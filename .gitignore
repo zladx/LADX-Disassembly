@@ -1,0 +1,12 @@
+# build
+*.o
+*.gbc
+*.1bpp
+*.2bpp
+
+# rgbasm extras
+*.sym
+*.map
+
+# precompiled python
+*.pyc

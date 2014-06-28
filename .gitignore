@@ -10,3 +10,6 @@
 
 # precompiled python
 *.pyc
+
+# swap files
+*.swp

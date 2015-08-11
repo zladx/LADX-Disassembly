@@ -13,10 +13,18 @@ include "code/header.asm"
 section "Main", rom0
 
 Start:
-	; There should be some code here. In the meantime, loop forever.
-	; Disable interrupts and halt to conserve battery.
+    cp    a, $11
+    jr    nz, .loc_61E
+    ld    a, [rKEY1]
+
+.loc_61E
+    xor   a
 
 	di
 .loop
 	halt
 	jr .loop
+
+section "bank1",romx,bank[$1]
+    xor    a
+

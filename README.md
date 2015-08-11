@@ -1,15 +1,11 @@
-# Game Boy bootstrap
+# Links Awakening DX Disassembly
 
-An example project to get would-be Game Boy programmers started without having to read mountains of docs.
+Taking on this myself for now. We will see how far I get. 
 
-[pypng][pypng] is used to convert png to Game Boy graphics.
+Using rom
 
-```bash
-	pip install pypng
+```
+Legend of Zelda, The - Link's Awakening DX (U) (V1.0) [C][!].gbc
+MD5 - 07C211479386825042EFB4AD31BB525F
 ```
 
-To build, install [rgbds][rgbds] and put it in your path.
-Then run `make`. This will output `game.gbc`.
-
-[pypng]: https://github.com/drj11/pypng
-[rgbds]: https://github.com/bentley/rgbds

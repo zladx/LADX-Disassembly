@@ -26,4 +26,4 @@ obj = src/main.o
 # Generating a mapfile is required thanks to a bug in rgblink.
 game.gbc: $(obj)
 	rgblink -n $*.sym -m $*.map -o $@ $(obj)
-	rgbfix  -v $@
+	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@

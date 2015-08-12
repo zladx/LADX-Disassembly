@@ -39,10 +39,10 @@ Start:
 
 .label_016F
     ld   [$FFFE], a
-    call .label_28CF
+    call $28CF
     ld   sp, $DFFF
     ld   a, $3C
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6A22
     xor  a
     ld   [$FF47], a
@@ -50,18 +50,18 @@ Start:
     ld   [$FF49], a
     ld   hl, $8000
     ld   bc, $1800
-    call .label_29DF
+    call $29DF
     ld   a, $24
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5C00
-    call .label_28F7
-    call .label_29D0
+    call $28F7
+    call $29D0
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6D32
     call $FFC0
     call $410D
-    call .label_2BCF
+    call $2BCF
     ld   a, $44
     ld   [$FF41], a
     ld   a, $4F
@@ -72,15 +72,15 @@ Start:
     ld   [$FFFF], a
     call $46AA
     ld   a, $1F
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4000
     ld   a, $18
     ld   [$FFB5], a
     ei
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4854
-    jp   .label_035F
+    jp   $035F
 
 .label_01DA
     ld   a, $01
@@ -131,16 +131,16 @@ Start:
     jr   nc, .label_022F
 
 .label_0229
-    call .label_08A4
-    call .label_08A4
+    call $08A4
+    call $08A4
 
 .label_022F
     di
-    call .label_0419
+    call $0419
     ei
-    call .label_08A4
-    call .label_08A4
-    jp   .label_035F
+    call $08A4
+    call $08A4
+    jp   $035F
 
 .label_023D
     ld   a, [$D6FD]
@@ -159,27 +159,27 @@ Start:
     cp   $08
     jr   c, .label_0264
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5257
 
 .label_0264
     ld   a, [$C17F]
     and  a
-    jp   z, .label_02D5
+    jp   z, $02D5
     inc  a
     jr   nz, .label_0279
 
 .label_026E
     ld   a, $17
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $48DD
-    jp   .label_02D5
+    jp   $02D5
 
 .label_0279
     inc  a
     jr   z, .label_026E
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$C180]
     inc  a
     ld   [$C180], a
@@ -194,7 +194,7 @@ Start:
     xor  a
     ld   [$C17F], a
     ld   [$C3CA], a
-    jp   .label_02D5
+    jp   $02D5
 
 .label_02A0
     push af
@@ -204,7 +204,7 @@ Start:
     and  a
     jr   z, .label_02B4
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6CA7
     jr   .label_02B7
 
@@ -213,17 +213,17 @@ Start:
 
 .label_02B7
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  af
     call $5038
-    call .label_08A4
+    call $08A4
     ld   a, [$DB97]
     ld   [$FF47], a
     ld   a, [$DB98]
     ld   [$FF48], a
     ld   a, [$DB99]
     ld   [$FF49], a
-    jp   .label_035F
+    jp   $035F
 
 .label_02D5
     ld   a, [$DB9A]
@@ -234,8 +234,8 @@ Start:
     ld   [$FF48], a
     ld   a, [$DB99]
     ld   [$FF49], a
-    call .label_08A4
-    call .label_281E
+    call $08A4
+    call $281E
     ld   a, [$FF90]
     ld   hl, $FF91
     or   [hl]
@@ -280,36 +280,35 @@ Start:
 
 .label_033B
     ld   a, $01
-    call .label_080C
+    call $080C
     call $5F2E
 
 .label_0343
-    call .label_0E34
+    call $0E34
     ld   a, [$FFFE]
     and  a
     jr   z, .label_0353
     ld   a, $21
-    call .label_080C
+    call $080C
     call $406E
 
 .label_0353
     xor  a
     ld   [$DDD2], a
     ld   a, $01
-    call .label_080C
+    call $080C
     call $5F4B
 
 .label_035F
     ld   a, $1F
-    call .label_080C
+    call $080C
     call $7F80
     ld   a, $0C
-    call .label_0B0B
-    call .label_080C
+    call $0B0B
+    call $080C
     xor  a
     ld   [$FFFD], a
     halt
-    nop
 
 .label_0374
     ld   a, [$FFD1]
@@ -317,7 +316,7 @@ Start:
     jr   z, .label_0374
     xor  a
     ld   [$FFD1], a
-    jp   .label_01DA
+    jp   $01DA
 
 .label_037F
     jr   nz, .label_03B1
@@ -352,7 +351,7 @@ Start:
 
 .label_03A8
     ld   [$FF42], a
-    jp   .label_03FF
+    jp   $03FF
 
 .label_03AD
     cp   $00
@@ -428,10 +427,10 @@ Start:
 .label_0408
     push af
     ld   a, $28
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4601
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  af
     reti
 
@@ -443,34 +442,34 @@ Start:
     cp   $23
     jr   z, .label_042B
     push af
-    call .label_28CF
+    call $28CF
     pop  af
 
 .label_042B
-    call .label_0430
+    call $0430
     jr   .label_045D
 
 .label_0430
     ld   e, a
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4657
     jp   [hl]
 
 .label_043A
-    call .label_28CF
+    call $28CF
     ld   a, $24
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5C2C
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4577
     ld   a, $08
-    ld   [.label_2100], a
-    call .label_292D
+    ld   [$2100], a
+    call $292D
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
 
 .label_045D
     xor  a
@@ -501,12 +500,12 @@ Start:
     cp   $09
     jr   c, .label_048D
     cp   $12
-    jp  c, .label_0577
+    jp  c, $0577
 
 .label_048D
     ld   a, [$FFFD]
     and  a
-    jp   nz, .label_0569
+    jp   nz, $0569
     ld   a, [$C19F]
     and  $7F
     jr   z, .label_04CC
@@ -514,16 +513,16 @@ Start:
     jr   z, .label_04CC
     cp   $05
     jr   nc, .label_04AC
-    call .label_23E4
+    call $23E4
     ld   hl, $C19F
     inc  [hl]
-    jp   .label_0569
+    jp   $0569
 
 .label_04AC
     cp   $0A
     jr   nz, .label_04B6
-    call .label_2719
-    jp   .label_0569
+    call $2719
+    jp   $0569
 
 .label_04B6
     cp   $0B
@@ -536,8 +535,8 @@ Start:
     jr   .label_04CC
 
 .label_04C6
-    call .label_276D
-    jp   .label_0569
+    call $276D
+    jp   $0569
 
 .label_04CC
     ld   a, [$DB95]
@@ -547,7 +546,7 @@ Start:
     cp   $06
     jr   c, .label_052B
     ld   a, $38
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $785A
     jr   .label_052B
 
@@ -562,13 +561,13 @@ Start:
     ld   hl, $C10E
     or   [hl]
     jr   z, .label_0509
-    call .label_05BC
+    call $05BC
     ld   a, [$FFE8]
     cp   $08
     jr   nc, .label_0504
 
 .label_0501
-    call .label_1D2E
+    call $1D2E
 
 .label_0504
     call $FFC0
@@ -586,43 +585,43 @@ Start:
     add  hl, de
     ld   a, [hl]
     ld   [$D6F8], a
-    call .label_1ED7
+    call $1ED7
     jr   .label_0501
 
 .label_0521
     ld   a, [$DB95]
     cp   $0D
     jr   z, .label_052B
-    call .label_1B0D
+    call $1B0D
 
 .label_052B
     ld   a, [$FFFE]
     and  a
     jr   z, .label_0538
     ld   a, $24
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5C1A
 
 .label_0538
     ld   de, $D601
-    call .label_2927
+    call $2927
     xor  a
     ld   [$D600], a
     ld   [$D601], a
     ld   [$DC90], a
     ld   [$DC91], a
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $72BA
     call $FFC0
     ld   a, [$FFFE]
     and  a
     jr   z, .label_0569
     ld   a, $21
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4000
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
 
 .label_0569
     ei
@@ -650,15 +649,15 @@ Start:
     and  a
     jr   z, .label_0598
     ld   a, $21
-    call .label_080C
+    call $080C
     call $4000
     ld   a, $24
-    call .label_080C
+    call $080C
     call $5C1A
 
 .label_0598
     ld   de, $D601
-    call .label_2927
+    call $2927
     xor  a
     ld   [$D600], a
     ld   [$D601], a
@@ -667,19 +666,19 @@ Start:
 
 .label_05AB
     ld   a, $28
-    call .label_080C
+    call $080C
     call $4616
     pop  af
     ld   [$DBAF], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     jr   .label_056A
 
 .label_05BC
     ld   a, [$FF90]
     and  a
-    jp   z, .label_069E
+    jp   z, $069E
     cp   $07
-    jp   z, .label_07B0
+    jp   z, $07B0
     cp   $03
     jp   z, $0062
     cp   $04
@@ -689,16 +688,16 @@ Start:
     cp   $06
     jp   z, $007A
     cp   $08
-    jp   nc, .label_07D3
+    jp   nc, $07D3
     ld   a, [$DBA5]
     and  a
-    jp   z, .label_0656
+    jp   z, $0656
     ld   a, [$FF90]
     cp   $02
-    jp   z, .label_0826
+    jp   z, $0826
     ld   a, $0D
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   a, [$FF92]
     ld   c, a
     ld   b, $00
@@ -723,9 +722,9 @@ Start:
     cp   $FF
     jr   nz, .label_062F
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4616
-    ld   [.label_2100], a
+    ld   [$2100], a
     jr   .label_0641
 
 .label_062F
@@ -743,7 +742,7 @@ Start:
 
 .label_0641
     ld   bc, $0040
-    call .label_2914
+    call $2914
 
 .label_0647
     ld   a, [$FF92]
@@ -760,8 +759,8 @@ Start:
 
 .label_0656
     ld   a, $0F
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   a, [$FF92]
     ld   c, a
     ld   b, $00
@@ -787,7 +786,7 @@ Start:
     ld   l, $00
     add  hl, bc
     ld   bc, $0040
-    call .label_2914
+    call $2914
     ld   a, [$FF92]
     inc  a
     ld   [$FF92], a
@@ -808,7 +807,7 @@ Start:
     cp   $FF
     jr   nz, .label_06CB
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $475A
     xor  a
     ld   [$C10E], a
@@ -819,13 +818,13 @@ Start:
     ld   c, $90
     ld   b, h
     ld   h, $00
-    call .label_0A13
+    call $0A13
     jr   .label_0738
 
 .label_06CB
     ld   a, [$FF91]
     and  a
-    jp   z, .label_073E
+    jp   z, $073E
     ld   a, [$C197]
     ld   e, a
     ld   d, $00
@@ -848,10 +847,10 @@ Start:
     ld   a, [hl]
     and  a
     jr   z, .label_06F7
-    call .label_0B0B
+    call $0B0B
 
 .label_06F7
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FF93]
     ld   c, a
     ld   b, $00
@@ -880,7 +879,7 @@ Start:
     ld   d, h
     pop  hl
     ld   bc, $0040
-    call .label_2914
+    call $2914
     ld   a, [$FF93]
     inc  a
     ld   [$FF93], a
@@ -918,10 +917,10 @@ Start:
     ld   a, [hl]
     and  a
     jr   z, .label_0764
-    call .label_0B0B
+    call $0B0B
 
 .label_0764
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$C10F]
     ld   c, a
     ld   b, $00
@@ -950,7 +949,7 @@ Start:
     ld   d, h
     pop  hl
     ld   bc, $0040
-    call .label_2914
+    call $2914
     ld   a, [$C10F]
     inc  a
     ld   [$C10F], a
@@ -965,7 +964,7 @@ Start:
 
 .label_07B0
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6BB5
     jp   $008B
 
@@ -1015,10 +1014,10 @@ Start:
     ld   h, [hl]
     ld   l, a
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   bc, $0040
-    call .label_2914
+    call $2914
     ld   a, [$FF90]
     cp   $0A
     jr   z, .label_0808
@@ -1042,34 +1041,34 @@ Start:
 
 .label_080C
     ld   [$DBAF], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_0813
-    call .label_0B0B
+    call $0B0B
 
 .label_0816
     ld   [$DBAF], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_081D
     push af
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  af
     ret
 
 .label_0826
     ld   a, $12
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   a, [$FF92]
     cp   $08
     jr   c, .label_0873
     jr   nz, .label_0843
     ld   a, $02
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6843
 
 .label_083E
@@ -1081,7 +1080,7 @@ Start:
     cp   $09
     jr   nz, .label_0854
     ld   a, $02
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6827
     ld   hl, $FF92
     inc  [hl]
@@ -1091,7 +1090,7 @@ Start:
     cp   $0A
     jr   nz, .label_0865
     ld   a, $02
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $680B
     ld   hl, $FF92
     inc  [hl]
@@ -1099,7 +1098,7 @@ Start:
 
 .label_0865
     ld   a, $02
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $67E5
     xor  a
     ld   [$FF90], a
@@ -1128,7 +1127,7 @@ Start:
     ld   hl, $7E00
     add  hl, bc
     ld   bc, $0040
-    call .label_2914
+    call $2914
     ld   a, [$FF92]
     inc  a
     ld   [$FF92], a
@@ -1136,7 +1135,7 @@ Start:
 
 .label_08A4
     ld   a, $1F
-    call .label_080C
+    call $080C
     call $4006
     ld   a, [$FFF3]
     and  a
@@ -1152,50 +1151,50 @@ Start:
     jr   .label_08C6
 
 .label_08C3
-    call .label_08C6
+    call $08C6
 
 .label_08C6
     ld   a, $1B
-    call .label_080C
+    call $080C
     call $4006
     ld   a, $1E
-    call .label_080C
+    call $080C
     call $4006
 
 .label_08D6
     ret
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6A30
 
 .label_08DF
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6AC1
     jr   .label_08DF
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6BA4
     jr   .label_08DF
     push af
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6BDC
     jr   .label_0973
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6C00
     jr   .label_0917
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6C24
 
 .label_0917
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     push af
     ld   b, $00
@@ -1210,10 +1209,10 @@ Start:
 
 .label_092F
     ld   a, $1A
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6576
     ld   a, [$FFDF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $DC91
     ld   a, [$DC90]
     ld   e, a
@@ -1256,20 +1255,20 @@ Start:
 
 .label_0973
     pop  af
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     push af
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6D0E
     jr   .label_0973
 
 .label_0983
     ld   a, $1A
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6710
     ld   a, [$FFDF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFE0]
     ld   h, a
     ld   a, [$FFE1]
@@ -1279,10 +1278,10 @@ Start:
     ret
     push af
     push bc
-    call .label_0983
+    call $0983
     ld   [$FFD7], a
     pop  bc
-    call .label_0983
+    call $0983
     ld   [$FFD8], a
     ld   a, [$DC90]
     ld   c, a
@@ -1306,29 +1305,29 @@ Start:
     jr   .label_0973
     push af
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4985
     jr   .label_0973
     push af
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4518
     jr   .label_0973
     push af
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4874
     jr   .label_0973
     push af
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4954
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $482D
-    jp   .label_0973
+    jp   $0973
 
 .label_0A01
     push hl
@@ -1339,12 +1338,12 @@ Start:
     add  a, $80
     ld   d, a
     ld   bc, $0100
-    call .label_2914
+    call $2914
     pop  hl
     jr   .label_0A2D
 
 .label_0A13
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFFE]
     and  a
     jr   z, .label_0A01
@@ -1361,99 +1360,99 @@ Start:
 
 .label_0A2D
     ld   a, h
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     push af
     ld   a, $35
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $4F00
     ld   de, $DCC0
     ld   bc, $0020
-    call .label_2914
-    jp   .label_0973
+    call $2914
+    jp   $0973
     push af
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $505F
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4F9B
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $20
-    ld   [.label_2100], a
-    call .label_3CE6
-    jp   .label_0973
+    ld   [$2100], a
+    call $3CE6
+    jp   $0973
     push af
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5A2E
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4F68
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6D52
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4BE8
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $0F
-    call .label_080C
-    call .label_2321
-    jp   .label_0973
+    call $080C
+    call $2321
+    jp   $0973
     push af
     ld   a, $36
-    call .label_080C
+    call $080C
     call $705A
 
 .label_0AB0
     pop  af
-    call .label_080C
+    call $080C
     ret
     push af
     ld   a, $24
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5C1A
     ld   de, $D601
-    call .label_2927
+    call $2927
     jr   .label_0AB0
     push af
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $703E
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $70D6
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $36
-    call .label_080C
+    call $080C
     call $4A77
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4A4C
-    jp   .label_0973
+    jp   $0973
     push af
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $7161
-    jp   .label_0973
+    jp   $0973
     ld   a, $3D
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4029
     ret
 
@@ -1473,14 +1472,14 @@ Start:
     pop  bc
     ret
     ld   a, [$FFD7]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, $02
     ld   [$FF70], a
-    call .label_2914
+    call $2914
     xor  a
     ld   [$FF70], a
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_0B2F
@@ -1496,7 +1495,7 @@ Start:
     and  $80
     jr   nz, .label_0B4B
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6E50
     jr   c, .label_0B54
 
@@ -1511,40 +1510,40 @@ Start:
 .label_0B54
     ld   a, [$FFD9]
     and  $7F
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  bc
     ret
-    ld   [.label_2100], a
-    call .label_2914
+    ld   [$2100], a
+    call $2914
     ld   a, $28
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     push hl
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFFE]
     and  a
     jr   z, .label_0B80
-    ld   de, .label_0168
+    ld   de, $0168
     add  hl, de
     ld   a, $01
     ld   [$FF4F], a
-    call .label_0B96
+    call $0B96
     xor  a
     ld   [$FF4F], a
 
 .label_0B80
     pop  hl
     push hl
-    call .label_0B96
+    call $0B96
     pop  hl
     ld   a, [$DB95]
     cp   $0D
     jr   nz, .label_0B90
-    call .label_0BB5
+    call $0BB5
 
 .label_0B90
     ld   a, [$FFE6]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_0B96
@@ -1574,12 +1573,12 @@ Start:
 .label_0BB5
     ld   bc, $0168
     ld   de, $D000
-    jp   .label_2914
+    jp   $2914
     push af
-    call .label_2BCF
-    jp   .label_0973
+    call $2BCF
+    jp   $0973
     ld   a, [$D16A]
-    ld   [.label_2100], a
+    ld   [$2100], a
 
 .label_0BCB
     ld   a, [hli]
@@ -1588,13 +1587,13 @@ Start:
     dec  b
     jr   nz, .label_0BCB
     ld   a, $28
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     ld   a, [$DE01]
-    ld   [.label_2100], a
-    call .label_0BE7
+    ld   [$2100], a
+    call $0BE7
     ld   a, [$DE04]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_0BE7
@@ -1604,9 +1603,9 @@ Start:
     ld   l, a
     jp   [hl]
     ld   a, $02
-    ld   [.label_2100], a
-    call .label_1A50
-    jp   .label_081D
+    ld   [$2100], a
+    call $1A50
+    jp   $081D
     ld   hl, $C450
     jr   .label_0C08
     ld   hl, $C2F0
@@ -1619,7 +1618,7 @@ Start:
     and  a
     ret
     ld   a, $AF
-    call .label_3B86
+    call $3B86
     ld   a, [$FF98]
     ld   hl, $C200
     add  hl, de
@@ -1640,18 +1639,18 @@ Start:
 
 .label_0C2D
     ld   a, $1C
-    ld   [.label_2100], a
+    ld   [$2100], a
     add  hl, bc
     ld   a, [hl]
     ld   hl, $2100
     ld   [hl], $01
     ret
     ld   a, $0C
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   bc, $0040
-    call .label_2914
+    call $2914
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     ld   hl, $FFF4
     ld   [hl], $0C
@@ -1784,9 +1783,9 @@ Start:
     ld   a, $07
     ld   [$FFF2], a
     ld   a, $05
-    jp   .label_0CC7
+    jp   $0CC7
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$DBA5]
     and  a
     jr   z, .label_0D59
@@ -1964,14 +1963,14 @@ Start:
 
 .label_0E29
     inc  hl
-    inc  b
+    inc  bc
     inc  d
     ld   a, d
     cp   $04
     jr   nz, .label_0E03
 
 .label_0E31
-    jp   .label_081D
+    jp   $081D
 
 .label_0E34
     ld   a, [$DB95]
@@ -2020,9 +2019,9 @@ Start:
     ld   c, $E2
     ld   c, $0E
     rrca
-    ld   de, .label_140F
+    ld   de, $140F
     rrca
-    rl   a
+    rla
     rrca
     rst  $10
     ld   c, $D1
@@ -2062,36 +2061,36 @@ Start:
     ld   b, b
     rrca
     call $6AF8
-    jp   .label_101A
+    jp   $101A
     call $67EE
-    jp   .label_101A
+    jp   $101A
     call $6203
-    jp   .label_101A
+    jp   $101A
     call $5626
-    jp   .label_101A
+    jp   $101A
     ld   a, $01
-    call .label_080C
+    call $080C
     jp   $4000
     jp   $6E1D
     ld   a, $17
-    call .label_080C
+    call $080C
     call $4AB7
-    jp   .label_101A
+    jp   $101A
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, $17
 
 .label_0EF4
     push af
-    call .label_398D
+    call $398D
     pop  af
-    jp   .label_080C
+    jp   $080C
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, $01
     jr   .label_0EF4
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, $02
     jr   .label_0EF4
     jp   $47CE
@@ -2099,24 +2098,24 @@ Start:
     jp   $4CFB
     jp   $4F8C
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4C4B
     call $4ABC
     ld   a, $01
-    call .label_080C
+    call $080C
     jp   $4371
     ld   a, $20
-    call .label_080C
+    call $080C
     jp   $5904
     ld   a, $28
-    call .label_080C
+    call $080C
     call $4000
-    jp   .label_101A
+    jp   $101A
     ld   a, $37
-    call .label_080C
+    call $080C
     jp   $4000
     ld   a, $02
-    call .label_080C
+    call $080C
     ld   a, [$C19F]
     and  a
     jr   nz, .label_0F8F
@@ -2133,9 +2132,9 @@ Start:
     dec  [hl]
     jr   nz, .label_0F75
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $61EE
-    call .label_081D
+    call $081D
 
 .label_0F75
     ld   a, [$C19F]
@@ -2149,7 +2148,7 @@ Start:
     dec  a
     ld   [$C1BC], a
     jr   nz, .label_0F8F
-    jp   .label_0C7D
+    jp   $0C7D
 
 .label_0F8F
     ld   hl, $DBC7
@@ -2177,20 +2176,20 @@ Start:
     db   $CB, $BE ; Need to handle this instruction 
     call $593B
     ld   a, $02
-    call .label_080C
+    call $080C
     call $78E8
-    call .label_1033
+    call $1033
     ld   a, [$C15C]
     ld   [$C3CF], a
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4B1F
     ld   a, $19
-    call .label_080C
+    call $080C
     call $7A9A
-    call .label_398D
+    call $398D
     ld   a, $02
-    call .label_080C
+    call $080C
     call $5487
     ld   hl, $D601
     ld   a, [$FFE7]
@@ -2215,25 +2214,25 @@ Start:
 
 .label_100A
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5C9C
 
 .label_1012
     ld   a, $14
-    call .label_080C
+    call $080C
     call $54F8
 
 .label_101A
     ld   a, $0F
-    call .label_080C
+    call $080C
 
 .label_101F
-    call .label_2321
+    call $2321
     ld   a, [$FFFE]
     and  a
     ret  z
     ld   a, $24
-    call .label_080C
+    call $080C
     jp   $7405
     ld   [$990E], sp
     jr   z, .label_101F
@@ -2260,7 +2259,7 @@ Start:
     ld   hl, $102D
     add  hl, de
     ld   a, [hl]
-    call .label_2385
+    call $2385
     ld   a, $01
 
 .label_1061
@@ -2324,10 +2323,10 @@ Start:
     ld   a, $07
     ld   [$DB95], a
     ld   a, $02
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $755B
-    call .label_1D2E
-    call .label_398D
+    call $1D2E
+    call $398D
     pop  af
     ret
 
@@ -2352,10 +2351,10 @@ Start:
 .label_10EF
     ld   a, [$C19F]
     and  a
-    jp   nz, .label_1794
+    jp   nz, $1794
     ld   a, [$C124]
     and  a
-    jp   nz, .label_114F
+    jp   nz, $114F
     ld   a, [$C11C]
     cp   $07
     jr   z, .label_1138
@@ -2379,7 +2378,7 @@ Start:
     ld   [$DDD6], a
     ld   [$DDD7], a
     ld   [$D464], a
-    call .label_27F2
+    call $27F2
     ld   a, $08
     ld   [$FFF3], a
 
@@ -2403,21 +2402,21 @@ Start:
     ld   de, $50A3
 
 .label_114F
-    call .label_1794
-    jp   .label_1D2E
+    call $1794
+    jp   $1D2E
     ld   a, $19
-    call .label_080C
+    call $080C
     jp   $5D6A
     ld   a, $01
-    call .label_080C
+    call $080C
     jp   $41C2
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $725A
     and  a
     ret  z
     ld   a, $02
-    call .label_080C
+    call $080C
     jp   $4287
     ld   a, [$C50A]
     ld   hl, $C167
@@ -2442,7 +2441,7 @@ Start:
     jr   nz, .label_11BA
 
 .label_11A5
-    call .label_1340
+    call $1340
     jr   .label_11BA
 
 .label_11AA
@@ -2465,10 +2464,10 @@ Start:
 .label_11C3
     ld   a, [$C117]
     and  a
-    jp   nz, .label_12ED
+    jp   nz, $12ED
     ld   a, [$C15C]
     and  a
-    jp   nz, .label_12ED
+    jp   nz, $12ED
     ld   a, [$C137]
     and  a
     jr   z, .label_11E2
@@ -2481,7 +2480,7 @@ Start:
 .label_11E2
     ld   a, [$FFA1]
     and  a
-    jp   nz, .label_12ED
+    jp   nz, $12ED
 
 .label_11E8
     ld   a, [$DB00]
@@ -2490,7 +2489,7 @@ Start:
     ld   a, [$FFCB]
     and  $20
     jr   z, .label_11FA
-    call .label_1705
+    call $1705
     jr   .label_11FE
 
 .label_11FA
@@ -2504,7 +2503,7 @@ Start:
     ld   a, [$FFCB]
     and  $10
     jr   z, .label_1210
-    call .label_1705
+    call $1705
 
 .label_120E
     jr   .label_1214
@@ -2527,7 +2526,7 @@ Start:
     jr   z, .label_1235
     cp   $02
     jr   z, .label_1235
-    call .label_1340
+    call $1340
 
 .label_1235
     ld   a, [$DB00]
@@ -2538,7 +2537,7 @@ Start:
     ld   a, [$FFCB]
     and  $20
     jr   z, .label_124B
-    call .label_1340
+    call $1340
 
 .label_124B
     ld   a, [$FFCC]
@@ -2548,7 +2547,7 @@ Start:
     cp   $02
     jr   z, .label_125E
     ld   a, [$DB00]
-    call .label_129C
+    call $129C
 
 .label_125E
     ld   a, [$FFCC]
@@ -2560,54 +2559,54 @@ Start:
     cp   $02
     jr   z, .label_1275
     ld   a, [$DB01]
-    call .label_129C
+    call $129C
 
 .label_1275
     ld   a, [$FFCB]
     and  $20
     jr   z, .label_1281
     ld   a, [$DB00]
-    call .label_1321
+    call $1321
 
 .label_1281
     ld   a, [$FFCB]
     and  $10
     jr   z, .label_128D
     ld   a, [$DB01]
-    call .label_1321
+    call $1321
 
 .label_128D
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $48CA
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_129C
     ld   c, a
     cp   $01
-    jp   z, .label_1528
+    jp   z, $1528
     cp   $04
-    jp   z, .label_12EE
+    jp   z, $12EE
     cp   $02
-    jp   z, .label_135A
+    jp   z, $135A
     cp   $03
-    jp   z, .label_1382
+    jp   z, $1382
     cp   $05
-    jp   z, .label_13BD
+    jp   z, $13BD
     cp   $0D
-    jp   z, .label_1383
+    jp   z, $1383
     cp   $06
-    jp   z, .label_1319
+    jp   z, $1319
     cp   $0A
-    jp   z, .label_14CB
+    jp   z, $14CB
     cp   $09
     jp   z, $41FC
     cp   $0C
-    jp   z, .label_148D
+    jp   z, $148D
     cp   $0B
-    jp   z, .label_12F8
+    jp   z, $12F8
     cp   $07
     jr   nz, .label_12ED
     ld   hl, $C137
@@ -2685,10 +2684,10 @@ Start:
     ld   a, [$DB44]
     ld   [$C15A], a
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4B4A
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_135A
@@ -2697,18 +2696,18 @@ Start:
     ret  nc
     ld   a, [$DB4D]
     and  a
-    jp   z, .label_0C20
+    jp   z, $0C20
     sub  a, $01
     daa
     ld   [$DB4D], a
     ld   a, $02
-    call .label_142F
+    call $142F
     ret  c
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4B81
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_1382
@@ -2721,53 +2720,17 @@ Start:
 .label_1387
     ret  nz
     ld   a, $01
-    call .label_142F
+    call $142F
     ret  c
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4BFF
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
-.label_139D
-    nop
-    nop
-    nop
-    nop
-
-.label_13A1
-    nop
-    nop
-    nop
-    nop
-
-.label_13A5
-    jr   nz, .label_1387
-    nop
-    nop
-
-.label_13A9
-    db   0, 0, $E0
-.label_13AD
-    jr   nz, .label_13DE
-    nop
-    nop
-    ld   b, b
-    ret  nz
-    nop
-    nop
-
-.label_13B5
-    nop
-    nop
-    ret  nc
-    jr   nc, .label_13BA
-
-.label_13BA
-    nop
-    ret  nz
-    ld   b, b
+    db   0, 0, 0, 0, 0, 0, 0, 0, $20, $E0, 0, 0, 0, 0, $E0, $20
+    db   $30, $D0, 0, 0, $40, $C0, 0, 0, 0, 0, $D0, $30, 0, 0, $C0, $40
 
 .label_13BD
     ld   a, [$C14C]
@@ -2844,7 +2807,7 @@ Start:
     ret
 
 .label_142F
-    call .label_3B86
+    call $3B86
     ret  c
     ld   a, $0C
     ld   [$C19B], a
@@ -2920,15 +2883,15 @@ Start:
 .label_14A7
     ld   a, [$DB4C]
     and  a
-    jp   z, .label_0C20
+    jp   z, $0C20
     ld   a, $08
-    call .label_3B86
+    call $3B86
     ret  c
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4C47
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_14C3
@@ -2960,7 +2923,7 @@ Start:
     ld   a, [$FFF9]
     and  a
     jr   z, .label_1508
-    call .label_1508
+    call $1508
     ld   a, [$FFCB]
     and  $03
     ld   a, $EA
@@ -2971,9 +2934,9 @@ Start:
     ld   [$FF9B], a
     xor  a
     ld   [$FFA3], a
-    call .label_21A8
+    call $21A8
     ld   a, $02
-    call .label_080C
+    call $080C
     jp   $6C75
 
 .label_1508
@@ -2998,10 +2961,12 @@ Start:
     ret
 
 .label_1524
-    db   $02, $14, $15, $16
-
-.label_1528
-    ld   a, [$C16D]
+    ld   [bc], a
+    inc  d
+    dec  d
+    jr   .label_1523
+    ld   l, l
+    pop  bc
     ld   hl, $C121
     or   [hl]
     ret  nz
@@ -3015,7 +2980,7 @@ Start:
     xor  a
     ld   [$C160], a
     ld   [$C1AC], a
-    call .label_280D
+    call $280D
     and  $03
     ld   e, a
     ld   d, $00
@@ -3023,12 +2988,12 @@ Start:
     add  hl, de
     ld   a, [hl]
     ld   [$FFF4], a
-    call .label_157C
+    call $157C
     ld   a, [$C146]
     and  a
     jr   nz, .label_1562
-    call .label_0CAF
-    call .label_178E
+    call $0CAF
+    call $178E
 
 .label_1562
     ld   a, [$C14D]
@@ -3041,7 +3006,7 @@ Start:
     cp   $02
     ret  nz
     ld   a, $DF
-    call .label_142F
+    call $142F
     xor  a
     ld   [$C19B], a
     ret
@@ -3063,17 +3028,17 @@ Start:
 
 .label_158F
     ld   d, $FA
-    ld   [.label_1608], sp
+    ld   [$1608], sp
     ld   d, $08
     ld   a, [$FAFA]
-    ld   [.label_0816], sp
-    ld   [.label_16FA], sp
-    ld   [.label_1616], sp
+    ld   [$0816], sp
+    ld   [$16FA], sp
+    ld   [$1616], sp
     ld   d, $08
     ld   a, [$FAFA]
-    call .label_15AF
+    call $15AF
     ld   a, $02
-    jp   .label_080C
+    jp   $080C
 
 .label_15AF
     ld   a, [$C1C4]
@@ -3129,22 +3094,21 @@ Start:
     ld   e, a
     ld   a, [$DBA5]
     ld   d, a
-    call .label_2A26
+    call $2A26
     pop  de
     cp   $D0
 
 .label_1608
-    jp  c, .label_1610
+    jp  c, $1610
     cp   $D4
-    jp  c, .label_16C2
+    jp  c, $16C2
 
 .label_1610
-    db   $FE, $90, $D2, $C2, $16, $FE
-
-.label_1616
-    ld   bc, $C2CA
-    ld   d, $E
-    nop
+    cp   $90
+    jp   nc, $16C2
+    cp   $01
+    jp   z, $16C2
+    ld   c, $00
     ld   a, [$DBA5]
     and  a
     ld   a, [$FFAF]
@@ -3166,7 +3130,7 @@ Start:
 .label_1637
     ld   a, c
     ld   [$FFF1], a
-    call .label_2178
+    call $2178
     ld   a, [$C14A]
     and  a
     jr   nz, .label_1653
@@ -3180,7 +3144,7 @@ Start:
 
 .label_1653
     ld   a, $05
-    call .label_142F
+    call $142F
     jr   c, .label_167C
     xor  a
     ld   [$C19B], a
@@ -3200,23 +3164,23 @@ Start:
     ld   [hl], a
     ld   c, e
     ld   b, d
-    call .label_3942
+    call $3942
 
 .label_167C
-    call .label_280D
+    call $280D
     and  $07
     ret  nz
     ld   a, [$FFAF]
     cp   $D3
     ret  z
-    call .label_280D
+    call $280D
     rra
     ld   a, $2E
     jr   nc, .label_1691
     ld   a, $2D
 
 .label_1691
-    call .label_3B86
+    call $3B86
     ret  c
     ld   hl, $C200
     add  hl, de
@@ -3271,7 +3235,7 @@ Start:
 .label_16DF
     ld   a, $04
     ld   [$C502], a
-    call .label_0D15
+    call $0D15
     ld   a, $10
     ld   [$C1C4], a
     ld   a, c
@@ -3321,7 +3285,7 @@ Start:
     ld   a, [$C120]
     add  a, $02
     ld   [$C120], a
-    call .label_1756
+    call $1756
     ld   a, [$C14B]
     inc  a
     ld   [$C14B], a
@@ -3367,7 +3331,7 @@ Start:
     add  a, $06
     ld   [$FFD8], a
     ld   a, $0B
-    jp   .label_0CC7
+    jp   $0CC7
 
 .label_1781
     ld   a, [$FF99]
@@ -3375,7 +3339,7 @@ Start:
     ld   a, $0E
     ld   [$FFF2], a
     ld   a, $0C
-    jp   .label_0CC7
+    jp   $0CC7
 
 .label_178E
     xor  a
@@ -3404,8 +3368,8 @@ Start:
     cp   $28
     jr   c, .label_17C6
     ld   a, [$FFE7]
-    rl   a
-    rl   a
+    rla
+    rla
     and  $10
     ld   [hl], a
 
@@ -3419,15 +3383,15 @@ Start:
     ld   a, [$FF99]
     cp   $88
     ret  nc
-    jp   .label_1819
+    jp   $1819
 
 .label_17DB
     ld   a, [$C19B]
     push af
     db   $CB, $7F ; Need to handle this instruction 
-    jp   z, .label_1814
+    jp   z, $1814
     ld   a, $02
-    call .label_080C
+    call $080C
     call $5310
     ld   a, [$C19B]
     and  $7F
@@ -3437,14 +3401,14 @@ Start:
     ld   a, [$C124]
     or   [hl]
     jr   nz, .label_1814
-    call .label_157C
+    call $157C
     ld   a, $04
-    call .label_142F
+    call $142F
     jr   c, .label_1814
     ld   a, $0D
     ld   [$FFF4], a
     ld   a, $02
-    call .label_080C
+    call $080C
     call $538B
 
 .label_1814
@@ -3454,16 +3418,16 @@ Start:
 
 .label_1819
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4AB3
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $49BA
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     call $754F
     ld   a, [$C3C9]
@@ -3471,17 +3435,17 @@ Start:
     jr   z, .label_1847
     xor  a
     ld   [$C3C9], a
-    jp   .label_0C7D
+    jp   $0C7D
 
 .label_1847
-    call .label_1A22
+    call $1A22
     xor  a
     ld   [$C157], a
     inc  a
     ld   [$C1A8], a
     ld   a, [$C16B]
     cp   $04
-    jp   nz, .label_19D9
+    jp   nz, $19D9
     xor  a
     ld   [$FF96], a
     ld   [$FF97], a
@@ -3500,7 +3464,7 @@ Start:
     jr   z, .label_1898
     push af
     ld   a, $04
-    call .label_080C
+    call $080C
     pop  af
     call $7A5F
     ld   hl, $DB6E
@@ -3591,7 +3555,7 @@ Start:
 .label_1909
     ld   c, a
     ld   a, $14
-    call .label_080C
+    call $080C
     push hl
     ld   a, [$FFF7]
     db   $CB, $37 ; Need to handle this instruction 
@@ -3641,7 +3605,7 @@ Start:
     cp   $0A
     jr   nc, .label_196E
     ld   a, $02
-    call .label_080C
+    call $080C
     call $6709
     ld   a, $30
     ld   [$FFB4], a
@@ -3687,8 +3651,8 @@ Start:
 
 .label_19A4
     ld   a, $14
-    ld   [.label_2100], a
-    call .label_19C2
+    ld   [$2100], a
+    call $19C2
     push de
     ld   a, [$FFF7]
     cp   $FF
@@ -3747,7 +3711,7 @@ Start:
     jr   .label_1A06
 
 .label_19FC
-    call .label_1A39
+    call $1A39
     ld   a, [$C16B]
     cp   $04
     jr   nz, .label_1A21
@@ -3766,31 +3730,31 @@ Start:
     xor  a
     ld   [$D47E], a
     ld   a, $36
-    jp   .label_2385
+    jp   $2385
 
 .label_1A21
     ret
 
 .label_1A22
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6C4F
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $55CA
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_1A39
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6C7A
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $563B
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_1A50
@@ -3883,8 +3847,8 @@ Start:
     and  a
     ret  nz
     ld   a, $10
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $6500
     ld   de, $9500
     ld   a, [$FFE7]
@@ -3908,7 +3872,7 @@ Start:
     db   $CB, $10 ; Need to handle this instruction 
     add  hl, bc
     ld   bc, $0040
-    jp   .label_2914
+    jp   $2914
     jr   nz, .label_1B67
     and  b
     ld   [$FFE0], a
@@ -3923,14 +3887,14 @@ Start:
     jr   nz, .label_1B46
     ld   a, [$D601]
     and  a
-    jp   nz, .label_1B45
+    jp   nz, $1B45
     ld   a, [$FFE7]
     and  $0F
     cp   $04
     jr   c, .label_1B45
     ld   a, $10
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   a, [$D006]
     ld   l, a
     ld   a, [$D007]
@@ -3940,7 +3904,7 @@ Start:
     ld   a, [$D009]
     ld   d, a
     ld   bc, $0020
-    jp   .label_2914
+    jp   $2914
 
 .label_1B45
     ret
@@ -3956,24 +3920,24 @@ Start:
 
 .label_1B53
     cp   $0B
-    jp  c, .label_1DE8
+    jp  c, $1DE8
     ld   a, [$DB9A]
     cp   $80
-    jp   nz, .label_1DE8
+    jp   nz, $1DE8
     ld   a, [$C14F]
     and  a
-    jp   nz, .label_1D2E
+    jp   nz, $1D2E
 
 .label_1B67
     ld   hl, $C124
     ld   a, [$D601]
     or   [hl]
-    jp   nz, .label_1D2E
+    jp   nz, $1D2E
     ld   a, [$D6F8]
     and  a
     jr   z, .label_1B7D
-    call .label_1ED7
-    jp   .label_1D2E
+    call $1ED7
+    jp   $1D2E
 
 .label_1B7D
     ld   a, [$FFA5]
@@ -3982,36 +3946,36 @@ Start:
 
 .label_1B82
     cp   $01
-    jp   z, .label_3F93
+    jp   z, $3F93
     cp   $02
-    jp   z, .label_3FA9
+    jp   z, $3FA9
     cp   $03
-    jp   z, .label_1EB5
+    jp   z, $1EB5
     cp   $04
-    jp   z, .label_1EBC
+    jp   z, $1EBC
     cp   $08
-    jp   z, .label_1E69
+    jp   z, $1E69
     cp   $09
-    jp   z, .label_1EA1
+    jp   z, $1EA1
     cp   $0A
-    jp   z, .label_1E2B
+    jp   z, $1E2B
     cp   $0B
-    jp   z, .label_1E8D
+    jp   z, $1E8D
     cp   $0C
-    jp   z, .label_1E33
+    jp   z, $1E33
     cp   $0D
-    jp   z, .label_1E01
+    jp   z, $1E01
     cp   $0E
     jr   z, .label_1BC5
     cp   $0F
-    jp   z, .label_1DF0
+    jp   z, $1DF0
     cp   $10
-    jp   z, .label_1DE9
-    jp   .label_1D2E
+    jp   z, $1DE9
+    jp   $1D2E
 
 .label_1BC5
     ld   a, $17
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $4062
 
 .label_1BCD
@@ -4056,14 +4020,14 @@ Start:
     inc  e
     ld   a, [$FFA6]
     and  $07
-    jp   nz, .label_1D1E
+    jp   nz, $1D1E
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $61AA
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
-    jp   .label_1D2E
+    call $0B0B
+    ld   [$2100], a
+    jp   $1D2E
 
 .label_1C13
     ld   l, a
@@ -4079,9 +4043,9 @@ Start:
 .label_1C24
     ld   a, [$FFA6]
     and  $0F
-    jp   nz, .label_1D1E
-    call .label_1CE8
-    jp   .label_1C13
+    jp   nz, $1D1E
+    call $1CE8
+    jp   $1C13
 
 .label_1C31
     nop
@@ -4096,7 +4060,7 @@ Start:
 .label_1C39
     ld   a, [$FFA6]
     and  $07
-    jp   nz, .label_1D1E
+    jp   nz, $1D1E
     ld   a, [$FFA6]
     rra
     rra
@@ -4114,35 +4078,35 @@ Start:
 
 .label_1C54
     ld   bc, $0040
-    call .label_2914
+    call $2914
     ld   a, [$FFF7]
     cp   $FF
     jr   nz, .label_1C87
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   b, $01
     call $47F7
     jr   z, .label_1C72
-    ld   [.label_2100], a
-    call .label_2914
+    ld   [$2100], a
+    call $2914
 
 .label_1C72
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   b, $00
     call $47F7
     jr   z, .label_1C87
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   de, $96C0
-    call .label_2914
+    call $2914
 
 .label_1C87
-    jp   .label_1D2E
+    jp   $1D2E
     ld   h, $6E
     jr   .label_1C24
     ld   a, [$FFA6]
     and  $07
-    jp   nz, .label_1D1E
+    jp   nz, $1D1E
     ld   a, [$FFA6]
     rra
     rra
@@ -4154,37 +4118,37 @@ Start:
     add  hl, de
     ld   l, [hl]
     ld   h, $6F
-    jp   .label_1C51
+    jp   $1C51
     ld   hl, $DCC0
     ld   a, [$FFF7]
     cp   $FF
     jr   nz, .label_1CB8
     ld   de, $8400
-    jp   .label_1C54
+    jp   $1C54
 
 .label_1CB8
     ld   a, [$FFA6]
     inc  a
     and  $03
-    jp   nz, .label_1C39
+    jp   nz, $1C39
     ld   de, $90C0
-    jp   .label_1C54
+    jp   $1C54
     ld   h, $70
 
 .label_1CC8
     ld   a, [$FFA6]
     and  $07
-    jp   nz, .label_1D1E
-    call .label_1CE8
-    jp   .label_1C13
+    jp   nz, $1D1E
+    call $1CE8
+    jp   $1C13
     ld   h, $71
 
 .label_1CD7
     ld   a, [$FFA6]
     and  $03
-    jp   nz, .label_1D1E
-    call .label_1CE8
-    jp   .label_1C13
+    jp   nz, $1D1E
+    call $1CE8
+    jp   $1C13
     ld   h, $72
     jr   .label_1CD7
 
@@ -4202,30 +4166,30 @@ Start:
     ld   h, $76
     jr   .label_1CC8
     ld   a, $38
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $7830
-    jp   .label_1D2E
+    jp   $1D2E
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
 
 .label_1D12
     ld   a, [bc]
-    inc  b
+    inc  bc
     ldi  [hl], a
     dec  d
     jr   nz, .label_1D12
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_1D1E
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $54F5
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
 
 .label_1D2E
     ld   a, [$FF9D]
@@ -4242,8 +4206,8 @@ Start:
 
 .label_1D42
     ld   a, [$DBC7]
-    rl   a
-    rl   a
+    rla
+    rla
     and  $10
 
 .label_1D49
@@ -4368,15 +4332,15 @@ Start:
     ld   hl, $6080
 
 .label_1DF5
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   de, $8400
     ld   bc, $0040
-    jp   .label_1F3B
+    jp   $1F3B
 
 .label_1E01
     ld   a, [$DB0E]
     cp   $02
-    jp  c, .label_1F3E
+    jp  c, $1F3E
     sub  a, $02
     ld   d, a
     ld   e, $00
@@ -4389,9 +4353,9 @@ Start:
     ld   de, $89A0
     ld   bc, $0040
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
-    jp   .label_1F3B
+    call $0B0B
+    ld   [$2100], a
+    jp   $1F3B
 
 .label_1E2B
     ld   hl, $68C0
@@ -4400,8 +4364,8 @@ Start:
 
 .label_1E33
     ld   a, $11
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   a, [$D000]
     db   $CB, $37 ; Need to handle this instruction 
     and  $F0
@@ -4420,18 +4384,18 @@ Start:
     add  hl, de
     pop  de
     ld   bc, $0040
-    call .label_2914
+    call $2914
     xor  a
     ld   [$FFA5], a
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ret
 
 .label_1E69
     ld   a, $13
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   a, [$D000]
     db   $CB, $37 ; Need to handle this instruction 
     and  $F0
@@ -4451,10 +4415,10 @@ Start:
     ld   hl, $48E0
     ld   de, $88E0
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   bc, $0020
-    jp   .label_1F3B
+    jp   $1F3B
 
 .label_1EA1
     ld   hl, $68E0
@@ -4462,10 +4426,10 @@ Start:
 
 .label_1EA7
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   bc, $0020
-    jp   .label_1F3B
+    jp   $1F3B
 
 .label_1EB5
     ld   hl, $7F00
@@ -4477,10 +4441,10 @@ Start:
     ld   a, $0D
 
 .label_1EC1
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   de, $9140
-    jp   .label_1F38
+    jp   $1F38
 
 .label_1ECD
     ld   b, b
@@ -4501,8 +4465,8 @@ Start:
 .label_1ED7
     push af
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     pop  af
     ld   hl, $FFA1
     ld   [hl], $01
@@ -4559,23 +4523,23 @@ Start:
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
-    jp   .label_2914
+    jp   $2914
 
 .label_1F35
-    jp   .label_1D2E
+    jp   $1D2E
 
 .label_1F38
     ld   bc, $0040
 
 .label_1F3B
-    call .label_2914
+    call $2914
 
 .label_1F3E
     xor  a
     ld   [$FFA5], a
     ld   a, $0C
-    ld   [.label_2100], a
-    jp   .label_1D2E
+    ld   [$2100], a
+    jp   $1D2E
 
 .label_1F49
     db   $C, 3, 8, 8, $A, $A, 5, $10, $36, $38, $3A, $3C
@@ -4590,9 +4554,9 @@ Start:
     db   0, 0, 4, 0
 
 .label_1F61
-    call .label_1F69
+    call $1F69
     ld   a, $02
-    jp   .label_080C
+    jp   $080C
 
 .label_1F69
     ld   hl, $C14A
@@ -4602,7 +4566,7 @@ Start:
     or   [hl]
     ld   hl, $C11C
     or   [hl]
-    jp   nz, .label_2177
+    jp   nz, $2177
     ld   a, [$FF9E]
     ld   e, a
     ld   d, $00
@@ -4629,34 +4593,34 @@ Start:
     add  hl, de
     ld   a, h
     cp   $D7
-    jp   nz, .label_214E
+    jp   nz, $214E
     ld   a, [hl]
     ld   [$FFD7], a
     ld   e, a
     ld   a, [$DBA5]
     ld   d, a
-    call .label_2A26
+    call $2A26
     ld   [$FFDC], a
     ld   a, [$FFD7]
     cp   $9A
     jr   z, .label_1FFE
     ld   a, [$FFDC]
     cp   $00
-    jp   z, .label_214E
+    jp   z, $214E
     cp   $01
     jr   z, .label_1FE6
     cp   $50
-    jp   z, .label_214E
+    jp   z, $214E
     cp   $51
-    jp   z, .label_214E
+    jp   z, $214E
     cp   $11
-    jp  c, .label_214E
+    jp  c, $214E
     cp   $D4
-    jp   nc, .label_214E
+    jp   nc, $214E
     cp   $D0
     jr   nc, .label_1FE6
     cp   $7C
-    jp   nc, .label_214E
+    jp   nc, $214E
 
 .label_1FE6
     ld   a, [$FFD7]
@@ -4666,24 +4630,24 @@ Start:
     cp   $5E
     jr   z, .label_1FF6
     cp   $D4
-    jp   nz, .label_2098
+    jp   nz, $2098
 
 .label_1FF6
     ld   a, [$DBA5]
     and  a
     ld   a, e
-    jp   nz, .label_2098
+    jp   nz, $2098
 
 .label_1FFE
     ld   e, a
     ld   a, [$FF9E]
     cp   $02
-    jp   nz, .label_20CF
+    jp   nz, $20CF
     ld   a, $02
     ld   [$C1AD], a
     ld   a, [$FFCC]
     and  $30
-    jp   z, .label_20CF
+    jp   z, $20CF
     ld   a, e
     cp   $5E
     ld   a, $8E
@@ -4697,8 +4661,8 @@ Start:
     and  a
     jr   z, .label_2030
     ld   a, $78
-    call .label_237C
-    jp   .label_20CF
+    call $237C
+    jp   $20CF
 
 .label_2030
     ld   a, [$DB4E]
@@ -4724,7 +4688,7 @@ Start:
     ld   e, a
     ld   d, $00
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $5118
     add  hl, de
     ld   a, [$DB49]
@@ -4749,7 +4713,7 @@ Start:
     and  $F0
     or   e
     ld   [$D473], a
-    jp   .label_20CF
+    jp   $20CF
 
 .label_2080
     cp   $83
@@ -4758,15 +4722,15 @@ Start:
     jr   z, .label_2093
 
 .label_2088
-    call .label_2373
-    jp   .label_20CF
+    call $2373
+    jp   $20CF
 
 .label_208E
-    call .label_2385
+    call $2385
     jr   .label_20CF
 
 .label_2093
-    call .label_237C
+    call $237C
     jr   .label_20CF
 
 .label_2098
@@ -4792,10 +4756,10 @@ Start:
 
 .label_20BF
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5900
     ld   a, $02
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $41D0
 
 .label_20CF
@@ -4810,14 +4774,14 @@ Start:
 .label_20DD
     ld   a, [$DB01]
     cp   $03
-    jp   nz, .label_2177
+    jp   nz, $2177
     ld   a, [$FFCB]
     and  $10
-    jp   z, .label_2177
+    jp   z, $2177
 
 .label_20EC
     ld   a, $02
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $48B0
     ld   a, $01
     ld   [$FFA1], a
@@ -4880,11 +4844,11 @@ Start:
     ret
 
 .label_2153
-    call .label_2165
+    call $2165
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $50C3
-    jp   .label_081D
+    jp   $081D
 
 .label_2161
     ld   a, $01
@@ -4895,23 +4859,23 @@ Start:
     ld   e, a
     ld   a, [$FFD7]
     ld   [$FFAF], a
-    call .label_2178
+    call $2178
     ld   a, [$FF9E]
     ld   [$C15D], a
-    jp   .label_2183
+    jp   $2183
 
 .label_2177
     ret
 
 .label_2178
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5526
-    jp   .label_081D
+    jp   $081D
 
 .label_2183
     ld   a, $05
-    call .label_142F
+    call $142F
     jr   c, .label_21A7
     ld   a, $02
     ld   [$FFF3], a
@@ -4926,7 +4890,7 @@ Start:
     ld   b, d
     ld   e, $01
     ld   a, $03
-    call .label_080C
+    call $080C
     jp   $5795
 
 .label_21A7
@@ -4937,7 +4901,7 @@ Start:
     and  a
     ret  nz
     ld   c, $01
-    call .label_21B6
+    call $21B6
     ld   c, $00
     ld   [$FFD7], a
 
@@ -4995,12 +4959,7 @@ Start:
     ret
 
 .label_2205
-    stop
-    ld   bc, $3E01
-    ld   [$00EA], sp
-    ld   hl, $34CD
-    ldi  [hl], a
-    jp   .label_081D
+    db   $10, $10, 1, 1, $3E, 8, $EA, 0, $21, $CD, $34, $22, $C3, $1D, 8
 
 .label_2214
     ld   a, [$C127]
@@ -5012,10 +4971,10 @@ Start:
 .label_221D
     ld   a, [hli]
     ld   [bc], a
-    inc  b
+    inc  bc
     ld   a, [hl]
     ld   [bc], a
-    inc  b
+    inc  bc
     ret
 
 .label_2224
@@ -5028,16 +4987,16 @@ Start:
     ld   a, [hli]
     ld   [bc], a
     inc  hl
-    inc  b
+    inc  bc
     ld   a, [hl]
     ld   [bc], a
-    inc  b
+    inc  bc
     ret
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4A76
     ld   a, $08
-    ld   [.label_2100], a
+    ld   [$2100], a
 
 .label_2241
     push bc
@@ -5089,29 +5048,29 @@ Start:
 
 .label_2291
     ld   a, $1A
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6576
 
 .label_2299
-    call .label_3905
+    call $3905
     add  hl, bc
     pop  de
     pop  bc
     ld   a, [$C125]
     and  $02
     jr   z, .label_22D3
-    call .label_2214
+    call $2214
     ld   a, [$FFFE]
     and  a
     jr   z, .label_22D1
     push bc
     push de
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $49D9
     ld   a, [$FFDF]
-    ld   [.label_2100], a
-    call .label_2214
+    ld   [$2100], a
+    call $2214
     ld   a, b
     ld   [$FFE2], a
     ld   a, c
@@ -5120,7 +5079,7 @@ Start:
     ld   [$FFE4], a
     ld   a, e
     ld   [$FFE5], a
-    call .label_3905
+    call $3905
     pop  de
     pop  bc
 
@@ -5128,18 +5087,18 @@ Start:
     jr   .label_22FE
 
 .label_22D3
-    call .label_2224
+    call $2224
     ld   a, [$FFFE]
     and  a
     jr   z, .label_22FE
     push bc
     push de
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $49D9
     ld   a, [$FFDF]
-    ld   [.label_2100], a
-    call .label_2224
+    ld   [$2100], a
+    call $2224
     ld   a, b
     ld   [$FFE2], a
     ld   a, c
@@ -5148,7 +5107,7 @@ Start:
     ld   [$FFE4], a
     ld   a, e
     ld   [$FFE5], a
-    call .label_3905
+    call $3905
     pop  de
     pop  bc
 
@@ -5166,9 +5125,9 @@ Start:
     ld   a, [$C128]
     dec  a
     ld   [$C128], a
-    jp   nz, .label_2241
+    jp   nz, $2241
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $5570
 
 .label_2321
@@ -5213,7 +5172,7 @@ Start:
     inc  h
     or   a
     inc  h
-    call .label_2924
+    call $2924
     dec  h
     sub  a, l
     ld   h, $14
@@ -5229,17 +5188,17 @@ Start:
     or   c
     inc  hl
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $5449
 
 .label_2373
-    call .label_2385
+    call $2385
     ld   a, $01
     ld   [$C112], a
     ret
 
 .label_237C
-    call .label_2385
+    call $2385
     ld   a, $02
     ld   [$C112], a
     ret
@@ -5280,7 +5239,7 @@ Start:
     cp   $08
     ret  c
     ld   a, $21
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $53CF
     nop
     inc  h
@@ -5344,7 +5303,7 @@ Start:
 .label_241E
     ld   a, [hli]
     ld   [bc], a
-    inc  b
+    inc  bc
     ld   a, l
     and  $1F
     jr   nz, .label_242B
@@ -5385,7 +5344,7 @@ Start:
     xor  a
     ld   [$FF4F], a
     ld   [$FF70], a
-    inc  b
+    inc  bc
     ld   a, l
     add  a, $01
     and  $1F
@@ -5418,7 +5377,7 @@ Start:
     jr   nz, .label_2444
     ret
     ld   a, $1C
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $4A2C
 
 .label_2485
@@ -5452,10 +5411,10 @@ Start:
 .label_24AE
     ret
     ld   a, $1C
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $4AA8
     ld   a, $1C
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$C172]
     and  a
     jr   z, .label_24C7
@@ -5465,9 +5424,9 @@ Start:
 
 .label_24C7
     call $49F1
-    jp   .label_2485
+    jp   $2485
     ld   a, $1C
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$C19F]
     ld   c, a
     ld   a, [$C171]
@@ -5520,12 +5479,12 @@ Start:
     ld   a, [hl]
     pop  hl
     ldi  [hl], a
-    call .label_2485
-    jp   .label_2529
+    call $2485
+    jp   $2529
 
 .label_2529
     ld   a, $1C
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$C170]
     and  $1F
     ld   c, a
@@ -5567,7 +5526,7 @@ Start:
     add  hl, de
     ld   a, [hl]
     and  $3F
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  hl
     ld   a, [$C170]
     ld   e, a
@@ -5578,7 +5537,7 @@ Start:
     ld   e, a
     ld   a, [hl]
     ld   [$C3C3], a
-    call .label_081D
+    call $081D
     ld   a, e
     ld   [$FFD7], a
     cp   $FE
@@ -5675,7 +5634,7 @@ Start:
     ld   [$FFD8], a
     ld   e, a
     ld   a, $1C
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $4641
     add  hl, de
     ld   e, [hl]
@@ -5688,7 +5647,7 @@ Start:
     db   $CB, $12 ; Need to handle this instruction 
     db   $CB, $23 ; Need to handle this instruction 
     db   $CB, $12 ; Need to handle this instruction 
-    call .label_081D
+    call $081D
     ld   hl, $5000
     add  hl, de
     ld   c, l
@@ -5699,13 +5658,13 @@ Start:
 .label_2633
     ld   a, [bc]
     ldi  [hl], a
-    inc  b
+    inc  bc
     dec  e
     jr   nz, .label_2633
     ld   [hl], $00
     push hl
     ld   a, $1C
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFD8]
     ld   e, a
     ld   d, $00
@@ -5753,7 +5712,7 @@ Start:
     ret
 
 .label_268E
-    jp   .label_2485
+    jp   $2485
 
 .label_2691
     ldi  [hl], a
@@ -5767,28 +5726,28 @@ Start:
     jr   nz, .label_26E1
     ld   a, [$C3C3]
     cp   $FF
-    jp   z, .label_25AD
+    jp   z, $25AD
     cp   $FE
-    jp   z, .label_2595
+    jp   z, $2595
     ld   a, [$C1CC]
     and  a
     jr   nz, .label_26B6
     inc  a
     ld   [$C1CC], a
-    call .label_259F
+    call $259F
 
 .label_26B6
-    call .label_27BB
+    call $27BB
     ld   a, [$FFCC]
     db   $CB, $67 ; Need to handle this instruction 
     jr   nz, .label_26E1
     db   $CB, $6F ; Need to handle this instruction 
     jr   z, .label_2714
     ld   a, $1C
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$DB95]
     cp   $07
-    jp   z, .label_278B
+    jp   z, $278B
     ld   a, [$C173]
     ld   e, a
     ld   a, [$C112]
@@ -5797,7 +5756,7 @@ Start:
     add  hl, de
     ld   a, [hl]
     and  a
-    jp   z, .label_278B
+    jp   z, $278B
 
 .label_26E1
     ld   e, $00
@@ -5824,7 +5783,7 @@ Start:
     ld   [$D604], a
     xor  a
     ld   [$D605], a
-    call .label_2485
+    call $2485
 
 .label_2714
     ret
@@ -5882,7 +5841,7 @@ Start:
     ld   a, [$FFE8]
     ld   [hl], a
     pop  bc
-    inc  b
+    inc  bc
     ld   a, c
     and  $1F
     jr   nz, .label_275D
@@ -5895,7 +5854,7 @@ Start:
     jr   nz, .label_2739
     ld   a, $08
     ld   [$C172], a
-    jp   .label_2485
+    jp   $2485
     ret
 
 .label_2769
@@ -5921,16 +5880,16 @@ Start:
     add  a, [hl]
     ld   b, a
     ld   hl, $2769
-    call .label_2731
-    jp   .label_267E
+    call $2731
+    jp   $267E
 
 .label_278B
     ld   a, $02
     ld   [$C177], a
-    jp   .label_2496
+    jp   $2496
     ld   a, [$FFCC]
     db   $CB, $67 ; Need to handle this instruction 
-    jp   nz, .label_27B7
+    jp   nz, $27B7
     and  $03
     jr   z, .label_27AA
     ld   hl, $C177
@@ -5946,16 +5905,16 @@ Start:
     and  $10
     ret  z
     ld   a, $17
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $7DCC
 
 .label_27B7
-    call .label_2496
+    call $2496
     ret
 
 .label_27BB
     ld   a, $17
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $7D7C
     ld   [$D368], a
     ld   [$FFBF], a
@@ -5972,11 +5931,11 @@ Start:
     pop  hl
     ret
     ld   a, $02
-    ld   [.label_2100], a
+    ld   [$2100], a
     push bc
     call $4146
     pop  bc
-    jp   .label_081D
+    jp   $081D
     ld   a, $38
     ld   [$FFA8], a
     xor  a
@@ -5988,15 +5947,15 @@ Start:
     and  a
     jr   nz, .label_27FF
     ld   a, $1F
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4003
 
 .label_27FF
-    jp   .label_081D
+    jp   $081D
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5E67
-    jp   .label_081D
+    jp   $081D
 
 .label_280D
     push hl
@@ -6140,7 +6099,7 @@ Start:
     ld   [$FFFF], a
     ret
     ld   a, $01
-    call .label_080C
+    call $080C
     jp   $6CE3
     ld   a, $7E
     ld   bc, $0400
@@ -6162,10 +6121,10 @@ Start:
     or   c
     jr   nz, .label_2900
     ret
-    ld   [.label_2100], a
-    call .label_2914
+    ld   [$2100], a
+    call $2914
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_2914
@@ -6188,7 +6147,7 @@ Start:
     inc  de
 
 .label_2924
-    call .label_2941
+    call $2941
 
 .label_2927
     ld   a, [$C124]
@@ -6209,7 +6168,7 @@ Start:
     inc  de
     ld   a, [de]
     inc  de
-    call .label_2991
+    call $2991
 
 .label_293C
     ld   a, [de]
@@ -6346,7 +6305,7 @@ Start:
 
 .label_29D3
     ld   hl, $FF90
-    call .label_29DF
+    call $29DF
     ld   bc, $1F00
 
 .label_29DC
@@ -6367,23 +6326,23 @@ Start:
     ld   [$FFFE], a
     ret
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5884
-    jp   .label_081D
+    jp   $081D
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4C98
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5A59
-    jp   .label_081D
+    jp   $081D
 
 .label_2A12
     ld   a, $08
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $4AD4
     ld   a, [$FFF7]
     cp   $FF
@@ -6396,78 +6355,78 @@ Start:
     ret
 
 .label_2A26
-    call .label_2A12
-    jp   .label_081D
-    call .label_2A12
+    call $2A12
+    jp   $081D
+    call $2A12
     push af
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  af
     ret
     ld   a, $13
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $6800
     ld   de, $9000
     ld   bc, $0800
-    call .label_2914
+    call $2914
     ld   hl, $7000
     ld   de, $8800
     ld   bc, $0800
-    jp   .label_2914
-    call .label_2A66
+    jp   $2914
+    call $2A66
     ld   de, $8400
     ld   hl, $7600
     ld   bc, $0100
-    jp   .label_2914
+    jp   $2914
 
 .label_2A66
     ld   a, $13
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $4000
     ld   de, $8000
     ld   bc, $1800
-    call .label_2914
+    call $2914
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $57E0
     ld   de, $97F0
     ld   bc, $0010
-    call .label_2914
+    call $2914
     ld   a, $12
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $7500
     ld   de, $8000
     ld   bc, $0040
-    call .label_2914
+    call $2914
     ld   de, $8D00
     ld   hl, $7500
     ld   bc, $0200
-    jp   .label_2914
+    jp   $2914
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $5000
     ld   de, $9000
     ld   bc, $0800
-    call .label_2914
+    call $2914
     ld   a, $12
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $6000
     ld   de, $8000
     ld   bc, $0800
-    call .label_2914
+    call $2914
     ld   a, $0F
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $6000
     ld   de, $8800
     ld   bc, $0800
-    jp   .label_2914
+    jp   $2914
     ld   hl, $4000
     ld   a, [$FFFE]
     and  a
@@ -6481,50 +6440,50 @@ Start:
 
 .label_2B01
     ld   a, $13
-    call .label_0B0B
+    call $0B0B
 
 .label_2B06
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   de, $8000
     ld   bc, $0800
-    call .label_2914
+    call $2914
     ld   a, $13
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $5800
     ld   de, $8800
     ld   bc, $1000
-    jp   .label_2914
-    call .label_08A4
+    jp   $2914
+    call $08A4
     ld   hl, $6800
     ld   a, $10
-    call .label_2B92
-    call .label_08A4
+    call $2B92
+    call $08A4
     ld   a, $12
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $6600
     ld   de, $8000
     ld   bc, $0080
-    call .label_2914
-    call .label_08A4
+    call $2914
+    call $08A4
     ld   a, [$FFFE]
     and  a
     jr   nz, .label_2B61
     ld   a, $10
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $6900
     ld   de, $8100
     ld   bc, $0700
-    jp   .label_2914
+    jp   $2914
 
 .label_2B61
     ld   a, $38
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $5000
     ld   de, $8000
     ld   bc, $0800
-    jp   .label_2914
+    jp   $2914
     ld   hl, $7800
     ld   a, [$FFFE]
     and  a
@@ -6544,67 +6503,67 @@ Start:
     ld   a, $13
 
 .label_2B92
-    call .label_0B0B
+    call $0B0B
 
 .label_2B95
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   de, $8000
     ld   bc, $0800
-    call .label_2914
+    call $2914
     ld   a, $13
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $7000
     ld   de, $8800
     ld   bc, $0800
-    call .label_2914
+    call $2914
     ld   hl, $6800
     ld   de, $9000
     ld   bc, $0800
-    jp   .label_2914
+    jp   $2914
     push bc
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5838
-    call .label_081D
+    call $081D
     pop  bc
     ret
 
 .label_2BCF
     ld   a, $0C
-    call .label_0813
+    call $0813
     ld   hl, $4000
     ld   de, $8000
     ld   bc, $0400
-    call .label_2914
+    call $2914
     ld   a, $0C
-    call .label_0813
+    call $0813
     ld   hl, $4800
     ld   de, $8800
     ld   bc, $1000
-    call .label_2914
+    call $2914
     ld   hl, $47A0
     ld   de, $8E00
     ld   bc, $0020
-    call .label_2914
+    call $2914
     ld   a, $01
-    call .label_080C
+    call $080C
     ret
-    call .label_2BCF
+    call $2BCF
     ld   a, $0F
-    call .label_0813
+    call $0813
     ld   hl, $4000
     ld   de, $8800
     ld   bc, $0400
-    call .label_2914
+    call $2914
     ld   a, $0F
-    call .label_0813
+    call $0813
     ld   hl, $5000
     ld   de, $9000
     ld   bc, $0800
-    jp   .label_2914
+    jp   $2914
     ld   a, $20
-    call .label_080C
+    call $080C
     ld   hl, $4589
     ld   a, [$FFF7]
     ld   e, a
@@ -6612,11 +6571,11 @@ Start:
     cp   $FF
     jr   nz, .label_2C53
     ld   a, $35
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $6200
     ld   de, $9000
     ld   bc, $0100
-    call .label_2914
+    call $2914
     ld   e, $00
     ld   d, e
     ld   hl, $6000
@@ -6629,20 +6588,20 @@ Start:
     ld   h, [hl]
     ld   l, $00
     ld   a, $0D
-    call .label_0813
+    call $0813
 
 .label_2C5D
     ld   de, $9100
     ld   bc, $0100
-    call .label_2914
+    call $2914
     ld   a, $0D
-    call .label_0813
+    call $0813
     ld   hl, $4000
     ld   de, $9200
     ld   bc, $0600
-    call .label_2914
+    call $2914
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  de
     push de
     ld   hl, $45A9
@@ -6655,40 +6614,40 @@ Start:
     add  hl, de
     ld   h, [hl]
     ld   l, $00
-    call .label_081D
+    call $081D
     ld   de, $9200
     ld   bc, $0200
-    call .label_2914
+    call $2914
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $47C0
     ld   de, $DCC0
     ld   bc, $0040
-    call .label_2914
-    call .label_2D50
+    call $2914
+    call $2D50
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  de
     ld   hl, $45CA
     add  hl, de
     ld   h, [hl]
     ld   l, $00
     ld   a, $12
-    call .label_0813
+    call $0813
     ld   a, [$FFF7]
     cp   $FF
     jr   nz, .label_2CD1
     ld   hl, $6100
     ld   a, $35
-    ld   [.label_2100], a
+    ld   [$2100], a
 
 .label_2CD1
     ld   de, $8F00
     ld   bc, $0100
-    call .label_2914
+    call $2914
     ld   a, [$DBAF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $7D00
     ld   a, [$FFF7]
     cp   $FF
@@ -6696,19 +6655,19 @@ Start:
     cp   $0A
     jr   c, .label_2CF5
     ld   a, $0C
-    call .label_0813
+    call $0813
     ld   hl, $4C00
 
 .label_2CF5
     ld   de, $8C00
     ld   bc, $0300
-    call .label_2914
+    call $2914
 
 .label_2CFE
     ld   a, [$DB4B]
     and  a
     jr   z, .label_2D07
-    call .label_1E2B
+    call $1E2B
 
 .label_2D07
     ld   a, [$DBA5]
@@ -6724,7 +6683,7 @@ Start:
     ld   a, [$DB15]
     cp   $06
     jr   c, .label_2D21
-    call .label_1EA1
+    call $1EA1
 
 .label_2D21
     ld   a, [$DB0E]
@@ -6736,59 +6695,59 @@ Start:
 .label_2D2C
     ret
     ld   a, $0C
-    call .label_0813
+    call $0813
     ld   hl, $5200
     ld   de, $9200
     ld   bc, $0600
-    call .label_2914
+    call $2914
     ld   hl, $4C00
     ld   de, $8C00
     ld   bc, $0400
-    call .label_2914
-    call .label_2D50
-    jp   .label_2CFE
+    call $2914
+    call $2D50
+    jp   $2CFE
 
 .label_2D50
     xor  a
     ld   [$FFA6], a
     ld   [$FFA7], a
-    call .label_1BD2
+    call $1BD2
     ld   a, $0C
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $4800
     ld   de, $8800
     ld   bc, $0800
-    call .label_2914
+    call $2914
     ld   hl, $4200
     ld   de, $8200
     ld   bc, $0100
-    call .label_2914
+    call $2914
     ret
     ld   a, $01
-    call .label_080C
+    call $080C
     ld   hl, $6D4A
     ld   de, $8700
     ld   bc, $0080
-    call .label_2914
+    call $2914
     ld   a, $10
-    call .label_0813
+    call $0813
     ld   hl, $5400
     ld   de, $8000
     ld   bc, $0600
-    call .label_2914
+    call $2914
     ld   hl, $4000
     ld   de, $8800
     ld   bc, $1000
-    jp   .label_2914
+    jp   $2914
     ld   a, $0F
-    call .label_0813
+    call $0813
     ld   hl, $4900
     ld   de, $8800
     ld   bc, $0700
-    call .label_2914
+    call $2914
     ld   a, $38
-    call .label_080C
+    call $080C
     ld   a, [$FFFE]
     and  a
     jr   nz, .label_2DC7
@@ -6801,7 +6760,7 @@ Start:
 .label_2DCA
     ld   de, $8400
     ld   bc, $0400
-    call .label_2914
+    call $2914
     ld   a, [$FFFE]
     and  a
     jr   nz, .label_2DDD
@@ -6814,17 +6773,17 @@ Start:
 .label_2DE0
     ld   de, $8200
     ld   bc, $0100
-    jp   .label_2914
+    jp   $2914
     ld   a, $0C
-    call .label_0813
+    call $0813
     ld   hl, $7800
     ld   de, $8F00
     ld   bc, $0800
-    call .label_2914
+    call $2914
     ld   hl, $5000
     ld   de, $8200
     ld   bc, $0100
-    jp   .label_2914
+    jp   $2914
     ld   hl, $7000
     jr   .label_2E13
     ld   hl, $7800
@@ -6833,48 +6792,48 @@ Start:
 
 .label_2E13
     ld   a, $10
-    call .label_0813
+    call $0813
     ld   de, $9000
     ld   bc, $0800
-    jp   .label_2914
+    jp   $2914
     ld   a, $13
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   hl, $7C00
     ld   de, $8C00
     ld   bc, $0400
-    call .label_2914
+    call $2914
     ld   hl, $6800
     ld   de, $9000
     ld   bc, $0400
-    jp   .label_2914
+    jp   $2914
     ld   a, $10
-    call .label_0813
+    call $0813
     ld   hl, $6700
     ld   de, $8400
     ld   bc, $0400
-    call .label_2914
+    call $2914
     ld   hl, $6000
     ld   de, $9000
     ld   bc, $0600
-    jp   .label_2914
+    jp   $2914
     ld   a, $0F
-    call .label_080C
+    call $080C
     ld   hl, $4400
     ld   de, $8800
     ld   bc, $0500
-    jp   .label_2914
+    jp   $2914
 
 .label_2E6F
     nop
-    ld   de, .label_120E
+    ld   de, $120E
     ld   a, [$FFF7]
     cp   $FF
     jr   nz, .label_2E84
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $475A
-    jp   .label_2F12
+    jp   $2F12
 
 .label_2E84
     xor  a
@@ -6947,10 +6906,10 @@ Start:
     ld   a, [hl]
     and  a
     jr   z, .label_2EF2
-    call .label_0B0B
+    call $0B0B
 
 .label_2EF2
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFD7]
     ld   d, a
     ld   e, $00
@@ -6961,22 +6920,22 @@ Start:
     ld   hl, $4000
     add  hl, bc
     ld   bc, $0100
-    call .label_2914
+    call $2914
 
 .label_2F0A
     ld   a, [$FFD7]
     inc  a
     cp   $04
-    jp   nz, .label_2E85
+    jp   nz, $2E85
 
 .label_2F12
     ld   de, $9000
     ld   a, [$DBA5]
     and  a
-    jp   z, .label_2FAD
+    jp   z, $2FAD
     ld   a, $0D
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   a, [$FFF9]
     and  a
     jr   z, .label_2F4B
@@ -6999,7 +6958,7 @@ Start:
 .label_2F41
     ld   de, $9000
     ld   bc, $0800
-    call .label_2914
+    call $2914
     ret
 
 .label_2F4B
@@ -7018,7 +6977,7 @@ Start:
     add  a, $50
     ld   h, a
     ld   bc, $0100
-    call .label_2914
+    call $2914
 
 .label_2F69
     ld   a, [$FFF7]
@@ -7028,11 +6987,11 @@ Start:
     cp   $B5
     jr   nz, .label_2F87
     ld   a, $35
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $6600
     ld   de, $8F00
     ld   bc, $0200
-    call .label_2914
+    call $2914
     ret
 
 .label_2F87
@@ -7043,21 +7002,21 @@ Start:
     and  a
     ret  nz
     ld   a, $35
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $6E00
     ld   de, $9690
     ld   bc, $0010
-    call .label_2914
+    call $2914
     ld   hl, $6E10
     ld   de, $9790
     ld   bc, $0010
-    call .label_2914
+    call $2914
     ret
 
 .label_2FAD
     ld   a, $0F
-    call .label_0B0B
-    ld   [.label_2100], a
+    call $0B0B
+    ld   [$2100], a
     ld   a, [$FF94]
     cp   $0F
     jr   z, .label_2FC6
@@ -7065,7 +7024,7 @@ Start:
     ld   h, a
     ld   l, $00
     ld   bc, $0200
-    call .label_2914
+    call $2914
 
 .label_2FC6
     ret
@@ -7144,9 +7103,9 @@ Start:
     db   $CB, $21 ; Need to handle this instruction 
     db   $CB, $10 ; Need to handle this instruction 
     ld   a, $1A
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6576
-    call .label_3905
+    call $3905
     ld   a, [$DBA5]
     and  a
     jr   z, .label_304C
@@ -7170,21 +7129,21 @@ Start:
 .label_304F
     push de
     add  hl, bc
-    call .label_2FC7
+    call $2FC7
     pop  de
     push hl
     ld   a, [$FFDF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFE0]
     ld   h, a
     ld   a, [$FFE1]
     ld   l, a
     ld   a, $01
     ld   [$FF4F], a
-    call .label_2FC7
+    call $2FC7
     xor  a
     ld   [$FF4F], a
-    call .label_3905
+    call $3905
     ld   a, h
     ld   [$FFE0], a
     ld   a, l
@@ -7197,23 +7156,23 @@ Start:
     adc  a, $00
     ld   d, a
     push de
-    call .label_2FC7
+    call $2FC7
     pop  de
     ld   a, [$FFDF]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFE0]
     ld   h, a
     ld   a, [$FFE1]
     ld   l, a
     ld   a, $01
     ld   [$FF4F], a
-    call .label_2FC7
+    call $2FC7
     xor  a
     ld   [$FF4F], a
-    call .label_3905
+    call $3905
     ret
-    call .label_3905
-    call .label_080C
+    call $3905
+    call $080C
     ld   de, $9800
     ld   hl, $D711
     ld   c, $80
@@ -7225,18 +7184,18 @@ Start:
     ld   a, [$FFFE]
     and  a
     jr   nz, .label_30B6
-    call .label_2FCD
+    call $2FCD
     jr   .label_30C4
 
 .label_30B6
     ld   a, [$DBA5]
     and  a
     jr   z, .label_30C1
-    call .label_3018
+    call $3018
     jr   .label_30C4
 
 .label_30C1
-    call .label_300E
+    call $300E
 
 .label_30C4
     pop  bc
@@ -7271,33 +7230,33 @@ Start:
     dec  c
     jr   nz, .label_30A9
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $6DEA
     ld   a, $01
     ld   [$FFFF], a
     ld   hl, $D47F
     inc  [hl]
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4CA3
     ld   a, [$FFFE]
     and  a
     jr   z, .label_3119
     ld   a, $21
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $40B3
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6DAF
 
 .label_3119
     ld   a, $09
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$DBA5]
     and  a
     jr   z, .label_313A
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   [$FFE8], a
     call $5897
     ld   e, a
@@ -7353,13 +7312,13 @@ Start:
     and  a
     jr   z, .label_31BF
     ld   a, $0A
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   [$FFE8], a
     ld   a, [$FFF7]
     cp   $FF
     jr   nz, .label_318F
     ld   hl, $7B77
-    jp   .label_3224
+    jp   $3224
 
 .label_318F
     cp   $1F
@@ -7371,7 +7330,7 @@ Start:
     cp   $0E
     jr   nz, .label_31A6
     ld   bc, $7855
-    jp   .label_323A
+    jp   $323A
 
 .label_31A6
     ld   hl, $4000
@@ -7381,7 +7340,7 @@ Start:
     cp   $06
     jr   c, .label_3224
     ld   a, $0B
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   [$FFE8], a
     ld   hl, $4000
     jr   .label_3224
@@ -7459,32 +7418,32 @@ Start:
     cp   $80
     jr   c, .label_323A
     ld   a, $1A
-    ld   [.label_2100], a
+    ld   [$2100], a
 
 .label_323A
     ld   a, [bc]
     cp   $FE
     jr   z, .label_328E
     ld   [$FFA4], a
-    inc  b
+    inc  bc
     ld   a, [$DBA5]
     and  a
     jr   z, .label_3258
     ld   a, [bc]
     and  $0F
-    call .label_37E7
+    call $37E7
     ld   a, [bc]
     db   $CB, $37 ; Need to handle this instruction 
     and  $0F
-    call .label_38EA
+    call $38EA
     jr   .label_325C
 
 .label_3258
     ld   a, [bc]
-    call .label_37E7
+    call $37E7
 
 .label_325C
-    inc  b
+    inc  bc
     ld   a, [bc]
     and  $FC
     cp   $E0
@@ -7497,16 +7456,16 @@ Start:
     ld   a, [bc]
     and  $03
     ldi  [hl], a
-    inc  b
+    inc  bc
     ld   a, [bc]
     ldi  [hl], a
-    inc  b
+    inc  bc
     ld   a, [bc]
     ldi  [hl], a
-    inc  b
+    inc  bc
     ld   a, [bc]
     ldi  [hl], a
-    inc  b
+    inc  bc
     ld   a, [bc]
     ldi  [hl], a
     ld   a, e
@@ -7518,20 +7477,20 @@ Start:
     ld   a, [bc]
     cp   $FE
     jr   z, .label_328E
-    call .label_32A9
+    call $32A9
     jr   .label_325C
 
 .label_328E
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6CCE
     ld   a, $36
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6D4D
     ld   a, $21
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $53F3
-    jp   .label_081D
+    jp   $081D
 
 .label_32A9
     xor  a
@@ -7542,10 +7501,10 @@ Start:
     db   $CB, $67 ; Need to handle this instruction 
     jr   nz, .label_32B8
     ld   [$FFD7], a
-    inc  b
+    inc  bc
 
 .label_32B8
-    inc  b
+    inc  bc
     ld   a, [$FFF8]
     ld   e, a
     ld   a, [$DBA5]
@@ -7559,17 +7518,17 @@ Start:
     dec  bc
     ld   a, [bc]
     ld   e, a
-    inc  b
+    inc  bc
     ld   a, $24
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $7578
-    call .label_353B
+    call $353B
     ret
 
 .label_32D9
     ld   a, [bc]
     sub  a, $EC
-    jp  c, .label_33CB
+    jp  c, $33CB
     rst  0
     ld   a, [$1535]
     ld   [hl], $30
@@ -7722,15 +7681,15 @@ Start:
     dec  bc
     ld   a, [bc]
     ld   [hl], a
-    inc  b
+    inc  bc
 
 .label_33BC
     ld   a, [$FFE0]
     cp   $C5
-    jp   z, .label_347D
+    jp   z, $347D
     cp   $C6
-    jp   z, .label_347D
-    jp   .label_34CE
+    jp   z, $347D
+    jp   $34CE
 
 .label_33CB
     add  a, $EC
@@ -7875,8 +7834,8 @@ Start:
     and  $F0
     add  a, $08
     ld   [$FFAD], a
-    inc  b
-    jp   .label_34CE
+    inc  bc
+    jp   $34CE
 
 .label_3496
     cp   $D6
@@ -7963,7 +7922,7 @@ Start:
 .label_34FB
     dec  e
     jr   nz, .label_34EF
-    inc  b
+    inc  bc
     ret
 
 .label_3500
@@ -7998,7 +7957,7 @@ Start:
     ld   a, $1A
 
 .label_3529
-    call .label_0B2F
+    call $0B2F
     ret
 
 .label_352D
@@ -8009,8 +7968,8 @@ Start:
     add  hl, de
     pop  af
     ld   [hl], a
-    call .label_3500
-    inc  b
+    call $3500
+    inc  bc
     ret
 
 .label_353B
@@ -8024,7 +7983,7 @@ Start:
     ld   a, $1A
 
 .label_3547
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_354B
@@ -8066,9 +8025,9 @@ Start:
 
 .label_357C
     ld   [hl], a
-    call .label_3500
+    call $3500
     inc  de
-    inc  b
+    inc  bc
     pop  hl
     ld   a, [bc]
     and  a
@@ -8116,9 +8075,9 @@ Start:
 
 .label_35BC
     ld   [hl], a
-    call .label_35CB
+    call $35CB
     inc  de
-    inc  b
+    inc  bc
     pop  hl
     ld   a, [bc]
     and  a
@@ -8150,7 +8109,7 @@ Start:
 
 .label_35E8
     ld   a, $24
-    call .label_0B2F
+    call $0B2F
     ret
 
 .label_35EE
@@ -8166,15 +8125,16 @@ Start:
     dec  l
     ld   l, $1E
     nop
-    call .label_373F
+    call $373F
     ld   a, [$FFF8]
     and  $04
-    jp   nz, .label_36B2
+    jp   nz, $36B2
     push bc
-    call .label_35EE
+    call $35EE
     ld   bc, $37E1
-    ld   de, .label_35F8
-    jp   .label_354B
+    ld   de, $35F8
+    jp   $354B
+
 
 .label_3613
     db   $2F, $30, $1E, 1, $CD, $3F, $37, $F0, $F8, $E6, 8, $C2, $EA, $36, $C5, $CD
@@ -8190,6 +8150,7 @@ Start:
     db   $FA, $8A, $C1, $F6, 1, $EA, $8A, $C1, $EA, $8B, $C1, $C3, $B2, $36
 
 .label_3677
+    db   $1E, 5, $CD, $3F, $37, $FA, $8A, $C1, $F6, 2, $EA, $8A, $C1, $EA, $8B, $C1
     db   $C3, $EA, $36, $1E, 6, $CD, $3F, $37, $FA, $8A, $C1, $F6, 4, $EA, $8A, $C1
     db   $EA, $8B, $C1, $C3, $FE, $36, $1E, 7, $CD, $3F, $37, $FA, $8A, $C1, $F6, 8
     db   $EA, $8A, $C1, $EA, $8B, $C1, $C3, $12, $37
@@ -8199,12 +8160,12 @@ Start:
 
 .label_36B2
     ld   a, $04
-    call .label_36C4
+    call $36C4
     push bc
-    call .label_35EE
+    call $35EE
     ld   bc, $37E1
-    ld   de, .label_36B0
-    jp   .label_354B
+    ld   de, $36B0
+    jp   $354B
 
 .label_36C4
     push af
@@ -8235,13 +8196,13 @@ Start:
 
 .label_36E8
     adc  a, h
-    ld   [.label_083E], sp
-    call .label_36C4
+    ld   [$083E], sp
+    call $36C4
     push bc
-    call .label_35EE
+    call $35EE
     ld   bc, $37E1
-    ld   de, .label_36E8
-    jp   .label_354B
+    ld   de, $36E8
+    jp   $354B
 
 .label_36FC
     add  hl, bc
@@ -8249,12 +8210,12 @@ Start:
 
 .label_36FE
     ld   a, $02
-    call .label_36C4
+    call $36C4
     push bc
-    call .label_35EE
+    call $35EE
     ld   bc, $37E4
-    ld   de, .label_36FC
-    jp   .label_354B
+    ld   de, $36FC
+    jp   $354B
 
 .label_3710
     dec  bc
@@ -8262,26 +8223,26 @@ Start:
 
 .label_3712
     ld   a, $01
-    call .label_36C4
+    call $36C4
     push bc
-    call .label_35EE
+    call $35EE
     ld   bc, $37E4
-    ld   de, .label_3710
-    jp   .label_354B
+    ld   de, $3710
+    jp   $354B
 
 .label_3724
     and  h
     and  l
     ld   e, $08
-    call .label_373F
+    call $373F
     ld   a, [$FFF8]
     and  $04
-    jp   nz, .label_36B2
+    jp   nz, $36B2
     push bc
-    call .label_35EE
+    call $35EE
     ld   bc, $37E1
-    ld   de, .label_3724
-    jp   .label_354B
+    ld   de, $3724
+    jp   $354B
 
 .label_373F
     ld   d, $00
@@ -8301,96 +8262,53 @@ Start:
     ld   hl, $C1D0
     add  hl, de
     ld   [hl], a
-    inc  b
+    inc  bc
     ret
 
 .label_375C
     xor  a
     or   b
     push bc
-    call .label_35EE
+    call $35EE
     ld   bc, $37E4
-    ld   de, .label_375C
-    jp   .label_354B
+    ld   de, $375C
+    jp   $354B
 
 .label_376B
     or   c
     or   d
     push bc
-    call .label_35EE
+    call $35EE
     ld   bc, $37E1
-    ld   de, .label_376B
-    jp   .label_354B
+    ld   de, $376B
+    jp   $354B
 
 .label_377A
     ld   b, l
     ld   b, [hl]
     push bc
-    call .label_35EE
+    call $35EE
     ld   bc, $37E1
-    ld   de, .label_377A
-    jp   .label_354B
+    ld   de, $377A
+    jp   $354B
 
 .label_3789
-    nop
-    ld   bc, $0302
-    stop
-    ld   [de], a
-    inc  de
-    jr   nz, .label_37B4
-    ldi  [hl], a
-    inc  hl
-    rst  $38
+    db   0, 1, 2, 3, $10, $11, $12, $13, $20, $21, $22, $23, $FF
 
 .label_3796
-    or   e
-    or   h
-    or   h
-    or   l
-    or   [hl]
-    or   a
-    cp   b
-    cp   c
-    cp   d
-    cp   e
-    cp   h
-    cp   l
-    ld   a, $08
-    call .label_36C4
-    push bc
-    call .label_35EE
-    ld   bc, $3789
-    ld   de, .label_3796
-    jp   .label_354B
+    db   $B3, $B4, $B4, $B5, $B6, $B7, $B8, $B9, $BA, $BB, $BC, $BD, $3E, 8, $CD, $C4
+    db   $36, $C5, $CD, $EE, $35, 1, $89, $37, $11, $96, $37, $C3, $4B, $35
 
 .label_37B4
-    pop  bc
-    jp   nz, $F7F0
-    cp   $1A
-    jr   nc, .label_37CF
-    cp   $06
-    jr   c, .label_37CF
-    ld   a, [$FFF6]
-    cp   $D3
-    jr   nz, .label_37CF
-    ld   a, [$DB46]
-    and  a
-    jr   z, .label_37CF
-    jp   .label_3677
+    db   $C1, $C2, $F0, $F7, $FE, $1A, $30, $13, $FE, 6, $38, $F, $F0, $F6, $FE, $D3
+    db   $20, 9, $FA, $46, $DB, $A7, $28, 3, $C3, $77, $36
 
 .label_37CF
-    ld   a, $01
-    call .label_36C4
-    push bc
-    call .label_35EE
-    ld   bc, $37E1
-    ld   de, .label_37B4
-    jp   .label_354B
+    db   $3E, 1, $CD, $C4, $36, $C5, $CD, $EE, $35, 1, $E1, $37, $11, $B4, $37, $C3
+    db   $4B, $35
 
 .label_37E1
-    nop
-    ld   bc, $00FF
-    stop
+    db   0, 1, $FF, 0, $10, $FF
 
 .label_37E7
     ld   [$FFE9], a
@@ -8412,10 +8330,10 @@ Start:
     jr   nz, .label_37EF
     ret
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5F02
     ld   a, $16
-    ld   [.label_2100], a
+    ld   [$2100], a
     xor  a
     ld   [$FFE4], a
     ld   a, [$FFF6]
@@ -8435,7 +8353,7 @@ Start:
     cp   [hl]
     jr   nz, .label_3850
     ld   a, $A8
-    call .label_3B86
+    call $3B86
     ld   a, [$DB70]
     ld   hl, $C200
     add  hl, de
@@ -8444,7 +8362,7 @@ Start:
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
-    call .label_38D4
+    call $38D4
     ld   hl, $C460
     add  hl, de
     ld   [hl], $FF
@@ -8478,15 +8396,18 @@ Start:
     ld   a, [bc]
     cp   $FF
     jr   z, .label_3877
-    call .label_3883
+    call $3883
     jr   .label_386D
 
 .label_3877
-    call .label_081D
+    call $081D
     ret
 
 .label_387B
-    db   1, 2, 4, 8, $10, $20, $40, $80
+    ld   bc, $0402
+    ld   [$2010], sp
+    ld   b, b
+    add  a, b
 
 .label_3883
     ld   a, [$FFE4]
@@ -8522,8 +8443,8 @@ Start:
 .label_38AD
     ld   hl, $FFE4
     inc  [hl]
-    inc  b
-    inc  b
+    inc  bc
+    inc  bc
     ret
 
 .label_38B4
@@ -8535,7 +8456,7 @@ Start:
     add  a, $10
     ld   [hl], a
     ld   a, [bc]
-    inc  b
+    inc  bc
     db   $CB, $37 ; Need to handle this instruction 
     and  $F0
     ld   hl, $C200
@@ -8545,33 +8466,33 @@ Start:
     ld   hl, $C3A0
     add  hl, de
     ld   a, [bc]
-    inc  b
+    inc  bc
     ld   [hl], a
 
 .label_38D4
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6524
     ld   a, $01
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5EAB
     ld   a, $16
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_38EA
     ld   e, a
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, e
     push bc
     call $4880
     pop  bc
     ld   a, [$FFE8]
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $588B
     ret
 
@@ -8586,16 +8507,16 @@ Start:
     ld   a, $08
 
 .label_3911
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     ld   a, $27
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $7FC5
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   $7DE6
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $5218
     add  hl, de
     ld   a, [hl]
@@ -8603,42 +8524,43 @@ Start:
     ld   [hl], $05
     ret
     ld   a, $19
-    call .label_080C
+    call $080C
     call $7C50
     ld   a, $03
-    jp   .label_080C
+    jp   $080C
 
 .label_3942
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $53E4
-    jp   .label_081D
+    jp   $081D
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $54AC
-    jp   .label_081D
+    jp   $081D
     ld   a, $01
-    call .label_080C
+    call $080C
     call $5FB3
     ld   a, $02
-    jp   .label_080C
+    jp   $080C
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $485B
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $7EFE
-    jp   .label_081D
+    jp   $081D
     ld   a, $14
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $5347
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_3989
-    db   0, 8, $10, $18
+    nop
+    ld   [$1810], sp
 
 .label_398D
     ld   hl, $C5A7
@@ -8682,10 +8604,10 @@ Start:
     ld   a, [hl]
     ld   [$C3C0], a
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4303
     xor  a
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$C19F]
     and  a
     jr   nz, .label_39E3
@@ -8694,7 +8616,7 @@ Start:
 .label_39E3
     ld   a, $20
     ld   [$DBAF], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6352
     ld   b, $00
     ld   c, $0F
@@ -8708,7 +8630,7 @@ Start:
     and  a
     jr   z, .label_3A03
     ld   [$FFEA], a
-    call .label_3A18
+    call $3A18
 
 .label_3A03
     dec  c
@@ -8717,10 +8639,10 @@ Start:
     jr   nz, .label_39F2
     ret
     ld   a, $15
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4000
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_3A18
@@ -8738,7 +8660,7 @@ Start:
     ld   [$FFF1], a
     ld   a, $19
     ld   [$DBAF], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFEB]
     cp   $6A
     jr   nz, .label_3A40
@@ -8753,24 +8675,24 @@ Start:
 
 .label_3A46
     call $7964
-    call .label_3D8A
+    call $3D8A
     jr   .label_3A54
 
 .label_3A4E
-    call .label_3D8A
+    call $3D8A
     call $7964
 
 .label_3A54
     ld   a, $14
     ld   [$DBAF], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $4D73
     ld   a, $03
     ld   [$DBAF], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFEA]
     cp   $05
-    jp   z, .label_3A8D
+    jp   z, $3A8D
     rst  0
     add  hl, bc
     db   $3A ; ldd  a, [hl]
@@ -8789,15 +8711,15 @@ Start:
     ld   d, a
     sub  a, h
     ld   c, l
-    call .label_3A8D
+    call $3A8D
     ld   a, $03
     ld   [$DBAF], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
 
 .label_3A8D
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   a, [$FFEB]
     ld   e, a
     ld   d, b
@@ -8813,8 +8735,9 @@ Start:
     ld   l, e
     ld   h, d
     ld   [$DBAF], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     jp   [hl]
+
 
 .label_3AAA
     db   8, 5, 8, 5, 8, $A, 8, $A, 8, $A, 8, $A, 8, $10, 4, $A
@@ -8837,12 +8760,12 @@ Start:
     db   $5D, $54, $C5, $CB, $21, $CB, $21, $21, $80, $D5, 9, $E, 4
 
 .label_3B04
-    ld   a, [de]
-    inc  de
-    ldi  [hl], a
-    dec  c
-    jr   nz, .label_3B04
-    pop  bc
+    ld      a, [de]
+    inc     de
+    ldi     [hl], a
+    dec     c
+    jr      nz, .label_3B04
+    pop     bc
     ret
 
 .label_3B0C
@@ -8855,77 +8778,77 @@ Start:
     inc  [hl]
     ret
     ld   a, $02
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $75F5
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $7893
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $7CAB
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6E28
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6C6B
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6BDE
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6C77
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $73EB
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $6E2B
-    jp   .label_081D
+    jp   $081D
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $75A2
-    jp   .label_081D
+    jp   $081D
 
 .label_3B86
     push af
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  af
     call $64CA
     db   $CB, $1D ; Need to handle this instruction 
-    call .label_081D
+    call $081D
     db   $CB, $15 ; Need to handle this instruction 
     ret
     push af
     ld   a, $03
-    ld   [.label_2100], a
+    ld   [$2100], a
     pop  af
     call $64CC
     db   $CB, $1D ; Need to handle this instruction 
-    call .label_081D
+    call $081D
     db   $CB, $15 ; Need to handle this instruction 
     ret
     ld   hl, $2100
     ld   [hl], $03
     call $7EC7
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $03
     call $7E45
-    jp   .label_081D
+    jp   $081D
     ld   a, [$FFF1]
     inc  a
     ret  z
-    call .label_3D57
+    call $3D57
     push de
     ld   a, [$C3C0]
     ld   e, a
@@ -9041,16 +8964,16 @@ Start:
     ld   c, a
     ld   b, $00
     ld   a, $15
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $795D
 
 .label_3C71
     call $7995
-    jp   .label_081D
+    jp   $081D
     ld   a, [$FFF1]
     inc  a
     ret  z
-    call .label_3D57
+    call $3D57
     push de
     ld   a, [$C3C0]
     ld   l, a
@@ -9114,7 +9037,7 @@ Start:
     inc  de
     jr   .label_3C63
     ld   a, $15
-    ld   [.label_2100], a
+    ld   [$2100], a
     jr   .label_3C71
     push hl
     ld   hl, $C000
@@ -9139,7 +9062,7 @@ Start:
     ld   [$FFD7], a
     ld   a, [$C123]
     ld   c, a
-    call .label_3D57
+    call $3D57
     ld   a, [$FFD7]
     ld   c, a
 
@@ -9197,9 +9120,9 @@ Start:
     ld   a, [$C123]
     ld   c, a
     ld   a, $15
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $795D
-    jp   .label_081D
+    jp   $081D
 
 .label_3D52
     ld   a, [$C123]
@@ -9261,88 +9184,88 @@ Start:
     ld   hl, $2100
     ld   [hl], $15
     call $7964
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $04
     call $5A1A
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $04
     call $5690
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $04
     call $504B
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $04
     call $49BD
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $36
     call $72AB
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $05
     call $6CC6
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $05
     call $6818
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $05
     call $6302
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $05
     call $5A1E
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $05
     call $556B
-    jp   .label_081D
+    jp   $081D
     ld   a, [$DBAF]
     push af
     ld   a, $02
-    call .label_080C
+    call $080C
     call $6C75
     pop  af
-    jp   .label_080C
+    jp   $080C
     ld   hl, $2100
     ld   [hl], $04
     call $5C63
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $03
     call $5407
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $02
     call $62CE
     call $6414
-    jp   .label_081D
+    jp   $081D
     ld   a, $02
-    call .label_080C
+    call $080C
     call $41D0
     ld   a, $03
-    jp   .label_080C
+    jp   $080C
     ld   hl, $2100
     ld   [hl], $20
     ld   c, $01
     ld   b, $00
     ld   e, $FF
     call $5C9C
-    jp   .label_081D
+    jp   $081D
     ld   hl, $2100
     ld   [hl], $03
     call $6472
-    jp   .label_081D
+    jp   $081D
     ld   a, $06
-    call .label_080C
+    call $080C
     call $783C
     ld   a, $03
-    jp   .label_080C
+    jp   $080C
     ld   e, $10
     ld   hl, $C280
 
@@ -9366,7 +9289,7 @@ Start:
     ld   a, [$FFEC]
     ld   [$FFD8], a
     ld   a, $08
-    call .label_0CC7
+    call $0CC7
     ld   hl, $C520
     add  hl, de
     ld   [hl], $0F
@@ -9480,17 +9403,18 @@ Start:
     ld   a, [hl]
 
 .label_3F45
-    jp   .label_2385
+    jp   $2385
 
 .label_3F48
-    db   1, 2, 4, 8, $10, $20, $40, $80
-
-.label_3F50
+    ld   bc, $0402
+    ld   [$2010], sp
+    ld   b, b
+    add  a, b
     ld   a, $03
     ld   [$C113], a
-    ld   [.label_2100], a
+    ld   [$2100], a
     call $55CF
-    call .label_081D
+    call $081D
     ld   hl, $C460
     add  hl, bc
     ld   a, [hl]
@@ -9530,32 +9454,32 @@ Start:
 
 .label_3F93
     ld   a, $05
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $59DE
     ld   de, $8460
     ld   bc, $0010
-    call .label_2914
+    call $2914
     ld   hl, $59EE
     jr   .label_3FBD
 
 .label_3FA9
     ld   a, $05
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $59FE
     ld   de, $8460
     ld   bc, $0010
-    call .label_2914
+    call $2914
     ld   hl, $5A0E
 
 .label_3FBD
     ld   de, $8480
     ld   bc, $0010
-    call .label_2914
+    call $2914
     xor  a
     ld   [$FFA5], a
     ld   a, $0C
-    ld   [.label_2100], a
-    jp   .label_1D2E
+    ld   [$2100], a
+    jp   $1D2E
     ld   b, $34
     ld   a, [$FFFE]
     and  a
@@ -9564,13 +9488,13 @@ Start:
 
 .label_3FD9
     ld   a, b
-    ld   [.label_2100], a
+    ld   [$2100], a
     ld   hl, $4000
     ld   de, $8400
     ld   bc, $0400
-    call .label_2914
+    call $2914
     ld   a, $20
-    ld   [.label_2100], a
+    ld   [$2100], a
     ret
     nop
     nop
@@ -9589,7 +9513,6 @@ Start:
     nop
     nop
     nop
-
 section "bank1",romx,bank[$1]
     xor    a
 

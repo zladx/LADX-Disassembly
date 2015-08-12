@@ -1712,7 +1712,7 @@ func_0C20::
 
 .label_0CAF
     xor  a
-    ld   [$C121], a
+    ld   [WR0_IsUsingSpinAttack], a
     ld   [$C122], a
     xor  a
     ld   [$C14B], a
@@ -2423,16 +2423,16 @@ func_0C20::
     ld   a, [$C14A]
     and  a
     jr   z, .label_11BC
-    ld   a, [BButtonSlot]
+    ld   a, [WR1_BButtonSlot]
     cp   $01
     jr   z, .label_11AA
-    ld   a, [AButtonSlot]
+    ld   a, [WR1_AButtonSlot]
     cp   $01
     jr   z, .label_11AA
-    ld   a, [BButtonSlot]
+    ld   a, [WR1_BButtonSlot]
     cp   $04
     jr   z, .label_11A5
-    ld   a, [AButtonSlot]
+    ld   a, [WR1_AButtonSlot]
     cp   $04
     jr   nz, .label_11BA
 
@@ -2454,8 +2454,8 @@ func_0C20::
 
 .label_11BC
     xor  a
-    ld   [$C15B], a
-    ld   [$C15A], a
+    ld   [WR0_IsUsingShield], a
+    ld   [WR0_ShieldLevel], a
 
 .label_11C3
     ld   a, [$C117]
@@ -2479,7 +2479,7 @@ func_0C20::
     jp   nz, $12ED
 
 .label_11E8
-    ld   a, [AButtonSlot]
+    ld   a, [WR1_AButtonSlot]
     cp   $08
     jr   nz, .label_11FE
     ld   a, [$FFCB]
@@ -2493,7 +2493,7 @@ func_0C20::
     ld   [$C14B], a
 
 .label_11FE
-    ld   a, [BButtonSlot]
+    ld   a, [WR1_BButtonSlot]
     cp   $08
     jr   nz, .label_1214
     ld   a, [$FFCB]
@@ -2509,11 +2509,11 @@ func_0C20::
     ld   [$C14B], a
 
 .label_1214
-    ld   a, [BButtonSlot]
+    ld   a, [WR1_BButtonSlot]
     cp   $04
     jr   nz, .label_1235
-    ld   a, [ShieldLevel]
-    ld   [$C15A], a
+    ld   a, [WR1_ShieldLevel]
+    ld   [WR0_ShieldLevel], a
     ld   a, [$FFCB]
     and  $10
     jr   z, .label_1235
@@ -2525,11 +2525,11 @@ func_0C20::
     call $1340
 
 .label_1235
-    ld   a, [AButtonSlot]
+    ld   a, [WR1_AButtonSlot]
     cp   $04
     jr   nz, .label_124B
-    ld   a, [ShieldLevel]
-    ld   [$C15A], a
+    ld   a, [WR1_ShieldLevel]
+    ld   [WR0_ShieldLevel], a
     ld   a, [$FFCB]
     and  $20
     jr   z, .label_124B
@@ -2542,7 +2542,7 @@ func_0C20::
     ld   a, [$C1AD]
     cp   $02
     jr   z, .label_125E
-    ld   a, [AButtonSlot]
+    ld   a, [WR1_AButtonSlot]
     call ItemFunction
 
 .label_125E
@@ -2554,21 +2554,21 @@ func_0C20::
     jr   z, .label_1275
     cp   $02
     jr   z, .label_1275
-    ld   a, [BButtonSlot]
+    ld   a, [WR1_BButtonSlot]
     call ItemFunction
 
 .label_1275
     ld   a, [$FFCB]
     and  $20
     jr   z, .label_1281
-    ld   a, [AButtonSlot]
+    ld   a, [WR1_AButtonSlot]
     call $1321
 
 .label_1281
     ld   a, [$FFCB]
     and  $10
     jr   z, .label_128D
-    ld   a, [BButtonSlot]
+    ld   a, [WR1_BButtonSlot]
     call $1321
 
 .label_128D
@@ -2584,35 +2584,35 @@ ItemFunction::
 ; .label_129C
     ld   c, a
     cp   $01
-    jp   z, $1528 ; use sword
+    jp   z, UseSword ; $1528 ; use sword
     cp   $04
-    jp   z, $12EE ; use shield
+    jp   z, UseShield ; $12EE ; use shield
     cp   $02
-    jp   z, $135A ; place bomb
+    jp   z, PlaceBomb ; $135A ; place bomb
     cp   $03
-    jp   z, $1382 ; use power bracelet
+    jp   z, UsePowerBracelet ; $1382 ; use power bracelet
     cp   $05
-    jp   z, $13BD ; shoot arrow
+    jp   z, ShootArrow ; $13BD ; shoot arrow
     cp   $0D
-    jp   z, $1383 ; use boomerang
+    jp   z, UseBoomerang ; $1383 ; use boomerang
     cp   $06
-    jp   z, $1319 ; use hookshot
+    jp   z, UseHookshot ; $1319 ; use hookshot
     cp   $0A
-    jp   z, $14CB ; use rocks feather
+    jp   z, UseRocksFeather ; $14CB ; use rocks feather
     cp   $09
     jp   z, $41FC ; use ocarina
     cp   $0C
-    jp   z, $148D ; use magic powder
+    jp   z, UseMagicPowder ; $148D ; use magic powder
     cp   $0B
-    jp   z, $12F8 ; use shovel
-    cp   $07
+    jp   z, UseShovel ; $12F8 ; use shovel
+    cp   $07 ; Magic wand
     jr   nz, .label_12ED
     ld   hl, $C137
     ld   a, [$C19B]
     or   [hl]
     jr   nz, .label_12ED
-    ld   a, [$C14D]
-    cp   $02
+    ld   a, [WR0_ProjectileCount] 
+    cp   $02 ; Check to see if we shot the max projectiles allowed for the magic wand
     jr   nc, .label_12ED
     ld   a, $8E
     ld   [$C19B], a
@@ -2620,7 +2620,7 @@ ItemFunction::
 .label_12ED
     ret
 
-.label_12EE
+UseShield::
     ld   a, [$C144]
     and  a
     ret  nz
@@ -2628,7 +2628,7 @@ ItemFunction::
     ld   [$FFF4], a
     ret
 
-.label_12F8
+UseShovel::
     ld   a, [$C1C7]
     ld   hl, $C146
     or   [hl]
@@ -2652,7 +2652,7 @@ ItemFunction::
     ld   [$C1C8], a
     ret
 
-.label_1319
+UseHookshot::
     ld   a, [$C1A4]
     and  a
     ret  nz
@@ -2678,9 +2678,9 @@ ItemFunction::
 
 .label_1340
     ld   a, $01
-    ld   [$C15B], a
-    ld   a, [ShieldLevel]
-    ld   [$C15A], a
+    ld   [WR0_IsUsingShield], a
+    ld   a, [WR1_ShieldLevel]
+    ld   [WR0_ShieldLevel], a
     ld   a, $20
     ld   [$2100], a
     call $4B4A
@@ -2688,16 +2688,16 @@ ItemFunction::
     ld   [$2100], a
     ret
 
-.label_135A
-    ld   a, [$C14E]
+PlaceBomb::
+    ld   a, [WR0_HasPlacedBomb]
     cp   $01
     ret  nc
-    ld   a, [$DB4D]
+    ld   a, [WR1_BombCount]
     and  a
     jp   z, $0C20
     sub  a, $01
     daa
-    ld   [$DB4D], a
+    ld   [WR1_BombCount], a
     ld   a, $02
     call $142F
     ret  c
@@ -2708,11 +2708,11 @@ ItemFunction::
     ld   [$2100], a
     ret
 
-.label_1382
+UsePowerBracelet::
     ret
 
-.label_1383
-    ld   a, [$C14D]
+UseBoomerang::
+    ld   a, [WR0_ProjectileCount]
     and  a
 
 .label_1387
@@ -2730,24 +2730,24 @@ ItemFunction::
     db   0, 0, 0, 0, 0, 0, 0, 0, $20, $E0, 0, 0, 0, 0, $E0, $20
     db   $30, $D0, 0, 0, $40, $C0, 0, 0, 0, 0, $D0, $30, 0, 0, $C0, $40
 
-.label_13BD
-    ld   a, [$C14C]
+ShootArrow::
+    ld   a, [WR0_IsShootingArrow]
     and  a
     ret  nz
-    ld   a, [$C14D]
+    ld   a, [WR0_ProjectileCount]
     cp   $02
     jr   nc, .label_142E
     ld   a, $10
-    ld   [$C14C], a
-    ld   a, [ArrowCount]
+    ld   [WR0_IsShootingArrow], a
+    ld   a, [WR1_ArrowCount]
     and  a
     jp   z, func_0C20
     sub  a, $01
     daa
-    ld   [ArrowCount], a
+    ld   [WR1_ArrowCount], a
 
 .label_13DE
-    call .label_157C
+    call func_157C
     ld   a, $00
     call .label_142F
     ret  c
@@ -2862,7 +2862,7 @@ ItemFunction::
     ccf
     ret
 
-.label_148D
+UseMagicPowder::
     ld   a, [$C19B]
     and  a
     ret  nz
@@ -2904,7 +2904,7 @@ ItemFunction::
     db   $E4 ; Undefined instruction
     inc  e
 
-.label_14CB
+UseRocksFeather::
     ld   a, [$C130]
     cp   $07
     ret  z
@@ -2958,14 +2958,12 @@ ItemFunction::
 .label_1523
     ret
 
-.label_1524
-    ld   [bc], a
-    inc  d
-    dec  d
-    jr   .label_1523
-    ld   l, l
-    pop  bc
-    ld   hl, $C121
+data_1524::
+    db   2, $14, $15, $18
+
+UseSword::
+    ld   a, [$C16D]
+    ld   hl, WR0_IsUsingSpinAttack
     or   [hl]
     ret  nz
     ld   a, $03
@@ -2982,7 +2980,7 @@ ItemFunction::
     and  $03
     ld   e, a
     ld   d, $00
-    ld   hl, $1524
+    ld   hl, data_1524
     add  hl, de
     ld   a, [hl]
     ld   [$FFF4], a
@@ -2994,7 +2992,7 @@ ItemFunction::
     call $178E
 
 .label_1562
-    ld   a, [$C14D]
+    ld   a, [WR0_ProjectileCount]
     and  a
     ret  nz
     ld   a, [$C5A9]
@@ -3009,7 +3007,7 @@ ItemFunction::
     ld   [$C19B], a
     ret
 
-.label_157C
+func_157C::
     ld   a, [$FFCB]
     and  $0F
     ld   e, a
@@ -3050,7 +3048,7 @@ ItemFunction::
     ret  z
 
 .label_15C0
-    ld   a, [$C121]
+    ld   a, [WR0_IsUsingSpinAttack]
     and  a
     jr   z, .label_15CD
     ld   a, [$C136]
@@ -3291,7 +3289,7 @@ ItemFunction::
     ret  nz
     ld   [$C14A], a
     xor  a
-    ld   [$C121], a
+    ld   [WR0_IsUsingSpinAttack], a
     ld   [$C122], a
     ld   a, [$FF9E]
     ld   e, a
@@ -3801,7 +3799,7 @@ ItemFunction::
     jr   nz, .label_1ABF
 
 .label_1A9A
-    ld   a, [$C15A]
+    ld   a, [WR0_ShieldLevel]
     and  a
     jr   nz, .label_1AA5
     ld   hl, $4910
@@ -3814,7 +3812,7 @@ ItemFunction::
     ld   hl, $4928
 
 .label_1AAF
-    ld   a, [$C15B]
+    ld   a, [WR0_IsUsingShield]
     and  a
     jr   z, .label_1ABD
     ld   a, l
@@ -4761,7 +4759,7 @@ ItemFunction::
     call $41D0
 
 .label_20CF
-    ld   a, [AButtonSlot]
+    ld   a, [WR1_AButtonSlot]
     cp   $03
     jr   nz, .label_20DD
     ld   a, [$FFCB]
@@ -4770,7 +4768,7 @@ ItemFunction::
     ret
 
 .label_20DD
-    ld   a, [BButtonSlot]
+    ld   a, [WR1_BButtonSlot]
     cp   $03
     jp   nz, $2177
     ld   a, [$FFCB]

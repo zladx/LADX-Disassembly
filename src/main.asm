@@ -2512,7 +2512,7 @@ func_0C20::
     ld   a, [BButtonSlot]
     cp   $04
     jr   nz, .label_1235
-    ld   a, [$DB44]
+    ld   a, [ShieldLevel]
     ld   [$C15A], a
     ld   a, [$FFCB]
     and  $10
@@ -2528,7 +2528,7 @@ func_0C20::
     ld   a, [AButtonSlot]
     cp   $04
     jr   nz, .label_124B
-    ld   a, [$DB44]
+    ld   a, [ShieldLevel]
     ld   [$C15A], a
     ld   a, [$FFCB]
     and  $20
@@ -2679,7 +2679,7 @@ ItemFunction::
 .label_1340
     ld   a, $01
     ld   [$C15B], a
-    ld   a, [$DB44]
+    ld   a, [ShieldLevel]
     ld   [$C15A], a
     ld   a, $20
     ld   [$2100], a
@@ -2739,12 +2739,12 @@ ItemFunction::
     jr   nc, .label_142E
     ld   a, $10
     ld   [$C14C], a
-    ld   a, [$DB45]
+    ld   a, [ArrowCount]
     and  a
     jp   z, func_0C20
     sub  a, $01
     daa
-    ld   [$DB45], a
+    ld   [ArrowCount], a
 
 .label_13DE
     call .label_157C
@@ -9338,16 +9338,10 @@ func_2BCF::
 .label_3EDE
     ret
 
-.label_3EDF
-    or   b
-    or   h
-    or   c
-    or   d
-    or   e
-    or   [hl]
-    cp   d
-    cp   h
-    cp   b
+data_3EDF
+    db   $B0, $B4, $B1, $B2, $B3, $B6, $BA, $BC, $B8
+
+.label_3EE8
     ld   hl, $C14F
     ld   a, [$C124]
     or   [hl]
@@ -9404,14 +9398,14 @@ func_2BCF::
     ret  z
     ld   e, a
     ld   d, b
-    ld   hl, $3EDF
+    ld   hl, data_3EDF
     add  hl, de
     ld   a, [hl]
 
 .label_3F45
     jp   $2385
 
-.label_3F48
+data_3F48::
     db   1, 2, 4, 8, $10, $20, $40, $80
 
 .label_3F50
@@ -9440,7 +9434,7 @@ func_2BCF::
     jr   nc, .label_3F8D
     ld   e, a
     ld   d, b
-    ld   hl, $3F48
+    ld   hl, data_3F48
     add  hl, de
     ld   a, [$FFF6]
     ld   e, a

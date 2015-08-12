@@ -13,24 +13,215 @@ section "rst FarCall", rom0 [FarCall]
 
 
 section "Bankswitch", rom0
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    jp   $046C
+    nop
+    nop
+    nop
+    nop
+    nop
+    jp   $0388
+    nop
+    nop
+    nop
+    nop
+    nop
+    reti
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    jp   $0408
+    nop
+    nop
+    nop
+    nop
+    nop
+    reti
+    nop
+    ld   hl, $6900
+    ld   de, $89A0
+    jr   label_0080
+    ld   hl, $6930
+    ld   de, $89D0
+    jr   label_0080
+    ld   hl, $49D0
+    ld   de, $89D0
+    jr   label_0080
+    ld   hl, $49A0
+    ld   de, $89A0
 
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, $C3, $6C, 4
-    db   0, 0, 0, 0, 0, $C3, $88, 3, 0, 0, 0, 0, 0, $D9, 0, 0
-    db   0, 0, 0, 0, 0, $C3, 8, 4, 0, 0, 0, 0, 0, $D9, 0, $21
-    db   0, $69, $11, $A0, $89, $18, $16, $21, $30, $69, $11, $D0, $89, $18, $E, $21
-    db   $D0, $49, $11, $D0, $89, $18, 6, $21, $A0, $49, $11, $A0, $89, 1, $30, 0
-    db   $CD, $14, $29, $AF, $E0, $90, $E0, $92, $3E, $C, $EA, 0, $21, $C9, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db   0, 0, 0, 0, 0, 0, 0, 0
-
+label_0080
+    ld   bc, $0030
+    call $2914 ; CopyData
+    xor  a
+    ld   [$FF90], a
+    ld   [$FF92], a
+    ld   a, $0C
+    ld   [$2100], a
+    ret
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
 
 ;rst_Bankswitch:
 ;	ld [hTemp], a

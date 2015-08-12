@@ -8,29 +8,27 @@ include "constants.asm"
 
 include "code/rst.asm"
 include "code/header.asm"
-
+include "defs.asm"
 
 section "Main", rom0
 
 Start:
     cp   $11
     jr   nz, .label_016E
-    ld   a, [$FF4D]
+    ld   a, [rKEY1]
     and  $80
     jr   nz, .label_0167
     ld   a, $30
-    ld   [$FF00], a
+    ld   [rJOYP], a
     ld   a, $01
-    ld   [$FF4D], a
+    ld   [rKEY1], a
     xor  a
     ld   [$FFFF], a
     stop
 
 .label_0167
     xor  a
-
-.label_0168
-    ld   [$FF70], a
+    ld   [rSVBK], a
     ld   a, $01
     jr   .label_016F
 
@@ -39,37 +37,37 @@ Start:
 
 .label_016F
     ld   [$FFFE], a
-    call $28CF
+    call LCDDisplayEnable
     ld   sp, $DFFF
     ld   a, $3C
     ld   [$2100], a
     call $6A22
     xor  a
-    ld   [$FF47], a
-    ld   [$FF48], a
-    ld   [$FF49], a
+    ld   [rBGP], a
+    ld   [rOBP0], a
+    ld   [rOBP1], a
     ld   hl, $8000
     ld   bc, $1800
-    call $29DF
+    call ZeroMemory
     ld   a, $24
     ld   [$2100], a
     call $5C00
-    call $28F7
-    call $29D0
+    call $28F7 ; FillBGMapWith7F
+    call $29D0 ; ClearHRAMAndWRAM
     ld   a, $01
     ld   [$2100], a
     call $6D32
-    call $FFC0
-    call $410D
-    call $2BCF
+    call $FFC0 ; CopyLCD_OAM_DMA_Xfer_To_HRAM
+    call $410D ; LCD_OAM_DMA_Xfer_Dest
+    call func_2BCF
     ld   a, $44
-    ld   [$FF41], a
+    ld   [rSTAT], a
     ld   a, $4F
-    ld   [$FF45], a
+    ld   [rLYC], a
     ld   a, $01
     ld   [$DBAF], a
     ld   a, $01
-    ld   [$FFFF], a
+    ld   [rIE], a
     call $46AA
     ld   a, $1F
     ld   [$2100], a
@@ -742,7 +740,7 @@ Start:
 
 .label_0641
     ld   bc, $0040
-    call $2914
+    call CopyData
 
 .label_0647
     ld   a, [$FF92]
@@ -786,7 +784,7 @@ Start:
     ld   l, $00
     add  hl, bc
     ld   bc, $0040
-    call $2914
+    call CopyData
     ld   a, [$FF92]
     inc  a
     ld   [$FF92], a
@@ -879,7 +877,7 @@ Start:
     ld   d, h
     pop  hl
     ld   bc, $0040
-    call $2914
+    call CopyData
     ld   a, [$FF93]
     inc  a
     ld   [$FF93], a
@@ -949,7 +947,7 @@ Start:
     ld   d, h
     pop  hl
     ld   bc, $0040
-    call $2914
+    call CopyData
     ld   a, [$C10F]
     inc  a
     ld   [$C10F], a
@@ -1017,7 +1015,7 @@ Start:
     call $0B0B
     ld   [$2100], a
     ld   bc, $0040
-    call $2914
+    call CopyData
     ld   a, [$FF90]
     cp   $0A
     jr   z, .label_0808
@@ -1044,10 +1042,8 @@ Start:
     ld   [$2100], a
     ret
 
-.label_0813
+func_0813::
     call $0B0B
-
-.label_0816
     ld   [$DBAF], a
     ld   [$2100], a
     ret
@@ -1127,7 +1123,7 @@ Start:
     ld   hl, $7E00
     add  hl, bc
     ld   bc, $0040
-    call $2914
+    call CopyData
     ld   a, [$FF92]
     inc  a
     ld   [$FF92], a
@@ -1338,7 +1334,7 @@ Start:
     add  a, $80
     ld   d, a
     ld   bc, $0100
-    call $2914
+    call CopyData
     pop  hl
     jr   .label_0A2D
 
@@ -1368,7 +1364,7 @@ Start:
     ld   hl, $4F00
     ld   de, $DCC0
     ld   bc, $0020
-    call $2914
+    call CopyData
     jp   $0973
     push af
     ld   a, $36
@@ -1475,7 +1471,7 @@ Start:
     ld   [$2100], a
     ld   a, $02
     ld   [$FF70], a
-    call $2914
+    call CopyData
     xor  a
     ld   [$FF70], a
     ld   a, $20
@@ -1514,7 +1510,7 @@ Start:
     pop  bc
     ret
     ld   [$2100], a
-    call $2914
+    call CopyData
     ld   a, $28
     ld   [$2100], a
     ret
@@ -1573,7 +1569,7 @@ Start:
 .label_0BB5
     ld   bc, $0168
     ld   de, $D000
-    jp   $2914
+    jp   CopyData
     push af
     call $2BCF
     jp   $0973
@@ -1629,7 +1625,7 @@ Start:
     ld   [hl], a
     ret
 
-.label_0C20
+func_0C20::
     ld   a, $1D
     ld   [$FFF2], a
     ret
@@ -1648,7 +1644,7 @@ Start:
     ld   a, $0C
     ld   [$2100], a
     ld   bc, $0040
-    call $2914
+    call CopyData
     ld   a, $01
     ld   [$2100], a
     ret
@@ -2427,16 +2423,16 @@ Start:
     ld   a, [$C14A]
     and  a
     jr   z, .label_11BC
-    ld   a, [$DB01]
+    ld   a, [BButtonSlot]
     cp   $01
     jr   z, .label_11AA
-    ld   a, [$DB00]
+    ld   a, [AButtonSlot]
     cp   $01
     jr   z, .label_11AA
-    ld   a, [$DB01]
+    ld   a, [BButtonSlot]
     cp   $04
     jr   z, .label_11A5
-    ld   a, [$DB00]
+    ld   a, [AButtonSlot]
     cp   $04
     jr   nz, .label_11BA
 
@@ -2483,7 +2479,7 @@ Start:
     jp   nz, $12ED
 
 .label_11E8
-    ld   a, [$DB00]
+    ld   a, [AButtonSlot]
     cp   $08
     jr   nz, .label_11FE
     ld   a, [$FFCB]
@@ -2497,7 +2493,7 @@ Start:
     ld   [$C14B], a
 
 .label_11FE
-    ld   a, [$DB01]
+    ld   a, [BButtonSlot]
     cp   $08
     jr   nz, .label_1214
     ld   a, [$FFCB]
@@ -2513,7 +2509,7 @@ Start:
     ld   [$C14B], a
 
 .label_1214
-    ld   a, [$DB01]
+    ld   a, [BButtonSlot]
     cp   $04
     jr   nz, .label_1235
     ld   a, [$DB44]
@@ -2529,7 +2525,7 @@ Start:
     call $1340
 
 .label_1235
-    ld   a, [$DB00]
+    ld   a, [AButtonSlot]
     cp   $04
     jr   nz, .label_124B
     ld   a, [$DB44]
@@ -2546,8 +2542,8 @@ Start:
     ld   a, [$C1AD]
     cp   $02
     jr   z, .label_125E
-    ld   a, [$DB00]
-    call $129C
+    ld   a, [AButtonSlot]
+    call ItemFunction
 
 .label_125E
     ld   a, [$FFCC]
@@ -2558,21 +2554,21 @@ Start:
     jr   z, .label_1275
     cp   $02
     jr   z, .label_1275
-    ld   a, [$DB01]
-    call $129C
+    ld   a, [BButtonSlot]
+    call ItemFunction
 
 .label_1275
     ld   a, [$FFCB]
     and  $20
     jr   z, .label_1281
-    ld   a, [$DB00]
+    ld   a, [AButtonSlot]
     call $1321
 
 .label_1281
     ld   a, [$FFCB]
     and  $10
     jr   z, .label_128D
-    ld   a, [$DB01]
+    ld   a, [BButtonSlot]
     call $1321
 
 .label_128D
@@ -2583,30 +2579,32 @@ Start:
     ld   [$2100], a
     ret
 
-.label_129C
+; Additional item functionalities or something?
+ItemFunction::
+; .label_129C
     ld   c, a
     cp   $01
-    jp   z, $1528
+    jp   z, $1528 ; use sword
     cp   $04
-    jp   z, $12EE
+    jp   z, $12EE ; use shield
     cp   $02
-    jp   z, $135A
+    jp   z, $135A ; place bomb
     cp   $03
-    jp   z, $1382
+    jp   z, $1382 ; use power bracelet
     cp   $05
-    jp   z, $13BD
+    jp   z, $13BD ; shoot arrow
     cp   $0D
-    jp   z, $1383
+    jp   z, $1383 ; use boomerang
     cp   $06
-    jp   z, $1319
+    jp   z, $1319 ; use hookshot
     cp   $0A
-    jp   z, $14CB
+    jp   z, $14CB ; use rocks feather
     cp   $09
-    jp   z, $41FC
+    jp   z, $41FC ; use ocarina
     cp   $0C
-    jp   z, $148D
+    jp   z, $148D ; use magic powder
     cp   $0B
-    jp   z, $12F8
+    jp   z, $12F8 ; use shovel
     cp   $07
     jr   nz, .label_12ED
     ld   hl, $C137
@@ -2743,7 +2741,7 @@ Start:
     ld   [$C14C], a
     ld   a, [$DB45]
     and  a
-    jp   z, .label_0C20
+    jp   z, func_0C20
     sub  a, $01
     daa
     ld   [$DB45], a
@@ -3872,7 +3870,7 @@ Start:
     db   $CB, $10 ; Need to handle this instruction 
     add  hl, bc
     ld   bc, $0040
-    jp   $2914
+    jp   CopyData
     jr   nz, .label_1B67
     and  b
     ld   [$FFE0], a
@@ -3904,7 +3902,7 @@ Start:
     ld   a, [$D009]
     ld   d, a
     ld   bc, $0020
-    jp   $2914
+    jp   CopyData
 
 .label_1B45
     ret
@@ -4078,7 +4076,7 @@ Start:
 
 .label_1C54
     ld   bc, $0040
-    call $2914
+    call CopyData
     ld   a, [$FFF7]
     cp   $FF
     jr   nz, .label_1C87
@@ -4088,7 +4086,7 @@ Start:
     call $47F7
     jr   z, .label_1C72
     ld   [$2100], a
-    call $2914
+    call CopyData
 
 .label_1C72
     ld   a, $20
@@ -4098,7 +4096,7 @@ Start:
     jr   z, .label_1C87
     ld   [$2100], a
     ld   de, $96C0
-    call $2914
+    call CopyData
 
 .label_1C87
     jp   $1D2E
@@ -4384,7 +4382,7 @@ Start:
     add  hl, de
     pop  de
     ld   bc, $0040
-    call $2914
+    call CopyData
     xor  a
     ld   [$FFA5], a
     ld   a, $0C
@@ -4523,7 +4521,7 @@ Start:
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
-    jp   $2914
+    jp   CopyData
 
 .label_1F35
     jp   $1D2E
@@ -4532,7 +4530,7 @@ Start:
     ld   bc, $0040
 
 .label_1F3B
-    call $2914
+    call CopyData
 
 .label_1F3E
     xor  a
@@ -4763,7 +4761,7 @@ Start:
     call $41D0
 
 .label_20CF
-    ld   a, [$DB00]
+    ld   a, [AButtonSlot]
     cp   $03
     jr   nz, .label_20DD
     ld   a, [$FFCB]
@@ -4772,7 +4770,7 @@ Start:
     ret
 
 .label_20DD
-    ld   a, [$DB01]
+    ld   a, [BButtonSlot]
     cp   $03
     jp   nz, $2177
     ld   a, [$FFCB]
@@ -6082,22 +6080,24 @@ Start:
     ld   h, d
     jp   [hl]
 
-.label_28CF
-    ld   a, [$FFFF]
+LCDDisplayEnable::
+    ld   a, [rIE] ; Save interrupts
     ld   [$FFD2], a
-    db   $CB, $87 ; Need to handle this instruction 
-    ld   [$FFFF], a
+    res  0, a 
+    ld   [rIE], a ; Enable interrupts
 
-.label_28D7
-    ld   a, [$FF44]
+.vblank_wait_loop
+    ld   a, [rLY]
     cp   $91
-    jr   nz, .label_28D7
-    ld   a, [$FF40]
+    jr   nz, .vblank_wait_loop
+    ld   a, [rLCDC]
     and  $7F
-    ld   [$FF40], a
-    ld   a, [$FFD2]
-    ld   [$FFFF], a
+    ld   [rLCDC], a
+    ld   a, [$FFD2] ; Restore interrupts 
+    ld   [rIE], a
     ret
+
+
     ld   a, $01
     call $080C
     jp   $6CE3
@@ -6122,19 +6122,21 @@ Start:
     jr   nz, .label_2900
     ret
     ld   [$2100], a
-    call $2914
+    call CopyData
     ld   a, $01
     ld   [$2100], a
     ret
 
-.label_2914
+CopyData::
+
+.CopyDataLoop
     ld   a, [hli]
     ld   [de], a
     inc  de
     dec  bc
     ld   a, b
     or   c
-    jr   nz, .label_2914
+    jr   nz, .CopyDataLoop
     ret
 
 .label_291D
@@ -6311,20 +6313,22 @@ Start:
 .label_29DC
     ld   hl, $C000
 
-.label_29DF
+ZeroMemory::
     ld   a, [$FFFE]
     push af
 
-.label_29E2
+.zero_memory_loop
     xor  a
     ldi  [hl], a
     dec  bc
     ld   a, b
     or   c
-    jr   nz, .label_29E2
+    jr   nz, .zero_memory_loop
     pop  af
     ld   [$FFFE], a
     ret
+
+
     ld   a, $14
     ld   [$2100], a
     call $5884
@@ -6369,16 +6373,16 @@ Start:
     ld   hl, $6800
     ld   de, $9000
     ld   bc, $0800
-    call $2914
+    call CopyData
     ld   hl, $7000
     ld   de, $8800
     ld   bc, $0800
-    jp   $2914
+    jp   CopyData
     call $2A66
     ld   de, $8400
     ld   hl, $7600
     ld   bc, $0100
-    jp   $2914
+    jp   CopyData
 
 .label_2A66
     ld   a, $13
@@ -6387,46 +6391,46 @@ Start:
     ld   hl, $4000
     ld   de, $8000
     ld   bc, $1800
-    call $2914
+    call CopyData
     ld   a, $0C
     call $0B0B
     ld   [$2100], a
     ld   hl, $57E0
     ld   de, $97F0
     ld   bc, $0010
-    call $2914
+    call CopyData
     ld   a, $12
     call $0B0B
     ld   [$2100], a
     ld   hl, $7500
     ld   de, $8000
     ld   bc, $0040
-    call $2914
+    call CopyData
     ld   de, $8D00
     ld   hl, $7500
     ld   bc, $0200
-    jp   $2914
+    jp   CopyData
     ld   a, $0C
     call $0B0B
     ld   [$2100], a
     ld   hl, $5000
     ld   de, $9000
     ld   bc, $0800
-    call $2914
+    call CopyData
     ld   a, $12
     call $0B0B
     ld   [$2100], a
     ld   hl, $6000
     ld   de, $8000
     ld   bc, $0800
-    call $2914
+    call CopyData
     ld   a, $0F
     call $0B0B
     ld   [$2100], a
     ld   hl, $6000
     ld   de, $8800
     ld   bc, $0800
-    jp   $2914
+    jp   CopyData
     ld   hl, $4000
     ld   a, [$FFFE]
     and  a
@@ -6446,14 +6450,14 @@ Start:
     ld   [$2100], a
     ld   de, $8000
     ld   bc, $0800
-    call $2914
+    call CopyData
     ld   a, $13
     call $0B0B
     ld   [$2100], a
     ld   hl, $5800
     ld   de, $8800
     ld   bc, $1000
-    jp   $2914
+    jp   CopyData
     call $08A4
     ld   hl, $6800
     ld   a, $10
@@ -6465,7 +6469,7 @@ Start:
     ld   hl, $6600
     ld   de, $8000
     ld   bc, $0080
-    call $2914
+    call CopyData
     call $08A4
     ld   a, [$FFFE]
     and  a
@@ -6475,7 +6479,7 @@ Start:
     ld   hl, $6900
     ld   de, $8100
     ld   bc, $0700
-    jp   $2914
+    jp   CopyData
 
 .label_2B61
     ld   a, $38
@@ -6483,7 +6487,7 @@ Start:
     ld   hl, $5000
     ld   de, $8000
     ld   bc, $0800
-    jp   $2914
+    jp   CopyData
     ld   hl, $7800
     ld   a, [$FFFE]
     and  a
@@ -6509,18 +6513,18 @@ Start:
     ld   [$2100], a
     ld   de, $8000
     ld   bc, $0800
-    call $2914
+    call CopyData
     ld   a, $13
     call $0B0B
     ld   [$2100], a
     ld   hl, $7000
     ld   de, $8800
     ld   bc, $0800
-    call $2914
+    call CopyData
     ld   hl, $6800
     ld   de, $9000
     ld   bc, $0800
-    jp   $2914
+    jp   CopyData
     push bc
     ld   a, $14
     ld   [$2100], a
@@ -6529,39 +6533,41 @@ Start:
     pop  bc
     ret
 
-.label_2BCF
+func_2BCF::
     ld   a, $0C
-    call $0813
+    call func_0813
     ld   hl, $4000
     ld   de, $8000
     ld   bc, $0400
-    call $2914
+    call CopyData
     ld   a, $0C
     call $0813
     ld   hl, $4800
     ld   de, $8800
     ld   bc, $1000
-    call $2914
+    call CopyData
     ld   hl, $47A0
     ld   de, $8E00
     ld   bc, $0020
-    call $2914
+    call CopyData
     ld   a, $01
     call $080C
     ret
+
+
     call $2BCF
     ld   a, $0F
     call $0813
     ld   hl, $4000
     ld   de, $8800
     ld   bc, $0400
-    call $2914
+    call CopyData
     ld   a, $0F
     call $0813
     ld   hl, $5000
     ld   de, $9000
     ld   bc, $0800
-    jp   $2914
+    jp   CopyData
     ld   a, $20
     call $080C
     ld   hl, $4589
@@ -6575,7 +6581,7 @@ Start:
     ld   hl, $6200
     ld   de, $9000
     ld   bc, $0100
-    call $2914
+    call CopyData
     ld   e, $00
     ld   d, e
     ld   hl, $6000
@@ -6593,13 +6599,13 @@ Start:
 .label_2C5D
     ld   de, $9100
     ld   bc, $0100
-    call $2914
+    call CopyData
     ld   a, $0D
     call $0813
     ld   hl, $4000
     ld   de, $9200
     ld   bc, $0600
-    call $2914
+    call CopyData
     ld   a, $20
     ld   [$2100], a
     pop  de
@@ -6617,14 +6623,14 @@ Start:
     call $081D
     ld   de, $9200
     ld   bc, $0200
-    call $2914
+    call CopyData
     ld   a, $0C
     call $0B0B
     ld   [$2100], a
     ld   hl, $47C0
     ld   de, $DCC0
     ld   bc, $0040
-    call $2914
+    call CopyData
     call $2D50
     ld   a, $20
     ld   [$2100], a
@@ -6645,7 +6651,7 @@ Start:
 .label_2CD1
     ld   de, $8F00
     ld   bc, $0100
-    call $2914
+    call CopyData
     ld   a, [$DBAF]
     ld   [$2100], a
     ld   hl, $7D00
@@ -6661,7 +6667,7 @@ Start:
 .label_2CF5
     ld   de, $8C00
     ld   bc, $0300
-    call $2914
+    call CopyData
 
 .label_2CFE
     ld   a, [$DB4B]
@@ -6699,11 +6705,11 @@ Start:
     ld   hl, $5200
     ld   de, $9200
     ld   bc, $0600
-    call $2914
+    call CopyData
     ld   hl, $4C00
     ld   de, $8C00
     ld   bc, $0400
-    call $2914
+    call CopyData
     call $2D50
     jp   $2CFE
 
@@ -6718,34 +6724,34 @@ Start:
     ld   hl, $4800
     ld   de, $8800
     ld   bc, $0800
-    call $2914
+    call CopyData
     ld   hl, $4200
     ld   de, $8200
     ld   bc, $0100
-    call $2914
+    call CopyData
     ret
     ld   a, $01
     call $080C
     ld   hl, $6D4A
     ld   de, $8700
     ld   bc, $0080
-    call $2914
+    call CopyData
     ld   a, $10
     call $0813
     ld   hl, $5400
     ld   de, $8000
     ld   bc, $0600
-    call $2914
+    call CopyData
     ld   hl, $4000
     ld   de, $8800
     ld   bc, $1000
-    jp   $2914
+    jp   CopyData
     ld   a, $0F
     call $0813
     ld   hl, $4900
     ld   de, $8800
     ld   bc, $0700
-    call $2914
+    call CopyData
     ld   a, $38
     call $080C
     ld   a, [$FFFE]
@@ -6760,7 +6766,7 @@ Start:
 .label_2DCA
     ld   de, $8400
     ld   bc, $0400
-    call $2914
+    call CopyData
     ld   a, [$FFFE]
     and  a
     jr   nz, .label_2DDD
@@ -6773,17 +6779,17 @@ Start:
 .label_2DE0
     ld   de, $8200
     ld   bc, $0100
-    jp   $2914
+    jp   CopyData
     ld   a, $0C
     call $0813
     ld   hl, $7800
     ld   de, $8F00
     ld   bc, $0800
-    call $2914
+    call CopyData
     ld   hl, $5000
     ld   de, $8200
     ld   bc, $0100
-    jp   $2914
+    jp   CopyData
     ld   hl, $7000
     jr   .label_2E13
     ld   hl, $7800
@@ -6795,34 +6801,34 @@ Start:
     call $0813
     ld   de, $9000
     ld   bc, $0800
-    jp   $2914
+    jp   CopyData
     ld   a, $13
     call $0B0B
     ld   [$2100], a
     ld   hl, $7C00
     ld   de, $8C00
     ld   bc, $0400
-    call $2914
+    call CopyData
     ld   hl, $6800
     ld   de, $9000
     ld   bc, $0400
-    jp   $2914
+    jp   CopyData
     ld   a, $10
     call $0813
     ld   hl, $6700
     ld   de, $8400
     ld   bc, $0400
-    call $2914
+    call CopyData
     ld   hl, $6000
     ld   de, $9000
     ld   bc, $0600
-    jp   $2914
+    jp   CopyData
     ld   a, $0F
     call $080C
     ld   hl, $4400
     ld   de, $8800
     ld   bc, $0500
-    jp   $2914
+    jp   CopyData
 
 .label_2E6F
     nop
@@ -6920,7 +6926,7 @@ Start:
     ld   hl, $4000
     add  hl, bc
     ld   bc, $0100
-    call $2914
+    call CopyData
 
 .label_2F0A
     ld   a, [$FFD7]
@@ -6958,7 +6964,7 @@ Start:
 .label_2F41
     ld   de, $9000
     ld   bc, $0800
-    call $2914
+    call CopyData
     ret
 
 .label_2F4B
@@ -6977,7 +6983,7 @@ Start:
     add  a, $50
     ld   h, a
     ld   bc, $0100
-    call $2914
+    call CopyData
 
 .label_2F69
     ld   a, [$FFF7]
@@ -6991,7 +6997,7 @@ Start:
     ld   hl, $6600
     ld   de, $8F00
     ld   bc, $0200
-    call $2914
+    call CopyData
     ret
 
 .label_2F87
@@ -7006,11 +7012,11 @@ Start:
     ld   hl, $6E00
     ld   de, $9690
     ld   bc, $0010
-    call $2914
+    call CopyData
     ld   hl, $6E10
     ld   de, $9790
     ld   bc, $0010
-    call $2914
+    call CopyData
     ret
 
 .label_2FAD
@@ -7024,7 +7030,7 @@ Start:
     ld   h, a
     ld   l, $00
     ld   bc, $0200
-    call $2914
+    call CopyData
 
 .label_2FC6
     ret
@@ -8745,7 +8751,7 @@ Start:
 
 .label_3AC8
     ld   b, $0A
-    ld   [.label_1006], sp
+    ld   [$1006], sp
     jr   nc, .label_3AD7
     rlca
     inc  b
@@ -9406,10 +9412,9 @@ Start:
     jp   $2385
 
 .label_3F48
-    ld   bc, $0402
-    ld   [$2010], sp
-    ld   b, b
-    add  a, b
+    db   1, 2, 4, 8, $10, $20, $40, $80
+
+.label_3F50
     ld   a, $03
     ld   [$C113], a
     ld   [$2100], a
@@ -9458,7 +9463,7 @@ Start:
     ld   hl, $59DE
     ld   de, $8460
     ld   bc, $0010
-    call $2914
+    call CopyData
     ld   hl, $59EE
     jr   .label_3FBD
 
@@ -9468,18 +9473,20 @@ Start:
     ld   hl, $59FE
     ld   de, $8460
     ld   bc, $0010
-    call $2914
+    call CopyData
     ld   hl, $5A0E
 
 .label_3FBD
     ld   de, $8480
     ld   bc, $0010
-    call $2914
+    call CopyData
     xor  a
     ld   [$FFA5], a
     ld   a, $0C
     ld   [$2100], a
     jp   $1D2E
+
+.label_3FD1
     ld   b, $34
     ld   a, [$FFFE]
     and  a
@@ -9492,27 +9499,13 @@ Start:
     ld   hl, $4000
     ld   de, $8400
     ld   bc, $0400
-    call $2914
+    call CopyData
     ld   a, $20
     ld   [$2100], a
     ret
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
+
+; NOTE: This was just a test to see how to write to other banks
+; remember to remove this
 section "bank1",romx,bank[$1]
     xor    a
 

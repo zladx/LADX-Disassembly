@@ -1,115 +1,46 @@
-; rst vectors are single-byte calls.
+;  0000,0008,0010,0018,0020,0028,0030,0038   for RST commands
+;  0040,0048,0050,0058,0060                  for Interrupts
 
-; Here, they're used as pseudoinstructions for bank management.
-; This is not the only way the rst instructions can be used.
+section "RST 0x0000", rom0 [$0000]
+    jp   func_28C0
 
+section "Interrupt 0x0040", rom0 [$0040]
+    jp   func_046C
 
-section "rst Bankswitch", rom0 [Bankswitch]
-;	jp rst_Bankswitch
-    jp   $28C0
+section "Interrupt 0x0048", rom0 [$0048]
+    jp   func_0388
 
-section "rst FarCall", rom0 [FarCall]
-;	jp rst_FarCall
-
-
-section "Bankswitch", rom0
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    jp   $046C
-    nop
-    nop
-    nop
-    nop
-    nop
-    jp   $0388
-    nop
-    nop
-    nop
-    nop
-    nop
+section "Interrupt 0x0050", rom0 [$0050]
     reti
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    jp   $0408
-    nop
-    nop
-    nop
-    nop
-    nop
+
+section "Interrupt 0x0058", rom0 [$0058]
+    jp   func_0408
+
+section "Interrupt 0x0060", rom0 [$0060]
     reti
-    nop
+
+
+section "Something 0x0062", rom0 [$0062]
+func_0062::
     ld   hl, $6900
     ld   de, $89A0
-    jr   label_0080
+    jr   func_0080
+
+func_006A::
     ld   hl, $6930
     ld   de, $89D0
-    jr   label_0080
+    jr   func_0080
+
+func_0072::
     ld   hl, $49D0
     ld   de, $89D0
-    jr   label_0080
+    jr   func_0080
+
+func_007A::
     ld   hl, $49A0
     ld   de, $89A0
 
-label_0080
+func_0080::
     ld   bc, $0030
     call CopyData
     xor  a
@@ -118,87 +49,4 @@ label_0080
     ld   a, $0C
     ld   [$2100], a
     ret
-
-;rst_Bankswitch:
-;	ld [hTemp], a
-;	ld a, l
-;	ld [hTemp + 1], a
-;	ld a, h
-;	ld [hTemp + 2], a
-;
-;	pop hl
-;	ld a, [hli]
-;	push hl
-;
-;	ld [hRomBank], a
-;	ld [MBC3RomBank], a
-;
-;	ld hl, hTemp + 2
-;	ld a, [hld]
-;	ld l, [hl]
-;	ld h, a
-;	ld a, [hTemp]
-;	ret
-;
-;
-;BankswitchHome:
-;	ld [hRomBank], a
-;	ld [MBC3RomBank], a
-;	ret
-;
-;
-;section "FarCall", rom0
-;
-;rst_FarCall:
-;	push af
-;	ld [hTemp], a
-;	ld a, l
-;	ld [hTemp + 1], a
-;	ld a, h
-;	ld [hTemp + 2], a
-;	pop af
-;
-;	; Grab the return address.
-;	pop hl
-;	ld a, $c3 ; jp
-;	ld [hCodeTemp + 0], a
-;	ld a, [hli]
-;	ld [hCodeTemp + 1], a
-;	ld a, [hli]
-;	ld [hCodeTemp + 2], a
-;	ld a, [hli]
-;	rst Bankswitch
-;	; Put it back, skipping past the arguments.
-;	push hl
-;
-;	ld a, [hRomBank]
-;	push af
-;
-;	ld hl, hTemp + 2
-;	ld a, [hld]
-;	ld l, [hl]
-;	ld h, a
-;	ld a, [hTemp]
-;
-;	call hCodeTemp
-;
-;	push af
-;	ld a, b
-;	ld [hTemp], a
-;	ld a, c
-;	ld [hTemp + 1], a
-;	pop af
-;
-;	pop bc
-;
-;	push af
-;	ld a, b
-;	rst Bankswitch
-;	ld a, [hTemp]
-;	ld b, a
-;	ld a, [hTemp + 1]
-;	ld c, a
-;	pop af
-;
-;	ret
 

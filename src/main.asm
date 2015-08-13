@@ -322,7 +322,7 @@ data_037F::
 data_0384::
     db   $30, $56, $68, 0
 
-.label_388
+func_0388::
     di
     push af
     push hl
@@ -419,7 +419,7 @@ func_03FF::
     ei
     reti
 
-.label_0408
+func_0408::
     push af
     ld   a, $28
     ld   [$2100], a
@@ -477,7 +477,7 @@ func_045D::
 data_046A::
     db   7, 9
     
-.label_046C
+func_046C::
     push af
     push bc
     push de
@@ -509,7 +509,7 @@ data_046A::
     jr   z, .label_04CC
     cp   $05
     jr   nc, .label_04AC
-    call $23E4
+    call func_23E4
     ld   hl, $C19F
     inc  [hl]
     jp   func_0569
@@ -517,7 +517,7 @@ data_046A::
 .label_04AC
     cp   $0A
     jr   nz, .label_04B6
-    call $2719
+    call func_2719
     jp   func_0569
 
 .label_04B6
@@ -531,7 +531,7 @@ data_046A::
     jr   .label_04CC
 
 .label_04C6
-    call $276D
+    call func_276D
     jp   func_0569
 
 .label_04CC
@@ -557,13 +557,13 @@ data_046A::
     ld   hl, $C10E
     or   [hl]
     jr   z, .label_0509
-    call $05BC
+    call func_05BC
     ld   a, [$FFE8]
     cp   $08
     jr   nc, .label_0504
 
 .label_0501
-    call $1D2E
+    call func_1D2E
 
 .label_0504
     call $FFC0
@@ -581,14 +581,14 @@ data_046A::
     add  hl, de
     ld   a, [hl]
     ld   [$D6F8], a
-    call $1ED7
+    call func_1ED7
     jr   .label_0501
 
 .label_0521
     ld   a, [$DB95]
     cp   $0D
     jr   z, .label_052B
-    call $1B0D
+    call func_1B0D
 
 .label_052B
     ld   a, [$FFFE]
@@ -600,7 +600,7 @@ data_046A::
 
 .label_0538
     ld   de, $D601
-    call $2927
+    call func_2927
     xor  a
     ld   [$D600], a
     ld   [$D601], a
@@ -653,7 +653,7 @@ func_0577::
 
 .label_0598
     ld   de, $D601
-    call $2927
+    call func_2927
     xor  a
     ld   [$D600], a
     ld   [$D601], a
@@ -669,28 +669,28 @@ func_0577::
     ld   [$2100], a
     jr   func_056A
 
-.label_05BC
+func_05BC::
     ld   a, [$FF90]
     and  a
-    jp   z, $069E
+    jp   z, func_069E
     cp   $07
-    jp   z, $07B0
+    jp   z, func_07B0
     cp   $03
-    jp   z, $0062
+    jp   z, func_0062
     cp   $04
-    jp   z, $006A
+    jp   z, func_006A
     cp   $05
-    jp   z, $0072
+    jp   z, func_0072
     cp   $06
-    jp   z, $007A
+    jp   z, func_007A
     cp   $08
-    jp   nc, $07D3
+    jp   nc, func_07D3
     ld   a, [$DBA5]
     and  a
-    jp   z, $0656
+    jp   z, func_0656
     ld   a, [$FF90]
     cp   $02
-    jp   z, $0826
+    jp   z, func_0826
     ld   a, $0D
     call func_0B0B
     ld   [$2100], a
@@ -753,7 +753,7 @@ func_0577::
 .label_0655
     ret
 
-.label_0656
+func_0656::
     ld   a, $0F
     call func_0B0B
     ld   [$2100], a
@@ -795,7 +795,7 @@ func_0577::
 .label_069D
     ret
 
-.label_069E
+func_069E::
     ld   a, [$FFFE]
     and  a
     jr   z, .label_06CB
@@ -814,13 +814,13 @@ func_0577::
     ld   c, $90
     ld   b, h
     ld   h, $00
-    call $0A13
+    call func_0A13
     jr   .label_0738
 
 .label_06CB
     ld   a, [$FF91]
     and  a
-    jp   z, $073E
+    jp   z, func_073E
     ld   a, [$C197]
     ld   e, a
     ld   d, $00
@@ -838,7 +838,7 @@ func_0577::
     and  $03
     ld   c, a
     ld   b, $00
-    ld   hl, $2E6F
+    ld   hl, func_2E6F
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -890,7 +890,7 @@ func_0577::
 .label_073D
     ret
 
-.label_073E
+func_073E::
     ld   a, [$C10D]
     ld   e, a
     ld   d, $00
@@ -908,7 +908,7 @@ func_0577::
     and  $03
     ld   c, a
     ld   b, $00
-    ld   hl, $2E6F
+    ld   hl, func_2E6F
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -958,7 +958,7 @@ func_0577::
 .label_07AF
     ret
 
-.label_07B0
+func_07B0::
     ld   a, $01
     ld   [$2100], a
     call $6BB5
@@ -992,7 +992,7 @@ func_0577::
     ld   h, b
     add  a, d
 
-.label_07D3
+func_07D3::
     sub  a, $08
     db   $CB, $27 ; Need to handle this instruction 
     ld   e, a
@@ -1053,7 +1053,7 @@ func_081D::
     pop  af
     ret
 
-.label_0826
+func_0826::
     ld   a, $12
     call func_0B0B
     ld   [$2100], a
@@ -1177,7 +1177,7 @@ func_08A4::
     ld   a, $20
     ld   [$2100], a
     call $6BDC
-    jr   .label_0973
+    jr   func_0973
     ld   a, $20
     ld   [$2100], a
     call $6C00
@@ -1247,7 +1247,7 @@ func_08A4::
     xor  a
     ldi  [hl], a
 
-.label_0973
+func_0973::
     pop  af
     ld   [$2100], a
     ret
@@ -1255,7 +1255,7 @@ func_08A4::
     ld   a, $20
     ld   [$2100], a
     call $6D0E
-    jr   .label_0973
+    jr   func_0973
 
 .label_0983
     ld   a, $1A
@@ -1296,34 +1296,34 @@ func_08A4::
     ldi  [hl], a
     xor  a
     ldi  [hl], a
-    jr   .label_0973
+    jr   func_0973
     push af
     ld   a, $20
     ld   [$2100], a
     call $4985
-    jr   .label_0973
+    jr   func_0973
     push af
     ld   a, $20
     ld   [$2100], a
     call $4518
-    jr   .label_0973
+    jr   func_0973
     push af
     ld   a, $20
     ld   [$2100], a
     call $4874
-    jr   .label_0973
+    jr   func_0973
     push af
     ld   a, $20
     ld   [$2100], a
     call $4954
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $20
     ld   [$2100], a
     call $482D
-    jp   $0973
+    jp   func_0973
 
-.label_0A01
+func_0A01::
     push hl
     ld   l, $00
     ld   e, l
@@ -1334,13 +1334,13 @@ func_08A4::
     ld   bc, $0100
     call CopyData
     pop  hl
-    jr   .label_0A2D
+    jr   func_0A2D
 
-.label_0A13
+func_0A13::
     ld   [$2100], a
     ld   a, [$FFFE]
     and  a
-    jr   z, .label_0A01
+    jr   z, func_0A01
     ld   a, b
     ld   [$FF51], a
     ld   a, $00
@@ -1352,7 +1352,7 @@ func_08A4::
     ld   a, $0F
     ld   [$FF55], a
 
-.label_0A2D
+func_0A2D::
     ld   a, h
     ld   [$2100], a
     ret
@@ -1363,47 +1363,47 @@ func_08A4::
     ld   de, $DCC0
     ld   bc, $0020
     call CopyData
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $36
     ld   [$2100], a
     call $505F
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $36
     ld   [$2100], a
     call $4F9B
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $20
     ld   [$2100], a
     call $3CE6
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $03
     ld   [$2100], a
     call $5A2E
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $36
     ld   [$2100], a
     call $4F68
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $20
     ld   [$2100], a
     call $6D52
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $36
     ld   [$2100], a
     call $4BE8
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $0F
     call func_080C
     call $2321
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $36
     call func_080C
@@ -1418,33 +1418,33 @@ func_08A4::
     ld   [$2100], a
     call $5C1A
     ld   de, $D601
-    call $2927
+    call func_2927
     jr   .label_0AB0
     push af
     ld   a, $36
     ld   [$2100], a
     call $703E
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $36
     ld   [$2100], a
     call $70D6
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $36
     call func_080C
     call $4A77
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $36
     ld   [$2100], a
     call $4A4C
-    jp   $0973
+    jp   func_0973
     push af
     ld   a, $36
     ld   [$2100], a
     call $7161
-    jp   $0973
+    jp   func_0973
     ld   a, $3D
     ld   [$2100], a
     call $4029
@@ -1570,7 +1570,7 @@ func_0B2F::
     jp   CopyData
     push af
     call $2BCF
-    jp   $0973
+    jp   func_0973
     ld   a, [$D16A]
     ld   [$2100], a
 
@@ -2321,7 +2321,7 @@ func_0E34::
     ld   a, $02
     ld   [$2100], a
     call $755B
-    call $1D2E
+    call func_1D2E
     call $398D
     pop  af
     ret
@@ -2399,7 +2399,7 @@ func_0E34::
 
 .label_114F
     call $1794
-    jp   $1D2E
+    jp   func_1D2E
     ld   a, $19
     call func_080C
     jp   $5D6A
@@ -3838,7 +3838,7 @@ func_157C::
     ld   [$FF9D], a
     ret
 
-.label_1ACC
+func_1ACC::
     ld   a, [$D601]
     and  a
     ret  nz
@@ -3869,16 +3869,16 @@ func_157C::
     add  hl, bc
     ld   bc, $0040
     jp   CopyData
-    jr   nz, .label_1B67
+    jr   nz, func_1B67
     and  b
     ld   [$FFE0], a
     ld   [$FFA0], a
     ld   h, b
 
-.label_1B0D
+func_1B0D::
     ld   a, [$DB95]
     cp   $09
-    jr   z, .label_1ACC
+    jr   z, func_1ACC
     cp   $00
     jr   nz, .label_1B46
     ld   a, [$D601]
@@ -3911,7 +3911,7 @@ func_157C::
     jr   nz, .label_1B53
     ld   a, [$FFA5]
     and  a
-    jr   nz, .label_1B82
+    jr   nz, func_1B82
     ret
 
 .label_1B53
@@ -3922,25 +3922,25 @@ func_157C::
     jp   nz, $1DE8
     ld   a, [$C14F]
     and  a
-    jp   nz, $1D2E
+    jp   nz, func_1D2E
 
-.label_1B67
+func_1B67::
     ld   hl, $C124
     ld   a, [$D601]
     or   [hl]
-    jp   nz, $1D2E
+    jp   nz, func_1D2E
     ld   a, [$D6F8]
     and  a
     jr   z, .label_1B7D
-    call $1ED7
-    jp   $1D2E
+    call func_1ED7
+    jp   func_1D2E
 
 .label_1B7D
     ld   a, [$FFA5]
     and  a
-    jr   z, .label_1BCD
+    jr   z, func_1BCD
 
-.label_1B82
+func_1B82::
     cp   $01
     jp   z, $3F93
     cp   $02
@@ -3967,14 +3967,14 @@ func_157C::
     jp   z, $1DF0
     cp   $10
     jp   z, $1DE9
-    jp   $1D2E
+    jp   func_1D2E
 
 .label_1BC5
     ld   a, $17
     ld   [$2100], a
     jp   $4062
 
-.label_1BCD
+func_1BCD::
     ld   a, [$FFA6]
     inc  a
     ld   [$FFA6], a
@@ -4023,7 +4023,7 @@ func_157C::
     ld   a, $0C
     call func_0B0B
     ld   [$2100], a
-    jp   $1D2E
+    jp   func_1D2E
 
 .label_1C13
     ld   l, a
@@ -4097,7 +4097,7 @@ func_157C::
     call CopyData
 
 .label_1C87
-    jp   $1D2E
+    jp   func_1D2E
     ld   h, $6E
     jr   .label_1C24
     ld   a, [$FFA6]
@@ -4164,7 +4164,7 @@ func_157C::
     ld   a, $38
     ld   [$2100], a
     call $7830
-    jp   $1D2E
+    jp   func_1D2E
     ld   a, $0C
     call func_0B0B
     ld   [$2100], a
@@ -4187,7 +4187,7 @@ func_157C::
     call func_0B0B
     ld   [$2100], a
 
-.label_1D2E
+func_1D2E::
     ld   a, [$FF9D]
     inc  a
     ret  z
@@ -4458,7 +4458,7 @@ func_157C::
     nop
     ld   l, b
 
-.label_1ED7
+func_1ED7::
     push af
     ld   a, $0C
     call func_0B0B
@@ -4522,7 +4522,7 @@ func_157C::
     jp   CopyData
 
 .label_1F35
-    jp   $1D2E
+    jp   func_1D2E
 
 .label_1F38
     ld   bc, $0040
@@ -4535,7 +4535,7 @@ func_157C::
     ld   [$FFA5], a
     ld   a, $0C
     ld   [$2100], a
-    jp   $1D2E
+    jp   func_1D2E
 
 .label_1F49
     db   $C, 3, 8, 8, $A, $A, 5, $10, $36, $38, $3A, $3C
@@ -5234,7 +5234,7 @@ data_23D6::
 data_23DC::
     db   $99, $99, $21, $61, $A1, $41, $81, $C1
 
-.label_23E4
+func_23E4::
     ld   a, [$C19F]
     db   $CB, $7F ; Need to handle this instruction 
     jr   z, .label_23EF
@@ -5768,7 +5768,7 @@ func_24AE::
     sbc  a, b
     sbc  a, c
 
-.label_2719
+func_2719::
     ld   e, $00
     ld   a, [$C19F]
     and  $80
@@ -5837,7 +5837,7 @@ func_24AE::
     sbc  a, b
     sbc  a, c
 
-.label_276D
+func_276D::
     ld   e, $00
     ld   a, [$C19F]
     and  $80
@@ -6041,6 +6041,8 @@ func_281E::
     ld   [$FFD0], a
     pop  bc
     ret
+
+func_28C0::
     ld   e, a
     ld   d, $00
     db   $CB, $23 ; Need to handle this instruction 
@@ -6126,7 +6128,7 @@ func_291D::
 .label_2924
     call func_2941
 
-.label_2927
+func_2927::
     ld   a, [$C124]
     and  a
     jr   nz, func_293C
@@ -6805,7 +6807,7 @@ func_2BCF::
     ld   bc, $0500
     jp   CopyData
 
-.label_2E6F
+func_2E6F::
     nop
     ld   de, $120E
     ld   a, [$FFF7]
@@ -6882,7 +6884,7 @@ func_2BCF::
     and  $03
     ld   e, a
     ld   d, $00
-    ld   hl, $2E6F
+    ld   hl, func_2E6F
     add  hl, de
     ld   a, [hl]
     and  a
@@ -9440,7 +9442,7 @@ data_3F48::
     ld   [$FFA5], a
     ld   a, $0C
     ld   [$2100], a
-    jp   $1D2E
+    jp   func_1D2E
 
 .label_3FD1
     ld   b, $34

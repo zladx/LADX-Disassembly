@@ -4,19 +4,19 @@
 section "RST 0x0000", rom0 [$0000]
     jp   func_28C0
 
-section "Interrupt 0x0040", rom0 [$0040]
+section "Interrupt Vblank", rom0 [$0040]
     jp   func_046C
 
-section "Interrupt 0x0048", rom0 [$0048]
+section "Interrupt LCD Stat", rom0 [$0048]
     jp   func_0388
 
-section "Interrupt 0x0050", rom0 [$0050]
+section "Interrupt Timer", rom0 [$0050]
     reti
 
-section "Interrupt 0x0058", rom0 [$0058]
+section "Interrupt Serial", rom0 [$0058]
     jp   func_0408
 
-section "Interrupt 0x0060", rom0 [$0060]
+section "Interrupt Joypad", rom0 [$0060]
     reti
 
 
@@ -46,6 +46,8 @@ func_0080::
     xor  a
     ld   [$FF90], a
     ld   [$FF92], a
+
+func_008B::
     ld   a, $0C
     ld   [$2100], a
     ret

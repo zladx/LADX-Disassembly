@@ -3043,7 +3043,7 @@ func_157C::
     ld   [$FFCD], a
     or   c
     ld   e, a
-    ld   hl, $D711
+    ld   hl, WR1_TileMap
     add  hl, de
     ld   a, h
     cp   $D7
@@ -4549,7 +4549,7 @@ func_1ED7::
     or   c
     ld   e, a
     ld   [$FFD8], a
-    ld   hl, $D711
+    ld   hl, WR1_TileMap
     add  hl, de
     ld   a, h
     cp   $D7
@@ -4964,7 +4964,7 @@ func_21A8::
     ld   a, [$FFD9]
     ld   c, a
     ld   b, $00
-    ld   hl, $D711
+    ld   hl, WR1_TileMap
     add  hl, bc
     ld   b, $00
     ld   c, [hl]
@@ -7121,7 +7121,7 @@ func_2E6F::
     call $3905
     call func_080C
     ld   de, $9800
-    ld   hl, $D711
+    ld   hl, WR1_TileMap
     ld   c, $80
 
 .label_30A9
@@ -7378,7 +7378,7 @@ func_2E6F::
     jr   z, .label_3258
     ld   a, [bc]
     and  $0F
-    call $37E7
+    call FillTileMap
     ld   a, [bc]
     db   $CB, $37 ; Need to handle this instruction 
     and  $0F
@@ -7387,7 +7387,7 @@ func_2E6F::
 
 .label_3258
     ld   a, [bc]
-    call $37E7
+    call FillTileMap
 
 .label_325C
     inc  bc
@@ -7848,7 +7848,7 @@ func_2E6F::
     dec  bc
     ld   a, [bc]
     ld   e, a
-    ld   hl, $D711
+    ld   hl, WR1_TileMap
     add  hl, de
     ld   a, [$FFD7]
     and  $0F
@@ -7911,7 +7911,7 @@ func_352D::
     dec  bc
     ld   a, [bc]
     ld   e, a
-    ld   hl, $D711
+    ld   hl, WR1_TileMap
     add  hl, de
     pop  af
     ld   [hl], a
@@ -8064,7 +8064,7 @@ func_35EE::
     ld   a, [bc]
     ld   e, a
     ld   d, $00
-    ld   hl, $D711
+    ld   hl, WR1_TileMap
     add  hl, de
     ret
 
@@ -8241,24 +8241,25 @@ data_37E1::
 data_37E4::
     db   0, $10, $FF
 
-.label_37E7
+; will fill the tile map with whatever is in register a
+FillTileMap::
     ld   [$FFE9], a
     ld   d, $80
-    ld   hl, $D711
+    ld   hl, WR1_TileMap
     ld   e, a
 
-.label_37EF
+.fill_tilemap_loop
     ld   a, l
     and  $0F
-    jr   z, .label_37F9
-    cp   $0B
-    jr   nc, .label_37F9
+    jr   z, .fill_tilemap_dont_copy
+    cp   $0B 
+    jr   nc, .fill_tilemap_dont_copy
     ld   [hl], e
 
-.label_37F9
+.fill_tilemap_dont_copy
     inc  hl
     dec  d
-    jr   nz, .label_37EF
+    jr   nz, .fill_tilemap_loop
     ret
 
     ld   a, $01
@@ -9427,7 +9428,184 @@ data_3F48::
     ret
 
 ; NOTE: This was just a test to see how to write to other banks
-; remember to remove this
-section "bank1",romx,bank[$1]
-    xor    a
+; remember to move these to other files when needed.
+section "bank1",romx,bank[$01]
+    db   0
+
+section "bank2",romx,bank[$02]
+    db   0
+
+section "bank3",romx,bank[$03]
+    db   0
+
+section "bank4",romx,bank[$04]
+    db   0
+
+section "bank5",romx,bank[$05]
+    db   0
+
+section "bank6",romx,bank[$06]
+    db   0
+
+section "bank7",romx,bank[$07]
+    db   0
+
+section "bank8",romx,bank[$08]
+    db   0
+
+section "bank9",romx,bank[$09]
+    db   0
+
+section "bank10",romx,bank[$0A]
+    db   0
+
+section "bank11",romx,bank[$0B]
+    db   0
+
+section "bank12",romx,bank[$0C]
+    db   0
+
+section "bank13",romx,bank[$0D]
+    db   0
+
+section "bank14",romx,bank[$0E]
+    db   0
+
+section "bank15",romx,bank[$0F]
+    db   0
+
+section "bank16",romx,bank[$10]
+    db   0
+
+section "bank17",romx,bank[$11]
+    db   0
+
+section "bank18",romx,bank[$12]
+    db   0
+
+section "bank19",romx,bank[$13]
+    db   0
+
+section "bank20",romx,bank[$14]
+    db   0
+
+section "bank21",romx,bank[$15]
+    db   0
+
+section "bank22",romx,bank[$16]
+    db   0
+
+section "bank23",romx,bank[$17]
+    db   0
+
+section "bank24",romx,bank[$18]
+    db   0
+
+section "bank25",romx,bank[$19]
+    db   0
+
+section "bank26",romx,bank[$1A]
+    db   0
+
+section "bank27",romx,bank[$1B]
+    db   0
+
+section "bank28",romx,bank[$1C]
+    db   0
+
+section "bank29",romx,bank[$1D]
+    db   0
+
+section "bank30",romx,bank[$1E]
+    db   0
+
+section "bank31",romx,bank[$1F]
+    db   0
+
+section "bank32",romx,bank[$20]
+    db   0
+
+section "bank33",romx,bank[$21]
+    db   0
+
+section "bank34",romx,bank[$22]
+    db   0
+
+section "bank35",romx,bank[$23]
+    db   0
+
+section "bank36",romx,bank[$24]
+    db   0
+
+section "bank37",romx,bank[$25]
+    db   0
+
+section "bank38",romx,bank[$26]
+    db   0
+
+section "bank39",romx,bank[$27]
+    db   0
+
+section "bank40",romx,bank[$28]
+    db   0
+
+section "bank41",romx,bank[$29]
+    db   0
+
+section "bank42",romx,bank[$2A]
+    db   0
+
+section "bank43",romx,bank[$2B]
+    db   0
+
+section "bank44",romx,bank[$2C]
+    db   0
+
+section "bank45",romx,bank[$2D]
+    db   0
+
+section "bank46",romx,bank[$2E]
+    db   0
+
+section "bank47",romx,bank[$2F]
+    db   0
+
+section "bank48",romx,bank[$30]
+    db   0
+
+section "bank49",romx,bank[$31]
+    db   0
+
+section "bank50",romx,bank[$32]
+    db   0
+
+section "bank51",romx,bank[$33]
+    db   0
+
+section "bank52",romx,bank[$34]
+    db   0
+
+section "bank53",romx,bank[$35]
+    db   0
+
+section "bank54",romx,bank[$36]
+    db   0
+
+section "bank55",romx,bank[$37]
+    db   0
+
+section "bank56",romx,bank[$38]
+    db   0
+
+section "bank57",romx,bank[$39]
+    db   0
+
+section "bank58",romx,bank[$3A]
+    db   0
+
+section "bank59",romx,bank[$3B]
+    db   0
+
+section "bank60",romx,bank[$3C]
+    db   0
 

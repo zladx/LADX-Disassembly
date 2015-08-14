@@ -8,7 +8,7 @@ include "constants.asm"
 
 include "code/rst.asm"
 include "code/header.asm"
-include "defs.asm"
+include "wram.asm"
 
 section "Main", rom0
 
@@ -2692,26 +2692,13 @@ data_13A5::
     db   $20, $E0, 0, 0
 
 data_13A9::
-    db   0
-    db   0
-    db   $E0 ; a
-    db   $20
-    db   $30 ; 0
-    db   $D0 ; -
-    db   0
-    db   0
-    db   $40 ; @
-    db   $C0 ; +
-    db   0
-    db   0
-    db   0
-    db   0
-    db   $D0 ; -
-    db   $30 ; 0
-    db   0
-    db   0
-    db   $C0 ; +
-    db   $40 ; @
+    db   0, 0, $E0, $20
+
+data_13AD::
+    db   $30, $D0, 0, 0, $40, $C0, 0, 0
+
+data_13B5::
+    db   0, 0, $D0, $30, 0, 0, $C0, $40
 
 ShootArrow::
     ld   a, [WR0_IsShootingArrow]
@@ -2771,13 +2758,13 @@ ShootArrow::
     ld   c, a
 
 .label_141A
-    ld   hl, $13AD
+    ld   hl, data_13AD
     add  hl, bc
     ld   a, [hl]
     ld   hl, $C240
     add  hl, de
     ld   [hl], a
-    ld   hl, $13B5
+    ld   hl, data_13B5
     add  hl, bc
     ld   a, [hl]
     ld   hl, $C250
@@ -2953,7 +2940,7 @@ UseSword::
     xor  a
     ld   [$C160], a
     ld   [$C1AC], a
-    call $280D
+    call func_280D
     and  $03
     ld   e, a
     ld   d, $00
@@ -3140,13 +3127,13 @@ func_157C::
     call $3942
 
 .label_167C
-    call $280D
+    call func_280D
     and  $07
     ret  nz
     ld   a, [$FFAF]
     cp   $D3
     ret  z
-    call $280D
+    call func_280D
     rra
     ld   a, $2E
     jr   nc, .label_1691
@@ -5906,7 +5893,7 @@ func_27F2::
     call $5E67
     jp   func_081D
 
-.label_280D
+func_280D::
     push hl
     ld   a, [$FFE7]
     ld   hl, $C13D

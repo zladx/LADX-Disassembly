@@ -1320,32 +1320,10 @@ label_07B0::
     jp   $008B
 
 label_07BB::
-    ld   h, b
-    ld   l, c
-    and  b
-    ld   l, c
-    ret  nz
-    ld   l, c
-    nop
-    ld   b, d
-    ld   b, b
-    ld   b, d
-    ld   h, b
-    ld   b, d
+    db   $60, $69, $A0, $69, $C0, $69, 0, $42, $40, $42, $60, $42
 
 label_07C7::
-    nop
-    add  a, d
-    ld   b, b
-    add  a, d
-    ld   h, b
-    add  a, d
-    nop
-    add  a, d
-    ld   b, b
-    add  a, d
-    ld   h, b
-    add  a, d
+    db   0, $82, $40, $82, $60, $82, 0, $82, $40, $82, $60, $82
 
 label_07D3::
     sub  a, $08
@@ -3834,14 +3812,10 @@ label_16FA::
     ret
 
 label_16FD::
-    jr   nz, label_16DF
-    nop
-    nop
+    db   $20, $E0, 0, 0
 
 label_1701::
-    nop
-    nop
-    ld   [rNR41], a
+    db   0, 0, $E0, $20
 
 label_1705::
     ld   a, [$FFF9]

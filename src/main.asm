@@ -6664,15 +6664,7 @@ label_2900::
     ld   [SelectRomBank_2100], a
     ret
 
-CopyData::
-    ld   a, [hli]
-    ld   [de], a
-    inc  de
-    dec  bc
-    ld   a, b
-    or   c
-    jr   nz, CopyData
-    ret
+include "CopyData.asm"
 
 label_291D::
     inc  de
@@ -10046,7 +10038,12 @@ section "bank11",romx,bank[$0B]
     db   0
 
 section "bank12",romx,bank[$0C]
-    db   0
+
+incbin "data/Bank_0xC_0x0000"
+incbin "data/Bank_0xC_0x0400"
+incbin "data/Bank_0xC_0x07A0"
+incbin "data/Bank_0xC_0x07C0"
+incbin "data/Bank_0xC_0x0800"
 
 section "bank13",romx,bank[$0D]
     db   0

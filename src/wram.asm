@@ -177,7 +177,7 @@ label_D006 equ $D006
 label_D007 equ $D007
 label_D008 equ $D008
 label_D009 equ $D009
-label_D16A equ $D16A
+;label_D16A equ $D16A
 label_D368 equ $D368
 label_D401 equ $D401
 label_D416 equ $D416
@@ -204,7 +204,7 @@ label_D6FC equ $D6FC
 label_D6FD equ $D6FD
 label_D6FE equ $D6FE
 label_D6FF equ $D6FF
-label_D711 equ $D711
+;label_D711 equ $D711
 label_D800 equ $D800
 label_D806 equ $D806
 label_D80E equ $D80E
@@ -243,14 +243,13 @@ label_DB95 equ $DB95
 label_DB96 equ $DB96
 label_DB97 equ $DB97
 label_DB98 equ $DB98
-label_DB99 equ $DB99
+;label_DB99 equ $DB99
 label_DB9A equ $DB9A
 label_DB9D equ $DB9D
 label_DB9E equ $DB9E
 label_DBA5 equ $DBA5
 label_DBAE equ $DBAE
 label_DBAF equ $DBAF
-label_DBB5 equ $DBB5
 label_DBB6 equ $DBB6
 label_DBC7 equ $DBC7
 label_DBC9 equ $DBC9
@@ -272,6 +271,8 @@ label_DE03 equ $DE03
 label_DE04 equ $DE04
 label_DFFF equ $DFFF
 
+
+WR1_KillCount   equ $D415
 WR1_TileMap     equ $D711
 WR1_AButtonSlot equ $DB00
 WR1_BButtonSlot equ $DB01
@@ -283,4 +284,5 @@ WR1_RupeeCountHigh equ $DB5D
 WR1_RupeeCountLow  equ $DB5E
 ; This appears to be the amount of rupees being added to your wallet
 WR1_AddRupeeBuffer equ $DB90 
+WR1_KillCount2 equ $DBB5
 

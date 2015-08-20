@@ -1525,6 +1525,8 @@ label_917::
     ld   a, $01
     ld   [SelectRomBank_2100], a
     ret
+
+label_91D::
     push af
     ld   b, $00
     ld   a, [$DDD8]
@@ -1586,6 +1588,8 @@ label_973::
     pop  af
     ld   [SelectRomBank_2100], a
     ret
+
+label_978::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
@@ -1605,6 +1609,8 @@ label_983::
     ld   a, [hl]
     inc  de
     ret
+
+label_999::
     push af
     push bc
     call label_983
@@ -1632,26 +1638,36 @@ label_983::
     xor  a
     ldi  [hl], a
     jr   label_973
+
+label_9C8::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4985
     jr   label_973
+
+label_9D3::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4518
     jr   label_973
+
+label_9DE::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4874
     jr   label_973
+
+label_9E9::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4954
     jp   label_973
+
+label_9F5::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
@@ -6475,6 +6491,8 @@ label_27BB::
     ld   a, $17
     ld   [SelectRomBank_2100], a
     jp   $7D7C
+
+label_17C3::
     ld   [$D368], a
     ld   [$FFBF], a
     ld   a, $38
@@ -6482,6 +6500,8 @@ label_27BB::
     xor  a
     ld   [$FFA8], a
     ret
+
+label_27D0::
     push hl
     ld   hl, $4000
     ld   [hl], $00
@@ -6489,12 +6509,16 @@ label_27BB::
     ld   [hl], $0A
     pop  hl
     ret
+
+label_27DD::
     ld   a, $02
     ld   [SelectRomBank_2100], a
     push bc
     call label_4146
     pop  bc
     jp   label_81D
+
+label_27EA::
     ld   a, $38
     ld   [$FFA8], a
     xor  a
@@ -6595,6 +6619,8 @@ label_2852::
 
 label_2886::
     ret
+
+label_2887::
     push bc
     ld   a, [$FFCD]
     ld   hl, $FF97
@@ -9041,6 +9067,7 @@ label_38EA::
     ld   a, [$FFE8]
     ld   [SelectRomBank_2100], a
     ret
+
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_588B
@@ -9059,12 +9086,18 @@ label_390F::
 label_3911::
     ld   [SelectRomBank_2100], a
     ret
+
+label_3915::
     ld   a, $27
     ld   [SelectRomBank_2100], a
     jp   $7FC5
+
+label_391D::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     jp   $7DE6
+
+label_3925::
     ld   a, $14
     ld   [SelectRomBank_2100], a
     ld   hl, $5218
@@ -9073,6 +9106,8 @@ label_3911::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     ret
+
+label_3935::
     ld   a, $19
     call label_80C
     call label_7C50
@@ -9084,23 +9119,33 @@ label_3942::
     ld   [SelectRomBank_2100], a
     call label_53E4
     jp   label_81D
+
+label_394D::
     ld   a, $14
     ld   [SelectRomBank_2100], a
     call label_54AC
     jp   label_81D
+
+label_3958::
     ld   a, $01
     call label_80C
     call label_5FB3
     ld   a, $02
     jp   label_80C
+
+label_3965::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_485B
     jp   label_81D
+
+label_3970::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_7EFE
     jp   label_81D
+
+label_397B::
     ld   a, $14
     ld   [SelectRomBank_2100], a
     call label_5347
@@ -9243,23 +9288,12 @@ label_3A54::
     cp   $05
     jp   z, label_3A8D
     rst  0
-    add  hl, bc
-    db   $3A ; ldd  a, [hl]
-    jr   label_3AC8
-    or   [hl]
-    ld   c, h
-    ld   c, h
-    ld   c, h
-    or   l
-    ld   c, b
-    adc  a, l
-    db   $3A ; ldd  a, [hl]
-    rlca
-    ld   c, [hl]
-    ldd  [hl], a
-    ld   d, a
-    sub  a, h
-    ld   c, l
+
+data_3A6F:: 
+    db 9, $3A, $18, $55, $B6, $4C, $4C, $4C, $B5, $48, $8D, $3A, 7, $4E, $32, $57
+    db $94, $4D
+
+label_3A81::
     call label_3A8D
     ld   a, $03
     ld   [$DBAF], a
@@ -9287,17 +9321,34 @@ label_3A8D::
     ld   [SelectRomBank_2100], a
     jp   [hl]
 
-label_3AAA::
+data_3AAA::
     db   8, 5, 8, 5, 8, $A, 8, $A, 8, $A, 8, $A, 8, $10, 4, $A
     db   8, 2, 8, 2, 8, $13, 8, $13, 8, 6, 6, 8, 8, 7
 
-label_3AC8::
+data_3AC8::
     db   6, $A, 8, 6, $10, $30, 8, 7, 4, $A, $C, 7, $FC, 4, $10
 
-label_3AD7::
-    db   $10, $C, $12, 8, 8, 2, 8, $10, $C, 8, $10, 8, 7, $C, 8, 8
-    db   8, 2, 8, $21, $50, $C3, 9, $7E, $E6, $7C, $5F, $50, $21, $AA, $3A, $19
-    db   $5D, $54, $C5, $CB, $21, $CB, $21, $21, $80, $D5, 9, $E, 4
+data_3AD7::
+    db $10, $C, $12, 8, 8, 2, 8, $10, $C, 8, $10, 8, 7, $C, 8, 8
+    db 8, 2, 8
+
+label_3AEA::
+    ld      hl, $C350
+    add     hl, bc
+    ld      a, [hl]
+    and     $7C ; '|'
+    ld      e, a
+    ld      d, b
+    ld      hl, data_3AAA
+    add     hl, de
+    ld      e, l
+    ld      d, h
+    push    bc
+    sla     c
+    sla     c
+    ld      hl, $D580
+    add     hl, bc
+    ld      c, 4
 
 label_3B04::
     ld   a, [de]
@@ -9755,50 +9806,74 @@ label_3D8A::
     sub  a, [hl]
     ld   [$FFEC], a
     ret
+
+label_3DA0::
     ld   hl, SelectRomBank_2100
     ld   [hl], $15
     call label_7964
     jp   label_81D
+
+label_3DAB::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_5A1A
     jp   label_81D
+
+label_3DB6::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_5690
     jp   label_81D
+
+label_3DC1::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_504B
     jp   label_81D
+
+label_3DCC::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_49BD
     jp   label_81D
+
+label_3DD7::
     ld   hl, SelectRomBank_2100
     ld   [hl], $36
     call label_72AB
     jp   label_81D
+
+label_3DE2::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_6CC6
     jp   label_81D
+
+label_3DED::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_6818
     jp   label_81D
+
+label_3DF8::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_6302
     jp   label_81D
+
+label_3E03::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_5A1E
     jp   label_81D
+
+label_3E0E::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_556B
     jp   label_81D
+
+label_3E19::
     ld   a, [$DBAF]
     push af
     ld   a, $02
@@ -9806,24 +9881,34 @@ label_3D8A::
     call label_6C75
     pop  af
     jp   label_80C
+
+label_3E29::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_5C63
     jp   label_81D
+
+label_3E34::
     ld   hl, SelectRomBank_2100
     ld   [hl], $03
     call label_5407
     jp   label_81D
+
+label_3E3F::
     ld   hl, SelectRomBank_2100
     ld   [hl], $02
     call label_62CE
     call label_6414
     jp   label_81D
+
+label_3E4D::
     ld   a, $02
     call label_80C
     call label_41D0
     ld   a, $03
     jp   label_80C
+
+label_3E5A::
     ld   hl, SelectRomBank_2100
     ld   [hl], $20
     ld   c, $01
@@ -9831,15 +9916,21 @@ label_3D8A::
     ld   e, $FF
     call label_5C9C
     jp   label_81D
+
+label_3E6B::
     ld   hl, SelectRomBank_2100
     ld   [hl], $03
     call label_6472
     jp   label_81D
+
+label_3E76::
     ld   a, $06
     call label_80C
     call label_783C
     ld   a, $03
     jp   label_80C
+
+label_3E83::
     ld   e, $10
     ld   hl, $C280
 
@@ -10169,40 +10260,41 @@ data_C4A0::     db 0, 0, 1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                 db 0, 1, 1, 3, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0
                 db 0, 0, 0
 
-data_C4C3::      db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                 db 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 1
-                 db 2, 2, 2, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2
-                 db 2, 4, 0, 1, 2, 0, 0, 0, 0, 1, 2, 2, 0, 0, 0, 0
-                 db 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                 db 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2
-                 db 2, 2, 0, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2
-                 db 2, 4, 0, 2, 2, 0, 0, 0, 0, 0, 1, 1, 1, 2, 1, 0
-                 db 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                 db 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                 db 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0
-                 db 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0
-                 db 2, 0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0
-                 db 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0
-                 db 2, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0
-                 db 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0
-                 db 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2
-                 db 2, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0
-                 db 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0
-                 db 0, 0, 0, 2, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2
-                 db 1, 2, 0, 1, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2
-                 db 1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                 db 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1
-                 db 2, 1, 0, 3, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1
-                 db 0, 0, 0, 1, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2
-                 db 1, 2, 0, 1, 2, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2
-                 db 1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                 db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 2
-                 db 0, 2, 0, 3, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 2, 2
-                 db 2, 2, 0, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0, 0, 2, 0
-                 db 0, 5, 2, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                 db 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2
-                 db 1, 4, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                 db 2, 4, 0, 2, 2, 0
+data_C4C3:: db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+data_C4D0:: db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 2, 1, 2, 2, 2, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0
+            db 0, 2, 2, 2, 4, 0, 1, 2, 0, 0, 0, 0, 1, 2, 2, 0
+            db 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            db 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 2, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1
+            db 2, 2, 2, 2, 4, 0, 2, 2, 0, 0, 0, 0, 0, 1, 1, 1
+            db 2, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            db 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            db 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 0, 0, 2, 0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 2, 2, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 2, 1, 2, 0, 1, 2, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 2, 1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0
+            db 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 1, 2, 1, 0, 3, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 1, 0, 0, 0, 1, 2, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 2, 1, 2, 0, 1, 2, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 2, 1, 2, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0
+            db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1
+            db 1, 0, 2, 0, 2, 0, 3, 0, 0, 0, 0, 0, 1, 1, 1, 0
+            db 0, 2, 2, 2, 2, 0, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0
+            db 0, 2, 0, 0, 5, 2, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0
+            db 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1
+            db 1, 1, 2, 1, 4, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0
+            db 0, 0, 0, 2, 4, 0, 2, 2, 0
 
 data_C6D9::      db 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 4, 0, 3, 2, 0
                  db 0, 0, 0, 1, 1, 1
@@ -10230,10 +10322,12 @@ data_C7BC::     db 1, 2, 2, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
 data_C7F1::     db 4, 4, 8, 8, $18, 8, 4, 8, $10, 8, $10, 8, 8, 4, 8, 8
                 db 8, 8, 8, 8, 8, $C, 0, 0, 8, 8, 8, $C, $C, $14, $10, $20
                 db 8, 8, 4, 4, 4, 4, 4, 0, $14, 8, 4, 8, 4, 4, 8, 8
-                db 4, 4, 4, 8, 8, 2, 6, 1, 3, 3, 3, $D, 8, $A, 2, 7
-                db $B, 0, 4, 0, 8, 4, $E, $E, $E, $E, $E, 0, 3, 3, 3, 3
-                db 3, 3, 3, 3, 3, 3, 2, 0, 0, 2, 0, 0, 0, 0, 6, 6
-                db $D, $E, 0, 9, 3, 6, 0, 2, $E, $E
+                db 4, 4, 4, 8, 8
+
+data_C826::     db 2, 6, 1, 3, 3, 3, $D, 8, $A, 2, 7, $B, 0, 4, 0, 8
+                db 4, $E, $E, $E, $E, $E, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3
+                db 3, 2, 0, 0, 2, 0, 0, 0, 0, 6, 6, $D, $E, 0, 9, 3
+                db 6, 0, 2, $E, $E
 
 label_C85B::
     call label_3A0A
@@ -10359,10 +10453,13 @@ label_C918::
     call label_9D3
     jp   [hl]
 
-label_C924::
-    ld   bc, data_2104
-    ld   h, b
-    call nz, label_DE09
+data_C924::
+    db 1, 4
+
+label_C926::
+    ld   hl, $C460
+    add  hl, bc
+    ld   e, [hl]
     ld   d, b
     ld   hl, data_C924
     add  hl, de
@@ -10598,7 +10695,7 @@ label_CABF::
     ld   [hl], $6B
     ret
 
-label_CAC6::
+data_CAC6::
     rst  $38
     ld   a, a
     cp   [hl]
@@ -10819,7 +10916,7 @@ label_CC15::
     ld   [hl], a
     jp   label_CB56
 
-label_CC44::
+data_CC44::
     inc  [hl]
     ld   [bc], a
     inc  [hl]
@@ -10875,22 +10972,16 @@ label_CC8C::
     ld   [hl], $13
     ret
 
-label_CCA4::
-    nop
-    nop
-    inc  b
-    nop
+data_CCA4::
+    db 0, 0, 4, 0
 
-label_CCA8::
-    nop
-    ld   bc, data_603
+data_CCA8::
+    db 0, 1, 3, 6
 
-label_CCAC::
-    inc  h
-    ld   bc, $0124
-    ld   a, $01
+data_CCAC::
+    db $24, 1, $24, 1, $3E, 1
 
-label_CCB2::
+data_CCB2::
     ld   e, $01
     ld   e, $61
     ld   a, [$FFF7]
@@ -11094,7 +11185,7 @@ label_CDEF::
 label_CE04::
     ret
 
-label_CE05::
+data_CE05::
     db   $10 ; Undefined instruction
     call label_3A81
     call label_FF7E
@@ -11182,13 +11273,13 @@ label_CE85::
     call label_FF32
     jp   label_3D7F
 
-label_CEA0::
+data_CEA0::
     inc  c
     inc  c
     db   $F4 ; Undefined instruction
     db   $F4 ; Undefined instruction
 
-label_CEA4::
+data_CEA4::
     inc  c
     db   $F4 ; Undefined instruction
     inc  c
@@ -11422,84 +11513,30 @@ label_CFF3::
     nop
     nop
 
-label_CFF7::
-    nop
-    nop
-    db   $F4 ; Undefined instruction
-    inc  c
-    ld   hl, $C2C0
-    add  hl, bc
-    ld   a, [hl]
-    and  a
-    jr   z, label_D048
-    ld   de, data_CFEB
-    call label_3BC0
-    call label_FF78
-    call label_FFA9
-    call label_EE28
-    call label_FF25
-    call label_F893
-    call label_C05
-    jr   nz, label_D03D
-    call label_280D
-    and  $1F
-    add  a, $20
+data_CFF7::
+    db 0, 0, $F4, $C, $21, $C0, $C2, 9, $7E, $A7, $28, $45, $11, $EB, $4F, $CD
+    db $C0, $3B, $CD, $78, $7F, $CD, $A9, $7F, $CD, $28, $6E, $CD, $25, $7F, $CD, $93
+    db $78, $CD, 5, $C, $20, $20, $CD, $D, $28, $E6, $1F, $C6, $20, $77, $E6, 3
+    db $5F, $50, $21, $F3, $4F, $19, $7E, $21, $40, $C2, 9, $77, $21, $F7, $4F, $19
+    db $7E, $21, $50, $C2, 9, $77
+
+data_D03D::
+    db $F0, $E7, $1F, $1F, $1F, $1F, $E6, 1, $C3, $C, $3B
+
+data_D048::      db $11, $CB, $4F, $CD, $3C
+data_D04D::      db $58, $C9
+
+data_D04F::      
+    db $62, $70, $63, $71
+
+data_D053::      
+    db $62, $70, $62, $70
+
+data_D057:: db 3, 4, 5, 6, 7, 8, 9, $A, $B, $C, 2, 1, 0, 0, 0, 0
+            db 1
+
+label_D068::
     ld   [hl], a
-    and  $03
-    ld   e, a
-    ld   d, b
-    ld   hl, data_CFF3
-    add  hl, de
-    ld   a, [hl]
-    ld   hl, $C240
-    add  hl, bc
-    ld   [hl], a
-    ld   hl, data_CFF7
-    add  hl, de
-    ld   a, [hl]
-    ld   hl, $C250
-    add  hl, bc
-    ld   [hl], a
-
-label_D03D::
-    ld   a, [$FFE7]
-    rra
-    rra
-    rra
-    rra
-    and  $01
-    jp   label_3B0C
-
-label_D048::
-    ld   de, data_CFCB
-    call label_D83C
-    ret
-
-label_D04F::
-    ld   h, d
-    ld   [hl], b
-    ld   h, e
-    ld   [hl], c
-
-label_D053::
-    ld   h, d
-    ld   [hl], b
-    ld   h, d
-    ld   [hl], b
-
-label_D057::
-    inc  bc
-    inc  b
-    dec  b
-    ld   b, $07
-    ld   [label_A09], sp
-    dec  bc
-    inc  c
-    ld   [bc], a
-    ld   bc, $0000
-    nop
-    nop
-    ld   bc, data_1432
     ld   h, h
     ret  z
     db   $F4 ; Undefined instruction
@@ -11651,29 +11688,25 @@ label_D154::
     add  hl, de
     ret
 
-label_D156::
-    ld   l, d
-    ld   a, d
-    ld   l, e
-    ld   a, e
+data_D156::
+    db $6A, $7A, $6B, $7B
 
-label_D15A::
-    db   $10 ; Undefined instruction
-    ld   de, $F813
-    ld   sp, hl
-    ld   a, [label_EFB]
-    ld   e, $0F
-    rra
+data_D15A::      
+    db $10, $12, $11, $13
 
-label_D166::
-    ld   l, b
-    ld   [hl], a
-    ld   l, c
-    ld   c, e
+data_D15E::      
+    db $F8, $F9, $FA, $FB
 
-label_D16A::
-    halt
-    halt
+data_D162::      
+    db $E, $1E, $F, $1F
+
+data_D166::      
+    db $68, $77, $69, $4B
+
+data_D16A::
+    db $76, $76, $76, $76
+
+label_D16E::
     call label_FEFE
     ld   d, $00
     ld   hl, data_D23D
@@ -11797,22 +11830,20 @@ label_D1F5::
 label_D234::
     ret
 
-label_D235::
-    ld   l, [hl]
-    rlca
-    ld   l, [hl]
-    daa
-    ld    hl, sp+$17
-    ld   a, [$F817]
-    ld   [$0000], sp
+data_D235::
+    db $6E, 7, $6E
 
-label_D241::
-    nop
-    nop
-    ld   [label_FEF8], sp
-    rlca
-    ld   a, [hl]
-    daa
+data_D238::
+    db $27, $F8, $17, $FA, $17
+    
+data_D23D::
+    db $F8, 8, 0, 0
+
+data_D241::
+    db 0, 0, 8, $F8
+
+data_D245::
+    db $7E, 7, $7E, $27
 
 label_D249::
     ld   a, [$DBA5]
@@ -12013,19 +12044,14 @@ label_D392::
 label_D395::
     jp   label_3935
 
-label_D398::
-    ld   a, [$FF17]
-    db   $F2 ; Undefined instruction
-    rla
-    db   $F4 ; Undefined instruction
-    ld   d, $F6
-    ld   d, $F0
-    ld   d, $F2
-    ld   d, $F4
-    ld   d, $F6
-    ld   d, $FA
-    and  l
-    db   $DB
+data_D398::
+    db $17, $F4, $16, $F6, $16
+
+data_D3A0::
+    db $F0, $16, $F2, $16, $F4, $16, $F6, $16
+
+label_D3A8::
+    ld   a, [$DBA5]
     and  a
     jr   z, label_D3B3
     ld   de, data_D3A0
@@ -12082,31 +12108,14 @@ label_D3F9::
 
 label_D406::
     ret
-    ld   a, $05
-    call label_E4CA
-    ret  c
-    ld   a, [$FFD7]
-    ld   hl, $C200
-    add  hl, de
-    ld   [hl], a
-    ld   a, [$FFD8]
-    ld   hl, $FFDA
-    sub  a, [hl]
-    ld   hl, $C210
-    add  hl, de
-    ld   [hl], a
-    ld   hl, $C3B0
-    add  hl, de
-    ld   [hl], $00
-    ld   hl, $C2F0
-    add  hl, de
-    ld   [hl], $0F
-    ld   hl, $C340
-    add  hl, de
-    ld   [hl], $C4
-    ld   a, $09
-    ld   [$FFF4], a
-    jp   label_3F8D
+
+label_D407::
+    db $3E, 5, $CD, $CA, $64, $D8, $F0, $D7, $21, 0, $C2, $19, $77, $F0
+
+data_D415::
+    db $D8, $21, $DA, $FF, $96, $21, $10, $C2, $19, $77, $21, $B0, $C3, $19, $36, 0
+    db $21, $F0, $C2, $19, $36, $F, $21, $40, $C3, $19, $36, $C4, $3E, 9, $E0, $F4
+    db $C3, $8D, $3F
 
 label_D438::
     ld   hl, $C2A0
@@ -12136,34 +12145,22 @@ label_D455::
     jp   label_C60
 
 label_D467::
-    cp   $0B
-    ret  nz
-    ld   a, [$C50D]
-    cp   $35
-    ret  c
-    cp   $3D
-    jr   c, label_D47D
-    ld   a, [$C503]
-    cp   $35
-    ret  c
-    cp   $3D
-    ret  nc
+    db $FE, $B, $C0, $FA, $D, $C5, $FE, $35, $D8, $FE, $3D, $38, 9, $FA, 3, $C5
+    db $FE, $35, $D8, $FE, $3D
 
-label_D47D::
-    jp   label_C60
-    ldd  [hl], a
-    ld   bc, data_E132
+data_D47C::
+    db $D0, $C3, $60, $C, $32, 1, $32, $61
 
 data_D484::
     db $30, 1, $30, $61
 
-label_D488::
+data_D488::
     db 0, 0, $3C, 1, 0, 8, $3C, $21, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
     db 0, 0, $3A, 1, 0, 8, $3A, $21, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
     db $FA, $FA, $3A, 1, $FA, 2, $3A, $21, 6, 6, $3A, 1, 6, $E, $3A, $21
     db 4, $FC, $30, 1, 4, 4, $30, $21, $FC, 4, $30, 1, $FC, $C, $30, $21
 
-label_D4C8::
+data_D4C8::
     db 0, 0, $3A, 1, 0, 8, $3A, $21, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
     db $F8, $F8, $3A, 1, $F8, 0, $3A, $21, 8, 8, $3A, 1, 8, $10, $3A, $21
     db 8, $F8, $3A, 1, 8, 0, $3A, $21, $F8, 8, $3A, 1, $F8, $10, $3A, $21
@@ -12249,12 +12246,17 @@ label_D594::
 label_D599::
     call label_FFA9
 
-data_D59C::     db $C9, $2E, $2E, $2D, $2D, $37, $2D, $FF, $FF, $2F, $37, $38, $2E, $2F
+data_D59C::     
+    db $C9, $2E, $2E, $2D, $2D, $37, $2D, $FF, $FF, $2F, $37, $38, $2E, $2F
 
-data_D5AA::     db $2F, 3, 1, 1, 0, 3, 3, 3, 3, 1, 0, 0, 0, 3
+data_D5AA::     
+    db $2F, 3, 1, 1, 0, 3, 3, 3, 3, 1, 0, 0, 0, 3
 
-data_D5B8::     db 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, $2E
-                db $2D, $38, $2F, $2E, $2D, $38, $37
+data_D5B8::     
+    db 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 
+
+data_D5C7::
+    db $2E, $2D, $38, $2F, $2E, $2D, $38, $37
 
 label_DC5F::
     ld   a, [$FFEB]
@@ -12436,64 +12438,27 @@ label_D6DF::
     ld   [hl], a
     ret
 
-label_D6EA::
-    ld   bc, data_808
-    db   $10 ; Undefined instruction
-    inc  b
-    inc  b
+data_D6EA::
+    db 1, 8, 8, $10
 
-label_D6F1::
-    ld   a, [bc]
-    scf
-    scf
-    scf
-    ld   bc, data_3939
-    add  hl, sp
-    ld   bc, data_3B3B
-    dec  sp
-    ld   bc, data_3D3D
-    dec  a
+data_D6EE::
+    db 1, 4, 4
 
-label_D701::
-    ld   bc, data_1010
-    ld   [$F000], sp
-    ld   a, [$FFF8]
-    nop
-    nop
-    nop
-    nop
-    nop
-    rst  $38
-    rst  $38
-    rst  $38
+data_D6F1::
+    db $A, $37, $37, $37, 1, $39, $39, $39, 1, $3B, $3B, $3B, 1, $3D, $3D, $3D
 
-label_D711::
-    rst  $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    ld   [$0000], sp
-    nop
-    ld   [$000E], sp
-    nop
-    ld   [$000E], sp
-    nop
-    ld   [$000E], sp
-    nop
-    nop
-    ld   c, $F0
-    db   $EB ; Undefined instruction
+data_D701::
+    db 1, $10, $10, 8, 0, $F0, $F0, $F8, 0, 0, 0, 0, 0, $FF, $FF, $FF
+
+data_D711::     
+    db $FF, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8
+
+data_D721::
+    db 0, 0, 0, 8, $E, 0, 0, 8, $E, 0, 0, 8, $E, 0, 0, 0
+    db $E
+
+label_D732::
+    ld   a, [$FFEB]
     ld   [$C5A8], a
     cp   $02
     jr   nz, label_D745
@@ -12625,47 +12590,25 @@ label_D7F7::
     ret
 
 data_D7FB::
-    jr   nc, label_D7FF
-    jr   nc, label_D821
+    db $30, 2, $30, $22
 
-label_D7FF::
-    ldd  [hl], a
-    ld   [bc], a
-    ldd  [hl], a
-    ldi  [hl], a
-    ;jr   nc, label_D847
-    ;jr   nc, label_D869
-    ldd  [hl], a
-    ld   b, d
-    ldd  [hl], a
-    ld   h, d
-    inc  [hl]
-    ld   [bc], a
-    ld   [hl], $02
-    ;jr   c, label_D813
-    db   $3A ; ldd  a, [hl]
-    ld   [bc], a
+data_D7FF::
+    db $32, 2, $32, $22, $30, $42, $30, $62, $32, $42, $32, $62, $34, 2, $36, 2
+    db $38, 2, $3A, 2
 
-label_D813::
-    ld   [hl], $22
-    inc  [hl]
-    ldi  [hl], a
-    db   $3A ; ldd  a, [hl]
-    ldi  [hl], a
-    ;jr   c, label_D83D
+data_D813::
+    db $36, $22, $34, $22, $3A, $22, $38, $22
 
-label_D81B::
-    ld   [$00F8], sp
-    nop
+data_D81B::
+    db 8, $F8, 0, 0
 
-label_D81F::
-    nop
-    nop
+data_D81F::
+    db 0, 0
 
-label_D821::
-    ld    hl, sp+$08
+data_D821::
+    db $F8, 8
 
-label_D823::
+data_D823::
     ld   b, $04
     ld   [bc], a
     nop
@@ -12820,7 +12763,7 @@ label_D8FC::
     or   [hl]
     jp   label_3B0C
 
-label_D917::
+data_D917::
     ld   h, b
     inc  bc
     ld   h, d
@@ -12856,24 +12799,17 @@ label_D921::
     ld   l, h
     inc  hl
 
-label_D937::
-    ld   [label_4F8], sp
-    db   $FC ; Undefined instruction
+data_D937::
+    db 8, $F8, 4, $FC
 
-label_D93B::
-    db   $FC ; Undefined instruction
-    db   $FC ; Undefined instruction
-    ld    hl, sp+$00
+data_D93B::
+    db $FC, $FC, $F8, 0
 
-label_D93F::
-    jr   nz, label_D921
-    nop
-    nop
+data_D93F::
+    db $20, $E0, 0, 0
 
-label_D943::
-    nop
-    nop
-    ld   [rNR41], a
+data_D943::
+    db 0, 0, $E0, $20
 
 label_D947::
     ld   a, $0C
@@ -12922,15 +12858,16 @@ label_D974::
 label_D98B::
     ret
 
-label_D98C::
-    ld   [$00F8], sp
-    nop
-    ld    hl, sp+$08
+data_D98C::
+    db 8, $F8
 
-label_D992::
+data_D98E::
+    db 0, 0, $F8, 8
+
+data_D992::
     jr   nz, label_D974
 
-label_D994::
+data_D994::
     nop
     nop
     ld   [rNR41], a
@@ -12978,7 +12915,7 @@ label_D9D6::
     ret
     ret
 
-label_D9D8::
+data_D9D8::
     xor  d
     inc  d
     xor  d
@@ -13044,7 +12981,7 @@ label_DA17::
     ld   [$FFA1], a
     ret
 
-label_DA4D::
+data_DA4D::
     xor  h
     ld   [bc], a
     xor  h
@@ -13150,7 +13087,7 @@ label_DAED::
     ld   [$C167], a
     jp   label_D12A
 
-label_DB17::
+data_DB17::
     sbc  a, d
     ld   [bc], a
     sbc  a, d
@@ -13197,22 +13134,24 @@ label_DB41::
     call label_3BC0
     jp   label_E0AA
 
-label_DB5B::
-    xor  [hl]
-    inc  d
+data_DB5B::
+    db $AE, $14
+
+label_DB5D::
     ld   de, data_DB5B
     call label_3C77
-    ;jr   label_DB7D
+    jr   label_DB7D
 
-label_DB65::
-    inc  d
-    ld   [bc], a
-    inc  d
-    ldi  [hl], a
-    inc  d
-    inc  d
-    inc  d
-    inc  [hl]
+data_DB65::
+    db $14, 2, $14
+
+data_DB68::
+    db $22, $14, $14
+
+data_DB6B::
+    db $14, $34
+
+label_DB6D::
     ld   de, data_DB65
     call label_3BC0
     ld   a, [$FFE7]
@@ -13221,6 +13160,8 @@ label_DB65::
     rra
     and  $01
     call label_3B0C
+
+label_DB7D::
     jp   label_E0AA
     
 data_DB80::
@@ -13323,9 +13264,8 @@ label_DC37::
 label_DC46::
     ret
 
-label_DC47::
-    adc  a, d
-    inc  d
+data_DC47::
+    db $8A, $14
 
 label_DC49::
     ld   a, [$FFF8]
@@ -13353,17 +13293,13 @@ label_DC67::
 label_DC75::
     jp   label_DA17
 
-label_DC78::
-    jp   z, label_C017
-    rla
-    jp   nz, label_C414
-    rla
-    add  a, $14
-    jp   z, label_17
-    and  e
-    and  h
-    and  l
-    nop
+data_DC78::
+    db $CA, $17, $C0, $17, $C2, $14, $C4, $17, $C6, $14, $CA, $17
+
+data_DC84::
+    db 0, $A3, $A4, $A5, 0
+    
+label_DC89::
     call label_DCEA
     jr   nc, label_DC99
     ld   hl, $D8CE
@@ -13467,20 +13403,20 @@ label_DD34::
     and  a
     ret
 
-label_DD36::
-    xor  b
-    inc  d
+data_DD36::
+    db $A8, $14
+
+label_DD38::
     call label_E1DE
     call label_E08C
     ld   de, data_DD36
     call label_3C77
     jp   label_E0AA
 
-label_DD47::
-    ld   e, [hl]
-    ld   [bc], a
-    ld   e, [hl]
-    ldi  [hl], a
+data_DD47::
+    db $5E, 2, $5E, $22
+
+label_DD4B::
     ld   hl, $DB4B
     ld   a, [$DB4C]
     or   [hl]
@@ -13510,111 +13446,20 @@ label_DD6C::
 label_DD80::
     jp   label_DA17
 
-label_DD83::
-    ld   [hl], b
-    ld   bc, data_172
-    ld   [hl], h
-    ld   bc, data_176
-    ld   a, b
-    ld   bc, data_17A
-    ld   a, h
-    ld   bc, data_17E
-    ld   hl, $C2B0
-    add  hl, bc
-    ld   a, [hl]
-    rst  0
-    and  e
-    ld   e, [hl]
-    sub  a, e
-    ld   e, [hl]
-    reti
-    ld   e, l
+data_DD83::
+    db $70, 1, $72, 1, $74, 1, $76, 1, $78, 1, $7A, 1, $7C, 1, $7E, 1
+    db $21, $B0, $C2, 9, $7E, $C7, $A3, $5E, $93, $5E, $D9, $5D
 
-label_DD9F::
-    db   $E4 ; Undefined instruction
-    db   $E4 ; Undefined instruction
-    db   $E4 ; Undefined instruction
-    db   $E4 ; Undefined instruction
-    sub  a, b
-    sub  a, b
-    sub  a, b
-    sub  a, b
-    ld   b, b
-    ld   b, b
-    ld   b, b
-    ld   b, b
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
+data_DD9F::
+    db $E4, $E4, $E4, $E4, $90, $90, $90, $90, $40, $40, $40, $40, 0, 0, 0, 0
+    db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
-label_DDBC::
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    ld   [label_808], sp
-    ld   [label_404], sp
-    inc  b
-    inc  b
-    nop
-    nop
-    nop
-    nop
-    nop
-    call label_3E76
-    ld   a, $01
-    ld   [$C167], a
-    call label_BFB
-    jr   nz, label_DE29
-    call label_3F8D
-    xor  a
-    ld   [$FF9D], a
-    ld   a, [$D201]
-    ld   e, a
-    ld   d, b
-    ld   hl, $C290
-    add  hl, de
-    inc  [hl]
-    call label_C9E
-    ld   a, [$FFF7]
-    rst  0
-    inc  c
-    ld   e, [hl]
-    ld   [de], a
-    ld   e, [hl]
-    ;jr   label_DE60
-    add  hl, de
-    ld   e, [hl]
-    ld   e, $5E
-    rra
-    ld   e, [hl]
-    inc  h
+data_DDBC::
+    db $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C
+    db 8, 8, 8, 8, 4, 4, 4, 4, 0, 0, 0, 0, 0, $CD, $76, $3E
+    db $3E, 1, $EA, $67, $C1, $CD, $FB, $B, $20, $43, $CD, $8D, $3F, $AF, $E0, $9D
+    db $FA, 1, $D2, $5F, $50, $21, $90, $C2, $19, $34, $CD, $9E, $C, $F0, $F7, $C7
+    db $C, $5E, $12, $5E, $18, $5E, $19, $5E, $1E, $5E, $1F, $5E, $24
 
 label_DE09::
     ld   e, [hl]
@@ -13622,16 +13467,26 @@ label_DE09::
     ld   a, $80
     ld   [$DB56], a
     ret
+
+label_DE12::
     ld   a, $02
     ld   [$DB48], a
     ret
+
+label_DE18::
     ret
+
+label_DE19::
     ld   a, $02
     ld   [$DB79], a
     ret
+
+label_DE1F::
     xor  a
     ld   [$DB74], a
     ret
+
+label_DE24::
     xor  a
     ld   [$DB7B], a
     ret
@@ -13702,25 +13557,9 @@ label_DE8A::
     ret
 
 label_DE8B::
-    ld   l, h
-    nop
-    rst  $38
-    rst  $38
-    ld   l, h
-    nop
-    ld   l, [hl]
-    nop
-    ld   de, data_DE8B
-    call label_3BC0
-    call label_FF25
-    call label_C05
-    jp   z, label_3F8D
-    ret
-    ld   a, [$FFF0]
-    cp   $03
-    jr   nc, label_DEAE
-    ld   a, $03
-    call label_AD2
+    db $6C, 0, $FF, $FF, $6C, 0, $6E, 0, $11, $8B, $5E, $CD, $C0, $3B, $CD, $25
+    db $7F, $CD, 5, $C, $CA, $8D, $3F, $C9, $F0, $F0, $FE, 3, $30, 5, $3E, 3
+    db $CD, $D2, $A
 
 label_DEAE::
     ld   a, c
@@ -13776,38 +13615,21 @@ label_DEFE::
 label_DF01::
     jp   label_DA17
 
-label_DF04::
-    ;jr   nz, label_DF2E
-    add  hl, hl
-    ld   a, [hli]
-    dec  hl
-    inc  l
-    dec  l
-    ld   l, $FA
-    ld   l, c
-    db   $D3 ; Undefined instruction
-    and  a
-    jr   nz, label_DF2C
-    ld   a, [$C19F]
-    and  a
-    jr   nz, label_DF2C
-    ld   a, [$FFF7]
-    ld   e, a
-    ld   d, b
-    ld   hl, data_DF04
-    add  hl, de
-    ld   a, [hl]
-    ld   [$D368], a
-    call label_3B12
-    call label_C05
-    ld   [hl], $FF
+data_DF04::
+    db $20, $28, $29, $2A, $2B, $2C, $2D, $2E, $FA, $69, $D3, $A7, $20, $1A, $FA, $9F
+    db $C1, $A7, $20, $14, $F0, $F7, $5F, $50, $21, 4, $5F, $19, $7E, $EA, $68, $D3
+    db $CD, $12, $3B, $CD, 5, $C, $36, $FF
 
 label_DF2C::
     jp   label_DA17
 
-label_DF2F::
-    ld   a, [bc]
-    ld   a, [$FC04]
+data_DF2F::
+    db $A, $FA
+
+data_DF31::
+    db 4, $FC
+
+label_DF33::
     call label_C05
     jr   nz, label_DF5F
     ld   a, $2B

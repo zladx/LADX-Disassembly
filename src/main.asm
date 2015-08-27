@@ -19095,18 +19095,7 @@ label_7640::
     ret
 
 label_764F::
-    nop
-    inc  bc
-    ld   [bc], a
-    inc  bc
-    inc  b
-    inc  bc
-    ld   b, $03
-    ld   [label_A03], sp
-    inc  bc
-    inc  c
-    inc  bc
-    ld   c, $03
+    db 0, 3, 2, 3, 4, 3, 6, 3, 8, 3, $A, 3, $C, 3, $E, 3
 
 label_765F::
     call label_71C7
@@ -19372,6 +19361,7 @@ label_783B::
 
 label_7850::
     db $10, $18, $2E, 5, 0, $18, $2C, 5, $10, $10, $2A, 5, 0, $10, $28, 5
+    db   $10 ; Undefined instruction
     db $10, 8, $26, 5, 0, 8, $24, 5, $10, 0, $22, 5, 0, 0, $20, 5
 
 label_7870::

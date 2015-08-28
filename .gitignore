@@ -13,3 +13,5 @@
 
 # swap files
 *.swp
+src/bank-bins/*
+

@@ -14,8 +14,8 @@ typedef int32_t  i32;
 typedef uint32_t u32;
 typedef int64_t  i64;
 typedef uint64_t u64;
-typedef float    r32;
-typedef double   r64;
+typedef float    f32;
+typedef double   f64;
 typedef i32      b32;
 
 #define internal static
@@ -30,15 +30,13 @@ typedef i32      b32;
 global_variable u8 RomData[0x100000];
 global_variable FILE *Output;
 
-typedef struct
-{
+typedef struct {
     u8 Opcode;
     u8 Size;
     char *Text;
 } instruction;
 
-global_variable instruction InstructionTable[] =
-{
+global_variable instruction InstructionTable[] = {
     {0x00, 1, "nop"},
     {0x01, 3, "ld   bc, $NN"},
     {0x02, 1, "ld   [bc], a"},
@@ -297,8 +295,7 @@ global_variable instruction InstructionTable[] =
     {0xFF, 1, "rst  $38"},
 };
 
-global_variable char *AdditionalInstructions[] = 
-{
+global_variable char *AdditionalInstructions[] = {
     "rlc  b",
     "rlc  c",
     "rlc  d",
@@ -557,8 +554,7 @@ global_variable char *AdditionalInstructions[] =
     "set  7, a"
 };
 
-enum memory_location
-{
+enum memory_location {
     ML_Undefined = -1,
     ML_16kbRomBank0,
     ML_16kbRomBankSwitchable,
@@ -574,8 +570,7 @@ enum memory_location
     ML_IntEnable
 };
 
-typedef struct
-{
+typedef struct {
     u16 Label;
     u16 Offset;
     b32 IsFunction;
@@ -588,339 +583,256 @@ global_variable label Labels[LABEL_COUNT];
 global_variable int NumberOfLabels;
 
 internal i32
-GetMemoryLocation(u16 Address)
-{
+GetMemoryLocation(u16 Address) {
     i32 Value = ML_Undefined;
-    if (Address >= 0x000 && Address <= 0x3FFF)
-    {
+    if (Address >= 0x000 && Address <= 0x3FFF) {
         Value = ML_16kbRomBank0;
     }
-    else if (Address >= 0x4000 && Address <= 0x7FFF)
-    {
+    else if (Address >= 0x4000 && Address <= 0x7FFF) {
         Value = ML_16kbRomBankSwitchable;
     }
-    else if (Address >= 0x8000 && Address <= 0x9FFF)
-    {
+    else if (Address >= 0x8000 && Address <= 0x9FFF) {
         Value = ML_8kbVRAM;
     }
-    else if (Address >= 0xA000 && Address <= 0xBFFF)
-    {
+    else if (Address >= 0xA000 && Address <= 0xBFFF) {
         Value = ML_8kbExternalRam;
     }
-    else if (Address >= 0xC000 && Address <= 0xDFFF)
-    {
+    else if (Address >= 0xC000 && Address <= 0xDFFF) {
         Value = ML_4kbWRAM_0;
     }
-    else if (Address >= 0xD000 && Address <= 0xDFFF)
-    {
+    else if (Address >= 0xD000 && Address <= 0xDFFF) {
         Value = ML_4kbWRAM_1;
     }
-    else if (Address >= 0xE000 && Address <= 0xFDFF)
-    {
+    else if (Address >= 0xE000 && Address <= 0xFDFF) {
         Value = ML_Echo_C000;
     }
-    else if (Address >= 0xFE00 && Address <= 0xFE9F)
-    {
+    else if (Address >= 0xFE00 && Address <= 0xFE9F) {
         Value = ML_OAM;
     }
-    else if (Address >= 0xFEA0 && Address <= 0xFEFF)
-    {
+    else if (Address >= 0xFEA0 && Address <= 0xFEFF) {
         Value = ML_NotUsable;
     }
-    else if (Address >= 0xFF00 && Address <= 0xFF7F)
-    {
+    else if (Address >= 0xFF00 && Address <= 0xFF7F) {
         Value = ML_IO;
     }
-    else if (Address >= 0xFF80 && Address <= 0xFFFE)
-    {
+    else if (Address >= 0xFF80 && Address <= 0xFFFE) {
         Value = ML_HighRam;
     }
-    else if (Address == 0xFFFF)
-    {
+    else if (Address == 0xFFFF) {
         Value = ML_IntEnable;
     }
     return Value;
 }
 
 internal u32
-GetLabelAddress(i32 Offset, u16 BankNumber)
-{
+GetLabelAddress(i32 Offset, u16 BankNumber) {
     i32 Value = 0;
-    if (Offset >= 0x4000 && Offset < 0x8000 && BankNumber > 0)
-    {
+    if (Offset >= 0x4000 && Offset < 0x8000 && BankNumber > 0) {
         Value = (BankNumber * 0x4000) + (Offset - 0x4000);
     }
-    else
-    {
+    else {
         Value = Offset;
     }
     return Value;
 }
 
 internal char *
-GetAddressStrValue(u16 Address, u16 BankNum)
-{
+GetAddressStrValue(u16 Address, u16 BankNum) {
     local_persist char Format[64];
     char *Value = 0;
 
-    if (Address == 0xff00)
-    {
+    if (Address == 0xff00) {
         Value = "rJOYP";
     }
-    else if (Address == 0xff01)
-    {
+    else if (Address == 0xff01) {
         Value = "rSB";
     }
-    else if (Address == 0xff02)
-    {
+    else if (Address == 0xff02) {
         Value = "rSC";
     }
-    else if (Address == 0xff04)
-    {
+    else if (Address == 0xff04) {
         Value = "rDIV";
     }
-    else if (Address == 0xff05)
-    {
+    else if (Address == 0xff05) {
         Value = "rTIMA";
     }
-    else if (Address == 0xff06)
-    {
+    else if (Address == 0xff06) {
         Value = "rTMA";
     }
-    else if (Address == 0xff07)
-    {
+    else if (Address == 0xff07) {
         Value = "rTAC";
     }
-    else if (Address == 0xff0f)
-    {
+    else if (Address == 0xff0f) {
         Value = "rIF";
     }
-    else if (Address == 0xff10)
-    {
+    else if (Address == 0xff10) {
         Value = "rNR10";
     }
-    else if (Address == 0xff11)
-    {
+    else if (Address == 0xff11) {
         Value = "rNR11";
     }
-    else if (Address == 0xff12)
-    {
+    else if (Address == 0xff12) {
         Value = "rNR12";
     }
-    else if (Address == 0xff13)
-    {
+    else if (Address == 0xff13) {
         Value = "rNR13";
     }
-    else if (Address == 0xff14)
-    {
+    else if (Address == 0xff14) {
         Value = "rNR14";
     }
-    else if (Address == 0xff16)
-    {
+    else if (Address == 0xff16) {
         Value = "rNR21";
     }
-    else if (Address == 0xff17)
-    {
+    else if (Address == 0xff17) {
         Value = "rNR22";
     }
-    else if (Address == 0xff18)
-    {
+    else if (Address == 0xff18) {
         Value = "rNR23";
     }
-    else if (Address == 0xff19)
-    {
+    else if (Address == 0xff19) {
         Value = "rNR24";
     }
-    else if (Address == 0xff1a )
-    {
+    else if (Address == 0xff1a) {
         Value = "rNR30";
     }
-    else if (Address == 0xff1b )
-    {
+    else if (Address == 0xff1b) {
         Value = "rNR31";
     }
-    else if (Address == 0xff1c )
-    {
+    else if (Address == 0xff1c) {
         Value = "rNR32";
     }
-    else if (Address == 0xff1d )
-    {
+    else if (Address == 0xff1d) {
         Value = "rNR33";
     }
-    else if (Address == 0xff1e )
-    {
+    else if (Address == 0xff1e) {
         Value = "rNR34";
     }
-    else if (Address == 0xff20 )
-    {
+    else if (Address == 0xff20) {
         Value = "rNR41";
     }
-    else if (Address == 0xff21 )
-    {
+    else if (Address == 0xff21) {
         Value = "rNR42";
     }
-    else if (Address == 0xff22 )
-    {
+    else if (Address == 0xff22) {
         Value = "rNR43";
     }
-    else if (Address == 0xff23 )
-    {
+    else if (Address == 0xff23) {
         Value = "rNR44";
     }
-    else if (Address == 0xff24 )
-    {
+    else if (Address == 0xff24) {
         Value = "rNR50";
     }
-    else if (Address == 0xff25 )
-    {
+    else if (Address == 0xff25) {
         Value = "rNR51";
     }
-    else if (Address == 0xff26 )
-    {
+    else if (Address == 0xff26) {
         Value = "rNR52";
     }
-    else if (Address == 0xff40 )
-    {
+    else if (Address == 0xff40) {
         Value = "rLCDC";
     }
-    else if (Address == 0xff41 )
-    {
+    else if (Address == 0xff41) {
         Value = "rSTAT";
     }
-    else if (Address == 0xff42)
-    {
+    else if (Address == 0xff42) {
         Value = "rSCY";
     }
-    else if (Address == 0xff43 )
-    {
+    else if (Address == 0xff43) {
         Value = "rSCX";
     }
-    else if (Address == 0xff44 )
-    {
+    else if (Address == 0xff44) {
         Value = "rLY";
     }
-    else if (Address == 0xff45 )
-    {
+    else if (Address == 0xff45) {
         Value = "rLYC";
     }
-    else if (Address == 0xff46 )
-    {
+    else if (Address == 0xff46) {
         Value = "rDMA";
     }
-    else if (Address == 0xff47 )
-    {
+    else if (Address == 0xff47) {
         Value = "rBGP";
     }
-    else if (Address == 0xff48 )
-    {
+    else if (Address == 0xff48) {
         Value = "rOBP0";
     }
-    else if (Address == 0xff49 )
-    {
+    else if (Address == 0xff49) {
         Value = "rOBP1";
     }
-    else if (Address == 0xff4a )
-    {
+    else if (Address == 0xff4a) {
         Value = "rWY";
     }
-    else if (Address == 0xff4b )
-    {
+    else if (Address == 0xff4b) {
         Value = "rWX";
     }
-    else if (Address == 0xff4d )
-    {
+    else if (Address == 0xff4d) {
         Value = "rKEY1";
     }
-    else if (Address == 0xff4f )
-    {
+    else if (Address == 0xff4f) {
         Value = "rVBK";
     }
-    else if (Address == 0xff51 )
-    {
+    else if (Address == 0xff51) {
         Value = "rHDMA1";
     }
-    else if (Address == 0xff52 )
-    {
+    else if (Address == 0xff52) {
         Value = "rHDMA2";
     }
-    else if (Address == 0xff53 )
-    {
+    else if (Address == 0xff53) {
         Value = "rHDMA3";
     }
-    else if (Address == 0xff54 )
-    {
+    else if (Address == 0xff54) {
         Value = "rHDMA4";
     }
-    else if (Address == 0xff55 )
-    {
+    else if (Address == 0xff55) {
         Value = "rHDMA5";
     }
-    else if (Address == 0xff56 )
-    {
+    else if (Address == 0xff56) {
         Value = "rRP";
     }
-    else if (Address == 0xff68 )
-    {
+    else if (Address == 0xff68) {
         Value = "rBGPI";
     }
-    else if (Address == 0xff69 )
-    {
+    else if (Address == 0xff69) {
         Value = "rBGPD";
     }
-    else if (Address == 0xff6a )
-    {
+    else if (Address == 0xff6a) {
         Value = "rOBPI";
     }
-    else if (Address == 0xff6b )
-    {
+    else if (Address == 0xff6b) {
         Value = "rOBPD";
     }
-    else if (Address == 0xff6c )
-    {
+    else if (Address == 0xff6c) {
         Value = "rUNKN1";
     }
-    else if (Address == 0xff70 )
-    {
+    else if (Address == 0xff70) {
         Value = "rSVBK";
     }
-    else if (Address == 0xff72 )
-    {
+    else if (Address == 0xff72) {
         Value = "rUNKN2";
     }
-    else if (Address == 0xff73 )
-    {
+    else if (Address == 0xff73) {
         Value = "rUNKN3";
     }
-    else if (Address == 0xff74 )
-    {
+    else if (Address == 0xff74) {
         Value = "rUNKN4";
     }
-    else if (Address == 0xff75 )
-    {
+    else if (Address == 0xff75) {
         Value = "rUNKN5";
     }
-    else if (Address == 0xff76 )
-    {
+    else if (Address == 0xff76) {
         Value = "rUNKN6";
     }
-    else if (Address == 0xff77 )
-    {
+    else if (Address == 0xff77) {
         Value = "rUNKN7";
     }
-    else if (Address == 0xffff )
-    {
+    else if (Address == 0xffff) {
         Value = "rIE";
     }
-    else if (Address >= 0x8000)
-    {
+    else if (Address >= 0x8000) {
         Value = 0;
     }
-    else
-    {
-        for (i32 i = 0; i < NumberOfLabels; ++i)
-        {
-            if (Labels[i].Label == Address)
-            {
+    else {
+        for (i32 i = 0; i < NumberOfLabels; ++i) {
+            if (Labels[i].Label == Address) {
                 sprintf(Format, "label_%X", GetLabelAddress(Address, BankNum));
                 Value = Format;
                 break;
@@ -932,12 +844,10 @@ GetAddressStrValue(u16 Address, u16 BankNum)
 }
 
 internal void
-AddLabel(u16 Offset, u16 Label, b32 IsFunction)
-{
+AddLabel(u16 Offset, u16 Label, b32 IsFunction) {
     Assert(NumberOfLabels < LABEL_COUNT);
 
-    if (Offset >= 0x150 && Label >= 0x150)
-    {
+    if (Offset >= 0x150 && Label >= 0x150) {
         Labels[NumberOfLabels].Offset = Offset;
         Labels[NumberOfLabels].Label = Label;
         Labels[NumberOfLabels].MemoryLocation = GetMemoryLocation(Label);
@@ -947,22 +857,18 @@ AddLabel(u16 Offset, u16 Label, b32 IsFunction)
 }
 
 internal b32
-IsWithinValidLabelRange(u16 Address)
-{
+IsWithinValidLabelRange(u16 Address) {
     b32 Result = Address >= 0 && Address < 0x8000;
     return Result;
 }
 
 internal b32
-LabelIsDefined(u16 Label)
-{
+LabelIsDefined(u16 Label) {
     i32 i;
     b32 Result = 0;
 
-    for (i = 0; i < NumberOfLabels; ++i)
-    {
-        if (Labels[i].Label == Label)
-        {
+    for (i = 0; i < NumberOfLabels; ++i) {
+        if (Labels[i].Label == Label) {
             Result = 1;
             break;
         }
@@ -971,16 +877,14 @@ LabelIsDefined(u16 Label)
 }
 
 internal u32
-GetAddressFromRomBankNumber(u16 Number)
-{
+GetAddressFromRomBankNumber(u16 Number) {
     u32 Value = Number * 0x4000;
     return Value;
 }
 
 global_variable u8 DataToDisassemble[0x8000];
 
-typedef struct
-{
+typedef struct {
     i32 Offset;
 } disassembly_location;
 
@@ -988,24 +892,20 @@ global_variable disassembly_location DisassemblyLocations[1024 * 1024];
 global_variable i32 DisassemblyLocationCount;
 
 internal void
-AddDisassemblyLocation(i32 Offset)
-{
+AddDisassemblyLocation(i32 Offset) {
     DisassemblyLocations[DisassemblyLocationCount].Offset = Offset;
     ++DisassemblyLocationCount;
 }
 
 internal int
-CompareDisassemblyLocation(const void *A, const void *B)
-{
+CompareDisassemblyLocation(const void *A, const void *B) {
     disassembly_location *LocA = (disassembly_location *)A;
     disassembly_location *LocB = (disassembly_location *)B;
 
-    if (LocA->Offset > LocB->Offset)
-    {
+    if (LocA->Offset > LocB->Offset) {
         return 1;
     }
-    if (LocA->Offset < LocB->Offset)
-    {
+    if (LocA->Offset < LocB->Offset) {
         return -1;
     }
 
@@ -1014,15 +914,13 @@ CompareDisassemblyLocation(const void *A, const void *B)
 
 
 internal void
-DisassembleBank(u16 BankNum)
-{
+DisassembleBank(u16 BankNum) {
     u32 RomPosition;
     u32 StartPosition = GetAddressFromRomBankNumber(BankNum);
     u32 CopyFrom = StartPosition;
 
     // NOTE: We are disasembling as if we are actually in the rom bank
-    if (StartPosition >= 0x8000)
-    {
+    if (StartPosition >= 0x8000) {
         StartPosition = 0x4000;
     }
 
@@ -1034,45 +932,38 @@ DisassembleBank(u16 BankNum)
     memset(Labels, 0, sizeof(Labels));
 
     // First pass
-    for (RomPosition = StartPosition; RomPosition < StartPosition + 0x4000; )
-    {
+    for (RomPosition = StartPosition; RomPosition < StartPosition + 0x4000; ) {
         u8 Instruction = DataToDisassemble[RomPosition];
         instruction Ins = InstructionTable[Instruction];
         u16 NN = DataToDisassemble[RomPosition + 1] | (DataToDisassemble[RomPosition + 2] << 8);
         u8 N = DataToDisassemble[RomPosition + 1];
         b32 IsFunction = 0;
 
-        if (Ins.Size == 1)
-        {
+        if (Ins.Size == 1) {
         }
-        else if (Ins.Size == 2)
-        {
+        else if (Ins.Size == 2) {
             // taking care of the jr <relative> instructions
             if (Instruction == 0x18 ||
                 Instruction == 0x20 ||
                 Instruction == 0x28 ||
                 Instruction == 0x30 ||
-                Instruction == 0x38)
-            {
+                Instruction == 0x38) {
                 i8 JmpLoc = (i8)N;
                 i16 LabelLoc = (i16)RomPosition + JmpLoc + 2;
                 AddLabel((u16)RomPosition, (u16)LabelLoc, IsFunction);
             }
         }
-        else if (Ins.Size == 3)
-        {
+        else if (Ins.Size == 3) {
             if (Instruction == 0xC4 || // call nz, $NN
                 Instruction == 0xCC || // call z, $NN
                 Instruction == 0xCD || // call $NN
                 Instruction == 0xD4 || // call nc, $NN
-                Instruction == 0xDC)   // call c, $NN
-            {
+                Instruction == 0xDC) { // call c, $NN
                 IsFunction = 1;
                 AddDisassemblyLocation(RomPosition);
             }
 
-            if (!LabelIsDefined(NN))
-            {
+            if (!LabelIsDefined(NN)) {
                 AddLabel((u16)RomPosition, NN, IsFunction);
             }
         }
@@ -1085,17 +976,14 @@ DisassembleBank(u16 BankNum)
     fprintf(Output, "section \"bank%d\",romx,bank[$%02X]\n", BankNum, BankNum);
 
     // disassembly pass
-    for (RomPosition = StartPosition; RomPosition < StartPosition + 0x4000; )
-    {
+    for (RomPosition = StartPosition; RomPosition < StartPosition + 0x4000; ) {
         u8 Instruction = DataToDisassemble[RomPosition];
         instruction Ins = InstructionTable[Instruction];
         u16 NN = DataToDisassemble[RomPosition + 1] | (DataToDisassemble[RomPosition + 2] << 8);
         u8 N = DataToDisassemble[RomPosition + 1];
 
-        for (i32 i = 0; i < NumberOfLabels; ++i)
-        {
-            if (Labels[i].Label == RomPosition)
-            {
+        for (i32 i = 0; i < NumberOfLabels; ++i) {
+            if (Labels[i].Label == RomPosition) {
                 fprintf(Output, "\nlabel_%X::\n", GetLabelAddress(RomPosition, BankNum));
                 break;
             }
@@ -1107,1366 +995,1091 @@ DisassembleBank(u16 BankNum)
         // For debugging, output offsets
         //fprintf(Output, "ROM_%04X: ", RomPosition);
 
-        switch (Instruction)
-        {
-            case 0x00:
-            {
+        switch (Instruction) {
+            case 0x00: {
                 fprintf(Output, "nop\n");
                 break;
             }
-            case 0x01:
-            {
+            case 0x01: {
                 char *Value = GetAddressStrValue(NN, BankNum);
-                if (Value)
-                {
+                if (Value) {
                     fprintf(Output, "ld   bc, %s\n", Value);
                 }
-                else
-                {
+                else {
                     fprintf(Output, "ld   bc, $%04X\n", NN);
                 }
                 break;
             }
-            case 0x02:
-            {
+            case 0x02: {
                 fprintf(Output, "ld   [bc], a\n");
                 break;
             }
-            case 0x03:
-            {
+            case 0x03: {
                 fprintf(Output, "inc  bc\n");
                 break;
             }
-            case 0x04:
-            {
+            case 0x04: {
                 fprintf(Output, "inc  b\n");
                 break;
             }
-            case 0x05:
-            {
+            case 0x05: {
                 fprintf(Output, "dec  b\n");
                 break;
             }
-            case 0x06:
-            {
+            case 0x06: {
                 fprintf(Output, "ld   b, $%02X\n", N);
                 break;
             }
-            case 0x07:
-            {
+            case 0x07: {
                 fprintf(Output, "rlca\n");
                 break;
             }
-            case 0x08:
-            {
+            case 0x08: {
                 char *Value = GetAddressStrValue(NN, BankNum);
-                if (Value)
-                {
+                if (Value) {
                     fprintf(Output, "ld   [%s], sp\n", Value);
                 }
-                else
-                {
+                else {
                     fprintf(Output, "ld   [$%04X], sp\n", NN);
                 }
                 break;
             }
-            case 0x09:
-            {
+            case 0x09: {
                 fprintf(Output, "add  hl, bc\n");
                 break;
             }
-            case 0x0A:
-            {
+            case 0x0A: {
                 fprintf(Output, "ld   a, [bc]\n");
                 break;
             }
-            case 0x0B:
-            {
+            case 0x0B: {
                 fprintf(Output, "dec  bc\n");
                 break;
             }
-            case 0x0C:
-            {
+            case 0x0C: {
                 fprintf(Output, "inc  c\n");
                 break;
             }
-            case 0x0D:
-            {
+            case 0x0D: {
                 fprintf(Output, "dec  c\n");
                 break;
             }
-            case 0x0E:
-            {
+            case 0x0E: {
                 fprintf(Output, "ld   c, $%02X\n", N);
                 break;
             }
-            case 0x0F:
-            {
+            case 0x0F: {
                 fprintf(Output, "rrca\n");
                 break;
             }
-            case 0x10:
-            {
-                if (N == 0)
-                {
+            case 0x10: {
+                if (N == 0) {
                     fprintf(Output, "stop\n");
                 }
-                else
-                {
+                else {
                     fprintf(Output, "db   $10 ; Undefined instruction\n");
                 }
                 break;
             }
-            case 0x11:
-            {
+            case 0x11: {
                 char *Value = GetAddressStrValue(NN, BankNum);
-                if (Value)
-                {
+                if (Value) {
                     fprintf(Output, "ld   de, %s\n", Value);
                 }
-                else
-                {
+                else {
                     fprintf(Output, "ld   de, $%04X\n", NN);
                 }
                 break;
             }
-            case 0x12:
-            {
+            case 0x12: {
                 fprintf(Output, "ld   [de], a\n");
                 break;
             }
-            case 0x13:
-            {
+            case 0x13: {
                 fprintf(Output, "inc  de\n");
                 break;
             }
-            case 0x14:
-            {
+            case 0x14: {
                 fprintf(Output, "inc  d\n");
                 break;
             }
-            case 0x15:
-            {
+            case 0x15: {
                 fprintf(Output, "dec  d\n");
                 break;
             }
-            case 0x16:
-            {
+            case 0x16: {
                 fprintf(Output, "ld   d, $%02X\n", N);
                 break;
             }
-            case 0x17:
-            {
+            case 0x17: {
                 fprintf(Output, "rla\n");
                 break;
             }
-            case 0x18:
-            {
+            case 0x18: {
                 i8 JmpLoc = (i8)N;
                 i16 LabelLoc = (i16)RomPosition + JmpLoc + 2;
                 fprintf(Output, "jr   label_%X\n", GetLabelAddress(LabelLoc, BankNum));
                 break;
             }
-            case 0x19:
-            {
+            case 0x19: {
                 fprintf(Output, "add  hl, de\n");
                 break;
             }
-            case 0x1A:
-            {
+            case 0x1A: {
                 fprintf(Output, "ld   a, [de]\n");
                 break;
             }
-            case 0x1B:
-            {
+            case 0x1B: {
                 fprintf(Output, "dec  de\n");
                 break;
             }
-            case 0x1C:
-            {
+            case 0x1C: {
                 fprintf(Output, "inc  e\n");
                 break;
             }
-            case 0x1D:
-            {
+            case 0x1D: {
                 fprintf(Output, "dec  e\n");
                 break;
             }
-            case 0x1E:
-            {
+            case 0x1E: {
                 fprintf(Output, "ld   e, $%02X\n", N);
                 break;
             }
-            case 0x1F:
-            {
+            case 0x1F: {
                 fprintf(Output, "rra\n");
                 break;
             }
-            case 0x20:
-            {
+            case 0x20: {
                 i8 JmpLoc = (i8)N;
                 i16 LabelLoc = (i16)RomPosition + JmpLoc + 2;
                 fprintf(Output, "jr   nz, label_%X\n", GetLabelAddress(LabelLoc, BankNum));
                 break;
             }
-            case 0x21:
-            {
+            case 0x21: {
                 char *Value = GetAddressStrValue(NN, BankNum);
-                if (Value)
-                {
+                if (Value) {
                     fprintf(Output, "ld   hl, %s\n", Value);
                 }
-                else
-                {
+                else {
                     fprintf(Output, "ld   hl, $%04X\n", NN);
                 }
                 break;
             }
-            case 0x22:
-            {
+            case 0x22: {
                 fprintf(Output, "ldi  [hl], a\n");
                 break;
             }
-            case 0x23:
-            {
+            case 0x23: {
                 fprintf(Output, "inc  hl\n");
                 break;
             }
-            case 0x24:
-            {
+            case 0x24: {
                 fprintf(Output, "inc  h\n");
                 break;
             }
-            case 0x25:
-            {
+            case 0x25: {
                 fprintf(Output, "dec  h\n");
                 break;
             }
-            case 0x26:
-            {
+            case 0x26: {
                 fprintf(Output, "ld   h, $%02X\n", N);
                 break;
             }
-            case 0x27:
-            {
+            case 0x27: {
                 fprintf(Output, "daa\n");
                 break;
             }
-            case 0x28:
-            {
+            case 0x28: {
                 i8 JmpLoc = (i8)N;
                 i16 LabelLoc = (i16)RomPosition + JmpLoc + 2;
                 fprintf(Output, "jr   z, label_%X\n", GetLabelAddress(LabelLoc, BankNum));
                 break;
             }
-            case 0x29:
-            {
+            case 0x29: {
                 fprintf(Output, "add  hl, hl\n");
                 break;
             }
-            case 0x2A:
-            {
+            case 0x2A: {
                 fprintf(Output, "ld   a, [hli]\n");
                 break;
             }
-            case 0x2B:
-            {
+            case 0x2B: {
                 fprintf(Output, "dec  hl\n");
                 break;
             }
-            case 0x2C:
-            {
+            case 0x2C: {
                 fprintf(Output, "inc  l\n");
                 break;
             }
-            case 0x2D:
-            {
+            case 0x2D: {
                 fprintf(Output, "dec  l\n");
                 break;
             }
-            case 0x2E:
-            {
+            case 0x2E: {
                 fprintf(Output, "ld   l, $%02X\n", N);
                 break;
             }
-            case 0x2F:
-            {
+            case 0x2F: {
                 fprintf(Output, "cpl\n");
                 break;
             }
-            case 0x30:
-            {
+            case 0x30: {
                 i8 JmpLoc = (i8)N;
                 i16 LabelLoc = (i16)RomPosition + JmpLoc + 2;
                 fprintf(Output, "jr   nc, label_%X\n", GetLabelAddress(LabelLoc, BankNum));
                 break;
             }
-            case 0x31:
-            {
+            case 0x31: {
                 char *Value = GetAddressStrValue(NN, BankNum);
-                if (Value)
-                {
+                if (Value) {
                     fprintf(Output, "ld   sp, %s\n", Value);
                 }
-                else
-                {
+                else {
                     fprintf(Output, "ld   sp, $%04X\n", NN);
                 }
                 break;
             }
-            case 0x32:
-            {
+            case 0x32: {
                 fprintf(Output, "ldd  [hl], a\n");
                 break;
             }
-            case 0x33:
-            {
+            case 0x33: {
                 fprintf(Output, "inc  sp\n");
                 break;
             }
-            case 0x34:
-            {
+            case 0x34: {
                 fprintf(Output, "inc  [hl]\n");
                 break;
             }
-            case 0x35:
-            {
+            case 0x35: {
                 fprintf(Output, "dec  [hl]\n");
                 break;
             }
-            case 0x36:
-            {
+            case 0x36: {
                 fprintf(Output, "ld   [hl], $%02X\n", N);
                 break;
             }
-            case 0x37:
-            {
+            case 0x37: {
                 fprintf(Output, "scf\n");
                 break;
             }
-            case 0x38:
-            {
+            case 0x38: {
                 i8 JmpLoc = (i8)N;
                 i16 LabelLoc = (i16)RomPosition + JmpLoc + 2;
                 fprintf(Output, "jr   c, label_%X\n", GetLabelAddress(LabelLoc, BankNum));
                 break;
             }
-            case 0x39:
-            {
+            case 0x39: {
                 fprintf(Output, "add  hl, sp\n");
                 break;
             }
-            case 0x3A:
-            {
+            case 0x3A: {
                 fprintf(Output, "db   $3A ; ldd  a, [hl]\n");
                 break;
             }
-            case 0x3B:
-            {
+            case 0x3B: {
                 fprintf(Output, "dec  sp\n");
                 break;
             }
-            case 0x3C:
-            {
+            case 0x3C: {
                 fprintf(Output, "inc  a\n");
                 break;
             }
-            case 0x3D:
-            {
+            case 0x3D: {
                 fprintf(Output, "dec  a\n");
                 break;
             }
-            case 0x3E:
-            {
+            case 0x3E: {
                 fprintf(Output, "ld   a, $%02X\n", N);
                 break;
             }
-            case 0x3F:
-            {
+            case 0x3F: {
                 fprintf(Output, "ccf\n");
                 break;
             }
-            case 0x40:
-            {
+            case 0x40: {
                 fprintf(Output, "ld   b, b\n");
                 break;
             }
-            case 0x41:
-            {
+            case 0x41: {
                 fprintf(Output, "ld   b, c\n");
                 break;
             }
-            case 0x42:
-            {
+            case 0x42: {
                 fprintf(Output, "ld   b, d\n");
                 break;
             }
-            case 0x43:
-            {
+            case 0x43: {
                 fprintf(Output, "ld   b, e\n");
                 break;
             }
-            case 0x44:
-            {
+            case 0x44: {
                 fprintf(Output, "ld   b, h\n");
                 break;
             }
-            case 0x45:
-            {
+            case 0x45: {
                 fprintf(Output, "ld   b, l\n");
                 break;
             }
-            case 0x46:
-            {
+            case 0x46: {
                 fprintf(Output, "ld   b, [hl]\n");
                 break;
             }
-            case 0x47:
-            {
+            case 0x47: {
                 fprintf(Output, "ld   b, a\n");
                 break;
             }
-            case 0x48:
-            {
+            case 0x48: {
                 fprintf(Output, "ld   c, b\n");
                 break;
             }
-            case 0x49:
-            {
+            case 0x49: {
                 fprintf(Output, "ld   c, c\n");
                 break;
             }
-            case 0x4A:
-            {
+            case 0x4A: {
                 fprintf(Output, "ld   c, d\n");
                 break;
             }
-            case 0x4B:
-            {
+            case 0x4B: {
                 fprintf(Output, "ld   c, e\n");
                 break;
             }
-            case 0x4C:
-            {
+            case 0x4C: {
                 fprintf(Output, "ld   c, h\n");
                 break;
             }
-            case 0x4D:
-            {
+            case 0x4D: {
                 fprintf(Output, "ld   c, l\n");
                 break;
             }
-            case 0x4E:
-            {
+            case 0x4E: {
                 fprintf(Output, "ld   c, [hl]\n");
                 break;
             }
-            case 0x4F:
-            {
+            case 0x4F: {
                 fprintf(Output, "ld   c, a\n");
                 break;
             }
-            case 0x50:
-            {
+            case 0x50: {
                 fprintf(Output, "ld   d, b\n");
                 break;
             }
-            case 0x51:
-            {
+            case 0x51: {
                 fprintf(Output, "ld   d, c\n");
                 break;
             }
-            case 0x52:
-            {
+            case 0x52: {
                 fprintf(Output, "ld   d, d\n");
                 break;
             }
-            case 0x53:
-            {
+            case 0x53: {
                 fprintf(Output, "ld   d, e\n");
                 break;
             }
-            case 0x54:
-            {
+            case 0x54: {
                 fprintf(Output, "ld   d, h\n");
                 break;
             }
-            case 0x55:
-            {
+            case 0x55: {
                 fprintf(Output, "ld   d, l\n");
                 break;
             }
-            case 0x56:
-            {
+            case 0x56: {
                 fprintf(Output, "ld   d, [hl]\n");
                 break;
             }
-            case 0x57:
-            {
+            case 0x57: {
                 fprintf(Output, "ld   d, a\n");
                 break;
             }
-            case 0x58:
-            {
+            case 0x58: {
                 fprintf(Output, "ld   e, b\n");
                 break;
             }
-            case 0x59:
-            {
+            case 0x59: {
                 fprintf(Output, "ld   e, c\n");
                 break;
             }
-            case 0x5A:
-            {
+            case 0x5A: {
                 fprintf(Output, "ld   e, d\n");
                 break;
             }
-            case 0x5B:
-            {
+            case 0x5B: {
                 fprintf(Output, "ld   e, e\n");
                 break;
             }
-            case 0x5C:
-            {
+            case 0x5C: {
                 fprintf(Output, "ld   e, h\n");
                 break;
             }
-            case 0x5D:
-            {
+            case 0x5D: {
                 fprintf(Output, "ld   e, l\n");
                 break;
             }
-            case 0x5E:
-            {
+            case 0x5E: {
                 fprintf(Output, "ld   e, [hl]\n");
                 break;
             }
-            case 0x5F:
-            {
+            case 0x5F: {
                 fprintf(Output, "ld   e, a\n");
                 break;
             }
-            case 0x60:
-            {
+            case 0x60: {
                 fprintf(Output, "ld   h, b\n");
                 break;
             }
-            case 0x61:
-            {
+            case 0x61: {
                 fprintf(Output, "ld   h, c\n");
                 break;
             }
-            case 0x62:
-            {
+            case 0x62: {
                 fprintf(Output, "ld   h, d\n");
                 break;
             }
-            case 0x63:
-            {
+            case 0x63: {
                 fprintf(Output, "ld   h, e\n");
                 break;
             }
-            case 0x64:
-            {
+            case 0x64: {
                 fprintf(Output, "ld   h, h\n");
                 break;
             }
-            case 0x65:
-            {
+            case 0x65: {
                 fprintf(Output, "ld   h, l\n");
                 break;
             }
-            case 0x66:
-            {
+            case 0x66: {
                 fprintf(Output, "ld   h, [hl]\n");
                 break;
             }
-            case 0x67:
-            {
+            case 0x67: {
                 fprintf(Output, "ld   h, a\n");
                 break;
             }
-            case 0x68:
-            {
+            case 0x68: {
                 fprintf(Output, "ld   l, b\n");
                 break;
             }
-            case 0x69:
-            {
+            case 0x69: {
                 fprintf(Output, "ld   l, c\n");
                 break;
             }
-            case 0x6A:
-            {
+            case 0x6A: {
                 fprintf(Output, "ld   l, d\n");
                 break;
             }
-            case 0x6B:
-            {
+            case 0x6B: {
                 fprintf(Output, "ld   l, e\n");
                 break;
             }
-            case 0x6C:
-            {
+            case 0x6C: {
                 fprintf(Output, "ld   l, h\n");
                 break;
             }
-            case 0x6D:
-            {
+            case 0x6D: {
                 fprintf(Output, "ld   l, l\n");
                 break;
             }
-            case 0x6E:
-            {
+            case 0x6E: {
                 fprintf(Output, "ld   l, [hl]\n");
                 break;
             }
-            case 0x6F:
-            {
+            case 0x6F: {
                 fprintf(Output, "ld   l, a\n");
                 break;
             }
-            case 0x70:
-            {
+            case 0x70: {
                 fprintf(Output, "ld   [hl], b\n");
                 break;
             }
-            case 0x71:
-            {
+            case 0x71: {
                 fprintf(Output, "ld   [hl], c\n");
                 break;
             }
-            case 0x72:
-            {
+            case 0x72: {
                 fprintf(Output, "ld   [hl], d\n");
                 break;
             }
-            case 0x73:
-            {
+            case 0x73: {
                 fprintf(Output, "ld   [hl], e\n");
                 break;
             }
-            case 0x74:
-            {
+            case 0x74: {
                 fprintf(Output, "ld   [hl], h\n");
                 break;
             }
-            case 0x75:
-            {
+            case 0x75: {
                 fprintf(Output, "ld   [hl], l\n");
                 break;
             }
-            case 0x76:
-            {
+            case 0x76: {
                 fprintf(Output, "halt\n");
                 break;
             }
-            case 0x77:
-            {
+            case 0x77: {
                 fprintf(Output, "ld   [hl], a\n");
                 break;
             }
-            case 0x78:
-            {
+            case 0x78: {
                 fprintf(Output, "ld   a, b\n");
                 break;
             }
-            case 0x79:
-            {
+            case 0x79: {
                 fprintf(Output, "ld   a, c\n");
                 break;
             }
-            case 0x7A:
-            {
+            case 0x7A: {
                 fprintf(Output, "ld   a, d\n");
                 break;
             }
-            case 0x7B:
-            {
+            case 0x7B: {
                 fprintf(Output, "ld   a, e\n");
                 break;
             }
-            case 0x7C:
-            {
+            case 0x7C: {
                 fprintf(Output, "ld   a, h\n");
                 break;
             }
-            case 0x7D:
-            {
+            case 0x7D: {
                 fprintf(Output, "ld   a, l\n");
                 break;
             }
-            case 0x7E:
-            {
+            case 0x7E: {
                 fprintf(Output, "ld   a, [hl]\n");
                 break;
             }
-            case 0x7F:
-            {
+            case 0x7F: {
                 fprintf(Output, "ld   a, a\n");
                 break;
             }
-            case 0x80:
-            {
+            case 0x80: {
                 fprintf(Output, "add  a, b\n");
                 break;
             }
-            case 0x81:
-            {
+            case 0x81: {
                 fprintf(Output, "add  a, c\n");
                 break;
             }
-            case 0x82:
-            {
+            case 0x82: {
                 fprintf(Output, "add  a, d\n");
                 break;
             }
-            case 0x83:
-            {
+            case 0x83: {
                 fprintf(Output, "add  a, e\n");
                 break;
             }
-            case 0x84:
-            {
+            case 0x84: {
                 fprintf(Output, "add  a, h\n");
                 break;
             }
-            case 0x85:
-            {
+            case 0x85: {
                 fprintf(Output, "add  a, l\n");
                 break;
             }
-            case 0x86:
-            {
+            case 0x86: {
                 fprintf(Output, "add  a, [hl]\n");
                 break;
             }
-            case 0x87:
-            {
+            case 0x87: {
                 fprintf(Output, "add  a, a\n");
                 break;
             }
-            case 0x88:
-            {
+            case 0x88: {
                 fprintf(Output, "adc  a, b\n");
                 break;
             }
-            case 0x89:
-            {
+            case 0x89: {
                 fprintf(Output, "adc  a, c\n");
                 break;
             }
-            case 0x8A:
-            {
+            case 0x8A: {
                 fprintf(Output, "adc  a, d\n");
                 break;
             }
-            case 0x8B:
-            {
+            case 0x8B: {
                 fprintf(Output, "adc  a, e\n");
                 break;
             }
-            case 0x8C:
-            {
+            case 0x8C: {
                 fprintf(Output, "adc  a, h\n");
                 break;
             }
-            case 0x8D:
-            {
+            case 0x8D: {
                 fprintf(Output, "adc  a, l\n");
                 break;
             }
-            case 0x8E:
-            {
+            case 0x8E: {
                 fprintf(Output, "adc  a, [hl]\n");
                 break;
             }
-            case 0x8F:
-            {
+            case 0x8F: {
                 fprintf(Output, "adc  a, a\n");
                 break;
             }
-            case 0x90:
-            {
+            case 0x90: {
                 fprintf(Output, "sub  a, b\n");
                 break;
             }
-            case 0x91:
-            {
+            case 0x91: {
                 fprintf(Output, "sub  a, c\n");
                 break;
             }
-            case 0x92:
-            {
+            case 0x92: {
                 fprintf(Output, "sub  a, d\n");
                 break;
             }
-            case 0x93:
-            {
+            case 0x93: {
                 fprintf(Output, "sub  a, e\n");
                 break;
             }
-            case 0x94:
-            {
+            case 0x94: {
                 fprintf(Output, "sub  a, h\n");
                 break;
             }
-            case 0x95:
-            {
+            case 0x95: {
                 fprintf(Output, "sub  a, l\n");
                 break;
             }
-            case 0x96:
-            {
+            case 0x96: {
                 fprintf(Output, "sub  a, [hl]\n");
                 break;
             }
-            case 0x97:
-            {
+            case 0x97: {
                 fprintf(Output, "sub  a, a\n");
                 break;
             }
-            case 0x98:
-            {
+            case 0x98: {
                 fprintf(Output, "sbc  a, b\n");
                 break;
             }
-            case 0x99:
-            {
+            case 0x99: {
                 fprintf(Output, "sbc  a, c\n");
                 break;
             }
-            case 0x9A:
-            {
+            case 0x9A: {
                 fprintf(Output, "sbc  a, d\n");
                 break;
             }
-            case 0x9B:
-            {
+            case 0x9B: {
                 fprintf(Output, "sbc  a, e\n");
                 break;
             }
-            case 0x9C:
-            {
+            case 0x9C: {
                 fprintf(Output, "sbc  a, h\n");
                 break;
             }
-            case 0x9D:
-            {
+            case 0x9D: {
                 fprintf(Output, "sbc  a, l\n");
                 break;
             }
-            case 0x9E:
-            {
+            case 0x9E: {
                 fprintf(Output, "sbc  a, [hl]\n");
                 break;
             }
-            case 0x9F:
-            {
+            case 0x9F: {
                 fprintf(Output, "sbc  a, a\n");
                 break;
             }
-            case 0xA0:
-            {
+            case 0xA0: {
                 fprintf(Output, "and  b\n");
                 break;
             }
-            case 0xA1:
-            {
+            case 0xA1: {
                 fprintf(Output, "and  c\n");
                 break;
             }
-            case 0xA2:
-            {
+            case 0xA2: {
                 fprintf(Output, "and  d\n");
                 break;
             }
-            case 0xA3:
-            {
+            case 0xA3: {
                 fprintf(Output, "and  e\n");
                 break;
             }
-            case 0xA4:
-            {
+            case 0xA4: {
                 fprintf(Output, "and  h\n");
                 break;
             }
-            case 0xA5:
-            {
+            case 0xA5: {
                 fprintf(Output, "and  l\n");
                 break;
             }
-            case 0xA6:
-            {
+            case 0xA6: {
                 fprintf(Output, "and  [hl]\n");
                 break;
             }
-            case 0xA7:
-            {
+            case 0xA7: {
                 fprintf(Output, "and  a\n");
                 break;
             }
-            case 0xA8:
-            {
+            case 0xA8: {
                 fprintf(Output, "xor  b\n");
                 break;
             }
-            case 0xA9:
-            {
+            case 0xA9: {
                 fprintf(Output, "xor  c\n");
                 break;
             }
-            case 0xAA:
-            {
+            case 0xAA: {
                 fprintf(Output, "xor  d\n");
                 break;
             }
-            case 0xAB:
-            {
+            case 0xAB: {
                 fprintf(Output, "xor  e\n");
                 break;
             }
-            case 0xAC:
-            {
+            case 0xAC: {
                 fprintf(Output, "xor  h\n");
                 break;
             }
-            case 0xAD:
-            {
+            case 0xAD: {
                 fprintf(Output, "xor  l\n");
                 break;
             }
-            case 0xAE:
-            {
+            case 0xAE: {
                 fprintf(Output, "xor  [hl]\n");
                 break;
             }
-            case 0xAF:
-            {
+            case 0xAF: {
                 fprintf(Output, "xor  a\n");
                 break;
             }
-            case 0xB0:
-            {
+            case 0xB0: {
                 fprintf(Output, "or   b\n");
                 break;
             }
-            case 0xB1:
-            {
+            case 0xB1: {
                 fprintf(Output, "or   c\n");
                 break;
             }
-            case 0xB2:
-            {
+            case 0xB2: {
                 fprintf(Output, "or   d\n");
                 break;
             }
-            case 0xB3:
-            {
+            case 0xB3: {
                 fprintf(Output, "or   e\n");
                 break;
             }
-            case 0xB4:
-            {
+            case 0xB4: {
                 fprintf(Output, "or   h\n");
                 break;
             }
-            case 0xB5:
-            {
+            case 0xB5: {
                 fprintf(Output, "or   l\n");
                 break;
             }
-            case 0xB6:
-            {
+            case 0xB6: {
                 fprintf(Output, "or   [hl]\n");
                 break;
             }
-            case 0xB7:
-            {
+            case 0xB7: {
                 fprintf(Output, "or   a\n");
                 break;
             }
-            case 0xB8:
-            {
+            case 0xB8: {
                 fprintf(Output, "cp   b\n");
                 break;
             }
-            case 0xB9:
-            {
+            case 0xB9: {
                 fprintf(Output, "cp   c\n");
                 break;
             }
-            case 0xBA:
-            {
+            case 0xBA: {
                 fprintf(Output, "cp   d\n");
                 break;
             }
-            case 0xBB:
-            {
+            case 0xBB: {
                 fprintf(Output, "cp   e\n");
                 break;
             }
-            case 0xBC:
-            {
+            case 0xBC: {
                 fprintf(Output, "cp   h\n");
                 break;
             }
-            case 0xBD:
-            {
+            case 0xBD: {
                 fprintf(Output, "cp   l\n");
                 break;
             }
-            case 0xBE:
-            {
+            case 0xBE: {
                 fprintf(Output, "cp   [hl]\n");
                 break;
             }
-            case 0xBF:
-            {
+            case 0xBF: {
                 fprintf(Output, "cp   a\n");
                 break;
             }
-            case 0xC0:
-            {
+            case 0xC0: {
                 fprintf(Output, "ret  nz\n");
                 break;
             }
-            case 0xC1:
-            {
+            case 0xC1: {
                 fprintf(Output, "pop  bc\n");
                 break;
             }
-            case 0xC2:
-            {
+            case 0xC2: {
                 fprintf(Output, "jp   nz, label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xC3:
-            {
+            case 0xC3: {
                 fprintf(Output, "jp   label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xC4:
-            {
+            case 0xC4: {
                 fprintf(Output, "call nz, label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xC5:
-            {
+            case 0xC5: {
                 fprintf(Output, "push bc\n");
                 break;
             }
-            case 0xC6:
-            {
+            case 0xC6: {
                 fprintf(Output, "add  a, $%02X\n", N);
                 break;
             }
-            case 0xC7:
-            {
+            case 0xC7: {
                 fprintf(Output, "rst  0\n");
                 break;
             }
-            case 0xC8:
-            {
+            case 0xC8: {
                 fprintf(Output, "ret  z\n");
                 break;
             }
-            case 0xC9:
-            {
+            case 0xC9: {
                 fprintf(Output, "ret\n");
                 break;
             }
-            case 0xCA:
-            {
+            case 0xCA: {
                 fprintf(Output, "jp   z, label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xCB:
-            {
+            case 0xCB: {
                 fprintf(Output, "%s\n", AdditionalInstructions[N]);
                 break;
             }
-            case 0xCC:
-            {
+            case 0xCC: {
                 fprintf(Output, "call z, label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xCD:
-            {
+            case 0xCD: {
                 fprintf(Output, "call label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xCE:
-            {
+            case 0xCE: {
                 fprintf(Output, "adc  a, $%02X\n", N);
                 break;
             }
-            case 0xCF:
-            {
+            case 0xCF: {
                 fprintf(Output, "rst  8\n");
                 break;
             }
-            case 0xD0:
-            {
+            case 0xD0: {
                 fprintf(Output, "ret  nc\n");
                 break;
             }
-            case 0xD1:
-            {
+            case 0xD1: {
                 fprintf(Output, "pop  de\n");
                 break;
             }
-            case 0xD2:
-            {
+            case 0xD2: {
                 fprintf(Output, "jp   nc, label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xD3:
-            {
+            case 0xD3: {
                 fprintf(Output, "db   $D3 ; Undefined instruction\n");
                 break;
             }
-            case 0xD4:
-            {
+            case 0xD4: {
                 fprintf(Output, "call nc, label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xD5:
-            {
+            case 0xD5: {
                 fprintf(Output, "push de\n");
                 break;
             }
-            case 0xD6:
-            {
+            case 0xD6: {
                 fprintf(Output, "sub  a, $%02X\n", N);
                 break;
             }
-            case 0xD7:
-            {
+            case 0xD7: {
                 fprintf(Output, "rst  $10\n");
                 break;
             }
-            case 0xD8:
-            {
+            case 0xD8: {
                 fprintf(Output, "ret  c\n");
                 break;
             }
-            case 0xD9:
-            {
+            case 0xD9: {
                 fprintf(Output, "reti\n");
                 break;
             }
-            case 0xDA:
-            {
+            case 0xDA: {
                 fprintf(Output, "jp  c, label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xDB:
-            {
+            case 0xDB: {
                 fprintf(Output, "db   $DB\n");
                 break;
             }
-            case 0xDC:
-            {
+            case 0xDC: {
                 fprintf(Output, "call c, label_%X\n", GetLabelAddress(NN, BankNum));
                 break;
             }
-            case 0xDD:
-            {
+            case 0xDD: {
                 fprintf(Output, "db   $%02X\n", N);
                 break;
             }
-            case 0xDE:
-            {
+            case 0xDE: {
                 fprintf(Output, "sbc  a, $%02X\n", N);
                 break;
             }
-            case 0xDF:
-            {
+            case 0xDF: {
                 fprintf(Output, "rst  $18\n");
                 break;
             }
-            case 0xE0:
-            {
+            case 0xE0: {
                 char *Value = GetAddressStrValue(0xFF00 + N, BankNum);
-                if (Value)
-                {
+                if (Value) {
                     fprintf(Output, "ld   [%s], a\n", Value);
                 }
-                else
-                {
+                else {
                     fprintf(Output, "ld   [$FF%02X], a\n", N);
                 }
                 break;
             }
-            case 0xE1:
-            {
+            case 0xE1: {
                 fprintf(Output, "pop  hl\n");
                 break;
             }
-            case 0xE2:
-            {
+            case 0xE2: {
                 fprintf(Output, "ldh  [$FF0C], a\n");
                 break;
             }
-            case 0xE3:
-            {
+            case 0xE3: {
                 fprintf(Output, "db   $E3 ; Undefined instruction\n");
                 break;
             }
-            case 0xE4:
-            {
+            case 0xE4: {
                 fprintf(Output, "db   $E4 ; Undefined instruction\n");
                 break;
             }
-            case 0xE5:
-            {
+            case 0xE5: {
                 fprintf(Output, "push hl\n");
                 break;
             }
-            case 0xE6:
-            {
+            case 0xE6: {
                 fprintf(Output, "and  $%02X\n", N);
                 break;
             }
-            case 0xE7:
-            {
+            case 0xE7: {
                 fprintf(Output, "rst  $20\n");
                 break;
             }
-            case 0xE8:
-            {
+            case 0xE8: {
                 fprintf(Output, "db   $E8 ; add  sp, d\n");
                 break;
             }
-            case 0xE9:
-            {
+            case 0xE9: {
                 fprintf(Output, "jp   [hl]\n");
                 break;
             }
-            case 0xEA:
-            {
+            case 0xEA: {
                 char *Value = GetAddressStrValue(NN, BankNum);
-                if (Value)
-                {
+                if (Value) {
                     fprintf(Output, "ld   [%s], a\n", Value);
                 }
-                else
-                {
+                else {
                     fprintf(Output, "ld   [$%04X], a\n", NN);
                 }
                 break;
             }
-            case 0xEB:
-            {
+            case 0xEB: {
                 fprintf(Output, "db   $EB ; Undefined instruction\n");
                 break;
             }
-            case 0xEC:
-            {
+            case 0xEC: {
                 fprintf(Output, "db   $EC ; Undefined instruction\n");
                 break;
             }
-            case 0xED:
-            {
+            case 0xED: {
                 fprintf(Output, "db   $ED ; Undefined instruction\n");
                 break;
             }
-            case 0xEE:
-            {
+            case 0xEE: {
                 fprintf(Output, "xor  $%02X\n", N);
                 break;
             }
-            case 0xEF:
-            {
+            case 0xEF: {
                 fprintf(Output, "rst  $28\n");
                 break;
             }
-            case 0xF0:
-            {
+            case 0xF0: {
                 fprintf(Output, "ld   a, [$FF%02X]\n", N);
                 break;
             }
-            case 0xF1:
-            {
+            case 0xF1: {
                 fprintf(Output, "pop  af\n");
                 break;
             }
-            case 0xF2:
-            {
+            case 0xF2: {
                 fprintf(Output, "db   $F2 ; Undefined instruction\n");
                 break;
             }
-            case 0xF3:
-            {
+            case 0xF3: {
                 fprintf(Output, "di\n");
                 break;
             }
-            case 0xF4:
-            {
+            case 0xF4: {
                 fprintf(Output, "db   $F4 ; Undefined instruction\n");
                 break;
             }
-            case 0xF5:
-            {
+            case 0xF5: {
                 fprintf(Output, "push af\n");
                 break;
             }
-            case 0xF6:
-            {
+            case 0xF6: {
                 fprintf(Output, "or   $%02X\n", N);
                 break;
             }
-            case 0xF7:
-            {
+            case 0xF7: {
                 fprintf(Output, "rst  $30\n");
                 break;
             }
-            case 0xF8:
-            {
+            case 0xF8: {
                 fprintf(Output, "ld    hl, sp+$%02X\n", N);
                 break;
             }
-            case 0xF9:
-            {
+            case 0xF9: {
                 fprintf(Output, "ld   sp, hl\n");
                 break;
             }
-            case 0xFA:
-            {
+            case 0xFA: {
                 char *Value = GetAddressStrValue(NN, BankNum);
-                if (Value)
-                {
+                if (Value) {
                     fprintf(Output, "ld   a, [%s]\n", Value);
                 }
-                else
-                {
+                else {
                     fprintf(Output, "ld   a, [$%04X]\n", NN);
                 }
                 break;
             }
-            case 0xFB:
-            {
+            case 0xFB: {
                 fprintf(Output, "ei\n");
                 break;
             }
-            case 0xFC:
-            {
+            case 0xFC: {
                 fprintf(Output, "db   $FC ; Undefined instruction\n");
                 break;
             }
-            case 0xFD:
-            {
+            case 0xFD: {
                 fprintf(Output, "db   $FD ; Undefined instruction\n");
                 break;
             }
-            case 0xFE:
-            {
+            case 0xFE: {
                 fprintf(Output, "cp   $%02X\n", N);
                 break;
             }
-            case 0xFF:
-            {
+            case 0xFF: {
                 fprintf(Output, "rst  $38\n");
                 break;
             }
@@ -2477,20 +2090,16 @@ DisassembleBank(u16 BankNum)
 }
 
 int
-main(int argc, char **argv)
-{
-    if (argc > 1)
-    {
+main(int argc, char **argv) {
+    if (argc > 1) {
         FILE *f;
         f = fopen(argv[1], "rb");
-        if (f)
-        {
+        if (f) {
             fread(RomData, 1, 0x100000, f);
             fclose(f);
             Output = stdout;
 
-            for (u16 BankNum = 0; BankNum <= 60; ++BankNum)
-            {
+            for (u16 BankNum = 0; BankNum <= 60; ++BankNum) {
                 char Format[256];
                 sprintf(Format, "Bank%d.asm", BankNum);
                 FILE *f2 = fopen(Format, "wb");

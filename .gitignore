@@ -15,3 +15,7 @@
 *.swp
 src/bank-bins/*
 
+*.pdb
+*.exe
+*.ilk
+*.obj

@@ -18,6 +18,11 @@ typedef float    f32;
 typedef double   f64;
 typedef i32      b32;
 
+#ifndef __cplusplus
+#define true 1
+#define false 0
+#endif
+
 #define internal static
 #define local_persist static
 #define global_variable static
@@ -25,7 +30,9 @@ typedef i32      b32;
 #define Min(A, B) (A < B ? A : B)
 #define Max(A, B) (A > B ? A : B)
 
-#define Assert(x) if (!(x)) { fprintf(stderr, "Assert fired in file %s at line %d\nEval: (%s)\n", __FILE__, __LINE__, #x); *(int*)0 = 0; } 
+#define Assert(x) if (!(x)) { fprintf(stderr, "Assert fired in file %s at line %d\nEval: (%s)\n", __FILE__, __LINE__, #x); *(int*)0 = 0; }
+
+#define NUMBER_WITHIN_RANGE(x, l, h) (x >= l && x <= h)
 
 global_variable u8 RomData[0x100000];
 global_variable FILE *Output;
@@ -577,45 +584,45 @@ typedef struct {
     u32 MemoryLocation;
 } label;
 
-#define LABEL_COUNT 1024 * 1024
+#define MAX_LABEL_COUNT 1024 * 1024
 
-global_variable label Labels[LABEL_COUNT];
+global_variable label Labels[MAX_LABEL_COUNT];
 global_variable int NumberOfLabels;
 
 internal i32
 GetMemoryLocation(u16 Address) {
     i32 Value = ML_Undefined;
-    if (Address >= 0x000 && Address <= 0x3FFF) {
+    if (NUMBER_WITHIN_RANGE(Address, 0x000, 0x3FFF)) {
         Value = ML_16kbRomBank0;
     }
-    else if (Address >= 0x4000 && Address <= 0x7FFF) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0x4000, 0x7FFF)) {
         Value = ML_16kbRomBankSwitchable;
     }
-    else if (Address >= 0x8000 && Address <= 0x9FFF) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0x8000, 0x9FFF)) {
         Value = ML_8kbVRAM;
     }
-    else if (Address >= 0xA000 && Address <= 0xBFFF) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0xA000, 0xBFFF)) {
         Value = ML_8kbExternalRam;
     }
-    else if (Address >= 0xC000 && Address <= 0xDFFF) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0xC000, 0xDFFF)) {
         Value = ML_4kbWRAM_0;
     }
-    else if (Address >= 0xD000 && Address <= 0xDFFF) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0xD000, 0xDFFF)) {
         Value = ML_4kbWRAM_1;
     }
-    else if (Address >= 0xE000 && Address <= 0xFDFF) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0xE000, 0xFDFF)) {
         Value = ML_Echo_C000;
     }
-    else if (Address >= 0xFE00 && Address <= 0xFE9F) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0xFE00, 0xFE9F)) {
         Value = ML_OAM;
     }
-    else if (Address >= 0xFEA0 && Address <= 0xFEFF) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0xFEA0, 0xFEFF)) {
         Value = ML_NotUsable;
     }
-    else if (Address >= 0xFF00 && Address <= 0xFF7F) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0xFF00, 0xFF7F)) {
         Value = ML_IO;
     }
-    else if (Address >= 0xFF80 && Address <= 0xFFFE) {
+    else if (NUMBER_WITHIN_RANGE(Address, 0xFF80, 0xFFFE)) {
         Value = ML_HighRam;
     }
     else if (Address == 0xFFFF) {
@@ -845,7 +852,7 @@ GetAddressStrValue(u16 Address, u16 BankNum) {
 
 internal void
 AddLabel(u16 Offset, u16 Label, b32 IsFunction) {
-    Assert(NumberOfLabels < LABEL_COUNT);
+    Assert(NumberOfLabels < MAX_LABEL_COUNT);
 
     if (Offset >= 0x150 && Label >= 0x150) {
         Labels[NumberOfLabels].Offset = Offset;
@@ -863,13 +870,13 @@ IsWithinValidLabelRange(u16 Address) {
 }
 
 internal b32
-LabelIsDefined(u16 Label) {
+IsLabelDefined(u16 Label) {
     i32 i;
-    b32 Result = 0;
+    b32 Result = false;
 
     for (i = 0; i < NumberOfLabels; ++i) {
         if (Labels[i].Label == Label) {
-            Result = 1;
+            Result = true;
             break;
         }
     }
@@ -884,35 +891,6 @@ GetAddressFromRomBankNumber(u16 Number) {
 
 global_variable u8 DataToDisassemble[0x8000];
 
-typedef struct {
-    i32 Offset;
-} disassembly_location;
-
-global_variable disassembly_location DisassemblyLocations[1024 * 1024];
-global_variable i32 DisassemblyLocationCount;
-
-internal void
-AddDisassemblyLocation(i32 Offset) {
-    DisassemblyLocations[DisassemblyLocationCount].Offset = Offset;
-    ++DisassemblyLocationCount;
-}
-
-internal int
-CompareDisassemblyLocation(const void *A, const void *B) {
-    disassembly_location *LocA = (disassembly_location *)A;
-    disassembly_location *LocB = (disassembly_location *)B;
-
-    if (LocA->Offset > LocB->Offset) {
-        return 1;
-    }
-    if (LocA->Offset < LocB->Offset) {
-        return -1;
-    }
-
-    return 0;
-}
-
-
 internal void
 DisassembleBank(u16 BankNum) {
     u32 RomPosition;
@@ -926,8 +904,6 @@ DisassembleBank(u16 BankNum) {
 
     memcpy(DataToDisassemble + StartPosition, RomData + CopyFrom, 0x4000);
 
-    DisassemblyLocationCount = 0;
-    memset(DisassemblyLocations, 0, sizeof(DisassemblyLocations));
     NumberOfLabels = 0;
     memset(Labels, 0, sizeof(Labels));
 
@@ -937,7 +913,7 @@ DisassembleBank(u16 BankNum) {
         instruction Ins = InstructionTable[Instruction];
         u16 NN = DataToDisassemble[RomPosition + 1] | (DataToDisassemble[RomPosition + 2] << 8);
         u8 N = DataToDisassemble[RomPosition + 1];
-        b32 IsFunction = 0;
+        b32 IsFunction = false;
 
         if (Ins.Size == 1) {
         }
@@ -959,19 +935,16 @@ DisassembleBank(u16 BankNum) {
                 Instruction == 0xCD || // call $NN
                 Instruction == 0xD4 || // call nc, $NN
                 Instruction == 0xDC) { // call c, $NN
-                IsFunction = 1;
-                AddDisassemblyLocation(RomPosition);
+                IsFunction = true;
             }
 
-            if (!LabelIsDefined(NN)) {
+            if (!IsLabelDefined(NN)) {
                 AddLabel((u16)RomPosition, NN, IsFunction);
             }
         }
 
         RomPosition += Ins.Size;
     }
-
-    qsort(DisassemblyLocations, DisassemblyLocationCount, sizeof(disassembly_location), CompareDisassemblyLocation);
 
     fprintf(Output, "section \"bank%d\",romx,bank[$%02X]\n", BankNum, BankNum);
 

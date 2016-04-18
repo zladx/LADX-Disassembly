@@ -19,3 +19,5 @@ src/bank-bins/*
 *.exe
 *.ilk
 *.obj
+*.sln
+*.suo

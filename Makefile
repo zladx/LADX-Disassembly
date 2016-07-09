@@ -18,11 +18,17 @@ DumpBanks: src/tools/DumpBanks.c
 	gcc -o DumpBanks src/tools/DumpBanks.c
 	chmod +x DumpBanks
 
+src/bank-bins:
+	mkdir -p src/bank-bins
+
+src/bank-bins/bank_00_0.bin: src/bank-bins DumpBanks
+	cd src/bank-bins && ../DumpBanks ../Zelda.gbc
+
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.
 obj = src/main.o
 
-.asm.o:
+.asm.o: src/bank-bins/bank_00_0.bin
 	rgbasm -i src/ -o $@ $<
 
 # Then we link them to create a playable image.

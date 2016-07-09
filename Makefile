@@ -22,7 +22,7 @@ src/bank-bins:
 	mkdir -p src/bank-bins
 
 src/bank-bins/bank_00_0.bin: src/bank-bins DumpBanks
-	cd src/bank-bins && ../DumpBanks ../Zelda.gbc
+	cd src/bank-bins && ../../DumpBanks ../../Zelda.gbc
 
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.

@@ -14,6 +14,10 @@ clean: ;
 	@rm -f $(obj)
 	@rm -f game.{gbc,sym,map}
 
+DumpBanks: src/tools/DumpBanks.c
+	gcc -o DumpBanks src/tools/DumpBanks.c
+	chmod +x DumpBanks
+
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.
 obj = src/main.o

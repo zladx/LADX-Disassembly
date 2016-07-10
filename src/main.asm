@@ -436,7 +436,7 @@ label_1F2::
     add  a, [hl]
 
 label_1F8::
-    ld   [rSCY], a
+    ld   [rSCY], a ; scrollY
     ld   a, [$FF96]
     ld   hl, $C155
     add  a, [hl]
@@ -444,7 +444,7 @@ label_1F8::
 label_200::
     ld   hl, $C1BF
     add  a, [hl]
-    ld   [rSCX], a
+    ld   [rSCX], a ; scrollX
     ld   a, [$D6FE]
     and  a
     jr   nz, label_213
@@ -644,12 +644,13 @@ label_35F::
     ld   [$FFFD], a
     halt
 
-label_374::
-    ld   a, [$FFD1]
+; Render loop?
+WaitNeedsRenderingFrame::
+    ld   a, [hNeedsRenderingFrame]
     and  a
-    jr   z, label_374
+    jr   z, WaitNeedsRenderingFrame
     xor  a
-    ld   [$FFD1], a
+    ld   [hNeedsRenderingFrame], a
     jp   label_1DA
 
 data_037F::
@@ -935,11 +936,11 @@ label_52B::
     jr   z, label_538
     ld   a, $24
     ld   [SelectRomBank_2100], a
-    call label_5C1A
+    call label_5C1A ; Change BG column palette. Triggered by an interrupt?
 
 label_538::
     ld   de, $D601
-    call label_2927
+    call label_2927 ; Load BD column tiles
     xor  a
     ld   [$D600], a
     ld   [$D601], a
@@ -961,7 +962,7 @@ label_538::
 label_569::
     ei
 
-label_56A::
+WaitForVBlank::
     pop  bc
     ld   a, c
     ld   [rSVBK], a
@@ -969,7 +970,7 @@ label_56A::
     pop  de
     pop  bc
     ld   a, $01
-    ld   [$FFD1], a
+    ld   [hNeedsRenderingFrame], a
     pop  af
     reti
 
@@ -1006,7 +1007,7 @@ label_5AB::
     pop  af
     ld   [$DBAF], a
     ld   [SelectRomBank_2100], a
-    jr   label_56A
+    jr   WaitForVBlank
 
 label_5BC::
     ld   a, [$FF90]
@@ -1365,9 +1366,10 @@ label_816::
     ld   [SelectRomBank_2100], a
     ret
 
+; often-used routine, map related
 label_81D::
     push af
-    ld   a, [$DBAF]
+    ld   a, [$DBAF] ; position on the map?
     ld   [SelectRomBank_2100], a
     pop  af
     ret
@@ -6633,7 +6635,7 @@ label_2991::
     inc  b
     pop  af
     and  $80
-    jr   nz, label_29B0
+    jr   nz, UpdateNextBGColumnWithTiles
 
 label_299B::
     ld   a, [de]
@@ -6654,20 +6656,20 @@ label_29AB::
     jr   nz, label_299B
     ret
 
-label_29B0::
+UpdateNextBGColumnWithTiles::
     ld   a, [de]
     cp   $EE
-    jr   z, label_29B6
+    jr   z, .UpdateNextBGColumnWithTiles_continue
     ld   [hl], a
 
-label_29B6::
+.UpdateNextBGColumnWithTiles_continue
     inc  de
     ld   a, b
     ld   bc, $0020
     add  hl, bc
     ld   b, a
     dec  b
-    jr   nz, label_29B0
+    jr   nz, UpdateNextBGColumnWithTiles
     ret
 
 label_29C1::
@@ -6697,13 +6699,13 @@ ZeroMemory::
     ld   a, [$FFFE]
     push af
 
-label_29E2::
+.ZeroMemory_loop
     xor  a
     ldi  [hl], a
     dec  bc
     ld   a, b
     or   c
-    jr   nz, label_29E2
+    jr   nz, .ZeroMemory_loop
     pop  af
     ld   [$FFFE], a
     ret
@@ -7824,7 +7826,7 @@ label_322F::
 label_323A::
     ld   a, [bc]
     cp   $FE
-    jr   z, label_328E
+    jr   z, endOfRoom
     ld   [$FFA4], a
     inc  bc
     ld   a, [$DBA5]
@@ -7837,18 +7839,18 @@ label_323A::
     swap a
     and  $0F
     call label_38EA
-    jr   label_325C
+    jr   CopyMapToTileMapLoop
 
 label_3258::
     ld   a, [bc]
     call FillTileMapWith
 
-label_325C::
-    inc  bc
-    ld   a, [bc]
+CopyMapToTileMapLoop::
+    inc  bc ; tile address
+    ld   a, [bc] ; tile type
     and  $FC
     cp   $E0
-    jr   nz, label_3284
+    jr   nz, CopyMapToTileMapLoop_consecutive_tiles
     ld   a, [$FFE6]
     ld   e, a
     ld   d, $00
@@ -7872,37 +7874,37 @@ label_325C::
     ld   a, e
     add  a, $05
     ld   [$FFE6], a
-    jr   label_325C
+    jr   CopyMapToTileMapLoop
 
-label_3284::
-    ld   a, [bc]
-    cp   $FE
-    jr   z, label_328E
+CopyMapToTileMapLoop_consecutive_tiles::
+    ld   a, [bc] ; tile type
+    cp   $FE ; end-of-room tile
+    jr   z, endOfRoom
     call label_32A9
-    jr   label_325C
+    jr   CopyMapToTileMapLoop
 
-label_328E::
+endOfRoom::
     ld   a, $01
     ld   [SelectRomBank_2100], a
     call label_6CCE
     ld   a, $36
     ld   [SelectRomBank_2100], a
-    call label_6D4D
+    call label_6D4D ; do stuff that returns early if end-of-room
     ld   a, $21
     ld   [SelectRomBank_2100], a
-    call label_53F3
+    call label_53F3 ; stuff that returns early when DBA5 is 0
     jp   label_81D
 
 label_32A9::
     xor  a
     ld   [$FFD7], a
-    ld   a, [bc]
+    ld   a, [bc] ; tile address
     bit  7, a
     jr   z, label_32B8
     bit  4, a
     jr   nz, label_32B8
     ld   [$FFD7], a
-    inc  bc
+    inc  bc ; increment tile address
 
 label_32B8::
     inc  bc
@@ -7911,9 +7913,9 @@ label_32B8::
     ld   a, [$DBA5]
     and  a
     jr   nz, label_32D9
-    ld   a, [bc]
+    ld   a, [bc] ; tile addres
     sub  a, $F5
-    jr   c, label_3304
+    jr   c, MoveToNextLine
     ld   a, [bc]
     ld   d, a
     dec  bc
@@ -7955,41 +7957,41 @@ label_32D9::
     or   [hl]
     scf
 
-label_3304::
+MoveToNextLine::
     add  a, $F5
     push af
     ld   d, a
     cp   $E9
-    jr   nz, label_330F
+    jr   nz, MoveToNextLine_notTileE9
     ld   [$C50E], a
 
-label_330F::
+MoveToNextLine_notTileE9::
     cp   $5E
-    jr   nz, label_3317
+    jr   nz, MoveToNextLine_notTile5E
     bit  5, e
     jr   nz, label_337C
 
-label_3317::
+MoveToNextLine_notTile5E::
     cp   $91
-    jr   nz, label_3324
+    jr   nz, MoveToNextLine_notTile91
     bit  5, e
-    jr   z, label_3324
+    jr   z, MoveToNextLine_notTile91
     pop  af
     ld   a, $5E
     ld   d, a
     push af
 
-label_3324::
+MoveToNextLine_notTile91::
     cp   $DC
-    jr   nz, label_3331
+    jr   nz, MoveToNextLine_notTileDC
     bit  5, e
-    jr   z, label_3331
+    jr   z, MoveToNextLine_notTileDC
     pop  af
     ld   a, $91
     ld   d, a
     push af
 
-label_3331::
+MoveToNextLine_notTileDC::
     cp   $D8
     jr   z, label_333D
     cp   $D9
@@ -8007,31 +8009,31 @@ label_333D::
 
 label_3346::
     cp   $C2
-    jr   nz, label_3353
+    jr   nz, MoveToNextLine_notTileC2
     bit  4, e
-    jr   z, label_3353
+    jr   z, MoveToNextLine_notTileC2
     pop  af
     ld   a, $E3
     ld   d, a
     push af
 
-label_3353::
+MoveToNextLine_notTileC2::
     ld   a, d
     cp   $BA
-    jr   nz, label_3361
+    jr   nz, MoveToNextLine_notTileBA
     bit  2, e
-    jr   z, label_3361
+    jr   z, MoveToNextLine_notTileBA
     pop  af
     ld   a, $E1
     ld   d, a
     push af
 
-label_3361::
+MoveToNextLine_notTileBA::
     ld   a, d
     cp   $D3
-    jr   nz, label_3381
+    jr   nz, MoveToNextLine_notTileD3
     bit  4, e
-    jr   z, label_3381
+    jr   z, MoveToNextLine_notTileD3
     ld   a, [$FFF6]
     cp   $75
     jr   z, label_337C
@@ -8040,7 +8042,7 @@ label_3361::
     cp   $AA
     jr   z, label_337C
     cp   $4A
-    jr   nz, label_3381
+    jr   nz, MoveToNextLine_notTileD3
 
 label_337C::
     pop  af
@@ -8048,7 +8050,7 @@ label_337C::
     ld   d, a
     push af
 
-label_3381::
+MoveToNextLine_notTileD3::
     ld   a, d
     ld   [$FFE0], a
     cp   $C2
@@ -8068,7 +8070,7 @@ label_3381::
     cp   $E2
     jr   z, label_33A8
     cp   $E3
-    jr   nz, label_33BC
+    jr   nz, MoveToNextLine_noSpecialTile
 
 label_33A8::
     ld   a, [$C19C]
@@ -8084,13 +8086,13 @@ label_33A8::
     ld   [hl], a
     inc  bc
 
-label_33BC::
+MoveToNextLine_noSpecialTile::
     ld   a, [$FFE0]
     cp   $C5
     jp   z, label_347D
     cp   $C6
     jp   z, label_347D
-    jp   label_34CE
+    jp   MoveToNextLine_finallyBeginSomething
 
 label_33CB::
     add  a, $EC
@@ -8236,7 +8238,7 @@ label_347D::
     add  a, $08
     ld   [$FFAD], a
     inc  bc
-    jp   label_34CE
+    jp   MoveToNextLine_finallyBeginSomething
 
 label_3496::
     cp   $D6
@@ -8274,55 +8276,56 @@ label_34B6::
 
 label_34C2::
     cp   $DE
-    jr   nz, label_34CE
+    jr   nz, MoveToNextLine_finallyBeginSomething
 
 label_34C6::
     bit  6, e
-    jr   z, label_34CE
+    jr   z, MoveToNextLine_finallyBeginSomething
     pop  af
     ld   a, $0D
 
 label_34CD::
     push af
 
-label_34CE::
+MoveToNextLine_finallyBeginSomething::
     cp   $A0
-    jr   nz, label_34DA
+    jr   nz, MoveToNextLine_tileTypeNotA0
     bit  4, e
-    jr   z, label_34DA
+    jr   z, MoveToNextLine_tileTypeNotA0
     pop  af
     ld   a, $A1
     push af
 
-label_34DA::
+MoveToNextLine_tileTypeNotA0::
     ld   d, $00
     ld   a, [$FFD7]
     and  a
     jr   z, label_352D
-    dec  bc
-    ld   a, [bc]
+    dec  bc ; decrement tile address
+    ld   a, [bc] ; load new tile type
     ld   e, a
-    ld   hl, WR1_TileMap
-    add  hl, de
+    ld   hl, WR1_TileMap ; prepare tile map
+    add  hl, de ; add current tile offset
     ld   a, [$FFD7]
     and  $0F
-    ld   e, a
-    pop  af
+    ld   e, a ; load repeat count from higher-bits of a
+    pop  af ;
     ld   d, a
 
-label_34EF::
+; fill map with e consecutive tiles of type d
+FillMapWithConsecutiveTiles::
     ld   a, d
     ldi  [hl], a
     ld   a, [$FFD7]
     and  $40
-    jr   z, label_34FB
+    jr   z, FillMapWithConsecutiveTiles_continue
     ld   a, l
-    add  a, $0F
+    add  a, $0F ; mirror the tile ?
     ld   l, a
 
-label_34FB::
+FillMapWithConsecutiveTiles_continue::
     dec  e
-    jr   nz, label_34EF
+    jr   nz, FillMapWithConsecutiveTiles
     inc  bc
     ret
 
@@ -8700,22 +8703,22 @@ data_37E4::
 ; Fill the tile map with whatever is in register a
 FillTileMapWith::
     ld   [$FFE9], a
-    ld   d, $80
+    ld   d, TilesPerMap
     ld   hl, WR1_TileMap
     ld   e, a
 
-.fill_loop
+FillTileMapWith_loop::
     ld   a, l
     and  $0F
-    jr   z, .dont_fill
-    cp   $0B
-    jr   nc, .dont_fill
+    jr   z, FillTileMapWith_continue
+    cp   $0B ; TilesPerRow+1
+    jr   nc, FillTileMapWith_continue
     ld   [hl], e
 
-.dont_fill
+FillTileMapWith_continue::
     inc  hl
     dec  d
-    jr   nz, .fill_loop
+    jr   nz, FillTileMapWith_loop
     ret
 
 label_37FE::

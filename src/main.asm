@@ -661,13 +661,13 @@ label_380:
 data_0384::
     db $30, $56, $68, 0
 
-func_0388::
+InterruptLCDStatus::
     di
     push af
     push hl
     push de
     push bc
-    ld   a, [$FF70]
+    ld   a, [rSVBK]
     ld   c, a
     xor  a
     ld   [rSVBK], a
@@ -758,7 +758,7 @@ label_402::
     ei
     reti
 
-func_0408::
+InterruptSerial::
     push af
     ld   a, $28
     ld   [SelectRomBank_2100], a
@@ -816,12 +816,12 @@ label_45D::
 data_046A::
     db   7, 9
 
-func_046C::
+InterruptVBlank::
     push af
     push bc
     push de
     push hl
-    ld   a, [$FF70]
+    ld   a, [rSVBK]
     and  $07
     ld   c, a
     xor  a

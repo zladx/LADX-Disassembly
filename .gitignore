@@ -4,6 +4,9 @@
 *.1bpp
 *.2bpp
 
+# bin
+DumpBanks
+
 # rgbasm extras
 *.sym
 *.map

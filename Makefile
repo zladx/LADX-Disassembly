@@ -28,7 +28,9 @@ src/bank-bins/bank_00_0.bin: src/bank-bins DumpBanks
 # src/main.o is built from src/main.asm.
 obj = src/main.o
 
-.asm.o: src/bank-bins/bank_00_0.bin
+src/main.o: src/bank-bins/*.bin src/*.asm src/code/*.asm
+
+.asm.o:
 	rgbasm -i src/ -o $@ $<
 
 # Then we link them to create a playable image.

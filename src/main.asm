@@ -10021,7 +10021,8 @@ data_bank_c_0400:: incbin "data/Bank_0xC_0x0400"
 data_bank_c_07A0:: incbin "data/Bank_0xC_0x07A0"
 data_bank_c_07C0:: incbin "data/Bank_0xC_0x07C0"
 data_bank_c_0800:: incbin "data/Bank_0xC_0x0800"
-data_bank_c_1800::
+
+data_bank_c_1800:: incbin "bank-bins/bank_0C_30000.bin", $1800, $2800
 
 section "bank13",romx,bank[$0D]
 incbin "bank-bins/bank_0D_34000.bin"
@@ -10084,10 +10085,10 @@ section "bank32",romx,bank[$20]
 incbin "bank-bins/bank_20_80000.bin"
 
 section "bank33",romx,bank[$21]
-incbin "bank-bins/bank_22_88000.bin"
+incbin "bank-bins/bank_21_84000.bin"
 
 section "bank34",romx,bank[$22]
-incbin "bank-bins/bank_23_8C000.bin"
+incbin "bank-bins/bank_22_88000.bin"
 
 section "bank35",romx,bank[$23]
 incbin "bank-bins/bank_23_8C000.bin"
@@ -10167,3 +10168,11 @@ incbin "bank-bins/bank_3B_EC000.bin"
 section "bank60",romx,bank[$3C]
 incbin "bank-bins/bank_3C_F0000.bin"
 
+section "bank61",romx,bank[$3D]
+incbin "bank-bins/bank_3D_F4000.bin"
+
+
+; Unused banks; make blank sections so they are filled with $00 instead of $ff to match
+; the rom
+section "bank62",romx,bank[$3E]
+section "bank63",romx,bank[$3F]

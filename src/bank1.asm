@@ -288,49 +288,22 @@ label_41BB::
     ld   [$DB97], a
     ld   [rBGP], a
     ret
-    ld   a, [$FF9C]
-    rst  0
-    inc  bc
-    ld   b, d
-    sub  a, c
-    ld   b, d
-    sbc  a, e
-    ld   b, d
-    jp   z, label_D942
-    ld   b, d
+
+
+    db $f0, $9c, $c7, $03, $42, $91, $42, $9b
+    db $42, $ca, $42, $d9, $42
+
 
 label_41CF::
-    ld   l, d
-    ld   l, d
-    ld   l, d
-    ld   l, d
-    ld   l, d
-    ld   l, d
-    ld   l, d
-    ld   l, d
-    ld   l, d
-    ld   l, d
-    nop
-    nop
-    nop
-    ld   a, [bc]
-    inc  b
-    ld   b, $00
-    ld   a, [bc]
-    inc  b
-    ld   b, $00
-    ld   a, [bc]
-    inc  b
-    ld   b, $1C
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
-    inc  e
+    db $6a, $6a, $6a, $6a, $6a, $6a, $6a, $6a
+    db $6a, $6a, $00, $00, $00, $0a, $04, $06
+    db $00, $0a, $04, $06, $00, $0a, $04, $06
+
+
+label_41E7::
+    db $1c, $1c, $1c, $1c, $1c, $1c, $1c, $1c
+    db $1c, $1c
+
     dec  de
     ld   a, [de]
     add  hl, de
@@ -339,10 +312,15 @@ label_41CF::
     inc  d
     inc  de
     ld   [de], a
-    ld   de, label_1010
+    db   $11
     db   $10 ; Undefined instruction
     db   $10 ; Undefined instruction
     db   $10 ; Undefined instruction
+    db   $10 ; Undefined instruction
+    db   $10 ; Undefined instruction
+    db   $10 ; Undefined instruction
+    db   $10 ; Undefined instruction
+    db   $af ; Undefined instruction
     ld   [$C155], a
     ld   [$C156], a
     ld   a, [$FFB7]
@@ -1806,69 +1784,15 @@ label_4BB0::
     ld   l, h
 
 label_4BB5::
-    ld   b, d
-    ld   b, e
-    ld   b, h
-    ld   b, l
-    ld   b, [hl]
-    ld   b, a
-    ld   c, b
-    nop
-    nop
-    ld   h, d
-    ld   h, e
-    ld   h, h
-    ld   h, l
-    ld   h, [hl]
-    ld   h, a
-    ld   l, b
-    ld   c, c
-    ld   c, d
-    ld   c, e
-    ld   c, h
-    ld   c, l
-    ld   c, [hl]
-    ld   c, a
-    nop
-    nop
-    ld   l, c
-    ld   l, d
-    ld   l, e
-    ld   l, h
-    ld   l, l
-    ld   l, [hl]
-    ld   l, a
-    ld   d, b
-    ld   d, c
-    ld   d, d
-    ld   d, e
-    ld   d, h
-    ld   d, l
-    ld   d, [hl]
-    nop
-    nop
-    ld   [hl], b
-    ld   [hl], c
-    ld   [hl], d
-    ld   [hl], e
-    ld   [hl], h
-    ld   [hl], l
-    halt
-    ld   e, b
-    ld   e, c
-    ld   e, d
-    ld   e, e
-    nop
-    nop
-    nop
-    nop
-    ld   [hl], a
-    ld   a, b
-    ld   a, c
-    ld   a, d
-    ld   a, e
-    nop
-    nop
+    db $42, $43, $44, $45, $46, $47, $48, $00
+    db $00, $62, $63, $64, $65, $66, $67, $68
+    db $49, $4a, $4b, $4c, $4d, $4e, $4f, $00
+    db $00, $69, $6a, $6b, $6c, $6d, $6e, $6f
+    db $50, $51, $52, $53, $54, $55, $56, $00
+    db $00, $70, $71, $72, $73, $74, $75, $76
+    db $57, $58, $59, $5a, $5b, $00, $00, $00
+    db $00, $77, $78, $79, $7a, $7b, $00, $00
+
 
 label_4BF5::
     ld   a, [$FFCC]
@@ -2109,7 +2033,11 @@ label_4D6D::
     call label_4D8B
     call label_4D94
     call label_4D9D
+
+label_4D79::
     jp   label_44D6
+
+label_4D7A::
     call label_4DA6
     call label_4DBE
     jp   label_44D6
@@ -2233,7 +2161,7 @@ label_4E3B::
     jr   label_4E55
 
 label_4E43::
-    db $99, $E4, $D, $7E, $7E, $10, $14, 8, $13, $7E, $7E, $7E, $7E, $E, $A, $7E
+    db $99, $E4, $D, $7E, $7E, $10, $14, 8, $13, $7E, $7E, $7E, $7E, $E, $A, $7E, $7E, $00
 
 label_4E55::
     ld   hl, $D601
@@ -2450,28 +2378,13 @@ label_4F45::
     xor  a
     ld   [hl], a
     ret
-    ld   a, [$DB96]
-    rst  0
-    ld   a, [de]
-    ld   c, l
-    inc  l
-    ld   c, l
-    and  [hl]
-    ld   c, a
-    cp   e
-    ld   c, a
-    jp   label_E14F
-    ld   c, a
-    add  hl, sp
-    ld   c, l
-    ld   c, c
-    ld   c, l
-    rst  $38
-    ld   c, a
-    rst  $18
-    ld   d, b
-    jp   [hl]
-    ld   d, c
+
+    db $fa, $96, $db, $c7, $1a, $4d, $2c, $4d
+    db $a6, $4f, $bb, $4f, $c3, $4f, $e1, $4f
+    db $39, $4d, $49, $4d, $ff, $4f, $df, $50
+    db $e9, $51
+
+
     ld   a, $08
     ld   [$D6FE], a
     xor  a
@@ -6253,21 +6166,13 @@ label_6975::
     ret
 
 label_6976::
-    inc  d
-    inc  d
-    db   $10 ; Undefined instruction
-    inc  c
-    inc  c
+    db $14, $14, $10, $10, $0c, $0c
 
 label_697C::
-    rla
-    rla
-    inc  de
+    db $17, $17, $13
 
 label_697F::
-    inc  de
-    rrca
-    rrca
+    db $13, $0f, $0f
 
 label_6982::
     db 0, 0, $CC, $10, 0, 8, $CE, $10, 0, $10, $DC, $10, 0, $18, $CC, $30
@@ -6329,7 +6234,7 @@ label_6A4F::
     db $18, $FA
 
 label_6A51::
-    db 7, $4
+    db $07, $48
 
 label_6A53::
     db $20, $FA, $27, $48
@@ -6793,7 +6698,7 @@ label_6D26::
 
 label_6D39::
     ld   a, [hli]
-    ldh  [$FF0C], a
+    ld   [$FF00+C], a
     inc  c
     dec  b
     jr   nz, label_6D39
@@ -6979,16 +6884,10 @@ label_6ED8::
     ld   e, b
     ld   [hl], c
     jp   label_7271
-    ld   [hl], d
-    ld   d, l
-    ld   [hl], e
-    halt
-    ret  nc
-    ld   [hl], e
-    db   $3A ; ldd  a, [hl]
-    ld   [hl], h
-    ld   c, b
-    ld   [hl], h
+
+    db $72, $55, $73, $76, $73, $d0, $73, $3a
+    db $74, $48, $74
+
     call label_29C1
     call label_27F2
     ld   a, $01
@@ -7416,7 +7315,7 @@ label_7264::
     db $18, $72
 
 label_7266::
-    db 5, $72, $2B, $72, $F2, $71, $3E, $72, $DF, $71, $51, $72
+    db 5, $72, $2B, $72, $F2, $71, $3E, $72, $DF, $71, $51
 
 label_7271::
     ld   [hl], d
@@ -7512,7 +7411,7 @@ label_72D8::
     nop
     nop
     sbc  a, d
-    halt
+    db $76, $0f
     nop
     nop
     nop
@@ -8088,13 +7987,12 @@ label_765F::
     ld   [$C3C0], a
     ld   a, [$FFF0]
     rst  0
-    add  a, c
-    halt
-    halt
-    halt
-    ld   [hl], a
-    add  a, c
-    ld   [hl], a
+    dw $7681
+    dw $76ab
+    dw $76d6
+    dw $7711
+    dw $7781
+
     call label_7D9C
     ld   a, [$FFE7]
     rra
@@ -8283,8 +8181,11 @@ label_77BD::
     jr   c, label_77BF
 
 label_77BF::
-    db $38, 0, $38, $20, $3A, 0, $3A, $20, $3A, 0, $3A, $20, $3C, 0, $3E, 0
-    db $3C, 0, $3E, 0, $3A, 0, $3A, $20, $3A, 0, $3A, $20, $38, 0, $38, $20
+    db $38, $20, $3a, $00, $3a, $20, $3a, $00
+    db $3a, $20, $3c, $00, $3e, $00, $3c, $00
+    db $3e, $00, $3a, $00, $3a, $20, $3a, $00
+    db $3a, $20, $38, $00, $38, $20
+
 
 label_77DD::
     xor  a
@@ -8316,14 +8217,10 @@ label_77ED::
     ret
 
 label_7808::
-    db   $10 ; Undefined instruction
-    ld   l, $05
-    nop
-    jr   label_783B
-    dec  b
+    db   $10, $18, $2e, $05, $00, $18, $2c, $05
 
 label_7810::
-    db   $10 ; Undefined instruction
+    db   $10, $10
 
 label_7812::
     db $2A, 5, 0, $10, $28, 5, $10, 8, $26, 5, 0, 8, $24, 5, $10, 0
@@ -8378,43 +8275,11 @@ label_789F::
     db $6C ; l
 
 label_78A0::
-    push af
-    ld   a, d
-    adc  a, l
-    ld   a, l
-    adc  a, l
-    ld   a, l
-    adc  a, l
-    ld   a, l
-    push af
-    ld   a, d
-    rst  $38
-    ld   a, a
-    rst  $38
-    ld   a, a
-    rst  $38
-    ld   a, a
-    push af
-    ld   a, d
-    ld   l, h
-    ld   l, l
-    adc  a, l
-    ld   [hl], c
-    rst  8
-    ld   [hl], l
-    push af
-    ld   a, d
-    ld   a, e
-    ld   l, a
-    cp   l
-    ld   [hl], e
-    rst  $38
-    ld   [hl], a
-    push af
-    ld   a, d
-    ld   a, [hli]
-    ld   e, l
-    adc  a, [hl]
+    db $f5, $7a, $8d, $7d, $8d, $7d, $8d, $7d
+    db $f5, $7a, $ff, $7f, $ff, $7f, $ff, $7f
+    db $f5, $7a, $6c, $6d, $8d, $71, $cf, $75
+    db $f5, $7a, $7b, $6f, $bd, $73, $ff, $77
+    db $f5, $7a, $2a, $5d, $8e
 
 label_78C5::
     ld   h, l
@@ -8651,15 +8516,12 @@ label_7A36::
 label_7A47::
     ld   a, [$FFF0]
     rst  0
-    ld   d, d
-    ld   a, d
-    ld   e, [hl]
-    ld   a, d
-    ld   l, [hl]
-    ld   a, d
-    call nz, label_CD7A
-    dec  b
-    inc  c
+    dw $7a52
+    dw $7a5e
+    dw $7a6e
+    dw $7ac4
+
+    call label_C05
     dec  [hl]
     jr   nz, label_7A5D
     ld   [hl], $90
@@ -8747,381 +8609,55 @@ label_7AE3::
     ret
 
 label_7AE4::
-    ld   a, h
-    ld   a, h
-    ld   b, h
-    ld   b, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   a, l
-    ld   c, h
-    ld   c, l
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   b, h
-    ld   b, l
-    ld   a, l
-    dec  l
-    ld   l, $2D
-    ld   l, $2D
-    ld   l, $7D
-    ld   c, h
-    ld   c, l
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   [hl], a
-    ld   b, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   c, e
-    ld   a, c
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   [hl], a
-    ld   [hl], l
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   [hl], l
-    ld   a, b
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   [hl], a
-    ld   a, d
-    ld   a, d
-    ld   [hl], h
-    ld   [hl], e
-    ld   [hl], h
-    ld   e, h
-    ld   e, l
-    ld   e, [hl]
-    ld   e, a
-    ld   [hl], e
-    ld   [hl], h
-    ld   [hl], e
-    ld   a, d
-    ld   a, [hl]
-    ld   a, b
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   [hl], e
-    ld   [hl], l
-    ld   a, b
-    ld   [hl], a
-    ld   a, b
-    ld   a, c
-    ld   e, b
-    ld   e, c
-    ld   e, d
-    ld   e, e
-    ld   a, c
-    ld   a, c
-    ld   [hl], a
-    ld   [hl], l
-    ld   a, [hl]
-    ld   [hl], h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   [hl], e
-    ld   [hl], h
-    halt
-    ld   a, d
-    ld   d, h
-    ld   d, l
-    ld   d, [hl]
-    ld   d, a
-    ld   a, d
-    ld   [hl], h
-    halt
-    ld   [hl], h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   [hl], a
-    ld   a, b
-    ld   a, h
-    ld   a, c
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   d, b
-    ld   d, c
-    ld   d, d
-    ld   d, e
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   a, h
-    ld   [hl], a
-    ld   a, b
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   [hl], l
-    ld   a, [hl]
-    ld   a, b
-    ld   [hl], a
-    ld   [hl], l
-    ld   a, b
-    ld   a, c
-    dec  hl
-    inc  l
-    ld   a, c
-    ld   a, c
-    ld   [hl], a
-    ld   [hl], l
-    ld   a, b
-    ld   [hl], a
-    ld   [hl], l
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
+    db $7c, $7c, $44, $45, $7d, $7d, $7d, $7d
+    db $7d, $7d, $7d, $7d, $7d, $7d, $7d, $7d
+    db $4c, $4d, $7c, $7c, $7c, $7c, $7c, $7c
+    db $44, $45, $7d, $2d, $2e, $2d, $2e, $2d
+    db $2e, $7d, $4c, $4d, $7c, $7c, $7c, $7c
+    db $7c, $7c, $7c, $7c, $7c, $77, $46, $7e
+    db $7e, $7e, $7e, $7e, $7e, $4b, $79, $7c
+    db $7c, $7c, $7c, $7c, $7c, $7c, $7c, $77
+    db $75, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $75, $78, $7c, $7c, $7c
+    db $7c, $7c, $77, $7a, $7a, $74, $73, $74
+    db $5c, $5d, $5e, $5f, $73, $74, $73, $7a
+    db $7e, $78, $7c, $7c, $7c, $7c, $73, $75
+    db $78, $77, $78, $79, $58, $59, $5a, $5b
+    db $79, $79, $77, $75, $7e, $74, $7c, $7c
+    db $7c, $7c, $7c, $73, $74, $76, $73, $7a
+    db $54, $55, $56, $57, $7a, $74, $76, $73
+    db $74, $7c, $7c, $7c, $77, $78, $7c, $79
+    db $7c, $7c, $7c, $7c, $50, $51, $52, $53
+    db $7c, $7c, $7c, $7c, $7c, $7c, $77, $78
+    db $7e, $7e, $75, $7e, $78, $77, $75, $78
+    db $79, $2b, $2c, $79, $79, $77, $75, $78
+    db $77, $75, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
+    db $7e, $7e, $7e, $7e
+
 
 label_7C60::
     ld   a, [$D00A]

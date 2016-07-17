@@ -39,3 +39,4 @@ src/main.o: src/bank-bins/*.bin src/*.asm src/code/*.asm
 game.gbc: $(obj)
 	rgblink -n $*.sym -m $*.map -o $@ $(obj)
 	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+	@md5sum -c ladx.md5

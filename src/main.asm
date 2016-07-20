@@ -12,6 +12,7 @@ include "wram.asm"
 
 SelectRomBank_2100 equ $2100
 
+label_1010 equ $1010
 label_4001 equ $4001
 label_4003 equ $4003
 label_4006 equ $4006
@@ -23,6 +24,7 @@ label_410D equ $410D
 label_4146 equ $4146
 label_41C2 equ $41C2
 label_41D0 equ $41D0
+label_41E7 equ $41E7
 UseOcarina equ $41FC
 label_4200 equ $4200
 label_4220 equ $4220
@@ -320,6 +322,7 @@ label_97F0 equ $97F0
 label_9800 equ $9800
 label_990E equ $990E
 label_A161 equ $A161
+label_D942 equ $D942
 label_F7F0 equ $F7F0
 label_FAFA equ $FAFA
 label_FF44 equ $FF44

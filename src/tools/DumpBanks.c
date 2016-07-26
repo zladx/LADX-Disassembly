@@ -37,7 +37,7 @@ main(int argc, char **argv) {
         return 1;
     }
 
-    for (int32_t BankNum = 0; BankNum <= 0x3C; ++BankNum) {
+    for (int32_t BankNum = 0; BankNum <= 0x3D; ++BankNum) {
         uint8_t BankData[BANK_SIZE];
         char FileName[512];
 

@@ -22,13 +22,15 @@ src/bank-bins:
 	mkdir -p src/bank-bins
 
 src/bank-bins/bank_00_0.bin: src/bank-bins DumpBanks
-	cd src/bank-bins && ../DumpBanks ../Zelda.gbc
+	cd src/bank-bins && ../../DumpBanks ../../Zelda.gbc
 
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.
 obj = src/main.o
 
-.asm.o: src/bank-bins/bank_00_0.bin
+src/main.o: src/*.asm src/code/*.asm src/bank-bins/bank_00_0.bin
+
+.asm.o:
 	rgbasm -i src/ -o $@ $<
 
 # Then we link them to create a playable image.
@@ -37,3 +39,4 @@ obj = src/main.o
 game.gbc: $(obj)
 	rgblink -n $*.sym -m $*.map -o $@ $(obj)
 	rgbfix  -c -n 0 -r 0x03 -s -l 0x33 -k "01" -m 0x1B -j -p 0xFF -t "ZELDA" -v $@
+	@md5sum -c ladx.md5

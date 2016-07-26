@@ -162,7 +162,7 @@ global_variable instruction InstructionTable[] = {
     {0x73, 1, "ld   [hl], e"},
     {0x74, 1, "ld   [hl], h"},
     {0x75, 1, "ld   [hl], l"},
-    {0x76, 2, "halt"},
+    {0x76, 1, "db   $76"}, // This is halt, but rgbds always inserts nop after it
     {0x77, 1, "ld   [hl], a"},
     {0x78, 1, "ld   a, b"},
     {0x79, 1, "ld   a, c"},
@@ -270,7 +270,7 @@ global_variable instruction InstructionTable[] = {
     {0xDF, 1, "rst  $18"},
     {0xE0, 2, "ld   [$FF00+$N], a"},
     {0xE1, 1, "pop  hl"},
-    {0xE2, 1, "ld   [$FF0C], a"},
+    {0xE2, 1, "ld   [$FF00+C], a"},
     {0xE3, 1, "db   $E3"}, // unused
     {0xE4, 1, "db   $E4"}, // unused
     {0xE5, 1, "push hl"},
@@ -286,7 +286,7 @@ global_variable instruction InstructionTable[] = {
     {0xEF, 1, "rst  $28"},
     {0xF0, 2, "ld   a, [$FF00+$N]"},
     {0xF1, 1, "pop  af"},
-    {0xF2, 1, "db   $F2"}, // unused
+    {0xF2, 2, "ld   a, [$FF00+C]"},
     {0xF3, 1, "di"},
     {0xF4, 1, "db   $F4"}, // unused
     {0xF5, 1, "push af"},
@@ -1487,7 +1487,7 @@ DisassembleBank(u16 BankNum) {
                 break;
             }
             case 0x76: {
-                fprintf(Output, "halt\n");
+                fprintf(Output, "db   $76 ; Halt\n");
                 break;
             }
             case 0x77: {
@@ -1925,7 +1925,7 @@ DisassembleBank(u16 BankNum) {
                 break;
             }
             case 0xE2: {
-                fprintf(Output, "ldh  [$FF0C], a\n");
+                fprintf(Output, "ld  [$FF00+C], a\n");
                 break;
             }
             case 0xE3: {
@@ -1995,7 +1995,7 @@ DisassembleBank(u16 BankNum) {
                 break;
             }
             case 0xF2: {
-                fprintf(Output, "db   $F2 ; Undefined instruction\n");
+                fprintf(Output, "ld   a, [$FF00+C]\n");
                 break;
             }
             case 0xF3: {

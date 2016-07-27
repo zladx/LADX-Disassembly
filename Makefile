@@ -15,8 +15,8 @@ clean: ;
 	@rm -f game.{gbc,sym,map}
 
 DumpBanks: src/tools/DumpBanks.c
-	gcc -o DumpBanks src/tools/DumpBanks.c
-	chmod +x DumpBanks
+	gcc -std=c99 -o DumpBanks src/tools/DumpBanks.c
+	chmod a+x DumpBanks
 
 src/bank-bins:
 	mkdir -p src/bank-bins

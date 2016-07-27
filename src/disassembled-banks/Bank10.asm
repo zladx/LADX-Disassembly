@@ -16,7 +16,7 @@ section "bank10",romx,bank[$0A]
     jr   c, label_28053
     adc  a, e
     ld   b, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   b, e
     rra
     ld   b, h
@@ -109,7 +109,7 @@ label_28053::
     ld   c, [hl]
     and  l
     ld   c, [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   c, [hl]
     rla
     ld   c, a
@@ -297,7 +297,7 @@ label_2810F::
     ld   h, h
     xor  h
     ld   h, h
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   h, h
 
 label_28140::
@@ -449,10 +449,14 @@ label_281C6::
     ld   [hl], l
     add  a, $75
     inc  h
-    halt
-    halt
-    halt
-    halt
+    db   $76 ; Halt
+    inc  h
+    db   $76 ; Halt
+    ld   l, a
+    db   $76 ; Halt
+    or   h
+    db   $76 ; Halt
+    inc  c
     ld   [hl], a
     ld   d, e
     ld   [hl], a
@@ -528,7 +532,7 @@ label_281EA::
     xor  h
     ld   d, h
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     nop
     jr   label_28268
     db   $10 ; Undefined instruction
@@ -585,7 +589,8 @@ label_28268::
     xor  h
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     ld   [rJOYP], a
     db   $D3 ; Undefined instruction
 
@@ -626,7 +631,7 @@ label_28284::
     jr   z, label_28323
     inc  bc
     jr   label_2826C
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     nop
     add  hl, de
     ld   a, b
@@ -645,7 +650,8 @@ label_28284::
 
 label_282C0::
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     add  hl, bc
     ld   hl, label_2279
     add  a, $19
@@ -885,8 +891,10 @@ label_283CE::
     cp   $00
     dec  c
     jr   nc, label_283DC
-    halt
-    halt
+    db   $76 ; Halt
+    push af
+    db   $76 ; Halt
+    dec  hl
     ld   [hl], a
     dec  c
     ld   a, b
@@ -937,7 +945,8 @@ label_2841B::
     dec  c
 
 label_28428::
-    halt
+    db   $76 ; Halt
+    inc  l
     ld   hl, label_2A0AC
     daa
     ld   h, c
@@ -979,7 +988,7 @@ label_28428::
     ret  nz
     dec  [hl]
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     nop
     dec  de
     ld   a, b
@@ -1271,7 +1280,8 @@ label_285AC::
     add  a, d
     ld   [hl], h
     dec  c
-    halt
+    db   $76 ; Halt
+    inc  l
     inc  hl
     xor  a
     ld   h, $AF
@@ -1380,8 +1390,10 @@ label_2861B::
     ld   e, c
     jr   z, label_286A4
     inc  h
-    halt
-    ld   de, label_15AC
+    db   $76 ; Halt
+    jr   z, label_28653
+    xor  h
+    dec  d
 
 label_28644::
     xor  h
@@ -1396,6 +1408,8 @@ label_28644::
     rst  $30
     jr   nz, label_2861B
     ld   d, b
+
+label_28653::
     ret
     ld   hl, $86B0
     ld   [de], a
@@ -2012,7 +2026,8 @@ label_28925::
     ld   b, $C7
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
 
 label_28930::
     jp   nz, label_DC11
@@ -2105,7 +2120,8 @@ label_2897A::
     dec  c
     ld   [hl], b
     ldi  [hl], a
-    halt
+    db   $76 ; Halt
+    dec  hl
     ld   [hl], a
     dec  c
 
@@ -2120,7 +2136,8 @@ label_28994::
     ld   b, $C7
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     add  a, e
     ld   de, $8320
     ld   hl, $8320
@@ -2135,7 +2152,7 @@ label_28994::
     dec  h
     jr   nz, label_289D1
     cp   a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   bc, $883B
     db   $10 ; Undefined instruction
     inc  b
@@ -2183,7 +2200,8 @@ label_289D7::
     dec  c
     dec  b
     ld   a, [hli]
-    halt
+    db   $76 ; Halt
+    dec  hl
     ld   [hl], a
     dec  c
     ld   a, b
@@ -2268,7 +2286,8 @@ label_28A32::
     ld   d, b
     or   $73
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     ld   h, e
     xor  a
     ld   h, [hl]
@@ -2347,15 +2366,15 @@ label_28AC5::
     xor  h
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     ld   [rJOYP], a
     inc  h
     jr   c, label_28AF2
     cp   $04
     rrca
     ld   b, b
-    db   $F2 ; Undefined instruction
-    ld   [hl], h
+    ld   a, [$FF00+C]
     pop  af
     add  a, d
     nop
@@ -2440,7 +2459,7 @@ label_28B36::
     xor  [hl]
     ld   h, a
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   bc, label_183E
     db   $10 ; Undefined instruction
     inc  b
@@ -2454,7 +2473,8 @@ label_28B43::
     rst  0
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     inc  de
     xor  a
     ld   d, $AF
@@ -2494,7 +2514,7 @@ label_28B6C::
 
 label_28B83::
     jr   label_28B43
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   bc, label_183A
     db   $10 ; Undefined instruction
     inc  b
@@ -2571,7 +2591,10 @@ label_28BD0::
     ld   b, $C7
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+
+label_28BD6::
+    ret  z
     add  a, h
     inc  de
     jr   nz, label_28B5D
@@ -2590,7 +2613,7 @@ label_28BD0::
     and  a
     ld   [hl], $A7
     jr   label_28BB1
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   bc, $883F
     db   $10 ; Undefined instruction
     inc  b
@@ -2663,7 +2686,8 @@ label_28C4F::
     dec  hl
 
 label_28C54::
-    halt
+    db   $76 ; Halt
+    inc  l
     add  a, d
     ld   [hl], h
     dec  c
@@ -2744,7 +2768,8 @@ label_28CAC::
 
 label_28CAD::
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     ldd  [hl], a
     rrca
     cp   $04
@@ -2795,7 +2820,8 @@ label_28CFB::
     ld   c, l
 
 label_28CFC::
-    halt
+    db   $76 ; Halt
+    ret  z
 
 label_28CFE::
     ld   [hl], h
@@ -2866,7 +2892,8 @@ label_28D45::
     dec  c
 
 label_28D46::
-    halt
+    db   $76 ; Halt
+    inc  l
     cp   $04
     ld   c, l
     rlca
@@ -2878,7 +2905,8 @@ label_28D46::
     ld   b, $C7
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     add  hl, hl
     jp   z, label_CA59
     nop
@@ -3055,7 +3083,8 @@ label_28E11::
     jr   nc, label_28DE1
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     nop
     inc  bc
     jp   label_309
@@ -3503,8 +3532,8 @@ label_29044::
     jp   nz, label_1067
     ld   l, c
     ld   [de], a
-    halt
-    ld   a, b
+    db   $76 ; Halt
+    jr   z, label_290C4
     dec  c
     ld   a, c
     inc  de
@@ -3618,6 +3647,8 @@ label_290BE::
     ld   h, b
     ld   [de], a
     ld   h, c
+
+label_290C4::
     ld   d, $62
     inc  hl
     ld   h, a
@@ -3652,12 +3683,14 @@ label_290D0::
     ld   b, $26
     add  a, $16
     inc  h
-    halt
-    rlca
+    db   $76 ; Halt
+    jr   z, label_290F7
     inc  d
     ld   [label_90D], sp
     dec  d
     add  a, $17
+
+label_290F7::
     ld   de, label_19C6
     db   $10 ; Undefined instruction
     ld   d, $78
@@ -3799,7 +3832,8 @@ label_29187::
     add  a, d
     ld   [hl], h
     ldi  [hl], a
-    halt
+    db   $76 ; Halt
+    dec  hl
     ld   a, c
     inc  l
     ld   b, b
@@ -3902,8 +3936,7 @@ label_29205::
     dec  c
     dec  b
     ld   a, [$FF40]
-    db   $F2 ; Undefined instruction
-    ld   c, c
+    ld   a, [$FF00+C]
     rst  $30
     ld   [label_90D], sp
     inc  h
@@ -3943,7 +3976,8 @@ label_29224::
     ret
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     add  a, d
     nop
     ld   [de], a
@@ -3982,7 +4016,8 @@ label_29255::
     add  a, d
     ld   [hl], h
     dec  c
-    halt
+    db   $76 ; Halt
+    inc  l
     push bc
     jr   nz, label_2927C
     ld   [bc], a
@@ -4005,7 +4040,7 @@ label_29284::
     ldi  [hl], a
     inc  b
     dec  c
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [bc], a
     xor  d
     jr   label_2929E
@@ -4079,11 +4114,13 @@ label_292DB::
     jr   z, label_292DB
     inc  b
     dec  c
-    halt
+    db   $76 ; Halt
+    push af
     ld   [hl], l
     dec  hl
     add  a, d
-    halt
+    db   $76 ; Halt
+    dec  c
     ld   a, b
     inc  l
     add  a, d
@@ -4222,7 +4259,10 @@ label_29342::
     cp   $04
     dec  c
     ld   b, $F4
-    halt
+    db   $76 ; Halt
+
+label_29384::
+    push af
 
 label_29385::
     dec  b
@@ -4262,7 +4302,8 @@ label_29386::
     ld   b, $F0
     add  hl, sp
     di
-    halt
+    db   $76 ; Halt
+    pop  af
     dec  b
     rst  0
     ld   [$C8C7], sp
@@ -4479,7 +4520,8 @@ label_29486::
     db   $ED ; Undefined instruction
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     nop
     inc  bc
     add  hl, bc
@@ -4591,7 +4633,8 @@ label_29527::
     ret  z
 
 label_29532::
-    halt
+    db   $76 ; Halt
+    ret  z
     add  a, d
 
 label_29535::
@@ -4734,7 +4777,8 @@ label_295A9::
     daa
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     ld   a, b
     jr   z, label_29652
     inc  bc
@@ -4822,7 +4866,8 @@ label_2963F::
     xor  h
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     ld   [rJOYP], a
     or   l
     ld   l, b
@@ -4942,7 +4987,7 @@ label_296B2::
     ld   d, h
     adc  a, b
     jr   label_296AC
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [bc], a
     xor  e
     adc  a, b
@@ -5177,7 +5222,8 @@ label_297CD::
     xor  h
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     ld   [rJOYP], a
     dec  hl
     ld   c, b
@@ -5211,7 +5257,8 @@ label_2980D::
     add  a, d
     ld   [hl], h
     inc  bc
-    halt
+    db   $76 ; Halt
+    inc  hl
     ld   [hl], b
     inc  hl
     add  a, d
@@ -5289,7 +5336,8 @@ label_2980D::
     xor  c
     ld   [hl], h
     dec  hl
-    halt
+    db   $76 ; Halt
+    inc  l
     ldd  [hl], a
     dec  de
     cp   $04
@@ -5336,8 +5384,8 @@ label_2980D::
     ld   h, a
     jr   z, label_29924
     daa
-    halt
-    add  a, h
+    db   $76 ; Halt
+    jr   z, label_29839
     inc  sp
     rrca
     add  a, h
@@ -5357,14 +5405,15 @@ label_298C4::
     xor  h
     ld   b, h
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  bc
     rst  $28
     jr   label_298DC
     cp   $0C
     ld   c, $39
     rst  $30
-    halt
+    db   $76 ; Halt
+    push af
     ld   [bc], a
     rst  0
     rlca
@@ -5386,7 +5435,8 @@ label_298C4::
     jp   nz, label_D58
     ld   [hl], l
     dec  hl
-    halt
+    db   $76 ; Halt
+    dec  c
     ld   [hl], a
     inc  l
     add  hl, hl
@@ -5404,7 +5454,7 @@ label_298C4::
     dec  [hl]
     adc  a, l
     jr   label_298C4
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  bc
 
 label_29907::
@@ -5573,7 +5623,7 @@ label_299AC::
     ld   [hl], $0F
     daa
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  bc
     ld   a, l
     adc  a, b
@@ -5804,8 +5854,8 @@ label_29AB6::
     ld   h, [hl]
     ld   c, $73
     jr   z, label_29A78
-    halt
-    ld   a, c
+    db   $76 ; Halt
+    ld   c, $79
     dec  c
     ld   de, $E2BE
     inc  bc
@@ -6018,7 +6068,8 @@ label_29BD4::
     ld   [hl], l
     daa
     add  a, h
-    halt
+    db   $76 ; Halt
+    ldi  [hl], a
     ld   [hl], a
     ret  z
 
@@ -6046,7 +6097,7 @@ label_29C12::
     dec  c
     ld   h, d
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  bc
     ld   e, $18
     db   $10 ; Undefined instruction
@@ -6166,7 +6217,8 @@ label_29CBE::
     dec  c
     inc  b
     db   $F4 ; Undefined instruction
-    halt
+    db   $76 ; Halt
+    db   $ED ; Undefined instruction
     jr   nz, label_29C9B
     ld   d, b
     ret
@@ -6353,7 +6405,8 @@ label_29DA5::
 
 label_29DAA::
     dec  de
-    halt
+    db   $76 ; Halt
+    inc  l
     ld   a, c
     jr   z, label_29DF9
     di
@@ -6362,8 +6415,7 @@ label_29DAA::
     inc  b
     db   $F4 ; Undefined instruction
     ld   b, b
-    db   $F2 ; Undefined instruction
-    ld   e, c
+    ld   a, [$FF00+C]
     rst  $28
     ld   [hl], h
     pop  af
@@ -6682,7 +6734,7 @@ label_29F33::
     db   $68
     ld   l, b
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  b
     xor  b
     jr   label_29F6F
@@ -6785,8 +6837,7 @@ label_29F6F::
     cp   $0C
     dec  c
     ld   d, b
-    db   $F2 ; Undefined instruction
-    ld   [hl], h
+    ld   a, [$FF00+C]
     pop  af
     add  a, [hl]
     ldi  [hl], a
@@ -6860,7 +6911,7 @@ label_2A029::
     ld   l, b
     or   b
     jr   label_29FF7
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  b
     and  d
     jr   label_2A04E
@@ -7006,10 +7057,7 @@ label_2A0C7::
     inc  b
     dec  c
     ld   d, b
-    db   $F2 ; Undefined instruction
-
-label_2A0CD::
-    ld   e, c
+    ld   a, [$FF00+C]
     di
     call nz, label_300
     call nz, label_301
@@ -7091,7 +7139,7 @@ label_2A142::
     and  [hl]
     ld   d, a
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  b
     and  h
     jr   label_2A15A
@@ -7216,7 +7264,8 @@ label_2A1AC::
     add  a, d
     ld   [hl], h
     dec  c
-    halt
+    db   $76 ; Halt
+    inc  l
     jp   nz, label_2013
     cp   $0C
     dec  c
@@ -7375,8 +7424,7 @@ label_2A286::
     ld   b, b
 
 label_2A287::
-    db   $F2 ; Undefined instruction
-    add  a, [hl]
+    ld   a, [$FF00+C]
     ldi  [hl], a
     rrca
     add  a, [hl]
@@ -7459,7 +7507,8 @@ label_2A2C3::
     ld   h, c
     sbc  a, $70
     ldi  [hl], a
-    halt
+    db   $76 ; Halt
+    dec  hl
     add  a, d
     ld   [hl], a
 
@@ -7469,7 +7518,7 @@ label_2A2EB::
     inc  h
     rla
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  b
     and  l
     adc  a, b
@@ -7555,7 +7604,7 @@ label_2A308::
 
 label_2A351::
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  b
     and  a
     adc  a, b
@@ -7620,8 +7669,7 @@ label_2A38F::
 label_2A394::
     rst  $30
     ld   d, b
-    db   $F2 ; Undefined instruction
-    rlca
+    ld   a, [$FF00+C]
     ld   h, $82
     ld   [label_1003], sp
     add  hl, hl
@@ -7788,8 +7836,7 @@ label_2A433::
     dec  l
     inc  b
     ld   a, [$FF30]
-    db   $F2 ; Undefined instruction
-    add  hl, sp
+    ld   a, [$FF00+C]
     rst  $30
     jp   nz, label_D39
     add  hl, de
@@ -7907,7 +7954,7 @@ label_2A4C7::
 label_2A4DA::
     ldi  [hl], a
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  b
     xor  c
     adc  a, b
@@ -8759,8 +8806,8 @@ label_2A8AB::
     add  a, e
     ld   h, a
     ldi  [hl], a
-    halt
-    ld   c, c
+    db   $76 ; Halt
+    jr   z, label_2A90A
     ld   a, [hli]
     ld   e, c
     dec  c
@@ -8818,6 +8865,8 @@ label_2A8AB::
     add  a, e
     ld   b, d
     rrca
+
+label_2A90A::
     add  a, e
     ld   d, d
     rrca
@@ -8874,7 +8923,8 @@ label_2A924::
     pop  af
     ld   [hl], e
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     jr   nz, label_2A916
     ld   d, b
     ret
@@ -9058,7 +9108,8 @@ label_2AA14::
 
 label_2AA2B::
     dec  c
-    halt
+    db   $76 ; Halt
+    inc  l
 
 label_2AA2E::
     cp   $04
@@ -9068,7 +9119,8 @@ label_2AA2E::
     jr   nz, label_2AA2B
     add  hl, sp
     rst  $30
-    halt
+    db   $76 ; Halt
+    push af
     db   $10 ; Undefined instruction
     jr   nz, label_2AA4A
     jr   nc, label_2AA6A
@@ -9123,7 +9175,7 @@ label_2AA62::
 label_2AA7A::
     ld   d, e
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     dec  b
     call c, label_1318
     cp   $04
@@ -9173,7 +9225,8 @@ label_2AAB3::
     ld   [bc], a
     db   $F4 ; Undefined instruction
     jr   nc, label_2AAAD
-    halt
+    db   $76 ; Halt
+    push af
 
 label_2AABD::
     nop
@@ -9219,7 +9272,8 @@ label_2AAE5::
     add  a, [hl]
     ld   [hl], b
     inc  de
-    halt
+    db   $76 ; Halt
+    inc  d
     ld   h, [hl]
 
 label_2AAF1::
@@ -9277,7 +9331,7 @@ label_2AB1C::
     cp   [hl]
 
 label_2AB33::
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     dec  b
     db   $DB
     adc  a, b
@@ -9396,7 +9450,7 @@ label_2AB93::
     ld   a, c
     inc  l
     jr   label_2AB83
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     dec  b
     db   $88
 
@@ -9432,8 +9486,7 @@ label_2ABC8::
     ld   de, label_68E
     db   $F4 ; Undefined instruction
     ld   b, b
-    db   $F2 ; Undefined instruction
-    ld   c, c
+    ld   a, [$FF00+C]
     ld   c, d
     ld   [hl], l
     push af
@@ -9476,7 +9529,8 @@ label_2AC19::
     dec  hl
     ld   [hl], d
     dec  c
-    halt
+    db   $76 ; Halt
+    dec  c
     ld   [hl], e
     inc  l
     ld   [hl], a
@@ -9533,7 +9587,7 @@ label_2AC52::
     jr   label_2AC13
 
 label_2AC54::
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
 
 label_2AC55::
     dec  b
@@ -9553,7 +9607,8 @@ label_2AC58::
     ld   b, $C7
     rlca
     db   $F4 ; Undefined instruction
-    halt
+    db   $76 ; Halt
+    push af
     rlca
     add  hl, hl
     ld   [label_90D], sp
@@ -9576,7 +9631,7 @@ label_2AC6A::
     add  a, d
     ld   h, h
     jp  c, label_BE11
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     dec  b
     jp  c, label_1318
     ldd  [hl], a
@@ -9710,8 +9765,11 @@ label_2AD29::
     dec  c
     ld   [bc], a
     ld   a, [$FF40]
-    db   $F2 ; Undefined instruction
-    ld   de, label_2A1AE
+    ld   a, [$FF00+C]
+    xor  [hl]
+
+label_2AD3A::
+    ld   h, c
     xor  [hl]
     ld   l, b
     xor  [hl]
@@ -9804,7 +9862,8 @@ label_2AD29::
     ld   sp, $C322
     ld   b, [hl]
     inc  hl
-    halt
+    db   $76 ; Halt
+    daa
     add  a, h
     ld   d, b
     ld   hl, label_2654
@@ -9827,6 +9886,8 @@ label_2AD29::
     daa
     rrca
     add  a, d
+
+label_2ADC8::
     scf
     rrca
     ld   d, d
@@ -9893,9 +9954,9 @@ label_2ADD6::
     dec  c
     inc  b
     ld   a, [$FF50]
-    db   $F2 ; Undefined instruction
-    ld   de, label_18AC
+    ld   a, [$FF00+C]
     xor  h
+    jr   label_2ADC8
     ld   hl, label_22AF
     and  a
     add  a, h
@@ -9974,7 +10035,8 @@ label_2AE5F::
     ld   h, [hl]
     jr   z, label_2AEF3
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
     add  a, e
     ld   d, $20
     cp   $04
@@ -10101,8 +10163,7 @@ label_2AEF6::
     db   $DB
     rlca
     ld   a, [$FF40]
-    db   $F2 ; Undefined instruction
-    ld   [hl], e
+    ld   a, [$FF00+C]
     pop  af
     ld   b, a
     inc  l
@@ -10161,7 +10222,7 @@ label_2AF62::
     call c, label_31C3
     call c, label_2A185
     call c, label_BE43
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     dec  b
     ret  c
     jr   label_2AF8B
@@ -10810,7 +10871,10 @@ label_2B2A7::
     ld   l, c
     jr   z, label_2B322
     ret  z
-    halt
+    db   $76 ; Halt
+
+label_2B2B2::
+    ret  z
     ld   a, b
     jr   z, label_2B32F
     dec  c
@@ -10876,7 +10940,10 @@ label_2B2FA::
     ld   l, c
     jr   z, label_2B375
     ret  z
-    halt
+    db   $76 ; Halt
+
+label_2B305::
+    ret  z
     ld   a, b
     jr   z, label_2B382
     dec  c
@@ -10985,7 +11052,10 @@ label_2B375::
     dec  c
 
 label_2B382::
-    halt
+    db   $76 ; Halt
+
+label_2B383::
+    inc  l
     ld   a, b
     jr   z, label_2B400
     rst  $18
@@ -11400,7 +11470,8 @@ label_2B570::
     add  a, e
     ld   [hl], e
     dec  b
-    halt
+    db   $76 ; Halt
+    daa
 
 label_2B577::
     add  a, d
@@ -11727,7 +11798,10 @@ label_2B6B6::
     add  a, l
     ld   [hl], c
     rst  $18
-    halt
+    db   $76 ; Halt
+
+label_2B700::
+    daa
     add  a, e
     ld   [hl], a
     ldi  [hl], a
@@ -11943,8 +12017,8 @@ label_2B7F4::
     add  a, d
     ld   [hl], h
     ldi  [hl], a
-    halt
-    ld   h, l
+    db   $76 ; Halt
+    jr   z, label_2B879
     set  4, b
     nop
     sub  a, d
@@ -12030,6 +12104,8 @@ label_2B874::
     rst  $18
     inc  bc
     rst  0
+
+label_2B879::
     ld   b, $C7
     add  a, d
     inc  d
@@ -12140,7 +12216,8 @@ label_2B8EF::
     inc  hl
     ld   [hl], b
     rst  $18
-    halt
+    db   $76 ; Halt
+    daa
     add  a, d
 
 label_2B902::
@@ -12238,7 +12315,8 @@ label_2B96F::
     ld   [hl], l
     daa
     add  a, e
-    halt
+    db   $76 ; Halt
+    ldi  [hl], a
     ld   a, c
     jr   z, label_2B9E5
     dec  de
@@ -12598,7 +12676,10 @@ label_2BB07::
     ld   a, b
     jr   z, label_2BBA7
     rst  $18
-    halt
+    db   $76 ; Halt
+
+label_2BB30::
+    db   $FD ; Undefined instruction
     ld   [rJOYP], a
     inc  de
     ld   e, b
@@ -12653,7 +12734,8 @@ label_2BB5C::
     ld   [hl], h
     ld   [hl], l
     ld   [hl], d
-    halt
+    db   $76 ; Halt
+    ld   a, [hl]
     add  a, e
     ld   [hl], a
     ld   [hl], d
@@ -12828,7 +12910,8 @@ label_2BC2B::
     inc  h
     ld   [hl], d
     ret  z
-    halt
+    db   $76 ; Halt
+    ret  z
 
 label_2BC31::
     ld   de, label_17AC
@@ -13126,8 +13209,7 @@ label_2BD8C::
     dec  c
     inc  b
     ld   a, [$FF30]
-    db   $F2 ; Undefined instruction
-    add  hl, sp
+    ld   a, [$FF00+C]
 
 label_2BD92::
     rst  $30
@@ -13443,8 +13525,7 @@ label_2BEA8::
     dec  c
     inc  b
     ld   a, [$FF30]
-    db   $F2 ; Undefined instruction
-    add  a, d
+    ld   a, [$FF00+C]
     ld   de, $8220
     rla
     jr   nz, label_2BEA1

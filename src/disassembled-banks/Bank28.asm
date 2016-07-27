@@ -207,20 +207,32 @@ label_7006C::
     ld   [hl], l
     ld    hl, sp+$75
     add  hl, bc
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
-    ld   [hl], a
+    db   $76 ; Halt
+    ld   a, [de]
+    db   $76 ; Halt
+    ld   a, [hli]
+    db   $76 ; Halt
+    add  hl, sp
+    db   $76 ; Halt
+    ld   c, c
+    db   $76 ; Halt
+    ld   e, c
+    db   $76 ; Halt
+    ld   l, c
+    db   $76 ; Halt
+    ld   a, c
+    db   $76 ; Halt
+    adc  a, c
+    db   $76 ; Halt
+    sbc  a, d
+    db   $76 ; Halt
+    or   [hl]
+    db   $76 ; Halt
+    rst  0
+    db   $76 ; Halt
+    rst  $30
+    db   $76 ; Halt
+    jr   label_70178
     add  hl, hl
     ld   [hl], a
     ld   b, [hl]
@@ -267,7 +279,7 @@ label_70120::
     ld   a, h
     sub  a, a
     ld   a, h
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   a, h
     ld   b, $7D
     ld   d, [hl]
@@ -325,6 +337,8 @@ label_70120::
     dec  de
     ld   e, l
     ld   [hl], d
+
+label_70178::
     ld   e, l
     ld   [hl], d
     ld   e, l
@@ -406,9 +420,12 @@ label_701BD::
     ld   [hl], l
     bit  6, l
     add  hl, de
-    halt
-    halt
-    halt
+    db   $76 ; Halt
+    adc  a, b
+    db   $76 ; Halt
+    db   $E8 ; add  sp, d
+    db   $76 ; Halt
+    add  hl, bc
     ld   a, b
     ld   d, h
     ld   a, b
@@ -560,14 +577,15 @@ label_70247::
     ld   e, e
     rst  0
     ld   e, e
-    halt
+    db   $76 ; Halt
+    ld   e, h
     call nz, label_45C
     ld   e, l
     inc  sp
     ld   e, l
     ld   h, d
     ld   e, l
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, [hl]
     inc  a
     ld   e, a
@@ -668,7 +686,7 @@ label_70247::
     ld   [hl], h
     sub  a, h
     ld   [hl], h
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [hl], h
     inc  sp
     ld   [hl], l
@@ -682,7 +700,8 @@ label_70247::
 label_702F1::
     jr   label_70369
     add  a, d
-    halt
+    db   $76 ; Halt
+    ld   c, c
     ld   [hl], a
     adc  a, b
     ld   [hl], a
@@ -698,7 +717,7 @@ label_702FF::
     ld   a, c
     add  a, c
     ld   a, c
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   a, c
     adc  a, a
     ld   a, d
@@ -918,7 +937,8 @@ label_70380::
     ld   e, [hl]
     ld   e, d
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   e, [hl]
     adc  a, a
     ld   e, [hl]
     xor  d
@@ -1038,8 +1058,10 @@ label_7045A::
     jp   label_D475
     ld   [hl], l
     ld   l, e
-    halt
-    halt
+    db   $76 ; Halt
+    reti
+    db   $76 ; Halt
+    add  hl, de
     ld   [hl], a
     ld   a, $77
     and  $77
@@ -1141,8 +1163,7 @@ label_704C6::
     ld   [hl], c
     cp   c
     ld   [hl], c
-    db   $F2 ; Undefined instruction
-    ld   [hl], c
+    ld   a, [$FF00+C]
     ld   l, $72
     ld   c, b
     ld   [hl], d
@@ -1184,9 +1205,11 @@ label_704FF::
     ld   a, [$FF75]
     ld   a, $76
     ld   a, c
-    halt
-    halt
-    halt
+    db   $76 ; Halt
+    and  a
+    db   $76 ; Halt
+    or   $76
+    inc  [hl]
     ld   [hl], a
     add  a, h
     ld   [hl], a
@@ -1315,7 +1338,7 @@ label_705A9::
     db   $DE
     sbc  a, $DF
     ld   [$FFE1], a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
 
@@ -1511,7 +1534,8 @@ label_705FF::
     ld   [hl], e
     ld   [hl], h
     ld   [hl], l
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     ld   a, b
     ld   a, c
     ld   b, d
@@ -1630,7 +1654,8 @@ label_706EB::
     ld   [hl], e
     ld   [hl], h
     ld   [hl], l
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     ld   a, b
     ld   a, c
     sbc  a, e
@@ -2708,7 +2733,8 @@ label_70B18::
     jr   nz, label_70BB1
     jr   nz, label_70BF6
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     ld   [hl], e
     jr   nz, label_70BEF
@@ -2787,7 +2813,8 @@ label_70BCE::
     ld   l, a
     jr   nz, label_70C43
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, h
     ld   l, a
     ld   [hl], b
@@ -2995,7 +3022,10 @@ label_70C9F::
     ld   hl, label_70920
     jr   nz, label_70D0F
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_70CA9::
+    ld   h, l
     ld   l, [hl]
     ld   e, [hl]
     ld   [hl], h
@@ -3110,7 +3140,8 @@ label_70D0F::
     ld   b, d
     ld   [hl], d
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_70D6B
     ld   h, c
     ld   l, [hl]
@@ -3249,7 +3280,8 @@ label_70D90::
     ld   e, [hl]
     ld   c, c
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_70E0A
     ld   l, a
     ld   [hl], h
@@ -3659,7 +3691,10 @@ label_70F38::
     ld   l, a
     jr   nz, label_70FAE
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_70F3D::
+    ld   h, l
 
 label_70F3E::
     ld   l, d
@@ -3789,7 +3824,8 @@ label_70FBC::
     jr   nz, label_70FDE
     ld   [hl], e
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     inc  l
 
 label_70FC3::
@@ -4124,7 +4160,8 @@ label_710ED::
     ld   [hl], d
     jr   nz, label_7115A
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, $2E
 
 label_710FC::
@@ -4136,7 +4173,10 @@ label_710FC::
     ld   c, c
     jr   nz, label_7116E
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_71108::
+    ld   h, l
     jr   nz, label_71179
     ld   l, a
     jr   nz, label_71177
@@ -4325,12 +4365,14 @@ label_711B9::
     jr   nz, label_711DE
     ld   c, c
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_711C2::
     ld   l, [hl]
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_711C6::
     ld   [hl], d
@@ -4539,7 +4581,8 @@ label_71287::
 label_7128C::
     jr   nz, label_712FA
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_71302
     ld   l, [hl]
     jr   nz, label_7130A
@@ -5127,7 +5170,8 @@ label_714D1::
     ld   c, c
     jr   nz, label_7153D
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_714D8::
     jr   nz, label_7153B
@@ -5437,7 +5481,8 @@ label_715FC::
     ld   l, h
     jr   nz, label_71666
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   a, c
     ld   l, a
     ld   [hl], l
@@ -5576,7 +5621,8 @@ label_7167B::
 
 label_71685::
     jr   nz, label_716EC
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, [hl]
     ld   c, c
     jr   nz, label_716EE
@@ -5738,7 +5784,8 @@ label_7171A::
     ld   l, c
 
 label_71724::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_7179C
     ld   l, b
 
@@ -5818,7 +5865,8 @@ label_71766::
     jr   nz, label_717D0
 
 label_7176B::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, [hl]
     ld   c, c
     jr   nz, label_717D2
@@ -5933,7 +5981,8 @@ label_717D0::
     ld   c, h
     ld   h, l
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_717DE::
     jr   nz, label_71854
@@ -6220,7 +6269,8 @@ label_718F4::
     ld   l, [hl]
     jr   nz, label_71946
     jr   nz, label_71964
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     jr   nz, label_71976
     ld   h, l
@@ -6799,7 +6849,8 @@ label_71B46::
     ld   c, c
     jr   nz, label_71BBC
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     jr   nz, label_71BC6
 
@@ -6810,7 +6861,10 @@ label_71B54::
     ld   l, c
 
 label_71B58::
-    halt
+    db   $76 ; Halt
+
+label_71B59::
+    ld   h, l
     jr   nz, label_71BBD
     jr   nz, label_71BD0
     ld   h, l
@@ -6954,7 +7008,8 @@ label_71BD0::
     ld   [hl], h
     jr   nz, label_71C56
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_71BF2::
     jr   nz, label_71C6D
@@ -7025,7 +7080,10 @@ label_71C31::
     jr   nz, label_71C80
     ld   l, b
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_71C3A::
+    ld   h, l
     jr   nz, label_71CA6
     ld   [hl], e
     jr   nz, label_71CB4
@@ -7198,7 +7256,8 @@ label_71CE2::
     ld   [hl], l
     jr   nz, label_71D4D
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_71CE8::
     jr   nz, label_71D5E
@@ -7391,7 +7450,8 @@ label_71DA2::
     ld   l, a
     jr   nz, label_71E17
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_71DAE::
     jr   nz, label_71E19
@@ -7419,7 +7479,8 @@ label_71DC2::
     ld   [hl], d
 
 label_71DC5::
-    halt
+    db   $76 ; Halt
+    ld   h, c
     ld   l, [hl]
     ld   [hl], h
     ld   [hl], e
@@ -7477,7 +7538,10 @@ label_71DFC::
     jr   nz, label_71E1E
     jr   nz, label_71E20
     jr   nz, label_71E22
-    halt
+    db   $76 ; Halt
+
+label_71E03::
+    ld   l, c
     ld   l, h
     ld   l, h
     ld   h, c
@@ -7620,7 +7684,8 @@ label_71E8C::
     ld   [hl], d
     ld   l, c
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_71F07
     ld   l, b
 
@@ -7738,12 +7803,16 @@ label_71EF6::
 label_71EFB::
     jr   nz, label_71F63
     ld   l, c
-    halt
+    db   $76 ; Halt
+
+label_71EFF::
+    ld   h, l
     jr   nz, label_71F22
     ld   l, h
     ld   h, l
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_71F07::
     ld   [hl], e
@@ -7774,7 +7843,8 @@ label_71F1A::
     jr   nz, label_71F98
     ld   l, b
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, h
 
 label_71F2A::
@@ -7804,7 +7874,8 @@ label_71F35::
     ld   h, l
 
 label_71F46::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     ld   hl, label_2020
     ld   c, c
@@ -7859,7 +7930,8 @@ label_71F7B::
     jr   nz, label_71FE9
     ld   h, l
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_71F81::
     jr   nz, label_71FF0
@@ -7913,13 +7985,15 @@ label_71FA8::
 label_71FB3::
     jr   nz, label_7201D
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_71FDA
     ld   [hl], d
     ld   h, l
     ld   h, e
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     ld   h, l
     ld   h, h
@@ -7944,7 +8018,8 @@ label_71FC9::
 
 label_71FD0::
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], e
     ld   hl, label_70E20
     ld   l, a
@@ -7954,7 +8029,8 @@ label_71FD0::
 label_71FDA::
     ld   l, l
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_72054
     ld   l, b
     ld   l, c
@@ -8013,7 +8089,8 @@ label_72018::
 
 label_7201A::
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_7201D::
     ld   [hl], d
@@ -8058,7 +8135,8 @@ label_7203B::
     ld   l, h
     ld   h, l
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_72047::
     ld   [hl], e
@@ -8106,7 +8184,8 @@ label_72068::
     jr   nz, label_7208F
     ld   l, h
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_720E4
     ld   h, [hl]
 
@@ -8171,7 +8250,8 @@ label_7209C::
 label_720A8::
     ld   h, l
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_720AC::
     ld   [hl], e
@@ -8390,7 +8470,8 @@ label_72189::
     jr   nz, label_721AB
     jr   nz, label_721F4
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_721FF
     ld   h, l
 
@@ -8474,7 +8555,8 @@ label_721DA::
 label_721E9::
     ld   l, h
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_72258
     ld   l, [hl]
     jr   nz, label_72266
@@ -8517,7 +8599,8 @@ label_72207::
     ld   h, l
     jr   nz, label_7227F
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_72281
     ld   l, [hl]
     ld   [hl], h
@@ -8525,7 +8608,8 @@ label_72207::
     ld   h, l
     jr   nz, label_72281
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], e
     jr   nz, label_72293
     ld   h, [hl]
@@ -8720,7 +8804,8 @@ label_722E8::
     jr   nz, label_7230A
     ld   h, [hl]
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   l, a
 
 label_722EE::
     ld   [hl], d
@@ -8818,7 +8903,8 @@ label_72342::
     ld   hl, label_2E2E
     ld   l, $48
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_723CC
     ld   l, a
     ld   [hl], l
@@ -8826,7 +8912,8 @@ label_72342::
     ld   h, l
     ld   [hl], h
     jr   nz, label_723C0
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     ld   a, c
     ld   l, a
@@ -8891,7 +8978,8 @@ label_72393::
 label_72399::
     jr   nz, label_72407
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], e
     jr   nz, label_7240A
     ld   l, [hl]
@@ -9235,7 +9323,10 @@ label_724E7::
     ld   [hl], h
     jr   nz, label_72555
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_724EF::
+    ld   h, l
     jr   nz, label_72565
     ld   l, a
     ld   l, l
@@ -9347,7 +9438,8 @@ label_72559::
     jr   nz, label_7257D
     jr   nz, label_725C7
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, [hl]
     ld   e, [hl]
     ld   [hl], h
@@ -9366,7 +9458,8 @@ label_7256A::
     ld   l, h
     jr   nz, label_725D9
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_725BF
     ld   l, a
     ld   l, h
@@ -9380,7 +9473,8 @@ label_7257D::
     jr   nz, label_725CB
     ld   h, l
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], e
 
 label_72584::
@@ -9505,7 +9599,8 @@ label_725F6::
     ld   l, a
 
 label_725F9::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, h
     ld   l, $2E
     ld   l, $20
@@ -9533,7 +9628,8 @@ label_7260F::
     ld   [hl], e
     ld   l, b
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, h
     ccf
     jr   nz, label_7263F
@@ -9627,7 +9723,8 @@ label_7267B::
     ld   h, l
     jr   nz, label_726E6
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_726F1
     ld   l, [hl]
     jr   nz, label_726FF
@@ -9683,7 +9780,8 @@ label_726AA::
 
 label_726BF::
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     inc  l
     jr   nz, label_72733
     ld   l, a
@@ -9894,7 +9992,10 @@ label_72796::
 
 label_7279C::
     ld   h, d
-    halt
+    db   $76 ; Halt
+
+label_7279E::
+    ld   l, c
     ld   l, a
     ld   [hl], l
     ld   [hl], e
@@ -9903,7 +10004,8 @@ label_7279C::
     jr   nz, label_727F0
     jr   nz, label_72811
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_72822
 
 label_727AE::
@@ -10176,7 +10278,8 @@ label_728B7::
 label_728B8::
     jr   nz, label_7291E
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   hl, label_2020
     ld   b, d
     ld   a, c
@@ -10222,7 +10325,8 @@ label_728EE::
     ld   h, c
 
 label_728F0::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_7296D
     ld   l, a
     ld   [hl], l
@@ -10371,7 +10475,8 @@ label_7297B::
 label_7297C::
     ld   h, c
     ld   hl, label_72148
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_729FD
     ld   l, a
     ld   [hl], l
@@ -10457,7 +10562,10 @@ label_729C1::
 label_729D8::
     jr   nz, label_72A41
     ld   l, c
-    halt
+    db   $76 ; Halt
+
+label_729DC::
+    ld   h, l
     jr   nz, label_72A54
     ld   [hl], e
     jr   nz, label_72A54
@@ -10487,7 +10595,8 @@ label_729F1::
 label_729F7::
     ld   h, d
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_72A1D
 
 label_729FD::
@@ -10712,7 +10821,10 @@ label_72ACF::
     ld   l, h
     jr   nz, label_72B45
     ld   l, a
-    halt
+    db   $76 ; Halt
+
+label_72ADA::
+    ld   h, l
     ld   hl, label_2020
 
 label_72ADE::
@@ -11348,7 +11460,10 @@ label_72D7E::
 
 label_72D81::
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_72D83::
+    ld   h, l
     jr   nz, label_72DA6
     jr   nz, label_72DA8
     ld   [hl], h
@@ -11403,7 +11518,10 @@ label_72DB6::
     ld   h, l
     jr   nz, label_72E2F
     ld   l, c
-    halt
+    db   $76 ; Halt
+
+label_72DBF::
+    ld   h, l
     ld   [hl], d
     jr   nz, label_72E25
     ld   h, c
@@ -11791,7 +11909,8 @@ label_72F64::
     ld   l, c
 
 label_72F73::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_72FEB
     ld   l, a
     jr   nz, label_72FC5
@@ -11914,7 +12033,10 @@ label_72FCD::
     ld   h, h
     jr   nz, label_73051
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_72FEB::
+    ld   h, l
     jr   nz, label_73050
     ld   [hl], d
     ld   l, a
@@ -12125,7 +12247,8 @@ label_730BA::
 
 label_730BC::
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_73122
     jr   nz, label_73135
     ld   h, l
@@ -12237,7 +12360,8 @@ label_73122::
     ld   l, a
     jr   nz, label_7319C
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_73133::
     ld   [hl], e
@@ -12484,7 +12608,8 @@ label_73216::
     jr   nz, label_73281
 
 label_7321C::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, [hl]
     jr   nz, label_73241
     ld   l, c
@@ -12555,10 +12680,12 @@ label_73260::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_732DA
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   h, h
     jr   nz, label_7328D
     jr   nz, label_7328F
@@ -12621,7 +12748,8 @@ label_732A2::
     ld   h, l
     ld   h, e
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     ld   h, l
     ld   h, h
@@ -13016,7 +13144,8 @@ label_7341E::
     ld   [hl], h
     jr   nz, label_734B0
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   hl, label_2020
 
 label_73449::
@@ -13030,7 +13159,8 @@ label_73449::
     ld   l, c
 
 label_73452::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_734C3
     ld   h, l
     jr   nz, label_734CC
@@ -13039,7 +13169,10 @@ label_73452::
     ld   h, l
 
 label_7345C::
-    halt
+    db   $76 ; Halt
+
+label_7345D::
+    ld   l, c
     ld   [hl], h
     ld   [hl], h
     ld   l, h
@@ -13326,7 +13459,8 @@ label_73575::
     ld   [hl], a
     ld   hl, label_709FF
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_735E8
     ld   l, a
     ld   [hl], h
@@ -13419,7 +13553,8 @@ label_735D4::
     ld   l, a
 
 label_735E1::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   hl, label_2020
     ld   b, e
     ld   h, c
@@ -13433,7 +13568,8 @@ label_735E8::
     ld   l, c
 
 label_735EF::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_73660
     ld   h, l
 
@@ -13444,7 +13580,8 @@ label_735F4::
     ld   h, l
 
 label_735F9::
-    halt
+    db   $76 ; Halt
+    ld   l, c
 
 label_735FB::
     ld   [hl], h
@@ -13620,7 +13757,8 @@ label_736A2::
 label_736A3::
     jr   nz, label_7370D
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_736A8::
     jr   nz, label_7370C
@@ -13662,7 +13800,8 @@ label_736CE::
     jr   nz, label_736F0
     jr   nz, label_736F2
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
 
 label_736D6::
@@ -13763,7 +13902,8 @@ label_73721::
     ld   h, e
     ld   h, l
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_73731::
     jr   nz, label_737A7
@@ -13825,7 +13965,10 @@ label_7376B::
 
 label_73773::
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_73775::
+    ld   h, l
     jr   nz, label_73798
     jr   nz, label_737DF
     ld   l, [hl]
@@ -13882,7 +14025,8 @@ label_737A7::
 label_737AC::
     ld   hl, label_70820
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_737D4
     jr   nz, label_7382F
     ld   l, a
@@ -14008,7 +14152,10 @@ label_73823::
     ld   [hl], e
     ld   h, l
     ld   l, h
-    halt
+    db   $76 ; Halt
+
+label_7382E::
+    ld   h, l
 
 label_7382F::
     ld   [hl], e
@@ -14090,7 +14237,8 @@ label_73866::
     ld   [hl], l
 
 label_73876::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, [hl]
     ld   l, c
     ld   [hl], d
@@ -14275,7 +14423,8 @@ label_73923::
     ld   l, a
 
 label_7392B::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   hl, label_70220
     ld   [hl], l
     ld   [hl], h
@@ -14707,7 +14856,10 @@ label_73AE0::
 label_73AF9::
     ld   l, c
     ld   h, l
-    halt
+    db   $76 ; Halt
+
+label_73AFC::
+    ld   h, l
     jr   nz, label_73B68
     ld   [hl], h
     ld   hl, label_2020
@@ -14765,7 +14917,8 @@ label_73B1D::
 label_73B3D::
     ld   c, b
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_73BBC
 
 label_73B43::
@@ -14888,7 +15041,8 @@ label_73BB3::
     ld   e, [hl]
 
 label_73BB4::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_73C24
     ld   h, l
     ld   h, c
@@ -15111,7 +15265,8 @@ label_73C87::
 
 label_73C97::
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_73C9A::
     jr   nz, label_73CFD
@@ -15176,7 +15331,8 @@ label_73CCD::
     ld   h, c
 
 label_73CD3::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_73D4B
     ld   l, b
     ld   h, l
@@ -15367,7 +15523,8 @@ label_73D87::
     jr   nz, label_73DAE
     ld   c, b
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_73E0D
     ld   l, a
     ld   [hl], l
@@ -15392,7 +15549,10 @@ label_73DA3::
     ld   l, c
     ld   l, l
     jr   nz, label_73E1C
-    halt
+    db   $76 ; Halt
+
+label_73DAE::
+    ld   h, l
     ld   [hl], d
     jr   nz, label_73DD2
     jr   nz, label_73E2D
@@ -15575,7 +15735,10 @@ label_73E5C::
     ld   h, c
 
 label_73E5D::
-    halt
+    db   $76 ; Halt
+
+label_73E5E::
+    ld   h, l
     jr   nz, label_73ED5
     ld   l, a
     jr   nz, label_73E84

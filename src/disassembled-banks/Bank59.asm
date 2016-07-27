@@ -2946,8 +2946,7 @@ label_ECC5E::
     ld   b, b
     ld   a, [hl]
     add  a, b
-    db   $F2 ; Undefined instruction
-    ld   l, h
+    ld   a, [$FF00+C]
     db   $E4 ; Undefined instruction
     jr   label_ECC45
     ld   [hl], b
@@ -2996,9 +2995,12 @@ label_ECC5E::
     dec  e
     rst  $38
     cp   $FF
-    halt
-    halt
-    halt
+    db   $76 ; Halt
+    rst  $38
+    db   $76 ; Halt
+    rst  $38
+    db   $76 ; Halt
+    ld   sp, hl
     cp   $FF
     cp   $FF
     ld   b, $FF
@@ -3098,8 +3100,7 @@ label_ECD52::
     dec  bc
     db   $F4 ; Undefined instruction
     rrca
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     nop
     nop
     nop
@@ -3476,8 +3477,7 @@ label_ECEC5::
     jr   nz, label_ECEF6
     ld   a, [hl]
     add  a, b
-    db   $F2 ; Undefined instruction
-    ld   l, h
+    ld   a, [$FF00+C]
     db   $E4 ; Undefined instruction
     jr   label_ECEC5
     ld   [hl], b
@@ -3723,10 +3723,12 @@ label_ED024::
     nop
     ld   c, c
     ld   [hl], $89
-    halt
+    db   $76 ; Halt
+    rst  $38
     ld   b, [hl]
     adc  a, a
-    halt
+    db   $76 ; Halt
+    ld   a, [hl]
     jr   c, label_ED0E9
     nop
     add  a, d
@@ -4516,7 +4518,7 @@ label_ED248::
     di
     db   $EC ; Undefined instruction
     db   $FD ; Undefined instruction
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [$FF1F], a
     rst  $38
     nop
@@ -6813,8 +6815,7 @@ label_EDCC7::
     rst  $38
     rst  $38
     adc  a, $3F
-    db   $F2 ; Undefined instruction
-    rrca
+    ld   a, [$FF00+C]
     db   $FC ; Undefined instruction
     inc  bc
     cp   $03
@@ -7614,7 +7615,7 @@ label_EE0F9::
     inc  a
     ld   b, d
     inc  a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  e
     inc  h
     jr   label_EE139
@@ -7740,7 +7741,7 @@ label_EE14E::
     rlca
     rra
     nop
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     dec  e
     add  a, c
     ld   a, [hl]
@@ -7874,7 +7875,7 @@ label_EE215::
     ld   a, h
     and  d
     ld   e, h
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  e
     ld   b, d
     inc  a
@@ -8317,8 +8318,7 @@ label_EE3F0::
     nop
     ld   a, [bc]
     nop
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     ld   bc, $0000
     inc  e
     nop
@@ -9576,8 +9576,7 @@ label_EE926::
     jr   label_EE92D
     ld   a, b
     ld    hl, sp+$A0
-    db   $F2 ; Undefined instruction
-    ret  nz
+    ld   a, [$FF00+C]
     db   $E3 ; Undefined instruction
     nop
     db   $D3 ; Undefined instruction
@@ -10665,10 +10664,8 @@ label_EED0E::
     ld   [hl], b
     ld   a, a
     ld   b, b
-    db   $F2 ; Undefined instruction
-    pop  bc
-    db   $F2 ; Undefined instruction
-    add  a, c
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
     ld   a, [$F781]
     adc  a, b
     db   $E3 ; Undefined instruction
@@ -10689,8 +10686,7 @@ label_EED0E::
     sbc  a, a
     db   $EC ; Undefined instruction
     ld   a, $1C
-    db   $F2 ; Undefined instruction
-    ld   a, h
+    ld   a, [$FF00+C]
     db   $E3 ; Undefined instruction
     push hl
     ret  nz
@@ -10718,7 +10714,8 @@ label_EED0E::
     dec  de
     or   b
     ld   c, a
-    halt
+    db   $76 ; Halt
+    xor  a
     ld   [$FFDF], a
     nop
     rst  $38
@@ -10914,7 +10911,7 @@ label_EEF02::
     ret  nz
     ld   a, c
     add  a, $1D
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     rst  $38
     ret  nz
     rst  $18
@@ -10936,7 +10933,7 @@ label_EEF17::
     daa
     jp  c, label_F92D
     ld   [hl], $FD
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $FD ; Undefined instruction
     add  a, d
     db   $FD ; Undefined instruction
@@ -11676,8 +11673,8 @@ label_EF27C::
     ld   [$FF3F], a
     db   $E3 ; Undefined instruction
     ccf
-    db   $F2 ; Undefined instruction
-    ld   e, $F3
+    ld   a, [$FF00+C]
+    di
     ld   e, $F3
     rra
     cp   $0C
@@ -11827,7 +11824,7 @@ label_EF30B::
     ld   a, a
     jp   label_E23E
     ccf
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ccf
     db   $E3 ; Undefined instruction
     ld   e, $F4
@@ -11919,7 +11916,7 @@ label_EF3B1::
     rst  $20
     db   $E4 ; Undefined instruction
     ld   h, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   hl, $E0E1
     jr   nz, label_EF39F
     jr   nz, label_EF3B1
@@ -12138,7 +12135,7 @@ label_EF49F::
     db   $10 ; Undefined instruction
     ld   [label_40F], sp
     rlca
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     rra
     rst  $38
@@ -12198,7 +12195,7 @@ label_EF503::
     rst  $38
     rst  $38
     nop
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     sbc  a, l
     xor  $D1
     db   $FC ; Undefined instruction
@@ -12283,7 +12280,7 @@ label_EF503::
     nop
     nop
     nop
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [$FF27], a
     and  e
     ld   h, $22
@@ -12299,8 +12296,7 @@ label_EF584::
     nop
     rrca
     ld   [label_4C4], sp
-    db   $F2 ; Undefined instruction
-    ldh  [$FF0C], a
+    ld   a, [$FF00+C]
     ld   e, $1E
     nop
     ld    hl, sp+$01
@@ -12770,9 +12766,8 @@ label_EF790::
     jr   label_EF790
     ld   b, b
     xor  $21
-    halt
-    inc  a
-    dec  bc
+    db   $76 ; Halt
+    ld   de, label_B3C
     inc  e
     rlca
     adc  a, [hl]
@@ -12970,8 +12965,8 @@ label_EF82B::
     ldi  [hl], a
 
 label_EF8AE::
-    ldh  [$FF0C], a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
+    ld  [$FF00+C], a
     ei
     jr   label_EF8AE
     ld   [label_1079], sp
@@ -13574,10 +13569,8 @@ label_EFB01::
     nop
     rst  $38
     rla
-    db   $F2 ; Undefined instruction
-    rla
-    db   $F2 ; Undefined instruction
-    rrca
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
     ld   a, [$FE07]
     inc  bc
     rst  $38
@@ -14004,9 +13997,8 @@ label_EFD45::
     db   $E4 ; Undefined instruction
     db   $E4 ; Undefined instruction
     ldi  [hl], a
-    db   $F2 ; Undefined instruction
-    ld   e, $FE
-    add  a, c
+    ld   a, [$FF00+C]
+    cp   $81
     ld   a, a
     ret  nz
     ccf

@@ -817,7 +817,7 @@ label_982E7::
     inc  bc
     add  hl, bc
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     add  hl, bc
     inc  bc
@@ -1252,7 +1252,7 @@ label_984D1::
     add  hl, bc
     inc  bc
     or   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     or   a
     inc  bc
     add  hl, bc
@@ -3635,7 +3635,7 @@ label_98F0C::
     inc  b
     ld   a, [bc]
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     scf
     scf
@@ -4127,7 +4127,7 @@ label_99131::
 
 label_99151::
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     add  hl, sp
     scf
@@ -4621,7 +4621,7 @@ label_9937D::
     jr   c, label_993C6
     ld   c, $38
     jr   z, label_99417
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   a, [bc]
     ld    hl, sp+$38
@@ -5091,7 +5091,7 @@ label_995A8::
     ld    hl, sp+$04
     jr   nz, label_995A8
     ld   a, [label_99BFF]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld    hl, sp+$04
     dec  a
@@ -9474,9 +9474,9 @@ label_9A8B6::
     ld   e, h
     rst  $30
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     rst  $30
     ld   h, $36
@@ -9542,7 +9542,7 @@ label_9A8FB::
     ld   sp, hl
     db   $FC ; Undefined instruction
     ld   h, b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   h, b
     ei
     rst  $38
@@ -10207,8 +10207,7 @@ label_9ABCD::
     or   e
     or   e
     or   e
-    db   $F2 ; Undefined instruction
-    inc  b
+    ld   a, [$FF00+C]
     jr   c, label_9ABF6
     jr   c, label_9ABA3
     cp   b
@@ -10217,9 +10216,8 @@ label_9ABCD::
     cp   c
     di
     inc  b
-    db   $F2 ; Undefined instruction
-    ld   c, $38
-    or   [hl]
+    ld   a, [$FF00+C]
+    jr   c, label_9ABAA
     cp   c
     cp   c
 
@@ -10721,7 +10719,7 @@ label_9ADDC::
     ld    hl, sp+$0B
     ld   e, h
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   e, h
     dec  bc
@@ -11689,9 +11687,9 @@ label_9B25F::
     db   $FC ; Undefined instruction
     dec  bc
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   h, d
     ld   a, [bc]
     rst  $38
@@ -11775,7 +11773,7 @@ label_9B29D::
     ld   h, d
     ld   a, [bc]
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   a, [bc]
     ld   h, d
@@ -12402,12 +12400,10 @@ label_9B58C::
     add  a, $FB
     scf
     ld   a, [$F8FA]
-    db   $F2 ; Undefined instruction
-    ld   c, $0E
-    ld   [$F8F5], a
-
-label_9B5AB::
-    scf
+    ld   a, [$FF00+C]
+    ld   c, $EA
+    push af
+    ld    hl, sp+$37
     inc  b
     ld   l, [hl]
     inc  b
@@ -12768,7 +12764,7 @@ label_9B70F::
     cp   $25
     ld   c, $37
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     rst  $30
     ld    hl, sp+$0B
@@ -12856,7 +12852,7 @@ label_9B70F::
     ld   h, $F7
     ld   a, [bc]
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   a, [bc]
     rst  $38
@@ -12985,7 +12981,7 @@ label_9B70F::
 
 label_9B81C::
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   e, h
     jr   c, label_9B830

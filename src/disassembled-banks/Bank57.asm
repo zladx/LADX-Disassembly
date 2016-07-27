@@ -74,10 +74,12 @@ label_E4024::
     nop
     ld   c, c
     ld   [hl], $89
-    halt
+    db   $76 ; Halt
+    rst  $38
     ld   b, [hl]
     adc  a, a
-    halt
+    db   $76 ; Halt
+    ld   a, [hl]
     jr   c, label_E40E9
     nop
     add  a, d
@@ -923,7 +925,8 @@ label_E43A2::
     rst  $38
     ld   [hl], h
     rst  $38
-    halt
+    db   $76 ; Halt
+    rst  $38
     rlca
     add  a, a
     ld   a, e
@@ -1800,7 +1803,8 @@ label_E47C0::
     rst  $38
     dec  [hl]
     rst  $38
-    halt
+    db   $76 ; Halt
+    rst  $28
     or   l
     adc  a, $7B
     adc  a, h
@@ -1863,7 +1867,7 @@ label_E47C0::
     rst  $38
     and  d
     ld   a, a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ccf
     push af
     ld   e, $FD
@@ -2428,8 +2432,7 @@ label_E4ACA::
 label_E4AD1::
     db   $F4 ; Undefined instruction
     adc  a, [hl]
-    db   $F2 ; Undefined instruction
-    add  a, [hl]
+    ld   a, [$FF00+C]
     ld   a, [label_E413F]
     ccf
     ld   b, c
@@ -3206,7 +3209,7 @@ label_E4E13::
     ld   a, a
     pop  bc
     ccf
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   a, $E4
     inc  e
     ld   sp, hl
@@ -3895,7 +3898,7 @@ label_E50F9::
     inc  a
     ld   b, d
     inc  a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  e
     inc  h
     jr   label_E5139
@@ -4021,7 +4024,7 @@ label_E514E::
     rlca
     rra
     nop
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     dec  e
     add  a, c
     ld   a, [hl]
@@ -4153,7 +4156,7 @@ label_E5215::
     ld   a, h
     and  d
     ld   e, h
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  e
     ld   b, d
     inc  a
@@ -4596,8 +4599,7 @@ label_E53F0::
     nop
     ld   a, [bc]
     nop
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     ld   bc, $0000
 
 label_E53FF::
@@ -5857,8 +5859,7 @@ label_E5926::
     jr   label_E592D
     ld   a, b
     ld    hl, sp+$A0
-    db   $F2 ; Undefined instruction
-    ret  nz
+    ld   a, [$FF00+C]
     db   $E3 ; Undefined instruction
     nop
     db   $D3 ; Undefined instruction
@@ -6944,10 +6945,8 @@ label_E5D0E::
     ld   [hl], b
     ld   a, a
     ld   b, b
-    db   $F2 ; Undefined instruction
-    pop  bc
-    db   $F2 ; Undefined instruction
-    add  a, c
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
     ld   a, [$F781]
     adc  a, b
     db   $E3 ; Undefined instruction
@@ -6968,8 +6967,7 @@ label_E5D0E::
     sbc  a, a
     db   $EC ; Undefined instruction
     ld   a, $1C
-    db   $F2 ; Undefined instruction
-    ld   a, h
+    ld   a, [$FF00+C]
     db   $E3 ; Undefined instruction
     push hl
     ret  nz
@@ -6997,7 +6995,8 @@ label_E5D0E::
     dec  de
     or   b
     ld   c, a
-    halt
+    db   $76 ; Halt
+    xor  a
     ld   [$FFDF], a
     nop
     rst  $38
@@ -7193,7 +7192,7 @@ label_E5F02::
     ret  nz
     ld   a, c
     add  a, $1D
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     rst  $38
     ret  nz
     rst  $18
@@ -7215,7 +7214,7 @@ label_E5F17::
     daa
     jp  c, label_F92D
     ld   [hl], $FD
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $FD ; Undefined instruction
     add  a, d
     db   $FD ; Undefined instruction
@@ -7499,10 +7498,12 @@ label_E6024::
     nop
     ld   c, c
     ld   [hl], $89
-    halt
+    db   $76 ; Halt
+    rst  $38
     ld   b, [hl]
     adc  a, a
-    halt
+    db   $76 ; Halt
+    ld   a, [hl]
     jr   c, label_E60E9
     nop
     add  a, d
@@ -8291,7 +8292,7 @@ label_E6248::
     di
     db   $EC ; Undefined instruction
     db   $FD ; Undefined instruction
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [$FF1F], a
     rst  $38
     nop
@@ -12233,7 +12234,8 @@ label_E7446::
     jr   nc, label_E7446
     ld   a, b
     cp   a
-    halt
+    db   $76 ; Halt
+    rst  $28
     ld   [hl], a
     rst  $38
     ld   b, a
@@ -13961,7 +13963,7 @@ label_E7B86::
     rla
     pop  af
     rrca
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     rra
     inc  b
     rst  $38
@@ -14503,7 +14505,8 @@ label_E7CE4::
     sbc  a, l
     ld   h, d
     adc  a, c
-    halt
+    db   $76 ; Halt
+    ret
     ld   [hl], $C9
     ld   [hl], $FD
     ld   bc, label_1FD
@@ -14613,7 +14616,8 @@ label_E7E8D::
     ld   [label_4FB], sp
     ld   sp, hl
     ld   b, $89
-    halt
+    db   $76 ; Halt
+    push bc
     db   $3A ; ldd  a, [hl]
     rst  $20
     jr   label_E7EBE

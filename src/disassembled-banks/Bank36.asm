@@ -8611,7 +8611,7 @@ label_924F3::
     sbc  a, b
     jp   nz, label_4F
     sbc  a, b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   c, a
     nop
     sbc  a, c
@@ -8641,7 +8641,7 @@ label_924F3::
     sbc  a, c
     jp   nz, label_4F
     sbc  a, c
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   c, a
     nop
     sbc  a, b
@@ -9723,7 +9723,7 @@ label_92A0D::
     rlca
     rlca
     sbc  a, c
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   c, a
     ld   [bc], a
     sbc  a, c
@@ -10727,7 +10727,7 @@ label_92D93::
     ld   e, d
     rst  $28
     rst  $28
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     rst  $28
     rst  $28
@@ -10748,8 +10748,7 @@ label_92D93::
     ld   a, [de]
     rst  $28
     rst  $28
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     rst  $28
     rst  $28
     ld   e, d
@@ -11760,7 +11759,8 @@ label_93240::
 
 label_93244::
     inc  de
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     xor  h
@@ -11781,7 +11781,8 @@ label_93244::
     ld   b, l
     sbc  a, b
     jr   nz, label_9326F
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     cp   h
@@ -11989,7 +11990,8 @@ label_93327::
     sbc  a, c
     ld   b, b
     inc  de
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     inc  e
@@ -12011,7 +12013,8 @@ label_93327::
     sbc  a, c
     ld   h, b
     inc  de
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     ld   e, $1F
@@ -12209,14 +12212,16 @@ label_9346A::
     ld   [$DDD6], a
     ret
     di
-    halt
+    db   $76 ; Halt
+    adc  a, l
     add  hl, bc
     xor  c
     inc  c
     nop
     nop
     di
-    halt
+    db   $76 ; Halt
+    xor  h
     ld   d, c
     ld   h, [hl]
     jr   nz, label_93487
@@ -12224,18 +12229,21 @@ label_9346A::
 label_93487::
     nop
     di
-    halt
+    db   $76 ; Halt
+    rla
     inc  d
     inc  c
     stop
     nop
     di
-    halt
+    db   $76 ; Halt
+    sub  a, a
     add  hl, bc
     adc  a, e
     ld   [$0000], sp
     di
-    halt
+    db   $76 ; Halt
+    ret  nz
     jr   nc, label_9349E
     jr   label_9349F
 
@@ -12250,15 +12258,17 @@ label_9349F::
     nop
     nop
     di
-    halt
-    ld   [hl], $63
+    db   $76 ; Halt
+    ld   h, $36
+    ld   h, e
     add  hl, de
     nop
     nop
     rst  $38
     ld   b, a
     di
-    halt
+    db   $76 ; Halt
+    ld   h, d
     dec  h
     nop
     nop
@@ -12448,13 +12458,17 @@ label_9358B::
     sbc  a, l
     ld   [hl], l
     ld   c, l
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
-    halt
+    db   $76 ; Halt
+    ld   l, l
+    db   $76 ; Halt
+    jr   label_93609
+    add  a, a
+    db   $76 ; Halt
+    and  c
+    db   $76 ; Halt
+    ret  nz
+    db   $76 ; Halt
+    ld   [label_476], a
     ld   [hl], a
     dec  bc
     add  a, $11
@@ -12541,6 +12555,8 @@ label_93606::
 
 label_93608::
     ld   [hl], a
+
+label_93609::
     inc  bc
     ret
 
@@ -12596,9 +12612,9 @@ label_9363E::
     ld   e, c
     ld   e, b
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     push bc
     call label_93625
@@ -12622,7 +12638,7 @@ label_93664::
     ld   e, c
     ld   e, b
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     push bc
     call label_93625
@@ -12731,7 +12747,7 @@ label_936FE::
     ld   d, d
     ld   d, d
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     push bc
     call label_93625
@@ -13682,7 +13698,8 @@ label_93B46::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a

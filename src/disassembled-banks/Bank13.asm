@@ -28,7 +28,7 @@ label_3400F::
     db   $FC ; Undefined instruction
     ld   [hl], d
     db   $FC ; Undefined instruction
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $FC ; Undefined instruction
     jp   nz, label_343FC
 
@@ -201,7 +201,8 @@ label_340BC::
     cp   a
     pop  hl
     rst  $18
-    halt
+    db   $76 ; Halt
+    db   $EB ; Undefined instruction
     db   $FD ; Undefined instruction
     ld   [hl], $FF
     rst  $38
@@ -441,7 +442,7 @@ label_3413E::
     or   $FB
     ld   a, l
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   a, h
     add  a, $F8
     add  a, d
@@ -810,7 +811,8 @@ label_343A4::
     nop
     ld   a, [hl]
     nop
-    halt
+    db   $76 ; Halt
+    nop
     ld   a, [hl]
     nop
     nop
@@ -1383,8 +1385,7 @@ label_345FC::
     nop
     nop
     nop
-    db   $F2 ; Undefined instruction
-    db   $FC ; Undefined instruction
+    ld   a, [$FF00+C]
     ld   b, $F8
     ld   a, $C0
     jr   nc, label_345F8
@@ -1421,7 +1422,8 @@ label_3463E::
     rst  $38
     cp   h
     jp   label_817A
-    halt
+    db   $76 ; Halt
+    add  a, c
     adc  a, [hl]
     ld   bc, $010E
     inc  c
@@ -1947,7 +1949,8 @@ label_3487C::
     cp   a
     pop  hl
     rst  $18
-    halt
+    db   $76 ; Halt
+    db   $EB ; Undefined instruction
     db   $FD ; Undefined instruction
     ld   [hl], $FF
     rst  $38
@@ -2201,7 +2204,7 @@ label_3495F::
     or   $FB
     ld   a, l
     cp   [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   a, h
     add  a, $F8
     add  a, d
@@ -2237,9 +2240,11 @@ label_3495F::
     cp   [hl]
     db   $3A ; ldd  a, [hl]
     db   $FC ; Undefined instruction
-    halt
-    ld   [$C6F4], a
-    ld    hl, sp+$63
+    db   $76 ; Halt
+    ld    hl, sp+$EA
+    db   $F4 ; Undefined instruction
+    add  a, $F8
+    ld   h, e
     rra
     ld   d, a
     cpl
@@ -2373,7 +2378,8 @@ label_34ABD::
     rst  $38
     add  a, c
     nop
-    halt
+    db   $76 ; Halt
+    adc  a, c
     adc  a, c
     rst  $30
     and  e
@@ -2395,7 +2401,8 @@ label_34ACB::
     cp   a
     db   $FD ; Undefined instruction
     rst  $18
-    halt
+    db   $76 ; Halt
+    db   $EB ; Undefined instruction
     inc  a
     rst  $30
     dec  a
@@ -2601,7 +2608,8 @@ label_34ACB::
     rst  $38
     inc  a
     rst  $30
-    halt
+    db   $76 ; Halt
+    db   $EB ; Undefined instruction
     db   $FD ; Undefined instruction
     rst  $18
     rst  $30
@@ -2620,11 +2628,11 @@ label_34ACB::
     db   $89
     adc  a, c
     rst  $30
-    halt
+    db   $76 ; Halt
+    adc  a, c
     add  a, c
     nop
-    db   $F2 ; Undefined instruction
-    rst  $38
+    ld   a, [$FF00+C]
     db   $E8 ; add  sp, d
     rst  $38
     rst  $38
@@ -3035,7 +3043,8 @@ label_34D85::
     inc  b
     ld   d, e
     nop
-    halt
+    db   $76 ; Halt
+    nop
     dec  e
     nop
     ld   bc, $AA00
@@ -3050,7 +3059,7 @@ label_34D85::
     ldi  [hl], a
     nop
     ld   a, $00
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     nop
     ld   b, b
     ld   bc, $0140
@@ -3280,7 +3289,7 @@ label_34E8E::
     ldi  [hl], a
     nop
     ld   a, $00
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     nop
     ld   b, b
     ld   bc, $0140
@@ -3481,8 +3490,7 @@ label_34F8E::
     cp   $00
     ld   a, [$FA04]
     inc  b
-    db   $F2 ; Undefined instruction
-    inc  c
+    ld   a, [$FF00+C]
     db   $E4 ; Undefined instruction
     jr   label_34FC4
     ld   a, [$FFF2]
@@ -3745,8 +3753,7 @@ label_35070::
     rst  $38
     ld   a, $FF
     ld   a, $63
-    db   $F2 ; Undefined instruction
-    add  a, e
+    ld   a, [$FF00+C]
     jp   nz, label_203
     inc  bc
     ld   [bc], a
@@ -4250,7 +4257,7 @@ label_35270::
     ld   c, $4F
     add  a, [hl]
     sub  a, a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [hl], e
     cp   $2F
     ld   e, $FF
@@ -4276,8 +4283,7 @@ label_35270::
     di
     pop  af
     rst  $28
-    db   $F2 ; Undefined instruction
-    rra
+    ld   a, [$FF00+C]
     inc  c
     rst  $38
     db   $F4 ; Undefined instruction
@@ -4350,8 +4356,7 @@ label_35390::
     inc  c
     ei
     jr   c, label_35381
-    db   $F2 ; Undefined instruction
-    rst  $38
+    ld   a, [$FF00+C]
     jr   nc, label_353E5
     db   $3A ; ldd  a, [hl]
     rst  $18
@@ -4425,8 +4430,7 @@ label_353E5::
     rst  $38
     ld   a, $FF
     ld   a, $63
-    db   $F2 ; Undefined instruction
-    add  a, e
+    ld   a, [$FF00+C]
     jp   nz, label_203
     inc  bc
     ld   [bc], a
@@ -4950,8 +4954,7 @@ label_35570::
     nop
     rst  $38
     dec  c
-    db   $F2 ; Undefined instruction
-    rst  $38
+    ld   a, [$FF00+C]
     nop
     nop
     nop
@@ -5004,8 +5007,7 @@ label_35570::
     rst  $38
     nop
     dec  c
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     rst  $38
     nop
     rst  $38
@@ -5166,7 +5168,7 @@ label_35570::
     ld   c, $4F
     add  a, [hl]
     sub  a, a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [hl], e
     cp   $2F
     ld   e, $FF
@@ -5575,7 +5577,7 @@ label_35570::
     ld   b, b
     db   $E8 ; add  sp, d
     ld   d, b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, c
     pop  bc
 
@@ -5675,7 +5677,7 @@ label_35970::
     inc  a
     jp   nz, label_E21C
     inc  e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     jr   c, label_359E9
     jr   c, label_359EB
     inc  a
@@ -5692,9 +5694,9 @@ label_359AD::
     nop
     nop
     inc  e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  a
     jp   nz, label_2FC
     db   $FC ; Undefined instruction
@@ -5848,7 +5850,7 @@ label_359EB::
     ld   b, b
     db   $E8 ; add  sp, d
     ld   d, b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, c
     pop  bc
     ld   a, e
@@ -6196,16 +6198,14 @@ label_35BAD::
     rst  $38
     ld   a, $FF
     ld   a, $63
-    db   $F2 ; Undefined instruction
-    add  a, e
+    ld   a, [$FF00+C]
     jp   nz, label_203
     inc  bc
     ld   [bc], a
     rst  $38
     rst  $38
     ld   a, [label_2DDC]
-    db   $F2 ; Undefined instruction
-    inc  e
+    ld   a, [$FF00+C]
     pop  hl
     ret  c
     ld   hl, label_21D0
@@ -6389,7 +6389,7 @@ label_35C70::
     ld   b, b
     db   $E8 ; add  sp, d
     ld   d, b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, c
     pop  bc
     ld   a, e
@@ -6605,7 +6605,7 @@ label_35C70::
     ld   b, b
     db   $E8 ; add  sp, d
     ld   d, b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, c
     pop  bc
     ld   a, e
@@ -6826,7 +6826,7 @@ label_35C70::
     ld   c, $4F
     add  a, [hl]
     sub  a, a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [hl], e
     cp   $2F
     ld   e, $FF
@@ -6848,13 +6848,10 @@ label_35C70::
     ld   c, b
     ld   [label_444], sp
     jp   nz, label_EEE2
-    db   $F2 ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    cp   $F2
-    ld   b, a
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
     ld   b, a
     ld   h, d
     ld   b, b
@@ -6869,8 +6866,8 @@ label_35C70::
     cpl
     jr   nc, label_35F4E
     rra
-    ldh  [$FF0C], a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
+    ld  [$FF00+C], a
     ld   b, [hl]
     ld   [bc], a
     ld   c, [hl]
@@ -7198,8 +7195,10 @@ label_3608E::
     ld   a, [$FF0F]
     ld   a, [$FF00]
     rst  $38
-    halt
-    halt
+    db   $76 ; Halt
+    adc  a, a
+    db   $76 ; Halt
+    adc  a, a
     ld   [hl], b
     adc  a, a
     rlca
@@ -7493,8 +7492,7 @@ label_361F4::
     nop
     sbc  a, d
     nop
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     jr   nz, label_3620E
 
 label_3620E::
@@ -8145,8 +8143,8 @@ label_364A8::
     ld   b, d
     ld   hl, label_21D2
     dec  c
-    db   $F2 ; Undefined instruction
-    ld   de, label_100E
+    ld   a, [$FF00+C]
+    ld   c, $10
     rrca
     jr   nz, label_36506
     add  a, b
@@ -8374,7 +8372,7 @@ label_3658E::
 
 label_365ED::
     db   $3A ; ldd  a, [hl]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   bc, label_3718A
     sub  a, l
     ld   b, d
@@ -8824,7 +8822,7 @@ label_366FF::
     ld   c, $4F
     add  a, [hl]
     sub  a, a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [hl], e
     cp   $2F
     ld   e, $FF
@@ -9051,8 +9049,7 @@ label_368AD::
     rst  $38
     rst  $38
     ld   a, [label_2DDC]
-    db   $F2 ; Undefined instruction
-    inc  e
+    ld   a, [$FF00+C]
     pop  hl
     ret  c
     ld   hl, label_21D0
@@ -9142,15 +9139,14 @@ label_368AD::
     ld   a, a
     pop  af
     ld   e, a
-    db   $F2 ; Undefined instruction
-    ld   e, $FC
+    ld   a, [$FF00+C]
+    db   $FC ; Undefined instruction
     inc  a
     ld    hl, sp+$E8
     sub  a, h
     db   $E4 ; Undefined instruction
     ld   a, [de]
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     rst  $38
     nop
     add  a, b
@@ -9267,10 +9263,9 @@ label_369A6::
     nop
     ld   b, [hl]
     nop
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     nop
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     ld   a, [$F800]
     nop
     db   $FD ; Undefined instruction
@@ -9736,11 +9731,10 @@ label_36BFE::
     ld   a, $FC
     ld   a, d
     db   $FC ; Undefined instruction
-    db   $F2 ; Undefined instruction
+    ld   a, [$FF00+C]
+    ld  [$FF00+C], a
     db   $FC ; Undefined instruction
-    ldh  [$FF0C], a
-    db   $FC ; Undefined instruction
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $FC ; Undefined instruction
     ld   b, a
     ccf
@@ -9758,12 +9752,11 @@ label_36BFE::
     nop
     nop
     nop
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $FC ; Undefined instruction
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $FC ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    db   $FC ; Undefined instruction
+    ld   a, [$FF00+C]
     ld   a, d
     db   $FC ; Undefined instruction
     ld   a, $FC
@@ -9817,7 +9810,8 @@ label_36BFE::
     sbc  a, a
     ld   l, b
     and  a
-    halt
+    db   $76 ; Halt
+    and  c
     ld   l, e
     or   b
     ld   l, h
@@ -9983,7 +9977,8 @@ label_36BFE::
     call nz, label_D6FF
     ei
     sub  a, $FB
-    halt
+    db   $76 ; Halt
+    ei
     or   $FB
     ld   e, $FB
     cp   $0F
@@ -10089,7 +10084,7 @@ label_36BFE::
     cp   h
     ld   h, [hl]
     cp   b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $FC ; Undefined instruction
     ldi  [hl], a
     db   $FC ; Undefined instruction
@@ -10145,14 +10140,14 @@ label_36BFE::
     cp   $FB
     ld   [hl], c
     cp   [hl]
-    halt
-    ldh  [$FF0C], a
+    db   $76 ; Halt
+    cp   b
+    ld  [$FF00+C], a
     db   $FC ; Undefined instruction
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $FC ; Undefined instruction
     and  $F8
-    db   $F2 ; Undefined instruction
-    ld   a, h
+    ld   a, [$FF00+C]
     ld   [hl], d
     cp   h
     ld   a, a
@@ -10542,13 +10537,10 @@ label_36FA9::
     db   $EC ; Undefined instruction
     sbc  a, h
     and  $C6
-    db   $F2 ; Undefined instruction
-    ld   b, d
-    db   $F2 ; Undefined instruction
-    ld   b, d
-    db   $F2 ; Undefined instruction
-    add  a, $F2
-    sbc  a, h
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
     and  $1A
     db   $EC ; Undefined instruction
     rst  $38
@@ -10598,10 +10590,9 @@ label_36FA9::
     add  a, d
 
 label_36FF7::
-    db   $F2 ; Undefined instruction
-    jp   nz, label_E6F2
-    db   $F2 ; Undefined instruction
-    db   $FC ; Undefined instruction
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
     cp   [hl]
     cp   d
 
@@ -11177,7 +11168,7 @@ label_37281::
     rst  8
     jr   z, label_37251
     dec  d
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [label_7F1], sp
     ld    hl, sp+$00
     rst  $38
@@ -11757,9 +11748,9 @@ label_374D2::
     ei
     rst  $30
     ei
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     rst  $38
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     rst  $38
     add  a, $FF
     call z, label_FF
@@ -11876,7 +11867,8 @@ label_374D2::
     ld   [label_18E7], sp
     call label_C932
     ld   [hl], $89
-    halt
+    db   $76 ; Halt
+    add  a, c
     ld   a, [hl]
     add  a, b
     ld   a, a
@@ -11927,7 +11919,8 @@ label_374D2::
     rst  $38
     inc  e
     rst  $38
-    halt
+    db   $76 ; Halt
+    adc  a, a
     ld   a, e
     add  a, a
     dec  a
@@ -12045,7 +12038,8 @@ label_374D2::
     rst  $38
     or   $FF
     rst  $38
-    halt
+    db   $76 ; Halt
+    rst  $38
     rst  $38
     adc  a, c
     adc  a, b
@@ -12210,7 +12204,7 @@ label_376FF::
     db   $FC ; Undefined instruction
     rrca
     ld   a, [$FF1F]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     dec  a
     push hl
     dec  sp
@@ -13330,8 +13324,7 @@ label_37C1F::
     cp   a
     rst  $28
     ld   a, [$FFED]
-    db   $F2 ; Undefined instruction
-    rst  $30
+    ld   a, [$FF00+C]
     db   $DB
     rst  $30
     jp  c, label_FEDB
@@ -13450,7 +13443,7 @@ label_37C81::
     rst  8
     jr   z, label_37C71
     dec  d
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [label_7F1], sp
     ld    hl, sp+$00
     rst  $38

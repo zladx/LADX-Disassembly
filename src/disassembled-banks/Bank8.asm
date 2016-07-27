@@ -99,10 +99,12 @@ section "bank8",romx,bank[$08]
     ld   c, b
     ld   c, b
     ld   c, b
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   c, c
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, b
     ld   c, b
     ld   c, b
@@ -342,7 +344,8 @@ label_20158::
     ld   [hl], l
     ld   h, [hl]
     ld   h, a
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     ld   l, b
     ld   l, c
     ld   a, b
@@ -610,10 +613,12 @@ label_20292::
     ld   a, h
     ld   a, h
     ld   a, h
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   [hl], a
     ld   [hl], a
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   a, [hl]
     ld   a, [hl]
     ld   a, [hl]
@@ -912,10 +917,12 @@ label_203B9::
     ld   c, b
     ld   c, b
     ld   c, b
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   c, c
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, b
     ld   c, b
     ld   c, b
@@ -1155,7 +1162,8 @@ label_20508::
     ld   [hl], l
     ld   h, [hl]
     ld   h, a
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     ld   l, b
     ld   l, c
     ld   a, b
@@ -1423,10 +1431,12 @@ label_20642::
     ld   a, h
     ld   a, h
     ld   a, h
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   [hl], a
     ld   [hl], a
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   a, [hl]
     ld   a, [hl]
     ld   a, [hl]
@@ -1725,10 +1735,12 @@ label_20769::
     ld   c, b
     ld   c, b
     ld   c, b
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   c, c
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, b
     ld   c, b
     ld   c, b
@@ -2233,10 +2245,12 @@ label_209F2::
     ld   a, h
     ld   a, h
     ld   a, h
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   [hl], a
     ld   [hl], a
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   a, [hl]
     ld   a, [hl]
     ld   a, [hl]
@@ -2652,8 +2666,7 @@ label_20C7F::
     pop  de
     ld   [label_23E09], sp
     ld   bc, $F1F0
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     ld   a, a
     ld   [rSB], a
     ld   bc, $0101
@@ -2851,8 +2864,7 @@ label_20D7F::
     pop  de
     ld   [label_23E09], sp
     ld   bc, $F1F0
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     ld   a, a
     ld   [rSB], a
     ld   bc, $0101
@@ -3696,7 +3708,7 @@ label_210CF::
     ld   e, d
     rst  $28
     rst  $28
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     rst  $28
     rst  $28
@@ -3717,8 +3729,7 @@ label_210CF::
     ld   a, [de]
     rst  $28
     rst  $28
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     rst  $28
     rst  $28
     ld   e, d
@@ -4727,7 +4738,8 @@ label_2152B::
 
 label_2152F::
     inc  de
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     xor  h
@@ -4748,7 +4760,8 @@ label_2152F::
     ld   b, l
     sbc  a, b
     jr   nz, label_2155A
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     cp   h
@@ -4958,7 +4971,8 @@ label_21612::
     sbc  a, c
     ld   b, b
     inc  de
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     inc  e
@@ -4980,7 +4994,8 @@ label_21612::
     sbc  a, c
     ld   h, b
     inc  de
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     ld   e, $1F
@@ -5443,8 +5458,7 @@ label_21832::
     and  b
     and  b
     add  a, d
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     db   $F4 ; Undefined instruction
     push af
     or   $F7
@@ -6167,14 +6181,13 @@ label_21B2E::
     inc  bc
     push hl
     and  $E1
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     sbc  a, b
     ldi  [hl], a
     inc  bc
     push af
     or   $F1
-    db   $F2 ; Undefined instruction
-    sbc  a, b
+    ld   a, [$FF00+C]
     ld   b, b
     rlca
     db   $E3 ; Undefined instruction
@@ -6222,7 +6235,7 @@ label_21B5B::
     pop  hl
 
 label_21B7B::
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     xor  h
     xor  h
     push hl
@@ -6244,8 +6257,7 @@ label_21B7B::
     di
     db   $F4 ; Undefined instruction
     pop  af
-    db   $F2 ; Undefined instruction
-    xor  h
+    ld   a, [$FF00+C]
     xor  h
     push af
     or   $F7
@@ -6570,11 +6582,12 @@ label_21CAC::
     ld   [hl], e
     ld   h, [hl]
     sbc  a, c
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  bc
     ld   [hl], d
     xor  [hl]
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     sbc  a, d
     nop
     rlca
@@ -6710,7 +6723,7 @@ label_21D72::
     rlca
     push hl
     and  $E1
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
     rst  $20
@@ -6725,8 +6738,7 @@ label_21D72::
 label_21D92::
     push af
     or   $F1
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     db   $F4 ; Undefined instruction
     rst  $30
     xor  [hl]
@@ -6736,12 +6748,12 @@ label_21D92::
     and  b
     and  c
     pop  hl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     xor  h
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
     pop  hl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     xor  h
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
@@ -6761,13 +6773,11 @@ label_21DB2::
     or   b
     or   c
     pop  af
-    db   $F2 ; Undefined instruction
-    xor  h
+    ld   a, [$FF00+C]
     di
     db   $F4 ; Undefined instruction
     pop  af
-    db   $F2 ; Undefined instruction
-    xor  h
+    ld   a, [$FF00+C]
     di
     db   $F4 ; Undefined instruction
     rst  $30
@@ -6865,7 +6875,7 @@ label_21DB2::
     cp   l
     cp   [hl]
     sbc  a, c
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     rrca
     ret  nz
     pop  bc
@@ -6967,7 +6977,7 @@ label_21E69::
     sbc  a, b
     call z, label_E507
     and  $E1
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
     rst  $20
@@ -6986,8 +6996,7 @@ label_21E69::
     or   $F1
 
 label_21EB5::
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     db   $F4 ; Undefined instruction
     rst  $30
     xor  [hl]
@@ -6997,12 +7006,12 @@ label_21EB5::
     and  b
     and  c
     pop  hl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     xor  h
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
     pop  hl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     xor  h
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
@@ -7019,13 +7028,11 @@ label_21EB5::
     or   b
     or   c
     pop  af
-    db   $F2 ; Undefined instruction
-    xor  h
+    ld   a, [$FF00+C]
     di
     db   $F4 ; Undefined instruction
     pop  af
-    db   $F2 ; Undefined instruction
-    xor  h
+    ld   a, [$FF00+C]
     di
     db   $F4 ; Undefined instruction
     rst  $30
@@ -7460,15 +7467,14 @@ label_22099::
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
     pop  hl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     sbc  a, d
     or   b
     inc  bc
     di
     db   $F4 ; Undefined instruction
     pop  af
-    db   $F2 ; Undefined instruction
-    sbc  a, d
+    ld   a, [$FF00+C]
     adc  a, $05
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
@@ -7524,7 +7530,7 @@ label_220CA::
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
     pop  hl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     sbc  a, e
     ld   c, e
     ld   bc, label_22564
@@ -7541,8 +7547,7 @@ label_220CA::
     di
     db   $F4 ; Undefined instruction
     pop  af
-    db   $F2 ; Undefined instruction
-    sbc  a, e
+    ld   a, [$FF00+C]
     ld   [hl], b
     inc  bc
     ldd  [hl], a
@@ -7584,7 +7589,7 @@ label_220CA::
     rlca
     push hl
     and  $E1
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
     rst  $20
@@ -7600,8 +7605,7 @@ label_220CA::
     rlca
     push af
     or   $F1
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     db   $F4 ; Undefined instruction
     rst  $30
     xor  [hl]
@@ -7652,7 +7656,7 @@ label_22167::
     ld   [bc], a
     inc  bc
     pop  hl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     sbc  a, b
     ld   c, d
     add  hl, bc
@@ -7672,8 +7676,7 @@ label_22167::
     ld   [de], a
     inc  de
     pop  af
-    db   $F2 ; Undefined instruction
-    sbc  a, b
+    ld   a, [$FF00+C]
     ld   l, d
     add  hl, bc
     ldd  [hl], a
@@ -7730,7 +7733,7 @@ label_2218B::
 label_221B7::
     xor  [hl]
     pop  hl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     sbc  a, b
     call z, label_E307
     db   $E4 ; Undefined instruction
@@ -7745,8 +7748,7 @@ label_221B7::
     xor  [hl]
     xor  [hl]
     pop  af
-    db   $F2 ; Undefined instruction
-    sbc  a, b
+    ld   a, [$FF00+C]
     db   $EC ; Undefined instruction
     rlca
     di
@@ -7809,7 +7811,7 @@ label_221F5::
     and  b
     and  c
     pop  hl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     xor  h
     xor  h
     ldi  [hl], a
@@ -7832,8 +7834,7 @@ label_221F5::
     or   b
     or   c
     pop  af
-    db   $F2 ; Undefined instruction
-    xor  h
+    ld   a, [$FF00+C]
     xor  h
     ldd  [hl], a
     inc  sp
@@ -10886,7 +10887,7 @@ label_22DE6::
     call nz, label_B326
     rst  $18
     ld   [$FFE1], a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
     push hl
@@ -10923,8 +10924,7 @@ label_22E9F::
     db   $ED ; Undefined instruction
     xor  $EF
     ld   a, [$FFF1]
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     ld   a, a
     ld   a, a
     ld   a, a
@@ -11649,7 +11649,7 @@ label_23170::
     ld   a, [hl]
     ld   a, [hl]
     ld   [$FFE1], a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     db   $E4 ; Undefined instruction
     push hl
@@ -11716,7 +11716,8 @@ label_231C9::
     ld   a, h
     ld   [hl], e
     ld   [hl], h
-    halt
+    db   $76 ; Halt
+    ld   [hl], e
     ld   a, d
     ld   d, h
     ld   d, l
@@ -11724,7 +11725,8 @@ label_231C9::
     ld   d, a
     ld   a, d
     ld   [hl], h
-    halt
+    db   $76 ; Halt
+    ld   [hl], e
     ld   [hl], h
     ld   a, h
     ld   a, h
@@ -12156,7 +12158,8 @@ label_233B7::
     dec  e
     ld   [hl], h
     ld   [hl], l
-    halt
+    db   $76 ; Halt
+    dec  e
     ld   b, b
     dec  e
     dec  [hl]
@@ -12492,7 +12495,8 @@ label_23529::
     ld   [hl], e
     ld   [hl], h
     ld   [hl], l
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     ld   a, a
     dec  b
     dec  b
@@ -13244,7 +13248,8 @@ label_23856::
     ld   [hl], e
     ld   [hl], l
     ld   [hl], l
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     ld   a, b
     ld   a, c
     ld   a, a

@@ -1675,7 +1675,8 @@ label_54A15::
     ld   [bc], a
     nop
     inc  b
-    halt
+    db   $76 ; Halt
+    ld   [bc], a
     nop
     inc  c
     ld   a, b
@@ -1746,7 +1747,8 @@ label_54A15::
     ldi  [hl], a
     nop
     inc  b
-    halt
+    db   $76 ; Halt
+    ldi  [hl], a
     ld   bc, label_5700C
     ldi  [hl], a
     nop
@@ -1846,10 +1848,13 @@ label_54B17::
     ld   bc, $0076
     db   $F4 ; Undefined instruction
     add  hl, bc
-    halt
+    db   $76 ; Halt
+    jr   nz, label_54B28
+
+label_54B28::
     nop
+    db   $76 ; Halt
     nop
-    halt
     nop
     ld   [label_2076], sp
     db   $E8 ; add  sp, d
@@ -1860,12 +1865,14 @@ label_54B17::
     ld   [label_2074], sp
     db   $F4 ; Undefined instruction
     nop
-    halt
+    db   $76 ; Halt
+    nop
     db   $F4 ; Undefined instruction
     ld   [label_2076], sp
     nop
     nop
-    halt
+    db   $76 ; Halt
+    nop
     nop
 
 label_54B44::
@@ -1879,13 +1886,17 @@ label_54B44::
     ld   [hl], h
     jr   nz, label_54B44
     rst  $38
-    halt
+    db   $76 ; Halt
+    nop
     db   $F4 ; Undefined instruction
     rlca
-    halt
+    db   $76 ; Halt
+    jr   nz, label_54B58
+
+label_54B58::
     nop
+    db   $76 ; Halt
     nop
-    halt
     nop
     ld   [label_2076], sp
     db   $E8 ; add  sp, d
@@ -1896,12 +1907,14 @@ label_54B44::
     ld   [label_2074], sp
     db   $F4 ; Undefined instruction
     nop
-    halt
+    db   $76 ; Halt
+    nop
     db   $F4 ; Undefined instruction
     ld   [label_2076], sp
     nop
     nop
-    halt
+    db   $76 ; Halt
+    nop
     nop
     ld   [label_2076], sp
 
@@ -1917,7 +1930,8 @@ label_54B77::
 
 label_54B80::
     nop
-    halt
+    db   $76 ; Halt
+    nop
     nop
     ld   [label_2076], sp
     db   $F4 ; Undefined instruction
@@ -1928,7 +1942,8 @@ label_54B80::
     ld   [label_2074], sp
     nop
     nop
-    halt
+    db   $76 ; Halt
+    nop
     nop
     ld   [label_2076], sp
     db   $F4 ; Undefined instruction
@@ -1940,7 +1955,8 @@ label_54B80::
 
 label_54BA0::
     nop
-    halt
+    db   $76 ; Halt
+    nop
     nop
     ld   [label_2076], sp
     db   $F4 ; Undefined instruction
@@ -1951,7 +1967,8 @@ label_54BA0::
     ld   [label_2074], sp
     nop
     nop
-    halt
+    db   $76 ; Halt
+    nop
     nop
     ld   [label_2076], sp
 
@@ -2139,13 +2156,12 @@ label_54CC4::
     add  hl, de
     ld   c, $02
     jp   label_3CE6
-
-label_54CD5::
-    halt
-    halt
-
-label_54CD9::
-    ld   de, label_54CD5
+    db   $76 ; Halt
+    nop
+    db   $76 ; Halt
+    jr   nz, label_54CEB
+    push de
+    ld   c, h
     call label_3BC0
     call label_57B0D
     call label_57B3E
@@ -2270,8 +2286,10 @@ label_54D9D::
     ld   [bc], a
     ld   a, b
     ldi  [hl], a
-    halt
-    halt
+    db   $76 ; Halt
+    ld   [bc], a
+    db   $76 ; Halt
+    ldi  [hl], a
     ld   [hl], h
     ld   [bc], a
     ld   [hl], h
@@ -2699,8 +2717,7 @@ label_55058::
     db   $ED ; Undefined instruction
     xor  $EF
     ld   a, [$FFF1]
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
 
 label_55064::
     ld   a, [$D219]
@@ -3504,7 +3521,8 @@ label_55532::
     ld   [label_57A10], sp
     ld   h, b
     ld    hl, sp+$F8
-    halt
+    db   $76 ; Halt
+    nop
     ld    hl, sp+$00
     ld   a, b
     nop
@@ -4404,8 +4422,8 @@ label_55AA7::
     ld   a, [$FFF5]
     pop  af
     ld   a, [$FFF1]
-    db   $F2 ; Undefined instruction
-    ld   a, [$FF0F]
+    ld   a, [$FF00+C]
+    rrca
     db   $10 ; Undefined instruction
     ld   c, $10
 
@@ -4477,17 +4495,13 @@ label_55AF7::
     db   $EC ; Undefined instruction
     db   $ED ; Undefined instruction
     db   $EC ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    db   $EB ; Undefined instruction
+    ld   a, [$FF00+C]
     db   $EC ; Undefined instruction
     db   $ED ; Undefined instruction
     db   $EC ; Undefined instruction
-    db   $F2 ; Undefined instruction
-
-label_55B0B::
-    ld   hl, $C3B0
-    add  hl, bc
-    ld   a, [hl]
+    ld   a, [$FF00+C]
+    or   b
+    jp   label_57E09
     ld   e, a
     ld   d, b
     ld   hl, label_55AE3
@@ -5758,12 +5772,11 @@ label_5623A::
     ld   [hl], h
     jr   nz, label_562B8
     nop
-    halt
-
-label_56245::
-    ld   hl, $C340
-    add  hl, bc
-    ld   [hl], $48
+    db   $76 ; Halt
+    jr   nz, label_56267
+    ld   b, b
+    jp   label_3609
+    ld   c, b
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
@@ -6059,7 +6072,7 @@ label_56425::
     ld   h, a
     adc  a, a
     ld   h, a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   h, a
     db   $E3 ; Undefined instruction
     ld   h, a
@@ -7215,10 +7228,11 @@ label_56AA4::
     ld   a, b
     jr   nz, label_56AA4
     dec  d
-    halt
-    dec  c
+    db   $76 ; Halt
+    jr   nz, label_56AC2
     di
-    halt
+    db   $76 ; Halt
+    ld   b, b
     dec  c
     ei
     ld   a, b
@@ -7229,6 +7243,8 @@ label_56AA4::
     rst  $38
     rst  $38
     rst  $38
+
+label_56AC2::
     rst  $38
     rst  $38
     nop
@@ -7273,7 +7289,8 @@ label_56ADD::
     ld   [label_5607E], sp
     di
     di
-    halt
+    db   $76 ; Halt
+    nop
     di
     ei
     ld   a, b
@@ -7288,7 +7305,8 @@ label_56AF8::
     dec  d
 
 label_56AFA::
-    halt
+    db   $76 ; Halt
+    ld   h, b
     rst  $38
     rst  $38
     rst  $38
@@ -7302,10 +7320,11 @@ label_56AFA::
     ld   a, b
     jr   nz, label_56AFA
     rla
-    halt
-    dec  c
+    db   $76 ; Halt
+    jr   nz, label_56B1A
     di
-    halt
+    db   $76 ; Halt
+    ld   b, b
     dec  c
     ei
     ld   a, b
@@ -7326,7 +7345,8 @@ label_56AFA::
     rst  $38
     pop  af
     pop  af
-    halt
+    db   $76 ; Halt
+    nop
     pop  af
     ld   sp, hl
     ld   a, b
@@ -7337,7 +7357,8 @@ label_56AFA::
     ld   h, b
     dec  c
     dec  d
-    halt
+    db   $76 ; Halt
+    ld   h, b
     nop
     nop
     rst  $38
@@ -7386,11 +7407,14 @@ label_56B65::
     ld   a, b
     jr   nz, label_56B65
     inc  c
-    halt
-    inc  b
+    db   $76 ; Halt
+    jr   nz, label_56B71
     db   $FC ; Undefined instruction
-    halt
+    db   $76 ; Halt
+    ld   b, b
     inc  b
+
+label_56B71::
     inc  b
     ld   a, b
     ld   b, b
@@ -7409,7 +7433,8 @@ label_56B65::
     rst  $38
     rst  $38
     ld    hl, sp+$F8
-    halt
+    db   $76 ; Halt
+    nop
     ld    hl, sp+$00
     ld   a, b
     nop
@@ -7433,7 +7458,8 @@ label_56B65::
     rst  $38
     db   $FC ; Undefined instruction
     db   $FC ; Undefined instruction
-    halt
+    db   $76 ; Halt
+    nop
     db   $FC ; Undefined instruction
     inc  b
     ld   a, b
@@ -7444,7 +7470,8 @@ label_56B65::
     ld   h, b
     inc  b
     inc  c
-    halt
+    db   $76 ; Halt
+    ld   h, b
     nop
     nop
     rst  $38
@@ -8265,7 +8292,8 @@ label_5703F::
     nop
     nop
     inc  b
-    halt
+    db   $76 ; Halt
+    nop
     nop
 
 label_57047::
@@ -8369,8 +8397,7 @@ label_570CF::
     jp  c, label_DDDB
     pop  hl
     and  $EB
-    db   $F2 ; Undefined instruction
-    ld   sp, hl
+    ld   a, [$FF00+C]
 
 label_570D7::
     nop
@@ -8390,16 +8417,14 @@ label_570D7::
 
 label_570E8::
     ld   sp, hl
-    db   $F2 ; Undefined instruction
-    db   $EB ; Undefined instruction
+    ld   a, [$FF00+C]
     and  $E1
     db   $DB
     db   $DB
     jp  c, label_DDDB
     pop  hl
     and  $EB
-    db   $F2 ; Undefined instruction
-    ld   sp, hl
+    ld   a, [$FF00+C]
 
 label_570F7::
     db   $E4 ; Undefined instruction
@@ -8465,8 +8490,8 @@ label_57127::
     nop
     db   $FD ; Undefined instruction
     ld   a, [$F4F6]
-    db   $F2 ; Undefined instruction
-    ld   a, [$FFEF]
+    ld   a, [$FF00+C]
+    rst  $28
     xor  $EF
     ld   a, [$FFF2]
     db   $F4 ; Undefined instruction
@@ -9300,7 +9325,8 @@ label_5764B::
     ld   [bc], a
     nop
     nop
-    halt
+    db   $76 ; Halt
+    ld   [bc], a
     nop
     ld   [label_278], sp
     ld   a, [$FF00]
@@ -10849,12 +10875,14 @@ label_57F82::
 label_57F86::
     ld   [hl], h
     inc  bc
-    halt
+    db   $76 ; Halt
+    inc  bc
     ld   [hl], b
     inc  bc
     ld   [hl], d
     inc  bc
-    halt
+    db   $76 ; Halt
+    inc  hl
     ld   [hl], h
     inc  hl
     ld   [hl], d

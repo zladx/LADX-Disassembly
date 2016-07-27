@@ -598,8 +598,7 @@ label_AC22B::
     ld   [$FFE0], a
     pop  af
     pop  af
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     push af
     or   $FF
     db   $FC ; Undefined instruction
@@ -625,7 +624,8 @@ label_AC22B::
     xor  $28
     call c, label_AF950
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   b, [hl]
     ccf
 
 label_AC2A1::
@@ -865,8 +865,8 @@ label_AC3B2::
     ld   c, $01
     ccf
     ld   bc, label_3FD
-    db   $F2 ; Undefined instruction
-    ld   c, $EC
+    ld   a, [$FF00+C]
+    db   $EC ; Undefined instruction
     inc  e
     cp   a
     ld   b, b
@@ -1044,8 +1044,7 @@ label_AC47C::
     ld   l, a
     ld   a, [hl]
     rst  $38
-    db   $F2 ; Undefined instruction
-    rst  $38
+    ld   a, [$FF00+C]
     db   $E3 ; Undefined instruction
 
 label_AC490::
@@ -2225,7 +2224,7 @@ label_AC984::
     cp   [hl]
     ld   h, h
     cpl
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     rst  8
     pop  bc
     add  a, b
@@ -4759,7 +4758,8 @@ label_AD460::
     cp   a
     and  h
     dec  a
-    halt
+    db   $76 ; Halt
+    ld   c, e
     ld   a, [hl]
     rst  0
     cp   a
@@ -9843,7 +9843,7 @@ label_AE9F8::
     inc  de
     ld   [de], a
     db   $E3 ; Undefined instruction
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     rlca
     ld   [bc], a
     rst  $38
@@ -11375,8 +11375,7 @@ label_AF111::
     inc  d
     ld   h, d
     ld   h, d
-    db   $F2 ; Undefined instruction
-    add  a, d
+    ld   a, [$FF00+C]
     ld   a, d
     add  a, d
     ld   l, c
@@ -11867,7 +11866,8 @@ label_AF34F::
     db   $10 ; Undefined instruction
     ld   [$E408], sp
     nop
-    halt
+    db   $76 ; Halt
+    nop
     adc  a, b
     ld   b, $46
     ld   bc, label_334
@@ -12207,8 +12207,7 @@ label_AF44B::
     nop
     db   $FC ; Undefined instruction
     nop
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     inc  c
     nop
     pop  af
@@ -12219,7 +12218,8 @@ label_AF44B::
     ld   bc, label_1BF
     inc  hl
     ld   [bc], a
-    halt
+    db   $76 ; Halt
+    dec  b
     ld   a, h
     dec  de
     pop  hl
@@ -13994,7 +13994,8 @@ label_AFCEB::
     add  a, b
     ld   a, c
     add  a, b
-    halt
+    db   $76 ; Halt
+    add  a, b
     ld   [rJOYP], a
     ld   b, b
     add  a, b
@@ -14512,8 +14513,7 @@ label_AFF83::
     ld   a, [hli]
 
 label_AFF9A::
-    db   $F2 ; Undefined instruction
-    ld   [de], a
+    ld   a, [$FF00+C]
     ld   a, [$FF10]
     ld    hl, sp+$08
     nop

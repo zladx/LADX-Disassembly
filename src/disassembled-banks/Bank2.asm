@@ -2442,7 +2442,8 @@ label_8E1C::
     nop
     inc  c
     add  hl, sp
-    halt
+    db   $76 ; Halt
+    ld   e, [hl]
     rst  $38
     ld   b, a
     nop

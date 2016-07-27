@@ -2202,13 +2202,11 @@ label_5C9B7::
     rst  $30
     db   $F4 ; Undefined instruction
     di
-    db   $F2 ; Undefined instruction
-    db   $F2 ; Undefined instruction
+    ld   a, [$FF00+C]
     pop  af
     pop  af
     pop  af
-    db   $F2 ; Undefined instruction
-    db   $F2 ; Undefined instruction
+    ld   a, [$FF00+C]
     di
     db   $F4 ; Undefined instruction
     rst  $30
@@ -3336,7 +3334,8 @@ label_5CFAF::
     and  b
     and  b
     ld   [hl], l
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     ld   a, b
     ld   a, c
     ld   a, d
@@ -6801,7 +6800,8 @@ label_5E271::
     ld   h, d
     cp   h
     ld   h, e
-    halt
+    db   $76 ; Halt
+    ld   h, h
     ret  c
     ld   h, h
     ld   a, $18
@@ -9314,7 +9314,7 @@ label_5EFB9::
     inc  c
     dec  c
     ld   c, $98
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   c, $0E
     db   $10 ; Undefined instruction
     ld   [de], a
@@ -9838,7 +9838,8 @@ label_5F356::
     ld   [hl], l
     nop
     db   $10 ; Undefined instruction
-    halt
+    db   $76 ; Halt
+    nop
     jr   label_5F376
 
 label_5F366::
@@ -10934,8 +10935,8 @@ label_5F8EF::
     ld   [hl], h
     jr   nz, label_5F96E
     nop
-    halt
-    ld   a, b
+    db   $76 ; Halt
+    jr   nz, label_5F974
     nop
     ld   a, b
     jr   nz, label_5F97A
@@ -11019,6 +11020,8 @@ label_5F95E::
 label_5F971::
     ld   a, [$FFFE]
     and  a
+
+label_5F974::
     ret  z
     ld   hl, $DE01
     ld   a, $27
@@ -11043,7 +11046,7 @@ label_5F987::
     jp  c, label_DC01
     ld   bc, label_1DE
     ld   [rSB], a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   bc, label_1E4
     and  $01
     db   $E8 ; add  sp, d
@@ -11685,9 +11688,9 @@ label_5FD0D::
     nop
     sbc  a, $00
     ld   [rJOYP], a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     nop
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     jr   nz, label_5FD0D
     jr   nz, label_5FD0D
     jr   nz, label_5FD0D

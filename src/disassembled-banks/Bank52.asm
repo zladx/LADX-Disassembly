@@ -14,7 +14,8 @@ section "bank52",romx,bank[$34]
     add  a, e
     ld   a, l
     adc  a, c
-    halt
+    db   $76 ; Halt
+    ret  nc
     cpl
     db   $FC ; Undefined instruction
     inc  bc
@@ -445,7 +446,8 @@ label_D019C::
     rst  $38
     ld   d, l
     rst  $38
-    halt
+    db   $76 ; Halt
+    rst  $38
     ld   d, l
     rst  $38
     nop
@@ -499,7 +501,8 @@ label_D019C::
     rst  $38
     ld   d, l
     rst  $38
-    halt
+    db   $76 ; Halt
+    rst  $38
     ld   d, l
     rst  $38
     nop
@@ -918,7 +921,8 @@ label_D019C::
     rst  $38
     ld   d, l
     rst  $38
-    halt
+    db   $76 ; Halt
+    rst  $38
     ld   d, l
     rst  $38
     nop
@@ -3866,7 +3870,8 @@ label_D0E27::
     ld   l, h
     rst  $20
     jr   label_D0DC6
-    halt
+    db   $76 ; Halt
+    rrca
     or   $06
     ld    hl, sp+$9E
     ld   h, b
@@ -4036,7 +4041,8 @@ label_D0EBF::
     add  a, e
     ld   a, l
     adc  a, c
-    halt
+    db   $76 ; Halt
+    ld   d, b
     cpl
     inc  a
     inc  bc
@@ -4213,9 +4219,8 @@ label_D0FCD::
     db   $FC ; Undefined instruction
     jr   label_D0FCD
     inc  [hl]
-    db   $F2 ; Undefined instruction
-    call z, label_34FA
-    db   $FC ; Undefined instruction
+    ld   a, [$FF00+C]
+    ld   a, [$FC34]
     or   b
     jr   c, label_D0F9C
 
@@ -4995,7 +5000,8 @@ label_D1202::
     ld   a, $1C
     ld   a, a
     ld   a, $FF
-    halt
+    db   $76 ; Halt
+    rst  $38
     ld   h, [hl]
     ld   l, a
     ld   b, $1F
@@ -5742,7 +5748,8 @@ label_D1602::
     ld   a, a
     cp   $7F
     xor  c
-    halt
+    db   $76 ; Halt
+    ld   a, a
     ld   bc, $0103
     inc  bc
     ld   bc, $0003

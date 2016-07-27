@@ -38,7 +38,7 @@ section "bank22",romx,bank[$16]
     ld   d, c
     jp  c, label_DF51
     ld   d, c
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   d, c
     push hl
     ld   d, c
@@ -53,8 +53,7 @@ section "bank22",romx,bank[$16]
     xor  $51
     rst  $28
     ld   d, c
-    db   $F2 ; Undefined instruction
-    ld   d, c
+    ld   a, [$FF00+C]
     push af
     ld   d, c
     ld    hl, sp+$51
@@ -113,7 +112,8 @@ section "bank22",romx,bank[$16]
     ld   d, d
     ld   [hl], e
     ld   d, d
-    halt
+    db   $76 ; Halt
+    ld   d, d
     ld   a, e
     ld   d, d
     ld   a, [hl]
@@ -266,10 +266,7 @@ label_58120::
     ld   d, e
     jp   [hl]
     ld   d, e
-    db   $F2 ; Undefined instruction
-
-label_58125::
-    ld   d, e
+    ld   a, [$FF00+C]
     ld   bc, label_654
     ld   d, h
     rlca
@@ -337,7 +334,7 @@ label_58125::
     ld   d, h
     call nc, label_D954
     ld   d, h
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   d, h
     rst  $20
     ld   d, h
@@ -378,7 +375,8 @@ label_58125::
     ld   d, l
     ld   [hl], c
     ld   d, l
-    halt
+    db   $76 ; Halt
+    ld   d, l
     ld   a, c
     ld   d, l
     ld   a, [hl]
@@ -638,7 +636,8 @@ label_5823C::
     ld   c, b
     ld   l, e
     ld   c, b
-    halt
+    db   $76 ; Halt
+    ld   c, b
     add  a, c
     ld   c, b
     adc  a, b
@@ -1112,7 +1111,8 @@ label_5847B::
     ld   c, [hl]
     ld   l, a
     ld   c, [hl]
-    halt
+    db   $76 ; Halt
+    ld   c, [hl]
     ld   a, a
     ld   c, [hl]
     add  a, d
@@ -1255,7 +1255,7 @@ label_58527::
     ld   c, a
     reti
     ld   c, a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   c, a
     rst  $20
     ld   c, a
@@ -1353,8 +1353,7 @@ label_58527::
     xor  $50
     pop  af
     ld   d, b
-    db   $F2 ; Undefined instruction
-    ld   d, b
+    ld   a, [$FF00+C]
 
 label_585BA::
     push af
@@ -3764,8 +3763,8 @@ label_58FE8::
     ld   a, c
     rst  $38
     inc  [hl]
-    halt
-    add  a, l
+    db   $76 ; Halt
+    ld   h, $85
     rst  $38
     ldi  [hl], a
     add  a, b
@@ -3989,8 +3988,10 @@ label_5909E::
 
 label_590E9::
     ld   b, [hl]
-    halt
-    add  a, l
+    db   $76 ; Halt
+
+label_590EB::
+    ld   h, $85
 
 label_590ED::
     rst  $38
@@ -5357,18 +5358,15 @@ label_596AA::
     ld   b, d
     rst  $38
     inc  sp
-    db   $F2 ; Undefined instruction
-    ld   b, l
+    ld   a, [$FF00+C]
     di
     rst  $38
     dec  d
     db   $F4 ; Undefined instruction
     rst  $38
     inc  sp
-    db   $F2 ; Undefined instruction
-    ld   b, [hl]
-    db   $F2 ; Undefined instruction
-    rst  $38
+    ld   a, [$FF00+C]
+    ld   a, [$FF00+C]
     dec  h
     db   $EC ; Undefined instruction
     ld   d, d
@@ -5389,8 +5387,7 @@ label_596AA::
     ld   b, d
     rst  $38
     ld   d, l
-    db   $F2 ; Undefined instruction
-    ld   h, e
+    ld   a, [$FF00+C]
     jr   c, label_596E2
     inc  [hl]
     ld   [$E945], a
@@ -5421,7 +5418,8 @@ label_596AA::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_59770
     ld   l, a
     ld   [hl], h
@@ -5440,7 +5438,10 @@ label_596AA::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+
+label_59720::
+    ld   h, l
     jr   nz, label_5978A
     ld   l, a
     ld   [hl], h
@@ -5511,7 +5512,8 @@ label_59762::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_597E3
 
 label_5977C::
@@ -5794,7 +5796,8 @@ label_59885::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_598F3
     ld   l, a
     ld   [hl], h
@@ -6130,7 +6133,8 @@ label_599CC::
     ld   h, c
 
 label_599CE::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_59A3F
 
 label_599D2::
@@ -6720,7 +6724,8 @@ label_59C3D::
     jr   nz, label_59CB0
 
 label_59C4B::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     ld   a, c
     dec  l
@@ -6761,7 +6766,8 @@ label_59C52::
     ld   h, l
 
 label_59C79::
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_59C7B::
     ld   [hl], d
@@ -6983,7 +6989,8 @@ label_59D62::
     ld   h, l
     jr   nz, label_59DD3
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     jr   nz, label_59D8B
     ld   h, d
@@ -7032,7 +7039,8 @@ label_59D94::
     ld   l, h
     jr   nz, label_59E08
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_59D9D::
     ld   [hl], d
@@ -7174,7 +7182,8 @@ label_59E1A::
 
 label_59E20::
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_59E99
     ld   l, a
     jr   nz, label_59E8B
@@ -7266,7 +7275,8 @@ label_59E88::
 label_59E8B::
     ld   [hl], d
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_59E8F::
     ld   l, h
@@ -7464,7 +7474,8 @@ label_59F54::
     ld   h, c
 
 label_59F55::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_59FCD
     ld   l, b
     ld   h, l
@@ -7523,12 +7534,16 @@ label_59F7F::
     jr   nz, label_59FAE
     jr   nz, label_59FF8
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5A00E
     ld   l, a
     ld   [hl], l
     jr   nz, label_59FFE
-    halt
+    db   $76 ; Halt
+
+label_59F9A::
+    ld   h, l
     ld   [hl], d
     jr   nz, label_59FBE
     jr   nz, label_5A016
@@ -7553,7 +7568,8 @@ label_59FAE::
     ld   l, h
     ld   b, e
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     inc  l
 
 label_59FB4::
@@ -7581,7 +7597,8 @@ label_59FBF::
 
 label_59FCD::
     jr   nz, label_59FEF
-    halt
+    db   $76 ; Halt
+    ld   l, c
     ld   l, h
     ld   l, h
     ld   h, c
@@ -7724,7 +7741,8 @@ label_5A03D::
     ld   l, h
     jr   nz, label_5A09D
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_5A05D::
     ld   l, $20
@@ -7740,7 +7758,8 @@ label_5A064::
     ld   h, l
 
 label_5A066::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5A0DE
     ld   l, b
 
@@ -7884,7 +7903,8 @@ label_5A0EC::
     ld   c, c
     jr   nz, label_5A15C
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5A16D
     ld   l, a
     jr   nz, label_5A15D
@@ -7921,7 +7941,8 @@ label_5A114::
     ld   l, h
     ld   l, c
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5A197
     ld   l, a
     ld   [hl], l
@@ -7976,7 +7997,10 @@ label_5A13C::
     ld   h, l
 
 label_5A153::
-    halt
+    db   $76 ; Halt
+
+label_5A154::
+    ld   h, l
     ld   l, [hl]
     jr   nz, label_5A1C7
     ld   [hl], h
@@ -8088,7 +8112,8 @@ label_5A1A0::
     jr   nz, label_5A1E0
     jr   nz, label_5A229
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5A240
 
 label_5A1C7::
@@ -8239,7 +8264,8 @@ label_5A240::
 label_5A249::
     jr   nz, label_5A2B3
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_5A24E::
     jr   nz, label_5A2C4
@@ -8363,7 +8389,8 @@ label_5A2C4::
     ld   l, a
 
 label_5A2C9::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, $2E
     ld   l, $57
     ld   l, b
@@ -8495,7 +8522,10 @@ label_5A348::
     jr   nz, label_5A3B6
     ld   h, l
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_5A34D::
+    ld   h, l
     ld   [hl], h
     ld   l, b
     ld   h, l
@@ -8545,7 +8575,8 @@ label_5A37C::
     jr   nz, label_5A39E
     jr   nz, label_5A3E8
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5A3FE
     ld   l, a
     ld   [hl], l
@@ -8683,7 +8714,10 @@ label_5A3FF::
     ld   l, h
     ld   h, l
     ld   h, c
-    halt
+    db   $76 ; Halt
+
+label_5A403::
+    ld   h, l
     jr   nz, label_5A47A
     ld   l, b
     ld   l, c
@@ -9219,7 +9253,8 @@ label_5A5F2::
     ld   h, c
 
 label_5A600::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5A676
     ld   h, l
     ld   h, c
@@ -10063,7 +10098,8 @@ label_5A926::
     ld   [hl], h
     jr   nz, label_5A994
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5A955
 
 label_5A935::
@@ -10466,7 +10502,8 @@ label_5AAB5::
     ld   l, c
 
 label_5AABD::
-    halt
+    db   $76 ; Halt
+    ld   l, c
     ld   l, [hl]
     ld   h, a
 
@@ -10670,7 +10707,8 @@ label_5AB8E::
     jr   nz, label_5ABB1
     ld   l, b
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_5AB95::
     jr   nz, label_5ABFB
@@ -10702,11 +10740,13 @@ label_5AB9C::
     ld   [hl], l
     jr   nz, label_5AC1E
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5AC2B
     ld   [hl], d
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, [hl]
 
 label_5ABC0::
@@ -10918,7 +10958,8 @@ label_5AC95::
     ld   h, a
     jr   nz, label_5AD03
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   l, a
 
 label_5AC9E::
     ld   h, e
@@ -10975,7 +11016,8 @@ label_5ACCF::
     ld   c, c
     jr   nz, label_5AD3C
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5AD3A
     ld   l, h
     ld   [hl], a
@@ -11779,7 +11821,8 @@ label_5AFFC::
     jr   nz, label_5B01F
     jr   nz, label_5B069
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5B068
     ld   h, l
     ld   h, c
@@ -12112,7 +12155,8 @@ label_5B149::
     ld   h, c
 
 label_5B154::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], h
     ld   l, b
     ld   h, l
@@ -12469,7 +12513,8 @@ label_5B2A6::
     jr   nz, label_5B2D0
 
 label_5B2B0::
-    halt
+    db   $76 ; Halt
+    ld   l, a
     ld   h, e
     ld   h, c
     ld   l, h
@@ -12525,7 +12570,8 @@ label_5B2E0::
     ccf
     jr   nz, label_5B307
     ld   b, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     ld   a, c
     ld   h, d
@@ -12629,7 +12675,8 @@ label_5B34E::
     jr   nz, label_5B3C6
     ld   [hl], d
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   l, c
     ld   l, a
     ld   [hl], l
     ld   [hl], e
@@ -12687,7 +12734,8 @@ label_5B383::
     ld   h, c
 
 label_5B38C::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     cp   $54
 
 label_5B390::
@@ -12795,7 +12843,8 @@ label_5B3F2::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5B468
     ld   h, l
 
@@ -12839,12 +12888,14 @@ label_5B420::
     jr   nz, label_5B485
 
 label_5B424::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     ld   a, c
     jr   nz, label_5B497
     ld   l, a
-    halt
+    db   $76 ; Halt
+    ld   l, c
 
 label_5B42D::
     ld   l, [hl]
@@ -12866,11 +12917,13 @@ label_5B438::
     ld   l, [hl]
     jr   nz, label_5B464
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, [hl]
     jr   nz, label_5B4B6
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   l, [hl]
     jr   nz, label_5B4C5
 
@@ -12887,7 +12940,8 @@ label_5B455::
     ld   l, [hl]
     ld   l, h
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   l, c
     ld   l, [hl]
     ld   h, a
     jr   nz, label_5B4D2
@@ -12935,7 +12989,8 @@ label_5B485::
     ld   l, e
     ld   h, l
     jr   nz, label_5B4F0
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     ld   a, c
     ld   [hl], h
@@ -12969,7 +13024,8 @@ label_5B4A9::
     jr   nz, label_5B50C
     ld   l, h
     ld   l, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   hl, label_588FF
     ld   h, l
     ld   a, c
@@ -13054,7 +13110,8 @@ label_5B502::
 label_5B507::
     jr   nz, label_5B57B
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_5B50C::
     ld   l, [hl]
@@ -13265,7 +13322,8 @@ label_5B5DD::
 
 label_5B5E0::
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5B652
     ld   l, a
 
@@ -13337,7 +13395,8 @@ label_5B62E::
     ld   [hl], e
     ld   h, l
     ld   [hl], d
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_5B634::
     jr   nz, label_5B69F
@@ -13378,7 +13437,8 @@ label_5B652::
     jr   nz, label_5B678
     jr   nz, label_5B6C2
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5B6D3
     ld   l, a
     jr   nz, label_5B6C5
@@ -13443,7 +13503,10 @@ label_5B69F::
     jr   nz, label_5B704
     ld   h, c
     ld   [hl], d
-    halt
+    db   $76 ; Halt
+
+label_5B6A4::
+    ld   h, l
     ld   h, h
     jr   nz, label_5B6C8
     ld   l, a
@@ -13824,7 +13887,8 @@ label_5B80A::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5B877
     ld   l, a
     ld   [hl], l
@@ -13878,7 +13942,8 @@ label_5B839::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5B8AD
     ld   l, a
     ld   l, h
@@ -13903,7 +13968,8 @@ label_5B859::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   h, a
     ld   l, a
     ld   [hl], h
@@ -13978,7 +14044,8 @@ label_5B8AB::
     ld   e, [hl]
 
 label_5B8B4::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5B91F
     ld   l, a
     ld   [hl], h
@@ -14058,7 +14125,10 @@ label_5B8F0::
 label_5B900::
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+
+label_5B903::
+    ld   h, l
     jr   nz, label_5B96D
     ld   l, a
     ld   [hl], h
@@ -14149,7 +14219,10 @@ label_5B958::
 label_5B95E::
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+
+label_5B961::
+    ld   h, l
     jr   nz, label_5B9CB
     ld   l, a
 
@@ -14578,7 +14651,8 @@ label_5BAF3::
     ld   l, e
     ld   h, l
     jr   nz, label_5BB6E
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
     jr   nz, label_5BB78
     ld   l, b
@@ -14686,7 +14760,8 @@ label_5BB58::
 label_5BB69::
     ld   l, [hl]
     ld   h, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
     ld   [hl], d
 
 label_5BB6E::
@@ -14713,7 +14788,8 @@ label_5BB78::
 label_5BB81::
     jr   nz, label_5BBEB
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5BBA8
 
 label_5BB88::
@@ -14822,7 +14898,10 @@ label_5BBEC::
     ld   l, [hl]
     jr   nz, label_5BC60
     ld   h, l
-    halt
+    db   $76 ; Halt
+
+label_5BBF4::
+    ld   h, l
     ld   [hl], d
 
 label_5BBF6::
@@ -15508,7 +15587,10 @@ label_5BE98::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+
+label_5BEA9::
+    ld   h, l
     jr   nz, label_5BF13
     ld   l, a
     ld   [hl], h
@@ -15539,7 +15621,8 @@ label_5BEC2::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5BF34
 
 label_5BECD::
@@ -15566,7 +15649,8 @@ label_5BEDF::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5BF50
     ld   l, a
     ld   [hl], h
@@ -15597,7 +15681,10 @@ label_5BEF7::
 label_5BF04::
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+
+label_5BF07::
+    ld   h, l
     jr   nz, label_5BF71
     ld   l, a
     ld   [hl], h
@@ -15619,7 +15706,8 @@ label_5BF13::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5BF8C
     ld   l, a
     ld   [hl], h
@@ -15646,7 +15734,8 @@ label_5BF34::
     ld   e, [hl]
 
 label_5BF3F::
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5BFAA
     ld   l, a
     ld   [hl], h
@@ -15677,7 +15766,10 @@ label_5BF50::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+
+label_5BF60::
+    ld   h, l
 
 label_5BF61::
     jr   nz, label_5BFCA
@@ -15702,7 +15794,8 @@ label_5BF6B::
     jr   nz, label_5BF9B
     jr   nz, label_5BF9D
     ld   b, l
-    halt
+    db   $76 ; Halt
+    ld   h, l
 
 label_5BF80::
     ld   l, [hl]
@@ -15721,7 +15814,8 @@ label_5BF8C::
     ld   l, a
     ld   [hl], l
     ld   e, [hl]
-    halt
+    db   $76 ; Halt
+    ld   h, l
     jr   nz, label_5BFFA
     ld   l, a
     ld   [hl], h

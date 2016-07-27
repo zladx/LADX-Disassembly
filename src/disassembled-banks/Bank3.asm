@@ -31,8 +31,8 @@ label_C004::
     ld   [de], a
 
 label_C025::
-    ldh  [$FF0C], a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
+    ld  [$FF00+C], a
     ld   [bc], a
     ld   [de], a
     ld   [bc], a
@@ -68,8 +68,7 @@ label_C040::
     jp   nz, label_8282
     add  a, d
     add  a, d
-    db   $F2 ; Undefined instruction
-    add  a, d
+    ld   a, [$FF00+C]
     ld   b, c
     add  a, d
     add  a, d
@@ -3199,8 +3198,10 @@ label_D166::
     ld   c, e
 
 label_D16A::
-    halt
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     call label_FEFE
     ld   d, $00
     ld   hl, label_D23D
@@ -3542,8 +3543,7 @@ label_D395::
 
 label_D398::
     ld   a, [$FF17]
-    db   $F2 ; Undefined instruction
-    rla
+    ld   a, [$FF00+C]
     db   $F4 ; Undefined instruction
     ld   d, $F6
     ld   d, $F0
@@ -4871,9 +4871,10 @@ label_DB7D::
     jp   label_E0AA
     ld   [hl], h
     nop
-    halt
-    halt
-    ld   [hl], h
+    db   $76 ; Halt
+    nop
+    db   $76 ; Halt
+    jr   nz, label_DBFB
     jr   nz, label_DB9A
     add  a, b
     ld   e, e

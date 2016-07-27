@@ -9195,7 +9195,7 @@ label_8C646::
     ld   e, b
     rst  $28
     rst  $28
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     db   $E3 ; Undefined instruction
     rst  $28
     rst  $28
@@ -9214,8 +9214,7 @@ label_8C646::
     ld   a, [de]
     rst  $28
     rst  $28
-    db   $F2 ; Undefined instruction
-    di
+    ld   a, [$FF00+C]
     rst  $28
     rst  $28
     ld   e, b
@@ -10233,7 +10232,8 @@ label_8EC41::
     inc  bc
     inc  bc
     inc  bc
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     xor  h
@@ -10252,7 +10252,8 @@ label_8EC41::
     ld   d, c
     ld   b, l
     ld   b, l
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     cp   h
@@ -10431,7 +10432,8 @@ label_8EC41::
     cp   l
     cp   h
     cp   l
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     inc  e
@@ -10450,7 +10452,8 @@ label_8EC41::
     dec  e
     inc  e
     dec  e
-    halt
+    db   $76 ; Halt
+    db   $76 ; Halt
     ld   c, c
     ld   e, c
     ld   e, $1F
@@ -13926,7 +13929,8 @@ label_8FCB6::
     inc  de
     ld   [hl], d
     xor  [hl]
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     xor  h
     xor  h
     xor  h
@@ -14354,4 +14358,255 @@ label_8FEFD::
     dec  c
     jr   nz, label_8FEFD
     ret
-
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop

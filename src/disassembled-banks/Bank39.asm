@@ -41,12 +41,12 @@ label_9C01F::
     ld   h, d
     ld   h, d
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   e, e
     ld   a, [bc]
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   a, [bc]
     inc  c
@@ -120,10 +120,10 @@ label_9C01F::
     scf
     ld   a, [bc]
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   h, d
     or   $37
@@ -729,7 +729,7 @@ label_9C346::
     ld   a, [bc]
     jr   z, label_9C354
     or   $5B
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   l, [hl]
     call nc, label_9EE6E
@@ -1185,7 +1185,7 @@ label_9C50E::
     ld   e, h
     ld   h, c
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     ld   h, d
     db   $FC ; Undefined instruction
@@ -1537,7 +1537,7 @@ label_9C6D9::
     or   a
     call label_3CE
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   e, e
     call label_CDCE
     adc  a, $03
@@ -2659,7 +2659,7 @@ label_9CD3A::
     jr   c, label_9CD4E
     ld   c, $37
     ld   e, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
 
 label_9CD44::
     ld   e, e
@@ -2916,10 +2916,10 @@ label_9CE6A::
     scf
     inc  b
     rst  $30
-    db   $F2 ; Undefined instruction
-    ld   c, $0E
-    ld   [$F8FB], a
-    daa
+    ld   a, [$FF00+C]
+    ld   c, $EA
+    ei
+    ld    hl, sp+$27
     scf
     jr   nz, label_9CE85
     di
@@ -3609,6 +3609,8 @@ label_9D1B3::
     inc  c
     dec  c
     and  e
+
+label_9D1BA::
     inc  l
     inc  l
     rst  $30
@@ -3657,8 +3659,7 @@ label_9D1B3::
     db   $E3 ; Undefined instruction
     xor  [hl]
     or   d
-    db   $F2 ; Undefined instruction
-    inc  b
+    ld   a, [$FF00+C]
     jr   c, label_9D206
     jr   c, label_9D1B3
     cp   b
@@ -3667,9 +3668,8 @@ label_9D1B3::
     cp   c
     di
     inc  b
-    db   $F2 ; Undefined instruction
-    ld   c, $38
-    or   [hl]
+    ld   a, [$FF00+C]
+    jr   c, label_9D1BA
     cp   c
     cp   c
 
@@ -11193,7 +11193,8 @@ label_9F378::
 
 label_9F388::
     nop
-    halt
+    db   $76 ; Halt
+    nop
     nop
     ld   [label_2076], sp
     ld   [label_9F700], sp
@@ -12024,7 +12025,8 @@ label_9F76E::
     ld   [label_477], sp
     ld   [de], a
     nop
-    halt
+    db   $76 ; Halt
+    inc  b
     ld   [de], a
     ld    hl, sp+$75
     inc  b
@@ -12050,7 +12052,8 @@ label_9F76E::
     inc  bc
 
 label_9F826::
-    halt
+    db   $76 ; Halt
+    ld   [hl], a
     and  d
     ld   [hl], a
     adc  a, $77
@@ -12651,7 +12654,8 @@ label_9FB5F::
     ld   [label_2774], sp
     nop
     nop
-    halt
+    db   $76 ; Halt
+    rlca
     nop
     ld   [label_2776], sp
     nop

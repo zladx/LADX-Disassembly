@@ -4346,14 +4346,16 @@ label_85548::
     ld   e, $04
     ld   bc, $0000
     di
-    halt
+    db   $76 ; Halt
+    adc  a, l
     add  hl, bc
     xor  c
     inc  c
     nop
     nop
     di
-    halt
+    db   $76 ; Halt
+    xor  h
     ld   d, c
     ld   h, [hl]
     jr   nz, label_8555F
@@ -4361,18 +4363,21 @@ label_85548::
 label_8555F::
     nop
     di
-    halt
+    db   $76 ; Halt
+    rla
     inc  d
     inc  c
     stop
     nop
     di
-    halt
+    db   $76 ; Halt
+    sub  a, a
     add  hl, bc
     adc  a, e
     ld   [$0000], sp
     di
-    halt
+    db   $76 ; Halt
+    ret  nz
     jr   nc, label_85576
     jr   label_85577
 
@@ -4387,26 +4392,30 @@ label_85577::
     nop
     nop
     di
-    halt
-    ld   [hl], $63
+    db   $76 ; Halt
+    ld   h, $36
+    ld   h, e
     add  hl, de
     nop
     nop
     rst  $38
     ld   b, a
     di
-    halt
+    db   $76 ; Halt
+    ld   h, d
     dec  h
     nop
     nop
     di
-    halt
-    ld   [hl], $63
+    db   $76 ; Halt
+    ld   h, $36
+    ld   h, e
     add  hl, de
     nop
     nop
     di
-    halt
+    db   $76 ; Halt
+    xor  h
     ld   d, c
     ld   h, [hl]
     jr   nz, label_8559F
@@ -5721,7 +5730,8 @@ label_85B4F::
     call nz, label_1F26
     ld   bc, $0069
     di
-    halt
+    db   $76 ; Halt
+    adc  a, l
     add  hl, bc
     xor  c
     inc  c
@@ -6786,7 +6796,8 @@ label_85FEF::
     ld   a, l
     and  $44
     dec  c
-    halt
+    db   $76 ; Halt
+    nop
     nop
 
 label_86010::
@@ -6862,7 +6873,8 @@ label_8603F::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    add  a, a
     ld   a, l
     and  $44
     nop
@@ -6877,7 +6889,8 @@ label_86067::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    add  a, a
     ld   a, l
     and  $44
     nop
@@ -6929,7 +6942,8 @@ label_8608F::
     ld   a, l
     and  $44
     dec  c
-    halt
+    db   $76 ; Halt
+    nop
     nop
     rst  $38
     ld   b, a
@@ -6995,7 +7009,8 @@ label_860DF::
     ld   a, l
     and  $44
     dec  c
-    halt
+    db   $76 ; Halt
+    nop
     nop
     add  a, a
     ld   a, l
@@ -7286,7 +7301,8 @@ label_86233::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    add  a, a
     ld   a, l
     and  $44
     nop
@@ -7301,7 +7317,8 @@ label_86257::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    add  a, a
     ld   a, l
     and  $44
     nop
@@ -7423,7 +7440,8 @@ label_862CF::
     ld   b, b
     ld   hl, $0000
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -7489,7 +7507,8 @@ label_8631F::
     ld   b, b
     ld   hl, $0000
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -7558,7 +7577,8 @@ label_8636F::
     ld   b, b
     ld   hl, $0000
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -7630,7 +7650,8 @@ label_863BF::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -7768,7 +7789,8 @@ label_8645F::
     add  hl, hl
     ld   bc, $00A5
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -7840,7 +7862,8 @@ label_864AF::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -7925,7 +7948,8 @@ label_86527::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -8004,7 +8028,8 @@ label_86587::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -8094,7 +8119,8 @@ label_865FF::
     nop
     rst  $38
     ld   b, a
-    halt
+    db   $76 ; Halt
+    dec  b
     add  hl, hl
     nop
     nop
@@ -8860,7 +8886,8 @@ label_8696F::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -8927,7 +8954,8 @@ label_869BF::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -9064,7 +9092,8 @@ label_86A5F::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -9133,7 +9162,8 @@ label_86AAF::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -9199,7 +9229,8 @@ label_86AFF::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -9268,7 +9299,8 @@ label_86B4F::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -9338,7 +9370,8 @@ label_86B9F::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -9522,7 +9555,8 @@ label_86C8F::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -9905,7 +9939,8 @@ label_86E6F::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -10228,7 +10263,8 @@ label_86FFF::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -10354,7 +10390,8 @@ label_8709F::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -10419,7 +10456,8 @@ label_870EF::
     nop
     nop
     dec  c
-    halt
+    db   $76 ; Halt
+    ld   b, l
     ld   a, l
     and  h
     inc  a
@@ -10483,7 +10521,8 @@ label_8713F::
     ld   a, l
     and  $44
     dec  c
-    halt
+    db   $76 ; Halt
+    nop
     nop
     add  a, a
     ld   a, l
@@ -11251,10 +11290,10 @@ label_874F0::
     ld   [hl], $75
     xor  $7D
     sub  a, [hl]
-    halt
-    halt
-    halt
-    ld   a, b
+    db   $76 ; Halt
+    ld   [hl], $76
+    sub  a, $76
+    xor  $78
     ld   l, [hl]
     ld   a, c
     xor  $79
@@ -11364,8 +11403,7 @@ label_8756A::
     ld   c, [hl]
     rst  $38
     ld   a, a
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     add  hl, de
     ld   a, [hli]
     ld   e, a
@@ -11484,8 +11522,7 @@ label_875FB::
     ld   c, [hl]
     rst  $38
     ld   a, a
-    db   $F2 ; Undefined instruction
-    nop
+    ld   a, [$FF00+C]
     add  hl, de
     ld   a, [hli]
     ld   e, a

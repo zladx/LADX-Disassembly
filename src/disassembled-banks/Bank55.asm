@@ -3281,7 +3281,8 @@ label_DD3FE::
     rst  $38
     ld   b, a
     nop
-    halt
+    db   $76 ; Halt
+    ldi  [hl], a
     ld   c, l
     nop
     nop
@@ -4489,7 +4490,8 @@ label_DD9B3::
     nop
     ei
     rlca
-    halt
+    db   $76 ; Halt
+    nop
     ei
     rrca
     ld   a, b
@@ -4776,8 +4778,8 @@ label_DDAE9::
     ld   bc, $0010
     ld   [hl], h
     ld   bc, label_810
-    halt
-    db   $10 ; Undefined instruction
+    db   $76 ; Halt
+    ld   bc, label_1010
     ld   a, b
     ld   bc, label_DDAE9
     db   $FD ; Undefined instruction
@@ -4938,7 +4940,7 @@ label_DDC4A::
     inc  c
     ld   a, d
     nop
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  d
     ld   a, h
     nop

@@ -92,7 +92,7 @@ label_6C06E::
     ld   a, [hli]
 
 label_6C06F::
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  c
     dec  b
     jr   nz, label_6C06E
@@ -103,7 +103,7 @@ label_6C06F::
 label_6C077::
     inc  [hl]
     ld   d, b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   d, c
     sub  a, e
     ld   d, d
@@ -218,7 +218,7 @@ label_6C0E6::
 
 label_6C0E9::
     ld   a, [hli]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  c
     ld   a, c
     cp   $40
@@ -519,7 +519,7 @@ label_6C2AB::
 
 label_6C2C4::
     ld   a, [hli]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  c
     ld   a, c
     cp   $40
@@ -1201,9 +1201,9 @@ label_6C67A::
     bit  7, a
     jr   nz, label_6C696
     xor  a
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   a, $80
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
 
 label_6C696::
     inc  c
@@ -1258,17 +1258,17 @@ label_6C6B8::
 label_6C6CB::
     ld   a, d
     or   b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  c
     ld   a, e
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  c
     ld   a, [hli]
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  c
     ld   a, [hl]
     or   $80
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
 
 label_6C6D9::
     pop  hl
@@ -1426,12 +1426,12 @@ label_6C7D2::
     add  hl, bc
     ld   a, [hl]
     pop  bc
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     inc  c
     inc  c
     ld   a, [de]
     or   $80
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ret
 
 label_6C7E5::
@@ -1490,7 +1490,7 @@ label_6C810::
 
 label_6C83D::
     ld   a, b
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     jp   label_6C6FC
 
 label_6C842::
@@ -1551,13 +1551,13 @@ label_6C884::
     ld   de, $D3A4
     call label_6C895
     ld   a, l
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [de], a
     inc  c
     inc  e
     ld   a, h
     and  $0F
-    ldh  [$FF0C], a
+    ld  [$FF00+C], a
     ld   [de], a
     ret
 
@@ -1934,10 +1934,7 @@ label_6CA54::
     nop
     nop
     jr   label_6C9F8
-    db   $F2 ; Undefined instruction
-
-label_6CA79::
-    nop
+    ld   a, [$FF00+C]
     nop
     jr   label_6C9FD
     add  a, c
@@ -3228,7 +3225,8 @@ label_6D050::
     ld   h, h
     ld   l, [hl]
     ld   [hl], d
-    halt
+    db   $76 ; Halt
+    and  e
     ld   a, h
     ld   bc, label_1A7
     and  c
@@ -3269,7 +3267,8 @@ label_6D09D::
     ld   l, h
     ld   [hl], b
     ld   [hl], h
-    halt
+    db   $76 ; Halt
+    ld   a, d
     and  d
     ld   [hl], h
     ld   bc, label_1A8
@@ -7140,7 +7139,8 @@ label_6E0C1::
     and  b
     ld   a, [hl]
     ld   a, d
-    halt
+    db   $76 ; Halt
+    ld   [hl], d
     ld   l, [hl]
     ld   l, d
     and  e
@@ -7205,7 +7205,8 @@ label_6E14E::
     ld   c, d
     ld   l, d
     ld   h, c
-    halt
+    db   $76 ; Halt
+    ld   h, c
     add  a, d
     ld   h, c
     nop
@@ -8130,20 +8131,17 @@ label_6E4A2::
     ld   h, a
 
 label_6E540::
-    db   $F2 ; Undefined instruction
-    ld   h, a
+    ld   a, [$FF00+C]
     ld   l, d
     ld   h, a
     ld   l, d
     ld   h, a
-    db   $F2 ; Undefined instruction
-    ld   h, a
+    ld   a, [$FF00+C]
     ld   l, d
     ld   h, a
     ld   l, d
     ld   h, a
-    db   $F2 ; Undefined instruction
-    ld   h, a
+    ld   a, [$FF00+C]
     pop  de
     ld   h, a
     ldd  [hl], a
@@ -8170,8 +8168,7 @@ label_6E540::
     ld   l, a
     and  l
     ld   l, b
-    db   $F2 ; Undefined instruction
-    ld   l, a
+    ld   a, [$FF00+C]
     adc  a, a
     ld   l, b
     sbc  a, $6F

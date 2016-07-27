@@ -1,5 +1,287 @@
-
-Start::
+section "bank0",romx,bank[$00]
+    jp   label_28C0
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    jp   label_46C
+    nop
+    nop
+    nop
+    nop
+    nop
+    jp   label_388
+    nop
+    nop
+    nop
+    nop
+    nop
+    reti
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    jp   label_408
+    nop
+    nop
+    nop
+    nop
+    nop
+    reti
+    nop
+    ld   hl, label_6900
+    ld   de, $89A0
+    jr   label_80
+    ld   hl, $6930
+    ld   de, $89D0
+    jr   label_80
+    ld   hl, $49D0
+    ld   de, $89D0
+    jr   label_80
+    ld   hl, $49A0
+    ld   de, $89A0
+    ld   bc, $0030
+    call label_2914
+    xor  a
+    ld   [$FF90], a
+    ld   [$FF92], a
+    ld   a, $0C
+    ld   [label_2100], a
+    ret
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    jp   label_150
+    adc  a, $ED
+    ld   h, [hl]
+    ld   h, [hl]
+    call z, label_D
+    dec  bc
+    inc  bc
+    ld   [hl], e
+    nop
+    add  a, e
+    nop
+    inc  c
+    nop
+    dec  c
+    nop
+    ld   [$1F11], sp
+    adc  a, b
+    adc  a, c
+    nop
+    ld   c, $DC
+    call z, label_E66E
+    db   $DD
+    db   $D9
+    reti
+    sbc  a, c
+    cp   e
+    cp   e
+    ld   h, a
+    ld   h, e
+    ld   l, [hl]
+    ld   c, $EC
+    call z, label_DCDD
+    sbc  a, c
+    sbc  a, a
+    cp   e
+    cp   c
+    inc  sp
+    ld   a, $5A
+    ld   b, l
+    ld   c, h
+    ld   b, h
+    ld   b, c
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    add  a, b
+    jr   nc, label_177
+    inc  bc
+    dec  de
+    dec  b
+    inc  bc
+    ld   bc, $0033
+    inc  a
+    db   $E3 ; Undefined instruction
+    db   $FD ; Undefined instruction
     cp   $11
     jr   nz, label_16E
     ld   a, [$FF4D]
@@ -295,7 +577,8 @@ label_35F::
     call label_80C
     xor  a
     ld   [$FFFD], a
-    halt
+    db   $76 ; Halt
+    nop
 
 label_374::
     ld   a, [$FFD1]

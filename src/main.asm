@@ -401,7 +401,7 @@ label_16F::
     ld   a, $4F
     ld   [rLYC], a
     ld   a, $01
-    ld   [$DBAF], a
+    ld   [WR1_CurrentBank], a
     ld   a, $01
     ld   [rIE], a
     call label_46AA
@@ -614,7 +614,7 @@ label_32D::
 
 label_33B::
     ld   a, $01
-    call label_80C
+    call SwitchBank
     call label_5F2E
 
 label_343::
@@ -623,23 +623,23 @@ label_343::
     and  a
     jr   z, label_353
     ld   a, $21
-    call label_80C
+    call SwitchBank
     call label_406E
 
 label_353::
     xor  a
     ld   [$DDD2], a
     ld   a, $01
-    call label_80C
+    call SwitchBank
     call label_5F4B
 
 label_35F::
     ld   a, $1F
-    call label_80C
+    call SwitchBank
     call label_7F80
     ld   a, $0C
     call label_B0B
-    call label_80C
+    call SwitchBank
     xor  a
     ld   [$FFFD], a
     halt
@@ -764,7 +764,7 @@ InterruptSerial::
     ld   a, $28
     ld   [SelectRomBank_2100], a
     call label_4601
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     pop  af
     reti
@@ -956,7 +956,7 @@ label_538::
     ld   a, $21
     ld   [SelectRomBank_2100], a
     call label_4000
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
 
 label_569::
@@ -975,7 +975,7 @@ WaitForVBlank::
     reti
 
 label_577::
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     push af
     ld   a, [$FFFD]
     and  a
@@ -985,10 +985,10 @@ label_577::
     and  a
     jr   z, label_598
     ld   a, $21
-    call label_80C
+    call SwitchBank
     call label_4000
     ld   a, $24
-    call label_80C
+    call SwitchBank
     call label_5C1A
 
 label_598::
@@ -1002,10 +1002,10 @@ label_598::
 
 label_5AB::
     ld   a, $28
-    call label_80C
+    call SwitchBank
     call label_4616
     pop  af
-    ld   [$DBAF], a
+    ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     jr   WaitForVBlank
 
@@ -1353,8 +1353,9 @@ label_808::
     ld   [$FF90], a
     ret
 
-label_80C::
-    ld   [$DBAF], a
+; Switch to the bank defined in a, and save the active bank
+SwitchBank::
+    ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     ret
 
@@ -1362,14 +1363,14 @@ label_813::
     call label_B0B
 
 label_816::
-    ld   [$DBAF], a
+    ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     ret
 
-; often-used routine, map related
+; Probably something like `ReloadCurrentBank`
 label_81D::
     push af
-    ld   a, [$DBAF] ; position on the map?
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     pop  af
     ret
@@ -1450,7 +1451,7 @@ label_873::
 
 label_8A4::
     ld   a, $1F
-    call label_80C
+    call SwitchBank
     call label_4006
     ld   a, [$FFF3]
     and  a
@@ -1470,10 +1471,10 @@ label_8C3::
 
 label_8C6::
     ld   a, $1B
-    call label_80C
+    call SwitchBank
     call label_4006
     ld   a, $1E
-    call label_80C
+    call SwitchBank
     call label_4006
 
 label_8D6::
@@ -1485,7 +1486,7 @@ label_8D7::
     call label_6A30
 
 label_8DF::
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -1768,19 +1769,19 @@ label_A8F::
 label_A9B::
     push af
     ld   a, $0F
-    call label_80C
+    call SwitchBank
     call label_2321
     jp   label_973
 
 label_AA7::
     push af
     ld   a, $36
-    call label_80C
+    call SwitchBank
     call label_705A
 
 label_AB0::
     pop  af
-    call label_80C
+    call SwitchBank
     ret
 
 label_AB5::
@@ -1809,7 +1810,7 @@ label_AD2::
 label_ADE::
     push af
     ld   a, $36
-    call label_80C
+    call SwitchBank
     call label_4A77
     jp   label_973
 
@@ -2447,7 +2448,7 @@ label_ED1::
 
 label_ED7::
     ld   a, $01
-    call label_80C
+    call SwitchBank
     jp   label_4000
 
 label_EDF::
@@ -2455,7 +2456,7 @@ label_EDF::
 
 label_EE2::
     ld   a, $17
-    call label_80C
+    call SwitchBank
     call label_4AB7
     jp   label_101A
 
@@ -2468,7 +2469,7 @@ label_EF4::
     push af
     call label_398D
     pop  af
-    jp   label_80C
+    jp   SwitchBank
 
 label_EFC::
     ld   a, $03
@@ -2500,28 +2501,28 @@ label_F1A::
     call label_4C4B
     call label_4ABC
     ld   a, $01
-    call label_80C
+    call SwitchBank
     jp   label_4371
 
 label_F2D::
     ld   a, $20
-    call label_80C
+    call SwitchBank
     jp   label_5904
 
 label_F35::
     ld   a, $28
-    call label_80C
+    call SwitchBank
     call label_4000
     jp   label_101A
 
 label_F40::
     ld   a, $37
-    call label_80C
+    call SwitchBank
     jp   label_4000
 
 label_F48::
     ld   a, $02
-    call label_80C
+    call SwitchBank
     ld   a, [$C19F]
     and  a
     jr   nz, label_F8F
@@ -2582,7 +2583,7 @@ label_F97::
     res  7, [hl]
     call label_593B
     ld   a, $02
-    call label_80C
+    call SwitchBank
     call label_78E8
     call label_1033
     ld   a, [$C15C]
@@ -2591,11 +2592,11 @@ label_F97::
     ld   [SelectRomBank_2100], a
     call label_4B1F
     ld   a, $19
-    call label_80C
+    call SwitchBank
     call label_7A9A
     call label_398D
     ld   a, $02
-    call label_80C
+    call SwitchBank
     call label_5487
     ld   hl, $D601
     ld   a, [$FFE7]
@@ -2625,7 +2626,7 @@ label_100A::
 
 label_1012::
     ld   a, $14
-    call label_80C
+    call SwitchBank
     call label_54F8
 
 label_101A::
@@ -2808,10 +2809,10 @@ label_114F::
     call label_1794
     jp   label_1D2E
     ld   a, $19
-    call label_80C
+    call SwitchBank
     jp   $5D6A
     ld   a, $01
-    call label_80C
+    call SwitchBank
     jp   $41C2
     ld   a, $36
     ld   [SelectRomBank_2100], a
@@ -2819,7 +2820,7 @@ label_114F::
     and  a
     ret  z
     ld   a, $02
-    call label_80C
+    call SwitchBank
     jp   $4287
     ld   a, [$C50A]
     ld   hl, $C167
@@ -2982,7 +2983,7 @@ label_128D::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_48CA
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -3089,7 +3090,7 @@ label_1340::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4B4A
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -3109,7 +3110,7 @@ PlaceBomb::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4B81
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -3128,7 +3129,7 @@ label_1387::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4BFF
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -3306,7 +3307,7 @@ label_14A7::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4C47
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -3346,7 +3347,7 @@ label_14F8::
     ld   [$FFA3], a
     call label_21A8
     ld   a, $02
-    call label_80C
+    call SwitchBank
     jp   $6C75
 
 label_1508::
@@ -3446,7 +3447,7 @@ label_158F::
     ld   a, [$FAFA]
     call label_15AF
     ld   a, $02
-    jp   label_80C
+    jp   SwitchBank
 
 label_15AF::
     ld   a, [$C1C4]
@@ -3800,7 +3801,7 @@ label_17DB::
     bit  7, a
     jp   z, label_1814
     ld   a, $02
-    call label_80C
+    call SwitchBank
     call label_5310
     ld   a, [$C19B]
     and  $7F
@@ -3817,7 +3818,7 @@ label_17DB::
     ld   a, $0D
     ld   [$FFF4], a
     ld   a, $02
-    call label_80C
+    call SwitchBank
     call label_538B
 
 label_1814::
@@ -3829,13 +3830,13 @@ label_1819::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4AB3
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_49BA
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
     call label_754F
@@ -3873,7 +3874,7 @@ label_186C::
     jr   z, label_1898
     push af
     ld   a, $04
-    call label_80C
+    call SwitchBank
     pop  af
     call label_7A5F
     ld   hl, $DB6E
@@ -3964,7 +3965,7 @@ label_1907::
 label_1909::
     ld   c, a
     ld   a, $14
-    call label_80C
+    call SwitchBank
     push hl
     ld   a, [$FFF7]
     swap a
@@ -4014,7 +4015,7 @@ label_1948::
     cp   $0A
     jr   nc, label_196E
     ld   a, $02
-    call label_80C
+    call SwitchBank
     call label_6709
     ld   a, $30
     ld   [$FFB4], a
@@ -4151,7 +4152,7 @@ label_1A22::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_55CA
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -4162,7 +4163,7 @@ label_1A39::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_563B
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -4957,7 +4958,7 @@ data_1F5D::
 label_1F61::
     call label_1F69
     ld   a, 2
-    jp   label_80C
+    jp   SwitchBank
 
 label_1F69::
     ld   hl, $C14A
@@ -5290,7 +5291,7 @@ label_2183::
     ld   b, d
     ld   e, $01
     ld   a, $03
-    call label_80C
+    call SwitchBank
     jp   $5795
 
 label_21A7::
@@ -6483,7 +6484,7 @@ label_28D7::
     ld   [rIE], a
     ret
     ld   a, $01
-    call label_80C
+    call SwitchBank
     jp   $6CE3
     ld   a, $7E
     ld   bc, $0400
@@ -6720,7 +6721,7 @@ label_29F8::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4C98
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -6945,7 +6946,7 @@ label_2BCF::
     ld   bc, data_bank_c_07C0-data_bank_c_07A0
     call CopyData
     ld   a, $01
-    call label_80C
+    call SwitchBank
     ret
 
     call label_2BCF
@@ -6962,7 +6963,7 @@ label_2BCF::
     ld   bc, $0800
     jp   CopyData
     ld   a, $20
-    call label_80C
+    call SwitchBank
     ld   hl, $4589
     ld   a, [$FFF7]
     ld   e, a
@@ -7045,7 +7046,7 @@ label_2CD1::
     ld   de, $8F00
     ld   bc, $0100
     call CopyData
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ld   hl, $7D00
     ld   a, [$FFF7]
@@ -7124,7 +7125,7 @@ label_2D50::
     call CopyData
     ret
     ld   a, $01
-    call label_80C
+    call SwitchBank
     ld   hl, $6D4A
     ld   de, $8700
     ld   bc, $0080
@@ -7146,7 +7147,7 @@ label_2D50::
     ld   bc, $0700
     call CopyData
     ld   a, $38
-    call label_80C
+    call SwitchBank
     ld   a, [$FFFE]
     and  a
     jr   nz, label_2DC7
@@ -7217,7 +7218,7 @@ label_2E13::
     ld   bc, $0600
     jp   CopyData
     ld   a, $0F
-    call label_80C
+    call SwitchBank
     ld   hl, $4400
     ld   de, $8800
     ld   bc, $0500
@@ -7573,7 +7574,7 @@ label_304F::
     call label_3905
     ret
     call label_3905
-    call label_80C
+    call SwitchBank
     ld   de, $9800
     ld   hl, WR1_TileMap
     ld   c, $80
@@ -8923,10 +8924,10 @@ label_3925::
 
 label_3935::
     ld   a, $19
-    call label_80C
+    call SwitchBank
     call label_7C50
     ld   a, $03
-    jp   label_80C
+    jp   SwitchBank
 
 label_3942::
     ld   a, $03
@@ -8942,10 +8943,10 @@ label_394D::
 
 label_3958::
     ld   a, $01
-    call label_80C
+    call SwitchBank
     call label_5FB3
     ld   a, $02
-    jp   label_80C
+    jp   SwitchBank
 
 label_3965::
     ld   a, $03
@@ -9023,7 +9024,7 @@ label_39C1::
 
 label_39E3::
     ld   a, $20
-    ld   [$DBAF], a
+    ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     call label_6352
     ld   b, $00
@@ -9069,7 +9070,7 @@ label_3A18::
     ld   a, [hl]
     ld   [$FFF1], a
     ld   a, $19
-    ld   [$DBAF], a
+    ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     ld   a, [$FFEB]
     cp   $6A
@@ -9094,11 +9095,11 @@ label_3A4E::
 
 label_3A54::
     ld   a, $14
-    ld   [$DBAF], a
+    ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     call label_4D73
     ld   a, $03
-    ld   [$DBAF], a
+    ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     ld   a, [$FFEA]
     cp   $05
@@ -9112,7 +9113,7 @@ data_3A6F::
 label_3A81::
     call label_3A8D
     ld   a, $03
-    ld   [$DBAF], a
+    ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     ret
 
@@ -9133,7 +9134,7 @@ label_3A8D::
     ld   a, [hl]
     ld   l, e
     ld   h, d
-    ld   [$DBAF], a
+    ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     jp   [hl]
 
@@ -9694,13 +9695,13 @@ label_3E0E::
     jp   label_81D
 
 label_3E19::
-    ld   a, [$DBAF]
+    ld   a, [WR1_CurrentBank]
     push af
     ld   a, $02
-    call label_80C
+    call SwitchBank
     call label_6C75
     pop  af
-    jp   label_80C
+    jp   SwitchBank
 
 label_3E29::
     ld   hl, SelectRomBank_2100
@@ -9723,10 +9724,10 @@ label_3E3F::
 
 label_3E4D::
     ld   a, $02
-    call label_80C
+    call SwitchBank
     call label_41D0
     ld   a, $03
-    jp   label_80C
+    jp   SwitchBank
 
 label_3E5A::
     ld   hl, SelectRomBank_2100
@@ -9745,10 +9746,10 @@ label_3E6B::
 
 label_3E76::
     ld   a, $06
-    call label_80C
+    call SwitchBank
     call label_783C
     ld   a, $03
-    jp   label_80C
+    jp   SwitchBank
 
 label_3E83::
     ld   e, $10

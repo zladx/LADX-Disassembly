@@ -279,6 +279,7 @@ WR1_BButtonSlot equ $DB01
 WR1_ShieldLevel equ $DB44
 WR1_ArrowCount  equ $DB45
 WR1_BombCount   equ $DB4D
+WR1_CurrentBank equ $DBAF
 
 WR1_RupeeCountHigh equ $DB5D
 WR1_RupeeCountLow  equ $DB5E

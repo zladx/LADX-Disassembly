@@ -347,48 +347,46 @@ label_FFF6 equ $FFF6
 section "Main", rom0
 
 Start:
-    cp   $11
-    jr   nz, label_16E
-    ld   a, [$FF4D]
-    and  $80
-    jr   nz, label_167
-    ld   a, $30
-    ld   [rJOYP], a
-    ld   a, $01
-    ld   [rKEY1], a
+    cp   $11 ; is running on Game Boy Color?
+    jr   nz, notGBC
+    ld   a, [rKEY1]
+    and  $80 ; do we need to switch the CPU speed?
+    jr   nz, speedSwitchDone
+    ld   a, $30      ; \
+    ld   [rJOYP], a  ; |
+    ld   a, $01      ; |
+    ld   [rKEY1], a  ; | Switch the CPU speed
+    xor  a           ; |
+    ld   [rIE], a    ; |
+    stop             ; /
+speedSwitchDone:
     xor  a
-    ld   [rIE], a
-    stop
-
-label_167::
-    xor  a
-
 data_0168::
     ld   [rSVBK], a
-    ld   a, $01
-    jr   label_16F
+    ld   a, $01 ; isGBC = true
+    jr   Init
 
-label_16E::
-    xor  a
+notGBC:
+    xor  a ; isGBC = false
 
-label_16F::
-    ld   [$FFFE], a
-    call label_28CF
-    ld   sp, $DFFF
-    ld   a, $3C
+Init::
+    ld   [hIsGBC], a ; Save isGBC value
+    call LCDOff
+    ld   sp, $DFFF ; init stack pointer
+    ld   a, $3C ; 60
     ld   [SelectRomBank_2100], a
     call label_6A22
-    xor  a
-    ld   [rBGP], a
-    ld   [rOBP0], a
-    ld   [rOBP1], a
+    xor  a          ; \
+    ld   [rBGP], a  ; | Clear registers
+    ld   [rOBP0], a ; |
+    ld   [rOBP1], a ; /
     ld   hl, $8000
     ld   bc, $1800
-    call ZeroMemory
+    call ZeroMemory ; Clear bytes at hl
     ld   a, $24
     ld   [SelectRomBank_2100], a
     call label_5C00
-    call label_28F7
+    call ClearBGMap
     call label_29D0
     ld   a, $01
     ld   [SelectRomBank_2100], a
@@ -777,7 +775,7 @@ label_419::
     cp   $23
     jr   z, label_42B
     push af
-    call label_28CF
+    call LCDOff
     pop  af
 
 label_42B::
@@ -792,7 +790,7 @@ label_430::
     jp   [hl]
 
 label_43A::
-    call label_28CF
+    call LCDOff
     ld   a, $24
     ld   [SelectRomBank_2100], a
     call label_5C2C
@@ -6467,44 +6465,46 @@ func_28C0::
     ld   h, d
     jp   [hl]
 
-label_28CF::
-    ld   a, [$FFFF]
-    ld   [$FFD2], a
-    res  0, a
-    ld   [rIE], a
-
-label_28D7::
-    ld   a, [$FF44]
-    cp   $91
-    jr   nz, label_28D7
-    ld   a, [$FF40]
-    and  $7F
-    ld   [rLCDC], a
+; Turn off LCD at next vertical blanking
+LCDOff::
+    ld   a, [rIE]   
+    ld   [$FFD2], a ; Save interrupts configuration
+    res  0, a        
+    ld   [rIE], a   ; Disable all interrupts
+.waitForEndOfLine   
+    ld   a, [rLY]
+    cp   $91         
+    jr   nz, .waitForEndOfLine ; Wait for row 145
+    ld   a, [rLCDC]  ; \
+    and  $7F         ; | Switch off LCD screen
+    ld   [rLCDC], a  ; /
     ld   a, [$FFD2]
-    ld   [rIE], a
+    ld   [rIE], a    ; Restore interrupts configuration
     ret
+
     ld   a, $01
     call SwitchBank
     jp   $6CE3
     ld   a, $7E
     ld   bc, $0400
-    jr   label_28FC
+    jr   ClearMap
 
-label_28F7::
+; Fill Background Tile Table with all 7Fs
+ClearBGMap::
     ld   a, $7F
     ld   bc, $0800
 
-label_28FC::
+; Fill background-sized memory area at bc with the content of a
+ClearMap::
     ld   d, a
     ld   hl, $9800
-
-label_2900::
+.clearMap_loop
     ld   a, d
     ldi  [hl], a
     dec  bc
     ld   a, b
     or   c
-    jr   nz, label_2900
+    jr   nz, .clearMap_loop
     ret
 
 label_2908::

@@ -412,11 +412,11 @@ Init::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4854
-    jp   label_35F
+    jp   WaitForNextFrame
 
-label_1DA::
-    ld   a, $01
-    ld   [$FFFD], a
+DidRenderFrame::
+    ld   a, 1
+    ld   [hWaitingForNextFrame], a ; no longer waiting for next frame
     ld   a, [$C500]
     and  a
     jr   z, label_1F2
@@ -472,7 +472,7 @@ label_22F::
     ei
     call label_8A4
     call label_8A4
-    jp   label_35F
+    jp   WaitForNextFrame
 
 label_23D::
     ld   a, [$D6FD]
@@ -555,7 +555,7 @@ label_2B7::
     ld   [rOBP0], a
     ld   a, [$DB99]
     ld   [rOBP1], a
-    jp   label_35F
+    jp   WaitForNextFrame
 
 label_2D5::
     ld   a, [$DB9A]
@@ -573,7 +573,7 @@ label_2D5::
     or   [hl]
     ld   hl, $C10E
     or   [hl]
-    jr   nz, label_35F
+    jr   nz, WaitForNextFrame
     ld   a, [$0003]
     and  a
     jr   z, label_32D
@@ -591,16 +591,16 @@ label_30D::
     ld   a, [$D6FC]
     xor  $01
     ld   [$D6FC], a
-    jr   nz, label_35F
+    jr   nz, WaitForNextFrame
     ld   a, [$C17B]
     xor  $10
     ld   [$C17B], a
-    jr   label_35F
+    jr   WaitForNextFrame
 
 label_327::
     ld   a, [$D6FC]
     and  a
-    jr   nz, label_35F
+    jr   nz, WaitForNextFrame
 
 label_32D::
     ld   a, [$DB95]
@@ -631,7 +631,7 @@ label_353::
     call SwitchBank
     call label_5F4B
 
-label_35F::
+WaitForNextFrame::
     ld   a, $1F
     call SwitchBank
     call label_7F80
@@ -639,17 +639,15 @@ label_35F::
     call label_B0B
     call SwitchBank
     xor  a
-    ld   [$FFFD], a
+    ld   [hWaitingForNextFrame], a ; Waiting for next frame
     halt
-
-; Render loop?
-WaitNeedsRenderingFrame::
+PollNeedsRenderingFrame::
     ld   a, [hNeedsRenderingFrame]
     and  a
-    jr   z, WaitNeedsRenderingFrame
+    jr   z, PollNeedsRenderingFrame
     xor  a
     ld   [hNeedsRenderingFrame], a
-    jp   label_1DA
+    jp   DidRenderFrame
 
 data_037F::
     db $20
@@ -837,9 +835,9 @@ InterruptVBlank::
     jp  c, label_577
 
 label_48D::
-    ld   a, [$FFFD]
+    ld   a, [hWaitingForNextFrame]
     and  a
-    jp   nz, label_569
+    jp   nz, WaitForVBlank ; if not already waiting for next frame, do
     ld   a, [$C19F]
     and  $7F
     jr   z, label_4CC
@@ -850,13 +848,13 @@ label_48D::
     call label_23E4
     ld   hl, $C19F
     inc  [hl]
-    jp   label_569
+    jp   WaitForVBlank
 
 label_4AC::
     cp   $0A
     jr   nz, label_4B6
     call label_2719
-    jp   label_569
+    jp   WaitForVBlank
 
 label_4B6::
     cp   $0B
@@ -870,7 +868,7 @@ label_4B6::
 
 label_4C6::
     call label_276D
-    jp   label_569
+    jp   WaitForVBlank
 
 label_4CC::
     ld   a, [$DB95]
@@ -887,7 +885,7 @@ label_4CC::
 label_4E4::
     ld   a, [$D6FE]
     and  a
-    jr   nz, label_569
+    jr   nz, WaitForVBlank
     ld   a, [$FF90]
     ld   [$FFE8], a
     ld   hl, $FF91
@@ -905,7 +903,7 @@ label_501::
 
 label_504::
     call label_FFC0
-    jr   label_569
+    jr   WaitForVBlank
 
 label_509::
     ld   a, [$FFBB]
@@ -950,17 +948,17 @@ label_538::
     call label_FFC0
     ld   a, [$FFFE]
     and  a
-    jr   z, label_569
+    jr   z, WaitForVBlank
     ld   a, $21
     ld   [SelectRomBank_2100], a
     call label_4000
     ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
 
-label_569::
+WaitForVBlank::
     ei
 
-WaitForVBlank::
+WaitForVBlank_direct::
     pop  bc
     ld   a, c
     ld   [rSVBK], a
@@ -1005,7 +1003,7 @@ label_5AB::
     pop  af
     ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
-    jr   WaitForVBlank
+    jr   WaitForVBlank_direct
 
 label_5BC::
     ld   a, [$FF90]

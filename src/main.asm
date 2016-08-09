@@ -2418,13 +2418,35 @@ label_E46::
 
 label_E85::
     ld   a, [$DB95]
-    rst  0
-
-label_E89::
-    db $DF, $E, $E2, $E, $E, $F, $11, $F, $14, $F, $17, $F, $D7, $E, $D1, $E
-    db $C5, $E, $CB, $E, $BF, $E, $1A, $F, $2D, $F, $35, $F, $40, $F, $40, $F
-    db $40, $F, $40, $F, $40, $F, $40, $F, $40, $F, $40, $F, $40, $F, $40, $F
-    db $40, $F, $40, $F, $40, $F
+    rst  0 ; skip to TableJump
+; Jump table
+    dw $0EDF
+    dw $0EE2
+    dw $0F0E
+    dw $0F11
+    dw $0F14
+    dw $0F17
+    dw $0ED7
+    dw $0ED1
+    dw $0EC5
+    dw $0ECB
+    dw $0EBF
+    dw $0F1A
+    dw $0F2D
+    dw $0F35
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
 
 label_EBF::
     call label_6AF8

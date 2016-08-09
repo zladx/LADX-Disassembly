@@ -2,7 +2,7 @@
 ;  0040,0048,0050,0058,0060                  for Interrupts
 
 section "RST 0x0000", rom0 [$0000]
-    jp   func_28C0
+    jp   TableJump
 
 section "Interrupt VBlank", rom0 [$0040]
     jp   InterruptVBlank

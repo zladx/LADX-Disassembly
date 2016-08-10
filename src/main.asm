@@ -6545,13 +6545,6 @@ ClearMap::
     jr   nz, .clearMap_loop
     ret
 
-label_2908::
-    ld   [SelectRomBank_2100], a
-    call CopyData
-    ld   a, $01
-    ld   [SelectRomBank_2100], a
-    ret
-
 include "CopyData.asm"
 
 label_291D::

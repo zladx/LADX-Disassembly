@@ -4130,7 +4130,7 @@ label_E367::
 
 label_E36D::
     call label_D12A
-    ld   hl, $DB0F
+    ld   hl, WR1_SeashellsCount
 
 label_E373::
     ld   a, [hl]

@@ -422,7 +422,7 @@ DidRenderFrame::
     ld   a, [$C500]
     and  a
     jr   z, label_1F2
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0B
     jr   nz, label_1F2
     ld   a, [$FFE7]
@@ -453,7 +453,7 @@ label_200::
     jr   z, label_23D
 
 label_213::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $09
     jr   z, label_229
     cp   $06
@@ -486,7 +486,7 @@ label_23D::
     ld   [rLCDC], a
     ld   hl, $FFE7
     inc  [hl]
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $00
     jr   nz, label_264
     ld   a, [$DB96]
@@ -551,22 +551,22 @@ label_2B7::
     pop  af
     call label_5038
     call label_8A4
-    ld   a, [$DB97]
+    ld   a, [WR1_BGPalette]
     ld   [rBGP], a
-    ld   a, [$DB98]
+    ld   a, [WR1_OBJ0Palette]
     ld   [rOBP0], a
-    ld   a, [$DB99]
+    ld   a, [WR1_OBJ1Palette]
     ld   [rOBP1], a
     jp   WaitForNextFrame
 
 label_2D5::
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     ld   [rWY], a
-    ld   a, [$DB97]
+    ld   a, [WR1_BGPalette]
     ld   [rBGP], a
-    ld   a, [$DB98]
+    ld   a, [WR1_OBJ0Palette]
     ld   [rOBP0], a
-    ld   a, [$DB99]
+    ld   a, [WR1_OBJ1Palette]
     ld   [rOBP1], a
     call label_8A4
     call label_281E
@@ -605,7 +605,7 @@ label_327::
     jr   nz, WaitForNextFrame
 
 label_32D::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0C
     jr   nz, label_33B
     ld   a, [$DB96]
@@ -832,7 +832,7 @@ InterruptVBlank::
     ld   [rSVBK], a
     push bc
     di
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0D
     jr   nz, label_48D
     ld   a, [$DB96]
@@ -878,7 +878,7 @@ label_4C6::
     jp   WaitForVBlank
 
 label_4CC::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0E
     jr   c, label_4E4
     ld   a, [$DB96]
@@ -928,7 +928,7 @@ label_509::
     jr   label_501
 
 label_521::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0D
     jr   z, label_52B
     call label_1B0D
@@ -1920,7 +1920,7 @@ label_B80::
     push hl
     call label_B96
     pop  hl
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0D
     jr   nz, label_B90
     call label_BB5
@@ -2387,7 +2387,7 @@ label_E31::
     jp   ReloadSavedBank
 
 label_E34::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $07
     jr   c, label_E85
     cp   $0B
@@ -2406,7 +2406,7 @@ label_E46::
     ld   hl, $C124
     or   [hl]
     jr   nz, label_E85
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0C
     jr   nc, label_E85
     ld   a, [$FFCB]
@@ -2558,7 +2558,7 @@ label_F48::
     ld   a, [hl]
     and  a
     jr   z, label_F75
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     cp   $80
     jr   nz, label_F75
     ld   a, [$C14F]
@@ -2753,7 +2753,7 @@ label_107F::
     ld   [$C16C], a
     ld   [$DB96], a
     ld   a, $07
-    ld   [$DB95], a
+    ld   [WR1_GameplayType], a
     ld   a, $02
     ld   [SelectRomBank_2100], a
     call label_755B
@@ -3913,7 +3913,7 @@ label_186C::
     or   $40
     ld   [$DC0C], a
     ld   a, $01
-    ld   [$D47E], a
+    ld   [WR1_DidStealItem], a
     xor  a
     ld   [$FF9D], a
 
@@ -3921,7 +3921,7 @@ label_1898::
     ld   a, [$FFF9]
     ld   [$FFE4], a
     ld   a, $0B
-    ld   [$DB95], a
+    ld   [WR1_GameplayType], a
     xor  a
     ld   [$DB96], a
     ld   [$C3CB], a
@@ -4162,11 +4162,11 @@ label_1A06::
 
 label_1A0F::
     ld   [$C11C], a
-    ld   a, [$D47E]
+    ld   a, [WR1_DidStealItem]
     and  a
     jr   z, label_1A21
     xor  a
-    ld   [$D47E], a
+    ld   [WR1_DidStealItem], a
     ld   a, $36
     jp   label_2385
 
@@ -4318,7 +4318,7 @@ label_1AEB::
     ld   h, b
 
 label_1B0D::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $09
     jr   z, label_1ACC
     cp   $00
@@ -4348,7 +4348,7 @@ label_1B45::
     ret
 
 label_1B46::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $01
     jr   nz, label_1B53
     ld   a, [$FFA5]
@@ -4359,7 +4359,7 @@ label_1B46::
 label_1B53::
     cp   $0B
     jp  c, label_1DE8
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     cp   $80
     jp   nz, label_1DE8
     ld   a, [$C14F]
@@ -4681,7 +4681,7 @@ label_1D49::
     jr   label_1DA1
 
 label_1D8C::
-    ld   a, [$DC0F]
+    ld   a, [WR1_TunicType]
     and  a
     jr   z, label_1D95
     inc  a
@@ -4730,7 +4730,7 @@ label_1DA1::
     jr   label_1DE7
 
 label_1DD2::
-    ld   a, [$DC0F]
+    ld   a, [WR1_TunicType]
     and  a
     jr   z, label_1DDB
     inc  a
@@ -4769,7 +4769,7 @@ label_1DF5::
     jp   label_1F3B
 
 label_1E01::
-    ld   a, [$DB0E]
+    ld   a, [WR1_TradeSequenceItem]
     cp   $02
     jp  c, label_1F3E
     sub  a, $02
@@ -5087,7 +5087,7 @@ label_1FFE::
     jr   z, label_2049
     cp   $D4
     jr   z, label_2049
-    ld   a, [$DB73]
+    ld   a, [WR1_IsMarinFollowingLink]
     and  a
     jr   z, label_2030
     ld   a, $78
@@ -5564,7 +5564,7 @@ label_2321::
     and  a
     ret  z
     ld   e, a
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $01
     ld   a, $7E
     jr   nz, label_2332
@@ -5801,7 +5801,7 @@ label_2485::
 label_2496::
     xor  a
     ld   [$C16F], a
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0D
     jr   nz, label_24A4
     xor  a
@@ -6148,7 +6148,7 @@ label_26B6::
     jr   z, label_2714
     ld   a, $1C
     ld   [SelectRomBank_2100], a
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $07
     jp   z, label_278B
     ld   a, [$C173]
@@ -6316,8 +6316,9 @@ label_27BB::
     ld   [SelectRomBank_2100], a
     jp   $7D7C
 
+; Set overworld music track?
 label_27C3::
-    ld   [$D368], a
+    ld   [WR1_OverworldMusic], a
     ld   [$FFBF], a
     ld   a, $38
     ld   [$FFAB], a
@@ -6382,7 +6383,7 @@ label_281E::
     ld   a, [$C124]
     and  a
     jr   nz, label_2886
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0B
     jr   nz, label_2852
     ld   a, [$DB96]
@@ -7126,7 +7127,7 @@ label_2D17::
     call label_1EA1
 
 label_2D21::
-    ld   a, [$DB0E]
+    ld   a, [WR1_TradeSequenceItem]
     cp   $02
     jr   c, label_2D2C
     ld   a, $0D
@@ -7306,19 +7307,19 @@ label_2E85::
     jr   z, label_2ED3
 
 label_2EB0::
-    ld   a, [$DB56]
+    ld   a, [WR1_IsBowWowFollowingLink]
     cp   $01
     ld   a, $A4
     jr   z, label_2ED1
-    ld   a, [$DB79]
+    ld   a, [WR1_IsGhostFollowingLink]
     and  a
     ld   a, $D8
     jr   nz, label_2ED1
-    ld   a, [$DB7B]
+    ld   a, [WR1_IsRoosterFollowingLink]
     and  a
     ld   a, $DD
     jr   nz, label_2ED1
-    ld   a, [$DB73]
+    ld   a, [WR1_IsMarinFollowingLink]
     and  a
     jr   z, label_2ED3
     ld   a, $8F
@@ -7718,7 +7719,7 @@ label_313A::
     ld   a, [$FFF6]
     ld   e, a
     ld   d, $00
-    ld   hl, $D800
+    ld   hl, WR1_MinimapTiles
     ld   a, [$DBA5]
     and  a
     jr   z, label_3161
@@ -7770,7 +7771,7 @@ label_318F::
     ld   a, [$FFF6]
     cp   $F5
     jr   nz, label_31A6
-    ld   a, [$DB0E]
+    ld   a, [WR1_TradeSequenceItem]
     cp   $0E
     jr   nz, label_31A6
     ld   bc, $7855
@@ -9495,7 +9496,7 @@ label_3C9C::
     ld   a, [hIsGBC]
     and  a
     jr   z, label_3CD0
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $01
     jr   z, label_3CD0
     ld   a, [$FFED]

@@ -6529,16 +6529,19 @@ label_28E8::
     jp   $6CE3
 
 label_28F0:: ; label accessed directly by a jump table
-    ld   a, $7E
-    ld   bc, $0400
+    ld   a, $7E    ; value
+    ld   bc, $0400 ; count
     jr   ClearMap
 
-; Fill Background Tile Table with all 7Fs
+; Fill the Background Map with all 7Fs
 ClearBGMap::
-    ld   a, $7F
-    ld   bc, $0800
+    ld   a, $7F    ; value 
+    ld   bc, $0800 ; count
 
-; Fill background-sized memory area at bc with the content of a
+; Fill the Background Map with a value
+; Inputs:
+;   a  : value to fill
+;   bc : count
 ClearMap::
     ld   d, a
     ld   hl, vBGMap0

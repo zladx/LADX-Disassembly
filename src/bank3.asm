@@ -6518,7 +6518,7 @@ label_F2EE::
     ld   a, [$DBAF]
     push af
     ld   a, $03
-    call label_80C
+    call SwitchBank
     call label_27F2
     pop  af
     ld   [$DBAF], a

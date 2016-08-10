@@ -4,17 +4,17 @@
 section "RST 0x0000", rom0 [$0000]
     jp   func_28C0
 
-section "Interrupt Vblank", rom0 [$0040]
-    jp   func_046C
+section "Interrupt VBlank", rom0 [$0040]
+    jp   InterruptVBlank
 
 section "Interrupt LCD Stat", rom0 [$0048]
-    jp   func_0388
+    jp   InterruptLCDStatus
 
 section "Interrupt Timer", rom0 [$0050]
     reti
 
 section "Interrupt Serial", rom0 [$0058]
-    jp   func_0408
+    jp   InterruptSerial
 
 section "Interrupt Joypad", rom0 [$0060]
     reti

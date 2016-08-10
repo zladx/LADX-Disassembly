@@ -1358,7 +1358,7 @@ SwitchBank::
 label_813::
     call label_B0B
 
-label_816::
+SwitchBank_duplicate::
     ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     ret
@@ -3458,7 +3458,7 @@ label_158F::
     ld   [label_1608], sp
     ld   d, $08
     ld   a, [$FAFA]
-    ld   [label_816], sp
+    ld   [SwitchBank_duplicate], sp
     ld   [label_16FA], sp
     ld   [label_1616], sp
     ld   d, $08

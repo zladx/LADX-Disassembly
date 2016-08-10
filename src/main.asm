@@ -933,7 +933,7 @@ label_521::
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
     jr   z, label_52B
-    call label_1B0D
+    call AnimateTiles
 
 label_52B::
     ld   a, [hIsGBC]
@@ -4294,6 +4294,7 @@ label_1AC7::
     ld   [$FF9D], a
     ret
 
+; CopyTiles special case for Marin Beach
 label_1ACC::
     ld   a, [$D601]
     and  a
@@ -4331,22 +4332,24 @@ label_1AEB::
     ld   [$FFA0], a
     ld   h, b
 
-label_1B0D::
+AnimateTiles::
     ld   a, [WR1_GameplayType]
-    cp   $09
-    jr   z, label_1ACC
-    cp   $00
-    jr   nz, label_1B46
-    ld   a, [$D601]
-    and  a
-    jp   nz, label_1B45
-    ld   a, [hFrameCounter]
+    cp   GAMEPLAY_MARIN_BEACH
+    jr   z, label_1ACC    ; handle special case
+    cp   GAMEPLAY_INTRO
+    jr   nz, .continue1
+    ; GameplayType == INTRO
+    ld   a, [$D601]  
+    and  a                ; if $D601 != 0   
+    jp   nz, .returnEarly ;   return immediatly
+    ld   a, [hFrameCounter]  
     and  $0F
-    cp   $04
-    jr   c, label_1B45
+    cp   $04              ; else if FrameCounter 4-lower-bits < 4    
+    jr   c, .returnEarly  ;   return immediately
     ld   a, $10
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
+; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
     ld   a, [$D006]
     ld   l, a
     ld   a, [$D007]
@@ -4357,28 +4360,28 @@ label_1B0D::
     ld   d, a
     ld   bc, $0020
     jp   CopyData
-
-label_1B45::
+.returnEarly
     ret
 
-label_1B46::
+.continue1
     ld   a, [WR1_GameplayType]
-    cp   $01
-    jr   nz, label_1B53
-    ld   a, [$FFA5]
-    and  a
-    jr   nz, label_1B82
+    cp   GAMEPLAY_CREDITS
+    jr   nz, .continue2
+    ; GameplayType == CREDITS
+    ld   a, [$FFA5]     
+    and  a                          ; if $FFA5 != 0 
+    jr   nz, animateEndCreditsTiles ;   handle end credits animated tiles
     ret
 
-label_1B53::
-    cp   $0B
-    jp  c, label_1DE8
+.continue2
+    cp   GAMEPLAY_OVERWORLD    ; if GameplayType > $0B
+    jp   c, animateTileReturn  ;   return immediately
     ld   a, [WR1_WindowY]
-    cp   $80
-    jp   nz, label_1DE8
-    ld   a, [$C14F]
-    and  a
-    jp   nz, label_1D2E
+    cp   $80                   ; if WindowY != $80
+    jp   nz, animateTileReturn ;   return immediately
+    ld   a, [$C14F]         ; overworld tiles frozen?
+    and  a                  ; if $C14F != 0
+    jp   nz, label_1D2E     ;   exit?
 
 label_1B67::
     ld   hl, $C124
@@ -4396,7 +4399,8 @@ label_1B7D::
     and  a
     jr   z, label_1BCD
 
-label_1B82::
+animateEndCreditsTiles::
+    ; a == $FFA5
     cp   $01
     jp   z, label_3F93
     cp   $02
@@ -4431,6 +4435,7 @@ label_1BC5::
     jp   $4062
 
 label_1BCD::
+    ; Increment $FFA6 (count of tiles animations run?)
     ld   a, [$FFA6]
     inc  a
     ld   [$FFA6], a
@@ -4764,7 +4769,7 @@ label_1DE5::
 label_1DE7::
     inc  hl
 
-label_1DE8::
+animateTileReturn::
     ret
 
 label_1DE9::

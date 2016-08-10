@@ -532,7 +532,7 @@ label_2A0::
     push af
     cp   $60
     jr   c, label_2B7
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2B4
     ld   a, $20
@@ -617,7 +617,7 @@ label_33B::
 
 label_343::
     call label_E34
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_353
     ld   a, $21
@@ -927,14 +927,13 @@ label_521::
     call label_1B0D
 
 label_52B::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
-    jr   z, label_538
+    jr   z, .notGBC
     ld   a, $24
     ld   [SelectRomBank_2100], a
     call label_5C1A ; Change BG column palette. Triggered by an interrupt?
-
-label_538::
+.notGBC
     ld   de, $D601
     call label_2927 ; Load BD column tiles
     xor  a
@@ -946,7 +945,7 @@ label_538::
     ld   [SelectRomBank_2100], a
     call label_72BA
     call label_FFC0
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, WaitForVBlank
     ld   a, $21
@@ -977,7 +976,7 @@ label_577::
     and  a
     jr   nz, label_5AB
     call label_FFC0
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_598
     ld   a, $21
@@ -1132,7 +1131,7 @@ label_69D::
     ret
 
 label_69E::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_6CB
     ld   a, [$FFF7]
@@ -1684,7 +1683,7 @@ label_A01::
 
 label_A13::
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_A01
     ld   a, b
@@ -1862,7 +1861,7 @@ label_0B1A::
 
 label_B2F::
     ld   [$FFD9], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     ret  z
     ld   a, [$DBA5]
@@ -1898,7 +1897,7 @@ label_B54::
     ret
     push hl
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_B80
     ld   de, data_0168
@@ -4620,7 +4619,7 @@ label_1D2E::
     ld   a, [$FF9D]
     inc  a
     ret  z
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_1D42
     ld   a, [$DBC7]
@@ -4658,7 +4657,7 @@ label_1D49::
     ld   a, [$C11D]
     or   d
     ld   [hl], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_1DA1
     ld   a, [$DBC7]
@@ -4707,7 +4706,7 @@ label_1DA1::
     ld   a, [$C11E]
     or   d
     ld   [hl], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_1DE7
     ld   a, [$DBC7]
@@ -5431,7 +5430,7 @@ label_2241::
     add  hl, bc
     ld   b, $00
     ld   c, [hl]
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2262
     ld   a, [$DBA5]
@@ -5452,7 +5451,7 @@ label_2262::
     and  a
     jr   z, label_2286
     ld   hl, $4000
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2299
     ld   hl, $43B0
@@ -5464,7 +5463,7 @@ label_2262::
 
 label_2286::
     ld   hl, $6749
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2299
     ld   hl, $6B1D
@@ -5483,7 +5482,7 @@ label_2299::
     and  $02
     jr   z, label_22D3
     call label_2214
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_22D1
     push bc
@@ -5511,7 +5510,7 @@ label_22D1::
 
 label_22D3::
     call label_2224
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_22FE
     push bc
@@ -5695,7 +5694,7 @@ label_23EF::
     xor  a
     ld   e, a
     ld   d, a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_2444
 
@@ -6728,7 +6727,7 @@ label_29DC::
     ld   hl, $C000
 
 ZeroMemory::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     push af
 
 .ZeroMemory_loop
@@ -6739,7 +6738,7 @@ ZeroMemory::
     or   c
     jr   nz, .ZeroMemory_loop
     pop  af
-    ld   [$FFFE], a
+    ld   [hIsGBC], a
     ret
 
 label_29ED::
@@ -6856,7 +6855,7 @@ label_2A66::
     ld   bc, $0800
     jp   CopyData
     ld   hl, $4000
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2B01
     ld   hl, $6800
@@ -6895,7 +6894,7 @@ label_2B06::
     ld   bc, $0080
     call CopyData
     call label_8A4
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_2B61
     ld   a, $10
@@ -6913,14 +6912,14 @@ label_2B61::
     ld   bc, $0800
     jp   CopyData
     ld   hl, $7800
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2B90
     ld   hl, $7800
     ld   a, $35
     jr   label_2B95
     ld   hl, $4800
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2B90
     ld   hl, $7000
@@ -7179,7 +7178,7 @@ label_2D50::
     call CopyData
     ld   a, $38
     call SwitchBank
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_2DC7
     ld   hl, $5C00
@@ -7192,7 +7191,7 @@ label_2DCA::
     ld   de, $8400
     ld   bc, $0400
     call CopyData
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_2DDD
     ld   hl, $6600
@@ -7428,7 +7427,7 @@ label_2F69::
     ret
 
 label_2F87::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     ret  z
     ld   a, [$FFF7]
@@ -7614,7 +7613,7 @@ label_30A9::
     push de
     push hl
     push bc
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_30B6
     call label_2FCD
@@ -7674,7 +7673,7 @@ label_30F4::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4CA3
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3119
     ld   a, $21
@@ -8153,7 +8152,7 @@ label_33DC::
     ld   a, [$C3CD]
     add  a, $04
     ld   [$C3CD], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_3406
     ld   a, $04
@@ -9369,7 +9368,7 @@ label_3C08::
     ld   hl, $FFED
     xor  [hl]
     ld   [de], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3C21
     ld   a, [$FFED]
@@ -9417,7 +9416,7 @@ label_3C4B::
     ld   hl, $FFED
     xor  [hl]
     ld   [de], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3C63
     ld   a, [$FFED]
@@ -9483,7 +9482,7 @@ label_3C9C::
     ld   a, [hli]
     ld   [de], a
     inc  de
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3CD0
     ld   a, [$DB95]
@@ -9577,7 +9576,7 @@ label_3D28::
     xor  [hl]
     ld   [de], a
     inc  hl
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3D3F
     ld   a, [$FFED]
@@ -9997,7 +9996,7 @@ label_3FBD::
     ld   [SelectRomBank_2100], a
     jp   label_1D2E
     ld   b, $34
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3FD9
     inc  b

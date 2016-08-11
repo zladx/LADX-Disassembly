@@ -2418,13 +2418,35 @@ label_E46::
 
 label_E85::
     ld   a, [$DB95]
-    rst  0
-
-label_E89::
-    db $DF, $E, $E2, $E, $E, $F, $11, $F, $14, $F, $17, $F, $D7, $E, $D1, $E
-    db $C5, $E, $CB, $E, $BF, $E, $1A, $F, $2D, $F, $35, $F, $40, $F, $40, $F
-    db $40, $F, $40, $F, $40, $F, $40, $F, $40, $F, $40, $F, $40, $F, $40, $F
-    db $40, $F, $40, $F, $40, $F
+    rst  0 ; skip to TableJump
+; Jump table
+    dw $0EDF
+    dw $0EE2
+    dw $0F0E
+    dw $0F11
+    dw $0F14
+    dw $0F17
+    dw $0ED7
+    dw $0ED1
+    dw $0EC5
+    dw $0ECB
+    dw $0EBF
+    dw $0F1A
+    dw $0F2D
+    dw $0F35
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
+    dw $0F40
 
 label_EBF::
     call label_6AF8
@@ -2674,14 +2696,14 @@ label_106D::
     ld   a, [$C1A9]
     ld   [$C1A8], a
     dec  a
-    rst  0
+    rst  0 ; skip to TableJump
     cp   h
     ld   d, c
-    rst  0
+    rst  0 ; skip to TableJump
     ld   d, c
-    rst  0
+    rst  0 ; skip to TableJump
     ld   d, c
-    rst  0
+    rst  0 ; skip to TableJump
     ld   d, c
     cp   h
     ld   d, c
@@ -2786,7 +2808,7 @@ label_1135::
     ld   a, [$C11C]
 
 label_1138::
-    rst  0
+    rst  0 ; skip to TableJump
     ld   h, l
     ld   de, $4F30
     ld   h, b
@@ -4391,7 +4413,7 @@ label_1BCD::
 
 label_1BD2::
     ld   a, [$FFA4]
-    rst  0
+    rst  0 ; skip to TableJump
     ld   e, $1D
     ld   sp, hl
     dec  de
@@ -5556,7 +5578,7 @@ label_2345::
     ld   a, e
     and  $7F
     dec  a
-    rst  0
+    rst  0 ; skip to TableJump
     ld   l, e
     inc  hl
     or   b
@@ -6449,19 +6471,30 @@ label_289F::
     pop  bc
     ret
 
-func_28C0::
-    ld   e, a
-    ld   d, $00
-    sla  e
-    rl   d
+; Jump to the routine defined at the given index in the jump table.
+;
+; Usage:
+;   ld   a, <routine_index>
+;   rst  0
+;   dw   $0E00 ; jump address for index 0
+;   dw   $0F00 ; jump address for index 1
+;   ...
+;
+; Input:
+;   a:  index of the routine address in the jump table
+TableJump::
+    ld   e, a    ; \
+    ld   d, $00  ; | Multiply the index by 2, and store it in de
+    sla  e       ; |
+    rl   d       ; /
     pop  hl
-    add  hl, de
-    ld   e, [hl]
+    add  hl, de  ; Add the base address and the offset
+    ld   e, [hl] ; Load the low byte of the target address
     inc  hl
-    ld   d, [hl]
+    ld   d, [hl] ; Load the high byte of the target address
     ld   l, e
     ld   h, d
-    jp   [hl]
+    jp   [hl]    ; Jump to the target address
 
 ; Turn off LCD at next vertical blanking
 LCDOff::
@@ -6480,9 +6513,12 @@ LCDOff::
     ld   [rIE], a    ; Restore interrupts configuration
     ret
 
+label_28E8::
     ld   a, $01
     call SwitchBank
     jp   $6CE3
+
+label_28F0:: ; label accessed directly by a jump table
     ld   a, $7E
     ld   bc, $0400
     jr   ClearMap
@@ -7931,7 +7967,7 @@ label_32D9::
     ld   a, [bc]
     sub  a, $EC
     jp  c, label_33CB
-    rst  0
+    rst  0 ; skip to TableJump
     ld   a, [label_1535]
     ld   [hl], $30
     ld   [hl], $4B
@@ -9102,7 +9138,7 @@ label_3A54::
     ld   a, [$FFEA]
     cp   $05
     jp   z, label_3A8D
-    rst  0
+    rst  0 ; skip to TableJump
 
 data_3A6F:: 
     db 9, $3A, $18, $55, $B6, $4C, $4C, $4C, $B5, $48, $8D, $3A, 7, $4E, $32, $57

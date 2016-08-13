@@ -3,8 +3,8 @@ label_C000 equ $C000
 label_C008 equ $C008
 label_C010 equ $C010
 label_C030 equ $C030
-label_C100 equ $C100
-label_C105 equ $C105
+WR0_ScrollXOffsetForSection equ $C100 ; Table of the scrollX offset to add for each screen section being drawn
+WR0_LCDSectionIndex         equ $C105 ; Portion of the screen being drawn (0 -> 4)
 label_C106 equ $C106
 label_C108 equ $C108
 label_C10B equ $C10B
@@ -239,12 +239,12 @@ label_DB71 equ $DB71
 label_DB73 equ $DB73
 label_DB79 equ $DB79
 label_DB7B equ $DB7B
-label_DB95 equ $DB95
-label_DB96 equ $DB96
-label_DB97 equ $DB97
-label_DB98 equ $DB98
-;label_DB99 equ $DB99
-label_DB9A equ $DB9A
+WR1_GameplayType            equ $DB95 ; See `GAMEPLAY_*` constants for possible values
+WR1_ScreenTransitionCounter equ $DB96 ; Counter incremented during screen transitions
+WR1_BGPalette               equ $DB97
+WR1_OBJ0Palette             equ $DB98
+WR1_OBJ1Palette             equ $DB99
+WR1_WindowY                 equ $DB9A
 label_DB9D equ $DB9D
 label_DB9E equ $DB9E
 label_DBA5 equ $DBA5

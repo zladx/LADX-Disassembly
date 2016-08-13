@@ -12,6 +12,10 @@ include "wram.asm"
 
 SelectRomBank_2100 equ $2100
 
+data_380   equ $0380
+label_3A8  equ $03A8
+label_3AD  equ $03AD
+label_400  equ $0400
 label_4001 equ $4001
 label_4003 equ $4003
 label_4006 equ $4006
@@ -326,8 +330,6 @@ label_FF44 equ $FF44
 label_FF90 equ $FF90
 label_FF91 equ $FF91
 label_FF92 equ $FF92
-label_FF96 equ $FF96
-label_FF97 equ $FF97
 label_FF98 equ $FF98
 label_FF9A equ $FF9A
 label_FF9D equ $FF9D
@@ -430,12 +432,12 @@ DidRenderFrame::
 
 label_1F2::
     ld   hl, $C156
-    ld   a, [$FF97]
+    ld   a, [hBaseScrollY]
     add  a, [hl]
 
 label_1F8::
     ld   [rSCY], a ; scrollY
-    ld   a, [$FF96]
+    ld   a, [hBaseScrollX]
     ld   hl, $C155
     add  a, [hl]
 
@@ -649,105 +651,110 @@ PollNeedsRenderingFrame::
     ld   [hNeedsRenderingFrame], a
     jp   DidRenderFrame
 
-data_037F::
-    db $20
+IntroSeaScreenSections::
+    ; Indexes of rows to divide the screen in horizontal sections.
+    ; This is used to enable differential scrolling during the sea intro sequence.
+    db $20, $30, $40, $60, 0 ; upper clouds, lower clouds, sea, upper waves, lower waves
 
-label_380:
-    db $30, $40, $60, 0
-
-data_0384::
-    db $30, $56, $68, 0
+IntroBeachScreenSections::
+    ; Indexes of rows to divide the screen in horizontal sections.
+    ; This is used to enable differential scrolling during the beach intro sequence.
+    db $30, $56, $68, 0 ; moutains, trees, beach, waves
 
 InterruptLCDStatus::
+    ; Manipulate the Background's scrollX and scrollY value while the screen is drawn,
+    ; to create various effects like differential scrolling.
     di
     push af
     push hl
     push de
     push bc
-    ld   a, [rSVBK]
-    ld   c, a
-    xor  a
-    ld   [rSVBK], a
-    ld   a, [$DB95]
-    cp   $01
-    jr   nz, label_3AD
-    ld   a, [$DB96]
-    cp   $05
-    jr   nz, label_3A6
-    ld   a, [$D000]
-    jr   label_3A8
+    ld   a, [rSVBK]  ; Save current WRAM Bank to c
+    ld   c, a        ;
+    xor  a           ; Load WRAM Bank 1 (as "0" fallbacks to loading bank 1)
+    ld   [rSVBK], a  ; 
+    ld   a, [WR1_GameplayType]       
+    cp   $01 ; if GameplayType != 1
+    jr   nz, skipScrollY
+    ; If GameplayType == 1
+    ld   a, [WR1_ScreenTransitionCounter]
+    cp   $05 ; if TransitionCounter != 5
+    jr   nz, setStandardScrollY
+    ; If TransitionCounter == 5
+    ld   a, [$D000]  ; override scrollY with WRA1:$D000 value
+    jr   setScrollY
 
-label_3A6::
-    ld   a, [$FF97]
+setStandardScrollY::
+    ; Set standard scrollY, without specific offset
+    ld   a, [hBaseScrollY]
 
-label_3A8::
-    ld   [rSCY], a
-    jp   label_3FF
+setScrollY::
+    ld   [rSCY], a ; scrollY
+    jp   restoreSavedWRAMBankAndReturn
 
-label_3AD::
-    cp   $00
-    jr   nz, label_3FC
-
-label_3B1::
-    ld   a, [$C105]
-    ld   e, a
-    ld   d, $00
-    ld   hl, $C100
-    add  hl, de
-    ld   a, [hl]
-    ld   hl, $FF96
+skipScrollY::
+    cp   GAMEPLAY_INTRO    ; if not during the introduction sequence
+    jr   nz, clearScrollX  ;   skip
+    ; GameplayType == GAMEPLAY_INTRO
+    ; Apply differential scrolling to each section:
+    ; load and apply the scrollX offset for the current screen section being drawn
+    ld   a, [WR0_LCDSectionIndex]
+    ld   e, a             ; hl = ScrollXOffsetForSection + LCDSectionIndex
+    ld   d, $00           ;
+    ld   hl, WR0_ScrollXOffsetForSection
+    add  hl, de           ;
+    ld   a, [hl]     
+    ld   hl, hBaseScrollX ; a = hBaseScrollX + [hl]
     add  a, [hl]
-    ld   [rSCX], a
-    ld   a, [$DB96]
-    cp   $06
-    jr   c, label_3D9
-    ld   hl, data_0384
-    add  hl, de
-    ld   a, [hl]
-    ld   [rLYC], a
-    ld   a, e
-    inc  a
-    and  $03
-    ld   [$C105], a
-    jr   label_3FF
+    ld   [rSCX], a        ; set scrollX
+    ld   a, [WR1_ScreenTransitionCounter] 
+    cp   $06  ; if TransitionCounter < 6 (intro sea)
+    jr   c, setupNextInterruptForIntroSea
+    ; If TransitionCounter >= 6 (intro beach)
+setupNextInterruptForIntroBeach::
+    ld   hl, IntroBeachScreenSections
+    add  hl, de        ; hl = ScreenSectionsTable + SectionIndex
+    ld   a, [hl]       ; 
+    ld   [rLYC], a     ; Fire LCD Y-compare interrupt when reaching the row for the next section
+    ld   a, e          ; a = SectionIndex + 1
+    inc  a             ;
+    and  $03           ; a = a % 4
+    ld   [WR0_LCDSectionIndex], a ; save SectionIndex
+    jr   restoreSavedWRAMBankAndReturn
 
-label_3D9::
-    ld   hl, data_037F
+setupNextInterruptForIntroSea::
+    ld   hl, IntroSeaScreenSections
+    add  hl, de        ; hl = LCDScreenSectionsTable + SectionIndex
+    ld   a, [hl]       ; 
+    ld   [rLYC], a     ; Fire LCD Y-compare interrupt when reaching the row for the next section
+    ld   a, e          ; a = SectionIndex + 1
+    inc  a             ; 
+    cp   $05           ; if SectionIndex != 5
+    jr   nz, skipResetSectionIndex ; skip
+    ; If SectionIndex reached 5, reset it to 0
+    xor  a             ; a = 0
 
-label_3DC::
-    add  hl, de
-    ld   a, [hl]
-    ld   [rLYC], a
-    ld   a, e
-    inc  a
-    cp   $05
-    jr   nz, label_3E7
-    xor  a
-
-label_3E7::
-    ld   [$C105], a
+skipResetSectionIndex::
+    ld   [WR0_LCDSectionIndex], a ; save SectionIndex
     nop
-    cp   $04
-    jr   nz, label_3FF
-    ld   a, [$C106]
-    ld   [rSCY], a
-    cpl
-    inc  a
-    add  a, $60
-    ld   [rLYC], a
-    jr   label_3FF
+    cp   $04           ; if SectionIndex != 4
+    jr   nz, restoreSavedWRAMBankAndReturn ; skip
+    ; If we are drawing the last section (4)
+    ld   a, [$C106]    ; set scrollY to [$C106]
+    ld   [rSCY], a     ;
+    cpl                ; a = $FF - a + $61
+    inc  a             ;
+    add  a, $60        ;
+    ld   [rLYC], a     ; Fire LCD Y-compare interrupt when reaching the row for the next transition step
+    jr   restoreSavedWRAMBankAndReturn
 
-label_3FC::
-    xor  a
-    ld   [rSCX], a
+clearScrollX::
+    xor  a           
+    ld   [rSCX], a ; scrollX
 
-label_3FF::
+restoreSavedWRAMBankAndReturn::
     ld   a, c
-
-label_400::
     ld   [rSVBK], a
-
-label_402::
     pop  bc
     pop  de
     pop  hl
@@ -2417,10 +2424,10 @@ label_E46::
     ld   [$C19F], a
     ld   [$DB96], a
     ld   a, $06
-    ld   [$DB95], a
+    ld   [WR1_GameplayType], a
 
 label_E85::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     rst  0 ; skip to TableJump
 ; Jump table
     dw $0EDF
@@ -3878,8 +3885,8 @@ label_1847::
     cp   $04
     jp   nz, label_19D9
     xor  a
-    ld   [$FF96], a
-    ld   [$FF97], a
+    ld   [hBaseScrollX], a
+    ld   [hBaseScrollY], a
     ld   [$FFB4], a
     ld   [$DDD6], a
     ld   [$DDD7], a
@@ -6440,7 +6447,7 @@ label_2886::
 label_2887::
     push bc
     ld   a, [$FFCD]
-    ld   hl, $FF97
+    ld   hl, hBaseScrollY
     add  a, [hl]
     and  $F8
     srl  a
@@ -6457,7 +6464,7 @@ label_289F::
     jr   nz, label_289F
     push hl
     ld   a, [$FFCE]
-    ld   hl, $FF96
+    ld   hl, hBaseScrollX
     add  a, [hl]
     pop  hl
     and  $F8
@@ -8734,7 +8741,7 @@ data_37E4::
 ; Fill the tile map with whatever is in register a
 FillTileMapWith::
     ld   [$FFE9], a
-    ld   d, TilesPerMap
+    ld   d, TILES_PER_MAP
     ld   hl, WR1_TileMap
     ld   e, a
 
@@ -8742,7 +8749,7 @@ FillTileMapWith_loop::
     ld   a, l
     and  $0F
     jr   z, FillTileMapWith_continue
-    cp   $0B ; TilesPerRow+1
+    cp   $0B ; TILES_PER_ROW+1
     jr   nc, FillTileMapWith_continue
     ld   [hl], e
 

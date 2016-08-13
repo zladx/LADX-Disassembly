@@ -2892,7 +2892,7 @@ label_52C7::
     inc  hl
     ld   b, [hl]
     ld   hl, $D800
-    ld   de, label_380
+    ld   de, data_380
 
 label_52D9::
     call label_27D0
@@ -4524,7 +4524,7 @@ label_5DFA::
     ld   h, [hl]
     ld   l, a
     ld   bc, $D800
-    ld   de, label_380
+    ld   de, data_380
 
 label_5E12::
     call label_27D0

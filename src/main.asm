@@ -1931,7 +1931,7 @@ label_B90::
     ret
 
 label_B96::
-    ld   de, $9800
+    ld   de, vBGMap0
 
 label_B99::
     ld   a, [hli]
@@ -6455,7 +6455,7 @@ label_2887::
     srl  a
     ld   de, $0000
     ld   e, a
-    ld   hl, $9800
+    ld   hl, vBGMap0
     ld   b, $20
 
 label_289F::
@@ -6541,7 +6541,7 @@ ClearBGMap::
 ; Fill background-sized memory area at bc with the content of a
 ClearMap::
     ld   d, a
-    ld   hl, $9800
+    ld   hl, vBGMap0
 .clearMap_loop
     ld   a, d
     ldi  [hl], a
@@ -7612,7 +7612,7 @@ label_304F::
     ret
     call label_3905
     call SwitchBank
-    ld   de, $9800
+    ld   de, vBGMap0
     ld   hl, WR1_TileMap
     ld   c, $80
 

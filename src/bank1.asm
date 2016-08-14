@@ -5131,10 +5131,10 @@ label_61AA::
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
-    ld   de, $96D0
-    ld   bc, $0010
-    ld   a, $0F
-    call label_2908
+    ld   de, $96D0  ; destination
+    ld   bc, $0010  ; count
+    ld   a, $0F     ; bank
+    call CopyDataFromBank
     ld   a, [$C109]
     swap a
     and  $0F
@@ -5146,10 +5146,10 @@ label_61AA::
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
-    ld   de, $96C0
-    ld   bc, $0010
-    ld   a, $0F
-    call label_2908
+    ld   de, $96C0 ; destination
+    ld   bc, $0010 ; count
+    ld   a, $0F    ; bank
+    call CopyDataFromBank
     ld   a, $6C
     ld   [$9909], a
 

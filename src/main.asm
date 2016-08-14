@@ -532,7 +532,7 @@ label_2A0::
     push af
     cp   $60
     jr   c, label_2B7
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2B4
     ld   a, $20
@@ -617,7 +617,7 @@ label_33B::
 
 label_343::
     call label_E34
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_353
     ld   a, $21
@@ -636,7 +636,7 @@ WaitForNextFrame::
     call SwitchBank
     call label_7F80
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     call SwitchBank
     xor  a
     ld   [hWaitingForNextFrame], a ; Waiting for next frame
@@ -799,7 +799,7 @@ label_43A::
     ld   [SelectRomBank_2100], a
     call label_292D
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
 
 label_45D::
@@ -927,14 +927,13 @@ label_521::
     call label_1B0D
 
 label_52B::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
-    jr   z, label_538
+    jr   z, .notGBC
     ld   a, $24
     ld   [SelectRomBank_2100], a
     call label_5C1A ; Change BG column palette. Triggered by an interrupt?
-
-label_538::
+.notGBC
     ld   de, $D601
     call label_2927 ; Load BD column tiles
     xor  a
@@ -946,7 +945,7 @@ label_538::
     ld   [SelectRomBank_2100], a
     call label_72BA
     call label_FFC0
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, WaitForVBlank
     ld   a, $21
@@ -977,7 +976,7 @@ label_577::
     and  a
     jr   nz, label_5AB
     call label_FFC0
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_598
     ld   a, $21
@@ -1028,7 +1027,7 @@ label_5BC::
     cp   $02
     jp   z, label_826
     ld   a, $0D
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   a, [$FF92]
     ld   c, a
@@ -1091,7 +1090,7 @@ label_655::
 
 label_656::
     ld   a, $0F
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   a, [$FF92]
     ld   c, a
@@ -1132,7 +1131,7 @@ label_69D::
     ret
 
 label_69E::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_6CB
     ld   a, [$FFF7]
@@ -1179,7 +1178,7 @@ label_6CB::
     ld   a, [hl]
     and  a
     jr   z, label_6F7
-    call label_B0B
+    call AdjustBankNumberForGBC
 
 label_6F7::
     ld   [SelectRomBank_2100], a
@@ -1249,7 +1248,7 @@ label_73E::
     ld   a, [hl]
     and  a
     jr   z, label_764
-    call label_B0B
+    call AdjustBankNumberForGBC
 
 label_764::
     ld   [SelectRomBank_2100], a
@@ -1324,7 +1323,7 @@ label_7D3::
     ld   h, [hl]
     ld   l, a
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   bc, $0040
     call CopyData
@@ -1355,16 +1354,16 @@ SwitchBank::
     ld   [SelectRomBank_2100], a
     ret
 
-label_813::
-    call label_B0B
+; Switch to the bank defined in a, depending on GB or GBC mode
+SwitchAdjustedBank::
+    call AdjustBankNumberForGBC
 
-label_816::
+SwitchBank_duplicate::
     ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
     ret
 
-; Probably something like `ReloadCurrentBank`
-label_81D::
+ReloadSavedBank::
     push af
     ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
@@ -1373,7 +1372,7 @@ label_81D::
 
 label_826::
     ld   a, $12
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   a, [$FF92]
     cp   $08
@@ -1684,7 +1683,7 @@ label_A01::
 
 label_A13::
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_A01
     ld   a, b
@@ -1830,21 +1829,25 @@ label_B02::
     call label_4029
     ret
 
-label_B0B::
+; Toogle an extra byte to the bank number on GBC (on GB, does nothing)
+; Input:  a: the bank number to adjust
+; Output: a: the adjusted bank number
+AdjustBankNumberForGBC::
     push bc
     ld   b, a
-    ld   a, [$FFFE]
-    and  a
-    jr   z, label_B17
-    ld   a, b
-    or   $20
+    ld   a, [hIsGBC]
+    and  a           ; if !isGBC
+    jr   z, .notGBC  ;   handle standard GB
+    ld   a, b        ; else
+    or   $20         ;   set 6-th bit of `a` to 1
+    pop  bc          ;   restore registers
+    ret              ;   return a
+.notGBC
+    ld   a, b        ; return the original value of a
     pop  bc
     ret
 
-label_B17::
-    ld   a, b
-    pop  bc
-    ret
+label_0B1A::
     ld   a, [$FFD7]
     ld   [SelectRomBank_2100], a
     ld   a, $02
@@ -1858,7 +1861,7 @@ label_B17::
 
 label_B2F::
     ld   [$FFD9], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     ret  z
     ld   a, [$DBA5]
@@ -1894,7 +1897,7 @@ label_B54::
     ret
     push hl
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_B80
     ld   de, data_0168
@@ -1981,7 +1984,7 @@ label_BE7::
     ld   a, $02
     ld   [SelectRomBank_2100], a
     call label_1A50
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_BFB::
     ld   hl, $C450
@@ -2374,7 +2377,7 @@ label_E29::
     jr   nz, label_E03
 
 label_E31::
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_E34::
     ld   a, [$DB95]
@@ -2559,7 +2562,7 @@ label_F48::
     ld   a, $01
     ld   [SelectRomBank_2100], a
     call label_61EE
-    call label_81D
+    call ReloadSavedBank
 
 label_F75::
     ld   a, [$C19F]
@@ -3458,7 +3461,7 @@ label_158F::
     ld   [label_1608], sp
     ld   d, $08
     ld   a, [$FAFA]
-    ld   [label_816], sp
+    ld   [SwitchBank_duplicate], sp
     ld   [label_16FA], sp
     ld   [label_1616], sp
     ld   d, $08
@@ -4275,7 +4278,7 @@ label_1ACC::
     and  a
     ret  nz
     ld   a, $10
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $6500
     ld   de, $9500
@@ -4321,7 +4324,7 @@ label_1B0D::
     cp   $04
     jr   c, label_1B45
     ld   a, $10
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   a, [$D006]
     ld   l, a
@@ -4453,7 +4456,7 @@ label_1BD2::
     ld   [SelectRomBank_2100], a
     call label_61AA
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     jp   label_1D2E
 
@@ -4591,7 +4594,7 @@ label_1CE8::
     call label_7830
     jp   label_1D2E
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
 
 label_1D12::
@@ -4609,14 +4612,14 @@ label_1D1E::
     ld   [SelectRomBank_2100], a
     call label_54F5
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
 
 label_1D2E::
     ld   a, [$FF9D]
     inc  a
     ret  z
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_1D42
     ld   a, [$DBC7]
@@ -4654,7 +4657,7 @@ label_1D49::
     ld   a, [$C11D]
     or   d
     ld   [hl], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_1DA1
     ld   a, [$DBC7]
@@ -4703,7 +4706,7 @@ label_1DA1::
     ld   a, [$C11E]
     or   d
     ld   [hl], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_1DE7
     ld   a, [$DBC7]
@@ -4774,7 +4777,7 @@ label_1E01::
     ld   de, $89A0
     ld   bc, $0040
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     jp   label_1F3B
 
@@ -4785,7 +4788,7 @@ label_1E2B::
 
 label_1E33::
     ld   a, $11
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   a, [$D000]
     swap a
@@ -4809,13 +4812,13 @@ label_1E55::
     xor  a
     ld   [$FFA5], a
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ret
 
 label_1E69::
     ld   a, $13
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   a, [$D000]
     swap a
@@ -4836,7 +4839,7 @@ label_1E8D::
     ld   hl, $48E0
     ld   de, $88E0
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   bc, $0020
     jp   label_1F3B
@@ -4847,7 +4850,7 @@ label_1EA1::
 
 label_1EA7::
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   bc, $0020
     jp   label_1F3B
@@ -4862,7 +4865,7 @@ label_1EBC::
     ld   a, $0D
 
 label_1EC1::
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   de, $9140
     jp   label_1F38
@@ -4879,7 +4882,7 @@ data_1ED3::
 label_1ED7::
     push af
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     pop  af
     ld   hl, $FFA1
@@ -5267,7 +5270,7 @@ label_2153::
     ld   a, $14
     ld   [SelectRomBank_2100], a
     call label_50C3
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_2161::
     ld   a, $01
@@ -5290,7 +5293,7 @@ label_2178::
     ld   a, $14
     ld   [SelectRomBank_2100], a
     call label_5526
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_2183::
     ld   a, $05
@@ -5427,7 +5430,7 @@ label_2241::
     add  hl, bc
     ld   b, $00
     ld   c, [hl]
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2262
     ld   a, [$DBA5]
@@ -5448,7 +5451,7 @@ label_2262::
     and  a
     jr   z, label_2286
     ld   hl, $4000
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2299
     ld   hl, $43B0
@@ -5460,7 +5463,7 @@ label_2262::
 
 label_2286::
     ld   hl, $6749
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2299
     ld   hl, $6B1D
@@ -5479,7 +5482,7 @@ label_2299::
     and  $02
     jr   z, label_22D3
     call label_2214
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_22D1
     push bc
@@ -5507,7 +5510,7 @@ label_22D1::
 
 label_22D3::
     call label_2224
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_22FE
     push bc
@@ -5691,7 +5694,7 @@ label_23EF::
     xor  a
     ld   e, a
     ld   d, a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_2444
 
@@ -5934,7 +5937,7 @@ label_2529::
     ld   e, a
     ld   a, [hl]
     ld   [$C3C3], a
-    call label_81D
+    call ReloadSavedBank
     ld   a, e
     ld   [$FFD7], a
     cp   $FE
@@ -6040,7 +6043,7 @@ label_2608::
     rl   d
     sla  e
     rl   d
-    call label_81D
+    call ReloadSavedBank
     ld   hl, $5000
     add  hl, de
     ld   c, l
@@ -6330,7 +6333,7 @@ label_27DD::
     push bc
     call label_4146
     pop  bc
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_27EA::
     ld   a, $38
@@ -6348,13 +6351,13 @@ label_27F2::
     call label_4003
 
 label_27FF::
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_2802::
     ld   a, $01
     ld   [SelectRomBank_2100], a
     call label_5E67
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_280D::
     push hl
@@ -6541,13 +6544,6 @@ ClearMap::
     jr   nz, .clearMap_loop
     ret
 
-label_2908::
-    ld   [SelectRomBank_2100], a
-    call CopyData
-    ld   a, $01
-    ld   [SelectRomBank_2100], a
-    ret
-
 include "CopyData.asm"
 
 label_291D::
@@ -6731,7 +6727,7 @@ label_29DC::
     ld   hl, $C000
 
 ZeroMemory::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     push af
 
 .ZeroMemory_loop
@@ -6742,14 +6738,14 @@ ZeroMemory::
     or   c
     jr   nz, .ZeroMemory_loop
     pop  af
-    ld   [$FFFE], a
+    ld   [hIsGBC], a
     ret
 
 label_29ED::
     ld   a, $14
     ld   [SelectRomBank_2100], a
     call label_5884
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_29F8::
     ld   a, $20
@@ -6763,7 +6759,7 @@ label_2A07::
     ld   a, $01
     ld   [SelectRomBank_2100], a
     call label_5A59
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_2A12::
     ld   a, $08
@@ -6781,7 +6777,7 @@ label_2A23::
 
 label_2A26::
     call label_2A12
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_2A2C::
     call label_2A12
@@ -6793,7 +6789,7 @@ label_2A2C::
 
 label_2A37::
     ld   a, $13
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $6800
     ld   de, $9000
@@ -6813,21 +6809,21 @@ label_2A57::
 
 label_2A66::
     ld   a, $13
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $4000
     ld   de, $8000
     ld   bc, $1800
     call CopyData
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $57E0
     ld   de, $97F0
     ld   bc, $0010
     call CopyData
     ld   a, $12
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $7500
     ld   de, $8000
@@ -6838,28 +6834,28 @@ label_2A66::
     ld   bc, $0200
     jp   CopyData
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $5000
     ld   de, $9000
     ld   bc, $0800
     call CopyData
     ld   a, $12
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $6000
     ld   de, $8000
     ld   bc, $0800
     call CopyData
     ld   a, $0F
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $6000
     ld   de, $8800
     ld   bc, $0800
     jp   CopyData
     ld   hl, $4000
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2B01
     ld   hl, $6800
@@ -6871,7 +6867,7 @@ label_2A66::
 
 label_2B01::
     ld   a, $13
-    call label_B0B
+    call AdjustBankNumberForGBC
 
 label_2B06::
     ld   [SelectRomBank_2100], a
@@ -6879,7 +6875,7 @@ label_2B06::
     ld   bc, $0800
     call CopyData
     ld   a, $13
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $5800
     ld   de, $8800
@@ -6891,14 +6887,14 @@ label_2B06::
     call label_2B92
     call label_8A4
     ld   a, $12
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $6600
     ld   de, $8000
     ld   bc, $0080
     call CopyData
     call label_8A4
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_2B61
     ld   a, $10
@@ -6916,14 +6912,14 @@ label_2B61::
     ld   bc, $0800
     jp   CopyData
     ld   hl, $7800
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2B90
     ld   hl, $7800
     ld   a, $35
     jr   label_2B95
     ld   hl, $4800
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_2B90
     ld   hl, $7000
@@ -6934,7 +6930,7 @@ label_2B90::
     ld   a, $13
 
 label_2B92::
-    call label_B0B
+    call AdjustBankNumberForGBC
 
 label_2B95::
     ld   [SelectRomBank_2100], a
@@ -6942,7 +6938,7 @@ label_2B95::
     ld   bc, $0800
     call CopyData
     ld   a, $13
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $7000
     ld   de, $8800
@@ -6958,19 +6954,19 @@ label_2BC1::
     ld   a, $14
     ld   [SelectRomBank_2100], a
     call label_5838
-    call label_81D
+    call ReloadSavedBank
     pop  bc
     ret
 
 label_2BCF::
     ld   a, $0C
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, data_bank_c_0000
     ld   de, $8000
     ld   bc, data_bank_c_0400-data_bank_c_0000
     call CopyData
     ld   a, $0C
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, data_bank_c_0800
     ld   de, $8800
     ld   bc, data_bank_c_1800-data_bank_c_0800
@@ -6985,13 +6981,13 @@ label_2BCF::
 
     call label_2BCF
     ld   a, $0F
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, $4000
     ld   de, $8800
     ld   bc, $0400
     call CopyData
     ld   a, $0F
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, $5000
     ld   de, $9000
     ld   bc, $0800
@@ -7022,14 +7018,14 @@ label_2C53::
     ld   h, [hl]
     ld   l, $00
     ld   a, $0D
-    call label_813
+    call SwitchAdjustedBank
 
 label_2C5D::
     ld   de, $9100
     ld   bc, $0100
     call CopyData
     ld   a, $0D
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, $4000
     ld   de, $9200
     ld   bc, $0600
@@ -7048,12 +7044,12 @@ label_2C8A::
     add  hl, de
     ld   h, [hl]
     ld   l, $00
-    call label_81D
+    call ReloadSavedBank
     ld   de, $9200
     ld   bc, $0200
     call CopyData
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $47C0
     ld   de, $DCC0
@@ -7068,7 +7064,7 @@ label_2C8A::
     ld   h, [hl]
     ld   l, $00
     ld   a, $12
-    call label_813
+    call SwitchAdjustedBank
     ld   a, [$FFF7]
     cp   $FF
     jr   nz, label_2CD1
@@ -7089,7 +7085,7 @@ label_2CD1::
     cp   $0A
     jr   c, label_2CF5
     ld   a, $0C
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, $4C00
 
 label_2CF5::
@@ -7129,7 +7125,7 @@ label_2D21::
 label_2D2C::
     ret
     ld   a, $0C
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, $5200
     ld   de, $9200
     ld   bc, $0600
@@ -7147,7 +7143,7 @@ label_2D50::
     ld   [$FFA7], a
     call label_1BD2
     ld   a, $0C
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $4800
     ld   de, $8800
@@ -7165,7 +7161,7 @@ label_2D50::
     ld   bc, $0080
     call CopyData
     ld   a, $10
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, $5400
     ld   de, $8000
     ld   bc, $0600
@@ -7175,14 +7171,14 @@ label_2D50::
     ld   bc, $1000
     jp   CopyData
     ld   a, $0F
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, $4900
     ld   de, $8800
     ld   bc, $0700
     call CopyData
     ld   a, $38
     call SwitchBank
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_2DC7
     ld   hl, $5C00
@@ -7195,7 +7191,7 @@ label_2DCA::
     ld   de, $8400
     ld   bc, $0400
     call CopyData
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_2DDD
     ld   hl, $6600
@@ -7209,7 +7205,7 @@ label_2DE0::
     ld   bc, $0100
     jp   CopyData
     ld   a, $0C
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, $7800
     ld   de, $8F00
     ld   bc, $0800
@@ -7226,12 +7222,12 @@ label_2DE0::
 
 label_2E13::
     ld   a, $10
-    call label_813
+    call SwitchAdjustedBank
     ld   de, $9000
     ld   bc, $0800
     jp   CopyData
     ld   a, $13
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   hl, $7C00
     ld   de, $8C00
@@ -7242,7 +7238,7 @@ label_2E13::
     ld   bc, $0400
     jp   CopyData
     ld   a, $10
-    call label_813
+    call SwitchAdjustedBank
     ld   hl, $6700
     ld   de, $8400
     ld   bc, $0400
@@ -7342,7 +7338,7 @@ label_2ED4::
     ld   a, [hl]
     and  a
     jr   z, label_2EF2
-    call label_B0B
+    call AdjustBankNumberForGBC
 
 label_2EF2::
     ld   [SelectRomBank_2100], a
@@ -7370,7 +7366,7 @@ label_2F12::
     and  a
     jp   z, label_2FAD
     ld   a, $0D
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   a, [$FFF9]
     and  a
@@ -7431,7 +7427,7 @@ label_2F69::
     ret
 
 label_2F87::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     ret  z
     ld   a, [$FFF7]
@@ -7451,7 +7447,7 @@ label_2F87::
 
 label_2FAD::
     ld   a, $0F
-    call label_B0B
+    call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
     ld   a, [$FF94]
     cp   $0F
@@ -7617,7 +7613,7 @@ label_30A9::
     push de
     push hl
     push bc
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_30B6
     call label_2FCD
@@ -7677,7 +7673,7 @@ label_30F4::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4CA3
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3119
     ld   a, $21
@@ -7928,7 +7924,7 @@ endOfRoom::
     ld   a, $21
     ld   [SelectRomBank_2100], a
     call label_53F3 ; stuff that returns early when DBA5 is 0
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_32A9::
     xor  a
@@ -8156,7 +8152,7 @@ label_33DC::
     ld   a, [$C3CD]
     add  a, $04
     ld   [$C3CD], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_3406
     ld   a, $04
@@ -8828,7 +8824,7 @@ label_386D::
     jr   label_386D
 
 label_3877::
-    call label_81D
+    call ReloadSavedBank
     ret
 
 data_387B::
@@ -8967,13 +8963,13 @@ label_3942::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_53E4
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_394D::
     ld   a, $14
     ld   [SelectRomBank_2100], a
     call label_54AC
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3958::
     ld   a, $01
@@ -8986,13 +8982,13 @@ label_3965::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_485B
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3970::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_7EFE
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_397B::
     ld   a, $14
@@ -9226,61 +9222,61 @@ label_3B18::
     ld   a, $02
     ld   [SelectRomBank_2100], a
     call label_75F5
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B23::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_7893
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B2E::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_7CAB
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B39::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_6E28
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B44::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_6C6B
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B4F::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_6BDE
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B5A::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_6C77
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B65::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_73EB
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B70::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_6E2B
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B7B::
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_75A2
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3B86::
     push af
@@ -9289,7 +9285,7 @@ label_3B86::
     pop  af
     call label_64CA
     rr   l
-    call label_81D
+    call ReloadSavedBank
     rl   l
     ret
 
@@ -9300,7 +9296,7 @@ label_3B98::
     pop  af
     call label_64CC
     rr   l
-    call label_81D
+    call ReloadSavedBank
     rl   l
     ret
 
@@ -9308,13 +9304,13 @@ label_3BAA::
     ld   hl, SelectRomBank_2100
     ld   [hl], $03
     call label_7EC7
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3BB5::
     ld   hl, SelectRomBank_2100
     ld   [hl], $03
     call label_7E45
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3BC0::
     ld   a, [$FFF1]
@@ -9372,7 +9368,7 @@ label_3C08::
     ld   hl, $FFED
     xor  [hl]
     ld   [de], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3C21
     ld   a, [$FFED]
@@ -9420,7 +9416,7 @@ label_3C4B::
     ld   hl, $FFED
     xor  [hl]
     ld   [de], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3C63
     ld   a, [$FFED]
@@ -9441,7 +9437,7 @@ label_3C63::
 
 label_3C71::
     call label_7995
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3C77::
     ld   a, [$FFF1]
@@ -9486,7 +9482,7 @@ label_3C9C::
     ld   a, [hli]
     ld   [de], a
     inc  de
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3CD0
     ld   a, [$DB95]
@@ -9580,7 +9576,7 @@ label_3D28::
     xor  [hl]
     ld   [de], a
     inc  hl
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3D3F
     ld   a, [$FFED]
@@ -9600,7 +9596,7 @@ label_3D3F::
     ld   a, $15
     ld   [SelectRomBank_2100], a
     call label_795D
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3D52::
     ld   a, [$C123]
@@ -9666,67 +9662,67 @@ label_3DA0::
     ld   hl, SelectRomBank_2100
     ld   [hl], $15
     call label_7964
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3DAB::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_5A1A
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3DB6::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_5690
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3DC1::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_504B
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3DCC::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_49BD
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3DD7::
     ld   hl, SelectRomBank_2100
     ld   [hl], $36
     call label_72AB
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3DE2::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_6CC6
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3DED::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_6818
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3DF8::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_6302
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3E03::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_5A1E
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3E0E::
     ld   hl, SelectRomBank_2100
     ld   [hl], $05
     call label_556B
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3E19::
     ld   a, [WR1_CurrentBank]
@@ -9741,20 +9737,20 @@ label_3E29::
     ld   hl, SelectRomBank_2100
     ld   [hl], $04
     call label_5C63
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3E34::
     ld   hl, SelectRomBank_2100
     ld   [hl], $03
     call label_5407
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3E3F::
     ld   hl, SelectRomBank_2100
     ld   [hl], $02
     call label_62CE
     call label_6414
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3E4D::
     ld   a, $02
@@ -9770,13 +9766,13 @@ label_3E5A::
     ld   b, $00
     ld   e, $FF
     call label_5C9C
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3E6B::
     ld   hl, SelectRomBank_2100
     ld   [hl], $03
     call label_6472
-    jp   label_81D
+    jp   ReloadSavedBank
 
 label_3E76::
     ld   a, $06
@@ -9931,7 +9927,7 @@ label_3F50::
     ld   [$C113], a
     ld   [SelectRomBank_2100], a
     call label_55CF
-    call label_81D
+    call ReloadSavedBank
     ld   hl, $C460
     add  hl, bc
     ld   a, [hl]
@@ -10000,7 +9996,7 @@ label_3FBD::
     ld   [SelectRomBank_2100], a
     jp   label_1D2E
     ld   b, $34
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_3FD9
     inc  b

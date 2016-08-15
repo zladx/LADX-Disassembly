@@ -2465,19 +2465,19 @@ jumpToGameplayHandler::
 
 FaceShrineMuralHandler::
     call label_6AF8
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
 PeachPictureHandler::
     call label_67EE
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
 MarinBeachHandler::
     call label_6203
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
 MinimapHandler::
     call label_5626
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
 FileSaveHandler::
     ld   a, $01
@@ -2491,7 +2491,7 @@ EndCreditsHandler::
     ld   a, $17
     call SwitchBank
     call label_4AB7
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
 label_EED::
     ld   a, $03
@@ -2546,7 +2546,7 @@ PhotoAlbumHandler::
     ld   a, $28
     call SwitchBank
     call label_4000
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
 PhotoPictureHandler::
     ld   a, $37
@@ -2662,17 +2662,22 @@ label_1012::
     call SwitchBank
     call label_54F8
 
-label_101A::
-    db $3E, $F, $CD, $C, 8
+returnFromGameplayHandler::
+    ld   a, $0F
+    call SwitchBank
 
 label_101F::
-    db $CD, $21, $23, $F0, $FE, $A7, $C8, $3E, $24, $CD, $C, 8, $C3, 5
-
-data_102D::
-    db $74
+    call label_2321
+    ld   a, [hIsGBC]
+    and  a
+    ret  z
+    ld   a, $24
+    call SwitchBank
+    jp   label_7405 ; will return to main game loop
 
 label_102E::
-    db 8, $E, $99, $28, $EC
+    ld   [$990E], sp
+    jr   z, label_101F
 
 label_1033::
     ld   a, [$FF99]
@@ -2693,7 +2698,7 @@ label_1033::
     ld   a, [$C1A9]
     ld   e, a
     ld   d, $00
-    ld   hl, data_102D
+    ld   hl, $102D
     add  hl, de
     ld   a, [hl]
     call label_2385

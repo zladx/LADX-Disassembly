@@ -65,7 +65,7 @@ label_C164 equ $C164
 label_C165 equ $C165
 label_C167 equ $C167
 label_C16A equ $C16A
-label_C16B equ $C16B
+WR0_TransitionSequenceCounter equ $C16B ; ?
 label_C16C equ $C16C
 label_C16D equ $C16D
 label_C16F equ $C16F

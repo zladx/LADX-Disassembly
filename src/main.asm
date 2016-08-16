@@ -10034,42 +10034,42 @@ label_3FD9::
     ret
 
 section "bank1",romx,bank[$01]
-;incbin "bank-bins/bank_01_4000.bin"
+;incbin "../bin/banks/bank_01_4000.bin"
 include "bank1.asm"
 
 section "bank2",romx,bank[$02]
-incbin "bank-bins/bank_02_8000.bin"
+incbin "../bin/banks/bank_02_8000.bin"
 
 section "bank3",romx,bank[$03]
-;incbin "bank-bins/bank_03_C000.bin"
+;incbin "../bin/banks/bank_03_C000.bin"
 include "bank3.asm"
 
 section "bank4",romx,bank[$04]
-incbin "bank-bins/bank_04_10000.bin"
+incbin "../bin/banks/bank_04_10000.bin"
 
 section "bank5",romx,bank[$05]
-incbin "bank-bins/bank_05_14000.bin"
+incbin "../bin/banks/bank_05_14000.bin"
 
 section "bank6",romx,bank[$06]
-incbin "bank-bins/bank_06_18000.bin"
+incbin "../bin/banks/bank_06_18000.bin"
 
 section "bank7",romx,bank[$07]
-incbin "bank-bins/bank_07_1C000.bin"
+incbin "../bin/banks/bank_07_1C000.bin"
 
 section "bank8",romx,bank[$08]
-incbin "bank-bins/bank_08_20000.bin"
+incbin "../bin/banks/bank_08_20000.bin"
 
 section "bank9",romx,bank[$09]
-incbin "bank-bins/bank_09_24000.bin"
+incbin "../bin/banks/bank_09_24000.bin"
 
 section "bank10",romx,bank[$0A]
-incbin "bank-bins/bank_0A_28000.bin"
+incbin "../bin/banks/bank_0A_28000.bin"
 
 section "bank11",romx,bank[$0B]
-incbin "bank-bins/bank_0B_2C000.bin"
+incbin "../bin/banks/bank_0B_2C000.bin"
 
 section "bank12",romx,bank[$0C]
-;incbin "bank-bins/bank_0C_30000.bin"
+;incbin "../bin/banks/bank_0C_30000.bin"
 
 data_bank_c_0000:: incbin "data/Bank_0xC_0x0000"
 data_bank_c_0400:: incbin "data/Bank_0xC_0x0400"
@@ -10077,154 +10077,154 @@ data_bank_c_07A0:: incbin "data/Bank_0xC_0x07A0"
 data_bank_c_07C0:: incbin "data/Bank_0xC_0x07C0"
 data_bank_c_0800:: incbin "data/Bank_0xC_0x0800"
 
-data_bank_c_1800:: incbin "bank-bins/bank_0C_30000.bin", $1800, $2800
+data_bank_c_1800:: incbin "../bin/banks/bank_0C_30000.bin", $1800, $2800
 
 section "bank13",romx,bank[$0D]
-incbin "bank-bins/bank_0D_34000.bin"
+incbin "../bin/banks/bank_0D_34000.bin"
 
 section "bank14",romx,bank[$0E]
-incbin "bank-bins/bank_0E_38000.bin"
+incbin "../bin/banks/bank_0E_38000.bin"
 
 section "bank15",romx,bank[$0F]
-incbin "bank-bins/bank_0F_3C000.bin"
+incbin "../bin/banks/bank_0F_3C000.bin"
 
 section "bank16",romx,bank[$10]
-incbin "bank-bins/bank_10_40000.bin"
+incbin "../bin/banks/bank_10_40000.bin"
 
 section "bank17",romx,bank[$11]
-incbin "bank-bins/bank_11_44000.bin"
+incbin "../bin/banks/bank_11_44000.bin"
 
 section "bank18",romx,bank[$12]
-incbin "bank-bins/bank_12_48000.bin"
+incbin "../bin/banks/bank_12_48000.bin"
 
 section "bank19",romx,bank[$13]
-incbin "bank-bins/bank_13_4C000.bin"
+incbin "../bin/banks/bank_13_4C000.bin"
 
 section "bank20",romx,bank[$14]
-incbin "bank-bins/bank_14_50000.bin"
+incbin "../bin/banks/bank_14_50000.bin"
 
 section "bank21",romx,bank[$15]
-incbin "bank-bins/bank_15_54000.bin"
+incbin "../bin/banks/bank_15_54000.bin"
 
 section "bank22",romx,bank[$16]
-incbin "bank-bins/bank_16_58000.bin"
+incbin "../bin/banks/bank_16_58000.bin"
 
 section "bank23",romx,bank[$17]
-incbin "bank-bins/bank_17_5C000.bin"
+incbin "../bin/banks/bank_17_5C000.bin"
 
 section "bank24",romx,bank[$18]
-incbin "bank-bins/bank_18_60000.bin"
+incbin "../bin/banks/bank_18_60000.bin"
 
 section "bank25",romx,bank[$19]
-incbin "bank-bins/bank_19_64000.bin"
+incbin "../bin/banks/bank_19_64000.bin"
 
 section "bank26",romx,bank[$1A]
-incbin "bank-bins/bank_1A_68000.bin"
+incbin "../bin/banks/bank_1A_68000.bin"
 
 section "bank27",romx,bank[$1B]
-incbin "bank-bins/bank_1B_6C000.bin"
+incbin "../bin/banks/bank_1B_6C000.bin"
 
 section "bank28",romx,bank[$1C]
-incbin "bank-bins/bank_1C_70000.bin"
+incbin "../bin/banks/bank_1C_70000.bin"
 
 section "bank29",romx,bank[$1D]
-incbin "bank-bins/bank_1D_74000.bin"
+incbin "../bin/banks/bank_1D_74000.bin"
 
 section "bank30",romx,bank[$1E]
-incbin "bank-bins/bank_1E_78000.bin"
+incbin "../bin/banks/bank_1E_78000.bin"
 
 section "bank31",romx,bank[$1F]
-incbin "bank-bins/bank_1F_7C000.bin"
+incbin "../bin/banks/bank_1F_7C000.bin"
 
 section "bank32",romx,bank[$20]
-incbin "bank-bins/bank_20_80000.bin"
+incbin "../bin/banks/bank_20_80000.bin"
 
 section "bank33",romx,bank[$21]
-incbin "bank-bins/bank_21_84000.bin"
+incbin "../bin/banks/bank_21_84000.bin"
 
 section "bank34",romx,bank[$22]
-incbin "bank-bins/bank_22_88000.bin"
+incbin "../bin/banks/bank_22_88000.bin"
 
 section "bank35",romx,bank[$23]
-incbin "bank-bins/bank_23_8C000.bin"
+incbin "../bin/banks/bank_23_8C000.bin"
 
 section "bank36",romx,bank[$24]
-incbin "bank-bins/bank_24_90000.bin"
+incbin "../bin/banks/bank_24_90000.bin"
 
 section "bank37",romx,bank[$25]
-incbin "bank-bins/bank_25_94000.bin"
+incbin "../bin/banks/bank_25_94000.bin"
 
 section "bank38",romx,bank[$26]
-incbin "bank-bins/bank_26_98000.bin"
+incbin "../bin/banks/bank_26_98000.bin"
 
 section "bank39",romx,bank[$27]
-incbin "bank-bins/bank_27_9C000.bin"
+incbin "../bin/banks/bank_27_9C000.bin"
 
 section "bank40",romx,bank[$28]
-incbin "bank-bins/bank_28_A0000.bin"
+incbin "../bin/banks/bank_28_A0000.bin"
 
 section "bank41",romx,bank[$29]
-incbin "bank-bins/bank_29_A4000.bin"
+incbin "../bin/banks/bank_29_A4000.bin"
 
 section "bank42",romx,bank[$2A]
-incbin "bank-bins/bank_2A_A8000.bin"
+incbin "../bin/banks/bank_2A_A8000.bin"
 
 section "bank43",romx,bank[$2B]
-incbin "bank-bins/bank_2B_AC000.bin"
+incbin "../bin/banks/bank_2B_AC000.bin"
 
 section "bank44",romx,bank[$2C]
-incbin "bank-bins/bank_2C_B0000.bin"
+incbin "../bin/banks/bank_2C_B0000.bin"
 
 section "bank45",romx,bank[$2D]
-incbin "bank-bins/bank_2D_B4000.bin"
+incbin "../bin/banks/bank_2D_B4000.bin"
 
 section "bank46",romx,bank[$2E]
-incbin "bank-bins/bank_2E_B8000.bin"
+incbin "../bin/banks/bank_2E_B8000.bin"
 
 section "bank47",romx,bank[$2F]
-incbin "bank-bins/bank_2F_BC000.bin"
+incbin "../bin/banks/bank_2F_BC000.bin"
 
 section "bank48",romx,bank[$30]
-incbin "bank-bins/bank_30_C0000.bin"
+incbin "../bin/banks/bank_30_C0000.bin"
 
 section "bank49",romx,bank[$31]
-incbin "bank-bins/bank_31_C4000.bin"
+incbin "../bin/banks/bank_31_C4000.bin"
 
 section "bank50",romx,bank[$32]
-incbin "bank-bins/bank_32_C8000.bin"
+incbin "../bin/banks/bank_32_C8000.bin"
 
 section "bank51",romx,bank[$33]
-incbin "bank-bins/bank_33_CC000.bin"
+incbin "../bin/banks/bank_33_CC000.bin"
 
 section "bank52",romx,bank[$34]
-incbin "bank-bins/bank_34_D0000.bin"
+incbin "../bin/banks/bank_34_D0000.bin"
 
 section "bank53",romx,bank[$35]
-incbin "bank-bins/bank_35_D4000.bin"
+incbin "../bin/banks/bank_35_D4000.bin"
 
 section "bank54",romx,bank[$36]
-incbin "bank-bins/bank_36_D8000.bin"
+incbin "../bin/banks/bank_36_D8000.bin"
 
 section "bank55",romx,bank[$37]
-incbin "bank-bins/bank_37_DC000.bin"
+incbin "../bin/banks/bank_37_DC000.bin"
 
 section "bank56",romx,bank[$38]
-incbin "bank-bins/bank_38_E0000.bin"
+incbin "../bin/banks/bank_38_E0000.bin"
 
 section "bank57",romx,bank[$39]
-incbin "bank-bins/bank_39_E4000.bin"
+incbin "../bin/banks/bank_39_E4000.bin"
 
 section "bank58",romx,bank[$3A]
-incbin "bank-bins/bank_3A_E8000.bin"
+incbin "../bin/banks/bank_3A_E8000.bin"
 
 section "bank59",romx,bank[$3B]
-incbin "bank-bins/bank_3B_EC000.bin"
+incbin "../bin/banks/bank_3B_EC000.bin"
 
 section "bank60",romx,bank[$3C]
-incbin "bank-bins/bank_3C_F0000.bin"
+incbin "../bin/banks/bank_3C_F0000.bin"
 
 section "bank61",romx,bank[$3D]
-incbin "bank-bins/bank_3D_F4000.bin"
+incbin "../bin/banks/bank_3D_F4000.bin"
 
 
 ; Unused banks; make blank sections so they are filled with $00 instead of $ff to match

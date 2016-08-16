@@ -16,7 +16,7 @@ DumpBanks
 
 # swap files
 *.swp
-src/bank-bins/*
+bin/banks/*
 
 *.pdb
 *.exe

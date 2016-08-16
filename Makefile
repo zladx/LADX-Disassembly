@@ -18,17 +18,17 @@ DumpBanks: tools/DumpBanks.c
 	gcc -std=c99 -o DumpBanks tools/DumpBanks.c
 	chmod a+x DumpBanks
 
-src/bank-bins:
-	mkdir -p src/bank-bins
+bin/banks:
+	mkdir -p bin/banks
 
-src/bank-bins/bank_00_0.bin: src/bank-bins DumpBanks
-	cd src/bank-bins && ../../DumpBanks ../../Zelda.gbc
+bin/banks/bank_00_0.bin: bin/banks DumpBanks
+	cd bin/banks && ../../DumpBanks ../../Zelda.gbc
 
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.
 obj = src/main.o
 
-src/main.o: src/*.asm src/code/*.asm src/bank-bins/bank_00_0.bin
+src/main.o: src/*.asm src/code/*.asm bin/banks/bank_00_0.bin
 
 .asm.o:
 	rgbasm -i src/ -o $@ $<

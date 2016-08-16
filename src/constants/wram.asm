@@ -37,7 +37,7 @@ label_C139 equ $C139
 label_C13A equ $C13A
 label_C13B equ $C13B
 label_C13C equ $C13C
-label_C13D equ $C13D
+WR0_RandomSeed              equ $C13D
 label_C140 equ $C140
 label_C142 equ $C142
 label_C144 equ $C144 ; Link sprite status (like is pushing something) ?

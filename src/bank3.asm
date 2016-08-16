@@ -328,7 +328,7 @@ label_C926::
     ld   hl, $C310
     add  hl, bc
     ld   [hl], $10
-    call label_280D
+    call GetRandomByte
     ld   hl, $C3D0
     add  hl, bc
     ld   [hl], a
@@ -379,10 +379,10 @@ label_C99C::
     sub  a, $04
     ld   [hl], a
     ret
-    call label_280D
+    call GetRandomByte
     jp   label_3B0C
     call label_BFB
-    call label_280D
+    call GetRandomByte
     and  $3F
     add  a, $10
     ld   [hl], a
@@ -611,7 +611,7 @@ label_CB40::
 label_CB48::
     ld   a, $01
     jr   label_CB51
-    call label_280D
+    call GetRandomByte
     and  $03
 
 label_CB51::
@@ -1118,7 +1118,7 @@ data_CEA4::
     db   $F4 ; Undefined instruction
     inc  c
     db   $F4 ; Undefined instruction
-    call label_280D
+    call GetRandomByte
     and  $03
     ld   e, a
     ld   d, b
@@ -1826,7 +1826,7 @@ label_D31E::
     ld   a, [hl]
     and  a
     jr   z, label_D369
-    call label_280D
+    call GetRandomByte
     and  $03
     jr   nz, label_D369
     ld   a, $2F
@@ -1862,7 +1862,7 @@ label_D378::
     ld   a, [$DB73]
     and  a
     jr   z, label_D392
-    call label_280D
+    call GetRandomByte
     and  $3F
     jr   nz, label_D38D
     ld   a, $28
@@ -2180,7 +2180,7 @@ label_D648::
 
 label_D655::
     add  hl, de
-    call label_280D
+    call GetRandomByte
     and  [hl]
     ret  nz
     ld   hl, data_D59C
@@ -2188,7 +2188,7 @@ label_D655::
     ld   a, [hl]
     cp   $FF
     jr   nz, label_D670
-    call label_280D
+    call GetRandomByte
     and  $07
     ld   e, a
     ld   d, b
@@ -2516,7 +2516,7 @@ label_D88D::
     jp   label_D998
 
 label_D896::
-    call label_280D
+    call GetRandomByte
     and  $1F
     or   $20
     ld   [hl], a
@@ -2535,7 +2535,7 @@ label_D896::
     jr   label_D8B9
 
 label_D8B6::
-    call label_280D
+    call GetRandomByte
 
 label_D8B9::
     and  $03
@@ -2568,7 +2568,7 @@ label_D8D7::
     jr   nz, label_D8F6
 
 label_D8E5::
-    call label_280D
+    call GetRandomByte
     and  $0F
     or   $10
     ld   [hl], a
@@ -3537,7 +3537,7 @@ label_DF5F::
     ld   hl, $C2E0
     add  hl, de
     ld   [hl], $38
-    call label_280D
+    call GetRandomByte
     and  $01
     ld   hl, $C3B0
     add  hl, de
@@ -3819,13 +3819,13 @@ label_E19C::
     call label_C05
     ret  nz
     ld   [hl], $30
-    call label_280D
+    call GetRandomByte
     and  $0F
     sub  a, $08
     ld   hl, $C240
     add  hl, bc
     ld   [hl], a
-    call label_280D
+    call GetRandomByte
     and  $0F
     sub  a, $08
     ld   hl, $C250
@@ -6617,7 +6617,7 @@ label_F37E::
     ld   hl, $C480
     add  hl, de
     ld   [hl], $1F
-    call label_280D
+    call GetRandomByte
     and  $03
     push bc
     ld   c, a

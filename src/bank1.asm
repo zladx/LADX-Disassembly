@@ -658,7 +658,7 @@ label_440B::
 label_4414::
     ld   a, $02
     ld   [$D6FF], a
-    call label_280D
+    call GetRandomByte
     ld   hl, hFrameCounter
     or   [hl]
     and  $03
@@ -5561,7 +5561,7 @@ label_652E::
     jr   nz, label_6545
     ld   a, $21
     ld   [$FFF2], a
-    call label_280D
+    call GetRandomByte
     and  $7F
     add  a, $60
     ld   [$D466], a
@@ -5834,7 +5834,7 @@ label_6733::
 label_6745::
     and  $3F
     jr   nz, label_675A
-    call label_280D
+    call GetRandomByte
     and  $07
     ld   e, a
     ld   d, b
@@ -5850,7 +5850,7 @@ label_675A::
     add  a, $40
     and  $3F
     jr   nz, label_6773
-    call label_280D
+    call GetRandomByte
     and  $07
     ld   e, a
     ld   d, b
@@ -7181,7 +7181,7 @@ label_70F7::
     ld   a, [hFrameCounter]
     and  $7F
     jr   nz, label_7107
-    call label_280D
+    call GetRandomByte
     and  $00
     jr   nz, label_7107
     call label_70A9
@@ -7705,11 +7705,11 @@ label_7447::
     ret
 
 label_7466::
-    call label_280D
+    call GetRandomByte
     and  $18
     add  a, $10
     ld   [$FFD8], a
-    call label_280D
+    call GetRandomByte
     and  $18
     add  a, $10
     ld   [$FFD7], a
@@ -7725,11 +7725,11 @@ label_7486::
     ldi  [hl], a
     ld   a, [$FFD7]
     ldi  [hl], a
-    call label_280D
+    call GetRandomByte
     and  $01
     ld   a, $28
     jr   z, label_749C
-    call label_280D
+    call GetRandomByte
     and  $06
     add  a, $70
 

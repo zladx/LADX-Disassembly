@@ -3426,7 +3426,7 @@ label_1535::
     xor  a
     ld   [$C160], a
     ld   [$C1AC], a
-    call label_280D
+    call GetRandomByte
     and  $03
     ld   e, a
     ld   d, $00
@@ -3622,13 +3622,13 @@ label_1653::
     call label_3942
 
 label_167C::
-    call label_280D
+    call GetRandomByte
     and  $07
     ret  nz
     ld   a, [$FFAF]
     cp   $D3
     ret  z
-    call label_280D
+    call GetRandomByte
     rra
     ld   a, $2E
     jr   nc, label_1691
@@ -6376,15 +6376,16 @@ label_2802::
     call label_5E67
     jp   ReloadSavedBank
 
-label_280D::
+; Return a random number in `a`
+GetRandomByte::
     push hl
     ld   a, [hFrameCounter]
-    ld   hl, $C13D
+    ld   hl, WR0_RandomSeed
     add  a, [hl]
     ld   hl, rLY
     add  a, [hl]
     rrca
-    ld   [$C13D], a
+    ld   [WR0_RandomSeed], a ; WR0_RandomSeed += FrameCounter + rrca(rLY)
     pop  hl
     ret
 

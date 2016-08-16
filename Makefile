@@ -28,7 +28,7 @@ bin/banks/bank_00_0.bin: bin/banks DumpBanks
 # src/main.o is built from src/main.asm.
 obj = src/main.o
 
-src/main.o: src/*.asm src/code/*.asm bin/banks/bank_00_0.bin
+src/main.o: src/*.asm src/constants/*.asm src/code/*.asm bin/banks/bank_00_0.bin
 
 .asm.o:
 	rgbasm -i src/ -o $@ $<

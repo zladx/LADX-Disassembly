@@ -4,11 +4,10 @@
 ; to split your code and data up into new objects in the makefile.
 
 
-include "constants.asm"
+include "constants/constants.asm"
 
 include "code/rst.asm"
 include "code/header.asm"
-include "wram.asm"
 
 SelectRomBank_2100 equ $2100
 

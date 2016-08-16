@@ -37,6 +37,7 @@ label_4371 equ $4371
 label_43B0 equ $43B0
 label_4400 equ $4400
 label_4496 equ $4496
+label_44D6 equ $44D6
 label_44E0 equ $44E0
 label_4518 equ $4518
 label_4520 equ $4520
@@ -217,7 +218,6 @@ label_6930 equ $6930
 label_6A22 equ $6A22
 label_6A30 equ $6A30
 label_6AC1 equ $6AC1
-label_6AF8 equ $6AF8
 label_6B1D equ $6B1D
 label_6BA4 equ $6BA4
 label_6BB5 equ $6BB5
@@ -240,7 +240,7 @@ label_6D52 equ $6D52
 label_6DAF equ $6DAF
 label_6E00 equ $6E00
 label_6E10 equ $6E10
-label_6E1D equ $6E1D
+label_6E28 equ $6E28
 label_6E2B equ $6E2B
 label_6E50 equ $6E50
 label_6E73 equ $6E73
@@ -741,8 +741,8 @@ skipResetSectionIndex::
     cp   $04           ; if SectionIndex != 4
     jr   nz, restoreSavedWRAMBankAndReturn ; skip
     ; If we are drawing the last section (4)
-    ld   a, [$C106]    ; set scrollY to [$C106]
-    ld   [rSCY], a     ;
+    ld   a, [WR0_IntroBGYOffset] ; Apply the Y offset to compensate for sea vertical movement
+    ld   [rSCY], a               ; (so that the horizon position stays constant).
     cpl                ; a = $FF - a + $61
     inc  a             ;
     add  a, $60        ;
@@ -1489,7 +1489,7 @@ label_8D7::
     ld   [SelectRomBank_2100], a
     call label_6A30
 
-label_8DF::
+restoreBankAndReturn::
     ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
@@ -1498,13 +1498,14 @@ label_8E6::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6AC1
-    jr   label_8DF
+    jr   restoreBankAndReturn
 
+; Load BG palette?
 label_8F0::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6BA4
-    jr   label_8DF
+    jr   restoreBankAndReturn
 
 label_8FA::
     push af
@@ -1517,14 +1518,14 @@ label_905::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6C00
-    jr   label_917
+    jr   LoadBank1AndReturn
 
 label_90F::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6C24
 
-label_917::
+LoadBank1AndReturn::
     ld   a, $01
     ld   [SelectRomBank_2100], a
     ret
@@ -2488,7 +2489,7 @@ FileSaveHandler::
     jp   label_4000
 
 IntroHandler::
-    jp   label_6E1D
+    jp   IntroHandlerEntryPoint
 
 EndCreditsHandler::
     ld   a, $17
@@ -6366,12 +6367,11 @@ label_27EA::
 label_27F2::
     ld   a, [$FFBC]
     and  a
-    jr   nz, label_27FF
+    jr   nz, .skip
     ld   a, $1F
     ld   [SelectRomBank_2100], a
     call label_4003
-
-label_27FF::
+.skip
     jp   ReloadSavedBank
 
 label_2802::

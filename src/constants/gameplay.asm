@@ -35,3 +35,12 @@ GAMEPLAY_PHOTO_BRIDGE      equ $20
 ; GAMEPLAY_INTRO
 GAMEPLAY_INTRO_SEA         equ $03
 GAMEPLAY_INTRO_LINK_FACE   equ $04
+GAMEPLAY_INTRO_BEACH       equ $07
+GAMEPLAY_INTRO_TITLE       equ $0B
+
+; Identifiers of entities during Intro sequence
+ENTITY_INTRO_SHIP          equ $05
+ENTITY_INTRO_MARIN         equ $06
+ENTITY_INTRO_INERT_LINK    equ $07
+ENTITY_INTRO_SPARKLE       equ $08
+

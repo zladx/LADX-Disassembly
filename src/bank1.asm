@@ -659,7 +659,7 @@ label_4414::
     ld   a, $02
     ld   [$D6FF], a
     call label_280D
-    ld   hl, $FFE7
+    ld   hl, hFrameCounter
     or   [hl]
     and  $03
     ld   [$FFB9], a
@@ -1323,7 +1323,7 @@ label_4920::
     ld   [$D000], a
 
 label_4938::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $10
     jr   nz, label_4954
     ld   a, [$D000]
@@ -1348,7 +1348,7 @@ label_4954::
     ld   d, $00
     ld   hl, label_48E4
     add  hl, de
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $08
     jr   z, label_497B
     ld   a, [hl]
@@ -1925,7 +1925,7 @@ label_4CB7::
     ld   b, $00
     add  hl, bc
     ld   e, [hl]
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $10
     jr   z, label_4CD9
     ld   hl, $C004
@@ -2246,7 +2246,7 @@ label_4ECF::
 label_4ED9::
     call label_4F0C
     call label_4954
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $10
     jr   z, label_4EEF
 
@@ -2293,7 +2293,7 @@ label_4F0C::
     ld   [$D000], a
 
 label_4F1D::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $10
     jr   nz, label_4F3A
     ld   a, [$D000]
@@ -2477,7 +2477,7 @@ label_5055::
     ld   d, $00
     ld   hl, label_48E4
     add  hl, de
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $08
     ld   a, [hl]
     ld   hl, $C000
@@ -2630,7 +2630,7 @@ label_5129::
     call label_5175
 
 label_512C::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $10
     jr   z, label_514F
     ld   a, [$D001]
@@ -2684,7 +2684,7 @@ label_5175::
     ld   a, [$D002]
     cp   $03
     jp   z, label_51C3
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $08
     jr   z, label_51A8
     ld   a, [hl]
@@ -2729,7 +2729,7 @@ label_51A8::
     ret
 
 label_51C3::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $08
     ld   a, [hl]
     ld   hl, $C008
@@ -2808,7 +2808,7 @@ label_5235::
 
 label_5249::
     call label_512C
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $10
     jr   z, label_526F
     ld   a, [$D002]
@@ -3896,7 +3896,7 @@ label_58A8::
     ldi  [hl], a
     ld   [hl], $3E
     inc  hl
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     rla
     and  $10
     ld   [hl], a
@@ -4113,7 +4113,7 @@ label_5B3F::
     ld   [hl], $F0
     inc  hl
     ld   [hl], $20
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $10
     jr   nz, label_5BAC
     ld   hl, $C088
@@ -5353,7 +5353,7 @@ label_6C3A::
     ld   a, [$FFFE]
     and  a
     jr   z, label_63E4
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_6417
     call label_1A39
@@ -5364,7 +5364,7 @@ label_6C3A::
     jr   label_6417
 
 label_63E4::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_63F8
     ld   a, [$C3C5]
@@ -5375,7 +5375,7 @@ label_63E4::
     call label_44D6
 
 label_63F8::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $03
     ld   e, a
     ld   a, [$C3C5]
@@ -5393,7 +5393,7 @@ label_63F8::
     ld   [$DB98], a
 
 label_6417::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $03
     jr   nz, label_642E
     ld   a, [$FF97]
@@ -5739,7 +5739,7 @@ label_668B::
     pop  de
     call label_658B
     call label_67A8
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_66C4
     ld   hl, $C560
@@ -5787,7 +5787,7 @@ label_66FD::
     jr   z, label_6718
     ld   hl, $D200
     add  hl, bc
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_6717
     ld   a, [hl]
@@ -5827,7 +5827,7 @@ label_6733::
     sla  a
     sla  a
     ld   e, a
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     add  a, e
     ld   [$FFE9], a
 
@@ -6282,7 +6282,7 @@ label_6A7C::
     jr   z, label_6AC2
     dec  a
     ld   [$D214], a
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     ld   a, [$D212]
     jr   nz, label_6AAE
@@ -7052,7 +7052,7 @@ label_7014::
 
 label_7031::
     call label_7D01
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     jp   nz, label_70B1
     ld   hl, $FF96
@@ -7178,7 +7178,7 @@ label_70E8::
     ret
 
 label_70F7::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $7F
     jr   nz, label_7107
     call label_280D
@@ -7256,7 +7256,7 @@ label_7188::
     ld   [$D010], a
 
 label_719B::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $03
     ld   e, a
     ld   a, [$D010]
@@ -7613,7 +7613,7 @@ label_73C8::
 label_73D0::
     call label_74D6
     call label_7920
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $3F
 
 label_73DA::
@@ -7852,7 +7852,7 @@ label_7568::
     and  a
     ld   a, $00
     jr   nz, label_757A
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     add  a, $D0
     rra
     rra
@@ -7994,7 +7994,7 @@ label_765F::
     dw $7781
 
     call label_7D9C
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     rra
     rra
     rra
@@ -8034,7 +8034,7 @@ label_76AA::
     xor  a
     ld   [$C291], a
     ld   [$C2E1], a
-    ld   [$FFE7], a
+    ld   [hFrameCounter], a
     ret
 
 label_76D4::
@@ -8044,7 +8044,7 @@ label_76D4::
     ld   a, [$C201]
     dec  a
     ld   [$C201], a
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $01
     jr   nz, label_7707
     ld   hl, $FF96
@@ -8069,7 +8069,7 @@ label_76FF::
     xor  a
 
 label_7707::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     rra
     rra
     and  $01
@@ -8078,13 +8078,13 @@ label_7707::
     call label_C05
     jr   nz, label_7778
     call label_7DCF
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $01
     jr   nz, label_776C
     ld   a, [$C201]
     dec  a
     ld   [$C201], a
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $03
     jr   nz, label_776C
     ld   hl, $FF96
@@ -8128,7 +8128,7 @@ label_7764::
     xor  a
 
 label_776C::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     rra
     rra
     rra
@@ -8143,7 +8143,7 @@ label_7778::
     ld   a, $01
     jp   label_3B0C
     call label_7D46
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $01
     jr   nz, label_77BC
     ld   a, $02
@@ -8529,7 +8529,7 @@ label_7A47::
 
 label_7A5D::
     ret
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $03
     jr   nz, label_7A6A
     call label_C05
@@ -8591,7 +8591,7 @@ label_7AB3::
     ld   a, $70
     ld   [$FFAA], a
     ret
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $03
     jr   nz, label_7AE3
     call label_C05
@@ -8752,28 +8752,28 @@ label_7CF9::
 
 label_7D01::
     ld   hl, $C100
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_7D0B
     inc  [hl]
 
 label_7D0B::
     inc  hl
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $0F
     jr   nz, label_7D13
     inc  [hl]
 
 label_7D13::
     inc  hl
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $1F
     jr   nz, label_7D1B
     inc  [hl]
 
 label_7D1B::
     inc  hl
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $0F
     jr   nz, label_7D23
     inc  [hl]
@@ -8787,7 +8787,7 @@ label_7D23::
     inc  [hl]
 
 label_7D2F::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     add  a, $FC
     rra
     rra
@@ -8803,13 +8803,13 @@ label_7D2F::
     ld   [$C106], a
 
 label_7D46::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $0F
     cp   $04
     jr   c, label_7D9B
 
 label_7D4E::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     rra
     rra
     rra
@@ -8838,7 +8838,7 @@ label_7D6A::
     ld   de, $9300
 
 label_7D7A::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $03
     sla  a
     sla  a
@@ -8862,7 +8862,7 @@ label_7D9B::
 
 label_7D9C::
     ld   hl, $C100
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_7DA6
     inc  [hl]
@@ -8896,7 +8896,7 @@ label_7DCC::
 
 label_7DCF::
     ld   hl, $C100
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $0F
     jr   nz, label_7DD9
     inc  [hl]

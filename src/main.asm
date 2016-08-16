@@ -339,7 +339,7 @@ label_FFC0 equ $FFC0
 label_FFD7 equ $FFD7
 label_FFDA equ $FFDA
 ;label_FFE4 equ $FFE4
-label_FFE7 equ $FFE7
+label_FFE7 equ hFrameCounter
 label_FFED equ $FFED
 label_FFEE equ $FFEE
 label_FFF4 equ $FFF4
@@ -424,7 +424,7 @@ DidRenderFrame::
     ld   a, [WR1_GameplayType]
     cp   $0B
     jr   nz, label_1F2
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     rrca
     and  $80
     jr   label_1F8
@@ -483,7 +483,7 @@ label_23D::
     and  $80
     or   e
     ld   [rLCDC], a
-    ld   hl, $FFE7
+    ld   hl, hFrameCounter
     inc  [hl]
     ld   a, [WR1_GameplayType]
     cp   $00
@@ -1462,7 +1462,7 @@ label_8A4::
     jr   z, label_8C6
     cp   $02
     jr   nz, label_8C3
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $01
     jr   nz, label_8D6
     jr   label_8C6
@@ -2631,7 +2631,7 @@ label_F97::
     call SwitchBank
     call label_5487
     ld   hl, $D601
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $03
     or   [hl]
     jr   nz, label_1012
@@ -2643,7 +2643,7 @@ label_F97::
 
 label_1000::
     ld   e, $00
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $04
 
 label_1006::
@@ -3758,7 +3758,7 @@ label_1713::
     ret
 
 label_1756::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     ld   hl, $FFA2
     or   [hl]
@@ -3814,7 +3814,7 @@ label_1794::
     ld   a, [$C122]
     cp   $28
     jr   c, label_17C6
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     rla
     rla
     and  $10
@@ -4298,7 +4298,7 @@ label_1ACC::
     ld   [SelectRomBank_2100], a
     ld   hl, $6500
     ld   de, $9500
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $0F
     jr   z, label_1AEB
     cp   $08
@@ -4307,7 +4307,7 @@ label_1ACC::
     ld   e, l
 
 label_1AEB::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $30
     ld   c, a
     ld   b, $00
@@ -4335,7 +4335,7 @@ label_1B0D::
     ld   a, [$D601]
     and  a
     jp   nz, label_1B45
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $0F
     cp   $04
     jr   c, label_1B45
@@ -6309,7 +6309,7 @@ label_278B::
     ld   [$FFF2], a
 
 label_27AA::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $10
     ret  z
     ld   a, $17
@@ -6378,7 +6378,7 @@ label_2802::
 
 label_280D::
     push hl
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     ld   hl, $C13D
     add  a, [hl]
     ld   hl, rLY
@@ -9050,7 +9050,7 @@ label_39AE::
     ld   [$C3C1], a
     ld   a, [$FFF7]
     cp   $0A
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     jr   c, label_39C1
     xor  a
 
@@ -9818,7 +9818,7 @@ label_3E8E::
     ld   a, [hl]
     and  a
     ret  z
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     xor  c
     and  $03
     ret  nz

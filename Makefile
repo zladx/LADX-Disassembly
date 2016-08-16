@@ -14,8 +14,8 @@ clean: ;
 	@rm -f $(obj)
 	@rm -f game.{gbc,sym,map}
 
-DumpBanks: src/tools/DumpBanks.c
-	gcc -std=c99 -o DumpBanks src/tools/DumpBanks.c
+DumpBanks: tools/DumpBanks.c
+	gcc -std=c99 -o DumpBanks tools/DumpBanks.c
 	chmod a+x DumpBanks
 
 src/bank-bins:

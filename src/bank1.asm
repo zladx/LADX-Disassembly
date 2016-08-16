@@ -17,7 +17,7 @@ label_4000::
     dec  h
     ld   e, b
     call label_44D6
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_4042
     ld   hl, $DC10
@@ -746,7 +746,7 @@ label_44B0::
     ret
     ld   a, $0F
     ld   [$FF94], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_44C9
     di
@@ -813,7 +813,7 @@ label_44F5::
     ld   [$DB98], a
     ld   a, $E4
     ld   [$DB99], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_4548
     ld   a, $04
@@ -1990,7 +1990,7 @@ label_4CDA::
     ld   b, $4E
     ld   l, e
     ld   c, [hl]
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $01
@@ -1998,20 +1998,20 @@ label_4CDA::
     ld   a, $01
     ld   [$DDD1], a
     jp   label_44D6
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $02
     ld   [$DDD1], a
     jp   label_44D6
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_4D53
     call label_905
     ld   a, $01
     ld   [$DDD1], a
     jp   label_44D6
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $02
@@ -3531,7 +3531,7 @@ label_5639::
     dec  h
     ld   e, b
     call label_44D6
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_5678
     ld   hl, $DC10
@@ -3803,7 +3803,7 @@ label_5818::
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_58A7
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_5854
     ld   hl, $DC10
@@ -4723,7 +4723,7 @@ label_5F19::
 label_5F2D::
     ret
     ld   hl, $0000
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_5F3A
     ld   [hl], $00
@@ -5350,7 +5350,7 @@ label_63BA::
     db 0, 0, 0, 0, 4, 4, 4, 4, $18, $18, $18, $18, $1C, $1C, $1C, $1C
 
 label_6C3A::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_63E4
     ld   a, [hFrameCounter]
@@ -5959,7 +5959,7 @@ label_67EE::
     db $25, $58, $E4, $68, 8, $69, $45, $69, $22, $58, $CD, $D6, $44
 
 label_680B::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_6829
     ld   hl, $DC10
@@ -6318,7 +6318,7 @@ label_6AC2::
     ld   e, a
     ld   d, $00
     ld   hl, label_6976
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_6AE3
     ld   hl, label_697C
@@ -6329,7 +6329,7 @@ label_6AE3::
     xor  a
     ld   [$C3C0], a
     ld   hl, label_6982
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_6AF4
     ld   hl, label_69D2
@@ -6356,7 +6356,7 @@ label_6AF4::
     dec  h
     ld   e, b
     call label_44D6
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_6B2B
     ld   hl, $DC10
@@ -6661,7 +6661,7 @@ label_6D02::
     ld   a, b
     or   c
     jr   nz, label_6CE9
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_6D10
     call label_6D11
@@ -6788,7 +6788,7 @@ label_6E28::
     ld   [$FFB5], a
     ld   a, $11
     ld   [$D6FF], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_6E57
     ld   a, [label_789B]
@@ -6915,7 +6915,7 @@ label_6ED8::
     ld   [$DDD5], a
     jp   label_44D6
     call label_7D01
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_6F42
     ld   a, $25
@@ -7154,7 +7154,7 @@ label_70CC::
     jr   nz, label_70F7
     ld   a, $03
     ld   [$DB96], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_70DE
     ld   a, $25
@@ -7338,7 +7338,7 @@ label_7286::
     dec  c
     jr   nz, label_7286
     ld   [hl], $00
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_7296
     call label_7338
@@ -7559,7 +7559,7 @@ label_737E::
     ldi  [hl], a
     dec  c
     jr   nz, label_737E
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_738E
     call label_79AE
@@ -8319,7 +8319,7 @@ label_7929::
     ld   a, $59
     add  a, [hl]
     ld   [$FFEC], a
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   nz, label_795D
     ld   a, [$D013]
@@ -8360,7 +8360,7 @@ label_795D::
     jr   label_797D
 
 label_797D::
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_7997
     ld   a, [$D013]
@@ -8708,7 +8708,7 @@ label_7C9D::
     cp   $14
     jr   nz, label_7C9D
     ld   [hl], $00
-    ld   a, [$FFFE]
+    ld   a, [hIsGBC]
     and  a
     jr   z, label_7CB6
     call label_7CCB

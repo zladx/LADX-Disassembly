@@ -20,35 +20,32 @@ section "Interrupt Joypad", rom0 [$0060]
     reti
 
 
-section "Something 0x0062", rom0 [$0062]
-func_0062::
+section "Hardcoded CopyData variants", rom0 [$0062]
+Copy6900ToTileMemory89A0::
     ld   hl, $6900
     ld   de, $89A0
-    jr   func_0080
+    jr   Copy48BytesAndClearFlags
 
-func_006A::
+Copy6930ToTileMemory89D0::
     ld   hl, $6930
     ld   de, $89D0
-    jr   func_0080
+    jr   Copy48BytesAndClearFlags
 
-func_0072::
+Copy49D0ToTileMemory89D0::
     ld   hl, $49D0
     ld   de, $89D0
-    jr   func_0080
+    jr   Copy48BytesAndClearFlags
 
-func_007A::
+Copy49A0ToTileMemory89A0::
     ld   hl, $49A0
     ld   de, $89A0
 
-func_0080::
+Copy48BytesAndClearFlags::
     ld   bc, $0030
     call CopyData
     xor  a
     ld   [$FF90], a
     ld   [$FF92], a
-
-func_008B::
     ld   a, $0C
     ld   [$2100], a
     ret
-

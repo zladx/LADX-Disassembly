@@ -422,7 +422,7 @@ DidRenderFrame::
     and  a
     jr   z, label_1F2
     ld   a, [WR1_GameplayType]
-    cp   $0B
+    cp   GAMEPLAY_OVERWORLD
     jr   nz, label_1F2
     ld   a, [hFrameCounter]
     rrca
@@ -453,11 +453,11 @@ label_200::
 
 label_213::
     ld   a, [WR1_GameplayType]
-    cp   $09
+    cp   GAMEPLAY_MARIN_BEACH
     jr   z, label_229
-    cp   $06
+    cp   GAMEPLAY_FILE_SAVE
     jr   c, label_229
-    cp   $0B
+    cp   GAMEPLAY_OVERWORLD
     jr   nz, label_22F
     ld   a, [WR1_GameplaySubtype]
     cp   $07
@@ -486,8 +486,9 @@ label_23D::
     ld   hl, hFrameCounter
     inc  [hl]
     ld   a, [WR1_GameplayType]
-    cp   $00
-    jr   nz, label_264
+    cp   GAMEPLAY_INTRO 
+    jr   nz, label_264 ; if GameplayType != INTRO
+    ; GameplayType == INTRO
     ld   a, [WR1_GameplaySubtype]
     cp   $08
     jr   c, label_264
@@ -605,8 +606,9 @@ label_327::
 
 label_32D::
     ld   a, [WR1_GameplayType]
-    cp   $0C
+    cp   GAMEPLAY_INVENTORY
     jr   nz, label_33B
+    ; GameplayType == INVENTORY
     ld   a, [WR1_GameplaySubtype]
     cp   $02
     jr   c, label_343
@@ -673,13 +675,13 @@ InterruptLCDStatus::
     xor  a           ; Load WRAM Bank 1 (as "0" fallbacks to loading bank 1)
     ld   [rSVBK], a  ; 
     ld   a, [WR1_GameplayType]       
-    cp   $01 ; if GameplayType != GAMEPLAY_CREDITS
+    cp   GAMEPLAY_CREDITS ; if GameplayType != GAMEPLAY_CREDITS
     jr   nz, skipScrollY
-    ; If GameplayType == CREDITS
+    ; GameplayType == CREDITS
     ld   a, [WR1_GameplaySubtype]
     cp   $05 ; if GameplaySubtype != 5
     jr   nz, setStandardScrollY
-    ; If GameplaySubtype == 5
+    ; GameplaySubtype == 5
     ld   a, [$D000]  ; override scrollY with WRA1:$D000 value
     jr   setScrollY
 
@@ -832,8 +834,9 @@ InterruptVBlank::
     push bc
     di
     ld   a, [WR1_GameplayType]
-    cp   $0D
+    cp   GAMEPLAY_PHOTO_ALBUM
     jr   nz, label_48D
+    ; GameplayType == PHOTO_ALBUM
     ld   a, [WR1_GameplaySubtype]
     cp   $09
     jr   c, label_48D
@@ -878,7 +881,7 @@ label_4C6::
 
 label_4CC::
     ld   a, [WR1_GameplayType]
-    cp   $0E
+    cp   GAMEPLAY_PHOTO_DIZZY_LINK
     jr   c, label_4E4
     ld   a, [WR1_GameplaySubtype]
     cp   $06
@@ -928,7 +931,7 @@ label_509::
 
 label_521::
     ld   a, [WR1_GameplayType]
-    cp   $0D
+    cp   GAMEPLAY_PHOTO_ALBUM
     jr   z, label_52B
     call label_1B0D
 
@@ -1920,7 +1923,7 @@ label_B80::
     call label_B96
     pop  hl
     ld   a, [WR1_GameplayType]
-    cp   $0D
+    cp   GAMEPLAY_PHOTO_ALBUM
     jr   nz, label_B90
     call label_BB5
 
@@ -2387,11 +2390,11 @@ label_E31::
 
 ExecuteGameplayHandler::
     ld   a, [WR1_GameplayType]
-    cp   $07 ; If GameplayType < 07
+    cp   GAMEPLAY_MINI_MAP ; If GameplayType < MINI_MAP
     jr   c, jumpToGameplayHandler
     cp   GAMEPLAY_OVERWORLD ; If GameplayType != Overworld
     jr   nz, presentSaveScreenIfNeeded
-    ; If GameplayType == Overworld
+    ; If GameplayType == OVERWORLD
     ld   a, [WR1_GameplaySubtype]
     cp   $07
     jr   nz, jumpToGameplayHandler
@@ -2408,9 +2411,9 @@ presentSaveScreenIfNeeded::
     or   [hl]
     jr   nz, jumpToGameplayHandler
     ld   a, [WR1_GameplayType]
-    cp   $0C ; If GameplayType > $0C
+    cp   GAMEPLAY_INVENTORY ; If GameplayType > INVENTORY (i.e. photo album and pictures)
     jr   nc, jumpToGameplayHandler
-    ; If GameplayType < $0C
+    ; If GameplayType < INVENTORY
     ld   a, [hPressedButtonsMask]
     cp   $F0 ; If hPressedButtonsMask != A+B+Start+Select
     jr   nz, jumpToGameplayHandler
@@ -2763,7 +2766,7 @@ label_107F::
     ld   [WR1_GameplaySubtype], a
     ld   a, $07
     ld   [WR1_GameplayType], a
-    ld   a, $02
+    ld   a, GAMEPLAY_FILE_SELECT
     ld   [SelectRomBank_2100], a
     call label_755B
     call label_1D2E
@@ -3929,7 +3932,7 @@ label_186C::
 label_1898::
     ld   a, [$FFF9]
     ld   [$FFE4], a
-    ld   a, $0B
+    ld   a, GAMEPLAY_OVERWORLD
     ld   [WR1_GameplayType], a
     xor  a
     ld   [WR1_GameplaySubtype], a
@@ -5574,7 +5577,7 @@ label_2321::
     ret  z
     ld   e, a
     ld   a, [WR1_GameplayType]
-    cp   $01
+    cp   GAMEPLAY_CREDITS
     ld   a, $7E
     jr   nz, label_2332
     ld   a, $7F
@@ -5811,7 +5814,7 @@ label_2496::
     xor  a
     ld   [$C16F], a
     ld   a, [WR1_GameplayType]
-    cp   $0D
+    cp   GAMEPLAY_PHOTO_ALBUM
     jr   nz, label_24A4
     xor  a
     jr   label_24AB
@@ -6158,7 +6161,7 @@ label_26B6::
     ld   a, $1C
     ld   [SelectRomBank_2100], a
     ld   a, [WR1_GameplayType]
-    cp   $07
+    cp   GAMEPLAY_MINI_MAP
     jp   z, label_278B
     ld   a, [$C173]
     ld   e, a
@@ -6394,7 +6397,7 @@ label_281E::
     and  a
     jr   nz, label_2886
     ld   a, [WR1_GameplayType]
-    cp   $0B
+    cp   GAMEPLAY_OVERWORLD
     jr   nz, label_2852
     ld   a, [WR1_GameplaySubtype]
     cp   $07
@@ -9507,7 +9510,7 @@ label_3C9C::
     and  a
     jr   z, label_3CD0
     ld   a, [WR1_GameplayType]
-    cp   $01
+    cp   GAMEPLAY_CREDITS
     jr   z, label_3CD0
     ld   a, [$FFED]
     and  a

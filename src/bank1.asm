@@ -910,8 +910,8 @@ label_4555::
     call label_27D0
     ld   a, [$ABB7]
     ld   [$DC05], a
-    ld   a, $02
-    ld   [$DB95], a
+    ld   a, GAMEPLAY_FILE_SELECT
+    ld   [WR1_GameplayType], a
     xor  a
     ld   [WR1_GameplaySubtype], a
     xor  a
@@ -996,8 +996,8 @@ label_46ED::
     ld   [$A45F], a
     ld   a, $0A
     ld   [$A460], a
-    ld   a, [$DB95]
-    cp   $03
+    ld   a, [WR1_GameplayType]
+    cp   GAMEPLAY_FILE_NEW
     jr   z, label_474E
     ld   a, $5B
     ld   [$A454], a
@@ -1412,8 +1412,8 @@ label_49AE::
     jr   nz, label_49AE
     xor  a
     ld   [WR1_GameplaySubtype], a
-    ld   a, $03
-    ld   [$DB95], a
+    ld   a, GAMEPLAY_FILE_NEW
+    ld   [WR1_GameplayType], a
 
 label_49BE::
     ld   a, $13
@@ -1439,10 +1439,10 @@ label_49DE::
     and  a
     ld   a, $04
     jr   z, label_49EC
-    ld   a, $05
+    ld   a, GAMEPLAY_FILE_COPY
 
 label_49EC::
-    ld   [$DB95], a
+    ld   [WR1_GameplayType], a
     jp   label_49BE
 
 label_49F2::
@@ -2940,8 +2940,8 @@ label_52FB::
     ld   [$DC0D], a
 
 label_531D::
-    ld   a, $0B
-    ld   [$DB95], a
+    ld   a, GAMEPLAY_OVERWORLD
+    ld   [WR1_GameplayType], a
     xor  a
     ld   [WR1_GameplaySubtype], a
     xor  a
@@ -3652,7 +3652,7 @@ label_571B::
     xor  a
     ld   [WR1_GameplaySubtype], a
     inc  a
-    ld   [$DB95], a
+    ld   [WR1_GameplayType], a
     ret
 
 label_5731::
@@ -3750,8 +3750,8 @@ label_57B7::
     ld   a, [$FFCB]
     cp   $60
     jr   nz, label_57FA
-    ld   a, $0B
-    ld   [$DB95], a
+    ld   a, GAMEPLAY_OVERWORLD
+    ld   [WR1_GameplayType], a
     call label_C7D
     ld   a, $00
     ld   [$D401], a
@@ -3842,8 +3842,8 @@ label_5854::
     ld   [$FFA9], a
     ld   a, $70
     ld   [$FFAA], a
-    ld   a, $0B
-    ld   [$DB95], a
+    ld   a, GAMEPLAY_OVERWORLD
+    ld   [WR1_GameplayType], a
     ld   [$FFBC], a
     ld   a, $02
     ld   [WR1_GameplaySubtype], a
@@ -5100,7 +5100,7 @@ label_6161::
 label_6162::
     call label_27F2
     xor  a
-    ld   [$DB95], a
+    ld   [WR1_GameplayType], a
     ld   [WR1_GameplaySubtype], a
     ld   [$DB98], a
     ld   [$DB99], a
@@ -6671,8 +6671,8 @@ label_6D10::
 
 label_6D11::
     ld   d, $05
-    ld   a, [$DB95]
-    cp   $0B
+    ld   a, [WR1_GameplayType]
+    cp   GAMEPLAY_OVERWORLD
     jr   z, label_6D1C
     ld   d, $06
 
@@ -6834,7 +6834,7 @@ label_6E94::
     ld   [$FF97], a
     ld   [rBGP], a
     ld   [$DB97], a
-    ld   hl, $DB95
+    ld   hl, WR1_GameplayType
     inc  [hl]
 
 label_6EA8::

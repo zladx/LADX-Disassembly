@@ -375,7 +375,7 @@ WR1_IsMarinFollowingLink    equ $DB73
 WR1_IsGhostFollowingLink    equ $DB79
 WR1_IsRoosterFollowingLink  equ $DB7B
 WR1_GameplayType            equ $DB95 ; See `GAMEPLAY_*` constants for possible values
-WR1_ScreenTransitionCounter equ $DB96 ; Counter incremented during screen transitions
+WR1_GameplaySubtype         equ $DB96 ; Value depens on GameplayType: this can be a sequence index, or a frame counter.
 WR1_BGPalette               equ $DB97
 WR1_OBJ0Palette             equ $DB98
 WR1_OBJ1Palette             equ $DB99

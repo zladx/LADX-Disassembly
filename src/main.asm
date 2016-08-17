@@ -459,7 +459,7 @@ label_213::
     jr   c, label_229
     cp   $0B
     jr   nz, label_22F
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $07
     jr   nc, label_22F
 
@@ -488,7 +488,7 @@ label_23D::
     ld   a, [WR1_GameplayType]
     cp   $00
     jr   nz, label_264
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $08
     jr   c, label_264
     ld   a, $20
@@ -607,7 +607,7 @@ label_32D::
     ld   a, [WR1_GameplayType]
     cp   $0C
     jr   nz, label_33B
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $02
     jr   c, label_343
 
@@ -673,13 +673,13 @@ InterruptLCDStatus::
     xor  a           ; Load WRAM Bank 1 (as "0" fallbacks to loading bank 1)
     ld   [rSVBK], a  ; 
     ld   a, [WR1_GameplayType]       
-    cp   $01 ; if GameplayType != 1
+    cp   $01 ; if GameplayType != GAMEPLAY_CREDITS
     jr   nz, skipScrollY
-    ; If GameplayType == 1
-    ld   a, [WR1_ScreenTransitionCounter]
-    cp   $05 ; if TransitionCounter != 5
+    ; If GameplayType == CREDITS
+    ld   a, [WR1_GameplaySubtype]
+    cp   $05 ; if GameplaySubtype != 5
     jr   nz, setStandardScrollY
-    ; If TransitionCounter == 5
+    ; If GameplaySubtype == 5
     ld   a, [$D000]  ; override scrollY with WRA1:$D000 value
     jr   setScrollY
 
@@ -694,7 +694,7 @@ setScrollY::
 skipScrollY::
     cp   GAMEPLAY_INTRO    ; if not during the introduction sequence
     jr   nz, clearScrollX  ;   skip
-    ; GameplayType == GAMEPLAY_INTRO
+    ; GameplayType == INTRO
     ; Apply differential scrolling to each section:
     ; load and apply the scrollX offset for the current screen section being drawn
     ld   a, [WR0_LCDSectionIndex]
@@ -706,8 +706,8 @@ skipScrollY::
     ld   hl, hBaseScrollX ; a = hBaseScrollX + [hl]
     add  a, [hl]
     ld   [rSCX], a        ; set scrollX
-    ld   a, [WR1_ScreenTransitionCounter] 
-    cp   $06  ; if TransitionCounter < 6 (intro sea)
+    ld   a, [WR1_GameplaySubtype] 
+    cp   $06  ; if GameplaySubtype < 6 (intro sea)
     jr   c, setupNextInterruptForIntroSea
     ; If TransitionCounter >= 6 (intro beach)
 setupNextInterruptForIntroBeach::
@@ -834,7 +834,7 @@ InterruptVBlank::
     ld   a, [WR1_GameplayType]
     cp   $0D
     jr   nz, label_48D
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $09
     jr   c, label_48D
     cp   $12
@@ -880,7 +880,7 @@ label_4CC::
     ld   a, [WR1_GameplayType]
     cp   $0E
     jr   c, label_4E4
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $06
     jr   c, label_52B
     ld   a, $38
@@ -2392,7 +2392,7 @@ ExecuteGameplayHandler::
     cp   GAMEPLAY_OVERWORLD ; If GameplayType != Overworld
     jr   nz, presentSaveScreenIfNeeded
     ; If GameplayType == Overworld
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $07
     jr   nz, jumpToGameplayHandler
 
@@ -2426,7 +2426,7 @@ presentSaveScreenIfNeeded::
     ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [$C19F], a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, GAMEPLAY_FILE_SAVE
     ld   [WR1_GameplayType], a
 
@@ -2760,7 +2760,7 @@ label_107F::
     xor  a
     ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, $07
     ld   [WR1_GameplayType], a
     ld   a, $02
@@ -3932,7 +3932,7 @@ label_1898::
     ld   a, $0B
     ld   [WR1_GameplayType], a
     xor  a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   [$C3CB], a
     ld   [$FFF9], a
     ld   hl, $D401
@@ -6396,7 +6396,7 @@ label_281E::
     ld   a, [WR1_GameplayType]
     cp   $0B
     jr   nz, label_2852
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $07
     jr   nz, label_284C
     ld   a, [$C11C]

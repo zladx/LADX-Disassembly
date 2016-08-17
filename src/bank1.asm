@@ -1,6 +1,6 @@
 
 label_4000::
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     rst  0
     ld   [de], a
     ld   b, b
@@ -533,7 +533,7 @@ label_435C::
     ldi  [hl], a
     ld   [hl], $00
     ret
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     rst  0
     sub  a, l
     ld   b, e
@@ -766,7 +766,7 @@ label_44C9::
     ld   [$D6FE], a
 
 label_44D6::
-    ld   hl, $DB96
+    ld   hl, WR1_GameplaySubtype
     inc  [hl]
     ret
     ld   a, $01
@@ -913,7 +913,7 @@ label_4555::
     ld   a, $02
     ld   [$DB95], a
     xor  a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     xor  a
     ld   [$FF97], a
     ld   [$FF96], a
@@ -1092,7 +1092,7 @@ label_47C3::
 label_47CD::
     ret
     call label_5DC0
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     rst  0
     jp   [hl]
     ld   b, a
@@ -1411,7 +1411,7 @@ label_49AE::
     dec  c
     jr   nz, label_49AE
     xor  a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, $03
     ld   [$DB95], a
 
@@ -1434,7 +1434,7 @@ label_49C3::
 
 label_49DE::
     xor  a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, [$D000]
     and  a
     ld   a, $04
@@ -1465,7 +1465,7 @@ label_49FE::
     db 0, $A1, $AD, $A4, $5A, $A8, $C3, $A4, $52
 
 label_4A07::
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     rst  0
     ld   de, label_244A
     ld   c, d
@@ -1965,7 +1965,7 @@ label_4CDA::
     ld   [hl], e
     ret
     call label_5DC0
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     rst  0
     ld   a, [de]
     ld   c, l
@@ -2214,7 +2214,7 @@ label_4E91::
 label_4E9E::
     call label_4EE5
     call label_4EBB
-    ld   hl, $DB96
+    ld   hl, WR1_GameplaySubtype
     dec  [hl]
     ret
 
@@ -2612,7 +2612,7 @@ label_5104::
     ld   a, [$FFCC]
     bit  5, a
     jr   z, label_5114
-    ld   hl, $DB96
+    ld   hl, WR1_GameplaySubtype
     dec  [hl]
     jp   label_514F
 
@@ -2799,7 +2799,7 @@ label_5235::
     ld   a, [$FFCC]
     bit  5, a
     jr   z, label_5249
-    ld   hl, $DB96
+    ld   hl, WR1_GameplaySubtype
     dec  [hl]
     xor  a
     ld   [$D000], a
@@ -2943,7 +2943,7 @@ label_531D::
     ld   a, $0B
     ld   [$DB95], a
     xor  a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     xor  a
     ld   [$C11C], a
     ld   [$FF9C], a
@@ -3506,13 +3506,13 @@ label_5619::
     ret
     xor  a
     ld   [$C3C0], a
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $05
     jr   z, label_5639
     xor  a
     ld   [$FFCB], a
     ld   [$FFCC], a
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
 
 label_5639::
     rst  0
@@ -3650,7 +3650,7 @@ label_571B::
     bit  7, a
     jr   z, label_5731
     xor  a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     inc  a
     ld   [$DB95], a
     ret
@@ -3772,7 +3772,7 @@ label_57B7::
     or   e
     ld   [$D416], a
     ld   a, $07
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ret
 
 label_57FA::
@@ -3846,7 +3846,7 @@ label_5854::
     ld   [$DB95], a
     ld   [$FFBC], a
     ld   a, $02
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, [$DBA5]
     and  a
     ld   a, $06
@@ -5101,7 +5101,7 @@ label_6162::
     call label_27F2
     xor  a
     ld   [$DB95], a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   [$DB98], a
     ld   [$DB99], a
     ld   [$DB97], a
@@ -5486,7 +5486,7 @@ label_64BA::
     ld   a, $DE
     call label_67DE
     ld   a, $06
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, $05
     ld   [$C3C7], a
     ret
@@ -6069,7 +6069,7 @@ label_68BF::
     jr   nz, label_68CF
     call label_6A7C
     ld   a, $07
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ret
 
 label_68CF::
@@ -6339,7 +6339,7 @@ label_6AF4::
     ret
 
 
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     rst  0
     ld   a, [bc]
     ld   l, e
@@ -6781,7 +6781,7 @@ label_6E28::
     and  $80
     jp   z, label_6EB1
     call label_27F2
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $0B
     jr   z, label_6E94
     ld   a, $28
@@ -6808,7 +6808,7 @@ label_6E57::
 label_6E62::
     ld   [$D013], a
     ld   a, $0D
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     xor  a
     ld   [$C280], a
     ld   [$C281], a
@@ -6829,7 +6829,7 @@ label_6E62::
 label_6E94::
     jp   label_4552
     xor  a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   [$FF96], a
     ld   [$FF97], a
     ld   [rBGP], a
@@ -6845,7 +6845,7 @@ label_6EA8::
     ret
 
 label_6EB1::
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $03
     jr   c, label_6ED8
     cp   $05
@@ -6869,7 +6869,7 @@ label_6EC6::
     call label_8F0
 
 label_6ED8::
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     rst  0
     ld    hl, sp+$6E
     ld   a, [hli]
@@ -7014,7 +7014,7 @@ label_6F9C::
     ld   [$C282], a
     ld   [$C290], a
     ld   a, $05
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   [$D00F], a
     call label_7D4E
     ld   a, $11
@@ -7041,7 +7041,7 @@ label_7014::
     ld   a, $FF
     ld   [rBGP], a
     ld   a, $04
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, $0F
     ld   [$D6FF], a
     ld   a, $01
@@ -7153,7 +7153,7 @@ label_70CC::
     cp   $A0
     jr   nz, label_70F7
     ld   a, $03
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a ; Move back to sea sequence
     ld   a, [hIsGBC]
     and  a
     jr   z, label_70DE
@@ -7233,7 +7233,7 @@ label_7168::
     ld   [$D001], a
     jr   nz, label_7188
     ld   a, $07
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, $06
     ld   [$C280], a
     ld   a, $B0
@@ -7692,7 +7692,7 @@ label_7447::
     ld   a, $11
     ld   [$D6FE], a
     ld   a, $0B
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, $C9
     ld   [$DB97], a
     ld   a, $1C
@@ -7715,7 +7715,7 @@ label_7466::
     ld   [$FFD7], a
     ld   hl, $C04C
     ld   c, $10
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $04
     jr   nz, label_7486
     ld   c, $15

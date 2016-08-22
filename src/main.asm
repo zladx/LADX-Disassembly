@@ -422,7 +422,7 @@ DidRenderFrame::
     ld   a, [$C500]
     and  a
     jr   z, label_1F2
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0B
     jr   nz, label_1F2
     ld   a, [$FFE7]
@@ -453,7 +453,7 @@ label_200::
     jr   z, label_23D
 
 label_213::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $09
     jr   z, label_229
     cp   $06
@@ -486,7 +486,7 @@ label_23D::
     ld   [rLCDC], a
     ld   hl, $FFE7
     inc  [hl]
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $00
     jr   nz, label_264
     ld   a, [$DB96]
@@ -551,22 +551,22 @@ label_2B7::
     pop  af
     call label_5038
     call label_8A4
-    ld   a, [$DB97]
+    ld   a, [WR1_BGPalette]
     ld   [rBGP], a
-    ld   a, [$DB98]
+    ld   a, [WR1_OBJ0Palette]
     ld   [rOBP0], a
-    ld   a, [$DB99]
+    ld   a, [WR1_OBJ1Palette]
     ld   [rOBP1], a
     jp   WaitForNextFrame
 
 label_2D5::
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     ld   [rWY], a
-    ld   a, [$DB97]
+    ld   a, [WR1_BGPalette]
     ld   [rBGP], a
-    ld   a, [$DB98]
+    ld   a, [WR1_OBJ0Palette]
     ld   [rOBP0], a
-    ld   a, [$DB99]
+    ld   a, [WR1_OBJ1Palette]
     ld   [rOBP1], a
     call label_8A4
     call label_281E
@@ -582,7 +582,7 @@ label_2D5::
     ld   a, [$D6FC]
     and  a
     jr   nz, label_30D
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $0F
     jr   z, label_327
 
@@ -605,7 +605,7 @@ label_327::
     jr   nz, WaitForNextFrame
 
 label_32D::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0C
     jr   nz, label_33B
     ld   a, [$DB96]
@@ -618,7 +618,7 @@ label_33B::
     call label_5F2E
 
 label_343::
-    call label_E34
+    call ExecuteGameplayHandler
     ld   a, [hIsGBC]
     and  a
     jr   z, label_353
@@ -832,7 +832,7 @@ InterruptVBlank::
     ld   [rSVBK], a
     push bc
     di
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0D
     jr   nz, label_48D
     ld   a, [$DB96]
@@ -878,7 +878,7 @@ label_4C6::
     jp   WaitForVBlank
 
 label_4CC::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0E
     jr   c, label_4E4
     ld   a, [$DB96]
@@ -928,7 +928,7 @@ label_509::
     jr   label_501
 
 label_521::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0D
     jr   z, label_52B
     call label_1B0D
@@ -1920,7 +1920,7 @@ label_B80::
     push hl
     call label_B96
     pop  hl
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0D
     jr   nz, label_B90
     call label_BB5
@@ -1931,7 +1931,7 @@ label_B90::
     ret
 
 label_B96::
-    ld   de, $9800
+    ld   de, vBGMap0
 
 label_B99::
     ld   a, [hli]
@@ -2114,7 +2114,7 @@ label_C9E::
     ld   a, $03
     ld   [$C11C], a
     xor  a
-    ld   [$C16B], a
+    ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [$D478], a
     and  a
@@ -2386,107 +2386,112 @@ label_E29::
 label_E31::
     jp   ReloadSavedBank
 
-label_E34::
-    ld   a, [$DB95]
-    cp   $07
-    jr   c, label_E85
-    cp   $0B
-    jr   nz, label_E46
+ExecuteGameplayHandler::
+    ld   a, [WR1_GameplayType]
+    cp   $07 ; If GameplayType < 07
+    jr   c, jumpToGameplayHandler
+    cp   GAMEPLAY_OVERWORLD ; If GameplayType != Overworld
+    jr   nz, presentSaveScreenIfNeeded
+    ; If GameplayType == Overworld
     ld   a, [$DB96]
     cp   $07
-    jr   nz, label_E85
+    jr   nz, jumpToGameplayHandler
 
-label_E46::
-    ld   a, [$C16B]
+presentSaveScreenIfNeeded::
+    ld   a, [WR0_TransitionSequenceCounter]
     cp   $04
-    jr   nz, label_E85
+    jr   nz, jumpToGameplayHandler
+    ; If WR0_TransitionSequenceCounter == 04 (not during a transition)
     ld   a, [$C19F]
     ld   hl, $C167
     or   [hl]
     ld   hl, $C124
     or   [hl]
-    jr   nz, label_E85
-    ld   a, [$DB95]
-    cp   $0C
-    jr   nc, label_E85
-    ld   a, [$FFCB]
-    cp   $F0
-    jr   nz, label_E85
+    jr   nz, jumpToGameplayHandler
+    ld   a, [WR1_GameplayType]
+    cp   $0C ; If GameplayType > $0C
+    jr   nc, jumpToGameplayHandler
+    ; If GameplayType < $0C
+    ld   a, [hPressedButtonsMask]
+    cp   $F0 ; If hPressedButtonsMask != A+B+Start+Select
+    jr   nz, jumpToGameplayHandler
+    ; If PressedButtonsMask == A+B+Start+Select
     ld   a, [$D474]
     and  a
-    jr   nz, label_E85
+    jr   nz, jumpToGameplayHandler
     ld   a, [$D464]
     and  a
-    jr   nz, label_E85
+    jr   nz, jumpToGameplayHandler
+    ; Present save screen
     xor  a
-    ld   [$C16B], a
+    ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [$C19F], a
     ld   [$DB96], a
-    ld   a, $06
+    ld   a, GAMEPLAY_FILE_SAVE
     ld   [WR1_GameplayType], a
 
-label_E85::
+jumpToGameplayHandler::
     ld   a, [WR1_GameplayType]
     rst  0 ; skip to TableJump
 ; Jump table
-    dw $0EDF
-    dw $0EE2
-    dw $0F0E
-    dw $0F11
-    dw $0F14
-    dw $0F17
-    dw $0ED7
-    dw $0ED1
-    dw $0EC5
-    dw $0ECB
-    dw $0EBF
-    dw $0F1A
-    dw $0F2D
-    dw $0F35
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
-    dw $0F40
+._00 dw IntroHandler
+._01 dw EndCreditsHandler
+._02 dw FileSelectionHandler
+._03 dw FileCreationHandler
+._04 dw FileDeletionHandler
+._05 dw FileCopyHandler
+._06 dw FileSaveHandler
+._07 dw MinimapHandler
+._08 dw PeachPictureHandler
+._09 dw MarinBeachHandler
+._0A dw FaceShrineMuralHandler
+._0B dw OverworldHandler
+._0C dw InventoryHandler
+._0D dw PhotoAlbumHandler
+._0E dw PhotoPictureHandler ; Dizzy Link photo
+._0F dw PhotoPictureHandler ; Good-looking Link photo
+._10 dw PhotoPictureHandler ; Marin cliff photo (with cutscene)
+._11 dw PhotoPictureHandler ; Marin well photo
+._12 dw PhotoPictureHandler ; Mabe village photo (with cutscene)
+._13 dw PhotoPictureHandler ; Ulrira photo
+._14 dw PhotoPictureHandler ; Bow-wow photo (with cutscene)
+._15 dw PhotoPictureHandler ; Thief photo
+._16 dw PhotoPictureHandler ; Fisherman photo
+._17 dw PhotoPictureHandler ; Zora photo
+._18 dw PhotoPictureHandler ; Kanalet Castle photo (with cutscene)
+._19 dw PhotoPictureHandler ; Ghost photo
+._1A dw PhotoPictureHandler ; Bridge photo
 
-label_EBF::
+FaceShrineMuralHandler::
     call label_6AF8
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
-label_EC5::
+PeachPictureHandler::
     call label_67EE
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
-label_ECB::
+MarinBeachHandler::
     call label_6203
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
-label_ED1::
+MinimapHandler::
     call label_5626
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
-label_ED7::
+FileSaveHandler::
     ld   a, $01
     call SwitchBank
     jp   label_4000
 
-label_EDF::
+IntroHandler::
     jp   label_6E1D
 
-label_EE2::
+EndCreditsHandler::
     ld   a, $17
     call SwitchBank
     call label_4AB7
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
 label_EED::
     ld   a, $03
@@ -2511,19 +2516,19 @@ label_F05::
     ld   a, $02
     jr   label_EF4
 
-label_F0E::
+FileSelectionHandler::
     jp   label_47CE
 
-label_F11::
+FileCreationHandler::
     jp   label_4A07
 
-label_F14::
+FileDeletionHandler::
     jp   label_4CFB
 
-label_F17::
+FileCopyHandler::
     jp   label_4F8C
 
-label_F1A::
+OverworldHandler::
     ld   a, $14
     ld   [SelectRomBank_2100], a
     call label_4C4B
@@ -2532,18 +2537,18 @@ label_F1A::
     call SwitchBank
     jp   label_4371
 
-label_F2D::
+InventoryHandler::
     ld   a, $20
     call SwitchBank
     jp   label_5904
 
-label_F35::
+PhotoAlbumHandler::
     ld   a, $28
     call SwitchBank
     call label_4000
-    jp   label_101A
+    jp   returnFromGameplayHandler
 
-label_F40::
+PhotoPictureHandler::
     ld   a, $37
     call SwitchBank
     jp   label_4000
@@ -2558,7 +2563,7 @@ label_F48::
     ld   a, [hl]
     and  a
     jr   z, label_F75
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     cp   $80
     jr   nz, label_F75
     ld   a, [$C14F]
@@ -2657,17 +2662,22 @@ label_1012::
     call SwitchBank
     call label_54F8
 
-label_101A::
-    db $3E, $F, $CD, $C, 8
+returnFromGameplayHandler::
+    ld   a, $0F
+    call SwitchBank
 
 label_101F::
-    db $CD, $21, $23, $F0, $FE, $A7, $C8, $3E, $24, $CD, $C, 8, $C3, 5
-
-data_102D::
-    db $74
+    call label_2321
+    ld   a, [hIsGBC]
+    and  a
+    ret  z
+    ld   a, $24
+    call SwitchBank
+    jp   label_7405 ; will return to main game loop
 
 label_102E::
-    db 8, $E, $99, $28, $EC
+    ld   [$990E], sp
+    jr   z, label_101F
 
 label_1033::
     ld   a, [$FF99]
@@ -2688,7 +2698,7 @@ label_1033::
     ld   a, [$C1A9]
     ld   e, a
     ld   d, $00
-    ld   hl, data_102D
+    ld   hl, $102D
     add  hl, de
     ld   a, [hl]
     call label_2385
@@ -2719,10 +2729,10 @@ label_106D::
     ld   d, c
 
 label_107F::
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $B0
     jr   nz, label_10DB
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $40
     jr   z, label_10DB
     ld   a, [$D45F]
@@ -2749,11 +2759,11 @@ label_107F::
     and  a
     jr   nz, label_10DB
     xor  a
-    ld   [$C16B], a
+    ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [$DB96], a
     ld   a, $07
-    ld   [$DB95], a
+    ld   [WR1_GameplayType], a
     ld   a, $02
     ld   [SelectRomBank_2100], a
     call label_755B
@@ -2918,7 +2928,7 @@ label_11E8::
     ld   a, [WR1_AButtonSlot]
     cp   $08
     jr   nz, label_11FE
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $20
     jr   z, label_11FA
     call label_1705
@@ -2932,7 +2942,7 @@ label_11FE::
     ld   a, [WR1_BButtonSlot]
     cp   $08
     jr   nz, label_1214
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $10
     jr   z, label_1210
     call label_1705
@@ -2950,7 +2960,7 @@ label_1214::
     jr   nz, label_1235
     ld   a, [WR1_ShieldLevel]
     ld   [WR0_ShieldLevel], a
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $10
     jr   z, label_1235
     ld   a, [$C1AD]
@@ -2966,7 +2976,7 @@ label_1235::
     jr   nz, label_124B
     ld   a, [WR1_ShieldLevel]
     ld   [WR0_ShieldLevel], a
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $20
     jr   z, label_124B
     call label_1340
@@ -2994,14 +3004,14 @@ label_125E::
     call ItemFunction
 
 label_1275::
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $20
     jr   z, label_1281
     ld   a, [WR1_AButtonSlot]
     call label_1321
 
 label_1281::
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $10
     jr   z, label_128D
     ld   a, [WR1_BButtonSlot]
@@ -3363,7 +3373,7 @@ UseRocksFeather::
     and  a
     jr   z, label_1508
     call label_1508
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $03
     ld   a, $EA
     jr   z, label_14F8
@@ -3449,7 +3459,7 @@ label_1562::
     ret
 
 label_157C::
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $0F
     ld   e, a
     ld   d, $00
@@ -3881,7 +3891,7 @@ label_1847::
     ld   [$C157], a
     inc  a
     ld   [$C1A8], a
-    ld   a, [$C16B]
+    ld   a, [WR0_TransitionSequenceCounter]
     cp   $04
     jp   nz, label_19D9
     xor  a
@@ -3913,7 +3923,7 @@ label_186C::
     or   $40
     ld   [$DC0C], a
     ld   a, $01
-    ld   [$D47E], a
+    ld   [WR1_DidStealItem], a
     xor  a
     ld   [$FF9D], a
 
@@ -3921,7 +3931,7 @@ label_1898::
     ld   a, [$FFF9]
     ld   [$FFE4], a
     ld   a, $0B
-    ld   [$DB95], a
+    ld   [WR1_GameplayType], a
     xor  a
     ld   [$DB96], a
     ld   [$C3CB], a
@@ -4145,12 +4155,12 @@ label_19DA::
     ld   a, $03
     ld   [$C17F], a
     ld   a, $04
-    ld   [$C16B], a
+    ld   [WR0_TransitionSequenceCounter], a
     jr   label_1A06
 
 label_19FC::
     call label_1A39
-    ld   a, [$C16B]
+    ld   a, [WR0_TransitionSequenceCounter]
     cp   $04
     jr   nz, label_1A21
 
@@ -4162,11 +4172,11 @@ label_1A06::
 
 label_1A0F::
     ld   [$C11C], a
-    ld   a, [$D47E]
+    ld   a, [WR1_DidStealItem]
     and  a
     jr   z, label_1A21
     xor  a
-    ld   [$D47E], a
+    ld   [WR1_DidStealItem], a
     ld   a, $36
     jp   label_2385
 
@@ -4318,7 +4328,7 @@ label_1AEB::
     ld   h, b
 
 label_1B0D::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $09
     jr   z, label_1ACC
     cp   $00
@@ -4348,7 +4358,7 @@ label_1B45::
     ret
 
 label_1B46::
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $01
     jr   nz, label_1B53
     ld   a, [$FFA5]
@@ -4359,7 +4369,7 @@ label_1B46::
 label_1B53::
     cp   $0B
     jp  c, label_1DE8
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     cp   $80
     jp   nz, label_1DE8
     ld   a, [$C14F]
@@ -4681,7 +4691,7 @@ label_1D49::
     jr   label_1DA1
 
 label_1D8C::
-    ld   a, [$DC0F]
+    ld   a, [WR1_TunicType]
     and  a
     jr   z, label_1D95
     inc  a
@@ -4730,7 +4740,7 @@ label_1DA1::
     jr   label_1DE7
 
 label_1DD2::
-    ld   a, [$DC0F]
+    ld   a, [WR1_TunicType]
     and  a
     jr   z, label_1DDB
     inc  a
@@ -4769,7 +4779,7 @@ label_1DF5::
     jp   label_1F3B
 
 label_1E01::
-    ld   a, [$DB0E]
+    ld   a, [WR1_TradeSequenceItem]
     cp   $02
     jp  c, label_1F3E
     sub  a, $02
@@ -5087,7 +5097,7 @@ label_1FFE::
     jr   z, label_2049
     cp   $D4
     jr   z, label_2049
-    ld   a, [$DB73]
+    ld   a, [WR1_IsMarinFollowingLink]
     and  a
     jr   z, label_2030
     ld   a, $78
@@ -5196,7 +5206,7 @@ label_20CF::
     ld   a, [WR1_AButtonSlot]
     cp   $03
     jr   nz, label_20DD
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $20
     jr   nz, label_20EC
     ret
@@ -5205,7 +5215,7 @@ label_20DD::
     ld   a, [WR1_BButtonSlot]
     cp   $03
     jp   nz, label_2177
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  $10
     jp   z, label_2177
 
@@ -5225,7 +5235,7 @@ label_20EC::
     ld   [$FF9D], a
     ld   hl, data_1F55
     add  hl, de
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     and  [hl]
     jr   z, label_214E
     ld   hl, data_1F59
@@ -5564,7 +5574,7 @@ label_2321::
     and  a
     ret  z
     ld   e, a
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $01
     ld   a, $7E
     jr   nz, label_2332
@@ -5801,7 +5811,7 @@ label_2485::
 label_2496::
     xor  a
     ld   [$C16F], a
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0D
     jr   nz, label_24A4
     xor  a
@@ -6148,7 +6158,7 @@ label_26B6::
     jr   z, label_2714
     ld   a, $1C
     ld   [SelectRomBank_2100], a
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $07
     jp   z, label_278B
     ld   a, [$C173]
@@ -6316,8 +6326,9 @@ label_27BB::
     ld   [SelectRomBank_2100], a
     jp   $7D7C
 
+; Set overworld music track?
 label_27C3::
-    ld   [$D368], a
+    ld   [WR1_OverworldMusic], a
     ld   [$FFBF], a
     ld   a, $38
     ld   [$FFAB], a
@@ -6382,7 +6393,7 @@ label_281E::
     ld   a, [$C124]
     and  a
     jr   nz, label_2886
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $0B
     jr   nz, label_2852
     ld   a, [$DB96]
@@ -6396,7 +6407,7 @@ label_281E::
     jr   z, label_2852
 
 label_283F::
-    ld   a, [$C16B]
+    ld   a, [WR0_TransitionSequenceCounter]
     cp   $04
     jr   nz, label_284C
     ld   a, [$DDD5]
@@ -6405,7 +6416,7 @@ label_283F::
 
 label_284C::
     xor  a
-    ld   [$FFCB], a
+    ld   [hPressedButtonsMask], a
     ld   [$FFCC], a
     ret
 
@@ -6432,12 +6443,12 @@ label_2852::
     and  $F0
     or   b
     ld   c, a
-    ld   a, [$FFCB]
+    ld   a, [hPressedButtonsMask]
     xor  c
     and  c
     ld   [$FFCC], a
     ld   a, c
-    ld   [$FFCB], a
+    ld   [hPressedButtonsMask], a
     ld   a, $30
     ld   [rJOYP], a
 
@@ -6455,7 +6466,7 @@ label_2887::
     srl  a
     ld   de, $0000
     ld   e, a
-    ld   hl, $9800
+    ld   hl, vBGMap0
     ld   b, $20
 
 label_289F::
@@ -6529,19 +6540,22 @@ label_28E8::
     jp   $6CE3
 
 label_28F0:: ; label accessed directly by a jump table
-    ld   a, $7E
-    ld   bc, $0400
+    ld   a, $7E    ; value
+    ld   bc, $0400 ; count
     jr   ClearMap
 
-; Fill Background Tile Table with all 7Fs
+; Fill the Background Map with all 7Fs
 ClearBGMap::
-    ld   a, $7F
-    ld   bc, $0800
+    ld   a, $7F    ; value 
+    ld   bc, $0800 ; count
 
-; Fill background-sized memory area at bc with the content of a
+; Fill the Background Map with a value
+; Inputs:
+;   a  : value to fill
+;   bc : count
 ClearMap::
     ld   d, a
-    ld   hl, $9800
+    ld   hl, vBGMap0
 .clearMap_loop
     ld   a, d
     ldi  [hl], a
@@ -7123,7 +7137,7 @@ label_2D17::
     call label_1EA1
 
 label_2D21::
-    ld   a, [$DB0E]
+    ld   a, [WR1_TradeSequenceItem]
     cp   $02
     jr   c, label_2D2C
     ld   a, $0D
@@ -7303,19 +7317,19 @@ label_2E85::
     jr   z, label_2ED3
 
 label_2EB0::
-    ld   a, [$DB56]
+    ld   a, [WR1_IsBowWowFollowingLink]
     cp   $01
     ld   a, $A4
     jr   z, label_2ED1
-    ld   a, [$DB79]
+    ld   a, [WR1_IsGhostFollowingLink]
     and  a
     ld   a, $D8
     jr   nz, label_2ED1
-    ld   a, [$DB7B]
+    ld   a, [WR1_IsRoosterFollowingLink]
     and  a
     ld   a, $DD
     jr   nz, label_2ED1
-    ld   a, [$DB73]
+    ld   a, [WR1_IsMarinFollowingLink]
     and  a
     jr   z, label_2ED3
     ld   a, $8F
@@ -7612,7 +7626,7 @@ label_304F::
     ret
     call label_3905
     call SwitchBank
-    ld   de, $9800
+    ld   de, vBGMap0
     ld   hl, WR1_TileMap
     ld   c, $80
 
@@ -7715,7 +7729,7 @@ label_313A::
     ld   a, [$FFF6]
     ld   e, a
     ld   d, $00
-    ld   hl, $D800
+    ld   hl, WR1_MinimapTiles
     ld   a, [$DBA5]
     and  a
     jr   z, label_3161
@@ -7767,7 +7781,7 @@ label_318F::
     ld   a, [$FFF6]
     cp   $F5
     jr   nz, label_31A6
-    ld   a, [$DB0E]
+    ld   a, [WR1_TradeSequenceItem]
     cp   $0E
     jr   nz, label_31A6
     ld   bc, $7855
@@ -8163,7 +8177,7 @@ label_33DC::
     and  a
     jr   nz, label_3406
     ld   a, $04
-    ld   [$C16B], a
+    ld   [WR0_TransitionSequenceCounter], a
 
 label_3406::
     pop  af
@@ -9492,7 +9506,7 @@ label_3C9C::
     ld   a, [hIsGBC]
     and  a
     jr   z, label_3CD0
-    ld   a, [$DB95]
+    ld   a, [WR1_GameplayType]
     cp   $01
     jr   z, label_3CD0
     ld   a, [$FFED]
@@ -9891,7 +9905,7 @@ label_3EFB::
 label_3F11::
     ld   [$D368], a
     ld   [$FFBD], a
-    ld   a, [$C16B]
+    ld   a, [WR0_TransitionSequenceCounter]
     cp   $04
     ret  nz
     ld   a, [$FFEB]

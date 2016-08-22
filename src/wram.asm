@@ -1,4 +1,3 @@
-
 label_C000 equ $C000
 label_C008 equ $C008
 label_C010 equ $C010
@@ -19,7 +18,7 @@ label_C11A equ $C11A
 label_C11C equ $C11C
 label_C11D equ $C11D
 label_C11E equ $C11E
-label_C120 equ $C120
+label_C120 equ $C120 ; link animation state?
 label_C121 equ $C121
 label_C122 equ $C122
 label_C123 equ $C123
@@ -41,7 +40,7 @@ label_C13C equ $C13C
 label_C13D equ $C13D
 label_C140 equ $C140
 label_C142 equ $C142
-label_C144 equ $C144
+label_C144 equ $C144 ; Link sprite status (like is pushing something) ?
 label_C145 equ $C145
 label_C146 equ $C146
 label_C149 equ $C149
@@ -66,7 +65,7 @@ label_C164 equ $C164
 label_C165 equ $C165
 label_C167 equ $C167
 label_C16A equ $C16A
-label_C16B equ $C16B
+WR0_TransitionSequenceCounter equ $C16B ; ?
 label_C16C equ $C16C
 label_C16D equ $C16D
 label_C16F equ $C16F
@@ -178,8 +177,102 @@ label_D007 equ $D007
 label_D008 equ $D008
 label_D009 equ $D009
 ;label_D16A equ $D16A
-label_D368 equ $D368
+; Overworld Music Track
+; 00: No music
+; 01: Title music when zelda logo appears
+; 02: Trendy game/Witch hut
+; 03: Game Over screen
+; 04: Mabe Village
+; 05: Overworld music
+; 06: Tal Tal Heights
+; 07: Village Shop
+; 08: Raft Ride Rapids
+; 09: Mysterious Forest
+; 0A: Home/trader house
+; 0B: Animal Village
+; 0C: Fairy House
+; 0D: Title music
+; 0E: BowWow kidnapped music
+; 0F: Found level 2 sword
+; 10: Found new weapon
+; 11: 2D underground dungeon
+; 12: Owl song
+; 13: Final Knightmare in Egg song
+; 14: Dream Shrine Entrance music
+; 15: Found an instrument
+; 16: Overworld cave
+; 17: Piece of Power/Acorn
+; 18: Received horn instrument
+; 19: Received bell instrument
+; 1A: Received harp instrument
+; 1B: Received xylophone instrument
+; 1C: Received ?? instrument
+; 1D: Received ?? instrument
+; 1E: Received thunder drum instrument
+; 1F: Marin singing
+; 20: Manbo's Mambo fish song
+; 21: Received ?? instrument
+; 22: Instruments song ??
+; 23: Instruments song ??
+; 24: Instruments song ??
+; 25: Instruments song when opening Egg
+; 26: Instruments song when opening Egg part 2
+; 27: Instruments song ??
+; 28: Lonely/ghost house
+; 29: Piece of Power part 2
+; 2A: Marin singing + Links ocarina
+; 2B: Level 5
+; 2C: Dungeon entrance Unlocking
+; 2D: Dream sequence sound?
+; 2E: At beach with Marin song
+; 2F: Unknown
+; 30: Dungeon sub-boss music
+; 31: Received level 1 sword at beach
+; 32: Mr Write's house
+; 33: Ulrira's house
+; 34: Tarin attacked by Bee's
+; 35: Song of Soul by Mamu frogs
+; 36: Monkey's building bridge
+; 37: Mr Write's house version 2
+; 38: Richard House Secret Song
+; 39: Turtle Rock entrance boss
+; 3A: Fishing/crane game
+; 3B: Received item
+; 3C: Hidden/Unused song!?
+; 3D: Nothing
+; 3E: BowWow stolen music
+; 3F: Ending music
+; 40: Richard's House
+; 41: Glitched noise, possibly unfinished song or Sound effect
+; 42: Glitched noise, possibly unfinished song or Sound effect
+; 43: Glitched noise, possibly unfinished song or Sound effect
+; 44: Glitchy music
+; 45: Glitchy music
+; 46: Glitchy music
+; 47: Silence
+; 48: Silence
+; 49: Glitchy noise
+; 4A: Silence
+; 4B: Glitchy music
+; 4C: Glitchy music
+; 4D: - 4F Silence
+; 50: - 57 Silence
+; 58: Glitchy music
+; 59: Silence
+; 5A: Glitchy music
+; 5B: Silence
+; 5C: Silence
+; 5D: Glitchy music
+; 5E: Silence
+; 5F: Silence
+; 60: Silence
+; 61: - 69 Color dungeon (DX only)
+; 6A: - F9 Untested
+; F0: Glitched music
+; FF: Nothing
+WR1_OverworldMusic          equ $D368
 label_D401 equ $D401
+WR1_KillCount               equ $D415
 label_D416 equ $D416
 label_D45F equ $D45F
 label_D463 equ $D463
@@ -188,7 +281,7 @@ label_D473 equ $D473
 label_D474 equ $D474
 label_D478 equ $D478
 label_D47C equ $D47C
-label_D47E equ $D47E
+WR1_DidStealItem            equ $D47E
 label_D47F equ $D47F
 label_D580 equ $D580
 label_D600 equ $D600
@@ -204,41 +297,83 @@ label_D6FC equ $D6FC
 label_D6FD equ $D6FD
 label_D6FE equ $D6FE
 label_D6FF equ $D6FF
-;label_D711 equ $D711
-label_D800 equ $D800
-label_D806 equ $D806
-label_D80E equ $D80E
-label_D82B equ $D82B
-label_D879 equ $D879
-label_D88C equ $D88C
-label_D8C9 equ $D8C9
-label_D8FD equ $D8FD
+WR1_TileMap                 equ $D711
+; Minimap Tile
+; $D800 -> $D8FF
+; Values:
+;   0:     not discovered yet
+;   non-0: various statuses
+WR1_MinimapTiles            equ $D800
 label_D900 equ $D900
 label_DA00 equ $DA00
-label_DB00 equ $DB00
-label_DB01 equ $DB01
-label_DB0E equ $DB0E
-label_DB15 equ $DB15
-label_DB44 equ $DB44
-label_DB45 equ $DB45
-label_DB46 equ $DB46
-label_DB49 equ $DB49
-label_DB4B equ $DB4B
-label_DB4C equ $DB4C
-label_DB4D equ $DB4D
-label_DB4E equ $DB4E
-label_DB4F equ $DB4F
-label_DB56 equ $DB56
-label_DB5A equ $DB5A
-label_DB5F equ $DB5F
-label_DB6B equ $DB6B
-label_DB6E equ $DB6E
-label_DB6F equ $DB6F
-label_DB70 equ $DB70
-label_DB71 equ $DB71
-label_DB73 equ $DB73
-label_DB79 equ $DB79
-label_DB7B equ $DB7B
+WR1_AButtonSlot             equ $DB00
+WR1_BButtonSlot             equ $DB01
+WR1_InventoryItem1          equ $DB02
+WR1_InventoryItem2          equ $DB03
+WR1_InventoryItem3          equ $DB04
+WR1_InventoryItem4          equ $DB05
+WR1_InventoryItem5          equ $DB06
+WR1_InventoryItem6          equ $DB07
+WR1_InventoryItem7          equ $DB08
+WR1_InventoryItem8          equ $DB09
+WR1_InventoryItem9          equ $DB0A
+WR1_InventoryItem10         equ $DB0B
+WR1_HasFlippers             equ $DB0C
+WR1_HasMedicine             equ $DB0D
+; Trade Sequence items:
+; $00 Nothing
+; $01 Yoshi Doll
+; $02 Ribbon
+; $03 Dog Food
+; $04 Bananas
+; $05 Stick
+; $06 Honeycomb
+; $07 Pineapple
+; $08 Hibiscus
+; $09 Letter
+; $0A Broom
+; $0B Fishing Hook
+; $0C Necklace
+; $0D Scale
+; $0E Magnifying glass
+WR1_TradeSequenceItem       equ $DB0E
+WR1_SeashellsCount          equ $DB0F
+label_DB10 equ $DB10
+WR1_HasTailKey              equ $DB11
+WR1_HasAnglerKey            equ $DB12
+WR1_HasFaceKey              equ $DB13
+WR1_HasBirdKey              equ $DB14
+; Golden Leaves count
+; 0-5: number of Golden Leaves
+; 6  : Slime Key
+WR1_GoldenLeavesCount       equ $DB15
+WR1_ShieldLevel             equ $DB44
+WR1_ArrowCount              equ $DB45
+label_DB46                  equ $DB46
+label_DB49                  equ $DB49
+label_DB4B                  equ $DB4B
+label_DB4C                  equ $DB4C
+WR1_BombCount               equ $DB4D
+WR1_MarinAndTarinAtHome     equ $DB4E
+label_DB4F                  equ $DB4F
+WR1_IsBowWowFollowingLink   equ $DB56
+label_DB5A                  equ $DB5A
+label_DB5F                  equ $DB5F
+WR1_HasInstrument1          equ $DB65  ; 0: false, 2: true
+WR1_HasInstrument2          equ $DB66  ; 0: false, 2: true
+WR1_HasInstrument3          equ $DB67  ; 0: false, 2: true
+WR1_HasInstrument4          equ $DB68  ; 0: false, 2: true
+WR1_HasInstrument5          equ $DB69  ; 0: false, 2: true
+WR1_HasInstrument6          equ $DB6A  ; 0: false, 2: true
+WR1_HasInstrument7          equ $DB6B  ; 0: false, 2: true
+WR1_HasInstrument8          equ $DB6C  ; 0: false, 2: true
+label_DB6E                  equ $DB6E
+label_DB6F                  equ $DB6F
+label_DB70                  equ $DB70
+label_DB71                  equ $DB71
+WR1_IsMarinFollowingLink    equ $DB73
+WR1_IsGhostFollowingLink    equ $DB79
+WR1_IsRoosterFollowingLink  equ $DB7B
 WR1_GameplayType            equ $DB95 ; See `GAMEPLAY_*` constants for possible values
 WR1_ScreenTransitionCounter equ $DB96 ; Counter incremented during screen transitions
 WR1_BGPalette               equ $DB97
@@ -247,14 +382,27 @@ WR1_OBJ1Palette             equ $DB99
 WR1_WindowY                 equ $DB9A
 label_DB9D equ $DB9D
 label_DB9E equ $DB9E
-label_DBA5 equ $DBA5
+label_DBA5 equ $DBA5 ; current room?
+WR1_SaveSlot                equ $DBA6
 label_DBAE equ $DBAE
-label_DBAF equ $DBAF
+WR1_CurrentBank             equ $DBAF
 label_DBB6 equ $DBB6
 label_DBC7 equ $DBC7
+label_DBC8 equ $DBC8 ; link position after room transition?
 label_DBC9 equ $DBC9
-label_DC0C equ $DC0C
-label_DC0F equ $DC0F
+WR1_HasDungeonMap           equ $DBCC
+WR1_HasDungeonCompass       equ $DBCD
+WR1_HasDungeonStoneSlab     equ $DBCE
+WR1_HasDungeonBossKey       equ $DBCF
+; Photos 1-8 (bitfield)
+WR1_Photos1                 equ $DC0C
+; Photos 9-12 (bitfield)
+WR1_Photos2                 equ $DC0D
+; Tunic Type (GBC only)
+; 0: green
+; 1: red
+; 2: blue
+WR1_TunicType               equ $DC0F
 label_DC90 equ $DC90
 label_DC91 equ $DC91
 label_DCC0 equ $DCC0
@@ -271,19 +419,9 @@ label_DE03 equ $DE03
 label_DE04 equ $DE04
 label_DFFF equ $DFFF
 
-
-WR1_KillCount   equ $D415
-WR1_TileMap     equ $D711
-WR1_AButtonSlot equ $DB00
-WR1_BButtonSlot equ $DB01
-WR1_ShieldLevel equ $DB44
-WR1_ArrowCount  equ $DB45
-WR1_BombCount   equ $DB4D
-WR1_CurrentBank equ $DBAF
-
-WR1_RupeeCountHigh equ $DB5D
-WR1_RupeeCountLow  equ $DB5E
+WR1_RupeeCountHigh          equ $DB5D
+WR1_RupeeCountLow           equ $DB5E
 ; This appears to be the amount of rupees being added to your wallet
-WR1_AddRupeeBuffer equ $DB90 
-WR1_KillCount2 equ $DBB5
+WR1_AddRupeeBuffer          equ $DB90 
+WR1_KillCount2              equ $DBB5
 

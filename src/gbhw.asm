@@ -35,7 +35,6 @@ OAM_X_FLIP    EQU 5
 OAM_Y_FLIP    EQU 6
 OAM_PRIORITY  EQU 7 ; 0: OBJ above BG, 1: OBJ behind BG (colors 1-3)
 
-
 ; Hardware registers
 rJOYP       EQU $ff00 ; Joypad (R/W)
 rSB         EQU $ff01 ; Serial transfer data (R/W)

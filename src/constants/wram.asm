@@ -37,7 +37,7 @@ label_C139 equ $C139
 label_C13A equ $C13A
 label_C13B equ $C13B
 label_C13C equ $C13C
-label_C13D equ $C13D
+WR0_RandomSeed              equ $C13D
 label_C140 equ $C140
 label_C142 equ $C142
 label_C144 equ $C144 ; Link sprite status (like is pushing something) ?
@@ -375,7 +375,7 @@ WR1_IsMarinFollowingLink    equ $DB73
 WR1_IsGhostFollowingLink    equ $DB79
 WR1_IsRoosterFollowingLink  equ $DB7B
 WR1_GameplayType            equ $DB95 ; See `GAMEPLAY_*` constants for possible values
-WR1_ScreenTransitionCounter equ $DB96 ; Counter incremented during screen transitions
+WR1_GameplaySubtype         equ $DB96 ; Value depens on GameplayType: this can be a sequence index, or a frame counter.
 WR1_BGPalette               equ $DB97
 WR1_OBJ0Palette             equ $DB98
 WR1_OBJ1Palette             equ $DB99

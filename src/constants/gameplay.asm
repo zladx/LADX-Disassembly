@@ -1,7 +1,7 @@
 TILES_PER_ROW equ $0B
 TILES_PER_MAP equ $80
 
-; Possible values for WR1_GameplayType
+; Values for WR1_GameplayType
 GAMEPLAY_INTRO             equ $00
 GAMEPLAY_CREDITS           equ $01
 GAMEPLAY_FILE_SELECT       equ $02
@@ -29,3 +29,9 @@ GAMEPLAY_PHOTO_ZORA        equ $17
 GAMEPLAY_PHOTO_KANALET     equ $18
 GAMEPLAY_PHOTO_GHOST       equ $19
 GAMEPLAY_PHOTO_BRIDGE      equ $20
+
+; Values for WR1_GameplaySubtype
+; (depends on the gameplay type)
+; GAMEPLAY_INTRO
+GAMEPLAY_INTRO_SEA         equ $03
+GAMEPLAY_INTRO_LINK_FACE   equ $04

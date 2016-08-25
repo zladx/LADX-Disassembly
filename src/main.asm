@@ -4,11 +4,10 @@
 ; to split your code and data up into new objects in the makefile.
 
 
-include "constants.asm"
+include "constants/constants.asm"
 
 include "code/rst.asm"
 include "code/header.asm"
-include "wram.asm"
 
 SelectRomBank_2100 equ $2100
 
@@ -340,7 +339,7 @@ label_FFC0 equ $FFC0
 label_FFD7 equ $FFD7
 label_FFDA equ $FFDA
 ;label_FFE4 equ $FFE4
-label_FFE7 equ $FFE7
+label_FFE7 equ hFrameCounter
 label_FFED equ $FFED
 label_FFEE equ $FFEE
 label_FFF4 equ $FFF4
@@ -423,9 +422,9 @@ DidRenderFrame::
     and  a
     jr   z, label_1F2
     ld   a, [WR1_GameplayType]
-    cp   $0B
+    cp   GAMEPLAY_OVERWORLD
     jr   nz, label_1F2
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     rrca
     and  $80
     jr   label_1F8
@@ -454,13 +453,13 @@ label_200::
 
 label_213::
     ld   a, [WR1_GameplayType]
-    cp   $09
+    cp   GAMEPLAY_MARIN_BEACH
     jr   z, label_229
-    cp   $06
+    cp   GAMEPLAY_FILE_SAVE
     jr   c, label_229
-    cp   $0B
+    cp   GAMEPLAY_OVERWORLD
     jr   nz, label_22F
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $07
     jr   nc, label_22F
 
@@ -484,12 +483,13 @@ label_23D::
     and  $80
     or   e
     ld   [rLCDC], a
-    ld   hl, $FFE7
+    ld   hl, hFrameCounter
     inc  [hl]
     ld   a, [WR1_GameplayType]
-    cp   $00
-    jr   nz, label_264
-    ld   a, [$DB96]
+    cp   GAMEPLAY_INTRO 
+    jr   nz, label_264 ; if GameplayType != INTRO
+    ; GameplayType == INTRO
+    ld   a, [WR1_GameplaySubtype]
     cp   $08
     jr   c, label_264
     ld   a, $20
@@ -606,9 +606,10 @@ label_327::
 
 label_32D::
     ld   a, [WR1_GameplayType]
-    cp   $0C
+    cp   GAMEPLAY_INVENTORY
     jr   nz, label_33B
-    ld   a, [$DB96]
+    ; GameplayType == INVENTORY
+    ld   a, [WR1_GameplaySubtype]
     cp   $02
     jr   c, label_343
 
@@ -674,13 +675,13 @@ InterruptLCDStatus::
     xor  a           ; Load WRAM Bank 1 (as "0" fallbacks to loading bank 1)
     ld   [rSVBK], a  ; 
     ld   a, [WR1_GameplayType]       
-    cp   $01 ; if GameplayType != 1
+    cp   GAMEPLAY_CREDITS ; if GameplayType != GAMEPLAY_CREDITS
     jr   nz, skipScrollY
-    ; If GameplayType == 1
-    ld   a, [WR1_ScreenTransitionCounter]
-    cp   $05 ; if TransitionCounter != 5
+    ; GameplayType == CREDITS
+    ld   a, [WR1_GameplaySubtype]
+    cp   $05 ; if GameplaySubtype != 5
     jr   nz, setStandardScrollY
-    ; If TransitionCounter == 5
+    ; GameplaySubtype == 5
     ld   a, [$D000]  ; override scrollY with WRA1:$D000 value
     jr   setScrollY
 
@@ -695,7 +696,7 @@ setScrollY::
 skipScrollY::
     cp   GAMEPLAY_INTRO    ; if not during the introduction sequence
     jr   nz, clearScrollX  ;   skip
-    ; GameplayType == GAMEPLAY_INTRO
+    ; GameplayType == INTRO
     ; Apply differential scrolling to each section:
     ; load and apply the scrollX offset for the current screen section being drawn
     ld   a, [WR0_LCDSectionIndex]
@@ -707,8 +708,8 @@ skipScrollY::
     ld   hl, hBaseScrollX ; a = hBaseScrollX + [hl]
     add  a, [hl]
     ld   [rSCX], a        ; set scrollX
-    ld   a, [WR1_ScreenTransitionCounter] 
-    cp   $06  ; if TransitionCounter < 6 (intro sea)
+    ld   a, [WR1_GameplaySubtype] 
+    cp   $06  ; if GameplaySubtype < 6 (intro sea)
     jr   c, setupNextInterruptForIntroSea
     ; If TransitionCounter >= 6 (intro beach)
 setupNextInterruptForIntroBeach::
@@ -833,9 +834,10 @@ InterruptVBlank::
     push bc
     di
     ld   a, [WR1_GameplayType]
-    cp   $0D
+    cp   GAMEPLAY_PHOTO_ALBUM
     jr   nz, label_48D
-    ld   a, [$DB96]
+    ; GameplayType == PHOTO_ALBUM
+    ld   a, [WR1_GameplaySubtype]
     cp   $09
     jr   c, label_48D
     cp   $12
@@ -879,9 +881,9 @@ label_4C6::
 
 label_4CC::
     ld   a, [WR1_GameplayType]
-    cp   $0E
+    cp   GAMEPLAY_PHOTO_DIZZY_LINK
     jr   c, label_4E4
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $06
     jr   c, label_52B
     ld   a, $38
@@ -929,7 +931,7 @@ label_509::
 
 label_521::
     ld   a, [WR1_GameplayType]
-    cp   $0D
+    cp   GAMEPLAY_PHOTO_ALBUM
     jr   z, label_52B
     call label_1B0D
 
@@ -1463,7 +1465,7 @@ label_8A4::
     jr   z, label_8C6
     cp   $02
     jr   nz, label_8C3
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $01
     jr   nz, label_8D6
     jr   label_8C6
@@ -1921,7 +1923,7 @@ label_B80::
     call label_B96
     pop  hl
     ld   a, [WR1_GameplayType]
-    cp   $0D
+    cp   GAMEPLAY_PHOTO_ALBUM
     jr   nz, label_B90
     call label_BB5
 
@@ -2388,12 +2390,12 @@ label_E31::
 
 ExecuteGameplayHandler::
     ld   a, [WR1_GameplayType]
-    cp   $07 ; If GameplayType < 07
+    cp   GAMEPLAY_MINI_MAP ; If GameplayType < MINI_MAP
     jr   c, jumpToGameplayHandler
     cp   GAMEPLAY_OVERWORLD ; If GameplayType != Overworld
     jr   nz, presentSaveScreenIfNeeded
-    ; If GameplayType == Overworld
-    ld   a, [$DB96]
+    ; If GameplayType == OVERWORLD
+    ld   a, [WR1_GameplaySubtype]
     cp   $07
     jr   nz, jumpToGameplayHandler
 
@@ -2409,9 +2411,9 @@ presentSaveScreenIfNeeded::
     or   [hl]
     jr   nz, jumpToGameplayHandler
     ld   a, [WR1_GameplayType]
-    cp   $0C ; If GameplayType > $0C
+    cp   GAMEPLAY_INVENTORY ; If GameplayType > INVENTORY (i.e. photo album and pictures)
     jr   nc, jumpToGameplayHandler
-    ; If GameplayType < $0C
+    ; If GameplayType < INVENTORY
     ld   a, [hPressedButtonsMask]
     cp   $F0 ; If hPressedButtonsMask != A+B+Start+Select
     jr   nz, jumpToGameplayHandler
@@ -2427,7 +2429,7 @@ presentSaveScreenIfNeeded::
     ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [$C19F], a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, GAMEPLAY_FILE_SAVE
     ld   [WR1_GameplayType], a
 
@@ -2632,7 +2634,7 @@ label_F97::
     call SwitchBank
     call label_5487
     ld   hl, $D601
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $03
     or   [hl]
     jr   nz, label_1012
@@ -2644,7 +2646,7 @@ label_F97::
 
 label_1000::
     ld   e, $00
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $04
 
 label_1006::
@@ -2761,10 +2763,10 @@ label_107F::
     xor  a
     ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   a, $07
     ld   [WR1_GameplayType], a
-    ld   a, $02
+    ld   a, GAMEPLAY_FILE_SELECT
     ld   [SelectRomBank_2100], a
     call label_755B
     call label_1D2E
@@ -3427,7 +3429,7 @@ label_1535::
     xor  a
     ld   [$C160], a
     ld   [$C1AC], a
-    call label_280D
+    call GetRandomByte
     and  $03
     ld   e, a
     ld   d, $00
@@ -3623,13 +3625,13 @@ label_1653::
     call label_3942
 
 label_167C::
-    call label_280D
+    call GetRandomByte
     and  $07
     ret  nz
     ld   a, [$FFAF]
     cp   $D3
     ret  z
-    call label_280D
+    call GetRandomByte
     rra
     ld   a, $2E
     jr   nc, label_1691
@@ -3759,7 +3761,7 @@ label_1713::
     ret
 
 label_1756::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $07
     ld   hl, $FFA2
     or   [hl]
@@ -3815,7 +3817,7 @@ label_1794::
     ld   a, [$C122]
     cp   $28
     jr   c, label_17C6
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     rla
     rla
     and  $10
@@ -3930,10 +3932,10 @@ label_186C::
 label_1898::
     ld   a, [$FFF9]
     ld   [$FFE4], a
-    ld   a, $0B
+    ld   a, GAMEPLAY_OVERWORLD
     ld   [WR1_GameplayType], a
     xor  a
-    ld   [$DB96], a
+    ld   [WR1_GameplaySubtype], a
     ld   [$C3CB], a
     ld   [$FFF9], a
     ld   hl, $D401
@@ -4299,7 +4301,7 @@ label_1ACC::
     ld   [SelectRomBank_2100], a
     ld   hl, $6500
     ld   de, $9500
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $0F
     jr   z, label_1AEB
     cp   $08
@@ -4308,7 +4310,7 @@ label_1ACC::
     ld   e, l
 
 label_1AEB::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $30
     ld   c, a
     ld   b, $00
@@ -4336,7 +4338,7 @@ label_1B0D::
     ld   a, [$D601]
     and  a
     jp   nz, label_1B45
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $0F
     cp   $04
     jr   c, label_1B45
@@ -5575,7 +5577,7 @@ label_2321::
     ret  z
     ld   e, a
     ld   a, [WR1_GameplayType]
-    cp   $01
+    cp   GAMEPLAY_CREDITS
     ld   a, $7E
     jr   nz, label_2332
     ld   a, $7F
@@ -5812,7 +5814,7 @@ label_2496::
     xor  a
     ld   [$C16F], a
     ld   a, [WR1_GameplayType]
-    cp   $0D
+    cp   GAMEPLAY_PHOTO_ALBUM
     jr   nz, label_24A4
     xor  a
     jr   label_24AB
@@ -6159,7 +6161,7 @@ label_26B6::
     ld   a, $1C
     ld   [SelectRomBank_2100], a
     ld   a, [WR1_GameplayType]
-    cp   $07
+    cp   GAMEPLAY_MINI_MAP
     jp   z, label_278B
     ld   a, [$C173]
     ld   e, a
@@ -6310,7 +6312,7 @@ label_278B::
     ld   [$FFF2], a
 
 label_27AA::
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     and  $10
     ret  z
     ld   a, $17
@@ -6377,15 +6379,16 @@ label_2802::
     call label_5E67
     jp   ReloadSavedBank
 
-label_280D::
+; Return a random number in `a`
+GetRandomByte::
     push hl
-    ld   a, [$FFE7]
-    ld   hl, $C13D
+    ld   a, [hFrameCounter]
+    ld   hl, WR0_RandomSeed
     add  a, [hl]
     ld   hl, rLY
     add  a, [hl]
     rrca
-    ld   [$C13D], a
+    ld   [WR0_RandomSeed], a ; WR0_RandomSeed += FrameCounter + rrca(rLY)
     pop  hl
     ret
 
@@ -6394,9 +6397,9 @@ label_281E::
     and  a
     jr   nz, label_2886
     ld   a, [WR1_GameplayType]
-    cp   $0B
+    cp   GAMEPLAY_OVERWORLD
     jr   nz, label_2852
-    ld   a, [$DB96]
+    ld   a, [WR1_GameplaySubtype]
     cp   $07
     jr   nz, label_284C
     ld   a, [$C11C]
@@ -9051,7 +9054,7 @@ label_39AE::
     ld   [$C3C1], a
     ld   a, [$FFF7]
     cp   $0A
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     jr   c, label_39C1
     xor  a
 
@@ -9507,7 +9510,7 @@ label_3C9C::
     and  a
     jr   z, label_3CD0
     ld   a, [WR1_GameplayType]
-    cp   $01
+    cp   GAMEPLAY_CREDITS
     jr   z, label_3CD0
     ld   a, [$FFED]
     and  a
@@ -9819,7 +9822,7 @@ label_3E8E::
     ld   a, [hl]
     and  a
     ret  z
-    ld   a, [$FFE7]
+    ld   a, [hFrameCounter]
     xor  c
     and  $03
     ret  nz
@@ -10034,42 +10037,42 @@ label_3FD9::
     ret
 
 section "bank1",romx,bank[$01]
-;incbin "bank-bins/bank_01_4000.bin"
+;incbin "../bin/banks/bank_01_4000.bin"
 include "bank1.asm"
 
 section "bank2",romx,bank[$02]
-incbin "bank-bins/bank_02_8000.bin"
+incbin "../bin/banks/bank_02_8000.bin"
 
 section "bank3",romx,bank[$03]
-;incbin "bank-bins/bank_03_C000.bin"
+;incbin "../bin/banks/bank_03_C000.bin"
 include "bank3.asm"
 
 section "bank4",romx,bank[$04]
-incbin "bank-bins/bank_04_10000.bin"
+incbin "../bin/banks/bank_04_10000.bin"
 
 section "bank5",romx,bank[$05]
-incbin "bank-bins/bank_05_14000.bin"
+incbin "../bin/banks/bank_05_14000.bin"
 
 section "bank6",romx,bank[$06]
-incbin "bank-bins/bank_06_18000.bin"
+incbin "../bin/banks/bank_06_18000.bin"
 
 section "bank7",romx,bank[$07]
-incbin "bank-bins/bank_07_1C000.bin"
+incbin "../bin/banks/bank_07_1C000.bin"
 
 section "bank8",romx,bank[$08]
-incbin "bank-bins/bank_08_20000.bin"
+incbin "../bin/banks/bank_08_20000.bin"
 
 section "bank9",romx,bank[$09]
-incbin "bank-bins/bank_09_24000.bin"
+incbin "../bin/banks/bank_09_24000.bin"
 
 section "bank10",romx,bank[$0A]
-incbin "bank-bins/bank_0A_28000.bin"
+incbin "../bin/banks/bank_0A_28000.bin"
 
 section "bank11",romx,bank[$0B]
-incbin "bank-bins/bank_0B_2C000.bin"
+incbin "../bin/banks/bank_0B_2C000.bin"
 
 section "bank12",romx,bank[$0C]
-;incbin "bank-bins/bank_0C_30000.bin"
+;incbin "../bin/banks/bank_0C_30000.bin"
 
 data_bank_c_0000:: incbin "data/Bank_0xC_0x0000"
 data_bank_c_0400:: incbin "data/Bank_0xC_0x0400"
@@ -10077,154 +10080,154 @@ data_bank_c_07A0:: incbin "data/Bank_0xC_0x07A0"
 data_bank_c_07C0:: incbin "data/Bank_0xC_0x07C0"
 data_bank_c_0800:: incbin "data/Bank_0xC_0x0800"
 
-data_bank_c_1800:: incbin "bank-bins/bank_0C_30000.bin", $1800, $2800
+data_bank_c_1800:: incbin "../bin/banks/bank_0C_30000.bin", $1800, $2800
 
 section "bank13",romx,bank[$0D]
-incbin "bank-bins/bank_0D_34000.bin"
+incbin "../bin/banks/bank_0D_34000.bin"
 
 section "bank14",romx,bank[$0E]
-incbin "bank-bins/bank_0E_38000.bin"
+incbin "../bin/banks/bank_0E_38000.bin"
 
 section "bank15",romx,bank[$0F]
-incbin "bank-bins/bank_0F_3C000.bin"
+incbin "../bin/banks/bank_0F_3C000.bin"
 
 section "bank16",romx,bank[$10]
-incbin "bank-bins/bank_10_40000.bin"
+incbin "../bin/banks/bank_10_40000.bin"
 
 section "bank17",romx,bank[$11]
-incbin "bank-bins/bank_11_44000.bin"
+incbin "../bin/banks/bank_11_44000.bin"
 
 section "bank18",romx,bank[$12]
-incbin "bank-bins/bank_12_48000.bin"
+incbin "../bin/banks/bank_12_48000.bin"
 
 section "bank19",romx,bank[$13]
-incbin "bank-bins/bank_13_4C000.bin"
+incbin "../bin/banks/bank_13_4C000.bin"
 
 section "bank20",romx,bank[$14]
-incbin "bank-bins/bank_14_50000.bin"
+incbin "../bin/banks/bank_14_50000.bin"
 
 section "bank21",romx,bank[$15]
-incbin "bank-bins/bank_15_54000.bin"
+incbin "../bin/banks/bank_15_54000.bin"
 
 section "bank22",romx,bank[$16]
-incbin "bank-bins/bank_16_58000.bin"
+incbin "../bin/banks/bank_16_58000.bin"
 
 section "bank23",romx,bank[$17]
-incbin "bank-bins/bank_17_5C000.bin"
+incbin "../bin/banks/bank_17_5C000.bin"
 
 section "bank24",romx,bank[$18]
-incbin "bank-bins/bank_18_60000.bin"
+incbin "../bin/banks/bank_18_60000.bin"
 
 section "bank25",romx,bank[$19]
-incbin "bank-bins/bank_19_64000.bin"
+incbin "../bin/banks/bank_19_64000.bin"
 
 section "bank26",romx,bank[$1A]
-incbin "bank-bins/bank_1A_68000.bin"
+incbin "../bin/banks/bank_1A_68000.bin"
 
 section "bank27",romx,bank[$1B]
-incbin "bank-bins/bank_1B_6C000.bin"
+incbin "../bin/banks/bank_1B_6C000.bin"
 
 section "bank28",romx,bank[$1C]
-incbin "bank-bins/bank_1C_70000.bin"
+incbin "../bin/banks/bank_1C_70000.bin"
 
 section "bank29",romx,bank[$1D]
-incbin "bank-bins/bank_1D_74000.bin"
+incbin "../bin/banks/bank_1D_74000.bin"
 
 section "bank30",romx,bank[$1E]
-incbin "bank-bins/bank_1E_78000.bin"
+incbin "../bin/banks/bank_1E_78000.bin"
 
 section "bank31",romx,bank[$1F]
-incbin "bank-bins/bank_1F_7C000.bin"
+incbin "../bin/banks/bank_1F_7C000.bin"
 
 section "bank32",romx,bank[$20]
-incbin "bank-bins/bank_20_80000.bin"
+incbin "../bin/banks/bank_20_80000.bin"
 
 section "bank33",romx,bank[$21]
-incbin "bank-bins/bank_21_84000.bin"
+incbin "../bin/banks/bank_21_84000.bin"
 
 section "bank34",romx,bank[$22]
-incbin "bank-bins/bank_22_88000.bin"
+incbin "../bin/banks/bank_22_88000.bin"
 
 section "bank35",romx,bank[$23]
-incbin "bank-bins/bank_23_8C000.bin"
+incbin "../bin/banks/bank_23_8C000.bin"
 
 section "bank36",romx,bank[$24]
-incbin "bank-bins/bank_24_90000.bin"
+incbin "../bin/banks/bank_24_90000.bin"
 
 section "bank37",romx,bank[$25]
-incbin "bank-bins/bank_25_94000.bin"
+incbin "../bin/banks/bank_25_94000.bin"
 
 section "bank38",romx,bank[$26]
-incbin "bank-bins/bank_26_98000.bin"
+incbin "../bin/banks/bank_26_98000.bin"
 
 section "bank39",romx,bank[$27]
-incbin "bank-bins/bank_27_9C000.bin"
+incbin "../bin/banks/bank_27_9C000.bin"
 
 section "bank40",romx,bank[$28]
-incbin "bank-bins/bank_28_A0000.bin"
+incbin "../bin/banks/bank_28_A0000.bin"
 
 section "bank41",romx,bank[$29]
-incbin "bank-bins/bank_29_A4000.bin"
+incbin "../bin/banks/bank_29_A4000.bin"
 
 section "bank42",romx,bank[$2A]
-incbin "bank-bins/bank_2A_A8000.bin"
+incbin "../bin/banks/bank_2A_A8000.bin"
 
 section "bank43",romx,bank[$2B]
-incbin "bank-bins/bank_2B_AC000.bin"
+incbin "../bin/banks/bank_2B_AC000.bin"
 
 section "bank44",romx,bank[$2C]
-incbin "bank-bins/bank_2C_B0000.bin"
+incbin "../bin/banks/bank_2C_B0000.bin"
 
 section "bank45",romx,bank[$2D]
-incbin "bank-bins/bank_2D_B4000.bin"
+incbin "../bin/banks/bank_2D_B4000.bin"
 
 section "bank46",romx,bank[$2E]
-incbin "bank-bins/bank_2E_B8000.bin"
+incbin "../bin/banks/bank_2E_B8000.bin"
 
 section "bank47",romx,bank[$2F]
-incbin "bank-bins/bank_2F_BC000.bin"
+incbin "../bin/banks/bank_2F_BC000.bin"
 
 section "bank48",romx,bank[$30]
-incbin "bank-bins/bank_30_C0000.bin"
+incbin "../bin/banks/bank_30_C0000.bin"
 
 section "bank49",romx,bank[$31]
-incbin "bank-bins/bank_31_C4000.bin"
+incbin "../bin/banks/bank_31_C4000.bin"
 
 section "bank50",romx,bank[$32]
-incbin "bank-bins/bank_32_C8000.bin"
+incbin "../bin/banks/bank_32_C8000.bin"
 
 section "bank51",romx,bank[$33]
-incbin "bank-bins/bank_33_CC000.bin"
+incbin "../bin/banks/bank_33_CC000.bin"
 
 section "bank52",romx,bank[$34]
-incbin "bank-bins/bank_34_D0000.bin"
+incbin "../bin/banks/bank_34_D0000.bin"
 
 section "bank53",romx,bank[$35]
-incbin "bank-bins/bank_35_D4000.bin"
+incbin "../bin/banks/bank_35_D4000.bin"
 
 section "bank54",romx,bank[$36]
-incbin "bank-bins/bank_36_D8000.bin"
+incbin "../bin/banks/bank_36_D8000.bin"
 
 section "bank55",romx,bank[$37]
-incbin "bank-bins/bank_37_DC000.bin"
+incbin "../bin/banks/bank_37_DC000.bin"
 
 section "bank56",romx,bank[$38]
-incbin "bank-bins/bank_38_E0000.bin"
+incbin "../bin/banks/bank_38_E0000.bin"
 
 section "bank57",romx,bank[$39]
-incbin "bank-bins/bank_39_E4000.bin"
+incbin "../bin/banks/bank_39_E4000.bin"
 
 section "bank58",romx,bank[$3A]
-incbin "bank-bins/bank_3A_E8000.bin"
+incbin "../bin/banks/bank_3A_E8000.bin"
 
 section "bank59",romx,bank[$3B]
-incbin "bank-bins/bank_3B_EC000.bin"
+incbin "../bin/banks/bank_3B_EC000.bin"
 
 section "bank60",romx,bank[$3C]
-incbin "bank-bins/bank_3C_F0000.bin"
+incbin "../bin/banks/bank_3C_F0000.bin"
 
 section "bank61",romx,bank[$3D]
-incbin "bank-bins/bank_3D_F4000.bin"
+incbin "../bin/banks/bank_3D_F4000.bin"
 
 
 ; Unused banks; make blank sections so they are filled with $00 instead of $ff to match

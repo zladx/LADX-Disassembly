@@ -829,85 +829,85 @@ label_4552::
     ld   [$D47B], a
 
 label_4555::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A454]
     ld   [$DB80], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A455]
     ld   [$DB81], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A456]
     ld   [$DB82], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A457]
     ld   [$DB83], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A458]
     ld   [$DB84], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A45F]
     ld   [$DC06], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A460]
     ld   [$DC09], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A45C]
     ld   [$DC00], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A45D]
     ld   [$DC01], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A801]
     ld   [$DB85], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A802]
     ld   [$DB86], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A803]
     ld   [$DB87], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A804]
     ld   [$DB88], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A805]
     ld   [$DB89], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A80C]
     ld   [$DC07], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A80D]
     ld   [$DC0A], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A809]
     ld   [$DC02], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$A80A]
     ld   [$DC03], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$ABAE]
     ld   [$DB8A], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$ABAF]
     ld   [$DB8B], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$ABB0]
     ld   [$DB8C], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$ABB1]
     ld   [$DB8D], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$ABB2]
     ld   [$DB8E], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$ABB9]
     ld   [$DC08], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$ABBA]
     ld   [$DC0B], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$ABB6]
     ld   [$DC04], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$ABB7]
     ld   [$DC05], a
     ld   a, GAMEPLAY_FILE_SELECT
@@ -1052,7 +1052,7 @@ label_4794::
     add  hl, de
 
 label_479C::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [hli]
     cp   c
     jr   nz, label_47AA
@@ -1069,7 +1069,7 @@ label_47AA::
     ld   de, label_3A8
 
 label_47B2::
-    call label_27D0
+    call EnableExternalRAMWriting
     xor  a
     ldi  [hl], a
     dec  de
@@ -1082,7 +1082,7 @@ label_47B2::
     ld   a, $01
 
 label_47C3::
-    call label_27D0
+    call EnableExternalRAMWriting
     ldi  [hl], a
     inc  a
     inc  a
@@ -1498,7 +1498,7 @@ label_4A07::
 label_4A3F::
     push hl
     add  hl, bc
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   [hl], a
     pop  hl
     ret
@@ -1507,7 +1507,7 @@ label_4A3F::
     push hl
 
 label_4A4D::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     ldi  [hl], a
     inc  bc
@@ -1607,7 +1607,7 @@ label_4AFE::
     ld   e, $05
 
 label_4B05::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [hli]
     ld   [bc], a
     inc  bc
@@ -2202,7 +2202,7 @@ label_4E67::
     ld   de, label_3A8
 
 label_4E91::
-    call label_27D0
+    call EnableExternalRAMWriting
     xor  a
     ldi  [hl], a
     dec  de
@@ -2784,10 +2784,10 @@ label_51CE::
     ld   de, label_3AD
 
 label_5224::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
-    call label_27D0
+    call EnableExternalRAMWriting
     ldi  [hl], a
     dec  de
     ld   a, e
@@ -2895,7 +2895,7 @@ label_52C7::
     ld   de, data_380
 
 label_52D9::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
     ldi  [hl], a
@@ -2907,7 +2907,7 @@ label_52D9::
     ld   de, $0005
 
 label_52EA::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
     ldi  [hl], a
@@ -2919,7 +2919,7 @@ label_52EA::
     ld   de, $0020
 
 label_52FB::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
     ldi  [hl], a
@@ -2927,15 +2927,15 @@ label_52FB::
     ld   a, e
     or   d
     jr   nz, label_52FB
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     ld   [$DC0F], a
     inc  bc
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     ld   [$DC0C], a
     inc  bc
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     ld   [$DC0D], a
 
@@ -4527,10 +4527,10 @@ label_5DFA::
     ld   de, data_380
 
 label_5E12::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
-    call label_27D0
+    call EnableExternalRAMWriting
     ldi  [hl], a
     dec  de
     ld   a, e
@@ -4540,10 +4540,10 @@ label_5E12::
     ld   de, $0005
 
 label_5E26::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
-    call label_27D0
+    call EnableExternalRAMWriting
     ldi  [hl], a
     dec  de
     ld   a, e
@@ -4553,26 +4553,26 @@ label_5E26::
     ld   de, $0020
 
 label_5E3A::
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
-    call label_27D0
+    call EnableExternalRAMWriting
     ldi  [hl], a
     dec  de
     ld   a, e
     or   d
     jr   nz, label_5E3A
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$DC0F]
-    call label_27D0
+    call EnableExternalRAMWriting
     ldi  [hl], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$DC0C]
-    call label_27D0
+    call EnableExternalRAMWriting
     ldi  [hl], a
-    call label_27D0
+    call EnableExternalRAMWriting
     ld   a, [$DC0D]
-    call label_27D0
+    call EnableExternalRAMWriting
     ldi  [hl], a
     ret
     push bc

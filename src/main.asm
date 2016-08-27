@@ -6338,12 +6338,12 @@ label_27C3::
     ld   [$FFA8], a
     ret
 
-label_27D0::
+EnableExternalRAMWriting::
     push hl
     ld   hl, $4000
-    ld   [hl], $00
+    ld   [hl], $00 ; Switch to RAM bank 0
     ld   hl, $0000
-    ld   [hl], $0A
+    ld   [hl], $0A ; Enable external RAM writing
     pop  hl
     ret
 

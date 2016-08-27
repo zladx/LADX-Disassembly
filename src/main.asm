@@ -1511,7 +1511,7 @@ label_8FA::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6BDC
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_905::
     ld   a, $20
@@ -1587,7 +1587,8 @@ label_92F::
     xor  a
     ldi  [hl], a
 
-label_973::
+; Restore bank saved on stack and return
+RestoreStackedBankAndReturn::
     pop  af
     ld   [SelectRomBank_2100], a
     ret
@@ -1597,7 +1598,7 @@ label_978::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6D0E
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_983::
     ld   a, $1A
@@ -1640,42 +1641,42 @@ label_999::
     ldi  [hl], a
     xor  a
     ldi  [hl], a
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_9C8::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4985
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_9D3::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4518
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_9DE::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4874
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_9E9::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4954
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_9F5::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_482D
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A01::
     push hl
@@ -1719,63 +1720,63 @@ label_A32::
     ld   de, $DCC0
     ld   bc, $0020
     call CopyData
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A47::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_505F
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A53::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_4F9B
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A5F::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_3CE6
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A6B::
     push af
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_5A2E
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A77::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_4F68
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A83::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6D52
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A8F::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_4BE8
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A9B::
     push af
     ld   a, $0F
     call SwitchBank
     call label_2321
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_AA7::
     push af
@@ -1802,35 +1803,35 @@ label_AC6::
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_703E
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_AD2::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_70D6
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_ADE::
     push af
     ld   a, $36
     call SwitchBank
     call label_4A77
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_AEA::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_4A4C
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_AF6::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_7161
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_B02::
     ld   a, $3D
@@ -1962,7 +1963,7 @@ label_BB5::
     jp   CopyData
     push af
     call label_2BCF
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
     ld   a, [$D16A]
     ld   [SelectRomBank_2100], a
 

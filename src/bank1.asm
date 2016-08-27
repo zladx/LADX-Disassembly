@@ -4030,7 +4030,7 @@ label_5AA0::
     ld   a, [hl]
     and  $FF
     jr   nz, label_5AF5
-    ld   a, [$C17B]
+    ld   a, [WR0_DebugMode]
     and  a
     jr   nz, label_5AF5
     ld   a, $09
@@ -5160,7 +5160,7 @@ label_61E9::
     ld   a, [$C11C]
     cp   $00
     jr   nz, label_6202
-    ld   a, [$C17B]
+    ld   a, [WR0_DebugMode]
     and  a
     jr   nz, label_6202
     ld   a, [$FFF7]

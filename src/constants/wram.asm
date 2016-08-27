@@ -76,7 +76,7 @@ label_C173 equ $C173
 label_C175 equ $C175
 label_C176 equ $C176
 label_C177 equ $C177
-label_C17B equ $C17B
+WR0_DebugMode               equ $C17B ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
 label_C17F equ $C17F
 label_C180 equ $C180
 label_C181 equ $C181

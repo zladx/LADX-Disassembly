@@ -594,9 +594,9 @@ label_30D::
     xor  $01
     ld   [$D6FC], a
     jr   nz, WaitForNextFrame
-    ld   a, [$C17B]
+    ld   a, [WR0_DebugMode]
     xor  $10
-    ld   [$C17B], a
+    ld   [WR0_DebugMode], a
     jr   WaitForNextFrame
 
 label_327::

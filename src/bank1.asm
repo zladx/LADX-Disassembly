@@ -82,7 +82,7 @@ label_4072::
     ld   a, $FF
     ld   [$DB9A], a
     xor  a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
@@ -120,11 +120,11 @@ label_40A9::
 label_40D5::
     ret
     xor  a
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     ld   [$DB99], a
     ld   [rOBP0], a
     ld   [rOBP1], a
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   [rBGP], a
     ld   a, [$FF98]
     ld   [$DB9D], a
@@ -285,7 +285,7 @@ label_41B4::
 
 label_41BB::
     xor  a
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   [rBGP], a
     ret
 
@@ -387,8 +387,8 @@ label_4259::
     ld   a, $01
     ld   [$C3CB], a
     ld   a, $1C
-    ld   [$DB98], a
-    ld   a, [$DB97]
+    ld   [WR1_OBJ0Palette], a
+    ld   a, [WR1_BGPalette]
     ld   [$DB99], a
     ld   e, $08
     call label_8D7
@@ -400,13 +400,13 @@ label_4259::
     inc  [hl]
     ret
     ld   a, $E4
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   a, $0A
     ld   [$D6FF], a
     ld   a, $FF
     ld   [$DB9A], a
     xor  a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$FF97], a
     ld   hl, $FF9C
     inc  [hl]
@@ -458,11 +458,11 @@ label_42FB::
     ldi  [hl], a
     dec  e
     jr   nz, label_42FB
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     ld   [$DB99], a
     ld   [rOBP0], a
     ld   [rOBP1], a
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   [rBGP], a
     ld   [$D6FB], a
     ld   [$D475], a
@@ -808,9 +808,9 @@ label_44F5::
     and  a
     jr   z, label_4548
     ld   a, [$C5AD]
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   a, $1C
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     ld   a, $E4
     ld   [$DB99], a
     ld   a, [hIsGBC]
@@ -916,10 +916,10 @@ label_4555::
     ld   [WR1_GameplaySubtype], a
     xor  a
     ld   [$FF97], a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   a, $00
-    ld   [$DB97], a
-    ld   [$DB98], a
+    ld   [WR1_BGPalette], a
+    ld   [WR1_OBJ0Palette], a
     ld   [$DB99], a
     ld   a, $01
     call label_8FA
@@ -1260,9 +1260,9 @@ label_48C2::
 label_48CC::
     ld   [$D6FF], a
     ld   a, $E4
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   a, $1C
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     ld   a, $E4
     ld   [$DB99], a
     call label_905
@@ -1423,8 +1423,8 @@ label_49BE::
 label_49C3::
     call label_49BE
     ld   a, $00
-    ld   [$DB97], a
-    ld   [$DB98], a
+    ld   [WR1_BGPalette], a
+    ld   [WR1_OBJ0Palette], a
     ld   [$DB99], a
     ld   a, $01
     call label_8FA
@@ -3578,7 +3578,7 @@ label_5678::
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$C1BF], a
     ld   [$FF97], a
     ld   [$C14F], a
@@ -3835,7 +3835,7 @@ label_5854::
     xor  a
     ld   [$C50A], a
     ld   [$C116], a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$FF97], a
     ld   [$C167], a
     ld   a, $07
@@ -5102,14 +5102,14 @@ label_6162::
     xor  a
     ld   [WR1_GameplayType], a
     ld   [WR1_GameplaySubtype], a
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     ld   [$DB99], a
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   [rBGP], a
     ld   [rOBP0], a
     ld   [rOBP1], a
     ld   [$FF97], a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$D6FB], a
     ld   [$D6F8], a
     ld   a, $18
@@ -5233,7 +5233,7 @@ label_6281::
     ld   a, $FF
     ld   [$DB9A], a
     xor  a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$C16B], a
     ld   [$C16C], a
     ld   a, $90
@@ -5385,12 +5385,12 @@ label_63F8::
     ld   hl, label_63AA
     add  hl, de
     ld   a, [hl]
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   [$DB99], a
     ld   hl, label_63BA
     add  hl, de
     ld   a, [hl]
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
 
 label_6417::
     ld   a, [hFrameCounter]
@@ -6039,7 +6039,7 @@ label_6885::
     ld   a, $FF
     ld   [$DB9A], a
     xor  a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
@@ -6404,7 +6404,7 @@ label_6B51::
     ld   a, $FF
     ld   [$DB9A], a
     xor  a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
@@ -6792,7 +6792,7 @@ label_6E28::
     and  a
     jr   nz, label_6E57
     ld   a, [label_789B]
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     ld   a, [label_789F]
     ld   [$DB99], a
     ld   a, $04
@@ -6816,7 +6816,7 @@ label_6E62::
     ld   [$C283], a
     ld   [$C284], a
     ld   [rBGP], a
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   a, $10
     ld   [$C17E], a
     call label_739D
@@ -6830,10 +6830,10 @@ label_6E94::
     jp   label_4552
     xor  a
     ld   [WR1_GameplaySubtype], a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$FF97], a
     ld   [rBGP], a
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   hl, WR1_GameplayType
     inc  [hl]
 
@@ -6927,7 +6927,7 @@ label_6F42::
 label_6F44::
     ld   [$D6FF], a
     ld   a, $1C
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     ld   a, $E0
     ld   [$DB99], a
     ld   a, $03
@@ -6999,11 +6999,11 @@ label_6F9C::
     ld   hl, label_6F93
     add  hl, de
     ld   a, [hl]
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   hl, label_6F9C
     add  hl, de
     ld   a, [hl]
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     call label_8D7
     ld   a, e
     cp   $08
@@ -7022,8 +7022,8 @@ label_6F9C::
     ld   a, $FF
     ld   [$D001], a
     xor  a
-    ld   [$FF96], a
-    ld   [$C100], a
+    ld   [hBaseScrollX], a
+    ld   [WR0_ScrollXOffsetForSection], a
     ld   [$C102], a
     ld   [$C103], a
     ld   a, $92
@@ -7047,7 +7047,7 @@ label_7014::
     ld   a, $01
     ld   [rIE], a
     xor  a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ret
 
 label_7031::
@@ -7055,7 +7055,7 @@ label_7031::
     ld   a, [hFrameCounter]
     and  $07
     jp   nz, label_70B1
-    ld   hl, $FF96
+    ld   hl, hBaseScrollX
     inc  [hl]
     ld   hl, $C200
     dec  [hl]
@@ -7064,7 +7064,7 @@ label_7031::
     inc  hl
     dec  [hl]
     ld   c, $00
-    ld   a, [$FF96]
+    ld   a, [hBaseScrollX]
     cp   $10
     jr   z, label_7068
     inc  c
@@ -7266,11 +7266,11 @@ label_719B::
     ld   hl, label_7128
     add  hl, de
     ld   a, [hl]
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   hl, label_7138
     add  hl, de
     ld   a, [hl]
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     ld   hl, label_7148
     add  hl, de
     ld   a, [hl]
@@ -7694,11 +7694,11 @@ label_7447::
     ld   a, $0B
     ld   [WR1_GameplaySubtype], a
     ld   a, $C9
-    ld   [$DB97], a
+    ld   [WR1_BGPalette], a
     ld   a, $1C
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     xor  a
-    ld   [$FF96], a
+    ld   [hBaseScrollX], a
     ld   [$FF97], a
     dec  a
     ld   [$D018], a
@@ -8047,7 +8047,7 @@ label_76D4::
     ld   a, [hFrameCounter]
     and  $01
     jr   nz, label_7707
-    ld   hl, $FF96
+    ld   hl, hBaseScrollX
     inc  [hl]
     ld   a, [hl]
     cp   $30
@@ -8087,7 +8087,7 @@ label_7707::
     ld   a, [hFrameCounter]
     and  $03
     jr   nz, label_776C
-    ld   hl, $FF96
+    ld   hl, hBaseScrollX
     inc  [hl]
     ld   a, [hl]
     cp   $40
@@ -8103,7 +8103,7 @@ label_7740::
     ld   [hl], $50
 
 label_7745::
-    ld   a, [$FF96]
+    ld   a, [hBaseScrollX]
     cp   $56
     jr   nz, label_775C
     ld   a, $A0
@@ -8397,7 +8397,7 @@ label_79AE::
     ld   hl, label_7898
     add  hl, bc
     ld   a, [hl]
-    ld   [$DB98], a
+    ld   [WR1_OBJ0Palette], a
     ld   hl, label_789C
     add  hl, bc
     ld   a, [hl]
@@ -8751,7 +8751,7 @@ label_7CF9::
     db 3, 2, 1, 0, 0, 1, 2, 3
 
 label_7D01::
-    ld   hl, $C100
+    ld   hl, WR0_ScrollXOffsetForSection
     ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_7D0B
@@ -8861,7 +8861,7 @@ label_7D9B::
     ret
 
 label_7D9C::
-    ld   hl, $C100
+    ld   hl, WR0_ScrollXOffsetForSection
     ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_7DA6
@@ -8895,7 +8895,7 @@ label_7DCC::
     jp   label_7D46
 
 label_7DCF::
-    ld   hl, $C100
+    ld   hl, WR0_ScrollXOffsetForSection
     ld   a, [hFrameCounter]
     and  $0F
     jr   nz, label_7DD9

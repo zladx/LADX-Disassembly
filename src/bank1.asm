@@ -451,7 +451,7 @@ label_42F2::
 
 label_42F5::
     xor  a
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     ld   e, $10
 
 label_42FB::
@@ -4858,7 +4858,7 @@ label_5FDE::
     ld   a, [hl]
     cp   $D5
     jr   nz, label_5FF0
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -4925,7 +4925,7 @@ label_6047::
     ld   a, [hl]
     cp   $D4
     jr   nz, label_6059
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -4968,7 +4968,7 @@ label_608A::
     ld   a, [hl]
     cp   $C1
     jr   nz, label_609C
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -5067,7 +5067,7 @@ label_612F::
     ld   a, [hl]
     cp   $6D
     jr   nz, label_6141
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -6810,7 +6810,7 @@ label_6E62::
     ld   a, $0D
     ld   [WR1_GameplaySubtype], a
     xor  a
-    ld   [$C280], a
+    ld   [WR0_EntitiesTypeTable], a
     ld   [$C281], a
     ld   [$C282], a
     ld   [$C283], a
@@ -6942,7 +6942,7 @@ label_6F5F::
     ldi  [hl], a
     dec  e
     jr   nz, label_6F5F
-    ld   [$C280], a
+    ld   [WR0_EntitiesTypeTable], a
     ld   [$C281], a
     ld   [$C3B0], a
     ld   [$C3B1], a
@@ -7009,7 +7009,7 @@ label_6F9C::
     cp   $08
     jp   nz, label_7013
     xor  a
-    ld   [$C280], a
+    ld   [WR0_EntitiesTypeTable], a
     ld   [$C281], a
     ld   [$C282], a
     ld   [$C290], a
@@ -7088,7 +7088,7 @@ label_7068::
     ld   d, $00
 
 label_706C::
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -7111,7 +7111,7 @@ label_7087::
     ld   hl, label_7081
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   [hl], a
     ld   hl, label_707B
@@ -7171,7 +7171,7 @@ label_70E0::
 label_70E8::
     ld   [rIE], a
     xor  a
-    ld   [$C280], a
+    ld   [WR0_EntitiesTypeTable], a
     ld   [$C281], a
     ld   a, $01
     ld   [$D002], a
@@ -7235,7 +7235,7 @@ label_7168::
     ld   a, $07
     ld   [WR1_GameplaySubtype], a
     ld   a, $06
-    ld   [$C280], a
+    ld   [WR0_EntitiesTypeTable], a
     ld   a, $B0
     ld   [$C200], a
     ld   a, $68
@@ -7622,7 +7622,7 @@ label_73DA::
     ld   d, $00
 
 label_73E0::
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -7778,7 +7778,7 @@ label_74D6::
 label_74DE::
     ld   a, c
     ld   [$C123], a
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -7809,7 +7809,7 @@ label_7509::
     ret
 
 label_7510::
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     cp   $05
@@ -7822,7 +7822,7 @@ label_7510::
     jp   z, label_77DD
     call label_C05
     jr   nz, label_7533
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   [hl], b
     ret
@@ -7950,7 +7950,7 @@ label_7629::
     ld   l, $01
 
 label_762B::
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     dec  a
@@ -8195,7 +8195,7 @@ label_77E1::
     call label_C05
     dec  [hl]
     jr   nz, label_77ED
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   [hl], b
     ret
@@ -8602,7 +8602,7 @@ label_7AB3::
     ld   [$D002], a
     ld   [$D003], a
     ld   [$D004], a
-    ld   [$C280], a
+    ld   [WR0_EntitiesTypeTable], a
     ld   [$C281], a
 
 label_7AE3::

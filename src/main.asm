@@ -3218,7 +3218,7 @@ ShootArrow::
     ld   a, [$C1C1]
     ld   c, a
     ld   b, d
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   [hl], b
     ld   hl, $C290
@@ -3903,7 +3903,7 @@ label_1847::
     ld   [$DDD6], a
     ld   [$DDD7], a
     ld   e, $10
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
 
 label_186C::
     ldi  [hl], a
@@ -5320,7 +5320,7 @@ label_2183::
     jr   c, label_21A7
     ld   a, $02
     ld   [$FFF3], a
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   [hl], $07
     ld   hl, $C3B0
@@ -8875,7 +8875,7 @@ label_389B::
     ld   d, e
 
 label_389E::
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $00
@@ -9087,7 +9087,7 @@ label_39E3::
 label_39F2::
     ld   a, c
     ld   [$C123], a
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -9807,7 +9807,7 @@ label_3E76::
 
 label_3E83::
     ld   e, $10
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
 
 label_3E88::
     xor  a
@@ -9986,7 +9986,7 @@ label_3F78::
     ld   [hl], a
 
 label_3F8D::
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   [hl], b
     ret

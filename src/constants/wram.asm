@@ -118,7 +118,7 @@ label_C220 equ $C220
 label_C230 equ $C230
 label_C240 equ $C240
 label_C250 equ $C250
-label_C280 equ $C280
+WR0_EntitiesTypeTable       equ $C280 ; type of visible entities
 label_C290 equ $C290
 label_C2A0 equ $C2A0
 label_C2E0 equ $C2E0

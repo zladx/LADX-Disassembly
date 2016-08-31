@@ -4,7 +4,7 @@ label_C010 equ $C010
 label_C030 equ $C030
 WR0_ScrollXOffsetForSection equ $C100 ; Table of the scrollX offset to add for each screen section being drawn
 WR0_LCDSectionIndex         equ $C105 ; Portion of the screen being drawn (0 -> 4)
-label_C106 equ $C106
+WR0_IntroBGYOffset          equ $C106 ; Offset for compensating the sea movement when drawing bottom screen section on intro sea
 label_C108 equ $C108
 label_C10B equ $C10B
 label_C10D equ $C10D
@@ -76,7 +76,7 @@ label_C173 equ $C173
 label_C175 equ $C175
 label_C176 equ $C176
 label_C177 equ $C177
-label_C17B equ $C17B
+WR0_DebugMode               equ $C17B ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
 label_C17F equ $C17F
 label_C180 equ $C180
 label_C181 equ $C181
@@ -112,13 +112,13 @@ label_C1CF equ $C1CF
 label_C1D0 equ $C1D0
 label_C1E0 equ $C1E0
 label_C1F0 equ $C1F0
-label_C200 equ $C200
-label_C210 equ $C210
+WR0_EntitiesPosXTable       equ $C200 ; X position of visible entities
+WR0_EntitiesPosYTable       equ $C210 ; Y position of visible entities
 label_C220 equ $C220
 label_C230 equ $C230
 label_C240 equ $C240
 label_C250 equ $C250
-label_C280 equ $C280
+WR0_EntitiesTypeTable       equ $C280 ; type of visible entities
 label_C290 equ $C290
 label_C2A0 equ $C2A0
 label_C2E0 equ $C2E0
@@ -170,8 +170,9 @@ WR0_HasPlacedBomb     equ $C14E
 WR0_ShieldLevel       equ $C15A
 WR0_IsUsingShield     equ $C15B
 
-
 label_D000 equ $D000
+WR0_IntroTimer        equ $D001
+WR0_IntroSubTimer     equ $D002
 label_D006 equ $D006
 label_D007 equ $D007
 label_D008 equ $D008

@@ -37,6 +37,7 @@ label_4371 equ $4371
 label_43B0 equ $43B0
 label_4400 equ $4400
 label_4496 equ $4496
+label_44D6 equ $44D6
 label_44E0 equ $44E0
 label_4518 equ $4518
 label_4520 equ $4520
@@ -217,7 +218,6 @@ label_6930 equ $6930
 label_6A22 equ $6A22
 label_6A30 equ $6A30
 label_6AC1 equ $6AC1
-label_6AF8 equ $6AF8
 label_6B1D equ $6B1D
 label_6BA4 equ $6BA4
 label_6BB5 equ $6BB5
@@ -240,7 +240,7 @@ label_6D52 equ $6D52
 label_6DAF equ $6DAF
 label_6E00 equ $6E00
 label_6E10 equ $6E10
-label_6E1D equ $6E1D
+label_6E28 equ $6E28
 label_6E2B equ $6E2B
 label_6E50 equ $6E50
 label_6E73 equ $6E73
@@ -594,9 +594,9 @@ label_30D::
     xor  $01
     ld   [$D6FC], a
     jr   nz, WaitForNextFrame
-    ld   a, [$C17B]
+    ld   a, [WR0_DebugMode]
     xor  $10
-    ld   [$C17B], a
+    ld   [WR0_DebugMode], a
     jr   WaitForNextFrame
 
 label_327::
@@ -741,8 +741,8 @@ skipResetSectionIndex::
     cp   $04           ; if SectionIndex != 4
     jr   nz, restoreSavedWRAMBankAndReturn ; skip
     ; If we are drawing the last section (4)
-    ld   a, [$C106]    ; set scrollY to [$C106]
-    ld   [rSCY], a     ;
+    ld   a, [WR0_IntroBGYOffset] ; Apply the Y offset to compensate for sea vertical movement
+    ld   [rSCY], a               ; (so that the horizon position stays constant).
     cpl                ; a = $FF - a + $61
     inc  a             ;
     add  a, $60        ;
@@ -1489,7 +1489,7 @@ label_8D7::
     ld   [SelectRomBank_2100], a
     call label_6A30
 
-label_8DF::
+restoreBankAndReturn::
     ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
     ret
@@ -1498,33 +1498,34 @@ label_8E6::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6AC1
-    jr   label_8DF
+    jr   restoreBankAndReturn
 
+; Load BG palette?
 label_8F0::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6BA4
-    jr   label_8DF
+    jr   restoreBankAndReturn
 
 label_8FA::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6BDC
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_905::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6C00
-    jr   label_917
+    jr   LoadBank1AndReturn
 
 label_90F::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6C24
 
-label_917::
+LoadBank1AndReturn::
     ld   a, $01
     ld   [SelectRomBank_2100], a
     ret
@@ -1587,7 +1588,8 @@ label_92F::
     xor  a
     ldi  [hl], a
 
-label_973::
+; Restore bank saved on stack and return
+RestoreStackedBankAndReturn::
     pop  af
     ld   [SelectRomBank_2100], a
     ret
@@ -1597,7 +1599,7 @@ label_978::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6D0E
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_983::
     ld   a, $1A
@@ -1640,42 +1642,42 @@ label_999::
     ldi  [hl], a
     xor  a
     ldi  [hl], a
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_9C8::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4985
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_9D3::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4518
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_9DE::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4874
-    jr   label_973
+    jr   RestoreStackedBankAndReturn
 
 label_9E9::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4954
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_9F5::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_482D
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A01::
     push hl
@@ -1719,63 +1721,63 @@ label_A32::
     ld   de, $DCC0
     ld   bc, $0020
     call CopyData
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A47::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_505F
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A53::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_4F9B
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A5F::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_3CE6
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A6B::
     push af
     ld   a, $03
     ld   [SelectRomBank_2100], a
     call label_5A2E
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A77::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_4F68
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A83::
     push af
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_6D52
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A8F::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_4BE8
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_A9B::
     push af
     ld   a, $0F
     call SwitchBank
     call label_2321
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_AA7::
     push af
@@ -1802,35 +1804,35 @@ label_AC6::
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_703E
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_AD2::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_70D6
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_ADE::
     push af
     ld   a, $36
     call SwitchBank
     call label_4A77
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_AEA::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_4A4C
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_AF6::
     push af
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_7161
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
 
 label_B02::
     ld   a, $3D
@@ -1962,7 +1964,7 @@ label_BB5::
     jp   CopyData
     push af
     call label_2BCF
-    jp   label_973
+    jp   RestoreStackedBankAndReturn
     ld   a, [$D16A]
     ld   [SelectRomBank_2100], a
 
@@ -2487,7 +2489,7 @@ FileSaveHandler::
     jp   label_4000
 
 IntroHandler::
-    jp   label_6E1D
+    jp   IntroHandlerEntryPoint
 
 EndCreditsHandler::
     ld   a, $17
@@ -3218,7 +3220,7 @@ ShootArrow::
     ld   a, [$C1C1]
     ld   c, a
     ld   b, d
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   [hl], b
     ld   hl, $C290
@@ -3903,7 +3905,7 @@ label_1847::
     ld   [$DDD6], a
     ld   [$DDD7], a
     ld   e, $10
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
 
 label_186C::
     ldi  [hl], a
@@ -5320,7 +5322,7 @@ label_2183::
     jr   c, label_21A7
     ld   a, $02
     ld   [$FFF3], a
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   [hl], $07
     ld   hl, $C3B0
@@ -6338,12 +6340,12 @@ label_27C3::
     ld   [$FFA8], a
     ret
 
-label_27D0::
+EnableExternalRAMWriting::
     push hl
     ld   hl, $4000
-    ld   [hl], $00
+    ld   [hl], $00 ; Switch to RAM bank 0
     ld   hl, $0000
-    ld   [hl], $0A
+    ld   [hl], $0A ; Enable external RAM writing
     pop  hl
     ret
 
@@ -6365,12 +6367,11 @@ label_27EA::
 label_27F2::
     ld   a, [$FFBC]
     and  a
-    jr   nz, label_27FF
+    jr   nz, .skip
     ld   a, $1F
     ld   [SelectRomBank_2100], a
     call label_4003
-
-label_27FF::
+.skip
     jp   ReloadSavedBank
 
 label_2802::
@@ -8875,7 +8876,7 @@ label_389B::
     ld   d, e
 
 label_389E::
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $00
@@ -9087,7 +9088,7 @@ label_39E3::
 label_39F2::
     ld   a, c
     ld   [$C123], a
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -9807,7 +9808,7 @@ label_3E76::
 
 label_3E83::
     ld   e, $10
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
 
 label_3E88::
     xor  a
@@ -9986,7 +9987,7 @@ label_3F78::
     ld   [hl], a
 
 label_3F8D::
-    ld   hl, $C280
+    ld   hl, WR0_EntitiesTypeTable
     add  hl, bc
     ld   [hl], b
     ret

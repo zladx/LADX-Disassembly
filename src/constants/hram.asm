@@ -12,5 +12,5 @@ hNeedsRenderingFrame  equ $FFD1
 hFrameCounter         equ $FFE7 ; wraps around 00-FF
 ;hSpriteYOffset?      equ $FFEC 
 ;hSpriteXOffset?      equ $FFEE
-hWaitingForNextFrame  equ $FFFD ; 0 = waiting for vblank, 1 = not waiting
+hDidRenderFrame       equ $FFFD
 hIsGBC                equ $FFFE ; 0 = GB, 1 = GBC

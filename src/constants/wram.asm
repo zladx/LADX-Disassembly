@@ -71,7 +71,7 @@ label_C16D equ $C16D
 label_C16F equ $C16F
 label_C170 equ $C170
 label_C171 equ $C171
-label_C172 equ $C172
+WR0_DialogScrollDelay       equ $C172
 label_C173 equ $C173
 label_C175 equ $C175
 label_C176 equ $C176

@@ -417,7 +417,7 @@ Init::
 
 DidRenderFrame::
     ld   a, 1
-    ld   [hWaitingForNextFrame], a ; no longer waiting for next frame
+    ld   [hDidRenderFrame], a ; no longer waiting for next frame
     ld   a, [$C500]
     and  a
     jr   z, label_1F2
@@ -642,7 +642,7 @@ WaitForNextFrame::
     call AdjustBankNumberForGBC
     call SwitchBank
     xor  a
-    ld   [hWaitingForNextFrame], a ; Waiting for next frame
+    ld   [hDidRenderFrame], a ; Waiting for next frame
     halt
 PollNeedsRenderingFrame::
     ld   a, [hNeedsRenderingFrame]
@@ -826,63 +826,82 @@ InterruptVBlank::
     push bc
     push de
     push hl
+
+    ; Adjust loaded bank
     ld   a, [rSVBK]
     and  $07
     ld   c, a
     xor  a
     ld   [rSVBK], a
     push bc
+
     di
+
+    ;
+    ; Photo Album handling
+    ;
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
-    jr   nz, label_48D
+    jr   nz, .continue
     ; GameplayType == PHOTO_ALBUM
     ld   a, [WR1_GameplaySubtype]
     cp   $09
-    jr   c, label_48D
+    jr   c, .continue
     cp   $12
-    jp  c, label_577
+    jp  c, PhotoAlbumVBlankHandler
 
-label_48D::
-    ld   a, [hWaitingForNextFrame]
+.continue
+    ld   a, [hDidRenderFrame]
     and  a
-    jp   nz, WaitForVBlank ; if not already waiting for next frame, do
+    jp   nz, WaitForVBlankAndReturn  ; if not already waiting for next frame, do
+
+    ;
+    ; Dialog handling
+    ;
     ld   a, [WR0_DialogState]
-    and  $7F
-    jr   z, label_4CC
-    cp   $01
-    jr   z, label_4CC
-    cp   $05
-    jr   nc, label_4AC
+    and  $7F  ; If dialog is closed
+    jr   z, vBlankContinue
+    cp   DIALOG_OPENING_1  ; If DialogState == 1
+    jr   z, vBlankContinue 
+    cp   DIALOG_OPENING_5  ; If DialogState > 5
+    jr   nc, .renderDialogText 
+    ; DialogState < 5
+    ; Open dialog
     call label_23E4
     ld   hl, WR0_DialogState
-    inc  [hl]
-    jp   WaitForVBlank
+    inc  [hl]  ; Increment DialogState
+    jp   WaitForVBlankAndReturn
 
-label_4AC::
-    cp   $0A
-    jr   nz, label_4B6
-    call label_2719
-    jp   WaitForVBlank
+.renderDialogText
+    cp   DIALOG_SCROLLING_1  ; if DialogState != Scrolling
+    jr   nz, .renderDialogTextContinue
+    ; DialogState == Scrolling 
+    call DialogBeginScrolling
+    jp   WaitForVBlankAndReturn
 
-label_4B6::
-    cp   $0B
-    jr   nz, label_4CC
-    ld   a, [$C172]
-    and  a
-    jr   z, label_4C6
-    dec  a
-    ld   [$C172], a
-    jr   label_4CC
+.renderDialogTextContinue
+    cp   DIALOG_SCROLLING_2  ; if DialogState != Scrolling2
+    jr   nz, vBlankContinue
+    ld   a, [WR0_DialogScrollDelay]
+    and  a  ; if DialogScrollDelay == 0
+    jr   z, .DialogFinishScrolling
+    ; DialogScrollDelay > 0
+    dec  a  ; decrement the delay
+    ld   [WR0_DialogScrollDelay], a
+    jr   vBlankContinue
 
-label_4C6::
-    call label_276D
-    jp   WaitForVBlank
+.DialogFinishScrolling
+    call DialogFinishScrolling
+    jp   WaitForVBlankAndReturn
 
-label_4CC::
+    ; 
+    ; Photo Picture handling
+    ;
+vBlankContinue::
     ld   a, [WR1_GameplayType]
-    cp   GAMEPLAY_PHOTO_DIZZY_LINK
-    jr   c, label_4E4
+    cp   GAMEPLAY_PHOTO_DIZZY_LINK  ; If GameplayType < Photo Picture
+    jr   c, .continue3
+    ; GameplayType is one of the Pictures
     ld   a, [WR1_GameplaySubtype]
     cp   $06
     jr   c, label_52B
@@ -891,10 +910,10 @@ label_4CC::
     call label_785A
     jr   label_52B
 
-label_4E4::
+.continue3
     ld   a, [$D6FE]
     and  a
-    jr   nz, WaitForVBlank
+    jr   nz, WaitForVBlankAndReturn
     ld   a, [$FF90]
     ld   [$FFE8], a
     ld   hl, $FF91
@@ -902,7 +921,7 @@ label_4E4::
     ld   hl, $C10E
     or   [hl]
     jr   z, label_509
-    call label_5BC
+    call label_5BC ; Copy tiles?
     ld   a, [$FFE8]
     cp   $08
     jr   nc, label_504
@@ -912,7 +931,7 @@ label_501::
 
 label_504::
     call label_FFC0
-    jr   WaitForVBlank
+    jr   WaitForVBlankAndReturn
 
 label_509::
     ld   a, [$FFBB]
@@ -944,7 +963,7 @@ label_52B::
     call label_5C1A ; Change BG column palette. Triggered by an interrupt?
 .notGBC
     ld   de, $D601
-    call label_2927 ; Load BD column tiles
+    call label_2927 ; Load BG column tiles
     xor  a
     ld   [$D600], a
     ld   [$D601], a
@@ -956,17 +975,17 @@ label_52B::
     call label_FFC0
     ld   a, [hIsGBC]
     and  a
-    jr   z, WaitForVBlank
+    jr   z, WaitForVBlankAndReturn
     ld   a, $21
     ld   [SelectRomBank_2100], a
     call label_4000
     ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
 
-WaitForVBlank::
+WaitForVBlankAndReturn::
     ei
 
-WaitForVBlank_direct::
+WaitForVBlankAndReturn_direct::
     pop  bc
     ld   a, c
     ld   [rSVBK], a
@@ -978,10 +997,10 @@ WaitForVBlank_direct::
     pop  af
     reti
 
-label_577::
+PhotoAlbumVBlankHandler::
     ld   a, [WR1_CurrentBank]
     push af
-    ld   a, [$FFFD]
+    ld   a, [hDidRenderFrame]
     and  a
     jr   nz, label_5AB
     call label_FFC0
@@ -1011,8 +1030,9 @@ label_5AB::
     pop  af
     ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
-    jr   WaitForVBlank_direct
+    jr   WaitForVBlankAndReturn_direct
 
+; Copy tiles?
 label_5BC::
     ld   a, [$FF90]
     and  a
@@ -2563,6 +2583,7 @@ label_F48::
     ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_F8F
+    ; Dialog is closed
     ld   hl, $FFB4
     ld   a, [hl]
     and  a
@@ -5686,6 +5707,8 @@ data_23D6::
 data_23DC::
     db   $99, $99, $21, $61, $A1, $41, $81, $C1
 
+; Open dialog animation
+; Saves tiles under the dialog box?
 label_23E4::
     ld   a, [WR0_DialogState]
     bit  7, a
@@ -5841,11 +5864,11 @@ label_24AE::
     jp   $4AA8
     ld   a, $1C
     ld   [SelectRomBank_2100], a
-    ld   a, [$C172]
+    ld   a, [WR0_DialogScrollDelay]
     and  a
     jr   z, label_24C7
     dec  a
-    ld   [$C172], a
+    ld   [WR0_DialogScrollDelay], a
     ret
 
 label_24C7::
@@ -6130,7 +6153,7 @@ label_267E::
     or   $06
     ld   [WR0_DialogState], a
     ld   a, $00
-    ld   [$C172], a
+    ld   [WR0_DialogScrollDelay], a
     ret
 
 label_268E::
@@ -6216,7 +6239,8 @@ data_2715::
 data_2717::
     db $98, $99
 
-label_2719::
+; Scroll dialog line?
+DialogBeginScrolling::
     ld   e, $00
     ld   a, [WR0_DialogState]
     and  $80
@@ -6272,8 +6296,8 @@ label_2739::
 label_275D::
     dec  e
     jr   nz, label_2739
-    ld   a, $08
-    ld   [$C172], a
+    ld   a, $08  ; Pause the scrolling for 8 frames
+    ld   [WR0_DialogScrollDelay], a
     jp   label_2485
     ret
 
@@ -6283,7 +6307,7 @@ data_2769::
 data_276B::
     db $98, $99
 
-label_276D::
+DialogFinishScrolling::
     ld   e, 0
     ld   a, [$C0FB+$A4]
     and  $80 ; 'Ç'

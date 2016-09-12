@@ -1,5 +1,5 @@
-TILES_PER_ROW equ $0B
-TILES_PER_MAP equ $80
+TILES_PER_ROW              equ $0B
+TILES_PER_MAP              equ $80
 
 ; Values for WR1_GameplayType
 GAMEPLAY_INTRO             equ $00
@@ -44,3 +44,20 @@ ENTITY_INTRO_MARIN         equ $06
 ENTITY_INTRO_INERT_LINK    equ $07
 ENTITY_INTRO_SPARKLE       equ $08
 
+; Values for WR0_DialogState
+DIALOG_CLOSED              equ $00
+DIALOG_OPENING_1           equ $01
+DIALOG_OPENING_2           equ $02
+DIALOG_OPENING_3           equ $03
+DIALOG_OPENING_4           equ $04
+DIALOG_OPENING_5           equ $05
+DIALOG_LETTER_IN_1         equ $06
+DIALOG_LETTER_IN_2         equ $07
+DIALOG_LETTER_IN_3         equ $08
+DIALOG_BREAK               equ $09 ; press A to continue
+DIALOG_SCROLLING_1         equ $0A
+DIALOG_SCROLLING_2         equ $0B
+DIALOG_END                 equ $0C ; press A to close
+DIALOG_CHOICE              equ $0D ; press A to choose
+DIALOG_CLOSING_1           equ $0E
+DIALOG_CLOSING_2           equ $0F

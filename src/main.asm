@@ -847,7 +847,7 @@ label_48D::
     ld   a, [hWaitingForNextFrame]
     and  a
     jp   nz, WaitForVBlank ; if not already waiting for next frame, do
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $7F
     jr   z, label_4CC
     cp   $01
@@ -855,7 +855,7 @@ label_48D::
     cp   $05
     jr   nc, label_4AC
     call label_23E4
-    ld   hl, $C19F
+    ld   hl, WR0_DialogState
     inc  [hl]
     jp   WaitForVBlank
 
@@ -2406,7 +2406,7 @@ presentSaveScreenIfNeeded::
     cp   $04
     jr   nz, jumpToGameplayHandler
     ; If WR0_TransitionSequenceCounter == 04 (not during a transition)
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     ld   hl, $C167
     or   [hl]
     ld   hl, $C124
@@ -2430,7 +2430,7 @@ presentSaveScreenIfNeeded::
     xor  a
     ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
     ld   [WR1_GameplaySubtype], a
     ld   a, GAMEPLAY_FILE_SAVE
     ld   [WR1_GameplayType], a
@@ -2560,7 +2560,7 @@ PhotoPictureHandler::
 label_F48::
     ld   a, $02
     call SwitchBank
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_F8F
     ld   hl, $FFB4
@@ -2581,7 +2581,7 @@ label_F48::
     call ReloadSavedBank
 
 label_F75::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_F8F
     ld   a, [$C1BC]
@@ -2691,7 +2691,7 @@ label_1033::
     ld   a, [$C1A9]
     and  a
     jr   z, label_107F
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_106D
     ld   hl, $C1AA
@@ -2753,7 +2753,7 @@ label_107F::
     ld   a, [$C11C]
     cp   $02
     jr   nc, label_10DB
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     ld   hl, $C167
     or   [hl]
     ld   hl, $C124
@@ -2795,7 +2795,7 @@ label_10E7::
     ld   [$FFB6], a
 
 label_10EF::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jp   nz, label_1794
     ld   a, [$C124]
@@ -3849,7 +3849,7 @@ label_17DB::
     and  $7F
     cp   $0C
     jr   nz, label_1814
-    ld   hl, $C19F
+    ld   hl, WR0_DialogState
     ld   a, [$C124]
     or   [hl]
     jr   nz, label_1814
@@ -5574,7 +5574,7 @@ label_22FE::
     jp   $5570
 
 label_2321::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     ret  z
     ld   e, a
@@ -5665,7 +5665,7 @@ label_2385::
     rra
     and  $80
     or   $01
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
     ret
 
 data_23B0::
@@ -5682,7 +5682,7 @@ data_23DC::
     db   $99, $99, $21, $61, $A1, $41, $81, $C1
 
 label_23E4::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     bit  7, a
     jr   z, label_23EF
     and  $7F
@@ -5802,7 +5802,7 @@ label_2475::
     jp   $4A2C
 
 label_2485::
-    ld   hl, $C19F
+    ld   hl, WR0_DialogState
     inc  [hl]
     ret
     ld   a, [$C1AB]
@@ -5822,12 +5822,12 @@ label_2496::
     jr   label_24AB
 
 label_24A4::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $F0
     or   $0E
 
 label_24AB::
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
 
 label_24AE::
     ret
@@ -5848,7 +5848,7 @@ label_24C7::
     jp   label_2485
     ld   a, $1C
     ld   [SelectRomBank_2100], a
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     ld   c, a
     ld   a, [$C171]
     bit  7, c
@@ -5968,10 +5968,10 @@ label_2529::
     ld   [$D601], a
 
 label_2595::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $F0
     or   $0D
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
 
 label_259F::
     ld   a, $15
@@ -5986,10 +5986,10 @@ label_25A4::
     ld   [$D601], a
 
 label_25AD::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $F0
     or   $0C
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
     ret
 
 data_25B8::
@@ -6120,10 +6120,10 @@ label_2663::
     jr   z, label_268E
 
 label_267E::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $F0
     or   $06
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
     ld   a, $00
     ld   [$C172], a
     ret
@@ -6177,7 +6177,7 @@ label_26B6::
 
 label_26E1::
     ld   e, $00
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $80
     jr   z, label_26EB
     inc  e
@@ -6213,7 +6213,7 @@ data_2717::
 
 label_2719::
     ld   e, $00
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $80
     jr   z, label_2723
     inc  e
@@ -9037,7 +9037,7 @@ label_398D::
     ld   [$FFF3], a
 
 label_399B::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_39AE
     ld   a, [$C111]
@@ -9072,7 +9072,7 @@ label_39C1::
     call label_4303
     xor  a
     ld   [SelectRomBank_2100], a
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_39E3
     ld   [$C1AD], a

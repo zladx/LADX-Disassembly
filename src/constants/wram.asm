@@ -89,7 +89,7 @@ label_C197 equ $C197
 label_C19B equ $C19B
 label_C19C equ $C19C
 label_C19D equ $C19D
-label_C19F equ $C19F
+WR0_DialogState             equ $C19F ; See `DIALOG_*` constants for possible values
 label_C1A4 equ $C1A4
 label_C1A5 equ $C1A5
 label_C1A8 equ $C1A8

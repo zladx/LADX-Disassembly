@@ -14,5 +14,7 @@ hNeedsRenderingFrame        equ $FFD1
 hFrameCounter               equ $FFE7 ; wraps around 00-FF
 ;hSpriteYOffset?            equ $FFEC 
 ;hSpriteXOffset?            equ $FFEE
+hMapIndex                   equ $FFF6 ; currently loaded map
+hMapTileset                 equ $FFF7 ; tileset index for the current map
 hDidRenderFrame             equ $FFFD
 hIsGBC                      equ $FFFE ; 0 = GB, 1 = GBC

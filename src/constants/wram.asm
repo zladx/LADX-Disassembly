@@ -49,7 +49,7 @@ label_C14B equ $C14B
 label_C14C equ $C14C
 label_C14D equ $C14D
 label_C14E equ $C14E
-label_C14F equ $C14F
+WR0_InventoryAppearing      equ $C14F
 label_C152 equ $C152
 label_C153 equ $C153
 WR0_ScreenShakeHorizontal   equ $C155 ; background offset for shaking the screen vertically
@@ -294,7 +294,7 @@ label_D605 equ $D605
 label_D6F8 equ $D6F8
 label_D6FA equ $D6FA
 label_D6FB equ $D6FB
-label_D6FC equ $D6FC
+WR1_EnginePaused            equ $D6FC
 WR1_LCDControl              equ $D6FD
 label_D6FE equ $D6FE
 label_D6FF equ $D6FF

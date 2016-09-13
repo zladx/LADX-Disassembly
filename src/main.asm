@@ -183,7 +183,6 @@ label_5D6A equ $5D6A
 label_5E67 equ $5E67
 label_5EAB equ $5EAB
 label_5F02 equ $5F02
-label_5F2E equ $5F2E
 label_5F4B equ $5F4B
 label_6000 equ $6000
 label_6080 equ $6080
@@ -413,99 +412,115 @@ Init::
     call label_4854
     jp   WaitForNextFrame
 
-DidRenderFrame::
+RenderLoop::
+    ; Set DidRenderFrame
     ld   a, 1
-    ld   [hDidRenderFrame], a ; no longer waiting for next frame
+    ld   [hDidRenderFrame], a 
+
+    ; Special case for $C500 == 1 (alternate background position)
+    ; If $C500 != 0...
     ld   a, [$C500]
     and  a
-    jr   z, label_1F2
+    jr   z, .applyRegularScrollYOffset
+    ; and GameplayType == OVERWORLD...
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_OVERWORLD
-    jr   nz, label_1F2
+    jr   nz, .applyRegularScrollYOffset
+    ; set scroll Y to $00 or $80 alternatively every other frame.
     ld   a, [hFrameCounter]
     rrca
     and  $80
-    jr   label_1F8
+    jr   .setScrollY
 
-label_1F2::
+.applyRegularScrollYOffset
     ld   hl, WR0_ScreenShakeVertical
     ld   a, [hBaseScrollY]
     add  a, [hl]
 
-label_1F8::
+.setScrollY
     ld   [rSCY], a ; scrollY
+
+    ; Set ScrollX
     ld   a, [hBaseScrollX]
     ld   hl, WR0_ScreenShakeHorizontal
     add  a, [hl]
-
-label_200::
     ld   hl, $C1BF
     add  a, [hl]
     ld   [rSCX], a ; scrollX
-    ld   a, [$D6FE]
-    and  a
-    jr   nz, label_213
-    ld   a, [$D6FF]
-    cp   $00
-    jr   z, label_23D
 
-label_213::
+    ; If the LCD screen is off, load new map data
+    ld   a, [$D6FE]
+    and  a   ; if $D6FE != 0, LoadNewMap
+    jr   nz, RenderLoopLoadNewMap
+    ld   a, [$D6FF] ; tilemap to load?
+    cp   $00 ; if $D6FF != 0, LoadNewMap
+    jr   z, RenderFrame
+
+RenderLoopLoadNewMap::
+    ; Control audio during the transition
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_MARIN_BEACH
-    jr   z, label_229
+    jr   z, .playAudioStep
     cp   GAMEPLAY_FILE_SAVE
-    jr   c, label_229
+    jr   c, .playAudioStep
     cp   GAMEPLAY_OVERWORLD
-    jr   nz, label_22F
+    jr   nz, .skipAudio
+    ; GameplayType == OVERWORLD
     ld   a, [WR1_GameplaySubtype]
     cp   $07
-    jr   nc, label_22F
+    jr   nc, .skipAudio
 
-label_229::
-    call label_8A4
-    call label_8A4
+.playAudioStep
+    call PlayAudioStep
+    call PlayAudioStep
 
-label_22F::
+.skipAudio
     di
-    call label_419
+    call LoadMapData
     ei
-    call label_8A4
-    call label_8A4
+    call PlayAudioStep
+    call PlayAudioStep
     jp   WaitForNextFrame
 
-label_23D::
+RenderFrame::
+    ; Update LCD status flags
     ld   a, [WR1_LCDControl]
     and  $7F
     ld   e, a
-    ld   a, [$FF40]
+    ld   a, [rLCDC]
     and  $80
     or   e
     ld   [rLCDC], a
+
+    ; Increment the global frame counter
     ld   hl, hFrameCounter
     inc  [hl]
+
+    ; Special case for the intro screen sprites
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_INTRO 
-    jr   nz, label_264 ; if GameplayType != INTRO
+    jr   nz, RenderWarpTransition
     ; GameplayType == INTRO
     ld   a, [WR1_GameplaySubtype]
     cp   $08
-    jr   c, label_264
+    jr   c, RenderWarpTransition
+    ; GameplaySubtype > GAMEPLAY_INTRO_BEACH
     ld   a, $20
     ld   [SelectRomBank_2100], a
-    call label_5257
+    call label_5257 ; position sprites for the title screen?
 
-label_264::
+RenderWarpTransition::
     ld   a, [WR0_WarpTransition]
     and  a
-    jp   z, label_2D5
+    jp   z, RenderInteractiveFrame
     inc  a
-    jr   nz, label_279
+    jr   nz, label_279 
 
 label_26E::
     ld   a, $17
     ld   [SelectRomBank_2100], a
     call label_48DD
-    jp   label_2D5
+    jp   RenderInteractiveFrame
 
 label_279::
     inc  a
@@ -526,7 +541,7 @@ label_296::
     xor  a
     ld   [WR0_WarpTransition], a
     ld   [$C3CA], a
-    jp   label_2D5
+    jp   RenderInteractiveFrame
 
 label_2A0::
     push af
@@ -548,7 +563,7 @@ label_2B7::
     ld   [SelectRomBank_2100], a
     pop  af
     call label_5038
-    call label_8A4
+    call PlayAudioStep
     ld   a, [WR1_BGPalette]
     ld   [rBGP], a
     ld   a, [WR1_OBJ0Palette]
@@ -557,7 +572,8 @@ label_2B7::
     ld   [rOBP1], a
     jp   WaitForNextFrame
 
-label_2D5::
+RenderInteractiveFrame::
+    ; Update graphics registers from game values
     ld   a, [WR1_WindowY]
     ld   [rWY], a
     ld   a, [WR1_BGPalette]
@@ -566,8 +582,10 @@ label_2D5::
     ld   [rOBP0], a
     ld   a, [WR1_OBJ1Palette]
     ld   [rOBP1], a
-    call label_8A4
-    call label_281E
+    
+    call PlayAudioStep
+    call ReadJoypadState
+
     ld   a, [hNeedsUpdatingBGTiles]
     ld   hl, hNeedsUpdatingSpriteTiles
     or   [hl]
@@ -577,80 +595,107 @@ label_2D5::
 
     ; Debug functions
     ld   a, [ROM_DebugTool1]
-    and  a
-    jr   z, label_32D
-    ld   a, [$D6FC]
-    and  a
-    jr   nz, label_30D
-    ld   a, [hPressedButtonsMask]
-    and  $0F
-    jr   z, label_327
+    and  a  ; Is debug mode disabled?
+    jr   z, RenderUpdateSprites
 
-label_30D::
+    ld   a, [WR1_EnginePaused]
+    and  a  ; Is engine already paused?
+    jr   nz, .engineIsPaused
+
+    ld   a, [hPressedButtonsMask]
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN ; Are none of the directional keys pressed?
+    jr   z, .saveEngineStatus
+
+.engineIsPaused
     ld   a, [$FFCC]
-    and  $40
-    jr   z, label_327
-    ld   a, [$D6FC]
-    xor  $01
-    ld   [$D6FC], a
+    and  J_SELECT  ; Was Select button just pressed?
+    jr   z, .saveEngineStatus
+
+    ; If Select button was just pressed,
+    ; toogle engine paused status.
+    ld   a, [WR1_EnginePaused]
+    xor  $01                  
+    ld   [WR1_EnginePaused], a
+
+    ; If the engine was just paused, skip the rest of the render loop
     jr   nz, WaitForNextFrame
+
+    ; If the engine was just unpaused,
+    ; toggle Free-movement mode.
     ld   a, [WR0_FreeMovementMode]
     xor  $10
     ld   [WR0_FreeMovementMode], a
     jr   WaitForNextFrame
 
-label_327::
-    ld   a, [$D6FC]
+.saveEngineStatus
+    ; If the engine is paused, skip the rest of the render loop
+    ld   a, [WR1_EnginePaused]
     and  a
     jr   nz, WaitForNextFrame
 
-label_32D::
+RenderUpdateSprites::
+    ; If not in Inventory, update sprites
     ld   a, [WR1_GameplayType]
-    cp   GAMEPLAY_INVENTORY
-    jr   nz, label_33B
-    ; GameplayType == INVENTORY
+    cp   GAMEPLAY_INVENTORY  
+    jr   nz, .updateSprites
+    
+    ; If Inventory is actually visible, skip sprites update
     ld   a, [WR1_GameplaySubtype]
-    cp   $02
-    jr   c, label_343
+    cp   GAMEPLAY_INVENTORY_DELAY1
+    jr   c, RenderGameplay
 
-label_33B::
+.updateSprites
     ld   a, $01
     call SwitchBank
-    call label_5F2E
+    call label_5F2E ; sprite-related-method
 
-label_343::
+RenderGameplay::
     call ExecuteGameplayHandler
+
+RenderPalettes::
+    ; If isGBC
     ld   a, [hIsGBC]
     and  a
-    jr   z, label_353
+    jr   z, .resetDDD2
+    ; update palettes
     ld   a, $21
     call SwitchBank
-    call label_406E
+    call label_406E ; update palette set defined in $DDD2?
 
-label_353::
+.resetDDD2
     xor  a
     ld   [$DDD2], a
+
+RenderWindow::
     ld   a, $01
     call SwitchBank
-    call label_5F4B
+    call UpdateWindowPosition
 
 WaitForNextFrame::
     ld   a, $1F
     call SwitchBank
     call label_7F80
+
     ld   a, $0C
     call AdjustBankNumberForGBC
     call SwitchBank
+
     xor  a
     ld   [hDidRenderFrame], a ; Waiting for next frame
     halt
+
 PollNeedsRenderingFrame::
+    ; Loop until hNeedsRenderingFrame != 0
     ld   a, [hNeedsRenderingFrame]
     and  a
     jr   z, PollNeedsRenderingFrame
+
+    ; Clear hNeedsRenderingFrame
     xor  a
     ld   [hNeedsRenderingFrame], a
-    jp   DidRenderFrame
+
+    ; Jump to the top of the render loop
+    jp   RenderLoop
 
 IntroSeaScreenSections::
     ; Indexes of rows to divide the screen in horizontal sections.
@@ -773,29 +818,52 @@ InterruptSerial::
     pop  af
     reti
 
-label_419::
+; Load tileset, background, sprites while the LCD screen is off
+LoadMapData::
     ld   a, [$D6FE]
     and  a
-    jr   z, label_43A
+    jr   z, .commonCase
+
+    ;
+    ; $D6FE != 0: special case
+    ;
     ld   [$DDD2], a
-    cp   $23
-    jr   z, label_42B
+    cp   $23 ; if $D6FE == $23
+    jr   z, .skipLCDOff
     push af
     call LCDOff
     pop  af
 
-label_42B::
-    call label_430
-    jr   label_45D
+.skipLCDOff
+    call .executeMapLoadFunction
+    jr   .clearValuesAndReturn
 
-label_430::
+.executeMapLoadFunction
     ld   e, a
     ld   a, $20
     ld   [SelectRomBank_2100], a
-    call label_4657
-    jp   [hl]
+    ; label_4657
+    ;   input:  $D6FE in e
+    ;   output: address to jump to in hl
+    ; Table address: 20:4664
+    ; Table values:
+    ;   01  $309B
+    ;   02  $28F7
+    ;   03  $2BCF
+    ;   04  $2C03
+    ;   05  $2D2D
+    ;   06  $2C28
+    ;   07  $2D2D
+    ;   08  $28F0
+    ;   09  $2E73
+    ;   ...
+    call label_4657 
+    jp   [hl] 
 
-label_43A::
+    ;
+    ; $D6FE == 0: common case
+    ;
+.commonCase
     call LCDOff
     ld   a, $24
     ld   [SelectRomBank_2100], a
@@ -810,7 +878,7 @@ label_43A::
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
 
-label_45D::
+.clearValuesAndReturn
     xor  a
     ld   [$D6FF], a
     ld   [$D6FE], a
@@ -1473,7 +1541,7 @@ label_873::
     ld   [$FF92], a
     ret
 
-label_8A4::
+PlayAudioStep::
     ld   a, $1F
     call SwitchBank
     call label_4006
@@ -2437,7 +2505,7 @@ presentSaveScreenIfNeeded::
     jr   nc, jumpToGameplayHandler
     ; If GameplayType < INVENTORY
     ld   a, [hPressedButtonsMask]
-    cp   $F0 ; If hPressedButtonsMask != A+B+Start+Select
+    cp   J_A | J_B | J_START | J_SELECT ; If hPressedButtonsMask != A+B+Start+Select
     jr   nz, jumpToGameplayHandler
     ; If PressedButtonsMask == A+B+Start+Select
     ld   a, [$D474]
@@ -2591,7 +2659,7 @@ label_F48::
     ld   a, [WR1_WindowY]
     cp   $80
     jr   nz, label_F75
-    ld   a, [$C14F]
+    ld   a, [WR0_InventoryAppearing]
     and  a
     jr   nz, label_F75
     dec  [hl]
@@ -2828,7 +2896,7 @@ label_10EF::
     ld   a, [$DB5A]
     ld   hl, $C50A
     or   [hl]
-    ld   hl, $C14F
+    ld   hl, WR0_InventoryAppearing
     or   [hl]
     jr   nz, label_1135
     ld   a, $07
@@ -4400,8 +4468,8 @@ AnimateTiles::
     ld   a, [WR1_WindowY]
     cp   $80                   ; if WindowY != $80
     jp   nz, animateTileReturn ;   return immediately
-    ld   a, [$C14F]         ; overworld tiles frozen?
-    and  a                  ; if $C14F != 0
+    ld   a, [WR0_InventoryAppearing]         ; overworld tiles frozen?
+    and  a                  ; if WR0_InventoryAppearing != 0
     jp   nz, label_1D2E     ;   exit?
 
 label_1B67::
@@ -5366,7 +5434,7 @@ label_21A7::
     ret
 
 label_21A8::
-    ld   a, [$C14F]
+    ld   a, [WR0_InventoryAppearing]
     and  a
     ret  nz
     ld   c, $01
@@ -6422,10 +6490,10 @@ GetRandomByte::
     pop  hl
     ret
 
-label_281E::
-    ld   a, [$C124]
+ReadJoypadState::
+    ld   a, [WR0_MapSlideTransitionState]
     and  a
-    jr   nz, label_2886
+    jr   nz, label_2886 ; return
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_OVERWORLD
     jr   nz, label_2852
@@ -6935,11 +7003,11 @@ label_2B06::
     ld   de, $8800
     ld   bc, $1000
     jp   CopyData
-    call label_8A4
+    call PlayAudioStep
     ld   hl, $6800
     ld   a, $10
     call label_2B92
-    call label_8A4
+    call PlayAudioStep
     ld   a, $12
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
@@ -6947,7 +7015,7 @@ label_2B06::
     ld   de, $8000
     ld   bc, $0080
     call CopyData
-    call label_8A4
+    call PlayAudioStep
     ld   a, [hIsGBC]
     and  a
     jr   nz, label_2B61
@@ -7046,6 +7114,8 @@ label_2BCF::
     ld   de, $9000
     ld   bc, $0800
     jp   CopyData
+
+label_2C28::
     ld   a, $20
     call SwitchBank
     ld   hl, $4589
@@ -7313,6 +7383,8 @@ data_2E6F::
 
 label_2E70::
     ld   de, $120E
+
+label_2E73::
     ld   a, [$FFF7]
     cp   $FF
     jr   nz, label_2E84
@@ -7657,6 +7729,8 @@ label_304F::
     ld   [rVBK], a
     call label_3905
     ret
+
+label_309B::
     call label_3905
     call SwitchBank
     ld   de, vBGMap0
@@ -9910,7 +9984,7 @@ data_3EDF::
     db $B0, $B4, $B1, $B2, $B3, $B6, $BA, $BC, $B8
 
 label_3EE8::
-    ld   hl, $C14F
+    ld   hl, WR0_InventoryAppearing
     ld   a, [WR0_MapSlideTransitionState]
     or   [hl]
     ret  nz

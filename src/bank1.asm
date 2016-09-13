@@ -63,7 +63,7 @@ label_4042::
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
-    ld   [$C14F], a
+    ld   [WR0_InventoryAppearing], a
     ld   [$C1B8], a
     ld   [$C1B9], a
     ld   [$C1B5], a
@@ -3582,7 +3582,7 @@ label_5678::
     ld   [hBaseScrollX], a
     ld   [$C1BF], a
     ld   [$FF97], a
-    ld   [$C14F], a
+    ld   [WR0_InventoryAppearing], a
     ld   [$C1B2], a
     ld   [$C1B3], a
     ld   a, [$DB54]
@@ -3879,7 +3879,7 @@ label_5895::
     ld   a, $08
     ld   [$C150], a
     xor  a
-    ld   [$C14F], a
+    ld   [WR0_InventoryAppearing], a
 
 label_58A7::
     ret
@@ -4725,6 +4725,8 @@ label_5F19::
 
 label_5F2D::
     ret
+
+label_5F2E::
     ld   hl, $0000
     ld   a, [hIsGBC]
     and  a
@@ -4748,7 +4750,9 @@ label_5F43::
     dec  b
     jr   nz, label_5F43
     ret
-    ld   a, [$C14F]
+
+UpdateWindowPosition::
+    ld   a, [WR0_InventoryAppearing]
     and  a
     jr   z, label_5F6A
     ld   hl, $C000

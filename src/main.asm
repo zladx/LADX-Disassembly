@@ -476,7 +476,7 @@ label_22F::
     jp   WaitForNextFrame
 
 label_23D::
-    ld   a, [$D6FD]
+    ld   a, [WR1_LCDControl]
     and  $7F
     ld   e, a
     ld   a, [$FF40]
@@ -814,7 +814,7 @@ label_45D::
     xor  a
     ld   [$D6FF], a
     ld   [$D6FE], a
-    ld   a, [$D6FD]
+    ld   a, [WR1_LCDControl]
     ld   [rLCDC], a
     ret
 

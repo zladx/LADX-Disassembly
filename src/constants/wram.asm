@@ -295,7 +295,7 @@ label_D6F8 equ $D6F8
 label_D6FA equ $D6FA
 label_D6FB equ $D6FB
 label_D6FC equ $D6FC
-label_D6FD equ $D6FD
+WR1_LCDControl              equ $D6FD
 label_D6FE equ $D6FE
 label_D6FF equ $D6FF
 WR1_TileMap                 equ $D711

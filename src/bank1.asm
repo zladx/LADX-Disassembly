@@ -146,7 +146,7 @@ label_40F9::
     call label_6162
     ld   a, $C7
     ld   [rLCDC], a
-    ld   [$D6FD], a
+    ld   [WR1_LCDControl], a
     ld   a, $07
     ld   [rWX], a
     ld   a, $80
@@ -796,7 +796,7 @@ label_44F5::
     call label_5895
     ld   a, [$FF40]
     or   $20
-    ld   [$D6FD], a
+    ld   [WR1_LCDControl], a
     ld   [rLCDC], a
     call IncrementGameplaySubtype
     ld   a, [$C11C]
@@ -3617,7 +3617,7 @@ label_56D9::
     ld   [$C1B4], a
     ld   a, [$FF40]
     and  $DF
-    ld   [$D6FD], a
+    ld   [WR1_LCDControl], a
     ld   [rLCDC], a
     call label_5888
     ld   a, $08
@@ -6922,7 +6922,7 @@ label_6EF8::
     ld   [$C13D], a
     ld   a, [$FF40]
     and  $DF
-    ld   [$D6FD], a
+    ld   [WR1_LCDControl], a
     ld   [rLCDC], a
     ld   a, $B4
     ld   [$D016], a

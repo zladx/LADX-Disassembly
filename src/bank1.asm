@@ -572,7 +572,7 @@ label_438D::
     nop
     call label_27F2
     call IncrementGameplaySubtype
-    ld   a, [$0004]
+    ld   a, [ROM_DebugTool2]
     and  a
     jr   z, label_43A7
     ld   a, $0B
@@ -942,7 +942,7 @@ label_46AA::
     call label_4794
     ld   de, $75A
     call label_4794
-    ld   a, [$0003]
+    ld   a, [ROM_DebugTool1]
     and  a
     jp   z, label_4793
     ld   e, $00
@@ -3644,7 +3644,7 @@ label_56F3::
 
 label_571B::
     ret
-    ld   a, [$0005]
+    ld   a, [ROM_DebugTool3]
     and  a
     jr   z, label_5731
     ld   a, [$FFCC]
@@ -3745,7 +3745,7 @@ label_57B3::
     ret
 
 label_57B7::
-    ld   a, [$0003]
+    ld   a, [ROM_DebugTool1]
     and  a
     jr   z, label_57FA
     ld   a, [$FFCB]
@@ -3778,7 +3778,7 @@ label_57B7::
 
 label_57FA::
     ld   e, $40
-    ld   a, [$0003]
+    ld   a, [ROM_DebugTool1]
     and  a
     jr   nz, label_5804
     ld   e, $60
@@ -4033,7 +4033,7 @@ label_5AA0::
     ld   a, [hl]
     and  $FF
     jr   nz, label_5AF5
-    ld   a, [WR0_DebugMode]
+    ld   a, [WR0_FreeMovementMode]
     and  a
     jr   nz, label_5AF5
     ld   a, $09
@@ -5164,7 +5164,7 @@ label_61E9::
     ld   a, [$C11C]
     cp   $00
     jr   nz, label_6202
-    ld   a, [WR0_DebugMode]
+    ld   a, [WR0_FreeMovementMode]
     and  a
     jr   nz, label_6202
     ld   a, [$FFF7]
@@ -6746,7 +6746,7 @@ label_6DD0::
     db 0, 0, 0, 0, 0, 0, 0, 0, $D, $9E
 
 label_6DEA::
-    ld   a, [$0004]
+    ld   a, [ROM_DebugTool2]
     and  a
     ret  nz
     ld   a, [$DBA5]

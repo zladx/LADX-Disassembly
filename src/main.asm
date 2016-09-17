@@ -576,7 +576,9 @@ label_2D5::
     ld   hl, $C10E
     or   [hl]
     jr   nz, WaitForNextFrame
-    ld   a, [$0003]
+
+    ; Debug functions
+    ld   a, [ROM_DebugTool1]
     and  a
     jr   z, label_32D
     ld   a, [$D6FC]
@@ -594,9 +596,9 @@ label_30D::
     xor  $01
     ld   [$D6FC], a
     jr   nz, WaitForNextFrame
-    ld   a, [WR0_DebugMode]
+    ld   a, [WR0_FreeMovementMode]
     xor  $10
-    ld   [WR0_DebugMode], a
+    ld   [WR0_FreeMovementMode], a
     jr   WaitForNextFrame
 
 label_327::

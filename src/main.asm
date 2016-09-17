@@ -497,7 +497,7 @@ label_23D::
     call label_5257
 
 label_264::
-    ld   a, [$C17F]
+    ld   a, [WR0_WarpTransition]
     and  a
     jp   z, label_2D5
     inc  a
@@ -519,14 +519,14 @@ label_279::
     ld   [$C180], a
     cp   $C0
     jr   nz, label_2A0
-    ld   a, [$C17F]
+    ld   a, [WR0_WarpTransition]
     cp   $02
     jr   nz, label_296
     call label_4E51
 
 label_296::
     xor  a
-    ld   [$C17F], a
+    ld   [WR0_WarpTransition], a
     ld   [$C3CA], a
     jp   label_2D5
 
@@ -4178,7 +4178,7 @@ label_19DA::
     ld   a, $30
     ld   [$C180], a
     ld   a, $03
-    ld   [$C17F], a
+    ld   [WR0_WarpTransition], a
     ld   a, $04
     ld   [WR0_TransitionSequenceCounter], a
     jr   label_1A06

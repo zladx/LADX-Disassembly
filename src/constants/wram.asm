@@ -77,7 +77,7 @@ label_C175 equ $C175
 label_C176 equ $C176
 label_C177 equ $C177
 WR0_DebugMode               equ $C17B ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
-label_C17F equ $C17F
+WR0_WarpTransition          equ $C17F ; See WARP_TRANSITION_* constants for possible values
 label_C180 equ $C180
 label_C181 equ $C181
 label_C18A equ $C18A
@@ -89,7 +89,7 @@ label_C197 equ $C197
 label_C19B equ $C19B
 label_C19C equ $C19C
 label_C19D equ $C19D
-WR0_DialogState             equ $C19F ; See `DIALOG_*` constants for possible values
+WR0_DialogState             equ $C19F ; See DIALOG_* constants for possible values
 label_C1A4 equ $C1A4
 label_C1A5 equ $C1A5
 label_C1A8 equ $C1A8
@@ -375,7 +375,7 @@ label_DB71                  equ $DB71
 WR1_IsMarinFollowingLink    equ $DB73
 WR1_IsGhostFollowingLink    equ $DB79
 WR1_IsRoosterFollowingLink  equ $DB7B
-WR1_GameplayType            equ $DB95 ; See `GAMEPLAY_*` constants for possible values
+WR1_GameplayType            equ $DB95 ; See GAMEPLAY_* constants for possible values
 WR1_GameplaySubtype         equ $DB96 ; Value depens on GameplayType: this can be a sequence index, or a frame counter.
 WR1_BGPalette               equ $DB97
 WR1_OBJ0Palette             equ $DB98

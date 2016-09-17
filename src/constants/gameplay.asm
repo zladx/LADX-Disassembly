@@ -61,3 +61,8 @@ DIALOG_END                 equ $0C ; press A to close
 DIALOG_CHOICE              equ $0D ; press A to choose
 DIALOG_CLOSING_1           equ $0E
 DIALOG_CLOSING_2           equ $0F
+
+; Values for WR0_WarpTransition
+WARP_TRANSITION_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine
+WARP_TRANSITION_MANBO_IN     equ $02 ; wavy transition when departing using Manbo's Mambo
+WARP_TRANSITION_MANBO_OUT    equ $03 ; wavy transition when arriving using Manbo's Mambo

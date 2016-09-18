@@ -2429,7 +2429,7 @@ presentSaveScreenIfNeeded::
     ld   a, [WR0_DialogState]
     ld   hl, $C167
     or   [hl]
-    ld   hl, $C124
+    ld   hl, WR0_MapSlideTransitionState
     or   [hl]
     jr   nz, jumpToGameplayHandler
     ld   a, [WR1_GameplayType]
@@ -2777,7 +2777,7 @@ label_107F::
     ld   a, [WR0_DialogState]
     ld   hl, $C167
     or   [hl]
-    ld   hl, $C124
+    ld   hl, WR0_MapSlideTransitionState
     or   [hl]
     jr   nz, label_10DB
     ld   a, [$D464]
@@ -2819,7 +2819,7 @@ label_10EF::
     ld   a, [WR0_DialogState]
     and  a
     jp   nz, label_1794
-    ld   a, [$C124]
+    ld   a, [WR0_MapSlideTransitionState]
     and  a
     jp   nz, label_114F
     ld   a, [$C11C]
@@ -3871,7 +3871,7 @@ label_17DB::
     cp   $0C
     jr   nz, label_1814
     ld   hl, WR0_DialogState
-    ld   a, [$C124]
+    ld   a, [WR0_MapSlideTransitionState]
     or   [hl]
     jr   nz, label_1814
     call label_157C
@@ -4405,7 +4405,7 @@ AnimateTiles::
     jp   nz, label_1D2E     ;   exit?
 
 label_1B67::
-    ld   hl, $C124
+    ld   hl, WR0_MapSlideTransitionState
     ld   a, [$D601]
     or   [hl]
     jp   nz, label_1D2E
@@ -6613,7 +6613,7 @@ label_2924::
     call label_2941
 
 label_2927::
-    ld   a, [$C124]
+    ld   a, [WR0_MapSlideTransitionState]
     and  a
     jr   nz, label_293C
 
@@ -9659,7 +9659,7 @@ label_3D52::
 
 label_3D57::
     push hl
-    ld   a, [$C124]
+    ld   a, [WR0_MapSlideTransitionState]
     and  a
     jr   z, label_3D7D
     ld   a, [$FFEE]
@@ -9911,7 +9911,7 @@ data_3EDF::
 
 label_3EE8::
     ld   hl, $C14F
-    ld   a, [$C124]
+    ld   a, [WR0_MapSlideTransitionState]
     or   [hl]
     ret  nz
     ld   a, [$C165]

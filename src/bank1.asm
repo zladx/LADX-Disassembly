@@ -3860,7 +3860,7 @@ label_5885::
     ld   [$D6FE], a
 
 label_5888::
-    ld   hl, $C124
+    ld   hl, WR0_MapSlideTransitionState
     ld   e, $00
 
 label_588D::

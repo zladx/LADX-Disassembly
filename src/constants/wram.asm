@@ -22,7 +22,7 @@ label_C120 equ $C120 ; link animation state?
 label_C121 equ $C121
 label_C122 equ $C122
 label_C123 equ $C123
-label_C124 equ $C124
+WR0_MapSlideTransitionState equ $C124
 label_C125 equ $C125
 label_C127 equ $C127
 label_C128 equ $C128

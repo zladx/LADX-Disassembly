@@ -327,7 +327,6 @@ label_F7F0 equ $F7F0
 label_FAFA equ $FAFA
 label_FF44 equ $FF44
 label_FF90 equ $FF90
-label_FF91 equ $FF91
 label_FF92 equ $FF92
 label_FF98 equ $FF98
 label_FF9A equ $FF9A
@@ -571,7 +570,7 @@ label_2D5::
     call label_8A4
     call label_281E
     ld   a, [$FF90]
-    ld   hl, $FF91
+    ld   hl, hNeedsUpdatingSpriteTiles
     or   [hl]
     ld   hl, $C10E
     or   [hl]
@@ -918,7 +917,7 @@ vBlankContinue::
     jr   nz, WaitForVBlankAndReturn
     ld   a, [$FF90]
     ld   [$FFE8], a
-    ld   hl, $FF91
+    ld   hl, hNeedsUpdatingSpriteTiles
     or   [hl]
     ld   hl, $C10E
     or   [hl]
@@ -1184,7 +1183,7 @@ label_69E::
     jr   label_738
 
 label_6CB::
-    ld   a, [$FF91]
+    ld   a, [hNeedsUpdatingSpriteTiles]
     and  a
     jp   z, label_73E
     ld   a, [$C197]
@@ -1250,7 +1249,7 @@ label_6F7::
 
 label_738::
     xor  a
-    ld   [$FF91], a
+    ld   [hNeedsUpdatingSpriteTiles], a
     ld   [$FF93], a
 
 label_73D::
@@ -2360,7 +2359,7 @@ label_DDB::
     cp   $FF
     jr   nz, label_DF1
     ld   a, $01
-    ld   [$FF91], a
+    ld   [hNeedsUpdatingSpriteTiles], a
     jr   label_E31
 
 label_DF1::
@@ -2399,7 +2398,7 @@ label_E1E::
     ld   a, d
     ld   [$C197], a
     ld   a, $01
-    ld   [$FF91], a
+    ld   [hNeedsUpdatingSpriteTiles], a
 
 label_E29::
     inc  hl

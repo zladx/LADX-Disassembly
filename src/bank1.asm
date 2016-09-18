@@ -761,7 +761,7 @@ label_44C9::
     call label_D1E
     xor  a
     ld   [$FF90], a
-    ld   [$FF91], a
+    ld   [hNeedsUpdatingSpriteTiles], a
     ld   a, $09
     ld   [$D6FE], a
 

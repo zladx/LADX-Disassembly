@@ -326,7 +326,6 @@ label_A161 equ $A161
 label_F7F0 equ $F7F0
 label_FAFA equ $FAFA
 label_FF44 equ $FF44
-label_FF90 equ $FF90
 label_FF92 equ $FF92
 label_FF98 equ $FF98
 label_FF9A equ $FF9A
@@ -569,7 +568,7 @@ label_2D5::
     ld   [rOBP1], a
     call label_8A4
     call label_281E
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     ld   hl, hNeedsUpdatingSpriteTiles
     or   [hl]
     ld   hl, $C10E
@@ -915,7 +914,7 @@ vBlankContinue::
     ld   a, [$D6FE]
     and  a
     jr   nz, WaitForVBlankAndReturn
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     ld   [$FFE8], a
     ld   hl, hNeedsUpdatingSpriteTiles
     or   [hl]
@@ -1035,7 +1034,7 @@ label_5AB::
 
 ; Copy tiles?
 label_5BC::
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     and  a
     jp   z, label_69E
     cp   $07
@@ -1053,7 +1052,7 @@ label_5BC::
     ld   a, [$DBA5]
     and  a
     jp   z, label_656
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     cp   $02
     jp   z, label_826
     ld   a, $0D
@@ -1112,7 +1111,7 @@ label_647::
     cp   $04
     jr   nz, label_655
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
 
 label_655::
@@ -1154,7 +1153,7 @@ label_656::
     cp   $08
     jr   nz, label_69D
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
 
 label_69D::
@@ -1357,7 +1356,7 @@ label_7D3::
     ld   [SelectRomBank_2100], a
     ld   bc, $0040
     call CopyData
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     cp   $0A
     jr   z, label_808
     cp   $0D
@@ -1366,16 +1365,16 @@ label_800::
     jr   z, label_808
 
 label_802::
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     inc  a
 
 label_805::
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ret
 
 label_808::
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ret
 
 ; Switch to the bank defined in a, and save the active bank
@@ -1442,7 +1441,7 @@ label_865::
     ld   [SelectRomBank_2100], a
     call label_67E5
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
     ret
 
@@ -2256,7 +2255,7 @@ label_D45::
     cp   $FF
     jr   z, label_D57
     ld   a, $01
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
 
 label_D57::
     jr   label_D91
@@ -2298,7 +2297,7 @@ label_D60::
 label_D8B::
     ld   [$FF94], a
     ld   a, $01
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
 
 label_D91::
     xor  a
@@ -6774,7 +6773,7 @@ label_29D0::
     ld   bc, $006D
 
 label_29D3::
-    ld   hl, $FF90
+    ld   hl, hNeedsUpdatingBGTiles
     call ZeroMemory
     ld   bc, $1F00
 

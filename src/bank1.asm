@@ -760,7 +760,7 @@ label_44B0::
 label_44C9::
     call label_D1E
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ld   [hNeedsUpdatingSpriteTiles], a
     ld   a, $09
     ld   [$D6FE], a
@@ -6477,7 +6477,7 @@ label_6BB4::
 label_6BC6::
     call label_6BEA
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
     ret
 

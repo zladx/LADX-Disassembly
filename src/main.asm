@@ -345,12 +345,12 @@ label_FFF6 equ $FFF6
 
 section "Main", rom0
 
-Start:
+Start::
     cp   $11 ; is running on Game Boy Color?
-    jr   nz, notGBC
+    jr   nz, .notGBC
     ld   a, [rKEY1]
     and  $80 ; do we need to switch the CPU speed?
-    jr   nz, speedSwitchDone
+    jr   nz, .speedSwitchDone
     ld   a, $30      ; \
     ld   [rJOYP], a  ; |
     ld   a, $01      ; |
@@ -358,14 +358,14 @@ Start:
     xor  a           ; |
     ld   [rIE], a    ; |
     stop             ; /
-speedSwitchDone:
+
+.speedSwitchDone
     xor  a
-data_0168::
     ld   [rSVBK], a
     ld   a, $01 ; isGBC = true
     jr   Init
 
-notGBC:
+.notGBC
     xor  a ; isGBC = false
 
 Init::
@@ -1931,7 +1931,7 @@ label_B54::
     ld   a, [hIsGBC]
     and  a
     jr   z, label_B80
-    ld   de, data_0168
+    ld   de, $0168
     add  hl, de
     ld   a, $01
     ld   [rVBK], a
@@ -1979,7 +1979,7 @@ label_B99::
     ret
 
 label_BB5::
-    ld   bc, data_0168
+    ld   bc, $0168
     ld   de, $D000
     jp   CopyData
     push af

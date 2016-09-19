@@ -80,7 +80,7 @@ label_4072::
     ld   a, $0D
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -150,7 +150,7 @@ label_40F9::
     ld   a, $07
     ld   [rWX], a
     ld   a, $80
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     ld   [rWY], a
     ld   a, $07
     ld   [$FFA9], a
@@ -404,7 +404,7 @@ label_4259::
     ld   a, $0A
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -3873,7 +3873,7 @@ label_588D::
 
 label_5895::
     ld   a, $80
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     ld   a, $07
     ld   [rWX], a
     ld   a, $08
@@ -4752,7 +4752,7 @@ label_5F43::
     and  a
     jr   z, label_5F6A
     ld   hl, $C000
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     add  a, $08
     ld   d, a
     ld   e, $28
@@ -4773,7 +4773,7 @@ label_5F62::
     ret
 
 label_5F6A::
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     and  a
     ret  z
     ld   a, [$C19F]
@@ -5235,7 +5235,7 @@ label_6281::
     ld   a, $13
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$C16B], a
@@ -6041,7 +6041,7 @@ label_6885::
     ld   a, e
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -6403,7 +6403,7 @@ label_6B52::
     ld   a, $15
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a

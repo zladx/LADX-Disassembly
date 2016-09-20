@@ -4383,8 +4383,7 @@ label_1AC7::
     ld   [$FF9D], a
     ret
 
-; CopyTiles special case for Marin Beach
-label_1ACC::
+AnimateMarinBeachTiles::
     ld   a, [$D601]
     and  a
     ret  nz
@@ -4395,13 +4394,13 @@ label_1ACC::
     ld   de, $9500
     ld   a, [hFrameCounter]
     and  $0F
-    jr   z, label_1AEB
+    jr   z, .skip
     cp   $08
     ret  nz
     ld   l, $40
     ld   e, l
 
-label_1AEB::
+.skip
     ld   a, [hFrameCounter]
     and  $30
     ld   c, a
@@ -4415,18 +4414,30 @@ label_1AEB::
     add  hl, bc
     ld   bc, $0040
     jp   CopyData
-    jr   nz, label_1B67
+    jr   nz, AnimateTilesStep4
     and  b
     ld   [$FFE0], a
     ld   [$FFA0], a
     ld   h, b
 
 AnimateTiles::
+    ;
+    ; Animate Marin dialog on beach tiles
+    ;
+
+    ; If GameplayType == MARIN_BEACH, handle special case
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_MARIN_BEACH
-    jr   z, label_1ACC    ; handle special case
+    jr   z, AnimateMarinBeachTiles
+
+    ;
+    ; Animate Intro sequence tiles
+    ;
+
+    ; If GameplayType != INTRO, skip
     cp   GAMEPLAY_INTRO
-    jr   nz, .continue1
+    jr   nz, AnimateTilesStep2
+ 
     ; GameplayType == INTRO
     ld   a, [$D601]  
     and  a                ; if $D601 != 0   
@@ -4452,27 +4463,42 @@ AnimateTiles::
 .returnEarly
     ret
 
-.continue1
+AnimateTilesStep2::
+    ;
+    ; Animate End Credits tiles
+    ;
+
+    ; If GameplayType != CREDITS, skip
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_CREDITS
-    jr   nz, .continue2
+    jr   nz, AnimateTilesStep3
+
     ; GameplayType == CREDITS
     ld   a, [$FFA5]     
     and  a                          ; if $FFA5 != 0 
-    jr   nz, animateEndCreditsTiles ;   handle end credits animated tiles
+    jr   nz, AnimateEndCreditsTiles ;   handle end credits animated tiles
     ret
 
-.continue2
-    cp   GAMEPLAY_OVERWORLD    ; if GameplayType > $0B
-    jp   c, animateTileReturn  ;   return immediately
+AnimateTilesStep3::
+    ;
+    ; Animate Overworld tiles
+    ;
+
+    ; If GameplayType > OVERWORLD
+    cp   GAMEPLAY_OVERWORLD
+    jp   c, AnimateTilesReturn ; return immediately
+
+    ; If the Inventory window is overlapping the screen
     ld   a, [WR1_WindowY]
-    cp   $80                   ; if WindowY != $80
-    jp   nz, animateTileReturn ;   return immediately
-    ld   a, [WR0_InventoryAppearing]         ; overworld tiles frozen?
-    and  a                  ; if WR0_InventoryAppearing != 0
+    cp   $80
+    jp   nz, AnimateTilesReturn ; return immediately
+
+    ; If the Inventory apparition animation is running
+    ld   a, [WR0_InventoryAppearing]
+    and  a
     jp   nz, label_1D2E     ;   exit?
 
-label_1B67::
+AnimateTilesStep4::
     ld   hl, WR0_MapSlideTransitionState
     ld   a, [$D601]
     or   [hl]
@@ -4488,7 +4514,7 @@ label_1B7D::
     and  a
     jr   z, label_1BCD
 
-animateEndCreditsTiles::
+AnimateEndCreditsTiles::
     ; a == $FFA5
     cp   $01
     jp   z, label_3F93
@@ -4858,7 +4884,7 @@ label_1DE5::
 label_1DE7::
     inc  hl
 
-animateTileReturn::
+AnimateTilesReturn::
     ret
 
 label_1DE9::

@@ -2,7 +2,7 @@ data_380   equ $0380
 
 label_4000::
     ld   a, [WR1_GameplaySubtype]
-    rst  0
+    JP_TABLE
     ld   [de], a
     ld   b, b
     ld   b, d
@@ -535,7 +535,8 @@ label_435C::
     ld   [hl], $00
     ret
     ld   a, [WR1_GameplaySubtype]
-    rst  0
+    JP_TABLE
+    ; Code below is actually data for the jump table
     sub  a, l
     ld   b, e
     dec  hl
@@ -1095,7 +1096,8 @@ label_47CD::
     ret
     call label_5DC0
     ld   a, [WR1_GameplaySubtype]
-    rst  0
+    JP_TABLE
+    ; Code below is actually data for the jump table
     jp   [hl]
     ld   b, a
     push af
@@ -1468,7 +1470,8 @@ label_49FE::
 
 label_4A07::
     ld   a, [WR1_GameplaySubtype]
-    rst  0 ; jump table
+    JP_TABLE
+    ; Code below is actually data for the jump table
     ld   de, label_244A
     ld   c, d
     sbc  a, e
@@ -1968,7 +1971,8 @@ label_4CDA::
     ret
     call label_5DC0
     ld   a, [WR1_GameplaySubtype]
-    rst  0
+    JP_TABLE
+    ; Code below is actually data for the jump table
     ld   a, [de]
     ld   c, l
     inc  l
@@ -2254,7 +2258,8 @@ label_4ED9::
 
 label_4EE5::
     ld   a, [$DBA6]
-    rst  0
+    JP_TABLE
+    ; Code below is actually data for the jump table
     adc  a, e
     ld   c, l
     sub  a, h
@@ -3517,7 +3522,8 @@ label_5619::
     ld   a, [WR1_GameplaySubtype]
 
 label_5639::
-    rst  0
+    JP_TABLE
+    ; Code below is actually data for the jump table
     ld   c, b
     ld   d, [hl]
     ld   a, b
@@ -6349,7 +6355,7 @@ label_6AF4::
 
 label_6AF8::
     ld   a, [WR1_GameplaySubtype]
-    rst  0 ; jump table
+    JP_TABLE
 ._0 dw label_6B0A
 ._1 dw label_6B2B
 ._2 dw label_6B52
@@ -6896,7 +6902,7 @@ label_6EC6::
 
 IntroSceneJumpTable::
     ld   a, [WR1_GameplaySubtype]
-    rst  0 ; jump table
+    JP_TABLE
 ._0 dw label_6EF8 
 ._1 dw label_6F2A
 ._2 dw label_6F36
@@ -8036,7 +8042,7 @@ RenderIntroMarin::
     add  a, $08
     ld   [$C3C0], a
     ld   a, [$FFF0]
-    rst  0 ; jump table
+    JP_TABLE
 ._0 dw label_7681
 ._1 dw label_76AB
 ._3 dw label_76D6
@@ -8574,7 +8580,7 @@ label_7A36::
 
 label_7A47::
     ld   a, [$FFF0]
-    rst  0
+    JP_TABLE
     dw $7a52
     dw $7a5e
     dw $7a6e

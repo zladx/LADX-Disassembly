@@ -2196,8 +2196,7 @@ presentSaveScreenIfNeeded::
 
 jumpToGameplayHandler::
     ld   a, [WR1_GameplayType]
-    rst  0 ; skip to TableJump
-; Jump table
+    JP_TABLE
 ._00 dw IntroHandler
 ._01 dw EndCreditsHandler
 ._02 dw FileSelectionHandler
@@ -2480,14 +2479,15 @@ label_106D::
     ld   a, [$C1A9]
     ld   [$C1A8], a
     dec  a
-    rst  0 ; skip to TableJump
+    JP_TABLE
+    ; Code below is actually data for the jump table
     cp   h
     ld   d, c
-    rst  0 ; skip to TableJump
+    rst  0
     ld   d, c
-    rst  0 ; skip to TableJump
+    rst  0
     ld   d, c
-    rst  0 ; skip to TableJump
+    rst  0
     ld   d, c
     cp   h
     ld   d, c
@@ -2592,7 +2592,8 @@ label_1135::
     ld   a, [$C11C]
 
 label_1138::
-    rst  0 ; skip to TableJump
+    JP_TABLE
+    ; Code below is actually data for the jump table
     ld   h, l
     ld   de, $4F30
     ld   h, b
@@ -4229,7 +4230,8 @@ label_1BCD::
 
 label_1BD2::
     ld   a, [$FFA4]
-    rst  0 ; skip to TableJump
+    JP_TABLE
+    ; Code below is actually data for the jump table
     ld   e, $1D
     ld   sp, hl
     dec  de
@@ -5395,7 +5397,8 @@ label_2345::
     ld   a, e
     and  $7F
     dec  a
-    rst  0 ; skip to TableJump
+    JP_TABLE
+    ; Code below is actually data for the jump table
     ld   l, e
     inc  hl
     or   b
@@ -7790,7 +7793,8 @@ label_32D9::
     ld   a, [bc]
     sub  a, $EC
     jp  c, label_33CB
-    rst  0 ; skip to TableJump
+    JP_TABLE
+    ; Code below is actually data for the jump table
     ld   a, [label_1535]
     ld   [hl], $30
     ld   [hl], $4B
@@ -8961,9 +8965,7 @@ label_3A54::
     ld   a, [$FFEA]
     cp   $05
     jp   z, label_3A8D
-    rst  0 ; skip to TableJump
-
-data_3A6F:: 
+    JP_TABLE
     db 9, $3A, $18, $55, $B6, $4C, $4C, $4C, $B5, $48, $8D, $3A, 7, $4E, $32, $57
     db $94, $4D
 

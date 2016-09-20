@@ -1,3 +1,4 @@
+data_380   equ $0380
 
 label_4000::
     ld   a, [WR1_GameplaySubtype]

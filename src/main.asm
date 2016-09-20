@@ -2808,7 +2808,7 @@ ItemFunction::
     cp   $0A
     jp   z, UseRocksFeather
     cp   $09
-    jp   z, UseOcarina
+    jp   z, label_41FC ; Ocarina
     cp   $0C
     jp   z, UseMagicPowder
     cp   $0B

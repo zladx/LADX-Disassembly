@@ -328,7 +328,6 @@ label_FF44 equ $FF44
 label_FF92 equ $FF92
 label_FF98 equ $FF98
 label_FF9A equ $FF9A
-label_FF9D equ $FF9D
 label_FFA1 equ $FFA1
 label_FFA2 equ $FFA2
 label_FFB4 equ $FFB4
@@ -2836,7 +2835,7 @@ label_107F::
     ld   a, [$FFA1]
     cp   $02
     jr   z, label_10DB
-    ld   a, [$FF9D]
+    ld   a, [hLinkAnimationState]
     cp   $FF
     jr   z, label_10DB
     ld   a, [$C11C]
@@ -4018,7 +4017,7 @@ label_186C::
     ld   a, $01
     ld   [WR1_DidStealItem], a
     xor  a
-    ld   [$FF9D], a
+    ld   [hLinkAnimationState], a
 
 label_1898::
     ld   a, [$FFF9]
@@ -4380,7 +4379,7 @@ label_1AC4::
 label_1AC7::
     add  hl, bc
     ld   a, [hl]
-    ld   [$FF9D], a
+    ld   [hLinkAnimationState], a
     ret
 
 AnimateMarinBeachTiles::
@@ -4757,7 +4756,7 @@ label_1D1E::
     ld   [SelectRomBank_2100], a
 
 label_1D2E::
-    ld   a, [$FF9D]
+    ld   a, [hLinkAnimationState]
     inc  a
     ret  z
     ld   a, [hIsGBC]
@@ -4804,7 +4803,7 @@ label_1D49::
     ld   a, [$DBC7]
     and  $04
     jr   nz, label_1DA1
-    ld   a, [$FF9D]
+    ld   a, [hLinkAnimationState]
     cp   $50
     jr   c, label_1D8C
     cp   $55
@@ -4823,7 +4822,7 @@ label_1D8C::
     ld   [hl], a
 
 label_1D95::
-    ld   a, [$FF9D]
+    ld   a, [hLinkAnimationState]
     cp   $4E
     jr   z, label_1D9F
     cp   $4F
@@ -4853,7 +4852,7 @@ label_1DA1::
     ld   a, [$DBC7]
     and  $04
     jr   nz, label_1DE7
-    ld   a, [$FF9D]
+    ld   a, [hLinkAnimationState]
     cp   $50
     jr   c, label_1DD2
     cp   $55
@@ -4872,7 +4871,7 @@ label_1DD2::
     ld   [hl], a
 
 label_1DDB::
-    ld   a, [$FF9D]
+    ld   a, [hLinkAnimationState]
     cp   $4E
     jr   z, label_1DE5
     cp   $4F
@@ -5356,7 +5355,7 @@ label_20EC::
 
     add  hl, de
     ld   a, [hl]
-    ld   [$FF9D], a
+    ld   [hLinkAnimationState], a
     ld   hl, data_1F55
     add  hl, de
     ld   a, [hPressedButtonsMask]
@@ -5370,7 +5369,7 @@ label_20EC::
     add  hl, de
     ld   a, [hl]
     ld   [$C13B], a
-    ld   hl, $FF9D
+    ld   hl, hLinkAnimationState
     inc  [hl]
     ld   e, $08
     ld   a, [$D47C]

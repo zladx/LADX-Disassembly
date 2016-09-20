@@ -6,6 +6,7 @@ hNeedsUpdatingBGTiles       equ $FF90
 hNeedsUpdatingSpriteTiles   equ $FF91
 hBaseScrollX                equ $FF96
 hBaseScrollY                equ $FF97
+hLinkAnimationState         equ $FF9D
 
 hButtonsInactiveDelay       equ $FFB5 ; Number of frames during which joypad is ignored
 hPressedButtonsMask         equ $FFCB

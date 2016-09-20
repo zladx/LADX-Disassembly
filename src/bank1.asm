@@ -335,7 +335,7 @@ label_420D::
     ld   a, $0F
     ld   [$D6FE], a
     ld   a, $FF
-    ld   [$FF9D], a
+    ld   [hLinkAnimationState], a
     ld   a, [$DB57]
     add  a, $01
     daa
@@ -373,7 +373,7 @@ label_4259::
     ld   hl, label_41CF
     add  hl, de
     ld   a, [hl]
-    ld   [$FF9D], a
+    ld   [hLinkAnimationState], a
     ld   a, [$FFB7]
     rra
     rra
@@ -2987,7 +2987,7 @@ label_5353::
     ld   [$DBA5], a
     jr   z, label_538E
     ld   a, $04
-    ld   [$FF9D], a
+    ld   [hLinkAnimationState], a
     ld   a, $02
     ld   [$FF9E], a
 
@@ -3016,7 +3016,7 @@ label_5394::
     ld   a, $60
     ld   [$DB9E], a
     xor  a
-    ld   [$FF9D], a
+    ld   [hLinkAnimationState], a
     ld   a, $03
     ld   [$FF9E], a
     ld   a, $16

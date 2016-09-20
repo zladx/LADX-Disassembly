@@ -11,7 +11,6 @@ label_4146 equ $4146
 label_41D0 equ $41D0
 label_41FC equ $41FC
 label_4303 equ $4303
-label_4371 equ $4371
 label_4518 equ $4518
 label_4577 equ $4577
 label_4601 equ $4601

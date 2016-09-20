@@ -2306,7 +2306,7 @@ OverworldHandler::
     call label_4ABC
     ld   a, $01
     call SwitchBank
-    jp   label_4371
+    jp   OverworldHandlerEntryPoint
 
 InventoryHandler::
     ld   a, $20

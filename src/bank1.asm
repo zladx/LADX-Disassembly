@@ -534,25 +534,18 @@ label_435C::
     ldi  [hl], a
     ld   [hl], $00
     ret
+
+OverworldHandlerEntryPoint::
     ld   a, [WR1_GameplaySubtype]
     JP_TABLE
-    ; Code below is actually data for the jump table
-    sub  a, l
-    ld   b, e
-    dec  hl
-    ld   b, h
-    or   h
-    ld   b, h
-    db   $DB
-    ld   b, h
-    ld   sp, hl
-    ld   b, h
-    nop
-    ld   b, l
-    rlca
-    ld   b, l
-    ld   c, b
-    rrca
+._0 dw label_4395
+._1 dw label_442B
+._2 dw label_44B4
+._3 dw label_44DB
+._4 dw label_44F9
+._5 dw label_4500
+._6 dw label_4507
+._7 dw label_F48
 
 label_4385::
     nop
@@ -572,6 +565,8 @@ label_438D::
     nop
     nop
     nop
+
+label_4395::
     call label_27F2
     call IncrementGameplaySubtype
     ld   a, [ROM_DebugTool2]
@@ -671,6 +666,8 @@ label_4425::
     ld   a, $09
     ld   [$D6FF], a
     ret
+
+label_442B::
     call label_29C6
     xor  a
     ld   [$C11C], a
@@ -746,6 +743,8 @@ label_44A6::
 label_44B0::
     ld   [$D6FE], a
     ret
+
+label_44B4::
     ld   a, $0F
     ld   [$FF94], a
     ld   a, [hIsGBC]
@@ -773,6 +772,7 @@ IncrementGameplaySubtypeAndReturn::
     inc  [hl]
     ret
 
+label_44DB::
     ld   a, $01
     ld   [$D6FE], a
     ld   a, [$D6FA]
@@ -789,12 +789,18 @@ IncrementGameplaySubtypeAndReturn::
 label_44F5::
     call IncrementGameplaySubtype
     ret
+
+label_44F9::
     call label_3E3F
     call IncrementGameplaySubtype
     ret
+
+label_4500::
     call label_3E5A
     call IncrementGameplaySubtype
     ret
+
+label_4507::
     call label_5895
     ld   a, [$FF40]
     or   $20

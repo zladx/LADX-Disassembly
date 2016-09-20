@@ -994,7 +994,7 @@ vBlankContinue::
     jr   nc, label_504
 
 label_501::
-    call label_1D2E
+    call DrawLinkSprite
 
 label_504::
     call label_FFC0
@@ -2859,7 +2859,7 @@ label_107F::
     ld   a, GAMEPLAY_FILE_SELECT
     ld   [SelectRomBank_2100], a
     call label_755B
-    call label_1D2E
+    call DrawLinkSprite
     call label_398D
     pop  af
     ret
@@ -2937,7 +2937,7 @@ label_1138::
 
 label_114F::
     call label_1794
-    jp   label_1D2E
+    jp   DrawLinkSpriteAndReturn
     ld   a, $19
     call SwitchBank
     jp   $5D6A
@@ -4495,18 +4495,19 @@ AnimateTilesStep3::
     ; If the Inventory apparition animation is running
     ld   a, [WR0_InventoryAppearing]
     and  a
-    jp   nz, label_1D2E     ;   exit?
+    jp   nz, DrawLinkSpriteAndReturn
 
 AnimateTilesStep4::
     ld   hl, WR0_MapSlideTransitionState
     ld   a, [$D601]
     or   [hl]
-    jp   nz, label_1D2E
+    jp   nz, DrawLinkSpriteAndReturn
+
     ld   a, [$D6F8]
     and  a
     jr   z, label_1B7D
     call label_1ED7
-    jp   label_1D2E
+    jp   DrawLinkSpriteAndReturn
 
 label_1B7D::
     ld   a, [$FFA5]
@@ -4541,7 +4542,7 @@ AnimateEndCreditsTiles::
     jp   z, label_1DF0
     cp   $10
     jp   z, label_1DE9
-    jp   label_1D2E
+    jp   DrawLinkSpriteAndReturn
 
 label_1BC5::
     ld   a, $17
@@ -4598,7 +4599,7 @@ label_1BD2::
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
-    jp   label_1D2E
+    jp   DrawLinkSpriteAndReturn
 
 label_1C13::
     ld   l, a
@@ -4665,7 +4666,7 @@ label_1C72::
     call CopyData
 
 label_1C87::
-    jp   label_1D2E
+    jp   DrawLinkSpriteAndReturn
     ld   h, $6E
     jr   label_1C24
     ld   a, [$FFA6]
@@ -4732,7 +4733,7 @@ label_1CE8::
     ld   a, $38
     ld   [SelectRomBank_2100], a
     call label_7830
-    jp   label_1D2E
+    jp   DrawLinkSpriteAndReturn
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
@@ -4755,7 +4756,8 @@ label_1D1E::
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
 
-label_1D2E::
+DrawLinkSprite::
+DrawLinkSpriteAndReturn::
     ld   a, [hLinkAnimationState]
     inc  a
     ret  z
@@ -5083,7 +5085,7 @@ label_1F2C::
     jp   CopyData
 
 label_1F35::
-    jp   label_1D2E
+    jp   DrawLinkSpriteAndReturn
 
 label_1F38::
     ld   bc, $0040
@@ -5096,7 +5098,7 @@ label_1F3E::
     ld   [$FFA5], a
     ld   a, $0C
     ld   [SelectRomBank_2100], a
-    jp   label_1D2E
+    jp   DrawLinkSpriteAndReturn
 
 data_1F49::
     db   $C, 3, 8, 8
@@ -10147,7 +10149,7 @@ label_3FBD::
     ld   [$FFA5], a
     ld   a, $0C
     ld   [SelectRomBank_2100], a
-    jp   label_1D2E
+    jp   DrawLinkSpriteAndReturn
     ld   b, $34
     ld   a, [hIsGBC]
     and  a

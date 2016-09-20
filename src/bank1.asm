@@ -50,7 +50,7 @@ label_403E::
     ei
 
 label_4042::
-    call label_1D2E
+    call DrawLinkSprite
     call label_EFC
     call label_1A22
     ld   a, [$C16B]
@@ -3565,7 +3565,7 @@ label_5674::
     ei
 
 label_5678::
-    call label_1D2E
+    call DrawLinkSprite
     call label_EFC
     call label_1A22
     ld   a, [$C16B]

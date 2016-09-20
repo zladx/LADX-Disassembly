@@ -2157,41 +2157,50 @@ ExecuteGameplayHandler::
     jr   nz, presentSaveScreenIfNeeded
     ; If GameplayType == OVERWORLD
     ld   a, [WR1_GameplaySubtype]
-    cp   $07
+    cp   $07 ; If GameplaySubtype != 7 (standard overworld gameplay)
     jr   nz, jumpToGameplayHandler
 
 presentSaveScreenIfNeeded::
+    ; If a indoor/outdoor transition is running
     ld   a, [WR0_TransitionSequenceCounter]
     cp   $04
     jr   nz, jumpToGameplayHandler
-    ; If WR0_TransitionSequenceCounter == 04 (not during a transition)
+
+    ; If a dialog is visible, or the screen is animating from one map to another
     ld   a, [WR0_DialogState]
     ld   hl, $C167
     or   [hl]
     ld   hl, WR0_MapSlideTransitionState
     or   [hl]
     jr   nz, jumpToGameplayHandler
+
+    ; If GameplayType > INVENTORY (i.e. photo album and pictures)
     ld   a, [WR1_GameplayType]
-    cp   GAMEPLAY_INVENTORY ; If GameplayType > INVENTORY (i.e. photo album and pictures)
+    cp   GAMEPLAY_INVENTORY
     jr   nc, jumpToGameplayHandler
-    ; If GameplayType < INVENTORY
+
+    ; If not all A + B + Start + Select buttons are pressed
     ld   a, [hPressedButtonsMask]
-    cp   J_A | J_B | J_START | J_SELECT ; If hPressedButtonsMask != A+B+Start+Select
+    cp   J_A | J_B | J_START | J_SELECT 
     jr   nz, jumpToGameplayHandler
-    ; If PressedButtonsMask == A+B+Start+Select
+
+    ; If $D474 != 0
     ld   a, [$D474]
     and  a
     jr   nz, jumpToGameplayHandler
+
+    ; If $D464 != 0
     ld   a, [$D464]
     and  a
     jr   nz, jumpToGameplayHandler
-    ; Present save screen
-    xor  a
+
+    ; Present save screen  
+    xor  a ; Clear variables  
     ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [WR0_DialogState], a
     ld   [WR1_GameplaySubtype], a
-    ld   a, GAMEPLAY_FILE_SAVE
+    ld   a, GAMEPLAY_FILE_SAVE ; Set GameplayType to FILE_SAVE
     ld   [WR1_GameplayType], a
 
 jumpToGameplayHandler::

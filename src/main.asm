@@ -428,14 +428,14 @@ DidRenderFrame::
     jr   label_1F8
 
 label_1F2::
-    ld   hl, $C156
+    ld   hl, WR0_ScreenShakeVertical
     ld   a, [hBaseScrollY]
     add  a, [hl]
 
 label_1F8::
     ld   [rSCY], a ; scrollY
     ld   a, [hBaseScrollX]
-    ld   hl, $C155
+    ld   hl, WR0_ScreenShakeHorizontal
     add  a, [hl]
 
 label_200::
@@ -9382,7 +9382,7 @@ label_3BC0::
     ld   a, [$FFEC]
     ld   [de], a
     inc  de
-    ld   a, [$C155]
+    ld   a, [WR0_ScreenShakeHorizontal]
     ld   c, a
     ld   a, [$FFED]
     and  $20
@@ -9438,7 +9438,7 @@ label_3C21::
     ld   a, [$FFEC]
     ld   [de], a
     inc  de
-    ld   a, [$C155]
+    ld   a, [WR0_ScreenShakeHorizontal]
     ld   c, a
     ld   a, [$FFED]
     and  $20
@@ -9519,7 +9519,7 @@ label_3C77::
 label_3C9C::
     ld   [de], a
     inc  de
-    ld   a, [$C155]
+    ld   a, [WR0_ScreenShakeHorizontal]
     ld   h, a
     ld   a, [$FFEE]
     add  a, $04
@@ -9601,7 +9601,7 @@ label_3D06::
     inc  hl
     inc  de
     push bc
-    ld   a, [$C155]
+    ld   a, [WR0_ScreenShakeHorizontal]
     ld   c, a
     ld   a, [$FFEE]
     add  a, [hl]

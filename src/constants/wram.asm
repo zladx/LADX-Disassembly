@@ -52,8 +52,8 @@ label_C14E equ $C14E
 label_C14F equ $C14F
 label_C152 equ $C152
 label_C153 equ $C153
-label_C155 equ $C155
-label_C156 equ $C156
+WR0_ScreenShakeHorizontal   equ $C155 ; background offset for shaking the screen vertically
+WR0_ScreenShakeVertical     equ $C156 ; background offset for shaking the screen vertically
 label_C157 equ $C157
 label_C15A equ $C15A
 label_C15B equ $C15B

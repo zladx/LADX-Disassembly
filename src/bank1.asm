@@ -321,8 +321,8 @@ label_41E7::
     db   $10 ; Undefined instruction
     db   $10 ; Undefined instruction
     db   $af ; Undefined instruction
-    ld   [$C155], a
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeHorizontal], a
+    ld   [WR0_ScreenShakeVertical], a
     ld   a, [$FFB7]
     and  a
 
@@ -6096,7 +6096,7 @@ label_68E3::
     dec  a
     ld   [$D210], a
     jr   nz, label_68FB
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeVertical], a
     ld   a, $20
     ld   [$D210], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -6109,7 +6109,7 @@ label_68FB::
 
 label_6903::
     ld   a, e
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeVertical], a
     ret
     call label_6A7C
     call label_695B
@@ -6151,7 +6151,7 @@ label_6944::
 
 label_695B::
     xor  a
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeVertical], a
     ld   a, [$D215]
     and  a
     jr   z, label_6975
@@ -6164,7 +6164,7 @@ label_695B::
 
 label_6971::
     ld   a, e
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeVertical], a
 
 label_6975::
     ret
@@ -6276,7 +6276,7 @@ label_6A7C::
     ld   [$FFF5], a
     ld   a, $38
     ld   [$FFEE], a
-    ld   a, [$C156]
+    ld   a, [WR0_ScreenShakeVertical]
     ld   e, a
     ld   a, $20
     sub  a, e
@@ -6312,7 +6312,7 @@ label_6AAE::
 label_6AC2::
     ld   a, $48
     ld   [$FFEE], a
-    ld   a, [$C156]
+    ld   a, [WR0_ScreenShakeVertical]
     ld   e, a
     ld   a, [$D211]
     add  a, $20

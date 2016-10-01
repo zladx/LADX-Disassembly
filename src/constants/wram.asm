@@ -8,7 +8,7 @@ WR0_IntroBGYOffset          equ $C106 ; Offset for compensating the sea movement
 label_C108 equ $C108
 label_C10B equ $C10B
 label_C10D equ $C10D
-label_C10E equ $C10E
+WR0_needsUpdatingNPCTiles   equ $C10E
 label_C10F equ $C10F
 label_C111 equ $C111
 label_C112 equ $C112

@@ -258,7 +258,7 @@ RenderInteractiveFrame::
     call ReadJoypadState
 
     ld   a, [hNeedsUpdatingBGTiles]
-    ld   hl, hNeedsUpdatingSpriteTiles
+    ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
     ld   hl, $C10E
     or   [hl]
@@ -655,7 +655,7 @@ vBlankContinue::
     jr   nz, WaitForVBlankAndReturn
     ld   a, [hNeedsUpdatingBGTiles]
     ld   [$FFE8], a
-    ld   hl, hNeedsUpdatingSpriteTiles
+    ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
     ld   hl, $C10E
     or   [hl]
@@ -921,7 +921,7 @@ label_69E::
     jr   label_738
 
 label_6CB::
-    ld   a, [hNeedsUpdatingSpriteTiles]
+    ld   a, [hNeedsUpdatingEnnemiesTiles]
     and  a
     jp   z, label_73E
     ld   a, [$C197]
@@ -987,7 +987,7 @@ label_6F7::
 
 label_738::
     xor  a
-    ld   [hNeedsUpdatingSpriteTiles], a
+    ld   [hNeedsUpdatingEnnemiesTiles], a
     ld   [$FF93], a
 
 label_73D::
@@ -2097,7 +2097,7 @@ label_DDB::
     cp   $FF
     jr   nz, label_DF1
     ld   a, $01
-    ld   [hNeedsUpdatingSpriteTiles], a
+    ld   [hNeedsUpdatingEnnemiesTiles], a
     jr   label_E31
 
 label_DF1::
@@ -2136,7 +2136,7 @@ label_E1E::
     ld   a, d
     ld   [$C197], a
     ld   a, $01
-    ld   [hNeedsUpdatingSpriteTiles], a
+    ld   [hNeedsUpdatingEnnemiesTiles], a
 
 label_E29::
     inc  hl

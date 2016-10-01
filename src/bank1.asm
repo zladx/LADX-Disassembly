@@ -762,7 +762,7 @@ label_44C9::
     call label_D1E
     xor  a
     ld   [hNeedsUpdatingBGTiles], a
-    ld   [hNeedsUpdatingSpriteTiles], a
+    ld   [hNeedsUpdatingEnnemiesTiles], a
     ld   a, $09
     ld   [$D6FE], a
 

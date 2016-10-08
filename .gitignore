@@ -24,3 +24,4 @@ bin/banks/*
 *.obj
 *.sln
 *.suo
+*.DS_Store

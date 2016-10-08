@@ -9994,10 +9994,10 @@ section "bank46",romx,bank[$2E]
 incbin "../bin/banks/bank_2E_B8000.bin"
 
 section "bank47",romx,bank[$2F]
-incbin "../bin/banks/bank_2F_BC000.bin"
+incbin "gfx/bank_2F.2bpp"
 
 section "bank48",romx,bank[$30]
-incbin "../bin/banks/bank_30_C0000.bin"
+incbin "gfx/bank_30.2bpp"
 
 section "bank49",romx,bank[$31]
 incbin "../bin/banks/bank_31_C4000.bin"

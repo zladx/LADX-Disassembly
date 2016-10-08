@@ -1,18 +1,18 @@
 .POSIX:
 
 # If your default python is 3, you may want to change this to python27.
-PYTHON = python
+PYTHON := python
+2BPP   := $(PYTHON) gfx.py 2bpp
 
-.SUFFIXES:
-.SUFFIXES: .asm .o .gbc
-
+.SUFFIXES: .asm .o .gbc .png .2bpp
 
 # For now, we only need to build one rom (game.gbc).
 all: game.gbc
 
-clean: ;
-	@rm -f $(obj)
-	@rm -f game.{gbc,sym,map}
+clean:
+	rm -f $(obj)
+	rm -f game.{gbc,sym,map}
+	find . -iname '*.2bpp' -exec rm {} +
 
 DumpBanks: tools/DumpBanks.c
 	gcc -std=c99 -o DumpBanks tools/DumpBanks.c
@@ -30,8 +30,13 @@ endif
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.
 obj = src/main.o
+asm_files = $(shell find src     -type f -name '*.asm')
+gfx_files = $(shell find src/gfx -type f -name '*.png')
 
-src/main.o: src/*.asm src/constants/*.asm src/code/*.asm bin/banks/bank_00_0.bin
+%.2bpp: %.png
+	$(2BPP) $<
+
+src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) bin/banks/bank_00_0.bin
 
 .asm.o:
 	rgbasm -i src/ -o $@ $<

@@ -104,6 +104,7 @@ RenderLoop::
     jr   .setScrollY
 
 .applyRegularScrollYOffset
+    ; Compose the base offset and the screen shake offset
     ld   hl, WR0_ScreenShakeVertical
     ld   a, [hBaseScrollY]
     add  a, [hl]
@@ -257,11 +258,13 @@ RenderInteractiveFrame::
     call PlayAudioStep
     call ReadJoypadState
 
+    ; If NeedsUpdatingBGTiles or NeedsUpdatingEnnemiesTiles or NeedsUpdatingNPCTiles…
     ld   a, [hNeedsUpdatingBGTiles]
     ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
     ld   hl, WR0_needsUpdatingNPCTiles
     or   [hl]
+    ; skip further rendering: the vblank interrupt will load the required data
     jr   nz, WaitForNextFrame
 
     ; Debug functions

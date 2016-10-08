@@ -6,6 +6,8 @@ hNeedsUpdatingBGTiles       equ $FF90
 hNeedsUpdatingEnnemiesTiles equ $FF91
 hBaseScrollX                equ $FF96
 hBaseScrollY                equ $FF97
+hLinkPositionX              equ $FF98
+hLinkPositionY              equ $FF99
 hLinkAnimationState         equ $FF9D
 
 hButtonsInactiveDelay       equ $FFB5 ; Number of frames during which joypad is ignored

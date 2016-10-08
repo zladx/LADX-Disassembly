@@ -9997,6 +9997,9 @@ section "bank47",romx,bank[$2F]
 incbin "gfx/bank_2F.2bpp"
 
 section "bank48",romx,bank[$30]
+incbin "gfx/intro/clouds-top.2bpp"
+incbin "gfx/intro/clouds-middle.2bpp"
+incbin "gfx/intro/clouds-bottom.2bpp"
 incbin "gfx/bank_30.2bpp"
 
 section "bank49",romx,bank[$31]

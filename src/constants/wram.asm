@@ -22,7 +22,7 @@ label_C120 equ $C120 ; link animation state?
 label_C121 equ $C121
 label_C122 equ $C122
 label_C123 equ $C123
-label_C124 equ $C124
+WR0_MapSlideTransitionState equ $C124
 label_C125 equ $C125
 label_C127 equ $C127
 label_C128 equ $C128
@@ -49,11 +49,11 @@ label_C14B equ $C14B
 label_C14C equ $C14C
 label_C14D equ $C14D
 label_C14E equ $C14E
-label_C14F equ $C14F
+WR0_InventoryAppearing      equ $C14F
 label_C152 equ $C152
 label_C153 equ $C153
-label_C155 equ $C155
-label_C156 equ $C156
+WR0_ScreenShakeHorizontal   equ $C155 ; background offset for shaking the screen vertically
+WR0_ScreenShakeVertical     equ $C156 ; background offset for shaking the screen vertically
 label_C157 equ $C157
 label_C15A equ $C15A
 label_C15B equ $C15B
@@ -71,13 +71,13 @@ label_C16D equ $C16D
 label_C16F equ $C16F
 label_C170 equ $C170
 label_C171 equ $C171
-label_C172 equ $C172
+WR0_DialogScrollDelay       equ $C172
 label_C173 equ $C173
 label_C175 equ $C175
 label_C176 equ $C176
 label_C177 equ $C177
-WR0_DebugMode               equ $C17B ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
-label_C17F equ $C17F
+WR0_FreeMovementMode        equ $C17B ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
+WR0_WarpTransition          equ $C17F ; See WARP_TRANSITION_* constants for possible values
 label_C180 equ $C180
 label_C181 equ $C181
 label_C18A equ $C18A
@@ -89,7 +89,7 @@ label_C197 equ $C197
 label_C19B equ $C19B
 label_C19C equ $C19C
 label_C19D equ $C19D
-label_C19F equ $C19F
+WR0_DialogState             equ $C19F ; See DIALOG_* constants for possible values
 label_C1A4 equ $C1A4
 label_C1A5 equ $C1A5
 label_C1A8 equ $C1A8
@@ -294,8 +294,8 @@ label_D605 equ $D605
 label_D6F8 equ $D6F8
 label_D6FA equ $D6FA
 label_D6FB equ $D6FB
-label_D6FC equ $D6FC
-label_D6FD equ $D6FD
+WR1_EnginePaused            equ $D6FC
+WR1_LCDControl              equ $D6FD
 label_D6FE equ $D6FE
 label_D6FF equ $D6FF
 WR1_TileMap                 equ $D711
@@ -375,7 +375,7 @@ label_DB71                  equ $DB71
 WR1_IsMarinFollowingLink    equ $DB73
 WR1_IsGhostFollowingLink    equ $DB79
 WR1_IsRoosterFollowingLink  equ $DB7B
-WR1_GameplayType            equ $DB95 ; See `GAMEPLAY_*` constants for possible values
+WR1_GameplayType            equ $DB95 ; See GAMEPLAY_* constants for possible values
 WR1_GameplaySubtype         equ $DB96 ; Value depens on GameplayType: this can be a sequence index, or a frame counter.
 WR1_BGPalette               equ $DB97
 WR1_OBJ0Palette             equ $DB98

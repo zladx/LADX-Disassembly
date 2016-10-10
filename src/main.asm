@@ -183,7 +183,6 @@ label_5D6A equ $5D6A
 label_5E67 equ $5E67
 label_5EAB equ $5EAB
 label_5F02 equ $5F02
-label_5F2E equ $5F2E
 label_5F4B equ $5F4B
 label_6000 equ $6000
 label_6080 equ $6080
@@ -326,8 +325,6 @@ label_A161 equ $A161
 label_F7F0 equ $F7F0
 label_FAFA equ $FAFA
 label_FF44 equ $FF44
-label_FF90 equ $FF90
-label_FF91 equ $FF91
 label_FF92 equ $FF92
 label_FF98 equ $FF98
 label_FF9A equ $FF9A
@@ -347,12 +344,12 @@ label_FFF6 equ $FFF6
 
 section "Main", rom0
 
-Start:
+Start::
     cp   $11 ; is running on Game Boy Color?
-    jr   nz, notGBC
+    jr   nz, .notGBC
     ld   a, [rKEY1]
     and  $80 ; do we need to switch the CPU speed?
-    jr   nz, speedSwitchDone
+    jr   nz, .speedSwitchDone
     ld   a, $30      ; \
     ld   [rJOYP], a  ; |
     ld   a, $01      ; |
@@ -360,14 +357,14 @@ Start:
     xor  a           ; |
     ld   [rIE], a    ; |
     stop             ; /
-speedSwitchDone:
+
+.speedSwitchDone
     xor  a
-data_0168::
     ld   [rSVBK], a
     ld   a, $01 ; isGBC = true
     jr   Init
 
-notGBC:
+.notGBC
     xor  a ; isGBC = false
 
 Init::
@@ -415,99 +412,115 @@ Init::
     call label_4854
     jp   WaitForNextFrame
 
-DidRenderFrame::
+RenderLoop::
+    ; Set DidRenderFrame
     ld   a, 1
-    ld   [hWaitingForNextFrame], a ; no longer waiting for next frame
+    ld   [hDidRenderFrame], a 
+
+    ; Special case for $C500 == 1 (alternate background position)
+    ; If $C500 != 0...
     ld   a, [$C500]
     and  a
-    jr   z, label_1F2
+    jr   z, .applyRegularScrollYOffset
+    ; and GameplayType == OVERWORLD...
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_OVERWORLD
-    jr   nz, label_1F2
+    jr   nz, .applyRegularScrollYOffset
+    ; set scroll Y to $00 or $80 alternatively every other frame.
     ld   a, [hFrameCounter]
     rrca
     and  $80
-    jr   label_1F8
+    jr   .setScrollY
 
-label_1F2::
-    ld   hl, $C156
+.applyRegularScrollYOffset
+    ld   hl, WR0_ScreenShakeVertical
     ld   a, [hBaseScrollY]
     add  a, [hl]
 
-label_1F8::
+.setScrollY
     ld   [rSCY], a ; scrollY
-    ld   a, [hBaseScrollX]
-    ld   hl, $C155
-    add  a, [hl]
 
-label_200::
+    ; Set ScrollX
+    ld   a, [hBaseScrollX]
+    ld   hl, WR0_ScreenShakeHorizontal
+    add  a, [hl]
     ld   hl, $C1BF
     add  a, [hl]
     ld   [rSCX], a ; scrollX
-    ld   a, [$D6FE]
-    and  a
-    jr   nz, label_213
-    ld   a, [$D6FF]
-    cp   $00
-    jr   z, label_23D
 
-label_213::
+    ; If the LCD screen is off, load new map data
+    ld   a, [$D6FE]
+    and  a   ; if $D6FE != 0, LoadNewMap
+    jr   nz, RenderLoopLoadNewMap
+    ld   a, [$D6FF] ; tilemap to load?
+    cp   $00 ; if $D6FF != 0, LoadNewMap
+    jr   z, RenderFrame
+
+RenderLoopLoadNewMap::
+    ; Control audio during the transition
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_MARIN_BEACH
-    jr   z, label_229
+    jr   z, .playAudioStep
     cp   GAMEPLAY_FILE_SAVE
-    jr   c, label_229
+    jr   c, .playAudioStep
     cp   GAMEPLAY_OVERWORLD
-    jr   nz, label_22F
+    jr   nz, .skipAudio
+    ; GameplayType == OVERWORLD
     ld   a, [WR1_GameplaySubtype]
     cp   $07
-    jr   nc, label_22F
+    jr   nc, .skipAudio
 
-label_229::
-    call label_8A4
-    call label_8A4
+.playAudioStep
+    call PlayAudioStep
+    call PlayAudioStep
 
-label_22F::
+.skipAudio
     di
-    call label_419
+    call LoadMapData
     ei
-    call label_8A4
-    call label_8A4
+    call PlayAudioStep
+    call PlayAudioStep
     jp   WaitForNextFrame
 
-label_23D::
-    ld   a, [$D6FD]
+RenderFrame::
+    ; Update LCD status flags
+    ld   a, [WR1_LCDControl]
     and  $7F
     ld   e, a
-    ld   a, [$FF40]
+    ld   a, [rLCDC]
     and  $80
     or   e
     ld   [rLCDC], a
+
+    ; Increment the global frame counter
     ld   hl, hFrameCounter
     inc  [hl]
+
+    ; Special case for the intro screen sprites
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_INTRO 
-    jr   nz, label_264 ; if GameplayType != INTRO
+    jr   nz, RenderWarpTransition
     ; GameplayType == INTRO
     ld   a, [WR1_GameplaySubtype]
     cp   $08
-    jr   c, label_264
+    jr   c, RenderWarpTransition
+    ; GameplaySubtype > GAMEPLAY_INTRO_BEACH
     ld   a, $20
     ld   [SelectRomBank_2100], a
-    call label_5257
+    call label_5257 ; position sprites for the title screen?
 
-label_264::
-    ld   a, [$C17F]
+RenderWarpTransition::
+    ld   a, [WR0_WarpTransition]
     and  a
-    jp   z, label_2D5
+    jp   z, RenderInteractiveFrame
     inc  a
-    jr   nz, label_279
+    jr   nz, label_279 
 
 label_26E::
     ld   a, $17
     ld   [SelectRomBank_2100], a
     call label_48DD
-    jp   label_2D5
+    jp   RenderInteractiveFrame
 
 label_279::
     inc  a
@@ -519,16 +532,16 @@ label_279::
     ld   [$C180], a
     cp   $C0
     jr   nz, label_2A0
-    ld   a, [$C17F]
+    ld   a, [WR0_WarpTransition]
     cp   $02
     jr   nz, label_296
     call label_4E51
 
 label_296::
     xor  a
-    ld   [$C17F], a
+    ld   [WR0_WarpTransition], a
     ld   [$C3CA], a
-    jp   label_2D5
+    jp   RenderInteractiveFrame
 
 label_2A0::
     push af
@@ -550,7 +563,7 @@ label_2B7::
     ld   [SelectRomBank_2100], a
     pop  af
     call label_5038
-    call label_8A4
+    call PlayAudioStep
     ld   a, [WR1_BGPalette]
     ld   [rBGP], a
     ld   a, [WR1_OBJ0Palette]
@@ -559,7 +572,8 @@ label_2B7::
     ld   [rOBP1], a
     jp   WaitForNextFrame
 
-label_2D5::
+RenderInteractiveFrame::
+    ; Update graphics registers from game values
     ld   a, [WR1_WindowY]
     ld   [rWY], a
     ld   a, [WR1_BGPalette]
@@ -568,89 +582,120 @@ label_2D5::
     ld   [rOBP0], a
     ld   a, [WR1_OBJ1Palette]
     ld   [rOBP1], a
-    call label_8A4
-    call label_281E
-    ld   a, [$FF90]
-    ld   hl, $FF91
+    
+    call PlayAudioStep
+    call ReadJoypadState
+
+    ld   a, [hNeedsUpdatingBGTiles]
+    ld   hl, hNeedsUpdatingSpriteTiles
     or   [hl]
     ld   hl, $C10E
     or   [hl]
     jr   nz, WaitForNextFrame
-    ld   a, [$0003]
-    and  a
-    jr   z, label_32D
-    ld   a, [$D6FC]
-    and  a
-    jr   nz, label_30D
-    ld   a, [hPressedButtonsMask]
-    and  $0F
-    jr   z, label_327
 
-label_30D::
+    ; Debug functions
+    ld   a, [ROM_DebugTool1]
+    and  a  ; Is debug mode disabled?
+    jr   z, RenderUpdateSprites
+
+    ld   a, [WR1_EnginePaused]
+    and  a  ; Is engine already paused?
+    jr   nz, .engineIsPaused
+
+    ld   a, [hPressedButtonsMask]
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN ; Are none of the directional keys pressed?
+    jr   z, .saveEngineStatus
+
+.engineIsPaused
     ld   a, [$FFCC]
-    and  $40
-    jr   z, label_327
-    ld   a, [$D6FC]
-    xor  $01
-    ld   [$D6FC], a
+    and  J_SELECT  ; Was Select button just pressed?
+    jr   z, .saveEngineStatus
+
+    ; If Select button was just pressed,
+    ; toogle engine paused status.
+    ld   a, [WR1_EnginePaused]
+    xor  $01                  
+    ld   [WR1_EnginePaused], a
+
+    ; If the engine was just paused, skip the rest of the render loop
     jr   nz, WaitForNextFrame
-    ld   a, [WR0_DebugMode]
+
+    ; If the engine was just unpaused,
+    ; toggle Free-movement mode.
+    ld   a, [WR0_FreeMovementMode]
     xor  $10
-    ld   [WR0_DebugMode], a
+    ld   [WR0_FreeMovementMode], a
     jr   WaitForNextFrame
 
-label_327::
-    ld   a, [$D6FC]
+.saveEngineStatus
+    ; If the engine is paused, skip the rest of the render loop
+    ld   a, [WR1_EnginePaused]
     and  a
     jr   nz, WaitForNextFrame
 
-label_32D::
+RenderUpdateSprites::
+    ; If not in Inventory, update sprites
     ld   a, [WR1_GameplayType]
-    cp   GAMEPLAY_INVENTORY
-    jr   nz, label_33B
-    ; GameplayType == INVENTORY
+    cp   GAMEPLAY_INVENTORY  
+    jr   nz, .updateSprites
+    
+    ; If Inventory is actually visible, skip sprites update
     ld   a, [WR1_GameplaySubtype]
-    cp   $02
-    jr   c, label_343
+    cp   GAMEPLAY_INVENTORY_DELAY1
+    jr   c, RenderGameplay
 
-label_33B::
+.updateSprites
     ld   a, $01
     call SwitchBank
-    call label_5F2E
+    call label_5F2E ; sprite-related-method
 
-label_343::
+RenderGameplay::
     call ExecuteGameplayHandler
+
+RenderPalettes::
+    ; If isGBC
     ld   a, [hIsGBC]
     and  a
-    jr   z, label_353
+    jr   z, .resetDDD2
+    ; update palettes
     ld   a, $21
     call SwitchBank
-    call label_406E
+    call label_406E ; update palette set defined in $DDD2?
 
-label_353::
+.resetDDD2
     xor  a
     ld   [$DDD2], a
+
+RenderWindow::
     ld   a, $01
     call SwitchBank
-    call label_5F4B
+    call UpdateWindowPosition
 
 WaitForNextFrame::
     ld   a, $1F
     call SwitchBank
     call label_7F80
+
     ld   a, $0C
     call AdjustBankNumberForGBC
     call SwitchBank
+
     xor  a
-    ld   [hWaitingForNextFrame], a ; Waiting for next frame
+    ld   [hDidRenderFrame], a ; Waiting for next frame
     halt
+
 PollNeedsRenderingFrame::
+    ; Loop until hNeedsRenderingFrame != 0
     ld   a, [hNeedsRenderingFrame]
     and  a
     jr   z, PollNeedsRenderingFrame
+
+    ; Clear hNeedsRenderingFrame
     xor  a
     ld   [hNeedsRenderingFrame], a
-    jp   DidRenderFrame
+
+    ; Jump to the top of the render loop
+    jp   RenderLoop
 
 IntroSeaScreenSections::
     ; Indexes of rows to divide the screen in horizontal sections.
@@ -773,29 +818,52 @@ InterruptSerial::
     pop  af
     reti
 
-label_419::
+; Load tileset, background, sprites while the LCD screen is off
+LoadMapData::
     ld   a, [$D6FE]
     and  a
-    jr   z, label_43A
+    jr   z, .commonCase
+
+    ;
+    ; $D6FE != 0: special case
+    ;
     ld   [$DDD2], a
-    cp   $23
-    jr   z, label_42B
+    cp   $23 ; if $D6FE == $23
+    jr   z, .skipLCDOff
     push af
     call LCDOff
     pop  af
 
-label_42B::
-    call label_430
-    jr   label_45D
+.skipLCDOff
+    call .executeMapLoadFunction
+    jr   .clearValuesAndReturn
 
-label_430::
+.executeMapLoadFunction
     ld   e, a
     ld   a, $20
     ld   [SelectRomBank_2100], a
-    call label_4657
-    jp   [hl]
+    ; label_4657
+    ;   input:  $D6FE in e
+    ;   output: address to jump to in hl
+    ; Table address: 20:4664
+    ; Table values:
+    ;   01  $309B
+    ;   02  $28F7
+    ;   03  $2BCF
+    ;   04  $2C03
+    ;   05  $2D2D
+    ;   06  $2C28
+    ;   07  $2D2D
+    ;   08  $28F0
+    ;   09  $2E73
+    ;   ...
+    call label_4657 
+    jp   [hl] 
 
-label_43A::
+    ;
+    ; $D6FE == 0: common case
+    ;
+.commonCase
     call LCDOff
     ld   a, $24
     ld   [SelectRomBank_2100], a
@@ -810,11 +878,11 @@ label_43A::
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
 
-label_45D::
+.clearValuesAndReturn
     xor  a
     ld   [$D6FF], a
     ld   [$D6FE], a
-    ld   a, [$D6FD]
+    ld   a, [WR1_LCDControl]
     ld   [rLCDC], a
     ret
 
@@ -826,63 +894,82 @@ InterruptVBlank::
     push bc
     push de
     push hl
+
+    ; Adjust loaded bank
     ld   a, [rSVBK]
     and  $07
     ld   c, a
     xor  a
     ld   [rSVBK], a
     push bc
+
     di
+
+    ;
+    ; Photo Album handling
+    ;
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
-    jr   nz, label_48D
+    jr   nz, .continue
     ; GameplayType == PHOTO_ALBUM
     ld   a, [WR1_GameplaySubtype]
     cp   $09
-    jr   c, label_48D
+    jr   c, .continue
     cp   $12
-    jp  c, label_577
+    jp  c, PhotoAlbumVBlankHandler
 
-label_48D::
-    ld   a, [hWaitingForNextFrame]
+.continue
+    ld   a, [hDidRenderFrame]
     and  a
-    jp   nz, WaitForVBlank ; if not already waiting for next frame, do
-    ld   a, [$C19F]
-    and  $7F
-    jr   z, label_4CC
-    cp   $01
-    jr   z, label_4CC
-    cp   $05
-    jr   nc, label_4AC
+    jp   nz, WaitForVBlankAndReturn  ; if not already waiting for next frame, do
+
+    ;
+    ; Dialog handling
+    ;
+    ld   a, [WR0_DialogState]
+    and  $7F  ; If dialog is closed
+    jr   z, vBlankContinue
+    cp   DIALOG_OPENING_1  ; If DialogState == 1
+    jr   z, vBlankContinue 
+    cp   DIALOG_OPENING_5  ; If DialogState > 5
+    jr   nc, .renderDialogText 
+    ; DialogState < 5
+    ; Open dialog
     call label_23E4
-    ld   hl, $C19F
-    inc  [hl]
-    jp   WaitForVBlank
+    ld   hl, WR0_DialogState
+    inc  [hl]  ; Increment DialogState
+    jp   WaitForVBlankAndReturn
 
-label_4AC::
-    cp   $0A
-    jr   nz, label_4B6
-    call label_2719
-    jp   WaitForVBlank
+.renderDialogText
+    cp   DIALOG_SCROLLING_1  ; if DialogState != Scrolling
+    jr   nz, .renderDialogTextContinue
+    ; DialogState == Scrolling 
+    call DialogBeginScrolling
+    jp   WaitForVBlankAndReturn
 
-label_4B6::
-    cp   $0B
-    jr   nz, label_4CC
-    ld   a, [$C172]
-    and  a
-    jr   z, label_4C6
-    dec  a
-    ld   [$C172], a
-    jr   label_4CC
+.renderDialogTextContinue
+    cp   DIALOG_SCROLLING_2  ; if DialogState != Scrolling2
+    jr   nz, vBlankContinue
+    ld   a, [WR0_DialogScrollDelay]
+    and  a  ; if DialogScrollDelay == 0
+    jr   z, .DialogFinishScrolling
+    ; DialogScrollDelay > 0
+    dec  a  ; decrement the delay
+    ld   [WR0_DialogScrollDelay], a
+    jr   vBlankContinue
 
-label_4C6::
-    call label_276D
-    jp   WaitForVBlank
+.DialogFinishScrolling
+    call DialogFinishScrolling
+    jp   WaitForVBlankAndReturn
 
-label_4CC::
+    ; 
+    ; Photo Picture handling
+    ;
+vBlankContinue::
     ld   a, [WR1_GameplayType]
-    cp   GAMEPLAY_PHOTO_DIZZY_LINK
-    jr   c, label_4E4
+    cp   GAMEPLAY_PHOTO_DIZZY_LINK  ; If GameplayType < Photo Picture
+    jr   c, .continue3
+    ; GameplayType is one of the Pictures
     ld   a, [WR1_GameplaySubtype]
     cp   $06
     jr   c, label_52B
@@ -891,18 +978,18 @@ label_4CC::
     call label_785A
     jr   label_52B
 
-label_4E4::
+.continue3
     ld   a, [$D6FE]
     and  a
-    jr   nz, WaitForVBlank
-    ld   a, [$FF90]
+    jr   nz, WaitForVBlankAndReturn
+    ld   a, [hNeedsUpdatingBGTiles]
     ld   [$FFE8], a
-    ld   hl, $FF91
+    ld   hl, hNeedsUpdatingSpriteTiles
     or   [hl]
     ld   hl, $C10E
     or   [hl]
     jr   z, label_509
-    call label_5BC
+    call label_5BC ; Copy tiles?
     ld   a, [$FFE8]
     cp   $08
     jr   nc, label_504
@@ -912,7 +999,7 @@ label_501::
 
 label_504::
     call label_FFC0
-    jr   WaitForVBlank
+    jr   WaitForVBlankAndReturn
 
 label_509::
     ld   a, [$FFBB]
@@ -933,7 +1020,7 @@ label_521::
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
     jr   z, label_52B
-    call label_1B0D
+    call AnimateTiles
 
 label_52B::
     ld   a, [hIsGBC]
@@ -944,7 +1031,7 @@ label_52B::
     call label_5C1A ; Change BG column palette. Triggered by an interrupt?
 .notGBC
     ld   de, $D601
-    call label_2927 ; Load BD column tiles
+    call label_2927 ; Load BG column tiles
     xor  a
     ld   [$D600], a
     ld   [$D601], a
@@ -956,17 +1043,17 @@ label_52B::
     call label_FFC0
     ld   a, [hIsGBC]
     and  a
-    jr   z, WaitForVBlank
+    jr   z, WaitForVBlankAndReturn
     ld   a, $21
     ld   [SelectRomBank_2100], a
     call label_4000
     ld   a, [WR1_CurrentBank]
     ld   [SelectRomBank_2100], a
 
-WaitForVBlank::
+WaitForVBlankAndReturn::
     ei
 
-WaitForVBlank_direct::
+WaitForVBlankAndReturn_direct::
     pop  bc
     ld   a, c
     ld   [rSVBK], a
@@ -978,10 +1065,10 @@ WaitForVBlank_direct::
     pop  af
     reti
 
-label_577::
+PhotoAlbumVBlankHandler::
     ld   a, [WR1_CurrentBank]
     push af
-    ld   a, [$FFFD]
+    ld   a, [hDidRenderFrame]
     and  a
     jr   nz, label_5AB
     call label_FFC0
@@ -1011,10 +1098,11 @@ label_5AB::
     pop  af
     ld   [WR1_CurrentBank], a
     ld   [SelectRomBank_2100], a
-    jr   WaitForVBlank_direct
+    jr   WaitForVBlankAndReturn_direct
 
+; Copy tiles?
 label_5BC::
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     and  a
     jp   z, label_69E
     cp   $07
@@ -1032,7 +1120,7 @@ label_5BC::
     ld   a, [$DBA5]
     and  a
     jp   z, label_656
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     cp   $02
     jp   z, label_826
     ld   a, $0D
@@ -1091,7 +1179,7 @@ label_647::
     cp   $04
     jr   nz, label_655
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
 
 label_655::
@@ -1133,7 +1221,7 @@ label_656::
     cp   $08
     jr   nz, label_69D
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
 
 label_69D::
@@ -1162,7 +1250,7 @@ label_69E::
     jr   label_738
 
 label_6CB::
-    ld   a, [$FF91]
+    ld   a, [hNeedsUpdatingSpriteTiles]
     and  a
     jp   z, label_73E
     ld   a, [$C197]
@@ -1228,7 +1316,7 @@ label_6F7::
 
 label_738::
     xor  a
-    ld   [$FF91], a
+    ld   [hNeedsUpdatingSpriteTiles], a
     ld   [$FF93], a
 
 label_73D::
@@ -1336,7 +1424,7 @@ label_7D3::
     ld   [SelectRomBank_2100], a
     ld   bc, $0040
     call CopyData
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     cp   $0A
     jr   z, label_808
     cp   $0D
@@ -1345,16 +1433,16 @@ label_800::
     jr   z, label_808
 
 label_802::
-    ld   a, [$FF90]
+    ld   a, [hNeedsUpdatingBGTiles]
     inc  a
 
 label_805::
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ret
 
 label_808::
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ret
 
 ; Switch to the bank defined in a, and save the active bank
@@ -1421,7 +1509,7 @@ label_865::
     ld   [SelectRomBank_2100], a
     call label_67E5
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
     ret
 
@@ -1453,7 +1541,7 @@ label_873::
     ld   [$FF92], a
     ret
 
-label_8A4::
+PlayAudioStep::
     ld   a, $1F
     call SwitchBank
     call label_4006
@@ -1911,7 +1999,7 @@ label_B54::
     ld   a, [hIsGBC]
     and  a
     jr   z, label_B80
-    ld   de, data_0168
+    ld   de, $0168
     add  hl, de
     ld   a, $01
     ld   [rVBK], a
@@ -1959,7 +2047,7 @@ label_B99::
     ret
 
 label_BB5::
-    ld   bc, data_0168
+    ld   bc, $0168
     ld   de, $D000
     jp   CopyData
     push af
@@ -2235,7 +2323,7 @@ label_D45::
     cp   $FF
     jr   z, label_D57
     ld   a, $01
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
 
 label_D57::
     jr   label_D91
@@ -2277,7 +2365,7 @@ label_D60::
 label_D8B::
     ld   [$FF94], a
     ld   a, $01
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
 
 label_D91::
     xor  a
@@ -2338,7 +2426,7 @@ label_DDB::
     cp   $FF
     jr   nz, label_DF1
     ld   a, $01
-    ld   [$FF91], a
+    ld   [hNeedsUpdatingSpriteTiles], a
     jr   label_E31
 
 label_DF1::
@@ -2377,7 +2465,7 @@ label_E1E::
     ld   a, d
     ld   [$C197], a
     ld   a, $01
-    ld   [$FF91], a
+    ld   [hNeedsUpdatingSpriteTiles], a
 
 label_E29::
     inc  hl
@@ -2406,10 +2494,10 @@ presentSaveScreenIfNeeded::
     cp   $04
     jr   nz, jumpToGameplayHandler
     ; If WR0_TransitionSequenceCounter == 04 (not during a transition)
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     ld   hl, $C167
     or   [hl]
-    ld   hl, $C124
+    ld   hl, WR0_MapSlideTransitionState
     or   [hl]
     jr   nz, jumpToGameplayHandler
     ld   a, [WR1_GameplayType]
@@ -2417,7 +2505,7 @@ presentSaveScreenIfNeeded::
     jr   nc, jumpToGameplayHandler
     ; If GameplayType < INVENTORY
     ld   a, [hPressedButtonsMask]
-    cp   $F0 ; If hPressedButtonsMask != A+B+Start+Select
+    cp   J_A | J_B | J_START | J_SELECT ; If hPressedButtonsMask != A+B+Start+Select
     jr   nz, jumpToGameplayHandler
     ; If PressedButtonsMask == A+B+Start+Select
     ld   a, [$D474]
@@ -2430,7 +2518,7 @@ presentSaveScreenIfNeeded::
     xor  a
     ld   [WR0_TransitionSequenceCounter], a
     ld   [$C16C], a
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
     ld   [WR1_GameplaySubtype], a
     ld   a, GAMEPLAY_FILE_SAVE
     ld   [WR1_GameplayType], a
@@ -2560,9 +2648,10 @@ PhotoPictureHandler::
 label_F48::
     ld   a, $02
     call SwitchBank
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_F8F
+    ; Dialog is closed
     ld   hl, $FFB4
     ld   a, [hl]
     and  a
@@ -2570,7 +2659,7 @@ label_F48::
     ld   a, [WR1_WindowY]
     cp   $80
     jr   nz, label_F75
-    ld   a, [$C14F]
+    ld   a, [WR0_InventoryAppearing]
     and  a
     jr   nz, label_F75
     dec  [hl]
@@ -2581,7 +2670,7 @@ label_F48::
     call ReloadSavedBank
 
 label_F75::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_F8F
     ld   a, [$C1BC]
@@ -2691,7 +2780,7 @@ label_1033::
     ld   a, [$C1A9]
     and  a
     jr   z, label_107F
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_106D
     ld   hl, $C1AA
@@ -2753,10 +2842,10 @@ label_107F::
     ld   a, [$C11C]
     cp   $02
     jr   nc, label_10DB
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     ld   hl, $C167
     or   [hl]
-    ld   hl, $C124
+    ld   hl, WR0_MapSlideTransitionState
     or   [hl]
     jr   nz, label_10DB
     ld   a, [$D464]
@@ -2795,10 +2884,10 @@ label_10E7::
     ld   [$FFB6], a
 
 label_10EF::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jp   nz, label_1794
-    ld   a, [$C124]
+    ld   a, [WR0_MapSlideTransitionState]
     and  a
     jp   nz, label_114F
     ld   a, [$C11C]
@@ -2807,7 +2896,7 @@ label_10EF::
     ld   a, [$DB5A]
     ld   hl, $C50A
     or   [hl]
-    ld   hl, $C14F
+    ld   hl, WR0_InventoryAppearing
     or   [hl]
     jr   nz, label_1135
     ld   a, $07
@@ -3849,8 +3938,8 @@ label_17DB::
     and  $7F
     cp   $0C
     jr   nz, label_1814
-    ld   hl, $C19F
-    ld   a, [$C124]
+    ld   hl, WR0_DialogState
+    ld   a, [WR0_MapSlideTransitionState]
     or   [hl]
     jr   nz, label_1814
     call label_157C
@@ -4157,7 +4246,7 @@ label_19DA::
     ld   a, $30
     ld   [$C180], a
     ld   a, $03
-    ld   [$C17F], a
+    ld   [WR0_WarpTransition], a
     ld   a, $04
     ld   [WR0_TransitionSequenceCounter], a
     jr   label_1A06
@@ -4294,6 +4383,7 @@ label_1AC7::
     ld   [$FF9D], a
     ret
 
+; CopyTiles special case for Marin Beach
 label_1ACC::
     ld   a, [$D601]
     and  a
@@ -4331,22 +4421,24 @@ label_1AEB::
     ld   [$FFA0], a
     ld   h, b
 
-label_1B0D::
+AnimateTiles::
     ld   a, [WR1_GameplayType]
-    cp   $09
-    jr   z, label_1ACC
-    cp   $00
-    jr   nz, label_1B46
-    ld   a, [$D601]
-    and  a
-    jp   nz, label_1B45
-    ld   a, [hFrameCounter]
+    cp   GAMEPLAY_MARIN_BEACH
+    jr   z, label_1ACC    ; handle special case
+    cp   GAMEPLAY_INTRO
+    jr   nz, .continue1
+    ; GameplayType == INTRO
+    ld   a, [$D601]  
+    and  a                ; if $D601 != 0   
+    jp   nz, .returnEarly ;   return immediatly
+    ld   a, [hFrameCounter]  
     and  $0F
-    cp   $04
-    jr   c, label_1B45
+    cp   $04              ; else if FrameCounter 4-lower-bits < 4    
+    jr   c, .returnEarly  ;   return immediately
     ld   a, $10
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
+; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
     ld   a, [$D006]
     ld   l, a
     ld   a, [$D007]
@@ -4357,31 +4449,31 @@ label_1B0D::
     ld   d, a
     ld   bc, $0020
     jp   CopyData
-
-label_1B45::
+.returnEarly
     ret
 
-label_1B46::
+.continue1
     ld   a, [WR1_GameplayType]
-    cp   $01
-    jr   nz, label_1B53
-    ld   a, [$FFA5]
-    and  a
-    jr   nz, label_1B82
+    cp   GAMEPLAY_CREDITS
+    jr   nz, .continue2
+    ; GameplayType == CREDITS
+    ld   a, [$FFA5]     
+    and  a                          ; if $FFA5 != 0 
+    jr   nz, animateEndCreditsTiles ;   handle end credits animated tiles
     ret
 
-label_1B53::
-    cp   $0B
-    jp  c, label_1DE8
+.continue2
+    cp   GAMEPLAY_OVERWORLD    ; if GameplayType > $0B
+    jp   c, animateTileReturn  ;   return immediately
     ld   a, [WR1_WindowY]
-    cp   $80
-    jp   nz, label_1DE8
-    ld   a, [$C14F]
-    and  a
-    jp   nz, label_1D2E
+    cp   $80                   ; if WindowY != $80
+    jp   nz, animateTileReturn ;   return immediately
+    ld   a, [WR0_InventoryAppearing]         ; overworld tiles frozen?
+    and  a                  ; if WR0_InventoryAppearing != 0
+    jp   nz, label_1D2E     ;   exit?
 
 label_1B67::
-    ld   hl, $C124
+    ld   hl, WR0_MapSlideTransitionState
     ld   a, [$D601]
     or   [hl]
     jp   nz, label_1D2E
@@ -4396,7 +4488,8 @@ label_1B7D::
     and  a
     jr   z, label_1BCD
 
-label_1B82::
+animateEndCreditsTiles::
+    ; a == $FFA5
     cp   $01
     jp   z, label_3F93
     cp   $02
@@ -4431,6 +4524,7 @@ label_1BC5::
     jp   $4062
 
 label_1BCD::
+    ; Increment $FFA6 (count of tiles animations run?)
     ld   a, [$FFA6]
     inc  a
     ld   [$FFA6], a
@@ -4764,7 +4858,7 @@ label_1DE5::
 label_1DE7::
     inc  hl
 
-label_1DE8::
+animateTileReturn::
     ret
 
 label_1DE9::
@@ -5340,7 +5434,7 @@ label_21A7::
     ret
 
 label_21A8::
-    ld   a, [$C14F]
+    ld   a, [WR0_InventoryAppearing]
     and  a
     ret  nz
     ld   c, $01
@@ -5574,7 +5668,7 @@ label_22FE::
     jp   $5570
 
 label_2321::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     ret  z
     ld   e, a
@@ -5665,7 +5759,7 @@ label_2385::
     rra
     and  $80
     or   $01
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
     ret
 
 data_23B0::
@@ -5681,8 +5775,10 @@ data_23D6::
 data_23DC::
     db   $99, $99, $21, $61, $A1, $41, $81, $C1
 
+; Open dialog animation
+; Saves tiles under the dialog box?
 label_23E4::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     bit  7, a
     jr   z, label_23EF
     and  $7F
@@ -5802,7 +5898,7 @@ label_2475::
     jp   $4A2C
 
 label_2485::
-    ld   hl, $C19F
+    ld   hl, WR0_DialogState
     inc  [hl]
     ret
     ld   a, [$C1AB]
@@ -5822,12 +5918,12 @@ label_2496::
     jr   label_24AB
 
 label_24A4::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $F0
     or   $0E
 
 label_24AB::
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
 
 label_24AE::
     ret
@@ -5836,11 +5932,11 @@ label_24AE::
     jp   $4AA8
     ld   a, $1C
     ld   [SelectRomBank_2100], a
-    ld   a, [$C172]
+    ld   a, [WR0_DialogScrollDelay]
     and  a
     jr   z, label_24C7
     dec  a
-    ld   [$C172], a
+    ld   [WR0_DialogScrollDelay], a
     ret
 
 label_24C7::
@@ -5848,7 +5944,7 @@ label_24C7::
     jp   label_2485
     ld   a, $1C
     ld   [SelectRomBank_2100], a
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     ld   c, a
     ld   a, [$C171]
     bit  7, c
@@ -5968,10 +6064,10 @@ label_2529::
     ld   [$D601], a
 
 label_2595::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $F0
     or   $0D
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
 
 label_259F::
     ld   a, $15
@@ -5986,10 +6082,10 @@ label_25A4::
     ld   [$D601], a
 
 label_25AD::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $F0
     or   $0C
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
     ret
 
 data_25B8::
@@ -6120,12 +6216,12 @@ label_2663::
     jr   z, label_268E
 
 label_267E::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $F0
     or   $06
-    ld   [$C19F], a
+    ld   [WR0_DialogState], a
     ld   a, $00
-    ld   [$C172], a
+    ld   [WR0_DialogScrollDelay], a
     ret
 
 label_268E::
@@ -6177,7 +6273,7 @@ label_26B6::
 
 label_26E1::
     ld   e, $00
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $80
     jr   z, label_26EB
     inc  e
@@ -6211,9 +6307,10 @@ data_2715::
 data_2717::
     db $98, $99
 
-label_2719::
+; Scroll dialog line?
+DialogBeginScrolling::
     ld   e, $00
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  $80
     jr   z, label_2723
     inc  e
@@ -6267,8 +6364,8 @@ label_2739::
 label_275D::
     dec  e
     jr   nz, label_2739
-    ld   a, $08
-    ld   [$C172], a
+    ld   a, $08  ; Pause the scrolling for 8 frames
+    ld   [WR0_DialogScrollDelay], a
     jp   label_2485
     ret
 
@@ -6278,7 +6375,7 @@ data_2769::
 data_276B::
     db $98, $99
 
-label_276D::
+DialogFinishScrolling::
     ld   e, 0
     ld   a, [$C0FB+$A4]
     and  $80 ; 'Ç'
@@ -6393,10 +6490,10 @@ GetRandomByte::
     pop  hl
     ret
 
-label_281E::
-    ld   a, [$C124]
+ReadJoypadState::
+    ld   a, [WR0_MapSlideTransitionState]
     and  a
-    jr   nz, label_2886
+    jr   nz, label_2886 ; return
     ld   a, [WR1_GameplayType]
     cp   GAMEPLAY_OVERWORLD
     jr   nz, label_2852
@@ -6584,7 +6681,7 @@ label_2924::
     call label_2941
 
 label_2927::
-    ld   a, [$C124]
+    ld   a, [WR0_MapSlideTransitionState]
     and  a
     jr   nz, label_293C
 
@@ -6744,7 +6841,7 @@ label_29D0::
     ld   bc, $006D
 
 label_29D3::
-    ld   hl, $FF90
+    ld   hl, hNeedsUpdatingBGTiles
     call ZeroMemory
     ld   bc, $1F00
 
@@ -6906,11 +7003,11 @@ label_2B06::
     ld   de, $8800
     ld   bc, $1000
     jp   CopyData
-    call label_8A4
+    call PlayAudioStep
     ld   hl, $6800
     ld   a, $10
     call label_2B92
-    call label_8A4
+    call PlayAudioStep
     ld   a, $12
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
@@ -6918,7 +7015,7 @@ label_2B06::
     ld   de, $8000
     ld   bc, $0080
     call CopyData
-    call label_8A4
+    call PlayAudioStep
     ld   a, [hIsGBC]
     and  a
     jr   nz, label_2B61
@@ -7017,6 +7114,8 @@ label_2BCF::
     ld   de, $9000
     ld   bc, $0800
     jp   CopyData
+
+label_2C28::
     ld   a, $20
     call SwitchBank
     ld   hl, $4589
@@ -7284,6 +7383,8 @@ data_2E6F::
 
 label_2E70::
     ld   de, $120E
+
+label_2E73::
     ld   a, [$FFF7]
     cp   $FF
     jr   nz, label_2E84
@@ -7628,6 +7729,8 @@ label_304F::
     ld   [rVBK], a
     call label_3905
     ret
+
+label_309B::
     call label_3905
     call SwitchBank
     ld   de, vBGMap0
@@ -9037,7 +9140,7 @@ label_398D::
     ld   [$FFF3], a
 
 label_399B::
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_39AE
     ld   a, [$C111]
@@ -9072,7 +9175,7 @@ label_39C1::
     call label_4303
     xor  a
     ld   [SelectRomBank_2100], a
-    ld   a, [$C19F]
+    ld   a, [WR0_DialogState]
     and  a
     jr   nz, label_39E3
     ld   [$C1AD], a
@@ -9353,7 +9456,7 @@ label_3BC0::
     ld   a, [$FFEC]
     ld   [de], a
     inc  de
-    ld   a, [$C155]
+    ld   a, [WR0_ScreenShakeHorizontal]
     ld   c, a
     ld   a, [$FFED]
     and  $20
@@ -9409,7 +9512,7 @@ label_3C21::
     ld   a, [$FFEC]
     ld   [de], a
     inc  de
-    ld   a, [$C155]
+    ld   a, [WR0_ScreenShakeHorizontal]
     ld   c, a
     ld   a, [$FFED]
     and  $20
@@ -9490,7 +9593,7 @@ label_3C77::
 label_3C9C::
     ld   [de], a
     inc  de
-    ld   a, [$C155]
+    ld   a, [WR0_ScreenShakeHorizontal]
     ld   h, a
     ld   a, [$FFEE]
     add  a, $04
@@ -9572,7 +9675,7 @@ label_3D06::
     inc  hl
     inc  de
     push bc
-    ld   a, [$C155]
+    ld   a, [WR0_ScreenShakeHorizontal]
     ld   c, a
     ld   a, [$FFEE]
     add  a, [hl]
@@ -9630,7 +9733,7 @@ label_3D52::
 
 label_3D57::
     push hl
-    ld   a, [$C124]
+    ld   a, [WR0_MapSlideTransitionState]
     and  a
     jr   z, label_3D7D
     ld   a, [$FFEE]
@@ -9881,8 +9984,8 @@ data_3EDF::
     db $B0, $B4, $B1, $B2, $B3, $B6, $BA, $BC, $B8
 
 label_3EE8::
-    ld   hl, $C14F
-    ld   a, [$C124]
+    ld   hl, WR0_InventoryAppearing
+    ld   a, [WR0_MapSlideTransitionState]
     or   [hl]
     ret  nz
     ld   a, [$C165]

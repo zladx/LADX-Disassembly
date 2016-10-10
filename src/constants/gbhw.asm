@@ -27,6 +27,16 @@ TIMER    EQU 2
 SERIAL   EQU 3
 JOYPAD   EQU 4
 
+; Joypad buttons mask
+J_RIGHT  EQU 1 << 0
+J_LEFT   EQU 1 << 1
+J_UP     EQU 1 << 2
+J_DOWN   EQU 1 << 3
+J_A      EQU 1 << 4
+J_B      EQU 1 << 5
+J_SELECT EQU 1 << 6
+J_START  EQU 1 << 7
+
 ; OAM attribute flags
 OAM_PALETTE   EQU %111
 OAM_TILE_BANK EQU 3

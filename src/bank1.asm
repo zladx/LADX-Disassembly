@@ -63,7 +63,7 @@ label_4042::
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
-    ld   [$C14F], a
+    ld   [WR0_InventoryAppearing], a
     ld   [$C1B8], a
     ld   [$C1B9], a
     ld   [$C1B5], a
@@ -80,7 +80,7 @@ label_4072::
     ld   a, $0D
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -146,11 +146,11 @@ label_40F9::
     call label_6162
     ld   a, $C7
     ld   [rLCDC], a
-    ld   [$D6FD], a
+    ld   [WR1_LCDControl], a
     ld   a, $07
     ld   [rWX], a
     ld   a, $80
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     ld   [rWY], a
     ld   a, $07
     ld   [$FFA9], a
@@ -321,8 +321,8 @@ label_41E7::
     db   $10 ; Undefined instruction
     db   $10 ; Undefined instruction
     db   $af ; Undefined instruction
-    ld   [$C155], a
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeHorizontal], a
+    ld   [WR0_ScreenShakeVertical], a
     ld   a, [$FFB7]
     and  a
 
@@ -404,7 +404,7 @@ label_4259::
     ld   a, $0A
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -572,7 +572,7 @@ label_438D::
     nop
     call label_27F2
     call IncrementGameplaySubtype
-    ld   a, [$0004]
+    ld   a, [ROM_DebugTool2]
     and  a
     jr   z, label_43A7
     ld   a, $0B
@@ -760,8 +760,8 @@ label_44B0::
 label_44C9::
     call label_D1E
     xor  a
-    ld   [$FF90], a
-    ld   [$FF91], a
+    ld   [hNeedsUpdatingBGTiles], a
+    ld   [hNeedsUpdatingSpriteTiles], a
     ld   a, $09
     ld   [$D6FE], a
 
@@ -796,7 +796,7 @@ label_44F5::
     call label_5895
     ld   a, [$FF40]
     or   $20
-    ld   [$D6FD], a
+    ld   [WR1_LCDControl], a
     ld   [rLCDC], a
     call IncrementGameplaySubtype
     ld   a, [$C11C]
@@ -942,7 +942,7 @@ label_46AA::
     call label_4794
     ld   de, $75A
     call label_4794
-    ld   a, [$0003]
+    ld   a, [ROM_DebugTool1]
     and  a
     jp   z, label_4793
     ld   e, $00
@@ -3582,7 +3582,7 @@ label_5678::
     ld   [hBaseScrollX], a
     ld   [$C1BF], a
     ld   [$FF97], a
-    ld   [$C14F], a
+    ld   [WR0_InventoryAppearing], a
     ld   [$C1B2], a
     ld   [$C1B3], a
     ld   a, [$DB54]
@@ -3617,7 +3617,7 @@ label_56D9::
     ld   [$C1B4], a
     ld   a, [$FF40]
     and  $DF
-    ld   [$D6FD], a
+    ld   [WR1_LCDControl], a
     ld   [rLCDC], a
     call label_5888
     ld   a, $08
@@ -3644,7 +3644,7 @@ label_56F3::
 
 label_571B::
     ret
-    ld   a, [$0005]
+    ld   a, [ROM_DebugTool3]
     and  a
     jr   z, label_5731
     ld   a, [$FFCC]
@@ -3745,7 +3745,7 @@ label_57B3::
     ret
 
 label_57B7::
-    ld   a, [$0003]
+    ld   a, [ROM_DebugTool1]
     and  a
     jr   z, label_57FA
     ld   a, [$FFCB]
@@ -3778,7 +3778,7 @@ label_57B7::
 
 label_57FA::
     ld   e, $40
-    ld   a, [$0003]
+    ld   a, [ROM_DebugTool1]
     and  a
     jr   nz, label_5804
     ld   e, $60
@@ -3860,7 +3860,7 @@ label_5885::
     ld   [$D6FE], a
 
 label_5888::
-    ld   hl, $C124
+    ld   hl, WR0_MapSlideTransitionState
     ld   e, $00
 
 label_588D::
@@ -3873,13 +3873,13 @@ label_588D::
 
 label_5895::
     ld   a, $80
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     ld   a, $07
     ld   [rWX], a
     ld   a, $08
     ld   [$C150], a
     xor  a
-    ld   [$C14F], a
+    ld   [WR0_InventoryAppearing], a
 
 label_58A7::
     ret
@@ -4033,7 +4033,7 @@ label_5AA0::
     ld   a, [hl]
     and  $FF
     jr   nz, label_5AF5
-    ld   a, [WR0_DebugMode]
+    ld   a, [WR0_FreeMovementMode]
     and  a
     jr   nz, label_5AF5
     ld   a, $09
@@ -4725,6 +4725,8 @@ label_5F19::
 
 label_5F2D::
     ret
+
+label_5F2E::
     ld   hl, $0000
     ld   a, [hIsGBC]
     and  a
@@ -4748,11 +4750,13 @@ label_5F43::
     dec  b
     jr   nz, label_5F43
     ret
-    ld   a, [$C14F]
+
+UpdateWindowPosition::
+    ld   a, [WR0_InventoryAppearing]
     and  a
     jr   z, label_5F6A
     ld   hl, $C000
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     add  a, $08
     ld   d, a
     ld   e, $28
@@ -4773,7 +4777,7 @@ label_5F62::
     ret
 
 label_5F6A::
-    ld   a, [$DB9A]
+    ld   a, [WR1_WindowY]
     and  a
     ret  z
     ld   a, [$C19F]
@@ -5164,7 +5168,7 @@ label_61E9::
     ld   a, [$C11C]
     cp   $00
     jr   nz, label_6202
-    ld   a, [WR0_DebugMode]
+    ld   a, [WR0_FreeMovementMode]
     and  a
     jr   nz, label_6202
     ld   a, [$FFF7]
@@ -5235,7 +5239,7 @@ label_6281::
     ld   a, $13
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$C16B], a
@@ -6041,7 +6045,7 @@ label_6885::
     ld   a, e
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -6096,7 +6100,7 @@ label_68E3::
     dec  a
     ld   [$D210], a
     jr   nz, label_68FB
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeVertical], a
     ld   a, $20
     ld   [$D210], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -6109,7 +6113,7 @@ label_68FB::
 
 label_6903::
     ld   a, e
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeVertical], a
     ret
     call label_6A7C
     call label_695B
@@ -6151,7 +6155,7 @@ label_6944::
 
 label_695B::
     xor  a
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeVertical], a
     ld   a, [$D215]
     and  a
     jr   z, label_6975
@@ -6164,7 +6168,7 @@ label_695B::
 
 label_6971::
     ld   a, e
-    ld   [$C156], a
+    ld   [WR0_ScreenShakeVertical], a
 
 label_6975::
     ret
@@ -6276,7 +6280,7 @@ label_6A7C::
     ld   [$FFF5], a
     ld   a, $38
     ld   [$FFEE], a
-    ld   a, [$C156]
+    ld   a, [WR0_ScreenShakeVertical]
     ld   e, a
     ld   a, $20
     sub  a, e
@@ -6312,7 +6316,7 @@ label_6AAE::
 label_6AC2::
     ld   a, $48
     ld   [$FFEE], a
-    ld   a, [$C156]
+    ld   a, [WR0_ScreenShakeVertical]
     ld   e, a
     ld   a, [$D211]
     add  a, $20
@@ -6403,7 +6407,7 @@ label_6B52::
     ld   a, $15
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [$DB9A], a
+    ld   [WR1_WindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -6477,7 +6481,7 @@ label_6BB4::
 label_6BC6::
     call label_6BEA
     xor  a
-    ld   [$FF90], a
+    ld   [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
     ret
 
@@ -6746,7 +6750,7 @@ label_6DD0::
     db 0, 0, 0, 0, 0, 0, 0, 0, $D, $9E
 
 label_6DEA::
-    ld   a, [$0004]
+    ld   a, [ROM_DebugTool2]
     and  a
     ret  nz
     ld   a, [$DBA5]
@@ -6922,7 +6926,7 @@ label_6EF8::
     ld   [$C13D], a
     ld   a, [$FF40]
     and  $DF
-    ld   [$D6FD], a
+    ld   [WR1_LCDControl], a
     ld   [rLCDC], a
     ld   a, $B4
     ld   [$D016], a

@@ -1,6 +1,10 @@
 # Links Awakening DX Disassembly
 
-Taking on this myself for now. We will see how far I get. 
+Disassembly of one of my favorite games. Taking it easy for now.
+
+Thanks to these people for contributing:
+    * kemenaran - https://github.com/kemenaran
+    * Drenn1 - https://github.com/Drenn1
 
 Using rom
 

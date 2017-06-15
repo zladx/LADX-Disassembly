@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # A library for working with Game Boy graphics.
@@ -283,7 +283,7 @@ def export_2bpp_to_png(filein, fileout=None, **kwargs):
 
     kwargs.update(read_filename_arguments(filein))
 
-    if pal_file == None:
+    if kwargs.get('pal_file', None) == None:
         if os.path.exists(os.path.splitext(fileout)[0]+'.pal'):
             kwargs['pal_file'] = os.path.splitext(fileout)[0]+'.pal'
 

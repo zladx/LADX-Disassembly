@@ -6797,19 +6797,19 @@ label_2BC1::
 label_2BCF::
     ld   a, $0C
     call SwitchAdjustedBank
-    ld   hl, data_bank_c_0000
+    ld   hl, $4000
     ld   de, $8000
-    ld   bc, data_bank_c_0400-data_bank_c_0000
+    ld   bc, $0400
     call CopyData
     ld   a, $0C
     call SwitchAdjustedBank
-    ld   hl, data_bank_c_0800
+    ld   hl, $4800
     ld   de, $8800
-    ld   bc, data_bank_c_1800-data_bank_c_0800
+    ld   bc, $1000
     call CopyData
-    ld   hl, data_bank_c_07A0
+    ld   hl, $47A0
     ld   de, $8E00
-    ld   bc, data_bank_c_07C0-data_bank_c_07A0
+    ld   bc, $0020
     call CopyData
     ld   a, $01
     call SwitchBank
@@ -9889,15 +9889,7 @@ section "bank11",romx,bank[$0B]
 incbin "../bin/banks/bank_0B_2C000.bin"
 
 section "bank12",romx,bank[$0C]
-;incbin "../bin/banks/bank_0C_30000.bin"
-
-data_bank_c_0000:: incbin "data/Bank_0xC_0x0000"
-data_bank_c_0400:: incbin "data/Bank_0xC_0x0400"
-data_bank_c_07A0:: incbin "data/Bank_0xC_0x07A0"
-data_bank_c_07C0:: incbin "data/Bank_0xC_0x07C0"
-data_bank_c_0800:: incbin "data/Bank_0xC_0x0800"
-
-data_bank_c_1800:: incbin "../bin/banks/bank_0C_30000.bin", $1800, $2800
+incbin "../bin/banks/bank_0C_30000.bin"
 
 section "bank13",romx,bank[$0D]
 incbin "../bin/banks/bank_0D_34000.bin"
@@ -10002,10 +9994,13 @@ section "bank46",romx,bank[$2E]
 incbin "../bin/banks/bank_2E_B8000.bin"
 
 section "bank47",romx,bank[$2F]
-incbin "../bin/banks/bank_2F_BC000.bin"
+incbin "gfx/bank_2F.2bpp"
 
 section "bank48",romx,bank[$30]
-incbin "../bin/banks/bank_30_C0000.bin"
+incbin "gfx/intro/clouds-top.2bpp"
+incbin "gfx/intro/clouds-middle.2bpp"
+incbin "gfx/intro/clouds-bottom.2bpp"
+incbin "gfx/bank_30.2bpp"
 
 section "bank49",romx,bank[$31]
 incbin "../bin/banks/bank_31_C4000.bin"

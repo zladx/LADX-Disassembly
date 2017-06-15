@@ -22,6 +22,9 @@ bin/banks:
 	mkdir -p bin/banks
 
 bin/banks/bank_00_0.bin: bin/banks DumpBanks
+ifeq (,$(wildcard Zelda.gbc))
+	$(error Original "Zelda.gbc" banks are missing. Find a copy of the "Legend of Zelda, The - Link's Awakening DX (U) (V1.0) [C][!]" (md5: 07C211479386825042EFB4AD31BB525F), and put it in the root directory to dump the banks)
+endif
 	cd bin/banks && ../../DumpBanks ../../Zelda.gbc
 
 # Objects are assembled from source.

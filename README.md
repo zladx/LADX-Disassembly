@@ -34,7 +34,8 @@ Here is how to use BGB for reverse-engineering the game:
 
 1. Compile the game (`make all`).
 
-  It produces `game.gbc` (a compiled rom identical to the original) and, more importantly, `game.map`, the debug symbols.
+    It produces `game.gbc` (a compiled rom identical to the original) and more importantly `game.map`, the debug symbols.
+  
 2. Open `game.gbc` in the [BGB emulator](http://bgb.bircd.org/).
 3. Open the debugger, and jump to the `0000:0150` address. You'll see a function named `Start`. Notice how BGB knows the name of this function from the debug symbols.
 4. You can now trace the execution of the code, set breakpoints, watchers, edit the memory, etc.

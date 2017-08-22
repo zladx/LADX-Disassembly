@@ -1,3 +1,6 @@
+; Gameplay-related enums values
+
+; Constants
 TILES_PER_ROW              equ $0B
 TILES_PER_MAP              equ $80
 

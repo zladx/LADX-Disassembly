@@ -9,16 +9,16 @@ include "code/header.asm"
 
 ; Sources
 section "Main", rom0
-include "bank0.asm"
+include "code/bank0.asm"
 
 section "bank1",romx,bank[$01]
-include "bank1.asm"
+include "code/bank1.asm"
 
 section "bank2",romx,bank[$02]
 incbin "../bin/banks/bank_02_8000.bin"
 
 section "bank3",romx,bank[$03]
-include "bank3.asm"
+include "code/bank3.asm"
 
 section "bank4",romx,bank[$04]
 incbin "../bin/banks/bank_04_10000.bin"

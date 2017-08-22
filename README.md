@@ -48,7 +48,7 @@ From there **the goal is to pick a function or a memory location, and understand
   - see what memory location it reads or changes,
   - observe the values changing in the memory viewer while the game runs,
   - use the debugger to replace the function by a `nop`, and see what change occur in the game
-3. Open the assembly source (`src/main.asm`, or `src/bank1.asm`) or memory map (`src/constants/*`), and label the code or memory you identified the purpose of.
+3. Open the assembly source (`src/code/bank*.asm`) or memory map (`src/constants/*`), and label the code or memory you identified the purpose of.
 4. Rince and repeat.
 
 ### Using `awake` (for static analysis)

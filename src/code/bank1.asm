@@ -1,3 +1,6 @@
+; Code for bank 1.
+; Contains main engine support code.
+
 data_380   equ $0380
 
 label_4000::

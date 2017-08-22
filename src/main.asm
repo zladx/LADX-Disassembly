@@ -4,7 +4,6 @@
 include "constants/constants.asm"
 include "code/rst.asm"
 include "code/header.asm"
-include "labels.asm"
 
 ; Include sources
 section "Main", rom0

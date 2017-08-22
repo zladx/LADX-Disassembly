@@ -6369,7 +6369,7 @@ ClearMap::
     jr   nz, .clearMap_loop
     ret
 
-include "CopyData.asm"
+include "code/copydata.asm"
 
 label_291D::
     inc  de

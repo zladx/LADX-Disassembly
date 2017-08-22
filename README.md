@@ -55,18 +55,18 @@ From there **the goal is to pick a function or a memory location, and understand
 
 [Awake](https://github.com/kemenaran/awake) is a static GameBoy assembly explorer, specially tuned for exploring ZeldaGB and ZeldaDX. It allows to identify functions, loops, and to jump easily from functions to function. It makes much easier to follow the flow of the code and data during the game.
 
-The tool was initially developed by @devdri. @kemenaran is currently writing some improvement to this tools, so that it can read debug symbols (otherwise no functions are labelled), and label functions from within the explorer. But this is still very much a work in progress. 
+The tool was initially developed by @devdri. @kemenaran is currently writing some improvement to this tools, so that it can read debug symbols (otherwise no functions are labelled), and label functions from within the explorer. But this is still very much a work in progress.
 
 ## How to extract graphics
 
 Graphics are stored in the ROM under the [2bpp binary format](http://www.huderlem.com/demos/gameboy2bpp.html). It encodes images in 4 nuances of grey (a palette is then applied at runtime to color them). This repository contains a tool to convert from and to the 2bpp file format.
 
 1. First let’s find a bank that contains graphic data (for instance using this [bank map](https://github.com/kemenaran/awake/blob/master/note.txt#L223-L255), or by picking a bank randomly).
-2. Attempt to convert the whole binary bank to PNG, and see if we recognize sprites in the resulting picture. For this you can use the `gfx.py` script in this repository.
+2. Attempt to convert the whole binary bank to PNG, and see if we recognize sprites in the resulting picture. For this you can use the `gfx.py` tool provided in this repository.
 
   - Take a binary bank you want to look at from bin/banks (dumped from the original rom). For instance the bank 2F.
   - Copy it somewhere, and rename it with a `.2bpp` file extention
-  - Run `gfx.py` to convert it to png: `./gfx.py png bank_2F_BC000.bin.2bpp`
+  - Run `gfx.py` to convert it to png: `tools/gfx.py png bank_2F_BC000.bin.2bpp`
   - Look at the resulting `bank_2F_BC000.bin.png`.
 
     If you recognize pictures and sprites in the resulting png picture, congratulation, you found a gfx data bank! On the opposite, if it all looks garbled, this is probably a code bank, or a bank that contains other data (like dungeon maps, or ennemies stats).
@@ -79,7 +79,7 @@ Graphics are stored in the ROM under the [2bpp binary format](http://www.huderle
   - incbin "../bin/banks/bank_2F_B8000.bin
   + incbin "gfx/bank_2F.2bpp"
   ```
-  
+
   At compile-time, the file `src/gfx/bank_2F.png` will be compiled back to a 2bpp file, and included into the ROM.
 
 Once this is done, you can even start splitting this large PNG file into some smaller fragments, sprite-per-sprite (have a look at `src/gfx` to see some already extracted sprites).

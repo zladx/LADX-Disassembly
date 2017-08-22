@@ -2,7 +2,7 @@
 
 # If your default python is 3, you may want to change this to python27.
 PYTHON := python
-2BPP   := $(PYTHON) gfx.py 2bpp
+2BPP   := $(PYTHON) tools/gfx.py 2bpp
 
 .SUFFIXES: .asm .o .gbc .png .2bpp
 

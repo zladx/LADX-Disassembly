@@ -1,11 +1,13 @@
 ; Root source file for the game.
 
-; Include defines and utility functions
+; Definitions
 include "constants/constants.asm"
-include "code/rst.asm"
+
+; Utilities fonctions and ROM header
+include "code/interrupts.asm"
 include "code/header.asm"
 
-; Include sources
+; Sources
 section "Main", rom0
 include "bank0.asm"
 

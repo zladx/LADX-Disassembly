@@ -132,13 +132,22 @@ section "bank40",romx,bank[$28]
 incbin "../bin/banks/bank_28_A0000.bin"
 
 section "bank41",romx,bank[$29]
-incbin "gfx/photos/bank_29.2bpp"
+incbin "gfx/photos/photo_nice_link.2bpp"
+incbin "gfx/photos/photo_marin_cliff.2bpp"
+incbin "gfx/photos/photo_marin_well.2bpp"
+incbin "gfx/photos/photo_mabe.2bpp"
 
 section "bank42",romx,bank[$2A]
-incbin "gfx/photos/bank_2A.2bpp"
+incbin "gfx/photos/photo_ulrira.2bpp"
+incbin "gfx/photos/photo_bow_wow.2bpp"
+incbin "gfx/photos/photo_shop.2bpp"
+incbin "gfx/photos/photo_fisherman.2bpp"
 
 section "bank43",romx,bank[$2B]
-incbin "gfx/photos/bank_2B.2bpp"
+incbin "gfx/photos/photo_zora.2bpp"
+incbin "gfx/photos/photo_kanalet.2bpp"
+incbin "gfx/photos/photo_ghost.2bpp"
+incbin "gfx/photos/photo_bridge.2bpp"
 
 section "bank44",romx,bank[$2C]
 incbin "gfx/bank_2C.2bpp"
@@ -184,13 +193,14 @@ section "bank56",romx,bank[$38]
 incbin "gfx/bank_38.2bpp"
 
 section "bank57",romx,bank[$39]
-incbin "gfx/photos/bank_39.2bpp"
+incbin "gfx/photos/photo_elements_1.2bpp"
 
 section "bank58",romx,bank[$3A]
-incbin "gfx/photos/bank_3A.2bpp"
+incbin "gfx/photos/photo_elements_2.2bpp"
 
 section "bank59",romx,bank[$3B]
-incbin "gfx/photos/bank_3B.2bpp"
+incbin "gfx/photos/photo_elements_3.2bpp"
+incbin "gfx/photos/photo_dizzy_link.2bpp"
 
 section "bank60",romx,bank[$3C]
 incbin "../bin/banks/bank_3C_F0000.bin"

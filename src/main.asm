@@ -45,25 +45,38 @@ section "bank11",romx,bank[$0B]
 incbin "../bin/banks/bank_0B_2C000.bin"
 
 section "bank12",romx,bank[$0C]
-incbin "gfx/characters/link_1.2bpp"
-incbin "gfx/items/items.2bpp"
-incbin "gfx/items/instruments.2bpp"
-incbin "gfx/world/overworld.2bpp"
-incbin "gfx/characters/link_2.2bpp"
-incbin "gfx/world/animated_tiles.2bpp"
-incbin "gfx/world/minimap.2bpp"
+incbin "gfx/characters/link_1.dmg.2bpp"
+incbin "gfx/items/items.dmg.2bpp"
+incbin "gfx/items/instruments.dmg.2bpp"
+incbin "gfx/world/overworld_1.dmg.2bpp"
+incbin "gfx/characters/link_2.dmg.2bpp"
+incbin "gfx/world/animated_tiles.dmg.2bpp"
+incbin "gfx/world/minimap.dmg.2bpp"
 
 section "bank13",romx,bank[$0D]
-incbin "gfx/world/dungeons.2bpp"
+incbin "gfx/world/dungeons.dmg.2bpp"
 
 section "bank14",romx,bank[$0E]
 incbin "gfx/bank_0E.2bpp"
 
 section "bank15",romx,bank[$0F]
-incbin "gfx/bank_0F.2bpp"
+incbin "gfx/menus/menu.dmg.2bpp"
+incbin "gfx/intro/title.dmg.2bpp"
+incbin "gfx/fonts/font.dmg.2bpp"
+incbin "gfx/world/camera_shop.dmg.2bpp"
+incbin "gfx/world/overworld_2.dmg.2bpp"
 
 section "bank16",romx,bank[$10]
-incbin "gfx/bank_10.2bpp"
+incbin "gfx/intro/clouds-top.dmg.2bpp"
+incbin "gfx/intro/clouds-middle.dmg.2bpp"
+incbin "gfx/intro/clouds-bottom.dmg.2bpp"
+incbin "gfx/intro/waves-bottom.dmg.2bpp"
+incbin "gfx/intro/intro.dmg.2bpp"
+incbin "gfx/scenes/christine.dmg.2bpp"
+incbin "gfx/scenes/marin_beach.dmg.2bpp"
+incbin "gfx/fonts/font_large.dmg.2bpp"
+incbin "gfx/scenes/relief.dmg.2bpp"
+incbin "gfx/scenes/painting.dmg.2bpp"
 
 section "bank17",romx,bank[$11]
 incbin "gfx/bank_11.2bpp"
@@ -156,23 +169,38 @@ incbin "gfx/photos/photo_ghost.2bpp"
 incbin "gfx/photos/photo_bridge.2bpp"
 
 section "bank44",romx,bank[$2C]
-incbin "gfx/bank_2C.2bpp"
+incbin "gfx/characters/link_1.cgb.2bpp"
+incbin "gfx/items/items.cgb.2bpp"
+incbin "gfx/items/instruments.cgb.2bpp"
+incbin "gfx/world/overworld_1.cgb.2bpp"
+incbin "gfx/characters/link_2.cgb.2bpp"
+incbin "gfx/world/animated_tiles.cgb.2bpp"
+incbin "gfx/world/minimap.cgb.2bpp"
 
 section "bank45",romx,bank[$2D]
-incbin "gfx/bank_2D.2bpp"
+incbin "gfx/world/dungeons.cgb.2bpp"
 
 section "bank46",romx,bank[$2E]
 incbin "gfx/bank_2E.2bpp"
 
 section "bank47",romx,bank[$2F]
-incbin "gfx/bank_2F.2bpp"
+incbin "gfx/menus/menu.cgb.2bpp"
+incbin "gfx/intro/title.cgb.2bpp"
+incbin "gfx/fonts/font.cgb.2bpp"
+incbin "gfx/world/camera_shop.cgb.2bpp"
+incbin "gfx/world/overworld_2.cgb.2bpp"
 
 section "bank48",romx,bank[$30]
-incbin "gfx/intro/clouds-top.2bpp"
-incbin "gfx/intro/clouds-middle.2bpp"
-incbin "gfx/intro/clouds-bottom.2bpp"
-incbin "gfx/intro/waves-bottom.2bpp"
-incbin "gfx/bank_30.2bpp"
+incbin "gfx/intro/clouds-top.cgb.2bpp"
+incbin "gfx/intro/clouds-middle.cgb.2bpp"
+incbin "gfx/intro/clouds-bottom.cgb.2bpp"
+incbin "gfx/intro/waves-bottom.cgb.2bpp"
+incbin "gfx/intro/intro.cgb.2bpp"
+incbin "gfx/scenes/christine.cgb.2bpp"
+incbin "gfx/scenes/marin_beach.cgb.2bpp"
+incbin "gfx/fonts/font_large.cgb.2bpp"
+incbin "gfx/scenes/relief.cgb.2bpp"
+incbin "gfx/scenes/painting.cgb.2bpp"
 
 section "bank49",romx,bank[$31]
 incbin "gfx/bank_31.2bpp"
@@ -184,10 +212,10 @@ section "bank51",romx,bank[$33]
 incbin "gfx/bank_33.2bpp"
 
 section "bank52",romx,bank[$34]
-incbin "gfx/bank_34.2bpp"
+incbin "gfx/menus/print.2bpp"
 
 section "bank53",romx,bank[$35]
-incbin "gfx/bank_35.2bpp"
+incbin "gfx/world/color_dungeon.2bpp"
 
 section "bank54",romx,bank[$36]
 incbin "../bin/banks/bank_36_D8000.bin"

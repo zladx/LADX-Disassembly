@@ -132,13 +132,13 @@ section "bank40",romx,bank[$28]
 incbin "../bin/banks/bank_28_A0000.bin"
 
 section "bank41",romx,bank[$29]
-incbin "gfx/bank_29.2bpp"
+incbin "gfx/photos/bank_29.2bpp"
 
 section "bank42",romx,bank[$2A]
-incbin "gfx/bank_2A.2bpp"
+incbin "gfx/photos/bank_2A.2bpp"
 
 section "bank43",romx,bank[$2B]
-incbin "gfx/bank_2B.2bpp"
+incbin "gfx/photos/bank_2B.2bpp"
 
 section "bank44",romx,bank[$2C]
 incbin "gfx/bank_2C.2bpp"
@@ -184,13 +184,13 @@ section "bank56",romx,bank[$38]
 incbin "gfx/bank_38.2bpp"
 
 section "bank57",romx,bank[$39]
-incbin "gfx/bank_39.2bpp"
+incbin "gfx/photos/bank_39.2bpp"
 
 section "bank58",romx,bank[$3A]
-incbin "gfx/bank_3A.2bpp"
+incbin "gfx/photos/bank_3A.2bpp"
 
 section "bank59",romx,bank[$3B]
-incbin "gfx/bank_3B.2bpp"
+incbin "gfx/photos/bank_3B.2bpp"
 
 section "bank60",romx,bank[$3C]
 incbin "../bin/banks/bank_3C_F0000.bin"

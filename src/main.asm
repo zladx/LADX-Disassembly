@@ -45,10 +45,16 @@ section "bank11",romx,bank[$0B]
 incbin "../bin/banks/bank_0B_2C000.bin"
 
 section "bank12",romx,bank[$0C]
-incbin "gfx/bank_0C.2bpp"
+incbin "gfx/characters/link_1.2bpp"
+incbin "gfx/items/items.2bpp"
+incbin "gfx/items/instruments.2bpp"
+incbin "gfx/world/overworld.2bpp"
+incbin "gfx/characters/link_2.2bpp"
+incbin "gfx/world/animated_tiles.2bpp"
+incbin "gfx/world/minimap.2bpp"
 
 section "bank13",romx,bank[$0D]
-incbin "gfx/bank_0D.2bpp"
+incbin "gfx/world/dungeons.2bpp"
 
 section "bank14",romx,bank[$0E]
 incbin "gfx/bank_0E.2bpp"

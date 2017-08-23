@@ -45,28 +45,28 @@ section "bank11",romx,bank[$0B]
 incbin "../bin/banks/bank_0B_2C000.bin"
 
 section "bank12",romx,bank[$0C]
-incbin "../bin/banks/bank_0C_30000.bin"
+incbin "gfx/bank_0C.2bpp"
 
 section "bank13",romx,bank[$0D]
-incbin "../bin/banks/bank_0D_34000.bin"
+incbin "gfx/bank_0D.2bpp"
 
 section "bank14",romx,bank[$0E]
-incbin "../bin/banks/bank_0E_38000.bin"
+incbin "gfx/bank_0E.2bpp"
 
 section "bank15",romx,bank[$0F]
-incbin "../bin/banks/bank_0F_3C000.bin"
+incbin "gfx/bank_0F.2bpp"
 
 section "bank16",romx,bank[$10]
-incbin "../bin/banks/bank_10_40000.bin"
+incbin "gfx/bank_10.2bpp"
 
 section "bank17",romx,bank[$11]
-incbin "../bin/banks/bank_11_44000.bin"
+incbin "gfx/bank_11.2bpp"
 
 section "bank18",romx,bank[$12]
-incbin "../bin/banks/bank_12_48000.bin"
+incbin "gfx/bank_12.2bpp"
 
 section "bank19",romx,bank[$13]
-incbin "../bin/banks/bank_13_4C000.bin"
+incbin "gfx/bank_13.2bpp"
 
 section "bank20",romx,bank[$14]
 incbin "../bin/banks/bank_14_50000.bin"
@@ -132,22 +132,22 @@ section "bank40",romx,bank[$28]
 incbin "../bin/banks/bank_28_A0000.bin"
 
 section "bank41",romx,bank[$29]
-incbin "../bin/banks/bank_29_A4000.bin"
+incbin "gfx/bank_29.2bpp"
 
 section "bank42",romx,bank[$2A]
-incbin "../bin/banks/bank_2A_A8000.bin"
+incbin "gfx/bank_2A.2bpp"
 
 section "bank43",romx,bank[$2B]
-incbin "../bin/banks/bank_2B_AC000.bin"
+incbin "gfx/bank_2B.2bpp"
 
 section "bank44",romx,bank[$2C]
-incbin "../bin/banks/bank_2C_B0000.bin"
+incbin "gfx/bank_2C.2bpp"
 
 section "bank45",romx,bank[$2D]
-incbin "../bin/banks/bank_2D_B4000.bin"
+incbin "gfx/bank_2D.2bpp"
 
 section "bank46",romx,bank[$2E]
-incbin "../bin/banks/bank_2E_B8000.bin"
+incbin "gfx/bank_2E.2bpp"
 
 section "bank47",romx,bank[$2F]
 incbin "gfx/bank_2F.2bpp"
@@ -156,22 +156,23 @@ section "bank48",romx,bank[$30]
 incbin "gfx/intro/clouds-top.2bpp"
 incbin "gfx/intro/clouds-middle.2bpp"
 incbin "gfx/intro/clouds-bottom.2bpp"
+incbin "gfx/intro/waves-bottom.2bpp"
 incbin "gfx/bank_30.2bpp"
 
 section "bank49",romx,bank[$31]
-incbin "../bin/banks/bank_31_C4000.bin"
+incbin "gfx/bank_31.2bpp"
 
 section "bank50",romx,bank[$32]
-incbin "../bin/banks/bank_32_C8000.bin"
+incbin "gfx/bank_32.2bpp"
 
 section "bank51",romx,bank[$33]
-incbin "../bin/banks/bank_33_CC000.bin"
+incbin "gfx/bank_33.2bpp"
 
 section "bank52",romx,bank[$34]
-incbin "../bin/banks/bank_34_D0000.bin"
+incbin "gfx/bank_34.2bpp"
 
 section "bank53",romx,bank[$35]
-incbin "../bin/banks/bank_35_D4000.bin"
+incbin "gfx/bank_35.2bpp"
 
 section "bank54",romx,bank[$36]
 incbin "../bin/banks/bank_36_D8000.bin"
@@ -180,16 +181,16 @@ section "bank55",romx,bank[$37]
 incbin "../bin/banks/bank_37_DC000.bin"
 
 section "bank56",romx,bank[$38]
-incbin "../bin/banks/bank_38_E0000.bin"
+incbin "gfx/bank_38.2bpp"
 
 section "bank57",romx,bank[$39]
-incbin "../bin/banks/bank_39_E4000.bin"
+incbin "gfx/bank_39.2bpp"
 
 section "bank58",romx,bank[$3A]
-incbin "../bin/banks/bank_3A_E8000.bin"
+incbin "gfx/bank_3A.2bpp"
 
 section "bank59",romx,bank[$3B]
-incbin "../bin/banks/bank_3B_EC000.bin"
+incbin "gfx/bank_3B.2bpp"
 
 section "bank60",romx,bank[$3C]
 incbin "../bin/banks/bank_3C_F0000.bin"

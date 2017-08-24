@@ -57,7 +57,7 @@ section "bank13",romx,bank[$0D]
 incbin "gfx/world/dungeons.dmg.2bpp"
 
 section "bank14",romx,bank[$0E]
-incbin "gfx/sprites.dmg.2bpp"
+incbin "gfx/characters/npc_1.dmg.2bpp"
 
 section "bank15",romx,bank[$0F]
 incbin "gfx/menus/menu.dmg.2bpp"
@@ -79,12 +79,12 @@ incbin "gfx/scenes/relief.dmg.2bpp"
 incbin "gfx/scenes/painting.dmg.2bpp"
 
 section "bank17",romx,bank[$11]
-incbin "gfx/characters/npc_1.dmg.2bpp"
+incbin "gfx/characters/npc_2.dmg.2bpp"
 
 section "bank18",romx,bank[$12]
-incbin "gfx/characters/npc_2.dmg.2bpp"
-incbin "gfx/characters/nightmare.dmg.2bpp"
 incbin "gfx/characters/npc_3.dmg.2bpp"
+incbin "gfx/characters/nightmare.dmg.2bpp"
+incbin "gfx/characters/npc_4.dmg.2bpp"
 incbin "gfx/items/items_2.dmg.2bpp"
 
 section "bank19",romx,bank[$13]
@@ -184,7 +184,7 @@ section "bank45",romx,bank[$2D]
 incbin "gfx/world/dungeons.cgb.2bpp"
 
 section "bank46",romx,bank[$2E]
-incbin "gfx/sprites.cgb.2bpp"
+incbin "gfx/characters/npc_1.cgb.2bpp"
 
 section "bank47",romx,bank[$2F]
 incbin "gfx/menus/menu.cgb.2bpp"
@@ -206,12 +206,12 @@ incbin "gfx/scenes/relief.cgb.2bpp"
 incbin "gfx/scenes/painting.cgb.2bpp"
 
 section "bank49",romx,bank[$31]
-incbin "gfx/characters/npc_1.cgb.2bpp"
+incbin "gfx/characters/npc_2.cgb.2bpp"
 
 section "bank50",romx,bank[$32]
-incbin "gfx/characters/npc_2.cgb.2bpp"
-incbin "gfx/characters/nightmare.cgb.2bpp"
 incbin "gfx/characters/npc_3.cgb.2bpp"
+incbin "gfx/characters/nightmare.cgb.2bpp"
+incbin "gfx/characters/npc_4.cgb.2bpp"
 incbin "gfx/items/items_2.cgb.2bpp"
 
 section "bank51",romx,bank[$33]

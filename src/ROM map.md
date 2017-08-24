@@ -16,7 +16,7 @@
 0B n/a
 0C Graphics: items, Link, minimap (DMG variant)
 0D Graphics: dungeons (DMG variant)
-0E Graphics (DMG variant)
+0E Graphics: NPCs, enemies (DMG variant)
 0F Graphics: title screen, font, overworld (DMG variant)
 10 Graphics: intro, various pictures (DMG variant)
 11 Graphics: NPCs (DMG variant)
@@ -48,7 +48,7 @@
 2B Graphics: photo pictures
 2C Graphics: items, Link, minimap (CGB variant)
 2D Graphics: dungeons (CGB variant)
-2E Graphics (CGB variant)
+2E Graphics: NPCs, enemies (CGB variant)
 2F Graphics: title screen, font, overworld (CGB variant)
 30 Graphics: intro, various pictures (CGB variant)
 31 Graphics: NPCs (CGB variant)

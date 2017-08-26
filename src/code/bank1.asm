@@ -7080,8 +7080,6 @@ IntroShipOnSeaHandler::
 label_7013::
     ret
 
-WR0_IntroShipPosX equ (WR0_EntitiesPosXTable + $02)
-
 label_7014::
     ld   a, [WR0_IntroShipPosX]
     cp   $50

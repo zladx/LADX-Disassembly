@@ -50,7 +50,7 @@ incbin "gfx/items/items_1.dmg.2bpp"
 incbin "gfx/items/instruments.dmg.2bpp"
 incbin "gfx/world/overworld_1.dmg.2bpp"
 incbin "gfx/characters/link_2.dmg.2bpp"
-incbin "gfx/world/animated_tiles.dmg.2bpp"
+incbin "gfx/world/animated_tiles.w32.dmg.2bpp"
 incbin "gfx/world/minimap.dmg.2bpp"
 
 section "bank13",romx,bank[$0D]
@@ -177,7 +177,7 @@ incbin "gfx/items/items_1.cgb.2bpp"
 incbin "gfx/items/instruments.cgb.2bpp"
 incbin "gfx/world/overworld_1.cgb.2bpp"
 incbin "gfx/characters/link_2.cgb.2bpp"
-incbin "gfx/world/animated_tiles.cgb.2bpp"
+incbin "gfx/world/animated_tiles.w32.cgb.2bpp"
 incbin "gfx/world/minimap.cgb.2bpp"
 
 section "bank45",romx,bank[$2D]

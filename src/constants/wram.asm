@@ -1,215 +1,215 @@
 section "WRAM Bank0", wram0
 
-WR0_C000 equ $C000
+wC000 equ $C000
   ds $100
 
-WR0_ScrollXOffsetForSection:: ; C100
+wScrollXOffsetForSection:: ; C100
   ; Table of the scrollX offset to add for each screen section being drawn
   ds $5
 
-WR0_LCDSectionIndex:: ; C105
+wLCDSectionIndex:: ; C105
   ; Portion of the screen being drawn (0 -> 4)
   ds 1
 
-WR0_IntroBGYOffset:: ; C106
+wIntroBGYOffset:: ; C106
   ; Offset for compensating the sea movement when drawing bottom screen section on intro sea
   ds 1
 
 ; Unlabeled
-WR0_C108 equ $C108
+wC108 equ $C108
 
   ds 7
 
-WR0_needsUpdatingNPCTiles:: ; C10E
+wneedsUpdatingNPCTiles:: ; C10E
   ds 1
 
 ; Unlabeled
-WR0_C10F equ $C10F
+wC10F equ $C10F
   ds $12
 
-WR0_IsUsingSpinAttack:: ; C121
+wIsUsingSpinAttack:: ; C121
   ds 1
 
 ; Unlabeled
-WR0_C122 equ $C122
+wC122 equ $C122
   ds 2
 
-WR0_MapSlideTransitionState:: ; C124
+wMapSlideTransitionState:: ; C124
   ds 1
 
 ; Unlabeled
-WR0_C125 equ $C125
+wC125 equ $C125
   ds $18
 
-WR0_RandomSeed:: ; C13D
+wRandomSeed:: ; C13D
   ; Seed for the Random Number Generator
   ds 1
 
 ; Unlabeled
-WR0_C140 equ $C13E
+wC140 equ $C13E
   ds $E
 
-WR0_IsShootingArrow:: ; C14C
+wIsShootingArrow:: ; C14C
   ds 1
 
-WR0_ProjectileCount:: ; C14D
+wProjectileCount:: ; C14D
   ds 1
 
-WR0_HasPlacedBomb:: ; C14E
+wHasPlacedBomb:: ; C14E
   ds 1
 
-WR0_InventoryAppearing:: ; C14F
+wInventoryAppearing:: ; C14F
   ds 1
 
 ; Unlabeled
-WR0_C150 equ $C150
+wC150 equ $C150
   ds 5
 
-WR0_ScreenShakeHorizontal:: ; C155
+wScreenShakeHorizontal:: ; C155
   ; background offset for shaking the screen vertically
   ds 1
 
-WR0_ScreenShakeVertical:: ; C156
+wScreenShakeVertical:: ; C156
   ; background offset for shaking the screen vertically
   ds 1
 
 ; Unlabeled
-WR0_C157 equ $C157
+wC157 equ $C157
   ds $2
 
-WR0_InventoryCursorFrameCounter:: ; C159
+wInventoryCursorFrameCounter:: ; C159
   ds 1
 
-WR0_HasMirrorShield:: ; C15A
+wHasMirrorShield:: ; C15A
   ds 1
 
-WR0_IsUsingShield:: ; C15B
+wIsUsingShield:: ; C15B
   ds 1
 
 ; Unlabeled
-WR0_C15C equ $C15C
+wC15C equ $C15C
   ds $F
 
-WR0_TransitionSequenceCounter:: ; C16B
+wTransitionSequenceCounter:: ; C16B
   ds 1
 
 ; Unlabeled
-WR0_C16C equ $C16C
+wC16C equ $C16C
   ds 6
 
-WR0_DialogScrollDelay:: ; C172
+wDialogScrollDelay:: ; C172
   ds 1
 
 ; Unlabeled
-WR0_C173 equ $C173
+wC173 equ $C173
   ds 8
 
-WR0_FreeMovementMode:: ; C17B
+wFreeMovementMode:: ; C17B
   ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
   ds 1
 
 ; Unlabeled
-WR0_C17C equ $C17C
+wC17C equ $C17C
   ds 3
 
-WR0_WarpTransition:: ; C17F
+wWarpTransition:: ; C17F
   ; See WARP_TRANSITION_* constants for possible values
   ds 1
 
 ; Unlabeled
-WR0_C180 equ $C180
+wC180 equ $C180
   ds $1F
 
-WR0_DialogState:: ; C19F
+wDialogState:: ; C19F
   ; See DIALOG_* constants for possible values
   ds 1
 
-WR0_C1A4 equ $C1A0
+wC1A4 equ $C1A0
   ds $60
 
-WR0_EntitiesPosXTable:: ; C200
+wEntitiesPosXTable:: ; C200
   ; X position of visible entities
 
-WR0_Entity0PosX:: ; C200
+wEntity0PosX:: ; C200
   ds $1
 
-WR0_Entity1PosX:: ; C201
+wEntity1PosX:: ; C201
   ds $1
 
-WR0_Entity2PosX:: ; C202
+wEntity2PosX:: ; C202
 
-WR0_IntroShipPosX:: ; C202
+wIntroShipPosX:: ; C202
   ; Position of the ship sprite during the intro sequence
   ds $1
 
-WR0_Entity3PosX:: ; C203
+wEntity3PosX:: ; C203
   ds $1
 
-WR0_Entity4PosX:: ; C204
+wEntity4PosX:: ; C204
   ds $1
 
-WR0_Entity5PosX:: ; C205
+wEntity5PosX:: ; C205
   ds $1
 
-WR0_Entity6PosX:: ; C206
+wEntity6PosX:: ; C206
   ds $1
 
-WR0_Entity7PosX:: ; C207
+wEntity7PosX:: ; C207
   ds $1
 
-WR0_Entity8PosX:: ; C208
+wEntity8PosX:: ; C208
   ds $1
 
-WR0_Entity9PosX:: ; C209
+wEntity9PosX:: ; C209
   ds $1
 
-WR0_Entity10PosX:: ; C20A
+wEntity10PosX:: ; C20A
   ds $1
 
-WR0_Entity11PosX:: ; C20B
+wEntity11PosX:: ; C20B
   ds $1
 
-WR0_Entity12PosX:: ; C20C
+wEntity12PosX:: ; C20C
   ds $1
 
-WR0_Entity13PosX:: ; C20D
+wEntity13PosX:: ; C20D
   ds $1
 
-WR0_Entity14PosX:: ; C20E
+wEntity14PosX:: ; C20E
   ds $1
 
-WR0_Entity15PosX:: ; C20F
+wEntity15PosX:: ; C20F
   ds $1
 
-WR0_EntitiesPosYTable:: ; C210
+wEntitiesPosYTable:: ; C210
   ; Y position of visible entities
   ds $10
 
 ; Unlabeled
-WR0_C220 equ $C220
+wC220 equ $C220
   ds $60
 
-WR0_EntitiesTypeTable:: ; C280
+wEntitiesTypeTable:: ; C280
   ; type of visible entities
   ds 1
 
 section "WRAM Bank1", wramx, bank[1]
 
 ; Unlabeled
-WR0_D000 equ $D000
+wD000 equ $D000
   ds 1
 
-WR0_IntroTimer:: ; D001
+wIntroTimer:: ; D001
   ds 1
 
-WR0_IntroSubTimer:: ; D002
+wIntroSubTimer:: ; D002
   ds 1
 
 ; Unlabeled
-WR0_D003 equ $D003
+wD003 equ $D003
   ds $365
 
-WR1_OverworldMusic:: ; D368
+wOverworldMusic:: ; D368
   ; Overworld Music Track
   ; 00: No music
   ; 01: Title music when zelda logo appears
@@ -306,94 +306,94 @@ WR1_OverworldMusic:: ; D368
   ds 1
 
 ; Unlabeled
-WR1_D369 equ $D369
+wD369 equ $D369
   ds $AC
 
-WR1_KillCount:: ; D415
+wKillCount:: ; D415
   ds 1
 
 ; Unlabeled
-WR0_D416 equ $D416
+wD416 equ $D416
   ds $68
 
-WR1_DidStealItem:: ; D47E
+wDidStealItem:: ; D47E
   ds 1
 
 ; Unlabeled
-WR0_D47F equ $D47F
+wD47F equ $D47F
   ds $27D
 
-WR1_EnginePaused:: ; D6FC
+wEnginePaused:: ; D6FC
   ds 1
 
-WR1_LCDControl:: ; D6FD
+wLCDControl:: ; D6FD
   ds 1
 
 ; Unlabeled
-WR0_D6FE equ $D6FE
+wD6FE equ $D6FE
   ds $13
 
-WR1_TileMap:: ; D711
+wTileMap:: ; D711
   ds 1
 
 ; Unlabeled
-WR0_D712 equ $D712
+wD712 equ $D712
   ds $EE
 
 ; Minimap Tile
 ; Values:
 ;   0:     not discovered yet
 ;   non-0: various statuses
-WR1_MinimapTiles:: ; D800
+wMinimapTiles:: ; D800
   ds $ff
 
 ; Unlabeled
-WR0_D900 equ $D900
+wD900 equ $D900
   ds $201
 
-WR1_AButtonSlot:: ; DB00
+wAButtonSlot:: ; DB00
   ds 1
 
-WR1_BButtonSlot:: ; DB01
+wBButtonSlot:: ; DB01
   ds 1
 
-WR1_InventoryItem1:: ; DB02
+wInventoryItem1:: ; DB02
   ds 1
 
-WR1_InventoryItem2:: ; DB03
+wInventoryItem2:: ; DB03
   ds 1
 
-WR1_InventoryItem3:: ; DB04
+wInventoryItem3:: ; DB04
   ds 1
 
-WR1_InventoryItem4:: ; DB05
+wInventoryItem4:: ; DB05
   ds 1
 
-WR1_InventoryItem5:: ; DB06
+wInventoryItem5:: ; DB06
   ds 1
 
-WR1_InventoryItem6:: ; DB07
+wInventoryItem6:: ; DB07
   ds 1
 
-WR1_InventoryItem7:: ; DB08
+wInventoryItem7:: ; DB08
   ds 1
 
-WR1_InventoryItem8:: ; DB09
+wInventoryItem8:: ; DB09
   ds 1
 
-WR1_InventoryItem9:: ; DB0A
+wInventoryItem9:: ; DB0A
   ds 1
 
-WR1_InventoryItem10:: ; DB0B
+wInventoryItem10:: ; DB0B
   ds 1
 
-WR1_HasFlippers:: ; DB0C
+wHasFlippers:: ; DB0C
   ds 1
 
-WR1_HasMedicine:: ; DB0D
+wHasMedicine:: ; DB0D
   ds 1
 
-WR1_TradeSequenceItem:: ; DB0E
+wTradeSequenceItem:: ; DB0E
   ; Trade Sequence items:
   ; $00 Nothing
   ; $01 Yoshi Doll
@@ -412,218 +412,218 @@ WR1_TradeSequenceItem:: ; DB0E
   ; $0E Magnifying glass
   ds 1
 
-WR1_SeashellsCount:: ; DB0F
+wSeashellsCount:: ; DB0F
   ds 1
 
 ; Unlabeled
-WR0_DB10 equ $DB10
+wDB10 equ $DB10
   ds 1
 
-WR1_HasTailKey:: ; DB11
+wHasTailKey:: ; DB11
   ds 1
 
-WR1_HasAnglerKey:: ; DB12
+wHasAnglerKey:: ; DB12
   ds 1
 
-WR1_HasFaceKey:: ; DB13
+wHasFaceKey:: ; DB13
   ds 1
 
-WR1_HasBirdKey:: ; DB14
+wHasBirdKey:: ; DB14
   ds 1
 
 ; Golden Leaves count
 ; 0-5: number of Golden Leaves
 ; 6  : Slime Key
-WR1_GoldenLeavesCount:: ; DB15
+wGoldenLeavesCount:: ; DB15
   ds 1
 
 ; Unlabeled
-WR0_DB16 equ $DB16
+wDB16 equ $DB16
   ds $2D
 
-WR1_PowerBraceletLevel:: ; DB43
+wPowerBraceletLevel:: ; DB43
   ds 1
 
-WR1_ShieldLevel:: ; DB44
+wShieldLevel:: ; DB44
   ds 1
 
-WR1_ArrowCount:: ; DB45
+wArrowCount:: ; DB45
   ds 1
 
 ; Unlabeled
-WR0_DB46 equ $DB46
+wDB46 equ $DB46
   ds 7
 
-WR1_BombCount:: ; DB4D
+wBombCount:: ; DB4D
   ds 1
 
-WR1_MarinAndTarinAtHome:: ; DB4E
+wMarinAndTarinAtHome:: ; DB4E
   ds 1
 
 ; Unlabeled
-WR0_DB4F equ $DB4F
+wDB4F equ $DB4F
   ds 7
 
-WR1_IsBowWowFollowingLink:: ; DB56
+wIsBowWowFollowingLink:: ; DB56
   ds 1
 
 ; Unlabeled
-WR0_DB57 equ $DB57
+wDB57 equ $DB57
   ds $6
 
-WR1_RupeeCountHigh:: ; DB5D
+wRupeeCountHigh:: ; DB5D
   ds 1
 
-WR1_RupeeCountLow:: ; DB5E
+wRupeeCountLow:: ; DB5E
   ds 1
 
 ; Unlabeled
-WR0_DB5F equ $DB5F
+wDB5F equ $DB5F
   ds $6
 
-WR1_HasInstrument1:: ; DB65
+wHasInstrument1:: ; DB65
   ; 0: false, 2: true
   ds 1
 
-WR1_HasInstrument2:: ; DB66
+wHasInstrument2:: ; DB66
   ; 0: false, 2: true
   ds 1
 
-WR1_HasInstrument3:: ; DB67
+wHasInstrument3:: ; DB67
   ; 0: false, 2: true
   ds 1
 
-WR1_HasInstrument4:: ; DB68
+wHasInstrument4:: ; DB68
   ; 0: false, 2: true
   ds 1
 
-WR1_HasInstrument5:: ; DB69
+wHasInstrument5:: ; DB69
   ; 0: false, 2: true
   ds 1
 
-WR1_HasInstrument6:: ; DB6A
+wHasInstrument6:: ; DB6A
   ; 0: false, 2: true
   ds 1
 
-WR1_HasInstrument7:: ; DB6B
+wHasInstrument7:: ; DB6B
   ; 0: false, 2: true
   ds 1
 
-WR1_HasInstrument8:: ; DB6C
+wHasInstrument8:: ; DB6C
   ; 0: false, 2: true
   ds 1
 
 ; Unlabeled
-WR0_DB6E equ $DB6E
+wDB6E equ $DB6E
   ds 6
 
-WR1_IsMarinFollowingLink:: ; DB73
+wIsMarinFollowingLink:: ; DB73
   ds 1
 
 ; Unlabeled
-WR0_DB74 equ $DB74
+wDB74 equ $DB74
   ds 5
 
-WR1_IsGhostFollowingLink:: ; DB79
+wIsGhostFollowingLink:: ; DB79
   ds 1
 
-WR1_DB7A:: ; DB7A
+wDB7A:: ; DB7A
   ds 1
 
-WR1_IsRoosterFollowingLink:: ; DB7B
+wIsRoosterFollowingLink:: ; DB7B
   ds 1
 
 ; Unlabeled
-WR0_DB7C equ $DB7C
+wDB7C equ $DB7C
   ds $14
 
 ; This appears to be the amount of rupees being added to your wallet
-WR1_AddRupeeBuffer:: ; DB90
+wAddRupeeBuffer:: ; DB90
   ds 1
 
 ; Unlabeled
-WR0_DB91 equ $DB91
+wDB91 equ $DB91
   ds $4
 
-WR1_GameplayType:: ; DB95
+wGameplayType:: ; DB95
   ; See GAMEPLAY_* constants for possible values
   ds 1
 
-WR1_GameplaySubtype:: ; DB96
+wGameplaySubtype:: ; DB96
   ; Value depens on GameplayType: this can be a sequence index, or a frame counter.
   ds 1
 
-WR1_BGPalette:: ; DB97
+wBGPalette:: ; DB97
   ds 1
 
-WR1_OBJ0Palette:: ; DB98
+wOBJ0Palette:: ; DB98
   ds 1
 
-WR1_OBJ1Palette:: ; DB99
+wOBJ1Palette:: ; DB99
   ds 1
 
-WR1_WindowY:: ; DB9A
+wWindowY:: ; DB9A
   ds 1
 
 ; Unlabeled
-WR0_DB9B equ $DB9B
+wDB9B equ $DB9B
   ds $A
 
-WR1_ActiveRoom:: ; $DBA5
+wActiveRoom:: ; $DBA5
   ; Current room?
   ds 1
 
-WR1_SaveSlot:: ; DBA6
+wSaveSlot:: ; DBA6
   ds 1
 
 ; Unlabeled
-WR0_DBA7 equ $DBA7
+wDBA7 equ $DBA7
   ds 8
 
-WR1_CurrentBank:: ; DBAF
+wCurrentBank:: ; DBAF
   ds 1
 
 ; Unlabeled
-WR0_DBB0 equ $DBB0
+wDBB0 equ $DBB0
   ds $5
 
-WR1_KillCount2:: ; DBB5
+wKillCount2:: ; DBB5
   ds 1
 
 ; Unlabeled
-WR0_DBB6 equ $DBB6
+wDBB6 equ $DBB6
   ds $16
 
-WR1_HasDungeonMap:: ; DBCC
+wHasDungeonMap:: ; DBCC
   ds 1
 
-WR1_HasDungeonCompass:: ; DBCD
+wHasDungeonCompass:: ; DBCD
   ds 1
 
-WR1_HasDungeonStoneSlab:: ; DBCE
+wHasDungeonStoneSlab:: ; DBCE
   ds 1
 
-WR1_HasDungeonBossKey:: ; DBCF
+wHasDungeonBossKey:: ; DBCF
   ds 1
 
 ; Unlabeled
-WR0_DBD0 equ $DBD0
+wDBD0 equ $DBD0
   ds $3C
 
 ; Photos 1-8 (bitfield)
-WR1_Photos1:: ; DC0C
+wPhotos1:: ; DC0C
   ds 1
 
 ; Photos 9-12 (bitfield)
-WR1_Photos2:: ; DC0D
+wPhotos2:: ; DC0D
   ds 1
 
-WR1_DC0E::
+wDC0E::
   ds 1
 
 ; Tunic Type (GBC only)
 ; 0: green
 ; 1: red
 ; 2: blue
-WR1_TunicType:: ; DC0F
+wTunicType:: ; DC0F
   ds 1

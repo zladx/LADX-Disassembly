@@ -2667,7 +2667,7 @@ label_11BA::
 label_11BC::
     xor  a
     ld   [WR0_IsUsingShield], a
-    ld   [WR0_ShieldLevel], a
+    ld   [WR0_HasMirrorShield], a
 
 label_11C3::
     ld   a, [$C117]
@@ -2725,7 +2725,7 @@ label_1214::
     cp   $04
     jr   nz, label_1235
     ld   a, [WR1_ShieldLevel]
-    ld   [WR0_ShieldLevel], a
+    ld   [WR0_HasMirrorShield], a
     ld   a, [hPressedButtonsMask]
     and  $10
     jr   z, label_1235
@@ -2741,7 +2741,7 @@ label_1235::
     cp   $04
     jr   nz, label_124B
     ld   a, [WR1_ShieldLevel]
-    ld   [WR0_ShieldLevel], a
+    ld   [WR0_HasMirrorShield], a
     ld   a, [hPressedButtonsMask]
     and  $20
     jr   z, label_124B
@@ -2890,7 +2890,7 @@ label_1340::
     ld   a, $01
     ld   [WR0_IsUsingShield], a
     ld   a, [WR1_ShieldLevel]
-    ld   [WR0_ShieldLevel], a
+    ld   [WR0_HasMirrorShield], a
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4B4A
@@ -4017,7 +4017,7 @@ label_1A88::
     jr   nz, label_1ABF
 
 label_1A9A::
-    ld   a, [WR0_ShieldLevel]
+    ld   a, [WR0_HasMirrorShield]
     and  a
     jr   nz, label_1AA5
     ld   hl, $4910

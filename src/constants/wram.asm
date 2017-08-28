@@ -77,7 +77,7 @@ WR0_ScreenShakeVertical:: ; C156
 WR0_C157 equ $C157
   ds $3
 
-WR0_ShieldLevel:: ; C15A
+WR0_HasMirrorShield:: ; C15A
   ds 1
 
 WR0_IsUsingShield:: ; C15B

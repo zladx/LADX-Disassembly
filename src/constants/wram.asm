@@ -75,7 +75,10 @@ WR0_ScreenShakeVertical:: ; C156
 
 ; Unlabeled
 WR0_C157 equ $C157
-  ds $3
+  ds $2
+
+WR0_InventoryCursorFrameCounter:: ; C159
+  ds 1
 
 WR0_HasMirrorShield:: ; C15A
   ds 1
@@ -436,7 +439,10 @@ WR1_GoldenLeavesCount:: ; DB15
 
 ; Unlabeled
 WR0_DB16 equ $DB16
-  ds $2E
+  ds $2D
+
+WR1_PowerBraceletLevel:: ; DB43
+  ds 1
 
 WR1_ShieldLevel:: ; DB44
   ds 1

@@ -4925,7 +4925,7 @@ label_6014::
     ld   a, [$DB68]
     and  $02
     jr   z, label_607F
-    ld   a, [$DB43]
+    ld   a, [WR1_PowerBraceletLevel]
     cp   $02
     jr   c, label_603C
     xor  a

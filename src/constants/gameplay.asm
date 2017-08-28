@@ -4,7 +4,7 @@
 TILES_PER_ROW              equ $0B
 TILES_PER_MAP              equ $80
 
-; Values for WR1_GameplayType
+; Values for wGameplayType
 GAMEPLAY_INTRO             equ $00
 GAMEPLAY_CREDITS           equ $01
 GAMEPLAY_FILE_SELECT       equ $02
@@ -33,7 +33,7 @@ GAMEPLAY_PHOTO_KANALET     equ $18
 GAMEPLAY_PHOTO_GHOST       equ $19
 GAMEPLAY_PHOTO_BRIDGE      equ $20
 
-; Values for WR1_GameplaySubtype
+; Values for wGameplaySubtype
 ; (depends on the gameplay type)
 ; GAMEPLAY_INTRO Subtype
 GAMEPLAY_INTRO_SEA         equ $03
@@ -63,7 +63,7 @@ ENTITY_INTRO_MARIN         equ $06
 ENTITY_INTRO_INERT_LINK    equ $07
 ENTITY_INTRO_SPARKLE       equ $08
 
-; Values for WR0_DialogState
+; Values for wDialogState
 DIALOG_CLOSED              equ $00
 DIALOG_OPENING_1           equ $01
 DIALOG_OPENING_2           equ $02
@@ -81,7 +81,7 @@ DIALOG_CHOICE              equ $0D ; press A to choose
 DIALOG_CLOSING_1           equ $0E
 DIALOG_CLOSING_2           equ $0F
 
-; Values for WR0_WarpTransition
+; Values for wWarpTransition
 WARP_TRANSITION_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine
 WARP_TRANSITION_MANBO_IN     equ $02 ; wavy transition when departing using Manbo's Mambo
 WARP_TRANSITION_MANBO_OUT    equ $03 ; wavy transition when arriving using Manbo's Mambo

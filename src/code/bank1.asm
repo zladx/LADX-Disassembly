@@ -4,7 +4,7 @@
 data_380   equ $0380
 
 label_4000::
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     JP_TABLE
     ld   [de], a
     ld   b, b
@@ -67,7 +67,7 @@ label_4042::
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
-    ld   [WR0_InventoryAppearing], a
+    ld   [wInventoryAppearing], a
     ld   [$C1B8], a
     ld   [$C1B9], a
     ld   [$C1B5], a
@@ -84,7 +84,7 @@ label_4072::
     ld   a, $0D
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [WR1_WindowY], a
+    ld   [wWindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -124,11 +124,11 @@ label_40A9::
 label_40D5::
     ret
     xor  a
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     ld   [$DB99], a
     ld   [rOBP0], a
     ld   [rOBP1], a
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   [rBGP], a
     ld   a, [$FF98]
     ld   [$DB9D], a
@@ -150,11 +150,11 @@ label_40F9::
     call label_6162
     ld   a, $C7
     ld   [rLCDC], a
-    ld   [WR1_LCDControl], a
+    ld   [wLCDControl], a
     ld   a, $07
     ld   [rWX], a
     ld   a, $80
-    ld   [WR1_WindowY], a
+    ld   [wWindowY], a
     ld   [rWY], a
     ld   a, $07
     ld   [$FFA9], a
@@ -289,7 +289,7 @@ label_41B4::
 
 label_41BB::
     xor  a
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   [rBGP], a
     ret
 
@@ -325,8 +325,8 @@ label_41E7::
     db   $10 ; Undefined instruction
     db   $10 ; Undefined instruction
     db   $af ; Undefined instruction
-    ld   [WR0_ScreenShakeHorizontal], a
-    ld   [WR0_ScreenShakeVertical], a
+    ld   [wScreenShakeHorizontal], a
+    ld   [wScreenShakeVertical], a
     ld   a, [$FFB7]
     and  a
 
@@ -391,8 +391,8 @@ label_4259::
     ld   a, $01
     ld   [$C3CB], a
     ld   a, $1C
-    ld   [WR1_OBJ0Palette], a
-    ld   a, [WR1_BGPalette]
+    ld   [wOBJ0Palette], a
+    ld   a, [wBGPalette]
     ld   [$DB99], a
     ld   e, $08
     call label_8D7
@@ -404,11 +404,11 @@ label_4259::
     inc  [hl]
     ret
     ld   a, $E4
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   a, $0A
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [WR1_WindowY], a
+    ld   [wWindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -455,18 +455,18 @@ label_42F2::
 
 label_42F5::
     xor  a
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     ld   e, $10
 
 label_42FB::
     ldi  [hl], a
     dec  e
     jr   nz, label_42FB
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     ld   [$DB99], a
     ld   [rOBP0], a
     ld   [rOBP1], a
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   [rBGP], a
     ld   [$D6FB], a
     ld   [$D475], a
@@ -539,7 +539,7 @@ label_435C::
     ret
 
 OverworldHandlerEntryPoint::
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     JP_TABLE
 ._0 dw label_4395
 ._1 dw label_442B
@@ -771,7 +771,7 @@ label_44C9::
 
 IncrementGameplaySubtype::
 IncrementGameplaySubtypeAndReturn::
-    ld   hl, WR1_GameplaySubtype
+    ld   hl, wGameplaySubtype
     inc  [hl]
     ret
 
@@ -807,7 +807,7 @@ label_4507::
     call label_5895
     ld   a, [$FF40]
     or   $20
-    ld   [WR1_LCDControl], a
+    ld   [wLCDControl], a
     ld   [rLCDC], a
     call IncrementGameplaySubtype
     ld   a, [$C11C]
@@ -821,9 +821,9 @@ label_4507::
     and  a
     jr   z, label_4548
     ld   a, [$C5AD]
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   a, $1C
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     ld   a, $E4
     ld   [$DB99], a
     ld   a, [hIsGBC]
@@ -924,15 +924,15 @@ label_4555::
     ld   a, [$ABB7]
     ld   [$DC05], a
     ld   a, GAMEPLAY_FILE_SELECT
-    ld   [WR1_GameplayType], a
+    ld   [wGameplayType], a
     xor  a
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     xor  a
     ld   [$FF97], a
     ld   [hBaseScrollX], a
     ld   a, $00
-    ld   [WR1_BGPalette], a
-    ld   [WR1_OBJ0Palette], a
+    ld   [wBGPalette], a
+    ld   [wOBJ0Palette], a
     ld   [$DB99], a
     ld   a, $01
     call label_8FA
@@ -1008,7 +1008,7 @@ label_46ED::
     ld   [$A45F], a
     ld   a, $0A
     ld   [$A460], a
-    ld   a, [WR1_GameplayType]
+    ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_NEW
     jr   z, label_474E
     ld   a, $5B
@@ -1104,7 +1104,7 @@ label_47C3::
 label_47CD::
     ret
     call label_5DC0
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     JP_TABLE
     ; Code below is actually data for the jump table
     jp   [hl]
@@ -1273,9 +1273,9 @@ label_48C2::
 label_48CC::
     ld   [$D6FF], a
     ld   a, $E4
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   a, $1C
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     ld   a, $E4
     ld   [$DB99], a
     call label_905
@@ -1424,9 +1424,9 @@ label_49AE::
     dec  c
     jr   nz, label_49AE
     xor  a
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ld   a, GAMEPLAY_FILE_NEW
-    ld   [WR1_GameplayType], a
+    ld   [wGameplayType], a
 
 label_49BE::
     ld   a, $13
@@ -1436,8 +1436,8 @@ label_49BE::
 label_49C3::
     call label_49BE
     ld   a, $00
-    ld   [WR1_BGPalette], a
-    ld   [WR1_OBJ0Palette], a
+    ld   [wBGPalette], a
+    ld   [wOBJ0Palette], a
     ld   [$DB99], a
     ld   a, $01
     call label_8FA
@@ -1447,7 +1447,7 @@ label_49C3::
 
 label_49DE::
     xor  a
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ld   a, [$D000]
     and  a
     ld   a, $04
@@ -1455,7 +1455,7 @@ label_49DE::
     ld   a, GAMEPLAY_FILE_COPY
 
 label_49EC::
-    ld   [WR1_GameplayType], a
+    ld   [wGameplayType], a
     jp   label_49BE
 
 label_49F2::
@@ -1478,7 +1478,7 @@ label_49FE::
     db 0, $A1, $AD, $A4, $5A, $A8, $C3, $A4, $52
 
 label_4A07::
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     JP_TABLE
     ; Code below is actually data for the jump table
     ld   de, label_244A
@@ -1979,7 +1979,7 @@ label_4CDA::
     ld   [hl], e
     ret
     call label_5DC0
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     JP_TABLE
     ; Code below is actually data for the jump table
     ld   a, [de]
@@ -2229,7 +2229,7 @@ label_4E91::
 label_4E9E::
     call label_4EE5
     call label_4EBB
-    ld   hl, WR1_GameplaySubtype
+    ld   hl, wGameplaySubtype
     dec  [hl]
     ret
 
@@ -2628,7 +2628,7 @@ label_5104::
     ld   a, [$FFCC]
     bit  5, a
     jr   z, label_5114
-    ld   hl, WR1_GameplaySubtype
+    ld   hl, wGameplaySubtype
     dec  [hl]
     jp   label_514F
 
@@ -2815,7 +2815,7 @@ label_5235::
     ld   a, [$FFCC]
     bit  5, a
     jr   z, label_5249
-    ld   hl, WR1_GameplaySubtype
+    ld   hl, wGameplaySubtype
     dec  [hl]
     xor  a
     ld   [$D000], a
@@ -2957,9 +2957,9 @@ label_52FB::
 
 label_531D::
     ld   a, GAMEPLAY_OVERWORLD
-    ld   [WR1_GameplayType], a
+    ld   [wGameplayType], a
     xor  a
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     xor  a
     ld   [$C11C], a
     ld   [$FF9C], a
@@ -3522,13 +3522,13 @@ label_5619::
     ret
     xor  a
     ld   [$C3C0], a
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     cp   $05
     jr   z, label_5639
     xor  a
     ld   [$FFCB], a
     ld   [$FFCC], a
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
 
 label_5639::
     JP_TABLE
@@ -3598,7 +3598,7 @@ label_5678::
     ld   [hBaseScrollX], a
     ld   [$C1BF], a
     ld   [$FF97], a
-    ld   [WR0_InventoryAppearing], a
+    ld   [wInventoryAppearing], a
     ld   [$C1B2], a
     ld   [$C1B3], a
     ld   a, [$DB54]
@@ -3633,7 +3633,7 @@ label_56D9::
     ld   [$C1B4], a
     ld   a, [$FF40]
     and  $DF
-    ld   [WR1_LCDControl], a
+    ld   [wLCDControl], a
     ld   [rLCDC], a
     call label_5888
     ld   a, $08
@@ -3667,9 +3667,9 @@ label_571B::
     bit  7, a
     jr   z, label_5731
     xor  a
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     inc  a
-    ld   [WR1_GameplayType], a
+    ld   [wGameplayType], a
     ret
 
 label_5731::
@@ -3768,7 +3768,7 @@ label_57B7::
     cp   $60
     jr   nz, label_57FA
     ld   a, GAMEPLAY_OVERWORLD
-    ld   [WR1_GameplayType], a
+    ld   [wGameplayType], a
     call label_C7D
     ld   a, $00
     ld   [$D401], a
@@ -3789,7 +3789,7 @@ label_57B7::
     or   e
     ld   [$D416], a
     ld   a, $07
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ret
 
 label_57FA::
@@ -3862,10 +3862,10 @@ label_5854::
     ld   a, $70
     ld   [$FFAA], a
     ld   a, GAMEPLAY_OVERWORLD
-    ld   [WR1_GameplayType], a
+    ld   [wGameplayType], a
     ld   [$FFBC], a
     ld   a, $02
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ld   a, [$DBA5]
     and  a
     ld   a, $06
@@ -3876,7 +3876,7 @@ label_5885::
     ld   [$D6FE], a
 
 label_5888::
-    ld   hl, WR0_MapSlideTransitionState
+    ld   hl, wMapSlideTransitionState
     ld   e, $00
 
 label_588D::
@@ -3889,13 +3889,13 @@ label_588D::
 
 label_5895::
     ld   a, $80
-    ld   [WR1_WindowY], a
+    ld   [wWindowY], a
     ld   a, $07
     ld   [rWX], a
     ld   a, $08
     ld   [$C150], a
     xor  a
-    ld   [WR0_InventoryAppearing], a
+    ld   [wInventoryAppearing], a
 
 label_58A7::
     ret
@@ -4049,7 +4049,7 @@ label_5AA0::
     ld   a, [hl]
     and  $FF
     jr   nz, label_5AF5
-    ld   a, [WR0_FreeMovementMode]
+    ld   a, [wFreeMovementMode]
     and  a
     jr   nz, label_5AF5
     ld   a, $09
@@ -4768,11 +4768,11 @@ label_5F43::
     ret
 
 UpdateWindowPosition::
-    ld   a, [WR0_InventoryAppearing]
+    ld   a, [wInventoryAppearing]
     and  a
     jr   z, label_5F6A
     ld   hl, $C000
-    ld   a, [WR1_WindowY]
+    ld   a, [wWindowY]
     add  a, $08
     ld   d, a
     ld   e, $28
@@ -4793,7 +4793,7 @@ label_5F62::
     ret
 
 label_5F6A::
-    ld   a, [WR1_WindowY]
+    ld   a, [wWindowY]
     and  a
     ret  z
     ld   a, [$C19F]
@@ -4881,7 +4881,7 @@ label_5FDE::
     ld   a, [hl]
     cp   $D5
     jr   nz, label_5FF0
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -4925,7 +4925,7 @@ label_6014::
     ld   a, [$DB68]
     and  $02
     jr   z, label_607F
-    ld   a, [$DB43]
+    ld   a, [wPowerBraceletLevel]
     cp   $02
     jr   c, label_603C
     xor  a
@@ -4948,7 +4948,7 @@ label_6047::
     ld   a, [hl]
     cp   $D4
     jr   nz, label_6059
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -4991,7 +4991,7 @@ label_608A::
     ld   a, [hl]
     cp   $C1
     jr   nz, label_609C
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -5090,7 +5090,7 @@ label_612F::
     ld   a, [hl]
     cp   $6D
     jr   nz, label_6141
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -5124,11 +5124,11 @@ label_6161::
 label_6162::
     call label_27F2
     xor  a
-    ld   [WR1_GameplayType], a
-    ld   [WR1_GameplaySubtype], a
-    ld   [WR1_OBJ0Palette], a
+    ld   [wGameplayType], a
+    ld   [wGameplaySubtype], a
+    ld   [wOBJ0Palette], a
     ld   [$DB99], a
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   [rBGP], a
     ld   [rOBP0], a
     ld   [rOBP1], a
@@ -5184,7 +5184,7 @@ label_61E9::
     ld   a, [$C11C]
     cp   $00
     jr   nz, label_6202
-    ld   a, [WR0_FreeMovementMode]
+    ld   a, [wFreeMovementMode]
     and  a
     jr   nz, label_6202
     ld   a, [$FFF7]
@@ -5255,7 +5255,7 @@ label_6281::
     ld   a, $13
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [WR1_WindowY], a
+    ld   [wWindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$C16B], a
@@ -5409,12 +5409,12 @@ label_63F8::
     ld   hl, label_63AA
     add  hl, de
     ld   a, [hl]
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   [$DB99], a
     ld   hl, label_63BA
     add  hl, de
     ld   a, [hl]
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
 
 label_6417::
     ld   a, [hFrameCounter]
@@ -5510,7 +5510,7 @@ label_64BA::
     ld   a, $DE
     call label_67DE
     ld   a, $06
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ld   a, $05
     ld   [$C3C7], a
     ret
@@ -5792,7 +5792,7 @@ label_66D7::
 label_66D8::
     db $E0, $66, $E4, $66, $E8, $66, $EC, $66, $4C, 0, $4C, $20, $4E, 0, $4E, $20
     db $5C, 0, $5C, $20, $5E, 0, $5E, $20
-    
+
 label_66F0::
     db 1, $FF
 
@@ -6061,7 +6061,7 @@ label_6885::
     ld   a, e
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [WR1_WindowY], a
+    ld   [wWindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -6093,7 +6093,7 @@ label_68BF::
     jr   nz, label_68CF
     call label_6A7C
     ld   a, $07
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ret
 
 label_68CF::
@@ -6116,7 +6116,7 @@ label_68E3::
     dec  a
     ld   [$D210], a
     jr   nz, label_68FB
-    ld   [WR0_ScreenShakeVertical], a
+    ld   [wScreenShakeVertical], a
     ld   a, $20
     ld   [$D210], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -6129,7 +6129,7 @@ label_68FB::
 
 label_6903::
     ld   a, e
-    ld   [WR0_ScreenShakeVertical], a
+    ld   [wScreenShakeVertical], a
     ret
     call label_6A7C
     call label_695B
@@ -6171,7 +6171,7 @@ label_6944::
 
 label_695B::
     xor  a
-    ld   [WR0_ScreenShakeVertical], a
+    ld   [wScreenShakeVertical], a
     ld   a, [$D215]
     and  a
     jr   z, label_6975
@@ -6184,7 +6184,7 @@ label_695B::
 
 label_6971::
     ld   a, e
-    ld   [WR0_ScreenShakeVertical], a
+    ld   [wScreenShakeVertical], a
 
 label_6975::
     ret
@@ -6217,7 +6217,7 @@ label_69C0::
 
 label_69C3::
     db 0, $DE, $10, $40, 8, $E0, $10, $40, $10, $E0, $30, $40, $18, $DE, $30
-    
+
 label_69D2::
     db 0
 
@@ -6296,7 +6296,7 @@ label_6A7C::
     ld   [$FFF5], a
     ld   a, $38
     ld   [$FFEE], a
-    ld   a, [WR0_ScreenShakeVertical]
+    ld   a, [wScreenShakeVertical]
     ld   e, a
     ld   a, $20
     sub  a, e
@@ -6332,7 +6332,7 @@ label_6AAE::
 label_6AC2::
     ld   a, $48
     ld   [$FFEE], a
-    ld   a, [WR0_ScreenShakeVertical]
+    ld   a, [wScreenShakeVertical]
     ld   e, a
     ld   a, [$D211]
     add  a, $20
@@ -6363,7 +6363,7 @@ label_6AF4::
     ret
 
 label_6AF8::
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     JP_TABLE
 ._0 dw label_6B0A
 ._1 dw label_6B2B
@@ -6423,7 +6423,7 @@ label_6B52::
     ld   a, $15
     ld   [$D6FF], a
     ld   a, $FF
-    ld   [WR1_WindowY], a
+    ld   [wWindowY], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -6698,7 +6698,7 @@ label_6D10::
 
 label_6D11::
     ld   d, $05
-    ld   a, [WR1_GameplayType]
+    ld   a, [wGameplayType]
     cp   GAMEPLAY_OVERWORLD
     jr   z, label_6D1C
     ld   d, $06
@@ -6818,11 +6818,11 @@ IntroCheckJoypad::
     jp   z, RenderIntroFrame
     ; Start button pressed
     call label_27F2
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     cp   GAMEPLAY_INTRO_TITLE  ; if on Title Screen
     jr   z, .transitionToFileMenu
     ; Transition to Title screen
-    ld   a, 40  ; Ignore joypad for the next 40 frames 
+    ld   a, 40  ; Ignore joypad for the next 40 frames
     ld   [hButtonsInactiveDelay], a
     ld   a, $11
     ld   [$D6FF], a
@@ -6831,7 +6831,7 @@ IntroCheckJoypad::
     jr   nz, .isGBC
     ; Not GBC
     ld   a, [label_789B]
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     ld   a, [label_789F]
     ld   [$DB99], a
     ld   a, $04
@@ -6847,15 +6847,15 @@ IntroCheckJoypad::
 .transitionToTitleScreen
     ld   [$D013], a
     ld   a, $0D
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     xor  a
-    ld   [WR0_EntitiesTypeTable], a
+    ld   [wEntitiesTypeTable], a
     ld   [$C281], a
     ld   [$C282], a
     ld   [$C283], a
     ld   [$C284], a
     ld   [rBGP], a
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   a, $10
     ld   [$C17E], a
     call ResetIntroTimers
@@ -6869,12 +6869,12 @@ IntroCheckJoypad::
     jp   TransitionToFileMenu
     ; Jump to End Sequence (dead code, never reached)
     xor  a
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
     ld   [rBGP], a
-    ld   [WR1_BGPalette], a
-    ld   hl, WR1_GameplayType
+    ld   [wBGPalette], a
+    ld   hl, wGameplayType
     inc  [hl]
 
 .enableVBlankInterruptAndReturn
@@ -6885,7 +6885,7 @@ IntroCheckJoypad::
     ret
 
 RenderIntroFrame::
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     cp   GAMEPLAY_INTRO_SEA
     jr   c, IntroSceneJumpTable
     cp   $05
@@ -6906,13 +6906,13 @@ label_6EC6::
     ld   hl, IntroSeaPaletteTable
     add  hl, de
     ld   a, [hl]
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     call label_8F0 ; Load BG palette
 
 IntroSceneJumpTable::
-    ld   a, [WR1_GameplaySubtype]
+    ld   a, [wGameplaySubtype]
     JP_TABLE
-._0 dw label_6EF8 
+._0 dw label_6EF8
 ._1 dw label_6F2A
 ._2 dw label_6F36
 ._3 dw IntroShipOnSeaHandler
@@ -6942,7 +6942,7 @@ label_6EF8::
     ld   [$C13D], a
     ld   a, [$FF40]
     and  $DF
-    ld   [WR1_LCDControl], a
+    ld   [wLCDControl], a
     ld   [rLCDC], a
     ld   a, $B4
     ld   [$D016], a
@@ -6971,7 +6971,7 @@ label_6F42::
 label_6F44::
     ld   [$D6FF], a
     ld   a, $1C
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     ld   a, $E0
     ld   [$DB99], a
     ld   a, $03
@@ -6986,7 +6986,7 @@ label_6F5F::
     ldi  [hl], a
     dec  e
     jr   nz, label_6F5F
-    ld   [WR0_EntitiesTypeTable], a
+    ld   [wEntitiesTypeTable], a
     ld   [$C281], a
     ld   [$C3B0], a
     ld   [$C3B1], a
@@ -7028,11 +7028,11 @@ label_6F9C::
 IntroShipOnSeaHandler::
     call RenderRain
     call RenderIntroEntities
-    ld   a, [WR0_IntroSubTimer]
+    ld   a, [wIntroSubTimer]
     and  a
     jr   z, label_7014
     inc  a
-    ld   [WR0_IntroSubTimer], a ; Increment subtimer
+    ld   [wIntroSubTimer], a ; Increment subtimer
     cp   $18
     jr   c, label_7013
     sub  a, $18
@@ -7045,31 +7045,31 @@ IntroShipOnSeaHandler::
     ld   hl, label_6F93
     add  hl, de
     ld   a, [hl]
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   hl, label_6F9C
     add  hl, de
     ld   a, [hl]
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     call label_8D7
     ld   a, e
     cp   $08
     jp   nz, label_7013
     xor  a
-    ld   [WR0_EntitiesTypeTable], a
+    ld   [wEntitiesTypeTable], a
     ld   [$C281], a
     ld   [$C282], a
     ld   [$C290], a
     ld   a, $05
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ld   [$D00F], a
     call label_7D4E
     ld   a, $11
     ld   [$D6FE], a
     ld   a, $FF
-    ld   [WR0_IntroTimer], a
+    ld   [wIntroTimer], a
     xor  a
     ld   [hBaseScrollX], a
-    ld   [WR0_ScrollXOffsetForSection], a
+    ld   [wScrollXOffsetForSection], a
     ld   [$C102], a
     ld   [$C103], a
     ld   a, $92
@@ -7080,10 +7080,8 @@ IntroShipOnSeaHandler::
 label_7013::
     ret
 
-WR0_IntroShipPosX equ (WR0_EntitiesPosXTable + $02)
-
 label_7014::
-    ld   a, [WR0_IntroShipPosX]
+    ld   a, [wIntroShipPosX]
     cp   $50
     jr   nz, label_7031
     ; If IntroShipPosX == $50
@@ -7091,7 +7089,7 @@ label_7014::
     ld   a, $FF
     ld   [rBGP], a
     ld   a, GAMEPLAY_INTRO_LINK_FACE
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ld   a, $0F
     ld   [$D6FF], a
     ld   a, $01
@@ -7138,7 +7136,7 @@ label_7068::
     ld   d, $00
 
 label_706C::
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -7161,7 +7159,7 @@ label_7087::
     ld   hl, label_7081
     add  hl, bc
     ld   a, [hl]
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   [hl], a
     ld   hl, label_707B
@@ -7187,9 +7185,9 @@ label_70B1::
 
 IntroLinkFaceHandler::
     call RenderRain
-    ld   a, [WR0_IntroTimer]
+    ld   a, [wIntroTimer]
     inc  a
-    ld   [WR0_IntroTimer], a
+    ld   [wIntroTimer], a
     cp   128
     jr   nz, .continue
     ; If IntroTimer == 128 frames
@@ -7210,7 +7208,7 @@ IntroLinkFaceHandler::
     ; If FrameCounter == 160 frames
     ; Move back to sea sequence
     ld   a, GAMEPLAY_INTRO_SEA
-    ld   [WR1_GameplaySubtype], a 
+    ld   [wGameplaySubtype], a
     ld   a, [hIsGBC]
     and  a
     jr   z, .notGBC
@@ -7226,10 +7224,10 @@ IntroLinkFaceHandler::
     ld   a, $03
     ld   [rIE], a ; Enable interrupts on VBlank and LCDStat
     xor  a
-    ld   [WR0_EntitiesTypeTable], a
+    ld   [wEntitiesTypeTable], a
     ld   [$C281], a
     ld   a, $01
-    ld   [WR0_IntroSubTimer], a
+    ld   [wIntroSubTimer], a
     ret
 
 .continue4
@@ -7293,9 +7291,9 @@ label_7168::
     ld   [$D001], a
     jr   nz, label_7188
     ld   a, $07
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ld   a, $06
-    ld   [WR0_EntitiesTypeTable], a
+    ld   [wEntitiesTypeTable], a
     ld   a, $B0
     ld   [$C200], a
     ld   a, $68
@@ -7326,11 +7324,11 @@ label_719B::
     ld   hl, label_7128
     add  hl, de
     ld   a, [hl]
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   hl, label_7138
     add  hl, de
     ld   a, [hl]
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     ld   hl, label_7148
     add  hl, de
     ld   a, [hl]
@@ -7643,9 +7641,9 @@ label_7395::
 
 ResetIntroTimers::
     ld   a, $A0
-    ld   [WR0_IntroTimer], a
+    ld   [wIntroTimer], a
     xor  a
-    ld   [WR0_IntroSubTimer], a
+    ld   [wIntroSubTimer], a
     ld   a, $FF
     ld   [$D003], a
     ret
@@ -7686,7 +7684,7 @@ TitleScreenHandler::
     ld   d, $00
 
 label_73E0::
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -7756,11 +7754,11 @@ label_7447::
     ld   a, $11
     ld   [$D6FE], a
     ld   a, $0B
-    ld   [WR1_GameplaySubtype], a
+    ld   [wGameplaySubtype], a
     ld   a, $C9
-    ld   [WR1_BGPalette], a
+    ld   [wBGPalette], a
     ld   a, $1C
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     xor  a
     ld   [hBaseScrollX], a
     ld   [$FF97], a
@@ -7779,8 +7777,8 @@ RenderRain::
     ld   [$FFD7], a
     ld   hl, $C04C
     ; On the sea, limit the rain to the top section of the screen ($10)
-    ld   c, $10  
-    ld   a, [WR1_GameplaySubtype]
+    ld   c, $10
+    ld   a, [wGameplaySubtype]
     cp   GAMEPLAY_INTRO_LINK_FACE ; if GameplaySubtype != LINK_FACE
     jr   nz, .loop
     ; On Link's face, the rain covers all the $15 rows of the screen
@@ -7794,7 +7792,7 @@ RenderRain::
     call GetRandomByte
     and  $01       ; if random(0,1) == 0
     ld   a, $28
-    jr   z, .next  ;   jump to next   
+    jr   z, .next  ;   jump to next
     call GetRandomByte
     and  $06
     add  a, $70
@@ -7843,16 +7841,16 @@ RenderIntroEntities::
 .loop
     ld   a, c
     ld   [$C123], a
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
     jr   z, .continue ; If no entity at this table index, continue
-    ld   hl, WR0_EntitiesPosXTable
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     ld   [$FFEE], a ; EntityOffsetX?
-    ld   hl, WR0_EntitiesPosYTable
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     ld   [$FFEC], a ; EntityOffsetY?
@@ -7875,7 +7873,7 @@ RenderIntroEntities::
 ; Inputs:
 ;   bc: index of entity in entities table
 RenderIntroEntity::
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     cp   ENTITY_INTRO_SHIP
@@ -7888,7 +7886,7 @@ RenderIntroEntity::
     jp   z, RenderIntroSparkle
     call label_C05
     jr   nz, label_7533
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], b
     ret
@@ -7914,7 +7912,7 @@ ShipHeaveTable::
     db 2, 1, 0, 0, 0, 1, 2, 2
 
 RenderIntroShip::
-    ld   a, [WR0_IntroSubTimer]
+    ld   a, [wIntroSubTimer]
     and  a
     ld   a, $00
     jr   nz, .skip
@@ -7959,7 +7957,7 @@ RenderIntroShip::
     dec  c
     jr   nz, .loop
 
-    ld   a, [WR0_IntroSubTimer]
+    ld   a, [wIntroSubTimer]
     cp   $10
     jr   c, .return
     ld   hl, data_7550
@@ -8015,7 +8013,7 @@ label_7629::
     ld   l, $01
 
 label_762B::
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     dec  a
@@ -8269,7 +8267,7 @@ label_77E1::
     call label_C05
     dec  [hl]
     jr   nz, label_77ED
-    ld   hl, WR0_EntitiesTypeTable
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], b
     ret
@@ -8471,7 +8469,7 @@ label_79AE::
     ld   hl, label_7898
     add  hl, bc
     ld   a, [hl]
-    ld   [WR1_OBJ0Palette], a
+    ld   [wOBJ0Palette], a
     ld   hl, label_789C
     add  hl, bc
     ld   a, [hl]
@@ -8676,7 +8674,7 @@ label_7AB3::
     ld   [$D002], a
     ld   [$D003], a
     ld   [$D004], a
-    ld   [WR0_EntitiesTypeTable], a
+    ld   [wEntitiesTypeTable], a
     ld   [$C281], a
 
 label_7AE3::
@@ -8831,7 +8829,7 @@ IntroBGVerticalOffsetTable::
     db 3, 2, 1, 0, 0, 1, 2, 3
 
 label_7D01::
-    ld   hl, WR0_ScrollXOffsetForSection
+    ld   hl, wScrollXOffsetForSection
     ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_7D0B
@@ -8880,7 +8878,7 @@ label_7D2F::
     add  hl, de
     ld   a, $00
     sub  a, [hl]
-    ld   [WR0_IntroBGYOffset], a
+    ld   [wIntroBGYOffset], a
 
 label_7D46::
     ld   a, [hFrameCounter]
@@ -8941,7 +8939,7 @@ label_7D9B::
     ret
 
 label_7D9C::
-    ld   hl, WR0_ScrollXOffsetForSection
+    ld   hl, wScrollXOffsetForSection
     ld   a, [hFrameCounter]
     and  $07
     jr   nz, label_7DA6
@@ -8975,7 +8973,7 @@ label_7DCC::
     jp   label_7D46
 
 label_7DCF::
-    ld   hl, WR0_ScrollXOffsetForSection
+    ld   hl, wScrollXOffsetForSection
     ld   a, [hFrameCounter]
     and  $0F
     jr   nz, label_7DD9

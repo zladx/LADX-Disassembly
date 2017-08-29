@@ -28,7 +28,7 @@ Start::
     xor  a ; isGBC = false
 
 Init::
-    ld   [hIsGBC], a ; Save isGBC value
+    ldh  [hIsGBC], a ; Save isGBC value
     call LCDOff
     ld   sp, $DFFF ; init stack pointer
     ld   a, $3C ; 60
@@ -75,7 +75,7 @@ Init::
 RenderLoop::
     ; Set DidRenderFrame
     ld   a, 1
-    ld   [hDidRenderFrame], a
+    ldh  [hDidRenderFrame], a
 
     ; Special case for $C500 == 1 (alternate background position)
     ; If $C500 != 0...
@@ -87,7 +87,7 @@ RenderLoop::
     cp   GAMEPLAY_OVERWORLD
     jr   nz, .applyRegularScrollYOffset
     ; set scroll Y to $00 or $80 alternatively every other frame.
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     rrca
     and  $80
     jr   .setScrollY
@@ -95,14 +95,14 @@ RenderLoop::
 .applyRegularScrollYOffset
     ; Compose the base offset and the screen shake offset
     ld   hl, wScreenShakeVertical
-    ld   a, [hBaseScrollY]
+    ldh  a, [hBaseScrollY]
     add  a, [hl]
 
 .setScrollY
     ld   [rSCY], a ; scrollY
 
     ; Set ScrollX
-    ld   a, [hBaseScrollX]
+    ldh  a, [hBaseScrollX]
     ld   hl, wScreenShakeHorizontal
     add  a, [hl]
     ld   hl, $C1BF
@@ -208,7 +208,7 @@ label_2A0::
     push af
     cp   $60
     jr   c, label_2B7
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B4
     ld   a, $20
@@ -248,7 +248,7 @@ RenderInteractiveFrame::
     call ReadJoypadState
 
     ; If NeedsUpdatingBGTiles or NeedsUpdatingEnnemiesTiles or NeedsUpdatingNPCTiles…
-    ld   a, [hNeedsUpdatingBGTiles]
+    ldh  a, [hNeedsUpdatingBGTiles]
     ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
     ld   hl, wneedsUpdatingNPCTiles
@@ -265,7 +265,7 @@ RenderInteractiveFrame::
     and  a  ; Is engine already paused?
     jr   nz, .engineIsPaused
 
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  J_RIGHT | J_LEFT | J_UP | J_DOWN ; Are none of the directional keys pressed?
     jr   z, .saveEngineStatus
 
@@ -317,7 +317,7 @@ RenderGameplay::
 
 RenderPalettes::
     ; If isGBC
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, .resetDDD2
     ; update palettes
@@ -344,18 +344,18 @@ WaitForNextFrame::
     call SwitchBank
 
     xor  a
-    ld   [hDidRenderFrame], a ; Waiting for next frame
+    ldh  [hDidRenderFrame], a ; Waiting for next frame
     halt
 
 PollNeedsRenderingFrame::
     ; Loop until hNeedsRenderingFrame != 0
-    ld   a, [hNeedsRenderingFrame]
+    ldh  a, [hNeedsRenderingFrame]
     and  a
     jr   z, PollNeedsRenderingFrame
 
     ; Clear hNeedsRenderingFrame
     xor  a
-    ld   [hNeedsRenderingFrame], a
+    ldh  [hNeedsRenderingFrame], a
 
     ; Jump to the top of the render loop
     jp   RenderLoop
@@ -395,7 +395,7 @@ InterruptLCDStatus::
 
 setStandardScrollY::
     ; Set standard scrollY, without specific offset
-    ld   a, [hBaseScrollY]
+    ldh  a, [hBaseScrollY]
 
 setScrollY::
     ld   [rSCY], a ; scrollY
@@ -582,7 +582,7 @@ InterruptVBlank::
     jp  c, PhotoAlbumVBlankHandler
 
 .continue
-    ld   a, [hDidRenderFrame]
+    ldh  a, [hDidRenderFrame]
     and  a
     jp   nz, WaitForVBlankAndReturn  ; if not already waiting for next frame, do
 
@@ -645,7 +645,7 @@ vBlankContinue::
     ld   a, [$D6FE]
     and  a
     jr   nz, WaitForVBlankAndReturn
-    ld   a, [hNeedsUpdatingBGTiles]
+    ldh  a, [hNeedsUpdatingBGTiles]
     ld   [$FFE8], a
     ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
@@ -686,7 +686,7 @@ label_521::
     call AnimateTiles
 
 label_52B::
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, .notGBC
     ld   a, $24
@@ -704,7 +704,7 @@ label_52B::
     ld   [SelectRomBank_2100], a
     call label_72BA
     call label_FFC0
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, WaitForVBlankAndReturn
     ld   a, $21
@@ -724,18 +724,18 @@ WaitForVBlankAndReturn_direct::
     pop  de
     pop  bc
     ld   a, $01
-    ld   [hNeedsRenderingFrame], a
+    ldh  [hNeedsRenderingFrame], a
     pop  af
     reti
 
 PhotoAlbumVBlankHandler::
     ld   a, [wCurrentBank]
     push af
-    ld   a, [hDidRenderFrame]
+    ldh  a, [hDidRenderFrame]
     and  a
     jr   nz, label_5AB
     call label_FFC0
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_598
     ld   a, $21
@@ -765,7 +765,7 @@ label_5AB::
 
 ; Copy tiles?
 label_5BC::
-    ld   a, [hNeedsUpdatingBGTiles]
+    ldh  a, [hNeedsUpdatingBGTiles]
     and  a
     jp   z, label_69E
     cp   $07
@@ -783,7 +783,7 @@ label_5BC::
     ld   a, [$DBA5]
     and  a
     jp   z, label_656
-    ld   a, [hNeedsUpdatingBGTiles]
+    ldh  a, [hNeedsUpdatingBGTiles]
     cp   $02
     jp   z, label_826
     ld   a, $0D
@@ -842,7 +842,7 @@ label_647::
     cp   $04
     jr   nz, label_655
     xor  a
-    ld   [hNeedsUpdatingBGTiles], a
+    ldh  [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
 
 label_655::
@@ -884,14 +884,14 @@ label_656::
     cp   $08
     jr   nz, label_69D
     xor  a
-    ld   [hNeedsUpdatingBGTiles], a
+    ldh  [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
 
 label_69D::
     ret
 
 label_69E::
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_6CB
     ld   a, [$FFF7]
@@ -913,7 +913,7 @@ label_69E::
     jr   label_738
 
 label_6CB::
-    ld   a, [hNeedsUpdatingEnnemiesTiles]
+    ldh  a, [hNeedsUpdatingEnnemiesTiles]
     and  a
     jp   z, label_73E
     ld   a, [$C197]
@@ -979,7 +979,7 @@ label_6F7::
 
 label_738::
     xor  a
-    ld   [hNeedsUpdatingEnnemiesTiles], a
+    ldh  [hNeedsUpdatingEnnemiesTiles], a
     ld   [$FF93], a
 
 label_73D::
@@ -1087,7 +1087,7 @@ label_7D3::
     ld   [SelectRomBank_2100], a
     ld   bc, $0040
     call CopyData
-    ld   a, [hNeedsUpdatingBGTiles]
+    ldh  a, [hNeedsUpdatingBGTiles]
     cp   $0A
     jr   z, label_808
     cp   $0D
@@ -1096,16 +1096,16 @@ label_800::
     jr   z, label_808
 
 label_802::
-    ld   a, [hNeedsUpdatingBGTiles]
+    ldh  a, [hNeedsUpdatingBGTiles]
     inc  a
 
 label_805::
-    ld   [hNeedsUpdatingBGTiles], a
+    ldh  [hNeedsUpdatingBGTiles], a
     ret
 
 label_808::
     xor  a
-    ld   [hNeedsUpdatingBGTiles], a
+    ldh  [hNeedsUpdatingBGTiles], a
     ret
 
 ; Switch to the bank defined in a, and save the active bank
@@ -1172,7 +1172,7 @@ label_865::
     ld   [SelectRomBank_2100], a
     call label_67E5
     xor  a
-    ld   [hNeedsUpdatingBGTiles], a
+    ldh  [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
     ret
 
@@ -1216,7 +1216,7 @@ PlayAudioStep::
     jr   z, label_8C6
     cp   $02
     jr   nz, label_8C3
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $01
     jr   nz, label_8D6
     jr   label_8C6
@@ -1445,7 +1445,7 @@ label_A01::
 
 label_A13::
     ld   [SelectRomBank_2100], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_A01
     ld   a, b
@@ -1597,7 +1597,7 @@ label_B02::
 AdjustBankNumberForGBC::
     push bc
     ld   b, a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a           ; if !isGBC
     jr   z, .notGBC  ;   handle standard GB
     ld   a, b        ; else
@@ -1623,7 +1623,7 @@ label_0B1A::
 
 label_B2F::
     ld   [$FFD9], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     ret  z
     ld   a, [$DBA5]
@@ -1659,7 +1659,7 @@ label_B54::
     ret
     push hl
     ld   [SelectRomBank_2100], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_B80
     ld   de, $0168
@@ -1986,7 +1986,7 @@ label_D45::
     cp   $FF
     jr   z, label_D57
     ld   a, $01
-    ld   [hNeedsUpdatingBGTiles], a
+    ldh  [hNeedsUpdatingBGTiles], a
 
 label_D57::
     jr   label_D91
@@ -2028,7 +2028,7 @@ label_D60::
 label_D8B::
     ld   [$FF94], a
     ld   a, $01
-    ld   [hNeedsUpdatingBGTiles], a
+    ldh  [hNeedsUpdatingBGTiles], a
 
 label_D91::
     xor  a
@@ -2089,7 +2089,7 @@ label_DDB::
     cp   $FF
     jr   nz, label_DF1
     ld   a, $01
-    ld   [hNeedsUpdatingEnnemiesTiles], a
+    ldh  [hNeedsUpdatingEnnemiesTiles], a
     jr   label_E31
 
 label_DF1::
@@ -2128,7 +2128,7 @@ label_E1E::
     ld   a, d
     ld   [$C197], a
     ld   a, $01
-    ld   [hNeedsUpdatingEnnemiesTiles], a
+    ldh  [hNeedsUpdatingEnnemiesTiles], a
 
 label_E29::
     inc  hl
@@ -2172,7 +2172,7 @@ presentSaveScreenIfNeeded::
     jr   nc, jumpToGameplayHandler
 
     ; If not all A + B + Start + Select buttons are pressed
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     cp   J_A | J_B | J_START | J_SELECT
     jr   nz, jumpToGameplayHandler
 
@@ -2396,7 +2396,7 @@ label_F97::
     call SwitchBank
     call label_5487
     ld   hl, $D601
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $03
     or   [hl]
     jr   nz, label_1012
@@ -2408,7 +2408,7 @@ label_F97::
 
 label_1000::
     ld   e, $00
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $04
 
 label_1006::
@@ -2432,7 +2432,7 @@ returnFromGameplayHandler::
 
 label_101F::
     call label_2321
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     ret  z
     ld   a, $24
@@ -2494,10 +2494,10 @@ label_106D::
     ld   d, c
 
 label_107F::
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $B0
     jr   nz, label_10DB
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $40
     jr   z, label_10DB
     ld   a, [$D45F]
@@ -2508,7 +2508,7 @@ label_107F::
     ld   a, [$FFA1]
     cp   $02
     jr   z, label_10DB
-    ld   a, [hLinkAnimationState]
+    ldh  a, [hLinkAnimationState]
     cp   $FF
     jr   z, label_10DB
     ld   a, [$C11C]
@@ -2694,7 +2694,7 @@ label_11E8::
     ld   a, [wAButtonSlot]
     cp   $08
     jr   nz, label_11FE
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $20
     jr   z, label_11FA
     call label_1705
@@ -2708,7 +2708,7 @@ label_11FE::
     ld   a, [wBButtonSlot]
     cp   $08
     jr   nz, label_1214
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $10
     jr   z, label_1210
     call label_1705
@@ -2726,7 +2726,7 @@ label_1214::
     jr   nz, label_1235
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $10
     jr   z, label_1235
     ld   a, [$C1AD]
@@ -2742,7 +2742,7 @@ label_1235::
     jr   nz, label_124B
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $20
     jr   z, label_124B
     call label_1340
@@ -2770,14 +2770,14 @@ label_125E::
     call ItemFunction
 
 label_1275::
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $20
     jr   z, label_1281
     ld   a, [wAButtonSlot]
     call label_1321
 
 label_1281::
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $10
     jr   z, label_128D
     ld   a, [wBButtonSlot]
@@ -3139,7 +3139,7 @@ UseRocksFeather::
     and  a
     jr   z, label_1508
     call label_1508
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $03
     ld   a, $EA
     jr   z, label_14F8
@@ -3225,7 +3225,7 @@ label_1562::
     ret
 
 label_157C::
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $0F
     ld   e, a
     ld   d, $00
@@ -3525,7 +3525,7 @@ label_1713::
     ret
 
 label_1756::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $07
     ld   hl, $FFA2
     or   [hl]
@@ -3581,7 +3581,7 @@ label_1794::
     ld   a, [$C122]
     cp   $28
     jr   c, label_17C6
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     rla
     rla
     and  $10
@@ -3661,8 +3661,8 @@ label_1847::
     cp   $04
     jp   nz, label_19D9
     xor  a
-    ld   [hBaseScrollX], a
-    ld   [hBaseScrollY], a
+    ldh  [hBaseScrollX], a
+    ldh  [hBaseScrollY], a
     ld   [$FFB4], a
     ld   [$DDD6], a
     ld   [$DDD7], a
@@ -3691,7 +3691,7 @@ label_186C::
     ld   a, $01
     ld   [wDidStealItem], a
     xor  a
-    ld   [hLinkAnimationState], a
+    ldh  [hLinkAnimationState], a
 
 label_1898::
     ld   a, [$FFF9]
@@ -4053,7 +4053,7 @@ label_1AC4::
 label_1AC7::
     add  hl, bc
     ld   a, [hl]
-    ld   [hLinkAnimationState], a
+    ldh  [hLinkAnimationState], a
     ret
 
 AnimateMarinBeachTiles::
@@ -4065,7 +4065,7 @@ AnimateMarinBeachTiles::
     ld   [SelectRomBank_2100], a
     ld   hl, $6500
     ld   de, $9500
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $0F
     jr   z, .skip
     cp   $08
@@ -4074,7 +4074,7 @@ AnimateMarinBeachTiles::
     ld   e, l
 
 .skip
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $30
     ld   c, a
     ld   b, $00
@@ -4115,7 +4115,7 @@ AnimateTiles::
     ld   a, [$D601]
     and  a                ; if $D601 != 0
     jp   nz, .returnEarly ;   return immediatly
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $0F
     cp   $04              ; else if FrameCounter 4-lower-bits < 4
     jr   c, .returnEarly  ;   return immediately
@@ -4433,10 +4433,10 @@ label_1D1E::
 
 DrawLinkSprite::
 DrawLinkSpriteAndReturn::
-    ld   a, [hLinkAnimationState]
+    ldh  a, [hLinkAnimationState]
     inc  a
     ret  z
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_1D42
     ld   a, [$DBC7]
@@ -4474,13 +4474,13 @@ label_1D49::
     ld   a, [$C11D]
     or   d
     ld   [hl], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_1DA1
     ld   a, [$DBC7]
     and  $04
     jr   nz, label_1DA1
-    ld   a, [hLinkAnimationState]
+    ldh  a, [hLinkAnimationState]
     cp   $50
     jr   c, label_1D8C
     cp   $55
@@ -4499,7 +4499,7 @@ label_1D8C::
     ld   [hl], a
 
 label_1D95::
-    ld   a, [hLinkAnimationState]
+    ldh  a, [hLinkAnimationState]
     cp   $4E
     jr   z, label_1D9F
     cp   $4F
@@ -4523,13 +4523,13 @@ label_1DA1::
     ld   a, [$C11E]
     or   d
     ld   [hl], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_1DE7
     ld   a, [$DBC7]
     and  $04
     jr   nz, label_1DE7
-    ld   a, [hLinkAnimationState]
+    ldh  a, [hLinkAnimationState]
     cp   $50
     jr   c, label_1DD2
     cp   $55
@@ -4548,7 +4548,7 @@ label_1DD2::
     ld   [hl], a
 
 label_1DDB::
-    ld   a, [hLinkAnimationState]
+    ldh  a, [hLinkAnimationState]
     cp   $4E
     jr   z, label_1DE5
     cp   $4F
@@ -5006,7 +5006,7 @@ label_20CF::
     ld   a, [wAButtonSlot]
     cp   $03
     jr   nz, label_20DD
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $20
     jr   nz, label_20EC
     ret
@@ -5015,7 +5015,7 @@ label_20DD::
     ld   a, [wBButtonSlot]
     cp   $03
     jp   nz, label_2177
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  $10
     jp   z, label_2177
 
@@ -5032,10 +5032,10 @@ label_20EC::
 
     add  hl, de
     ld   a, [hl]
-    ld   [hLinkAnimationState], a
+    ldh  [hLinkAnimationState], a
     ld   hl, data_1F55
     add  hl, de
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     and  [hl]
     jr   z, label_214E
     ld   hl, data_1F59
@@ -5247,7 +5247,7 @@ label_2241::
     add  hl, bc
     ld   b, $00
     ld   c, [hl]
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_2262
     ld   a, [$DBA5]
@@ -5268,7 +5268,7 @@ label_2262::
     and  a
     jr   z, label_2286
     ld   hl, $4000
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_2299
     ld   hl, $43B0
@@ -5280,7 +5280,7 @@ label_2262::
 
 label_2286::
     ld   hl, $6749
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_2299
     ld   hl, $6B1D
@@ -5299,7 +5299,7 @@ label_2299::
     and  $02
     jr   z, label_22D3
     call label_2214
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_22D1
     push bc
@@ -5327,7 +5327,7 @@ label_22D1::
 
 label_22D3::
     call label_2224
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_22FE
     push bc
@@ -5514,7 +5514,7 @@ label_23EF::
     xor  a
     ld   e, a
     ld   d, a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, label_2444
 
@@ -6114,7 +6114,7 @@ label_278B::
     ld   [$FFF2], a
 
 label_27AA::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $10
     ret  z
     ld   a, $17
@@ -6183,7 +6183,7 @@ label_2802::
 ; Return a random number in `a`
 GetRandomByte::
     push hl
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     ld   hl, wRandomSeed
     add  a, [hl]
     ld   hl, rLY
@@ -6220,7 +6220,7 @@ label_283F::
 
 label_284C::
     xor  a
-    ld   [hPressedButtonsMask], a
+    ldh  [hPressedButtonsMask], a
     ld   [$FFCC], a
     ret
 
@@ -6247,12 +6247,12 @@ label_2852::
     and  $F0
     or   b
     ld   c, a
-    ld   a, [hPressedButtonsMask]
+    ldh  a, [hPressedButtonsMask]
     xor  c
     and  c
     ld   [$FFCC], a
     ld   a, c
-    ld   [hPressedButtonsMask], a
+    ldh  [hPressedButtonsMask], a
     ld   a, $30
     ld   [rJOYP], a
 
@@ -6552,7 +6552,7 @@ label_29DC::
     ld   hl, $C000
 
 ZeroMemory::
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     push af
 
 .ZeroMemory_loop
@@ -6563,7 +6563,7 @@ ZeroMemory::
     or   c
     jr   nz, .ZeroMemory_loop
     pop  af
-    ld   [hIsGBC], a
+    ldh  [hIsGBC], a
     ret
 
 label_29ED::
@@ -6680,7 +6680,7 @@ label_2A66::
     ld   bc, $0800
     jp   CopyData
     ld   hl, $4000
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B01
     ld   hl, $6800
@@ -6719,7 +6719,7 @@ label_2B06::
     ld   bc, $0080
     call CopyData
     call PlayAudioStep
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, label_2B61
     ld   a, $10
@@ -6737,14 +6737,14 @@ label_2B61::
     ld   bc, $0800
     jp   CopyData
     ld   hl, $7800
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B90
     ld   hl, $7800
     ld   a, $35
     jr   label_2B95
     ld   hl, $4800
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B90
     ld   hl, $7000
@@ -7005,7 +7005,7 @@ label_2D50::
     call CopyData
     ld   a, $38
     call SwitchBank
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, label_2DC7
     ld   hl, $5C00
@@ -7018,7 +7018,7 @@ label_2DCA::
     ld   de, $8400
     ld   bc, $0400
     call CopyData
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, label_2DDD
     ld   hl, $6600
@@ -7256,7 +7256,7 @@ label_2F69::
     ret
 
 label_2F87::
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     ret  z
     ld   a, [$FFF7]
@@ -7444,7 +7444,7 @@ label_30A9::
     push de
     push hl
     push bc
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, label_30B6
     call label_2FCD
@@ -7504,7 +7504,7 @@ label_30F4::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4CA3
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_3119
     ld   a, $21
@@ -7984,7 +7984,7 @@ label_33DC::
     ld   a, [$C3CD]
     add  a, $04
     ld   [$C3CD], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, label_3406
     ld   a, $04
@@ -8862,7 +8862,7 @@ label_39AE::
     ld   [$C3C1], a
     ld   a, [$FFF7]
     cp   $0A
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     jr   c, label_39C1
     xor  a
 
@@ -9198,7 +9198,7 @@ label_3C08::
     ld   hl, $FFED
     xor  [hl]
     ld   [de], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_3C21
     ld   a, [$FFED]
@@ -9246,7 +9246,7 @@ label_3C4B::
     ld   hl, $FFED
     xor  [hl]
     ld   [de], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_3C63
     ld   a, [$FFED]
@@ -9312,7 +9312,7 @@ label_3C9C::
     ld   a, [hli]
     ld   [de], a
     inc  de
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_3CD0
     ld   a, [wGameplayType]
@@ -9406,7 +9406,7 @@ label_3D28::
     xor  [hl]
     ld   [de], a
     inc  hl
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_3D3F
     ld   a, [$FFED]
@@ -9628,7 +9628,7 @@ label_3E8E::
     ld   a, [hl]
     and  a
     ret  z
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     xor  c
     and  $03
     ret  nz
@@ -9826,7 +9826,7 @@ label_3FBD::
     ld   [SelectRomBank_2100], a
     jp   DrawLinkSpriteAndReturn
     ld   b, $34
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_3FD9
     inc  b

@@ -21,7 +21,7 @@ label_4000::
     dec  h
     ld   e, b
     call IncrementGameplaySubtype
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_4042
     ld   hl, $DC10
@@ -86,7 +86,7 @@ label_4072::
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
@@ -339,7 +339,7 @@ label_420D::
     ld   a, $0F
     ld   [$D6FE], a
     ld   a, $FF
-    ld   [hLinkAnimationState], a
+    ldh  [hLinkAnimationState], a
     ld   a, [$DB57]
     add  a, $01
     daa
@@ -377,7 +377,7 @@ label_4259::
     ld   hl, label_41CF
     add  hl, de
     ld   a, [hl]
-    ld   [hLinkAnimationState], a
+    ldh  [hLinkAnimationState], a
     ld   a, [$FFB7]
     rra
     rra
@@ -410,7 +410,7 @@ label_4259::
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$FF97], a
     ld   hl, $FF9C
     inc  [hl]
@@ -750,7 +750,7 @@ label_44B0::
 label_44B4::
     ld   a, $0F
     ld   [$FF94], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_44C9
     di
@@ -764,8 +764,8 @@ label_44B4::
 label_44C9::
     call label_D1E
     xor  a
-    ld   [hNeedsUpdatingBGTiles], a
-    ld   [hNeedsUpdatingEnnemiesTiles], a
+    ldh  [hNeedsUpdatingBGTiles], a
+    ldh  [hNeedsUpdatingEnnemiesTiles], a
     ld   a, $09
     ld   [$D6FE], a
 
@@ -826,7 +826,7 @@ label_4507::
     ld   [wOBJ0Palette], a
     ld   a, $E4
     ld   [$DB99], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, label_4548
     ld   a, $04
@@ -929,7 +929,7 @@ label_4555::
     ld   [wGameplaySubtype], a
     xor  a
     ld   [$FF97], a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   a, $00
     ld   [wBGPalette], a
     ld   [wOBJ0Palette], a
@@ -1336,7 +1336,7 @@ label_4920::
     ld   [$D000], a
 
 label_4938::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $10
     jr   nz, label_4954
     ld   a, [$D000]
@@ -1361,7 +1361,7 @@ label_4954::
     ld   d, $00
     ld   hl, label_48E4
     add  hl, de
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $08
     jr   z, label_497B
     ld   a, [hl]
@@ -1939,7 +1939,7 @@ label_4CB7::
     ld   b, $00
     add  hl, bc
     ld   e, [hl]
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $10
     jr   z, label_4CD9
     ld   hl, $C004
@@ -2005,7 +2005,7 @@ label_4CDA::
     ld   b, $4E
     ld   l, e
     ld   c, [hl]
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $01
@@ -2013,20 +2013,20 @@ label_4CDA::
     ld   a, $01
     ld   [$DDD1], a
     jp   IncrementGameplaySubtypeAndReturn
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $02
     ld   [$DDD1], a
     jp   IncrementGameplaySubtypeAndReturn
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     call label_905
     ld   a, $01
     ld   [$DDD1], a
     jp   IncrementGameplaySubtypeAndReturn
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $02
@@ -2261,7 +2261,7 @@ label_4ECF::
 label_4ED9::
     call label_4F0C
     call label_4954
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $10
     jr   z, label_4EEF
 
@@ -2309,7 +2309,7 @@ label_4F0C::
     ld   [$D000], a
 
 label_4F1D::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $10
     jr   nz, label_4F3A
     ld   a, [$D000]
@@ -2493,7 +2493,7 @@ label_5055::
     ld   d, $00
     ld   hl, label_48E4
     add  hl, de
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $08
     ld   a, [hl]
     ld   hl, $C000
@@ -2646,7 +2646,7 @@ label_5129::
     call label_5175
 
 label_512C::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $10
     jr   z, label_514F
     ld   a, [$D001]
@@ -2700,7 +2700,7 @@ label_5175::
     ld   a, [$D002]
     cp   $03
     jp   z, label_51C3
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $08
     jr   z, label_51A8
     ld   a, [hl]
@@ -2745,7 +2745,7 @@ label_51A8::
     ret
 
 label_51C3::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $08
     ld   a, [hl]
     ld   hl, $C008
@@ -2824,7 +2824,7 @@ label_5235::
 
 label_5249::
     call label_512C
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $10
     jr   z, label_526F
     ld   a, [$D002]
@@ -3002,7 +3002,7 @@ label_5353::
     ld   [$DBA5], a
     jr   z, label_538E
     ld   a, $04
-    ld   [hLinkAnimationState], a
+    ldh  [hLinkAnimationState], a
     ld   a, $02
     ld   [$FF9E], a
 
@@ -3031,7 +3031,7 @@ label_5394::
     ld   a, $60
     ld   [$DB9E], a
     xor  a
-    ld   [hLinkAnimationState], a
+    ldh  [hLinkAnimationState], a
     ld   a, $03
     ld   [$FF9E], a
     ld   a, $16
@@ -3548,7 +3548,7 @@ label_5639::
     dec  h
     ld   e, b
     call IncrementGameplaySubtype
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_5678
     ld   hl, $DC10
@@ -3595,7 +3595,7 @@ label_5678::
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$C1BF], a
     ld   [$FF97], a
     ld   [wInventoryAppearing], a
@@ -3822,7 +3822,7 @@ label_5825::
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_58A7
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_5854
     ld   hl, $DC10
@@ -3854,7 +3854,7 @@ label_5854::
     xor  a
     ld   [$C50A], a
     ld   [$C116], a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$FF97], a
     ld   [$C167], a
     ld   a, $07
@@ -3915,7 +3915,7 @@ label_58A8::
     ldi  [hl], a
     ld   [hl], $3E
     inc  hl
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     rla
     and  $10
     ld   [hl], a
@@ -4132,7 +4132,7 @@ label_5B3F::
     ld   [hl], $F0
     inc  hl
     ld   [hl], $20
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $10
     jr   nz, label_5BAC
     ld   hl, $C088
@@ -4744,7 +4744,7 @@ label_5F2D::
 
 label_5F2E::
     ld   hl, $0000
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_5F3A
     ld   [hl], $00
@@ -5133,7 +5133,7 @@ label_6162::
     ld   [rOBP0], a
     ld   [rOBP1], a
     ld   [$FF97], a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$D6FB], a
     ld   [$D6F8], a
     ld   a, $18
@@ -5257,7 +5257,7 @@ label_6281::
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$C16B], a
     ld   [$C16C], a
     ld   a, $90
@@ -5374,10 +5374,10 @@ label_63BA::
     db 0, 0, 0, 0, 4, 4, 4, 4, $18, $18, $18, $18, $1C, $1C, $1C, $1C
 
 label_6C3A::
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_63E4
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $07
     jr   nz, label_6417
     call label_1A39
@@ -5388,7 +5388,7 @@ label_6C3A::
     jr   label_6417
 
 label_63E4::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $07
     jr   nz, label_63F8
     ld   a, [$C3C5]
@@ -5399,7 +5399,7 @@ label_63E4::
     call IncrementGameplaySubtype
 
 label_63F8::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $03
     ld   e, a
     ld   a, [$C3C5]
@@ -5417,7 +5417,7 @@ label_63F8::
     ld   [wOBJ0Palette], a
 
 label_6417::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_642E
     ld   a, [$FF97]
@@ -5763,7 +5763,7 @@ label_668B::
     pop  de
     call label_658B
     call label_67A8
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $07
     jr   nz, label_66C4
     ld   hl, $C560
@@ -5811,7 +5811,7 @@ label_66FD::
     jr   z, label_6718
     ld   hl, $D200
     add  hl, bc
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $07
     jr   nz, label_6717
     ld   a, [hl]
@@ -5851,7 +5851,7 @@ label_6733::
     sla  a
     sla  a
     ld   e, a
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     add  a, e
     ld   [$FFE9], a
 
@@ -5983,7 +5983,7 @@ label_67EE::
     db $25, $58, $E4, $68, 8, $69, $45, $69, $22, $58, $CD, $D6, $44
 
 label_680B::
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_6829
     ld   hl, $DC10
@@ -6063,7 +6063,7 @@ label_6885::
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
@@ -6306,7 +6306,7 @@ label_6A7C::
     jr   z, label_6AC2
     dec  a
     ld   [$D214], a
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $07
     ld   a, [$D212]
     jr   nz, label_6AAE
@@ -6342,7 +6342,7 @@ label_6AC2::
     ld   e, a
     ld   d, $00
     ld   hl, label_6976
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_6AE3
     ld   hl, label_697C
@@ -6353,7 +6353,7 @@ label_6AE3::
     xor  a
     ld   [$C3C0], a
     ld   hl, label_6982
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_6AF4
     ld   hl, label_69D2
@@ -6375,7 +6375,7 @@ label_6AF8::
 
 label_6B0A::
     call IncrementGameplaySubtype
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_6B2B
     ld   hl, $DC10
@@ -6425,7 +6425,7 @@ label_6B52::
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
@@ -6497,7 +6497,7 @@ label_6BB4::
 label_6BC6::
     call label_6BEA
     xor  a
-    ld   [hNeedsUpdatingBGTiles], a
+    ldh  [hNeedsUpdatingBGTiles], a
     ld   [$FF92], a
     ret
 
@@ -6688,7 +6688,7 @@ label_6D02::
     ld   a, b
     or   c
     jr   nz, label_6CE9
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_6D10
     call label_6D11
@@ -6804,12 +6804,12 @@ IntroSeaPaletteTable::
     db $C6, $C2, $C0, $C2
 
 IntroHandlerEntryPoint::
-    ld   a, [hButtonsInactiveDelay]
+    ldh  a, [hButtonsInactiveDelay]
     and  a  ; if ButtonsInactiveDelay == 0
     jr   z, IntroCheckJoypad
     ; ButtonsInactiveDelay != 0
     dec  a
-    ld   [hButtonsInactiveDelay], a
+    ldh  [hButtonsInactiveDelay], a
     jp   RenderIntroFrame
 
 IntroCheckJoypad::
@@ -6823,10 +6823,10 @@ IntroCheckJoypad::
     jr   z, .transitionToFileMenu
     ; Transition to Title screen
     ld   a, 40  ; Ignore joypad for the next 40 frames
-    ld   [hButtonsInactiveDelay], a
+    ldh  [hButtonsInactiveDelay], a
     ld   a, $11
     ld   [$D6FF], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, .isGBC
     ; Not GBC
@@ -6870,7 +6870,7 @@ IntroCheckJoypad::
     ; Jump to End Sequence (dead code, never reached)
     xor  a
     ld   [wGameplaySubtype], a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$FF97], a
     ld   [rBGP], a
     ld   [wBGPalette], a
@@ -6937,7 +6937,7 @@ label_6EF8::
     ld   a, $02
     ld   [$D6FE], a
     xor  a
-    ld   [hFrameCounter], a
+    ldh  [hFrameCounter], a
     ld   a, $A2
     ld   [$C13D], a
     ld   a, [$FF40]
@@ -6959,7 +6959,7 @@ label_6F2A::
 
 label_6F36::
     call label_7D01
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_6F42
     ld   a, $25
@@ -7068,7 +7068,7 @@ IntroShipOnSeaHandler::
     ld   a, $FF
     ld   [wIntroTimer], a
     xor  a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [wScrollXOffsetForSection], a
     ld   [$C102], a
     ld   [$C103], a
@@ -7095,12 +7095,12 @@ label_7014::
     ld   a, $01
     ld   [rIE], a
     xor  a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ret
 
 label_7031::
     call label_7D01
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $07
     jp   nz, label_70B1
     ld   hl, hBaseScrollX
@@ -7112,7 +7112,7 @@ label_7031::
     inc  hl
     dec  [hl]
     ld   c, $00
-    ld   a, [hBaseScrollX]
+    ldh  a, [hBaseScrollX]
     cp   $10
     jr   z, label_7068
     inc  c
@@ -7209,7 +7209,7 @@ IntroLinkFaceHandler::
     ; Move back to sea sequence
     ld   a, GAMEPLAY_INTRO_SEA
     ld   [wGameplaySubtype], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, .notGBC
     ld   a, $25
@@ -7231,7 +7231,7 @@ IntroLinkFaceHandler::
     ret
 
 .continue4
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $7F
     jr   nz, .return
     ; FrameCounter == $7F
@@ -7314,7 +7314,7 @@ label_7188::
     ld   [$D010], a
 
 label_719B::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $03
     ld   e, a
     ld   a, [$D010]
@@ -7400,7 +7400,7 @@ label_7286::
     dec  c
     jr   nz, label_7286
     ld   [hl], $00
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_7296
     call label_7338
@@ -7623,7 +7623,7 @@ label_737E::
     ldi  [hl], a
     dec  c
     jr   nz, label_737E
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, label_738E
     call label_79AE
@@ -7677,7 +7677,7 @@ label_73C8::
 TitleScreenHandler::
     call RenderIntroEntities
     call label_7920
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $3F
     jr   nz, label_7418
     ld   e, $01
@@ -7760,7 +7760,7 @@ label_7447::
     ld   a, $1C
     ld   [wOBJ0Palette], a
     xor  a
-    ld   [hBaseScrollX], a
+    ldh  [hBaseScrollX], a
     ld   [$FF97], a
     dec  a
     ld   [$D018], a
@@ -7916,7 +7916,7 @@ RenderIntroShip::
     and  a
     ld   a, $00
     jr   nz, .skip
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     add  a, $D0
     rra
     rra
@@ -8058,7 +8058,7 @@ RenderIntroMarin::
 
 label_7681::
     call label_7D9C
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     rra
     rra
     rra
@@ -8100,7 +8100,7 @@ label_76AB::
     xor  a
     ld   [$C291], a
     ld   [$C2E1], a
-    ld   [hFrameCounter], a
+    ldh  [hFrameCounter], a
     ret
 
 label_76D4::
@@ -8112,7 +8112,7 @@ label_76D6::
     ld   a, [$C201]
     dec  a
     ld   [$C201], a
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $01
     jr   nz, label_7707
     ld   hl, hBaseScrollX
@@ -8137,7 +8137,7 @@ label_76FF::
     xor  a
 
 label_7707::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     rra
     rra
     and  $01
@@ -8148,13 +8148,13 @@ label_7711::
     call label_C05
     jr   nz, label_7778
     call label_7DCF
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $01
     jr   nz, label_776C
     ld   a, [$C201]
     dec  a
     ld   [$C201], a
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_776C
     ld   hl, hBaseScrollX
@@ -8173,7 +8173,7 @@ label_7740::
     ld   [hl], $50
 
 label_7745::
-    ld   a, [hBaseScrollX]
+    ldh  a, [hBaseScrollX]
     cp   $56
     jr   nz, label_775C
     ld   a, $A0
@@ -8198,7 +8198,7 @@ label_7764::
     xor  a
 
 label_776C::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     rra
     rra
     rra
@@ -8215,7 +8215,7 @@ label_7778::
 
 label_7781::
     call label_7D46
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $01
     jr   nz, label_77BC
     ld   a, $02
@@ -8391,7 +8391,7 @@ label_7929::
     ld   a, $59
     add  a, [hl]
     ld   [$FFEC], a
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   nz, label_795D
     ld   a, [$D013]
@@ -8432,7 +8432,7 @@ label_795D::
     jr   label_797D
 
 label_797D::
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_7997
     ld   a, [$D013]
@@ -8601,7 +8601,7 @@ label_7A47::
 
 label_7A5D::
     ret
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_7A6A
     call label_C05
@@ -8663,7 +8663,7 @@ label_7AB3::
     ld   a, $70
     ld   [$FFAA], a
     ret
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_7AE3
     call label_C05
@@ -8780,7 +8780,7 @@ label_7C9D::
     cp   $14
     jr   nz, label_7C9D
     ld   [hl], $00
-    ld   a, [hIsGBC]
+    ldh  a, [hIsGBC]
     and  a
     jr   z, label_7CB6
     call label_7CCB
@@ -8830,28 +8830,28 @@ IntroBGVerticalOffsetTable::
 
 label_7D01::
     ld   hl, wScrollXOffsetForSection
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $07
     jr   nz, label_7D0B
     inc  [hl]
 
 label_7D0B::
     inc  hl
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $0F
     jr   nz, label_7D13
     inc  [hl]
 
 label_7D13::
     inc  hl
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $1F
     jr   nz, label_7D1B
     inc  [hl]
 
 label_7D1B::
     inc  hl
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $0F
     jr   nz, label_7D23
     inc  [hl]
@@ -8865,7 +8865,7 @@ label_7D23::
     inc  [hl]
 
 label_7D2F::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     add  a, $FC
     rra
     rra
@@ -8881,13 +8881,13 @@ label_7D2F::
     ld   [wIntroBGYOffset], a
 
 label_7D46::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $0F
     cp   $04
     jr   c, label_7D9B
 
 label_7D4E::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     rra
     rra
     rra
@@ -8916,7 +8916,7 @@ label_7D6A::
     ld   de, $9300
 
 label_7D7A::
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $03
     sla  a
     sla  a
@@ -8940,7 +8940,7 @@ label_7D9B::
 
 label_7D9C::
     ld   hl, wScrollXOffsetForSection
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $07
     jr   nz, label_7DA6
     inc  [hl]
@@ -8974,7 +8974,7 @@ label_7DCC::
 
 label_7DCF::
     ld   hl, wScrollXOffsetForSection
-    ld   a, [hFrameCounter]
+    ldh  a, [hFrameCounter]
     and  $0F
     jr   nz, label_7DD9
     inc  [hl]

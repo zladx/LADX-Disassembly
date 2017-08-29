@@ -61,9 +61,9 @@ label_4042::
     cp   $04
     jr   nz, label_4072
     ld   a, $03
-    ld   [$FFA9], a
+    ldh  [$FFA9], a
     ld   a, $30
-    ld   [$FFAA], a
+    ldh  [$FFAA], a
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
@@ -87,7 +87,7 @@ label_4072::
     ld   [wWindowY], a
     xor  a
     ldh  [hBaseScrollX], a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
     ld   a, $01
@@ -102,11 +102,11 @@ label_4072::
 label_40A9::
     ret
     call label_412A
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $B0
     jr   z, label_4127
     ld   a, $13
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     ld   a, [$C13F]
     cp   $01
     jr   z, label_40F9
@@ -130,9 +130,9 @@ label_40D5::
     ld   [rOBP1], a
     ld   [wBGPalette], a
     ld   [rBGP], a
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     ld   [$DB9D], a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     ld   [$DB9E], a
     call label_52A4
     ld   a, $80
@@ -144,7 +144,7 @@ label_40F9::
     call label_5DE6
     call label_29CB
     xor  a
-    ld   [$FFF5], a
+    ldh  [$FFF5], a
     ld   a, $01
     ld   [$DBAF], a
     call label_6162
@@ -157,9 +157,9 @@ label_40F9::
     ld   [wWindowY], a
     ld   [rWY], a
     ld   a, $07
-    ld   [$FFA9], a
+    ldh  [$FFA9], a
     ld   a, $70
-    ld   [$FFAA], a
+    ldh  [$FFAA], a
 
 label_4127::
     ret
@@ -171,7 +171,7 @@ label_4128::
 label_412A::
     ld   hl, $C13F
     call label_6BA8
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $0C
     jr   z, label_413B
     ld   a, [hl]
@@ -193,7 +193,7 @@ label_413B::
     ldi  [hl], a
     ld   [hl], $00
     ret
-    ld   a, [$FFB7]
+    ldh  a, [$FFB7]
     and  a
     jp   nz, label_41BB
     ld   e, $70
@@ -327,15 +327,15 @@ label_41E7::
     db   $af ; Undefined instruction
     ld   [wScreenShakeHorizontal], a
     ld   [wScreenShakeVertical], a
-    ld   a, [$FFB7]
+    ldh  a, [$FFB7]
     and  a
 
 label_420D::
     jr   nz, label_4259
     ld   a, $10
-    ld   [$FFB7], a
+    ldh  [$FFB7], a
     ld   a, $01
-    ld   [$FF9C], a
+    ldh  [$FF9C], a
     ld   a, $0F
     ld   [$D6FE], a
     ld   a, $FF
@@ -378,7 +378,7 @@ label_4259::
     add  hl, de
     ld   a, [hl]
     ldh  [hLinkAnimationState], a
-    ld   a, [$FFB7]
+    ldh  a, [$FFB7]
     rra
     rra
     rra
@@ -411,7 +411,7 @@ label_4259::
     ld   [wWindowY], a
     xor  a
     ldh  [hBaseScrollX], a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ld   hl, $FF9C
     inc  [hl]
     call label_905
@@ -439,7 +439,7 @@ label_4259::
 label_42D8::
     ret
     call label_4339
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $B0
     jr   z, label_4335
     ld   a, [$C13F]
@@ -470,9 +470,9 @@ label_42FB::
     ld   [rBGP], a
     ld   [$D6FB], a
     ld   [$D475], a
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     ld   [$DB9D], a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     ld   [$DB9E], a
     call label_52A4
     ld   a, $01
@@ -484,7 +484,7 @@ label_42FB::
 label_432C::
     call label_5DE6
     xor  a
-    ld   [$FFF5], a
+    ldh  [$FFF5], a
     call label_6162
 
 label_4335::
@@ -498,7 +498,7 @@ label_4336::
 label_4339::
     ld   hl, $C13F
     call label_6BA8
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $08
     jr   z, label_434D
     ld   a, [hl]
@@ -511,7 +511,7 @@ label_434C::
     ld   [hl], a
 
 label_434D::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $04
     jr   z, label_435C
     ld   a, [hl]
@@ -583,7 +583,7 @@ label_43A7::
     ld   a, [$DBA5]
     and  a
     jr   z, label_4414
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_43B8
     ld   hl, $DDDA
@@ -604,7 +604,7 @@ label_43C5::
     ld   c, $05
 
 label_43CA::
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   z, label_43DB
     cp   $08
@@ -624,7 +624,7 @@ label_43DC::
     inc  de
     dec  c
     jr   nz, label_43CA
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_43E9
     ld   a, $0F
@@ -636,7 +636,7 @@ label_43E9::
     add  hl, de
     ld   a, [hl]
     ld   [$DBB0], a
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   z, label_440B
     cp   $08
@@ -645,7 +645,7 @@ label_43E9::
     jr   nc, label_4425
     cp   $06
     jr   nz, label_440B
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     jr   nz, label_4425
 
@@ -662,7 +662,7 @@ label_4414::
     ld   hl, hFrameCounter
     or   [hl]
     and  $03
-    ld   [$FFB9], a
+    ldh  [$FFB9], a
     ret
 
 label_4425::
@@ -676,13 +676,13 @@ label_442B::
     ld   [$C11C], a
     call IncrementGameplaySubtype
     ld   a, [$DB9D]
-    ld   [$FF98], a
+    ldh  [$FF98], a
     ld   [$DBB1], a
     ld   a, [$DB9E]
-    ld   [$FF99], a
+    ldh  [$FF99], a
     ld   [$DBB2], a
     ld   a, [$DBC8]
-    ld   [$FFA2], a
+    ldh  [$FFA2], a
     and  a
     jr   z, label_4452
     ld   a, $02
@@ -695,12 +695,12 @@ label_4452::
     call label_37FE
     call label_5FB3
     ld   a, $FF
-    ld   [$FFA6], a
+    ldh  [$FFA6], a
     ld   a, [$DBA5]
     and  a
     jr   z, label_44A6
     ld   d, a
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_4475
     ld   d, $00
@@ -714,7 +714,7 @@ label_4475::
     inc  d
 
 label_447E::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   e, a
     call label_29ED
     cp   $1A
@@ -730,7 +730,7 @@ label_4495::
     ld   a, [$DBCD]
     and  a
     jr   z, label_44A6
-    ld   a, [$FFF8]
+    ldh  a, [$FFF8]
     and  $10
     jr   nz, label_44A6
     ld   a, $0C
@@ -749,7 +749,7 @@ label_44B0::
 
 label_44B4::
     ld   a, $0F
-    ld   [$FF94], a
+    ldh  [$FF94], a
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_44C9
@@ -787,7 +787,7 @@ label_44DB::
     and  a
     jr   z, label_44F5
     ld   a, $03
-    ld   [$FFA5], a
+    ldh  [$FFA5], a
 
 label_44F5::
     call IncrementGameplaySubtype
@@ -834,7 +834,7 @@ label_4507::
 
 label_4548::
     jp   label_27DD
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $90
     jp   z, TransitionReturn
 
@@ -928,7 +928,7 @@ label_4555::
     xor  a
     ld   [wGameplaySubtype], a
     xor  a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ldh  [hBaseScrollX], a
     ld   a, $00
     ld   [wBGPalette], a
@@ -1198,7 +1198,7 @@ label_4852::
     ld   a, $05
 
 label_486D::
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   a, [de]
     and  a
     ld   a, $7E
@@ -1216,7 +1216,7 @@ label_486D::
 label_4881::
     ldi  [hl], a
     inc  de
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     dec  a
     jr   nz, label_486D
     ld   a, b
@@ -1230,7 +1230,7 @@ label_4881::
     ld   a, $05
 
 label_4894::
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   a, [de]
     and  a
     jr   label_489D
@@ -1249,7 +1249,7 @@ label_489D::
 label_48A9::
     ldi  [hl], a
     inc  de
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     dec  a
     jr   nz, label_4894
     xor  a
@@ -1287,13 +1287,13 @@ label_48E4::
     ld   l, e
     add  a, e
     call label_6BA8
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $90
     jr   z, label_48F4
     jp   IncrementGameplaySubtypeAndReturn
 
 label_48F4::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $0C
     jr   z, label_4920
     ld   c, $02
@@ -1303,7 +1303,7 @@ label_48F4::
     inc  c
 
 label_4903::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     bit  2, a
     jr   nz, label_4915
     ld   a, [$DBA6]
@@ -1327,7 +1327,7 @@ label_4920::
     ld   a, [$DBA6]
     cp   $03
     jr   nz, label_4954
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $03
     jr   z, label_4938
     call label_6BAE
@@ -1430,7 +1430,7 @@ label_49AE::
 
 label_49BE::
     ld   a, $13
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     ret
 
 label_49C3::
@@ -1570,7 +1570,7 @@ label_4A98::
     ld   d, h
     ld   bc, $984A
     call label_4852
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $80
     jr   z, label_4B29
     call label_49BE
@@ -1809,17 +1809,17 @@ label_4BB5::
 
 
 label_4BF5::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
 
 label_4BF7::
-    ld   [$FFD7], a
-    ld   a, [$FFD7]
+    ldh  [$FFD7], a
+    ldh  a, [$FFD7]
     and  $0C
     jr   nz, label_4C41
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     and  $03
     jr   nz, label_4C21
-    ld   a, [$FFCB]
+    ldh  a, [$FFCB]
     ld   hl, $C182
     and  $0F
     jr   nz, label_4C12
@@ -1834,7 +1834,7 @@ label_4C12::
     cp   $18
     jr   nz, label_4C1F
     ld   [hl], $15
-    ld   a, [$FFCB]
+    ldh  a, [$FFCB]
     jr   label_4BF7
 
 label_4C1F::
@@ -1907,7 +1907,7 @@ label_4C63::
     ret
 
 label_4C8A::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $30
     jr   z, label_4CB7
     bit  5, a
@@ -2080,11 +2080,11 @@ label_4DA6::
     and  $01
     jr   z, label_4DBD
     xor  a
-    ld   [$FFDB], a
+    ldh  [$FFDB], a
     ld   a, [$DC06]
-    ld   [$FFD9], a
+    ldh  [$FFD9], a
     ld   a, [$DC09]
-    ld   [$FFDA], a
+    ldh  [$FFDA], a
     jp   label_5D53
 
 label_4DBD::
@@ -2095,11 +2095,11 @@ label_4DBE::
     and  $02
     jr   z, label_4DBD
     ld   a, $01
-    ld   [$FFDB], a
+    ldh  [$FFDB], a
     ld   a, [$DC07]
-    ld   [$FFD9], a
+    ldh  [$FFD9], a
     ld   a, [$DC0A]
-    ld   [$FFDA], a
+    ldh  [$FFDA], a
     jp   label_5D53
 
 label_4DD6::
@@ -2107,11 +2107,11 @@ label_4DD6::
     and  $04
     jr   z, label_4DBD
     ld   a, $02
-    ld   [$FFDB], a
+    ldh  [$FFDB], a
     ld   a, [$DC08]
-    ld   [$FFD9], a
+    ldh  [$FFD9], a
     ld   a, [$DC0B]
-    ld   [$FFDA], a
+    ldh  [$FFDA], a
     jp   label_5D53
 
 label_4DEE::
@@ -2140,7 +2140,7 @@ label_4DEE::
     ld   b, h
     ld   a, [hl]
     call label_6BA8
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $08
     jr   z, label_4E18
     ld   a, [$DBA6]
@@ -2149,7 +2149,7 @@ label_4DEE::
     ld   [$DBA6], a
 
 label_4E18::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $04
     jr   z, label_4E2B
     ld   a, [$DBA6]
@@ -2162,7 +2162,7 @@ label_4E28::
     ld   [$DBA6], a
 
 label_4E2B::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $90
     jr   z, label_4E67
     ld   a, [$DBA6]
@@ -2196,7 +2196,7 @@ label_4E5D::
 label_4E67::
     call label_4954
     ret
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     bit  5, a
     jr   nz, label_4E9E
     and  $90
@@ -2300,7 +2300,7 @@ label_4F03::
     ret
 
 label_4F0C::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $03
     jr   z, label_4F1D
     call label_6BAE
@@ -2433,7 +2433,7 @@ label_4F45::
     call label_4852
     jp   IncrementGameplaySubtypeAndReturn
     call label_6BA8
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $08
     jr   z, label_500E
     ld   a, [$D001]
@@ -2441,7 +2441,7 @@ label_4F45::
     jr   label_5018
 
 label_500E::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $04
     jr   z, label_501D
     ld   a, [$D001]
@@ -2452,7 +2452,7 @@ label_5018::
     ld   [$D001], a
 
 label_501D::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $90
     jr   z, label_5055
     ld   a, [$D001]
@@ -2602,7 +2602,7 @@ label_50C7::
     ld   b, h
     ld   a, [hl]
     call label_6BA8
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $08
     jr   z, label_50F1
     ld   a, [$D002]
@@ -2611,7 +2611,7 @@ label_50C7::
     ld   [$D002], a
 
 label_50F1::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $04
     jr   z, label_5104
     ld   a, [$D002]
@@ -2625,7 +2625,7 @@ label_5101::
 
 label_5104::
     call label_5094
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     bit  5, a
     jr   z, label_5114
     ld   hl, wGameplaySubtype
@@ -2771,7 +2771,7 @@ label_51CE::
     call label_5094
     call label_51CE
     call label_4F0C
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $90
     jr   z, label_5235
     ld   a, [$D000]
@@ -2812,7 +2812,7 @@ label_5224::
     jp   label_4555
 
 label_5235::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     bit  5, a
     jr   z, label_5249
     ld   hl, wGameplaySubtype
@@ -2874,7 +2874,7 @@ label_5295::
 
 label_52A4::
     xor  a
-    ld   [$FFF9], a
+    ldh  [$FFF9], a
     ld   a, [$DB5A]
     and  a
     jr   nz, label_52BB
@@ -2962,7 +2962,7 @@ label_531D::
     ld   [wGameplaySubtype], a
     xor  a
     ld   [$C11C], a
-    ld   [$FF9C], a
+    ldh  [$FF9C], a
     ld   [$DB93], a
     ld   [$DB94], a
     ld   [$DB90], a
@@ -2987,16 +2987,16 @@ label_5353::
     ld   a, [$DB63]
     ld   [$DB9E], a
     ld   a, [$DB61]
-    ld   [$FFF6], a
+    ldh  [$FFF6], a
     ld   [$DB9C], a
     ld   a, [$DB60]
-    ld   [$FFF7], a
+    ldh  [$FFF7], a
     ld   a, [$DB64]
     ld   [$DBAE], a
     xor  a
-    ld   [$FFF9], a
+    ldh  [$FFF9], a
     ld   a, $03
-    ld   [$FF9E], a
+    ldh  [$FF9E], a
     ld   a, [$DB5F]
     and  $01
     ld   [$DBA5], a
@@ -3004,7 +3004,7 @@ label_5353::
     ld   a, $04
     ldh  [hLinkAnimationState], a
     ld   a, $02
-    ld   [$FF9E], a
+    ldh  [$FF9E], a
 
 label_538E::
     ld   a, $02
@@ -3020,12 +3020,12 @@ label_5394::
     ld   [$DB76], a
     ld   a, $A3
     ld   [$DB9C], a
-    ld   [$FFF6], a
+    ldh  [$FFF6], a
     ld   [$DB54], a
     ld   a, $01
     ld   [$DBA5], a
     ld   a, $10
-    ld   [$FFF7], a
+    ldh  [$FFF7], a
     ld   a, $50
     ld   [$DB9D], a
     ld   a, $60
@@ -3033,7 +3033,7 @@ label_5394::
     xor  a
     ldh  [hLinkAnimationState], a
     ld   a, $03
-    ld   [$FF9E], a
+    ldh  [$FF9E], a
     ld   a, $16
     ld   [$DB6F], a
     ld   a, $50
@@ -3335,10 +3335,10 @@ label_5519::
     jr   nz, label_5519
     push de
     xor  a
-    ld   [$FFD7], a
-    ld   [$FFD8], a
-    ld   [$FFD9], a
-    ld   [$FFDA], a
+    ldh  [$FFD7], a
+    ldh  [$FFD8], a
+    ldh  [$FFD9], a
+    ldh  [$FFDA], a
     ld   c, a
     ld   b, a
     ld   e, a
@@ -3368,19 +3368,19 @@ label_5544::
     ld   hl, label_53D8
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   hl, label_53E8
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     ld   hl, label_53F8
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD9], a
+    ldh  [$FFD9], a
     ld   hl, label_5408
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFDA], a
+    ldh  [$FFDA], a
     pop  hl
     call label_5619
     push hl
@@ -3395,10 +3395,10 @@ label_5544::
     xor  a
     ld   [hl], a
     xor  a
-    ld   [$FFD7], a
-    ld   [$FFD8], a
-    ld   [$FFD9], a
-    ld   [$FFDA], a
+    ldh  [$FFD7], a
+    ldh  [$FFD8], a
+    ldh  [$FFD9], a
+    ldh  [$FFDA], a
     ld   c, a
     ld   b, a
     ld   e, a
@@ -3452,17 +3452,17 @@ label_55C0::
     ld   hl, label_5418
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   hl, label_545C
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     xor  a
-    ld   [$FFD9], a
+    ldh  [$FFD9], a
     ld   hl, label_54A0
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFDA], a
+    ldh  [$FFDA], a
     pop  hl
     call label_5619
     push hl
@@ -3489,18 +3489,18 @@ label_55F5::
     ld   hl, label_54E4
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   hl, label_54E6
 
 label_5600::
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     ld   a, $01
-    ld   [$FFD9], a
-    ld   a, [$FFF7]
+    ldh  [$FFD9], a
+    ldh  a, [$FFF7]
     add  a, $B1
-    ld   [$FFDA], a
+    ldh  [$FFDA], a
     pop  hl
     call label_5619
     inc  hl
@@ -3511,13 +3511,13 @@ label_5600::
     ret
 
 label_5619::
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ldi  [hl], a
-    ld   a, [$FFD8]
+    ldh  a, [$FFD8]
     ldi  [hl], a
-    ld   a, [$FFD9]
+    ldh  a, [$FFD9]
     ldi  [hl], a
-    ld   a, [$FFDA]
+    ldh  a, [$FFDA]
     ld   [hl], a
     ret
     xor  a
@@ -3526,8 +3526,8 @@ label_5619::
     cp   $05
     jr   z, label_5639
     xor  a
-    ld   [$FFCB], a
-    ld   [$FFCC], a
+    ldh  [$FFCB], a
+    ldh  [$FFCC], a
     ld   a, [wGameplaySubtype]
 
 label_5639::
@@ -3588,16 +3588,16 @@ label_5678::
     cp   $04
     jr   nz, label_56F3
     ld   a, $03
-    ld   [$FFA9], a
+    ldh  [$FFA9], a
     ld   a, $30
-    ld   [$FFAA], a
+    ldh  [$FFAA], a
     call IncrementGameplaySubtype
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
     ldh  [hBaseScrollX], a
     ld   [$C1BF], a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ld   [wInventoryAppearing], a
     ld   [$C1B2], a
     ld   [$C1B3], a
@@ -3663,7 +3663,7 @@ label_571B::
     ld   a, [ROM_DebugTool3]
     and  a
     jr   z, label_5731
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     bit  7, a
     jr   z, label_5731
     xor  a
@@ -3676,7 +3676,7 @@ label_5731::
     ld   a, [$C19F]
     and  a
     jp   nz, label_5818
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $10
     jr   z, label_57B7
     ld   a, [$DBB4]
@@ -3764,7 +3764,7 @@ label_57B7::
     ld   a, [ROM_DebugTool1]
     and  a
     jr   z, label_57FA
-    ld   a, [$FFCB]
+    ldh  a, [$FFCB]
     cp   $60
     jr   nz, label_57FA
     ld   a, GAMEPLAY_OVERWORLD
@@ -3779,11 +3779,11 @@ label_57B7::
     ld   [$D404], a
     ld   a, $52
     ld   [$D405], a
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     swap a
     and  $0F
     ld   e, a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     sub  a, $08
     and  $F0
     or   e
@@ -3800,7 +3800,7 @@ label_57FA::
     ld   e, $60
 
 label_5804::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  e
     jr   z, label_5818
     xor  a
@@ -3855,15 +3855,15 @@ label_5854::
     ld   [$C50A], a
     ld   [$C116], a
     ldh  [hBaseScrollX], a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ld   [$C167], a
     ld   a, $07
-    ld   [$FFA9], a
+    ldh  [$FFA9], a
     ld   a, $70
-    ld   [$FFAA], a
+    ldh  [$FFAA], a
     ld   a, GAMEPLAY_OVERWORLD
     ld   [wGameplayType], a
-    ld   [$FFBC], a
+    ldh  [$FFBC], a
     ld   a, $02
     ld   [wGameplaySubtype], a
     ld   a, [$DBA5]
@@ -3961,7 +3961,7 @@ label_5A31::
     db 0, 0, 0, 0, 0, 0, 0, 0
 
 label_5A59::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
     ld   hl, label_5959
@@ -3980,14 +3980,14 @@ label_5A6E::
 
 label_5A71::
     ld   a, [$DBB4]
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   a, [$C1B3]
     ld   hl, $C1B2
     or   [hl]
     ld   hl, $C19F
     or   [hl]
     jp   nz, label_5B3F
-    ld   a, [$FFCB]
+    ldh  a, [$FFCB]
     ld   c, a
     ld   hl, $C182
     and  $0F
@@ -4006,7 +4006,7 @@ label_5A92::
     jr   label_5AA0
 
 label_5A9D::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     ld   c, a
 
 label_5AA0::
@@ -4053,8 +4053,8 @@ label_5AA0::
     and  a
     jr   nz, label_5AF5
     ld   a, $09
-    ld   [$FFF2], a
-    ld   a, [$FFD7]
+    ldh  [$FFF2], a
+    ldh  a, [$FFD7]
     ld   [$DBB4], a
     jr   label_5B3F
 
@@ -4243,14 +4243,14 @@ label_5C72::
 
 label_5C7B::
     ld   [$C1B0], a
-    ld   [$FFF1], a
+    ldh  [$FFF1], a
     ld   a, $00
     ld   [$C3C0], a
     ld   a, $08
     ld   [$C340], a
     ld   a, $00
     ld   [$C123], a
-    ld   [$FFED], a
+    ldh  [$FFED], a
     ld   e, $00
     ld   a, [$C1B4]
     cp   $70
@@ -4268,11 +4268,11 @@ label_5CA3::
     ld   hl, label_5C41
     add  hl, de
     ld   a, [hl]
-    ld   [$FFEE], a
+    ldh  [$FFEE], a
     ld   hl, label_5C45
     add  hl, de
     ld   a, [hl]
-    ld   [$FFEC], a
+    ldh  [$FFEC], a
     ld   a, [$C1B0]
     rla
     rla
@@ -4291,7 +4291,7 @@ label_5CBD::
     ld   a, $08
     ld   [$C3C0], a
     xor  a
-    ld   [$FFF5], a
+    ldh  [$FFF5], a
     ld   c, $08
     call label_3CE6
     ld   a, [$C1B0]
@@ -4301,15 +4301,15 @@ label_5CBD::
     dec  a
     cp   $80
     jr   nc, label_5D13
-    ld   [$FFF1], a
+    ldh  [$FFF1], a
     ld   de, $C030
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     ld   [de], a
     inc  de
-    ld   a, [$FFF1]
+    ldh  a, [$FFF1]
     ld   c, a
     ld   b, $00
     sla  c
@@ -4324,10 +4324,10 @@ label_5CBD::
     ld   a, [hli]
     ld   [de], a
     inc  de
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     add  a, $08
     ld   [de], a
     inc  de
@@ -4413,7 +4413,7 @@ label_5D53::
     add  hl, de
     push de
     ld   bc, label_5D14
-    ld   a, [$FFDB]
+    ldh  a, [$FFDB]
     and  a
     jr   z, label_5D75
     ld   bc, label_5D29
@@ -4434,15 +4434,15 @@ label_5D77::
     ld   hl, $D604
     add  hl, de
     ld   c, $00
-    ld   a, [$FFD9]
+    ldh  a, [$FFD9]
     and  a
     jr   z, label_5DAB
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
 
 label_5D8B::
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     sub  a, $08
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     jr   c, label_5DA2
     ld   a, $AE
     ldi  [hl], a
@@ -4465,7 +4465,7 @@ label_5DA2::
     jr   label_5DB3
 
 label_5DAB::
-    ld   a, [$FFDA]
+    ldh  a, [$FFDA]
     cp   c
     jr   z, label_5DBF
     ld   a, $AE
@@ -4598,7 +4598,7 @@ label_5E3A::
     ld   a, [$DBA5]
     and  a
     jr   z, label_5E95
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_5E79
     ld   hl, $DDDA
@@ -4660,10 +4660,10 @@ label_5EA6::
     nop
     ld   hl, $C460
     add  hl, de
-    ld   a, [$FFE4]
+    ldh  a, [$FFE4]
     ld   [hl], a
     inc  a
-    ld   [$FFE4], a
+    ldh  [$FFE4], a
     push bc
     ld   a, [$C125]
     ld   c, a
@@ -4671,47 +4671,47 @@ label_5EA6::
     ld   hl, label_5E97
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   hl, label_5E9C
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     ld   hl, label_5EA1
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFD9], a
+    ldh  [$FFD9], a
     ld   hl, label_5EA6
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFDA], a
+    ldh  [$FFDA], a
     ld   hl, $C200
     add  hl, de
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     add  a, [hl]
     ld   [hl], a
     rr   c
     ld   hl, $C220
     add  hl, de
-    ld   a, [$FFD8]
+    ldh  a, [$FFD8]
     rl   c
     adc  a, [hl]
     ld   [hl], a
     ld   hl, $C210
     add  hl, de
-    ld   a, [$FFD9]
+    ldh  a, [$FFD9]
     add  a, [hl]
     ld   [hl], a
     rr   c
     ld   hl, $C230
     add  hl, de
-    ld   a, [$FFDA]
+    ldh  a, [$FFDA]
     rl   c
     adc  a, [hl]
     ld   [hl], a
     pop  bc
     ret
     ld   c, $06
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   hl, $CE81
 
 label_5F09::
@@ -4733,7 +4733,7 @@ label_5F19::
     ld   hl, $CE81
     add  hl, de
     ld   e, [hl]
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   [hl], a
     ld   hl, $CF00
     add  hl, de
@@ -4850,10 +4850,10 @@ label_5FB3::
     ld   a, [$DBA5]
     and  a
     jr   z, label_5FD3
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     ret  nz
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $16
     ret  z
     cp   $14
@@ -4862,7 +4862,7 @@ label_5FB3::
     ret  z
     cp   $0A
     ret  c
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $FD
     ret  z
     cp   $B1
@@ -4895,15 +4895,15 @@ label_5FF0::
     jr   nz, label_5FDE
     ld   a, $D5
     call label_3B86
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ld   a, [$FFA2]
+    ldh  a, [$FFA2]
     ld   hl, $C310
     add  hl, de
     ld   [hl], a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
@@ -4919,7 +4919,7 @@ label_6014::
     ld   a, [$DBA5]
     and  a
     jr   nz, label_607F
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $40
     jr   c, label_607F
     ld   a, [$DB68]
@@ -4962,11 +4962,11 @@ label_6059::
     jr   nz, label_6047
     ld   a, $D4
     call label_3B86
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
@@ -4976,7 +4976,7 @@ label_6059::
     add  hl, de
     inc  [hl]
     ld   a, $2D
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
 
 label_607F::
     ld   a, [$DB73]
@@ -5005,13 +5005,13 @@ label_609C::
     jr   nz, label_608A
     ld   a, $C1
     call label_3B86
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
     ld   hl, $D155
     call label_6118
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
@@ -5019,7 +5019,7 @@ label_609C::
     ld   [hl], a
     ld   hl, $D175
     call label_6118
-    ld   a, [$FFA2]
+    ldh  a, [$FFA2]
     ld   hl, $C310
     add  hl, de
     ld   [hl], a
@@ -5031,32 +5031,32 @@ label_609C::
     ld   hl, $C2F0
     add  hl, de
     ld   [hl], $0C
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $A4
     jr   nz, label_60F7
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $11
     jr   nz, label_60F7
     ld   a, $08
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     ld   [$C167], a
     ld   hl, $C300
     add  hl, de
     ld   [hl], $79
 
 label_60F7::
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     ld   hl, $D1B5
     call label_6118
     ld   a, [$DB10]
     and  a
     jr   z, label_6117
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     ld   hl, $C200
     add  hl, de
     add  a, $20
     ld   [hl], a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     ld   hl, $C210
     add  hl, de
     add  a, $10
@@ -5075,7 +5075,7 @@ label_611A::
     ret
 
 label_611F::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $A7
     ret  z
     ld   a, [$DB56]
@@ -5104,15 +5104,15 @@ label_6141::
     jr   nz, label_612F
     ld   a, $6D
     call label_3B86
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
-    ld   a, [$FFA2]
+    ldh  a, [$FFA2]
     ld   hl, $C310
     add  hl, de
     ld   [hl], a
@@ -5132,12 +5132,12 @@ label_6162::
     ld   [rBGP], a
     ld   [rOBP0], a
     ld   [rOBP1], a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ldh  [hBaseScrollX], a
     ld   [$D6FB], a
     ld   [$D6F8], a
     ld   a, $18
-    ld   [$FFB5], a
+    ldh  [$FFB5], a
     ret
 
 label_618A::
@@ -5187,7 +5187,7 @@ label_61E9::
     ld   a, [wFreeMovementMode]
     and  a
     jr   nz, label_6202
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     add  a, $56
     call label_2385
 
@@ -5261,7 +5261,7 @@ label_6281::
     ld   [$C16B], a
     ld   [$C16C], a
     ld   a, $90
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ld   a, $40
     ld   [$C114], a
     ld   a, $A0
@@ -5420,9 +5420,9 @@ label_6417::
     ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_642E
-    ld   a, [$FF97]
+    ldh  a, [$FF97]
     inc  a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     cp   $00
     jr   nz, label_642E
     ld   a, $80
@@ -5575,7 +5575,7 @@ label_651E::
     cp   $A0
     jr   nz, label_652E
     ld   a, $0F
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
     xor  a
 
 label_652E::
@@ -5584,7 +5584,7 @@ label_652E::
     and  a
     jr   nz, label_6545
     ld   a, $21
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     call GetRandomByte
     and  $7F
     add  a, $60
@@ -5593,7 +5593,7 @@ label_652E::
 label_6545::
     dec  a
     ld   [$D466], a
-    ld   a, [$FF97]
+    ldh  a, [$FF97]
     dec  a
     cp   $C0
     ret  c
@@ -5607,13 +5607,13 @@ label_6545::
 
 label_655F::
     ld   a, $7C
-    ld   [$FFEC], a
+    ldh  [$FFEC], a
     ld   a, $58
-    ld   [$FFEE], a
+    ldh  [$FFEE], a
     ld   hl, $C030
     call label_658B
     ld   a, $48
-    ld   [$FFEE], a
+    ldh  [$FFEE], a
     ld   de, label_6512
     ld   a, [$DC0F]
     and  a
@@ -5630,13 +5630,13 @@ label_6584::
 
 label_658B::
     push bc
-    ld   a, [$FF97]
+    ldh  a, [$FF97]
     ld   c, a
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     sub  a, c
-    ld   [$FFE8], a
+    ldh  [$FFE8], a
     ldi  [hl], a
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     ldi  [hl], a
     ld   a, [de]
     inc  de
@@ -5644,10 +5644,10 @@ label_658B::
     ld   a, [de]
     inc  de
     ldi  [hl], a
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     sub  a, c
     ldi  [hl], a
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     add  a, $08
     ldi  [hl], a
     ld   a, [de]
@@ -5672,11 +5672,11 @@ label_65B2::
     ld   hl, $C530
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFEE], a
+    ldh  [$FFEE], a
     ld   hl, $C540
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFEC], a
+    ldh  [$FFEC], a
     ld   hl, $C520
     add  hl, bc
     ld   a, [hl]
@@ -5774,7 +5774,7 @@ label_668B::
     dec  [hl]
 
 label_66C4::
-    ld   a, [$FFE8]
+    ldh  a, [$FFE8]
     cp   $F0
     jr   c, label_66D7
     ld   hl, $C560
@@ -5853,7 +5853,7 @@ label_6733::
     ld   e, a
     ldh  a, [hFrameCounter]
     add  a, e
-    ld   [$FFE9], a
+    ldh  [$FFE9], a
 
 label_6745::
     and  $3F
@@ -5870,7 +5870,7 @@ label_6745::
     ld   [hl], a
 
 label_675A::
-    ld   a, [$FFE9]
+    ldh  a, [$FFE9]
     add  a, $40
     and  $3F
     jr   nz, label_6773
@@ -5968,14 +5968,14 @@ label_67D4::
 
 label_67DE::
     ld   e, a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     push af
     ld   a, $60
-    ld   [$FF99], a
+    ldh  [$FF99], a
     ld   a, e
     call label_2373
     pop  af
-    ld   [$FF99], a
+    ldh  [$FF99], a
     ret
 
 label_67EE::
@@ -6014,13 +6014,13 @@ label_6829::
     cp   $04
     jr   nz, label_6855
     call label_5888
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $06
     jr   z, label_6849
     ld   a, $03
-    ld   [$FFA9], a
+    ldh  [$FFA9], a
     ld   a, $30
-    ld   [$FFAA], a
+    ldh  [$FFAA], a
 
 label_6849::
     call IncrementGameplaySubtype
@@ -6032,10 +6032,10 @@ label_6849::
 label_6855::
     ret
     ld   e, $21
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $06
     jr   z, label_6868
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $DD
     ld   e, $12
     jr   nz, label_6868
@@ -6048,10 +6048,10 @@ label_6868::
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
     ld   e, $24
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $06
     jr   z, label_6885
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $DD
     ld   e, $12
     jr   nz, label_6885
@@ -6064,7 +6064,7 @@ label_6885::
     ld   [wWindowY], a
     xor  a
     ldh  [hBaseScrollX], a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
     ld   e, $08
@@ -6088,7 +6088,7 @@ label_689E::
 
 label_68BF::
     ret
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $06
     jr   nz, label_68CF
     call label_6A7C
@@ -6097,11 +6097,11 @@ label_68BF::
     ret
 
 label_68CF::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $B0
     jr   z, label_68E3
     ld   a, $13
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
 
 label_68D9::
     call IncrementGameplaySubtype
@@ -6287,20 +6287,20 @@ label_6A76::
     ld   l, d
 
 label_6A7C::
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $06
     ret  nz
     xor  a
-    ld   [$FFF1], a
-    ld   [$FFED], a
-    ld   [$FFF5], a
+    ldh  [$FFF1], a
+    ldh  [$FFED], a
+    ldh  [$FFF5], a
     ld   a, $38
-    ld   [$FFEE], a
+    ldh  [$FFEE], a
     ld   a, [wScreenShakeVertical]
     ld   e, a
     ld   a, $20
     sub  a, e
-    ld   [$FFEC], a
+    ldh  [$FFEC], a
     ld   a, [$D214]
     and  a
     jr   z, label_6AC2
@@ -6331,13 +6331,13 @@ label_6AAE::
 
 label_6AC2::
     ld   a, $48
-    ld   [$FFEE], a
+    ldh  [$FFEE], a
     ld   a, [wScreenShakeVertical]
     ld   e, a
     ld   a, [$D211]
     add  a, $20
     sub  a, e
-    ld   [$FFEC], a
+    ldh  [$FFEC], a
     ld   a, [$D213]
     ld   e, a
     ld   d, $00
@@ -6407,9 +6407,9 @@ label_6B2B::
     jr   nz, label_6B51
     call label_5888
     ld   a, $03
-    ld   [$FFA9], a
+    ldh  [$FFA9], a
     ld   a, $30
-    ld   [$FFAA], a
+    ldh  [$FFAA], a
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
@@ -6426,7 +6426,7 @@ label_6B52::
     ld   [wWindowY], a
     xor  a
     ldh  [hBaseScrollX], a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ld   [$C16B], a
     ld   [$C16C], a
     ld   a, $01
@@ -6462,30 +6462,30 @@ label_6B99::
     ret
 
 label_6B9A::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $B0
     jr   z, label_6BA7
     ld   a, $13
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     call label_68D9
 
 label_6BA7::
     ret
 
 label_6BA8::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $0C
     jr   z, label_6BB4
 
 label_6BAE::
     push af
     ld   a, $0A
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     pop  af
 
 label_6BB4::
     ret
-    ld   a, [$FF92]
+    ldh  a, [$FF92]
     cp   $08
     jp  c, label_6C77
     jr   nz, label_6BC6
@@ -6498,7 +6498,7 @@ label_6BC6::
     call label_6BEA
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
-    ld   [$FF92], a
+    ldh  [$FF92], a
     ret
 
 label_6BCF::
@@ -6521,15 +6521,15 @@ label_6BF0::
 
 label_6BF4::
     ld   a, c
-    ld   [$FFE0], a
+    ldh  [$FFE0], a
     ld   d, $00
 
 label_6BF9::
     xor  a
-    ld   [$FFD7], a
-    ld   [$FFD8], a
-    ld   [$FFD9], a
-    ld   [$FFDA], a
+    ldh  [$FFD7], a
+    ldh  [$FFD8], a
+    ldh  [$FFD9], a
+    ldh  [$FFDA], a
     ld   hl, $DB65
     add  hl, de
     ld   a, [hl]
@@ -6544,13 +6544,13 @@ label_6BF9::
     ld   h, $9D
     push hl
     ld   a, $7C
-    ld   [$FFD7], a
-    ld   [$FFD8], a
-    ld   [$FFD9], a
+    ldh  [$FFD7], a
+    ldh  [$FFD8], a
+    ldh  [$FFD9], a
     ld   hl, label_6BD7
     add  hl, de
     ld   a, [hl]
-    ld   [$FFDA], a
+    ldh  [$FFDA], a
     pop  hl
     jr   label_6C48
 
@@ -6566,28 +6566,28 @@ label_6C2A::
     ld   hl, label_6BDF
     add  hl, de
     ld   a, [hl]
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     inc  a
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     add  a, $0F
-    ld   [$FFD9], a
+    ldh  [$FFD9], a
     inc  a
-    ld   [$FFDA], a
+    ldh  [$FFDA], a
     pop  hl
 
 label_6C48::
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ld   [hl], a
     call label_6C69
-    ld   a, [$FFD8]
-    ld   [hl], a
-    inc  c
-    call label_6C69
-    ld   a, [$FFD9]
+    ldh  a, [$FFD8]
     ld   [hl], a
     inc  c
     call label_6C69
-    ld   a, [$FFDA]
+    ldh  a, [$FFD9]
+    ld   [hl], a
+    inc  c
+    call label_6C69
+    ldh  a, [$FFDA]
     ld   [hl], a
     inc  e
     ld   a, e
@@ -6631,9 +6631,9 @@ label_6C77::
     ld   hl, label_4D00
     add  hl, bc
     call label_C3A
-    ld   a, [$FF92]
+    ldh  a, [$FF92]
     inc  a
-    ld   [$FF92], a
+    ldh  [$FF92], a
     ret
 
 label_6CA5::
@@ -6772,7 +6772,7 @@ label_6DEA::
     ld   a, [$DBA5]
     and  a
     jr   z, label_6E18
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_6DFF
     ld   a, $0F
@@ -6792,7 +6792,7 @@ label_6E03::
     ld   h, [hl]
     ld   l, a
     ld   [hl], $A3
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     jr   z, label_6E18
     ld   [hl], $7F
@@ -6813,7 +6813,7 @@ IntroHandlerEntryPoint::
     jp   RenderIntroFrame
 
 IntroCheckJoypad::
-    ld   a, [$FFCC]  ; unknow joypad-related value
+    ldh  a, [$FFCC]  ; unknow joypad-related value
     and  $80  ; If not pressing Start
     jp   z, RenderIntroFrame
     ; Start button pressed
@@ -6871,7 +6871,7 @@ IntroCheckJoypad::
     xor  a
     ld   [wGameplaySubtype], a
     ldh  [hBaseScrollX], a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     ld   [rBGP], a
     ld   [wBGPalette], a
     ld   hl, wGameplayType
@@ -6991,7 +6991,7 @@ label_6F5F::
     ld   [$C3B0], a
     ld   [$C3B1], a
     ld   [$C3B2], a
-    ld   [$FFED], a
+    ldh  [$FFED], a
     ld   a, $05
     ld   [$C282], a
     ld   a, $C0
@@ -7273,8 +7273,8 @@ label_7148::
     db 0, 0, 0, 0, $40, $40, $40, $40, $90, $90, $90, $90
 
 label_7154::
-    ld   [$FFE0], a
-    ld   [$FFE0], a
+    ldh  [$FFE0], a
+    ldh  [$FFE0], a
 
 label_7158::
     call label_71C7
@@ -7351,7 +7351,7 @@ label_71C7::
     cp   $A0
     jr   nz, label_71DB
     ld   a, $0F
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
     xor  a
 
 label_71DB::
@@ -7588,7 +7588,7 @@ label_7355::
     cp   $10
     jr   c, label_7363
     ld   a, $19
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
     call IncrementGameplaySubtype
 
 label_7363::
@@ -7761,7 +7761,7 @@ label_7447::
     ld   [wOBJ0Palette], a
     xor  a
     ldh  [hBaseScrollX], a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     dec  a
     ld   [$D018], a
     ret
@@ -7770,11 +7770,11 @@ RenderRain::
     call GetRandomByte
     and  $18
     add  a, $10
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     call GetRandomByte
     and  $18
     add  a, $10
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   hl, $C04C
     ; On the sea, limit the rain to the top section of the screen ($10)
     ld   c, $10
@@ -7785,9 +7785,9 @@ RenderRain::
     ld   c, $15
 
 .loop
-    ld   a, [$FFD8]
+    ldh  a, [$FFD8]
     ldi  [hl], a
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ldi  [hl], a
     call GetRandomByte
     and  $01       ; if random(0,1) == 0
@@ -7801,16 +7801,16 @@ RenderRain::
     ldi  [hl], a
     ld   a, $00
     ldi  [hl], a
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     add  a, $1C
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     cp   $A0
     jr   c, .continue
     sub  a, $98
-    ld   [$FFD7], a
-    ld   a, [$FFD8]
+    ldh  [$FFD7], a
+    ldh  a, [$FFD8]
     add  a, $25
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
 
 .continue
     dec  c
@@ -7849,19 +7849,19 @@ RenderIntroEntities::
     ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFEE], a ; EntityOffsetX?
+    ldh  [$FFEE], a ; EntityOffsetX?
     ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFEC], a ; EntityOffsetY?
+    ldh  [$FFEC], a ; EntityOffsetY?
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFF1], a
+    ldh  [$FFF1], a
     ld   hl, $C290
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFF0], a
+    ldh  [$FFF0], a
     call RenderIntroEntity
 .continue
     dec  c
@@ -7938,12 +7938,12 @@ RenderIntroShip::
     ld   c, $06
 
 .loop
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     add  a, [hl]
     inc  hl
     ld   [de], a
     inc  de
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -7964,12 +7964,12 @@ RenderIntroShip::
     ld   de, $C018
     ld   c, $04
 .loop2
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     add  a, [hl]
     inc  hl
     ld   [de], a
     inc  de
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -8048,7 +8048,7 @@ RenderIntroMarin::
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a
-    ld   a, [$FFF0]
+    ldh  a, [$FFF0]
     JP_TABLE
 ._0 dw label_7681
 ._1 dw label_76AB
@@ -8064,7 +8064,7 @@ label_7681::
     rra
     and  $01
     call label_3B0C
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     cp   $48
     jr   nc, label_769C
     call label_C05
@@ -8278,7 +8278,7 @@ label_77ED::
     rra
     rra
     and  $07
-    ld   [$FFF1], a
+    ldh  [$FFF1], a
     xor  a
     ld   [$C340], a
     ld   de, label_77BD
@@ -8386,11 +8386,11 @@ label_7920::
 
 label_7929::
     ld   a, $78
-    ld   [$FFEE], a
+    ldh  [$FFEE], a
     ld   hl, $D018
     ld   a, $59
     add  a, [hl]
-    ld   [$FFEC], a
+    ldh  [$FFEC], a
     ldh  a, [hIsGBC]
     and  a
     jr   nz, label_795D
@@ -8572,7 +8572,7 @@ label_7A27::
     ld   d, $00
 
 RenderIntroInertLink::
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     cp   $F0
     jr   nc, label_7A47
     xor  a
@@ -8586,7 +8586,7 @@ label_7A36::
     ld   [$C3C0], a
 
 label_7A47::
-    ld   a, [$FFF0]
+    ldh  a, [$FFF0]
     JP_TABLE
     dw $7a52
     dw $7a5e
@@ -8635,10 +8635,10 @@ label_7A8B::
     ld   [$C211], a
 
 label_7A96::
-    ld   a, [$FF97]
+    ldh  a, [$FF97]
     push af
     dec  a
-    ld   [$FF97], a
+    ldh  [$FF97], a
     pop  af
     and  $07
     jr   nz, label_7AB2
@@ -8659,9 +8659,9 @@ label_7AB3::
     call label_C05
     ld   [hl], $17
     ld   a, $07
-    ld   [$FFA9], a
+    ldh  [$FFA9], a
     ld   a, $70
-    ld   [$FFAA], a
+    ldh  [$FFAA], a
     ret
     ldh  a, [hFrameCounter]
     and  $03

@@ -65,7 +65,7 @@ Init::
     ld   [SelectRomBank_2100], a
     call label_4000
     ld   a, $18
-    ld   [$FFB5], a
+    ldh  [$FFB5], a
     ei
     ld   a, $20
     ld   [SelectRomBank_2100], a
@@ -270,7 +270,7 @@ RenderInteractiveFrame::
     jr   z, .saveEngineStatus
 
 .engineIsPaused
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  J_SELECT  ; Was Select button just pressed?
     jr   z, .saveEngineStatus
 
@@ -646,14 +646,14 @@ vBlankContinue::
     and  a
     jr   nz, WaitForVBlankAndReturn
     ldh  a, [hNeedsUpdatingBGTiles]
-    ld   [$FFE8], a
+    ldh  [$FFE8], a
     ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
     ld   hl, wneedsUpdatingNPCTiles
     or   [hl]
     jr   z, label_509
     call label_5BC ; Copy tiles?
-    ld   a, [$FFE8]
+    ldh  a, [$FFE8]
     cp   $08
     jr   nc, label_504
 
@@ -665,11 +665,11 @@ label_504::
     jr   WaitForVBlankAndReturn
 
 label_509::
-    ld   a, [$FFBB]
+    ldh  a, [$FFBB]
     and  a
     jr   z, label_521
     dec  a
-    ld   [$FFBB], a
+    ldh  [$FFBB], a
     ld   e, a
     ld   d, $00
     ld   hl, data_046A
@@ -789,7 +789,7 @@ label_5BC::
     ld   a, $0D
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
-    ld   a, [$FF92]
+    ldh  a, [$FF92]
     ld   c, a
     ld   b, $00
     sla  c
@@ -809,7 +809,7 @@ label_5BC::
     ld   e, l
     ld   d, h
     ld   hl, $5000
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_62F
     ld   a, $20
@@ -819,14 +819,14 @@ label_5BC::
     jr   label_641
 
 label_62F::
-    ld   a, [$FF94]
+    ldh  a, [$FF94]
     add  a, $50
     ld   h, a
     add  hl, bc
-    ld   a, [$FFBB]
+    ldh  a, [$FFBB]
     and  a
     jr   z, label_641
-    ld   a, [$FF92]
+    ldh  a, [$FF92]
     dec  a
     cp   $02
     jr   c, label_647
@@ -836,14 +836,14 @@ label_641::
     call CopyData
 
 label_647::
-    ld   a, [$FF92]
+    ldh  a, [$FF92]
     inc  a
-    ld   [$FF92], a
+    ldh  [$FF92], a
     cp   $04
     jr   nz, label_655
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
-    ld   [$FF92], a
+    ldh  [$FF92], a
 
 label_655::
     ret
@@ -852,7 +852,7 @@ label_656::
     ld   a, $0F
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
-    ld   a, [$FF92]
+    ldh  a, [$FF92]
     ld   c, a
     ld   b, $00
     sla  c
@@ -871,21 +871,21 @@ label_656::
     add  hl, bc
     ld   e, l
     ld   d, h
-    ld   a, [$FF94]
+    ldh  a, [$FF94]
     add  a, $40
     ld   h, a
     ld   l, $00
     add  hl, bc
     ld   bc, $0040
     call CopyData
-    ld   a, [$FF92]
+    ldh  a, [$FF92]
     inc  a
-    ld   [$FF92], a
+    ldh  [$FF92], a
     cp   $08
     jr   nz, label_69D
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
-    ld   [$FF92], a
+    ldh  [$FF92], a
 
 label_69D::
     ret
@@ -894,7 +894,7 @@ label_69E::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_6CB
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_6CB
     ld   a, $20
@@ -942,7 +942,7 @@ label_6CB::
 
 label_6F7::
     ld   [SelectRomBank_2100], a
-    ld   a, [$FF93]
+    ldh  a, [$FF93]
     ld   c, a
     ld   b, $00
     sla  c
@@ -971,16 +971,16 @@ label_6F7::
     pop  hl
     ld   bc, $0040
     call CopyData
-    ld   a, [$FF93]
+    ldh  a, [$FF93]
     inc  a
-    ld   [$FF93], a
+    ldh  [$FF93], a
     cp   $04
     jr   nz, label_73D
 
 label_738::
     xor  a
     ldh  [hNeedsUpdatingEnnemiesTiles], a
-    ld   [$FF93], a
+    ldh  [$FF93], a
 
 label_73D::
     ret
@@ -1134,7 +1134,7 @@ label_826::
     ld   a, $12
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
-    ld   a, [$FF92]
+    ldh  a, [$FF92]
     cp   $08
     jr   c, label_873
     jr   nz, label_843
@@ -1173,7 +1173,7 @@ label_865::
     call label_67E5
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
-    ld   [$FF92], a
+    ldh  [$FF92], a
     ret
 
 label_873::
@@ -1199,16 +1199,16 @@ label_873::
     add  hl, bc
     ld   bc, $0040
     call CopyData
-    ld   a, [$FF92]
+    ldh  a, [$FF92]
     inc  a
-    ld   [$FF92], a
+    ldh  [$FF92], a
     ret
 
 PlayAudioStep::
     ld   a, $1F
     call SwitchBank
     call label_4006
-    ld   a, [$FFF3]
+    ldh  a, [$FFF3]
     and  a
     jr   nz, label_8D6
     ld   a, [$C10B]
@@ -1297,7 +1297,7 @@ label_92F::
     ld   a, $1A
     ld   [SelectRomBank_2100], a
     call label_6576
-    ld   a, [$FFDF]
+    ldh  a, [$FFDF]
     ld   [SelectRomBank_2100], a
     ld   hl, $DC91
     ld   a, [$DC90]
@@ -1306,13 +1306,13 @@ label_92F::
     ld   [$DC90], a
     ld   d, $00
     add  hl, de
-    ld   a, [$FFE0]
+    ldh  a, [$FFE0]
     ld   d, a
-    ld   a, [$FFE1]
+    ldh  a, [$FFE1]
     ld   e, a
-    ld   a, [$FFCF]
+    ldh  a, [$FFCF]
     ldi  [hl], a
-    ld   a, [$FFD0]
+    ldh  a, [$FFD0]
     ldi  [hl], a
     ld   a, $81
     ldi  [hl], a
@@ -1323,9 +1323,9 @@ label_92F::
     ld   a, [de]
     ldi  [hl], a
     dec  de
-    ld   a, [$FFCF]
+    ldh  a, [$FFCF]
     ldi  [hl], a
-    ld   a, [$FFD0]
+    ldh  a, [$FFD0]
     inc  a
     ldi  [hl], a
     ld   a, $81
@@ -1356,11 +1356,11 @@ label_983::
     ld   a, $1A
     ld   [SelectRomBank_2100], a
     call label_6710
-    ld   a, [$FFDF]
+    ldh  a, [$FFDF]
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFE0]
+    ldh  a, [$FFE0]
     ld   h, a
-    ld   a, [$FFE1]
+    ldh  a, [$FFE1]
     ld   l, a
     ld   a, [hl]
     inc  de
@@ -1370,10 +1370,10 @@ label_999::
     push af
     push bc
     call label_983
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     pop  bc
     call label_983
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     ld   a, [$DC90]
     ld   c, a
     ld   b, $00
@@ -1381,15 +1381,15 @@ label_999::
     ld   [$DC90], a
     ld   hl, $DC91
     add  hl, bc
-    ld   a, [$FFCF]
+    ldh  a, [$FFCF]
     ldi  [hl], a
-    ld   a, [$FFD0]
+    ldh  a, [$FFD0]
     ldi  [hl], a
     ld   a, $01
     ldi  [hl], a
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ldi  [hl], a
-    ld   a, [$FFD8]
+    ldh  a, [$FFD8]
     ldi  [hl], a
     xor  a
     ldi  [hl], a
@@ -1610,7 +1610,7 @@ AdjustBankNumberForGBC::
     ret
 
 label_0B1A::
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ld   [SelectRomBank_2100], a
     ld   a, $02
     ld   [rSVBK], a
@@ -1622,7 +1622,7 @@ label_0B1A::
     ret
 
 label_B2F::
-    ld   [$FFD9], a
+    ldh  [$FFD9], a
     ldh  a, [hIsGBC]
     and  a
     ret  z
@@ -1630,7 +1630,7 @@ label_B2F::
     and  a
     ret  nz
     push bc
-    ld   a, [$FFD9]
+    ldh  a, [$FFD9]
     and  $80
     jr   nz, label_B4B
     ld   a, $20
@@ -1647,7 +1647,7 @@ label_B4B::
     ld   [rSVBK], a
 
 label_B54::
-    ld   a, [$FFD9]
+    ldh  a, [$FFD9]
     and  $7F
     ld   [SelectRomBank_2100], a
     pop  bc
@@ -1681,7 +1681,7 @@ label_B80::
     call label_BB5
 
 label_B90::
-    ld   a, [$FFE6]
+    ldh  a, [$FFE6]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -1766,11 +1766,11 @@ label_C08::
     ret
     ld   a, $AF
     call label_3B86
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
@@ -1778,7 +1778,7 @@ label_C08::
 
 label_C20::
     ld   a, $1D
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     ret
 
 label_C25::
@@ -1839,7 +1839,7 @@ label_C60::
     and  a
     jr   nz, label_C7B
     ld   a, $02
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
 
 label_C7B::
     pop  af
@@ -1847,10 +1847,10 @@ label_C7B::
 
 label_C7D::
     ld   a, $30
-    ld   [$FFA8], a
+    ldh  [$FFA8], a
     jr   label_C9A
     ld   a, $30
-    ld   [$FFA8], a
+    ldh  [$FFA8], a
     jr   label_C9E
     ld   a, [$D401]
     cp   $01
@@ -1859,11 +1859,11 @@ label_C7D::
     and  a
     jr   z, label_C7D
     ld   a, $01
-    ld   [$FFBC], a
+    ldh  [$FFBC], a
 
 label_C9A::
     ld   a, $06
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
 
 label_C9E::
     ld   a, $03
@@ -1887,10 +1887,10 @@ label_CB6::
     ret
 
 label_CBE::
-    ld   a, [$FF9F]
-    ld   [$FF98], a
-    ld   a, [$FFA0]
-    ld   [$FF99], a
+    ldh  a, [$FF9F]
+    ldh  [$FF98], a
+    ldh  a, [$FFA0]
+    ldh  [$FF99], a
     ret
 
 label_CC7::
@@ -1925,11 +1925,11 @@ label_CEC::
     ld   hl, $C510
     add  hl, de
     ld   [hl], a
-    ld   a, [$FFD8]
+    ldh  a, [$FFD8]
     ld   hl, $C540
     add  hl, de
     ld   [hl], a
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ld   hl, $C530
     add  hl, de
     ld   [hl], a
@@ -1941,14 +1941,14 @@ label_CEC::
 label_D07::
     ld   a, [$C140]
     sub  a, $08
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   a, [$C142]
     sub  a, $08
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
 
 label_D15::
     ld   a, $07
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     ld   a, $05
     jp   label_CC7
 
@@ -1958,11 +1958,11 @@ label_D1E::
     ld   a, [$DBA5]
     and  a
     jr   z, label_D59
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
     ld   hl, $6EB3
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_D3C
     ld   hl, $70B3
@@ -1977,12 +1977,12 @@ label_D3C::
 
 label_D45::
     add  hl, de
-    ld   a, [$FF94]
+    ldh  a, [$FF94]
     ld   e, a
     ld   a, [hl]
     cp   e
     jr   z, label_D57
-    ld   [$FF94], a
+    ldh  [$FF94], a
     cp   $FF
     jr   z, label_D57
     ld   a, $01
@@ -1992,7 +1992,7 @@ label_D57::
     jr   label_D91
 
 label_D59::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $07
     jr   nz, label_D60
     inc  a
@@ -2011,7 +2011,7 @@ label_D60::
     ld   d, $00
     ld   hl, $6E73
     add  hl, de
-    ld   a, [$FF94]
+    ldh  a, [$FF94]
     ld   e, a
     ld   a, [hl]
     cp   e
@@ -2020,26 +2020,26 @@ label_D60::
     jr   z, label_D91
     cp   $1A
     jr   nz, label_D8B
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $37
     jr   nz, label_D91
     ld   a, [hl]
 
 label_D8B::
-    ld   [$FF94], a
+    ldh  [$FF94], a
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
 
 label_D91::
     xor  a
-    ld   [$FFD7], a
-    ld   a, [$FFF6]
+    ldh  [$FFD7], a
+    ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
     ld   hl, $70D3
     ld   a, [$DBA5]
     ld   d, a
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $1A
     jr   nc, label_DAB
     cp   $06
@@ -2052,10 +2052,10 @@ label_DAB::
     ld   a, d
     and  a
     jr   z, label_DC1
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $10
     jr   nz, label_DDB
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $B5
     jr   nz, label_DDB
     ld   e, $3D
@@ -2085,7 +2085,7 @@ label_DDB::
     rl   d
     sla  e
     rl   d
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_DF1
     ld   a, $01
@@ -2113,7 +2113,7 @@ label_E03::
     cp   $FF
     jr   z, label_E29
     ld   [bc], a
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     and  a
     jr   z, label_E1E
     ld   a, d
@@ -2124,7 +2124,7 @@ label_E03::
 
 label_E1E::
     inc  a
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   a, d
     ld   [$C197], a
     ld   a, $01
@@ -2362,13 +2362,13 @@ label_F8F::
     dec  [hl]
 
 label_F97::
-    ld   a, [$FF98]
-    ld   [$FF9F], a
-    ld   a, [$FF99]
-    ld   [$FFA0], a
+    ldh  a, [$FF98]
+    ldh  [$FF9F], a
+    ldh  a, [$FF99]
+    ldh  [$FFA0], a
     ld   hl, $FFA2
     sub  a, [hl]
-    ld   [$FFB3], a
+    ldh  [$FFB3], a
     call label_60E0
     xor  a
     ld   [$C140], a
@@ -2444,7 +2444,7 @@ label_102E::
     jr   z, label_101F
 
 label_1033::
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     ld   hl, $FFA2
     sub  a, [hl]
     ld   [$C145], a
@@ -2505,7 +2505,7 @@ label_107F::
     ld   [$D45F], a
     cp   $04
     jr   c, label_10DF
-    ld   a, [$FFA1]
+    ldh  a, [$FFA1]
     cp   $02
     jr   z, label_10DB
     ldh  a, [hLinkAnimationState]
@@ -2542,18 +2542,18 @@ label_10DB::
     ld   [$D45F], a
 
 label_10DF::
-    ld   a, [$FFB7]
+    ldh  a, [$FFB7]
     and  a
     jr   z, label_10E7
     dec  a
-    ld   [$FFB7], a
+    ldh  [$FFB7], a
 
 label_10E7::
-    ld   a, [$FFB6]
+    ldh  a, [$FFB6]
     and  a
     jr   z, label_10EF
     dec  a
-    ld   [$FFB6], a
+    ldh  [$FFB6], a
 
 label_10EF::
     ld   a, [wDialogState]
@@ -2574,20 +2574,20 @@ label_10EF::
     ld   a, $07
     ld   [$C11C], a
     ld   a, $BF
-    ld   [$FFB7], a
+    ldh  [$FFB7], a
     ld   a, $10
     ld   [$C3CC], a
     xor  a
 
 label_1120::
     ld   [$DBC7], a
-    ld   [$FF9C], a
+    ldh  [$FF9C], a
     ld   [$DDD6], a
     ld   [$DDD7], a
     ld   [$D464], a
     call label_27F2
     ld   a, $08
-    ld   [$FFF3], a
+    ldh  [$FFF3], a
 
 label_1135::
     ld   a, [$C11C]
@@ -2686,7 +2686,7 @@ label_11C3::
     jr   nc, label_11E8
 
 label_11E2::
-    ld   a, [$FFA1]
+    ldh  a, [$FFA1]
     and  a
     jp   nz, label_12ED
 
@@ -2748,7 +2748,7 @@ label_1235::
     call label_1340
 
 label_124B::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $20
     jr   z, label_125E
     ld   a, [$C1AD]
@@ -2758,7 +2758,7 @@ label_124B::
     call ItemFunction
 
 label_125E::
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $10
     jr   z, label_1275
     ld   a, [$C1AD]
@@ -2835,7 +2835,7 @@ UseShield::
     and  a
     ret  nz
     ld   a, $16
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
     ret
 
 UseShovel::
@@ -2848,12 +2848,12 @@ label_1300::
     call label_4D20
     jr   nc, label_130B
     ld   a, $07
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     jr   label_130F
 
 label_130B::
     ld   a, $0E
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
 
 label_130F::
     ld   a, $01
@@ -2993,12 +2993,12 @@ ShootArrow::
 
 label_1401::
     ld   a, $0A
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
     ld   a, $06
 
 label_1407::
     ld   [$C1C0], a
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     ld   c, a
     ld   b, $00
 
@@ -3033,24 +3033,24 @@ label_142F::
     ld   a, $0C
     ld   [$C19B], a
     push bc
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     ld   c, a
     ld   b, $00
     ld   hl, data_139D
     add  hl, bc
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     add  a, [hl]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
     ld   hl, data_13A1
     add  hl, bc
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     add  a, [hl]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
-    ld   a, [$FFA2]
+    ldh  a, [$FFA2]
     inc  a
     ld   hl, $C310
     add  hl, de
@@ -3067,7 +3067,7 @@ label_142F::
     ld   hl, $C250
     add  hl, de
     ld   [hl], a
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     ld   hl, $C3B0
     add  hl, de
     ld   [hl], a
@@ -3092,7 +3092,7 @@ UseMagicPowder::
     ld   a, [$DB4B]
     and  a
     jr   z, label_14A7
-    ld   a, [$FFA2]
+    ldh  a, [$FFA2]
     and  a
     ret  nz
     ld   a, $02
@@ -3134,8 +3134,8 @@ UseRocksFeather::
     ld   [$C152], a
     ld   [$C153], a
     ld   a, $0D
-    ld   [$FFF2], a
-    ld   a, [$FFF9]
+    ldh  [$FFF2], a
+    ldh  a, [$FFF9]
     and  a
     jr   z, label_1508
     call label_1508
@@ -3146,9 +3146,9 @@ UseRocksFeather::
     ld   a, $E8
 
 label_14F8::
-    ld   [$FF9B], a
+    ldh  [$FF9B], a
     xor  a
-    ld   [$FFA3], a
+    ldh  [$FFA3], a
     call label_21A8
     ld   a, $02
     call SwitchBank
@@ -3156,21 +3156,21 @@ label_14F8::
 
 label_1508::
     ld   a, $20
-    ld   [$FFA3], a
+    ldh  [$FFA3], a
     ld   a, [$C14A]
     and  a
     ret  z
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     ld   e, a
     ld   d, b
     ld   hl, data_14C3
     add  hl, de
     ld   a, [hl]
-    ld   [$FF9A], a
+    ldh  [$FF9A], a
     ld   hl, data_14C7
     add  hl, de
     ld   a, [hl]
-    ld   [$FF9B], a
+    ldh  [$FF9B], a
 
 label_1523::
     ret
@@ -3200,7 +3200,7 @@ label_1535::
     ld   hl, data_1524
     add  hl, de
     ld   a, [hl]
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
     call label_157C
     ld   a, [$C146]
     and  a
@@ -3234,7 +3234,7 @@ label_157C::
     ld   a, [hl]
     cp   $0F
     jr   z, label_158E
-    ld   [$FF9E], a
+    ldh  [$FF9E], a
 
 label_158E::
     ret
@@ -3273,27 +3273,27 @@ label_15C0::
     jr   label_15CF
 
 label_15CD::
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
 
 label_15CF::
     ld   e, a
     ld   d, $00
     ld   hl, $158F ; TODO: Check this
     add  hl, de
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     add  a, [hl]
     sub  a, $08
     and  $F0
-    ld   [$FFCE], a
+    ldh  [$FFCE], a
     swap a
     ld   c, a
     ld   hl, $159B ; TODO: Check this
     add  hl, de
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     add  a, [hl]
     sub  a, $10
     and  $F0
-    ld   [$FFCD], a
+    ldh  [$FFCD], a
     or   c
     ld   e, a
     ld   hl, wTileMap
@@ -3303,7 +3303,7 @@ label_15CF::
     ret  nz
     push de
     ld   a, [hl]
-    ld   [$FFAF], a
+    ldh  [$FFAF], a
     ld   e, a
     ld   a, [$DBA5]
     ld   d, a
@@ -3333,7 +3333,7 @@ label_1616::
     nop
     ld   a, [$DBA5]
     and  a
-    ld   a, [$FFAF]
+    ldh  a, [$FFAF]
     jr   z, label_1629
     cp   $DD
     jr   z, label_1637
@@ -3351,7 +3351,7 @@ label_1629::
 
 label_1637::
     ld   a, c
-    ld   [$FFF1], a
+    ldh  [$FFF1], a
     call label_2178
     ld   a, [$C14A]
     and  a
@@ -3372,17 +3372,17 @@ label_1653::
     ld   [$C19B], a
     ld   hl, $C200
     add  hl, de
-    ld   a, [$FFCE]
+    ldh  a, [$FFCE]
     add  a, $08
     ld   [hl], a
     ld   hl, $C210
     add  hl, de
-    ld   a, [$FFCD]
+    ldh  a, [$FFCD]
     add  a, $10
     ld   [hl], a
     ld   hl, $C3B0
     add  hl, de
-    ld   a, [$FFF1]
+    ldh  a, [$FFF1]
     ld   [hl], a
     ld   c, e
     ld   b, d
@@ -3392,7 +3392,7 @@ label_167C::
     call GetRandomByte
     and  $07
     ret  nz
-    ld   a, [$FFAF]
+    ldh  a, [$FFAF]
     cp   $D3
     ret  z
     call GetRandomByte
@@ -3406,12 +3406,12 @@ label_1691::
     ret  c
     ld   hl, $C200
     add  hl, de
-    ld   a, [$FFCE]
+    ldh  a, [$FFCE]
     add  a, $08
     ld   [hl], a
     ld   hl, $C210
     add  hl, de
-    ld   a, [$FFCD]
+    ldh  a, [$FFCD]
     add  a, $10
     ld   [hl], a
     ld   hl, $C450
@@ -3436,19 +3436,19 @@ label_16C2::
     ld   a, [$C16D]
     and  a
     ret  z
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     ld   e, a
     ld   d, $00
     ld   hl, data_16BA
     add  hl, de
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     add  a, [hl]
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   hl, data_16BE
     add  hl, de
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     add  a, [hl]
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
 
 label_16DF::
     ld   a, $04
@@ -3461,14 +3461,14 @@ label_16DF::
     cp   $90
     jr   z, label_16F8
     ld   a, $07
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     ret
 
 label_16F8::
     ld   a, $17
 
 label_16FA::
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
     ret
 
 data_16FD::
@@ -3478,13 +3478,13 @@ data_1701::
     db   0, 0, $E0, $20
 
 label_1705::
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     jr   z, label_1713
-    ld   a, [$FF9C]
+    ldh  a, [$FF9C]
     and  a
     ret  nz
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     and  $02
     ret  nz
 
@@ -3492,7 +3492,7 @@ label_1713::
     ld   a, [$C14A]
     and  a
     ret  nz
-    ld   a, [$FFA2]
+    ldh  a, [$FFA2]
     ld   hl, $C146
     or   [hl]
     ret  nz
@@ -3509,17 +3509,17 @@ label_1713::
     xor  a
     ld   [wIsUsingSpinAttack], a
     ld   [$C122], a
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     ld   e, a
     ld   d, $00
     ld   hl, data_16FD
     add  hl, de
     ld   a, [hl]
-    ld   [$FF9A], a
+    ldh  [$FF9A], a
     ld   hl, data_1701
     add  hl, de
     ld   a, [hl]
-    ld   [$FF9B], a
+    ldh  [$FF9B], a
     xor  a
     ld   [$C1AC], a
     ret
@@ -3534,31 +3534,31 @@ label_1756::
     ld   hl, $C146
     or   [hl]
     ret  nz
-    ld   a, [$FF98]
-    ld   [$FFD7], a
+    ldh  a, [$FF98]
+    ldh  [$FFD7], a
     ld   a, [$C181]
     cp   $05
     jr   z, label_1781
     ld   a, $07
-    ld   [$FFF4], a
-    ld   a, [$FF99]
+    ldh  [$FFF4], a
+    ldh  a, [$FF99]
     add  a, $06
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     ld   a, $0B
     jp   label_CC7
 
 label_1781::
-    ld   a, [$FF99]
-    ld   [$FFD8], a
+    ldh  a, [$FF99]
+    ldh  [$FFD8], a
     ld   a, $0E
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     ld   a, $0C
     jp   label_CC7
 
 label_178E::
     xor  a
-    ld   [$FF9A], a
-    ld   [$FF9B], a
+    ldh  [$FF9A], a
+    ldh  [$FF9B], a
     ret
 
 label_1794::
@@ -3573,9 +3573,9 @@ label_1794::
     ld   a, [$C145]
     ld   hl, $C13B
     add  a, [hl]
-    ld   [$FFD7], a
-    ld   a, [$FF98]
-    ld   [$FFD8], a
+    ldh  [$FFD7], a
+    ldh  a, [$FF98]
+    ldh  [$FFD8], a
     ld   hl, $FFDA
     ld   [hl], $00
     ld   a, [$C122]
@@ -3593,8 +3593,8 @@ label_17C6::
     ld   a, [$C13A]
     ld   l, a
     ld   a, [$C136]
-    ld   [$FFD9], a
-    ld   a, [$FF99]
+    ldh  [$FFD9], a
+    ldh  a, [$FF99]
     cp   $88
     ret  nc
     jp   label_1819
@@ -3620,7 +3620,7 @@ label_17DB::
     call label_142F
     jr   c, label_1814
     ld   a, $0D
-    ld   [$FFF4], a
+    ldh  [$FFF4], a
     ld   a, $02
     call SwitchBank
     call label_538B
@@ -3663,7 +3663,7 @@ label_1847::
     xor  a
     ldh  [hBaseScrollX], a
     ldh  [hBaseScrollY], a
-    ld   [$FFB4], a
+    ldh  [$FFB4], a
     ld   [$DDD6], a
     ld   [$DDD7], a
     ld   e, $10
@@ -3694,28 +3694,28 @@ label_186C::
     ldh  [hLinkAnimationState], a
 
 label_1898::
-    ld   a, [$FFF9]
-    ld   [$FFE4], a
+    ldh  a, [$FFF9]
+    ldh  [$FFE4], a
     ld   a, GAMEPLAY_OVERWORLD
     ld   [wGameplayType], a
     xor  a
     ld   [wGameplaySubtype], a
     ld   [$C3CB], a
-    ld   [$FFF9], a
+    ldh  [$FFF9], a
     ld   hl, $D401
     ld   a, [$DBA5]
-    ld   [$FFE6], a
+    ldh  [$FFE6], a
     and  a
     jr   nz, label_18DF
     ld   hl, $D416
     ld   c, $00
 
 label_18BA::
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     swap a
     and  $0F
     ld   e, a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     sub  a, $08
     and  $F0
     or   e
@@ -3743,21 +3743,21 @@ label_18DF::
     ld   [$DBA5], a
     cp   $02
     jr   nz, label_18F2
-    ld   [$FFF9], a
+    ldh  [$FFF9], a
     dec  a
     ld   [$DBA5], a
     ld   a, $01
-    ld   [$FF9C], a
+    ldh  [$FF9C], a
 
 label_18F2::
     ld   a, [hli]
-    ld   [$FFF7], a
+    ldh  [$FFF7], a
     ld   a, [$DBA5]
     and  a
     ld   a, [hli]
-    ld   [$FFF6], a
+    ldh  [$FFF6], a
     jr   nz, label_1909
-    ld   a, [$FFE6]
+    ldh  a, [$FFE6]
     and  a
     jr   z, label_1907
     xor  a
@@ -3771,7 +3771,7 @@ label_1909::
     ld   a, $14
     call SwitchBank
     push hl
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     swap a
     ld   e, a
     ld   d, $00
@@ -3781,7 +3781,7 @@ label_1909::
     rl   d
     ld   hl, $4220
     add  hl, de
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_192E
     ld   hl, $44E0
@@ -3810,19 +3810,19 @@ label_193E::
 label_1948::
     ld   a, e
     ld   [$DBAE], a
-    ld   a, [$FFE6]
+    ldh  a, [$FFE6]
     and  a
     jr   nz, label_196E
     xor  a
     ld   [$D47C], a
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $0A
     jr   nc, label_196E
     ld   a, $02
     call SwitchBank
     call label_6709
     ld   a, $30
-    ld   [$FFB4], a
+    ldh  [$FFB4], a
     xor  a
     ld   [$D6FB], a
     ld   [$D6F8], a
@@ -3836,16 +3836,16 @@ label_196F::
     ld   a, [hl]
     ld   [$DB9E], a
     pop  hl
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     jr   nz, label_19DA
-    ld   a, [$FFE4]
+    ldh  a, [$FFE4]
     and  a
     jr   nz, label_19D9
     ld   a, [$DBA5]
     and  a
     jr   z, label_19C2
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_1993
     ld   hl, $4E3C
@@ -3868,7 +3868,7 @@ label_19A4::
     ld   [SelectRomBank_2100], a
     call label_19C2
     push de
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_19B7
     ld   a, $3A
@@ -3888,16 +3888,16 @@ label_19BF::
 
 label_19C2::
     ld   a, $00
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   de, $DB5F
 
 label_19C9::
     ld   a, [hli]
     ld   [de], a
     inc  de
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     inc  a
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     cp   $05
     jr   nz, label_19C9
     ld   a, [$DBAE]
@@ -3908,7 +3908,7 @@ label_19D9::
 
 label_19DA::
     xor  a
-    ld   [$FF9E], a
+    ldh  [$FF9E], a
     ret
     call label_754F
     ld   a, [$D474]
@@ -3978,7 +3978,7 @@ label_1A50::
     sra  a
     and  $01
     ld   d, a
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     sla  a
     or   d
     ld   c, a
@@ -3987,7 +3987,7 @@ label_1A50::
     ld   a, [$C11C]
     cp   $01
     jr   nz, label_1A78
-    ld   a, [$FF9C]
+    ldh  a, [$FF9C]
     and  a
     jr   z, label_1A76
     ld   hl, $4950
@@ -3996,10 +3996,10 @@ label_1A76::
     jr   label_1AC7
 
 label_1A78::
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     jr   z, label_1A88
-    ld   a, [$FF9C]
+    ldh  a, [$FF9C]
     cp   $02
     jr   nz, label_1A88
     ld   hl, $4958
@@ -4009,7 +4009,7 @@ label_1A88::
     ld   a, [$C15C]
     cp   $01
     jr   z, label_1AC4
-    ld   a, [$FFB2]
+    ldh  a, [$FFB2]
     and  a
     jr   nz, label_1A9A
     ld   a, [$C144]
@@ -4089,8 +4089,8 @@ AnimateMarinBeachTiles::
     jp   CopyData
     jr   nz, AnimateTilesStep4
     and  b
-    ld   [$FFE0], a
-    ld   [$FFA0], a
+    ldh  [$FFE0], a
+    ldh  [$FFA0], a
     ld   h, b
 
 AnimateTiles::
@@ -4147,7 +4147,7 @@ AnimateTilesStep2::
     jr   nz, AnimateTilesStep3
 
     ; GameplayType == CREDITS
-    ld   a, [$FFA5]
+    ldh  a, [$FFA5]
     and  a                          ; if $FFA5 != 0
     jr   nz, AnimateEndCreditsTiles ;   handle end credits animated tiles
     ret
@@ -4184,7 +4184,7 @@ AnimateTilesStep4::
     jp   DrawLinkSpriteAndReturn
 
 label_1B7D::
-    ld   a, [$FFA5]
+    ldh  a, [$FFA5]
     and  a
     jr   z, label_1BCD
 
@@ -4225,12 +4225,12 @@ label_1BC5::
 
 label_1BCD::
     ; Increment $FFA6 (count of tiles animations run?)
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     inc  a
-    ld   [$FFA6], a
+    ldh  [$FFA6], a
 
 label_1BD2::
-    ld   a, [$FFA4]
+    ldh  a, [$FFA4]
     JP_TABLE
     ; Code below is actually data for the jump table
     ld   e, $1D
@@ -4265,7 +4265,7 @@ label_1BD2::
     inc  e
     rst  $38
     inc  e
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     and  $07
     jp   nz, label_1D1E
     ld   a, $01
@@ -4288,7 +4288,7 @@ label_1C13::
     ld   h, $6A
 
 label_1C24::
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     and  $0F
     jp   nz, label_1D1E
     call label_1CE8
@@ -4298,10 +4298,10 @@ data_1C31::
     db 0, $40, $80, $C0, $C0, $C0, $80, $40
 
 label_1C39::
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     and  $07
     jp   nz, label_1D1E
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     rra
     rra
     rra
@@ -4319,7 +4319,7 @@ label_1C51::
 label_1C54::
     ld   bc, $0040
     call CopyData
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_1C87
     ld   a, $20
@@ -4344,10 +4344,10 @@ label_1C87::
     jp   DrawLinkSpriteAndReturn
     ld   h, $6E
     jr   label_1C24
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     and  $07
     jp   nz, label_1D1E
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     rra
     rra
     rra
@@ -4360,14 +4360,14 @@ label_1C87::
     ld   h, $6F
     jp   label_1C51
     ld   hl, $DCC0
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_1CB8
     ld   de, $8400
     jp   label_1C54
 
 label_1CB8::
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     inc  a
     and  $03
     jp   nz, label_1C39
@@ -4376,7 +4376,7 @@ label_1CB8::
     ld   h, $70
 
 label_1CC8::
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     and  $07
     jp   nz, label_1D1E
     call label_1CE8
@@ -4384,7 +4384,7 @@ label_1CC8::
     ld   h, $71
 
 label_1CD7::
-    ld   a, [$FFA6]
+    ldh  a, [$FFA6]
     and  $03
     jp   nz, label_1D1E
     call label_1CE8
@@ -4393,9 +4393,9 @@ label_1CD7::
     jr   label_1CD7
 
 label_1CE8::
-    ld   a, [$FFA7]
+    ldh  a, [$FFA7]
     add  a, $40
-    ld   [$FFA7], a
+    ldh  [$FFA7], a
     ret
     ld   h, $75
     jr   label_1CD7
@@ -4464,7 +4464,7 @@ label_1D49::
     ldi  [hl], a
     ld   a, [$C13C]
     ld   c, a
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     add  a, c
     ldi  [hl], a
     ld   a, $00
@@ -4512,7 +4512,7 @@ label_1DA1::
     inc  hl
     pop  af
     ldi  [hl], a
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     add  a, c
     add  a, $08
     ldi  [hl], a
@@ -4627,7 +4627,7 @@ label_1E55::
     ld   bc, $0040
     call CopyData
     xor  a
-    ld   [$FFA5], a
+    ldh  [$FFA5], a
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
@@ -4770,7 +4770,7 @@ label_1F3B::
 
 label_1F3E::
     xor  a
-    ld   [$FFA5], a
+    ldh  [$FFA5], a
     ld   a, $0C
     ld   [SelectRomBank_2100], a
     jp   DrawLinkSpriteAndReturn
@@ -4807,44 +4807,44 @@ label_1F69::
     ld   hl, $C11C
     or   [hl]
     jp   nz, label_2177
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     ld   e, a
     ld   d, $00
     ld   hl, data_1F49
     add  hl, de
-    ld   a, [$FF98]
+    ldh  a, [$FF98]
     add  a, [hl]
     sub  a, $08
     and  $F0
-    ld   [$FFCE], a
+    ldh  [$FFCE], a
     swap a
     ld   c, a
     ld   hl, data_1F4D
     add  hl, de
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     add  a, [hl]
     sub  a, $10
     and  $F0
-    ld   [$FFCD], a
+    ldh  [$FFCD], a
     or   c
     ld   e, a
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     ld   hl, wTileMap
     add  hl, de
     ld   a, h
     cp   $D7
     jp   nz, label_214E
     ld   a, [hl]
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   e, a
     ld   a, [$DBA5]
     ld   d, a
     call label_2A26
-    ld   [$FFDC], a
-    ld   a, [$FFD7]
+    ldh  [$FFDC], a
+    ldh  a, [$FFD7]
     cp   $9A
     jr   z, label_1FFE
-    ld   a, [$FFDC]
+    ldh  a, [$FFDC]
     cp   $00
     jp   z, label_214E
     cp   $01
@@ -4863,7 +4863,7 @@ label_1F69::
     jp   nc, label_214E
 
 label_1FE6::
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ld   e, a
     cp   $6F
     jr   z, label_1FF6
@@ -4880,12 +4880,12 @@ label_1FF6::
 
 label_1FFE::
     ld   e, a
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     cp   $02
     jp   nz, label_20CF
     ld   a, $02
     ld   [$C1AD], a
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $30
     jp   z, label_20CF
     ld   a, e
@@ -4907,7 +4907,7 @@ label_1FFE::
 label_2030::
     ld   a, [$DB4E]
     and  a
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     jr   nz, label_203E
     ld   e, $FF
     cp   $A3
@@ -4924,7 +4924,7 @@ label_2046::
     jr   label_208E
 
 label_2049::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
     ld   a, $14
@@ -4945,11 +4945,11 @@ label_2066::
     jr   nz, label_2080
     bit  0, e
     jr   nz, label_2080
-    ld   a, [$FFCE]
+    ldh  a, [$FFCE]
     swap a
     and  $0F
     ld   e, a
-    ld   a, [$FFCD]
+    ldh  a, [$FFCD]
     and  $F0
     or   e
     ld   [$D473], a
@@ -4980,17 +4980,17 @@ label_2098::
     and  $1F
     cp   $0D
     jr   z, label_20CF
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     cp   $02
     jr   nz, label_20CF
     ld   [$C1AD], a
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $30
     jr   z, label_20CF
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     jr   nz, label_20BF
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     cp   $02
     jr   nz, label_20CF
 
@@ -5024,8 +5024,8 @@ label_20EC::
     ld   [SelectRomBank_2100], a
     call label_48B0
     ld   a, $01
-    ld   [$FFA1], a
-    ld   a, [$FF9E]
+    ldh  [$FFA1], a
+    ldh  a, [$FF9E]
     ld   e, a
     ld   d, $00
     ld   hl, data_1F51
@@ -5061,8 +5061,8 @@ label_212C::
     cp   e
     jr   c, label_214D
     xor  a
-    ld   [$FFE5], a
-    ld   a, [$FFD7]
+    ldh  [$FFE5], a
+    ldh  a, [$FFD7]
     cp   $8E
     jr   z, label_2153
     cp   $20
@@ -5070,7 +5070,7 @@ label_212C::
     ld   a, [$DBA5]
     and  a
     jr   nz, label_214D
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     cp   $5C
     jr   z, label_2161
 
@@ -5091,15 +5091,15 @@ label_2153::
 
 label_2161::
     ld   a, $01
-    ld   [$FFE5], a
+    ldh  [$FFE5], a
 
 label_2165::
-    ld   a, [$FFD8]
+    ldh  a, [$FFD8]
     ld   e, a
-    ld   a, [$FFD7]
-    ld   [$FFAF], a
+    ldh  a, [$FFD7]
+    ldh  [$FFAF], a
     call label_2178
-    ld   a, [$FF9E]
+    ldh  a, [$FF9E]
     ld   [$C15D], a
     jp   label_2183
 
@@ -5117,13 +5117,13 @@ label_2183::
     call label_142F
     jr   c, label_21A7
     ld   a, $02
-    ld   [$FFF3], a
+    ldh  [$FFF3], a
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   [hl], $07
     ld   hl, $C3B0
     add  hl, de
-    ld   a, [$FFE5]
+    ldh  a, [$FFE5]
     ld   [hl], a
     ld   c, e
     ld   b, d
@@ -5142,7 +5142,7 @@ label_21A8::
     ld   c, $01
     call label_21B6
     ld   c, $00
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
 
 label_21B6::
     ld   b, $00
@@ -5173,7 +5173,7 @@ label_21D7::
     adc  a, [hl]
     ld   [hl], a
     ret
-    ld   a, [$FFA3]
+    ldh  a, [$FFA3]
     push af
     swap a
     and  $F0
@@ -5240,7 +5240,7 @@ label_222C::
 label_2241::
     push bc
     push de
-    ld   a, [$FFD9]
+    ldh  a, [$FFD9]
     ld   c, a
     ld   b, $00
     ld   hl, wTileMap
@@ -5272,7 +5272,7 @@ label_2262::
     and  a
     jr   z, label_2299
     ld   hl, $43B0
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_2291
     ld   hl, $4760
@@ -5307,17 +5307,17 @@ label_2299::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_49D9
-    ld   a, [$FFDF]
+    ldh  a, [$FFDF]
     ld   [SelectRomBank_2100], a
     call label_2214
     ld   a, b
-    ld   [$FFE2], a
+    ldh  [$FFE2], a
     ld   a, c
-    ld   [$FFE3], a
+    ldh  [$FFE3], a
     ld   a, d
-    ld   [$FFE4], a
+    ldh  [$FFE4], a
     ld   a, e
-    ld   [$FFE5], a
+    ldh  [$FFE5], a
     call label_3905
     pop  de
     pop  bc
@@ -5335,17 +5335,17 @@ label_22D3::
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_49D9
-    ld   a, [$FFDF]
+    ldh  a, [$FFDF]
     ld   [SelectRomBank_2100], a
     call label_2224
     ld   a, b
-    ld   [$FFE2], a
+    ldh  [$FFE2], a
     ld   a, c
-    ld   [$FFE3], a
+    ldh  [$FFE3], a
     ld   a, d
-    ld   [$FFE4], a
+    ldh  [$FFE4], a
     ld   a, e
-    ld   [$FFE5], a
+    ldh  [$FFE5], a
     call label_3905
     pop  de
     pop  bc
@@ -5357,9 +5357,9 @@ label_22FE::
     ld   b, $00
     ld   hl, data_2205
     add  hl, bc
-    ld   a, [$FFD9]
+    ldh  a, [$FFD9]
     add  a, [hl]
-    ld   [$FFD9], a
+    ldh  [$FFD9], a
     pop  bc
     ld   a, [$C128]
     dec  a
@@ -5381,7 +5381,7 @@ label_2321::
     ld   a, $7F
 
 label_2332::
-    ld   [$FFE8], a
+    ldh  [$FFE8], a
     ld   a, [$C164]
     and  a
     ld   a, [$C170]
@@ -5457,7 +5457,7 @@ label_2385::
     ld   [$C112], a
     ld   a, $0F
     ld   [$C5AB], a
-    ld   a, [$FF99]
+    ldh  a, [$FF99]
     cp   $48
     rra
     and  $80
@@ -5503,13 +5503,13 @@ label_23EF::
     ld   a, [$C12F]
     add  a, [hl]
     ld   l, a
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   hl, data_23D6
     add  hl, de
     ld   a, [$C12E]
     add  a, [hl]
     ld   h, a
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ld   l, a
     xor  a
     ld   e, a
@@ -5536,9 +5536,9 @@ label_242B::
     cp   $12
     jr   nz, label_241E
     ld   e, $00
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     add  a, $20
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     jr   nc, label_243C
     inc  h
 
@@ -5583,9 +5583,9 @@ label_2464::
     cp   $12
     jr   nz, label_2444
     ld   e, $00
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     add  a, $20
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     jr   nc, label_2475
     inc  h
 
@@ -5607,7 +5607,7 @@ label_2485::
     ld   a, [$C1AB]
     and  a
     jr   nz, label_24AE
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     and  $30
     jr   z, label_24AE
 
@@ -5759,7 +5759,7 @@ label_2529::
     ld   [$C3C3], a
     call ReloadSavedBank
     ld   a, e
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     cp   $FE
     jr   nz, label_25A4
     pop  hl
@@ -5774,7 +5774,7 @@ label_2595::
 
 label_259F::
     ld   a, $15
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
     ret
 
 label_25A4::
@@ -5814,7 +5814,7 @@ label_25D4::
     and  e
     jr   nz, label_25DF
     ld   a, d
-    ld   [$FFF3], a
+    ldh  [$FFF3], a
 
 label_25DF::
     pop  af
@@ -5847,7 +5847,7 @@ label_25FF::
     ld   a, $20
 
 label_2608::
-    ld   [$FFD8], a
+    ldh  [$FFD8], a
     ld   e, a
     ld   a, $1C
     ld   [SelectRomBank_2100], a
@@ -5881,7 +5881,7 @@ label_2633::
     push hl
     ld   a, $1C
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFD8]
+    ldh  a, [$FFD8]
     ld   e, a
     ld   d, $00
     xor  a
@@ -5954,7 +5954,7 @@ label_2695::
 
 label_26B6::
     call label_27BB
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     bit  4, a
     jr   nz, label_26E1
     bit  5, a
@@ -5995,7 +5995,7 @@ label_26EB::
     ld   [$D602], a
     ld   a, $4F
     ld   [$D603], a
-    ld   a, [$FFE8]
+    ldh  a, [$FFE8]
     ld   [$D604], a
     xor  a
     ld   [$D605], a
@@ -6053,7 +6053,7 @@ label_2739::
     ld   a, l
     add  a, $20
     ld   l, a
-    ld   a, [$FFE8]
+    ldh  a, [$FFE8]
     ld   [hl], a
     pop  bc
     inc  bc
@@ -6100,7 +6100,7 @@ label_278B::
     ld   a, $02
     ld   [$C177], a
     jp   label_2496
-    ld   a, [$FFCC]
+    ldh  a, [$FFCC]
     bit  4, a
     jp   nz, label_27B7
     and  $03
@@ -6111,7 +6111,7 @@ label_278B::
     and  $01
     ld   [hl], a
     ld   a, $0A
-    ld   [$FFF2], a
+    ldh  [$FFF2], a
 
 label_27AA::
     ldh  a, [hFrameCounter]
@@ -6133,11 +6133,11 @@ label_27BB::
 ; Set overworld music track?
 label_27C3::
     ld   [wOverworldMusic], a
-    ld   [$FFBF], a
+    ldh  [$FFBF], a
     ld   a, $38
-    ld   [$FFAB], a
+    ldh  [$FFAB], a
     xor  a
-    ld   [$FFA8], a
+    ldh  [$FFA8], a
     ret
 
 EnableExternalRAMWriting::
@@ -6159,13 +6159,13 @@ label_27DD::
 
 label_27EA::
     ld   a, $38
-    ld   [$FFA8], a
+    ldh  [$FFA8], a
     xor  a
-    ld   [$FFAB], a
+    ldh  [$FFAB], a
     ret
 
 label_27F2::
-    ld   a, [$FFBC]
+    ldh  a, [$FFBC]
     and  a
     jr   nz, .skip
     ld   a, $1F
@@ -6206,7 +6206,7 @@ ReadJoypadState::
     ld   a, [$C11C]
     cp   $07
     jr   nz, label_283F
-    ld   a, [$FF9C]
+    ldh  a, [$FF9C]
     cp   $04
     jr   z, label_2852
 
@@ -6221,7 +6221,7 @@ label_283F::
 label_284C::
     xor  a
     ldh  [hPressedButtonsMask], a
-    ld   [$FFCC], a
+    ldh  [$FFCC], a
     ret
 
 label_2852::
@@ -6250,7 +6250,7 @@ label_2852::
     ldh  a, [hPressedButtonsMask]
     xor  c
     and  c
-    ld   [$FFCC], a
+    ldh  [$FFCC], a
     ld   a, c
     ldh  [hPressedButtonsMask], a
     ld   a, $30
@@ -6261,7 +6261,7 @@ label_2886::
 
 label_2887::
     push bc
-    ld   a, [$FFCD]
+    ldh  a, [$FFCD]
     ld   hl, hBaseScrollY
     add  a, [hl]
     and  $F8
@@ -6278,7 +6278,7 @@ label_289F::
     dec  b
     jr   nz, label_289F
     push hl
-    ld   a, [$FFCE]
+    ldh  a, [$FFCE]
     ld   hl, hBaseScrollX
     add  a, [hl]
     pop  hl
@@ -6290,9 +6290,9 @@ label_289F::
     ld   e, a
     add  hl, de
     ld   a, h
-    ld   [$FFCF], a
+    ldh  [$FFCF], a
     ld   a, l
-    ld   [$FFD0], a
+    ldh  [$FFD0], a
     pop  bc
     ret
 
@@ -6324,7 +6324,7 @@ TableJump::
 ; Turn off LCD at next vertical blanking
 LCDOff::
     ld   a, [rIE]
-    ld   [$FFD2], a ; Save interrupts configuration
+    ldh  [$FFD2], a ; Save interrupts configuration
     res  0, a
     ld   [rIE], a   ; Disable all interrupts
 .waitForEndOfLine
@@ -6334,7 +6334,7 @@ LCDOff::
     ld   a, [rLCDC]  ; \
     and  $7F         ; | Switch off LCD screen
     ld   [rLCDC], a  ; /
-    ld   a, [$FFD2]
+    ldh  a, [$FFD2]
     ld   [rIE], a    ; Restore interrupts configuration
     ret
 
@@ -6590,7 +6590,7 @@ label_2A12::
     ld   a, $08
     ld   [SelectRomBank_2100], a
     ld   hl, $4AD4
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_2A23
     ld   hl, $4BD4
@@ -6822,7 +6822,7 @@ label_2C28::
     ld   a, $20
     call SwitchBank
     ld   hl, $4589
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     ld   e, a
     ld   d, $00
     cp   $FF
@@ -6862,7 +6862,7 @@ label_2C5D::
     pop  de
     push de
     ld   hl, $45A9
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_2C8A
     ld   hl, $45C9
@@ -6892,7 +6892,7 @@ label_2C8A::
     ld   l, $00
     ld   a, $12
     call SwitchAdjustedBank
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_2CD1
     ld   hl, $6100
@@ -6906,7 +6906,7 @@ label_2CD1::
     ld   a, [wCurrentBank]
     ld   [SelectRomBank_2100], a
     ld   hl, $7D00
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   z, label_2CF5
     cp   $0A
@@ -6930,7 +6930,7 @@ label_2D07::
     ld   a, [$DBA5]
     and  a
     jr   z, label_2D17
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   z, label_2D21
     cp   $0A
@@ -6947,7 +6947,7 @@ label_2D21::
     cp   $02
     jr   c, label_2D2C
     ld   a, $0D
-    ld   [$FFA5], a
+    ldh  [$FFA5], a
 
 label_2D2C::
     ret
@@ -6966,8 +6966,8 @@ label_2D2C::
 
 label_2D50::
     xor  a
-    ld   [$FFA6], a
-    ld   [$FFA7], a
+    ldh  [$FFA6], a
+    ldh  [$FFA7], a
     call label_1BD2
     ld   a, $0C
     call AdjustBankNumberForGBC
@@ -7088,7 +7088,7 @@ label_2E70::
     ld   de, $120E
 
 label_2E73::
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_2E84
     ld   a, $20
@@ -7100,7 +7100,7 @@ label_2E84::
     xor  a
 
 label_2E85::
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   hl, $C193
     ld   e, a
     ld   d, $00
@@ -7110,15 +7110,15 @@ label_2E85::
     ld   a, [$DBA5]
     and  a
     jr   z, label_2EB0
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     jr   nz, label_2ED3
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $14
     jr   z, label_2ED3
     cp   $0A
     jr   c, label_2ED3
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $FD
     jr   z, label_2ED3
     cp   $B1
@@ -7171,7 +7171,7 @@ label_2ED4::
 
 label_2EF2::
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ld   d, a
     ld   e, $00
     ld   hl, $8400
@@ -7184,7 +7184,7 @@ label_2EF2::
     call CopyData
 
 label_2F0A::
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     inc  a
     cp   $04
     jp   nz, label_2E85
@@ -7197,11 +7197,11 @@ label_2F12::
     ld   a, $0D
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     jr   z, label_2F4B
     ld   hl, $7000
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $06
     jr   z, label_2F41
     cp   $0A
@@ -7212,7 +7212,7 @@ label_2F36::
     jr   label_2F41
 
 label_2F3B::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $E9
     jr   z, label_2F36
 
@@ -7223,16 +7223,16 @@ label_2F41::
     ret
 
 label_2F4B::
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_2F57
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $12
     jr   nz, label_2F69
 
 label_2F57::
     ld   hl, $5000
-    ld   a, [$FF94]
+    ldh  a, [$FF94]
     cp   $FF
     jr   z, label_2F69
     add  a, $50
@@ -7241,10 +7241,10 @@ label_2F57::
     call CopyData
 
 label_2F69::
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $10
     jr   nz, label_2F87
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $B5
     jr   nz, label_2F87
     ld   a, $35
@@ -7259,7 +7259,7 @@ label_2F87::
     ldh  a, [hIsGBC]
     and  a
     ret  z
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     and  a
     ret  nz
     ld   a, $35
@@ -7278,7 +7278,7 @@ label_2FAD::
     ld   a, $0F
     call AdjustBankNumberForGBC
     ld   [SelectRomBank_2100], a
-    ld   a, [$FF94]
+    ldh  a, [$FF94]
     cp   $0F
     jr   z, label_2FC6
     add  a, $40
@@ -7307,12 +7307,12 @@ label_2FCD::
     sla  c
     rl   b
     ld   hl, $6749
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   z, label_2FEC
     cp   $10
     jr   nz, label_2FF1
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $B5
     jr   nz, label_2FF1
 
@@ -7371,12 +7371,12 @@ label_3019::
     and  a
     jr   z, label_304C
     ld   hl, $43B0
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   z, label_3047
     cp   $10
     jr   nz, label_304F
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $B5
     jr   nz, label_304F
 
@@ -7393,11 +7393,11 @@ label_304F::
     call label_2FC7
     pop  de
     push hl
-    ld   a, [$FFDF]
+    ldh  a, [$FFDF]
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFE0]
+    ldh  a, [$FFE0]
     ld   h, a
-    ld   a, [$FFE1]
+    ldh  a, [$FFE1]
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
@@ -7406,9 +7406,9 @@ label_304F::
     ld   [rVBK], a
     call label_3905
     ld   a, h
-    ld   [$FFE0], a
+    ldh  [$FFE0], a
     ld   a, l
-    ld   [$FFE1], a
+    ldh  [$FFE1], a
     pop  hl
     ld   a, e
     add  a, $1F
@@ -7419,11 +7419,11 @@ label_304F::
     push de
     call label_2FC7
     pop  de
-    ld   a, [$FFDF]
+    ldh  a, [$FFDF]
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFE0]
+    ldh  a, [$FFE0]
     ld   h, a
-    ld   a, [$FFE1]
+    ldh  a, [$FFE1]
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
@@ -7522,7 +7522,7 @@ label_3119::
     jr   z, label_313A
     ld   a, $14
     ld   [SelectRomBank_2100], a
-    ld   [$FFE8], a
+    ldh  [$FFE8], a
     call label_5897
     ld   e, a
     ld   hl, wKillCount2
@@ -7536,7 +7536,7 @@ label_3132::
     jr   nz, label_3132
 
 label_313A::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
     ld   hl, wMinimapTiles
@@ -7544,7 +7544,7 @@ label_313A::
     and  a
     jr   z, label_3161
     ld   hl, $D900
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_3156
     ld   hl, $DDE0
@@ -7559,7 +7559,7 @@ label_3156::
 
 label_3161::
     add  hl, de
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
     ld   a, [hl]
     jr   nz, label_316B
@@ -7567,8 +7567,8 @@ label_3161::
     ld   [hl], a
 
 label_316B::
-    ld   [$FFF8], a
-    ld   a, [$FFF6]
+    ldh  [$FFF8], a
+    ldh  a, [$FFF6]
     ld   c, a
     ld   b, $00
     sla  c
@@ -7578,8 +7578,8 @@ label_316B::
     jr   z, label_31BF
     ld   a, $0A
     ld   [SelectRomBank_2100], a
-    ld   [$FFE8], a
-    ld   a, [$FFF7]
+    ldh  [$FFE8], a
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_318F
     ld   hl, $7B77
@@ -7588,7 +7588,7 @@ label_316B::
 label_318F::
     cp   $1F
     jr   nz, label_31A6
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $F5
     jr   nz, label_31A6
     ld   a, [wTradeSequenceItem]
@@ -7599,19 +7599,19 @@ label_318F::
 
 label_31A6::
     ld   hl, $4000
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $1A
     jr   nc, label_3224
     cp   $06
     jr   c, label_3224
     ld   a, $0B
     ld   [SelectRomBank_2100], a
-    ld   [$FFE8], a
+    ldh  [$FFE8], a
     ld   hl, $4000
     jr   label_3224
 
 label_31BF::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $0E
     jr   nz, label_31D1
     ld   a, [$D80E]
@@ -7679,7 +7679,7 @@ label_3224::
     jr   nz, label_323A
 
 label_322F::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $80
     jr   c, label_323A
     ld   a, $1A
@@ -7689,7 +7689,7 @@ label_323A::
     ld   a, [bc]
     cp   $FE
     jr   z, endOfRoom
-    ld   [$FFA4], a
+    ldh  [$FFA4], a
     inc  bc
     ld   a, [$DBA5]
     and  a
@@ -7713,7 +7713,7 @@ CopyMapToTileMapLoop::
     and  $FC
     cp   $E0
     jr   nz, CopyMapToTileMapLoop_consecutive_tiles
-    ld   a, [$FFE6]
+    ldh  a, [$FFE6]
     ld   e, a
     ld   d, $00
     ld   hl, $D401
@@ -7735,7 +7735,7 @@ CopyMapToTileMapLoop::
     ldi  [hl], a
     ld   a, e
     add  a, $05
-    ld   [$FFE6], a
+    ldh  [$FFE6], a
     jr   CopyMapToTileMapLoop
 
 CopyMapToTileMapLoop_consecutive_tiles::
@@ -7759,18 +7759,18 @@ endOfRoom::
 
 label_32A9::
     xor  a
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   a, [bc] ; tile address
     bit  7, a
     jr   z, label_32B8
     bit  4, a
     jr   nz, label_32B8
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     inc  bc ; increment tile address
 
 label_32B8::
     inc  bc
-    ld   a, [$FFF8]
+    ldh  a, [$FFF8]
     ld   e, a
     ld   a, [$DBA5]
     and  a
@@ -7897,7 +7897,7 @@ MoveToNextLine_notTileBA::
     jr   nz, MoveToNextLine_notTileD3
     bit  4, e
     jr   z, MoveToNextLine_notTileD3
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $75
     jr   z, label_337C
     cp   $07
@@ -7915,7 +7915,7 @@ label_337C::
 
 MoveToNextLine_notTileD3::
     ld   a, d
-    ld   [$FFE0], a
+    ldh  [$FFE0], a
     cp   $C2
     jr   z, label_33A8
     cp   $E1
@@ -7950,7 +7950,7 @@ label_33A8::
     inc  bc
 
 MoveToNextLine_noSpecialTile::
-    ld   a, [$FFE0]
+    ldh  a, [$FFE0]
     cp   $C5
     jp   z, label_347D
     cp   $C6
@@ -7959,7 +7959,7 @@ MoveToNextLine_noSpecialTile::
 
 label_33CB::
     add  a, $EC
-    ld   [$FFE0], a
+    ldh  [$FFE0], a
     push af
     cp   $CF
     jr   c, label_33DC
@@ -7973,9 +7973,9 @@ label_33DC::
     jr   nz, label_3407
     xor  a
     ld   [$C3CB], a
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $C4
-    ld   a, [$FFE0]
+    ldh  a, [$FFE0]
     jr   z, label_3407
     ld   hl, $DBC9
     inc  [hl]
@@ -8068,7 +8068,7 @@ label_345B::
     bit  4, e
     jr   nz, label_3467
     pop  af
-    ld   a, [$FFE9]
+    ldh  a, [$FFE9]
     push af
 
 label_3467::
@@ -8090,16 +8090,16 @@ label_3471::
 label_347D::
     dec  bc
     ld   a, $01
-    ld   [$FFAC], a
+    ldh  [$FFAC], a
     ld   a, [bc]
     and  $F0
     add  a, $10
-    ld   [$FFAE], a
+    ldh  [$FFAE], a
     ld   a, [bc]
     swap a
     and  $F0
     add  a, $08
-    ld   [$FFAD], a
+    ldh  [$FFAD], a
     inc  bc
     jp   MoveToNextLine_finallyBeginSomething
 
@@ -8130,9 +8130,9 @@ label_34AE::
     push af
 
 label_34B6::
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $0A
-    ld   a, [$FFE0]
+    ldh  a, [$FFE0]
     jr   c, label_34C2
     cp   $A9
     jr   z, label_34C6
@@ -8161,7 +8161,7 @@ MoveToNextLine_finallyBeginSomething::
 
 MoveToNextLine_tileTypeNotA0::
     ld   d, $00
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     and  a
     jr   z, label_352D
     dec  bc ; decrement tile address
@@ -8169,7 +8169,7 @@ MoveToNextLine_tileTypeNotA0::
     ld   e, a
     ld   hl, wTileMap ; prepare tile map
     add  hl, de ; add current tile offset
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     and  $0F
     ld   e, a ; load repeat count from higher-bits of a
     pop  af ;
@@ -8179,7 +8179,7 @@ MoveToNextLine_tileTypeNotA0::
 FillMapWithConsecutiveTiles::
     ld   a, d
     ldi  [hl], a
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     and  $40
     jr   z, FillMapWithConsecutiveTiles_continue
     ld   a, l
@@ -8197,7 +8197,7 @@ label_3500::
     ret  z
     cp   $09
     jr   nz, label_350E
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $97
     ret  nz
     jr   label_3527
@@ -8205,7 +8205,7 @@ label_3500::
 label_350E::
     cp   $E1
     jr   nz, label_351D
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $0E
     ret  z
     cp   $0C
@@ -8214,7 +8214,7 @@ label_350E::
     ret  z
 
 label_351D::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $80
     jr   nc, label_3527
     ld   a, $09
@@ -8240,7 +8240,7 @@ label_352D::
     ret
 
 label_353B::
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $80
     jr   nc, label_3545
     ld   a, $09
@@ -8358,7 +8358,7 @@ label_35CB::
     ret  z
     cp   $09
     jr   nz, label_35D9
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $97
     ret  nz
     jr   label_35E8
@@ -8366,7 +8366,7 @@ label_35CB::
 label_35D9::
     cp   $E1
     jr   nz, label_35E8
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     cp   $0E
     ret  z
     cp   $0C
@@ -8394,7 +8394,7 @@ data_35F8::
 label_35FA::
     ld   e, 0
     call label_373F
-    ld   a, [$FFF8]
+    ldh  a, [$FFF8]
     and  $04
     jp   nz, label_36B2
     push bc
@@ -8437,10 +8437,10 @@ label_36B2::
 label_36C4::
     push af
     ld   hl, $D900
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_36D8
     ld   hl, $DDE0
@@ -8458,7 +8458,7 @@ label_36E1::
     pop  af
     or   [hl]
     ld   [hl], a
-    ld   [$FFF8], a
+    ldh  [$FFF8], a
     ret
 
 data_36E8::
@@ -8503,7 +8503,7 @@ data_3724::
 label_3726::
     ld   e, $08
     call label_373F
-    ld   a, [$FFF8]
+    ldh  a, [$FFF8]
     and  $04
     jp   nz, label_36B2
     push bc
@@ -8565,7 +8565,7 @@ data_37E4::
 
 ; Fill the tile map with whatever is in register a
 FillTileMapWith::
-    ld   [$FFE9], a
+    ldh  [$FFE9], a
     ld   d, TILES_PER_MAP
     ld   hl, wTileMap
     ld   e, a
@@ -8591,8 +8591,8 @@ label_37FE::
     ld   a, $16
     ld   [SelectRomBank_2100], a
     xor  a
-    ld   [$FFE4], a
-    ld   a, [$FFF6]
+    ldh  [$FFE4], a
+    ldh  a, [$FFF6]
     ld   c, a
     ld   b, $00
     sla  c
@@ -8601,7 +8601,7 @@ label_37FE::
     ld   a, [$DBA5]
     and  a
     jr   z, label_3868
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $06
     jr   nz, label_3850
     ld   a, [$DB6F]
@@ -8623,11 +8623,11 @@ label_37FE::
     add  hl, de
     ld   [hl], $FF
     xor  a
-    ld   [$FFE4], a
+    ldh  [$FFE4], a
 
 label_3850::
     ld   hl, $4200
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     jr   nz, label_385E
     ld   hl, $4600
@@ -8663,14 +8663,14 @@ data_387B::
     db 1, 2, 4, 8, $10, $20, $40, $80
 
 label_3883::
-    ld   a, [$FFE4]
+    ldh  a, [$FFE4]
     cp   $08
     jr   nc, label_389B
     ld   e, a
     ld   d, $00
     ld   hl, data_387B
     add  hl, de
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   e, a
     ld   a, [hl]
     ld   hl, $CF00
@@ -8741,7 +8741,7 @@ label_38EA::
     push bc
     call label_4880
     pop  bc
-    ld   a, [$FFE8]
+    ldh  a, [$FFE8]
     ld   [SelectRomBank_2100], a
     ret
 
@@ -8841,7 +8841,7 @@ label_398D::
     dec  [hl]
     jr   nz, label_399B
     ld   a, $10
-    ld   [$FFF3], a
+    ldh  [$FFF3], a
 
 label_399B::
     ld   a, [wDialogState]
@@ -8860,7 +8860,7 @@ label_39AE::
     ret  z
     xor  a
     ld   [$C3C1], a
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $0A
     ldh  a, [hFrameCounter]
     jr   c, label_39C1
@@ -8900,7 +8900,7 @@ label_39F2::
     ld   a, [hl]
     and  a
     jr   z, label_3A03
-    ld   [$FFEA], a
+    ldh  [$FFEA], a
     call label_3A18
 
 label_3A03::
@@ -8922,27 +8922,27 @@ label_3A18::
     ld   hl, $C3A0
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFEB], a
+    ldh  [$FFEB], a
     ld   hl, $C290
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFF0], a
+    ldh  [$FFF0], a
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFF1], a
+    ldh  [$FFF1], a
     ld   a, $19
     ld   [wCurrentBank], a
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFEB]
+    ldh  a, [$FFEB]
     cp   $6A
     jr   nz, label_3A40
-    ld   a, [$FFB2]
+    ldh  a, [$FFB2]
     and  a
     jr   nz, label_3A46
 
 label_3A40::
-    ld   a, [$FFEA]
+    ldh  a, [$FFEA]
     cp   $07
     jr   nz, label_3A4E
 
@@ -8963,7 +8963,7 @@ label_3A54::
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFEA]
+    ldh  a, [$FFEA]
     cp   $05
     jp   z, label_3A8D
     JP_TABLE
@@ -8980,7 +8980,7 @@ label_3A81::
 label_3A8D::
     ld   a, $20
     ld   [SelectRomBank_2100], a
-    ld   a, [$FFEB]
+    ldh  a, [$FFEB]
     ld   e, a
     ld   d, b
     ld   hl, $4000
@@ -9143,7 +9143,7 @@ label_3BB5::
     jp   ReloadSavedBank
 
 label_3BC0::
-    ld   a, [$FFF1]
+    ldh  a, [$FFF1]
     inc  a
     ret  z
     call label_3D57
@@ -9155,12 +9155,12 @@ label_3BC0::
     add  hl, de
     ld   e, l
     ld   d, h
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
-    ld   a, [$FFED]
+    ldh  a, [$FFED]
     and  $20
     rra
     rra
@@ -9169,7 +9169,7 @@ label_3BC0::
     sub  a, c
     ld   [de], a
     inc  de
-    ld   a, [$FFF1]
+    ldh  a, [$FFF1]
     ld   c, a
     ld   b, $00
     sla  c
@@ -9178,7 +9178,7 @@ label_3BC0::
     rl   b
     pop  hl
     add  hl, bc
-    ld   a, [$FFF5]
+    ldh  a, [$FFF5]
     ld   c, a
     ld   a, [hli]
     add  a, c
@@ -9201,7 +9201,7 @@ label_3C08::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_3C21
-    ld   a, [$FFED]
+    ldh  a, [$FFED]
     and  $10
     jr   z, label_3C21
     ld   a, [de]
@@ -9211,12 +9211,12 @@ label_3C08::
 
 label_3C21::
     inc  de
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
-    ld   a, [$FFED]
+    ldh  a, [$FFED]
     and  $20
     xor  $20
     rra
@@ -9227,7 +9227,7 @@ label_3C21::
     ld   [de], a
     inc  de
     pop  hl
-    ld   a, [$FFF5]
+    ldh  a, [$FFF5]
     ld   c, a
     ld   a, [hli]
     add  a, c
@@ -9249,7 +9249,7 @@ label_3C4B::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_3C63
-    ld   a, [$FFED]
+    ldh  a, [$FFED]
     and  $10
     jr   z, label_3C63
     ld   a, [de]
@@ -9270,7 +9270,7 @@ label_3C71::
     jp   ReloadSavedBank
 
 label_3C77::
-    ld   a, [$FFF1]
+    ldh  a, [$FFF1]
     inc  a
     ret  z
     call label_3D57
@@ -9285,24 +9285,24 @@ label_3C77::
     ld   a, [$C123]
     ld   c, a
     ld   b, $00
-    ld   a, [$FFF9]
+    ldh  a, [$FFF9]
     and  a
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     jr   z, label_3C9C
     sub  a, $04
-    ld   [$FFEC], a
+    ldh  [$FFEC], a
 
 label_3C9C::
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
     ld   h, a
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     add  a, $04
     sub  a, h
     ld   [de], a
     inc  de
-    ld   a, [$FFF1]
+    ldh  a, [$FFF1]
     ld   c, a
     ld   b, $00
     sla  c
@@ -9318,7 +9318,7 @@ label_3C9C::
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
     jr   z, label_3CD0
-    ld   a, [$FFED]
+    ldh  a, [$FFED]
     and  a
     jr   z, label_3CD0
     ld   a, [hl]
@@ -9348,7 +9348,7 @@ label_3CE0::
     jr   label_3CF6
 
 label_3CE6::
-    ld   a, [$FFF1]
+    ldh  a, [$FFF1]
     inc  a
     jr   z, label_3D52
     push hl
@@ -9363,15 +9363,15 @@ label_3CF6::
     ld   d, h
     pop  hl
     ld   a, c
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   a, [$C123]
     ld   c, a
     call label_3D57
-    ld   a, [$FFD7]
+    ldh  a, [$FFD7]
     ld   c, a
 
 label_3D06::
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     add  a, [hl]
     ld   [de], a
     inc  hl
@@ -9379,13 +9379,13 @@ label_3D06::
     push bc
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     add  a, [hl]
     sub  a, c
     ld   [de], a
     inc  hl
     inc  de
-    ld   a, [$FFF5]
+    ldh  a, [$FFF5]
     ld   c, a
     ld   a, [hli]
     push af
@@ -9402,14 +9402,14 @@ label_3D06::
 label_3D28::
     pop  bc
     inc  de
-    ld   a, [$FFED]
+    ldh  a, [$FFED]
     xor  [hl]
     ld   [de], a
     inc  hl
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_3D3F
-    ld   a, [$FFED]
+    ldh  a, [$FFED]
     and  a
     jr   z, label_3D3F
     ld   a, [de]
@@ -9438,11 +9438,11 @@ label_3D57::
     ld   a, [wMapSlideTransitionState]
     and  a
     jr   z, label_3D7D
-    ld   a, [$FFEE]
+    ldh  a, [$FFEE]
     dec  a
     cp   $C0
     jr   nc, label_3D7C
-    ld   a, [$FFEC]
+    ldh  a, [$FFEC]
     dec  a
     cp   $88
     jr   nc, label_3D7C
@@ -9477,15 +9477,15 @@ label_3D8A::
     ld   hl, $C200
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFEE], a
+    ldh  [$FFEE], a
     ld   hl, $C210
     add  hl, bc
     ld   a, [hl]
-    ld   [$FFEF], a
+    ldh  [$FFEF], a
     ld   hl, $C310
     add  hl, bc
     sub  a, [hl]
-    ld   [$FFEC], a
+    ldh  [$FFEC], a
     ret
 
 label_3DA0::
@@ -9632,10 +9632,10 @@ label_3E8E::
     xor  c
     and  $03
     ret  nz
-    ld   a, [$FFEE]
-    ld   [$FFD7], a
-    ld   a, [$FFEC]
-    ld   [$FFD8], a
+    ldh  a, [$FFEE]
+    ldh  [$FFD7], a
+    ldh  a, [$FFEC]
+    ldh  [$FFD8], a
     ld   a, $08
     call label_CC7
     ld   hl, $C520
@@ -9653,7 +9653,7 @@ label_3EAF::
     inc  a
 
 label_3EBA::
-    ld   [$FFD7], a
+    ldh  [$FFD7], a
     ld   hl, $C400
     add  hl, bc
     ld   a, [hl]
@@ -9713,11 +9713,11 @@ label_3EFB::
 
 label_3F11::
     ld   [$D368], a
-    ld   [$FFBD], a
+    ldh  [$FFBD], a
     ld   a, [wTransitionSequenceCounter]
     cp   $04
     ret  nz
-    ld   a, [$FFEB]
+    ldh  a, [$FFEB]
     cp   $87
     jr   nz, label_3F26
     ld   a, $DA
@@ -9735,7 +9735,7 @@ label_3F2E::
     ld   a, [hl]
     and  $04
     ret  nz
-    ld   a, [$FFF7]
+    ldh  a, [$FFF7]
     cp   $FF
     ret  z
     cp   $05
@@ -9782,7 +9782,7 @@ label_3F78::
     ld   d, b
     ld   hl, data_3F48
     add  hl, de
-    ld   a, [$FFF6]
+    ldh  a, [$FFF6]
     ld   e, a
     ld   d, b
     ld   a, [hl]
@@ -9821,7 +9821,7 @@ label_3FBD::
     ld   bc, $0010
     call CopyData
     xor  a
-    ld   [$FFA5], a
+    ldh  [$FFA5], a
     ld   a, $0C
     ld   [SelectRomBank_2100], a
     jp   DrawLinkSpriteAndReturn

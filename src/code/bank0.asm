@@ -5,7 +5,7 @@
 SelectRomBank_2100 equ $2100
 
 Start::
-    cp   $11 ; is running on Game Boy Color?
+    cp   GBC ; is running on Game Boy Color?
     jr   nz, .notGBC
     ld   a, [rKEY1]
     and  $80 ; do we need to switch the CPU speed?

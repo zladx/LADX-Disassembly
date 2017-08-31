@@ -40,12 +40,12 @@ Init::
     ld   [rOBP1], a ; /
     ld   hl, $8000
     ld   bc, $1800
-    call ZeroMemory ; Clear bytes at hl
+    call ClearBytes
     ld   a, $24
     ld   [SelectRomBank_2100], a
     call label_5C00
     call ClearBGMap
-    call label_29D0
+    call ClearHRAMAndWRAM
     ld   a, $01
     ld   [SelectRomBank_2100], a
     call label_6D32
@@ -6528,40 +6528,50 @@ UpdateNextBGColumnWithTiles::
     jr   nz, UpdateNextBGColumnWithTiles
     ret
 
-label_29C1::
+; Clear $1600 bytes of WRAM (from $C000 to $D600)
+ClearLowerAndMiddleWRAM::
     ld   bc, $1600
-    jr   label_29DC
+    jr   ClearWRAMBytes
 
-label_29C6::
+; Clear $1300 bytes of WRAM (from $C000 to $D300)
+ClearLowerWRAM::
     ld   bc, $1300
-    jr   label_29DC
+    jr   ClearWRAMBytes
 
-label_29CB::
+; Clear lower values of HRAM (from $FF90 to $FFBF) and all WRAM
+ClearWRAMAndLowerHRAM::
     ld   bc, $002F
-    jr   label_29D3
+    jr   ClearHRAMBytesAndWRAM
 
-label_29D0::
+; Clear all values from HRAM and WRAM
+; (only `hIsGBC` is kept)
+ClearHRAMAndWRAM::
+    ; Set all bytes of HRAM (from $FF90 to $FFFD) to zero
     ld   bc, $006D
 
-label_29D3::
-    ld   hl, hNeedsUpdatingBGTiles
-    call ZeroMemory
+ClearHRAMBytesAndWRAM
+    ; Set BC bytes of HRAM (starting from $FF90) to zero
+    ld   hl, hGameValuesSection
+    call ClearBytes
+    ; Set all bytes of WRAM (from $C000 to $DF00) to zero
     ld   bc, $1F00
 
-label_29DC::
-    ld   hl, $C000
+; Set BC bytes of WRAM (starting from $C000) to zero
+ClearWRAMBytes::
+    ld   hl, wram0Section
 
-ZeroMemory::
+; Set BC bytes of memory starting from HL to zero
+ClearBytes::
     ldh  a, [hIsGBC]
     push af
 
-.ZeroMemory_loop
+.ClearBytes_loop
     xor  a
     ldi  [hl], a
     dec  bc
     ld   a, b
     or   c
-    jr   nz, .ZeroMemory_loop
+    jr   nz, .ClearBytes_loop
     pop  af
     ldh  [hIsGBC], a
     ret

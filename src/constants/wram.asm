@@ -1,6 +1,9 @@
 section "WRAM Bank0", wram0
 
-wC000 equ $C000
+wram0Section EQU $C000
+
+; Unlabeled
+wC000 EQU $C000
   ds $100
 
 wScrollXOffsetForSection:: ; C100

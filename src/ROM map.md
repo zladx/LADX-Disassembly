@@ -62,5 +62,5 @@
 39 Graphics: photo elements
 3A Graphics: photo elements
 3B Graphics: photo elements, photo pictures
-3C Graphics and data
+3C Graphics and code
 3D n/a

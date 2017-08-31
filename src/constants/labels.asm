@@ -88,7 +88,7 @@ label_593B equ $593B
 label_5A1A equ $5A1A
 label_5A1E equ $5A1E
 label_5A2E equ $5A2E
-label_5C00 equ $5C00
+ClearTilesMap1 equ $5C00
 label_5C1A equ $5C1A
 label_5C2C equ $5C2C
 label_5C63 equ $5C63

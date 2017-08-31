@@ -4,7 +4,8 @@
 
 SelectRomBank_2100 equ $2100
 
-Start::
+Start:: ;
+    ; Switch CPU to double-speed if needed
     cp   GBC ; is running on Game Boy Color?
     jr   nz, .notGBC
     ld   a, [rKEY1]
@@ -29,29 +30,44 @@ Start::
 
 Init::
     ldh  [hIsGBC], a ; Save isGBC value
-    call LCDOff
-    ld   sp, $DFFF ; init stack pointer
-    ld   a, $3C ; 60
+    call LCDOff      ; Turn off screen
+    ld   sp, $DFFF   ; Init stack pointer
+
+    ; Call 003C:6A22
+    ld   a, $3C
     ld   [SelectRomBank_2100], a
     call label_6A22
-    xor  a          ; \
-    ld   [rBGP], a  ; | Clear registers
-    ld   [rOBP0], a ; |
-    ld   [rOBP1], a ; /
-    ld   hl, $8000
+
+    ; Clear registers
+    xor  a
+    ld   [rBGP], a
+    ld   [rOBP0], a
+    ld   [rOBP1], a
+
+    ; Clear Tiles Map 0
+    ld   hl, vTiles0
     ld   bc, $1800
     call ClearBytes
+
+    ; Clear Tiles Map 1 (if GBC)
     ld   a, $24
     ld   [SelectRomBank_2100], a
-    call label_5C00
+    call ClearTilesMap1
+
+    ; Clear Background Map
     call ClearBGMap
     call ClearHRAMAndWRAM
+
+    ; Call procedures in bank 1
     ld   a, $01
     ld   [SelectRomBank_2100], a
     call label_6D32
     call label_FFC0
     call label_410D
+
+    ; Call 0000:2BCF
     call label_2BCF
+
     ld   a, $44
     ld   [rSTAT], a
     ld   a, $4F

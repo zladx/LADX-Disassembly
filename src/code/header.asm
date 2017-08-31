@@ -22,8 +22,8 @@ Copy48BytesAndClearFlags::
     ld   bc, $0030
     call CopyData
     xor  a
-    ld   [$FF90], a
-    ld   [$FF92], a
+    ldh  [$FF90], a
+    ldh  [$FF92], a
     ld   a, $0C
     ld   [$2100], a
     ret

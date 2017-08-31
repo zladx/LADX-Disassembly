@@ -1,6 +1,8 @@
 ; Constants for GameBoy hardware
 ; Graciously aped from http://nocash.emubase.de/pandocs.htm.
 
+GBC EQU $11
+
 ; MBC3
 MBC3SRamEnable EQU $0000
 MBC3RomBank    EQU $2000

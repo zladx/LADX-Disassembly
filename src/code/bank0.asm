@@ -66,7 +66,7 @@ Init::
     ; Initiate DMA transfer
     call hDMARoutine
 
-    call label_410D
+    call LCDOn
 
     ; Call 0000:2BCF
     call label_2BCF

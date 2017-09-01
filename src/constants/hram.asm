@@ -47,7 +47,19 @@ hLinkAnimationState:: ; FF9D
 
 ; Unlabeled
 hFF9E:: ; hFF9E
-  ds $17
+  ds $B
+
+; Unused (?) Window Y value
+hWindowYUnused:: ; FFA9
+  ds 1
+
+; Unused (?) Window X value
+hWindowXUnused:: ; FFAA
+  ds 1
+
+; Unlabeled
+hFFAB:: ; hFFAB
+  ds $A
 
 hButtonsInactiveDelay:: ; FFB5
   ; Number of frames during which joypad is ignored

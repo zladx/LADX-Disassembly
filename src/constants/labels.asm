@@ -6,7 +6,6 @@ label_4006 equ $4006
 label_4029 equ $4029
 label_406E equ $406E
 label_40B3 equ $40B3
-label_410D equ $410D
 label_4146 equ $4146
 label_41D0 equ $41D0
 label_41FC equ $41FC

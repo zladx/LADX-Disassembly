@@ -61,9 +61,9 @@ label_4042::
     cp   $04
     jr   nz, label_4072
     ld   a, $03
-    ldh  [$FFA9], a
+    ldh  [hWindowYUnused], a
     ld   a, $30
-    ldh  [$FFAA], a
+    ldh  [hWindowXUnused], a
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
@@ -104,7 +104,7 @@ label_40A9::
     call label_412A
     ldh  a, [$FFCC]
     and  $B0
-    jr   z, label_4127
+    jr   z, LCDOn_return
     ld   a, $13
     ldh  [$FFF2], a
     ld   a, [$C13F]
@@ -148,20 +148,37 @@ label_40F9::
     ld   a, $01
     ld   [$DBAF], a
     call label_6162
-    ld   a, $C7
+
+; Enable LCD Screen
+LCDOn::
+    ; Configure LCD control register
+    ;   Bit 7: Enable LDC display
+    ;   Bit 6: Window tile map to $9C00-$9FFF
+    ;   Bit 5: Window display disabled
+    ;   Bit 4: Background & Window Tile Data to $8800-$97FF
+    ;   Bit 3: Background Tile Map to $9800-$9BFF
+    ;   Bit 2: Sprite size 8x16
+    ;   Bit 1: Sprite displayed enabled
+    ;   Bit 0: Background display enabled
+    ld   a, %11000111
     ld   [rLCDC], a
     ld   [wLCDControl], a
+
+    ; Set Window X position
     ld   a, $07
     ld   [rWX], a
+
+    ; Set Windows Y position
     ld   a, $80
     ld   [wWindowY], a
     ld   [rWY], a
-    ld   a, $07
-    ldh  [$FFA9], a
-    ld   a, $70
-    ldh  [$FFAA], a
 
-label_4127::
+    ; Configure Window
+    ld   a, $07
+    ldh  [hWindowYUnused], a
+    ld   a, $70
+    ldh  [hWindowXUnused], a
+LCDOn_return:
     ret
 
 label_4128::
@@ -3588,9 +3605,9 @@ label_5678::
     cp   $04
     jr   nz, label_56F3
     ld   a, $03
-    ldh  [$FFA9], a
+    ldh  [hWindowYUnused], a
     ld   a, $30
-    ldh  [$FFAA], a
+    ldh  [hWindowXUnused], a
     call IncrementGameplaySubtype
     xor  a
     ld   [$C16B], a
@@ -3858,9 +3875,9 @@ label_5854::
     ldh  [$FF97], a
     ld   [$C167], a
     ld   a, $07
-    ldh  [$FFA9], a
+    ldh  [hWindowYUnused], a
     ld   a, $70
-    ldh  [$FFAA], a
+    ldh  [hWindowXUnused], a
     ld   a, GAMEPLAY_OVERWORLD
     ld   [wGameplayType], a
     ldh  [$FFBC], a
@@ -6018,9 +6035,9 @@ label_6829::
     cp   $06
     jr   z, label_6849
     ld   a, $03
-    ldh  [$FFA9], a
+    ldh  [hWindowYUnused], a
     ld   a, $30
-    ldh  [$FFAA], a
+    ldh  [hWindowXUnused], a
 
 label_6849::
     call IncrementGameplaySubtype
@@ -6407,9 +6424,9 @@ label_6B2B::
     jr   nz, label_6B51
     call label_5888
     ld   a, $03
-    ldh  [$FFA9], a
+    ldh  [hWindowYUnused], a
     ld   a, $30
-    ldh  [$FFAA], a
+    ldh  [hWindowXUnused], a
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
@@ -8640,9 +8657,9 @@ label_7AB3::
     call label_C05
     ld   [hl], $17
     ld   a, $07
-    ldh  [$FFA9], a
+    ldh  [hWindowYUnused], a
     ld   a, $70
-    ldh  [$FFAA], a
+    ldh  [hWindowXUnused], a
     ret
     ldh  a, [hFrameCounter]
     and  $03

@@ -58,11 +58,14 @@ Init::
     call ClearBGMap
     call ClearHRAMAndWRAM
 
-    ; Call procedures in bank 1
+    ; Copy DMA routine to HRAM
     ld   a, $01
     ld   [SelectRomBank_2100], a
-    call label_6D32
-    call label_FFC0
+    call WriteDMACodeToHRAM
+
+    ; Initiate DMA transfer
+    call hDMARoutine
+
     call label_410D
 
     ; Call 0000:2BCF
@@ -677,7 +680,7 @@ label_501::
     call DrawLinkSprite
 
 label_504::
-    call label_FFC0
+    call hDMARoutine
     jr   WaitForVBlankAndReturn
 
 label_509::
@@ -719,7 +722,7 @@ label_52B::
     ld   a, $36
     ld   [SelectRomBank_2100], a
     call label_72BA
-    call label_FFC0
+    call hDMARoutine
     ldh  a, [hIsGBC]
     and  a
     jr   z, WaitForVBlankAndReturn
@@ -750,7 +753,7 @@ PhotoAlbumVBlankHandler::
     ldh  a, [hDidRenderFrame]
     and  a
     jr   nz, label_5AB
-    call label_FFC0
+    call hDMARoutine
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_598

@@ -54,8 +54,17 @@ hButtonsInactiveDelay:: ; FFB5
   ds 1
 
 ; Unlabeled
-hFFB6:: ; hFFB6
-  ds $15
+hFFB6:: ; FFB6
+  ds $A
+
+; DMA routine copied from ROM during initialization
+; Copy the content of wOAMBuffer to the OAM memory
+hDMARoutine:: ; FFC0
+  ds $A
+
+; Unlabeled
+hFFCA:: ; FFCA
+  ds 1
 
 hPressedButtonsMask:: ; FFCB
  ds 1

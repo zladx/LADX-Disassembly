@@ -6719,27 +6719,8 @@ label_6D26::
     ld   a, $00
     ld   [rVBK], a
     ret
-    ld   c, $C0
-    ld   b, $0A
-    ld   hl, label_6D40
 
-label_6D39::
-    ld   a, [hli]
-    ld   [$FF00+C], a
-    inc  c
-    dec  b
-    jr   nz, label_6D39
-    ret
-
-label_6D40::
-    ld   a, $C0
-    ld   [rDMA], a
-    ld   a, $28
-
-label_6D46::
-    dec  a
-    jr   nz, label_6D46
-    ret
+include "src/code/oam_dma.asm"
 
 label_6D4A::
     db $80, $80, $40, $40, $20, $20, $10, $10, 8, 8, 4, 4, 2, 2, 1, 1

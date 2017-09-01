@@ -130,7 +130,6 @@ label_6CA7 equ $6CA7
 label_6CC6 equ $6CC6
 label_6CCE equ $6CCE
 label_6D0E equ $6D0E
-label_6D32 equ $6D32
 label_6D4D equ $6D4D
 label_6D52 equ $6D52
 label_6DAF equ $6DAF

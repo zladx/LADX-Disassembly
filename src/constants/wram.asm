@@ -2,9 +2,13 @@ section "WRAM Bank0", wram0
 
 wram0Section EQU $C000
 
+wOAMBuffer:: ; C000
+  ; Buffer for OAM data. Copied to OAM by DMA
+  ds 4 * 40
+
 ; Unlabeled
-wC000 EQU $C000
-  ds $100
+wC0A0:: ; C0A0
+  ds $60
 
 wScrollXOffsetForSection:: ; C100
   ; Table of the scrollX offset to add for each screen section being drawn

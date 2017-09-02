@@ -13,6 +13,9 @@ hCodeTemp:: ; FF82
 hFF83:: ; FF83
  ds $D
 
+; Beginning of the game-variables section of the HRAM
+hGameValuesSection EQU $FF90
+
 hNeedsUpdatingBGTiles:: ; FF90
  ds 1
 

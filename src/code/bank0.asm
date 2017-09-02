@@ -40,12 +40,12 @@ Init::
     ld   [rOBP1], a ; /
     ld   hl, $8000
     ld   bc, $1800
-    call ZeroMemory ; Clear bytes at hl
+    call ClearBytes
     ld   a, $24
     ld   [SelectRomBank_2100], a
     call label_5C00
     call ClearBGMap
-    call label_29D0
+    call ClearHRAMAndWRAM
     ld   a, $01
     ld   [SelectRomBank_2100], a
     call label_6D32
@@ -6528,43 +6528,7 @@ UpdateNextBGColumnWithTiles::
     jr   nz, UpdateNextBGColumnWithTiles
     ret
 
-label_29C1::
-    ld   bc, $1600
-    jr   label_29DC
-
-label_29C6::
-    ld   bc, $1300
-    jr   label_29DC
-
-label_29CB::
-    ld   bc, $002F
-    jr   label_29D3
-
-label_29D0::
-    ld   bc, $006D
-
-label_29D3::
-    ld   hl, hNeedsUpdatingBGTiles
-    call ZeroMemory
-    ld   bc, $1F00
-
-label_29DC::
-    ld   hl, $C000
-
-ZeroMemory::
-    ldh  a, [hIsGBC]
-    push af
-
-.ZeroMemory_loop
-    xor  a
-    ldi  [hl], a
-    dec  bc
-    ld   a, b
-    or   c
-    jr   nz, .ZeroMemory_loop
-    pop  af
-    ldh  [hIsGBC], a
-    ret
+include "src/code/home/clear_memory.asm"
 
 label_29ED::
     ld   a, $14

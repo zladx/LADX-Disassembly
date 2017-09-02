@@ -142,7 +142,7 @@ label_40D5::
 label_40F9::
     call label_27F2
     call label_5DE6
-    call label_29CB
+    call ClearWRAMAndLowerHRAM
     xor  a
     ldh  [$FFF5], a
     ld   a, $01
@@ -671,7 +671,7 @@ label_4425::
     ret
 
 label_442B::
-    call label_29C6
+    call ClearLowerWRAM
     xor  a
     ld   [$C11C], a
     call IncrementGameplaySubtype
@@ -6928,7 +6928,7 @@ IntroSceneJumpTable::
 ._D dw $7448
 
 label_6EF8::
-    call label_29C1
+    call ClearLowerAndMiddleWRAM
     call label_27F2
     ld   a, $01
     call label_8FA

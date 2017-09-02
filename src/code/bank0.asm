@@ -68,29 +68,59 @@ Init::
 
     call LCDOn
 
-    ; Call 0000:2BCF
+    ; Load default tiles
     call LoadBank0CTiles
 
-    ld   a, $44
+    ; Initialize LCD Status register
+    ;   Bit 6: LYC coincidence interrupt enabled
+    ;   Bit 5: Mode 2 OAM interrupt disabled
+    ;   Bit 4: Mode 1 V-Blank interrupt disabled
+    ;   Bit 3: Mode 0 H-Blank interrupt disabled
+    ;   Bit 2-0: read-only
+    ld   a, %01000100
     ld   [rSTAT], a
+
+    ; Initialize LY Compare register
+    ; Request a STAT interrupt when LY equals $4F
     ld   a, $4F
     ld   [rLYC], a
+
+    ; Initialize wCurrentBank
     ld   a, $01
     ld   [wCurrentBank], a
-    ld   a, $01
+
+    ; Initialize Interrupts
+    ;   Bit 4: Joypad interrupt disabled
+    ;   Bit 3: Serial interrupt disabled
+    ;   Bit 2: Timer interrupt disabled
+    ;   Bit 1: LCD STAT interrupt disabled
+    ;   Bit 0: V-Blank interrupt enabled
+    ld   a, %00001
     ld   [rIE], a
 
     ; Initialize save files
     call InitSaveFiles
+
+    ; Initialize sound
+    ; (calls 001F:4000)
     ld   a, $1F
     ld   [SelectRomBank_2100], a
     call label_4000
-    ld   a, $18
-    ldh  [$FFB5], a
+
+    ; Ignore joypad input during 24 frames
+    ld   a, 24
+    ldh  [hButtonsInactiveDelay], a
+
+    ; Enable interrupts
     ei
+
+    ; If GBC, clear WRAM Bank 5
+    ; (calls 20:4854)
     ld   a, $20
     ld   [SelectRomBank_2100], a
     call label_4854
+
+    ; Start rendering
     jp   WaitForNextFrame
 
 RenderLoop::

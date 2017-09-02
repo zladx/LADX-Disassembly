@@ -386,23 +386,29 @@ RenderWindow::
     call UpdateWindowPosition
 
 WaitForNextFrame::
+    ; Animate inventory window
+    ; (calls 1F:7F80)
     ld   a, $1F
     call SwitchBank
     call label_7F80
 
+    ; Switch to first graphics bank ($0C on DMG, $2C on GBC)
     ld   a, $0C
     call AdjustBankNumberForGBC
     call SwitchBank
 
+    ; Reset didRenderFrame flag
     xor  a
-    ldh  [hDidRenderFrame], a ; Waiting for next frame
+    ldh  [hDidRenderFrame], a
+
+    ; Stop the CPU until the next interrupt
     halt
 
-PollNeedsRenderingFrame::
     ; Loop until hNeedsRenderingFrame != 0
+.pollNeedsRenderingFrame
     ldh  a, [hNeedsRenderingFrame]
     and  a
-    jr   z, PollNeedsRenderingFrame
+    jr   z, .pollNeedsRenderingFrame
 
     ; Clear hNeedsRenderingFrame
     xor  a

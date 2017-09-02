@@ -69,7 +69,7 @@ Init::
     call LCDOn
 
     ; Call 0000:2BCF
-    call label_2BCF
+    call LoadBank0CTiles
 
     ld   a, $44
     ld   [rSTAT], a
@@ -1733,7 +1733,7 @@ label_BB5::
     ld   de, $D000
     jp   CopyData
     push af
-    call label_2BCF
+    call LoadBank0CTiles
     jp   RestoreStackedBankAndReturn
     ld   a, [$D16A]
     ld   [SelectRomBank_2100], a
@@ -6766,28 +6766,38 @@ label_2BC1::
     pop  bc
     ret
 
-label_2BCF::
+; Load tiles from bank $0C to Tiles Map
+LoadBank0CTiles::
+    ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
     ld   a, $0C
     call SwitchAdjustedBank
+    ; Copy $400 bytes from the first tile sheet to Tiles map 0
     ld   hl, $4000
-    ld   de, $8000
+    ld   de, vTiles0
     ld   bc, $0400
     call CopyData
+
+    ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
     ld   a, $0C
     call SwitchAdjustedBank
+    ; Copy $1000 bytes from the second tile sheet to Tiles Map 1
     ld   hl, $4800
-    ld   de, $8800
+    ld   de, vTiles1
     ld   bc, $1000
     call CopyData
+
+    ; Copy $20 bytes from $47A0 to a portion of Tiles Map 1 ($8E00)
     ld   hl, $47A0
-    ld   de, $8E00
+    ld   de, vTiles1 + $600
     ld   bc, $0020
     call CopyData
+
+    ; Select bank 1
     ld   a, $01
     call SwitchBank
     ret
 
-    call label_2BCF
+    call LoadBank0CTiles
     ld   a, $0F
     call SwitchAdjustedBank
     ld   hl, $4000

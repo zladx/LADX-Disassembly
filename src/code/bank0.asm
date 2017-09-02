@@ -79,7 +79,9 @@ Init::
     ld   [wCurrentBank], a
     ld   a, $01
     ld   [rIE], a
-    call label_46AA
+
+    ; Initialize save files
+    call InitSaveFiles
     ld   a, $1F
     ld   [SelectRomBank_2100], a
     call label_4000

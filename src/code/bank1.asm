@@ -963,21 +963,26 @@ label_4667::
     db 1, 1, 1, 6, 1, 1, 1, 1, 7, 1, 1, 1, 1, 8, 1, 1
     db 1, 1, 9
 
-label_46AA::
+; Initialize save files, and load debug save file if needed
+InitSaveFiles::
+    ; Initialize the battery-backed memory used for save files
     ld   de, $0000
     call label_4794
     ld   de, $3AD
     call label_4794
     ld   de, $75A
     call label_4794
+
+    ; If DebugTool1 is enabled,
+    ; write a default save file with everything unlocked
     ld   a, [ROM_DebugTool1]
     and  a
-    jp   z, label_4793
+    jp   z, .return
+
     ld   e, $00
     ld   d, $00
     ld   bc, $A405
-
-label_46CA::
+.loop
     ld   hl, label_4667
     add  hl, de
     ld   a, [hli]
@@ -986,21 +991,23 @@ label_46CA::
     inc  e
     ld   a, e
     cp   $43
-    jr   nz, label_46CA
+    jr   nz, .loop
+
     ld   a, $01
     ld   [$A453], a
     ld   a, $01
     ld   [$A449], a
     ld   a, $02
     ld   [$A448], a
+
     ld   hl, $A46A
     ld   e, $09
     ld   a, $02
-
-label_46ED::
+.loop2
     ldi  [hl], a
     dec  e
-    jr   nz, label_46ED
+    jr   nz, .loop2
+
     ld   a, $60
     ld   [$A452], a
     ld   [$A47D], a
@@ -1025,9 +1032,10 @@ label_46ED::
     ld   [$A45F], a
     ld   a, $0A
     ld   [$A460], a
+
     ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_NEW
-    jr   z, label_474E
+    jr   z, .notOnNewFileScreen
     ld   a, $5B
     ld   [$A454], a
     ld   a, $46
@@ -1039,7 +1047,7 @@ label_46ED::
     ld   a, $42
     ld   [$A458], a
 
-label_474E::
+.notOnNewFileScreen
     xor  a
     ld   [$A45C], a
     ld   [$A45D], a
@@ -1052,14 +1060,15 @@ label_474E::
     ld   [$A467], a
     ld   a, $62
     ld   [$A468], a
+
     ld   hl, $A105
     ld   a, $80
     ld   e, $00
-
-label_4774::
+.loop3
     ldi  [hl], a
     dec  e
-    jr   nz, label_4774
+    jr   nz, .loop3
+
     ld   a, $01
     ld   [$DDDA], a
     ld   [$DDDB], a
@@ -1067,11 +1076,11 @@ label_4774::
     ld   [$DDDD], a
     ld   [$DDDE], a
     ld   a, $FF
-    ld   [$DC0C], a
+    ld   [wPhotos1], a
     ld   a, $0F
-    ld   [$DC0D], a
+    ld   [wPhotos2], a
 
-label_4793::
+.return
     ret
 
 label_4794::

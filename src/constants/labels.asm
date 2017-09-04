@@ -6,7 +6,6 @@ label_4006 equ $4006
 label_4029 equ $4029
 label_406E equ $406E
 label_40B3 equ $40B3
-label_410D equ $410D
 label_4146 equ $4146
 label_41D0 equ $41D0
 label_41FC equ $41FC
@@ -88,7 +87,7 @@ label_593B equ $593B
 label_5A1A equ $5A1A
 label_5A1E equ $5A1E
 label_5A2E equ $5A2E
-label_5C00 equ $5C00
+ClearTilesMap1 equ $5C00
 label_5C1A equ $5C1A
 label_5C2C equ $5C2C
 label_5C63 equ $5C63
@@ -130,7 +129,6 @@ label_6CA7 equ $6CA7
 label_6CC6 equ $6CC6
 label_6CCE equ $6CCE
 label_6D0E equ $6D0E
-label_6D32 equ $6D32
 label_6D4D equ $6D4D
 label_6D52 equ $6D52
 label_6DAF equ $6DAF

@@ -47,15 +47,36 @@ hLinkAnimationState:: ; FF9D
 
 ; Unlabeled
 hFF9E:: ; hFF9E
-  ds $17
+  ds $B
+
+; Unused (?) Window Y value
+hWindowYUnused:: ; FFA9
+  ds 1
+
+; Unused (?) Window X value
+hWindowXUnused:: ; FFAA
+  ds 1
+
+; Unlabeled
+hFFAB:: ; hFFAB
+  ds $A
 
 hButtonsInactiveDelay:: ; FFB5
   ; Number of frames during which joypad is ignored
   ds 1
 
 ; Unlabeled
-hFFB6:: ; hFFB6
-  ds $15
+hFFB6:: ; FFB6
+  ds $A
+
+; DMA routine copied from ROM during initialization
+; Copy the content of wOAMBuffer to the OAM memory
+hDMARoutine:: ; FFC0
+  ds $A
+
+; Unlabeled
+hFFCA:: ; FFCA
+  ds 1
 
 hPressedButtonsMask:: ; FFCB
  ds 1

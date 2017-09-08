@@ -277,7 +277,7 @@ global_variable instruction InstructionTable[] = {
     {0xE6, 2, "and  $N"},
     {0xE7, 1, "rst  $20"},
     {0xE8, 1, "add  sp, d"},
-    {0xE9, 1, "jp   [hl]"},
+    {0xE9, 1, "jp   hl"},
     {0xEA, 3, "ld   [$NN], a"},
     {0xEB, 1, "db   $EB"},
     {0xEC, 1, "db   $EC"},
@@ -1953,7 +1953,7 @@ DisassembleBank(u16 BankNum) {
                 break;
             }
             case 0xE9: {
-                fprintf(Output, "jp   [hl]\n");
+                fprintf(Output, "jp   hl\n");
                 break;
             }
             case 0xEA: {

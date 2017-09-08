@@ -283,7 +283,7 @@ label_C918::
     ld   [hl], $05
     ld   a, $03
     call label_9D3
-    jp   [hl]
+    jp   hl
 
 data_C924::
     db 1, 4

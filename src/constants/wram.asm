@@ -203,18 +203,26 @@ wEntitiesTypeTable:: ; C280
 wEntitiesWalkingTable:: ; C290
   ; Indicate if the designated entity is walking (1) or standing in place (0).
   ; e.g. Mabe village dog has 1 when jumping around, and 0 when standing in place moving the tail.
+  ds $10
 
-wEntity1Walking:: ; C290
-  ds 1
+wEntitiesUnknownTableA:: ; C2A0
+  ds $10
 
-wEntity2Walking:: ; C291
-  ds 1
+wEntitiesUnknownTableB:: ; C2B0
+  ds $10
 
-wEntity3Walking:: ; C292
-  ds 1
+wEntitiesUnknownTableC:: ; C2C0
+  ds $10
 
-wEntity4Walking:: ; C293
-  ds 1
+wEntitiesUnknownTableD:: ; C2D0
+  ds $10
+
+wEntitiesFrameCounterTable:: ; C2E0
+  ; Frames count of the current animation for the entity.
+  ds $10
+
+wEntitiesUnknowTableF:: ; C2F0
+  ds $10
 
 section "WRAM Bank1", wramx, bank[1]
 

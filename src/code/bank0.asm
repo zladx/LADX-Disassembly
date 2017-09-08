@@ -1809,20 +1809,35 @@ label_BE7::
 
 label_BFB::
     ld   hl, $C450
-    jr   label_C08
+    jr   IsZero
 
 label_C00::
-    ld   hl, $C2F0
-    jr   label_C08
+    ld   hl, wEntitiesUnknowTableF
+    jr   IsZero
 
-label_C05::
-    ld   hl, $C2E0
+; Test if the frame counter for the given entity is 0
+; Input:
+;  - bc: entity number
+; Output:
+;  - a: the value read
+;  - z: whether the value equal to zero
+IsEntityFrameCounterZero::
+    ld   hl, wEntitiesFrameCounterTable
 
-label_C08::
+; Test if the value at given address is equal to zero
+; Inputs:
+;  - hl: an address
+;  - bc: an offset
+; Output:
+;  - a: the value read
+;  - z: whether the value equal to zero
+IsZero:
     add  hl, bc
     ld   a, [hl]
     and  a
     ret
+
+label_C0C::
     ld   a, $AF
     call label_3B86
     ldh  a, [$FF98]

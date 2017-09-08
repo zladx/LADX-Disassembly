@@ -431,7 +431,7 @@ label_CA12::
     add  hl, bc
     ld   [hl], $02
     call label_3B12
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $20
     ret
     ldh  a, [$FFF6]
@@ -757,7 +757,7 @@ data_CC44::
     inc  d
     inc  [hl]
     inc  [hl]
-    call label_C05
+    call IsEntityFrameCounterZero
     jr   z, label_CC77
     ldh  a, [$FFE7]
     rra
@@ -841,7 +841,7 @@ label_CCCD::
     ret
 
 label_CCDC::
-    call label_C05
+    call IsEntityFrameCounterZero
     jr   nz, label_CD07
     ld   hl, $C430
     add  hl, bc
@@ -918,7 +918,7 @@ label_CD51::
 
 label_CD57::
     call label_FF7E
-    call label_C05
+    call IsEntityFrameCounterZero
     cp   $3F
     jr   nz, label_CD66
     ld   hl, $FFF2
@@ -1010,7 +1010,7 @@ label_CDEF::
     ld   [hl], $05
     call label_3B12
     ld   [hl], $01
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $80
     ld   hl, $C2D0
     add  hl, bc
@@ -1071,7 +1071,7 @@ label_CE35::
     ld   hl, $C490
     add  hl, bc
     ld   [hl], b
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $02
     ldh  a, [$FF9E]
     ld   [$C15D], a
@@ -1148,7 +1148,7 @@ label_CED0::
     add  a, [hl]
     ld   [hl], a
     ret
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $80
     ld   hl, $C3B0
     add  hl, bc
@@ -2320,7 +2320,7 @@ label_D748::
     ld   a, [$C15D]
     ldh  [$FF9E], a
     push hl
-    call label_C05
+    call IsEntityFrameCounterZero
     pop  hl
     and  a
     jr   nz, label_D789
@@ -2477,7 +2477,7 @@ label_D847::
     ld   a, $01
     ld   [hl], a
     ldh  [$FFF0], a
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $40
 
 label_D858::
@@ -2486,7 +2486,7 @@ label_D858::
     ldh  a, [$FFF0]
     and  a
     jr   z, label_D8D7
-    call label_C05
+    call IsEntityFrameCounterZero
     jr   z, label_D896
     cp   $0A
     jr   nz, label_D889
@@ -2564,7 +2564,7 @@ label_D8D7::
     ld   a, [hl]
     and  $0F
     jr   nz, label_D8E5
-    call label_C05
+    call IsEntityFrameCounterZero
     jr   nz, label_D8F6
 
 label_D8E5::
@@ -2760,7 +2760,7 @@ data_D9D8::
     inc  [hl]
     ld   de, data_D9D8
     call label_3BC0
-    call label_C05
+    call IsEntityFrameCounterZero
     jp   z, label_E0AA
     dec  a
     jr   nz, label_DA17
@@ -2847,7 +2847,7 @@ data_DA4D::
     dec  b
     ld   e, e
     call label_DA17
-    call label_C05
+    call IsEntityFrameCounterZero
     ret  nz
     ld   a, $01
     ld   [$C167], a
@@ -3031,7 +3031,7 @@ label_DBB2::
     db $BA, $5B, $E4, $5B, 1, $5C, $F, $5C
 
 label_DBBA::
-    call label_C05
+    call IsEntityFrameCounterZero
     jp   z, label_E0AA
     cp   $10
     jr   nz, label_DBCB
@@ -3059,14 +3059,14 @@ label_DBE1::
     ret  nz
     ld   a, $FF
     call label_3B0C
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $20
     ld   a, $20
     ld   [$C121], a
     ld   a, $03
     ldh  [$FFF4], a
     jp   label_3B12
-    call label_C05
+    call IsEntityFrameCounterZero
     ret  nz
     ld   [hl], $20
     ld   a, $00
@@ -3080,7 +3080,7 @@ label_DBE1::
     ldh  a, [$FF98]
     sub  a, $04
     ld   [hl], a
-    call label_C05
+    call IsEntityFrameCounterZero
     jr   nz, label_DC37
     ld   [$C167], a
     ld   d, $01
@@ -3111,7 +3111,7 @@ label_DC49::
     jp   nz, label_3F8D
     ld   de, data_DC47
     call label_3C77
-    call label_C05
+    call IsEntityFrameCounterZero
     jp   z, label_E0AA
     cp   $10
     jr   nz, label_DC67
@@ -3152,7 +3152,7 @@ label_DC99::
     jp   z, label_DC49
     ld   de, data_DC78
     call label_3C77
-    call label_C05
+    call IsEntityFrameCounterZero
     jp   z, label_DCD6
     cp   $10
     jr   nz, label_DCCD
@@ -3230,7 +3230,7 @@ label_DCEA::
     ld   hl, $C4C0
     add  hl, bc
     ld   [hl], $48
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $2F
     ld   a, $18
     ldh  [$FFF2], a
@@ -3261,7 +3261,7 @@ label_DD4B::
     jp   nz, label_3F8D
     ld   de, data_DD47
     call label_3BC0
-    call label_C05
+    call IsEntityFrameCounterZero
     jp   z, label_E0AA
     cp   $10
     jr   nz, label_DD6C
@@ -3423,7 +3423,7 @@ label_DEAE::
     ld   e, a
     cp   a
     ld   e, a
-    call label_C05
+    call IsEntityFrameCounterZero
     jp   z, label_E0AA
     cp   $10
     jr   nz, label_DEFE
@@ -3468,7 +3468,7 @@ data_DF31::
     db 4, $FC
 
 label_DF33::
-    call label_C05
+    call IsEntityFrameCounterZero
     jr   nz, label_DF5F
     ld   a, $2B
     ldh  [$FFF2], a
@@ -3577,7 +3577,7 @@ label_E001::
     call label_E1DE
     ld   de, data_DFFB
     call label_3C77
-    call label_C05
+    call IsEntityFrameCounterZero
     jp   z, label_E0AA
     cp   $10
     jr   nz, label_E04C
@@ -3816,7 +3816,7 @@ label_E198::
     jr   nc, label_E1BB
 
 label_E19C::
-    call label_C05
+    call IsEntityFrameCounterZero
     ret  nz
     ld   [hl], $30
     call GetRandomByte
@@ -4171,7 +4171,7 @@ label_E3A1::
     ld   a, $25
     ld   [$D368], a
     ld   [$D46C], a
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   a, $70
     ld   [hl], a
     ld   [$C111], a
@@ -4183,7 +4183,7 @@ label_E3A1::
     ldh  [$FFF2], a
 
 label_E3D2::
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   a, $68
     ld   [hl], a
     ld   [$C111], a
@@ -4243,7 +4243,7 @@ label_E422::
     ld   [$D368], a
     ld   [$C167], a
     call label_E3A1
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $A0
     ld   a, $FF
     ldh  [$FFBF], a
@@ -4452,7 +4452,7 @@ data_E5D1::
 label_E5E2::
     call label_E650
     call label_FF78
-    call label_C05
+    call IsEntityFrameCounterZero
     and  a
     jp   nz, label_E5F2
     jp   label_3F8D
@@ -4517,7 +4517,7 @@ label_E64F::
     ret
 
 label_E650::
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   e, a
     ld   d, b
     ld   hl, data_E5CA
@@ -4541,7 +4541,7 @@ label_E650::
     ld   a, [$C124]
     and  a
     jr   nz, label_E687
-    call label_C05
+    call IsEntityFrameCounterZero
     and  $04
     jr   z, label_E687
     ld   e, $84
@@ -4562,7 +4562,7 @@ label_E68C::
     add  a, $10
     cp   $A0
     jp   nc, label_3F8D
-    call label_C05
+    call IsEntityFrameCounterZero
     cp   $18
     jp  c, label_E5E2
     jr   nz, label_E6AD
@@ -5089,7 +5089,7 @@ label_EA2E::
     ldh  a, [$FFF0]
     and  a
     jr   nz, label_EA70
-    call label_C05
+    call IsEntityFrameCounterZero
     jp   nz, label_EAD4
     ld   a, $05
     ld   [$C19E], a
@@ -5119,7 +5119,7 @@ data_EA6C::
     inc  b
 
 label_EA70::
-    call label_C05
+    call IsEntityFrameCounterZero
     jr   z, label_EA96
     ld   a, $02
     call label_E4CA
@@ -5168,7 +5168,7 @@ label_EA96::
     ld   [$C19E], a
     call label_F5A2
     jr   label_EADA
-    call label_C05
+    call IsEntityFrameCounterZero
     jr   nz, label_EAD4
     call label_EBDE
 
@@ -5180,7 +5180,7 @@ label_EAD7::
 
 label_EADA::
     call label_FF78
-    call label_C05
+    call IsEntityFrameCounterZero
     jr   nz, label_EB4C
     call label_FF25
     call label_FCAB
@@ -5189,7 +5189,7 @@ label_EADA::
     ld   a, [hl]
     and  a
     jr   z, label_EB42
-    call label_C05
+    call IsEntityFrameCounterZero
     ldh  a, [$FFEB]
     cp   $04
     jr   nz, label_EAFF
@@ -5267,7 +5267,7 @@ label_EB53::
     ldh  a, [$FFEB]
     cp   $0A
     jr   z, label_EB6E
-    call label_C05
+    call IsEntityFrameCounterZero
     srl  a
     srl  a
     srl  a
@@ -5577,7 +5577,7 @@ label_ED1B::
     ld   hl, $C290
     add  hl, bc
     ld   [hl], $02
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $30
     ld   a, $0E
     ldh  [$FFF3], a
@@ -5597,7 +5597,7 @@ label_ED3D::
     ldh  a, [$FFEB]
     cp   $1C
     jr   nz, label_ED4E
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $80
     call label_3B12
     ld   [hl], $04
@@ -5860,7 +5860,7 @@ label_EED1::
     cpl
     inc  a
     ld   [hl], a
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $40
     call label_C00
     ld   [hl], $08
@@ -5910,7 +5910,7 @@ label_EF2A::
     ld   hl, $C320
     add  hl, bc
     ld   [hl], $20
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $FF
     ldh  a, [$FF9E]
     ld   e, a
@@ -6076,7 +6076,7 @@ label_F018::
     jr   nz, label_F042
     call label_3B12
     ld   [hl], $01
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $40
     ld   a, $40
     ld   [$D464], a
@@ -6108,7 +6108,7 @@ label_F042::
     ld   [hl], a
     call label_3B12
     ld   [hl], $02
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $40
     call label_C00
     ld   [hl], $08
@@ -6400,7 +6400,7 @@ label_F235::
     ld   hl, $C280
     add  hl, bc
     ld   [hl], $03
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $60
     ld   hl, $C340
     add  hl, bc
@@ -6997,7 +6997,7 @@ label_F5A6::
     ldh  a, [$FFEB]
     cp   $55
     jr   nz, label_F5FE
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], b
 
 label_F5FE::
@@ -7175,7 +7175,7 @@ label_F715::
     jr   nz, label_F734
 
 label_F71F::
-    call label_C05
+    call IsEntityFrameCounterZero
     xor  a
     ld   [hl], a
     ld   hl, $C340
@@ -7260,7 +7260,7 @@ label_F798::
     jr   label_F79F
 
 label_F79A::
-    call label_C05
+    call IsEntityFrameCounterZero
     xor  a
     ld   [hl], a
 
@@ -7278,7 +7278,7 @@ label_F7A7::
     ldh  a, [$FFF0]
     and  a
     jr   z, label_F7B8
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $03
     ret
 
@@ -7620,7 +7620,7 @@ label_F9CB::
     ld   hl, $C4C0
     add  hl, bc
     ld   [hl], a
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $6F
     ldh  a, [$FFEB]
     cp   $14
@@ -7635,7 +7635,7 @@ label_F9CB::
     ld   a, [hl]
     and  a
     jr   nz, label_FA18
-    call label_C05
+    call IsEntityFrameCounterZero
     ld   [hl], $2F
     ld   a, $18
     ldh  [$FFF2], a
@@ -7986,7 +7986,7 @@ label_FC7B::
     ldh  a, [$FFEB]
     cp   $03
     jr   nz, label_FC91
-    call label_C05
+    call IsEntityFrameCounterZero
     cp   $26
     jr   c, label_FC8B
     call label_3F8D
@@ -8210,7 +8210,7 @@ label_FDE3::
     ldh  a, [$FFEB]
     cp   $01
     jr   nz, label_FDF3
-    call label_C05
+    call IsEntityFrameCounterZero
     ret  z
 
 label_FDF3::

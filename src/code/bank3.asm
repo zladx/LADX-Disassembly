@@ -1427,7 +1427,7 @@ label_D0B9::
     ld   hl, data_D04D
     add  hl, de
     ld   a, [hl]
-    ld   [$DB90], a
+    ld   [wAddRupeeBufferHigh], a
     ld   hl, data_D048
     add  hl, de
     ld   a, [hl]
@@ -2768,7 +2768,7 @@ data_D9D8::
     ld   [$D368], a
     ld   hl, $DB5B
     inc  [hl]
-    ld   hl, $DB93
+    ld   hl, wSubstractRupeeBufferLow
     ld   [hl], $FF
     call label_D134
     ld   a, [hl]
@@ -2898,7 +2898,7 @@ label_DABA::
     ldh  [$FFF2], a
     xor  a
     ld   [$DB5C], a
-    ld   hl, $DB93
+    ld   hl, wSubstractRupeeBufferLow
     ld   [hl], $40
     ld   hl, $DB5B
     inc  [hl]
@@ -4311,14 +4311,14 @@ label_E4AD::
     ld   a, $08
 
 label_E4B9::
-    ld   hl, $DB93
+    ld   hl, wSubstractRupeeBufferLow
 
 label_E4BC::
     add  a, [hl]
     ld   [hl], a
     ret
     ld   a, $01
-    ld   hl, $DB90
+    ld   hl, wAddRupeeBufferHigh
     jr   label_E4BC
     ld   a, $30
     jr   label_E4B9

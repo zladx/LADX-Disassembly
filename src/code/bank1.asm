@@ -2989,12 +2989,12 @@ label_531D::
     xor  a
     ld   [$C11C], a
     ldh  [$FF9C], a
-    ld   [$DB93], a
+    ld   [wSubstractRupeeBufferLow], a
     ld   [$DB94], a
-    ld   [$DB90], a
+    ld   [wAddRupeeBufferHigh], a
     ld   [$DB8F], a
-    ld   [$DB92], a
-    ld   [$DB91], a
+    ld   [wSubstractRupeeBufferHigh], a
+    ld   [wAddRupeeBufferLow], a
     ld   a, [$DB6F]
     and  a
     jr   nz, label_5353

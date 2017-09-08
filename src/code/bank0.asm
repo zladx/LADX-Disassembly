@@ -6426,7 +6426,7 @@ ClearMap::
     jr   nz, .clearMap_loop
     ret
 
-include "code/copydata.asm"
+include "code/home/copy_data.asm"
 
 label_291D::
     inc  de

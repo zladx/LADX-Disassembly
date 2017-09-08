@@ -430,7 +430,7 @@ label_CA12::
     ld   hl, $C380
     add  hl, bc
     ld   [hl], $02
-    call label_3B12
+    call IncrementEntityWalkingAttr
     call IsEntityFrameCounterZero
     ld   [hl], $20
     ret
@@ -1008,7 +1008,7 @@ label_CDEF::
     ld   hl, $C280
     add  hl, bc
     ld   [hl], $05
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   [hl], $01
     call IsEntityFrameCounterZero
     ld   [hl], $80
@@ -1244,7 +1244,7 @@ label_CF67::
     ld   a, [$DBA5]
     and  a
     ret  z
-    call label_3B12
+    call IncrementEntityWalkingAttr
     jr   label_CF83
     call label_CF12
     ld   a, [$DBA5]
@@ -1295,7 +1295,7 @@ label_CFA9::
     ret
 
 label_CFC8::
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
 
 label_CFCB::
     ld   h, b
@@ -2851,16 +2851,16 @@ data_DA4D::
     ret  nz
     ld   a, $01
     ld   [$C167], a
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
     ld   a, $03
     ldh  [$FF90], a
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
     ld   a, $04
     ldh  [$FF90], a
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
     ld   a, $4F
     call label_2385
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   a, $01
     ld   [$C1AB], a
     ret
@@ -2873,7 +2873,7 @@ data_DA4D::
     inc  [hl]
     ld   a, [hl]
     cp   $A8
-    jp   z, label_3B12
+    jp   z, IncrementEntityWalkingAttr
     cp   $38
     jr   nz, label_DABA
     ld   a, [$DB5C]
@@ -2906,7 +2906,7 @@ label_DABA::
     call label_2385
 
 label_DAED::
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
     call label_DA17
     ld   de, data_DA4D
     call label_3BC0
@@ -2915,7 +2915,7 @@ label_DAED::
     ret  nz
     ld   a, $05
     ldh  [$FF90], a
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
     ld   a, $06
     ldh  [$FF90], a
     call label_3F8D
@@ -3050,7 +3050,7 @@ label_DBCB::
     ldh  [$FFBF], a
     call label_BFB
     ld   [hl], $52
-    call label_3B12
+    call IncrementEntityWalkingAttr
 
 label_DBE1::
     jp   label_DA17
@@ -3065,13 +3065,13 @@ label_DBE1::
     ld   [$C121], a
     ld   a, $03
     ldh  [$FFF4], a
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
     call IsEntityFrameCounterZero
     ret  nz
     ld   [hl], $20
     ld   a, $00
     call label_3B0C
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
     call label_DA17
     ld   a, $6B
     ldh  [$FF9D], a
@@ -3428,7 +3428,7 @@ label_DEAE::
     cp   $10
     jr   nz, label_DEFE
     dec  [hl]
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ldh  a, [$FFF7]
     add  a, $00
     call label_2373
@@ -3489,7 +3489,7 @@ label_DF33::
     ld   hl, $C450
     add  hl, de
     ld   [hl], $80
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
 
 label_DF5F::
     ld   hl, $C2D0
@@ -4195,7 +4195,7 @@ label_E3DB::
     jp   label_CAF
     ld   a, $10
     ld   [$D368], a
-    call label_3B12
+    call IncrementEntityWalkingAttr
     jr   label_E3DB
 
 data_E3EE::
@@ -5536,7 +5536,7 @@ label_ECD5::
     ld   a, e
     cp   $02
     jr   nz, label_ED3D
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   [hl], $05
     ld   a, $02
     ld   [$C146], a
@@ -5599,7 +5599,7 @@ label_ED3D::
     jr   nz, label_ED4E
     call IsEntityFrameCounterZero
     ld   [hl], $80
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   [hl], $04
     ret
 
@@ -5619,7 +5619,7 @@ label_ED5D::
     ldh  a, [$FFF0]
     cp   $04
     jr   nz, label_ED73
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   [hl], $08
     ld   a, $03
     ldh  [$FFF3], a
@@ -5840,7 +5840,7 @@ label_EE8E::
     ldh  [$FF9B], a
     ld   a, $08
     ld   [$C13E], a
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
 
 label_EED1::
     cp   $55
@@ -6052,7 +6052,7 @@ label_EFE8::
     ld   d, $70
     ld   b, d
     ld   [hl], b
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   [hl], $06
     ret
 
@@ -6065,7 +6065,7 @@ label_F007::
     ret  nc
 
 label_F013::
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
     ldh  a, [$FFEB]
 
 label_F018::
@@ -6074,7 +6074,7 @@ label_F018::
     ldh  a, [$FFEA]
     cp   $05
     jr   nz, label_F042
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   [hl], $01
     call IsEntityFrameCounterZero
     ld   [hl], $40
@@ -6106,7 +6106,7 @@ label_F042::
     ld   hl, $C240
     add  hl, bc
     ld   [hl], a
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   [hl], $02
     call IsEntityFrameCounterZero
     ld   [hl], $40
@@ -6560,7 +6560,7 @@ label_F330::
     ldh  [$FF99], a
 
 label_F33E::
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   [hl], b
     ld   hl, $C480
     add  hl, bc

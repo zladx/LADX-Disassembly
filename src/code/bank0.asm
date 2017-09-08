@@ -9090,8 +9090,11 @@ label_3B0C::
     ld   [hl], a
     ret
 
-label_3B12::
-    ld   hl, $C290
+; Increment the "is walking" attribute of the given entity
+; Input:
+;  - bc: the entity number
+IncrementEntityWalkingAttr::
+    ld   hl, wEntitiesWalkingTable
     add  hl, bc
     inc  [hl]
     ret

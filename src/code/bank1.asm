@@ -8076,7 +8076,7 @@ label_7681::
     jr   nc, label_769C
     call IsEntityFrameCounterZero
     ld   [hl], $40
-    call label_3B12
+    call IncrementEntityWalkingAttr
 
 label_769C::
     ld   hl, $C3D0
@@ -8097,7 +8097,7 @@ label_76AB::
     call label_3B0C
     call IsEntityFrameCounterZero
     jr   nz, label_76D4
-    call label_3B12
+    call IncrementEntityWalkingAttr
     ld   a, $07
     ld   [$C281], a
     ld   a, $FE
@@ -8129,7 +8129,7 @@ label_76D6::
     jr   nz, label_76F7
     call IsEntityFrameCounterZero
     ld   [hl], $40
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
 
 label_76F7::
     cp   $20
@@ -8190,7 +8190,7 @@ label_7745::
     ld   [rIE], a
     call IsEntityFrameCounterZero
     ld   [hl], $E0
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
 
 label_775C::
     cp   $20
@@ -8604,7 +8604,7 @@ label_7A47::
     dec  [hl]
     jr   nz, label_7A5D
     ld   [hl], $90
-    call label_3B12
+    call IncrementEntityWalkingAttr
 
 label_7A5D::
     ret
@@ -8619,7 +8619,7 @@ label_7A6A::
     ret
 
 label_7A6B::
-    jp   label_3B12
+    jp   IncrementEntityWalkingAttr
     ld   a, [$D00A]
     cp   $13
     jr   z, label_7AB3
@@ -8662,7 +8662,7 @@ label_7AB2::
     ret
 
 label_7AB3::
-    call label_3B12
+    call IncrementEntityWalkingAttr
     call IsEntityFrameCounterZero
     ld   [hl], $17
     ld   a, $07

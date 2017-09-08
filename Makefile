@@ -3,6 +3,7 @@
 # If your default python is 3, you may want to change this to python27.
 PYTHON := python
 2BPP   := $(PYTHON) tools/gfx.py 2bpp
+ASM    := rgbasm -E
 
 .SUFFIXES: .asm .o .gbc .png .2bpp
 
@@ -39,7 +40,7 @@ gfx_files = $(shell find src/gfx -type f -name '*.png')
 src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) bin/banks/bank_00_0.bin
 
 .asm.o:
-	rgbasm -i src/ -o $@ $<
+	$(ASM) -i src/ -o $@ $<
 
 # Then we link them to create a playable image.
 # This also spits out game.sym, which lets you use labels in bgb.

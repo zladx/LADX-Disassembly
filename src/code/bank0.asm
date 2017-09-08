@@ -121,36 +121,38 @@ Init::
     ; Start rendering
     jp   WaitForNextFrame
 
+; The main render loop.
 RenderLoop::
     ; Set DidRenderFrame
     ld   a, 1
     ldh  [hDidRenderFrame], a
 
+.RenderLoop_setScrollY:
     ; Special case for $C500 == 1 (alternate background position)
     ; If $C500 != 0...
     ld   a, [$C500]
     and  a
-    jr   z, .applyRegularScrollYOffset
+    jr   z, .noSpecialCase
     ; and GameplayType == OVERWORLD...
     ld   a, [wGameplayType]
     cp   GAMEPLAY_OVERWORLD
-    jr   nz, .applyRegularScrollYOffset
-    ; set scroll Y to $00 or $80 alternatively every other frame.
+    jr   nz, .noSpecialCase
+    ; ... set scroll Y to $00 or $80 alternatively every other frame.
     ldh  a, [hFrameCounter]
     rrca
     and  $80
     jr   .setScrollY
+.noSpecialCase
 
-.applyRegularScrollYOffset
-    ; Compose the base offset and the screen shake offset
+    ; Common case: add the base offset and the screen shake offset
     ld   hl, wScreenShakeVertical
     ldh  a, [hBaseScrollY]
     add  a, [hl]
-
 .setScrollY
-    ld   [rSCY], a ; scrollY
+    ld   [rSCY], a
 
-    ; Set ScrollX
+.RenderLoop_setScrollX:
+    ; Add the base offset and the screen shake offset (plus $C1BF)
     ldh  a, [hBaseScrollX]
     ld   hl, wScreenShakeHorizontal
     add  a, [hl]
@@ -158,15 +160,16 @@ RenderLoop::
     add  a, [hl]
     ld   [rSCX], a ; scrollX
 
+.RenderLoop_loadNewMap:
     ; If the LCD screen is off, load new map data
     ld   a, [$D6FE]
     and  a   ; if $D6FE != 0, LoadNewMap
-    jr   nz, RenderLoopLoadNewMap
+    jr   nz, .loadNewMap
     ld   a, [$D6FF] ; tilemap to load?
     cp   $00 ; if $D6FF != 0, LoadNewMap
-    jr   z, RenderFrame
+    jr   z, .noNewMap
 
-RenderLoopLoadNewMap::
+.loadNewMap
     ; Control audio during the transition
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MARIN_BEACH
@@ -191,8 +194,9 @@ RenderLoopLoadNewMap::
     call PlayAudioStep
     call PlayAudioStep
     jp   WaitForNextFrame
+.noNewMap
 
-RenderFrame::
+.RenderLoop_renderFrame:
     ; Update LCD status flags
     ld   a, [wLCDControl]
     and  $7F

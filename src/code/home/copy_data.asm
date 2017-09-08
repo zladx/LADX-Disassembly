@@ -5,10 +5,10 @@
 ;   de : destination address
 ;   hl : source address
 CopyDataFromBank::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call CopyData
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 ; Copy data

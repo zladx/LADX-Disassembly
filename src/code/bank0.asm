@@ -2,8 +2,6 @@
 ; Unlike other banks, this code is always adressable at `0000:xxxx`, without
 ; the need to switch banks.
 
-SelectRomBank_2100 equ $2100
-
 Start:: ;
     ; Switch CPU to double-speed if needed
     cp   GBC ; is running on Game Boy Color?
@@ -35,7 +33,7 @@ Init::
 
     ; Call 003C:6A22
     ld   a, $3C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6A22
 
     ; Clear registers
@@ -51,7 +49,7 @@ Init::
 
     ; Clear Tiles Map 1 (if GBC)
     ld   a, $24
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call ClearTilesMap1
 
     ; Clear Background Map
@@ -60,7 +58,7 @@ Init::
 
     ; Copy DMA routine to HRAM
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call WriteDMACodeToHRAM
 
     ; Initiate DMA transfer
@@ -104,7 +102,7 @@ Init::
     ; Initialize sound
     ; (calls 001F:4000)
     ld   a, $1F
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4000
 
     ; Ignore joypad input during 24 frames
@@ -117,7 +115,7 @@ Init::
     ; If GBC, clear WRAM Bank 5
     ; (calls 20:4854)
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4854
 
     ; Start rendering
@@ -218,7 +216,7 @@ RenderFrame::
     jr   c, RenderWarpTransition
     ; GameplaySubtype > GAMEPLAY_INTRO_BEACH
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5257 ; position sprites for the title screen?
 
 RenderWarpTransition::
@@ -230,7 +228,7 @@ RenderWarpTransition::
 
 label_26E::
     ld   a, $17
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_48DD
     jp   RenderInteractiveFrame
 
@@ -238,7 +236,7 @@ label_279::
     inc  a
     jr   z, label_26E
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [$C180]
     inc  a
     ld   [$C180], a
@@ -263,7 +261,7 @@ label_2A0::
     and  a
     jr   z, label_2B4
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6CA7
     jr   label_2B7
 
@@ -272,7 +270,7 @@ label_2B4::
 
 label_2B7::
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  af
     call label_5038
     call PlayAudioStep
@@ -531,10 +529,10 @@ restoreSavedWRAMBankAndReturn::
 InterruptSerial::
     push af
     ld   a, $28
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4601
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  af
     reti
 
@@ -561,7 +559,7 @@ LoadMapData::
 .executeMapLoadFunction
     ld   e, a
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ; label_4657
     ;   input:  $D6FE in e
     ;   output: address to jump to in hl
@@ -586,17 +584,17 @@ LoadMapData::
 .commonCase
     call LCDOff
     ld   a, $24
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5C2C
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4577
     ld   a, $08
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_292D
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
 
 .clearValuesAndReturn
     xor  a
@@ -694,7 +692,7 @@ vBlankContinue::
     cp   $06
     jr   c, label_52B
     ld   a, $38
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_785A
     jr   label_52B
 
@@ -747,7 +745,7 @@ label_52B::
     and  a
     jr   z, .notGBC
     ld   a, $24
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5C1A ; Change BG column palette. Triggered by an interrupt?
 .notGBC
     ld   de, $D601
@@ -758,17 +756,17 @@ label_52B::
     ld   [$DC90], a
     ld   [$DC91], a
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_72BA
     call hDMARoutine
     ldh  a, [hIsGBC]
     and  a
     jr   z, WaitForVBlankAndReturn
     ld   a, $21
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4000
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
 
 WaitForVBlankAndReturn::
     ei
@@ -817,7 +815,7 @@ label_5AB::
     call label_4616
     pop  af
     ld   [wCurrentBank], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jr   WaitForVBlankAndReturn_direct
 
 ; Copy tiles?
@@ -845,7 +843,7 @@ label_5BC::
     jp   z, label_826
     ld   a, $0D
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FF92]
     ld   c, a
     ld   b, $00
@@ -870,9 +868,9 @@ label_5BC::
     cp   $FF
     jr   nz, label_62F
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4616
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jr   label_641
 
 label_62F::
@@ -908,7 +906,7 @@ label_655::
 label_656::
     ld   a, $0F
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FF92]
     ld   c, a
     ld   b, $00
@@ -955,7 +953,7 @@ label_69E::
     cp   $FF
     jr   nz, label_6CB
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_475A
     xor  a
     ld   [wneedsUpdatingNPCTiles], a
@@ -998,7 +996,7 @@ label_6CB::
     call AdjustBankNumberForGBC
 
 label_6F7::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FF93]
     ld   c, a
     ld   b, $00
@@ -1068,7 +1066,7 @@ label_73E::
     call AdjustBankNumberForGBC
 
 label_764::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [$C10F]
     ld   c, a
     ld   b, $00
@@ -1112,7 +1110,7 @@ label_7AF::
 
 label_7B0::
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6BB5
     jp   $008B
 
@@ -1141,7 +1139,7 @@ label_7D3::
     ld   l, a
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   bc, $0040
     call CopyData
     ldh  a, [hNeedsUpdatingBGTiles]
@@ -1168,7 +1166,7 @@ label_808::
 ; Switch to the bank defined in a, and save the active bank
 SwitchBank::
     ld   [wCurrentBank], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 ; Switch to the bank defined in a, depending on GB or GBC mode
@@ -1177,26 +1175,26 @@ SwitchAdjustedBank::
 
 SwitchBank_duplicate::
     ld   [wCurrentBank], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 ReloadSavedBank::
     push af
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  af
     ret
 
 label_826::
     ld   a, $12
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FF92]
     cp   $08
     jr   c, label_873
     jr   nz, label_843
     ld   a, $02
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6843
 
 label_83E::
@@ -1208,7 +1206,7 @@ label_843::
     cp   $09
     jr   nz, label_854
     ld   a, $02
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6827
     ld   hl, $FF92
     inc  [hl]
@@ -1218,7 +1216,7 @@ label_854::
     cp   $0A
     jr   nz, label_865
     ld   a, $02
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_680B
     ld   hl, $FF92
     inc  [hl]
@@ -1226,7 +1224,7 @@ label_854::
 
 label_865::
     ld   a, $02
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_67E5
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
@@ -1294,48 +1292,48 @@ label_8D6::
 
 label_8D7::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6A30
 
 restoreBankAndReturn::
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_8E6::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6AC1
     jr   restoreBankAndReturn
 
 ; Load BG palette?
 label_8F0::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6BA4
     jr   restoreBankAndReturn
 
 label_8FA::
     push af
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6BDC
     jr   RestoreStackedBankAndReturn
 
 label_905::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6C00
     jr   LoadBank1AndReturn
 
 label_90F::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6C24
 
 LoadBank1AndReturn::
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_91D::
@@ -1352,10 +1350,10 @@ label_91D::
 
 label_92F::
     ld   a, $1A
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6576
     ldh  a, [$FFDF]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $DC91
     ld   a, [$DC90]
     ld   e, a
@@ -1399,22 +1397,22 @@ label_92F::
 ; Restore bank saved on stack and return
 RestoreStackedBankAndReturn::
     pop  af
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_978::
     push af
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6D0E
     jr   RestoreStackedBankAndReturn
 
 label_983::
     ld   a, $1A
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6710
     ldh  a, [$FFDF]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
     ld   h, a
     ldh  a, [$FFE1]
@@ -1455,35 +1453,35 @@ label_999::
 label_9C8::
     push af
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4985
     jr   RestoreStackedBankAndReturn
 
 label_9D3::
     push af
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4518
     jr   RestoreStackedBankAndReturn
 
 label_9DE::
     push af
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4874
     jr   RestoreStackedBankAndReturn
 
 label_9E9::
     push af
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4954
     jp   RestoreStackedBankAndReturn
 
 label_9F5::
     push af
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_482D
     jp   RestoreStackedBankAndReturn
 
@@ -1501,7 +1499,7 @@ label_A01::
     jr   label_A2D
 
 label_A13::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_A01
@@ -1518,13 +1516,13 @@ label_A13::
 
 label_A2D::
     ld   a, h
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_A32::
     push af
     ld   a, $35
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $4F00
     ld   de, $DCC0
     ld   bc, $0020
@@ -1534,49 +1532,49 @@ label_A32::
 label_A47::
     push af
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_505F
     jp   RestoreStackedBankAndReturn
 
 label_A53::
     push af
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4F9B
     jp   RestoreStackedBankAndReturn
 
 label_A5F::
     push af
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_3CE6
     jp   RestoreStackedBankAndReturn
 
 label_A6B::
     push af
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5A2E
     jp   RestoreStackedBankAndReturn
 
 label_A77::
     push af
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4F68
     jp   RestoreStackedBankAndReturn
 
 label_A83::
     push af
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6D52
     jp   RestoreStackedBankAndReturn
 
 label_A8F::
     push af
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4BE8
     jp   RestoreStackedBankAndReturn
 
@@ -1601,7 +1599,7 @@ label_AB0::
 label_AB5::
     push af
     ld   a, $24
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5C1A
     ld   de, $D601
     call label_2927
@@ -1610,14 +1608,14 @@ label_AB5::
 label_AC6::
     push af
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_703E
     jp   RestoreStackedBankAndReturn
 
 label_AD2::
     push af
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_70D6
     jp   RestoreStackedBankAndReturn
 
@@ -1631,20 +1629,20 @@ label_ADE::
 label_AEA::
     push af
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4A4C
     jp   RestoreStackedBankAndReturn
 
 label_AF6::
     push af
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_7161
     jp   RestoreStackedBankAndReturn
 
 label_B02::
     ld   a, $3D
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4029
     ret
 
@@ -1668,14 +1666,14 @@ AdjustBankNumberForGBC::
 
 label_0B1A::
     ldh  a, [$FFD7]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, $02
     ld   [rSVBK], a
     call CopyData
     xor  a
     ld   [rSVBK], a
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_B2F::
@@ -1691,7 +1689,7 @@ label_B2F::
     and  $80
     jr   nz, label_B4B
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6E50
     jr   c, label_B54
 
@@ -1706,16 +1704,16 @@ label_B4B::
 label_B54::
     ldh  a, [$FFD9]
     and  $7F
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  bc
     ret
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call CopyData
     ld   a, $28
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
     push hl
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_B80
@@ -1739,7 +1737,7 @@ label_B80::
 
 label_B90::
     ldh  a, [$FFE6]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_B96::
@@ -1774,7 +1772,7 @@ label_BB5::
     call LoadBank0CTiles
     jp   RestoreStackedBankAndReturn
     ld   a, [$D16A]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
 
 label_BCB::
     ld   a, [hli]
@@ -1783,15 +1781,15 @@ label_BCB::
     dec  b
     jr   nz, label_BCB
     ld   a, $28
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_BD7::
     ld   a, [$DE01]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_BE7
     ld   a, [$DE04]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_BE7::
@@ -1801,7 +1799,7 @@ label_BE7::
     ld   l, a
     jp   [hl]
     ld   a, $02
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_1A50
     jp   ReloadSavedBank
 
@@ -1847,20 +1845,20 @@ label_C2A::
 
 label_C2D::
     ld   a, $1C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     add  hl, bc
     ld   a, [hl]
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $01
     ret
 
 label_C3A::
     ld   a, $0C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   bc, $0040
     call CopyData
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_C4B::
@@ -2011,7 +2009,7 @@ label_D15::
 
 label_D1E::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [$DBA5]
     and  a
     jr   z, label_D59
@@ -2315,7 +2313,7 @@ EndCreditsHandler::
 
 label_EED::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, $17
 
 label_EF4::
@@ -2326,13 +2324,13 @@ label_EF4::
 
 label_EFC::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, $01
     jr   label_EF4
 
 label_F05::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, $02
     jr   label_EF4
 
@@ -2350,7 +2348,7 @@ FileCopyHandler::
 
 OverworldHandler::
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4C4B
     call label_4ABC
     ld   a, $01
@@ -2393,7 +2391,7 @@ label_F48::
     dec  [hl]
     jr   nz, label_F75
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_61EE
     call ReloadSavedBank
 
@@ -2443,7 +2441,7 @@ label_F97::
     ld   a, [$C15C]
     ld   [$C3CF], a
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4B1F
     ld   a, $19
     call SwitchBank
@@ -2475,7 +2473,7 @@ label_1006::
 
 label_100A::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5C9C
 
 label_1012::
@@ -2587,7 +2585,7 @@ label_107F::
     ld   a, $07
     ld   [wGameplayType], a
     ld   a, GAMEPLAY_FILE_SELECT
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_755B
     call DrawLinkSprite
     call label_398D
@@ -2676,7 +2674,7 @@ label_114F::
     call SwitchBank
     jp   $41C2
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_725A
     and  a
     ret  z
@@ -2842,10 +2840,10 @@ label_1281::
 
 label_128D::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_48CA
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 ItemFunction::
@@ -2949,10 +2947,10 @@ label_1340::
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4B4A
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 PlaceBomb::
@@ -2969,10 +2967,10 @@ PlaceBomb::
     call label_142F
     ret  c
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4B81
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 UsePowerBracelet::
@@ -2988,10 +2986,10 @@ label_1387::
     call label_142F
     ret  c
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4BFF
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 data_139D::
@@ -3166,10 +3164,10 @@ label_14A7::
     call label_3B86
     ret  c
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4C47
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 data_14C3::
@@ -3689,16 +3687,16 @@ label_1814::
 
 label_1819::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4AB3
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_49BA
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
     call label_754F
     ld   a, [$C3C9]
@@ -3922,7 +3920,7 @@ label_1993::
 
 label_19A4::
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_19C2
     push de
     ldh  a, [$FFF7]
@@ -4008,24 +4006,24 @@ label_1A21::
 
 label_1A22::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6C4F
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_55CA
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_1A39::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6C7A
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_563B
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_1A50::
@@ -4119,7 +4117,7 @@ AnimateMarinBeachTiles::
     ret  nz
     ld   a, $10
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $6500
     ld   de, $9500
     ldh  a, [hFrameCounter]
@@ -4178,7 +4176,7 @@ AnimateTiles::
     jr   c, .returnEarly  ;   return immediately
     ld   a, $10
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
 ; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
     ld   a, [$D006]
     ld   l, a
@@ -4277,7 +4275,7 @@ AnimateEndCreditsTiles::
 
 label_1BC5::
     ld   a, $17
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   $4062
 
 label_1BCD::
@@ -4326,11 +4324,11 @@ label_1BD2::
     and  $07
     jp   nz, label_1D1E
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_61AA
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
 label_1C13::
@@ -4380,20 +4378,20 @@ label_1C54::
     cp   $FF
     jr   nz, label_1C87
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   b, $01
     call label_47F7
     jr   z, label_1C72
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call CopyData
 
 label_1C72::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   b, $00
     call label_47F7
     jr   z, label_1C87
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   de, $96C0
     call CopyData
 
@@ -4463,12 +4461,12 @@ label_1CE8::
     ld   h, $76
     jr   label_1CC8
     ld   a, $38
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_7830
     jp   DrawLinkSpriteAndReturn
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
 
 label_1D12::
     ld   a, [bc]
@@ -4477,16 +4475,16 @@ label_1D12::
     dec  d
     jr   nz, label_1D12
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_1D1E::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_54F5
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
 
 DrawLinkSprite::
 DrawLinkSpriteAndReturn::
@@ -4630,7 +4628,7 @@ label_1DF0::
     ld   hl, $6080
 
 label_1DF5::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   de, $8400
     ld   bc, $0040
     jp   label_1F3B
@@ -4652,7 +4650,7 @@ label_1E01::
     ld   bc, $0040
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   label_1F3B
 
 label_1E2B::
@@ -4663,7 +4661,7 @@ label_1E2B::
 label_1E33::
     ld   a, $11
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [$D000]
     swap a
     and  $F0
@@ -4687,13 +4685,13 @@ label_1E55::
     ldh  [$FFA5], a
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_1E69::
     ld   a, $13
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [$D000]
     swap a
     and  $F0
@@ -4714,7 +4712,7 @@ label_1E8D::
     ld   de, $88E0
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   bc, $0020
     jp   label_1F3B
 
@@ -4725,7 +4723,7 @@ label_1EA1::
 label_1EA7::
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   bc, $0020
     jp   label_1F3B
 
@@ -4740,7 +4738,7 @@ label_1EBC::
 
 label_1EC1::
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   de, $9140
     jp   label_1F38
 
@@ -4757,7 +4755,7 @@ label_1ED7::
     push af
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  af
     ld   hl, $FFA1
     ld   [hl], $01
@@ -4829,7 +4827,7 @@ label_1F3E::
     xor  a
     ldh  [$FFA5], a
     ld   a, $0C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
 data_1F49::
@@ -4985,7 +4983,7 @@ label_2049::
     ld   e, a
     ld   d, $00
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $5118
     add  hl, de
     ld   a, [$DB49]
@@ -5053,10 +5051,10 @@ label_2098::
 
 label_20BF::
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5900
     ld   a, $02
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_41D0
 
 label_20CF::
@@ -5078,7 +5076,7 @@ label_20DD::
 
 label_20EC::
     ld   a, $02
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_48B0
     ld   a, $01
     ldh  [$FFA1], a
@@ -5142,7 +5140,7 @@ label_214E::
 label_2153::
     call label_2165
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_50C3
     jp   ReloadSavedBank
 
@@ -5165,7 +5163,7 @@ label_2177::
 
 label_2178::
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5526
     jp   ReloadSavedBank
 
@@ -5289,10 +5287,10 @@ label_222C::
     inc  bc
     ret
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4A76
     ld   a, $08
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
 
 label_2241::
     push bc
@@ -5344,7 +5342,7 @@ label_2286::
 
 label_2291::
     ld   a, $1A
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6576
 
 label_2299::
@@ -5362,10 +5360,10 @@ label_2299::
     push bc
     push de
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_49D9
     ldh  a, [$FFDF]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_2214
     ld   a, b
     ldh  [$FFE2], a
@@ -5390,10 +5388,10 @@ label_22D3::
     push bc
     push de
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_49D9
     ldh  a, [$FFDF]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_2224
     ld   a, b
     ldh  [$FFE2], a
@@ -5423,7 +5421,7 @@ label_22FE::
     ld   [$C128], a
     jp   nz, label_2241
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   $5570
 
 label_2321::
@@ -5485,7 +5483,7 @@ label_2345::
     or   c
     inc  hl
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   $5449
 
 label_2373::
@@ -5654,7 +5652,7 @@ label_2475::
     jr   nz, label_2444
     ret
     ld   a, $1C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   $4A2C
 
 label_2485::
@@ -5688,10 +5686,10 @@ label_24AB::
 label_24AE::
     ret
     ld   a, $1C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   $4AA8
     ld   a, $1C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [wDialogScrollDelay]
     and  a
     jr   z, label_24C7
@@ -5703,7 +5701,7 @@ label_24C7::
     call label_49F1
     jp   label_2485
     ld   a, $1C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
     ld   c, a
     ld   a, [$C171]
@@ -5761,7 +5759,7 @@ label_250D::
 
 label_2529::
     ld   a, $1C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [$C170]
     and  $1F
     ld   c, a
@@ -5803,7 +5801,7 @@ label_2529::
     add  hl, de
     ld   a, [hl]
     and  $3F
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  hl
     ld   a, [$C170]
     ld   e, a
@@ -5907,7 +5905,7 @@ label_2608::
     ldh  [$FFD8], a
     ld   e, a
     ld   a, $1C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $4641
     add  hl, de
     ld   e, [hl]
@@ -5937,7 +5935,7 @@ label_2633::
     ld   [hl], $00
     push hl
     ld   a, $1C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FFD8]
     ld   e, a
     ld   d, $00
@@ -6017,7 +6015,7 @@ label_26B6::
     bit  5, a
     jr   z, label_2714
     ld   a, $1C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MINI_MAP
     jp   z, label_278B
@@ -6175,7 +6173,7 @@ label_27AA::
     and  $10
     ret  z
     ld   a, $17
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   $7DCC
 
 label_27B7::
@@ -6184,7 +6182,7 @@ label_27B7::
 
 label_27BB::
     ld   a, $17
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   $7D7C
 
 ; Set overworld music track?
@@ -6208,7 +6206,7 @@ EnableExternalRAMWriting::
 
 label_27DD::
     ld   a, $02
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     push bc
     call label_4146
     pop  bc
@@ -6226,14 +6224,14 @@ label_27F2::
     and  a
     jr   nz, .skip
     ld   a, $1F
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4003
 .skip
     jp   ReloadSavedBank
 
 label_2802::
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5E67
     jp   ReloadSavedBank
 
@@ -6589,27 +6587,27 @@ include "src/code/home/clear_memory.asm"
 
 label_29ED::
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5884
     jp   ReloadSavedBank
 
 label_29F8::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4C98
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_2A07::
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5A59
     jp   ReloadSavedBank
 
 label_2A12::
     ld   a, $08
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $4AD4
     ldh  a, [$FFF7]
     cp   $FF
@@ -6629,14 +6627,14 @@ label_2A2C::
     call label_2A12
     push af
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  af
     ret
 
 label_2A37::
     ld   a, $13
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $6800
     ld   de, $9000
     ld   bc, $0800
@@ -6656,21 +6654,21 @@ label_2A57::
 label_2A66::
     ld   a, $13
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $4000
     ld   de, $8000
     ld   bc, $1800
     call CopyData
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $57E0
     ld   de, $97F0
     ld   bc, $0010
     call CopyData
     ld   a, $12
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $7500
     ld   de, $8000
     ld   bc, $0040
@@ -6681,21 +6679,21 @@ label_2A66::
     jp   CopyData
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $5000
     ld   de, $9000
     ld   bc, $0800
     call CopyData
     ld   a, $12
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $6000
     ld   de, $8000
     ld   bc, $0800
     call CopyData
     ld   a, $0F
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $6000
     ld   de, $8800
     ld   bc, $0800
@@ -6716,13 +6714,13 @@ label_2B01::
     call AdjustBankNumberForGBC
 
 label_2B06::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   de, $8000
     ld   bc, $0800
     call CopyData
     ld   a, $13
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $5800
     ld   de, $8800
     ld   bc, $1000
@@ -6734,7 +6732,7 @@ label_2B06::
     call PlayAudioStep
     ld   a, $12
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $6600
     ld   de, $8000
     ld   bc, $0080
@@ -6744,7 +6742,7 @@ label_2B06::
     and  a
     jr   nz, label_2B61
     ld   a, $10
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $6900
     ld   de, $8100
     ld   bc, $0700
@@ -6752,7 +6750,7 @@ label_2B06::
 
 label_2B61::
     ld   a, $38
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $5000
     ld   de, $8000
     ld   bc, $0800
@@ -6779,13 +6777,13 @@ label_2B92::
     call AdjustBankNumberForGBC
 
 label_2B95::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   de, $8000
     ld   bc, $0800
     call CopyData
     ld   a, $13
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $7000
     ld   de, $8800
     ld   bc, $0800
@@ -6798,7 +6796,7 @@ label_2B95::
 label_2BC1::
     push bc
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5838
     call ReloadSavedBank
     pop  bc
@@ -6859,7 +6857,7 @@ label_2C28::
     cp   $FF
     jr   nz, label_2C53
     ld   a, $35
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $6200
     ld   de, $9000
     ld   bc, $0100
@@ -6889,7 +6887,7 @@ label_2C5D::
     ld   bc, $0600
     call CopyData
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  de
     push de
     ld   hl, $45A9
@@ -6908,14 +6906,14 @@ label_2C8A::
     call CopyData
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $47C0
     ld   de, $DCC0
     ld   bc, $0040
     call CopyData
     call label_2D50
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  de
     ld   hl, $45CA
     add  hl, de
@@ -6928,14 +6926,14 @@ label_2C8A::
     jr   nz, label_2CD1
     ld   hl, $6100
     ld   a, $35
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
 
 label_2CD1::
     ld   de, $8F00
     ld   bc, $0100
     call CopyData
     ld   a, [wCurrentBank]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $7D00
     ldh  a, [$FFF7]
     cp   $FF
@@ -7002,7 +7000,7 @@ label_2D50::
     call label_1BD2
     ld   a, $0C
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $4800
     ld   de, $8800
     ld   bc, $0800
@@ -7086,7 +7084,7 @@ label_2E13::
     jp   CopyData
     ld   a, $13
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $7C00
     ld   de, $8C00
     ld   bc, $0400
@@ -7123,7 +7121,7 @@ label_2E73::
     cp   $FF
     jr   nz, label_2E84
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_475A
     jp   label_2F12
 
@@ -7201,7 +7199,7 @@ label_2ED4::
     call AdjustBankNumberForGBC
 
 label_2EF2::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FFD7]
     ld   d, a
     ld   e, $00
@@ -7227,7 +7225,7 @@ label_2F12::
     jp   z, label_2FAD
     ld   a, $0D
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FFF9]
     and  a
     jr   z, label_2F4B
@@ -7279,7 +7277,7 @@ label_2F69::
     cp   $B5
     jr   nz, label_2F87
     ld   a, $35
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $6600
     ld   de, $8F00
     ld   bc, $0200
@@ -7294,7 +7292,7 @@ label_2F87::
     and  a
     ret  nz
     ld   a, $35
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $6E00
     ld   de, $9690
     ld   bc, $0010
@@ -7308,7 +7306,7 @@ label_2F87::
 label_2FAD::
     ld   a, $0F
     call AdjustBankNumberForGBC
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FF94]
     cp   $0F
     jr   z, label_2FC6
@@ -7395,7 +7393,7 @@ label_3019::
     sla  c
     rl   b
     ld   a, $1A
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6576
     call label_3905
     ld   a, [$DBA5]
@@ -7425,7 +7423,7 @@ label_304F::
     pop  de
     push hl
     ldh  a, [$FFDF]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
     ld   h, a
     ldh  a, [$FFE1]
@@ -7451,7 +7449,7 @@ label_304F::
     call label_2FC7
     pop  de
     ldh  a, [$FFDF]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
     ld   h, a
     ldh  a, [$FFE1]
@@ -7524,7 +7522,7 @@ label_30E9::
     dec  c
     jr   nz, label_30A9
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   label_6DEA
 
 label_30F4::
@@ -7533,26 +7531,26 @@ label_30F4::
     ld   hl, $D47F
     inc  [hl]
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4CA3
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_3119
     ld   a, $21
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_40B3
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6DAF
 
 label_3119::
     ld   a, $09
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [$DBA5]
     and  a
     jr   z, label_313A
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  [$FFE8], a
     call label_5897
     ld   e, a
@@ -7608,7 +7606,7 @@ label_316B::
     and  a
     jr   z, label_31BF
     ld   a, $0A
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  [$FFE8], a
     ldh  a, [$FFF7]
     cp   $FF
@@ -7636,7 +7634,7 @@ label_31A6::
     cp   $06
     jr   c, label_3224
     ld   a, $0B
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  [$FFE8], a
     ld   hl, $4000
     jr   label_3224
@@ -7714,7 +7712,7 @@ label_322F::
     cp   $80
     jr   c, label_323A
     ld   a, $1A
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
 
 label_323A::
     ld   a, [bc]
@@ -7778,13 +7776,13 @@ CopyMapToTileMapLoop_consecutive_tiles::
 
 endOfRoom::
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6CCE
     ld   a, $36
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6D4D ; do stuff that returns early if end-of-room
     ld   a, $21
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_53F3 ; stuff that returns early when DBA5 is 0
     jp   ReloadSavedBank
 
@@ -7816,7 +7814,7 @@ label_32B8::
     ld   e, a
     inc  bc
     ld   a, $24
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_7578
     call label_353B
     ret
@@ -8281,7 +8279,7 @@ label_3545::
     ld   a, $1A
 
 label_3547::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_354B::
@@ -8617,10 +8615,10 @@ FillTileMapWith_continue::
 
 label_37FE::
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5F02
     ld   a, $16
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     xor  a
     ldh  [$FFE4], a
     ldh  a, [$FFF6]
@@ -8755,29 +8753,29 @@ label_38B4::
 
 label_38D4::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6524
     ld   a, $01
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5EAB
     ld   a, $16
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_38EA::
     ld   e, a
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, e
     push bc
     call label_4880
     pop  bc
     ldh  a, [$FFE8]
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_588B
     ret
 
@@ -8792,26 +8790,26 @@ label_390F::
     ld   a, $08
 
 label_3911::
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_3915::
     ld   a, $27
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   $7FC5
 
 label_391D::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   $7DE6
 
 label_3925::
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $5218
     add  hl, de
     ld   a, [hl]
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $05
     ret
 
@@ -8824,13 +8822,13 @@ label_3935::
 
 label_3942::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_53E4
     jp   ReloadSavedBank
 
 label_394D::
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_54AC
     jp   ReloadSavedBank
 
@@ -8843,22 +8841,22 @@ label_3958::
 
 label_3965::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_485B
     jp   ReloadSavedBank
 
 label_3970::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_7EFE
     jp   ReloadSavedBank
 
 label_397B::
     ld   a, $14
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_5347
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 data_3989::
@@ -8906,10 +8904,10 @@ label_39C1::
     ld   a, [hl]
     ld   [$C3C0], a
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4303
     xor  a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
     and  a
     jr   nz, label_39E3
@@ -8918,7 +8916,7 @@ label_39C1::
 label_39E3::
     ld   a, $20
     ld   [wCurrentBank], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6352
     ld   b, $00
     ld   c, $0F
@@ -8943,10 +8941,10 @@ label_3A03::
 
 label_3A0A::
     ld   a, $15
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4000
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_3A18::
@@ -8964,7 +8962,7 @@ label_3A18::
     ldh  [$FFF1], a
     ld   a, $19
     ld   [wCurrentBank], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FFEB]
     cp   $6A
     jr   nz, label_3A40
@@ -8989,11 +8987,11 @@ label_3A4E::
 label_3A54::
     ld   a, $14
     ld   [wCurrentBank], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_4D73
     ld   a, $03
     ld   [wCurrentBank], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FFEA]
     cp   $05
     jp   z, label_3A8D
@@ -9005,12 +9003,12 @@ label_3A81::
     call label_3A8D
     ld   a, $03
     ld   [wCurrentBank], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 label_3A8D::
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ldh  a, [$FFEB]
     ld   e, a
     ld   d, b
@@ -9026,7 +9024,7 @@ label_3A8D::
     ld   l, e
     ld   h, d
     ld   [wCurrentBank], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   [hl]
 
 data_3AAA::
@@ -9081,68 +9079,68 @@ label_3B12::
 
 label_3B18::
     ld   a, $02
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_75F5
     jp   ReloadSavedBank
 
 label_3B23::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_7893
     jp   ReloadSavedBank
 
 label_3B2E::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_7CAB
     jp   ReloadSavedBank
 
 label_3B39::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6E28
     jp   ReloadSavedBank
 
 label_3B44::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6C6B
     jp   ReloadSavedBank
 
 label_3B4F::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6BDE
     jp   ReloadSavedBank
 
 label_3B5A::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6C77
     jp   ReloadSavedBank
 
 label_3B65::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_73EB
     jp   ReloadSavedBank
 
 label_3B70::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_6E2B
     jp   ReloadSavedBank
 
 label_3B7B::
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_75A2
     jp   ReloadSavedBank
 
 label_3B86::
     push af
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  af
     call label_64CA
     rr   l
@@ -9153,7 +9151,7 @@ label_3B86::
 label_3B98::
     push af
     ld   a, $03
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     pop  af
     call label_64CC
     rr   l
@@ -9162,13 +9160,13 @@ label_3B98::
     ret
 
 label_3BAA::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $03
     call label_7EC7
     jp   ReloadSavedBank
 
 label_3BB5::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $03
     call label_7E45
     jp   ReloadSavedBank
@@ -9293,7 +9291,7 @@ label_3C63::
     ld   c, a
     ld   b, $00
     ld   a, $15
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_795D
 
 label_3C71::
@@ -9370,7 +9368,7 @@ label_3CD6::
 
 label_3CD9::
     ld   a, $15
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jr   label_3C71
 
 label_3CE0::
@@ -9455,7 +9453,7 @@ label_3D3F::
     ld   a, [$C123]
     ld   c, a
     ld   a, $15
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_795D
     jp   ReloadSavedBank
 
@@ -9520,67 +9518,67 @@ label_3D8A::
     ret
 
 label_3DA0::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $15
     call label_7964
     jp   ReloadSavedBank
 
 label_3DAB::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $04
     call label_5A1A
     jp   ReloadSavedBank
 
 label_3DB6::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $04
     call label_5690
     jp   ReloadSavedBank
 
 label_3DC1::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $04
     call label_504B
     jp   ReloadSavedBank
 
 label_3DCC::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $04
     call label_49BD
     jp   ReloadSavedBank
 
 label_3DD7::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $36
     call label_72AB
     jp   ReloadSavedBank
 
 label_3DE2::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $05
     call label_6CC6
     jp   ReloadSavedBank
 
 label_3DED::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $05
     call label_6818
     jp   ReloadSavedBank
 
 label_3DF8::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $05
     call label_6302
     jp   ReloadSavedBank
 
 label_3E03::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $05
     call label_5A1E
     jp   ReloadSavedBank
 
 label_3E0E::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $05
     call label_556B
     jp   ReloadSavedBank
@@ -9595,19 +9593,19 @@ label_3E19::
     jp   SwitchBank
 
 label_3E29::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $04
     call label_5C63
     jp   ReloadSavedBank
 
 label_3E34::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $03
     call label_5407
     jp   ReloadSavedBank
 
 label_3E3F::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $02
     call label_62CE
     call label_6414
@@ -9621,7 +9619,7 @@ label_3E4D::
     jp   SwitchBank
 
 label_3E5A::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $20
     ld   c, $01
     ld   b, $00
@@ -9630,7 +9628,7 @@ label_3E5A::
     jp   ReloadSavedBank
 
 label_3E6B::
-    ld   hl, SelectRomBank_2100
+    ld   hl, MBC3SelectBank
     ld   [hl], $03
     call label_6472
     jp   ReloadSavedBank
@@ -9786,7 +9784,7 @@ data_3F48::
 label_3F50::
     ld   a, $03
     ld   [$C113], a
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     call label_55CF
     call ReloadSavedBank
     ld   hl, $C460
@@ -9830,7 +9828,7 @@ label_3F8D::
 
 label_3F93::
     ld   a, $05
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $59DE
     ld   de, $8460
     ld   bc, $0010
@@ -9840,7 +9838,7 @@ label_3F93::
 
 label_3FA9::
     ld   a, $05
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $59FE
     ld   de, $8460
     ld   bc, $0010
@@ -9854,7 +9852,7 @@ label_3FBD::
     xor  a
     ldh  [$FFA5], a
     ld   a, $0C
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
     ld   b, $34
     ldh  a, [hIsGBC]
@@ -9864,11 +9862,11 @@ label_3FBD::
 
 label_3FD9::
     ld   a, b
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ld   hl, $4000
     ld   de, $8400
     ld   bc, $0400
     call CopyData
     ld   a, $20
-    ld   [SelectRomBank_2100], a
+    ld   [MBC3SelectBank], a
     ret

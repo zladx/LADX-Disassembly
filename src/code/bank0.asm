@@ -204,7 +204,7 @@ RenderLoop::
 .noNewMap
 
 .RenderLoop_renderFrame:
-    ; Update LCD status flags
+    ; Apply LCD status flags
     ld   a, [wLCDControl]
     and  $7F
     ld   e, a
@@ -217,63 +217,90 @@ RenderLoop::
     ld   hl, hFrameCounter
     inc  [hl]
 
-    ; Special case for the intro screen sprites
+    ; Special case for the intro screen sprites.
+    ; If GameplayType == INTRO...
     ld   a, [wGameplayType]
     cp   GAMEPLAY_INTRO
-    jr   nz, RenderWarpTransition
-    ; GameplayType == INTRO
+    jr   nz, .fi
+    ; ... and GameplaySubtype > INTRO_BEACH...
     ld   a, [wGameplaySubtype]
     cp   $08
-    jr   c, RenderWarpTransition
-    ; GameplaySubtype > GAMEPLAY_INTRO_BEACH
+    jr   c, .fi
+    ; Position sprites for the title screen (?)
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_5257 ; position sprites for the title screen?
+    call label_5257
+.fi
 
-RenderWarpTransition::
-    ld   a, [wWarpTransition]
+.RenderLoop_TransitionSfx:
+    ; If no transition special effect is active, go to the next step.
+    ld   a, [wTransitionSfx]
     and  a
     jp   z, RenderInteractiveFrame
-    inc  a
-    jr   nz, label_279
 
-label_26E::
+    ; There are two types of transition special effects:
+    ;  - interactive: new gameplay frames are rendered while the effect is active ;
+    ;  - non-interactive: no new frame is rendered while the effect is active.
+
+    ; If TransitionSfx == TRANSITION_SFX_WIND_FISH
+    ; use external code for interactive transitions.
+    inc  a
+    jr   nz, .elsif
+.interactiveTransition
+    ; Apply the transition effect...
     ld   a, $17
     ld   [MBC3SelectBank], a
     call label_48DD
+    ; ... and continue rendering a new frame.
     jp   RenderInteractiveFrame
-
-label_279::
+.elsif
+    ; If TransitionSfx == TRANSITION_SFX_FLOATING,
+    ; use the interactive transition code too.
     inc  a
-    jr   z, label_26E
+    jr   z, .interactiveTransition
+
+    ; Else, render a non-interactive transition effect.
+    ; Select bank $14
     ld   a, $14
     ld   [MBC3SelectBank], a
-    ld   a, [$C180]
+
+    ; Increment frame count for the transition effect
+    ld   a, [wTransitionSfxFrameCount]
     inc  a
-    ld   [$C180], a
+    ld   [wTransitionSfxFrameCount], a
+
+    ; If the frame count has reached $C0 yet, continue the transition.
     cp   $C0
-    jr   nz, label_2A0
-    ld   a, [wWarpTransition]
-    cp   $02
-    jr   nz, label_296
+    jr   nz, .renderTransitionSfx
+
+    ; The transition is finished.
+    ; If the transition was MANBO_IN...
+    ld   a, [wTransitionSfx]
+    cp   TRANSITION_SFX_MANBO_IN
+    jr   nz, .finishTransition
+    ; ... teleport to Manbo Pond.
     call label_4E51
 
-label_296::
+.finishTransition
+    ; Reset transition state
     xor  a
-    ld   [wWarpTransition], a
+    ld   [wTransitionSfx], a
     ld   [$C3CA], a
+    ; Resume rendering of interactive frames
     jp   RenderInteractiveFrame
 
-label_2A0::
+.renderTransitionSfx
     push af
     cp   $60
     jr   c, label_2B7
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B4
+
     ld   a, $20
     ld   [MBC3SelectBank], a
     call label_6CA7
+
     jr   label_2B7
 
 label_2B4::
@@ -284,13 +311,17 @@ label_2B7::
     ld   [MBC3SelectBank], a
     pop  af
     call label_5038
+    ; Play some audio
     call PlayAudioStep
+    ; Apply pending palettes
     ld   a, [wBGPalette]
     ld   [rBGP], a
     ld   a, [wOBJ0Palette]
     ld   [rOBP0], a
     ld   a, [wOBJ1Palette]
     ld   [rOBP1], a
+    ; This is a non-interactive transition: no new gameplay frame is rendered.
+    ; Wait for the next V-Blank.
     jp   WaitForNextFrame
 
 RenderInteractiveFrame::
@@ -4023,8 +4054,8 @@ label_19DA::
     ld   [$D474], a
     ld   a, $30
     ld   [$C180], a
-    ld   a, $03
-    ld   [wWarpTransition], a
+    ld   a, TRANSITION_SFX_MANBO_OUT
+    ld   [wTransitionSfx], a
     ld   a, $04
     ld   [wTransitionSequenceCounter], a
     jr   label_1A06

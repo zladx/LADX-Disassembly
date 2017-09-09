@@ -224,6 +224,14 @@ wEntitiesFrameCounterTable:: ; C2E0
 wEntitiesUnknowTableF:: ; C2F0
   ds $10
 
+; Unlabeled
+wC300 equ $C300 ; C300
+  ds $200
+
+wAlternateBackgroundEnabled:: ; C500
+  ; If enabled, alternate between two Background position every frame.
+  ds 1
+
 section "WRAM Bank1", wramx, bank[1]
 
 ; Unlabeled

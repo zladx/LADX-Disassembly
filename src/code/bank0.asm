@@ -128,9 +128,8 @@ RenderLoop::
     ldh  [hDidRenderFrame], a
 
 .RenderLoop_setScrollY:
-    ; Special case for $C500 == 1 (alternate background position)
-    ; If $C500 != 0...
-    ld   a, [$C500]
+    ; If wAlternateBackgroundEnabled == 1...
+    ld   a, [wAlternateBackgroundEnabled]
     and  a
     jr   z, .noSpecialCase
     ; and GameplayType == OVERWORLD...

@@ -151,11 +151,11 @@ RenderLoop::
     ld   [rSCY], a
 
 .RenderLoop_setScrollX:
-    ; Add the base offset and the screen shake offset (plus $C1BF)
+    ; Add the base offset, the screen shake offset and an additionnal offset
     ldh  a, [hBaseScrollX]
     ld   hl, wScreenShakeHorizontal
     add  a, [hl]
-    ld   hl, $C1BF
+    ld   hl, wScrollXOffset
     add  a, [hl]
     ld   [rSCX], a ; scrollX
 

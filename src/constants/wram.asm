@@ -132,7 +132,13 @@ wDialogState:: ; C19F
   ds 1
 
 wC1A4 equ $C1A0
-  ds $60
+  ds $1F
+
+wScrollXOffset:: ; C1BF
+  ds 1
+
+wC1C0 equ $C1C0 ; C1C0
+  ds $40
 
 wEntitiesPosXTable:: ; C200
   ; X position of visible entities

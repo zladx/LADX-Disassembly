@@ -5460,19 +5460,26 @@ label_22FE::
     ld   [MBC3SelectBank], a
     jp   $5570
 
+; Unknown procedure
 label_2321::
+    ; If DialogState == 0, don't do anything.
     ld   a, [wDialogState]
     and  a
     ret  z
+
+    ; a = (GameplayType == CREDITS ? $07 : $7E)
     ld   e, a
+.if
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
+.then
     ld   a, $7E
-    jr   nz, label_2332
+    jr   nz, .fi
+.else
     ld   a, $7F
-
-label_2332::
+.fi
     ldh  [$FFE8], a
+
     ld   a, [$C164]
     and  a
     ld   a, [$C170]
@@ -5548,7 +5555,7 @@ label_2385::
     ld   [$C112], a
     ld   a, $0F
     ld   [$C5AB], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     cp   $48
     rra
     and  $80
@@ -5691,36 +5698,50 @@ label_2475::
     ld   [MBC3SelectBank], a
     jp   $4A2C
 
-label_2485::
+IncrementDialogState::
     ld   hl, wDialogState
     inc  [hl]
     ret
+
+; Unused code
+ConditionallyUpdateDialogState::
+    ; If $C1AB == 0...
     ld   a, [$C1AB]
     and  a
-    jr   nz, label_24AE
+    jr   nz, UpdateDialogState_return
+    ; ... and ($FFCC & 0x30) != 0...
     ldh  a, [$FFCC]
     and  $30
-    jr   z, label_24AE
+    jr   z, UpdateDialogState_return
+    ; ... update dialog state
 
-label_2496::
+UpdateDialogState::
+    ; Clear $C16F
     xor  a
     ld   [$C16F], a
+
+.if
+    ; If GameplayType == PHOTO_ALBUM
     ld   a, [wGameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
-    jr   nz, label_24A4
+    jr   nz, .else
+.then
+    ; A = 0
     xor  a
-    jr   label_24AB
-
-label_24A4::
+    jr   .fi
+.else
+    ; A = (wDialogState & $F0) | $E
     ld   a, [wDialogState]
     and  $F0
     or   $0E
-
-label_24AB::
+.fi
+    ; Set dialog state
     ld   [wDialogState], a
 
-label_24AE::
+UpdateDialogState_return:
     ret
+
+label_24AF::
     ld   a, $1C
     ld   [MBC3SelectBank], a
     jp   $4AA8
@@ -5735,7 +5756,7 @@ label_24AE::
 
 label_24C7::
     call label_49F1
-    jp   label_2485
+    jp   IncrementDialogState
     ld   a, $1C
     ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
@@ -5790,7 +5811,7 @@ label_250D::
     ld   a, [hl]
     pop  hl
     ldi  [hl], a
-    call label_2485
+    call IncrementDialogState
     jp   label_2529
 
 label_2529::
@@ -6019,7 +6040,7 @@ label_267E::
     ret
 
 label_268E::
-    jp   label_2485
+    jp   IncrementDialogState
 
 data_2691::
     db $22, $42
@@ -6090,7 +6111,7 @@ label_26EB::
     ld   [$D604], a
     xor  a
     ld   [$D605], a
-    call label_2485
+    call IncrementDialogState
 
 label_2714::
     ret
@@ -6160,7 +6181,7 @@ label_275D::
     jr   nz, label_2739
     ld   a, $08  ; Pause the scrolling for 8 frames
     ld   [wDialogScrollDelay], a
-    jp   label_2485
+    jp   IncrementDialogState
     ret
 
 data_2769::
@@ -6190,7 +6211,7 @@ label_2777::
 label_278B::
     ld   a, $02
     ld   [$C177], a
-    jp   label_2496
+    jp   UpdateDialogState
     ldh  a, [$FFCC]
     bit  4, a
     jp   nz, label_27B7
@@ -6213,7 +6234,7 @@ label_27AA::
     jp   $7DCC
 
 label_27B7::
-    call label_2496
+    call UpdateDialogState
     ret
 
 label_27BB::

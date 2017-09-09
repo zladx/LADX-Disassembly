@@ -145,7 +145,7 @@ RenderLoop::
     jr   .setScrollY
 .noSpecialCase
 
-    ; Common case: add the base offset and the screen shake offset
+    ; Default case: add the base offset and the screen shake offset
     ld   hl, wScreenShakeVertical
     ldh  a, [hBaseScrollY]
     add  a, [hl]
@@ -162,16 +162,21 @@ RenderLoop::
     ld   [rSCX], a ; scrollX
 
 .RenderLoop_loadNewMap:
-    ; If the LCD screen is off, load new map data
+    ; If wTileMapToLoad != 0 || wBGMapToLoad != 0,
+    ; load new map data and return.
     ld   a, [wTileMapToLoad]
-    and  a   ; if wTileMapToLoad != 0, LoadNewMap
+    and  a
     jr   nz, .loadNewMap
-    ld   a, [wBGMapToLoad] ; tilemap to load?
-    cp   $00 ; if wBGMapToLoad != 0, LoadNewMap
+    ld   a, [wBGMapToLoad]
+    cp   $00
     jr   z, .noNewMap
 
 .loadNewMap
-    ; Control audio during the transition
+    ; Play audio samples before loading the map when:
+    ; - in a menu (GameplayType <= GAMEPLAY_FILE_SAVE)
+    ; - on the Overworld in default mode (GAMEPLAY_OVERWORLD_DEFAULT)
+    ; - on the beach with Marin (GAMEPLAY_MARIN_BEACH)
+    ; All other combinations skip this step.
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MARIN_BEACH
     jr   z, .playAudioStep
@@ -179,19 +184,19 @@ RenderLoop::
     jr   c, .playAudioStep
     cp   GAMEPLAY_OVERWORLD
     jr   nz, .skipAudio
-    ; GameplayType == OVERWORLD
     ld   a, [wGameplaySubtype]
-    cp   $07
+    cp   GAMEPLAY_OVERWORLD_DEFAULT
     jr   nc, .skipAudio
-
 .playAudioStep
     call PlayAudioStep
     call PlayAudioStep
-
 .skipAudio
+
+    ; Load new map tiles and background
     di
     call LoadMapData
     ei
+    ; Play more audio
     call PlayAudioStep
     call PlayAudioStep
     ; And we're done for this frame.

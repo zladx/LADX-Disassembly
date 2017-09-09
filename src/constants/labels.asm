@@ -1,6 +1,7 @@
 label_3A8 equ $3A8
 label_3AD equ $3AD
 label_400 equ $400
+label_4000 equ $4000
 label_4003 equ $4003
 label_4006 equ $4006
 label_4029 equ $4029

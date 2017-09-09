@@ -192,6 +192,7 @@ RenderLoop::
     ei
     call PlayAudioStep
     call PlayAudioStep
+    ; And we're done for this frame.
     jp   WaitForNextFrame
 .noNewMap
 
@@ -2334,9 +2335,9 @@ MinimapHandler::
     jp   returnFromGameplayHandler
 
 FileSaveHandler::
-    ld   a, $01
+    ld   a, BANK(FileSaveHandlerEntryPoint)
     call SwitchBank
-    jp   label_4000
+    jp   FileSaveHandlerEntryPoint
 
 IntroHandler::
     jp   IntroHandlerEntryPoint

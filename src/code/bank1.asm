@@ -104,7 +104,7 @@ FileSaveDelay1::
 
 FileSaveDelay2::
     ld   a, $0D
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
@@ -450,7 +450,7 @@ label_4259::
     ld   a, $E4
     ld   [wBGPalette], a
     ld   a, $0A
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
@@ -620,7 +620,7 @@ label_4395::
     and  a
     jr   z, label_43A7
     ld   a, $0B
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ret
 
 label_43A7::
@@ -696,12 +696,12 @@ label_43E9::
 label_440B::
     call label_5511
     ld   a, $07
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ret
 
 label_4414::
     ld   a, $02
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     call GetRandomByte
     ld   hl, hFrameCounter
     or   [hl]
@@ -711,7 +711,7 @@ label_4414::
 
 label_4425::
     ld   a, $09
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ret
 
 label_442B::
@@ -1324,7 +1324,7 @@ label_48C2::
     ld   a, $04
 
 label_48CC::
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   a, $E4
     ld   [wBGPalette], a
     ld   a, $1C
@@ -1547,7 +1547,7 @@ label_4A07::
     ld   [$DBAA], a
     ret
     ld   a, $05
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   hl, $D601
     ld   a, $98
     ldi  [hl], a
@@ -2094,7 +2094,7 @@ label_4D53::
     ld   [$D000], a
     jp   IncrementGameplaySubtypeAndReturn
     ld   a, $06
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     jp   IncrementGameplaySubtypeAndReturn
 
 label_4D6D::
@@ -2463,7 +2463,7 @@ label_4F45::
     ld   [$D002], a
     jp   IncrementGameplaySubtypeAndReturn
     ld   a, $0C
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     jp   IncrementGameplaySubtypeAndReturn
     ld   bc, $98C4
     ld   de, $DB80
@@ -3061,7 +3061,7 @@ label_5353::
 
 label_538E::
     ld   a, $02
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ret
 
 label_5394::
@@ -3690,7 +3690,7 @@ label_56D9::
     ld   [rLCDC], a
     call label_5888
     ld   a, $08
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
 
 label_56F3::
     ret
@@ -5306,7 +5306,7 @@ label_6281::
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
     ld   a, $13
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
@@ -6112,7 +6112,7 @@ label_6868::
 
 label_6885::
     ld   a, e
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
@@ -6474,7 +6474,7 @@ label_6B51::
 
 label_6B52::
     ld   a, $15
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   a, $FF
     ld   [wWindowY], a
     xor  a
@@ -6859,7 +6859,7 @@ IntroCheckJoypad::
     ld   a, 40  ; Ignore joypad for the next 40 frames
     ldh  [hButtonsInactiveDelay], a
     ld   a, $11
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ldh  a, [hIsGBC]
     and  a
     jr   nz, .isGBC
@@ -7003,7 +7003,7 @@ label_6F42::
     ld   a, $0E
 
 label_6F44::
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   a, $1C
     ld   [wOBJ0Palette], a
     ld   a, $E0
@@ -7125,7 +7125,7 @@ label_7014::
     ld   a, GAMEPLAY_INTRO_LINK_FACE
     ld   [wGameplaySubtype], a
     ld   a, $0F
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   a, $01
     ld   [rIE], a
     xor  a
@@ -7253,7 +7253,7 @@ IntroLinkFaceHandler::
     ld   a, $0E
 
 .continue3
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     call label_7108
     ld   a, $03
     ld   [rIE], a ; Enable interrupts on VBlank and LCDStat
@@ -7291,7 +7291,7 @@ label_7108::
 
 label_711A::
     ld   a, $10
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   a, $01
     ld   [$DDD5], a
     call IncrementGameplaySubtype

@@ -166,8 +166,8 @@ RenderLoop::
     ld   a, [wTileMapToLoad]
     and  a   ; if wTileMapToLoad != 0, LoadNewMap
     jr   nz, .loadNewMap
-    ld   a, [$D6FF] ; tilemap to load?
-    cp   $00 ; if $D6FF != 0, LoadNewMap
+    ld   a, [wBGMapToLoad] ; tilemap to load?
+    cp   $00 ; if wBGMapToLoad != 0, LoadNewMap
     jr   z, .noNewMap
 
 .loadNewMap
@@ -595,6 +595,7 @@ LoadMapData::
     ld   [MBC3SelectBank], a
     call label_5C2C
 
+    ; Manipulate wBGMapToLoad (calls 20:4577)
     ld   a, $20
     ld   [MBC3SelectBank], a
     call label_4577
@@ -609,7 +610,7 @@ LoadMapData::
 
 .ClearValuesAndReturn:
     xor  a
-    ld   [$D6FF], a
+    ld   [wBGMapToLoad], a
     ld   [wTileMapToLoad], a
     ld   a, [wLCDControl]
     ld   [rLCDC], a
@@ -5518,7 +5519,7 @@ label_2345::
     inc  h
     or   a
     inc  h
-    call label_2924
+    call $2924
     dec  h
     sub  a, l
     ld   h, $14
@@ -6499,8 +6500,6 @@ label_291D::
     inc  de
     ld   a, [de]
     inc  de
-
-label_2924::
     call label_2941
 
 label_2927::
@@ -6509,6 +6508,7 @@ label_2927::
     jr   nz, label_293C
 
 label_292D::
+    ; If de != 0, jump to label_291D
     ld   a, [de]
     and  a
     jr   nz, label_291D

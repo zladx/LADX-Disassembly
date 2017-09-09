@@ -374,12 +374,14 @@ wEnginePaused:: ; D6FC
 wLCDControl:: ; D6FD
   ds 1
 
-; Unlabeled
-wTileMapToLoad::
+wTileMapToLoad:: ; D6FE
   ds 1
 
-wD6FF equ $D6FF
-  ds $12
+wBGMapToLoad:: ; D6FF
+  ds 1
+
+wD700 equ $D700
+  ds $11
 
 wTileMap:: ; D711
   ds 1

@@ -121,7 +121,9 @@ Init::
     ; Start rendering
     jp   WaitForNextFrame
 
-; The main render loop.
+;
+; Main render loop.
+;
 RenderLoop::
     ; Set DidRenderFrame
     ld   a, 1
@@ -161,8 +163,8 @@ RenderLoop::
 
 .RenderLoop_loadNewMap:
     ; If the LCD screen is off, load new map data
-    ld   a, [$D6FE]
-    and  a   ; if $D6FE != 0, LoadNewMap
+    ld   a, [wTileMapToLoad]
+    and  a   ; if wTileMapToLoad != 0, LoadNewMap
     jr   nz, .loadNewMap
     ld   a, [$D6FF] ; tilemap to load?
     cp   $00 ; if $D6FF != 0, LoadNewMap
@@ -540,32 +542,34 @@ InterruptSerial::
     pop  af
     reti
 
-; Load tileset, background, sprites while the LCD screen is off
+; Load tileset, background, sprites while the LCD screen is off.
+; Inputs:
+;  - wTileMapToLoad: number of the map to load
 LoadMapData::
-    ld   a, [$D6FE]
+    ld   a, [wTileMapToLoad]
     and  a
-    jr   z, .commonCase
+    jr   z, .LoadMapZero
 
-    ;
-    ; $D6FE != 0: special case
-    ;
+    ; Copy map number to the palette-loading variable
     ld   [$DDD2], a
-    cp   $23 ; if $D6FE == $23
-    jr   z, .skipLCDOff
+
+    ; if wTileMapToLoad != $23, turn of LCD
+    cp   $23
+    jr   z, .LCDOffEnd
     push af
     call LCDOff
     pop  af
+.LCDOffEnd
 
-.skipLCDOff
-    call .executeMapLoadFunction
-    jr   .clearValuesAndReturn
+    call .ExecuteMapLoadHandler
+    jr   .ClearValuesAndReturn
 
-.executeMapLoadFunction
+.ExecuteMapLoadHandler:
     ld   e, a
     ld   a, $20
     ld   [MBC3SelectBank], a
     ; label_4657
-    ;   input:  $D6FE in e
+    ;   input:  wTileMapToLoad in e
     ;   output: address to jump to in hl
     ; Table address: 20:4664
     ; Table values:
@@ -579,31 +583,34 @@ LoadMapData::
     ;   08  $28F0
     ;   09  $2E73
     ;   ...
+    ;   10  LoadIntroSequenceTiles
     call label_4657
-    jp   hl
+    jp   hl ; tail-call ; will return when done.
 
-    ;
-    ; $D6FE == 0: common case
-    ;
-.commonCase
+    ; Special case for loading map n° 0
+.LoadMapZero:
     call LCDOff
+    ; Do some GBC-only stuff (calls 24:5C2C)
     ld   a, $24
     ld   [MBC3SelectBank], a
     call label_5C2C
+
     ld   a, $20
     ld   [MBC3SelectBank], a
     call label_4577
+
     ld   a, $08
     ld   [MBC3SelectBank], a
     call label_292D
+
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-.clearValuesAndReturn
+.ClearValuesAndReturn:
     xor  a
     ld   [$D6FF], a
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     ld   a, [wLCDControl]
     ld   [rLCDC], a
     ret
@@ -704,7 +711,7 @@ vBlankContinue::
     ;
     ; Standard gameplay (i.e. not Photos) handling
     ;
-    ld   a, [$D6FE]
+    ld   a, [wTileMapToLoad]
     and  a
     jr   nz, WaitForVBlankAndReturn
 
@@ -7068,22 +7075,35 @@ label_2D50::
     ld   bc, $0100
     call CopyData
     ret
+
+; Load Map n°10 (introduction sequence)
+LoadIntroSequenceTiles::
+    ; Copy $80 bytes of map tiles from 01:6D4A to Tiles Memory
+    ; (rain graphics)
     ld   a, $01
     call SwitchBank
     ld   hl, $6D4A
-    ld   de, $8700
+    ld   de, vTiles0 + $700
     ld   bc, $0080
     call CopyData
+
+    ; Copy $600 bytes of map tiles from 10:5400 to Tiles Memory
+    ; (some intro sequence graphics)
     ld   a, $10
     call SwitchAdjustedBank
     ld   hl, $5400
-    ld   de, $8000
+    ld   de, vTiles0
     ld   bc, $0600
     call CopyData
+
+    ; Copy $1000 bytes of map tiles from 10:4000 to Tiles Memory
+    ; (intro sequence graphics)
     ld   hl, $4000
-    ld   de, $8800
+    ld   de, vTiles1
     ld   bc, $1000
-    jp   CopyData
+    jp   CopyData ; tail-call ; will return afterwards.
+
+label_2DA7::
     ld   a, $0F
     call SwitchAdjustedBank
     ld   hl, $4900

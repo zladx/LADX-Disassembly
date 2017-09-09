@@ -90,14 +90,14 @@ FileSaveMapFadeOut::
     ld   [$C1B9], a
     ld   [$C1B5], a
     ld   a, $0F
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
 
 label_4072::
     ret
 
 FileSaveDelay1::
     ld   a, $0D
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     xor  a
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -381,7 +381,7 @@ label_420D::
     ld   a, $01
     ldh  [$FF9C], a
     ld   a, $0F
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     ld   a, $FF
     ldh  [hLinkAnimationState], a
     ld   a, [$DB57]
@@ -443,7 +443,7 @@ label_4259::
     call label_90F
     ret
     ld   a, $0D
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     ld   hl, $FF9C
     inc  [hl]
     ret
@@ -788,7 +788,7 @@ label_44A6::
     ld   a, $07
 
 label_44B0::
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     ret
 
 label_44B4::
@@ -811,7 +811,7 @@ label_44C9::
     ldh  [hNeedsUpdatingBGTiles], a
     ldh  [hNeedsUpdatingEnnemiesTiles], a
     ld   a, $09
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
 
 IncrementGameplaySubtype::
 IncrementGameplaySubtypeAndReturn::
@@ -821,7 +821,7 @@ IncrementGameplaySubtypeAndReturn::
 
 label_44DB::
     ld   a, $01
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     ld   a, [$D6FA]
     and  a
     jr   z, label_44F5
@@ -1180,12 +1180,12 @@ label_47CD::
     inc  b
     ld   c, d
     ld   a, $04
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     xor  a
     ld   [$D000], a
     jp   IncrementGameplaySubtypeAndReturn
     ld   a, $08
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     jp   IncrementGameplaySubtypeAndReturn
     call label_4DA6
     call label_4DBE
@@ -1495,7 +1495,7 @@ label_49C3::
     ld   a, $01
     call label_8FA
     ld   a, $05
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     jp   IncrementGameplaySubtypeAndReturn
 
 label_49DE::
@@ -1540,7 +1540,7 @@ label_4A07::
     ld   c, d
     call IncrementGameplaySubtype
     ld   a, $08
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     xor  a
     ld   [$DBA8], a
     ld   [$DBA9], a
@@ -2088,7 +2088,7 @@ label_4CDA::
 label_4D53::
     jp   IncrementGameplaySubtypeAndReturn
     ld   a, $08
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     xor  a
     ld   [$DBA6], a
     ld   [$D000], a
@@ -2455,7 +2455,7 @@ label_4F45::
 
 
     ld   a, $08
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     xor  a
     ld   [$DBA6], a
     ld   [$D000], a
@@ -3695,11 +3695,11 @@ label_56D9::
 label_56F3::
     ret
     ld   a, $0B
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     call IncrementGameplaySubtype
     ret
     ld   a, $0E
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     ld   a, $01
     ld   [$DDD5], a
     call IncrementGameplaySubtype
@@ -3926,7 +3926,7 @@ label_5854::
     ld   a, $07
 
 label_5885::
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
 
 label_5888::
     ld   hl, wMapSlideTransitionState
@@ -5296,12 +5296,12 @@ label_6260::
     call label_5888
     call label_64FF
     ld   a, $0F
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
 
 label_6281::
     ret
     ld   a, $13
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     xor  a
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -6080,7 +6080,7 @@ label_6849::
     xor  a
     ld   [$C1BF], a
     ld   a, $0F
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
 
 label_6855::
     ret
@@ -6096,7 +6096,7 @@ label_6855::
 
 label_6868::
     ld   a, e
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     xor  a
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -6467,7 +6467,7 @@ label_6B2B::
     xor  a
     ld   [$C1BF], a
     ld   a, $14
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
 
 label_6B51::
     ret
@@ -6969,7 +6969,7 @@ label_6EF8::
     ld   a, $1A
     call label_27C3
     ld   a, $02
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     xor  a
     ldh  [hFrameCounter], a
     ld   a, $A2
@@ -6986,7 +6986,7 @@ label_6EF8::
 
 label_6F2A::
     ld   a, $10
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     xor  a
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -7098,7 +7098,7 @@ IntroShipOnSeaHandler::
     ld   [$D00F], a
     call label_7D4E
     ld   a, $11
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     ld   a, $FF
     ld   [wIntroTimer], a
     xor  a
@@ -7786,7 +7786,7 @@ label_7439::
 label_7447::
     ret
     ld   a, $11
-    ld   [$D6FE], a
+    ld   [wTileMapToLoad], a
     ld   a, $0B
     ld   [wGameplaySubtype], a
     ld   a, $C9

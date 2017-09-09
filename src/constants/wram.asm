@@ -375,8 +375,11 @@ wLCDControl:: ; D6FD
   ds 1
 
 ; Unlabeled
-wD6FE equ $D6FE
-  ds $13
+wTileMapToLoad::
+  ds 1
+
+wD6FF equ $D6FF
+  ds $12
 
 wTileMap:: ; D711
   ds 1

@@ -576,7 +576,7 @@ LoadMapData::
     ;   09  $2E73
     ;   ...
     call label_4657
-    jp   [hl]
+    jp   hl
 
     ;
     ; $D6FE == 0: common case
@@ -1797,7 +1797,7 @@ label_BE7::
     ld   h, a
     ld   a, [$DE03]
     ld   l, a
-    jp   [hl]
+    jp   hl
     ld   a, $02
     ld   [MBC3SelectBank], a
     call label_1A50
@@ -6374,7 +6374,7 @@ TableJump::
     ld   d, [hl] ; Load the high byte of the target address
     ld   l, e
     ld   h, d
-    jp   [hl]    ; Jump to the target address
+    jp   hl    ; Jump to the target address
 
 ; Turn off LCD at next vertical blanking
 LCDOff::
@@ -9025,7 +9025,7 @@ label_3A8D::
     ld   h, d
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    jp   [hl]
+    jp   hl
 
 data_3AAA::
     db   8, 5, 8, 5, 8, $A, 8, $A, 8, $A, 8, $A, 8, $10, 4, $A

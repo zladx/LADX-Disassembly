@@ -1133,7 +1133,7 @@ label_47CD::
     ld   a, [wGameplaySubtype]
     JP_TABLE
     ; Code below is actually data for the jump table
-    jp   [hl]
+    jp   hl
     ld   b, a
     push af
     ld   b, a
@@ -3096,7 +3096,7 @@ label_53E8::
     rst  $38
     adc  a, d
     ldd  [hl], a
-    jp   [hl]
+    jp   hl
     rst  $38
     adc  a, d
     ld   l, $E9
@@ -3286,7 +3286,7 @@ label_54A0::
     nop
     rst  $38
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     rst  $38
     nop
     db   $E8 ; add  sp, d
@@ -3294,7 +3294,7 @@ label_54A0::
     db   $E8 ; add  sp, d
     rst  $38
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     rst  $38
     nop
     db   $E8 ; add  sp, d
@@ -3324,7 +3324,7 @@ label_54A0::
     db   $EC ; Undefined instruction
     db   $E8 ; add  sp, d
     db   $EC ; Undefined instruction
-    jp   [hl]
+    jp   hl
     rst  $38
     nop
     nop

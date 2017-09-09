@@ -689,7 +689,7 @@ InterruptVBlank::
 vBlankContinue::
     ld   a, [wGameplayType]
     cp   GAMEPLAY_PHOTO_DIZZY_LINK  ; If GameplayType < Photo Picture
-    jr   c, .continue3
+    jr   c, .gameplayNotAPhoto
     ; GameplayType is one of the Pictures
     ld   a, [wGameplaySubtype]
     cp   $06
@@ -698,46 +698,64 @@ vBlankContinue::
     ld   [MBC3SelectBank], a
     call label_785A
     jr   label_52B
+.gameplayNotAPhoto
 
-.continue3
+    ;
+    ; Standard gameplay (i.e. not Photos) handling
+    ;
     ld   a, [$D6FE]
     and  a
     jr   nz, WaitForVBlankAndReturn
+
+    ; If NeedsUpdatingBGTiles or NeedsUpdatingEnnemiesTiles or NeedsUpdatingNPCTiles…
     ldh  a, [hNeedsUpdatingBGTiles]
     ldh  [$FFE8], a
     ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
     ld   hl, wNeedsUpdatingNPCTiles
     or   [hl]
-    jr   z, label_509
-    call label_5BC ; Copy tiles?
+    jr   z, .noTilesToUpdate
+
+    ; Load tiles (?)
+    call label_5BC
+
+    ; If $FFE8 >= 8, skip drawing of Link sprite
     ldh  a, [$FFE8]
     cp   $08
-    jr   nc, label_504
-
-label_501::
+    jr   nc, .linkSpriteDone
+.drawLinkSprite
     call DrawLinkSprite
+.linkSpriteDone
 
-label_504::
+    ; Copy tiles to OAM memory
     call hDMARoutine
+    ; And we're done.
     jr   WaitForVBlankAndReturn
 
-label_509::
+.noTilesToUpdate
+    ; If $FFBB == 0, move on
     ldh  a, [$FFBB]
     and  a
-    jr   z, label_521
+    jr   z, .animateTiles
+
+    ; Decrement $FFBB
     dec  a
     ldh  [$FFBB], a
+
+    ; Read [data_046A + A]
     ld   e, a
     ld   d, $00
     ld   hl, data_046A
     add  hl, de
     ld   a, [hl]
+    ; Store this value to $D6F8
     ld   [$D6F8], a
+    ; Switch Link's sprite ?
     call label_1ED7
-    jr   label_501
+    jr   .drawLinkSprite
 
-label_521::
+.animateTiles
+    ; If GameplayType != PHOTO_ALBUM, animate tiles
     ld   a, [wGameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
     jr   z, label_52B

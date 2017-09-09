@@ -303,7 +303,7 @@ RenderInteractiveFrame::
     ldh  a, [hNeedsUpdatingBGTiles]
     ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
-    ld   hl, wneedsUpdatingNPCTiles
+    ld   hl, wNeedsUpdatingNPCTiles
     or   [hl]
     ; skip further rendering: the vblank interrupt will load the required data
     jr   nz, WaitForNextFrame
@@ -707,7 +707,7 @@ vBlankContinue::
     ldh  [$FFE8], a
     ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
-    ld   hl, wneedsUpdatingNPCTiles
+    ld   hl, wNeedsUpdatingNPCTiles
     or   [hl]
     jr   z, label_509
     call label_5BC ; Copy tiles?
@@ -959,7 +959,7 @@ label_69E::
     ld   [MBC3SelectBank], a
     call label_475A
     xor  a
-    ld   [wneedsUpdatingNPCTiles], a
+    ld   [wNeedsUpdatingNPCTiles], a
     ld   [$C10F], a
     ld   hl, $9000
     ld   bc, $0000
@@ -1105,7 +1105,7 @@ label_764::
     cp   $04
     jr   nz, label_7AF
     xor  a
-    ld   [wneedsUpdatingNPCTiles], a
+    ld   [wNeedsUpdatingNPCTiles], a
     ld   [$C10F], a
 
 label_7AF::
@@ -2192,7 +2192,7 @@ label_E03::
     ld   a, d
     ld   [$C10D], a
     ld   a, $01
-    ld   [wneedsUpdatingNPCTiles], a
+    ld   [wNeedsUpdatingNPCTiles], a
     jr   label_E29
 
 label_E1E::

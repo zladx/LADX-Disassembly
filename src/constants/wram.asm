@@ -27,7 +27,7 @@ wC108 equ $C108
 
   ds 7
 
-wneedsUpdatingNPCTiles:: ; C10E
+wNeedsUpdatingNPCTiles:: ; C10E
   ds 1
 
 ; Unlabeled

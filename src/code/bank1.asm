@@ -3,57 +3,75 @@
 
 data_380   equ $0380
 
-label_4000::
+; Code for save file screen.
+; Displays the "Return to Game / Save and Quit" screen.
+FileSaveHandlerEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-    ld   [de], a
-    ld   b, b
-    ld   b, d
-    ld   b, b
-    ld   [hl], e
-    ld   b, b
-    ld   a, a
-    ld   b, b
-    sbc  a, h
-    ld   b, b
-    xor  d
-    ld   b, b
-    dec  h
-    ld   e, b
+._00 dw FileSaveInitial
+._01 dw FileSaveMapFadeOut
+._02 dw FileSaveDelay1
+._03 dw FileSaveDelay2
+._04 dw FileSaveVisible
+._05 dw FileSaveInteractive
+._06 dw FileSaveFadeOut
+
+FileSaveInitial::
     call IncrementGameplaySubtype
+
+    ; If running on grayscale GB, jump directly to the
+    ; next state (map fade-out).
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_4042
-    ld   hl, $DC10
-    ld   c, $80
+    jr   z, FileSaveMapFadeOut
+
+    ; Running on GBC: copy data from WRAM0 to WRAM3
+    ld   hl, $DC10 ; start address
+    ld   c, $80    ; bytes count
+
+    ; Disable interrupts
     di
+
+    ; Select WRAM Bank 3
     ld   a, $03
     ld   [rSVBK], a
+
+    ; If $D000 == 0...
     ld   a, [$D000]
     and  a
-    jr   nz, label_403E
+    jr   nz, .done
 
-label_402A::
+    ; Copy $80 bytes from 00:DC10 to 03:DC10
+.loop
+    ; Switch to WRAM bank 0
     xor  a
     ld   [rSVBK], a
+    ; Read a byte
     ld   b, [hl]
+    ; Switch to WRAM bank 3
     ld   a, $03
     ld   [rSVBK], a
+    ; Write a byte
     ld   [hl], b
+    ; Increment the pointer, and loop until done.
     inc  hl
     dec  c
     ld   a, c
     and  a
-    jr   nz, label_402A
+    jr   nz, .loop
+
+    ; Set $D000 to 1
     ld   a, $01
     ld   [$D000], a
 
-label_403E::
+.done
+    ; Switch back to WRAM bank 0
     xor  a
     ld   [rSVBK], a
+    ; Enable interrupts
     ei
 
-label_4042::
+FileSaveMapFadeOut::
     call DrawLinkSprite
     call label_EFC
     call label_1A22
@@ -76,11 +94,15 @@ label_4042::
 
 label_4072::
     ret
+
+FileSaveDelay1::
     ld   a, $0D
     ld   [$D6FE], a
     xor  a
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
+
+FileSaveDelay2::
     ld   a, $0D
     ld   [$D6FF], a
     ld   a, $FF
@@ -93,14 +115,17 @@ label_4072::
     ld   a, $01
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
+
+FileSaveVisible::
     call label_1A39
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_40A9
+    jr   nz, .return
     call IncrementGameplaySubtype
-
-label_40A9::
+.return
     ret
+
+FileSaveInteractive::
     call label_412A
     ldh  a, [$FFCC]
     and  $B0
@@ -116,13 +141,15 @@ label_40A9::
     ld   [$C16C], a
     ld   a, [$DBA5]
     and  a
-    jr   z, label_40D5
+    jr   z, .done
     xor  a
     ld   [$C50A], a
     ld   [$C116], a
-
-label_40D5::
+.done
     ret
+
+; Unused code?
+label_40D6::
     xor  a
     ld   [wOBJ0Palette], a
     ld   [$DB99], a
@@ -3843,7 +3870,7 @@ label_5818::
     ret
     call label_6A7C
 
-label_5825::
+FileSaveFadeOut::
     call label_1A22
     ld   a, [$C16B]
     cp   $04
@@ -6397,7 +6424,7 @@ label_6AF8::
 ._3 dw label_6B6F
 ._4 dw label_6B81
 ._5 dw label_6B9A
-._6 dw label_5825
+._6 dw FileSaveFadeOut
 
 label_6B0A::
     call IncrementGameplaySubtype

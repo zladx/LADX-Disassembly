@@ -121,36 +121,37 @@ Init::
     ; Start rendering
     jp   WaitForNextFrame
 
+; The main render loop.
 RenderLoop::
     ; Set DidRenderFrame
     ld   a, 1
     ldh  [hDidRenderFrame], a
 
-    ; Special case for $C500 == 1 (alternate background position)
-    ; If $C500 != 0...
-    ld   a, [$C500]
+.RenderLoop_setScrollY:
+    ; If wAlternateBackgroundEnabled == 1...
+    ld   a, [wAlternateBackgroundEnabled]
     and  a
-    jr   z, .applyRegularScrollYOffset
+    jr   z, .noSpecialCase
     ; and GameplayType == OVERWORLD...
     ld   a, [wGameplayType]
     cp   GAMEPLAY_OVERWORLD
-    jr   nz, .applyRegularScrollYOffset
-    ; set scroll Y to $00 or $80 alternatively every other frame.
+    jr   nz, .noSpecialCase
+    ; ... set scroll Y to $00 or $80 alternatively every other frame.
     ldh  a, [hFrameCounter]
     rrca
     and  $80
     jr   .setScrollY
+.noSpecialCase
 
-.applyRegularScrollYOffset
-    ; Compose the base offset and the screen shake offset
+    ; Common case: add the base offset and the screen shake offset
     ld   hl, wScreenShakeVertical
     ldh  a, [hBaseScrollY]
     add  a, [hl]
-
 .setScrollY
-    ld   [rSCY], a ; scrollY
+    ld   [rSCY], a
 
-    ; Set ScrollX
+.RenderLoop_setScrollX:
+    ; Add the base offset and the screen shake offset (plus $C1BF)
     ldh  a, [hBaseScrollX]
     ld   hl, wScreenShakeHorizontal
     add  a, [hl]
@@ -158,15 +159,16 @@ RenderLoop::
     add  a, [hl]
     ld   [rSCX], a ; scrollX
 
+.RenderLoop_loadNewMap:
     ; If the LCD screen is off, load new map data
     ld   a, [$D6FE]
     and  a   ; if $D6FE != 0, LoadNewMap
-    jr   nz, RenderLoopLoadNewMap
+    jr   nz, .loadNewMap
     ld   a, [$D6FF] ; tilemap to load?
     cp   $00 ; if $D6FF != 0, LoadNewMap
-    jr   z, RenderFrame
+    jr   z, .noNewMap
 
-RenderLoopLoadNewMap::
+.loadNewMap
     ; Control audio during the transition
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MARIN_BEACH
@@ -191,8 +193,9 @@ RenderLoopLoadNewMap::
     call PlayAudioStep
     call PlayAudioStep
     jp   WaitForNextFrame
+.noNewMap
 
-RenderFrame::
+.RenderLoop_renderFrame:
     ; Update LCD status flags
     ld   a, [wLCDControl]
     and  $7F
@@ -300,7 +303,7 @@ RenderInteractiveFrame::
     ldh  a, [hNeedsUpdatingBGTiles]
     ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
-    ld   hl, wneedsUpdatingNPCTiles
+    ld   hl, wNeedsUpdatingNPCTiles
     or   [hl]
     ; skip further rendering: the vblank interrupt will load the required data
     jr   nz, WaitForNextFrame
@@ -686,7 +689,7 @@ InterruptVBlank::
 vBlankContinue::
     ld   a, [wGameplayType]
     cp   GAMEPLAY_PHOTO_DIZZY_LINK  ; If GameplayType < Photo Picture
-    jr   c, .continue3
+    jr   c, .gameplayNotAPhoto
     ; GameplayType is one of the Pictures
     ld   a, [wGameplaySubtype]
     cp   $06
@@ -695,46 +698,64 @@ vBlankContinue::
     ld   [MBC3SelectBank], a
     call label_785A
     jr   label_52B
+.gameplayNotAPhoto
 
-.continue3
+    ;
+    ; Standard gameplay (i.e. not Photos) handling
+    ;
     ld   a, [$D6FE]
     and  a
     jr   nz, WaitForVBlankAndReturn
+
+    ; If NeedsUpdatingBGTiles or NeedsUpdatingEnnemiesTiles or NeedsUpdatingNPCTiles…
     ldh  a, [hNeedsUpdatingBGTiles]
     ldh  [$FFE8], a
     ld   hl, hNeedsUpdatingEnnemiesTiles
     or   [hl]
-    ld   hl, wneedsUpdatingNPCTiles
+    ld   hl, wNeedsUpdatingNPCTiles
     or   [hl]
-    jr   z, label_509
-    call label_5BC ; Copy tiles?
+    jr   z, .noTilesToUpdate
+
+    ; Load tiles (?)
+    call label_5BC
+
+    ; If $FFE8 >= 8, skip drawing of Link sprite
     ldh  a, [$FFE8]
     cp   $08
-    jr   nc, label_504
-
-label_501::
+    jr   nc, .linkSpriteDone
+.drawLinkSprite
     call DrawLinkSprite
+.linkSpriteDone
 
-label_504::
+    ; Copy tiles to OAM memory
     call hDMARoutine
+    ; And we're done.
     jr   WaitForVBlankAndReturn
 
-label_509::
+.noTilesToUpdate
+    ; If $FFBB == 0, move on
     ldh  a, [$FFBB]
     and  a
-    jr   z, label_521
+    jr   z, .animateTiles
+
+    ; Decrement $FFBB
     dec  a
     ldh  [$FFBB], a
+
+    ; Read [data_046A + A]
     ld   e, a
     ld   d, $00
     ld   hl, data_046A
     add  hl, de
     ld   a, [hl]
+    ; Store this value to $D6F8
     ld   [$D6F8], a
+    ; Switch Link's sprite ?
     call label_1ED7
-    jr   label_501
+    jr   .drawLinkSprite
 
-label_521::
+.animateTiles
+    ; If GameplayType != PHOTO_ALBUM, animate tiles
     ld   a, [wGameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
     jr   z, label_52B
@@ -956,7 +977,7 @@ label_69E::
     ld   [MBC3SelectBank], a
     call label_475A
     xor  a
-    ld   [wneedsUpdatingNPCTiles], a
+    ld   [wNeedsUpdatingNPCTiles], a
     ld   [$C10F], a
     ld   hl, $9000
     ld   bc, $0000
@@ -1102,7 +1123,7 @@ label_764::
     cp   $04
     jr   nz, label_7AF
     xor  a
-    ld   [wneedsUpdatingNPCTiles], a
+    ld   [wNeedsUpdatingNPCTiles], a
     ld   [$C10F], a
 
 label_7AF::
@@ -1805,20 +1826,35 @@ label_BE7::
 
 label_BFB::
     ld   hl, $C450
-    jr   label_C08
+    jr   IsZero
 
 label_C00::
-    ld   hl, $C2F0
-    jr   label_C08
+    ld   hl, wEntitiesUnknowTableF
+    jr   IsZero
 
-label_C05::
-    ld   hl, $C2E0
+; Test if the frame counter for the given entity is 0
+; Input:
+;  - bc: entity number
+; Output:
+;  - a: the value read
+;  - z: whether the value equal to zero
+IsEntityFrameCounterZero::
+    ld   hl, wEntitiesFrameCounterTable
 
-label_C08::
+; Test if the value at given address is equal to zero
+; Inputs:
+;  - hl: an address
+;  - bc: an offset
+; Output:
+;  - a: the value read
+;  - z: whether the value equal to zero
+IsZero:
     add  hl, bc
     ld   a, [hl]
     and  a
     ret
+
+label_C0C::
     ld   a, $AF
     call label_3B86
     ldh  a, [$FF98]
@@ -2174,7 +2210,7 @@ label_E03::
     ld   a, d
     ld   [$C10D], a
     ld   a, $01
-    ld   [wneedsUpdatingNPCTiles], a
+    ld   [wNeedsUpdatingNPCTiles], a
     jr   label_E29
 
 label_E1E::
@@ -5424,19 +5460,26 @@ label_22FE::
     ld   [MBC3SelectBank], a
     jp   $5570
 
+; Unknown procedure
 label_2321::
+    ; If DialogState == 0, don't do anything.
     ld   a, [wDialogState]
     and  a
     ret  z
+
+    ; a = (GameplayType == CREDITS ? $07 : $7E)
     ld   e, a
+.if
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
+.then
     ld   a, $7E
-    jr   nz, label_2332
+    jr   nz, .fi
+.else
     ld   a, $7F
-
-label_2332::
+.fi
     ldh  [$FFE8], a
+
     ld   a, [$C164]
     and  a
     ld   a, [$C170]
@@ -5512,7 +5555,7 @@ label_2385::
     ld   [$C112], a
     ld   a, $0F
     ld   [$C5AB], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     cp   $48
     rra
     and  $80
@@ -5655,36 +5698,50 @@ label_2475::
     ld   [MBC3SelectBank], a
     jp   $4A2C
 
-label_2485::
+IncrementDialogState::
     ld   hl, wDialogState
     inc  [hl]
     ret
+
+; Unused code
+ConditionallyUpdateDialogState::
+    ; If $C1AB == 0...
     ld   a, [$C1AB]
     and  a
-    jr   nz, label_24AE
+    jr   nz, UpdateDialogState_return
+    ; ... and ($FFCC & 0x30) != 0...
     ldh  a, [$FFCC]
     and  $30
-    jr   z, label_24AE
+    jr   z, UpdateDialogState_return
+    ; ... update dialog state
 
-label_2496::
+UpdateDialogState::
+    ; Clear $C16F
     xor  a
     ld   [$C16F], a
+
+.if
+    ; If GameplayType == PHOTO_ALBUM
     ld   a, [wGameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
-    jr   nz, label_24A4
+    jr   nz, .else
+.then
+    ; A = 0
     xor  a
-    jr   label_24AB
-
-label_24A4::
+    jr   .fi
+.else
+    ; A = (wDialogState & $F0) | $E
     ld   a, [wDialogState]
     and  $F0
     or   $0E
-
-label_24AB::
+.fi
+    ; Set dialog state
     ld   [wDialogState], a
 
-label_24AE::
+UpdateDialogState_return:
     ret
+
+label_24AF::
     ld   a, $1C
     ld   [MBC3SelectBank], a
     jp   $4AA8
@@ -5699,7 +5756,7 @@ label_24AE::
 
 label_24C7::
     call label_49F1
-    jp   label_2485
+    jp   IncrementDialogState
     ld   a, $1C
     ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
@@ -5754,7 +5811,7 @@ label_250D::
     ld   a, [hl]
     pop  hl
     ldi  [hl], a
-    call label_2485
+    call IncrementDialogState
     jp   label_2529
 
 label_2529::
@@ -5983,7 +6040,7 @@ label_267E::
     ret
 
 label_268E::
-    jp   label_2485
+    jp   IncrementDialogState
 
 data_2691::
     db $22, $42
@@ -6054,7 +6111,7 @@ label_26EB::
     ld   [$D604], a
     xor  a
     ld   [$D605], a
-    call label_2485
+    call IncrementDialogState
 
 label_2714::
     ret
@@ -6124,7 +6181,7 @@ label_275D::
     jr   nz, label_2739
     ld   a, $08  ; Pause the scrolling for 8 frames
     ld   [wDialogScrollDelay], a
-    jp   label_2485
+    jp   IncrementDialogState
     ret
 
 data_2769::
@@ -6154,7 +6211,7 @@ label_2777::
 label_278B::
     ld   a, $02
     ld   [$C177], a
-    jp   label_2496
+    jp   UpdateDialogState
     ldh  a, [$FFCC]
     bit  4, a
     jp   nz, label_27B7
@@ -6177,7 +6234,7 @@ label_27AA::
     jp   $7DCC
 
 label_27B7::
-    call label_2496
+    call UpdateDialogState
     ret
 
 label_27BB::
@@ -9071,8 +9128,11 @@ label_3B0C::
     ld   [hl], a
     ret
 
-label_3B12::
-    ld   hl, $C290
+; Increment the "is walking" attribute of the given entity
+; Input:
+;  - bc: the entity number
+IncrementEntityWalkingAttr::
+    ld   hl, wEntitiesWalkingTable
     add  hl, bc
     inc  [hl]
     ret

@@ -27,7 +27,7 @@ wC108 equ $C108
 
   ds 7
 
-wneedsUpdatingNPCTiles:: ; C10E
+wNeedsUpdatingNPCTiles:: ; C10E
   ds 1
 
 ; Unlabeled
@@ -198,6 +198,38 @@ wC220 equ $C220
 
 wEntitiesTypeTable:: ; C280
   ; type of visible entities
+  ds $10
+
+wEntitiesWalkingTable:: ; C290
+  ; Indicate if the designated entity is walking (1) or standing in place (0).
+  ; e.g. Mabe village dog has 1 when jumping around, and 0 when standing in place moving the tail.
+  ds $10
+
+wEntitiesUnknownTableA:: ; C2A0
+  ds $10
+
+wEntitiesUnknownTableB:: ; C2B0
+  ds $10
+
+wEntitiesUnknownTableC:: ; C2C0
+  ds $10
+
+wEntitiesUnknownTableD:: ; C2D0
+  ds $10
+
+wEntitiesFrameCounterTable:: ; C2E0
+  ; Frames count of the current animation for the entity.
+  ds $10
+
+wEntitiesUnknowTableF:: ; C2F0
+  ds $10
+
+; Unlabeled
+wC300 equ $C300 ; C300
+  ds $200
+
+wAlternateBackgroundEnabled:: ; C500
+  ; If enabled, alternate between two Background position every frame.
   ds 1
 
 section "WRAM Bank1", wramx, bank[1]
@@ -479,9 +511,11 @@ wDB57 equ $DB57
   ds $6
 
 wRupeeCountHigh:: ; DB5D
+  ; Higher digits of the player rupees count
   ds 1
 
 wRupeeCountLow:: ; DB5E
+  ; Lower digits of the player rupees count
   ds 1
 
 ; Unlabeled
@@ -544,13 +578,25 @@ wIsRoosterFollowingLink:: ; DB7B
 wDB7C equ $DB7C
   ds $14
 
-; This appears to be the amount of rupees being added to your wallet
-wAddRupeeBuffer:: ; DB90
+wAddRupeeBufferHigh:: ; DB90
+  ; Higher digits of the amount of rupees to be added to your wallet (high digits)
+  ds 1
+
+wAddRupeeBufferLow:: ; DB91
+  ; Amount of rupees to be added to your wallet (low digits)
+  ds 1
+
+wSubstractRupeeBufferHigh:: ; DB92
+  ; Amount of rupees to be removed from your wallet (high digits)
+  ds 1
+
+wSubstractRupeeBufferLow:: ; DB93
+  ; Amount of rupees to be removed from your wallet (low digits)
   ds 1
 
 ; Unlabeled
-wDB91 equ $DB91
-  ds $4
+wDB94:: ; DB94
+  ds 1
 
 wGameplayType:: ; DB95
   ; See GAMEPLAY_* constants for possible values

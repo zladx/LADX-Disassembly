@@ -119,20 +119,31 @@ wFreeMovementMode:: ; C17B
 wC17C equ $C17C
   ds 3
 
-wWarpTransition:: ; C17F
-  ; See WARP_TRANSITION_* constants for possible values
+wTransitionSfx:: ; C17F
+  ; Special Background effect applied during some transitions or animations.
+  ; See TRANSITION_SFX_* constants for possible values.
+  ds 1
+
+wTransitionSfxFrameCount:: ; C180
+  ; Number of frames rendered during a warp transition.
   ds 1
 
 ; Unlabeled
-wC180 equ $C180
-  ds $1F
+wC181 equ $C181
+  ds $1E
 
 wDialogState:: ; C19F
-  ; See DIALOG_* constants for possible values
+  ; See DIALOG_* constants for possible values.
   ds 1
 
 wC1A4 equ $C1A0
-  ds $60
+  ds $1F
+
+wScrollXOffset:: ; C1BF
+  ds 1
+
+wC1C0 equ $C1C0 ; C1C0
+  ds $40
 
 wEntitiesPosXTable:: ; C200
   ; X position of visible entities
@@ -368,9 +379,14 @@ wEnginePaused:: ; D6FC
 wLCDControl:: ; D6FD
   ds 1
 
-; Unlabeled
-wD6FE equ $D6FE
-  ds $13
+wTileMapToLoad:: ; D6FE
+  ds 1
+
+wBGMapToLoad:: ; D6FF
+  ds 1
+
+wD700 equ $D700
+  ds $11
 
 wTileMap:: ; D711
   ds 1

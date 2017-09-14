@@ -121,7 +121,9 @@ Init::
     ; Start rendering
     jp   WaitForNextFrame
 
-; The main render loop.
+;
+; Main render loop.
+;
 RenderLoop::
     ; Set DidRenderFrame
     ld   a, 1
@@ -143,7 +145,7 @@ RenderLoop::
     jr   .setScrollY
 .noSpecialCase
 
-    ; Common case: add the base offset and the screen shake offset
+    ; Default case: add the base offset and the screen shake offset
     ld   hl, wScreenShakeVertical
     ldh  a, [hBaseScrollY]
     add  a, [hl]
@@ -151,25 +153,30 @@ RenderLoop::
     ld   [rSCY], a
 
 .RenderLoop_setScrollX:
-    ; Add the base offset and the screen shake offset (plus $C1BF)
+    ; Add the base offset, the screen shake offset and an additionnal offset
     ldh  a, [hBaseScrollX]
     ld   hl, wScreenShakeHorizontal
     add  a, [hl]
-    ld   hl, $C1BF
+    ld   hl, wScrollXOffset
     add  a, [hl]
     ld   [rSCX], a ; scrollX
 
 .RenderLoop_loadNewMap:
-    ; If the LCD screen is off, load new map data
-    ld   a, [$D6FE]
-    and  a   ; if $D6FE != 0, LoadNewMap
+    ; If wTileMapToLoad != 0 || wBGMapToLoad != 0,
+    ; load new map data and return.
+    ld   a, [wTileMapToLoad]
+    and  a
     jr   nz, .loadNewMap
-    ld   a, [$D6FF] ; tilemap to load?
-    cp   $00 ; if $D6FF != 0, LoadNewMap
+    ld   a, [wBGMapToLoad]
+    cp   $00
     jr   z, .noNewMap
 
 .loadNewMap
-    ; Control audio during the transition
+    ; Play audio samples before loading the map when:
+    ; - in a menu (GameplayType <= GAMEPLAY_FILE_SAVE)
+    ; - on the Overworld in default mode (GAMEPLAY_OVERWORLD_DEFAULT)
+    ; - on the beach with Marin (GAMEPLAY_MARIN_BEACH)
+    ; All other combinations skip this step.
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MARIN_BEACH
     jr   z, .playAudioStep
@@ -177,19 +184,19 @@ RenderLoop::
     jr   c, .playAudioStep
     cp   GAMEPLAY_OVERWORLD
     jr   nz, .skipAudio
-    ; GameplayType == OVERWORLD
     ld   a, [wGameplaySubtype]
-    cp   $07
+    cp   GAMEPLAY_OVERWORLD_DEFAULT
     jr   nc, .skipAudio
-
 .playAudioStep
     call PlayAudioStep
     call PlayAudioStep
-
 .skipAudio
+
+    ; Load new map tiles and background
     di
     call LoadMapData
     ei
+    ; Play more audio
     call PlayAudioStep
     call PlayAudioStep
     ; And we're done for this frame.
@@ -197,7 +204,7 @@ RenderLoop::
 .noNewMap
 
 .RenderLoop_renderFrame:
-    ; Update LCD status flags
+    ; Apply LCD status flags
     ld   a, [wLCDControl]
     and  $7F
     ld   e, a
@@ -210,63 +217,90 @@ RenderLoop::
     ld   hl, hFrameCounter
     inc  [hl]
 
-    ; Special case for the intro screen sprites
+    ; Special case for the intro screen sprites.
+    ; If GameplayType == INTRO...
     ld   a, [wGameplayType]
     cp   GAMEPLAY_INTRO
-    jr   nz, RenderWarpTransition
-    ; GameplayType == INTRO
+    jr   nz, .fi
+    ; ... and GameplaySubtype > INTRO_BEACH...
     ld   a, [wGameplaySubtype]
     cp   $08
-    jr   c, RenderWarpTransition
-    ; GameplaySubtype > GAMEPLAY_INTRO_BEACH
+    jr   c, .fi
+    ; Position sprites for the title screen (?)
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_5257 ; position sprites for the title screen?
+    call label_5257
+.fi
 
-RenderWarpTransition::
-    ld   a, [wWarpTransition]
+.RenderLoop_TransitionSfx:
+    ; If no transition special effect is active, go to the next step.
+    ld   a, [wTransitionSfx]
     and  a
     jp   z, RenderInteractiveFrame
-    inc  a
-    jr   nz, label_279
 
-label_26E::
+    ; There are two types of transition special effects:
+    ;  - interactive: new gameplay frames are rendered while the effect is active ;
+    ;  - non-interactive: no new frame is rendered while the effect is active.
+
+    ; If TransitionSfx == TRANSITION_SFX_WIND_FISH
+    ; use external code for interactive transitions.
+    inc  a
+    jr   nz, .elsif
+.interactiveTransition
+    ; Apply the transition effect...
     ld   a, $17
     ld   [MBC3SelectBank], a
     call label_48DD
+    ; ... and continue rendering a new frame.
     jp   RenderInteractiveFrame
-
-label_279::
+.elsif
+    ; If TransitionSfx == TRANSITION_SFX_FLOATING,
+    ; use the interactive transition code too.
     inc  a
-    jr   z, label_26E
+    jr   z, .interactiveTransition
+
+    ; Else, render a non-interactive transition effect.
+    ; Select bank $14
     ld   a, $14
     ld   [MBC3SelectBank], a
-    ld   a, [$C180]
+
+    ; Increment frame count for the transition effect
+    ld   a, [wTransitionSfxFrameCount]
     inc  a
-    ld   [$C180], a
+    ld   [wTransitionSfxFrameCount], a
+
+    ; If the frame count has reached $C0 yet, continue the transition.
     cp   $C0
-    jr   nz, label_2A0
-    ld   a, [wWarpTransition]
-    cp   $02
-    jr   nz, label_296
+    jr   nz, .renderTransitionSfx
+
+    ; The transition is finished.
+    ; If the transition was MANBO_IN...
+    ld   a, [wTransitionSfx]
+    cp   TRANSITION_SFX_MANBO_IN
+    jr   nz, .finishTransition
+    ; ... teleport to Manbo Pond.
     call label_4E51
 
-label_296::
+.finishTransition
+    ; Reset transition state
     xor  a
-    ld   [wWarpTransition], a
+    ld   [wTransitionSfx], a
     ld   [$C3CA], a
+    ; Resume rendering of interactive frames
     jp   RenderInteractiveFrame
 
-label_2A0::
+.renderTransitionSfx
     push af
     cp   $60
     jr   c, label_2B7
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B4
+
     ld   a, $20
     ld   [MBC3SelectBank], a
     call label_6CA7
+
     jr   label_2B7
 
 label_2B4::
@@ -277,13 +311,17 @@ label_2B7::
     ld   [MBC3SelectBank], a
     pop  af
     call label_5038
+    ; Play some audio
     call PlayAudioStep
+    ; Apply pending palettes
     ld   a, [wBGPalette]
     ld   [rBGP], a
     ld   a, [wOBJ0Palette]
     ld   [rOBP0], a
     ld   a, [wOBJ1Palette]
     ld   [rOBP1], a
+    ; This is a non-interactive transition: no new gameplay frame is rendered.
+    ; Wait for the next V-Blank.
     jp   WaitForNextFrame
 
 RenderInteractiveFrame::
@@ -540,32 +578,34 @@ InterruptSerial::
     pop  af
     reti
 
-; Load tileset, background, sprites while the LCD screen is off
+; Load tileset, background, sprites while the LCD screen is off.
+; Inputs:
+;  - wTileMapToLoad: number of the map to load
 LoadMapData::
-    ld   a, [$D6FE]
+    ld   a, [wTileMapToLoad]
     and  a
-    jr   z, .commonCase
+    jr   z, .LoadMapZero
 
-    ;
-    ; $D6FE != 0: special case
-    ;
+    ; Copy map number to the palette-loading variable
     ld   [$DDD2], a
-    cp   $23 ; if $D6FE == $23
-    jr   z, .skipLCDOff
+
+    ; if wTileMapToLoad != $23, turn of LCD
+    cp   $23
+    jr   z, .LCDOffEnd
     push af
     call LCDOff
     pop  af
+.LCDOffEnd
 
-.skipLCDOff
-    call .executeMapLoadFunction
-    jr   .clearValuesAndReturn
+    call .ExecuteMapLoadHandler
+    jr   .ClearValuesAndReturn
 
-.executeMapLoadFunction
+.ExecuteMapLoadHandler:
     ld   e, a
     ld   a, $20
     ld   [MBC3SelectBank], a
     ; label_4657
-    ;   input:  $D6FE in e
+    ;   input:  wTileMapToLoad in e
     ;   output: address to jump to in hl
     ; Table address: 20:4664
     ; Table values:
@@ -579,31 +619,35 @@ LoadMapData::
     ;   08  $28F0
     ;   09  $2E73
     ;   ...
+    ;   10  LoadIntroSequenceTiles
     call label_4657
-    jp   hl
+    jp   hl ; tail-call ; will return when done.
 
-    ;
-    ; $D6FE == 0: common case
-    ;
-.commonCase
+    ; Special case for loading map n° 0
+.LoadMapZero:
     call LCDOff
+    ; Do some GBC-only stuff (calls 24:5C2C)
     ld   a, $24
     ld   [MBC3SelectBank], a
     call label_5C2C
+
+    ; Manipulate wBGMapToLoad (calls 20:4577)
     ld   a, $20
     ld   [MBC3SelectBank], a
     call label_4577
+
     ld   a, $08
     ld   [MBC3SelectBank], a
     call label_292D
+
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-.clearValuesAndReturn
+.ClearValuesAndReturn:
     xor  a
-    ld   [$D6FF], a
-    ld   [$D6FE], a
+    ld   [wBGMapToLoad], a
+    ld   [wTileMapToLoad], a
     ld   a, [wLCDControl]
     ld   [rLCDC], a
     ret
@@ -704,7 +748,7 @@ vBlankContinue::
     ;
     ; Standard gameplay (i.e. not Photos) handling
     ;
-    ld   a, [$D6FE]
+    ld   a, [wTileMapToLoad]
     and  a
     jr   nz, WaitForVBlankAndReturn
 
@@ -4010,8 +4054,8 @@ label_19DA::
     ld   [$D474], a
     ld   a, $30
     ld   [$C180], a
-    ld   a, $03
-    ld   [wWarpTransition], a
+    ld   a, TRANSITION_SFX_MANBO_OUT
+    ld   [wTransitionSfx], a
     ld   a, $04
     ld   [wTransitionSequenceCounter], a
     jr   label_1A06
@@ -5511,7 +5555,7 @@ label_2345::
     inc  h
     or   a
     inc  h
-    call label_2924
+    call $2924
     dec  h
     sub  a, l
     ld   h, $14
@@ -6492,8 +6536,6 @@ label_291D::
     inc  de
     ld   a, [de]
     inc  de
-
-label_2924::
     call label_2941
 
 label_2927::
@@ -6502,6 +6544,7 @@ label_2927::
     jr   nz, label_293C
 
 label_292D::
+    ; If de != 0, jump to label_291D
     ld   a, [de]
     and  a
     jr   nz, label_291D
@@ -7068,22 +7111,35 @@ label_2D50::
     ld   bc, $0100
     call CopyData
     ret
+
+; Load Map n°10 (introduction sequence)
+LoadIntroSequenceTiles::
+    ; Copy $80 bytes of map tiles from 01:6D4A to Tiles Memory
+    ; (rain graphics)
     ld   a, $01
     call SwitchBank
     ld   hl, $6D4A
-    ld   de, $8700
+    ld   de, vTiles0 + $700
     ld   bc, $0080
     call CopyData
+
+    ; Copy $600 bytes of map tiles from 10:5400 to Tiles Memory
+    ; (some intro sequence graphics)
     ld   a, $10
     call SwitchAdjustedBank
     ld   hl, $5400
-    ld   de, $8000
+    ld   de, vTiles0
     ld   bc, $0600
     call CopyData
+
+    ; Copy $1000 bytes of map tiles from 10:4000 to Tiles Memory
+    ; (intro sequence graphics)
     ld   hl, $4000
-    ld   de, $8800
+    ld   de, vTiles1
     ld   bc, $1000
-    jp   CopyData
+    jp   CopyData ; tail-call ; will return afterwards.
+
+label_2DA7::
     ld   a, $0F
     call SwitchAdjustedBank
     ld   hl, $4900

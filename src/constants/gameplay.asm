@@ -50,6 +50,10 @@ GAMEPLAY_FILE_SAVE_VISIBLE      equ $04
 GAMEPLAY_FILE_SAVE_INTERACTIVE  equ $05
 GAMEPLAY_FILE_SAVE_FADE_OUT     equ $06
 
+; GAMEPLAY_OVERWORLD Subtype
+; ...
+GAMEPLAY_OVERWORLD_DEFAULT      equ $07
+
 ; GAMEPLAY_INVENTORY Subtype
 GAMEPLAY_INVENTORY_INITIAL      equ $00
 GAMEPLAY_INVENTORY_MAP_FADE_OUT equ $01
@@ -90,7 +94,10 @@ DIALOG_CHOICE              equ $0D ; press A to choose
 DIALOG_CLOSING_1           equ $0E
 DIALOG_CLOSING_2           equ $0F
 
-; Values for wWarpTransition
-WARP_TRANSITION_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine
-WARP_TRANSITION_MANBO_IN     equ $02 ; wavy transition when departing using Manbo's Mambo
-WARP_TRANSITION_MANBO_OUT    equ $03 ; wavy transition when arriving using Manbo's Mambo
+; Values for wTransitionSfx
+TRANSITION_SFX_NONE         equ $00 ; no transition
+TRANSITION_SFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine
+TRANSITION_SFX_MANBO_IN     equ $02 ; wavy transition when departing using Manbo's Mambo
+TRANSITION_SFX_MANBO_OUT    equ $03 ; wavy transition when arriving using Manbo's Mambo
+TRANSITION_SFX_FLOATING     equ $FE ; slow up-and-down motion
+TRANSITION_SFX_WIND_FISH    equ $FF ; wavy transition when the Wind Fish appears and disappears

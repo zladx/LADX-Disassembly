@@ -1050,7 +1050,7 @@ DisassembleBank(u16 BankNum) {
                     fprintf(Output, "stop\n");
                 }
                 else {
-                    fprintf(Output, "db   $10 ; Undefined instruction\n");
+                    fprintf(Output, "db   $10\n    db   $%02X\n", N);
                 }
                 break;
             }

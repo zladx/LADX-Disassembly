@@ -44,7 +44,7 @@ section "bank22",romx,bank[$16]
     ld   d, c
     db   $E8 ; add  sp, d
     ld   d, c
-    jp   [hl]
+    jp   hl
     ld   d, c
     db   $EC ; Undefined instruction
     ld   d, c
@@ -264,7 +264,7 @@ label_5811C::
 label_58120::
     db   $E8 ; add  sp, d
     ld   d, e
-    jp   [hl]
+    jp   hl
     ld   d, e
     ld   a, [$FF00+C]
     ld   bc, label_654
@@ -797,7 +797,7 @@ label_58323::
     db   $E3 ; Undefined instruction
     ld   c, d
     and  $4A
-    jp   [hl]
+    jp   hl
     ld   c, d
     ld   [$EB4A], a
     ld   c, d
@@ -809,7 +809,8 @@ label_58323::
     ld   c, e
     add  hl, bc
     ld   c, e
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $4B
     rla
     ld   c, e
 
@@ -1270,7 +1271,8 @@ label_58527::
     ld   d, b
     add  hl, bc
     ld   d, b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $50
     dec  d
     ld   d, b
     inc  e
@@ -1348,7 +1350,7 @@ label_58527::
     ld   d, b
     db   $E4 ; Undefined instruction
     ld   d, b
-    jp   [hl]
+    jp   hl
     ld   d, b
     xor  $50
     pop  af
@@ -1367,7 +1369,8 @@ label_585BE::
     ld   d, c
     dec  c
     ld   d, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $51
     inc  de
     ld   d, c
     ld   d, $51
@@ -4491,14 +4494,19 @@ label_592FF::
     cpl
     rst  $38
     scf
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $53
+    db   $10
+    db   $57
+    db   $10
+    db   $45
     ld   [de], a
     rst  $38
     inc  sp
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $53
+    db   $10
+    db   $45
     ld   [de], a
     ld   d, a
     ld   de, label_5A4FF
@@ -4574,15 +4582,21 @@ label_5932D::
     nop
     cp   a
     inc  d
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $16
+    db   $10
+    db   $34
+    db   $10
+    db   $25
     ld   [de], a
     rst  $38
     inc  de
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $17
+    db   $10
+    db   $35
+    db   $10
+    db   $24
     ld   [de], a
     rst  $38
     rst  $38
@@ -5177,7 +5191,8 @@ label_59567::
     ld   h, d
     push bc
     rst  $38
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $CD
     ld   d, $CD
     ld   d, b
     call label_CD56
@@ -5316,7 +5331,7 @@ label_59631::
     dec  [hl]
     ld   [$EA44], a
     inc  [hl]
-    jp   [hl]
+    jp   hl
     ld   b, l
     db   $EB ; Undefined instruction
     rst  $38

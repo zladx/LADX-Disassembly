@@ -2101,18 +2101,18 @@ label_987C5::
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   a, $3A
     dec  de
     dec  de
     add  hl, sp
     db   $3A ; ldd  a, [hl]
     dec  sp
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     add  hl, sp
     db   $3A ; ldd  a, [hl]
     dec  de
@@ -2173,7 +2173,7 @@ label_987C5::
     dec  de
     db   $3A ; ldd  a, [hl]
     ccf
-    jp   [hl]
+    jp   hl
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     ld   d, e
@@ -2182,13 +2182,13 @@ label_987C5::
     dec  de
     db   $3A ; ldd  a, [hl]
     dec  sp
-    jp   [hl]
+    jp   hl
     add  hl, sp
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
 
 label_9889E::
-    jp   [hl]
+    jp   hl
     dec  sp
     dec  de
     dec  de
@@ -2201,18 +2201,18 @@ label_9889E::
     dec  de
     dec  a
     ld   c, b
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   c, c
     inc  a
     ld   c, $1B
     cpl
     ld   c, [hl]
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   l, $2F
     cpl
@@ -2243,7 +2243,7 @@ label_988C9::
     ld   a, $3A
     ld   [$FF3F], a
     add  hl, sp
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
     dec  sp
     dec  de
@@ -2263,21 +2263,21 @@ label_988C9::
     dec  de
     dec  a
     cpl
-    jp   [hl]
+    jp   hl
     cpl
-    jp   [hl]
+    jp   hl
     cpl
-    jp   [hl]
+    jp   hl
     cpl
     cpl
     cpl
     ld   c, [hl]
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     scf
@@ -3298,18 +3298,18 @@ label_98D06::
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
@@ -3363,21 +3363,21 @@ label_98D06::
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -3788,7 +3788,8 @@ label_98FB1::
     rst  $38
     ld   b, h
     dec  d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $19
     jr   nc, label_9902C
     dec  de
     dec  h
@@ -3915,7 +3916,8 @@ label_9902C::
     ld   d, c
     dec  de
     ld   a, [de]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $16
     dec  h
     ld   h, $27
     dec  de
@@ -4466,9 +4468,9 @@ label_992F9::
     ld   c, $0E
     ld   c, $3D
     ld   c, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   c, c
     inc  a
 
@@ -4476,9 +4478,9 @@ label_99303::
     ld   c, $0E
     ld   c, $38
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   l, $2F
     cpl
@@ -4531,8 +4533,8 @@ label_9931C::
     ld   c, $0E
     ld   c, $3D
     ld   c, b
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     ld   c, c
     cpl
     cpl
@@ -4541,8 +4543,8 @@ label_9931C::
     cpl
     ld   c, [hl]
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -5567,11 +5569,11 @@ label_997B9::
     jr   c, label_99801
 
 label_997C2::
-    jp   [hl]
+    jp   hl
 
 label_997C3::
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
@@ -5579,11 +5581,11 @@ label_997C3::
     jr   c, label_99807
 
 label_997CC::
-    jp   [hl]
+    jp   hl
 
 label_997CD::
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
@@ -5633,28 +5635,28 @@ label_997F1::
     db   $EB ; Undefined instruction
     db   $EB ; Undefined instruction
     jr   c, label_997E7
-    jp   [hl]
+    jp   hl
     dec  hl
     inc  l
 
 label_99801::
     inc  l
     dec  l
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     dec  hl
     jr   c, label_997F1
-    jp   [hl]
+    jp   hl
     ld   l, $2F
     cpl
     ld   c, [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     ld   l, $3A
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -5663,8 +5665,8 @@ label_99801::
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -6739,14 +6741,14 @@ label_99CB9::
 label_99CBF::
     scf
     jr   c, label_99CAB
-    jp   [hl]
+    jp   hl
 
 label_99CC3::
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     ccf
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
 
 label_99CC9::
     add  hl, sp
@@ -9267,17 +9269,17 @@ label_9A7BA::
     dec  l
     jr   c, label_9A81C
     ld   c, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   l, $2F
     cpl
     ld   c, [hl]
     jr   c, label_9A831
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     ccf
@@ -10393,17 +10395,17 @@ label_9ACA8::
     inc  b
     db   $3A ; ldd  a, [hl]
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     ccf
     jr   c, label_9AC9C
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
 
 label_9ACBF::
     ld   a, $3A
@@ -12052,7 +12054,8 @@ label_9B368::
     db   $FC ; Undefined instruction
     jr   c, label_9B411
     ld   a, [de]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $19
     ld   c, $0E
     rst  $38
     rst  $38
@@ -13113,13 +13116,16 @@ label_9B896::
     ld   de, label_1B1B
     dec  de
     ld   a, [de]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $37
     ld   a, [bc]
     ld   a, [bc]
     or   [hl]
     dec  d
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $16
     inc  b
 
 label_9B8B8::
@@ -13167,12 +13173,14 @@ label_9B8B8::
     ld   c, $0E
     ld   c, $0E
     ld   a, [de]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     add  hl, de
     ld   c, $1A
     add  hl, de
     ld   c, $1A
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $16
     inc  b
     inc  b
     ld   de, label_180E
@@ -13219,7 +13227,8 @@ label_9B8B8::
     dec  h
     ld   h, $0B
     cp   $37
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $19
     ld   c, $12
     inc  b
     daa
@@ -14168,8 +14177,10 @@ label_9BD41::
 
 label_9BD59::
     ld   a, [de]
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     ld   h, $0A
 
 label_9BD60::
@@ -14210,8 +14221,10 @@ label_9BD8A::
     inc  b
     inc  b
     dec  d
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $39
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -14231,7 +14244,8 @@ label_9BD9D::
     ld   a, [bc]
     ld   a, [bc]
     ld   a, [bc]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $19
     call nc, label_270A
     add  hl, hl
     ld   h, $0A
@@ -14239,7 +14253,8 @@ label_9BD9D::
     ld   a, [bc]
     inc  b
     dec  d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     add  hl, de
     daa
     jr   z, label_9BD8A
@@ -14249,7 +14264,8 @@ label_9BD9D::
     inc  d
     ld   b, h
     dec  d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     add  hl, de
     ld   a, [bc]
     daa

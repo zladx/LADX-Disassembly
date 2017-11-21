@@ -8351,7 +8351,7 @@ label_92329::
     rlca
     nop
     sbc  a, h
-    jp   [hl]
+    jp   hl
     ld   c, c
     ld   bc, label_99D
     ld   c, c
@@ -8657,7 +8657,7 @@ label_924F3::
     ld   b, [hl]
     ld   [bc], a
     sbc  a, b
-    jp   [hl]
+    jp   hl
     ld   b, [hl]
     ld   [bc], a
     nop
@@ -11010,7 +11010,7 @@ label_92F31::
     ld   [hl], h
     ld   [hl], h
     ld   [hl], h
-    jp   [hl]
+    jp   hl
     ld   a, h
     ld   a, h
     ld   a, h
@@ -11033,7 +11033,7 @@ label_92F31::
     ld   a, a
     ld   [hl], h
     ld   [hl], h
-    jp   [hl]
+    jp   hl
     ld   a, h
     ld   a, h
     ld   a, h
@@ -12135,11 +12135,14 @@ label_933ED::
     ld   [hl], l
 
 label_933F9::
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $DC
     jr   nc, label_933D9
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $DC
     jr   nc, label_933DD
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $DC
     jr   nc, label_933E1
     ld   a, [$DBA5]
     and  a
@@ -12452,7 +12455,7 @@ label_93547::
     ld   l, a
     pop  de
     ld   a, e
-    jp   [hl]
+    jp   hl
 
 label_9358B::
     sbc  a, l
@@ -12590,7 +12593,8 @@ label_9362E::
     nop
     ld   bc, label_302
     inc  b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $11
     ld   [de], a
     inc  de
     inc  d
@@ -12840,7 +12844,8 @@ label_93711::
     ld   [hl], e
     call z, label_1075
     ld   d, [hl]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $56
     rst  $38
 
 label_93780::
@@ -13026,7 +13031,8 @@ label_93854::
     nop
     nop
     jp   label_92010
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $B3
     ld   a, [hl]
     nop
     nop
@@ -13045,14 +13051,16 @@ label_93854::
     nop
     nop
     ld   h, b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $0B
     add  hl, de
     or   e
     ld   a, [hl]
     nop
     nop
     ld   h, b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $67
     ld   [label_93EB3], sp
     nop
     nop
@@ -13118,12 +13126,14 @@ label_93854::
     nop
     nop
     ld   sp, $AB0D
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $B3
     ld   a, [hl]
     nop
     nop
     xor  e
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $46
     inc  b
     or   e
     ld   a, [hl]
@@ -13144,7 +13154,8 @@ label_93854::
     nop
     nop
     xor  e
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $45
     dec  e
     or   e
     ld   a, [hl]
@@ -13161,7 +13172,8 @@ label_93854::
     and  b
     inc  e
     xor  e
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $B3
     ld   a, [hl]
     nop
     nop
@@ -13212,7 +13224,8 @@ label_9392B::
     nop
     ret  nz
     jr   nz, label_9390C
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $B3
     ld   a, [hl]
     nop
     nop
@@ -13688,7 +13701,8 @@ label_93B46::
     dec  sp
     rst  $38
     ld   a, h
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $28
     nop
     nop
     add  hl, sp

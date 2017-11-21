@@ -11556,7 +11556,7 @@ label_8F1BD::
     ld   [hl], h
     ld   [hl], h
     ld   [hl], h
-    jp   [hl]
+    jp   hl
     ld   a, h
     ld   a, h
     ld   a, h
@@ -11576,7 +11576,7 @@ label_8F1BD::
     ld   h, c
     ld   [hl], h
     ld   [hl], h
-    jp   [hl]
+    jp   hl
     ld   a, h
     ld   a, h
     ld   a, h
@@ -12902,7 +12902,7 @@ label_8F8F6::
     sbc  a, h
     sbc  a, [hl]
     cp   [hl]
-    jp   [hl]
+    jp   hl
     nop
     sbc  a, e
     ret  nz
@@ -12931,7 +12931,7 @@ label_8F8F6::
     inc  de
     sbc  a, [hl]
     cp   [hl]
-    jp   [hl]
+    jp   hl
     ld   sp, hl
     ei
     xor  h
@@ -13049,7 +13049,7 @@ label_8F9B6::
     sbc  a, e
     nop
     inc  de
-    jp   [hl]
+    jp   hl
     ld   sp, hl
     ei
     xor  h
@@ -13200,7 +13200,7 @@ label_8F9B6::
     sbc  a, h
     sbc  a, [hl]
     cp   [hl]
-    jp   [hl]
+    jp   hl
     ld   sp, hl
     ei
     xor  h
@@ -13399,7 +13399,7 @@ label_8FA76::
     sbc  a, h
     sbc  a, [hl]
     cp   [hl]
-    jp   [hl]
+    jp   hl
     nop
     sbc  a, c
     jr   nz, label_8FB36
@@ -13430,7 +13430,7 @@ label_8FB36::
     sbc  a, h
     sbc  a, [hl]
     cp   [hl]
-    jp   [hl]
+    jp   hl
     ld   sp, hl
     ei
     xor  h

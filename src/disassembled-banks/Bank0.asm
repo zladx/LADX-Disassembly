@@ -4854,7 +4854,8 @@ label_1F49::
     ld   [label_A08], sp
     ld   a, [bc]
     dec  b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $36
     jr   c, label_1F8E
     inc  a
 
@@ -5278,7 +5279,8 @@ label_21FB::
     ret
 
 label_2205::
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     ld   bc, label_3E01
     ld   [$00EA], sp
     ld   hl, label_34CD
@@ -8671,7 +8673,8 @@ label_377A::
 label_3789::
     nop
     ld   bc, label_302
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $11
     ld   [de], a
     inc  de
     jr   nz, label_37B4
@@ -8727,7 +8730,8 @@ label_37CF::
 label_37E1::
     nop
     ld   bc, $00FF
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $FF
 
 label_37E7::
     ld   [$FFE9], a
@@ -9184,7 +9188,8 @@ label_3AC8::
     rlca
     db   $FC ; Undefined instruction
     inc  b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     inc  c
     ld   [de], a
     ld   [label_208], sp

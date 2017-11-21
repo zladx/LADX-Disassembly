@@ -3788,7 +3788,8 @@ label_98FB1::
     rst  $38
     ld   b, h
     dec  d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $19
     jr   nc, label_9902C
     dec  de
     dec  h
@@ -3915,7 +3916,8 @@ label_9902C::
     ld   d, c
     dec  de
     ld   a, [de]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $16
     dec  h
     ld   h, $27
     dec  de
@@ -12052,7 +12054,8 @@ label_9B368::
     db   $FC ; Undefined instruction
     jr   c, label_9B411
     ld   a, [de]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $19
     ld   c, $0E
     rst  $38
     rst  $38
@@ -13113,13 +13116,16 @@ label_9B896::
     ld   de, label_1B1B
     dec  de
     ld   a, [de]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $37
     ld   a, [bc]
     ld   a, [bc]
     or   [hl]
     dec  d
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $16
     inc  b
 
 label_9B8B8::
@@ -13167,12 +13173,14 @@ label_9B8B8::
     ld   c, $0E
     ld   c, $0E
     ld   a, [de]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     add  hl, de
     ld   c, $1A
     add  hl, de
     ld   c, $1A
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $16
     inc  b
     inc  b
     ld   de, label_180E
@@ -13219,7 +13227,8 @@ label_9B8B8::
     dec  h
     ld   h, $0B
     cp   $37
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $19
     ld   c, $12
     inc  b
     daa
@@ -14168,8 +14177,10 @@ label_9BD41::
 
 label_9BD59::
     ld   a, [de]
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     ld   h, $0A
 
 label_9BD60::
@@ -14210,8 +14221,10 @@ label_9BD8A::
     inc  b
     inc  b
     dec  d
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $39
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -14231,7 +14244,8 @@ label_9BD9D::
     ld   a, [bc]
     ld   a, [bc]
     ld   a, [bc]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $19
     call nc, label_270A
     add  hl, hl
     ld   h, $0A
@@ -14239,7 +14253,8 @@ label_9BD9D::
     ld   a, [bc]
     inc  b
     dec  d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     add  hl, de
     daa
     jr   z, label_9BD8A
@@ -14249,7 +14264,8 @@ label_9BD9D::
     inc  d
     ld   b, h
     dec  d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     add  hl, de
     ld   a, [bc]
     daa

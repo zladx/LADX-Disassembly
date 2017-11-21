@@ -1921,7 +1921,8 @@ label_6CA54::
     ld   b, [hl]
     nop
     inc  de
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $C0
     inc  hl
     nop
     jr   nz, label_6CAAD
@@ -1940,11 +1941,13 @@ label_6CA54::
     add  a, c
     nop
     db   $3A ; ldd  a, [hl]
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $C0
     add  a, b
     nop
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $C0
     ld   d, a
     nop
     nop
@@ -4073,7 +4076,8 @@ label_6D403::
     nop
     ret  z
     ld   c, d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $54
     ld   e, $54
     inc  l
     ld   d, h
@@ -5917,7 +5921,8 @@ label_6DB96::
     add  a, d
     nop
     and  d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $1E
     and  c
     inc  h
     and  d
@@ -5925,7 +5930,8 @@ label_6DB96::
     jr   z, label_6DB88
     ld   bc, label_CA1
     ld   c, $A2
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $A1
     ld   e, $A2
     inc  h
     ld   h, $A1
@@ -7812,7 +7818,8 @@ label_6E3CC::
     nop
     sbc  a, d
     sbc  a, e
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $A1
     jr   z, label_6E415
     sbc  a, h
     sbc  a, c
@@ -8394,7 +8401,8 @@ label_6E64D::
     ld   l, h
     and  e
     ld   [hl], b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $6C
     nop
     nop
     sbc  a, l
@@ -9816,7 +9824,8 @@ label_6EC90::
     ld   l, a
     adc  a, b
     ld   l, l
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $70
     and  a
     ld   l, l
     add  a, e
@@ -9920,7 +9929,8 @@ label_6ECEA::
     add  a, d
     nop
     and  d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     sbc  a, l
     ld   [hl], c
     add  a, d
@@ -9936,7 +9946,8 @@ label_6ECEA::
     nop
     and  d
     ld   bc, label_1006
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $9D
     ld   [hl], c
     add  a, d
     add  a, b
@@ -9986,11 +9997,13 @@ label_6ECEA::
     add  a, d
     nop
     and  d
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     and  h
     ld   bc, label_1A2
     ld   b, $10
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $A4
     ld   bc, label_10A3
     sbc  a, e
     inc  bc
@@ -10634,7 +10647,8 @@ label_6F00C::
     and  l
     ld   bc, $009C
     sbc  a, e
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $A5
     ld   bc, $009C
     xor  b
     ld   bc, $A600
@@ -11275,7 +11289,8 @@ label_6F32B::
     and  d
     dec  d
     and  e
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $9C
     and  d
     dec  d
     dec  d

@@ -239,7 +239,8 @@ label_400FE::
     rst  $38
     nop
     rst  $28
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     rst  $28
     add  a, b
     ld   a, a
@@ -810,7 +811,8 @@ label_40348::
     ld   [$FFBF], a
     and  b
     rra
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $FF
     ld    hl, sp+$FF
     ld   b, $FF
     ld   bc, $00FF
@@ -845,7 +847,8 @@ label_403C0::
     stop
     cp   $40
     ccf
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $CF
     ld   [$00F7], sp
     rst  $38
     nop
@@ -1044,7 +1047,8 @@ label_4044E::
     jr   nz, label_4049E
 
 label_404BE::
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $F0
     nop
     nop
     nop
@@ -1164,7 +1168,8 @@ label_40511::
     rlca
     ld   b, $06
     rst  $28
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $7F
     nop
     ld   a, a
     nop
@@ -1219,7 +1224,8 @@ label_4055B::
     ld   [label_6FD], sp
     db   $FD ; Undefined instruction
     dec  b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $F0
     adc  a, b
     ld   l, b
     ld   [label_878], sp
@@ -1543,7 +1549,8 @@ label_406A5::
     ld   sp, label_431DE
     sbc  a, [hl]
     rst  $38
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $FF
     cp   $FF
     rst  $38
     rst  $38
@@ -1794,7 +1801,8 @@ label_407D6::
     rst  $38
     ccf
     ei
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $F0
     dec  e
     ld   sp, hl
     inc  c
@@ -2138,7 +2146,8 @@ label_4097E::
     ld   [$FFA4], a
     and  d
     rla
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     jr   label_409DC
     rrca
     rlca
@@ -2395,7 +2404,8 @@ label_40AD1::
     ld   b, h
     rst  $38
     jr   z, label_40AF8
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $FF
     jr   z, label_40AFC
     ld   b, h
     rst  $38
@@ -2540,7 +2550,8 @@ label_40B16::
     add  a, b
     add  a, b
     jr   label_40BA4
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     nop
     nop
     jp   label_8000
@@ -3015,8 +3026,10 @@ label_40DA3::
 
 label_40DA5::
     stop
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $01
+    db   $10
+    db   $01
 
 label_40DAB::
     jr   c, label_40DB0
@@ -3029,7 +3042,8 @@ label_40DAF::
     jr   label_40DAB
     jr   label_40DAD
     jr   label_40DAF
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $F0
     jr   nc, label_40DAB
     jr   nc, label_40D9D
     jr   nz, label_40DAF
@@ -3490,7 +3504,8 @@ label_40F97::
     ld   b, h
     ld   b, h
     jr   z, label_40FE0
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     jr   z, label_40FE4
     ld   b, h
     ld   b, h
@@ -3567,7 +3582,8 @@ label_40FE4::
     rst  $38
     nop
     rst  $28
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     rst  $28
     add  a, b
     ld   a, a
@@ -3675,7 +3691,8 @@ label_41052::
     rst  $38
     nop
     rst  $28
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     rst  $28
     add  a, b
     ld   a, a
@@ -3785,7 +3802,8 @@ label_410C2::
     rst  $38
     nop
     rst  $28
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     rst  $28
     add  a, b
     ld   a, a
@@ -3895,7 +3913,8 @@ label_410C2::
     rst  $38
     nop
     rst  $28
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     rst  $28
     add  a, b
     ld   a, a
@@ -4556,13 +4575,15 @@ label_4144F::
     ld   [$FFC0], a
     ld   [$FFC0], a
     ld   [rJOYP], a
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $E0
 
 label_4147E::
     ld   a, [$FF00]
     ld   bc, label_1E00
     ld   bc, label_F10
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $0F
     ld   d, $09
     rrca
     ld   [bc], a
@@ -4772,7 +4793,8 @@ label_41577::
     ld   b, h
     ld   b, h
     jr   z, label_415B0
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     jr   z, label_415B4
     ld   b, h
     ld   b, h
@@ -4785,7 +4807,8 @@ label_41577::
     ld   b, h
     ld   b, h
     jr   z, label_415C0
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     jr   z, label_415C4
     ld   b, h
     ld   b, h
@@ -4798,7 +4821,8 @@ label_41577::
     ld   b, h
     ld   b, h
     jr   z, label_415D0
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     jr   z, label_415D4
     ld   b, h
     ld   b, h
@@ -4815,7 +4839,8 @@ label_415B4::
     ld   b, h
     ld   b, h
     jr   z, label_415E0
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     jr   z, label_415E4
     ld   b, h
     ld   b, h
@@ -5062,7 +5087,8 @@ label_416A0::
     ld   h, b
     jr   nz, label_416CA
     jr   nc, label_416DC
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     jr   label_416C8
     ld   [label_C08], sp
     inc  c
@@ -6652,8 +6678,10 @@ label_41DD3::
     ret  nz
     nop
     jr   nz, label_41E31
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $1F
+    db   $10
+    db   $1F
     ld   [label_80F], sp
     rrca
     inc  b
@@ -7004,8 +7032,10 @@ label_41F90::
     ld   a, a
     jr   nz, label_41FD7
     jr   nz, label_41FD9
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $1F
+    db   $10
+    db   $1F
     ld   [$810F], sp
     add  a, c
     add  a, c
@@ -7175,7 +7205,8 @@ label_41FD9::
     db   $FC ; Undefined instruction
     rst  $38
     jr   nc, label_420D5
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $F8
     ret  nc
     ld   a, [$FF30]
     db   $F0
@@ -7643,9 +7674,12 @@ label_42235::
     jr   nc, label_42265
     jr   nc, label_42267
     jr   nc, label_42269
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $FF
+    db   $10
+    db   $FF
+    db   $10
+    db   $FF
     ld   hl, label_21FF
     rst  $38
     rla
@@ -7686,10 +7720,14 @@ label_42235::
     rst  $38
     nop
     rst  $38
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $FF
+    db   $10
+    db   $FF
+    db   $10
+    db   $FF
+    db   $10
+    db   $FF
     inc  de
     rst  $38
     sub  a, b
@@ -8095,7 +8133,8 @@ label_42466::
     jr   nc, label_42483
     sub  a, [hl]
     ld   bc, label_33C
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $0F
     jr   c, label_42483
     rst  $38
     nop
@@ -8689,7 +8728,8 @@ label_426BE::
     jr   nz, label_4272B
     jr   nc, label_4271D
     jr   nz, label_4272F
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $0F
     jr   nz, label_42733
     jr   nz, label_42735
     jr   nc, label_42727
@@ -8783,7 +8823,8 @@ label_42749::
     dec  bc
     dec  de
     inc  b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $0F
     ld   [label_707], sp
     nop
     add  a, b
@@ -8805,7 +8846,8 @@ label_42749::
     inc  b
     ld    hl, sp+$F8
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $E0
     ld   [rJOYP], a
     nop
     nop
@@ -9200,7 +9242,8 @@ label_4292D::
     ld   a, [hl]
     jr   z, label_429C9
     jr   label_429CB
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $FF
     jr   z, label_42952
     ld   l, d
     rst  $38
@@ -10035,7 +10078,8 @@ label_42CAE::
     ld   [de], a
     nop
     add  hl, hl
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $28
     stop
     nop
     nop
@@ -10406,7 +10450,8 @@ label_42E3F::
     inc  e
     nop
     rst  $38
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $29
     sub  a, $FF
     jr   nz, label_42EC4
     xor  [hl]
@@ -10525,7 +10570,8 @@ label_42EC4::
     inc  e
     nop
     rst  $38
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $29
     sub  a, $FF
     jr   nz, label_42F44
     xor  [hl]
@@ -10647,7 +10693,8 @@ label_42F5E::
     inc  e
     nop
     rst  $38
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $29
     sub  a, $FF
     jr   nz, label_42FC4
     xor  [hl]
@@ -10762,7 +10809,8 @@ label_42FC4::
     inc  e
     nop
     rst  $38
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $29
     sub  a, $FF
     jr   nz, label_43044
     xor  [hl]
@@ -10948,7 +10996,8 @@ label_430A8::
     db   $FD ; Undefined instruction
     push de
     jr   z, label_430A8
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $FF
     nop
     nop
     rst  $38
@@ -11240,7 +11289,8 @@ label_431DE::
     sbc  a, d
     pop  af
     ld   c, $EF
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $DF
     jr   nz, label_431BE
     ld   b, [hl]
     or   a
@@ -11679,7 +11729,8 @@ label_43406::
     rst  $38
     nop
     db   $EB ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $D7
     jr   nz, label_4340C
     nop
     ld   e, a
@@ -11698,7 +11749,8 @@ label_43406::
     rst  $38
     nop
     rst  $28
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $F7
     nop
     rst  $38
     nop
@@ -11977,7 +12029,8 @@ label_43564::
     rst  $38
     nop
     rst  $38
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $FF
     nop
     rst  $30
     nop
@@ -12057,7 +12110,8 @@ label_43582::
     rst  $38
     ld   [label_20F7], sp
     rst  $38
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $EF
     inc  bc
     ld   a, h
     add  a, a
@@ -12127,7 +12181,8 @@ label_435E6::
     rst  $38
     ld   h, b
     sbc  a, a
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $EF
     rrca
     ld   a, [$FF81]
     ld   a, [hl]
@@ -13014,7 +13069,8 @@ label_439BD::
     ld   [bc], a
     ld   e, b
     rlca
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $0F
     nop
     ccf
     rrca

@@ -492,7 +492,8 @@ label_50240::
     inc  c
     dec  c
     ld   c, $0F
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $11
     nop
     ld   bc, label_1200
     inc  de
@@ -1166,7 +1167,8 @@ label_504E0::
     nop
     nop
     ld   c, $0F
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $11
     nop
     nop
     nop
@@ -2164,7 +2166,8 @@ label_5094E::
 
 label_50959::
     add  hl, bc
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $19
     jr   nz, label_50987
     jr   nc, label_50999
 
@@ -2355,7 +2358,8 @@ label_50A0A::
     jr   z, label_50A25
 
 label_50A25::
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $20
     jr   nc, label_50A69
     ld   d, b
     ld   h, b
@@ -3687,112 +3691,170 @@ label_51111::
     inc  c
     dec  l
     inc  c
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $B5
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     and  l
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $A8
+    db   $10
+    db   $10
     or   a
     or   h
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     and  c
     ld   [label_808], sp
     ld   [$B010], sp
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $83
     inc  b
     inc  b
     inc  b
     inc  b
     and  [hl]
     ld   [label_808], sp
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     inc  b
     cp   h
     inc  b
     inc  b
     ld   [$A608], sp
     ld   [$B310], sp
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     inc  b
     inc  b
     inc  b
     inc  b
     ld   [label_808], sp
     ld   [label_10B8], sp
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     inc  b
     inc  b
     inc  b
     inc  b
     call nz, label_A10
     ld   a, [bc]
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $FC
     sbc  a, l
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     cp   l
     and  b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $0A
     ld   a, [bc]
     and  d
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $FB
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $0A
     ld   a, [bc]
     ld   a, [bc]
     ld   a, [bc]
     add  a, e
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $BA
+    db   $10
+    db   $B1
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $0A
     ld   a, [bc]
     ld   a, [bc]
     add  a, e
     xor  c
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $A4
+    db   $10
+    db   $10
+    db   $10
+    db   $AF
     xor  a
     cp   c
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     or   d
     dec  bc
     dec  bc
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $BE
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     xor  a
     xor  a
     ld   sp, hl
@@ -3801,25 +3863,42 @@ label_51111::
     db   $DB
     dec  bc
     dec  bc
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $C3
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
 
 label_51202::
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $9E
+    db   $10
+    db   $10
     nop
     nop
     nop
@@ -4072,8 +4151,10 @@ label_51333::
     inc  b
     inc  b
     inc  b
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     nop
     nop
     nop

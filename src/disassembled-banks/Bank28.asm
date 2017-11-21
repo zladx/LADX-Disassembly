@@ -399,7 +399,8 @@ label_70181::
     ld   [hl], b
     db   $E4 ; Undefined instruction
     ld   [hl], c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $72
     sub  a, b
     ld   [hl], d
     adc  a, a
@@ -762,7 +763,8 @@ label_70320::
     ld   b, e
     xor  a
     ld   b, e
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $44
     scf
     ld   b, h
     ld   a, b
@@ -877,7 +879,8 @@ label_70380::
     rst  0
     ld   d, d
     or   $52
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $53
     dec  de
     ld   d, h
     ei
@@ -1264,7 +1267,8 @@ label_704FF::
     push hl
     ld   a, h
     ld   bc, $007D
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $20
     jr   nc, label_705A6
     ld   d, b
     ld   h, b
@@ -1277,7 +1281,8 @@ label_704FF::
     ret  nc
     ld   [$FFF0], a
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $20
     jr   nc, label_705B6
     ld   d, b
     ld   h, b
@@ -1555,7 +1560,8 @@ label_705FF::
     inc  c
     dec  c
     ld   c, $0F
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $11
     ld   [de], a
     inc  de
     inc  d

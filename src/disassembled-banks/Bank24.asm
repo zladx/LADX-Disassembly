@@ -406,7 +406,8 @@ label_602BA::
     nop
     ld   [$0062], sp
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $64
     nop
     nop
     jr   label_6032F
@@ -414,13 +415,16 @@ label_602BA::
     stop
     ld   l, b
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   l, d
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     ld   l, h
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     ld   l, [hl]
     nop
     nop
@@ -430,7 +434,8 @@ label_602BA::
     nop
     ld   [$0072], sp
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $74
     nop
     nop
     jr   label_6035F
@@ -438,13 +443,16 @@ label_602BA::
     stop
     ld   l, b
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   l, d
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     ld   l, h
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     ld   l, [hl]
     nop
     nop
@@ -454,7 +462,8 @@ label_602BA::
     nop
     ld   [$007A], sp
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $7C
     nop
     nop
     jr   label_60387
@@ -462,13 +471,16 @@ label_602BA::
     stop
     ld   l, b
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   l, d
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     ld   l, h
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     ld   l, [hl]
     nop
     nop
@@ -479,7 +491,8 @@ label_602BA::
 label_6031F::
     ld   [label_207C], sp
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $7A
     jr   nz, label_60327
 
 label_60327::
@@ -491,7 +504,8 @@ label_60327::
 
 label_6032F::
     ld   [label_206C], sp
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     ld   l, d
     jr   nz, label_60347
     jr   label_603A1
@@ -505,7 +519,8 @@ label_6033B::
 label_6033F::
     ld   [label_2074], sp
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $72
     jr   nz, label_60347
 
 label_60347::
@@ -517,7 +532,8 @@ label_6034B::
     ld   l, [hl]
     jr   nz, label_6035F
     ld   [label_206C], sp
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     ld   l, d
     jr   nz, label_60367
     jr   label_603C1
@@ -1205,7 +1221,8 @@ label_60728::
     nop
     ld   [$0042], sp
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $44
     nop
     call label_C05
     jr   nz, label_60746
@@ -1268,7 +1285,8 @@ label_6078F::
     stop
     ld   d, h
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   d, [hl]
     nop
     ld    hl, sp+$10
@@ -1282,7 +1300,8 @@ label_6078F::
     nop
     jr   label_6080C
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     ld   e, [hl]
     ld   b, b
     nop
@@ -1294,7 +1313,8 @@ label_6078F::
     stop
     ld   c, d
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   c, h
     nop
     ld    hl, sp+$10
@@ -1308,7 +1328,8 @@ label_6078F::
     nop
     jr   label_60830
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     ld   e, [hl]
     ld   b, b
     nop
@@ -1320,7 +1341,8 @@ label_6078F::
     stop
     ld   d, h
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   d, [hl]
     nop
     ld    hl, sp+$10
@@ -1334,7 +1356,8 @@ label_6078F::
     nop
     jr   label_60854
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     ld   e, [hl]
     ld   b, b
     nop
@@ -1346,7 +1369,8 @@ label_6078F::
     stop
     ld   c, d
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   c, h
     nop
     ld    hl, sp+$10
@@ -1360,7 +1384,8 @@ label_6078F::
     nop
     jr   label_60878
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     ld   e, [hl]
     ld   b, b
 
@@ -1883,7 +1908,8 @@ label_60B15::
     stop
     ld   [hl], h
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   [hl], h
     jr   nz, label_60B66
 
@@ -1897,7 +1923,8 @@ label_60B6A::
     stop
     ld   [hl], h
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   [hl], h
     jr   nz, label_60B76
 
@@ -1911,7 +1938,8 @@ label_60B7A::
     stop
     ld   [hl], h
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   [hl], h
     jr   nz, label_60B86
 
@@ -1924,7 +1952,8 @@ label_60B86::
     stop
     ld   [hl], h
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   [hl], h
     jr   nz, label_60C10
     ld   [bc], a
@@ -2778,7 +2807,8 @@ label_61110::
     stop
     ld   a, h
     rlca
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   a, h
     ld   h, a
     jr   nz, label_6111A
@@ -2813,14 +2843,16 @@ label_61126::
     ld   b, b
     ld   [label_6277A], sp
     ld   b, b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $78
     ld   h, a
 
 label_61140::
     stop
     ld   a, h
     ld   d, h
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   a, h
     inc  [hl]
     jr   nz, label_6114A
@@ -2855,7 +2887,8 @@ label_61156::
     ld   b, b
     ld   [label_6347A], sp
     ld   b, b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $78
     ld   [hl], h
 
 label_61170::
@@ -3837,13 +3870,16 @@ label_6179B::
     ld   bc, $0010
     ld   a, b
     ld   b, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   a, d
     ld   b, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     ld   a, h
     ld   b, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     ld   a, [hl]
     ld   b, c
     nop
@@ -3853,7 +3889,8 @@ label_6179B::
     nop
     ld   [label_6016A], sp
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $6C
     ld   b, c
     nop
     jr   label_61898
@@ -3861,13 +3898,16 @@ label_6179B::
     stop
     ld   h, b
     ld   b, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     ld   h, d
     ld   b, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     ld   h, h
     ld   b, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     ld   h, [hl]
     ld   b, c
     ld   c, $00
@@ -3885,13 +3925,16 @@ label_6179B::
     stop
     rst  $38
     ld   b, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $08
     rst  $38
     ld   b, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
     rst  $38
     ld   b, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $18
     rst  $38
     ld   b, c
 
@@ -4726,7 +4769,8 @@ label_61D7D::
 label_61D7F::
     nop
     ld   bc, $00FF
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $F0
     call label_63DE8
     ld   a, $01
     ld   [$FFA4], a
@@ -4807,7 +4851,8 @@ label_61DFB::
     ld   b, $00
     ld   [label_654], sp
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $56
     ld   b, $00
     ld    hl, sp+$50
     inc  bc
@@ -4818,7 +4863,8 @@ label_61DFB::
     nop
     ld   [label_354], sp
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $56
     inc  bc
 
 label_61E1B::
@@ -5600,7 +5646,8 @@ label_6232D::
     ret
 
 label_6237D::
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $20
     jr   nc, label_623C1
     ld   d, b
     ld   h, b
@@ -6131,7 +6178,8 @@ label_62679::
     add  hl, bc
     dec  c
     ld   c, $0F
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $11
     ld   de, $0111
 
 label_626A3::
@@ -6336,7 +6384,8 @@ label_6273A::
     db   $FD ; Undefined instruction
     ld   [label_236E], sp
     db   $FD ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $6C
     inc  hl
     nop
     nop
@@ -6445,7 +6494,8 @@ label_6273A::
     db   $FC ; Undefined instruction
     ld   [label_236E], sp
     db   $FC ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $6C
     inc  hl
     nop
     nop
@@ -6460,7 +6510,8 @@ label_6273A::
     ld   l, h
     inc  hl
     nop
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $6E
     inc  hl
     nop
     jr   label_628CD
@@ -6480,7 +6531,8 @@ label_6273A::
     inc  b
     ld   [label_236E], sp
     inc  b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $6C
     inc  hl
     nop
     nop
@@ -6718,7 +6770,8 @@ label_629BD::
     ld   [label_100C], sp
     inc  c
     ld   [label_2104], sp
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $C0
     ld   a, [$FFE7]
     rra
     rra
@@ -8420,9 +8473,12 @@ label_633FA::
     db   $FC ; Undefined instruction
 
 label_63406::
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
+    db   $10
     call label_C05
     jr   nz, label_63416
     ld   [hl], $80
@@ -8734,7 +8790,8 @@ label_6358E::
     ld   a, [$FF08]
     ld   a, h
     ld   [hl], $F0
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $70
     daa
     nop
     nop
@@ -9104,7 +9161,8 @@ label_637ED::
     ldi  [hl], a
 
 label_6381D::
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $11
     ld   [de], a
     ld   de, $F1F0
     rla

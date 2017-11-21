@@ -809,7 +809,8 @@ label_58323::
     ld   c, e
     add  hl, bc
     ld   c, e
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $4B
     rla
     ld   c, e
 
@@ -1270,7 +1271,8 @@ label_58527::
     ld   d, b
     add  hl, bc
     ld   d, b
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $50
     dec  d
     ld   d, b
     inc  e
@@ -1367,7 +1369,8 @@ label_585BE::
     ld   d, c
     dec  c
     ld   d, c
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $51
     inc  de
     ld   d, c
     ld   d, $51
@@ -4491,14 +4494,19 @@ label_592FF::
     cpl
     rst  $38
     scf
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $53
+    db   $10
+    db   $57
+    db   $10
+    db   $45
     ld   [de], a
     rst  $38
     inc  sp
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $53
+    db   $10
+    db   $45
     ld   [de], a
     ld   d, a
     ld   de, label_5A4FF
@@ -4574,15 +4582,21 @@ label_5932D::
     nop
     cp   a
     inc  d
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $16
+    db   $10
+    db   $34
+    db   $10
+    db   $25
     ld   [de], a
     rst  $38
     inc  de
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $17
+    db   $10
+    db   $35
+    db   $10
+    db   $24
     ld   [de], a
     rst  $38
     rst  $38
@@ -5177,7 +5191,8 @@ label_59567::
     ld   h, d
     push bc
     rst  $38
-    db   $10 ; Undefined instruction
+    db   $10
+    db   $CD
     ld   d, $CD
     ld   d, b
     call label_CD56

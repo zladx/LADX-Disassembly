@@ -269,7 +269,7 @@ RenderLoop::
     inc  a
     ld   [wTransitionSfxFrameCount], a
 
-    ; If the frame count has reached $C0 yet, continue the transition.
+    ; If the frame count didn't reached $C0 yet, continue the transition.
     cp   $C0
     jr   nz, .renderTransitionSfx
 
@@ -290,27 +290,36 @@ RenderLoop::
     jp   RenderInteractiveFrame
 
 .renderTransitionSfx
+
+    ; If TransitionSfxFrameCount >= $60,
+    ; start fading the screen to white.
     push af
     cp   $60
-    jr   c, label_2B7
+    jr   c, .transitionFadeOutEnd
+    ; If GBC...
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_2B4
-
+    jr   z, .renderDMGFadeOut
+    ; Render fade-to-white effect for GBC
+    ; (calls 20:6CA7)
     ld   a, $20
     ld   [MBC3SelectBank], a
     call label_6CA7
-
-    jr   label_2B7
-
-label_2B4::
+    jr   .transitionDone
+.renderDMGFadeOut
+    ; Render fade-to-white effect for DMG
+    ; (calls 14:4FE8)
     call label_4FE8
+.transitionFadeOutEnd
 
-label_2B7::
+.transitionDone
+    ; Render transition effect
+    ; (calls 14:5038)
     ld   a, $14
     ld   [MBC3SelectBank], a
     pop  af
     call label_5038
+
     ; Play some audio
     call PlayAudioStep
     ; Apply pending palettes

@@ -5526,7 +5526,7 @@ label_A9913::
     rst  8
     ld   a, l
     rst  8
-    jp   [hl]
+    jp   hl
     ld   e, a
     pop  af
     ld   e, a
@@ -5584,7 +5584,7 @@ label_A9913::
     ccf
     rst  $10
     ccf
-    jp   [hl]
+    jp   hl
     rra
     call nz, label_FA3F
     rlca
@@ -7400,7 +7400,7 @@ label_AA19C::
     ccf
     pop  bc
     rra
-    jp   [hl]
+    jp   hl
     ld   h, b
     rst  $38
     add  a, b
@@ -7617,7 +7617,7 @@ label_AA2E3::
     ccf
     ret
     rra
-    jp   [hl]
+    jp   hl
     rst  $38
     rst  $38
     ld   a, [$FF00]
@@ -9301,7 +9301,7 @@ label_AAA16::
     cp   $01
     rst  $38
     rlca
-    jp   [hl]
+    jp   hl
     ld   e, $F7
     ld   a, c
     cp   $00
@@ -10244,9 +10244,9 @@ label_AAE3C::
     add  a, d
     db   $FD ; Undefined instruction
     sub  a, [hl]
-    jp   [hl]
+    jp   hl
     sub  a, [hl]
-    jp   [hl]
+    jp   hl
     ld   a, h
     ld   bc, $00FF
     cp   l

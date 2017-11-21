@@ -163,7 +163,7 @@ label_2C083::
     ld   d, e
     cp   e
     ld   d, e
-    jp   [hl]
+    jp   hl
     ld   d, e
     inc  h
     ld   d, h
@@ -394,7 +394,7 @@ label_2C186::
     ld   [hl], d
     and  b
     ld   [hl], d
-    jp   [hl]
+    jp   hl
     ld   [hl], d
     ld   a, [de]
     ld   [hl], e
@@ -464,7 +464,7 @@ label_2C1D8::
     ld   h, $7C
     adc  a, e
     ld   a, h
-    jp   [hl]
+    jp   hl
     ld   a, h
     inc  e
     ld   a, l
@@ -5592,7 +5592,7 @@ label_2DA32::
     dec  [hl]
     db   $E8 ; add  sp, d
     ld   b, h
-    jp   [hl]
+    jp   hl
     ld   b, l
     ld   [label_4FE], a
     rrca
@@ -7708,7 +7708,7 @@ label_2E431::
     ld   d, [hl]
     set  4, b
     nop
-    jp   [hl]
+    jp   hl
     ld   l, b
 
 label_2E437::

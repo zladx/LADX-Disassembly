@@ -952,12 +952,12 @@ label_68437::
     ld   [bc], a
 
 label_68484::
-    jp   [hl]
+    jp   hl
     add  a, e
 
 label_68486::
     ld   [de], a
-    jp   [hl]
+    jp   hl
     jp   nz, label_E22
     jp   nz, label_3862
 

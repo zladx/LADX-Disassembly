@@ -7624,7 +7624,7 @@ label_7A46E::
     rst  $10
     ld   h, h
     ld   [$FF64], a
-    jp   [hl]
+    jp   hl
     ld   h, h
     ld   c, $6E
     ld   a, [$FF00+C]
@@ -7861,9 +7861,9 @@ label_7A569::
     ld   h, h
     ld   [$FF64], a
     ld   [$FF64], a
-    jp   [hl]
+    jp   hl
     ld   h, h
-    jp   [hl]
+    jp   hl
     ld   h, h
     ld   a, [$FF00+C]
     ld   a, [$FF00+C]
@@ -7904,10 +7904,10 @@ label_7A569::
     ld   h, h
     inc  de
     ld   l, [hl]
-    jp   [hl]
+    jp   hl
     ld   h, h
     ld   c, $6E
-    jp   [hl]
+    jp   hl
     ld   h, h
     ld   a, [$FF00+C]
     inc  de
@@ -9381,7 +9381,7 @@ label_7AB67::
     ld   l, h
     sbc  a, e
     ld   l, l
-    jp   [hl]
+    jp   hl
     ld   l, h
     adc  a, h
     ld   l, l
@@ -9389,17 +9389,17 @@ label_7AB67::
 label_7AC6C::
     sbc  a, l
     ld   l, [hl]
-    jp   [hl]
+    jp   hl
     ld   l, h
     sub  a, h
     ld   l, [hl]
-    jp   [hl]
+    jp   hl
     ld   l, h
     sbc  a, e
     ld   l, l
     sub  a, a
     ld   l, [hl]
-    jp   [hl]
+    jp   hl
     ld   l, h
     ld   a, h
     ld   l, [hl]
@@ -9447,23 +9447,23 @@ label_7AC9A::
     ld   e, a
     sbc  a, e
     ld   l, l
-    jp   [hl]
+    jp   hl
     ld   l, h
     adc  a, h
     ld   l, l
     sbc  a, l
     ld   l, [hl]
-    jp   [hl]
+    jp   hl
     ld   l, h
     db   $EB ; Undefined instruction
     ld   l, l
     sub  a, h
     ld   l, [hl]
-    jp   [hl]
+    jp   hl
     ld   l, h
     sub  a, a
     ld   l, [hl]
-    jp   [hl]
+    jp   hl
     ld   l, h
     adc  a, h
     ld   l, l

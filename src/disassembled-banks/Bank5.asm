@@ -8054,7 +8054,7 @@ label_16FCA::
     db   $E4 ; Undefined instruction
     push hl
     rst  $20
-    jp   [hl]
+    jp   hl
     db   $ED ; Undefined instruction
     pop  af
     or   $FB
@@ -8078,13 +8078,13 @@ label_16FCA::
     ei
     or   $F1
     db   $ED ; Undefined instruction
-    jp   [hl]
+    jp   hl
     rst  $20
     push hl
     db   $E4 ; Undefined instruction
     push hl
     rst  $20
-    jp   [hl]
+    jp   hl
     db   $ED ; Undefined instruction
     pop  af
     or   $FB

@@ -507,7 +507,7 @@ label_7C223::
     call label_7FA64
     ld   de, $D390
     ld   bc, $D394
-    jp   [hl]
+    jp   hl
     xor  a
     ld   [$D370], a
     ld   [$D371], a
@@ -1453,7 +1453,7 @@ label_7C7C9::
     ld   b, a
     db   $E3 ; Undefined instruction
     ld   b, a
-    jp   [hl]
+    jp   hl
     ld   b, a
 
 label_7C7D1::
@@ -3607,7 +3607,7 @@ label_7D40C::
     ld   a, [$D3CD]
     and  a
     ret  nz
-    jp   [hl]
+    jp   hl
 
 label_7D41B::
     and  a
@@ -6696,7 +6696,7 @@ label_7E508::
 label_7E50B::
     ld   de, $D393
     ld   bc, $D398
-    jp   [hl]
+    jp   hl
 
 label_7E512::
     ld   a, [$C50E]
@@ -7159,7 +7159,7 @@ label_7E7AA::
     jp   label_7FA25
 
 label_7E7DC::
-    jp   [hl]
+    jp   hl
     ld   h, a
     db   $EC ; Undefined instruction
     ld   h, a

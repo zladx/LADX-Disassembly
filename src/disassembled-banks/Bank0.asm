@@ -724,7 +724,7 @@ label_430::
     ld   a, $20
     ld   [label_2100], a
     call label_4657
-    jp   [hl]
+    jp   hl
 
 label_43A::
     call label_28CF
@@ -1871,7 +1871,7 @@ label_BE7::
     ld   h, a
     ld   a, [$DE03]
     ld   l, a
-    jp   [hl]
+    jp   hl
     ld   a, $02
     ld   [label_2100], a
     call label_1A50
@@ -6404,7 +6404,7 @@ label_289F::
     ld   d, [hl]
     ld   l, e
     ld   h, d
-    jp   [hl]
+    jp   hl
 
 label_28CF::
     ld   a, [$FFFF]
@@ -9155,7 +9155,7 @@ label_3A8D::
     ld   h, d
     ld   [$DBAF], a
     ld   [label_2100], a
-    jp   [hl]
+    jp   hl
 
 label_3AAA::
     ld   [label_805], sp

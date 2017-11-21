@@ -8609,7 +8609,7 @@ label_E242D::
     db   $FC ; Undefined instruction
     db   $FC ; Undefined instruction
     rst  $20
-    jp   [hl]
+    jp   hl
     rst  $38
     db   $E8 ; add  sp, d
     cp   $D0
@@ -11543,7 +11543,7 @@ label_E26CB::
     rst  $38
     call c, label_E34E7
     adc  a, a
-    jp   [hl]
+    jp   hl
     rra
     ld   [$ED1F], a
     ld   e, $F3
@@ -11644,7 +11644,7 @@ label_E26CB::
     sbc  a, a
     db   $E8 ; add  sp, d
     rra
-    jp   [hl]
+    jp   hl
     rra
     ld   [$ED1F], a
     ld   e, $F1
@@ -12465,7 +12465,7 @@ label_E33BD::
     rst  $38
     call c, label_E34E7
     adc  a, a
-    jp   [hl]
+    jp   hl
     rra
     ld   [$ED1F], a
     ld   e, $F3
@@ -12566,7 +12566,7 @@ label_E33BD::
     sbc  a, a
     db   $E8 ; add  sp, d
     rra
-    jp   [hl]
+    jp   hl
     rra
     ld   [$ED1F], a
     ld   e, $F1
@@ -12691,7 +12691,7 @@ label_E3513::
     ld   a, l
     ret
     inc  a
-    jp   [hl]
+    jp   hl
     jr   c, label_E3507
     jr   label_E3511
     jr   label_E3513
@@ -12701,7 +12701,7 @@ label_E3513::
     ld   bc, label_2FF
     cp   $84
     ld   a, h
-    jp   [hl]
+    jp   hl
 
 label_E352A::
     jr   label_E351F

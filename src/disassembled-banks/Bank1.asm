@@ -1137,7 +1137,7 @@ label_47CD::
     call label_5DC0
     ld   a, [$DB96]
     rst  0
-    jp   [hl]
+    jp   hl
     ld   b, a
     push af
     ld   b, a
@@ -2520,7 +2520,7 @@ label_4F45::
     ld   c, a
     rst  $18
     ld   d, b
-    jp   [hl]
+    jp   hl
     ld   d, c
     ld   a, $08
     ld   [$D6FE], a
@@ -3198,7 +3198,7 @@ label_53E8::
     rst  $38
     adc  a, d
     ldd  [hl], a
-    jp   [hl]
+    jp   hl
     rst  $38
     adc  a, d
     ld   l, $E9
@@ -3379,7 +3379,7 @@ label_54A0::
     nop
     rst  $38
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     rst  $38
     nop
     db   $E8 ; add  sp, d
@@ -3387,7 +3387,7 @@ label_54A0::
     db   $E8 ; add  sp, d
     rst  $38
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     rst  $38
     nop
     db   $E8 ; add  sp, d
@@ -3417,7 +3417,7 @@ label_54A0::
     db   $EC ; Undefined instruction
     db   $E8 ; add  sp, d
     db   $EC ; Undefined instruction
-    jp   [hl]
+    jp   hl
     rst  $38
     nop
     nop
@@ -3467,7 +3467,7 @@ label_54E6::
     ld   c, c
     ld   a, a
     sbc  a, l
-    jp   [hl]
+    jp   hl
     ld   c, c
     ld   a, a
     sbc  a, [hl]
@@ -8593,7 +8593,7 @@ label_71DE::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $ED ; Undefined instruction
     xor  $EF

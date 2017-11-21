@@ -1883,7 +1883,7 @@ label_C918::
     ld   [hl], $05
     ld   a, $03
     call label_9D3
-    jp   [hl]
+    jp   hl
 
 label_C924::
     ld   bc, label_2104

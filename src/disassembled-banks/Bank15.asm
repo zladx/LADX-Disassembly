@@ -1304,7 +1304,7 @@ label_3C545::
     add  a, b
     nop
     ld   [rJOYP], a
-    jp   [hl]
+    jp   hl
     nop
     ld   a, l
     nop
@@ -1424,7 +1424,7 @@ label_3C545::
     inc  bc
     db   $E3 ; Undefined instruction
     inc  bc
-    jp   [hl]
+    jp   hl
     ld   a, [$FFE3]
     ret  nz
     rst  $28
@@ -2333,7 +2333,7 @@ label_3C910::
     inc  bc
     db   $E8 ; add  sp, d
     inc  bc
-    jp   [hl]
+    jp   hl
     rlca
     db   $EB ; Undefined instruction
     rlca
@@ -2376,7 +2376,7 @@ label_3CA32::
     di
     ld   h, h
     di
-    jp   [hl]
+    jp   hl
     ld    hl, sp+$1B
     ld   [$FF30], a
     ret  nz
@@ -3500,7 +3500,7 @@ label_3CF4C::
     rst  $38
     add  hl, bc
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $38
     nop
     rst  $38
@@ -5935,7 +5935,7 @@ label_3D927::
     ld   bc, $8387
     db   $EC ; Undefined instruction
     db   $E4 ; Undefined instruction
-    jp   [hl]
+    jp   hl
     ld   [$FFE3], a
     pop  hl
     rst  $20
@@ -7678,7 +7678,7 @@ label_3E0DE::
 
 label_3E0DF::
     nop
-    jp   [hl]
+    jp   hl
     jr   label_3E0CC
     jr   label_3E0D0
     jr   label_3E0DE
@@ -8013,7 +8013,7 @@ label_3E259::
     ld   sp, hl
     ld   a, $F8
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $38
     ld   b, [hl]
     pop  hl
@@ -9042,7 +9042,7 @@ label_3E6FF::
     sbc  a, a
     or   e
     or   e
-    jp   [hl]
+    jp   hl
     xor  c
     call nz, label_6C4
     ld   b, $05
@@ -9309,7 +9309,7 @@ label_3E7CF::
     db   $FC ; Undefined instruction
     rst  $38
     ld   a, [$FF00+C]
-    jp   [hl]
+    jp   hl
     di
     rla
     add  hl, de
@@ -10031,7 +10031,7 @@ label_3EB35::
     pop  hl
     pop  de
     pop  hl
-    jp   [hl]
+    jp   hl
     ld   sp, label_1F1F
     add  a, a
     add  a, d
@@ -11158,7 +11158,7 @@ label_3F042::
     rst  $38
     ld   a, c
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $18
     jr   label_3F092
     rst  $10
@@ -11481,7 +11481,7 @@ label_3F1BF::
     db   $FD ; Undefined instruction
     ld   c, c
     db   $FD ; Undefined instruction
-    jp   [hl]
+    jp   hl
     db   $FD ; Undefined instruction
     add  hl, sp
     rst  $38
@@ -13615,7 +13615,7 @@ label_3FB91::
     sbc  a, a
     rra
     ld   [rJOYP], a
-    jp   [hl]
+    jp   hl
     rst  $38
     ret
     ld   a, a

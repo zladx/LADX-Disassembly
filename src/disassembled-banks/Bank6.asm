@@ -66,7 +66,7 @@ label_18049::
     ld   b, b
     ret  c
     ld   b, b
-    jp   [hl]
+    jp   hl
     ld   b, b
     call label_3B12
     ld   a, [$DB15]

@@ -1410,7 +1410,7 @@ label_DC7C3::
 label_DC7D0::
     ld   a, [$C20E]
     rst  0
-    jp   [hl]
+    jp   hl
     ld   b, a
     add  hl, hl
     ld   c, b
@@ -4786,7 +4786,7 @@ label_DDAE9::
 
 label_DDB60::
     ld   e, d
-    jp   [hl]
+    jp   hl
     ld   e, d
     dec  d
     ld   e, e

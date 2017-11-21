@@ -1315,7 +1315,7 @@ label_C850B::
     ld   a, c
     ld   a, $C7
     ld   a, b
-    jp   [hl]
+    jp   hl
     ld   d, [hl]
     adc  a, e
     ld   [hl], l
@@ -1362,7 +1362,7 @@ label_C8642::
     ld   a, c
     ld   a, $C7
     ld   a, b
-    jp   [hl]
+    jp   hl
     ld   d, [hl]
     adc  a, e
     ld   [hl], l
@@ -1378,7 +1378,7 @@ label_C8642::
     nop
     push hl
     ld   [bc], a
-    jp   [hl]
+    jp   hl
     ld   b, $D5
     ld   c, $EF
     ld   e, $FD
@@ -1802,7 +1802,7 @@ label_C8857::
     ld    hl, sp+$1E
     ld   [rBGPD], a
     sub  a, [hl]
-    jp   [hl]
+    jp   hl
     ld   d, $FF
 
 label_C8879::
@@ -1912,7 +1912,7 @@ label_C88E2::
     ld    hl, sp+$B2
     ld   e, h
     ld   a, [$FF00+C]
-    jp   [hl]
+    jp   hl
     ld   [hl], $F1
     xor  $F1
     sbc  a, $F3
@@ -3764,7 +3764,7 @@ label_C9108::
     ccf
     jp   label_2FFF
     or   $D9
-    jp   [hl]
+    jp   hl
     or   $00
     nop
     nop
@@ -4013,7 +4013,7 @@ label_C9149::
     cp   $07
     cp   $0F
     or   $19
-    jp   [hl]
+    jp   hl
     or   $00
     nop
     nop
@@ -12980,7 +12980,7 @@ label_CB938::
     ld   [hl], e
     db   $EC ; Undefined instruction
     inc  [hl]
-    jp   [hl]
+    jp   hl
     ld   a, c
     xor  l
     cp   c

@@ -4080,7 +4080,7 @@ label_CD1C5::
     rst  $38
     jp   label_EDFF
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $30
     di
     rst  $38
@@ -4922,7 +4922,7 @@ label_CD601::
     cp   $00
     nop
     cp   $D5
-    jp   [hl]
+    jp   hl
     or   [hl]
     ld   e, a
     and  b
@@ -5826,7 +5826,7 @@ label_CDA63::
     ld   [de], a
 
 label_CDA6B::
-    jp   [hl]
+    jp   hl
     inc  d
     ld   [$FF35], a
     ret  nz
@@ -6167,6 +6167,8 @@ label_CDB83::
     add  hl, bc
     rst  $38
     db   $F4 ; Undefined instruction
+
+label_CDBF7::
     rst  $38
     ld   sp, hl
     rst  $38
@@ -7376,7 +7378,7 @@ label_CE13E::
     inc  b
     ld   a, [$F409]
     ld   [de], a
-    jp   [hl]
+    jp   hl
     scf
     add  a, c
     add  hl, sp
@@ -9440,7 +9442,7 @@ label_CEA71::
     rst  $38
     rst  $38
     rst  $38
-    jp   [hl]
+    jp   hl
     sbc  a, a
     ret
     cp   a
@@ -12759,7 +12761,7 @@ label_CF90E::
     ld   d, $EA
     ld   d, $EB
     inc  de
-    jp   [hl]
+    jp   hl
     inc  hl
     db   $21
     ld   hl, $FCDE
@@ -14270,4 +14272,4 @@ label_CFF8F::
     rst  $30
     adc  a, h
     rst  $30
-    ld   [$00F7], sp
+    ld   [$5CF7], sp

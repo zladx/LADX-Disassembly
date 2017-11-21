@@ -251,7 +251,7 @@ label_7006C::
     ld   [hl], a
     ret  c
     ld   [hl], a
-    jp   [hl]
+    jp   hl
     ld   [hl], a
     ld   a, [label_70877]
     ld   a, b
@@ -1215,7 +1215,7 @@ label_704FF::
     ld   [hl], a
     cp   l
     ld   [hl], a
-    jp   [hl]
+    jp   hl
     ld   [hl], a
     add  hl, hl
     ld   a, b
@@ -1346,7 +1346,7 @@ label_705B6::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $ED ; Undefined instruction
     xor  $EF

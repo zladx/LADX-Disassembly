@@ -5055,7 +5055,7 @@ label_9D4F::
     ld   e, [hl]
     inc  bc
     ld   e, [hl]
-    jp   [hl]
+    jp   hl
     ld   e, l
     jr   label_9DD5
     jp   nz, label_CD5D

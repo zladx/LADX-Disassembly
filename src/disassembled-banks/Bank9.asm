@@ -147,7 +147,7 @@ label_2403C::
     ld   e, c
     sbc  a, b
     ld   e, c
-    jp   [hl]
+    jp   hl
     ld   e, c
     ld   c, $5A
     ccf
@@ -2608,7 +2608,7 @@ label_24B65::
     ccf
     add  a, e
     dec  [hl]
-    jp   [hl]
+    jp   hl
     jr   c, label_24BD7
     jp   nz, label_3A39
 
@@ -2619,7 +2619,7 @@ label_24B9C::
     dec  sp
     add  a, e
     ld   b, l
-    jp   [hl]
+    jp   hl
     ld   c, b
     add  hl, sp
     add  a, e
@@ -2667,7 +2667,7 @@ label_24BB6::
 label_24BD7::
     ld   sp, $C23F
     ldd  [hl], a
-    jp   [hl]
+    jp   hl
     inc  sp
     ld   a, $83
     inc  [hl]
@@ -2685,7 +2685,7 @@ label_24BD7::
 
 label_24BEC::
     ld   b, [hl]
-    jp   [hl]
+    jp   hl
     ld   b, a
     dec  sp
     add  a, a
@@ -2700,7 +2700,7 @@ label_24BEC::
     ld   c, b
     add  a, e
     ld   h, e
-    jp   [hl]
+    jp   hl
     ld   h, [hl]
     ld   c, c
     ld   h, a
@@ -2711,7 +2711,7 @@ label_24BEC::
     db   $3A ; ldd  a, [hl]
     add  a, e
     ld   [hl], e
-    jp   [hl]
+    jp   hl
     db   $76 ; Halt
     db   $3A ; ldd  a, [hl]
     ld   [hl], a
@@ -3650,10 +3650,10 @@ label_25070::
     ld   d, h
     add  a, e
     inc  bc
-    jp   [hl]
+    jp   hl
     add  a, e
     inc  de
-    jp   [hl]
+    jp   hl
     add  a, l
     ldi  [hl], a
     ld   c, $70
@@ -3764,7 +3764,7 @@ label_250DF::
     ld   h, $C6
     pop  hl
     rra
-    jp   [hl]
+    jp   hl
     jr   z, label_25118
     cp   $0B
     inc  b
@@ -4698,10 +4698,10 @@ label_25545::
     ld   h, a
     ld   c, $83
     ld   h, d
-    jp   [hl]
+    jp   hl
     add  a, e
     ld   [hl], d
-    jp   [hl]
+    jp   hl
     ld   h, l
     ld   c, c
     ld   h, [hl]
@@ -4760,10 +4760,10 @@ label_25575::
     db   $3A ; ldd  a, [hl]
     add  a, d
     ld   h, e
-    jp   [hl]
+    jp   hl
     add  a, d
     ld   [hl], e
-    jp   [hl]
+    jp   hl
     ld   h, l
     ld   c, c
     add  a, h
@@ -5566,10 +5566,10 @@ label_25941::
 label_25951::
     ld   de, $833B
     ld   [bc], a
-    jp   [hl]
+    jp   hl
     add  a, e
     ld   [de], a
-    jp   [hl]
+    jp   hl
     jp   nz, label_3A05
     jp   nz, label_3E06
     ld   h, $39
@@ -5594,16 +5594,16 @@ label_25951::
     ret  z
     add  a, d
     ld   h, c
-    jp   [hl]
+    jp   hl
     add  a, d
     ld   [hl], c
-    jp   [hl]
+    jp   hl
     add  a, d
     ld   h, a
-    jp   [hl]
+    jp   hl
     add  a, d
     ld   [hl], a
-    jp   [hl]
+    jp   hl
     ld   h, e
     dec  hl
     ld   l, c
@@ -5636,10 +5636,10 @@ label_25951::
     db   $3A ; ldd  a, [hl]
     add  a, d
     inc  bc
-    jp   [hl]
+    jp   hl
     add  a, d
     inc  de
-    jp   [hl]
+    jp   hl
     ld   sp, label_32ED
     ret  z
     jp   nz, label_ED25
@@ -6423,7 +6423,7 @@ label_25D4E::
     add  a, d
     ld   bc, $82E9
     rlca
-    jp   [hl]
+    jp   hl
     add  hl, bc
     add  hl, sp
     push bc
@@ -8296,10 +8296,10 @@ label_26675::
     ccf
     add  a, e
     ld   h, d
-    jp   [hl]
+    jp   hl
     add  a, e
     ld   [hl], d
-    jp   [hl]
+    jp   hl
     add  a, h
     db   $10 ; Undefined instruction
     add  a, d

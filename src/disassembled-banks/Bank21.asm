@@ -8430,7 +8430,7 @@ label_570F7::
     db   $E4 ; Undefined instruction
     push hl
     rst  $20
-    jp   [hl]
+    jp   hl
     db   $ED ; Undefined instruction
 
 label_570FC::
@@ -8458,13 +8458,13 @@ label_570FF::
     ei
     or   $F1
     db   $ED ; Undefined instruction
-    jp   [hl]
+    jp   hl
     rst  $20
     push hl
     db   $E4 ; Undefined instruction
     push hl
     rst  $20
-    jp   [hl]
+    jp   hl
     db   $ED ; Undefined instruction
     pop  af
     or   $FB

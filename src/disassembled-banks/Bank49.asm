@@ -2499,7 +2499,7 @@ label_C4B2F::
     cp   $30
     ld   sp, hl
     or   [hl]
-    jp   [hl]
+    jp   hl
     or   $F9
     add  a, $BD
     jp   nz, label_827D
@@ -4365,7 +4365,7 @@ label_C53DC::
     nop
     ld   [hl], l
     inc  bc
-    jp   [hl]
+    jp   hl
     db   $76 ; Halt
     cp   e
     ld   b, h
@@ -4417,7 +4417,7 @@ label_C53DC::
     ld   [bc], a
     rst  8
     nop
-    jp   [hl]
+    jp   hl
     add  a, a
     ld   [hl], d
     rst  8
@@ -4461,7 +4461,7 @@ label_C53DC::
     ld  [$FF00+C], a
     db   $FD ; Undefined instruction
     ld   [de], a
-    jp   [hl]
+    jp   hl
     ld   [hl], $F1
     ld   c, $38
     nop
@@ -13933,7 +13933,7 @@ label_C7F24::
     dec  [hl]
     rst  $38
     add  hl, bc
-    jp   [hl]
+    jp   hl
     or   $60
     sbc  a, a
     ld   b, b
@@ -14098,4 +14098,4 @@ label_C7FE7::
     adc  a, $DA
     inc  a
     db   $F4 ; Undefined instruction
-    ld    hl, sp+$00
+    ld    hl, sp+$51

@@ -9935,7 +9935,7 @@ label_67A8F::
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
-    jp   [hl]
+    jp   hl
     cp   [hl]
     ld   a, d
     db   $DB

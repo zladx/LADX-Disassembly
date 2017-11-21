@@ -270,7 +270,7 @@ label_80100::
     add  a, b
     ld   e, d
     dec  b
-    jp   [hl]
+    jp   hl
     ld   e, l
     jr   label_801A6
     ld   d, l
@@ -1493,7 +1493,7 @@ label_80669::
     ld   [hl], e
     ld   l, $69
     inc  b
-    jp   [hl]
+    jp   hl
     dec  l
     ld   l, c
     inc  b
@@ -2834,7 +2834,7 @@ label_80D88::
     db   $E3 ; Undefined instruction
     push hl
     and  $E8
-    jp   [hl]
+    jp   hl
     db   $EB ; Undefined instruction
     db   $EC ; Undefined instruction
     xor  $EF
@@ -2876,7 +2876,7 @@ label_80D88::
     db   $E3 ; Undefined instruction
     push hl
     and  $E8
-    jp   [hl]
+    jp   hl
     db   $EB ; Undefined instruction
     db   $EC ; Undefined instruction
     xor  $F0
@@ -2918,7 +2918,7 @@ label_80D88::
     db   $E4 ; Undefined instruction
     push hl
     and  $E8
-    jp   [hl]
+    jp   hl
     ld   [$EDEC], a
     xor  $F0
     pop  af
@@ -2960,7 +2960,7 @@ label_80D88::
     db   $E4 ; Undefined instruction
     push hl
     and  $E8
-    jp   [hl]
+    jp   hl
     ld   [$EDEC], a
     xor  $EF
     pop  af
@@ -3003,7 +3003,7 @@ label_80E95::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     db   $EB ; Undefined instruction
     db   $EC ; Undefined instruction
     db   $ED ; Undefined instruction
@@ -3046,7 +3046,7 @@ label_80E95::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     xor  $EF
     ld   a, [$FFF1]
@@ -3086,7 +3086,7 @@ label_80F01::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $ED ; Undefined instruction
     xor  $EF
@@ -3128,7 +3128,7 @@ label_80F55::
     and  $E7
     db   $E8 ; add  sp, d
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $ED ; Undefined instruction
     xor  $EF
@@ -3169,7 +3169,7 @@ label_80F55::
     ld   a, [$FFF0]
     rst  $20
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $EC ; Undefined instruction
     db   $EC ; Undefined instruction
@@ -3213,7 +3213,7 @@ label_80FB8::
     ld   a, [de]
     dec  de
     ld   a, [$FFE9]
-    jp   [hl]
+    jp   hl
     ld   [$EBEB], a
     db   $EC ; Undefined instruction
     db   $ED ; Undefined instruction
@@ -6077,7 +6077,7 @@ label_81DFB::
 
 label_81E00::
     ld   e, l
-    jp   [hl]
+    jp   hl
     ld   e, l
     db   $ED ; Undefined instruction
     ld   e, l
@@ -11350,7 +11350,7 @@ label_83679::
     rst  $38
     db   $F4 ; Undefined instruction
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$FFEB], a
     rst  $38
     rst  $38

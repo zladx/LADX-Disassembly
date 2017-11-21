@@ -4596,7 +4596,7 @@ label_F1435::
     nop
     db   $EB ; Undefined instruction
     inc  d
-    jp   [hl]
+    jp   hl
     add  a, b
     ld   de, label_F08
     nop
@@ -5780,7 +5780,7 @@ label_F18E4::
     rst  $38
     sbc  a, b
     ld   a, a
-    jp   [hl]
+    jp   hl
     db   $E8 ; add  sp, d
     rst  $30
     or   $1F
@@ -6846,7 +6846,7 @@ label_F1CA4::
     rst  $18
     ld   [$FFF9], a
     ret  nz
-    jp   [hl]
+    jp   hl
     ld  [$FF00+C], a
     ld    hl, sp+$F8
     rst  $38

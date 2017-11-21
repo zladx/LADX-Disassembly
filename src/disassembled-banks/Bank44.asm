@@ -3182,7 +3182,7 @@ label_B0D77::
     ld   e, h
     ld   e, h
     ld   a, [$FF00+C]
-    jp   [hl]
+    jp   hl
     xor  c
     push hl
     dec  h
@@ -4320,9 +4320,9 @@ label_B1279::
     ld   sp, hl
     rst  $28
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $38
     rst  $38
     nop
@@ -4522,7 +4522,7 @@ label_B13B2::
     rst  $38
     nop
     rst  $38
-    jp   [hl]
+    jp   hl
     rra
     add  hl, bc
     db   $FD ; Undefined instruction
@@ -12291,7 +12291,7 @@ label_B34AD::
     rlca
     dec  de
     inc  bc
-    jp   [hl]
+    jp   hl
     ld   bc, label_5F3
     di
     dec  h
@@ -12372,7 +12372,7 @@ label_B34AD::
     inc  bc
     push af
     dec  c
-    jp   [hl]
+    jp   hl
     rla
     dec  de
     db   $DB

@@ -482,7 +482,7 @@ label_10336::
     ld   b, e
     sbc  a, a
     ld   b, h
-    jp   [hl]
+    jp   hl
     ld   b, h
     rla
     ld   b, l
@@ -2737,7 +2737,7 @@ label_11067::
     ld   d, b
     pop  hl
     ld   d, b
-    jp   [hl]
+    jp   hl
     ld   d, b
     call label_C05
     ld   [hl], $80

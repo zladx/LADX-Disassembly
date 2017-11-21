@@ -153,7 +153,7 @@ label_E40AF::
     sub  a, $EF
     sub  a, $EF
     call nc, label_D02F
-    jp   [hl]
+    jp   hl
     sub  a, $FF
     ret  nz
     nop
@@ -1816,7 +1816,7 @@ label_E47C0::
     rst  $38
     call c, label_E74E7
     adc  a, a
-    jp   [hl]
+    jp   hl
     rra
     ld   [$ED1F], a
     ld   e, $F3
@@ -2047,7 +2047,7 @@ label_E48F0::
     sbc  a, a
     db   $E8 ; add  sp, d
     rra
-    jp   [hl]
+    jp   hl
     rra
     ld   [$ED1F], a
     ld   e, $F1
@@ -2969,7 +2969,7 @@ label_E4D13::
     ld   a, l
     ret
     inc  a
-    jp   [hl]
+    jp   hl
     jr   c, label_E4D07
     jr   label_E4D11
     jr   label_E4D13
@@ -2979,7 +2979,7 @@ label_E4D13::
     ld   bc, label_2FF
     cp   $84
     ld   a, h
-    jp   [hl]
+    jp   hl
     jr   label_E4D1F
     nop
     rst  $30
@@ -6370,7 +6370,7 @@ label_E5B63::
     inc  b
     cp   l
     inc  bc
-    jp   [hl]
+    jp   hl
     rla
     rst  $20
     ld   e, $DF
@@ -7577,7 +7577,7 @@ label_E60AF::
     sub  a, $EF
     sub  a, $EF
     call nc, label_D02F
-    jp   [hl]
+    jp   hl
     sub  a, $FF
     ret  nz
     nop
@@ -9138,9 +9138,9 @@ label_E6730::
     nop
     and  $19
     and  $19
-    jp   [hl]
+    jp   hl
     rra
-    jp   [hl]
+    jp   hl
     rra
     ld   h, [hl]
     rra
@@ -11454,7 +11454,7 @@ label_E70FF::
     sub  a, $EF
     sub  a, $EF
     call nc, label_D02F
-    jp   [hl]
+    jp   hl
     sub  a, $FF
     ret  nz
     db   $EB ; Undefined instruction
@@ -11526,7 +11526,7 @@ label_E70FF::
     sub  a, $EF
     sub  a, $EF
     call nc, label_D02F
-    jp   [hl]
+    jp   hl
     sub  a, $FF
     ret  nz
     db   $EB ; Undefined instruction
@@ -13959,7 +13959,7 @@ label_E7B86::
     rrca
     ld   sp, hl
     rlca
-    jp   [hl]
+    jp   hl
     rla
     pop  af
     rrca

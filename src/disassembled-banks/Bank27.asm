@@ -4087,7 +4087,7 @@ label_6D403::
     ld   d, h
     ld   [hl], c
     ld   d, h
-    jp   [hl]
+    jp   hl
     ld   d, h
     rst  $38
     rst  $38

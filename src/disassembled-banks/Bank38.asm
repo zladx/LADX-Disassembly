@@ -2101,18 +2101,18 @@ label_987C5::
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   a, $3A
     dec  de
     dec  de
     add  hl, sp
     db   $3A ; ldd  a, [hl]
     dec  sp
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     add  hl, sp
     db   $3A ; ldd  a, [hl]
     dec  de
@@ -2173,7 +2173,7 @@ label_987C5::
     dec  de
     db   $3A ; ldd  a, [hl]
     ccf
-    jp   [hl]
+    jp   hl
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     ld   d, e
@@ -2182,13 +2182,13 @@ label_987C5::
     dec  de
     db   $3A ; ldd  a, [hl]
     dec  sp
-    jp   [hl]
+    jp   hl
     add  hl, sp
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
 
 label_9889E::
-    jp   [hl]
+    jp   hl
     dec  sp
     dec  de
     dec  de
@@ -2201,18 +2201,18 @@ label_9889E::
     dec  de
     dec  a
     ld   c, b
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   c, c
     inc  a
     ld   c, $1B
     cpl
     ld   c, [hl]
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   l, $2F
     cpl
@@ -2243,7 +2243,7 @@ label_988C9::
     ld   a, $3A
     ld   [$FF3F], a
     add  hl, sp
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
     dec  sp
     dec  de
@@ -2263,21 +2263,21 @@ label_988C9::
     dec  de
     dec  a
     cpl
-    jp   [hl]
+    jp   hl
     cpl
-    jp   [hl]
+    jp   hl
     cpl
-    jp   [hl]
+    jp   hl
     cpl
     cpl
     cpl
     ld   c, [hl]
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     scf
@@ -3298,18 +3298,18 @@ label_98D06::
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
@@ -3363,21 +3363,21 @@ label_98D06::
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -4466,9 +4466,9 @@ label_992F9::
     ld   c, $0E
     ld   c, $3D
     ld   c, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   c, c
     inc  a
 
@@ -4476,9 +4476,9 @@ label_99303::
     ld   c, $0E
     ld   c, $38
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   l, $2F
     cpl
@@ -4531,8 +4531,8 @@ label_9931C::
     ld   c, $0E
     ld   c, $3D
     ld   c, b
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     ld   c, c
     cpl
     cpl
@@ -4541,8 +4541,8 @@ label_9931C::
     cpl
     ld   c, [hl]
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -5567,11 +5567,11 @@ label_997B9::
     jr   c, label_99801
 
 label_997C2::
-    jp   [hl]
+    jp   hl
 
 label_997C3::
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
@@ -5579,11 +5579,11 @@ label_997C3::
     jr   c, label_99807
 
 label_997CC::
-    jp   [hl]
+    jp   hl
 
 label_997CD::
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
@@ -5633,28 +5633,28 @@ label_997F1::
     db   $EB ; Undefined instruction
     db   $EB ; Undefined instruction
     jr   c, label_997E7
-    jp   [hl]
+    jp   hl
     dec  hl
     inc  l
 
 label_99801::
     inc  l
     dec  l
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     dec  hl
     jr   c, label_997F1
-    jp   [hl]
+    jp   hl
     ld   l, $2F
     cpl
     ld   c, [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     ld   l, $3A
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -5663,8 +5663,8 @@ label_99801::
     db   $3A ; ldd  a, [hl]
     ccf
     db   $3A ; ldd  a, [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
     db   $3A ; ldd  a, [hl]
@@ -6739,14 +6739,14 @@ label_99CB9::
 label_99CBF::
     scf
     jr   c, label_99CAB
-    jp   [hl]
+    jp   hl
 
 label_99CC3::
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     ccf
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
 
 label_99CC9::
     add  hl, sp
@@ -9267,17 +9267,17 @@ label_9A7BA::
     dec  l
     jr   c, label_9A81C
     ld   c, [hl]
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   l, $2F
     cpl
     ld   c, [hl]
     jr   c, label_9A831
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     ccf
@@ -10393,17 +10393,17 @@ label_9ACA8::
     inc  b
     db   $3A ; ldd  a, [hl]
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
     ld   a, $3A
     db   $3A ; ldd  a, [hl]
     ccf
     jr   c, label_9AC9C
     ccf
-    jp   [hl]
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
+    jp   hl
 
 label_9ACBF::
     ld   a, $3A

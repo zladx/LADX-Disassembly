@@ -7463,7 +7463,7 @@ label_5E51D::
     add  a, $05
     or   h
     or   l
-    jp   [hl]
+    jp   hl
     ld   [$B9B8], a
     sbc  a, c
     and  $05

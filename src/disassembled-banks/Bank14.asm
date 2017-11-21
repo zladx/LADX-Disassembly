@@ -1657,7 +1657,7 @@ label_387AC::
     ld   d, l
     xor  e
     ld   d, h
-    jp   [hl]
+    jp   hl
     ld   d, [hl]
     cp   h
     ld   b, e

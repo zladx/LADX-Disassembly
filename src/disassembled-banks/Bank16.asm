@@ -1478,7 +1478,7 @@ label_406A5::
     dec  a
     call label_EB1B
     dec  e
-    jp   [hl]
+    jp   hl
     db   $3A ; ldd  a, [hl]
     call z, label_16F1
     rst  $28
@@ -2134,7 +2134,7 @@ label_4097E::
     ld   a, a
     ld   a, a
     cp   $F3
-    jp   [hl]
+    jp   hl
     ld   [$FFA4], a
     and  d
     rla
@@ -2503,7 +2503,7 @@ label_40B16::
     nop
     sbc  a, c
     nop
-    jp   [hl]
+    jp   hl
     nop
     rlca
     nop
@@ -4100,7 +4100,7 @@ label_41216::
     nop
     sbc  a, c
     nop
-    jp   [hl]
+    jp   hl
     nop
     rlca
     nop
@@ -5620,7 +5620,7 @@ label_4192D::
     jr   nz, label_4190E
     jr   nz, label_419AA
     ei
-    jp   [hl]
+    jp   hl
 
 label_41933::
     rst  8
@@ -5636,7 +5636,7 @@ label_41939::
     rst  $18
     jr   nz, label_418C8
     ld   b, a
-    jp   [hl]
+    jp   hl
     db   $EB ; Undefined instruction
     add  hl, de
     rst  $18
@@ -7531,7 +7531,7 @@ label_421DB::
     rst  $38
 
 label_421EA::
-    jp   [hl]
+    jp   hl
     rst  $30
 
 label_421EC::
@@ -10829,7 +10829,7 @@ label_42FFD::
     rlca
     ei
     rlca
-    jp   [hl]
+    jp   hl
     rla
     ld   a, l
     inc  bc
@@ -11049,7 +11049,7 @@ label_43121::
     rst  $38
     push bc
     inc  hl
-    jp   [hl]
+    jp   hl
     rlca
     jp   label_4170F
     rrca
@@ -13110,7 +13110,7 @@ label_43AAE::
     ret  nz
     cp   a
     ld   a, [$FFFF]
-    jp   [hl]
+    jp   hl
 
 label_43AB3::
     rst  $38
@@ -13462,7 +13462,7 @@ label_43B37::
     rst  $38
     ld   sp, hl
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $28
     pop  af
     rst  $38
@@ -13922,7 +13922,7 @@ label_43D03::
     ld   [$FFFE], a
     ld   sp, hl
     db   $EC ; Undefined instruction
-    jp   [hl]
+    jp   hl
     sbc  a, $F0
     db   $FC ; Undefined instruction
     ret  nz

@@ -1826,7 +1826,7 @@ label_E87BF::
     rst  $38
     call c, label_EB4E7
     adc  a, a
-    jp   [hl]
+    jp   hl
     rra
     ld   [$ED1F], a
     ld   e, $F3
@@ -2057,7 +2057,7 @@ label_E88F0::
     sbc  a, a
     db   $E8 ; add  sp, d
     rra
-    jp   [hl]
+    jp   hl
     rra
     ld   [$ED1F], a
     ld   e, $F1
@@ -6395,7 +6395,7 @@ label_E9B63::
     inc  b
     cp   l
     inc  bc
-    jp   [hl]
+    jp   hl
     rla
     rst  $20
     ld   e, $DF
@@ -13854,7 +13854,7 @@ label_EBB86::
     rrca
     ld   sp, hl
     rlca
-    jp   [hl]
+    jp   hl
     rla
     pop  af
     rrca

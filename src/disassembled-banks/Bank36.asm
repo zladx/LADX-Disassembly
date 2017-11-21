@@ -8351,7 +8351,7 @@ label_92329::
     rlca
     nop
     sbc  a, h
-    jp   [hl]
+    jp   hl
     ld   c, c
     ld   bc, label_99D
     ld   c, c
@@ -8657,7 +8657,7 @@ label_924F3::
     ld   b, [hl]
     ld   [bc], a
     sbc  a, b
-    jp   [hl]
+    jp   hl
     ld   b, [hl]
     ld   [bc], a
     nop
@@ -11010,7 +11010,7 @@ label_92F31::
     ld   [hl], h
     ld   [hl], h
     ld   [hl], h
-    jp   [hl]
+    jp   hl
     ld   a, h
     ld   a, h
     ld   a, h
@@ -11033,7 +11033,7 @@ label_92F31::
     ld   a, a
     ld   [hl], h
     ld   [hl], h
-    jp   [hl]
+    jp   hl
     ld   a, h
     ld   a, h
     ld   a, h
@@ -12452,7 +12452,7 @@ label_93547::
     ld   l, a
     pop  de
     ld   a, e
-    jp   [hl]
+    jp   hl
 
 label_9358B::
     sbc  a, l

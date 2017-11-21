@@ -3544,6 +3544,8 @@ label_4CFF4::
     inc  a
     nop
     ld   a, [hl]
+
+label_4CFF7::
     nop
     rst  $38
     nop
@@ -4084,7 +4086,7 @@ label_4D220::
     rst  $38
     jp   label_EDF3
     db   $ED ; Undefined instruction
-    jp   [hl]
+    jp   hl
     push hl
     di
     di
@@ -4926,7 +4928,7 @@ label_4D601::
     cp   $00
     nop
     cp   $D5
-    jp   [hl]
+    jp   hl
     or   [hl]
     ld   e, a
     and  b
@@ -5840,7 +5842,7 @@ label_4DA53::
     ld   [de], a
 
 label_4DA6B::
-    jp   [hl]
+    jp   hl
     rla
     db   $E3 ; Undefined instruction
     scf
@@ -7408,7 +7410,7 @@ label_4E154::
     inc  b
     ld   a, [$F409]
     ld   [de], a
-    jp   [hl]
+    jp   hl
     scf
     add  a, c
     add  hl, sp
@@ -9461,7 +9463,7 @@ label_4EA71::
     rst  $38
     rst  $38
     rst  $38
-    jp   [hl]
+    jp   hl
     sbc  a, a
     ret
     cp   a
@@ -12806,7 +12808,7 @@ label_4F90E::
     ld   d, $EA
     ld   d, $EB
     inc  de
-    jp   [hl]
+    jp   hl
     inc  hl
     db   $21
     ld   hl, $FCDE
@@ -14324,4 +14326,4 @@ label_4FEF7::
     rst  $30
     adc  a, h
     rst  $30
-    ld   [$00F7], sp
+    ld   [label_4D0F7], sp

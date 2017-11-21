@@ -3512,7 +3512,7 @@ label_B5008::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -4848,7 +4848,7 @@ label_B557C::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -5410,7 +5410,7 @@ label_B557C::
     pop  af
     rrca
     rrca
-    jp   [hl]
+    jp   hl
     add  hl, bc
     rst  $38
     rst  $38
@@ -5728,7 +5728,7 @@ label_B59EB::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -6590,7 +6590,7 @@ label_B5C7C::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -6882,7 +6882,7 @@ label_B5F6D::
     ld   [hl], c
     db   $FD ; Undefined instruction
     inc  bc
-    jp   [hl]
+    jp   hl
     ld   e, a
     or   $4E
     db   $F4 ; Undefined instruction
@@ -7994,7 +7994,7 @@ label_B6475::
     ld   b, h
     ld   sp, hl
     inc  b
-    jp   [hl]
+    jp   hl
     inc  d
     ld   a, c
     add  a, h
@@ -8531,7 +8531,7 @@ label_B66FF::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -10543,7 +10543,7 @@ label_B6FFF::
     sbc  a, a
     rst  $10
     rrca
-    jp   [hl]
+    jp   hl
     rlca
     rrca
     rst  $38
@@ -12235,7 +12235,7 @@ label_B778E::
     sbc  a, a
     rst  $10
     rrca
-    jp   [hl]
+    jp   hl
     rlca
     nop
     rst  $38
@@ -12403,7 +12403,7 @@ label_B784F::
     rrca
     dec  bc
     rlca
-    jp   [hl]
+    jp   hl
     rlca
     ld   a, c
     add  a, a
@@ -12430,7 +12430,7 @@ label_B784F::
     rrca
     dec  bc
     rlca
-    jp   [hl]
+    jp   hl
     rlca
     ld   a, c
     add  a, a
@@ -13716,7 +13716,7 @@ label_B7E3F::
     ld   e, $11
     inc  l
     set  1, [hl]
-    jp   [hl]
+    jp   hl
     xor  $E9
     db   $E8 ; add  sp, d
     rst  $28
@@ -14029,7 +14029,7 @@ label_B7F77::
     xor  l
     db   $DB
     rst  $18
-    jp   [hl]
+    jp   hl
     rst  $18
     rst  $20
     cpl

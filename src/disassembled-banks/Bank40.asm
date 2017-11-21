@@ -4439,7 +4439,7 @@ label_A160C::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     ld   b, h
     ld   b, c
@@ -5119,7 +5119,7 @@ label_A1901::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $E4 ; Undefined instruction
     ld   de, label_1312
@@ -6518,7 +6518,7 @@ label_A1EC4::
     and  $E7
     db   $E8 ; add  sp, d
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     nop
     nop
     nop
@@ -7930,7 +7930,7 @@ label_A2411::
     sbc  a, $E5
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $ED ; Undefined instruction
     db   $E3 ; Undefined instruction
@@ -8403,7 +8403,7 @@ label_A2667::
     ld   e, h
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   e, l
     ld   e, [hl]
     ld   e, a
@@ -9227,7 +9227,7 @@ label_A2A0F::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $ED ; Undefined instruction
     ld   a, [$FF00+C]
@@ -9900,7 +9900,7 @@ label_A2C4F::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $ED ; Undefined instruction
     xor  $EF
@@ -11846,7 +11846,7 @@ label_A34BF::
     xor  a
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     or   b
     or   c
     or   d
@@ -13063,7 +13063,7 @@ label_A39E0::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $ED ; Undefined instruction
     xor  $EF

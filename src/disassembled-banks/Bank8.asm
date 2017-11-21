@@ -3991,7 +3991,7 @@ label_2121C::
     ld   [hl], h
     ld   [hl], h
     ld   [hl], h
-    jp   [hl]
+    jp   hl
     ld   a, h
     ld   a, h
     ld   a, h
@@ -4014,7 +4014,7 @@ label_2121C::
     ld   a, a
     ld   [hl], h
     ld   [hl], h
-    jp   [hl]
+    jp   hl
     ld   a, h
     ld   a, h
     ld   a, h
@@ -9170,7 +9170,7 @@ label_227B3::
     call z, label_2289C
     adc  a, $8D
     sbc  a, h
-    jp   [hl]
+    jp   hl
     ld   c, c
     ld   a, a
     sbc  a, l
@@ -10917,7 +10917,7 @@ label_22E9F::
     ld   a, a
     ld   a, a
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$DAEB], a
     ld   a, a
     db   $EC ; Undefined instruction
@@ -11655,7 +11655,7 @@ label_23170::
     push hl
     and  $E7
     db   $E8 ; add  sp, d
-    jp   [hl]
+    jp   hl
     ld   [$ECEB], a
     db   $ED ; Undefined instruction
     xor  $EF

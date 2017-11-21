@@ -3566,7 +3566,7 @@ label_34FE9::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -4912,7 +4912,7 @@ label_35570::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -5790,7 +5790,7 @@ label_359EB::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -6644,7 +6644,7 @@ label_35C70::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -8068,7 +8068,7 @@ label_3646F::
     ld   b, h
     ld   sp, hl
     inc  b
-    jp   [hl]
+    jp   hl
     inc  d
     ld   a, c
     add  a, h
@@ -8621,7 +8621,7 @@ label_366FF::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -10646,7 +10646,7 @@ label_36FFF::
     sbc  a, a
     rst  $10
     rrca
-    jp   [hl]
+    jp   hl
     rlca
     rrca
     rst  $38
@@ -10753,7 +10753,7 @@ label_36FFF::
     cp   a
     add  hl, sp
     rst  $28
-    jp   [hl]
+    jp   hl
     rrca
     add  hl, bc
     rst  $38
@@ -12339,7 +12339,7 @@ label_3778E::
     sbc  a, a
     rst  $10
     rrca
-    jp   [hl]
+    jp   hl
     rlca
     nop
     rst  $38
@@ -12507,7 +12507,7 @@ label_3784F::
     rrca
     dec  bc
     rlca
-    jp   [hl]
+    jp   hl
     rlca
     ld   a, c
     add  a, a
@@ -12534,7 +12534,7 @@ label_3784F::
     rrca
     dec  bc
     rlca
-    jp   [hl]
+    jp   hl
     rlca
     ld   a, c
     add  a, a
@@ -13823,7 +13823,7 @@ label_37E3F::
     ld   e, $11
     inc  l
     set  1, [hl]
-    jp   [hl]
+    jp   hl
     xor  $E9
     db   $E8 ; add  sp, d
     rst  $28
@@ -14135,7 +14135,7 @@ label_37F77::
     xor  l
     db   $DB
     rst  $18
-    jp   [hl]
+    jp   hl
     rst  $18
     rst  $20
     cpl

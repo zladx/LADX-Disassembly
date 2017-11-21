@@ -1308,7 +1308,7 @@ label_BC545::
     add  a, b
     nop
     ld   [rJOYP], a
-    jp   [hl]
+    jp   hl
     nop
     ld   a, l
     nop
@@ -1428,7 +1428,7 @@ label_BC545::
     inc  bc
     db   $E3 ; Undefined instruction
     inc  bc
-    jp   [hl]
+    jp   hl
     ld   a, [$FFE3]
     ret  nz
     rst  $28
@@ -3524,8 +3524,8 @@ label_BCF23::
     add  hl, bc
     add  hl, bc
     add  hl, bc
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     nop
     nop
     ld   [de], a
@@ -5965,7 +5965,7 @@ label_BD927::
     ld   bc, $8387
     db   $EC ; Undefined instruction
     db   $E4 ; Undefined instruction
-    jp   [hl]
+    jp   hl
     ld   [$FFE3], a
     pop  hl
     rst  $20
@@ -7721,7 +7721,7 @@ label_BE0DE::
 
 label_BE0DF::
     nop
-    jp   [hl]
+    jp   hl
     jr   label_BE0CC
     jr   label_BE0D0
     jr   label_BE0DE
@@ -8054,7 +8054,7 @@ label_BE259::
     ld   sp, hl
     ld   a, $F8
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $38
     ld   b, [hl]
     ld   [rIE], a
@@ -9083,7 +9083,7 @@ label_BE6FF::
     sbc  a, a
     or   e
     or   e
-    jp   [hl]
+    jp   hl
     xor  c
     call nz, label_6C4
     ld   b, $05
@@ -9780,7 +9780,7 @@ label_BE912::
 
 label_BEA0B::
     or   a
-    jp   [hl]
+    jp   hl
     cp   a
     db   $E4 ; Undefined instruction
     cp   e
@@ -10052,7 +10052,7 @@ label_BEA0B::
     pop  hl
     pop  de
     pop  hl
-    jp   [hl]
+    jp   hl
     ld   sp, label_1F1F
     ld   a, [$FB87]
     add  a, a
@@ -10829,7 +10829,7 @@ label_BEECB::
     call z, label_ABBB
     db   $DB
     sbc  a, e
-    jp   [hl]
+    jp   hl
     adc  a, c
     or   l
     call label_BEC54
@@ -11185,7 +11185,7 @@ label_BF042::
     rst  $38
     ld   a, c
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $18
     jr   label_BF092
     rst  $10
@@ -11513,7 +11513,7 @@ label_BF1BF::
     db   $FD ; Undefined instruction
     ld   c, c
     db   $FD ; Undefined instruction
-    jp   [hl]
+    jp   hl
     db   $FD ; Undefined instruction
     add  hl, sp
     rst  $38
@@ -13624,7 +13624,7 @@ label_BFB92::
     sbc  a, a
     rra
     ld   [rJOYP], a
-    jp   [hl]
+    jp   hl
     rst  $38
     ret
     ld   a, a

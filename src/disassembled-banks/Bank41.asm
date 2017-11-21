@@ -6272,7 +6272,7 @@ label_A5B63::
     inc  b
     cp   l
     inc  bc
-    jp   [hl]
+    jp   hl
     rla
     rst  $20
     ld   e, $DF
@@ -9685,7 +9685,7 @@ label_A6B00::
     nop
     ret  nc
     nop
-    jp   [hl]
+    jp   hl
     ld   bc, label_1F1
     or   $BC
     cp   $1E
@@ -10027,7 +10027,7 @@ label_A6CD6::
     ld   bc, $010F
     dec  b
     inc  bc
-    jp   [hl]
+    jp   hl
     rst  $10
     rst  $38
     ret  nz
@@ -10889,8 +10889,8 @@ label_A7002::
     nop
     jp   label_ECC3
     db   $EC ; Undefined instruction
-    jp   [hl]
-    jp   [hl]
+    jp   hl
+    jp   hl
     di
     ld   a, [$FF00+C]
     call nc, label_D8DF
@@ -11135,7 +11135,7 @@ label_A71C6::
     ld   a, [hli]
     ld   a, [hl]
     jr   z, label_A71C6
-    jp   [hl]
+    jp   hl
     db   $FC ; Undefined instruction
     inc  a
     rst  $28
@@ -11243,9 +11243,9 @@ label_A71FF::
     add  hl, de
     dec  h
     call label_F5CD
-    jp   [hl]
+    jp   hl
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     ld   sp, hl
     ld   b, b
     ld   b, b
@@ -13803,7 +13803,7 @@ label_A7CF1::
     sbc  a, a
     db   $E8 ; add  sp, d
     rra
-    jp   [hl]
+    jp   hl
     rra
     db   $EB ; Undefined instruction
     ld   e, $EF

@@ -5364,9 +5364,9 @@ label_ED730::
     nop
     and  $19
     and  $19
-    jp   [hl]
+    jp   hl
     rra
-    jp   [hl]
+    jp   hl
     rra
     ld   h, [hl]
     rra
@@ -10089,7 +10089,7 @@ label_EEB63::
     inc  b
     cp   l
     inc  bc
-    jp   [hl]
+    jp   hl
     rla
     rst  $20
     ld   e, $DF
@@ -13103,7 +13103,7 @@ label_EF944::
     rst  $38
     jr   nz, label_EF944
     ld   d, b
-    jp   [hl]
+    jp   hl
     sbc  a, b
     db   $F4 ; Undefined instruction
     inc  c
@@ -13430,7 +13430,7 @@ label_EFAA4::
     ld   [hl], b
     and  b
     ld   a, [$FFF0]
-    jp   [hl]
+    jp   hl
     jr   label_EFB01
     ld   a, a
     ld   b, b

@@ -6164,7 +6164,7 @@ label_DA5C6::
     ld   h, l
     reti
     ld   h, l
-    jp   [hl]
+    jp   hl
     ld   h, l
     pop  af
     ld   h, l
@@ -7478,7 +7478,7 @@ label_DAD3B::
     ld   l, h
     pop  hl
     ld   l, h
-    jp   [hl]
+    jp   hl
     ld   l, h
     pop  af
     ld   l, h

@@ -1188,7 +1188,7 @@ label_AC4FC::
     di
     sbc  a, [hl]
     ld   a, a
-    jp   [hl]
+    jp   hl
     ld   e, $FB
     inc  e
     ld   [hl], a
@@ -4042,7 +4042,7 @@ label_AD14B::
     dec  de
     rst  $38
     rst  $38
-    jp   [hl]
+    jp   hl
     pop  af
     push bc
     db   $E4 ; Undefined instruction
@@ -4124,7 +4124,7 @@ label_AD1C5::
     inc  bc
     ld   bc, rSB
     rst  $38
-    jp   [hl]
+    jp   hl
     pop  af
     push bc
     db   $E4 ; Undefined instruction
@@ -12356,7 +12356,7 @@ label_AF5A0::
     rst  $38
     db   $EB ; Undefined instruction
     rst  $38
-    jp   [hl]
+    jp   hl
     rst  $38
     ld   sp, hl
     rst  $38
@@ -12524,7 +12524,7 @@ label_AF660::
     set  7, a
     set  7, a
     set  7, a
-    jp   [hl]
+    jp   hl
     rst  $38
     ld   l, c
     rst  $38

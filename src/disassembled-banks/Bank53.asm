@@ -1058,7 +1058,7 @@ label_D419C::
     nop
     ccf
     rst  0
-    jp   [hl]
+    jp   hl
     rlca
     rrca
     nop
@@ -2766,6 +2766,8 @@ label_D4BCF::
     dec  bc
     rlca
     add  hl, bc
+
+label_D4BF7::
     rlca
     inc  c
     rlca
@@ -7951,7 +7953,7 @@ label_D6138::
     ld   [hl], e
     db   $EC ; Undefined instruction
     inc  [hl]
-    jp   [hl]
+    jp   hl
     ld   a, c
     xor  l
     cp   c
@@ -8356,7 +8358,7 @@ label_D62C0::
     dec  b
     dec  b
     ld   sp, hl
-    jp   [hl]
+    jp   hl
     inc  de
     ld   de, label_317
     rst  8
@@ -14987,4 +14989,4 @@ label_D7E59::
     rst  $30
     adc  a, h
     rst  $30
-    ld   [$00F7], sp
+    ld   [$4CF7], sp

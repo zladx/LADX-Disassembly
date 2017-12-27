@@ -5806,9 +5806,9 @@ label_250D::
     pop  hl
     ldi  [hl], a
     call label_2485
-    jp   label_2529
+    jp   GetCharacter
 
-label_2529::
+GetCharacter::
     ld   a, $1C
     ld   [label_2100], a
     ld   a, [$C170]

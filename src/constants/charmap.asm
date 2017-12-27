@@ -13,7 +13,7 @@ charmap "<bananas>", $e3
 charmap "<stick>", $e4
 charmap "<honeycomb>", $e5
 charmap "<pineapple>", $e6
-charmap "<flower>", $e7
+charmap "<flower2>", $e7
 charmap "<broom>", $e8
 charmap "<fishhook>", $e9
 charmap "<bra>", $ea

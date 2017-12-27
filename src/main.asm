@@ -4,6 +4,9 @@
 include "constants/charmap.asm"
 include "constants/constants.asm"
 
+include "text/dialogue_table.asm"
+include "text/dialogue.asm"
+
 ; Utilities fonctions and ROM header
 include "code/interrupts.asm"
 include "code/header.asm"

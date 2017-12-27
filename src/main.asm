@@ -1,6 +1,7 @@
 ; Root source file for the game.
 
 ; Definitions
+include "constants/charmap.asm"
 include "constants/constants.asm"
 
 ; Utilities fonctions and ROM header

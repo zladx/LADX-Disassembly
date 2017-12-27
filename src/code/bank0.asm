@@ -5918,7 +5918,7 @@ DrawNextCharacter::
     ld   a, e
     ldh  [$FFD7], a
     cp   $FE
-    jr   nz, label_25A4
+    jr   nz, not_end
     pop  hl
     xor  a
     ld   [$D601], a
@@ -5934,7 +5934,7 @@ label_259F::
     ldh  [$FFF2], a
     ret
 
-label_25A4::
+not_end:: ; TODO make this local
     cp   $FF
     jr   nz, label_25BD
     pop  hl
@@ -5952,7 +5952,7 @@ data_25B8::
     db $55, $49, $4A, $46, $47
 
 label_25BD::
-    cp   $20
+    cp   " "
     jr   z, label_25E0
     push af
     ld   a, [$C5AB]

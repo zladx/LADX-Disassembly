@@ -1,4 +1,5 @@
-SECTION "Text pointer table", ROMX[$4001], BANK[$1c]
+SECTION "Dialogue pointer table", ROMX[$4001], BANK[$1c]
+DialoguePointerTable::
 	dw Dialogue0
 	dw Dialogue1
 	dw Dialogue2
@@ -688,7 +689,11 @@ SECTION "Text pointer table", ROMX[$4001], BANK[$1c]
 	dw Dialogue686
 	dw Dialogue687
 
-SECTION "Text bank table", ROMX[$4741], BANK[$1c]
+SECTION "Dialogue bank table", ROMX[$4741], BANK[$1c]
+DialogueBankTable::
+; Some bank numbers have the high bit set for an unknown reason.
+; The routine DrawNextCharacter does `and $3f`, so the bit
+; is dropped.  It is unknown if it's used anywhere else.
 	db BANK(Dialogue0)
 	db BANK(Dialogue1) | $80
 	db BANK(Dialogue2)

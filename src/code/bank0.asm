@@ -5860,7 +5860,7 @@ label_250D::
     jp   DrawNextCharacter
 
 DrawNextCharacter::
-    ld   a, $1C
+    ld   a, BANK(DialoguePointerTable)
     ld   [MBC3SelectBank], a
     ld   a, [wCharacterPosition]
     and  $1F
@@ -5889,7 +5889,7 @@ DrawNextCharacter::
     ld   e, a
     sla  e
     rl   d
-    ld   hl, $4001
+    ld   hl, DialoguePointerTable
     add  hl, de
     ld   a, [hli]
     ld   e, a
@@ -5899,10 +5899,10 @@ DrawNextCharacter::
     ld   e, a
     ld   a, [wDialogueIndexHi]
     ld   d, a
-    ld   hl, $4741
+    ld   hl, DialogueBankTable
     add  hl, de
     ld   a, [hl] ; bank
-    and  $3F
+    and  $3f
     ld   [MBC3SelectBank], a
     pop  hl
     ld   a, [wCharacterPosition]
@@ -6116,7 +6116,7 @@ label_26B6::
     jr   nz, label_26E1
     bit  5, a
     jr   z, label_2714
-    ld   a, $1C
+    ld   a, BANK(DialogueBankTable)
     ld   [MBC3SelectBank], a
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MINI_MAP
@@ -6125,7 +6125,7 @@ label_26B6::
     ld   e, a
     ld   a, [wDialogueIndexHi]
     ld   d, a
-    ld   hl, $4741
+    ld   hl, DialogueBankTable
     add  hl, de
     ld   a, [hl]
     and  a

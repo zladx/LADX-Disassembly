@@ -6,6 +6,7 @@ include "constants/constants.asm"
 
 include "text/dialogue_table.asm"
 include "text/dialogue.asm"
+include "text/dialogue_dx.asm"
 
 ; Utilities fonctions and ROM header
 include "code/interrupts.asm"

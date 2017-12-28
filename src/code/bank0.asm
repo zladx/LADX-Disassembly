@@ -5525,9 +5525,9 @@ label_2321::
 .fi
     ldh  [$FFE8], a
 
-    ld   a, [$C164]
+    ld   a, [wCharacterPositionHi]
     and  a
-    ld   a, [$C170]
+    ld   a, [wCharacterPosition]
     jr   nz, label_2341
     cp   $20
     jr   c, label_2345
@@ -5577,13 +5577,13 @@ label_2345::
 label_2373::
     call label_2385
     ld   a, $01
-    ld   [$C112], a
+    ld   [wDialogueIndexHi], a
     ret
 
 label_237C::
     call label_2385
     ld   a, $02
-    ld   [$C112], a
+    ld   [wDialogueIndexHi], a
     ret
 
 label_2385::
@@ -5591,13 +5591,13 @@ label_2385::
     xor  a
     ld   [$C177], a
     pop  af
-    ld   [$C173], a
+    ld   [wDialogueIndex], a
     xor  a
     ld   [$C16F], a
-    ld   [$C170], a
-    ld   [$C164], a
+    ld   [wCharacterPosition], a
+    ld   [wCharacterPositionHi], a
     ld   [$C108], a
-    ld   [$C112], a
+    ld   [wDialogueIndexHi], a
     ld   a, $0F
     ld   [$C5AB], a
     ldh  a, [hLinkPositionY]
@@ -5848,7 +5848,7 @@ label_250D::
     xor  a
     ldi  [hl], a
     push hl
-    ld   a, [$C170]
+    ld   a, [wCharacterPosition]
     and  $1F
     ld   c, a
     ld   hl, $45A1
@@ -5857,12 +5857,12 @@ label_250D::
     pop  hl
     ldi  [hl], a
     call IncrementDialogState
-    jp   label_2529
+    jp   DrawNextCharacter
 
-label_2529::
-    ld   a, $1C
+DrawNextCharacter::
+    ld   a, BANK(DialoguePointerTable)
     ld   [MBC3SelectBank], a
-    ld   a, [$C170]
+    ld   a, [wCharacterPosition]
     and  $1F
     ld   c, a
     ld   b, $00
@@ -5873,52 +5873,52 @@ label_2529::
     ld   a, [hl]
     ld   hl, $D600
     add  hl, de
-    ldi  [hl], a
+    ldi  [hl], a ; controls the row the tile gets drawn to
     push hl
     ld   hl, $4561
     add  hl, bc
     ld   a, [hl]
     pop  hl
-    ldi  [hl], a
+    ldi  [hl], a ; controls the column the tile gets drawn to
     ld   a, $0F
     ldi  [hl], a
     push hl
-    ld   a, [$C112]
+    ld   a, [wDialogueIndexHi]
     ld   d, a
-    ld   a, [$C173]
+    ld   a, [wDialogueIndex]
     ld   e, a
     sla  e
     rl   d
-    ld   hl, $4001
+    ld   hl, DialoguePointerTable
     add  hl, de
     ld   a, [hli]
     ld   e, a
     ld   d, [hl]
     push de
-    ld   a, [$C173]
+    ld   a, [wDialogueIndex]
     ld   e, a
-    ld   a, [$C112]
+    ld   a, [wDialogueIndexHi]
     ld   d, a
-    ld   hl, $4741
+    ld   hl, DialogueBankTable
     add  hl, de
-    ld   a, [hl]
-    and  $3F
+    ld   a, [hl] ; bank
+    and  $3f
     ld   [MBC3SelectBank], a
     pop  hl
-    ld   a, [$C170]
+    ld   a, [wCharacterPosition]
     ld   e, a
-    ld   a, [$C164]
+    ld   a, [wCharacterPositionHi]
     ld   d, a
     add  hl, de
     ld   a, [hli]
     ld   e, a
     ld   a, [hl]
-    ld   [$C3C3], a
+    ld   [$C3C3], a ; upcoming character, used in code for the arrow
     call ReloadSavedBank
     ld   a, e
     ldh  [$FFD7], a
     cp   $FE
-    jr   nz, label_25A4
+    jr   nz, not_end
     pop  hl
     xor  a
     ld   [$D601], a
@@ -5934,7 +5934,7 @@ label_259F::
     ldh  [$FFF2], a
     ret
 
-label_25A4::
+not_end:: ; TODO make this local
     cp   $FF
     jr   nz, label_25BD
     pop  hl
@@ -5952,7 +5952,7 @@ data_25B8::
     db $55, $49, $4A, $46, $47
 
 label_25BD::
-    cp   $20
+    cp   " "
     jr   z, label_25E0
     push af
     ld   a, [$C5AB]
@@ -5966,7 +5966,7 @@ label_25BD::
     ld   e, $03
 
 label_25D4::
-    ld   a, [$C170]
+    ld   a, [wCharacterPosition]
     add  a, $04
     and  e
     jr   nz, label_25DF
@@ -6063,12 +6063,12 @@ label_2660::
     ld   [hl], $00
 
 label_2663::
-    ld   a, [$C170]
+    ld   a, [wCharacterPosition]
     add  a, $01
-    ld   [$C170], a
-    ld   a, [$C164]
+    ld   [wCharacterPosition], a
+    ld   a, [wCharacterPositionHi]
     adc  a, $00
-    ld   [$C164], a
+    ld   [wCharacterPositionHi], a
     xor  a
     ld   [$C1CC], a
     ld   a, [$C171]
@@ -6094,7 +6094,7 @@ data_2693::
     db $98, $99
 
 label_2695::
-    ld   a, [$C170]
+    ld   a, [wCharacterPosition]
     and  $1F
     jr   nz, label_26E1
     ld   a, [$C3C3]
@@ -6116,16 +6116,16 @@ label_26B6::
     jr   nz, label_26E1
     bit  5, a
     jr   z, label_2714
-    ld   a, $1C
+    ld   a, BANK(DialogueBankTable)
     ld   [MBC3SelectBank], a
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MINI_MAP
     jp   z, label_278B
-    ld   a, [$C173]
+    ld   a, [wDialogueIndex]
     ld   e, a
-    ld   a, [$C112]
+    ld   a, [wDialogueIndexHi]
     ld   d, a
-    ld   hl, $4741
+    ld   hl, DialogueBankTable
     add  hl, de
     ld   a, [hl]
     and  a

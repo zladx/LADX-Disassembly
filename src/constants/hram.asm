@@ -1,4 +1,4 @@
-section "HRAM", HRAM
+section "HRAM", HRAM[$ff80]
 
 hRomBank:: ; FF80
  ds 1

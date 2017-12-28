@@ -1,4 +1,4 @@
-section "WRAM Bank0", wram0
+section "WRAM Bank0", wram0[$c000]
 
 wram0Section EQU $C000
 
@@ -30,9 +30,24 @@ wC108 equ $C108
 wNeedsUpdatingNPCTiles:: ; C10E
   ds 1
 
-; Unlabeled
-wC10F equ $C10F
-  ds $12
+wC10F: ds 1
+wC110: ds 1
+wC111: ds 1
+wDialogueIndexHi: ds 1
+wC113: ds 1
+wC114: ds 1
+wC115: ds 1
+wC116: ds 1
+wC117: ds 1
+wC118: ds 1
+wC119: ds 1
+wC11A: ds 1
+wC11B: ds 1
+wC11C: ds 1
+wC11D: ds 1
+wC11E: ds 1
+wC11F: ds 1
+wC120: ds 1
 
 wIsUsingSpinAttack:: ; C121
   ds 1
@@ -93,23 +108,43 @@ wHasMirrorShield:: ; C15A
 wIsUsingShield:: ; C15B
   ds 1
 
-; Unlabeled
-wC15C equ $C15C
-  ds $F
+wC15C: ds 1
+wC15D: ds 1
+wC15E: ds 1
+wC15F: ds 1
+wC160: ds 1
+wC161: ds 1
+wC162: ds 1
+wC163: ds 1
+wCharacterPositionHi: ds 1
+wC165: ds 1
+wC166: ds 1
+wC167: ds 1
+wC168: ds 1
+wC169: ds 1
+wC16A: ds 1
 
 wTransitionSequenceCounter:: ; C16B
   ds 1
 
-; Unlabeled
-wC16C equ $C16C
-  ds 6
+wC16C: ds 1
+wC16D: ds 1
+wC16E: ds 1
+wC16F: ds 1
+wCharacterPosition: ds 1
+wC171: ds 1
 
 wDialogScrollDelay:: ; C172
   ds 1
 
-; Unlabeled
-wC173 equ $C173
-  ds 8
+wDialogueIndex: ds 1
+wC174: ds 1
+wC175: ds 1
+wC176: ds 1
+wC177: ds 1
+wC178: ds 1
+wC179: ds 1
+wC17a: ds 1
 
 wFreeMovementMode:: ; C17B
   ; See https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Mono_Pausing_the_Engine_and_Mono.2FDX_Free-Movement_Mode
@@ -243,7 +278,7 @@ wAlternateBackgroundEnabled:: ; C500
   ; If enabled, alternate between two Background position every frame.
   ds 1
 
-section "WRAM Bank1", wramx, bank[1]
+section "WRAM Bank1", wramx[$d000], bank[1]
 
 ; Unlabeled
 wD000 equ $D000

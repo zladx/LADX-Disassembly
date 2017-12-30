@@ -5882,15 +5882,15 @@ DrawNextCharacter::
     ld   a, [hl]
     ld   hl, $D600
     add  hl, de
-    ldi  [hl], a ; controls the row the tile gets drawn to
+    ldi  [hl], a ; high byte of tile destination address
     push hl
     ld   hl, $4561
     add  hl, bc
     ld   a, [hl]
     pop  hl
-    ldi  [hl], a ; controls the column the tile gets drawn to
+    ldi  [hl], a ; low byte of tile destination address
     ld   a, $0F
-    ldi  [hl], a
+    ldi  [hl], a ; number of bytes
     push hl
     ld   a, [wDialogueIndexHi]
     ld   d, a
@@ -5926,98 +5926,95 @@ DrawNextCharacter::
     call ReloadSavedBank
     ld   a, e
     ldh  [$FFD7], a
-    cp   $FE
-    jr   nz, not_end
+    cp   "<ask>" ; $fe
+    jr   nz, .not_choice
     pop  hl
     xor  a
     ld   [$D601], a
 
-label_2595::
+.choice
     ld   a, [wDialogState]
     and  $F0
-    or   $0D
+    or   DIALOG_CHOICE
     ld   [wDialogState], a
 
-label_259F::
+.end_dialogue
     ld   a, $15
-    ldh  [$FFF2], a
+    ldh  [$fff2], a
     ret
 
-not_end:: ; TODO make this local
-    cp   $FF
-    jr   nz, label_25BD
+.not_choice
+    cp   "@" ; $ff
+    jr   nz, .not_end
     pop  hl
     xor  a
     ld   [$D601], a
 
-label_25AD::
+.label_25AD::
     ld   a, [wDialogState]
     and  $F0
     or   $0C
     ld   [wDialogState], a
     ret
 
-data_25B8::
+.ThiefString: ; data_25B8::
     db $55, $49, $4A, $46, $47
 
-label_25BD::
+.not_end
     cp   " "
-    jr   z, label_25E0
+    jr   z, .nosfx
     push af
-    ld   a, [$C5AB]
+    ld   a, [wDialogueSFX]
     ld   d, a
     ld   e, $01
-    cp   $0F
-    jr   z, label_25D4
+    cp   SFX_TYPEWRITER
+    jr   z, .got_frequency
     ld   e, $07
-    cp   $19
-    jr   z, label_25D4
+    cp   SFX_HOOT
+    jr   z, .got_frequency
     ld   e, $03
-
-label_25D4::
+.got_frequency
     ld   a, [wCharacterPosition]
     add  a, $04
     and  e
-    jr   nz, label_25DF
+    jr   nz, .skipsfx
     ld   a, d
-    ldh  [$FFF3], a
-
-label_25DF::
+    ldh  [hSFX], a
+.skipsfx
     pop  af
 
-label_25E0::
+.nosfx
     ld   d, $00
-    cp   $23
-    jr   nz, label_2608
-    ld   a, [$C108]
+    cp   "#" ; character of player name
+    jr   nz, .not_name
+    ld   a, [wNameIndex]
     ld   e, a
     inc  a
-    cp   $05
-    jr   nz, label_25F0
+    cp   NAME_LENGTH
+    jr   nz, .not_over
     xor  a
-
-label_25F0::
-    ld   [$C108], a
-    ld   hl, $DB4F
-    ld   a, [$DB6E]
+.not_over
+    ld   [wNameIndex], a
+    ld   hl, wName
+    ld   a, [wIsThief]
     and  a
-    jr   z, label_25FF
-    ld   hl, data_25B8
-
-label_25FF::
+    jr   z, .not_thief
+    ld   hl, .ThiefString
+.not_thief
     add  hl, de
     ld   a, [hl]
     dec  a
-    cp   $FF
-    jr   nz, label_2608
-    ld   a, $20
+    cp   "@"
+    jr   nz, .got_name_char
+    ld   a, " "
+.got_name_char
 
-label_2608::
+.not_name
     ldh  [$FFD8], a
     ld   e, a
-    ld   a, $1C
+    ld   a, BANK(AsciiToTileMap)
     ld   [MBC3SelectBank], a
-    ld   hl, $4641
+    ld   hl, AsciiToTileMap
     add  hl, de
     ld   e, [hl]
     ld   d, $00
@@ -6108,15 +6105,15 @@ label_2695::
     jr   nz, label_26E1
     ld   a, [$C3C3]
     cp   $FF
-    jp   z, label_25AD
+    jp   z, DrawNextCharacter.label_25AD
     cp   $FE
-    jp   z, label_2595
+    jp   z, DrawNextCharacter.choice
     ld   a, [$C1CC]
     and  a
     jr   nz, label_26B6
     inc  a
     ld   [$C1CC], a
-    call label_259F
+    call DrawNextCharacter.end_dialogue
 
 label_26B6::
     call label_27BB

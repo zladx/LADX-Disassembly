@@ -25,4 +25,5 @@ bin/banks/*
 *.sln
 *.suo
 *.DS_Store
+*~
 Z80Dis

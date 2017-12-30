@@ -22,10 +22,16 @@ wIntroBGYOffset:: ; C106
   ; Offset for compensating the sea movement when drawing bottom screen section on intro sea
   ds 1
 
-; Unlabeled
-wC108 equ $C108
 
-  ds 7
+wC107: ds 1
+
+wNameIndex:: ds 1
+
+wC109: ds 1
+wC10a: ds 1
+wC10b: ds 1
+wC10c: ds 1
+wC10d: ds 1
 
 wNeedsUpdatingNPCTiles:: ; C10E
   ds 1
@@ -277,6 +283,11 @@ wC300 equ $C300 ; C300
 wAlternateBackgroundEnabled:: ; C500
   ; If enabled, alternate between two Background position every frame.
   ds 1
+  
+ds $aa
+
+wDialogueSFX:: ; C5ab
+    ds 1
 
 section "WRAM Bank1", wramx[$d000], bank[1]
 
@@ -550,9 +561,11 @@ wBombCount:: ; DB4D
 wMarinAndTarinAtHome:: ; DB4E
   ds 1
 
-; Unlabeled
-wDB4F equ $DB4F
-  ds 7
+wName:: ; db4f
+  ds NAME_LENGTH ; 5
+
+wDB54:: ds 1
+wDB55:: ds 1
 
 wIsBowWowFollowingLink:: ; DB56
   ds 1
@@ -605,9 +618,15 @@ wHasInstrument8:: ; DB6C
   ; 0: false, 2: true
   ds 1
 
-; Unlabeled
-wDB6E equ $DB6E
-  ds 6
+wDB6D: ds 1
+
+wIsThief:: ; DB6E
+  ds 1
+
+wDB6F: ds 1
+wDB70: ds 1
+wDB71: ds 1
+wDB62: ds 1
 
 wIsMarinFollowingLink:: ; DB73
   ds 1

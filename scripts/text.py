@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import struct
+from pprint import pprint
 
 NUMSTRINGS = 688
 END_CHARS = ("@", "<ask>")
@@ -123,5 +124,6 @@ def print_pointer_table():
 if __name__ == "__main__":
     # comment/uncomment whichever you want
 
+    pprint(dict(enumerate(strings)))
     #print_strings()
-    print_pointer_table()
+    #print_pointer_table()

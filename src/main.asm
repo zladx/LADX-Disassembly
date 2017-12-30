@@ -8,6 +8,8 @@ include "text/dialogue_table.asm"
 include "text/dialogue.asm"
 include "text/dialogue_dx.asm"
 
+include "data/ascii_to_tile.asm"
+
 ; Utilities fonctions and ROM header
 include "code/interrupts.asm"
 include "code/header.asm"

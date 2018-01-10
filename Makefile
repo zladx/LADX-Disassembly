@@ -23,14 +23,10 @@ DumpBanks: tools/DumpBanks.c
 	gcc -std=c99 -o DumpBanks tools/DumpBanks.c
 	chmod a+x DumpBanks
 
-bin/banks:
-	mkdir -p bin/banks
-
-bin/banks/bank_00_0.bin: bin/banks DumpBanks
+Zelda.gbc:
 ifeq (,$(wildcard Zelda.gbc))
-	$(error Original "Zelda.gbc" banks are missing. Find a copy of the "Legend of Zelda, The - Link's Awakening DX (U) (V1.0) [C][!]" (md5: 07C211479386825042EFB4AD31BB525F), and put it in the root directory to dump the banks)
+	$(error Original "Zelda.gbc" is required to stub non-yet-disassembled sections. Find a copy of the "Legend of Zelda, The - Link's Awakening DX (U) (V1.0) [C][!]" (md5: 07C211479386825042EFB4AD31BB525F), and put it in the root directory to compile the game)
 endif
-	cd bin/banks && ../../DumpBanks ../../Zelda.gbc
 
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.
@@ -41,7 +37,7 @@ gfx_files = $(shell find src/gfx -type f -name '*.png')
 %.2bpp: %.png
 	$(2BPP) $<
 
-src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) bin/banks/bank_00_0.bin
+src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) Zelda.gbc
 
 .asm.o:
 	$(ASM) -i src/ -o $@ $<

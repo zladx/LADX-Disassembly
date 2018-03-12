@@ -136,7 +136,9 @@ wTransitionSequenceCounter:: ; C16B
 wC16C: ds 1
 wC16D: ds 1
 wC16E: ds 1
-wC16F: ds 1
+; State of the dialog open or close animation.
+; Values goes from 0 to 5.
+wDialogOpenCloseAnimationFrame: ds 1 ; C16F
 wCharacterPosition: ds 1
 wC171: ds 1
 

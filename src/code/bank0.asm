@@ -4232,7 +4232,7 @@ AnimateMarinBeachTiles::
     add  hl, bc
     ld   bc, $0040
     jp   CopyData
-    jr   nz, AnimateTilesStep4
+    jr   nz, AnimateTiles.doOverworldAnimations
     and  b
     ldh  [$FFE0], a
     ldh  [$FFA0], a
@@ -4252,22 +4252,24 @@ AnimateTiles::
     ; Animate Intro sequence tiles
     ;
 
-    ; If GameplayType != INTRO, skip
+    ; If GameplayType == INTRO, handle the tile animation manually,
+    ; and don't perform any further animation.
     cp   GAMEPLAY_INTRO
-    jr   nz, AnimateTilesStep2
-
-    ; GameplayType == INTRO
+    jr   nz, .notIntro
+    ; If there is no transfert request pending…
     ld   a, [$D601]
-    and  a                ; if $D601 != 0
-    jp   nz, .returnEarly ;   return immediatly
+    and  a
+    jp   nz, .return
+    ; … and the frame count is >= 4
     ldh  a, [hFrameCounter]
     and  $0F
-    cp   $04              ; else if FrameCounter 4-lower-bits < 4
-    jr   c, .returnEarly  ;   return immediately
+    cp   $04
+    jr   c, .return
+    ; Switch to the bank with intro tiles
     ld   a, $10
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
+    ; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
     ld   a, [$D006]
     ld   l, a
     ld   a, [$D007]
@@ -4278,10 +4280,11 @@ AnimateTiles::
     ld   d, a
     ld   bc, $0020
     jp   CopyData
-.returnEarly
+.return
+    ; Return early
     ret
 
-AnimateTilesStep2::
+.notIntro
     ;
     ; Animate End Credits tiles
     ;
@@ -4289,51 +4292,55 @@ AnimateTilesStep2::
     ; If GameplayType != CREDITS, skip
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
-    jr   nz, AnimateTilesStep3
+    jr   nz, .notCredits
 
     ; GameplayType == CREDITS
     ldh  a, [$FFA5]
     and  a                          ; if $FFA5 != 0
-    jr   nz, AnimateEndCreditsTiles ;   handle end credits animated tiles
+    jr   nz, AnimateTiles.animateEndCredits ;   handle end credits animated tiles
     ret
 
-AnimateTilesStep3::
+.notCredits
     ;
     ; Animate Overworld tiles
     ;
 
     ; If GameplayType > OVERWORLD
     cp   GAMEPLAY_OVERWORLD
-    jp   c, AnimateTilesReturn ; return immediately
+    jp   c, AnimateTiles_return ; return immediately
 
     ; If the Inventory window is overlapping the screen
     ld   a, [wWindowY]
     cp   $80
-    jp   nz, AnimateTilesReturn ; return immediately
+    jp   nz, AnimateTiles_return ; return immediately
 
-    ; If the Inventory apparition animation is running
+    ; If the Inventory apparition animation is running,
+    ; only animate Link's sprite. 
     ld   a, [wInventoryAppearing]
     and  a
     jp   nz, DrawLinkSpriteAndReturn
 
-AnimateTilesStep4::
+.doOverworldAnimations
+    ; If there is a pending request or a map transition,
+    ; only animate Link's sprite. 
     ld   hl, wMapSlideTransitionState
     ld   a, [$D601]
     or   [hl]
     jp   nz, DrawLinkSpriteAndReturn
 
+    ; If $D6F8 != 0, handle special case
     ld   a, [$D6F8]
     and  a
-    jr   z, label_1B7D
+    jr   z, .notD6F8
     call label_1ED7
     jp   DrawLinkSpriteAndReturn
 
-label_1B7D::
+.notD6F8
     ldh  a, [$FFA5]
     and  a
     jr   z, label_1BCD
 
-AnimateEndCreditsTiles::
+.animateEndCredits
     ; a == $FFA5
     cp   $01
     jp   z, label_3F93
@@ -4356,14 +4363,14 @@ AnimateEndCreditsTiles::
     cp   $0D
     jp   z, label_1E01
     cp   $0E
-    jr   z, label_1BC5
+    jr   z, .animateCreditsIslandFadeTiles
     cp   $0F
     jp   z, label_1DF0
     cp   $10
     jp   z, label_1DE9
     jp   DrawLinkSpriteAndReturn
 
-label_1BC5::
+.animateCreditsIslandFadeTiles
     ld   a, $17
     ld   [MBC3SelectBank], a
     jp   $4062
@@ -4705,7 +4712,7 @@ label_1DE5::
 label_1DE7::
     inc  hl
 
-AnimateTilesReturn::
+AnimateTiles_return::
     ret
 
 label_1DE9::

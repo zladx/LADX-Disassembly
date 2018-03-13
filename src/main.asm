@@ -42,6 +42,7 @@ incbin "gfx/characters/npc_1.dmg.2bpp"
 section "bank15",romx[$4000],bank[$0F]
 incbin "gfx/menus/menu.dmg.2bpp"
 incbin "gfx/intro/title.dmg.2bpp"
+FontTiles::
 incbin "gfx/fonts/font.dmg.2bpp"
 incbin "gfx/world/camera_shop.dmg.2bpp"
 incbin "gfx/world/overworld_2.dmg.2bpp"
@@ -106,6 +107,7 @@ incbin "gfx/characters/npc_1.cgb.2bpp"
 section "bank47",romx[$4000],bank[$2F]
 incbin "gfx/menus/menu.cgb.2bpp"
 incbin "gfx/intro/title.cgb.2bpp"
+FontTilesCGB::
 incbin "gfx/fonts/font.cgb.2bpp"
 incbin "gfx/world/camera_shop.cgb.2bpp"
 incbin "gfx/world/overworld_2.cgb.2bpp"

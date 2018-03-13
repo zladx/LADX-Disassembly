@@ -5947,7 +5947,7 @@ DialogDrawNextCharacterHandler::
     ld   a, e
     ldh  [$FFD7], a
     cp   "<ask>" ; $fe
-    jr   nz, .not_choice
+    jr   nz, .notChoice
     pop  hl
     xor  a
     ld   [$D601], a
@@ -5958,14 +5958,14 @@ DialogDrawNextCharacterHandler::
     or   DIALOG_CHOICE
     ld   [wDialogState], a
 
-.end_dialogue
+.endDialogue
     ld   a, $15
     ldh  [$fff2], a
     ret
 
-.not_choice
+.notChoice
     cp   "@" ; $ff
-    jr   nz, .not_end
+    jr   nz, .notEnd
     pop  hl
     xor  a
     ld   [$D601], a
@@ -5977,59 +5977,59 @@ DialogDrawNextCharacterHandler::
     ld   [wDialogState], a
     ret
 
-.ThiefString: ; data_25B8::
-    db $55, $49, $4A, $46, $47
+.ThiefString::
+    db "T" + 1, "H" + 1, "I" + 1, "E" + 1, "F" + 1
 
-.not_end
+.notEnd
     cp   " "
-    jr   z, .nosfx
+    jr   z, .noSFX
     push af
     ld   a, [wDialogueSFX]
     ld   d, a
     ld   e, $01
     cp   SFX_TYPEWRITER
-    jr   z, .got_frequency
+    jr   z, .handleFrequency
     ld   e, $07
     cp   SFX_HOOT
-    jr   z, .got_frequency
+    jr   z, .handleFrequency
     ld   e, $03
-.got_frequency
+.handleFrequency
     ld   a, [wDialogCharacterIndex]
     add  a, $04
     and  e
-    jr   nz, .skipsfx
+    jr   nz, .skipSFX
     ld   a, d
     ldh  [hSFX], a
-.skipsfx
+.skipSFX
     pop  af
 
-.nosfx
+.noSFX
     ld   d, $00
     cp   "#" ; character of player name
-    jr   nz, .not_name
+    jr   nz, .notName
     ld   a, [wNameIndex]
     ld   e, a
     inc  a
     cp   NAME_LENGTH
-    jr   nz, .not_over
+    jr   nz, .notOver
     xor  a
-.not_over
+.notOver
     ld   [wNameIndex], a
     ld   hl, wName
     ld   a, [wIsThief]
     and  a
-    jr   z, .not_thief
+    jr   z, .notThief
     ld   hl, .ThiefString
-.not_thief
+.notThief
     add  hl, de
     ld   a, [hl]
     dec  a
     cp   "@"
-    jr   nz, .got_name_char
+    jr   nz, .handleNameChar
     ld   a, " "
-.got_name_char
+.handleNameChar
 
-.not_name
+.notName
     ldh  [$FFD8], a
     ld   e, a
     ld   a, BANK(AsciiToTileMap)
@@ -6047,30 +6047,32 @@ DialogDrawNextCharacterHandler::
     sla  e
     rl   d
     call ReloadSavedBank
-    ld   hl, $5000
+    ld   hl, FontTiles
     add  hl, de
     ld   c, l
     ld   b, h
     pop  hl
     ld   e, $10
-
-label_2633::
+    ; copy character tile data to wRequestData
+.copyTileLoop
     ld   a, [bc]
     ldi  [hl], a
     inc  bc
     dec  e
-    jr   nz, label_2633
+    jr   nz, .copyTileLoop
     ld   [hl], $00
     push hl
-    ld   a, $1C
-    ld   [MBC3SelectBank], a
+
+     ; stubbed out bit of code accessing a table for (han)dakutens
+    ld   a, $1C ; BANK(DakutenTable)
+    ld   [MBC3SelectBank], a ; current character
     ldh  a, [$FFD8]
     ld   e, a
     ld   d, $00
     xor  a
     pop  hl
     and  a
-    jr   z, label_2663
+    jr   z, .noDakuten
     ld   e, a
     ld   a, [$C175]
     ldi  [hl], a
@@ -6081,14 +6083,14 @@ label_2633::
     ldi  [hl], a
     ld   a, $C9
     rr   e
-    jr   c, label_2660
-    dec  a
+    jr   c, .handleDakutenTile
+    dec  a  ; dakuten ($C8)
 
-label_2660::
+.handleDakutenTile
     ldi  [hl], a
     ld   [hl], $00
 
-label_2663::
+.noDakuten
     ld   a, [wDialogCharacterIndex]
     add  a, $01
     ld   [wDialogCharacterIndex], a
@@ -6133,7 +6135,7 @@ DialogBreakHandler::
     jr   nz, label_26B6
     inc  a
     ld   [$C1CC], a
-    call DialogDrawNextCharacterHandler.end_dialogue
+    call DialogDrawNextCharacterHandler.endDialogue
 
 label_26B6::
     call label_27BB

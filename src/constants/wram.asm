@@ -122,7 +122,7 @@ wC160: ds 1
 wC161: ds 1
 wC162: ds 1
 wC163: ds 1
-wCharacterPositionHi: ds 1
+wDialogCharacterIndexHi: ds 1
 wC165: ds 1
 wC166: ds 1
 wC167: ds 1
@@ -139,8 +139,8 @@ wC16E: ds 1
 ; State of the dialog open or close animation.
 ; Values goes from 0 to 5.
 wDialogOpenCloseAnimationFrame: ds 1 ; C16F
-wCharacterPosition: ds 1
-wC171: ds 1
+wDialogCharacterIndex ds 1 ; C170
+wDialogNextCharPosition: ds 1
 
 wDialogScrollDelay:: ; C172
   ds 1
@@ -177,6 +177,7 @@ wC181 equ $C181
 
 wDialogState:: ; C19F
   ; See DIALOG_* constants for possible values.
+  ; (only the lower byte is used)
   ds 1
 
 wC1A4 equ $C1A0

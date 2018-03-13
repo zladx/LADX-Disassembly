@@ -1657,7 +1657,7 @@ label_A9B::
     push af
     ld   a, $0F
     call SwitchBank
-    call label_2321
+    call ExecuteDialog
     jp   RestoreStackedBankAndReturn
 
 label_AA7::
@@ -2576,7 +2576,7 @@ returnFromGameplayHandler::
     call SwitchBank
 
 label_101F::
-    call label_2321
+    call ExecuteDialog
     ldh  a, [hIsGBC]
     and  a
     ret  z
@@ -5514,73 +5514,67 @@ label_22FE::
     ld   [MBC3SelectBank], a
     jp   $5570
 
-; Unknown procedure
-label_2321::
+ExecuteDialog::
     ; If DialogState == 0, don't do anything.
     ld   a, [wDialogState]
     and  a
     ret  z
 
-    ; a = (GameplayType == CREDITS ? $07 : $7E)
+    ; Configure the dialog background color
     ld   e, a
-.if
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
-.then
+    ; By default use a dark background color
     ld   a, $7E
-    jr   nz, .fi
-.else
+    jr   nz, .writeBackgroundTile
+.lightBackground
+    ; but during credits: use a light background color
     ld   a, $7F
-.fi
+.writeBackgroundTile
+    ; Save the background value to be updated later
     ldh  [$FFE8], a
 
-    ld   a, [wCharacterPositionHi]
+    ; If the character index is > 20 (i.e. past the first two lines),
+    ; mask wDialogNextCharPosition around $10
+    ld   a, [wDialogCharacterIndexHi]
     and  a
-    ld   a, [wCharacterPosition]
-    jr   nz, label_2341
+    ld   a, [wDialogCharacterIndex]
+    jr   nz, .wrapPosition
     cp   $20
-    jr   c, label_2345
-
-label_2341::
+    jr   c, .writePosition
+.wrapPosition
     and  $0F
     or   $10
+.writePosition
+    ld   [wDialogNextCharPosition], a
 
-label_2345::
-    ld   [$C171], a
+    ; Discard wDialogState lower byte
     ld   a, e
     and  $7F
+
+    ; Dispatch according to the dialog state
     dec  a
     JP_TABLE
-    ; Code below is actually data for the jump table
-    ld   l, e
-    inc  hl
-    or   b
-    inc  hl
-    or   b
-    inc  hl
-    or   b
-    inc  hl
-    ld   a, l
-    inc  h
-    or   a
-    inc  h
-    call $2924
-    dec  h
-    sub  a, l
-    ld   h, $14
-    daa
-    ld   l, b
-    daa
-    adc  a, d
-    inc  h
-    sub  a, e
-    daa
-    xor  a
-    inc  h
-    or   c
-    inc  hl
+._00 dw DialogOpenAnimationStartHandler
+._01 dw DialogOpenAnimationHandler
+._02 dw DialogOpenAnimationHandler
+._03 dw DialogOpenAnimationHandler
+._04 dw DialogOpenAnimationEndHandler
+._05 dw DialogLetterAnimationStartHandler
+._06 dw DialogLetterAnimationEndHandler
+._07 dw DialogDrawNextCharacterHandler
+._08 dw DialogBreakHandler
+._09 dw DialogScrollingStartHandler
+._0A dw DialogScrollingEndHandler
+._0B dw DialogFinishedHandler
+._0C dw DialogChoiceHandler
+._0D dw DialogClosingBeginHandler
+._0E dw DialogClosingEndHandler
+
+DialogOpenAnimationStartHandler::
     ld   a, $14
     ld   [MBC3SelectBank], a
+    ; Call 14:5449
     jp   $5449
 
 label_2373::
@@ -5603,8 +5597,8 @@ label_2385::
     ld   [wDialogueIndex], a
     xor  a
     ld   [$C16F], a
-    ld   [wCharacterPosition], a
-    ld   [wCharacterPositionHi], a
+    ld   [wDialogCharacterIndex], a
+    ld   [wDialogCharacterIndexHi], a
     ld   [$C108], a
     ld   [wDialogueIndexHi], a
     ld   a, $0F
@@ -5617,9 +5611,29 @@ label_2385::
     ld   [wDialogState], a
     ret
 
-data_23B0::
-    db   $C9, $AF, $EA, $9F, $C1, $3E, $18, $EA, $34, $C1, $F0, $FE, $A7, $C8, $FA, $95
-    db   $DB, $FE, $B, $C0, $FA, $CC, $C3, $FE, 8, $D8, $3E, $21, $EA, 0, $21, $C3
+DialogOpenAnimationHandler::
+    ret
+
+DialogClosingEndHandler::
+    xor  a
+    ld   [wDialogState], a
+    ld   a, $18
+    ld   [$C134], a
+    ldh  a, [hIsGBC]
+    and  a
+    ret  z
+
+    ld   a, [wGameplayType]
+    cp   a, GAMEPLAY_OVERWORLD
+    ret  nz
+
+    ld   a, [$C3CC]
+    cp   a, $08
+    ret  c
+
+    ld   a, $21
+    ld   [$2100], a
+    db   $C3
 
 data_23D0::
     db   $CF, $53, 0, $24, $48, 0
@@ -5748,6 +5762,8 @@ label_2475::
     cp   $02
     jr   nz, label_2444
     ret
+
+DialogOpenAnimationEndHandler::
     ld   a, $1C
     ld   [MBC3SelectBank], a
     jp   $4A2C
@@ -5757,8 +5773,7 @@ IncrementDialogState::
     inc  [hl]
     ret
 
-; Unused code
-ConditionallyUpdateDialogState::
+DialogFinishedHandler::
     ; If $C1AB == 0...
     ld   a, [$C1AB]
     and  a
@@ -5795,27 +5810,32 @@ UpdateDialogState::
 UpdateDialogState_return:
     ret
 
-label_24AF::
+DialogClosingBeginHandler::
     ld   a, $1C
     ld   [MBC3SelectBank], a
+    ; Call 1C:4AA8 (start open dialog animation)
     jp   $4AA8
+
+DialogLetterAnimationStartHandler::
     ld   a, $1C
     ld   [MBC3SelectBank], a
     ld   a, [wDialogScrollDelay]
     and  a
-    jr   z, label_24C7
+    jr   z, .delayOver
     dec  a
     ld   [wDialogScrollDelay], a
     ret
 
-label_24C7::
+.delayOver
     call label_49F1
     jp   IncrementDialogState
+
+DialogLetterAnimationEndHandler::
     ld   a, $1C
     ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
     ld   c, a
-    ld   a, [$C171]
+    ld   a, [wDialogNextCharPosition]
     bit  7, c
     jr   z, label_24DF
     add  a, $20
@@ -5857,7 +5877,7 @@ label_250D::
     xor  a
     ldi  [hl], a
     push hl
-    ld   a, [wCharacterPosition]
+    ld   a, [wDialogCharacterIndex]
     and  $1F
     ld   c, a
     ld   hl, $45A1
@@ -5866,12 +5886,12 @@ label_250D::
     pop  hl
     ldi  [hl], a
     call IncrementDialogState
-    jp   DrawNextCharacter
+    jp   DialogDrawNextCharacterHandler
 
-DrawNextCharacter::
+DialogDrawNextCharacterHandler::
     ld   a, BANK(DialoguePointerTable)
     ld   [MBC3SelectBank], a
-    ld   a, [wCharacterPosition]
+    ld   a, [wDialogCharacterIndex]
     and  $1F
     ld   c, a
     ld   b, $00
@@ -5914,9 +5934,9 @@ DrawNextCharacter::
     and  $3f
     ld   [MBC3SelectBank], a
     pop  hl
-    ld   a, [wCharacterPosition]
+    ld   a, [wDialogCharacterIndex]
     ld   e, a
-    ld   a, [wCharacterPositionHi]
+    ld   a, [wDialogCharacterIndexHi]
     ld   d, a
     add  hl, de
     ld   a, [hli]
@@ -5974,7 +5994,7 @@ DrawNextCharacter::
     jr   z, .got_frequency
     ld   e, $03
 .got_frequency
-    ld   a, [wCharacterPosition]
+    ld   a, [wDialogCharacterIndex]
     add  a, $04
     and  e
     jr   nz, .skipsfx
@@ -6069,15 +6089,15 @@ label_2660::
     ld   [hl], $00
 
 label_2663::
-    ld   a, [wCharacterPosition]
+    ld   a, [wDialogCharacterIndex]
     add  a, $01
-    ld   [wCharacterPosition], a
-    ld   a, [wCharacterPositionHi]
+    ld   [wDialogCharacterIndex], a
+    ld   a, [wDialogCharacterIndexHi]
     adc  a, $00
-    ld   [wCharacterPositionHi], a
+    ld   [wDialogCharacterIndexHi], a
     xor  a
     ld   [$C1CC], a
-    ld   a, [$C171]
+    ld   a, [wDialogNextCharPosition]
     cp   $1F
     jr   z, label_268E
 
@@ -6099,21 +6119,21 @@ data_2691::
 data_2693::
     db $98, $99
 
-label_2695::
-    ld   a, [wCharacterPosition]
+DialogBreakHandler::
+    ld   a, [wDialogCharacterIndex]
     and  $1F
     jr   nz, label_26E1
     ld   a, [$C3C3]
     cp   $FF
-    jp   z, DrawNextCharacter.label_25AD
+    jp   z, DialogDrawNextCharacterHandler.label_25AD
     cp   $FE
-    jp   z, DrawNextCharacter.choice
+    jp   z, DialogDrawNextCharacterHandler.choice
     ld   a, [$C1CC]
     and  a
     jr   nz, label_26B6
     inc  a
     ld   [$C1CC], a
-    call DrawNextCharacter.end_dialogue
+    call DialogDrawNextCharacterHandler.end_dialogue
 
 label_26B6::
     call label_27BB
@@ -6121,7 +6141,7 @@ label_26B6::
     bit  4, a
     jr   nz, label_26E1
     bit  5, a
-    jr   z, label_2714
+    jr   z, DialogScrollingStartHandler
     ld   a, BANK(DialogueBankTable)
     ld   [MBC3SelectBank], a
     ld   a, [wGameplayType]
@@ -6164,7 +6184,7 @@ label_26EB::
     ld   [$D605], a
     call IncrementDialogState
 
-label_2714::
+DialogScrollingStartHandler::
     ret
 
 data_2715::
@@ -6233,6 +6253,8 @@ label_275D::
     ld   a, $08  ; Pause the scrolling for 8 frames
     ld   [wDialogScrollDelay], a
     jp   IncrementDialogState
+
+DialogScrollingEndHandler::
     ret
 
 data_2769::
@@ -6263,6 +6285,8 @@ label_278B::
     ld   a, $02
     ld   [$C177], a
     jp   UpdateDialogState
+
+DialogChoiceHandler::
     ldh  a, [$FFCC]
     bit  4, a
     jp   nz, label_27B7
@@ -6677,10 +6701,9 @@ label_29AB::
 UpdateNextBGColumnWithTiles::
     ld   a, [de]
     cp   $EE
-    jr   z, .UpdateNextBGColumnWithTiles_continue
+    jr   z, .continue
     ld   [hl], a
-
-.UpdateNextBGColumnWithTiles_continue
+.continue
     inc  de
     ld   a, b
     ld   bc, $0020

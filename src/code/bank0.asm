@@ -647,7 +647,7 @@ LoadMapData::
 
     ld   a, $08
     ld   [MBC3SelectBank], a
-    call label_292D
+    call ExecuteCopyRequest.noMapTransition
 
     ld   a, $0C
     call AdjustBankNumberForGBC
@@ -823,13 +823,14 @@ label_52B::
     ld   [MBC3SelectBank], a
     call label_5C1A ; Change BG column palette. Triggered by an interrupt?
 .notGBC
-    ld   de, $D601
-    call label_2927 ; Load BG column tiles
+    ld   de, wRequest
+    call ExecuteCopyRequest ; Load BG column tiles
     xor  a
-    ld   [$D600], a
-    ld   [$D601], a
+    ld   [wRequests], a
+    ld   [wRequest], a
     ld   [$DC90], a
     ld   [$DC91], a
+
     ld   a, $36
     ld   [MBC3SelectBank], a
     call label_72BA
@@ -876,11 +877,11 @@ PhotoAlbumVBlankHandler::
     call label_5C1A
 
 label_598::
-    ld   de, $D601
-    call label_2927
+    ld   de, wRequest
+    call ExecuteCopyRequest
     xor  a
-    ld   [$D600], a
-    ld   [$D601], a
+    ld   [wRequests], a
+    ld   [wRequest], a
     ld   [$DC90], a
     ld   [$DC91], a
 
@@ -1676,8 +1677,8 @@ label_AB5::
     ld   a, $24
     ld   [MBC3SelectBank], a
     call label_5C1A
-    ld   de, $D601
-    call label_2927
+    ld   de, wRequest
+    call ExecuteCopyRequest
     jr   label_AB0
 
 label_AC6::
@@ -2540,7 +2541,7 @@ label_F97::
     ld   a, $02
     call SwitchBank
     call label_5487
-    ld   hl, $D601
+    ld   hl, wRequestDestination
     ldh  a, [hFrameCounter]
     and  $03
     or   [hl]
@@ -4202,7 +4203,7 @@ label_1AC7::
     ret
 
 AnimateMarinBeachTiles::
-    ld   a, [$D601]
+    ld   a, [wRequestDestinationHigh]
     and  a
     ret  nz
     ld   a, $10
@@ -4257,7 +4258,7 @@ AnimateTiles::
     cp   GAMEPLAY_INTRO
     jr   nz, .notIntro
     ; If there is no transfert request pending…
-    ld   a, [$D601]
+    ld   a, [wRequest]
     and  a
     jp   nz, .return
     ; … and the frame count is >= 4
@@ -4324,7 +4325,7 @@ AnimateTiles::
     ; If there is a pending request or a map transition,
     ; only animate Link's sprite. 
     ld   hl, wMapSlideTransitionState
-    ld   a, [$D601]
+    ld   a, [wRequest]
     or   [hl]
     jp   nz, DrawLinkSpriteAndReturn
 
@@ -5856,7 +5857,7 @@ label_24DF::
     ld   hl, $45C1
     add  hl, bc
     add  a, [hl]
-    ld   hl, $D600
+    ld   hl, wRequests
     add  hl, de
     ldi  [hl], a
     ld   [$C175], a
@@ -5907,7 +5908,7 @@ DialogDrawNextCharacterHandler::
     ld   hl, $4581
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $D600
+    ld   hl, wRequests
     add  hl, de
     ldi  [hl], a ; high byte of tile destination address
     push hl
@@ -5957,7 +5958,7 @@ DialogDrawNextCharacterHandler::
     jr   nz, .notChoice
     pop  hl
     xor  a
-    ld   [$D601], a
+    ld   [wRequest], a
 
 .choice
     ld   a, [wDialogState]
@@ -5975,7 +5976,7 @@ DialogDrawNextCharacterHandler::
     jr   nz, .notEnd
     pop  hl
     xor  a
-    ld   [$D601], a
+    ld   [wRequest], a
 
 .label_25AD::
     ld   a, [wDialogState]
@@ -6182,16 +6183,16 @@ label_26E1::
     add  hl, de
     ld   a, [$C12E]
     add  a, [hl]
-    ld   [$D601], a
+    ld   [wRequestDestinationHigh], a
     ld   hl, data_2691
     add  hl, de
     ld   a, [$C12F]
     add  a, [hl]
-    ld   [$D602], a
+    ld   [wRequestDestinationLow], a
     ld   a, $4F
-    ld   [$D603], a
+    ld   [wRequestLength], a
     ldh  a, [hDialogBackgroundTile]
-    ld   [$D604], a
+    ld   [wRequestLength + 1], a
     xor  a
     ld   [$D605], a
     call IncrementDialogState
@@ -6570,7 +6571,12 @@ ClearMap::
 
 include "code/home/copy_data.asm"
 
-label_291D::
+; Copy data
+; Inputs:
+;   bc : number of bytes to copy
+;   de : destination address
+;   hl : source address
+DoCopyTilesData
     inc  de
     ld   h, a
     ld   a, [de]
@@ -6580,19 +6586,24 @@ label_291D::
     inc  de
     call label_2941
 
-label_2927::
+; Execute a data copy from a wRequest structure,
+; with optional handling during map transitions.
+; Inputs:
+;   de: data copy request struct (see wRequest)
+ExecuteCopyRequest::
     ld   a, [wMapSlideTransitionState]
     and  a
-    jr   nz, label_293C
+    jr   nz, .duringMapTransition
 
-label_292D::
-    ; If de != 0, jump to label_291D
+.noMapTransition
+    ; Sanity check: if the destination address is present, copy the data.
     ld   a, [de]
     and  a
-    jr   nz, label_291D
+    jr   nz, DoCopyTilesData
+    ; but if the destination address is blank, return
     ret
 
-label_2932::
+.mapTransitionCopyLoop
     inc  de
     ld   h, a
     ld   a, [de]
@@ -6602,10 +6613,10 @@ label_2932::
     inc  de
     call label_2991
 
-label_293C::
+.duringMapTransition
     ld   a, [de]
     and  a
-    jr   nz, label_2932
+    jr   nz, .mapTransitionCopyLoop
     ret
 
 label_2941::

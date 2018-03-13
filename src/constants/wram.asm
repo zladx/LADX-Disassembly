@@ -62,6 +62,7 @@ wIsUsingSpinAttack:: ; C121
 wC122 equ $C122
   ds 2
 
+; See MAP_SLIDE_* constants for possible values.
 wMapSlideTransitionState:: ; C124
   ds 1
 

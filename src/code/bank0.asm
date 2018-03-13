@@ -5769,6 +5769,7 @@ DialogOpenAnimationEndHandler::
     jp   $4A2C
 
 IncrementDialogState::
+IncrementDialogStateAndReturn::
     ld   hl, wDialogState
     inc  [hl]
     ret
@@ -5828,7 +5829,7 @@ DialogLetterAnimationStartHandler::
 
 .delayOver
     call label_49F1
-    jp   IncrementDialogState
+    jp   IncrementDialogStateAndReturn
 
 DialogLetterAnimationEndHandler::
     ld   a, $1C
@@ -6113,7 +6114,7 @@ label_267E::
     ret
 
 label_268E::
-    jp   IncrementDialogState
+    jp   IncrementDialogStateAndReturn
 
 data_2691::
     db $22, $42
@@ -6254,7 +6255,7 @@ label_275D::
     jr   nz, label_2739
     ld   a, $08  ; Pause the scrolling for 8 frames
     ld   [wDialogScrollDelay], a
-    jp   IncrementDialogState
+    jp   IncrementDialogStateAndReturn
 
 DialogScrollingEndHandler::
     ret

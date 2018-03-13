@@ -647,7 +647,7 @@ LoadMapData::
 
     ld   a, $08
     ld   [MBC3SelectBank], a
-    call ExecuteCopyRequest.noMapTransition
+    call ExecuteBackgroundCopyRequest.noMapTransition
 
     ld   a, $0C
     call AdjustBankNumberForGBC
@@ -824,7 +824,7 @@ label_52B::
     call label_5C1A ; Change BG column palette. Triggered by an interrupt?
 .notGBC
     ld   de, wRequest
-    call ExecuteCopyRequest ; Load BG column tiles
+    call ExecuteBackgroundCopyRequest ; Load BG column tiles
     xor  a
     ld   [wRequests], a
     ld   [wRequest], a
@@ -878,7 +878,7 @@ PhotoAlbumVBlankHandler::
 
 label_598::
     ld   de, wRequest
-    call ExecuteCopyRequest
+    call ExecuteBackgroundCopyRequest
     xor  a
     ld   [wRequests], a
     ld   [wRequest], a
@@ -1678,7 +1678,7 @@ label_AB5::
     ld   [MBC3SelectBank], a
     call label_5C1A
     ld   de, wRequest
-    call ExecuteCopyRequest
+    call ExecuteBackgroundCopyRequest
     jr   label_AB0
 
 label_AC6::
@@ -6571,36 +6571,41 @@ ClearMap::
 
 include "code/home/copy_data.asm"
 
-; Copy data
+; Execute a data copy from a wRequest structure,
+; with optional handling during map transitions.
 ; Inputs:
-;   bc : number of bytes to copy
-;   de : destination address
-;   hl : source address
-DoCopyTilesData
+;   de: data copy request struct (see wRequest)
+;   a:  destination address high byte
+ExpandCopyRequestArgs
+    ; Copy destination address to hl
     inc  de
     ld   h, a
     ld   a, [de]
     ld   l, a
+    ; Copy data length to a
     inc  de
     ld   a, [de]
+    ; Move de to the data start
     inc  de
-    call label_2941
+    call CopyBackgroundData
+    ; fallthrough
 
 ; Execute a data copy from a wRequest structure,
 ; with optional handling during map transitions.
 ; Inputs:
 ;   de: data copy request struct (see wRequest)
-ExecuteCopyRequest::
+ExecuteBackgroundCopyRequest::
     ld   a, [wMapSlideTransitionState]
     and  a
     jr   nz, .duringMapTransition
 
 .noMapTransition
-    ; Sanity check: if the destination address is present, copy the data.
+    ; If the request is present, copy the data.
     ld   a, [de]
     and  a
-    jr   nz, DoCopyTilesData
-    ; but if the destination address is blank, return
+    jr   nz, ExpandCopyRequestArgs
+    ; but if the request is blank or has just been executed successfully,
+    ; return.
     ret
 
 .mapTransitionCopyLoop
@@ -6619,57 +6624,67 @@ ExecuteCopyRequest::
     jr   nz, .mapTransitionCopyLoop
     ret
 
-label_2941::
+; Copy map data to Background data
+; Inputs:
+;   de: data copy source address
+;   hl: data copy destination address
+;   a:  data length
+CopyBackgroundData::
+    ; Save the six lowest bits (actual data length) of the data length to b
     push af
     and  $3F
     ld   b, a
     inc  b
     pop  af
+
+    ; Save the two highmost bits (copy flag) of the data length to a
     rlca
     rlca
     and  $03
-    jr   z, label_2955
-    dec  a
-    jr   z, label_2966
-    dec  a
-    jr   z, label_2977
-    jr   label_2984
 
-label_2955::
+    ; Dispatch according to the copy flag
+    jr   z, .copyMode0
+    dec  a
+    jr   z, .copyMode1
+    dec  a
+    jr   z, .copyMode2
+    jr   .copyMode3
+
+.copyMode0
     ld   a, [de]
     ldi  [hl], a
     ld   a, l
     and  $1F
-    jr   nz, label_2961
+    jr   nz, .unknown
     dec  hl
     ld   a, l
     and  $E0
     ld   l, a
 
-label_2961::
+.unknown
     inc  de
     dec  b
-    jr   nz, label_2955
+    jr   nz, .copyMode0
     ret
 
-label_2966::
+.copyMode1
     ld   a, [de]
     ldi  [hl], a
     ld   a, l
     and  $1F
-    jr   nz, label_2972
+    jr   nz, .unknow2
     dec  hl
     ld   a, l
     and  $E0
     ld   l, a
 
-label_2972::
+.unknow2
     dec  b
-    jr   nz, label_2966
+    jr   nz, .copyMode1
     inc  de
     ret
 
-label_2977::
+.copyMode2
     ld   a, [de]
     ld   [hl], a
     inc  de
@@ -6678,10 +6693,10 @@ label_2977::
     add  hl, bc
     ld   b, a
     dec  b
-    jr   nz, label_2977
+    jr   nz, .copyMode2
     ret
 
-label_2984::
+.copyMode3
     ld   a, [de]
     ld   [hl], a
     ld   a, b
@@ -6689,7 +6704,7 @@ label_2984::
     add  hl, bc
     ld   b, a
     dec  b
-    jr   nz, label_2984
+    jr   nz, .copyMode3
     inc  de
     ret
 

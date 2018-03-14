@@ -5524,15 +5524,14 @@ ExecuteDialog::
     ld   e, a
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
-    ; By default use a dark background color
-    ld   a, $7E
+    ; By default use a dark background
+    ld   a, DIALOG_BG_TILE_DARK
     jr   nz, .writeBackgroundTile
 .lightBackground
-    ; but during credits: use a light background color
-    ld   a, $7F
+    ; but during credits use a light background
+    ld   a, DIALOG_BG_TILE_LIGHT
 .writeBackgroundTile
-    ; Save the background value to be updated later
-    ldh  [$FFE8], a
+    ldh  [hDialogBackgroundTile], a
 
     ; If the character index is > 20 (i.e. past the first two lines),
     ; mask wDialogNextCharPosition around $10
@@ -6161,13 +6160,16 @@ label_26B6::
     jp   z, label_278B
 
 label_26E1::
+    ; Build a BG Data transfert request for the dialog background
+
+    ; e = (wDialogState == DIALOG_CLOSED ? 0 : 1)
     ld   e, $00
     ld   a, [wDialogState]
     and  $80
-    jr   z, label_26EB
+    jr   z, .closed
     inc  e
+.closed
 
-label_26EB::
     ld   d, $00
     ld   hl, data_2693
     add  hl, de
@@ -6181,7 +6183,7 @@ label_26EB::
     ld   [$D602], a
     ld   a, $4F
     ld   [$D603], a
-    ldh  a, [$FFE8]
+    ldh  a, [hDialogBackgroundTile]
     ld   [$D604], a
     xor  a
     ld   [$D605], a
@@ -6239,7 +6241,7 @@ label_2739::
     ld   a, l
     add  a, $20
     ld   l, a
-    ldh  a, [$FFE8]
+    ldh  a, [hDialogBackgroundTile]
     ld   [hl], a
     pop  bc
     inc  bc

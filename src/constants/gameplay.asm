@@ -96,6 +96,10 @@ DIALOG_CHOICE              equ $0D ; press A to choose
 DIALOG_CLOSING_1           equ $0E
 DIALOG_CLOSING_2           equ $0F
 
+; Tiles used as the dialog background color
+DIALOG_BG_TILE_DARK        equ $7E
+DIALOG_BG_TILE_LIGHT       equ $7F
+
 ; Values for wTransitionSfx
 TRANSITION_SFX_NONE         equ $00 ; no transition
 TRANSITION_SFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine

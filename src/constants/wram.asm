@@ -435,8 +435,9 @@ wRequestDestinationHigh:: ; D601
 wRequestDestinationLow::  ; D602
   ds 1
 
-; Request data length
-; (The two highmost bits are actually a flag for the copy mode)
+; Request data length and mode
+;   bits 0-6: data length
+;   bits 7-8: copy mode (see BG_COPY_MODE_* constants)
 wRequestLength:           ; D603
   ds 1
 

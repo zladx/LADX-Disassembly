@@ -6,6 +6,16 @@ TILES_PER_MAP              equ $80
 
 NAME_LENGTH                EQU 5
 
+; Copy modes for CopyBackgroundData
+; Copy the data from source to dest, progressing horizontally
+BG_COPY_MODE_ROW                 equ $00
+; Copy a single byte from source to dest, progressing horizontally
+BG_COPY_MODE_ROW_SINGLE_VALUE    equ $40
+; Copy the data from source to dest, progressing vertically
+BG_COPY_MODE_COLUMN              equ $80
+; Copy a single byte from source to dest, progressing vertically
+BG_COPY_MODE_COLUMN_SINGLE_VALUE equ $C0
+
 ; Values for wGameplayType
 GAMEPLAY_INTRO             equ $00
 GAMEPLAY_CREDITS           equ $01

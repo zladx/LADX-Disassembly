@@ -6189,7 +6189,7 @@ label_26E1::
     ld   a, [$C12F]
     add  a, [hl]
     ld   [wRequestDestinationLow], a
-    ld   a, $4F
+    ld   a, BG_COPY_MODE_ROW_SINGLE_VALUE | $0F
     ld   [wRequestLength], a
     ldh  a, [hDialogBackgroundTile]
     ld   [wRequestLength + 1], a

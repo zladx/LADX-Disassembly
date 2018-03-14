@@ -83,7 +83,7 @@ ExecuteBackgroundCopyRequest::
 ; Inputs:
 ;   de: data copy source address
 ;   hl: data copy destination address
-;   a:  data length
+;   a:  data length (bits 0-6) and copy mode (bits 7-8)
 CopyBackgroundData::
     ; Save the six lowest bits (actual data length) of the data length to b
     push af
@@ -97,67 +97,92 @@ CopyBackgroundData::
     rlca
     and  $03
 
-    ; Dispatch according to the copy flag
-    jr   z, .copyMode0
+    ; Dispatch according to the copy mode
+    ; BG_COPY_MODE_ROW
+    jr   z, .copyRow
     dec  a
-    jr   z, .copyMode1
+    ; BG_COPY_MODE_ROW_SINGLE_VALUE
+    jr   z, .copyRowSingleValue
     dec  a
-    jr   z, .copyMode2
-    jr   .copyMode3
+    ; BG_COPY_MODE_COLUMN
+    jr   z, .copyColumn
+    ; BG_COPY_MODE_COLUMN_SINGLE_VALUE
+    jr   .copyColumnSingleValue
 
-.copyMode0
+.copyRow
+    ; Copy one byte from [de] to [hl]
     ld   a, [de]
     ldi  [hl], a
+    ; If 'dest mod 32' is 0…
     ld   a, l
     and  $1F
-    jr   nz, .unknown
+    jr   nz, .noSubstraction0
+    ; dest = dest - 32
     dec  hl
     ld   a, l
     and  $E0
     ld   l, a
-.unknown
+.noSubstraction0
+    ; Increment the source address
     inc  de
+    ; Decrement the length to be copied
     dec  b
-    jr   nz, .copyMode0
+    ; Loop
+    jr   nz, .copyRow
     ret
 
-.copyMode1
+; Copy a single value in [de] from [hl] to [hl + a]
+.copyRowSingleValue
+    ; Copy one byte from [de] to [hl]
     ld   a, [de]
     ldi  [hl], a
+    ; If 'dest mod 32' is 0…
     ld   a, l
     and  $1F
-    jr   nz, .unknow2
+    jr   nz, .noSubstraction1
+    ; dest = dest - 32
     dec  hl
     ld   a, l
     and  $E0
     ld   l, a
-.unknow2
+.noSubstraction1
+    ; Decrement the length to be copied
     dec  b
-    jr   nz, .copyMode1
+    ; Loop (without incrementing the source address)
+    jr   nz, .copyRowSingleValue
     inc  de
     ret
 
-.copyMode2
+.copyColumn
+    ; Copy one byte from [de] to [hl]
     ld   a, [de]
     ld   [hl], a
+    ; Increment the source address
     inc  de
+    ; Move the destination to the next background column
     ld   a, b
     ld   bc, $0020
     add  hl, bc
+    ; Decrement the length to be copied
     ld   b, a
     dec  b
-    jr   nz, .copyMode2
+    ; Loop
+    jr   nz, .copyColumn
     ret
 
-.copyMode3
+.copyColumnSingleValue
+    ; Copy one byte from [de] to [hl]
     ld   a, [de]
     ld   [hl], a
+    ; Move the destination to the next background column
     ld   a, b
     ld   bc, $0020
     add  hl, bc
+    ; Decrement the length to be copied
     ld   b, a
     dec  b
-    jr   nz, .copyMode3
+    ; Loop (without incrementing the source address)
+    jr   nz, .copyColumnSingleValue
     inc  de
     ret
 

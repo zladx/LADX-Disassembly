@@ -49,7 +49,11 @@ wC118: ds 1
 wC119: ds 1
 wC11A: ds 1
 wC11B: ds 1
-wC11C: ds 1
+
+; See LINK_MOTION_* constants for possible values.
+wLinkMotionState: ; C11C
+  ds 1
+
 wC11D: ds 1
 wC11E: ds 1
 wC11F: ds 1

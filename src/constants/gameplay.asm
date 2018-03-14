@@ -118,6 +118,19 @@ DIALOG_CLOSING_2           equ $0F
 DIALOG_BG_TILE_DARK        equ $7E
 DIALOG_BG_TILE_LIGHT       equ $7F
 
+; Values for wLinkMotionState
+LINK_MOTION_INTERACTIVE    equ $00
+LINK_MOTION_FALLING_UP     equ $01
+LINK_MOTION_JUMPING        equ $02
+LINK_MOTION_MAP_FADE_OUT   equ $03
+LINK_MOTION_MAP_FADE_IN    equ $04
+LINK_MOTION_REVOLVING_DOOR equ $05
+LINK_MOTION_FALLING_DOWN   equ $06
+LINK_MOTION_PASS_OUT       equ $07
+LINK_MOTION_RECOVER        equ $08
+LINK_MOTION_TELEPORT       equ $09
+LINK_MOTION_UNKNOWN        equ $0F
+
 ; Values for wTransitionSfx
 TRANSITION_SFX_NONE         equ $00 ; no transition
 TRANSITION_SFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine

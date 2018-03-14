@@ -2013,7 +2013,7 @@ label_C9A::
 
 label_C9E::
     ld   a, $03
-    ld   [$C11C], a
+    ld   [wLinkMotionState], a
     xor  a
     ld   [wTransitionSequenceCounter], a
     ld   [$C16C], a
@@ -2546,7 +2546,7 @@ label_F97::
     and  $03
     or   [hl]
     jr   nz, label_1012
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $02
     jr   nc, label_1012
     ld   c, $01
@@ -2657,7 +2657,7 @@ label_107F::
     ldh  a, [hLinkAnimationState]
     cp   $FF
     jr   z, label_10DB
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $02
     jr   nc, label_10DB
     ld   a, [wDialogState]
@@ -2708,24 +2708,22 @@ label_10EF::
     ld   a, [wMapSlideTransitionState]
     and  a
     jp   nz, label_114F
-    ld   a, [$C11C]
-    cp   $07
-    jr   z, label_1138
+    ld   a, [wLinkMotionState]
+    cp   LINK_MOTION_PASS_OUT
+    jr   z, .linkMotionJumpTable
     ld   a, [$DB5A]
     ld   hl, $C50A
     or   [hl]
     ld   hl, wInventoryAppearing
     or   [hl]
-    jr   nz, label_1135
+    jr   nz, .handleLinkMotion
     ld   a, $07
-    ld   [$C11C], a
+    ld   [wLinkMotionState], a
     ld   a, $BF
     ldh  [$FFB7], a
     ld   a, $10
     ld   [$C3CC], a
     xor  a
-
-label_1120::
     ld   [$DBC7], a
     ldh  [$FF9C], a
     ld   [$DDD6], a
@@ -2735,35 +2733,37 @@ label_1120::
     ld   a, $08
     ldh  [$FFF3], a
 
-label_1135::
-    ld   a, [$C11C]
-
-label_1138::
+.handleLinkMotion
+    ld   a, [wLinkMotionState]
+.linkMotionJumpTable
     JP_TABLE
-    ; Code below is actually data for the jump table
-    ld   h, l
-    ld   de, $4F30
-    ld   h, b
-    ld   c, c
-    scf
-    jr   label_1120
-    add  hl, de
-    ld   l, l
-    ld   c, [hl]
-    call nc, label_5D50
-    ld   de, $5267
-    ld   d, l
-    ld   de, $50A3
+._00 dw LinkMotionInteractiveHandler
+._01 dw $4F30       ; LINK_MOTION_FALLING_UP
+._02 dw $4960       ; LINK_MOTION_JUMPING
+._03 dw LinkMotionMapFadeOutHandler
+._04 dw LinkMotionMapFadeInHandler
+._05 dw $4E6D       ; LINK_MOTION_REVOLVING_DOOR
+._06 dw $50D4       ; LINK_MOTION_FALLING_DOWN
+._07 dw LinkMotionPassOutHandler
+._08 dw $5267       ; LINK_MOTION_RECOVER
+._09 dw LinkMotionTeleportUpHandler
+._0F dw $50A3       ; LINK_MOTION_UNKNOWN
 
 label_114F::
     call label_1794
     jp   DrawLinkSpriteAndReturn
+
+LinkMotionTeleportUpHandler::
     ld   a, $19
     call SwitchBank
     jp   $5D6A
-    ld   a, $01
+
+LinkMotionPassOutHandler::
+    ld   a, BANK(LinkPassOut)
     call SwitchBank
-    jp   $41C2
+    jp   LinkPassOut
+
+LinkMotionInteractiveHandler::
     ld   a, $36
     ld   [MBC3SelectBank], a
     call label_725A
@@ -3709,7 +3709,7 @@ label_178E::
 
 label_1794::
     call label_753A
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $01
     ret  z
     ld   a, [$C16A]
@@ -3789,6 +3789,8 @@ label_1819::
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
+
+LinkMotionMapFadeOutHandler::
     call label_754F
     ld   a, [$C3C9]
     and  a
@@ -4056,6 +4058,8 @@ label_19DA::
     xor  a
     ldh  [$FF9E], a
     ret
+
+LinkMotionMapFadeInHandler::
     call label_754F
     ld   a, [$D474]
     and  a
@@ -4083,7 +4087,7 @@ label_1A06::
     ld   a, $00
 
 label_1A0F::
-    ld   [$C11C], a
+    ld   [wLinkMotionState], a
     ld   a, [wDidStealItem]
     and  a
     jr   z, label_1A21
@@ -4130,7 +4134,7 @@ label_1A50::
     ld   c, a
     ld   b, $00
     ld   hl, $4948
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $01
     jr   nz, label_1A78
     ldh  a, [$FF9C]
@@ -4957,7 +4961,7 @@ label_1F69::
     or   [hl]
     ld   hl, $FFA2
     or   [hl]
-    ld   hl, $C11C
+    ld   hl, wLinkMotionState
     or   [hl]
     jp   nz, label_2177
     ldh  a, [$FF9E]
@@ -5588,37 +5592,39 @@ GetRandomByte::
     ret
 
 ReadJoypadState::
+    ; Ignore joypad during map transitions
     ld   a, [wMapSlideTransitionState]
     and  a
-    jr   nz, label_2886 ; return
+    jr   nz, ReadJoypadState_return
+
     ld   a, [wGameplayType]
     cp   GAMEPLAY_OVERWORLD
-    jr   nz, label_2852
+    jr   nz, .readState
     ld   a, [wGameplaySubtype]
     cp   $07
-    jr   nz, label_284C
-    ld   a, [$C11C]
+    jr   nz, .notOverworld
+    ld   a, [wLinkMotionState]
     cp   $07
-    jr   nz, label_283F
+    jr   nz, .linkNotPassingOut
     ldh  a, [$FF9C]
     cp   $04
-    jr   z, label_2852
+    jr   z, .readState
 
-label_283F::
+.linkNotPassingOut
     ld   a, [wTransitionSequenceCounter]
     cp   $04
-    jr   nz, label_284C
+    jr   nz, .notOverworld
     ld   a, [$DDD5]
     and  a
-    jr   z, label_2852
+    jr   z, .readState
 
-label_284C::
+.notOverworld
     xor  a
     ldh  [hPressedButtonsMask], a
     ldh  [$FFCC], a
     ret
 
-label_2852::
+.readState
     ld   a, $20
     ld   [rJOYP], a
     ld   a, [$FF00]
@@ -5650,7 +5656,7 @@ label_2852::
     ld   a, $30
     ld   [rJOYP], a
 
-label_2886::
+ReadJoypadState_return
     ret
 
 label_2887::
@@ -8079,7 +8085,7 @@ label_399B::
     ld   [$C111], a
 
 label_39AE::
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $07
     ret  z
     xor  a

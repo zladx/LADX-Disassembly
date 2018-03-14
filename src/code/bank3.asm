@@ -5356,7 +5356,7 @@ data_EBDA::
     db 2, $A, $E, 6
 
 label_EBDE::
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $02
     jr   nc, label_EC5A
     ldh  a, [$FFA2]
@@ -5454,7 +5454,7 @@ label_EC72::
     jr   nz, label_EC5A
 
 label_EC77::
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $02
     jr   nc, label_EC5A
     push bc
@@ -6926,7 +6926,7 @@ label_F571::
     cp   $22
     jr   c, label_F570
     ld   a, $0A
-    ld   [$C11C], a
+    ld   [wLinkMotionState], a
     ld   hl, $C380
     add  hl, bc
     ld   a, [hl]
@@ -7590,7 +7590,7 @@ label_F9AC::
     jr   z, label_FA18
     cp   $C1
     jr   nz, label_F9CB
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $06
     jr   nz, label_FA18
     ldh  a, [$FFAF]
@@ -8057,7 +8057,7 @@ label_FCAB::
     ldh  a, [$FFFE]
     and  a
     jr   z, label_FCFD
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $05
     ret  z
     ld   a, [$DDD6]

@@ -88,9 +88,10 @@ hFFCC:: ; hFFCC
 hNeedsRenderingFrame:: ; FFD1
  ds 1
 
-; Unlabeled
-hFFD2:: ; hFFD2
-  ds $15
+hFFD2:: ; FFD2
+  ds 1
+
+  ds $14
 
 hFrameCounter:: ; FFE7
   ; wraps around 00-FF
@@ -98,7 +99,14 @@ hFrameCounter:: ; FFE7
 
 ; Unlabeled
 hFFE8:: ; hFFE8
-  ds $E
+  ds $B
+
+hSFX:: ; FFF3
+  ; plays sfx immediately
+  ds 1
+
+hFFF4: ds 1
+hFFF5: ds 1
 
 hMapIndex:: ; FFF6
   ; currently loaded map

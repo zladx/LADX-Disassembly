@@ -337,7 +337,8 @@ label_41BB::
     ld   [rBGP], a
     ret
 
-
+LinkPassOut::
+    ; Actually code, not data
     db $f0, $9c, $c7, $03, $42, $91, $42, $9b
     db $42, $ca, $42, $d9, $42
 
@@ -717,7 +718,7 @@ label_4425::
 label_442B::
     call ClearLowerWRAM
     xor  a
-    ld   [$C11C], a
+    ld   [wLinkMotionState], a
     call IncrementGameplaySubtype
     ld   a, [$DB9D]
     ldh  [$FF98], a
@@ -854,10 +855,10 @@ label_4507::
     ld   [wLCDControl], a
     ld   [rLCDC], a
     call IncrementGameplaySubtype
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     ld   [$D463], a
     ld   a, $04
-    ld   [$C11C], a
+    ld   [wLinkMotionState], a
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
@@ -3014,7 +3015,7 @@ label_531D::
     xor  a
     ld   [wGameplaySubtype], a
     xor  a
-    ld   [$C11C], a
+    ld   [wLinkMotionState], a
     ldh  [$FF9C], a
     ld   [wSubstractRupeeBufferLow], a
     ld   [$DB94], a
@@ -5234,7 +5235,7 @@ label_61E9::
     inc  a
     ld   [$990A], a
     ret
-    ld   a, [$C11C]
+    ld   a, [wLinkMotionState]
     cp   $00
     jr   nz, label_6202
     ld   a, [wFreeMovementMode]

@@ -10,7 +10,7 @@ Start:: ;
     and  $80 ; do we need to switch the CPU speed?
     jr   nz, .speedSwitchDone
     ld   a, $30      ; \
-    ld   [rJOYP], a  ; |
+    ld   [rP1], a  ; |
     ld   a, $01      ; |
     ld   [rKEY1], a  ; | Switch the CPU speed
     xor  a           ; |
@@ -5626,14 +5626,14 @@ ReadJoypadState::
 
 .readState
     ld   a, $20
-    ld   [rJOYP], a
+    ld   [rP1], a
     ld   a, [$FF00]
     ld   a, [$FF00]
     cpl
     and  $0F
     ld   b, a
     ld   a, $10
-    ld   [rJOYP], a
+    ld   [rP1], a
     ld   a, [$FF00]
     ld   a, [$FF00]
     ld   a, [$FF00]
@@ -5654,7 +5654,7 @@ ReadJoypadState::
     ld   a, c
     ldh  [hPressedButtonsMask], a
     ld   a, $30
-    ld   [rJOYP], a
+    ld   [rP1], a
 
 ReadJoypadState_return
     ret

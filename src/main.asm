@@ -4,9 +4,9 @@
 include "constants/charmap.asm"
 include "constants/constants.asm"
 
-include "text/dialogue_table.asm"
-include "text/dialogue.asm"
-include "text/dialogue_dx.asm"
+include "text/dialog_table.asm"
+include "text/dialog.asm"
+include "text/dialog_dx.asm"
 
 include "data/ascii_to_tile.asm"
 

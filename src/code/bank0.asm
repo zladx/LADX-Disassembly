@@ -5579,13 +5579,13 @@ DialogOpenAnimationStartHandler::
 label_2373::
     call label_2385
     ld   a, $01
-    ld   [wDialogueIndexHi], a
+    ld   [wDialogIndexHi], a
     ret
 
 label_237C::
     call label_2385
     ld   a, $02
-    ld   [wDialogueIndexHi], a
+    ld   [wDialogIndexHi], a
     ret
 
 label_2385::
@@ -5593,13 +5593,13 @@ label_2385::
     xor  a
     ld   [$C177], a
     pop  af
-    ld   [wDialogueIndex], a
+    ld   [wDialogIndex], a
     xor  a
     ld   [$C16F], a
     ld   [wDialogCharacterIndex], a
     ld   [wDialogCharacterIndexHi], a
     ld   [$C108], a
-    ld   [wDialogueIndexHi], a
+    ld   [wDialogIndexHi], a
     ld   a, $0F
     ld   [$C5AB], a
     ldh  a, [hLinkPositionY]
@@ -5889,7 +5889,7 @@ label_250D::
     jp   DialogDrawNextCharacterHandler
 
 DialogDrawNextCharacterHandler::
-    ld   a, BANK(DialoguePointerTable)
+    ld   a, BANK(DialogPointerTable)
     ld   [MBC3SelectBank], a
     ld   a, [wDialogCharacterIndex]
     and  $1F
@@ -5912,23 +5912,23 @@ DialogDrawNextCharacterHandler::
     ld   a, $0F
     ldi  [hl], a ; number of bytes
     push hl
-    ld   a, [wDialogueIndexHi]
+    ld   a, [wDialogIndexHi]
     ld   d, a
-    ld   a, [wDialogueIndex]
+    ld   a, [wDialogIndex]
     ld   e, a
     sla  e
     rl   d
-    ld   hl, DialoguePointerTable
+    ld   hl, DialogPointerTable
     add  hl, de
     ld   a, [hli]
     ld   e, a
     ld   d, [hl]
     push de
-    ld   a, [wDialogueIndex]
+    ld   a, [wDialogIndex]
     ld   e, a
-    ld   a, [wDialogueIndexHi]
+    ld   a, [wDialogIndexHi]
     ld   d, a
-    ld   hl, DialogueBankTable
+    ld   hl, DialogBankTable
     add  hl, de
     ld   a, [hl] ; bank
     and  $3f
@@ -5958,7 +5958,7 @@ DialogDrawNextCharacterHandler::
     or   DIALOG_CHOICE
     ld   [wDialogState], a
 
-.endDialogue
+.endDialog
     ld   a, $15
     ldh  [$fff2], a
     ret
@@ -5984,7 +5984,7 @@ DialogDrawNextCharacterHandler::
     cp   " "
     jr   z, .noSFX
     push af
-    ld   a, [wDialogueSFX]
+    ld   a, [wDialogSFX]
     ld   d, a
     ld   e, $01
     cp   SFX_TYPEWRITER
@@ -6135,7 +6135,7 @@ DialogBreakHandler::
     jr   nz, label_26B6
     inc  a
     ld   [$C1CC], a
-    call DialogDrawNextCharacterHandler.endDialogue
+    call DialogDrawNextCharacterHandler.endDialog
 
 label_26B6::
     call label_27BB
@@ -6144,16 +6144,16 @@ label_26B6::
     jr   nz, label_26E1
     bit  5, a
     jr   z, DialogScrollingStartHandler
-    ld   a, BANK(DialogueBankTable)
+    ld   a, BANK(DialogBankTable)
     ld   [MBC3SelectBank], a
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MINI_MAP
     jp   z, label_278B
-    ld   a, [wDialogueIndex]
+    ld   a, [wDialogIndex]
     ld   e, a
-    ld   a, [wDialogueIndexHi]
+    ld   a, [wDialogIndexHi]
     ld   d, a
-    ld   hl, DialogueBankTable
+    ld   hl, DialogBankTable
     add  hl, de
     ld   a, [hl]
     and  a

@@ -39,7 +39,7 @@ wNeedsUpdatingNPCTiles:: ; C10E
 wC10F: ds 1
 wC110: ds 1
 wC111: ds 1
-wDialogueIndexHi: ds 1
+wDialogIndexHi: ds 1
 wC113: ds 1
 wC114: ds 1
 wC115: ds 1
@@ -145,7 +145,7 @@ wDialogNextCharPosition: ds 1
 wDialogScrollDelay:: ; C172
   ds 1
 
-wDialogueIndex: ds 1
+wDialogIndex: ds 1
 wC174: ds 1
 wC175: ds 1
 wC176: ds 1
@@ -289,7 +289,7 @@ wAlternateBackgroundEnabled:: ; C500
   
 ds $aa
 
-wDialogueSFX:: ; C5ab
+wDialogSFX:: ; C5ab
     ds 1
 
 section "WRAM Bank1", wramx[$d000], bank[1]

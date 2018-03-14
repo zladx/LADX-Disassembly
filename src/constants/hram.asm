@@ -97,9 +97,13 @@ hFrameCounter:: ; FFE7
   ; wraps around 00-FF
   ds 1
 
-; Unlabeled
-hFFE8:: ; hFFE8
-  ds $B
+; This location has different uses
+hFFE8                   ; FFE8
+hDialogBackgroundTile:: ; FFE8
+  ds 1
+
+hFFE9:: ; FFE9
+  ds $A
 
 hSFX:: ; FFF3
   ; plays sfx immediately

@@ -94,7 +94,7 @@ def print_strings():
         if last_address != address:
             print("SECTION \"Text at {1:02x}:{0:04x}\", ROMX[${0:04x}], BANK[${1:02x}]".format(address%0x4000 + 0x4000, address//0x4000))
         for index in indexes:
-            label = "Dialogue{}".format(index)
+            label = "Dialog{}".format(index)
             print("{}::".format(label))
         for line in string:
             print("\tdb \"{}\"".format(line))
@@ -107,7 +107,7 @@ def print_pointer_table():
     pointer = POINTER_TABLE_ADDRESS % 0x4000 + 0x4000
     print("SECTION \"Text pointer table\", ROMX[${:04x}], BANK[${:02x}]".format(pointer, bank))
     for i in range(NUMSTRINGS):
-        print("\tdw Dialogue{}".format(i))
+        print("\tdw Dialog{}".format(i))
     
     print()
     bank = BANK_TABLE_ADDRESS // 0x4000
@@ -117,9 +117,9 @@ def print_pointer_table():
         bank = banks[i]
         bank_high = bank & 0xc0
         if bank_high:
-            print("\tdb BANK(Dialogue{}) | ${:02x}".format(i, bank_high))
+            print("\tdb BANK(Dialog{}) | ${:02x}".format(i, bank_high))
         else:
-            print("\tdb BANK(Dialogue{})".format(i))
+            print("\tdb BANK(Dialog{})".format(i))
 
 if __name__ == "__main__":
     # comment/uncomment whichever you want

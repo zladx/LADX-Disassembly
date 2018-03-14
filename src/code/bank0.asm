@@ -5524,15 +5524,14 @@ ExecuteDialog::
     ld   e, a
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
-    ; By default use a dark background color
-    ld   a, $7E
+    ; By default use a dark background
+    ld   a, DIALOG_BG_TILE_DARK
     jr   nz, .writeBackgroundTile
 .lightBackground
-    ; but during credits: use a light background color
-    ld   a, $7F
+    ; but during credits use a light background
+    ld   a, DIALOG_BG_TILE_LIGHT
 .writeBackgroundTile
-    ; Save the background value to be updated later
-    ldh  [$FFE8], a
+    ldh  [hDialogBackgroundTile], a
 
     ; If the character index is > 20 (i.e. past the first two lines),
     ; mask wDialogNextCharPosition around $10
@@ -5580,13 +5579,13 @@ DialogOpenAnimationStartHandler::
 label_2373::
     call label_2385
     ld   a, $01
-    ld   [wDialogueIndexHi], a
+    ld   [wDialogIndexHi], a
     ret
 
 label_237C::
     call label_2385
     ld   a, $02
-    ld   [wDialogueIndexHi], a
+    ld   [wDialogIndexHi], a
     ret
 
 label_2385::
@@ -5594,13 +5593,13 @@ label_2385::
     xor  a
     ld   [$C177], a
     pop  af
-    ld   [wDialogueIndex], a
+    ld   [wDialogIndex], a
     xor  a
     ld   [$C16F], a
     ld   [wDialogCharacterIndex], a
     ld   [wDialogCharacterIndexHi], a
     ld   [$C108], a
-    ld   [wDialogueIndexHi], a
+    ld   [wDialogIndexHi], a
     ld   a, $0F
     ld   [$C5AB], a
     ldh  a, [hLinkPositionY]
@@ -5890,7 +5889,7 @@ label_250D::
     jp   DialogDrawNextCharacterHandler
 
 DialogDrawNextCharacterHandler::
-    ld   a, BANK(DialoguePointerTable)
+    ld   a, BANK(DialogPointerTable)
     ld   [MBC3SelectBank], a
     ld   a, [wDialogCharacterIndex]
     and  $1F
@@ -5913,23 +5912,23 @@ DialogDrawNextCharacterHandler::
     ld   a, $0F
     ldi  [hl], a ; number of bytes
     push hl
-    ld   a, [wDialogueIndexHi]
+    ld   a, [wDialogIndexHi]
     ld   d, a
-    ld   a, [wDialogueIndex]
+    ld   a, [wDialogIndex]
     ld   e, a
     sla  e
     rl   d
-    ld   hl, DialoguePointerTable
+    ld   hl, DialogPointerTable
     add  hl, de
     ld   a, [hli]
     ld   e, a
     ld   d, [hl]
     push de
-    ld   a, [wDialogueIndex]
+    ld   a, [wDialogIndex]
     ld   e, a
-    ld   a, [wDialogueIndexHi]
+    ld   a, [wDialogIndexHi]
     ld   d, a
-    ld   hl, DialogueBankTable
+    ld   hl, DialogBankTable
     add  hl, de
     ld   a, [hl] ; bank
     and  $3f
@@ -5959,7 +5958,7 @@ DialogDrawNextCharacterHandler::
     or   DIALOG_CHOICE
     ld   [wDialogState], a
 
-.endDialogue
+.endDialog
     ld   a, $15
     ldh  [$fff2], a
     ret
@@ -5985,7 +5984,7 @@ DialogDrawNextCharacterHandler::
     cp   " "
     jr   z, .noSFX
     push af
-    ld   a, [wDialogueSFX]
+    ld   a, [wDialogSFX]
     ld   d, a
     ld   e, $01
     cp   SFX_TYPEWRITER
@@ -6136,7 +6135,7 @@ DialogBreakHandler::
     jr   nz, label_26B6
     inc  a
     ld   [$C1CC], a
-    call DialogDrawNextCharacterHandler.endDialogue
+    call DialogDrawNextCharacterHandler.endDialog
 
 label_26B6::
     call label_27BB
@@ -6145,29 +6144,32 @@ label_26B6::
     jr   nz, label_26E1
     bit  5, a
     jr   z, DialogScrollingStartHandler
-    ld   a, BANK(DialogueBankTable)
+    ld   a, BANK(DialogBankTable)
     ld   [MBC3SelectBank], a
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MINI_MAP
     jp   z, label_278B
-    ld   a, [wDialogueIndex]
+    ld   a, [wDialogIndex]
     ld   e, a
-    ld   a, [wDialogueIndexHi]
+    ld   a, [wDialogIndexHi]
     ld   d, a
-    ld   hl, DialogueBankTable
+    ld   hl, DialogBankTable
     add  hl, de
     ld   a, [hl]
     and  a
     jp   z, label_278B
 
 label_26E1::
+    ; Build a BG Data transfert request for the dialog background
+
+    ; e = (wDialogState == DIALOG_CLOSED ? 0 : 1)
     ld   e, $00
     ld   a, [wDialogState]
     and  $80
-    jr   z, label_26EB
+    jr   z, .closed
     inc  e
+.closed
 
-label_26EB::
     ld   d, $00
     ld   hl, data_2693
     add  hl, de
@@ -6181,7 +6183,7 @@ label_26EB::
     ld   [$D602], a
     ld   a, $4F
     ld   [$D603], a
-    ldh  a, [$FFE8]
+    ldh  a, [hDialogBackgroundTile]
     ld   [$D604], a
     xor  a
     ld   [$D605], a
@@ -6239,7 +6241,7 @@ label_2739::
     ld   a, l
     add  a, $20
     ld   l, a
-    ldh  a, [$FFE8]
+    ldh  a, [hDialogBackgroundTile]
     ld   [hl], a
     pop  bc
     inc  bc

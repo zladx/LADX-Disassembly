@@ -6,6 +6,16 @@ TILES_PER_MAP              equ $80
 
 NAME_LENGTH                EQU 5
 
+; Copy modes for CopyBackgroundData
+; Copy the data from source to dest, progressing horizontally
+BG_COPY_MODE_ROW                 equ $00
+; Copy a single byte from source to dest, progressing horizontally
+BG_COPY_MODE_ROW_SINGLE_VALUE    equ $40
+; Copy the data from source to dest, progressing vertically
+BG_COPY_MODE_COLUMN              equ $80
+; Copy a single byte from source to dest, progressing vertically
+BG_COPY_MODE_COLUMN_SINGLE_VALUE equ $C0
+
 ; Values for wGameplayType
 GAMEPLAY_INTRO             equ $00
 GAMEPLAY_CREDITS           equ $01
@@ -77,6 +87,14 @@ ENTITY_INTRO_SHIP          equ $05
 ENTITY_INTRO_MARIN         equ $06
 ENTITY_INTRO_INERT_LINK    equ $07
 ENTITY_INTRO_SPARKLE       equ $08
+
+; Values for wMapSlideTransitionState
+MAP_SLIDE_NONE             equ $00
+MAP_SLIDE_PREPARE_1        equ $01
+MAP_SLIDE_PREPARE_2        equ $02
+MAP_SLIDE_PREPARE_3        equ $03
+MAP_SLIDE_FIRST_HALF       equ $04
+MAP_SLIDE_SECOND_HALF      equ $05
 
 ; Values for wDialogState
 DIALOG_CLOSED              equ $00

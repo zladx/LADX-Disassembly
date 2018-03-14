@@ -647,7 +647,7 @@ LoadMapData::
 
     ld   a, $08
     ld   [MBC3SelectBank], a
-    call label_292D
+    call ExecuteBackgroundCopyRequest.noMapTransition
 
     ld   a, $0C
     call AdjustBankNumberForGBC
@@ -823,13 +823,14 @@ label_52B::
     ld   [MBC3SelectBank], a
     call label_5C1A ; Change BG column palette. Triggered by an interrupt?
 .notGBC
-    ld   de, $D601
-    call label_2927 ; Load BG column tiles
+    ld   de, wRequest
+    call ExecuteBackgroundCopyRequest ; Load BG column tiles
     xor  a
-    ld   [$D600], a
-    ld   [$D601], a
+    ld   [wRequests], a
+    ld   [wRequest], a
     ld   [$DC90], a
     ld   [$DC91], a
+
     ld   a, $36
     ld   [MBC3SelectBank], a
     call label_72BA
@@ -876,11 +877,11 @@ PhotoAlbumVBlankHandler::
     call label_5C1A
 
 label_598::
-    ld   de, $D601
-    call label_2927
+    ld   de, wRequest
+    call ExecuteBackgroundCopyRequest
     xor  a
-    ld   [$D600], a
-    ld   [$D601], a
+    ld   [wRequests], a
+    ld   [wRequest], a
     ld   [$DC90], a
     ld   [$DC91], a
 
@@ -1676,8 +1677,8 @@ label_AB5::
     ld   a, $24
     ld   [MBC3SelectBank], a
     call label_5C1A
-    ld   de, $D601
-    call label_2927
+    ld   de, wRequest
+    call ExecuteBackgroundCopyRequest
     jr   label_AB0
 
 label_AC6::
@@ -2540,7 +2541,7 @@ label_F97::
     ld   a, $02
     call SwitchBank
     call label_5487
-    ld   hl, $D601
+    ld   hl, wRequestDestination
     ldh  a, [hFrameCounter]
     and  $03
     or   [hl]
@@ -4202,7 +4203,7 @@ label_1AC7::
     ret
 
 AnimateMarinBeachTiles::
-    ld   a, [$D601]
+    ld   a, [wRequestDestinationHigh]
     and  a
     ret  nz
     ld   a, $10
@@ -4232,7 +4233,7 @@ AnimateMarinBeachTiles::
     add  hl, bc
     ld   bc, $0040
     jp   CopyData
-    jr   nz, AnimateTilesStep4
+    jr   nz, AnimateTiles.doOverworldAnimations
     and  b
     ldh  [$FFE0], a
     ldh  [$FFA0], a
@@ -4252,22 +4253,24 @@ AnimateTiles::
     ; Animate Intro sequence tiles
     ;
 
-    ; If GameplayType != INTRO, skip
+    ; If GameplayType == INTRO, handle the tile animation manually,
+    ; and don't perform any further animation.
     cp   GAMEPLAY_INTRO
-    jr   nz, AnimateTilesStep2
-
-    ; GameplayType == INTRO
-    ld   a, [$D601]
-    and  a                ; if $D601 != 0
-    jp   nz, .returnEarly ;   return immediatly
+    jr   nz, .notIntro
+    ; If there is no transfert request pending…
+    ld   a, [wRequest]
+    and  a
+    jp   nz, .return
+    ; … and the frame count is >= 4
     ldh  a, [hFrameCounter]
     and  $0F
-    cp   $04              ; else if FrameCounter 4-lower-bits < 4
-    jr   c, .returnEarly  ;   return immediately
+    cp   $04
+    jr   c, .return
+    ; Switch to the bank with intro tiles
     ld   a, $10
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
+    ; Copy 32 bytes of data from address stored at $D006 to address stored at $D008
     ld   a, [$D006]
     ld   l, a
     ld   a, [$D007]
@@ -4278,10 +4281,11 @@ AnimateTiles::
     ld   d, a
     ld   bc, $0020
     jp   CopyData
-.returnEarly
+.return
+    ; Return early
     ret
 
-AnimateTilesStep2::
+.notIntro
     ;
     ; Animate End Credits tiles
     ;
@@ -4289,51 +4293,55 @@ AnimateTilesStep2::
     ; If GameplayType != CREDITS, skip
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
-    jr   nz, AnimateTilesStep3
+    jr   nz, .notCredits
 
     ; GameplayType == CREDITS
     ldh  a, [$FFA5]
     and  a                          ; if $FFA5 != 0
-    jr   nz, AnimateEndCreditsTiles ;   handle end credits animated tiles
+    jr   nz, AnimateTiles.animateEndCredits ;   handle end credits animated tiles
     ret
 
-AnimateTilesStep3::
+.notCredits
     ;
     ; Animate Overworld tiles
     ;
 
     ; If GameplayType > OVERWORLD
     cp   GAMEPLAY_OVERWORLD
-    jp   c, AnimateTilesReturn ; return immediately
+    jp   c, AnimateTiles_return ; return immediately
 
     ; If the Inventory window is overlapping the screen
     ld   a, [wWindowY]
     cp   $80
-    jp   nz, AnimateTilesReturn ; return immediately
+    jp   nz, AnimateTiles_return ; return immediately
 
-    ; If the Inventory apparition animation is running
+    ; If the Inventory apparition animation is running,
+    ; only animate Link's sprite. 
     ld   a, [wInventoryAppearing]
     and  a
     jp   nz, DrawLinkSpriteAndReturn
 
-AnimateTilesStep4::
+.doOverworldAnimations
+    ; If there is a pending request or a map transition,
+    ; only animate Link's sprite. 
     ld   hl, wMapSlideTransitionState
-    ld   a, [$D601]
+    ld   a, [wRequest]
     or   [hl]
     jp   nz, DrawLinkSpriteAndReturn
 
+    ; If $D6F8 != 0, handle special case
     ld   a, [$D6F8]
     and  a
-    jr   z, label_1B7D
+    jr   z, .notD6F8
     call label_1ED7
     jp   DrawLinkSpriteAndReturn
 
-label_1B7D::
+.notD6F8
     ldh  a, [$FFA5]
     and  a
     jr   z, label_1BCD
 
-AnimateEndCreditsTiles::
+.animateEndCredits
     ; a == $FFA5
     cp   $01
     jp   z, label_3F93
@@ -4356,14 +4364,14 @@ AnimateEndCreditsTiles::
     cp   $0D
     jp   z, label_1E01
     cp   $0E
-    jr   z, label_1BC5
+    jr   z, .animateCreditsIslandFadeTiles
     cp   $0F
     jp   z, label_1DF0
     cp   $10
     jp   z, label_1DE9
     jp   DrawLinkSpriteAndReturn
 
-label_1BC5::
+.animateCreditsIslandFadeTiles
     ld   a, $17
     ld   [MBC3SelectBank], a
     jp   $4062
@@ -4705,7 +4713,7 @@ label_1DE5::
 label_1DE7::
     inc  hl
 
-AnimateTilesReturn::
+AnimateTiles_return::
     ret
 
 label_1DE9::
@@ -5849,7 +5857,7 @@ label_24DF::
     ld   hl, $45C1
     add  hl, bc
     add  a, [hl]
-    ld   hl, $D600
+    ld   hl, wRequests
     add  hl, de
     ldi  [hl], a
     ld   [$C175], a
@@ -5900,7 +5908,7 @@ DialogDrawNextCharacterHandler::
     ld   hl, $4581
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $D600
+    ld   hl, wRequests
     add  hl, de
     ldi  [hl], a ; high byte of tile destination address
     push hl
@@ -5950,7 +5958,7 @@ DialogDrawNextCharacterHandler::
     jr   nz, .notChoice
     pop  hl
     xor  a
-    ld   [$D601], a
+    ld   [wRequest], a
 
 .choice
     ld   a, [wDialogState]
@@ -5968,7 +5976,7 @@ DialogDrawNextCharacterHandler::
     jr   nz, .notEnd
     pop  hl
     xor  a
-    ld   [$D601], a
+    ld   [wRequest], a
 
 .label_25AD::
     ld   a, [wDialogState]
@@ -6175,16 +6183,16 @@ label_26E1::
     add  hl, de
     ld   a, [$C12E]
     add  a, [hl]
-    ld   [$D601], a
+    ld   [wRequestDestinationHigh], a
     ld   hl, data_2691
     add  hl, de
     ld   a, [$C12F]
     add  a, [hl]
-    ld   [$D602], a
-    ld   a, $4F
-    ld   [$D603], a
+    ld   [wRequestDestinationLow], a
+    ld   a, BG_COPY_MODE_ROW_SINGLE_VALUE | $0F
+    ld   [wRequestLength], a
     ldh  a, [hDialogBackgroundTile]
-    ld   [$D604], a
+    ld   [wRequestLength + 1], a
     xor  a
     ld   [$D605], a
     call IncrementDialogState
@@ -6562,161 +6570,6 @@ ClearMap::
     ret
 
 include "code/home/copy_data.asm"
-
-label_291D::
-    inc  de
-    ld   h, a
-    ld   a, [de]
-    ld   l, a
-    inc  de
-    ld   a, [de]
-    inc  de
-    call label_2941
-
-label_2927::
-    ld   a, [wMapSlideTransitionState]
-    and  a
-    jr   nz, label_293C
-
-label_292D::
-    ; If de != 0, jump to label_291D
-    ld   a, [de]
-    and  a
-    jr   nz, label_291D
-    ret
-
-label_2932::
-    inc  de
-    ld   h, a
-    ld   a, [de]
-    ld   l, a
-    inc  de
-    ld   a, [de]
-    inc  de
-    call label_2991
-
-label_293C::
-    ld   a, [de]
-    and  a
-    jr   nz, label_2932
-    ret
-
-label_2941::
-    push af
-    and  $3F
-    ld   b, a
-    inc  b
-    pop  af
-    rlca
-    rlca
-    and  $03
-    jr   z, label_2955
-    dec  a
-    jr   z, label_2966
-    dec  a
-    jr   z, label_2977
-    jr   label_2984
-
-label_2955::
-    ld   a, [de]
-    ldi  [hl], a
-    ld   a, l
-    and  $1F
-    jr   nz, label_2961
-    dec  hl
-    ld   a, l
-    and  $E0
-    ld   l, a
-
-label_2961::
-    inc  de
-    dec  b
-    jr   nz, label_2955
-    ret
-
-label_2966::
-    ld   a, [de]
-    ldi  [hl], a
-    ld   a, l
-    and  $1F
-    jr   nz, label_2972
-    dec  hl
-    ld   a, l
-    and  $E0
-    ld   l, a
-
-label_2972::
-    dec  b
-    jr   nz, label_2966
-    inc  de
-    ret
-
-label_2977::
-    ld   a, [de]
-    ld   [hl], a
-    inc  de
-    ld   a, b
-    ld   bc, $0020
-    add  hl, bc
-    ld   b, a
-    dec  b
-    jr   nz, label_2977
-    ret
-
-label_2984::
-    ld   a, [de]
-    ld   [hl], a
-    ld   a, b
-    ld   bc, $0020
-    add  hl, bc
-    ld   b, a
-    dec  b
-    jr   nz, label_2984
-    inc  de
-    ret
-
-label_2991::
-    push af
-    and  $3F
-    ld   b, a
-    inc  b
-    pop  af
-    and  $80
-    jr   nz, UpdateNextBGColumnWithTiles
-
-label_299B::
-    ld   a, [de]
-    cp   $EE
-    jr   z, label_29AB
-    ldi  [hl], a
-    ld   a, l
-    and  $1F
-    jr   nz, label_29AB
-    dec  hl
-    ld   a, l
-    and  $E0
-    ld   l, a
-
-label_29AB::
-    inc  de
-    dec  b
-    jr   nz, label_299B
-    ret
-
-UpdateNextBGColumnWithTiles::
-    ld   a, [de]
-    cp   $EE
-    jr   z, .continue
-    ld   [hl], a
-.continue
-    inc  de
-    ld   a, b
-    ld   bc, $0020
-    add  hl, bc
-    ld   b, a
-    dec  b
-    jr   nz, UpdateNextBGColumnWithTiles
-    ret
 
 include "src/code/home/clear_memory.asm"
 

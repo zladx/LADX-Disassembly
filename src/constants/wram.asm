@@ -62,6 +62,7 @@ wIsUsingSpinAttack:: ; C121
 wC122 equ $C122
   ds 2
 
+; See MAP_SLIDE_* constants for possible values.
 wMapSlideTransitionState:: ; C124
   ds 1
 
@@ -420,7 +421,29 @@ wDidStealItem:: ; D47E
 
 ; Unlabeled
 wD47F equ $D47F
-  ds $27D
+  ds $D600 - $D47F
+
+; Data structures for copying data to vram during blanking times
+wRequests::               ; D600
+  ds 1
+
+; Request destination address (big endian)
+wRequest:                 ; D601
+wRequestDestination:      ; D601
+wRequestDestinationHigh:: ; D601
+  ds 1
+wRequestDestinationLow::  ; D602
+  ds 1
+
+; Request data length and mode
+;   bits 0-6: data length
+;   bits 7-8: copy mode (see BG_COPY_MODE_* constants)
+wRequestLength:           ; D603
+  ds 1
+
+; Request data (variable length)
+wRequestData:             ; D604
+  ds $D6FC - $D604
 
 wEnginePaused:: ; D6FC
   ds 1

@@ -1997,7 +1997,7 @@ label_C7D::
     and  a
     jr   z, label_C7D
     ld   a, $01
-    ldh  [$FFBC], a
+    ldh  [hFFBC], a
 
 label_C9A::
     ld   a, $06
@@ -5534,7 +5534,7 @@ label_27EA::
     ret
 
 label_27F2::
-    ldh  a, [$FFBC]
+    ldh  a, [hFFBC]
     and  a
     jr   nz, .skip
     ld   a, $1F

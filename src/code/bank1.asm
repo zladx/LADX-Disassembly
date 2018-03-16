@@ -3917,7 +3917,7 @@ label_5854::
     ldh  [hWindowXUnused], a
     ld   a, GAMEPLAY_OVERWORLD
     ld   [wGameplayType], a
-    ldh  [$FFBC], a
+    ldh  [hFFBC], a
     ld   a, $02
     ld   [wGameplaySubtype], a
     ld   a, [$DBA5]

@@ -67,7 +67,14 @@ hButtonsInactiveDelay:: ; FFB5
 
 ; Unlabeled
 hFFB6:: ; FFB6
-  ds $A
+  ds $6
+
+; Unknown; stores previous gameplay type before a transition?
+; Related to fade-out/fade-in transitions
+; Seems to affect whether a music track is restarted afer
+; a transition
+hFFBC:: ; FFBC
+  ds 4
 
 ; DMA routine copied from ROM during initialization
 ; Copy the content of wOAMBuffer to the OAM memory

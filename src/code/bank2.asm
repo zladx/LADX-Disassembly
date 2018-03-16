@@ -26,11 +26,11 @@ Data_002_4000::
     db   $00, $00, $01, $00, $01, $00             
 
 label_002_4146::
-    ldh  a, [$FFBC]                               ; $4146: $F0 $BC
+    ldh  a, [hFFBC]                               ; $4146: $F0 $BC
     and  a                                        ; $4148: $A7
     jr   z, label_002_414F                        ; $4149: $28 $04
     xor  a                                        ; $414B: $AF
-    ldh  [$FFBC], a                               ; $414C: $E0 $BC
+    ldh  [hFFBC], a                               ; $414C: $E0 $BC
     ret                                           ; $414E: $C9
 
 label_002_414F::

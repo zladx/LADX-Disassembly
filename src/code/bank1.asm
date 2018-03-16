@@ -4648,6 +4648,8 @@ label_5E3A::
     call EnableExternalRAMWriting
     ldi  [hl], a
     ret
+
+label_5E67::
     push bc
     ld   a, [wActiveRoom]
     and  a

@@ -5544,9 +5544,7 @@ label_27F2::
     jp   ReloadSavedBank
 
 label_2802::
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call label_5E67
+    callsb label_5E67
     jp   ReloadSavedBank
 
 ; Return a random number in `a`

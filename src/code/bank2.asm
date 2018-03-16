@@ -28,11 +28,12 @@ Data_002_4000::
 label_002_4146::
     ldh  a, [$FFBC]                               ; $4146: $F0 $BC
     and  a                                        ; $4148: $A7
-    db   $28, $04                                 ; $4149: $28 $04
+    jr   z, label_002_414F                        ; $4149: $28 $04
     xor  a                                        ; $414B: $AF
     ldh  [$FFBC], a                               ; $414C: $E0 $BC
     ret                                           ; $414E: $C9
 
+label_002_414F::
     ld   d, $1D                                   ; $414F: $16 $1D
     ld   a, [wMarinAndTarinAtHome]                ; $4151: $FA $4E $DB
     and  a                                        ; $4154: $A7

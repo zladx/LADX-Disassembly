@@ -1269,9 +1269,9 @@ label_826::
     cp   $08
     jr   c, label_873
     jr   nz, label_843
-    ld   a, $02
+    ld   a, BANK(label_002_6843)
     ld   [MBC3SelectBank], a
-    call label_6843
+    call label_002_6843
 
 label_83E::
     ld   hl, $FF92
@@ -1281,9 +1281,9 @@ label_83E::
 label_843::
     cp   $09
     jr   nz, label_854
-    ld   a, $02
+    ld   a, BANK(label_002_6827)
     ld   [MBC3SelectBank], a
-    call label_6827
+    call label_002_6827
     ld   hl, $FF92
     inc  [hl]
     ret
@@ -1291,17 +1291,17 @@ label_843::
 label_854::
     cp   $0A
     jr   nz, label_865
-    ld   a, $02
+    ld   a, BANK(label_002_680B)
     ld   [MBC3SelectBank], a
-    call label_680B
+    call label_002_680B
     ld   hl, $FF92
     inc  [hl]
     ret
 
 label_865::
-    ld   a, $02
+    ld   a, BANK(label_002_67E5)
     ld   [MBC3SelectBank], a
-    call label_67E5
+    call label_002_67E5
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
     ldh  [$FF92], a
@@ -2525,9 +2525,9 @@ label_F97::
     ld   hl, $C11E
     res  7, [hl]
     call label_593B
-    ld   a, $02
+    ld   a, BANK(label_002_78E8)
     call SwitchBank
-    call label_78E8
+    call label_002_78E8
     call label_1033
     ld   a, [$C15C]
     ld   [$C3CF], a
@@ -2538,9 +2538,9 @@ label_F97::
     call SwitchBank
     call label_7A9A
     call label_398D
-    ld   a, $02
+    ld   a, BANK(label_002_5487)
     call SwitchBank
-    call label_5487
+    call label_002_5487
     ld   hl, wRequestDestination
     ldh  a, [hFrameCounter]
     and  $03
@@ -2769,9 +2769,9 @@ LinkMotionInteractiveHandler::
     call label_725A
     and  a
     ret  z
-    ld   a, $02
+    ld   a, BANK(label_002_4287)
     call SwitchBank
-    jp   $4287
+    jp   label_002_4287
     ld   a, [$C50A]
     ld   hl, $C167
     or   [hl]
@@ -3296,9 +3296,9 @@ label_14F8::
     xor  a
     ldh  [$FFA3], a
     call label_21A8
-    ld   a, $02
+    ld   a, BANK(func_002_6C75)
     call SwitchBank
-    jp   $6C75
+    jp   func_002_6C75
 
 label_1508::
     ld   a, $20
@@ -3750,9 +3750,9 @@ label_17DB::
     push af
     bit  7, a
     jp   z, label_1814
-    ld   a, $02
+    ld   a, BANK(label_002_5310)
     call SwitchBank
-    call label_5310
+    call label_002_5310
     ld   a, [$C19B]
     and  $7F
     cp   $0C
@@ -3767,9 +3767,9 @@ label_17DB::
     jr   c, label_1814
     ld   a, $0D
     ldh  [$FFF4], a
-    ld   a, $02
+    ld   a, BANK(label_002_538B)
     call SwitchBank
-    call label_538B
+    call label_002_538B
 
 label_1814::
     pop  af
@@ -3966,9 +3966,9 @@ label_1948::
     ldh  a, [$FFF7]
     cp   $0A
     jr   nc, label_196E
-    ld   a, $02
+    ld   a, BANK(IsMapE8)
     call SwitchBank
-    call label_6709
+    call IsMapE8
     ld   a, $30
     ldh  [$FFB4], a
     xor  a
@@ -5155,9 +5155,9 @@ label_20BF::
     ld   a, $14
     ld   [MBC3SelectBank], a
     call label_5900
-    ld   a, $02
+    ld   a, BANK(label_002_41D0)
     ld   [MBC3SelectBank], a
-    call label_41D0
+    call label_002_41D0
 
 label_20CF::
     ld   a, [wAButtonSlot]
@@ -5177,9 +5177,9 @@ label_20DD::
     jp   z, label_2177
 
 label_20EC::
-    ld   a, $02
+    ld   a, BANK(label_002_48B0)
     ld   [MBC3SelectBank], a
-    call label_48B0
+    call label_002_48B0
     ld   a, $01
     ldh  [$FFA1], a
     ldh  a, [$FF9E]
@@ -5548,10 +5548,10 @@ EnableExternalRAMWriting::
     ret
 
 label_27DD::
-    ld   a, $02
+    ld   a, BANK(label_002_4146)
     ld   [MBC3SelectBank], a
     push bc
-    call label_4146
+    call label_002_4146
     pop  bc
     jp   ReloadSavedBank
 
@@ -8282,9 +8282,9 @@ IncrementEntityWalkingAttr::
     ret
 
 label_3B18::
-    ld   a, $02
+    ld   a, BANK(func_002_75F5)
     ld   [MBC3SelectBank], a
-    call label_75F5
+    call func_002_75F5
     jp   ReloadSavedBank
 
 label_3B23::
@@ -8790,9 +8790,9 @@ label_3E0E::
 label_3E19::
     ld   a, [wCurrentBank]
     push af
-    ld   a, $02
+    ld   a, BANK(func_002_6C75)
     call SwitchBank
-    call label_6C75
+    call func_002_6C75
     pop  af
     jp   SwitchBank
 
@@ -8816,9 +8816,9 @@ label_3E3F::
     jp   ReloadSavedBank
 
 label_3E4D::
-    ld   a, $02
+    ld   a, BANK(label_002_41D0)
     call SwitchBank
-    call label_41D0
+    call label_002_41D0
     ld   a, $03
     jp   SwitchBank
 

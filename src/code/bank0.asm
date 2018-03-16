@@ -5499,8 +5499,7 @@ label_22FE::
 
 include "code/home/dialogs.asm"
 
-; Set overworld music track?
-label_27C3::
+SetOverworldSoundtrack::
     ld   [wOverworldMusic], a
     ldh  [$FFBF], a
     ld   a, $38
@@ -5518,11 +5517,12 @@ EnableExternalRAMWriting::
     pop  hl
     ret
 
+; Load soudtrack after map or gameplay transition
 label_27DD::
-    ld   a, BANK(label_002_4146)
+    ld   a, BANK(LoadSoundtrackAfterTransition)
     ld   [MBC3SelectBank], a
     push bc
-    call label_002_4146
+    call LoadSoundtrackAfterTransition
     pop  bc
     jp   ReloadSavedBank
 

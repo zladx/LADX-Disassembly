@@ -25,20 +25,21 @@ Data_002_4000::
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db   $00, $00, $01, $00, $01, $00             
 
-label_002_4146::
+LoadSoundtrackAfterTransition::
     ldh  a, [hFFBC]                               ; $4146: $F0 $BC
     and  a                                        ; $4148: $A7
-    jr   z, label_002_414F                        ; $4149: $28 $04
+    jr   z, .noPendingGameplayTransition          ; $4149: $28 $04
     xor  a                                        ; $414B: $AF
     ldh  [hFFBC], a                               ; $414C: $E0 $BC
     ret                                           ; $414E: $C9
 
-label_002_414F::
+.noPendingGameplayTransition
     ld   d, $1D                                   ; $414F: $16 $1D
     ld   a, [wMarinAndTarinAtHome]                ; $4151: $FA $4E $DB
     and  a                                        ; $4154: $A7
-    jp   z, label_002_41A2                        ; $4155: $CA $A2 $41
+    jp   z, .tarinAndMarinNotAtHome               ; $4155: $CA $A2 $41
 
+.tarinAndMarinAtHome
     ldh  a, [hMapIndex]                           ; $4158: $F0 $F6
     ld   e, a                                     ; $415A: $5F
     ld   d, $00                                   ; $415B: $16 $00
@@ -82,14 +83,14 @@ label_002_414F::
     ld   a, $21                                   ; $419E: $3E $21
     db   $18, $05                                 ; $41A0: $18 $05
 
-label_002_41A2::
+.tarinAndMarinNotAtHome
     xor  a                                        ; $41A2: $AF
     ld   [$D46C], a                               ; $41A3: $EA $6C $D4
     ld   a, d                                     ; $41A6: $7A
     ld   e, a                                     ; $41A7: $5F
     ld   d, $00                                   ; $41A8: $16 $00
     ldh  [$FFB0], a                               ; $41AA: $E0 $B0
-    call $27C3                                    ; $41AC: $CD $C3 $27
+    call SetOverworldSoundtrack                   ; $41AC: $CD $C3 $27
     ld   a, e                                     ; $41AF: $7B
     cp   $25                                      ; $41B0: $FE $25
     db   $30, $08                                 ; $41B2: $30 $08
@@ -7589,7 +7590,7 @@ label_002_78E8::
     ldh  a, [$FFB1]                               ; $7932: $F0 $B1
     and  a                                        ; $7934: $A7
     db   $28, $06                                 ; $7935: $28 $06
-    call $27C3                                    ; $7937: $CD $C3 $27
+    call SetOverworldSoundtrack                   ; $7937: $CD $C3 $27
     xor  a                                        ; $793A: $AF
     ldh  [$FFB1], a                               ; $793B: $E0 $B1
     call $178E                                    ; $793D: $CD $8E $17

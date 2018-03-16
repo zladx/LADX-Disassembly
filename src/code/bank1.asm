@@ -139,7 +139,7 @@ FileSaveInteractive::
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
-    ld   a, [$DBA5]
+    ld   a, [wActiveRoom]
     and  a
     jr   z, .done
     xor  a
@@ -625,7 +625,7 @@ label_4395::
     ret
 
 label_43A7::
-    ld   a, [$DBA5]
+    ld   a, [wActiveRoom]
     and  a
     jr   z, label_4414
     ldh  a, [$FFF7]
@@ -741,7 +741,7 @@ label_4452::
     call label_5FB3
     ld   a, $FF
     ldh  [$FFA6], a
-    ld   a, [$DBA5]
+    ld   a, [wActiveRoom]
     and  a
     jr   z, label_44A6
     ld   d, a
@@ -782,7 +782,7 @@ label_4495::
     ld   [$D462], a
 
 label_44A6::
-    ld   a, [$DBA5]
+    ld   a, [wActiveRoom]
     and  a
     ld   a, $06
     jr   nz, label_44B0
@@ -3053,7 +3053,7 @@ label_5353::
     ldh  [$FF9E], a
     ld   a, [$DB5F]
     and  $01
-    ld   [$DBA5], a
+    ld   [wActiveRoom], a
     jr   z, label_538E
     ld   a, $04
     ldh  [hLinkAnimationState], a
@@ -3077,7 +3077,7 @@ label_5394::
     ldh  [$FFF6], a
     ld   [$DB54], a
     ld   a, $01
-    ld   [$DBA5], a
+    ld   [wActiveRoom], a
     ld   a, $10
     ldh  [$FFF7], a
     ld   a, $50
@@ -3920,7 +3920,7 @@ label_5854::
     ldh  [hFFBC], a
     ld   a, $02
     ld   [wGameplaySubtype], a
-    ld   a, [$DBA5]
+    ld   a, [wActiveRoom]
     and  a
     ld   a, $06
     jr   nz, label_5885
@@ -4649,7 +4649,7 @@ label_5E3A::
     ldi  [hl], a
     ret
     push bc
-    ld   a, [$DBA5]
+    ld   a, [wActiveRoom]
     and  a
     jr   z, label_5E95
     ldh  a, [$FFF7]
@@ -4901,7 +4901,7 @@ label_5FAB::
     ret
 
 label_5FB3::
-    ld   a, [$DBA5]
+    ld   a, [wActiveRoom]
     and  a
     jr   z, label_5FD3
     ldh  a, [$FFF9]
@@ -4970,7 +4970,7 @@ label_6014::
     jr   z, label_6043
     cp   $02
     jr   nz, label_607F
-    ld   a, [$DBA5]
+    ld   a, [wActiveRoom]
     and  a
     jr   nz, label_607F
     ldh  a, [$FFF6]
@@ -6804,7 +6804,7 @@ label_6DEA::
     ld   a, [ROM_DebugTool2]
     and  a
     ret  nz
-    ld   a, [$DBA5]
+    ld   a, [wActiveRoom]
     and  a
     jr   z, label_6E18
     ldh  a, [$FFF7]
@@ -6968,7 +6968,7 @@ label_6EF8::
     ld   a, $01
     call label_8FA
     ld   a, $1A
-    call label_27C3
+    call SetOverworldSoundtrack
     ld   a, $02
     ld   [wTileMapToLoad], a
     xor  a

@@ -5,6 +5,7 @@
 *.2bpp
 
 # bin
+Z80Dis
 DumpBanks
 
 # rgbasm extras
@@ -16,14 +17,20 @@ DumpBanks
 
 # swap files
 *.swp
-bin/banks/*
 
+# visual studio
 *.pdb
 *.exe
 *.ilk
 *.obj
 *.sln
 *.suo
+
+# macos files
 *.DS_Store
+
+# temporary editor backups
 *~
-Z80Dis
+
+# save files
+game.sav

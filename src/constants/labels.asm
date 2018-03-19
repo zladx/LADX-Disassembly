@@ -93,7 +93,6 @@ label_5C1A equ $5C1A
 label_5C2C equ $5C2C
 label_5C63 equ $5C63
 label_5D50 equ $5D50
-label_5E67 equ $5E67
 label_5EAB equ $5EAB
 label_5F02 equ $5F02
 label_60E0 equ $60E0

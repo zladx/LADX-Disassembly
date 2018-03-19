@@ -649,7 +649,7 @@ GetAddressStrValue(u16 Address, u16 BankNum) {
     char *Value = 0;
 
     if (Address == 0xff00) {
-        Value = "rJOYP";
+        Value = "rP1";
     }
     else if (Address == 0xff01) {
         Value = "rSB";

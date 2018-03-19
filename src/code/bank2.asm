@@ -57,24 +57,24 @@ LoadSoundtrackAfterTransition::
     ld   d, $18                                   ; $416C: $16 $18
     ld   a, [$D46C]                               ; $416E: $FA $6C $D4
     and  a                                        ; $4171: $A7
-    jr   nz, .jr_002_41A6                          ; $4172: $20 $32
+    jr   nz, .jr_002_41A6                         ; $4172: $20 $32
 
     ldh  a, [hMapTileset]                         ; $4174: $F0 $F7
     cp   $FF                                      ; $4176: $FE $FF
-    jr   nz, .jr_002_417E                          ; $4178: $20 $04
+    jr   nz, .jr_002_417E                         ; $4178: $20 $04
 
     ld   a, $09                                   ; $417A: $3E $09
-    jr   .jr_002_418C                              ; $417C: $18 $0E
+    jr   .jr_002_418C                             ; $417C: $18 $0E
 
 .jr_002_417E
     cp   $10                                      ; $417E: $FE $10
-    jr   nz, .jr_002_418C                          ; $4180: $20 $0A
+    jr   nz, .jr_002_418C                         ; $4180: $20 $0A
 
     ld   d, a                                     ; $4182: $57
     ldh  a, [hMapIndex]                           ; $4183: $F0 $F6
     cp   $B5                                      ; $4185: $FE $B5
     ld   a, d                                     ; $4187: $7A
-    jr   nz, .jr_002_418C                          ; $4188: $20 $02
+    jr   nz, .jr_002_418C                         ; $4188: $20 $02
 
     ld   a, $0F                                   ; $418A: $3E $0F
 
@@ -86,14 +86,14 @@ LoadSoundtrackAfterTransition::
     ld   d, [hl]                                  ; $4193: $56
     ldh  a, [$FFF9]                               ; $4194: $F0 $F9
     and  a                                        ; $4196: $A7
-    jr   z, .jr_002_41A6                           ; $4197: $28 $0D
+    jr   z, .jr_002_41A6                          ; $4197: $28 $0D
 
     ld   a, e                                     ; $4199: $7B
     cp   $0A                                      ; $419A: $FE $0A
-    jr   nc, .jr_002_41A6                          ; $419C: $30 $08
+    jr   nc, .jr_002_41A6                         ; $419C: $30 $08
 
     ld   a, $21                                   ; $419E: $3E $21
-    jr   .jr_002_41A7                              ; $41A0: $18 $05
+    jr   .jr_002_41A7                             ; $41A0: $18 $05
 
 .tarinAndMarinNotAtHome
     xor  a                                        ; $41A2: $AF
@@ -109,18 +109,18 @@ LoadSoundtrackAfterTransition::
     call SetOverworldSoundtrack                   ; $41AC: $CD $C3 $27
     ld   a, e                                     ; $41AF: $7B
     cp   $25                                      ; $41B0: $FE $25
-    jr   nc, .jr_002_41BC                          ; $41B2: $30 $08
+    jr   nc, .jr_002_41BC                         ; $41B2: $30 $08
 
     ld   hl, $4120                                ; $41B4: $21 $20 $41
     add  hl, de                                   ; $41B7: $19
     ld   a, [hl]                                  ; $41B8: $7E
     and  a                                        ; $41B9: $A7
-    jr   nz, .jr_002_41CF                          ; $41BA: $20 $13
+    jr   nz, .jr_002_41CF                         ; $41BA: $20 $13
 
 .jr_002_41BC
     ld   a, [$D47C]                               ; $41BC: $FA $7C $D4
     and  a                                        ; $41BF: $A7
-    jr   z, .jr_002_41CF                           ; $41C0: $28 $0D
+    jr   z, .jr_002_41CF                          ; $41C0: $28 $0D
 
     ld   a, $49                                   ; $41C2: $3E $49
     ld   [wOverworldMusic], a                     ; $41C4: $EA $68 $D3

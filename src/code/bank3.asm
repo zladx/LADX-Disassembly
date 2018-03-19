@@ -501,7 +501,7 @@ label_CA7A::
     inc  a
     ld   [$C3C8], a
     ld   a, $2F
-    ldh  [$FFB1], a
+    ldh  [hNextMusicTrack], a
     ldh  [$FFB0], a
     ldh  [$FFBD], a
     call label_27EA
@@ -2071,7 +2071,7 @@ label_D56F::
     ld   a, [$DC0F]
     and  a
     jr   nz, label_D594
-    ld   a, [$D47C]
+    ld   a, [wActivePowerUp]
     cp   $01
     jr   nz, label_D594
     ld   a, $12
@@ -2126,7 +2126,7 @@ label_D5E2::
 label_D5FA::
     ld   [$D471], a
     ld   a, [$C1BE]
-    ld   hl, $D47C
+    ld   hl, wActivePowerUp
     or   [hl]
     ld   hl, $FFF9
     or   [hl]
@@ -2164,7 +2164,7 @@ label_D62E::
     ld   a, [$C1BE]
     ld   hl, $FFF9
     or   [hl]
-    ld   hl, $D47C
+    ld   hl, wActivePowerUp
     or   [hl]
     jr   nz, label_D648
     ld   a, $33
@@ -2335,7 +2335,7 @@ label_D748::
     ld   a, [$DC0F]
     and  $01
     jr   nz, label_D77F
-    ld   a, [$D47C]
+    ld   a, [wActivePowerUp]
     cp   $01
     jr   nz, label_D782
 
@@ -4151,7 +4151,7 @@ label_E37C::
     ld   de, $DB4D
     jr   label_E35F
     xor  a
-    ld   [$D46C], a
+    ld   [wBossDefeated], a
     ld   [$C3CB], a
     ld   a, $1B
     ld   [$D368], a
@@ -4167,10 +4167,10 @@ label_E3A1::
     ldh  [$FF98], a
     jr   label_E3D2
     xor  a
-    ld   [$D47C], a
+    ld   [wActivePowerUp], a
     ld   a, $25
     ld   [$D368], a
-    ld   [$D46C], a
+    ld   [wBossDefeated], a
     call IsEntityFrameCounterZero
     ld   a, $70
     ld   [hl], a
@@ -5646,7 +5646,7 @@ label_ED73::
     ld   a, [$DC0F]
     cp   $02
     jr   z, label_EDA9
-    ld   a, [$D47C]
+    ld   a, [wActivePowerUp]
     cp   $02
     jr   nz, label_EDAB
     ld   a, e
@@ -5665,7 +5665,7 @@ label_EDAB::
     ld   [$DBC7], a
     xor  a
     ld   [$D471], a
-    ld   a, [$D47C]
+    ld   a, [wActivePowerUp]
     and  a
     jr   z, label_EDDF
     ld   hl, $D47A
@@ -5674,7 +5674,7 @@ label_EDAB::
     cp   $03
     jr   c, label_EDDF
     xor  a
-    ld   [$D47C], a
+    ld   [wActivePowerUp], a
     ld   a, [$C1BE]
     and  a
     jr   nz, label_EDDF
@@ -6172,7 +6172,7 @@ label_F0B9::
     ld   a, [$DC0F]
     cp   $01
     jr   z, label_F0DD
-    ld   a, [$D47C]
+    ld   a, [wActivePowerUp]
     cp   $01
     ld   a, $20
     jr   nz, label_F0DF
@@ -6266,7 +6266,7 @@ label_F15E::
     ld   a, [$DC0F]
     cp   $01
     jr   z, label_F17A
-    ld   a, [$D47C]
+    ld   a, [wActivePowerUp]
     cp   $01
     jr   nz, label_F19D
 
@@ -6299,7 +6299,7 @@ label_F19D::
     ld   a, [$DC0F]
     and  $01
     jr   nz, label_F1AE
-    ld   a, [$D47C]
+    ld   a, [wActivePowerUp]
     and  $01
 
 label_F1AE::

@@ -404,7 +404,7 @@ label_4240::
     xor  a
     ld   [$C1BF], a
     ld   [$D415], a
-    ld   [$D47C], a
+    ld   [wActivePowerUp], a
     ld   [$D47A], a
     ld   [$C3CB], a
     ld   [$C3CC], a

@@ -59,7 +59,15 @@ hWindowXUnused:: ; FFAA
 
 ; Unlabeled
 hFFAB:: ; hFFAB
-  ds $A
+  ds 6
+
+; Next music to be played after map slide transition
+hNextMusicTrack:: ; hFFB1
+  ds 1
+
+; Unlabeled
+hFFB2:: ; hFFB2
+  ds 3
 
 hButtonsInactiveDelay:: ; FFB5
   ; Number of frames during which joypad is ignored
@@ -125,6 +133,7 @@ hMapIndex:: ; FFF6
 
 hMapTileset:: ; FFF7
   ; tileset index for the current map
+  ; See MAP_TILESET_* constants for values
   ds 1
 
 ; Unlabeled

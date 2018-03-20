@@ -314,7 +314,7 @@ wD003 equ $D003
   ds $365
 
 wWorldMusicTrack:: ; D368
-  ; Overworld Music Track
+  ; World Music Track
   ; 00: No music
   ; 01: Title music when zelda logo appears
   ; 02: Trendy game/Witch hut

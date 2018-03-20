@@ -134,9 +134,9 @@ RenderLoop::
     ld   a, [wAlternateBackgroundEnabled]
     and  a
     jr   z, .noSpecialCase
-    ; and GameplayType == OVERWORLD...
+    ; and GameplayType == WORLD...
     ld   a, [wGameplayType]
-    cp   GAMEPLAY_OVERWORLD
+    cp   GAMEPLAY_WORLD
     jr   nz, .noSpecialCase
     ; ... set scroll Y to $00 or $80 alternatively every other frame.
     ldh  a, [hFrameCounter]
@@ -174,7 +174,7 @@ RenderLoop::
 .loadNewMap
     ; Play audio samples before loading the map when:
     ; - in a menu (GameplayType <= GAMEPLAY_FILE_SAVE)
-    ; - on the Overworld in default mode (GAMEPLAY_OVERWORLD_DEFAULT)
+    ; - on the World in default mode (GAMEPLAY_WORLD_DEFAULT)
     ; - on the beach with Marin (GAMEPLAY_MARIN_BEACH)
     ; All other combinations skip this step.
     ld   a, [wGameplayType]
@@ -182,10 +182,10 @@ RenderLoop::
     jr   z, .playAudioStep
     cp   GAMEPLAY_FILE_SAVE
     jr   c, .playAudioStep
-    cp   GAMEPLAY_OVERWORLD
+    cp   GAMEPLAY_WORLD
     jr   nz, .skipAudio
     ld   a, [wGameplaySubtype]
-    cp   GAMEPLAY_OVERWORLD_DEFAULT
+    cp   GAMEPLAY_WORLD_DEFAULT
     jr   nc, .skipAudio
 .playAudioStep
     call PlayAudioStep
@@ -2283,11 +2283,11 @@ ExecuteGameplayHandler::
     ld   a, [wGameplayType]
     cp   GAMEPLAY_MINI_MAP ; If GameplayType < MINI_MAP
     jr   c, jumpToGameplayHandler
-    cp   GAMEPLAY_OVERWORLD ; If GameplayType != Overworld
+    cp   GAMEPLAY_WORLD ; If GameplayType != World
     jr   nz, presentSaveScreenIfNeeded
-    ; If GameplayType == OVERWORLD
+    ; If GameplayType == WORLD
     ld   a, [wGameplaySubtype]
-    cp   $07 ; If GameplaySubtype != 7 (standard overworld gameplay)
+    cp   GAMEPLAY_WORLD_DEFAULT ; If GameplaySubtype != 7 (standard overworld gameplay)
     jr   nz, jumpToGameplayHandler
 
 presentSaveScreenIfNeeded::
@@ -2347,7 +2347,7 @@ jumpToGameplayHandler::
 ._08 dw PeachPictureHandler
 ._09 dw MarinBeachHandler
 ._0A dw FaceShrineMuralHandler
-._0B dw OverworldHandler
+._0B dw WorldHandler
 ._0C dw InventoryHandler
 ._0D dw PhotoAlbumHandler
 ._0E dw PhotoPictureHandler ; Dizzy Link photo
@@ -2427,14 +2427,14 @@ FileDeletionHandler::
 FileCopyHandler::
     jp   label_4F8C
 
-OverworldHandler::
+WorldHandler::
     ld   a, $14
     ld   [MBC3SelectBank], a
     call label_4C4B
     call label_4ABC
     ld   a, $01
     call SwitchBank
-    jp   OverworldHandlerEntryPoint
+    jp   WorldHandlerEntryPoint
 
 InventoryHandler::
     ld   a, $20
@@ -3821,7 +3821,7 @@ label_186C::
 label_1898::
     ldh  a, [$FFF9]
     ldh  [$FFE4], a
-    ld   a, GAMEPLAY_OVERWORLD
+    ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     xor  a
     ld   [wGameplaySubtype], a
@@ -4212,7 +4212,7 @@ AnimateMarinBeachTiles::
     add  hl, bc
     ld   bc, $0040
     jp   CopyData
-    jr   nz, AnimateTiles.doOverworldAnimations
+    jr   nz, AnimateTiles.doWorldAnimations
     and  b
     ldh  [$FFE0], a
     ldh  [$FFA0], a
@@ -4282,11 +4282,11 @@ AnimateTiles::
 
 .notCredits
     ;
-    ; Animate Overworld tiles
+    ; Animate World tiles
     ;
 
-    ; If GameplayType > OVERWORLD
-    cp   GAMEPLAY_OVERWORLD
+    ; If GameplayType > WORLD
+    cp   GAMEPLAY_WORLD
     jp   c, AnimateTiles_return ; return immediately
 
     ; If the Inventory window is overlapping the screen
@@ -4300,7 +4300,7 @@ AnimateTiles::
     and  a
     jp   nz, DrawLinkSpriteAndReturn
 
-.doOverworldAnimations
+.doWorldAnimations
     ; If there is a pending request or a map transition,
     ; only animate Link's sprite. 
     ld   hl, wMapSlideTransitionState
@@ -5572,11 +5572,11 @@ ReadJoypadState::
     jr   nz, ReadJoypadState_return
 
     ld   a, [wGameplayType]
-    cp   GAMEPLAY_OVERWORLD
+    cp   GAMEPLAY_WORLD
     jr   nz, .readState
     ld   a, [wGameplaySubtype]
-    cp   $07
-    jr   nz, .notOverworld
+    cp   GAMEPLAY_WORLD_DEFAULT
+    jr   nz, .notWorld
     ld   a, [wLinkMotionState]
     cp   $07
     jr   nz, .linkNotPassingOut
@@ -5587,12 +5587,12 @@ ReadJoypadState::
 .linkNotPassingOut
     ld   a, [wTransitionSequenceCounter]
     cp   $04
-    jr   nz, .notOverworld
+    jr   nz, .notWorld
     ld   a, [$DDD5]
     and  a
     jr   z, .readState
 
-.notOverworld
+.notWorld
     xor  a
     ldh  [hPressedButtonsMask], a
     ldh  [$FFCC], a

@@ -107,7 +107,7 @@ DialogClosingEndHandler::
     ret  z
 
     ld   a, [wGameplayType]
-    cp   a, GAMEPLAY_OVERWORLD
+    cp   a, GAMEPLAY_WORLD
     ret  nz
 
     ld   a, [$C3CC]

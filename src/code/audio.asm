@@ -1,5 +1,5 @@
 ; Overworld music tracks, indexed by map index
-OverworldMusics::
+OverworldMusicTracks::
     db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06
     db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06
     db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
@@ -18,17 +18,17 @@ OverworldMusics::
     db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
 
 ; Music tracks for inside houses, indexed by map index
-HouseMusics::
+HouseMusicTracks::
     db   $14, $15, $16, $17, $4B, $58, $5B, $5A, $12, $61, $26, $26, $26, $26, $07, $02
     db   $0A, $26, $0A, $53, $13, $3E, $1F, $00, $00, $00, $00, $00, $00, $0A, $48, $26
 
 ; Whether a music track has precedence over the Power-Up music, indexed by track id
-MusicOverridesPowerUp::
+MusicOverridesPowerUpTrack::
     db   $00, $00, $01, $00, $01, $00, $00, $01, $00, $00, $01, $01, $01, $00, $01, $00
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db   $00, $00, $01, $00, $01, $00             
 
-LoadSoundtrackAfterTransition::
+SelectMusicTrackAfterTransition::
     ldh  a, [hFFBC]                               ; $4146: $F0 $BC
     and  a                                        ; $4148: $A7
     jr   z, .noPendingGameplayTransition          ; $4149: $28 $04
@@ -47,11 +47,11 @@ LoadSoundtrackAfterTransition::
     jp   z, .clearEventFlagsAndLoadSoundtrack     ; $4155: $CA $A2 $41
 
     ; Lookup the music to use
-    ; d = OverworldMusics[hMapIndex]
+    ; d = OverworldMusicTracks[hMapIndex]
     ldh  a, [hMapIndex]                           ; $4158: $F0 $F6
     ld   e, a                                     ; $415A: $5F
     ld   d, $00                                   ; $415B: $16 $00
-    ld   hl, OverworldMusics                      ; $415D: $21 $00 $40
+    ld   hl, OverworldMusicTracks                      ; $415D: $21 $00 $40
     add  hl, de                                   ; $4160: $19
     ld   d, [hl]                                  ; $4161: $56
     ld   a, d                                     ; $4162: $7A
@@ -93,10 +93,10 @@ LoadSoundtrackAfterTransition::
     ld   a, $0F                                   ; $418A: $3E $0F
 .tilesetDone
 
-    ; music id = HouseMusics[a]
+    ; music id = HouseMusicTracks[a]
     ld   e, a                                     ; $418C: $5F
     ld   d, $00                                   ; $418D: $16 $00
-    ld   hl, HouseMusics                          ; $418F: $21 $00 $41
+    ld   hl, HouseMusicTracks                          ; $418F: $21 $00 $41
     add  hl, de                                   ; $4192: $19
     ld   d, [hl]                                  ; $4193: $56
 
@@ -125,14 +125,14 @@ LoadSoundtrackAfterTransition::
     ld   d, $00                                   ; $41A8: $16 $00
     ; $FFB0 = soundtrack id
     ldh  [$FFB0], a                               ; $41AA: $E0 $B0
-    call SetOverworldSoundtrack                   ; $41AC: $CD $C3 $27
+    call SetWorldMusicTrack                   ; $41AC: $CD $C3 $27
 
     ; If soundtrack id <= $24…
     ld   a, e                                     ; $41AF: $7B
     cp   $25                                      ; $41B0: $FE $25
     jr   nc, .mayUsePowerUpMusic                  ; $41B2: $30 $08
-    ; … and MusicOverridesPowerUp[soundtrack_id] == 1…
-    ld   hl, MusicOverridesPowerUp                ; $41B4: $21 $20 $41
+    ; … and MusicOverridesPowerUpTrack[soundtrack_id] == 1…
+    ld   hl, MusicOverridesPowerUpTrack                ; $41B4: $21 $20 $41
     add  hl, de                                   ; $41B7: $19
     ld   a, [hl]                                  ; $41B8: $7E
     and  a                                        ; $41B9: $A7
@@ -148,7 +148,7 @@ LoadSoundtrackAfterTransition::
 
     ; Replace the current music by the power-up music
     ld   a, $49 ; Piece of Power / Accorn         ; $41C2: $3E $49
-    ld   [wOverworldMusic], a                     ; $41C4: $EA $68 $D3
+    ld   [wWorldMusicTrack], a                     ; $41C4: $EA $68 $D3
     ldh  [$FFBD], a                               ; $41C7: $E0 $BD
     ldh  [$FFBF], a                               ; $41C9: $E0 $BF
     xor  a                                        ; $41CB: $AF

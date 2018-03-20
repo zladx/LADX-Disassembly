@@ -5499,10 +5499,11 @@ label_22FE::
 
 include "code/home/dialogs.asm"
 
+; Set the music track to play on the world
 ; Input:
 ;   a:   soundtrack id to load
-SetOverworldSoundtrack::
-    ld   [wOverworldMusic], a
+SetWorldMusicTrack::
+    ld   [wWorldMusicTrack], a
     ldh  [$FFBF], a
     ; $FFAB = a
     ld   a, $38
@@ -5523,10 +5524,10 @@ EnableExternalRAMWriting::
 
 ; Load soudtrack after map or gameplay transition
 label_27DD::
-    ld   a, BANK(LoadSoundtrackAfterTransition)
+    ld   a, BANK(SelectMusicTrackAfterTransition)
     ld   [MBC3SelectBank], a
     push bc
-    call LoadSoundtrackAfterTransition
+    call SelectMusicTrackAfterTransition
     pop  bc
     jp   ReloadSavedBank
 

@@ -313,7 +313,7 @@ wIntroSubTimer:: ; D002
 wD003 equ $D003
   ds $365
 
-wOverworldMusic:: ; D368
+wWorldMusicTrack:: ; D368
   ; Overworld Music Track
   ; 00: No music
   ; 01: Title music when zelda logo appears

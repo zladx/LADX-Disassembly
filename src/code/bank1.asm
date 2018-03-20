@@ -6970,7 +6970,7 @@ label_6EF8::
     ld   a, $01
     call label_8FA
     ld   a, $1A
-    call SetOverworldSoundtrack
+    call SetWorldMusicTrack
     ld   a, $02
     ld   [wTileMapToLoad], a
     xor  a

@@ -8923,7 +8923,7 @@ label_002_78E8::
     and  a                                        ; $7934: $A7
     jr   z, jr_002_793D                           ; $7935: $28 $06
 
-    call SetOverworldSoundtrack                   ; $7937: $CD $C3 $27
+    call SetWorldMusicTrack                   ; $7937: $CD $C3 $27
     xor  a                                        ; $793A: $AF
     ldh  [hNextMusicTrack], a                     ; $793B: $E0 $B1
 
@@ -9236,7 +9236,7 @@ jr_002_7AE9:
     ldh  a, [hMapIndex]                           ; $7AF5: $F0 $F6
     ld   e, a                                     ; $7AF7: $5F
     ld   d, $00                                   ; $7AF8: $16 $00
-    ld   hl, OverworldMusics                       ; $7AFA: $21 $00 $40
+    ld   hl, OverworldMusicTracks                       ; $7AFA: $21 $00 $40
     add  hl, de                                   ; $7AFD: $19
     ld   a, [hl]                                  ; $7AFE: $7E
     ld   hl, $FFB0                                ; $7AFF: $21 $B0 $FF

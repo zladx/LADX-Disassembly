@@ -583,7 +583,7 @@ label_435C::
     ld   [hl], $00
     ret
 
-OverworldHandlerEntryPoint::
+WorldHandlerEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
 ._0 dw label_4395
@@ -3010,7 +3010,7 @@ label_52FB::
     ld   [$DC0D], a
 
 label_531D::
-    ld   a, GAMEPLAY_OVERWORLD
+    ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     xor  a
     ld   [wGameplaySubtype], a
@@ -3821,7 +3821,7 @@ label_57B7::
     ldh  a, [$FFCB]
     cp   $60
     jr   nz, label_57FA
-    ld   a, GAMEPLAY_OVERWORLD
+    ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     call label_C7D
     ld   a, $00
@@ -3915,7 +3915,7 @@ label_5854::
     ldh  [hWindowYUnused], a
     ld   a, $70
     ldh  [hWindowXUnused], a
-    ld   a, GAMEPLAY_OVERWORLD
+    ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     ldh  [hFFBC], a
     ld   a, $02
@@ -6755,7 +6755,7 @@ label_6D10::
 label_6D11::
     ld   d, $05
     ld   a, [wGameplayType]
-    cp   GAMEPLAY_OVERWORLD
+    cp   GAMEPLAY_WORLD
     jr   z, label_6D1C
     ld   d, $06
 

@@ -3132,7 +3132,7 @@ label_1407::
     ld   b, $00
 
 label_140F::
-    ld   a, [$D47C]
+    ld   a, [wActivePowerUp]
     cp   $01
     jr   nz, label_141A
     ld   a, c
@@ -3886,7 +3886,7 @@ label_18F2::
     and  a
     jr   z, label_1907
     xor  a
-    ld   [$D47C], a
+    ld   [wActivePowerUp], a
 
 label_1907::
     jr   label_196F
@@ -3939,7 +3939,7 @@ label_1948::
     and  a
     jr   nz, label_196E
     xor  a
-    ld   [$D47C], a
+    ld   [wActivePowerUp], a
     ldh  a, [$FFF7]
     cp   $0A
     jr   nc, label_196E
@@ -5177,7 +5177,7 @@ label_20EC::
     ld   hl, hLinkAnimationState
     inc  [hl]
     ld   e, $08
-    ld   a, [$D47C]
+    ld   a, [wActivePowerUp]
     cp   $01
     jr   nz, label_212C
     ld   e, $03
@@ -5499,11 +5499,16 @@ label_22FE::
 
 include "code/home/dialogs.asm"
 
-SetOverworldSoundtrack::
-    ld   [wOverworldMusic], a
+; Set the music track to play on the world
+; Input:
+;   a:   soundtrack id to load
+SetWorldMusicTrack::
+    ld   [wWorldMusicTrack], a
     ldh  [$FFBF], a
+    ; $FFAB = a
     ld   a, $38
     ldh  [$FFAB], a
+    ; $FFA8 = 0
     xor  a
     ldh  [$FFA8], a
     ret
@@ -5519,10 +5524,10 @@ EnableExternalRAMWriting::
 
 ; Load soudtrack after map or gameplay transition
 label_27DD::
-    ld   a, BANK(LoadSoundtrackAfterTransition)
+    ld   a, BANK(SelectMusicTrackAfterTransition)
     ld   [MBC3SelectBank], a
     push bc
-    call LoadSoundtrackAfterTransition
+    call SelectMusicTrackAfterTransition
     pop  bc
     jp   ReloadSavedBank
 

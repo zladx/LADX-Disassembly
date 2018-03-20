@@ -2,135 +2,7 @@
 ; This file was created with mgbdis v1.0.1 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-Data_002_4000::
-    db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06
-    db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06
-    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08
-    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08
-    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08
-    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08
-    db   $09, $04, $04, $04, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $04, $04, $04, $04, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $04, $04, $04, $04, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $04, $04, $04, $04, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $0B, $0B, $05, $05
-    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $0B, $0B, $05, $05
-    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $14, $15, $16, $17, $4B, $58, $5B, $5A, $12, $61, $26, $26, $26, $26, $07, $02
-    db   $0A, $26, $0A, $53, $13, $3E, $1F, $00, $00, $00, $00, $00, $00, $0A, $48, $26
-    db   $00, $00, $01, $00, $01, $00, $00, $01, $00, $00, $01, $01, $01, $00, $01, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $01, $00, $01, $00             
-
-LoadSoundtrackAfterTransition::
-    ldh  a, [hFFBC]                               ; $4146: $F0 $BC
-    and  a                                        ; $4148: $A7
-    jr   z, .noPendingGameplayTransition          ; $4149: $28 $04
-
-    xor  a                                        ; $414B: $AF
-    ldh  [hFFBC], a                               ; $414C: $E0 $BC
-    ret                                           ; $414E: $C9
-
-.noPendingGameplayTransition
-    ld   d, $1D                                   ; $414F: $16 $1D
-    ld   a, [wMarinAndTarinAtHome]                ; $4151: $FA $4E $DB
-    and  a                                        ; $4154: $A7
-    jp   z, .tarinAndMarinNotAtHome               ; $4155: $CA $A2 $41
-
-.tarinAndMarinAtHome
-    ldh  a, [hMapIndex]                           ; $4158: $F0 $F6
-    ld   e, a                                     ; $415A: $5F
-    ld   d, $00                                   ; $415B: $16 $00
-    ld   hl, Data_002_4000                        ; $415D: $21 $00 $40
-    add  hl, de                                   ; $4160: $19
-    ld   d, [hl]                                  ; $4161: $56
-    ld   a, d                                     ; $4162: $7A
-    xor  a                                        ; $4163: $AF
-    ldh  [$FFB1], a                               ; $4164: $E0 $B1
-    ld   a, [wActiveRoom]                         ; $4166: $FA $A5 $DB
-    and  a                                        ; $4169: $A7
-    jr   z, .tarinAndMarinNotAtHome               ; $416A: $28 $36
-
-    ld   d, $18                                   ; $416C: $16 $18
-    ld   a, [$D46C]                               ; $416E: $FA $6C $D4
-    and  a                                        ; $4171: $A7
-    jr   nz, .jr_002_41A6                         ; $4172: $20 $32
-
-    ldh  a, [hMapTileset]                         ; $4174: $F0 $F7
-    cp   $FF                                      ; $4176: $FE $FF
-    jr   nz, .jr_002_417E                         ; $4178: $20 $04
-
-    ld   a, $09                                   ; $417A: $3E $09
-    jr   .jr_002_418C                             ; $417C: $18 $0E
-
-.jr_002_417E
-    cp   $10                                      ; $417E: $FE $10
-    jr   nz, .jr_002_418C                         ; $4180: $20 $0A
-
-    ld   d, a                                     ; $4182: $57
-    ldh  a, [hMapIndex]                           ; $4183: $F0 $F6
-    cp   $B5                                      ; $4185: $FE $B5
-    ld   a, d                                     ; $4187: $7A
-    jr   nz, .jr_002_418C                         ; $4188: $20 $02
-
-    ld   a, $0F                                   ; $418A: $3E $0F
-
-.jr_002_418C
-    ld   e, a                                     ; $418C: $5F
-    ld   d, $00                                   ; $418D: $16 $00
-    ld   hl, $4100                                ; $418F: $21 $00 $41
-    add  hl, de                                   ; $4192: $19
-    ld   d, [hl]                                  ; $4193: $56
-    ldh  a, [$FFF9]                               ; $4194: $F0 $F9
-    and  a                                        ; $4196: $A7
-    jr   z, .jr_002_41A6                          ; $4197: $28 $0D
-
-    ld   a, e                                     ; $4199: $7B
-    cp   $0A                                      ; $419A: $FE $0A
-    jr   nc, .jr_002_41A6                         ; $419C: $30 $08
-
-    ld   a, $21                                   ; $419E: $3E $21
-    jr   .jr_002_41A7                             ; $41A0: $18 $05
-
-.tarinAndMarinNotAtHome
-    xor  a                                        ; $41A2: $AF
-    ld   [$D46C], a                               ; $41A3: $EA $6C $D4
-
-.jr_002_41A6
-    ld   a, d                                     ; $41A6: $7A
-
-.jr_002_41A7
-    ld   e, a                                     ; $41A7: $5F
-    ld   d, $00                                   ; $41A8: $16 $00
-    ldh  [$FFB0], a                               ; $41AA: $E0 $B0
-    call SetOverworldSoundtrack                   ; $41AC: $CD $C3 $27
-    ld   a, e                                     ; $41AF: $7B
-    cp   $25                                      ; $41B0: $FE $25
-    jr   nc, .jr_002_41BC                         ; $41B2: $30 $08
-
-    ld   hl, $4120                                ; $41B4: $21 $20 $41
-    add  hl, de                                   ; $41B7: $19
-    ld   a, [hl]                                  ; $41B8: $7E
-    and  a                                        ; $41B9: $A7
-    jr   nz, .jr_002_41CF                         ; $41BA: $20 $13
-
-.jr_002_41BC
-    ld   a, [$D47C]                               ; $41BC: $FA $7C $D4
-    and  a                                        ; $41BF: $A7
-    jr   z, .jr_002_41CF                          ; $41C0: $28 $0D
-
-    ld   a, $49                                   ; $41C2: $3E $49
-    ld   [wOverworldMusic], a                     ; $41C4: $EA $68 $D3
-    ldh  [$FFBD], a                               ; $41C7: $E0 $BD
-    ldh  [$FFBF], a                               ; $41C9: $E0 $BF
-    xor  a                                        ; $41CB: $AF
-    ld   [$C1CF], a                               ; $41CC: $EA $CF $C1
-
-.jr_002_41CF
-    ret                                           ; $41CF: $C9
+include "code/audio/music.asm"
 
 label_002_41D0::
     push bc                                       ; $41D0: $C5
@@ -523,7 +395,7 @@ jr_002_4402:
 
     ld   e, $00                                   ; $4409: $1E $00
     ld   d, $00                                   ; $440B: $16 $00
-    ld   a, [$D47C]                               ; $440D: $FA $7C $D4
+    ld   a, [wActivePowerUp]                      ; $440D: $FA $7C $D4
     cp   $01                                      ; $4410: $FE $01
     jr   nz, jr_002_4416                          ; $4412: $20 $02
 
@@ -9047,13 +8919,13 @@ label_002_78E8::
     jp   nz, label_002_79CC                       ; $792E: $C2 $CC $79
 
     pop  af                                       ; $7931: $F1
-    ldh  a, [$FFB1]                               ; $7932: $F0 $B1
+    ldh  a, [hNextMusicTrack]                     ; $7932: $F0 $B1
     and  a                                        ; $7934: $A7
     jr   z, jr_002_793D                           ; $7935: $28 $06
 
-    call SetOverworldSoundtrack                   ; $7937: $CD $C3 $27
+    call SetWorldMusicTrack                   ; $7937: $CD $C3 $27
     xor  a                                        ; $793A: $AF
-    ldh  [$FFB1], a                               ; $793B: $E0 $B1
+    ldh  [hNextMusicTrack], a                     ; $793B: $E0 $B1
 
 jr_002_793D:
     call label_178E                               ; $793D: $CD $8E $17
@@ -9340,7 +9212,7 @@ jr_002_7ABD:
     ldh  a, [$FFB0]                               ; $7AD4: $F0 $B0
     jr   nz, jr_002_7AE2                          ; $7AD6: $20 $0A
 
-    ld   a, [$D47C]                               ; $7AD8: $FA $7C $D4
+    ld   a, [wActivePowerUp]                      ; $7AD8: $FA $7C $D4
     and  a                                        ; $7ADB: $A7
     ldh  a, [$FFB0]                               ; $7ADC: $F0 $B0
     jr   z, jr_002_7AE2                           ; $7ADE: $28 $02
@@ -9348,7 +9220,7 @@ jr_002_7ABD:
     ld   a, $49                                   ; $7AE0: $3E $49
 
 jr_002_7AE2:
-    ldh  [$FFB1], a                               ; $7AE2: $E0 $B1
+    ldh  [hNextMusicTrack], a                     ; $7AE2: $E0 $B1
     call label_27EA                               ; $7AE4: $CD $EA $27
     jr   label_002_7B36                           ; $7AE7: $18 $4D
 
@@ -9357,14 +9229,14 @@ jr_002_7AE9:
     and  a                                        ; $7AEC: $A7
     jr   nz, label_002_7B36                       ; $7AED: $20 $47
 
-    ld   a, [wMarinAndTarinAtHome]                ; $7AEF: $FA $4E $DB
+    ld   a, [wDidFindSword]                       ; $7AEF: $FA $4E $DB
     and  a                                        ; $7AF2: $A7
     jr   z, label_002_7B36                        ; $7AF3: $28 $41
 
     ldh  a, [hMapIndex]                           ; $7AF5: $F0 $F6
     ld   e, a                                     ; $7AF7: $5F
     ld   d, $00                                   ; $7AF8: $16 $00
-    ld   hl, Data_002_4000                        ; $7AFA: $21 $00 $40
+    ld   hl, OverworldMusicTracks                       ; $7AFA: $21 $00 $40
     add  hl, de                                   ; $7AFD: $19
     ld   a, [hl]                                  ; $7AFE: $7E
     ld   hl, $FFB0                                ; $7AFF: $21 $B0 $FF
@@ -9383,7 +9255,7 @@ jr_002_7AE9:
     jr   nz, jr_002_7B2A                          ; $7B12: $20 $16
 
 jr_002_7B14:
-    ld   a, [$D47C]                               ; $7B14: $FA $7C $D4
+    ld   a, [wActivePowerUp]                      ; $7B14: $FA $7C $D4
     and  a                                        ; $7B17: $A7
     jr   z, func_002_7B2D                         ; $7B18: $28 $13
 
@@ -9393,7 +9265,7 @@ jr_002_7B14:
 
     call func_002_7B2D                            ; $7B20: $CD $2D $7B
     ld   a, $49                                   ; $7B23: $3E $49
-    ldh  [$FFB1], a                               ; $7B25: $E0 $B1
+    ldh  [hNextMusicTrack], a                     ; $7B25: $E0 $B1
     ldh  [$FFBD], a                               ; $7B27: $E0 $BD
     ret                                           ; $7B29: $C9
 
@@ -9403,7 +9275,7 @@ jr_002_7B2A:
 
 func_002_7B2D::
     ld   a, c                                     ; $7B2D: $79
-    ldh  [$FFB1], a                               ; $7B2E: $E0 $B1
+    ldh  [hNextMusicTrack], a                     ; $7B2E: $E0 $B1
     call label_27EA                               ; $7B30: $CD $EA $27
 
 jr_002_7B33:

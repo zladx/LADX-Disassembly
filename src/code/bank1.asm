@@ -404,7 +404,7 @@ label_4240::
     xor  a
     ld   [$C1BF], a
     ld   [$D415], a
-    ld   [$D47C], a
+    ld   [wActivePowerUp], a
     ld   [$D47A], a
     ld   [$C3CB], a
     ld   [$C3CC], a
@@ -6970,7 +6970,7 @@ label_6EF8::
     ld   a, $01
     call label_8FA
     ld   a, $1A
-    call SetOverworldSoundtrack
+    call SetWorldMusicTrack
     ld   a, $02
     ld   [wTileMapToLoad], a
     xor  a

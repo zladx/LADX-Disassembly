@@ -313,7 +313,7 @@ wIntroSubTimer:: ; D002
 wD003 equ $D003
   ds $365
 
-wOverworldMusic:: ; D368
+wWorldMusicTrack:: ; D368
   ; Overworld Music Track
   ; 00: No music
   ; 01: Title music when zelda logo appears
@@ -418,7 +418,25 @@ wKillCount:: ; D415
 
 ; Unlabeled
 wD416 equ $D416
-  ds $68
+  ds $56
+
+wBossDefeated:: ; D46C
+  ; A boss was just defeated
+  ds 1
+
+; Unlabeled
+wD46D::
+  ds $F
+
+wActivePowerUp:: ; D47C
+  ; 0:  No power-up
+  ; 1:  Piece of Power 
+  ; 2:  Guardian Accorn
+  ds 1
+
+; Unlabeled
+wD47D::
+  ds 1
 
 wDidStealItem:: ; D47E
   ds 1
@@ -588,7 +606,8 @@ wDB46 equ $DB46
 wBombCount:: ; DB4D
   ds 1
 
-wMarinAndTarinAtHome:: ; DB4E
+wDidFindSword:: ; DB4E
+  ; Set to 1 when Link retrieves his sword on the beach
   ds 1
 
 wName:: ; db4f

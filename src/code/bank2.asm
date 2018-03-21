@@ -8876,7 +8876,7 @@ jr_002_78CF:
     db   $fc                                      ; $78E6: $FC
     inc  b                                        ; $78E7: $04
 
-label_002_78E8::
+ApplyMapTransition::
     ld   a, [wMapSlideTransitionState]            ; $78E8: $FA $24 $C1
     cp   $00                                      ; $78EB: $FE $00
     jp   z, label_002_79D9                        ; $78ED: $CA $D9 $79
@@ -9028,15 +9028,12 @@ jr_002_79BC:
 label_002_79CC::
     pop  af                                       ; $79CC: $F1
     dec  a                                        ; $79CD: $3D
-    rst  $00                                      ; $79CE: $C7
-    ld   a, [$3E79]                               ; $79CF: $FA $79 $3E
-    ld   a, e                                     ; $79D2: $7B
-    ld   a, a                                     ; $79D3: $7F
-    ld   a, e                                     ; $79D4: $7B
-    nop                                           ; $79D5: $00
-    ld   a, h                                     ; $79D6: $7C
-    inc  bc                                       ; $79D7: $03
-    ld   a, h                                     ; $79D8: $7C
+    JP_TABLE                                      ; $79CE: $C7
+._00 dw label_002_79FA
+._01 dw label_002_7B3E
+._02 dw label_002_7B7F
+._03 dw label_002_7C00
+._04 dw label_002_7C03
 
 label_002_79D9::
     ret                                           ; $79D9: $C9
@@ -9065,6 +9062,8 @@ label_002_79D9::
     ld   [bc], a                                  ; $79F7: $02
     ld   [bc], a                                  ; $79F8: $02
     ld   [bc], a                                  ; $79F9: $02
+
+label_002_79FA::
     ld   a, [$C125]                               ; $79FA: $FA $25 $C1
     ld   c, a                                     ; $79FD: $4F
     ld   b, $00                                   ; $79FE: $06 $00
@@ -9288,6 +9287,7 @@ label_002_7B36::
     ld   [wMapSlideTransitionState], a            ; $7B3A: $EA $24 $C1
     ret                                           ; $7B3D: $C9
 
+label_002_7B3E::
     call label_D1E                                ; $7B3E: $CD $1E $0D
     ld   a, [$D6FA]                               ; $7B41: $FA $FA $D6
     cp   $02                                      ; $7B44: $FE $02
@@ -9338,7 +9338,10 @@ jr_002_7B4C:
     ld   bc, $F0FF                                ; $7B77: $01 $FF $F0
     db   $10                                      ; $7B7A: $10
     ld   bc, $F8FF                                ; $7B7B: $01 $FF $F8
-    ld   [$BBF0], sp                              ; $7B7E: $08 $F0 $BB
+    db   $08                                      ; $7B7E: $08
+
+label_002_7B7F::
+    db $F0, $BB                                   ; $7B7F: $F0 $BB
     and  a                                        ; $7B81: $A7
     ret  nz                                       ; $7B82: $C0
 
@@ -9406,8 +9409,10 @@ jr_002_7B91:
     ld   [$C12B], a                               ; $7BFA: $EA $2B $C1
     jp   label_002_7B36                           ; $7BFD: $C3 $36 $7B
 
+label_002_7C00::
     jp   $2209                                    ; $7C00: $C3 $09 $22
 
+label_002_7C03::
     ret                                           ; $7C03: $C9
 
     nop                                           ; $7C04: $00

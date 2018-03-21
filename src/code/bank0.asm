@@ -2452,6 +2452,7 @@ PhotoPictureHandler::
     call SwitchBank
     jp   label_4000
 
+; Actual world handler
 label_F48::
     ld   a, $02
     call SwitchBank
@@ -2515,7 +2516,7 @@ label_F97::
     ld   hl, $C11E
     res  7, [hl]
     call label_593B
-    callsw label_002_78E8
+    callsw ApplyMapTransition
     call label_1033
     ld   a, [$C15C]
     ld   [$C3CF], a

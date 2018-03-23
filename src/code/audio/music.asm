@@ -47,11 +47,11 @@ SelectMusicTrackAfterTransition::
     jp   z, .clearEventFlagsAndLoadSoundtrack     ; $4155: $CA $A2 $41
 
     ; Lookup the music to use
-    ; d = OverworldMusicTracks[hMapIndex]
-    ldh  a, [hMapIndex]                           ; $4158: $F0 $F6
+    ; d = OverworldMusicTracks[hMapRoom]
+    ldh  a, [hMapRoom]                            ; $4158: $F0 $F6
     ld   e, a                                     ; $415A: $5F
     ld   d, $00                                   ; $415B: $16 $00
-    ld   hl, OverworldMusicTracks                      ; $415D: $21 $00 $40
+    ld   hl, OverworldMusicTracks                 ; $415D: $21 $00 $40
     add  hl, de                                   ; $4160: $19
     ld   d, [hl]                                  ; $4161: $56
     ld   a, d                                     ; $4162: $7A
@@ -71,32 +71,32 @@ SelectMusicTrackAfterTransition::
     and  a                                        ; $4171: $A7
     jr   nz, .loadSoundtrack                      ; $4172: $20 $32
 
-    ; Set a depending on the tileset
-    ldh  a, [hMapTileset]                         ; $4174: $F0 $F7
-    cp   MAP_TILESET_SPECIAL                      ; $4176: $FE $FF
-    jr   nz, .tilesetNotFF                        ; $4178: $20 $04
+    ; Set a depending on the world map
+    ldh  a, [hMapId]                              ; $4174: $F0 $F7
+    cp   MAP_SPECIAL                              ; $4176: $FE $FF
+    jr   nz, .mapNotFF                            ; $4178: $20 $04
 
     ld   a, $09                                   ; $417A: $3E $09
-    jr   .tilesetDone                             ; $417C: $18 $0E
+    jr   .mapDone                                 ; $417C: $18 $0E
 
-.tilesetNotFF
-    ; If using the houses tileset…
-    cp   MAP_TILESET_HOUSE                        ; $417E: $FE $10
-    jr   nz, .tilesetDone                         ; $4180: $20 $0A
+.mapNotFF
+    ; If on the houses map…
+    cp   MAP_HOUSE                                ; $417E: $FE $10
+    jr   nz, .mapDone                             ; $4180: $20 $0A
     ; … and the map is $B5 (Photo Shop)…
     ld   d, a                                     ; $4182: $57
-    ldh  a, [hMapIndex]                           ; $4183: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $4183: $F0 $F6
     cp   $B5                                      ; $4185: $FE $B5
     ld   a, d                                     ; $4187: $7A
-    jr   nz, .tilesetDone                         ; $4188: $20 $02
+    jr   nz, .mapDone                             ; $4188: $20 $02
     ; … use same music than for map $0F (Trendy Game)
     ld   a, $0F                                   ; $418A: $3E $0F
-.tilesetDone
+.mapDone
 
     ; music id = HouseMusicTracks[a]
     ld   e, a                                     ; $418C: $5F
     ld   d, $00                                   ; $418D: $16 $00
-    ld   hl, HouseMusicTracks                          ; $418F: $21 $00 $41
+    ld   hl, HouseMusicTracks                     ; $418F: $21 $00 $41
     add  hl, de                                   ; $4192: $19
     ld   d, [hl]                                  ; $4193: $56
 
@@ -125,14 +125,14 @@ SelectMusicTrackAfterTransition::
     ld   d, $00                                   ; $41A8: $16 $00
     ; $FFB0 = soundtrack id
     ldh  [$FFB0], a                               ; $41AA: $E0 $B0
-    call SetWorldMusicTrack                   ; $41AC: $CD $C3 $27
+    call SetWorldMusicTrack                       ; $41AC: $CD $C3 $27
 
     ; If soundtrack id <= $24…
     ld   a, e                                     ; $41AF: $7B
     cp   $25                                      ; $41B0: $FE $25
     jr   nc, .mayUsePowerUpMusic                  ; $41B2: $30 $08
     ; … and MusicOverridesPowerUpTrack[soundtrack_id] == 1…
-    ld   hl, MusicOverridesPowerUpTrack                ; $41B4: $21 $20 $41
+    ld   hl, MusicOverridesPowerUpTrack           ; $41B4: $21 $20 $41
     add  hl, de                                   ; $41B7: $19
     ld   a, [hl]                                  ; $41B8: $7E
     and  a                                        ; $41B9: $A7
@@ -148,7 +148,7 @@ SelectMusicTrackAfterTransition::
 
     ; Replace the current music by the power-up music
     ld   a, $49 ; Piece of Power / Accorn         ; $41C2: $3E $49
-    ld   [wWorldMusicTrack], a                     ; $41C4: $EA $68 $D3
+    ld   [wWorldMusicTrack], a                    ; $41C4: $EA $68 $D3
     ldh  [$FFBD], a                               ; $41C7: $E0 $BD
     ldh  [$FFBF], a                               ; $41C9: $E0 $BF
     xor  a                                        ; $41CB: $AF

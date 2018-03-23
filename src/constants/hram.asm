@@ -127,13 +127,13 @@ hSFX:: ; FFF3
 hFFF4: ds 1
 hFFF5: ds 1
 
-hMapIndex:: ; FFF6
-  ; currently loaded map
+hMapRoom:: ; FFF6
+  ; Room id on the active map
   ds 1
 
-hMapTileset:: ; FFF7
-  ; tileset index for the current map
-  ; See MAP_TILESET_* constants for values
+hMapId:: ; FFF7
+  ; Id of the current world map
+  ; See MAP_* constants for values
   ds 1
 
 ; Unlabeled

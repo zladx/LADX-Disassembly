@@ -448,7 +448,7 @@ label_CA32::
     ld   a, [$DBA5]
     and  a
     jr   z, label_CA46
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   z, label_CA4D
 
@@ -816,7 +816,7 @@ data_CCAC::
 data_CCB2::
     ld   e, $01
     ld   e, $61
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_CCDC
     ld   hl, $C3A0
@@ -1505,7 +1505,7 @@ label_D134::
     ld   hl, $D800
     ldh  a, [$FFF6]
     ld   e, a
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_D14B
     ld   d, $00
@@ -1852,7 +1852,7 @@ label_D369::
     ldh  a, [$FFF1]
     and  a
     jr   nz, label_D392
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $1E
     jr   z, label_D378
     cp   $10
@@ -2450,7 +2450,7 @@ data_D823::
     ld   b, $04
     ld   [bc], a
     nop
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $15
     jr   nz, label_D835
     ld   a, [$DB56]
@@ -2775,7 +2775,7 @@ data_D9D8::
     or   $20
     ld   [hl], a
     ldh  [$FFF8], a
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     ld   hl, $DA2E
     cp   $06
     jr   z, label_DA12
@@ -3405,7 +3405,7 @@ label_DEAE::
     ldh  a, [$FFF8]
     and  $10
     jp   nz, label_3F8D
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     and  $03
     ldh  [$FFF1], a
     call label_394D
@@ -3429,10 +3429,10 @@ label_DEAE::
     jr   nz, label_DEFE
     dec  [hl]
     call IncrementEntityWalkingAttr
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     add  a, $00
     call OpenDialogInTable1
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     ld   e, a
     ld   d, b
     ld   hl, $DB65
@@ -3626,7 +3626,7 @@ label_E055::
     db   $DB
     and  a
     jr   z, label_E063
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   z, label_E06A
 
@@ -4837,7 +4837,7 @@ label_E878::
     ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_E88B
     ld   hl, $DDE0
@@ -4965,7 +4965,7 @@ label_E93C::
     ldh  a, [$FFF6]
     ld   c, a
     ld   b, $00
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_E954
     ld   hl, $DDE0

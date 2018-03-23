@@ -612,7 +612,7 @@ label_43A7::
     ld   a, [wActiveRoom]
     and  a
     jr   z, label_4414
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_43B8
     ld   hl, $DDDA
@@ -633,7 +633,7 @@ label_43C5::
     ld   c, $05
 
 label_43CA::
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   z, label_43DB
     cp   $08
@@ -653,7 +653,7 @@ label_43DC::
     inc  de
     dec  c
     jr   nz, label_43CA
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_43E9
     ld   a, $0F
@@ -665,7 +665,7 @@ label_43E9::
     add  hl, de
     ld   a, [hl]
     ld   [$DBB0], a
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   z, label_440B
     cp   $08
@@ -729,7 +729,7 @@ label_4452::
     and  a
     jr   z, label_44A6
     ld   d, a
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_4475
     ld   d, $00
@@ -3028,7 +3028,7 @@ label_5353::
     ldh  [$FFF6], a
     ld   [$DB9C], a
     ld   a, [$DB60]
-    ldh  [hMapTileset], a
+    ldh  [hMapId], a
     ld   a, [$DB64]
     ld   [$DBAE], a
     xor  a
@@ -3063,7 +3063,7 @@ label_5394::
     ld   a, $01
     ld   [wActiveRoom], a
     ld   a, $10
-    ldh  [hMapTileset], a
+    ldh  [hMapId], a
     ld   a, $50
     ld   [$DB9D], a
     ld   a, $60
@@ -3536,7 +3536,7 @@ label_5600::
     ldh  [$FFD8], a
     ld   a, $01
     ldh  [$FFD9], a
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     add  a, $B1
     ldh  [$FFDA], a
     pop  hl
@@ -4638,7 +4638,7 @@ label_5E67::
     ld   a, [wActiveRoom]
     and  a
     jr   z, label_5E95
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_5E79
     ld   hl, $DDDA
@@ -4893,7 +4893,7 @@ label_5FB3::
     ldh  a, [$FFF9]
     and  a
     ret  nz
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $16
     ret  z
     cp   $14
@@ -5074,7 +5074,7 @@ label_609C::
     ldh  a, [$FFF6]
     cp   $A4
     jr   nz, label_60F7
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $11
     jr   nz, label_60F7
     ld   a, $08
@@ -5231,8 +5231,8 @@ OpenDungeonNameDialog::
     ld   a, [wFreeMovementMode]
     and  a
     jr   nz, .return
-    ; Open Dialog n° (hMapTileset + $56)
-    ldh  a, [hMapTileset]
+    ; Open Dialog n° (hMapId + $56)
+    ldh  a, [hMapId]
     add  a, $56
     call OpenDialog
 .return
@@ -6059,7 +6059,7 @@ label_6829::
     cp   $04
     jr   nz, label_6855
     call label_5888
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $06
     jr   z, label_6849
     ld   a, $03
@@ -6077,7 +6077,7 @@ label_6849::
 label_6855::
     ret
     ld   e, $21
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $06
     jr   z, label_6868
     ldh  a, [$FFF6]
@@ -6093,7 +6093,7 @@ label_6868::
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
     ld   e, $24
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $06
     jr   z, label_6885
     ldh  a, [$FFF6]
@@ -6133,7 +6133,7 @@ label_689E::
 
 label_68BF::
     ret
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $06
     jr   nz, label_68CF
     call label_6A7C
@@ -6332,7 +6332,7 @@ label_6A76::
     ld   l, d
 
 label_6A7C::
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $06
     ret  nz
     xor  a
@@ -6798,7 +6798,7 @@ label_6DEA::
     ld   a, [wActiveRoom]
     and  a
     jr   z, label_6E18
-    ldh  a, [hMapTileset]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_6DFF
     ld   a, $0F

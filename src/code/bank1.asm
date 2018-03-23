@@ -586,35 +586,19 @@ label_435C::
 WorldHandlerEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-._0 dw label_4395
-._1 dw label_442B
-._2 dw label_44B4
-._3 dw label_44DB
-._4 dw label_44F9
-._5 dw label_4500
-._6 dw label_4507
-._7 dw label_F48
+._0 dw GameplayWorldSubtype0Handler
+._1 dw GameplayWorldSubtype1Handler
+._2 dw GameplayWorldSubtype2Handler
+._3 dw GameplayWorldSubtype3Handler
+._4 dw GameplayWorldSubtype4Handler
+._5 dw GameplayWorldSubtype5Handler
+._6 dw GameplayWorldSubtype6Handler
+._7 dw WorldDefaultHandler
 
-label_4385::
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    jr   nc, label_438D
+data_4385::
+    db $00, $00, $00, $00, $00, $00, $30, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-label_438D::
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-
-label_4395::
+GameplayWorldSubtype0Handler::
     call label_27F2
     call IncrementGameplaySubtype
     ld   a, [ROM_DebugTool2]
@@ -677,7 +661,7 @@ label_43DC::
 label_43E9::
     ld   e, a
     ld   d, $00
-    ld   hl, label_4385
+    ld   hl, data_4385
     add  hl, de
     ld   a, [hl]
     ld   [$DBB0], a
@@ -715,7 +699,7 @@ label_4425::
     ld   [wBGMapToLoad], a
     ret
 
-label_442B::
+GameplayWorldSubtype1Handler::
     call ClearLowerWRAM
     xor  a
     ld   [wLinkMotionState], a
@@ -792,7 +776,7 @@ label_44B0::
     ld   [wTileMapToLoad], a
     ret
 
-label_44B4::
+GameplayWorldSubtype2Handler::
     ld   a, $0F
     ldh  [$FF94], a
     ldh  a, [hIsGBC]
@@ -820,7 +804,7 @@ IncrementGameplaySubtypeAndReturn::
     inc  [hl]
     ret
 
-label_44DB::
+GameplayWorldSubtype3Handler::
     ld   a, $01
     ld   [wTileMapToLoad], a
     ld   a, [$D6FA]
@@ -838,17 +822,17 @@ label_44F5::
     call IncrementGameplaySubtype
     ret
 
-label_44F9::
+GameplayWorldSubtype4Handler::
     call label_3E3F
     call IncrementGameplaySubtype
     ret
 
-label_4500::
+GameplayWorldSubtype5Handler::
     call label_3E5A
     call IncrementGameplaySubtype
     ret
 
-label_4507::
+GameplayWorldSubtype6Handler::
     call label_5895
     ld   a, [$FF40]
     or   $20

@@ -2452,8 +2452,8 @@ PhotoPictureHandler::
     call SwitchBank
     jp   label_4000
 
-; Actual world handler
-label_F48::
+; World handler for GAMEPLAY_WORLD_DEFAULT, dispatched from WorldHandlerEntryPoint
+WorldDefaultHandler::
     ld   a, $02
     call SwitchBank
     ld   a, [wDialogState]

@@ -448,7 +448,7 @@ label_CA32::
     ld   a, [$DBA5]
     and  a
     jr   z, label_CA46
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   z, label_CA4D
 
@@ -816,7 +816,7 @@ data_CCAC::
 data_CCB2::
     ld   e, $01
     ld   e, $61
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_CCDC
     ld   hl, $C3A0
@@ -1505,7 +1505,7 @@ label_D134::
     ld   hl, $D800
     ldh  a, [$FFF6]
     ld   e, a
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_D14B
     ld   d, $00
@@ -1852,7 +1852,7 @@ label_D369::
     ldh  a, [$FFF1]
     and  a
     jr   nz, label_D392
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $1E
     jr   z, label_D378
     cp   $10
@@ -1866,12 +1866,12 @@ label_D378::
     and  $3F
     jr   nz, label_D38D
     ld   a, $28
-    call label_2385
+    call OpenDialog
     jp   label_3F8D
 
 label_D38D::
     ld   a, $99
-    call label_2373
+    call OpenDialogInTable1
 
 label_D392::
     jp   label_3F8D
@@ -2450,7 +2450,7 @@ data_D823::
     ld   b, $04
     ld   [bc], a
     nop
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $15
     jr   nz, label_D835
     ld   a, [$DB56]
@@ -2775,7 +2775,7 @@ data_D9D8::
     or   $20
     ld   [hl], a
     ldh  [$FFF8], a
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     ld   hl, $DA2E
     cp   $06
     jr   z, label_DA12
@@ -2859,7 +2859,7 @@ data_DA4D::
     ldh  [$FF90], a
     jp   IncrementEntityWalkingAttr
     ld   a, $4F
-    call label_2385
+    call OpenDialog
     call IncrementEntityWalkingAttr
     ld   a, $01
     ld   [$C1AB], a
@@ -2903,7 +2903,7 @@ label_DABA::
     ld   hl, $DB5B
     inc  [hl]
     ld   a, $50
-    call label_2385
+    call OpenDialog
 
 label_DAED::
     jp   IncrementEntityWalkingAttr
@@ -3037,7 +3037,7 @@ label_DBBA::
     jr   nz, label_DBCB
     dec  [hl]
     ld   a, $9B
-    call label_2385
+    call OpenDialog
     xor  a
 
 label_DBCB::
@@ -3117,7 +3117,7 @@ label_DC49::
     jr   nz, label_DC67
     dec  [hl]
     ld   a, $93
-    call label_2385
+    call OpenDialog
     xor  a
 
 label_DC67::
@@ -3164,7 +3164,7 @@ label_DC99::
     ld   hl, data_DC84
     add  hl, de
     ld   a, [hl]
-    call label_2385
+    call OpenDialog
     ldh  a, [$FFF1]
     dec  a
     ld   e, a
@@ -3267,7 +3267,7 @@ label_DD4B::
     jr   nz, label_DD6C
     dec  [hl]
     ld   a, $0F
-    call label_2385
+    call OpenDialog
     xor  a
 
 label_DD6C::
@@ -3405,7 +3405,7 @@ label_DEAE::
     ldh  a, [$FFF8]
     and  $10
     jp   nz, label_3F8D
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     and  $03
     ldh  [$FFF1], a
     call label_394D
@@ -3429,10 +3429,10 @@ label_DEAE::
     jr   nz, label_DEFE
     dec  [hl]
     call IncrementEntityWalkingAttr
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     add  a, $00
-    call label_2373
-    ldh  a, [$FFF7]
+    call OpenDialogInTable1
+    ldh  a, [hMapTileset]
     ld   e, a
     ld   d, b
     ld   hl, $DB65
@@ -3608,7 +3608,7 @@ label_E029::
 
 label_E047::
     ld   a, e
-    call label_2385
+    call OpenDialog
     xor  a
 
 label_E04C::
@@ -3626,7 +3626,7 @@ label_E055::
     db   $DB
     and  a
     jr   z, label_E063
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   z, label_E06A
 
@@ -4126,7 +4126,7 @@ label_E35F::
 label_E367::
     ret
     ld   a, $EF
-    call label_2385
+    call OpenDialog
 
 label_E36D::
     call label_D12A
@@ -4837,7 +4837,7 @@ label_E878::
     ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_E88B
     ld   hl, $DDE0
@@ -4965,7 +4965,7 @@ label_E93C::
     ldh  a, [$FFF6]
     ld   c, a
     ld   b, $00
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_E954
     ld   hl, $DDE0
@@ -6544,7 +6544,7 @@ label_F304::
 
 label_F325::
     ld   a, e
-    call label_2385
+    call OpenDialog
     ld   a, $5E
     ld   [$D368], a
     jr   label_F33E
@@ -6555,7 +6555,7 @@ label_F330::
     ld   a, $10
     ldh  [$FF99], a
     ld   a, e
-    call label_2385
+    call OpenDialog
     pop  af
     ldh  [$FF99], a
 

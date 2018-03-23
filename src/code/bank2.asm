@@ -1194,7 +1194,7 @@ jr_002_4A7C:
     jr   nz, jr_002_4AB2                          ; $4A99: $20 $17
 
     ld   a, $77                                   ; $4A9B: $3E $77
-    call label_237C                               ; $4A9D: $CD $7C $23
+    call OpenDialogInTable2                               ; $4A9D: $CD $7C $23
     jr   jr_002_4AB2                              ; $4AA0: $18 $10
 
 jr_002_4AA2:
@@ -1203,7 +1203,7 @@ jr_002_4AA2:
     jr   nz, jr_002_4AB2                          ; $4AA6: $20 $0A
 
     ld   a, $8E                                   ; $4AA8: $3E $8E
-    call label_2385                               ; $4AAA: $CD $85 $23
+    call OpenDialog                               ; $4AAA: $CD $85 $23
     xor  a                                        ; $4AAD: $AF
     ld   [wC167], a                               ; $4AAE: $EA $67 $C1
     ret                                           ; $4AB1: $C9
@@ -1357,7 +1357,7 @@ jr_002_4B85:
     jr   nz, jr_002_4BA1                          ; $4B9A: $20 $05
 
     ld   a, $79                                   ; $4B9C: $3E $79
-    call label_237C                               ; $4B9E: $CD $7C $23
+    call OpenDialogInTable2                               ; $4B9E: $CD $7C $23
 
 jr_002_4BA1:
     xor  a                                        ; $4BA1: $AF
@@ -6620,7 +6620,7 @@ jr_002_6B81:
     inc  a                                        ; $6B90: $3C
     ld   [$C5A6], a                               ; $6B91: $EA $A6 $C5
     ld   a, $51                                   ; $6B94: $3E $51
-    call label_2385                               ; $6B96: $CD $85 $23
+    call OpenDialog                               ; $6B96: $CD $85 $23
 
 jr_002_6B99:
     ldh  a, [$FFAF]                               ; $6B99: $F0 $AF
@@ -7728,7 +7728,7 @@ jr_002_7213:
     ld   [$DB47], a                               ; $7214: $EA $47 $DB
     ld   a, $98                                   ; $7217: $3E $98
     ld   [$C3C9], a                               ; $7219: $EA $C9 $C3
-    call label_2373                               ; $721C: $CD $73 $23
+    call OpenDialogInTable1                               ; $721C: $CD $73 $23
     ld   a, [wC163]                               ; $721F: $FA $63 $C1
     inc  a                                        ; $7222: $3C
     ld   [$DB10], a                               ; $7223: $EA $10 $DB
@@ -8061,7 +8061,7 @@ jr_002_7402:
 
 jr_002_7415:
     ld   a, $53                                   ; $7415: $3E $53
-    call label_237C                               ; $7417: $CD $7C $23
+    call OpenDialogInTable2                               ; $7417: $CD $7C $23
     jp   label_002_7454                           ; $741A: $C3 $54 $74
 
 jr_002_741D:
@@ -8213,11 +8213,11 @@ jr_002_74C9:
     jp   $1828                                    ; $74FB: $C3 $28 $18
 
 func_002_74FE::
-    call label_2385                               ; $74FE: $CD $85 $23
+    call OpenDialog                               ; $74FE: $CD $85 $23
     jp   label_178E                               ; $7501: $C3 $8E $17
 
 func_002_7504::
-    call label_237C                               ; $7504: $CD $7C $23
+    call OpenDialogInTable2                               ; $7504: $CD $7C $23
     jp   label_178E                               ; $7507: $C3 $8E $17
 
     ld   [$00F8], sp                              ; $750A: $08 $F8 $00

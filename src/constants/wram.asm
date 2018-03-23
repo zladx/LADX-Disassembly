@@ -181,8 +181,8 @@ wC181 equ $C181
   ds $1E
 
 wDialogState:: ; C19F
-  ; See DIALOG_* constants for possible values.
-  ; (only the lower byte is used)
+  ; Upper bit:    set if the dialog is displayed on bottom (instead of top)
+  ; Lowest bits:  the dialog state (see DIALOG_* constants for possible values)
   ds 1
 
 wC1A4 equ $C1A0

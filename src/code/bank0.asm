@@ -940,7 +940,7 @@ label_5BC::
     ld   e, l
     ld   d, h
     ld   hl, $5000
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_62F
     ld   a, $20
@@ -1025,7 +1025,7 @@ label_69E::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_6CB
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_6CB
     ld   a, $20
@@ -2100,7 +2100,7 @@ label_D1E::
     ld   e, a
     ld   d, $00
     ld   hl, $6EB3
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_D3C
     ld   hl, $70B3
@@ -2177,7 +2177,7 @@ label_D91::
     ld   hl, $70D3
     ld   a, [$DBA5]
     ld   d, a
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $1A
     jr   nc, label_DAB
     cp   $06
@@ -2190,7 +2190,7 @@ label_DAB::
     ld   a, d
     and  a
     jr   z, label_DC1
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $10
     jr   nz, label_DDB
     ldh  a, [$FFF6]
@@ -2223,7 +2223,7 @@ label_DDB::
     rl   d
     sla  e
     rl   d
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_DF1
     ld   a, $01
@@ -2452,7 +2452,7 @@ PhotoPictureHandler::
     call SwitchBank
     jp   label_4000
 
-; World handler for GAMEPLAY_WORLD_DEFAULT, dispatched from WorldHandlerEntryPoint
+; World handler for GAMEPLAY_WORLD_DEFAULT (dispatched from WorldHandlerEntryPoint)
 WorldDefaultHandler::
     ld   a, $02
     call SwitchBank
@@ -2463,21 +2463,21 @@ WorldDefaultHandler::
     ld   hl, $FFB4
     ld   a, [hl]
     and  a
-    jr   z, label_F75
+    jr   z, .notDungeonEntrance
     ld   a, [wWindowY]
     cp   $80
-    jr   nz, label_F75
+    jr   nz, .notDungeonEntrance
     ld   a, [wInventoryAppearing]
     and  a
-    jr   nz, label_F75
+    jr   nz, .notDungeonEntrance
     dec  [hl]
-    jr   nz, label_F75
+    jr   nz, .notDungeonEntrance
     ld   a, $01
     ld   [MBC3SelectBank], a
-    call label_61EE
+    call OpenDungeonNameDialog
     call ReloadSavedBank
 
-label_F75::
+.notDungeonEntrance
     ld   a, [wDialogState]
     and  a
     jr   nz, label_F8F
@@ -2598,7 +2598,7 @@ label_1033::
     ld   hl, $102D
     add  hl, de
     ld   a, [hl]
-    call label_2385
+    call OpenDialog
     ld   a, $01
 
 label_1061::
@@ -3877,7 +3877,7 @@ label_18DF::
 
 label_18F2::
     ld   a, [hli]
-    ldh  [$FFF7], a
+    ldh  [hMapTileset], a
     ld   a, [$DBA5]
     and  a
     ld   a, [hli]
@@ -3897,7 +3897,7 @@ label_1909::
     ld   a, $14
     call SwitchBank
     push hl
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     swap a
     ld   e, a
     ld   d, $00
@@ -3907,7 +3907,7 @@ label_1909::
     rl   d
     ld   hl, $4220
     add  hl, de
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_192E
     ld   hl, $44E0
@@ -3941,7 +3941,7 @@ label_1948::
     jr   nz, label_196E
     xor  a
     ld   [wActivePowerUp], a
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $0A
     jr   nc, label_196E
     callsw IsMapE8
@@ -3969,7 +3969,7 @@ label_196F::
     ld   a, [$DBA5]
     and  a
     jr   z, label_19C2
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_1993
     ld   hl, $4E3C
@@ -3992,7 +3992,7 @@ label_19A4::
     ld   [MBC3SelectBank], a
     call label_19C2
     push de
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_19B7
     ld   a, $3A
@@ -4070,7 +4070,7 @@ label_1A0F::
     xor  a
     ld   [wDidStealItem], a
     ld   a, $36
-    jp   label_2385
+    jp   OpenDialog
 
 label_1A21::
     ret
@@ -4452,7 +4452,7 @@ label_1C51::
 label_1C54::
     ld   bc, $0040
     call CopyData
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_1C87
     ld   a, $20
@@ -4493,7 +4493,7 @@ label_1C87::
     ld   h, $6F
     jp   label_1C51
     ld   hl, $DCC0
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_1CB8
     ld   de, $8400
@@ -5034,7 +5034,7 @@ label_1FFE::
     and  a
     jr   z, label_2030
     ld   a, $78
-    call label_237C
+    call OpenDialogInTable2
     jp   label_20CF
 
 label_2030::
@@ -5095,15 +5095,15 @@ label_2080::
     jr   z, label_2093
 
 label_2088::
-    call label_2373
+    call OpenDialogInTable1
     jp   label_20CF
 
 label_208E::
-    call label_2385
+    call OpenDialog
     jr   label_20CF
 
 label_2093::
-    call label_237C
+    call OpenDialogInTable2
     jr   label_20CF
 
 label_2098::
@@ -5401,7 +5401,7 @@ label_2262::
     and  a
     jr   z, label_2299
     ld   hl, $43B0
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_2291
     ld   hl, $4760
@@ -5772,7 +5772,7 @@ label_2A12::
     ld   a, $08
     ld   [MBC3SelectBank], a
     ld   hl, $4AD4
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_2A23
     ld   hl, $4BD4
@@ -6014,7 +6014,7 @@ label_2C28::
     ld   a, $20
     call SwitchBank
     ld   hl, $4589
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     ld   e, a
     ld   d, $00
     cp   $FF
@@ -6054,7 +6054,7 @@ label_2C5D::
     pop  de
     push de
     ld   hl, $45A9
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_2C8A
     ld   hl, $45C9
@@ -6084,7 +6084,7 @@ label_2C8A::
     ld   l, $00
     ld   a, $12
     call SwitchAdjustedBank
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_2CD1
     ld   hl, $6100
@@ -6098,7 +6098,7 @@ label_2CD1::
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ld   hl, $7D00
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   z, label_2CF5
     cp   $0A
@@ -6122,7 +6122,7 @@ label_2D07::
     ld   a, [$DBA5]
     and  a
     jr   z, label_2D17
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   z, label_2D21
     cp   $0A
@@ -6293,7 +6293,7 @@ label_2E70::
     ld   de, $120E
 
 label_2E73::
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_2E84
     ld   a, $20
@@ -6318,7 +6318,7 @@ label_2E85::
     ldh  a, [$FFF9]
     and  a
     jr   nz, label_2ED3
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $14
     jr   z, label_2ED3
     cp   $0A
@@ -6406,7 +6406,7 @@ label_2F12::
     and  a
     jr   z, label_2F4B
     ld   hl, $7000
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $06
     jr   z, label_2F41
     cp   $0A
@@ -6428,7 +6428,7 @@ label_2F41::
     ret
 
 label_2F4B::
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_2F57
     ldh  a, [$FFF6]
@@ -6446,7 +6446,7 @@ label_2F57::
     call CopyData
 
 label_2F69::
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $10
     jr   nz, label_2F87
     ldh  a, [$FFF6]
@@ -6464,7 +6464,7 @@ label_2F87::
     ldh  a, [hIsGBC]
     and  a
     ret  z
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     and  a
     ret  nz
     ld   a, $35
@@ -6512,7 +6512,7 @@ label_2FCD::
     sla  c
     rl   b
     ld   hl, $6749
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   z, label_2FEC
     cp   $10
@@ -6576,7 +6576,7 @@ label_3019::
     and  a
     jr   z, label_304C
     ld   hl, $43B0
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   z, label_3047
     cp   $10
@@ -6749,7 +6749,7 @@ label_313A::
     and  a
     jr   z, label_3161
     ld   hl, $D900
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_3156
     ld   hl, $DDE0
@@ -6784,7 +6784,7 @@ label_316B::
     ld   a, $0A
     ld   [MBC3SelectBank], a
     ldh  [$FFE8], a
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_318F
     ld   hl, $7B77
@@ -6804,7 +6804,7 @@ label_318F::
 
 label_31A6::
     ld   hl, $4000
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $1A
     jr   nc, label_3224
     cp   $06
@@ -7335,7 +7335,7 @@ label_34AE::
     push af
 
 label_34B6::
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $0A
     ldh  a, [$FFE0]
     jr   c, label_34C2
@@ -7645,7 +7645,7 @@ label_36C4::
     ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_36D8
     ld   hl, $DDE0
@@ -7806,7 +7806,7 @@ label_37FE::
     ld   a, [$DBA5]
     and  a
     jr   z, label_3868
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $06
     jr   nz, label_3850
     ld   a, [$DB6F]
@@ -7832,7 +7832,7 @@ label_37FE::
 
 label_3850::
     ld   hl, $4200
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     jr   nz, label_385E
     ld   hl, $4600
@@ -8065,7 +8065,7 @@ label_39AE::
     ret  z
     xor  a
     ld   [$C3C1], a
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $0A
     ldh  a, [hFrameCounter]
     jr   c, label_39C1
@@ -8937,7 +8937,7 @@ label_3F2E::
     ld   a, [hl]
     and  $04
     ret  nz
-    ldh  a, [$FFF7]
+    ldh  a, [hMapTileset]
     cp   $FF
     ret  z
     cp   $05
@@ -8949,7 +8949,7 @@ label_3F2E::
     ld   a, [hl]
 
 label_3F45::
-    jp   label_2385
+    jp   OpenDialog
 
 data_3F48::
     db 1, 2, 4, 8, $10, $20, $40, $80

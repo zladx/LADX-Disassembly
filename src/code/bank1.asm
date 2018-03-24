@@ -613,7 +613,7 @@ label_43A7::
     and  a
     jr   z, label_4414
     ldh  a, [hMapId]
-    cp   $FF
+    cp   MAP_SPECIAL
     jr   nz, label_43B8
     ld   hl, $DDDA
     jr   label_43C5
@@ -634,11 +634,11 @@ label_43C5::
 
 label_43CA::
     ldh  a, [hMapId]
-    cp   $FF
+    cp   MAP_SPECIAL
     jr   z, label_43DB
-    cp   $08
+    cp   MAP_TURTLE_ROCK
     jr   z, label_43D8
-    cp   $0A
+    cp   MAP_CAVE_A
     jr   c, label_43DB
 
 label_43D8::
@@ -654,7 +654,7 @@ label_43DC::
     dec  c
     jr   nz, label_43CA
     ldh  a, [hMapId]
-    cp   $FF
+    cp   MAP_SPECIAL
     jr   nz, label_43E9
     ld   a, $0F
 
@@ -666,13 +666,13 @@ label_43E9::
     ld   a, [hl]
     ld   [$DBB0], a
     ldh  a, [hMapId]
-    cp   $FF
+    cp   MAP_SPECIAL
     jr   z, label_440B
-    cp   $08
+    cp   MAP_TURTLE_ROCK
     jr   z, label_4425
-    cp   $0A
+    cp   MAP_CAVE_A
     jr   nc, label_4425
-    cp   $06
+    cp   MAP_FACE_SHRINE
     jr   nz, label_440B
     ldh  a, [$FFF9]
     and  a
@@ -730,7 +730,7 @@ label_4452::
     jr   z, label_44A6
     ld   d, a
     ldh  a, [hMapId]
-    cp   $FF
+    cp   MAP_SPECIAL
     jr   nz, label_4475
     ld   d, $00
     jr   label_447E
@@ -3062,7 +3062,7 @@ label_5394::
     ld   [$DB54], a
     ld   a, $01
     ld   [wActiveRoom], a
-    ld   a, $10
+    ld   a, MAP_HOUSE
     ldh  [hMapId], a
     ld   a, $50
     ld   [$DB9D], a
@@ -4639,7 +4639,7 @@ label_5E67::
     and  a
     jr   z, label_5E95
     ldh  a, [hMapId]
-    cp   $FF
+    cp   MAP_SPECIAL
     jr   nz, label_5E79
     ld   hl, $DDDA
     jr   label_5E8A
@@ -4894,13 +4894,13 @@ label_5FB3::
     and  a
     ret  nz
     ldh  a, [hMapId]
-    cp   $16
+    cp   MAP_S_FACE_SHRINE
     ret  z
-    cp   $14
+    cp   MAP_KANALET
     ret  z
-    cp   $13
+    cp   MAP_DREAM_SHRINE
     ret  z
-    cp   $0A
+    cp   MAP_CAVE_A
     ret  c
     ldh  a, [$FFF6]
     cp   $FD
@@ -5075,7 +5075,7 @@ label_609C::
     cp   $A4
     jr   nz, label_60F7
     ldh  a, [hMapId]
-    cp   $11
+    cp   MAP_CAVE_B
     jr   nz, label_60F7
     ld   a, $08
     ldh  [$FFF2], a
@@ -6060,7 +6060,7 @@ label_6829::
     jr   nz, label_6855
     call label_5888
     ldh  a, [hMapId]
-    cp   $06
+    cp   MAP_FACE_SHRINE
     jr   z, label_6849
     ld   a, $03
     ldh  [hWindowYUnused], a
@@ -6078,7 +6078,7 @@ label_6855::
     ret
     ld   e, $21
     ldh  a, [hMapId]
-    cp   $06
+    cp   MAP_FACE_SHRINE
     jr   z, label_6868
     ldh  a, [$FFF6]
     cp   $DD
@@ -6094,7 +6094,7 @@ label_6868::
     jp   IncrementGameplaySubtypeAndReturn
     ld   e, $24
     ldh  a, [hMapId]
-    cp   $06
+    cp   MAP_FACE_SHRINE
     jr   z, label_6885
     ldh  a, [$FFF6]
     cp   $DD
@@ -6134,7 +6134,7 @@ label_689E::
 label_68BF::
     ret
     ldh  a, [hMapId]
-    cp   $06
+    cp   MAP_FACE_SHRINE
     jr   nz, label_68CF
     call label_6A7C
     ld   a, $07
@@ -6333,7 +6333,7 @@ label_6A76::
 
 label_6A7C::
     ldh  a, [hMapId]
-    cp   $06
+    cp   MAP_FACE_SHRINE
     ret  nz
     xor  a
     ldh  [$FFF1], a
@@ -6799,7 +6799,7 @@ label_6DEA::
     and  a
     jr   z, label_6E18
     ldh  a, [hMapId]
-    cp   $FF
+    cp   MAP_SPECIAL
     jr   nz, label_6DFF
     ld   a, $0F
     jr   label_6E03

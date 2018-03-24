@@ -407,7 +407,7 @@ jr_002_4416:
     jr   jr_002_4427                              ; $441A: $18 $0B
 
     ldh  a, [hMapId]                         ; $441C: $F0 $F7
-    cp   $FF                                      ; $441E: $FE $FF
+    cp   MAP_SPECIAL                                      ; $441E: $FE $FF
     jr   nz, jr_002_4427                          ; $4420: $20 $05
 
     call func_002_438F                            ; $4422: $CD $8F $43
@@ -1312,7 +1312,7 @@ func_002_4B49::
     jr   z, jr_002_4BBF                           ; $4B4D: $28 $70
 
     ldh  a, [hMapId]                         ; $4B4F: $F0 $F7
-    cp   $08                                      ; $4B51: $FE $08
+    cp   MAP_TURTLE_ROCK                                      ; $4B51: $FE $08
     jr   nz, jr_002_4B64                          ; $4B53: $20 $0F
 
     ld   a, [$D219]                               ; $4B55: $FA $19 $D2
@@ -2418,7 +2418,7 @@ jr_002_516A:
 
 jr_002_5176:
     ldh  a, [hMapId]                         ; $5176: $F0 $F7
-    cp   $0A                                      ; $5178: $FE $0A
+    cp   MAP_CAVE_A                                      ; $5178: $FE $0A
     jr   nz, jr_002_51AC                          ; $517A: $20 $30
 
     ldh  a, [hMapRoom]                           ; $517C: $F0 $F6
@@ -2887,12 +2887,12 @@ label_002_5420::
 label_002_5425::
     push bc                                       ; $5425: $C5
     ldh  a, [hMapId]                         ; $5426: $F0 $F7
-    cp   $FF                                      ; $5428: $FE $FF
+    cp   MAP_SPECIAL                                      ; $5428: $FE $FF
     ld   a, $30                                   ; $542A: $3E $30
     jr   z, jr_002_5438                           ; $542C: $28 $0A
 
     ldh  a, [hMapId]                         ; $542E: $F0 $F7
-    cp   $0A                                      ; $5430: $FE $0A
+    cp   MAP_CAVE_A                                      ; $5430: $FE $0A
     ld   a, $30                                   ; $5432: $3E $30
     jr   c, jr_002_5438                           ; $5434: $38 $02
 
@@ -2906,7 +2906,7 @@ jr_002_5438:
     add  hl, de                                   ; $5440: $19
     ld   [hl], $28                                ; $5441: $36 $28
     ldh  a, [hMapId]                         ; $5443: $F0 $F7
-    cp   $FF                                      ; $5445: $FE $FF
+    cp   MAP_SPECIAL                                      ; $5445: $FE $FF
     jr   nz, jr_002_5453                          ; $5447: $20 $0A
 
     ld   [hl], $48                                ; $5449: $36 $48
@@ -2921,7 +2921,7 @@ jr_002_5453:
     add  hl, de                                   ; $5456: $19
     ld   [hl], $3C                                ; $5457: $36 $3C
     ldh  a, [hMapId]                         ; $5459: $F0 $F7
-    cp   $FF                                      ; $545B: $FE $FF
+    cp   MAP_SPECIAL                                      ; $545B: $FE $FF
     jr   nz, jr_002_5469                          ; $545D: $20 $0A
 
     ld   [hl], $3C                                ; $545F: $36 $3C
@@ -4151,7 +4151,7 @@ func_002_5B9F::
     jr   z, jr_002_5BC2                           ; $5BAA: $28 $16
 
     ldh  a, [hMapId]                         ; $5BAC: $F0 $F7
-    cp   $FF                                      ; $5BAE: $FE $FF
+    cp   MAP_SPECIAL                                      ; $5BAE: $FE $FF
     jr   nz, jr_002_5BB9                          ; $5BB0: $20 $07
 
     ld   d, $00                                   ; $5BB2: $16 $00
@@ -4422,7 +4422,7 @@ jr_002_5D21:
 
     ld   hl, $D900                                ; $5D2A: $21 $00 $D9
     ldh  a, [hMapId]                         ; $5D2D: $F0 $F7
-    cp   $FF                                      ; $5D2F: $FE $FF
+    cp   MAP_SPECIAL                                      ; $5D2F: $FE $FF
     jr   nz, jr_002_5D36                          ; $5D31: $20 $03
 
     ld   hl, $DDE0                                ; $5D33: $21 $E0 $DD
@@ -4622,7 +4622,7 @@ jr_002_5E2E:
     ld   e, a                                     ; $5E4B: $5F
     ld   hl, $D900                                ; $5E4C: $21 $00 $D9
     ldh  a, [hMapId]                         ; $5E4F: $F0 $F7
-    cp   $FF                                      ; $5E51: $FE $FF
+    cp   MAP_SPECIAL                                      ; $5E51: $FE $FF
     jr   nz, jr_002_5E5A                          ; $5E53: $20 $05
 
     ld   hl, $DDE0                                ; $5E55: $21 $E0 $DD
@@ -4888,7 +4888,7 @@ func_002_5F9F::
     ret                                           ; $5FC5: $C9
 
     ldh  a, [hMapId]                         ; $5FC6: $F0 $F7
-    cp   $06                                      ; $5FC8: $FE $06
+    cp   MAP_FACE_SHRINE                                      ; $5FC8: $FE $06
     jr   nz, jr_002_5FD1                          ; $5FCA: $20 $05
 
     ld   a, [$DAE8]                               ; $5FCC: $FA $E8 $DA
@@ -5199,7 +5199,7 @@ jr_002_613D:
     jr   z, jr_002_619C                           ; $6189: $28 $11
 
     ldh  a, [hMapId]                         ; $618B: $F0 $F7
-    cp   $FF                                      ; $618D: $FE $FF
+    cp   MAP_SPECIAL                                      ; $618D: $FE $FF
     jr   z, jr_002_6197                           ; $618F: $28 $06
 
     cp   $08                                      ; $6191: $FE $08
@@ -5207,7 +5207,7 @@ jr_002_613D:
     jr   nc, jr_002_619C                          ; $6195: $30 $05
 
 jr_002_6197:
-    call IsMapE8                                  ; $6197: $CD $09 $67
+    call IsMapRoomE8                                  ; $6197: $CD $09 $67
     ld   a, $02                                   ; $619A: $3E $02
 
 jr_002_619C:
@@ -5769,14 +5769,14 @@ Data_002_6478::
     db   $7D, $00, $02, $03, $07, $05, $0A, $0B, $0F, $04, $08, $09, $0E, $06, $0C, $0D
     db   $01                                      
 
-IsMapE8::
+IsMapRoomE8::
     ldh  a, [hMapRoom]                           ; $6709: $F0 $F6
     cp   $E8                                      ; $670B: $FE $E8
     ret  z                                        ; $670D: $C8
 
     ld   hl, $6479                                ; $670E: $21 $79 $64
     ldh  a, [hMapId]                         ; $6711: $F0 $F7
-    cp   $FF                                      ; $6713: $FE $FF
+    cp   MAP_SPECIAL                                      ; $6713: $FE $FF
     jr   nz, jr_002_671C                          ; $6715: $20 $05
 
     ld   hl, $66B9                                ; $6717: $21 $B9 $66
@@ -5794,7 +5794,7 @@ jr_002_671C:
 
 jr_002_672A:
     ldh  a, [hMapId]                         ; $672A: $F0 $F7
-    cp   $06                                      ; $672C: $FE $06
+    cp   MAP_FACE_SHRINE                                      ; $672C: $FE $06
     jr   nz, jr_002_673A                          ; $672E: $20 $0A
 
     ld   a, [wHasInstrument7]                     ; $6730: $FA $6B $DB
@@ -6337,7 +6337,7 @@ jr_002_6A00:
     ret                                           ; $6A00: $C9
 
     ldh  a, [hMapId]                         ; $6A01: $F0 $F7
-    cp   $06                                      ; $6A03: $FE $06
+    cp   MAP_FACE_SHRINE                                      ; $6A03: $FE $06
     jr   nz, jr_002_6A24                          ; $6A05: $20 $1D
 
     ldh  a, [hMapRoom]                           ; $6A07: $F0 $F6
@@ -6772,7 +6772,7 @@ func_002_6C75::
     ret  nz                                       ; $6C7C: $C0
 
     ldh  a, [hMapId]                         ; $6C7D: $F0 $F7
-    cp   $1F                                      ; $6C7F: $FE $1F
+    cp   MAP_CAVE_D                                      ; $6C7F: $FE $1F
     jr   nz, jr_002_6C99                          ; $6C81: $20 $16
 
     ldh  a, [$FFF9]                               ; $6C83: $F0 $F9
@@ -6818,7 +6818,7 @@ jr_002_6CB6:
     jr   nz, jr_002_6CD1                          ; $6CB9: $20 $16
 
     ldh  a, [hMapId]                         ; $6CBB: $F0 $F7
-    cp   $1F                                      ; $6CBD: $FE $1F
+    cp   MAP_CAVE_D                                      ; $6CBD: $FE $1F
     jp   nz, label_002_6D5C                       ; $6CBF: $C2 $5C $6D
 
     ldh  a, [hMapRoom]                           ; $6CC2: $F0 $F6
@@ -7003,7 +7003,7 @@ jr_002_6DCC:
     jr   nz, jr_002_6DE4                          ; $6DD0: $20 $12
 
     ldh  a, [hMapId]                         ; $6DD2: $F0 $F7
-    cp   $1F                                      ; $6DD4: $FE $1F
+    cp   MAP_CAVE_D                                      ; $6DD4: $FE $1F
     jr   z, jr_002_6DE4                           ; $6DD6: $28 $0C
 
     ld   a, [wActiveRoom]                         ; $6DD8: $FA $A5 $DB
@@ -8982,7 +8982,7 @@ jr_002_7986:
 
     ld   d, a                                     ; $7992: $57
     ldh  a, [hMapId]                         ; $7993: $F0 $F7
-    cp   $FF                                      ; $7995: $FE $FF
+    cp   MAP_SPECIAL                                      ; $7995: $FE $FF
     jr   nz, jr_002_799D                          ; $7997: $20 $04
 
     ld   d, $00                                   ; $7999: $16 $00
@@ -9072,13 +9072,13 @@ label_002_79FA::
     jr   z, jr_002_7A6D                           ; $7A04: $28 $67
 
     ldh  a, [hMapId]                         ; $7A06: $F0 $F7
-    cp   $FF                                      ; $7A08: $FE $FF
+    cp   MAP_SPECIAL                                      ; $7A08: $FE $FF
     jr   z, jr_002_7A48                           ; $7A0A: $28 $3C
 
-    cp   $0B                                      ; $7A0C: $FE $0B
+    cp   MAP_DUNGEON_G1                                      ; $7A0C: $FE $0B
     jr   nc, jr_002_7A6D                          ; $7A0E: $30 $5D
 
-    cp   $08                                      ; $7A10: $FE $08
+    cp   MAP_TURTLE_ROCK                                      ; $7A10: $FE $08
     jr   nz, jr_002_7A48                          ; $7A12: $20 $34
 
     ldh  a, [hMapRoom]                           ; $7A14: $F0 $F6
@@ -9125,7 +9125,7 @@ jr_002_7A48:
     jr   nz, jr_002_7A67                          ; $7A53: $20 $12
 
     ldh  a, [hMapId]                         ; $7A55: $F0 $F7
-    cp   $05                                      ; $7A57: $FE $05
+    cp   MAP_CATFISHS_MAW                                      ; $7A57: $FE $05
     jr   nz, jr_002_7A67                          ; $7A59: $20 $0C
 
     ld   a, [$DBAE]                               ; $7A5B: $FA $AE $DB
@@ -9188,7 +9188,7 @@ label_002_7AA5::
     jr   z, jr_002_7ABD                           ; $7AAC: $28 $0F
 
     ldh  a, [hMapId]                         ; $7AAE: $F0 $F7
-    cp   $FF                                      ; $7AB0: $FE $FF
+    cp   MAP_SPECIAL                                      ; $7AB0: $FE $FF
     jr   nz, jr_002_7ABD                          ; $7AB2: $20 $09
 
     ld   a, $01                                   ; $7AB4: $3E $01

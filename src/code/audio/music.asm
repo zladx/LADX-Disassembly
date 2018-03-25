@@ -100,8 +100,8 @@ SelectMusicTrackAfterTransition::
     add  hl, de                                   ; $4192: $19
     ld   d, [hl]                                  ; $4193: $56
 
-    ; If $FFF9 != 0 and a <= $0A…
-    ldh  a, [$FFF9]                               ; $4194: $F0 $F9
+    ; If hFFF9 != 0 and a <= $0A…
+    ldh  a, [hFFF9]                               ; $4194: $F0 $F9
     and  a                                        ; $4196: $A7
     jr   z, .loadSoundtrack                       ; $4197: $28 $0D
     ld   a, e                                     ; $4199: $7B

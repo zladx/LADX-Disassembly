@@ -2025,9 +2025,9 @@ label_CB6::
     ret
 
 label_CBE::
-    ldh  a, [$FF9F]
+    ldh  a, [hLinkFinalPositionX]
     ldh  [hLinkPositionX], a
-    ldh  a, [$FFA0]
+    ldh  a, [hLinkFinalPositionY]
     ldh  [hLinkPositionY], a
     ret
 
@@ -2506,9 +2506,9 @@ WorldDefaultHandler::
 
     ; 
     ldh  a, [hLinkPositionX]
-    ldh  [$FF9F], a
+    ldh  [hLinkFinalPositionX], a
     ldh  a, [hLinkPositionY]
-    ldh  [$FFA0], a
+    ldh  [hLinkFinalPositionY], a
     ld   hl, $FFA2
     sub  a, [hl]
     ldh  [$FFB3], a
@@ -3271,7 +3271,7 @@ UseRocksFeather::
     ld   [$C153], a
     ld   a, $0D
     ldh  [$FFF2], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_1508
     call label_1508
@@ -3612,7 +3612,7 @@ data_1701::
     db   0, 0, $E0, $20
 
 label_1705::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_1713
     ldh  a, [$FF9C]
@@ -3826,14 +3826,14 @@ label_186C::
     ldh  [hLinkAnimationState], a
 
 label_1898::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     ldh  [$FFE4], a
     ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     xor  a
     ld   [wGameplaySubtype], a
     ld   [$C3CB], a
-    ldh  [$FFF9], a
+    ldh  [hFFF9], a
     ld   hl, $D401
     ld   a, [$DBA5]
     ldh  [$FFE6], a
@@ -3875,7 +3875,7 @@ label_18DF::
     ld   [$DBA5], a
     cp   $02
     jr   nz, label_18F2
-    ldh  [$FFF9], a
+    ldh  [hFFF9], a
     dec  a
     ld   [$DBA5], a
     ld   a, $01
@@ -3966,7 +3966,7 @@ label_196F::
     ld   a, [hl]
     ld   [$DB9E], a
     pop  hl
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_19DA
     ldh  a, [$FFE4]
@@ -4128,7 +4128,7 @@ label_1A76::
     jr   label_1AC7
 
 label_1A78::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_1A88
     ldh  a, [$FF9C]
@@ -4222,7 +4222,7 @@ AnimateMarinBeachTiles::
     jr   nz, AnimateTiles.doWorldAnimations
     and  b
     ldh  [$FFE0], a
-    ldh  [$FFA0], a
+    ldh  [hLinkFinalPositionY], a
     ld   h, b
 
 AnimateTiles::
@@ -5126,7 +5126,7 @@ label_2098::
     ldh  a, [$FFCC]
     and  $30
     jr   z, label_20CF
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_20BF
     ldh  a, [$FF9E]
@@ -6321,7 +6321,7 @@ label_2E85::
     ld   a, [$DBA5]
     and  a
     jr   z, label_2EB0
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_2ED3
     ldh  a, [hMapId]
@@ -6408,7 +6408,7 @@ label_2F12::
     ld   a, $0D
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_2F4B
     ld   hl, $7000
@@ -6770,7 +6770,7 @@ label_3156::
 
 label_3161::
     add  hl, de
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     ld   a, [hl]
     jr   nz, label_316B
@@ -6778,7 +6778,7 @@ label_3161::
     ld   [hl], a
 
 label_316B::
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     ldh  a, [$FFF6]
     ld   c, a
     ld   b, $00
@@ -6981,7 +6981,7 @@ label_32A9::
 
 label_32B8::
     inc  bc
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     ld   e, a
     ld   a, [$DBA5]
     and  a
@@ -7605,7 +7605,7 @@ data_35F8::
 label_35FA::
     ld   e, 0
     call label_373F
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $04
     jp   nz, label_36B2
     push bc
@@ -7669,7 +7669,7 @@ label_36E1::
     pop  af
     or   [hl]
     ld   [hl], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     ret
 
 data_36E8::
@@ -7714,7 +7714,7 @@ data_3724::
 label_3726::
     ld   e, $08
     call label_373F
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $04
     jp   nz, label_36B2
     push bc
@@ -8497,7 +8497,7 @@ label_3C77::
     ld   a, [$C123]
     ld   c, a
     ld   b, $00
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     ldh  a, [$FFEC]
     jr   z, label_3C9C

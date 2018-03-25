@@ -224,7 +224,7 @@ label_C8AD::
     ld   a, [hl]
     and  $80
     jr   z, label_C918
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $30
     jr   z, label_C8C7
     jp   label_3F8D
@@ -480,10 +480,10 @@ label_CA6B::
 
 label_CA72::
     ret
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     rra
     jr   label_CA7A
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
 
 label_CA7A::
     and  $10
@@ -1208,7 +1208,7 @@ label_CF24::
     ldh  a, [$FFF6]
     cp   $F8
     jr   nz, label_CF44
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     bit  4, a
     jp   nz, label_3F8D
     bit  5, a
@@ -1219,7 +1219,7 @@ label_CF24::
 label_CF44::
     cp   $7A
     jr   nz, label_CF54
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
     ld   a, $04
@@ -1231,7 +1231,7 @@ label_CF54::
     ld   a, [$D969]
     and  $10
     jp   z, label_3F8D
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
 
@@ -1496,7 +1496,7 @@ label_D12A::
     ld   a, [hl]
     or   $10
     ld   [hl], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     ret
 
 label_D134::
@@ -2128,7 +2128,7 @@ label_D5FA::
     ld   a, [$C1BE]
     ld   hl, wActivePowerUp
     or   [hl]
-    ld   hl, $FFF9
+    ld   hl, hFFF9
     or   [hl]
     jr   nz, label_D60F
     ld   a, $34
@@ -2162,7 +2162,7 @@ label_D62E::
     jr   c, label_D648
     ld   [hl], b
     ld   a, [$C1BE]
-    ld   hl, $FFF9
+    ld   hl, hFFF9
     or   [hl]
     ld   hl, wActivePowerUp
     or   [hl]
@@ -2222,7 +2222,7 @@ label_D670::
     ld   hl, $C480
     add  hl, de
     ld   [hl], $03
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_D6D9
     ld   hl, $C3A0
@@ -2388,7 +2388,7 @@ label_D795::
     ld   hl, $C210
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_D7D7
     push hl
@@ -2774,7 +2774,7 @@ data_D9D8::
     ld   a, [hl]
     or   $20
     ld   [hl], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     ldh  a, [hMapId]
     ld   hl, $DA2E
     cp   $06
@@ -2824,7 +2824,7 @@ data_DA4D::
     ld   [bc], a
     xor  h
     ldi  [hl], a
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
     ldh  a, [$FFF0]
@@ -3017,7 +3017,7 @@ label_DB99::
     ld   a, [$DB4E]
     and  a
     jr   nz, label_DBAC
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
     ld   de, data_DB97
@@ -3106,7 +3106,7 @@ data_DC47::
     db $8A, $14
 
 label_DC49::
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
     ld   de, data_DC47
@@ -3402,7 +3402,7 @@ label_DE8B::
 label_DEAE::
     ld   a, c
     ld   [$D201], a
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
     ldh  a, [hMapId]
@@ -3595,7 +3595,7 @@ label_E029::
     ld   hl, $DB15
     call label_E373
     call label_D12A
-    ld   hl, $FFF8
+    ld   hl, hFFF8
     res  4, [hl]
     ld   e, $A2
     ld   a, [$DB15]
@@ -3680,7 +3680,7 @@ label_E0B3::
     call label_FF25
     call label_EB7B
     call label_F893
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_E0E3
     ld   hl, $C2A0
@@ -3777,7 +3777,7 @@ label_E136::
 
 label_E143::
     ld   [hl], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_E156
     ld   hl, $C250
@@ -4621,7 +4621,7 @@ label_E6FA::
     call label_EB34
 
 label_E706::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     ret  nz
     ld   a, [hl]
@@ -4678,7 +4678,7 @@ data_E76D::
     db 0, 0, $10, 0
 
 label_E771::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jp   nz, label_E8E5
     push bc
@@ -4829,7 +4829,7 @@ label_E865::
     ld   a, [hl]
     or   $04
     ld   [hl], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     jp   label_D1F5
 
 label_E878::
@@ -4859,7 +4859,7 @@ label_E894::
     ld   a, [de]
     or   [hl]
     ld   [de], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     ld   hl, data_E75D
     add  hl, bc
     ld   a, [$DBAE]
@@ -4983,7 +4983,7 @@ label_E95D::
     ld   a, [hl]
     or   $40
     ld   [hl], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
 
 label_E964::
     call label_2178
@@ -5290,7 +5290,7 @@ data_EB77::
     db $40, 8, $40, $40
 
 label_EB7B::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_EB8C
     call label_FF5E
@@ -5557,7 +5557,7 @@ label_ECF9::
     ldh  a, [$FFB7]
     and  a
     jr   nz, label_ED1B
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_ED15
     ldh  a, [$FFA3]
@@ -5581,7 +5581,7 @@ label_ED1B::
     ld   [hl], $30
     ld   a, $0E
     ldh  [$FFF3], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_ED38
     ld   a, $10
@@ -5708,7 +5708,7 @@ label_EDFA::
 
 label_EE02::
     call label_F565
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_EE0E
 
@@ -7494,7 +7494,7 @@ label_F90C::
     ldh  a, [$FFD7]
     cp   $03
     jr   z, label_F973
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_F93D
     ld   hl, $C320

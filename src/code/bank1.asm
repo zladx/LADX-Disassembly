@@ -674,7 +674,7 @@ label_43E9::
     jr   nc, label_4425
     cp   MAP_FACE_SHRINE
     jr   nz, label_440B
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_4425
 
@@ -759,7 +759,7 @@ label_4495::
     ld   a, [$DBCD]
     and  a
     jr   z, label_44A6
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jr   nz, label_44A6
     ld   a, $0C
@@ -2912,7 +2912,7 @@ label_5295::
 
 label_52A4::
     xor  a
-    ldh  [$FFF9], a
+    ldh  [hFFF9], a
     ld   a, [$DB5A]
     and  a
     jr   nz, label_52BB
@@ -3032,7 +3032,7 @@ label_5353::
     ld   a, [$DB64]
     ld   [$DBAE], a
     xor  a
-    ldh  [$FFF9], a
+    ldh  [hFFF9], a
     ld   a, $03
     ldh  [$FF9E], a
     ld   a, [$DB5F]
@@ -4890,7 +4890,7 @@ label_5FB3::
     ld   a, [wActiveRoom]
     and  a
     jr   z, label_5FD3
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     ret  nz
     ldh  a, [hMapId]
@@ -6818,7 +6818,7 @@ label_6E03::
     ld   h, [hl]
     ld   l, a
     ld   [hl], $A3
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_6E18
     ld   [hl], $7F

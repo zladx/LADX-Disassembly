@@ -2512,7 +2512,7 @@ WorldDefaultHandler::
     ld   hl, $FFA2
     sub  a, [hl]
     ldh  [$FFB3], a
-    call label_60E0
+    call func_002_60E0
     xor  a
     ld   [$C140], a
     ld   [$C13C], a
@@ -3238,7 +3238,7 @@ UseMagicPowder::
     ret
 
 label_14A7::
-    ld   a, [$DB4C]
+    ld   a, [wMagicPowderCount]
     and  a
     jp   z, label_C20
     ld   a, $08

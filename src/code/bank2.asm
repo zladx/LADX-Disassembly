@@ -5096,27 +5096,34 @@ jr_002_60BD:
     ldh  [hFFF8], a                               ; $60D5: $E0 $F8
     ret                                           ; $60D7: $C9
 
-func_002_60D8::
+; Clamp the item count to a maximum value
+; Inputs:
+;   hl   address of maximum item count
+;   de   address of current item count
+ClampItemCount::
+    ; If [de] >= [hl]…
     ld   a, [de]                                  ; $60D8: $1A
     cp   [hl]                                     ; $60D9: $BE
-    jr   c, jr_002_60DE                           ; $60DA: $38 $02
-
+    jr   c, .return                               ; $60DA: $38 $02
+    ; … [de] = [hl]
     ld   a, [hl]                                  ; $60DC: $7E
     ld   [de], a                                  ; $60DD: $12
-
-jr_002_60DE:
+.return
     inc  hl                                       ; $60DE: $23
     ret                                           ; $60DF: $C9
 
-    ld   hl, $DB76                                ; $60E0: $21 $76 $DB
-    ld   de, $DB4C                                ; $60E3: $11 $4C $DB
-    call func_002_60D8                            ; $60E6: $CD $D8 $60
+func_002_60E0::
+    ; Clamp items count
+    ld   hl, wMaxMagicPowder                      ; $60E0: $21 $76 $DB
+    ld   de, wMagicPowderCount                    ; $60E3: $11 $4C $DB
+    call ClampItemCount                           ; $60E6: $CD $D8 $60
     ld   de, wBombCount                           ; $60E9: $11 $4D $DB
-    call func_002_60D8                            ; $60EC: $CD $D8 $60
+    call ClampItemCount                           ; $60EC: $CD $D8 $60
     ld   de, wArrowCount                          ; $60EF: $11 $45 $DB
-    call func_002_60D8                            ; $60F2: $CD $D8 $60
+    call ClampItemCount                           ; $60F2: $CD $D8 $60
+    
     ld   a, [wLinkMotionState]                    ; $60F5: $FA $1C $C1
-    cp   $02                                      ; $60F8: $FE $02
+    cp   LINK_MOTION_JUMPING                      ; $60F8: $FE $02
     ret  nc                                       ; $60FA: $D0
 
     ld   a, [wDialogState]                        ; $60FB: $FA $9F $C1
@@ -5185,7 +5192,7 @@ jr_002_613D:
     ldh  [hPressedButtonsMask], a                 ; $616A: $E0 $CB
     ldh  [hFFCC], a                               ; $616C: $E0 $CC
     ld   [wGameplaySubtype], a                    ; $616E: $EA $96 $DB
-    ld   a, $0C                                   ; $6171: $3E $0C
+    ld   a, GAMEPLAY_INVENTORY                    ; $6171: $3E $0C
     ld   [wGameplayType], a                       ; $6173: $EA $95 $DB
     ld   a, $11                                   ; $6176: $3E $11
     ldh  [$FFF2], a                               ; $6178: $E0 $F2
@@ -5202,7 +5209,7 @@ jr_002_613D:
     cp   MAP_SPECIAL                                      ; $618D: $FE $FF
     jr   z, jr_002_6197                           ; $618F: $28 $06
 
-    cp   $08                                      ; $6191: $FE $08
+    cp   MAP_TURTLE_ROCK                          ; $6191: $FE $08
     ld   a, $07                                   ; $6193: $3E $07
     jr   nc, jr_002_619C                          ; $6195: $30 $05
 

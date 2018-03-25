@@ -3256,7 +3256,7 @@ data_DD47::
 
 label_DD4B::
     ld   hl, $DB4B
-    ld   a, [$DB4C]
+    ld   a, [wMagicPowderCount]
     or   [hl]
     jp   nz, label_3F8D
     ld   de, data_DD47
@@ -4112,8 +4112,8 @@ label_E32D::
     ldh  [$FFA5], a
     ld   d, $0C
     call label_E472
-    ld   hl, $DB76
-    ld   de, $DB4C
+    ld   hl, wMaxMagicPowder
+    ld   de, wMagicPowderCount
 
 label_E35F::
     ld   a, [de]
@@ -4142,12 +4142,12 @@ label_E373::
 
 label_E37C::
     ret
-    ld   hl, $DB78
+    ld   hl, wMaxArrows
     ld   de, $DB45
     jr   label_E35F
     ld   d, $02
     call label_E472
-    ld   hl, $DB77
+    ld   hl, wMaxBombs
     ld   de, $DB4D
     jr   label_E35F
     xor  a

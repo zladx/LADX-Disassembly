@@ -3051,11 +3051,11 @@ label_538E::
 
 label_5394::
     ld   a, $30
-    ld   [$DB78], a
+    ld   [wMaxArrows], a
     ld   a, $30
-    ld   [$DB77], a
+    ld   [wMaxBombs], a
     ld   a, $20
-    ld   [$DB76], a
+    ld   [wMaxMagicPowder], a
     ld   a, $A3
     ld   [$DB9C], a
     ldh  [$FFF6], a

@@ -157,9 +157,9 @@ label_40D6::
     ld   [rOBP1], a
     ld   [wBGPalette], a
     ld   [rBGP], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   [$DB9D], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   [$DB9E], a
     call label_52A4
     ld   a, $80
@@ -515,9 +515,9 @@ label_42FB::
     ld   [rBGP], a
     ld   [$D6FB], a
     ld   [$D475], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   [$DB9D], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   [$DB9E], a
     call label_52A4
     ld   a, $01
@@ -705,10 +705,10 @@ GameplayWorldSubtype1Handler::
     ld   [wLinkMotionState], a
     call IncrementGameplaySubtype
     ld   a, [$DB9D]
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     ld   [$DBB1], a
     ld   a, [$DB9E]
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ld   [$DBB2], a
     ld   a, [$DBC8]
     ldh  [$FFA2], a
@@ -3817,11 +3817,11 @@ label_57B7::
     ld   [$D404], a
     ld   a, $52
     ld   [$D405], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     swap a
     and  $0F
     ld   e, a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     sub  a, $08
     and  $F0
     or   e
@@ -4935,7 +4935,7 @@ label_5FF0::
     jr   nz, label_5FDE
     ld   a, $D5
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
@@ -4943,7 +4943,7 @@ label_5FF0::
     ld   hl, $C310
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
@@ -5002,11 +5002,11 @@ label_6059::
     jr   nz, label_6047
     ld   a, $D4
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
@@ -5045,13 +5045,13 @@ label_609C::
     jr   nz, label_608A
     ld   a, $C1
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
     ld   hl, $D155
     call label_6118
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
@@ -5091,12 +5091,12 @@ label_60F7::
     ld   a, [$DB10]
     and  a
     jr   z, label_6117
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     add  a, $20
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, de
     add  a, $10
@@ -5144,11 +5144,11 @@ label_6141::
     jr   nz, label_612F
     ld   a, $6D
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
@@ -6013,14 +6013,14 @@ label_67D4::
 
 label_67DE::
     ld   e, a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     push af
     ld   a, $60
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ld   a, e
     call OpenDialogInTable1
     pop  af
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ret
 
 label_67EE::

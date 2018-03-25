@@ -935,26 +935,26 @@ label_CD66::
     ld   hl, data_CCA8
     add  hl, de
     ld   e, [hl]
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     push af
     ld   hl, $C4B0
     add  hl, bc
 
 label_CD7A::
     ld   a, [hl]
-    ldh  [$FF98], a
-    ldh  a, [$FF99]
+    ldh  [hLinkPositionX], a
+    ldh  a, [hLinkPositionY]
     push af
     ld   hl, $C4C0
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ld   a, e
     call label_FEC7
     pop  af
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     pop  af
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     jp   label_FF25
     call label_3A81
     call label_FF7E
@@ -2373,7 +2373,7 @@ label_D795::
     ld   hl, data_D701
     add  hl, de
     ld   a, [hl]
-    ld   hl, $FF98
+    ld   hl, hLinkPositionX
     add  a, [hl]
     ld   hl, $C200
     add  hl, bc
@@ -2381,7 +2381,7 @@ label_D795::
     ld   hl, data_D711
     add  hl, de
     ld   a, [hl]
-    ld   hl, $FF99
+    ld   hl, hLinkPositionY
     add  a, [hl]
     ld   hl, $C13B
     add  a, [hl]
@@ -2790,11 +2790,11 @@ label_DA14::
     jp   label_3F8D
 
 label_DA17::
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, bc
     sub  a, $0C
@@ -3077,7 +3077,7 @@ label_DBE1::
     ldh  [$FF9D], a
     ld   hl, $C200
     add  hl, bc
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     sub  a, $04
     ld   [hl], a
     call IsEntityFrameCounterZero
@@ -4158,13 +4158,13 @@ label_E37C::
     ld   [$C167], a
 
 label_E3A1::
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     push af
     add  a, $04
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     call label_E41E
     pop  af
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     jr   label_E3D2
     xor  a
     ld   [wActivePowerUp], a
@@ -4214,12 +4214,12 @@ label_E422::
     push de
     ld   hl, data_E3EE
     add  hl, de
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     ldh  [$FFD7], a
     ld   hl, data_E3F2
     add  hl, de
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     ldh  [$FFD8], a
     ld   a, $07
@@ -4492,13 +4492,13 @@ label_E614::
 
 label_E625::
     ldh  a, [$FFEE]
-    ld   hl, $FF98
+    ld   hl, hLinkPositionX
     sub  a, [hl]
     add  a, $18
     cp   $30
     jr   nc, label_E64A
     ldh  a, [$FFEF]
-    ld   hl, $FF99
+    ld   hl, hLinkPositionY
     sub  a, [hl]
     add  a, $18
     cp   $30
@@ -5363,13 +5363,13 @@ label_EBDE::
     and  a
     jr   nz, label_EC5A
     ld   hl, $FFEE
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     sub  a, [hl]
     add  a, $06
     cp   $0C
     jr   nc, label_EC5A
     ld   hl, $FFEC
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     sub  a, [hl]
     add  a, $06
     cp   $0C
@@ -5466,7 +5466,7 @@ label_EC77::
     ldh  a, [$FFEE]
     add  a, [hl]
     push hl
-    ld   hl, $FF98
+    ld   hl, hLinkPositionX
     sub  a, [hl]
     sub  a, $08
     cp   $80
@@ -5488,7 +5488,7 @@ label_EC98::
     ldh  a, [$FFEC]
     add  a, [hl]
     push hl
-    ld   hl, $FF99
+    ld   hl, hLinkPositionY
     sub  a, [hl]
     sub  a, $08
     cp   $80
@@ -6550,14 +6550,14 @@ label_F325::
     jr   label_F33E
 
 label_F330::
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     push af
     ld   a, $10
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ld   a, e
     call OpenDialog
     pop  af
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
 
 label_F33E::
     call IncrementEntityWalkingAttr
@@ -6837,10 +6837,10 @@ label_F4EC::
     xor  c
     rra
     jr   nc, label_F570
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, $08
     ldh  [$FFD7], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, $08
     ldh  [$FFD9], a
     ld   de, $FFEE
@@ -7368,26 +7368,26 @@ label_F834::
 
 label_F83B::
     ldh  [$FFD7], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     push af
     ld   hl, $C200
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF98], a
-    ldh  a, [$FF99]
+    ldh  [hLinkPositionX], a
+    ldh  a, [hLinkPositionY]
     push af
     ld   hl, $C210
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     push de
     ldh  a, [$FFD7]
     call label_FE45
     pop  de
     pop  af
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     pop  af
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     ret
 
 data_F85F::
@@ -8387,7 +8387,7 @@ label_FEC7::
 
 label_FED9::
     ld   e, $00
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, bc
     sub  a, [hl]
@@ -8401,7 +8401,7 @@ label_FEE7::
 
 label_FEE9::
     ld   e, $02
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, bc
     sub  a, [hl]

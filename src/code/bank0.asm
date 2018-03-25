@@ -1904,11 +1904,11 @@ IsZero:
 label_C0C::
     ld   a, $AF
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
@@ -2026,9 +2026,9 @@ label_CB6::
 
 label_CBE::
     ldh  a, [$FF9F]
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     ldh  a, [$FFA0]
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ret
 
 label_CC7::
@@ -2432,9 +2432,7 @@ WorldHandler::
     ld   [MBC3SelectBank], a
     call label_4C4B
     call label_4ABC
-    ld   a, $01
-    call SwitchBank
-    jp   WorldHandlerEntryPoint
+    jpsw WorldHandlerEntryPoint
 
 InventoryHandler::
     ld   a, $20
@@ -2459,7 +2457,8 @@ WorldDefaultHandler::
     ; If dialog is open, jump
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_F8F
+    jr   nz, .hasDialogOpen
+
     ; If [$FFB4] != 0…
     ld   hl, $FFB4
     ld   a, [hl]
@@ -2482,28 +2481,33 @@ WorldDefaultHandler::
 
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_F8F
+    jr   nz, .hasDialogOpen
+
+    ; If $C1BC > 0…
     ld   a, [$C1BC]
     and  a
-    jr   z, label_F8F
+    jr   z, .hasDialogOpen
     ld   hl, $FFA1
     ld   [hl], $02
     dec  a
     ld   [$C1BC], a
-    jr   nz, label_F8F
+    jr   nz, .hasDialogOpen
     jp   label_C7D
 
-label_F8F::
+.hasDialogOpen
+    
+    ; If $DBC7 > 0, decrement it
     ld   hl, $DBC7
     ld   a, [hl]
     and  a
-    jr   z, label_F97
+    jr   z, .DBC7End
     dec  [hl]
+.DBC7End
 
-label_F97::
-    ldh  a, [$FF98]
+    ; 
+    ldh  a, [hLinkPositionX]
     ldh  [$FF9F], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ldh  [$FFA0], a
     ld   hl, $FFA2
     sub  a, [hl]
@@ -2579,7 +2583,7 @@ label_102E::
     jr   z, label_101F
 
 label_1033::
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $FFA2
     sub  a, [hl]
     ld   [$C145], a
@@ -3170,14 +3174,14 @@ label_142F::
     ld   b, $00
     ld   hl, data_139D
     add  hl, bc
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
     ld   hl, data_13A1
     add  hl, bc
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     ld   hl, $C210
     add  hl, de
@@ -3410,7 +3414,7 @@ label_15CF::
     ld   d, $00
     ld   hl, $158F ; TODO: Check this
     add  hl, de
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     sub  a, $08
     and  $F0
@@ -3419,7 +3423,7 @@ label_15CF::
     ld   c, a
     ld   hl, $159B ; TODO: Check this
     add  hl, de
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     sub  a, $10
     and  $F0
@@ -3571,12 +3575,12 @@ label_16C2::
     ld   d, $00
     ld   hl, data_16BA
     add  hl, de
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     ldh  [$FFD7], a
     ld   hl, data_16BE
     add  hl, de
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     ldh  [$FFD8], a
 
@@ -3664,21 +3668,21 @@ label_1756::
     ld   hl, $C146
     or   [hl]
     ret  nz
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ldh  [$FFD7], a
     ld   a, [$C181]
     cp   $05
     jr   z, label_1781
     ld   a, $07
     ldh  [$FFF4], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, $06
     ldh  [$FFD8], a
     ld   a, $0B
     jp   label_CC7
 
 label_1781::
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ldh  [$FFD8], a
     ld   a, $0E
     ldh  [$FFF2], a
@@ -3704,7 +3708,7 @@ label_1794::
     ld   hl, $C13B
     add  a, [hl]
     ldh  [$FFD7], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ldh  [$FFD8], a
     ld   hl, $FFDA
     ld   [hl], $00
@@ -3724,7 +3728,7 @@ label_17C6::
     ld   l, a
     ld   a, [$C136]
     ldh  [$FFD9], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     cp   $88
     ret  nc
     jp   label_1819
@@ -3839,11 +3843,11 @@ label_1898::
     ld   c, $00
 
 label_18BA::
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     swap a
     and  $0F
     ld   e, a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     sub  a, $08
     and  $F0
     or   e
@@ -4599,7 +4603,7 @@ label_1D49::
     ldi  [hl], a
     ld   a, [$C13C]
     ld   c, a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, c
     ldi  [hl], a
     ld   a, $00
@@ -4647,7 +4651,7 @@ label_1DA1::
     inc  hl
     pop  af
     ldi  [hl], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, c
     add  a, $08
     ldi  [hl], a
@@ -4947,7 +4951,7 @@ label_1F69::
     ld   d, $00
     ld   hl, data_1F49
     add  hl, de
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     sub  a, $08
     and  $F0
@@ -4956,7 +4960,7 @@ label_1F69::
     ld   c, a
     ld   hl, data_1F4D
     add  hl, de
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     sub  a, $10
     and  $F0
@@ -5288,7 +5292,7 @@ label_21B6::
     add  a, [hl]
     ld   [hl], a
     rl   d
-    ld   hl, $FF98
+    ld   hl, hLinkPositionX
     add  hl, bc
     pop  af
     ld   e, $00

@@ -9180,6 +9180,8 @@ jr_004_7A2E:
     ld   a, $35                                   ; $7A59: $3E $35
     call OpenDialog                               ; $7A5B: $CD $85 $23
     pop  af                                       ; $7A5E: $F1
+
+label_004_7A5F::
     dec  a                                        ; $7A5F: $3D
     JP_TABLE                                      ; $7A60: $C7
     xor  c                                        ; $7A61: $A9

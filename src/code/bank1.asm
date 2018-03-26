@@ -157,9 +157,9 @@ label_40D6::
     ld   [rOBP1], a
     ld   [wBGPalette], a
     ld   [rBGP], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   [$DB9D], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   [$DB9E], a
     call label_52A4
     ld   a, $80
@@ -515,9 +515,9 @@ label_42FB::
     ld   [rBGP], a
     ld   [$D6FB], a
     ld   [$D475], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   [$DB9D], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   [$DB9E], a
     call label_52A4
     ld   a, $01
@@ -586,35 +586,19 @@ label_435C::
 WorldHandlerEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-._0 dw label_4395
-._1 dw label_442B
-._2 dw label_44B4
-._3 dw label_44DB
-._4 dw label_44F9
-._5 dw label_4500
-._6 dw label_4507
-._7 dw label_F48
+._0 dw GameplayWorldSubtype0Handler
+._1 dw GameplayWorldSubtype1Handler
+._2 dw GameplayWorldSubtype2Handler
+._3 dw GameplayWorldSubtype3Handler
+._4 dw GameplayWorldSubtype4Handler
+._5 dw GameplayWorldSubtype5Handler
+._6 dw GameplayWorldSubtype6Handler
+._7 dw WorldDefaultHandler
 
-label_4385::
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    jr   nc, label_438D
+data_4385::
+    db $00, $00, $00, $00, $00, $00, $30, $00, $00, $00, $00, $00, $00, $00, $00, $00
 
-label_438D::
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-
-label_4395::
+GameplayWorldSubtype0Handler::
     call label_27F2
     call IncrementGameplaySubtype
     ld   a, [ROM_DebugTool2]
@@ -628,8 +612,8 @@ label_43A7::
     ld   a, [wActiveRoom]
     and  a
     jr   z, label_4414
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_43B8
     ld   hl, $DDDA
     jr   label_43C5
@@ -649,12 +633,12 @@ label_43C5::
     ld   c, $05
 
 label_43CA::
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   z, label_43DB
-    cp   $08
+    cp   MAP_TURTLE_ROCK
     jr   z, label_43D8
-    cp   $0A
+    cp   MAP_CAVE_A
     jr   c, label_43DB
 
 label_43D8::
@@ -669,28 +653,28 @@ label_43DC::
     inc  de
     dec  c
     jr   nz, label_43CA
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_43E9
     ld   a, $0F
 
 label_43E9::
     ld   e, a
     ld   d, $00
-    ld   hl, label_4385
+    ld   hl, data_4385
     add  hl, de
     ld   a, [hl]
     ld   [$DBB0], a
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   z, label_440B
-    cp   $08
+    cp   MAP_TURTLE_ROCK
     jr   z, label_4425
-    cp   $0A
+    cp   MAP_CAVE_A
     jr   nc, label_4425
-    cp   $06
+    cp   MAP_FACE_SHRINE
     jr   nz, label_440B
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_4425
 
@@ -715,16 +699,16 @@ label_4425::
     ld   [wBGMapToLoad], a
     ret
 
-label_442B::
+GameplayWorldSubtype1Handler::
     call ClearLowerWRAM
     xor  a
     ld   [wLinkMotionState], a
     call IncrementGameplaySubtype
     ld   a, [$DB9D]
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     ld   [$DBB1], a
     ld   a, [$DB9E]
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ld   [$DBB2], a
     ld   a, [$DBC8]
     ldh  [$FFA2], a
@@ -745,8 +729,8 @@ label_4452::
     and  a
     jr   z, label_44A6
     ld   d, a
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_4475
     ld   d, $00
     jr   label_447E
@@ -775,7 +759,7 @@ label_4495::
     ld   a, [$DBCD]
     and  a
     jr   z, label_44A6
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jr   nz, label_44A6
     ld   a, $0C
@@ -792,7 +776,7 @@ label_44B0::
     ld   [wTileMapToLoad], a
     ret
 
-label_44B4::
+GameplayWorldSubtype2Handler::
     ld   a, $0F
     ldh  [$FF94], a
     ldh  a, [hIsGBC]
@@ -820,7 +804,7 @@ IncrementGameplaySubtypeAndReturn::
     inc  [hl]
     ret
 
-label_44DB::
+GameplayWorldSubtype3Handler::
     ld   a, $01
     ld   [wTileMapToLoad], a
     ld   a, [$D6FA]
@@ -838,17 +822,17 @@ label_44F5::
     call IncrementGameplaySubtype
     ret
 
-label_44F9::
+GameplayWorldSubtype4Handler::
     call label_3E3F
     call IncrementGameplaySubtype
     ret
 
-label_4500::
+GameplayWorldSubtype5Handler::
     call label_3E5A
     call IncrementGameplaySubtype
     ret
 
-label_4507::
+GameplayWorldSubtype6Handler::
     call label_5895
     ld   a, [$FF40]
     or   $20
@@ -2928,7 +2912,7 @@ label_5295::
 
 label_52A4::
     xor  a
-    ldh  [$FFF9], a
+    ldh  [hFFF9], a
     ld   a, [$DB5A]
     and  a
     jr   nz, label_52BB
@@ -3044,11 +3028,11 @@ label_5353::
     ldh  [$FFF6], a
     ld   [$DB9C], a
     ld   a, [$DB60]
-    ldh  [$FFF7], a
+    ldh  [hMapId], a
     ld   a, [$DB64]
     ld   [$DBAE], a
     xor  a
-    ldh  [$FFF9], a
+    ldh  [hFFF9], a
     ld   a, $03
     ldh  [$FF9E], a
     ld   a, [$DB5F]
@@ -3067,19 +3051,19 @@ label_538E::
 
 label_5394::
     ld   a, $30
-    ld   [$DB78], a
+    ld   [wMaxArrows], a
     ld   a, $30
-    ld   [$DB77], a
+    ld   [wMaxBombs], a
     ld   a, $20
-    ld   [$DB76], a
+    ld   [wMaxMagicPowder], a
     ld   a, $A3
     ld   [$DB9C], a
     ldh  [$FFF6], a
     ld   [$DB54], a
     ld   a, $01
     ld   [wActiveRoom], a
-    ld   a, $10
-    ldh  [$FFF7], a
+    ld   a, MAP_HOUSE
+    ldh  [hMapId], a
     ld   a, $50
     ld   [$DB9D], a
     ld   a, $60
@@ -3552,7 +3536,7 @@ label_5600::
     ldh  [$FFD8], a
     ld   a, $01
     ldh  [$FFD9], a
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     add  a, $B1
     ldh  [$FFDA], a
     pop  hl
@@ -3791,7 +3775,7 @@ label_577E::
     ld   a, [hl]
 
 label_5792::
-    call label_2385
+    call OpenDialog
     ld   a, [$C173]
     cp   $A7
     jr   z, label_57A3
@@ -3833,11 +3817,11 @@ label_57B7::
     ld   [$D404], a
     ld   a, $52
     ld   [$D405], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     swap a
     and  $0F
     ld   e, a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     sub  a, $08
     and  $F0
     or   e
@@ -4024,7 +4008,7 @@ label_5A59::
     ld   hl, label_5909
     add  hl, de
     ld   a, [hl]
-    jp   label_2385
+    jp   OpenDialog
 
 label_5A6B::
     db 0, 1, $FF
@@ -4654,8 +4638,8 @@ label_5E67::
     ld   a, [wActiveRoom]
     and  a
     jr   z, label_5E95
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_5E79
     ld   hl, $DDDA
     jr   label_5E8A
@@ -4906,17 +4890,17 @@ label_5FB3::
     ld   a, [wActiveRoom]
     and  a
     jr   z, label_5FD3
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     ret  nz
-    ldh  a, [$FFF7]
-    cp   $16
+    ldh  a, [hMapId]
+    cp   MAP_S_FACE_SHRINE
     ret  z
-    cp   $14
+    cp   MAP_KANALET
     ret  z
-    cp   $13
+    cp   MAP_DREAM_SHRINE
     ret  z
-    cp   $0A
+    cp   MAP_CAVE_A
     ret  c
     ldh  a, [$FFF6]
     cp   $FD
@@ -4951,7 +4935,7 @@ label_5FF0::
     jr   nz, label_5FDE
     ld   a, $D5
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
@@ -4959,7 +4943,7 @@ label_5FF0::
     ld   hl, $C310
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
@@ -5018,11 +5002,11 @@ label_6059::
     jr   nz, label_6047
     ld   a, $D4
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
@@ -5061,13 +5045,13 @@ label_609C::
     jr   nz, label_608A
     ld   a, $C1
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
     ld   hl, $D155
     call label_6118
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
@@ -5090,8 +5074,8 @@ label_609C::
     ldh  a, [$FFF6]
     cp   $A4
     jr   nz, label_60F7
-    ldh  a, [$FFF7]
-    cp   $11
+    ldh  a, [hMapId]
+    cp   MAP_CAVE_B
     jr   nz, label_60F7
     ld   a, $08
     ldh  [$FFF2], a
@@ -5107,12 +5091,12 @@ label_60F7::
     ld   a, [$DB10]
     and  a
     jr   z, label_6117
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     add  a, $20
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, de
     add  a, $10
@@ -5160,11 +5144,11 @@ label_6141::
     jr   nz, label_612F
     ld   a, $6D
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
@@ -5237,18 +5221,23 @@ label_61E9::
     inc  a
     ld   [$990A], a
     ret
+
+OpenDungeonNameDialog::
+    ; If wLinkMotionState == LINK_MOTION_INTERACTIVE…
     ld   a, [wLinkMotionState]
     cp   $00
-    jr   nz, label_6202
+    jr   nz, .return
+    ; … and Free Movement Mode is disabled…
     ld   a, [wFreeMovementMode]
     and  a
-    jr   nz, label_6202
-    ldh  a, [$FFF7]
+    jr   nz, .return
+    ; Open Dialog n° (hMapId + $56)
+    ldh  a, [hMapId]
     add  a, $56
-    call label_2385
-
-label_6202::
+    call OpenDialog
+.return
     ret
+
     ld   a, [$C19F]
     and  a
     jr   nz, label_6213
@@ -6024,14 +6013,14 @@ label_67D4::
 
 label_67DE::
     ld   e, a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     push af
     ld   a, $60
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ld   a, e
-    call label_2373
+    call OpenDialogInTable1
     pop  af
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ret
 
 label_67EE::
@@ -6070,8 +6059,8 @@ label_6829::
     cp   $04
     jr   nz, label_6855
     call label_5888
-    ldh  a, [$FFF7]
-    cp   $06
+    ldh  a, [hMapId]
+    cp   MAP_FACE_SHRINE
     jr   z, label_6849
     ld   a, $03
     ldh  [hWindowYUnused], a
@@ -6088,8 +6077,8 @@ label_6849::
 label_6855::
     ret
     ld   e, $21
-    ldh  a, [$FFF7]
-    cp   $06
+    ldh  a, [hMapId]
+    cp   MAP_FACE_SHRINE
     jr   z, label_6868
     ldh  a, [$FFF6]
     cp   $DD
@@ -6104,8 +6093,8 @@ label_6868::
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
     ld   e, $24
-    ldh  a, [$FFF7]
-    cp   $06
+    ldh  a, [hMapId]
+    cp   MAP_FACE_SHRINE
     jr   z, label_6885
     ldh  a, [$FFF6]
     cp   $DD
@@ -6144,8 +6133,8 @@ label_689E::
 
 label_68BF::
     ret
-    ldh  a, [$FFF7]
-    cp   $06
+    ldh  a, [hMapId]
+    cp   MAP_FACE_SHRINE
     jr   nz, label_68CF
     call label_6A7C
     ld   a, $07
@@ -6343,8 +6332,8 @@ label_6A76::
     ld   l, d
 
 label_6A7C::
-    ldh  a, [$FFF7]
-    cp   $06
+    ldh  a, [hMapId]
+    cp   MAP_FACE_SHRINE
     ret  nz
     xor  a
     ldh  [$FFF1], a
@@ -6512,7 +6501,7 @@ label_6B81::
     cp   $80
     jr   nz, label_6B99
     ld   a, $E7
-    call label_2385
+    call OpenDialog
 
 label_6B99::
     ret
@@ -6809,8 +6798,8 @@ label_6DEA::
     ld   a, [wActiveRoom]
     and  a
     jr   z, label_6E18
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_6DFF
     ld   a, $0F
     jr   label_6E03
@@ -6829,7 +6818,7 @@ label_6E03::
     ld   h, [hl]
     ld   l, a
     ld   [hl], $A3
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_6E18
     ld   [hl], $7F

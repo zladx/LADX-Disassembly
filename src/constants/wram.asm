@@ -181,8 +181,8 @@ wC181 equ $C181
   ds $1E
 
 wDialogState:: ; C19F
-  ; See DIALOG_* constants for possible values.
-  ; (only the lower byte is used)
+  ; Upper bit:    set if the dialog is displayed on bottom (instead of top)
+  ; Lowest bits:  the dialog state (see DIALOG_* constants for possible values)
   ds 1
 
 wC1A4 equ $C1A0
@@ -601,7 +601,10 @@ wArrowCount:: ; DB45
 
 ; Unlabeled
 wDB46 equ $DB46
-  ds 7
+  ds 6
+
+wMagicPowderCount:: ; DB4C
+  ds 1
 
 wBombCount:: ; DB4D
   ds 1
@@ -675,14 +678,24 @@ wIsThief:: ; DB6E
 wDB6F: ds 1
 wDB70: ds 1
 wDB71: ds 1
-wDB62: ds 1
+wDB72: ds 1
 
 wIsMarinFollowingLink:: ; DB73
   ds 1
 
 ; Unlabeled
 wDB74 equ $DB74
-  ds 5
+  ds 2
+
+wMaxMagicPowder:: ; DB76
+  ds 1
+
+wMaxBombs:: ; DB77
+  ; Maximum number of bombs that Link can carry
+  ds 1
+
+wMaxArrows:: ; DB78
+  ds 1
 
 wIsGhostFollowingLink:: ; DB79
   ds 1

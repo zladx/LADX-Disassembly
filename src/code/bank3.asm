@@ -224,7 +224,7 @@ label_C8AD::
     ld   a, [hl]
     and  $80
     jr   z, label_C918
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $30
     jr   z, label_C8C7
     jp   label_3F8D
@@ -448,7 +448,7 @@ label_CA32::
     ld   a, [$DBA5]
     and  a
     jr   z, label_CA46
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $FF
     jr   z, label_CA4D
 
@@ -480,10 +480,10 @@ label_CA6B::
 
 label_CA72::
     ret
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     rra
     jr   label_CA7A
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
 
 label_CA7A::
     and  $10
@@ -816,7 +816,7 @@ data_CCAC::
 data_CCB2::
     ld   e, $01
     ld   e, $61
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_CCDC
     ld   hl, $C3A0
@@ -935,26 +935,26 @@ label_CD66::
     ld   hl, data_CCA8
     add  hl, de
     ld   e, [hl]
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     push af
     ld   hl, $C4B0
     add  hl, bc
 
 label_CD7A::
     ld   a, [hl]
-    ldh  [$FF98], a
-    ldh  a, [$FF99]
+    ldh  [hLinkPositionX], a
+    ldh  a, [hLinkPositionY]
     push af
     ld   hl, $C4C0
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ld   a, e
     call label_FEC7
     pop  af
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     pop  af
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     jp   label_FF25
     call label_3A81
     call label_FF7E
@@ -1208,7 +1208,7 @@ label_CF24::
     ldh  a, [$FFF6]
     cp   $F8
     jr   nz, label_CF44
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     bit  4, a
     jp   nz, label_3F8D
     bit  5, a
@@ -1219,7 +1219,7 @@ label_CF24::
 label_CF44::
     cp   $7A
     jr   nz, label_CF54
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
     ld   a, $04
@@ -1231,7 +1231,7 @@ label_CF54::
     ld   a, [$D969]
     and  $10
     jp   z, label_3F8D
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
 
@@ -1496,7 +1496,7 @@ label_D12A::
     ld   a, [hl]
     or   $10
     ld   [hl], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     ret
 
 label_D134::
@@ -1505,7 +1505,7 @@ label_D134::
     ld   hl, $D800
     ldh  a, [$FFF6]
     ld   e, a
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_D14B
     ld   d, $00
@@ -1852,7 +1852,7 @@ label_D369::
     ldh  a, [$FFF1]
     and  a
     jr   nz, label_D392
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $1E
     jr   z, label_D378
     cp   $10
@@ -1866,12 +1866,12 @@ label_D378::
     and  $3F
     jr   nz, label_D38D
     ld   a, $28
-    call label_2385
+    call OpenDialog
     jp   label_3F8D
 
 label_D38D::
     ld   a, $99
-    call label_2373
+    call OpenDialogInTable1
 
 label_D392::
     jp   label_3F8D
@@ -2128,7 +2128,7 @@ label_D5FA::
     ld   a, [$C1BE]
     ld   hl, wActivePowerUp
     or   [hl]
-    ld   hl, $FFF9
+    ld   hl, hFFF9
     or   [hl]
     jr   nz, label_D60F
     ld   a, $34
@@ -2162,7 +2162,7 @@ label_D62E::
     jr   c, label_D648
     ld   [hl], b
     ld   a, [$C1BE]
-    ld   hl, $FFF9
+    ld   hl, hFFF9
     or   [hl]
     ld   hl, wActivePowerUp
     or   [hl]
@@ -2222,7 +2222,7 @@ label_D670::
     ld   hl, $C480
     add  hl, de
     ld   [hl], $03
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_D6D9
     ld   hl, $C3A0
@@ -2373,7 +2373,7 @@ label_D795::
     ld   hl, data_D701
     add  hl, de
     ld   a, [hl]
-    ld   hl, $FF98
+    ld   hl, hLinkPositionX
     add  a, [hl]
     ld   hl, $C200
     add  hl, bc
@@ -2381,14 +2381,14 @@ label_D795::
     ld   hl, data_D711
     add  hl, de
     ld   a, [hl]
-    ld   hl, $FF99
+    ld   hl, hLinkPositionY
     add  a, [hl]
     ld   hl, $C13B
     add  a, [hl]
     ld   hl, $C210
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_D7D7
     push hl
@@ -2450,7 +2450,7 @@ data_D823::
     ld   b, $04
     ld   [bc], a
     nop
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $15
     jr   nz, label_D835
     ld   a, [$DB56]
@@ -2774,8 +2774,8 @@ data_D9D8::
     ld   a, [hl]
     or   $20
     ld   [hl], a
-    ldh  [$FFF8], a
-    ldh  a, [$FFF7]
+    ldh  [hFFF8], a
+    ldh  a, [hMapId]
     ld   hl, $DA2E
     cp   $06
     jr   z, label_DA12
@@ -2790,11 +2790,11 @@ label_DA14::
     jp   label_3F8D
 
 label_DA17::
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, bc
     sub  a, $0C
@@ -2824,7 +2824,7 @@ data_DA4D::
     ld   [bc], a
     xor  h
     ldi  [hl], a
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
     ldh  a, [$FFF0]
@@ -2859,7 +2859,7 @@ data_DA4D::
     ldh  [$FF90], a
     jp   IncrementEntityWalkingAttr
     ld   a, $4F
-    call label_2385
+    call OpenDialog
     call IncrementEntityWalkingAttr
     ld   a, $01
     ld   [$C1AB], a
@@ -2903,7 +2903,7 @@ label_DABA::
     ld   hl, $DB5B
     inc  [hl]
     ld   a, $50
-    call label_2385
+    call OpenDialog
 
 label_DAED::
     jp   IncrementEntityWalkingAttr
@@ -3017,7 +3017,7 @@ label_DB99::
     ld   a, [$DB4E]
     and  a
     jr   nz, label_DBAC
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
     ld   de, data_DB97
@@ -3037,7 +3037,7 @@ label_DBBA::
     jr   nz, label_DBCB
     dec  [hl]
     ld   a, $9B
-    call label_2385
+    call OpenDialog
     xor  a
 
 label_DBCB::
@@ -3077,7 +3077,7 @@ label_DBE1::
     ldh  [$FF9D], a
     ld   hl, $C200
     add  hl, bc
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     sub  a, $04
     ld   [hl], a
     call IsEntityFrameCounterZero
@@ -3106,7 +3106,7 @@ data_DC47::
     db $8A, $14
 
 label_DC49::
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
     ld   de, data_DC47
@@ -3117,7 +3117,7 @@ label_DC49::
     jr   nz, label_DC67
     dec  [hl]
     ld   a, $93
-    call label_2385
+    call OpenDialog
     xor  a
 
 label_DC67::
@@ -3164,7 +3164,7 @@ label_DC99::
     ld   hl, data_DC84
     add  hl, de
     ld   a, [hl]
-    call label_2385
+    call OpenDialog
     ldh  a, [$FFF1]
     dec  a
     ld   e, a
@@ -3256,7 +3256,7 @@ data_DD47::
 
 label_DD4B::
     ld   hl, $DB4B
-    ld   a, [$DB4C]
+    ld   a, [wMagicPowderCount]
     or   [hl]
     jp   nz, label_3F8D
     ld   de, data_DD47
@@ -3267,7 +3267,7 @@ label_DD4B::
     jr   nz, label_DD6C
     dec  [hl]
     ld   a, $0F
-    call label_2385
+    call OpenDialog
     xor  a
 
 label_DD6C::
@@ -3402,10 +3402,10 @@ label_DE8B::
 label_DEAE::
     ld   a, c
     ld   [$D201], a
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $10
     jp   nz, label_3F8D
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     and  $03
     ldh  [$FFF1], a
     call label_394D
@@ -3429,10 +3429,10 @@ label_DEAE::
     jr   nz, label_DEFE
     dec  [hl]
     call IncrementEntityWalkingAttr
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     add  a, $00
-    call label_2373
-    ldh  a, [$FFF7]
+    call OpenDialogInTable1
+    ldh  a, [hMapId]
     ld   e, a
     ld   d, b
     ld   hl, $DB65
@@ -3595,7 +3595,7 @@ label_E029::
     ld   hl, $DB15
     call label_E373
     call label_D12A
-    ld   hl, $FFF8
+    ld   hl, hFFF8
     res  4, [hl]
     ld   e, $A2
     ld   a, [$DB15]
@@ -3608,7 +3608,7 @@ label_E029::
 
 label_E047::
     ld   a, e
-    call label_2385
+    call OpenDialog
     xor  a
 
 label_E04C::
@@ -3626,7 +3626,7 @@ label_E055::
     db   $DB
     and  a
     jr   z, label_E063
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $FF
     jr   z, label_E06A
 
@@ -3680,7 +3680,7 @@ label_E0B3::
     call label_FF25
     call label_EB7B
     call label_F893
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_E0E3
     ld   hl, $C2A0
@@ -3777,7 +3777,7 @@ label_E136::
 
 label_E143::
     ld   [hl], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_E156
     ld   hl, $C250
@@ -4112,8 +4112,8 @@ label_E32D::
     ldh  [$FFA5], a
     ld   d, $0C
     call label_E472
-    ld   hl, $DB76
-    ld   de, $DB4C
+    ld   hl, wMaxMagicPowder
+    ld   de, wMagicPowderCount
 
 label_E35F::
     ld   a, [de]
@@ -4126,7 +4126,7 @@ label_E35F::
 label_E367::
     ret
     ld   a, $EF
-    call label_2385
+    call OpenDialog
 
 label_E36D::
     call label_D12A
@@ -4142,12 +4142,12 @@ label_E373::
 
 label_E37C::
     ret
-    ld   hl, $DB78
+    ld   hl, wMaxArrows
     ld   de, $DB45
     jr   label_E35F
     ld   d, $02
     call label_E472
-    ld   hl, $DB77
+    ld   hl, wMaxBombs
     ld   de, $DB4D
     jr   label_E35F
     xor  a
@@ -4158,13 +4158,13 @@ label_E37C::
     ld   [$C167], a
 
 label_E3A1::
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     push af
     add  a, $04
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     call label_E41E
     pop  af
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     jr   label_E3D2
     xor  a
     ld   [wActivePowerUp], a
@@ -4214,12 +4214,12 @@ label_E422::
     push de
     ld   hl, data_E3EE
     add  hl, de
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     ldh  [$FFD7], a
     ld   hl, data_E3F2
     add  hl, de
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     ldh  [$FFD8], a
     ld   a, $07
@@ -4492,13 +4492,13 @@ label_E614::
 
 label_E625::
     ldh  a, [$FFEE]
-    ld   hl, $FF98
+    ld   hl, hLinkPositionX
     sub  a, [hl]
     add  a, $18
     cp   $30
     jr   nc, label_E64A
     ldh  a, [$FFEF]
-    ld   hl, $FF99
+    ld   hl, hLinkPositionY
     sub  a, [hl]
     add  a, $18
     cp   $30
@@ -4621,7 +4621,7 @@ label_E6FA::
     call label_EB34
 
 label_E706::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     ret  nz
     ld   a, [hl]
@@ -4678,7 +4678,7 @@ data_E76D::
     db 0, 0, $10, 0
 
 label_E771::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jp   nz, label_E8E5
     push bc
@@ -4829,7 +4829,7 @@ label_E865::
     ld   a, [hl]
     or   $04
     ld   [hl], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     jp   label_D1F5
 
 label_E878::
@@ -4837,7 +4837,7 @@ label_E878::
     ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_E88B
     ld   hl, $DDE0
@@ -4859,7 +4859,7 @@ label_E894::
     ld   a, [de]
     or   [hl]
     ld   [de], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     ld   hl, data_E75D
     add  hl, bc
     ld   a, [$DBAE]
@@ -4965,7 +4965,7 @@ label_E93C::
     ldh  a, [$FFF6]
     ld   c, a
     ld   b, $00
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $FF
     jr   nz, label_E954
     ld   hl, $DDE0
@@ -4983,7 +4983,7 @@ label_E95D::
     ld   a, [hl]
     or   $40
     ld   [hl], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
 
 label_E964::
     call label_2178
@@ -5290,7 +5290,7 @@ data_EB77::
     db $40, 8, $40, $40
 
 label_EB7B::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_EB8C
     call label_FF5E
@@ -5363,13 +5363,13 @@ label_EBDE::
     and  a
     jr   nz, label_EC5A
     ld   hl, $FFEE
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     sub  a, [hl]
     add  a, $06
     cp   $0C
     jr   nc, label_EC5A
     ld   hl, $FFEC
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     sub  a, [hl]
     add  a, $06
     cp   $0C
@@ -5466,7 +5466,7 @@ label_EC77::
     ldh  a, [$FFEE]
     add  a, [hl]
     push hl
-    ld   hl, $FF98
+    ld   hl, hLinkPositionX
     sub  a, [hl]
     sub  a, $08
     cp   $80
@@ -5488,7 +5488,7 @@ label_EC98::
     ldh  a, [$FFEC]
     add  a, [hl]
     push hl
-    ld   hl, $FF99
+    ld   hl, hLinkPositionY
     sub  a, [hl]
     sub  a, $08
     cp   $80
@@ -5557,7 +5557,7 @@ label_ECF9::
     ldh  a, [$FFB7]
     and  a
     jr   nz, label_ED1B
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_ED15
     ldh  a, [$FFA3]
@@ -5581,7 +5581,7 @@ label_ED1B::
     ld   [hl], $30
     ld   a, $0E
     ldh  [$FFF3], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_ED38
     ld   a, $10
@@ -5708,7 +5708,7 @@ label_EDFA::
 
 label_EE02::
     call label_F565
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_EE0E
 
@@ -6544,20 +6544,20 @@ label_F304::
 
 label_F325::
     ld   a, e
-    call label_2385
+    call OpenDialog
     ld   a, $5E
     ld   [$D368], a
     jr   label_F33E
 
 label_F330::
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     push af
     ld   a, $10
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     ld   a, e
-    call label_2385
+    call OpenDialog
     pop  af
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
 
 label_F33E::
     call IncrementEntityWalkingAttr
@@ -6837,10 +6837,10 @@ label_F4EC::
     xor  c
     rra
     jr   nc, label_F570
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, $08
     ldh  [$FFD7], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, $08
     ldh  [$FFD9], a
     ld   de, $FFEE
@@ -7368,26 +7368,26 @@ label_F834::
 
 label_F83B::
     ldh  [$FFD7], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     push af
     ld   hl, $C200
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF98], a
-    ldh  a, [$FF99]
+    ldh  [hLinkPositionX], a
+    ldh  a, [hLinkPositionY]
     push af
     ld   hl, $C210
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     push de
     ldh  a, [$FFD7]
     call label_FE45
     pop  de
     pop  af
-    ldh  [$FF99], a
+    ldh  [hLinkPositionY], a
     pop  af
-    ldh  [$FF98], a
+    ldh  [hLinkPositionX], a
     ret
 
 data_F85F::
@@ -7494,7 +7494,7 @@ label_F90C::
     ldh  a, [$FFD7]
     cp   $03
     jr   z, label_F973
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_F93D
     ld   hl, $C320
@@ -8387,7 +8387,7 @@ label_FEC7::
 
 label_FED9::
     ld   e, $00
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, bc
     sub  a, [hl]
@@ -8401,7 +8401,7 @@ label_FEE7::
 
 label_FEE9::
     ld   e, $02
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, bc
     sub  a, [hl]

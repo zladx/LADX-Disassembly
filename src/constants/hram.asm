@@ -45,9 +45,24 @@ hFF9A:: ; hFF9A
 hLinkAnimationState:: ; FF9D
  ds 1
 
+hLinkDirection:: ; FF9E
+  ; Direction Link is facing
+  ; 0 Right
+  ; 1 Left
+  ; 2 Top
+  ; 3 Down
+  ds 1
+
+hLinkFinalPositionX:: ; FF9F
+  ; Final computed position of Link, once every modifiers added
+  ds 1
+
+hLinkFinalPositionY:: ; FFA0
+  ; Final computed position of Link, once every modifiers added
+  ds 1
+
 ; Unlabeled
-hFF9E:: ; hFF9E
-  ds $B
+ds $8
 
 ; Unused (?) Window Y value
 hWindowYUnused:: ; FFA9
@@ -127,18 +142,34 @@ hSFX:: ; FFF3
 hFFF4: ds 1
 hFFF5: ds 1
 
-hMapIndex:: ; FFF6
-  ; currently loaded map
+hMapRoom:: ; FFF6
+  ; Room id on the active map
   ds 1
 
-hMapTileset:: ; FFF7
-  ; tileset index for the current map
-  ; See MAP_TILESET_* constants for values
+hMapId:: ; FFF7
+  ; Id of the current world map
+  ; See MAP_* constants for values
   ds 1
 
-; Unlabeled
-hFFF8:: ; hFFF8
-  ds $5
+hFFF8:: ; FFF8
+  ds 1
+
+hFFF9:: ; FFF9
+  ds 1
+
+hLinkRoomPosition:: ; FFFA
+  ; Position of Link in the current world room
+  ; Value goes from 0 (top left) to $79 (bottom right)
+  ; Not updated during room transitions
+  ds 1
+
+hLinkFinalRoomPosition:: ; FFFB
+  ; Final position of Link in the room, once modifiers applied
+  ds 1
+
+; Unused?
+hFFFC:: ; FFFC
+  ds 1
 
 hDidRenderFrame:: ; FFFD
  ds 1

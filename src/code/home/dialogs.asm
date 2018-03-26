@@ -60,24 +60,38 @@ DialogOpenAnimationStartHandler::
     ; Call 14:5449
     jp   $5449
 
-label_2373::
-    call label_2385
+; Open a dialog in the $100-$1FF range
+; Input:
+;   a: dialog index in table 1
+OpenDialogInTable1::
+    call OpenDialog
     ld   a, $01
     ld   [wDialogIndexHi], a
     ret
 
-label_237C::
-    call label_2385
+; Open a dialog in the $200-$2FF range
+; Input:
+;   a: dialog index in table 2
+OpenDialogInTable2::
+    call OpenDialog
     ld   a, $02
     ld   [wDialogIndexHi], a
     ret
 
-label_2385::
+; Open a dialog in the $00-$FF range
+; Input:
+;   a: dialog index in table 0
+OpenDialog::
+    ; Clear $C177
     push af
     xor  a
     ld   [$C177], a
     pop  af
+
+    ; Save the dialog index
     ld   [wDialogIndex], a
+
+    ; Initialize dialog variables
     xor  a
     ld   [$C16F], a
     ld   [wDialogCharacterIndex], a
@@ -86,6 +100,8 @@ label_2385::
     ld   [wDialogIndexHi], a
     ld   a, $0F
     ld   [$C5AB], a
+    ; Determine if the dialog is displayed on top or bottom
+    ; wDialogState = hLinkPositionY < $48 ? $81 : $01
     ldh  a, [hLinkPositionY]
     cp   $48
     rra

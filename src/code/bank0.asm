@@ -940,8 +940,8 @@ label_5BC::
     ld   e, l
     ld   d, h
     ld   hl, $5000
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_62F
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -1025,8 +1025,8 @@ label_69E::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_6CB
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_6CB
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -1904,11 +1904,11 @@ IsZero:
 label_C0C::
     ld   a, $AF
     call label_3B86
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
@@ -2025,10 +2025,10 @@ label_CB6::
     ret
 
 label_CBE::
-    ldh  a, [$FF9F]
-    ldh  [$FF98], a
-    ldh  a, [$FFA0]
-    ldh  [$FF99], a
+    ldh  a, [hLinkFinalPositionX]
+    ldh  [hLinkPositionX], a
+    ldh  a, [hLinkFinalPositionY]
+    ldh  [hLinkPositionY], a
     ret
 
 label_CC7::
@@ -2100,8 +2100,8 @@ label_D1E::
     ld   e, a
     ld   d, $00
     ld   hl, $6EB3
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_D3C
     ld   hl, $70B3
     jr   label_D45
@@ -2177,10 +2177,10 @@ label_D91::
     ld   hl, $70D3
     ld   a, [$DBA5]
     ld   d, a
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $1A
     jr   nc, label_DAB
-    cp   $06
+    cp   MAP_FACE_SHRINE
     jr   c, label_DAB
     inc  d
 
@@ -2190,8 +2190,8 @@ label_DAB::
     ld   a, d
     and  a
     jr   z, label_DC1
-    ldh  a, [$FFF7]
-    cp   $10
+    ldh  a, [hMapId]
+    cp   MAP_HOUSE
     jr   nz, label_DDB
     ldh  a, [$FFF6]
     cp   $B5
@@ -2223,8 +2223,8 @@ label_DDB::
     rl   d
     sla  e
     rl   d
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_DF1
     ld   a, $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a
@@ -2432,9 +2432,7 @@ WorldHandler::
     ld   [MBC3SelectBank], a
     call label_4C4B
     call label_4ABC
-    ld   a, $01
-    call SwitchBank
-    jp   WorldHandlerEntryPoint
+    jpsw WorldHandlerEntryPoint
 
 InventoryHandler::
     ld   a, $20
@@ -2452,60 +2450,69 @@ PhotoPictureHandler::
     call SwitchBank
     jp   label_4000
 
-label_F48::
+; World handler for GAMEPLAY_WORLD_DEFAULT (dispatched from WorldHandlerEntryPoint)
+WorldDefaultHandler::
     ld   a, $02
     call SwitchBank
+    ; If dialog is open, jump
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_F8F
-    ; Dialog is closed
+    jr   nz, .hasDialogOpen
+
+    ; If [$FFB4] != 0…
     ld   hl, $FFB4
     ld   a, [hl]
     and  a
-    jr   z, label_F75
+    jr   z, .noDungeonName
+    ; … and inventory window is not visible…
     ld   a, [wWindowY]
     cp   $80
-    jr   nz, label_F75
+    jr   nz, .noDungeonName
+    ; … and inventory is not opening…
     ld   a, [wInventoryAppearing]
     and  a
-    jr   nz, label_F75
+    jr   nz, .noDungeonName
+    ; … display the dungeon name.
     dec  [hl]
-    jr   nz, label_F75
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call label_61EE
+    jr   nz, .noDungeonName
+    callsb OpenDungeonNameDialog
     call ReloadSavedBank
+.noDungeonName
 
-label_F75::
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_F8F
+    jr   nz, .hasDialogOpen
+
+    ; If $C1BC > 0…
     ld   a, [$C1BC]
     and  a
-    jr   z, label_F8F
+    jr   z, .hasDialogOpen
     ld   hl, $FFA1
     ld   [hl], $02
     dec  a
     ld   [$C1BC], a
-    jr   nz, label_F8F
+    jr   nz, .hasDialogOpen
     jp   label_C7D
 
-label_F8F::
+.hasDialogOpen
+    
+    ; If $DBC7 > 0, decrement it
     ld   hl, $DBC7
     ld   a, [hl]
     and  a
-    jr   z, label_F97
+    jr   z, .DBC7End
     dec  [hl]
+.DBC7End
 
-label_F97::
-    ldh  a, [$FF98]
-    ldh  [$FF9F], a
-    ldh  a, [$FF99]
-    ldh  [$FFA0], a
+    ; 
+    ldh  a, [hLinkPositionX]
+    ldh  [hLinkFinalPositionX], a
+    ldh  a, [hLinkPositionY]
+    ldh  [hLinkFinalPositionY], a
     ld   hl, $FFA2
     sub  a, [hl]
     ldh  [$FFB3], a
-    call label_60E0
+    call func_002_60E0
     xor  a
     ld   [$C140], a
     ld   [$C13C], a
@@ -2515,7 +2522,7 @@ label_F97::
     ld   hl, $C11E
     res  7, [hl]
     call label_593B
-    callsw label_002_78E8
+    callsw ApplyMapTransition
     call label_1033
     ld   a, [$C15C]
     ld   [$C3CF], a
@@ -2576,7 +2583,7 @@ label_102E::
     jr   z, label_101F
 
 label_1033::
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ld   hl, $FFA2
     sub  a, [hl]
     ld   [$C145], a
@@ -2597,7 +2604,7 @@ label_1033::
     ld   hl, $102D
     add  hl, de
     ld   a, [hl]
-    call label_2385
+    call OpenDialog
     ld   a, $01
 
 label_1061::
@@ -3167,14 +3174,14 @@ label_142F::
     ld   b, $00
     ld   hl, data_139D
     add  hl, bc
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
     ld   hl, data_13A1
     add  hl, bc
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     ld   hl, $C210
     add  hl, de
@@ -3231,7 +3238,7 @@ UseMagicPowder::
     ret
 
 label_14A7::
-    ld   a, [$DB4C]
+    ld   a, [wMagicPowderCount]
     and  a
     jp   z, label_C20
     ld   a, $08
@@ -3264,7 +3271,7 @@ UseRocksFeather::
     ld   [$C153], a
     ld   a, $0D
     ldh  [$FFF2], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_1508
     call label_1508
@@ -3407,7 +3414,7 @@ label_15CF::
     ld   d, $00
     ld   hl, $158F ; TODO: Check this
     add  hl, de
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     sub  a, $08
     and  $F0
@@ -3416,7 +3423,7 @@ label_15CF::
     ld   c, a
     ld   hl, $159B ; TODO: Check this
     add  hl, de
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     sub  a, $10
     and  $F0
@@ -3568,12 +3575,12 @@ label_16C2::
     ld   d, $00
     ld   hl, data_16BA
     add  hl, de
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     ldh  [$FFD7], a
     ld   hl, data_16BE
     add  hl, de
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     ldh  [$FFD8], a
 
@@ -3605,7 +3612,7 @@ data_1701::
     db   0, 0, $E0, $20
 
 label_1705::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_1713
     ldh  a, [$FF9C]
@@ -3661,21 +3668,21 @@ label_1756::
     ld   hl, $C146
     or   [hl]
     ret  nz
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ldh  [$FFD7], a
     ld   a, [$C181]
     cp   $05
     jr   z, label_1781
     ld   a, $07
     ldh  [$FFF4], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, $06
     ldh  [$FFD8], a
     ld   a, $0B
     jp   label_CC7
 
 label_1781::
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     ldh  [$FFD8], a
     ld   a, $0E
     ldh  [$FFF2], a
@@ -3701,7 +3708,7 @@ label_1794::
     ld   hl, $C13B
     add  a, [hl]
     ldh  [$FFD7], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     ldh  [$FFD8], a
     ld   hl, $FFDA
     ld   [hl], $00
@@ -3721,7 +3728,7 @@ label_17C6::
     ld   l, a
     ld   a, [$C136]
     ldh  [$FFD9], a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     cp   $88
     ret  nc
     jp   label_1819
@@ -3819,14 +3826,14 @@ label_186C::
     ldh  [hLinkAnimationState], a
 
 label_1898::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     ldh  [$FFE4], a
     ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     xor  a
     ld   [wGameplaySubtype], a
     ld   [$C3CB], a
-    ldh  [$FFF9], a
+    ldh  [hFFF9], a
     ld   hl, $D401
     ld   a, [$DBA5]
     ldh  [$FFE6], a
@@ -3836,11 +3843,11 @@ label_1898::
     ld   c, $00
 
 label_18BA::
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     swap a
     and  $0F
     ld   e, a
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     sub  a, $08
     and  $F0
     or   e
@@ -3868,7 +3875,7 @@ label_18DF::
     ld   [$DBA5], a
     cp   $02
     jr   nz, label_18F2
-    ldh  [$FFF9], a
+    ldh  [hFFF9], a
     dec  a
     ld   [$DBA5], a
     ld   a, $01
@@ -3876,7 +3883,7 @@ label_18DF::
 
 label_18F2::
     ld   a, [hli]
-    ldh  [$FFF7], a
+    ldh  [hMapId], a
     ld   a, [$DBA5]
     and  a
     ld   a, [hli]
@@ -3896,7 +3903,7 @@ label_1909::
     ld   a, $14
     call SwitchBank
     push hl
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     swap a
     ld   e, a
     ld   d, $00
@@ -3906,8 +3913,8 @@ label_1909::
     rl   d
     ld   hl, $4220
     add  hl, de
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_192E
     ld   hl, $44E0
     jr   label_193C
@@ -3940,10 +3947,10 @@ label_1948::
     jr   nz, label_196E
     xor  a
     ld   [wActivePowerUp], a
-    ldh  a, [$FFF7]
-    cp   $0A
+    ldh  a, [hMapId]
+    cp   MAP_CAVE_A
     jr   nc, label_196E
-    callsw IsMapE8
+    callsw IsMapRoomE8
     ld   a, $30
     ldh  [$FFB4], a
     xor  a
@@ -3959,7 +3966,7 @@ label_196F::
     ld   a, [hl]
     ld   [$DB9E], a
     pop  hl
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_19DA
     ldh  a, [$FFE4]
@@ -3968,8 +3975,8 @@ label_196F::
     ld   a, [$DBA5]
     and  a
     jr   z, label_19C2
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_1993
     ld   hl, $4E3C
     jr   label_19A4
@@ -3991,8 +3998,8 @@ label_19A4::
     ld   [MBC3SelectBank], a
     call label_19C2
     push de
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_19B7
     ld   a, $3A
     jr   label_19BF
@@ -4069,7 +4076,7 @@ label_1A0F::
     xor  a
     ld   [wDidStealItem], a
     ld   a, $36
-    jp   label_2385
+    jp   OpenDialog
 
 label_1A21::
     ret
@@ -4121,7 +4128,7 @@ label_1A76::
     jr   label_1AC7
 
 label_1A78::
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_1A88
     ldh  a, [$FF9C]
@@ -4215,7 +4222,7 @@ AnimateMarinBeachTiles::
     jr   nz, AnimateTiles.doWorldAnimations
     and  b
     ldh  [$FFE0], a
-    ldh  [$FFA0], a
+    ldh  [hLinkFinalPositionY], a
     ld   h, b
 
 AnimateTiles::
@@ -4451,8 +4458,8 @@ label_1C51::
 label_1C54::
     ld   bc, $0040
     call CopyData
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_1C87
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -4492,8 +4499,8 @@ label_1C87::
     ld   h, $6F
     jp   label_1C51
     ld   hl, $DCC0
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_1CB8
     ld   de, $8400
     jp   label_1C54
@@ -4596,7 +4603,7 @@ label_1D49::
     ldi  [hl], a
     ld   a, [$C13C]
     ld   c, a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, c
     ldi  [hl], a
     ld   a, $00
@@ -4644,7 +4651,7 @@ label_1DA1::
     inc  hl
     pop  af
     ldi  [hl], a
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, c
     add  a, $08
     ldi  [hl], a
@@ -4944,7 +4951,7 @@ label_1F69::
     ld   d, $00
     ld   hl, data_1F49
     add  hl, de
-    ldh  a, [$FF98]
+    ldh  a, [hLinkPositionX]
     add  a, [hl]
     sub  a, $08
     and  $F0
@@ -4953,7 +4960,7 @@ label_1F69::
     ld   c, a
     ld   hl, data_1F4D
     add  hl, de
-    ldh  a, [$FF99]
+    ldh  a, [hLinkPositionY]
     add  a, [hl]
     sub  a, $10
     and  $F0
@@ -5033,7 +5040,7 @@ label_1FFE::
     and  a
     jr   z, label_2030
     ld   a, $78
-    call label_237C
+    call OpenDialogInTable2
     jp   label_20CF
 
 label_2030::
@@ -5094,15 +5101,15 @@ label_2080::
     jr   z, label_2093
 
 label_2088::
-    call label_2373
+    call OpenDialogInTable1
     jp   label_20CF
 
 label_208E::
-    call label_2385
+    call OpenDialog
     jr   label_20CF
 
 label_2093::
-    call label_237C
+    call OpenDialogInTable2
     jr   label_20CF
 
 label_2098::
@@ -5119,7 +5126,7 @@ label_2098::
     ldh  a, [$FFCC]
     and  $30
     jr   z, label_20CF
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_20BF
     ldh  a, [$FF9E]
@@ -5285,7 +5292,7 @@ label_21B6::
     add  a, [hl]
     ld   [hl], a
     rl   d
-    ld   hl, $FF98
+    ld   hl, hLinkPositionX
     add  hl, bc
     pop  af
     ld   e, $00
@@ -5400,8 +5407,8 @@ label_2262::
     and  a
     jr   z, label_2299
     ld   hl, $43B0
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_2291
     ld   hl, $4760
     jr   label_2291
@@ -5771,8 +5778,8 @@ label_2A12::
     ld   a, $08
     ld   [MBC3SelectBank], a
     ld   hl, $4AD4
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_2A23
     ld   hl, $4BD4
 
@@ -6013,7 +6020,7 @@ label_2C28::
     ld   a, $20
     call SwitchBank
     ld   hl, $4589
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     ld   e, a
     ld   d, $00
     cp   $FF
@@ -6053,8 +6060,8 @@ label_2C5D::
     pop  de
     push de
     ld   hl, $45A9
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_2C8A
     ld   hl, $45C9
 
@@ -6083,8 +6090,8 @@ label_2C8A::
     ld   l, $00
     ld   a, $12
     call SwitchAdjustedBank
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_2CD1
     ld   hl, $6100
     ld   a, $35
@@ -6097,10 +6104,10 @@ label_2CD1::
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ld   hl, $7D00
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   z, label_2CF5
-    cp   $0A
+    cp   MAP_CAVE_A
     jr   c, label_2CF5
     ld   a, $0C
     call SwitchAdjustedBank
@@ -6121,10 +6128,10 @@ label_2D07::
     ld   a, [$DBA5]
     and  a
     jr   z, label_2D17
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   z, label_2D21
-    cp   $0A
+    cp   MAP_CAVE_A
     jr   c, label_2D21
 
 label_2D17::
@@ -6292,8 +6299,8 @@ label_2E70::
     ld   de, $120E
 
 label_2E73::
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_2E84
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -6314,13 +6321,13 @@ label_2E85::
     ld   a, [$DBA5]
     and  a
     jr   z, label_2EB0
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   nz, label_2ED3
-    ldh  a, [$FFF7]
-    cp   $14
+    ldh  a, [hMapId]
+    cp   MAP_KANALET
     jr   z, label_2ED3
-    cp   $0A
+    cp   MAP_CAVE_A
     jr   c, label_2ED3
     ldh  a, [$FFF6]
     cp   $FD
@@ -6401,14 +6408,14 @@ label_2F12::
     ld   a, $0D
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     jr   z, label_2F4B
     ld   hl, $7000
-    ldh  a, [$FFF7]
-    cp   $06
+    ldh  a, [hMapId]
+    cp   MAP_FACE_SHRINE
     jr   z, label_2F41
-    cp   $0A
+    cp   MAP_CAVE_A
     jr   nc, label_2F3B
 
 label_2F36::
@@ -6427,8 +6434,8 @@ label_2F41::
     ret
 
 label_2F4B::
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_2F57
     ldh  a, [$FFF6]
     cp   $12
@@ -6445,8 +6452,8 @@ label_2F57::
     call CopyData
 
 label_2F69::
-    ldh  a, [$FFF7]
-    cp   $10
+    ldh  a, [hMapId]
+    cp   MAP_HOUSE
     jr   nz, label_2F87
     ldh  a, [$FFF6]
     cp   $B5
@@ -6463,7 +6470,7 @@ label_2F87::
     ldh  a, [hIsGBC]
     and  a
     ret  z
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     and  a
     ret  nz
     ld   a, $35
@@ -6511,10 +6518,10 @@ label_2FCD::
     sla  c
     rl   b
     ld   hl, $6749
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   z, label_2FEC
-    cp   $10
+    cp   MAP_HOUSE
     jr   nz, label_2FF1
     ldh  a, [$FFF6]
     cp   $B5
@@ -6575,10 +6582,10 @@ label_3019::
     and  a
     jr   z, label_304C
     ld   hl, $43B0
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   z, label_3047
-    cp   $10
+    cp   MAP_HOUSE
     jr   nz, label_304F
     ldh  a, [$FFF6]
     cp   $B5
@@ -6748,8 +6755,8 @@ label_313A::
     and  a
     jr   z, label_3161
     ld   hl, $D900
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_3156
     ld   hl, $DDE0
     jr   label_3161
@@ -6763,7 +6770,7 @@ label_3156::
 
 label_3161::
     add  hl, de
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     ld   a, [hl]
     jr   nz, label_316B
@@ -6771,7 +6778,7 @@ label_3161::
     ld   [hl], a
 
 label_316B::
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     ldh  a, [$FFF6]
     ld   c, a
     ld   b, $00
@@ -6783,8 +6790,8 @@ label_316B::
     ld   a, $0A
     ld   [MBC3SelectBank], a
     ldh  [$FFE8], a
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_318F
     ld   hl, $7B77
     jp   label_3224
@@ -6803,10 +6810,10 @@ label_318F::
 
 label_31A6::
     ld   hl, $4000
-    ldh  a, [$FFF7]
+    ldh  a, [hMapId]
     cp   $1A
     jr   nc, label_3224
-    cp   $06
+    cp   MAP_FACE_SHRINE
     jr   c, label_3224
     ld   a, $0B
     ld   [MBC3SelectBank], a
@@ -6974,7 +6981,7 @@ label_32A9::
 
 label_32B8::
     inc  bc
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     ld   e, a
     ld   a, [$DBA5]
     and  a
@@ -7334,8 +7341,8 @@ label_34AE::
     push af
 
 label_34B6::
-    ldh  a, [$FFF7]
-    cp   $0A
+    ldh  a, [hMapId]
+    cp   MAP_CAVE_A
     ldh  a, [$FFE0]
     jr   c, label_34C2
     cp   $A9
@@ -7598,7 +7605,7 @@ data_35F8::
 label_35FA::
     ld   e, 0
     call label_373F
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $04
     jp   nz, label_36B2
     push bc
@@ -7644,8 +7651,8 @@ label_36C4::
     ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_36D8
     ld   hl, $DDE0
     jr   label_36E1
@@ -7662,7 +7669,7 @@ label_36E1::
     pop  af
     or   [hl]
     ld   [hl], a
-    ldh  [$FFF8], a
+    ldh  [hFFF8], a
     ret
 
 data_36E8::
@@ -7707,7 +7714,7 @@ data_3724::
 label_3726::
     ld   e, $08
     call label_373F
-    ldh  a, [$FFF8]
+    ldh  a, [hFFF8]
     and  $04
     jp   nz, label_36B2
     push bc
@@ -7805,8 +7812,8 @@ label_37FE::
     ld   a, [$DBA5]
     and  a
     jr   z, label_3868
-    ldh  a, [$FFF7]
-    cp   $06
+    ldh  a, [hMapId]
+    cp   MAP_FACE_SHRINE
     jr   nz, label_3850
     ld   a, [$DB6F]
     ld   hl, $FFF6
@@ -7831,8 +7838,8 @@ label_37FE::
 
 label_3850::
     ld   hl, $4200
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     jr   nz, label_385E
     ld   hl, $4600
     jr   label_3868
@@ -8064,8 +8071,8 @@ label_39AE::
     ret  z
     xor  a
     ld   [$C3C1], a
-    ldh  a, [$FFF7]
-    cp   $0A
+    ldh  a, [hMapId]
+    cp   MAP_CAVE_A
     ldh  a, [hFrameCounter]
     jr   c, label_39C1
     xor  a
@@ -8490,7 +8497,7 @@ label_3C77::
     ld   a, [$C123]
     ld   c, a
     ld   b, $00
-    ldh  a, [$FFF9]
+    ldh  a, [hFFF9]
     and  a
     ldh  a, [$FFEC]
     jr   z, label_3C9C
@@ -8936,10 +8943,10 @@ label_3F2E::
     ld   a, [hl]
     and  $04
     ret  nz
-    ldh  a, [$FFF7]
-    cp   $FF
+    ldh  a, [hMapId]
+    cp   MAP_SPECIAL
     ret  z
-    cp   $05
+    cp   MAP_CATFISHS_MAW
     ret  z
     ld   e, a
     ld   d, b
@@ -8948,7 +8955,7 @@ label_3F2E::
     ld   a, [hl]
 
 label_3F45::
-    jp   label_2385
+    jp   OpenDialog
 
 data_3F48::
     db 1, 2, 4, 8, $10, $20, $40, $80

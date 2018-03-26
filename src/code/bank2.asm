@@ -112,7 +112,7 @@ jr_002_424F:
     add  hl, de                                   ; $426A: $19
     xor  a                                        ; $426B: $AF
     ld   [hl], a                                  ; $426C: $77
-    ldh  a, [hFF9E]                               ; $426D: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $426D: $F0 $9E
     ld   c, a                                     ; $426F: $4F
     ld   b, $00                                   ; $4270: $06 $00
     ld   hl, $424C                                ; $4272: $21 $4C $42
@@ -268,7 +268,7 @@ jr_002_4345:
     dec  a                                        ; $4354: $3D
     ld   [$C19B], a                               ; $4355: $EA $9B $C1
     and  $7F                                      ; $4358: $E6 $7F
-    ldh  a, [hFF9E]                               ; $435A: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $435A: $F0 $9E
     ld   e, a                                     ; $435C: $5F
     ld   d, $00                                   ; $435D: $16 $00
     ld   hl, $4346                                ; $435F: $21 $46 $43
@@ -283,7 +283,7 @@ jr_002_4367:
     ret                                           ; $436B: $C9
 
 func_002_436C::
-    ldh  a, [$FFF9]                               ; $436C: $F0 $F9
+    ldh  a, [hFFF9]                               ; $436C: $F0 $F9
     and  a                                        ; $436E: $A7
     jr   z, jr_002_43BA                           ; $436F: $28 $49
 
@@ -370,7 +370,7 @@ jr_002_43CE:
     ld   d, $00                                   ; $43DB: $16 $00
     ld   hl, $4905                                ; $43DD: $21 $05 $49
     add  hl, de                                   ; $43E0: $19
-    ldh  a, [hFF9E]                               ; $43E1: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $43E1: $F0 $9E
     cp   [hl]                                     ; $43E3: $BE
     jr   nz, jr_002_43F4                          ; $43E4: $20 $0E
 
@@ -406,8 +406,8 @@ jr_002_4416:
     and  a                                        ; $4419: $A7
     jr   jr_002_4427                              ; $441A: $18 $0B
 
-    ldh  a, [hMapTileset]                         ; $441C: $F0 $F7
-    cp   $FF                                      ; $441E: $FE $FF
+    ldh  a, [hMapId]                         ; $441C: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $441E: $FE $FF
     jr   nz, jr_002_4427                          ; $4420: $20 $05
 
     call func_002_438F                            ; $4422: $CD $8F $43
@@ -446,7 +446,7 @@ jr_002_443A:
     ld   a, e                                     ; $4452: $7B
     jr   nz, jr_002_4457                          ; $4453: $20 $02
 
-    ldh  [hFF9E], a                               ; $4455: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $4455: $E0 $9E
 
 jr_002_4457:
     jr   label_002_4464                           ; $4457: $18 $0B
@@ -565,7 +565,7 @@ jr_002_44E3:
     and  a                                        ; $44F0: $A7
     jp   z, label_002_45AC                        ; $44F1: $CA $AC $45
 
-    ldh  a, [$FFF9]                               ; $44F4: $F0 $F9
+    ldh  a, [hFFF9]                               ; $44F4: $F0 $F9
     and  a                                        ; $44F6: $A7
     jp   nz, label_002_45AC                       ; $44F7: $C2 $AC $45
 
@@ -733,7 +733,7 @@ label_002_4709::
     srl  a                                        ; $4714: $CB $3F
     ld   e, a                                     ; $4716: $5F
     ld   d, $00                                   ; $4717: $16 $00
-    ldh  a, [hFF9E]                               ; $4719: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $4719: $F0 $9E
     sla  a                                        ; $471B: $CB $27
     sla  a                                        ; $471D: $CB $27
     sla  a                                        ; $471F: $CB $27
@@ -745,13 +745,13 @@ label_002_4709::
     ld   [$C137], a                               ; $4728: $EA $37 $C1
     ld   hl, $46E9                                ; $472B: $21 $E9 $46
     add  hl, de                                   ; $472E: $19
-    ldh  a, [hFF9E]                               ; $472F: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $472F: $F0 $9E
     push af                                       ; $4731: $F5
     ld   a, [hl]                                  ; $4732: $7E
-    ldh  [hFF9E], a                               ; $4733: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $4733: $E0 $9E
     call label_002_4827                           ; $4735: $CD $27 $48
     pop  af                                       ; $4738: $F1
-    ldh  [hFF9E], a                               ; $4739: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $4739: $E0 $9E
     ldh  a, [hFrameCounter]                       ; $473B: $F0 $E7
     and  $03                                      ; $473D: $E6 $03
     jr   nz, jr_002_4745                          ; $473F: $20 $04
@@ -815,7 +815,7 @@ func_002_478C::
     ld   hl, $46C5                                ; $479B: $21 $C5 $46
     add  hl, de                                   ; $479E: $19
     ld   a, [hl]                                  ; $479F: $7E
-    ldh  [hFF9E], a                               ; $47A0: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $47A0: $E0 $9E
     ret                                           ; $47A2: $C9
 
 jr_002_47A3:
@@ -828,7 +828,7 @@ jr_002_47A3:
     or   [hl]                                     ; $47B0: $B6
     jr   nz, jr_002_47E0                          ; $47B1: $20 $2D
 
-    ldh  a, [hFF9E]                               ; $47B3: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $47B3: $F0 $9E
     rla                                           ; $47B5: $17
     rla                                           ; $47B6: $17
     and  $0C                                      ; $47B7: $E6 $0C
@@ -904,7 +904,7 @@ jr_002_4823:
 
 label_002_4827::
     ld   hl, $C137                                ; $4827: $21 $37 $C1
-    ldh  a, [hFF9E]                               ; $482A: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $482A: $F0 $9E
     ld   e, a                                     ; $482C: $5F
     sla  a                                        ; $482D: $CB $27
     sla  a                                        ; $482F: $CB $27
@@ -1019,7 +1019,7 @@ Data_002_48C5::
     ldh  a, [hLinkPositionY]                      ; $496A: $F0 $99
     add  $10                                      ; $496C: $C6 $10
     ldh  [hLinkPositionY], a                      ; $496E: $E0 $99
-    ldh  [$FFA0], a                               ; $4970: $E0 $A0
+    ldh  [hLinkFinalPositionY], a                               ; $4970: $E0 $A0
     ldh  a, [$FFA2]                               ; $4972: $F0 $A2
     add  $10                                      ; $4974: $C6 $10
     ldh  [$FFA2], a                               ; $4976: $E0 $A2
@@ -1032,7 +1032,7 @@ jr_002_4978:
     ldh  a, [hLinkPositionY]                      ; $497F: $F0 $99
     add  $08                                      ; $4981: $C6 $08
     ldh  [hLinkPositionY], a                      ; $4983: $E0 $99
-    ldh  [$FFA0], a                               ; $4985: $E0 $A0
+    ldh  [hLinkFinalPositionY], a                               ; $4985: $E0 $A0
     ldh  a, [$FFA2]                               ; $4987: $F0 $A2
     add  $08                                      ; $4989: $C6 $08
     ldh  [$FFA2], a                               ; $498B: $E0 $A2
@@ -1194,7 +1194,7 @@ jr_002_4A7C:
     jr   nz, jr_002_4AB2                          ; $4A99: $20 $17
 
     ld   a, $77                                   ; $4A9B: $3E $77
-    call label_237C                               ; $4A9D: $CD $7C $23
+    call OpenDialogInTable2                               ; $4A9D: $CD $7C $23
     jr   jr_002_4AB2                              ; $4AA0: $18 $10
 
 jr_002_4AA2:
@@ -1203,7 +1203,7 @@ jr_002_4AA2:
     jr   nz, jr_002_4AB2                          ; $4AA6: $20 $0A
 
     ld   a, $8E                                   ; $4AA8: $3E $8E
-    call label_2385                               ; $4AAA: $CD $85 $23
+    call OpenDialog                               ; $4AAA: $CD $85 $23
     xor  a                                        ; $4AAD: $AF
     ld   [wC167], a                               ; $4AAE: $EA $67 $C1
     ret                                           ; $4AB1: $C9
@@ -1311,8 +1311,8 @@ func_002_4B49::
     and  a                                        ; $4B4C: $A7
     jr   z, jr_002_4BBF                           ; $4B4D: $28 $70
 
-    ldh  a, [hMapTileset]                         ; $4B4F: $F0 $F7
-    cp   $08                                      ; $4B51: $FE $08
+    ldh  a, [hMapId]                         ; $4B4F: $F0 $F7
+    cp   MAP_TURTLE_ROCK                                      ; $4B51: $FE $08
     jr   nz, jr_002_4B64                          ; $4B53: $20 $0F
 
     ld   a, [$D219]                               ; $4B55: $FA $19 $D2
@@ -1357,7 +1357,7 @@ jr_002_4B85:
     jr   nz, jr_002_4BA1                          ; $4B9A: $20 $05
 
     ld   a, $79                                   ; $4B9C: $3E $79
-    call label_237C                               ; $4B9E: $CD $7C $23
+    call OpenDialogInTable2                               ; $4B9E: $CD $7C $23
 
 jr_002_4BA1:
     xor  a                                        ; $4BA1: $AF
@@ -1372,7 +1372,7 @@ jr_002_4BA9:
     rra                                           ; $4BAC: $1F
     and  $01                                      ; $4BAD: $E6 $01
     ld   e, a                                     ; $4BAF: $5F
-    ldh  a, [hFF9E]                               ; $4BB0: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $4BB0: $F0 $9E
     sla  a                                        ; $4BB2: $CB $27
     add  e                                        ; $4BB4: $83
     ld   e, a                                     ; $4BB5: $5F
@@ -1585,7 +1585,7 @@ jr_002_4CC1:
     and  a                                        ; $4CCB: $A7
     jr   nz, jr_002_4CD3                          ; $4CCC: $20 $05
 
-    ldh  a, [hMapIndex]                           ; $4CCE: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $4CCE: $F0 $F6
     cp   $0E                                      ; $4CD0: $FE $0E
     ret  z                                        ; $4CD2: $C8
 
@@ -1646,11 +1646,11 @@ func_002_4D20::
     or   [hl]                                     ; $4D26: $B6
     ld   hl, wLinkMotionState                     ; $4D27: $21 $1C $C1
     or   [hl]                                     ; $4D2A: $B6
-    ld   hl, $FFF9                                ; $4D2B: $21 $F9 $FF
+    ld   hl, hFFF9                                ; $4D2B: $21 $F9 $FF
     or   [hl]                                     ; $4D2E: $B6
     jp   nz, label_002_4D95                       ; $4D2F: $C2 $95 $4D
 
-    ldh  a, [hFF9E]                               ; $4D32: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $4D32: $F0 $9E
     ld   e, a                                     ; $4D34: $5F
     ld   d, $00                                   ; $4D35: $16 $00
     ld   hl, $4BC0                                ; $4D37: $21 $C0 $4B
@@ -1939,7 +1939,7 @@ jr_002_4EA1:
     ld   a, $FB                                   ; $4EB8: $3E $FB
     ldh  [hLinkPositionY], a                      ; $4EBA: $E0 $99
     ld   a, $02                                   ; $4EBC: $3E $02
-    ldh  [hFF9E], a                               ; $4EBE: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $4EBE: $E0 $9E
     ld   a, $04                                   ; $4EC0: $3E $04
     ldh  [hLinkAnimationState], a                 ; $4EC2: $E0 $9D
 
@@ -2169,7 +2169,7 @@ jr_002_4FFA:
     cp   $0F                                      ; $4FFF: $FE $0F
     jr   z, jr_002_5005                           ; $5001: $28 $02
 
-    ldh  [hFF9E], a                               ; $5003: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $5003: $E0 $9E
 
 jr_002_5005:
     call label_1A50                               ; $5005: $CD $50 $1A
@@ -2197,21 +2197,21 @@ jr_002_5015:
     ldh  [$FF9C], a                               ; $5022: $E0 $9C
 
 jr_002_5024:
-    ldh  a, [hMapTileset]                         ; $5024: $F0 $F7
+    ldh  a, [hMapId]                         ; $5024: $F0 $F7
     and  a                                        ; $5026: $A7
     jr   z, jr_002_5035                           ; $5027: $28 $0C
 
     cp   $1F                                      ; $5029: $FE $1F
     jr   nz, jr_002_507A                          ; $502B: $20 $4D
 
-    ldh  a, [hMapIndex]                           ; $502D: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $502D: $F0 $F6
     cp   $F2                                      ; $502F: $FE $F2
     jr   nz, jr_002_5079                          ; $5031: $20 $46
 
     jr   jr_002_503B                              ; $5033: $18 $06
 
 jr_002_5035:
-    ldh  a, [hMapIndex]                           ; $5035: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $5035: $F0 $F6
     cp   $78                                      ; $5037: $FE $78
     jr   nz, jr_002_5079                          ; $5039: $20 $3E
 
@@ -2256,7 +2256,7 @@ jr_002_5079:
     ret                                           ; $5079: $C9
 
 jr_002_507A:
-    ldh  a, [hMapIndex]                           ; $507A: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $507A: $F0 $F6
     cp   $8D                                      ; $507C: $FE $8D
     jr   nz, jr_002_50A2                          ; $507E: $20 $22
 
@@ -2345,7 +2345,7 @@ jr_002_50F6:
     and  a                                        ; $5106: $A7
     jr   nz, jr_002_512B                          ; $5107: $20 $22
 
-    ldh  a, [hMapIndex]                           ; $5109: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $5109: $F0 $F6
     cp   $01                                      ; $510B: $FE $01
     jr   z, jr_002_511B                           ; $510D: $28 $0C
 
@@ -2412,16 +2412,16 @@ jr_002_516A:
     and  a                                        ; $516D: $A7
     jr   nz, jr_002_5176                          ; $516E: $20 $06
 
-    ldh  a, [hMapIndex]                           ; $5170: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $5170: $F0 $F6
     cp   $1E                                      ; $5172: $FE $1E
     jr   z, jr_002_5155                           ; $5174: $28 $DF
 
 jr_002_5176:
-    ldh  a, [hMapTileset]                         ; $5176: $F0 $F7
-    cp   $0A                                      ; $5178: $FE $0A
+    ldh  a, [hMapId]                         ; $5176: $F0 $F7
+    cp   MAP_CAVE_A                                      ; $5178: $FE $0A
     jr   nz, jr_002_51AC                          ; $517A: $20 $30
 
-    ldh  a, [hMapIndex]                           ; $517C: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $517C: $F0 $F6
     cp   $7A                                      ; $517E: $FE $7A
     jr   z, jr_002_518E                           ; $5180: $28 $0C
 
@@ -2449,7 +2449,7 @@ jr_002_518E:
     ld   a, $24                                   ; $51A0: $3E $24
     ld   [$DBC8], a                               ; $51A2: $EA $C8 $DB
     ld   a, $03                                   ; $51A5: $3E $03
-    ldh  [hFF9E], a                               ; $51A7: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $51A7: $E0 $9E
     jp   $0C83                                    ; $51A9: $C3 $83 $0C
 
 jr_002_51AC:
@@ -2600,7 +2600,7 @@ jr_002_5283:
     and  a                                        ; $5289: $A7
     jr   nz, jr_002_529C                          ; $528A: $20 $10
 
-    ldh  a, [hMapIndex]                           ; $528C: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $528C: $F0 $F6
     cp   $2B                                      ; $528E: $FE $2B
     jr   nz, jr_002_529C                          ; $5290: $20 $0A
 
@@ -2640,10 +2640,10 @@ label_002_52B9::
     ld   [$DBC7], a                               ; $52BB: $EA $C7 $DB
     ld   a, [$DBB1]                               ; $52BE: $FA $B1 $DB
     ldh  [hLinkPositionX], a                      ; $52C1: $E0 $98
-    ldh  [$FF9F], a                               ; $52C3: $E0 $9F
+    ldh  [hLinkFinalPositionX], a                               ; $52C3: $E0 $9F
     ld   a, [$DBB2]                               ; $52C5: $FA $B2 $DB
     ldh  [hLinkPositionY], a                      ; $52C8: $E0 $99
-    ldh  [$FFA0], a                               ; $52CA: $E0 $A0
+    ldh  [hLinkFinalPositionY], a                               ; $52CA: $E0 $A0
     ld   hl, $FFA2                                ; $52CC: $21 $A2 $FF
     sub  [hl]                                     ; $52CF: $96
     ld   [$C145], a                               ; $52D0: $EA $45 $C1
@@ -2704,7 +2704,7 @@ label_002_5310::
     ld   a, [$C19B]                               ; $5310: $FA $9B $C1
     and  $7F                                      ; $5313: $E6 $7F
     cp   $08                                      ; $5315: $FE $08
-    ldh  a, [hFF9E]                               ; $5317: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $5317: $F0 $9E
     jr   c, jr_002_531D                           ; $5319: $38 $02
 
     add  $04                                      ; $531B: $C6 $04
@@ -2789,7 +2789,7 @@ jr_002_5366:
     inc  b                                        ; $538A: $04
 
 label_002_538B::
-    ldh  a, [hFF9E]                               ; $538B: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $538B: $F0 $9E
     ld   c, a                                     ; $538D: $4F
     ld   b, $00                                   ; $538E: $06 $00
     ld   hl, $5383                                ; $5390: $21 $83 $53
@@ -2886,13 +2886,13 @@ label_002_5420::
 
 label_002_5425::
     push bc                                       ; $5425: $C5
-    ldh  a, [hMapTileset]                         ; $5426: $F0 $F7
-    cp   $FF                                      ; $5428: $FE $FF
+    ldh  a, [hMapId]                         ; $5426: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $5428: $FE $FF
     ld   a, $30                                   ; $542A: $3E $30
     jr   z, jr_002_5438                           ; $542C: $28 $0A
 
-    ldh  a, [hMapTileset]                         ; $542E: $F0 $F7
-    cp   $0A                                      ; $5430: $FE $0A
+    ldh  a, [hMapId]                         ; $542E: $F0 $F7
+    cp   MAP_CAVE_A                                      ; $5430: $FE $0A
     ld   a, $30                                   ; $5432: $3E $30
     jr   c, jr_002_5438                           ; $5434: $38 $02
 
@@ -2905,12 +2905,12 @@ jr_002_5438:
     ld   hl, wEntity0PosX                         ; $543D: $21 $00 $C2
     add  hl, de                                   ; $5440: $19
     ld   [hl], $28                                ; $5441: $36 $28
-    ldh  a, [hMapTileset]                         ; $5443: $F0 $F7
-    cp   $FF                                      ; $5445: $FE $FF
+    ldh  a, [hMapId]                         ; $5443: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $5445: $FE $FF
     jr   nz, jr_002_5453                          ; $5447: $20 $0A
 
     ld   [hl], $48                                ; $5449: $36 $48
-    ldh  a, [hMapIndex]                           ; $544B: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $544B: $F0 $F6
     cp   $08                                      ; $544D: $FE $08
     jr   nz, jr_002_5453                          ; $544F: $20 $02
 
@@ -2920,12 +2920,12 @@ jr_002_5453:
     ld   hl, wEntitiesPosYTable                   ; $5453: $21 $10 $C2
     add  hl, de                                   ; $5456: $19
     ld   [hl], $3C                                ; $5457: $36 $3C
-    ldh  a, [hMapTileset]                         ; $5459: $F0 $F7
-    cp   $FF                                      ; $545B: $FE $FF
+    ldh  a, [hMapId]                         ; $5459: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $545B: $FE $FF
     jr   nz, jr_002_5469                          ; $545D: $20 $0A
 
     ld   [hl], $3C                                ; $545F: $36 $3C
-    ldh  a, [hMapIndex]                           ; $5461: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $5461: $F0 $F6
     cp   $08                                      ; $5463: $FE $08
     jr   nz, jr_002_5469                          ; $5465: $20 $02
 
@@ -3091,7 +3091,7 @@ jr_002_552A:
     and  a                                        ; $554A: $A7
     jr   nz, jr_002_5566                          ; $554B: $20 $19
 
-    ldh  a, [hMapIndex]                           ; $554D: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $554D: $F0 $F6
     cp   $77                                      ; $554F: $FE $77
     jr   nz, jr_002_5560                          ; $5551: $20 $0D
 
@@ -3358,7 +3358,7 @@ jr_002_568C:
     ldh  [$FFD8], a                               ; $56A4: $E0 $D8
     ld   a, $60                                   ; $56A6: $3E $60
     ldh  [$FFCE], a                               ; $56A8: $E0 $CE
-    ldh  a, [hMapIndex]                           ; $56AA: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $56AA: $F0 $F6
     cp   $B5                                      ; $56AC: $FE $B5
     ld   a, $10                                   ; $56AE: $3E $10
     jr   nz, jr_002_56B8                          ; $56B0: $20 $06
@@ -3403,7 +3403,7 @@ jr_002_56B8:
     jr   nz, label_002_5707                       ; $56EE: $20 $17
 
     ld   hl, $D727                                ; $56F0: $21 $27 $D7
-    ldh  a, [hMapIndex]                           ; $56F3: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $56F3: $F0 $F6
     cp   $B5                                      ; $56F5: $FE $B5
     jr   nz, jr_002_56FC                          ; $56F7: $20 $03
 
@@ -4143,15 +4143,15 @@ jr_002_5B6F:
 
 func_002_5B9F::
     ld   hl, wMinimapTiles                        ; $5B9F: $21 $00 $D8
-    ldh  a, [hMapIndex]                           ; $5BA2: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $5BA2: $F0 $F6
     ld   e, a                                     ; $5BA4: $5F
     ld   a, [wActiveRoom]                         ; $5BA5: $FA $A5 $DB
     ld   d, a                                     ; $5BA8: $57
     and  a                                        ; $5BA9: $A7
     jr   z, jr_002_5BC2                           ; $5BAA: $28 $16
 
-    ldh  a, [hMapTileset]                         ; $5BAC: $F0 $F7
-    cp   $FF                                      ; $5BAE: $FE $FF
+    ldh  a, [hMapId]                         ; $5BAC: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $5BAE: $FE $FF
     jr   nz, jr_002_5BB9                          ; $5BB0: $20 $07
 
     ld   d, $00                                   ; $5BB2: $16 $00
@@ -4421,14 +4421,14 @@ jr_002_5D21:
     jr   z, jr_002_5D36                           ; $5D28: $28 $0C
 
     ld   hl, $D900                                ; $5D2A: $21 $00 $D9
-    ldh  a, [hMapTileset]                         ; $5D2D: $F0 $F7
-    cp   $FF                                      ; $5D2F: $FE $FF
+    ldh  a, [hMapId]                         ; $5D2D: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $5D2F: $FE $FF
     jr   nz, jr_002_5D36                          ; $5D31: $20 $03
 
     ld   hl, $DDE0                                ; $5D33: $21 $E0 $DD
 
 jr_002_5D36:
-    ldh  a, [hMapIndex]                           ; $5D36: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $5D36: $F0 $F6
     ld   e, a                                     ; $5D38: $5F
     ld   d, $00                                   ; $5D39: $16 $00
     add  hl, de                                   ; $5D3B: $19
@@ -4571,7 +4571,7 @@ label_002_5E02::
     ret                                           ; $5E02: $C9
 
     call func_002_5DAF                            ; $5E03: $CD $AF $5D
-    ldh  a, [hMapIndex]                           ; $5E06: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $5E06: $F0 $F6
     cp   $69                                      ; $5E08: $FE $69
     jr   nz, jr_002_5E15                          ; $5E0A: $20 $09
 
@@ -4584,7 +4584,7 @@ label_002_5E02::
 jr_002_5E15:
     jp   label_002_5425                           ; $5E15: $C3 $25 $54
 
-    ldh  a, [hMapTileset]                         ; $5E18: $F0 $F7
+    ldh  a, [hMapId]                         ; $5E18: $F0 $F7
     ld   e, a                                     ; $5E1A: $5F
     ld   d, $00                                   ; $5E1B: $16 $00
     ld   hl, wHasInstrument1                      ; $5E1D: $21 $65 $DB
@@ -4609,7 +4609,7 @@ jr_002_5E2E:
     cp   $C1                                      ; $5E36: $FE $C1
     jr   nz, jr_002_5E6A                          ; $5E38: $20 $30
 
-    ldh  a, [hMapTileset]                         ; $5E3A: $F0 $F7
+    ldh  a, [hMapId]                         ; $5E3A: $F0 $F7
     ld   e, a                                     ; $5E3C: $5F
     ld   d, $00                                   ; $5E3D: $16 $00
     ld   hl, wHasInstrument1                      ; $5E3F: $21 $65 $DB
@@ -4618,11 +4618,11 @@ jr_002_5E2E:
     or   $01                                      ; $5E44: $F6 $01
     ld   [hl], a                                  ; $5E46: $77
     ld   d, $00                                   ; $5E47: $16 $00
-    ldh  a, [hMapIndex]                           ; $5E49: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $5E49: $F0 $F6
     ld   e, a                                     ; $5E4B: $5F
     ld   hl, $D900                                ; $5E4C: $21 $00 $D9
-    ldh  a, [hMapTileset]                         ; $5E4F: $F0 $F7
-    cp   $FF                                      ; $5E51: $FE $FF
+    ldh  a, [hMapId]                         ; $5E4F: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $5E51: $FE $FF
     jr   nz, jr_002_5E5A                          ; $5E53: $20 $05
 
     ld   hl, $DDE0                                ; $5E55: $21 $E0 $DD
@@ -4887,8 +4887,8 @@ func_002_5F9F::
     ld   h, b                                     ; $5FC4: $60
     ret                                           ; $5FC5: $C9
 
-    ldh  a, [hMapTileset]                         ; $5FC6: $F0 $F7
-    cp   $06                                      ; $5FC8: $FE $06
+    ldh  a, [hMapId]                         ; $5FC6: $F0 $F7
+    cp   MAP_FACE_SHRINE                                      ; $5FC8: $FE $06
     jr   nz, jr_002_5FD1                          ; $5FCA: $20 $05
 
     ld   a, [$DAE8]                               ; $5FCC: $FA $E8 $DA
@@ -4977,7 +4977,7 @@ jr_002_602C:
     xor  a                                        ; $6032: $AF
     ldh  [$FFD7], a                               ; $6033: $E0 $D7
     ld   de, $0000                                ; $6035: $11 $00 $00
-    ldh  a, [hMapIndex]                           ; $6038: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $6038: $F0 $F6
     cp   $12                                      ; $603A: $FE $12
     jr   z, jr_002_609B                           ; $603C: $28 $5D
 
@@ -5017,7 +5017,7 @@ jr_002_6064:
     jr   nz, jr_002_603E                          ; $6068: $20 $D4
 
     ld   e, $09                                   ; $606A: $1E $09
-    ldh  a, [hMapIndex]                           ; $606C: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $606C: $F0 $F6
     cp   $0A                                      ; $606E: $FE $0A
     jr   z, jr_002_6074                           ; $6070: $28 $02
 
@@ -5029,7 +5029,7 @@ jr_002_6074:
     ret  nz                                       ; $6077: $C0
 
     call label_C60                                ; $6078: $CD $60 $0C
-    ldh  a, [hMapIndex]                           ; $607B: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $607B: $F0 $F6
     cp   $08                                      ; $607D: $FE $08
     ret  z                                        ; $607F: $C8
 
@@ -5039,7 +5039,7 @@ jr_002_6074:
     call func_002_5DAF                            ; $6084: $CD $AF $5D
     call func_002_5E25                            ; $6087: $CD $25 $5E
     ld   hl, $DDE0                                ; $608A: $21 $E0 $DD
-    ldh  a, [hMapIndex]                           ; $608D: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $608D: $F0 $F6
     ld   e, a                                     ; $608F: $5F
     ld   d, $00                                   ; $6090: $16 $00
     add  hl, de                                   ; $6092: $19
@@ -5096,27 +5096,34 @@ jr_002_60BD:
     ldh  [hFFF8], a                               ; $60D5: $E0 $F8
     ret                                           ; $60D7: $C9
 
-func_002_60D8::
+; Clamp the item count to a maximum value
+; Inputs:
+;   hl   address of maximum item count
+;   de   address of current item count
+ClampItemCount::
+    ; If [de] >= [hl]…
     ld   a, [de]                                  ; $60D8: $1A
     cp   [hl]                                     ; $60D9: $BE
-    jr   c, jr_002_60DE                           ; $60DA: $38 $02
-
+    jr   c, .return                               ; $60DA: $38 $02
+    ; … [de] = [hl]
     ld   a, [hl]                                  ; $60DC: $7E
     ld   [de], a                                  ; $60DD: $12
-
-jr_002_60DE:
+.return
     inc  hl                                       ; $60DE: $23
     ret                                           ; $60DF: $C9
 
-    ld   hl, $DB76                                ; $60E0: $21 $76 $DB
-    ld   de, $DB4C                                ; $60E3: $11 $4C $DB
-    call func_002_60D8                            ; $60E6: $CD $D8 $60
+func_002_60E0::
+    ; Clamp items count
+    ld   hl, wMaxMagicPowder                      ; $60E0: $21 $76 $DB
+    ld   de, wMagicPowderCount                    ; $60E3: $11 $4C $DB
+    call ClampItemCount                           ; $60E6: $CD $D8 $60
     ld   de, wBombCount                           ; $60E9: $11 $4D $DB
-    call func_002_60D8                            ; $60EC: $CD $D8 $60
+    call ClampItemCount                           ; $60EC: $CD $D8 $60
     ld   de, wArrowCount                          ; $60EF: $11 $45 $DB
-    call func_002_60D8                            ; $60F2: $CD $D8 $60
+    call ClampItemCount                           ; $60F2: $CD $D8 $60
+    
     ld   a, [wLinkMotionState]                    ; $60F5: $FA $1C $C1
-    cp   $02                                      ; $60F8: $FE $02
+    cp   LINK_MOTION_JUMPING                      ; $60F8: $FE $02
     ret  nc                                       ; $60FA: $D0
 
     ld   a, [wDialogState]                        ; $60FB: $FA $9F $C1
@@ -5185,7 +5192,7 @@ jr_002_613D:
     ldh  [hPressedButtonsMask], a                 ; $616A: $E0 $CB
     ldh  [hFFCC], a                               ; $616C: $E0 $CC
     ld   [wGameplaySubtype], a                    ; $616E: $EA $96 $DB
-    ld   a, $0C                                   ; $6171: $3E $0C
+    ld   a, GAMEPLAY_INVENTORY                    ; $6171: $3E $0C
     ld   [wGameplayType], a                       ; $6173: $EA $95 $DB
     ld   a, $11                                   ; $6176: $3E $11
     ldh  [$FFF2], a                               ; $6178: $E0 $F2
@@ -5198,16 +5205,16 @@ jr_002_613D:
     ld   a, $07                                   ; $6187: $3E $07
     jr   z, jr_002_619C                           ; $6189: $28 $11
 
-    ldh  a, [hMapTileset]                         ; $618B: $F0 $F7
-    cp   $FF                                      ; $618D: $FE $FF
+    ldh  a, [hMapId]                         ; $618B: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $618D: $FE $FF
     jr   z, jr_002_6197                           ; $618F: $28 $06
 
-    cp   $08                                      ; $6191: $FE $08
+    cp   MAP_TURTLE_ROCK                          ; $6191: $FE $08
     ld   a, $07                                   ; $6193: $3E $07
     jr   nc, jr_002_619C                          ; $6195: $30 $05
 
 jr_002_6197:
-    call IsMapE8                                  ; $6197: $CD $09 $67
+    call IsMapRoomE8                                  ; $6197: $CD $09 $67
     ld   a, $02                                   ; $619A: $3E $02
 
 jr_002_619C:
@@ -5769,14 +5776,14 @@ Data_002_6478::
     db   $7D, $00, $02, $03, $07, $05, $0A, $0B, $0F, $04, $08, $09, $0E, $06, $0C, $0D
     db   $01                                      
 
-IsMapE8::
-    ldh  a, [hMapIndex]                           ; $6709: $F0 $F6
+IsMapRoomE8::
+    ldh  a, [hMapRoom]                           ; $6709: $F0 $F6
     cp   $E8                                      ; $670B: $FE $E8
     ret  z                                        ; $670D: $C8
 
     ld   hl, $6479                                ; $670E: $21 $79 $64
-    ldh  a, [hMapTileset]                         ; $6711: $F0 $F7
-    cp   $FF                                      ; $6713: $FE $FF
+    ldh  a, [hMapId]                         ; $6711: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $6713: $FE $FF
     jr   nz, jr_002_671C                          ; $6715: $20 $05
 
     ld   hl, $66B9                                ; $6717: $21 $B9 $66
@@ -5793,8 +5800,8 @@ jr_002_671C:
     add  hl, de                                   ; $6729: $19
 
 jr_002_672A:
-    ldh  a, [hMapTileset]                         ; $672A: $F0 $F7
-    cp   $06                                      ; $672C: $FE $06
+    ldh  a, [hMapId]                         ; $672A: $F0 $F7
+    cp   MAP_FACE_SHRINE                                      ; $672C: $FE $06
     jr   nz, jr_002_673A                          ; $672E: $20 $0A
 
     ld   a, [wHasInstrument7]                     ; $6730: $FA $6B $DB
@@ -6190,7 +6197,7 @@ jr_002_692B:
     and  a                                        ; $692E: $A7
     jp   z, label_002_7719                        ; $692F: $CA $19 $77
 
-    ld   hl, hFF9E                                ; $6932: $21 $9E $FF
+    ld   hl, hLinkDirection                                ; $6932: $21 $9E $FF
     res  1, [hl]                                  ; $6935: $CB $8E
     call label_CB6                                ; $6937: $CD $B6 $0C
     ld   [$C146], a                               ; $693A: $EA $46 $C1
@@ -6243,7 +6250,7 @@ jr_002_696E:
     ld   hl, $690D                                ; $697B: $21 $0D $69
     add  hl, de                                   ; $697E: $19
     ld   a, [hl]                                  ; $697F: $7E
-    ldh  [hFF9E], a                               ; $6980: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $6980: $E0 $9E
 
 jr_002_6982:
     call label_21A8                               ; $6982: $CD $A8 $21
@@ -6293,7 +6300,7 @@ jr_002_699E:
     ld   a, [hl]                                  ; $69C6: $7E
     ldh  [$FF9B], a                               ; $69C7: $E0 $9B
     ld   a, $02                                   ; $69C9: $3E $02
-    ldh  [hFF9E], a                               ; $69CB: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $69CB: $E0 $9E
     ldh  a, [hPressedButtonsMask]                 ; $69CD: $F0 $CB
     and  $0F                                      ; $69CF: $E6 $0F
     jr   z, jr_002_69D7                           ; $69D1: $28 $04
@@ -6336,11 +6343,11 @@ jr_002_69F3:
 jr_002_6A00:
     ret                                           ; $6A00: $C9
 
-    ldh  a, [hMapTileset]                         ; $6A01: $F0 $F7
-    cp   $06                                      ; $6A03: $FE $06
+    ldh  a, [hMapId]                         ; $6A01: $F0 $F7
+    cp   MAP_FACE_SHRINE                                      ; $6A03: $FE $06
     jr   nz, jr_002_6A24                          ; $6A05: $20 $1D
 
-    ldh  a, [hMapIndex]                           ; $6A07: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $6A07: $F0 $F6
     cp   $F8                                      ; $6A09: $FE $F8
     jr   nz, jr_002_6A24                          ; $6A0B: $20 $17
 
@@ -6405,7 +6412,7 @@ jr_002_6A64:
 
     rlca                                          ; $6A6E: $07
     and  $01                                      ; $6A6F: $E6 $01
-    ldh  [hFF9E], a                               ; $6A71: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $6A71: $E0 $9E
 
 jr_002_6A73:
     ldh  a, [hPressedButtonsMask]                 ; $6A73: $F0 $CB
@@ -6467,7 +6474,7 @@ jr_002_6AAA:
     jr   nz, jr_002_6ACB                          ; $6AC6: $20 $03
 
     ld   a, e                                     ; $6AC8: $7B
-    ldh  [hFF9E], a                               ; $6AC9: $E0 $9E
+    ldh  [hLinkDirection], a                               ; $6AC9: $E0 $9E
 
 jr_002_6ACB:
     ld   hl, wC120                                ; $6ACB: $21 $20 $C1
@@ -6493,7 +6500,7 @@ label_002_6ADB::
 
 jr_002_6AE6:
     call label_21A8                               ; $6AE6: $CD $A8 $21
-    ld   hl, hFF9E                                ; $6AE9: $21 $9E $FF
+    ld   hl, hLinkDirection                                ; $6AE9: $21 $9E $FF
     ldh  a, [hPressedButtonsMask]                 ; $6AEC: $F0 $CB
     and  $0F                                      ; $6AEE: $E6 $0F
     cp   $04                                      ; $6AF0: $FE $04
@@ -6620,7 +6627,7 @@ jr_002_6B81:
     inc  a                                        ; $6B90: $3C
     ld   [$C5A6], a                               ; $6B91: $EA $A6 $C5
     ld   a, $51                                   ; $6B94: $3E $51
-    call label_2385                               ; $6B96: $CD $85 $23
+    call OpenDialog                               ; $6B96: $CD $85 $23
 
 jr_002_6B99:
     ldh  a, [$FFAF]                               ; $6B99: $F0 $AF
@@ -6684,7 +6691,7 @@ jr_002_6BEB:
     and  $04                                      ; $6BEE: $E6 $04
     jr   z, jr_002_6BF6                           ; $6BF0: $28 $04
 
-    ldh  a, [$FFA0]                               ; $6BF2: $F0 $A0
+    ldh  a, [hLinkFinalPositionY]                               ; $6BF2: $F0 $A0
     ldh  [hLinkPositionY], a                      ; $6BF4: $E0 $99
 
 jr_002_6BF6:
@@ -6692,7 +6699,7 @@ jr_002_6BF6:
     and  $03                                      ; $6BF9: $E6 $03
     ret  z                                        ; $6BFB: $C8
 
-    ldh  a, [$FF9F]                               ; $6BFC: $F0 $9F
+    ldh  a, [hLinkFinalPositionX]                               ; $6BFC: $F0 $9F
     ldh  [hLinkPositionX], a                      ; $6BFE: $E0 $98
     ld   a, [$C14A]                               ; $6C00: $FA $4A $C1
     and  a                                        ; $6C03: $A7
@@ -6711,7 +6718,7 @@ jr_002_6BF6:
     call func_002_6C75                            ; $6C19: $CD $75 $6C
     ld   a, $20                                   ; $6C1C: $3E $20
     ld   [$C157], a                               ; $6C1E: $EA $57 $C1
-    ldh  a, [hFF9E]                               ; $6C21: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $6C21: $F0 $9E
     and  $02                                      ; $6C23: $E6 $02
     sla  a                                        ; $6C25: $CB $27
     ld   [$C158], a                               ; $6C27: $EA $58 $C1
@@ -6771,15 +6778,15 @@ func_002_6C75::
     or   [hl]                                     ; $6C7B: $B6
     ret  nz                                       ; $6C7C: $C0
 
-    ldh  a, [hMapTileset]                         ; $6C7D: $F0 $F7
-    cp   $1F                                      ; $6C7F: $FE $1F
+    ldh  a, [hMapId]                         ; $6C7D: $F0 $F7
+    cp   MAP_CAVE_D                                      ; $6C7F: $FE $1F
     jr   nz, jr_002_6C99                          ; $6C81: $20 $16
 
-    ldh  a, [$FFF9]                               ; $6C83: $F0 $F9
+    ldh  a, [hFFF9]                               ; $6C83: $F0 $F9
     and  a                                        ; $6C85: $A7
     jr   z, jr_002_6C99                           ; $6C86: $28 $11
 
-    ldh  a, [hMapIndex]                           ; $6C88: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $6C88: $F0 $F6
     cp   $EB                                      ; $6C8A: $FE $EB
     jr   z, jr_002_6C92                           ; $6C8C: $28 $04
 
@@ -6813,15 +6820,15 @@ jr_002_6C99:
     jp   label_002_6E09                           ; $6CB3: $C3 $09 $6E
 
 jr_002_6CB6:
-    ldh  a, [$FFF9]                               ; $6CB6: $F0 $F9
+    ldh  a, [hFFF9]                               ; $6CB6: $F0 $F9
     and  a                                        ; $6CB8: $A7
     jr   nz, jr_002_6CD1                          ; $6CB9: $20 $16
 
-    ldh  a, [hMapTileset]                         ; $6CBB: $F0 $F7
-    cp   $1F                                      ; $6CBD: $FE $1F
+    ldh  a, [hMapId]                         ; $6CBB: $F0 $F7
+    cp   MAP_CAVE_D                                      ; $6CBD: $FE $1F
     jp   nz, label_002_6D5C                       ; $6CBF: $C2 $5C $6D
 
-    ldh  a, [hMapIndex]                           ; $6CC2: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $6CC2: $F0 $F6
     cp   $F5                                      ; $6CC4: $FE $F5
     jp   z, label_C7D                             ; $6CC6: $CA $7D $0C
 
@@ -6831,7 +6838,7 @@ jr_002_6CB6:
     jp   label_C7D                                ; $6CCE: $C3 $7D $0C
 
 jr_002_6CD1:
-    ldh  a, [hMapIndex]                           ; $6CD1: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $6CD1: $F0 $F6
     cp   $E8                                      ; $6CD3: $FE $E8
     jp   z, label_002_6D5C                        ; $6CD5: $CA $5C $6D
 
@@ -6862,7 +6869,7 @@ jr_002_6CD1:
     jr   z, label_002_6D5C                        ; $6CFE: $28 $5C
 
 jr_002_6D00:
-    ldh  a, [$FFA0]                               ; $6D00: $F0 $A0
+    ldh  a, [hLinkFinalPositionY]                               ; $6D00: $F0 $A0
     ldh  [hLinkPositionY], a                      ; $6D02: $E0 $99
     xor  a                                        ; $6D04: $AF
     ldh  [$FF9B], a                               ; $6D05: $E0 $9B
@@ -6876,15 +6883,15 @@ jr_002_6D0A:
     jp   label_C7D                                ; $6D10: $C3 $7D $0C
 
 jr_002_6D13:
-    ldh  a, [$FF9F]                               ; $6D13: $F0 $9F
+    ldh  a, [hLinkFinalPositionX]                               ; $6D13: $F0 $9F
     ldh  [hLinkPositionX], a                      ; $6D15: $E0 $98
     xor  a                                        ; $6D17: $AF
     ldh  [hFF9A], a                               ; $6D18: $E0 $9A
-    ldh  a, [$FFF9]                               ; $6D1A: $F0 $F9
+    ldh  a, [hFFF9]                               ; $6D1A: $F0 $F9
     and  a                                        ; $6D1C: $A7
     jr   z, label_002_6D5C                        ; $6D1D: $28 $3D
 
-    ldh  a, [hMapIndex]                           ; $6D1F: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $6D1F: $F0 $F6
     cp   $F5                                      ; $6D21: $FE $F5
     jp   z, $0C83                                 ; $6D23: $CA $83 $0C
 
@@ -6940,7 +6947,7 @@ label_002_6D5C::
     cp   $06                                      ; $6D77: $FE $06
     jp   z, label_002_6E0C                        ; $6D79: $CA $0C $6E
 
-    ldh  a, [$FFF9]                               ; $6D7C: $F0 $F9
+    ldh  a, [hFFF9]                               ; $6D7C: $F0 $F9
     and  a                                        ; $6D7E: $A7
     jr   nz, jr_002_6D88                          ; $6D7F: $20 $07
 
@@ -6968,7 +6975,7 @@ jr_002_6D94:
     jr   nc, jr_002_6DCC                          ; $6DA1: $30 $29
 
     ld   a, [$C14A]                               ; $6DA3: $FA $4A $C1
-    ld   hl, $FFF9                                ; $6DA6: $21 $F9 $FF
+    ld   hl, hFFF9                                ; $6DA6: $21 $F9 $FF
     or   [hl]                                     ; $6DA9: $B6
     ld   hl, $FFB2                                ; $6DAA: $21 $B2 $FF
     or   [hl]                                     ; $6DAD: $B6
@@ -6998,12 +7005,12 @@ jr_002_6DBE:
     jr   nz, label_002_6E0C                       ; $6DCA: $20 $40
 
 jr_002_6DCC:
-    ldh  a, [hMapIndex]                           ; $6DCC: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $6DCC: $F0 $F6
     cp   $E8                                      ; $6DCE: $FE $E8
     jr   nz, jr_002_6DE4                          ; $6DD0: $20 $12
 
-    ldh  a, [hMapTileset]                         ; $6DD2: $F0 $F7
-    cp   $1F                                      ; $6DD4: $FE $1F
+    ldh  a, [hMapId]                         ; $6DD2: $F0 $F7
+    cp   MAP_CAVE_D                                      ; $6DD4: $FE $1F
     jr   z, jr_002_6DE4                           ; $6DD6: $28 $0C
 
     ld   a, [wActiveRoom]                         ; $6DD8: $FA $A5 $DB
@@ -7082,7 +7089,7 @@ label_002_6E45::
     or   [hl]                                     ; $6E4B: $B6
     ret  nz                                       ; $6E4C: $C0
 
-    ldh  a, [$FFF9]                               ; $6E4D: $F0 $F9
+    ldh  a, [hFFF9]                               ; $6E4D: $F0 $F9
     and  a                                        ; $6E4F: $A7
     jr   z, jr_002_6E55                           ; $6E50: $28 $03
 
@@ -7181,7 +7188,7 @@ jr_002_6EC6:
     ldh  a, [hLinkPositionX]                      ; $6ED4: $F0 $98
     add  [hl]                                     ; $6ED6: $86
     ldh  [hLinkPositionX], a                      ; $6ED7: $E0 $98
-    ldh  a, [$FFA0]                               ; $6ED9: $F0 $A0
+    ldh  a, [hLinkFinalPositionY]                               ; $6ED9: $F0 $A0
     ldh  [hLinkPositionY], a                      ; $6EDB: $E0 $99
 
 jr_002_6EDD:
@@ -7228,7 +7235,7 @@ jr_002_6EF6:
     ldh  a, [hLinkPositionY]                      ; $6F13: $F0 $99
     add  [hl]                                     ; $6F15: $86
     ldh  [hLinkPositionY], a                      ; $6F16: $E0 $99
-    ldh  a, [$FF9F]                               ; $6F18: $F0 $9F
+    ldh  a, [hLinkFinalPositionX]                               ; $6F18: $F0 $9F
     ldh  [hLinkPositionX], a                      ; $6F1A: $E0 $98
 
 jr_002_6F1C:
@@ -7313,7 +7320,7 @@ jr_002_6F25:
     cp   $C0                                      ; $6F9D: $FE $C0
     jp   nz, label_002_7045                       ; $6F9F: $C2 $45 $70
 
-    ldh  a, [hFF9E]                               ; $6FA2: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $6FA2: $F0 $9E
     cp   $02                                      ; $6FA4: $FE $02
     jp   nz, label_002_703B                       ; $6FA6: $C2 $3B $70
 
@@ -7321,7 +7328,7 @@ jr_002_6F25:
     bit  4, a                                     ; $6FAB: $CB $67
     jp   nz, label_002_703B                       ; $6FAD: $C2 $3B $70
 
-    ldh  a, [hMapIndex]                           ; $6FB0: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $6FB0: $F0 $F6
     cp   $0E                                      ; $6FB2: $FE $0E
     jr   nz, jr_002_6FBD                          ; $6FB4: $20 $07
 
@@ -7340,7 +7347,7 @@ jr_002_6FC6:
     and  a                                        ; $6FC6: $A7
     jr   z, jr_002_703E                           ; $6FC7: $28 $75
 
-    ldh  a, [hMapIndex]                           ; $6FC9: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $6FC9: $F0 $F6
     cp   $8C                                      ; $6FCB: $FE $8C
     jr   nz, jr_002_6FD4                          ; $6FCD: $20 $05
 
@@ -7406,7 +7413,7 @@ jr_002_7015:
 
 jr_002_702C:
     ld   hl, wMinimapTiles                        ; $702C: $21 $00 $D8
-    ldh  a, [hMapIndex]                           ; $702F: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $702F: $F0 $F6
     ld   e, a                                     ; $7031: $5F
     ld   d, $00                                   ; $7032: $16 $00
     add  hl, de                                   ; $7034: $19
@@ -7468,7 +7475,7 @@ jr_002_7078:
 
 jr_002_7085:
     ld   d, $00                                   ; $7085: $16 $00
-    ldh  a, [hFF9E]                               ; $7087: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $7087: $F0 $9E
     cp   e                                        ; $7089: $BB
     jp   nz, label_002_70D8                       ; $708A: $C2 $D8 $70
 
@@ -7686,7 +7693,7 @@ label_002_71BB::
     jr   z, jr_002_722C                           ; $71DC: $28 $4E
 
 jr_002_71DE:
-    ldh  a, [hMapIndex]                           ; $71DE: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $71DE: $F0 $F6
     cp   $77                                      ; $71E0: $FE $77
     jr   z, jr_002_7204                           ; $71E2: $28 $20
 
@@ -7728,7 +7735,7 @@ jr_002_7213:
     ld   [$DB47], a                               ; $7214: $EA $47 $DB
     ld   a, $98                                   ; $7217: $3E $98
     ld   [$C3C9], a                               ; $7219: $EA $C9 $C3
-    call label_2373                               ; $721C: $CD $73 $23
+    call OpenDialogInTable1                               ; $721C: $CD $73 $23
     ld   a, [wC163]                               ; $721F: $FA $63 $C1
     inc  a                                        ; $7222: $3C
     ld   [$DB10], a                               ; $7223: $EA $10 $DB
@@ -7790,7 +7797,7 @@ label_002_7277::
     jr   nz, jr_002_728E                          ; $727B: $20 $11
 
     ld   hl, $FFE3                                ; $727D: $21 $E3 $FF
-    ldh  a, [hFF9E]                               ; $7280: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $7280: $F0 $9E
     cp   [hl]                                     ; $7282: $BE
     jr   nz, jr_002_728B                          ; $7283: $20 $06
 
@@ -7803,7 +7810,7 @@ jr_002_728B:
 
 jr_002_728E:
     ld   hl, $FFE3                                ; $728E: $21 $E3 $FF
-    ldh  a, [hFF9E]                               ; $7291: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $7291: $F0 $9E
     cp   [hl]                                     ; $7293: $BE
     jr   nz, jr_002_72FA                          ; $7294: $20 $64
 
@@ -7888,7 +7895,7 @@ jr_002_72FA:
 
     ld   hl, $6E31                                ; $7307: $21 $31 $6E
     add  hl, bc                                   ; $730A: $09
-    ldh  a, [hFF9E]                               ; $730B: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $730B: $F0 $9E
     cp   [hl]                                     ; $730D: $BE
     jp   nz, label_002_7454                       ; $730E: $C2 $54 $74
 
@@ -7916,7 +7923,7 @@ jr_002_7330:
     ld   [$C144], a                               ; $7338: $EA $44 $C1
 
 jr_002_733B:
-    ldh  a, [hMapTileset]                         ; $733B: $F0 $F7
+    ldh  a, [hMapId]                         ; $733B: $F0 $F7
     and  a                                        ; $733D: $A7
     ldh  a, [$FFAF]                               ; $733E: $F0 $AF
     jr   z, label_002_73AD                        ; $7340: $28 $6B
@@ -7993,7 +8000,7 @@ label_002_73AD::
     and  a                                        ; $73B6: $A7
     jp   nz, label_002_7454                       ; $73B7: $C2 $54 $74
 
-    ldh  a, [hMapIndex]                           ; $73BA: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $73BA: $F0 $F6
     cp   $77                                      ; $73BC: $FE $77
     jr   nz, jr_002_742D                          ; $73BE: $20 $6D
 
@@ -8016,7 +8023,7 @@ jr_002_73D4:
     cp   [hl]                                     ; $73DA: $BE
     jr   nz, jr_002_73E6                          ; $73DB: $20 $09
 
-    ldh  a, [hFF9E]                               ; $73DD: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $73DD: $F0 $9E
     ld   hl, $73A8                                ; $73DF: $21 $A8 $73
     add  hl, de                                   ; $73E2: $19
     cp   [hl]                                     ; $73E3: $BE
@@ -8061,7 +8068,7 @@ jr_002_7402:
 
 jr_002_7415:
     ld   a, $53                                   ; $7415: $3E $53
-    call label_237C                               ; $7417: $CD $7C $23
+    call OpenDialogInTable2                               ; $7417: $CD $7C $23
     jp   label_002_7454                           ; $741A: $C3 $54 $74
 
 jr_002_741D:
@@ -8095,7 +8102,7 @@ jr_002_742F:
     and  a                                        ; $7446: $A7
     jr   nz, label_002_7454                       ; $7447: $20 $0B
 
-    ldh  a, [hMapIndex]                           ; $7449: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $7449: $F0 $F6
     cp   $77                                      ; $744B: $FE $77
     jr   nz, label_002_7454                       ; $744D: $20 $05
 
@@ -8204,7 +8211,7 @@ jr_002_74C9:
     ld   [$C146], a                               ; $74E6: $EA $46 $C1
     ld   a, $20                                   ; $74E9: $3E $20
     ld   [$C157], a                               ; $74EB: $EA $57 $C1
-    ldh  a, [hFF9E]                               ; $74EE: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $74EE: $F0 $9E
     and  $02                                      ; $74F0: $E6 $02
     sla  a                                        ; $74F2: $CB $27
     ld   [$C158], a                               ; $74F4: $EA $58 $C1
@@ -8213,11 +8220,11 @@ jr_002_74C9:
     jp   $1828                                    ; $74FB: $C3 $28 $18
 
 func_002_74FE::
-    call label_2385                               ; $74FE: $CD $85 $23
+    call OpenDialog                               ; $74FE: $CD $85 $23
     jp   label_178E                               ; $7501: $C3 $8E $17
 
 func_002_7504::
-    call label_237C                               ; $7504: $CD $7C $23
+    call OpenDialogInTable2                               ; $7504: $CD $7C $23
     jp   label_178E                               ; $7507: $C3 $8E $17
 
     ld   [$00F8], sp                              ; $750A: $08 $F8 $00
@@ -8238,7 +8245,7 @@ func_002_7512::
     ldh  [$FFD8], a                               ; $7521: $E0 $D8
     or   e                                        ; $7523: $B3
     ld   e, a                                     ; $7524: $5F
-    ldh  [$FFFA], a                               ; $7525: $E0 $FA
+    ldh  [hLinkRoomPosition], a                               ; $7525: $E0 $FA
     ld   d, $00                                   ; $7527: $16 $00
     ld   hl, wTileMap                             ; $7529: $21 $11 $D7
     ld   a, h                                     ; $752C: $7C
@@ -8306,8 +8313,8 @@ jr_002_7586:
     ret                                           ; $7586: $C9
 
 jr_002_7587:
-    ldh  a, [$FFFA]                               ; $7587: $F0 $FA
-    ldh  [$FFFB], a                               ; $7589: $E0 $FB
+    ldh  a, [hLinkRoomPosition]                               ; $7587: $F0 $FA
+    ldh  [hLinkFinalRoomPosition], a                               ; $7589: $E0 $FB
     ld   a, [wFreeMovementMode]                   ; $758B: $FA $7B $C1
     and  a                                        ; $758E: $A7
     ret  nz                                       ; $758F: $C0
@@ -8398,7 +8405,7 @@ func_002_75F5::
     ldh  [$FF9B], a                               ; $7608: $E0 $9B
     ld   a, $02                                   ; $760A: $3E $02
     ld   [$C146], a                               ; $760C: $EA $46 $C1
-    ldh  a, [$FFF9]                               ; $760F: $F0 $F9
+    ldh  a, [hFFF9]                               ; $760F: $F0 $F9
     and  a                                        ; $7611: $A7
     jr   nz, jr_002_761E                          ; $7612: $20 $0A
 
@@ -8587,7 +8594,7 @@ jr_002_7732:
     xor  a                                        ; $7737: $AF
     ldh  [$FF9C], a                               ; $7738: $E0 $9C
     call label_178E                               ; $773A: $CD $8E $17
-    ldh  a, [hFF9E]                               ; $773D: $F0 $9E
+    ldh  a, [hLinkDirection]                               ; $773D: $F0 $9E
     ld   e, a                                     ; $773F: $5F
     ld   d, b                                     ; $7740: $50
     ld   hl, $750A                                ; $7741: $21 $0A $75
@@ -8738,7 +8745,7 @@ jr_002_77F7:
     ldh  [hSFX], a                                ; $7822: $E0 $F3
     ld   a, $03                                   ; $7824: $3E $03
     ldh  [$FFA5], a                               ; $7826: $E0 $A5
-    ldh  a, [hMapIndex]                           ; $7828: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $7828: $F0 $F6
     cp   $C3                                      ; $782A: $FE $C3
     jr   nz, jr_002_7833                          ; $782C: $20 $05
 
@@ -8754,8 +8761,8 @@ jr_002_7833:
 jr_002_783C:
     xor  a                                        ; $783C: $AF
     ld   [$C1CA], a                               ; $783D: $EA $CA $C1
-    ldh  a, [$FFFA]                               ; $7840: $F0 $FA
-    ld   hl, $FFFB                                ; $7842: $21 $FB $FF
+    ldh  a, [hLinkRoomPosition]                               ; $7840: $F0 $FA
+    ld   hl, hLinkFinalRoomPosition                                ; $7842: $21 $FB $FF
     cp   [hl]                                     ; $7845: $BE
     ld   hl, $C1C9                                ; $7846: $21 $C9 $C1
     jr   nz, jr_002_786C                          ; $7849: $20 $21
@@ -8814,7 +8821,7 @@ label_002_787D::
     and  a                                        ; $789B: $A7
     jr   nz, jr_002_78A9                          ; $789C: $20 $0B
 
-    ldh  a, [hMapIndex]                           ; $789E: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $789E: $F0 $F6
     cp   $32                                      ; $78A0: $FE $32
     jr   nz, jr_002_78A9                          ; $78A2: $20 $05
 
@@ -8843,7 +8850,7 @@ jr_002_78AA:
     and  a                                        ; $78C0: $A7
     jr   nz, jr_002_78CE                          ; $78C1: $20 $0B
 
-    ldh  a, [hMapIndex]                           ; $78C3: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $78C3: $F0 $F6
     cp   $32                                      ; $78C5: $FE $32
     jr   nz, jr_002_78CE                          ; $78C7: $20 $05
 
@@ -8876,7 +8883,7 @@ jr_002_78CF:
     db   $fc                                      ; $78E6: $FC
     inc  b                                        ; $78E7: $04
 
-label_002_78E8::
+ApplyMapTransition::
     ld   a, [wMapSlideTransitionState]            ; $78E8: $FA $24 $C1
     cp   $00                                      ; $78EB: $FE $00
     jp   z, label_002_79D9                        ; $78ED: $CA $D9 $79
@@ -8981,8 +8988,8 @@ jr_002_7986:
     ret  z                                        ; $7991: $C8
 
     ld   d, a                                     ; $7992: $57
-    ldh  a, [hMapTileset]                         ; $7993: $F0 $F7
-    cp   $FF                                      ; $7995: $FE $FF
+    ldh  a, [hMapId]                         ; $7993: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $7995: $FE $FF
     jr   nz, jr_002_799D                          ; $7997: $20 $04
 
     ld   d, $00                                   ; $7999: $16 $00
@@ -8998,7 +9005,7 @@ jr_002_799D:
     inc  d                                        ; $79A5: $14
 
 jr_002_79A6:
-    ldh  a, [hMapIndex]                           ; $79A6: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $79A6: $F0 $F6
     ld   e, a                                     ; $79A8: $5F
     call label_29ED                               ; $79A9: $CD $ED $29
     cp   $1A                                      ; $79AC: $FE $1A
@@ -9028,15 +9035,12 @@ jr_002_79BC:
 label_002_79CC::
     pop  af                                       ; $79CC: $F1
     dec  a                                        ; $79CD: $3D
-    rst  $00                                      ; $79CE: $C7
-    ld   a, [$3E79]                               ; $79CF: $FA $79 $3E
-    ld   a, e                                     ; $79D2: $7B
-    ld   a, a                                     ; $79D3: $7F
-    ld   a, e                                     ; $79D4: $7B
-    nop                                           ; $79D5: $00
-    ld   a, h                                     ; $79D6: $7C
-    inc  bc                                       ; $79D7: $03
-    ld   a, h                                     ; $79D8: $7C
+    JP_TABLE                                      ; $79CE: $C7
+._00 dw label_002_79FA
+._01 dw label_002_7B3E
+._02 dw label_002_7B7F
+._03 dw label_002_7C00
+._04 dw label_002_7C03
 
 label_002_79D9::
     ret                                           ; $79D9: $C9
@@ -9065,6 +9069,8 @@ label_002_79D9::
     ld   [bc], a                                  ; $79F7: $02
     ld   [bc], a                                  ; $79F8: $02
     ld   [bc], a                                  ; $79F9: $02
+
+label_002_79FA::
     ld   a, [$C125]                               ; $79FA: $FA $25 $C1
     ld   c, a                                     ; $79FD: $4F
     ld   b, $00                                   ; $79FE: $06 $00
@@ -9072,17 +9078,17 @@ label_002_79D9::
     and  a                                        ; $7A03: $A7
     jr   z, jr_002_7A6D                           ; $7A04: $28 $67
 
-    ldh  a, [hMapTileset]                         ; $7A06: $F0 $F7
-    cp   $FF                                      ; $7A08: $FE $FF
+    ldh  a, [hMapId]                         ; $7A06: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $7A08: $FE $FF
     jr   z, jr_002_7A48                           ; $7A0A: $28 $3C
 
-    cp   $0B                                      ; $7A0C: $FE $0B
+    cp   MAP_DUNGEON_G1                                      ; $7A0C: $FE $0B
     jr   nc, jr_002_7A6D                          ; $7A0E: $30 $5D
 
-    cp   $08                                      ; $7A10: $FE $08
+    cp   MAP_TURTLE_ROCK                                      ; $7A10: $FE $08
     jr   nz, jr_002_7A48                          ; $7A12: $20 $34
 
-    ldh  a, [hMapIndex]                           ; $7A14: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $7A14: $F0 $F6
     cp   $71                                      ; $7A16: $FE $71
     jr   nz, jr_002_7A48                          ; $7A18: $20 $2E
 
@@ -9125,8 +9131,8 @@ jr_002_7A48:
     cp   $02                                      ; $7A51: $FE $02
     jr   nz, jr_002_7A67                          ; $7A53: $20 $12
 
-    ldh  a, [hMapTileset]                         ; $7A55: $F0 $F7
-    cp   $05                                      ; $7A57: $FE $05
+    ldh  a, [hMapId]                         ; $7A55: $F0 $F7
+    cp   MAP_CATFISHS_MAW                                      ; $7A57: $FE $05
     jr   nz, jr_002_7A67                          ; $7A59: $20 $0C
 
     ld   a, [$DBAE]                               ; $7A5B: $FA $AE $DB
@@ -9153,14 +9159,14 @@ jr_002_7A6D:
     ld   a, $1E                                   ; $7A78: $3E $1E
     ld   [wC169], a                               ; $7A7A: $EA $69 $C1
     ld   a, $63                                   ; $7A7D: $3E $63
-    ld   hl, hMapIndex                            ; $7A7F: $21 $F6 $FF
+    ld   hl, hMapRoom                            ; $7A7F: $21 $F6 $FF
     jr   jr_002_7A8D                              ; $7A82: $18 $09
 
 jr_002_7A84:
     ld   hl, $7B77                                ; $7A84: $21 $77 $7B
     add  hl, bc                                   ; $7A87: $09
     ld   a, [hl]                                  ; $7A88: $7E
-    ld   hl, hMapIndex                            ; $7A89: $21 $F6 $FF
+    ld   hl, hMapRoom                            ; $7A89: $21 $F6 $FF
 
 jr_002_7A8C:
     add  [hl]                                     ; $7A8C: $86
@@ -9188,8 +9194,8 @@ label_002_7AA5::
     and  a                                        ; $7AAB: $A7
     jr   z, jr_002_7ABD                           ; $7AAC: $28 $0F
 
-    ldh  a, [hMapTileset]                         ; $7AAE: $F0 $F7
-    cp   $FF                                      ; $7AB0: $FE $FF
+    ldh  a, [hMapId]                         ; $7AAE: $F0 $F7
+    cp   MAP_SPECIAL                                      ; $7AB0: $FE $FF
     jr   nz, jr_002_7ABD                          ; $7AB2: $20 $09
 
     ld   a, $01                                   ; $7AB4: $3E $01
@@ -9233,7 +9239,7 @@ jr_002_7AE9:
     and  a                                        ; $7AF2: $A7
     jr   z, label_002_7B36                        ; $7AF3: $28 $41
 
-    ldh  a, [hMapIndex]                           ; $7AF5: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $7AF5: $F0 $F6
     ld   e, a                                     ; $7AF7: $5F
     ld   d, $00                                   ; $7AF8: $16 $00
     ld   hl, OverworldMusicTracks                       ; $7AFA: $21 $00 $40
@@ -9288,6 +9294,7 @@ label_002_7B36::
     ld   [wMapSlideTransitionState], a            ; $7B3A: $EA $24 $C1
     ret                                           ; $7B3D: $C9
 
+label_002_7B3E::
     call label_D1E                                ; $7B3E: $CD $1E $0D
     ld   a, [$D6FA]                               ; $7B41: $FA $FA $D6
     cp   $02                                      ; $7B44: $FE $02
@@ -9338,7 +9345,10 @@ jr_002_7B4C:
     ld   bc, $F0FF                                ; $7B77: $01 $FF $F0
     db   $10                                      ; $7B7A: $10
     ld   bc, $F8FF                                ; $7B7B: $01 $FF $F8
-    ld   [$BBF0], sp                              ; $7B7E: $08 $F0 $BB
+    db   $08                                      ; $7B7E: $08
+
+label_002_7B7F::
+    db $F0, $BB                                   ; $7B7F: $F0 $BB
     and  a                                        ; $7B81: $A7
     ret  nz                                       ; $7B82: $C0
 
@@ -9406,8 +9416,10 @@ jr_002_7B91:
     ld   [$C12B], a                               ; $7BFA: $EA $2B $C1
     jp   label_002_7B36                           ; $7BFD: $C3 $36 $7B
 
+label_002_7C00::
     jp   $2209                                    ; $7C00: $C3 $09 $22
 
+label_002_7C03::
     ret                                           ; $7C03: $C9
 
     nop                                           ; $7C04: $00
@@ -9473,7 +9485,7 @@ label_002_7C50::
     cp   $0E                                      ; $7C6D: $FE $0E
     jr   nz, jr_002_7C88                          ; $7C6F: $20 $17
 
-    ldh  a, [hMapIndex]                           ; $7C71: $F0 $F6
+    ldh  a, [hMapRoom]                           ; $7C71: $F0 $F6
     cp   $3E                                      ; $7C73: $FE $3E
     jr   z, jr_002_7C8B                           ; $7C75: $28 $14
 

@@ -3809,10 +3809,10 @@ label_186C::
     and  a
     jr   z, label_1898
     push af
-    ld   a, $04
+    ld   a, BANK(label_004_7A5F)
     call SwitchBank
     pop  af
-    call label_7A5F
+    call label_004_7A5F
     ld   hl, $DB6E
     inc  [hl]
     ld   hl, $DB46

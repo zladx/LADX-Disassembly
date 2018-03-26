@@ -15,11 +15,11 @@ clean:
 	rm -f game.{gbc,sym,map}
 	find . -iname '*.2bpp' -exec rm {} +
 
-Z80Dis: tools/Z80Dis.c
+Z80Dis: tools/deprecatd/Z80Dis.c
 	gcc -std=c99 -o Z80Dis tools/Z80Dis.c
 	chmod a+x Z80Dis
 
-DumpBanks: tools/DumpBanks.c
+DumpBanks: tools/deprecated/DumpBanks.c
 	gcc -std=c99 -o DumpBanks tools/DumpBanks.c
 	chmod a+x DumpBanks
 

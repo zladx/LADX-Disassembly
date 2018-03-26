@@ -1,3 +1,9 @@
+// Dump the raw binary data of a bank
+//
+// DEPRECATED: instead of usign raw binary data for the
+// not-yet-disassembled parts, this project now uses rgblink
+// with the -O option to specify the original ROM as an overlay file.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

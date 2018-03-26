@@ -2620,17 +2620,11 @@ label_106D::
     ld   [$C1A8], a
     dec  a
     JP_TABLE
-    ; Code below is actually data for the jump table
-    cp   h
-    ld   d, c
-    rst  0
-    ld   d, c
-    rst  0
-    ld   d, c
-    rst  0
-    ld   d, c
-    cp   h
-    ld   d, c
+._00 dw label_002_51BC
+._01 dw label_002_51C7
+._02 dw label_002_51C7
+._03 dw label_002_51C7
+._04 dw label_002_51BC
 
 label_107F::
     ldh  a, [hPressedButtonsMask]

@@ -2461,14 +2461,15 @@ jr_002_51AC:
     ld   [wC167], a                               ; $51B8: $EA $67 $C1
     ret                                           ; $51BB: $C9
 
+label_002_51BC::
     ld   a, [$C1AA]                               ; $51BC: $FA $AA $C1
     cp   $2E                                      ; $51BF: $FE $2E
-    jr   nz, jr_002_51C7                          ; $51C1: $20 $04
+    jr   nz, label_002_51C7                       ; $51C1: $20 $04
 
     ld   a, $17                                   ; $51C3: $3E $17
     ldh  [$FFF2], a                               ; $51C5: $E0 $F2
 
-jr_002_51C7:
+label_002_51C7::
     call label_CAF                                ; $51C7: $CD $AF $0C
     ld   [wC16A], a                               ; $51CA: $EA $6A $C1
     ld   [$C137], a                               ; $51CD: $EA $37 $C1

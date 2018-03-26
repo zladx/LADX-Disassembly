@@ -1,3 +1,9 @@
+// Disassembler for Game Boy roms
+//
+// DEPRECATED: this project now uses mgbdis,
+// which produces a better quality output and can use
+// already labeled debug symbols to output new code.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>

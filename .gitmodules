@@ -1,0 +1,3 @@
+[submodule "tools/mgbdis"]
+	path = tools/mgbdis
+	url = https://github.com/kemenaran/mgbdis.git

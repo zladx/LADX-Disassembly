@@ -7,7 +7,7 @@
     ld   hl, wEntitiesUnknownTableB               ; $4006: $21 $B0 $C2
     add  hl, bc                                   ; $4009: $09
     ld   a, [hl]                                  ; $400A: $7E
-    rst  $00                                      ; $400B: $C7
+    JP_TABLE                                      ; $400B: $C7
     ld   d, $40                                   ; $400C: $16 $40
     rst  $20                                      ; $400E: $E7
     ld   b, d                                     ; $400F: $42
@@ -82,7 +82,7 @@ jr_004_404E:
 
 jr_004_4085:
     ldh  a, [$FFF0]                               ; $4085: $F0 $F0
-    rst  $00                                      ; $4087: $C7
+    JP_TABLE                                      ; $4087: $C7
     sub  b                                        ; $4088: $90
     ld   b, b                                     ; $4089: $40
     and  e                                        ; $408A: $A3
@@ -448,7 +448,7 @@ func_004_42B3:
     ldh  a, [hFrameCounter]                       ; $42F4: $F0 $E7
     ld   [hl], a                                  ; $42F6: $77
     ldh  a, [$FFF0]                               ; $42F7: $F0 $F0
-    rst  $00                                      ; $42F9: $C7
+    JP_TABLE                                      ; $42F9: $C7
     nop                                           ; $42FA: $00
     ld   b, e                                     ; $42FB: $43
     ld   [label_10EF._05], sp                     ; $42FC: $08 $43 $11
@@ -486,7 +486,7 @@ jr_004_431A:
 
 jr_004_4336:
     ldh  a, [$FFF0]                               ; $4336: $F0 $F0
-    rst  $00                                      ; $4338: $C7
+    JP_TABLE                                      ; $4338: $C7
     ld   b, l                                     ; $4339: $45
     ld   b, e                                     ; $433A: $43
     add  b                                        ; $433B: $80
@@ -1343,14 +1343,14 @@ jr_004_4972:
     ld   hl, $C390                                ; $49D2: $21 $90 $C3
     add  hl, bc                                   ; $49D5: $09
     ld   a, [hl]                                  ; $49D6: $7E
-    rst  $00                                      ; $49D7: $C7
+    JP_TABLE                                      ; $49D7: $C7
     call c, $FB49                                 ; $49D8: $DC $49 $FB
     ld   c, l                                     ; $49DB: $4D
     ld   hl, $C360                                ; $49DC: $21 $60 $C3
     add  hl, bc                                   ; $49DF: $09
     ld   [hl], $50                                ; $49E0: $36 $50
     ldh  a, [$FFF0]                               ; $49E2: $F0 $F0
-    rst  $00                                      ; $49E4: $C7
+    JP_TABLE                                      ; $49E4: $C7
     db   $ed                                      ; $49E5: $ED
     ld   c, c                                     ; $49E6: $49
     dec  l                                        ; $49E7: $2D
@@ -1592,10 +1592,10 @@ func_004_4B52:
     ld   hl, wEntitiesUnknownTableD               ; $4B52: $21 $D0 $C2
     add  hl, bc                                   ; $4B55: $09
     ld   a, [hl]                                  ; $4B56: $7E
-    rst  $00                                      ; $4B57: $C7
+    JP_TABLE                                      ; $4B57: $C7
     ld   a, h                                     ; $4B58: $7C
     ld   c, e                                     ; $4B59: $4B
-    rst  $00                                      ; $4B5A: $C7
+    JP_TABLE                                      ; $4B5A: $C7
     ld   c, e                                     ; $4B5B: $4B
     db   $10                                      ; $4B5C: $10
     inc  c                                        ; $4B5D: $0C
@@ -1753,7 +1753,7 @@ Data_004_4BDD::
     ldh  a, [hFrameCounter]                       ; $4E09: $F0 $E7
     ld   [hl], a                                  ; $4E0B: $77
     ldh  a, [$FFF0]                               ; $4E0C: $F0 $F0
-    rst  $00                                      ; $4E0E: $C7
+    JP_TABLE                                      ; $4E0E: $C7
     dec  d                                        ; $4E0F: $15
     ld   c, [hl]                                  ; $4E10: $4E
     dec  e                                        ; $4E11: $1D
@@ -1847,7 +1847,7 @@ jr_004_4E83:
     xor  a                                        ; $4E86: $AF
     ldh  [hFFE8], a                               ; $4E87: $E0 $E8
     ldh  a, [$FFF0]                               ; $4E89: $F0 $F0
-    rst  $00                                      ; $4E8B: $C7
+    JP_TABLE                                      ; $4E8B: $C7
     and  h                                        ; $4E8C: $A4
     ld   c, [hl]                                  ; $4E8D: $4E
     db   $eb                                      ; $4E8E: $EB
@@ -2109,7 +2109,7 @@ func_004_5067:
     ld   hl, wEntitiesUnknownTableB               ; $5070: $21 $B0 $C2
     add  hl, bc                                   ; $5073: $09
     ld   a, [hl]                                  ; $5074: $7E
-    rst  $00                                      ; $5075: $C7
+    JP_TABLE                                      ; $5075: $C7
     ld   a, [hl]                                  ; $5076: $7E
     ld   d, b                                     ; $5077: $50
     ld   h, [hl]                                  ; $5078: $66
@@ -2134,7 +2134,7 @@ func_004_5067:
     ld   hl, $C440                                ; $5099: $21 $40 $C4
     add  hl, bc                                   ; $509C: $09
     ld   a, [hl]                                  ; $509D: $7E
-    rst  $00                                      ; $509E: $C7
+    JP_TABLE                                      ; $509E: $C7
     and  l                                        ; $509F: $A5
     ld   d, b                                     ; $50A0: $50
     pop  hl                                       ; $50A1: $E1
@@ -2233,7 +2233,7 @@ jr_004_5120:
     add  hl, bc                                   ; $5123: $09
     ld   [hl], $08                                ; $5124: $36 $08
     ldh  a, [$FFF0]                               ; $5126: $F0 $F0
-    rst  $00                                      ; $5128: $C7
+    JP_TABLE                                      ; $5128: $C7
     cpl                                           ; $5129: $2F
     ld   d, c                                     ; $512A: $51
     ld   e, b                                     ; $512B: $58
@@ -2955,7 +2955,7 @@ jr_004_551C:
 
 jr_004_5541:
     ldh  a, [$FFF0]                               ; $5541: $F0 $F0
-    rst  $00                                      ; $5543: $C7
+    JP_TABLE                                      ; $5543: $C7
     ld   c, d                                     ; $5544: $4A
     ld   d, l                                     ; $5545: $55
     ld   l, c                                     ; $5546: $69
@@ -3026,7 +3026,7 @@ jr_004_5596:
 
     call func_004_7FA3                            ; $55AB: $CD $A3 $7F
     ldh  a, [$FFF0]                               ; $55AE: $F0 $F0
-    rst  $00                                      ; $55B0: $C7
+    JP_TABLE                                      ; $55B0: $C7
     or   a                                        ; $55B1: $B7
     ld   d, l                                     ; $55B2: $55
     jp   $E055                                    ; $55B3: $C3 $55 $E0
@@ -3219,7 +3219,7 @@ func_004_56A7:
     jp   z, label_004_5791                        ; $56C7: $CA $91 $57
 
     ldh  a, [$FFF0]                               ; $56CA: $F0 $F0
-    rst  $00                                      ; $56CC: $C7
+    JP_TABLE                                      ; $56CC: $C7
     push de                                       ; $56CD: $D5
     ld   d, [hl]                                  ; $56CE: $56
     db   $e3                                      ; $56CF: $E3
@@ -4261,7 +4261,7 @@ jr_004_5E22:
     call func_004_7FA3                            ; $5E22: $CD $A3 $7F
     call func_004_6D80                            ; $5E25: $CD $80 $6D
     ldh  a, [$FFF0]                               ; $5E28: $F0 $F0
-    rst  $00                                      ; $5E2A: $C7
+    JP_TABLE                                      ; $5E2A: $C7
     ld   sp, $765E                                ; $5E2B: $31 $5E $76
     ld   e, [hl]                                  ; $5E2E: $5E
     or   [hl]                                     ; $5E2F: $B6
@@ -4509,7 +4509,7 @@ jr_004_5FC2:
     call label_3DA0                               ; $5FC9: $CD $A0 $3D
     call func_004_7BE3                            ; $5FCC: $CD $E3 $7B
     ldh  a, [$FFF0]                               ; $5FCF: $F0 $F0
-    rst  $00                                      ; $5FD1: $C7
+    JP_TABLE                                      ; $5FD1: $C7
     ret  c                                        ; $5FD2: $D8
 
     ld   e, a                                     ; $5FD3: $5F
@@ -4612,7 +4612,7 @@ Data_004_604C::
     ld   hl, wEntitiesUnknownTableB               ; $60A9: $21 $B0 $C2
     add  hl, bc                                   ; $60AC: $09
     ld   a, [hl]                                  ; $60AD: $7E
-    rst  $00                                      ; $60AE: $C7
+    JP_TABLE                                      ; $60AE: $C7
     ret  nc                                       ; $60AF: $D0
 
     ld   h, b                                     ; $60B0: $60
@@ -4715,7 +4715,7 @@ jr_004_6120:
     ld   de, Data_004_604C                        ; $613D: $11 $4C $60
     call label_3BC0                               ; $6140: $CD $C0 $3B
     ldh  a, [$FFF0]                               ; $6143: $F0 $F0
-    rst  $00                                      ; $6145: $C7
+    JP_TABLE                                      ; $6145: $C7
     ld   d, h                                     ; $6146: $54
     ld   h, c                                     ; $6147: $61
     ld   a, e                                     ; $6148: $7B
@@ -4938,7 +4938,7 @@ jr_004_6267:
     ld   [wIntroTimer], a                         ; $6292: $EA $01 $D0
     call func_004_7FA3                            ; $6295: $CD $A3 $7F
     ldh  a, [$FFF0]                               ; $6298: $F0 $F0
-    rst  $00                                      ; $629A: $C7
+    JP_TABLE                                      ; $629A: $C7
     sbc  a                                        ; $629B: $9F
     ld   h, d                                     ; $629C: $62
     ld   [$CD63], sp                              ; $629D: $08 $63 $CD
@@ -5245,7 +5245,7 @@ label_004_644E:
     call func_004_7FA3                            ; $644E: $CD $A3 $7F
     call func_004_6DCA                            ; $6451: $CD $CA $6D
     ldh  a, [$FFF0]                               ; $6454: $F0 $F0
-    rst  $00                                      ; $6456: $C7
+    JP_TABLE                                      ; $6456: $C7
     ld   h, e                                     ; $6457: $63
     ld   h, h                                     ; $6458: $64
     sbc  e                                        ; $6459: $9B
@@ -5912,7 +5912,7 @@ jr_004_6834:
     call func_004_7FA3                            ; $6837: $CD $A3 $7F
     call label_3B70                               ; $683A: $CD $70 $3B
     ldh  a, [$FFF0]                               ; $683D: $F0 $F0
-    rst  $00                                      ; $683F: $C7
+    JP_TABLE                                      ; $683F: $C7
     ld   c, b                                     ; $6840: $48
     ld   l, b                                     ; $6841: $68
     db   $fd                                      ; $6842: $FD
@@ -6205,7 +6205,7 @@ jr_004_69D5:
     ld   [hl], $00                                ; $69E5: $36 $00
     call label_3B39                               ; $69E7: $CD $39 $3B
     ldh  a, [$FFF0]                               ; $69EA: $F0 $F0
-    rst  $00                                      ; $69EC: $C7
+    JP_TABLE                                      ; $69EC: $C7
     di                                            ; $69ED: $F3
     ld   l, c                                     ; $69EE: $69
     dec  a                                        ; $69EF: $3D
@@ -7106,7 +7106,7 @@ jr_004_6EE9:
     ret  nz                                       ; $6EF4: $C0
 
     ldh  a, [$FFF0]                               ; $6EF5: $F0 $F0
-    rst  $00                                      ; $6EF7: $C7
+    JP_TABLE                                      ; $6EF7: $C7
     jr   c, @+$71                                 ; $6EF8: $38 $6F
 
     add  $6F                                      ; $6EFA: $C6 $6F
@@ -8155,7 +8155,7 @@ jr_004_7511:
 jr_004_7517:
     call func_004_7FA3                            ; $7517: $CD $A3 $7F
     ldh  a, [$FFF0]                               ; $751A: $F0 $F0
-    rst  $00                                      ; $751C: $C7
+    JP_TABLE                                      ; $751C: $C7
     add  hl, hl                                   ; $751D: $29
     ld   [hl], l                                  ; $751E: $75
     ld   e, h                                     ; $751F: $5C
@@ -8172,7 +8172,7 @@ jr_004_7517:
     ld   hl, $C380                                ; $752C: $21 $80 $C3
     add  hl, bc                                   ; $752F: $09
     ld   a, [hl]                                  ; $7530: $7E
-    rst  $00                                      ; $7531: $C7
+    JP_TABLE                                      ; $7531: $C7
     inc  a                                        ; $7532: $3C
     ld   [hl], l                                  ; $7533: $75
     ld   b, h                                     ; $7534: $44
@@ -8537,7 +8537,7 @@ jr_004_770E:
 
 jr_004_7723:
     ldh  a, [$FFF0]                               ; $7723: $F0 $F0
-    rst  $00                                      ; $7725: $C7
+    JP_TABLE                                      ; $7725: $C7
     ld   hl, sp+$77                               ; $7726: $F8 $77
     xor  a                                        ; $7728: $AF
     ld   a, b                                     ; $7729: $78
@@ -9181,7 +9181,7 @@ jr_004_7A2E:
     call OpenDialog                               ; $7A5B: $CD $85 $23
     pop  af                                       ; $7A5E: $F1
     dec  a                                        ; $7A5F: $3D
-    rst  $00                                      ; $7A60: $C7
+    JP_TABLE                                      ; $7A60: $C7
     xor  c                                        ; $7A61: $A9
     ld   a, d                                     ; $7A62: $7A
     jp   nc, $D87A                                ; $7A63: $D2 $7A $D8
@@ -9665,7 +9665,7 @@ jr_004_7D51:
     call func_004_6DCA                            ; $7D54: $CD $CA $6D
     call label_3B23                               ; $7D57: $CD $23 $3B
     ldh  a, [$FFF0]                               ; $7D5A: $F0 $F0
-    rst  $00                                      ; $7D5C: $C7
+    JP_TABLE                                      ; $7D5C: $C7
     ld   l, c                                     ; $7D5D: $69
     ld   a, l                                     ; $7D5E: $7D
     and  e                                        ; $7D5F: $A3
@@ -9803,7 +9803,7 @@ jr_004_7E2A:
     call func_004_6DCA                            ; $7E2A: $CD $CA $6D
     call label_3B23                               ; $7E2D: $CD $23 $3B
     ldh  a, [$FFF0]                               ; $7E30: $F0 $F0
-    rst  $00                                      ; $7E32: $C7
+    JP_TABLE                                      ; $7E32: $C7
     add  hl, sp                                   ; $7E33: $39
     ld   a, [hl]                                  ; $7E34: $7E
     ld   c, h                                     ; $7E35: $4C
@@ -9956,7 +9956,7 @@ jr_004_7EE4:
     call label_3B23                               ; $7F04: $CD $23 $3B
     ldh  a, [$FFF0]                               ; $7F07: $F0 $F0
     and  $03                                      ; $7F09: $E6 $03
-    rst  $00                                      ; $7F0B: $C7
+    JP_TABLE                                      ; $7F0B: $C7
     inc  d                                        ; $7F0C: $14
     ld   a, a                                     ; $7F0D: $7F
     daa                                           ; $7F0E: $27

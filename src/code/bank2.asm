@@ -3134,7 +3134,7 @@ jr_002_557C:
 jr_002_557F:
     pop  af                                       ; $557F: $F1
     dec  a                                        ; $5580: $3D
-    rst  $00                                      ; $5581: $C7
+    JP_TABLE                                      ; $5581: $C7
     dec  h                                        ; $5582: $25
     ld   e, b                                     ; $5583: $58
     and  h                                        ; $5584: $A4
@@ -4459,7 +4459,7 @@ func_002_5D4F::
     srl  a                                        ; $5D62: $CB $3F
     srl  a                                        ; $5D64: $CB $3F
     srl  a                                        ; $5D66: $CB $3F
-    rst  $00                                      ; $5D68: $C7
+    JP_TABLE                                      ; $5D68: $C7
     push bc                                       ; $5D69: $C5
     ld   e, a                                     ; $5D6A: $5F
     dec  h                                        ; $5D6B: $25
@@ -4854,7 +4854,7 @@ func_002_5F9F::
     and  $1F                                      ; $5F9F: $E6 $1F
     ldh  [$FFD7], a                               ; $5FA1: $E0 $D7
     dec  a                                        ; $5FA3: $3D
-    rst  $00                                      ; $5FA4: $C7
+    JP_TABLE                                      ; $5FA4: $C7
     db   $fc                                      ; $5FA5: $FC
     ld   e, a                                     ; $5FA6: $5F
     push bc                                       ; $5FA7: $C5
@@ -5948,7 +5948,7 @@ label_002_67E5::
     ld   a, [$DBB0]                               ; $67E5: $FA $B0 $DB
     and  $30                                      ; $67E8: $E6 $30
     swap a                                        ; $67EA: $CB $37
-    rst  $00                                      ; $67EC: $C7
+    JP_TABLE                                      ; $67EC: $C7
     push af                                       ; $67ED: $F5
     ld   h, a                                     ; $67EE: $67
     ld_long a, $FF67                              ; $67EF: $FA $67 $FF
@@ -5974,7 +5974,7 @@ label_002_680B::
     ld   a, [$DBB0]                               ; $680B: $FA $B0 $DB
     and  $30                                      ; $680E: $E6 $30
     swap a                                        ; $6810: $CB $37
-    rst  $00                                      ; $6812: $C7
+    JP_TABLE                                      ; $6812: $C7
     dec  de                                       ; $6813: $1B
     ld   l, b                                     ; $6814: $68
     jr   nz, @+$6A                                ; $6815: $20 $68
@@ -5996,7 +5996,7 @@ label_002_6827::
     ld   a, [$DBB0]                               ; $6827: $FA $B0 $DB
     and  $30                                      ; $682A: $E6 $30
     swap a                                        ; $682C: $CB $37
-    rst  $00                                      ; $682E: $C7
+    JP_TABLE                                      ; $682E: $C7
     scf                                           ; $682F: $37
     ld   l, b                                     ; $6830: $68
     scf                                           ; $6831: $37
@@ -6147,7 +6147,7 @@ jr_002_68E3:
 
 jr_002_68E4:
     ldh  a, [$FF9C]                               ; $68E4: $F0 $9C
-    rst  $00                                      ; $68E6: $C7
+    JP_TABLE                                      ; $68E6: $C7
     ld   bc, $A16A                                ; $68E7: $01 $6A $A1
     ld   l, c                                     ; $68EA: $69
     db   $10                                      ; $68EB: $10

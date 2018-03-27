@@ -37,6 +37,7 @@ incbin "gfx/items/items_1.dmg.2bpp"
 incbin "gfx/items/instruments.dmg.2bpp"
 incbin "gfx/world/overworld_1.dmg.2bpp"
 incbin "gfx/characters/link_2.dmg.2bpp"
+AnimatedTiles::
 incbin "gfx/world/animated_tiles.w32.dmg.2bpp"
 incbin "gfx/world/minimap.dmg.2bpp"
 

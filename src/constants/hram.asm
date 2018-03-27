@@ -61,8 +61,30 @@ hLinkFinalPositionY:: ; FFA0
   ; Final computed position of Link, once every modifiers added
   ds 1
 
+ds 3
+
+hAnimatedTilesGroup:: ; FFA4
+  ; Animated tiles are grouped by groups of 4 tiles.
+  ; Each map can use one of these groups.
+  ; See ANIMATED_TILES_* constants for possible values
+  ds 1
+
 ; Unlabeled
-ds $8
+hFFA5:: ; FFA5
+  ds 1
+
+hAnimatedTilesFrameCount:: ;FFA6
+  ; Incremented every frame, wraps around $FF
+  ds 1
+
+hAnimatedTilesDataOffset:: ;FFA7
+  ; Pointer to the animation data for the current
+  ; frame (either 00, 40, 80 or C0).
+  ds 1
+
+; Unlabeled
+hFFA8:: ; FFA8
+  ds 1
 
 ; Unused (?) Window Y value
 hWindowYUnused:: ; FFA9

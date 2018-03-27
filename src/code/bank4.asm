@@ -6637,7 +6637,7 @@ label_004_6C20:
     ld   c, $10                                   ; $6C5C: $0E $10
     ld   c, $0C                                   ; $6C5E: $0E $0C
     ld   b, $F0                                   ; $6C60: $06 $F0
-    ldh  a, [$FFA7]                               ; $6C62: $F0 $A7
+    ldh  a, [hAnimatedTilesDataOffset]                               ; $6C62: $F0 $A7
     jp   nz, label_004_6D0F                       ; $6C64: $C2 $0F $6D
 
     ld   de, $6C2D                                ; $6C67: $11 $2D $6C

@@ -4225,6 +4225,9 @@ AnimateMarinBeachTiles::
     ldh  [hLinkFinalPositionY], a
     ld   h, b
 
+; Animated tiles work in groups of 4 tiles.
+; Every n frame, the animation frame pointer is incremented,
+; and the next frame of the animation is copied into the Tiles memory.
 AnimateTiles::
     ;
     ; Animate Marin dialog on beach tiles
@@ -4272,11 +4275,8 @@ AnimateTiles::
     ret
 
 .notIntro
-    ;
-    ; Animate End Credits tiles
-    ;
 
-    ; If GameplayType != CREDITS, skip
+    ; If GameplayType != CREDITS, continue
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
     jr   nz, .notCredits
@@ -4325,7 +4325,7 @@ AnimateTiles::
 .notD6F8
     ldh  a, [$FFA5]
     and  a
-    jr   z, label_1BCD
+    jr   z, .notFFA5
 
 .animateEndCredits
     ; a == $FFA5
@@ -4362,192 +4362,226 @@ AnimateTiles::
     ld   [MBC3SelectBank], a
     jp   $4062
 
-label_1BCD::
-    ; Increment $FFA6 (count of tiles animations run?)
-    ldh  a, [$FFA6]
+.notFFA5
+    ; Increment hAnimatedTilesFrameCount
+    ldh  a, [hAnimatedTilesFrameCount]
     inc  a
-    ldh  [$FFA6], a
+    ldh  [hAnimatedTilesFrameCount], a
 
-label_1BD2::
-    ldh  a, [$FFA4]
+.jumpTable
+    ldh  a, [hAnimatedTilesGroup]
     JP_TABLE
-    ; Code below is actually data for the jump table
-    ld   e, $1D
-    ld   sp, hl
-    dec  de
-    ld   d, $1C
-    ld   a, [de]
-    inc  e
-    add  hl, sp
-    inc  e
-    adc  a, d
-    inc  e
-    adc  a, [hl]
-    inc  e
-    xor  c
-    inc  e
-    add  a, $1C
-    push de
-    inc  e
-    db   $E4 ; Undefined instruction
-    inc  e
-    ldi  [hl], a
-    inc  e
-    ld   e, $1C
-    rst  $28
-    inc  e
-    ei
-    inc  e
-    di
-    inc  e
-    rst  $30
-    inc  e
-    rst  $38
-    inc  e
-    ldh  a, [$FFA6]
+._00 dw SkipTilesGroupAnimation
+._01 dw AnimateCounterTilesGroup
+._02 dw AnimateTideTilesGroup
+._03 dw AnimateVillageTilesGroup
+._04 dw AnimateDungeon1TilesGroup
+._05 dw AnimateUndergroundTilesGroup
+._06 dw AnimateLavaTilesGroup
+._07 dw AnimateDungeon2TilesGroup
+._08 dw AnimateWarpTilesGroup
+._09 dw AnimateWaterCurrentsTilesGroup
+._0A dw AnimateWaterfallTilesGroup
+._0B dw AnimateSlowWaterfallTilesGroup
+._0C dw AnimateWaterDungeonTilesGroup
+._0D dw AnimateLightBeamTilesGroup
+._0E dw AnimateCrystalBlockTilesGroup
+._0F dw AnimateBubblesTilesGroup
+._10 dw AnimateWeatherVaneTilesGroup
+._11 dw AnimatePhotoTilesGroup
+
+AnimateCounterTilesGroup::
+    ldh  a, [hAnimatedTilesFrameCount]
     and  $07
-    jp   nz, label_1D1E
+    jp   nz, SkipTilesGroupAnimation
     ld   a, $01
     ld   [MBC3SelectBank], a
-    call label_61AA
+    call LoadCounterAnimatedTiles
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
-label_1C13::
+; Load the given frame for the animated tiles group
+; Inputs:
+;   h    the animated tiles group id
+;   a    the data offset for the frame to load
+LoadAnimatedTilesFrameAtOffset::
     ld   l, a
-    jr   label_1C51
-    ld   h, $6B
-    jr   label_1C24
-    ld   h, $6C
-    jr   label_1C24
-    ld   h, $73
-    jr   label_1C24
-    ld   h, $6A
+    jr   LoadAnimatedTilesFrame
 
-label_1C24::
-    ldh  a, [$FFA6]
+AnimateTideTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $1
+    jr   AnimateTilesSlowSpeed
+
+AnimateVillageTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $2
+    jr   AnimateTilesSlowSpeed
+
+AnimateWaterDungeonTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $9
+    jr   AnimateTilesSlowSpeed
+
+AnimateSlowWaterfallTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $0
+
+AnimateTilesSlowSpeed::
+    ; If (FrameCount mod $0F) = 0, animate
+    ldh  a, [hAnimatedTilesFrameCount]
     and  $0F
-    jp   nz, label_1D1E
-    call label_1CE8
-    jp   label_1C13
+    jp   nz, SkipTilesGroupAnimation
+    call IncrementAnimatedTilesDataOffset
+    jp   LoadAnimatedTilesFrameAtOffset
 
-data_1C31::
+AnimatedTilesDataOffsets::
     db 0, $40, $80, $C0, $C0, $C0, $80, $40
 
-label_1C39::
-    ldh  a, [$FFA6]
+AnimateDungeon1TilesGroup::
+    ldh  a, [hAnimatedTilesFrameCount]
     and  $07
-    jp   nz, label_1D1E
-    ldh  a, [$FFA6]
+    jp   nz, SkipTilesGroupAnimation
+    ldh  a, [hAnimatedTilesFrameCount]
     rra
     rra
     rra
     and  $07
     ld   e, a
     ld   d, $00
-    ld   hl, data_1C31
+    ld   hl, AnimatedTilesDataOffsets
     add  hl, de
     ld   l, [hl]
-    ld   h, $6D
+    ld   h, HIGH(AnimatedTiles) + $3
 
-label_1C51::
-    ld   de, $96C0
-
-label_1C54::
+; Load the given frame for the animated tiles group
+; Inputs:
+;  hl  frames location
+;  de  target location
+;  bc  frame size
+LoadAnimatedTilesFrame::
+    ; Copy the tiles data
+    ld   de, vTiles2 + $06C0
+.de
     ld   bc, $0040
     call CopyData
+
+    ; Do special case for MAP_SPECIAL
     ldh  a, [hMapId]
     cp   MAP_SPECIAL
-    jr   nz, label_1C87
+    jr   nz, .endMapFF
+
     ld   a, $20
     ld   [MBC3SelectBank], a
     ld   b, $01
     call label_47F7
-    jr   z, label_1C72
+    jr   z, .next
     ld   [MBC3SelectBank], a
     call CopyData
-
-label_1C72::
+.next
     ld   a, $20
     ld   [MBC3SelectBank], a
     ld   b, $00
     call label_47F7
-    jr   z, label_1C87
+    jr   z, .endMapFF
     ld   [MBC3SelectBank], a
     ld   de, $96C0
     call CopyData
+.endMapFF
 
-label_1C87::
     jp   DrawLinkSpriteAndReturn
-    ld   h, $6E
-    jr   label_1C24
-    ldh  a, [$FFA6]
+
+AnimateUndergroundTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $4
+    jr   AnimateTilesSlowSpeed
+
+AnimateLavaTilesGroup::
+    ldh  a, [hAnimatedTilesFrameCount]
     and  $07
-    jp   nz, label_1D1E
-    ldh  a, [$FFA6]
+    jp   nz, SkipTilesGroupAnimation
+    ldh  a, [hAnimatedTilesFrameCount]
     rra
     rra
     rra
     and  $07
     ld   e, a
     ld   d, $00
-    ld   hl, data_1C31
+    ld   hl, AnimatedTilesDataOffsets
     add  hl, de
     ld   l, [hl]
-    ld   h, $6F
-    jp   label_1C51
+    ld   h, HIGH(AnimatedTiles) + $5
+    jp   LoadAnimatedTilesFrame
+
+AnimateDungeon2TilesGroup::
     ld   hl, $DCC0
     ldh  a, [hMapId]
     cp   MAP_SPECIAL
     jr   nz, label_1CB8
     ld   de, $8400
-    jp   label_1C54
+    jp   LoadAnimatedTilesFrame.de
 
 label_1CB8::
-    ldh  a, [$FFA6]
+    ldh  a, [hAnimatedTilesFrameCount]
     inc  a
     and  $03
-    jp   nz, label_1C39
+    jp   nz, AnimateDungeon1TilesGroup
     ld   de, $90C0
-    jp   label_1C54
-    ld   h, $70
+    jp   LoadAnimatedTilesFrame.de
 
-label_1CC8::
-    ldh  a, [$FFA6]
+AnimateWarpTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $6
+
+AnimateTilesMediumSpeed::
+    ldh  a, [hAnimatedTilesFrameCount]
     and  $07
-    jp   nz, label_1D1E
-    call label_1CE8
-    jp   label_1C13
-    ld   h, $71
+    jp   nz, SkipTilesGroupAnimation
+    call IncrementAnimatedTilesDataOffset
+    jp   LoadAnimatedTilesFrameAtOffset
 
-label_1CD7::
-    ldh  a, [$FFA6]
+AnimateWaterCurrentsTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $7
+
+AnimateTilesFastSpeed::
+    ldh  a, [hAnimatedTilesFrameCount]
     and  $03
-    jp   nz, label_1D1E
-    call label_1CE8
-    jp   label_1C13
-    ld   h, $72
-    jr   label_1CD7
+    jp   nz, SkipTilesGroupAnimation
+    call IncrementAnimatedTilesDataOffset
+    jp   LoadAnimatedTilesFrameAtOffset
 
-label_1CE8::
-    ldh  a, [$FFA7]
+AnimateWaterfallTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $8
+    jr   AnimateTilesFastSpeed
+
+; Increment the current data offset by one frame.
+; Return:
+;   a   the new data offset
+IncrementAnimatedTilesDataOffset::
+    ldh  a, [hAnimatedTilesDataOffset]
     add  a, $40
-    ldh  [$FFA7], a
+    ldh  [hAnimatedTilesDataOffset], a
     ret
-    ld   h, $75
-    jr   label_1CD7
-    ld   h, $74
-    jr   label_1CC8
-    ld   h, $77
-    jr   label_1CC8
-    ld   h, $76
-    jr   label_1CC8
+
+AnimateLightBeamTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $B
+    jr   AnimateTilesFastSpeed
+
+AnimateBubblesTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $A
+    jr   AnimateTilesMediumSpeed
+
+AnimateWeatherVaneTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $D
+    jr   AnimateTilesMediumSpeed
+
+AnimateCrystalBlockTilesGroup::
+    ld   h, HIGH(AnimatedTiles) + $C
+    jr   AnimateTilesMediumSpeed
+
+AnimatePhotoTilesGroup::
     ld   a, $38
     ld   [MBC3SelectBank], a
     call label_7830
     jp   DrawLinkSpriteAndReturn
+
+label_1D0A::
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4562,7 +4596,7 @@ label_1D12::
     ld   [MBC3SelectBank], a
     ret
 
-label_1D1E::
+SkipTilesGroupAnimation::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call label_54F5
@@ -6164,9 +6198,9 @@ label_2D2C::
 
 label_2D50::
     xor  a
-    ldh  [$FFA6], a
-    ldh  [$FFA7], a
-    call label_1BD2
+    ldh  [hAnimatedTilesFrameCount], a
+    ldh  [hAnimatedTilesDataOffset], a
+    call AnimateTiles.jumpTable
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -6900,7 +6934,7 @@ label_323A::
     ld   a, [bc]
     cp   $FE
     jr   z, endOfRoom
-    ldh  [$FFA4], a
+    ldh  [hAnimatedTilesGroup], a
     inc  bc
     ld   a, [$DBA5]
     and  a

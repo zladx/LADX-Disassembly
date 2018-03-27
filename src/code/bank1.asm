@@ -724,7 +724,7 @@ label_4452::
     call label_37FE
     call label_5FB3
     ld   a, $FF
-    ldh  [$FFA6], a
+    ldh  [hAnimatedTilesFrameCount], a
     ld   a, [wActiveRoom]
     and  a
     jr   z, label_44A6
@@ -5184,7 +5184,7 @@ label_618A::
     db 0, $57, $10, $57, $20, $57, $30, $57, $40, $57, $50, $57, $60, $57, $70, $57
     db $80, $57, $90, $57, 0, $58, $10, $58, $20, $58, $30, $58, $40, $58, $50, $58
 
-label_61AA::
+LoadCounterAnimatedTiles::
     ld   a, [$C109]
     and  $0F
     sla  a

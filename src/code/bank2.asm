@@ -8982,7 +8982,7 @@ jr_002_797A:
 jr_002_7986:
     call label_3958                               ; $7986: $CD $58 $39
     ld   a, $FF                                   ; $7989: $3E $FF
-    ldh  [$FFA6], a                               ; $798B: $E0 $A6
+    ldh  [hAnimatedTilesFrameCount], a                               ; $798B: $E0 $A6
     ld   a, [wActiveRoom]                         ; $798D: $FA $A5 $DB
     and  a                                        ; $7990: $A7
     ret  z                                        ; $7991: $C8

@@ -11,6 +11,7 @@ include "text/dialog_dx.asm"
 include "data/ascii_to_tile.asm"
 
 ; Utilities fonctions and ROM header
+include "code/macros.asm"
 include "code/interrupts.asm"
 include "code/header.asm"
 
@@ -36,6 +37,7 @@ incbin "gfx/items/items_1.dmg.2bpp"
 incbin "gfx/items/instruments.dmg.2bpp"
 incbin "gfx/world/overworld_1.dmg.2bpp"
 incbin "gfx/characters/link_2.dmg.2bpp"
+AnimatedTiles::
 incbin "gfx/world/animated_tiles.w32.dmg.2bpp"
 incbin "gfx/world/minimap.dmg.2bpp"
 

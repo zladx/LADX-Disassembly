@@ -1,8 +1,6 @@
 .POSIX:
 
-# If your default python is 3, you may want to change this to python27.
-PYTHON := python
-2BPP   := $(PYTHON) tools/gfx.py 2bpp
+2BPP   := rgbgfx
 ASM    := rgbasm -E
 
 .SUFFIXES: .asm .o .gbc .png .2bpp
@@ -35,7 +33,7 @@ asm_files = $(shell find src     -type f -name '*.asm')
 gfx_files = $(shell find src/gfx -type f -name '*.png')
 
 %.2bpp: %.png
-	$(2BPP) $<
+	$(2BPP) -o $@ $<
 
 src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) Zelda.gbc
 

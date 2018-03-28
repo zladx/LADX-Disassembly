@@ -117,9 +117,9 @@ jr_004_409E:
     ld   a, $14                                   ; $40BA: $3E $14
     call label_3BB5                               ; $40BC: $CD $B5 $3B
     ldh  a, [$FFD7]                               ; $40BF: $F0 $D7
-    ldh  [$FF9B], a                               ; $40C1: $E0 $9B
+    ldh  [hLinkPositionYIncrement], a                               ; $40C1: $E0 $9B
     ldh  a, [$FFD8]                               ; $40C3: $F0 $D8
-    ldh  [hFF9A], a                               ; $40C5: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $40C5: $E0 $9A
 
 jr_004_40C7:
     ld   hl, wEntitiesUnknownTableD               ; $40C7: $21 $D0 $C2
@@ -2871,11 +2871,11 @@ jr_004_547E:
     ldh  a, [$FFD7]                               ; $54B4: $F0 $D7
     cpl                                           ; $54B6: $2F
     inc  a                                        ; $54B7: $3C
-    ldh  [$FF9B], a                               ; $54B8: $E0 $9B
+    ldh  [hLinkPositionYIncrement], a                               ; $54B8: $E0 $9B
     ldh  a, [$FFD8]                               ; $54BA: $F0 $D8
     cpl                                           ; $54BC: $2F
     inc  a                                        ; $54BD: $3C
-    ldh  [hFF9A], a                               ; $54BE: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $54BE: $E0 $9A
     push bc                                       ; $54C0: $C5
     call label_21A8                               ; $54C1: $CD $A8 $21
     pop  bc                                       ; $54C4: $C1
@@ -5932,9 +5932,9 @@ jr_004_6852:
     cp   $00                                      ; $6855: $FE $00
     jp   nz, label_004_68E4                       ; $6857: $C2 $E4 $68
 
-    ldh  a, [hFF9A]                               ; $685A: $F0 $9A
+    ldh  a, [hLinkPositionXIncrement]                               ; $685A: $F0 $9A
     push af                                       ; $685C: $F5
-    ldh  a, [$FF9B]                               ; $685D: $F0 $9B
+    ldh  a, [hLinkPositionYIncrement]                               ; $685D: $F0 $9B
     push af                                       ; $685F: $F5
     ld   e, $00                                   ; $6860: $1E $00
     ldh  a, [$FFEB]                               ; $6862: $F0 $EB
@@ -5957,7 +5957,7 @@ jr_004_686D:
     inc  a                                        ; $6879: $3C
 
 jr_004_687A:
-    ldh  [$FF9B], a                               ; $687A: $E0 $9B
+    ldh  [hLinkPositionYIncrement], a                               ; $687A: $E0 $9B
     ldh  a, [$FFD8]                               ; $687C: $F0 $D8
     bit  0, e                                     ; $687E: $CB $43
     jr   z, jr_004_6884                           ; $6880: $28 $02
@@ -5966,15 +5966,15 @@ jr_004_687A:
     inc  a                                        ; $6883: $3C
 
 jr_004_6884:
-    ldh  [hFF9A], a                               ; $6884: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $6884: $E0 $9A
     push bc                                       ; $6886: $C5
     call label_21A8                               ; $6887: $CD $A8 $21
     call label_3E19                               ; $688A: $CD $19 $3E
     pop  bc                                       ; $688D: $C1
     pop  af                                       ; $688E: $F1
-    ldh  [$FF9B], a                               ; $688F: $E0 $9B
+    ldh  [hLinkPositionYIncrement], a                               ; $688F: $E0 $9B
     pop  af                                       ; $6891: $F1
-    ldh  [hFF9A], a                               ; $6892: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $6892: $E0 $9A
     xor  a                                        ; $6894: $AF
     ld   [$C144], a                               ; $6895: $EA $44 $C1
     ldh  a, [$FFEB]                               ; $6898: $F0 $EB
@@ -7275,7 +7275,7 @@ jr_004_6FE2:
 jr_004_6FE6:
     xor  a                                        ; $6FE6: $AF
     ld   [wC120], a                               ; $6FE7: $EA $20 $C1
-    ldh  [hFF9A], a                               ; $6FEA: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $6FEA: $E0 $9A
     ld   e, $06                                   ; $6FEC: $1E $06
     ld   hl, $C390                                ; $6FEE: $21 $90 $C3
     add  hl, bc                                   ; $6FF1: $09

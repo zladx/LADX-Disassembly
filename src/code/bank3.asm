@@ -4504,9 +4504,9 @@ label_E625::
     cp   $30
     jr   nc, label_E64A
     call label_ECD5
-    ld   hl, $FF9A
+    ld   hl, hLinkPositionXIncrement
     sla  [hl]
-    ld   hl, $FF9B
+    ld   hl, hLinkPositionYIncrement
     sla  [hl]
 
 label_E64A::
@@ -5541,7 +5541,7 @@ label_ECD5::
     ld   a, $02
     ld   [$C146], a
     ld   a, $F0
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     call label_3D7F
     ld   a, $0E
     ldh  [$FFF3], a
@@ -5565,7 +5565,7 @@ label_ECF9::
     jr   label_ED17
 
 label_ED15::
-    ldh  a, [$FF9B]
+    ldh  a, [hLinkPositionYIncrement]
 
 label_ED17::
     and  $80
@@ -5590,7 +5590,7 @@ label_ED1B::
 
 label_ED38::
     ld   a, $F0
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ret
 
 label_ED3D::
@@ -5728,9 +5728,9 @@ label_EE0E::
     ld   hl, data_EE0C
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     ld   a, $F4
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     xor  a
     ldh  [$FF9C], a
     scf
@@ -5837,7 +5837,7 @@ label_EE8E::
     cp   $02
     ret  nz
     ld   a, $04
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ld   a, $08
     ld   [$C13E], a
     jp   IncrementEntityWalkingAttr
@@ -6001,9 +6001,9 @@ label_EFA7::
     inc  a
 
 label_EFB3::
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     xor  a
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ret
 
 label_EFB9::
@@ -6912,9 +6912,9 @@ label_F52D::
 label_F565::
     call label_FE45
     ldh  a, [$FFD7]
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ldh  a, [$FFD8]
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
 
 label_F570::
     ret
@@ -6936,9 +6936,9 @@ label_F571::
     ld   a, $D0
 
 label_F58B::
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     xor  a
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ld   a, $30
     ldh  [$FFA3], a
     ld   a, $0B

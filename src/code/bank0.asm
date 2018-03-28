@@ -1289,7 +1289,7 @@ WorldDefaultHandler::
     ld   hl, $C11E
     res  7, [hl]
     call $593B
-    callsw ApplyMapTransition
+    callsw ApplyMapSlideTransition
     call label_1033
     ld   a, [$C15C]
     ld   [$C3CF], a
@@ -2045,7 +2045,7 @@ UseRocksFeather::
     ld   a, $E8
 
 label_14F8::
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     xor  a
     ldh  [$FFA3], a
     call label_21A8
@@ -2063,11 +2063,11 @@ label_1508::
     ld   hl, data_14C3
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     ld   hl, data_14C7
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
 
 label_1523::
     ret
@@ -2103,7 +2103,7 @@ label_1535::
     and  a
     jr   nz, label_1562
     call label_CAF
-    call label_178E
+    call ClearLinkPositionIncrement
 
 label_1562::
     ld   a, [wProjectileCount]
@@ -2412,11 +2412,11 @@ label_1713::
     ld   hl, data_16FD
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     ld   hl, data_1701
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     xor  a
     ld   [$C1AC], a
     ret
@@ -2452,10 +2452,10 @@ label_1781::
     ld   a, $0C
     jp   label_CC7
 
-label_178E::
+ClearLinkPositionIncrement::
     xor  a
-    ldh  [$FF9A], a
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionXIncrement], a
+    ldh  [hLinkPositionYIncrement], a
     ret
 
 label_1794::
@@ -3532,7 +3532,7 @@ label_21A8::
 
 label_21B6::
     ld   b, $00
-    ld   hl, $FF9A
+    ld   hl, hLinkPositionXIncrement
     add  hl, bc
     ld   a, [hl]
     push af
@@ -3681,7 +3681,7 @@ label_2299::
     add  hl, bc
     pop  de
     pop  bc
-    ld   a, [$C125]
+    ld   a, [wMapSlideDirection]
     and  $02
     jr   z, label_22D3
     call label_2214
@@ -3738,7 +3738,7 @@ label_22D3::
 
 label_22FE::
     push bc
-    ld   a, [$C125]
+    ld   a, [wMapSlideDirection]
     ld   c, a
     ld   b, $00
     ld   hl, data_2205

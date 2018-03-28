@@ -38,9 +38,17 @@ hLinkPositionX:: ; FF98
 hLinkPositionY:: ; FF99
  ds 1
 
+hLinkPositionXIncrement:: ; FF9A
+ ; Increment applied to hLinkPositionX at the end of the frame
+ ds 1
+
+hLinkPositionYIncrement:: ; FF9B
+ ; Increment applied to hLinkPositionY at the end of the frame
+ ds 1
+
 ; Unlabeled
-hFF9A:: ; hFF9A
-  ds 3
+hFF9C:: ; hFF9C
+ ds 1
 
 hLinkAnimationState:: ; FF9D
  ds 1

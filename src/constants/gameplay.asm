@@ -102,6 +102,12 @@ MAP_SLIDE_PREPARE_3        equ $03
 MAP_SLIDE_FIRST_HALF       equ $04
 MAP_SLIDE_SECOND_HALF      equ $05
 
+; Values for wMapSlideDirection
+MAP_SLIDE_DIRECTION_RIGHT  equ $00
+MAP_SLIDE_DIRECTION_LEFT   equ $01
+MAP_SLIDE_DIRECTION_TOP    equ $02
+MAP_SLIDE_DIRECTION_BOTTOM equ $03
+
 ; Values for wDialogState
 DIALOG_CLOSED              equ $00
 DIALOG_OPENING_1           equ $01

@@ -719,7 +719,7 @@ GameplayWorldSubtype1Handler::
 
 label_4452::
     ld   a, $04
-    ld   [$C125], a
+    ld   [wMapSlideDirection], a
     call label_30F4
     call label_37FE
     call label_5FB3
@@ -4705,7 +4705,7 @@ label_5EA6::
     inc  a
     ldh  [$FFE4], a
     push bc
-    ld   a, [$C125]
+    ld   a, [wMapSlideDirection]
     ld   c, a
     ld   b, $00
     ld   hl, label_5E97

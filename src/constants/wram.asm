@@ -70,9 +70,24 @@ wC122 equ $C122
 wMapSlideTransitionState:: ; C124
   ds 1
 
+wMapSlideDirection:: ; C125
+  ; See MAP_SLIDE_DIRECTION_* constants for possible values
+  ds 1
+
 ; Unlabeled
-wC125 equ $C125
-  ds $18
+wC126 equ $C126
+  ds 6
+
+wMapSlideTargetScrollX:: ; C12C
+  ; Stop the map slide transition when reaching this value
+  ds 1
+
+wMapSlideTargetScrollY:: ; C12D
+  ; Stop the map slide transition when reaching this value
+  ds 1
+
+; Unlabeled
+ds $F
 
 wRandomSeed:: ; C13D
   ; Seed for the Random Number Generator

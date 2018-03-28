@@ -1116,7 +1116,7 @@ label_47AA::
     push de
     ld   hl, $A105
     add  hl, de
-    ld   de, label_3A8
+    ld   de, $3A8
 
 label_47B2::
     call EnableExternalRAMWriting
@@ -2252,7 +2252,7 @@ label_4E67::
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
-    ld   de, label_3A8
+    ld   de, $3A8
 
 label_4E91::
     call EnableExternalRAMWriting
@@ -2598,7 +2598,7 @@ label_50AF::
     ld   b, h
     ld   a, [hl]
     sbc  a, b
-    call nz, label_7E44
+    call nz, $7E44
     sbc  a, c
     inc  b
     ld   b, h
@@ -2622,7 +2622,7 @@ label_50C7::
     ld   b, h
     ld   a, [hl]
     sbc  a, b
-    call label_7E44
+    call $7E44
     sbc  a, c
     dec  c
     ld   b, h
@@ -2835,7 +2835,7 @@ label_51CE::
     inc  hl
     ld   h, [hl]
     ld   l, a
-    ld   de, label_3AD
+    ld   de, $3AD
 
 label_5224::
     call EnableExternalRAMWriting
@@ -6673,7 +6673,7 @@ label_6C77::
     add  hl, bc
     ld   e, l
     ld   d, h
-    ld   hl, label_4D00
+    ld   hl, $4D00
     add  hl, bc
     call label_C3A
     ldh  a, [$FF92]
@@ -6702,7 +6702,7 @@ label_6CE0::
 
 label_6CE2::
     ret
-    ld   bc, label_400
+    ld   bc, $400
     ld   hl, $9800
 
 label_6CE9::
@@ -6752,7 +6752,7 @@ label_6D1C::
     ld   a, $01
     ld   [rVBK], a
     ld   hl, $9800
-    ld   bc, label_400
+    ld   bc, $400
 
 label_6D26::
     ld   a, d

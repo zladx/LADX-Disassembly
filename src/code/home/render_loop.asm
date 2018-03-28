@@ -116,7 +116,7 @@ RenderLoop::
     ; Position sprites for the title screen (?)
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_5257
+    call $5257
 .fi
 
 .RenderLoop_TransitionSfx:
@@ -137,7 +137,7 @@ RenderLoop::
     ; Apply the transition effect...
     ld   a, $17
     ld   [MBC3SelectBank], a
-    call label_48DD
+    call $48DD
     ; ... and continue rendering a new frame.
     jp   RenderInteractiveFrame
 .elsif
@@ -166,7 +166,7 @@ RenderLoop::
     cp   TRANSITION_SFX_MANBO_IN
     jr   nz, .finishTransition
     ; ... teleport to Manbo Pond.
-    call label_4E51
+    call $4E51
 
 .finishTransition
     ; Reset transition state
@@ -191,12 +191,12 @@ RenderLoop::
     ; (calls 20:6CA7)
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6CA7
+    call $6CA7
     jr   .transitionDone
 .renderDMGFadeOut
     ; Render fade-to-white effect for DMG
     ; (calls 14:4FE8)
-    call label_4FE8
+    call $4FE8
 .transitionFadeOutEnd
 
 .transitionDone
@@ -205,7 +205,7 @@ RenderLoop::
     ld   a, $14
     ld   [MBC3SelectBank], a
     pop  af
-    call label_5038
+    call $5038
 
     ; Play some audio
     call PlayAudioStep
@@ -310,7 +310,8 @@ RenderPalettes::
     ; update palettes
     ld   a, $21
     call SwitchBank
-    call label_406E ; update palette set defined in $DDD2?
+    ; update palette set defined in $DDD2?
+    call $406E
 
 .resetDDD2
     xor  a
@@ -326,7 +327,7 @@ WaitForNextFrame::
     ; (calls 1F:7F80)
     ld   a, $1F
     call SwitchBank
-    call label_7F80
+    call $7F80
 
     ; Switch to first graphics bank ($0C on DMG, $2C on GBC)
     ld   a, $0C

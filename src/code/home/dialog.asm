@@ -331,7 +331,7 @@ DialogLetterAnimationStartHandler::
     ret
 
 .delayOver
-    call label_49F1
+    call $49F1
     jp   IncrementDialogStateAndReturn
 
 DialogLetterAnimationEndHandler::

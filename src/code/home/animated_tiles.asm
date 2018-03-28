@@ -287,7 +287,7 @@ LoadAnimatedTilesFrame::
     ld   a, $20
     ld   [MBC3SelectBank], a
     ld   b, $01
-    call label_47F7
+    call $47F7
     jr   z, .next
     ld   [MBC3SelectBank], a
     call CopyData
@@ -295,7 +295,7 @@ LoadAnimatedTilesFrame::
     ld   a, $20
     ld   [MBC3SelectBank], a
     ld   b, $00
-    call label_47F7
+    call $47F7
     jr   z, .endMapFF
     ld   [MBC3SelectBank], a
     ld   de, $96C0
@@ -393,7 +393,7 @@ AnimateCrystalBlockTilesGroup::
 AnimatePhotoTilesGroup::
     ld   a, $38
     ld   [MBC3SelectBank], a
-    call label_7830
+    call $7830
     jp   DrawLinkSpriteAndReturn
 
 label_1D0A::
@@ -414,7 +414,7 @@ label_1D12::
 SkipTilesGroupAnimation::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_54F5
+    call $54F5
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a

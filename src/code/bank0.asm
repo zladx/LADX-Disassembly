@@ -97,7 +97,7 @@ label_873::
 PlayAudioStep::
     ld   a, $1F
     call SwitchBank
-    call label_4006
+    call $4006
     ldh  a, [$FFF3]
     and  a
     jr   nz, label_8D6
@@ -117,10 +117,10 @@ label_8C3::
 label_8C6::
     ld   a, $1B
     call SwitchBank
-    call label_4006
+    call $4006
     ld   a, $1E
     call SwitchBank
-    call label_4006
+    call $4006
 
 label_8D6::
     ret
@@ -128,7 +128,7 @@ label_8D6::
 label_8D7::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6A30
+    call $6A30
 
 restoreBankAndReturn::
     ld   a, [wCurrentBank]
@@ -138,33 +138,33 @@ restoreBankAndReturn::
 label_8E6::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6AC1
+    call $6AC1
     jr   restoreBankAndReturn
 
 ; Load BG palette?
 label_8F0::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6BA4
+    call $6BA4
     jr   restoreBankAndReturn
 
 label_8FA::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6BDC
+    call $6BDC
     jr   RestoreStackedBankAndReturn
 
 label_905::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6C00
+    call $6C00
     jr   LoadBank1AndReturn
 
 label_90F::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6C24
+    call $6C24
 
 LoadBank1AndReturn::
     ld   a, $01
@@ -186,7 +186,7 @@ label_91D::
 label_92F::
     ld   a, $1A
     ld   [MBC3SelectBank], a
-    call label_6576
+    call $6576
     ldh  a, [$FFDF]
     ld   [MBC3SelectBank], a
     ld   hl, $DC91
@@ -239,13 +239,13 @@ label_978::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6D0E
+    call $6D0E
     jr   RestoreStackedBankAndReturn
 
 label_983::
     ld   a, $1A
     ld   [MBC3SelectBank], a
-    call label_6710
+    call $6710
     ldh  a, [$FFDF]
     ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
@@ -289,21 +289,21 @@ label_9C8::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4985
+    call $4985
     jr   RestoreStackedBankAndReturn
 
 label_9D3::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4518
+    call $4518
     jr   RestoreStackedBankAndReturn
 
 label_9DE::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4874
+    call $4874
     jr   RestoreStackedBankAndReturn
 
 label_9E9::
@@ -317,7 +317,7 @@ label_9F5::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_482D
+    call $482D
     jp   RestoreStackedBankAndReturn
 
 label_A01::
@@ -368,14 +368,14 @@ label_A47::
     push af
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_505F
+    call $505F
     jp   RestoreStackedBankAndReturn
 
 label_A53::
     push af
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_4F9B
+    call $4F9B
     jp   RestoreStackedBankAndReturn
 
 label_A5F::
@@ -389,28 +389,28 @@ label_A6B::
     push af
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_5A2E
+    call $5A2E
     jp   RestoreStackedBankAndReturn
 
 label_A77::
     push af
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_4F68
+    call $4F68
     jp   RestoreStackedBankAndReturn
 
 label_A83::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6D52
+    call $6D52
     jp   RestoreStackedBankAndReturn
 
 label_A8F::
     push af
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_4BE8
+    call $4BE8
     jp   RestoreStackedBankAndReturn
 
 label_A9B::
@@ -424,7 +424,7 @@ label_AA7::
     push af
     ld   a, $36
     call SwitchBank
-    call label_705A
+    call $705A
 
 label_AB0::
     pop  af
@@ -435,7 +435,7 @@ label_AB5::
     push af
     ld   a, $24
     ld   [MBC3SelectBank], a
-    call label_5C1A
+    call $5C1A
     ld   de, wRequest
     call ExecuteBackgroundCopyRequest
     jr   label_AB0
@@ -444,41 +444,41 @@ label_AC6::
     push af
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_703E
+    call $703E
     jp   RestoreStackedBankAndReturn
 
 label_AD2::
     push af
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_70D6
+    call $70D6
     jp   RestoreStackedBankAndReturn
 
 label_ADE::
     push af
     ld   a, $36
     call SwitchBank
-    call label_4A77
+    call $4A77
     jp   RestoreStackedBankAndReturn
 
 label_AEA::
     push af
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_4A4C
+    call $4A4C
     jp   RestoreStackedBankAndReturn
 
 label_AF6::
     push af
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_7161
+    call $7161
     jp   RestoreStackedBankAndReturn
 
 label_B02::
     ld   a, $3D
     ld   [MBC3SelectBank], a
-    call label_4029
+    call $4029
     ret
 
 ; Toogle an extra byte to the bank number on GBC (on GB, does nothing)
@@ -525,7 +525,7 @@ label_B2F::
     jr   nz, label_B4B
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6E50
+    call $6E50
     jr   c, label_B54
 
 label_B4B::
@@ -1140,11 +1140,11 @@ PeachPictureHandler::
     jp   returnFromGameplayHandler
 
 MarinBeachHandler::
-    call label_6203
+    call $6203
     jp   returnFromGameplayHandler
 
 MinimapHandler::
-    call label_5626
+    call $5626
     jp   returnFromGameplayHandler
 
 FileSaveHandler::
@@ -1156,7 +1156,7 @@ IntroHandler::
 EndCreditsHandler::
     ld   a, $17
     call SwitchBank
-    call label_4AB7
+    call $4AB7
     jp   returnFromGameplayHandler
 
 label_EED::
@@ -1183,39 +1183,39 @@ label_F05::
     jr   label_EF4
 
 FileSelectionHandler::
-    jp   label_47CE
+    jp   $47CE
 
 FileCreationHandler::
     jp   label_4A07
 
 FileDeletionHandler::
-    jp   label_4CFB
+    jp   $4CFB
 
 FileCopyHandler::
-    jp   label_4F8C
+    jp   $4F8C
 
 WorldHandler::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_4C4B
-    call label_4ABC
+    call $4C4B
+    call $4ABC
     jpsw WorldHandlerEntryPoint
 
 InventoryHandler::
     ld   a, $20
     call SwitchBank
-    jp   label_5904
+    jp   $5904
 
 PhotoAlbumHandler::
     ld   a, $28
     call SwitchBank
-    call label_4000
+    call $4000
     jp   returnFromGameplayHandler
 
 PhotoPictureHandler::
     ld   a, $37
     call SwitchBank
-    jp   label_4000
+    jp   $4000
 
 ; World handler for GAMEPLAY_WORLD_DEFAULT (dispatched from WorldHandlerEntryPoint)
 WorldDefaultHandler::
@@ -1288,17 +1288,17 @@ WorldDefaultHandler::
     res  7, [hl]
     ld   hl, $C11E
     res  7, [hl]
-    call label_593B
+    call $593B
     callsw ApplyMapTransition
     call label_1033
     ld   a, [$C15C]
     ld   [$C3CF], a
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4B1F
+    call $4B1F
     ld   a, $19
     call SwitchBank
-    call label_7A9A
+    call $7A9A
     call label_398D
     callsw label_002_5487
     ld   hl, wRequestDestination
@@ -1330,7 +1330,7 @@ label_100A::
 label_1012::
     ld   a, $14
     call SwitchBank
-    call label_54F8
+    call $54F8
 
 returnFromGameplayHandler::
     ld   a, $0F
@@ -1343,7 +1343,8 @@ label_101F::
     ret  z
     ld   a, $24
     call SwitchBank
-    jp   label_7405 ; will return to main game loop
+    ; will return to main game loop
+    jp   $7405
 
 label_102E::
     ld   [$990E], sp
@@ -1431,7 +1432,7 @@ label_107F::
     ld   [wGameplayType], a
     ld   a, GAMEPLAY_FILE_SELECT
     ld   [MBC3SelectBank], a
-    call label_755B
+    call $755B
     call DrawLinkSprite
     call label_398D
     pop  af
@@ -1518,7 +1519,7 @@ LinkMotionPassOutHandler::
 LinkMotionInteractiveHandler::
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_725A
+    call $725A
     and  a
     ret  z
 
@@ -1683,7 +1684,7 @@ label_1281::
 label_128D::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_48CA
+    call $48CA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1707,7 +1708,8 @@ ItemFunction::
     cp   $0A
     jp   z, UseRocksFeather
     cp   $09
-    jp   z, label_41FC ; Ocarina
+    ; Ocarina
+    jp   z, $41FC
     cp   $0C
     jp   z, UseMagicPowder
     cp   $0B
@@ -1742,7 +1744,7 @@ UseShovel::
     ret  nz
 
 label_1300::
-    call label_4D20
+    call $4D20
     jr   nc, label_130B
     ld   a, $07
     ldh  [$FFF2], a
@@ -1790,7 +1792,7 @@ label_1340::
     ld   [wHasMirrorShield], a
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4B4A
+    call $4B4A
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1810,7 +1812,7 @@ PlaceBomb::
     ret  c
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4B81
+    call $4B81
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1829,7 +1831,7 @@ label_1387::
     ret  c
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4BFF
+    call $4BFF
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -2007,7 +2009,7 @@ label_14A7::
     ret  c
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4C47
+    call $4C47
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -2524,19 +2526,19 @@ label_1814::
 label_1819::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4AB3
+    call $4AB3
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_49BA
+    call $49BA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
 LinkMotionMapFadeOutHandler::
-    call label_754F
+    call $754F
     ld   a, [$C3C9]
     and  a
     jr   z, label_1847
@@ -2803,7 +2805,7 @@ label_19DA::
     ret
 
 LinkMotionMapFadeInHandler::
-    call label_754F
+    call $754F
     ld   a, [$D474]
     and  a
     jr   z, label_19FC
@@ -2845,10 +2847,10 @@ label_1A21::
 label_1A22::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6C4F
+    call $6C4F
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_55CA
+    call $55CA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -2856,10 +2858,10 @@ label_1A22::
 label_1A39::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6C7A
+    call $6C7A
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_563B
+    call $563B
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -3385,7 +3387,7 @@ label_2098::
 label_20BF::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_5900
+    call $5900
     callsb label_002_41D0
 
 label_20CF::
@@ -3470,7 +3472,7 @@ label_2153::
     call label_2165
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_50C3
+    call $50C3
     jp   ReloadSavedBank
 
 label_2161::
@@ -3493,7 +3495,7 @@ label_2177::
 label_2178::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_5526
+    call $5526
     jp   ReloadSavedBank
 
 label_2183::
@@ -3617,7 +3619,7 @@ label_222C::
     ret
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4A76
+    call $4A76
     ld   a, $08
     ld   [MBC3SelectBank], a
 
@@ -3672,7 +3674,7 @@ label_2286::
 label_2291::
     ld   a, $1A
     ld   [MBC3SelectBank], a
-    call label_6576
+    call $6576
 
 label_2299::
     call label_3905
@@ -3690,7 +3692,7 @@ label_2299::
     push de
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_49D9
+    call $49D9
     ldh  a, [$FFDF]
     ld   [MBC3SelectBank], a
     call label_2214
@@ -3718,7 +3720,7 @@ label_22D3::
     push de
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_49D9
+    call $49D9
     ldh  a, [$FFDF]
     ld   [MBC3SelectBank], a
     call label_2224
@@ -3800,7 +3802,7 @@ label_27F2::
     jr   nz, .skip
     ld   a, $1F
     ld   [MBC3SelectBank], a
-    call label_4003
+    call $4003
 .skip
     jp   ReloadSavedBank
 
@@ -4006,13 +4008,13 @@ include "src/code/home/clear_memory.asm"
 label_29ED::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_5884
+    call $5884
     jp   ReloadSavedBank
 
 label_29F8::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4C98
+    call $4C98
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -4215,7 +4217,7 @@ label_2BC1::
     push bc
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_5838
+    call $5838
     call ReloadSavedBank
     pop  bc
     ret
@@ -4553,7 +4555,7 @@ label_2E73::
     jr   nz, label_2E84
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_475A
+    call $475A
     jp   label_2F12
 
 label_2E84::
@@ -4825,7 +4827,7 @@ label_3019::
     rl   b
     ld   a, $1A
     ld   [MBC3SelectBank], a
-    call label_6576
+    call $6576
     call label_3905
     ld   a, [$DBA5]
     and  a
@@ -4963,16 +4965,16 @@ label_30F4::
     inc  [hl]
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4CA3
+    call $4CA3
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_3119
     ld   a, $21
     ld   [MBC3SelectBank], a
-    call label_40B3
+    call $40B3
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_6DAF
+    call $6DAF
 
 label_3119::
     ld   a, $09
@@ -4983,7 +4985,7 @@ label_3119::
     ld   a, $14
     ld   [MBC3SelectBank], a
     ldh  [$FFE8], a
-    call label_5897
+    call $5897
     ld   e, a
     ld   hl, wKillCount2
 
@@ -5208,13 +5210,15 @@ CopyMapToTileMapLoop_consecutive_tiles::
 endOfRoom::
     ld   a, $01
     ld   [MBC3SelectBank], a
-    call label_6CCE
+    call $6CCE
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_6D4D ; do stuff that returns early if end-of-room
+    ; do stuff that returns early if end-of-room
+    call $6D4D
     ld   a, $21
     ld   [MBC3SelectBank], a
-    call label_53F3 ; stuff that returns early when DBA5 is 0
+    ; stuff that returns early when DBA5 is 0
+    call $53F3
     jp   ReloadSavedBank
 
 label_32A9::
@@ -5246,7 +5250,7 @@ label_32B8::
     inc  bc
     ld   a, $24
     ld   [MBC3SelectBank], a
-    call label_7578
+    call $7578
     call label_353B
     ret
 
@@ -6047,7 +6051,7 @@ FillTileMapWith_continue::
 label_37FE::
     ld   a, $01
     ld   [MBC3SelectBank], a
-    call label_5F02
+    call $5F02
     ld   a, $16
     ld   [MBC3SelectBank], a
     xor  a
@@ -6185,10 +6189,10 @@ label_38B4::
 label_38D4::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_6524
+    call $6524
     ld   a, $01
     ld   [MBC3SelectBank], a
-    call label_5EAB
+    call $5EAB
     ld   a, $16
     ld   [MBC3SelectBank], a
     ret
@@ -6199,7 +6203,7 @@ label_38EA::
     ld   [MBC3SelectBank], a
     ld   a, e
     push bc
-    call label_4880
+    call $4880
     pop  bc
     ldh  a, [$FFE8]
     ld   [MBC3SelectBank], a
@@ -6207,7 +6211,7 @@ label_38EA::
 
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_588B
+    call $588B
     ret
 
 label_3905::
@@ -6247,20 +6251,20 @@ label_3925::
 label_3935::
     ld   a, $19
     call SwitchBank
-    call label_7C50
+    call $7C50
     ld   a, $03
     jp   SwitchBank
 
 label_3942::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_53E4
+    call $53E4
     jp   ReloadSavedBank
 
 label_394D::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_54AC
+    call $54AC
     jp   ReloadSavedBank
 
 label_3958::
@@ -6273,19 +6277,19 @@ label_3958::
 label_3965::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_485B
+    call $485B
     jp   ReloadSavedBank
 
 label_3970::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_7EFE
+    call $7EFE
     jp   ReloadSavedBank
 
 label_397B::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_5347
+    call $5347
     ld   a, $03
     ld   [MBC3SelectBank], a
     ret
@@ -6336,7 +6340,7 @@ label_39C1::
     ld   [$C3C0], a
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4303
+    call $4303
     xor  a
     ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
@@ -6348,7 +6352,7 @@ label_39E3::
     ld   a, $20
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    call label_6352
+    call $6352
     ld   b, $00
     ld   c, $0F
 
@@ -6373,7 +6377,7 @@ label_3A03::
 label_3A0A::
     ld   a, $15
     ld   [MBC3SelectBank], a
-    call label_4000
+    call $4000
     ld   a, $03
     ld   [MBC3SelectBank], a
     ret
@@ -6407,19 +6411,19 @@ label_3A40::
     jr   nz, label_3A4E
 
 label_3A46::
-    call label_7964
+    call $7964
     call label_3D8A
     jr   label_3A54
 
 label_3A4E::
     call label_3D8A
-    call label_7964
+    call $7964
 
 label_3A54::
     ld   a, $14
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    call label_4D73
+    call $4D73
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
@@ -6518,31 +6522,31 @@ label_3B18::
 label_3B23::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_7893
+    call $7893
     jp   ReloadSavedBank
 
 label_3B2E::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_7CAB
+    call $7CAB
     jp   ReloadSavedBank
 
 label_3B39::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_6E28
+    call $6E28
     jp   ReloadSavedBank
 
 label_3B44::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_6C6B
+    call $6C6B
     jp   ReloadSavedBank
 
 label_3B4F::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_6BDE
+    call $6BDE
     jp   ReloadSavedBank
 
 label_3B5A::
@@ -6554,19 +6558,19 @@ label_3B5A::
 label_3B65::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_73EB
+    call $73EB
     jp   ReloadSavedBank
 
 label_3B70::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_6E2B
+    call $6E2B
     jp   ReloadSavedBank
 
 label_3B7B::
     ld   a, $03
     ld   [MBC3SelectBank], a
-    call label_75A2
+    call $75A2
     jp   ReloadSavedBank
 
 label_3B86::
@@ -6585,7 +6589,7 @@ label_3B98::
     ld   a, $03
     ld   [MBC3SelectBank], a
     pop  af
-    call label_64CC
+    call $64CC
     rr   l
     call ReloadSavedBank
     rl   l
@@ -6594,13 +6598,13 @@ label_3B98::
 label_3BAA::
     ld   hl, MBC3SelectBank
     ld   [hl], $03
-    call label_7EC7
+    call $7EC7
     jp   ReloadSavedBank
 
 label_3BB5::
     ld   hl, MBC3SelectBank
     ld   [hl], $03
-    call label_7E45
+    call $7E45
     jp   ReloadSavedBank
 
 label_3BC0::
@@ -6727,7 +6731,7 @@ label_3C63::
     call label_795D
 
 label_3C71::
-    call label_7995
+    call $7995
     jp   ReloadSavedBank
 
 label_3C77::
@@ -6952,67 +6956,67 @@ label_3D8A::
 label_3DA0::
     ld   hl, MBC3SelectBank
     ld   [hl], $15
-    call label_7964
+    call $7964
     jp   ReloadSavedBank
 
 label_3DAB::
     ld   hl, MBC3SelectBank
     ld   [hl], $04
-    call label_5A1A
+    call $5A1A
     jp   ReloadSavedBank
 
 label_3DB6::
     ld   hl, MBC3SelectBank
     ld   [hl], $04
-    call label_5690
+    call $5690
     jp   ReloadSavedBank
 
 label_3DC1::
     ld   hl, MBC3SelectBank
     ld   [hl], $04
-    call label_504B
+    call $504B
     jp   ReloadSavedBank
 
 label_3DCC::
     ld   hl, MBC3SelectBank
     ld   [hl], $04
-    call label_49BD
+    call $49BD
     jp   ReloadSavedBank
 
 label_3DD7::
     ld   hl, MBC3SelectBank
     ld   [hl], $36
-    call label_72AB
+    call $72AB
     jp   ReloadSavedBank
 
 label_3DE2::
     ld   hl, MBC3SelectBank
     ld   [hl], $05
-    call label_6CC6
+    call $6CC6
     jp   ReloadSavedBank
 
 label_3DED::
     ld   hl, MBC3SelectBank
     ld   [hl], $05
-    call label_6818
+    call $6818
     jp   ReloadSavedBank
 
 label_3DF8::
     ld   hl, MBC3SelectBank
     ld   [hl], $05
-    call label_6302
+    call $6302
     jp   ReloadSavedBank
 
 label_3E03::
     ld   hl, MBC3SelectBank
     ld   [hl], $05
-    call label_5A1E
+    call $5A1E
     jp   ReloadSavedBank
 
 label_3E0E::
     ld   hl, MBC3SelectBank
     ld   [hl], $05
-    call label_556B
+    call $556B
     jp   ReloadSavedBank
 
 label_3E19::
@@ -7025,20 +7029,20 @@ label_3E19::
 label_3E29::
     ld   hl, MBC3SelectBank
     ld   [hl], $04
-    call label_5C63
+    call $5C63
     jp   ReloadSavedBank
 
 label_3E34::
     ld   hl, MBC3SelectBank
     ld   [hl], $03
-    call label_5407
+    call $5407
     jp   ReloadSavedBank
 
 label_3E3F::
     ld   hl, MBC3SelectBank
     ld   [hl], $02
-    call label_62CE
-    call label_6414
+    call $62CE
+    call $6414
     jp   ReloadSavedBank
 
 label_3E4D::
@@ -7058,13 +7062,13 @@ label_3E5A::
 label_3E6B::
     ld   hl, MBC3SelectBank
     ld   [hl], $03
-    call label_6472
+    call $6472
     jp   ReloadSavedBank
 
 label_3E76::
     ld   a, $06
     call SwitchBank
-    call label_783C
+    call $783C
     ld   a, $03
     jp   SwitchBank
 
@@ -7213,7 +7217,7 @@ label_3F50::
     ld   a, $03
     ld   [$C113], a
     ld   [MBC3SelectBank], a
-    call label_55CF
+    call $55CF
     call ReloadSavedBank
     ld   hl, $C460
     add  hl, bc

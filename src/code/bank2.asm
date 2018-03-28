@@ -8886,12 +8886,12 @@ jr_002_78CF:
 
 ApplyMapTransition::
     ld   a, [wMapSlideTransitionState]            ; $78E8: $FA $24 $C1
-    cp   $00                                      ; $78EB: $FE $00
-    jp   z, label_002_79D9                        ; $78ED: $CA $D9 $79
+    cp   MAP_SLIDE_NONE                           ; $78EB: $FE $00
+    jp   z, .return                               ; $78ED: $CA $D9 $79
 
     push af                                       ; $78F0: $F5
     cp   $04                                      ; $78F1: $FE $04
-    jp   c, label_002_79CC                        ; $78F3: $DA $CC $79
+    jp   c, .jumpTable                            ; $78F3: $DA $CC $79
 
     ld   a, [$C125]                               ; $78F6: $FA $25 $C1
     ld   c, a                                     ; $78F9: $4F
@@ -8919,23 +8919,23 @@ ApplyMapTransition::
     ldh  [hBaseScrollY], a                        ; $791F: $E0 $97
     ld   hl, $C12D                                ; $7921: $21 $2D $C1
     cp   [hl]                                     ; $7924: $BE
-    jp   nz, label_002_79CC                       ; $7925: $C2 $CC $79
+    jp   nz, .jumpTable                           ; $7925: $C2 $CC $79
 
     ldh  a, [hBaseScrollX]                        ; $7928: $F0 $96
     ld   hl, $C12C                                ; $792A: $21 $2C $C1
     cp   [hl]                                     ; $792D: $BE
-    jp   nz, label_002_79CC                       ; $792E: $C2 $CC $79
+    jp   nz, .jumpTable                           ; $792E: $C2 $CC $79
 
     pop  af                                       ; $7931: $F1
     ldh  a, [hNextMusicTrack]                     ; $7932: $F0 $B1
     and  a                                        ; $7934: $A7
-    jr   z, jr_002_793D                           ; $7935: $28 $06
+    jr   z, .jr_002_793D                          ; $7935: $28 $06
 
-    call SetWorldMusicTrack                   ; $7937: $CD $C3 $27
+    call SetWorldMusicTrack                       ; $7937: $CD $C3 $27
     xor  a                                        ; $793A: $AF
     ldh  [hNextMusicTrack], a                     ; $793B: $E0 $B1
 
-jr_002_793D:
+.jr_002_793D
     call label_178E                               ; $793D: $CD $8E $17
     ldh  [$FFA3], a                               ; $7940: $E0 $A3
     ld   [wMapSlideTransitionState], a            ; $7942: $EA $24 $C1
@@ -8945,42 +8945,42 @@ jr_002_793D:
     ld   [$DBB2], a                               ; $794C: $EA $B2 $DB
     ld   a, [$C125]                               ; $794F: $FA $25 $C1
     cp   $03                                      ; $7952: $FE $03
-    jr   nz, jr_002_797A                          ; $7954: $20 $24
+    jr   nz, .jr_002_797A                         ; $7954: $20 $24
 
     ld   a, $01                                   ; $7956: $3E $01
     ldh  [$FF9B], a                               ; $7958: $E0 $9B
     call label_002_6E45                           ; $795A: $CD $45 $6E
     ldh  a, [$FFAF]                               ; $795D: $F0 $AF
     cp   $DB                                      ; $795F: $FE $DB
-    jr   z, jr_002_797A                           ; $7961: $28 $17
+    jr   z, .jr_002_797A                          ; $7961: $28 $17
 
     cp   $DC                                      ; $7963: $FE $DC
-    jr   z, jr_002_797A                           ; $7965: $28 $13
+    jr   z, .jr_002_797A                          ; $7965: $28 $13
 
     cp   $E1                                      ; $7967: $FE $E1
-    jr   z, jr_002_7971                           ; $7969: $28 $06
+    jr   z, .jr_002_7971                          ; $7969: $28 $06
 
     ld   a, [$C133]                               ; $796B: $FA $33 $C1
     and  a                                        ; $796E: $A7
-    jr   z, jr_002_797A                           ; $796F: $28 $09
+    jr   z, .jr_002_797A                          ; $796F: $28 $09
 
-jr_002_7971:
+.jr_002_7971
     ld   a, [wFreeMovementMode]                   ; $7971: $FA $7B $C1
     and  a                                        ; $7974: $A7
-    jr   nz, jr_002_797A                          ; $7975: $20 $03
+    jr   nz, .jr_002_797A                         ; $7975: $20 $03
 
     call func_002_6EAD                            ; $7977: $CD $AD $6E
 
-jr_002_797A:
+.jr_002_797A
     ld   a, [wC169]                               ; $797A: $FA $69 $C1
     and  a                                        ; $797D: $A7
-    jr   z, jr_002_7986                           ; $797E: $28 $06
+    jr   z, .jr_002_7986                          ; $797E: $28 $06
 
     ldh  [$FFF2], a                               ; $7980: $E0 $F2
     xor  a                                        ; $7982: $AF
     ld   [wC169], a                               ; $7983: $EA $69 $C1
 
-jr_002_7986:
+.jr_002_7986
     call label_3958                               ; $7986: $CD $58 $39
     ld   a, $FF                                   ; $7989: $3E $FF
     ldh  [hAnimatedTilesFrameCount], a                               ; $798B: $E0 $A6
@@ -8989,38 +8989,38 @@ jr_002_7986:
     ret  z                                        ; $7991: $C8
 
     ld   d, a                                     ; $7992: $57
-    ldh  a, [hMapId]                         ; $7993: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $7995: $FE $FF
-    jr   nz, jr_002_799D                          ; $7997: $20 $04
+    ldh  a, [hMapId]                              ; $7993: $F0 $F7
+    cp   MAP_SPECIAL                              ; $7995: $FE $FF
+    jr   nz, .jr_002_799D                         ; $7997: $20 $04
 
     ld   d, $00                                   ; $7999: $16 $00
-    jr   jr_002_79A6                              ; $799B: $18 $09
+    jr   .jr_002_79A6                             ; $799B: $18 $09
 
-jr_002_799D:
+.jr_002_799D
     cp   $1A                                      ; $799D: $FE $1A
-    jr   nc, jr_002_79A6                          ; $799F: $30 $05
+    jr   nc, .jr_002_79A6                         ; $799F: $30 $05
 
     cp   $06                                      ; $79A1: $FE $06
-    jr   c, jr_002_79A6                           ; $79A3: $38 $01
+    jr   c, .jr_002_79A6                          ; $79A3: $38 $01
 
     inc  d                                        ; $79A5: $14
 
-jr_002_79A6:
-    ldh  a, [hMapRoom]                           ; $79A6: $F0 $F6
+.jr_002_79A6
+    ldh  a, [hMapRoom]                            ; $79A6: $F0 $F6
     ld   e, a                                     ; $79A8: $5F
     call label_29ED                               ; $79A9: $CD $ED $29
     cp   $1A                                      ; $79AC: $FE $1A
-    jr   z, jr_002_79BC                           ; $79AE: $28 $0C
+    jr   z, .jr_002_79BC                          ; $79AE: $28 $0C
 
     cp   $19                                      ; $79B0: $FE $19
-    jr   z, jr_002_79BC                           ; $79B2: $28 $08
+    jr   z, .jr_002_79BC                          ; $79B2: $28 $08
 
     ld   a, [$C18E]                               ; $79B4: $FA $8E $C1
     and  $E0                                      ; $79B7: $E6 $E0
     cp   $80                                      ; $79B9: $FE $80
     ret  nz                                       ; $79BB: $C0
 
-jr_002_79BC:
+.jr_002_79BC
     ld   a, [wHasDungeonCompass]                  ; $79BC: $FA $CD $DB
     and  a                                        ; $79BF: $A7
     ret  z                                        ; $79C0: $C8
@@ -9033,19 +9033,20 @@ jr_002_79BC:
     ld   [$D462], a                               ; $79C8: $EA $62 $D4
     ret                                           ; $79CB: $C9
 
-label_002_79CC::
+.jumpTable
     pop  af                                       ; $79CC: $F1
     dec  a                                        ; $79CD: $3D
     JP_TABLE                                      ; $79CE: $C7
-._00 dw label_002_79FA
-._01 dw label_002_7B3E
-._02 dw label_002_7B7F
-._03 dw label_002_7C00
-._04 dw label_002_7C03
+._00 dw MapSlidePrepare1Handler
+._01 dw MapSlidePrepare2Handler
+._02 dw MapSlidePrepare3Handler
+._03 dw MapSlideFirstHalfHandler
+._04 dw MapSlideSecondHalfHandler
 
-label_002_79D9::
+.return
     ret                                           ; $79D9: $C9
 
+Data_002_79DA::
     ld   bc, $0201                                ; $79DA: $01 $01 $02
     nop                                           ; $79DD: $00
     nop                                           ; $79DE: $00
@@ -9071,7 +9072,7 @@ label_002_79D9::
     ld   [bc], a                                  ; $79F8: $02
     ld   [bc], a                                  ; $79F9: $02
 
-label_002_79FA::
+MapSlidePrepare1Handler::
     ld   a, [$C125]                               ; $79FA: $FA $25 $C1
     ld   c, a                                     ; $79FD: $4F
     ld   b, $00                                   ; $79FE: $06 $00
@@ -9079,17 +9080,17 @@ label_002_79FA::
     and  a                                        ; $7A03: $A7
     jr   z, jr_002_7A6D                           ; $7A04: $28 $67
 
-    ldh  a, [hMapId]                         ; $7A06: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $7A08: $FE $FF
+    ldh  a, [hMapId]                              ; $7A06: $F0 $F7
+    cp   MAP_SPECIAL                              ; $7A08: $FE $FF
     jr   z, jr_002_7A48                           ; $7A0A: $28 $3C
 
-    cp   MAP_DUNGEON_G1                                      ; $7A0C: $FE $0B
+    cp   MAP_DUNGEON_G1                           ; $7A0C: $FE $0B
     jr   nc, jr_002_7A6D                          ; $7A0E: $30 $5D
 
-    cp   MAP_TURTLE_ROCK                                      ; $7A10: $FE $08
+    cp   MAP_TURTLE_ROCK                          ; $7A10: $FE $08
     jr   nz, jr_002_7A48                          ; $7A12: $20 $34
 
-    ldh  a, [hMapRoom]                           ; $7A14: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $7A14: $F0 $F6
     cp   $71                                      ; $7A16: $FE $71
     jr   nz, jr_002_7A48                          ; $7A18: $20 $2E
 
@@ -9132,8 +9133,8 @@ jr_002_7A48:
     cp   $02                                      ; $7A51: $FE $02
     jr   nz, jr_002_7A67                          ; $7A53: $20 $12
 
-    ldh  a, [hMapId]                         ; $7A55: $F0 $F7
-    cp   MAP_CATFISHS_MAW                                      ; $7A57: $FE $05
+    ldh  a, [hMapId]                              ; $7A55: $F0 $F7
+    cp   MAP_CATFISHS_MAW                         ; $7A57: $FE $05
     jr   nz, jr_002_7A67                          ; $7A59: $20 $0C
 
     ld   a, [$DBAE]                               ; $7A5B: $FA $AE $DB
@@ -9160,14 +9161,14 @@ jr_002_7A6D:
     ld   a, $1E                                   ; $7A78: $3E $1E
     ld   [wC169], a                               ; $7A7A: $EA $69 $C1
     ld   a, $63                                   ; $7A7D: $3E $63
-    ld   hl, hMapRoom                            ; $7A7F: $21 $F6 $FF
+    ld   hl, hMapRoom                             ; $7A7F: $21 $F6 $FF
     jr   jr_002_7A8D                              ; $7A82: $18 $09
 
 jr_002_7A84:
     ld   hl, $7B77                                ; $7A84: $21 $77 $7B
     add  hl, bc                                   ; $7A87: $09
     ld   a, [hl]                                  ; $7A88: $7E
-    ld   hl, hMapRoom                            ; $7A89: $21 $F6 $FF
+    ld   hl, hMapRoom                             ; $7A89: $21 $F6 $FF
 
 jr_002_7A8C:
     add  [hl]                                     ; $7A8C: $86
@@ -9195,8 +9196,8 @@ label_002_7AA5::
     and  a                                        ; $7AAB: $A7
     jr   z, jr_002_7ABD                           ; $7AAC: $28 $0F
 
-    ldh  a, [hMapId]                         ; $7AAE: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $7AB0: $FE $FF
+    ldh  a, [hMapId]                              ; $7AAE: $F0 $F7
+    cp   MAP_SPECIAL                              ; $7AB0: $FE $FF
     jr   nz, jr_002_7ABD                          ; $7AB2: $20 $09
 
     ld   a, $01                                   ; $7AB4: $3E $01
@@ -9240,10 +9241,10 @@ jr_002_7AE9:
     and  a                                        ; $7AF2: $A7
     jr   z, label_002_7B36                        ; $7AF3: $28 $41
 
-    ldh  a, [hMapRoom]                           ; $7AF5: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $7AF5: $F0 $F6
     ld   e, a                                     ; $7AF7: $5F
     ld   d, $00                                   ; $7AF8: $16 $00
-    ld   hl, OverworldMusicTracks                       ; $7AFA: $21 $00 $40
+    ld   hl, OverworldMusicTracks                 ; $7AFA: $21 $00 $40
     add  hl, de                                   ; $7AFD: $19
     ld   a, [hl]                                  ; $7AFE: $7E
     ld   hl, $FFB0                                ; $7AFF: $21 $B0 $FF
@@ -9295,7 +9296,7 @@ label_002_7B36::
     ld   [wMapSlideTransitionState], a            ; $7B3A: $EA $24 $C1
     ret                                           ; $7B3D: $C9
 
-label_002_7B3E::
+MapSlidePrepare2Handler::
     call label_D1E                                ; $7B3E: $CD $1E $0D
     ld   a, [$D6FA]                               ; $7B41: $FA $FA $D6
     cp   $02                                      ; $7B44: $FE $02
@@ -9348,7 +9349,7 @@ jr_002_7B4C:
     ld   bc, $F8FF                                ; $7B7B: $01 $FF $F8
     db   $08                                      ; $7B7E: $08
 
-label_002_7B7F::
+MapSlidePrepare3Handler::
     db $F0, $BB                                   ; $7B7F: $F0 $BB
     and  a                                        ; $7B81: $A7
     ret  nz                                       ; $7B82: $C0
@@ -9417,10 +9418,10 @@ jr_002_7B91:
     ld   [$C12B], a                               ; $7BFA: $EA $2B $C1
     jp   label_002_7B36                           ; $7BFD: $C3 $36 $7B
 
-label_002_7C00::
+MapSlideFirstHalfHandler::
     jp   $2209                                    ; $7C00: $C3 $09 $22
 
-label_002_7C03::
+MapSlideSecondHalfHandler::
     ret                                           ; $7C03: $C9
 
     nop                                           ; $7C04: $00

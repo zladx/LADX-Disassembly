@@ -3,8 +3,9 @@
 ;
 
 ; After the boot ROM code is done executing, control
-; is transfered to address $0150 – that is, `Start`.
-Start:: ; $0150
+; is transfered to address $100, which immediatly jumps here.
+; (See header.asm)
+Start::
     ; Switch CPU to double-speed if needed
     cp   GBC ; is running on Game Boy Color?
     jr   nz, .notGBC

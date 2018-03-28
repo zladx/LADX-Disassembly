@@ -12,7 +12,6 @@ include "data/ascii_to_tile.asm"
 
 ; Utilities fonctions and ROM header
 include "code/macros.asm"
-include "code/interrupts.asm"
 include "code/header.asm"
 
 ; Sources

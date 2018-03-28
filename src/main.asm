@@ -1,7 +1,6 @@
 ; Root source file for the game.
 
 ; Definitions
-include "constants/charmap.asm"
 include "constants/constants.asm"
 
 include "text/dialog_table.asm"

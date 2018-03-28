@@ -1,3 +1,4 @@
+include "constants/charmap.asm"
 include "constants/debug.asm"
 include "constants/gameplay.asm"
 include "constants/gbhw.asm"

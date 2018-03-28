@@ -1,3 +1,7 @@
+;
+; Dialog display
+;
+
 ExecuteDialog::
     ; If DialogState == 0, don't do anything.
     ld   a, [wDialogState]

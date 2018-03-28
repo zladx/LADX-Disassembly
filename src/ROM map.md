@@ -42,7 +42,7 @@
 25 Data
 26 n/a
 27 Data
-28 n/a
+28 Game Boy Printer code?
 29 Graphics: photo pictures
 2A Graphics: photo pictures
 2B Graphics: photo pictures

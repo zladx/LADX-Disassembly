@@ -128,7 +128,7 @@ InterruptSerial::
     push af
     ld   a, $28
     ld   [MBC3SelectBank], a
-    call label_4601
+    call $4601
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     pop  af
@@ -160,7 +160,7 @@ LoadMapData::
     ld   e, a
     ld   a, $20
     ld   [MBC3SelectBank], a
-    ; label_4657
+    ; $4657
     ;   input:  wTileMapToLoad in e
     ;   output: address to jump to in hl
     ; Table address: 20:4664
@@ -176,7 +176,7 @@ LoadMapData::
     ;   09  $2E73
     ;   ...
     ;   10  LoadIntroSequenceTiles
-    call label_4657
+    call $4657
     jp   hl ; tail-call ; will return when done.
 
     ; Special case for loading map n° 0
@@ -185,12 +185,12 @@ LoadMapData::
     ; Do some GBC-only stuff (calls 24:5C2C)
     ld   a, $24
     ld   [MBC3SelectBank], a
-    call label_5C2C
+    call $5C2C
 
     ; Manipulate wBGMapToLoad (calls 20:4577)
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4577
+    call $4577
 
     ld   a, $08
     ld   [MBC3SelectBank], a
@@ -303,7 +303,7 @@ vBlankContinue::
     jr   c, label_52B
     ld   a, $38
     ld   [MBC3SelectBank], a
-    call label_785A
+    call $785A
     jr   label_52B
 .gameplayNotAPhoto
 
@@ -374,7 +374,8 @@ label_52B::
     jr   z, .notGBC
     ld   a, $24
     ld   [MBC3SelectBank], a
-    call label_5C1A ; Change BG column palette. Triggered by an interrupt?
+    ; Change BG column palette. Triggered by an interrupt?
+    call $5C1A
 .notGBC
     ld   de, wRequest
     call ExecuteBackgroundCopyRequest ; Load BG column tiles
@@ -386,14 +387,14 @@ label_52B::
 
     ld   a, $36
     ld   [MBC3SelectBank], a
-    call label_72BA
+    call $72BA
     call hDMARoutine
     ldh  a, [hIsGBC]
     and  a
     jr   z, WaitForVBlankAndReturn
     ld   a, $21
     ld   [MBC3SelectBank], a
-    call label_4000
+    call $4000
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
 
@@ -424,10 +425,10 @@ PhotoAlbumVBlankHandler::
     jr   z, label_598
     ld   a, $21
     call SwitchBank
-    call label_4000
+    call $4000
     ld   a, $24
     call SwitchBank
-    call label_5C1A
+    call $5C1A
 
 label_598::
     ld   de, wRequest
@@ -441,7 +442,7 @@ label_598::
 label_5AB::
     ld   a, $28
     call SwitchBank
-    call label_4616
+    call $4616
     pop  af
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
@@ -498,7 +499,7 @@ label_5BC::
     jr   nz, label_62F
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4616
+    call $4616
     ld   [MBC3SelectBank], a
     jr   label_641
 
@@ -583,13 +584,13 @@ label_69E::
     jr   nz, label_6CB
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_475A
+    call $475A
     xor  a
     ld   [wNeedsUpdatingNPCTiles], a
     ld   [$C10F], a
     ld   hl, $9000
     ld   bc, $0000
-    call label_4616
+    call $4616
     ld   c, $90
     ld   b, h
     ld   h, $00
@@ -740,7 +741,7 @@ label_7AF::
 label_7B0::
     ld   a, $01
     ld   [MBC3SelectBank], a
-    call label_6BB5
+    call $6BB5
     jp   $008B
 
 data_07BB::

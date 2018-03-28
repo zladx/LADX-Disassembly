@@ -37,7 +37,7 @@ Init::
     ; Call 003C:6A22
     ld   a, $3C
     ld   [MBC3SelectBank], a
-    call label_6A22
+    call $6A22
 
     ; Clear registers
     xor  a
@@ -53,7 +53,7 @@ Init::
     ; Clear Tiles Map 1 (if GBC)
     ld   a, $24
     ld   [MBC3SelectBank], a
-    call ClearTilesMap1
+    call $5C00
 
     ; Clear Background Map
     call ClearBGMap
@@ -106,7 +106,7 @@ Init::
     ; (calls 001F:4000)
     ld   a, $1F
     ld   [MBC3SelectBank], a
-    call label_4000
+    call $4000
 
     ; Ignore joypad input during 24 frames
     ld   a, 24
@@ -119,7 +119,7 @@ Init::
     ; (calls 20:4854)
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_4854
+    call $4854
 
     ; Start rendering
     jp   WaitForNextFrame

@@ -613,7 +613,7 @@ label_43A7::
     and  a
     jr   z, label_4414
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_43B8
     ld   hl, $DDDA
     jr   label_43C5
@@ -634,7 +634,7 @@ label_43C5::
 
 label_43CA::
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_43DB
     cp   MAP_TURTLE_ROCK
     jr   z, label_43D8
@@ -654,7 +654,7 @@ label_43DC::
     dec  c
     jr   nz, label_43CA
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_43E9
     ld   a, $0F
 
@@ -666,7 +666,7 @@ label_43E9::
     ld   a, [hl]
     ld   [$DBB0], a
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_440B
     cp   MAP_TURTLE_ROCK
     jr   z, label_4425
@@ -730,7 +730,7 @@ label_4452::
     jr   z, label_44A6
     ld   d, a
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_4475
     ld   d, $00
     jr   label_447E
@@ -4639,7 +4639,7 @@ label_5E67::
     and  a
     jr   z, label_5E95
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_5E79
     ld   hl, $DDDA
     jr   label_5E8A
@@ -6799,7 +6799,7 @@ label_6DEA::
     and  a
     jr   z, label_6E18
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_6DFF
     ld   a, $0F
     jr   label_6E03

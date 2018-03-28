@@ -31,7 +31,7 @@ MAP_S_FACE_SHRINE  equ $16
 MAP_LIBRARY        equ $1D
 MAP_UNKNOWN        equ $1E
 MAP_CAVE_D         equ $1F
-MAP_SPECIAL        equ $FF
+MAP_COLOR_DUNGEON  equ $FF
 
 ; Values for hAnimatedTilesGroup
 ANIMATED_TILES_NONE           equ $00

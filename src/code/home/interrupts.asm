@@ -495,7 +495,7 @@ label_5BC::
     ld   d, h
     ld   hl, $5000
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_62F
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -580,7 +580,7 @@ label_69E::
     and  a
     jr   z, label_6CB
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_6CB
     ld   a, $20
     ld   [MBC3SelectBank], a

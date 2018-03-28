@@ -407,7 +407,7 @@ jr_002_4416:
     jr   jr_002_4427                              ; $441A: $18 $0B
 
     ldh  a, [hMapId]                         ; $441C: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $441E: $FE $FF
+    cp   MAP_COLOR_DUNGEON                                      ; $441E: $FE $FF
     jr   nz, jr_002_4427                          ; $4420: $20 $05
 
     call func_002_438F                            ; $4422: $CD $8F $43
@@ -2888,7 +2888,7 @@ label_002_5420::
 label_002_5425::
     push bc                                       ; $5425: $C5
     ldh  a, [hMapId]                         ; $5426: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $5428: $FE $FF
+    cp   MAP_COLOR_DUNGEON                                      ; $5428: $FE $FF
     ld   a, $30                                   ; $542A: $3E $30
     jr   z, jr_002_5438                           ; $542C: $28 $0A
 
@@ -2907,7 +2907,7 @@ jr_002_5438:
     add  hl, de                                   ; $5440: $19
     ld   [hl], $28                                ; $5441: $36 $28
     ldh  a, [hMapId]                         ; $5443: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $5445: $FE $FF
+    cp   MAP_COLOR_DUNGEON                                      ; $5445: $FE $FF
     jr   nz, jr_002_5453                          ; $5447: $20 $0A
 
     ld   [hl], $48                                ; $5449: $36 $48
@@ -2922,7 +2922,7 @@ jr_002_5453:
     add  hl, de                                   ; $5456: $19
     ld   [hl], $3C                                ; $5457: $36 $3C
     ldh  a, [hMapId]                         ; $5459: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $545B: $FE $FF
+    cp   MAP_COLOR_DUNGEON                                      ; $545B: $FE $FF
     jr   nz, jr_002_5469                          ; $545D: $20 $0A
 
     ld   [hl], $3C                                ; $545F: $36 $3C
@@ -4152,7 +4152,7 @@ func_002_5B9F::
     jr   z, jr_002_5BC2                           ; $5BAA: $28 $16
 
     ldh  a, [hMapId]                         ; $5BAC: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $5BAE: $FE $FF
+    cp   MAP_COLOR_DUNGEON                                      ; $5BAE: $FE $FF
     jr   nz, jr_002_5BB9                          ; $5BB0: $20 $07
 
     ld   d, $00                                   ; $5BB2: $16 $00
@@ -4423,7 +4423,7 @@ jr_002_5D21:
 
     ld   hl, $D900                                ; $5D2A: $21 $00 $D9
     ldh  a, [hMapId]                         ; $5D2D: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $5D2F: $FE $FF
+    cp   MAP_COLOR_DUNGEON                                      ; $5D2F: $FE $FF
     jr   nz, jr_002_5D36                          ; $5D31: $20 $03
 
     ld   hl, $DDE0                                ; $5D33: $21 $E0 $DD
@@ -4623,7 +4623,7 @@ jr_002_5E2E:
     ld   e, a                                     ; $5E4B: $5F
     ld   hl, $D900                                ; $5E4C: $21 $00 $D9
     ldh  a, [hMapId]                         ; $5E4F: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $5E51: $FE $FF
+    cp   MAP_COLOR_DUNGEON                                      ; $5E51: $FE $FF
     jr   nz, jr_002_5E5A                          ; $5E53: $20 $05
 
     ld   hl, $DDE0                                ; $5E55: $21 $E0 $DD
@@ -5207,7 +5207,7 @@ jr_002_613D:
     jr   z, jr_002_619C                           ; $6189: $28 $11
 
     ldh  a, [hMapId]                         ; $618B: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $618D: $FE $FF
+    cp   MAP_COLOR_DUNGEON                                      ; $618D: $FE $FF
     jr   z, jr_002_6197                           ; $618F: $28 $06
 
     cp   MAP_TURTLE_ROCK                          ; $6191: $FE $08
@@ -5784,7 +5784,7 @@ IsMapRoomE8::
 
     ld   hl, $6479                                ; $670E: $21 $79 $64
     ldh  a, [hMapId]                         ; $6711: $F0 $F7
-    cp   MAP_SPECIAL                                      ; $6713: $FE $FF
+    cp   MAP_COLOR_DUNGEON                                      ; $6713: $FE $FF
     jr   nz, jr_002_671C                          ; $6715: $20 $05
 
     ld   hl, $66B9                                ; $6717: $21 $B9 $66
@@ -9016,9 +9016,9 @@ ApplyMapSlideTransition::
     ; d = wActiveRoom
     ld   d, a                                     ; $7992: $57
     
-    ; If hMapId == MAP_SPECIAL, d = 0
+    ; If hMapId == MAP_COLOR_DUNGEON, d = 0
     ldh  a, [hMapId]                              ; $7993: $F0 $F7
-    cp   MAP_SPECIAL                              ; $7995: $FE $FF
+    cp   MAP_COLOR_DUNGEON                              ; $7995: $FE $FF
     jr   nz, .mapNotFF                            ; $7997: $20 $04
 
     ld   d, 0                                     ; $7999: $16 $00
@@ -9086,7 +9086,7 @@ MapSlidePrepare1Handler::
     jr   z, jr_002_7A6D                           ; $7A04: $28 $67
 
     ldh  a, [hMapId]                              ; $7A06: $F0 $F7
-    cp   MAP_SPECIAL                              ; $7A08: $FE $FF
+    cp   MAP_COLOR_DUNGEON                              ; $7A08: $FE $FF
     jr   z, jr_002_7A48                           ; $7A0A: $28 $3C
 
     cp   MAP_DUNGEON_G1                           ; $7A0C: $FE $0B
@@ -9202,7 +9202,7 @@ label_002_7AA5::
     jr   z, jr_002_7ABD                           ; $7AAC: $28 $0F
 
     ldh  a, [hMapId]                              ; $7AAE: $F0 $F7
-    cp   MAP_SPECIAL                              ; $7AB0: $FE $FF
+    cp   MAP_COLOR_DUNGEON                              ; $7AB0: $FE $FF
     jr   nz, jr_002_7ABD                          ; $7AB2: $20 $09
 
     ld   a, $01                                   ; $7AB4: $3E $01

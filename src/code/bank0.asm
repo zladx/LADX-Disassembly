@@ -868,7 +868,7 @@ label_D1E::
     ld   d, $00
     ld   hl, $6EB3
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_D3C
     ld   hl, $70B3
     jr   label_D45
@@ -991,7 +991,7 @@ label_DDB::
     sla  e
     rl   d
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_DF1
     ld   a, $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a
@@ -2677,7 +2677,7 @@ label_1909::
     ld   hl, $4220
     add  hl, de
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_192E
     ld   hl, $44E0
     jr   label_193C
@@ -2739,7 +2739,7 @@ label_196F::
     and  a
     jr   z, label_19C2
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_1993
     ld   hl, $4E3C
     jr   label_19A4
@@ -2762,7 +2762,7 @@ label_19A4::
     call label_19C2
     push de
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_19B7
     ld   a, $3A
     jr   label_19BF
@@ -3659,7 +3659,7 @@ label_2262::
     jr   z, label_2299
     ld   hl, $43B0
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2291
     ld   hl, $4760
     jr   label_2291
@@ -4030,7 +4030,7 @@ label_2A12::
     ld   [MBC3SelectBank], a
     ld   hl, $4AD4
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2A23
     ld   hl, $4BD4
 
@@ -4312,7 +4312,7 @@ label_2C5D::
     push de
     ld   hl, $45A9
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2C8A
     ld   hl, $45C9
 
@@ -4342,7 +4342,7 @@ label_2C8A::
     ld   a, $12
     call SwitchAdjustedBank
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2CD1
     ld   hl, $6100
     ld   a, $35
@@ -4356,7 +4356,7 @@ label_2CD1::
     ld   [MBC3SelectBank], a
     ld   hl, $7D00
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_2CF5
     cp   MAP_CAVE_A
     jr   c, label_2CF5
@@ -4380,7 +4380,7 @@ label_2D07::
     and  a
     jr   z, label_2D17
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_2D21
     cp   MAP_CAVE_A
     jr   c, label_2D21
@@ -4551,7 +4551,7 @@ label_2E70::
 
 label_2E73::
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2E84
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -4686,7 +4686,7 @@ label_2F41::
 
 label_2F4B::
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2F57
     ldh  a, [$FFF6]
     cp   $12
@@ -4770,7 +4770,7 @@ label_2FCD::
     rl   b
     ld   hl, $6749
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_2FEC
     cp   MAP_HOUSE
     jr   nz, label_2FF1
@@ -4834,7 +4834,7 @@ label_3019::
     jr   z, label_304C
     ld   hl, $43B0
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_3047
     cp   MAP_HOUSE
     jr   nz, label_304F
@@ -5007,7 +5007,7 @@ label_313A::
     jr   z, label_3161
     ld   hl, $D900
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_3156
     ld   hl, $DDE0
     jr   label_3161
@@ -5042,7 +5042,7 @@ label_316B::
     ld   [MBC3SelectBank], a
     ldh  [$FFE8], a
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_318F
     ld   hl, $7B77
     jp   label_3224
@@ -5905,7 +5905,7 @@ label_36C4::
     ld   e, a
     ld   d, $00
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_36D8
     ld   hl, $DDE0
     jr   label_36E1
@@ -6092,7 +6092,7 @@ label_37FE::
 label_3850::
     ld   hl, $4200
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_385E
     ld   hl, $4600
     jr   label_3868
@@ -7197,7 +7197,7 @@ label_3F2E::
     and  $04
     ret  nz
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     ret  z
     cp   MAP_CATFISHS_MAW
     ret  z

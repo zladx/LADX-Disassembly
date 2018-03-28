@@ -73,7 +73,7 @@ SelectMusicTrackAfterTransition::
 
     ; Set a depending on the world map
     ldh  a, [hMapId]                              ; $4174: $F0 $F7
-    cp   MAP_SPECIAL                              ; $4176: $FE $FF
+    cp   MAP_COLOR_DUNGEON                              ; $4176: $FE $FF
     jr   nz, .mapNotFF                            ; $4178: $20 $04
 
     ld   a, $09                                   ; $417A: $3E $09

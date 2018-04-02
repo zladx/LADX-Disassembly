@@ -2601,14 +2601,14 @@ jr_002_5283:
     and  a                                        ; $5289: $A7
     jr   nz, jr_002_529C                          ; $528A: $20 $10
 
-    ldh  a, [hMapRoom]                           ; $528C: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $528C: $F0 $F6
     cp   $2B                                      ; $528E: $FE $2B
     jr   nz, jr_002_529C                          ; $5290: $20 $0A
 
     ld   a, $48                                   ; $5292: $3E $48
-    ld   [$DBB1], a                               ; $5294: $EA $B1 $DB
+    ld   [wLinkMapEntryPositionX], a              ; $5294: $EA $B1 $DB
     ld   a, $30                                   ; $5297: $3E $30
-    ld   [$DBB2], a                               ; $5299: $EA $B2 $DB
+    ld   [wLinkMapEntryPositionY], a              ; $5299: $EA $B2 $DB
 
 jr_002_529C:
     jp   label_002_52B9                           ; $529C: $C3 $B9 $52
@@ -2639,12 +2639,12 @@ jr_002_52B5:
 label_002_52B9::
     ld   a, $40                                   ; $52B9: $3E $40
     ld   [$DBC7], a                               ; $52BB: $EA $C7 $DB
-    ld   a, [$DBB1]                               ; $52BE: $FA $B1 $DB
+    ld   a, [wLinkMapEntryPositionX]              ; $52BE: $FA $B1 $DB
     ldh  [hLinkPositionX], a                      ; $52C1: $E0 $98
-    ldh  [hLinkFinalPositionX], a                               ; $52C3: $E0 $9F
-    ld   a, [$DBB2]                               ; $52C5: $FA $B2 $DB
+    ldh  [hLinkFinalPositionX], a                 ; $52C3: $E0 $9F
+    ld   a, [wLinkMapEntryPositionY]              ; $52C5: $FA $B2 $DB
     ldh  [hLinkPositionY], a                      ; $52C8: $E0 $99
-    ldh  [hLinkFinalPositionY], a                               ; $52CA: $E0 $A0
+    ldh  [hLinkFinalPositionY], a                 ; $52CA: $E0 $A0
     ld   hl, $FFA2                                ; $52CC: $21 $A2 $FF
     sub  [hl]                                     ; $52CF: $96
     ld   [$C145], a                               ; $52D0: $EA $45 $C1
@@ -4270,7 +4270,7 @@ label_002_5C33::
     add  hl, bc                                   ; $5C43: $09
     add  [hl]                                     ; $5C44: $86
     ldh  [$FFCD], a                               ; $5C45: $E0 $CD
-    ld   a, [$DBB2]                               ; $5C47: $FA $B2 $DB
+    ld   a, [wLinkMapEntryPositionY]              ; $5C47: $FA $B2 $DB
     sub  $10                                      ; $5C4A: $D6 $10
     ld   hl, $FFCD                                ; $5C4C: $21 $CD $FF
     sub  [hl]                                     ; $5C4F: $96
@@ -4278,7 +4278,7 @@ label_002_5C33::
     cp   $20                                      ; $5C52: $FE $20
     jr   nc, jr_002_5C6F                          ; $5C54: $30 $19
 
-    ld   a, [$DBB1]                               ; $5C56: $FA $B1 $DB
+    ld   a, [wLinkMapEntryPositionX]              ; $5C56: $FA $B1 $DB
     sub  $08                                      ; $5C59: $D6 $08
     ld   hl, $FFCE                                ; $5C5B: $21 $CE $FF
     sub  [hl]                                     ; $5C5E: $96
@@ -4287,9 +4287,9 @@ label_002_5C33::
     jr   nc, jr_002_5C6F                          ; $5C63: $30 $0A
 
     ldh  a, [hLinkPositionX]                      ; $5C65: $F0 $98
-    ld   [$DBB1], a                               ; $5C67: $EA $B1 $DB
+    ld   [wLinkMapEntryPositionX], a              ; $5C67: $EA $B1 $DB
     ldh  a, [hLinkPositionY]                      ; $5C6A: $F0 $99
-    ld   [$DBB2], a                               ; $5C6C: $EA $B2 $DB
+    ld   [wLinkMapEntryPositionY], a              ; $5C6C: $EA $B2 $DB
 
 jr_002_5C6F:
     push de                                       ; $5C6F: $D5
@@ -8904,6 +8904,10 @@ ApplyMapSlideTransition::
     cp   MAP_SLIDE_FIRST_HALF                     ; $78F1: $FE $04
     jp   c, .jumpTable                            ; $78F3: $DA $CC $79
 
+    ;
+    ; Apply the scroll offset
+    ;
+
     ; hLinkPositionXIncrement = MapSlideLinkXIncrement[wMapSlideDirection]
     ld   a, [wMapSlideDirection]                  ; $78F6: $FA $25 $C1
     ld   c, a                                     ; $78F9: $4F
@@ -8937,7 +8941,7 @@ ApplyMapSlideTransition::
     add  [hl]                                     ; $791E: $86
     ldh  [hBaseScrollY], a                        ; $791F: $E0 $97
     
-    ; If the target scroll position is reached,
+    ; If the target scroll position is not reached yet,
     ; go directly to the jump table
     ld   hl, wMapSlideTargetScrollY               ; $7921: $21 $2D $C1
     cp   [hl]                                     ; $7924: $BE
@@ -8947,6 +8951,10 @@ ApplyMapSlideTransition::
     ld   hl, wMapSlideTargetScrollX               ; $792A: $21 $2C $C1
     cp   [hl]                                     ; $792D: $BE
     jp   nz, .jumpTable                           ; $792E: $C2 $CC $79
+
+    ;
+    ; Slide transition reached the target scroll position
+    ;
 
     ; Change the music track if needed
     pop  af                                       ; $7931: $F1
@@ -8958,14 +8966,15 @@ ApplyMapSlideTransition::
     ldh  [hNextMusicTrack], a                     ; $793B: $E0 $B1
 .noMusicTrackChange
 
+    ; Clear variables
     call ClearLinkPositionIncrement               ; $793D: $CD $8E $17
-    
     ldh  [$FFA3], a                               ; $7940: $E0 $A3
     ld   [wMapSlideTransitionState], a            ; $7942: $EA $24 $C1
     ldh  a, [hLinkPositionX]                      ; $7945: $F0 $98
-    ld   [$DBB1], a                               ; $7947: $EA $B1 $DB
+    ld   [wLinkMapEntryPositionX], a              ; $7947: $EA $B1 $DB
     ldh  a, [hLinkPositionY]                      ; $794A: $F0 $99
-    ld   [$DBB2], a                               ; $794C: $EA $B2 $DB
+    ld   [wLinkMapEntryPositionY], a              ; $794C: $EA $B2 $DB
+
     ld   a, [wMapSlideDirection]                  ; $794F: $FA $25 $C1
     cp   MAP_SLIDE_DIRECTION_BOTTOM               ; $7952: $FE $03
     jr   nz, .bottomDirectionEnd                  ; $7954: $20 $24

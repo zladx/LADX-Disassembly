@@ -706,10 +706,10 @@ GameplayWorldSubtype1Handler::
     call IncrementGameplaySubtype
     ld   a, [$DB9D]
     ldh  [hLinkPositionX], a
-    ld   [$DBB1], a
+    ld   [wLinkMapEntryPositionX], a
     ld   a, [$DB9E]
     ldh  [hLinkPositionY], a
-    ld   [$DBB2], a
+    ld   [wLinkMapEntryPositionY], a
     ld   a, [$DBC8]
     ldh  [$FFA2], a
     and  a

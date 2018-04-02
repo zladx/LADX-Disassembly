@@ -785,7 +785,20 @@ wCurrentBank:: ; DBAF
 
 ; Unlabeled
 wDBB0 equ $DBB0
-  ds $5
+  ds 1
+
+wLinkMapEntryPositionX:: ; DBB1
+  ; The position at which Link entered on a map
+  ; (used for reseting Link's position after a fall)
+  ds 1
+
+wLinkMapEntryPositionY:: ; DBB2
+  ; The position at which Link entered on a map
+  ; (used for reseting Link's position after a fall)
+  ds 1
+
+; Unlabeled
+ds 2
 
 wKillCount2:: ; DBB5
   ds 1

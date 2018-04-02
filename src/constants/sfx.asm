@@ -2,4 +2,6 @@
 ; Constants for audio effects
 ;
 
-SFX_COMPASS equ $0C
+; Values for hSfx
+SFX_HOOT            equ $19
+SFX_TYPEWRITER      equ $0F

@@ -150,6 +150,3 @@ TRANSITION_GFX_MANBO_IN     equ $02 ; wavy transition when departing using Manbo
 TRANSITION_GFX_MANBO_OUT    equ $03 ; wavy transition when arriving using Manbo's Mambo
 TRANSITION_GFX_FLOATING     equ $FE ; slow up-and-down motion
 TRANSITION_GFX_WIND_FISH    equ $FF ; wavy transition when the Wind Fish appears and disappears
-
-SFX_TYPEWRITER      EQU $0f
-SFX_HOOT            EQU $19

@@ -435,8 +435,9 @@ wKillCount:: ; D415
 wD416 equ $D416
   ds $4C
 
-wMapTransitionEndSfx:: ; D462
-  ; Sound to be played at the end of a map effect transition
+wCompassSfxCountdown:: ; D462
+  ; Each frame decrements the value.
+  ; When reaching 0, play the compass sfx.
   ds 1
 
 ; Unlabeled

@@ -9088,9 +9088,9 @@ ApplyMapSlideTransition::
     and  $10                                      ; $79C3: $E6 $10
     ret  nz                                       ; $79C5: $C0
 
-    ; Request compass sound effect to be played
-    ld   a, SFX_COMPASS                           ; $79C6: $3E $0C
-    ld   [wMapTransitionEndSfx], a                ; $79C8: $EA $62 $D4
+    ; Request compass sound effect to be played in 12 frames
+    ld   a, 12                                    ; $79C6: $3E $0C
+    ld   [wCompassSfxCountdown], a                ; $79C8: $EA $62 $D4
     ret                                           ; $79CB: $C9
 
 .jumpTable

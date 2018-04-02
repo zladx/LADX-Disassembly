@@ -763,7 +763,7 @@ label_4495::
     and  $10
     jr   nz, label_44A6
     ld   a, $0C
-    ld   [wMapTransitionEndSfx], a
+    ld   [wCompassSfxCountdown], a
 
 label_44A6::
     ld   a, [wIsIndoor]

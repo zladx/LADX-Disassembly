@@ -173,7 +173,8 @@ hFFE9:: ; FFE9
   ds $A
 
 hSFX:: ; FFF3
-  ; plays sfx immediately
+  ; Plays audio effect immediately
+  ; See SFX_* constants for possible values
   ds 1
 
 hFFF4: ds 1

@@ -3584,10 +3584,17 @@ label_21FB::
     ret
 
 data_2205::
-    db   $10, $10, 1, 1, $3E, 8, $EA, 0, $21, $CD, $34, $22, $C3, $1D, 8
+    db   $10, $10, $01, $01
+
+; Update BG map during map slide transition
+UpdateSlidingBGMap::
+    ld   a, $08
+    ld   [MBC3SelectBank], a
+    call label_2234
+    jp   ReloadSavedBank
 
 label_2214::
-    ld   a, [$C127]
+    ld   a, [wBGUpdateRegionOriginLow]
     and  $20
     jr   z, label_221D
     inc  hl
@@ -3603,7 +3610,7 @@ label_221D::
     ret
 
 label_2224::
-    ld   a, [$C127]
+    ld   a, [wBGUpdateRegionOriginLow]
     and  $01
     jr   z, label_222C
     inc  hl
@@ -3617,6 +3624,9 @@ label_222C::
     ld   [bc], a
     inc  bc
     ret
+
+; Load some palette data?
+label_2234::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4A76

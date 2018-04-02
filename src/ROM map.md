@@ -34,7 +34,7 @@
 1D Text
 1E Music
 1F Audio code and Music
-20 Palette-related code?
+20 BG and palette-related code
 21 Code and data
 22 Data
 23 Data

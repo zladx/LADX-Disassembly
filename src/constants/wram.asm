@@ -74,9 +74,25 @@ wMapSlideDirection:: ; C125
   ; See MAP_SLIDE_DIRECTION_* constants for possible values
   ds 1
 
+wBGUpdateRegionOriginHigh:: ; C126
+  ; Position of the first tile of a background region
+  ; to be updated during a map slide transition (low byte)
+  ds 1
+
+wBGUpdateRegionOriginLow:: ; C127
+  ; Position of the first tile of a background piece (row or colum)
+  ; to update during a map slide transition (high byte)
+  ds 1
+
 ; Unlabeled
-wC126 equ $C126
-  ds 6
+ds 1
+
+wMapSlideFramesBeforeMidScreen:: ; C129
+  ; Number of frames remaining before reaching the mid-screen transition point
+  ds 1
+
+; Unlabeled
+ds 2
 
 wMapSlideTargetScrollX:: ; C12C
   ; Stop the map slide transition when reaching this value
@@ -86,8 +102,16 @@ wMapSlideTargetScrollY:: ; C12D
   ; Stop the map slide transition when reaching this value
   ds 1
 
+wBGOriginHigh:: ; C12E
+  ; Position of the first visible background tile (high byte)
+  ds 1
+
+wBGOriginLow:: ; C12F
+  ; Position of the first visible background tile (low byte)
+  ds 1
+
 ; Unlabeled
-ds $F
+ds $D
 
 wRandomSeed:: ; C13D
   ; Seed for the Random Number Generator

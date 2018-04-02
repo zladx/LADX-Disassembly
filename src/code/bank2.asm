@@ -8903,7 +8903,7 @@ ApplyMapSlideTransition::
     ; go directly to the jump table.
     push af                                       ; $78F0: $F5
     cp   MAP_SLIDE_FIRST_HALF                     ; $78F1: $FE $04
-    jp   c, .jumpTable                            ; $78F3: $DA $CC $79
+    jp   c, .dispatchTransition                   ; $78F3: $DA $CC $79
 
     ;
     ; Apply the scroll offset
@@ -8946,15 +8946,16 @@ ApplyMapSlideTransition::
     ; go directly to the jump table
     ld   hl, wMapSlideTargetScrollY               ; $7921: $21 $2D $C1
     cp   [hl]                                     ; $7924: $BE
-    jp   nz, .jumpTable                           ; $7925: $C2 $CC $79
+    jp   nz, .dispatchTransition                  ; $7925: $C2 $CC $79
 
     ldh  a, [hBaseScrollX]                        ; $7928: $F0 $96
     ld   hl, wMapSlideTargetScrollX               ; $792A: $21 $2C $C1
     cp   [hl]                                     ; $792D: $BE
-    jp   nz, .jumpTable                           ; $792E: $C2 $CC $79
+    jp   nz, .dispatchTransition                  ; $792E: $C2 $CC $79
 
     ;
-    ; Slide transition reached the target scroll position
+    ; Slide transition reached the target scroll position:
+    ; finish the transition.
     ;
 
     ; Change the music track if needed
@@ -9016,13 +9017,12 @@ ApplyMapSlideTransition::
     ld   a, [wC169]                               ; $797A: $FA $69 $C1
     and  a                                        ; $797D: $A7
     jr   z, .noC169                               ; $797E: $28 $06
-
     ; $FFF2 = $C169
     ldh  [$FFF2], a                               ; $7980: $E0 $F2
     xor  a                                        ; $7982: $AF
     ld   [wC169], a                               ; $7983: $EA $69 $C1
-
 .noC169
+
     call label_3958                               ; $7986: $CD $58 $39
 
     ; Reset animated tiles frame
@@ -9088,12 +9088,12 @@ ApplyMapSlideTransition::
     and  $10                                      ; $79C3: $E6 $10
     ret  nz                                       ; $79C5: $C0
 
-    ; Request compass sound effect to be played in 12 frames
+    ; Request compass sound effect to be played with a 12 frames delay
     ld   a, 12                                    ; $79C6: $3E $0C
     ld   [wCompassSfxCountdown], a                ; $79C8: $EA $62 $D4
     ret                                           ; $79CB: $C9
 
-.jumpTable
+.dispatchTransition
     pop  af                                       ; $79CC: $F1
     dec  a                                        ; $79CD: $3D
     JP_TABLE                                      ; $79CE: $C7
@@ -9111,15 +9111,15 @@ Data_002_79DA::
     db $01, $02, $00, $02, $01, $02, $00, $02, $00, $00, $00, $00, $02, $02, $02, $02
 
 MapSlidePrepare1Handler::
-    ld   a, [wMapSlideDirection]                               ; $79FA: $FA $25 $C1
+    ld   a, [wMapSlideDirection]                  ; $79FA: $FA $25 $C1
     ld   c, a                                     ; $79FD: $4F
     ld   b, $00                                   ; $79FE: $06 $00
-    ld   a, [wIsIndoor]                         ; $7A00: $FA $A5 $DB
+    ld   a, [wIsIndoor]                           ; $7A00: $FA $A5 $DB
     and  a                                        ; $7A03: $A7
     jr   z, jr_002_7A6D                           ; $7A04: $28 $67
 
     ldh  a, [hMapId]                              ; $7A06: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                              ; $7A08: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $7A08: $FE $FF
     jr   z, jr_002_7A48                           ; $7A0A: $28 $3C
 
     cp   MAP_DUNGEON_G1                           ; $7A0C: $FE $0B
@@ -9268,16 +9268,16 @@ jr_002_7ABD:
 jr_002_7AE2:
     ldh  [hNextMusicTrack], a                     ; $7AE2: $E0 $B1
     call label_27EA                               ; $7AE4: $CD $EA $27
-    jr   label_002_7B36                           ; $7AE7: $18 $4D
+    jr   IncrementMapSlideTransitionStateAndReturn ; $7AE7: $18 $4D
 
 jr_002_7AE9:
-    ld   a, [wIsIndoor]                         ; $7AE9: $FA $A5 $DB
+    ld   a, [wIsIndoor]                           ; $7AE9: $FA $A5 $DB
     and  a                                        ; $7AEC: $A7
-    jr   nz, label_002_7B36                       ; $7AED: $20 $47
+    jr   nz, IncrementMapSlideTransitionStateAndReturn ; $7AED: $20 $47
 
     ld   a, [wDidFindSword]                       ; $7AEF: $FA $4E $DB
     and  a                                        ; $7AF2: $A7
-    jr   z, label_002_7B36                        ; $7AF3: $28 $41
+    jr   z, IncrementMapSlideTransitionStateAndReturn ; $7AF3: $28 $41
 
     ldh  a, [hMapRoom]                            ; $7AF5: $F0 $F6
     ld   e, a                                     ; $7AF7: $5F
@@ -9287,7 +9287,7 @@ jr_002_7AE9:
     ld   a, [hl]                                  ; $7AFE: $7E
     ld   hl, $FFB0                                ; $7AFF: $21 $B0 $FF
     cp   [hl]                                     ; $7B02: $BE
-    jr   z, label_002_7B36                        ; $7B03: $28 $31
+    jr   z, IncrementMapSlideTransitionStateAndReturn ; $7B03: $28 $31
 
     ld   c, a                                     ; $7B05: $4F
     cp   $25                                      ; $7B06: $FE $25
@@ -9328,7 +9328,7 @@ jr_002_7B33:
     ld   a, c                                     ; $7B33: $79
     ldh  [$FFB0], a                               ; $7B34: $E0 $B0
 
-label_002_7B36::
+IncrementMapSlideTransitionStateAndReturn::
     ld   a, [wMapSlideTransitionState]            ; $7B36: $FA $24 $C1
     inc  a                                        ; $7B39: $3C
     ld   [wMapSlideTransitionState], a            ; $7B3A: $EA $24 $C1
@@ -9344,29 +9344,46 @@ MapSlidePrepare2Handler::
     ldh  [$FFBB], a                               ; $7B4A: $E0 $BB
 
 jr_002_7B4C:
-    jp   label_002_7B36                           ; $7B4C: $C3 $36 $7B
+    jp   IncrementMapSlideTransitionStateAndReturn ; $7B4C: $C3 $36 $7B
 
-    nop                                           ; $7B4F: $00
-    nop                                           ; $7B50: $00
-    ld   [bc], a                                  ; $7B51: $02
-    ld   [bc], a                                  ; $7B52: $02
-    inc  d                                        ; $7B53: $14
-    inc  c                                        ; $7B54: $0C
-    nop                                           ; $7B55: $00
-    nop                                           ; $7B56: $00
-    nop                                           ; $7B57: $00
-    nop                                           ; $7B58: $00
-    inc  bc                                       ; $7B59: $03
-    ld   [bc], a                                  ; $7B5A: $02
-    inc  d                                        ; $7B5B: $14
-    rra                                           ; $7B5C: $1F
-    ld   [rP1], a                                 ; $7B5D: $E0 $00
-    ld   [$0A08], sp                              ; $7B5F: $08 $08 $0A
-    ld   a, [bc]                                  ; $7B62: $0A
-    inc  d                                        ; $7B63: $14
-    inc  d                                        ; $7B64: $14
-    db   $10                                      ; $7B65: $10
-    stop                                          ; $7B66: $10 $00
+MapSlideBGOriginHigh::
+.right  db $00
+.left   db $00
+.top    db $02
+.bottom db $02
+
+MapSlideBGOriginLow::
+.right  db $14
+.left   db $0C
+.top    db $00
+.bottom db $00
+
+MapSlideBGInitialUpdateRegionHigh::
+.right  db $00
+.left   db $00
+.top    db $03
+.bottom db $02
+
+MapSlideBGInitialUpdateRegionLow::
+.right  db $14
+.left   db $1F
+.top    db $E0
+.bottom db $00
+
+data_002_7B5F::
+.right  db $08
+.left   db $08
+.top    db $0A
+.bottom db $0A
+
+MapSlideFramesToMidScreen::
+.right  db $14
+.left   db $14
+.top    db $10
+.bottom db $10
+
+data_002_7B67::
+    db   $00                                      ; $7B67: $00
     add  hl, bc                                   ; $7B68: $09
     ld   [hl], b                                  ; $7B69: $70
     nop                                           ; $7B6A: $00
@@ -9374,94 +9391,124 @@ jr_002_7B4C:
     ld   b, b                                     ; $7B6C: $40
     ld   [bc], a                                  ; $7B6D: $02
     ld   [bc], a                                  ; $7B6E: $02
-    and  b                                        ; $7B6F: $A0
-    ld   h, b                                     ; $7B70: $60
-    nop                                           ; $7B71: $00
-    nop                                           ; $7B72: $00
-    nop                                           ; $7B73: $00
-    nop                                           ; $7B74: $00
-    add  b                                        ; $7B75: $80
-    add  b                                        ; $7B76: $80
+
+MapSlideTargetScrollX::
+.right  db $A0
+.left   db $60
+.top    db $00
+.bottom db $00
+
+MapSlideTargetScrollY::
+.right  db $00
+.left   db $00
+.top    db $80
+.bottom db $80
+
+data_002_7B77::
     ld   bc, $F0FF                                ; $7B77: $01 $FF $F0
     db   $10                                      ; $7B7A: $10
+
+data_002_7B7B::
     ld   bc, $F8FF                                ; $7B7B: $01 $FF $F8
     db   $08                                      ; $7B7E: $08
 
 MapSlidePrepare3Handler::
-    db $F0, $BB                                   ; $7B7F: $F0 $BB
+    ; If $FFBB == 0, return
+    ldh  a, [$FFBB]                               ; $7B7F: $F0 $BB
     and  a                                        ; $7B81: $A7
     ret  nz                                       ; $7B82: $C0
 
+    ; a = wMapSlideDirection
+    ; e = (slide direction horizontal ? $DF : $FF)
     ld   e, $FF                                   ; $7B83: $1E $FF
-    ld   a, [wMapSlideDirection]                               ; $7B85: $FA $25 $C1
+    ld   a, [wMapSlideDirection]                  ; $7B85: $FA $25 $C1
     ld   c, a                                     ; $7B88: $4F
     ld   b, $00                                   ; $7B89: $06 $00
     and  $02                                      ; $7B8B: $E6 $02
-    jr   nz, jr_002_7B91                          ; $7B8D: $20 $02
-
+    jr   nz, .slideDirectionNotHorizontal         ; $7B8D: $20 $02
     ld   e, $DF                                   ; $7B8F: $1E $DF
+.slideDirectionNotHorizontal
 
-jr_002_7B91:
-    ld   hl, $7B6F                                ; $7B91: $21 $6F $7B
+    ; Configure the target scrollX position
+    ld   hl, MapSlideTargetScrollX                ; $7B91: $21 $6F $7B
     add  hl, bc                                   ; $7B94: $09
     ld   a, [wMapSlideTargetScrollX]              ; $7B95: $FA $2C $C1
     add  [hl]                                     ; $7B98: $86
     ld   [wMapSlideTargetScrollX], a              ; $7B99: $EA $2C $C1
-    ld   hl, $7B73                                ; $7B9C: $21 $73 $7B
+    
+    ; Configure the target scrollY position
+    ld   hl, MapSlideTargetScrollY                ; $7B9C: $21 $73 $7B
     add  hl, bc                                   ; $7B9F: $09
     ld   a, [wMapSlideTargetScrollY]              ; $7BA0: $FA $2D $C1
     add  [hl]                                     ; $7BA3: $86
     ld   [wMapSlideTargetScrollY], a              ; $7BA4: $EA $2D $C1
-    ld   hl, $7B5B                                ; $7BA7: $21 $5B $7B
+    
+    ; Configure the initial position of the Background region to be updated
+    ld   hl, MapSlideBGInitialUpdateRegionLow     ; $7BA7: $21 $5B $7B
     add  hl, bc                                   ; $7BAA: $09
-    ld   a, [$C12F]                               ; $7BAB: $FA $2F $C1
+    ld   a, [wBGOriginLow]                        ; $7BAB: $FA $2F $C1
     add  [hl]                                     ; $7BAE: $86
     rl   d                                        ; $7BAF: $CB $12
     and  e                                        ; $7BB1: $A3
-    ld   [$C127], a                               ; $7BB2: $EA $27 $C1
-    ld   hl, $7B57                                ; $7BB5: $21 $57 $7B
+    ld   [wBGUpdateRegionOriginLow], a            ; $7BB2: $EA $27 $C1
+    
+    ld   hl, MapSlideBGInitialUpdateRegionHigh    ; $7BB5: $21 $57 $7B
     add  hl, bc                                   ; $7BB8: $09
-    ld   a, [$C12E]                               ; $7BB9: $FA $2E $C1
+    ld   a, [wBGOriginHigh]                       ; $7BB9: $FA $2E $C1
     rr   d                                        ; $7BBC: $CB $1A
     adc  [hl]                                     ; $7BBE: $8E
     and  $03                                      ; $7BBF: $E6 $03
-    ld   [$C126], a                               ; $7BC1: $EA $26 $C1
-    ld   hl, $7B53                                ; $7BC4: $21 $53 $7B
+    ld   [wBGUpdateRegionOriginHigh], a           ; $7BC1: $EA $26 $C1
+    
+    ; Save the background origin position after the transition
+    ld   hl, MapSlideBGOriginLow                  ; $7BC4: $21 $53 $7B
     add  hl, bc                                   ; $7BC7: $09
-    ld   a, [$C12F]                               ; $7BC8: $FA $2F $C1
+    ld   a, [wBGOriginLow]                        ; $7BC8: $FA $2F $C1
     add  [hl]                                     ; $7BCB: $86
     rl   d                                        ; $7BCC: $CB $12
     and  e                                        ; $7BCE: $A3
-    ld   [$C12F], a                               ; $7BCF: $EA $2F $C1
-    ld   hl, $7B4F                                ; $7BD2: $21 $4F $7B
+    ld   [wBGOriginLow], a                        ; $7BCF: $EA $2F $C1
+    
+    ld   hl, MapSlideBGOriginHigh                 ; $7BD2: $21 $4F $7B
     add  hl, bc                                   ; $7BD5: $09
-    ld   a, [$C12E]                               ; $7BD6: $FA $2E $C1
+    ld   a, [wBGOriginHigh]                       ; $7BD6: $FA $2E $C1
     rr   d                                        ; $7BD9: $CB $1A
     adc  [hl]                                     ; $7BDB: $8E
     and  $03                                      ; $7BDC: $E6 $03
-    ld   [$C12E], a                               ; $7BDE: $EA $2E $C1
-    ld   hl, $7B5F                                ; $7BE1: $21 $5F $7B
+    ld   [wBGOriginHigh], a                       ; $7BDE: $EA $2E $C1
+    
+    ; Configure $C128
+    ld   hl, data_002_7B5F                        ; $7BE1: $21 $5F $7B
     add  hl, bc                                   ; $7BE4: $09
     ld   a, [hl]                                  ; $7BE5: $7E
     ld   [$C128], a                               ; $7BE6: $EA $28 $C1
-    ld   hl, $7B63                                ; $7BE9: $21 $63 $7B
+    
+    ; Set number of frames to elapse before reaching
+    ; the mid-transition point
+    ld   hl, MapSlideFramesToMidScreen            ; $7BE9: $21 $63 $7B
     add  hl, bc                                   ; $7BEC: $09
     ld   a, [hl]                                  ; $7BED: $7E
-    ld   [$C129], a                               ; $7BEE: $EA $29 $C1
-    ld   hl, $7B67                                ; $7BF1: $21 $67 $7B
+    ld   [wMapSlideFramesBeforeMidScreen], a      ; $7BEE: $EA $29 $C1
+    
+    ld   hl, data_002_7B67                        ; $7BF1: $21 $67 $7B
     add  hl, bc                                   ; $7BF4: $09
     ld   a, [hl]                                  ; $7BF5: $7E
     ld   [$C12A], a                               ; $7BF6: $EA $2A $C1
     xor  a                                        ; $7BF9: $AF
     ld   [$C12B], a                               ; $7BFA: $EA $2B $C1
-    jp   label_002_7B36                           ; $7BFD: $C3 $36 $7B
+    
+    jp   IncrementMapSlideTransitionStateAndReturn ; $7BFD: $C3 $36 $7B
 
 MapSlideFirstHalfHandler::
-    jp   $2209                                    ; $7C00: $C3 $09 $22
+    ; Update BG Map
+    jp   UpdateSlidingBGMap                       ; $7C00: $C3 $09 $22
 
 MapSlideSecondHalfHandler::
+    ; The scroll increment has already been done earlier:
+    ; nothing more to do.
     ret                                           ; $7C03: $C9
 
+Data_002_7C04::
     nop                                           ; $7C04: $00
     nop                                           ; $7C05: $00
     rst  $38                                      ; $7C06: $FF

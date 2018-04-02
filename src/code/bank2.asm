@@ -1189,7 +1189,7 @@ jr_002_4A7C:
     cp   $01                                      ; $4A91: $FE $01
     jr   z, jr_002_4AB2                           ; $4A93: $28 $1D
 
-    ld   a, [wActiveRoom]                         ; $4A95: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $4A95: $FA $A5 $DB
     and  a                                        ; $4A98: $A7
     jr   nz, jr_002_4AB2                          ; $4A99: $20 $17
 
@@ -1407,7 +1407,7 @@ func_002_4BD4::
     ld   [hl+], a                                 ; $4BD9: $22
     ld   a, $81                                   ; $4BDA: $3E $81
     ld   [hl+], a                                 ; $4BDC: $22
-    ld   a, [wActiveRoom]                         ; $4BDD: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $4BDD: $FA $A5 $DB
     and  a                                        ; $4BE0: $A7
     jr   z, jr_002_4BFA                           ; $4BE1: $28 $17
 
@@ -1473,7 +1473,7 @@ func_002_4C14::
     ld   [hl+], a                                 ; $4C32: $22
     ld   [de], a                                  ; $4C33: $12
     inc  de                                       ; $4C34: $13
-    ld   a, [wActiveRoom]                         ; $4C35: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $4C35: $FA $A5 $DB
     and  a                                        ; $4C38: $A7
     jr   z, jr_002_4C64                           ; $4C39: $28 $29
 
@@ -1581,7 +1581,7 @@ jr_002_4CC1:
     and  $07                                      ; $4CC4: $E6 $07
     jr   nz, jr_002_4D1F                          ; $4CC6: $20 $57
 
-    ld   a, [wActiveRoom]                         ; $4CC8: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $4CC8: $FA $A5 $DB
     and  a                                        ; $4CCB: $A7
     jr   nz, jr_002_4CD3                          ; $4CCC: $20 $05
 
@@ -1681,7 +1681,7 @@ func_002_4D20::
     ld   a, [hl]                                  ; $4D62: $7E
     ldh  [$FFD7], a                               ; $4D63: $E0 $D7
     ld   e, a                                     ; $4D65: $5F
-    ld   a, [wActiveRoom]                         ; $4D66: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $4D66: $FA $A5 $DB
     ld   d, a                                     ; $4D69: $57
     call label_2A26                               ; $4D6A: $CD $26 $2A
     cp   $00                                      ; $4D6D: $FE $00
@@ -2341,7 +2341,7 @@ jr_002_50F6:
     ld   [wIsUsingSpinAttack], a                  ; $50FA: $EA $21 $C1
     ld   [$C122], a                               ; $50FD: $EA $22 $C1
     call func_002_52D6                            ; $5100: $CD $D6 $52
-    ld   a, [wActiveRoom]                         ; $5103: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $5103: $FA $A5 $DB
     and  a                                        ; $5106: $A7
     jr   nz, jr_002_512B                          ; $5107: $20 $22
 
@@ -2408,7 +2408,7 @@ jr_002_515C:
     jp   $0C83                                    ; $5167: $C3 $83 $0C
 
 jr_002_516A:
-    ld   a, [wActiveRoom]                         ; $516A: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $516A: $FA $A5 $DB
     and  a                                        ; $516D: $A7
     jr   nz, jr_002_5176                          ; $516E: $20 $06
 
@@ -2597,7 +2597,7 @@ jr_002_524F:
 jr_002_5283:
     xor  a                                        ; $5283: $AF
     ldh  [$FF9C], a                               ; $5284: $E0 $9C
-    ld   a, [wActiveRoom]                         ; $5286: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $5286: $FA $A5 $DB
     and  a                                        ; $5289: $A7
     jr   nz, jr_002_529C                          ; $528A: $20 $10
 
@@ -3096,7 +3096,7 @@ jr_002_552A:
     cp   $77                                      ; $554F: $FE $77
     jr   nz, jr_002_5560                          ; $5551: $20 $0D
 
-    ld   a, [wActiveRoom]                         ; $5553: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $5553: $FA $A5 $DB
     and  a                                        ; $5556: $A7
     jr   nz, jr_002_5560                          ; $5557: $20 $07
 
@@ -3826,7 +3826,7 @@ func_002_5928::
     or   [hl]                                     ; $5945: $B6
     jr   nz, jr_002_5967                          ; $5946: $20 $1F
 
-    ld   a, [wActiveRoom]                         ; $5948: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $5948: $FA $A5 $DB
     and  a                                        ; $594B: $A7
     jr   z, jr_002_5967                           ; $594C: $28 $19
 
@@ -4146,7 +4146,7 @@ func_002_5B9F::
     ld   hl, wMinimapTiles                        ; $5B9F: $21 $00 $D8
     ldh  a, [hMapRoom]                           ; $5BA2: $F0 $F6
     ld   e, a                                     ; $5BA4: $5F
-    ld   a, [wActiveRoom]                         ; $5BA5: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $5BA5: $FA $A5 $DB
     ld   d, a                                     ; $5BA8: $57
     and  a                                        ; $5BA9: $A7
     jr   z, jr_002_5BC2                           ; $5BAA: $28 $16
@@ -4417,7 +4417,7 @@ jr_002_5CFE:
 
 jr_002_5D21:
     ld   hl, wMinimapTiles                        ; $5D21: $21 $00 $D8
-    ld   a, [wActiveRoom]                         ; $5D24: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $5D24: $FA $A5 $DB
     and  a                                        ; $5D27: $A7
     jr   z, jr_002_5D36                           ; $5D28: $28 $0C
 
@@ -5201,7 +5201,7 @@ jr_002_613D:
     ld   [$C151], a                               ; $617B: $EA $51 $C1
     ld   a, $0B                                   ; $617E: $3E $0B
     ld   [$C154], a                               ; $6180: $EA $54 $C1
-    ld   a, [wActiveRoom]                         ; $6183: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $6183: $FA $A5 $DB
     and  a                                        ; $6186: $A7
     ld   a, $07                                   ; $6187: $3E $07
     jr   z, jr_002_619C                           ; $6189: $28 $11
@@ -6753,7 +6753,7 @@ func_002_6C2F::
     ld   a, [hl]                                  ; $6C54: $7E
     ldh  [$FFAF], a                               ; $6C55: $E0 $AF
     ld   e, a                                     ; $6C57: $5F
-    ld   a, [wActiveRoom]                         ; $6C58: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $6C58: $FA $A5 $DB
     ld   d, a                                     ; $6C5B: $57
     call label_2A26                               ; $6C5C: $CD $26 $2A
     ldh  [$FFD8], a                               ; $6C5F: $E0 $D8
@@ -7014,7 +7014,7 @@ jr_002_6DCC:
     cp   MAP_CAVE_D                                      ; $6DD4: $FE $1F
     jr   z, jr_002_6DE4                           ; $6DD6: $28 $0C
 
-    ld   a, [wActiveRoom]                         ; $6DD8: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $6DD8: $FA $A5 $DB
     and  a                                        ; $6DDB: $A7
     jr   z, jr_002_6DE4                           ; $6DDC: $28 $06
 
@@ -7134,7 +7134,7 @@ jr_002_6E72:
     and  $80                                      ; $6E7F: $E6 $80
     jr   nz, jr_002_6EC6                          ; $6E81: $20 $43
 
-    ld   a, [wActiveRoom]                         ; $6E83: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $6E83: $FA $A5 $DB
     and  a                                        ; $6E86: $A7
     jr   nz, jr_002_6EC6                          ; $6E87: $20 $3D
 
@@ -7279,7 +7279,7 @@ jr_002_6F25:
     ld   a, [hl]                                  ; $6F55: $7E
     ldh  [$FFAF], a                               ; $6F56: $E0 $AF
     ld   e, a                                     ; $6F58: $5F
-    ld   a, [wActiveRoom]                         ; $6F59: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $6F59: $FA $A5 $DB
     ld   d, a                                     ; $6F5C: $57
     call label_2A26                               ; $6F5D: $CD $26 $2A
     ldh  [$FFE4], a                               ; $6F60: $E0 $E4
@@ -7451,7 +7451,7 @@ jr_002_7053:
 
     sub  $D0                                      ; $705F: $D6 $D0
     ld   e, a                                     ; $7061: $5F
-    ld   a, [wActiveRoom]                         ; $7062: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $7062: $FA $A5 $DB
     and  a                                        ; $7065: $A7
     jr   nz, jr_002_7085                          ; $7066: $20 $1D
 
@@ -7682,7 +7682,7 @@ label_002_71BB::
     cp   $06                                      ; $71C6: $FE $06
     jp   nc, label_002_726A                       ; $71C8: $D2 $6A $72
 
-    ld   a, [wActiveRoom]                         ; $71CB: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $71CB: $FA $A5 $DB
     and  a                                        ; $71CE: $A7
     jr   nz, jr_002_722C                          ; $71CF: $20 $5B
 
@@ -7749,7 +7749,7 @@ jr_002_722C:
     and  a                                        ; $722F: $A7
     jp   nz, label_002_7454                       ; $7230: $C2 $54 $74
 
-    ld   a, [wActiveRoom]                         ; $7233: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $7233: $FA $A5 $DB
     and  a                                        ; $7236: $A7
     jp   nz, $0C89                                ; $7237: $C2 $89 $0C
 
@@ -7821,7 +7821,7 @@ jr_002_728E:
     or   [hl]                                     ; $729C: $B6
     jr   nz, jr_002_72FA                          ; $729D: $20 $5B
 
-    ld   a, [wActiveRoom]                         ; $729F: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $729F: $FA $A5 $DB
     and  a                                        ; $72A2: $A7
     ldh  a, [$FFAF]                               ; $72A3: $F0 $AF
     jr   z, jr_002_72D1                           ; $72A5: $28 $2A
@@ -7998,7 +7998,7 @@ label_002_73AD::
     cp   $C5                                      ; $73AF: $FE $C5
     jr   nz, jr_002_741D                          ; $73B1: $20 $6A
 
-    ld   a, [wActiveRoom]                         ; $73B3: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $73B3: $FA $A5 $DB
     and  a                                        ; $73B6: $A7
     jp   nz, label_002_7454                       ; $73B7: $C2 $54 $74
 
@@ -8074,7 +8074,7 @@ jr_002_7415:
     jp   label_002_7454                           ; $741A: $C3 $54 $74
 
 jr_002_741D:
-    ld   a, [wActiveRoom]                         ; $741D: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $741D: $FA $A5 $DB
     and  a                                        ; $7420: $A7
     jr   z, label_002_7454                        ; $7421: $28 $31
 
@@ -8100,7 +8100,7 @@ jr_002_742F:
     xor  a                                        ; $743C: $AF
     ld   [$C191], a                               ; $743D: $EA $91 $C1
     call func_002_53B0                            ; $7440: $CD $B0 $53
-    ld   a, [wActiveRoom]                         ; $7443: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $7443: $FA $A5 $DB
     and  a                                        ; $7446: $A7
     jr   nz, label_002_7454                       ; $7447: $20 $0B
 
@@ -8253,7 +8253,7 @@ func_002_7512::
     ld   a, h                                     ; $752C: $7C
     add  hl, de                                   ; $752D: $19
     ld   h, a                                     ; $752E: $67
-    ld   a, [wActiveRoom]                         ; $752F: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $752F: $FA $A5 $DB
     ld   d, a                                     ; $7532: $57
     ld   a, [hl]                                  ; $7533: $7E
     ldh  [$FFB8], a                               ; $7534: $E0 $B8
@@ -8361,7 +8361,7 @@ func_002_75BD::
 
     call func_002_7512                            ; $75C7: $CD $12 $75
     ld   c, a                                     ; $75CA: $4F
-    ld   a, [wActiveRoom]                         ; $75CB: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $75CB: $FA $A5 $DB
     and  a                                        ; $75CE: $A7
     jr   nz, jr_002_75D9                          ; $75CF: $20 $08
 
@@ -8719,7 +8719,7 @@ jr_002_77E9:
     ld   [$D6F9], a                               ; $77F4: $EA $F9 $D6
 
 jr_002_77F7:
-    ld   a, [wActiveRoom]                         ; $77F7: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $77F7: $FA $A5 $DB
     and  a                                        ; $77FA: $A7
     jp   z, label_002_786E                        ; $77FB: $CA $6E $78
 
@@ -8819,7 +8819,7 @@ label_002_787D::
     and  a                                        ; $7895: $A7
     jr   z, jr_002_78A9                           ; $7896: $28 $11
 
-    ld   a, [wActiveRoom]                         ; $7898: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $7898: $FA $A5 $DB
     and  a                                        ; $789B: $A7
     jr   nz, jr_002_78A9                          ; $789C: $20 $0B
 
@@ -8848,7 +8848,7 @@ jr_002_78AA:
     and  a                                        ; $78BA: $A7
     jr   z, jr_002_78CE                           ; $78BB: $28 $11
 
-    ld   a, [wActiveRoom]                         ; $78BD: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $78BD: $FA $A5 $DB
     and  a                                        ; $78C0: $A7
     jr   nz, jr_002_78CE                          ; $78C1: $20 $0B
 
@@ -9033,12 +9033,12 @@ ApplyMapSlideTransition::
     ; Play compass SFX if needed
     ;
 
-    ; If wActiveRoom == 0, return
-    ld   a, [wActiveRoom]                         ; $798D: $FA $A5 $DB
+    ; If wIsIndoor == 0, return
+    ld   a, [wIsIndoor]                         ; $798D: $FA $A5 $DB
     and  a                                        ; $7990: $A7
     ret  z                                        ; $7991: $C8
 
-    ; d = wActiveRoom
+    ; d = wIsIndoor
     ld   d, a                                     ; $7992: $57
     
     ; If hMapId == MAP_COLOR_DUNGEON, d = 0
@@ -9114,7 +9114,7 @@ MapSlidePrepare1Handler::
     ld   a, [wMapSlideDirection]                               ; $79FA: $FA $25 $C1
     ld   c, a                                     ; $79FD: $4F
     ld   b, $00                                   ; $79FE: $06 $00
-    ld   a, [wActiveRoom]                         ; $7A00: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $7A00: $FA $A5 $DB
     and  a                                        ; $7A03: $A7
     jr   z, jr_002_7A6D                           ; $7A04: $28 $67
 
@@ -9230,7 +9230,7 @@ jr_002_7A8D:
 
 label_002_7AA5::
     call label_30F4                               ; $7AA5: $CD $F4 $30
-    ld   a, [wActiveRoom]                         ; $7AA8: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $7AA8: $FA $A5 $DB
     and  a                                        ; $7AAB: $A7
     jr   z, jr_002_7ABD                           ; $7AAC: $28 $0F
 
@@ -9271,7 +9271,7 @@ jr_002_7AE2:
     jr   label_002_7B36                           ; $7AE7: $18 $4D
 
 jr_002_7AE9:
-    ld   a, [wActiveRoom]                         ; $7AE9: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $7AE9: $FA $A5 $DB
     and  a                                        ; $7AEC: $A7
     jr   nz, label_002_7B36                       ; $7AED: $20 $47
 

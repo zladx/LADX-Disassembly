@@ -4007,7 +4007,7 @@ include "src/code/home/clear_memory.asm"
 
 ; Retrieve the status of chests in the given room
 ; Inputs:
-;   d    is overworld room
+;   d    is room indoor
 ;   e    room id
 ; Output:
 ;   a    status of chests (eg. $19, $1A, etc.)

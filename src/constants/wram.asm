@@ -776,8 +776,9 @@ wWindowY:: ; DB9A
 wDB9B equ $DB9B
   ds $A
 
-wActiveRoom:: ; $DBA5
-  ; Current room?
+wIsIndoor:: ; $DBA5
+  ; 0 on the overworld
+  ; 1 on interior maps (house, dungeons, etc)
   ds 1
 
 wSaveSlot:: ; DBA6

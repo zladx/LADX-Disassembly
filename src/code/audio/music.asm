@@ -60,8 +60,8 @@ SelectMusicTrackAfterTransition::
     xor  a                                        ; $4163: $AF
     ldh  [hNextMusicTrack], a                     ; $4164: $E0 $B1
 
-    ; If wActiveRoom == 0, skip further code and load the soundtrack
-    ld   a, [wActiveRoom]                         ; $4166: $FA $A5 $DB
+    ; If wIsIndoor == 0, skip further code and load the soundtrack
+    ld   a, [wIsIndoor]                         ; $4166: $FA $A5 $DB
     and  a                                        ; $4169: $A7
     jr   z, .clearEventFlagsAndLoadSoundtrack     ; $416A: $28 $36
 

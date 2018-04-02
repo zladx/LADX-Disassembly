@@ -6566,7 +6566,7 @@ func_004_6BE1:
     ld   a, [hl]                                  ; $6BFE: $7E
     ldh  [$FFAF], a                               ; $6BFF: $E0 $AF
     ld   e, a                                     ; $6C01: $5F
-    ld   a, [wActiveRoom]                         ; $6C02: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $6C02: $FA $A5 $DB
     ld   d, a                                     ; $6C05: $57
     call label_2A26                               ; $6C06: $CD $26 $2A
     cp   $00                                      ; $6C09: $FE $00

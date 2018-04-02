@@ -104,7 +104,14 @@ hWindowXUnused:: ; FFAA
 
 ; Unlabeled
 hFFAB:: ; hFFAB
-  ds 6
+  ds 4
+
+; Related to ennemies IA state?
+hFFAF:: ; FFAF
+  ds 1
+
+hFFB0:: ; FFB0
+  ds 1
 
 ; Next music to be played after map slide transition
 hNextMusicTrack:: ; hFFB1

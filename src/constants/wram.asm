@@ -28,10 +28,10 @@ wC107: ds 1
 wNameIndex:: ds 1
 
 wC109: ds 1
-wC10a: ds 1
-wC10b: ds 1
-wC10c: ds 1
-wC10d: ds 1
+wC10A: ds 1
+wC10B: ds 1
+wC10C: ds 1
+wC10D: ds 1
 
 wNeedsUpdatingNPCTiles:: ; C10E
   ds 1
@@ -309,7 +309,7 @@ wAlternateBackgroundEnabled:: ; C500
   
 ds $aa
 
-wDialogSFX:: ; C5ab
+wDialogSFX:: ; C5AB
     ds 1
 
 section "WRAM Bank1", wramx[$d000], bank[1]
@@ -433,7 +433,14 @@ wKillCount:: ; D415
 
 ; Unlabeled
 wD416 equ $D416
-  ds $56
+  ds $4C
+
+wMapTransitionEndSfx:: ; D462
+  ; Sound to be played at the end of a map effect transition
+  ds 1
+
+; Unlabeled
+ds 9
 
 wBossDefeated:: ; D46C
   ; A boss was just defeated

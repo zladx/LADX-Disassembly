@@ -576,7 +576,7 @@ func_002_44FA::
     ldh  [$FFA3], a                               ; $4501: $E0 $A3
     ld   a, $FF                                   ; $4503: $3E $FF
     ld   [wC120], a                               ; $4505: $EA $20 $C1
-    ld   a, [wC10a]                               ; $4508: $FA $0A $C1
+    ld   a, [wC10A]                               ; $4508: $FA $0A $C1
     ld   hl, $C14A                                ; $450B: $21 $4A $C1
     or   [hl]                                     ; $450E: $B6
     jr   nz, jr_002_4563                          ; $450F: $20 $52
@@ -659,7 +659,7 @@ jr_002_456C:
     ld   [$C146], a                               ; $4576: $EA $46 $C1
     ld   [$C152], a                               ; $4579: $EA $52 $C1
     ld   [$C153], a                               ; $457C: $EA $53 $C1
-    ld   [wC10a], a                               ; $457F: $EA $0A $C1
+    ld   [wC10A], a                               ; $457F: $EA $0A $C1
     ldh  a, [hLinkPositionY]                      ; $4582: $F0 $99
     cp   $88                                      ; $4584: $FE $88
     jr   nc, label_002_45AC                       ; $4586: $30 $24
@@ -1036,7 +1036,7 @@ jr_002_4978:
     ldh  a, [$FFA2]                               ; $4987: $F0 $A2
     add  $08                                      ; $4989: $C6 $08
     ldh  [$FFA2], a                               ; $498B: $E0 $A2
-    call label_002_6E45                           ; $498D: $CD $45 $6E
+    call CheckForLedgeJump                        ; $498D: $CD $45 $6E
     ldh  a, [$FFAF]                               ; $4990: $F0 $AF
     cp   $E1                                      ; $4992: $FE $E1
     jr   z, jr_002_4978                           ; $4994: $28 $E2
@@ -7042,12 +7042,12 @@ jr_002_6DE4:
     ldh  [$FFA2], a                               ; $6E07: $E0 $A2
 
 label_002_6E09::
-    jp   label_002_6E45                           ; $6E09: $C3 $45 $6E
+    jp   CheckForLedgeJump                        ; $6E09: $C3 $45 $6E
 
 label_002_6E0C::
     call ClearLinkPositionIncrement               ; $6E0C: $CD $8E $17
     ld   [$C13E], a                               ; $6E0F: $EA $3E $C1
-    jp   label_002_6E45                           ; $6E12: $C3 $45 $6E
+    jp   CheckForLedgeJump                        ; $6E12: $C3 $45 $6E
 
     ld   b, $09                                   ; $6E15: $06 $09
     dec  bc                                       ; $6E17: $0B
@@ -7084,8 +7084,9 @@ label_002_6E0C::
     nop                                           ; $6E42: $00
     ld   a, [rNR10]                               ; $6E43: $F0 $10
 
-label_002_6E45::
-    ld   hl, wC10a                                ; $6E45: $21 $0A $C1
+; Initiate a jump if Link is passing through a ledge
+CheckForLedgeJump::
+    ld   hl, wC10A                                ; $6E45: $21 $0A $C1
     ld   a, [wFreeMovementMode]                   ; $6E48: $FA $7B $C1
     or   [hl]                                     ; $6E4B: $B6
     ret  nz                                       ; $6E4C: $C0
@@ -7518,7 +7519,7 @@ jr_002_70B5:
     ld   a, $01                                   ; $70CA: $3E $01
     ld   [$C146], a                               ; $70CC: $EA $46 $C1
     ld   a, $01                                   ; $70CF: $3E $01
-    ld   [wC10a], a                               ; $70D1: $EA $0A $C1
+    ld   [wC10A], a                               ; $70D1: $EA $0A $C1
     ld   a, $08                                   ; $70D4: $3E $08
     ldh  [$FFF2], a                               ; $70D6: $E0 $F2
 
@@ -8934,7 +8935,7 @@ ApplyMapSlideTransition::
     add  [hl]                                     ; $7915: $86
     ldh  [hBaseScrollX], a                        ; $7916: $E0 $96
     
-    ; hBaseScrollY += MappSlideYIncrement[wMapSlideDirection]
+    ; hBaseScrollY += MapSlideYIncrement[wMapSlideDirection]
     ld   hl, MapSlideYIncrement                   ; $7918: $21 $E4 $78
     add  hl, bc                                   ; $791B: $09
     ldh  a, [hBaseScrollY]                        ; $791C: $F0 $97
@@ -8970,18 +8971,25 @@ ApplyMapSlideTransition::
     call ClearLinkPositionIncrement               ; $793D: $CD $8E $17
     ldh  [$FFA3], a                               ; $7940: $E0 $A3
     ld   [wMapSlideTransitionState], a            ; $7942: $EA $24 $C1
+    
+    ; Save Link's initial position on the new map
     ldh  a, [hLinkPositionX]                      ; $7945: $F0 $98
     ld   [wLinkMapEntryPositionX], a              ; $7947: $EA $B1 $DB
     ldh  a, [hLinkPositionY]                      ; $794A: $F0 $99
     ld   [wLinkMapEntryPositionY], a              ; $794C: $EA $B2 $DB
 
+    ; If the transition direction was to the bottom…
     ld   a, [wMapSlideDirection]                  ; $794F: $FA $25 $C1
     cp   MAP_SLIDE_DIRECTION_BOTTOM               ; $7952: $FE $03
     jr   nz, .bottomDirectionEnd                  ; $7954: $20 $24
 
+    ; Initiate a jump if Link landed on a ledge
     ld   a, $01                                   ; $7956: $3E $01
     ldh  [hLinkPositionYIncrement], a             ; $7958: $E0 $9B
-    call label_002_6E45                           ; $795A: $CD $45 $6E
+    call CheckForLedgeJump                        ; $795A: $CD $45 $6E
+
+    ; If ($FFAF != $DB && $FFAF != $DC && ($FFAF == $E1 || $C133 != 0),
+    ; handle special case.
     ldh  a, [$FFAF]                               ; $795D: $F0 $AF
     cp   $DB                                      ; $795F: $FE $DB
     jr   z, .bottomDirectionEnd                   ; $7961: $28 $17
@@ -8990,13 +8998,13 @@ ApplyMapSlideTransition::
     jr   z, .bottomDirectionEnd                   ; $7965: $28 $13
 
     cp   $E1                                      ; $7967: $FE $E1
-    jr   z, .jr_002_7971                          ; $7969: $28 $06
+    jr   z, .handleFFAFSpecialCase                ; $7969: $28 $06
 
     ld   a, [$C133]                               ; $796B: $FA $33 $C1
     and  a                                        ; $796E: $A7
     jr   z, .bottomDirectionEnd                   ; $796F: $28 $09
 
-.jr_002_7971
+.handleFFAFSpecialCase
     ld   a, [wFreeMovementMode]                   ; $7971: $FA $7B $C1
     and  a                                        ; $7974: $A7
     jr   nz, .bottomDirectionEnd                  ; $7975: $20 $03
@@ -9004,18 +9012,26 @@ ApplyMapSlideTransition::
     call func_002_6EAD                            ; $7977: $CD $AD $6E
 .bottomDirectionEnd
 
+    ; If $C169 != 0…
     ld   a, [wC169]                               ; $797A: $FA $69 $C1
     and  a                                        ; $797D: $A7
-    jr   z, .jr_002_7986                          ; $797E: $28 $06
+    jr   z, .noC169                               ; $797E: $28 $06
 
+    ; $FFF2 = $C169
     ldh  [$FFF2], a                               ; $7980: $E0 $F2
     xor  a                                        ; $7982: $AF
     ld   [wC169], a                               ; $7983: $EA $69 $C1
 
-.jr_002_7986
+.noC169
     call label_3958                               ; $7986: $CD $58 $39
+
+    ; Reset animated tiles frame
     ld   a, $FF                                   ; $7989: $3E $FF
     ldh  [hAnimatedTilesFrameCount], a            ; $798B: $E0 $A6
+
+    ;
+    ; Play compass SFX if needed
+    ;
 
     ; If wActiveRoom == 0, return
     ld   a, [wActiveRoom]                         ; $798D: $FA $A5 $DB
@@ -9027,14 +9043,14 @@ ApplyMapSlideTransition::
     
     ; If hMapId == MAP_COLOR_DUNGEON, d = 0
     ldh  a, [hMapId]                              ; $7993: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                              ; $7995: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $7995: $FE $FF
     jr   nz, .mapNotFF                            ; $7997: $20 $04
 
     ld   d, 0                                     ; $7999: $16 $00
     jr   .activeRoomEnd                           ; $799B: $18 $09
 
 .mapNotFF
-    ; else if (hMapId >= $06 && hMapId < $1A), d += 1
+    ; else if (hMapId >= MAP_FACE_SHRINE && hMapId < $1A), d += 1
     cp   $1A                                      ; $799D: $FE $1A
     jr   nc, .activeRoomEnd                       ; $799F: $30 $05
     cp   $06                                      ; $79A1: $FE $06
@@ -9042,31 +9058,39 @@ ApplyMapSlideTransition::
     inc  d                                        ; $79A5: $14
 .activeRoomEnd
 
+    ; e = hMapRoom
     ldh  a, [hMapRoom]                            ; $79A6: $F0 $F6
     ld   e, a                                     ; $79A8: $5F
-    call label_29ED                               ; $79A9: $CD $ED $29
+
+    call GetChestsStatusForRoom                   ; $79A9: $CD $ED $29
+
+    ; If chests status are neither $1A nor $19, and $C18E != 80, return.
     cp   $1A                                      ; $79AC: $FE $1A
-    jr   z, .jr_002_79BC                          ; $79AE: $28 $0C
+    jr   z, .hasCompassDetectableStatus           ; $79AE: $28 $0C
 
     cp   $19                                      ; $79B0: $FE $19
-    jr   z, .jr_002_79BC                          ; $79B2: $28 $08
+    jr   z, .hasCompassDetectableStatus           ; $79B2: $28 $08
 
     ld   a, [$C18E]                               ; $79B4: $FA $8E $C1
     and  $E0                                      ; $79B7: $E6 $E0
     cp   $80                                      ; $79B9: $FE $80
     ret  nz                                       ; $79BB: $C0
 
-.jr_002_79BC
+.hasCompassDetectableStatus
+
+    ; If player doesn't have the compass, return
     ld   a, [wHasDungeonCompass]                  ; $79BC: $FA $CD $DB
     and  a                                        ; $79BF: $A7
     ret  z                                        ; $79C0: $C8
 
+    ; If $FFF8 != 0, return
     ldh  a, [hFFF8]                               ; $79C1: $F0 $F8
     and  $10                                      ; $79C3: $E6 $10
     ret  nz                                       ; $79C5: $C0
 
-    ld   a, $0C                                   ; $79C6: $3E $0C
-    ld   [$D462], a                               ; $79C8: $EA $62 $D4
+    ; Request compass sound effect to be played
+    ld   a, SFX_COMPASS                           ; $79C6: $3E $0C
+    ld   [wMapTransitionEndSfx], a                ; $79C8: $EA $62 $D4
     ret                                           ; $79CB: $C9
 
 .jumpTable
@@ -9164,7 +9188,7 @@ jr_002_7A67:
     jr   jr_002_7A8C                              ; $7A6B: $18 $1F
 
 jr_002_7A6D:
-    ld   a, [wC10c]                               ; $7A6D: $FA $0C $C1
+    ld   a, [wC10C]                               ; $7A6D: $FA $0C $C1
     and  a                                        ; $7A70: $A7
     jr   z, jr_002_7A84                           ; $7A71: $28 $11
 
@@ -9532,9 +9556,9 @@ jr_002_7C8B:
     ld   hl, $7C48                                ; $7C94: $21 $48 $7C
     add  hl, de                                   ; $7C97: $19
     ld   a, [hl]                                  ; $7C98: $7E
-    ldh  [hLinkPositionYIncrement], a                               ; $7C99: $E0 $9B
+    ldh  [hLinkPositionYIncrement], a             ; $7C99: $E0 $9B
     call label_21A8                               ; $7C9B: $CD $A8 $21
-    jp   label_002_6E45                           ; $7C9E: $C3 $45 $6E
+    jp   CheckForLedgeJump                        ; $7C9E: $C3 $45 $6E
 
     nop                                           ; $7CA1: $00
     nop                                           ; $7CA2: $00

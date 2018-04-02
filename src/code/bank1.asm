@@ -745,7 +745,7 @@ label_4475::
 label_447E::
     ldh  a, [$FFF6]
     ld   e, a
-    call label_29ED
+    call GetChestsStatusForRoom
     cp   $1A
     jr   z, label_4495
     cp   $19
@@ -763,7 +763,7 @@ label_4495::
     and  $10
     jr   nz, label_44A6
     ld   a, $0C
-    ld   [$D462], a
+    ld   [wMapTransitionEndSfx], a
 
 label_44A6::
     ld   a, [wActiveRoom]

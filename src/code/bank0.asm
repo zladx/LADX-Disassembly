@@ -4005,7 +4005,13 @@ include "code/home/copy_data.asm"
 
 include "src/code/home/clear_memory.asm"
 
-label_29ED::
+; Retrieve the status of chests in the given room
+; Inputs:
+;   d    is overworld room
+;   e    room id
+; Output:
+;   a    status of chests (eg. $19, $1A, etc.)
+GetChestsStatusForRoom::
     ld   a, $14
     ld   [MBC3SelectBank], a
     call $5884

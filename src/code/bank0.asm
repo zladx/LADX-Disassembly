@@ -2813,8 +2813,8 @@ LinkMotionMapFadeInHandler::
     ld   [$D474], a
     ld   a, $30
     ld   [$C180], a
-    ld   a, TRANSITION_SFX_MANBO_OUT
-    ld   [wTransitionSfx], a
+    ld   a, TRANSITION_GFX_MANBO_OUT
+    ld   [wTransitionGfx], a
     ld   a, $04
     ld   [wTransitionSequenceCounter], a
     jr   label_1A06

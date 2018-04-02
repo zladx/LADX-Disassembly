@@ -143,13 +143,13 @@ LINK_MOTION_RECOVER        equ $08
 LINK_MOTION_TELEPORT       equ $09
 LINK_MOTION_UNKNOWN        equ $0F
 
-; Values for wTransitionSfx
-TRANSITION_SFX_NONE         equ $00 ; no transition
-TRANSITION_SFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine
-TRANSITION_SFX_MANBO_IN     equ $02 ; wavy transition when departing using Manbo's Mambo
-TRANSITION_SFX_MANBO_OUT    equ $03 ; wavy transition when arriving using Manbo's Mambo
-TRANSITION_SFX_FLOATING     equ $FE ; slow up-and-down motion
-TRANSITION_SFX_WIND_FISH    equ $FF ; wavy transition when the Wind Fish appears and disappears
+; Values for wTransitionGfx
+TRANSITION_GFX_NONE         equ $00 ; no transition
+TRANSITION_GFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine
+TRANSITION_GFX_MANBO_IN     equ $02 ; wavy transition when departing using Manbo's Mambo
+TRANSITION_GFX_MANBO_OUT    equ $03 ; wavy transition when arriving using Manbo's Mambo
+TRANSITION_GFX_FLOATING     equ $FE ; slow up-and-down motion
+TRANSITION_GFX_WIND_FISH    equ $FF ; wavy transition when the Wind Fish appears and disappears
 
 SFX_TYPEWRITER      EQU $0f
 SFX_HOOT            EQU $19

@@ -182,12 +182,12 @@ wFreeMovementMode:: ; C17B
 wC17C equ $C17C
   ds 3
 
-wTransitionSfx:: ; C17F
+wTransitionGfx:: ; C17F
   ; Special Background effect applied during some transitions or animations.
-  ; See TRANSITION_SFX_* constants for possible values.
+  ; See TRANSITION_GFX_* constants for possible values.
   ds 1
 
-wTransitionSfxFrameCount:: ; C180
+wTransitionGfxFrameCount:: ; C180
   ; Number of frames rendered during a warp transition.
   ds 1
 

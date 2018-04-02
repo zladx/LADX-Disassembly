@@ -1216,9 +1216,9 @@ jr_002_4AB2:
     jr   nz, jr_002_4AD0                          ; $4ABB: $20 $13
 
     ld   a, $02                                   ; $4ABD: $3E $02
-    ld   [wTransitionSfx], a                      ; $4ABF: $EA $7F $C1
+    ld   [wTransitionGfx], a                      ; $4ABF: $EA $7F $C1
     xor  a                                        ; $4AC2: $AF
-    ld   [wTransitionSfxFrameCount], a            ; $4AC3: $EA $80 $C1
+    ld   [wTransitionGfxFrameCount], a            ; $4AC3: $EA $80 $C1
     ld   [wTransitionSequenceCounter], a          ; $4AC6: $EA $6B $C1
     ld   [wC16C], a                               ; $4AC9: $EA $6C $C1
     ld   a, $2C                                   ; $4ACC: $3E $2C

@@ -237,7 +237,14 @@ wDialogGotItemCountdown:: ; C1AA
   ds 1
 
 ; Unlabeled
-ds $14
+ds $11
+
+wLoadPreviousMapCountdown:: ; C1BC
+  ; Number of frames to wait before loading the previous map and room
+  ds 1
+
+; Unlabeled
+ds 2
 
 wScrollXOffset:: ; C1BF
   ds 1

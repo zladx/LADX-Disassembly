@@ -750,7 +750,7 @@ label_C7B::
     pop  af
     ret
 
-label_C7D::
+ApplyMapFadeOutTransition::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9A
@@ -759,10 +759,10 @@ label_C7D::
     jr   label_C9E
     ld   a, [$D401]
     cp   $01
-    jr   nz, label_C7D
+    jr   nz, ApplyMapFadeOutTransition
     ld   a, [$DBA5]
     and  a
-    jr   z, label_C7D
+    jr   z, ApplyMapFadeOutTransition
     ld   a, $01
     ldh  [hFFBC], a
 
@@ -771,8 +771,11 @@ label_C9A::
     ldh  [$FFF4], a
 
 label_C9E::
-    ld   a, $03
+    ; Prevent Link from moving during the transition
+    ld   a, LINK_MOTION_MAP_FADE_OUT
     ld   [wLinkMotionState], a
+
+    ; Reset the transition variables
     xor  a
     ld   [wTransitionSequenceCounter], a
     ld   [$C16C], a
@@ -1221,10 +1224,10 @@ PhotoPictureHandler::
 WorldDefaultHandler::
     ld   a, $02
     call SwitchBank
-    ; If dialog is open, jump
+    ; If a dialog is already open, continue to the normal flow
     ld   a, [wDialogState]
     and  a
-    jr   nz, .hasDialogOpen
+    jr   nz, .normalFlow
 
     ; If [$FFB4] != 0…
     ld   hl, $FFB4
@@ -1246,22 +1249,27 @@ WorldDefaultHandler::
     call ReloadSavedBank
 .noDungeonName
 
+    ; If still no dialog is open…
     ld   a, [wDialogState]
     and  a
-    jr   nz, .hasDialogOpen
+    jr   nz, .normalFlow
 
-    ; If $C1BC > 0…
-    ld   a, [$C1BC]
+    ; … and a countdown to load the previous map is > 0…
+    ld   a, [wLoadPreviousMapCountdown]
     and  a
-    jr   z, .hasDialogOpen
+    jr   z, .normalFlow
+
+    ; … decrement the counter
     ld   hl, $FFA1
     ld   [hl], $02
     dec  a
-    ld   [$C1BC], a
-    jr   nz, .hasDialogOpen
-    jp   label_C7D
+    ld   [wLoadPreviousMapCountdown], a
 
-.hasDialogOpen
+    ; If the countdown reached zero, apply the transition
+    jr   nz, .normalFlow
+    jp   ApplyMapFadeOutTransition
+
+.normalFlow
     
     ; If $DBC7 > 0, decrement it
     ld   hl, $DBC7
@@ -1294,19 +1302,24 @@ WorldDefaultHandler::
     res  7, [hl]
 
     call label_002_593B
+
     callsw ApplyMapSlideTransition
 
     call ApplyGotItem
+
     ld   a, [$C15C]
     ld   [$C3CF], a
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4B1F
+
     ld   a, $19
     call SwitchBank
     call $7A9A
+    
     call label_398D
     callsw label_002_5487
+    
     ld   hl, wRequestDestination
     ldh  a, [hFrameCounter]
     and  $03
@@ -2554,7 +2567,7 @@ LinkMotionMapFadeOutHandler::
     jr   z, label_1847
     xor  a
     ld   [$C3C9], a
-    jp   label_C7D
+    jp   ApplyMapFadeOutTransition
 
 label_1847::
     call label_1A22

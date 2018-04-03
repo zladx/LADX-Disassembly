@@ -2276,7 +2276,7 @@ jr_002_507A:
     ld   [$D404], a                               ; $5096: $EA $04 $D4
     ld   a, [wLinkMotionState]                    ; $5099: $FA $1C $C1
     ld   [$D463], a                               ; $509C: $EA $63 $D4
-    jp   label_C7D                                ; $509F: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransition                                ; $509F: $C3 $7D $0C
 
 jr_002_50A2:
     ret                                           ; $50A2: $C9
@@ -3013,7 +3013,7 @@ jr_002_54BD:
     ld   [$D405], a                               ; $54D9: $EA $05 $D4
     ld   hl, $FFF2                                ; $54DC: $21 $F2 $FF
     ld   [hl], $02                                ; $54DF: $36 $02
-    jp   label_C7D                                ; $54E1: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransition                                ; $54E1: $C3 $7D $0C
 
 jr_002_54E4:
     ld   b, $00                                   ; $54E4: $06 $00
@@ -6371,7 +6371,7 @@ jr_002_6A00:
 
     ldh  a, [hFFCC]                               ; $6A1D: $F0 $CC
     and  $04                                      ; $6A1F: $E6 $04
-    jp   nz, label_C7D                            ; $6A21: $C2 $7D $0C
+    jp   nz, ApplyMapFadeOutTransition                            ; $6A21: $C2 $7D $0C
 
 jr_002_6A24:
     ld   a, [$C14A]                               ; $6A24: $FA $4A $C1
@@ -6804,7 +6804,7 @@ func_002_6C75::
 jr_002_6C92:
     ldh  a, [hLinkPositionY]                      ; $6C92: $F0 $99
     cp   $2C                                      ; $6C94: $FE $2C
-    jp   c, label_C7D                             ; $6C96: $DA $7D $0C
+    jp   c, ApplyMapFadeOutTransition                             ; $6C96: $DA $7D $0C
 
 jr_002_6C99:
     ld   e, $02                                   ; $6C99: $1E $02
@@ -6838,12 +6838,12 @@ jr_002_6CB6:
 
     ldh  a, [hMapRoom]                           ; $6CC2: $F0 $F6
     cp   $F5                                      ; $6CC4: $FE $F5
-    jp   z, label_C7D                             ; $6CC6: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransition                             ; $6CC6: $CA $7D $0C
 
     cp   $F2                                      ; $6CC9: $FE $F2
     jp   nz, label_002_6D5C                       ; $6CCB: $C2 $5C $6D
 
-    jp   label_C7D                                ; $6CCE: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransition                                ; $6CCE: $C3 $7D $0C
 
 jr_002_6CD1:
     ldh  a, [hMapRoom]                           ; $6CD1: $F0 $F6
@@ -6857,13 +6857,13 @@ jr_002_6CD1:
     jr   z, jr_002_6D00                           ; $6CDF: $28 $1F
 
     cp   $A3                                      ; $6CE1: $FE $A3
-    jp   z, label_C7D                             ; $6CE3: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransition                             ; $6CE3: $CA $7D $0C
 
     cp   $C0                                      ; $6CE6: $FE $C0
-    jp   z, label_C7D                             ; $6CE8: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransition                             ; $6CE8: $CA $7D $0C
 
     cp   $C1                                      ; $6CEB: $FE $C1
-    jp   z, label_C7D                             ; $6CED: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransition                             ; $6CED: $CA $7D $0C
 
     cp   $FF                                      ; $6CF0: $FE $FF
     jr   nz, jr_002_6D0A                          ; $6CF2: $20 $16
@@ -6888,7 +6888,7 @@ jr_002_6D0A:
     cp   $02                                      ; $6D0C: $FE $02
     jr   z, label_002_6D5C                        ; $6D0E: $28 $4C
 
-    jp   label_C7D                                ; $6D10: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransition                                ; $6D10: $C3 $7D $0C
 
 jr_002_6D13:
     ldh  a, [hLinkFinalPositionX]                               ; $6D13: $F0 $9F
@@ -6907,7 +6907,7 @@ jr_002_6D13:
     jp   z, $0C83                                 ; $6D28: $CA $83 $0C
 
     cp   $E9                                      ; $6D2B: $FE $E9
-    jp   z, label_C7D                             ; $6D2D: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransition                             ; $6D2D: $CA $7D $0C
 
     cp   $E8                                      ; $6D30: $FE $E8
     jp   z, label_002_6E09                        ; $6D32: $CA $09 $6E
@@ -7760,7 +7760,7 @@ jr_002_722C:
     and  a                                        ; $7236: $A7
     jp   nz, $0C89                                ; $7237: $C2 $89 $0C
 
-    jp   label_C7D                                ; $723A: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransition                                ; $723A: $C3 $7D $0C
 
 label_002_723D::
     ld   a, [$D6F9]                               ; $723D: $FA $F9 $D6
@@ -8176,7 +8176,7 @@ jr_002_74A3:
     ldh  a, [$FFDC]                               ; $74A3: $F0 $DC
     and  $0F                                      ; $74A5: $E6 $0F
     cp   $0C                                      ; $74A7: $FE $0C
-    jp   nc, label_C7D                            ; $74A9: $D2 $7D $0C
+    jp   nc, ApplyMapFadeOutTransition                            ; $74A9: $D2 $7D $0C
 
 jr_002_74AC:
     ret                                           ; $74AC: $C9

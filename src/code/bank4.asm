@@ -8430,7 +8430,7 @@ label_004_7680:
 
     ld   [$DB74], a                               ; $768D: $EA $74 $DB
     ld   a, $18                                   ; $7690: $3E $18
-    ld   [$C1BC], a                               ; $7692: $EA $BC $C1
+    ld   [wLoadPreviousMapCountdown], a                               ; $7692: $EA $BC $C1
     jp   IncrementEntityWalkingAttr               ; $7695: $C3 $12 $3B
 
     ld   a, $02                                   ; $7698: $3E $02

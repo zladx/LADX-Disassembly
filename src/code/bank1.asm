@@ -3808,7 +3808,7 @@ label_57B7::
     jr   nz, label_57FA
     ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
-    call label_C7D
+    call ApplyMapFadeOutTransition
     ld   a, $00
     ld   [$D401], a
     ld   [$D402], a

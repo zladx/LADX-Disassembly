@@ -5301,10 +5301,11 @@ label_002_61F5::
     ret  nz                                       ; $6202: $C0
 
 jr_002_6203:
-    call func_002_6209                            ; $6203: $CD $09 $62
+    call UpdateRupeesCount                            ; $6203: $CD $09 $62
     jp   label_002_6317                           ; $6206: $C3 $17 $63
 
-func_002_6209::
+; Decrement the rupees count and play the associated sound effect
+UpdateRupeesCount::
     ld   hl, wRequests                            ; $6209: $21 $00 $D6
     ldh  a, [hFrameCounter]                       ; $620C: $F0 $E7
     and  $01                                      ; $620E: $E6 $01
@@ -5314,16 +5315,16 @@ func_002_6209::
     ld   hl, $C3CE                                ; $6212: $21 $CE $C3
     ld   a, [hl]                                  ; $6215: $7E
     and  a                                        ; $6216: $A7
-    jr   z, jr_002_621B                           ; $6217: $28 $02
+    jr   z, .C3CENotZero                          ; $6217: $28 $02
 
     dec  [hl]                                     ; $6219: $35
     ret                                           ; $621A: $C9
+.C3CENotZero
 
-jr_002_621B:
     ld   hl, $DB8F                                ; $621B: $21 $8F $DB
     ld   a, [wAddRupeeBufferHigh]                 ; $621E: $FA $90 $DB
     or   [hl]                                     ; $6221: $B6
-    jr   z, jr_002_6274                           ; $6222: $28 $50
+    jr   z, .jr_002_6274                          ; $6222: $28 $50
 
     ld   a, $05                                   ; $6224: $3E $05
     ldh  [hSFX], a                                ; $6226: $E0 $F3
@@ -5338,11 +5339,11 @@ jr_002_621B:
     rla                                           ; $6237: $17
     inc  a                                        ; $6238: $3C
     cp   $0A                                      ; $6239: $FE $0A
-    jr   c, jr_002_623F                           ; $623B: $38 $02
+    jr   c, .noReinitTo9                          ; $623B: $38 $02
 
     ld   a, $09                                   ; $623D: $3E $09
+.noReinitTo9
 
-jr_002_623F:
     ld   e, a                                     ; $623F: $5F
     ld   a, [wAddRupeeBufferHigh]                 ; $6240: $FA $90 $DB
     sub  e                                        ; $6243: $93
@@ -5359,7 +5360,7 @@ jr_002_623F:
     daa                                           ; $6258: $27
     ld   [wRupeeCountHigh], a                     ; $6259: $EA $5D $DB
     cp   $10                                      ; $625C: $FE $10
-    jr   c, jr_002_6271                           ; $625E: $38 $11
+    jr   c, .rupeesLessThan16                     ; $625E: $38 $11
 
     ld   a, $09                                   ; $6260: $3E $09
     ld   [wRupeeCountHigh], a                     ; $6262: $EA $5D $DB
@@ -5368,17 +5369,17 @@ jr_002_623F:
     xor  a                                        ; $626A: $AF
     ld   [$DB8F], a                               ; $626B: $EA $8F $DB
     ld   [wAddRupeeBufferHigh], a                 ; $626E: $EA $90 $DB
+.rupeesLessThan16
 
-jr_002_6271:
-    call label_002_62CE                           ; $6271: $CD $CE $62
+    call LoadRupeesDigits                           ; $6271: $CD $CE $62
 
-jr_002_6274:
+.jr_002_6274
     ld   hl, wAddRupeeBufferLow                   ; $6274: $21 $91 $DB
     ld   a, [wSubstractRupeeBufferHigh]           ; $6277: $FA $92 $DB
     or   [hl]                                     ; $627A: $B6
     ret  z                                        ; $627B: $C8
 
-    ld   a, $05                                   ; $627C: $3E $05
+    ld   a, SFX_RUPEE                             ; $627C: $3E $05
     ldh  [hSFX], a                                ; $627E: $E0 $F3
     ld   a, [wSubstractRupeeBufferHigh]           ; $6280: $FA $92 $DB
     ld   e, a                                     ; $6283: $5F
@@ -5391,11 +5392,11 @@ jr_002_6274:
     rla                                           ; $628F: $17
     inc  a                                        ; $6290: $3C
     cp   $0A                                      ; $6291: $FE $0A
-    jr   c, jr_002_6297                           ; $6293: $38 $02
-
+    jr   c, .rupeesNot0A                          ; $6293: $38 $02
     ld   a, $09                                   ; $6295: $3E $09
+.rupeesNot0A
 
-jr_002_6297:
+    ; If wRupeeCountLow == 0 || wRupeeCountHigh == 0, return
     ld   e, a                                     ; $6297: $5F
     ld   a, [wSubstractRupeeBufferHigh]           ; $6298: $FA $92 $DB
     sub  e                                        ; $629B: $93
@@ -5416,18 +5417,20 @@ jr_002_6297:
     sbc  $00                                      ; $62B6: $DE $00
     daa                                           ; $62B8: $27
     ld   [wRupeeCountHigh], a                     ; $62B9: $EA $5D $DB
-    jr   nc, jr_002_62CB                          ; $62BC: $30 $0D
+    jr   nc, .resetEnd                            ; $62BC: $30 $0D
 
+    ; Reset rupees counters
     xor  a                                        ; $62BE: $AF
     ld   [wRupeeCountHigh], a                     ; $62BF: $EA $5D $DB
     ld   [wRupeeCountLow], a                      ; $62C2: $EA $5E $DB
     ld   [wAddRupeeBufferLow], a                  ; $62C5: $EA $91 $DB
     ld   [wSubstractRupeeBufferHigh], a           ; $62C8: $EA $92 $DB
+.resetEnd
 
-jr_002_62CB:
-    jp   label_002_62CE                           ; $62CB: $C3 $CE $62
+    jp   LoadRupeesDigits                           ; $62CB: $C3 $CE $62
 
-label_002_62CE::
+; Load the rupees digit tiles for the current rupees count
+LoadRupeesDigits::
     ld   a, [wRequests]                           ; $62CE: $FA $00 $D6
     ld   e, a                                     ; $62D1: $5F
     ld   d, $00                                   ; $62D2: $16 $00

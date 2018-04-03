@@ -349,8 +349,16 @@ wC300 equ $C300 ; C300
 wAlternateBackgroundEnabled:: ; C500
   ; If enabled, alternate between two Background position every frame.
   ds 1
-  
-ds $aa
+
+; Unlabeled
+ds $A6
+
+wBossAgonySFXCountdown:: ; C5A7
+  ; When reaching zero, play the SFX_BOSS_AGONY sound effect
+  ds 1
+
+; Unlabeled
+ds 3
 
 wDialogSFX:: ; C5AB
     ds 1

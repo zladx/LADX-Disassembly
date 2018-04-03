@@ -6525,7 +6525,7 @@ label_F2EE::
 
 label_F304::
     ld   a, $03
-    ld   [$C5A7], a
+    ld   [wBossAgonySFXCountdown], a
     ld   hl, $C2C0
     add  hl, bc
     ld   [hl], b

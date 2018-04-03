@@ -6337,30 +6337,35 @@ data_3989::
     db   0, 8, $10, $18
 
 label_398D::
-    ld   hl, $C5A7
+    ; Play the Boss Agony audio effect if needed
+    ld   hl, wBossAgonySFXCountdown
     ld   a, [hl]
     and  a
-    jr   z, label_399B
+    jr   z, .bossAgonyEnd
     dec  [hl]
-    jr   nz, label_399B
-    ld   a, $10
+    jr   nz, .bossAgonyEnd
+    ld   a, SFX_BOSS_AGONY
     ldh  [hSFX], a
+.bossAgonyEnd
 
-label_399B::
+    ; If no dialog is open… 
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_39AE
+    jr   nz, .C111End
+    ; … decrement $C111
     ld   a, [$C111]
     ld   [$C1A8], a
     and  a
-    jr   z, label_39AE
+    jr   z, .C111End
     dec  a
     ld   [$C111], a
+.C111End
 
-label_39AE::
+    ; If Link is passing out, return
     ld   a, [wLinkMotionState]
-    cp   $07
+    cp   LINK_MOTION_PASS_OUT
     ret  z
+    
     xor  a
     ld   [$C3C1], a
     ldh  a, [hMapId]

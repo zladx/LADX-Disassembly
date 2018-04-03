@@ -978,7 +978,7 @@ label_CD7A::
     ld   hl, $C420
     add  hl, bc
     ld   [hl], $20
-    ld   hl, $FFF3
+    ld   hl, hSFX
     ld   [hl], $07
     ld   hl, $C440
     add  hl, bc
@@ -1067,7 +1067,7 @@ label_CE35::
     add  hl, bc
     ld   [hl], $07
     ld   a, $02
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ld   hl, $C490
     add  hl, bc
     ld   [hl], b
@@ -2075,7 +2075,7 @@ label_D56F::
     cp   $01
     jr   nz, label_D594
     ld   a, $12
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
 
 label_D594::
     ld   hl, $FFF4
@@ -4071,7 +4071,7 @@ label_E311::
     jr   label_E32D
 
 label_E328::
-    ld   hl, $FFF3
+    ld   hl, hSFX
     ld   [hl], $01
 
 label_E32D::
@@ -5544,7 +5544,7 @@ label_ECD5::
     ldh  [hLinkPositionYIncrement], a
     call label_3D7F
     ld   a, $0E
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ret
 
 label_ECF9::
@@ -5580,7 +5580,7 @@ label_ED1B::
     call IsEntityFrameCounterZero
     ld   [hl], $30
     ld   a, $0E
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ldh  a, [hFFF9]
     and  a
     jr   nz, label_ED38
@@ -5622,7 +5622,7 @@ label_ED5D::
     call IncrementEntityWalkingAttr
     ld   [hl], $08
     ld   a, $03
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ret
 
 label_ED73::
@@ -5635,7 +5635,7 @@ label_ED73::
     or   [hl]
     jp   nz, label_EE0A
     ld   a, $03
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ld   hl, $C4D0
     add  hl, bc
     ld   d, b
@@ -6279,7 +6279,7 @@ label_F17A::
     add  hl, bc
     ld   [hl], $01
     ld   a, $11
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ld   hl, $C280
     add  hl, bc
     ld   a, [hl]
@@ -6376,7 +6376,7 @@ label_F215::
     ld   [hl], $03
     and  $80
     jr   z, label_F228
-    ld   hl, $FFF3
+    ld   hl, hSFX
     ld   [hl], $07
 
 label_F228::
@@ -6386,7 +6386,7 @@ label_F228::
     cp   $6C
     jr   nz, label_F235
     ld   a, $13
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
 
 label_F235::
     pop  af

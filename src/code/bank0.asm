@@ -98,7 +98,7 @@ PlayAudioStep::
     ld   a, $1F
     call SwitchBank
     call $4006
-    ldh  a, [$FFF3]
+    ldh  a, [hSFX]
     and  a
     jr   nz, label_8D6
     ld   a, [$C10B]
@@ -1509,7 +1509,7 @@ label_10EF::
     ld   [$D464], a
     call label_27F2
     ld   a, $08
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
 
 .handleLinkMotion
     ld   a, [wLinkMotionState]
@@ -3526,7 +3526,7 @@ label_2183::
     call label_142F
     jr   c, label_21A7
     ld   a, $02
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   [hl], $07
@@ -6344,7 +6344,7 @@ label_398D::
     dec  [hl]
     jr   nz, label_399B
     ld   a, $10
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
 
 label_399B::
     ld   a, [wDialogState]

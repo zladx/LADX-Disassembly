@@ -1296,7 +1296,7 @@ WorldDefaultHandler::
     call label_002_593B
     callsw ApplyMapSlideTransition
 
-    call label_1033
+    call ApplyGotItem
     ld   a, [$C15C]
     ld   [$C3CF], a
     ld   a, $20
@@ -1356,23 +1356,27 @@ label_102E::
     ld   [$990E], sp
     jr   z, label_101F
 
-label_1033::
+ApplyGotItem::
     ldh  a, [hLinkPositionY]
     ld   hl, $FFA2
     sub  a, [hl]
     ld   [$C145], a
-    ld   a, [$C1A9]
+    ld   a, [wDialogGotItem]
     and  a
-    jr   z, label_107F
+    jr   z, InitGotItemSequence
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_106D
-    ld   hl, $C1AA
+    jr   nz, .dispatchItemType
+
+    ; Did the "got item" dialog countdown reached the target value yet?
+    ld   hl, wDialogGotItemCountdown
     dec  [hl]
     ld   a, [hl]
     cp   $02
-    jr   nz, label_1061
-    ld   a, [$C1A9]
+    jr   nz, .countdownNotFinished
+
+    ; Dialog countdown reached the target value: open the "Got item" dialog
+    ld   a, [wDialogGotItem]
     ld   e, a
     ld   d, $00
     ld   hl, $102D
@@ -1381,26 +1385,26 @@ label_1033::
     call OpenDialog
     ld   a, $01
 
-label_1061::
+.countdownNotFinished
     and  a
-    jr   nz, label_106D
+    jr   nz, .dispatchItemType
     xor  a
-    ld   [$C1A9], a
+    ld   [wDialogGotItem], a
     ld   [$C1A8], a
-    jr   label_107F
+    jr   InitGotItemSequence
 
-label_106D::
-    ld   a, [$C1A9]
+.dispatchItemType
+    ld   a, [wDialogGotItem]
     ld   [$C1A8], a
     dec  a
     JP_TABLE
-._00 dw label_002_51BC
-._01 dw label_002_51C7
-._02 dw label_002_51C7
-._03 dw label_002_51C7
-._04 dw label_002_51BC
+._00 dw HandleGotItemA
+._01 dw HandleGotItemB
+._02 dw HandleGotItemB
+._03 dw HandleGotItemB
+._04 dw HandleGotItemA
 
-label_107F::
+InitGotItemSequence::
     ldh  a, [hPressedButtonsMask]
     and  $B0
     jr   nz, label_10DB
@@ -2001,9 +2005,9 @@ UseMagicPowder::
     and  a
     ret  nz
     ld   a, $02
-    ld   [$C1A9], a
+    ld   [wDialogGotItem], a
     ld   a, $2A
-    ld   [$C1AA], a
+    ld   [wDialogGotItemCountdown], a
     ret
 
 label_14A7::

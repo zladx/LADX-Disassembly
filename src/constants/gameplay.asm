@@ -130,6 +130,13 @@ DIALOG_CLOSING_2           equ $0F
 DIALOG_BG_TILE_DARK        equ $7E
 DIALOG_BG_TILE_LIGHT       equ $7F
 
+; Values for wDialogGotItem
+DIALOG_GOT_PIECE_OF_POWER equ $01
+DIALOG_GOT_TOADSTOOL      equ $02
+DIALOG_GOT_MAGIC_POWDER   equ $03
+DIALOG_GOT_ROD            equ $04
+DIALOG_GOT_GUARDIAN_ACORN equ $05
+
 ; Values for wLinkMotionState
 LINK_MOTION_INTERACTIVE    equ $00
 LINK_MOTION_FALLING_UP     equ $01

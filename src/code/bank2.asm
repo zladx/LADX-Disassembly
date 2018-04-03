@@ -2461,15 +2461,15 @@ jr_002_51AC:
     ld   [wC167], a                               ; $51B8: $EA $67 $C1
     ret                                           ; $51BB: $C9
 
-label_002_51BC::
-    ld   a, [$C1AA]                               ; $51BC: $FA $AA $C1
+HandleGotItemA::
+    ld   a, [wDialogGotItemCountdown]             ; $51BC: $FA $AA $C1
     cp   $2E                                      ; $51BF: $FE $2E
-    jr   nz, label_002_51C7                       ; $51C1: $20 $04
+    jr   nz, HandleGotItemB                       ; $51C1: $20 $04
 
     ld   a, $17                                   ; $51C3: $3E $17
     ldh  [$FFF2], a                               ; $51C5: $E0 $F2
 
-label_002_51C7::
+HandleGotItemB::
     call label_CAF                                ; $51C7: $CD $AF $0C
     ld   [wC16A], a                               ; $51CA: $EA $6A $C1
     ld   [$C137], a                               ; $51CD: $EA $37 $C1
@@ -2499,7 +2499,7 @@ jr_002_51ED:
     add  [hl]                                     ; $51FD: $86
     sub  $10                                      ; $51FE: $D6 $10
     ldh  [$FFD7], a                               ; $5200: $E0 $D7
-    ld   a, [$C1A9]                               ; $5202: $FA $A9 $C1
+    ld   a, [wDialogGotItem]                               ; $5202: $FA $A9 $C1
     cp   $01                                      ; $5205: $FE $01
     jr   z, jr_002_524F                           ; $5207: $28 $46
 
@@ -2511,7 +2511,7 @@ jr_002_51ED:
     add  $00                                      ; $5211: $C6 $00
     ld   [bc], a                                  ; $5213: $02
     inc  bc                                       ; $5214: $03
-    ld   a, [$C1A9]                               ; $5215: $FA $A9 $C1
+    ld   a, [wDialogGotItem]                               ; $5215: $FA $A9 $C1
     ld   e, $AE                                   ; $5218: $1E $AE
     cp   $05                                      ; $521A: $FE $05
     jr   z, jr_002_522F                           ; $521C: $28 $11
@@ -3821,53 +3821,55 @@ func_002_5928::
     rst  $30                                      ; $593A: $F7
 
 label_002_593B::
+    ; If not dialog, no inventory, no map transition, return
     ld   hl, wDialogState                         ; $593B: $21 $9F $C1
     ld   a, [wMapSlideTransitionState]            ; $593E: $FA $24 $C1
     or   [hl]                                     ; $5941: $B6
     ld   hl, wInventoryAppearing                  ; $5942: $21 $4F $C1
     or   [hl]                                     ; $5945: $B6
-    jr   nz, jr_002_5967                          ; $5946: $20 $1F
+    jr   nz, .return                              ; $5946: $20 $1F
 
-    ld   a, [wIsIndoor]                         ; $5948: $FA $A5 $DB
+    ; If not indoor, return
+    ld   a, [wIsIndoor]                           ; $5948: $FA $A5 $DB
     and  a                                        ; $594B: $A7
-    jr   z, jr_002_5967                           ; $594C: $28 $19
+    jr   z, .return                               ; $594C: $28 $19
 
     call func_002_5D4F                            ; $594E: $CD $4F $5D
     ld   a, [$C188]                               ; $5951: $FA $88 $C1
     and  a                                        ; $5954: $A7
-    jr   z, jr_002_5968                           ; $5955: $28 $11
+    jr   z, .jr_002_5968                          ; $5955: $28 $11
 
     cp   $02                                      ; $5957: $FE $02
     ld   a, $01                                   ; $5959: $3E $01
     ldh  [$FFA1], a                               ; $595B: $E0 $A1
-    jr   z, jr_002_5964                           ; $595D: $28 $05
+    jr   z, .jr_002_5964                          ; $595D: $28 $05
 
     call $5A7B                                    ; $595F: $CD $7B $5A
-    jr   jr_002_5967                              ; $5962: $18 $03
+    jr   .return                                  ; $5962: $18 $03
 
-jr_002_5964:
+.jr_002_5964
     call func_002_5C04                            ; $5964: $CD $04 $5C
 
-jr_002_5967:
+.return
     ret                                           ; $5967: $C9
 
-jr_002_5968:
+.jr_002_5968
     ld   a, [$C18C]                               ; $5968: $FA $8C $C1
     and  a                                        ; $596B: $A7
-    jr   z, jr_002_599D                           ; $596C: $28 $2F
+    jr   z, .jr_002_599D                          ; $596C: $28 $2F
 
     ld   e, $03                                   ; $596E: $1E $03
     ld   a, [$C18A]                               ; $5970: $FA $8A $C1
     ld   c, a                                     ; $5973: $4F
 
-jr_002_5974:
+.jr_002_5974
     inc  e                                        ; $5974: $1C
     ld   a, e                                     ; $5975: $7B
     cp   $08                                      ; $5976: $FE $08
-    jr   z, jr_002_5998                           ; $5978: $28 $1E
+    jr   z, .jr_002_5998                          ; $5978: $28 $1E
 
     srl  c                                        ; $597A: $CB $39
-    jr   nc, jr_002_5974                          ; $597C: $30 $F6
+    jr   nc, .jr_002_5974                         ; $597C: $30 $F6
 
     ld   d, $00                                   ; $597E: $16 $00
     ld   hl, $5933                                ; $5980: $21 $33 $59
@@ -3883,31 +3885,31 @@ jr_002_5974:
     ld   [$C188], a                               ; $5994: $EA $88 $C1
     ret                                           ; $5997: $C9
 
-jr_002_5998:
+.jr_002_5998
     xor  a                                        ; $5998: $AF
     ld   [$C18C], a                               ; $5999: $EA $8C $C1
     ret                                           ; $599C: $C9
 
-jr_002_599D:
+.jr_002_599D
     ld   a, [$C18D]                               ; $599D: $FA $8D $C1
     and  a                                        ; $59A0: $A7
-    jr   nz, jr_002_59A4                          ; $59A1: $20 $01
+    jr   nz, .jr_002_59A4                         ; $59A1: $20 $01
 
     ret                                           ; $59A3: $C9
 
-jr_002_59A4:
+.jr_002_59A4
     ld   e, $03                                   ; $59A4: $1E $03
     ld   a, [$C18B]                               ; $59A6: $FA $8B $C1
     ld   c, a                                     ; $59A9: $4F
 
-jr_002_59AA:
+.loop
     inc  e                                        ; $59AA: $1C
     ld   a, e                                     ; $59AB: $7B
     cp   $08                                      ; $59AC: $FE $08
-    jr   z, jr_002_59CF                           ; $59AE: $28 $1F
+    jr   z, .jr_002_59CF                          ; $59AE: $28 $1F
 
     srl  c                                        ; $59B0: $CB $39
-    jr   nc, jr_002_59AA                          ; $59B2: $30 $F6
+    jr   nc, .loop                                ; $59B2: $30 $F6
 
     ld   d, $00                                   ; $59B4: $16 $00
     ld   hl, $5933                                ; $59B6: $21 $33 $59
@@ -3923,7 +3925,7 @@ jr_002_59AA:
     ld   [$DBAC], a                               ; $59CB: $EA $AC $DB
     ret                                           ; $59CE: $C9
 
-jr_002_59CF:
+.jr_002_59CF
     xor  a                                        ; $59CF: $AF
     ld   [$C18D], a                               ; $59D0: $EA $8D $C1
     ret                                           ; $59D3: $C9
@@ -8780,7 +8782,7 @@ jr_002_783C:
 
     ldh  a, [$FFA1]                               ; $7851: $F0 $A1
     ld   e, a                                     ; $7853: $5F
-    ld   a, [$C1A9]                               ; $7854: $FA $A9 $C1
+    ld   a, [wDialogGotItem]                               ; $7854: $FA $A9 $C1
     ld   d, a                                     ; $7857: $57
     ld   a, [wDialogState]                        ; $7858: $FA $9F $C1
     or   e                                        ; $785B: $B3

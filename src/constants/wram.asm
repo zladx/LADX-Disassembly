@@ -224,8 +224,20 @@ wDialogState:: ; C19F
   ; Lowest bits:  the dialog state (see DIALOG_* constants for possible values)
   ds 1
 
-wC1A4 equ $C1A0
-  ds $1F
+; Unlabeled
+ds $9
+
+wDialogGotItem:: ; C1A9
+  ; The "Got item" dialog to display
+  ds 1
+
+wDialogGotItemCountdown:: ; C1AA
+  ; Number of frames to wait (while playing the "got item" sound effect)
+  ; before displaying the dialog
+  ds 1
+
+; Unlabeled
+ds $14
 
 wScrollXOffset:: ; C1BF
   ds 1

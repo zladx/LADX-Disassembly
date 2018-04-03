@@ -659,7 +659,7 @@ label_002_7C14::
     or   [hl]                                     ; $7C1B: $B6
     ld   hl, $FFA1                                ; $7C1C: $21 $A1 $FF
     or   [hl]                                     ; $7C1F: $B6
-    ld   hl, $C1A9                                ; $7C20: $21 $A9 $C1
+    ld   hl, wDialogGotItem                                ; $7C20: $21 $A9 $C1
     or   [hl]                                     ; $7C23: $B6
     ret  nz                                       ; $7C24: $C0
 
@@ -689,7 +689,7 @@ label_002_7C50::
     and  $00                                      ; $7C52: $E6 $00
     ld   hl, wMapSlideTransitionState             ; $7C54: $21 $24 $C1
     or   [hl]                                     ; $7C57: $B6
-    ld   hl, $C1A9                                ; $7C58: $21 $A9 $C1
+    ld   hl, wDialogGotItem                                ; $7C58: $21 $A9 $C1
     or   [hl]                                     ; $7C5B: $B6
     ld   hl, $FFA1                                ; $7C5C: $21 $A1 $FF
     or   [hl]                                     ; $7C5F: $B6

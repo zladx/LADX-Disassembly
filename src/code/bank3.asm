@@ -5631,7 +5631,7 @@ label_ED73::
     or   [hl]
     ld   hl, $C166
     or   [hl]
-    ld   hl, $C1A9
+    ld   hl, wDialogGotItem
     or   [hl]
     jp   nz, label_EE0A
     ld   a, $03

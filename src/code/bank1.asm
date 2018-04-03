@@ -158,9 +158,9 @@ label_40D6::
     ld   [wBGPalette], a
     ld   [rBGP], a
     ldh  a, [hLinkPositionX]
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ldh  a, [hLinkPositionY]
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     call label_52A4
     ld   a, $80
     ld   [$DBC7], a
@@ -516,9 +516,9 @@ label_42FB::
     ld   [$D6FB], a
     ld   [$D475], a
     ldh  a, [hLinkPositionX]
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ldh  a, [hLinkPositionY]
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     call label_52A4
     ld   a, $01
     call label_8FA
@@ -704,10 +704,10 @@ GameplayWorldSubtype1Handler::
     xor  a
     ld   [wLinkMotionState], a
     call IncrementGameplaySubtype
-    ld   a, [$DB9D]
+    ld   a, [wMapEntrancePositionX]
     ldh  [hLinkPositionX], a
     ld   [wLinkMapEntryPositionX], a
-    ld   a, [$DB9E]
+    ld   a, [wMapEntrancePositionY]
     ldh  [hLinkPositionY], a
     ld   [wLinkMapEntryPositionY], a
     ld   a, [$DBC8]
@@ -3021,9 +3021,9 @@ label_5353::
     ld   a, [$DB62]
     and  a
     jr   z, label_5394
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ld   a, [$DB63]
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     ld   a, [$DB61]
     ldh  [$FFF6], a
     ld   [$DB9C], a
@@ -3049,6 +3049,7 @@ label_538E::
     ld   [wBGMapToLoad], a
     ret
 
+; Write default save?
 label_5394::
     ld   a, $30
     ld   [wMaxArrows], a
@@ -3065,9 +3066,9 @@ label_5394::
     ld   a, MAP_HOUSE
     ldh  [hMapId], a
     ld   a, $50
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ld   a, $60
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     xor  a
     ldh  [hLinkAnimationState], a
     ld   a, $03

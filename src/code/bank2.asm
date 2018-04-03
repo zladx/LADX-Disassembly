@@ -3819,6 +3819,8 @@ func_002_5928::
     cp   $FD                                      ; $5937: $FE $FD
     ei                                            ; $5939: $FB
     rst  $30                                      ; $593A: $F7
+
+label_002_593B::
     ld   hl, wDialogState                         ; $593B: $21 $9F $C1
     ld   a, [wMapSlideTransitionState]            ; $593E: $FA $24 $C1
     or   [hl]                                     ; $5941: $B6

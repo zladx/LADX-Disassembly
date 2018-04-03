@@ -1271,25 +1271,31 @@ WorldDefaultHandler::
     dec  [hl]
 .DBC7End
 
-    ; 
+    ; Copy Link's position into Link's final position
     ldh  a, [hLinkPositionX]
     ldh  [hLinkFinalPositionX], a
     ldh  a, [hLinkPositionY]
     ldh  [hLinkFinalPositionY], a
+
     ld   hl, $FFA2
     sub  a, [hl]
     ldh  [$FFB3], a
     call func_002_60E0
+
     xor  a
     ld   [$C140], a
     ld   [$C13C], a
     ld   [$C13B], a
+
     ld   hl, $C11D
     res  7, [hl]
+
     ld   hl, $C11E
     res  7, [hl]
-    call $593B
+
+    call label_002_593B
     callsw ApplyMapSlideTransition
+
     call label_1033
     ld   a, [$C15C]
     ld   [$C3CF], a
@@ -2725,9 +2731,9 @@ label_196E::
 
 label_196F::
     ld   a, [hli]
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ld   a, [hl]
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     pop  hl
     ldh  a, [hFFF9]
     and  a

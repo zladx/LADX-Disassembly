@@ -798,8 +798,18 @@ wWindowY:: ; DB9A
   ds 1
 
 ; Unlabeled
-wDB9B equ $DB9B
-  ds $A
+ds 2
+
+wMapEntrancePositionX:: ; DB9D
+  ; Initial position of Link when loading a new map
+  ds 1
+
+wMapEntrancePositionY:: ; DB9E
+  ; Initial position of Link when loading a new map
+  ds 1
+
+; Unlabeled
+ds 6
 
 wIsIndoor:: ; $DBA5
   ; 0 on the overworld

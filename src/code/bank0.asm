@@ -2072,7 +2072,7 @@ label_14F8::
     xor  a
     ldh  [$FFA3], a
     call label_21A8
-    jpsw func_002_6C75
+    jpsw CheckPositionForMapTransition
 
 label_1508::
     ld   a, $20
@@ -7066,7 +7066,7 @@ label_3E0E::
 label_3E19::
     ld   a, [wCurrentBank]
     push af
-    callsw func_002_6C75
+    callsw CheckPositionForMapTransition
     pop  af
     jp   SwitchBank
 

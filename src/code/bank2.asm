@@ -526,7 +526,7 @@ label_002_44B5::
     ld   [$C130], a                               ; $44B8: $EA $30 $C1
     xor  a                                        ; $44BB: $AF
     ld   [wC11F], a                               ; $44BC: $EA $1F $C1
-    jp   func_002_6C75                            ; $44BF: $C3 $75 $6C
+    jp   CheckPositionForMapTransition                            ; $44BF: $C3 $75 $6C
 
 func_002_44C2::
     ld   a, [$C13E]                               ; $44C2: $FA $3E $C1
@@ -536,7 +536,7 @@ func_002_44C2::
     dec  a                                        ; $44C7: $3D
     ld   [$C13E], a                               ; $44C8: $EA $3E $C1
     call label_21A8                               ; $44CB: $CD $A8 $21
-    call func_002_6C75                            ; $44CE: $CD $75 $6C
+    call CheckPositionForMapTransition                            ; $44CE: $CD $75 $6C
     ld   a, [$C133]                               ; $44D1: $FA $33 $C1
     and  a                                        ; $44D4: $A7
     jr   z, jr_002_44E3                           ; $44D5: $28 $0C
@@ -1853,12 +1853,13 @@ jr_002_4E37:
     pop  bc                                       ; $4E46: $C1
     ret                                           ; $4E47: $C9
 
+; Copy data from RAM bank 2 to RAM bank 0
 func_002_4E48::
     di                                            ; $4E48: $F3
     ld   hl, $DC88                                ; $4E49: $21 $88 $DC
     ld   e, $00                                   ; $4E4C: $1E $00
 
-jr_002_4E4E:
+.loop
     ld   a, $02                                   ; $4E4E: $3E $02
     ld   [rSVBK], a                               ; $4E50: $E0 $70
     ld   b, [hl]                                  ; $4E52: $46
@@ -1870,7 +1871,7 @@ jr_002_4E4E:
     inc  e                                        ; $4E59: $1C
     ld   a, e                                     ; $4E5A: $7B
     cp   $08                                      ; $4E5B: $FE $08
-    jr   c, jr_002_4E4E                           ; $4E5D: $38 $EF
+    jr   c, .loop                                 ; $4E5D: $38 $EF
 
     ei                                            ; $4E5F: $FB
     ld   a, $02                                   ; $4E60: $3E $02
@@ -6141,7 +6142,7 @@ jr_002_68C7:
     dec  a                                        ; $68CD: $3D
     ld   [$C13E], a                               ; $68CE: $EA $3E $C1
     call label_21A8                               ; $68D1: $CD $A8 $21
-    call func_002_6C75                            ; $68D4: $CD $75 $6C
+    call CheckPositionForMapTransition                            ; $68D4: $CD $75 $6C
     ldh  a, [$FF9C]                               ; $68D7: $F0 $9C
     cp   $02                                      ; $68D9: $FE $02
     jr   z, jr_002_68E3                           ; $68DB: $28 $06
@@ -6262,7 +6263,7 @@ jr_002_696E:
 
 jr_002_6982:
     call label_21A8                               ; $6982: $CD $A8 $21
-    call func_002_6C75                            ; $6985: $CD $75 $6C
+    call CheckPositionForMapTransition                            ; $6985: $CD $75 $6C
     ld   a, [wInventoryAppearing]                 ; $6988: $FA $4F $C1
     and  a                                        ; $698B: $A7
     ret  nz                                       ; $698C: $C0
@@ -6318,7 +6319,7 @@ jr_002_699E:
 
 jr_002_69D7:
     call label_21A8                               ; $69D7: $CD $A8 $21
-    call func_002_6C75                            ; $69DA: $CD $75 $6C
+    call CheckPositionForMapTransition                            ; $69DA: $CD $75 $6C
     ld   a, [wInventoryAppearing]                 ; $69DD: $FA $4F $C1
     and  a                                        ; $69E0: $A7
     ret  nz                                       ; $69E1: $C0
@@ -6523,7 +6524,7 @@ jr_002_6AF6:
     ld   [hl], $03                                ; $6AFA: $36 $03
 
 jr_002_6AFC:
-    call func_002_6C75                            ; $6AFC: $CD $75 $6C
+    call CheckPositionForMapTransition                            ; $6AFC: $CD $75 $6C
     ld   a, [wInventoryAppearing]                 ; $6AFF: $FA $4F $C1
     and  a                                        ; $6B02: $A7
     ret  nz                                       ; $6B03: $C0
@@ -6723,7 +6724,7 @@ jr_002_6BF6:
     ld   a, $E8                                   ; $6C12: $3E $E8
     ldh  [hLinkPositionYIncrement], a                               ; $6C14: $E0 $9B
     call label_21A8                               ; $6C16: $CD $A8 $21
-    call func_002_6C75                            ; $6C19: $CD $75 $6C
+    call CheckPositionForMapTransition                            ; $6C19: $CD $75 $6C
     ld   a, $20                                   ; $6C1C: $3E $20
     ld   [$C157], a                               ; $6C1E: $EA $57 $C1
     ldh  a, [hLinkDirection]                               ; $6C21: $F0 $9E
@@ -6780,21 +6781,22 @@ func_002_6C69::
 jr_002_6C74:
     ret                                           ; $6C74: $C9
 
-func_002_6C75::
+; Check Link's position, and initiate a map or room transition if needed
+CheckPositionForMapTransition::
     ld   a, [wDialogState]                        ; $6C75: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $6C78: $21 $4F $C1
     or   [hl]                                     ; $6C7B: $B6
     ret  nz                                       ; $6C7C: $C0
 
-    ldh  a, [hMapId]                         ; $6C7D: $F0 $F7
-    cp   MAP_CAVE_D                                      ; $6C7F: $FE $1F
+    ldh  a, [hMapId]                              ; $6C7D: $F0 $F7
+    cp   MAP_CAVE_D                               ; $6C7F: $FE $1F
     jr   nz, jr_002_6C99                          ; $6C81: $20 $16
 
     ldh  a, [hFFF9]                               ; $6C83: $F0 $F9
     and  a                                        ; $6C85: $A7
     jr   z, jr_002_6C99                           ; $6C86: $28 $11
 
-    ldh  a, [hMapRoom]                           ; $6C88: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $6C88: $F0 $F6
     cp   $EB                                      ; $6C8A: $FE $EB
     jr   z, jr_002_6C92                           ; $6C8C: $28 $04
 
@@ -6804,9 +6806,10 @@ func_002_6C75::
 jr_002_6C92:
     ldh  a, [hLinkPositionY]                      ; $6C92: $F0 $99
     cp   $2C                                      ; $6C94: $FE $2C
-    jp   c, ApplyMapFadeOutTransition                             ; $6C96: $DA $7D $0C
+    jp   c, ApplyMapFadeOutTransition             ; $6C96: $DA $7D $0C
 
 jr_002_6C99:
+    ; Check if Link reached screen boundaries, and change room if needed
     ld   e, $02                                   ; $6C99: $1E $02
     ldh  a, [hLinkPositionY]                      ; $6C9B: $F0 $99
     cp   $0C                                      ; $6C9D: $FE $0C
@@ -6832,21 +6835,21 @@ jr_002_6CB6:
     and  a                                        ; $6CB8: $A7
     jr   nz, jr_002_6CD1                          ; $6CB9: $20 $16
 
-    ldh  a, [hMapId]                         ; $6CBB: $F0 $F7
-    cp   MAP_CAVE_D                                      ; $6CBD: $FE $1F
+    ldh  a, [hMapId]                              ; $6CBB: $F0 $F7
+    cp   MAP_CAVE_D                               ; $6CBD: $FE $1F
     jp   nz, label_002_6D5C                       ; $6CBF: $C2 $5C $6D
 
-    ldh  a, [hMapRoom]                           ; $6CC2: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $6CC2: $F0 $F6
     cp   $F5                                      ; $6CC4: $FE $F5
-    jp   z, ApplyMapFadeOutTransition                             ; $6CC6: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransition             ; $6CC6: $CA $7D $0C
 
     cp   $F2                                      ; $6CC9: $FE $F2
     jp   nz, label_002_6D5C                       ; $6CCB: $C2 $5C $6D
 
-    jp   ApplyMapFadeOutTransition                                ; $6CCE: $C3 $7D $0C
+    jp   ApplyMapFadeOutTransition                ; $6CCE: $C3 $7D $0C
 
 jr_002_6CD1:
-    ldh  a, [hMapRoom]                           ; $6CD1: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $6CD1: $F0 $F6
     cp   $E8                                      ; $6CD3: $FE $E8
     jp   z, label_002_6D5C                        ; $6CD5: $CA $5C $6D
 
@@ -6857,13 +6860,13 @@ jr_002_6CD1:
     jr   z, jr_002_6D00                           ; $6CDF: $28 $1F
 
     cp   $A3                                      ; $6CE1: $FE $A3
-    jp   z, ApplyMapFadeOutTransition                             ; $6CE3: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransition             ; $6CE3: $CA $7D $0C
 
     cp   $C0                                      ; $6CE6: $FE $C0
-    jp   z, ApplyMapFadeOutTransition                             ; $6CE8: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransition             ; $6CE8: $CA $7D $0C
 
     cp   $C1                                      ; $6CEB: $FE $C1
-    jp   z, ApplyMapFadeOutTransition                             ; $6CED: $CA $7D $0C
+    jp   z, ApplyMapFadeOutTransition             ; $6CED: $CA $7D $0C
 
     cp   $FF                                      ; $6CF0: $FE $FF
     jr   nz, jr_002_6D0A                          ; $6CF2: $20 $16
@@ -6980,14 +6983,14 @@ jr_002_6D94:
 
     ldh  a, [hLinkPositionY]                      ; $6D9D: $F0 $99
     cp   $88                                      ; $6D9F: $FE $88
-    jr   nc, jr_002_6DCC                          ; $6DA1: $30 $29
+    jr   nc, initiateRoomTransition               ; $6DA1: $30 $29
 
     ld   a, [$C14A]                               ; $6DA3: $FA $4A $C1
     ld   hl, hFFF9                                ; $6DA6: $21 $F9 $FF
     or   [hl]                                     ; $6DA9: $B6
     ld   hl, $FFB2                                ; $6DAA: $21 $B2 $FF
     or   [hl]                                     ; $6DAD: $B6
-    jr   nz, jr_002_6DCC                          ; $6DAE: $20 $1C
+    jr   nz, initiateRoomTransition               ; $6DAE: $20 $1C
 
     ldh  a, [hPressedButtonsMask]                 ; $6DB0: $F0 $CB
     and  $0F                                      ; $6DB2: $E6 $0F
@@ -6998,7 +7001,7 @@ jr_002_6D94:
 
     dec  a                                        ; $6DBA: $3D
     cp   e                                        ; $6DBB: $BB
-    jr   z, jr_002_6DCC                           ; $6DBC: $28 $0E
+    jr   z, initiateRoomTransition                ; $6DBC: $28 $0E
 
 jr_002_6DBE:
     ldh  a, [hPressedButtonsMask]                 ; $6DBE: $F0 $CB
@@ -7012,27 +7015,28 @@ jr_002_6DBE:
     cp   e                                        ; $6DC9: $BB
     jr   nz, label_002_6E0C                       ; $6DCA: $20 $40
 
-jr_002_6DCC:
-    ldh  a, [hMapRoom]                           ; $6DCC: $F0 $F6
+initiateRoomTransition:
+    ldh  a, [hMapRoom]                            ; $6DCC: $F0 $F6
     cp   $E8                                      ; $6DCE: $FE $E8
-    jr   nz, jr_002_6DE4                          ; $6DD0: $20 $12
+    jr   nz, .specialCaseEnd                      ; $6DD0: $20 $12
 
-    ldh  a, [hMapId]                         ; $6DD2: $F0 $F7
-    cp   MAP_CAVE_D                                      ; $6DD4: $FE $1F
-    jr   z, jr_002_6DE4                           ; $6DD6: $28 $0C
+    ldh  a, [hMapId]                              ; $6DD2: $F0 $F7
+    cp   MAP_CAVE_D                               ; $6DD4: $FE $1F
+    jr   z, .specialCaseEnd                       ; $6DD6: $28 $0C
 
-    ld   a, [wIsIndoor]                         ; $6DD8: $FA $A5 $DB
+    ld   a, [wIsIndoor]                           ; $6DD8: $FA $A5 $DB
     and  a                                        ; $6DDB: $A7
-    jr   z, jr_002_6DE4                           ; $6DDC: $28 $06
+    jr   z, .specialCaseEnd                       ; $6DDC: $28 $06
 
     xor  a                                        ; $6DDE: $AF
     ld   [wScrollXOffset], a                      ; $6DDF: $EA $BF $C1
     ld   [rSCX], a                                ; $6DE2: $E0 $43
+.specialCaseEnd
 
-jr_002_6DE4:
+    ; Configure a new room transition
     ld   a, e                                     ; $6DE4: $7B
-    ld   [wMapSlideDirection], a                               ; $6DE5: $EA $25 $C1
-    ld   a, $01                                   ; $6DE8: $3E $01
+    ld   [wMapSlideDirection], a                  ; $6DE5: $EA $25 $C1
+    ld   a, MAP_SLIDE_PREPARE_1                   ; $6DE8: $3E $01
     ld   [wMapSlideTransitionState], a            ; $6DEA: $EA $24 $C1
     xor  a                                        ; $6DED: $AF
     ld   [$C14B], a                               ; $6DEE: $EA $4B $C1

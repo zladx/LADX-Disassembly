@@ -720,7 +720,7 @@ GameplayWorldSubtype1Handler::
 label_4452::
     ld   a, $04
     ld   [wMapSlideDirection], a
-    call label_30F4
+    call LoadRoom
     call label_37FE
     call label_5FB3
     ld   a, $FF

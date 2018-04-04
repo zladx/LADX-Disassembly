@@ -238,9 +238,39 @@ ApplyMapSlideTransition::
 .return
     ret                                           ; $79D9: $C9
 
-Data_002_79DA::
-    db $01, $01, $02, $00, $00, $02, $01, $02, $00, $02, $02, $00, $02, $02, $00, $02
-    db $01, $02, $00, $02, $01, $02, $00, $02, $00, $00, $00, $00, $02, $02, $02, $02
+WindFishEggMazeSequence::
+    db MAP_SLIDE_DIRECTION_LEFT
+    db MAP_SLIDE_DIRECTION_LEFT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_LEFT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_LEFT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_LEFT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_RIGHT
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_TOP
+    db MAP_SLIDE_DIRECTION_TOP
 
 MapSlidePrepare1Handler::
     ld   a, [wMapSlideDirection]                  ; $79FA: $FA $25 $C1
@@ -252,10 +282,14 @@ MapSlidePrepare1Handler::
     and  a                                        ; $7A03: $A7
     jr   z, .indoorEnd                            ; $7A04: $28 $67
 
+    ;
+    ; Wind Fish's Egg
+    ;
+
     ; If map is not color dungeon…
     ldh  a, [hMapId]                              ; $7A06: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $7A08: $FE $FF
-    jr   z, .noTurtleRockHack                     ; $7A0A: $28 $3C
+    jr   z, .noWindFishEggMaze                    ; $7A0A: $28 $3C
 
     ; … and hMapId < $0B…
     cp   MAP_DUNGEON_G1                           ; $7A0C: $FE $0B
@@ -263,158 +297,207 @@ MapSlidePrepare1Handler::
 
     ; … and map is Wind Fish's Egg…
     cp   MAP_WINDFISHS_EGG                        ; $7A10: $FE $08
-    jr   nz, .noTurtleRockHack                    ; $7A12: $20 $34
+    jr   nz, .noWindFishEggMaze                   ; $7A12: $20 $34
 
-    ; … and dungeon room is $71…
+    ; … and egg room is $71…
     ldh  a, [hMapRoom]                            ; $7A14: $F0 $F6
     cp   $71                                      ; $7A16: $FE $71
-    jr   nz, .noTurtleRockHack                    ; $7A18: $20 $2E
+    jr   nz, .noWindFishEggMaze                   ; $7A18: $20 $2E
 
     ; … and is not sliding to the bottom…
     ld   a, c                                     ; $7A1A: $79
     cp   MAP_SLIDE_DIRECTION_BOTTOM               ; $7A1B: $FE $03
-    jr   z, .noTurtleRockHack                     ; $7A1D: $28 $29
+    jr   z, .noWindFishEggMaze                    ; $7A1D: $28 $29
 
-    ; hl = Data_002_79DA + $DB7C
+    ; hl = WindFishEggMazeSequence + $DB7C
     ld   a, [$DB7C]                               ; $7A1F: $FA $7C $DB
     ld   e, a                                     ; $7A22: $5F
     ld   d, $00                                   ; $7A23: $16 $00
-    ld   hl, Data_002_79DA                        ; $7A25: $21 $DA $79
+    ld   hl, WindFishEggMazeSequence              ; $7A25: $21 $DA $79
     add  hl, de                                   ; $7A28: $19
     
-    ; $C5AA += 1
-    ld   a, [$C5AA]                               ; $7A29: $FA $AA $C5
+    ; wEggMazeProgress += 1
+    ld   a, [wEggMazeProgress]                    ; $7A29: $FA $AA $C5
     ld   e, a                                     ; $7A2C: $5F
     inc  a                                        ; $7A2D: $3C
-    ld   [$C5AA], a                               ; $7A2E: $EA $AA $C5
+    ld   [wEggMazeProgress], a                    ; $7A2E: $EA $AA $C5
     
-    ; If map 
+    ; If direction != hl[wEggMazeProgress]…
     add  hl, de                                   ; $7A31: $19
     ld   a, c                                     ; $7A32: $79
     cp   [hl]                                     ; $7A33: $BE
-    jr   z, .jr_002_7A3D                          ; $7A34: $28 $07
-
+    jr   z, .mazeDirectionOk                      ; $7A34: $28 $07
+    ; … clear progress.
     xor  a                                        ; $7A36: $AF
-    ld   [$C5AA], a                               ; $7A37: $EA $AA $C5
-    jp   label_002_7AA5                           ; $7A3A: $C3 $A5 $7A
+    ld   [wEggMazeProgress], a                    ; $7A37: $EA $AA $C5
+    jp   .loadRoom                                ; $7A3A: $C3 $A5 $7A
+.mazeDirectionOk
 
-.jr_002_7A3D
+    ; If maze progress >= 7, mark maze as solved
     ld   a, e                                     ; $7A3D: $7B
     cp   $07                                      ; $7A3E: $FE $07
-    jp   nz, label_002_7AA5                       ; $7A40: $C2 $A5 $7A
-
+    jp   nz, .loadRoom                            ; $7A40: $C2 $A5 $7A
     ld   a, $02                                   ; $7A43: $3E $02
     ld   [wC169], a                               ; $7A45: $EA $69 $C1
 
-.noTurtleRockHack
-    xor  a                                        ; $7A48: $AF
-    ld   [$C5AA], a                               ; $7A49: $EA $AA $C5
-    ld   hl, $7B7B                                ; $7A4C: $21 $7B $7B
-    add  hl, bc                                   ; $7A4F: $09
-    ld   a, c                                     ; $7A50: $79
-    cp   $02                                      ; $7A51: $FE $02
-    jr   nz, .jr_002_7A67                         ; $7A53: $20 $12
+.noWindFishEggMaze
 
+    ; Reset maze progress
+    xor  a                                        ; $7A48: $AF
+    ld   [wEggMazeProgress], a                    ; $7A49: $EA $AA $C5
+
+    ;
+    ; Compute the next IndoorRoom according to the direction
+    ;
+
+    ; hl = IndoorRoomIncrement + wMapSlideDirection
+    ld   hl, IndoorRoomIncrement                  ; $7A4C: $21 $7B $7B
+    add  hl, bc                                   ; $7A4F: $09
+
+    ; If wMapSlideDirection == Top…
+    ld   a, c                                     ; $7A50: $79
+    cp   MAP_SLIDE_DIRECTION_TOP                  ; $7A51: $FE $02
+    jr   nz, .noFaceShrineHack                    ; $7A53: $20 $12
+
+    ; … and dungeon is Face Shrine…
     ldh  a, [hMapId]                              ; $7A55: $F0 $F7
     cp   MAP_FACE_SHRINE                          ; $7A57: $FE $05
-    jr   nz, .jr_002_7A67                         ; $7A59: $20 $0C
+    jr   nz, .noFaceShrineHack                    ; $7A59: $20 $0C
 
-    ld   a, [$DBAE]                               ; $7A5B: $FA $AE $DB
+    ; … and dungeon room is $1D…
+    ld   a, [wIndoorRoom]                         ; $7A5B: $FA $AE $DB
     cp   $1D                                      ; $7A5E: $FE $1D
-    jr   nz, .jr_002_7A67                         ; $7A60: $20 $05
+    jr   nz, .noFaceShrineHack                    ; $7A60: $20 $05
 
+    ; … actually pretend we are on map $35.
     ld   a, $35                                   ; $7A62: $3E $35
-    ld   [$DBAE], a                               ; $7A64: $EA $AE $DB
+    ld   [wIndoorRoom], a                         ; $7A64: $EA $AE $DB
+.noFaceShrineHack
 
-.jr_002_7A67
+    ; a = IndoorRoomIncrement[direction]
+    ; hl = wIndoorRoom
     ld   a, [hl]                                  ; $7A67: $7E
-    ld   hl, $DBAE                                ; $7A68: $21 $AE $DB
-    jr   jr_002_7A8C                              ; $7A6B: $18 $1F
-
+    ld   hl, wIndoorRoom                          ; $7A68: $21 $AE $DB
+    jr   .incrementRoom                           ; $7A6B: $18 $1F
 .indoorEnd
+
+    ;
+    ; Overworld
+    ;
+
+    ; If C10C != 0…
     ld   a, [wC10C]                               ; $7A6D: $FA $0C $C1
     and  a                                        ; $7A70: $A7
-    jr   z, jr_002_7A84                           ; $7A71: $28 $11
+    jr   z, .C169End                              ; $7A71: $28 $11
 
+    ; … and direction == top…
     ld   a, c                                     ; $7A73: $79
-    cp   $02                                      ; $7A74: $FE $02
-    jr   nz, jr_002_7A84                          ; $7A76: $20 $0C
+    cp   MAP_SLIDE_DIRECTION_TOP                  ; $7A74: $FE $02
+    jr   nz, .C169End                             ; $7A76: $20 $0C
 
+    ; $C169 = $1E
     ld   a, $1E                                   ; $7A78: $3E $1E
     ld   [wC169], a                               ; $7A7A: $EA $69 $C1
+    
+    ; a = $63
+    ; hl = hMapRoom
     ld   a, $63                                   ; $7A7D: $3E $63
     ld   hl, hMapRoom                             ; $7A7F: $21 $F6 $FF
-    jr   jr_002_7A8D                              ; $7A82: $18 $09
+    jr   .setRoom                                 ; $7A82: $18 $09
+.C169End
 
-jr_002_7A84:
-    ld   hl, $7B77                                ; $7A84: $21 $77 $7B
+    ; a = OverworldRoomIncrement[direction]
+    ; hl = hMapRoom
+    ld   hl, OverworldRoomIncrement               ; $7A84: $21 $77 $7B
     add  hl, bc                                   ; $7A87: $09
     ld   a, [hl]                                  ; $7A88: $7E
     ld   hl, hMapRoom                             ; $7A89: $21 $F6 $FF
 
-jr_002_7A8C:
+.incrementRoom
     add  [hl]                                     ; $7A8C: $86
 
-jr_002_7A8D:
+.setRoom
+    ; Write the new room to the defined address
+    ; (either hMapRoom or wIndoorRoom)
     ld   [hl], a                                  ; $7A8D: $77
+
+    ; If room == $41 (Tail Cave Key on Mysterious Forest)…
     cp   $41                                      ; $7A8E: $FE $41
-    jr   nz, label_002_7AA5                       ; $7A90: $20 $13
+    jr   nz, .forestRoomEnd                       ; $7A90: $20 $13
 
+    ; … and direction == top…
     ld   a, c                                     ; $7A92: $79
-    cp   $02                                      ; $7A93: $FE $02
-    jr   nz, label_002_7AA5                       ; $7A95: $20 $0E
+    cp   MAP_SLIDE_DIRECTION_TOP                  ; $7A93: $FE $02
+    jr   nz, .forestRoomEnd                       ; $7A95: $20 $0E
 
-    ld   hl, $D841                                ; $7A97: $21 $41 $D8
+    ; … and this room has not been visited yet…
+    ld   hl, wMinimapTiles + $41                  ; $7A97: $21 $41 $D8
     bit  6, [hl]                                  ; $7A9A: $CB $76
-    jr   nz, label_002_7AA5                       ; $7A9C: $20 $07
+    jr   nz, .forestRoomEnd                       ; $7A9C: $20 $07
 
+    ; … mark the room as discovered
     set  6, [hl]                                  ; $7A9E: $CB $F6
+
+    ; ???
     ld   a, $02                                   ; $7AA0: $3E $02
     ld   [wC169], a                               ; $7AA2: $EA $69 $C1
+.forestRoomEnd
 
-label_002_7AA5::
-    call label_30F4                               ; $7AA5: $CD $F4 $30
-    ld   a, [wIsIndoor]                         ; $7AA8: $FA $A5 $DB
+.loadRoom
+    call LoadRoom                                 ; $7AA5: $CD $F4 $30
+    
+    ; If in Color Dungeon…
+    ld   a, [wIsIndoor]                           ; $7AA8: $FA $A5 $DB
     and  a                                        ; $7AAB: $A7
-    jr   z, jr_002_7ABD                           ; $7AAC: $28 $0F
+    jr   z, .colorDungeonEnd                      ; $7AAC: $28 $0F
 
     ldh  a, [hMapId]                              ; $7AAE: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                              ; $7AB0: $FE $FF
-    jr   nz, jr_002_7ABD                          ; $7AB2: $20 $09
+    cp   MAP_COLOR_DUNGEON                        ; $7AB0: $FE $FF
+    jr   nz, .colorDungeonEnd                     ; $7AB2: $20 $09
 
+    ; force update the background tiles
     ld   a, $01                                   ; $7AB4: $3E $01
     ldh  [hNeedsUpdatingBGTiles], a               ; $7AB6: $E0 $90
+    
+    ; Copy some data
     ld   a, $02                                   ; $7AB8: $3E $02
     call label_9F5                                ; $7ABA: $CD $F5 $09
+.colorDungeonEnd
 
-jr_002_7ABD:
     call label_37FE                               ; $7ABD: $CD $FE $37
-    call DrawLinkSpriteAndReturn                  ; $7AC0: $CD $2E $1D
-    call label_1794                               ; $7AC3: $CD $94 $17
+    call DrawLinkSprite                           ; $7AC0: $CD $2E $1D
+    call ApplyLinkMotionState                               ; $7AC3: $CD $94 $17
+    
+    ;
+    ; Get the music track to apply later
+    ;
+
     ld   a, [$C1CF]                               ; $7AC6: $FA $CF $C1
     and  a                                        ; $7AC9: $A7
-    jr   z, jr_002_7AE9                           ; $7ACA: $28 $1D
+    jr   z, .C1CFIsZero                           ; $7ACA: $28 $1D
 
     xor  a                                        ; $7ACC: $AF
     ld   [$C1CF], a                               ; $7ACD: $EA $CF $C1
     ld   a, [wTunicType]                          ; $7AD0: $FA $0F $DC
     and  a                                        ; $7AD3: $A7
-    ldh  a, [$FFB0]                               ; $7AD4: $F0 $B0
-    jr   nz, jr_002_7AE2                          ; $7AD6: $20 $0A
+    ldh  a, [hMusicTrack]                               ; $7AD4: $F0 $B0
+    jr   nz, .jr_002_7AE2                         ; $7AD6: $20 $0A
 
     ld   a, [wActivePowerUp]                      ; $7AD8: $FA $7C $D4
     and  a                                        ; $7ADB: $A7
-    ldh  a, [$FFB0]                               ; $7ADC: $F0 $B0
-    jr   z, jr_002_7AE2                           ; $7ADE: $28 $02
+    ldh  a, [hMusicTrack]                               ; $7ADC: $F0 $B0
+    jr   z, .jr_002_7AE2                          ; $7ADE: $28 $02
 
     ld   a, $49                                   ; $7AE0: $3E $49
 
-jr_002_7AE2:
+.jr_002_7AE2
     ldh  [hNextMusicTrack], a                     ; $7AE2: $E0 $B1
     call label_27EA                               ; $7AE4: $CD $EA $27
     jr   IncrementMapSlideTransitionStateAndReturn ; $7AE7: $18 $4D
 
-jr_002_7AE9:
+.C1CFIsZero
+    ; If indoors, or sword wasn't found yet, the music
+    ; track will be handled directly by the audio code ; return.
     ld   a, [wIsIndoor]                           ; $7AE9: $FA $A5 $DB
     and  a                                        ; $7AEC: $A7
     jr   nz, IncrementMapSlideTransitionStateAndReturn ; $7AED: $20 $47
@@ -423,13 +506,14 @@ jr_002_7AE9:
     and  a                                        ; $7AF2: $A7
     jr   z, IncrementMapSlideTransitionStateAndReturn ; $7AF3: $28 $41
 
+    ; Load the music track from the Overworld tracks array
     ldh  a, [hMapRoom]                            ; $7AF5: $F0 $F6
     ld   e, a                                     ; $7AF7: $5F
     ld   d, $00                                   ; $7AF8: $16 $00
     ld   hl, OverworldMusicTracks                 ; $7AFA: $21 $00 $40
     add  hl, de                                   ; $7AFD: $19
     ld   a, [hl]                                  ; $7AFE: $7E
-    ld   hl, $FFB0                                ; $7AFF: $21 $B0 $FF
+    ld   hl, hMusicTrack                                ; $7AFF: $21 $B0 $FF
     cp   [hl]                                     ; $7B02: $BE
     jr   z, IncrementMapSlideTransitionStateAndReturn ; $7B03: $28 $31
 
@@ -447,13 +531,13 @@ jr_002_7AE9:
 jr_002_7B14:
     ld   a, [wActivePowerUp]                      ; $7B14: $FA $7C $D4
     and  a                                        ; $7B17: $A7
-    jr   z, func_002_7B2D                         ; $7B18: $28 $13
+    jr   z, SetNextMusicTrack                     ; $7B18: $28 $13
 
     ldh  a, [$FFBD]                               ; $7B1A: $F0 $BD
     cp   $49                                      ; $7B1C: $FE $49
-    jr   z, jr_002_7B33                           ; $7B1E: $28 $13
+    jr   z, SetNextMusicTrack.setMusicTrack       ; $7B1E: $28 $13
 
-    call func_002_7B2D                            ; $7B20: $CD $2D $7B
+    call SetNextMusicTrack                        ; $7B20: $CD $2D $7B
     ld   a, $49                                   ; $7B23: $3E $49
     ldh  [hNextMusicTrack], a                     ; $7B25: $E0 $B1
     ldh  [$FFBD], a                               ; $7B27: $E0 $BD
@@ -463,14 +547,14 @@ jr_002_7B2A:
     ld   a, c                                     ; $7B2A: $79
     ldh  [$FFBD], a                               ; $7B2B: $E0 $BD
 
-func_002_7B2D::
+SetNextMusicTrack::
     ld   a, c                                     ; $7B2D: $79
     ldh  [hNextMusicTrack], a                     ; $7B2E: $E0 $B1
     call label_27EA                               ; $7B30: $CD $EA $27
 
-jr_002_7B33:
+.setMusicTrack
     ld   a, c                                     ; $7B33: $79
-    ldh  [$FFB0], a                               ; $7B34: $E0 $B0
+    ldh  [hMusicTrack], a                         ; $7B34: $E0 $B0
 
 IncrementMapSlideTransitionStateAndReturn::
     ld   a, [wMapSlideTransitionState]            ; $7B36: $FA $24 $C1
@@ -548,13 +632,17 @@ MapSlideTargetScrollY::
 .top    db $80
 .bottom db $80
 
-data_002_7B77::
-    ld   bc, $F0FF                                ; $7B77: $01 $FF $F0
-    db   $10                                      ; $7B7A: $10
+OverworldRoomIncrement::
+.right  db $01
+.left   db $FF
+.top    db $F0
+.bottom db $10
 
-data_002_7B7B::
-    ld   bc, $F8FF                                ; $7B7B: $01 $FF $F8
-    db   $08                                      ; $7B7E: $08
+IndoorRoomIncrement::
+.right  db $01
+.left   db $FF
+.top    db $F8
+.bottom db $08
 
 MapSlidePrepare3Handler::
     ; If $FFBB == 0, return

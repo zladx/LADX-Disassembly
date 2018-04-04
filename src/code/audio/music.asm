@@ -123,8 +123,7 @@ SelectMusicTrackAfterTransition::
     ; Set overworld soundtrack
     ld   e, a                                     ; $41A7: $5F
     ld   d, $00                                   ; $41A8: $16 $00
-    ; $FFB0 = soundtrack id
-    ldh  [$FFB0], a                               ; $41AA: $E0 $B0
+    ldh  [hMusicTrack], a                               ; $41AA: $E0 $B0
     call SetWorldMusicTrack                       ; $41AC: $CD $C3 $27
 
     ; If soundtrack id <= $24…

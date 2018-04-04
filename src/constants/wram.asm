@@ -358,7 +358,11 @@ wBossAgonySFXCountdown:: ; C5A7
   ds 1
 
 ; Unlabeled
-ds 3
+ds 2
+
+wEggMazeProgress:: ; C5AA
+  ; Number of rooms progressed correctly in the Wind Fish's Egg maze
+  ds 1
 
 wDialogSFX:: ; C5AB
     ds 1

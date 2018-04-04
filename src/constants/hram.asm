@@ -110,7 +110,7 @@ hFFAB:: ; hFFAB
 hFFAF:: ; FFAF
   ds 1
 
-hFFB0:: ; FFB0
+hMusicTrack:: ; FFB0
   ds 1
 
 ; Next music to be played after map slide transition

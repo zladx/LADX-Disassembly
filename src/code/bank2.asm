@@ -187,7 +187,7 @@ jr_002_42C7:
     call $434A                                    ; $42D6: $CD $4A $43
     call func_002_478C                            ; $42D9: $CD $8C $47
     call func_002_4B49                            ; $42DC: $CD $49 $4B
-    call label_1794                               ; $42DF: $CD $94 $17
+    call ApplyLinkMotionState                               ; $42DF: $CD $94 $17
     call func_002_4338                            ; $42E2: $CD $38 $43
     call func_002_4A16                            ; $42E5: $CD $16 $4A
     ld   a, [wMapSlideTransitionState]            ; $42E8: $FA $24 $C1
@@ -554,7 +554,7 @@ jr_002_44E0:
 
 jr_002_44E3:
     pop  af                                       ; $44E3: $F1
-    jp   label_1794                               ; $44E4: $C3 $94 $17
+    jp   ApplyLinkMotionState                               ; $44E4: $C3 $94 $17
 
     nop                                           ; $44E7: $00
     ld   a, [rNR10]                               ; $44E8: $F0 $10
@@ -1071,7 +1071,7 @@ jr_002_49B6:
     call func_002_478C                            ; $49BE: $CD $8C $47
     ld   a, [$C137]                               ; $49C1: $FA $37 $C1
     ld   [wC16A], a                               ; $49C4: $EA $6A $C1
-    jp   label_1794                               ; $49C7: $C3 $94 $17
+    jp   ApplyLinkMotionState                               ; $49C7: $C3 $94 $17
 
     ld   bc, $0100                                ; $49CA: $01 $00 $01
     nop                                           ; $49CD: $00
@@ -2475,7 +2475,7 @@ HandleGotItemB::
     ld   [wC16A], a                               ; $51CA: $EA $6A $C1
     ld   [$C137], a                               ; $51CD: $EA $37 $C1
     ld   [$C13E], a                               ; $51D0: $EA $3E $C1
-    call label_1794                               ; $51D3: $CD $94 $17
+    call ApplyLinkMotionState                               ; $51D3: $CD $94 $17
     call $21E1                                    ; $51D6: $CD $E1 $21
     ldh  a, [$FFA3]                               ; $51D9: $F0 $A3
     sub  $02                                      ; $51DB: $D6 $02

@@ -1482,7 +1482,7 @@ label_10E7::
 label_10EF::
     ld   a, [wDialogState]
     and  a
-    jp   nz, label_1794
+    jp   nz, ApplyLinkMotionState
     ld   a, [wMapSlideTransitionState]
     and  a
     jp   nz, label_114F
@@ -1528,7 +1528,7 @@ label_10EF::
 ._0F dw $50A3       ; LINK_MOTION_UNKNOWN
 
 label_114F::
-    call label_1794
+    call ApplyLinkMotionState
     jp   DrawLinkSpriteAndReturn
 
 LinkMotionTeleportUpHandler::
@@ -2481,7 +2481,8 @@ ClearLinkPositionIncrement::
     ldh  [hLinkPositionYIncrement], a
     ret
 
-label_1794::
+; Animate Link motion?
+ApplyLinkMotionState::
     call label_753A
     ld   a, [wLinkMotionState]
     cp   $01
@@ -4997,11 +4998,16 @@ label_30E9::
     ld   [MBC3SelectBank], a
     jp   label_6DEA
 
-label_30F4::
+; Load room blocks and tiles
+LoadRoom::
+    ; Disable all interrupts except VBlank
     ld   a, $01
     ld   [rIE], a
+
+    ; Increment $D47F
     ld   hl, $D47F
     inc  [hl]
+
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4CA3

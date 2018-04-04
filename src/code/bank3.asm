@@ -360,7 +360,7 @@ label_C995::
 
 label_C99C::
     ld   [$D368], a
-    ldh  [$FFB0], a
+    ldh  [hMusicTrack], a
     ldh  [$FFBD], a
     ldh  [$FFBF], a
     ret
@@ -397,7 +397,7 @@ label_C99C::
     ld   [hl], a
     ret
     xor  a
-    ldh  [$FFB0], a
+    ldh  [hMusicTrack], a
     ret
     call label_CA12
     ldh  a, [$FFEE]
@@ -502,7 +502,7 @@ label_CA7A::
     ld   [$C3C8], a
     ld   a, $2F
     ldh  [hNextMusicTrack], a
-    ldh  [$FFB0], a
+    ldh  [hMusicTrack], a
     ldh  [$FFBD], a
     call label_27EA
 
@@ -3046,7 +3046,7 @@ label_DBCB::
     ld   a, $31
     ld   [$D368], a
     ld   a, $05
-    ldh  [$FFB0], a
+    ldh  [hMusicTrack], a
     ldh  [$FFBF], a
     call label_BFB
     ld   [hl], $52
@@ -5678,7 +5678,7 @@ label_EDAB::
     ld   a, [$C1BE]
     and  a
     jr   nz, label_EDDF
-    ldh  a, [$FFB0]
+    ldh  a, [hMusicTrack]
     cp   $22
     jr   z, label_EDDD
     ld   [$D368], a

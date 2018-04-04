@@ -1312,7 +1312,7 @@ func_002_4B49::
     jr   z, jr_002_4BBF                           ; $4B4D: $28 $70
 
     ldh  a, [hMapId]                              ; $4B4F: $F0 $F7
-    cp   MAP_TURTLE_ROCK                          ; $4B51: $FE $08
+    cp   MAP_WINDFISHS_EGG                        ; $4B51: $FE $08
     jr   nz, jr_002_4B64                          ; $4B53: $20 $0F
 
     ld   a, [$D219]                               ; $4B55: $FA $19 $D2
@@ -2419,7 +2419,7 @@ jr_002_516A:
 
 jr_002_5176:
     ldh  a, [hMapId]                         ; $5176: $F0 $F7
-    cp   MAP_CAVE_A                                      ; $5178: $FE $0A
+    cp   MAP_CAVE_B                                      ; $5178: $FE $0A
     jr   nz, jr_002_51AC                          ; $517A: $20 $30
 
     ldh  a, [hMapRoom]                           ; $517C: $F0 $F6
@@ -2894,7 +2894,7 @@ label_002_5425::
     jr   z, jr_002_5438                           ; $542C: $28 $0A
 
     ldh  a, [hMapId]                         ; $542E: $F0 $F7
-    cp   MAP_CAVE_A                                      ; $5430: $FE $0A
+    cp   MAP_CAVE_B                                      ; $5430: $FE $0A
     ld   a, $30                                   ; $5432: $3E $30
     jr   c, jr_002_5438                           ; $5434: $38 $02
 
@@ -4893,8 +4893,8 @@ func_002_5F9F::
     ld   h, b                                     ; $5FC4: $60
     ret                                           ; $5FC5: $C9
 
-    ldh  a, [hMapId]                         ; $5FC6: $F0 $F7
-    cp   MAP_FACE_SHRINE                                      ; $5FC8: $FE $06
+    ldh  a, [hMapId]                              ; $5FC6: $F0 $F7
+    cp   MAP_EAGLES_TOWER                         ; $5FC8: $FE $06
     jr   nz, jr_002_5FD1                          ; $5FCA: $20 $05
 
     ld   a, [$DAE8]                               ; $5FCC: $FA $E8 $DA
@@ -5206,21 +5206,21 @@ jr_002_613D:
     ld   [$C151], a                               ; $617B: $EA $51 $C1
     ld   a, $0B                                   ; $617E: $3E $0B
     ld   [$C154], a                               ; $6180: $EA $54 $C1
-    ld   a, [wIsIndoor]                         ; $6183: $FA $A5 $DB
+    ld   a, [wIsIndoor]                           ; $6183: $FA $A5 $DB
     and  a                                        ; $6186: $A7
     ld   a, $07                                   ; $6187: $3E $07
     jr   z, jr_002_619C                           ; $6189: $28 $11
 
-    ldh  a, [hMapId]                         ; $618B: $F0 $F7
+    ldh  a, [hMapId]                              ; $618B: $F0 $F7
     cp   MAP_COLOR_DUNGEON                                      ; $618D: $FE $FF
     jr   z, jr_002_6197                           ; $618F: $28 $06
 
-    cp   MAP_TURTLE_ROCK                          ; $6191: $FE $08
+    cp   MAP_WINDFISHS_EGG                        ; $6191: $FE $08
     ld   a, $07                                   ; $6193: $3E $07
     jr   nc, jr_002_619C                          ; $6195: $30 $05
 
 jr_002_6197:
-    call IsMapRoomE8                                  ; $6197: $CD $09 $67
+    call IsMapRoomE8                              ; $6197: $CD $09 $67
     ld   a, $02                                   ; $619A: $3E $02
 
 jr_002_619C:
@@ -5809,8 +5809,8 @@ jr_002_671C:
     add  hl, de                                   ; $6729: $19
 
 jr_002_672A:
-    ldh  a, [hMapId]                         ; $672A: $F0 $F7
-    cp   MAP_FACE_SHRINE                                      ; $672C: $FE $06
+    ldh  a, [hMapId]                              ; $672A: $F0 $F7
+    cp   MAP_EAGLES_TOWER                         ; $672C: $FE $06
     jr   nz, jr_002_673A                          ; $672E: $20 $0A
 
     ld   a, [wHasInstrument7]                     ; $6730: $FA $6B $DB
@@ -6352,11 +6352,11 @@ jr_002_69F3:
 jr_002_6A00:
     ret                                           ; $6A00: $C9
 
-    ldh  a, [hMapId]                         ; $6A01: $F0 $F7
-    cp   MAP_FACE_SHRINE                                      ; $6A03: $FE $06
+    ldh  a, [hMapId]                              ; $6A01: $F0 $F7
+    cp   MAP_EAGLES_TOWER                         ; $6A03: $FE $06
     jr   nz, jr_002_6A24                          ; $6A05: $20 $1D
 
-    ldh  a, [hMapRoom]                           ; $6A07: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $6A07: $F0 $F6
     cp   $F8                                      ; $6A09: $FE $F8
     jr   nz, jr_002_6A24                          ; $6A0B: $20 $17
 
@@ -6789,7 +6789,7 @@ CheckPositionForMapTransition::
     ret  nz                                       ; $6C7C: $C0
 
     ldh  a, [hMapId]                              ; $6C7D: $F0 $F7
-    cp   MAP_CAVE_D                               ; $6C7F: $FE $1F
+    cp   MAP_CAVE_E                               ; $6C7F: $FE $1F
     jr   nz, jr_002_6C99                          ; $6C81: $20 $16
 
     ldh  a, [hFFF9]                               ; $6C83: $F0 $F9
@@ -6836,7 +6836,7 @@ jr_002_6CB6:
     jr   nz, jr_002_6CD1                          ; $6CB9: $20 $16
 
     ldh  a, [hMapId]                              ; $6CBB: $F0 $F7
-    cp   MAP_CAVE_D                               ; $6CBD: $FE $1F
+    cp   MAP_CAVE_E                               ; $6CBD: $FE $1F
     jp   nz, label_002_6D5C                       ; $6CBF: $C2 $5C $6D
 
     ldh  a, [hMapRoom]                            ; $6CC2: $F0 $F6
@@ -7021,7 +7021,7 @@ initiateRoomTransition:
     jr   nz, .specialCaseEnd                      ; $6DD0: $20 $12
 
     ldh  a, [hMapId]                              ; $6DD2: $F0 $F7
-    cp   MAP_CAVE_D                               ; $6DD4: $FE $1F
+    cp   MAP_CAVE_E                               ; $6DD4: $FE $1F
     jr   z, .specialCaseEnd                       ; $6DD6: $28 $0C
 
     ld   a, [wIsIndoor]                           ; $6DD8: $FA $A5 $DB

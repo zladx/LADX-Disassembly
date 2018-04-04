@@ -185,7 +185,7 @@ hMapRoom:: ; FFF6
   ds 1
 
 hMapId:: ; FFF7
-  ; Id of the current world map
+  ; Id of the current indoor world map
   ; See MAP_* constants for values
   ds 1
 

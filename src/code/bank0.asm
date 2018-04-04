@@ -950,7 +950,7 @@ label_D91::
     ldh  a, [hMapId]
     cp   $1A
     jr   nc, label_DAB
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   c, label_DAB
     inc  d
 
@@ -2734,7 +2734,7 @@ label_1948::
     xor  a
     ld   [wActivePowerUp], a
     ldh  a, [hMapId]
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   nc, label_196E
     callsw IsMapRoomE8
     ld   a, $30
@@ -4397,7 +4397,7 @@ label_2CD1::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   z, label_2CF5
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   c, label_2CF5
     ld   a, $0C
     call SwitchAdjustedBank
@@ -4421,7 +4421,7 @@ label_2D07::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   z, label_2D21
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   c, label_2D21
 
 label_2D17::
@@ -4617,7 +4617,7 @@ label_2E85::
     ldh  a, [hMapId]
     cp   MAP_KANALET
     jr   z, label_2ED3
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   c, label_2ED3
     ldh  a, [$FFF6]
     cp   $FD
@@ -4703,9 +4703,9 @@ label_2F12::
     jr   z, label_2F4B
     ld   hl, $7000
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   z, label_2F41
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   nc, label_2F3B
 
 label_2F36::
@@ -5103,7 +5103,7 @@ label_31A6::
     ldh  a, [hMapId]
     cp   $1A
     jr   nc, label_3224
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   c, label_3224
     ld   a, $0B
     ld   [MBC3SelectBank], a
@@ -5634,7 +5634,7 @@ label_34AE::
 
 label_34B6::
     ldh  a, [hMapId]
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     ldh  a, [$FFE0]
     jr   c, label_34C2
     cp   $A9
@@ -6105,7 +6105,7 @@ label_37FE::
     and  a
     jr   z, label_3868
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   nz, label_3850
     ld   a, [$DB6F]
     ld   hl, $FFF6
@@ -6369,7 +6369,7 @@ label_398D::
     xor  a
     ld   [$C3C1], a
     ldh  a, [hMapId]
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     ldh  a, [hFrameCounter]
     jr   c, label_39C1
     xor  a
@@ -7243,7 +7243,7 @@ label_3F2E::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     ret  z
-    cp   MAP_CATFISHS_MAW
+    cp   MAP_FACE_SHRINE
     ret  z
     ld   e, a
     ld   d, b

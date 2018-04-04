@@ -636,9 +636,9 @@ label_43CA::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   z, label_43DB
-    cp   MAP_TURTLE_ROCK
+    cp   MAP_WINDFISHS_EGG
     jr   z, label_43D8
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   c, label_43DB
 
 label_43D8::
@@ -668,11 +668,11 @@ label_43E9::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   z, label_440B
-    cp   MAP_TURTLE_ROCK
+    cp   MAP_WINDFISHS_EGG
     jr   z, label_4425
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   nc, label_4425
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   nz, label_440B
     ldh  a, [hFFF9]
     and  a
@@ -4901,7 +4901,7 @@ label_5FB3::
     ret  z
     cp   MAP_DREAM_SHRINE
     ret  z
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     ret  c
     ldh  a, [$FFF6]
     cp   $FD
@@ -5076,7 +5076,7 @@ label_609C::
     cp   $A4
     jr   nz, label_60F7
     ldh  a, [hMapId]
-    cp   MAP_CAVE_B
+    cp   MAP_CAVE_C
     jr   nz, label_60F7
     ld   a, $08
     ldh  [$FFF2], a
@@ -6061,7 +6061,7 @@ label_6829::
     jr   nz, label_6855
     call label_5888
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   z, label_6849
     ld   a, $03
     ldh  [hWindowYUnused], a
@@ -6079,7 +6079,7 @@ label_6855::
     ret
     ld   e, $21
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   z, label_6868
     ldh  a, [$FFF6]
     cp   $DD
@@ -6095,7 +6095,7 @@ label_6868::
     jp   IncrementGameplaySubtypeAndReturn
     ld   e, $24
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   z, label_6885
     ldh  a, [$FFF6]
     cp   $DD
@@ -6135,7 +6135,7 @@ label_689E::
 label_68BF::
     ret
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   nz, label_68CF
     call label_6A7C
     ld   a, $07
@@ -6334,7 +6334,7 @@ label_6A76::
 
 label_6A7C::
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     ret  nz
     xor  a
     ldh  [$FFF1], a

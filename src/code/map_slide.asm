@@ -246,47 +246,59 @@ MapSlidePrepare1Handler::
     ld   a, [wMapSlideDirection]                  ; $79FA: $FA $25 $C1
     ld   c, a                                     ; $79FD: $4F
     ld   b, $00                                   ; $79FE: $06 $00
+    
+    ; If map in indoor…
     ld   a, [wIsIndoor]                           ; $7A00: $FA $A5 $DB
     and  a                                        ; $7A03: $A7
-    jr   z, jr_002_7A6D                           ; $7A04: $28 $67
+    jr   z, .indoorEnd                            ; $7A04: $28 $67
 
+    ; If map is not color dungeon…
     ldh  a, [hMapId]                              ; $7A06: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $7A08: $FE $FF
-    jr   z, jr_002_7A48                           ; $7A0A: $28 $3C
+    jr   z, .noTurtleRockHack                     ; $7A0A: $28 $3C
 
+    ; … and hMapId < $0B…
     cp   MAP_DUNGEON_G1                           ; $7A0C: $FE $0B
-    jr   nc, jr_002_7A6D                          ; $7A0E: $30 $5D
+    jr   nc, .indoorEnd                           ; $7A0E: $30 $5D
 
-    cp   MAP_TURTLE_ROCK                          ; $7A10: $FE $08
-    jr   nz, jr_002_7A48                          ; $7A12: $20 $34
+    ; … and map is Wind Fish's Egg…
+    cp   MAP_WINDFISHS_EGG                        ; $7A10: $FE $08
+    jr   nz, .noTurtleRockHack                    ; $7A12: $20 $34
 
+    ; … and dungeon room is $71…
     ldh  a, [hMapRoom]                            ; $7A14: $F0 $F6
     cp   $71                                      ; $7A16: $FE $71
-    jr   nz, jr_002_7A48                          ; $7A18: $20 $2E
+    jr   nz, .noTurtleRockHack                    ; $7A18: $20 $2E
 
+    ; … and is not sliding to the bottom…
     ld   a, c                                     ; $7A1A: $79
-    cp   $03                                      ; $7A1B: $FE $03
-    jr   z, jr_002_7A48                           ; $7A1D: $28 $29
+    cp   MAP_SLIDE_DIRECTION_BOTTOM               ; $7A1B: $FE $03
+    jr   z, .noTurtleRockHack                     ; $7A1D: $28 $29
 
+    ; hl = Data_002_79DA + $DB7C
     ld   a, [$DB7C]                               ; $7A1F: $FA $7C $DB
     ld   e, a                                     ; $7A22: $5F
     ld   d, $00                                   ; $7A23: $16 $00
     ld   hl, Data_002_79DA                        ; $7A25: $21 $DA $79
     add  hl, de                                   ; $7A28: $19
+    
+    ; $C5AA += 1
     ld   a, [$C5AA]                               ; $7A29: $FA $AA $C5
     ld   e, a                                     ; $7A2C: $5F
     inc  a                                        ; $7A2D: $3C
     ld   [$C5AA], a                               ; $7A2E: $EA $AA $C5
+    
+    ; If map 
     add  hl, de                                   ; $7A31: $19
     ld   a, c                                     ; $7A32: $79
     cp   [hl]                                     ; $7A33: $BE
-    jr   z, jr_002_7A3D                           ; $7A34: $28 $07
+    jr   z, .jr_002_7A3D                          ; $7A34: $28 $07
 
     xor  a                                        ; $7A36: $AF
     ld   [$C5AA], a                               ; $7A37: $EA $AA $C5
     jp   label_002_7AA5                           ; $7A3A: $C3 $A5 $7A
 
-jr_002_7A3D:
+.jr_002_7A3D
     ld   a, e                                     ; $7A3D: $7B
     cp   $07                                      ; $7A3E: $FE $07
     jp   nz, label_002_7AA5                       ; $7A40: $C2 $A5 $7A
@@ -294,32 +306,32 @@ jr_002_7A3D:
     ld   a, $02                                   ; $7A43: $3E $02
     ld   [wC169], a                               ; $7A45: $EA $69 $C1
 
-jr_002_7A48:
+.noTurtleRockHack
     xor  a                                        ; $7A48: $AF
     ld   [$C5AA], a                               ; $7A49: $EA $AA $C5
     ld   hl, $7B7B                                ; $7A4C: $21 $7B $7B
     add  hl, bc                                   ; $7A4F: $09
     ld   a, c                                     ; $7A50: $79
     cp   $02                                      ; $7A51: $FE $02
-    jr   nz, jr_002_7A67                          ; $7A53: $20 $12
+    jr   nz, .jr_002_7A67                         ; $7A53: $20 $12
 
     ldh  a, [hMapId]                              ; $7A55: $F0 $F7
-    cp   MAP_CATFISHS_MAW                         ; $7A57: $FE $05
-    jr   nz, jr_002_7A67                          ; $7A59: $20 $0C
+    cp   MAP_FACE_SHRINE                          ; $7A57: $FE $05
+    jr   nz, .jr_002_7A67                         ; $7A59: $20 $0C
 
     ld   a, [$DBAE]                               ; $7A5B: $FA $AE $DB
     cp   $1D                                      ; $7A5E: $FE $1D
-    jr   nz, jr_002_7A67                          ; $7A60: $20 $05
+    jr   nz, .jr_002_7A67                         ; $7A60: $20 $05
 
     ld   a, $35                                   ; $7A62: $3E $35
     ld   [$DBAE], a                               ; $7A64: $EA $AE $DB
 
-jr_002_7A67:
+.jr_002_7A67
     ld   a, [hl]                                  ; $7A67: $7E
     ld   hl, $DBAE                                ; $7A68: $21 $AE $DB
     jr   jr_002_7A8C                              ; $7A6B: $18 $1F
 
-jr_002_7A6D:
+.indoorEnd
     ld   a, [wC10C]                               ; $7A6D: $FA $0C $C1
     and  a                                        ; $7A70: $A7
     jr   z, jr_002_7A84                           ; $7A71: $28 $11

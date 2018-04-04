@@ -346,7 +346,7 @@ jr_002_43B9:
     ret                                           ; $43B9: $C9
 
 jr_002_43BA:
-    ld   a, [$DBAE]                               ; $43BA: $FA $AE $DB
+    ld   a, [wIndoorRoom]                               ; $43BA: $FA $AE $DB
     ld   [$D46B], a                               ; $43BD: $EA $6B $D4
     call func_002_44C2                            ; $43C0: $CD $C2 $44
     ldh  a, [$FFA2]                               ; $43C3: $F0 $A2
@@ -2043,7 +2043,7 @@ jr_002_4F3C:
     ld   [$C137], a                               ; $4F47: $EA $37 $C1
     ld   [wC16A], a                               ; $4F4A: $EA $6A $C1
     ld   [wC16D], a                               ; $4F4D: $EA $6D $C1
-    ld   a, [$DBAE]                               ; $4F50: $FA $AE $DB
+    ld   a, [wIndoorRoom]                               ; $4F50: $FA $AE $DB
     ld   [$D46B], a                               ; $4F53: $EA $6B $D4
     ld   hl, wDialogState                         ; $4F56: $21 $9F $C1
     ldh  a, [$FFA1]                               ; $4F59: $F0 $A1
@@ -4131,7 +4131,7 @@ jr_002_5B6F:
     ldh  [hFFF8], a                               ; $5B81: $E0 $F8
     ld   hl, $5A69                                ; $5B83: $21 $69 $5A
     add  hl, de                                   ; $5B86: $19
-    ld   a, [$DBAE]                               ; $5B87: $FA $AE $DB
+    ld   a, [wIndoorRoom]                               ; $5B87: $FA $AE $DB
     add  [hl]                                     ; $5B8A: $86
     ld   e, a                                     ; $5B8B: $5F
     call label_2BC1                               ; $5B8C: $CD $C1 $2B

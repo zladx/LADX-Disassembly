@@ -2727,7 +2727,7 @@ label_193E::
 
 label_1948::
     ld   a, e
-    ld   [$DBAE], a
+    ld   [wIndoorRoom], a
     ldh  a, [$FFE6]
     and  a
     jr   nz, label_196E
@@ -2816,7 +2816,7 @@ label_19C9::
     ldh  [$FFD7], a
     cp   $05
     jr   nz, label_19C9
-    ld   a, [$DBAE]
+    ld   a, [wIndoorRoom]
     ld   [de], a
 
 label_19D9::

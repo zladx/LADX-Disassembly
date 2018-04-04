@@ -4862,7 +4862,7 @@ label_E894::
     ldh  [hFFF8], a
     ld   hl, data_E75D
     add  hl, bc
-    ld   a, [$DBAE]
+    ld   a, [wIndoorRoom]
     add  a, [hl]
     ld   e, a
     ld   d, $00

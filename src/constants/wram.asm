@@ -838,7 +838,7 @@ wMapEntrancePositionY:: ; DB9E
 ; Unlabeled
 ds 6
 
-wIsIndoor:: ; $DBA5
+wIsIndoor:: ; DBA5
   ; 0 on the overworld
   ; 1 on interior maps (house, dungeons, etc)
   ds 1
@@ -848,7 +848,10 @@ wSaveSlot:: ; DBA6
 
 ; Unlabeled
 wDBA7 equ $DBA7
-  ds 8
+  ds 7
+
+wIndoorRoom:: ; DBAE
+  ds 1
 
 wCurrentBank:: ; DBAF
   ds 1

@@ -3030,7 +3030,7 @@ label_5353::
     ld   a, [$DB60]
     ldh  [hMapId], a
     ld   a, [$DB64]
-    ld   [$DBAE], a
+    ld   [wIndoorRoom], a
     xor  a
     ldh  [hFFF9], a
     ld   a, $03

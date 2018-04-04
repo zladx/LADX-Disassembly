@@ -465,7 +465,7 @@ label_5BC::
     jp   z, $007A
     cp   $08
     jp   nc, label_7D3
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jp   z, label_656
     ldh  a, [hNeedsUpdatingBGTiles]

@@ -516,7 +516,7 @@ label_B2F::
     ldh  a, [hIsGBC]
     and  a
     ret  z
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ret  nz
     push bc
@@ -760,7 +760,7 @@ ApplyMapFadeOutTransition::
     ld   a, [$D401]
     cp   $01
     jr   nz, ApplyMapFadeOutTransition
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, ApplyMapFadeOutTransition
     ld   a, $01
@@ -863,7 +863,8 @@ label_D15::
 label_D1E::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    ld   a, [$DBA5]
+    
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_D59
     ldh  a, [$FFF6]
@@ -945,7 +946,7 @@ label_D91::
     ld   e, a
     ld   d, $00
     ld   hl, $70D3
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     ldh  a, [hMapId]
     cp   $1A
@@ -1002,7 +1003,7 @@ label_DDB::
 
 label_DF1::
     ld   hl, $73F3
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_DFD
     ld   hl, $763B
@@ -2225,7 +2226,7 @@ label_15CF::
     ld   a, [hl]
     ldh  [$FFAF], a
     ld   e, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     call label_2A26
     pop  de
@@ -2251,7 +2252,7 @@ label_1616::
     ld   bc, $C2CA
     ld   d, $E
     nop
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ldh  a, [$FFAF]
     jr   z, label_1629
@@ -2622,7 +2623,7 @@ label_1898::
     ld   [$C3CB], a
     ldh  [hFFF9], a
     ld   hl, $D401
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ldh  [$FFE6], a
     and  a
     jr   nz, label_18DF
@@ -2659,19 +2660,19 @@ label_18D2::
 label_18DF::
     push hl
     ld   a, [hli]
-    ld   [$DBA5], a
+    ld   [wIsIndoor], a
     cp   $02
     jr   nz, label_18F2
     ldh  [hFFF9], a
     dec  a
-    ld   [$DBA5], a
+    ld   [wIsIndoor], a
     ld   a, $01
     ldh  [$FF9C], a
 
 label_18F2::
     ld   a, [hli]
     ldh  [hMapId], a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ld   a, [hli]
     ldh  [$FFF6], a
@@ -2759,7 +2760,7 @@ label_196F::
     ldh  a, [$FFE4]
     and  a
     jr   nz, label_19D9
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_19C2
     ldh  a, [hMapId]
@@ -3251,7 +3252,7 @@ label_1F69::
     ld   a, [hl]
     ldh  [$FFD7], a
     ld   e, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     call label_2A26
     ldh  [$FFDC], a
@@ -3287,7 +3288,7 @@ label_1FE6::
     jp   nz, label_2098
 
 label_1FF6::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ld   a, e
     jp   nz, label_2098
@@ -3477,7 +3478,7 @@ label_212C::
     jr   z, label_2153
     cp   $20
     jr   z, label_2153
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_214D
     ldh  a, [$FFD7]
@@ -3670,7 +3671,7 @@ label_2241::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2262
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_2262
     ld   a, $02
@@ -3684,7 +3685,7 @@ label_2262::
     rl   b
     sla  c
     rl   b
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_2286
     ld   hl, $4000
@@ -4416,7 +4417,7 @@ label_2CFE::
     call label_1E2B
 
 label_2D07::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_2D17
     ldh  a, [hMapId]
@@ -4609,7 +4610,7 @@ label_2E85::
     add  hl, de
     and  a
     jr   nz, label_2ED3
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_2EB0
     ldh  a, [hFFF9]
@@ -4693,7 +4694,7 @@ label_2F0A::
 
 label_2F12::
     ld   de, $9000
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jp   z, label_2FAD
     ld   a, $0D
@@ -4823,7 +4824,7 @@ label_2FEC::
     jr   label_2FFA
 
 label_2FF1::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_2FFA
     ld   hl, $4000
@@ -4869,7 +4870,7 @@ label_3019::
     ld   [MBC3SelectBank], a
     call $6576
     call label_3905
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_304C
     ld   hl, $43B0
@@ -4953,7 +4954,7 @@ label_30A9::
     jr   label_30C4
 
 label_30B6::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_30C1
     call label_3018
@@ -5024,7 +5025,7 @@ LoadRoom::
 label_3119::
     ld   a, $09
     ld   [MBC3SelectBank], a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_313A
     ld   a, $14
@@ -5047,7 +5048,7 @@ label_313A::
     ld   e, a
     ld   d, $00
     ld   hl, wMinimapTiles
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_3161
     ld   hl, $D900
@@ -5080,7 +5081,7 @@ label_316B::
     ld   b, $00
     sla  c
     rl   b
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_31BF
     ld   a, $0A
@@ -5181,7 +5182,7 @@ label_3224::
     ld   c, a
     ld   a, [hl]
     ld   b, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_323A
 
@@ -5198,7 +5199,7 @@ label_323A::
     jr   z, endOfRoom
     ldh  [hAnimatedTilesGroup], a
     inc  bc
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_3258
     ld   a, [bc]
@@ -5281,7 +5282,7 @@ label_32B8::
     inc  bc
     ldh  a, [hFFF8]
     ld   e, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_32D9
     ld   a, [bc] ; tile addres
@@ -6107,7 +6108,7 @@ label_37FE::
     sla  c
     rl   b
     ld   hl, $4000
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_3868
     ldh  a, [hMapId]
@@ -6260,7 +6261,7 @@ label_38EA::
     ret
 
 label_3905::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_390F
     ld   a, $1A

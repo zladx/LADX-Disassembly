@@ -860,53 +860,65 @@ label_D15::
     ld   a, $05
     jp   label_CC7
 
-label_D1E::
+; Load sprites for the next room,
+; either during a map transition or a room slide transition.
+LoadRoomSprites::
     ld   a, $20
     ld   [MBC3SelectBank], a
     
+    ; If is indoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_D59
+    jr   z, .overworld
+
+    ;
+    ; Indoor
+    ;
+
     ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
     ld   hl, $6EB3
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_D3C
+    jr   nz, .label_D3C
     ld   hl, $70B3
-    jr   label_D45
+    jr   .label_D45
 
-label_D3C::
+.label_D3C
     cp   $1A
-    jr   nc, label_D45
+    jr   nc, .label_D45
     cp   $06
-    jr   c, label_D45
+    jr   c, .label_D45
     inc  h
 
-label_D45::
+.label_D45
     add  hl, de
     ldh  a, [$FF94]
     ld   e, a
     ld   a, [hl]
     cp   e
-    jr   z, label_D57
+    jr   z, .label_D57
     ldh  [$FF94], a
     cp   $FF
-    jr   z, label_D57
+    jr   z, .label_D57
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
 
-label_D57::
-    jr   label_D91
+.label_D57::
+    jr   .indoorOutdoorEnd
 
-label_D59::
+.overworld
+    ;
+    ; Overworld
+    ;
+
     ldh  a, [$FFF6]
     cp   $07
-    jr   nz, label_D60
+    jr   nz, .label_D60
     inc  a
 
-label_D60::
+.label_D60
     ld   d, a
     srl  a
     srl  a
@@ -924,22 +936,22 @@ label_D60::
     ld   e, a
     ld   a, [hl]
     cp   e
-    jr   z, label_D91
+    jr   z, .indoorOutdoorEnd
     cp   $0F
-    jr   z, label_D91
+    jr   z, .indoorOutdoorEnd
     cp   $1A
-    jr   nz, label_D8B
+    jr   nz, .label_D8B
     ldh  a, [$FFF6]
     cp   $37
-    jr   nz, label_D91
+    jr   nz, .indoorOutdoorEnd
     ld   a, [hl]
 
-label_D8B::
+.label_D8B
     ldh  [$FF94], a
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
 
-label_D91::
+.indoorOutdoorEnd
     xor  a
     ldh  [$FFD7], a
     ldh  a, [$FFF6]

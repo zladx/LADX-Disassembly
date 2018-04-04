@@ -563,11 +563,13 @@ IncrementMapSlideTransitionStateAndReturn::
     ret                                           ; $7B3D: $C9
 
 MapSlidePrepare2Handler::
-    call label_D1E                                ; $7B3E: $CD $1E $0D
-
+    call LoadRoomSprites                                ; $7B3E: $CD $1E $0D
+    
+    ; If $D6FA == 2…
     ld   a, [$D6FA]                               ; $7B41: $FA $FA $D6
     cp   $02                                      ; $7B44: $FE $02
     jr   nz, .not02                               ; $7B46: $20 $04
+    ; … $FFBB == 2
     ld   a, $02                                   ; $7B48: $3E $02
     ldh  [$FFBB], a                               ; $7B4A: $E0 $BB
 .not02

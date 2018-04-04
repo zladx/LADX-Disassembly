@@ -791,7 +791,7 @@ GameplayWorldSubtype2Handler::
     ei
 
 label_44C9::
-    call label_D1E
+    call LoadRoomSprites
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
     ldh  [hNeedsUpdatingEnnemiesTiles], a

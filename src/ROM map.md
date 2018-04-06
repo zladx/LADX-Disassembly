@@ -25,24 +25,24 @@
 14 Code and text
 15 Code
 16 Code and text
-17 Code and credits text
+17 Credits code and text
 18 Code and data
 19 Code
-1A n/a
-1B Music
+1A Code
+1B Audio code and Music
 1C Map data?
 1D Text
 1E Music
-1F Music
-20 n/a
+1F Audio code and Music
+20 BG and palette-related code
 21 Code and data
 22 Data
 23 Data
-24 Data
+24 GBC-specific code
 25 Data
 26 n/a
 27 Data
-28 Game Boy Printer code?
+28 Photo album and Game Boy Printer code
 29 Graphics: photo pictures
 2A Graphics: photo pictures
 2B Graphics: photo pictures
@@ -63,4 +63,4 @@
 3A Graphics: photo elements
 3B Graphics: photo elements, photo pictures
 3C Graphics and code
-3D n/a
+3D Code

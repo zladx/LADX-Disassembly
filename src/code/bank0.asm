@@ -98,7 +98,7 @@ PlayAudioStep::
     ld   a, $1F
     call SwitchBank
     call $4006
-    ldh  a, [$FFF3]
+    ldh  a, [hSFX]
     and  a
     jr   nz, label_8D6
     ld   a, [$C10B]
@@ -516,7 +516,7 @@ label_B2F::
     ldh  a, [hIsGBC]
     and  a
     ret  z
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ret  nz
     push bc
@@ -750,7 +750,7 @@ label_C7B::
     pop  af
     ret
 
-label_C7D::
+ApplyMapFadeOutTransition::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9A
@@ -759,10 +759,10 @@ label_C7D::
     jr   label_C9E
     ld   a, [$D401]
     cp   $01
-    jr   nz, label_C7D
-    ld   a, [$DBA5]
+    jr   nz, ApplyMapFadeOutTransition
+    ld   a, [wIsIndoor]
     and  a
-    jr   z, label_C7D
+    jr   z, ApplyMapFadeOutTransition
     ld   a, $01
     ldh  [hFFBC], a
 
@@ -771,8 +771,11 @@ label_C9A::
     ldh  [$FFF4], a
 
 label_C9E::
-    ld   a, $03
+    ; Prevent Link from moving during the transition
+    ld   a, LINK_MOTION_MAP_FADE_OUT
     ld   [wLinkMotionState], a
+
+    ; Reset the transition variables
     xor  a
     ld   [wTransitionSequenceCounter], a
     ld   [$C16C], a
@@ -857,52 +860,65 @@ label_D15::
     ld   a, $05
     jp   label_CC7
 
-label_D1E::
+; Load sprites for the next room,
+; either during a map transition or a room transition.
+LoadRoomSprites::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    ld   a, [$DBA5]
+    
+    ; If is indoor…
+    ld   a, [wIsIndoor]
     and  a
-    jr   z, label_D59
+    jr   z, .overworld
+
+    ;
+    ; Indoor
+    ;
+
     ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
     ld   hl, $6EB3
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
-    jr   nz, label_D3C
+    cp   MAP_COLOR_DUNGEON
+    jr   nz, .label_D3C
     ld   hl, $70B3
-    jr   label_D45
+    jr   .label_D45
 
-label_D3C::
+.label_D3C
     cp   $1A
-    jr   nc, label_D45
+    jr   nc, .label_D45
     cp   $06
-    jr   c, label_D45
+    jr   c, .label_D45
     inc  h
 
-label_D45::
+.label_D45
     add  hl, de
     ldh  a, [$FF94]
     ld   e, a
     ld   a, [hl]
     cp   e
-    jr   z, label_D57
+    jr   z, .label_D57
     ldh  [$FF94], a
     cp   $FF
-    jr   z, label_D57
+    jr   z, .label_D57
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
 
-label_D57::
-    jr   label_D91
+.label_D57::
+    jr   .indoorOutdoorEnd
 
-label_D59::
+.overworld
+    ;
+    ; Overworld
+    ;
+
     ldh  a, [$FFF6]
     cp   $07
-    jr   nz, label_D60
+    jr   nz, .label_D60
     inc  a
 
-label_D60::
+.label_D60
     ld   d, a
     srl  a
     srl  a
@@ -920,34 +936,34 @@ label_D60::
     ld   e, a
     ld   a, [hl]
     cp   e
-    jr   z, label_D91
+    jr   z, .indoorOutdoorEnd
     cp   $0F
-    jr   z, label_D91
+    jr   z, .indoorOutdoorEnd
     cp   $1A
-    jr   nz, label_D8B
+    jr   nz, .label_D8B
     ldh  a, [$FFF6]
     cp   $37
-    jr   nz, label_D91
+    jr   nz, .indoorOutdoorEnd
     ld   a, [hl]
 
-label_D8B::
+.label_D8B
     ldh  [$FF94], a
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
 
-label_D91::
+.indoorOutdoorEnd
     xor  a
     ldh  [$FFD7], a
     ldh  a, [$FFF6]
     ld   e, a
     ld   d, $00
     ld   hl, $70D3
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     ldh  a, [hMapId]
     cp   $1A
     jr   nc, label_DAB
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   c, label_DAB
     inc  d
 
@@ -991,7 +1007,7 @@ label_DDB::
     sla  e
     rl   d
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_DF1
     ld   a, $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a
@@ -999,7 +1015,7 @@ label_DDB::
 
 label_DF1::
     ld   hl, $73F3
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_DFD
     ld   hl, $763B
@@ -1067,7 +1083,7 @@ presentSaveScreenIfNeeded::
     ld   a, [wDialogState]
     ld   hl, $C167
     or   [hl]
-    ld   hl, wMapSlideTransitionState
+    ld   hl, wRoomTransitionState
     or   [hl]
     jr   nz, jumpToGameplayHandler
 
@@ -1221,10 +1237,10 @@ PhotoPictureHandler::
 WorldDefaultHandler::
     ld   a, $02
     call SwitchBank
-    ; If dialog is open, jump
+    ; If a dialog is already open, continue to the normal flow
     ld   a, [wDialogState]
     and  a
-    jr   nz, .hasDialogOpen
+    jr   nz, .normalFlow
 
     ; If [$FFB4] != 0…
     ld   hl, $FFB4
@@ -1246,22 +1262,27 @@ WorldDefaultHandler::
     call ReloadSavedBank
 .noDungeonName
 
+    ; If still no dialog is open…
     ld   a, [wDialogState]
     and  a
-    jr   nz, .hasDialogOpen
+    jr   nz, .normalFlow
 
-    ; If $C1BC > 0…
-    ld   a, [$C1BC]
+    ; … and a countdown to load the previous map is > 0…
+    ld   a, [wLoadPreviousMapCountdown]
     and  a
-    jr   z, .hasDialogOpen
+    jr   z, .normalFlow
+
+    ; … decrement the counter
     ld   hl, $FFA1
     ld   [hl], $02
     dec  a
-    ld   [$C1BC], a
-    jr   nz, .hasDialogOpen
-    jp   label_C7D
+    ld   [wLoadPreviousMapCountdown], a
 
-.hasDialogOpen
+    ; If the countdown reached zero, apply the transition
+    jr   nz, .normalFlow
+    jp   ApplyMapFadeOutTransition
+
+.normalFlow
     
     ; If $DBC7 > 0, decrement it
     ld   hl, $DBC7
@@ -1271,36 +1292,47 @@ WorldDefaultHandler::
     dec  [hl]
 .DBC7End
 
-    ; 
+    ; Copy Link's position into Link's final position
     ldh  a, [hLinkPositionX]
     ldh  [hLinkFinalPositionX], a
     ldh  a, [hLinkPositionY]
     ldh  [hLinkFinalPositionY], a
+
     ld   hl, $FFA2
     sub  a, [hl]
     ldh  [$FFB3], a
     call func_002_60E0
+
     xor  a
     ld   [$C140], a
     ld   [$C13C], a
     ld   [$C13B], a
+
     ld   hl, $C11D
     res  7, [hl]
+
     ld   hl, $C11E
     res  7, [hl]
-    call $593B
-    callsw ApplyMapTransition
-    call label_1033
+
+    call label_002_593B
+
+    callsw ApplyRoomTransition
+
+    call ApplyGotItem
+
     ld   a, [$C15C]
     ld   [$C3CF], a
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4B1F
+
     ld   a, $19
     call SwitchBank
     call $7A9A
+    
     call label_398D
     callsw label_002_5487
+    
     ld   hl, wRequestDestination
     ldh  a, [hFrameCounter]
     and  $03
@@ -1350,23 +1382,27 @@ label_102E::
     ld   [$990E], sp
     jr   z, label_101F
 
-label_1033::
+ApplyGotItem::
     ldh  a, [hLinkPositionY]
     ld   hl, $FFA2
     sub  a, [hl]
     ld   [$C145], a
-    ld   a, [$C1A9]
+    ld   a, [wDialogGotItem]
     and  a
-    jr   z, label_107F
+    jr   z, InitGotItemSequence
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_106D
-    ld   hl, $C1AA
+    jr   nz, .dispatchItemType
+
+    ; Did the "got item" dialog countdown reached the target value yet?
+    ld   hl, wDialogGotItemCountdown
     dec  [hl]
     ld   a, [hl]
     cp   $02
-    jr   nz, label_1061
-    ld   a, [$C1A9]
+    jr   nz, .countdownNotFinished
+
+    ; Dialog countdown reached the target value: open the "Got item" dialog
+    ld   a, [wDialogGotItem]
     ld   e, a
     ld   d, $00
     ld   hl, $102D
@@ -1375,26 +1411,26 @@ label_1033::
     call OpenDialog
     ld   a, $01
 
-label_1061::
+.countdownNotFinished
     and  a
-    jr   nz, label_106D
+    jr   nz, .dispatchItemType
     xor  a
-    ld   [$C1A9], a
+    ld   [wDialogGotItem], a
     ld   [$C1A8], a
-    jr   label_107F
+    jr   InitGotItemSequence
 
-label_106D::
-    ld   a, [$C1A9]
+.dispatchItemType
+    ld   a, [wDialogGotItem]
     ld   [$C1A8], a
     dec  a
     JP_TABLE
-._00 dw label_002_51BC
-._01 dw label_002_51C7
-._02 dw label_002_51C7
-._03 dw label_002_51C7
-._04 dw label_002_51BC
+._00 dw HandleGotItemA
+._01 dw HandleGotItemB
+._02 dw HandleGotItemB
+._03 dw HandleGotItemB
+._04 dw HandleGotItemA
 
-label_107F::
+InitGotItemSequence::
     ldh  a, [hPressedButtonsMask]
     and  $B0
     jr   nz, label_10DB
@@ -1418,7 +1454,7 @@ label_107F::
     ld   a, [wDialogState]
     ld   hl, $C167
     or   [hl]
-    ld   hl, wMapSlideTransitionState
+    ld   hl, wRoomTransitionState
     or   [hl]
     jr   nz, label_10DB
     ld   a, [$D464]
@@ -1459,8 +1495,8 @@ label_10E7::
 label_10EF::
     ld   a, [wDialogState]
     and  a
-    jp   nz, label_1794
-    ld   a, [wMapSlideTransitionState]
+    jp   nz, ApplyLinkMotionState
+    ld   a, [wRoomTransitionState]
     and  a
     jp   nz, label_114F
     ld   a, [wLinkMotionState]
@@ -1486,7 +1522,7 @@ label_10EF::
     ld   [$D464], a
     call label_27F2
     ld   a, $08
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
 
 .handleLinkMotion
     ld   a, [wLinkMotionState]
@@ -1505,7 +1541,7 @@ label_10EF::
 ._0F dw $50A3       ; LINK_MOTION_UNKNOWN
 
 label_114F::
-    call label_1794
+    call ApplyLinkMotionState
     jp   DrawLinkSpriteAndReturn
 
 LinkMotionTeleportUpHandler::
@@ -1995,9 +2031,9 @@ UseMagicPowder::
     and  a
     ret  nz
     ld   a, $02
-    ld   [$C1A9], a
+    ld   [wDialogGotItem], a
     ld   a, $2A
-    ld   [$C1AA], a
+    ld   [wDialogGotItemCountdown], a
     ret
 
 label_14A7::
@@ -2045,11 +2081,11 @@ UseRocksFeather::
     ld   a, $E8
 
 label_14F8::
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     xor  a
     ldh  [$FFA3], a
     call label_21A8
-    jpsw func_002_6C75
+    jpsw CheckPositionForMapTransition
 
 label_1508::
     ld   a, $20
@@ -2063,11 +2099,11 @@ label_1508::
     ld   hl, data_14C3
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     ld   hl, data_14C7
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
 
 label_1523::
     ret
@@ -2103,7 +2139,7 @@ label_1535::
     and  a
     jr   nz, label_1562
     call label_CAF
-    call label_178E
+    call ClearLinkPositionIncrement
 
 label_1562::
     ld   a, [wProjectileCount]
@@ -2202,7 +2238,7 @@ label_15CF::
     ld   a, [hl]
     ldh  [$FFAF], a
     ld   e, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     call label_2A26
     pop  de
@@ -2228,7 +2264,7 @@ label_1616::
     ld   bc, $C2CA
     ld   d, $E
     nop
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ldh  a, [$FFAF]
     jr   z, label_1629
@@ -2412,11 +2448,11 @@ label_1713::
     ld   hl, data_16FD
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     ld   hl, data_1701
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     xor  a
     ld   [$C1AC], a
     ret
@@ -2452,13 +2488,14 @@ label_1781::
     ld   a, $0C
     jp   label_CC7
 
-label_178E::
+ClearLinkPositionIncrement::
     xor  a
-    ldh  [$FF9A], a
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionXIncrement], a
+    ldh  [hLinkPositionYIncrement], a
     ret
 
-label_1794::
+; Animate Link motion?
+ApplyLinkMotionState::
     call label_753A
     ld   a, [wLinkMotionState]
     cp   $01
@@ -2507,7 +2544,7 @@ label_17DB::
     cp   $0C
     jr   nz, label_1814
     ld   hl, wDialogState
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     or   [hl]
     jr   nz, label_1814
     call label_157C
@@ -2544,7 +2581,7 @@ LinkMotionMapFadeOutHandler::
     jr   z, label_1847
     xor  a
     ld   [$C3C9], a
-    jp   label_C7D
+    jp   ApplyMapFadeOutTransition
 
 label_1847::
     call label_1A22
@@ -2598,7 +2635,7 @@ label_1898::
     ld   [$C3CB], a
     ldh  [hFFF9], a
     ld   hl, $D401
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ldh  [$FFE6], a
     and  a
     jr   nz, label_18DF
@@ -2635,19 +2672,19 @@ label_18D2::
 label_18DF::
     push hl
     ld   a, [hli]
-    ld   [$DBA5], a
+    ld   [wIsIndoor], a
     cp   $02
     jr   nz, label_18F2
     ldh  [hFFF9], a
     dec  a
-    ld   [$DBA5], a
+    ld   [wIsIndoor], a
     ld   a, $01
     ldh  [$FF9C], a
 
 label_18F2::
     ld   a, [hli]
     ldh  [hMapId], a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ld   a, [hli]
     ldh  [$FFF6], a
@@ -2677,7 +2714,7 @@ label_1909::
     ld   hl, $4220
     add  hl, de
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_192E
     ld   hl, $44E0
     jr   label_193C
@@ -2704,14 +2741,14 @@ label_193E::
 
 label_1948::
     ld   a, e
-    ld   [$DBAE], a
+    ld   [wIndoorRoom], a
     ldh  a, [$FFE6]
     and  a
     jr   nz, label_196E
     xor  a
     ld   [wActivePowerUp], a
     ldh  a, [hMapId]
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   nc, label_196E
     callsw IsMapRoomE8
     ld   a, $30
@@ -2725,9 +2762,9 @@ label_196E::
 
 label_196F::
     ld   a, [hli]
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ld   a, [hl]
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     pop  hl
     ldh  a, [hFFF9]
     and  a
@@ -2735,11 +2772,11 @@ label_196F::
     ldh  a, [$FFE4]
     and  a
     jr   nz, label_19D9
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_19C2
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_1993
     ld   hl, $4E3C
     jr   label_19A4
@@ -2762,7 +2799,7 @@ label_19A4::
     call label_19C2
     push de
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_19B7
     ld   a, $3A
     jr   label_19BF
@@ -2793,7 +2830,7 @@ label_19C9::
     ldh  [$FFD7], a
     cp   $05
     jr   nz, label_19C9
-    ld   a, [$DBAE]
+    ld   a, [wIndoorRoom]
     ld   [de], a
 
 label_19D9::
@@ -2813,8 +2850,8 @@ LinkMotionMapFadeInHandler::
     ld   [$D474], a
     ld   a, $30
     ld   [$C180], a
-    ld   a, TRANSITION_SFX_MANBO_OUT
-    ld   [wTransitionSfx], a
+    ld   a, TRANSITION_GFX_MANBO_OUT
+    ld   [wTransitionGfx], a
     ld   a, $04
     ld   [wTransitionSequenceCounter], a
     jr   label_1A06
@@ -3227,7 +3264,7 @@ label_1F69::
     ld   a, [hl]
     ldh  [$FFD7], a
     ld   e, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     call label_2A26
     ldh  [$FFDC], a
@@ -3263,7 +3300,7 @@ label_1FE6::
     jp   nz, label_2098
 
 label_1FF6::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ld   a, e
     jp   nz, label_2098
@@ -3453,7 +3490,7 @@ label_212C::
     jr   z, label_2153
     cp   $20
     jr   z, label_2153
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_214D
     ldh  a, [$FFD7]
@@ -3503,7 +3540,7 @@ label_2183::
     call label_142F
     jr   c, label_21A7
     ld   a, $02
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   [hl], $07
@@ -3532,7 +3569,7 @@ label_21A8::
 
 label_21B6::
     ld   b, $00
-    ld   hl, $FF9A
+    ld   hl, hLinkPositionXIncrement
     add  hl, bc
     ld   a, [hl]
     push af
@@ -3584,10 +3621,17 @@ label_21FB::
     ret
 
 data_2205::
-    db   $10, $10, 1, 1, $3E, 8, $EA, 0, $21, $CD, $34, $22, $C3, $1D, 8
+    db   $10, $10, $01, $01
+
+; Update BG map during room transition
+UpdateSlidingBGMap::
+    ld   a, $08
+    ld   [MBC3SelectBank], a
+    call label_2234
+    jp   ReloadSavedBank
 
 label_2214::
-    ld   a, [$C127]
+    ld   a, [wBGUpdateRegionOriginLow]
     and  $20
     jr   z, label_221D
     inc  hl
@@ -3603,7 +3647,7 @@ label_221D::
     ret
 
 label_2224::
-    ld   a, [$C127]
+    ld   a, [wBGUpdateRegionOriginLow]
     and  $01
     jr   z, label_222C
     inc  hl
@@ -3617,6 +3661,9 @@ label_222C::
     ld   [bc], a
     inc  bc
     ret
+
+; Load some palette data?
+label_2234::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4A76
@@ -3636,7 +3683,7 @@ label_2241::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2262
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_2262
     ld   a, $02
@@ -3650,7 +3697,7 @@ label_2262::
     rl   b
     sla  c
     rl   b
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_2286
     ld   hl, $4000
@@ -3659,7 +3706,7 @@ label_2262::
     jr   z, label_2299
     ld   hl, $43B0
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2291
     ld   hl, $4760
     jr   label_2291
@@ -3681,7 +3728,7 @@ label_2299::
     add  hl, bc
     pop  de
     pop  bc
-    ld   a, [$C125]
+    ld   a, [wRoomTransitionDirection]
     and  $02
     jr   z, label_22D3
     call label_2214
@@ -3738,7 +3785,7 @@ label_22D3::
 
 label_22FE::
     push bc
-    ld   a, [$C125]
+    ld   a, [wRoomTransitionDirection]
     ld   c, a
     ld   b, $00
     ld   hl, data_2205
@@ -3825,7 +3872,7 @@ GetRandomByte::
 
 ReadJoypadState::
     ; Ignore joypad during map transitions
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     and  a
     jr   nz, ReadJoypadState_return
 
@@ -4005,7 +4052,13 @@ include "code/home/copy_data.asm"
 
 include "src/code/home/clear_memory.asm"
 
-label_29ED::
+; Retrieve the status of chests in the given room
+; Inputs:
+;   d    is room indoor
+;   e    room id
+; Output:
+;   a    status of chests (eg. $19, $1A, etc.)
+GetChestsStatusForRoom::
     ld   a, $14
     ld   [MBC3SelectBank], a
     call $5884
@@ -4030,7 +4083,7 @@ label_2A12::
     ld   [MBC3SelectBank], a
     ld   hl, $4AD4
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2A23
     ld   hl, $4BD4
 
@@ -4312,7 +4365,7 @@ label_2C5D::
     push de
     ld   hl, $45A9
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2C8A
     ld   hl, $45C9
 
@@ -4342,7 +4395,7 @@ label_2C8A::
     ld   a, $12
     call SwitchAdjustedBank
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2CD1
     ld   hl, $6100
     ld   a, $35
@@ -4356,9 +4409,9 @@ label_2CD1::
     ld   [MBC3SelectBank], a
     ld   hl, $7D00
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_2CF5
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   c, label_2CF5
     ld   a, $0C
     call SwitchAdjustedBank
@@ -4376,13 +4429,13 @@ label_2CFE::
     call label_1E2B
 
 label_2D07::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_2D17
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_2D21
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   c, label_2D21
 
 label_2D17::
@@ -4551,7 +4604,7 @@ label_2E70::
 
 label_2E73::
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2E84
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -4569,7 +4622,7 @@ label_2E85::
     add  hl, de
     and  a
     jr   nz, label_2ED3
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_2EB0
     ldh  a, [hFFF9]
@@ -4578,7 +4631,7 @@ label_2E85::
     ldh  a, [hMapId]
     cp   MAP_KANALET
     jr   z, label_2ED3
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   c, label_2ED3
     ldh  a, [$FFF6]
     cp   $FD
@@ -4653,7 +4706,7 @@ label_2F0A::
 
 label_2F12::
     ld   de, $9000
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jp   z, label_2FAD
     ld   a, $0D
@@ -4664,9 +4717,9 @@ label_2F12::
     jr   z, label_2F4B
     ld   hl, $7000
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   z, label_2F41
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   nc, label_2F3B
 
 label_2F36::
@@ -4686,7 +4739,7 @@ label_2F41::
 
 label_2F4B::
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_2F57
     ldh  a, [$FFF6]
     cp   $12
@@ -4770,7 +4823,7 @@ label_2FCD::
     rl   b
     ld   hl, $6749
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_2FEC
     cp   MAP_HOUSE
     jr   nz, label_2FF1
@@ -4783,7 +4836,7 @@ label_2FEC::
     jr   label_2FFA
 
 label_2FF1::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_2FFA
     ld   hl, $4000
@@ -4829,12 +4882,12 @@ label_3019::
     ld   [MBC3SelectBank], a
     call $6576
     call label_3905
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_304C
     ld   hl, $43B0
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_3047
     cp   MAP_HOUSE
     jr   nz, label_304F
@@ -4913,7 +4966,7 @@ label_30A9::
     jr   label_30C4
 
 label_30B6::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_30C1
     call label_3018
@@ -4958,11 +5011,16 @@ label_30E9::
     ld   [MBC3SelectBank], a
     jp   label_6DEA
 
-label_30F4::
+; Load room blocks and tiles
+LoadRoom::
+    ; Disable all interrupts except VBlank
     ld   a, $01
     ld   [rIE], a
+
+    ; Increment $D47F
     ld   hl, $D47F
     inc  [hl]
+
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4CA3
@@ -4979,7 +5037,7 @@ label_30F4::
 label_3119::
     ld   a, $09
     ld   [MBC3SelectBank], a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_313A
     ld   a, $14
@@ -5002,12 +5060,12 @@ label_313A::
     ld   e, a
     ld   d, $00
     ld   hl, wMinimapTiles
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_3161
     ld   hl, $D900
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_3156
     ld   hl, $DDE0
     jr   label_3161
@@ -5035,14 +5093,14 @@ label_316B::
     ld   b, $00
     sla  c
     rl   b
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_31BF
     ld   a, $0A
     ld   [MBC3SelectBank], a
     ldh  [$FFE8], a
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_318F
     ld   hl, $7B77
     jp   label_3224
@@ -5064,7 +5122,7 @@ label_31A6::
     ldh  a, [hMapId]
     cp   $1A
     jr   nc, label_3224
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   c, label_3224
     ld   a, $0B
     ld   [MBC3SelectBank], a
@@ -5136,7 +5194,7 @@ label_3224::
     ld   c, a
     ld   a, [hl]
     ld   b, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_323A
 
@@ -5153,7 +5211,7 @@ label_323A::
     jr   z, endOfRoom
     ldh  [hAnimatedTilesGroup], a
     inc  bc
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_3258
     ld   a, [bc]
@@ -5236,7 +5294,7 @@ label_32B8::
     inc  bc
     ldh  a, [hFFF8]
     ld   e, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_32D9
     ld   a, [bc] ; tile addres
@@ -5595,7 +5653,7 @@ label_34AE::
 
 label_34B6::
     ldh  a, [hMapId]
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     ldh  a, [$FFE0]
     jr   c, label_34C2
     cp   $A9
@@ -5905,7 +5963,7 @@ label_36C4::
     ld   e, a
     ld   d, $00
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_36D8
     ld   hl, $DDE0
     jr   label_36E1
@@ -6062,11 +6120,11 @@ label_37FE::
     sla  c
     rl   b
     ld   hl, $4000
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_3868
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   nz, label_3850
     ld   a, [$DB6F]
     ld   hl, $FFF6
@@ -6092,7 +6150,7 @@ label_37FE::
 label_3850::
     ld   hl, $4200
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_385E
     ld   hl, $4600
     jr   label_3868
@@ -6215,7 +6273,7 @@ label_38EA::
     ret
 
 label_3905::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_390F
     ld   a, $1A
@@ -6298,34 +6356,39 @@ data_3989::
     db   0, 8, $10, $18
 
 label_398D::
-    ld   hl, $C5A7
+    ; Play the Boss Agony audio effect if needed
+    ld   hl, wBossAgonySFXCountdown
     ld   a, [hl]
     and  a
-    jr   z, label_399B
+    jr   z, .bossAgonyEnd
     dec  [hl]
-    jr   nz, label_399B
-    ld   a, $10
-    ldh  [$FFF3], a
+    jr   nz, .bossAgonyEnd
+    ld   a, SFX_BOSS_AGONY
+    ldh  [hSFX], a
+.bossAgonyEnd
 
-label_399B::
+    ; If no dialog is open… 
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_39AE
+    jr   nz, .C111End
+    ; … decrement $C111
     ld   a, [$C111]
     ld   [$C1A8], a
     and  a
-    jr   z, label_39AE
+    jr   z, .C111End
     dec  a
     ld   [$C111], a
+.C111End
 
-label_39AE::
+    ; If Link is passing out, return
     ld   a, [wLinkMotionState]
-    cp   $07
+    cp   LINK_MOTION_PASS_OUT
     ret  z
+    
     xor  a
     ld   [$C3C1], a
     ldh  a, [hMapId]
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     ldh  a, [hFrameCounter]
     jr   c, label_39C1
     xor  a
@@ -6900,7 +6963,7 @@ label_3D52::
 
 label_3D57::
     push hl
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     and  a
     jr   z, label_3D7D
     ldh  a, [$FFEE]
@@ -7022,7 +7085,7 @@ label_3E0E::
 label_3E19::
     ld   a, [wCurrentBank]
     push af
-    callsw func_002_6C75
+    callsw CheckPositionForMapTransition
     pop  af
     jp   SwitchBank
 
@@ -7148,7 +7211,7 @@ data_3EDF::
 
 label_3EE8::
     ld   hl, wInventoryAppearing
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     or   [hl]
     ret  nz
     ld   a, [$C165]
@@ -7197,9 +7260,9 @@ label_3F2E::
     and  $04
     ret  nz
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     ret  z
-    cp   MAP_CATFISHS_MAW
+    cp   MAP_FACE_SHRINE
     ret  z
     ld   e, a
     ld   d, b

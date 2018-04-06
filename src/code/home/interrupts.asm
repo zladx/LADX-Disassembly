@@ -465,7 +465,7 @@ label_5BC::
     jp   z, $007A
     cp   $08
     jp   nc, label_7D3
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jp   z, label_656
     ldh  a, [hNeedsUpdatingBGTiles]
@@ -495,7 +495,7 @@ label_5BC::
     ld   d, h
     ld   hl, $5000
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_62F
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -580,7 +580,7 @@ label_69E::
     and  a
     jr   z, label_6CB
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_6CB
     ld   a, $20
     ld   [MBC3SelectBank], a

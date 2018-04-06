@@ -60,8 +60,8 @@ SelectMusicTrackAfterTransition::
     xor  a                                        ; $4163: $AF
     ldh  [hNextMusicTrack], a                     ; $4164: $E0 $B1
 
-    ; If wActiveRoom == 0, skip further code and load the soundtrack
-    ld   a, [wActiveRoom]                         ; $4166: $FA $A5 $DB
+    ; If wIsIndoor == 0, skip further code and load the soundtrack
+    ld   a, [wIsIndoor]                         ; $4166: $FA $A5 $DB
     and  a                                        ; $4169: $A7
     jr   z, .clearEventFlagsAndLoadSoundtrack     ; $416A: $28 $36
 
@@ -73,7 +73,7 @@ SelectMusicTrackAfterTransition::
 
     ; Set a depending on the world map
     ldh  a, [hMapId]                              ; $4174: $F0 $F7
-    cp   MAP_SPECIAL                              ; $4176: $FE $FF
+    cp   MAP_COLOR_DUNGEON                              ; $4176: $FE $FF
     jr   nz, .mapNotFF                            ; $4178: $20 $04
 
     ld   a, $09                                   ; $417A: $3E $09
@@ -123,8 +123,7 @@ SelectMusicTrackAfterTransition::
     ; Set overworld soundtrack
     ld   e, a                                     ; $41A7: $5F
     ld   d, $00                                   ; $41A8: $16 $00
-    ; $FFB0 = soundtrack id
-    ldh  [$FFB0], a                               ; $41AA: $E0 $B0
+    ldh  [hMusicTrack], a                               ; $41AA: $E0 $B0
     call SetWorldMusicTrack                       ; $41AC: $CD $C3 $27
 
     ; If soundtrack id <= $24…

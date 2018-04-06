@@ -50,7 +50,7 @@ ExpandCopyRequestArgs
 ; Inputs:
 ;   de: data copy request struct (see wRequest)
 ExecuteBackgroundCopyRequest::
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     and  a
     jr   nz, .duringMapTransition
 

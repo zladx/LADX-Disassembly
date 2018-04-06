@@ -94,13 +94,19 @@ ENTITY_INTRO_MARIN         equ $06
 ENTITY_INTRO_INERT_LINK    equ $07
 ENTITY_INTRO_SPARKLE       equ $08
 
-; Values for wMapSlideTransitionState
-MAP_SLIDE_NONE             equ $00
-MAP_SLIDE_PREPARE_1        equ $01
-MAP_SLIDE_PREPARE_2        equ $02
-MAP_SLIDE_PREPARE_3        equ $03
-MAP_SLIDE_FIRST_HALF       equ $04
-MAP_SLIDE_SECOND_HALF      equ $05
+; Values for wRoomTransitionState
+ROOM_TRANSITION_NONE             equ $00
+ROOM_TRANSITION_PREPARE_1        equ $01
+ROOM_TRANSITION_PREPARE_2        equ $02
+ROOM_TRANSITION_PREPARE_3        equ $03
+ROOM_TRANSITION_FIRST_HALF       equ $04
+ROOM_TRANSITION_SECOND_HALF      equ $05
+
+; Values for wRoomTransitionDirection
+ROOM_TRANSITION_DIR_RIGHT  equ $00
+ROOM_TRANSITION_DIR_LEFT   equ $01
+ROOM_TRANSITION_DIR_TOP    equ $02
+ROOM_TRANSITION_DIR_BOTTOM equ $03
 
 ; Values for wDialogState
 DIALOG_CLOSED              equ $00
@@ -124,6 +130,13 @@ DIALOG_CLOSING_2           equ $0F
 DIALOG_BG_TILE_DARK        equ $7E
 DIALOG_BG_TILE_LIGHT       equ $7F
 
+; Values for wDialogGotItem
+DIALOG_GOT_PIECE_OF_POWER equ $01
+DIALOG_GOT_TOADSTOOL      equ $02
+DIALOG_GOT_MAGIC_POWDER   equ $03
+DIALOG_GOT_ROD            equ $04
+DIALOG_GOT_GUARDIAN_ACORN equ $05
+
 ; Values for wLinkMotionState
 LINK_MOTION_INTERACTIVE    equ $00
 LINK_MOTION_FALLING_UP     equ $01
@@ -137,13 +150,10 @@ LINK_MOTION_RECOVER        equ $08
 LINK_MOTION_TELEPORT       equ $09
 LINK_MOTION_UNKNOWN        equ $0F
 
-; Values for wTransitionSfx
-TRANSITION_SFX_NONE         equ $00 ; no transition
-TRANSITION_SFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine
-TRANSITION_SFX_MANBO_IN     equ $02 ; wavy transition when departing using Manbo's Mambo
-TRANSITION_SFX_MANBO_OUT    equ $03 ; wavy transition when arriving using Manbo's Mambo
-TRANSITION_SFX_FLOATING     equ $FE ; slow up-and-down motion
-TRANSITION_SFX_WIND_FISH    equ $FF ; wavy transition when the Wind Fish appears and disappears
-
-SFX_TYPEWRITER      EQU $0f
-SFX_HOOT            EQU $19
+; Values for wTransitionGfx
+TRANSITION_GFX_NONE         equ $00 ; no transition
+TRANSITION_GFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine
+TRANSITION_GFX_MANBO_IN     equ $02 ; wavy transition when departing using Manbo's Mambo
+TRANSITION_GFX_MANBO_OUT    equ $03 ; wavy transition when arriving using Manbo's Mambo
+TRANSITION_GFX_FLOATING     equ $FE ; slow up-and-down motion
+TRANSITION_GFX_WIND_FISH    equ $FF ; wavy transition when the Wind Fish appears and disappears

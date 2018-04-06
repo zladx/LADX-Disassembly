@@ -125,7 +125,7 @@ AnimateTiles::
 .doWorldAnimations
     ; If there is a pending request or a map transition,
     ; only animate Link's sprite. 
-    ld   hl, wMapSlideTransitionState
+    ld   hl, wRoomTransitionState
     ld   a, [wRequest]
     or   [hl]
     jp   nz, DrawLinkSpriteAndReturn
@@ -279,9 +279,9 @@ LoadAnimatedTilesFrame::
     ld   bc, $0040
     call CopyData
 
-    ; Do special case for MAP_SPECIAL
+    ; Do special case for MAP_COLOR_DUNGEON
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, .endMapFF
 
     ld   a, $20
@@ -328,7 +328,7 @@ AnimateLavaTilesGroup::
 AnimateDungeon2TilesGroup::
     ld   hl, $DCC0
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_1CB8
     ld   de, $8400
     jp   LoadAnimatedTilesFrame.de

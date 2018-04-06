@@ -139,7 +139,7 @@ FileSaveInteractive::
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
-    ld   a, [wActiveRoom]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, .done
     xor  a
@@ -158,9 +158,9 @@ label_40D6::
     ld   [wBGPalette], a
     ld   [rBGP], a
     ldh  a, [hLinkPositionX]
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ldh  a, [hLinkPositionY]
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     call label_52A4
     ld   a, $80
     ld   [$DBC7], a
@@ -516,9 +516,9 @@ label_42FB::
     ld   [$D6FB], a
     ld   [$D475], a
     ldh  a, [hLinkPositionX]
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ldh  a, [hLinkPositionY]
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     call label_52A4
     ld   a, $01
     call label_8FA
@@ -609,11 +609,11 @@ GameplayWorldSubtype0Handler::
     ret
 
 label_43A7::
-    ld   a, [wActiveRoom]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_4414
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_43B8
     ld   hl, $DDDA
     jr   label_43C5
@@ -634,11 +634,11 @@ label_43C5::
 
 label_43CA::
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_43DB
-    cp   MAP_TURTLE_ROCK
+    cp   MAP_WINDFISHS_EGG
     jr   z, label_43D8
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   c, label_43DB
 
 label_43D8::
@@ -654,7 +654,7 @@ label_43DC::
     dec  c
     jr   nz, label_43CA
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_43E9
     ld   a, $0F
 
@@ -666,13 +666,13 @@ label_43E9::
     ld   a, [hl]
     ld   [$DBB0], a
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   z, label_440B
-    cp   MAP_TURTLE_ROCK
+    cp   MAP_WINDFISHS_EGG
     jr   z, label_4425
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     jr   nc, label_4425
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   nz, label_440B
     ldh  a, [hFFF9]
     and  a
@@ -704,12 +704,12 @@ GameplayWorldSubtype1Handler::
     xor  a
     ld   [wLinkMotionState], a
     call IncrementGameplaySubtype
-    ld   a, [$DB9D]
+    ld   a, [wMapEntrancePositionX]
     ldh  [hLinkPositionX], a
-    ld   [$DBB1], a
-    ld   a, [$DB9E]
+    ld   [wLinkMapEntryPositionX], a
+    ld   a, [wMapEntrancePositionY]
     ldh  [hLinkPositionY], a
-    ld   [$DBB2], a
+    ld   [wLinkMapEntryPositionY], a
     ld   a, [$DBC8]
     ldh  [$FFA2], a
     and  a
@@ -719,18 +719,18 @@ GameplayWorldSubtype1Handler::
 
 label_4452::
     ld   a, $04
-    ld   [$C125], a
-    call label_30F4
+    ld   [wRoomTransitionDirection], a
+    call LoadRoom
     call label_37FE
     call label_5FB3
     ld   a, $FF
     ldh  [hAnimatedTilesFrameCount], a
-    ld   a, [wActiveRoom]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_44A6
     ld   d, a
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_4475
     ld   d, $00
     jr   label_447E
@@ -745,7 +745,7 @@ label_4475::
 label_447E::
     ldh  a, [$FFF6]
     ld   e, a
-    call label_29ED
+    call GetChestsStatusForRoom
     cp   $1A
     jr   z, label_4495
     cp   $19
@@ -763,10 +763,10 @@ label_4495::
     and  $10
     jr   nz, label_44A6
     ld   a, $0C
-    ld   [$D462], a
+    ld   [wCompassSfxCountdown], a
 
 label_44A6::
-    ld   a, [wActiveRoom]
+    ld   a, [wIsIndoor]
     and  a
     ld   a, $06
     jr   nz, label_44B0
@@ -791,7 +791,7 @@ GameplayWorldSubtype2Handler::
     ei
 
 label_44C9::
-    call label_D1E
+    call LoadRoomSprites
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
     ldh  [hNeedsUpdatingEnnemiesTiles], a
@@ -3021,23 +3021,23 @@ label_5353::
     ld   a, [$DB62]
     and  a
     jr   z, label_5394
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ld   a, [$DB63]
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     ld   a, [$DB61]
     ldh  [$FFF6], a
     ld   [$DB9C], a
     ld   a, [$DB60]
     ldh  [hMapId], a
     ld   a, [$DB64]
-    ld   [$DBAE], a
+    ld   [wIndoorRoom], a
     xor  a
     ldh  [hFFF9], a
     ld   a, $03
     ldh  [$FF9E], a
     ld   a, [$DB5F]
     and  $01
-    ld   [wActiveRoom], a
+    ld   [wIsIndoor], a
     jr   z, label_538E
     ld   a, $04
     ldh  [hLinkAnimationState], a
@@ -3049,6 +3049,7 @@ label_538E::
     ld   [wBGMapToLoad], a
     ret
 
+; Write default save?
 label_5394::
     ld   a, $30
     ld   [wMaxArrows], a
@@ -3061,13 +3062,13 @@ label_5394::
     ldh  [$FFF6], a
     ld   [$DB54], a
     ld   a, $01
-    ld   [wActiveRoom], a
+    ld   [wIsIndoor], a
     ld   a, MAP_HOUSE
     ldh  [hMapId], a
     ld   a, $50
-    ld   [$DB9D], a
+    ld   [wMapEntrancePositionX], a
     ld   a, $60
-    ld   [$DB9E], a
+    ld   [wMapEntrancePositionY], a
     xor  a
     ldh  [hLinkAnimationState], a
     ld   a, $03
@@ -3807,7 +3808,7 @@ label_57B7::
     jr   nz, label_57FA
     ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
-    call label_C7D
+    call ApplyMapFadeOutTransition
     ld   a, $00
     ld   [$D401], a
     ld   [$D402], a
@@ -3904,7 +3905,7 @@ label_5854::
     ldh  [hFFBC], a
     ld   a, $02
     ld   [wGameplaySubtype], a
-    ld   a, [wActiveRoom]
+    ld   a, [wIsIndoor]
     and  a
     ld   a, $06
     jr   nz, label_5885
@@ -3914,7 +3915,7 @@ label_5885::
     ld   [wTileMapToLoad], a
 
 label_5888::
-    ld   hl, wMapSlideTransitionState
+    ld   hl, wRoomTransitionState
     ld   e, $00
 
 label_588D::
@@ -4635,11 +4636,11 @@ label_5E3A::
 
 label_5E67::
     push bc
-    ld   a, [wActiveRoom]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_5E95
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_5E79
     ld   hl, $DDDA
     jr   label_5E8A
@@ -4705,7 +4706,7 @@ label_5EA6::
     inc  a
     ldh  [$FFE4], a
     push bc
-    ld   a, [$C125]
+    ld   a, [wRoomTransitionDirection]
     ld   c, a
     ld   b, $00
     ld   hl, label_5E97
@@ -4887,7 +4888,7 @@ label_5FAB::
     ret
 
 label_5FB3::
-    ld   a, [wActiveRoom]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_5FD3
     ldh  a, [hFFF9]
@@ -4900,7 +4901,7 @@ label_5FB3::
     ret  z
     cp   MAP_DREAM_SHRINE
     ret  z
-    cp   MAP_CAVE_A
+    cp   MAP_CAVE_B
     ret  c
     ldh  a, [$FFF6]
     cp   $FD
@@ -4956,7 +4957,7 @@ label_6014::
     jr   z, label_6043
     cp   $02
     jr   nz, label_607F
-    ld   a, [wActiveRoom]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_607F
     ldh  a, [$FFF6]
@@ -5075,7 +5076,7 @@ label_609C::
     cp   $A4
     jr   nz, label_60F7
     ldh  a, [hMapId]
-    cp   MAP_CAVE_B
+    cp   MAP_CAVE_C
     jr   nz, label_60F7
     ld   a, $08
     ldh  [$FFF2], a
@@ -6060,7 +6061,7 @@ label_6829::
     jr   nz, label_6855
     call label_5888
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   z, label_6849
     ld   a, $03
     ldh  [hWindowYUnused], a
@@ -6078,7 +6079,7 @@ label_6855::
     ret
     ld   e, $21
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   z, label_6868
     ldh  a, [$FFF6]
     cp   $DD
@@ -6094,7 +6095,7 @@ label_6868::
     jp   IncrementGameplaySubtypeAndReturn
     ld   e, $24
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   z, label_6885
     ldh  a, [$FFF6]
     cp   $DD
@@ -6134,7 +6135,7 @@ label_689E::
 label_68BF::
     ret
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     jr   nz, label_68CF
     call label_6A7C
     ld   a, $07
@@ -6333,7 +6334,7 @@ label_6A76::
 
 label_6A7C::
     ldh  a, [hMapId]
-    cp   MAP_FACE_SHRINE
+    cp   MAP_EAGLES_TOWER
     ret  nz
     xor  a
     ldh  [$FFF1], a
@@ -6795,11 +6796,11 @@ label_6DEA::
     ld   a, [ROM_DebugTool2]
     and  a
     ret  nz
-    ld   a, [wActiveRoom]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_6E18
     ldh  a, [hMapId]
-    cp   MAP_SPECIAL
+    cp   MAP_COLOR_DUNGEON
     jr   nz, label_6DFF
     ld   a, $0F
     jr   label_6E03

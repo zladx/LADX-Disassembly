@@ -38,9 +38,17 @@ hLinkPositionX:: ; FF98
 hLinkPositionY:: ; FF99
  ds 1
 
+hLinkPositionXIncrement:: ; FF9A
+ ; Increment applied to hLinkPositionX at the end of the frame
+ ds 1
+
+hLinkPositionYIncrement:: ; FF9B
+ ; Increment applied to hLinkPositionY at the end of the frame
+ ds 1
+
 ; Unlabeled
-hFF9A:: ; hFF9A
-  ds 3
+hFF9C:: ; hFF9C
+ ds 1
 
 hLinkAnimationState:: ; FF9D
  ds 1
@@ -96,9 +104,16 @@ hWindowXUnused:: ; FFAA
 
 ; Unlabeled
 hFFAB:: ; hFFAB
-  ds 6
+  ds 4
 
-; Next music to be played after map slide transition
+; Related to ennemies IA state?
+hFFAF:: ; FFAF
+  ds 1
+
+hMusicTrack:: ; FFB0
+  ds 1
+
+; Next music to be played after room transition
 hNextMusicTrack:: ; hFFB1
   ds 1
 
@@ -158,7 +173,8 @@ hFFE9:: ; FFE9
   ds $A
 
 hSFX:: ; FFF3
-  ; plays sfx immediately
+  ; Plays audio effect immediately
+  ; See SFX_* constants for possible values
   ds 1
 
 hFFF4: ds 1
@@ -169,7 +185,7 @@ hMapRoom:: ; FFF6
   ds 1
 
 hMapId:: ; FFF7
-  ; Id of the current world map
+  ; Id of the current indoor world map
   ; See MAP_* constants for values
   ds 1
 

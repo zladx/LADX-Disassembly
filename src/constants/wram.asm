@@ -28,10 +28,10 @@ wC107: ds 1
 wNameIndex:: ds 1
 
 wC109: ds 1
-wC10a: ds 1
-wC10b: ds 1
-wC10c: ds 1
-wC10d: ds 1
+wC10A: ds 1
+wC10B: ds 1
+wC10C: ds 1
+wC10D: ds 1
 
 wNeedsUpdatingNPCTiles:: ; C10E
   ds 1
@@ -66,13 +66,52 @@ wIsUsingSpinAttack:: ; C121
 wC122 equ $C122
   ds 2
 
-; See MAP_SLIDE_* constants for possible values.
-wMapSlideTransitionState:: ; C124
+; See ROOM_TRANSITION_* constants for possible values.
+wRoomTransitionState:: ; C124
+  ds 1
+
+wRoomTransitionDirection:: ; C125
+  ; See ROOM_TRANSITION_DIR_* constants for possible values
+  ds 1
+
+wBGUpdateRegionOriginHigh:: ; C126
+  ; Position of the first tile of a background region
+  ; to be updated during a room transition (low byte)
+  ds 1
+
+wBGUpdateRegionOriginLow:: ; C127
+  ; Position of the first tile of a background piece (row or colum)
+  ; to update during a room transition (high byte)
   ds 1
 
 ; Unlabeled
-wC125 equ $C125
-  ds $18
+ds 1
+
+wRoomTransitionFramesBeforeMidScreen:: ; C129
+  ; Number of frames remaining before reaching the mid-screen transition point
+  ds 1
+
+; Unlabeled
+ds 2
+
+wRoomTransitionTargetScrollX:: ; C12C
+  ; Stop the room transition when reaching this value
+  ds 1
+
+wRoomTransitionTargetScrollY:: ; C12D
+  ; Stop the room transition when reaching this value
+  ds 1
+
+wBGOriginHigh:: ; C12E
+  ; Position of the first visible background tile (high byte)
+  ds 1
+
+wBGOriginLow:: ; C12F
+  ; Position of the first visible background tile (low byte)
+  ds 1
+
+; Unlabeled
+ds $D
 
 wRandomSeed:: ; C13D
   ; Seed for the Random Number Generator
@@ -167,12 +206,12 @@ wFreeMovementMode:: ; C17B
 wC17C equ $C17C
   ds 3
 
-wTransitionSfx:: ; C17F
+wTransitionGfx:: ; C17F
   ; Special Background effect applied during some transitions or animations.
-  ; See TRANSITION_SFX_* constants for possible values.
+  ; See TRANSITION_GFX_* constants for possible values.
   ds 1
 
-wTransitionSfxFrameCount:: ; C180
+wTransitionGfxFrameCount:: ; C180
   ; Number of frames rendered during a warp transition.
   ds 1
 
@@ -185,8 +224,27 @@ wDialogState:: ; C19F
   ; Lowest bits:  the dialog state (see DIALOG_* constants for possible values)
   ds 1
 
-wC1A4 equ $C1A0
-  ds $1F
+; Unlabeled
+ds $9
+
+wDialogGotItem:: ; C1A9
+  ; The "Got item" dialog to display
+  ds 1
+
+wDialogGotItemCountdown:: ; C1AA
+  ; Number of frames to wait (while playing the "got item" sound effect)
+  ; before displaying the dialog
+  ds 1
+
+; Unlabeled
+ds $11
+
+wLoadPreviousMapCountdown:: ; C1BC
+  ; Number of frames to wait before loading the previous map and room
+  ds 1
+
+; Unlabeled
+ds 2
 
 wScrollXOffset:: ; C1BF
   ds 1
@@ -291,10 +349,22 @@ wC300 equ $C300 ; C300
 wAlternateBackgroundEnabled:: ; C500
   ; If enabled, alternate between two Background position every frame.
   ds 1
-  
-ds $aa
 
-wDialogSFX:: ; C5ab
+; Unlabeled
+ds $A6
+
+wBossAgonySFXCountdown:: ; C5A7
+  ; When reaching zero, play the SFX_BOSS_AGONY sound effect
+  ds 1
+
+; Unlabeled
+ds 2
+
+wEggMazeProgress:: ; C5AA
+  ; Number of rooms progressed correctly in the Wind Fish's Egg maze
+  ds 1
+
+wDialogSFX:: ; C5AB
     ds 1
 
 section "WRAM Bank1", wramx[$d000], bank[1]
@@ -418,7 +488,15 @@ wKillCount:: ; D415
 
 ; Unlabeled
 wD416 equ $D416
-  ds $56
+  ds $4C
+
+wCompassSfxCountdown:: ; D462
+  ; Each frame decrements the value.
+  ; When reaching 0, play the compass sfx.
+  ds 1
+
+; Unlabeled
+ds 9
 
 wBossDefeated:: ; D46C
   ; A boss was just defeated
@@ -751,11 +829,22 @@ wWindowY:: ; DB9A
   ds 1
 
 ; Unlabeled
-wDB9B equ $DB9B
-  ds $A
+ds 2
 
-wActiveRoom:: ; $DBA5
-  ; Current room?
+wMapEntrancePositionX:: ; DB9D
+  ; Initial position of Link when loading a new map
+  ds 1
+
+wMapEntrancePositionY:: ; DB9E
+  ; Initial position of Link when loading a new map
+  ds 1
+
+; Unlabeled
+ds 6
+
+wIsIndoor:: ; DBA5
+  ; 0 on the overworld
+  ; 1 on interior maps (house, dungeons, etc)
   ds 1
 
 wSaveSlot:: ; DBA6
@@ -763,14 +852,30 @@ wSaveSlot:: ; DBA6
 
 ; Unlabeled
 wDBA7 equ $DBA7
-  ds 8
+  ds 7
+
+wIndoorRoom:: ; DBAE
+  ds 1
 
 wCurrentBank:: ; DBAF
   ds 1
 
 ; Unlabeled
 wDBB0 equ $DBB0
-  ds $5
+  ds 1
+
+wLinkMapEntryPositionX:: ; DBB1
+  ; The position at which Link entered on a map
+  ; (used for reseting Link's position after a fall)
+  ds 1
+
+wLinkMapEntryPositionY:: ; DBB2
+  ; The position at which Link entered on a map
+  ; (used for reseting Link's position after a fall)
+  ds 1
+
+; Unlabeled
+ds 2
 
 wKillCount2:: ; DBB5
   ds 1

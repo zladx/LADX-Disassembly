@@ -121,7 +121,7 @@ RenderLoop::
 
 .RenderLoop_TransitionSfx:
     ; If no transition special effect is active, go to the next step.
-    ld   a, [wTransitionSfx]
+    ld   a, [wTransitionGfx]
     and  a
     jp   z, RenderInteractiveFrame
 
@@ -129,7 +129,7 @@ RenderLoop::
     ;  - interactive: new gameplay frames are rendered while the effect is active ;
     ;  - non-interactive: no new frame is rendered while the effect is active.
 
-    ; If TransitionSfx == TRANSITION_SFX_WIND_FISH
+    ; If TransitionSfx == TRANSITION_GFX_WIND_FISH
     ; use external code for interactive transitions.
     inc  a
     jr   nz, .elsif
@@ -141,7 +141,7 @@ RenderLoop::
     ; ... and continue rendering a new frame.
     jp   RenderInteractiveFrame
 .elsif
-    ; If TransitionSfx == TRANSITION_SFX_FLOATING,
+    ; If TransitionSfx == TRANSITION_GFX_FLOATING,
     ; use the interactive transition code too.
     inc  a
     jr   z, .interactiveTransition
@@ -152,9 +152,9 @@ RenderLoop::
     ld   [MBC3SelectBank], a
 
     ; Increment frame count for the transition effect
-    ld   a, [wTransitionSfxFrameCount]
+    ld   a, [wTransitionGfxFrameCount]
     inc  a
-    ld   [wTransitionSfxFrameCount], a
+    ld   [wTransitionGfxFrameCount], a
 
     ; If the frame count didn't reached $C0 yet, continue the transition.
     cp   $C0
@@ -162,8 +162,8 @@ RenderLoop::
 
     ; The transition is finished.
     ; If the transition was MANBO_IN...
-    ld   a, [wTransitionSfx]
-    cp   TRANSITION_SFX_MANBO_IN
+    ld   a, [wTransitionGfx]
+    cp   TRANSITION_GFX_MANBO_IN
     jr   nz, .finishTransition
     ; ... teleport to Manbo Pond.
     call $4E51
@@ -171,7 +171,7 @@ RenderLoop::
 .finishTransition
     ; Reset transition state
     xor  a
-    ld   [wTransitionSfx], a
+    ld   [wTransitionGfx], a
     ld   [$C3CA], a
     ; Resume rendering of interactive frames
     jp   RenderInteractiveFrame

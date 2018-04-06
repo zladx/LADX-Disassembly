@@ -117,9 +117,9 @@ jr_004_409E:
     ld   a, $14                                   ; $40BA: $3E $14
     call label_3BB5                               ; $40BC: $CD $B5 $3B
     ldh  a, [$FFD7]                               ; $40BF: $F0 $D7
-    ldh  [$FF9B], a                               ; $40C1: $E0 $9B
+    ldh  [hLinkPositionYIncrement], a                               ; $40C1: $E0 $9B
     ldh  a, [$FFD8]                               ; $40C3: $F0 $D8
-    ldh  [hFF9A], a                               ; $40C5: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $40C5: $E0 $9A
 
 jr_004_40C7:
     ld   hl, wEntitiesUnknownTableD               ; $40C7: $21 $D0 $C2
@@ -2871,11 +2871,11 @@ jr_004_547E:
     ldh  a, [$FFD7]                               ; $54B4: $F0 $D7
     cpl                                           ; $54B6: $2F
     inc  a                                        ; $54B7: $3C
-    ldh  [$FF9B], a                               ; $54B8: $E0 $9B
+    ldh  [hLinkPositionYIncrement], a                               ; $54B8: $E0 $9B
     ldh  a, [$FFD8]                               ; $54BA: $F0 $D8
     cpl                                           ; $54BC: $2F
     inc  a                                        ; $54BD: $3C
-    ldh  [hFF9A], a                               ; $54BE: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $54BE: $E0 $9A
     push bc                                       ; $54C0: $C5
     call label_21A8                               ; $54C1: $CD $A8 $21
     pop  bc                                       ; $54C4: $C1
@@ -3209,7 +3209,7 @@ func_004_56A7:
     call func_004_56A7                            ; $56B0: $CD $A7 $56
     call $5902                                    ; $56B3: $CD $02 $59
     call label_C56                                ; $56B6: $CD $56 $0C
-    ld   a, [wMapSlideTransitionState]            ; $56B9: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $56B9: $FA $24 $C1
     and  a                                        ; $56BC: $A7
     jp   nz, label_004_5690                       ; $56BD: $C2 $90 $56
 
@@ -3651,7 +3651,7 @@ Data_004_5A49::
     db   $02, $02, $06, $06, $01, $01, $07, $07, $00, $06, $0C, $0E, $10, $0E, $0C, $06
     db   $00, $FA, $F4, $F2, $F0, $F2, $F4, $FA, $00, $06, $0C, $0E, $CD, $7F, $5B
 
-    ld   a, [wMapSlideTransitionState]            ; $5A98: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $5A98: $FA $24 $C1
     and  a                                        ; $5A9B: $A7
     jr   nz, jr_004_5AA6                          ; $5A9C: $20 $08
 
@@ -5932,9 +5932,9 @@ jr_004_6852:
     cp   $00                                      ; $6855: $FE $00
     jp   nz, label_004_68E4                       ; $6857: $C2 $E4 $68
 
-    ldh  a, [hFF9A]                               ; $685A: $F0 $9A
+    ldh  a, [hLinkPositionXIncrement]                               ; $685A: $F0 $9A
     push af                                       ; $685C: $F5
-    ldh  a, [$FF9B]                               ; $685D: $F0 $9B
+    ldh  a, [hLinkPositionYIncrement]                               ; $685D: $F0 $9B
     push af                                       ; $685F: $F5
     ld   e, $00                                   ; $6860: $1E $00
     ldh  a, [$FFEB]                               ; $6862: $F0 $EB
@@ -5957,7 +5957,7 @@ jr_004_686D:
     inc  a                                        ; $6879: $3C
 
 jr_004_687A:
-    ldh  [$FF9B], a                               ; $687A: $E0 $9B
+    ldh  [hLinkPositionYIncrement], a                               ; $687A: $E0 $9B
     ldh  a, [$FFD8]                               ; $687C: $F0 $D8
     bit  0, e                                     ; $687E: $CB $43
     jr   z, jr_004_6884                           ; $6880: $28 $02
@@ -5966,15 +5966,15 @@ jr_004_687A:
     inc  a                                        ; $6883: $3C
 
 jr_004_6884:
-    ldh  [hFF9A], a                               ; $6884: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $6884: $E0 $9A
     push bc                                       ; $6886: $C5
     call label_21A8                               ; $6887: $CD $A8 $21
     call label_3E19                               ; $688A: $CD $19 $3E
     pop  bc                                       ; $688D: $C1
     pop  af                                       ; $688E: $F1
-    ldh  [$FF9B], a                               ; $688F: $E0 $9B
+    ldh  [hLinkPositionYIncrement], a                               ; $688F: $E0 $9B
     pop  af                                       ; $6891: $F1
-    ldh  [hFF9A], a                               ; $6892: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $6892: $E0 $9A
     xor  a                                        ; $6894: $AF
     ld   [$C144], a                               ; $6895: $EA $44 $C1
     ldh  a, [$FFEB]                               ; $6898: $F0 $EB
@@ -6566,7 +6566,7 @@ func_004_6BE1:
     ld   a, [hl]                                  ; $6BFE: $7E
     ldh  [$FFAF], a                               ; $6BFF: $E0 $AF
     ld   e, a                                     ; $6C01: $5F
-    ld   a, [wActiveRoom]                         ; $6C02: $FA $A5 $DB
+    ld   a, [wIsIndoor]                         ; $6C02: $FA $A5 $DB
     ld   d, a                                     ; $6C05: $57
     call label_2A26                               ; $6C06: $CD $26 $2A
     cp   $00                                      ; $6C09: $FE $00
@@ -7275,7 +7275,7 @@ jr_004_6FE2:
 jr_004_6FE6:
     xor  a                                        ; $6FE6: $AF
     ld   [wC120], a                               ; $6FE7: $EA $20 $C1
-    ldh  [hFF9A], a                               ; $6FEA: $E0 $9A
+    ldh  [hLinkPositionXIncrement], a                               ; $6FEA: $E0 $9A
     ld   e, $06                                   ; $6FEC: $1E $06
     ld   hl, $C390                                ; $6FEE: $21 $90 $C3
     add  hl, bc                                   ; $6FF1: $09
@@ -8430,7 +8430,7 @@ label_004_7680:
 
     ld   [$DB74], a                               ; $768D: $EA $74 $DB
     ld   a, $18                                   ; $7690: $3E $18
-    ld   [$C1BC], a                               ; $7692: $EA $BC $C1
+    ld   [wLoadPreviousMapCountdown], a                               ; $7692: $EA $BC $C1
     jp   IncrementEntityWalkingAttr               ; $7695: $C3 $12 $3B
 
     ld   a, $02                                   ; $7698: $3E $02
@@ -10086,7 +10086,7 @@ func_004_7FA9:
     or   [hl]                                     ; $7FC5: $B6
     jr   nz, jr_004_7FCE                          ; $7FC6: $20 $06
 
-    ld   a, [wMapSlideTransitionState]            ; $7FC8: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $7FC8: $FA $24 $C1
     and  a                                        ; $7FCB: $A7
     jr   z, jr_004_7FCF                           ; $7FCC: $28 $01
 
@@ -10095,52 +10095,3 @@ jr_004_7FCE:
 
 jr_004_7FCF:
     ret                                           ; $7FCF: $C9
-
-    nop                                           ; $7FD0: $00
-    nop                                           ; $7FD1: $00
-    nop                                           ; $7FD2: $00
-    nop                                           ; $7FD3: $00
-    nop                                           ; $7FD4: $00
-    nop                                           ; $7FD5: $00
-    nop                                           ; $7FD6: $00
-    nop                                           ; $7FD7: $00
-    nop                                           ; $7FD8: $00
-    nop                                           ; $7FD9: $00
-    nop                                           ; $7FDA: $00
-    nop                                           ; $7FDB: $00
-    nop                                           ; $7FDC: $00
-    nop                                           ; $7FDD: $00
-    nop                                           ; $7FDE: $00
-    nop                                           ; $7FDF: $00
-    nop                                           ; $7FE0: $00
-    nop                                           ; $7FE1: $00
-    nop                                           ; $7FE2: $00
-    nop                                           ; $7FE3: $00
-    nop                                           ; $7FE4: $00
-    nop                                           ; $7FE5: $00
-    nop                                           ; $7FE6: $00
-    nop                                           ; $7FE7: $00
-    nop                                           ; $7FE8: $00
-    nop                                           ; $7FE9: $00
-    nop                                           ; $7FEA: $00
-    nop                                           ; $7FEB: $00
-    nop                                           ; $7FEC: $00
-    nop                                           ; $7FED: $00
-    nop                                           ; $7FEE: $00
-    nop                                           ; $7FEF: $00
-    nop                                           ; $7FF0: $00
-    nop                                           ; $7FF1: $00
-    nop                                           ; $7FF2: $00
-    nop                                           ; $7FF3: $00
-    nop                                           ; $7FF4: $00
-    nop                                           ; $7FF5: $00
-    nop                                           ; $7FF6: $00
-    nop                                           ; $7FF7: $00
-    nop                                           ; $7FF8: $00
-    nop                                           ; $7FF9: $00
-    nop                                           ; $7FFA: $00
-    nop                                           ; $7FFB: $00
-    nop                                           ; $7FFC: $00
-    nop                                           ; $7FFD: $00
-    nop                                           ; $7FFE: $00
-    nop                                           ; $7FFF: $00

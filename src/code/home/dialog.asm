@@ -169,13 +169,13 @@ label_23EF::
     ld   b, a
     ld   hl, data_23DC
     add  hl, de
-    ld   a, [$C12F]
+    ld   a, [wBGOriginLow]
     add  a, [hl]
     ld   l, a
     ldh  [$FFD7], a
     ld   hl, data_23D6
     add  hl, de
-    ld   a, [$C12E]
+    ld   a, [wBGOriginHigh]
     add  a, [hl]
     ld   h, a
     ldh  a, [$FFD7]
@@ -349,7 +349,7 @@ label_24DF::
     ld   b, $00
     ld   e, $01
     ld   d, $00
-    ld   a, [$C12E]
+    ld   a, [wBGOriginHigh]
     ld   hl, $45C1
     add  hl, bc
     add  a, [hl]
@@ -364,7 +364,7 @@ label_24DF::
     and  $E0
     add  a, $20
     ld   e, a
-    ld   a, [$C12F]
+    ld   a, [wBGOriginLow]
     add  a, [hl]
     ld   d, a
     cp   e
@@ -677,12 +677,12 @@ label_26E1::
     ld   d, $00
     ld   hl, data_2693
     add  hl, de
-    ld   a, [$C12E]
+    ld   a, [wBGOriginHigh]
     add  a, [hl]
     ld   [wRequestDestinationHigh], a
     ld   hl, data_2691
     add  hl, de
-    ld   a, [$C12F]
+    ld   a, [wBGOriginLow]
     add  a, [hl]
     ld   [wRequestDestinationLow], a
     ld   a, BG_COPY_MODE_ROW_SINGLE_VALUE | $0F
@@ -714,14 +714,14 @@ label_2723::
     ld   d, $00
     ld   hl, data_2717
     add  hl, de
-    ld   a, [$C12E]
+    ld   a, [wBGOriginHigh]
     add  a, [hl]
     ld   b, a
     ld   hl, data_2715
 
 label_2731::
     add  hl, de
-    ld   a, [$C12F]
+    ld   a, [wBGOriginLow]
     add  a, [hl]
     ld   c, a
     ld   e, $10
@@ -783,7 +783,7 @@ label_2777::
     ld   d, $00
     ld   hl, data_276B
     add  hl, de
-    ld   a, [$C12E]
+    ld   a, [wBGOriginHigh]
     add  a, [hl]
     ld   b, a
     ld   hl, data_2769

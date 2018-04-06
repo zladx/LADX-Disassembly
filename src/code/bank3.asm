@@ -253,7 +253,7 @@ label_C8E2::
     jr   z, label_C8AD
 
 label_C8F0::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_C908
     ld   a, [$D478]
@@ -360,7 +360,7 @@ label_C995::
 
 label_C99C::
     ld   [$D368], a
-    ldh  [$FFB0], a
+    ldh  [hMusicTrack], a
     ldh  [$FFBD], a
     ldh  [$FFBF], a
     ret
@@ -397,7 +397,7 @@ label_C99C::
     ld   [hl], a
     ret
     xor  a
-    ldh  [$FFB0], a
+    ldh  [hMusicTrack], a
     ret
     call label_CA12
     ldh  a, [$FFEE]
@@ -445,7 +445,7 @@ label_CA32::
     ld   hl, $C310
     add  hl, bc
     ld   [hl], $10
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_CA46
     ldh  a, [hMapId]
@@ -502,7 +502,7 @@ label_CA7A::
     ld   [$C3C8], a
     ld   a, $2F
     ldh  [hNextMusicTrack], a
-    ldh  [$FFB0], a
+    ldh  [hMusicTrack], a
     ldh  [$FFBD], a
     call label_27EA
 
@@ -539,7 +539,7 @@ data_CAC6::
     ldh  a, [$FFFE]
     and  a
     jr   z, label_CB2F
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_CB2F
     ld   a, [$DB73]
@@ -579,7 +579,7 @@ label_CB01::
 
 label_CB1A::
     ret
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_CB2F
     ld   a, [$D477]
@@ -626,7 +626,7 @@ label_CB56::
     ret
     ld   a, $FF
     jp   label_3B0C
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_CB56
     ldh  a, [$FFF6]
@@ -978,7 +978,7 @@ label_CD7A::
     ld   hl, $C420
     add  hl, bc
     ld   [hl], $20
-    ld   hl, $FFF3
+    ld   hl, hSFX
     ld   [hl], $07
     ld   hl, $C440
     add  hl, bc
@@ -1067,7 +1067,7 @@ label_CE35::
     add  hl, bc
     ld   [hl], $07
     ld   a, $02
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ld   hl, $C490
     add  hl, bc
     ld   [hl], b
@@ -1191,7 +1191,7 @@ label_CF12::
     ld   hl, $C2D0
     add  hl, bc
     ld   [hl], $01
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_CF24
     ld   hl, $C2D0
@@ -1241,13 +1241,13 @@ label_CF67::
     cp   $0E
     jr   z, label_CF83
     ret
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ret  z
     call IncrementEntityWalkingAttr
     jr   label_CF83
     call label_CF12
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_CFA9
 
@@ -1500,7 +1500,7 @@ label_D12A::
     ret
 
 label_D134::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     ld   hl, $D800
     ldh  a, [$FFF6]
@@ -1580,7 +1580,7 @@ label_D198::
     ld   b, $03
 
 label_D1B3::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_D1C9
     ld   de, data_D15A
@@ -1681,7 +1681,7 @@ data_D245::
     db $7E, 7, $7E, $27
 
 label_D249::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ldh  [$FFF1], a
     ld   de, data_D235
     and  a
@@ -1706,7 +1706,7 @@ label_D276::
     ldh  a, [$FFF6]
     cp   $C7
     jr   z, label_D282
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_D286
 
@@ -1736,7 +1736,7 @@ label_D286::
     call label_3F8D
     ld   de, data_D162
     ld   b, $C4
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_D2B5
     ld   de, data_D15E
@@ -1889,7 +1889,7 @@ data_D3A0::
     db $F0, $16, $F2, $16, $F4, $16, $F6, $16
 
 label_D3A8::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_D3B3
     ld   de, data_D3A0
@@ -2075,7 +2075,7 @@ label_D56F::
     cp   $01
     jr   nz, label_D594
     ld   a, $12
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
 
 label_D594::
     ld   hl, $FFF4
@@ -3046,7 +3046,7 @@ label_DBCB::
     ld   a, $31
     ld   [$D368], a
     ld   a, $05
-    ldh  [$FFB0], a
+    ldh  [hMusicTrack], a
     ldh  [$FFBF], a
     call label_BFB
     ld   [hl], $52
@@ -3197,7 +3197,7 @@ label_DCE7::
     jp   label_E0B3
 
 label_DCEA::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_DD34
     ldh  a, [$FFF6]
@@ -3582,7 +3582,7 @@ label_E001::
     cp   $10
     jr   nz, label_E04C
     dec  [hl]
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_E029
     ldh  a, [$FFF6]
@@ -3878,7 +3878,7 @@ label_E1DE::
     ldh  a, [$FFEB]
     cp   $3D
     jr   z, label_E200
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jp   nz, label_E29C
 
@@ -4071,7 +4071,7 @@ label_E311::
     jr   label_E32D
 
 label_E328::
-    ld   hl, $FFF3
+    ld   hl, hSFX
     ld   [hl], $01
 
 label_E32D::
@@ -4504,9 +4504,9 @@ label_E625::
     cp   $30
     jr   nc, label_E64A
     call label_ECD5
-    ld   hl, $FF9A
+    ld   hl, hLinkPositionXIncrement
     sla  [hl]
-    ld   hl, $FF9B
+    ld   hl, hLinkPositionYIncrement
     sla  [hl]
 
 label_E64A::
@@ -4531,7 +4531,7 @@ label_E650::
     or   $08
     ld   [hl], a
     call label_E5B0
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_E68B
     ld   a, [$C16B]
@@ -4718,7 +4718,7 @@ label_E771::
     jr   c, label_E828
     cp   $BF
     jr   nc, label_E828
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_E828
     ld   a, $02
@@ -4786,7 +4786,7 @@ label_E822::
     jp   label_E865
 
 label_E828::
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     call label_2A26
     sub  a, $99
@@ -4796,7 +4796,7 @@ label_E828::
     ld   c, a
     ld   a, $02
     ldh  [$FFF2], a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_E878
     pop  bc
@@ -4862,7 +4862,7 @@ label_E894::
     ldh  [hFFF8], a
     ld   hl, data_E75D
     add  hl, bc
-    ld   a, [$DBAE]
+    ld   a, [wIndoorRoom]
     add  a, [hl]
     ld   e, a
     ld   d, $00
@@ -4944,7 +4944,7 @@ label_E90F::
     ld   a, h
     cp   $D7
     jp   nz, label_E9A0
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ld   a, [hl]
     ldh  [$FFAF], a
@@ -5004,7 +5004,7 @@ label_E964::
     ld   [hl], a
     ld   hl, $C3B0
     add  hl, de
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     xor  $01
     ld   [hl], a
     ldh  [$FFF1], a
@@ -5040,7 +5040,7 @@ label_E9D9::
     ld   de, data_E9AA
     call label_EAD7
     call label_FF78
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     ldh  a, [$FFAF]
     jr   z, label_E9F0
@@ -5541,10 +5541,10 @@ label_ECD5::
     ld   a, $02
     ld   [$C146], a
     ld   a, $F0
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     call label_3D7F
     ld   a, $0E
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ret
 
 label_ECF9::
@@ -5565,7 +5565,7 @@ label_ECF9::
     jr   label_ED17
 
 label_ED15::
-    ldh  a, [$FF9B]
+    ldh  a, [hLinkPositionYIncrement]
 
 label_ED17::
     and  $80
@@ -5580,7 +5580,7 @@ label_ED1B::
     call IsEntityFrameCounterZero
     ld   [hl], $30
     ld   a, $0E
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ldh  a, [hFFF9]
     and  a
     jr   nz, label_ED38
@@ -5590,7 +5590,7 @@ label_ED1B::
 
 label_ED38::
     ld   a, $F0
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ret
 
 label_ED3D::
@@ -5622,7 +5622,7 @@ label_ED5D::
     call IncrementEntityWalkingAttr
     ld   [hl], $08
     ld   a, $03
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ret
 
 label_ED73::
@@ -5631,11 +5631,11 @@ label_ED73::
     or   [hl]
     ld   hl, $C166
     or   [hl]
-    ld   hl, $C1A9
+    ld   hl, wDialogGotItem
     or   [hl]
     jp   nz, label_EE0A
     ld   a, $03
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ld   hl, $C4D0
     add  hl, bc
     ld   d, b
@@ -5678,7 +5678,7 @@ label_EDAB::
     ld   a, [$C1BE]
     and  a
     jr   nz, label_EDDF
-    ldh  a, [$FFB0]
+    ldh  a, [hMusicTrack]
     cp   $22
     jr   z, label_EDDD
     ld   [$D368], a
@@ -5728,9 +5728,9 @@ label_EE0E::
     ld   hl, data_EE0C
     add  hl, de
     ld   a, [hl]
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     ld   a, $F4
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     xor  a
     ldh  [$FF9C], a
     scf
@@ -5837,7 +5837,7 @@ label_EE8E::
     cp   $02
     ret  nz
     ld   a, $04
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ld   a, $08
     ld   [$C13E], a
     jp   IncrementEntityWalkingAttr
@@ -6001,9 +6001,9 @@ label_EFA7::
     inc  a
 
 label_EFB3::
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     xor  a
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ret
 
 label_EFB9::
@@ -6279,7 +6279,7 @@ label_F17A::
     add  hl, bc
     ld   [hl], $01
     ld   a, $11
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
     ld   hl, $C280
     add  hl, bc
     ld   a, [hl]
@@ -6376,7 +6376,7 @@ label_F215::
     ld   [hl], $03
     and  $80
     jr   z, label_F228
-    ld   hl, $FFF3
+    ld   hl, hSFX
     ld   [hl], $07
 
 label_F228::
@@ -6386,7 +6386,7 @@ label_F228::
     cp   $6C
     jr   nz, label_F235
     ld   a, $13
-    ldh  [$FFF3], a
+    ldh  [hSFX], a
 
 label_F235::
     pop  af
@@ -6525,7 +6525,7 @@ label_F2EE::
 
 label_F304::
     ld   a, $03
-    ld   [$C5A7], a
+    ld   [wBossAgonySFXCountdown], a
     ld   hl, $C2C0
     add  hl, bc
     ld   [hl], b
@@ -6912,9 +6912,9 @@ label_F52D::
 label_F565::
     call label_FE45
     ldh  a, [$FFD7]
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ldh  a, [$FFD8]
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
 
 label_F570::
     ret
@@ -6936,9 +6936,9 @@ label_F571::
     ld   a, $D0
 
 label_F58B::
-    ldh  [$FF9A], a
+    ldh  [hLinkPositionXIncrement], a
     xor  a
-    ldh  [$FF9B], a
+    ldh  [hLinkPositionYIncrement], a
     ld   a, $30
     ldh  [$FFA3], a
     ld   a, $0B
@@ -7082,7 +7082,7 @@ label_F668::
 label_F680::
     cp   $3F
     jr   nz, label_F6AC
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_F6AC
     ld   hl, $C290
@@ -7790,7 +7790,7 @@ label_FB13::
     jp   z, label_FC7B
     push de
     ld   e, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     call label_2A2C
     pop  de
@@ -7912,7 +7912,7 @@ label_FBE4::
     ldh  a, [$FFE7]
     and  $03
     jr   z, label_FC28
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_FC17
     ldh  a, [$FFE7]
@@ -8071,7 +8071,7 @@ label_FCFD::
     ldh  a, [$FFEB]
     cp   $04
     jr   nz, label_FD6B
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   z, label_FD6B
     push hl
@@ -8135,7 +8135,7 @@ label_FD6A::
 label_FD6B::
     ld   a, [hl]
     ld   e, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     call label_2A2C
     ldh  [$FFD8], a
@@ -8161,7 +8161,7 @@ label_FD6B::
     ldh  a, [$FFE7]
     and  $03
     jr   z, label_FE03
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     and  a
     jr   nz, label_FDAC
     ldh  a, [$FFE7]
@@ -8266,7 +8266,7 @@ label_FE0E::
     ld   a, [hl]
     ldh  [$FFAF], a
     ld   e, a
-    ld   a, [$DBA5]
+    ld   a, [wIsIndoor]
     ld   d, a
     call label_2A2C
     ldh  [$FFDA], a

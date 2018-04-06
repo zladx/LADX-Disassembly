@@ -719,7 +719,7 @@ GameplayWorldSubtype1Handler::
 
 label_4452::
     ld   a, $04
-    ld   [wMapSlideDirection], a
+    ld   [wRoomTransitionDirection], a
     call LoadRoom
     call label_37FE
     call label_5FB3
@@ -3915,7 +3915,7 @@ label_5885::
     ld   [wTileMapToLoad], a
 
 label_5888::
-    ld   hl, wMapSlideTransitionState
+    ld   hl, wRoomTransitionState
     ld   e, $00
 
 label_588D::
@@ -4706,7 +4706,7 @@ label_5EA6::
     inc  a
     ldh  [$FFE4], a
     push bc
-    ld   a, [wMapSlideDirection]
+    ld   a, [wRoomTransitionDirection]
     ld   c, a
     ld   b, $00
     ld   hl, label_5E97

@@ -66,40 +66,40 @@ wIsUsingSpinAttack:: ; C121
 wC122 equ $C122
   ds 2
 
-; See MAP_SLIDE_* constants for possible values.
-wMapSlideTransitionState:: ; C124
+; See ROOM_TRANSITION_* constants for possible values.
+wRoomTransitionState:: ; C124
   ds 1
 
-wMapSlideDirection:: ; C125
-  ; See MAP_SLIDE_DIRECTION_* constants for possible values
+wRoomTransitionDirection:: ; C125
+  ; See ROOM_TRANSITION_DIR_* constants for possible values
   ds 1
 
 wBGUpdateRegionOriginHigh:: ; C126
   ; Position of the first tile of a background region
-  ; to be updated during a map slide transition (low byte)
+  ; to be updated during a room transition (low byte)
   ds 1
 
 wBGUpdateRegionOriginLow:: ; C127
   ; Position of the first tile of a background piece (row or colum)
-  ; to update during a map slide transition (high byte)
+  ; to update during a room transition (high byte)
   ds 1
 
 ; Unlabeled
 ds 1
 
-wMapSlideFramesBeforeMidScreen:: ; C129
+wRoomTransitionFramesBeforeMidScreen:: ; C129
   ; Number of frames remaining before reaching the mid-screen transition point
   ds 1
 
 ; Unlabeled
 ds 2
 
-wMapSlideTargetScrollX:: ; C12C
-  ; Stop the map slide transition when reaching this value
+wRoomTransitionTargetScrollX:: ; C12C
+  ; Stop the room transition when reaching this value
   ds 1
 
-wMapSlideTargetScrollY:: ; C12D
-  ; Stop the map slide transition when reaching this value
+wRoomTransitionTargetScrollY:: ; C12D
+  ; Stop the room transition when reaching this value
   ds 1
 
 wBGOriginHigh:: ; C12E

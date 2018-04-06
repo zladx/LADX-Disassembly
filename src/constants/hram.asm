@@ -113,7 +113,7 @@ hFFAF:: ; FFAF
 hMusicTrack:: ; FFB0
   ds 1
 
-; Next music to be played after map slide transition
+; Next music to be played after room transition
 hNextMusicTrack:: ; hFFB1
   ds 1
 

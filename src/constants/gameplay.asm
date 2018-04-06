@@ -94,19 +94,19 @@ ENTITY_INTRO_MARIN         equ $06
 ENTITY_INTRO_INERT_LINK    equ $07
 ENTITY_INTRO_SPARKLE       equ $08
 
-; Values for wMapSlideTransitionState
-MAP_SLIDE_NONE             equ $00
-MAP_SLIDE_PREPARE_1        equ $01
-MAP_SLIDE_PREPARE_2        equ $02
-MAP_SLIDE_PREPARE_3        equ $03
-MAP_SLIDE_FIRST_HALF       equ $04
-MAP_SLIDE_SECOND_HALF      equ $05
+; Values for wRoomTransitionState
+ROOM_TRANSITION_NONE             equ $00
+ROOM_TRANSITION_PREPARE_1        equ $01
+ROOM_TRANSITION_PREPARE_2        equ $02
+ROOM_TRANSITION_PREPARE_3        equ $03
+ROOM_TRANSITION_FIRST_HALF       equ $04
+ROOM_TRANSITION_SECOND_HALF      equ $05
 
-; Values for wMapSlideDirection
-MAP_SLIDE_DIRECTION_RIGHT  equ $00
-MAP_SLIDE_DIRECTION_LEFT   equ $01
-MAP_SLIDE_DIRECTION_TOP    equ $02
-MAP_SLIDE_DIRECTION_BOTTOM equ $03
+; Values for wRoomTransitionDirection
+ROOM_TRANSITION_DIR_RIGHT  equ $00
+ROOM_TRANSITION_DIR_LEFT   equ $01
+ROOM_TRANSITION_DIR_TOP    equ $02
+ROOM_TRANSITION_DIR_BOTTOM equ $03
 
 ; Values for wDialogState
 DIALOG_CLOSED              equ $00

@@ -3209,7 +3209,7 @@ func_004_56A7:
     call func_004_56A7                            ; $56B0: $CD $A7 $56
     call $5902                                    ; $56B3: $CD $02 $59
     call label_C56                                ; $56B6: $CD $56 $0C
-    ld   a, [wMapSlideTransitionState]            ; $56B9: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $56B9: $FA $24 $C1
     and  a                                        ; $56BC: $A7
     jp   nz, label_004_5690                       ; $56BD: $C2 $90 $56
 
@@ -3651,7 +3651,7 @@ Data_004_5A49::
     db   $02, $02, $06, $06, $01, $01, $07, $07, $00, $06, $0C, $0E, $10, $0E, $0C, $06
     db   $00, $FA, $F4, $F2, $F0, $F2, $F4, $FA, $00, $06, $0C, $0E, $CD, $7F, $5B
 
-    ld   a, [wMapSlideTransitionState]            ; $5A98: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $5A98: $FA $24 $C1
     and  a                                        ; $5A9B: $A7
     jr   nz, jr_004_5AA6                          ; $5A9C: $20 $08
 
@@ -10086,7 +10086,7 @@ func_004_7FA9:
     or   [hl]                                     ; $7FC5: $B6
     jr   nz, jr_004_7FCE                          ; $7FC6: $20 $06
 
-    ld   a, [wMapSlideTransitionState]            ; $7FC8: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $7FC8: $FA $24 $C1
     and  a                                        ; $7FCB: $A7
     jr   z, jr_004_7FCF                           ; $7FCC: $28 $01
 

@@ -861,7 +861,7 @@ label_D15::
     jp   label_CC7
 
 ; Load sprites for the next room,
-; either during a map transition or a room slide transition.
+; either during a map transition or a room transition.
 LoadRoomSprites::
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -1083,7 +1083,7 @@ presentSaveScreenIfNeeded::
     ld   a, [wDialogState]
     ld   hl, $C167
     or   [hl]
-    ld   hl, wMapSlideTransitionState
+    ld   hl, wRoomTransitionState
     or   [hl]
     jr   nz, jumpToGameplayHandler
 
@@ -1316,7 +1316,7 @@ WorldDefaultHandler::
 
     call label_002_593B
 
-    callsw ApplyMapSlideTransition
+    callsw ApplyRoomTransition
 
     call ApplyGotItem
 
@@ -1454,7 +1454,7 @@ InitGotItemSequence::
     ld   a, [wDialogState]
     ld   hl, $C167
     or   [hl]
-    ld   hl, wMapSlideTransitionState
+    ld   hl, wRoomTransitionState
     or   [hl]
     jr   nz, label_10DB
     ld   a, [$D464]
@@ -1496,7 +1496,7 @@ label_10EF::
     ld   a, [wDialogState]
     and  a
     jp   nz, ApplyLinkMotionState
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     and  a
     jp   nz, label_114F
     ld   a, [wLinkMotionState]
@@ -2544,7 +2544,7 @@ label_17DB::
     cp   $0C
     jr   nz, label_1814
     ld   hl, wDialogState
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     or   [hl]
     jr   nz, label_1814
     call label_157C
@@ -3623,7 +3623,7 @@ label_21FB::
 data_2205::
     db   $10, $10, $01, $01
 
-; Update BG map during map slide transition
+; Update BG map during room transition
 UpdateSlidingBGMap::
     ld   a, $08
     ld   [MBC3SelectBank], a
@@ -3728,7 +3728,7 @@ label_2299::
     add  hl, bc
     pop  de
     pop  bc
-    ld   a, [wMapSlideDirection]
+    ld   a, [wRoomTransitionDirection]
     and  $02
     jr   z, label_22D3
     call label_2214
@@ -3785,7 +3785,7 @@ label_22D3::
 
 label_22FE::
     push bc
-    ld   a, [wMapSlideDirection]
+    ld   a, [wRoomTransitionDirection]
     ld   c, a
     ld   b, $00
     ld   hl, data_2205
@@ -3872,7 +3872,7 @@ GetRandomByte::
 
 ReadJoypadState::
     ; Ignore joypad during map transitions
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     and  a
     jr   nz, ReadJoypadState_return
 
@@ -6963,7 +6963,7 @@ label_3D52::
 
 label_3D57::
     push hl
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     and  a
     jr   z, label_3D7D
     ldh  a, [$FFEE]
@@ -7211,7 +7211,7 @@ data_3EDF::
 
 label_3EE8::
     ld   hl, wInventoryAppearing
-    ld   a, [wMapSlideTransitionState]
+    ld   a, [wRoomTransitionState]
     or   [hl]
     ret  nz
     ld   a, [$C165]

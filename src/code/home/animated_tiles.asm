@@ -125,7 +125,7 @@ AnimateTiles::
 .doWorldAnimations
     ; If there is a pending request or a map transition,
     ; only animate Link's sprite. 
-    ld   hl, wMapSlideTransitionState
+    ld   hl, wRoomTransitionState
     ld   a, [wRequest]
     or   [hl]
     jp   nz, DrawLinkSpriteAndReturn

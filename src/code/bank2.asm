@@ -190,7 +190,7 @@ jr_002_42C7:
     call ApplyLinkMotionState                               ; $42DF: $CD $94 $17
     call func_002_4338                            ; $42E2: $CD $38 $43
     call func_002_4A16                            ; $42E5: $CD $16 $4A
-    ld   a, [wMapSlideTransitionState]            ; $42E8: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $42E8: $FA $24 $C1
     and  a                                        ; $42EB: $A7
     jr   nz, jr_002_4315                          ; $42EC: $20 $27
 
@@ -1957,9 +1957,9 @@ jr_002_4EC4:
 
 jr_002_4ED3:
     ld   a, $02                                   ; $4ED3: $3E $02
-    ld   [wMapSlideDirection], a                               ; $4ED5: $EA $25 $C1
+    ld   [wRoomTransitionDirection], a                               ; $4ED5: $EA $25 $C1
     ld   a, $01                                   ; $4ED8: $3E $01
-    ld   [wMapSlideTransitionState], a            ; $4EDA: $EA $24 $C1
+    ld   [wRoomTransitionState], a            ; $4EDA: $EA $24 $C1
 
 func_002_4EDD::
     xor  a                                        ; $4EDD: $AF
@@ -3037,7 +3037,7 @@ jr_002_54F7:
     cp   $FF                                      ; $54F9: $FE $FF
     jr   nz, jr_002_54E8                          ; $54FB: $20 $EB
 
-    ld   a, [wMapSlideTransitionState]            ; $54FD: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $54FD: $FA $24 $C1
     and  a                                        ; $5500: $A7
     jr   nz, jr_002_5529                          ; $5501: $20 $26
 
@@ -3115,7 +3115,7 @@ jr_002_5566:
 
 func_002_5567::
     push af                                       ; $5567: $F5
-    ld   a, [wMapSlideTransitionState]            ; $5568: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $5568: $FA $24 $C1
     and  a                                        ; $556B: $A7
     jr   nz, jr_002_557C                          ; $556C: $20 $0E
 
@@ -3824,7 +3824,7 @@ func_002_5928::
 label_002_593B::
     ; If not dialog, no inventory, no map transition, return
     ld   hl, wDialogState                         ; $593B: $21 $9F $C1
-    ld   a, [wMapSlideTransitionState]            ; $593E: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $593E: $FA $24 $C1
     or   [hl]                                     ; $5941: $B6
     ld   hl, wInventoryAppearing                  ; $5942: $21 $4F $C1
     or   [hl]                                     ; $5945: $B6
@@ -5136,7 +5136,7 @@ func_002_60E0::
     and  a                                        ; $60FE: $A7
     jp   nz, label_002_61F5                       ; $60FF: $C2 $F5 $61
 
-    ld   a, [wMapSlideTransitionState]            ; $6102: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $6102: $FA $24 $C1
     and  a                                        ; $6105: $A7
     ret  nz                                       ; $6106: $C0
 
@@ -6782,6 +6782,7 @@ jr_002_6C74:
     ret                                           ; $6C74: $C9
 
 ; Check Link's position, and initiate a map or room transition if needed
+; TODO
 CheckPositionForMapTransition::
     ld   a, [wDialogState]                        ; $6C75: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $6C78: $21 $4F $C1
@@ -7035,9 +7036,9 @@ initiateRoomTransition:
 
     ; Configure a new room transition
     ld   a, e                                     ; $6DE4: $7B
-    ld   [wMapSlideDirection], a                  ; $6DE5: $EA $25 $C1
-    ld   a, MAP_SLIDE_PREPARE_1                   ; $6DE8: $3E $01
-    ld   [wMapSlideTransitionState], a            ; $6DEA: $EA $24 $C1
+    ld   [wRoomTransitionDirection], a                  ; $6DE5: $EA $25 $C1
+    ld   a, ROOM_TRANSITION_PREPARE_1                   ; $6DE8: $3E $01
+    ld   [wRoomTransitionState], a            ; $6DEA: $EA $24 $C1
     xor  a                                        ; $6DED: $AF
     ld   [$C14B], a                               ; $6DEE: $EA $4B $C1
     ld   [wIsUsingSpinAttack], a                  ; $6DF1: $EA $21 $C1
@@ -8365,7 +8366,7 @@ jr_002_75B2:
     jr   z, jr_002_75B1                           ; $75BB: $28 $F4
 
 func_002_75BD::
-    ld   a, [wMapSlideTransitionState]            ; $75BD: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $75BD: $FA $24 $C1
     ld   hl, wDialogState                         ; $75C0: $21 $9F $C1
     or   [hl]                                     ; $75C3: $B6
     jp   nz, label_002_76C0                       ; $75C4: $C2 $C0 $76
@@ -8734,7 +8735,7 @@ jr_002_77F7:
     and  a                                        ; $77FA: $A7
     jp   z, label_002_786E                        ; $77FB: $CA $6E $78
 
-    ld   a, [wMapSlideTransitionState]            ; $77FE: $FA $24 $C1
+    ld   a, [wRoomTransitionState]                ; $77FE: $FA $24 $C1
     and  a                                        ; $7801: $A7
     jr   nz, label_002_786E                       ; $7802: $20 $6A
 
@@ -8881,4 +8882,4 @@ jr_002_78CF:
     ld   [wC11F], a                               ; $78D4: $EA $1F $C1
     ret                                           ; $78D7: $C9
 
-include "code/map_slide.asm"
+include "code/room_transition.asm"

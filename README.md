@@ -14,9 +14,10 @@ MD5 - 07C211479386825042EFB4AD31BB525F
 
 This repository produces a valid Zelda DX ROM from several different inputs:
 
-- Disassembled and labelled assembly code (in `./src`),
+- Disassembled and labeled assembly code (in `./src`),
 - Extracted PNG graphics (in `./src/gfx`),
-- Binary banks not disassembled yet (in `./bin/banks`, to be extracted from the original ROM by yourself).
+- Extracted dialog texts (in `./src/text`),
+- The original ROM (used to fill-in sections not disassembled yet).
 
 ## Status
 

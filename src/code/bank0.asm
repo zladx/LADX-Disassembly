@@ -3625,9 +3625,11 @@ data_2205::
 
 ; Update BG map during room transition
 UpdateSlidingBGMap::
+    ; Switch to Map Data bank
     ld   a, $08
     ld   [MBC3SelectBank], a
-    call label_2234
+    call DoUpdateSlidingBGMap
+    ; Reload saved bank and return
     jp   ReloadSavedBank
 
 label_2214::
@@ -3662,79 +3664,93 @@ label_222C::
     inc  bc
     ret
 
-; Load some palette data?
-label_2234::
+; Load BG data during map transition
+DoUpdateSlidingBGMap::
+    ; Configures an async data request to copy background tilemap
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4A76
+
+    ; Switch back to Map Data bank
     ld   a, $08
     ld   [MBC3SelectBank], a
 
-label_2241::
+.loop
     push bc
     push de
+
+    ; hl = wTileMap + $FFD9
     ldh  a, [$FFD9]
     ld   c, a
     ld   b, $00
     ld   hl, wTileMap
     add  hl, bc
+    
+    ; c = wTileMap[$FFD9]
     ld   b, $00
     ld   c, [hl]
+
+    ; If running on GBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_2262
+    jr   z, .ramSwitchEnd
+    ; … and is indoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_2262
+    jr   nz, .ramSwitchEnd
+    ; … switch to RAM Bank 2,
     ld   a, $02
     ld   [rSVBK], a
+    ; read hl,
     ld   c, [hl]
+    ; switch back to RAM Bank 0.
     xor  a
     ld   [rSVBK], a
+.ramSwitchEnd
 
-label_2262::
     sla  c
     rl   b
     sla  c
     rl   b
+    
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_2286
+    jr   z, .label_2286
     ld   hl, $4000
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_2299
+    jr   z, .label_2299
     ld   hl, $43B0
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2291
+    jr   nz, .label_2291
     ld   hl, $4760
-    jr   label_2291
+    jr   .label_2291
 
-label_2286::
+.label_2286
     ld   hl, $6749
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_2299
+    jr   z, .label_2299
     ld   hl, $6B1D
 
-label_2291::
+.label_2291
     ld   a, $1A
     ld   [MBC3SelectBank], a
     call $6576
 
-label_2299::
+.label_2299
     call label_3905
     add  hl, bc
     pop  de
     pop  bc
     ld   a, [wRoomTransitionDirection]
     and  $02
-    jr   z, label_22D3
+    jr   z, .label_22D3
     call label_2214
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_22D1
+    jr   z, .label_22D1
     push bc
     push de
     ld   a, $20
@@ -3755,14 +3771,14 @@ label_2299::
     pop  de
     pop  bc
 
-label_22D1::
-    jr   label_22FE
+.label_22D1
+    jr   .label_22FE
 
-label_22D3::
+.label_22D3
     call label_2224
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_22FE
+    jr   z, .label_22FE
     push bc
     push de
     ld   a, $20
@@ -3783,7 +3799,7 @@ label_22D3::
     pop  de
     pop  bc
 
-label_22FE::
+.label_22FE
     push bc
     ld   a, [wRoomTransitionDirection]
     ld   c, a
@@ -3797,7 +3813,7 @@ label_22FE::
     ld   a, [$C128]
     dec  a
     ld   [$C128], a
-    jp   nz, label_2241
+    jp   nz, .loop
     ld   a, $20
     ld   [MBC3SelectBank], a
     jp   $5570

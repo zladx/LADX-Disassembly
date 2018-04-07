@@ -184,12 +184,12 @@ wC16E: ds 1
 ; Values goes from 0 to 5.
 wDialogOpenCloseAnimationFrame: ds 1 ; C16F
 wDialogCharacterIndex ds 1 ; C170
-wDialogNextCharPosition: ds 1
+wDialogNextCharPosition: ds 1 ; C171
 
 wDialogScrollDelay:: ; C172
   ds 1
 
-wDialogIndex: ds 1
+wDialogIndex: ds 1 ; C173
 wC174: ds 1
 wC175: ds 1
 wC176: ds 1

@@ -10,7 +10,7 @@
 05 Code and data
 06 Code and data
 07 n/a
-08 Data
+08 Map data
 09 Data and text
 0A n/a
 0B n/a

@@ -18,6 +18,20 @@ This repository produces a valid Zelda DX ROM from several different inputs:
 - Extracted PNG graphics (in `./src/gfx`),
 - Binary banks not disassembled yet (in `./bin/banks`, to be extracted from the original ROM by yourself).
 
+## Status
+
+- Bank 0 : disassembled, 35% documented
+- Bank 1 : disassembled, 10% documented
+- Bank 2 : disassembled, 15% documented
+- Bank 3 : disassembled
+- Bank 4 : disassembled
+- Other banks : not disassembled yet
+- Memory : 20% documented
+- Dialogs : extracted, 100%
+- Graphics : extracted, 100%
+- Maps : not extracted
+- Music : not extracted
+
 ## How to label code
 
 Disassembling the code is easy, and computers are very good at it. What is difficult is to _label_ the original code, finding the meaning behind of function calls and memory manipulations.

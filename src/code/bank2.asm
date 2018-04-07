@@ -7098,7 +7098,7 @@ CheckPositionForMapTransition::
     ld   [wRoomTransitionDirection], a            ; $6DE5: $EA $25 $C1
     
     ; Set the initial state
-    ld   a, ROOM_TRANSITION_PREPARE_1             ; $6DE8: $3E $01
+    ld   a, ROOM_TRANSITION_LOAD_ROOM             ; $6DE8: $3E $01
     ld   [wRoomTransitionState], a                ; $6DEA: $EA $24 $C1
     
     ; Clear some state before the transition

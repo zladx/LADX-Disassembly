@@ -28,13 +28,13 @@ RoomTransitionYIncrement::
 
 ApplyRoomTransition::
     ld   a, [wRoomTransitionState]                ; $78E8: $FA $24 $C1
-    cp   ROOM_TRANSITION_NONE                           ; $78EB: $FE $00
+    cp   ROOM_TRANSITION_NONE                     ; $78EB: $FE $00
     jp   z, .return                               ; $78ED: $CA $D9 $79
 
-    ; If wRoomTransitionState < ROOM_TRANSITION_FIRST_HALF,
+    ; If the room transition didn't start to scroll yet,
     ; go directly to the jump table.
     push af                                       ; $78F0: $F5
-    cp   ROOM_TRANSITION_FIRST_HALF                     ; $78F1: $FE $04
+    cp   ROOM_TRANSITION_FIRST_HALF               ; $78F1: $FE $04
     jp   c, .dispatchTransition                   ; $78F3: $DA $CC $79
 
     ;
@@ -75,7 +75,7 @@ ApplyRoomTransition::
     ldh  [hBaseScrollY], a                        ; $791F: $E0 $97
 
     ; If the target scroll position is not reached yet,
-    ; go directly to the jump table
+    ; go to the jump table
     ld   hl, wRoomTransitionTargetScrollY         ; $7921: $21 $2D $C1
     cp   [hl]                                     ; $7924: $BE
     jp   nz, .dispatchTransition                  ; $7925: $C2 $CC $79
@@ -229,9 +229,9 @@ ApplyRoomTransition::
     pop  af                                       ; $79CC: $F1
     dec  a                                        ; $79CD: $3D
     JP_TABLE                                      ; $79CE: $C7
-._00 dw RoomTransitionPrepare1Handler
-._01 dw RoomTransitionPrepare2Handler
-._02 dw RoomTransitionPrepare3Handler
+._00 dw RoomTransitionPrepareHandler
+._01 dw RoomTransitionLoadSprites
+._02 dw RoomTransitionConfigureScrollTargets
 ._03 dw RoomTransitionFirstHalfHandler
 ._04 dw RoomTransitionSecondHalfHandler
 
@@ -272,7 +272,7 @@ WindFishEggMazeSequence::
     db ROOM_TRANSITION_DIR_TOP
     db ROOM_TRANSITION_DIR_TOP
 
-RoomTransitionPrepare1Handler::
+RoomTransitionPrepareHandler::
     ld   a, [wRoomTransitionDirection]            ; $79FA: $FA $25 $C1
     ld   c, a                                     ; $79FD: $4F
     ld   b, $00                                   ; $79FE: $06 $00
@@ -435,12 +435,11 @@ RoomTransitionPrepare1Handler::
     bit  6, [hl]                                  ; $7A9A: $CB $76
     jr   nz, .forestRoomEnd                       ; $7A9C: $20 $07
 
-    ; … mark the room as discovered
+    ; … mark the room as discovered…
     set  6, [hl]                                  ; $7A9E: $CB $F6
-
-    ; ???
-    ld   a, $02                                   ; $7AA0: $3E $02
-    ld   [wNextJingle], a                               ; $7AA2: $EA $69 $C1
+    ; … and play a success jingle.
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $7AA0: $3E $02
+    ld   [wNextJingle], a                         ; $7AA2: $EA $69 $C1
 .forestRoomEnd
 
 .loadRoom
@@ -562,7 +561,7 @@ IncrementRoomTransitionStateAndReturn::
     ld   [wRoomTransitionState], a                ; $7B3A: $EA $24 $C1
     ret                                           ; $7B3D: $C9
 
-RoomTransitionPrepare2Handler::
+RoomTransitionLoadSprites::
     call LoadRoomSprites                          ; $7B3E: $CD $1E $0D
     
     ; If $D6FA == 2…
@@ -646,7 +645,7 @@ IndoorRoomIncrement::
 .top    db $F8
 .bottom db $08
 
-RoomTransitionPrepare3Handler::
+RoomTransitionConfigureScrollTargets::
     ; If $FFBB == 0, return
     ldh  a, [$FFBB]                               ; $7B7F: $F0 $BB
     and  a                                        ; $7B81: $A7

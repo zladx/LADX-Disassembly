@@ -196,19 +196,19 @@ ApplyRoomTransition::
 
     call GetChestsStatusForRoom                   ; $79A9: $CD $ED $29
 
-    ; If chests status are neither $1A nor $19, and $C18E != 80, return.
-    cp   $1A                                      ; $79AC: $FE $1A
-    jr   z, .hasCompassDetectableStatus           ; $79AE: $28 $0C
+    ; If chest status is not some key, and $C18E != 80, return.
+    cp   CHEST_SMALL_KEY                          ; $79AC: $FE $1A
+    jr   z, .hasCompassDetectableTreasure         ; $79AE: $28 $0C
 
-    cp   $19                                      ; $79B0: $FE $19
-    jr   z, .hasCompassDetectableStatus           ; $79B2: $28 $08
+    cp   CHEST_NIGHTMARE_KEY                      ; $79B0: $FE $19
+    jr   z, .hasCompassDetectableTreasure         ; $79B2: $28 $08
 
     ld   a, [$C18E]                               ; $79B4: $FA $8E $C1
     and  $E0                                      ; $79B7: $E6 $E0
     cp   $80                                      ; $79B9: $FE $80
     ret  nz                                       ; $79BB: $C0
 
-.hasCompassDetectableStatus
+.hasCompassDetectableTreasure
 
     ; If player doesn't have the compass, return
     ld   a, [wHasDungeonCompass]                  ; $79BC: $FA $CD $DB

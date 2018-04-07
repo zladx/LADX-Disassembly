@@ -674,7 +674,7 @@ label_43E9::
     jr   nc, label_4425
     cp   MAP_EAGLES_TOWER
     jr   nz, label_440B
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_4425
 
@@ -2912,7 +2912,7 @@ label_5295::
 
 label_52A4::
     xor  a
-    ldh  [hFFF9], a
+    ldh  [hIsSideScrolling], a
     ld   a, [$DB5A]
     and  a
     jr   nz, label_52BB
@@ -3032,7 +3032,7 @@ label_5353::
     ld   a, [$DB64]
     ld   [wIndoorRoom], a
     xor  a
-    ldh  [hFFF9], a
+    ldh  [hIsSideScrolling], a
     ld   a, $03
     ldh  [$FF9E], a
     ld   a, [$DB5F]
@@ -4891,7 +4891,7 @@ label_5FB3::
     ld   a, [wIsIndoor]
     and  a
     jr   z, label_5FD3
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     ret  nz
     ldh  a, [hMapId]
@@ -6819,7 +6819,7 @@ label_6E03::
     ld   h, [hl]
     ld   l, a
     ld   [hl], $A3
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_6E18
     ld   [hl], $7F

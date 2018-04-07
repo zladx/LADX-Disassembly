@@ -283,7 +283,7 @@ jr_002_4367:
     ret                                           ; $436B: $C9
 
 func_002_436C::
-    ldh  a, [hFFF9]                               ; $436C: $F0 $F9
+    ldh  a, [hIsSideScrolling]                    ; $436C: $F0 $F9
     and  a                                        ; $436E: $A7
     jr   z, jr_002_43BA                           ; $436F: $28 $49
 
@@ -565,7 +565,7 @@ jr_002_44E3:
     and  a                                        ; $44F0: $A7
     jp   z, label_002_45AC                        ; $44F1: $CA $AC $45
 
-    ldh  a, [hFFF9]                               ; $44F4: $F0 $F9
+    ldh  a, [hIsSideScrolling]                    ; $44F4: $F0 $F9
     and  a                                        ; $44F6: $A7
     jp   nz, label_002_45AC                       ; $44F7: $C2 $AC $45
 
@@ -1646,7 +1646,7 @@ func_002_4D20::
     or   [hl]                                     ; $4D26: $B6
     ld   hl, wLinkMotionState                     ; $4D27: $21 $1C $C1
     or   [hl]                                     ; $4D2A: $B6
-    ld   hl, hFFF9                                ; $4D2B: $21 $F9 $FF
+    ld   hl, hIsSideScrolling                                ; $4D2B: $21 $F9 $FF
     or   [hl]                                     ; $4D2E: $B6
     jp   nz, label_002_4D95                       ; $4D2F: $C2 $95 $4D
 
@@ -6782,8 +6782,8 @@ jr_002_6C74:
     ret                                           ; $6C74: $C9
 
 ; Check Link's position, and initiate a map or room transition if needed
-; TODO
 CheckPositionForMapTransition::
+    ; If a dialog or the inventory is visible, return
     ld   a, [wDialogState]                        ; $6C75: $FA $9F $C1
     ld   hl, wInventoryAppearing                  ; $6C78: $21 $4F $C1
     or   [hl]                                     ; $6C7B: $B6
@@ -6793,7 +6793,7 @@ CheckPositionForMapTransition::
     cp   MAP_CAVE_E                               ; $6C7F: $FE $1F
     jr   nz, jr_002_6C99                          ; $6C81: $20 $16
 
-    ldh  a, [hFFF9]                               ; $6C83: $F0 $F9
+    ldh  a, [hIsSideScrolling]                    ; $6C83: $F0 $F9
     and  a                                        ; $6C85: $A7
     jr   z, jr_002_6C99                           ; $6C86: $28 $11
 
@@ -6832,7 +6832,7 @@ jr_002_6C99:
     jp   label_002_6E09                           ; $6CB3: $C3 $09 $6E
 
 jr_002_6CB6:
-    ldh  a, [hFFF9]                               ; $6CB6: $F0 $F9
+    ldh  a, [hIsSideScrolling]                    ; $6CB6: $F0 $F9
     and  a                                        ; $6CB8: $A7
     jr   nz, jr_002_6CD1                          ; $6CB9: $20 $16
 
@@ -6899,7 +6899,7 @@ jr_002_6D13:
     ldh  [hLinkPositionX], a                      ; $6D15: $E0 $98
     xor  a                                        ; $6D17: $AF
     ldh  [hLinkPositionXIncrement], a                               ; $6D18: $E0 $9A
-    ldh  a, [hFFF9]                               ; $6D1A: $F0 $F9
+    ldh  a, [hIsSideScrolling]                    ; $6D1A: $F0 $F9
     and  a                                        ; $6D1C: $A7
     jr   z, label_002_6D5C                        ; $6D1D: $28 $3D
 
@@ -6959,7 +6959,7 @@ label_002_6D5C::
     cp   $06                                      ; $6D77: $FE $06
     jp   z, label_002_6E0C                        ; $6D79: $CA $0C $6E
 
-    ldh  a, [hFFF9]                               ; $6D7C: $F0 $F9
+    ldh  a, [hIsSideScrolling]                    ; $6D7C: $F0 $F9
     and  a                                        ; $6D7E: $A7
     jr   nz, jr_002_6D88                          ; $6D7F: $20 $07
 
@@ -6987,7 +6987,7 @@ jr_002_6D94:
     jr   nc, initiateRoomTransition               ; $6DA1: $30 $29
 
     ld   a, [$C14A]                               ; $6DA3: $FA $4A $C1
-    ld   hl, hFFF9                                ; $6DA6: $21 $F9 $FF
+    ld   hl, hIsSideScrolling                                ; $6DA6: $21 $F9 $FF
     or   [hl]                                     ; $6DA9: $B6
     ld   hl, $FFB2                                ; $6DAA: $21 $B2 $FF
     or   [hl]                                     ; $6DAD: $B6
@@ -7103,7 +7103,7 @@ CheckForLedgeJump::
     or   [hl]                                     ; $6E4B: $B6
     ret  nz                                       ; $6E4C: $C0
 
-    ldh  a, [hFFF9]                               ; $6E4D: $F0 $F9
+    ldh  a, [hIsSideScrolling]                    ; $6E4D: $F0 $F9
     and  a                                        ; $6E4F: $A7
     jr   z, jr_002_6E55                           ; $6E50: $28 $03
 
@@ -8419,7 +8419,7 @@ func_002_75F5::
     ldh  [hLinkPositionYIncrement], a                               ; $7608: $E0 $9B
     ld   a, $02                                   ; $760A: $3E $02
     ld   [$C146], a                               ; $760C: $EA $46 $C1
-    ldh  a, [hFFF9]                               ; $760F: $F0 $F9
+    ldh  a, [hIsSideScrolling]                    ; $760F: $F0 $F9
     and  a                                        ; $7611: $A7
     jr   nz, jr_002_761E                          ; $7612: $20 $0A
 

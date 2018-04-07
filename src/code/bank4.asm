@@ -4476,7 +4476,7 @@ jr_004_5F91:
     ret                                           ; $5F95: $C9
 
 jr_004_5F96:
-    ldh  a, [hFFF9]                               ; $5F96: $F0 $F9
+    ldh  a, [hIsSideScrolling]                    ; $5F96: $F0 $F9
     and  a                                        ; $5F98: $A7
     jp   nz, $60A4                                ; $5F99: $C2 $A4 $60
 

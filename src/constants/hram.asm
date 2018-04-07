@@ -192,7 +192,10 @@ hMapId:: ; FFF7
 hFFF8:: ; FFF8
   ds 1
 
-hFFF9:: ; FFF9
+hIsSideScrolling:: ; FFF9
+  ; 0  top view
+  ; 1  Unknown
+  ; 2  side-scrolling view
   ds 1
 
 hLinkRoomPosition:: ; FFFA

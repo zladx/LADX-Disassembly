@@ -2128,7 +2128,7 @@ label_D5FA::
     ld   a, [$C1BE]
     ld   hl, wActivePowerUp
     or   [hl]
-    ld   hl, hFFF9
+    ld   hl, hIsSideScrolling
     or   [hl]
     jr   nz, label_D60F
     ld   a, $34
@@ -2162,7 +2162,7 @@ label_D62E::
     jr   c, label_D648
     ld   [hl], b
     ld   a, [$C1BE]
-    ld   hl, hFFF9
+    ld   hl, hIsSideScrolling
     or   [hl]
     ld   hl, wActivePowerUp
     or   [hl]
@@ -2222,7 +2222,7 @@ label_D670::
     ld   hl, $C480
     add  hl, de
     ld   [hl], $03
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_D6D9
     ld   hl, $C3A0
@@ -2388,7 +2388,7 @@ label_D795::
     ld   hl, $C210
     add  hl, bc
     ld   [hl], a
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_D7D7
     push hl
@@ -3680,7 +3680,7 @@ label_E0B3::
     call label_FF25
     call label_EB7B
     call label_F893
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_E0E3
     ld   hl, $C2A0
@@ -3777,7 +3777,7 @@ label_E136::
 
 label_E143::
     ld   [hl], a
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_E156
     ld   hl, $C250
@@ -4621,7 +4621,7 @@ label_E6FA::
     call label_EB34
 
 label_E706::
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     ret  nz
     ld   a, [hl]
@@ -4678,7 +4678,7 @@ data_E76D::
     db 0, 0, $10, 0
 
 label_E771::
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jp   nz, label_E8E5
     push bc
@@ -5290,7 +5290,7 @@ data_EB77::
     db $40, 8, $40, $40
 
 label_EB7B::
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_EB8C
     call label_FF5E
@@ -5557,7 +5557,7 @@ label_ECF9::
     ldh  a, [$FFB7]
     and  a
     jr   nz, label_ED1B
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_ED15
     ldh  a, [$FFA3]
@@ -5581,7 +5581,7 @@ label_ED1B::
     ld   [hl], $30
     ld   a, $0E
     ldh  [hSFX], a
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_ED38
     ld   a, $10
@@ -5708,7 +5708,7 @@ label_EDFA::
 
 label_EE02::
     call label_F565
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_EE0E
 
@@ -7494,7 +7494,7 @@ label_F90C::
     ldh  a, [$FFD7]
     cp   $03
     jr   z, label_F973
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_F93D
     ld   hl, $C320

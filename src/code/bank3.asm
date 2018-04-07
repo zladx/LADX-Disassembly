@@ -1698,7 +1698,7 @@ label_D25D::
     call label_D2D4
     call label_EC77
     jr   nc, label_D276
-    call label_CBE
+    call CopyLinkFinalPositionToPosition
     ld   a, $03
     ld   [$C144], a
 
@@ -1852,6 +1852,7 @@ label_D369::
     ldh  a, [$FFF1]
     and  a
     jr   nz, label_D392
+    ; If in a house…
     ldh  a, [hMapId]
     cp   $1E
     jr   z, label_D378
@@ -1859,17 +1860,22 @@ label_D369::
     jr   nz, label_D392
 
 label_D378::
-    ld   a, [$DB73]
+    ; … and Marin is following Link…
+    ld   a, [wIsMarinFollowingLink]
     and  a
     jr   z, label_D392
+
+    ; draw a random number
     call GetRandomByte
     and  $3F
     jr   nz, label_D38D
+    ; Open Marin reaction 1
     ld   a, $28
     call OpenDialog
     jp   label_3F8D
 
 label_D38D::
+    ; Open Marin reaction 2
     ld   a, $99
     call OpenDialogInTable1
 

@@ -794,7 +794,7 @@ label_CB6::
     ld   [$C14A], a
     ret
 
-label_CBE::
+CopyLinkFinalPositionToPosition::
     ldh  a, [hLinkFinalPositionX]
     ldh  [hLinkPositionX], a
     ldh  a, [hLinkFinalPositionY]

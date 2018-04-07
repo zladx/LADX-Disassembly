@@ -9453,7 +9453,7 @@ func_004_7BE3:
     call label_3B5A                               ; $7BE3: $CD $5A $3B
     jr   nc, jr_004_7C05                          ; $7BE6: $30 $1D
 
-    call label_CBE                                ; $7BE8: $CD $BE $0C
+    call CopyLinkFinalPositionToPosition          ; $7BE8: $CD $BE $0C
     call label_CB6                                ; $7BEB: $CD $B6 $0C
     ld   a, [$C1A6]                               ; $7BEE: $FA $A6 $C1
     and  a                                        ; $7BF1: $A7

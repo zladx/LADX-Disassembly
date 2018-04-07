@@ -121,7 +121,7 @@ ApplyRoomTransition::
     ldh  [hLinkPositionYIncrement], a             ; $7958: $E0 $9B
     call CheckForLedgeJump                        ; $795A: $CD $45 $6E
 
-    ; If ($FFAF != $DB && $FFAF != $DC && ($FFAF == $E1 || $C133 != 0),
+    ; If ($FFAF != $DB && $FFAF != $DC && ($FFAF == $E1 || wCollisionType != 0),
     ; handle special case.
     ldh  a, [$FFAF]                               ; $795D: $F0 $AF
     cp   $DB                                      ; $795F: $FE $DB
@@ -133,7 +133,7 @@ ApplyRoomTransition::
     cp   $E1                                      ; $7967: $FE $E1
     jr   z, .handleFFAFSpecialCase                ; $7969: $28 $06
 
-    ld   a, [$C133]                               ; $796B: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $796B: $FA $33 $C1
     and  a                                        ; $796E: $A7
     jr   z, .bottomDirectionEnd                   ; $796F: $28 $09
 

@@ -111,7 +111,18 @@ wBGOriginLow:: ; C12F
   ds 1
 
 ; Unlabeled
-ds $D
+ds 3
+
+wCollisionType:: ; C133
+  ; 00  no collision
+  ; 03  obstacle on top/bottom
+  ; 04  unknown
+  ; 08  unknown
+  ; 0C  obstacle on left/right
+  ds 1
+
+; Unlabeled
+ds $9
 
 wRandomSeed:: ; C13D
   ; Seed for the Random Number Generator

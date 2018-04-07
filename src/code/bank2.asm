@@ -537,7 +537,7 @@ func_002_44C2::
     ld   [$C13E], a                               ; $44C8: $EA $3E $C1
     call label_21A8                               ; $44CB: $CD $A8 $21
     call CheckPositionForMapTransition                            ; $44CE: $CD $75 $6C
-    ld   a, [$C133]                               ; $44D1: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $44D1: $FA $33 $C1
     and  a                                        ; $44D4: $A7
     jr   z, jr_002_44E3                           ; $44D5: $28 $0C
 
@@ -1044,7 +1044,7 @@ jr_002_4978:
     cp   $61                                      ; $4996: $FE $61
     jr   z, jr_002_49A0                           ; $4998: $28 $06
 
-    ld   a, [$C133]                               ; $499A: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $499A: $FA $33 $C1
     and  a                                        ; $499D: $A7
     jr   nz, jr_002_4978                          ; $499E: $20 $D8
 
@@ -6342,7 +6342,7 @@ jr_002_69F1:
 
 jr_002_69F3:
     call func_002_6B56                            ; $69F3: $CD $56 $6B
-    ld   a, [$C133]                               ; $69F6: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $69F6: $FA $33 $C1
     and  $08                                      ; $69F9: $E6 $08
     jr   z, jr_002_6A00                           ; $69FB: $28 $03
 
@@ -6401,7 +6401,7 @@ jr_002_6A4C:
     and  a                                        ; $6A4F: $A7
     jr   nz, jr_002_6A94                          ; $6A50: $20 $42
 
-    ld   a, [$C133]                               ; $6A52: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6A52: $FA $33 $C1
     and  $08                                      ; $6A55: $E6 $08
     jr   nz, jr_002_6A94                          ; $6A57: $20 $3B
 
@@ -6536,7 +6536,7 @@ jr_002_6AFC:
     cp   $B0                                      ; $6B0A: $FE $B0
     jr   nz, jr_002_6B34                          ; $6B0C: $20 $26
 
-    ld   a, [$C133]                               ; $6B0E: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6B0E: $FA $33 $C1
     and  a                                        ; $6B11: $A7
     jr   nz, jr_002_6B26                          ; $6B12: $20 $12
 
@@ -6612,7 +6612,7 @@ label_002_6B66::
     ldh  a, [$FFD8]                               ; $6B6D: $F0 $D8
     ldh  [$FFD7], a                               ; $6B6F: $E0 $D7
     xor  a                                        ; $6B71: $AF
-    ld   [$C133], a                               ; $6B72: $EA $33 $C1
+    ld   [wCollisionType], a                               ; $6B72: $EA $33 $C1
     ld   c, $00                                   ; $6B75: $0E $00
     ldh  a, [hLinkPositionXIncrement]                               ; $6B77: $F0 $9A
     and  a                                        ; $6B79: $A7
@@ -6680,14 +6680,14 @@ jr_002_6BAC:
     jr   z, jr_002_6BD8                           ; $6BCF: $28 $07
 
 jr_002_6BD1:
-    ld   a, [$C133]                               ; $6BD1: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6BD1: $FA $33 $C1
     and  $08                                      ; $6BD4: $E6 $08
     jr   z, jr_002_6BEB                           ; $6BD6: $28 $13
 
 jr_002_6BD8:
-    ld   a, [$C133]                               ; $6BD8: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6BD8: $FA $33 $C1
     or   $08                                      ; $6BDB: $F6 $08
-    ld   [$C133], a                               ; $6BDD: $EA $33 $C1
+    ld   [wCollisionType], a                               ; $6BDD: $EA $33 $C1
     xor  a                                        ; $6BE0: $AF
     ldh  [hLinkPositionYIncrement], a                               ; $6BE1: $E0 $9B
     ldh  a, [hLinkPositionY]                      ; $6BE3: $F0 $99
@@ -6696,7 +6696,7 @@ jr_002_6BD8:
     ldh  [hLinkPositionY], a                      ; $6BE9: $E0 $99
 
 jr_002_6BEB:
-    ld   a, [$C133]                               ; $6BEB: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6BEB: $FA $33 $C1
     and  $04                                      ; $6BEE: $E6 $04
     jr   z, jr_002_6BF6                           ; $6BF0: $28 $04
 
@@ -6704,7 +6704,7 @@ jr_002_6BEB:
     ldh  [hLinkPositionY], a                      ; $6BF4: $E0 $99
 
 jr_002_6BF6:
-    ld   a, [$C133]                               ; $6BF6: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6BF6: $FA $33 $C1
     and  $03                                      ; $6BF9: $E6 $03
     ret  z                                        ; $6BFB: $C8
 
@@ -6774,9 +6774,9 @@ func_002_6C2F::
 func_002_6C69::
     ld   hl, $6B57                                ; $6C69: $21 $57 $6B
     add  hl, bc                                   ; $6C6C: $09
-    ld   a, [$C133]                               ; $6C6D: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6C6D: $FA $33 $C1
     or   [hl]                                     ; $6C70: $B6
-    ld   [$C133], a                               ; $6C71: $EA $33 $C1
+    ld   [wCollisionType], a                               ; $6C71: $EA $33 $C1
 
 jr_002_6C74:
     ret                                           ; $6C74: $C9
@@ -7111,7 +7111,7 @@ CheckForLedgeJump::
 
 jr_002_6E55:
     xor  a                                        ; $6E55: $AF
-    ld   [$C133], a                               ; $6E56: $EA $33 $C1
+    ld   [wCollisionType], a                               ; $6E56: $EA $33 $C1
     ldh  a, [hLinkPositionYIncrement]                               ; $6E59: $F0 $9B
     cp   $00                                      ; $6E5B: $FE $00
     jr   z, jr_002_6EDD                           ; $6E5D: $28 $7E
@@ -7191,7 +7191,7 @@ jr_002_6EB5:
     jp   label_CB6                                ; $6EC3: $C3 $B6 $0C
 
 jr_002_6EC6:
-    ld   a, [$C133]                               ; $6EC6: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6EC6: $FA $33 $C1
     and  $03                                      ; $6EC9: $E6 $03
     jr   z, jr_002_6EDD                           ; $6ECB: $28 $10
 
@@ -7236,7 +7236,7 @@ jr_002_6EF6:
     dec  e                                        ; $6EFE: $1D
     jr   nz, jr_002_6EF6                          ; $6EFF: $20 $F5
 
-    ld   a, [$C133]                               ; $6F01: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6F01: $FA $33 $C1
     and  $0C                                      ; $6F04: $E6 $0C
     jr   z, jr_002_6F1C                           ; $6F06: $28 $14
 
@@ -7253,7 +7253,7 @@ jr_002_6EF6:
     ldh  [hLinkPositionX], a                      ; $6F1A: $E0 $98
 
 jr_002_6F1C:
-    ld   a, [$C133]                               ; $6F1C: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $6F1C: $FA $33 $C1
     and  a                                        ; $6F1F: $A7
     jr   nz, jr_002_6F25                          ; $6F20: $20 $03
 
@@ -8126,9 +8126,9 @@ jr_002_742F:
 label_002_7454::
     ld   hl, $6E29                                ; $7454: $21 $29 $6E
     add  hl, bc                                   ; $7457: $09
-    ld   a, [$C133]                               ; $7458: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $7458: $FA $33 $C1
     or   [hl]                                     ; $745B: $B6
-    ld   [$C133], a                               ; $745C: $EA $33 $C1
+    ld   [wCollisionType], a                               ; $745C: $EA $33 $C1
     scf                                           ; $745F: $37
     ret                                           ; $7460: $C9
 
@@ -8195,12 +8195,12 @@ label_002_74AD::
     cp   $02                                      ; $74B5: $FE $02
     ret  nz                                       ; $74B7: $C0
 
-    ld   a, [$C133]                               ; $74B8: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $74B8: $FA $33 $C1
     and  $03                                      ; $74BB: $E6 $03
     cp   $03                                      ; $74BD: $FE $03
     jr   z, jr_002_74C9                           ; $74BF: $28 $08
 
-    ld   a, [$C133]                               ; $74C1: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $74C1: $FA $33 $C1
     and  $0C                                      ; $74C4: $E6 $0C
     cp   $0C                                      ; $74C6: $FE $0C
     ret  nz                                       ; $74C8: $C0

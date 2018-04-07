@@ -3918,7 +3918,7 @@ jr_004_5C16:
     cp   $20                                      ; $5C2E: $FE $20
     jr   nc, jr_004_5C42                          ; $5C30: $30 $10
 
-    ld   a, [$C133]                               ; $5C32: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $5C32: $FA $33 $C1
     and  a                                        ; $5C35: $A7
     jr   z, jr_004_5C42                           ; $5C36: $28 $0A
 

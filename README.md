@@ -21,17 +21,17 @@ This repository produces a valid Zelda DX ROM from several different inputs:
 
 ## Status
 
-- Bank 0 : disassembled, 35% documented
-- Bank 1 : disassembled, 10% documented
-- Bank 2 : disassembled, 15% documented
-- Bank 3 : disassembled
-- Bank 4 : disassembled
-- Other banks : not disassembled yet
-- Memory : 20% documented
-- Dialogs : extracted, 100%
-- Graphics : extracted, 100%
-- Maps : not extracted
-- Music : not extracted
+- Bank 0: disassembled, 35% documented
+- Bank 1: disassembled, 10% documented
+- Bank 2: disassembled, 15% documented
+- Bank 3: disassembled
+- Bank 4: disassembled
+- Other banks: not disassembled yet
+- Memory: 20% documented
+- Dialogs: extracted, 100%
+- Graphics: extracted, 100%
+- Maps: not extracted
+- Music: not extracted
 
 ## How to label code
 

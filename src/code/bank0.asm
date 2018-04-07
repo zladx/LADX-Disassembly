@@ -1502,7 +1502,7 @@ label_10EF::
     ld   a, [wLinkMotionState]
     cp   LINK_MOTION_PASS_OUT
     jr   z, .linkMotionJumpTable
-    ld   a, [$DB5A]
+    ld   a, [wHealth]
     ld   hl, $C50A
     or   [hl]
     ld   hl, wInventoryAppearing

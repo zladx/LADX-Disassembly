@@ -5661,17 +5661,17 @@ jr_004_6677:
     or   $10                                      ; $66B9: $F6 $10
     ld   [hl], a                                  ; $66BB: $77
     ldh  [hFFF8], a                               ; $66BC: $E0 $F8
-    ld   a, [$DB5C]                               ; $66BE: $FA $5C $DB
+    ld   a, [wHeartPiecesCount]                               ; $66BE: $FA $5C $DB
     inc  a                                        ; $66C1: $3C
-    ld   [$DB5C], a                               ; $66C2: $EA $5C $DB
+    ld   [wHeartPiecesCount], a                               ; $66C2: $EA $5C $DB
     cp   $04                                      ; $66C5: $FE $04
     jr   nz, jr_004_66DA                          ; $66C7: $20 $11
 
     xor  a                                        ; $66C9: $AF
-    ld   [$DB5C], a                               ; $66CA: $EA $5C $DB
+    ld   [wHeartPiecesCount], a                               ; $66CA: $EA $5C $DB
     ld   hl, wSubstractRupeeBufferLow             ; $66CD: $21 $93 $DB
     ld   [hl], $40                                ; $66D0: $36 $40
-    ld   hl, $DB5B                                ; $66D2: $21 $5B $DB
+    ld   hl, wMaxHealth                                ; $66D2: $21 $5B $DB
     inc  [hl]                                     ; $66D5: $34
     ld   a, $FF                                   ; $66D6: $3E $FF
     jr   jr_004_66DC                              ; $66D8: $18 $02
@@ -9339,7 +9339,7 @@ jr_004_7B3F:
     call IsEntityFrameCounterZero                 ; $7B44: $CD $05 $0C
     ret  nz                                       ; $7B47: $C0
 
-    ld   a, [$DB5A]                               ; $7B48: $FA $5A $DB
+    ld   a, [wHealth]                               ; $7B48: $FA $5A $DB
     and  a                                        ; $7B4B: $A7
     ret  nz                                       ; $7B4C: $C0
 

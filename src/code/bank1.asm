@@ -2913,10 +2913,10 @@ label_5295::
 label_52A4::
     xor  a
     ldh  [hIsSideScrolling], a
-    ld   a, [$DB5A]
+    ld   a, [wHealth]
     and  a
     jr   nz, label_52BB
-    ld   a, [$DB5B]
+    ld   a, [wMaxHealth]
     ld   e, a
 
 label_52B1::
@@ -2926,7 +2926,7 @@ label_52B3::
     ld   hl, label_5295
     add  hl, de
     ld   a, [hl]
-    ld   [$DB5A], a
+    ld   [wHealth], a
 
 label_52BB::
     ld   hl, $DBD1
@@ -4559,16 +4559,16 @@ label_5DE1::
     ret
 
 label_5DE6::
-    ld   a, [$DB5A]
+    ld   a, [wHealth]
     and  a
     jr   nz, label_5DFA
-    ld   a, [$DB5B]
+    ld   a, [wMaxHealth]
     ld   e, a
     ld   d, $00
     ld   hl, label_5295
     add  hl, de
     ld   a, [hl]
-    ld   [$DB5A], a
+    ld   [wHealth], a
 
 label_5DFA::
     call label_2802

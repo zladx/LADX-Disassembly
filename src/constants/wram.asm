@@ -355,7 +355,21 @@ wEntitiesUnknowTableF:: ; C2F0
 
 ; Unlabeled
 wC300 equ $C300 ; C300
-  ds $200
+  ds $AF
+
+wDroppedItem:: ; C3AF
+  ; Status of one of the items that can be dropped by cutting herbs
+  ds 1
+
+; Unlabeled
+ds $A8
+
+wDroppedItemsCountdown:: ; C458
+  ; Number of frame before a dropped item disappears
+  ds 8
+
+; Unlabeled
+ds $A0
 
 wAlternateBackgroundEnabled:: ; C500
   ; If enabled, alternate between two Background position every frame.
@@ -713,7 +727,18 @@ wIsBowWowFollowingLink:: ; DB56
 
 ; Unlabeled
 wDB57 equ $DB57
-  ds $6
+  ds $3
+
+wHealth:: ; DB5A
+  ; Number of hearts ($08 = 1 heart)
+  ds 1
+
+wMaxHealth:: ; DB5B
+  ; Maximum number of hearts
+  ds 1
+
+wHeartPiecesCount:: ; DB5C
+  ds 1
 
 wRupeeCountHigh:: ; DB5D
   ; Higher digits of the player rupees count

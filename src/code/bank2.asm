@@ -5485,12 +5485,12 @@ LoadRupeesDigits::
 label_002_6317::
     xor  a                                        ; $6317: $AF
     ld   [wC163], a                               ; $6318: $EA $63 $C1
-    ld   a, [$DB5B]                               ; $631B: $FA $5B $DB
+    ld   a, [wMaxHealth]                               ; $631B: $FA $5B $DB
     ld   e, a                                     ; $631E: $5F
     ld   d, $00                                   ; $631F: $16 $00
     ld   hl, $6308                                ; $6321: $21 $08 $63
     add  hl, de                                   ; $6324: $19
-    ld   a, [$DB5A]                               ; $6325: $FA $5A $DB
+    ld   a, [wHealth]                               ; $6325: $FA $5A $DB
     cp   [hl]                                     ; $6328: $BE
     jr   nc, jr_002_6342                          ; $6329: $30 $17
 
@@ -5523,7 +5523,7 @@ jr_002_6342:
 
     dec  a                                        ; $6354: $3D
     ld   [wSubstractRupeeBufferLow], a            ; $6355: $EA $93 $DB
-    ld   a, [$DB5B]                               ; $6358: $FA $5B $DB
+    ld   a, [wMaxHealth]                               ; $6358: $FA $5B $DB
     cp   $0F                                      ; $635B: $FE $0F
     jr   c, jr_002_6361                           ; $635D: $38 $02
 
@@ -5534,7 +5534,7 @@ jr_002_6361:
     sla  a                                        ; $6363: $CB $27
     sla  a                                        ; $6365: $CB $27
     ld   e, a                                     ; $6367: $5F
-    ld   a, [$DB5A]                               ; $6368: $FA $5A $DB
+    ld   a, [wHealth]                               ; $6368: $FA $5A $DB
     cp   e                                        ; $636B: $BB
     jr   nz, jr_002_6374                          ; $636C: $20 $06
 
@@ -5544,7 +5544,7 @@ jr_002_6361:
 
 jr_002_6374:
     inc  a                                        ; $6374: $3C
-    ld   [$DB5A], a                               ; $6375: $EA $5A $DB
+    ld   [wHealth], a                               ; $6375: $EA $5A $DB
     and  $07                                      ; $6378: $E6 $07
     cp   $06                                      ; $637A: $FE $06
     jr   nz, jr_002_6382                          ; $637C: $20 $04
@@ -5562,16 +5562,16 @@ jr_002_6385:
 
     dec  a                                        ; $638B: $3D
     ld   [wDB94], a                               ; $638C: $EA $94 $DB
-    ld   a, [$DB5A]                               ; $638F: $FA $5A $DB
+    ld   a, [wHealth]                               ; $638F: $FA $5A $DB
     and  a                                        ; $6392: $A7
     jr   z, jr_002_6399                           ; $6393: $28 $04
 
     dec  a                                        ; $6395: $3D
-    ld   [$DB5A], a                               ; $6396: $EA $5A $DB
+    ld   [wHealth], a                               ; $6396: $EA $5A $DB
 
 jr_002_6399:
     call func_002_6414                            ; $6399: $CD $14 $64
-    ld   a, [$DB5A]                               ; $639C: $FA $5A $DB
+    ld   a, [wHealth]                               ; $639C: $FA $5A $DB
     and  a                                        ; $639F: $A7
     jr   z, jr_002_63A3                           ; $63A0: $28 $01
 
@@ -5586,7 +5586,7 @@ jr_002_63A3:
     dec  a                                        ; $63A9: $3D
     ld   [wHasMedicine], a                        ; $63AA: $EA $0D $DB
     ld   a, $08                                   ; $63AD: $3E $08
-    ld   [$DB5A], a                               ; $63AF: $EA $5A $DB
+    ld   [wHealth], a                               ; $63AF: $EA $5A $DB
     ld   a, [wSubstractRupeeBufferLow]            ; $63B2: $FA $93 $DB
     add  $80                                      ; $63B5: $C6 $80
     ld   [wSubstractRupeeBufferLow], a            ; $63B7: $EA $93 $DB
@@ -5683,7 +5683,7 @@ jr_002_6429:
     ld   hl, wRequestData                         ; $6434: $21 $04 $D6
     add  hl, de                                   ; $6437: $19
     ld   c, $00                                   ; $6438: $0E $00
-    ld   a, [$DB5A]                               ; $643A: $FA $5A $DB
+    ld   a, [wHealth]                               ; $643A: $FA $5A $DB
     and  a                                        ; $643D: $A7
     jr   z, jr_002_6462                           ; $643E: $28 $22
 
@@ -5718,7 +5718,7 @@ jr_002_6459:
     jr   jr_002_646B                              ; $6460: $18 $09
 
 jr_002_6462:
-    ld   a, [$DB5B]                               ; $6462: $FA $5B $DB
+    ld   a, [wMaxHealth]                               ; $6462: $FA $5B $DB
     cp   c                                        ; $6465: $B9
     jr   z, jr_002_6477                           ; $6466: $28 $0F
 

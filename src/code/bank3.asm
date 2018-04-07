@@ -2146,7 +2146,7 @@ label_D60F::
     ret  z
     ld   e, a
     ld   d, $1E
-    ld   a, [$DB5B]
+    ld   a, [wMaxHealth]
     cp   $07
     jr   c, label_D62E
     ld   d, $23
@@ -2766,7 +2766,7 @@ data_D9D8::
     jr   nz, label_DA17
     ld   a, $18
     ld   [$D368], a
-    ld   hl, $DB5B
+    ld   hl, wMaxHealth
     inc  [hl]
     ld   hl, wSubstractRupeeBufferLow
     ld   [hl], $FF
@@ -2876,9 +2876,9 @@ data_DA4D::
     jp   z, IncrementEntityWalkingAttr
     cp   $38
     jr   nz, label_DABA
-    ld   a, [$DB5C]
+    ld   a, [wHeartPiecesCount]
     inc  a
-    ld   [$DB5C], a
+    ld   [wHeartPiecesCount], a
 
 label_DABA::
     ret
@@ -2891,17 +2891,24 @@ label_DABA::
     ld   a, [$C19F]
     and  a
     ret  nz
-    ld   a, [$DB5C]
+
+    ; If found 4 heart pieces…
+    ld   a, [wHeartPiecesCount]
     cp   $04
     jr   nz, label_DAED
+    ; Play a success jingle
     ld   a, $19
     ldh  [$FFF2], a
+    ; Clear heart pieces count
     xor  a
-    ld   [$DB5C], a
+    ld   [wHeartPiecesCount], a
+    ; Configure the heart increase animation
     ld   hl, wSubstractRupeeBufferLow
     ld   [hl], $40
-    ld   hl, $DB5B
+    ; Increase the maximum number of hearts
+    ld   hl, wMaxHealth
     inc  [hl]
+    ; Open the "4 pieces of heart collected" dialog
     ld   a, $50
     call OpenDialog
 
@@ -2962,7 +2969,7 @@ label_DB2B::
 
 label_DB41::
     ldh  [$FFEC], a
-    ld   a, [$DB5C]
+    ld   a, [wHeartPiecesCount]
     ldh  [$FFF1], a
     ld   a, $8E
     ldh  [$FFEE], a

@@ -170,7 +170,12 @@ hDialogBackgroundTile:: ; FFE8
   ds 1
 
 hFFE9:: ; FFE9
-  ds $A
+  ds $9
+
+hJingle:: ; FFF2
+  ; Play a jingle immediately
+  ; See JINGLE_* constants for possible values
+  ds 1
 
 hSFX:: ; FFF3
   ; Plays audio effect immediately

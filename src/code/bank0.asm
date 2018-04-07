@@ -682,8 +682,8 @@ label_C0C::
     ret
 
 label_C20::
-    ld   a, $1D
-    ldh  [$FFF2], a
+    ld   a, JINGLE_WRONG_ANSWER
+    ldh  [hJingle], a
     ret
 
 label_C25::
@@ -743,8 +743,8 @@ label_C60::
     ld   a, [$C19D]
     and  a
     jr   nz, label_C7B
-    ld   a, $02
-    ldh  [$FFF2], a
+    ld   a, JINGLE_PUZZLE_SOLVED
+    ldh  [hJingle], a
 
 label_C7B::
     pop  af
@@ -855,8 +855,8 @@ label_D07::
     ldh  [$FFD8], a
 
 label_D15::
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
     ld   a, $05
     jp   label_CC7
 
@@ -1782,8 +1782,8 @@ UseShovel::
 label_1300::
     call $4D20
     jr   nc, label_130B
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
     jr   label_130F
 
 label_130B::
@@ -2068,8 +2068,8 @@ UseRocksFeather::
     xor  a
     ld   [$C152], a
     ld   [$C153], a
-    ld   a, $0D
-    ldh  [$FFF2], a
+    ld   a, JINGLE_FEATHER_JUMP
+    ldh  [hJingle], a
     ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_1508
@@ -2393,8 +2393,8 @@ label_16DF::
     and  $F0
     cp   $90
     jr   z, label_16F8
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
     ret
 
 label_16F8::
@@ -2483,8 +2483,8 @@ label_1756::
 label_1781::
     ldh  a, [hLinkPositionY]
     ldh  [$FFD8], a
-    ld   a, $0E
-    ldh  [$FFF2], a
+    ld   a, JINGLE_WATER_DIVE
+    ldh  [hJingle], a
     ld   a, $0C
     jp   label_CC7
 

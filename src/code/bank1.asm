@@ -130,8 +130,8 @@ FileSaveInteractive::
     ldh  a, [$FFCC]
     and  $B0
     jr   z, LCDOn_return
-    ld   a, $13
-    ldh  [$FFF2], a
+    ld   a, JINGLE_VALIDATE
+    ldh  [hJingle], a
     ld   a, [$C13F]
     cp   $01
     jr   z, label_40F9
@@ -1467,8 +1467,8 @@ label_49AE::
     ld   [wGameplayType], a
 
 label_49BE::
-    ld   a, $13
-    ldh  [$FFF2], a
+    ld   a, JINGLE_VALIDATE
+    ldh  [hJingle], a
     ret
 
 label_49C3::
@@ -4091,8 +4091,8 @@ label_5AA0::
     ld   a, [wFreeMovementMode]
     and  a
     jr   nz, label_5AF5
-    ld   a, $09
-    ldh  [$FFF2], a
+    ld   a, JINGLE_BUMP
+    ldh  [hJingle], a
     ldh  a, [$FFD7]
     ld   [$DBB4], a
     jr   label_5B3F
@@ -5017,7 +5017,7 @@ label_6059::
     add  hl, de
     inc  [hl]
     ld   a, $2D
-    ldh  [$FFF2], a
+    ldh  [hJingle], a
 
 label_607F::
     ld   a, [$DB73]
@@ -5078,8 +5078,8 @@ label_609C::
     ldh  a, [hMapId]
     cp   MAP_CAVE_C
     jr   nz, label_60F7
-    ld   a, $08
-    ldh  [$FFF2], a
+    ld   a, JINGLE_JUMP_DOWN
+    ldh  [hJingle], a
     ld   [$C167], a
     ld   hl, $C300
     add  hl, de
@@ -5629,8 +5629,8 @@ label_652E::
     ld   a, [$D466]
     and  a
     jr   nz, label_6545
-    ld   a, $21
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SEAGULL
+    ldh  [hJingle], a
     call GetRandomByte
     and  $7F
     add  a, $60
@@ -6146,8 +6146,8 @@ label_68CF::
     ldh  a, [$FFCC]
     and  $B0
     jr   z, label_68E3
-    ld   a, $13
-    ldh  [$FFF2], a
+    ld   a, JINGLE_VALIDATE
+    ldh  [hJingle], a
 
 label_68D9::
     call IncrementGameplaySubtype
@@ -6511,8 +6511,8 @@ label_6B9A::
     ldh  a, [$FFCC]
     and  $B0
     jr   z, label_6BA7
-    ld   a, $13
-    ldh  [$FFF2], a
+    ld   a, JINGLE_VALIDATE
+    ldh  [hJingle], a
     call label_68D9
 
 label_6BA7::
@@ -6525,8 +6525,8 @@ label_6BA8::
 
 label_6BAE::
     push af
-    ld   a, $0A
-    ldh  [$FFF2], a
+    ld   a, JINGLE_MOVE_SELECTION
+    ldh  [hJingle], a
     pop  af
 
 label_6BB4::

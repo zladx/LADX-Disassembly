@@ -182,7 +182,7 @@ wC165: ds 1
 wC166: ds 1
 wC167: ds 1
 wC168: ds 1
-wC169: ds 1
+wNextJingle: ds 1 ; C169
 wC16A: ds 1
 
 wTransitionSequenceCounter:: ; C16B

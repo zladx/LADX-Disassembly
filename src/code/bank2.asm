@@ -214,8 +214,8 @@ jr_002_42C7:
     cp   $28                                      ; $430D: $FE $28
     jr   nz, jr_002_4315                          ; $430F: $20 $04
 
-    ld   a, $04                                   ; $4311: $3E $04
-    ldh  [$FFF2], a                               ; $4313: $E0 $F2
+    ld   a, JINGLE_CHARGING_SWORD                 ; $4311: $3E $04
+    ldh  [hJingle], a                             ; $4313: $E0 $F2
 
 jr_002_4315:
     ret                                           ; $4315: $C9
@@ -696,8 +696,8 @@ jr_002_45AD:
     ldh  [$FFD8], a                               ; $45AF: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $45B1: $F0 $98
     ldh  [$FFD7], a                               ; $45B3: $E0 $D7
-    ld   a, $0E                                   ; $45B5: $3E $0E
-    ldh  [$FFF2], a                               ; $45B7: $E0 $F2
+    ld   a, JINGLE_WATER_DIVE                     ; $45B5: $3E $0E
+    ldh  [hJingle], a                             ; $45B7: $E0 $F2
     ld   a, $0C                                   ; $45B9: $3E $0C
     jp   label_CC7                                ; $45BB: $C3 $C7 $0C
 
@@ -1215,14 +1215,14 @@ jr_002_4AB2:
     cp   $01                                      ; $4AB9: $FE $01
     jr   nz, jr_002_4AD0                          ; $4ABB: $20 $13
 
-    ld   a, $02                                   ; $4ABD: $3E $02
+    ld   a, TRANSITION_GFX_MANBO_IN               ; $4ABD: $3E $02
     ld   [wTransitionGfx], a                      ; $4ABF: $EA $7F $C1
     xor  a                                        ; $4AC2: $AF
     ld   [wTransitionGfxFrameCount], a            ; $4AC3: $EA $80 $C1
     ld   [wTransitionSequenceCounter], a          ; $4AC6: $EA $6B $C1
     ld   [wC16C], a                               ; $4AC9: $EA $6C $C1
-    ld   a, $2C                                   ; $4ACC: $3E $2C
-    ldh  [$FFF2], a                               ; $4ACE: $E0 $F2
+    ld   a, JINGLE_MANBO_WARP                     ; $4ACC: $3E $2C
+    ldh  [hJingle], a                             ; $4ACE: $E0 $F2
 
 jr_002_4AD0:
     ret                                           ; $4AD0: $C9
@@ -2092,7 +2092,7 @@ jr_002_4F92:
     jr   z, jr_002_4FA1                           ; $4F96: $28 $09
 
     ld   a, $0F                                   ; $4F98: $3E $0F
-    ldh  [$FFF2], a                               ; $4F9A: $E0 $F2
+    ldh  [hJingle], a                               ; $4F9A: $E0 $F2
     ld   a, $20                                   ; $4F9C: $3E $20
     ld   [$C183], a                               ; $4F9E: $EA $83 $C1
 
@@ -2467,8 +2467,8 @@ HandleGotItemA::
     cp   $2E                                      ; $51BF: $FE $2E
     jr   nz, HandleGotItemB                       ; $51C1: $20 $04
 
-    ld   a, $17                                   ; $51C3: $3E $17
-    ldh  [$FFF2], a                               ; $51C5: $E0 $F2
+    ld   a, JINGLE_GOT_POWER_UP                   ; $51C3: $3E $17
+    ldh  [hJingle], a                             ; $51C5: $E0 $F2
 
 HandleGotItemB::
     call label_CAF                                ; $51C7: $CD $AF $0C
@@ -3012,8 +3012,8 @@ jr_002_54BD:
     ld   [$D404], a                               ; $54D4: $EA $04 $D4
     ld   a, $70                                   ; $54D7: $3E $70
     ld   [$D405], a                               ; $54D9: $EA $05 $D4
-    ld   hl, $FFF2                                ; $54DC: $21 $F2 $FF
-    ld   [hl], $02                                ; $54DF: $36 $02
+    ld   hl, hJingle                              ; $54DC: $21 $F2 $FF
+    ld   [hl], JINGLE_PUZZLE_SOLVED               ; $54DF: $36 $02
     jp   ApplyMapFadeOutTransition                                ; $54E1: $C3 $7D $0C
 
 jr_002_54E4:
@@ -3415,8 +3415,8 @@ jr_002_56FC:
     ld   [hl], $E3                                ; $56FC: $36 $E3
     ld   a, $82                                   ; $56FE: $3E $82
     call label_B2F                                ; $5700: $CD $2F $0B
-    ld   a, $23                                   ; $5703: $3E $23
-    ldh  [$FFF2], a                               ; $5705: $E0 $F2
+    ld   a, JINGLE_DUNGEON_OPENED                 ; $5703: $3E $23
+    ldh  [hJingle], a                             ; $5705: $E0 $F2
 
 label_002_5707::
     ret                                           ; $5707: $C9
@@ -3812,8 +3812,8 @@ func_002_5928::
     ldh  [$FFD8], a                               ; $5928: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $592A: $F0 $98
     ldh  [$FFD7], a                               ; $592C: $E0 $D7
-    ld   a, $0E                                   ; $592E: $3E $0E
-    ldh  [$FFF2], a                               ; $5930: $E0 $F2
+    ld   a, JINGLE_WATER_DIVE                     ; $592E: $3E $0E
+    ldh  [hJingle], a                             ; $5930: $E0 $F2
     ld   a, $01                                   ; $5932: $3E $01
     jp   label_CC7                                ; $5934: $C3 $C7 $0C
 
@@ -4647,7 +4647,7 @@ jr_002_5E63:
     add  hl, de                                   ; $5E63: $19
     set  5, [hl]                                  ; $5E64: $CB $EE
     ld   a, $1B                                   ; $5E66: $3E $1B
-    ldh  [$FFF2], a                               ; $5E68: $E0 $F2
+    ldh  [hJingle], a                               ; $5E68: $E0 $F2
 
 jr_002_5E6A:
     ld   a, [$C190]                               ; $5E6A: $FA $90 $C1
@@ -5183,8 +5183,8 @@ jr_002_613D:
     ld   a, $01                                   ; $614B: $3E $01
     ld   [wInventoryAppearing], a                 ; $614D: $EA $4F $C1
     ld   [$C151], a                               ; $6150: $EA $51 $C1
-    ld   a, $12                                   ; $6153: $3E $12
-    ldh  [$FFF2], a                               ; $6155: $E0 $F2
+    ld   a, JINGLE_CLOSE_INVENTORY                ; $6153: $3E $12
+    ldh  [hJingle], a                             ; $6155: $E0 $F2
     ld   a, [$C150]                               ; $6157: $FA $50 $C1
     cpl                                           ; $615A: $2F
     inc  a                                        ; $615B: $3C
@@ -5200,8 +5200,8 @@ jr_002_613D:
     ld   [wGameplaySubtype], a                    ; $616E: $EA $96 $DB
     ld   a, GAMEPLAY_INVENTORY                    ; $6171: $3E $0C
     ld   [wGameplayType], a                       ; $6173: $EA $95 $DB
-    ld   a, $11                                   ; $6176: $3E $11
-    ldh  [$FFF2], a                               ; $6178: $E0 $F2
+    ld   a, JINGLE_OPEN_INVENTORY                 ; $6176: $3E $11
+    ldh  [hJingle], a                             ; $6178: $E0 $F2
     xor  a                                        ; $617A: $AF
     ld   [$C151], a                               ; $617B: $EA $51 $C1
     ld   a, $0B                                   ; $617E: $3E $0B
@@ -6731,8 +6731,8 @@ jr_002_6BF6:
     and  $02                                      ; $6C23: $E6 $02
     sla  a                                        ; $6C25: $CB $27
     ld   [$C158], a                               ; $6C27: $EA $58 $C1
-    ld   a, $0B                                   ; $6C2A: $3E $0B
-    ldh  [$FFF2], a                               ; $6C2C: $E0 $F2
+    ld   a, JINGLE_HUGE_BUMP                   ; $6C2A: $3E $0B
+    ldh  [hJingle], a                             ; $6C2C: $E0 $F2
     ret                                           ; $6C2E: $C9
 
 func_002_6C2F::
@@ -7166,13 +7166,13 @@ jr_002_6E72:
     cp   $02                                      ; $6E9F: $FE $02
     jr   z, jr_002_6EDD                           ; $6EA1: $28 $3A
 
-    ld   a, $08                                   ; $6EA3: $3E $08
-    ldh  [$FFF2], a                               ; $6EA5: $E0 $F2
+    ld   a, JINGLE_JUMP_DOWN                      ; $6EA3: $3E $08
+    ldh  [hJingle], a                             ; $6EA5: $E0 $F2
     jr   jr_002_6EB5                              ; $6EA7: $18 $0C
 
 func_002_6EA9::
-    ld   a, $08                                   ; $6EA9: $3E $08
-    ldh  [$FFF2], a                               ; $6EAB: $E0 $F2
+    ld   a, JINGLE_JUMP_DOWN                      ; $6EA9: $3E $08
+    ldh  [hJingle], a                             ; $6EAB: $E0 $F2
 
 func_002_6EAD::
     ldh  a, [hLinkPositionX]                      ; $6EAD: $F0 $98
@@ -7532,8 +7532,8 @@ jr_002_70B5:
     ld   [$C146], a                               ; $70CC: $EA $46 $C1
     ld   a, $01                                   ; $70CF: $3E $01
     ld   [wC10A], a                               ; $70D1: $EA $0A $C1
-    ld   a, $08                                   ; $70D4: $3E $08
-    ldh  [$FFF2], a                               ; $70D6: $E0 $F2
+    ld   a, JINGLE_JUMP_DOWN                      ; $70D4: $3E $08
+    ldh  [hJingle], a                             ; $70D6: $E0 $F2
 
 label_002_70D8::
     xor  a                                        ; $70D8: $AF
@@ -8153,8 +8153,8 @@ jr_002_7472:
     cp   $06                                      ; $7476: $FE $06
     jr   nc, jr_002_74AC                          ; $7478: $30 $32
 
-    ld   a, $0C                                   ; $747A: $3E $0C
-    ldh  [$FFF2], a                               ; $747C: $E0 $F2
+    ld   a, JINGLE_REVOLVING_DOOR                 ; $747A: $3E $0C
+    ldh  [hJingle], a                             ; $747C: $E0 $F2
     ld   a, $05                                   ; $747E: $3E $05
     ld   [wLinkMotionState], a                    ; $7480: $EA $1C $C1
     call ClearLinkPositionIncrement               ; $7483: $CD $8E $17
@@ -8229,8 +8229,8 @@ jr_002_74C9:
     and  $02                                      ; $74F0: $E6 $02
     sla  a                                        ; $74F2: $CB $27
     ld   [$C158], a                               ; $74F4: $EA $58 $C1
-    ld   a, $0B                                   ; $74F7: $3E $0B
-    ldh  [$FFF2], a                               ; $74F9: $E0 $F2
+    ld   a, JINGLE_HUGE_BUMP                   ; $74F7: $3E $0B
+    ldh  [hJingle], a                             ; $74F9: $E0 $F2
     jp   $1828                                    ; $74FB: $C3 $28 $18
 
 func_002_74FE::
@@ -8669,8 +8669,8 @@ jr_002_7750:
     and  a                                        ; $7793: $A7
     jr   nz, jr_002_779A                          ; $7794: $20 $04
 
-    ld   a, $0E                                   ; $7796: $3E $0E
-    ldh  [$FFF2], a                               ; $7798: $E0 $F2
+    ld   a, JINGLE_WATER_DIVE                     ; $7796: $3E $0E
+    ldh  [hJingle], a                             ; $7798: $E0 $F2
 
 jr_002_779A:
     ld   a, [$C13B]                               ; $779A: $FA $3B $C1

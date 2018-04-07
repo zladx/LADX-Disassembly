@@ -921,8 +921,8 @@ label_CD57::
     call IsEntityFrameCounterZero
     cp   $3F
     jr   nz, label_CD66
-    ld   hl, $FFF2
-    ld   [hl], $18
+    ld   hl, hJingle
+    ld   [hl], JINGLE_ITEM_FALLING
 
 label_CD66::
     rra
@@ -2897,8 +2897,8 @@ label_DABA::
     cp   $04
     jr   nz, label_DAED
     ; Play a success jingle
-    ld   a, $19
-    ldh  [$FFF2], a
+    ld   a, JINGLE_NEW_HEART
+    ldh  [hJingle], a
     ; Clear heart pieces count
     xor  a
     ld   [wHeartPiecesCount], a
@@ -3103,8 +3103,8 @@ label_DC37::
     ldh  a, [$FFEF]
     sub  a, $0C
     call label_EC36
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
 
 label_DC46::
     ret
@@ -3239,8 +3239,8 @@ label_DCEA::
     ld   [hl], $48
     call IsEntityFrameCounterZero
     ld   [hl], $2F
-    ld   a, $18
-    ldh  [$FFF2], a
+    ld   a, JINGLE_ITEM_FALLING
+    ldh  [hJingle], a
     scf
     ret
 
@@ -3477,8 +3477,8 @@ data_DF31::
 label_DF33::
     call IsEntityFrameCounterZero
     jr   nz, label_DF5F
-    ld   a, $2B
-    ldh  [$FFF2], a
+    ld   a, JINGLE_INSTRUMENT_WARP
+    ldh  [hJingle], a
     ld   a, $39
     call label_E4CA
     ldh  a, [$FFD7]
@@ -3763,10 +3763,10 @@ label_E120::
     jr   z, label_E134
     cp   $02
     jr   z, label_E134
-    ld   a, $09
+    ld   a, JINGLE_BUMP
 
 label_E132::
-    ldh  [$FFF2], a
+    ldh  [hJingle], a
 
 label_E134::
     pop  hl
@@ -4073,8 +4073,8 @@ label_E311::
     sub  a, $2D
     cp   $02
     jr   nc, label_E328
-    ld   hl, $FFF2
-    ld   [hl], $14
+    ld   hl, hJingle
+    ld   [hl], JINGLE_GOT_HEART
     jr   label_E32D
 
 label_E328::
@@ -4186,8 +4186,8 @@ label_E3A1::
     ld   a, $10
     ld   [$D368], a
     jr   label_E3D2
-    ld   a, $01
-    ldh  [$FFF2], a
+    ld   a, JINGLE_TREASURE_FOUND
+    ldh  [hJingle], a
 
 label_E3D2::
     call IsEntityFrameCounterZero
@@ -4728,8 +4728,8 @@ label_E771::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, label_E828
-    ld   a, $02
-    ldh  [$FFF2], a
+    ld   a, JINGLE_PUZZLE_SOLVED
+    ldh  [hJingle], a
     ldh  a, [$FFCD]
     and  $E0
     ldh  [$FFCD], a
@@ -4801,8 +4801,8 @@ label_E828::
     cp   $04
     jp   nc, label_E8E4
     ld   c, a
-    ld   a, $02
-    ldh  [$FFF2], a
+    ld   a, JINGLE_PUZZLE_SOLVED
+    ldh  [hJingle], a
     ld   a, [wIsIndoor]
     and  a
     jr   nz, label_E878
@@ -5214,8 +5214,8 @@ label_EAFF::
     ld   a, [hl]
     inc  a
     jr   z, label_EB13
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
 
 label_EB13::
     call label_C50
@@ -5406,8 +5406,8 @@ label_EBDE::
     ld   hl, $C2A0
     add  hl, bc
     ld   [hl], $02
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
     ldh  a, [$FFEF]
 
 label_EC36::
@@ -5428,7 +5428,7 @@ label_EC41::
     cp   [hl]
     jr   nz, label_EC5B
     ld   a, $16
-    ldh  [$FFF2], a
+    ldh  [hJingle], a
 
 label_EC54::
     ld   hl, $C2A0
@@ -5986,8 +5986,8 @@ label_EF8E::
     jp   z, label_EF24
 
 label_EF93::
-    ld   a, $09
-    ldh  [$FFF2], a
+    ld   a, JINGLE_BUMP
+    ldh  [hJingle], a
     call label_CB6
     ld   a, $0C
     ld   [$C13E], a
@@ -6268,8 +6268,8 @@ label_F15E::
     ld   [$C122], a
     ld   a, $30
     call label_EFCC
-    ld   hl, $FFF2
-    ld   [hl], $09
+    ld   hl, hJingle
+    ld   [hl], JINGLE_BUMP
     ld   a, [$DC0F]
     cp   $01
     jr   z, label_F17A
@@ -6379,8 +6379,8 @@ label_F215::
     ld   hl, $C430
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $FFF2
-    ld   [hl], $03
+    ld   hl, hJingle
+    ld   [hl], JINGLE_BOW_WOW_CHOMP
     and  $80
     jr   z, label_F228
     ld   hl, hSFX
@@ -6783,8 +6783,8 @@ label_F48B::
     ldh  a, [$FFEB]
     cp   $BE
     jr   nz, label_F4C1
-    ld   a, $09
-    ldh  [$FFF2], a
+    ld   a, JINGLE_BUMP
+    ldh  [hJingle], a
     ld   a, [$D205]
     cp   $00
     jr   z, label_F4BF
@@ -6948,8 +6948,8 @@ label_F58B::
     ldh  [hLinkPositionYIncrement], a
     ld   a, $30
     ldh  [$FFA3], a
-    ld   a, $0B
-    ldh  [$FFF2], a
+    ld   a, JINGLE_HUGE_BUMP
+    ldh  [hJingle], a
     ret
     ld   a, $20
     ld   [$C13E], a
@@ -7543,8 +7543,8 @@ label_F95C::
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFD8], a
-    ld   a, $0E
-    ldh  [$FFF2], a
+    ld   a, JINGLE_WATER_DIVE
+    ldh  [hJingle], a
     ld   a, $01
     call label_CC7
 
@@ -7644,8 +7644,8 @@ label_F9CB::
     jr   nz, label_FA18
     call IsEntityFrameCounterZero
     ld   [hl], $2F
-    ld   a, $18
-    ldh  [$FFF2], a
+    ld   a, JINGLE_ITEM_FALLING
+    ldh  [hJingle], a
 
 label_FA18::
     ldh  a, [$FFEB]

@@ -110,8 +110,8 @@ jr_004_409E:
     jr   nc, jr_004_40C7                          ; $40AC: $30 $19
 
     call label_CB6                                ; $40AE: $CD $B6 $0C
-    ld   a, $09                                   ; $40B1: $3E $09
-    ldh  [$FFF2], a                               ; $40B3: $E0 $F2
+    ld   a, JINGLE_BUMP                           ; $40B1: $3E $09
+    ldh  [hJingle], a                             ; $40B3: $E0 $F2
     ld   a, $10                                   ; $40B5: $3E $10
     ld   [$C13E], a                               ; $40B7: $EA $3E $C1
     ld   a, $14                                   ; $40BA: $3E $14
@@ -135,8 +135,8 @@ jr_004_40C7:
     ld   hl, $C320                                ; $40D5: $21 $20 $C3
     add  hl, bc                                   ; $40D8: $09
     ld   [hl], $10                                ; $40D9: $36 $10
-    ld   a, $20                                   ; $40DB: $3E $20
-    ldh  [$FFF2], a                               ; $40DD: $E0 $F2
+    ld   a, JINGLE_BIG_BUMP                       ; $40DB: $3E $20
+    ldh  [hJingle], a                             ; $40DD: $E0 $F2
 
 jr_004_40DF:
     ldh  a, [hLinkPositionX]                      ; $40DF: $F0 $98
@@ -196,8 +196,8 @@ jr_004_4118:
     ld   hl, wEntitiesFrameCounterTable           ; $413A: $21 $E0 $C2
     add  hl, de                                   ; $413D: $19
     ld   [hl], $47                                ; $413E: $36 $47
-    ld   a, $06                                   ; $4140: $3E $06
-    ldh  [$FFF2], a                               ; $4142: $E0 $F2
+    ld   a, JINGlE_ENNEMY_MORPH_IN                ; $4140: $3E $06
+    ldh  [hJingle], a                             ; $4142: $E0 $F2
 
 label_004_4144:
 jr_004_4144:
@@ -390,8 +390,8 @@ jr_004_4245:
     ld   hl, $C320                                ; $4269: $21 $20 $C3
     add  hl, bc                                   ; $426C: $09
     ld   [hl], $10                                ; $426D: $36 $10
-    ld   a, $20                                   ; $426F: $3E $20
-    ldh  [$FFF2], a                               ; $4271: $E0 $F2
+    ld   a, JINGLE_BIG_BUMP                       ; $426F: $3E $20
+    ldh  [hJingle], a                             ; $4271: $E0 $F2
     ld   a, $0C                                   ; $4273: $3E $0C
     call label_3BAA                               ; $4275: $CD $AA $3B
 
@@ -800,8 +800,8 @@ jr_004_44E2:
     ld   hl, wEntitiesFrameCounterTable           ; $450C: $21 $E0 $C2
     add  hl, de                                   ; $450F: $19
     ld   [hl], $C7                                ; $4510: $36 $C7
-    ld   a, $1F                                   ; $4512: $3E $1F
-    ldh  [$FFF2], a                               ; $4514: $E0 $F2
+    ld   a, JINGLE_ENNEMY_MORPH_OUT               ; $4512: $3E $1F
+    ldh  [hJingle], a                             ; $4514: $E0 $F2
 
 jr_004_4516:
     ret                                           ; $4516: $C9
@@ -1364,8 +1364,8 @@ jr_004_4972:
     jr   nz, jr_004_49FB                          ; $49F2: $20 $07
 
     call IncrementEntityWalkingAttr               ; $49F4: $CD $12 $3B
-    ld   a, $08                                   ; $49F7: $3E $08
-    ldh  [$FFF2], a                               ; $49F9: $E0 $F2
+    ld   a, JINGLE_JUMP_DOWN                      ; $49F7: $3E $08
+    ldh  [hJingle], a                             ; $49F9: $E0 $F2
 
 jr_004_49FB:
     call IsEntityFrameCounterZero                 ; $49FB: $CD $05 $0C
@@ -1834,8 +1834,8 @@ label_004_4E60:
 
     call IncrementEntityWalkingAttr               ; $4E74: $CD $12 $3B
     ld   [hl], $02                                ; $4E77: $36 $02
-    ld   a, $24                                   ; $4E79: $3E $24
-    ldh  [$FFF2], a                               ; $4E7B: $E0 $F2
+    ld   a, JINGLE_JUMP                           ; $4E79: $3E $24
+    ldh  [hJingle], a                             ; $4E7B: $E0 $F2
     call label_3D7F                               ; $4E7D: $CD $7F $3D
     jr   jr_004_4E83                              ; $4E80: $18 $01
 
@@ -1955,8 +1955,8 @@ jr_004_4F14:
 
     ld   a, $18                                   ; $4F2E: $3E $18
     ld   [$C157], a                               ; $4F30: $EA $57 $C1
-    ld   a, $0B                                   ; $4F33: $3E $0B
-    ldh  [$FFF2], a                               ; $4F35: $E0 $F2
+    ld   a, JINGLE_HUGE_BUMP                      ; $4F33: $3E $0B
+    ldh  [hJingle], a                             ; $4F35: $E0 $F2
     ld   a, [$C146]                               ; $4F37: $FA $46 $C1
     and  a                                        ; $4F3A: $A7
     jr   nz, jr_004_4F49                          ; $4F3B: $20 $0C
@@ -1976,8 +1976,8 @@ jr_004_4F49:
     cp   $F2                                      ; $4F4F: $FE $F2
     jr   nc, jr_004_4F57                          ; $4F51: $30 $04
 
-    ld   a, $20                                   ; $4F53: $3E $20
-    ldh  [$FFF2], a                               ; $4F55: $E0 $F2
+    ld   a, JINGLE_BIG_BUMP                       ; $4F53: $3E $20
+    ldh  [hJingle], a                             ; $4F55: $E0 $F2
 
 jr_004_4F57:
     call IncrementEntityWalkingAttr               ; $4F57: $CD $12 $3B
@@ -2025,8 +2025,8 @@ jr_004_4F60:
     ld   hl, wEntitiesPosYTable                   ; $4FA4: $21 $10 $C2
     add  hl, bc                                   ; $4FA7: $09
     ld   [hl], a                                  ; $4FA8: $77
-    ld   a, $08                                   ; $4FA9: $3E $08
-    ldh  [$FFF2], a                               ; $4FAB: $E0 $F2
+    ld   a, JINGLE_JUMP_DOWN                      ; $4FA9: $3E $08
+    ldh  [hJingle], a                             ; $4FAB: $E0 $F2
 
 jr_004_4FAD:
     ret                                           ; $4FAD: $C9
@@ -2831,7 +2831,7 @@ func_004_542F:
     cp   $50                                      ; $5475: $FE $50
     jr   nz, jr_004_547E                          ; $5477: $20 $05
 
-    ld   hl, $FFF2                                ; $5479: $21 $F2 $FF
+    ld   hl, hJingle                                ; $5479: $21 $F2 $FF
     ld   [hl], $40                                ; $547C: $36 $40
 
 jr_004_547E:
@@ -2951,7 +2951,7 @@ jr_004_551C:
     jr   nz, jr_004_5541                          ; $553B: $20 $04
 
     ld   a, $3F                                   ; $553D: $3E $3F
-    ldh  [$FFF2], a                               ; $553F: $E0 $F2
+    ldh  [hJingle], a                               ; $553F: $E0 $F2
 
 jr_004_5541:
     ldh  a, [$FFF0]                               ; $5541: $F0 $F0
@@ -4303,8 +4303,8 @@ jr_004_5E4A:
     call IsEntityFrameCounterZero                 ; $5E66: $CD $05 $0C
     ld   [hl], $20                                ; $5E69: $36 $20
     call IncrementEntityWalkingAttr               ; $5E6B: $CD $12 $3B
-    ld   a, $3C                                   ; $5E6E: $3E $3C
-    ldh  [$FFF2], a                               ; $5E70: $E0 $F2
+    ld   a, JINGLE_ENNEMY_SHRIEK                  ; $5E6E: $3E $3C
+    ldh  [hJingle], a                             ; $5E70: $E0 $F2
 
 jr_004_5E72:
     ret                                           ; $5E72: $C9
@@ -4778,8 +4778,8 @@ jr_004_616C:
     ld   hl, wEntitiesFrameCounterTable           ; $61AB: $21 $E0 $C2
     add  hl, de                                   ; $61AE: $19
     ld   [hl], $14                                ; $61AF: $36 $14
-    ld   a, $08                                   ; $61B1: $3E $08
-    ldh  [$FFF2], a                               ; $61B3: $E0 $F2
+    ld   a, JINGLE_JUMP_DOWN                      ; $61B1: $3E $08
+    ldh  [hJingle], a                             ; $61B3: $E0 $F2
     ret                                           ; $61B5: $C9
 
 jr_004_61B6:
@@ -5015,8 +5015,8 @@ label_004_62F6:
     ldh  [$FFD7], a                               ; $62FC: $E0 $D7
     ld   a, $01                                   ; $62FE: $3E $01
     call label_CC7                                ; $6300: $CD $C7 $0C
-    ld   a, $0E                                   ; $6303: $3E $0E
-    ldh  [$FFF2], a                               ; $6305: $E0 $F2
+    ld   a, JINGLE_WATER_DIVE                     ; $6303: $3E $0E
+    ldh  [hJingle], a                             ; $6305: $E0 $F2
 
 jr_004_6307:
     ret                                           ; $6307: $C9
@@ -5650,8 +5650,8 @@ jr_004_6677:
     and  $10                                      ; $66A7: $E6 $10
     jr   nz, jr_004_66E6                          ; $66A9: $20 $3B
 
-    ld   a, $01                                   ; $66AB: $3E $01
-    ldh  [$FFF2], a                               ; $66AD: $E0 $F2
+    ld   a, JINGLE_TREASURE_FOUND                 ; $66AB: $3E $01
+    ldh  [hJingle], a                             ; $66AD: $E0 $F2
     ldh  a, [hMapRoom]                            ; $66AF: $F0 $F6
     ld   e, a                                     ; $66B1: $5F
     ld   d, $01                                   ; $66B2: $16 $01
@@ -6583,8 +6583,8 @@ func_004_6BE1:
     ld   [hl], a                                  ; $6C16: $77
     call label_C00                                ; $6C17: $CD $00 $0C
     ld   [hl], $08                                ; $6C1A: $36 $08
-    ld   a, $07                                   ; $6C1C: $3E $07
-    ldh  [$FFF2], a                               ; $6C1E: $E0 $F2
+    ld   a, JINGLE_SWORD_POKING                   ; $6C1C: $3E $07
+    ldh  [hJingle], a                             ; $6C1E: $E0 $F2
 
 label_004_6C20:
     ldh  a, [$FFEE]                               ; $6C20: $F0 $EE
@@ -6630,7 +6630,7 @@ label_004_6C20:
     ld   c, $0C                                   ; $6C4E: $0E $0C
     ld   b, $00                                   ; $6C50: $06 $00
     ld   a, [$F2F4]                               ; $6C52: $FA $F4 $F2
-    ldh  a, [$FFF2]                               ; $6C55: $F0 $F2
+    ldh  a, [hJingle]                               ; $6C55: $F0 $F2
     db   $f4                                      ; $6C57: $F4
     ld   a, [$0600]                               ; $6C58: $FA $00 $06
     inc  c                                        ; $6C5B: $0C
@@ -7057,8 +7057,8 @@ func_004_6E92:
     dec  a                                        ; $6EA7: $3D
     jr   nz, jr_004_6EAE                          ; $6EA8: $20 $04
 
-    ld   a, $19                                   ; $6EAA: $3E $19
-    ldh  [$FFF2], a                               ; $6EAC: $E0 $F2
+    ld   a, JINGLE_NEW_HEART                      ; $6EAA: $3E $19
+    ldh  [hJingle], a                             ; $6EAC: $E0 $F2
 
 jr_004_6EAE:
     ldh  a, [$FFF1]                               ; $6EAE: $F0 $F1
@@ -8247,8 +8247,8 @@ jr_004_7570:
     jr   jr_004_7598                              ; $7592: $18 $04
 
 jr_004_7594:
-    ld   a, $09                                   ; $7594: $3E $09
-    ldh  [$FFF2], a                               ; $7596: $E0 $F2
+    ld   a, JINGLE_BUMP                           ; $7594: $3E $09
+    ldh  [hJingle], a                             ; $7596: $E0 $F2
 
 jr_004_7598:
     ldh  a, [hFrameCounter]                       ; $7598: $F0 $E7
@@ -8919,8 +8919,8 @@ jr_004_78D4:
     cp   [hl]                                     ; $78FD: $BE
     jr   nz, jr_004_7940                          ; $78FE: $20 $40
 
-    ld   a, $13                                   ; $7900: $3E $13
-    ldh  [$FFF2], a                               ; $7902: $E0 $F2
+    ld   a, JINGLE_VALIDATE                       ; $7900: $3E $13
+    ldh  [hJingle], a                             ; $7902: $E0 $F2
     jp   label_004_796D                           ; $7904: $C3 $6D $79
 
 jr_004_7907:
@@ -8944,8 +8944,8 @@ jr_004_7907:
     and  a                                        ; $7924: $A7
     jr   z, jr_004_792B                           ; $7925: $28 $04
 
-    ld   a, $13                                   ; $7927: $3E $13
-    ldh  [$FFF2], a                               ; $7929: $E0 $F2
+    ld   a, JINGLE_VALIDATE                       ; $7927: $3E $13
+    ldh  [hJingle], a                             ; $7929: $E0 $F2
 
 jr_004_792B:
     push bc                                       ; $792B: $C5
@@ -9895,8 +9895,8 @@ jr_004_7EA5:
     ld   [hl], a                                  ; $7EAC: $77
 
 jr_004_7EAD:
-    ld   a, $09                                   ; $7EAD: $3E $09
-    ldh  [$FFF2], a                               ; $7EAF: $E0 $F2
+    ld   a, JINGLE_BUMP                           ; $7EAD: $3E $09
+    ldh  [hJingle], a                             ; $7EAF: $E0 $F2
 
 jr_004_7EB1:
     ldh  a, [hFrameCounter]                       ; $7EB1: $F0 $E7

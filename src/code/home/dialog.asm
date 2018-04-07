@@ -463,8 +463,8 @@ DialogDrawNextCharacterHandler::
     ld   [wDialogState], a
 
 .endDialog
-    ld   a, $15
-    ldh  [$fff2], a
+    ld   a, JINGLE_DIALOG_BREAK
+    ldh  [hJingle], a
     ret
 
 .notChoice
@@ -806,8 +806,8 @@ DialogChoiceHandler::
     inc  a
     and  $01
     ld   [hl], a
-    ld   a, $0A
-    ldh  [$FFF2], a
+    ld   a, JINGLE_MOVE_SELECTION
+    ldh  [hJingle], a
 
 label_27AA::
     ldh  a, [hFrameCounter]

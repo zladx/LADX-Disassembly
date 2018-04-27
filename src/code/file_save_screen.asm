@@ -3,7 +3,7 @@
 ; Displays the "Return to Game / Save and Quit" screen.
 ;
 
-FileSaveHandlerEntryPoint::
+FileSaveEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
 ._00 dw FileSaveInitial

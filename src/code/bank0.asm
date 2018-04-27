@@ -1164,7 +1164,7 @@ MinimapHandler::
     jp   returnFromGameplayHandler
 
 FileSaveHandler::
-    jpsw FileSaveHandlerEntryPoint
+    jpsw FileSaveEntryPoint
 
 IntroHandler::
     jp   IntroHandlerEntryPoint

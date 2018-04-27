@@ -1199,16 +1199,16 @@ label_F05::
     jr   label_EF4
 
 FileSelectionHandler::
-    jp   $47CE
+    jp   FileSelectionEntryPoint
 
 FileCreationHandler::
-    jp   label_4A07
+    jp   FileCreationEntryPoint
 
 FileDeletionHandler::
-    jp   $4CFB
+    jp   FileDeletionEntryPoint
 
 FileCopyHandler::
-    jp   $4F8C
+    jp   FileCopyEntryPoint
 
 WorldHandler::
     ld   a, $14

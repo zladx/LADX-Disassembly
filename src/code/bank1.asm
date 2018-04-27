@@ -69,6 +69,7 @@ label_4128::
     ld   c, b
     ld   e, b
 
+; Called by FileSaveInteractive
 label_412A::
     ld   hl, $C13F
     call label_6BA8
@@ -99,7 +100,7 @@ label_413B::
     jp   nz, label_41BB
     ld   e, $70
 
-label_4158::
+.wait
     xor  a
     ld   [rBGP], a
     nop
@@ -133,7 +134,7 @@ label_4158::
     nop
     nop
     dec  e
-    jr   nz, label_4158
+    jr   nz, .wait
     ld   e, $30
 
 label_417E::
@@ -150,7 +151,7 @@ label_4187::
     jr   nz, label_4187
     ld   e, $FF
 
-label_4190::
+.wait
     ld   a, $C0
     ld   [rBGP], a
     nop
@@ -172,7 +173,7 @@ label_4190::
     nop
     nop
     dec  e
-    jr   nz, label_4190
+    jr   nz, .wait
     ld   e, $30
 
 label_41AB::
@@ -370,6 +371,8 @@ label_47C3::
 
 label_47CD::
     ret
+
+FileSelectionEntryPoint::
     call label_5DC0
     ld   a, [wGameplaySubtype]
     JP_TABLE
@@ -744,7 +747,7 @@ label_49F8::
 label_49FE::
     db 0, $A1, $AD, $A4, $5A, $A8, $C3, $A4, $52
 
-label_4A07::
+FileCreationEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
     ; Code below is actually data for the jump table
@@ -1245,6 +1248,8 @@ label_4CDA::
     add  hl, bc
     ld   [hl], e
     ret
+
+FileDeletionEntryPoint::
     call label_5DC0
     ld   a, [wGameplaySubtype]
     JP_TABLE
@@ -1662,11 +1667,11 @@ label_4F45::
     ld   [hl], a
     ret
 
+FileCopyEntryPoint::
     db $fa, $96, $db, $c7, $1a, $4d, $2c, $4d
     db $a6, $4f, $bb, $4f, $c3, $4f, $e1, $4f
     db $39, $4d, $49, $4d, $ff, $4f, $df, $50
     db $e9, $51
-
 
     ld   a, $08
     ld   [wTileMapToLoad], a

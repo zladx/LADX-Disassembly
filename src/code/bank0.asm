@@ -1148,19 +1148,19 @@ jumpToGameplayHandler::
 ._1A dw PhotoPictureHandler ; Bridge photo
 
 FaceShrineMuralHandler::
-    call label_6AF8
+    call FaceShrineMuralEntryPoint
     jp   returnFromGameplayHandler
 
 PeachPictureHandler::
-    call label_67EE
+    call PeachPictureEntryPoint
     jp   returnFromGameplayHandler
 
 MarinBeachHandler::
-    call $6203
+    call MarineBeachEntryPoint
     jp   returnFromGameplayHandler
 
 MinimapHandler::
-    call $5626
+    call MinimapEntryPoint
     jp   returnFromGameplayHandler
 
 FileSaveHandler::

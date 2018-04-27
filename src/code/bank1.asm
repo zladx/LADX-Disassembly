@@ -3559,6 +3559,8 @@ label_5619::
     ldh  a, [$FFDA]
     ld   [hl], a
     ret
+
+MinimapEntryPoint::
     xor  a
     ld   [$C3C0], a
     ld   a, [wGameplaySubtype]
@@ -5239,6 +5241,7 @@ OpenDungeonNameDialog::
 .return
     ret
 
+MarineBeachEntryPoint::
     ld   a, [$C19F]
     and  a
     jr   nz, label_6213
@@ -5256,9 +5259,33 @@ label_6213::
     ld   [$C3C4], a
 
 label_621D::
-    db $FA, $96, $DB, $C7, $3F, $62, $60, $62, $82, $62, $8E, $62, $CA, $63, $17, $64
-    db $32, $64, $50, $64, $67, $64, $79, $64, $90, $64, $A2, $64, $D0, $64, $E7, $64
-    db $25, $58, $CD, $D6, $44, $F0, $FE, $A7, $28, $19, $21, $10, $DC, $E, $80, $F3
+    ld   a, [wGameplaySubtype]
+    JP_TABLE
+._00 dw MarineBeachPrepare0
+._01 dw MarineBeachPrepare1
+._02 dw MarineBeachPrepare2
+._03 dw MarineBeachPrepare3
+._04 dw MarineBeachScroll1
+._05 dw MarineBeachScroll2
+._06 dw MarineBeachScrollStop
+._07 dw MarineBeachDialog1
+._08 dw MarineBeachPause1
+._09 dw MarineBeachDialog2
+._0A dw MarineBeachPause2
+._0B dw MarineBeachAreYouListening
+._0C dw MarineBeachDialog3
+._0D dw MarineBeachDialog4
+._0E dw FileSaveFadeOut
+
+MarineBeachPrepare0::
+    call IncrementGameplaySubtypeAndReturn
+    ldh  a, [hIsGBC]
+    and  a
+    jr   z, MarineBeachPrepare1
+
+    ld   hl, $DC10
+    ld   c, $80
+    di
 
 label_624D::
     xor  a
@@ -5276,13 +5303,13 @@ label_624D::
     ld   [rSVBK], a
     ei
 
-label_6260::
+MarineBeachPrepare1::
     ld   a, $01
     ld   [$C167], a
     call label_1A22
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_6281
+    jr   nz, .return
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
@@ -5290,14 +5317,17 @@ label_6260::
     call label_64FF
     ld   a, $0F
     ld   [wTileMapToLoad], a
-
-label_6281::
+.return
     ret
+
+MarineBeachPrepare2::
     ld   a, $13
     ld   [wTileMapToLoad], a
     xor  a
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
+
+MarineBeachPrepare3::
     ld   a, $13
     ld   [wBGMapToLoad], a
     ld   a, $FF
@@ -5419,19 +5449,19 @@ label_63AA::
 label_63BA::
     db 0, 0, 0, 0, 4, 4, 4, 4, $18, $18, $18, $18, $1C, $1C, $1C, $1C
 
-label_6C3A::
+MarineBeachScroll1::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_63E4
     ldh  a, [hFrameCounter]
     and  $07
-    jr   nz, label_6417
+    jr   nz, MarineBeachScroll2
     call label_1A39
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_6417
+    jr   nz, MarineBeachScroll2
     call IncrementGameplaySubtype
-    jr   label_6417
+    jr   MarineBeachScroll2
 
 label_63E4::
     ldh  a, [hFrameCounter]
@@ -5462,7 +5492,7 @@ label_63F8::
     ld   a, [hl]
     ld   [wOBJ0Palette], a
 
-label_6417::
+MarineBeachScroll2::
     ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_642E
@@ -5478,6 +5508,8 @@ label_6417::
 label_642E::
     call label_651E
     ret
+
+MarineBeachScrollStop::
     call label_651E
     ld   a, [$C19F]
     and  a
@@ -5496,6 +5528,8 @@ label_644A::
     ld   a, $02
     ld   [$C3C4], a
     ret
+
+MarineBeachDialog1::
     call label_651E
     ld   a, [$C19F]
     and  a
@@ -5508,6 +5542,8 @@ label_644A::
 
 label_6466::
     ret
+
+MarineBeachPause1::
     call label_651E
     ld   a, [$C3C7]
     and  a
@@ -5518,6 +5554,8 @@ label_6466::
 
 label_6478::
     ret
+
+MarineBeachDialog2::
     call label_651E
     ld   a, [$C19F]
     and  a
@@ -5530,6 +5568,8 @@ label_6478::
 
 label_648F::
     ret
+
+MarineBeachPause2::
     call label_651E
     ld   a, [$C3C7]
     and  a
@@ -5540,6 +5580,8 @@ label_648F::
 
 label_64A1::
     ret
+
+MarineBeachAreYouListening::
     call label_651E
     ld   a, [$C19F]
     and  a
@@ -5565,6 +5607,8 @@ label_64CA::
     ld   a, $02
     ld   [$C3C4], a
     ret
+
+MarineBeachDialog3::
     call label_651E
     ld   a, [$C19F]
     and  a
@@ -5577,6 +5621,8 @@ label_64CA::
 
 label_64E6::
     ret
+
+MarineBeachDialog4::
     call label_651E
     ld   a, $02
     ld   [$C3C4], a
@@ -6024,7 +6070,7 @@ label_67DE::
     ldh  [hLinkPositionY], a
     ret
 
-label_67EE::
+PeachPictureEntryPoint::
     db $FA, $96, $DB, $C7, 8, $68, $29, $68, $56, $68, $73, $68, $AA, $68, $C0, $68
     db $25, $58, $E4, $68, 8, $69, $45, $69, $22, $58, $CD, $D6, $44
 
@@ -6408,7 +6454,7 @@ label_6AF4::
     call label_3CE6
     ret
 
-label_6AF8::
+FaceShrineMuralEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
 ._0 dw label_6B0A

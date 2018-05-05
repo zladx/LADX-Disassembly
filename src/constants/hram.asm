@@ -170,7 +170,12 @@ hDialogBackgroundTile:: ; FFE8
   ds 1
 
 hFFE9:: ; FFE9
-  ds $A
+  ds $9
+
+hJingle:: ; FFF2
+  ; Play a jingle immediately
+  ; See JINGLE_* constants for possible values
+  ds 1
 
 hSFX:: ; FFF3
   ; Plays audio effect immediately
@@ -192,7 +197,10 @@ hMapId:: ; FFF7
 hFFF8:: ; FFF8
   ds 1
 
-hFFF9:: ; FFF9
+hIsSideScrolling:: ; FFF9
+  ; 0  top view
+  ; 1  Unknown
+  ; 2  side-scrolling view
   ds 1
 
 hLinkRoomPosition:: ; FFFA

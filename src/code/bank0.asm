@@ -682,8 +682,8 @@ label_C0C::
     ret
 
 label_C20::
-    ld   a, $1D
-    ldh  [$FFF2], a
+    ld   a, JINGLE_WRONG_ANSWER
+    ldh  [hJingle], a
     ret
 
 label_C25::
@@ -743,8 +743,8 @@ label_C60::
     ld   a, [$C19D]
     and  a
     jr   nz, label_C7B
-    ld   a, $02
-    ldh  [$FFF2], a
+    ld   a, JINGLE_PUZZLE_SOLVED
+    ldh  [hJingle], a
 
 label_C7B::
     pop  af
@@ -794,7 +794,7 @@ label_CB6::
     ld   [$C14A], a
     ret
 
-label_CBE::
+CopyLinkFinalPositionToPosition::
     ldh  a, [hLinkFinalPositionX]
     ldh  [hLinkPositionX], a
     ldh  a, [hLinkFinalPositionY]
@@ -855,8 +855,8 @@ label_D07::
     ldh  [$FFD8], a
 
 label_D15::
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
     ld   a, $05
     jp   label_CC7
 
@@ -1502,7 +1502,7 @@ label_10EF::
     ld   a, [wLinkMotionState]
     cp   LINK_MOTION_PASS_OUT
     jr   z, .linkMotionJumpTable
-    ld   a, [$DB5A]
+    ld   a, [wHealth]
     ld   hl, $C50A
     or   [hl]
     ld   hl, wInventoryAppearing
@@ -1782,8 +1782,8 @@ UseShovel::
 label_1300::
     call $4D20
     jr   nc, label_130B
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
     jr   label_130F
 
 label_130B::
@@ -2068,9 +2068,9 @@ UseRocksFeather::
     xor  a
     ld   [$C152], a
     ld   [$C153], a
-    ld   a, $0D
-    ldh  [$FFF2], a
-    ldh  a, [hFFF9]
+    ld   a, JINGLE_FEATHER_JUMP
+    ldh  [hJingle], a
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_1508
     call label_1508
@@ -2393,8 +2393,8 @@ label_16DF::
     and  $F0
     cp   $90
     jr   z, label_16F8
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
     ret
 
 label_16F8::
@@ -2411,7 +2411,7 @@ data_1701::
     db   0, 0, $E0, $20
 
 label_1705::
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_1713
     ldh  a, [$FF9C]
@@ -2483,8 +2483,8 @@ label_1756::
 label_1781::
     ldh  a, [hLinkPositionY]
     ldh  [$FFD8], a
-    ld   a, $0E
-    ldh  [$FFF2], a
+    ld   a, JINGLE_WATER_DIVE
+    ldh  [hJingle], a
     ld   a, $0C
     jp   label_CC7
 
@@ -2626,14 +2626,14 @@ label_186C::
     ldh  [hLinkAnimationState], a
 
 label_1898::
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     ldh  [$FFE4], a
     ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     xor  a
     ld   [wGameplaySubtype], a
     ld   [$C3CB], a
-    ldh  [hFFF9], a
+    ldh  [hIsSideScrolling], a
     ld   hl, $D401
     ld   a, [wIsIndoor]
     ldh  [$FFE6], a
@@ -2675,7 +2675,7 @@ label_18DF::
     ld   [wIsIndoor], a
     cp   $02
     jr   nz, label_18F2
-    ldh  [hFFF9], a
+    ldh  [hIsSideScrolling], a
     dec  a
     ld   [wIsIndoor], a
     ld   a, $01
@@ -2766,7 +2766,7 @@ label_196F::
     ld   a, [hl]
     ld   [wMapEntrancePositionY], a
     pop  hl
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_19DA
     ldh  a, [$FFE4]
@@ -2928,7 +2928,7 @@ label_1A76::
     jr   label_1AC7
 
 label_1A78::
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_1A88
     ldh  a, [$FF9C]
@@ -3414,7 +3414,7 @@ label_2098::
     ldh  a, [$FFCC]
     and  $30
     jr   z, label_20CF
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_20BF
     ldh  a, [$FF9E]
@@ -3625,9 +3625,11 @@ data_2205::
 
 ; Update BG map during room transition
 UpdateSlidingBGMap::
+    ; Switch to Map Data bank
     ld   a, $08
     ld   [MBC3SelectBank], a
-    call label_2234
+    call DoUpdateSlidingBGMap
+    ; Reload saved bank and return
     jp   ReloadSavedBank
 
 label_2214::
@@ -3662,79 +3664,93 @@ label_222C::
     inc  bc
     ret
 
-; Load some palette data?
-label_2234::
+; Load BG data during map transition
+DoUpdateSlidingBGMap::
+    ; Configures an async data request to copy background tilemap
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4A76
+
+    ; Switch back to Map Data bank
     ld   a, $08
     ld   [MBC3SelectBank], a
 
-label_2241::
+.loop
     push bc
     push de
+
+    ; hl = wTileMap + $FFD9
     ldh  a, [$FFD9]
     ld   c, a
     ld   b, $00
     ld   hl, wTileMap
     add  hl, bc
+    
+    ; c = wTileMap[$FFD9]
     ld   b, $00
     ld   c, [hl]
+
+    ; If running on GBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_2262
+    jr   z, .ramSwitchEnd
+    ; … and is indoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_2262
+    jr   nz, .ramSwitchEnd
+    ; … switch to RAM Bank 2,
     ld   a, $02
     ld   [rSVBK], a
+    ; read hl,
     ld   c, [hl]
+    ; switch back to RAM Bank 0.
     xor  a
     ld   [rSVBK], a
+.ramSwitchEnd
 
-label_2262::
     sla  c
     rl   b
     sla  c
     rl   b
+    
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_2286
+    jr   z, .label_2286
     ld   hl, $4000
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_2299
+    jr   z, .label_2299
     ld   hl, $43B0
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2291
+    jr   nz, .label_2291
     ld   hl, $4760
-    jr   label_2291
+    jr   .label_2291
 
-label_2286::
+.label_2286
     ld   hl, $6749
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_2299
+    jr   z, .label_2299
     ld   hl, $6B1D
 
-label_2291::
+.label_2291
     ld   a, $1A
     ld   [MBC3SelectBank], a
     call $6576
 
-label_2299::
+.label_2299
     call label_3905
     add  hl, bc
     pop  de
     pop  bc
     ld   a, [wRoomTransitionDirection]
     and  $02
-    jr   z, label_22D3
+    jr   z, .label_22D3
     call label_2214
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_22D1
+    jr   z, .label_22D1
     push bc
     push de
     ld   a, $20
@@ -3755,14 +3771,14 @@ label_2299::
     pop  de
     pop  bc
 
-label_22D1::
-    jr   label_22FE
+.label_22D1
+    jr   .label_22FE
 
-label_22D3::
+.label_22D3
     call label_2224
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_22FE
+    jr   z, .label_22FE
     push bc
     push de
     ld   a, $20
@@ -3783,7 +3799,7 @@ label_22D3::
     pop  de
     pop  bc
 
-label_22FE::
+.label_22FE
     push bc
     ld   a, [wRoomTransitionDirection]
     ld   c, a
@@ -3797,7 +3813,7 @@ label_22FE::
     ld   a, [$C128]
     dec  a
     ld   [$C128], a
-    jp   nz, label_2241
+    jp   nz, .loop
     ld   a, $20
     ld   [MBC3SelectBank], a
     jp   $5570
@@ -4625,7 +4641,7 @@ label_2E85::
     ld   a, [wIsIndoor]
     and  a
     jr   z, label_2EB0
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_2ED3
     ldh  a, [hMapId]
@@ -4712,7 +4728,7 @@ label_2F12::
     ld   a, $0D
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_2F4B
     ld   hl, $7000
@@ -5079,7 +5095,7 @@ label_3156::
 
 label_3161::
     add  hl, de
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     ld   a, [hl]
     jr   nz, label_316B
@@ -6813,7 +6829,7 @@ label_3C77::
     ld   a, [$C123]
     ld   c, a
     ld   b, $00
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     ldh  a, [$FFEC]
     jr   z, label_3C9C

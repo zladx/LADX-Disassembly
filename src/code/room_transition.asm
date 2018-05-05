@@ -28,13 +28,13 @@ RoomTransitionYIncrement::
 
 ApplyRoomTransition::
     ld   a, [wRoomTransitionState]                ; $78E8: $FA $24 $C1
-    cp   ROOM_TRANSITION_NONE                           ; $78EB: $FE $00
+    cp   ROOM_TRANSITION_NONE                     ; $78EB: $FE $00
     jp   z, .return                               ; $78ED: $CA $D9 $79
 
-    ; If wRoomTransitionState < ROOM_TRANSITION_FIRST_HALF,
+    ; If the room transition didn't start to scroll yet,
     ; go directly to the jump table.
     push af                                       ; $78F0: $F5
-    cp   ROOM_TRANSITION_FIRST_HALF                     ; $78F1: $FE $04
+    cp   ROOM_TRANSITION_FIRST_HALF               ; $78F1: $FE $04
     jp   c, .dispatchTransition                   ; $78F3: $DA $CC $79
 
     ;
@@ -75,7 +75,7 @@ ApplyRoomTransition::
     ldh  [hBaseScrollY], a                        ; $791F: $E0 $97
 
     ; If the target scroll position is not reached yet,
-    ; go directly to the jump table
+    ; go to the jump table
     ld   hl, wRoomTransitionTargetScrollY         ; $7921: $21 $2D $C1
     cp   [hl]                                     ; $7924: $BE
     jp   nz, .dispatchTransition                  ; $7925: $C2 $CC $79
@@ -121,7 +121,7 @@ ApplyRoomTransition::
     ldh  [hLinkPositionYIncrement], a             ; $7958: $E0 $9B
     call CheckForLedgeJump                        ; $795A: $CD $45 $6E
 
-    ; If ($FFAF != $DB && $FFAF != $DC && ($FFAF == $E1 || $C133 != 0),
+    ; If ($FFAF != $DB && $FFAF != $DC && ($FFAF == $E1 || wCollisionType != 0),
     ; handle special case.
     ldh  a, [$FFAF]                               ; $795D: $F0 $AF
     cp   $DB                                      ; $795F: $FE $DB
@@ -133,7 +133,7 @@ ApplyRoomTransition::
     cp   $E1                                      ; $7967: $FE $E1
     jr   z, .handleFFAFSpecialCase                ; $7969: $28 $06
 
-    ld   a, [$C133]                               ; $796B: $FA $33 $C1
+    ld   a, [wCollisionType]                               ; $796B: $FA $33 $C1
     and  a                                        ; $796E: $A7
     jr   z, .bottomDirectionEnd                   ; $796F: $28 $09
 
@@ -145,15 +145,15 @@ ApplyRoomTransition::
     call func_002_6EAD                            ; $7977: $CD $AD $6E
 .bottomDirectionEnd
 
-    ; If $C169 != 0…
-    ld   a, [wC169]                               ; $797A: $FA $69 $C1
+    ; If a jingle has been configured…
+    ld   a, [wNextJingle]                         ; $797A: $FA $69 $C1
     and  a                                        ; $797D: $A7
-    jr   z, .noC169                               ; $797E: $28 $06
-    ; $FFF2 = $C169
-    ldh  [$FFF2], a                               ; $7980: $E0 $F2
+    jr   z, .noJingle                             ; $797E: $28 $06
+    ; … play the configured jingle immediately
+    ldh  [hJingle], a                             ; $7980: $E0 $F2
     xor  a                                        ; $7982: $AF
-    ld   [wC169], a                               ; $7983: $EA $69 $C1
-.noC169
+    ld   [wNextJingle], a                         ; $7983: $EA $69 $C1
+.noJingle
 
     call label_3958                               ; $7986: $CD $58 $39
 
@@ -196,19 +196,19 @@ ApplyRoomTransition::
 
     call GetChestsStatusForRoom                   ; $79A9: $CD $ED $29
 
-    ; If chests status are neither $1A nor $19, and $C18E != 80, return.
-    cp   $1A                                      ; $79AC: $FE $1A
-    jr   z, .hasCompassDetectableStatus           ; $79AE: $28 $0C
+    ; If chest status is not some key, and $C18E != 80, return.
+    cp   CHEST_SMALL_KEY                          ; $79AC: $FE $1A
+    jr   z, .hasCompassDetectableTreasure         ; $79AE: $28 $0C
 
-    cp   $19                                      ; $79B0: $FE $19
-    jr   z, .hasCompassDetectableStatus           ; $79B2: $28 $08
+    cp   CHEST_NIGHTMARE_KEY                      ; $79B0: $FE $19
+    jr   z, .hasCompassDetectableTreasure         ; $79B2: $28 $08
 
     ld   a, [$C18E]                               ; $79B4: $FA $8E $C1
     and  $E0                                      ; $79B7: $E6 $E0
     cp   $80                                      ; $79B9: $FE $80
     ret  nz                                       ; $79BB: $C0
 
-.hasCompassDetectableStatus
+.hasCompassDetectableTreasure
 
     ; If player doesn't have the compass, return
     ld   a, [wHasDungeonCompass]                  ; $79BC: $FA $CD $DB
@@ -229,9 +229,9 @@ ApplyRoomTransition::
     pop  af                                       ; $79CC: $F1
     dec  a                                        ; $79CD: $3D
     JP_TABLE                                      ; $79CE: $C7
-._00 dw RoomTransitionPrepare1Handler
-._01 dw RoomTransitionPrepare2Handler
-._02 dw RoomTransitionPrepare3Handler
+._00 dw RoomTransitionPrepareHandler
+._01 dw RoomTransitionLoadSprites
+._02 dw RoomTransitionConfigureScrollTargets
 ._03 dw RoomTransitionFirstHalfHandler
 ._04 dw RoomTransitionSecondHalfHandler
 
@@ -272,7 +272,7 @@ WindFishEggMazeSequence::
     db ROOM_TRANSITION_DIR_TOP
     db ROOM_TRANSITION_DIR_TOP
 
-RoomTransitionPrepare1Handler::
+RoomTransitionPrepareHandler::
     ld   a, [wRoomTransitionDirection]            ; $79FA: $FA $25 $C1
     ld   c, a                                     ; $79FD: $4F
     ld   b, $00                                   ; $79FE: $06 $00
@@ -337,8 +337,8 @@ RoomTransitionPrepare1Handler::
     ld   a, e                                     ; $7A3D: $7B
     cp   $07                                      ; $7A3E: $FE $07
     jp   nz, .loadRoom                            ; $7A40: $C2 $A5 $7A
-    ld   a, $02                                   ; $7A43: $3E $02
-    ld   [wC169], a                               ; $7A45: $EA $69 $C1
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $7A43: $3E $02
+    ld   [wNextJingle], a                               ; $7A45: $EA $69 $C1
 
 .noWindFishEggMaze
 
@@ -388,23 +388,23 @@ RoomTransitionPrepare1Handler::
     ; If C10C != 0…
     ld   a, [wC10C]                               ; $7A6D: $FA $0C $C1
     and  a                                        ; $7A70: $A7
-    jr   z, .C169End                              ; $7A71: $28 $11
+    jr   z, .mysteriousWoodsEnd                   ; $7A71: $28 $11
 
     ; … and direction == top…
     ld   a, c                                     ; $7A73: $79
     cp   ROOM_TRANSITION_DIR_TOP                  ; $7A74: $FE $02
-    jr   nz, .C169End                             ; $7A76: $20 $0C
+    jr   nz, .mysteriousWoodsEnd                  ; $7A76: $20 $0C
 
-    ; $C169 = $1E
-    ld   a, $1E                                   ; $7A78: $3E $1E
-    ld   [wC169], a                               ; $7A7A: $EA $69 $C1
+    ; … Link got lost in the Mysterious Woods
+    ld   a, JINGLE_FOREST_LOST                    ; $7A78: $3E $1E
+    ld   [wNextJingle], a                         ; $7A7A: $EA $69 $C1
     
     ; a = $63
     ; hl = hMapRoom
     ld   a, $63                                   ; $7A7D: $3E $63
     ld   hl, hMapRoom                             ; $7A7F: $21 $F6 $FF
     jr   .setRoom                                 ; $7A82: $18 $09
-.C169End
+.mysteriousWoodsEnd
 
     ; a = OverworldRoomIncrement[direction]
     ; hl = hMapRoom
@@ -435,12 +435,11 @@ RoomTransitionPrepare1Handler::
     bit  6, [hl]                                  ; $7A9A: $CB $76
     jr   nz, .forestRoomEnd                       ; $7A9C: $20 $07
 
-    ; … mark the room as discovered
+    ; … mark the room as discovered…
     set  6, [hl]                                  ; $7A9E: $CB $F6
-
-    ; ???
-    ld   a, $02                                   ; $7AA0: $3E $02
-    ld   [wC169], a                               ; $7AA2: $EA $69 $C1
+    ; … and play a success jingle.
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $7AA0: $3E $02
+    ld   [wNextJingle], a                         ; $7AA2: $EA $69 $C1
 .forestRoomEnd
 
 .loadRoom
@@ -562,7 +561,7 @@ IncrementRoomTransitionStateAndReturn::
     ld   [wRoomTransitionState], a                ; $7B3A: $EA $24 $C1
     ret                                           ; $7B3D: $C9
 
-RoomTransitionPrepare2Handler::
+RoomTransitionLoadSprites::
     call LoadRoomSprites                          ; $7B3E: $CD $1E $0D
     
     ; If $D6FA == 2…
@@ -646,7 +645,7 @@ IndoorRoomIncrement::
 .top    db $F8
 .bottom db $08
 
-RoomTransitionPrepare3Handler::
+RoomTransitionConfigureScrollTargets::
     ; If $FFBB == 0, return
     ldh  a, [$FFBB]                               ; $7B7F: $F0 $BB
     and  a                                        ; $7B81: $A7

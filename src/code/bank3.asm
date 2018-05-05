@@ -921,8 +921,8 @@ label_CD57::
     call IsEntityFrameCounterZero
     cp   $3F
     jr   nz, label_CD66
-    ld   hl, $FFF2
-    ld   [hl], $18
+    ld   hl, hJingle
+    ld   [hl], JINGLE_ITEM_FALLING
 
 label_CD66::
     rra
@@ -1698,7 +1698,7 @@ label_D25D::
     call label_D2D4
     call label_EC77
     jr   nc, label_D276
-    call label_CBE
+    call CopyLinkFinalPositionToPosition
     ld   a, $03
     ld   [$C144], a
 
@@ -1852,6 +1852,7 @@ label_D369::
     ldh  a, [$FFF1]
     and  a
     jr   nz, label_D392
+    ; If in a house…
     ldh  a, [hMapId]
     cp   $1E
     jr   z, label_D378
@@ -1859,17 +1860,22 @@ label_D369::
     jr   nz, label_D392
 
 label_D378::
-    ld   a, [$DB73]
+    ; … and Marin is following Link…
+    ld   a, [wIsMarinFollowingLink]
     and  a
     jr   z, label_D392
+
+    ; draw a random number
     call GetRandomByte
     and  $3F
     jr   nz, label_D38D
+    ; Open Marin reaction 1
     ld   a, $28
     call OpenDialog
     jp   label_3F8D
 
 label_D38D::
+    ; Open Marin reaction 2
     ld   a, $99
     call OpenDialogInTable1
 
@@ -2128,7 +2134,7 @@ label_D5FA::
     ld   a, [$C1BE]
     ld   hl, wActivePowerUp
     or   [hl]
-    ld   hl, hFFF9
+    ld   hl, hIsSideScrolling
     or   [hl]
     jr   nz, label_D60F
     ld   a, $34
@@ -2146,7 +2152,7 @@ label_D60F::
     ret  z
     ld   e, a
     ld   d, $1E
-    ld   a, [$DB5B]
+    ld   a, [wMaxHealth]
     cp   $07
     jr   c, label_D62E
     ld   d, $23
@@ -2162,7 +2168,7 @@ label_D62E::
     jr   c, label_D648
     ld   [hl], b
     ld   a, [$C1BE]
-    ld   hl, hFFF9
+    ld   hl, hIsSideScrolling
     or   [hl]
     ld   hl, wActivePowerUp
     or   [hl]
@@ -2222,7 +2228,7 @@ label_D670::
     ld   hl, $C480
     add  hl, de
     ld   [hl], $03
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_D6D9
     ld   hl, $C3A0
@@ -2388,7 +2394,7 @@ label_D795::
     ld   hl, $C210
     add  hl, bc
     ld   [hl], a
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_D7D7
     push hl
@@ -2766,7 +2772,7 @@ data_D9D8::
     jr   nz, label_DA17
     ld   a, $18
     ld   [$D368], a
-    ld   hl, $DB5B
+    ld   hl, wMaxHealth
     inc  [hl]
     ld   hl, wSubstractRupeeBufferLow
     ld   [hl], $FF
@@ -2876,9 +2882,9 @@ data_DA4D::
     jp   z, IncrementEntityWalkingAttr
     cp   $38
     jr   nz, label_DABA
-    ld   a, [$DB5C]
+    ld   a, [wHeartPiecesCount]
     inc  a
-    ld   [$DB5C], a
+    ld   [wHeartPiecesCount], a
 
 label_DABA::
     ret
@@ -2891,17 +2897,24 @@ label_DABA::
     ld   a, [$C19F]
     and  a
     ret  nz
-    ld   a, [$DB5C]
+
+    ; If found 4 heart pieces…
+    ld   a, [wHeartPiecesCount]
     cp   $04
     jr   nz, label_DAED
-    ld   a, $19
-    ldh  [$FFF2], a
+    ; Play a success jingle
+    ld   a, JINGLE_NEW_HEART
+    ldh  [hJingle], a
+    ; Clear heart pieces count
     xor  a
-    ld   [$DB5C], a
+    ld   [wHeartPiecesCount], a
+    ; Configure the heart increase animation
     ld   hl, wSubstractRupeeBufferLow
     ld   [hl], $40
-    ld   hl, $DB5B
+    ; Increase the maximum number of hearts
+    ld   hl, wMaxHealth
     inc  [hl]
+    ; Open the "4 pieces of heart collected" dialog
     ld   a, $50
     call OpenDialog
 
@@ -2962,7 +2975,7 @@ label_DB2B::
 
 label_DB41::
     ldh  [$FFEC], a
-    ld   a, [$DB5C]
+    ld   a, [wHeartPiecesCount]
     ldh  [$FFF1], a
     ld   a, $8E
     ldh  [$FFEE], a
@@ -3096,8 +3109,8 @@ label_DC37::
     ldh  a, [$FFEF]
     sub  a, $0C
     call label_EC36
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
 
 label_DC46::
     ret
@@ -3232,8 +3245,8 @@ label_DCEA::
     ld   [hl], $48
     call IsEntityFrameCounterZero
     ld   [hl], $2F
-    ld   a, $18
-    ldh  [$FFF2], a
+    ld   a, JINGLE_ITEM_FALLING
+    ldh  [hJingle], a
     scf
     ret
 
@@ -3470,8 +3483,8 @@ data_DF31::
 label_DF33::
     call IsEntityFrameCounterZero
     jr   nz, label_DF5F
-    ld   a, $2B
-    ldh  [$FFF2], a
+    ld   a, JINGLE_INSTRUMENT_WARP
+    ldh  [hJingle], a
     ld   a, $39
     call label_E4CA
     ldh  a, [$FFD7]
@@ -3680,7 +3693,7 @@ label_E0B3::
     call label_FF25
     call label_EB7B
     call label_F893
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_E0E3
     ld   hl, $C2A0
@@ -3756,10 +3769,10 @@ label_E120::
     jr   z, label_E134
     cp   $02
     jr   z, label_E134
-    ld   a, $09
+    ld   a, JINGLE_BUMP
 
 label_E132::
-    ldh  [$FFF2], a
+    ldh  [hJingle], a
 
 label_E134::
     pop  hl
@@ -3777,7 +3790,7 @@ label_E136::
 
 label_E143::
     ld   [hl], a
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_E156
     ld   hl, $C250
@@ -4066,8 +4079,8 @@ label_E311::
     sub  a, $2D
     cp   $02
     jr   nc, label_E328
-    ld   hl, $FFF2
-    ld   [hl], $14
+    ld   hl, hJingle
+    ld   [hl], JINGLE_GOT_HEART
     jr   label_E32D
 
 label_E328::
@@ -4179,8 +4192,8 @@ label_E3A1::
     ld   a, $10
     ld   [$D368], a
     jr   label_E3D2
-    ld   a, $01
-    ldh  [$FFF2], a
+    ld   a, JINGLE_TREASURE_FOUND
+    ldh  [hJingle], a
 
 label_E3D2::
     call IsEntityFrameCounterZero
@@ -4621,7 +4634,7 @@ label_E6FA::
     call label_EB34
 
 label_E706::
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     ret  nz
     ld   a, [hl]
@@ -4678,7 +4691,7 @@ data_E76D::
     db 0, 0, $10, 0
 
 label_E771::
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jp   nz, label_E8E5
     push bc
@@ -4721,8 +4734,8 @@ label_E771::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, label_E828
-    ld   a, $02
-    ldh  [$FFF2], a
+    ld   a, JINGLE_PUZZLE_SOLVED
+    ldh  [hJingle], a
     ldh  a, [$FFCD]
     and  $E0
     ldh  [$FFCD], a
@@ -4794,8 +4807,8 @@ label_E828::
     cp   $04
     jp   nc, label_E8E4
     ld   c, a
-    ld   a, $02
-    ldh  [$FFF2], a
+    ld   a, JINGLE_PUZZLE_SOLVED
+    ldh  [hJingle], a
     ld   a, [wIsIndoor]
     and  a
     jr   nz, label_E878
@@ -5207,8 +5220,8 @@ label_EAFF::
     ld   a, [hl]
     inc  a
     jr   z, label_EB13
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
 
 label_EB13::
     call label_C50
@@ -5290,7 +5303,7 @@ data_EB77::
     db $40, 8, $40, $40
 
 label_EB7B::
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_EB8C
     call label_FF5E
@@ -5399,8 +5412,8 @@ label_EBDE::
     ld   hl, $C2A0
     add  hl, bc
     ld   [hl], $02
-    ld   a, $07
-    ldh  [$FFF2], a
+    ld   a, JINGLE_SWORD_POKING
+    ldh  [hJingle], a
     ldh  a, [$FFEF]
 
 label_EC36::
@@ -5421,7 +5434,7 @@ label_EC41::
     cp   [hl]
     jr   nz, label_EC5B
     ld   a, $16
-    ldh  [$FFF2], a
+    ldh  [hJingle], a
 
 label_EC54::
     ld   hl, $C2A0
@@ -5557,7 +5570,7 @@ label_ECF9::
     ldh  a, [$FFB7]
     and  a
     jr   nz, label_ED1B
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_ED15
     ldh  a, [$FFA3]
@@ -5581,7 +5594,7 @@ label_ED1B::
     ld   [hl], $30
     ld   a, $0E
     ldh  [hSFX], a
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_ED38
     ld   a, $10
@@ -5708,7 +5721,7 @@ label_EDFA::
 
 label_EE02::
     call label_F565
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_EE0E
 
@@ -5979,8 +5992,8 @@ label_EF8E::
     jp   z, label_EF24
 
 label_EF93::
-    ld   a, $09
-    ldh  [$FFF2], a
+    ld   a, JINGLE_BUMP
+    ldh  [hJingle], a
     call label_CB6
     ld   a, $0C
     ld   [$C13E], a
@@ -6261,8 +6274,8 @@ label_F15E::
     ld   [$C122], a
     ld   a, $30
     call label_EFCC
-    ld   hl, $FFF2
-    ld   [hl], $09
+    ld   hl, hJingle
+    ld   [hl], JINGLE_BUMP
     ld   a, [$DC0F]
     cp   $01
     jr   z, label_F17A
@@ -6372,8 +6385,8 @@ label_F215::
     ld   hl, $C430
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $FFF2
-    ld   [hl], $03
+    ld   hl, hJingle
+    ld   [hl], JINGLE_BOW_WOW_CHOMP
     and  $80
     jr   z, label_F228
     ld   hl, hSFX
@@ -6776,8 +6789,8 @@ label_F48B::
     ldh  a, [$FFEB]
     cp   $BE
     jr   nz, label_F4C1
-    ld   a, $09
-    ldh  [$FFF2], a
+    ld   a, JINGLE_BUMP
+    ldh  [hJingle], a
     ld   a, [$D205]
     cp   $00
     jr   z, label_F4BF
@@ -6941,8 +6954,8 @@ label_F58B::
     ldh  [hLinkPositionYIncrement], a
     ld   a, $30
     ldh  [$FFA3], a
-    ld   a, $0B
-    ldh  [$FFF2], a
+    ld   a, JINGLE_HUGE_BUMP
+    ldh  [hJingle], a
     ret
     ld   a, $20
     ld   [$C13E], a
@@ -7494,7 +7507,7 @@ label_F90C::
     ldh  a, [$FFD7]
     cp   $03
     jr   z, label_F973
-    ldh  a, [hFFF9]
+    ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_F93D
     ld   hl, $C320
@@ -7536,8 +7549,8 @@ label_F95C::
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFD8], a
-    ld   a, $0E
-    ldh  [$FFF2], a
+    ld   a, JINGLE_WATER_DIVE
+    ldh  [hJingle], a
     ld   a, $01
     call label_CC7
 
@@ -7637,8 +7650,8 @@ label_F9CB::
     jr   nz, label_FA18
     call IsEntityFrameCounterZero
     ld   [hl], $2F
-    ld   a, $18
-    ldh  [$FFF2], a
+    ld   a, JINGLE_ITEM_FALLING
+    ldh  [hJingle], a
 
 label_FA18::
     ldh  a, [$FFEB]

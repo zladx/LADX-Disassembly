@@ -1148,23 +1148,23 @@ jumpToGameplayHandler::
 ._1A dw PhotoPictureHandler ; Bridge photo
 
 FaceShrineMuralHandler::
-    call label_6AF8
+    call FaceShrineMuralEntryPoint
     jp   returnFromGameplayHandler
 
 PeachPictureHandler::
-    call label_67EE
+    call PeachPictureEntryPoint
     jp   returnFromGameplayHandler
 
 MarinBeachHandler::
-    call $6203
+    call MarineBeachEntryPoint
     jp   returnFromGameplayHandler
 
 MinimapHandler::
-    call $5626
+    call MinimapEntryPoint
     jp   returnFromGameplayHandler
 
 FileSaveHandler::
-    jpsw FileSaveHandlerEntryPoint
+    jpsw FileSaveEntryPoint
 
 IntroHandler::
     jp   IntroHandlerEntryPoint
@@ -1199,16 +1199,16 @@ label_F05::
     jr   label_EF4
 
 FileSelectionHandler::
-    jp   $47CE
+    jp   FileSelectionEntryPoint
 
 FileCreationHandler::
-    jp   label_4A07
+    jp   FileCreationEntryPoint
 
 FileDeletionHandler::
-    jp   $4CFB
+    jp   FileDeletionEntryPoint
 
 FileCopyHandler::
-    jp   $4F8C
+    jp   FileCopyEntryPoint
 
 WorldHandler::
     ld   a, $14

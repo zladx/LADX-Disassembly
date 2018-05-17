@@ -170,7 +170,18 @@ hDialogBackgroundTile:: ; FFE8
   ds 1
 
 hFFE9:: ; FFE9
-  ds $9
+  ds 1
+
+; Entity type?
+; 0-4: unknown
+; 5: do nothing
+; 6-9: unknown   
+; See wEntitiesTypeTable 
+hEntityType:: ; FFEA
+  ds 1
+
+; Unlabeled
+ds 7
 
 hJingle:: ; FFF2
   ; Play a jingle immediately

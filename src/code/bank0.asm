@@ -6534,8 +6534,8 @@ label_39F2::
     ld   a, [hl]
     and  a
     jr   z, label_3A03
-    ldh  [$FFEA], a
-    call label_3A18
+    ldh  [hEntityType], a
+    call LoadEntities
 
 label_3A03::
     dec  c
@@ -6552,7 +6552,7 @@ label_3A0A::
     ld   [MBC3SelectBank], a
     ret
 
-label_3A18::
+LoadEntities::
     ld   hl, $C3A0
     add  hl, bc
     ld   a, [hl]
@@ -6576,7 +6576,7 @@ label_3A18::
     jr   nz, label_3A46
 
 label_3A40::
-    ldh  a, [$FFEA]
+    ldh  a, [hEntityType]
     cp   $07
     jr   nz, label_3A4E
 
@@ -6597,9 +6597,14 @@ label_3A54::
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFEA]
+    ldh  a, [hEntityType]
     cp   $05
     jp   z, label_3A8D
+    ; Jump table on FFEA value.
+    ; 0-4: unknown
+    ; 5: return immediately
+    ; 6-9: unknown
+    ; Entity timer type?
     JP_TABLE
     db 9, $3A, $18, $55, $B6, $4C, $4C, $4C, $B5, $48, $8D, $3A, 7, $4E, $32, $57
     db $94, $4D

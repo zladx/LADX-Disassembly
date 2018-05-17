@@ -5325,7 +5325,7 @@ label_32B8::
     ld   a, $24
     ld   [MBC3SelectBank], a
     call $7578
-    call label_353B
+    call SetBankForRoom
     ret
 
 label_32D9::
@@ -5777,17 +5777,20 @@ label_352D::
     inc  bc
     ret
 
-label_353B::
-    ldh  a, [$FFF6]
+; Use the current map room to load the adequate bank
+SetBankForRoom::
+    ldh  a, [hMapRoom]
+    ; If hMapRoom <= $80…
     cp   $80
-    jr   nc, label_3545
+    jr   nc, .moreThan80
+    ; … a = $09
     ld   a, $09
-    jr   label_3547
-
-label_3545::
+    jr   .fi
+.moreThan80
+    ; else a = $1A
     ld   a, $1A
-
-label_3547::
+.fi
+    ; Load the bank $09 or $1A
     ld   [MBC3SelectBank], a
     ret
 

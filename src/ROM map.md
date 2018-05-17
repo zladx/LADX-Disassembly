@@ -11,7 +11,7 @@
 06 Code and data
 07 n/a
 08 Map data
-09 Data and text
+09 Room data and text
 0A n/a
 0B n/a
 0C Graphics: items, Link, minimap (DMG variant)
@@ -28,7 +28,7 @@
 17 Credits code and text
 18 Code and data
 19 Code (Link motions)
-1A Code
+1A Room data and text
 1B Audio code and Music
 1C Map data?
 1D Text

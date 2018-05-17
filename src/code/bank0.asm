@@ -1460,15 +1460,15 @@ InitGotItemSequence::
     ld   a, [$D464]
     and  a
     jr   nz, label_10DB
+
+    ; Show a location on the mini-map
     xor  a
     ld   [wTransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [wGameplaySubtype], a
-    ld   a, $07
+    ld   a, GAMEPLAY_MINI_MAP
     ld   [wGameplayType], a
-    ld   a, GAMEPLAY_FILE_SELECT
-    ld   [MBC3SelectBank], a
-    call $755B
+    callsb func_002_755B
     call DrawLinkSprite
     call label_398D
     pop  af

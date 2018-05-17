@@ -8331,6 +8331,7 @@ jr_002_7549:
 
     call ClearLinkPositionIncrement               ; $7558: $CD $8E $17
 
+; Called when getting an item, and showing a location on the mini-map
 func_002_755B::
     call func_002_7512                            ; $755B: $CD $12 $75
     ld   c, $04                                   ; $755E: $0E $04

@@ -875,7 +875,7 @@ LoadRoomSprites::
     ; Indoor
     ;
 
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, $6EB3
@@ -913,7 +913,7 @@ LoadRoomSprites::
     ; Overworld
     ;
 
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $07
     jr   nz, .label_D60
     inc  a
@@ -941,7 +941,7 @@ LoadRoomSprites::
     jr   z, .indoorOutdoorEnd
     cp   $1A
     jr   nz, .label_D8B
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $37
     jr   nz, .indoorOutdoorEnd
     ld   a, [hl]
@@ -954,7 +954,7 @@ LoadRoomSprites::
 .indoorOutdoorEnd
     xor  a
     ldh  [$FFD7], a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, $70D3
@@ -976,7 +976,7 @@ label_DAB::
     ldh  a, [hMapId]
     cp   MAP_HOUSE
     jr   nz, label_DDB
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $B5
     jr   nz, label_DDB
     ld   e, $3D
@@ -2687,7 +2687,7 @@ label_18F2::
     ld   a, [wIsIndoor]
     and  a
     ld   a, [hli]
-    ldh  [$FFF6], a
+    ldh  [hMapRoom], a
     jr   nz, label_1909
     ldh  a, [$FFE6]
     and  a
@@ -3334,7 +3334,7 @@ label_1FFE::
 label_2030::
     ld   a, [$DB4E]
     and  a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     jr   nz, label_203E
     ld   e, $FF
     cp   $A3
@@ -3351,7 +3351,7 @@ label_2046::
     jr   label_208E
 
 label_2049::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   a, $14
@@ -4649,7 +4649,7 @@ label_2E85::
     jr   z, label_2ED3
     cp   MAP_CAVE_B
     jr   c, label_2ED3
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $FD
     jr   z, label_2ED3
     cp   $B1
@@ -4743,7 +4743,7 @@ label_2F36::
     jr   label_2F41
 
 label_2F3B::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $E9
     jr   z, label_2F36
 
@@ -4757,7 +4757,7 @@ label_2F4B::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, label_2F57
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $12
     jr   nz, label_2F69
 
@@ -4775,7 +4775,7 @@ label_2F69::
     ldh  a, [hMapId]
     cp   MAP_HOUSE
     jr   nz, label_2F87
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $B5
     jr   nz, label_2F87
     ld   a, $35
@@ -4843,7 +4843,7 @@ label_2FCD::
     jr   z, label_2FEC
     cp   MAP_HOUSE
     jr   nz, label_2FF1
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $B5
     jr   nz, label_2FF1
 
@@ -4907,7 +4907,7 @@ label_3019::
     jr   z, label_3047
     cp   MAP_HOUSE
     jr   nz, label_304F
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $B5
     jr   nz, label_304F
 
@@ -5072,7 +5072,7 @@ label_3132::
     jr   nz, label_3132
 
 label_313A::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, wMinimapTiles
@@ -5104,7 +5104,7 @@ label_3161::
 
 label_316B::
     ldh  [hFFF8], a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
     sla  c
@@ -5124,7 +5124,7 @@ label_316B::
 label_318F::
     cp   $1F
     jr   nz, label_31A6
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $F5
     jr   nz, label_31A6
     ld   a, [wTradeSequenceItem]
@@ -5147,7 +5147,7 @@ label_31A6::
     jr   label_3224
 
 label_31BF::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $0E
     jr   nz, label_31D1
     ld   a, [$D80E]
@@ -5215,7 +5215,7 @@ label_3224::
     jr   nz, label_323A
 
 label_322F::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $80
     jr   c, label_323A
     ld   a, $1A
@@ -5435,7 +5435,7 @@ MoveToNextLine_notTileBA::
     jr   nz, MoveToNextLine_notTileD3
     bit  4, e
     jr   z, MoveToNextLine_notTileD3
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $75
     jr   z, label_337C
     cp   $07
@@ -5511,7 +5511,7 @@ label_33DC::
     jr   nz, label_3407
     xor  a
     ld   [$C3CB], a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $C4
     ldh  a, [$FFE0]
     jr   z, label_3407
@@ -5735,7 +5735,7 @@ label_3500::
     ret  z
     cp   $09
     jr   nz, label_350E
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $97
     ret  nz
     jr   label_3527
@@ -5743,7 +5743,7 @@ label_3500::
 label_350E::
     cp   $E1
     jr   nz, label_351D
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $0E
     ret  z
     cp   $0C
@@ -5752,7 +5752,7 @@ label_350E::
     ret  z
 
 label_351D::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $80
     jr   nc, label_3527
     ld   a, $09
@@ -5896,7 +5896,7 @@ label_35CB::
     ret  z
     cp   $09
     jr   nz, label_35D9
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $97
     ret  nz
     jr   label_35E8
@@ -5904,7 +5904,7 @@ label_35CB::
 label_35D9::
     cp   $E1
     jr   nz, label_35E8
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $0E
     ret  z
     cp   $0C
@@ -5975,7 +5975,7 @@ label_36B2::
 label_36C4::
     push af
     ld   hl, $D900
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ldh  a, [hMapId]
@@ -6130,7 +6130,7 @@ label_37FE::
     ld   [MBC3SelectBank], a
     xor  a
     ldh  [$FFE4], a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
     sla  c
@@ -6143,7 +6143,7 @@ label_37FE::
     cp   MAP_EAGLES_TOWER
     jr   nz, label_3850
     ld   a, [$DB6F]
-    ld   hl, $FFF6
+    ld   hl, hMapRoom
     cp   [hl]
     jr   nz, label_3850
     ld   a, $A8
@@ -6208,7 +6208,7 @@ label_3883::
     ld   d, $00
     ld   hl, data_387B
     add  hl, de
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   a, [hl]
     ld   hl, $CF00
@@ -7322,7 +7322,7 @@ label_3F78::
     ld   d, b
     ld   hl, data_3F48
     add  hl, de
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, b
     ld   a, [hl]

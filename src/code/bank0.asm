@@ -5224,12 +5224,12 @@ label_322F::
 label_323A::
     ld   a, [bc]
     cp   $FE
-    jr   z, endOfRoom
+    jr   z, .endOfRoom
     ldh  [hAnimatedTilesGroup], a
     inc  bc
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_3258
+    jr   z, .label_3258
     ld   a, [bc]
     and  $0F
     call FillTileMapWith
@@ -5237,18 +5237,18 @@ label_323A::
     swap a
     and  $0F
     call label_38EA
-    jr   CopyMapToTileMapLoop
+    jr   .CopyMapToTileMapLoop
 
-label_3258::
+.label_3258
     ld   a, [bc]
     call FillTileMapWith
 
-CopyMapToTileMapLoop::
+.CopyMapToTileMapLoop
     inc  bc ; tile address
     ld   a, [bc] ; tile type
     and  $FC
     cp   $E0
-    jr   nz, CopyMapToTileMapLoop_consecutive_tiles
+    jr   nz, .CopyMapToTileMapLoop_consecutive_tiles
     ldh  a, [$FFE6]
     ld   e, a
     ld   d, $00
@@ -5272,16 +5272,16 @@ CopyMapToTileMapLoop::
     ld   a, e
     add  a, $05
     ldh  [$FFE6], a
-    jr   CopyMapToTileMapLoop
+    jr   .CopyMapToTileMapLoop
 
-CopyMapToTileMapLoop_consecutive_tiles::
+.CopyMapToTileMapLoop_consecutive_tiles
     ld   a, [bc] ; tile type
     cp   $FE ; end-of-room tile
-    jr   z, endOfRoom
-    call label_32A9
-    jr   CopyMapToTileMapLoop
+    jr   z, .endOfRoom
+    call func_32A9
+    jr   .CopyMapToTileMapLoop
 
-endOfRoom::
+.endOfRoom
     ld   a, $01
     ld   [MBC3SelectBank], a
     call $6CCE
@@ -5295,68 +5295,103 @@ endOfRoom::
     call $53F3
     jp   ReloadSavedBank
 
-label_32A9::
+func_32A9::
+    ; Clear $FFD7
     xor  a
     ldh  [$FFD7], a
+
+    ; If [BC] & 0x80 != 0 && [BC] & 0x10) == 0…
     ld   a, [bc] ; tile address
     bit  7, a
-    jr   z, label_32B8
+    jr   z, .bcEnd
     bit  4, a
-    jr   nz, label_32B8
+    jr   nz, .bcEnd
+    ; … $FFD7 = [bc]
     ldh  [$FFD7], a
+    ; Increment BC
     inc  bc ; increment tile address
+.bcEnd
 
-label_32B8::
     inc  bc
+
+    ; e = hFFF8
     ldh  a, [hFFF8]
     ld   e, a
+
+    ; If is outdoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_32D9
+    jr   nz, .isIndoor
+
+    ; If [BC] < $F5, move to next line.
     ld   a, [bc] ; tile addres
     sub  a, $F5
     jr   c, MoveToNextLine
+
+    ;
     ld   a, [bc]
     ld   d, a
     dec  bc
     ld   a, [bc]
     ld   e, a
     inc  bc
+
     ld   a, $24
     ld   [MBC3SelectBank], a
     call $7578
     call SetBankForRoom
     ret
 
-label_32D9::
+.isIndoor
+    ; a = [block type] - $EC
     ld   a, [bc]
     sub  a, $EC
-    jp  c, label_33CB
+    ; If a >= $EC, dispatch the tile script
+    jp  c, MoveToNextLine_notDoor
     JP_TABLE
-    ; Code below is actually data for the jump table
-    ld   a, [label_1535]
-    ld   [hl], $30
-    ld   [hl], $4B
-    ld   [hl], $64
-    ld   [hl], $77
-    ld   [hl], $8A
-    ld   [hl], $9D
-    ld   [hl], $B2
-    ld   [hl], $EA
-    ld   [hl], $FE
-    ld   [hl], $12
-    scf
-    ld   h, $37
-    ld   e, [hl]
-    scf
-    ld   l, l
-    scf
-    ld   a, h
-    scf
-    and  d
-    scf
-    or   [hl]
-    scf
+    ; TODO: document door types (values taken from the LALE editor)
+    ; case 0xEC // Key Doors
+    ; case 0xED
+    ; case 0xEE
+    ; case 0xEF
+
+    ; case 0xF4  // Open Doors
+    ; case 0xF5
+    ; case 0xF6
+    ; case 0xF7
+
+    ; case 0xF0  // Closed Doors
+    ; case 0xF1
+    ; case 0xF2
+    ; case 0xF3
+
+    ; case 0xF8 // Boss Door
+
+    ; case 0xF9 // ?? Stairs maybe
+    ; case 0xFA // FLip Wall
+    ; case 0xFB // One-way Arrow
+
+    ; case 0xFC // Dungeon Entrances
+
+    ; case 0xFD //Indoor Entrances
+._EC dw label_35FA
+._ED dw $3615
+._EE dw $3630
+._EF dw $364B
+._F0 dw $3664
+._F1 dw $3677
+._F2 dw $368A
+._F3 dw $369D
+._F4 dw $36B2
+._F5 dw $36EA 
+._F6 dw $36FE
+._F7 dw $3712
+._F8 dw $3726
+._F9 dw $375E
+._FA dw $376D
+._FB dw $377C
+._FC dw $37A2
+._FD dw IndoorEntranceHandler
 
 MoveToNextLine::
     add  a, $F5
@@ -5495,7 +5530,7 @@ MoveToNextLine_noSpecialTile::
     jp   z, label_347D
     jp   MoveToNextLine_finallyBeginSomething
 
-label_33CB::
+MoveToNextLine_notDoor::
     add  a, $EC
     ldh  [$FFE0], a
     push af
@@ -5957,11 +5992,30 @@ data_3649::
     db   $EE, $35, 1, $E4, $37, $11, $49, $36, $C3, $4B, $35, $1E, 4, $CD, $3F, $37
     db   $FA, $8A, $C1, $F6, 1, $EA, $8A, $C1, $EA, $8B, $C1, $C3, $B2, $36
 
-data_3677::
-    db   $1E, 5, $CD, $3F, $37, $FA, $8A, $C1, $F6, 2, $EA, $8A, $C1, $EA, $8B, $C1
-    db   $C3, $EA, $36, $1E, 6, $CD, $3F, $37, $FA, $8A, $C1, $F6, 4, $EA, $8A, $C1
-    db   $EA, $8B, $C1, $C3, $FE, $36, $1E, 7, $CD, $3F, $37, $FA, $8A, $C1, $F6, 8
-    db   $EA, $8A, $C1, $EA, $8B, $C1, $C3, $12, $37
+label_3677::
+    ld   e, $05
+    call label_373F
+    ld   a, [$C18A]
+    or   $02
+    ld   [$C18A], a
+    ld   [$C18B], a
+    jp   $36EA
+
+    ld   e, $06
+    call label_373F
+    ld   a, [$C18A]
+    or   $04
+    ld   [$C18A], a
+    ld   [$C18B], a
+    jp   label_36FE
+
+    ld   e, $07
+    call label_373F
+    ld   a, [$C18A]
+    or   $08
+    ld   [$C18A], a
+    ld   [$C18B], a
+    jp   label_3712
 
 data_36B0::
     db   $43, $44
@@ -5975,6 +6029,7 @@ label_36B2::
     ld   de, data_36B0
     jp   label_354B
 
+; Set hFFF8 depending on the map and room
 label_36C4::
     push af
     ld   hl, $D900
@@ -6091,18 +6146,51 @@ data_3796::
     db   $36, $C5, $CD, $EE, $35, 1, $89, $37, $11, $96, $37, $C3, $4B, $35
 
 data_37B4::
-    db   $C1, $C2, $F0, $F7, $FE, $1A, $30, $13, $FE, 6, $38, $F, $F0, $F6, $FE, $D3
-    db   $20, 9, $FA, $46, $DB, $A7, $28, 3, $C3, $77, $36
+    db   $C1, $C2
 
-data_37CF::
-    db   $3E, 1, $CD, $C4, $36, $C5, $CD, $EE, $35, 1, $E1, $37, $11, $B4, $37, $C3
-    db   $4B, $35
+IndoorEntranceHandler::
+    ; If MapId < $1A…
+    ldh  a, [hMapId]
+    cp   $1A
+    jr   nc, .end
+
+    ; … and MapId >= $06…
+    cp   MAP_EAGLES_TOWER
+    jr   c, .end  
+
+    ; … and MapRoom == $D3…
+    ldh  a, [hMapRoom]
+    cp   $D3
+    jr   nz, .end
+
+    ; … and $DB46 != 0…
+    ld   a, [$DB46]
+    and  a
+    jr   z, .end
+
+    ; … handle special case.
+    jp   label_3677
+
+.end
+
+    ld   a, $01
+    call label_36C4
+    push bc
+    call label_35EE
+    ld   bc, data_37E1
+    ld   de, data_37B4
+    ; tail-call jump
+    jp   label_354B
 
 data_37E1::
-    db   0, 1, $FF
+    db   $00
+    db   $01
+    db   $FF
 
 data_37E4::
-    db   0, $10, $FF
+    db   $00
+    db   $10
+    db   $FF
 
 ; Fill the tile map with whatever is in register a
 FillTileMapWith::

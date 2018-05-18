@@ -15,8 +15,6 @@ SwitchBank::
 ; Switch to the bank defined in a, depending on GB or GBC mode
 SwitchAdjustedBank::
     call AdjustBankNumberForGBC
-
-SwitchBank_duplicate::
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
     ret

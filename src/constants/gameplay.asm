@@ -150,6 +150,16 @@ LINK_MOTION_RECOVER        equ $08
 LINK_MOTION_TELEPORT       equ $09
 LINK_MOTION_UNKNOWN        equ $0F
 
+; Values for wSwordDirection
+SWORD_DIRECTION_RIGHT        equ $00
+SWORD_DIRECTION_RIGHT_BOTTOM equ $01
+SWORD_DIRECTION_BOTTOM       equ $02
+SWORD_DIRECTION_LEFT_BOTTOM  equ $03
+SWORD_DIRECTION_LEFT         equ $04
+SWORD_DIRECTION_LEFT_TOP     equ $05
+SWORD_DIRECTION_TOP          equ $06
+SWORD_DIRECTION_RIGHT_TOP    equ $07
+
 ; Values for wTransitionGfx
 TRANSITION_GFX_NONE         equ $00 ; no transition
 TRANSITION_GFX_DREAM_SHRINE equ $01 ; wavy transition when sleeping in the Dream Shrine

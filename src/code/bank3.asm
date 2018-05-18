@@ -2814,7 +2814,7 @@ label_DA17::
     ld   a, $03
     ldh  [$FF9E], a
     xor  a
-    ld   [$C137], a
+    ld   [wSwordAnimationState], a
     ld   [$C16A], a
     ld   [$C122], a
     ld   [$C121], a
@@ -6094,7 +6094,7 @@ label_F018::
     ld   a, $40
     ld   [$D464], a
     xor  a
-    ld   [$C137], a
+    ld   [wSwordAnimationState], a
     ld   [$C16A], a
     ld   [$C121], a
     ld   a, $1C

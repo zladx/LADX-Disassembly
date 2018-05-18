@@ -1587,12 +1587,12 @@ label_11A5::
     jr   label_11BA
 
 label_11AA::
-    ld   a, [$C137]
+    ld   a, [wSwordAnimationState]
     dec  a
     cp   $04
     jr   c, label_11BA
     ld   a, $05
-    ld   [$C137], a
+    ld   [wSwordAnimationState], a
     ld   [$C16A], a
 
 label_11BA::
@@ -1610,7 +1610,7 @@ label_11C3::
     ld   a, [$C15C]
     and  a
     jp   nz, label_12ED
-    ld   a, [$C137]
+    ld   a, [wSwordAnimationState]
     and  a
     jr   z, label_11E2
     cp   $03
@@ -1752,7 +1752,7 @@ ItemFunction::
     jp   z, UseShovel
     cp   $07 ; Magic wand
     jr   nz, label_12ED
-    ld   hl, $C137
+    ld   hl, wSwordAnimationState
     ld   a, [$C19B]
     or   [hl]
     jr   nz, label_12ED
@@ -1806,7 +1806,7 @@ UseHookshot::
 label_1321::
     cp   $01
     ret  nz
-    ld   hl, $C137
+    ld   hl, wSwordAnimationState
     ld   a, [$C1AD]
     and  $03
     or   [hl]
@@ -1817,7 +1817,7 @@ label_1321::
     xor  a
     ld   [$C1AC], a
     ld   a, $05
-    ld   [$C137], a
+    ld   [wSwordAnimationState], a
     ld   [$C5B0], a
     ret
 
@@ -2121,7 +2121,7 @@ UseSword::
 
 label_1535::
     ld   a, $01
-    ld   [$C137], a
+    ld   [wSwordAnimationState], a
     ld   [$C5B0], a
     xor  a
     ld   [$C160], a
@@ -2201,7 +2201,7 @@ label_15C0::
     ld   a, [wIsUsingSpinAttack]
     and  a
     jr   z, label_15CD
-    ld   a, [$C136]
+    ld   a, [wSwordDirection]
     add  a, $04
     jr   label_15CF
 
@@ -2526,7 +2526,7 @@ label_17C6::
     ld   h, a
     ld   a, [$C13A]
     ld   l, a
-    ld   a, [$C136]
+    ld   a, [wSwordDirection]
     ldh  [$FFD9], a
     ldh  a, [hLinkPositionY]
     cp   $88

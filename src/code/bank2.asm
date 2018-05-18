@@ -194,7 +194,7 @@ jr_002_42C7:
     and  a                                        ; $42EB: $A7
     jr   nz, jr_002_4315                          ; $42EC: $20 $27
 
-    ld   a, [$C137]                               ; $42EE: $FA $37 $C1
+    ld   a, [wSwordAnimationState]                               ; $42EE: $FA $37 $C1
     ld   [wC16A], a                               ; $42F1: $EA $6A $C1
     cp   $05                                      ; $42F4: $FE $05
     jr   nz, jr_002_4316                          ; $42F6: $20 $1E
@@ -204,7 +204,7 @@ jr_002_42C7:
     jr   nz, jr_002_4333                          ; $42FC: $20 $35
 
     xor  a                                        ; $42FE: $AF
-    ld   [$C137], a                               ; $42FF: $EA $37 $C1
+    ld   [wSwordAnimationState], a                               ; $42FF: $EA $37 $C1
     ld   a, [$C122]                               ; $4302: $FA $22 $C1
     cp   $28                                      ; $4305: $FE $28
     jr   z, jr_002_4315                           ; $4307: $28 $0C
@@ -742,7 +742,7 @@ label_002_4709::
     ld   hl, $46C9                                ; $4723: $21 $C9 $46
     add  hl, de                                   ; $4726: $19
     ld   a, [hl]                                  ; $4727: $7E
-    ld   [$C137], a                               ; $4728: $EA $37 $C1
+    ld   [wSwordAnimationState], a                               ; $4728: $EA $37 $C1
     ld   hl, $46E9                                ; $472B: $21 $E9 $46
     add  hl, de                                   ; $472E: $19
     ldh  a, [hLinkDirection]                               ; $472F: $F0 $9E
@@ -795,7 +795,7 @@ label_002_476B::
 
 jr_002_4781:
     ld   a, $03                                   ; $4781: $3E $03
-    ld   [$C137], a                               ; $4783: $EA $37 $C1
+    ld   [wSwordAnimationState], a                               ; $4783: $EA $37 $C1
     jp   label_002_4827                           ; $4786: $C3 $27 $48
 
 jr_002_4789:
@@ -824,7 +824,7 @@ jr_002_47A3:
     jr   nz, jr_002_47E0                          ; $47A8: $20 $36
 
     ld   a, [$C3CF]                               ; $47AA: $FA $CF $C3
-    ld   hl, $C137                                ; $47AD: $21 $37 $C1
+    ld   hl, wSwordAnimationState                                ; $47AD: $21 $37 $C1
     or   [hl]                                     ; $47B0: $B6
     jr   nz, jr_002_47E0                          ; $47B1: $20 $2D
 
@@ -864,13 +864,13 @@ jr_002_47E0:
     and  a                                        ; $47EA: $A7
     jp   nz, label_002_476B                       ; $47EB: $C2 $6B $47
 
-    ld   a, [$C137]                               ; $47EE: $FA $37 $C1
+    ld   a, [wSwordAnimationState]                               ; $47EE: $FA $37 $C1
     and  a                                        ; $47F1: $A7
     ret  z                                        ; $47F2: $C8
 
     ld   hl, wC16E                                ; $47F3: $21 $6E $C1
     ld   [hl], $04                                ; $47F6: $36 $04
-    ld   a, [$C137]                               ; $47F8: $FA $37 $C1
+    ld   a, [wSwordAnimationState]                               ; $47F8: $FA $37 $C1
     cp   $05                                      ; $47FB: $FE $05
     jr   nc, jr_002_4789                          ; $47FD: $30 $8A
 
@@ -886,9 +886,9 @@ jr_002_4809:
     and  a                                        ; $480C: $A7
     jr   nz, jr_002_4823                          ; $480D: $20 $14
 
-    ld   a, [$C137]                               ; $480F: $FA $37 $C1
+    ld   a, [wSwordAnimationState]                               ; $480F: $FA $37 $C1
     inc  a                                        ; $4812: $3C
-    ld   [$C137], a                               ; $4813: $EA $37 $C1
+    ld   [wSwordAnimationState], a                               ; $4813: $EA $37 $C1
     cp   $04                                      ; $4816: $FE $04
     jp   z, label_002_48B0                        ; $4818: $CA $B0 $48
 
@@ -903,7 +903,7 @@ jr_002_4823:
     ld   [$C138], a                               ; $4824: $EA $38 $C1
 
 label_002_4827::
-    ld   hl, $C137                                ; $4827: $21 $37 $C1
+    ld   hl, wSwordAnimationState                                ; $4827: $21 $37 $C1
     ldh  a, [hLinkDirection]                               ; $482A: $F0 $9E
     ld   e, a                                     ; $482C: $5F
     sla  a                                        ; $482D: $CB $27
@@ -916,7 +916,7 @@ label_002_4827::
     ld   hl, $461E                                ; $4837: $21 $1E $46
     add  hl, bc                                   ; $483A: $09
     ld   a, [hl]                                  ; $483B: $7E
-    ld   [$C136], a                               ; $483C: $EA $36 $C1
+    ld   [wSwordDirection], a                               ; $483C: $EA $36 $C1
     ld   hl, $4636                                ; $483F: $21 $36 $46
     add  hl, bc                                   ; $4842: $09
     ld   a, [hl]                                  ; $4843: $7E
@@ -991,7 +991,7 @@ label_002_48B0::
     jr   nz, jr_002_48C4                          ; $48B8: $20 $0A
 
     xor  a                                        ; $48BA: $AF
-    ld   [$C137], a                               ; $48BB: $EA $37 $C1
+    ld   [wSwordAnimationState], a                               ; $48BB: $EA $37 $C1
     ld   [wC16A], a                               ; $48BE: $EA $6A $C1
     ld   [wIsUsingSpinAttack], a                  ; $48C1: $EA $21 $C1
 
@@ -1069,7 +1069,7 @@ jr_002_49B6:
     ld   [$C146], a                               ; $49B8: $EA $46 $C1
     call $1177                                    ; $49BB: $CD $77 $11
     call func_002_478C                            ; $49BE: $CD $8C $47
-    ld   a, [$C137]                               ; $49C1: $FA $37 $C1
+    ld   a, [wSwordAnimationState]                               ; $49C1: $FA $37 $C1
     ld   [wC16A], a                               ; $49C4: $EA $6A $C1
     jp   ApplyLinkMotionState                               ; $49C7: $C3 $94 $17
 
@@ -1327,7 +1327,7 @@ jr_002_4B64:
     ld   hl, $FFA1                                ; $4B64: $21 $A1 $FF
     ld   [hl], $01                                ; $4B67: $36 $01
     call ClearLinkPositionIncrement               ; $4B69: $CD $8E $17
-    ld   [$C137], a                               ; $4B6C: $EA $37 $C1
+    ld   [wSwordAnimationState], a                               ; $4B6C: $EA $37 $C1
     ld   [wIsUsingSpinAttack], a                  ; $4B6F: $EA $21 $C1
     ld   [$C122], a                               ; $4B72: $EA $22 $C1
     ld   a, [$C1C8]                               ; $4B75: $FA $C8 $C1
@@ -2040,7 +2040,7 @@ jr_002_4F3C:
     ldh  [$FFA2], a                               ; $4F3F: $E0 $A2
     ld   [$C146], a                               ; $4F41: $EA $46 $C1
     ld   [$C19B], a                               ; $4F44: $EA $9B $C1
-    ld   [$C137], a                               ; $4F47: $EA $37 $C1
+    ld   [wSwordAnimationState], a                               ; $4F47: $EA $37 $C1
     ld   [wC16A], a                               ; $4F4A: $EA $6A $C1
     ld   [wC16D], a                               ; $4F4D: $EA $6D $C1
     ld   a, [wIndoorRoom]                               ; $4F50: $FA $AE $DB
@@ -2473,7 +2473,7 @@ HandleGotItemA::
 HandleGotItemB::
     call label_CAF                                ; $51C7: $CD $AF $0C
     ld   [wC16A], a                               ; $51CA: $EA $6A $C1
-    ld   [$C137], a                               ; $51CD: $EA $37 $C1
+    ld   [wSwordAnimationState], a                               ; $51CD: $EA $37 $C1
     ld   [$C13E], a                               ; $51D0: $EA $3E $C1
     call ApplyLinkMotionState                               ; $51D3: $CD $94 $17
     call $21E1                                    ; $51D6: $CD $E1 $21
@@ -6499,7 +6499,7 @@ jr_002_6AD1:
     ld   [wC120], a                               ; $6AD8: $EA $20 $C1
 
 label_002_6ADB::
-    ld   a, [$C137]                               ; $6ADB: $FA $37 $C1
+    ld   a, [wSwordAnimationState]                               ; $6ADB: $FA $37 $C1
     and  a                                        ; $6ADE: $A7
     jr   nz, jr_002_6AE6                          ; $6ADF: $20 $05
 

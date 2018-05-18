@@ -122,7 +122,24 @@ wCollisionType:: ; C133
   ds 1
 
 ; Unlabeled
-ds $9
+ds $2
+
+wSwordDirection:: ; C136
+  ; Position of the sword during a sping attack
+  ; See SWORD_DIRECTION_* constants for possible values
+  ds 1
+
+wSwordAnimationState:: ; C137
+  ; State of the sword during a normal swing or a swing attack
+  ; 00  none
+  ; 01  swing start
+  ; 02  swing middle
+  ; 03  swing front
+  ; 04  swing end
+  ds 1
+
+; Unlabeled
+ds $5
 
 wRandomSeed:: ; C13D
   ; Seed for the Random Number Generator

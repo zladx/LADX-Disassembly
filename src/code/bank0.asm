@@ -137,12 +137,16 @@ PlayAudioStep::
 .return
     ret
 
+;
+; Palette-related code in bank $20
+;
+
 label_8D7::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6A30
 
-restoreBankAndReturn::
+RestoreBankAndReturn::
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -151,14 +155,13 @@ label_8E6::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6AC1
-    jr   restoreBankAndReturn
+    jr   RestoreBankAndReturn
 
-; Load BG palette?
 label_8F0::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6BA4
-    jr   restoreBankAndReturn
+    jr   RestoreBankAndReturn
 
 label_8FA::
     push af
@@ -332,24 +335,50 @@ label_9F5::
     call $482D
     jp   RestoreStackedBankAndReturn
 
-label_A01::
+;
+; Specific data-copying routines
+;
+
+; Copy $100 bytes without DMA (used on DMG), then switch back to bank at h
+; Inputs:
+;  b   source address high byte
+;  c   destination address high byte
+;  h   bank to switch back after the transfert
+Copy100Bytes_noDMA::
+    ; Save h
     push hl
+
+    ; Copy $100 bytes from "${b}00" to "${c}80"
     ld   l, $00
     ld   e, l
     ld   h, b
     ld   a, c
     add  a, $80
     ld   d, a
-    ld   bc, $0100
+    ld   bc, $100
     call CopyData
-    pop  hl
-    jr   label_A2D
 
-label_A13::
+    ; Switch back to the bank in h
+    pop  hl
+    jr   SelectBankAtHAndReturn
+
+; Copy $100 bytes from bank at a, then switch back to bank at h
+; Inputs:
+;  a   bank to copy data from
+;  b   source address high byte
+;  c   destination address high byte
+;  h   bank to switch back after the transfert
+Copy100BytesFromBankAtA::
+    ; Switch to bank in a
     ld   [MBC3SelectBank], a
+
+    ; If running on DMG, use a loop to copy the data
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_A01
+    jr   z, Copy100Bytes_noDMA
+
+    ; On CGB, configure a DMA transfert
+    ; to copy $0F bytes from "${b}00" to "${c}00"
     ld   a, b
     ld   [rHDMA1], a
     ld   a, $00
@@ -360,8 +389,9 @@ label_A13::
     ld   [rHDMA4], a
     ld   a, $0F
     ld   [rHDMA5], a
-
-label_A2D::
+    
+    ; Fallthrough to switch back to the bank in h
+SelectBankAtHAndReturn::
     ld   a, h
     ld   [MBC3SelectBank], a
     ret
@@ -493,7 +523,7 @@ label_B02::
     call $4029
     ret
 
-; Toogle an extra byte to the bank number on GBC (on GB, does nothing)
+; Toogle an extra byte to the bank number on GBC (on DMG, does nothing)
 ; Input:  a: the bank number to adjust
 ; Output: a: the adjusted bank number
 AdjustBankNumberForGBC::

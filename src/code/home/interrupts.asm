@@ -594,7 +594,7 @@ label_69E::
     ld   c, $90
     ld   b, h
     ld   h, $00
-    call label_A13
+    call Copy100BytesFromBankAtA
     jr   label_738
 
 label_6CB::

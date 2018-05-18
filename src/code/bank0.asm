@@ -93,34 +93,48 @@ label_873::
     ret
 
 PlayAudioStep::
+    ; Call $1F:4006
     ld   a, $1F
     call SwitchBank
     call $4006
+
+    ; If an SFX is playing, return early
     ldh  a, [hSFX]
     and  a
-    jr   nz, label_8D6
+    jr   nz, .return
+
+    ; If $C10B != 0…
     ld   a, [$C10B]
     and  a
-    jr   z, label_8C6
+    jr   z, .doAudioStep
+    ; … and $C10B != 2…
     cp   $02
-    jr   nz, label_8C3
+    ; … play two audio steps.
+    jr   nz, .doAudioStepTwice
+
+    ; Otherwise, play the audio step only on odd frames
     ldh  a, [hFrameCounter]
     and  $01
-    jr   nz, label_8D6
-    jr   label_8C6
+    jr   nz, .return
 
-label_8C3::
-    call label_8C6
+    jr   .doAudioStep
 
-label_8C6::
+.doAudioStepTwice
+    call .doAudioStep
+    ; Fallthrough to doAudioStep a second time
+
+.doAudioStep
+    ; Call 1B:4006
     ld   a, $1B
     call SwitchBank
     call $4006
+
+    ; Call 1E:4006
     ld   a, $1E
     call SwitchBank
     call $4006
 
-label_8D6::
+.return
     ret
 
 label_8D7::

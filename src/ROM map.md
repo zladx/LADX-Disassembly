@@ -32,7 +32,7 @@
 1B Audio code and Music
 1C Map data?
 1D Text
-1E Music
+1E Audio code and Music
 1F Audio code and Music
 20 BG and palette-related code
 21 Code and data

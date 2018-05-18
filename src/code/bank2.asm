@@ -13,13 +13,13 @@ label_002_41D0::
     ld   hl, wEntitiesTypeTable                   ; $41D8: $21 $80 $C2
     add  hl, de                                   ; $41DB: $19
     dec  [hl]                                     ; $41DC: $35
-    ldh  a, [$FFCE]                               ; $41DD: $F0 $CE
+    ldh  a, [hSwordIntersectedAreaX]                               ; $41DD: $F0 $CE
     and  $F0                                      ; $41DF: $E6 $F0
     add  $08                                      ; $41E1: $C6 $08
     ld   hl, wEntity0PosX                         ; $41E3: $21 $00 $C2
     add  hl, de                                   ; $41E6: $19
     ld   [hl], a                                  ; $41E7: $77
-    ldh  a, [$FFCD]                               ; $41E8: $F0 $CD
+    ldh  a, [hSwordIntersectedAreaY]                               ; $41E8: $F0 $CD
     and  $F0                                      ; $41EA: $E6 $F0
     add  $10                                      ; $41EC: $C6 $10
     ld   hl, wEntitiesPosYTable                   ; $41EE: $21 $10 $C2
@@ -1603,12 +1603,12 @@ jr_002_4CDD:
 
     ld   hl, wEntity0PosX                         ; $4CE2: $21 $00 $C2
     add  hl, de                                   ; $4CE5: $19
-    ldh  a, [$FFCE]                               ; $4CE6: $F0 $CE
+    ldh  a, [hSwordIntersectedAreaX]                               ; $4CE6: $F0 $CE
     add  $08                                      ; $4CE8: $C6 $08
     ld   [hl], a                                  ; $4CEA: $77
     ld   hl, wEntitiesPosYTable                   ; $4CEB: $21 $10 $C2
     add  hl, de                                   ; $4CEE: $19
-    ldh  a, [$FFCD]                               ; $4CEF: $F0 $CD
+    ldh  a, [hSwordIntersectedAreaY]                               ; $4CEF: $F0 $CD
     add  $10                                      ; $4CF1: $C6 $10
     ld   [hl], a                                  ; $4CF3: $77
     ld   hl, $C450                                ; $4CF4: $21 $50 $C4
@@ -1659,7 +1659,7 @@ func_002_4D20::
     add  [hl]                                     ; $4D3D: $86
     sub  $08                                      ; $4D3E: $D6 $08
     and  $F0                                      ; $4D40: $E6 $F0
-    ldh  [$FFCE], a                               ; $4D42: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $4D42: $E0 $CE
     swap a                                        ; $4D44: $CB $37
     ld   c, a                                     ; $4D46: $4F
     ld   hl, $4BC4                                ; $4D47: $21 $C4 $4B
@@ -1668,7 +1668,7 @@ func_002_4D20::
     add  [hl]                                     ; $4D4D: $86
     sub  $10                                      ; $4D4E: $D6 $10
     and  $F0                                      ; $4D50: $E6 $F0
-    ldh  [$FFCD], a                               ; $4D52: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $4D52: $E0 $CD
     or   c                                        ; $4D54: $B1
     ld   e, a                                     ; $4D55: $5F
     ldh  [$FFD8], a                               ; $4D56: $E0 $D8
@@ -1724,12 +1724,12 @@ label_002_4D95::
 
 label_002_4D97::
     ldh  a, [$FFD7]                               ; $4D97: $F0 $D7
-    ldh  [$FFCE], a                               ; $4D99: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $4D99: $E0 $CE
     swap a                                        ; $4D9B: $CB $37
     and  $0F                                      ; $4D9D: $E6 $0F
     ld   e, a                                     ; $4D9F: $5F
     ldh  a, [$FFD8]                               ; $4DA0: $F0 $D8
-    ldh  [$FFCD], a                               ; $4DA2: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $4DA2: $E0 $CD
     and  $F0                                      ; $4DA4: $E6 $F0
     or   e                                        ; $4DA6: $B3
     ld   e, a                                     ; $4DA7: $5F
@@ -2835,20 +2835,20 @@ func_002_53B0::
     ldh  [hFFF8], a                               ; $53CF: $E0 $F8
     ldh  a, [$FFDB]                               ; $53D1: $F0 $DB
     and  $F0                                      ; $53D3: $E6 $F0
-    ldh  [$FFCE], a                               ; $53D5: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $53D5: $E0 $CE
     swap a                                        ; $53D7: $CB $37
     ld   e, a                                     ; $53D9: $5F
     ldh  a, [$FFDC]                               ; $53DA: $F0 $DC
     and  $F0                                      ; $53DC: $E6 $F0
-    ldh  [$FFCD], a                               ; $53DE: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $53DE: $E0 $CD
     or   e                                        ; $53E0: $B3
     ld   e, a                                     ; $53E1: $5F
     ld   d, $00                                   ; $53E2: $16 $00
     call label_2178                               ; $53E4: $CD $78 $21
-    ldh  a, [$FFCE]                               ; $53E7: $F0 $CE
+    ldh  a, [hSwordIntersectedAreaX]                               ; $53E7: $F0 $CE
     add  $08                                      ; $53E9: $C6 $08
     ldh  [$FFD7], a                               ; $53EB: $E0 $D7
-    ldh  a, [$FFCD]                               ; $53ED: $F0 $CD
+    ldh  a, [hSwordIntersectedAreaY]                               ; $53ED: $F0 $CD
     add  $10                                      ; $53EF: $C6 $10
     ldh  [$FFD8], a                               ; $53F1: $E0 $D8
     ld   a, $02                                   ; $53F3: $3E $02
@@ -3359,18 +3359,18 @@ jr_002_568C:
     ld   a, [hl]                                  ; $56A3: $7E
     ldh  [$FFD8], a                               ; $56A4: $E0 $D8
     ld   a, $60                                   ; $56A6: $3E $60
-    ldh  [$FFCE], a                               ; $56A8: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $56A8: $E0 $CE
     ldh  a, [hMapRoom]                           ; $56AA: $F0 $F6
     cp   $B5                                      ; $56AC: $FE $B5
     ld   a, $10                                   ; $56AE: $3E $10
     jr   nz, jr_002_56B8                          ; $56B0: $20 $06
 
     ld   a, $60                                   ; $56B2: $3E $60
-    ldh  [$FFCE], a                               ; $56B4: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $56B4: $E0 $CE
     ld   a, $10                                   ; $56B6: $3E $10
 
 jr_002_56B8:
-    ldh  [$FFCD], a                               ; $56B8: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $56B8: $E0 $CD
     call label_2887                               ; $56BA: $CD $87 $28
     ld   a, [wRequests]                           ; $56BD: $FA $00 $D6
     ld   e, a                                     ; $56C0: $5F
@@ -3976,7 +3976,7 @@ jr_002_5A95:
     ld   hl, $C1D0                                ; $5AA0: $21 $D0 $C1
     add  hl, bc                                   ; $5AA3: $09
     add  [hl]                                     ; $5AA4: $86
-    ldh  [$FFCE], a                               ; $5AA5: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $5AA5: $E0 $CE
 
 label_002_5AA7::
     ld   hl, $5A2E                                ; $5AA7: $21 $2E $5A
@@ -3990,7 +3990,7 @@ label_002_5AA7::
     ld   hl, $C1E0                                ; $5AB4: $21 $E0 $C1
     add  hl, bc                                   ; $5AB7: $09
     add  [hl]                                     ; $5AB8: $86
-    ldh  [$FFCD], a                               ; $5AB9: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $5AB9: $E0 $CD
     push de                                       ; $5ABB: $D5
     call label_2887                               ; $5ABC: $CD $87 $28
     pop  de                                       ; $5ABF: $D1
@@ -4260,7 +4260,7 @@ jr_002_5C21:
     ld   hl, $C1D0                                ; $5C2C: $21 $D0 $C1
     add  hl, bc                                   ; $5C2F: $09
     add  [hl]                                     ; $5C30: $86
-    ldh  [$FFCE], a                               ; $5C31: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $5C31: $E0 $CE
 
 label_002_5C33::
     ld   hl, $5BE8                                ; $5C33: $21 $E8 $5B
@@ -4274,10 +4274,10 @@ label_002_5C33::
     ld   hl, $C1E0                                ; $5C40: $21 $E0 $C1
     add  hl, bc                                   ; $5C43: $09
     add  [hl]                                     ; $5C44: $86
-    ldh  [$FFCD], a                               ; $5C45: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $5C45: $E0 $CD
     ld   a, [wLinkMapEntryPositionY]              ; $5C47: $FA $B2 $DB
     sub  $10                                      ; $5C4A: $D6 $10
-    ld   hl, $FFCD                                ; $5C4C: $21 $CD $FF
+    ld   hl, hSwordIntersectedAreaY                                ; $5C4C: $21 $CD $FF
     sub  [hl]                                     ; $5C4F: $96
     add  $10                                      ; $5C50: $C6 $10
     cp   $20                                      ; $5C52: $FE $20
@@ -4285,7 +4285,7 @@ label_002_5C33::
 
     ld   a, [wLinkMapEntryPositionX]              ; $5C56: $FA $B1 $DB
     sub  $08                                      ; $5C59: $D6 $08
-    ld   hl, $FFCE                                ; $5C5B: $21 $CE $FF
+    ld   hl, hSwordIntersectedAreaX                                ; $5C5B: $21 $CE $FF
     sub  [hl]                                     ; $5C5E: $96
     add  $10                                      ; $5C5F: $C6 $10
     cp   $20                                      ; $5C61: $FE $20
@@ -4742,13 +4742,13 @@ jr_002_5EEB:
     ld   a, $20                                   ; $5EEB: $3E $20
 
 jr_002_5EED:
-    ldh  [$FFCD], a                               ; $5EED: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $5EED: $E0 $CD
     ld   a, $80                                   ; $5EEF: $3E $80
-    ldh  [$FFCE], a                               ; $5EF1: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $5EF1: $E0 $CE
     swap a                                        ; $5EF3: $CB $37
     and  $0F                                      ; $5EF5: $E6 $0F
     ld   e, a                                     ; $5EF7: $5F
-    ldh  a, [$FFCD]                               ; $5EF8: $F0 $CD
+    ldh  a, [hSwordIntersectedAreaY]                               ; $5EF8: $F0 $CD
     and  $F0                                      ; $5EFA: $E6 $F0
     or   e                                        ; $5EFC: $B3
     ld   e, a                                     ; $5EFD: $5F
@@ -4825,17 +4825,17 @@ func_002_5F5C::
     ld   a, $01                                   ; $5F5C: $3E $01
     ldh  [$FFAC], a                               ; $5F5E: $E0 $AC
     ld   a, $10                                   ; $5F60: $3E $10
-    ldh  [$FFCD], a                               ; $5F62: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $5F62: $E0 $CD
     add  $10                                      ; $5F64: $C6 $10
     ldh  [$FFAE], a                               ; $5F66: $E0 $AE
     ld   a, $80                                   ; $5F68: $3E $80
-    ldh  [$FFCE], a                               ; $5F6A: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $5F6A: $E0 $CE
     add  $08                                      ; $5F6C: $C6 $08
     ldh  [$FFAD], a                               ; $5F6E: $E0 $AD
     swap a                                        ; $5F70: $CB $37
     and  $0F                                      ; $5F72: $E6 $0F
     ld   e, a                                     ; $5F74: $5F
-    ldh  a, [$FFCD]                               ; $5F75: $F0 $CD
+    ldh  a, [hSwordIntersectedAreaY]                               ; $5F75: $F0 $CD
     and  $F0                                      ; $5F77: $E6 $F0
     or   e                                        ; $5F79: $B3
     ld   e, a                                     ; $5F7A: $5F
@@ -7995,10 +7995,10 @@ jr_002_734F:
 
     ldh  a, [$FFDB]                               ; $7356: $F0 $DB
     and  $F0                                      ; $7358: $E6 $F0
-    ldh  [$FFCE], a                               ; $735A: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $735A: $E0 $CE
     ldh  a, [$FFDC]                               ; $735C: $F0 $DC
     and  $F0                                      ; $735E: $E6 $F0
-    ldh  [$FFCD], a                               ; $7360: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $7360: $E0 $CD
     ldh  a, [hFFE9]                               ; $7362: $F0 $E9
     ld   e, a                                     ; $7364: $5F
     ld   d, $00                                   ; $7365: $16 $00

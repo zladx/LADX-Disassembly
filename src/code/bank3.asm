@@ -1073,7 +1073,7 @@ label_CE35::
     ld   [hl], b
     call IsEntityFrameCounterZero
     ld   [hl], $02
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   [$C15D], a
     jp   label_D732
 
@@ -1598,14 +1598,14 @@ label_D1C9::
     ld   b, $00
     ldh  a, [$FFEF]
     sub  a, $0F
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     ldh  a, [$FFEE]
     sub  a, $07
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     swap a
     and  $0F
     ld   e, a
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     and  $F0
     or   e
     ld   e, a
@@ -1980,9 +1980,9 @@ label_D438::
 
 label_D455::
     ld   a, $30
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     ld   a, $20
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     ld   a, $19
     ldh  [$FFDF], a
     call label_3E4D
@@ -2324,7 +2324,7 @@ label_D748::
     cp   $04
     jr   z, label_D789
     ld   a, [$C15D]
-    ldh  [$FF9E], a
+    ldh  [hLinkDirection], a
     push hl
     call IsEntityFrameCounterZero
     pop  hl
@@ -2366,7 +2366,7 @@ label_D78F::
     jp   label_D7E6
 
 label_D795::
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     sla  a
     sla  a
     add  a, e
@@ -2812,7 +2812,7 @@ label_DA17::
     ld   a, $6C
     ldh  [$FF9D], a
     ld   a, $03
-    ldh  [$FF9E], a
+    ldh  [hLinkDirection], a
     xor  a
     ld   [wSwordAnimationState], a
     ld   [$C16A], a
@@ -4703,7 +4703,7 @@ label_E771::
     add  hl, de
     add  a, [hl]
     and  $F0
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     swap a
     ld   hl, $C210
     add  hl, bc
@@ -4714,7 +4714,7 @@ label_E771::
     add  hl, de
     add  a, [hl]
     and  $F0
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   c, a
     ld   b, $00
@@ -4736,12 +4736,12 @@ label_E771::
     jr   nz, label_E828
     ld   a, JINGLE_PUZZLE_SOLVED
     ldh  [hJingle], a
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     and  $E0
-    ldh  [$FFCD], a
-    ldh  a, [$FFCE]
+    ldh  [hSwordIntersectedAreaY], a
+    ldh  a, [hSwordIntersectedAreaX]
     and  $E0
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     ld   a, $03
     call label_AA7
     ld   a, c
@@ -4779,13 +4779,13 @@ label_E802::
     ld   hl, data_E769
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $FFCE
+    ld   hl, hSwordIntersectedAreaX
     add  a, [hl]
     ld   [hl], a
     ld   hl, data_E76D
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $FFCD
+    ld   hl, hSwordIntersectedAreaY
     add  a, [hl]
     ld   [hl], a
     dec  c
@@ -4887,13 +4887,13 @@ label_E894::
     ld   a, [de]
     or   [hl]
     ld   [de], a
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     swap a
     and  $0F
     ld   e, a
 
 label_E8BE::
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     and  $F0
     or   e
     ld   e, a
@@ -4938,7 +4938,7 @@ label_E8F8::
     add  a, [hl]
     sub  a, $08
     and  $F0
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     swap a
     ld   c, a
     ld   hl, data_E8EF
@@ -4949,7 +4949,7 @@ label_E90F::
     add  a, [hl]
     sub  a, $10
     and  $F0
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   e, a
     ld   hl, $D711
@@ -5007,12 +5007,12 @@ label_E964::
     ld   [$C19B], a
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ld   [hl], a
     ld   hl, $C210
     add  hl, de
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
     ld   [hl], a
     ld   hl, $C3B0
@@ -5077,10 +5077,10 @@ label_E9F8::
     ld   e, a
     ld   d, b
     call label_2178
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ldh  [$FFD7], a
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
     ldh  [$FFD8], a
     ld   a, $08
@@ -5396,7 +5396,7 @@ label_EBDE::
     ld   a, [$DB44]
     cp   $02
     jr   c, label_EC5B
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, b
     ld   hl, data_EBDA
@@ -5430,7 +5430,7 @@ label_EC41::
     ld   d, b
     ld   hl, data_EBD6
     add  hl, de
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     cp   [hl]
     jr   nz, label_EC5B
     ld   a, $16
@@ -5846,7 +5846,7 @@ label_EE8E::
     ld   a, [$DB44]
     cp   $02
     ret  nz
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     cp   $02
     ret  nz
     ld   a, $04
@@ -5925,7 +5925,7 @@ label_EF2A::
     ld   [hl], $20
     call IsEntityFrameCounterZero
     ld   [hl], $FF
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, b
     ld   hl, data_EF65
@@ -5967,7 +5967,7 @@ label_EF6D::
     jr   nz, label_EF8E
 
 label_EF75::
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     and  $02
     jr   nz, label_EF81
     ld   hl, $C240
@@ -6230,7 +6230,7 @@ label_F10D::
     ld   a, [hl]
     and  a
     jr   nz, label_F146
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, b
     ld   hl, data_EFE4
@@ -6707,7 +6707,7 @@ label_F3E7::
     jp   z, label_F4E1
     ld   hl, $C380
     add  hl, bc
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     cp   [hl]
     jp   z, label_F4E1
     ld   de, $FFEE
@@ -6816,7 +6816,7 @@ label_F4BF::
     jr   label_F4DC
 
 label_F4C1::
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, b
     ld   hl, data_F4E4
@@ -7623,12 +7623,12 @@ label_F9CB::
     ld   hl, $C280
     add  hl, bc
     ld   [hl], $02
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ld   hl, $C4B0
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
     ld   hl, $C4C0
     add  hl, bc
@@ -8042,7 +8042,7 @@ label_FCAB::
     ld   a, [hl]
     ldh  [$FFDB], a
     and  $F0
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     swap a
     ld   hl, $C210
     add  hl, bc
@@ -8051,7 +8051,7 @@ label_FCAB::
     sub  a, $08
     ldh  [$FFDC], a
     and  $F0
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   c, a
     ldh  [$FFE9], a
@@ -8108,11 +8108,11 @@ label_FCFD::
     ld   hl, $C2C0
     add  hl, bc
     ld   [hl], e
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     ld   hl, $C200
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     ld   hl, $C210
     add  hl, bc
     ld   [hl], a
@@ -8258,7 +8258,7 @@ label_FE0E::
     sub  a, $01
     ldh  [$FFDB], a
     and  $F0
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     swap a
     ld   hl, $C210
     add  hl, bc
@@ -8267,7 +8267,7 @@ label_FE0E::
     sub  a, $07
     ldh  [$FFDC], a
     and  $F0
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   c, a
     ld   b, $00

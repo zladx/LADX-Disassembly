@@ -150,7 +150,20 @@ hPressedButtonsMask:: ; FFCB
 
 ; Unlabeled
 hFFCC:: ; hFFCC
-  ds $5
+  ds 1
+
+hSwordIntersectedAreaY:: ; FFCD
+  ; Topmost corner of the area intercepted by Link's sword
+  ; Vary from 00 to 80 by increments of 10
+  ds 1
+
+hSwordIntersectedAreaX:: ; FFCE
+  ; Leftmost corner of the area intercepted by Link's sword
+  ; Vary from 00 to A0 by increments of 10
+  ds 1
+
+; Unlabeled
+ds $2
 
 hNeedsRenderingFrame:: ; FFD1
  ds 1

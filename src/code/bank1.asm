@@ -879,7 +879,7 @@ label_5353::
     xor  a
     ldh  [hIsSideScrolling], a
     ld   a, $03
-    ldh  [$FF9E], a
+    ldh  [hLinkDirection], a
     ld   a, [$DB5F]
     and  $01
     ld   [wIsIndoor], a
@@ -887,7 +887,7 @@ label_5353::
     ld   a, $04
     ldh  [hLinkAnimationState], a
     ld   a, $02
-    ldh  [$FF9E], a
+    ldh  [hLinkDirection], a
 
 label_538E::
     ld   a, $02
@@ -917,7 +917,7 @@ label_5394::
     xor  a
     ldh  [hLinkAnimationState], a
     ld   a, $03
-    ldh  [$FF9E], a
+    ldh  [hLinkDirection], a
     ld   a, $16
     ld   [$DB6F], a
     ld   a, $50
@@ -2933,7 +2933,7 @@ label_609C::
     ld   [hl], $79
 
 label_60F7::
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   hl, $D1B5
     call label_6118
     ld   a, [$DB10]

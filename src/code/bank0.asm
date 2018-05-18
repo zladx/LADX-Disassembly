@@ -1933,7 +1933,7 @@ label_1401::
 
 label_1407::
     ld   [$C1C0], a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   c, a
     ld   b, $00
 
@@ -1968,7 +1968,7 @@ label_142F::
     ld   a, $0C
     ld   [$C19B], a
     push bc
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   c, a
     ld   b, $00
     ld   hl, data_139D
@@ -2002,7 +2002,7 @@ label_142F::
     ld   hl, $C250
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   hl, $C3B0
     add  hl, de
     ld   [hl], a
@@ -2093,7 +2093,7 @@ label_1508::
     ld   a, [$C14A]
     and  a
     ret  z
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, b
     ld   hl, data_14C3
@@ -2167,7 +2167,7 @@ label_157C::
     ld   a, [hl]
     cp   $0F
     jr   z, label_158E
-    ldh  [$FF9E], a
+    ldh  [hLinkDirection], a
 
 label_158E::
     ret
@@ -2217,7 +2217,7 @@ label_15CF::
     add  a, [hl]
     sub  a, $08
     and  $F0
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     swap a
     ld   c, a
     ld   hl, $159B ; TODO: Check this
@@ -2226,7 +2226,7 @@ label_15CF::
     add  a, [hl]
     sub  a, $10
     and  $F0
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   e, a
     ld   hl, wTileMap
@@ -2305,12 +2305,12 @@ label_1653::
     ld   [$C19B], a
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ld   [hl], a
     ld   hl, $C210
     add  hl, de
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
     ld   [hl], a
     ld   hl, $C3B0
@@ -2339,12 +2339,12 @@ label_1691::
     ret  c
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ld   [hl], a
     ld   hl, $C210
     add  hl, de
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
     ld   [hl], a
     ld   hl, $C450
@@ -2369,7 +2369,7 @@ label_16C2::
     ld   a, [$C16D]
     and  a
     ret  z
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
     ld   hl, data_16BA
@@ -2417,7 +2417,7 @@ label_1705::
     ldh  a, [$FF9C]
     and  a
     ret  nz
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     and  $02
     ret  nz
 
@@ -2442,7 +2442,7 @@ label_1713::
     xor  a
     ld   [wIsUsingSpinAttack], a
     ld   [$C122], a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
     ld   hl, data_16FD
@@ -2838,7 +2838,7 @@ label_19D9::
 
 label_19DA::
     xor  a
-    ldh  [$FF9E], a
+    ldh  [hLinkDirection], a
     ret
 
 LinkMotionMapFadeInHandler::
@@ -2910,7 +2910,7 @@ label_1A50::
     sra  a
     and  $01
     ld   d, a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     sla  a
     or   d
     ld   c, a
@@ -3234,7 +3234,7 @@ label_1F69::
     ld   hl, wLinkMotionState
     or   [hl]
     jp   nz, label_2177
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
     ld   hl, data_1F49
@@ -3243,7 +3243,7 @@ label_1F69::
     add  a, [hl]
     sub  a, $08
     and  $F0
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     swap a
     ld   c, a
     ld   hl, data_1F4D
@@ -3252,7 +3252,7 @@ label_1F69::
     add  a, [hl]
     sub  a, $10
     and  $F0
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   e, a
     ldh  [$FFD8], a
@@ -3307,7 +3307,7 @@ label_1FF6::
 
 label_1FFE::
     ld   e, a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     cp   $02
     jp   nz, label_20CF
     ld   a, $02
@@ -3372,11 +3372,11 @@ label_2066::
     jr   nz, label_2080
     bit  0, e
     jr   nz, label_2080
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     swap a
     and  $0F
     ld   e, a
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     and  $F0
     or   e
     ld   [$D473], a
@@ -3407,7 +3407,7 @@ label_2098::
     and  $1F
     cp   $0D
     jr   z, label_20CF
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     cp   $02
     jr   nz, label_20CF
     ld   [$C1AD], a
@@ -3417,7 +3417,7 @@ label_2098::
     ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_20BF
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     cp   $02
     jr   nz, label_20CF
 
@@ -3448,7 +3448,7 @@ label_20EC::
     callsb label_002_48B0
     ld   a, $01
     ldh  [$FFA1], a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
     ld   hl, data_1F51
@@ -3522,7 +3522,7 @@ label_2165::
     ldh  a, [$FFD7]
     ldh  [$FFAF], a
     call label_2178
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   [$C15D], a
     jp   label_2183
 
@@ -3956,7 +3956,7 @@ ReadJoypadState_return
 
 label_2887::
     push bc
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     ld   hl, hBaseScrollY
     add  a, [hl]
     and  $F8
@@ -3973,7 +3973,7 @@ label_289F::
     dec  b
     jr   nz, label_289F
     push hl
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     ld   hl, hBaseScrollX
     add  a, [hl]
     pop  hl

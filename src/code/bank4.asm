@@ -3116,14 +3116,14 @@ jr_004_5628:
     push de                                       ; $562A: $D5
     ldh  a, [$FFEF]                               ; $562B: $F0 $EF
     sub  $0F                                      ; $562D: $D6 $0F
-    ldh  [$FFCD], a                               ; $562F: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $562F: $E0 $CD
     ldh  a, [$FFEE]                               ; $5631: $F0 $EE
     sub  $07                                      ; $5633: $D6 $07
-    ldh  [$FFCE], a                               ; $5635: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $5635: $E0 $CE
     swap a                                        ; $5637: $CB $37
     and  $0F                                      ; $5639: $E6 $0F
     ld   e, a                                     ; $563B: $5F
-    ldh  a, [$FFCD]                               ; $563C: $F0 $CD
+    ldh  a, [hSwordIntersectedAreaY]                               ; $563C: $F0 $CD
     and  $F0                                      ; $563E: $E6 $F0
     or   e                                        ; $5640: $B3
     ld   e, a                                     ; $5641: $5F
@@ -5300,7 +5300,7 @@ jr_004_6497:
     jr   jr_004_64E0                              ; $6497: $18 $47
 
     db   $10                                      ; $6499: $10
-    ldh  a, [$FFCD]                               ; $649A: $F0 $CD
+    ldh  a, [hSwordIntersectedAreaY]                               ; $649A: $F0 $CD
     sbc  e                                        ; $649C: $9B
     ld   h, a                                     ; $649D: $67
     ld   hl, wEntitiesUnknownTableB               ; $649E: $21 $B0 $C2

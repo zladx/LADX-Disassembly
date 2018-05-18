@@ -981,7 +981,7 @@ jr_002_487E:
     ld   [$C5B0], a                               ; $48AA: $EA $B0 $C5
 
 jr_002_48AD:
-    jp   $15A7                                    ; $48AD: $C3 $A7 $15
+    jp   CheckStaticSwordCollision_trampoline     ; $48AD: $C3 $A7 $15
 
 label_002_48B0::
     xor  a                                        ; $48B0: $AF

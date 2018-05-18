@@ -2172,55 +2172,64 @@ label_157C::
 label_158E::
     ret
 
-label_158F::
-    ld   d, $FA
-    ld   [label_1608], sp
-    ld   d, $08
-    ld   a, [$FAFA]
-    ld   [SwitchBank_duplicate], sp
-    ld   [label_16FA], sp
-    ld   [label_1616], sp
-    ld   d, $08
-    ld   a, [$FAFA]
-    call label_15AF
+SwordCollisionMapX::
+    ; Single sword swing (right-left-top-bottom)
+    db $16, $FA, $08, $08
+    ; Spin attack (anti-clockwise from right)
+    db $16, $16, $08, $FA, $FA, $FA, $08, $16
+
+SwordCollisionMapY::
+    ; Single sword swing (right-left-top-bottom)
+    db $08, $08, $FA, $16
+    ; Spin attack (anti-clockwise from right)
+    db $08, $16, $16, $16, $08, $FA, $FA, $FA
+
+; Check sword collisions with static elements and objects, then return to bank 2
+CheckStaticSwordCollision_trampoline::
+    call CheckStaticSwordCollision
     ld   a, $02
     jp   SwitchBank
 
-label_15AF::
+; Check sword collision with static elements (bushes, grasses)
+; and items lying on the floor.
+CheckStaticSwordCollision::
     ld   a, [$C1C4]
     and  a
     ret  nz
     ld   a, [$C14A]
     and  a
-    jr   nz, label_15C0
+    jr   nz, .label_15C0
     ld   a, [$C16A]
     cp   $05
     ret  z
+.label_15C0
 
-label_15C0::
+    ; a = IsUsingSpinAttack ? (SwordDirection + 4) : LinkDirection
     ld   a, [wIsUsingSpinAttack]
     and  a
-    jr   z, label_15CD
+    jr   z, .notSpinning
     ld   a, [wSwordDirection]
     add  a, $04
-    jr   label_15CF
+    jr   .end
+.notSpinning
+    ldh  a, [hLinkDirection]
+.end
 
-label_15CD::
-    ldh  a, [$FF9E]
-
-label_15CF::
+    ; Compute the horizontal intersected area
     ld   e, a
     ld   d, $00
-    ld   hl, $158F ; TODO: Check this
+    ld   hl, SwordCollisionMapX
     add  hl, de
     ldh  a, [hLinkPositionX]
     add  a, [hl]
     sub  a, $08
     and  $F0
     ldh  [hSwordIntersectedAreaX], a
+
+    ; Compute the vertical intersected area
     swap a
     ld   c, a
-    ld   hl, $159B ; TODO: Check this
+    ld   hl, SwordCollisionMapY
     add  hl, de
     ldh  a, [hLinkPositionY]
     add  a, [hl]
@@ -2242,34 +2251,29 @@ label_15CF::
     ld   d, a
     call label_2A26
     pop  de
+
     cp   $D0
+    jp   c, .label_1610
 
-label_1608::
-    db   $DA ; +
-    db   $10
-    db   $16
-    db   $FE ; ¦
-    db   $D4 ; +
-    db   $DA ; +
-    db   $C2 ; -
-    db   $16
-    db   $FE ; ¦
-    db   $90 ; É
-    db   $D2 ; -
-    db   $C2 ; -
-    db   $16
-    db   $FE ; ¦
+    cp   $D4
+    jp   c, CheckItemsSwordCollision
 
-label_1616::
-    ld   bc, $C2CA
-    ld   d, $E
-    nop
+.label_1610
+    cp   $90
+    jp   nc, CheckItemsSwordCollision
+
+    cp   $01           
+    jp   z, CheckItemsSwordCollision 
+
+    ld   c, $00
     ld   a, [wIsIndoor]
     and  a
     ldh  a, [$FFAF]
     jr   z, label_1629
+
     cp   $DD
     jr   z, label_1637
+
     ret
 
 label_1629::
@@ -2364,7 +2368,8 @@ data_16BA::
 data_16BE::
     db 4, 4, $EE, $12
 
-label_16C2::
+; Check sword collision with items lying on the ground
+CheckItemsSwordCollision::
     ld   c, a
     ld   a, [$C16D]
     and  a

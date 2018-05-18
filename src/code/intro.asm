@@ -35,13 +35,13 @@ IntroCheckJoypad::
     ld   a, [label_789B]
     ld   [wOBJ0Palette], a
     ld   a, [label_789F]
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ld   a, $04
     jr   .transitionToTitleScreen
 
 .isGBC
     ld   a, $01
-    call label_8FA
+    call ClearFileMenuBG_trampoline
     xor  a
     ld   [$DDD5], a
     ld   a, $08
@@ -62,7 +62,7 @@ IntroCheckJoypad::
     ld   [$C17E], a
     call ResetIntroTimers
     ld   a, $0D
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     ld   [$D00F], a
     call label_7D4E
     jr   .enableVBlankInterruptAndReturn
@@ -133,7 +133,7 @@ label_6EF8::
     call ClearLowerAndMiddleWRAM
     call label_27F2
     ld   a, $01
-    call label_8FA
+    call ClearFileMenuBG_trampoline
     ld   a, $1A
     call SetWorldMusicTrack
     ld   a, $02
@@ -175,7 +175,7 @@ label_6F44::
     ld   a, $1C
     ld   [wOBJ0Palette], a
     ld   a, $E0
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ld   a, $03
     ld   [rIE], a
     ld   a, $00
@@ -534,7 +534,7 @@ label_719B::
     ld   hl, label_7148
     add  hl, de
     ld   a, [hl]
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     call label_8E6
 
 label_71C2::
@@ -1677,7 +1677,7 @@ label_79AE::
     ld   hl, label_789C
     add  hl, bc
     ld   a, [hl]
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ret
 
 label_79C2::
@@ -1853,7 +1853,7 @@ label_7A96::
     cp   $0B
     jr   nz, label_7AB2
     ld   a, $01
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
 
 label_7AB2::
     ret

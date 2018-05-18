@@ -411,8 +411,9 @@ wDialogSFX:: ; C5AB
 
 section "WRAM Bank1", wramx[$d000], bank[1]
 
-; Unlabeled
-wD000 equ $D000
+wIsFileSelectionArrowShifted:: ; D000
+  ; Is the arrow on the File Selection screen on the COPY item
+  ; (May have other usages in other parts of the gameplay code)
   ds 1
 
 wIntroTimer:: ; D001
@@ -545,8 +546,11 @@ wBossDefeated:: ; D46C
   ds 1
 
 ; Unlabeled
-wD46D::
-  ds $F
+ds $E
+
+wForceFileSelectionScreenMusic:: ; D47B
+  ; If not zero, force the music track to change when displaying the file selections screen
+  ds 1
 
 wActivePowerUp:: ; D47C
   ; 0:  No power-up
@@ -903,9 +907,11 @@ wIsIndoor:: ; DBA5
 wSaveSlot:: ; DBA6
   ds 1
 
+wSaveFilesCount:: ; DBA7
+  ds 1
+
 ; Unlabeled
-wDBA7 equ $DBA7
-  ds 7
+ds 6
 
 wIndoorRoom:: ; DBAE
   ds 1
@@ -950,8 +956,28 @@ wHasDungeonBossKey:: ; DBCF
   ds 1
 
 ; Unlabeled
-wDBD0 equ $DBD0
-  ds $3C
+ds $30
+
+wFile1DeathCountHigh:: ; DC00
+  ds 1
+
+wFile1DeathCountLow:: ; DC01
+  ds 1
+
+wFile2DeathCountHigh:: ; DC02
+  ds 1
+
+wFile2DeathCountLow:: ; DC03
+  ds 1
+
+wFile3DeathCountHigh:: ; DC04
+  ds 1
+
+wFile3DeathCountLow:: ; DC05
+  ds 1
+
+; Unlabeled
+ds 6
 
 ; Photos 1-8 (bitfield)
 wPhotos1:: ; DC0C

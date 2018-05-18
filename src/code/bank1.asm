@@ -9,7 +9,7 @@ include "code/file_save_screen.asm"
 label_40D6::
     xor  a
     ld   [wOBJ0Palette], a
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ld   [rOBP0], a
     ld   [rOBP1], a
     ld   [wBGPalette], a
@@ -373,82 +373,89 @@ label_47CD::
     ret
 
 FileSelectionEntryPoint::
-    call label_5DC0
+    call func_5DC0
     ld   a, [wGameplaySubtype]
     JP_TABLE
     ; Code below is actually data for the jump table
-    jp   hl
-    ld   b, a
-    push af
-    ld   b, a
-    db   $FD ; Undefined instruction
-    ld   b, a
-    ld   b, $48
-    inc  c
-    ld   c, b
-    ld   c, a
-    ld   c, b
-    or   e
-    ld   c, b
-    db   $E8 ; add  sp, d
-    ld   c, b
-    sub  a, l
-    ld   c, c
-    inc  b
-    ld   c, d
+._00 dw FileSelectionPrepare0
+._01 dw FileSelectionPrepare1
+._02 dw FileSelectionPrepare2
+._03 dw FileSelectionPrepare3
+._04 dw CopyDeathCountsToBG
+._05 dw FileSelectionPrepare5
+._06 dw FileSelectionPrepare6
+._07 dw FileSelectionInteractiveHandler
+._08 dw FileSelectionExecuteChoice
+._09 dw FileSelectionLoadSavedFile
+
+FileSelectionPrepare0::
+    ; Load tilemap 4
     ld   a, $04
     ld   [wTileMapToLoad], a
     xor  a
     ld   [$D000], a
     jp   IncrementGameplaySubtypeAndReturn
+
+FileSelectionPrepare1::
+    ; Load tilemap 8
     ld   a, $08
     ld   [wTileMapToLoad], a
     jp   IncrementGameplaySubtypeAndReturn
+
+FileSelectionPrepare2::
     call label_4DA6
     call label_4DBE
     jp   IncrementGameplaySubtypeAndReturn
+
+FileSelectionPrepare3::
     call label_4DD6
     jp   IncrementGameplaySubtypeAndReturn
 
-label_480C::
-    ld   a, [$DBA7]
+CopyDeathCountsToBG::
+    ld   a, [wSaveFilesCount]
     and  $01
-    jr   z, label_4821
-    ld   a, [$DC00]
-    ld   h, a
-    ld   a, [$DC01]
-    ld   l, a
-    ld   de, $98E7
-    call label_4F45
+    jr   z, .file2
 
-label_4821::
-    ld   a, [$DBA7]
+    ld   a, [wFile1DeathCountHigh]
+    ld   h, a
+    ld   a, [wFile1DeathCountLow]
+    ld   l, a
+    ld   de, vBGMap0 + $00E7
+    call CopyDigitsToFileScreenBG
+
+.file2
+    ld   a, [wSaveFilesCount]
     and  $02
-    jr   z, label_4836
-    ld   a, [$DC02]
-    ld   h, a
-    ld   a, [$DC03]
-    ld   l, a
-    ld   de, $9947
-    call label_4F45
+    jr   z, .file3
 
-label_4836::
-    ld   a, [$DBA7]
+    ld   a, [wFile2DeathCountHigh]
+    ld   h, a
+    ld   a, [wFile2DeathCountLow]
+    ld   l, a
+    ld   de, vBGMap0 + $0147
+    call CopyDigitsToFileScreenBG
+
+.file3
+    ld   a, [wSaveFilesCount]
     and  $04
-    jr   z, label_484B
-    ld   a, [$DC04]
-    ld   h, a
-    ld   a, [$DC05]
-    ld   l, a
-    ld   de, $99A7
-    call label_4F45
+    jr   z, .return
 
-label_484B::
+    ld   a, [wFile3DeathCountHigh]
+    ld   h, a
+    ld   a, [wFile3DeathCountLow]
+    ld   l, a
+    ld   de, vBGMap0 + $01A7
+    call CopyDigitsToFileScreenBG
+
+.return
     jp   IncrementGameplaySubtypeAndReturn
+    ; Unused
     ret
+
+FileSelectionPrepare5::
     jp   label_4D6D
 
-label_4852::
+func_4852::
     push de
     ld   a, [$D600]
     ld   e, a
@@ -467,12 +474,12 @@ label_4852::
     push de
     ld   a, $05
 
-label_486D::
+.loop
     ldh  [$FFD7], a
     ld   a, [de]
     and  a
     ld   a, $7E
-    jr   z, label_4881
+    jr   z, .skipDE
     ld   a, [de]
     dec  a
     push bc
@@ -482,13 +489,13 @@ label_486D::
     call label_C25
     pop  hl
     pop  bc
+.skipDE
 
-label_4881::
     ldi  [hl], a
     inc  de
     ldh  a, [$FFD7]
     dec  a
-    jr   nz, label_486D
+    jr   nz, .loop
     ld   a, b
     ldi  [hl], a
     ld   a, c
@@ -525,30 +532,39 @@ label_48A9::
     xor  a
     ld   [hl], a
     ret
-    ld   a, [$D47B]
+
+FileSelectionPrepare6::
+    ; If the music track should set overriden…
+    ld   a, [wForceFileSelectionScreenMusic]
     and  a
-    jr   z, label_48C2
+    jr   z, .dontForceMusicTrack
+    ; … clear the flag…
     xor  a
-    ld   [$D47B], a
+    ld   [wForceFileSelectionScreenMusic], a
+    ; … and set the music to the file menu selection track
     ld   a, $11
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
+.dontForceMusicTrack
 
-label_48C2::
-    ld   a, [$DBA7]
+    ; If there are no saved files yet…
+    ld   a, [wSaveFilesCount]
     and  a
+    ; … use background map 3,
     ld   a, $03
-    jr   z, label_48CC
+    jr   z, .BGMapEnd
+    ; else use background map 4.
     ld   a, $04
+.BGMapEnd
 
-label_48CC::
+    ; Load background and palette
     ld   [wBGMapToLoad], a
     ld   a, $E4
     ld   [wBGPalette], a
     ld   a, $1C
     ld   [wOBJ0Palette], a
     ld   a, $E4
-    ld   [$DB99], a
-    call label_905
+    ld   [wOBJ1Palette], a
+    call LoadFileMenuBG_trampoline
     jp   IncrementGameplaySubtypeAndReturn
 
 label_48E4::
@@ -556,6 +572,8 @@ label_48E4::
     ld   d, e
     ld   l, e
     add  a, e
+
+FileSelectionInteractiveHandler::
     call label_6BA8
     ldh  a, [$FFCC]
     and  $90
@@ -567,7 +585,7 @@ label_48F4::
     and  $0C
     jr   z, label_4920
     ld   c, $02
-    ld   a, [$DBA7]
+    ld   a, [wSaveFilesCount]
     and  a
     jr   z, label_4903
     inc  c
@@ -576,7 +594,7 @@ label_4903::
     ldh  a, [$FFCC]
     bit  2, a
     jr   nz, label_4915
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     add  a, $01
     inc  c
     cp   c
@@ -585,16 +603,16 @@ label_4903::
     jr   label_491D
 
 label_4915::
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     sub  a, $01
     jr   nc, label_491D
     ld   a, c
 
 label_491D::
-    ld   [$DBA6], a
+    ld   [wSaveSlot], a
 
 label_4920::
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     cp   $03
     jr   nz, label_4954
     ldh  a, [$FFCC]
@@ -626,7 +644,7 @@ label_4948::
     ld   [hl], a
 
 label_4954::
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     ld   e, a
     ld   d, $00
     ld   hl, label_48E4
@@ -673,10 +691,15 @@ label_497B::
     ld   a, $20
     ld   [hl], a
     ret
-    ld   a, [$DBA6]
+
+FileSelectionExecuteChoice::
+    ; If the COPY or ERASE menu item was selected, handle this.
+    ld   a, [wSaveSlot]
     cp   $03
-    jr   z, label_49DE
-    ld   a, [$DBA6]
+    jr   z, HandleFileSelectionCommand
+
+    ; The player selected an actual save file.
+    ld   a, [wSaveSlot]
     ld   e, a
     sla  a
     sla  a
@@ -687,47 +710,58 @@ label_497B::
     ld   hl, $DB80
     add  hl, de
 
-label_49AE::
+.loop
     ld   a, [hli]
     and  a
-    jr   nz, label_49C3
+    jr   nz, LoadSelectedFile
     dec  c
-    jr   nz, label_49AE
+    jr   nz, .loop
+
+    ; Go to the file new dialog
     xor  a
     ld   [wGameplaySubtype], a
     ld   a, GAMEPLAY_FILE_NEW
     ld   [wGameplayType], a
 
-label_49BE::
+PlayValidationJingle::
+PlayValidationJingleAndReturn::
     ld   a, JINGLE_VALIDATE
     ldh  [hJingle], a
     ret
 
-label_49C3::
-    call label_49BE
+LoadSelectedFile::
+    call PlayValidationJingle
+
     ld   a, $00
     ld   [wBGPalette], a
     ld   [wOBJ0Palette], a
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ld   a, $01
-    call label_8FA
+    call ClearFileMenuBG_trampoline
+
     ld   a, $05
     ld   [wTileMapToLoad], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_49DE::
+HandleFileSelectionCommand::
+    ; Clear Gameplay Subtype
     xor  a
     ld   [wGameplaySubtype], a
-    ld   a, [$D000]
+    ; If the arrow is not the COPY item…
+    ld   a, [wIsFileSelectionArrowShifted]
     and  a
-    ld   a, $04
-    jr   z, label_49EC
+    ; … go to the File Deletion screen,
+    ld   a, GAMEPLAY_FILE_DELETE
+    jr   z, .nextScreenEnd
+    ; else go to the File Copy screen.
     ld   a, GAMEPLAY_FILE_COPY
+.nextScreenEnd
 
-label_49EC::
+    ; Move to the Game Start stage
     ld   [wGameplayType], a
-    jp   label_49BE
+    jp   PlayValidationJingleAndReturn
 
+; File creation data
 label_49F2::
     dec  b
     and  h
@@ -746,7 +780,10 @@ label_49F8::
 
 ; Part of file copy
 label_49FE::
-    db 0, $A1, $AD, $A4, $5A, $A8, $C3, $A4, $52
+    db 0, $A1, $AD, $A4, $5A, $A8
+
+FileSelectionLoadSavedFile::
+    jp   LoadSavedFile
 
 include "code/file_creation.asm"
 include "code/file_deletion.asm"
@@ -755,7 +792,8 @@ include "code/file_copy.asm"
 label_5295::
     db $18, $18, $18, $18, $18, $18, $28, $28, $28, $28, $38, $38, $38, $38, $50
 
-label_52A4::
+; Main entry point for loading a saved game
+LoadSavedFile::
     xor  a
     ldh  [hIsSideScrolling], a
     ld   a, [wHealth]
@@ -779,7 +817,7 @@ label_52BB::
     ld   [hl], $00
     and  a
     jr   nz, label_531D
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
 
 label_52C7::
     sla  a
@@ -1542,7 +1580,7 @@ label_56F3::
     cp   $04
     jr   nz, label_571B
     call IncrementGameplaySubtype
-    call label_49BE
+    call PlayValidationJingle
 
 label_571B::
     ret
@@ -2372,9 +2410,9 @@ label_5DBD::
 label_5DBF::
     ret
 
-label_5DC0::
+func_5DC0::
     xor  a
-    ld   de, $DBA7
+    ld   de, wSaveFilesCount
     ld   [de], a
     ld   b, $01
     ld   c, $00
@@ -2419,7 +2457,7 @@ label_5DE6::
 
 label_5DFA::
     call label_2802
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     sla  a
     ld   e, a
     ld   d, $00
@@ -3015,7 +3053,7 @@ label_6162::
     ld   [wGameplayType], a
     ld   [wGameplaySubtype], a
     ld   [wOBJ0Palette], a
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ld   [wBGPalette], a
     ld   [rBGP], a
     ld   [rOBP0], a

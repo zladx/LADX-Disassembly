@@ -27,7 +27,7 @@ FileCreationEntryPoint::
     ldi  [hl], a
     xor  a
     ldi  [hl], a
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     add  a, $AB
     ldi  [hl], a
     xor  a
@@ -83,7 +83,7 @@ label_4A98::
     nop
     dec  b
     ld   a, [bc]
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     ld   e, a
     ld   d, $00
     ld   hl, label_4A98
@@ -94,12 +94,12 @@ label_4A98::
     ld   e, l
     ld   d, h
     ld   bc, $984A
-    call label_4852
+    call func_4852
     ldh  a, [$FFCC]
     and  $80
     jr   z, label_4B29
-    call label_49BE
-    ld   a, [$DBA6]
+    call PlayValidationJingle
+    ld   a, [wSaveSlot]
     sla  a
     ld   e, a
     ld   d, $00
@@ -112,7 +112,7 @@ label_4A98::
     ld   de, $004F
     add  hl, de
     push hl
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     ld   e, a
     sla  a
     sla  a
@@ -137,7 +137,7 @@ label_4A98::
     cp   $42
     jr   nz, label_4AFE
     ld   a, $60
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
 
 label_4AFE::
     ld   hl, $DB80
@@ -437,7 +437,7 @@ label_4C8A::
     jr   z, label_4CB7
     bit  5, a
     jr   nz, label_4CA7
-    call label_49BE
+    call PlayValidationJingle
     call label_4CDA
     ld   a, [$DBAA]
     add  a, $01
@@ -447,7 +447,7 @@ label_4C8A::
     jr   label_4CB4
 
 label_4CA7::
-    call label_49BE
+    call PlayValidationJingle
     ld   a, [$DBAA]
     sub  a, $01
     cp   $FF
@@ -490,7 +490,7 @@ label_4CDA::
     add  hl, bc
     ld   a, [hl]
     ld   e, a
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     ld   c, a
     sla  a
     sla  a

@@ -3,7 +3,7 @@
 ;
 
 FileDeletionEntryPoint::
-    call label_5DC0
+    call func_5DC0
     ld   a, [wGameplaySubtype]
     JP_TABLE
     ; Code below is actually data for the jump table
@@ -34,7 +34,7 @@ FileDeletionEntryPoint::
     and  a
     jr   z, label_4D53
     ld   a, $01
-    call label_8FA
+    call ClearFileMenuBG_trampoline
     ld   a, $01
     ld   [$DDD1], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -47,7 +47,7 @@ FileDeletionEntryPoint::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
-    call label_905
+    call LoadFileMenuBG_trampoline
     ld   a, $01
     ld   [$DDD1], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -62,7 +62,7 @@ label_4D53::
     ld   a, $08
     ld   [wTileMapToLoad], a
     xor  a
-    ld   [$DBA6], a
+    ld   [wSaveSlot], a
     ld   [$D000], a
     jp   IncrementGameplaySubtypeAndReturn
     ld   a, $06
@@ -73,8 +73,6 @@ label_4D6D::
     call label_4D8B
     call label_4D94
     call label_4D9D
-
-label_4D79::
     jp   IncrementGameplaySubtypeAndReturn
 
 label_4D7A::
@@ -83,25 +81,25 @@ label_4D7A::
     jp   IncrementGameplaySubtypeAndReturn
     call label_4DD6
     jp   IncrementGameplaySubtypeAndReturn
-    jp   label_480C
+    jp   CopyDeathCountsToBG
 
 label_4D8B::
     ld   bc, $98C5
     ld   de, $DB80
-    jp   label_4852
+    jp   func_4852
 
 label_4D94::
     ld   bc, $9925
     ld   de, $DB85
-    jp   label_4852
+    jp   func_4852
 
 label_4D9D::
     ld   bc, $9985
     ld   de, $DB8A
-    jp   label_4852
+    jp   func_4852
 
 label_4DA6::
-    ld   a, [$DBA7]
+    ld   a, [wSaveFilesCount]
     and  $01
     jr   z, label_4DBD
     xor  a
@@ -116,7 +114,7 @@ label_4DBD::
     ret
 
 label_4DBE::
-    ld   a, [$DBA7]
+    ld   a, [wSaveFilesCount]
     and  $02
     jr   z, label_4DBD
     ld   a, $01
@@ -128,7 +126,7 @@ label_4DBE::
     jp   label_5D53
 
 label_4DD6::
-    ld   a, [$DBA7]
+    ld   a, [wSaveFilesCount]
     and  $04
     jr   z, label_4DBD
     ld   a, $02
@@ -168,35 +166,35 @@ label_4DEE::
     ldh  a, [$FFCC]
     and  $08
     jr   z, label_4E18
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     inc  a
     and  $03
-    ld   [$DBA6], a
+    ld   [wSaveSlot], a
 
 label_4E18::
     ldh  a, [$FFCC]
     and  $04
     jr   z, label_4E2B
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     dec  a
     cp   $FF
     jr   nz, label_4E28
     ld   a, $03
 
 label_4E28::
-    ld   [$DBA6], a
+    ld   [wSaveSlot], a
 
 label_4E2B::
     ldh  a, [$FFCC]
     and  $90
     jr   z, label_4E67
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     cp   $03
     jr   nz, label_4E3B
     jp   label_4555
 
 label_4E3B::
-    call label_49BE
+    call PlayValidationJingle
     call IncrementGameplaySubtype
     jr   label_4E55
 
@@ -229,8 +227,8 @@ label_4E67::
     ld   a, [$D000]
     and  a
     jp   z, label_4555
-    call label_49BE
-    ld   a, [$DBA6]
+    call PlayValidationJingle
+    ld   a, [wSaveSlot]
     sla  a
     ld   e, a
     ld   d, $00
@@ -291,7 +289,7 @@ label_4ED9::
     jr   z, label_4EEF
 
 label_4EE5::
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     JP_TABLE
     ; Code below is actually data for the jump table
     adc  a, e
@@ -302,7 +300,7 @@ label_4EE5::
     ld   c, l
 
 label_4EEF::
-    ld   a, [$DBA6]
+    ld   a, [wSaveSlot]
     rla
     rla
     rla
@@ -369,7 +367,7 @@ label_4F3B::
     cp   b
     cp   c
 
-label_4F45::
+CopyDigitsToFileScreenBG::
     push hl
     ld   a, [$D600]
     ld   c, a

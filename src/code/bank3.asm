@@ -359,7 +359,7 @@ label_C995::
     ld   a, e
 
 label_C99C::
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     ldh  [hMusicTrack], a
     ldh  [$FFBD], a
     ldh  [$FFBF], a
@@ -575,7 +575,7 @@ label_CB01::
     cp   $80
     jr   nz, label_CB1A
     ld   a, $0E
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
 
 label_CB1A::
     ret
@@ -2771,7 +2771,7 @@ data_D9D8::
     dec  a
     jr   nz, label_DA17
     ld   a, $18
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     ld   hl, wMaxHealth
     inc  [hl]
     ld   hl, wSubstractRupeeBufferLow
@@ -3057,7 +3057,7 @@ label_DBCB::
     dec  a
     jr   nz, label_DBE1
     ld   a, $31
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     ld   a, $05
     ldh  [hMusicTrack], a
     ldh  [$FFBF], a
@@ -3402,7 +3402,7 @@ label_DE76::
     ld   a, [hl]
     ld   [$DB98], a
     xor  a
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
 
 label_DE8A::
     ret
@@ -4167,7 +4167,7 @@ label_E37C::
     ld   [wBossDefeated], a
     ld   [$C3CB], a
     ld   a, $1B
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     ld   [$C167], a
 
 label_E3A1::
@@ -4182,7 +4182,7 @@ label_E3A1::
     xor  a
     ld   [wActivePowerUp], a
     ld   a, $25
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     ld   [wBossDefeated], a
     call IsEntityFrameCounterZero
     ld   a, $70
@@ -4190,7 +4190,7 @@ label_E3A1::
     ld   [$C111], a
     jr   label_E3DB
     ld   a, $10
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     jr   label_E3D2
     ld   a, JINGLE_TREASURE_FOUND
     ldh  [hJingle], a
@@ -4207,7 +4207,7 @@ label_E3DB::
     ld   [hl], $05
     jp   label_CAF
     ld   a, $10
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     call IncrementEntityWalkingAttr
     jr   label_E3DB
 
@@ -4253,7 +4253,7 @@ label_E422::
     and  a
     jr   nz, label_E468
     ld   a, $0F
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     ld   [$C167], a
     call label_E3A1
     call IsEntityFrameCounterZero
@@ -4313,7 +4313,7 @@ label_E4A0::
 
 label_E4A5::
     ld   a, $10
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     jp   label_E3D2
 
 label_E4AD::
@@ -5694,7 +5694,7 @@ label_EDAB::
     ldh  a, [hMusicTrack]
     cp   $22
     jr   z, label_EDDD
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
 
 label_EDDD::
     ldh  [$FFBF], a
@@ -6559,7 +6559,7 @@ label_F325::
     ld   a, e
     call OpenDialog
     ld   a, $5E
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     jr   label_F33E
 
 label_F330::

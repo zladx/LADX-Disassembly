@@ -163,14 +163,16 @@ label_8F0::
     call $6BA4
     jr   RestoreBankAndReturn
 
-label_8FA::
+; Call 20:6BDC, then switch back to bank 1
+ClearFileMenuBG_trampoline::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6BDC
     jr   RestoreStackedBankAndReturn
 
-label_905::
+; Load file menu background and palette, then switch back to bank 1
+LoadFileMenuBG_trampoline::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6C00
@@ -7395,7 +7397,7 @@ label_3EFB::
     ld   a, $50
 
 label_3F11::
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     ldh  [$FFBD], a
     ld   a, [wTransitionSequenceCounter]
     cp   $04

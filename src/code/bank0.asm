@@ -15,8 +15,6 @@ SwitchBank::
 ; Switch to the bank defined in a, depending on GB or GBC mode
 SwitchAdjustedBank::
     call AdjustBankNumberForGBC
-
-SwitchBank_duplicate::
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
     ret
@@ -95,42 +93,60 @@ label_873::
     ret
 
 PlayAudioStep::
+    ; Call $1F:4006
     ld   a, $1F
     call SwitchBank
     call $4006
+
+    ; If an SFX is playing, return early
     ldh  a, [hSFX]
     and  a
-    jr   nz, label_8D6
+    jr   nz, .return
+
+    ; If $C10B != 0…
     ld   a, [$C10B]
     and  a
-    jr   z, label_8C6
+    jr   z, .doAudioStep
+    ; … and $C10B != 2…
     cp   $02
-    jr   nz, label_8C3
+    ; … play two audio steps.
+    jr   nz, .doAudioStepTwice
+
+    ; Otherwise, play the audio step only on odd frames
     ldh  a, [hFrameCounter]
     and  $01
-    jr   nz, label_8D6
-    jr   label_8C6
+    jr   nz, .return
 
-label_8C3::
-    call label_8C6
+    jr   .doAudioStep
 
-label_8C6::
+.doAudioStepTwice
+    call .doAudioStep
+    ; Fallthrough to doAudioStep a second time
+
+.doAudioStep
+    ; Call 1B:4006
     ld   a, $1B
     call SwitchBank
     call $4006
+
+    ; Call 1E:4006
     ld   a, $1E
     call SwitchBank
     call $4006
 
-label_8D6::
+.return
     ret
+
+;
+; Palette-related code in bank $20
+;
 
 label_8D7::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6A30
 
-restoreBankAndReturn::
+RestoreBankAndReturn::
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -139,23 +155,24 @@ label_8E6::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6AC1
-    jr   restoreBankAndReturn
+    jr   RestoreBankAndReturn
 
-; Load BG palette?
 label_8F0::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6BA4
-    jr   restoreBankAndReturn
+    jr   RestoreBankAndReturn
 
-label_8FA::
+; Call 20:6BDC, then switch back to bank 1
+ClearFileMenuBG_trampoline::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6BDC
     jr   RestoreStackedBankAndReturn
 
-label_905::
+; Load file menu background and palette, then switch back to bank 1
+LoadFileMenuBG_trampoline::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6C00
@@ -320,24 +337,50 @@ label_9F5::
     call $482D
     jp   RestoreStackedBankAndReturn
 
-label_A01::
+;
+; Specific data-copying routines
+;
+
+; Copy $100 bytes without DMA (used on DMG), then switch back to bank at h
+; Inputs:
+;  b   source address high byte
+;  c   destination address high byte
+;  h   bank to switch back after the transfert
+Copy100Bytes_noDMA::
+    ; Save h
     push hl
+
+    ; Copy $100 bytes from "${b}00" to "${c}80"
     ld   l, $00
     ld   e, l
     ld   h, b
     ld   a, c
     add  a, $80
     ld   d, a
-    ld   bc, $0100
+    ld   bc, $100
     call CopyData
-    pop  hl
-    jr   label_A2D
 
-label_A13::
+    ; Switch back to the bank in h
+    pop  hl
+    jr   SelectBankAtHAndReturn
+
+; Copy $100 bytes from bank at a, then switch back to bank at h
+; Inputs:
+;  a   bank to copy data from
+;  b   source address high byte
+;  c   destination address high byte
+;  h   bank to switch back after the transfert
+Copy100BytesFromBankAtA::
+    ; Switch to bank in a
     ld   [MBC3SelectBank], a
+
+    ; If running on DMG, use a loop to copy the data
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_A01
+    jr   z, Copy100Bytes_noDMA
+
+    ; On CGB, configure a DMA transfert
+    ; to copy $0F bytes from "${b}00" to "${c}00"
     ld   a, b
     ld   [rHDMA1], a
     ld   a, $00
@@ -348,8 +391,9 @@ label_A13::
     ld   [rHDMA4], a
     ld   a, $0F
     ld   [rHDMA5], a
-
-label_A2D::
+    
+    ; Fallthrough to switch back to the bank in h
+SelectBankAtHAndReturn::
     ld   a, h
     ld   [MBC3SelectBank], a
     ret
@@ -481,7 +525,7 @@ label_B02::
     call $4029
     ret
 
-; Toogle an extra byte to the bank number on GBC (on GB, does nothing)
+; Toogle an extra byte to the bank number on GBC (on DMG, does nothing)
 ; Input:  a: the bank number to adjust
 ; Output: a: the adjusted bank number
 AdjustBankNumberForGBC::
@@ -875,7 +919,7 @@ LoadRoomSprites::
     ; Indoor
     ;
 
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, $6EB3
@@ -913,7 +957,7 @@ LoadRoomSprites::
     ; Overworld
     ;
 
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $07
     jr   nz, .label_D60
     inc  a
@@ -941,7 +985,7 @@ LoadRoomSprites::
     jr   z, .indoorOutdoorEnd
     cp   $1A
     jr   nz, .label_D8B
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $37
     jr   nz, .indoorOutdoorEnd
     ld   a, [hl]
@@ -954,7 +998,7 @@ LoadRoomSprites::
 .indoorOutdoorEnd
     xor  a
     ldh  [$FFD7], a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, $70D3
@@ -976,7 +1020,7 @@ label_DAB::
     ldh  a, [hMapId]
     cp   MAP_HOUSE
     jr   nz, label_DDB
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $B5
     jr   nz, label_DDB
     ld   e, $3D
@@ -1460,15 +1504,15 @@ InitGotItemSequence::
     ld   a, [$D464]
     and  a
     jr   nz, label_10DB
+
+    ; Show a location on the mini-map
     xor  a
     ld   [wTransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [wGameplaySubtype], a
-    ld   a, $07
+    ld   a, GAMEPLAY_MINI_MAP
     ld   [wGameplayType], a
-    ld   a, GAMEPLAY_FILE_SELECT
-    ld   [MBC3SelectBank], a
-    call $755B
+    callsb func_002_755B
     call DrawLinkSprite
     call label_398D
     pop  af
@@ -1587,12 +1631,12 @@ label_11A5::
     jr   label_11BA
 
 label_11AA::
-    ld   a, [$C137]
+    ld   a, [wSwordAnimationState]
     dec  a
     cp   $04
     jr   c, label_11BA
     ld   a, $05
-    ld   [$C137], a
+    ld   [wSwordAnimationState], a
     ld   [$C16A], a
 
 label_11BA::
@@ -1610,7 +1654,7 @@ label_11C3::
     ld   a, [$C15C]
     and  a
     jp   nz, label_12ED
-    ld   a, [$C137]
+    ld   a, [wSwordAnimationState]
     and  a
     jr   z, label_11E2
     cp   $03
@@ -1752,7 +1796,7 @@ ItemFunction::
     jp   z, UseShovel
     cp   $07 ; Magic wand
     jr   nz, label_12ED
-    ld   hl, $C137
+    ld   hl, wSwordAnimationState
     ld   a, [$C19B]
     or   [hl]
     jr   nz, label_12ED
@@ -1806,7 +1850,7 @@ UseHookshot::
 label_1321::
     cp   $01
     ret  nz
-    ld   hl, $C137
+    ld   hl, wSwordAnimationState
     ld   a, [$C1AD]
     and  $03
     or   [hl]
@@ -1817,7 +1861,7 @@ label_1321::
     xor  a
     ld   [$C1AC], a
     ld   a, $05
-    ld   [$C137], a
+    ld   [wSwordAnimationState], a
     ld   [$C5B0], a
     ret
 
@@ -1933,7 +1977,7 @@ label_1401::
 
 label_1407::
     ld   [$C1C0], a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   c, a
     ld   b, $00
 
@@ -1968,7 +2012,7 @@ label_142F::
     ld   a, $0C
     ld   [$C19B], a
     push bc
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   c, a
     ld   b, $00
     ld   hl, data_139D
@@ -2002,7 +2046,7 @@ label_142F::
     ld   hl, $C250
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   hl, $C3B0
     add  hl, de
     ld   [hl], a
@@ -2093,7 +2137,7 @@ label_1508::
     ld   a, [$C14A]
     and  a
     ret  z
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, b
     ld   hl, data_14C3
@@ -2121,7 +2165,7 @@ UseSword::
 
 label_1535::
     ld   a, $01
-    ld   [$C137], a
+    ld   [wSwordAnimationState], a
     ld   [$C5B0], a
     xor  a
     ld   [$C160], a
@@ -2167,66 +2211,75 @@ label_157C::
     ld   a, [hl]
     cp   $0F
     jr   z, label_158E
-    ldh  [$FF9E], a
+    ldh  [hLinkDirection], a
 
 label_158E::
     ret
 
-label_158F::
-    ld   d, $FA
-    ld   [label_1608], sp
-    ld   d, $08
-    ld   a, [$FAFA]
-    ld   [SwitchBank_duplicate], sp
-    ld   [label_16FA], sp
-    ld   [label_1616], sp
-    ld   d, $08
-    ld   a, [$FAFA]
-    call label_15AF
+SwordCollisionMapX::
+    ; Single sword swing (right-left-top-bottom)
+    db $16, $FA, $08, $08
+    ; Spin attack (anti-clockwise from right)
+    db $16, $16, $08, $FA, $FA, $FA, $08, $16
+
+SwordCollisionMapY::
+    ; Single sword swing (right-left-top-bottom)
+    db $08, $08, $FA, $16
+    ; Spin attack (anti-clockwise from right)
+    db $08, $16, $16, $16, $08, $FA, $FA, $FA
+
+; Check sword collisions with static elements and objects, then return to bank 2
+CheckStaticSwordCollision_trampoline::
+    call CheckStaticSwordCollision
     ld   a, $02
     jp   SwitchBank
 
-label_15AF::
+; Check sword collision with static elements (bushes, grasses)
+; and items lying on the floor.
+CheckStaticSwordCollision::
     ld   a, [$C1C4]
     and  a
     ret  nz
     ld   a, [$C14A]
     and  a
-    jr   nz, label_15C0
+    jr   nz, .label_15C0
     ld   a, [$C16A]
     cp   $05
     ret  z
+.label_15C0
 
-label_15C0::
+    ; a = IsUsingSpinAttack ? (SwordDirection + 4) : LinkDirection
     ld   a, [wIsUsingSpinAttack]
     and  a
-    jr   z, label_15CD
-    ld   a, [$C136]
+    jr   z, .notSpinning
+    ld   a, [wSwordDirection]
     add  a, $04
-    jr   label_15CF
+    jr   .end
+.notSpinning
+    ldh  a, [hLinkDirection]
+.end
 
-label_15CD::
-    ldh  a, [$FF9E]
-
-label_15CF::
+    ; Compute the horizontal intersected area
     ld   e, a
     ld   d, $00
-    ld   hl, $158F ; TODO: Check this
+    ld   hl, SwordCollisionMapX
     add  hl, de
     ldh  a, [hLinkPositionX]
     add  a, [hl]
     sub  a, $08
     and  $F0
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
+
+    ; Compute the vertical intersected area
     swap a
     ld   c, a
-    ld   hl, $159B ; TODO: Check this
+    ld   hl, SwordCollisionMapY
     add  hl, de
     ldh  a, [hLinkPositionY]
     add  a, [hl]
     sub  a, $10
     and  $F0
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   e, a
     ld   hl, wTileMap
@@ -2242,34 +2295,29 @@ label_15CF::
     ld   d, a
     call label_2A26
     pop  de
+
     cp   $D0
+    jp   c, .label_1610
 
-label_1608::
-    db   $DA ; +
-    db   $10
-    db   $16
-    db   $FE ; ¦
-    db   $D4 ; +
-    db   $DA ; +
-    db   $C2 ; -
-    db   $16
-    db   $FE ; ¦
-    db   $90 ; É
-    db   $D2 ; -
-    db   $C2 ; -
-    db   $16
-    db   $FE ; ¦
+    cp   $D4
+    jp   c, CheckItemsSwordCollision
 
-label_1616::
-    ld   bc, $C2CA
-    ld   d, $E
-    nop
+.label_1610
+    cp   $90
+    jp   nc, CheckItemsSwordCollision
+
+    cp   $01           
+    jp   z, CheckItemsSwordCollision 
+
+    ld   c, $00
     ld   a, [wIsIndoor]
     and  a
     ldh  a, [$FFAF]
     jr   z, label_1629
+
     cp   $DD
     jr   z, label_1637
+
     ret
 
 label_1629::
@@ -2305,12 +2353,12 @@ label_1653::
     ld   [$C19B], a
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ld   [hl], a
     ld   hl, $C210
     add  hl, de
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
     ld   [hl], a
     ld   hl, $C3B0
@@ -2339,12 +2387,12 @@ label_1691::
     ret  c
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ld   [hl], a
     ld   hl, $C210
     add  hl, de
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
     ld   [hl], a
     ld   hl, $C450
@@ -2364,12 +2412,13 @@ data_16BA::
 data_16BE::
     db 4, 4, $EE, $12
 
-label_16C2::
+; Check sword collision with items lying on the ground
+CheckItemsSwordCollision::
     ld   c, a
     ld   a, [$C16D]
     and  a
     ret  z
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
     ld   hl, data_16BA
@@ -2417,7 +2466,7 @@ label_1705::
     ldh  a, [$FF9C]
     and  a
     ret  nz
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     and  $02
     ret  nz
 
@@ -2442,7 +2491,7 @@ label_1713::
     xor  a
     ld   [wIsUsingSpinAttack], a
     ld   [$C122], a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
     ld   hl, data_16FD
@@ -2526,7 +2575,7 @@ label_17C6::
     ld   h, a
     ld   a, [$C13A]
     ld   l, a
-    ld   a, [$C136]
+    ld   a, [wSwordDirection]
     ldh  [$FFD9], a
     ldh  a, [hLinkPositionY]
     cp   $88
@@ -2687,7 +2736,7 @@ label_18F2::
     ld   a, [wIsIndoor]
     and  a
     ld   a, [hli]
-    ldh  [$FFF6], a
+    ldh  [hMapRoom], a
     jr   nz, label_1909
     ldh  a, [$FFE6]
     and  a
@@ -2838,7 +2887,7 @@ label_19D9::
 
 label_19DA::
     xor  a
-    ldh  [$FF9E], a
+    ldh  [hLinkDirection], a
     ret
 
 LinkMotionMapFadeInHandler::
@@ -2910,7 +2959,7 @@ label_1A50::
     sra  a
     and  $01
     ld   d, a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     sla  a
     or   d
     ld   c, a
@@ -3234,7 +3283,7 @@ label_1F69::
     ld   hl, wLinkMotionState
     or   [hl]
     jp   nz, label_2177
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
     ld   hl, data_1F49
@@ -3243,7 +3292,7 @@ label_1F69::
     add  a, [hl]
     sub  a, $08
     and  $F0
-    ldh  [$FFCE], a
+    ldh  [hSwordIntersectedAreaX], a
     swap a
     ld   c, a
     ld   hl, data_1F4D
@@ -3252,7 +3301,7 @@ label_1F69::
     add  a, [hl]
     sub  a, $10
     and  $F0
-    ldh  [$FFCD], a
+    ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   e, a
     ldh  [$FFD8], a
@@ -3307,7 +3356,7 @@ label_1FF6::
 
 label_1FFE::
     ld   e, a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     cp   $02
     jp   nz, label_20CF
     ld   a, $02
@@ -3334,7 +3383,7 @@ label_1FFE::
 label_2030::
     ld   a, [$DB4E]
     and  a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     jr   nz, label_203E
     ld   e, $FF
     cp   $A3
@@ -3351,7 +3400,7 @@ label_2046::
     jr   label_208E
 
 label_2049::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   a, $14
@@ -3372,11 +3421,11 @@ label_2066::
     jr   nz, label_2080
     bit  0, e
     jr   nz, label_2080
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     swap a
     and  $0F
     ld   e, a
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     and  $F0
     or   e
     ld   [$D473], a
@@ -3407,7 +3456,7 @@ label_2098::
     and  $1F
     cp   $0D
     jr   z, label_20CF
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     cp   $02
     jr   nz, label_20CF
     ld   [$C1AD], a
@@ -3417,7 +3466,7 @@ label_2098::
     ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_20BF
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     cp   $02
     jr   nz, label_20CF
 
@@ -3448,7 +3497,7 @@ label_20EC::
     callsb label_002_48B0
     ld   a, $01
     ldh  [$FFA1], a
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
     ld   hl, data_1F51
@@ -3522,7 +3571,7 @@ label_2165::
     ldh  a, [$FFD7]
     ldh  [$FFAF], a
     call label_2178
-    ldh  a, [$FF9E]
+    ldh  a, [hLinkDirection]
     ld   [$C15D], a
     jp   label_2183
 
@@ -3956,7 +4005,7 @@ ReadJoypadState_return
 
 label_2887::
     push bc
-    ldh  a, [$FFCD]
+    ldh  a, [hSwordIntersectedAreaY]
     ld   hl, hBaseScrollY
     add  a, [hl]
     and  $F8
@@ -3973,7 +4022,7 @@ label_289F::
     dec  b
     jr   nz, label_289F
     push hl
-    ldh  a, [$FFCE]
+    ldh  a, [hSwordIntersectedAreaX]
     ld   hl, hBaseScrollX
     add  a, [hl]
     pop  hl
@@ -4649,7 +4698,7 @@ label_2E85::
     jr   z, label_2ED3
     cp   MAP_CAVE_B
     jr   c, label_2ED3
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $FD
     jr   z, label_2ED3
     cp   $B1
@@ -4743,7 +4792,7 @@ label_2F36::
     jr   label_2F41
 
 label_2F3B::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $E9
     jr   z, label_2F36
 
@@ -4757,7 +4806,7 @@ label_2F4B::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, label_2F57
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $12
     jr   nz, label_2F69
 
@@ -4775,7 +4824,7 @@ label_2F69::
     ldh  a, [hMapId]
     cp   MAP_HOUSE
     jr   nz, label_2F87
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $B5
     jr   nz, label_2F87
     ld   a, $35
@@ -4843,7 +4892,7 @@ label_2FCD::
     jr   z, label_2FEC
     cp   MAP_HOUSE
     jr   nz, label_2FF1
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $B5
     jr   nz, label_2FF1
 
@@ -4907,7 +4956,7 @@ label_3019::
     jr   z, label_3047
     cp   MAP_HOUSE
     jr   nz, label_304F
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $B5
     jr   nz, label_304F
 
@@ -5072,7 +5121,7 @@ label_3132::
     jr   nz, label_3132
 
 label_313A::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, wMinimapTiles
@@ -5104,7 +5153,7 @@ label_3161::
 
 label_316B::
     ldh  [hFFF8], a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
     sla  c
@@ -5124,7 +5173,7 @@ label_316B::
 label_318F::
     cp   $1F
     jr   nz, label_31A6
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $F5
     jr   nz, label_31A6
     ld   a, [wTradeSequenceItem]
@@ -5147,7 +5196,7 @@ label_31A6::
     jr   label_3224
 
 label_31BF::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $0E
     jr   nz, label_31D1
     ld   a, [$D80E]
@@ -5215,7 +5264,7 @@ label_3224::
     jr   nz, label_323A
 
 label_322F::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $80
     jr   c, label_323A
     ld   a, $1A
@@ -5224,12 +5273,12 @@ label_322F::
 label_323A::
     ld   a, [bc]
     cp   $FE
-    jr   z, endOfRoom
+    jr   z, .endOfRoom
     ldh  [hAnimatedTilesGroup], a
     inc  bc
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_3258
+    jr   z, .label_3258
     ld   a, [bc]
     and  $0F
     call FillTileMapWith
@@ -5237,18 +5286,18 @@ label_323A::
     swap a
     and  $0F
     call label_38EA
-    jr   CopyMapToTileMapLoop
+    jr   .CopyMapToTileMapLoop
 
-label_3258::
+.label_3258
     ld   a, [bc]
     call FillTileMapWith
 
-CopyMapToTileMapLoop::
+.CopyMapToTileMapLoop
     inc  bc ; tile address
     ld   a, [bc] ; tile type
     and  $FC
     cp   $E0
-    jr   nz, CopyMapToTileMapLoop_consecutive_tiles
+    jr   nz, .CopyMapToTileMapLoop_consecutive_tiles
     ldh  a, [$FFE6]
     ld   e, a
     ld   d, $00
@@ -5272,16 +5321,16 @@ CopyMapToTileMapLoop::
     ld   a, e
     add  a, $05
     ldh  [$FFE6], a
-    jr   CopyMapToTileMapLoop
+    jr   .CopyMapToTileMapLoop
 
-CopyMapToTileMapLoop_consecutive_tiles::
+.CopyMapToTileMapLoop_consecutive_tiles
     ld   a, [bc] ; tile type
     cp   $FE ; end-of-room tile
-    jr   z, endOfRoom
-    call label_32A9
-    jr   CopyMapToTileMapLoop
+    jr   z, .endOfRoom
+    call func_32A9
+    jr   .CopyMapToTileMapLoop
 
-endOfRoom::
+.endOfRoom
     ld   a, $01
     ld   [MBC3SelectBank], a
     call $6CCE
@@ -5295,68 +5344,103 @@ endOfRoom::
     call $53F3
     jp   ReloadSavedBank
 
-label_32A9::
+func_32A9::
+    ; Clear $FFD7
     xor  a
     ldh  [$FFD7], a
+
+    ; If [BC] & 0x80 != 0 && [BC] & 0x10) == 0…
     ld   a, [bc] ; tile address
     bit  7, a
-    jr   z, label_32B8
+    jr   z, .bcEnd
     bit  4, a
-    jr   nz, label_32B8
+    jr   nz, .bcEnd
+    ; … $FFD7 = [bc]
     ldh  [$FFD7], a
+    ; Increment BC
     inc  bc ; increment tile address
+.bcEnd
 
-label_32B8::
     inc  bc
+
+    ; e = hFFF8
     ldh  a, [hFFF8]
     ld   e, a
+
+    ; If is outdoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_32D9
+    jr   nz, .isIndoor
+
+    ; If [BC] < $F5, move to next line.
     ld   a, [bc] ; tile addres
     sub  a, $F5
     jr   c, MoveToNextLine
+
+    ;
     ld   a, [bc]
     ld   d, a
     dec  bc
     ld   a, [bc]
     ld   e, a
     inc  bc
+
     ld   a, $24
     ld   [MBC3SelectBank], a
     call $7578
-    call label_353B
+    call SetBankForRoom
     ret
 
-label_32D9::
+.isIndoor
+    ; a = [block type] - $EC
     ld   a, [bc]
     sub  a, $EC
-    jp  c, label_33CB
+    ; If a >= $EC, dispatch the tile script
+    jp  c, MoveToNextLine_notDoor
     JP_TABLE
-    ; Code below is actually data for the jump table
-    ld   a, [label_1535]
-    ld   [hl], $30
-    ld   [hl], $4B
-    ld   [hl], $64
-    ld   [hl], $77
-    ld   [hl], $8A
-    ld   [hl], $9D
-    ld   [hl], $B2
-    ld   [hl], $EA
-    ld   [hl], $FE
-    ld   [hl], $12
-    scf
-    ld   h, $37
-    ld   e, [hl]
-    scf
-    ld   l, l
-    scf
-    ld   a, h
-    scf
-    and  d
-    scf
-    or   [hl]
-    scf
+    ; TODO: document door types (values taken from the LALE editor)
+    ; case 0xEC // Key Doors
+    ; case 0xED
+    ; case 0xEE
+    ; case 0xEF
+
+    ; case 0xF4  // Open Doors
+    ; case 0xF5
+    ; case 0xF6
+    ; case 0xF7
+
+    ; case 0xF0  // Closed Doors
+    ; case 0xF1
+    ; case 0xF2
+    ; case 0xF3
+
+    ; case 0xF8 // Boss Door
+
+    ; case 0xF9 // ?? Stairs maybe
+    ; case 0xFA // FLip Wall
+    ; case 0xFB // One-way Arrow
+
+    ; case 0xFC // Dungeon Entrances
+
+    ; case 0xFD //Indoor Entrances
+._EC dw label_35FA
+._ED dw $3615
+._EE dw $3630
+._EF dw $364B
+._F0 dw $3664
+._F1 dw $3677
+._F2 dw $368A
+._F3 dw $369D
+._F4 dw $36B2
+._F5 dw $36EA 
+._F6 dw $36FE
+._F7 dw $3712
+._F8 dw $3726
+._F9 dw $375E
+._FA dw $376D
+._FB dw $377C
+._FC dw $37A2
+._FD dw IndoorEntranceHandler
 
 MoveToNextLine::
     add  a, $F5
@@ -5435,7 +5519,7 @@ MoveToNextLine_notTileBA::
     jr   nz, MoveToNextLine_notTileD3
     bit  4, e
     jr   z, MoveToNextLine_notTileD3
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $75
     jr   z, label_337C
     cp   $07
@@ -5495,7 +5579,7 @@ MoveToNextLine_noSpecialTile::
     jp   z, label_347D
     jp   MoveToNextLine_finallyBeginSomething
 
-label_33CB::
+MoveToNextLine_notDoor::
     add  a, $EC
     ldh  [$FFE0], a
     push af
@@ -5511,7 +5595,7 @@ label_33DC::
     jr   nz, label_3407
     xor  a
     ld   [$C3CB], a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $C4
     ldh  a, [$FFE0]
     jr   z, label_3407
@@ -5735,7 +5819,7 @@ label_3500::
     ret  z
     cp   $09
     jr   nz, label_350E
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $97
     ret  nz
     jr   label_3527
@@ -5743,7 +5827,7 @@ label_3500::
 label_350E::
     cp   $E1
     jr   nz, label_351D
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $0E
     ret  z
     cp   $0C
@@ -5752,7 +5836,7 @@ label_350E::
     ret  z
 
 label_351D::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $80
     jr   nc, label_3527
     ld   a, $09
@@ -5777,17 +5861,20 @@ label_352D::
     inc  bc
     ret
 
-label_353B::
-    ldh  a, [$FFF6]
+; Use the current map room to load the adequate bank
+SetBankForRoom::
+    ldh  a, [hMapRoom]
+    ; If hMapRoom <= $80…
     cp   $80
-    jr   nc, label_3545
+    jr   nc, .moreThan80
+    ; … a = $09
     ld   a, $09
-    jr   label_3547
-
-label_3545::
+    jr   .fi
+.moreThan80
+    ; else a = $1A
     ld   a, $1A
-
-label_3547::
+.fi
+    ; Load the bank $09 or $1A
     ld   [MBC3SelectBank], a
     ret
 
@@ -5896,7 +5983,7 @@ label_35CB::
     ret  z
     cp   $09
     jr   nz, label_35D9
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $97
     ret  nz
     jr   label_35E8
@@ -5904,7 +5991,7 @@ label_35CB::
 label_35D9::
     cp   $E1
     jr   nz, label_35E8
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $0E
     ret  z
     cp   $0C
@@ -5954,11 +6041,30 @@ data_3649::
     db   $EE, $35, 1, $E4, $37, $11, $49, $36, $C3, $4B, $35, $1E, 4, $CD, $3F, $37
     db   $FA, $8A, $C1, $F6, 1, $EA, $8A, $C1, $EA, $8B, $C1, $C3, $B2, $36
 
-data_3677::
-    db   $1E, 5, $CD, $3F, $37, $FA, $8A, $C1, $F6, 2, $EA, $8A, $C1, $EA, $8B, $C1
-    db   $C3, $EA, $36, $1E, 6, $CD, $3F, $37, $FA, $8A, $C1, $F6, 4, $EA, $8A, $C1
-    db   $EA, $8B, $C1, $C3, $FE, $36, $1E, 7, $CD, $3F, $37, $FA, $8A, $C1, $F6, 8
-    db   $EA, $8A, $C1, $EA, $8B, $C1, $C3, $12, $37
+label_3677::
+    ld   e, $05
+    call label_373F
+    ld   a, [$C18A]
+    or   $02
+    ld   [$C18A], a
+    ld   [$C18B], a
+    jp   $36EA
+
+    ld   e, $06
+    call label_373F
+    ld   a, [$C18A]
+    or   $04
+    ld   [$C18A], a
+    ld   [$C18B], a
+    jp   label_36FE
+
+    ld   e, $07
+    call label_373F
+    ld   a, [$C18A]
+    or   $08
+    ld   [$C18A], a
+    ld   [$C18B], a
+    jp   label_3712
 
 data_36B0::
     db   $43, $44
@@ -5972,10 +6078,11 @@ label_36B2::
     ld   de, data_36B0
     jp   label_354B
 
+; Set hFFF8 depending on the map and room
 label_36C4::
     push af
     ld   hl, $D900
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ldh  a, [hMapId]
@@ -6088,18 +6195,51 @@ data_3796::
     db   $36, $C5, $CD, $EE, $35, 1, $89, $37, $11, $96, $37, $C3, $4B, $35
 
 data_37B4::
-    db   $C1, $C2, $F0, $F7, $FE, $1A, $30, $13, $FE, 6, $38, $F, $F0, $F6, $FE, $D3
-    db   $20, 9, $FA, $46, $DB, $A7, $28, 3, $C3, $77, $36
+    db   $C1, $C2
 
-data_37CF::
-    db   $3E, 1, $CD, $C4, $36, $C5, $CD, $EE, $35, 1, $E1, $37, $11, $B4, $37, $C3
-    db   $4B, $35
+IndoorEntranceHandler::
+    ; If MapId < $1A…
+    ldh  a, [hMapId]
+    cp   $1A
+    jr   nc, .end
+
+    ; … and MapId >= $06…
+    cp   MAP_EAGLES_TOWER
+    jr   c, .end  
+
+    ; … and MapRoom == $D3…
+    ldh  a, [hMapRoom]
+    cp   $D3
+    jr   nz, .end
+
+    ; … and $DB46 != 0…
+    ld   a, [$DB46]
+    and  a
+    jr   z, .end
+
+    ; … handle special case.
+    jp   label_3677
+
+.end
+
+    ld   a, $01
+    call label_36C4
+    push bc
+    call label_35EE
+    ld   bc, data_37E1
+    ld   de, data_37B4
+    ; tail-call jump
+    jp   label_354B
 
 data_37E1::
-    db   0, 1, $FF
+    db   $00
+    db   $01
+    db   $FF
 
 data_37E4::
-    db   0, $10, $FF
+    db   $00
+    db   $10
+    db   $FF
 
 ; Fill the tile map with whatever is in register a
 FillTileMapWith::
@@ -6130,7 +6270,7 @@ label_37FE::
     ld   [MBC3SelectBank], a
     xor  a
     ldh  [$FFE4], a
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
     sla  c
@@ -6143,7 +6283,7 @@ label_37FE::
     cp   MAP_EAGLES_TOWER
     jr   nz, label_3850
     ld   a, [$DB6F]
-    ld   hl, $FFF6
+    ld   hl, hMapRoom
     cp   [hl]
     jr   nz, label_3850
     ld   a, $A8
@@ -6208,7 +6348,7 @@ label_3883::
     ld   d, $00
     ld   hl, data_387B
     add  hl, de
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   a, [hl]
     ld   hl, $CF00
@@ -6443,8 +6583,8 @@ label_39F2::
     ld   a, [hl]
     and  a
     jr   z, label_3A03
-    ldh  [$FFEA], a
-    call label_3A18
+    ldh  [hEntityType], a
+    call LoadEntities
 
 label_3A03::
     dec  c
@@ -6461,7 +6601,7 @@ label_3A0A::
     ld   [MBC3SelectBank], a
     ret
 
-label_3A18::
+LoadEntities::
     ld   hl, $C3A0
     add  hl, bc
     ld   a, [hl]
@@ -6485,7 +6625,7 @@ label_3A18::
     jr   nz, label_3A46
 
 label_3A40::
-    ldh  a, [$FFEA]
+    ldh  a, [hEntityType]
     cp   $07
     jr   nz, label_3A4E
 
@@ -6506,9 +6646,14 @@ label_3A54::
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFEA]
+    ldh  a, [hEntityType]
     cp   $05
     jp   z, label_3A8D
+    ; Jump table on FFEA value.
+    ; 0-4: unknown
+    ; 5: return immediately
+    ; 6-9: unknown
+    ; Entity timer type?
     JP_TABLE
     db 9, $3A, $18, $55, $B6, $4C, $4C, $4C, $B5, $48, $8D, $3A, 7, $4E, $32, $57
     db $94, $4D
@@ -7252,7 +7397,7 @@ label_3EFB::
     ld   a, $50
 
 label_3F11::
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
     ldh  [$FFBD], a
     ld   a, [wTransitionSequenceCounter]
     cp   $04
@@ -7322,7 +7467,7 @@ label_3F78::
     ld   d, b
     ld   hl, data_3F48
     add  hl, de
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, b
     ld   a, [hl]

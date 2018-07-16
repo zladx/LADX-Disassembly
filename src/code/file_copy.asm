@@ -11,7 +11,7 @@ FileCopyEntryPoint::
     ld   a, $08
     ld   [wTileMapToLoad], a
     xor  a
-    ld   [$DBA6], a
+    ld   [wSaveSlot], a
     ld   [$D000], a
     ld   [$D001], a
     ld   [$D002], a
@@ -21,23 +21,23 @@ FileCopyEntryPoint::
     jp   IncrementGameplaySubtypeAndReturn
     ld   bc, $98C4
     ld   de, $DB80
-    call label_4852
+    call func_4852
     ld   bc, $9924
     ld   de, $DB85
-    call label_4852
+    call func_4852
     ld   bc, $9984
     ld   de, $DB8A
-    call label_4852
+    call func_4852
     jp   IncrementGameplaySubtypeAndReturn
     ld   bc, $98CD
     ld   de, $DB80
-    call label_4852
+    call func_4852
     ld   bc, $992D
     ld   de, $DB85
-    call label_4852
+    call func_4852
     ld   bc, $998D
     ld   de, $DB8A
-    call label_4852
+    call func_4852
     jp   IncrementGameplaySubtypeAndReturn
     call label_6BA8
     ldh  a, [$FFCC]
@@ -92,7 +92,7 @@ label_5042::
     and  a
     jr   z, label_5055
     call IncrementGameplaySubtype
-    call label_49BE
+    call PlayValidationJingle
 
 label_5055::
     ld   a, [$D001]
@@ -245,7 +245,7 @@ label_5114::
     ld   a, [$D002]
     cp   $03
     jp   z, label_4555
-    call label_49BE
+    call PlayValidationJingle
     call IncrementGameplaySubtype
     jp   label_4E55
 
@@ -286,17 +286,17 @@ label_514F::
     jr   z, label_516C
     ld   bc, $98C4
     ld   de, $DB80
-    jp   label_4852
+    jp   func_4852
 
 label_5163::
     ld   bc, $9924
     ld   de, $DB85
-    jp   label_4852
+    jp   func_4852
 
 label_516C::
     ld   bc, $9984
     ld   de, $DB8A
-    jp   label_4852
+    jp   func_4852
 
 label_5175::
     ld   a, [$D002]
@@ -384,7 +384,7 @@ label_51CE::
     ld   a, [$D000]
     and  a
     jp   z, label_4555
-    call label_49BE
+    call PlayValidationJingle
     ld   a, [$D001]
     sla  a
     ld   e, a
@@ -464,14 +464,14 @@ label_526F::
     jr   z, label_528C
     ld   bc, $98CD
     ld   de, $DB80
-    jp   label_4852
+    jp   func_4852
 
 label_5283::
     ld   bc, $992D
     ld   de, $DB85
-    jp   label_4852
+    jp   func_4852
 
 label_528C::
     ld   bc, $998D
     ld   de, $DB8A
-    jp   label_4852
+    jp   func_4852

@@ -439,7 +439,7 @@ func_004_42B3:
     jp   label_3D8A                               ; $42E4: $C3 $8A $3D
 
     call func_004_46F9                            ; $42E7: $CD $F9 $46
-    ldh  a, [$FFEA]                               ; $42EA: $F0 $EA
+    ldh  a, [hEntityType]                               ; $42EA: $F0 $EA
     cp   $05                                      ; $42EC: $FE $05
     jr   z, jr_004_431A                           ; $42EE: $28 $2A
 
@@ -1744,7 +1744,7 @@ Data_004_4BDD::
     jp   label_3D8A                               ; $4DF8: $C3 $8A $3D
 
     call func_004_4FFE                            ; $4DFB: $CD $FE $4F
-    ldh  a, [$FFEA]                               ; $4DFE: $F0 $EA
+    ldh  a, [hEntityType]                               ; $4DFE: $F0 $EA
     cp   $05                                      ; $4E00: $FE $05
     jp   z, label_004_4E60                        ; $4E02: $CA $60 $4E
 
@@ -2123,7 +2123,7 @@ func_004_5067:
     call label_3EE8                               ; $5082: $CD $E8 $3E
     call label_394D                               ; $5085: $CD $4D $39
     call func_004_542F                            ; $5088: $CD $2F $54
-    ldh  a, [$FFEA]                               ; $508B: $F0 $EA
+    ldh  a, [hEntityType]                               ; $508B: $F0 $EA
     cp   $05                                      ; $508D: $FE $05
     jp   z, label_004_510F                        ; $508F: $CA $0F $51
 
@@ -3116,14 +3116,14 @@ jr_004_5628:
     push de                                       ; $562A: $D5
     ldh  a, [$FFEF]                               ; $562B: $F0 $EF
     sub  $0F                                      ; $562D: $D6 $0F
-    ldh  [$FFCD], a                               ; $562F: $E0 $CD
+    ldh  [hSwordIntersectedAreaY], a                               ; $562F: $E0 $CD
     ldh  a, [$FFEE]                               ; $5631: $F0 $EE
     sub  $07                                      ; $5633: $D6 $07
-    ldh  [$FFCE], a                               ; $5635: $E0 $CE
+    ldh  [hSwordIntersectedAreaX], a                               ; $5635: $E0 $CE
     swap a                                        ; $5637: $CB $37
     and  $0F                                      ; $5639: $E6 $0F
     ld   e, a                                     ; $563B: $5F
-    ldh  a, [$FFCD]                               ; $563C: $F0 $CD
+    ldh  a, [hSwordIntersectedAreaY]                               ; $563C: $F0 $CD
     and  $F0                                      ; $563E: $E6 $F0
     or   e                                        ; $5640: $B3
     ld   e, a                                     ; $5641: $5F
@@ -3214,7 +3214,7 @@ func_004_56A7:
     jp   nz, label_004_5690                       ; $56BD: $C2 $90 $56
 
     call label_3EE8                               ; $56C0: $CD $E8 $3E
-    ldh  a, [$FFEA]                               ; $56C3: $F0 $EA
+    ldh  a, [hEntityType]                               ; $56C3: $F0 $EA
     cp   $05                                      ; $56C5: $FE $05
     jp   z, label_004_5791                        ; $56C7: $CA $91 $57
 
@@ -5300,7 +5300,7 @@ jr_004_6497:
     jr   jr_004_64E0                              ; $6497: $18 $47
 
     db   $10                                      ; $6499: $10
-    ldh  a, [$FFCD]                               ; $649A: $F0 $CD
+    ldh  a, [hSwordIntersectedAreaY]                               ; $649A: $F0 $CD
     sbc  e                                        ; $649C: $9B
     ld   h, a                                     ; $649D: $67
     ld   hl, wEntitiesUnknownTableB               ; $649E: $21 $B0 $C2
@@ -10063,7 +10063,7 @@ jr_004_7F9D:
     ret                                           ; $7FA2: $C9
 
 func_004_7FA3:
-    ldh  a, [$FFEA]                               ; $7FA3: $F0 $EA
+    ldh  a, [hEntityType]                               ; $7FA3: $F0 $EA
     cp   $05                                      ; $7FA5: $FE $05
     jr   nz, jr_004_7FCE                          ; $7FA7: $20 $25
 

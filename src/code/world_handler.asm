@@ -273,7 +273,7 @@ GameplayWorldSubtype6Handler::
     ld   a, $1C
     ld   [wOBJ0Palette], a
     ld   a, $E4
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ldh  a, [hIsGBC]
     and  a
     jr   nz, label_4548
@@ -287,7 +287,7 @@ label_4548::
     jp   z, TransitionReturn
 
 TransitionToFileMenu::
-    ld   [$D47B], a
+    ld   [wForceFileSelectionScreenMusic], a
 
 label_4555::
     call EnableExternalRAMWriting
@@ -313,10 +313,10 @@ label_4555::
     ld   [$DC09], a
     call EnableExternalRAMWriting
     ld   a, [$A45C]
-    ld   [$DC00], a
+    ld   [wFile1DeathCountHigh], a
     call EnableExternalRAMWriting
     ld   a, [$A45D]
-    ld   [$DC01], a
+    ld   [wFile1DeathCountLow], a
     call EnableExternalRAMWriting
     ld   a, [$A801]
     ld   [$DB85], a
@@ -340,10 +340,10 @@ label_4555::
     ld   [$DC0A], a
     call EnableExternalRAMWriting
     ld   a, [$A809]
-    ld   [$DC02], a
+    ld   [wFile2DeathCountHigh], a
     call EnableExternalRAMWriting
     ld   a, [$A80A]
-    ld   [$DC03], a
+    ld   [wFile2DeathCountLow], a
     call EnableExternalRAMWriting
     ld   a, [$ABAE]
     ld   [$DB8A], a
@@ -367,10 +367,10 @@ label_4555::
     ld   [$DC0B], a
     call EnableExternalRAMWriting
     ld   a, [$ABB6]
-    ld   [$DC04], a
+    ld   [wFile3DeathCountHigh], a
     call EnableExternalRAMWriting
     ld   a, [$ABB7]
-    ld   [$DC05], a
+    ld   [wFile3DeathCountLow], a
     ld   a, GAMEPLAY_FILE_SELECT
     ld   [wGameplayType], a
     xor  a
@@ -381,8 +381,8 @@ label_4555::
     ld   a, $00
     ld   [wBGPalette], a
     ld   [wOBJ0Palette], a
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ld   a, $01
-    call label_8FA
+    call ClearFileMenuBG_trampoline
 TransitionReturn::
     ret

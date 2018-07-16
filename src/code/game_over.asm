@@ -103,7 +103,7 @@ label_4259::
     ld   a, $1C
     ld   [wOBJ0Palette], a
     ld   a, [wBGPalette]
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ld   e, $08
     call label_8D7
     call label_90F
@@ -124,7 +124,7 @@ label_4259::
     ldh  [$FF97], a
     ld   hl, $FF9C
     inc  [hl]
-    call label_905
+    call LoadFileMenuBG_trampoline
     call label_2802
     ret
     nop
@@ -144,7 +144,7 @@ label_4259::
     ld   hl, $FF9C
     inc  [hl]
     ld   a, $03
-    ld   [$D368], a
+    ld   [wWorldMusicTrack], a
 
 label_42D8::
     ret
@@ -173,7 +173,7 @@ label_42FB::
     dec  e
     jr   nz, label_42FB
     ld   [wOBJ0Palette], a
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ld   [rOBP0], a
     ld   [rOBP1], a
     ld   [wBGPalette], a
@@ -186,7 +186,7 @@ label_42FB::
     ld   [wMapEntrancePositionY], a
     call label_52A4
     ld   a, $01
-    call label_8FA
+    call ClearFileMenuBG_trampoline
     ld   a, $80
     ld   [$DBC7], a
     ret

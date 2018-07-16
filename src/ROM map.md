@@ -11,9 +11,9 @@
 06 Code and data
 07 n/a
 08 Map data
-09 Data and text
+09 Map data and text
 0A n/a
-0B n/a
+0B Map data
 0C Graphics: items, Link, minimap (DMG variant)
 0D Graphics: dungeons (DMG variant)
 0E Graphics: NPCs, enemies (DMG variant)
@@ -27,12 +27,12 @@
 16 Code and text
 17 Credits code and text
 18 Code and data
-19 Code
-1A Code
+19 Code (Link motions)
+1A Map data and text
 1B Audio code and Music
 1C Map data?
 1D Text
-1E Music
+1E Audio code and Music
 1F Audio code and Music
 20 BG and palette-related code
 21 Code and data

@@ -247,7 +247,7 @@ label_63F8::
     add  hl, de
     ld   a, [hl]
     ld   [wBGPalette], a
-    ld   [$DB99], a
+    ld   [wOBJ1Palette], a
     ld   hl, label_63BA
     add  hl, de
     ld   a, [hl]

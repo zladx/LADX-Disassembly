@@ -554,7 +554,7 @@ wForceFileSelectionScreenMusic:: ; D47B
 
 wActivePowerUp:: ; D47C
   ; 0:  No power-up
-  ; 1:  Piece of Power 
+  ; 1:  Piece of Power
   ; 2:  Guardian Accorn
   ds 1
 

@@ -3942,7 +3942,7 @@ Data_002_59D4::
     db   $00, $00, $00, $00, $01, $01, $10, $10, $01, $01, $10, $10, $43, $8C, $09, $0B
     db   $43, $8C, $09, $0B, $44, $08, $0A, $0C, $44, $08, $0A, $0C, $04, $08, $02, $01
     db   $04, $08, $02, $01, $04, $F8, $08, $FF, $01, $F8, $08, $FF, $01, $F8, $08, $04
-    db   $01, $02, $08, $04, $01                  
+    db   $01, $02, $08, $04, $01
 
     ld   [bc], a                                  ; $5A79: $02
     ld   [$001E], sp                              ; $5A7A: $08 $1E $00
@@ -5127,7 +5127,7 @@ func_002_60E0::
     call ClampItemCount                           ; $60EC: $CD $D8 $60
     ld   de, wArrowCount                          ; $60EF: $11 $45 $DB
     call ClampItemCount                           ; $60F2: $CD $D8 $60
-    
+
     ld   a, [wLinkMotionState]                    ; $60F5: $FA $1C $C1
     cp   LINK_MOTION_JUMPING                      ; $60F8: $FE $02
     ret  nc                                       ; $60FA: $D0
@@ -5783,7 +5783,7 @@ Data_002_6478::
     db   $7D, $7D, $EF, $EF, $ED, $EF, $EF, $EF, $7D, $7D, $7D, $EF, $EF, $EF, $EF, $7D
     db   $7D, $7D, $7D, $EF, $ED, $EF, $ED, $7D, $7D, $7D, $7D, $EF, $EF, $ED, $EF, $7D
     db   $7D, $00, $02, $03, $07, $05, $0A, $0B, $0F, $04, $08, $09, $0E, $06, $0C, $0D
-    db   $01                                      
+    db   $01
 
 IsMapRoomE8::
     ldh  a, [hMapRoom]                           ; $6709: $F0 $F6
@@ -6820,7 +6820,7 @@ CheckPositionForMapTransition::
     ; If Link is on the top of the ladder…
     ldh  a, [hLinkPositionY]                      ; $6C92: $F0 $99
     cp   $2C                                      ; $6C94: $FE $2C
-    
+
     ; … exit the map.
     jp   c, ApplyMapFadeOutTransition             ; $6C96: $DA $7D $0C
 .kanaletEnd
@@ -6935,11 +6935,11 @@ CheckPositionForMapTransition::
     ; hLinkPositionX = hLinkFinalPositionX
     ldh  a, [hLinkFinalPositionX]                 ; $6D13: $F0 $9F
     ldh  [hLinkPositionX], a                      ; $6D15: $E0 $98
-    
+
     ; Clear hLinkPositionXIncrement
     xor  a                                        ; $6D17: $AF
     ldh  [hLinkPositionXIncrement], a             ; $6D18: $E0 $9A
-    
+
     ; If in a side-scrolling room…
     ldh  a, [hIsSideScrolling]                    ; $6D1A: $F0 $F9
     and  a                                        ; $6D1C: $A7
@@ -6990,7 +6990,7 @@ CheckPositionForMapTransition::
 .manualEntryPointsEnd
 
     call CopyLinkFinalPositionToPosition                                ; $6D5C: $CD $BE $0C
-    
+
     ld   a, [$C181]                               ; $6D5F: $FA $81 $C1
     cp   $50                                      ; $6D62: $FE $50
     jp   z, clearIncrementAndReturn               ; $6D64: $CA $0C $6E
@@ -7096,18 +7096,18 @@ CheckPositionForMapTransition::
     ; Set the direction
     ld   a, e                                     ; $6DE4: $7B
     ld   [wRoomTransitionDirection], a            ; $6DE5: $EA $25 $C1
-    
+
     ; Set the initial state
     ld   a, ROOM_TRANSITION_LOAD_ROOM             ; $6DE8: $3E $01
     ld   [wRoomTransitionState], a                ; $6DEA: $EA $24 $C1
-    
+
     ; Clear some state before the transition
     xor  a                                        ; $6DED: $AF
     ld   [$C14B], a                               ; $6DEE: $EA $4B $C1
     ld   [wIsUsingSpinAttack], a                  ; $6DF1: $EA $21 $C1
     ld   [$C14A], a                               ; $6DF4: $EA $4A $C1
     ld   [$C188], a                               ; $6DF7: $EA $88 $C1
-    
+
     ; If Link's Y position >= $88…
     ldh  a, [hLinkPositionY]                      ; $6DFA: $F0 $99
     cp   $88                                      ; $6DFC: $FE $88

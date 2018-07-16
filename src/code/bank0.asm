@@ -391,7 +391,7 @@ Copy100BytesFromBankAtA::
     ld   [rHDMA4], a
     ld   a, $0F
     ld   [rHDMA5], a
-    
+
     ; Fallthrough to switch back to the bank in h
 SelectBankAtHAndReturn::
     ld   a, h
@@ -909,7 +909,7 @@ label_D15::
 LoadRoomSprites::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    
+
     ; If is indoor…
     ld   a, [wIsIndoor]
     and  a
@@ -1327,7 +1327,7 @@ WorldDefaultHandler::
     jp   ApplyMapFadeOutTransition
 
 .normalFlow
-    
+
     ; If $DBC7 > 0, decrement it
     ld   hl, $DBC7
     ld   a, [hl]
@@ -1373,10 +1373,10 @@ WorldDefaultHandler::
     ld   a, $19
     call SwitchBank
     call $7A9A
-    
+
     call label_398D
     callsw label_002_5487
-    
+
     ld   hl, wRequestDestination
     ldh  a, [hFrameCounter]
     and  $03
@@ -2306,8 +2306,8 @@ CheckStaticSwordCollision::
     cp   $90
     jp   nc, CheckItemsSwordCollision
 
-    cp   $01           
-    jp   z, CheckItemsSwordCollision 
+    cp   $01
+    jp   z, CheckItemsSwordCollision
 
     ld   c, $00
     ld   a, [wIsIndoor]
@@ -3734,7 +3734,7 @@ DoUpdateSlidingBGMap::
     ld   b, $00
     ld   hl, wTileMap
     add  hl, bc
-    
+
     ; c = wTileMap[$FFD9]
     ld   b, $00
     ld   c, [hl]
@@ -3761,7 +3761,7 @@ DoUpdateSlidingBGMap::
     rl   b
     sla  c
     rl   b
-    
+
     ld   a, [wIsIndoor]
     and  a
     jr   z, .label_2286
@@ -5432,7 +5432,7 @@ func_32A9::
 ._F2 dw $368A
 ._F3 dw $369D
 ._F4 dw $36B2
-._F5 dw $36EA 
+._F5 dw $36EA
 ._F6 dw $36FE
 ._F7 dw $3712
 ._F8 dw $3726
@@ -6205,7 +6205,7 @@ IndoorEntranceHandler::
 
     ; … and MapId >= $06…
     cp   MAP_EAGLES_TOWER
-    jr   c, .end  
+    jr   c, .end
 
     ; … and MapRoom == $D3…
     ldh  a, [hMapRoom]
@@ -6523,7 +6523,7 @@ label_398D::
     ldh  [hSFX], a
 .bossAgonyEnd
 
-    ; If no dialog is open… 
+    ; If no dialog is open…
     ld   a, [wDialogState]
     and  a
     jr   nz, .C111End
@@ -6540,7 +6540,7 @@ label_398D::
     ld   a, [wLinkMotionState]
     cp   LINK_MOTION_PASS_OUT
     ret  z
-    
+
     xor  a
     ld   [$C3C1], a
     ldh  a, [hMapId]

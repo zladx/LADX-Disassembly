@@ -3789,7 +3789,7 @@ DoUpdateSlidingBGMap::
     call $6576
 
 .label_2299
-    call label_3905
+    call SwitchToMapDataBank
     add  hl, bc
     pop  de
     pop  bc
@@ -3816,7 +3816,7 @@ DoUpdateSlidingBGMap::
     ldh  [$FFE4], a
     ld   a, e
     ldh  [$FFE5], a
-    call label_3905
+    call SwitchToMapDataBank
     pop  de
     pop  bc
 
@@ -3844,7 +3844,7 @@ DoUpdateSlidingBGMap::
     ldh  [$FFE4], a
     ld   a, e
     ldh  [$FFE5], a
-    call label_3905
+    call SwitchToMapDataBank
     pop  de
     pop  bc
 
@@ -4946,7 +4946,7 @@ label_3019::
     ld   a, $1A
     ld   [MBC3SelectBank], a
     call $6576
-    call label_3905
+    call SwitchToMapDataBank
     ld   a, [wIsIndoor]
     and  a
     jr   z, label_304C
@@ -4984,7 +4984,7 @@ label_304F::
     call label_2FC7
     xor  a
     ld   [rVBK], a
-    call label_3905
+    call SwitchToMapDataBank
     ld   a, h
     ldh  [$FFE0], a
     ld   a, l
@@ -5010,11 +5010,11 @@ label_304F::
     call label_2FC7
     xor  a
     ld   [rVBK], a
-    call label_3905
+    call SwitchToMapDataBank
     ret
 
 label_309B::
-    call label_3905
+    call SwitchToMapDataBank
     call SwitchBank
     ld   de, vBGMap0
     ld   hl, wTileMap
@@ -6428,17 +6428,17 @@ label_38EA::
     call $588B
     ret
 
-label_3905::
+SwitchToMapDataBank::
+    ; mapBank = (IsIndoor ? $08 : $1A)
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_390F
+    jr   nz, .indoor
     ld   a, $1A
-    jr   label_3911
-
-label_390F::
+    jr   .end
+.indoor
     ld   a, $08
-
-label_3911::
+.end
+    ; Switch to map bank
     ld   [MBC3SelectBank], a
     ret
 

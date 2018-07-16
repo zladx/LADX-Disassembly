@@ -3669,8 +3669,13 @@ label_21FB::
     ld   [hl], a
     ret
 
-data_2205::
-    db   $10, $10, $01, $01
+; Increment the BG map offset by this amount during room transition,
+; depending on the transition direction.
+SlidingBGMapDestIncrement::
+.right  db $10
+.left   db $10
+.top    db $01
+.bottom db $01
 
 ; Update BG map during room transition
 UpdateSlidingBGMap::
@@ -3681,14 +3686,14 @@ UpdateSlidingBGMap::
     ; Reload saved bank and return
     jp   ReloadSavedBank
 
-label_2214::
+IncrementBGMapSourceAndDestination_Vertical::
     ld   a, [wBGUpdateRegionOriginLow]
     and  $20
-    jr   z, label_221D
+    jr   z, .noColumnEnd
     inc  hl
     inc  hl
+.noColumnEnd
 
-label_221D::
     ld   a, [hli]
     ld   [bc], a
     inc  bc
@@ -3697,13 +3702,13 @@ label_221D::
     inc  bc
     ret
 
-label_2224::
+IncrementBGMapSourceAndDestination_Horizontal::
     ld   a, [wBGUpdateRegionOriginLow]
     and  $01
-    jr   z, label_222C
+    jr   z, .noColumnEnd
     inc  hl
+.noColumnEnd
 
-label_222C::
     ld   a, [hli]
     ld   [bc], a
     inc  hl
@@ -3762,52 +3767,76 @@ DoUpdateSlidingBGMap::
     sla  c
     rl   b
 
+    ;
+    ; Map base address selection
+    ;
+
+    ; If IsIndoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, .label_2286
+    jr   z, .baseAddress_isOverworld
+    ; hl = $4000.
     ld   hl, $4000
+    ; if IsGBC…
     ldh  a, [hIsGBC]
     and  a
     jr   z, .label_2299
+    ; … hl = (MapId == MAP_COLOR_DUNGEON ? $4760: $43B0)
     ld   hl, $43B0
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, .label_2291
+    jr   nz, .mapBaseAddressDone
     ld   hl, $4760
-    jr   .label_2291
+    jr   .mapBaseAddressDone
 
-.label_2286
+.baseAddress_isOverworld
+    ; hl = (hIsGBC ? $6B1D : $6749)
     ld   hl, $6749
     ldh  a, [hIsGBC]
     and  a
     jr   z, .label_2299
     ld   hl, $6B1D
 
-.label_2291
+.mapBaseAddressDone
+
+    ;
+    ; BG map offset selection
+    ;
+
+    ; Set BG map offset in FFE0-FFE1
     ld   a, $1A
     ld   [MBC3SelectBank], a
     call $6576
 
 .label_2299
+    ; Switch to the bank containing the BG map
     call SwitchToMapDataBank
+    ; hl = base map address + BG map offset
     add  hl, bc
     pop  de
     pop  bc
+
+    ; If the Room transition is vertical…
     ld   a, [wRoomTransitionDirection]
     and  $02
-    jr   z, .label_22D3
-    call label_2214
+    jr   z, .horizontalRoomTransition
+    ; Increment the source and target destination
+    call IncrementBGMapSourceAndDestination_Vertical
+
+    ; If IsGBC, load BG palette data
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .label_22D1
+    jr   z, .verticalIncrementEnd
     push bc
     push de
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $49D9
+    ; Select palettes bank
     ldh  a, [$FFDF]
     ld   [MBC3SelectBank], a
-    call label_2214
+    ; Increment again the source and target destination
+    call IncrementBGMapSourceAndDestination_Vertical
     ld   a, b
     ldh  [$FFE2], a
     ld   a, c
@@ -3816,26 +3845,30 @@ DoUpdateSlidingBGMap::
     ldh  [$FFE4], a
     ld   a, e
     ldh  [$FFE5], a
+    ; Restore state
     call SwitchToMapDataBank
     pop  de
     pop  bc
 
-.label_22D1
-    jr   .label_22FE
+.verticalIncrementEnd
+    jr   .incrementEnd
 
-.label_22D3
-    call label_2224
+.horizontalRoomTransition
+    call IncrementBGMapSourceAndDestination_Horizontal
+    ; If IsGBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .label_22FE
+    jr   z, .incrementEnd
+    ; Load BG palette data
     push bc
     push de
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $49D9
+    ; Select palettes bank
     ldh  a, [$FFDF]
     ld   [MBC3SelectBank], a
-    call label_2224
+    call IncrementBGMapSourceAndDestination_Horizontal
     ld   a, b
     ldh  [$FFE2], a
     ld   a, c
@@ -3844,25 +3877,35 @@ DoUpdateSlidingBGMap::
     ldh  [$FFE4], a
     ld   a, e
     ldh  [$FFE5], a
+    ; Cleanup
     call SwitchToMapDataBank
     pop  de
     pop  bc
 
-.label_22FE
+.incrementEnd
+
     push bc
+    ; Increment BG destination address
+    ; (by a column or by a row)
     ld   a, [wRoomTransitionDirection]
     ld   c, a
     ld   b, $00
-    ld   hl, data_2205
+    ld   hl, SlidingBGMapDestIncrement
     add  hl, bc
     ldh  a, [$FFD9]
     add  a, [hl]
     ldh  [$FFD9], a
     pop  bc
-    ld   a, [$C128]
+
+    ; Decrement loop counter
+    ld   a, [wBGUpdateRegionTilesCount]
     dec  a
-    ld   [$C128], a
+    ld   [wBGUpdateRegionTilesCount], a
+
+    ; Loop until BG map data for the whole region is copied
     jp   nz, .loop
+
+    ; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
     ld   a, $20
     ld   [MBC3SelectBank], a
     jp   $5570

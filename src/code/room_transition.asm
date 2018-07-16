@@ -710,11 +710,11 @@ RoomTransitionConfigureScrollTargets::
     and  $03                                      ; $7BDC: $E6 $03
     ld   [wBGOriginHigh], a                       ; $7BDE: $EA $2E $C1
 
-    ; Configure $C128
+    ; Configure wBGUpdateRegionTilesCount
     ld   hl, data_002_7B5F                        ; $7BE1: $21 $5F $7B
     add  hl, bc                                   ; $7BE4: $09
     ld   a, [hl]                                  ; $7BE5: $7E
-    ld   [$C128], a                               ; $7BE6: $EA $28 $C1
+    ld   [wBGUpdateRegionTilesCount], a                               ; $7BE6: $EA $28 $C1
 
     ; Set number of frames to elapse before reaching
     ; the mid-transition point

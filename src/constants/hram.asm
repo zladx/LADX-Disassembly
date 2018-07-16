@@ -171,7 +171,21 @@ hNeedsRenderingFrame:: ; FFD1
 hFFD2:: ; FFD2
   ds 1
 
-  ds $14
+; Unlabeled
+ds $D
+
+; This location has different uses
+hFFE0              ; FFE0
+hBGMapOffsetHigh:: ; FFE0
+  ds 1
+
+; This location has different uses
+hFFE1              ; FFE1
+hBGMapOffsetLow::  ; FFE1
+  ds 1
+
+; Unlabeled
+ds 5
 
 hFrameCounter:: ; FFE7
   ; wraps around 00-FF
@@ -188,8 +202,8 @@ hFFE9:: ; FFE9
 ; Entity type?
 ; 0-4: unknown
 ; 5: do nothing
-; 6-9: unknown   
-; See wEntitiesTypeTable 
+; 6-9: unknown
+; See wEntitiesTypeTable
 hEntityType:: ; FFEA
   ds 1
 

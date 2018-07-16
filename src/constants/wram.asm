@@ -84,8 +84,9 @@ wBGUpdateRegionOriginLow:: ; C127
   ; to update during a room transition (high byte)
   ds 1
 
-; Unlabeled
-ds 1
+wBGUpdateRegionTilesCount ; C128
+  ; Number of tiles of a background piece (row or column) to be updated in a single batch
+  ds 1
 
 wRoomTransitionFramesBeforeMidScreen:: ; C129
   ; Number of frames remaining before reaching the mid-screen transition point

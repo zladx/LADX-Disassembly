@@ -3671,18 +3671,18 @@ label_21FB::
 
 ; Increment the BG map offset by this amount during room transition,
 ; depending on the transition direction.
-SlidingBGMapDestIncrement::
+BGRegionIncrement::
 .right  db $10
 .left   db $10
 .top    db $01
 .bottom db $01
 
-; Update BG map during room transition
-UpdateSlidingBGMap::
+; Update a region (row or column) of the BG map during room transition
+UpdateBGRegion::
     ; Switch to Map Data bank
     ld   a, $08
     ld   [MBC3SelectBank], a
-    call DoUpdateSlidingBGMap
+    call DoUpdateBGRegion
     ; Reload saved bank and return
     jp   ReloadSavedBank
 
@@ -3718,8 +3718,8 @@ IncrementBGMapSourceAndDestination_Horizontal::
     inc  bc
     ret
 
-; Load BG data during map transition
-DoUpdateSlidingBGMap::
+; Update a region (row or column) of the BG map during room transition
+DoUpdateBGRegion::
     ; Configures an async data request to copy background tilemap
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -3890,7 +3890,7 @@ DoUpdateSlidingBGMap::
     ld   a, [wRoomTransitionDirection]
     ld   c, a
     ld   b, $00
-    ld   hl, SlidingBGMapDestIncrement
+    ld   hl, BGRegionIncrement
     add  hl, bc
     ldh  a, [$FFD9]
     add  a, [hl]

@@ -734,7 +734,7 @@ RoomTransitionConfigureScrollTargets::
 
 RoomTransitionFirstHalfHandler::
     ; Update BG Map
-    jp   UpdateSlidingBGMap                       ; $7C00: $C3 $09 $22
+    jp   UpdateBGRegion                       ; $7C00: $C3 $09 $22
 
 RoomTransitionSecondHalfHandler::
     ; The scroll increment has already been done earlier:

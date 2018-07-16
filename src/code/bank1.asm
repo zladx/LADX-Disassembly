@@ -18,7 +18,7 @@ label_40D6::
     ld   [wMapEntrancePositionX], a
     ldh  a, [hLinkPositionY]
     ld   [wMapEntrancePositionY], a
-    call label_52A4
+    call LoadSavedFile
     ld   a, $80
     ld   [$DBC7], a
     ret

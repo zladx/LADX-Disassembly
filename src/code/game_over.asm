@@ -184,7 +184,7 @@ label_42FB::
     ld   [wMapEntrancePositionX], a
     ldh  a, [hLinkPositionY]
     ld   [wMapEntrancePositionY], a
-    call label_52A4
+    call LoadSavedFile
     ld   a, $01
     call ClearFileMenuBG_trampoline
     ld   a, $80

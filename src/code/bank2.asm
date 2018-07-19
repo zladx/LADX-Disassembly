@@ -27,7 +27,7 @@ label_002_41D0::
     ld   [hl], a                                  ; $41F2: $77
     ld   hl, $C3B0                                ; $41F3: $21 $B0 $C3
     add  hl, de                                   ; $41F6: $19
-    ldh  a, [$FFDF]                               ; $41F7: $F0 $DF
+    ldh  a, [hRoomPaletteBank]                               ; $41F7: $F0 $DF
     ld   [hl], a                                  ; $41F9: $77
 
 jr_002_41FA:

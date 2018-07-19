@@ -204,7 +204,7 @@ label_92F::
     ld   a, $1A
     ld   [MBC3SelectBank], a
     call $6576
-    ldh  a, [$FFDF]
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ld   hl, $DC91
     ld   a, [$DC90]
@@ -263,7 +263,7 @@ label_983::
     ld   a, $1A
     ld   [MBC3SelectBank], a
     call $6710
-    ldh  a, [$FFDF]
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
     ld   h, a
@@ -3833,7 +3833,7 @@ DoUpdateBGRegion::
     ld   [MBC3SelectBank], a
     call $49D9
     ; Select palettes bank
-    ldh  a, [$FFDF]
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ; Increment again the source and target destination
     call IncrementBGMapSourceAndDestination_Vertical
@@ -3866,7 +3866,7 @@ DoUpdateBGRegion::
     ld   [MBC3SelectBank], a
     call $49D9
     ; Select palettes bank
-    ldh  a, [$FFDF]
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     call IncrementBGMapSourceAndDestination_Horizontal
     ld   a, b
@@ -5016,7 +5016,7 @@ label_304F::
     call label_2FC7
     pop  de
     push hl
-    ldh  a, [$FFDF]
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
     ld   h, a
@@ -5042,7 +5042,7 @@ label_304F::
     push de
     call label_2FC7
     pop  de
-    ldh  a, [$FFDF]
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
     ld   h, a

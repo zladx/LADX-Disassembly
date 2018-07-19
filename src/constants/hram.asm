@@ -172,7 +172,10 @@ hFFD2:: ; FFD2
   ds 1
 
 ; Unlabeled
-ds $D
+ds $C
+
+hRoomPaletteBank ; FFDF
+  ds 1
 
 ; This location has different uses
 hFFE0              ; FFE0

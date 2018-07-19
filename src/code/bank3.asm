@@ -1984,7 +1984,7 @@ label_D455::
     ld   a, $20
     ldh  [hSwordIntersectedAreaY], a
     ld   a, $19
-    ldh  [$FFDF], a
+    ldh  [hRoomPaletteBank], a
     call label_3E4D
     jp   label_C60
 

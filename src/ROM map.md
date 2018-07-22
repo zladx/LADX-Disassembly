@@ -11,8 +11,8 @@
 06 Code and data
 07 n/a
 08 Indoor map data
-09 Map data and text
-0A n/a
+09 Overworld map pointers, Overworld map data (rooms 0-7F), text
+0A Room pointers data (L1-6)
 0B Map data
 0C Graphics: items, Link, minimap (DMG variant)
 0D Graphics: dungeons (DMG variant)
@@ -28,7 +28,7 @@
 17 Credits code and text
 18 Code and data
 19 Code (Link motions)
-1A Code and Overworld map data
+1A Code, Overworld map data (rooms 80-FF), Overworld palette (0x6476)
 1B Audio code and Music
 1C Map data?
 1D Text
@@ -37,8 +37,8 @@
 20 BG and palette-related code
 21 Code and data
 22 Data
-23 Data
-24 GBC-specific code
+23 Indoor palettes
+24 Indoor palettes
 25 Data
 26 n/a
 27 Data

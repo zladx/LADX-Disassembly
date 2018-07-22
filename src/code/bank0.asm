@@ -201,9 +201,9 @@ label_91D::
     push af
 
 label_92F::
-    ld   a, $1A
+    ld   a, BANK(func_01A_6576)
     ld   [MBC3SelectBank], a
-    call $6576
+    call func_01A_6576
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ld   hl, $DC91
@@ -3803,7 +3803,8 @@ DoUpdateBGRegion::
     ; BG map offset selection
     ;
 
-    ; Set BG map offset in FFE0-FFE1
+    ; Set the palette bank in hRoomPaletteBank,
+    ; and the target BG map offset in FFE0-FFE1
     ld   a, $1A
     ld   [MBC3SelectBank], a
     call $6576

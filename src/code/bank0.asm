@@ -3790,8 +3790,8 @@ DoUpdateBGRegion::
     jr   .mapBaseAddressDone
 
 .baseAddress_isOverworld
-    ; hl = (hIsGBC ? $6B1D : $6749)
-    ld   hl, $6749
+    ; hl = (hIsGBC ? $6B1D : OverworldBaseMap)
+    ld   hl, OverworldBaseMap
     ldh  a, [hIsGBC]
     and  a
     jr   z, .label_2299
@@ -4914,7 +4914,8 @@ label_2FAD::
 label_2FC6::
     ret
 
-label_2FC7::
+; Copy two bytes from hl to de
+CopyWord::
     ld   a, [hli]
     ld   [de], a
     inc  de
@@ -4970,52 +4971,68 @@ label_2FFA::
     ld   [de], a
     ret
 
-label_300E::
+; Copy an overworld block (2x2 tiles) to the BG map
+CopyOverworldBlockToBG::
     ld   a, $02
     ld   [rSVBK], a
     ld   c, [hl]
     xor  a
     ld   [rSVBK], a
-    jr   label_3019
+    jr   doCopyBlockToBG
 
-label_3018::
+; Copy an indoor block (2x2 tiles) to the BG map
+CopyIndoorBlockToBG::
     ld   c, [hl]
 
-label_3019::
+doCopyBlockToBG:
     ld   b, $00
     sla  c
     rl   b
     sla  c
     rl   b
-    ld   a, $1A
+
+    ld   a, BANK(func_01A_6576)
     ld   [MBC3SelectBank], a
-    call $6576
+    call func_01A_6576
+
     call SwitchToMapDataBank
+
+    ;
+    ; Select the base address for the source tile map
+    ;
+
+    ; If IsIndoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_304C
+    jr   z, .isOverworld
+    ; … set the default base address
     ld   hl, $43B0
+    ; If MapID == MAP_COLOR_DUNGEON, hl = $4760
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, label_3047
+    jr   z, .hasSpecialBaseAddress
+    ; If MapId == MAP_HOUSE && MapRoom == $B5, hl = $4760
     cp   MAP_HOUSE
-    jr   nz, label_304F
+    jr   nz, .baseAddressDone
     ldh  a, [hMapRoom]
     cp   $B5
-    jr   nz, label_304F
+    jr   nz, .baseAddressDone
 
-label_3047::
+.hasSpecialBaseAddress
     ld   hl, $4760
-    jr   label_304F
+    jr   .baseAddressDone
 
-label_304C::
+.isOverworld
     ld   hl, $6B1D
+.baseAddressDone
 
-label_304F::
+    ; Copy tile numbers for tiles on the upper row
     push de
     add  hl, bc
-    call label_2FC7
+    call CopyWord
     pop  de
+
+    ; Copy palettes from WRAM1 for tiles on the upper row
     push hl
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
@@ -5025,24 +5042,34 @@ label_304F::
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
-    call label_2FC7
+    call CopyWord
+
+    ; Restore RAM and ROM banks
     xor  a
     ld   [rVBK], a
     call SwitchToMapDataBank
+
+    ; Update palette offset
     ld   a, h
     ldh  [$FFE0], a
     ld   a, l
     ldh  [$FFE1], a
     pop  hl
+
+    ; Move BG target down by one row
     ld   a, e
     add  a, $1F
     ld   e, a
     ld   a, d
     adc  a, $00
     ld   d, a
+
+    ; Copy tile numbers for tiles on the lower row
     push de
-    call label_2FC7
+    call CopyWord
     pop  de
+
+    ; Copy palettes from WRAM1 for tiles on the lower row
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
@@ -5051,12 +5078,20 @@ label_304F::
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
-    call label_2FC7
+    call CopyWord
+
+    ; Restore RAM and ROM banks
     xor  a
     ld   [rVBK], a
     call SwitchToMapDataBank
+
     ret
 
+; Copy the tile map of a room to BG video memory.
+;
+; This is used when loading a map in one go (instead
+; of having a sliding screen transition.)
+; (called by LoadMapData)
 label_309B::
     call SwitchToMapDataBank
     call SwitchBank
@@ -5064,47 +5099,51 @@ label_309B::
     ld   hl, wTileMap
     ld   c, $80
 
-label_30A9::
+.loop
     push de
     push hl
     push bc
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_30B6
+    jr   nz, .copyBlockToBG
     call label_2FCD
-    jr   label_30C4
+    jr   .blockCopyEnd
 
-label_30B6::
+    ; Copy the block tiles and palettes (2x2 tiles) to the BG map
+.copyBlockToBG
+    ; If IsIndoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_30C1
-    call label_3018
-    jr   label_30C4
+    jr   z, .isOverworld
+    ; then copy tiles for indoor room
+    call CopyIndoorBlockToBG
+    jr   .blockCopyEnd
+.isOverworld
+    ; else copy tiles for overworld room
+    call CopyOverworldBlockToBG
+.blockCopyEnd
 
-label_30C1::
-    call label_300E
-
-label_30C4::
     pop  bc
     pop  hl
     pop  de
+
     inc  hl
     ld   a, l
     and  $0F
     cp   $0B
-    jr   nz, label_30D5
+    jr   nz, .lEnd
     ld   a, l
     and  $F0
     add  a, $11
     ld   l, a
+.lEnd
 
-label_30D5::
     ld   a, e
     add  a, $02
     ld   e, a
     and  $1F
     cp   $14
-    jr   nz, label_30E9
+    jr   nz, .aEnd
     ld   a, e
     and  $E0
     add  a, $40
@@ -5112,13 +5151,13 @@ label_30D5::
     ld   a, d
     adc  a, $00
     ld   d, a
+.aEnd
 
-label_30E9::
+    ; Loop until all blocks of the room are copied to the BG
     dec  c
-    jr   nz, label_30A9
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    jp   label_6DEA
+    jr   nz, .loop
+
+    jpsb UpdateMinimapEntranceArrowAndReturn
 
 ; Load room blocks and tiles
 LoadRoom::
@@ -5905,18 +5944,18 @@ label_352D::
     inc  bc
     ret
 
-; Use the current map room to load the adequate bank
+; Use the current overworld room to load the adequate bank
 SetBankForRoom::
     ldh  a, [hMapRoom]
     ; If hMapRoom <= $80…
     cp   $80
     jr   nc, .moreThan80
     ; … a = $09
-    ld   a, $09
+    ld   a, BANK(OverworldMapHeadersFirstHalf)
     jr   .fi
 .moreThan80
     ; else a = $1A
-    ld   a, $1A
+    ld   a, BANK(OverworldMapHeadersSecondHalf)
 .fi
     ; Load the bank $09 or $1A
     ld   [MBC3SelectBank], a
@@ -6477,7 +6516,7 @@ SwitchToMapDataBank::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, .indoor
-    ld   a, $1A
+    ld   a, BANK(OverworldBaseMap)
     jr   .end
 .indoor
     ld   a, $08

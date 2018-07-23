@@ -18,6 +18,13 @@ callsw: macro
 endm
 
 ; Jump using SwitchBank
+jpsb: macro
+    ld   a, BANK(\1)
+    ld   [MBC3SelectBank], a
+    jp   \1
+endm
+
+; Jump using SwitchBank
 jpsw: macro
     ld   a, BANK(\1)
     call SwitchBank

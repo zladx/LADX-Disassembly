@@ -90,6 +90,7 @@ OverworldMapHeadersSecondHalf::
 incbin "data/maps/overworld_map_2.bin"
 incbin "data/palette_pointers/overworld_pointers.bin"
 include "code/bank1A/map_loading.asm"
+OverworldBaseMap::
 incbin "data/overworld_base_map.bin"
 include "code/bank1A/unknown.asm"
 

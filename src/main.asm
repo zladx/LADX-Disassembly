@@ -88,6 +88,7 @@ include "text/dialog.asm"
 section "bank1A",romx[$4000],bank[$1A]
 OverworldMapHeadersSecondHalf::
 incbin "data/maps/overworld_map_2.bin"
+incbin "data/palette_pointers/overworld_pointers.bin"
 include "code/bank1A/map_loading.asm"
 incbin "data/overworld_base_map.bin"
 include "code/bank1A/unknown.asm"

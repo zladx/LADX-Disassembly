@@ -171,13 +171,15 @@ hNeedsRenderingFrame:: ; FFD1
 hFFD2:: ; FFD2
   ds 1
 
+; FFD7 object being set on the map
+
 ; Unlabeled
 ds $C
 
 hRoomPaletteBank ; FFDF
   ds 1
 
-; This location has different uses
+; Scratch hram address with different uses
 hFFE0              ; FFE0
 hBGMapOffsetHigh:: ; FFE0
   ds 1

@@ -5368,7 +5368,7 @@ label_323A::
     jr   z, .label_3258
     ld   a, [bc]
     and  $0F
-    call FillTileMapWith
+    call FillRoomMapWithBlock
     ld   a, [bc]
     swap a
     and  $0F
@@ -5377,7 +5377,7 @@ label_323A::
 
 .label_3258
     ld   a, [bc]
-    call FillTileMapWith
+    call FillRoomMapWithBlock
 
 .CopyMapToTileMapLoop
     inc  bc ; tile address
@@ -5884,20 +5884,32 @@ MoveToNextLine_tileTypeNotA0::
     pop  af ;
     ld   d, a
 
-; fill map with e consecutive tiles of type d
-FillMapWithConsecutiveTiles::
+; Fill the active room map with many consecutive blocks
+; Inputs:
+;   d      block type
+;   e      count
+;   hl     destination address
+;   $FFD7  block data (including the direction)
+FillMapWithConsecutiveBlocks::
+    ; Copy block value to the active room map
     ld   a, d
     ldi  [hl], a
+
+    ; If the block direction is vertical…
     ldh  a, [$FFD7]
     and  $40
-    jr   z, FillMapWithConsecutiveTiles_continue
+    jr   z, .verticalEnd
+    ; … increment the target address to move to the next column
     ld   a, l
-    add  a, $0F ; mirror the tile ?
+    add  a, $0F
     ld   l, a
+.verticalEnd
 
-FillMapWithConsecutiveTiles_continue::
+    ; While the block count didn't reach 0, loop
     dec  e
-    jr   nz, FillMapWithConsecutiveTiles
+    jr   nz, FillMapWithConsecutiveBlocks
+
+    ; Cleanup
     inc  bc
     ret
 
@@ -6339,25 +6351,27 @@ data_37E4::
     db   $10
     db   $FF
 
-; Fill the tile map with whatever is in register a
-FillTileMapWith::
+; Fill all the active room map with the same block
+; Inputs:
+;   a   the block value to fill the map with
+FillRoomMapWithBlock::
     ldh  [$FFE9], a
     ld   d, TILES_PER_MAP
     ld   hl, wRoomMapBlocks
     ld   e, a
 
-FillTileMapWith_loop::
+.loop
     ld   a, l
     and  $0F
-    jr   z, FillTileMapWith_continue
+    jr   z, .continue
     cp   $0B ; TILES_PER_ROW+1
-    jr   nc, FillTileMapWith_continue
+    jr   nc, .continue
     ld   [hl], e
 
-FillTileMapWith_continue::
+.continue
     inc  hl
     dec  d
-    jr   nz, FillTileMapWith_loop
+    jr   nz, .loop
     ret
 
 label_37FE::

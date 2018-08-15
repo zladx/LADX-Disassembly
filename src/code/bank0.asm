@@ -4923,7 +4923,8 @@ CopyWord::
     ld   [de], a
     ret
 
-label_2FCD::
+; TODO: document better
+CopySomeDMGMapData::
     ld   a, [hl]
     ld   c, a
     ld   b, $00
@@ -4971,8 +4972,8 @@ label_2FFA::
     ld   [de], a
     ret
 
-; Copy an overworld block (2x2 tiles) to the BG map
-CopyOverworldBlockToBG::
+; Given an overworld block, retrieve its tiles and palettes (2x2), and copy them to the BG map
+WriteOverworldBlockToBG::
     ld   a, $02
     ld   [rSVBK], a
     ld   c, [hl]
@@ -4980,8 +4981,8 @@ CopyOverworldBlockToBG::
     ld   [rSVBK], a
     jr   doCopyBlockToBG
 
-; Copy an indoor block (2x2 tiles) to the BG map
-CopyIndoorBlockToBG::
+; Given an indoor block, retrieve its tiles and palettes (2x2), and copy them to the BG map
+WriteIndoorBlockToBG::
     ld   c, [hl]
 
 doCopyBlockToBG:
@@ -5103,10 +5104,13 @@ label_309B::
     push de
     push hl
     push bc
+
+    ; If not running on GBC…
     ldh  a, [hIsGBC]
     and  a
     jr   nz, .copyBlockToBG
-    call label_2FCD
+    ; …copy some data to vBGMap0
+    call CopySomeDMGMapData
     jr   .blockCopyEnd
 
     ; Copy the block tiles and palettes (2x2 tiles) to the BG map
@@ -5116,11 +5120,11 @@ label_309B::
     and  a
     jr   z, .isOverworld
     ; then copy tiles for indoor room
-    call CopyIndoorBlockToBG
+    call WriteIndoorBlockToBG
     jr   .blockCopyEnd
 .isOverworld
     ; else copy tiles for overworld room
-    call CopyOverworldBlockToBG
+    call WriteOverworldBlockToBG
 .blockCopyEnd
 
     pop  bc

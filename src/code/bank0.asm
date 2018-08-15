@@ -2282,7 +2282,7 @@ CheckStaticSwordCollision::
     ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   e, a
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, de
     ld   a, h
     cp   $D7
@@ -3305,7 +3305,7 @@ label_1F69::
     or   c
     ld   e, a
     ldh  [$FFD8], a
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, de
     ld   a, h
     cp   $D7
@@ -3733,14 +3733,14 @@ DoUpdateBGRegion::
     push bc
     push de
 
-    ; hl = wTileMap + $FFD9
+    ; hl = wRoomMapBlocks + $FFD9
     ldh  a, [$FFD9]
     ld   c, a
     ld   b, $00
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, bc
 
-    ; c = wTileMap[$FFD9]
+    ; c = wRoomMapBlocks[$FFD9]
     ld   b, $00
     ld   c, [hl]
 
@@ -5096,7 +5096,7 @@ label_309B::
     call SwitchToMapDataBank
     call SwitchBank
     ld   de, vBGMap0
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     ld   c, $80
 
 .loop
@@ -5872,7 +5872,7 @@ MoveToNextLine_tileTypeNotA0::
     dec  bc ; decrement tile address
     ld   a, [bc] ; load new tile type
     ld   e, a
-    ld   hl, wTileMap ; prepare tile map
+    ld   hl, wRoomMapBlocks ; prepare tile map
     add  hl, de ; add current tile offset
     ldh  a, [$FFD7]
     and  $0F
@@ -5936,7 +5936,7 @@ label_352D::
     dec  bc
     ld   a, [bc]
     ld   e, a
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, de
     pop  af
     ld   [hl], a
@@ -6092,7 +6092,7 @@ label_35EE::
     ld   a, [bc]
     ld   e, a
     ld   d, $00
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, de
     ret
 
@@ -6328,7 +6328,7 @@ data_37E4::
 FillTileMapWith::
     ldh  [$FFE9], a
     ld   d, TILES_PER_MAP
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     ld   e, a
 
 FillTileMapWith_loop::

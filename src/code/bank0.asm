@@ -5872,7 +5872,7 @@ MoveToNextLine_tileTypeNotA0::
     ld   d, $00
     ldh  a, [$FFD7]
     and  a
-    jr   z, label_352D
+    jr   z, CopyBlockToActiveRoomMap
     dec  bc ; decrement tile address
     ld   a, [bc] ; load new tile type
     ld   e, a
@@ -5901,6 +5901,7 @@ FillMapWithConsecutiveTiles_continue::
     inc  bc
     ret
 
+; On GBC, special case for some overworld blocks
 label_3500::
     cp   $04
     ret  z
@@ -5933,18 +5934,28 @@ label_3527::
     ld   a, $1A
 
 label_3529::
+    ; On GBC, copy some overworld blocks to ram bank 2
     call label_B2F
     ret
 
-label_352D::
+; Copy a block from the room data to the active room map
+; Inputs:
+;  bc        block object address + 1 ([room position, block value])
+;  stack[0]  block value
+CopyBlockToActiveRoomMap::
+    ; Load the position of the object in the room
     dec  bc
     ld   a, [bc]
     ld   e, a
     ld   hl, wRoomMapBlocks
     add  hl, de
+    ; Pop the block value from the stack
     pop  af
+    ; Copy the block to the active room map
     ld   [hl], a
+    ; On GBC, do some special-case handling
     call label_3500
+    ; Cleanup
     inc  bc
     ret
 

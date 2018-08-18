@@ -3780,46 +3780,70 @@ label_6DB0::
     db $10, $10, 8, 8, 4, 4, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0
     db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
-label_6DCA::
-    db $E, $9E, $D, $9E, $C, $9E
+; Background tile where the Dungeon entrance arrow should be displayed
+MinimapEntrancePosition::
+    dw vBGMap1 + $20E ; Dungeon 1
+    dw vBGMap1 + $20D ; Dungeon 2
+    dw vBGMap1 + $20C ; Dungeon 3
+    dw vBGMap1 + $20E ; Dungeon 4
+    dw vBGMap1 + $212 ; Dungeon 5
+    dw vBGMap1 + $20E ; Dungeon 6
+    dw vBGMap1 + $20C ; Dungeon 7
+    dw vBGMap1 + $20E ; Dungeon 8
+    dw $0    ; (unused)
+    dw $0    ; (unused)
+    dw $0    ; (unused)
+    dw $0    ; (unused)
+    dw $0    ; (unused)
+    dw $0    ; (unused)
+    dw $0    ; (unused)
+    dw vBGMap1 + $20D ; Color Dungeon
 
-label_6DD0::
-    db $E, $9E, $12, $9E, $E, $9E, $C, $9E, $E, $9E, 0, 0, 0, 0, 0, 0
-    db 0, 0, 0, 0, 0, 0, 0, 0, $D, $9E
-
-label_6DEA::
+; Called after tiles are copied to the BG when loading a map all at once
+UpdateMinimapEntranceArrowAndReturn::
+    ; If DebugTool2 is enabled, return immediately
     ld   a, [ROM_DebugTool2]
     and  a
     ret  nz
+
+    ; If IsIndoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_6E18
+    jr   z, .return
+    ; then a = (MapId == MAP_COLOR_DUNGEON ? $0F : MapId)
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_6DFF
+    jr   nz, .notColorDungeon
     ld   a, $0F
-    jr   label_6E03
+    jr   .endIf
 
-label_6DFF::
+.notColorDungeon
+    ; If MapId >= 8 (not a dungeon), return
     cp   $08
-    jr   nc, label_6E18
+    jr   nc, .return
+.endIf
 
-label_6E03::
+    ; hl = MinimapEntrancePosition[MapId]
     sla  a
     ld   e, a
     ld   d, $00
-    ld   hl, label_6DCA
+    ld   hl, MinimapEntrancePosition
     add  hl, de
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
+
+    ; Display the Minimap Arrow tile ($A3) at the target address
     ld   [hl], $A3
+
+    ; If IsSideScrolling…
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   z, label_6E18
+    jr   z, .return
+    ; … hide the arrow.
     ld   [hl], $7F
 
-label_6E18::
+.return
     ret
 
 include "code/intro.asm"

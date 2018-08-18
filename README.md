@@ -73,6 +73,12 @@ From there **the goal is to pick a function or a memory location, and understand
 
 The tool was initially developed by @devdri. @kemenaran is currently writing some improvement to this tools, so that it can read debug symbols (otherwise no functions are labelled), and label functions from within the explorer.
 
+## Resources
+
+- [Artemis251's Link's Awakening Cache](http://artemis251.fobby.net/zelda/index.php): ROM map, maps data format
+- [Xkeeper's Link's Awakening depot](xkeeper.net/hacking/linksawakening/): maps tilesets and save format infos
+- [LALE](https://github.com/Fatories/LALE) : level editor, notes on maps data format
+
 ## Contributors
 
 Thanks to these people for contributing:

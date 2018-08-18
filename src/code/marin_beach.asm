@@ -408,7 +408,7 @@ label_6505::
 
 ;
 ; Seagull animations and sounds
-; 
+;
 
 label_650A::
     db $40, 1, $40, $21

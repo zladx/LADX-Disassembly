@@ -276,7 +276,7 @@ RoomTransitionPrepareHandler::
     ld   a, [wRoomTransitionDirection]            ; $79FA: $FA $25 $C1
     ld   c, a                                     ; $79FD: $4F
     ld   b, $00                                   ; $79FE: $06 $00
-    
+
     ; If map in indoor…
     ld   a, [wIsIndoor]                           ; $7A00: $FA $A5 $DB
     and  a                                        ; $7A03: $A7
@@ -315,13 +315,13 @@ RoomTransitionPrepareHandler::
     ld   d, $00                                   ; $7A23: $16 $00
     ld   hl, WindFishEggMazeSequence              ; $7A25: $21 $DA $79
     add  hl, de                                   ; $7A28: $19
-    
+
     ; wEggMazeProgress += 1
     ld   a, [wEggMazeProgress]                    ; $7A29: $FA $AA $C5
     ld   e, a                                     ; $7A2C: $5F
     inc  a                                        ; $7A2D: $3C
     ld   [wEggMazeProgress], a                    ; $7A2E: $EA $AA $C5
-    
+
     ; If direction != hl[wEggMazeProgress]…
     add  hl, de                                   ; $7A31: $19
     ld   a, c                                     ; $7A32: $79
@@ -398,7 +398,7 @@ RoomTransitionPrepareHandler::
     ; … Link got lost in the Mysterious Woods
     ld   a, JINGLE_FOREST_LOST                    ; $7A78: $3E $1E
     ld   [wNextJingle], a                         ; $7A7A: $EA $69 $C1
-    
+
     ; a = $63
     ; hl = hMapRoom
     ld   a, $63                                   ; $7A7D: $3E $63
@@ -444,7 +444,7 @@ RoomTransitionPrepareHandler::
 
 .loadRoom
     call LoadRoom                                 ; $7AA5: $CD $F4 $30
-    
+
     ; If in Color Dungeon…
     ld   a, [wIsIndoor]                           ; $7AA8: $FA $A5 $DB
     and  a                                        ; $7AAB: $A7
@@ -457,7 +457,7 @@ RoomTransitionPrepareHandler::
     ; force update the background tiles
     ld   a, $01                                   ; $7AB4: $3E $01
     ldh  [hNeedsUpdatingBGTiles], a               ; $7AB6: $E0 $90
-    
+
     ; Copy some data
     ld   a, $02                                   ; $7AB8: $3E $02
     call label_9F5                                ; $7ABA: $CD $F5 $09
@@ -466,7 +466,7 @@ RoomTransitionPrepareHandler::
     call label_37FE                               ; $7ABD: $CD $FE $37
     call DrawLinkSprite                           ; $7AC0: $CD $2E $1D
     call ApplyLinkMotionState                     ; $7AC3: $CD $94 $17
-    
+
     ;
     ; Get the music track to apply later
     ;
@@ -563,7 +563,7 @@ IncrementRoomTransitionStateAndReturn::
 
 RoomTransitionLoadSprites::
     call LoadRoomSprites                          ; $7B3E: $CD $1E $0D
-    
+
     ; If $D6FA == 2…
     ld   a, [$D6FA]                               ; $7B41: $FA $FA $D6
     cp   $02                                      ; $7B44: $FE $02
@@ -710,11 +710,11 @@ RoomTransitionConfigureScrollTargets::
     and  $03                                      ; $7BDC: $E6 $03
     ld   [wBGOriginHigh], a                       ; $7BDE: $EA $2E $C1
 
-    ; Configure $C128
+    ; Configure wBGUpdateRegionTilesCount
     ld   hl, data_002_7B5F                        ; $7BE1: $21 $5F $7B
     add  hl, bc                                   ; $7BE4: $09
     ld   a, [hl]                                  ; $7BE5: $7E
-    ld   [$C128], a                               ; $7BE6: $EA $28 $C1
+    ld   [wBGUpdateRegionTilesCount], a                               ; $7BE6: $EA $28 $C1
 
     ; Set number of frames to elapse before reaching
     ; the mid-transition point
@@ -734,7 +734,7 @@ RoomTransitionConfigureScrollTargets::
 
 RoomTransitionFirstHalfHandler::
     ; Update BG Map
-    jp   UpdateSlidingBGMap                       ; $7C00: $C3 $09 $22
+    jp   UpdateBGRegion                       ; $7C00: $C3 $09 $22
 
 RoomTransitionSecondHalfHandler::
     ; The scroll increment has already been done earlier:

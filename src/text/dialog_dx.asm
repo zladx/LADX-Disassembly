@@ -1,4 +1,3 @@
-SECTION "Text at 09:668e", ROMX[$668e], BANK[$09]
 Dialog590::
 	db "Have you heard  "
 	db "of the Flying   "

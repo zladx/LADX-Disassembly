@@ -18,6 +18,13 @@ callsw: macro
 endm
 
 ; Jump using SwitchBank
+jpsb: macro
+    ld   a, BANK(\1)
+    ld   [MBC3SelectBank], a
+    jp   \1
+endm
+
+; Jump using SwitchBank
 jpsw: macro
     ld   a, BANK(\1)
     call SwitchBank
@@ -37,12 +44,12 @@ endm
 ; so these are encoded as data bytes using a macro to ensure exact
 ; reproduction of the original ROM.
 ld_long: MACRO
-    IF STRLWR("\1") == "a" 
+    IF STRLWR("\1") == "a"
         ; ld a, [$ff40]
         db $FA
         dw \2
-    ELSE 
-        IF STRLWR("\2") == "a" 
+    ELSE
+        IF STRLWR("\2") == "a"
             ; ld [$ff40], a
             db $EA
             dw \1

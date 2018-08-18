@@ -171,7 +171,26 @@ hNeedsRenderingFrame:: ; FFD1
 hFFD2:: ; FFD2
   ds 1
 
-  ds $14
+; FFD7 object being set on the map
+
+; Unlabeled
+ds $C
+
+hRoomPaletteBank ; FFDF
+  ds 1
+
+; Scratch hram address with different uses
+hFFE0              ; FFE0
+hBGMapOffsetHigh:: ; FFE0
+  ds 1
+
+; This location has different uses
+hFFE1              ; FFE1
+hBGMapOffsetLow::  ; FFE1
+  ds 1
+
+; Unlabeled
+ds 5
 
 hFrameCounter:: ; FFE7
   ; wraps around 00-FF
@@ -188,8 +207,8 @@ hFFE9:: ; FFE9
 ; Entity type?
 ; 0-4: unknown
 ; 5: do nothing
-; 6-9: unknown   
-; See wEntitiesTypeTable 
+; 6-9: unknown
+; See wEntitiesTypeTable
 hEntityType:: ; FFEA
   ds 1
 

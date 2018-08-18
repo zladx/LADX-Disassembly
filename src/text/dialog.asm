@@ -1,4 +1,3 @@
-SECTION "Text at 14:5934", ROMX[$5934], BANK[$14]
 Dialog0::
 	db "Whoa, boy! Where"
 	db "ya off to in    "

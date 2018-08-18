@@ -27,7 +27,7 @@ label_002_41D0::
     ld   [hl], a                                  ; $41F2: $77
     ld   hl, $C3B0                                ; $41F3: $21 $B0 $C3
     add  hl, de                                   ; $41F6: $19
-    ldh  a, [$FFDF]                               ; $41F7: $F0 $DF
+    ldh  a, [hRoomPaletteBank]                               ; $41F7: $F0 $DF
     ld   [hl], a                                  ; $41F9: $77
 
 jr_002_41FA:
@@ -1553,7 +1553,7 @@ label_002_4C92::
     ldh  a, [$FFD8]                               ; $4C92: $F0 $D8
     ld   e, a                                     ; $4C94: $5F
     ld   d, $00                                   ; $4C95: $16 $00
-    ld   hl, wTileMap                             ; $4C97: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $4C97: $21 $11 $D7
     add  hl, de                                   ; $4C9A: $19
     ld   [hl], $CC                                ; $4C9B: $36 $CC
     ld   a, $82                                   ; $4C9D: $3E $82
@@ -1672,7 +1672,7 @@ func_002_4D20::
     or   c                                        ; $4D54: $B1
     ld   e, a                                     ; $4D55: $5F
     ldh  [$FFD8], a                               ; $4D56: $E0 $D8
-    ld   hl, wTileMap                             ; $4D58: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $4D58: $21 $11 $D7
     add  hl, de                                   ; $4D5B: $19
     ld   a, h                                     ; $4D5C: $7C
     cp   $D7                                      ; $4D5D: $FE $D7
@@ -1734,7 +1734,7 @@ label_002_4D97::
     or   e                                        ; $4DA6: $B3
     ld   e, a                                     ; $4DA7: $5F
     ld   d, $00                                   ; $4DA8: $16 $00
-    ld   hl, wTileMap                             ; $4DAA: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $4DAA: $21 $11 $D7
     add  hl, de                                   ; $4DAD: $19
     ld   [hl], $AE                                ; $4DAE: $36 $AE
     call label_2887                               ; $4DB0: $CD $87 $28
@@ -3942,7 +3942,7 @@ Data_002_59D4::
     db   $00, $00, $00, $00, $01, $01, $10, $10, $01, $01, $10, $10, $43, $8C, $09, $0B
     db   $43, $8C, $09, $0B, $44, $08, $0A, $0C, $44, $08, $0A, $0C, $04, $08, $02, $01
     db   $04, $08, $02, $01, $04, $F8, $08, $FF, $01, $F8, $08, $FF, $01, $F8, $08, $04
-    db   $01, $02, $08, $04, $01                  
+    db   $01, $02, $08, $04, $01
 
     ld   [bc], a                                  ; $5A79: $02
     ld   [$001E], sp                              ; $5A7A: $08 $1E $00
@@ -4103,7 +4103,7 @@ jr_002_5B4C:
     ld   hl, $5A50                                ; $5B58: $21 $50 $5A
     add  hl, bc                                   ; $5B5B: $09
     ld   a, [hl]                                  ; $5B5C: $7E
-    ld   hl, wTileMap                             ; $5B5D: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $5B5D: $21 $11 $D7
     add  hl, de                                   ; $5B60: $19
     ld   [hl], a                                  ; $5B61: $77
     ldh  a, [$FFE5]                               ; $5B62: $F0 $E5
@@ -4407,7 +4407,7 @@ jr_002_5CFE:
     ld   hl, $5BFC                                ; $5D0A: $21 $FC $5B
     add  hl, bc                                   ; $5D0D: $09
     ld   a, [hl]                                  ; $5D0E: $7E
-    ld   hl, wTileMap                             ; $5D0F: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $5D0F: $21 $11 $D7
     add  hl, de                                   ; $5D12: $19
     ld   [hl], a                                  ; $5D13: $77
     ldh  a, [$FFE5]                               ; $5D14: $F0 $E5
@@ -4753,7 +4753,7 @@ jr_002_5EED:
     or   e                                        ; $5EFC: $B3
     ld   e, a                                     ; $5EFD: $5F
     ld   d, $00                                   ; $5EFE: $16 $00
-    ld   hl, wTileMap                             ; $5F00: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $5F00: $21 $11 $D7
     add  hl, de                                   ; $5F03: $19
     ld   a, $A0                                   ; $5F04: $3E $A0
     ld   [hl], a                                  ; $5F06: $77
@@ -4840,7 +4840,7 @@ func_002_5F5C::
     or   e                                        ; $5F79: $B3
     ld   e, a                                     ; $5F7A: $5F
     ld   d, $00                                   ; $5F7B: $16 $00
-    ld   hl, wTileMap                             ; $5F7D: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $5F7D: $21 $11 $D7
     add  hl, de                                   ; $5F80: $19
     ld   a, $BE                                   ; $5F81: $3E $BE
     ld   [hl], a                                  ; $5F83: $77
@@ -5127,7 +5127,7 @@ func_002_60E0::
     call ClampItemCount                           ; $60EC: $CD $D8 $60
     ld   de, wArrowCount                          ; $60EF: $11 $45 $DB
     call ClampItemCount                           ; $60F2: $CD $D8 $60
-    
+
     ld   a, [wLinkMotionState]                    ; $60F5: $FA $1C $C1
     cp   LINK_MOTION_JUMPING                      ; $60F8: $FE $02
     ret  nc                                       ; $60FA: $D0
@@ -5783,7 +5783,7 @@ Data_002_6478::
     db   $7D, $7D, $EF, $EF, $ED, $EF, $EF, $EF, $7D, $7D, $7D, $EF, $EF, $EF, $EF, $7D
     db   $7D, $7D, $7D, $EF, $ED, $EF, $ED, $7D, $7D, $7D, $7D, $EF, $EF, $ED, $EF, $7D
     db   $7D, $00, $02, $03, $07, $05, $0A, $0B, $0F, $04, $08, $09, $0E, $06, $0C, $0D
-    db   $01                                      
+    db   $01
 
 IsMapRoomE8::
     ldh  a, [hMapRoom]                           ; $6709: $F0 $F6
@@ -6754,7 +6754,7 @@ func_002_6C2F::
     or   e                                        ; $6C4A: $B3
     ld   e, a                                     ; $6C4B: $5F
     ld   d, $00                                   ; $6C4C: $16 $00
-    ld   hl, wTileMap                             ; $6C4E: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $6C4E: $21 $11 $D7
     ld   a, h                                     ; $6C51: $7C
     add  hl, de                                   ; $6C52: $19
     ld   h, a                                     ; $6C53: $67
@@ -6820,7 +6820,7 @@ CheckPositionForMapTransition::
     ; If Link is on the top of the ladder…
     ldh  a, [hLinkPositionY]                      ; $6C92: $F0 $99
     cp   $2C                                      ; $6C94: $FE $2C
-    
+
     ; … exit the map.
     jp   c, ApplyMapFadeOutTransition             ; $6C96: $DA $7D $0C
 .kanaletEnd
@@ -6935,11 +6935,11 @@ CheckPositionForMapTransition::
     ; hLinkPositionX = hLinkFinalPositionX
     ldh  a, [hLinkFinalPositionX]                 ; $6D13: $F0 $9F
     ldh  [hLinkPositionX], a                      ; $6D15: $E0 $98
-    
+
     ; Clear hLinkPositionXIncrement
     xor  a                                        ; $6D17: $AF
     ldh  [hLinkPositionXIncrement], a             ; $6D18: $E0 $9A
-    
+
     ; If in a side-scrolling room…
     ldh  a, [hIsSideScrolling]                    ; $6D1A: $F0 $F9
     and  a                                        ; $6D1C: $A7
@@ -6990,7 +6990,7 @@ CheckPositionForMapTransition::
 .manualEntryPointsEnd
 
     call CopyLinkFinalPositionToPosition                                ; $6D5C: $CD $BE $0C
-    
+
     ld   a, [$C181]                               ; $6D5F: $FA $81 $C1
     cp   $50                                      ; $6D62: $FE $50
     jp   z, clearIncrementAndReturn               ; $6D64: $CA $0C $6E
@@ -7096,18 +7096,18 @@ CheckPositionForMapTransition::
     ; Set the direction
     ld   a, e                                     ; $6DE4: $7B
     ld   [wRoomTransitionDirection], a            ; $6DE5: $EA $25 $C1
-    
+
     ; Set the initial state
     ld   a, ROOM_TRANSITION_LOAD_ROOM             ; $6DE8: $3E $01
     ld   [wRoomTransitionState], a                ; $6DEA: $EA $24 $C1
-    
+
     ; Clear some state before the transition
     xor  a                                        ; $6DED: $AF
     ld   [$C14B], a                               ; $6DEE: $EA $4B $C1
     ld   [wIsUsingSpinAttack], a                  ; $6DF1: $EA $21 $C1
     ld   [$C14A], a                               ; $6DF4: $EA $4A $C1
     ld   [$C188], a                               ; $6DF7: $EA $88 $C1
-    
+
     ; If Link's Y position >= $88…
     ldh  a, [hLinkPositionY]                      ; $6DFA: $F0 $99
     cp   $88                                      ; $6DFC: $FE $88
@@ -7321,7 +7321,7 @@ jr_002_6F25:
     ld   e, a                                     ; $6F4A: $5F
     ldh  [hFFE9], a                               ; $6F4B: $E0 $E9
     ld   d, $00                                   ; $6F4D: $16 $00
-    ld   hl, wTileMap                             ; $6F4F: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $6F4F: $21 $11 $D7
     ld   a, h                                     ; $6F52: $7C
     add  hl, de                                   ; $6F53: $19
     ld   h, a                                     ; $6F54: $67
@@ -8298,7 +8298,7 @@ func_002_7512::
     ld   e, a                                     ; $7524: $5F
     ldh  [hLinkRoomPosition], a                               ; $7525: $E0 $FA
     ld   d, $00                                   ; $7527: $16 $00
-    ld   hl, wTileMap                             ; $7529: $21 $11 $D7
+    ld   hl, wRoomMapBlocks                       ; $7529: $21 $11 $D7
     ld   a, h                                     ; $752C: $7C
     add  hl, de                                   ; $752D: $19
     ld   h, a                                     ; $752E: $67

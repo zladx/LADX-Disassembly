@@ -31,11 +31,12 @@ endif
 obj = src/main.o
 asm_files = $(shell find src     -type f -name '*.asm')
 gfx_files = $(shell find src/gfx -type f -name '*.png')
+bin_files = $(shell find src     -type f -name '*.bin')
 
 %.2bpp: %.png
 	$(2BPP) -o $@ $<
 
-src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) Zelda.gbc
+src/main.o: $(asm_files) $(gfx_files:.png=.2bpp) $(bin_files) Zelda.gbc
 
 .asm.o:
 	$(ASM) -i src/ -o $@ $<

@@ -84,8 +84,9 @@ wBGUpdateRegionOriginLow:: ; C127
   ; to update during a room transition (high byte)
   ds 1
 
-; Unlabeled
-ds 1
+wBGUpdateRegionTilesCount ; C128
+  ; Number of tiles of a background piece (row or column) to be updated in a single batch
+  ds 1
 
 wRoomTransitionFramesBeforeMidScreen:: ; C129
   ; Number of frames remaining before reaching the mid-screen transition point
@@ -554,7 +555,7 @@ wForceFileSelectionScreenMusic:: ; D47B
 
 wActivePowerUp:: ; D47C
   ; 0:  No power-up
-  ; 1:  Piece of Power 
+  ; 1:  Piece of Power
   ; 2:  Guardian Accorn
   ds 1
 
@@ -603,26 +604,27 @@ wTileMapToLoad:: ; D6FE
 wBGMapToLoad:: ; D6FF
   ds 1
 
-wD700 equ $D700
-  ds $11
+; Memory region reserved for map blocks of the active room.
+; Actual blocks are surrounded by FF values (see wRoomMapBlocks)
+;
+; When loading a new room, room data is read and decoded into this
+; area.
+wRoomMapBlocksArea:: ; D700
+  ds $100
 
-wTileMap:: ; D711
-  ds 1
-
-; Unlabeled
-wD712 equ $D712
-  ds $EE
+; Start of the actual map blocks for the active room (ignoring the surrounding FF values)
+wRoomMapBlocks equ $D711
 
 ; Minimap Tile
 ; Values:
 ;   0:     not discovered yet
 ;   non-0: various statuses
 wMinimapTiles:: ; D800
-  ds $ff
+  ds $100
 
 ; Unlabeled
-wD900 equ $D900
-  ds $201
+wD900:: ; D900
+  ds $200
 
 wAButtonSlot:: ; DB00
   ds 1

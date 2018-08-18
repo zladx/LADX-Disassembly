@@ -201,10 +201,10 @@ label_91D::
     push af
 
 label_92F::
-    ld   a, $1A
+    ld   a, BANK(func_01A_6576)
     ld   [MBC3SelectBank], a
-    call $6576
-    ldh  a, [$FFDF]
+    call func_01A_6576
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ld   hl, $DC91
     ld   a, [$DC90]
@@ -263,7 +263,7 @@ label_983::
     ld   a, $1A
     ld   [MBC3SelectBank], a
     call $6710
-    ldh  a, [$FFDF]
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
     ld   h, a
@@ -391,7 +391,7 @@ Copy100BytesFromBankAtA::
     ld   [rHDMA4], a
     ld   a, $0F
     ld   [rHDMA5], a
-    
+
     ; Fallthrough to switch back to the bank in h
 SelectBankAtHAndReturn::
     ld   a, h
@@ -909,7 +909,7 @@ label_D15::
 LoadRoomSprites::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    
+
     ; If is indoor…
     ld   a, [wIsIndoor]
     and  a
@@ -1327,7 +1327,7 @@ WorldDefaultHandler::
     jp   ApplyMapFadeOutTransition
 
 .normalFlow
-    
+
     ; If $DBC7 > 0, decrement it
     ld   hl, $DBC7
     ld   a, [hl]
@@ -1373,10 +1373,10 @@ WorldDefaultHandler::
     ld   a, $19
     call SwitchBank
     call $7A9A
-    
+
     call label_398D
     callsw label_002_5487
-    
+
     ld   hl, wRequestDestination
     ldh  a, [hFrameCounter]
     and  $03
@@ -2282,7 +2282,7 @@ CheckStaticSwordCollision::
     ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   e, a
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, de
     ld   a, h
     cp   $D7
@@ -2306,8 +2306,8 @@ CheckStaticSwordCollision::
     cp   $90
     jp   nc, CheckItemsSwordCollision
 
-    cp   $01           
-    jp   z, CheckItemsSwordCollision 
+    cp   $01
+    jp   z, CheckItemsSwordCollision
 
     ld   c, $00
     ld   a, [wIsIndoor]
@@ -3305,7 +3305,7 @@ label_1F69::
     or   c
     ld   e, a
     ldh  [$FFD8], a
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, de
     ld   a, h
     cp   $D7
@@ -3669,26 +3669,31 @@ label_21FB::
     ld   [hl], a
     ret
 
-data_2205::
-    db   $10, $10, $01, $01
+; Increment the BG map offset by this amount during room transition,
+; depending on the transition direction.
+BGRegionIncrement::
+.right  db $10
+.left   db $10
+.top    db $01
+.bottom db $01
 
-; Update BG map during room transition
-UpdateSlidingBGMap::
+; Update a region (row or column) of the BG map during room transition
+UpdateBGRegion::
     ; Switch to Map Data bank
     ld   a, $08
     ld   [MBC3SelectBank], a
-    call DoUpdateSlidingBGMap
+    call DoUpdateBGRegion
     ; Reload saved bank and return
     jp   ReloadSavedBank
 
-label_2214::
+IncrementBGMapSourceAndDestination_Vertical::
     ld   a, [wBGUpdateRegionOriginLow]
     and  $20
-    jr   z, label_221D
+    jr   z, .noColumnEnd
     inc  hl
     inc  hl
+.noColumnEnd
 
-label_221D::
     ld   a, [hli]
     ld   [bc], a
     inc  bc
@@ -3697,13 +3702,13 @@ label_221D::
     inc  bc
     ret
 
-label_2224::
+IncrementBGMapSourceAndDestination_Horizontal::
     ld   a, [wBGUpdateRegionOriginLow]
     and  $01
-    jr   z, label_222C
+    jr   z, .noColumnEnd
     inc  hl
+.noColumnEnd
 
-label_222C::
     ld   a, [hli]
     ld   [bc], a
     inc  hl
@@ -3713,8 +3718,8 @@ label_222C::
     inc  bc
     ret
 
-; Load BG data during map transition
-DoUpdateSlidingBGMap::
+; Update a region (row or column) of the BG map during room transition
+DoUpdateBGRegion::
     ; Configures an async data request to copy background tilemap
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -3728,14 +3733,14 @@ DoUpdateSlidingBGMap::
     push bc
     push de
 
-    ; hl = wTileMap + $FFD9
+    ; hl = wRoomMapBlocks + $FFD9
     ldh  a, [$FFD9]
     ld   c, a
     ld   b, $00
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, bc
-    
-    ; c = wTileMap[$FFD9]
+
+    ; c = wRoomMapBlocks[$FFD9]
     ld   b, $00
     ld   c, [hl]
 
@@ -3761,53 +3766,78 @@ DoUpdateSlidingBGMap::
     rl   b
     sla  c
     rl   b
-    
+
+    ;
+    ; Map base address selection
+    ;
+
+    ; If IsIndoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, .label_2286
+    jr   z, .baseAddress_isOverworld
+    ; hl = $4000.
     ld   hl, $4000
+    ; if IsGBC…
     ldh  a, [hIsGBC]
     and  a
     jr   z, .label_2299
+    ; … hl = (MapId == MAP_COLOR_DUNGEON ? $4760: $43B0)
     ld   hl, $43B0
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, .label_2291
+    jr   nz, .mapBaseAddressDone
     ld   hl, $4760
-    jr   .label_2291
+    jr   .mapBaseAddressDone
 
-.label_2286
-    ld   hl, $6749
+.baseAddress_isOverworld
+    ; hl = (hIsGBC ? $6B1D : OverworldBaseMap)
+    ld   hl, OverworldBaseMap
     ldh  a, [hIsGBC]
     and  a
     jr   z, .label_2299
     ld   hl, $6B1D
 
-.label_2291
+.mapBaseAddressDone
+
+    ;
+    ; BG map offset selection
+    ;
+
+    ; Set the palette bank in hRoomPaletteBank,
+    ; and the target BG map offset in FFE0-FFE1
     ld   a, $1A
     ld   [MBC3SelectBank], a
     call $6576
 
 .label_2299
-    call label_3905
+    ; Switch to the bank containing the BG map
+    call SwitchToMapDataBank
+    ; hl = base map address + BG map offset
     add  hl, bc
     pop  de
     pop  bc
+
+    ; If the Room transition is vertical…
     ld   a, [wRoomTransitionDirection]
     and  $02
-    jr   z, .label_22D3
-    call label_2214
+    jr   z, .horizontalRoomTransition
+    ; Increment the source and target destination
+    call IncrementBGMapSourceAndDestination_Vertical
+
+    ; If IsGBC, load BG palette data
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .label_22D1
+    jr   z, .verticalIncrementEnd
     push bc
     push de
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $49D9
-    ldh  a, [$FFDF]
+    ; Select palettes bank
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    call label_2214
+    ; Increment again the source and target destination
+    call IncrementBGMapSourceAndDestination_Vertical
     ld   a, b
     ldh  [$FFE2], a
     ld   a, c
@@ -3816,26 +3846,30 @@ DoUpdateSlidingBGMap::
     ldh  [$FFE4], a
     ld   a, e
     ldh  [$FFE5], a
-    call label_3905
+    ; Restore state
+    call SwitchToMapDataBank
     pop  de
     pop  bc
 
-.label_22D1
-    jr   .label_22FE
+.verticalIncrementEnd
+    jr   .incrementEnd
 
-.label_22D3
-    call label_2224
+.horizontalRoomTransition
+    call IncrementBGMapSourceAndDestination_Horizontal
+    ; If IsGBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .label_22FE
+    jr   z, .incrementEnd
+    ; Load BG palette data
     push bc
     push de
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $49D9
-    ldh  a, [$FFDF]
+    ; Select palettes bank
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    call label_2224
+    call IncrementBGMapSourceAndDestination_Horizontal
     ld   a, b
     ldh  [$FFE2], a
     ld   a, c
@@ -3844,25 +3878,35 @@ DoUpdateSlidingBGMap::
     ldh  [$FFE4], a
     ld   a, e
     ldh  [$FFE5], a
-    call label_3905
+    ; Cleanup
+    call SwitchToMapDataBank
     pop  de
     pop  bc
 
-.label_22FE
+.incrementEnd
+
     push bc
+    ; Increment BG destination address
+    ; (by a column or by a row)
     ld   a, [wRoomTransitionDirection]
     ld   c, a
     ld   b, $00
-    ld   hl, data_2205
+    ld   hl, BGRegionIncrement
     add  hl, bc
     ldh  a, [$FFD9]
     add  a, [hl]
     ldh  [$FFD9], a
     pop  bc
-    ld   a, [$C128]
+
+    ; Decrement loop counter
+    ld   a, [wBGUpdateRegionTilesCount]
     dec  a
-    ld   [$C128], a
+    ld   [wBGUpdateRegionTilesCount], a
+
+    ; Loop until BG map data for the whole region is copied
     jp   nz, .loop
+
+    ; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
     ld   a, $20
     ld   [MBC3SelectBank], a
     jp   $5570
@@ -4870,7 +4914,8 @@ label_2FAD::
 label_2FC6::
     ret
 
-label_2FC7::
+; Copy two bytes from hl to de
+CopyWord::
     ld   a, [hli]
     ld   [de], a
     inc  de
@@ -4878,7 +4923,8 @@ label_2FC7::
     ld   [de], a
     ret
 
-label_2FCD::
+; TODO: document better
+CopySomeDMGMapData::
     ld   a, [hl]
     ld   c, a
     ld   b, $00
@@ -4926,54 +4972,70 @@ label_2FFA::
     ld   [de], a
     ret
 
-label_300E::
+; Given an overworld block, retrieve its tiles and palettes (2x2), and copy them to the BG map
+WriteOverworldBlockToBG::
     ld   a, $02
     ld   [rSVBK], a
     ld   c, [hl]
     xor  a
     ld   [rSVBK], a
-    jr   label_3019
+    jr   doCopyBlockToBG
 
-label_3018::
+; Given an indoor block, retrieve its tiles and palettes (2x2), and copy them to the BG map
+WriteIndoorBlockToBG::
     ld   c, [hl]
 
-label_3019::
+doCopyBlockToBG:
     ld   b, $00
     sla  c
     rl   b
     sla  c
     rl   b
-    ld   a, $1A
+
+    ld   a, BANK(func_01A_6576)
     ld   [MBC3SelectBank], a
-    call $6576
-    call label_3905
+    call func_01A_6576
+
+    call SwitchToMapDataBank
+
+    ;
+    ; Select the base address for the source tile map
+    ;
+
+    ; If IsIndoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_304C
+    jr   z, .isOverworld
+    ; … set the default base address
     ld   hl, $43B0
+    ; If MapID == MAP_COLOR_DUNGEON, hl = $4760
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, label_3047
+    jr   z, .hasSpecialBaseAddress
+    ; If MapId == MAP_HOUSE && MapRoom == $B5, hl = $4760
     cp   MAP_HOUSE
-    jr   nz, label_304F
+    jr   nz, .baseAddressDone
     ldh  a, [hMapRoom]
     cp   $B5
-    jr   nz, label_304F
+    jr   nz, .baseAddressDone
 
-label_3047::
+.hasSpecialBaseAddress
     ld   hl, $4760
-    jr   label_304F
+    jr   .baseAddressDone
 
-label_304C::
+.isOverworld
     ld   hl, $6B1D
+.baseAddressDone
 
-label_304F::
+    ; Copy tile numbers for tiles on the upper row
     push de
     add  hl, bc
-    call label_2FC7
+    call CopyWord
     pop  de
+
+    ; Copy palettes from WRAM1 for tiles on the upper row
     push hl
-    ldh  a, [$FFDF]
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
     ld   h, a
@@ -4981,25 +5043,35 @@ label_304F::
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
-    call label_2FC7
+    call CopyWord
+
+    ; Restore RAM and ROM banks
     xor  a
     ld   [rVBK], a
-    call label_3905
+    call SwitchToMapDataBank
+
+    ; Update palette offset
     ld   a, h
     ldh  [$FFE0], a
     ld   a, l
     ldh  [$FFE1], a
     pop  hl
+
+    ; Move BG target down by one row
     ld   a, e
     add  a, $1F
     ld   e, a
     ld   a, d
     adc  a, $00
     ld   d, a
+
+    ; Copy tile numbers for tiles on the lower row
     push de
-    call label_2FC7
+    call CopyWord
     pop  de
-    ldh  a, [$FFDF]
+
+    ; Copy palettes from WRAM1 for tiles on the lower row
+    ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ldh  a, [$FFE0]
     ld   h, a
@@ -5007,60 +5079,75 @@ label_304F::
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
-    call label_2FC7
+    call CopyWord
+
+    ; Restore RAM and ROM banks
     xor  a
     ld   [rVBK], a
-    call label_3905
+    call SwitchToMapDataBank
+
     ret
 
+; Copy the tile map of a room to BG video memory.
+;
+; This is used when loading a map in one go (instead
+; of having a sliding screen transition.)
+; (called by LoadMapData)
 label_309B::
-    call label_3905
+    call SwitchToMapDataBank
     call SwitchBank
     ld   de, vBGMap0
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     ld   c, $80
 
-label_30A9::
+.loop
     push de
     push hl
     push bc
+
+    ; If not running on GBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_30B6
-    call label_2FCD
-    jr   label_30C4
+    jr   nz, .copyBlockToBG
+    ; …copy some data to vBGMap0
+    call CopySomeDMGMapData
+    jr   .blockCopyEnd
 
-label_30B6::
+    ; Copy the block tiles and palettes (2x2 tiles) to the BG map
+.copyBlockToBG
+    ; If IsIndoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_30C1
-    call label_3018
-    jr   label_30C4
+    jr   z, .isOverworld
+    ; then copy tiles for indoor room
+    call WriteIndoorBlockToBG
+    jr   .blockCopyEnd
+.isOverworld
+    ; else copy tiles for overworld room
+    call WriteOverworldBlockToBG
+.blockCopyEnd
 
-label_30C1::
-    call label_300E
-
-label_30C4::
     pop  bc
     pop  hl
     pop  de
+
     inc  hl
     ld   a, l
     and  $0F
     cp   $0B
-    jr   nz, label_30D5
+    jr   nz, .lEnd
     ld   a, l
     and  $F0
     add  a, $11
     ld   l, a
+.lEnd
 
-label_30D5::
     ld   a, e
     add  a, $02
     ld   e, a
     and  $1F
     cp   $14
-    jr   nz, label_30E9
+    jr   nz, .aEnd
     ld   a, e
     and  $E0
     add  a, $40
@@ -5068,13 +5155,13 @@ label_30D5::
     ld   a, d
     adc  a, $00
     ld   d, a
+.aEnd
 
-label_30E9::
+    ; Loop until all blocks of the room are copied to the BG
     dec  c
-    jr   nz, label_30A9
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    jp   label_6DEA
+    jr   nz, .loop
+
+    jpsb UpdateMinimapEntranceArrowAndReturn
 
 ; Load room blocks and tiles
 LoadRoom::
@@ -5281,7 +5368,7 @@ label_323A::
     jr   z, .label_3258
     ld   a, [bc]
     and  $0F
-    call FillTileMapWith
+    call FillRoomMapWithBlock
     ld   a, [bc]
     swap a
     and  $0F
@@ -5290,7 +5377,7 @@ label_323A::
 
 .label_3258
     ld   a, [bc]
-    call FillTileMapWith
+    call FillRoomMapWithBlock
 
 .CopyMapToTileMapLoop
     inc  bc ; tile address
@@ -5432,7 +5519,7 @@ func_32A9::
 ._F2 dw $368A
 ._F3 dw $369D
 ._F4 dw $36B2
-._F5 dw $36EA 
+._F5 dw $36EA
 ._F6 dw $36FE
 ._F7 dw $3712
 ._F8 dw $3726
@@ -5785,11 +5872,11 @@ MoveToNextLine_tileTypeNotA0::
     ld   d, $00
     ldh  a, [$FFD7]
     and  a
-    jr   z, label_352D
+    jr   z, CopyBlockToActiveRoomMap
     dec  bc ; decrement tile address
     ld   a, [bc] ; load new tile type
     ld   e, a
-    ld   hl, wTileMap ; prepare tile map
+    ld   hl, wRoomMapBlocks ; prepare tile map
     add  hl, de ; add current tile offset
     ldh  a, [$FFD7]
     and  $0F
@@ -5797,23 +5884,36 @@ MoveToNextLine_tileTypeNotA0::
     pop  af ;
     ld   d, a
 
-; fill map with e consecutive tiles of type d
-FillMapWithConsecutiveTiles::
+; Fill the active room map with many consecutive blocks
+; Inputs:
+;   d      block type
+;   e      count
+;   hl     destination address
+;   $FFD7  block data (including the direction)
+FillMapWithConsecutiveBlocks::
+    ; Copy block value to the active room map
     ld   a, d
     ldi  [hl], a
+
+    ; If the block direction is vertical…
     ldh  a, [$FFD7]
     and  $40
-    jr   z, FillMapWithConsecutiveTiles_continue
+    jr   z, .verticalEnd
+    ; … increment the target address to move to the next column
     ld   a, l
-    add  a, $0F ; mirror the tile ?
+    add  a, $0F
     ld   l, a
+.verticalEnd
 
-FillMapWithConsecutiveTiles_continue::
+    ; While the block count didn't reach 0, loop
     dec  e
-    jr   nz, FillMapWithConsecutiveTiles
+    jr   nz, FillMapWithConsecutiveBlocks
+
+    ; Cleanup
     inc  bc
     ret
 
+; On GBC, special case for some overworld blocks
 label_3500::
     cp   $04
     ret  z
@@ -5846,33 +5946,43 @@ label_3527::
     ld   a, $1A
 
 label_3529::
+    ; On GBC, copy some overworld blocks to ram bank 2
     call label_B2F
     ret
 
-label_352D::
+; Copy a block from the room data to the active room map
+; Inputs:
+;  bc        block object address + 1 ([room position, block value])
+;  stack[0]  block value
+CopyBlockToActiveRoomMap::
+    ; Load the position of the object in the room
     dec  bc
     ld   a, [bc]
     ld   e, a
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, de
+    ; Pop the block value from the stack
     pop  af
+    ; Copy the block to the active room map
     ld   [hl], a
+    ; On GBC, do some special-case handling
     call label_3500
+    ; Cleanup
     inc  bc
     ret
 
-; Use the current map room to load the adequate bank
+; Use the current overworld room to load the adequate bank
 SetBankForRoom::
     ldh  a, [hMapRoom]
     ; If hMapRoom <= $80…
     cp   $80
     jr   nc, .moreThan80
     ; … a = $09
-    ld   a, $09
+    ld   a, BANK(OverworldMapHeadersFirstHalf)
     jr   .fi
 .moreThan80
     ; else a = $1A
-    ld   a, $1A
+    ld   a, BANK(OverworldMapHeadersSecondHalf)
 .fi
     ; Load the bank $09 or $1A
     ld   [MBC3SelectBank], a
@@ -6009,7 +6119,7 @@ label_35EE::
     ld   a, [bc]
     ld   e, a
     ld   d, $00
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     add  hl, de
     ret
 
@@ -6205,7 +6315,7 @@ IndoorEntranceHandler::
 
     ; … and MapId >= $06…
     cp   MAP_EAGLES_TOWER
-    jr   c, .end  
+    jr   c, .end
 
     ; … and MapRoom == $D3…
     ldh  a, [hMapRoom]
@@ -6241,25 +6351,27 @@ data_37E4::
     db   $10
     db   $FF
 
-; Fill the tile map with whatever is in register a
-FillTileMapWith::
+; Fill all the active room map with the same block
+; Inputs:
+;   a   the block value to fill the map with
+FillRoomMapWithBlock::
     ldh  [$FFE9], a
     ld   d, TILES_PER_MAP
-    ld   hl, wTileMap
+    ld   hl, wRoomMapBlocks
     ld   e, a
 
-FillTileMapWith_loop::
+.loop
     ld   a, l
     and  $0F
-    jr   z, FillTileMapWith_continue
+    jr   z, .continue
     cp   $0B ; TILES_PER_ROW+1
-    jr   nc, FillTileMapWith_continue
+    jr   nc, .continue
     ld   [hl], e
 
-FillTileMapWith_continue::
+.continue
     inc  hl
     dec  d
-    jr   nz, FillTileMapWith_loop
+    jr   nz, .loop
     ret
 
 label_37FE::
@@ -6428,17 +6540,17 @@ label_38EA::
     call $588B
     ret
 
-label_3905::
+SwitchToMapDataBank::
+    ; mapBank = (IsIndoor ? $08 : $1A)
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_390F
-    ld   a, $1A
-    jr   label_3911
-
-label_390F::
+    jr   nz, .indoor
+    ld   a, BANK(OverworldBaseMap)
+    jr   .end
+.indoor
     ld   a, $08
-
-label_3911::
+.end
+    ; Switch to map bank
     ld   [MBC3SelectBank], a
     ret
 
@@ -6523,7 +6635,7 @@ label_398D::
     ldh  [hSFX], a
 .bossAgonyEnd
 
-    ; If no dialog is open… 
+    ; If no dialog is open…
     ld   a, [wDialogState]
     and  a
     jr   nz, .C111End
@@ -6540,7 +6652,7 @@ label_398D::
     ld   a, [wLinkMotionState]
     cp   LINK_MOTION_PASS_OUT
     ret  z
-    
+
     xor  a
     ld   [$C3C1], a
     ldh  a, [hMapId]

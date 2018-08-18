@@ -145,7 +145,7 @@ LoadMapData::
     ; Copy map number to the palette-loading variable
     ld   [$DDD2], a
 
-    ; if wTileMapToLoad != $23, turn of LCD
+    ; if wTileMapToLoad != $23, turn off LCD
     cp   $23
     jr   z, .LCDOffEnd
     push af

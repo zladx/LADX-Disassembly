@@ -2823,7 +2823,7 @@ label_196F::
     jr   nz, label_19D9
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_19C2
+    jr   z, SetSpawnLocation
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, label_1993
@@ -2832,7 +2832,7 @@ label_196F::
 
 label_1993::
     cp   $0A
-    jr   nc, label_19C2
+    jr   nc, SetSpawnLocation
     ld   e, a
     sla  a
     sla  a
@@ -2845,7 +2845,7 @@ label_1993::
 label_19A4::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_19C2
+    call SetSpawnLocation
     push de
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
@@ -2865,12 +2865,15 @@ label_19BF::
     ld   [de], a
     ret
 
-label_19C2::
+; Record Link's spawn point, that will be used
+; when loading the save file or starting after a game over.
+SetSpawnLocation::
     ld   a, $00
     ldh  [$FFD7], a
-    ld   de, $DB5F
+    ld   de, wSpawnLocationData
 
-label_19C9::
+    ; Copy five bytes from $D406 to wSpawnLocationData
+.loop
     ld   a, [hli]
     ld   [de], a
     inc  de
@@ -2878,7 +2881,9 @@ label_19C9::
     inc  a
     ldh  [$FFD7], a
     cp   $05
-    jr   nz, label_19C9
+    jr   nz, .loop
+
+    ; Record the indoor room
     ld   a, [wIndoorRoom]
     ld   [de], a
 

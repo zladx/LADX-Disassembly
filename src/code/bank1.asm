@@ -892,7 +892,7 @@ label_531D::
     ld   [wAddRupeeBufferLow], a
     ld   a, [$DB6F]
     and  a
-    jr   nz, label_5353
+    jr   nz, .setStartingPoint
     ld   a, $16
     ld   [$DB6F], a
     ld   a, $50
@@ -900,40 +900,49 @@ label_531D::
     ld   a, $27
     ld   [$DB71], a
 
-label_5353::
-    ld   a, [$DB62]
+.setStartingPoint
+    ld   a, [wSpawnPositionX]
     and  a
-    jr   z, label_5394
+    jr   z, .loadPredefinedSaveFile
     ld   [wMapEntrancePositionX], a
-    ld   a, [$DB63]
+
+    ld   a, [wSpawnPositionY]
     ld   [wMapEntrancePositionY], a
-    ld   a, [$DB61]
-    ldh  [$FFF6], a
+
+    ld   a, [wSpawnMapRoom]
+    ldh  [hMapRoom], a
     ld   [$DB9C], a
-    ld   a, [$DB60]
+
+    ld   a, [wSpawnMapId]
     ldh  [hMapId], a
-    ld   a, [$DB64]
+
+    ld   a, [wSpawnIndoorRoom]
     ld   [wIndoorRoom], a
+
     xor  a
     ldh  [hIsSideScrolling], a
+
     ld   a, $03
     ldh  [hLinkDirection], a
-    ld   a, [$DB5F]
+
+    ld   a, [wSpawnIsIndoor]
     and  $01
     ld   [wIsIndoor], a
-    jr   z, label_538E
+
+    jr   z, .finish
+
     ld   a, $04
     ldh  [hLinkAnimationState], a
+
     ld   a, $02
     ldh  [hLinkDirection], a
 
-label_538E::
+.finish
     ld   a, $02
     ld   [wBGMapToLoad], a
     ret
 
-; Write default save?
-label_5394::
+.loadPredefinedSaveFile
     ld   a, $30
     ld   [wMaxArrows], a
     ld   a, $30
@@ -942,7 +951,7 @@ label_5394::
     ld   [wMaxMagicPowder], a
     ld   a, $A3
     ld   [$DB9C], a
-    ldh  [$FFF6], a
+    ldh  [hMapRoom], a
     ld   [$DB54], a
     ld   a, $01
     ld   [wIsIndoor], a
@@ -962,7 +971,7 @@ label_5394::
     ld   [$DB70], a
     ld   a, $27
     ld   [$DB71], a
-    jr   label_538E
+    jr   .finish
 
 label_53D8::
     sbc  a, l

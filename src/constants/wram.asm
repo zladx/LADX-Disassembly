@@ -777,9 +777,22 @@ wRupeeCountLow:: ; DB5E
   ; Lower digits of the player rupees count
   ds 1
 
-; Unlabeled
-wDB5F equ $DB5F
-  ds $6
+; Define Link's spawn position
+; Used when loading a save file or after a game over
+wSpawnLocationData:: ; DB5F
+wSpawnIsIndoor:: ; DB5F
+  ds 1
+wSpawnMapId:: ; DB60
+  ds 1
+wSpawnMapRoom:: ; DB61
+  ds 1
+wSpawnPositionX:: ; DB62
+  ; If 0, will load the pre-defined save file
+  ds 1
+wSpawnPositionY:: ; DB63
+  ds 1
+wSpawnIndoorRoom:: ; DB64
+  ds 1
 
 wHasInstrument1:: ; DB65
   ; 0: false, 2: true

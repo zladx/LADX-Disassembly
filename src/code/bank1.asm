@@ -2533,7 +2533,7 @@ label_5E67::
 label_5E79::
     cp   $0A
     jr   nc, label_5E95
-    ld   hl, $DB16
+    ld   hl, wDungeonItemFlags
     ld   e, a
     sla  a
     sla  a

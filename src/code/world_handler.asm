@@ -44,7 +44,7 @@ label_43B8::
     add  a, e
     ld   e, a
     ld   d, $00
-    ld   hl, $DB16
+    ld   hl, wDungeonItemFlags
     add  hl, de
 
 label_43C5::

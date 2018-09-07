@@ -717,8 +717,9 @@ wHasBirdKey:: ; DB14
 wGoldenLeavesCount:: ; DB15
   ds 1
 
-; Unlabeled
-wDB16 equ $DB16
+; Beginning of dungeon item flags.
+; 5 bytes fo each dungeon, 5th byte is quantity of keys for that dungeon
+wDungeonItemFlags:: ; DB16
   ds $2D
 
 wPowerBraceletLevel:: ; DB43

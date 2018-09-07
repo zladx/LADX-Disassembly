@@ -163,7 +163,7 @@ data_C826::     db 2, 6, 1, 3, 3, 3, $D, 8, $A, 2, 7, $B, 0, 4, 0, 8
 
 label_C85B::
     call label_3A0A
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   hl, $C3E0
     add  hl, bc
     ld   [hl], a
@@ -233,7 +233,7 @@ label_C8C7::
     ldh  a, [$FFEB]
     cp   $5F
     jr   nz, label_C8F0
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $95
     jr   z, label_C8F0
     cp   $92
@@ -306,7 +306,7 @@ label_C926::
     call label_C00
     ld   [hl], $30
     ret
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $65
     ret  nz
     ldh  a, [$FFEC]
@@ -434,7 +434,7 @@ label_CA12::
     call IsEntityFrameCounterZero
     ld   [hl], $20
     ret
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $D9
     ld   a, $32
     jr   nz, label_CA32
@@ -465,7 +465,7 @@ label_CA4F::
     ld   de, $C220
     ld   hl, $C200
     jp   label_CF92
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $E2
     jr   nz, label_CA6B
     ld   a, [$DB56]
@@ -489,7 +489,7 @@ label_CA7A::
     and  $10
     jp   nz, label_3F8D
     ret
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $C0
     jr   c, label_CAA3
     ld   a, [$DB74]
@@ -629,7 +629,7 @@ label_CB56::
     ld   a, [wIsIndoor]
     and  a
     jr   z, label_CB56
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $DA
     jr   nz, label_CB56
     ld   a, [$DB0E]
@@ -645,7 +645,7 @@ label_CB56::
 
 label_CB84::
     ld   hl, $DDE0
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     add  hl, de
@@ -1174,7 +1174,7 @@ label_CEEC::
     ld   hl, $C2D0
     add  hl, bc
     ld   [hl], $02
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $A4
     jr   z, label_CF0B
     cp   $D2
@@ -1205,7 +1205,7 @@ label_CF24::
     or   $11
     ld   [hl], a
     ret
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $F8
     jr   nz, label_CF44
     ldh  a, [hFFF8]
@@ -1503,7 +1503,7 @@ label_D134::
     ld   a, [wIsIndoor]
     ld   d, a
     ld   hl, $D800
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ldh  a, [hMapId]
     cp   $FF
@@ -1570,7 +1570,7 @@ label_D198::
     ldh  [$FFF4], a
     ld   de, data_D166
     ld   b, $C6
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $77
     jr   nz, label_D1B3
     ld   a, [$DDD9]
@@ -1585,7 +1585,7 @@ label_D1B3::
     jr   z, label_D1C9
     ld   de, data_D15A
     ld   b, $0D
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $C7
     jr   nz, label_D1C9
     ld   de, data_D156
@@ -1686,7 +1686,7 @@ label_D249::
     ld   de, data_D235
     and  a
     jr   nz, label_D25D
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $77
     jr   nz, label_D25D
     ld   de, data_D245
@@ -1703,7 +1703,7 @@ label_D25D::
     ld   [$C144], a
 
 label_D276::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $C7
     jr   z, label_D282
     ld   a, [wIsIndoor]
@@ -2246,7 +2246,7 @@ label_D670::
 label_D6B8::
     cp   $3C
     jr   nz, label_D6D1
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $58
     jr   z, label_D6C6
     cp   $5A
@@ -3160,7 +3160,7 @@ label_DC89::
     ret
 
 label_DC99::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $80
     jp   z, label_DC49
     ld   de, data_DC78
@@ -3213,7 +3213,7 @@ label_DCEA::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, label_DD34
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $CE
     jr   nz, label_DD34
     ldh  a, [$FFEF]
@@ -3598,7 +3598,7 @@ label_E001::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, label_E029
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $C6
     jr   nz, label_E029
     ld   a, $05
@@ -3902,7 +3902,7 @@ label_E200::
     jr   z, label_E227
     cp   $3D
     jr   nz, label_E22F
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $DA
     jr   z, label_E22F
     cp   $A5
@@ -4297,10 +4297,10 @@ label_E487::
 
 label_E48E::
     ret
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $80
     jr   z, label_E4A5
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $7C
     jr   nz, label_E4A0
     ld   hl, $D969
@@ -4835,7 +4835,7 @@ label_E862::
 label_E865::
     push de
     ld   hl, $D800
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     add  hl, de
@@ -4847,7 +4847,7 @@ label_E865::
 
 label_E878::
     ld   hl, $D900
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ldh  a, [hMapId]
@@ -4975,7 +4975,7 @@ label_E93C::
     cp   $A9
     jp   nz, label_E9A0
     ld   hl, $D900
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
     ldh  a, [hMapId]

@@ -162,7 +162,7 @@ label_4475::
     inc  d
 
 label_447E::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     call GetChestsStatusForRoom
     cp   $1A

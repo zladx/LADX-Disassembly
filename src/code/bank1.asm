@@ -1894,7 +1894,7 @@ label_5A31::
     db 0, 0, 0, 0, 0, 0, 0, 0
 
 label_5A59::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, label_5959
@@ -2646,7 +2646,7 @@ label_5EA6::
     pop  bc
     ret
     ld   c, $06
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   hl, $CE81
 
 label_5F09::
@@ -2668,7 +2668,7 @@ label_5F19::
     ld   hl, $CE81
     add  hl, de
     ld   e, [hl]
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   [hl], a
     ld   hl, $CF00
     add  hl, de
@@ -2797,7 +2797,7 @@ label_5FB3::
     ret  z
     cp   MAP_CAVE_B
     ret  c
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $FD
     ret  z
     cp   $B1
@@ -2854,7 +2854,7 @@ label_6014::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, label_607F
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $40
     jr   c, label_607F
     ld   a, [$DB68]
@@ -2966,7 +2966,7 @@ label_609C::
     ld   hl, $C2F0
     add  hl, de
     ld   [hl], $0C
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $A4
     jr   nz, label_60F7
     ldh  a, [hMapId]
@@ -3010,7 +3010,7 @@ label_611A::
     ret
 
 label_611F::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $A7
     ret  z
     ld   a, [$DB56]
@@ -3193,7 +3193,7 @@ label_6855::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   z, label_6868
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $DD
     ld   e, $12
     jr   nz, label_6868
@@ -3209,7 +3209,7 @@ label_6868::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   z, label_6885
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $DD
     ld   e, $12
     jr   nz, label_6885

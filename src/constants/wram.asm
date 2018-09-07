@@ -745,7 +745,7 @@ wSwordLevel:: ; DB4E
   ; Set to 1 when Link retrieves his sword on the beach
   ds 1
 
-wName:: ; db4f
+wName:: ; DB4F
   ds NAME_LENGTH ; 5
 
 wDB54:: ds 1
@@ -754,8 +754,8 @@ wDB55:: ds 1
 wIsBowWowFollowingLink:: ; DB56
   ds 1
 
-; Unlabeled
-wDB57 equ $DB57
+; Death count (one per save slot)
+wDeathCount:: ; DB57
   ds $3
 
 wHealth:: ; DB5A

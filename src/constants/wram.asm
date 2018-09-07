@@ -604,16 +604,16 @@ wTileMapToLoad:: ; D6FE
 wBGMapToLoad:: ; D6FF
   ds 1
 
-; Memory region reserved for map blocks of the active room.
-; Actual blocks are surrounded by FF values (see wRoomMapBlocks)
+; Memory region reserved for map objects of the active room.
+; Actual objects are surrounded by FF values (see wRoomObjects)
 ;
 ; When loading a new room, room data is read and decoded into this
 ; area.
-wRoomMapBlocksArea:: ; D700
+wRoomObjectsArea:: ; D700
   ds $100
 
-; Start of the actual map blocks for the active room (ignoring the surrounding FF values)
-wRoomMapBlocks equ $D711
+; Start of the actual map objects for the active room (ignoring the surrounding FF values)
+wRoomObjects equ $D711
 
 ; World rooms status
 ;

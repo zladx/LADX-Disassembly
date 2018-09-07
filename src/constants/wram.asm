@@ -741,7 +741,7 @@ wMagicPowderCount:: ; DB4C
 wBombCount:: ; DB4D
   ds 1
 
-wDidFindSword:: ; DB4E
+wSwordLevel:: ; DB4E
   ; Set to 1 when Link retrieves his sword on the beach
   ds 1
 

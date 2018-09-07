@@ -8509,7 +8509,7 @@ func_004_76B3:
     call func_004_788E                            ; $76F6: $CD $8E $78
 
 jr_004_76F9:
-    ld   a, [wDidFindSword]                       ; $76F9: $FA $4E $DB
+    ld   a, [wSwordLevel]                         ; $76F9: $FA $4E $DB
     and  a                                        ; $76FC: $A7
     jr   z, jr_004_7705                           ; $76FD: $28 $06
 

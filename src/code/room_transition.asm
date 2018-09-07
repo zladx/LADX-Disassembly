@@ -501,7 +501,7 @@ RoomTransitionPrepareHandler::
     and  a                                        ; $7AEC: $A7
     jr   nz, IncrementRoomTransitionStateAndReturn ; $7AED: $20 $47
 
-    ld   a, [wDidFindSword]                       ; $7AEF: $FA $4E $DB
+    ld   a, [wSwordLevel]                         ; $7AEF: $FA $4E $DB
     and  a                                        ; $7AF2: $A7
     jr   z, IncrementRoomTransitionStateAndReturn ; $7AF3: $28 $41
 

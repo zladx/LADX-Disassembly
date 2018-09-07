@@ -29,9 +29,9 @@ section "bank5",romx[$4000],bank[$05]
 
 section "bank009",romx[$4000],bank[$09]
 OverworldRoomPointers::
-incbin "data/map_pointers/overworld_pointers.bin"
+include "data/map_pointers/overworld.asm"
 OverworldMapHeadersFirstHalf::
-incbin "data/maps/overworld_map_1.bin"
+include "data/maps/overworld_a.asm"
 include "text/dialog_dx.asm"
 
 section "bank0C",romx[$4000],bank[$0C]
@@ -87,7 +87,7 @@ include "text/dialog.asm"
 
 section "bank1A",romx[$4000],bank[$1A]
 OverworldMapHeadersSecondHalf::
-incbin "data/maps/overworld_map_2.bin"
+include "data/maps/overworld_b.asm"
 incbin "data/palette_pointers/overworld_pointers.bin"
 include "code/bank1A/map_loading.asm"
 OverworldBaseMap::

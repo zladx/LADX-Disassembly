@@ -431,7 +431,7 @@ RoomTransitionPrepareHandler::
     jr   nz, .forestRoomEnd                       ; $7A95: $20 $0E
 
     ; … and this room has not been visited yet…
-    ld   hl, wMinimapTiles + $41                  ; $7A97: $21 $41 $D8
+    ld   hl, wOverworldRoomStatus + $41                  ; $7A97: $21 $41 $D8
     bit  6, [hl]                                  ; $7A9A: $CB $76
     jr   nz, .forestRoomEnd                       ; $7A9C: $20 $07
 

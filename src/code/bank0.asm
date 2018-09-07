@@ -5211,7 +5211,7 @@ label_313A::
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
-    ld   hl, wMinimapTiles
+    ld   hl, wOverworldRoomStatus
     ld   a, [wIsIndoor]
     and  a
     jr   z, label_3161

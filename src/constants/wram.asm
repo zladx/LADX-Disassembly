@@ -615,11 +615,16 @@ wRoomMapBlocksArea:: ; D700
 ; Start of the actual map blocks for the active room (ignoring the surrounding FF values)
 wRoomMapBlocks equ $D711
 
-; Minimap Tile
-; Values:
-;   0:     not discovered yet
-;   non-0: various statuses
-wMinimapTiles:: ; D800
+; World rooms status
+;
+; Each screen status is represented by a byte, which is a combination of the following masks : :
+;   00 : Unexplored
+;   10 : changed from initial status (for example sword taken on the beach or dungeon opened with key)
+;   20 : owl talked
+;   80 : visited
+;
+; For example, visiting the first dungeon's screen (80) and opening it with the key (10) would put that byte at 90
+wOverworldRoomStatus:: ; D800
   ds $100
 
 ; Unlabeled

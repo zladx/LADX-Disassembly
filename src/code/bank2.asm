@@ -4148,7 +4148,7 @@ jr_002_5B6F:
     ret                                           ; $5B9E: $C9
 
 func_002_5B9F::
-    ld   hl, wMinimapTiles                        ; $5B9F: $21 $00 $D8
+    ld   hl, wOverworldRoomStatus                        ; $5B9F: $21 $00 $D8
     ldh  a, [hMapRoom]                           ; $5BA2: $F0 $F6
     ld   e, a                                     ; $5BA4: $5F
     ld   a, [wIsIndoor]                         ; $5BA5: $FA $A5 $DB
@@ -4421,7 +4421,7 @@ jr_002_5CFE:
     jr   jr_002_5CFE                              ; $5D1F: $18 $DD
 
 jr_002_5D21:
-    ld   hl, wMinimapTiles                        ; $5D21: $21 $00 $D8
+    ld   hl, wOverworldRoomStatus                        ; $5D21: $21 $00 $D8
     ld   a, [wIsIndoor]                         ; $5D24: $FA $A5 $DB
     and  a                                        ; $5D27: $A7
     jr   z, jr_002_5D36                           ; $5D28: $28 $0C
@@ -7463,7 +7463,7 @@ jr_002_7015:
     call label_27F2                               ; $7029: $CD $F2 $27
 
 jr_002_702C:
-    ld   hl, wMinimapTiles                        ; $702C: $21 $00 $D8
+    ld   hl, wOverworldRoomStatus                        ; $702C: $21 $00 $D8
     ldh  a, [hMapRoom]                           ; $702F: $F0 $F6
     ld   e, a                                     ; $7031: $5F
     ld   d, $00                                   ; $7032: $16 $00

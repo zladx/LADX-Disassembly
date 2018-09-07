@@ -2662,7 +2662,7 @@ label_186C::
     call SwitchBank
     pop  af
     call label_004_7A5F
-    ld   hl, $DB6E
+    ld   hl, wIsThief
     inc  [hl]
     ld   hl, $DB46
     inc  [hl]

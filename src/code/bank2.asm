@@ -1553,7 +1553,7 @@ label_002_4C92::
     ldh  a, [$FFD8]                               ; $4C92: $F0 $D8
     ld   e, a                                     ; $4C94: $5F
     ld   d, $00                                   ; $4C95: $16 $00
-    ld   hl, wRoomMapBlocks                       ; $4C97: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $4C97: $21 $11 $D7
     add  hl, de                                   ; $4C9A: $19
     ld   [hl], $CC                                ; $4C9B: $36 $CC
     ld   a, $82                                   ; $4C9D: $3E $82
@@ -1672,7 +1672,7 @@ func_002_4D20::
     or   c                                        ; $4D54: $B1
     ld   e, a                                     ; $4D55: $5F
     ldh  [$FFD8], a                               ; $4D56: $E0 $D8
-    ld   hl, wRoomMapBlocks                       ; $4D58: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $4D58: $21 $11 $D7
     add  hl, de                                   ; $4D5B: $19
     ld   a, h                                     ; $4D5C: $7C
     cp   $D7                                      ; $4D5D: $FE $D7
@@ -1734,7 +1734,7 @@ label_002_4D97::
     or   e                                        ; $4DA6: $B3
     ld   e, a                                     ; $4DA7: $5F
     ld   d, $00                                   ; $4DA8: $16 $00
-    ld   hl, wRoomMapBlocks                       ; $4DAA: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $4DAA: $21 $11 $D7
     add  hl, de                                   ; $4DAD: $19
     ld   [hl], $AE                                ; $4DAE: $36 $AE
     call label_2887                               ; $4DB0: $CD $87 $28
@@ -4103,7 +4103,7 @@ jr_002_5B4C:
     ld   hl, $5A50                                ; $5B58: $21 $50 $5A
     add  hl, bc                                   ; $5B5B: $09
     ld   a, [hl]                                  ; $5B5C: $7E
-    ld   hl, wRoomMapBlocks                       ; $5B5D: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $5B5D: $21 $11 $D7
     add  hl, de                                   ; $5B60: $19
     ld   [hl], a                                  ; $5B61: $77
     ldh  a, [$FFE5]                               ; $5B62: $F0 $E5
@@ -4148,7 +4148,7 @@ jr_002_5B6F:
     ret                                           ; $5B9E: $C9
 
 func_002_5B9F::
-    ld   hl, wMinimapTiles                        ; $5B9F: $21 $00 $D8
+    ld   hl, wOverworldRoomStatus                        ; $5B9F: $21 $00 $D8
     ldh  a, [hMapRoom]                           ; $5BA2: $F0 $F6
     ld   e, a                                     ; $5BA4: $5F
     ld   a, [wIsIndoor]                         ; $5BA5: $FA $A5 $DB
@@ -4407,7 +4407,7 @@ jr_002_5CFE:
     ld   hl, $5BFC                                ; $5D0A: $21 $FC $5B
     add  hl, bc                                   ; $5D0D: $09
     ld   a, [hl]                                  ; $5D0E: $7E
-    ld   hl, wRoomMapBlocks                       ; $5D0F: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $5D0F: $21 $11 $D7
     add  hl, de                                   ; $5D12: $19
     ld   [hl], a                                  ; $5D13: $77
     ldh  a, [$FFE5]                               ; $5D14: $F0 $E5
@@ -4421,7 +4421,7 @@ jr_002_5CFE:
     jr   jr_002_5CFE                              ; $5D1F: $18 $DD
 
 jr_002_5D21:
-    ld   hl, wMinimapTiles                        ; $5D21: $21 $00 $D8
+    ld   hl, wOverworldRoomStatus                        ; $5D21: $21 $00 $D8
     ld   a, [wIsIndoor]                         ; $5D24: $FA $A5 $DB
     and  a                                        ; $5D27: $A7
     jr   z, jr_002_5D36                           ; $5D28: $28 $0C
@@ -4753,7 +4753,7 @@ jr_002_5EED:
     or   e                                        ; $5EFC: $B3
     ld   e, a                                     ; $5EFD: $5F
     ld   d, $00                                   ; $5EFE: $16 $00
-    ld   hl, wRoomMapBlocks                       ; $5F00: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $5F00: $21 $11 $D7
     add  hl, de                                   ; $5F03: $19
     ld   a, $A0                                   ; $5F04: $3E $A0
     ld   [hl], a                                  ; $5F06: $77
@@ -4840,7 +4840,7 @@ func_002_5F5C::
     or   e                                        ; $5F79: $B3
     ld   e, a                                     ; $5F7A: $5F
     ld   d, $00                                   ; $5F7B: $16 $00
-    ld   hl, wRoomMapBlocks                       ; $5F7D: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $5F7D: $21 $11 $D7
     add  hl, de                                   ; $5F80: $19
     ld   a, $BE                                   ; $5F81: $3E $BE
     ld   [hl], a                                  ; $5F83: $77
@@ -6754,7 +6754,7 @@ func_002_6C2F::
     or   e                                        ; $6C4A: $B3
     ld   e, a                                     ; $6C4B: $5F
     ld   d, $00                                   ; $6C4C: $16 $00
-    ld   hl, wRoomMapBlocks                       ; $6C4E: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $6C4E: $21 $11 $D7
     ld   a, h                                     ; $6C51: $7C
     add  hl, de                                   ; $6C52: $19
     ld   h, a                                     ; $6C53: $67
@@ -7321,7 +7321,7 @@ jr_002_6F25:
     ld   e, a                                     ; $6F4A: $5F
     ldh  [hFFE9], a                               ; $6F4B: $E0 $E9
     ld   d, $00                                   ; $6F4D: $16 $00
-    ld   hl, wRoomMapBlocks                       ; $6F4F: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $6F4F: $21 $11 $D7
     ld   a, h                                     ; $6F52: $7C
     add  hl, de                                   ; $6F53: $19
     ld   h, a                                     ; $6F54: $67
@@ -7463,7 +7463,7 @@ jr_002_7015:
     call label_27F2                               ; $7029: $CD $F2 $27
 
 jr_002_702C:
-    ld   hl, wMinimapTiles                        ; $702C: $21 $00 $D8
+    ld   hl, wOverworldRoomStatus                        ; $702C: $21 $00 $D8
     ldh  a, [hMapRoom]                           ; $702F: $F0 $F6
     ld   e, a                                     ; $7031: $5F
     ld   d, $00                                   ; $7032: $16 $00
@@ -8298,7 +8298,7 @@ func_002_7512::
     ld   e, a                                     ; $7524: $5F
     ldh  [hLinkRoomPosition], a                               ; $7525: $E0 $FA
     ld   d, $00                                   ; $7527: $16 $00
-    ld   hl, wRoomMapBlocks                       ; $7529: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $7529: $21 $11 $D7
     ld   a, h                                     ; $752C: $7C
     add  hl, de                                   ; $752D: $19
     ld   h, a                                     ; $752E: $67

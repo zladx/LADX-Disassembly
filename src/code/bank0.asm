@@ -2282,7 +2282,7 @@ CheckStaticSwordCollision::
     ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   e, a
-    ld   hl, wRoomMapBlocks
+    ld   hl, wRoomObjects
     add  hl, de
     ld   a, h
     cp   $D7
@@ -3305,7 +3305,7 @@ label_1F69::
     or   c
     ld   e, a
     ldh  [$FFD8], a
-    ld   hl, wRoomMapBlocks
+    ld   hl, wRoomObjects
     add  hl, de
     ld   a, h
     cp   $D7
@@ -3733,14 +3733,14 @@ DoUpdateBGRegion::
     push bc
     push de
 
-    ; hl = wRoomMapBlocks + $FFD9
+    ; hl = wRoomObjects + $FFD9
     ldh  a, [$FFD9]
     ld   c, a
     ld   b, $00
-    ld   hl, wRoomMapBlocks
+    ld   hl, wRoomObjects
     add  hl, bc
 
-    ; c = wRoomMapBlocks[$FFD9]
+    ; c = wRoomObjects[$FFD9]
     ld   b, $00
     ld   c, [hl]
 
@@ -4972,20 +4972,20 @@ label_2FFA::
     ld   [de], a
     ret
 
-; Given an overworld block, retrieve its tiles and palettes (2x2), and copy them to the BG map
-WriteOverworldBlockToBG::
+; Given an overworld object, retrieve its tiles and palettes (2x2), and copy them to the BG map
+WriteOverworldObjectToBG::
     ld   a, $02
     ld   [rSVBK], a
     ld   c, [hl]
     xor  a
     ld   [rSVBK], a
-    jr   doCopyBlockToBG
+    jr   doCopyObjectToBG
 
-; Given an indoor block, retrieve its tiles and palettes (2x2), and copy them to the BG map
-WriteIndoorBlockToBG::
+; Given an indoor object, retrieve its tiles and palettes (2x2), and copy them to the BG map
+WriteIndoorObjectToBG::
     ld   c, [hl]
 
-doCopyBlockToBG:
+doCopyObjectToBG:
     ld   b, $00
     sla  c
     rl   b
@@ -5097,7 +5097,7 @@ label_309B::
     call SwitchToMapDataBank
     call SwitchBank
     ld   de, vBGMap0
-    ld   hl, wRoomMapBlocks
+    ld   hl, wRoomObjects
     ld   c, $80
 
 .loop
@@ -5108,24 +5108,24 @@ label_309B::
     ; If not running on GBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, .copyBlockToBG
+    jr   nz, .copyObjectToBG
     ; …copy some data to vBGMap0
     call CopySomeDMGMapData
-    jr   .blockCopyEnd
+    jr   .objectCopyEnd
 
-    ; Copy the block tiles and palettes (2x2 tiles) to the BG map
-.copyBlockToBG
+    ; Copy the object tiles and palettes (2x2 tiles) to the BG map
+.copyObjectToBG
     ; If IsIndoor…
     ld   a, [wIsIndoor]
     and  a
     jr   z, .isOverworld
     ; then copy tiles for indoor room
-    call WriteIndoorBlockToBG
-    jr   .blockCopyEnd
+    call WriteIndoorObjectToBG
+    jr   .objectCopyEnd
 .isOverworld
     ; else copy tiles for overworld room
-    call WriteOverworldBlockToBG
-.blockCopyEnd
+    call WriteOverworldObjectToBG
+.objectCopyEnd
 
     pop  bc
     pop  hl
@@ -5157,13 +5157,13 @@ label_309B::
     ld   d, a
 .aEnd
 
-    ; Loop until all blocks of the room are copied to the BG
+    ; Loop until all objects of the room are copied to the BG
     dec  c
     jr   nz, .loop
 
     jpsb UpdateMinimapEntranceArrowAndReturn
 
-; Load room blocks and tiles
+; Load room objects and tiles
 LoadRoom::
     ; Disable all interrupts except VBlank
     ld   a, $01
@@ -5211,7 +5211,7 @@ label_313A::
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
-    ld   hl, wMinimapTiles
+    ld   hl, wOverworldRoomStatus
     ld   a, [wIsIndoor]
     and  a
     jr   z, label_3161
@@ -5368,7 +5368,7 @@ label_323A::
     jr   z, .label_3258
     ld   a, [bc]
     and  $0F
-    call FillRoomMapWithBlock
+    call FillRoomMapWithObject
     ld   a, [bc]
     swap a
     and  $0F
@@ -5377,7 +5377,7 @@ label_323A::
 
 .label_3258
     ld   a, [bc]
-    call FillRoomMapWithBlock
+    call FillRoomMapWithObject
 
 .CopyMapToTileMapLoop
     inc  bc ; tile address
@@ -5479,7 +5479,7 @@ func_32A9::
     ret
 
 .isIndoor
-    ; a = [block type] - $EC
+    ; a = [bject type] - $EC
     ld   a, [bc]
     sub  a, $EC
     ; If a >= $EC, dispatch the tile script
@@ -5872,11 +5872,11 @@ MoveToNextLine_tileTypeNotA0::
     ld   d, $00
     ldh  a, [$FFD7]
     and  a
-    jr   z, CopyBlockToActiveRoomMap
+    jr   z, CopyObjectToActiveRoomMap
     dec  bc ; decrement tile address
     ld   a, [bc] ; load new tile type
     ld   e, a
-    ld   hl, wRoomMapBlocks ; prepare tile map
+    ld   hl, wRoomObjects ; prepare tile map
     add  hl, de ; add current tile offset
     ldh  a, [$FFD7]
     and  $0F
@@ -5884,18 +5884,18 @@ MoveToNextLine_tileTypeNotA0::
     pop  af ;
     ld   d, a
 
-; Fill the active room map with many consecutive blocks
+; Fill the active room map with many consecutive objects
 ; Inputs:
-;   d      block type
+;   d      object type
 ;   e      count
 ;   hl     destination address
-;   $FFD7  block data (including the direction)
-FillMapWithConsecutiveBlocks::
-    ; Copy block value to the active room map
+;   $FFD7  object data (including the direction)
+FillRoomWithConsecutiveObjects::
+    ; Copy object type to the active room map
     ld   a, d
     ldi  [hl], a
 
-    ; If the block direction is vertical…
+    ; If the object direction is vertical…
     ldh  a, [$FFD7]
     and  $40
     jr   z, .verticalEnd
@@ -5905,15 +5905,15 @@ FillMapWithConsecutiveBlocks::
     ld   l, a
 .verticalEnd
 
-    ; While the block count didn't reach 0, loop
+    ; While the object count didn't reach 0, loop
     dec  e
-    jr   nz, FillMapWithConsecutiveBlocks
+    jr   nz, FillRoomWithConsecutiveObjects
 
     ; Cleanup
     inc  bc
     ret
 
-; On GBC, special case for some overworld blocks
+; On GBC, special case for some overworld objects
 label_3500::
     cp   $04
     ret  z
@@ -5946,24 +5946,24 @@ label_3527::
     ld   a, $1A
 
 label_3529::
-    ; On GBC, copy some overworld blocks to ram bank 2
+    ; On GBC, copy some overworld objects to ram bank 2
     call label_B2F
     ret
 
-; Copy a block from the room data to the active room map
+; Copy an object from the room data to the active room
 ; Inputs:
-;  bc        block object address + 1 ([room position, block value])
-;  stack[0]  block value
-CopyBlockToActiveRoomMap::
+;  bc        object object address + 1 ([room position, object value])
+;  stack[0]  object value
+CopyObjectToActiveRoomMap::
     ; Load the position of the object in the room
     dec  bc
     ld   a, [bc]
     ld   e, a
-    ld   hl, wRoomMapBlocks
+    ld   hl, wRoomObjects
     add  hl, de
-    ; Pop the block value from the stack
+    ; Pop the object value from the stack
     pop  af
-    ; Copy the block to the active room map
+    ; Copy the object to the active room
     ld   [hl], a
     ; On GBC, do some special-case handling
     call label_3500
@@ -6119,7 +6119,7 @@ label_35EE::
     ld   a, [bc]
     ld   e, a
     ld   d, $00
-    ld   hl, wRoomMapBlocks
+    ld   hl, wRoomObjects
     add  hl, de
     ret
 
@@ -6351,13 +6351,13 @@ data_37E4::
     db   $10
     db   $FF
 
-; Fill all the active room map with the same block
+; Fill all the active room map with the same object
 ; Inputs:
-;   a   the block value to fill the map with
-FillRoomMapWithBlock::
+;   a   the object type to fill the map with
+FillRoomMapWithObject::
     ldh  [$FFE9], a
     ld   d, TILES_PER_MAP
-    ld   hl, wRoomMapBlocks
+    ld   hl, wRoomObjects
     ld   e, a
 
 .loop

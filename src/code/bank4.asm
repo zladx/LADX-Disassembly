@@ -3128,7 +3128,7 @@ jr_004_5628:
     or   e                                        ; $5640: $B3
     ld   e, a                                     ; $5641: $5F
     ld   d, $00                                   ; $5642: $16 $00
-    ld   hl, wRoomMapBlocks                       ; $5644: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $5644: $21 $11 $D7
     add  hl, de                                   ; $5647: $19
     ldh  a, [$FFD7]                               ; $5648: $F0 $D7
     ld   [hl], a                                  ; $564A: $77
@@ -6559,7 +6559,7 @@ func_004_6BE1:
     or   e                                        ; $6BF4: $B3
     ld   e, a                                     ; $6BF5: $5F
     ld   d, $00                                   ; $6BF6: $16 $00
-    ld   hl, wRoomMapBlocks                       ; $6BF8: $21 $11 $D7
+    ld   hl, wRoomObjects                       ; $6BF8: $21 $11 $D7
     ld   a, h                                     ; $6BFB: $7C
     add  hl, de                                   ; $6BFC: $19
     ld   h, a                                     ; $6BFD: $67

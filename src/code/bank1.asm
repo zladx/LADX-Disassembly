@@ -475,7 +475,7 @@ func_4852::
     ld   a, $05
 
 .loop
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, [de]
     and  a
     ld   a, $7E
@@ -493,7 +493,7 @@ func_4852::
 
     ldi  [hl], a
     inc  de
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     dec  a
     jr   nz, .loop
     ld   a, b
@@ -507,7 +507,7 @@ func_4852::
     ld   a, $05
 
 label_4894::
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, [de]
     and  a
     jr   label_489D
@@ -526,7 +526,7 @@ label_489D::
 label_48A9::
     ldi  [hl], a
     inc  de
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     dec  a
     jr   nz, label_4894
     xor  a
@@ -1266,7 +1266,7 @@ label_5519::
     jr   nz, label_5519
     push de
     xor  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  [$FFD8], a
     ldh  [$FFD9], a
     ldh  [$FFDA], a
@@ -1299,7 +1299,7 @@ label_5544::
     ld   hl, label_53D8
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, label_53E8
     add  hl, bc
     ld   a, [hl]
@@ -1326,7 +1326,7 @@ label_5544::
     xor  a
     ld   [hl], a
     xor  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  [$FFD8], a
     ldh  [$FFD9], a
     ldh  [$FFDA], a
@@ -1383,7 +1383,7 @@ label_55C0::
     ld   hl, label_5418
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, label_545C
     add  hl, bc
     ld   a, [hl]
@@ -1420,7 +1420,7 @@ label_55F5::
     ld   hl, label_54E4
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, label_54E6
 
 label_5600::
@@ -1442,7 +1442,7 @@ label_5600::
     ret
 
 label_5619::
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ldi  [hl], a
     ldh  a, [$FFD8]
     ldi  [hl], a
@@ -1913,7 +1913,7 @@ label_5A6E::
 
 label_5A71::
     ld   a, [$DBB4]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, [$C1B3]
     ld   hl, $C1B2
     or   [hl]
@@ -1968,7 +1968,7 @@ label_5AA0::
     add  hl, de
     ld   a, [$DBB4]
     add  a, [hl]
-    ld   hl, $FFD7
+    ld   hl, hScratchA
     ld   [$DBB4], a
     cp   [hl]
     jr   z, label_5B3F
@@ -1987,7 +1987,7 @@ label_5AA0::
     jr   nz, label_5AF5
     ld   a, JINGLE_BUMP
     ldh  [hJingle], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   [$DBB4], a
     jr   label_5B3F
 
@@ -2370,12 +2370,12 @@ label_5D77::
     ldh  a, [$FFD9]
     and  a
     jr   z, label_5DAB
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
 
 label_5D8B::
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     sub  a, $08
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     jr   c, label_5DA2
     ld   a, $AE
     ldi  [hl], a
@@ -2606,7 +2606,7 @@ label_5EA6::
     ld   hl, label_5E97
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, label_5E9C
     add  hl, bc
     ld   a, [hl]
@@ -2621,7 +2621,7 @@ label_5EA6::
     ldh  [$FFDA], a
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     add  a, [hl]
     ld   [hl], a
     rr   c
@@ -3576,7 +3576,7 @@ label_6BF4::
 
 label_6BF9::
     xor  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  [$FFD8], a
     ldh  [$FFD9], a
     ldh  [$FFDA], a
@@ -3594,7 +3594,7 @@ label_6BF9::
     ld   h, $9D
     push hl
     ld   a, $7C
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  [$FFD8], a
     ldh  [$FFD9], a
     ld   hl, label_6BD7
@@ -3616,7 +3616,7 @@ label_6C2A::
     ld   hl, label_6BDF
     add  hl, de
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     inc  a
     ldh  [$FFD8], a
     add  a, $0F
@@ -3626,7 +3626,7 @@ label_6C2A::
     pop  hl
 
 label_6C48::
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   [hl], a
     call label_6C69
     ldh  a, [$FFD8]

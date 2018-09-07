@@ -172,13 +172,13 @@ label_23EF::
     ld   a, [wBGOriginLow]
     add  a, [hl]
     ld   l, a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, data_23D6
     add  hl, de
     ld   a, [wBGOriginHigh]
     add  a, [hl]
     ld   h, a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   l, a
     xor  a
     ld   e, a
@@ -205,9 +205,9 @@ label_242B::
     cp   $12
     jr   nz, label_241E
     ld   e, $00
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     add  a, $20
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     jr   nc, label_243C
     inc  h
 
@@ -252,9 +252,9 @@ label_2464::
     cp   $12
     jr   nz, label_2444
     ld   e, $00
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     add  a, $20
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     jr   nc, label_2475
     inc  h
 
@@ -449,7 +449,7 @@ DialogDrawNextCharacterHandler::
     ld   [$C3C3], a ; upcoming character, used in code for the arrow
     call ReloadSavedBank
     ld   a, e
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     cp   "<ask>" ; $fe
     jr   nz, .notChoice
     pop  hl

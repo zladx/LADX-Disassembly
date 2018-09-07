@@ -337,11 +337,11 @@ label_4BF5::
     ldh  a, [$FFCC]
 
 label_4BF7::
-    ldh  [$FFD7], a
-    ldh  a, [$FFD7]
+    ldh  [hScratchA], a
+    ldh  a, [hScratchA]
     and  $0C
     jr   nz, label_4C41
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     and  $03
     jr   nz, label_4C21
     ldh  a, [$FFCB]

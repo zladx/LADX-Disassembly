@@ -169,12 +169,14 @@ hNeedsRenderingFrame:: ; FFD1
  ds 1
 
 hFFD2:: ; FFD2
+  ds 5
+
+; Scratch value, used for many different uses
+hScratchA:: ; FFD7
   ds 1
 
-; FFD7 object being set on the map
-
 ; Unlabeled
-ds $C
+ds 7
 
 hRoomPaletteBank ; FFDF
   ds 1

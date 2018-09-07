@@ -978,7 +978,7 @@ RenderRain::
     call GetRandomByte
     and  $18
     add  a, $10
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, $C04C
     ; On the sea, limit the rain to the top section of the screen ($10)
     ld   c, $10
@@ -991,7 +991,7 @@ RenderRain::
 .loop
     ldh  a, [$FFD8]
     ldi  [hl], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ldi  [hl], a
     call GetRandomByte
     and  $01       ; if random(0,1) == 0
@@ -1005,13 +1005,13 @@ RenderRain::
     ldi  [hl], a
     ld   a, $00
     ldi  [hl], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     add  a, $1C
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     cp   $A0
     jr   c, .continue
     sub  a, $98
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  a, [$FFD8]
     add  a, $25
     ldh  [$FFD8], a

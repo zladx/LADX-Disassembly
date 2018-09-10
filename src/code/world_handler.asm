@@ -44,7 +44,7 @@ label_43B8::
     add  a, e
     ld   e, a
     ld   d, $00
-    ld   hl, $DB16
+    ld   hl, wDungeonItemFlags
     add  hl, de
 
 label_43C5::
@@ -162,7 +162,7 @@ label_4475::
     inc  d
 
 label_447E::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     call GetChestsStatusForRoom
     cp   $1A

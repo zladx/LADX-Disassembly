@@ -717,8 +717,9 @@ wHasBirdKey:: ; DB14
 wGoldenLeavesCount:: ; DB15
   ds 1
 
-; Unlabeled
-wDB16 equ $DB16
+; Beginning of dungeon item flags.
+; 5 bytes fo each dungeon, 5th byte is quantity of keys for that dungeon
+wDungeonItemFlags:: ; DB16
   ds $2D
 
 wPowerBraceletLevel:: ; DB43
@@ -740,11 +741,11 @@ wMagicPowderCount:: ; DB4C
 wBombCount:: ; DB4D
   ds 1
 
-wDidFindSword:: ; DB4E
+wSwordLevel:: ; DB4E
   ; Set to 1 when Link retrieves his sword on the beach
   ds 1
 
-wName:: ; db4f
+wName:: ; DB4F
   ds NAME_LENGTH ; 5
 
 wDB54:: ds 1
@@ -753,8 +754,8 @@ wDB55:: ds 1
 wIsBowWowFollowingLink:: ; DB56
   ds 1
 
-; Unlabeled
-wDB57 equ $DB57
+; Death count (one per save slot)
+wDeathCount:: ; DB57
   ds $3
 
 wHealth:: ; DB5A
@@ -776,9 +777,22 @@ wRupeeCountLow:: ; DB5E
   ; Lower digits of the player rupees count
   ds 1
 
-; Unlabeled
-wDB5F equ $DB5F
-  ds $6
+; Define Link's spawn position
+; Used when loading a save file or after a game over
+wSpawnLocationData:: ; DB5F
+wSpawnIsIndoor:: ; DB5F
+  ds 1
+wSpawnMapId:: ; DB60
+  ds 1
+wSpawnMapRoom:: ; DB61
+  ds 1
+wSpawnPositionX:: ; DB62
+  ; If 0, will load the pre-defined save file
+  ds 1
+wSpawnPositionY:: ; DB63
+  ds 1
+wSpawnIndoorRoom:: ; DB64
+  ds 1
 
 wHasInstrument1:: ; DB65
   ; 0: false, 2: true

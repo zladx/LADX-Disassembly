@@ -50,10 +50,10 @@ label_420D::
     ld   [wTileMapToLoad], a
     ld   a, $FF
     ldh  [hLinkAnimationState], a
-    ld   a, [$DB57]
+    ld   a, [wDeathCount]
     add  a, $01
     daa
-    ld   [$DB57], a
+    ld   [wDeathCount], a
     ld   a, [$DB58]
     adc  a, $00
     daa
@@ -61,7 +61,7 @@ label_420D::
     cp   $10
     jr   c, label_4240
     ld   a, $99
-    ld   [$DB57], a
+    ld   [wDeathCount], a
     ld   a, $09
     ld   [$DB58], a
 

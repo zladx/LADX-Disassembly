@@ -26,7 +26,7 @@ HouseMusicTracks::
 MusicOverridesPowerUpTrack::
     db   $00, $00, $01, $00, $01, $00, $00, $01, $00, $00, $01, $01, $01, $00, $01, $00
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $01, $00, $01, $00             
+    db   $00, $00, $01, $00, $01, $00
 
 SelectMusicTrackAfterTransition::
     ldh  a, [hFFBC]                               ; $4146: $F0 $BC
@@ -40,9 +40,9 @@ SelectMusicTrackAfterTransition::
     ret                                           ; $414E: $C9
 
 .noPendingGameplayTransition
-    ; If wDidFindSword == 0, use adventure start music
+    ; If wSwordLevel == 0 (Link doesn’t have its sword yet), use adventure start music
     ld   d, $1D                                   ; $414F: $16 $1D
-    ld   a, [wDidFindSword]                       ; $4151: $FA $4E $DB
+    ld   a, [wSwordLevel]                         ; $4151: $FA $4E $DB
     and  a                                        ; $4154: $A7
     jp   z, .clearEventFlagsAndLoadSoundtrack     ; $4155: $CA $A2 $41
 

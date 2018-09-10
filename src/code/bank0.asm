@@ -277,7 +277,7 @@ label_999::
     push af
     push bc
     call label_983
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     pop  bc
     call label_983
     ldh  [$FFD8], a
@@ -294,7 +294,7 @@ label_999::
     ldi  [hl], a
     ld   a, $01
     ldi  [hl], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ldi  [hl], a
     ldh  a, [$FFD8]
     ldi  [hl], a
@@ -544,7 +544,7 @@ AdjustBankNumberForGBC::
     ret
 
 label_0B1A::
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   [MBC3SelectBank], a
     ld   a, $02
     ld   [rSVBK], a
@@ -881,7 +881,7 @@ label_CEC::
     ld   hl, $C540
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   hl, $C530
     add  hl, de
     ld   [hl], a
@@ -893,7 +893,7 @@ label_CEC::
 label_D07::
     ld   a, [$C140]
     sub  a, $08
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, [$C142]
     sub  a, $08
     ldh  [$FFD8], a
@@ -997,7 +997,7 @@ LoadRoomSprites::
 
 .indoorOutdoorEnd
     xor  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
@@ -1078,7 +1078,7 @@ label_E03::
     cp   $FF
     jr   z, label_E29
     ld   [bc], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     and  a
     jr   z, label_E1E
     ld   a, d
@@ -1089,7 +1089,7 @@ label_E03::
 
 label_E1E::
     inc  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, d
     ld   [$C197], a
     ld   a, $01
@@ -2425,7 +2425,7 @@ CheckItemsSwordCollision::
     add  hl, de
     ldh  a, [hLinkPositionX]
     add  a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, data_16BE
     add  hl, de
     ldh  a, [hLinkPositionY]
@@ -2517,7 +2517,7 @@ label_1756::
     or   [hl]
     ret  nz
     ldh  a, [hLinkPositionX]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, [$C181]
     cp   $05
     jr   z, label_1781
@@ -2556,7 +2556,7 @@ ApplyLinkMotionState::
     ld   a, [$C145]
     ld   hl, $C13B
     add  a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  a, [hLinkPositionX]
     ldh  [$FFD8], a
     ld   hl, $FFDA
@@ -2662,7 +2662,7 @@ label_186C::
     call SwitchBank
     pop  af
     call label_004_7A5F
-    ld   hl, $DB6E
+    ld   hl, wIsThief
     inc  [hl]
     ld   hl, $DB46
     inc  [hl]
@@ -2823,7 +2823,7 @@ label_196F::
     jr   nz, label_19D9
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_19C2
+    jr   z, SetSpawnLocation
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, label_1993
@@ -2832,7 +2832,7 @@ label_196F::
 
 label_1993::
     cp   $0A
-    jr   nc, label_19C2
+    jr   nc, SetSpawnLocation
     ld   e, a
     sla  a
     sla  a
@@ -2845,7 +2845,7 @@ label_1993::
 label_19A4::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    call label_19C2
+    call SetSpawnLocation
     push de
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
@@ -2865,20 +2865,26 @@ label_19BF::
     ld   [de], a
     ret
 
-label_19C2::
+; Record Link's spawn point, that will be used
+; when loading the save file or starting after a game over.
+SetSpawnLocation::
+    ; Initialize counter
     ld   a, $00
-    ldh  [$FFD7], a
-    ld   de, $DB5F
+    ldh  [hScratchA], a
+    ld   de, wSpawnLocationData
 
-label_19C9::
+    ; Copy five bytes from $D406 to wSpawnLocationData
+.loop
     ld   a, [hli]
     ld   [de], a
     inc  de
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     inc  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     cp   $05
-    jr   nz, label_19C9
+    jr   nz, .loop
+
+    ; Save the indoor room
     ld   a, [wIndoorRoom]
     ld   [de], a
 
@@ -3311,13 +3317,13 @@ label_1F69::
     cp   $D7
     jp   nz, label_214E
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
     call label_2A26
     ldh  [$FFDC], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     cp   $9A
     jr   z, label_1FFE
     ldh  a, [$FFDC]
@@ -3339,7 +3345,7 @@ label_1F69::
     jp   nc, label_214E
 
 label_1FE6::
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   e, a
     cp   $6F
     jr   z, label_1FF6
@@ -3534,7 +3540,7 @@ label_212C::
     jr   c, label_214D
     xor  a
     ldh  [$FFE5], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     cp   $8E
     jr   z, label_2153
     cp   $20
@@ -3542,7 +3548,7 @@ label_212C::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, label_214D
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     cp   $5C
     jr   z, label_2161
 
@@ -3568,7 +3574,7 @@ label_2161::
 label_2165::
     ldh  a, [$FFD8]
     ld   e, a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ldh  [$FFAF], a
     call label_2178
     ldh  a, [hLinkDirection]
@@ -3614,7 +3620,7 @@ label_21A8::
     ld   c, $01
     call label_21B6
     ld   c, $00
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
 
 label_21B6::
     ld   b, $00
@@ -4724,7 +4730,7 @@ label_2E84::
     xor  a
 
 label_2E85::
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, $C193
     ld   e, a
     ld   d, $00
@@ -4795,7 +4801,7 @@ label_2ED4::
 
 label_2EF2::
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   d, a
     ld   e, $00
     ld   hl, $8400
@@ -4808,7 +4814,7 @@ label_2EF2::
     call CopyData
 
 label_2F0A::
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     inc  a
     cp   $04
     jp   nz, label_2E85
@@ -5432,9 +5438,9 @@ label_323A::
     jp   ReloadSavedBank
 
 func_32A9::
-    ; Clear $FFD7
+    ; Clear hScratchA
     xor  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
 
     ; If [BC] & 0x80 != 0 && [BC] & 0x10) == 0…
     ld   a, [bc] ; tile address
@@ -5442,8 +5448,8 @@ func_32A9::
     jr   z, .bcEnd
     bit  4, a
     jr   nz, .bcEnd
-    ; … $FFD7 = [bc]
-    ldh  [$FFD7], a
+    ; … hScratchA = [bc]
+    ldh  [hScratchA], a
     ; Increment BC
     inc  bc ; increment tile address
 .bcEnd
@@ -5870,7 +5876,7 @@ MoveToNextLine_finallyBeginSomething::
 
 MoveToNextLine_tileTypeNotA0::
     ld   d, $00
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     and  a
     jr   z, CopyObjectToActiveRoomMap
     dec  bc ; decrement tile address
@@ -5878,7 +5884,7 @@ MoveToNextLine_tileTypeNotA0::
     ld   e, a
     ld   hl, wRoomObjects ; prepare tile map
     add  hl, de ; add current tile offset
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     and  $0F
     ld   e, a ; load repeat count from higher-bits of a
     pop  af ;
@@ -5889,14 +5895,14 @@ MoveToNextLine_tileTypeNotA0::
 ;   d      object type
 ;   e      count
 ;   hl     destination address
-;   $FFD7  object data (including the direction)
+;   hScratchA  object data (including the direction)
 FillRoomWithConsecutiveObjects::
     ; Copy object type to the active room map
     ld   a, d
     ldi  [hl], a
 
     ; If the object direction is vertical…
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     and  $40
     jr   z, .verticalEnd
     ; … increment the target address to move to the next column
@@ -7164,11 +7170,11 @@ label_3CF6::
     ld   d, h
     pop  hl
     ld   a, c
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, [$C123]
     ld   c, a
     call label_3D57
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   c, a
 
 label_3D06::
@@ -7430,7 +7436,7 @@ label_3E8E::
     and  $03
     ret  nz
     ldh  a, [$FFEE]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  a, [$FFEC]
     ldh  [$FFD8], a
     ld   a, $08
@@ -7450,7 +7456,7 @@ label_3EAF::
     inc  a
 
 label_3EBA::
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, $C400
     add  hl, bc
     ld   a, [hl]
@@ -7461,7 +7467,7 @@ label_3EBA::
 
 label_3EC7::
     ld   e, $03
-    ld   hl, $FFD7
+    ld   hl, hScratchA
     cp   [hl]
     jr   c, label_3ED1
     ld   e, $0C

@@ -475,7 +475,7 @@ func_4852::
     ld   a, $05
 
 .loop
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, [de]
     and  a
     ld   a, $7E
@@ -493,7 +493,7 @@ func_4852::
 
     ldi  [hl], a
     inc  de
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     dec  a
     jr   nz, .loop
     ld   a, b
@@ -507,7 +507,7 @@ func_4852::
     ld   a, $05
 
 label_4894::
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, [de]
     and  a
     jr   label_489D
@@ -526,7 +526,7 @@ label_489D::
 label_48A9::
     ldi  [hl], a
     inc  de
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     dec  a
     jr   nz, label_4894
     xor  a
@@ -892,7 +892,7 @@ label_531D::
     ld   [wAddRupeeBufferLow], a
     ld   a, [$DB6F]
     and  a
-    jr   nz, label_5353
+    jr   nz, .setStartingPoint
     ld   a, $16
     ld   [$DB6F], a
     ld   a, $50
@@ -900,40 +900,49 @@ label_531D::
     ld   a, $27
     ld   [$DB71], a
 
-label_5353::
-    ld   a, [$DB62]
+.setStartingPoint
+    ld   a, [wSpawnPositionX]
     and  a
-    jr   z, label_5394
+    jr   z, .loadPredefinedSaveFile
     ld   [wMapEntrancePositionX], a
-    ld   a, [$DB63]
+
+    ld   a, [wSpawnPositionY]
     ld   [wMapEntrancePositionY], a
-    ld   a, [$DB61]
-    ldh  [$FFF6], a
+
+    ld   a, [wSpawnMapRoom]
+    ldh  [hMapRoom], a
     ld   [$DB9C], a
-    ld   a, [$DB60]
+
+    ld   a, [wSpawnMapId]
     ldh  [hMapId], a
-    ld   a, [$DB64]
+
+    ld   a, [wSpawnIndoorRoom]
     ld   [wIndoorRoom], a
+
     xor  a
     ldh  [hIsSideScrolling], a
+
     ld   a, $03
     ldh  [hLinkDirection], a
-    ld   a, [$DB5F]
+
+    ld   a, [wSpawnIsIndoor]
     and  $01
     ld   [wIsIndoor], a
-    jr   z, label_538E
+
+    jr   z, .finish
+
     ld   a, $04
     ldh  [hLinkAnimationState], a
+
     ld   a, $02
     ldh  [hLinkDirection], a
 
-label_538E::
+.finish
     ld   a, $02
     ld   [wBGMapToLoad], a
     ret
 
-; Write default save?
-label_5394::
+.loadPredefinedSaveFile
     ld   a, $30
     ld   [wMaxArrows], a
     ld   a, $30
@@ -942,7 +951,7 @@ label_5394::
     ld   [wMaxMagicPowder], a
     ld   a, $A3
     ld   [$DB9C], a
-    ldh  [$FFF6], a
+    ldh  [hMapRoom], a
     ld   [$DB54], a
     ld   a, $01
     ld   [wIsIndoor], a
@@ -962,7 +971,7 @@ label_5394::
     ld   [$DB70], a
     ld   a, $27
     ld   [$DB71], a
-    jr   label_538E
+    jr   .finish
 
 label_53D8::
     sbc  a, l
@@ -1257,7 +1266,7 @@ label_5519::
     jr   nz, label_5519
     push de
     xor  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  [$FFD8], a
     ldh  [$FFD9], a
     ldh  [$FFDA], a
@@ -1290,7 +1299,7 @@ label_5544::
     ld   hl, label_53D8
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, label_53E8
     add  hl, bc
     ld   a, [hl]
@@ -1317,7 +1326,7 @@ label_5544::
     xor  a
     ld   [hl], a
     xor  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  [$FFD8], a
     ldh  [$FFD9], a
     ldh  [$FFDA], a
@@ -1374,7 +1383,7 @@ label_55C0::
     ld   hl, label_5418
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, label_545C
     add  hl, bc
     ld   a, [hl]
@@ -1411,7 +1420,7 @@ label_55F5::
     ld   hl, label_54E4
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, label_54E6
 
 label_5600::
@@ -1433,7 +1442,7 @@ label_5600::
     ret
 
 label_5619::
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ldi  [hl], a
     ldh  a, [$FFD8]
     ldi  [hl], a
@@ -1885,7 +1894,7 @@ label_5A31::
     db 0, 0, 0, 0, 0, 0, 0, 0
 
 label_5A59::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, label_5959
@@ -1904,7 +1913,7 @@ label_5A6E::
 
 label_5A71::
     ld   a, [$DBB4]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   a, [$C1B3]
     ld   hl, $C1B2
     or   [hl]
@@ -1959,7 +1968,7 @@ label_5AA0::
     add  hl, de
     ld   a, [$DBB4]
     add  a, [hl]
-    ld   hl, $FFD7
+    ld   hl, hScratchA
     ld   [$DBB4], a
     cp   [hl]
     jr   z, label_5B3F
@@ -1978,7 +1987,7 @@ label_5AA0::
     jr   nz, label_5AF5
     ld   a, JINGLE_BUMP
     ldh  [hJingle], a
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   [$DBB4], a
     jr   label_5B3F
 
@@ -2361,12 +2370,12 @@ label_5D77::
     ldh  a, [$FFD9]
     and  a
     jr   z, label_5DAB
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
 
 label_5D8B::
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     sub  a, $08
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     jr   c, label_5DA2
     ld   a, $AE
     ldi  [hl], a
@@ -2533,7 +2542,7 @@ label_5E67::
 label_5E79::
     cp   $0A
     jr   nc, label_5E95
-    ld   hl, $DB16
+    ld   hl, wDungeonItemFlags
     ld   e, a
     sla  a
     sla  a
@@ -2597,7 +2606,7 @@ label_5EA6::
     ld   hl, label_5E97
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ld   hl, label_5E9C
     add  hl, bc
     ld   a, [hl]
@@ -2612,7 +2621,7 @@ label_5EA6::
     ldh  [$FFDA], a
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     add  a, [hl]
     ld   [hl], a
     rr   c
@@ -2637,7 +2646,7 @@ label_5EA6::
     pop  bc
     ret
     ld   c, $06
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   hl, $CE81
 
 label_5F09::
@@ -2659,7 +2668,7 @@ label_5F19::
     ld   hl, $CE81
     add  hl, de
     ld   e, [hl]
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     ld   [hl], a
     ld   hl, $CF00
     add  hl, de
@@ -2788,7 +2797,7 @@ label_5FB3::
     ret  z
     cp   MAP_CAVE_B
     ret  c
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $FD
     ret  z
     cp   $B1
@@ -2845,7 +2854,7 @@ label_6014::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, label_607F
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $40
     jr   c, label_607F
     ld   a, [$DB68]
@@ -2957,7 +2966,7 @@ label_609C::
     ld   hl, $C2F0
     add  hl, de
     ld   [hl], $0C
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $A4
     jr   nz, label_60F7
     ldh  a, [hMapId]
@@ -3001,7 +3010,7 @@ label_611A::
     ret
 
 label_611F::
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $A7
     ret  z
     ld   a, [$DB56]
@@ -3184,7 +3193,7 @@ label_6855::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   z, label_6868
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $DD
     ld   e, $12
     jr   nz, label_6868
@@ -3200,7 +3209,7 @@ label_6868::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   z, label_6885
-    ldh  a, [$FFF6]
+    ldh  a, [hMapRoom]
     cp   $DD
     ld   e, $12
     jr   nz, label_6885
@@ -3567,7 +3576,7 @@ label_6BF4::
 
 label_6BF9::
     xor  a
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  [$FFD8], a
     ldh  [$FFD9], a
     ldh  [$FFDA], a
@@ -3585,7 +3594,7 @@ label_6BF9::
     ld   h, $9D
     push hl
     ld   a, $7C
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     ldh  [$FFD8], a
     ldh  [$FFD9], a
     ld   hl, label_6BD7
@@ -3607,7 +3616,7 @@ label_6C2A::
     ld   hl, label_6BDF
     add  hl, de
     ld   a, [hl]
-    ldh  [$FFD7], a
+    ldh  [hScratchA], a
     inc  a
     ldh  [$FFD8], a
     add  a, $0F
@@ -3617,7 +3626,7 @@ label_6C2A::
     pop  hl
 
 label_6C48::
-    ldh  a, [$FFD7]
+    ldh  a, [hScratchA]
     ld   [hl], a
     call label_6C69
     ldh  a, [$FFD8]

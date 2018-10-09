@@ -17,6 +17,7 @@ This repository produces a valid Zelda DX ROM from several different inputs:
 - Disassembled and labeled assembly code (in `./src`),
 - Extracted PNG graphics (in `./src/gfx`),
 - Extracted dialog texts (in `./src/text`),
+- Extracted maps (in `./src/data/maps`),
 - The original ROM (used to fill-in sections not disassembled yet).
 
 ## Status
@@ -30,7 +31,8 @@ This repository produces a valid Zelda DX ROM from several different inputs:
 - Memory: 20% documented
 - Dialogs: extracted, 100%
 - Graphics: extracted, 100%
-- Maps: not extracted
+- Maps: headers and blocks extracted, further formatting work needed
+- Wrap data, Chest data, Palettes: not extracted
 - Music: not extracted
 
 ## How to label code

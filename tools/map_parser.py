@@ -60,7 +60,7 @@ class MapParser:
 
         raise Exception("Cannot find a room for room pointer '0x{:X}'".format(room_address))
 
-    def room_address(self, room_index, partial_pointer):
+    def _room_address(self, room_index, partial_pointer):
         """Return the actual address of the room data from the partial pointer"""
 
         # Retrieve the base address of data for this room
@@ -90,7 +90,7 @@ class MapParser:
             partial_pointer = (higher_byte << 8) + lower_byte
 
             # Compute the actual address of the room data
-            room_address = self.room_address(room_index, partial_pointer)
+            room_address = self._room_address(room_index, partial_pointer)
 
             # Store the data into the parsed pointers table
             room_pointer = RoomPointer(index = room_index, value = partial_pointer, address = room_address)

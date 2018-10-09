@@ -28,30 +28,31 @@ map_descriptors = [
                 length = 7797
             )
         ]),
-    # MapDescriptor(
-    #     name = 'dungeons_a',
-    #     address = BANK(0x10),
-    #     length = 512,
-    #     data_base_address = BANK(0x10),
-    #     rooms = [
-    #         RoomsDescriptor(
-    #             name = 'dungeons_a',
-    #             address = BANK(0x10) + 512,
-    #             length = 1000 # FIXME
-    #         )]
-    # ),
-    # MapDescriptor(
-    #     name = 'dungeons_b',
-    #     address = BANK(0x0B),
-    #     length = 512,
-    #     data_base_address = BANK(0x0B),
-    #     rooms = [
-    #         RoomsDescriptor(
-    #             name = 'dungeons_b',
-    #             address = BANK(0x0B) + 512,
-    #             length = 1000 # FIXME
-    #         )]
-    # )
+    MapDescriptor(
+        name = 'dungeons_a',
+        address = BANK(0x0A),
+        length = 512,
+        data_base_address = BANK(0x0A),
+        rooms = [
+            RoomsDescriptor(
+                name = 'dungeons_a',
+                address = BANK(0x0A) + 512,
+                length = 0x3D42
+            )]
+    ),
+    MapDescriptor(
+        name = 'dungeons_b',
+        address = BANK(0x0B),
+        length = 512,
+        data_base_address = BANK(0x0B),
+        invalid_pointers = [0x2FE01],
+        rooms = [
+            RoomsDescriptor(
+                name = 'dungeons_b',
+                address = BANK(0x0B) + 512,
+                length = 0x3C00
+            )]
+    )
 ]
 
 def format_as_asm(bytes):
@@ -85,8 +86,9 @@ if __name__ == "__main__":
         ## Labels are generated from the map name and room index, like 'Overworld7A'.
         for room_index, room_pointer in enumerate(map_parser.room_pointers):
             room = map_parser.room_for_pointer(room_pointer)
-            label = '{}{:02X}'.format(map_prefix, room_index)
-            room.label = label
+            if room is not None:
+                label = '{}{:02X}'.format(map_prefix, room_index)
+                room.label = label
         ## Leftover rooms (having room data but missing from the map) get an 'Unreferenced' label.
         unreferenced_count = 0
         for rooms_parser in map_parser.rooms_parsers:
@@ -102,7 +104,10 @@ if __name__ == "__main__":
 
         for room_pointer in map_parser.room_pointers:
             room = map_parser.room_for_pointer(room_pointer)
-            map_file.write("dw {}  ; ${:02X}\n".format(room.label, room_pointer.address))
+            if room:
+                map_file.write("dw {}  ; ${:02X}\n".format(room.label, room_pointer.address))
+            else:
+                map_file.write("dw ${:02X}  ; Invalid room pointer\n".format(room_pointer.value))
 
         map_file.close()
 

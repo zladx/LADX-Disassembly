@@ -62,11 +62,6 @@ def format_as_asm(bytes):
     """
     return 'db   ' + ', '.join('${:02X}'.format(b) for b in bytes)
 
-
-def to_camel_case(snake_str):
-    """Convert a string from snake_case to CamelCase"""
-    return ''.join(w.title() for w in snake_str.split('_'))
-
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("rompath", nargs="?", metavar="rompath", type=str)
@@ -80,23 +75,6 @@ if __name__ == "__main__":
     for map_descriptor in map_descriptors:
         # Parse map and rooms in the rom file
         map_parser = MapParser(rom_path, map_descriptor)
-
-        # Generate labels for rooms
-        map_prefix = to_camel_case(map_parser.name)
-        ## Labels are generated from the map name and room index, like 'Overworld7A'.
-        for room_index, room_pointer in enumerate(map_parser.room_pointers):
-            room = map_parser.room_for_pointer(room_pointer)
-            if room is not None:
-                label = '{}{:02X}'.format(map_prefix, room_index)
-                room.label = label
-        ## Leftover rooms (having room data but missing from the map) get an 'Unreferenced' label.
-        unreferenced_count = 0
-        for rooms_parser in map_parser.rooms_parsers:
-            for room in rooms_parser.rooms:
-                if room.label is None:
-                    label = '{}Unreferenced{:02X}'.format(map_prefix, unreferenced_count)
-                    room.label = label
-                    unreferenced_count += 1
 
         # Write map pointers table
         map_file = open(os.path.join(target_dir, 'map_pointers', map_descriptor.name + '.asm'), 'w')

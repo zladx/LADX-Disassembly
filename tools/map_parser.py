@@ -15,6 +15,7 @@ RoomsDescriptor = namedtuple('RoomsDescriptor', ['name', 'address', 'length'])
 
 # Represent a room on a Map
 RoomPointer = namedtuple('RoomPointer', ['index', 'value', 'address'])
+
 # Represent a Room and its data
 class Room:
     def __init__(self, address, length, data):
@@ -22,6 +23,10 @@ class Room:
         self.address = address
         self.length = length
         self.data = data
+
+def to_camel_case(snake_str):
+    """Convert a string from snake_case to CamelCase"""
+    return ''.join(w.title() for w in snake_str.split('_'))
 
 class MapParser:
     """Parse a map and its rooms from a MapDescriptor
@@ -41,6 +46,7 @@ class MapParser:
             rom = rom_file.read()
             self.room_pointers = self._parse_pointers_table(rom, map_descriptor)
             self.rooms_parsers = self._parse_rooms(rom, map_descriptor.rooms)
+            self._label_rooms(self.rooms_parsers)
 
     def room_for_pointer(self, room_pointer):
         """
@@ -104,6 +110,30 @@ class MapParser:
         for rooms_descriptor in rooms_descriptors:
             rooms_parsers.append(RoomsParser(rom, rooms_descriptor))
         return rooms_parsers
+
+    def _label_rooms(self, rooms_parsers):
+        """
+        Set labels on rooms.
+
+        Labels are generated from the map name and room index, like 'Overworld7A'.
+        Unreferenced rooms get special out-of-sequence labels.
+        """
+        map_prefix = to_camel_case(self.name)
+
+        for room_index, room_pointer in enumerate(self.room_pointers):
+            room = self.room_for_pointer(room_pointer)
+            if room is not None:
+                label = '{}{:02X}'.format(map_prefix, room_index)
+                room.label = label
+
+        ## Leftover rooms (having room data but missing from the map) get an 'Unreferenced' label.
+        unreferenced_count = 0
+        for rooms_parser in self.rooms_parsers:
+            for room in rooms_parser.rooms:
+                if room.label is None:
+                    label = '{}Unreferenced{:02X}'.format(map_prefix, unreferenced_count)
+                    room.label = label
+                    unreferenced_count += 1
 
 
 class RoomsParser:

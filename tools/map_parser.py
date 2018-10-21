@@ -197,7 +197,6 @@ class Room:
             object_type = byte & 0xF0
 
             if byte == ROOM_END:
-                data.append(rom[address + i])
                 i += 1
                 roomEnd = True
 

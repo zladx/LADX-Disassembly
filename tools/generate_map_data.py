@@ -61,12 +61,16 @@ class RoomFormatter:
 
     @classmethod
     def to_asm(cls, room):
-        return dedent('''
-            {}::
-              db   ${:02X} ; animation id
-              db   ${:02X} ; floor tile
-              db   {} ; objects data
-        ''').format(room.label, room.animation, room.floor_tile, cls._bytes_to_hex(room.objects))
+        asm = "{}::\n".format(room.label)
+        if room.animation is not None:
+            asm += "  db   ${:02X} ; animation id\n".format(room.animation)
+        if room.floor_tile is not None:
+            asm += "  db   ${:02X} ; floor tile\n".format(room.floor_tile)
+        if room.objects:
+            asm += "  db   {} ; objects data\n".format(cls._bytes_to_hex(room.objects))
+        asm += "  db   $FE ; room end\n\n"
+
+        return asm
 
     def _bytes_to_hex(bytes):
         """

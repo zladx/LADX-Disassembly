@@ -183,6 +183,14 @@ class Room:
 
         print("Parse room at address {:X}".format(address))
 
+        # Check room validity
+        if rom[address] == ROOM_END:
+            self.animation = None
+            self.floor_tile = None
+            self.objects = []
+            self.length = 1
+            return
+
         # Parse header
         self.animation = rom[address]
         self.floor_tile = rom[address + 1]

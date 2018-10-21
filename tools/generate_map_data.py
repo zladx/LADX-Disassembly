@@ -29,31 +29,31 @@ map_descriptors = [
                 length = 7797
             )
         ]),
-    # MapDescriptor(
-    #     name = 'dungeons_a',
-    #     address = BANK(0x0A),
-    #     length = 512,
-    #     data_base_address = BANK(0x0A),
-    #     rooms = [
-    #         RoomsDescriptor(
-    #             name = 'dungeons_a',
-    #             address = BANK(0x0A) + 512,
-    #             length = 0x3D42
-    #         )]
-    # ),
-    # MapDescriptor(
-    #     name = 'dungeons_b',
-    #     address = BANK(0x0B),
-    #     length = 512,
-    #     data_base_address = BANK(0x0B),
-    #     invalid_pointers = [0x2FE01],
-    #     rooms = [
-    #         RoomsDescriptor(
-    #             name = 'dungeons_b',
-    #             address = BANK(0x0B) + 512,
-    #             length = 0x3C00
-    #         )]
-    # )
+    MapDescriptor(
+        name = 'dungeons_a',
+        address = BANK(0x0A),
+        length = 512,
+        data_base_address = BANK(0x0A),
+        rooms = [
+            RoomsDescriptor(
+                name = 'dungeons_a',
+                address = BANK(0x0A) + 512,
+                length = 0x3D42
+            )]
+    ),
+    MapDescriptor(
+        name = 'dungeons_b',
+        address = BANK(0x0B),
+        length = 512,
+        data_base_address = BANK(0x0B),
+        invalid_pointers = [0x2FE01],
+        rooms = [
+            RoomsDescriptor(
+                name = 'dungeons_b',
+                address = BANK(0x0B) + 512,
+                length = 0x3C00
+            )]
+    )
 ]
 
 class RoomFormatter:

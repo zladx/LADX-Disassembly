@@ -181,8 +181,6 @@ class Room:
     def _parse(self, rom, address):
         """Parse a room header and objects"""
 
-        print("Parse room at address {:X}".format(address))
-
         # Check room validity
         if rom[address] == ROOM_END:
             self.animation = None
@@ -192,6 +190,7 @@ class Room:
             return
 
         # Parse header
+        # (FIXME: this is not correct for dungeon rooms)
         self.animation = rom[address]
         self.floor_tile = rom[address + 1]
 
@@ -229,5 +228,3 @@ class Room:
 
         self.objects = data
         self.length = i
-
-        print("Parsed room at address {:X} (length: {})".format(address, i))

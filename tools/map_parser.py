@@ -13,16 +13,8 @@ class MapDescriptor:
 # Describe the location of an area containing Rooms
 RoomsDescriptor = namedtuple('RoomsDescriptor', ['name', 'address', 'length'])
 
-# Represent a room on a Map
+# Represent a room in a Map
 RoomPointer = namedtuple('RoomPointer', ['index', 'value', 'address'])
-
-# Represent a Room and its data
-class Room:
-    def __init__(self, address, length, data):
-        self.label = None
-        self.address = address
-        self.length = length
-        self.data = data
 
 def to_camel_case(snake_str):
     """Convert a string from snake_case to CamelCase"""
@@ -154,26 +146,81 @@ class RoomsParser:
         end_address = descriptor.address + descriptor.length
 
         while address < end_address:
-            room = self._parseRoom(rom, address)
+            room = Room(rom, address)
             rooms.append(room)
-
             address += room.length
 
         return rooms
 
-    def _parseRoom(self, rom, address):
-        """Parse a room data, until we reach the end marker"""
-        END_BYTE = 0xFE
+# Object special types
+OBJECT_VERTICAL   = 0xC0;
+OBJECT_HORIZONTAL = 0x80;
+OBJECT_WARP       = 0xE0;
+OBJECT_INVALID_D0 = 0xD0;
+OBJECT_INVALID_B0 = 0xB0;
+OBJECT_INVALID_A0 = 0xA0;
+OBJECT_INVALID_90 = 0x90;
+ROOM_END   = 0xFE;
 
+class Room:
+    """Represent a Room and its data"""
+    def __init__(self, rom, address, label=None):
+        self.address = address
+        self.data = None
+        self.label = None
+        self.length = None
+
+        self.animation = None
+        self.floor_tile = None
+        # self.template = None
+        # self.dungeon = None
+        self.objects = []
+
+        self._parse(rom, address)
+
+    def _parse(self, rom, address):
+        """Parse a room header and objects"""
+
+        print("Parse room at address {:X}".format(address))
+
+        # Parse header
+        self.animation = rom[address]
+        self.floor_tile = rom[address + 1]
+
+        # Parse objects
         data = []
-        i = 0
+        i = 2
         roomEnd = False
 
         while not roomEnd:
             byte = rom[address + i]
-            data.append(byte)
+            object_type = byte & 0xF0
 
-            i += 1
-            roomEnd = (byte == END_BYTE)
+            if byte == ROOM_END:
+                data.append(rom[address + i])
+                i += 1
+                roomEnd = True
 
-        return Room(address, i, data)
+            elif object_type == OBJECT_WARP:
+                data.append(rom[address + i])
+                data.append(rom[address + i + 1])
+                data.append(rom[address + i + 2])
+                data.append(rom[address + i + 3])
+                data.append(rom[address + i + 4])
+                i += 5
+
+            elif object_type == OBJECT_VERTICAL or object_type == OBJECT_HORIZONTAL:
+                data.append(rom[address + i])
+                data.append(rom[address + i + 1])
+                data.append(rom[address + i + 2])
+                i += 3
+
+            else:
+                data.append(rom[address + i])
+                data.append(rom[address + i + 1])
+                i += 2
+
+        self.objects = data
+        self.length = i
+
+        print("Parsed room at address {:X} (length: {})".format(address, i))

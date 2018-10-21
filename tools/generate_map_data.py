@@ -4,6 +4,7 @@
 
 import os
 import argparse
+from textwrap import dedent
 from map_parser import *
 
 def BANK(bank_index):
@@ -28,39 +29,52 @@ map_descriptors = [
                 length = 7797
             )
         ]),
-    MapDescriptor(
-        name = 'dungeons_a',
-        address = BANK(0x0A),
-        length = 512,
-        data_base_address = BANK(0x0A),
-        rooms = [
-            RoomsDescriptor(
-                name = 'dungeons_a',
-                address = BANK(0x0A) + 512,
-                length = 0x3D42
-            )]
-    ),
-    MapDescriptor(
-        name = 'dungeons_b',
-        address = BANK(0x0B),
-        length = 512,
-        data_base_address = BANK(0x0B),
-        invalid_pointers = [0x2FE01],
-        rooms = [
-            RoomsDescriptor(
-                name = 'dungeons_b',
-                address = BANK(0x0B) + 512,
-                length = 0x3C00
-            )]
-    )
+    # MapDescriptor(
+    #     name = 'dungeons_a',
+    #     address = BANK(0x0A),
+    #     length = 512,
+    #     data_base_address = BANK(0x0A),
+    #     rooms = [
+    #         RoomsDescriptor(
+    #             name = 'dungeons_a',
+    #             address = BANK(0x0A) + 512,
+    #             length = 0x3D42
+    #         )]
+    # ),
+    # MapDescriptor(
+    #     name = 'dungeons_b',
+    #     address = BANK(0x0B),
+    #     length = 512,
+    #     data_base_address = BANK(0x0B),
+    #     invalid_pointers = [0x2FE01],
+    #     rooms = [
+    #         RoomsDescriptor(
+    #             name = 'dungeons_b',
+    #             address = BANK(0x0B) + 512,
+    #             length = 0x3C00
+    #         )]
+    # )
 ]
 
-def format_as_asm(bytes):
-    """
-    Format an array of bytes into a string suitable for inclusion in an assembly file.
-    Example: [0x01, 0x34, 0x3E] -> 'db    $01, $34, $3E'
-    """
-    return 'db   ' + ', '.join('${:02X}'.format(b) for b in bytes)
+class RoomFormatter:
+    """Output annotated assembly code for a given room"""
+
+    @classmethod
+    def to_asm(cls, room):
+        return dedent('''
+            {}::
+              db   ${:02X} ; animation id
+              db   ${:02X} ; floor tile
+              db   {} ; objects data
+        ''').format(room.label, room.animation, room.floor_tile, cls._bytes_to_hex(room.objects))
+
+    def _bytes_to_hex(bytes):
+        """
+        Format an array of bytes into a string suitable for inclusion in an assembly file.
+        Example: [0x01, 0x34, 0x3E] -> 'db    $01, $34, $3E'
+        """
+        return ', '.join('${:02X}'.format(b) for b in bytes)
+
 
 if __name__ == "__main__":
     arg_parser = argparse.ArgumentParser()
@@ -95,6 +109,6 @@ if __name__ == "__main__":
             rooms_file.write(disclaimer)
 
             for index, room in enumerate(rooms_parser.rooms):
-                rooms_file.write("{}::\n  {}\n\n".format(room.label, format_as_asm(room.data)))
+                rooms_file.write(RoomFormatter.to_asm(room))
 
             rooms_file.close()

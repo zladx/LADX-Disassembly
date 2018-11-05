@@ -76,7 +76,7 @@ class RoomFormatter:
 
         if room.objects:
             asm += "  db   {} ; objects data\n".format(cls._bytes_to_hex(room.objects))
-        asm += "  db   $FE ; room end\n\n"
+        asm += "  db   ROOM_END\n\n"
 
         return asm
 

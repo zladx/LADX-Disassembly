@@ -32,3 +32,6 @@ MAP_LIBRARY        equ $1D
 MAP_UNKNOWN        equ $1E
 MAP_CAVE_E         equ $1F
 MAP_COLOR_DUNGEON  equ $FF
+
+; Value for room objects
+ROOM_END           equ $FE

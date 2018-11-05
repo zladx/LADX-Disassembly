@@ -11,18 +11,10 @@ class MapDescriptor:
         self.invalid_pointers = invalid_pointers
 
 # Describe the location of an area containing Rooms
-RoomsDescriptor = namedtuple('RoomsDescriptor', ['name', 'address', 'length'])
+RoomsDescriptor = namedtuple('RoomsDescriptor', ['name', 'address', 'length', 'klass'])
 
-# Represent a room on a Map
+# Represent a room in a Map
 RoomPointer = namedtuple('RoomPointer', ['index', 'value', 'address'])
-
-# Represent a Room and its data
-class Room:
-    def __init__(self, address, length, data):
-        self.label = None
-        self.address = address
-        self.length = length
-        self.data = data
 
 def to_camel_case(snake_str):
     """Convert a string from snake_case to CamelCase"""
@@ -152,28 +144,146 @@ class RoomsParser:
         rooms = []
         address = descriptor.address
         end_address = descriptor.address + descriptor.length
+        room_class = descriptor.klass
 
         while address < end_address:
-            room = self._parseRoom(rom, address)
+            room = (room_class)(rom, address)
             rooms.append(room)
-
             address += room.length
 
         return rooms
 
-    def _parseRoom(self, rom, address):
-        """Parse a room data, until we reach the end marker"""
-        END_BYTE = 0xFE
+# Object special types
+OBJECT_VERTICAL   = 0xC0;
+OBJECT_HORIZONTAL = 0x80;
+OBJECT_WARP       = 0xE0;
+OBJECT_INVALID_D0 = 0xD0;
+OBJECT_INVALID_B0 = 0xB0;
+OBJECT_INVALID_A0 = 0xA0;
+OBJECT_INVALID_90 = 0x90;
+ROOM_END   = 0xFE;
 
+# Animated tiles
+ANIMATED_TILES_IDS = [
+    "ANIMATED_TILES_NONE",
+    "ANIMATED_TILES_COUNTER",
+    "ANIMATED_TILES_TIDE",
+    "ANIMATED_TILES_VILLAGE",
+    "ANIMATED_TILES_DUNGEON_1",
+    "ANIMATED_TILES_UNDERGROUND",
+    "ANIMATED_TILES_LAVA",
+    "ANIMATED_TILES_DUNGEON_2",
+    "ANIMATED_TILES_WARP_TILE",
+    "ANIMATED_TILES_CURRENTS",
+    "ANIMATED_TILES_WATERFALL",
+    "ANIMATED_TILES_WATERFALL_SLOW",
+    "ANIMATED_TILES_WATER_DUNGEON",
+    "ANIMATED_TILES_LIGHT_BEAM",
+    "ANIMATED_TILES_CRYSTAL_BLOCK",
+    "ANIMATED_TILES_BUBBLES",
+    "ANIMATED_TILES_WEATHER_VANE",
+    "ANIMATED_TILES_PHOTO"
+]
+
+TEMPLATE_IDS = [
+    "ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT",
+    "ROOM_TEMPLATE_RIGHT_BOTTOM_LEFT",
+    "ROOM_TEMPLATE_TOP_LEFT_BOTTOM",
+    "ROOM_TEMPLATE_LEFT_TOP_RIGHT",
+    "ROOM_TEMPLATE_TOP_RIGHT_BOTTOM",
+    "ROOM_TEMPLATE_BOTTOM_LEFT",
+    "ROOM_TEMPLATE_BOTTOM_RIGHT",
+    "ROOM_TEMPLATE_TOP_RIGHT",
+    "ROOM_TEMPLATE_TOP_LEFT",
+]
+
+class Room:
+    """Represent a Room and its data"""
+    def __init__(self, rom, address, label=None):
+        self.address = address
+        self.data = None
+        self.label = None
+        self.length = None
+
+        self.animation_id = None
+        self.template = None
+        self.floor_tile = None
+        self.objects = []
+
+        # Check room validity
+        if rom[address] == ROOM_END:
+            self.animation_id = None
+            self.floor_tile = None
+            self.objects = []
+            self.length = 1
+            return
+
+        self._parse_header(rom, address)
+        self._parse(rom, address)
+
+    def animation_id_constant(self):
+        if self.animation_id is None or self.animation_id >= len(ANIMATED_TILES_IDS):
+            return None
+        else:
+            return ANIMATED_TILES_IDS[self.animation_id]
+
+    def template_id_constant(self):
+        if self.template is None or self.template >= len(TEMPLATE_IDS):
+            return None
+        else:
+            return TEMPLATE_IDS[self.template]
+
+    def _parse_header(self, room, address):
+        """Parse the room first two bytes"""
+        raise "parse_header method must be implemented by subclasses"
+
+    def _parse(self, rom, address):
+        """Parse the room objects"""
+
+        # Parse objects
         data = []
-        i = 0
+        i = 2
         roomEnd = False
 
         while not roomEnd:
             byte = rom[address + i]
-            data.append(byte)
+            object_type = byte & 0xF0
 
-            i += 1
-            roomEnd = (byte == END_BYTE)
+            if byte == ROOM_END:
+                i += 1
+                roomEnd = True
 
-        return Room(address, i, data)
+            elif object_type == OBJECT_WARP:
+                data.append(rom[address + i])
+                data.append(rom[address + i + 1])
+                data.append(rom[address + i + 2])
+                data.append(rom[address + i + 3])
+                data.append(rom[address + i + 4])
+                i += 5
+
+            elif object_type == OBJECT_VERTICAL or object_type == OBJECT_HORIZONTAL:
+                data.append(rom[address + i])
+                data.append(rom[address + i + 1])
+                data.append(rom[address + i + 2])
+                i += 3
+
+            else:
+                data.append(rom[address + i])
+                data.append(rom[address + i + 1])
+                i += 2
+
+        self.objects = data
+        self.length = i
+
+class OverworldRoom(Room):
+    """Represent a room in the Overworld map"""
+    def _parse_header(self, rom, address):
+        self.animation_id = rom[address]
+        self.floor_tile = rom[address + 1]
+
+class IndoorRoom(Room):
+    """Represent a room in the indoor maps"""
+    def _parse_header(self, rom, address):
+        self.animation_id = rom[address]
+        self.floor_tile = (rom[address + 1] & 0x0F)
+        self.template =   (rom[address + 1] & 0xF0) >> 4

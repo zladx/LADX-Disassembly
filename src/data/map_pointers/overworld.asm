@@ -1,4 +1,4 @@
-; File generated automatically with `tools/generate_map_data.py`
+; File generated automatically by `tools/generate_map_data.py`
 
 dw Overworld00  ; $24200
 dw Overworld01  ; $24264

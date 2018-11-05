@@ -11,7 +11,7 @@ class MapDescriptor:
         self.invalid_pointers = invalid_pointers
 
 # Describe the location of an area containing Rooms
-RoomsDescriptor = namedtuple('RoomsDescriptor', ['name', 'address', 'length'])
+RoomsDescriptor = namedtuple('RoomsDescriptor', ['name', 'address', 'length', 'klass'])
 
 # Represent a room in a Map
 RoomPointer = namedtuple('RoomPointer', ['index', 'value', 'address'])
@@ -144,9 +144,10 @@ class RoomsParser:
         rooms = []
         address = descriptor.address
         end_address = descriptor.address + descriptor.length
+        room_class = descriptor.klass
 
         while address < end_address:
-            room = Room(rom, address)
+            room = (room_class)(rom, address)
             rooms.append(room)
             address += room.length
 
@@ -193,21 +194,9 @@ class Room:
         self.length = None
 
         self.animation_id = None
+        self.template = None
         self.floor_tile = None
-        # self.template = None
-        # self.dungeon = None
         self.objects = []
-
-        self._parse(rom, address)
-
-    def animation_id_constant(self):
-        if self.animation_id is None or self.animation_id >= len(ANIMATED_TILES_IDS):
-            return None
-        else:
-            return ANIMATED_TILES_IDS[self.animation_id]
-
-    def _parse(self, rom, address):
-        """Parse a room header and objects"""
 
         # Check room validity
         if rom[address] == ROOM_END:
@@ -217,10 +206,21 @@ class Room:
             self.length = 1
             return
 
-        # Parse header
-        # (FIXME: this is not correct for dungeon rooms)
-        self.animation_id = rom[address]
-        self.floor_tile = rom[address + 1]
+        self._parse_header(rom, address)
+        self._parse(rom, address)
+
+    def animation_id_constant(self):
+        if self.animation_id is None or self.animation_id >= len(ANIMATED_TILES_IDS):
+            return None
+        else:
+            return ANIMATED_TILES_IDS[self.animation_id]
+
+    def _parse_header(self, room, address):
+        """Parse the room first two bytes"""
+        raise "parse_header method must be implemented by subclasses"
+
+    def _parse(self, rom, address):
+        """Parse the room objects"""
 
         # Parse objects
         data = []
@@ -256,3 +256,16 @@ class Room:
 
         self.objects = data
         self.length = i
+
+class OverworldRoom(Room):
+    """Represent a room in the Overworld map"""
+    def _parse_header(self, rom, address):
+        self.animation_id = rom[address]
+        self.floor_tile = rom[address + 1]
+
+class DungeonRoom(Room):
+    """Represent a room in the Dungeons maps"""
+    def _parse_header(self, rom, address):
+        self.animation_id = rom[address]
+        self.floor_tile = (rom[address + 1] & 0x0F)
+        self.template =   (rom[address + 1] & 0xF0) >> 4

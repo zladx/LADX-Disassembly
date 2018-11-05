@@ -21,12 +21,14 @@ map_descriptors = [
             RoomsDescriptor(
                 name = 'overworld_a',
                 address = BANK(0x09) + 512,
-                length = 9357
+                length = 9357,
+                klass = OverworldRoom
             ),
             RoomsDescriptor(
                 name = 'overworld_b',
                 address = BANK(0x1A),
-                length = 7797
+                length = 7797,
+                klass = OverworldRoom
             )
         ]),
     MapDescriptor(
@@ -38,7 +40,8 @@ map_descriptors = [
             RoomsDescriptor(
                 name = 'dungeons_a',
                 address = BANK(0x0A) + 512,
-                length = 0x3D42
+                length = 0x3D42,
+                klass = DungeonRoom
             )]
     ),
     MapDescriptor(
@@ -51,7 +54,8 @@ map_descriptors = [
             RoomsDescriptor(
                 name = 'dungeons_b',
                 address = BANK(0x0B) + 512,
-                length = 0x3C00
+                length = 0x3C00,
+                klass = DungeonRoom
             )]
     )
 ]
@@ -64,8 +68,12 @@ class RoomFormatter:
         asm = "{}::\n".format(room.label)
         if room.animation_id is not None:
             asm += "  db   {} ; animation id\n".format(cls._asm_animation_id(room))
-        if room.floor_tile is not None:
+
+        if room.floor_tile is not None and room.template is not None:
+            asm += "  db   ${:02X} | ${:02X} ; room template | floor tile\n".format(room.template << 4, room.floor_tile)
+        elif room.floor_tile is not None:
             asm += "  db   ${:02X} ; floor tile\n".format(room.floor_tile)
+
         if room.objects:
             asm += "  db   {} ; objects data\n".format(cls._bytes_to_hex(room.objects))
         asm += "  db   $FE ; room end\n\n"

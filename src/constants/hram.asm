@@ -200,6 +200,7 @@ hFrameCounter:: ; FFE7
 
 ; This location has different uses
 hFFE8                   ; FFE8
+hRoomBank::             ; FFE8
 hDialogBackgroundTile:: ; FFE8
   ds 1
 

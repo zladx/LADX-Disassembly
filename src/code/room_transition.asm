@@ -215,8 +215,8 @@ ApplyRoomTransition::
     and  a                                        ; $79BF: $A7
     ret  z                                        ; $79C0: $C8
 
-    ; If $FFF8 != 0, return
-    ldh  a, [hFFF8]                               ; $79C1: $F0 $F8
+    ; If the chests for this room have been opened, return
+    ldh  a, [hRoomStatus]                         ; $79C1: $F0 $F8
     and  $10                                      ; $79C3: $E6 $10
     ret  nz                                       ; $79C5: $C0
 

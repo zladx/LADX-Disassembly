@@ -5646,7 +5646,7 @@ jr_004_6677:
     cp   $0F                                      ; $66A1: $FE $0F
     jr   nz, jr_004_66E6                          ; $66A3: $20 $41
 
-    ldh  a, [hFFF8]                               ; $66A5: $F0 $F8
+    ldh  a, [hRoomStatus]                               ; $66A5: $F0 $F8
     and  $10                                      ; $66A7: $E6 $10
     jr   nz, jr_004_66E6                          ; $66A9: $20 $3B
 
@@ -5660,7 +5660,7 @@ jr_004_6677:
     ld   a, [hl]                                  ; $66B8: $7E
     or   $10                                      ; $66B9: $F6 $10
     ld   [hl], a                                  ; $66BB: $77
-    ldh  [hFFF8], a                               ; $66BC: $E0 $F8
+    ldh  [hRoomStatus], a                               ; $66BC: $E0 $F8
     ld   a, [wHeartPiecesCount]                               ; $66BE: $FA $5C $DB
     inc  a                                        ; $66C1: $3C
     ld   [wHeartPiecesCount], a                               ; $66C2: $EA $5C $DB
@@ -6174,7 +6174,7 @@ label_004_69A5:
     cp   $14                                      ; $69B0: $FE $14
     jr   c, jr_004_69C9                           ; $69B2: $38 $15
 
-    ldh  a, [hFFF8]                               ; $69B4: $F0 $F8
+    ldh  a, [hRoomStatus]                               ; $69B4: $F0 $F8
     and  $10                                      ; $69B6: $E6 $10
     jp   nz, label_004_6D7A                       ; $69B8: $C2 $7A $6D
 
@@ -7029,7 +7029,7 @@ jr_004_6E7A:
 
     ld   a, [wIsMarinFollowingLink]               ; $6E7C: $FA $73 $DB
     push af                                       ; $6E7F: $F5
-    ldh  a, [hFFF8]                               ; $6E80: $F0 $F8
+    ldh  a, [hRoomStatus]                               ; $6E80: $F0 $F8
     and  $10                                      ; $6E82: $E6 $10
     jr   z, jr_004_6E8A                           ; $6E84: $28 $04
 

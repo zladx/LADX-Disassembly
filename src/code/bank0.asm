@@ -5182,70 +5182,92 @@ LoadRoom::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4CA3
+
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_3119
+    jr   z, .GBCEnd
     ld   a, $21
     ld   [MBC3SelectBank], a
     call $40B3
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6DAF
+.GBCEnd
 
-label_3119::
-    ld   a, $09
+    ;
+    ; Load map pointers bank
+    ;
+
+    ld   a, BANK(OverworldRoomPointers)
     ld   [MBC3SelectBank], a
+    ; If loading an indoor room…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_313A
+    jr   z, .indoorSpecialCodeEnd
+    ; Do some stuff
     ld   a, $14
     ld   [MBC3SelectBank], a
     ldh  [$FFE8], a
     call $5897
     ld   e, a
     ld   hl, wKillCount2
-
-label_3132::
+.loop
     xor  a
     ldi  [hl], a
     inc  e
     ld   a, e
     cp   $11
-    jr   nz, label_3132
+    jr   nz, .loop
+.indoorSpecialCodeEnd
 
-label_313A::
+    ;
+    ; Load the room status
+    ;
+
+    ; de = hMapRoom
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
+    ; hl = wOverworldRoomStatus
     ld   hl, wOverworldRoomStatus
+    ; If loading an indoor room…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_3161
-    ld   hl, $D900
+    jr   z, .roomStatusEnd
+    ; … use the room status for indoor map A
+    ld   hl, wIndoorARoomStatus
+    ; If Color Dungeon…
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_3156
+    jr   nz, .notColorDungeon
+    ; … use the room status for color dungeon
     ld   hl, $DDE0
-    jr   label_3161
-
-label_3156::
+    jr   .roomStatusEnd
+.notColorDungeon
+    ; Unless on one of the special rooms, use the room status for the indoor map B
     cp   $1A
-    jr   nc, label_3161
+    jr   nc, .roomStatusEnd
     cp   $06
-    jr   c, label_3161
-    ld   hl, $DA00
+    jr   c, .roomStatusEnd
+    ld   hl, wIndoorBRoomStatus
+.roomStatusEnd
 
-label_3161::
+    ; a = RoomStatusTable[hMapRoom]
     add  hl, de
     ldh  a, [hIsSideScrolling]
     and  a
     ld   a, [hl]
-    jr   nz, label_316B
+
+    ; If the room status was zero (not visited yet), mark the room as visited
+    jr   nz, .markVisitedRoomEnd
     or   $80
     ld   [hl], a
+.markVisitedRoomEnd
 
-label_316B::
-    ldh  [hFFF8], a
+    ; Set the room status as the current room status
+    ldh  [hRoomStatus], a
+
+
     ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
@@ -5456,8 +5478,8 @@ func_32A9::
 
     inc  bc
 
-    ; e = hFFF8
-    ldh  a, [hFFF8]
+    ; e = hRoomStatus
+    ldh  a, [hRoomStatus]
     ld   e, a
 
     ; If is outdoor…
@@ -6135,7 +6157,7 @@ data_35F8::
 label_35FA::
     ld   e, 0
     call label_373F
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $04
     jp   nz, label_36B2
     push bc
@@ -6194,7 +6216,7 @@ label_36B2::
     ld   de, data_36B0
     jp   label_354B
 
-; Set hFFF8 depending on the map and room
+; Set hRoomStatus depending on the map and room
 label_36C4::
     push af
     ld   hl, $D900
@@ -6219,7 +6241,7 @@ label_36E1::
     pop  af
     or   [hl]
     ld   [hl], a
-    ldh  [hFFF8], a
+    ldh  [hRoomStatus], a
     ret
 
 data_36E8::
@@ -6264,7 +6286,7 @@ data_3724::
 label_3726::
     ld   e, $08
     call label_373F
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $04
     jp   nz, label_36B2
     push bc

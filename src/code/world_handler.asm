@@ -178,7 +178,7 @@ label_4495::
     ld   a, [$DBCD]
     and  a
     jr   z, label_44A6
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $10
     jr   nz, label_44A6
     ld   a, $0C

@@ -2229,7 +2229,7 @@ jr_002_503B:
     cp   $10                                      ; $504B: $FE $10
     jr   nc, jr_002_50A2                          ; $504D: $30 $53
 
-    ld   hl, hFFF8                                ; $504F: $21 $F8 $FF
+    ld   hl, hRoomStatus                                ; $504F: $21 $F8 $FF
     bit  5, [hl]                                  ; $5052: $CB $6E
     jr   nz, jr_002_5079                          ; $5054: $20 $23
 
@@ -2832,7 +2832,7 @@ func_002_53B0::
     ld   a, [hl]                                  ; $53CB: $7E
     or   $40                                      ; $53CC: $F6 $40
     ld   [hl], a                                  ; $53CE: $77
-    ldh  [hFFF8], a                               ; $53CF: $E0 $F8
+    ldh  [hRoomStatus], a                               ; $53CF: $E0 $F8
     ldh  a, [$FFDB]                               ; $53D1: $F0 $DB
     and  $F0                                      ; $53D3: $E6 $F0
     ldh  [hSwordIntersectedAreaX], a                               ; $53D5: $E0 $CE
@@ -4128,7 +4128,7 @@ jr_002_5B6F:
     ld   a, [bc]                                  ; $5B7E: $0A
     or   [hl]                                     ; $5B7F: $B6
     ld   [bc], a                                  ; $5B80: $02
-    ldh  [hFFF8], a                               ; $5B81: $E0 $F8
+    ldh  [hRoomStatus], a                               ; $5B81: $E0 $F8
     ld   hl, $5A69                                ; $5B83: $21 $69 $5A
     add  hl, de                                   ; $5B86: $19
     ld   a, [wIndoorRoom]                               ; $5B87: $FA $AE $DB
@@ -4449,7 +4449,7 @@ jr_002_5D36:
     pop  hl                                       ; $5D49: $E1
     and  [hl]                                     ; $5D4A: $A6
     ld   [hl], a                                  ; $5D4B: $77
-    ldh  [hFFF8], a                               ; $5D4C: $E0 $F8
+    ldh  [hRoomStatus], a                               ; $5D4C: $E0 $F8
     ret                                           ; $5D4E: $C9
 
 func_002_5D4F::
@@ -4523,7 +4523,7 @@ jr_002_5DA8:
     ret                                           ; $5DAE: $C9
 
 func_002_5DAF::
-    ldh  a, [hFFF8]                               ; $5DAF: $F0 $F8
+    ldh  a, [hRoomStatus]                               ; $5DAF: $F0 $F8
     and  $10                                      ; $5DB1: $E6 $10
     jr   nz, jr_002_5DC0                          ; $5DB3: $20 $0B
 
@@ -4571,7 +4571,7 @@ label_002_5DF6::
     ld   a, [hl]                                  ; $5DFC: $7E
     or   $10                                      ; $5DFD: $F6 $10
     ld   [hl], a                                  ; $5DFF: $77
-    ldh  [hFFF8], a                               ; $5E00: $E0 $F8
+    ldh  [hRoomStatus], a                               ; $5E00: $E0 $F8
 
 label_002_5E02::
     ret                                           ; $5E02: $C9
@@ -4585,7 +4585,7 @@ label_002_5E02::
     ld   a, [hl]                                  ; $5E0F: $7E
     or   $10                                      ; $5E10: $F6 $10
     ld   [hl], a                                  ; $5E12: $77
-    ldh  [hFFF8], a                               ; $5E13: $E0 $F8
+    ldh  [hRoomStatus], a                               ; $5E13: $E0 $F8
 
 jr_002_5E15:
     jp   label_002_5425                           ; $5E15: $C3 $25 $54
@@ -5099,7 +5099,7 @@ jr_002_60BD:
     ld   a, [hl]                                  ; $60D1: $7E
     or   $10                                      ; $60D2: $F6 $10
     ld   [hl], a                                  ; $60D4: $77
-    ldh  [hFFF8], a                               ; $60D5: $E0 $F8
+    ldh  [hRoomStatus], a                               ; $60D5: $E0 $F8
     ret                                           ; $60D7: $C9
 
 ; Clamp the item count to a maximum value
@@ -7375,7 +7375,7 @@ jr_002_6F25:
     cp   $02                                      ; $6FA4: $FE $02
     jp   nz, label_002_703B                       ; $6FA6: $C2 $3B $70
 
-    ldh  a, [hFFF8]                               ; $6FA9: $F0 $F8
+    ldh  a, [hRoomStatus]                               ; $6FA9: $F0 $F8
     bit  4, a                                     ; $6FAB: $CB $67
     jp   nz, label_002_703B                       ; $6FAD: $C2 $3B $70
 
@@ -7471,7 +7471,7 @@ jr_002_702C:
     ld   a, [hl]                                  ; $7035: $7E
     or   $10                                      ; $7036: $F6 $10
     ld   [hl], a                                  ; $7038: $77
-    ldh  [hFFF8], a                               ; $7039: $E0 $F8
+    ldh  [hRoomStatus], a                               ; $7039: $E0 $F8
 
 label_002_703B::
     jp   label_002_7277                           ; $703B: $C3 $77 $72

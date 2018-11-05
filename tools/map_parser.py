@@ -185,6 +185,18 @@ ANIMATED_TILES_IDS = [
     "ANIMATED_TILES_PHOTO"
 ]
 
+TEMPLATE_IDS = [
+    "ROOM_TEMPLATE_TOP_RIGHT_BOTTOM_LEFT",
+    "ROOM_TEMPLATE_RIGHT_BOTTOM_LEFT",
+    "ROOM_TEMPLATE_TOP_LEFT_BOTTOM",
+    "ROOM_TEMPLATE_LEFT_TOP_RIGHT",
+    "ROOM_TEMPLATE_TOP_RIGHT_BOTTOM",
+    "ROOM_TEMPLATE_BOTTOM_LEFT",
+    "ROOM_TEMPLATE_BOTTOM_RIGHT",
+    "ROOM_TEMPLATE_TOP_RIGHT",
+    "ROOM_TEMPLATE_TOP_LEFT",
+]
+
 class Room:
     """Represent a Room and its data"""
     def __init__(self, rom, address, label=None):
@@ -214,6 +226,12 @@ class Room:
             return None
         else:
             return ANIMATED_TILES_IDS[self.animation_id]
+
+    def template_id_constant(self):
+        if self.template is None or self.template >= len(TEMPLATE_IDS):
+            return None
+        else:
+            return TEMPLATE_IDS[self.template]
 
     def _parse_header(self, room, address):
         """Parse the room first two bytes"""

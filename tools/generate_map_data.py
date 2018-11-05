@@ -70,7 +70,7 @@ class RoomFormatter:
             asm += "  db   {} ; animation id\n".format(cls._asm_animation_id(room))
 
         if room.floor_tile is not None and room.template is not None:
-            asm += "  db   ${:02X} | ${:02X} ; room template | floor tile\n".format(room.template << 4, room.floor_tile)
+            asm += "  db   {} | ${:02X} ; room template | floor tile\n".format(cls._asm_room_template(room), room.floor_tile)
         elif room.floor_tile is not None:
             asm += "  db   ${:02X} ; floor tile\n".format(room.floor_tile)
 
@@ -79,6 +79,9 @@ class RoomFormatter:
         asm += "  db   $FE ; room end\n\n"
 
         return asm
+
+    def _asm_room_template(room):
+        return room.template_id_constant() or "${:02X}".format(room.template << 4)
 
     def _asm_animation_id(room):
         return room.animation_id_constant() or "${:02X}".format(room.animation_id)
@@ -135,4 +138,12 @@ if __name__ == "__main__":
             file.write("; Values for hAnimatedTilesGroup\n")
             for animated_tiles_constant in ANIMATED_TILES_IDS:
                 file.write("{} equ ${:02X}\n".format(animated_tiles_constant, i))
+                i += 1
+
+        with open(os.path.join(target_dir, '..', 'constants', 'room_templates.asm'), 'w') as file:
+            i = 0
+            file.write(disclaimer)
+            file.write("; Values for indoor rooms templates\n")
+            for template_constant in TEMPLATE_IDS:
+                file.write("{} equ ${:02X}\n".format(template_constant, i << 4))
                 i += 1

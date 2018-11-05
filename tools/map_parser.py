@@ -162,6 +162,28 @@ OBJECT_INVALID_A0 = 0xA0;
 OBJECT_INVALID_90 = 0x90;
 ROOM_END   = 0xFE;
 
+# Animated tiles
+ANIMATED_TILES_IDS = [
+    "ANIMATED_TILES_NONE",
+    "ANIMATED_TILES_COUNTER",
+    "ANIMATED_TILES_TIDE",
+    "ANIMATED_TILES_VILLAGE",
+    "ANIMATED_TILES_DUNGEON_1",
+    "ANIMATED_TILES_UNDERGROUND",
+    "ANIMATED_TILES_LAVA",
+    "ANIMATED_TILES_DUNGEON_2",
+    "ANIMATED_TILES_WARP_TILE",
+    "ANIMATED_TILES_CURRENTS",
+    "ANIMATED_TILES_WATERFALL",
+    "ANIMATED_TILES_WATERFALL_SLOW",
+    "ANIMATED_TILES_WATER_DUNGEON",
+    "ANIMATED_TILES_LIGHT_BEAM",
+    "ANIMATED_TILES_CRYSTAL_BLOCK",
+    "ANIMATED_TILES_BUBBLES",
+    "ANIMATED_TILES_WEATHER_VANE",
+    "ANIMATED_TILES_PHOTO"
+]
+
 class Room:
     """Represent a Room and its data"""
     def __init__(self, rom, address, label=None):
@@ -170,7 +192,7 @@ class Room:
         self.label = None
         self.length = None
 
-        self.animation = None
+        self.animation_id = None
         self.floor_tile = None
         # self.template = None
         # self.dungeon = None
@@ -178,12 +200,18 @@ class Room:
 
         self._parse(rom, address)
 
+    def animation_id_constant(self):
+        if self.animation_id is None or self.animation_id >= len(ANIMATED_TILES_IDS):
+            return None
+        else:
+            return ANIMATED_TILES_IDS[self.animation_id]
+
     def _parse(self, rom, address):
         """Parse a room header and objects"""
 
         # Check room validity
         if rom[address] == ROOM_END:
-            self.animation = None
+            self.animation_id = None
             self.floor_tile = None
             self.objects = []
             self.length = 1
@@ -191,7 +219,7 @@ class Room:
 
         # Parse header
         # (FIXME: this is not correct for dungeon rooms)
-        self.animation = rom[address]
+        self.animation_id = rom[address]
         self.floor_tile = rom[address + 1]
 
         # Parse objects

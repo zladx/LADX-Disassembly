@@ -1,4 +1,4 @@
-; File generated automatically with `tools/generate_map_data.py`
+; File generated automatically by `tools/generate_map_data.py`
 
 dw DungeonsB01  ; $2C200
 dw DungeonsB01  ; $2C200

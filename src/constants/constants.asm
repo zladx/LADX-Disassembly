@@ -1,3 +1,4 @@
+include "constants/animated_tiles.asm"
 include "constants/charmap.asm"
 include "constants/debug.asm"
 include "constants/gameplay.asm"

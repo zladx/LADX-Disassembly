@@ -62,8 +62,8 @@ class RoomFormatter:
     @classmethod
     def to_asm(cls, room):
         asm = "{}::\n".format(room.label)
-        if room.animation is not None:
-            asm += "  db   ${:02X} ; animation id\n".format(room.animation)
+        if room.animation_id is not None:
+            asm += "  db   {} ; animation id\n".format(cls._asm_animation_id(room))
         if room.floor_tile is not None:
             asm += "  db   ${:02X} ; floor tile\n".format(room.floor_tile)
         if room.objects:
@@ -71,6 +71,9 @@ class RoomFormatter:
         asm += "  db   $FE ; room end\n\n"
 
         return asm
+
+    def _asm_animation_id(room):
+        return room.animation_id_constant() or "${:02X}".format(room.animation_id)
 
     def _bytes_to_hex(bytes):
         """
@@ -88,7 +91,7 @@ if __name__ == "__main__":
     args = arg_parser.parse_args()
     rom_path = args.rompath or 'Zelda.gbc'
     target_dir = args.target or os.path.join('src', 'data')
-    disclaimer = "; File generated automatically with `tools/generate_map_data.py`\n\n"
+    disclaimer = "; File generated automatically by `tools/generate_map_data.py`\n\n"
 
     for map_descriptor in map_descriptors:
         # Parse map and rooms in the rom file
@@ -116,3 +119,12 @@ if __name__ == "__main__":
                 rooms_file.write(RoomFormatter.to_asm(room))
 
             rooms_file.close()
+
+        # Write constants
+        with open(os.path.join(target_dir, '..', 'constants', 'animated_tiles.asm'), 'w') as file:
+            i = 0
+            file.write(disclaimer)
+            file.write("; Values for hAnimatedTilesGroup\n")
+            for animated_tiles_constant in ANIMATED_TILES_IDS:
+                file.write("{} equ ${:02X}\n".format(animated_tiles_constant, i))
+                i += 1

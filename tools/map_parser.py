@@ -263,8 +263,8 @@ class OverworldRoom(Room):
         self.animation_id = rom[address]
         self.floor_tile = rom[address + 1]
 
-class DungeonRoom(Room):
-    """Represent a room in the Dungeons maps"""
+class IndoorRoom(Room):
+    """Represent a room in the indoor maps"""
     def _parse_header(self, rom, address):
         self.animation_id = rom[address]
         self.floor_tile = (rom[address + 1] & 0x0F)

@@ -35,16 +35,16 @@ include "data/maps/overworld_a.asm"
 include "text/dialog_dx.asm"
 
 section "bank0A", romx[$4000], bank[$0A]
-DungeonsARoomPointers::
-include "data/map_pointers/dungeons_a.asm"
-DungeonsAMapHeaders::
-include "data/maps/dungeons_a.asm"
+IndoorsARoomPointers::
+include "data/map_pointers/indoors_a.asm"
+IndoorsAMapHeaders::
+include "data/maps/indoors_a.asm"
 
 section "bank0B", romx[$4000], bank[$0B]
-DungeonsBRoomPointers::
-include "data/map_pointers/dungeons_b.asm"
-DungeonsBMapHeaders::
-include "data/maps/dungeons_b.asm"
+IndoorsBRoomPointers::
+include "data/map_pointers/indoors_b.asm"
+IndoorsBMapHeaders::
+include "data/maps/indoors_b.asm"
 
 section "bank0C",romx[$4000],bank[$0C]
 incbin "gfx/characters/link_1.dmg.2bpp"

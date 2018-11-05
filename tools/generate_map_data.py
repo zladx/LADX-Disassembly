@@ -32,30 +32,30 @@ map_descriptors = [
             )
         ]),
     MapDescriptor(
-        name = 'dungeons_a',
+        name = 'indoors_a',
         address = BANK(0x0A),
         length = 512,
         data_base_address = BANK(0x0A),
         rooms = [
             RoomsDescriptor(
-                name = 'dungeons_a',
+                name = 'indoors_a',
                 address = BANK(0x0A) + 512,
                 length = 0x3D42,
-                klass = DungeonRoom
+                klass = IndoorRoom
             )]
     ),
     MapDescriptor(
-        name = 'dungeons_b',
+        name = 'indoors_b',
         address = BANK(0x0B),
         length = 512,
         data_base_address = BANK(0x0B),
         invalid_pointers = [0x2FE01],
         rooms = [
             RoomsDescriptor(
-                name = 'dungeons_b',
+                name = 'indoors_b',
                 address = BANK(0x0B) + 512,
                 length = 0x3C00,
-                klass = DungeonRoom
+                klass = IndoorRoom
             )]
     )
 ]

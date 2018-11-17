@@ -15,7 +15,7 @@ map_descriptors = [
     MapDescriptor(
         name = 'overworld',
         address = BANK(0x09),
-        length = 512,
+        length = 0x200,
         data_base_address = (lambda room_index: BANK(0x09) if room_index <= 0x7F else BANK(0x1A)),
         rooms = [
             RoomsDescriptor(
@@ -34,29 +34,44 @@ map_descriptors = [
     MapDescriptor(
         name = 'indoors_a',
         address = BANK(0x0A),
-        length = 512,
+        length = 0x200,
         data_base_address = BANK(0x0A),
         rooms = [
             RoomsDescriptor(
                 name = 'indoors_a',
-                address = BANK(0x0A) + 512,
-                length = 0x3D42,
+                address = BANK(0x0A) + 0x200,
+                length = 0x3977,
                 klass = IndoorRoom
             )]
     ),
     MapDescriptor(
         name = 'indoors_b',
         address = BANK(0x0B),
-        length = 512,
+        length = 0x200,
         data_base_address = BANK(0x0B),
         invalid_pointers = [0x2FE01],
         rooms = [
             RoomsDescriptor(
                 name = 'indoors_b',
-                address = BANK(0x0B) + 512,
+                address = BANK(0x0B) + 0x200,
                 length = 0x3C00,
                 klass = IndoorRoom
             )]
+    ),
+    MapDescriptor(
+        name = 'color_dungeon',
+        address = BANK(0x0A) + 0x200 + 0x3977,
+        length = 0x40,
+        data_base_address = BANK(0x0A),
+        invalid_pointers = [BANK(0x0A) + 0x200],
+        rooms = [
+            RoomsDescriptor(
+                name = 'color_dungeon',
+                address = BANK(0x0A) + 0x200 + 0x3977 + 0x40,
+                length = 0x38B,
+                klass = IndoorRoom
+            )
+        ]
     )
 ]
 

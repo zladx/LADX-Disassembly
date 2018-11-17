@@ -39,6 +39,10 @@ IndoorsARoomPointers::
 include "data/map_pointers/indoors_a.asm"
 IndoorsAMapHeaders::
 include "data/maps/indoors_a.asm"
+ColorDunngeonRoomPointers::
+include "data/map_pointers/color_dungeon.asm"
+ColorDungeonMapHeaders::
+include "data/maps/color_dungeon.asm"
 
 section "bank0B", romx[$4000], bank[$0B]
 IndoorsBRoomPointers::

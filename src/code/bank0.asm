@@ -5310,10 +5310,10 @@ LoadRoom::
     jp   TMP_parseRoomHeader
 .goriyaRoomEnd
 
-    ; If the map is less than $1A…
+    ; If the map is less than MAP_UNKNOWN_1A…
     ld   hl, IndoorsARoomPointers
     ldh  a, [hMapId]
-    cp   $1A
+    cp   MAP_UNKNOWN_1A
     jr   nc, TMP_bankAndAddressSelectionEnd
     ; …and the map is greater than the first 6 dungeons…
     cp   MAP_EAGLES_TOWER

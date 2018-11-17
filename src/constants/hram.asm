@@ -200,6 +200,7 @@ hFrameCounter:: ; FFE7
 
 ; This location has different uses
 hFFE8                   ; FFE8
+hRoomBank::             ; FFE8
 hDialogBackgroundTile:: ; FFE8
   ds 1
 
@@ -239,7 +240,11 @@ hMapId:: ; FFF7
   ; See MAP_* constants for values
   ds 1
 
-hFFF8:: ; FFF8
+hRoomStatus:: ; FFF8
+  ; Status of the current room
+  ; 00 : not visited
+  ; 80 : visited
+  ; ?? : visited and special event occured
   ds 1
 
 hIsSideScrolling:: ; FFF9

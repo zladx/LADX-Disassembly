@@ -224,7 +224,7 @@ label_C8AD::
     ld   a, [hl]
     and  $80
     jr   z, label_C918
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $30
     jr   z, label_C8C7
     jp   label_3F8D
@@ -480,10 +480,10 @@ label_CA6B::
 
 label_CA72::
     ret
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     rra
     jr   label_CA7A
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
 
 label_CA7A::
     and  $10
@@ -1208,7 +1208,7 @@ label_CF24::
     ldh  a, [hMapRoom]
     cp   $F8
     jr   nz, label_CF44
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     bit  4, a
     jp   nz, label_3F8D
     bit  5, a
@@ -1219,7 +1219,7 @@ label_CF24::
 label_CF44::
     cp   $7A
     jr   nz, label_CF54
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $10
     jp   nz, label_3F8D
     ld   a, $04
@@ -1231,7 +1231,7 @@ label_CF54::
     ld   a, [$D969]
     and  $10
     jp   z, label_3F8D
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $10
     jp   nz, label_3F8D
 
@@ -1496,7 +1496,7 @@ label_D12A::
     ld   a, [hl]
     or   $10
     ld   [hl], a
-    ldh  [hFFF8], a
+    ldh  [hRoomStatus], a
     ret
 
 label_D134::
@@ -2780,7 +2780,7 @@ data_D9D8::
     ld   a, [hl]
     or   $20
     ld   [hl], a
-    ldh  [hFFF8], a
+    ldh  [hRoomStatus], a
     ldh  a, [hMapId]
     ld   hl, $DA2E
     cp   $06
@@ -2830,7 +2830,7 @@ data_DA4D::
     ld   [bc], a
     xor  h
     ldi  [hl], a
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $10
     jp   nz, label_3F8D
     ldh  a, [$FFF0]
@@ -3030,7 +3030,7 @@ label_DB99::
     ld   a, [$DB4E]
     and  a
     jr   nz, label_DBAC
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $10
     jp   nz, label_3F8D
     ld   de, data_DB97
@@ -3119,7 +3119,7 @@ data_DC47::
     db $8A, $14
 
 label_DC49::
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $10
     jp   nz, label_3F8D
     ld   de, data_DC47
@@ -3415,7 +3415,7 @@ label_DE8B::
 label_DEAE::
     ld   a, c
     ld   [$D201], a
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $10
     jp   nz, label_3F8D
     ldh  a, [hMapId]
@@ -3608,7 +3608,7 @@ label_E029::
     ld   hl, $DB15
     call label_E373
     call label_D12A
-    ld   hl, hFFF8
+    ld   hl, hRoomStatus
     res  4, [hl]
     ld   e, $A2
     ld   a, [$DB15]
@@ -4842,7 +4842,7 @@ label_E865::
     ld   a, [hl]
     or   $04
     ld   [hl], a
-    ldh  [hFFF8], a
+    ldh  [hRoomStatus], a
     jp   label_D1F5
 
 label_E878::
@@ -4872,7 +4872,7 @@ label_E894::
     ld   a, [de]
     or   [hl]
     ld   [de], a
-    ldh  [hFFF8], a
+    ldh  [hRoomStatus], a
     ld   hl, data_E75D
     add  hl, bc
     ld   a, [wIndoorRoom]
@@ -4996,7 +4996,7 @@ label_E95D::
     ld   a, [hl]
     or   $40
     ld   [hl], a
-    ldh  [hFFF8], a
+    ldh  [hRoomStatus], a
 
 label_E964::
     call label_2178

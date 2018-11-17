@@ -627,9 +627,11 @@ wRoomObjects equ $D711
 wOverworldRoomStatus:: ; D800
   ds $100
 
-; Unlabeled
-wD900:: ; D900
-  ds $200
+wIndoorARoomStatus:: ; D900
+  ds $100
+
+wIndoorBRoomStatus:: ; D900
+  ds $100
 
 wAButtonSlot:: ; DB00
   ds 1

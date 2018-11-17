@@ -5182,113 +5182,151 @@ LoadRoom::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $4CA3
+
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_3119
+    jr   z, .GBCEnd
     ld   a, $21
     ld   [MBC3SelectBank], a
     call $40B3
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $6DAF
+.GBCEnd
 
-label_3119::
-    ld   a, $09
+    ;
+    ; Load map pointers bank
+    ;
+
+    ld   a, BANK(OverworldRoomPointers)
     ld   [MBC3SelectBank], a
+    ; If loading an indoor room…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_313A
+    jr   z, .indoorSpecialCodeEnd
+    ; Do some stuff
     ld   a, $14
     ld   [MBC3SelectBank], a
-    ldh  [$FFE8], a
+    ldh  [hRoomBank], a
     call $5897
     ld   e, a
     ld   hl, wKillCount2
-
-label_3132::
+.loop
     xor  a
     ldi  [hl], a
     inc  e
     ld   a, e
     cp   $11
-    jr   nz, label_3132
+    jr   nz, .loop
+.indoorSpecialCodeEnd
 
-label_313A::
+    ;
+    ; Load the room status
+    ;
+
+    ; de = hMapRoom
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
+    ; hl = wOverworldRoomStatus
     ld   hl, wOverworldRoomStatus
+    ; If loading an indoor room…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_3161
-    ld   hl, $D900
+    jr   z, .roomStatusEnd
+    ; … use the room status for indoor map A
+    ld   hl, wIndoorARoomStatus
+    ; If Color Dungeon…
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_3156
+    jr   nz, .notColorDungeon
+    ; … use the room status for color dungeon
     ld   hl, $DDE0
-    jr   label_3161
-
-label_3156::
+    jr   .roomStatusEnd
+.notColorDungeon
+    ; Unless on one of the special rooms, use the room status for the indoor map B
     cp   $1A
-    jr   nc, label_3161
+    jr   nc, .roomStatusEnd
     cp   $06
-    jr   c, label_3161
-    ld   hl, $DA00
+    jr   c, .roomStatusEnd
+    ld   hl, wIndoorBRoomStatus
+.roomStatusEnd
 
-label_3161::
+    ; a = RoomStatusTable[hMapRoom]
     add  hl, de
     ldh  a, [hIsSideScrolling]
     and  a
     ld   a, [hl]
-    jr   nz, label_316B
+
+    ; If the room status was zero (not visited yet), mark the room as visited
+    jr   nz, .markVisitedRoomEnd
     or   $80
     ld   [hl], a
+.markVisitedRoomEnd
 
-label_316B::
-    ldh  [hFFF8], a
+    ; Set the room status as the current room status
+    ldh  [hRoomStatus], a
+
+    ;
+    ; Select the bank and address for the map pointers table
+    ;
+
+    ; bc = hMapRoom
     ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
     sla  c
     rl   b
+
+    ; If the room is indoor…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_31BF
-    ld   a, $0A
+    jr   z, .isIndoorEnd
+
+    ; …use the bank for IndoorA map
+    ld   a, BANK(IndoorsARoomPointers)
     ld   [MBC3SelectBank], a
-    ldh  [$FFE8], a
+    ldh  [hRoomBank], a
+
+    ; If the room is in the Color Dungeon…
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_318F
-    ld   hl, $7B77
-    jp   label_3224
+    jr   nz, .colorDungeonEnd
+    ; …use the map pointers table specific to the color dungeon.
+    ld   hl, $7B77 ; color dungeon map pointers table
+    jp   TMP_bankAndAddressSelectionEnd
+.colorDungeonEnd
 
-label_318F::
-    cp   $1F
-    jr   nz, label_31A6
+    ; If have the Magnifying Lens, load an alternate Goriya room (where the Goriya NPC is actually present)
+    cp   MAP_CAVE_E
+    jr   nz, .goriyaRoomEnd
     ldh  a, [hMapRoom]
     cp   $F5
-    jr   nz, label_31A6
+    jr   nz, .goriyaRoomEnd
     ld   a, [wTradeSequenceItem]
-    cp   $0E
-    jr   nz, label_31A6
-    ld   bc, $7855
-    jp   label_323A
+    cp   $0E ; Magnifying Glass
+    jr   nz, .goriyaRoomEnd
+    ld   bc, IndoorsAUnreferenced02
+    jp   TMP_parseRoomHeader
+.goriyaRoomEnd
 
-label_31A6::
-    ld   hl, $4000
+    ; If the map is less than MAP_UNKNOWN_1A…
+    ld   hl, IndoorsARoomPointers
     ldh  a, [hMapId]
-    cp   $1A
-    jr   nc, label_3224
+    cp   MAP_UNKNOWN_1A
+    jr   nc, TMP_bankAndAddressSelectionEnd
+    ; …and the map is greater than the first 6 dungeons…
     cp   MAP_EAGLES_TOWER
-    jr   c, label_3224
-    ld   a, $0B
+    jr   c, TMP_bankAndAddressSelectionEnd
+    ; …use the bank for IndoorB map.
+    ld   a, BANK(IndoorsBRoomPointers)
     ld   [MBC3SelectBank], a
-    ldh  [$FFE8], a
-    ld   hl, $4000
-    jr   label_3224
+    ldh  [hRoomBank], a
+    ld   hl, IndoorsBRoomPointers
+    jr   TMP_bankAndAddressSelectionEnd
 
-label_31BF::
+.isIndoorEnd
+
     ldh  a, [hMapRoom]
     cp   $0E
     jr   nz, label_31D1
@@ -5346,7 +5384,8 @@ label_3211::
 label_3221::
     ld   hl, $4000
 
-label_3224::
+TMP_bankAndAddressSelectionEnd::
+
     add  hl, bc
     ld   a, [hli]
     ld   c, a
@@ -5354,16 +5393,20 @@ label_3224::
     ld   b, a
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_323A
+    jr   nz, TMP_parseRoomHeader
 
 label_322F::
     ldh  a, [hMapRoom]
     cp   $80
-    jr   c, label_323A
+    jr   c, TMP_parseRoomHeader
     ld   a, $1A
     ld   [MBC3SelectBank], a
 
-label_323A::
+    ;
+    ; Parse room header
+    ;
+
+TMP_parseRoomHeader::
     ld   a, [bc]
     cp   $FE
     jr   z, .endOfRoom
@@ -5456,8 +5499,8 @@ func_32A9::
 
     inc  bc
 
-    ; e = hFFF8
-    ldh  a, [hFFF8]
+    ; e = hRoomStatus
+    ldh  a, [hRoomStatus]
     ld   e, a
 
     ; If is outdoor…
@@ -6135,7 +6178,7 @@ data_35F8::
 label_35FA::
     ld   e, 0
     call label_373F
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $04
     jp   nz, label_36B2
     push bc
@@ -6194,7 +6237,7 @@ label_36B2::
     ld   de, data_36B0
     jp   label_354B
 
-; Set hFFF8 depending on the map and room
+; Set hRoomStatus depending on the map and room
 label_36C4::
     push af
     ld   hl, $D900
@@ -6219,7 +6262,7 @@ label_36E1::
     pop  af
     or   [hl]
     ld   [hl], a
-    ldh  [hFFF8], a
+    ldh  [hRoomStatus], a
     ret
 
 data_36E8::
@@ -6264,7 +6307,7 @@ data_3724::
 label_3726::
     ld   e, $08
     call label_373F
-    ldh  a, [hFFF8]
+    ldh  a, [hRoomStatus]
     and  $04
     jp   nz, label_36B2
     push bc
@@ -6537,7 +6580,7 @@ label_38EA::
     push bc
     call $4880
     pop  bc
-    ldh  a, [$FFE8]
+    ldh  a, [hRoomBank]
     ld   [MBC3SelectBank], a
     ret
 

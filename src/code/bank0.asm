@@ -5430,26 +5430,38 @@ LoadRoom::
     ;
 
 .parseRoomHeader
+    ; Parse header first byte (animated tiles group)
     ld   a, [bc]
     cp   ROOM_END
     jr   z, .endOfRoom
     ldh  [hAnimatedTilesGroup], a
+
+    ; Parse header second byte
     inc  bc
     ld   a, [wIsIndoor]
     and  a
-    jr   z, .label_3258
+    jr   z, .parseOverworldFloorTile
+
+.parseIndoorsSecondByte
+    ; For indoor rooms, the lower nybble is the floor tile…
     ld   a, [bc]
     and  $0F
     call FillRoomMapWithObject
+    ; … and the upper nybble is the room template
     ld   a, [bc]
     swap a
     and  $0F
-    call label_38EA
+    call LoadRoomTemplate
     jr   .CopyMapToTileMapLoop
 
-.label_3258
+.parseOverworldSecondByte
+    ; For overworld rooms, the second byte is just the floor tile
     ld   a, [bc]
     call FillRoomMapWithObject
+
+    ;
+    ; Parse room objects
+    ;
 
 .CopyMapToTileMapLoop
     inc  bc ; tile address
@@ -6595,7 +6607,9 @@ label_38D4::
     ld   [MBC3SelectBank], a
     ret
 
-label_38EA::
+; Load the template for an indoor room
+;   a: the template to use (see ROOM_TEMPLATE_* constants)
+LoadRoomTemplate::
     ld   e, a
     ld   a, $14
     ld   [MBC3SelectBank], a

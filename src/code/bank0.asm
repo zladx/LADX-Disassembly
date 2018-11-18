@@ -5294,7 +5294,7 @@ LoadRoom::
     jr   nz, .colorDungeonEnd
     ; …use the map pointers table specific to the color dungeon.
     ld   hl, ColorDungeonRoomPointers ; color dungeon map pointers table
-    jp   .bankAndAddressSelectionEnd
+    jp   .fetchRoomAddress
 .colorDungeonEnd
 
     ; If have the Magnifying Lens, load an alternate Goriya room (where the Goriya NPC is actually present)
@@ -5314,16 +5314,16 @@ LoadRoom::
     ld   hl, IndoorsARoomPointers
     ldh  a, [hMapId]
     cp   MAP_UNKNOWN_1A
-    jr   nc, .bankAndAddressSelectionEnd
+    jr   nc, .fetchRoomAddress
     ; …and the map is greater than the first 6 dungeons…
     cp   MAP_EAGLES_TOWER
-    jr   c, .bankAndAddressSelectionEnd
+    jr   c, .fetchRoomAddress
     ; …use the bank for IndoorB map.
     ld   a, BANK(IndoorsBRoomPointers)
     ld   [MBC3SelectBank], a
     ldh  [hRoomBank], a
     ld   hl, IndoorsBRoomPointers
-    jr   .bankAndAddressSelectionEnd
+    jr   .fetchRoomAddress
 
 .isIndoorEnd
 
@@ -5338,7 +5338,7 @@ LoadRoom::
     and  $10
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced01 ; Eagle's Tower open
-    jr   .label_322F
+    jr   .loadBankForOverworldRooms
 .endEaglesTowerAlt
 
     cp   $8C
@@ -5347,7 +5347,7 @@ LoadRoom::
     and  $10
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced05 ; South Face Shrine open
-    jr   .label_322F
+    jr   .loadBankForOverworldRooms
 .endSouthFaceShrineAlt
 
     cp   $79
@@ -5356,7 +5356,7 @@ LoadRoom::
     and  $10
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced04 ; Upper Tal Tal Heights dry
-    jr   .label_322F
+    jr   .loadBankForOverworldRooms
 .endUpperTalTalHeightsAlt
 
     cp   $06
@@ -5365,7 +5365,7 @@ LoadRoom::
     and  $10
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced00 ; Windfish's Egg open
-    jr   .label_322F
+    jr   .loadBankForOverworldRooms
 .endWindfishsEggAlt
 
     cp   $1B
@@ -5374,7 +5374,7 @@ LoadRoom::
     and  $10
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced02 ; Tal Tal Heights dry
-    jr   .label_322F
+    jr   .loadBankForOverworldRooms
 .endTalTalHeightsAlt
 
     cp   $2B
@@ -5383,36 +5383,55 @@ LoadRoom::
     and  $10
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced03 ; Angler's Tunnel open
-    jr   .label_322F
+    jr   .loadBankForOverworldRooms
 
 .altRoomsEnd
+
+    ;
+    ; Get room address from index
+    ;
+    ; hl: rooms base address
+    ; bc: room index
+    ;
+
+    ; Set the base address for resolving usual room pointers
+    ; (except Color Dungeon)
     ld   hl, $4000
 
-.bankAndAddressSelectionEnd
-
+.fetchRoomAddress
+    ; b = hl[room index]
+    ; c = hl[room index + 1]
     add  hl, bc
     ld   a, [hli]
     ld   c, a
     ld   a, [hl]
     ld   b, a
+
+    ;
+    ; Load proper bank for Overworld rooms
+    ;
+
+    ; If in Overworld…
     ld   a, [wIsIndoor]
     and  a
     jr   nz, .parseRoomHeader
-
-.label_322F
+.loadBankForOverworldRooms
+    ; … and the overworld room index is >= $80…
     ldh  a, [hMapRoom]
     cp   $80
     jr   c, .parseRoomHeader
-    ld   a, $1A
+    ; … select bank for second half of Overworld rooms
+    ld   a, BANK(OverworldMapHeadersSecondHalf)
     ld   [MBC3SelectBank], a
 
     ;
     ; Parse room header
+    ; bc: address of room header data
     ;
 
 .parseRoomHeader
     ld   a, [bc]
-    cp   $FE
+    cp   ROOM_END
     jr   z, .endOfRoom
     ldh  [hAnimatedTilesGroup], a
     inc  bc

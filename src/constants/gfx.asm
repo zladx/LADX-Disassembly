@@ -39,3 +39,12 @@ MAP_COLOR_DUNGEON    equ $FF
 
 ; Value for room objects
 ROOM_END           equ $FE
+
+; Value for wOverworldRoomStatus (and similar constants)
+;
+; Flags can be combined. For example, visiting the first dungeon's screen (80)
+; and opening it with the key (10) would put that byte at 90.
+ROOM_STATUS_UNVISITED    equ $00
+ROOM_STATUS_CHANGED      equ $10 ; e.g. sword taken on the beach, or dungeon opened with key
+ROOM_STATUS_OWL_TALKED   equ $20
+ROOM_STATUS_VISITED      equ $80

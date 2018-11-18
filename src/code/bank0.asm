@@ -5260,7 +5260,7 @@ LoadRoom::
 
     ; If the room status was zero (not visited yet), mark the room as visited
     jr   nz, .markVisitedRoomEnd
-    or   $80
+    or   ROOM_STATUS_VISITED
     ld   [hl], a
 .markVisitedRoomEnd
 
@@ -5335,7 +5335,7 @@ LoadRoom::
     cp   $0E
     jr   nz, .endEaglesTowerAlt
     ld   a, [$D80E]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced01 ; Eagle's Tower open
     jr   .loadBankForOverworldRooms
@@ -5344,7 +5344,7 @@ LoadRoom::
     cp   $8C
     jr   nz, .endSouthFaceShrineAlt
     ld   a, [$D88C]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced05 ; South Face Shrine open
     jr   .loadBankForOverworldRooms
@@ -5353,7 +5353,7 @@ LoadRoom::
     cp   $79
     jr   nz, .endUpperTalTalHeightsAlt
     ld   a, [$D879]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced04 ; Upper Tal Tal Heights dry
     jr   .loadBankForOverworldRooms
@@ -5362,7 +5362,7 @@ LoadRoom::
     cp   $06
     jr   nz, .endWindfishsEggAlt
     ld   a, [$D806]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced00 ; Windfish's Egg open
     jr   .loadBankForOverworldRooms
@@ -5371,7 +5371,7 @@ LoadRoom::
     cp   $1B
     jr   nz, .endTalTalHeightsAlt
     ld   a, [$D82B]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced02 ; Tal Tal Heights dry
     jr   .loadBankForOverworldRooms
@@ -5380,7 +5380,7 @@ LoadRoom::
     cp   $2B
     jr   nz, .altRoomsEnd
     ld   a, [$D82B]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced03 ; Angler's Tunnel open
     jr   .loadBankForOverworldRooms

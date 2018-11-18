@@ -152,7 +152,7 @@ if __name__ == "__main__":
             file.write(disclaimer)
             file.write("; Values for hAnimatedTilesGroup\n")
             for animated_tiles_constant in ANIMATED_TILES_IDS:
-                file.write("{} equ ${:02X}\n".format(animated_tiles_constant, i))
+                file.write("{:29} equ ${:02X}\n".format(animated_tiles_constant, i))
                 i += 1
 
         with open(os.path.join(target_dir, '..', 'constants', 'room_templates.asm'), 'w') as file:
@@ -160,5 +160,5 @@ if __name__ == "__main__":
             file.write(disclaimer)
             file.write("; Values for indoor rooms templates\n")
             for template_constant in TEMPLATE_IDS:
-                file.write("{} equ ${:02X}\n".format(template_constant, i << 4))
+                file.write("{:35} equ ${:02X}\n".format(template_constant, i << 4))
                 i += 1

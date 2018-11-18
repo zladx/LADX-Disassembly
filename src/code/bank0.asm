@@ -5293,8 +5293,8 @@ LoadRoom::
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
     ; …use the map pointers table specific to the color dungeon.
-    ld   hl, $7B77 ; color dungeon map pointers table
-    jp   TMP_bankAndAddressSelectionEnd
+    ld   hl, ColorDungeonRoomPointers ; color dungeon map pointers table
+    jp   .fetchRoomAddress
 .colorDungeonEnd
 
     ; If have the Magnifying Lens, load an alternate Goriya room (where the Goriya NPC is actually present)
@@ -5307,126 +5307,161 @@ LoadRoom::
     cp   $0E ; Magnifying Glass
     jr   nz, .goriyaRoomEnd
     ld   bc, IndoorsAUnreferenced02
-    jp   TMP_parseRoomHeader
+    jp   .parseRoomHeader
 .goriyaRoomEnd
 
     ; If the map is less than MAP_UNKNOWN_1A…
     ld   hl, IndoorsARoomPointers
     ldh  a, [hMapId]
     cp   MAP_UNKNOWN_1A
-    jr   nc, TMP_bankAndAddressSelectionEnd
+    jr   nc, .fetchRoomAddress
     ; …and the map is greater than the first 6 dungeons…
     cp   MAP_EAGLES_TOWER
-    jr   c, TMP_bankAndAddressSelectionEnd
+    jr   c, .fetchRoomAddress
     ; …use the bank for IndoorB map.
     ld   a, BANK(IndoorsBRoomPointers)
     ld   [MBC3SelectBank], a
     ldh  [hRoomBank], a
     ld   hl, IndoorsBRoomPointers
-    jr   TMP_bankAndAddressSelectionEnd
+    jr   .fetchRoomAddress
 
 .isIndoorEnd
 
+    ;
+    ; Swap some Overworld rooms with alternative layouts
+    ;
+
     ldh  a, [hMapRoom]
     cp   $0E
-    jr   nz, label_31D1
+    jr   nz, .endEaglesTowerAlt
     ld   a, [$D80E]
     and  $10
-    jr   z, label_3221
-    ld   bc, $47EC
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced01 ; Eagle's Tower open
+    jr   .loadBankForOverworldRooms
+.endEaglesTowerAlt
 
-label_31D1::
     cp   $8C
-    jr   nz, label_31E1
+    jr   nz, .endSouthFaceShrineAlt
     ld   a, [$D88C]
     and  $10
-    jr   z, label_3221
-    ld   bc, $434E
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced05 ; South Face Shrine open
+    jr   .loadBankForOverworldRooms
+.endSouthFaceShrineAlt
 
-label_31E1::
     cp   $79
-    jr   nz, label_31F1
+    jr   nz, .endUpperTalTalHeightsAlt
     ld   a, [$D879]
     and  $10
-    jr   z, label_3221
-    ld   bc, $6513
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced04 ; Upper Tal Tal Heights dry
+    jr   .loadBankForOverworldRooms
+.endUpperTalTalHeightsAlt
 
-label_31F1::
     cp   $06
-    jr   nz, label_3201
+    jr   nz, .endWindfishsEggAlt
     ld   a, [$D806]
     and  $10
-    jr   z, label_3221
-    ld   bc, $4496
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced00 ; Windfish's Egg open
+    jr   .loadBankForOverworldRooms
+.endWindfishsEggAlt
 
-label_3201::
     cp   $1B
-    jr   nz, label_3211
+    jr   nz, .endTalTalHeightsAlt
     ld   a, [$D82B]
     and  $10
-    jr   z, label_3221
-    ld   bc, $4C0F
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced02 ; Tal Tal Heights dry
+    jr   .loadBankForOverworldRooms
+.endTalTalHeightsAlt
 
-label_3211::
     cp   $2B
-    jr   nz, label_3221
+    jr   nz, .altRoomsEnd
     ld   a, [$D82B]
     and  $10
-    jr   z, label_3221
-    ld   bc, $509A
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced03 ; Angler's Tunnel open
+    jr   .loadBankForOverworldRooms
 
-label_3221::
+.altRoomsEnd
+
+    ;
+    ; Get room address from index
+    ;
+    ; hl: rooms base address
+    ; bc: room index
+    ;
+
+    ; Set the base address for resolving usual room pointers
+    ; (except Color Dungeon)
     ld   hl, $4000
 
-TMP_bankAndAddressSelectionEnd::
-
+.fetchRoomAddress
+    ; b = hl[room index]
+    ; c = hl[room index + 1]
     add  hl, bc
     ld   a, [hli]
     ld   c, a
     ld   a, [hl]
     ld   b, a
+
+    ;
+    ; Load proper bank for Overworld rooms
+    ;
+
+    ; If in Overworld…
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, TMP_parseRoomHeader
-
-label_322F::
+    jr   nz, .parseRoomHeader
+.loadBankForOverworldRooms
+    ; … and the overworld room index is >= $80…
     ldh  a, [hMapRoom]
     cp   $80
-    jr   c, TMP_parseRoomHeader
-    ld   a, $1A
+    jr   c, .parseRoomHeader
+    ; … select bank for second half of Overworld rooms
+    ld   a, BANK(OverworldMapHeadersSecondHalf)
     ld   [MBC3SelectBank], a
 
     ;
     ; Parse room header
+    ; bc: address of room header data
     ;
 
-TMP_parseRoomHeader::
+.parseRoomHeader
+    ; Parse header first byte (animated tiles group)
     ld   a, [bc]
-    cp   $FE
+    cp   ROOM_END
     jr   z, .endOfRoom
     ldh  [hAnimatedTilesGroup], a
+
+    ; Parse header second byte
     inc  bc
     ld   a, [wIsIndoor]
     and  a
-    jr   z, .label_3258
+    jr   z, .parseOverworldFloorTile
+
+.parseIndoorsSecondByte
+    ; For indoor rooms, the lower nybble is the floor tile…
     ld   a, [bc]
     and  $0F
     call FillRoomMapWithObject
+    ; … and the upper nybble is the room template
     ld   a, [bc]
     swap a
     and  $0F
-    call label_38EA
+    call LoadRoomTemplate
     jr   .CopyMapToTileMapLoop
 
-.label_3258
+.parseOverworldSecondByte
+    ; For overworld rooms, the second byte is just the floor tile
     ld   a, [bc]
     call FillRoomMapWithObject
+
+    ;
+    ; Parse room objects
+    ;
 
 .CopyMapToTileMapLoop
     inc  bc ; tile address
@@ -6572,7 +6607,9 @@ label_38D4::
     ld   [MBC3SelectBank], a
     ret
 
-label_38EA::
+; Load the template for an indoor room
+;   a: the template to use (see ROOM_TEMPLATE_* constants)
+LoadRoomTemplate::
     ld   e, a
     ld   a, $14
     ld   [MBC3SelectBank], a

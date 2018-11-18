@@ -39,7 +39,7 @@ IndoorsARoomPointers::
 include "data/map_pointers/indoors_a.asm"
 IndoorsAMapHeaders::
 include "data/maps/indoors_a.asm"
-ColorDunngeonRoomPointers::
+ColorDungeonRoomPointers::
 include "data/map_pointers/color_dungeon.asm"
 ColorDungeonMapHeaders::
 include "data/maps/color_dungeon.asm"

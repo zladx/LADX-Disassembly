@@ -5877,7 +5877,7 @@ label_004_67FB:
     sub  $08                                      ; $6807: $D6 $08
     and  $F0                                      ; $6809: $E6 $F0
     or   e                                        ; $680B: $B3
-    ld   [$D416], a                               ; $680C: $EA $16 $D4
+    ld   [wWarp0PositionTileIndex], a             ; $680C: $EA $16 $D4
     xor  a                                        ; $680F: $AF
     ld   [wC167], a                               ; $6810: $EA $67 $C1
     ret                                           ; $6813: $C9

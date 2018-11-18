@@ -524,15 +524,84 @@ wWorldMusicTrack:: ; D368
   ds 1
 
 ; Unlabeled
-wD369 equ $D369
-  ds $AC
+ds $98
 
-wKillCount:: ; D415
+; Room warps
+;
+; Each room can have 4 warp points. The room warps destination are defined below,
+; and the warp positions is defined at D416-D419.
+
+; Warp 0
+wWarp0MapCategory:: ; D401
+  ds 1
+wWarp0Map:: ; D402
+  ds 1
+wWarp0Room:: ; D403
+  ds 1
+wWarp0DestinationX:: ; D404
+  ds 1
+wWarp0DestinationY:: ; D405
+  ds 1
+
+; Warp 1
+wWarp1MapCategory:: ; D406
+  ds 1
+wWarp1Map:: ; D407
+  ds 1
+wWarp1Room:: ; D408
+  ds 1
+wWarp1DestinationX:: ; D409
+  ds 1
+wWarp1DestinationY:: ; D40A
+  ds 1
+
+; Warp 2
+wWarp2MapCategory:: ; D40B
+  ds 1
+wWarp2Map:: ; D40C
+  ds 1
+wWarp2Room:: ; D40D
+  ds 1
+wWarp2DestinationX:: ; D40E
+  ds 1
+wWarp2DestinationY:: ; D40F
+  ds 1
+
+; Warp 3
+wWarp3MapCategory:: ; D410
+  ds 1
+wWarp3Map:: ; D411
+  ds 1
+wWarp3Room:: ; D412
+  ds 1
+wWarp3DestinationX:: ; D413
+  ds 1
+wWarp3DestinationY:: ; D414
+  ds 1
+
+wPieceOfPowerKillCount:: ; D415
+  ; Kill count, to tell if a Piece of Power should be dropped
+  ds 1
+
+wWarpPositions::
+wWarp0PositionTileIndex:: ; D416
+  ; Position of warp 0, as a tile index on the map
+  ds 1
+
+wWarp1PositionTileIndex:: ; D417
+  ; Position of warp 1, as a tile index on the map
+  ds 1
+
+wWarp2PositionTileIndex:: ; D418
+  ; Position of warp 2, as a tile index on the map
+  ds 1
+
+wWarp3PositionTileIndex:: ; D419
+  ; Position of warp 3, as a tile index on the map
   ds 1
 
 ; Unlabeled
-wD416 equ $D416
-  ds $4C
+ds $48
 
 wCompassSfxCountdown:: ; D462
   ; Each frame decrements the value.

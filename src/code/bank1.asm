@@ -1704,14 +1704,14 @@ label_57B7::
     ld   [wGameplayType], a
     call ApplyMapFadeOutTransition
     ld   a, $00
-    ld   [$D401], a
-    ld   [$D402], a
+    ld   [wWarp0MapCategory], a
+    ld   [wWarp0Map], a
     ld   a, [$DBB4]
-    ld   [$D403], a
+    ld   [wWarp0Room], a
     ld   a, $48
-    ld   [$D404], a
+    ld   [wWarp0DestinationX], a
     ld   a, $52
-    ld   [$D405], a
+    ld   [wWarp0DestinationY], a
     ldh  a, [hLinkPositionX]
     swap a
     and  $0F
@@ -1720,7 +1720,7 @@ label_57B7::
     sub  a, $08
     and  $F0
     or   e
-    ld   [$D416], a
+    ld   [wWarp0PositionTileIndex], a
     ld   a, $07
     ld   [wGameplaySubtype], a
     ret

@@ -586,11 +586,15 @@ label_B54::
     ld   [MBC3SelectBank], a
     pop  bc
     ret
+
+func_B5D::
     ld   [MBC3SelectBank], a
     call CopyData
     ld   a, $28
     ld   [MBC3SelectBank], a
     ret
+
+func_B69::
     push hl
     ld   [MBC3SelectBank], a
     ldh  a, [hIsGBC]
@@ -609,12 +613,13 @@ label_B80::
     push hl
     call label_B96
     pop  hl
+
     ld   a, [wGameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
-    jr   nz, label_B90
+    jr   nz, .photoAlbumEnd
     call label_BB5
+.photoAlbumEnd
 
-label_B90::
     ldh  a, [$FFE6]
     ld   [MBC3SelectBank], a
     ret
@@ -801,7 +806,7 @@ ApplyMapFadeOutTransition::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9E
-    ld   a, [$D401]
+    ld   a, [wWarp0MapCategory]
     cp   $01
     jr   nz, ApplyMapFadeOutTransition
     ld   a, [wIsIndoor]
@@ -2683,12 +2688,12 @@ label_1898::
     ld   [wGameplaySubtype], a
     ld   [$C3CB], a
     ldh  [hIsSideScrolling], a
-    ld   hl, $D401
+    ld   hl, wWarp0MapCategory
     ld   a, [wIsIndoor]
     ldh  [$FFE6], a
     and  a
     jr   nz, label_18DF
-    ld   hl, $D416
+    ld   hl, wWarpPositions
     ld   c, $00
 
 label_18BA::
@@ -2715,7 +2720,7 @@ label_18D2::
     add  a, c
     ld   e, a
     ld   d, $00
-    ld   hl, $D401
+    ld   hl, wWarp0MapCategory
     add  hl, de
 
 label_18DF::
@@ -2873,7 +2878,7 @@ SetSpawnLocation::
     ldh  [hScratchA], a
     ld   de, wSpawnLocationData
 
-    ; Copy five bytes from $D406 to wSpawnLocationData
+    ; Copy warp data (5 bytes) from wWarp1 to wSpawnLocationData
 .loop
     ld   a, [hli]
     ld   [de], a
@@ -5428,8 +5433,8 @@ LoadRoom::
     ; Parse room header
     ; bc: address of room header data
     ;
-
 .parseRoomHeader
+
     ; Parse header first byte (animated tiles group)
     ld   a, [bc]
     cp   ROOM_END
@@ -5464,15 +5469,20 @@ LoadRoom::
     ;
 
 .CopyMapToTileMapLoop
-    inc  bc ; tile address
-    ld   a, [bc] ; tile type
-    and  $FC
-    cp   $E0
-    jr   nz, .CopyMapToTileMapLoop_consecutive_tiles
+    ; Increment the current address
+    inc  bc
+    ; a = object type byte
+    ld   a, [bc]
+
+    ; If object is warp data…
+    and  %11111100
+    cp   OBJECT_WARP
+    jr   nz, .CopyMapToTileMapLoop_multipleBlocksObject
+    ; …copy object to <UNKNOWN>
     ldh  a, [$FFE6]
     ld   e, a
     ld   d, $00
-    ld   hl, $D401
+    ld   hl, wWarp0MapCategory
     add  hl, de
     ld   a, [bc]
     and  $03
@@ -5494,9 +5504,9 @@ LoadRoom::
     ldh  [$FFE6], a
     jr   .CopyMapToTileMapLoop
 
-.CopyMapToTileMapLoop_consecutive_tiles
+.CopyMapToTileMapLoop_multipleBlocksObject
     ld   a, [bc] ; tile type
-    cp   $FE ; end-of-room tile
+    cp   ROOM_END
     jr   z, .endOfRoom
     call func_32A9
     jr   .CopyMapToTileMapLoop
@@ -5735,7 +5745,7 @@ label_33A8::
     and  $03
     ld   [$C19C], a
     ld   d, $00
-    ld   hl, $D416
+    ld   hl, wWarpPositions
     add  hl, de
     dec  bc
     ld   a, [bc]
@@ -6101,7 +6111,7 @@ label_3560::
     and  $03
     ld   [$C19C], a
     ld   d, $00
-    ld   hl, $D416
+    ld   hl, wWarpPositions
     add  hl, de
     pop  af
     ld   [hl], a
@@ -6151,7 +6161,7 @@ label_35A0::
     and  $03
     ld   [$C19C], a
     ld   d, $00
-    ld   hl, $D416
+    ld   hl, wWarpPositions
     add  hl, de
     pop  af
     ld   [hl], a

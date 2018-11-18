@@ -2161,7 +2161,7 @@ label_D60F::
     ld   d, $28
 
 label_D62E::
-    ld   hl, $D415
+    ld   hl, wPieceOfPowerKillCount
     inc  [hl]
     ld   a, [hl]
     cp   d

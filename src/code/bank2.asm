@@ -2274,7 +2274,7 @@ jr_002_507A:
     jr   nc, jr_002_50A2                          ; $5092: $30 $0E
 
     ldh  a, [hLinkPositionX]                      ; $5094: $F0 $98
-    ld   [$D404], a                               ; $5096: $EA $04 $D4
+    ld   [wWarp0DestinationX], a                  ; $5096: $EA $04 $D4
     ld   a, [wLinkMotionState]                    ; $5099: $FA $1C $C1
     ld   [$D463], a                               ; $509C: $EA $63 $D4
     jp   ApplyMapFadeOutTransition                                ; $509F: $C3 $7D $0C
@@ -2378,12 +2378,12 @@ jr_002_512B:
     cp   $FF                                      ; $5132: $FE $FF
     jr   z, jr_002_5155                           ; $5134: $28 $1F
 
-    ld   a, [$D401]                               ; $5136: $FA $01 $D4
+    ld   a, [wWarp0MapCategory]                               ; $5136: $FA $01 $D4
     cp   $02                                      ; $5139: $FE $02
     jr   nz, jr_002_5145                          ; $513B: $20 $08
 
     ldh  a, [hLinkPositionY]                      ; $513D: $F0 $99
-    ld   [$D404], a                               ; $513F: $EA $04 $D4
+    ld   [wWarp0DestinationX], a                               ; $513F: $EA $04 $D4
     xor  a                                        ; $5142: $AF
     jr   jr_002_515C                              ; $5143: $18 $17
 
@@ -2391,10 +2391,10 @@ jr_002_5145:
     ldh  a, [hLinkPositionX]                      ; $5145: $F0 $98
     and  $F0                                      ; $5147: $E6 $F0
     add  $08                                      ; $5149: $C6 $08
-    ld   [$D404], a                               ; $514B: $EA $04 $D4
+    ld   [wWarp0DestinationX], a                               ; $514B: $EA $04 $D4
     ldh  a, [hLinkPositionY]                      ; $514E: $F0 $99
     and  $F0                                      ; $5150: $E6 $F0
-    ld   [$D405], a                               ; $5152: $EA $05 $D4
+    ld   [wWarp0DestinationY], a                               ; $5152: $EA $05 $D4
 
 jr_002_5155:
     ld   a, $01                                   ; $5155: $3E $01
@@ -2437,7 +2437,7 @@ jr_002_5176:
 
 jr_002_518E:
     ld   a, $00                                   ; $518E: $3E $00
-    ld   hl, $D401                                ; $5190: $21 $01 $D4
+    ld   hl, wWarp0MapCategory                                ; $5190: $21 $01 $D4
     ld   [hl+], a                                 ; $5193: $22
     ld   a, $00                                   ; $5194: $3E $00
     ld   [hl+], a                                 ; $5196: $22
@@ -2988,7 +2988,7 @@ jr_002_54A6:
     jr   jr_002_54E4                              ; $54AC: $18 $36
 
     ld   a, $01                                   ; $54AE: $3E $01
-    ld   [$D401], a                               ; $54B0: $EA $01 $D4
+    ld   [wWarp0MapCategory], a                               ; $54B0: $EA $01 $D4
     ld   a, [$D479]                               ; $54B3: $FA $79 $D4
     ld   e, a                                     ; $54B6: $5F
     inc  a                                        ; $54B7: $3C
@@ -3003,15 +3003,15 @@ jr_002_54BD:
     ld   hl, $5471                                ; $54C2: $21 $71 $54
     add  hl, de                                   ; $54C5: $19
     ld   a, [hl]                                  ; $54C6: $7E
-    ld   [$D403], a                               ; $54C7: $EA $03 $D4
+    ld   [wWarp0Room], a                               ; $54C7: $EA $03 $D4
     ld   hl, $547C                                ; $54CA: $21 $7C $54
     add  hl, de                                   ; $54CD: $19
     ld   a, [hl]                                  ; $54CE: $7E
-    ld   [$D402], a                               ; $54CF: $EA $02 $D4
+    ld   [wWarp0Map], a                               ; $54CF: $EA $02 $D4
     ld   a, $50                                   ; $54D2: $3E $50
-    ld   [$D404], a                               ; $54D4: $EA $04 $D4
+    ld   [wWarp0DestinationX], a                               ; $54D4: $EA $04 $D4
     ld   a, $70                                   ; $54D7: $3E $70
-    ld   [$D405], a                               ; $54D9: $EA $05 $D4
+    ld   [wWarp0DestinationY], a                               ; $54D9: $EA $05 $D4
     ld   hl, hJingle                              ; $54DC: $21 $F2 $FF
     ld   [hl], JINGLE_PUZZLE_SOLVED               ; $54DF: $36 $02
     jp   ApplyMapFadeOutTransition                                ; $54E1: $C3 $7D $0C

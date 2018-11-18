@@ -68,7 +68,7 @@ label_420D::
 label_4240::
     xor  a
     ld   [$C1BF], a
-    ld   [$D415], a
+    ld   [wPieceOfPowerKillCount], a
     ld   [wActivePowerUp], a
     ld   [$D47A], a
     ld   [$C3CB], a

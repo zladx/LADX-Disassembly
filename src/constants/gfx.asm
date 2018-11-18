@@ -38,6 +38,7 @@ MAP_CAVE_E           equ $1F
 MAP_COLOR_DUNGEON    equ $FF
 
 ; Value for room objects
+OBJECT_WARP        equ $E0
 ROOM_END           equ $FE
 
 ; Value for wOverworldRoomStatus (and similar constants)

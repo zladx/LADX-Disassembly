@@ -5440,7 +5440,7 @@ LoadRoom::
     inc  bc
     ld   a, [wIsIndoor]
     and  a
-    jr   z, .parseOverworldFloorTile
+    jr   z, .parseOverworldSecondByte
 
 .parseIndoorsSecondByte
     ; For indoor rooms, the lower nybble is the floor tile…

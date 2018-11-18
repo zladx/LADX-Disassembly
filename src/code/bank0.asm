@@ -5293,8 +5293,8 @@ LoadRoom::
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
     ; …use the map pointers table specific to the color dungeon.
-    ld   hl, $7B77 ; color dungeon map pointers table
-    jp   TMP_bankAndAddressSelectionEnd
+    ld   hl, ColorDungeonRoomPointers ; color dungeon map pointers table
+    jp   .bankAndAddressSelectionEnd
 .colorDungeonEnd
 
     ; If have the Magnifying Lens, load an alternate Goriya room (where the Goriya NPC is actually present)
@@ -5307,84 +5307,88 @@ LoadRoom::
     cp   $0E ; Magnifying Glass
     jr   nz, .goriyaRoomEnd
     ld   bc, IndoorsAUnreferenced02
-    jp   TMP_parseRoomHeader
+    jp   .parseRoomHeader
 .goriyaRoomEnd
 
     ; If the map is less than MAP_UNKNOWN_1A…
     ld   hl, IndoorsARoomPointers
     ldh  a, [hMapId]
     cp   MAP_UNKNOWN_1A
-    jr   nc, TMP_bankAndAddressSelectionEnd
+    jr   nc, .bankAndAddressSelectionEnd
     ; …and the map is greater than the first 6 dungeons…
     cp   MAP_EAGLES_TOWER
-    jr   c, TMP_bankAndAddressSelectionEnd
+    jr   c, .bankAndAddressSelectionEnd
     ; …use the bank for IndoorB map.
     ld   a, BANK(IndoorsBRoomPointers)
     ld   [MBC3SelectBank], a
     ldh  [hRoomBank], a
     ld   hl, IndoorsBRoomPointers
-    jr   TMP_bankAndAddressSelectionEnd
+    jr   .bankAndAddressSelectionEnd
 
 .isIndoorEnd
 
+    ;
+    ; Swap some Overworld rooms with alternative layouts
+    ;
+
     ldh  a, [hMapRoom]
     cp   $0E
-    jr   nz, label_31D1
+    jr   nz, .endEaglesTowerAlt
     ld   a, [$D80E]
     and  $10
-    jr   z, label_3221
-    ld   bc, $47EC
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced01 ; Eagle's Tower open
+    jr   .label_322F
+.endEaglesTowerAlt
 
-label_31D1::
     cp   $8C
-    jr   nz, label_31E1
+    jr   nz, .endSouthFaceShrineAlt
     ld   a, [$D88C]
     and  $10
-    jr   z, label_3221
-    ld   bc, $434E
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced05 ; South Face Shrine open
+    jr   .label_322F
+.endSouthFaceShrineAlt
 
-label_31E1::
     cp   $79
-    jr   nz, label_31F1
+    jr   nz, .endUpperTalTalHeightsAlt
     ld   a, [$D879]
     and  $10
-    jr   z, label_3221
-    ld   bc, $6513
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced04 ; Upper Tal Tal Heights dry
+    jr   .label_322F
+.endUpperTalTalHeightsAlt
 
-label_31F1::
     cp   $06
-    jr   nz, label_3201
+    jr   nz, .endWindfishsEggAlt
     ld   a, [$D806]
     and  $10
-    jr   z, label_3221
-    ld   bc, $4496
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced00 ; Windfish's Egg open
+    jr   .label_322F
+.endWindfishsEggAlt
 
-label_3201::
     cp   $1B
-    jr   nz, label_3211
+    jr   nz, .endTalTalHeightsAlt
     ld   a, [$D82B]
     and  $10
-    jr   z, label_3221
-    ld   bc, $4C0F
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced02 ; Tal Tal Heights dry
+    jr   .label_322F
+.endTalTalHeightsAlt
 
-label_3211::
     cp   $2B
-    jr   nz, label_3221
+    jr   nz, .altRoomsEnd
     ld   a, [$D82B]
     and  $10
-    jr   z, label_3221
-    ld   bc, $509A
-    jr   label_322F
+    jr   z, .altRoomsEnd
+    ld   bc, OverworldUnreferenced03 ; Angler's Tunnel open
+    jr   .label_322F
 
-label_3221::
+.altRoomsEnd
     ld   hl, $4000
 
-TMP_bankAndAddressSelectionEnd::
+.bankAndAddressSelectionEnd
 
     add  hl, bc
     ld   a, [hli]
@@ -5393,12 +5397,12 @@ TMP_bankAndAddressSelectionEnd::
     ld   b, a
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, TMP_parseRoomHeader
+    jr   nz, .parseRoomHeader
 
-label_322F::
+.label_322F
     ldh  a, [hMapRoom]
     cp   $80
-    jr   c, TMP_parseRoomHeader
+    jr   c, .parseRoomHeader
     ld   a, $1A
     ld   [MBC3SelectBank], a
 
@@ -5406,7 +5410,7 @@ label_322F::
     ; Parse room header
     ;
 
-TMP_parseRoomHeader::
+.parseRoomHeader
     ld   a, [bc]
     cp   $FE
     jr   z, .endOfRoom

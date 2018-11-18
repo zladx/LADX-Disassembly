@@ -620,7 +620,7 @@ label_B80::
     call label_BB5
 .photoAlbumEnd
 
-    ldh  a, [$FFE6]
+    ldh  a, [hFreeWarpDataAddress]
     ld   [MBC3SelectBank], a
     ret
 
@@ -2688,9 +2688,9 @@ label_1898::
     ld   [wGameplaySubtype], a
     ld   [$C3CB], a
     ldh  [hIsSideScrolling], a
-    ld   hl, wWarp0MapCategory
+    ld   hl, wWarpStructs
     ld   a, [wIsIndoor]
-    ldh  [$FFE6], a
+    ldh  [hFreeWarpDataAddress], a
     and  a
     jr   nz, label_18DF
     ld   hl, wWarpPositions
@@ -2743,7 +2743,7 @@ label_18F2::
     ld   a, [hli]
     ldh  [hMapRoom], a
     jr   nz, label_1909
-    ldh  a, [$FFE6]
+    ldh  a, [hFreeWarpDataAddress]
     and  a
     jr   z, label_1907
     xor  a
@@ -2796,7 +2796,7 @@ label_193E::
 label_1948::
     ld   a, e
     ld   [wIndoorRoom], a
-    ldh  a, [$FFE6]
+    ldh  a, [hFreeWarpDataAddress]
     and  a
     jr   nz, label_196E
     xor  a
@@ -5457,7 +5457,7 @@ LoadRoom::
     swap a
     and  $0F
     call LoadRoomTemplate
-    jr   .CopyMapToTileMapLoop
+    jr   .parseRoomObjects
 
 .parseOverworldSecondByte
     ; For overworld rooms, the second byte is just the floor tile
@@ -5468,21 +5468,21 @@ LoadRoom::
     ; Parse room objects
     ;
 
-.CopyMapToTileMapLoop
+.parseRoomObjects
     ; Increment the current address
     inc  bc
-    ; a = object type byte
+    ; a = object type
     ld   a, [bc]
 
     ; If object is warp data…
     and  %11111100
     cp   OBJECT_WARP
-    jr   nz, .CopyMapToTileMapLoop_multipleBlocksObject
-    ; …copy object to <UNKNOWN>
-    ldh  a, [$FFE6]
+    jr   nz, .warpDataEnd
+    ; …copy object to the first available warp data slot.
+    ldh  a, [hFreeWarpDataAddress]
     ld   e, a
     ld   d, $00
-    ld   hl, wWarp0MapCategory
+    ld   hl, wWarpStructs
     add  hl, de
     ld   a, [bc]
     and  $03
@@ -5499,22 +5499,28 @@ LoadRoom::
     inc  bc
     ld   a, [bc]
     ldi  [hl], a
+    ; Increment the address of the first available warp data slot
     ld   a, e
     add  a, $05
-    ldh  [$FFE6], a
-    jr   .CopyMapToTileMapLoop
+    ldh  [hFreeWarpDataAddress], a
+    jr   .parseRoomObjects
+.warpDataEnd
 
-.CopyMapToTileMapLoop_multipleBlocksObject
-    ld   a, [bc] ; tile type
+    ; a = object type
+    ld   a, [bc]
+    ; If we reached the end of the room objects, exit the loop
     cp   ROOM_END
     jr   z, .endOfRoom
-    call func_32A9
-    jr   .CopyMapToTileMapLoop
+
+    call LoadRoomObject
+    jr   .parseRoomObjects
 
 .endOfRoom
-    ld   a, $01
+    ; TODO: label this function
+    ld   a, BANK(func_001_6CCE)
     ld   [MBC3SelectBank], a
-    call $6CCE
+    call func_001_6CCE
+
     ld   a, $36
     ld   [MBC3SelectBank], a
     ; do stuff that returns early if end-of-room
@@ -5525,7 +5531,7 @@ LoadRoom::
     call $53F3
     jp   ReloadSavedBank
 
-func_32A9::
+LoadRoomObject::
     ; Clear hScratchA
     xor  a
     ldh  [hScratchA], a

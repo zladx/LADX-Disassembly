@@ -531,6 +531,8 @@ ds $98
 ; Each room can have 4 warp points. The room warps destination are defined below,
 ; and the warp positions is defined at D416-D419.
 
+wWarpStructs::
+
 ; Warp 0
 wWarp0MapCategory:: ; D401
   ds 1

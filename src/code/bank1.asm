@@ -3686,27 +3686,28 @@ label_6C77::
     ldh  [$FF92], a
     ret
 
-label_6CA5::
+data_6CA5::
     db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, $A, $B, $10, $1B, $20, $2B
     db $30, $3B, $40, $4B, $50, $5B, $60, $6B, $70, $7B, $80, $8B, $90, $91, $92, $93
-    db $94, $95, $96, $97, $98, $99, $9A, $9B, $FF, 1, $A5, $6C
+    db $94, $95, $96, $97, $98, $99, $9A, $9B, $FF
 
-label_6CD1::
+func_001_6CCE::
+    ld   bc, data_6CA5
+.loop
     ld   a, [bc]
     cp   $FF
-    jr   z, label_6CE2
+    jr   z, .end
     ld   e, a
     ld   d, $00
-    ld   hl, $D700
+    ld   hl, wRoomObjectsArea
     add  hl, de
     ld   [hl], $FF
     inc  bc
+    jr   .loop ; $6CE0
 
-label_6CE0::
-    jr   label_6CD1
-
-label_6CE2::
+.end
     ret
+
     ld   bc, $400
     ld   hl, $9800
 

@@ -192,7 +192,11 @@ hBGMapOffsetLow::  ; FFE1
   ds 1
 
 ; Unlabeled
-ds 5
+ds 4
+
+hFreeWarpDataAddress ; FFE6
+  ; Address of the first free warp data slot
+  ds 1
 
 hFrameCounter:: ; FFE7
   ; wraps around 00-FF

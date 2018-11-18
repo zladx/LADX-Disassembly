@@ -5241,7 +5241,7 @@ LoadRoom::
     cp   MAP_COLOR_DUNGEON
     jr   nz, .notColorDungeon
     ; … use the room status for color dungeon
-    ld   hl, $DDE0
+    ld   hl, wColorDungeonRoomStatus
     jr   .roomStatusEnd
 .notColorDungeon
     ; Unless on one of the special rooms, use the room status for the indoor map B

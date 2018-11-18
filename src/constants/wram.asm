@@ -1019,3 +1019,12 @@ wDC0E::
 ; 2: blue
 wTunicType:: ; DC0F
   ds 1
+
+; Unlabeled
+ds $1D0
+
+; Color dungeon rooms status
+;
+; See wOverworldRoomStatus
+wColorDungeonRoomStatus:: ; DDE0
+  ds $100

@@ -124,7 +124,7 @@ if __name__ == "__main__":
         map_parser = MapParser(rom_path, map_descriptor)
 
         # Write map pointers table
-        map_file = open(os.path.join(target_dir, 'map_pointers', map_descriptor.name + '.asm'), 'w')
+        map_file = open(os.path.join(target_dir, 'maps', map_descriptor.name + '.asm'), 'w')
         map_file.write(disclaimer)
 
         for room_pointer in map_parser.room_pointers:
@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
         # Write rooms
         for rooms_parser in map_parser.rooms_parsers:
-            rooms_file = open(os.path.join(target_dir, 'maps', rooms_parser.name + '.asm'), 'w')
+            rooms_file = open(os.path.join(target_dir, 'rooms', rooms_parser.name + '.asm'), 'w')
             rooms_file.write(disclaimer)
 
             for index, room in enumerate(rooms_parser.rooms):

@@ -5421,7 +5421,7 @@ LoadRoom::
     cp   $80
     jr   c, .parseRoomHeader
     ; … select bank for second half of Overworld rooms
-    ld   a, BANK(OverworldMapHeadersSecondHalf)
+    ld   a, BANK(OverworldRoomsSecondHalf)
     ld   [MBC3SelectBank], a
 
     ;
@@ -6062,11 +6062,11 @@ SetBankForRoom::
     cp   $80
     jr   nc, .moreThan80
     ; … a = $09
-    ld   a, BANK(OverworldMapHeadersFirstHalf)
+    ld   a, BANK(OverworldRoomsFirstHalf)
     jr   .fi
 .moreThan80
     ; else a = $1A
-    ld   a, BANK(OverworldMapHeadersSecondHalf)
+    ld   a, BANK(OverworldRoomsSecondHalf)
 .fi
     ; Load the bank $09 or $1A
     ld   [MBC3SelectBank], a

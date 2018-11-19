@@ -5525,29 +5525,50 @@ LoadRoom::
     ld   [MBC3SelectBank], a
     ; do stuff that returns early if end-of-room
     call $6D4D
+
     ld   a, $21
     ld   [MBC3SelectBank], a
     ; stuff that returns early when DBA5 is 0
     call $53F3
+
+    ; Reload saved bank and return
     jp   ReloadSavedBank
 
+; Load an individual object
+; bc : start address of the object
+;
+; Objects can be 2-bytes or 3-bytes objects:
+;
+; twoBytesObject:
+;   ds 1 ; location (YX)
+;   ds 1 ; type
+;
+; threeBytesObject:
+;   ds 1 ; direction and length (8X: horizontal + length ; CX: vertical + length)
+;   ds 1 ; location (YX)
+;   ds 1 ; type
+;
 LoadRoomObject::
     ; Clear hScratchA
     xor  a
     ldh  [hScratchA], a
 
-    ; If [BC] & 0x80 != 0 && [BC] & 0x10) == 0…
-    ld   a, [bc] ; tile address
+    ; If object type first bit is 1…
+    ld   a, [bc]
     bit  7, a
-    jr   z, .bcEnd
+    jr   z, .threeBytesObjectEnd
+    ; … and object type 4th bit is 0…
     bit  4, a
-    jr   nz, .bcEnd
-    ; … hScratchA = [bc]
+    jr   nz, .threeBytesObjectEnd
+    ; … this is a three-bytes object, that spans more than one block.
+    ; The first byte encodes the direction and length of the block:
+    ; save it to hScratchA.
     ldh  [hScratchA], a
-    ; Increment BC
-    inc  bc ; increment tile address
-.bcEnd
+    ; Skip the parsed direction-and-length byte
+    inc  bc
+.threeBytesObjectEnd
 
+    ; Increment read pointer to the object type
     inc  bc
 
     ; e = hRoomStatus
@@ -5559,23 +5580,27 @@ LoadRoomObject::
     and  a
     jr   nz, .isIndoor
 
-    ; If [BC] < $F5, move to next line.
-    ld   a, [bc] ; tile addres
+    ; Outdoor objects >= $F5 are handled by code in another bank.
+
+    ; If object type >= $F5…
+    ld   a, [bc]
     sub  a, $F5
     jr   c, MoveToNextLine
-
-    ;
+    ; d = object type
     ld   a, [bc]
     ld   d, a
+    ; e = object position
     dec  bc
     ld   a, [bc]
     ld   e, a
+    ; (re-increment bc to be at the object type again)
     inc  bc
-
+    ; Call $7578 (jump to an address computed from the object type)
     ld   a, $24
     ld   [MBC3SelectBank], a
     call $7578
     call SetBankForRoom
+    ; Return early
     ret
 
 .isIndoor

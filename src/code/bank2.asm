@@ -205,12 +205,12 @@ jr_002_42C7:
 
     xor  a                                        ; $42FE: $AF
     ld   [wSwordAnimationState], a                               ; $42FF: $EA $37 $C1
-    ld   a, [$C122]                               ; $4302: $FA $22 $C1
+    ld   a, [wSwordCharge]                               ; $4302: $FA $22 $C1
     cp   $28                                      ; $4305: $FE $28
     jr   z, jr_002_4315                           ; $4307: $28 $0C
 
     inc  a                                        ; $4309: $3C
-    ld   [$C122], a                               ; $430A: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $430A: $EA $22 $C1
     cp   $28                                      ; $430D: $FE $28
     jr   nz, jr_002_4315                          ; $430F: $20 $04
 
@@ -225,7 +225,7 @@ jr_002_4316:
     cp   $01                                      ; $4319: $FE $01
     jr   z, jr_002_4333                           ; $431B: $28 $16
 
-    ld   a, [$C122]                               ; $431D: $FA $22 $C1
+    ld   a, [wSwordCharge]                               ; $431D: $FA $22 $C1
     cp   $28                                      ; $4320: $FE $28
     jr   nz, jr_002_4333                          ; $4322: $20 $0F
 
@@ -240,7 +240,7 @@ jr_002_4316:
 
 jr_002_4333:
     xor  a                                        ; $4333: $AF
-    ld   [$C122], a                               ; $4334: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $4334: $EA $22 $C1
 
 jr_002_4337:
     ret                                           ; $4337: $C9
@@ -1329,7 +1329,7 @@ jr_002_4B64:
     call ClearLinkPositionIncrement               ; $4B69: $CD $8E $17
     ld   [wSwordAnimationState], a                               ; $4B6C: $EA $37 $C1
     ld   [wIsUsingSpinAttack], a                  ; $4B6F: $EA $21 $C1
-    ld   [$C122], a                               ; $4B72: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $4B72: $EA $22 $C1
     ld   a, [$C1C8]                               ; $4B75: $FA $C8 $C1
     inc  a                                        ; $4B78: $3C
     ld   [$C1C8], a                               ; $4B79: $EA $C8 $C1
@@ -2340,7 +2340,7 @@ jr_002_50F6:
     xor  a                                        ; $50F6: $AF
     ld   [$C13E], a                               ; $50F7: $EA $3E $C1
     ld   [wIsUsingSpinAttack], a                  ; $50FA: $EA $21 $C1
-    ld   [$C122], a                               ; $50FD: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $50FD: $EA $22 $C1
     call func_002_52D6                            ; $5100: $CD $D6 $52
     ld   a, [wIsIndoor]                         ; $5103: $FA $A5 $DB
     and  a                                        ; $5106: $A7
@@ -7960,7 +7960,7 @@ jr_002_72FA:
     ld   [$C1C3], a                               ; $731E: $EA $C3 $C1
     xor  a                                        ; $7321: $AF
     ld   [wIsUsingSpinAttack], a                  ; $7322: $EA $21 $C1
-    ld   [$C122], a                               ; $7325: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $7325: $EA $22 $C1
     ld   a, $0C                                   ; $7328: $3E $0C
     ld   [wC16D], a                               ; $732A: $EA $6D $C1
     jp   label_002_7454                           ; $732D: $C3 $54 $74

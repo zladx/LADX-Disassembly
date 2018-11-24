@@ -2816,7 +2816,7 @@ label_DA17::
     xor  a
     ld   [wSwordAnimationState], a
     ld   [$C16A], a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     ld   [$C121], a
     ld   hl, $C470
     add  hl, bc
@@ -5900,7 +5900,7 @@ label_EF04::
     ld   a, $01
     ld   [$C160], a
     xor  a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     jp   label_F13B
 
 label_EF20::
@@ -6271,7 +6271,7 @@ label_F14D::
 
 label_F15E::
     xor  a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     ld   a, $30
     call label_EFCC
     ld   hl, hJingle
@@ -6776,7 +6776,7 @@ label_F440::
     call label_F3DB
     ld   [hl], $08
     xor  a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     call label_C50
     ld   hl, $C121
     ld   a, [$C16A]

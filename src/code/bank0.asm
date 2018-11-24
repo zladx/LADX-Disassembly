@@ -835,7 +835,7 @@ label_C9E::
 label_CAF::
     xor  a
     ld   [wIsUsingSpinAttack], a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
 
 label_CB6::
     xor  a
@@ -2346,7 +2346,7 @@ label_1637::
     cp   $05
     jr   nz, label_1653
     xor  a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     ld   a, $0C
     ld   [$C16D], a
 
@@ -2495,7 +2495,7 @@ label_1713::
     ld   [$C14A], a
     xor  a
     ld   [wIsUsingSpinAttack], a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
@@ -2566,7 +2566,7 @@ ApplyLinkMotionState::
     ldh  [$FFD8], a
     ld   hl, $FFDA
     ld   [hl], $00
-    ld   a, [$C122]
+    ld   a, [wSwordCharge]
     cp   $28
     jr   c, label_17C6
     ldh  a, [hFrameCounter]
@@ -6485,7 +6485,7 @@ data_37B4::
 LoadObject_IndoorEntrance::
     ; If MapId < $1A…
     ldh  a, [hMapId]
-    cp   $1A
+    cp   MAP_UNKNOWN_1A
     jr   nc, .end
 
     ; … and MapId >= $06…

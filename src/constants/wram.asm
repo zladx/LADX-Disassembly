@@ -62,9 +62,11 @@ wC120: ds 1
 wIsUsingSpinAttack:: ; C121
   ds 1
 
+wSwordCharge:: ; C122
+  ds 1
+
 ; Unlabeled
-wC122 equ $C122
-  ds 2
+ds 1 ; C123
 
 ; See ROOM_TRANSITION_* constants for possible values.
 wRoomTransitionState:: ; C124

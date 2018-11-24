@@ -5575,12 +5575,12 @@ LoadRoomObject::
     ldh  a, [hRoomStatus]
     ld   e, a
 
-    ; If is outdoor…
+    ; If currently on overworld…
     ld   a, [wIsIndoor]
     and  a
     jr   nz, .isIndoor
 
-    ; Outdoor objects >= $F5 are handled by code in another bank.
+    ; Overworld objects with type >= $F5 are handled by code in another bank.
 
     ; If object type >= $F5…
     ld   a, [bc]
@@ -5604,55 +5604,30 @@ LoadRoomObject::
     ret
 
 .isIndoor
-    ; a = [bject type] - $EC
+    ; a = [object type] - $EC
     ld   a, [bc]
-    sub  a, $EC
-    ; If a >= $EC, dispatch the tile script
+    sub  a, $EC ; FIXME: use a constant
+    ; If a >= $EC, dispatch to the door object handlers
     jp  c, MoveToNextLine_notDoor
     JP_TABLE
-    ; TODO: document door types (values taken from the LALE editor)
-    ; case 0xEC // Key Doors
-    ; case 0xED
-    ; case 0xEE
-    ; case 0xEF
-
-    ; case 0xF4  // Open Doors
-    ; case 0xF5
-    ; case 0xF6
-    ; case 0xF7
-
-    ; case 0xF0  // Closed Doors
-    ; case 0xF1
-    ; case 0xF2
-    ; case 0xF3
-
-    ; case 0xF8 // Boss Door
-
-    ; case 0xF9 // ?? Stairs maybe
-    ; case 0xFA // FLip Wall
-    ; case 0xFB // One-way Arrow
-
-    ; case 0xFC // Dungeon Entrances
-
-    ; case 0xFD //Indoor Entrances
-._EC dw label_35FA
-._ED dw $3615
-._EE dw $3630
-._EF dw $364B
-._F0 dw $3664
-._F1 dw $3677
-._F2 dw $368A
-._F3 dw $369D
-._F4 dw $36B2
-._F5 dw $36EA
-._F6 dw $36FE
-._F7 dw $3712
-._F8 dw $3726
-._F9 dw $375E
-._FA dw $376D
-._FB dw $377C
-._FC dw $37A2
-._FD dw IndoorEntranceHandler
+._EC dw LoadObject_KeyDoor1
+._ED dw LoadObject_KeyDoor2
+._EE dw LoadObject_KeyDoor3
+._EF dw LoadObject_KeyDoor4
+._F0 dw LoadObject_ClosedDoor1
+._F1 dw LoadObject_ClosedDoor2
+._F2 dw LoadObject_ClosedDoor3
+._F3 dw LoadObject_ClosedDoor4
+._F4 dw LoadObject_OpenDoor1
+._F5 dw LoadObject_OpenDoor2
+._F6 dw LoadObject_OpenDoor3
+._F7 dw LoadObject_OpenDoor4
+._F8 dw LoadObject_BossDoor
+._F9 dw LoadObject_Stairs
+._FA dw LoadObject_FlipWall
+._FB dw LoadObject_OneWayArrow
+._FC dw LoadObject_DungeonEntrance
+._FD dw LoadObject_IndoorEntrance
 
 MoveToNextLine::
     add  a, $F5
@@ -6251,12 +6226,12 @@ label_35EE::
 data_35F8::
     db $2D, $2E
 
-label_35FA::
+LoadObject_KeyDoor1::
     ld   e, 0
-    call label_373F
+    call func_373F
     ldh  a, [hRoomStatus]
     and  $04
-    jp   nz, label_36B2
+    jp   nz, LoadObject_OpenDoor1
     push bc
     call label_35EE
     ld   bc, data_37E1
@@ -6264,47 +6239,93 @@ label_35FA::
     jp   label_354B
 
 data_3613::
-    db   $2F, $30, $1E, 1, $CD, $3F, $37, $F0, $F8, $E6, 8, $C2, $EA, $36, $C5, $CD
-    db   $EE, $35, 1, $E1, $37, $11, $13, $36, $C3, $4B, $35
+    db   $2F, $30
+
+LoadObject_KeyDoor2::
+    ld   e, $01
+    call func_373F
+    ldh  a, [hRoomStatus]
+    and  $08
+    jp   nz, LoadObject_OpenDoor2
+
+    push bc
+    call label_35EE
+    ld   bc, data_37E1
+    ld   de, data_3613
+    jp   label_354B
 
 data_362E::
-    db   $31, $32, $1E, 2, $CD, $3F, $37, $F0, $F8, $E6, 2, $C2, $FE, $36, $C5, $CD
-    db   $EE, $35, 1, $E4, $37, $11, $2E, $36, $C3, $4B, $35
+    db   $31, $32
+
+LoadObject_KeyDoor3::
+    ld   e, $02
+    call func_373F
+    ldh  a, [hRoomStatus]
+    and  $02
+    jp   nz, LoadObject_OpenDoor3
+
+    push bc
+    call label_35EE
+    ld   bc, data_37E4
+    ld   de, data_362E
+    jp   label_354B
 
 data_3649::
-    db   $33, $34, $1E, 3, $CD, $3F, $37, $F0, $F8, $E6, 1, $C2, $12, $37, $C5, $CD
-    db   $EE, $35, 1, $E4, $37, $11, $49, $36, $C3, $4B, $35, $1E, 4, $CD, $3F, $37
-    db   $FA, $8A, $C1, $F6, 1, $EA, $8A, $C1, $EA, $8B, $C1, $C3, $B2, $36
+    db   $33, $34
 
-label_3677::
+LoadObject_KeyDoor4::
+    ld   e, $03
+    call func_373F
+    ldh  a, [hRoomStatus]
+    and  $01
+    jp   nz, LoadObject_OpenDoor4
+
+    push bc
+    call label_35EE
+    ld   bc, data_37E4
+    ld   de, data_3649
+    jp   label_354B
+
+LoadObject_ClosedDoor1::
+    ld   e, $04
+    call func_373F
+    ld   a, [$C18A]
+    or   $01
+    ld   [$C18A], a
+    ld   [$C18B], a
+    jp   LoadObject_OpenDoor1
+
+LoadObject_ClosedDoor2::
     ld   e, $05
-    call label_373F
+    call func_373F
     ld   a, [$C18A]
     or   $02
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   $36EA
+    jp   LoadObject_OpenDoor2
 
+LoadObject_ClosedDoor3::
     ld   e, $06
-    call label_373F
+    call func_373F
     ld   a, [$C18A]
     or   $04
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   label_36FE
+    jp   LoadObject_OpenDoor3
 
+LoadObject_ClosedDoor4::
     ld   e, $07
-    call label_373F
+    call func_373F
     ld   a, [$C18A]
     or   $08
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   label_3712
+    jp   LoadObject_OpenDoor4
 
 data_36B0::
     db   $43, $44
 
-label_36B2::
+LoadObject_OpenDoor1::
     ld   a, $04
     call label_36C4
     push bc
@@ -6344,7 +6365,7 @@ label_36E1::
 data_36E8::
     db $8C, 8
 
-label_36EA::
+LoadObject_OpenDoor2::
     ld   a, 8
     call label_36C4
     push bc
@@ -6356,7 +6377,7 @@ label_36EA::
 data_36FC::
     db 9, $A
 
-label_36FE::
+LoadObject_OpenDoor3::
     ld   a, $02
     call label_36C4
     push bc
@@ -6368,7 +6389,7 @@ label_36FE::
 data_3710::
     db $B, $C
 
-label_3712::
+LoadObject_OpenDoor4::
     ld   a, $01
     call label_36C4
     push bc
@@ -6380,19 +6401,19 @@ label_3712::
 data_3724::
     db $A4, $A5
 
-label_3726::
+LoadObject_BossDoor::
     ld   e, $08
-    call label_373F
+    call func_373F
     ldh  a, [hRoomStatus]
     and  $04
-    jp   nz, label_36B2
+    jp   nz, LoadObject_OpenDoor1
     push bc
     call label_35EE
     ld   bc, data_37E1
     ld   de, data_3724
     jp   label_354B
 
-label_373F::
+func_373F::
     ld   d, $00
     ld   hl, $C1F0
     add  hl, de
@@ -6414,25 +6435,54 @@ label_373F::
     ret
 
 data_375C::
-    db   $AF, $B0, $C5, $CD, $EE, $35, 1, $E4, $37, $11, $5C, $37, $C3, $4B, $35
+    db   $AF, $B0
+
+LoadObject_Stairs::
+    push bc                                       ; $375E: $C5
+    call label_35EE                               ; $375F: $CD $EE $35
+    ld   bc, data_37E4                            ; $3762: $01 $E4 $37
+    ld   de, data_375C                            ; $3765: $11 $5C $37
+    jp   label_354B                               ; $3768: $C3 $4B $35
 
 data_376B::
-    db   $B1, $B2, $C5, $CD, $EE, $35, 1, $E1, $37, $11, $6B, $37, $C3, $4B, $35
+    db   $B1, $B2
+
+LoadObject_FlipWall::
+    push bc                                       ; $376D: $C5
+    call label_35EE                               ; $376E: $CD $EE $35
+    ld   bc, data_37E1                            ; $3771: $01 $E1 $37
+    ld   de, data_376B                            ; $3774: $11 $6B $37
+    jp   label_354B                               ; $3777: $C3 $4B $35
 
 data_377A::
-    db   $45, $46, $C5, $CD, $EE, $35, 1, $E1, $37, $11, $7A, $37, $C3, $4B, $35
+    db   $45, $46
+
+LoadObject_OneWayArrow::
+    push bc                                       ; $377C: $C5
+    call label_35EE                               ; $377D: $CD $EE $35
+    ld   bc, data_37E1                            ; $3780: $01 $E1 $37
+    ld   de, data_377A                            ; $3783: $11 $7A $37
+    jp   label_354B                               ; $3786: $C3 $4B $35
 
 data_3789::
     db   0, 1, 2, 3, $10, $11, $12, $13, $20, $21, $22, $23, $FF
 
 data_3796::
-    db   $B3, $B4, $B4, $B5, $B6, $B7, $B8, $B9, $BA, $BB, $BC, $BD, $3E, 8, $CD, $C4
-    db   $36, $C5, $CD, $EE, $35, 1, $89, $37, $11, $96, $37, $C3, $4B, $35
+    db   $B3, $B4, $B4, $B5, $B6, $B7, $B8, $B9, $BA, $BB, $BC, $BD
+
+LoadObject_DungeonEntrance::
+    ld   a, $08                                   ; $37A2: $3E $08
+    call label_36C4                               ; $37A4: $CD $C4 $36
+    push bc                                       ; $37A7: $C5
+    call label_35EE                               ; $37A8: $CD $EE $35
+    ld   bc, data_3789                            ; $37AB: $01 $89 $37
+    ld   de, data_3796                            ; $37AE: $11 $96 $37
+    jp   label_354B                               ; $37B1: $C3 $4B $35
 
 data_37B4::
     db   $C1, $C2
 
-IndoorEntranceHandler::
+LoadObject_IndoorEntrance::
     ; If MapId < $1A…
     ldh  a, [hMapId]
     cp   $1A
@@ -6453,7 +6503,7 @@ IndoorEntranceHandler::
     jr   z, .end
 
     ; … handle special case.
-    jp   label_3677
+    jp   LoadObject_ClosedDoor2
 
 .end
 

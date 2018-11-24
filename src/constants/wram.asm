@@ -1098,3 +1098,6 @@ ds $1D0
 ; See wOverworldRoomStatus
 wColorDungeonRoomStatus:: ; DDE0
   ds $100
+
+; E200 - E300: entities
+; See https://github.com/Xkeeper0/emu-lua/blob/master/legacy/gbx/link's awakening.lua

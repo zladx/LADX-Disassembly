@@ -70,7 +70,7 @@ label_4240::
     ld   [$C1BF], a
     ld   [wPieceOfPowerKillCount], a
     ld   [wActivePowerUp], a
-    ld   [$D47A], a
+    ld   [wPowerUpHits], a
     ld   [$C3CB], a
     ld   [$C3CC], a
     ld   [$C3CD], a

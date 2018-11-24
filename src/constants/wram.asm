@@ -620,7 +620,11 @@ wBossDefeated:: ; D46C
   ds 1
 
 ; Unlabeled
-ds $E
+ds $D
+
+wPowerUpHits:: ; D47A
+  ; Power-ups are disabled after 3 hits are taken from ennemies
+  ds 1
 
 wForceFileSelectionScreenMusic:: ; D47B
   ; If not zero, force the music track to change when displaying the file selections screen

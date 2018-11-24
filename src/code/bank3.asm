@@ -5681,7 +5681,7 @@ label_EDAB::
     ld   a, [wActivePowerUp]
     and  a
     jr   z, label_EDDF
-    ld   hl, $D47A
+    ld   hl, wPowerUpHits
     inc  [hl]
     ld   a, [hl]
     cp   $03

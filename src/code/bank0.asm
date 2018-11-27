@@ -5604,24 +5604,24 @@ LoadRoomObject::
     ret
 
 .isIndoor
-    ; a = [object type] - $EC
+    ; a = object type - OBJECT_KEY_DOOR_TOP
     ld   a, [bc]
-    sub  a, $EC ; FIXME: use a constant
-    ; If a >= $EC, dispatch to the door object handlers
+    sub  a, OBJECT_KEY_DOOR_TOP
+    ; If a >= OBJECT_KEY_DOOR_TOP, dispatch to the door object handlers
     jp  c, MoveToNextLine_notDoor
     JP_TABLE
-._EC dw LoadObject_KeyDoor1
-._ED dw LoadObject_KeyDoor2
-._EE dw LoadObject_KeyDoor3
-._EF dw LoadObject_KeyDoor4
-._F0 dw LoadObject_ClosedDoor1
-._F1 dw LoadObject_ClosedDoor2
-._F2 dw LoadObject_ClosedDoor3
-._F3 dw LoadObject_ClosedDoor4
-._F4 dw LoadObject_OpenDoor1
-._F5 dw LoadObject_OpenDoor2
-._F6 dw LoadObject_OpenDoor3
-._F7 dw LoadObject_OpenDoor4
+._EC dw LoadObject_KeyDoorTop
+._ED dw LoadObject_KeyDoorBottom
+._EE dw LoadObject_KeyDoorLeft
+._EF dw LoadObject_KeyDoorRight
+._F0 dw LoadObject_ClosedDoorTop
+._F1 dw LoadObject_ClosedDoorBottom
+._F2 dw LoadObject_ClosedDoorLeft
+._F3 dw LoadObject_ClosedDoorRight
+._F4 dw LoadObject_OpenDoorTop
+._F5 dw LoadObject_OpenDoorBottom
+._F6 dw LoadObject_OpenDoorLeft
+._F7 dw LoadObject_OpenDoorRight
 ._F8 dw LoadObject_BossDoor
 ._F9 dw LoadObject_Stairs
 ._FA dw LoadObject_FlipWall
@@ -6226,12 +6226,12 @@ label_35EE::
 data_35F8::
     db $2D, $2E
 
-LoadObject_KeyDoor1::
+LoadObject_KeyDoorTop::
     ld   e, 0
     call func_373F
     ldh  a, [hRoomStatus]
     and  $04
-    jp   nz, LoadObject_OpenDoor1
+    jp   nz, LoadObject_OpenDoorTop
     push bc
     call label_35EE
     ld   bc, data_37E1
@@ -6241,12 +6241,12 @@ LoadObject_KeyDoor1::
 data_3613::
     db   $2F, $30
 
-LoadObject_KeyDoor2::
+LoadObject_KeyDoorBottom::
     ld   e, $01
     call func_373F
     ldh  a, [hRoomStatus]
     and  $08
-    jp   nz, LoadObject_OpenDoor2
+    jp   nz, LoadObject_OpenDoorBottom
 
     push bc
     call label_35EE
@@ -6257,12 +6257,12 @@ LoadObject_KeyDoor2::
 data_362E::
     db   $31, $32
 
-LoadObject_KeyDoor3::
+LoadObject_KeyDoorLeft::
     ld   e, $02
     call func_373F
     ldh  a, [hRoomStatus]
     and  $02
-    jp   nz, LoadObject_OpenDoor3
+    jp   nz, LoadObject_OpenDoorLeft
 
     push bc
     call label_35EE
@@ -6273,12 +6273,12 @@ LoadObject_KeyDoor3::
 data_3649::
     db   $33, $34
 
-LoadObject_KeyDoor4::
+LoadObject_KeyDoorRight::
     ld   e, $03
     call func_373F
     ldh  a, [hRoomStatus]
     and  $01
-    jp   nz, LoadObject_OpenDoor4
+    jp   nz, LoadObject_OpenDoorRight
 
     push bc
     call label_35EE
@@ -6286,46 +6286,46 @@ LoadObject_KeyDoor4::
     ld   de, data_3649
     jp   label_354B
 
-LoadObject_ClosedDoor1::
+LoadObject_ClosedDoorTop::
     ld   e, $04
     call func_373F
     ld   a, [$C18A]
     or   $01
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   LoadObject_OpenDoor1
+    jp   LoadObject_OpenDoorTop
 
-LoadObject_ClosedDoor2::
+LoadObject_ClosedDoorBottom::
     ld   e, $05
     call func_373F
     ld   a, [$C18A]
     or   $02
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   LoadObject_OpenDoor2
+    jp   LoadObject_OpenDoorBottom
 
-LoadObject_ClosedDoor3::
+LoadObject_ClosedDoorLeft::
     ld   e, $06
     call func_373F
     ld   a, [$C18A]
     or   $04
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   LoadObject_OpenDoor3
+    jp   LoadObject_OpenDoorLeft
 
-LoadObject_ClosedDoor4::
+LoadObject_ClosedDoorRight::
     ld   e, $07
     call func_373F
     ld   a, [$C18A]
     or   $08
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   LoadObject_OpenDoor4
+    jp   LoadObject_OpenDoorRight
 
 data_36B0::
     db   $43, $44
 
-LoadObject_OpenDoor1::
+LoadObject_OpenDoorTop::
     ld   a, $04
     call label_36C4
     push bc
@@ -6365,7 +6365,7 @@ label_36E1::
 data_36E8::
     db $8C, 8
 
-LoadObject_OpenDoor2::
+LoadObject_OpenDoorBottom::
     ld   a, 8
     call label_36C4
     push bc
@@ -6377,7 +6377,7 @@ LoadObject_OpenDoor2::
 data_36FC::
     db 9, $A
 
-LoadObject_OpenDoor3::
+LoadObject_OpenDoorLeft::
     ld   a, $02
     call label_36C4
     push bc
@@ -6389,7 +6389,7 @@ LoadObject_OpenDoor3::
 data_3710::
     db $B, $C
 
-LoadObject_OpenDoor4::
+LoadObject_OpenDoorRight::
     ld   a, $01
     call label_36C4
     push bc
@@ -6406,7 +6406,7 @@ LoadObject_BossDoor::
     call func_373F
     ldh  a, [hRoomStatus]
     and  $04
-    jp   nz, LoadObject_OpenDoor1
+    jp   nz, LoadObject_OpenDoorTop
     push bc
     call label_35EE
     ld   bc, data_37E1
@@ -6488,7 +6488,7 @@ LoadObject_IndoorEntrance::
     cp   MAP_UNKNOWN_1A
     jr   nc, .end
 
-    ; … and MapId >= $06…
+    ; … and MapId >= MAP_EAGLES_TOWER…
     cp   MAP_EAGLES_TOWER
     jr   c, .end
 
@@ -6503,7 +6503,7 @@ LoadObject_IndoorEntrance::
     jr   z, .end
 
     ; … handle special case.
-    jp   LoadObject_ClosedDoor2
+    jp   LoadObject_ClosedDoorBottom
 
 .end
 

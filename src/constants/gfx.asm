@@ -38,8 +38,28 @@ MAP_CAVE_E           equ $1F
 MAP_COLOR_DUNGEON    equ $FF
 
 ; Value for room objects
-OBJECT_WARP        equ $E0
-ROOM_END           equ $FE
+OBJECT_STAIRS_DOWN        equ $BE
+OBJECT_WARP               equ $E0
+; Indoor doors
+OBJECT_KEY_DOOR_TOP       equ $EC
+OBJECT_KEY_DOOR_BOTTOM    equ $ED
+OBJECT_KEY_DOOR_LEFT      equ $EE
+OBJECT_KEY_DOOR_RIGHT     equ $EF
+OBJECT_CLOSED_DOOR_TOP    equ $F0
+OBJECT_CLOSED_DOOR_BOTTOM equ $F1
+OBJECT_CLOSED_DOOR_LEFT   equ $F2
+OBJECT_CLOSED_DOOR_RIGHT  equ $F3
+OBJECT_OPEN_DOOR_TOP      equ $F4
+OBJECT_OPEN_DOOR_BOTTOM   equ $F5
+OBJECT_OPEN_DOOR_LEFT     equ $F6
+OBJECT_OPEN_DOOR_RIGHT    equ $F7
+OBJECT_BOSS_DOOR          equ $F8
+OBJECT_STAIRS             equ $F9
+OBJECT_FLIP_WALL          equ $FA
+OBJECT_ONE_WAY_ARROW      equ $FB
+OBJECT_DUNGEON_ENTRANCE   equ $FC
+OBJECT_INDOOR_ENTRANCE    equ $FD
+ROOM_END                  equ $FE
 
 ; Value for wOverworldRoomStatus (and similar constants)
 ;

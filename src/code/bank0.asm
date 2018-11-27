@@ -5476,7 +5476,7 @@ LoadRoom::
 
     ; If object is warp data…
     and  %11111100
-    cp   OBJECT_WARP
+    cp   ROOM_WARP
     jr   nz, .warpDataEnd
     ; …copy object to the first available warp data slot.
     ldh  a, [hFreeWarpDataAddress]
@@ -5746,26 +5746,28 @@ LoadRoomObject::
     ; hScratchB = object type
     ld   a, d
     ldh  [hScratchB], a
-    cp   $C2
-    jr   z, label_33A8
-    cp   $E1
-    jr   z, label_33A8
-    cp   $CB
-    jr   z, label_33A8
-    cp   $BA
-    jr   z, label_33A8
-    cp   $61
-    jr   z, label_33A8
-    cp   $C6
-    jr   z, label_33A8
-    cp   $C5
-    jr   z, label_33A8
-    cp   $E2
-    jr   z, label_33A8
-    cp   $E3
-    jr   nz, MoveToNextLine_noSpecialTile
 
-label_33A8::
+    ; If object is an entrance to somewhere else…
+    cp   OBJECT_CLOSED_GATE
+    jr   z, .configureDoorWarpData
+    cp   OBJECT_ROCKY_CAVE_DOOR
+    jr   z, .configureDoorWarpData
+    cp   $CB
+    jr   z, .configureDoorWarpData
+    cp   OBJECT_BOMBABLE_CAVE_DOOR
+    jr   z, .configureDoorWarpData
+    cp   $61
+    jr   z, .configureDoorWarpData
+    cp   OBJECT_GROUND_STAIRS
+    jr   z, .configureDoorWarpData
+    cp   $C5
+    jr   z, .configureDoorWarpData
+    cp   $E2
+    jr   z, .configureDoorWarpData
+    cp   OBJECT_CAVE_DOOR
+    jr   nz, .overworldDoorEnd
+
+.configureDoorWarpData
     ld   a, [$C19C]
     ld   e, a
     inc  a
@@ -5778,12 +5780,14 @@ label_33A8::
     ld   a, [bc]
     ld   [hl], a
     inc  bc
+.overworldDoorEnd
 
-MoveToNextLine_noSpecialTile::
+    ; a = object type
     ldh  a, [hScratchB]
+
     cp   $C5
     jp   z, label_347D
-    cp   $C6
+    cp   OBJECT_GROUND_STAIRS
     jp   z, label_347D
     jp   MoveToNextLine_finallyBeginSomething
 

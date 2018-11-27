@@ -38,20 +38,49 @@ MAP_CAVE_E           equ $1F
 MAP_COLOR_DUNGEON    equ $FF
 
 ; Value for room objects
+OBJECT_SHORT_GRASS          equ $04
+OBJECT_ROCKY_GROUND         equ $09
+OBJECT_TALL_GRASS           equ $0A
+OBJECT_PATH                 equ $0B
+OBJECT_WATER_BANK_BOTTOM    equ $0F
+OBJECT_WATER_BANK_TOP       equ $10
+OBJECT_WATER_BANK_RIGHT     equ $11
+OBJECT_WATER_BANK_CORNER_TL equ $13
+OBJECT_WATER_BANK_CORNER_BR equ $16
+OBJECT_WATER_BANK_BR        equ $17
+OBJECT_WATER_BANK_BL        equ $18
+OBJECT_WATER_BANK_TR        equ $19
+OBJECT_WATER_BANK_TL        equ $1A
+OBJECT_SHALLOW_WATER        equ $1B
+OBJECT_LIFTABLE_ROCK        equ $20
+OBJECT_CLIFF_CORNER_BL      equ $2E
+OBJECT_CLIFF_BOTTOM         equ $2F
+OBJECT_CLIFF_LEFT           equ $37
+OBJECT_CLIFF_RIGHT          equ $38
+OBJECT_CLIFF_CORNER_TL      equ $80
+OBJECT_CLIFF_CORNER_TR      equ $81
+OBJECT_ANIMATED_FLOWERS     equ $44
+OBJECT_PHONE_BOOTH_TOP      equ $45
+OBJECT_CLIFF_TOP            equ $4D
 OBJECT_BUSH                 equ $5C
 OBJECT_WEATHER_VANE_BASE    equ $5E
+OBJECT_ROUNDED_BLOCK        equ $6E
+OBJECT_OWN_STATUE           equ $6F
 OBJECT_WEATHER_VANE_TOP     equ $91
 OBJECT_BOMBABLE_CAVE_DOOR   equ $BA
 OBJECT_STAIRS_DOWN          equ $BE
 OBJECT_CLOSED_GATE          equ $C2
 OBJECT_GROUND_STAIRS        equ $C6
 OBJECT_BUSH_GROUND_STAIRS   equ $D3
+OBJECT_SIGNPOST             equ $D4
 OBJECT_MONKEY_BRIDGE_TOP    equ $D8
 OBJECT_MONKEY_BRIDGE_MIDDLE equ $D9
 OBJECT_MONKEY_BRIDGE_BOTTOM equ $DA
 OBJECT_MONKEY_BRIDGE_BUILT  equ $DB
 OBJECT_WEATHER_VANE_ABOVE   equ $DC
-OBJECT_WARP                 equ $E0
+OBJECT_STEPS                equ $E0
+OBJECT_GROUND_HOLE          equ $E8
+
 OBJECT_ROCKY_CAVE_DOOR      equ $E1
 OBJECT_CAVE_DOOR            equ $E3
 OBJECT_WATERFALL            equ $E9
@@ -75,7 +104,10 @@ OBJECT_ONE_WAY_ARROW        equ $FB
 OBJECT_DUNGEON_ENTRANCE     equ $FC
 OBJECT_INDOOR_ENTRANCE      equ $FD
 ; Overworld macros
-OBJECT_MACRO_F5 equ $F5
+OBJECT_MACRO_F5             equ $F5
+
+; Room header constants
+ROOM_WARP                   equ $E0
 ROOM_END                    equ $FE
 
 ; Value for wOverworldRoomStatus (and similar constants)

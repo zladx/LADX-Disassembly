@@ -74,6 +74,8 @@ OBJECT_FLIP_WALL            equ $FA
 OBJECT_ONE_WAY_ARROW        equ $FB
 OBJECT_DUNGEON_ENTRANCE     equ $FC
 OBJECT_INDOOR_ENTRANCE      equ $FD
+; Overworld macros
+OBJECT_MACRO_F5 equ $F5
 ROOM_END                    equ $FE
 
 ; Value for wOverworldRoomStatus (and similar constants)

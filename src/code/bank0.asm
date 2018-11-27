@@ -5582,10 +5582,10 @@ LoadRoomObject::
 
     ; Overworld objects with type >= $F5 are handled by code in another bank.
 
-    ; If object type >= $F5…
+    ; If object is an Overworld macro…
     ld   a, [bc]
-    sub  a, $F5
-    jr   c, .loadOverworldLowerObject
+    sub  a, OBJECT_MACRO_F5
+    jr   c, .loadOverworldObject
     ; d = object type
     ld   a, [bc]
     ld   d, a
@@ -5595,7 +5595,7 @@ LoadRoomObject::
     ld   e, a
     ; (re-increment bc to be at the object type again)
     inc  bc
-    ; Call $7578 (jump to an address computed from the object type)
+    ; Call $7578 (handle Overworld macro)
     ld   a, $24
     ld   [MBC3SelectBank], a
     call $7578
@@ -5629,8 +5629,8 @@ LoadRoomObject::
 ._FC dw LoadObject_DungeonEntrance
 ._FD dw LoadObject_IndoorEntrance
 
-; Load an Overworld object lower than $F5
-.loadOverworldLowerObject
+; Load an Overworld object (that is not a macro)
+.loadOverworldObject
     ; Re-increment a to be the object type
     add  a, $F5
     push af

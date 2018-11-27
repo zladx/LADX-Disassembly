@@ -5575,17 +5575,17 @@ LoadRoomObject::
     ldh  a, [hRoomStatus]
     ld   e, a
 
-    ; If currently on overworld…
+    ; If currently on Overworld…
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, .isIndoor
+    jr   nz, .loadIndoorObject
 
     ; Overworld objects with type >= $F5 are handled by code in another bank.
 
     ; If object type >= $F5…
     ld   a, [bc]
     sub  a, $F5
-    jr   c, MoveToNextLine
+    jr   c, .loadOverworldLowerObject
     ; d = object type
     ld   a, [bc]
     ld   d, a
@@ -5603,12 +5603,12 @@ LoadRoomObject::
     ; Return early
     ret
 
-.isIndoor
+.loadIndoorObject
     ; a = object type - OBJECT_KEY_DOOR_TOP
     ld   a, [bc]
     sub  a, OBJECT_KEY_DOOR_TOP
     ; If a >= OBJECT_KEY_DOOR_TOP, dispatch to the door object handlers
-    jp  c, MoveToNextLine_notDoor
+    jp  c, LoadIndoorObject_notDoor
     JP_TABLE
 ._EC dw LoadObject_KeyDoorTop
 ._ED dw LoadObject_KeyDoorBottom
@@ -5629,100 +5629,120 @@ LoadRoomObject::
 ._FC dw LoadObject_DungeonEntrance
 ._FD dw LoadObject_IndoorEntrance
 
-MoveToNextLine::
+; Load an Overworld object lower than $F5
+.loadOverworldLowerObject
+    ; Re-increment a to be the object type
     add  a, $F5
     push af
+    ; d = a
     ld   d, a
-    cp   $E9
-    jr   nz, MoveToNextLine_notTileE9
+
+    cp   OBJECT_WATERFALL
+    jr   nz, .waterfallEnd
     ld   [$C50E], a
+.waterfallEnd
 
-MoveToNextLine_notTileE9::
-    cp   $5E
-    jr   nz, MoveToNextLine_notTile5E
-    bit  5, e
-    jr   nz, label_337C
+    ;
+    ; If the Weather Vane is pushed open, shift it to the top
+    ;
 
-MoveToNextLine_notTile5E::
-    cp   $91
-    jr   nz, MoveToNextLine_notTile91
-    bit  5, e
-    jr   z, MoveToNextLine_notTile91
+    cp   OBJECT_WEATHER_VANE_BASE
+    jr   nz, .weatherVaneBottomEnd
+    bit  5, e ; object position
+    jr   nz, .replaceObjectByGroundStairs
+.weatherVaneBottomEnd
+
+    cp   OBJECT_WEATHER_VANE_TOP
+    jr   nz, .weatherVaneTopEnd
+    bit  5, e ; object position
+    jr   z, .weatherVaneTopEnd
+    ; replace the top by the vane base
     pop  af
-    ld   a, $5E
+    ld   a, OBJECT_WEATHER_VANE_BASE
     ld   d, a
     push af
+.weatherVaneTopEnd
 
-MoveToNextLine_notTile91::
-    cp   $DC
-    jr   nz, MoveToNextLine_notTileDC
-    bit  5, e
-    jr   z, MoveToNextLine_notTileDC
+    cp   OBJECT_WEATHER_VANE_ABOVE
+    jr   nz, .weatherVaneAboveEnd
+    bit  5, e ; object position
+    jr   z, .weatherVaneAboveEnd
+    ; replace the grass above by the vane top
     pop  af
-    ld   a, $91
+    ld   a, OBJECT_WEATHER_VANE_TOP
     ld   d, a
     push af
+.weatherVaneAboveEnd
 
-MoveToNextLine_notTileDC::
-    cp   $D8
-    jr   z, label_333D
-    cp   $D9
-    jr   z, label_333D
-    cp   $DA
-    jr   nz, label_3346
+    ;
+    ; If the Monkey Bridge is built yet, display it
+    ;
 
-label_333D::
+    cp   OBJECT_MONKEY_BRIDGE_TOP
+    jr   z, .loadMonkeyBridgeObject
+    cp   OBJECT_MONKEY_BRIDGE_MIDDLE
+    jr   z, .loadMonkeyBridgeObject
+    cp   OBJECT_MONKEY_BRIDGE_BOTTOM
+    jr   nz, .monkeyBridgeEnd
+
+.loadMonkeyBridgeObject
+    ; If the monkey bridge is built…
     bit  4, e
-    jr   z, label_3346
+    jr   z, .monkeyBridgeEnd
+    ; …replace the object by the monkey bridge
     pop  af
-    ld   a, $DB
+    ld   a, OBJECT_MONKEY_BRIDGE_BUILT
     ld   d, a
     push af
+.monkeyBridgeEnd
 
-label_3346::
-    cp   $C2
-    jr   nz, MoveToNextLine_notTileC2
+    ; If a closed gate has been opened…
+    cp   OBJECT_CLOSED_GATE
+    jr   nz, .closedGateEnd
     bit  4, e
-    jr   z, MoveToNextLine_notTileC2
+    jr   z, .closedGateEnd
+    ; …replace the object by the open cave entrance
     pop  af
-    ld   a, $E3
+    ld   a, OBJECT_CAVE_DOOR
     ld   d, a
     push af
+.closedGateEnd
 
-MoveToNextLine_notTileC2::
+    ; If a bombable cave door has been bombed…
     ld   a, d
-    cp   $BA
-    jr   nz, MoveToNextLine_notTileBA
+    cp   OBJECT_BOMBABLE_CAVE_DOOR
+    jr   nz, .bombableCaveDoorEnd
     bit  2, e
-    jr   z, MoveToNextLine_notTileBA
+    jr   z, .bombableCaveDoorEnd
+    ; …replace the object by the open rocky cave entrance
     pop  af
-    ld   a, $E1
+    ld   a, OBJECT_ROCKY_CAVE_DOOR
     ld   d, a
     push af
+.bombableCaveDoorEnd
 
-MoveToNextLine_notTileBA::
+    ; If a bush masking a cave entrance has been cut…
     ld   a, d
-    cp   $D3
-    jr   nz, MoveToNextLine_notTileD3
+    cp   OBJECT_BUSH_GROUND_STAIRS
+    jr   nz, .bushGroundStairsEnd
     bit  4, e
-    jr   z, MoveToNextLine_notTileD3
+    jr   z, .bushGroundStairsEnd
     ldh  a, [hMapRoom]
     cp   $75
-    jr   z, label_337C
+    jr   z, .replaceObjectByGroundStairs
     cp   $07
-    jr   z, label_337C
+    jr   z, .replaceObjectByGroundStairs
     cp   $AA
-    jr   z, label_337C
+    jr   z, .replaceObjectByGroundStairs
     cp   $4A
-    jr   nz, MoveToNextLine_notTileD3
-
-label_337C::
+    jr   nz, .bushGroundStairsEnd
+.replaceObjectByGroundStairs
     pop  af
-    ld   a, $C6
+    ld   a, OBJECT_GROUND_STAIRS
     ld   d, a
     push af
+.bushGroundStairsEnd
 
-MoveToNextLine_notTileD3::
     ld   a, d
     ldh  [$FFE0], a
     cp   $C2
@@ -5766,7 +5786,7 @@ MoveToNextLine_noSpecialTile::
     jp   z, label_347D
     jp   MoveToNextLine_finallyBeginSomething
 
-MoveToNextLine_notDoor::
+LoadIndoorObject_notDoor::
     add  a, $EC
     ldh  [$FFE0], a
     push af

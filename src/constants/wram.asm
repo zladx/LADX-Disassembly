@@ -256,7 +256,14 @@ wDialogState:: ; C19F
   ds 1
 
 ; Unlabeled
-ds $9
+ds $5
+
+wConveyorBeltsCount:: ; C1A5
+  ; Number of conveyor belts on the current screen
+  ds 1
+
+; Unlabeled
+ds 3
 
 wDialogGotItem:: ; C1A9
   ; The "Got item" dialog to display

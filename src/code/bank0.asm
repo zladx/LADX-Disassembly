@@ -5608,7 +5608,7 @@ LoadRoomObject::
     ld   a, [bc]
     sub  a, OBJECT_KEY_DOOR_TOP
     ; If a >= OBJECT_KEY_DOOR_TOP, dispatch to the door object handlers
-    jp  c, LoadIndoorObject_notDoor
+    jp  c, .loadNonDoorIndoorObject
     JP_TABLE
 ._EC dw LoadObject_KeyDoorTop
 ._ED dw LoadObject_KeyDoorBottom
@@ -5623,7 +5623,7 @@ LoadRoomObject::
 ._F6 dw LoadObject_OpenDoorLeft
 ._F7 dw LoadObject_OpenDoorRight
 ._F8 dw LoadObject_BossDoor
-._F9 dw LoadObject_Stairs
+._F9 dw LoadObject_StairsDoor
 ._FA dw LoadObject_FlipWall
 ._FB dw LoadObject_OneWayArrow
 ._FC dw LoadObject_DungeonEntrance
@@ -5791,19 +5791,23 @@ LoadRoomObject::
     jp   z, label_347D
     jp   MoveToNextLine_finallyBeginSomething
 
-LoadIndoorObject_notDoor::
-    add  a, $EC
+.loadNonDoorIndoorObject
+    ; Re-increment a to be the object type
+    add  a, OBJECT_KEY_DOOR_TOP
     ldh  [hScratchB], a
-    push af
-    cp   $CF
-    jr   c, label_33DC
-    cp   $D3
-    jr   nc, label_33DC
-    ld   hl, $C1A5
-    inc  [hl]
 
-label_33DC::
-    cp   $AB
+    ; If object type is a conveyor belt…
+    push af
+    cp   OBJECT_CONVEYOR_BOTTOM
+    jr   c, .conveyorEnd
+    cp   OBJECT_TRENDY_GAME_BORDER
+    jr   nc, .conveyorEnd
+    ; …increment the number of conveyor belts present on screen
+    ld   hl, wConveyorBeltsCount
+    inc  [hl]
+.conveyorEnd
+
+    cp   OBJECT_TORCH
     jr   nz, label_3407
     xor  a
     ld   [$C3CB], a
@@ -6462,7 +6466,7 @@ func_373F::
 data_375C::
     db   $AF, $B0
 
-LoadObject_Stairs::
+LoadObject_StairsDoor::
     push bc                                       ; $375E: $C5
     call label_35EE                               ; $375F: $CD $EE $35
     ld   bc, data_37E4                            ; $3762: $01 $E4 $37

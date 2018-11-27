@@ -37,7 +37,7 @@ MAP_UNKNOWN_1E       equ $1E
 MAP_CAVE_E           equ $1F
 MAP_COLOR_DUNGEON    equ $FF
 
-; Value for room objects
+; Value for overworld room objects
 OBJECT_SHORT_GRASS          equ $04
 OBJECT_ROCKY_GROUND         equ $09
 OBJECT_TALL_GRASS           equ $0A
@@ -68,7 +68,6 @@ OBJECT_ROUNDED_BLOCK        equ $6E
 OBJECT_OWN_STATUE           equ $6F
 OBJECT_WEATHER_VANE_TOP     equ $91
 OBJECT_BOMBABLE_CAVE_DOOR   equ $BA
-OBJECT_STAIRS_DOWN          equ $BE
 OBJECT_CLOSED_GATE          equ $C2
 OBJECT_GROUND_STAIRS        equ $C6
 OBJECT_BUSH_GROUND_STAIRS   equ $D3
@@ -84,7 +83,15 @@ OBJECT_GROUND_HOLE          equ $E8
 OBJECT_ROCKY_CAVE_DOOR      equ $E1
 OBJECT_CAVE_DOOR            equ $E3
 OBJECT_WATERFALL            equ $E9
-; Indoor doors
+
+; Values for indoor room objects
+OBJECT_TORCH                equ $AB
+OBJECT_STAIRS_DOWN          equ $BF
+OBJECT_CONVEYOR_BOTTOM      equ $CF
+OBJECT_CONVEYOR_TOP         equ $D0
+OBJECT_CONVEYOR_RIGHT       equ $D1
+OBJECT_CONVEYOR_LEFT        equ $D2
+OBJECT_TRENDY_GAME_BORDER   equ $D3
 OBJECT_KEY_DOOR_TOP         equ $EC
 OBJECT_KEY_DOOR_BOTTOM      equ $ED
 OBJECT_KEY_DOOR_LEFT        equ $EE
@@ -98,7 +105,7 @@ OBJECT_OPEN_DOOR_BOTTOM     equ $F5
 OBJECT_OPEN_DOOR_LEFT       equ $F6
 OBJECT_OPEN_DOOR_RIGHT      equ $F7
 OBJECT_BOSS_DOOR            equ $F8
-OBJECT_STAIRS               equ $F9
+OBJECT_STAIRS_DOOR          equ $F9
 OBJECT_FLIP_WALL            equ $FA
 OBJECT_ONE_WAY_ARROW        equ $FB
 OBJECT_DUNGEON_ENTRANCE     equ $FC

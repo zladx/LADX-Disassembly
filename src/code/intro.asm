@@ -475,8 +475,8 @@ label_7148::
     db 0, 0, 0, 0, $40, $40, $40, $40, $90, $90, $90, $90
 
 label_7154::
-    ldh  [$FFE0], a
-    ldh  [$FFE0], a
+    ldh  [hScratchB], a
+    ldh  [hScratchB], a
 
 label_7158::
     call label_71C7

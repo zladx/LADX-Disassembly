@@ -36,7 +36,7 @@ AnimateMarinBeachTiles::
     jp   CopyData
     jr   nz, AnimateTiles.doWorldAnimations
     and  b
-    ldh  [$FFE0], a
+    ldh  [hScratchB], a
     ldh  [hLinkFinalPositionY], a
     ld   h, b
 
@@ -117,14 +117,14 @@ AnimateTiles::
     jp   nz, AnimateTiles_return ; return immediately
 
     ; If the Inventory apparition animation is running,
-    ; only animate Link's sprite. 
+    ; only animate Link's sprite.
     ld   a, [wInventoryAppearing]
     and  a
     jp   nz, DrawLinkSpriteAndReturn
 
 .doWorldAnimations
     ; If there is a pending request or a map transition,
-    ; only animate Link's sprite. 
+    ; only animate Link's sprite.
     ld   hl, wRoomTransitionState
     ld   a, [wRequest]
     or   [hl]

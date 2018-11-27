@@ -3571,7 +3571,7 @@ label_6BF0::
 
 label_6BF4::
     ld   a, c
-    ldh  [$FFE0], a
+    ldh  [hScratchB], a
     ld   d, $00
 
 label_6BF9::
@@ -3641,7 +3641,7 @@ label_6C48::
     ld   [hl], a
     inc  e
     ld   a, e
-    ld   hl, $FFE0
+    ld   hl, hScratchB
     cp   [hl]
     jp   nz, label_6BF9
     ret

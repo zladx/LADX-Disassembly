@@ -213,9 +213,9 @@ label_92F::
     ld   [$DC90], a
     ld   d, $00
     add  hl, de
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     ld   d, a
-    ldh  a, [$FFE1]
+    ldh  a, [hScratchC]
     ld   e, a
     ldh  a, [$FFCF]
     ldi  [hl], a
@@ -265,9 +265,9 @@ label_983::
     call $6710
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     ld   h, a
-    ldh  a, [$FFE1]
+    ldh  a, [hScratchC]
     ld   l, a
     ld   a, [hl]
     inc  de
@@ -5048,9 +5048,9 @@ doCopyObjectToBG:
     push hl
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     ld   h, a
-    ldh  a, [$FFE1]
+    ldh  a, [hScratchC]
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
@@ -5063,9 +5063,9 @@ doCopyObjectToBG:
 
     ; Update palette offset
     ld   a, h
-    ldh  [$FFE0], a
+    ldh  [hScratchB], a
     ld   a, l
-    ldh  [$FFE1], a
+    ldh  [hScratchC], a
     pop  hl
 
     ; Move BG target down by one row
@@ -5084,9 +5084,9 @@ doCopyObjectToBG:
     ; Copy palettes from WRAM1 for tiles on the lower row
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     ld   h, a
-    ldh  a, [$FFE1]
+    ldh  a, [hScratchC]
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
@@ -5743,8 +5743,9 @@ LoadRoomObject::
     push af
 .bushGroundStairsEnd
 
+    ; hScratchB = object type
     ld   a, d
-    ldh  [$FFE0], a
+    ldh  [hScratchB], a
     cp   $C2
     jr   z, label_33A8
     cp   $E1
@@ -5779,7 +5780,7 @@ label_33A8::
     inc  bc
 
 MoveToNextLine_noSpecialTile::
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     cp   $C5
     jp   z, label_347D
     cp   $C6
@@ -5788,7 +5789,7 @@ MoveToNextLine_noSpecialTile::
 
 LoadIndoorObject_notDoor::
     add  a, $EC
-    ldh  [$FFE0], a
+    ldh  [hScratchB], a
     push af
     cp   $CF
     jr   c, label_33DC
@@ -5804,7 +5805,7 @@ label_33DC::
     ld   [$C3CB], a
     ldh  a, [hMapRoom]
     cp   $C4
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     jr   z, label_3407
     ld   hl, $DBC9
     inc  [hl]
@@ -5961,7 +5962,7 @@ label_34AE::
 label_34B6::
     ldh  a, [hMapId]
     cp   MAP_CAVE_B
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     jr   c, label_34C2
     cp   $A9
     jr   z, label_34C6

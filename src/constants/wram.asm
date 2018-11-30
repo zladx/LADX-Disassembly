@@ -389,7 +389,15 @@ wDroppedItem:: ; C3AF
   ds 1
 
 ; Unlabeled
-ds $A8
+ds $1B
+
+wObjectAffectingBGPalette:: ; C3CB
+  ; Type of the object affecting the background palette
+  ; (for instance a dark palette when torches are not lit)
+  ds 1
+
+; Unlabeled
+ds $8C
 
 wDroppedItemsCountdown:: ; C458
   ; Number of frame before a dropped item disappears

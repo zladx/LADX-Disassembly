@@ -265,7 +265,7 @@ GameplayWorldSubtype6Handler::
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
-    ld   a, [$C3CB]
+    ld   a, [wObjectAffectingBGPalette]
     and  a
     jr   z, label_4548
     ld   a, [$C5AD]

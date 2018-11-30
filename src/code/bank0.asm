@@ -2686,7 +2686,7 @@ label_1898::
     ld   [wGameplayType], a
     xor  a
     ld   [wGameplaySubtype], a
-    ld   [$C3CB], a
+    ld   [wObjectAffectingBGPalette], a
     ldh  [hIsSideScrolling], a
     ld   hl, wWarpStructs
     ld   a, [wIsIndoor]

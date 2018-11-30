@@ -4165,7 +4165,7 @@ label_E37C::
     jr   label_E35F
     xor  a
     ld   [wBossDefeated], a
-    ld   [$C3CB], a
+    ld   [wObjectAffectingBGPalette], a
     ld   a, $1B
     ld   [wWorldMusicTrack], a
     ld   [$C167], a

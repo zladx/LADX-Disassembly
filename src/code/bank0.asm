@@ -5807,31 +5807,40 @@ LoadRoomObject::
     inc  [hl]
 .conveyorEnd
 
-    cp   OBJECT_TORCH
-    jr   nz, label_3407
+    ; If object is an unlit torch…
+    cp   OBJECT_TORCH_UNLIT
+    jr   nz, .torchEnd
+    ; clear wObjectAffectingBGPalette
     xor  a
-    ld   [$C3CB], a
+    ld   [wObjectAffectingBGPalette], a
+    ; If the room is $C4…
     ldh  a, [hMapRoom]
     cp   $C4
+    ; … and the object type is not zero…
     ldh  a, [hScratchB]
-    jr   z, label_3407
-    ld   hl, $DBC9
+    jr   z, .torchEnd
+    ; …then increment the number of torches in the room
+    ld   hl, wTorchesCount
     inc  [hl]
-    ld   [$C3CB], a
+    ; mark the torch as affecting the background palette
+    ld   [wObjectAffectingBGPalette], a
+    ; $C3CD += 4
     push af
     ld   a, [$C3CD]
     add  a, $04
     ld   [$C3CD], a
+    ; If not on GBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_3406
+    jr   nz, .dmgTorchesEnd
+    ; …configure the transition counter that will dim the lights
+    ; when entering the room.
     ld   a, $04
     ld   [wTransitionSequenceCounter], a
-
-label_3406::
+.dmgTorchesEnd
     pop  af
+.torchEnd
 
-label_3407::
     cp   $8E
     jr   z, label_341E
     cp   $AA

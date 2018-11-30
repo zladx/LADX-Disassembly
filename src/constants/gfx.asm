@@ -85,7 +85,8 @@ OBJECT_CAVE_DOOR            equ $E3
 OBJECT_WATERFALL            equ $E9
 
 ; Values for indoor room objects
-OBJECT_TORCH                equ $AB
+OBJECT_TORCH_UNLIT          equ $AB
+OBJECT_TORCH_LIT            equ $AC
 OBJECT_STAIRS_DOWN          equ $BF
 OBJECT_CONVEYOR_BOTTOM      equ $CF
 OBJECT_CONVEYOR_TOP         equ $D0

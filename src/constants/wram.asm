@@ -396,8 +396,15 @@ wObjectAffectingBGPalette:: ; C3CB
   ; (for instance a dark palette when torches are not lit)
   ds 1
 
+wBGPaletteEffectAddress:: ; $C3CC
+  ; Adress of a palette[frameCount] array
+  ds 1
+
+wC3CD:: ; C3CD
+  ds 1
+
 ; Unlabeled
-ds $8C
+ds $8A
 
 wDroppedItemsCountdown:: ; C458
   ; Number of frame before a dropped item disappears
@@ -1049,7 +1056,13 @@ wKillCount2:: ; DBB5
 
 ; Unlabeled
 wDBB6 equ $DBB6
-  ds $16
+  ds $13
+
+wTorchesCount:: ; DBC9
+  ds 1
+
+; Unlabeled
+ds 2
 
 wHasDungeonMap:: ; DBCC
   ds 1

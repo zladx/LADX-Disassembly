@@ -8124,20 +8124,26 @@ label_FCFD::
     pop  bc
     ld   hl, $C1A2
     inc  [hl]
+
+    ; If $C3CD != 0…
     ld   a, [$C3CD]
     and  a
-    jr   z, label_FD63
+    jr   z, .paletteTransitionEnd
+    ; … decrement $C3CD by 4
     sub  a, $04
     ld   [$C3CD], a
-    ldh  a, [$FFFE]
+    ; If isGBC…
+    ldh  a, [hIsGBC]
     and  a
-    jr   z, label_FD63
+    jr   z, .paletteTransitionEnd
+    ; $DDD6 = $40
     ld   a, $40
     ld   [$DDD6], a
+    ; $DDD7 = $0B
     ld   a, $0B
     ld   [$DDD7], a
+.paletteTransitionEnd
 
-label_FD63::
     ld   de, data_E9A2
     push de
     jp   label_D1F5

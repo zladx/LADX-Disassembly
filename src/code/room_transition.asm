@@ -564,14 +564,14 @@ IncrementRoomTransitionStateAndReturn::
 RoomTransitionLoadSprites::
     call LoadRoomSprites                          ; $7B3E: $CD $1E $0D
 
-    ; If $D6FA == 2…
-    ld   a, [$D6FA]                               ; $7B41: $FA $FA $D6
-    cp   $02                                      ; $7B44: $FE $02
-    jr   nz, .not02                               ; $7B46: $20 $04
+    ; If room has mobile blocks…
+    ld   a, [wRoomSwitchableObject]               ; $7B41: $FA $FA $D6
+    cp   ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK      ; $7B44: $FE $02
+    jr   nz, .mobileBlocksEnd                     ; $7B46: $20 $04
     ; … $FFBB == 2
     ld   a, $02                                   ; $7B48: $3E $02
     ldh  [$FFBB], a                               ; $7B4A: $E0 $BB
-.not02
+.mobileBlocksEnd
 
     jp   IncrementRoomTransitionStateAndReturn    ; $7B4C: $C3 $36 $7B
 

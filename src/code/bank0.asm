@@ -5841,25 +5841,30 @@ LoadRoomObject::
     pop  af
 .torchEnd
 
-    cp   $8E
-    jr   z, label_341E
-    cp   $AA
-    jr   z, label_341E
-    cp   $DC
-    jr   z, label_3417
-    cp   $DB
-    jr   nz, label_3423
+    ;
+    ; Configure switches and movable blocks
+    ;
 
-label_3417::
-    ld   hl, $D6FA
-    ld   [hl], $02
-    jr   label_3423
+    cp   OBJECT_POT_WITH_SWITCH
+    jr   z, .setSwitchButton
+    cp   OBJECT_SWITCH_BUTTON
+    jr   z, .setSwitchButton
 
-label_341E::
-    ld   hl, $D6FA
-    ld   [hl], $01
+    cp   OBJECT_RAISED_BLOCK
+    jr   z, .setMovableBlock
+    cp   OBJECT_LOWERED_BLOCK
+    jr   nz, .switchableObjectsEnd
 
-label_3423::
+.setMovableBlock
+    ld   hl, wRoomSwitchableObject
+    ld   [hl], ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK
+    jr   .switchableObjectsEnd
+
+.setSwitchButton
+    ld   hl, wRoomSwitchableObject
+    ld   [hl], ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON
+.switchableObjectsEnd
+
     cp   $3F
     jr   z, label_342B
     cp   $47

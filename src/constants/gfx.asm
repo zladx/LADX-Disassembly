@@ -85,6 +85,10 @@ OBJECT_CAVE_DOOR            equ $E3
 OBJECT_WATERFALL            equ $E9
 
 ; Values for indoor room objects
+OBJECT_LIFTABLE_POT         equ $20
+OBJECT_BOMBABLE_WALL        equ $3F
+OBJECT_POT_WITH_SWITCH      equ $8E
+OBJECT_SWITCH_BUTTON        equ $AA
 OBJECT_TORCH_UNLIT          equ $AB
 OBJECT_TORCH_LIT            equ $AC
 OBJECT_STAIRS_DOWN          equ $BF
@@ -93,6 +97,8 @@ OBJECT_CONVEYOR_TOP         equ $D0
 OBJECT_CONVEYOR_RIGHT       equ $D1
 OBJECT_CONVEYOR_LEFT        equ $D2
 OBJECT_TRENDY_GAME_BORDER   equ $D3
+OBJECT_LOWERED_BLOCK        equ $DB
+OBJECT_RAISED_BLOCK         equ $DC
 OBJECT_KEY_DOOR_TOP         equ $EC
 OBJECT_KEY_DOOR_BOTTOM      equ $ED
 OBJECT_KEY_DOOR_LEFT        equ $EE
@@ -126,3 +132,8 @@ ROOM_STATUS_UNVISITED    equ $00
 ROOM_STATUS_CHANGED      equ $10 ; e.g. sword taken on the beach, or dungeon opened with key
 ROOM_STATUS_OWL_TALKED   equ $20
 ROOM_STATUS_VISITED      equ $80
+
+; Values for wRoomSwitchableObject
+ROOM_SWITCHABLE_OBJECT_NONE          equ $0
+ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON equ $1
+ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK  equ $2

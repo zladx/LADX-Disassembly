@@ -689,7 +689,15 @@ wRequestLength:           ; D603
 
 ; Request data (variable length)
 wRequestData:             ; D604
-  ds $D6FC - $D604
+  ds $D6FA - $D604
+
+wRoomSwitchableObject:: ; D6FA
+  ; Is there one or more switchable objects in the room
+  ; See ROOM_SWITCHABLE_OBJECT_* constants
+  ds 1
+
+; Unlabeled
+ds 1
 
 wEnginePaused:: ; D6FC
   ds 1

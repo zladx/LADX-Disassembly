@@ -226,7 +226,7 @@ IncrementGameplaySubtypeAndReturn::
 GameplayWorldSubtype3Handler::
     ld   a, $01
     ld   [wTileMapToLoad], a
-    ld   a, [$D6FA]
+    ld   a, [wRoomSwitchableObject]
     and  a
     jr   z, label_44F5
     ld   a, $05

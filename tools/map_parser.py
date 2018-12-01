@@ -241,7 +241,7 @@ class Room:
         """Parse the room objects"""
 
         # Parse objects
-        data = []
+        objects = []
         i = 2
         roomEnd = False
 
@@ -254,25 +254,31 @@ class Room:
                 roomEnd = True
 
             elif object_type == OBJECT_WARP:
-                data.append(rom[address + i])
-                data.append(rom[address + i + 1])
-                data.append(rom[address + i + 2])
-                data.append(rom[address + i + 3])
-                data.append(rom[address + i + 4])
+                objects.append([
+                    rom[address + i],
+                    rom[address + i + 1],
+                    rom[address + i + 2],
+                    rom[address + i + 3],
+                    rom[address + i + 4]
+                ])
                 i += 5
 
             elif object_type == OBJECT_VERTICAL or object_type == OBJECT_HORIZONTAL:
-                data.append(rom[address + i])
-                data.append(rom[address + i + 1])
-                data.append(rom[address + i + 2])
+                objects.append([
+                    rom[address + i],
+                    rom[address + i + 1],
+                    rom[address + i + 2]
+                ])
                 i += 3
 
             else:
-                data.append(rom[address + i])
-                data.append(rom[address + i + 1])
+                objects.append([
+                    rom[address + i],
+                    rom[address + i +1]
+                ])
                 i += 2
 
-        self.objects = data
+        self.objects = objects
         self.length = i
 
 class OverworldRoom(Room):

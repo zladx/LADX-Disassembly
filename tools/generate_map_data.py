@@ -90,7 +90,8 @@ class RoomFormatter:
             asm += "  db   ${:02X} ; floor tile\n".format(room.floor_tile)
 
         if room.objects:
-            asm += "  db   {} ; objects data\n".format(cls._bytes_to_hex(room.objects))
+            for room_object in room.objects:
+                asm += "  db   {:23} ; object\n".format(cls._bytes_to_hex(room_object))
         asm += "  db   ROOM_END\n\n"
 
         return asm

@@ -5786,9 +5786,9 @@ LoadRoomObject::
     ldh  a, [hScratchB]
 
     cp   $C5
-    jp   z, label_347D
+    jp   z, .configureStairs
     cp   OBJECT_GROUND_STAIRS
-    jp   z, label_347D
+    jp   z, .configureStairs
     jp   MoveToNextLine_finallyBeginSomething
 
 .loadNonDoorIndoorObject
@@ -5846,100 +5846,124 @@ LoadRoomObject::
     ;
 
     cp   OBJECT_POT_WITH_SWITCH
-    jr   z, .setSwitchButton
+    jr   z, .configureSwitchButton
     cp   OBJECT_SWITCH_BUTTON
-    jr   z, .setSwitchButton
+    jr   z, .configureSwitchButton
 
     cp   OBJECT_RAISED_BLOCK
-    jr   z, .setMovableBlock
+    jr   z, .configureMovableBlock
     cp   OBJECT_LOWERED_BLOCK
     jr   nz, .switchableObjectsEnd
 
-.setMovableBlock
+.configureMovableBlock
     ld   hl, wRoomSwitchableObject
     ld   [hl], ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK
     jr   .switchableObjectsEnd
 
-.setSwitchButton
+.configureSwitchButton
     ld   hl, wRoomSwitchableObject
     ld   [hl], ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON
 .switchableObjectsEnd
 
-    cp   $3F
-    jr   z, label_342B
-    cp   $47
-    jr   nz, label_342F
+    ;
+    ; Configure top and bottom bombable walls
+    ;
 
-label_342B::
+    cp   OBJECT_BOMBABLE_WALL_TOP
+    jr   z, .configureBombableWallTop
+    cp   OBJECT_HIDDEN_BOMBABLE_WALL_TOP
+    jr   nz, .bombableWallBottom
+.configureBombableWallTop
+    ; If a top bombable wall has been bombed…
     bit  2, e
-    jr   nz, label_343B
+    ; …replace the wall by a bombed passage
+    jr   nz, .replaceByVerticalBombedPassage
 
-label_342F::
-    cp   $40
-    jr   z, label_3437
-    cp   $48
-    jr   nz, label_343F
-
-label_3437::
+.bombableWallBottom
+    cp   OBJECT_BOMBABLE_WALL_BOTTOM
+    jr   z, .configureBombableWallBottom
+    cp   OBJECT_HIDDEN_BOMBABLE_WALL_BOTTOM
+    jr   nz, .verticalBombableWallsEnd
+.configureBombableWallBottom
+    ; If a bottom bombable wall has been bombed…
     bit  3, e
-    jr   z, label_343F
+    jr   z, .verticalBombableWallsEnd
+    ; …replace the wall by a bombed passage
 
-label_343B::
+.replaceByVerticalBombedPassage
     pop  af
-    ld   a, $3D
+    ld   a, OBJECT_BOMBED_PASSAGE_VERTICAL
     push af
+.verticalBombableWallsEnd
 
-label_343F::
-    cp   $41
-    jr   z, label_3447
-    cp   $49
-    jr   nz, label_344B
+    ;
+    ; Configure left and right bombable walls
+    ;
 
-label_3447::
+    cp   OBJECT_BOMBABLE_WALL_LEFT
+    jr   z, .configureBombableWallLeft
+    cp   OBJECT_HIDDEN_BOMBABLE_WALL_LEFT
+    jr   nz, .bombableWallRight
+
+.configureBombableWallLeft
+    ; If a left bombable wall has been bombed…
     bit  1, e
-    jr   nz, label_3457
+    ; …replace the wall by a bombed passage
+    jr   nz, .replaceByHorizontalBombedPassage
 
-label_344B::
-    cp   $42
-    jr   z, label_3453
-    cp   $4A
-    jr   nz, label_345B
-
-label_3453::
+.bombableWallRight
+    cp   OBJECT_BOMBABLE_WALL_RIGHT
+    jr   z, .configureBombableWallRight
+    cp   OBJECT_HIDDEN_BOMBABLE_WALL_RIGHT
+    jr   nz, .horizontalBombableWallsEnd
+.configureBombableWallRight
+    ; If a right bombable wall has been bombed…
     bit  0, e
-    jr   z, label_345B
+    ; …replace the wall by a bombed passage
+    jr   z, .horizontalBombableWallsEnd
 
-label_3457::
+.replaceByHorizontalBombedPassage
     pop  af
-    ld   a, $3E
+    ld   a, OBJECT_BOMBED_PASSAGE_HORIZONTAL
     push af
+.horizontalBombableWallsEnd
 
-label_345B::
     cp   $A1
-    jr   nz, label_3467
+    jr   nz, .label_3467
     bit  4, e
-    jr   nz, label_3467
+    jr   nz, .label_3467
     pop  af
     ldh  a, [$FFE9]
     push af
+.label_3467
 
-label_3467::
-    cp   $BF
-    jr   nz, label_3471
+    ;
+    ; Configure hidden stairs
+    ;
+
+    ; If the object is stairs down…
+    cp   OBJECT_STAIRS_DOWN
+    jr   nz, .hiddenStairsEnd
+    ; … and the stairs are not visible yet…
     bit  4, e
-    jr   nz, label_3471
+    jr   nz, .hiddenStairsEnd
+    ; return without loading this object.
     pop  af
     ret
+.hiddenStairsEnd
 
-label_3471::
+    ;
+    ; Configure stairs
+    ;
+
     cp   $BE
-    jr   z, label_347D
-    cp   $BF
-    jr   z, label_347D
-    cp   $CB
-    jr   nz, label_3496
+    jr   z, .configureStairs
+    cp   OBJECT_STAIRS_DOWN
+    jr   z, .configureStairs
+    cp   OBJECT_STAIRS_UP
+    jr   nz, .stairsEnd
 
-label_347D::
+.configureStairs
     dec  bc
     ld   a, $01
     ldh  [$FFAC], a
@@ -5954,8 +5978,8 @@ label_347D::
     ldh  [$FFAD], a
     inc  bc
     jp   MoveToNextLine_finallyBeginSomething
+.stairsEnd
 
-label_3496::
     cp   $D6
     jr   z, label_349E
     cp   $D5

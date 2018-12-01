@@ -87,6 +87,10 @@ OBJECT_MACRO_F5             equ $F5
 
 ; Values for indoor room objects
 OBJECT_LIFTABLE_POT                equ $20
+OBJECT_WALL_TOP                    equ $21
+OBJECT_WALL_BOTTOM                 equ $22
+OBJECT_WALL_LEFT                   equ $23
+OBJECT_WALL_RIGHT                  equ $24
 OBJECT_BOMBED_PASSAGE_VERTICAL     equ $3D
 OBJECT_BOMBED_PASSAGE_HORIZONTAL   equ $3E
 OBJECT_BOMBABLE_WALL_TOP           equ $3F
@@ -98,16 +102,22 @@ OBJECT_HIDDEN_BOMBABLE_WALL_BOTTOM equ $48
 OBJECT_HIDDEN_BOMBABLE_WALL_LEFT   equ $49
 OBJECT_HIDDEN_BOMBABLE_WALL_RIGHT  equ $4A
 OBJECT_POT_WITH_SWITCH             equ $8E
+OBJECT_CHEST_OPEN                  equ $A1
 OBJECT_SWITCH_BUTTON               equ $AA
 OBJECT_TORCH_UNLIT                 equ $AB
 OBJECT_TORCH_LIT                   equ $AC
-OBJECT_STAIRS_DOWN                 equ $BF
+OBJECT_STAIRS_DOWN                 equ $BE
+OBJECT_HIDDEN_STAIRS_DOWN          equ $BF
 OBJECT_STAIRS_UP                   equ $CB
 OBJECT_CONVEYOR_BOTTOM             equ $CF
 OBJECT_CONVEYOR_TOP                equ $D0
 OBJECT_CONVEYOR_RIGHT              equ $D1
 OBJECT_CONVEYOR_LEFT               equ $D2
 OBJECT_TRENDY_GAME_BORDER          equ $D3
+OBJECT_RAISED_FENCE_TOP            equ $D5
+OBJECT_RAISED_FENCE_BOTTOM         equ $D6
+OBJECT_RAISED_FENCE_LEFT           equ $D7
+OBJECT_RAISED_FENCE_RIGHT          equ $D8
 OBJECT_LOWERED_BLOCK               equ $DB
 OBJECT_RAISED_BLOCK                equ $DC
 OBJECT_KEY_DOOR_TOP                equ $EC

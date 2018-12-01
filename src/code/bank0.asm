@@ -5928,21 +5928,28 @@ LoadRoomObject::
     push af
 .horizontalBombableWallsEnd
 
-    cp   $A1
-    jr   nz, .label_3467
+    ;
+    ; Configure chest
+    ;
+
+    ; If object is a chest…
+    cp   OBJECT_CHEST_OPEN
+    jr   nz, .chestEnd
+    ; … and the chest has been opened…
     bit  4, e
-    jr   nz, .label_3467
+    jr   nz, .chestEnd
+    ; a = [$FFE9]
     pop  af
     ldh  a, [$FFE9]
     push af
-.label_3467
+.chestEnd
 
     ;
     ; Configure hidden stairs
     ;
 
-    ; If the object is stairs down…
-    cp   OBJECT_STAIRS_DOWN
+    ; If the object is hidden stairs…
+    cp   OBJECT_HIDDEN_STAIRS_DOWN
     jr   nz, .hiddenStairsEnd
     ; … and the stairs are not visible yet…
     bit  4, e
@@ -5956,9 +5963,9 @@ LoadRoomObject::
     ; Configure stairs
     ;
 
-    cp   $BE
-    jr   z, .configureStairs
     cp   OBJECT_STAIRS_DOWN
+    jr   z, .configureStairs
+    cp   OBJECT_HIDDEN_STAIRS_DOWN
     jr   z, .configureStairs
     cp   OBJECT_STAIRS_UP
     jr   nz, .stairsEnd
@@ -5980,32 +5987,44 @@ LoadRoomObject::
     jp   MoveToNextLine_finallyBeginSomething
 .stairsEnd
 
-    cp   $D6
-    jr   z, label_349E
-    cp   $D5
-    jr   nz, label_34A6
+    ;
+    ; Configure raised fences
+    ;
+    ; Raised fences can be activated: they turn into a wall
+    ; jumpable from the top.
+    ;
+    ; NB: it seems these objects are not used in the final game.
+    ;
 
-label_349E::
+    cp   OBJECT_RAISED_FENCE_BOTTOM
+    jr   z, .configureVerticalFence
+    cp   OBJECT_RAISED_FENCE_TOP
+    jr   nz, .verticalFenceEnd
+.configureVerticalFence
+    ; If the fence has been lowered…
     bit  4, e
-    jr   nz, label_34A6
+    jr   nz, .verticalFenceEnd
+    ; … replace the fence by a jumpable wall
     pop  af
-    ld   a, $21
+    ld   a, OBJECT_WALL_TOP
     push af
+.verticalFenceEnd
 
-label_34A6::
-    cp   $D7
-    jr   z, label_34AE
-    cp   $D8
-    jr   nz, label_34B6
+    cp   OBJECT_RAISED_FENCE_LEFT
+    jr   z, .configureHorizontalFence
+    cp   OBJECT_RAISED_FENCE_RIGHT
+    jr   nz, .horizontalFenceEnd
 
-label_34AE::
+.configureHorizontalFence
+    ; If the fence has been lowered…
     bit  4, e
-    jr   nz, label_34B6
+    jr   nz, .horizontalFenceEnd
+    ; … replace the fence by a jumpable wall
     pop  af
-    ld   a, $22
+    ld   a, OBJECT_WALL_BOTTOM
     push af
+.horizontalFenceEnd
 
-label_34B6::
     ldh  a, [hMapId]
     cp   MAP_CAVE_B
     ldh  a, [hScratchB]

@@ -3686,28 +3686,39 @@ label_6C77::
     ldh  [$FF92], a
     ret
 
-data_6CA5::
-    db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, $A, $B, $10, $1B, $20, $2B
+; Coordinates of the borders surrounding the room objects
+RoomBorderCoordinates::
+    db $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $0A, $0B, $10, $1B, $20, $2B
     db $30, $3B, $40, $4B, $50, $5B, $60, $6B, $70, $7B, $80, $8B, $90, $91, $92, $93
     db $94, $95, $96, $97, $98, $99, $9A, $9B, $FF
 
-func_001_6CCE::
-    ld   bc, data_6CA5
+; Surround the objects area defining a room by ROOM_BORDER values
+PadRoomObjectsArea::
+    ld   bc, RoomBorderCoordinates
 .loop
+    ; a = next border coordinate
     ld   a, [bc]
+
+    ; if the border reached $FF, exit loop
     cp   $FF
     jr   z, .end
+
+    ; hl = wRoomObjectsArea + next border coordinate
     ld   e, a
     ld   d, $00
     ld   hl, wRoomObjectsArea
     add  hl, de
-    ld   [hl], $FF
-    inc  bc
-    jr   .loop ; $6CE0
 
+    ; write the border
+    ld   [hl], ROOM_BORDER
+
+    ; increment and continue
+    inc  bc
+    jr   .loop
 .end
     ret
 
+label_6CE3::
     ld   bc, $400
     ld   hl, $9800
 

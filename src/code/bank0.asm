@@ -5516,10 +5516,9 @@ LoadRoom::
     jr   .parseRoomObjectsLoop
 
 .endOfRoom
-    ; TODO: label this function
-    ld   a, BANK(func_001_6CCE)
-    ld   [MBC3SelectBank], a
-    call func_001_6CCE
+
+    ; Surround the objects area defining a room by ROOM_BORDER values
+    callsb PadRoomObjectsArea
 
     ld   a, $36
     ld   [MBC3SelectBank], a

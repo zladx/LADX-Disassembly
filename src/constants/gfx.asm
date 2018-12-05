@@ -146,6 +146,7 @@ OBJECT_INDOOR_ENTRANCE             equ $FD
 ; Room header constants
 ROOM_WARP                   equ $E0
 ROOM_END                    equ $FE
+ROOM_BORDER                 equ $FF
 
 ; Value for wOverworldRoomStatus (and similar constants)
 ;

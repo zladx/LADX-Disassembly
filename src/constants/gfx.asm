@@ -86,6 +86,7 @@ OBJECT_WATERFALL            equ $E9
 OBJECT_MACRO_F5             equ $F5
 
 ; Values for indoor room objects
+OBJECT_FLOOR_OD                    equ $0D
 OBJECT_LIFTABLE_POT                equ $20
 OBJECT_WALL_TOP                    equ $21
 OBJECT_WALL_BOTTOM                 equ $22
@@ -102,7 +103,9 @@ OBJECT_HIDDEN_BOMBABLE_WALL_BOTTOM equ $48
 OBJECT_HIDDEN_BOMBABLE_WALL_LEFT   equ $49
 OBJECT_HIDDEN_BOMBABLE_WALL_RIGHT  equ $4A
 OBJECT_POT_WITH_SWITCH             equ $8E
+OBJECT_CHEST_CLOSED                equ $A0
 OBJECT_CHEST_OPEN                  equ $A1
+OBJECT_BOMBABLE_BLOCK              equ $A9
 OBJECT_SWITCH_BUTTON               equ $AA
 OBJECT_TORCH_UNLIT                 equ $AB
 OBJECT_TORCH_LIT                   equ $AC
@@ -120,6 +123,7 @@ OBJECT_RAISED_FENCE_LEFT           equ $D7
 OBJECT_RAISED_FENCE_RIGHT          equ $D8
 OBJECT_LOWERED_BLOCK               equ $DB
 OBJECT_RAISED_BLOCK                equ $DC
+OBJECT_BREAKABLE_CRYSTAL           equ $DE
 OBJECT_KEY_DOOR_TOP                equ $EC
 OBJECT_KEY_DOOR_BOTTOM             equ $ED
 OBJECT_KEY_DOOR_LEFT               equ $EE

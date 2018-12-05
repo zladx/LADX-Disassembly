@@ -5789,7 +5789,7 @@ LoadRoomObject::
     jp   z, .configureStairs
     cp   OBJECT_GROUND_STAIRS
     jp   z, .configureStairs
-    jp   MoveToNextLine_finallyBeginSomething
+    jp   .breakableObjectEnd
 
 .loadNonDoorIndoorObject
     ; Re-increment a to be the object type
@@ -5984,7 +5984,7 @@ LoadRoomObject::
     add  a, $08
     ldh  [$FFAD], a
     inc  bc
-    jp   MoveToNextLine_finallyBeginSomething
+    jp   .breakableObjectEnd
 .stairsEnd
 
     ;
@@ -6025,34 +6025,46 @@ LoadRoomObject::
     push af
 .horizontalFenceEnd
 
+    ;
+    ; Configure breakable objects
+    ;
+
     ldh  a, [hMapId]
     cp   MAP_CAVE_B
     ldh  a, [hScratchB]
-    jr   c, label_34C2
-    cp   $A9
-    jr   z, label_34C6
+    jr   c, .bombableBlockEnd
+    cp   OBJECT_BOMBABLE_BLOCK
+    jr   z, .configureBreakableObject
+.bombableBlockEnd
 
-label_34C2::
-    cp   $DE
-    jr   nz, MoveToNextLine_finallyBeginSomething
+    cp   OBJECT_BREAKABLE_CRYSTAL
+    jr   nz, .breakableObjectEnd
 
-label_34C6::
+.configureBreakableObject
+    ; If the object has been broken…
     bit  6, e
-    jr   z, MoveToNextLine_finallyBeginSomething
+    jr   z, .breakableObjectEnd
+    ; … replace it by an empty floor tile
     pop  af
-    ld   a, $0D
-
-label_34CD::
+    ld   a, OBJECT_FLOOR_OD
     push af
+.breakableObjectEnd
 
-MoveToNextLine_finallyBeginSomething::
-    cp   $A0
-    jr   nz, MoveToNextLine_tileTypeNotA0
+    ;
+    ; Configure chest
+    ;
+
+    ; If the object is an closed chest…
+    cp   OBJECT_CHEST_CLOSED
+    jr   nz, .closedChestEnd
+    ; … and the chest has already been opened…
     bit  4, e
-    jr   z, MoveToNextLine_tileTypeNotA0
+    jr   z, .closedChestEnd
+    ; … replace it by an open chest
     pop  af
-    ld   a, $A1
+    ld   a, OBJECT_CHEST_OPEN
     push af
+.closedChestEnd
 
 MoveToNextLine_tileTypeNotA0::
     ld   d, $00

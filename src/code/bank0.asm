@@ -5174,7 +5174,7 @@ label_309B::
 
     jpsb UpdateMinimapEntranceArrowAndReturn
 
-; Load room objects and tiles
+; Load room objects
 LoadRoom::
     ; Disable all interrupts except VBlank
     ld   a, $01
@@ -5457,7 +5457,7 @@ LoadRoom::
     swap a
     and  $0F
     call LoadRoomTemplate
-    jr   .parseRoomObjects
+    jr   .parseRoomObjectsLoop
 
 .parseOverworldSecondByte
     ; For overworld rooms, the second byte is just the floor tile
@@ -5468,7 +5468,7 @@ LoadRoom::
     ; Parse room objects
     ;
 
-.parseRoomObjects
+.parseRoomObjectsLoop
     ; Increment the current address
     inc  bc
     ; a = object type
@@ -5503,7 +5503,7 @@ LoadRoom::
     ld   a, e
     add  a, $05
     ldh  [hFreeWarpDataAddress], a
-    jr   .parseRoomObjects
+    jr   .parseRoomObjectsLoop
 .warpDataEnd
 
     ; a = object type
@@ -5513,7 +5513,7 @@ LoadRoom::
     jr   z, .endOfRoom
 
     call LoadRoomObject
-    jr   .parseRoomObjects
+    jr   .parseRoomObjectsLoop
 
 .endOfRoom
     ; TODO: label this function
@@ -5534,10 +5534,10 @@ LoadRoom::
     ; Reload saved bank and return
     jp   ReloadSavedBank
 
-; Load an individual object
+; Read an individual room object, and write it to the unpacked room objects area.
 ; bc : start address of the object
 ;
-; Objects can be 2-bytes or 3-bytes objects:
+; Objects can be 2-bytes objects or 3-bytes objects:
 ;
 ; twoBytesObject:
 ;   ds 1 ; location (YX)
@@ -6066,21 +6066,31 @@ LoadRoomObject::
     push af
 .closedChestEnd
 
-MoveToNextLine_tileTypeNotA0::
+    ; a = multiple-blocks object direction and length
     ld   d, $00
     ldh  a, [hScratchA]
+    ; If there are no coordinates for a multiple-blocks object…
     and  a
+    ; … this is a single-block object:
+    ; copy the object to the unpacked map and return
     jr   z, CopyObjectToActiveRoomMap
-    dec  bc ; decrement tile address
-    ld   a, [bc] ; load new tile type
+
+
+    ; This is a multiple-blocks object.
+    ; hl = initial position address
+    dec  bc
+    ld   a, [bc]
     ld   e, a
-    ld   hl, wRoomObjects ; prepare tile map
-    add  hl, de ; add current tile offset
+    ld   hl, wRoomObjects
+    add  hl, de
+    ; e = count
     ldh  a, [hScratchA]
     and  $0F
-    ld   e, a ; load repeat count from higher-bits of a
-    pop  af ;
+    ld   e, a
+    ; d = object type
+    pop  af
     ld   d, a
+    ; fallthrough FillRoomWithConsecutiveObjects
 
 ; Fill the active room map with many consecutive objects
 ; Inputs:

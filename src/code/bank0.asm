@@ -6656,10 +6656,9 @@ FillRoomMapWithObject::
     jr   nz, .loop
     ret
 
-label_37FE::
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call $5F02
+LoadRoomEntities::
+    callsb func_001_5F02
+
     ld   a, $16
     ld   [MBC3SelectBank], a
     xor  a
@@ -6980,7 +6979,7 @@ label_39F2::
     and  a
     jr   z, label_3A03
     ldh  [hEntityType], a
-    call LoadEntities
+    call LoadEntity
 
 label_3A03::
     dec  c
@@ -6997,7 +6996,7 @@ label_3A0A::
     ld   [MBC3SelectBank], a
     ret
 
-LoadEntities::
+LoadEntity::
     ld   hl, $C3A0
     add  hl, bc
     ld   a, [hl]

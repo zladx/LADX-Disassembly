@@ -140,7 +140,7 @@ label_4452::
     ld   a, $04
     ld   [wRoomTransitionDirection], a
     call LoadRoom
-    call label_37FE
+    call LoadRoomEntities
     call label_5FB3
     ld   a, $FF
     ldh  [hAnimatedTilesFrameCount], a

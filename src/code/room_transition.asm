@@ -463,7 +463,7 @@ RoomTransitionPrepareHandler::
     call label_9F5                                ; $7ABA: $CD $F5 $09
 .colorDungeonEnd
 
-    call label_37FE                               ; $7ABD: $CD $FE $37
+    call LoadRoomEntities                               ; $7ABD: $CD $FE $37
     call DrawLinkSprite                           ; $7AC0: $CD $2E $1D
     call ApplyLinkMotionState                     ; $7AC3: $CD $94 $17
 

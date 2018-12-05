@@ -2645,6 +2645,9 @@ label_5EA6::
     ld   [hl], a
     pop  bc
     ret
+
+; Called during room loading
+func_001_5F02::
     ld   c, $06
     ldh  a, [hMapRoom]
     ld   hl, $CE81

@@ -62,9 +62,11 @@ wC120: ds 1
 wIsUsingSpinAttack:: ; C121
   ds 1
 
+wSwordCharge:: ; C122
+  ds 1
+
 ; Unlabeled
-wC122 equ $C122
-  ds 2
+ds 1 ; C123
 
 ; See ROOM_TRANSITION_* constants for possible values.
 wRoomTransitionState:: ; C124
@@ -254,7 +256,14 @@ wDialogState:: ; C19F
   ds 1
 
 ; Unlabeled
-ds $9
+ds $5
+
+wConveyorBeltsCount:: ; C1A5
+  ; Number of conveyor belts on the current screen
+  ds 1
+
+; Unlabeled
+ds 3
 
 wDialogGotItem:: ; C1A9
   ; The "Got item" dialog to display
@@ -380,7 +389,22 @@ wDroppedItem:: ; C3AF
   ds 1
 
 ; Unlabeled
-ds $A8
+ds $1B
+
+wObjectAffectingBGPalette:: ; C3CB
+  ; Type of the object affecting the background palette
+  ; (for instance a dark palette when torches are not lit)
+  ds 1
+
+wBGPaletteEffectAddress:: ; $C3CC
+  ; Adress of a palette[frameCount] array
+  ds 1
+
+wC3CD:: ; C3CD
+  ds 1
+
+; Unlabeled
+ds $8A
 
 wDroppedItemsCountdown:: ; C458
   ; Number of frame before a dropped item disappears
@@ -524,15 +548,86 @@ wWorldMusicTrack:: ; D368
   ds 1
 
 ; Unlabeled
-wD369 equ $D369
-  ds $AC
+ds $98
 
-wKillCount:: ; D415
+; Room warps
+;
+; Each room can have 4 warp points. The room warps destination are defined below,
+; and the warp positions is defined at D416-D419.
+
+wWarpStructs::
+
+; Warp 0
+wWarp0MapCategory:: ; D401
+  ds 1
+wWarp0Map:: ; D402
+  ds 1
+wWarp0Room:: ; D403
+  ds 1
+wWarp0DestinationX:: ; D404
+  ds 1
+wWarp0DestinationY:: ; D405
+  ds 1
+
+; Warp 1
+wWarp1MapCategory:: ; D406
+  ds 1
+wWarp1Map:: ; D407
+  ds 1
+wWarp1Room:: ; D408
+  ds 1
+wWarp1DestinationX:: ; D409
+  ds 1
+wWarp1DestinationY:: ; D40A
+  ds 1
+
+; Warp 2
+wWarp2MapCategory:: ; D40B
+  ds 1
+wWarp2Map:: ; D40C
+  ds 1
+wWarp2Room:: ; D40D
+  ds 1
+wWarp2DestinationX:: ; D40E
+  ds 1
+wWarp2DestinationY:: ; D40F
+  ds 1
+
+; Warp 3
+wWarp3MapCategory:: ; D410
+  ds 1
+wWarp3Map:: ; D411
+  ds 1
+wWarp3Room:: ; D412
+  ds 1
+wWarp3DestinationX:: ; D413
+  ds 1
+wWarp3DestinationY:: ; D414
+  ds 1
+
+wPieceOfPowerKillCount:: ; D415
+  ; Kill count, to tell if a Piece of Power should be dropped
+  ds 1
+
+wWarpPositions::
+wWarp0PositionTileIndex:: ; D416
+  ; Position of warp 0, as a tile index on the map
+  ds 1
+
+wWarp1PositionTileIndex:: ; D417
+  ; Position of warp 1, as a tile index on the map
+  ds 1
+
+wWarp2PositionTileIndex:: ; D418
+  ; Position of warp 2, as a tile index on the map
+  ds 1
+
+wWarp3PositionTileIndex:: ; D419
+  ; Position of warp 3, as a tile index on the map
   ds 1
 
 ; Unlabeled
-wD416 equ $D416
-  ds $4C
+ds $48
 
 wCompassSfxCountdown:: ; D462
   ; Each frame decrements the value.
@@ -547,7 +642,11 @@ wBossDefeated:: ; D46C
   ds 1
 
 ; Unlabeled
-ds $E
+ds $D
+
+wPowerUpHits:: ; D47A
+  ; Power-ups are disabled after 3 hits are taken from ennemies
+  ds 1
 
 wForceFileSelectionScreenMusic:: ; D47B
   ; If not zero, force the music track to change when displaying the file selections screen
@@ -590,7 +689,15 @@ wRequestLength:           ; D603
 
 ; Request data (variable length)
 wRequestData:             ; D604
-  ds $D6FC - $D604
+  ds $D6FA - $D604
+
+wRoomSwitchableObject:: ; D6FA
+  ; Is there one or more switchable objects in the room
+  ; See ROOM_SWITCHABLE_OBJECT_* constants
+  ds 1
+
+; Unlabeled
+ds 1
 
 wEnginePaused:: ; D6FC
   ds 1
@@ -616,14 +723,7 @@ wRoomObjectsArea:: ; D700
 wRoomObjects equ $D711
 
 ; World rooms status
-;
-; Each screen status is represented by a byte, which is a combination of the following masks : :
-;   00 : Unexplored
-;   10 : changed from initial status (for example sword taken on the beach or dungeon opened with key)
-;   20 : owl talked
-;   80 : visited
-;
-; For example, visiting the first dungeon's screen (80) and opening it with the key (10) would put that byte at 90
+; Each room is a byte combining ROOM_STATUS_* constants.
 wOverworldRoomStatus:: ; D800
   ds $100
 
@@ -964,7 +1064,13 @@ wKillCount2:: ; DBB5
 
 ; Unlabeled
 wDBB6 equ $DBB6
-  ds $16
+  ds $13
+
+wTorchesCount:: ; DBC9
+  ds 1
+
+; Unlabeled
+ds 2
 
 wHasDungeonMap:: ; DBCC
   ds 1
@@ -1019,3 +1125,15 @@ wDC0E::
 ; 2: blue
 wTunicType:: ; DC0F
   ds 1
+
+; Unlabeled
+ds $1D0
+
+; Color dungeon rooms status
+;
+; See wOverworldRoomStatus
+wColorDungeonRoomStatus:: ; DDE0
+  ds $100
+
+; E200 - E300: entities
+; See https://github.com/Xkeeper0/emu-lua/blob/master/legacy/gbx/link's awakening.lua

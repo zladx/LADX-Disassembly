@@ -5877,7 +5877,7 @@ label_004_67FB:
     sub  $08                                      ; $6807: $D6 $08
     and  $F0                                      ; $6809: $E6 $F0
     or   e                                        ; $680B: $B3
-    ld   [$D416], a                               ; $680C: $EA $16 $D4
+    ld   [wWarp0PositionTileIndex], a             ; $680C: $EA $16 $D4
     xor  a                                        ; $680F: $AF
     ld   [wC167], a                               ; $6810: $EA $67 $C1
     ret                                           ; $6813: $C9
@@ -9377,7 +9377,7 @@ func_004_7B70:
     ld   a, $04                                   ; $7B70: $3E $04
 
 jr_004_7B72:
-    ldh  [$FFE6], a                               ; $7B72: $E0 $E6
+    ldh  [hFreeWarpDataAddress], a                               ; $7B72: $E0 $E6
     ld   e, a                                     ; $7B74: $5F
     ld   d, b                                     ; $7B75: $50
     ld   hl, $C504                                ; $7B76: $21 $04 $C5
@@ -9389,7 +9389,7 @@ jr_004_7B72:
     dec  a                                        ; $7B7E: $3D
     ldh  [$FFF1], a                               ; $7B7F: $E0 $F1
     ld   hl, $7B55                                ; $7B81: $21 $55 $7B
-    ldh  a, [$FFE6]                               ; $7B84: $F0 $E6
+    ldh  a, [hFreeWarpDataAddress]                               ; $7B84: $F0 $E6
     ld   e, a                                     ; $7B86: $5F
     add  hl, de                                   ; $7B87: $19
     ld   a, [hl]                                  ; $7B88: $7E
@@ -9416,7 +9416,7 @@ jr_004_7BA6:
     call label_3C77                               ; $7BA9: $CD $77 $3C
 
 jr_004_7BAC:
-    ldh  a, [$FFE6]                               ; $7BAC: $F0 $E6
+    ldh  a, [hFreeWarpDataAddress]                               ; $7BAC: $F0 $E6
     dec  a                                        ; $7BAE: $3D
     jr   nz, jr_004_7B72                          ; $7BAF: $20 $C1
 

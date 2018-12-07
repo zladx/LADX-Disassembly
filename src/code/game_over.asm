@@ -68,10 +68,10 @@ label_420D::
 label_4240::
     xor  a
     ld   [$C1BF], a
-    ld   [$D415], a
+    ld   [wPieceOfPowerKillCount], a
     ld   [wActivePowerUp], a
-    ld   [$D47A], a
-    ld   [$C3CB], a
+    ld   [wPowerUpHits], a
+    ld   [wObjectAffectingBGPalette], a
     ld   [$C3CC], a
     ld   [$C3CD], a
     ld   [rOBP0], a
@@ -99,7 +99,7 @@ label_4259::
     ld   a, [hl]
     ld   [$C3CD], a
     ld   a, $01
-    ld   [$C3CB], a
+    ld   [wObjectAffectingBGPalette], a
     ld   a, $1C
     ld   [wOBJ0Palette], a
     ld   a, [wBGPalette]

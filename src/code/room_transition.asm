@@ -431,7 +431,7 @@ RoomTransitionPrepareHandler::
     jr   nz, .forestRoomEnd                       ; $7A95: $20 $0E
 
     ; … and this room has not been visited yet…
-    ld   hl, wOverworldRoomStatus + $41                  ; $7A97: $21 $41 $D8
+    ld   hl, wOverworldRoomStatus + $41           ; $7A97: $21 $41 $D8
     bit  6, [hl]                                  ; $7A9A: $CB $76
     jr   nz, .forestRoomEnd                       ; $7A9C: $20 $07
 
@@ -463,7 +463,7 @@ RoomTransitionPrepareHandler::
     call label_9F5                                ; $7ABA: $CD $F5 $09
 .colorDungeonEnd
 
-    call label_37FE                               ; $7ABD: $CD $FE $37
+    call LoadRoomEntities                               ; $7ABD: $CD $FE $37
     call DrawLinkSprite                           ; $7AC0: $CD $2E $1D
     call ApplyLinkMotionState                     ; $7AC3: $CD $94 $17
 
@@ -564,14 +564,14 @@ IncrementRoomTransitionStateAndReturn::
 RoomTransitionLoadSprites::
     call LoadRoomSprites                          ; $7B3E: $CD $1E $0D
 
-    ; If $D6FA == 2…
-    ld   a, [$D6FA]                               ; $7B41: $FA $FA $D6
-    cp   $02                                      ; $7B44: $FE $02
-    jr   nz, .not02                               ; $7B46: $20 $04
+    ; If room has mobile blocks…
+    ld   a, [wRoomSwitchableObject]               ; $7B41: $FA $FA $D6
+    cp   ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK      ; $7B44: $FE $02
+    jr   nz, .mobileBlocksEnd                     ; $7B46: $20 $04
     ; … $FFBB == 2
     ld   a, $02                                   ; $7B48: $3E $02
     ldh  [$FFBB], a                               ; $7B4A: $E0 $BB
-.not02
+.mobileBlocksEnd
 
     jp   IncrementRoomTransitionStateAndReturn    ; $7B4C: $C3 $36 $7B
 

@@ -1704,14 +1704,14 @@ label_57B7::
     ld   [wGameplayType], a
     call ApplyMapFadeOutTransition
     ld   a, $00
-    ld   [$D401], a
-    ld   [$D402], a
+    ld   [wWarp0MapCategory], a
+    ld   [wWarp0Map], a
     ld   a, [$DBB4]
-    ld   [$D403], a
+    ld   [wWarp0Room], a
     ld   a, $48
-    ld   [$D404], a
+    ld   [wWarp0DestinationX], a
     ld   a, $52
-    ld   [$D405], a
+    ld   [wWarp0DestinationY], a
     ldh  a, [hLinkPositionX]
     swap a
     and  $0F
@@ -1720,7 +1720,7 @@ label_57B7::
     sub  a, $08
     and  $F0
     or   e
-    ld   [$D416], a
+    ld   [wWarp0PositionTileIndex], a
     ld   a, $07
     ld   [wGameplaySubtype], a
     ret
@@ -2645,6 +2645,9 @@ label_5EA6::
     ld   [hl], a
     pop  bc
     ret
+
+; Called during room loading
+func_001_5F02::
     ld   c, $06
     ldh  a, [hMapRoom]
     ld   hl, $CE81
@@ -3571,7 +3574,7 @@ label_6BF0::
 
 label_6BF4::
     ld   a, c
-    ldh  [$FFE0], a
+    ldh  [hScratchB], a
     ld   d, $00
 
 label_6BF9::
@@ -3641,7 +3644,7 @@ label_6C48::
     ld   [hl], a
     inc  e
     ld   a, e
-    ld   hl, $FFE0
+    ld   hl, hScratchB
     cp   [hl]
     jp   nz, label_6BF9
     ret
@@ -3686,27 +3689,39 @@ label_6C77::
     ldh  [$FF92], a
     ret
 
-label_6CA5::
-    db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, $A, $B, $10, $1B, $20, $2B
+; Coordinates of the borders surrounding the room objects
+RoomBorderCoordinates::
+    db $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $0A, $0B, $10, $1B, $20, $2B
     db $30, $3B, $40, $4B, $50, $5B, $60, $6B, $70, $7B, $80, $8B, $90, $91, $92, $93
-    db $94, $95, $96, $97, $98, $99, $9A, $9B, $FF, 1, $A5, $6C
+    db $94, $95, $96, $97, $98, $99, $9A, $9B, $FF
 
-label_6CD1::
+; Surround the objects area defining a room by ROOM_BORDER values
+PadRoomObjectsArea::
+    ld   bc, RoomBorderCoordinates
+.loop
+    ; a = next border coordinate
     ld   a, [bc]
+
+    ; if the border reached $FF, exit loop
     cp   $FF
-    jr   z, label_6CE2
+    jr   z, .end
+
+    ; hl = wRoomObjectsArea + next border coordinate
     ld   e, a
     ld   d, $00
-    ld   hl, $D700
+    ld   hl, wRoomObjectsArea
     add  hl, de
-    ld   [hl], $FF
+
+    ; write the border
+    ld   [hl], ROOM_BORDER
+
+    ; increment and continue
     inc  bc
-
-label_6CE0::
-    jr   label_6CD1
-
-label_6CE2::
+    jr   .loop
+.end
     ret
+
+label_6CE3::
     ld   bc, $400
     ld   hl, $9800
 

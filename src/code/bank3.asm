@@ -2161,7 +2161,7 @@ label_D60F::
     ld   d, $28
 
 label_D62E::
-    ld   hl, $D415
+    ld   hl, wPieceOfPowerKillCount
     inc  [hl]
     ld   a, [hl]
     cp   d
@@ -2816,7 +2816,7 @@ label_DA17::
     xor  a
     ld   [wSwordAnimationState], a
     ld   [$C16A], a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     ld   [$C121], a
     ld   hl, $C470
     add  hl, bc
@@ -4165,7 +4165,7 @@ label_E37C::
     jr   label_E35F
     xor  a
     ld   [wBossDefeated], a
-    ld   [$C3CB], a
+    ld   [wObjectAffectingBGPalette], a
     ld   a, $1B
     ld   [wWorldMusicTrack], a
     ld   [$C167], a
@@ -5681,7 +5681,7 @@ label_EDAB::
     ld   a, [wActivePowerUp]
     and  a
     jr   z, label_EDDF
-    ld   hl, $D47A
+    ld   hl, wPowerUpHits
     inc  [hl]
     ld   a, [hl]
     cp   $03
@@ -5900,7 +5900,7 @@ label_EF04::
     ld   a, $01
     ld   [$C160], a
     xor  a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     jp   label_F13B
 
 label_EF20::
@@ -6271,7 +6271,7 @@ label_F14D::
 
 label_F15E::
     xor  a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     ld   a, $30
     call label_EFCC
     ld   hl, hJingle
@@ -6776,7 +6776,7 @@ label_F440::
     call label_F3DB
     ld   [hl], $08
     xor  a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     call label_C50
     ld   hl, $C121
     ld   a, [$C16A]
@@ -8124,20 +8124,26 @@ label_FCFD::
     pop  bc
     ld   hl, $C1A2
     inc  [hl]
+
+    ; If $C3CD != 0…
     ld   a, [$C3CD]
     and  a
-    jr   z, label_FD63
+    jr   z, .paletteTransitionEnd
+    ; … decrement $C3CD by 4
     sub  a, $04
     ld   [$C3CD], a
-    ldh  a, [$FFFE]
+    ; If isGBC…
+    ldh  a, [hIsGBC]
     and  a
-    jr   z, label_FD63
+    jr   z, .paletteTransitionEnd
+    ; $DDD6 = $40
     ld   a, $40
     ld   [$DDD6], a
+    ; $DDD7 = $0B
     ld   a, $0B
     ld   [$DDD7], a
+.paletteTransitionEnd
 
-label_FD63::
     ld   de, data_E9A2
     push de
     jp   label_D1F5

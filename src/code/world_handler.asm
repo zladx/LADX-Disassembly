@@ -140,7 +140,7 @@ label_4452::
     ld   a, $04
     ld   [wRoomTransitionDirection], a
     call LoadRoom
-    call label_37FE
+    call LoadRoomEntities
     call label_5FB3
     ld   a, $FF
     ldh  [hAnimatedTilesFrameCount], a
@@ -226,7 +226,7 @@ IncrementGameplaySubtypeAndReturn::
 GameplayWorldSubtype3Handler::
     ld   a, $01
     ld   [wTileMapToLoad], a
-    ld   a, [$D6FA]
+    ld   a, [wRoomSwitchableObject]
     and  a
     jr   z, label_44F5
     ld   a, $05
@@ -265,7 +265,7 @@ GameplayWorldSubtype6Handler::
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
-    ld   a, [$C3CB]
+    ld   a, [wObjectAffectingBGPalette]
     and  a
     jr   z, label_4548
     ld   a, [$C5AD]

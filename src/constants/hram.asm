@@ -182,17 +182,21 @@ hRoomPaletteBank ; FFDF
   ds 1
 
 ; Scratch hram address with different uses
-hFFE0              ; FFE0
+hScratchB          ; FFE0
 hBGMapOffsetHigh:: ; FFE0
   ds 1
 
 ; This location has different uses
-hFFE1              ; FFE1
+hScratchC          ; FFE1
 hBGMapOffsetLow::  ; FFE1
   ds 1
 
 ; Unlabeled
-ds 5
+ds 4
+
+hFreeWarpDataAddress ; FFE6
+  ; Address of the first free warp data slot
+  ds 1
 
 hFrameCounter:: ; FFE7
   ; wraps around 00-FF

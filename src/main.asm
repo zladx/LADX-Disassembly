@@ -29,26 +29,26 @@ section "bank5",romx[$4000],bank[$05]
 
 section "bank009",romx[$4000],bank[$09]
 OverworldRoomPointers::
-include "data/map_pointers/overworld.asm"
-OverworldMapHeadersFirstHalf::
-include "data/maps/overworld_a.asm"
+include "data/maps/overworld.asm"
+OverworldRoomsFirstHalf::
+include "data/rooms/overworld_a.asm"
 include "text/dialog_dx.asm"
 
 section "bank0A", romx[$4000], bank[$0A]
 IndoorsARoomPointers::
-include "data/map_pointers/indoors_a.asm"
-IndoorsAMapHeaders::
 include "data/maps/indoors_a.asm"
+IndoorsARooms::
+include "data/rooms/indoors_a.asm"
 ColorDungeonRoomPointers::
-include "data/map_pointers/color_dungeon.asm"
-ColorDungeonMapHeaders::
 include "data/maps/color_dungeon.asm"
+ColorDungeonRooms::
+include "data/rooms/color_dungeon.asm"
 
 section "bank0B", romx[$4000], bank[$0B]
 IndoorsBRoomPointers::
-include "data/map_pointers/indoors_b.asm"
-IndoorsBMapHeaders::
 include "data/maps/indoors_b.asm"
+IndoorsBRooms::
+include "data/rooms/indoors_b.asm"
 
 section "bank0C",romx[$4000],bank[$0C]
 incbin "gfx/characters/link_1.dmg.2bpp"
@@ -102,8 +102,8 @@ section "bank14",romx[$5934], BANK[$14]
 include "text/dialog.asm"
 
 section "bank1A",romx[$4000],bank[$1A]
-OverworldMapHeadersSecondHalf::
-include "data/maps/overworld_b.asm"
+OverworldRoomsSecondHalf::
+include "data/rooms/overworld_b.asm"
 incbin "data/palette_pointers/overworld_banks.bin"
 incbin "data/palette_pointers/overworld_pointers.bin"
 include "code/bank1A/map_loading.asm"

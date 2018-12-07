@@ -38,7 +38,7 @@
 21 Code and data
 22 Data
 23 Indoor palettes
-24 Indoor palettes
+24 Indoor palettes; code for some overworld objects
 25 Data
 26 n/a
 27 Data

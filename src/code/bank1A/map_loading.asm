@@ -154,7 +154,7 @@ label_01A_6636::
     ld   a, h                                     ; $6638: $7C
     ldh  [hBGMapOffsetHigh], a                    ; $6639: $E0 $E0
     ld   a, l                                     ; $663B: $7D
-    ldh  [hFFE1], a                               ; $663C: $E0 $E1
+    ldh  [hBGMapOffsetLow], a                     ; $663C: $E0 $E1
     pop  hl                                       ; $663E: $E1
     ret                                           ; $663F: $C9
 
@@ -206,11 +206,11 @@ jr_01A_6736:
     ld   c, a                                     ; $673A: $4F
     ldh  a, [hBGMapOffsetHigh]                    ; $673B: $F0 $E0
     ld   h, a                                     ; $673D: $67
-    ldh  a, [hFFE1]                               ; $673E: $F0 $E1
+    ldh  a, [hBGMapOffsetLow]                     ; $673E: $F0 $E1
     ld   l, a                                     ; $6740: $6F
     add  hl, bc                                   ; $6741: $09
     ld   a, h                                     ; $6742: $7C
     ldh  [hBGMapOffsetHigh], a                    ; $6743: $E0 $E0
     ld   a, l                                     ; $6745: $7D
-    ldh  [hFFE1], a                               ; $6746: $E0 $E1
+    ldh  [hBGMapOffsetLow], a                     ; $6746: $E0 $E1
     ret                                           ; $6748: $C9

@@ -90,7 +90,8 @@ class RoomFormatter:
             asm += "  db   ${:02X} ; floor tile\n".format(room.floor_tile)
 
         if room.objects:
-            asm += "  db   {} ; objects data\n".format(cls._bytes_to_hex(room.objects))
+            for room_object in room.objects:
+                asm += "  db   {:23} ; object\n".format(cls._bytes_to_hex(room_object))
         asm += "  db   ROOM_END\n\n"
 
         return asm
@@ -124,7 +125,7 @@ if __name__ == "__main__":
         map_parser = MapParser(rom_path, map_descriptor)
 
         # Write map pointers table
-        map_file = open(os.path.join(target_dir, 'map_pointers', map_descriptor.name + '.asm'), 'w')
+        map_file = open(os.path.join(target_dir, 'maps', map_descriptor.name + '.asm'), 'w')
         map_file.write(disclaimer)
 
         for room_pointer in map_parser.room_pointers:
@@ -138,7 +139,7 @@ if __name__ == "__main__":
 
         # Write rooms
         for rooms_parser in map_parser.rooms_parsers:
-            rooms_file = open(os.path.join(target_dir, 'maps', rooms_parser.name + '.asm'), 'w')
+            rooms_file = open(os.path.join(target_dir, 'rooms', rooms_parser.name + '.asm'), 'w')
             rooms_file.write(disclaimer)
 
             for index, room in enumerate(rooms_parser.rooms):
@@ -152,7 +153,7 @@ if __name__ == "__main__":
             file.write(disclaimer)
             file.write("; Values for hAnimatedTilesGroup\n")
             for animated_tiles_constant in ANIMATED_TILES_IDS:
-                file.write("{} equ ${:02X}\n".format(animated_tiles_constant, i))
+                file.write("{:29} equ ${:02X}\n".format(animated_tiles_constant, i))
                 i += 1
 
         with open(os.path.join(target_dir, '..', 'constants', 'room_templates.asm'), 'w') as file:
@@ -160,5 +161,5 @@ if __name__ == "__main__":
             file.write(disclaimer)
             file.write("; Values for indoor rooms templates\n")
             for template_constant in TEMPLATE_IDS:
-                file.write("{} equ ${:02X}\n".format(template_constant, i << 4))
+                file.write("{:35} equ ${:02X}\n".format(template_constant, i << 4))
                 i += 1

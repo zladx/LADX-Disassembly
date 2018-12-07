@@ -213,9 +213,9 @@ label_92F::
     ld   [$DC90], a
     ld   d, $00
     add  hl, de
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     ld   d, a
-    ldh  a, [$FFE1]
+    ldh  a, [hScratchC]
     ld   e, a
     ldh  a, [$FFCF]
     ldi  [hl], a
@@ -265,9 +265,9 @@ label_983::
     call $6710
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     ld   h, a
-    ldh  a, [$FFE1]
+    ldh  a, [hScratchC]
     ld   l, a
     ld   a, [hl]
     inc  de
@@ -586,11 +586,15 @@ label_B54::
     ld   [MBC3SelectBank], a
     pop  bc
     ret
+
+func_B5D::
     ld   [MBC3SelectBank], a
     call CopyData
     ld   a, $28
     ld   [MBC3SelectBank], a
     ret
+
+func_B69::
     push hl
     ld   [MBC3SelectBank], a
     ldh  a, [hIsGBC]
@@ -609,13 +613,14 @@ label_B80::
     push hl
     call label_B96
     pop  hl
+
     ld   a, [wGameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
-    jr   nz, label_B90
+    jr   nz, .photoAlbumEnd
     call label_BB5
+.photoAlbumEnd
 
-label_B90::
-    ldh  a, [$FFE6]
+    ldh  a, [hFreeWarpDataAddress]
     ld   [MBC3SelectBank], a
     ret
 
@@ -801,7 +806,7 @@ ApplyMapFadeOutTransition::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9E
-    ld   a, [$D401]
+    ld   a, [wWarp0MapCategory]
     cp   $01
     jr   nz, ApplyMapFadeOutTransition
     ld   a, [wIsIndoor]
@@ -830,7 +835,7 @@ label_C9E::
 label_CAF::
     xor  a
     ld   [wIsUsingSpinAttack], a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
 
 label_CB6::
     xor  a
@@ -2341,7 +2346,7 @@ label_1637::
     cp   $05
     jr   nz, label_1653
     xor  a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     ld   a, $0C
     ld   [$C16D], a
 
@@ -2490,7 +2495,7 @@ label_1713::
     ld   [$C14A], a
     xor  a
     ld   [wIsUsingSpinAttack], a
-    ld   [$C122], a
+    ld   [wSwordCharge], a
     ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
@@ -2561,7 +2566,7 @@ ApplyLinkMotionState::
     ldh  [$FFD8], a
     ld   hl, $FFDA
     ld   [hl], $00
-    ld   a, [$C122]
+    ld   a, [wSwordCharge]
     cp   $28
     jr   c, label_17C6
     ldh  a, [hFrameCounter]
@@ -2681,14 +2686,14 @@ label_1898::
     ld   [wGameplayType], a
     xor  a
     ld   [wGameplaySubtype], a
-    ld   [$C3CB], a
+    ld   [wObjectAffectingBGPalette], a
     ldh  [hIsSideScrolling], a
-    ld   hl, $D401
+    ld   hl, wWarpStructs
     ld   a, [wIsIndoor]
-    ldh  [$FFE6], a
+    ldh  [hFreeWarpDataAddress], a
     and  a
     jr   nz, label_18DF
-    ld   hl, $D416
+    ld   hl, wWarpPositions
     ld   c, $00
 
 label_18BA::
@@ -2715,7 +2720,7 @@ label_18D2::
     add  a, c
     ld   e, a
     ld   d, $00
-    ld   hl, $D401
+    ld   hl, wWarp0MapCategory
     add  hl, de
 
 label_18DF::
@@ -2738,7 +2743,7 @@ label_18F2::
     ld   a, [hli]
     ldh  [hMapRoom], a
     jr   nz, label_1909
-    ldh  a, [$FFE6]
+    ldh  a, [hFreeWarpDataAddress]
     and  a
     jr   z, label_1907
     xor  a
@@ -2791,7 +2796,7 @@ label_193E::
 label_1948::
     ld   a, e
     ld   [wIndoorRoom], a
-    ldh  a, [$FFE6]
+    ldh  a, [hFreeWarpDataAddress]
     and  a
     jr   nz, label_196E
     xor  a
@@ -2873,7 +2878,7 @@ SetSpawnLocation::
     ldh  [hScratchA], a
     ld   de, wSpawnLocationData
 
-    ; Copy five bytes from $D406 to wSpawnLocationData
+    ; Copy warp data (5 bytes) from wWarp1 to wSpawnLocationData
 .loop
     ld   a, [hli]
     ld   [de], a
@@ -5043,9 +5048,9 @@ doCopyObjectToBG:
     push hl
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     ld   h, a
-    ldh  a, [$FFE1]
+    ldh  a, [hScratchC]
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
@@ -5058,9 +5063,9 @@ doCopyObjectToBG:
 
     ; Update palette offset
     ld   a, h
-    ldh  [$FFE0], a
+    ldh  [hScratchB], a
     ld   a, l
-    ldh  [$FFE1], a
+    ldh  [hScratchC], a
     pop  hl
 
     ; Move BG target down by one row
@@ -5079,9 +5084,9 @@ doCopyObjectToBG:
     ; Copy palettes from WRAM1 for tiles on the lower row
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFE0]
+    ldh  a, [hScratchB]
     ld   h, a
-    ldh  a, [$FFE1]
+    ldh  a, [hScratchC]
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
@@ -5169,7 +5174,7 @@ label_309B::
 
     jpsb UpdateMinimapEntranceArrowAndReturn
 
-; Load room objects and tiles
+; Load room objects
 LoadRoom::
     ; Disable all interrupts except VBlank
     ld   a, $01
@@ -5241,7 +5246,7 @@ LoadRoom::
     cp   MAP_COLOR_DUNGEON
     jr   nz, .notColorDungeon
     ; … use the room status for color dungeon
-    ld   hl, $DDE0
+    ld   hl, wColorDungeonRoomStatus
     jr   .roomStatusEnd
 .notColorDungeon
     ; Unless on one of the special rooms, use the room status for the indoor map B
@@ -5260,7 +5265,7 @@ LoadRoom::
 
     ; If the room status was zero (not visited yet), mark the room as visited
     jr   nz, .markVisitedRoomEnd
-    or   $80
+    or   ROOM_STATUS_VISITED
     ld   [hl], a
 .markVisitedRoomEnd
 
@@ -5335,7 +5340,7 @@ LoadRoom::
     cp   $0E
     jr   nz, .endEaglesTowerAlt
     ld   a, [$D80E]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced01 ; Eagle's Tower open
     jr   .loadBankForOverworldRooms
@@ -5344,7 +5349,7 @@ LoadRoom::
     cp   $8C
     jr   nz, .endSouthFaceShrineAlt
     ld   a, [$D88C]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced05 ; South Face Shrine open
     jr   .loadBankForOverworldRooms
@@ -5353,7 +5358,7 @@ LoadRoom::
     cp   $79
     jr   nz, .endUpperTalTalHeightsAlt
     ld   a, [$D879]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced04 ; Upper Tal Tal Heights dry
     jr   .loadBankForOverworldRooms
@@ -5362,7 +5367,7 @@ LoadRoom::
     cp   $06
     jr   nz, .endWindfishsEggAlt
     ld   a, [$D806]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced00 ; Windfish's Egg open
     jr   .loadBankForOverworldRooms
@@ -5371,7 +5376,7 @@ LoadRoom::
     cp   $1B
     jr   nz, .endTalTalHeightsAlt
     ld   a, [$D82B]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced02 ; Tal Tal Heights dry
     jr   .loadBankForOverworldRooms
@@ -5380,7 +5385,7 @@ LoadRoom::
     cp   $2B
     jr   nz, .altRoomsEnd
     ld   a, [$D82B]
-    and  $10
+    and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, OverworldUnreferenced03 ; Angler's Tunnel open
     jr   .loadBankForOverworldRooms
@@ -5421,15 +5426,15 @@ LoadRoom::
     cp   $80
     jr   c, .parseRoomHeader
     ; … select bank for second half of Overworld rooms
-    ld   a, BANK(OverworldMapHeadersSecondHalf)
+    ld   a, BANK(OverworldRoomsSecondHalf)
     ld   [MBC3SelectBank], a
 
     ;
     ; Parse room header
     ; bc: address of room header data
     ;
-
 .parseRoomHeader
+
     ; Parse header first byte (animated tiles group)
     ld   a, [bc]
     cp   ROOM_END
@@ -5452,7 +5457,7 @@ LoadRoom::
     swap a
     and  $0F
     call LoadRoomTemplate
-    jr   .CopyMapToTileMapLoop
+    jr   .parseRoomObjectsLoop
 
 .parseOverworldSecondByte
     ; For overworld rooms, the second byte is just the floor tile
@@ -5463,16 +5468,21 @@ LoadRoom::
     ; Parse room objects
     ;
 
-.CopyMapToTileMapLoop
-    inc  bc ; tile address
-    ld   a, [bc] ; tile type
-    and  $FC
-    cp   $E0
-    jr   nz, .CopyMapToTileMapLoop_consecutive_tiles
-    ldh  a, [$FFE6]
+.parseRoomObjectsLoop
+    ; Increment the current address
+    inc  bc
+    ; a = object type
+    ld   a, [bc]
+
+    ; If object is warp data…
+    and  %11111100
+    cp   ROOM_WARP
+    jr   nz, .warpDataEnd
+    ; …copy object to the first available warp data slot.
+    ldh  a, [hFreeWarpDataAddress]
     ld   e, a
     ld   d, $00
-    ld   hl, $D401
+    ld   hl, wWarpStructs
     add  hl, de
     ld   a, [bc]
     and  $03
@@ -5489,398 +5499,477 @@ LoadRoom::
     inc  bc
     ld   a, [bc]
     ldi  [hl], a
+    ; Increment the address of the first available warp data slot
     ld   a, e
     add  a, $05
-    ldh  [$FFE6], a
-    jr   .CopyMapToTileMapLoop
+    ldh  [hFreeWarpDataAddress], a
+    jr   .parseRoomObjectsLoop
+.warpDataEnd
 
-.CopyMapToTileMapLoop_consecutive_tiles
-    ld   a, [bc] ; tile type
-    cp   $FE ; end-of-room tile
+    ; a = object type
+    ld   a, [bc]
+    ; If we reached the end of the room objects, exit the loop
+    cp   ROOM_END
     jr   z, .endOfRoom
-    call func_32A9
-    jr   .CopyMapToTileMapLoop
+
+    call LoadRoomObject
+    jr   .parseRoomObjectsLoop
 
 .endOfRoom
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call $6CCE
+
+    ; Surround the objects area defining a room by ROOM_BORDER values
+    callsb PadRoomObjectsArea
+
     ld   a, $36
     ld   [MBC3SelectBank], a
     ; do stuff that returns early if end-of-room
     call $6D4D
+
     ld   a, $21
     ld   [MBC3SelectBank], a
     ; stuff that returns early when DBA5 is 0
     call $53F3
+
+    ; Reload saved bank and return
     jp   ReloadSavedBank
 
-func_32A9::
+; Read an individual room object, and write it to the unpacked room objects area.
+; bc : start address of the object
+;
+; Objects can be 2-bytes objects or 3-bytes objects:
+;
+; twoBytesObject:
+;   ds 1 ; location (YX)
+;   ds 1 ; type
+;
+; threeBytesObject:
+;   ds 1 ; direction and length (8X: horizontal + length ; CX: vertical + length)
+;   ds 1 ; location (YX)
+;   ds 1 ; type
+;
+LoadRoomObject::
     ; Clear hScratchA
     xor  a
     ldh  [hScratchA], a
 
-    ; If [BC] & 0x80 != 0 && [BC] & 0x10) == 0…
-    ld   a, [bc] ; tile address
+    ; If object type first bit is 1…
+    ld   a, [bc]
     bit  7, a
-    jr   z, .bcEnd
+    jr   z, .threeBytesObjectEnd
+    ; … and object type 4th bit is 0…
     bit  4, a
-    jr   nz, .bcEnd
-    ; … hScratchA = [bc]
+    jr   nz, .threeBytesObjectEnd
+    ; … this is a three-bytes object, that spans more than one block.
+    ; The first byte encodes the direction and length of the block:
+    ; save it to hScratchA.
     ldh  [hScratchA], a
-    ; Increment BC
-    inc  bc ; increment tile address
-.bcEnd
+    ; Skip the parsed direction-and-length byte
+    inc  bc
+.threeBytesObjectEnd
 
+    ; Increment read pointer to the object type
     inc  bc
 
     ; e = hRoomStatus
     ldh  a, [hRoomStatus]
     ld   e, a
 
-    ; If is outdoor…
+    ; If currently on Overworld…
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, .isIndoor
+    jr   nz, .loadIndoorObject
 
-    ; If [BC] < $F5, move to next line.
-    ld   a, [bc] ; tile addres
-    sub  a, $F5
-    jr   c, MoveToNextLine
+    ; Overworld objects with type >= $F5 are handled by code in another bank.
 
-    ;
+    ; If object is an Overworld macro…
+    ld   a, [bc]
+    sub  a, OBJECT_MACRO_F5
+    jr   c, .loadOverworldObject
+    ; d = object type
     ld   a, [bc]
     ld   d, a
+    ; e = object position
     dec  bc
     ld   a, [bc]
     ld   e, a
+    ; (re-increment bc to be at the object type again)
     inc  bc
-
+    ; Call $7578 (handle Overworld macro)
     ld   a, $24
     ld   [MBC3SelectBank], a
     call $7578
     call SetBankForRoom
+    ; Return early
     ret
 
-.isIndoor
-    ; a = [bject type] - $EC
+.loadIndoorObject
+    ; a = object type - OBJECT_KEY_DOOR_TOP
     ld   a, [bc]
-    sub  a, $EC
-    ; If a >= $EC, dispatch the tile script
-    jp  c, MoveToNextLine_notDoor
+    sub  a, OBJECT_KEY_DOOR_TOP
+    ; If a >= OBJECT_KEY_DOOR_TOP, dispatch to the door object handlers
+    jp  c, .loadNonDoorIndoorObject
     JP_TABLE
-    ; TODO: document door types (values taken from the LALE editor)
-    ; case 0xEC // Key Doors
-    ; case 0xED
-    ; case 0xEE
-    ; case 0xEF
+._EC dw LoadObject_KeyDoorTop
+._ED dw LoadObject_KeyDoorBottom
+._EE dw LoadObject_KeyDoorLeft
+._EF dw LoadObject_KeyDoorRight
+._F0 dw LoadObject_ClosedDoorTop
+._F1 dw LoadObject_ClosedDoorBottom
+._F2 dw LoadObject_ClosedDoorLeft
+._F3 dw LoadObject_ClosedDoorRight
+._F4 dw LoadObject_OpenDoorTop
+._F5 dw LoadObject_OpenDoorBottom
+._F6 dw LoadObject_OpenDoorLeft
+._F7 dw LoadObject_OpenDoorRight
+._F8 dw LoadObject_BossDoor
+._F9 dw LoadObject_StairsDoor
+._FA dw LoadObject_FlipWall
+._FB dw LoadObject_OneWayArrow
+._FC dw LoadObject_DungeonEntrance
+._FD dw LoadObject_IndoorEntrance
 
-    ; case 0xF4  // Open Doors
-    ; case 0xF5
-    ; case 0xF6
-    ; case 0xF7
-
-    ; case 0xF0  // Closed Doors
-    ; case 0xF1
-    ; case 0xF2
-    ; case 0xF3
-
-    ; case 0xF8 // Boss Door
-
-    ; case 0xF9 // ?? Stairs maybe
-    ; case 0xFA // FLip Wall
-    ; case 0xFB // One-way Arrow
-
-    ; case 0xFC // Dungeon Entrances
-
-    ; case 0xFD //Indoor Entrances
-._EC dw label_35FA
-._ED dw $3615
-._EE dw $3630
-._EF dw $364B
-._F0 dw $3664
-._F1 dw $3677
-._F2 dw $368A
-._F3 dw $369D
-._F4 dw $36B2
-._F5 dw $36EA
-._F6 dw $36FE
-._F7 dw $3712
-._F8 dw $3726
-._F9 dw $375E
-._FA dw $376D
-._FB dw $377C
-._FC dw $37A2
-._FD dw IndoorEntranceHandler
-
-MoveToNextLine::
+; Load an Overworld object (that is not a macro)
+.loadOverworldObject
+    ; Re-increment a to be the object type
     add  a, $F5
     push af
+    ; d = a
     ld   d, a
-    cp   $E9
-    jr   nz, MoveToNextLine_notTileE9
+
+    cp   OBJECT_WATERFALL
+    jr   nz, .waterfallEnd
     ld   [$C50E], a
+.waterfallEnd
 
-MoveToNextLine_notTileE9::
-    cp   $5E
-    jr   nz, MoveToNextLine_notTile5E
-    bit  5, e
-    jr   nz, label_337C
+    ;
+    ; If the Weather Vane is pushed open, shift it to the top
+    ;
 
-MoveToNextLine_notTile5E::
-    cp   $91
-    jr   nz, MoveToNextLine_notTile91
-    bit  5, e
-    jr   z, MoveToNextLine_notTile91
+    cp   OBJECT_WEATHER_VANE_BASE
+    jr   nz, .weatherVaneBottomEnd
+    bit  5, e ; object position
+    jr   nz, .replaceObjectByGroundStairs
+.weatherVaneBottomEnd
+
+    cp   OBJECT_WEATHER_VANE_TOP
+    jr   nz, .weatherVaneTopEnd
+    bit  5, e ; object position
+    jr   z, .weatherVaneTopEnd
+    ; replace the top by the vane base
     pop  af
-    ld   a, $5E
+    ld   a, OBJECT_WEATHER_VANE_BASE
     ld   d, a
     push af
+.weatherVaneTopEnd
 
-MoveToNextLine_notTile91::
-    cp   $DC
-    jr   nz, MoveToNextLine_notTileDC
-    bit  5, e
-    jr   z, MoveToNextLine_notTileDC
+    cp   OBJECT_WEATHER_VANE_ABOVE
+    jr   nz, .weatherVaneAboveEnd
+    bit  5, e ; object position
+    jr   z, .weatherVaneAboveEnd
+    ; replace the grass above by the vane top
     pop  af
-    ld   a, $91
+    ld   a, OBJECT_WEATHER_VANE_TOP
     ld   d, a
     push af
+.weatherVaneAboveEnd
 
-MoveToNextLine_notTileDC::
-    cp   $D8
-    jr   z, label_333D
-    cp   $D9
-    jr   z, label_333D
-    cp   $DA
-    jr   nz, label_3346
+    ;
+    ; If the Monkey Bridge is built yet, display it
+    ;
 
-label_333D::
+    cp   OBJECT_MONKEY_BRIDGE_TOP
+    jr   z, .loadMonkeyBridgeObject
+    cp   OBJECT_MONKEY_BRIDGE_MIDDLE
+    jr   z, .loadMonkeyBridgeObject
+    cp   OBJECT_MONKEY_BRIDGE_BOTTOM
+    jr   nz, .monkeyBridgeEnd
+
+.loadMonkeyBridgeObject
+    ; If the monkey bridge is built…
     bit  4, e
-    jr   z, label_3346
+    jr   z, .monkeyBridgeEnd
+    ; …replace the object by the monkey bridge
     pop  af
-    ld   a, $DB
+    ld   a, OBJECT_MONKEY_BRIDGE_BUILT
     ld   d, a
     push af
+.monkeyBridgeEnd
 
-label_3346::
-    cp   $C2
-    jr   nz, MoveToNextLine_notTileC2
+    ; If a closed gate has been opened…
+    cp   OBJECT_CLOSED_GATE
+    jr   nz, .closedGateEnd
     bit  4, e
-    jr   z, MoveToNextLine_notTileC2
+    jr   z, .closedGateEnd
+    ; …replace the object by the open cave entrance
     pop  af
-    ld   a, $E3
+    ld   a, OBJECT_CAVE_DOOR
     ld   d, a
     push af
+.closedGateEnd
 
-MoveToNextLine_notTileC2::
+    ; If a bombable cave door has been bombed…
     ld   a, d
-    cp   $BA
-    jr   nz, MoveToNextLine_notTileBA
+    cp   OBJECT_BOMBABLE_CAVE_DOOR
+    jr   nz, .bombableCaveDoorEnd
     bit  2, e
-    jr   z, MoveToNextLine_notTileBA
+    jr   z, .bombableCaveDoorEnd
+    ; …replace the object by the open rocky cave entrance
     pop  af
-    ld   a, $E1
+    ld   a, OBJECT_ROCKY_CAVE_DOOR
     ld   d, a
     push af
+.bombableCaveDoorEnd
 
-MoveToNextLine_notTileBA::
+    ; If a bush masking a cave entrance has been cut…
     ld   a, d
-    cp   $D3
-    jr   nz, MoveToNextLine_notTileD3
+    cp   OBJECT_BUSH_GROUND_STAIRS
+    jr   nz, .bushGroundStairsEnd
     bit  4, e
-    jr   z, MoveToNextLine_notTileD3
+    jr   z, .bushGroundStairsEnd
     ldh  a, [hMapRoom]
     cp   $75
-    jr   z, label_337C
+    jr   z, .replaceObjectByGroundStairs
     cp   $07
-    jr   z, label_337C
+    jr   z, .replaceObjectByGroundStairs
     cp   $AA
-    jr   z, label_337C
+    jr   z, .replaceObjectByGroundStairs
     cp   $4A
-    jr   nz, MoveToNextLine_notTileD3
-
-label_337C::
+    jr   nz, .bushGroundStairsEnd
+.replaceObjectByGroundStairs
     pop  af
-    ld   a, $C6
+    ld   a, OBJECT_GROUND_STAIRS
     ld   d, a
     push af
+.bushGroundStairsEnd
 
-MoveToNextLine_notTileD3::
+    ; hScratchB = object type
     ld   a, d
-    ldh  [$FFE0], a
-    cp   $C2
-    jr   z, label_33A8
-    cp   $E1
-    jr   z, label_33A8
-    cp   $CB
-    jr   z, label_33A8
-    cp   $BA
-    jr   z, label_33A8
-    cp   $61
-    jr   z, label_33A8
-    cp   $C6
-    jr   z, label_33A8
-    cp   $C5
-    jr   z, label_33A8
-    cp   $E2
-    jr   z, label_33A8
-    cp   $E3
-    jr   nz, MoveToNextLine_noSpecialTile
+    ldh  [hScratchB], a
 
-label_33A8::
+    ; If object is an entrance to somewhere else…
+    cp   OBJECT_CLOSED_GATE
+    jr   z, .configureDoorWarpData
+    cp   OBJECT_ROCKY_CAVE_DOOR
+    jr   z, .configureDoorWarpData
+    cp   $CB
+    jr   z, .configureDoorWarpData
+    cp   OBJECT_BOMBABLE_CAVE_DOOR
+    jr   z, .configureDoorWarpData
+    cp   $61
+    jr   z, .configureDoorWarpData
+    cp   OBJECT_GROUND_STAIRS
+    jr   z, .configureDoorWarpData
+    cp   $C5
+    jr   z, .configureDoorWarpData
+    cp   $E2
+    jr   z, .configureDoorWarpData
+    cp   OBJECT_CAVE_DOOR
+    jr   nz, .overworldDoorEnd
+
+.configureDoorWarpData
     ld   a, [$C19C]
     ld   e, a
     inc  a
     and  $03
     ld   [$C19C], a
     ld   d, $00
-    ld   hl, $D416
+    ld   hl, wWarpPositions
     add  hl, de
     dec  bc
     ld   a, [bc]
     ld   [hl], a
     inc  bc
+.overworldDoorEnd
 
-MoveToNextLine_noSpecialTile::
-    ldh  a, [$FFE0]
+    ; a = object type
+    ldh  a, [hScratchB]
+
     cp   $C5
-    jp   z, label_347D
-    cp   $C6
-    jp   z, label_347D
-    jp   MoveToNextLine_finallyBeginSomething
+    jp   z, .configureStairs
+    cp   OBJECT_GROUND_STAIRS
+    jp   z, .configureStairs
+    jp   .breakableObjectEnd
 
-MoveToNextLine_notDoor::
-    add  a, $EC
-    ldh  [$FFE0], a
+.loadNonDoorIndoorObject
+    ; Re-increment a to be the object type
+    add  a, OBJECT_KEY_DOOR_TOP
+    ldh  [hScratchB], a
+
+    ; If object type is a conveyor belt…
     push af
-    cp   $CF
-    jr   c, label_33DC
-    cp   $D3
-    jr   nc, label_33DC
-    ld   hl, $C1A5
+    cp   OBJECT_CONVEYOR_BOTTOM
+    jr   c, .conveyorEnd
+    cp   OBJECT_TRENDY_GAME_BORDER
+    jr   nc, .conveyorEnd
+    ; …increment the number of conveyor belts present on screen
+    ld   hl, wConveyorBeltsCount
     inc  [hl]
+.conveyorEnd
 
-label_33DC::
-    cp   $AB
-    jr   nz, label_3407
+    ; If object is an unlit torch…
+    cp   OBJECT_TORCH_UNLIT
+    jr   nz, .torchEnd
+    ; clear wObjectAffectingBGPalette
     xor  a
-    ld   [$C3CB], a
+    ld   [wObjectAffectingBGPalette], a
+    ; If the room is $C4…
     ldh  a, [hMapRoom]
     cp   $C4
-    ldh  a, [$FFE0]
-    jr   z, label_3407
-    ld   hl, $DBC9
+    ; … and the object type is not zero…
+    ldh  a, [hScratchB]
+    jr   z, .torchEnd
+    ; …then increment the number of torches in the room
+    ld   hl, wTorchesCount
     inc  [hl]
-    ld   [$C3CB], a
+    ; mark the torch as affecting the background palette
+    ld   [wObjectAffectingBGPalette], a
+    ; $C3CD += 4
     push af
     ld   a, [$C3CD]
     add  a, $04
     ld   [$C3CD], a
+    ; If not on GBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_3406
+    jr   nz, .dmgTorchesEnd
+    ; …configure the transition counter that will dim the lights
+    ; when entering the room.
     ld   a, $04
     ld   [wTransitionSequenceCounter], a
-
-label_3406::
+.dmgTorchesEnd
     pop  af
+.torchEnd
 
-label_3407::
-    cp   $8E
-    jr   z, label_341E
-    cp   $AA
-    jr   z, label_341E
-    cp   $DC
-    jr   z, label_3417
-    cp   $DB
-    jr   nz, label_3423
+    ;
+    ; Configure switches and movable blocks
+    ;
 
-label_3417::
-    ld   hl, $D6FA
-    ld   [hl], $02
-    jr   label_3423
+    cp   OBJECT_POT_WITH_SWITCH
+    jr   z, .configureSwitchButton
+    cp   OBJECT_SWITCH_BUTTON
+    jr   z, .configureSwitchButton
 
-label_341E::
-    ld   hl, $D6FA
-    ld   [hl], $01
+    cp   OBJECT_RAISED_BLOCK
+    jr   z, .configureMovableBlock
+    cp   OBJECT_LOWERED_BLOCK
+    jr   nz, .switchableObjectsEnd
 
-label_3423::
-    cp   $3F
-    jr   z, label_342B
-    cp   $47
-    jr   nz, label_342F
+.configureMovableBlock
+    ld   hl, wRoomSwitchableObject
+    ld   [hl], ROOM_SWITCHABLE_OBJECT_MOBILE_BLOCK
+    jr   .switchableObjectsEnd
 
-label_342B::
+.configureSwitchButton
+    ld   hl, wRoomSwitchableObject
+    ld   [hl], ROOM_SWITCHABLE_OBJECT_SWITCH_BUTTON
+.switchableObjectsEnd
+
+    ;
+    ; Configure top and bottom bombable walls
+    ;
+
+    cp   OBJECT_BOMBABLE_WALL_TOP
+    jr   z, .configureBombableWallTop
+    cp   OBJECT_HIDDEN_BOMBABLE_WALL_TOP
+    jr   nz, .bombableWallBottom
+.configureBombableWallTop
+    ; If a top bombable wall has been bombed…
     bit  2, e
-    jr   nz, label_343B
+    ; …replace the wall by a bombed passage
+    jr   nz, .replaceByVerticalBombedPassage
 
-label_342F::
-    cp   $40
-    jr   z, label_3437
-    cp   $48
-    jr   nz, label_343F
-
-label_3437::
+.bombableWallBottom
+    cp   OBJECT_BOMBABLE_WALL_BOTTOM
+    jr   z, .configureBombableWallBottom
+    cp   OBJECT_HIDDEN_BOMBABLE_WALL_BOTTOM
+    jr   nz, .verticalBombableWallsEnd
+.configureBombableWallBottom
+    ; If a bottom bombable wall has been bombed…
     bit  3, e
-    jr   z, label_343F
+    jr   z, .verticalBombableWallsEnd
+    ; …replace the wall by a bombed passage
 
-label_343B::
+.replaceByVerticalBombedPassage
     pop  af
-    ld   a, $3D
+    ld   a, OBJECT_BOMBED_PASSAGE_VERTICAL
     push af
+.verticalBombableWallsEnd
 
-label_343F::
-    cp   $41
-    jr   z, label_3447
-    cp   $49
-    jr   nz, label_344B
+    ;
+    ; Configure left and right bombable walls
+    ;
 
-label_3447::
+    cp   OBJECT_BOMBABLE_WALL_LEFT
+    jr   z, .configureBombableWallLeft
+    cp   OBJECT_HIDDEN_BOMBABLE_WALL_LEFT
+    jr   nz, .bombableWallRight
+
+.configureBombableWallLeft
+    ; If a left bombable wall has been bombed…
     bit  1, e
-    jr   nz, label_3457
+    ; …replace the wall by a bombed passage
+    jr   nz, .replaceByHorizontalBombedPassage
 
-label_344B::
-    cp   $42
-    jr   z, label_3453
-    cp   $4A
-    jr   nz, label_345B
-
-label_3453::
+.bombableWallRight
+    cp   OBJECT_BOMBABLE_WALL_RIGHT
+    jr   z, .configureBombableWallRight
+    cp   OBJECT_HIDDEN_BOMBABLE_WALL_RIGHT
+    jr   nz, .horizontalBombableWallsEnd
+.configureBombableWallRight
+    ; If a right bombable wall has been bombed…
     bit  0, e
-    jr   z, label_345B
+    ; …replace the wall by a bombed passage
+    jr   z, .horizontalBombableWallsEnd
 
-label_3457::
+.replaceByHorizontalBombedPassage
     pop  af
-    ld   a, $3E
+    ld   a, OBJECT_BOMBED_PASSAGE_HORIZONTAL
     push af
+.horizontalBombableWallsEnd
 
-label_345B::
-    cp   $A1
-    jr   nz, label_3467
+    ;
+    ; Configure chest
+    ;
+
+    ; If object is a chest…
+    cp   OBJECT_CHEST_OPEN
+    jr   nz, .chestEnd
+    ; … and the chest has been opened…
     bit  4, e
-    jr   nz, label_3467
+    jr   nz, .chestEnd
+    ; a = [$FFE9]
     pop  af
     ldh  a, [$FFE9]
     push af
+.chestEnd
 
-label_3467::
-    cp   $BF
-    jr   nz, label_3471
+    ;
+    ; Configure hidden stairs
+    ;
+
+    ; If the object is hidden stairs…
+    cp   OBJECT_HIDDEN_STAIRS_DOWN
+    jr   nz, .hiddenStairsEnd
+    ; … and the stairs are not visible yet…
     bit  4, e
-    jr   nz, label_3471
+    jr   nz, .hiddenStairsEnd
+    ; return without loading this object.
     pop  af
     ret
+.hiddenStairsEnd
 
-label_3471::
-    cp   $BE
-    jr   z, label_347D
-    cp   $BF
-    jr   z, label_347D
-    cp   $CB
-    jr   nz, label_3496
+    ;
+    ; Configure stairs
+    ;
 
-label_347D::
+    cp   OBJECT_STAIRS_DOWN
+    jr   z, .configureStairs
+    cp   OBJECT_HIDDEN_STAIRS_DOWN
+    jr   z, .configureStairs
+    cp   OBJECT_STAIRS_UP
+    jr   nz, .stairsEnd
+
+.configureStairs
     dec  bc
     ld   a, $01
     ldh  [$FFAC], a
@@ -5894,79 +5983,113 @@ label_347D::
     add  a, $08
     ldh  [$FFAD], a
     inc  bc
-    jp   MoveToNextLine_finallyBeginSomething
+    jp   .breakableObjectEnd
+.stairsEnd
 
-label_3496::
-    cp   $D6
-    jr   z, label_349E
-    cp   $D5
-    jr   nz, label_34A6
+    ;
+    ; Configure raised fences
+    ;
+    ; Raised fences can be activated: they turn into a wall
+    ; jumpable from the top.
+    ;
+    ; NB: it seems these objects are not used in the final game.
+    ;
 
-label_349E::
+    cp   OBJECT_RAISED_FENCE_BOTTOM
+    jr   z, .configureVerticalFence
+    cp   OBJECT_RAISED_FENCE_TOP
+    jr   nz, .verticalFenceEnd
+.configureVerticalFence
+    ; If the fence has been lowered…
     bit  4, e
-    jr   nz, label_34A6
+    jr   nz, .verticalFenceEnd
+    ; … replace the fence by a jumpable wall
     pop  af
-    ld   a, $21
+    ld   a, OBJECT_WALL_TOP
     push af
+.verticalFenceEnd
 
-label_34A6::
-    cp   $D7
-    jr   z, label_34AE
-    cp   $D8
-    jr   nz, label_34B6
+    cp   OBJECT_RAISED_FENCE_LEFT
+    jr   z, .configureHorizontalFence
+    cp   OBJECT_RAISED_FENCE_RIGHT
+    jr   nz, .horizontalFenceEnd
 
-label_34AE::
+.configureHorizontalFence
+    ; If the fence has been lowered…
     bit  4, e
-    jr   nz, label_34B6
+    jr   nz, .horizontalFenceEnd
+    ; … replace the fence by a jumpable wall
     pop  af
-    ld   a, $22
+    ld   a, OBJECT_WALL_BOTTOM
     push af
+.horizontalFenceEnd
 
-label_34B6::
+    ;
+    ; Configure breakable objects
+    ;
+
     ldh  a, [hMapId]
     cp   MAP_CAVE_B
-    ldh  a, [$FFE0]
-    jr   c, label_34C2
-    cp   $A9
-    jr   z, label_34C6
+    ldh  a, [hScratchB]
+    jr   c, .bombableBlockEnd
+    cp   OBJECT_BOMBABLE_BLOCK
+    jr   z, .configureBreakableObject
+.bombableBlockEnd
 
-label_34C2::
-    cp   $DE
-    jr   nz, MoveToNextLine_finallyBeginSomething
+    cp   OBJECT_BREAKABLE_CRYSTAL
+    jr   nz, .breakableObjectEnd
 
-label_34C6::
+.configureBreakableObject
+    ; If the object has been broken…
     bit  6, e
-    jr   z, MoveToNextLine_finallyBeginSomething
+    jr   z, .breakableObjectEnd
+    ; … replace it by an empty floor tile
     pop  af
-    ld   a, $0D
-
-label_34CD::
+    ld   a, OBJECT_FLOOR_OD
     push af
+.breakableObjectEnd
 
-MoveToNextLine_finallyBeginSomething::
-    cp   $A0
-    jr   nz, MoveToNextLine_tileTypeNotA0
+    ;
+    ; Configure chest
+    ;
+
+    ; If the object is an closed chest…
+    cp   OBJECT_CHEST_CLOSED
+    jr   nz, .closedChestEnd
+    ; … and the chest has already been opened…
     bit  4, e
-    jr   z, MoveToNextLine_tileTypeNotA0
+    jr   z, .closedChestEnd
+    ; … replace it by an open chest
     pop  af
-    ld   a, $A1
+    ld   a, OBJECT_CHEST_OPEN
     push af
+.closedChestEnd
 
-MoveToNextLine_tileTypeNotA0::
+    ; a = multiple-blocks object direction and length
     ld   d, $00
     ldh  a, [hScratchA]
+    ; If there are no coordinates for a multiple-blocks object…
     and  a
+    ; … this is a single-block object:
+    ; copy the object to the unpacked map and return
     jr   z, CopyObjectToActiveRoomMap
-    dec  bc ; decrement tile address
-    ld   a, [bc] ; load new tile type
+
+
+    ; This is a multiple-blocks object.
+    ; hl = initial position address
+    dec  bc
+    ld   a, [bc]
     ld   e, a
-    ld   hl, wRoomObjects ; prepare tile map
-    add  hl, de ; add current tile offset
+    ld   hl, wRoomObjects
+    add  hl, de
+    ; e = count
     ldh  a, [hScratchA]
     and  $0F
-    ld   e, a ; load repeat count from higher-bits of a
-    pop  af ;
+    ld   e, a
+    ; d = object type
+    pop  af
     ld   d, a
+    ; fallthrough FillRoomWithConsecutiveObjects
 
 ; Fill the active room map with many consecutive objects
 ; Inputs:
@@ -6062,11 +6185,11 @@ SetBankForRoom::
     cp   $80
     jr   nc, .moreThan80
     ; … a = $09
-    ld   a, BANK(OverworldMapHeadersFirstHalf)
+    ld   a, BANK(OverworldRoomsFirstHalf)
     jr   .fi
 .moreThan80
     ; else a = $1A
-    ld   a, BANK(OverworldMapHeadersSecondHalf)
+    ld   a, BANK(OverworldRoomsSecondHalf)
 .fi
     ; Load the bank $09 or $1A
     ld   [MBC3SelectBank], a
@@ -6101,7 +6224,7 @@ label_3560::
     and  $03
     ld   [$C19C], a
     ld   d, $00
-    ld   hl, $D416
+    ld   hl, wWarpPositions
     add  hl, de
     pop  af
     ld   [hl], a
@@ -6151,7 +6274,7 @@ label_35A0::
     and  $03
     ld   [$C19C], a
     ld   d, $00
-    ld   hl, $D416
+    ld   hl, wWarpPositions
     add  hl, de
     pop  af
     ld   [hl], a
@@ -6210,12 +6333,12 @@ label_35EE::
 data_35F8::
     db $2D, $2E
 
-label_35FA::
+LoadObject_KeyDoorTop::
     ld   e, 0
-    call label_373F
+    call func_373F
     ldh  a, [hRoomStatus]
     and  $04
-    jp   nz, label_36B2
+    jp   nz, LoadObject_OpenDoorTop
     push bc
     call label_35EE
     ld   bc, data_37E1
@@ -6223,47 +6346,93 @@ label_35FA::
     jp   label_354B
 
 data_3613::
-    db   $2F, $30, $1E, 1, $CD, $3F, $37, $F0, $F8, $E6, 8, $C2, $EA, $36, $C5, $CD
-    db   $EE, $35, 1, $E1, $37, $11, $13, $36, $C3, $4B, $35
+    db   $2F, $30
+
+LoadObject_KeyDoorBottom::
+    ld   e, $01
+    call func_373F
+    ldh  a, [hRoomStatus]
+    and  $08
+    jp   nz, LoadObject_OpenDoorBottom
+
+    push bc
+    call label_35EE
+    ld   bc, data_37E1
+    ld   de, data_3613
+    jp   label_354B
 
 data_362E::
-    db   $31, $32, $1E, 2, $CD, $3F, $37, $F0, $F8, $E6, 2, $C2, $FE, $36, $C5, $CD
-    db   $EE, $35, 1, $E4, $37, $11, $2E, $36, $C3, $4B, $35
+    db   $31, $32
+
+LoadObject_KeyDoorLeft::
+    ld   e, $02
+    call func_373F
+    ldh  a, [hRoomStatus]
+    and  $02
+    jp   nz, LoadObject_OpenDoorLeft
+
+    push bc
+    call label_35EE
+    ld   bc, data_37E4
+    ld   de, data_362E
+    jp   label_354B
 
 data_3649::
-    db   $33, $34, $1E, 3, $CD, $3F, $37, $F0, $F8, $E6, 1, $C2, $12, $37, $C5, $CD
-    db   $EE, $35, 1, $E4, $37, $11, $49, $36, $C3, $4B, $35, $1E, 4, $CD, $3F, $37
-    db   $FA, $8A, $C1, $F6, 1, $EA, $8A, $C1, $EA, $8B, $C1, $C3, $B2, $36
+    db   $33, $34
 
-label_3677::
+LoadObject_KeyDoorRight::
+    ld   e, $03
+    call func_373F
+    ldh  a, [hRoomStatus]
+    and  $01
+    jp   nz, LoadObject_OpenDoorRight
+
+    push bc
+    call label_35EE
+    ld   bc, data_37E4
+    ld   de, data_3649
+    jp   label_354B
+
+LoadObject_ClosedDoorTop::
+    ld   e, $04
+    call func_373F
+    ld   a, [$C18A]
+    or   $01
+    ld   [$C18A], a
+    ld   [$C18B], a
+    jp   LoadObject_OpenDoorTop
+
+LoadObject_ClosedDoorBottom::
     ld   e, $05
-    call label_373F
+    call func_373F
     ld   a, [$C18A]
     or   $02
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   $36EA
+    jp   LoadObject_OpenDoorBottom
 
+LoadObject_ClosedDoorLeft::
     ld   e, $06
-    call label_373F
+    call func_373F
     ld   a, [$C18A]
     or   $04
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   label_36FE
+    jp   LoadObject_OpenDoorLeft
 
+LoadObject_ClosedDoorRight::
     ld   e, $07
-    call label_373F
+    call func_373F
     ld   a, [$C18A]
     or   $08
     ld   [$C18A], a
     ld   [$C18B], a
-    jp   label_3712
+    jp   LoadObject_OpenDoorRight
 
 data_36B0::
     db   $43, $44
 
-label_36B2::
+LoadObject_OpenDoorTop::
     ld   a, $04
     call label_36C4
     push bc
@@ -6303,7 +6472,7 @@ label_36E1::
 data_36E8::
     db $8C, 8
 
-label_36EA::
+LoadObject_OpenDoorBottom::
     ld   a, 8
     call label_36C4
     push bc
@@ -6315,7 +6484,7 @@ label_36EA::
 data_36FC::
     db 9, $A
 
-label_36FE::
+LoadObject_OpenDoorLeft::
     ld   a, $02
     call label_36C4
     push bc
@@ -6327,7 +6496,7 @@ label_36FE::
 data_3710::
     db $B, $C
 
-label_3712::
+LoadObject_OpenDoorRight::
     ld   a, $01
     call label_36C4
     push bc
@@ -6339,19 +6508,19 @@ label_3712::
 data_3724::
     db $A4, $A5
 
-label_3726::
+LoadObject_BossDoor::
     ld   e, $08
-    call label_373F
+    call func_373F
     ldh  a, [hRoomStatus]
     and  $04
-    jp   nz, label_36B2
+    jp   nz, LoadObject_OpenDoorTop
     push bc
     call label_35EE
     ld   bc, data_37E1
     ld   de, data_3724
     jp   label_354B
 
-label_373F::
+func_373F::
     ld   d, $00
     ld   hl, $C1F0
     add  hl, de
@@ -6373,31 +6542,60 @@ label_373F::
     ret
 
 data_375C::
-    db   $AF, $B0, $C5, $CD, $EE, $35, 1, $E4, $37, $11, $5C, $37, $C3, $4B, $35
+    db   $AF, $B0
+
+LoadObject_StairsDoor::
+    push bc                                       ; $375E: $C5
+    call label_35EE                               ; $375F: $CD $EE $35
+    ld   bc, data_37E4                            ; $3762: $01 $E4 $37
+    ld   de, data_375C                            ; $3765: $11 $5C $37
+    jp   label_354B                               ; $3768: $C3 $4B $35
 
 data_376B::
-    db   $B1, $B2, $C5, $CD, $EE, $35, 1, $E1, $37, $11, $6B, $37, $C3, $4B, $35
+    db   $B1, $B2
+
+LoadObject_FlipWall::
+    push bc                                       ; $376D: $C5
+    call label_35EE                               ; $376E: $CD $EE $35
+    ld   bc, data_37E1                            ; $3771: $01 $E1 $37
+    ld   de, data_376B                            ; $3774: $11 $6B $37
+    jp   label_354B                               ; $3777: $C3 $4B $35
 
 data_377A::
-    db   $45, $46, $C5, $CD, $EE, $35, 1, $E1, $37, $11, $7A, $37, $C3, $4B, $35
+    db   $45, $46
+
+LoadObject_OneWayArrow::
+    push bc                                       ; $377C: $C5
+    call label_35EE                               ; $377D: $CD $EE $35
+    ld   bc, data_37E1                            ; $3780: $01 $E1 $37
+    ld   de, data_377A                            ; $3783: $11 $7A $37
+    jp   label_354B                               ; $3786: $C3 $4B $35
 
 data_3789::
     db   0, 1, 2, 3, $10, $11, $12, $13, $20, $21, $22, $23, $FF
 
 data_3796::
-    db   $B3, $B4, $B4, $B5, $B6, $B7, $B8, $B9, $BA, $BB, $BC, $BD, $3E, 8, $CD, $C4
-    db   $36, $C5, $CD, $EE, $35, 1, $89, $37, $11, $96, $37, $C3, $4B, $35
+    db   $B3, $B4, $B4, $B5, $B6, $B7, $B8, $B9, $BA, $BB, $BC, $BD
+
+LoadObject_DungeonEntrance::
+    ld   a, $08                                   ; $37A2: $3E $08
+    call label_36C4                               ; $37A4: $CD $C4 $36
+    push bc                                       ; $37A7: $C5
+    call label_35EE                               ; $37A8: $CD $EE $35
+    ld   bc, data_3789                            ; $37AB: $01 $89 $37
+    ld   de, data_3796                            ; $37AE: $11 $96 $37
+    jp   label_354B                               ; $37B1: $C3 $4B $35
 
 data_37B4::
     db   $C1, $C2
 
-IndoorEntranceHandler::
+LoadObject_IndoorEntrance::
     ; If MapId < $1A…
     ldh  a, [hMapId]
-    cp   $1A
+    cp   MAP_UNKNOWN_1A
     jr   nc, .end
 
-    ; … and MapId >= $06…
+    ; … and MapId >= MAP_EAGLES_TOWER…
     cp   MAP_EAGLES_TOWER
     jr   c, .end
 
@@ -6412,7 +6610,7 @@ IndoorEntranceHandler::
     jr   z, .end
 
     ; … handle special case.
-    jp   label_3677
+    jp   LoadObject_ClosedDoorBottom
 
 .end
 
@@ -6458,10 +6656,9 @@ FillRoomMapWithObject::
     jr   nz, .loop
     ret
 
-label_37FE::
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call $5F02
+LoadRoomEntities::
+    callsb func_001_5F02
+
     ld   a, $16
     ld   [MBC3SelectBank], a
     xor  a
@@ -6782,7 +6979,7 @@ label_39F2::
     and  a
     jr   z, label_3A03
     ldh  [hEntityType], a
-    call LoadEntities
+    call LoadEntity
 
 label_3A03::
     dec  c
@@ -6799,7 +6996,7 @@ label_3A0A::
     ld   [MBC3SelectBank], a
     ret
 
-LoadEntities::
+LoadEntity::
     ld   hl, $C3A0
     add  hl, bc
     ld   a, [hl]

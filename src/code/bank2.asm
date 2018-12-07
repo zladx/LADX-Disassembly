@@ -205,12 +205,12 @@ jr_002_42C7:
 
     xor  a                                        ; $42FE: $AF
     ld   [wSwordAnimationState], a                               ; $42FF: $EA $37 $C1
-    ld   a, [$C122]                               ; $4302: $FA $22 $C1
+    ld   a, [wSwordCharge]                               ; $4302: $FA $22 $C1
     cp   $28                                      ; $4305: $FE $28
     jr   z, jr_002_4315                           ; $4307: $28 $0C
 
     inc  a                                        ; $4309: $3C
-    ld   [$C122], a                               ; $430A: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $430A: $EA $22 $C1
     cp   $28                                      ; $430D: $FE $28
     jr   nz, jr_002_4315                          ; $430F: $20 $04
 
@@ -225,7 +225,7 @@ jr_002_4316:
     cp   $01                                      ; $4319: $FE $01
     jr   z, jr_002_4333                           ; $431B: $28 $16
 
-    ld   a, [$C122]                               ; $431D: $FA $22 $C1
+    ld   a, [wSwordCharge]                               ; $431D: $FA $22 $C1
     cp   $28                                      ; $4320: $FE $28
     jr   nz, jr_002_4333                          ; $4322: $20 $0F
 
@@ -240,7 +240,7 @@ jr_002_4316:
 
 jr_002_4333:
     xor  a                                        ; $4333: $AF
-    ld   [$C122], a                               ; $4334: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $4334: $EA $22 $C1
 
 jr_002_4337:
     ret                                           ; $4337: $C9
@@ -1329,7 +1329,7 @@ jr_002_4B64:
     call ClearLinkPositionIncrement               ; $4B69: $CD $8E $17
     ld   [wSwordAnimationState], a                               ; $4B6C: $EA $37 $C1
     ld   [wIsUsingSpinAttack], a                  ; $4B6F: $EA $21 $C1
-    ld   [$C122], a                               ; $4B72: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $4B72: $EA $22 $C1
     ld   a, [$C1C8]                               ; $4B75: $FA $C8 $C1
     inc  a                                        ; $4B78: $3C
     ld   [$C1C8], a                               ; $4B79: $EA $C8 $C1
@@ -2274,7 +2274,7 @@ jr_002_507A:
     jr   nc, jr_002_50A2                          ; $5092: $30 $0E
 
     ldh  a, [hLinkPositionX]                      ; $5094: $F0 $98
-    ld   [$D404], a                               ; $5096: $EA $04 $D4
+    ld   [wWarp0DestinationX], a                  ; $5096: $EA $04 $D4
     ld   a, [wLinkMotionState]                    ; $5099: $FA $1C $C1
     ld   [$D463], a                               ; $509C: $EA $63 $D4
     jp   ApplyMapFadeOutTransition                                ; $509F: $C3 $7D $0C
@@ -2340,7 +2340,7 @@ jr_002_50F6:
     xor  a                                        ; $50F6: $AF
     ld   [$C13E], a                               ; $50F7: $EA $3E $C1
     ld   [wIsUsingSpinAttack], a                  ; $50FA: $EA $21 $C1
-    ld   [$C122], a                               ; $50FD: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $50FD: $EA $22 $C1
     call func_002_52D6                            ; $5100: $CD $D6 $52
     ld   a, [wIsIndoor]                         ; $5103: $FA $A5 $DB
     and  a                                        ; $5106: $A7
@@ -2378,12 +2378,12 @@ jr_002_512B:
     cp   $FF                                      ; $5132: $FE $FF
     jr   z, jr_002_5155                           ; $5134: $28 $1F
 
-    ld   a, [$D401]                               ; $5136: $FA $01 $D4
+    ld   a, [wWarp0MapCategory]                               ; $5136: $FA $01 $D4
     cp   $02                                      ; $5139: $FE $02
     jr   nz, jr_002_5145                          ; $513B: $20 $08
 
     ldh  a, [hLinkPositionY]                      ; $513D: $F0 $99
-    ld   [$D404], a                               ; $513F: $EA $04 $D4
+    ld   [wWarp0DestinationX], a                               ; $513F: $EA $04 $D4
     xor  a                                        ; $5142: $AF
     jr   jr_002_515C                              ; $5143: $18 $17
 
@@ -2391,10 +2391,10 @@ jr_002_5145:
     ldh  a, [hLinkPositionX]                      ; $5145: $F0 $98
     and  $F0                                      ; $5147: $E6 $F0
     add  $08                                      ; $5149: $C6 $08
-    ld   [$D404], a                               ; $514B: $EA $04 $D4
+    ld   [wWarp0DestinationX], a                               ; $514B: $EA $04 $D4
     ldh  a, [hLinkPositionY]                      ; $514E: $F0 $99
     and  $F0                                      ; $5150: $E6 $F0
-    ld   [$D405], a                               ; $5152: $EA $05 $D4
+    ld   [wWarp0DestinationY], a                               ; $5152: $EA $05 $D4
 
 jr_002_5155:
     ld   a, $01                                   ; $5155: $3E $01
@@ -2437,7 +2437,7 @@ jr_002_5176:
 
 jr_002_518E:
     ld   a, $00                                   ; $518E: $3E $00
-    ld   hl, $D401                                ; $5190: $21 $01 $D4
+    ld   hl, wWarp0MapCategory                                ; $5190: $21 $01 $D4
     ld   [hl+], a                                 ; $5193: $22
     ld   a, $00                                   ; $5194: $3E $00
     ld   [hl+], a                                 ; $5196: $22
@@ -2988,7 +2988,7 @@ jr_002_54A6:
     jr   jr_002_54E4                              ; $54AC: $18 $36
 
     ld   a, $01                                   ; $54AE: $3E $01
-    ld   [$D401], a                               ; $54B0: $EA $01 $D4
+    ld   [wWarp0MapCategory], a                               ; $54B0: $EA $01 $D4
     ld   a, [$D479]                               ; $54B3: $FA $79 $D4
     ld   e, a                                     ; $54B6: $5F
     inc  a                                        ; $54B7: $3C
@@ -3003,15 +3003,15 @@ jr_002_54BD:
     ld   hl, $5471                                ; $54C2: $21 $71 $54
     add  hl, de                                   ; $54C5: $19
     ld   a, [hl]                                  ; $54C6: $7E
-    ld   [$D403], a                               ; $54C7: $EA $03 $D4
+    ld   [wWarp0Room], a                               ; $54C7: $EA $03 $D4
     ld   hl, $547C                                ; $54CA: $21 $7C $54
     add  hl, de                                   ; $54CD: $19
     ld   a, [hl]                                  ; $54CE: $7E
-    ld   [$D402], a                               ; $54CF: $EA $02 $D4
+    ld   [wWarp0Map], a                               ; $54CF: $EA $02 $D4
     ld   a, $50                                   ; $54D2: $3E $50
-    ld   [$D404], a                               ; $54D4: $EA $04 $D4
+    ld   [wWarp0DestinationX], a                               ; $54D4: $EA $04 $D4
     ld   a, $70                                   ; $54D7: $3E $70
-    ld   [$D405], a                               ; $54D9: $EA $05 $D4
+    ld   [wWarp0DestinationY], a                               ; $54D9: $EA $05 $D4
     ld   hl, hJingle                              ; $54DC: $21 $F2 $FF
     ld   [hl], JINGLE_PUZZLE_SOLVED               ; $54DF: $36 $02
     jp   ApplyMapFadeOutTransition                                ; $54E1: $C3 $7D $0C
@@ -7960,7 +7960,7 @@ jr_002_72FA:
     ld   [$C1C3], a                               ; $731E: $EA $C3 $C1
     xor  a                                        ; $7321: $AF
     ld   [wIsUsingSpinAttack], a                  ; $7322: $EA $21 $C1
-    ld   [$C122], a                               ; $7325: $EA $22 $C1
+    ld   [wSwordCharge], a                               ; $7325: $EA $22 $C1
     ld   a, $0C                                   ; $7328: $3E $0C
     ld   [wC16D], a                               ; $732A: $EA $6D $C1
     jp   label_002_7454                           ; $732D: $C3 $54 $74

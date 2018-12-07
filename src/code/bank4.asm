@@ -2877,7 +2877,7 @@ jr_004_547E:
     inc  a                                        ; $54BD: $3C
     ldh  [hLinkPositionXIncrement], a                               ; $54BE: $E0 $9A
     push bc                                       ; $54C0: $C5
-    call label_21A8                               ; $54C1: $CD $A8 $21
+    call UpdateFinalLinkPosition                  ; $54C1: $CD $A8 $21
     pop  bc                                       ; $54C4: $C1
     call func_004_6E35                            ; $54C5: $CD $35 $6E
     add  $03                                      ; $54C8: $C6 $03
@@ -5968,7 +5968,7 @@ jr_004_687A:
 jr_004_6884:
     ldh  [hLinkPositionXIncrement], a                               ; $6884: $E0 $9A
     push bc                                       ; $6886: $C5
-    call label_21A8                               ; $6887: $CD $A8 $21
+    call UpdateFinalLinkPosition                  ; $6887: $CD $A8 $21
     call label_3E19                               ; $688A: $CD $19 $3E
     pop  bc                                       ; $688D: $C1
     pop  af                                       ; $688E: $F1

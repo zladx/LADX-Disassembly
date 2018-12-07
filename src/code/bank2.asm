@@ -291,18 +291,24 @@ func_002_436C::
     and  a                                        ; $4374: $A7
     jr   nz, jr_002_43BA                          ; $4375: $20 $43
 
+    ; Side-scrolling code
     jp   $68B7                                    ; $4377: $C3 $B7 $68
 
-func_002_437A::
+; Inputs:
+;   e : sequence count
+MoveLinkToPressedButtonDirection::
+    ; e = ([hPressedButtonsMask] & 0xF) | e
     ldh  a, [hPressedButtonsMask]                 ; $437A: $F0 $CB
     and  $0F                                      ; $437C: $E6 $0F
     or   e                                        ; $437E: $B3
     ld   e, a                                     ; $437F: $5F
-    ld   hl, Data_002_48C5                        ; $4380: $21 $C5 $48
+    ; hLinkPositionXIncrement = [HorizontalIncrementForLinkPosition + de]
+    ld   hl, HorizontalIncrementForLinkPosition                        ; $4380: $21 $C5 $48
     add  hl, de                                   ; $4383: $19
     ld   a, [hl]                                  ; $4384: $7E
-    ldh  [hLinkPositionXIncrement], a                               ; $4385: $E0 $9A
-    ld   hl, $48E5                                ; $4387: $21 $E5 $48
+    ldh  [hLinkPositionXIncrement], a             ; $4385: $E0 $9A
+    ; hLinkPositionYIncrement = [VerticalIncrementForLinkPosition + de]
+    ld   hl, VerticalIncrementForLinkPosition                        ; $4387: $21 $E5 $48
     add  hl, de                                   ; $438A: $19
     ld   a, [hl]                                  ; $438B: $7E
     ldh  [hLinkPositionYIncrement], a                               ; $438C: $E0 $9B
@@ -313,10 +319,10 @@ func_002_438F::
     and  $0F                                      ; $4391: $E6 $0F
     or   e                                        ; $4393: $B3
     ld   e, a                                     ; $4394: $5F
-    ld   hl, Data_002_48C5                        ; $4395: $21 $C5 $48
+    ld   hl, HorizontalIncrementForLinkPosition   ; $4395: $21 $C5 $48
     add  hl, de                                   ; $4398: $19
     ld   a, [hl]                                  ; $4399: $7E
-    ld   hl, hLinkPositionXIncrement                                ; $439A: $21 $9A $FF
+    ld   hl, hLinkPositionXIncrement              ; $439A: $21 $9A $FF
     sub  [hl]                                     ; $439D: $96
     jr   z, jr_002_43A7                           ; $439E: $28 $07
 
@@ -328,7 +334,7 @@ func_002_438F::
     dec  [hl]                                     ; $43A6: $35
 
 jr_002_43A7:
-    ld   hl, $48E5                                ; $43A7: $21 $E5 $48
+    ld   hl, VerticalIncrementForLinkPosition                        ; $43A7: $21 $E5 $48
     add  hl, de                                   ; $43AA: $19
     ld   a, [hl]                                  ; $43AB: $7E
     ld   hl, hLinkPositionYIncrement                                ; $43AC: $21 $9B $FF
@@ -406,15 +412,15 @@ jr_002_4416:
     and  a                                        ; $4419: $A7
     jr   jr_002_4427                              ; $441A: $18 $0B
 
-    ldh  a, [hMapId]                         ; $441C: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $441E: $FE $FF
+    ldh  a, [hMapId]                              ; $441C: $F0 $F7
+    cp   MAP_COLOR_DUNGEON                        ; $441E: $FE $FF
     jr   nz, jr_002_4427                          ; $4420: $20 $05
 
     call func_002_438F                            ; $4422: $CD $8F $43
     jr   jr_002_442A                              ; $4425: $18 $03
 
 jr_002_4427:
-    call func_002_437A                            ; $4427: $CD $7A $43
+    call MoveLinkToPressedButtonDirection         ; $4427: $CD $7A $43
 
 jr_002_442A:
     ld   a, [wFreeMovementMode]                   ; $442A: $FA $7B $C1
@@ -519,14 +525,14 @@ func_002_44AD::
     and  a                                        ; $44B0: $A7
     ret  nz                                       ; $44B1: $C0
 
-    call label_21A8                               ; $44B2: $CD $A8 $21
+    call UpdateFinalLinkPosition                  ; $44B2: $CD $A8 $21
 
 label_002_44B5::
     ld   a, [wC11F]                               ; $44B5: $FA $1F $C1
     ld   [$C130], a                               ; $44B8: $EA $30 $C1
     xor  a                                        ; $44BB: $AF
     ld   [wC11F], a                               ; $44BC: $EA $1F $C1
-    jp   CheckPositionForMapTransition                            ; $44BF: $C3 $75 $6C
+    jp   CheckPositionForMapTransition            ; $44BF: $C3 $75 $6C
 
 func_002_44C2::
     ld   a, [$C13E]                               ; $44C2: $FA $3E $C1
@@ -535,9 +541,9 @@ func_002_44C2::
 
     dec  a                                        ; $44C7: $3D
     ld   [$C13E], a                               ; $44C8: $EA $3E $C1
-    call label_21A8                               ; $44CB: $CD $A8 $21
-    call CheckPositionForMapTransition                            ; $44CE: $CD $75 $6C
-    ld   a, [wCollisionType]                               ; $44D1: $FA $33 $C1
+    call UpdateFinalLinkPosition                  ; $44CB: $CD $A8 $21
+    call CheckPositionForMapTransition            ; $44CE: $CD $75 $6C
+    ld   a, [wCollisionType]                      ; $44D1: $FA $33 $C1
     and  a                                        ; $44D4: $A7
     jr   z, jr_002_44E3                           ; $44D5: $28 $0C
 
@@ -998,11 +1004,28 @@ label_002_48B0::
 jr_002_48C4:
     ret                                           ; $48C4: $C9
 
-Data_002_48C5::
-    db   $00, $10, $F0, $00, $00, $0C, $F4, $00, $00, $0C, $F4, $00, $00, $00, $00, $00
-    db   $00, $14, $EC, $00, $00, $0F, $F1, $00, $00, $0F, $F1, $00, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $F0, $F4, $F4, $00, $10, $0C, $0C, $00, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $EC, $F1, $F1, $00, $14, $0F, $0F, $00, $00, $00, $00, $00
+HorizontalIncrementForLinkPosition::
+    ;    TOP  LEFT RIGHT BOTTOM
+    db   $00, $10, $F0, $00
+    db   $00, $0C, $F4, $00
+    db   $00, $0C, $F4, $00
+    db   $00, $00, $00, $00
+    db   $00, $14, $EC, $00
+    db   $00, $0F, $F1, $00
+    db   $00, $0F, $F1, $00
+    db   $00, $00, $00, $00
+
+VerticalIncrementForLinkPosition::
+    ;    TOP  LEFT RIGHT BOTTOM
+    db   $00, $00, $00, $00
+    db   $F0, $F4, $F4, $00
+    db   $10, $0C, $0C, $00
+    db   $00, $00, $00, $00
+    db   $00, $00, $00, $00
+    db   $EC, $F1, $F1, $00
+    db   $14, $0F, $0F, $00
+    db   $00, $00, $00, $00
+
     db   $0F, $00, $01, $0F, $02, $0F, $0F, $0F, $03, $0F, $0F, $0A, $0B, $06, $07, $04
     db   $05, $00, $01, $2C, $2D, $06, $07, $34, $35, $22, $23, $2A, $2B, $28, $29, $30
     db   $31, $24, $25, $2E, $2F, $06, $07, $34, $35, $22, $23, $2A, $2B, $28, $29, $32
@@ -2284,7 +2307,7 @@ jr_002_50A2:
 
     ld   a, $01                                   ; $50A3: $3E $01
     ldh  [$FFA1], a                               ; $50A5: $E0 $A1
-    call label_21A8                               ; $50A7: $CD $A8 $21
+    call UpdateFinalLinkPosition                  ; $50A7: $CD $A8 $21
     call $21E1                                    ; $50AA: $CD $E1 $21
     ldh  a, [hLinkPositionX]                      ; $50AD: $F0 $98
     and  $F0                                      ; $50AF: $E6 $F0
@@ -6141,8 +6164,8 @@ jr_002_68C7:
 
     dec  a                                        ; $68CD: $3D
     ld   [$C13E], a                               ; $68CE: $EA $3E $C1
-    call label_21A8                               ; $68D1: $CD $A8 $21
-    call CheckPositionForMapTransition                            ; $68D4: $CD $75 $6C
+    call UpdateFinalLinkPosition                  ; $68D1: $CD $A8 $21
+    call CheckPositionForMapTransition            ; $68D4: $CD $75 $6C
     ldh  a, [$FF9C]                               ; $68D7: $F0 $9C
     cp   $02                                      ; $68D9: $FE $02
     jr   z, jr_002_68E3                           ; $68DB: $28 $06
@@ -6259,11 +6282,11 @@ jr_002_696E:
     ld   hl, $690D                                ; $697B: $21 $0D $69
     add  hl, de                                   ; $697E: $19
     ld   a, [hl]                                  ; $697F: $7E
-    ldh  [hLinkDirection], a                               ; $6980: $E0 $9E
+    ldh  [hLinkDirection], a                      ; $6980: $E0 $9E
 
 jr_002_6982:
-    call label_21A8                               ; $6982: $CD $A8 $21
-    call CheckPositionForMapTransition                            ; $6985: $CD $75 $6C
+    call UpdateFinalLinkPosition                  ; $6982: $CD $A8 $21
+    call CheckPositionForMapTransition            ; $6985: $CD $75 $6C
     ld   a, [wInventoryAppearing]                 ; $6988: $FA $4F $C1
     and  a                                        ; $698B: $A7
     ret  nz                                       ; $698C: $C0
@@ -6318,8 +6341,8 @@ jr_002_699E:
     inc  [hl]                                     ; $69D6: $34
 
 jr_002_69D7:
-    call label_21A8                               ; $69D7: $CD $A8 $21
-    call CheckPositionForMapTransition                            ; $69DA: $CD $75 $6C
+    call UpdateFinalLinkPosition                  ; $69D7: $CD $A8 $21
+    call CheckPositionForMapTransition            ; $69DA: $CD $75 $6C
     ld   a, [wInventoryAppearing]                 ; $69DD: $FA $4F $C1
     and  a                                        ; $69E0: $A7
     ret  nz                                       ; $69E1: $C0
@@ -6508,8 +6531,8 @@ label_002_6ADB::
     jr   nz, jr_002_6AFC                          ; $6AE4: $20 $16
 
 jr_002_6AE6:
-    call label_21A8                               ; $6AE6: $CD $A8 $21
-    ld   hl, hLinkDirection                                ; $6AE9: $21 $9E $FF
+    call UpdateFinalLinkPosition                  ; $6AE6: $CD $A8 $21
+    ld   hl, hLinkDirection                       ; $6AE9: $21 $9E $FF
     ldh  a, [hPressedButtonsMask]                 ; $6AEC: $F0 $CB
     and  $0F                                      ; $6AEE: $E6 $0F
     cp   $04                                      ; $6AF0: $FE $04
@@ -6723,7 +6746,7 @@ jr_002_6BF6:
     ldh  [hLinkPositionXIncrement], a                               ; $6C10: $E0 $9A
     ld   a, $E8                                   ; $6C12: $3E $E8
     ldh  [hLinkPositionYIncrement], a                               ; $6C14: $E0 $9B
-    call label_21A8                               ; $6C16: $CD $A8 $21
+    call UpdateFinalLinkPosition                  ; $6C16: $CD $A8 $21
     call CheckPositionForMapTransition                            ; $6C19: $CD $75 $6C
     ld   a, $20                                   ; $6C1C: $3E $20
     ld   [$C157], a                               ; $6C1E: $EA $57 $C1

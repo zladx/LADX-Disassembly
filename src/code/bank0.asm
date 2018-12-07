@@ -2133,7 +2133,7 @@ label_14F8::
     ldh  [hLinkPositionYIncrement], a
     xor  a
     ldh  [$FFA3], a
-    call label_21A8
+    call UpdateFinalLinkPosition
     jpsw CheckPositionForMapTransition
 
 label_1508::
@@ -2215,10 +2215,9 @@ label_157C::
     add  hl, de
     ld   a, [hl]
     cp   $0F
-    jr   z, label_158E
+    jr   z, .return
     ldh  [hLinkDirection], a
-
-label_158E::
+.return
     ret
 
 SwordCollisionMapX::
@@ -3618,20 +3617,29 @@ label_2183::
 label_21A7::
     ret
 
-label_21A8::
+UpdateFinalLinkPosition::
+    ; If inventory is appearing, return
     ld   a, [wInventoryAppearing]
     and  a
     ret  nz
+
+    ; Compute next Link vertical position
     ld   c, $01
-    call label_21B6
+    call ComputeLinkPosition
+    ; Compute next Link horizontal position
     ld   c, $00
     ldh  [hScratchA], a
 
-label_21B6::
+; Inputs:
+;   c : direction (0: horizontal ; 1: vertical)
+ComputeLinkPosition::
+    ; b = 0
     ld   b, $00
+    ; a = [hLinkPositionXIncrement + direction]
     ld   hl, hLinkPositionXIncrement
     add  hl, bc
     ld   a, [hl]
+
     push af
     swap a
     and  $F0
@@ -3639,16 +3647,19 @@ label_21B6::
     add  hl, bc
     add  a, [hl]
     ld   [hl], a
+
     rl   d
+    ; hl = [hLinkPositionX + direction]
     ld   hl, hLinkPositionX
     add  hl, bc
+
     pop  af
     ld   e, $00
     bit  7, a
-    jr   z, label_21D7
+    jr   z, .label_21D7
     ld   e, $F0
+.label_21D7
 
-label_21D7::
     swap a
     and  $0F
     or   e
@@ -3656,6 +3667,8 @@ label_21D7::
     adc  a, [hl]
     ld   [hl], a
     ret
+
+func_21E1::
     ldh  a, [$FFA3]
     push af
     swap a
@@ -3668,10 +3681,9 @@ label_21D7::
     pop  af
     ld   e, $00
     bit  7, a
-    jr   z, label_21FB
+    jr   z, .label_21FB
     ld   e, $F0
-
-label_21FB::
+.label_21FB
     swap a
     and  $0F
     or   e
@@ -3994,7 +4006,7 @@ ReadJoypadState::
     ; Ignore joypad during map transitions
     ld   a, [wRoomTransitionState]
     and  a
-    jr   nz, ReadJoypadState_return
+    jr   nz, .return
 
     ld   a, [wGameplayType]
     cp   GAMEPLAY_WORLD
@@ -4003,7 +4015,7 @@ ReadJoypadState::
     cp   GAMEPLAY_WORLD_DEFAULT
     jr   nz, .notWorld
     ld   a, [wLinkMotionState]
-    cp   $07
+    cp   LINK_MOTION_PASS_OUT
     jr   nz, .linkNotPassingOut
     ldh  a, [$FF9C]
     cp   $04
@@ -4055,7 +4067,7 @@ ReadJoypadState::
     ld   a, $30
     ld   [rP1], a
 
-ReadJoypadState_return
+.return
     ret
 
 label_2887::

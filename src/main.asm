@@ -51,10 +51,17 @@ IndoorsBRooms::
 include "data/rooms/indoors_b.asm"
 
 section "bank0C",romx[$4000],bank[$0C]
+LinkCharacterTiles::
 incbin "gfx/characters/link_1.dmg.2bpp"
+Items1Tiles::
 incbin "gfx/items/items_1.dmg.2bpp"
+Items2Tiles::
+incbin "gfx/items/items_2.dmg.2bpp"
+SirenInstrumentsTiles::
 incbin "gfx/items/instruments.dmg.2bpp"
+Overworld1Tiles::
 incbin "gfx/world/overworld_1.dmg.2bpp"
+LinkCharacter2Tiles::
 incbin "gfx/characters/link_2.dmg.2bpp"
 AnimatedTiles::
 incbin "gfx/world/animated_tiles.w32.dmg.2bpp"
@@ -67,6 +74,7 @@ section "bankOE",romx[$4000],bank[$0E]
 incbin "gfx/characters/npc_1.dmg.2bpp"
 
 section "bankOF",romx[$4000],bank[$0F]
+MenuTiles::
 incbin "gfx/menus/menu.dmg.2bpp"
 incbin "gfx/intro/title.dmg.2bpp"
 FontTiles::
@@ -93,7 +101,7 @@ section "bank12",romx[$4000],bank[$12]
 incbin "gfx/characters/npc_3.dmg.2bpp"
 incbin "gfx/characters/nightmare.dmg.2bpp"
 incbin "gfx/characters/npc_4.dmg.2bpp"
-incbin "gfx/items/items_2.dmg.2bpp"
+incbin "gfx/items/items_3.dmg.2bpp"
 
 section "bank13",romx[$4000],bank[$13]
 incbin "gfx/ending/ending.dmg.2bpp"
@@ -135,6 +143,7 @@ incbin "gfx/photos/photo_bridge.2bpp"
 section "bank2C",romx[$4000],bank[$2C]
 incbin "gfx/characters/link_1.cgb.2bpp"
 incbin "gfx/items/items_1.cgb.2bpp"
+incbin "gfx/items/items_2.cgb.2bpp"
 incbin "gfx/items/instruments.cgb.2bpp"
 incbin "gfx/world/overworld_1.cgb.2bpp"
 incbin "gfx/characters/link_2.cgb.2bpp"
@@ -189,7 +198,7 @@ section "bank32",romx[$4000],bank[$32]
 incbin "gfx/characters/npc_3.cgb.2bpp"
 incbin "gfx/characters/nightmare.cgb.2bpp"
 incbin "gfx/characters/npc_4.cgb.2bpp"
-incbin "gfx/items/items_2.cgb.2bpp"
+incbin "gfx/items/items_3.cgb.2bpp"
 
 section "bank33",romx[$4000],bank[$33]
 incbin "gfx/ending/ending.cgb.2bpp"
@@ -198,6 +207,7 @@ section "bank34",romx[$4000],bank[$34]
 incbin "gfx/menus/print.2bpp"
 
 section "bank35",romx[$4000],bank[$35]
+ColorDungeonTiles::
 incbin "gfx/world/color_dungeon.2bpp"
 
 section "bank38",romx[$4000],bank[$38]

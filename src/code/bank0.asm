@@ -653,7 +653,7 @@ label_BB5::
     ld   de, $D000
     jp   CopyData
     push af
-    call LoadBank0CTiles
+    call LoadBaseTiles
     jp   RestoreStackedBankAndReturn
     ld   a, [$D16A]
     ld   [MBC3SelectBank], a
@@ -4407,81 +4407,94 @@ label_2BC1::
     pop  bc
     ret
 
-; Load tiles from bank $0C to Tiles Map
-LoadBank0CTiles::
+; Load the basic tiles (Link's character, items icons) to tile memory
+LoadBaseTiles::
     ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
-    ld   a, $0C
+    ld   a, BANK(LinkCharacterTiles)
     call SwitchAdjustedBank
-    ; Copy $400 bytes from the first tile sheet to Tiles map 0
-    ld   hl, $4000
+    ; Copy $400 bytes from the link's tile sheet to Tiles map 0
+    ld   hl, LinkCharacterTiles
     ld   de, vTiles0
     ld   bc, $0400
     call CopyData
 
     ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
-    ld   a, $0C
+    ld   a, BANK(Items2Tiles)
     call SwitchAdjustedBank
-    ; Copy $1000 bytes from the second tile sheet to Tiles Map 1
-    ld   hl, $4800
+    ; Copy $1000 bytes from the items tile sheet to Tiles Map 1
+    ld   hl, Items2Tiles
     ld   de, vTiles1
     ld   bc, $1000
     call CopyData
 
-    ; Copy $20 bytes from $47A0 to a portion of Tiles Map 1 ($8E00)
-    ld   hl, $47A0
+    ; Copy two tiles from the times tile sheet to a portion of Tiles Map 1
+    ld   hl, Items1Tiles + $3A0
     ld   de, vTiles1 + $600
     ld   bc, $0020
     call CopyData
 
-    ; Select bank 1
+    ; Swtich back to bank 1
     ld   a, $01
     call SwitchBank
     ret
 
-    call LoadBank0CTiles
-    ld   a, $0F
+LoadInventoryTiles::
+    call LoadBaseTiles
+
+    ; Select the tiles sheet bank ($0F on DMG, $2F on GBC)
+    ld   a, BANK(MenuTiles)
     call SwitchAdjustedBank
-    ld   hl, $4000
-    ld   de, $8800
+    ; Copy $400 bytes from the menu tile sheet to Tiles Map 1
+    ld   hl, MenuTiles
+    ld   de, vTiles1
     ld   bc, $0400
     call CopyData
-    ld   a, $0F
-    call SwitchAdjustedBank
-    ld   hl, $5000
-    ld   de, $9000
-    ld   bc, $0800
-    jp   CopyData
 
-label_2C28::
+    ; Select the tiles sheet bank ($0F on DMG, $2F on GBC)
+    ld   a, BANK(FontTiles)
+    call SwitchAdjustedBank
+    ; Copy $800 bytes from the menu tile sheet to Tiles Map 2
+    ld   hl, FontTiles
+    ld   de, vTiles2
+    ld   bc, $0800
+    jp   CopyData ; tail-call
+
+LoadDungeonTiles::
+    ; Switch to bank $20
     ld   a, $20
     call SwitchBank
     ld   hl, $4589
+    ; e = [hMapId]
     ldh  a, [hMapId]
     ld   e, a
     ld   d, $00
-    cp   $FF
-    jr   nz, label_2C53
+    ; If inside the Color Dungeon…
+    cp   MAP_COLOR_DUNGEON
+    jr   nz, .notColorDungeon
+    ; … switch to bank $35
     ld   a, $35
     ld   [MBC3SelectBank], a
+    ; … and copy Color Dungeon tiles to Tiles Map 2
     ld   hl, $6200
-    ld   de, $9000
+    ld   de, vTiles2
     ld   bc, $0100
     call CopyData
+
     ld   e, $00
     ld   d, e
     ld   hl, $6000
     push de
-    jr   label_2C5D
+    jr   .endIf
 
-label_2C53::
+.notColorDungeon
     push de
     add  hl, de
     ld   h, [hl]
     ld   l, $00
     ld   a, $0D
     call SwitchAdjustedBank
+.endIf
 
-label_2C5D::
     ld   de, $9100
     ld   bc, $0100
     call CopyData
@@ -4491,6 +4504,7 @@ label_2C5D::
     ld   de, $9200
     ld   bc, $0600
     call CopyData
+
     ld   a, $20
     ld   [MBC3SelectBank], a
     pop  de
@@ -4498,10 +4512,10 @@ label_2C5D::
     ld   hl, $45A9
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2C8A
+    jr   nz, .colorDungeonEnd
     ld   hl, $45C9
+.colorDungeonEnd
 
-label_2C8A::
     add  hl, de
     ld   h, [hl]
     ld   l, $00
@@ -4509,6 +4523,7 @@ label_2C8A::
     ld   de, $9200
     ld   bc, $0200
     call CopyData
+
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4516,7 +4531,8 @@ label_2C8A::
     ld   de, $DCC0
     ld   bc, $0040
     call CopyData
-    call label_2D50
+
+    call func_2D50
     ld   a, $20
     ld   [MBC3SelectBank], a
     pop  de
@@ -4524,16 +4540,18 @@ label_2C8A::
     add  hl, de
     ld   h, [hl]
     ld   l, $00
+
     ld   a, $12
     call SwitchAdjustedBank
+
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2CD1
+    jr   nz, .colorDungeonEnd2
     ld   hl, $6100
     ld   a, $35
     ld   [MBC3SelectBank], a
+.colorDungeonEnd2
 
-label_2CD1::
     ld   de, $8F00
     ld   bc, $0100
     call CopyData
@@ -4579,39 +4597,45 @@ label_2D17::
 label_2D21::
     ld   a, [wTradeSequenceItem]
     cp   $02
-    jr   c, label_2D2C
+    jr   c, .return
     ld   a, $0D
     ldh  [$FFA5], a
 
-label_2D2C::
+.return
     ret
+
+func_2D2D::
     ld   a, $0C
     call SwitchAdjustedBank
     ld   hl, $5200
-    ld   de, $9200
+    ld   de, vTiles2 + $200
     ld   bc, $0600
     call CopyData
+    ; Load keys tiles
     ld   hl, $4C00
     ld   de, $8C00
     ld   bc, $0400
     call CopyData
-    call label_2D50
+    call func_2D50
     jp   label_2CFE
 
-label_2D50::
+func_2D50::
     xor  a
     ldh  [hAnimatedTilesFrameCount], a
     ldh  [hAnimatedTilesDataOffset], a
     call AnimateTiles.jumpTable
-    ld   a, $0C
+
+    ld   a, BANK(Items2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $4800
-    ld   de, $8800
+
+    ld   hl, Items2Tiles
+    ld   de, vTiles1
     ld   bc, $0800
     call CopyData
+
     ld   hl, $4200
-    ld   de, $8200
+    ld   de, vTiles0 + $200
     ld   bc, $0100
     call CopyData
     ret
@@ -4688,6 +4712,7 @@ label_2DE0::
     ld   de, $8200
     ld   bc, $0100
     jp   CopyData
+
     ld   hl, $7000
     jr   label_2E13
     ld   hl, $7800
@@ -4700,6 +4725,7 @@ label_2E13::
     ld   de, $9000
     ld   bc, $0800
     jp   CopyData
+
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4711,6 +4737,7 @@ label_2E13::
     ld   de, $9000
     ld   bc, $0400
     jp   CopyData
+
     ld   a, $10
     call SwitchAdjustedBank
     ld   hl, $6700
@@ -4721,6 +4748,7 @@ label_2E13::
     ld   de, $9000
     ld   bc, $0600
     jp   CopyData
+
     ld   a, $0F
     call SwitchBank
     ld   hl, $4400

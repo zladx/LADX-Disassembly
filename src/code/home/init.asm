@@ -70,7 +70,7 @@ Init::
     call LCDOn
 
     ; Load default tiles
-    call LoadBank0CTiles
+    call LoadBaseTiles
 
     ; Initialize LCD Status register
     ;   Bit 6: LYC coincidence interrupt enabled

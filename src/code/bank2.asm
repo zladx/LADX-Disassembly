@@ -5576,7 +5576,7 @@ jr_002_6374:
     ldh  [hSFX], a                                ; $6380: $E0 $F3
 
 jr_002_6382:
-    jp   func_002_6414                            ; $6382: $C3 $14 $64
+    jp   LoadHeartsCount                            ; $6382: $C3 $14 $64
 
 jr_002_6385:
     ld   a, [wDB94]                               ; $6385: $FA $94 $DB
@@ -5593,7 +5593,7 @@ jr_002_6385:
     ld   [wHealth], a                               ; $6396: $EA $5A $DB
 
 jr_002_6399:
-    call func_002_6414                            ; $6399: $CD $14 $64
+    call LoadHeartsCount                            ; $6399: $CD $14 $64
     ld   a, [wHealth]                               ; $639C: $FA $5A $DB
     and  a                                        ; $639F: $A7
     jr   z, jr_002_63A3                           ; $63A0: $28 $01
@@ -5659,27 +5659,30 @@ jr_002_63E4:
 jr_002_63FE:
     ret                                           ; $63FE: $C9
 
-    sbc  h                                        ; $63FF: $9C
-    dec  c                                        ; $6400: $0D
-    ld   b, $7F                                   ; $6401: $06 $7F
-    ld   a, a                                     ; $6403: $7F
-    ld   a, a                                     ; $6404: $7F
-    ld   a, a                                     ; $6405: $7F
-    ld   a, a                                     ; $6406: $7F
-    ld   a, a                                     ; $6407: $7F
-    ld   a, a                                     ; $6408: $7F
-    sbc  h                                        ; $6409: $9C
-    dec  l                                        ; $640A: $2D
-    ld   b, $7F                                   ; $640B: $06 $7F
-    ld   a, a                                     ; $640D: $7F
-    ld   a, a                                     ; $640E: $7F
-    ld   a, a                                     ; $640F: $7F
-    ld   a, a                                     ; $6410: $7F
-    ld   a, a                                     ; $6411: $7F
-    ld   a, a                                     ; $6412: $7F
-    nop                                           ; $6413: $00
+Data_002_63FF::
+    db   $9C
+    db   $0D
+    db   $06
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $9C
+    db   $2D
+    db   $06
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $7F
+    db   $00
 
-func_002_6414::
+LoadHeartsCount::
     ld   a, [wRequests]                           ; $6414: $FA $00 $D6
     ld   e, a                                     ; $6417: $5F
     ld   d, $00                                   ; $6418: $16 $00
@@ -5688,15 +5691,15 @@ func_002_6414::
     ld   hl, wRequestDestinationHigh              ; $641F: $21 $01 $D6
     add  hl, de                                   ; $6422: $19
     push de                                       ; $6423: $D5
-    ld   bc, $63FF                                ; $6424: $01 $FF $63
+    ld   bc, Data_002_63FF                        ; $6424: $01 $FF $63
     ld   e, $15                                   ; $6427: $1E $15
 
-jr_002_6429:
+.loop
     ld   a, [bc]                                  ; $6429: $0A
     inc  bc                                       ; $642A: $03
     ld   [hl+], a                                 ; $642B: $22
     dec  e                                        ; $642C: $1D
-    jr   nz, jr_002_6429                          ; $642D: $20 $FA
+    jr   nz, .loop                                ; $642D: $20 $FA
 
     nop                                           ; $642F: $00
     nop                                           ; $6430: $00

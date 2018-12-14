@@ -2552,7 +2552,7 @@ label_5E79::
     add  hl, de
 
 label_5E8A::
-    ld   de, $DBCC
+    ld   de, wHasDungeonMap
     ld   c, $05
 
 label_5E8F::

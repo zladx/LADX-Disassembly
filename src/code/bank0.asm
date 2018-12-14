@@ -7697,11 +7697,11 @@ label_3E34::
     call $5407
     jp   ReloadSavedBank
 
-label_3E3F::
+LoadHeartsAndRuppeesCount::
     ld   hl, MBC3SelectBank
-    ld   [hl], $02
-    call $62CE
-    call $6414
+    ld   [hl], BANK(LoadRupeesDigits)
+    call LoadRupeesDigits
+    call LoadHeartsCount
     jp   ReloadSavedBank
 
 label_3E4D::

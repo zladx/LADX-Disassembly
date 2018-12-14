@@ -1444,7 +1444,7 @@ label_D0D8::
     sub  a, $16
     ld   e, a
     ld   d, $00
-    ld   hl, $DBCC
+    ld   hl, wHasDungeonMap
     add  hl, de
     inc  [hl]
     call label_2802

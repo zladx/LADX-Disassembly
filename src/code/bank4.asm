@@ -439,7 +439,7 @@ func_004_42B3:
     jp   label_3D8A                               ; $42E4: $C3 $8A $3D
 
     call func_004_46F9                            ; $42E7: $CD $F9 $46
-    ldh  a, [hEntityType]                               ; $42EA: $F0 $EA
+    ldh  a, [hActiveEntityType]                               ; $42EA: $F0 $EA
     cp   $05                                      ; $42EC: $FE $05
     jr   z, jr_004_431A                           ; $42EE: $28 $2A
 
@@ -1744,7 +1744,7 @@ Data_004_4BDD::
     jp   label_3D8A                               ; $4DF8: $C3 $8A $3D
 
     call func_004_4FFE                            ; $4DFB: $CD $FE $4F
-    ldh  a, [hEntityType]                               ; $4DFE: $F0 $EA
+    ldh  a, [hActiveEntityType]                               ; $4DFE: $F0 $EA
     cp   $05                                      ; $4E00: $FE $05
     jp   z, label_004_4E60                        ; $4E02: $CA $60 $4E
 
@@ -2123,7 +2123,7 @@ func_004_5067:
     call label_3EE8                               ; $5082: $CD $E8 $3E
     call label_394D                               ; $5085: $CD $4D $39
     call func_004_542F                            ; $5088: $CD $2F $54
-    ldh  a, [hEntityType]                               ; $508B: $F0 $EA
+    ldh  a, [hActiveEntityType]                               ; $508B: $F0 $EA
     cp   $05                                      ; $508D: $FE $05
     jp   z, label_004_510F                        ; $508F: $CA $0F $51
 
@@ -3214,7 +3214,7 @@ func_004_56A7:
     jp   nz, label_004_5690                       ; $56BD: $C2 $90 $56
 
     call label_3EE8                               ; $56C0: $CD $E8 $3E
-    ldh  a, [hEntityType]                               ; $56C3: $F0 $EA
+    ldh  a, [hActiveEntityType]                               ; $56C3: $F0 $EA
     cp   $05                                      ; $56C5: $FE $05
     jp   z, label_004_5791                        ; $56C7: $CA $91 $57
 
@@ -10063,7 +10063,7 @@ jr_004_7F9D:
     ret                                           ; $7FA2: $C9
 
 func_004_7FA3:
-    ldh  a, [hEntityType]                               ; $7FA3: $F0 $EA
+    ldh  a, [hActiveEntityType]                               ; $7FA3: $F0 $EA
     cp   $05                                      ; $7FA5: $FE $05
     jr   nz, jr_004_7FCE                          ; $7FA7: $20 $25
 

@@ -295,52 +295,36 @@ wEntitiesPosXTable:: ; C200
 
 wEntity0PosX:: ; C200
   ds $1
-
 wEntity1PosX:: ; C201
   ds $1
-
 wEntity2PosX:: ; C202
-
 wIntroShipPosX:: ; C202
   ; Position of the ship sprite during the intro sequence
   ds $1
-
 wEntity3PosX:: ; C203
   ds $1
-
 wEntity4PosX:: ; C204
   ds $1
-
 wEntity5PosX:: ; C205
   ds $1
-
 wEntity6PosX:: ; C206
   ds $1
-
 wEntity7PosX:: ; C207
   ds $1
-
 wEntity8PosX:: ; C208
   ds $1
-
 wEntity9PosX:: ; C209
   ds $1
-
 wEntity10PosX:: ; C20A
   ds $1
-
 wEntity11PosX:: ; C20B
   ds $1
-
 wEntity12PosX:: ; C20C
   ds $1
-
 wEntity13PosX:: ; C20D
   ds $1
-
 wEntity14PosX:: ; C20E
   ds $1
-
 wEntity15PosX:: ; C20F
   ds $1
 
@@ -455,7 +439,8 @@ wDroppedItem:: ; C3AF
   ; Status of one of the items that can be dropped by cutting herbs
   ds 1
 
-; Unlabeled
+wEntitiesUnknownTableG:: ; C3B0
+
 ds $1B
 
 wObjectAffectingBGPalette:: ; C3CB

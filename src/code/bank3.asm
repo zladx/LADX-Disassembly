@@ -6084,7 +6084,7 @@ label_F013::
 label_F018::
     cp   $B9
     jr   nz, label_F042
-    ldh  a, [hEntityType]
+    ldh  a, [hActiveEntityType]
     cp   $05
     jr   nz, label_F042
     call IncrementEntityWalkingAttr
@@ -8533,7 +8533,7 @@ label_FF5E::
     jr   label_FF4A
 
 label_FF78::
-    ldh  a, [hEntityType]
+    ldh  a, [hActiveEntityType]
     cp   $05
     jr   nz, label_FFA7
 

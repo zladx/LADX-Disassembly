@@ -94,7 +94,7 @@ RenderIntroFrame::
     ld   a, [wGameplaySubtype]
     cp   GAMEPLAY_INTRO_SEA
     jr   c, IntroSceneJumpTable
-    cp   $05
+    cp   GAMEPLAY_INTRO_LIGHTNING
     jr   nc, IntroSceneJumpTable
     ; Check $D000 counter value
     ld   a, [$D000]
@@ -118,9 +118,9 @@ label_6EC6::
 IntroSceneJumpTable::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-._0 dw label_6EF8
-._1 dw label_6F2A
-._2 dw label_6F36
+._0 dw IntroSceneStage0Handler
+._1 dw IntroSceneStage1Handler
+._2 dw IntroSceneStage2Handler
 ._3 dw IntroShipOnSeaHandler
 ._4 dw IntroLinkFaceHandler
 ._5 dw label_711A ; transition?
@@ -133,7 +133,7 @@ IntroSceneJumpTable::
 ._C dw $743A
 ._D dw label_7448
 
-label_6EF8::
+IntroSceneStage0Handler::
     call ClearLowerAndMiddleWRAM
     call label_27F2
     ld   a, $01
@@ -156,15 +156,16 @@ label_6EF8::
     ld   [$D017], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_6F2A::
+IntroSceneStage1Handler::
     ld   a, $10
     ld   [wTileMapToLoad], a
     xor  a
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_6F36::
+IntroSceneStage2Handler::
     call label_7D01
+
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_6F42
@@ -1051,31 +1052,43 @@ RenderIntroEntities::
     ld   [$C3C0], a
     ld   c, $02  ; Entities count
     ld   b, $00
+
 .loop
     ld   a, c
     ld   [$C123], a
+
+    ; a = EntityType[c]
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
     jr   z, .continue ; If no entity at this table index, continue
+
+    ; $FFEE = wEntitiesPosXTable[c]
     ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFEE], a ; EntityOffsetX?
+
+    ; $FFEC = wEntitiesPosYTable[c]
     ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFEC], a ; EntityOffsetY?
-    ld   hl, $C3B0
+
+    ; $FFF1 = wEntitiesUnknownTableG[c]
+    ld   hl, wEntitiesUnknownTableG
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFF1], a
-    ld   hl, $C290
+
+    ; $FFF0 = wEntitiesWalkingTable[c]
+    ld   hl, wEntitiesWalkingTable
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFF0], a
     call RenderIntroEntity
+
 .continue
     dec  c
     ld   a, c

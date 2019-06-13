@@ -216,11 +216,20 @@ hFFE9:: ; FFE9
 ; 5: do nothing
 ; 6-9: unknown
 ; See wEntitiesTypeTable
-hEntityType:: ; FFEA
+hActiveEntityType:: ; FFEA
   ds 1
 
 ; Unlabeled
-ds 7
+ds 5
+
+hActiveEntityWalking:: ; FFF0
+  ; Is the active entity walking
+  ; See wEntitiesWalkingTable
+  ds 1
+
+hActiveEntityUnknownG:: ; FFF1
+  ; See wEntitiesUnknownTableG
+  ds 1
 
 hJingle:: ; FFF2
   ; Play a jingle immediately

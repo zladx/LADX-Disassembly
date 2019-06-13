@@ -7021,7 +7021,7 @@ label_39F2::
     ld   a, [hl]
     and  a
     jr   z, label_3A03
-    ldh  [hEntityType], a
+    ldh  [hActiveEntityType], a
     call LoadEntity
 
 label_3A03::
@@ -7063,7 +7063,7 @@ LoadEntity::
     jr   nz, label_3A46
 
 label_3A40::
-    ldh  a, [hEntityType]
+    ldh  a, [hActiveEntityType]
     cp   $07
     jr   nz, label_3A4E
 
@@ -7084,7 +7084,7 @@ label_3A54::
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [hEntityType]
+    ldh  a, [hActiveEntityType]
     cp   $05
     jp   z, label_3A8D
     ; Jump table on FFEA value.

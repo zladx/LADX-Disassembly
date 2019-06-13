@@ -970,7 +970,7 @@ label_CD7A::
     ldh  a, [$FFEB]
     cp   $5C
     jr   nz, label_CDD2
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -1558,7 +1558,7 @@ label_D16E::
     ld   [hl], a
     call label_D249
     call label_F893
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -1921,7 +1921,7 @@ label_D3B6::
     ld   a, [hl]
     and  a
     jr   z, label_D3E4
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -1962,7 +1962,7 @@ data_D415::
     db $C3, $8D, $3F
 
 label_D438::
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -2565,7 +2565,7 @@ label_D8B9::
     ret
 
 label_D8D7::
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     and  $0F
@@ -3696,7 +3696,7 @@ label_E0B3::
     ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_E0E3
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     and  $08
@@ -4626,7 +4626,7 @@ label_E6F7::
     call label_CE35
 
 label_E6FA::
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     and  $03
@@ -5068,7 +5068,7 @@ label_E9F0::
     jr   nz, label_EA1D
 
 label_E9F8::
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   [hl], b
     call label_C00
@@ -5197,7 +5197,7 @@ label_EADA::
     jr   nz, label_EB4C
     call label_FF25
     call label_FCAB
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -5215,7 +5215,7 @@ label_EAFF::
     ld   hl, $C320
     add  hl, bc
     ld   [hl], $10
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     inc  a
@@ -5409,7 +5409,7 @@ label_EBDE::
     and  $0F
     cp   $05
     jr   nc, label_EC5B
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   [hl], $02
     ld   a, JINGLE_SWORD_POKING
@@ -5437,7 +5437,7 @@ label_EC41::
     ldh  [hJingle], a
 
 label_EC54::
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   [hl], $FF
 
@@ -5709,7 +5709,7 @@ label_EDDF::
     jp   z, label_EFA7
     cp   $5A
     jr   nz, label_EDFA
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   [hl], $01
 
@@ -7071,7 +7071,7 @@ label_F656::
     jr   z, label_F668
 
 label_F65F::
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   [hl], $01
     jp   label_F737
@@ -7254,7 +7254,7 @@ label_F75A::
     jr   label_F79A
 
 label_F782::
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -7666,7 +7666,7 @@ label_FA18::
     sla  a
     sla  a
     ldh  [hScratchA], a
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     xor  a
     ld   [hl], a
@@ -8020,7 +8020,7 @@ label_FC9A::
     ld   hl, data_F87F
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     or   [hl]
     ld   [hl], a
@@ -8223,7 +8223,7 @@ label_FDCD::
     jr   nz, label_FE03
 
 label_FDE3::
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     ld   [hl], $01
     ldh  a, [$FFEB]

@@ -412,7 +412,13 @@ wEntitiesWalkingTable:: ; C290
   ; e.g. Mabe village dog has 1 when jumping around, and 0 when standing in place moving the tail.
   ds $10
 
-wEntitiesUnknownTableA:: ; C2A0
+wEntitiesCollisionsTable:: ; C2A0
+  ; Indicates if the entity is collisioning
+  ; 0: no collisions
+  ; 1: collision on the right
+  ; 2: collision on the left
+  ; 3: collision on the bottom
+  ; 4: collision on the top
   ds $10
 
 wEntitiesUnknownTableB:: ; C2B0
@@ -440,6 +446,7 @@ wDroppedItem:: ; C3AF
   ds 1
 
 wEntitiesUnknownTableG:: ; C3B0
+  ; Entity custom state?
 
 ds $1B
 

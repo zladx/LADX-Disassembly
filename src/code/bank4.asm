@@ -2614,7 +2614,7 @@ jr_004_52C9:
     add  hl, bc                                   ; $532E: $09
     ld   [hl], $01                                ; $532F: $36 $01
     call label_3B23                               ; $5331: $CD $23 $3B
-    ld   hl, wEntitiesUnknownTableA               ; $5334: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $5334: $21 $A0 $C2
     add  hl, bc                                   ; $5337: $09
     ld   a, [hl]                                  ; $5338: $7E
     and  a                                        ; $5339: $A7
@@ -3004,7 +3004,7 @@ jr_004_557E:
     call func_004_6DCA                            ; $5586: $CD $CA $6D
     call label_3B23                               ; $5589: $CD $23 $3B
     call label_3B39                               ; $558C: $CD $39 $3B
-    ld   hl, wEntitiesUnknownTableA               ; $558F: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $558F: $21 $A0 $C2
     add  hl, bc                                   ; $5592: $09
     ld   a, [hl]                                  ; $5593: $7E
     and  a                                        ; $5594: $A7
@@ -3063,7 +3063,7 @@ jr_004_55D8:
     call func_004_6DCA                            ; $55E0: $CD $CA $6D
     call label_3B23                               ; $55E3: $CD $23 $3B
     call label_3B39                               ; $55E6: $CD $39 $3B
-    ld   hl, wEntitiesUnknownTableA               ; $55E9: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $55E9: $21 $A0 $C2
     add  hl, bc                                   ; $55EC: $09
     ld   a, [hl]                                  ; $55ED: $7E
     and  a                                        ; $55EE: $A7
@@ -3712,7 +3712,7 @@ func_004_5AE6:
 
 jr_004_5AF1:
     call label_3B23                               ; $5AF1: $CD $23 $3B
-    ld   hl, wEntitiesUnknownTableA               ; $5AF4: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $5AF4: $21 $A0 $C2
     add  hl, bc                                   ; $5AF7: $09
     ld   a, [hl]                                  ; $5AF8: $7E
     and  a                                        ; $5AF9: $A7
@@ -4426,7 +4426,7 @@ jr_004_5EE5:
     call label_3B2E                               ; $5F12: $CD $2E $3B
     call label_3B4F                               ; $5F15: $CD $4F $3B
     call label_3B70                               ; $5F18: $CD $70 $3B
-    ld   hl, wEntitiesUnknownTableA               ; $5F1B: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $5F1B: $21 $A0 $C2
     add  hl, bc                                   ; $5F1E: $09
     ld   a, [hl]                                  ; $5F1F: $7E
     and  a                                        ; $5F20: $A7
@@ -5203,7 +5203,7 @@ jr_004_63FC:
     ld   [hl], a                                  ; $6401: $77
 
 jr_004_6402:
-    ld   hl, wEntitiesUnknownTableA               ; $6402: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $6402: $21 $A0 $C2
     add  hl, bc                                   ; $6405: $09
     ld   a, [hl]                                  ; $6406: $7E
     and  a                                        ; $6407: $A7
@@ -6747,7 +6747,7 @@ jr_004_6D0E:
 
 label_004_6D0F:
     call label_3B2E                               ; $6D0F: $CD $2E $3B
-    ld   hl, wEntitiesUnknownTableA               ; $6D12: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $6D12: $21 $A0 $C2
     add  hl, bc                                   ; $6D15: $09
     ld   a, [hl]                                  ; $6D16: $7E
     and  a                                        ; $6D17: $A7
@@ -9601,7 +9601,7 @@ func_004_7C98:
     push af                                       ; $7CC0: $F5
     ld   [hl], $01                                ; $7CC1: $36 $01
     call label_3B23                               ; $7CC3: $CD $23 $3B
-    ld   hl, wEntitiesUnknownTableA               ; $7CC6: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $7CC6: $21 $A0 $C2
     add  hl, bc                                   ; $7CC9: $09
     ld   a, [hl]                                  ; $7CCA: $7E
     push af                                       ; $7CCB: $F5
@@ -9612,7 +9612,7 @@ func_004_7C98:
     add  hl, bc                                   ; $7CD5: $09
     ld   [hl], $FF                                ; $7CD6: $36 $FF
     call label_3B23                               ; $7CD8: $CD $23 $3B
-    ld   hl, wEntitiesUnknownTableA               ; $7CDB: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $7CDB: $21 $A0 $C2
     add  hl, bc                                   ; $7CDE: $09
     pop  af                                       ; $7CDF: $F1
     or   [hl]                                     ; $7CE0: $B6
@@ -9865,7 +9865,7 @@ jr_004_7E5D:
     call IsEntityFrameCounterZero                 ; $7E86: $CD $05 $0C
     jr   z, jr_004_7EBA                           ; $7E89: $28 $2F
 
-    ld   hl, wEntitiesUnknownTableA               ; $7E8B: $21 $A0 $C2
+    ld   hl, wEntitiesCollisionsTable               ; $7E8B: $21 $A0 $C2
     add  hl, bc                                   ; $7E8E: $09
     ld   a, [hl]                                  ; $7E8F: $7E
     and  $03                                      ; $7E90: $E6 $03

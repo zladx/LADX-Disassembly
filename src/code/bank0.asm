@@ -7794,7 +7794,7 @@ label_3EC7::
 
 label_3ED1::
     ld   a, e
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     and  [hl]
     jr   z, label_3EDE

@@ -278,7 +278,7 @@ label_C90B::
     ld   [$C165], a
 
 label_C918::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $05
     ld   a, $03
@@ -785,7 +785,7 @@ label_CC77::
     ld   hl, $C3A0
     add  hl, bc
     ld   [hl], $1E
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $05
     jp   label_C86B
@@ -794,7 +794,7 @@ label_CC8C::
     ld   hl, $C480
     add  hl, bc
     ld   [hl], $1F
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $01
     ld   hl, $C340
@@ -830,7 +830,7 @@ data_CCB2::
     jr   nz, label_CCDC
 
 label_CCCD::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, $05
     ld   [hl], a
@@ -1005,7 +1005,7 @@ label_CDD2::
     jr   nz, label_CE04
 
 label_CDEF::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $05
     call IncrementEntityWalkingAttr
@@ -1063,7 +1063,7 @@ label_CE35::
     jr   nc, label_CE72
     ld   a, $01
     ld   [$C3CF], a
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $07
     ld   a, $02
@@ -1083,7 +1083,7 @@ label_CE72::
     ld   a, [hl]
     and  a
     jr   nz, label_CE85
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $05
     ld   hl, $C320
@@ -1726,7 +1726,7 @@ label_D286::
     add  hl, bc
     ld   [hl], a
     call label_F893
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -1765,7 +1765,7 @@ label_D2D4::
     ld   d, b
 
 label_D2D7::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $05
@@ -1911,7 +1911,7 @@ label_D3B6::
     ld   [$C19E], a
     call label_F5A2
     call label_E0B3
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     cp   $02
@@ -3231,7 +3231,7 @@ label_DCEA::
     ld   a, [hl]
     and  a
     jr   nz, label_DD34
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     cp   $05
@@ -3762,7 +3762,7 @@ label_E112::
 label_E120::
     cp   $02
     jr   nz, label_E134
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -4009,7 +4009,7 @@ label_E2AF::
     dec  a
     ld   e, a
     ld   d, b
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -4202,7 +4202,7 @@ label_E3D2::
     ld   [$C111], a
 
 label_E3DB::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $05
     jp   label_CAF
@@ -4342,7 +4342,7 @@ label_E4CA::
     ld   d, $00
 
 label_E4CF::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -6293,7 +6293,7 @@ label_F17A::
     ld   [hl], $01
     ld   a, $11
     ldh  [hSFX], a
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     cp   $01
@@ -6410,7 +6410,7 @@ label_F235::
     ld   hl, $FFF4
     ld   [hl], $12
     call label_F3DB
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $03
     call IsEntityFrameCounterZero
@@ -6432,7 +6432,7 @@ label_F260::
     call label_F3DB
 
 label_F267::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $06
     ld   hl, $C300
@@ -6495,7 +6495,7 @@ label_F2B5::
     jp   nz, label_F3B6
 
 label_F2C2::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $01
     ld   hl, $C430
@@ -6512,7 +6512,7 @@ label_F2D8::
     ld   a, e
     cp   c
     jr   z, label_F2EE
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $05
@@ -6621,7 +6621,7 @@ label_F37E::
     ld   a, [hl]
     and  a
     jr   nz, label_F3AA
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -6974,7 +6974,7 @@ label_F5A6::
     xor  e
     and  $01
     jp   nz, label_F79F
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $05
@@ -7221,7 +7221,7 @@ label_F737::
     jp   label_F79F
 
 label_F751::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     cp   $08
@@ -7325,7 +7325,7 @@ label_F7D9::
     ld   d, $00
 
 label_F7DD::
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $05
@@ -7620,7 +7620,7 @@ label_F9CB::
     ld   hl, $C420
     add  hl, bc
     ld   [hl], $00
-    ld   hl, $C280
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], $02
     ldh  a, [hSwordIntersectedAreaX]

@@ -8,13 +8,13 @@ IntroSeaPaletteTable::
 IntroHandlerEntryPoint::
     ldh  a, [hButtonsInactiveDelay]
     and  a  ; if ButtonsInactiveDelay == 0
-    jr   z, IntroCheckJoypad
+    jr   z, .checkJoypad
     ; ButtonsInactiveDelay != 0
     dec  a
     ldh  [hButtonsInactiveDelay], a
     jp   RenderIntroFrame
 
-IntroCheckJoypad::
+.checkJoypad
     ldh  a, [$FFCC]  ; unknow joypad-related value
     and  $80  ; If not pressing Start
     jp   z, RenderIntroFrame
@@ -51,15 +51,19 @@ IntroCheckJoypad::
     ld   a, $0D
     ld   [wGameplaySubtype], a
     xor  a
-    ld   [wEntitiesTypeTable], a
-    ld   [$C281], a
-    ld   [$C282], a
-    ld   [$C283], a
-    ld   [$C284], a
+    ; Reset entities
+    ld   [wEntity0Type], a
+    ld   [wEntity1Type], a
+    ld   [wEntity2Type], a
+    ld   [wEntity3Type], a
+    ld   [wEntity4Type], a
+
     ld   [rBGP], a
     ld   [wBGPalette], a
+
     ld   a, $10
     ld   [$C17E], a
+
     call ResetIntroTimers
     ld   a, $0D
     ld   [wWorldMusicTrack], a
@@ -188,18 +192,22 @@ label_6F5F::
     ldi  [hl], a
     dec  e
     jr   nz, label_6F5F
-    ld   [wEntitiesTypeTable], a
-    ld   [$C281], a
+
+    ld   [wEntity0Type], a
+    ld   [wEntity1Type], a
     ld   [$C3B0], a
     ld   [$C3B1], a
     ld   [$C3B2], a
     ldh  [$FFED], a
+
+    ; Configure Link's ship entity
     ld   a, $05
-    ld   [$C282], a
+    ld   [wEntity2Type], a
     ld   a, $C0
-    ld   [$C202], a
+    ld   [wEntity2PosX], a
     ld   a, $4E
-    ld   [$C212], a
+    ld   [wEntity2PosY], a
+
     xor  a
     ld   [$C340], a
     ld   [$C341], a
@@ -786,14 +794,15 @@ label_734C::
     ret
 
 label_7355::
+    ; If $C17E != 10…
     ld   a, [$C17E]
     cp   $10
-    jr   c, label_7363
+    jr   c, .return
+
     ld   a, $19
     ldh  [$FFF4], a
     call IncrementGameplaySubtype
-
-label_7363::
+.return
     ret
 
 label_7364::

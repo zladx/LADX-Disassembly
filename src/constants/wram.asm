@@ -346,15 +346,82 @@ wEntity15PosX:: ; C20F
 
 wEntitiesPosYTable:: ; C210
   ; Y position of visible entities
-  ds $10
+
+wEntity0PosY:: ; C210
+  ds $1
+wEntity1PosY:: ; C211
+  ds $1
+wEntity2PosY:: ; C212
+  ds $1
+wEntity3PosY:: ; C213
+  ds $1
+wEntity4PosY:: ; C214
+  ds $1
+wEntity5PosY:: ; C215
+  ds $1
+wEntity6PosY:: ; C216
+  ds $1
+wEntity7PosY:: ; C217
+  ds $1
+wEntity8PosY:: ; C218
+  ds $1
+wEntity9PosY:: ; C219
+  ds $1
+wEntityAPosY:: ; C21A
+  ds $1
+wEntityBPosY:: ; C21B
+  ds $1
+wEntityCPosY:: ; C21C
+  ds $1
+wEntityDPosY:: ; C21D
+  ds $1
+wEntityEPosY:: ; C21E
+  ds $1
+wEntityFPosY:: ; C21F
+  ds $1
 
 ; Unlabeled
 wC220 equ $C220
   ds $60
 
 wEntitiesTypeTable:: ; C280
-  ; type of visible entities
-  ds $10
+  ; Type of visible entities
+  ; 0: entity not present
+  ; 5: Link's ship in intro
+  ; 6: Marin
+
+wEntity0Type:: ; C280
+  ds $1
+wEntity1Type:: ; C281
+  ds $1
+wEntity2Type:: ; C282
+  ds $1
+wEntity3Type:: ; C283
+  ds $1
+wEntity4Type:: ; C284
+  ds $1
+wEntity5Type:: ; C285
+  ds $1
+wEntity6Type:: ; C286
+  ds $1
+wEntity7Type:: ; C287
+  ds $1
+wEntity8Type:: ; C288
+  ds $1
+wEntity9Type:: ; C289
+  ds $1
+wEntityAType:: ; C28A
+  ds $1
+wEntityBType:: ; C28B
+  ds $1
+wEntityCType:: ; C28C
+  ds $1
+wEntityDType:: ; C28D
+  ds $1
+wEntityEType:: ; C28E
+  ds $1
+wEntityFType:: ; C28F
+  ds $1
 
 wEntitiesWalkingTable:: ; C290
   ; Indicate if the designated entity is walking (1) or standing in place (0).

@@ -464,13 +464,13 @@ label_6545::
 
 label_655F::
     ld   a, $7C
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ld   a, $58
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   hl, $C030
     call label_658B
     ld   a, $48
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   de, label_6512
     ld   a, [$DC0F]
     and  a
@@ -489,11 +489,11 @@ label_658B::
     push bc
     ldh  a, [$FF97]
     ld   c, a
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     sub  a, c
     ldh  [$FFE8], a
     ldi  [hl], a
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     ldi  [hl], a
     ld   a, [de]
     inc  de
@@ -501,10 +501,10 @@ label_658B::
     ld   a, [de]
     inc  de
     ldi  [hl], a
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     sub  a, c
     ldi  [hl], a
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, $08
     ldi  [hl], a
     ld   a, [de]
@@ -529,11 +529,11 @@ label_65B2::
     ld   hl, $C530
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   hl, $C540
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ld   hl, $C520
     add  hl, bc
     ld   a, [hl]

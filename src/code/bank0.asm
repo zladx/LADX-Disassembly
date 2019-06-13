@@ -7056,7 +7056,7 @@ LoadEntity::
     ld   hl, $C290
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFF0], a
+    ldh  [hActiveEntityWalking], a
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
@@ -7291,7 +7291,7 @@ label_3BC0::
     add  hl, de
     ld   e, l
     ld   d, h
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
@@ -7300,7 +7300,7 @@ label_3BC0::
     and  $20
     rra
     rra
-    ld   hl, $FFEE
+    ld   hl, wActiveEntityPosX
     add  a, [hl]
     sub  a, c
     ld   [de], a
@@ -7347,7 +7347,7 @@ label_3C08::
 
 label_3C21::
     inc  de
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
@@ -7357,7 +7357,7 @@ label_3C21::
     xor  $20
     rra
     rra
-    ld   hl, $FFEE
+    ld   hl, wActiveEntityPosX
     sub  a, c
     add  a, [hl]
     ld   [de], a
@@ -7423,17 +7423,17 @@ label_3C77::
     ld   b, $00
     ldh  a, [hIsSideScrolling]
     and  a
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     jr   z, label_3C9C
     sub  a, $04
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
 
 label_3C9C::
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
     ld   h, a
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, $04
     sub  a, h
     ld   [de], a
@@ -7507,7 +7507,7 @@ label_3CF6::
     ld   c, a
 
 label_3D06::
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, [hl]
     ld   [de], a
     inc  hl
@@ -7515,7 +7515,7 @@ label_3D06::
     push bc
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, [hl]
     sub  a, c
     ld   [de], a
@@ -7574,11 +7574,11 @@ label_3D57::
     ld   a, [wRoomTransitionState]
     and  a
     jr   z, label_3D7D
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     dec  a
     cp   $C0
     jr   nc, label_3D7C
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     dec  a
     cp   $88
     jr   nc, label_3D7C
@@ -7613,7 +7613,7 @@ label_3D8A::
     ld   hl, $C200
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   hl, $C210
     add  hl, bc
     ld   a, [hl]
@@ -7621,7 +7621,7 @@ label_3D8A::
     ld   hl, $C310
     add  hl, bc
     sub  a, [hl]
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ret
 
 label_3DA0::
@@ -7764,9 +7764,9 @@ label_3E8E::
     xor  c
     and  $03
     ret  nz
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     ldh  [hScratchA], a
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     ldh  [$FFD8], a
     ld   a, $08
     call label_CC7

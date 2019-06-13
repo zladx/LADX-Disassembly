@@ -220,7 +220,19 @@ hActiveEntityType:: ; FFEA
   ds 1
 
 ; Unlabeled
-ds 5
+ds 1
+
+wActiveEntityPosY:: ; FFEC
+  ds 1
+
+; Unlabeled
+ds 1 ; FFED
+
+wActiveEntityPosX:: ; FFEE
+  ds 1
+
+; Unlabeled
+ds 1 ; FFEF
 
 hActiveEntityWalking:: ; FFF0
   ; Is the active entity walking

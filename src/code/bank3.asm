@@ -309,7 +309,7 @@ label_C926::
     ldh  a, [hMapRoom]
     cp   $65
     ret  nz
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     cp   $50
     ret  c
     ld   hl, $C2B0
@@ -400,12 +400,12 @@ label_C99C::
     ldh  [hMusicTrack], a
     ret
     call label_CA12
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     swap a
     and  $01
     add  a, $04
     jp   label_3B0C
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     swap a
     and  $01
     ld   e, a
@@ -900,9 +900,9 @@ label_CD29::
     ld   d, b
     ld   hl, data_CCA4
     add  hl, de
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, [hl]
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ld   a, e
     cp   $03
     jr   nz, label_CD51
@@ -1154,7 +1154,7 @@ label_CED0::
     add  hl, bc
     dec  [hl]
     ret
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     and  $10
     ld   a, $00
     jr   nz, label_CEEC
@@ -1599,7 +1599,7 @@ label_D1C9::
     ldh  a, [$FFEF]
     sub  a, $0F
     ldh  [hSwordIntersectedAreaY], a
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     sub  a, $07
     ldh  [hSwordIntersectedAreaX], a
     swap a
@@ -1777,7 +1777,7 @@ label_D2D7::
     jr   nz, label_D31E
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     sub  a, [hl]
     add  a, $0C
     cp   $18
@@ -1788,7 +1788,7 @@ label_D2D7::
     ld   hl, $C310
     add  hl, de
     sub  a, [hl]
-    ld   hl, $FFEC
+    ld   hl, wActiveEntityPosY
     sub  a, [hl]
     add  a, $0C
     cp   $18
@@ -2482,14 +2482,14 @@ label_D847::
     add  hl, bc
     ld   a, $01
     ld   [hl], a
-    ldh  [$FFF0], a
+    ldh  [hActiveEntityWalking], a
     call IsEntityFrameCounterZero
     ld   [hl], $40
 
 label_D858::
     call label_FFA9
     call label_EE28
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     and  a
     jr   z, label_D8D7
     call IsEntityFrameCounterZero
@@ -2833,7 +2833,7 @@ data_DA4D::
     ldh  a, [hRoomStatus]
     and  $10
     jp   nz, label_3F8D
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     rst  0
     ld   d, d
     ld   e, e
@@ -2974,11 +2974,11 @@ label_DB2B::
     ld   a, $6B
 
 label_DB41::
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ld   a, [wHeartPiecesCount]
     ldh  [$FFF1], a
     ld   a, $8E
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   de, data_DB17
     jp   label_3BC0
     ld   de, data_DA4D
@@ -3037,7 +3037,7 @@ label_DB99::
 
 label_DBAC::
     call label_3C77
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     rst  0
 
 label_DBB2::
@@ -3221,7 +3221,7 @@ label_DCEA::
     add  a, $03
     cp   $06
     jr   nc, label_DD34
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     sub  a, $50
     add  a, $03
     cp   $06
@@ -3424,7 +3424,7 @@ label_DEAE::
     call label_394D
     ld   de, data_DD83
     call label_3BC0
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     rst  0
     push de
     ld   e, [hl]
@@ -3945,7 +3945,7 @@ label_E243::
     ld   a, [$C178]
     and  a
     jr   z, label_E29C
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, $08
     ld   hl, $C179
     sub  a, [hl]
@@ -4504,7 +4504,7 @@ label_E614::
     jr   label_E64A
 
 label_E625::
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     ld   hl, hLinkPositionX
     sub  a, [hl]
     add  a, $18
@@ -4571,7 +4571,7 @@ label_E68C::
     call label_3BC0
     call label_FF78
     ret
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, $10
     cp   $A0
     jp   nc, label_3F8D
@@ -4643,7 +4643,7 @@ label_E706::
     jp   label_EB43
 
 label_E711::
-    ld   hl, $FFEC
+    ld   hl, wActiveEntityPosY
     inc  [hl]
     inc  [hl]
     ld   de, data_E52E
@@ -4934,7 +4934,7 @@ label_E8F8::
     push bc
     ld   hl, data_E8E6
     add  hl, de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, [hl]
     sub  a, $08
     and  $F0
@@ -4943,7 +4943,7 @@ label_E8F8::
     ld   c, a
     ld   hl, data_E8EF
     add  hl, de
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
 
 label_E90F::
     add  a, [hl]
@@ -5099,7 +5099,7 @@ label_EA2E::
     jp   label_EAD7
     ld   hl, $C14D
     inc  [hl]
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     and  a
     jr   nz, label_EA70
     call IsEntityFrameCounterZero
@@ -5162,14 +5162,14 @@ label_EA96::
     ldh  [$FFF1], a
     ld   hl, data_EA68
     add  hl, de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, [hl]
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   hl, data_EA6C
     add  hl, de
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, [hl]
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ld   de, data_EA66
     call label_3C77
     call label_3D8A
@@ -5375,13 +5375,13 @@ label_EBDE::
     ldh  a, [$FFA2]
     and  a
     jr   nz, label_EC5A
-    ld   hl, $FFEE
+    ld   hl, wActiveEntityPosX
     ldh  a, [hLinkPositionX]
     sub  a, [hl]
     add  a, $06
     cp   $0C
     jr   nc, label_EC5A
-    ld   hl, $FFEC
+    ld   hl, wActiveEntityPosY
     ldh  a, [hLinkPositionY]
     sub  a, [hl]
     add  a, $06
@@ -5418,7 +5418,7 @@ label_EBDE::
 
 label_EC36::
     ldh  [$FFD8], a
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     ldh  [hScratchA], a
     ld   a, $05
     jp   label_CC7
@@ -5476,7 +5476,7 @@ label_EC77::
     ld   hl, $D580
     add  hl, bc
     pop  bc
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, [hl]
     push hl
     ld   hl, hLinkPositionX
@@ -5498,7 +5498,7 @@ label_EC98::
     cp   e
     jp   nc, label_ECCB
     inc  hl
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, [hl]
     push hl
     ld   hl, hLinkPositionY
@@ -5629,7 +5629,7 @@ label_ED5D::
     ldh  a, [$FFEB]
     cp   $E4
     jr   nz, label_ED73
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     cp   $04
     jr   nz, label_ED73
     call IncrementEntityWalkingAttr
@@ -5778,7 +5778,7 @@ label_EE4B::
     ld   a, [hl]
     and  a
     jp   nz, label_F3E6
-    ld   de, $FFEE
+    ld   de, wActiveEntityPosX
     push bc
     sla  c
     sla  c
@@ -5807,7 +5807,7 @@ label_EE6E::
     jp   nc, label_F3E6
     inc  hl
     push hl
-    ld   de, $FFEC
+    ld   de, wActiveEntityPosY
     pop  hl
     ld   a, [de]
     add  a, [hl]
@@ -5858,7 +5858,7 @@ label_EE8E::
 label_EED1::
     cp   $55
     jr   nz, label_EEF7
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     cp   $02
     jp   nz, label_EF93
     ld   hl, $C240
@@ -6249,9 +6249,9 @@ label_F10D::
     call label_EFCC
 
 label_F13B::
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     ldh  [hScratchA], a
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     ldh  [$FFD8], a
     jp   label_D15
 
@@ -6710,7 +6710,7 @@ label_F3E7::
     ldh  a, [hLinkDirection]
     cp   [hl]
     jp   z, label_F4E1
-    ld   de, $FFEE
+    ld   de, wActiveEntityPosX
     ld   hl, $D5C0
     ld   a, [de]
     add  a, [hl]
@@ -6733,7 +6733,7 @@ label_F422::
     cp   e
     jp   nc, label_F4E1
     inc  hl
-    ld   de, $FFEC
+    ld   de, wActiveEntityPosY
     ld   a, [de]
     add  a, [hl]
     push hl
@@ -6856,7 +6856,7 @@ label_F4EC::
     ldh  a, [hLinkPositionY]
     add  a, $08
     ldh  [$FFD9], a
-    ld   de, $FFEE
+    ld   de, wActiveEntityPosX
     ld   hl, $D5C0
     ld   a, [de]
     add  a, [hl]
@@ -6879,7 +6879,7 @@ label_F511::
     cp   e
     jr   nc, label_F570
     inc  hl
-    ld   de, $FFEC
+    ld   de, wActiveEntityPosY
     ld   a, [de]
     add  a, [hl]
     push hl
@@ -6986,7 +6986,7 @@ label_F5A6::
     jp   nz, label_F79F
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     sub  a, [hl]
     add  a, $0C
     cp   $18
@@ -6997,7 +6997,7 @@ label_F5A6::
     ld   hl, $C310
     add  hl, de
     sub  a, [hl]
-    ld   hl, $FFEC
+    ld   hl, wActiveEntityPosY
     sub  a, [hl]
     add  a, $0C
     cp   $18
@@ -7262,7 +7262,7 @@ label_F782::
     ldh  a, [$FFEB]
     cp   $00
     jr   nz, label_F795
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     and  a
     jr   nz, label_F798
 
@@ -7288,7 +7288,7 @@ label_F7A7::
     ldh  a, [$FFEB]
     cp   $00
     jr   nz, label_F7B8
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     and  a
     jr   z, label_F7B8
     call IsEntityFrameCounterZero
@@ -7342,7 +7342,7 @@ label_F7DD::
     jr   nz, label_F834
     ld   hl, $C200
     add  hl, de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     sub  a, [hl]
     add  a, $18
     cp   $30
@@ -7353,7 +7353,7 @@ label_F7DD::
     ld   hl, $C310
     add  hl, de
     sub  a, [hl]
-    ld   hl, $FFEC
+    ld   hl, wActiveEntityPosY
     sub  a, [hl]
     add  a, $18
     cp   $30
@@ -7690,7 +7690,7 @@ label_FA47::
     jr   nz, label_FA5D
     ld   hl, $C200
     add  hl, bc
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     ld   [hl], a
 
 label_FA5D::
@@ -8235,7 +8235,7 @@ label_FDE3::
 label_FDF3::
     ld   hl, $C200
     add  hl, bc
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     ld   [hl], a
     ld   hl, $C210
     add  hl, bc

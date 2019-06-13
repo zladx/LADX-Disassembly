@@ -2201,11 +2201,11 @@ label_5CA3::
     ld   hl, label_5C41
     add  hl, de
     ld   a, [hl]
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   hl, label_5C45
     add  hl, de
     ld   a, [hl]
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ld   a, [$C1B0]
     rla
     rla
@@ -2236,10 +2236,10 @@ label_5CBD::
     jr   nc, label_5D13
     ldh  [$FFF1], a
     ld   de, $C030
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     ld   [de], a
     inc  de
     ldh  a, [$FFF1]
@@ -2257,10 +2257,10 @@ label_5CBD::
     ld   a, [hli]
     ld   [de], a
     inc  de
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, $08
     ld   [de], a
     inc  de
@@ -3456,12 +3456,12 @@ label_6A7C::
     ldh  [$FFED], a
     ldh  [$FFF5], a
     ld   a, $38
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   a, [wScreenShakeVertical]
     ld   e, a
     ld   a, $20
     sub  a, e
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ld   a, [$D214]
     and  a
     jr   z, label_6AC2
@@ -3492,13 +3492,13 @@ label_6AAE::
 
 label_6AC2::
     ld   a, $48
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   a, [wScreenShakeVertical]
     ld   e, a
     ld   a, [$D211]
     add  a, $20
     sub  a, e
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ld   a, [$D213]
     ld   e, a
     ld   d, $00

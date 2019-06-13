@@ -1066,17 +1066,17 @@ RenderIntroEntities::
     and  a
     jr   z, .continue ; If no entity at this table index, continue
 
-    ; $FFEE = wEntitiesPosXTable[c]
+    ; wActiveEntityPosX = wEntitiesPosXTable[c]
     ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEE], a ; EntityOffsetX?
+    ldh  [wActiveEntityPosX], a
 
-    ; $FFEC = wEntitiesPosYTable[c]
+    ; wActiveEntityPosY = wEntitiesPosYTable[c]
     ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEC], a ; EntityOffsetY?
+    ldh  [wActiveEntityPosY], a
 
     ; $FFF1 = wEntitiesUnknownTableG[c]
     ld   hl, wEntitiesUnknownTableG
@@ -1084,11 +1084,11 @@ RenderIntroEntities::
     ld   a, [hl]
     ldh  [$FFF1], a
 
-    ; $FFF0 = wEntitiesWalkingTable[c]
+    ; hActiveEntityWalking = wEntitiesWalkingTable[c]
     ld   hl, wEntitiesWalkingTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFF0], a
+    ldh  [hActiveEntityWalking], a
     call RenderIntroEntity
 
 .continue
@@ -1157,7 +1157,7 @@ RenderIntroShip::
     ld   hl, ShipHeaveTable
     add  hl, de
     ld   a, [hl]
-    ld   hl, $FFEC
+    ld   hl, wActiveEntityPosY
     add  a, [hl]
     ld   [hl], a
     ld   hl, data_7538
@@ -1166,12 +1166,12 @@ RenderIntroShip::
     ld   c, $06
 
 .loop
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, [hl]
     inc  hl
     ld   [de], a
     inc  de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -1192,12 +1192,12 @@ RenderIntroShip::
     ld   de, $C018
     ld   c, $04
 .loop2
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, [hl]
     inc  hl
     ld   [de], a
     inc  de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -1276,7 +1276,7 @@ RenderIntroMarin::
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     JP_TABLE
 ._0 dw label_7681
 ._1 dw label_76AB
@@ -1292,7 +1292,7 @@ label_7681::
     rra
     and  $01
     call label_3B0C
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     cp   $48
     jr   nc, label_769C
     call IsEntityFrameCounterZero
@@ -1614,11 +1614,11 @@ label_7920::
 
 label_7929::
     ld   a, $78
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   hl, $D018
     ld   a, $59
     add  a, [hl]
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ldh  a, [hIsGBC]
     and  a
     jr   nz, label_795D
@@ -1800,7 +1800,7 @@ label_7A27::
     ld   d, $00
 
 RenderIntroInertLink::
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     cp   $F0
     jr   nc, label_7A47
     xor  a
@@ -1814,7 +1814,7 @@ label_7A36::
     ld   [$C3C0], a
 
 label_7A47::
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     JP_TABLE
     dw $7a52
     dw $7a5e

@@ -34,6 +34,7 @@ jr_002_41FA:
     pop  bc                                       ; $41FA: $C1
     ret                                           ; $41FB: $C9
 
+UseOcarina::
     ld   hl, $C146                                ; $41FC: $21 $46 $C1
     ld   a, [wC166]                               ; $41FF: $FA $66 $C1
     or   [hl]                                     ; $4202: $B6

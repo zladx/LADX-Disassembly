@@ -1793,8 +1793,7 @@ ItemFunction::
     cp   $0A
     jp   z, UseRocksFeather
     cp   $09
-    ; Ocarina
-    jp   z, $41FC
+    jp   z, UseOcarina
     cp   $0C
     jp   z, UseMagicPowder
     cp   $0B

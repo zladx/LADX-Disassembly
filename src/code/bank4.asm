@@ -45,7 +45,7 @@
     ld   [hl], $08                                ; $4044: $36 $08
     call label_3E34                               ; $4046: $CD $34 $3E
     ld   a, $29                                   ; $4049: $3E $29
-    ldh  [hFFF4], a                               ; $404B: $E0 $F4
+    ldh  [hNextSFX], a                            ; $404B: $E0 $F4
     ret                                           ; $404D: $C9
 
 jr_004_404E:
@@ -711,7 +711,7 @@ jr_004_4438:
     add  hl, bc                                   ; $4480: $09
     ld   [hl], $10                                ; $4481: $36 $10
     ld   a, $28                                   ; $4483: $3E $28
-    ldh  [hFFF4], a                               ; $4485: $E0 $F4
+    ldh  [hNextSFX], a                            ; $4485: $E0 $F4
 
 jr_004_4487:
     ld   hl, $C300                                ; $4487: $21 $00 $C3
@@ -940,7 +940,7 @@ jr_004_45A6:
     call label_3BAA                               ; $45E8: $CD $AA $3B
     pop  bc                                       ; $45EB: $C1
     ld   a, $28                                   ; $45EC: $3E $28
-    ldh  [hFFF4], a                               ; $45EE: $E0 $F4
+    ldh  [hNextSFX], a                            ; $45EE: $E0 $F4
 
 jr_004_45F0:
     ret                                           ; $45F0: $C9
@@ -1600,11 +1600,11 @@ func_004_4B52:
     db   $10                                      ; $4B5C: $10
     inc  c                                        ; $4B5D: $0C
     ld   b, $02                                   ; $4B5E: $06 $02
-    ldh  a, [hFFF4]                               ; $4B60: $F0 $F4
+    ldh  a, [hNextSFX]                            ; $4B60: $F0 $F4
     ld   a, [$10FE]                               ; $4B62: $FA $FE $10
     inc  c                                        ; $4B65: $0C
     ld   b, $02                                   ; $4B66: $06 $02
-    ldh  a, [hFFF4]                               ; $4B68: $F0 $F4
+    ldh  a, [hNextSFX]                            ; $4B68: $F0 $F4
     ld   a, [$02FE]                               ; $4B6A: $FA $FE $02
     ld   b, $0C                                   ; $4B6D: $06 $0C
     db   $10                                      ; $4B6F: $10
@@ -1860,7 +1860,7 @@ jr_004_4E83:
     inc  c                                        ; $4E95: $0C
     nop                                           ; $4E96: $00
     db   $f4                                      ; $4E97: $F4
-    ldh  a, [hFFF4]                               ; $4E98: $F0 $F4
+    ldh  a, [hNextSFX]                            ; $4E98: $F0 $F4
     nop                                           ; $4E9A: $00
     inc  c                                        ; $4E9B: $0C
     nop                                           ; $4E9C: $00
@@ -1869,7 +1869,7 @@ jr_004_4E83:
     inc  c                                        ; $4E9F: $0C
     nop                                           ; $4EA0: $00
     db   $f4                                      ; $4EA1: $F4
-    ldh  a, [hFFF4]                               ; $4EA2: $F0 $F4
+    ldh  a, [hNextSFX]                            ; $4EA2: $F0 $F4
     ld   a, $18                                   ; $4EA4: $3E $18
     call func_004_4B37                            ; $4EA6: $CD $37 $4B
     call label_3B39                               ; $4EA9: $CD $39 $3B
@@ -3347,7 +3347,7 @@ jr_004_5777:
     ld   hl, $C310                                ; $5784: $21 $10 $C3
     add  hl, de                                   ; $5787: $19
     ld   [hl], a                                  ; $5788: $77
-    ld   hl, hFFF4                                ; $5789: $21 $F4 $FF
+    ld   hl, hNextSFX                             ; $5789: $21 $F4 $FF
     ld   [hl], $1A                                ; $578C: $36 $1A
     jp   label_004_6D7A                           ; $578E: $C3 $7A $6D
 
@@ -3385,7 +3385,7 @@ jr_004_57B8:
 
     ld   [hl], b                                  ; $57C1: $70
     ld   a, $1B                                   ; $57C2: $3E $1B
-    ldh  [hFFF4], a                               ; $57C4: $E0 $F4
+    ldh  [hNextSFX], a                            ; $57C4: $E0 $F4
 
 func_004_57C6:
 jr_004_57C6:
@@ -3603,7 +3603,7 @@ label_004_5A05:
     ld   a, $02                                   ; $5A10: $3E $02
     call label_CC7                                ; $5A12: $CD $C7 $0C
     ld   a, $13                                   ; $5A15: $3E $13
-    ldh  [hFFF4], a                               ; $5A17: $E0 $F4
+    ldh  [hNextSFX], a                            ; $5A17: $E0 $F4
     ret                                           ; $5A19: $C9
 
 func_004_5A1A:
@@ -6036,7 +6036,7 @@ label_004_68E4:
     jr   nz, jr_004_68FC                          ; $68F6: $20 $04
 
     ld   a, $1F                                   ; $68F8: $3E $1F
-    ldh  [hFFF4], a                               ; $68FA: $E0 $F4
+    ldh  [hNextSFX], a                            ; $68FA: $E0 $F4
 
 jr_004_68FC:
     ret                                           ; $68FC: $C9
@@ -6656,7 +6656,7 @@ label_004_6C20:
     jr   c, jr_004_6CB3                           ; $6C84: $38 $2D
 
     ld   a, $08                                   ; $6C86: $3E $08
-    ldh  [hFFF4], a                               ; $6C88: $E0 $F4
+    ldh  [hNextSFX], a                            ; $6C88: $E0 $F4
     ldh  a, [hScratchA]                               ; $6C8A: $F0 $D7
     ld   hl, wEntity0PosX                         ; $6C8C: $21 $00 $C2
     add  hl, de                                   ; $6C8F: $19
@@ -7476,7 +7476,7 @@ label_004_7104:
 func_004_7107:
 label_004_7107:
     ld   a, $20                                   ; $7107: $3E $20
-    ldh  [hFFF4], a                               ; $7109: $E0 $F4
+    ldh  [hNextSFX], a                            ; $7109: $E0 $F4
 
 jr_004_710B:
     ret                                           ; $710B: $C9
@@ -7539,7 +7539,7 @@ func_004_7160:
 label_004_7160:
 jr_004_7160:
     ld   a, $21                                   ; $7160: $3E $21
-    ldh  [hFFF4], a                               ; $7162: $E0 $F4
+    ldh  [hNextSFX], a                            ; $7162: $E0 $F4
 
 jr_004_7164:
     ret                                           ; $7164: $C9
@@ -9291,7 +9291,7 @@ jr_004_7ACA:
     ld   a, $CA                                   ; $7AF3: $3E $CA
     call label_3B86                               ; $7AF5: $CD $86 $3B
     ld   a, $26                                   ; $7AF8: $3E $26
-    ldh  [hFFF4], a                               ; $7AFA: $E0 $F4
+    ldh  [hNextSFX], a                            ; $7AFA: $E0 $F4
     ldh  a, [hScratchA]                               ; $7AFC: $F0 $D7
     ld   hl, wEntity0PosX                         ; $7AFE: $21 $00 $C2
     add  hl, de                                   ; $7B01: $19

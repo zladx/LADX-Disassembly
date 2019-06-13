@@ -761,7 +761,7 @@ label_C3A::
     ret
 
 label_C4B::
-    ld   hl, $FFF4
+    ld   hl, hNextSFX
     ld   [hl], $0C
 
 label_C50::
@@ -817,7 +817,7 @@ ApplyMapFadeOutTransition::
 
 label_C9A::
     ld   a, $06
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
 
 label_C9E::
     ; Prevent Link from moving during the transition
@@ -1818,7 +1818,7 @@ UseShield::
     and  a
     ret  nz
     ld   a, $16
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ret
 
 UseShovel::
@@ -1829,16 +1829,17 @@ UseShovel::
 
 label_1300::
     call $4D20
-    jr   nc, label_130B
+    jr   nc, .notPoking
+
     ld   a, JINGLE_SWORD_POKING
     ldh  [hJingle], a
-    jr   label_130F
+    jr   .endIf
 
-label_130B::
+.notPoking
     ld   a, $0E
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
+.endIf
 
-label_130F::
     ld   a, $01
     ld   [$C1C7], a
     xor  a
@@ -1976,7 +1977,7 @@ ShootArrow::
 
 label_1401::
     ld   a, $0A
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ld   a, $06
 
 label_1407::
@@ -2156,8 +2157,8 @@ label_1508::
 label_1523::
     ret
 
-data_1524::
-    db   2, $14, $15, $18
+SwordRandomSfxTable::
+    db   SFX_SWORD_A, SFX_SWORD_B, SFX_SWORD_C, SFX_SWORD_D
 
 UseSword::
     ld   a, [$C16D]
@@ -2174,14 +2175,17 @@ label_1535::
     xor  a
     ld   [$C160], a
     ld   [$C1AC], a
+
+    ; Play a random SFX
     call GetRandomByte
     and  $03
     ld   e, a
     ld   d, $00
-    ld   hl, data_1524
+    ld   hl, SwordRandomSfxTable
     add  hl, de
     ld   a, [hl]
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
+
     call label_157C
     ld   a, [$C146]
     and  a
@@ -2453,7 +2457,7 @@ label_16F8::
     ld   a, $17
 
 label_16FA::
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ret
 
 data_16FD::
@@ -2525,7 +2529,7 @@ label_1756::
     cp   $05
     jr   z, label_1781
     ld   a, $07
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ldh  a, [hLinkPositionY]
     add  a, $06
     ldh  [$FFD8], a
@@ -2604,7 +2608,7 @@ label_17DB::
     call label_142F
     jr   c, label_1814
     ld   a, $0D
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     callsw label_002_538B
 
 label_1814::

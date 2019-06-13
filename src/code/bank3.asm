@@ -800,7 +800,7 @@ label_CC8C::
     ld   hl, $C340
     add  hl, bc
     ld   [hl], $04
-    ld   hl, $FFF4
+    ld   hl, hNextSFX
     ld   [hl], $13
     ret
 
@@ -1378,7 +1378,7 @@ label_D068::
     ld   a, $2A
     ld   [$C111], a
     ld   a, $04
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ld   de, data_D04F
     ldh  a, [$FFFE]
     and  a
@@ -1567,7 +1567,7 @@ label_D16E::
 
 label_D198::
     ld   a, $11
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ld   de, data_D166
     ld   b, $C6
     ldh  a, [hMapRoom]
@@ -1929,7 +1929,7 @@ label_D3B6::
     call label_D438
 
 label_D3E4::
-    ld   hl, $FFF4
+    ld   hl, hNextSFX
     ld   [hl], $05
     ld   e, $1F
     ldh  a, [$FFF1]
@@ -2084,7 +2084,7 @@ label_D56F::
     ldh  [hSFX], a
 
 label_D594::
-    ld   hl, $FFF4
+    ld   hl, hNextSFX
     ld   [hl], $13
 
 label_D599::
@@ -3077,7 +3077,7 @@ label_DBE1::
     ld   a, $20
     ld   [$C121], a
     ld   a, $03
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     jp   IncrementEntityWalkingAttr
     call IsEntityFrameCounterZero
     ret  nz
@@ -3357,7 +3357,7 @@ label_DE29::
     and  a
     jr   nz, label_DE45
     ld   a, $2C
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     xor  a
 
 label_DE45::
@@ -3756,7 +3756,7 @@ label_E112::
     cp   $30
     jr   nz, label_E120
     ld   a, $17
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     jr   label_E134
 
 label_E120::
@@ -5086,7 +5086,7 @@ label_E9F8::
     ld   a, $08
     call label_CC7
     ld   a, $13
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
 
 label_EA1D::
     ret
@@ -6098,7 +6098,7 @@ label_F018::
     ld   [$C16A], a
     ld   [$C121], a
     ld   a, $1C
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     jp   label_ECD5
 
 label_F042::
@@ -6407,7 +6407,7 @@ label_F235::
     jr   c, label_F2B5
     cp   $FE
     jr   nz, label_F260
-    ld   hl, $FFF4
+    ld   hl, hNextSFX
     ld   [hl], $12
     call label_F3DB
     ld   hl, wEntitiesTypeTable
@@ -8089,7 +8089,7 @@ label_FCFD::
     jr   z, label_FD6B
     push hl
     ld   a, $12
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ld   a, $08
     call label_E4CA
     jr   c, label_FD6A

@@ -561,7 +561,7 @@ label_71C7::
     cp   $A0
     jr   nz, label_71DB
     ld   a, $0F
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     xor  a
 
 label_71DB::
@@ -800,7 +800,7 @@ label_7355::
     jr   c, .return
 
     ld   a, $19
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     call IncrementGameplaySubtype
 .return
     ret

@@ -37,7 +37,11 @@ JINGLE_MANBO_WARP       equ $2C
 JINGLE_ENNEMY_SHRIEK    equ $3C
 
 ; Values for hSfx
+SFX_SWORD_A         equ $02
 SFX_RUPEE           equ $05
 SFX_TYPEWRITER      equ $0F
 SFX_BOSS_AGONY      equ $10
+SFX_SWORD_B         equ $14
+SFX_SWORD_C         equ $15
+SFX_SWORD_D         equ $18
 SFX_HOOT            equ $19

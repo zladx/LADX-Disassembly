@@ -232,7 +232,11 @@ hSFX:: ; FFF3
   ; See SFX_* constants for possible values
   ds 1
 
-hFFF4: ds 1
+hNextSFX:: ; FFF4
+  ; Play audio effect next
+  ; See SFX_* constants for possible values
+  ds 1
+
 hFFF5: ds 1
 
 hMapRoom:: ; FFF6

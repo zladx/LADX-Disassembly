@@ -242,6 +242,7 @@ IntroShipOnSeaHandler::
     ld   a, [wIntroSubTimer]
     and  a
     jr   z, label_7014
+
     inc  a
     ld   [wIntroSubTimer], a ; Increment subtimer
     cp   $18
@@ -292,10 +293,11 @@ label_7013::
     ret
 
 label_7014::
+    ; If IntroShipPosX == $50…
     ld   a, [wIntroShipPosX]
     cp   $50
-    jr   nz, label_7031
-    ; If IntroShipPosX == $50
+    jr   nz, .transitionEnd
+
     ; Transition to next sequence
     ld   a, $FF
     ld   [rBGP], a
@@ -308,8 +310,8 @@ label_7014::
     xor  a
     ldh  [hBaseScrollX], a
     ret
+.transitionEnd
 
-label_7031::
     call label_7D01
     ldh  a, [hFrameCounter]
     and  $07

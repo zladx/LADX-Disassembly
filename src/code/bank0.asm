@@ -7013,22 +7013,31 @@ label_39E3::
     ld   b, $00
     ld   c, $0F
 
-label_39F2::
+.loop
+    ; Write active entity index to $C123
     ld   a, c
     ld   [$C123], a
+
+    ; Read entity type
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
+
+    ; If type != 0…
     and  a
-    jr   z, label_3A03
+    jr   z, .loadEntityEnd
+
+    ; load the entity.
     ldh  [hActiveEntityType], a
     call LoadEntity
+.loadEntityEnd
 
-label_3A03::
+    ; While c >= 0, loop
     dec  c
     ld   a, c
     cp   $FF
-    jr   nz, label_39F2
+    jr   nz, .loop
+
     ret
 
 label_3A0A::

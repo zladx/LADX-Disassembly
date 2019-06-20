@@ -48,7 +48,7 @@ label_43B8::
     add  hl, de
 
 label_43C5::
-    ld   de, $DBCC
+    ld   de, wHasDungeonMap
     ld   c, $05
 
 label_43CA::
@@ -242,7 +242,7 @@ label_44F5::
     ret
 
 GameplayWorldSubtype4Handler::
-    call label_3E3F
+    call LoadHeartsAndRuppeesCount
     call IncrementGameplaySubtype
     ret
 

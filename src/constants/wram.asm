@@ -65,8 +65,9 @@ wIsUsingSpinAttack:: ; C121
 wSwordCharge:: ; C122
   ds 1
 
-; Unlabeled
-ds 1 ; C123
+wLinkWalkingFrameCount:: ; C123
+  ; Number of frames during which Link has been walking continuously
+  ds 1
 
 ; See ROOM_TRANSITION_* constants for possible values.
 wRoomTransitionState:: ; C124
@@ -295,73 +296,130 @@ wEntitiesPosXTable:: ; C200
 
 wEntity0PosX:: ; C200
   ds $1
-
 wEntity1PosX:: ; C201
   ds $1
-
 wEntity2PosX:: ; C202
-
 wIntroShipPosX:: ; C202
   ; Position of the ship sprite during the intro sequence
   ds $1
-
 wEntity3PosX:: ; C203
   ds $1
-
 wEntity4PosX:: ; C204
   ds $1
-
 wEntity5PosX:: ; C205
   ds $1
-
 wEntity6PosX:: ; C206
   ds $1
-
 wEntity7PosX:: ; C207
   ds $1
-
 wEntity8PosX:: ; C208
   ds $1
-
 wEntity9PosX:: ; C209
   ds $1
-
 wEntity10PosX:: ; C20A
   ds $1
-
 wEntity11PosX:: ; C20B
   ds $1
-
 wEntity12PosX:: ; C20C
   ds $1
-
 wEntity13PosX:: ; C20D
   ds $1
-
 wEntity14PosX:: ; C20E
   ds $1
-
 wEntity15PosX:: ; C20F
   ds $1
 
 wEntitiesPosYTable:: ; C210
   ; Y position of visible entities
-  ds $10
+
+wEntity0PosY:: ; C210
+  ds $1
+wEntity1PosY:: ; C211
+  ds $1
+wEntity2PosY:: ; C212
+  ds $1
+wEntity3PosY:: ; C213
+  ds $1
+wEntity4PosY:: ; C214
+  ds $1
+wEntity5PosY:: ; C215
+  ds $1
+wEntity6PosY:: ; C216
+  ds $1
+wEntity7PosY:: ; C217
+  ds $1
+wEntity8PosY:: ; C218
+  ds $1
+wEntity9PosY:: ; C219
+  ds $1
+wEntityAPosY:: ; C21A
+  ds $1
+wEntityBPosY:: ; C21B
+  ds $1
+wEntityCPosY:: ; C21C
+  ds $1
+wEntityDPosY:: ; C21D
+  ds $1
+wEntityEPosY:: ; C21E
+  ds $1
+wEntityFPosY:: ; C21F
+  ds $1
 
 ; Unlabeled
 wC220 equ $C220
   ds $60
 
 wEntitiesTypeTable:: ; C280
-  ; type of visible entities
-  ds $10
+  ; Type of visible entities
+  ; 0: entity not present
+  ; 5: Link's ship in intro
+  ; 6: Marin
+
+wEntity0Type:: ; C280
+  ds $1
+wEntity1Type:: ; C281
+  ds $1
+wEntity2Type:: ; C282
+  ds $1
+wEntity3Type:: ; C283
+  ds $1
+wEntity4Type:: ; C284
+  ds $1
+wEntity5Type:: ; C285
+  ds $1
+wEntity6Type:: ; C286
+  ds $1
+wEntity7Type:: ; C287
+  ds $1
+wEntity8Type:: ; C288
+  ds $1
+wEntity9Type:: ; C289
+  ds $1
+wEntityAType:: ; C28A
+  ds $1
+wEntityBType:: ; C28B
+  ds $1
+wEntityCType:: ; C28C
+  ds $1
+wEntityDType:: ; C28D
+  ds $1
+wEntityEType:: ; C28E
+  ds $1
+wEntityFType:: ; C28F
+  ds $1
 
 wEntitiesWalkingTable:: ; C290
   ; Indicate if the designated entity is walking (1) or standing in place (0).
   ; e.g. Mabe village dog has 1 when jumping around, and 0 when standing in place moving the tail.
   ds $10
 
-wEntitiesUnknownTableA:: ; C2A0
+wEntitiesCollisionsTable:: ; C2A0
+  ; Indicates if the entity is collisioning
+  ; 0: no collisions
+  ; 1: collision on the right
+  ; 2: collision on the left
+  ; 3: collision on the bottom
+  ; 4: collision on the top
   ds $10
 
 wEntitiesUnknownTableB:: ; C2B0
@@ -388,7 +446,9 @@ wDroppedItem:: ; C3AF
   ; Status of one of the items that can be dropped by cutting herbs
   ds 1
 
-; Unlabeled
+wEntitiesUnknownTableG:: ; C3B0
+  ; Entity custom state?
+
 ds $1B
 
 wObjectAffectingBGPalette:: ; C3CB

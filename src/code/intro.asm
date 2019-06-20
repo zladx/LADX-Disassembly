@@ -8,13 +8,13 @@ IntroSeaPaletteTable::
 IntroHandlerEntryPoint::
     ldh  a, [hButtonsInactiveDelay]
     and  a  ; if ButtonsInactiveDelay == 0
-    jr   z, IntroCheckJoypad
+    jr   z, .checkJoypad
     ; ButtonsInactiveDelay != 0
     dec  a
     ldh  [hButtonsInactiveDelay], a
     jp   RenderIntroFrame
 
-IntroCheckJoypad::
+.checkJoypad
     ldh  a, [$FFCC]  ; unknow joypad-related value
     and  $80  ; If not pressing Start
     jp   z, RenderIntroFrame
@@ -51,15 +51,19 @@ IntroCheckJoypad::
     ld   a, $0D
     ld   [wGameplaySubtype], a
     xor  a
-    ld   [wEntitiesTypeTable], a
-    ld   [$C281], a
-    ld   [$C282], a
-    ld   [$C283], a
-    ld   [$C284], a
+    ; Reset entities
+    ld   [wEntity0Type], a
+    ld   [wEntity1Type], a
+    ld   [wEntity2Type], a
+    ld   [wEntity3Type], a
+    ld   [wEntity4Type], a
+
     ld   [rBGP], a
     ld   [wBGPalette], a
+
     ld   a, $10
     ld   [$C17E], a
+
     call ResetIntroTimers
     ld   a, $0D
     ld   [wWorldMusicTrack], a
@@ -90,7 +94,7 @@ RenderIntroFrame::
     ld   a, [wGameplaySubtype]
     cp   GAMEPLAY_INTRO_SEA
     jr   c, IntroSceneJumpTable
-    cp   $05
+    cp   GAMEPLAY_INTRO_LIGHTNING
     jr   nc, IntroSceneJumpTable
     ; Check $D000 counter value
     ld   a, [$D000]
@@ -114,9 +118,9 @@ label_6EC6::
 IntroSceneJumpTable::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-._0 dw label_6EF8
-._1 dw label_6F2A
-._2 dw label_6F36
+._0 dw IntroSceneStage0Handler
+._1 dw IntroSceneStage1Handler
+._2 dw IntroSceneStage2Handler
 ._3 dw IntroShipOnSeaHandler
 ._4 dw IntroLinkFaceHandler
 ._5 dw label_711A ; transition?
@@ -129,7 +133,7 @@ IntroSceneJumpTable::
 ._C dw $743A
 ._D dw label_7448
 
-label_6EF8::
+IntroSceneStage0Handler::
     call ClearLowerAndMiddleWRAM
     call label_27F2
     ld   a, $01
@@ -152,15 +156,16 @@ label_6EF8::
     ld   [$D017], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_6F2A::
+IntroSceneStage1Handler::
     ld   a, $10
     ld   [wTileMapToLoad], a
     xor  a
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_6F36::
+IntroSceneStage2Handler::
     call label_7D01
+
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_6F42
@@ -188,18 +193,22 @@ label_6F5F::
     ldi  [hl], a
     dec  e
     jr   nz, label_6F5F
-    ld   [wEntitiesTypeTable], a
-    ld   [$C281], a
+
+    ld   [wEntity0Type], a
+    ld   [wEntity1Type], a
     ld   [$C3B0], a
     ld   [$C3B1], a
     ld   [$C3B2], a
     ldh  [$FFED], a
+
+    ; Configure Link's ship entity
     ld   a, $05
-    ld   [$C282], a
+    ld   [wEntity2Type], a
     ld   a, $C0
-    ld   [$C202], a
+    ld   [wEntity2PosX], a
     ld   a, $4E
-    ld   [$C212], a
+    ld   [wEntity2PosY], a
+
     xor  a
     ld   [$C340], a
     ld   [$C341], a
@@ -233,6 +242,7 @@ IntroShipOnSeaHandler::
     ld   a, [wIntroSubTimer]
     and  a
     jr   z, label_7014
+
     inc  a
     ld   [wIntroSubTimer], a ; Increment subtimer
     cp   $18
@@ -283,10 +293,11 @@ label_7013::
     ret
 
 label_7014::
+    ; If IntroShipPosX == $50…
     ld   a, [wIntroShipPosX]
     cp   $50
-    jr   nz, label_7031
-    ; If IntroShipPosX == $50
+    jr   nz, .transitionEnd
+
     ; Transition to next sequence
     ld   a, $FF
     ld   [rBGP], a
@@ -299,8 +310,8 @@ label_7014::
     xor  a
     ldh  [hBaseScrollX], a
     ret
+.transitionEnd
 
-label_7031::
     call label_7D01
     ldh  a, [hFrameCounter]
     and  $07
@@ -553,7 +564,7 @@ label_71C7::
     cp   $A0
     jr   nz, label_71DB
     ld   a, $0F
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     xor  a
 
 label_71DB::
@@ -786,14 +797,15 @@ label_734C::
     ret
 
 label_7355::
+    ; If $C17E != 10…
     ld   a, [$C17E]
     cp   $10
-    jr   c, label_7363
-    ld   a, $19
-    ldh  [$FFF4], a
-    call IncrementGameplaySubtype
+    jr   c, .return
 
-label_7363::
+    ld   a, $19
+    ldh  [hNextSFX], a
+    call IncrementGameplaySubtype
+.return
     ret
 
 label_7364::
@@ -1042,31 +1054,43 @@ RenderIntroEntities::
     ld   [$C3C0], a
     ld   c, $02  ; Entities count
     ld   b, $00
+
 .loop
     ld   a, c
-    ld   [$C123], a
+    ld   [wLinkWalkingFrameCount], a
+
+    ; a = EntityType[c]
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
     jr   z, .continue ; If no entity at this table index, continue
+
+    ; wActiveEntityPosX = wEntitiesPosXTable[c]
     ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEE], a ; EntityOffsetX?
+    ldh  [wActiveEntityPosX], a
+
+    ; wActiveEntityPosY = wEntitiesPosYTable[c]
     ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEC], a ; EntityOffsetY?
-    ld   hl, $C3B0
+    ldh  [wActiveEntityPosY], a
+
+    ; $FFF1 = wEntitiesUnknownTableG[c]
+    ld   hl, wEntitiesUnknownTableG
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFF1], a
-    ld   hl, $C290
+
+    ; hActiveEntityWalking = wEntitiesWalkingTable[c]
+    ld   hl, wEntitiesWalkingTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFF0], a
+    ldh  [hActiveEntityWalking], a
     call RenderIntroEntity
+
 .continue
     dec  c
     ld   a, c
@@ -1077,9 +1101,11 @@ RenderIntroEntities::
 ; Inputs:
 ;   bc: index of entity in entities table
 RenderIntroEntity::
+    ; a = wEntitiesTypeTable[bc]
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
+
     cp   ENTITY_INTRO_SHIP
     jr   z, RenderIntroShip
     cp   ENTITY_INTRO_MARIN
@@ -1133,7 +1159,7 @@ RenderIntroShip::
     ld   hl, ShipHeaveTable
     add  hl, de
     ld   a, [hl]
-    ld   hl, $FFEC
+    ld   hl, wActiveEntityPosY
     add  a, [hl]
     ld   [hl], a
     ld   hl, data_7538
@@ -1142,12 +1168,12 @@ RenderIntroShip::
     ld   c, $06
 
 .loop
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, [hl]
     inc  hl
     ld   [de], a
     inc  de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -1168,12 +1194,12 @@ RenderIntroShip::
     ld   de, $C018
     ld   c, $04
 .loop2
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, [hl]
     inc  hl
     ld   [de], a
     inc  de
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -1240,19 +1266,21 @@ label_7640::
     ld   [$C3C0], a
     ret
 
-label_764F::
+data_764F::
     db 0, 3, 2, 3, 4, 3, 6, 3, 8, 3, $A, 3, $C, 3, $E, 3
 
 RenderIntroMarin::
     call label_71C7
     xor  a
     ld   [$C340], a
-    ld   de, label_764F
+    ld   de, data_764F
     call label_3BC0
+
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
+
     JP_TABLE
 ._0 dw label_7681
 ._1 dw label_76AB
@@ -1268,7 +1296,7 @@ label_7681::
     rra
     and  $01
     call label_3B0C
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     cp   $48
     jr   nc, label_769C
     call IsEntityFrameCounterZero
@@ -1590,11 +1618,11 @@ label_7920::
 
 label_7929::
     ld   a, $78
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   hl, $D018
     ld   a, $59
     add  a, [hl]
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ldh  a, [hIsGBC]
     and  a
     jr   nz, label_795D
@@ -1767,7 +1795,7 @@ label_7A1F::
     pop  bc
     ret
 
-label_7A27::
+data_7A27::
     stop
     ld   [de], a
     nop
@@ -1776,21 +1804,21 @@ label_7A27::
     ld   d, $00
 
 RenderIntroInertLink::
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     cp   $F0
     jr   nc, label_7A47
     xor  a
 
 label_7A36::
     ld   [$C340], a
-    ld   de, label_7A27
+    ld   de, data_7A27
     call label_3BC0
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a
 
 label_7A47::
-    ldh  a, [$FFF0]
+    ldh  a, [hActiveEntityWalking]
     JP_TABLE
     dw $7a52
     dw $7a5e

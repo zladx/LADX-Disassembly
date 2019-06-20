@@ -653,7 +653,7 @@ label_BB5::
     ld   de, $D000
     jp   CopyData
     push af
-    call LoadBank0CTiles
+    call LoadBaseTiles
     jp   RestoreStackedBankAndReturn
     ld   a, [$D16A]
     ld   [MBC3SelectBank], a
@@ -761,7 +761,7 @@ label_C3A::
     ret
 
 label_C4B::
-    ld   hl, $FFF4
+    ld   hl, hNextSFX
     ld   [hl], $0C
 
 label_C50::
@@ -817,7 +817,7 @@ ApplyMapFadeOutTransition::
 
 label_C9A::
     ld   a, $06
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
 
 label_C9E::
     ; Prevent Link from moving during the transition
@@ -1793,8 +1793,7 @@ ItemFunction::
     cp   $0A
     jp   z, UseRocksFeather
     cp   $09
-    ; Ocarina
-    jp   z, $41FC
+    jp   z, UseOcarina
     cp   $0C
     jp   z, UseMagicPowder
     cp   $0B
@@ -1819,7 +1818,7 @@ UseShield::
     and  a
     ret  nz
     ld   a, $16
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ret
 
 UseShovel::
@@ -1830,16 +1829,17 @@ UseShovel::
 
 label_1300::
     call $4D20
-    jr   nc, label_130B
+    jr   nc, .notPoking
+
     ld   a, JINGLE_SWORD_POKING
     ldh  [hJingle], a
-    jr   label_130F
+    jr   .endIf
 
-label_130B::
+.notPoking
     ld   a, $0E
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
+.endIf
 
-label_130F::
     ld   a, $01
     ld   [$C1C7], a
     xor  a
@@ -1977,7 +1977,7 @@ ShootArrow::
 
 label_1401::
     ld   a, $0A
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ld   a, $06
 
 label_1407::
@@ -2133,7 +2133,7 @@ label_14F8::
     ldh  [hLinkPositionYIncrement], a
     xor  a
     ldh  [$FFA3], a
-    call label_21A8
+    call UpdateFinalLinkPosition
     jpsw CheckPositionForMapTransition
 
 label_1508::
@@ -2157,8 +2157,8 @@ label_1508::
 label_1523::
     ret
 
-data_1524::
-    db   2, $14, $15, $18
+SwordRandomSfxTable::
+    db   SFX_SWORD_A, SFX_SWORD_B, SFX_SWORD_C, SFX_SWORD_D
 
 UseSword::
     ld   a, [$C16D]
@@ -2175,14 +2175,17 @@ label_1535::
     xor  a
     ld   [$C160], a
     ld   [$C1AC], a
+
+    ; Play a random SFX
     call GetRandomByte
     and  $03
     ld   e, a
     ld   d, $00
-    ld   hl, data_1524
+    ld   hl, SwordRandomSfxTable
     add  hl, de
     ld   a, [hl]
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
+
     call label_157C
     ld   a, [$C146]
     and  a
@@ -2215,10 +2218,9 @@ label_157C::
     add  hl, de
     ld   a, [hl]
     cp   $0F
-    jr   z, label_158E
+    jr   z, .return
     ldh  [hLinkDirection], a
-
-label_158E::
+.return
     ret
 
 SwordCollisionMapX::
@@ -2455,7 +2457,7 @@ label_16F8::
     ld   a, $17
 
 label_16FA::
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ret
 
 data_16FD::
@@ -2527,7 +2529,7 @@ label_1756::
     cp   $05
     jr   z, label_1781
     ld   a, $07
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     ldh  a, [hLinkPositionY]
     add  a, $06
     ldh  [$FFD8], a
@@ -2606,7 +2608,7 @@ label_17DB::
     call label_142F
     jr   c, label_1814
     ld   a, $0D
-    ldh  [$FFF4], a
+    ldh  [hNextSFX], a
     callsw label_002_538B
 
 label_1814::
@@ -3618,20 +3620,29 @@ label_2183::
 label_21A7::
     ret
 
-label_21A8::
+UpdateFinalLinkPosition::
+    ; If inventory is appearing, return
     ld   a, [wInventoryAppearing]
     and  a
     ret  nz
+
+    ; Compute next Link vertical position
     ld   c, $01
-    call label_21B6
+    call ComputeLinkPosition
+    ; Compute next Link horizontal position
     ld   c, $00
     ldh  [hScratchA], a
 
-label_21B6::
+; Inputs:
+;   c : direction (0: horizontal ; 1: vertical)
+ComputeLinkPosition::
+    ; b = 0
     ld   b, $00
+    ; a = [hLinkPositionXIncrement + direction]
     ld   hl, hLinkPositionXIncrement
     add  hl, bc
     ld   a, [hl]
+
     push af
     swap a
     and  $F0
@@ -3639,16 +3650,19 @@ label_21B6::
     add  hl, bc
     add  a, [hl]
     ld   [hl], a
+
     rl   d
+    ; hl = [hLinkPositionX + direction]
     ld   hl, hLinkPositionX
     add  hl, bc
+
     pop  af
     ld   e, $00
     bit  7, a
-    jr   z, label_21D7
+    jr   z, .label_21D7
     ld   e, $F0
+.label_21D7
 
-label_21D7::
     swap a
     and  $0F
     or   e
@@ -3656,6 +3670,8 @@ label_21D7::
     adc  a, [hl]
     ld   [hl], a
     ret
+
+func_21E1::
     ldh  a, [$FFA3]
     push af
     swap a
@@ -3668,10 +3684,9 @@ label_21D7::
     pop  af
     ld   e, $00
     bit  7, a
-    jr   z, label_21FB
+    jr   z, .label_21FB
     ld   e, $F0
-
-label_21FB::
+.label_21FB
     swap a
     and  $0F
     or   e
@@ -3994,7 +4009,7 @@ ReadJoypadState::
     ; Ignore joypad during map transitions
     ld   a, [wRoomTransitionState]
     and  a
-    jr   nz, ReadJoypadState_return
+    jr   nz, .return
 
     ld   a, [wGameplayType]
     cp   GAMEPLAY_WORLD
@@ -4003,7 +4018,7 @@ ReadJoypadState::
     cp   GAMEPLAY_WORLD_DEFAULT
     jr   nz, .notWorld
     ld   a, [wLinkMotionState]
-    cp   $07
+    cp   LINK_MOTION_PASS_OUT
     jr   nz, .linkNotPassingOut
     ldh  a, [$FF9C]
     cp   $04
@@ -4055,7 +4070,7 @@ ReadJoypadState::
     ld   a, $30
     ld   [rP1], a
 
-ReadJoypadState_return
+.return
     ret
 
 label_2887::
@@ -4395,81 +4410,94 @@ label_2BC1::
     pop  bc
     ret
 
-; Load tiles from bank $0C to Tiles Map
-LoadBank0CTiles::
+; Load the basic tiles (Link's character, items icons) to tile memory
+LoadBaseTiles::
     ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
-    ld   a, $0C
+    ld   a, BANK(LinkCharacterTiles)
     call SwitchAdjustedBank
-    ; Copy $400 bytes from the first tile sheet to Tiles map 0
-    ld   hl, $4000
+    ; Copy $400 bytes from the link's tile sheet to Tiles map 0
+    ld   hl, LinkCharacterTiles
     ld   de, vTiles0
     ld   bc, $0400
     call CopyData
 
     ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
-    ld   a, $0C
+    ld   a, BANK(Items2Tiles)
     call SwitchAdjustedBank
-    ; Copy $1000 bytes from the second tile sheet to Tiles Map 1
-    ld   hl, $4800
+    ; Copy $1000 bytes from the items tile sheet to Tiles Map 1
+    ld   hl, Items2Tiles
     ld   de, vTiles1
     ld   bc, $1000
     call CopyData
 
-    ; Copy $20 bytes from $47A0 to a portion of Tiles Map 1 ($8E00)
-    ld   hl, $47A0
+    ; Copy two tiles from the times tile sheet to a portion of Tiles Map 1
+    ld   hl, Items1Tiles + $3A0
     ld   de, vTiles1 + $600
     ld   bc, $0020
     call CopyData
 
-    ; Select bank 1
+    ; Swtich back to bank 1
     ld   a, $01
     call SwitchBank
     ret
 
-    call LoadBank0CTiles
-    ld   a, $0F
+LoadInventoryTiles::
+    call LoadBaseTiles
+
+    ; Select the tiles sheet bank ($0F on DMG, $2F on GBC)
+    ld   a, BANK(MenuTiles)
     call SwitchAdjustedBank
-    ld   hl, $4000
-    ld   de, $8800
+    ; Copy $400 bytes from the menu tile sheet to Tiles Map 1
+    ld   hl, MenuTiles
+    ld   de, vTiles1
     ld   bc, $0400
     call CopyData
-    ld   a, $0F
-    call SwitchAdjustedBank
-    ld   hl, $5000
-    ld   de, $9000
-    ld   bc, $0800
-    jp   CopyData
 
-label_2C28::
+    ; Select the tiles sheet bank ($0F on DMG, $2F on GBC)
+    ld   a, BANK(FontTiles)
+    call SwitchAdjustedBank
+    ; Copy $800 bytes from the menu tile sheet to Tiles Map 2
+    ld   hl, FontTiles
+    ld   de, vTiles2
+    ld   bc, $0800
+    jp   CopyData ; tail-call
+
+LoadDungeonTiles::
+    ; Switch to bank $20
     ld   a, $20
     call SwitchBank
     ld   hl, $4589
+    ; e = [hMapId]
     ldh  a, [hMapId]
     ld   e, a
     ld   d, $00
-    cp   $FF
-    jr   nz, label_2C53
+    ; If inside the Color Dungeon…
+    cp   MAP_COLOR_DUNGEON
+    jr   nz, .notColorDungeon
+    ; … switch to bank $35
     ld   a, $35
     ld   [MBC3SelectBank], a
+    ; … and copy Color Dungeon tiles to Tiles Map 2
     ld   hl, $6200
-    ld   de, $9000
+    ld   de, vTiles2
     ld   bc, $0100
     call CopyData
+
     ld   e, $00
     ld   d, e
     ld   hl, $6000
     push de
-    jr   label_2C5D
+    jr   .endIf
 
-label_2C53::
+.notColorDungeon
     push de
     add  hl, de
     ld   h, [hl]
     ld   l, $00
     ld   a, $0D
     call SwitchAdjustedBank
+.endIf
 
-label_2C5D::
     ld   de, $9100
     ld   bc, $0100
     call CopyData
@@ -4479,6 +4507,7 @@ label_2C5D::
     ld   de, $9200
     ld   bc, $0600
     call CopyData
+
     ld   a, $20
     ld   [MBC3SelectBank], a
     pop  de
@@ -4486,10 +4515,10 @@ label_2C5D::
     ld   hl, $45A9
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2C8A
+    jr   nz, .colorDungeonEnd
     ld   hl, $45C9
+.colorDungeonEnd
 
-label_2C8A::
     add  hl, de
     ld   h, [hl]
     ld   l, $00
@@ -4497,6 +4526,7 @@ label_2C8A::
     ld   de, $9200
     ld   bc, $0200
     call CopyData
+
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4504,7 +4534,8 @@ label_2C8A::
     ld   de, $DCC0
     ld   bc, $0040
     call CopyData
-    call label_2D50
+
+    call func_2D50
     ld   a, $20
     ld   [MBC3SelectBank], a
     pop  de
@@ -4512,16 +4543,18 @@ label_2C8A::
     add  hl, de
     ld   h, [hl]
     ld   l, $00
+
     ld   a, $12
     call SwitchAdjustedBank
+
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2CD1
+    jr   nz, .colorDungeonEnd2
     ld   hl, $6100
     ld   a, $35
     ld   [MBC3SelectBank], a
+.colorDungeonEnd2
 
-label_2CD1::
     ld   de, $8F00
     ld   bc, $0100
     call CopyData
@@ -4567,39 +4600,45 @@ label_2D17::
 label_2D21::
     ld   a, [wTradeSequenceItem]
     cp   $02
-    jr   c, label_2D2C
+    jr   c, .return
     ld   a, $0D
     ldh  [$FFA5], a
 
-label_2D2C::
+.return
     ret
+
+func_2D2D::
     ld   a, $0C
     call SwitchAdjustedBank
     ld   hl, $5200
-    ld   de, $9200
+    ld   de, vTiles2 + $200
     ld   bc, $0600
     call CopyData
+    ; Load keys tiles
     ld   hl, $4C00
     ld   de, $8C00
     ld   bc, $0400
     call CopyData
-    call label_2D50
+    call func_2D50
     jp   label_2CFE
 
-label_2D50::
+func_2D50::
     xor  a
     ldh  [hAnimatedTilesFrameCount], a
     ldh  [hAnimatedTilesDataOffset], a
     call AnimateTiles.jumpTable
-    ld   a, $0C
+
+    ld   a, BANK(Items2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $4800
-    ld   de, $8800
+
+    ld   hl, Items2Tiles
+    ld   de, vTiles1
     ld   bc, $0800
     call CopyData
+
     ld   hl, $4200
-    ld   de, $8200
+    ld   de, vTiles0 + $200
     ld   bc, $0100
     call CopyData
     ret
@@ -4676,6 +4715,7 @@ label_2DE0::
     ld   de, $8200
     ld   bc, $0100
     jp   CopyData
+
     ld   hl, $7000
     jr   label_2E13
     ld   hl, $7800
@@ -4688,6 +4728,7 @@ label_2E13::
     ld   de, $9000
     ld   bc, $0800
     jp   CopyData
+
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4699,6 +4740,7 @@ label_2E13::
     ld   de, $9000
     ld   bc, $0400
     jp   CopyData
+
     ld   a, $10
     call SwitchAdjustedBank
     ld   hl, $6700
@@ -4709,6 +4751,7 @@ label_2E13::
     ld   de, $9000
     ld   bc, $0600
     jp   CopyData
+
     ld   a, $0F
     call SwitchBank
     ld   hl, $4400
@@ -6970,22 +7013,31 @@ label_39E3::
     ld   b, $00
     ld   c, $0F
 
-label_39F2::
+.loop
+    ; Write active entity index to wLinkWalkingFrameCount
     ld   a, c
-    ld   [$C123], a
+    ld   [wLinkWalkingFrameCount], a
+
+    ; Read entity type
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
-    and  a
-    jr   z, label_3A03
-    ldh  [hEntityType], a
-    call LoadEntity
 
-label_3A03::
+    ; If type != 0…
+    and  a
+    jr   z, .loadEntityEnd
+
+    ; load the entity.
+    ldh  [hActiveEntityType], a
+    call LoadEntity
+.loadEntityEnd
+
+    ; While c >= 0, loop
     dec  c
     ld   a, c
     cp   $FF
-    jr   nz, label_39F2
+    jr   nz, .loop
+
     ret
 
 label_3A0A::
@@ -7004,7 +7056,7 @@ LoadEntity::
     ld   hl, $C290
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFF0], a
+    ldh  [hActiveEntityWalking], a
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
@@ -7020,7 +7072,7 @@ LoadEntity::
     jr   nz, label_3A46
 
 label_3A40::
-    ldh  a, [hEntityType]
+    ldh  a, [hActiveEntityType]
     cp   $07
     jr   nz, label_3A4E
 
@@ -7041,7 +7093,7 @@ label_3A54::
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [hEntityType]
+    ldh  a, [hActiveEntityType]
     cp   $05
     jp   z, label_3A8D
     ; Jump table on FFEA value.
@@ -7226,11 +7278,13 @@ label_3BB5::
     call $7E45
     jp   ReloadSavedBank
 
+; Render active NPC
 label_3BC0::
     ldh  a, [$FFF1]
     inc  a
     ret  z
-    call label_3D57
+
+    call AdjustEntityPositionDuringRoomTransition
     push de
     ld   a, [$C3C0]
     ld   e, a
@@ -7239,7 +7293,7 @@ label_3BC0::
     add  hl, de
     ld   e, l
     ld   d, h
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
@@ -7248,7 +7302,7 @@ label_3BC0::
     and  $20
     rra
     rra
-    ld   hl, $FFEE
+    ld   hl, wActiveEntityPosX
     add  a, [hl]
     sub  a, c
     ld   [de], a
@@ -7295,7 +7349,7 @@ label_3C08::
 
 label_3C21::
     inc  de
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
@@ -7305,7 +7359,7 @@ label_3C21::
     xor  $20
     rra
     rra
-    ld   hl, $FFEE
+    ld   hl, wActiveEntityPosX
     sub  a, c
     add  a, [hl]
     ld   [de], a
@@ -7342,7 +7396,7 @@ label_3C4B::
     ld   [de], a
 
 label_3C63::
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   b, $00
     ld   a, $15
@@ -7357,7 +7411,7 @@ label_3C77::
     ldh  a, [$FFF1]
     inc  a
     ret  z
-    call label_3D57
+    call AdjustEntityPositionDuringRoomTransition
     push de
     ld   a, [$C3C0]
     ld   l, a
@@ -7366,22 +7420,22 @@ label_3C77::
     add  hl, bc
     ld   e, l
     ld   d, h
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   b, $00
     ldh  a, [hIsSideScrolling]
     and  a
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     jr   z, label_3C9C
     sub  a, $04
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
 
 label_3C9C::
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
     ld   h, a
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, $04
     sub  a, h
     ld   [de], a
@@ -7448,14 +7502,14 @@ label_3CF6::
     pop  hl
     ld   a, c
     ldh  [hScratchA], a
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
-    call label_3D57
+    call AdjustEntityPositionDuringRoomTransition
     ldh  a, [hScratchA]
     ld   c, a
 
 label_3D06::
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     add  a, [hl]
     ld   [de], a
     inc  hl
@@ -7463,7 +7517,7 @@ label_3D06::
     push bc
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     add  a, [hl]
     sub  a, c
     ld   [de], a
@@ -7505,7 +7559,7 @@ label_3D3F::
     inc  de
     dec  c
     jr   nz, label_3D06
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   a, $15
     ld   [MBC3SelectBank], a
@@ -7513,38 +7567,53 @@ label_3D3F::
     jp   ReloadSavedBank
 
 label_3D52::
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ret
 
-label_3D57::
+; Adjusts NPC position during room transition
+; Inputs:
+;  c:   ???
+; Returns:
+;  a:   ???
+AdjustEntityPositionDuringRoomTransition::
+    ; If a room transition is active…
     push hl
     ld   a, [wRoomTransitionState]
     and  a
-    jr   z, label_3D7D
-    ldh  a, [$FFEE]
+    jr   z, .popAndReturn
+
+    ; and wActiveEntityPosX - 1 is still on screen…
+    ldh  a, [wActiveEntityPosX]
     dec  a
     cp   $C0
-    jr   nc, label_3D7C
-    ldh  a, [$FFEC]
+    jr   nc, .popTwiceAndReturn
+
+    ; and wActiveEntityPosY - 1 is still on screen…
+    ldh  a, [wActiveEntityPosY]
     dec  a
     cp   $88
-    jr   nc, label_3D7C
+    jr   nc, .popTwiceAndReturn
+
+    ; and $C220[c] == 0…
     ld   hl, $C220
     add  hl, bc
     ld   a, [hl]
     and  a
-    jr   nz, label_3D7C
+    jr   nz, .popTwiceAndReturn
+
+    ; and (a = $C230[c]) == 0…
     ld   hl, $C230
     add  hl, bc
     ld   a, [hl]
     and  a
-    jr   z, label_3D7D
+    ; return a
+    jr   z, .popAndReturn
 
-label_3D7C::
+.popTwiceAndReturn
     pop  af
 
-label_3D7D::
+.popAndReturn
     pop  hl
     ret
 
@@ -7561,7 +7630,7 @@ label_3D8A::
     ld   hl, $C200
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEE], a
+    ldh  [wActiveEntityPosX], a
     ld   hl, $C210
     add  hl, bc
     ld   a, [hl]
@@ -7569,7 +7638,7 @@ label_3D8A::
     ld   hl, $C310
     add  hl, bc
     sub  a, [hl]
-    ldh  [$FFEC], a
+    ldh  [wActiveEntityPosY], a
     ret
 
 label_3DA0::
@@ -7657,11 +7726,11 @@ label_3E34::
     call $5407
     jp   ReloadSavedBank
 
-label_3E3F::
+LoadHeartsAndRuppeesCount::
     ld   hl, MBC3SelectBank
-    ld   [hl], $02
-    call $62CE
-    call $6414
+    ld   [hl], BANK(LoadRupeesDigits)
+    call LoadRupeesDigits
+    call LoadHeartsCount
     jp   ReloadSavedBank
 
 label_3E4D::
@@ -7712,9 +7781,9 @@ label_3E8E::
     xor  c
     and  $03
     ret  nz
-    ldh  a, [$FFEE]
+    ldh  a, [wActiveEntityPosX]
     ldh  [hScratchA], a
-    ldh  a, [$FFEC]
+    ldh  a, [wActiveEntityPosY]
     ldh  [$FFD8], a
     ld   a, $08
     call label_CC7
@@ -7751,7 +7820,7 @@ label_3EC7::
 
 label_3ED1::
     ld   a, e
-    ld   hl, $C2A0
+    ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     and  [hl]
     jr   z, label_3EDE

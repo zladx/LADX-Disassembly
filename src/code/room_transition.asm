@@ -57,7 +57,7 @@ ApplyRoomTransition::
     ldh  [hLinkPositionYIncrement], a             ; $7908: $E0 $9B
 
     push bc                                       ; $790A: $C5
-    call label_21A8                               ; $790B: $CD $A8 $21
+    call UpdateFinalLinkPosition                               ; $790B: $CD $A8 $21
     pop  bc                                       ; $790E: $C1
 
     ; hBaseScrollX += RoomTransitionXIncrement[wRoomTransitionDirection]
@@ -837,5 +837,5 @@ jr_002_7C8B:
     add  hl, de                                   ; $7C97: $19
     ld   a, [hl]                                  ; $7C98: $7E
     ldh  [hLinkPositionYIncrement], a             ; $7C99: $E0 $9B
-    call label_21A8                               ; $7C9B: $CD $A8 $21
+    call UpdateFinalLinkPosition                               ; $7C9B: $CD $A8 $21
     jp   CheckForLedgeJump                        ; $7C9E: $C3 $45 $6E

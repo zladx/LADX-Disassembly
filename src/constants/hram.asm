@@ -216,11 +216,32 @@ hFFE9:: ; FFE9
 ; 5: do nothing
 ; 6-9: unknown
 ; See wEntitiesTypeTable
-hEntityType:: ; FFEA
+hActiveEntityType:: ; FFEA
   ds 1
 
 ; Unlabeled
-ds 7
+ds 1
+
+wActiveEntityPosY:: ; FFEC
+  ds 1
+
+; Unlabeled
+ds 1 ; FFED
+
+wActiveEntityPosX:: ; FFEE
+  ds 1
+
+; Unlabeled
+ds 1 ; FFEF
+
+hActiveEntityWalking:: ; FFF0
+  ; Is the active entity walking
+  ; See wEntitiesWalkingTable
+  ds 1
+
+hActiveEntityUnknownG:: ; FFF1
+  ; See wEntitiesUnknownTableG
+  ds 1
 
 hJingle:: ; FFF2
   ; Play a jingle immediately
@@ -232,7 +253,11 @@ hSFX:: ; FFF3
   ; See SFX_* constants for possible values
   ds 1
 
-hFFF4: ds 1
+hNextSFX:: ; FFF4
+  ; Play audio effect next
+  ; See SFX_* constants for possible values
+  ds 1
+
 hFFF5: ds 1
 
 hMapRoom:: ; FFF6

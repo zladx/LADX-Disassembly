@@ -1101,9 +1101,11 @@ RenderIntroEntities::
 ; Inputs:
 ;   bc: index of entity in entities table
 RenderIntroEntity::
+    ; a = wEntitiesTypeTable[bc]
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
+
     cp   ENTITY_INTRO_SHIP
     jr   z, RenderIntroShip
     cp   ENTITY_INTRO_MARIN
@@ -1264,19 +1266,21 @@ label_7640::
     ld   [$C3C0], a
     ret
 
-label_764F::
+data_764F::
     db 0, 3, 2, 3, 4, 3, 6, 3, 8, 3, $A, 3, $C, 3, $E, 3
 
 RenderIntroMarin::
     call label_71C7
     xor  a
     ld   [$C340], a
-    ld   de, label_764F
+    ld   de, data_764F
     call label_3BC0
+
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a
     ldh  a, [hActiveEntityWalking]
+
     JP_TABLE
 ._0 dw label_7681
 ._1 dw label_76AB
@@ -1791,7 +1795,7 @@ label_7A1F::
     pop  bc
     ret
 
-label_7A27::
+data_7A27::
     stop
     ld   [de], a
     nop
@@ -1807,7 +1811,7 @@ RenderIntroInertLink::
 
 label_7A36::
     ld   [$C340], a
-    ld   de, label_7A27
+    ld   de, data_7A27
     call label_3BC0
     ld   a, [$C3C0]
     add  a, $08

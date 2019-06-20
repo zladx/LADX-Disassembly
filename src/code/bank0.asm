@@ -7278,11 +7278,13 @@ label_3BB5::
     call $7E45
     jp   ReloadSavedBank
 
+; Render active NPC
 label_3BC0::
     ldh  a, [$FFF1]
     inc  a
     ret  z
-    call label_3D57
+
+    call AdjustEntityPositionDuringRoomTransition
     push de
     ld   a, [$C3C0]
     ld   e, a
@@ -7409,7 +7411,7 @@ label_3C77::
     ldh  a, [$FFF1]
     inc  a
     ret  z
-    call label_3D57
+    call AdjustEntityPositionDuringRoomTransition
     push de
     ld   a, [$C3C0]
     ld   l, a
@@ -7502,7 +7504,7 @@ label_3CF6::
     ldh  [hScratchA], a
     ld   a, [$C123]
     ld   c, a
-    call label_3D57
+    call AdjustEntityPositionDuringRoomTransition
     ldh  a, [hScratchA]
     ld   c, a
 
@@ -7569,34 +7571,49 @@ label_3D52::
     ld   c, a
     ret
 
-label_3D57::
+; Adjusts NPC position during room transition
+; Inputs:
+;  c:   ???
+; Returns:
+;  a:   ???
+AdjustEntityPositionDuringRoomTransition::
+    ; If a room transition is active…
     push hl
     ld   a, [wRoomTransitionState]
     and  a
-    jr   z, label_3D7D
+    jr   z, .popAndReturn
+
+    ; and wActiveEntityPosX - 1 is still on screen…
     ldh  a, [wActiveEntityPosX]
     dec  a
     cp   $C0
-    jr   nc, label_3D7C
+    jr   nc, .popTwiceAndReturn
+
+    ; and wActiveEntityPosY - 1 is still on screen…
     ldh  a, [wActiveEntityPosY]
     dec  a
     cp   $88
-    jr   nc, label_3D7C
+    jr   nc, .popTwiceAndReturn
+
+    ; and $C220[c] == 0…
     ld   hl, $C220
     add  hl, bc
     ld   a, [hl]
     and  a
-    jr   nz, label_3D7C
+    jr   nz, .popTwiceAndReturn
+
+    ; and (a = $C230[c]) == 0…
     ld   hl, $C230
     add  hl, bc
     ld   a, [hl]
     and  a
-    jr   z, label_3D7D
+    ; return a
+    jr   z, .popAndReturn
 
-label_3D7C::
+.popTwiceAndReturn
     pop  af
 
-label_3D7D::
+.popAndReturn
     pop  hl
     ret
 

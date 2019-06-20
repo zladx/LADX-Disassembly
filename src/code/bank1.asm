@@ -2182,7 +2182,7 @@ label_5C7B::
     ld   a, $08
     ld   [$C340], a
     ld   a, $00
-    ld   [$C123], a
+    ld   [wLinkWalkingFrameCount], a
     ldh  [$FFED], a
     ld   e, $00
     ld   a, [$C1B4]

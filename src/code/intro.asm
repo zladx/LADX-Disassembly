@@ -1057,7 +1057,7 @@ RenderIntroEntities::
 
 .loop
     ld   a, c
-    ld   [$C123], a
+    ld   [wLinkWalkingFrameCount], a
 
     ; a = EntityType[c]
     ld   hl, wEntitiesTypeTable

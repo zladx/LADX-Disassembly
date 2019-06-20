@@ -7014,9 +7014,9 @@ label_39E3::
     ld   c, $0F
 
 .loop
-    ; Write active entity index to $C123
+    ; Write active entity index to wLinkWalkingFrameCount
     ld   a, c
-    ld   [$C123], a
+    ld   [wLinkWalkingFrameCount], a
 
     ; Read entity type
     ld   hl, wEntitiesTypeTable
@@ -7396,7 +7396,7 @@ label_3C4B::
     ld   [de], a
 
 label_3C63::
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   b, $00
     ld   a, $15
@@ -7420,7 +7420,7 @@ label_3C77::
     add  hl, bc
     ld   e, l
     ld   d, h
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   b, $00
     ldh  a, [hIsSideScrolling]
@@ -7502,7 +7502,7 @@ label_3CF6::
     pop  hl
     ld   a, c
     ldh  [hScratchA], a
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     call AdjustEntityPositionDuringRoomTransition
     ldh  a, [hScratchA]
@@ -7559,7 +7559,7 @@ label_3D3F::
     inc  de
     dec  c
     jr   nz, label_3D06
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   a, $15
     ld   [MBC3SelectBank], a
@@ -7567,7 +7567,7 @@ label_3D3F::
     jp   ReloadSavedBank
 
 label_3D52::
-    ld   a, [$C123]
+    ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ret
 

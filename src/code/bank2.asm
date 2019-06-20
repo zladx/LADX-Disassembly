@@ -3046,7 +3046,7 @@ jr_002_54E4:
 
 jr_002_54E8:
     ld   a, c                                     ; $54E8: $79
-    ld   [$C123], a                               ; $54E9: $EA $23 $C1
+    ld   [wLinkWalkingFrameCount], a                               ; $54E9: $EA $23 $C1
     ld   hl, $C510                                ; $54EC: $21 $10 $C5
     add  hl, bc                                   ; $54EF: $09
     ld   a, [hl]                                  ; $54F0: $7E
@@ -3814,7 +3814,7 @@ jr_002_5904:
     jr   c, jr_002_5925                           ; $5910: $38 $13
 
     ldh  a, [hFrameCounter]                       ; $5912: $F0 $E7
-    ld   hl, $C123                                ; $5914: $21 $23 $C1
+    ld   hl, wLinkWalkingFrameCount                                ; $5914: $21 $23 $C1
     add  [hl]                                     ; $5917: $86
     and  $07                                      ; $5918: $E6 $07
     ld   e, a                                     ; $591A: $5F

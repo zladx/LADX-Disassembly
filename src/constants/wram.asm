@@ -65,8 +65,9 @@ wIsUsingSpinAttack:: ; C121
 wSwordCharge:: ; C122
   ds 1
 
-; Unlabeled
-ds 1 ; C123
+wLinkWalkingFrameCount:: ; C123
+  ; Number of frames during which Link has been walking continuously
+  ds 1
 
 ; See ROOM_TRANSITION_* constants for possible values.
 wRoomTransitionState:: ; C124

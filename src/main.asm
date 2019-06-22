@@ -106,7 +106,9 @@ incbin "gfx/items/items_3.dmg.2bpp"
 section "bank13",romx[$4000],bank[$13]
 incbin "gfx/ending/ending.dmg.2bpp"
 
-section "bank14",romx[$5934], BANK[$14]
+section "bank14_layouts",romx[$4220], BANK[$14]
+include "data/maps/layouts.asm"
+section "bank14_dialog",romx[$5934], BANK[$14]
 include "text/dialog.asm"
 
 section "bank1A",romx[$4000],bank[$1A]

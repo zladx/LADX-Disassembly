@@ -5767,65 +5767,31 @@ jr_002_6475:
 
 jr_002_6477:
     ret                                           ; $6477: $C9
+    and  a                                        ; $6478: $A7
 
-Data_002_6478::
-    db   $A7, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D
-    db   $7D, $7D, $7D, $7D, $7D, $7D, $7D, $EF, $7D, $7D, $EF, $EF, $EF, $7D, $7D, $EE
-    db   $7D, $ED, $7D, $EF, $ED, $EF, $ED, $EF, $7D, $EF, $EF, $ED, $ED, $EF, $EF, $EF
-    db   $7D, $EF, $7D, $EF, $ED, $ED, $7D, $7D, $7D, $7D, $ED, $EF, $EF, $7D, $7D, $7D
-    db   $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $ED, $ED, $ED, $EF, $EF, $EF
-    db   $7D, $7D, $7D, $ED, $7D, $7D, $ED, $7D, $7D, $7D, $EF, $EF, $7D, $7D, $EF, $EE
-    db   $7D, $7D, $EF, $7D, $7D, $7D, $7D, $EF, $7D, $7D, $ED, $7D, $7D, $7D, $7D, $EF
-    db   $7D, $7D, $EF, $EF, $EF, $EF, $EF, $EF, $7D, $7D, $7D, $ED, $ED, $ED, $ED, $7D
-    db   $7D, $EF, $EF, $ED, $EF, $7D, $7D, $7D, $7D, $ED, $EF, $ED, $ED, $7D, $7D, $7D
-    db   $7D, $EF, $EF, $EF, $EF, $7D, $7D, $EF, $7D, $7D, $ED, $EF, $7D, $7D, $EF, $EF
-    db   $EF, $7D, $ED, $7D, $7D, $7D, $7D, $EF, $7D, $7D, $ED, $ED, $7D, $7D, $7D, $EF
-    db   $7D, $7D, $ED, $7D, $7D, $7D, $7D, $EE, $7D, $7D, $EF, $ED, $7D, $7D, $7D, $EF
-    db   $EF, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $ED, $EF, $7D, $7D
-    db   $7D, $7D, $EF, $7D, $EF, $EF, $7D, $ED, $7D, $7D, $EE, $EF, $ED, $EF, $ED, $EF
-    db   $7D, $7D, $EF, $ED, $ED, $EF, $EF, $ED, $7D, $7D, $7D, $EF, $EF, $EF, $ED, $7D
-    db   $7D, $7D, $7D, $ED, $EF, $ED, $ED, $7D, $7D, $7D, $7D, $7D, $EF, $ED, $7D, $7D
-    db   $7D, $7D, $EF, $EF, $EF, $ED, $EF, $7D, $7D, $7D, $7D, $7D, $EE, $7D, $EF, $ED
-    db   $7D, $7D, $EF, $EF, $EF, $EF, $EF, $ED, $ED, $7D, $7D, $7D, $7D, $7D, $EF, $EF
-    db   $EF, $7D, $7D, $7D, $EF, $EF, $EF, $EF, $7D, $7D, $7D, $ED, $EF, $EF, $EF, $7D
-    db   $7D, $7D, $7D, $7D, $ED, $EF, $EF, $7D, $7D, $7D, $7D, $7D, $7D, $ED, $EF, $ED
-    db   $EF, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $ED, $7D, $7D, $7D, $7D, $7D, $7D
-    db   $ED, $EF, $ED, $7D, $EF, $EF, $7D, $ED, $EF, $EF, $ED, $EF, $EF, $EE, $EF, $ED
-    db   $EF, $ED, $EF, $7D, $EF, $EF, $7D, $EF, $EF, $7D, $EF, $ED, $EF, $EF, $EF, $EF
-    db   $7D, $7D, $ED, $ED, $7D, $7D, $EF, $ED, $7D, $7D, $EF, $EF, $EF, $EF, $EF, $EF
-    db   $7D, $7D, $ED, $ED, $7D, $7D, $7D, $7D, $7D, $EF, $EF, $EF, $EF, $7D, $EF, $EF
-    db   $7D, $EF, $EF, $EF, $ED, $7D, $EF, $EE, $7D, $EF, $ED, $EF, $EF, $7D, $7D, $7D
-    db   $7D, $ED, $EF, $EF, $ED, $7D, $EF, $ED, $7D, $EF, $EF, $EF, $EF, $EF, $EF, $EF
-    db   $ED, $ED, $EF, $EF, $EF, $EF, $EF, $EF, $EF, $EF, $EF, $EF, $EF, $7D, $EF, $EF
-    db   $7D, $7D, $7D, $7D, $EF, $EF, $7D, $7D, $7D, $ED, $7D, $7D, $EE, $ED, $7D, $7D
-    db   $ED, $EF, $EF, $ED, $EF, $EF, $ED, $EF, $EF, $7D, $ED, $EF, $EF, $EF, $EF, $EF
-    db   $7D, $7D, $ED, $EF, $EF, $EF, $EF, $EF, $7D, $EF, $ED, $EF, $ED, $EF, $EF, $EF
-    db   $EF, $EF, $ED, $EF, $EF, $EF, $ED, $EF, $EF, $ED, $7D, $7D, $EF, $EF, $7D, $7D
-    db   $ED, $7D, $ED, $ED, $7D, $7D, $7D, $7D, $7D, $EF, $EF, $EF, $EF, $7D, $7D, $7D
-    db   $7D, $EF, $EF, $EF, $ED, $7D, $7D, $7D, $7D, $EF, $ED, $EF, $EF, $7D, $7D, $7D
-    db   $7D, $ED, $EF, $EF, $ED, $7D, $EF, $ED, $7D, $EF, $EF, $EF, $EF, $EF, $EF, $EF
-    db   $EF, $ED, $EF, $EF, $EF, $EF, $EF, $EE, $EF, $EF, $EF, $EF, $EF, $7D, $EF, $EF
-    db   $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D
-    db   $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $EE, $EF, $7D, $7D, $ED, $EF
-    db   $7D, $7D, $EF, $EF, $ED, $EF, $EF, $EF, $7D, $7D, $7D, $EF, $EF, $EF, $EF, $7D
-    db   $7D, $7D, $7D, $EF, $ED, $EF, $ED, $7D, $7D, $7D, $7D, $EF, $EF, $ED, $EF, $7D
-    db   $7D, $00, $02, $03, $07, $05, $0A, $0B, $0F, $04, $08, $09, $0E, $06, $0C, $0D
-    db   $01
+MinimapsTable::
+include "data/minimaps.asm"
+
+Data_002_66F9::
+    db   $00, $02, $03, $07, $05, $0A, $0B, $0F, $04, $08, $09, $0E, $06, $0C, $0D, $01
 
 IsMapRoomE8::
-    ldh  a, [hMapRoom]                           ; $6709: $F0 $F6
+    ldh  a, [hMapRoom]                            ; $6709: $F0 $F6
     cp   $E8                                      ; $670B: $FE $E8
     ret  z                                        ; $670D: $C8
 
-    ld   hl, $6479                                ; $670E: $21 $79 $64
-    ldh  a, [hMapId]                         ; $6711: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $6713: $FE $FF
-    jr   nz, jr_002_671C                          ; $6715: $20 $05
+LoadMinimap::
+    ; Load special minimap for Color Dungeon
+    ld   hl, MinimapsTable                        ; $670E: $21 $79 $64
+    ldh  a, [hMapId]                              ; $6711: $F0 $F7
+    cp   MAP_COLOR_DUNGEON                        ; $6713: $FE $FF
+    jr   nz, .computeRegularMinimapAddress        ; $6715: $20 $05
 
-    ld   hl, $66B9                                ; $6717: $21 $B9 $66
-    jr   jr_002_672A                              ; $671A: $18 $0E
+    ld   hl, ColorDungeonMinimap                  ; $6717: $21 $B9 $66
+    jr   .minimapAddressEnd                       ; $671A: $18 $0E
 
-jr_002_671C:
+.computeRegularMinimapAddress
+    ; Compute minimap address from map id
     swap a                                        ; $671C: $CB $37
     ld   e, a                                     ; $671E: $5F
     ld   d, $00                                   ; $671F: $16 $00
@@ -5834,20 +5800,22 @@ jr_002_671C:
     sla  e                                        ; $6725: $CB $23
     rl   d                                        ; $6727: $CB $12
     add  hl, de                                   ; $6729: $19
+.minimapAddressEnd
 
-jr_002_672A:
+    ; Load special minimap for collapsed Eagle's Tower
     ldh  a, [hMapId]                              ; $672A: $F0 $F7
     cp   MAP_EAGLES_TOWER                         ; $672C: $FE $06
-    jr   nz, jr_002_673A                          ; $672E: $20 $0A
+    jr   nz, .eaglesTowerEnd                      ; $672E: $20 $0A
 
     ld   a, [wHasInstrument7]                     ; $6730: $FA $6B $DB
     and  $04                                      ; $6733: $E6 $04
-    jr   z, jr_002_673A                           ; $6735: $28 $03
+    jr   z, .eaglesTowerEnd                       ; $6735: $28 $03
 
-    ld   hl, $6679                                ; $6737: $21 $79 $66
+    ld   hl, EaglesTowerCollapsedMinimap          ; $6737: $21 $79 $66
+.eaglesTowerEnd
 
-jr_002_673A:
-    ld   de, $D480                                ; $673A: $11 $80 $D4
+    ; Load the minimap into WRAM
+    ld   de, wDungeonMinimap                      ; $673A: $11 $80 $D4
     ld   bc, $0040                                ; $673D: $01 $40 $00
     call CopyData                                 ; $6740: $CD $14 $29
     ld   d, $00                                   ; $6743: $16 $00
@@ -5895,7 +5863,7 @@ jr_002_676B:
     and  $0F                                      ; $6778: $E6 $0F
     ld   c, a                                     ; $677A: $4F
     ld   b, $00                                   ; $677B: $06 $00
-    ld   hl, $66F9                                ; $677D: $21 $F9 $66
+    ld   hl, Data_002_66F9                        ; $677D: $21 $F9 $66
     add  hl, bc                                   ; $6780: $09
     ld   a, [hl]                                  ; $6781: $7E
     inc  a                                        ; $6782: $3C

@@ -32,39 +32,38 @@ label_826::
     ld   [MBC3SelectBank], a
     ldh  a, [$FF92]
     cp   $08
-    jr   c, label_873
-    jr   nz, label_843
+    jr   c, .jr_873
+    jr   nz, .jr_843
     callsb label_002_6843
 
-label_83E::
     ld   hl, $FF92
     inc  [hl]
     ret
 
-label_843::
+.jr_843
     cp   $09
-    jr   nz, label_854
-    callsb label_002_6827
+    jr   nz, .jr_854
+    callsb label_002_6827 ; minimap-related
     ld   hl, $FF92
     inc  [hl]
     ret
 
-label_854::
+.jr_854
     cp   $0A
-    jr   nz, label_865
+    jr   nz, .jr_865
     callsb label_002_680B
     ld   hl, $FF92
     inc  [hl]
     ret
 
-label_865::
+.jr_865
     callsb label_002_67E5
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
     ldh  [$FF92], a
     ret
 
-label_873::
+.jr_873
     ld   c, a
     ld   b, $00
     sla  c

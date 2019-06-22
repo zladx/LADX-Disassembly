@@ -4,7 +4,7 @@
 
 00 Home (main code)
 01 Main code
-02 Code and data
+02 Code, minimaps
 03 Code and data
 04 Ennemies code?
 05 Code and data

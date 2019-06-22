@@ -726,8 +726,13 @@ wDidStealItem:: ; D47E
   ds 1
 
 ; Unlabeled
-wD47F equ $D47F
-  ds $D600 - $D47F
+ds 1 ; D47F
+
+wDungeonMinimap:: ; D480
+  ds $40
+
+; Unlabeled
+ds $D600 - $D4C0
 
 ; Data structures for copying data to vram during blanking times
 wRequests::               ; D600

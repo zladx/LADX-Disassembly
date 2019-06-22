@@ -78,7 +78,7 @@ Minimap7::
     db   $EF, $ED, $EF, $EF, $EF, $ED, $EF, $EF
     db   $ED, $7D, $7D, $EF, $EF, $7D, $7D, $ED
 
-Minimap8::
+EaglesTowerCollapsedMinimap::
     db   $7D, $ED, $ED, $7D, $7D, $7D, $7D, $7D
     db   $EF, $EF, $EF, $EF, $7D, $7D, $7D, $7D
     db   $EF, $EF, $EF, $ED, $7D, $7D, $7D, $7D
@@ -88,7 +88,7 @@ Minimap8::
     db   $ED, $EF, $EF, $EF, $EF, $EF, $EE, $EF
     db   $EF, $EF, $EF, $EF, $7D, $EF, $EF, $7D
 
-Minimap9::
+ColorDungeonMinimap::
     db   $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D
     db   $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D
     db   $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D

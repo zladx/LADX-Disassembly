@@ -171,23 +171,29 @@ hNeedsRenderingFrame:: ; FFD1
 hFFD2:: ; FFD2
   ds 5
 
-; Scratch value, used for many different uses
+; Scratch values, used for many different uses
 hScratchA:: ; FFD7
+  ds 1
+hScratchB:: ; FFD8
+  ds 1
+hScratchC:: ; FFD9
+  ds 1
+hScratchD:: ; FFDA
   ds 1
 
 ; Unlabeled
-ds 7
+ds 4
 
 hRoomPaletteBank ; FFDF
   ds 1
 
 ; Scratch hram address with different uses
-hScratchB          ; FFE0
+hScratchE          ; FFE0
 hBGMapOffsetHigh:: ; FFE0
   ds 1
 
 ; This location has different uses
-hScratchC          ; FFE1
+hScratchF          ; FFE1
 hBGMapOffsetLow::  ; FFE1
   ds 1
 

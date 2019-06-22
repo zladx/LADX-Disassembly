@@ -5822,7 +5822,7 @@ LoadMinimap::
     ld   e, $00                                   ; $6745: $1E $00
 
 label_002_6747::
-    ld   hl, $D480                                ; $6747: $21 $80 $D4
+    ld   hl, wDungeonMinimap                      ; $6747: $21 $80 $D4
     add  hl, de                                   ; $674A: $19
     ld   a, [hl]                                  ; $674B: $7E
     cp   $7D                                      ; $674C: $FE $7D
@@ -5869,7 +5869,7 @@ jr_002_676B:
     inc  a                                        ; $6782: $3C
     add  $CF                                      ; $6783: $C6 $CF
     ld   c, a                                     ; $6785: $4F
-    ld   hl, $D480                                ; $6786: $21 $80 $D4
+    ld   hl, wDungeonMinimap                      ; $6786: $21 $80 $D4
     add  hl, de                                   ; $6789: $19
     ld   a, [hl]                                  ; $678A: $7E
     cp   $EE                                      ; $678B: $FE $EE
@@ -5897,7 +5897,7 @@ jr_002_67A1:
     jr   z, label_002_67B5                        ; $67A6: $28 $0D
 
 jr_002_67A8:
-    ld   hl, $D480                                ; $67A8: $21 $80 $D4
+    ld   hl, wDungeonMinimap                      ; $67A8: $21 $80 $D4
     add  hl, de                                   ; $67AB: $19
     ld   [hl], c                                  ; $67AC: $71
     ld   a, [wHasDungeonMap]                      ; $67AD: $FA $CC $DB
@@ -5918,7 +5918,7 @@ label_002_67B5::
 
     di                                            ; $67C1: $F3
     ld   e, $00                                   ; $67C2: $1E $00
-    ld   hl, $D480                                ; $67C4: $21 $80 $D4
+    ld   hl, wDungeonMinimap                      ; $67C4: $21 $80 $D4
 
 jr_002_67C7:
     ld   d, $01                                   ; $67C7: $16 $01
@@ -6039,7 +6039,7 @@ jr_002_6848:
 
 jr_002_685B:
     push hl                                       ; $685B: $E5
-    ld   hl, $D480                                ; $685C: $21 $80 $D4
+    ld   hl, wDungeonMinimap                      ; $685C: $21 $80 $D4
     add  hl, de                                   ; $685F: $19
     ld   a, [hl]                                  ; $6860: $7E
     pop  hl                                       ; $6861: $E1
@@ -6081,7 +6081,7 @@ jr_002_6885:
 
 jr_002_6888:
     push hl                                       ; $6888: $E5
-    ld   hl, $D480                                ; $6889: $21 $80 $D4
+    ld   hl, wDungeonMinimap                      ; $6889: $21 $80 $D4
     add  hl, de                                   ; $688C: $19
     ld   a, [hl]                                  ; $688D: $7E
     pop  hl                                       ; $688E: $E1

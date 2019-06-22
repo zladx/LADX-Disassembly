@@ -5821,35 +5821,38 @@ LoadMinimap::
     ld   d, $00                                   ; $6743: $16 $00
     ld   e, $00                                   ; $6745: $1E $00
 
-label_002_6747::
+    ; For each minimap room…
+.minimapRoomsLoop
+    ; a = wDungeonMinimap[e]
     ld   hl, wDungeonMinimap                      ; $6747: $21 $80 $D4
     add  hl, de                                   ; $674A: $19
     ld   a, [hl]                                  ; $674B: $7E
+
     cp   $7D                                      ; $674C: $FE $7D
-    jr   z, label_002_67B5                        ; $674E: $28 $65
+    jr   z, .continue                             ; $674E: $28 $65
 
     cp   $ED                                      ; $6750: $FE $ED
-    jr   z, jr_002_6758                           ; $6752: $28 $04
+    jr   z, .jr_002_6758                          ; $6752: $28 $04
 
     cp   $EE                                      ; $6754: $FE $EE
-    jr   nz, jr_002_6760                          ; $6756: $20 $08
+    jr   nz, .jr_002_6760                         ; $6756: $20 $08
 
-jr_002_6758:
+.jr_002_6758
     ld   a, [wHasDungeonCompass]                  ; $6758: $FA $CD $DB
     and  a                                        ; $675B: $A7
-    jr   nz, jr_002_676B                          ; $675C: $20 $0D
+    jr   nz, .jr_002_676B                         ; $675C: $20 $0D
 
     ld   [hl], $EF                                ; $675E: $36 $EF
 
-jr_002_6760:
+.jr_002_6760
     ld   a, [wHasDungeonMap]                      ; $6760: $FA $CC $DB
     and  a                                        ; $6763: $A7
-    jr   nz, jr_002_676B                          ; $6764: $20 $05
+    jr   nz, .jr_002_676B                         ; $6764: $20 $05
 
     ld   [hl], $7D                                ; $6766: $36 $7D
-    jp   label_002_67B5                           ; $6768: $C3 $B5 $67
+    jp   .continue                                ; $6768: $C3 $B5 $67
 
-jr_002_676B:
+.jr_002_676B
     push de                                       ; $676B: $D5
     call label_2BC1                               ; $676C: $CD $C1 $2B
     ld   c, e                                     ; $676F: $4B
@@ -5857,7 +5860,7 @@ jr_002_676B:
     pop  de                                       ; $6771: $D1
     ld   a, [hl]                                  ; $6772: $7E
     bit  7, a                                     ; $6773: $CB $7F
-    jr   z, label_002_67B5                        ; $6775: $28 $3E
+    jr   z, .continue                             ; $6775: $28 $3E
 
     ld   a, [hl]                                  ; $6777: $7E
     and  $0F                                      ; $6778: $E6 $0F
@@ -5873,79 +5876,82 @@ jr_002_676B:
     add  hl, de                                   ; $6789: $19
     ld   a, [hl]                                  ; $678A: $7E
     cp   $EE                                      ; $678B: $FE $EE
-    jr   z, jr_002_6793                           ; $678D: $28 $04
+    jr   z, .jr_002_6793                          ; $678D: $28 $04
 
     cp   $ED                                      ; $678F: $FE $ED
-    jr   nz, jr_002_67A8                          ; $6791: $20 $15
+    jr   nz, .jr_002_67A8                         ; $6791: $20 $15
 
-jr_002_6793:
+.jr_002_6793
     push de                                       ; $6793: $D5
     push af                                       ; $6794: $F5
     call label_2BC1                               ; $6795: $CD $C1 $2B
     pop  af                                       ; $6798: $F1
     ld   e, $20                                   ; $6799: $1E $20
     cp   $ED                                      ; $679B: $FE $ED
-    jr   nz, jr_002_67A1                          ; $679D: $20 $02
+    jr   nz, .jr_002_67A1                         ; $679D: $20 $02
 
     ld   e, $10                                   ; $679F: $1E $10
 
-jr_002_67A1:
+.jr_002_67A1
     ld   a, [hl]                                  ; $67A1: $7E
     and  e                                        ; $67A2: $A3
     pop  de                                       ; $67A3: $D1
     cp   $00                                      ; $67A4: $FE $00
-    jr   z, label_002_67B5                        ; $67A6: $28 $0D
+    jr   z, .continue                             ; $67A6: $28 $0D
 
-jr_002_67A8:
+.jr_002_67A8
     ld   hl, wDungeonMinimap                      ; $67A8: $21 $80 $D4
     add  hl, de                                   ; $67AB: $19
     ld   [hl], c                                  ; $67AC: $71
     ld   a, [wHasDungeonMap]                      ; $67AD: $FA $CC $DB
     and  a                                        ; $67B0: $A7
-    jr   nz, label_002_67B5                       ; $67B1: $20 $02
+    jr   nz, .continue                            ; $67B1: $20 $02
 
     ld   [hl], $7D                                ; $67B3: $36 $7D
 
-label_002_67B5::
+.continue
+    ; Loop while not all $40 rooms are processed
     inc  e                                        ; $67B5: $1C
     ld   a, e                                     ; $67B6: $7B
     cp   $40                                      ; $67B7: $FE $40
-    jp   nz, label_002_6747                       ; $67B9: $C2 $47 $67
+    jp   nz, .minimapRoomsLoop                    ; $67B9: $C2 $47 $67
 
     ldh  a, [hIsGBC]                              ; $67BC: $F0 $FE
     and  a                                        ; $67BE: $A7
-    jr   z, jr_002_67E4                           ; $67BF: $28 $23
+    jr   z, .return                               ; $67BF: $28 $23
 
     di                                            ; $67C1: $F3
     ld   e, $00                                   ; $67C2: $1E $00
     ld   hl, wDungeonMinimap                      ; $67C4: $21 $80 $D4
 
-jr_002_67C7:
+.loop
     ld   d, $01                                   ; $67C7: $16 $01
     xor  a                                        ; $67C9: $AF
     ld   [rSVBK], a                               ; $67CA: $E0 $70
     ld   a, [hl]                                  ; $67CC: $7E
     cp   $ED                                      ; $67CD: $FE $ED
-    jr   nz, jr_002_67D3                          ; $67CF: $20 $02
+    jr   nz, .jr_002_67D3                         ; $67CF: $20 $02
 
     ld   d, $06                                   ; $67D1: $16 $06
 
-jr_002_67D3:
+.jr_002_67D3
     ld   a, $02                                   ; $67D3: $3E $02
     ld   [rSVBK], a                               ; $67D5: $E0 $70
     ld   a, d                                     ; $67D7: $7A
     ld   [hl], a                                  ; $67D8: $77
     inc  hl                                       ; $67D9: $23
+
+    ; Loop while not all $40 rooms are processed
     inc  e                                        ; $67DA: $1C
     ld   a, e                                     ; $67DB: $7B
     cp   $40                                      ; $67DC: $FE $40
-    jr   nz, jr_002_67C7                          ; $67DE: $20 $E7
+    jr   nz, .loop                                ; $67DE: $20 $E7
 
     xor  a                                        ; $67E0: $AF
     ld   [rSVBK], a                               ; $67E1: $E0 $70
     ei                                            ; $67E3: $FB
 
-jr_002_67E4:
+.return
     ret                                           ; $67E4: $C9
 
 label_002_67E5::

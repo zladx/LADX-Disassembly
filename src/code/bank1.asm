@@ -2680,29 +2680,40 @@ label_5F19::
 label_5F2D::
     ret
 
-label_5F2E::
+HideAllSprites::
+    ; $0000 controls whether to enable external RAM writing
     ld   hl, $0000
+
+    ; If CGB…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_5F3A
+    jr   z, .enableExternalRAMWriting
+    ; disable external RAM writing
+    ; (probably because an extra RAM bank available on CGB can be used)
     ld   [hl], $00
-    jr   label_5F3C
+    jr   .endIf
 
-label_5F3A::
+.enableExternalRAMWriting
+    ; else enable external RAM writing
     ld   [hl], $FF
+.endIf
 
-label_5F3C::
+    ; loop counter
     ld   b, $28
+    ; value to write
     ld   a, $F4
-    ld   hl, $C000
+    ; address
+    ld   hl, wOAMBuffer
 
-label_5F43::
+    ; Write $F4 to every first byte (Y position) of the OAM buffer
+    ; This ensures the sprite is hidden.
+.loop
     ldi  [hl], a
     inc  hl
     inc  hl
     inc  hl
     dec  b
-    jr   nz, label_5F43
+    jr   nz, .loop
     ret
 
 UpdateWindowPosition::

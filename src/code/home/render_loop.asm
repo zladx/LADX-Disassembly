@@ -1,5 +1,5 @@
 ;
-; Main render loop. 
+; Main render loop.
 ;
 
 ; Game loop:
@@ -246,7 +246,7 @@ RenderInteractiveFrame::
     ; Debug functions
     ld   a, [ROM_DebugTool1]
     and  a  ; Is debug mode disabled?
-    jr   z, RenderUpdateSprites
+    jr   z, ResetSprites
 
     ld   a, [wEnginePaused]
     and  a  ; Is engine already paused?
@@ -283,21 +283,19 @@ RenderInteractiveFrame::
     and  a
     jr   nz, WaitForNextFrame
 
-RenderUpdateSprites::
-    ; If not in Inventory, update sprites
+ResetSprites::
+    ; If not in Inventory, initially hide all sprites
     ld   a, [wGameplayType]
     cp   GAMEPLAY_INVENTORY
-    jr   nz, .updateSprites
+    jr   nz, .resetSpritesVisibility
 
-    ; If Inventory is actually visible, skip sprites update
+    ; If Inventory is actually visible, leave sprites visible
     ld   a, [wGameplaySubtype]
     cp   GAMEPLAY_INVENTORY_DELAY1
     jr   c, RenderGameplay
 
-.updateSprites
-    ld   a, $01
-    call SwitchBank
-    call label_5F2E ; sprite-related-method
+.resetSpritesVisibility
+    callsw HideAllSprites
 
 RenderGameplay::
     call ExecuteGameplayHandler
@@ -318,9 +316,7 @@ RenderPalettes::
     ld   [$DDD2], a
 
 RenderWindow::
-    ld   a, $01
-    call SwitchBank
-    call UpdateWindowPosition
+    callsw UpdateWindowPosition
 
 WaitForNextFrame::
     ; Animate inventory window

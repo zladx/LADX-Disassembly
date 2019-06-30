@@ -36,26 +36,26 @@ FileDeletionEntryPoint::
     ld   a, $01
     call ClearFileMenuBG_trampoline
     ld   a, $01
-    ld   [$DDD1], a
+    ld   [wPaletteUnknownA], a
     jp   IncrementGameplaySubtypeAndReturn
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $02
-    ld   [$DDD1], a
+    ld   [wPaletteUnknownA], a
     jp   IncrementGameplaySubtypeAndReturn
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     call LoadFileMenuBG_trampoline
     ld   a, $01
-    ld   [$DDD1], a
+    ld   [wPaletteUnknownA], a
     jp   IncrementGameplaySubtypeAndReturn
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $02
-    ld   [$DDD1], a
+    ld   [wPaletteUnknownA], a
 
 label_4D53::
     jp   IncrementGameplaySubtypeAndReturn
@@ -105,9 +105,9 @@ label_4DA6::
     xor  a
     ldh  [$FFDB], a
     ld   a, [$DC06]
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ld   a, [$DC09]
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     jp   label_5D53
 
 label_4DBD::
@@ -120,9 +120,9 @@ label_4DBE::
     ld   a, $01
     ldh  [$FFDB], a
     ld   a, [$DC07]
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ld   a, [$DC0A]
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     jp   label_5D53
 
 label_4DD6::
@@ -132,9 +132,9 @@ label_4DD6::
     ld   a, $02
     ldh  [$FFDB], a
     ld   a, [$DC08]
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ld   a, [$DC0B]
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     jp   label_5D53
 
 label_4DEE::

@@ -142,8 +142,8 @@ LoadMapData::
     and  a
     jr   z, .LoadMapZero
 
-    ; Copy map number to the palette-loading variable
-    ld   [$DDD2], a
+    ; Copy tile map number to the palette-loading variable
+    ld   [wPaletteToLoadForTileMap], a
 
     ; if wTileMapToLoad != $23, turn off LCD
     cp   $23

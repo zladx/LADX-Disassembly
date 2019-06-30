@@ -1267,9 +1267,9 @@ label_5519::
     push de
     xor  a
     ldh  [hScratchA], a
-    ldh  [$FFD8], a
-    ldh  [$FFD9], a
-    ldh  [$FFDA], a
+    ldh  [hScratchB], a
+    ldh  [hScratchC], a
+    ldh  [hScratchD], a
     ld   c, a
     ld   b, a
     ld   e, a
@@ -1303,15 +1303,15 @@ label_5544::
     ld   hl, label_53E8
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   hl, label_53F8
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ld   hl, label_5408
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     pop  hl
     call label_5619
     push hl
@@ -1327,9 +1327,9 @@ label_5544::
     ld   [hl], a
     xor  a
     ldh  [hScratchA], a
-    ldh  [$FFD8], a
-    ldh  [$FFD9], a
-    ldh  [$FFDA], a
+    ldh  [hScratchB], a
+    ldh  [hScratchC], a
+    ldh  [hScratchD], a
     ld   c, a
     ld   b, a
     ld   e, a
@@ -1387,13 +1387,13 @@ label_55C0::
     ld   hl, label_545C
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     xor  a
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ld   hl, label_54A0
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     pop  hl
     call label_5619
     push hl
@@ -1426,12 +1426,12 @@ label_55F5::
 label_5600::
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, $01
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ldh  a, [hMapId]
     add  a, $B1
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     pop  hl
     call label_5619
     inc  hl
@@ -1444,11 +1444,11 @@ label_5600::
 label_5619::
     ldh  a, [hScratchA]
     ldi  [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ldi  [hl], a
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     ldi  [hl], a
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     ld   [hl], a
     ret
 
@@ -2367,7 +2367,7 @@ label_5D77::
     ld   hl, $D604
     add  hl, de
     ld   c, $00
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     and  a
     jr   z, label_5DAB
     ldh  [hScratchA], a
@@ -2398,7 +2398,7 @@ label_5DA2::
     jr   label_5DB3
 
 label_5DAB::
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     cp   c
     jr   z, label_5DBF
     ld   a, $AE
@@ -2610,15 +2610,15 @@ label_5EA6::
     ld   hl, label_5E9C
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   hl, label_5EA1
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ld   hl, label_5EA6
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     ld   hl, $C200
     add  hl, de
     ldh  a, [hScratchA]
@@ -2627,19 +2627,19 @@ label_5EA6::
     rr   c
     ld   hl, $C220
     add  hl, de
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     rl   c
     adc  a, [hl]
     ld   [hl], a
     ld   hl, $C210
     add  hl, de
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     add  a, [hl]
     ld   [hl], a
     rr   c
     ld   hl, $C230
     add  hl, de
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     rl   c
     adc  a, [hl]
     ld   [hl], a
@@ -2680,29 +2680,40 @@ label_5F19::
 label_5F2D::
     ret
 
-label_5F2E::
+HideAllSprites::
+    ; $0000 controls whether to enable external RAM writing
     ld   hl, $0000
+
+    ; If CGB…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_5F3A
+    jr   z, .enableExternalRAMWriting
+    ; disable external RAM writing
+    ; (probably because an extra RAM bank available on CGB can be used)
     ld   [hl], $00
-    jr   label_5F3C
+    jr   .endIf
 
-label_5F3A::
+.enableExternalRAMWriting
+    ; else enable external RAM writing
     ld   [hl], $FF
+.endIf
 
-label_5F3C::
+    ; loop counter
     ld   b, $28
+    ; value to write
     ld   a, $F4
-    ld   hl, $C000
+    ; address
+    ld   hl, wOAMBuffer
 
-label_5F43::
+    ; Write $F4 to every first byte (Y position) of the OAM buffer
+    ; This ensures the sprite is hidden.
+.loop
     ldi  [hl], a
     inc  hl
     inc  hl
     inc  hl
     dec  b
-    jr   nz, label_5F43
+    jr   nz, .loop
     ret
 
 UpdateWindowPosition::
@@ -3574,15 +3585,15 @@ label_6BF0::
 
 label_6BF4::
     ld   a, c
-    ldh  [hScratchB], a
+    ldh  [hScratchE], a
     ld   d, $00
 
 label_6BF9::
     xor  a
     ldh  [hScratchA], a
-    ldh  [$FFD8], a
-    ldh  [$FFD9], a
-    ldh  [$FFDA], a
+    ldh  [hScratchB], a
+    ldh  [hScratchC], a
+    ldh  [hScratchD], a
     ld   hl, $DB65
     add  hl, de
     ld   a, [hl]
@@ -3598,12 +3609,12 @@ label_6BF9::
     push hl
     ld   a, $7C
     ldh  [hScratchA], a
-    ldh  [$FFD8], a
-    ldh  [$FFD9], a
+    ldh  [hScratchB], a
+    ldh  [hScratchC], a
     ld   hl, label_6BD7
     add  hl, de
     ld   a, [hl]
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     pop  hl
     jr   label_6C48
 
@@ -3621,30 +3632,30 @@ label_6C2A::
     ld   a, [hl]
     ldh  [hScratchA], a
     inc  a
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     add  a, $0F
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     inc  a
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     pop  hl
 
 label_6C48::
     ldh  a, [hScratchA]
     ld   [hl], a
     call label_6C69
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   [hl], a
     inc  c
     call label_6C69
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     ld   [hl], a
     inc  c
     call label_6C69
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     ld   [hl], a
     inc  e
     ld   a, e
-    ld   hl, hScratchB
+    ld   hl, hScratchE
     cp   [hl]
     jp   nz, label_6BF9
     ret

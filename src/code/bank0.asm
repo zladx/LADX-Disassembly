@@ -212,9 +212,9 @@ label_92F::
     ld   [$DC90], a
     ld   d, $00
     add  hl, de
-    ldh  a, [hScratchB]
+    ldh  a, [hScratchE]
     ld   d, a
-    ldh  a, [hScratchC]
+    ldh  a, [hScratchF]
     ld   e, a
     ldh  a, [$FFCF]
     ldi  [hl], a
@@ -264,9 +264,9 @@ label_983::
     call $6710
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    ldh  a, [hScratchB]
+    ldh  a, [hScratchE]
     ld   h, a
-    ldh  a, [hScratchC]
+    ldh  a, [hScratchF]
     ld   l, a
     ld   a, [hl]
     inc  de
@@ -279,7 +279,7 @@ label_999::
     ldh  [hScratchA], a
     pop  bc
     call label_983
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, [$DC90]
     ld   c, a
     ld   b, $00
@@ -295,7 +295,7 @@ label_999::
     ldi  [hl], a
     ldh  a, [hScratchA]
     ldi  [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ldi  [hl], a
     xor  a
     ldi  [hl], a
@@ -555,7 +555,7 @@ label_0B1A::
     ret
 
 label_B2F::
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ldh  a, [hIsGBC]
     and  a
     ret  z
@@ -563,7 +563,7 @@ label_B2F::
     and  a
     ret  nz
     push bc
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     and  $80
     jr   nz, label_B4B
     ld   a, $20
@@ -580,7 +580,7 @@ label_B4B::
     ld   [rSVBK], a
 
 label_B54::
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     and  $7F
     ld   [MBC3SelectBank], a
     pop  bc
@@ -881,7 +881,7 @@ label_CEC::
     ld   hl, $C510
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   hl, $C540
     add  hl, de
     ld   [hl], a
@@ -900,7 +900,7 @@ label_D07::
     ldh  [hScratchA], a
     ld   a, [$C142]
     sub  a, $08
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
 
 label_D15::
     ld   a, JINGLE_SWORD_POKING
@@ -2436,7 +2436,7 @@ CheckItemsSwordCollision::
     add  hl, de
     ldh  a, [hLinkPositionY]
     add  a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
 
 label_16DF::
     ld   a, $04
@@ -2531,13 +2531,13 @@ label_1756::
     ldh  [hNextSFX], a
     ldh  a, [hLinkPositionY]
     add  a, $06
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, $0B
     jp   label_CC7
 
 label_1781::
     ldh  a, [hLinkPositionY]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, JINGLE_WATER_DIVE
     ldh  [hJingle], a
     ld   a, $0C
@@ -2564,8 +2564,8 @@ ApplyLinkMotionState::
     add  a, [hl]
     ldh  [hScratchA], a
     ldh  a, [hLinkPositionX]
-    ldh  [$FFD8], a
-    ld   hl, $FFDA
+    ldh  [hScratchB], a
+    ld   hl, hScratchD
     ld   [hl], $00
     ld   a, [wSwordCharge]
     cp   $28
@@ -2582,7 +2582,7 @@ label_17C6::
     ld   a, [$C13A]
     ld   l, a
     ld   a, [wSwordDirection]
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ldh  a, [hLinkPositionY]
     cp   $88
     ret  nc
@@ -3316,7 +3316,7 @@ label_1F69::
     ldh  [hSwordIntersectedAreaY], a
     or   c
     ld   e, a
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   hl, wRoomObjects
     add  hl, de
     ld   a, h
@@ -3578,7 +3578,7 @@ label_2161::
     ldh  [$FFE5], a
 
 label_2165::
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   e, a
     ldh  a, [hScratchA]
     ldh  [$FFAF], a
@@ -3758,14 +3758,14 @@ DoUpdateBGRegion::
     push bc
     push de
 
-    ; hl = wRoomObjects + $FFD9
-    ldh  a, [$FFD9]
+    ; hl = wRoomObjects + hScratchC
+    ldh  a, [hScratchC]
     ld   c, a
     ld   b, $00
     ld   hl, wRoomObjects
     add  hl, bc
 
-    ; c = wRoomObjects[$FFD9]
+    ; c = wRoomObjects[hScratchC]
     ld   b, $00
     ld   c, [hl]
 
@@ -3918,9 +3918,9 @@ DoUpdateBGRegion::
     ld   b, $00
     ld   hl, BGRegionIncrement
     add  hl, bc
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     add  a, [hl]
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     pop  bc
 
     ; Decrement loop counter
@@ -5090,9 +5090,9 @@ doCopyObjectToBG:
     push hl
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    ldh  a, [hScratchB]
+    ldh  a, [hScratchE]
     ld   h, a
-    ldh  a, [hScratchC]
+    ldh  a, [hScratchF]
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
@@ -5105,9 +5105,9 @@ doCopyObjectToBG:
 
     ; Update palette offset
     ld   a, h
-    ldh  [hScratchB], a
+    ldh  [hScratchE], a
     ld   a, l
-    ldh  [hScratchC], a
+    ldh  [hScratchF], a
     pop  hl
 
     ; Move BG target down by one row
@@ -5126,9 +5126,9 @@ doCopyObjectToBG:
     ; Copy palettes from WRAM1 for tiles on the lower row
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
-    ldh  a, [hScratchB]
+    ldh  a, [hScratchE]
     ld   h, a
-    ldh  a, [hScratchC]
+    ldh  a, [hScratchF]
     ld   l, a
     ld   a, $01
     ld   [rVBK], a
@@ -5784,9 +5784,9 @@ LoadRoomObject::
     push af
 .bushGroundStairsEnd
 
-    ; hScratchB = object type
+    ; hScratchE = object type
     ld   a, d
-    ldh  [hScratchB], a
+    ldh  [hScratchE], a
 
     ; If object is an entrance to somewhere else…
     cp   OBJECT_CLOSED_GATE
@@ -5824,7 +5824,7 @@ LoadRoomObject::
 .overworldDoorEnd
 
     ; a = object type
-    ldh  a, [hScratchB]
+    ldh  a, [hScratchE]
 
     cp   $C5
     jp   z, .configureStairs
@@ -5835,7 +5835,7 @@ LoadRoomObject::
 .loadNonDoorIndoorObject
     ; Re-increment a to be the object type
     add  a, OBJECT_KEY_DOOR_TOP
-    ldh  [hScratchB], a
+    ldh  [hScratchE], a
 
     ; If object type is a conveyor belt…
     push af
@@ -5858,7 +5858,7 @@ LoadRoomObject::
     ldh  a, [hMapRoom]
     cp   $C4
     ; … and the object type is not zero…
-    ldh  a, [hScratchB]
+    ldh  a, [hScratchE]
     jr   z, .torchEnd
     ; …then increment the number of torches in the room
     ld   hl, wTorchesCount
@@ -6072,7 +6072,7 @@ LoadRoomObject::
 
     ldh  a, [hMapId]
     cp   MAP_CAVE_B
-    ldh  a, [hScratchB]
+    ldh  a, [hScratchE]
     jr   c, .bombableBlockEnd
     cp   OBJECT_BOMBABLE_BLOCK
     jr   z, .configureBreakableObject
@@ -7783,7 +7783,7 @@ label_3E8E::
     ldh  a, [wActiveEntityPosX]
     ldh  [hScratchA], a
     ldh  a, [wActiveEntityPosY]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, $08
     call label_CC7
     ld   hl, $C520

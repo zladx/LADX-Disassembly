@@ -1836,11 +1836,11 @@ label_D31E::
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     ld   hl, $C310
     add  hl, de
     ld   [hl], a
@@ -2215,7 +2215,7 @@ label_D670::
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
@@ -2660,7 +2660,7 @@ label_D947::
     call label_E4CA
     jr   c, label_D98B
     push bc
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     ld   c, a
     ld   hl, data_D937
     add  hl, bc
@@ -2671,7 +2671,7 @@ label_D947::
     ld   [hl], a
     ld   hl, data_D93B
     add  hl, bc
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     add  a, [hl]
     ld   hl, $C210
     add  hl, de
@@ -2690,7 +2690,7 @@ label_D974::
     ld   hl, $C250
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     ld   hl, $C3B0
     add  hl, de
     ld   [hl], a
@@ -2721,7 +2721,7 @@ label_D998::
     call label_E4CA
     jr   c, label_D9D6
     push bc
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     ld   hl, $C380
     add  hl, de
     ld   [hl], a
@@ -2735,7 +2735,7 @@ label_D998::
     ld   [hl], a
     ld   hl, data_D98E
     add  hl, bc
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     add  a, [hl]
     ld   hl, $C210
     add  hl, de
@@ -3492,7 +3492,7 @@ label_DF33::
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
@@ -3539,7 +3539,7 @@ label_DF5F::
     ld   hl, $C240
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   hl, $C210
     add  hl, de
     add  a, $F8
@@ -3971,7 +3971,7 @@ label_E26B::
     ld   [hl], $18
     ld   a, $0C
     call label_FE45
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     cpl
     inc  a
     ld   hl, $C240
@@ -4234,7 +4234,7 @@ label_E422::
     add  hl, de
     ldh  a, [hLinkPositionY]
     add  a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, $07
     call label_CC7
     ld   hl, $C520
@@ -4368,15 +4368,15 @@ label_E4E0::
     ld   hl, $C210
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   hl, $C380
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ld   hl, $C310
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     call label_E524
     ld   hl, $C410
     add  hl, de
@@ -5082,7 +5082,7 @@ label_E9F8::
     ldh  [hScratchA], a
     ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, $08
     call label_CC7
     ld   a, $13
@@ -5141,7 +5141,7 @@ label_EA70::
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
@@ -5417,7 +5417,7 @@ label_EBDE::
     ldh  a, [$FFEF]
 
 label_EC36::
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ldh  a, [wActiveEntityPosX]
     ldh  [hScratchA], a
     ld   a, $05
@@ -6038,7 +6038,7 @@ label_EFCC::
     ld   hl, $C400
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     cpl
     inc  a
     ld   hl, $C3F0
@@ -6113,7 +6113,7 @@ label_F042::
     ld   hl, $C250
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     cpl
     inc  a
     ld   hl, $C240
@@ -6252,7 +6252,7 @@ label_F13B::
     ldh  a, [wActiveEntityPosX]
     ldh  [hScratchA], a
     ldh  a, [wActiveEntityPosY]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     jp   label_D15
 
 label_F146::
@@ -6480,7 +6480,7 @@ label_F29D::
     ld   hl, $C310
     add  hl, bc
     sub  a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, $02
     jp   label_CC7
 
@@ -6767,7 +6767,7 @@ label_F440::
     ld   hl, $C400
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     cpl
     inc  a
     ld   hl, $C3F0
@@ -6828,7 +6828,7 @@ label_F4C1::
     add  hl, de
     ld   a, [$C142]
     add  a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     call label_D15
 
 label_F4DC::
@@ -6855,7 +6855,7 @@ label_F4EC::
     ldh  [hScratchA], a
     ldh  a, [hLinkPositionY]
     add  a, $08
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ld   de, wActiveEntityPosX
     ld   hl, $D5C0
     ld   a, [de]
@@ -6883,7 +6883,7 @@ label_F511::
     ld   a, [de]
     add  a, [hl]
     push hl
-    ld   hl, $FFD9
+    ld   hl, hScratchC
     sub  a, [hl]
     cp   $80
     jr   c, label_F52D
@@ -6926,7 +6926,7 @@ label_F565::
     call label_FE45
     ldh  a, [hScratchA]
     ldh  [hLinkPositionYIncrement], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ldh  [hLinkPositionXIncrement], a
 
 label_F570::
@@ -7157,7 +7157,7 @@ label_F6AC::
     ld   hl, $C200
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   hl, $C210
     add  hl, de
     ld   [hl], a
@@ -7166,7 +7166,7 @@ label_F6AC::
     ld   a, c
     inc  a
     ld   [hl], a
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     and  $01
     ld   hl, $C3B0
     add  hl, de
@@ -7369,7 +7369,7 @@ label_F7DD::
     ld   [hl], a
     ld   hl, $C3F0
     add  hl, de
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   [hl], a
 
 label_F834::
@@ -7425,7 +7425,7 @@ label_F893::
     ldh  [hScratchA], a
     xor  a
     ld   [hl], a
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   [$C503], a
     ld   [$C50D], a
     ld   hl, $C310
@@ -7469,7 +7469,7 @@ label_F8E3::
     ldh  a, [$FFAF]
     cp   $67
     jr   z, label_F907
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     and  a
     jp   z, label_FA18
     cp   $0B
@@ -7548,14 +7548,14 @@ label_F95C::
     ld   hl, $C210
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, JINGLE_WATER_DIVE
     ldh  [hJingle], a
     ld   a, $01
     call label_CC7
 
 label_F973::
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     inc  a
     cp   $F1
     jr   c, label_F99C
@@ -7587,7 +7587,7 @@ label_F99C::
     ldh  a, [$FFAF]
     cp   $61
     jr   z, label_F9AC
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     cp   $50
     jr   z, label_F9AC
     cp   $51
@@ -7744,7 +7744,7 @@ label_FACD::
     ldh  [$FFDB], a
     swap a
     and  $0F
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     pop  bc
     push bc
     ld   a, e
@@ -7789,7 +7789,7 @@ label_FB13::
     add  a, [hl]
     ldh  [$FFDC], a
     and  $F0
-    ld   hl, $FFD8
+    ld   hl, hScratchB
     or   [hl]
     ld   c, a
     ld   hl, $D711
@@ -7807,7 +7807,7 @@ label_FB13::
     ld   d, a
     call label_2A2C
     pop  de
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     ldh  a, [$FFEB]
     cp   $CC
     jr   z, label_FB4E
@@ -7815,7 +7815,7 @@ label_FB13::
     jr   nz, label_FB5D
 
 label_FB4E::
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     cp   $05
     jp   z, label_FCA7
     cp   $07
@@ -7823,7 +7823,7 @@ label_FB4E::
     jp   label_FC75
 
 label_FB5D::
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     and  a
     jp   z, label_FCA7
     cp   $0B
@@ -7876,7 +7876,7 @@ label_FBA7::
 
 label_FBBB::
     push de
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     sub  a, $7C
     sla  a
     sla  a
@@ -7904,7 +7904,7 @@ label_FBBB::
     jp   z, label_FCA7
 
 label_FBE4::
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     cp   $D0
     jr   c, label_FC2B
     cp   $D4
@@ -7991,7 +7991,7 @@ label_FC5A::
     jr   z, label_FCA7
 
 label_FC75::
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     cp   $60
     jr   nz, label_FC91
 
@@ -8157,10 +8157,10 @@ label_FD6B::
     ld   a, [wIsIndoor]
     ld   d, a
     call label_2A2C
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     and  a
     jp   z, label_FE03
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     cp   $FF
     jp   z, label_FE05
     cp   $D0
@@ -8210,7 +8210,7 @@ label_FDC0::
     jp   label_FE03
 
 label_FDCD::
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     cp   $A0
     jr   nc, label_FE03
     cp   $50
@@ -8288,18 +8288,18 @@ label_FE0E::
     ld   a, [wIsIndoor]
     ld   d, a
     call label_2A2C
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     ret
 
 label_FE45::
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     and  a
     jp   z, label_FEC3
     call label_FEE9
     dec  e
     dec  e
     ld   a, e
-    ldh  [$FFD9], a
+    ldh  [hScratchC], a
     ld   a, d
     bit  7, a
     jr   z, label_FE5A
@@ -8310,7 +8310,7 @@ label_FE5A::
     ldh  [$FFE3], a
     call label_FED9
     ld   a, e
-    ldh  [$FFDA], a
+    ldh  [hScratchD], a
     ld   a, d
     bit  7, a
     jr   z, label_FE69
@@ -8335,7 +8335,7 @@ label_FE7E::
     xor  a
     ldh  [$FFE2], a
     ldh  [hScratchA], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   d, a
 
 label_FE86::
@@ -8361,13 +8361,13 @@ label_FE99::
     jr   z, label_FEAC
     ldh  a, [hScratchA]
     push af
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ldh  [hScratchA], a
     pop  af
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
 
 label_FEAC::
-    ldh  a, [$FFD9]
+    ldh  a, [hScratchC]
     and  a
     ldh  a, [hScratchA]
     jr   nz, label_FEB7
@@ -8376,13 +8376,13 @@ label_FEAC::
     ldh  [hScratchA], a
 
 label_FEB7::
-    ldh  a, [$FFDA]
+    ldh  a, [hScratchD]
     and  a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     jr   z, label_FEC2
     cpl
     inc  a
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
 
 label_FEC2::
     ret
@@ -8398,7 +8398,7 @@ label_FEC7::
     ld   hl, $C250
     add  hl, bc
     ld   [hl], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   hl, $C240
     add  hl, bc
     ld   [hl], a
@@ -8449,7 +8449,7 @@ label_FF0B::
     push af
     call label_FEE9
     ld   a, e
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   a, d
     bit  7, a
     jr   z, label_FF19
@@ -8464,7 +8464,7 @@ label_FF19::
     jr   label_FF23
 
 label_FF21::
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
 
 label_FF23::
     ld   e, a

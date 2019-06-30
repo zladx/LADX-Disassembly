@@ -486,8 +486,8 @@ label_7148::
     db 0, 0, 0, 0, $40, $40, $40, $40, $90, $90, $90, $90
 
 label_7154::
-    ldh  [hScratchB], a
-    ldh  [hScratchB], a
+    ldh  [hScratchE], a
+    ldh  [hScratchE], a
 
 label_7158::
     call label_71C7
@@ -986,7 +986,7 @@ RenderRain::
     call GetRandomByte
     and  $18
     add  a, $10
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     call GetRandomByte
     and  $18
     add  a, $10
@@ -1001,7 +1001,7 @@ RenderRain::
     ld   c, $15
 
 .loop
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ldi  [hl], a
     ldh  a, [hScratchA]
     ldi  [hl], a
@@ -1024,9 +1024,9 @@ RenderRain::
     jr   c, .continue
     sub  a, $98
     ldh  [hScratchA], a
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     add  a, $25
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
 
 .continue
     dec  c

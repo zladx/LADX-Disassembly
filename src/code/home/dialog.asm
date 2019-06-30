@@ -534,7 +534,7 @@ DialogDrawNextCharacterHandler::
 .handleNameChar
 
 .notName
-    ldh  [$FFD8], a
+    ldh  [hScratchB], a
     ld   e, a
     ld   a, BANK(AsciiToTileMap)
     ld   [MBC3SelectBank], a
@@ -570,7 +570,7 @@ DialogDrawNextCharacterHandler::
      ; stubbed out bit of code accessing a table for (han)dakutens
     ld   a, $1C ; BANK(DakutenTable)
     ld   [MBC3SelectBank], a ; current character
-    ldh  a, [$FFD8]
+    ldh  a, [hScratchB]
     ld   e, a
     ld   d, $00
     xor  a

@@ -36,26 +36,26 @@ FileDeletionEntryPoint::
     ld   a, $01
     call ClearFileMenuBG_trampoline
     ld   a, $01
-    ld   [$DDD1], a
+    ld   [wPaletteUnknownA], a
     jp   IncrementGameplaySubtypeAndReturn
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $02
-    ld   [$DDD1], a
+    ld   [wPaletteUnknownA], a
     jp   IncrementGameplaySubtypeAndReturn
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     call LoadFileMenuBG_trampoline
     ld   a, $01
-    ld   [$DDD1], a
+    ld   [wPaletteUnknownA], a
     jp   IncrementGameplaySubtypeAndReturn
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_4D53
     ld   a, $02
-    ld   [$DDD1], a
+    ld   [wPaletteUnknownA], a
 
 label_4D53::
     jp   IncrementGameplaySubtypeAndReturn

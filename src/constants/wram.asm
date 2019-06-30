@@ -1192,7 +1192,28 @@ wTunicType:: ; DC0F
   ds 1
 
 ; Unlabeled
-ds $1D0
+ds $DDD1 - $DC10
+
+; Unknown palette-related value
+wPaletteUnknownA:: ; DDD1
+  ds 1
+
+wPaletteToLoadForTileMap:: ; DDD2
+  ; Indicates that the palette for the given tile map should
+  ; be loaded on the next render loop
+  ds 1
+
+wPaletteUnknownC:: ; DDD3
+  ds 1
+
+wPaletteUnknownD:: ; DDD4
+  ds 1
+
+wPaletteUnknownE:: ; DDD5
+  ds 1
+
+; Unlabeled
+ds $DDE0 - $DDD6
 
 ; Color dungeon rooms status
 ;

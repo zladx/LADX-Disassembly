@@ -7247,7 +7247,7 @@ jr_004_6FB8:
     jr   nz, jr_004_6FB8                          ; $6FBE: $20 $F8
 
     ld   a, $02                                   ; $6FC0: $3E $02
-    ld   [$DDD1], a                               ; $6FC2: $EA $D1 $DD
+    ld   [wPaletteUnknownA], a                               ; $6FC2: $EA $D1 $DD
     ret                                           ; $6FC5: $C9
 
     ld   a, [wC167]                               ; $6FC6: $FA $67 $C1
@@ -9329,7 +9329,7 @@ jr_004_7B32:
     jr   nz, jr_004_7B32                          ; $7B38: $20 $F8
 
     ld   a, $02                                   ; $7B3A: $3E $02
-    ld   [$DDD1], a                               ; $7B3C: $EA $D1 $DD
+    ld   [wPaletteUnknownA], a                               ; $7B3C: $EA $D1 $DD
 
 jr_004_7B3F:
     ret                                           ; $7B3F: $C9

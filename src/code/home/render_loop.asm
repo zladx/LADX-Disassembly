@@ -301,19 +301,18 @@ RenderGameplay::
     call ExecuteGameplayHandler
 
 RenderPalettes::
-    ; If isGBC
+    ; If isGBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .resetDDD2
-    ; update palettes
+    jr   z, .clearPaletteToLoad
+    ; Load palette set defined in wPaletteToLoadForTileMap
     ld   a, $21
     call SwitchBank
-    ; update palette set defined in $DDD2?
     call $406E
 
-.resetDDD2
+.clearPaletteToLoad
     xor  a
-    ld   [$DDD2], a
+    ld   [wPaletteToLoadForTileMap], a
 
 RenderWindow::
     callsw UpdateWindowPosition

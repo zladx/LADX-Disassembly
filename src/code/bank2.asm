@@ -149,12 +149,12 @@ jr_002_4291:
     ld   [$C1C4], a                               ; $4298: $EA $C4 $C1
 
 jr_002_429B:
-    ld   a, [$C1C0]                               ; $429B: $FA $C0 $C1
+    ld   a, [wBombArrowCooldown]                               ; $429B: $FA $C0 $C1
     and  a                                        ; $429E: $A7
     jr   z, jr_002_42A5                           ; $429F: $28 $04
 
     dec  a                                        ; $42A1: $3D
-    ld   [$C1C0], a                               ; $42A2: $EA $C0 $C1
+    ld   [wBombArrowCooldown], a                               ; $42A2: $EA $C0 $C1
 
 jr_002_42A5:
     call func_002_436C                            ; $42A5: $CD $6C $43

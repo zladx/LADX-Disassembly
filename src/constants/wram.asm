@@ -184,6 +184,8 @@ wIsShootingArrow:: ; C14C
   ds 1
 
 wProjectileCount:: ; C14D
+  ; Link's active projectiles.
+  ; If ≥0x02, Link cannot shoot any more projectiles.
   ds 1
 
 wHasPlacedBomb:: ; C14E
@@ -315,8 +317,13 @@ ds 2
 wScrollXOffset:: ; C1BF
   ds 1
 
-wC1C0 equ $C1C0 ; C1C0
-  ds $40
+wBombArrowCooldown:: ; C1C0
+  ; Gets set to 6 whenever Link uses the bow or drops a bomb,
+  ; and then decrements by 1 each frame.
+  ds 1
+
+; Unlabeled
+  ds $3F
 
 wEntitiesPosXTable:: ; C200
   ; X position of visible entities

@@ -1957,7 +1957,7 @@ ShootArrow::
     ret  c
     ld   a, e
     ld   [$C1C2], a
-    ld   a, [$C1C0]
+    ld   a, [wBombArrowCooldown]
     and  a
     jr   z, label_1401
     ld   a, [$C1C1]
@@ -1978,7 +1978,7 @@ label_1401::
     ld   a, $06
 
 label_1407::
-    ld   [$C1C0], a
+    ld   [wBombArrowCooldown], a
     ldh  a, [hLinkDirection]
     ld   c, a
     ld   b, $00

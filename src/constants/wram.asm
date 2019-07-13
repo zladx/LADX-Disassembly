@@ -169,7 +169,13 @@ wIsLinkInTheAir:: ; C143
   ds 1
 
 ; Unlabeled
-ds $8
+ds $7
+
+wPegagusBootsChargeMeter:: ; C14B
+  ; Pegasus Boots charge meter
+  ; 0:  not charged
+  ; 1F: fully charged
+  ds 1
 
 wIsShootingArrow:: ; C14C
   ds 1

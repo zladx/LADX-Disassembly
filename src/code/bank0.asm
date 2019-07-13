@@ -836,7 +836,7 @@ label_CAF::
 
 label_CB6::
     xor  a
-    ld   [$C14B], a
+    ld   [wPegagusBootsChargeMeter], a
     ld   [$C14A], a
     ret
 
@@ -1682,7 +1682,7 @@ label_11E8::
 
 label_11FA::
     xor  a
-    ld   [$C14B], a
+    ld   [wPegagusBootsChargeMeter], a
 
 label_11FE::
     ld   a, [wBButtonSlot]
@@ -1698,7 +1698,7 @@ label_120E::
 
 label_1210::
     xor  a
-    ld   [$C14B], a
+    ld   [wPegagusBootsChargeMeter], a
 
 label_1214::
     ld   a, [wBButtonSlot]
@@ -2486,9 +2486,9 @@ label_1713::
     add  a, $02
     ld   [$C120], a
     call label_1756
-    ld   a, [$C14B]
+    ld   a, [wPegagusBootsChargeMeter]
     inc  a
-    ld   [$C14B], a
+    ld   [wPegagusBootsChargeMeter], a
     cp   $20
     ret  nz
     ld   [$C14A], a

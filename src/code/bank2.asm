@@ -459,7 +459,7 @@ jr_002_4457:
     jr   label_002_4464                           ; $4457: $18 $0B
 
 jr_002_4459:
-    ld   a, [$C14B]                               ; $4459: $FA $4B $C1
+    ld   a, [wPegagusBootsChargeMeter]                               ; $4459: $FA $4B $C1
     and  a                                        ; $445C: $A7
     jr   nz, label_002_4464                       ; $445D: $20 $05
 
@@ -6150,7 +6150,7 @@ jr_002_6ACB:
     jr   label_002_6ADB                           ; $6ACF: $18 $0A
 
 jr_002_6AD1:
-    ld   a, [$C14B]                               ; $6AD1: $FA $4B $C1
+    ld   a, [wPegagusBootsChargeMeter]                               ; $6AD1: $FA $4B $C1
     and  a                                        ; $6AD4: $A7
     jr   nz, label_002_6ADB                       ; $6AD5: $20 $04
 
@@ -6762,7 +6762,7 @@ CheckPositionForMapTransition::
 
     ; Clear some state before the transition
     xor  a                                        ; $6DED: $AF
-    ld   [$C14B], a                               ; $6DEE: $EA $4B $C1
+    ld   [wPegagusBootsChargeMeter], a                               ; $6DEE: $EA $4B $C1
     ld   [wIsUsingSpinAttack], a                  ; $6DF1: $EA $21 $C1
     ld   [$C14A], a                               ; $6DF4: $EA $4A $C1
     ld   [$C188], a                               ; $6DF7: $EA $88 $C1

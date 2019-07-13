@@ -83,8 +83,11 @@ The tool was initially developed by @devdri. @kemenaran is currently writing som
 
 - [Artemis251's Link's Awakening Cache](http://artemis251.fobby.net/zelda/index.php): ROM map, maps data format
 - [Xkeeper's Link's Awakening depot](xkeeper.net/hacking/linksawakening/): maps tilesets and save format infos
-- [LALE](https://github.com/Fatories/LALE) : level editor, notes on maps data format
+- [LALE](https://github.com/Fatories/LALE): level editor, notes on maps data format
 - [The Legend of Zelda Link's Awakening /DX Speedrunning Wiki](http://spiraster.x10host.com/LADXWiki/index.php/) : infos on wrong warps and map data format
+- [Disassembling Link's Awakening](https://kemenaran.winosx.com/posts/category-disassembling-links-awakening/): a serie of blog posts and progress reports
+- Discord: [LADX](https://discord.gg/sSHrwdB)
+
 
 ## Contributors
 

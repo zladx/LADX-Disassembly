@@ -119,13 +119,13 @@ jr_002_424F:
     ld   hl, $424C                                ; $4272: $21 $4C $42
     add  hl, bc                                   ; $4275: $09
     ld   a, [hl]                                  ; $4276: $7E
-    ld   hl, $C240                                ; $4277: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                                ; $4277: $21 $40 $C2
     add  hl, de                                   ; $427A: $19
     ld   [hl], a                                  ; $427B: $77
     ld   hl, $4250                                ; $427C: $21 $50 $42
     add  hl, bc                                   ; $427F: $09
     ld   a, [hl]                                  ; $4280: $7E
-    ld   hl, $C250                                ; $4281: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                                ; $4281: $21 $50 $C2
     add  hl, de                                   ; $4284: $19
     ld   [hl], a                                  ; $4285: $77
 
@@ -149,12 +149,12 @@ jr_002_4291:
     ld   [$C1C4], a                               ; $4298: $EA $C4 $C1
 
 jr_002_429B:
-    ld   a, [$C1C0]                               ; $429B: $FA $C0 $C1
+    ld   a, [wBombArrowCooldown]                               ; $429B: $FA $C0 $C1
     and  a                                        ; $429E: $A7
     jr   z, jr_002_42A5                           ; $429F: $28 $04
 
     dec  a                                        ; $42A1: $3D
-    ld   [$C1C0], a                               ; $42A2: $EA $C0 $C1
+    ld   [wBombArrowCooldown], a                               ; $42A2: $EA $C0 $C1
 
 jr_002_42A5:
     call func_002_436C                            ; $42A5: $CD $6C $43
@@ -200,7 +200,7 @@ jr_002_42C7:
     cp   $05                                      ; $42F4: $FE $05
     jr   nz, jr_002_4316                          ; $42F6: $20 $1E
 
-    ld   a, [$C14A]                               ; $42F8: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $42F8: $FA $4A $C1
     and  a                                        ; $42FB: $A7
     jr   nz, jr_002_4333                          ; $42FC: $20 $35
 
@@ -365,7 +365,7 @@ jr_002_43BA:
     jp   nz, label_002_44B5                       ; $43CB: $C2 $B5 $44
 
 jr_002_43CE:
-    ld   a, [$C14A]                               ; $43CE: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $43CE: $FA $4A $C1
     and  a                                        ; $43D1: $A7
     jr   z, jr_002_4402                           ; $43D2: $28 $2E
 
@@ -459,7 +459,7 @@ jr_002_4457:
     jr   label_002_4464                           ; $4457: $18 $0B
 
 jr_002_4459:
-    ld   a, [$C14B]                               ; $4459: $FA $4B $C1
+    ld   a, [wPegagusBootsChargeMeter]                               ; $4459: $FA $4B $C1
     and  a                                        ; $445C: $A7
     jr   nz, label_002_4464                       ; $445D: $20 $05
 
@@ -490,7 +490,7 @@ jr_002_4481:
     and  a                                        ; $4483: $A7
     jr   nz, jr_002_44A2                          ; $4484: $20 $1C
 
-    ld   hl, wC11F                                ; $4486: $21 $1F $C1
+    ld   hl, wLinkGroundStatus                                ; $4486: $21 $1F $C1
     ld   a, [hl]                                  ; $4489: $7E
     and  a                                        ; $448A: $A7
     jr   z, func_002_44AD                         ; $448B: $28 $20
@@ -529,10 +529,10 @@ func_002_44AD::
     call UpdateFinalLinkPosition                  ; $44B2: $CD $A8 $21
 
 label_002_44B5::
-    ld   a, [wC11F]                               ; $44B5: $FA $1F $C1
+    ld   a, [wLinkGroundStatus]                               ; $44B5: $FA $1F $C1
     ld   [$C130], a                               ; $44B8: $EA $30 $C1
     xor  a                                        ; $44BB: $AF
-    ld   [wC11F], a                               ; $44BC: $EA $1F $C1
+    ld   [wLinkGroundStatus], a                               ; $44BC: $EA $1F $C1
     jp   CheckPositionForMapTransition            ; $44BF: $C3 $75 $6C
 
 func_002_44C2::
@@ -584,7 +584,7 @@ func_002_44FA::
     ld   a, $FF                                   ; $4503: $3E $FF
     ld   [wC120], a                               ; $4505: $EA $20 $C1
     ld   a, [wC10A]                               ; $4508: $FA $0A $C1
-    ld   hl, $C14A                                ; $450B: $21 $4A $C1
+    ld   hl, wIsRunningWithPegasusBoots                                ; $450B: $21 $4A $C1
     or   [hl]                                     ; $450E: $B6
     jr   nz, jr_002_4563                          ; $450F: $20 $52
 
@@ -779,7 +779,7 @@ jr_002_4745:
     ld   [$C140], a                               ; $4754: $EA $40 $C1
     ld   a, $18                                   ; $4757: $3E $18
     ld   [$C141], a                               ; $4759: $EA $41 $C1
-    ld   [$C143], a                               ; $475C: $EA $43 $C1
+    ld   [wIsLinkInTheAir], a                               ; $475C: $EA $43 $C1
     ld   a, [$C145]                               ; $475F: $FA $45 $C1
     add  $08                                      ; $4762: $C6 $08
     ld   [$C142], a                               ; $4764: $EA $42 $C1
@@ -793,7 +793,7 @@ label_002_476B::
 
     ld   hl, wC16E                                ; $4772: $21 $6E $C1
     ld   [hl], $04                                ; $4775: $36 $04
-    ld   a, [$C14A]                               ; $4777: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $4777: $FA $4A $C1
     and  a                                        ; $477A: $A7
     jr   nz, jr_002_4781                          ; $477B: $20 $04
 
@@ -881,7 +881,7 @@ jr_002_47E0:
     cp   $05                                      ; $47FB: $FE $05
     jr   nc, jr_002_4789                          ; $47FD: $30 $8A
 
-    ld   a, [$C14A]                               ; $47FF: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $47FF: $FA $4A $C1
     and  a                                        ; $4802: $A7
     jr   nz, jr_002_4809                          ; $4803: $20 $04
 
@@ -983,7 +983,7 @@ jr_002_487E:
     ld   hl, $4606                                ; $48A0: $21 $06 $46
     add  hl, bc                                   ; $48A3: $09
     ld   a, [hl]                                  ; $48A4: $7E
-    ld   [$C143], a                               ; $48A5: $EA $43 $C1
+    ld   [wIsLinkInTheAir], a                               ; $48A5: $EA $43 $C1
     ld   a, $01                                   ; $48A8: $3E $01
     ld   [$C5B0], a                               ; $48AA: $EA $B0 $C5
 
@@ -993,7 +993,7 @@ jr_002_48AD:
 label_002_48B0::
     xor  a                                        ; $48B0: $AF
     ld   [$C1AC], a                               ; $48B1: $EA $AC $C1
-    ld   a, [$C14A]                               ; $48B4: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $48B4: $FA $4A $C1
     and  a                                        ; $48B7: $A7
     jr   nz, jr_002_48C4                          ; $48B8: $20 $0A
 
@@ -1308,10 +1308,10 @@ jr_002_4AF1:
     ld   hl, $4A14                                ; $4B2A: $21 $14 $4A
     add  hl, bc                                   ; $4B2D: $09
     ld   a, [hl]                                  ; $4B2E: $7E
-    ld   hl, $C240                                ; $4B2F: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                                ; $4B2F: $21 $40 $C2
     add  hl, de                                   ; $4B32: $19
     ld   [hl], a                                  ; $4B33: $77
-    ld   hl, $C250                                ; $4B34: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                                ; $4B34: $21 $50 $C2
     add  hl, de                                   ; $4B37: $19
     ld   [hl], $FC                                ; $4B38: $36 $FC
     ld   hl, $C3D0                                ; $4B3A: $21 $D0 $C3
@@ -1651,13 +1651,13 @@ jr_002_4CDD:
     ldh  a, [hScratchA]                               ; $4D0D: $F0 $D7
     cpl                                           ; $4D0F: $2F
     inc  a                                        ; $4D10: $3C
-    ld   hl, $C250                                ; $4D11: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                                ; $4D11: $21 $50 $C2
     add  hl, bc                                   ; $4D14: $09
     ld   [hl], a                                  ; $4D15: $77
     ldh  a, [hScratchB]                               ; $4D16: $F0 $D8
     cpl                                           ; $4D18: $2F
     inc  a                                        ; $4D19: $3C
-    ld   hl, $C240                                ; $4D1A: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                                ; $4D1A: $21 $40 $C2
     add  hl, bc                                   ; $4D1D: $09
     ld   [hl], a                                  ; $4D1E: $77
 
@@ -3460,7 +3460,7 @@ label_002_5707::
     ld   d, $00                                   ; $571F: $16 $00
     ld   e, a                                     ; $5721: $5F
     ld   hl, $5708                                ; $5722: $21 $08 $57
-    ld   a, [$C14A]                               ; $5725: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $5725: $FA $4A $C1
     and  a                                        ; $5728: $A7
     jp   nz, label_002_583A                       ; $5729: $C2 $3A $58
 
@@ -6034,7 +6034,7 @@ jr_002_6A00:
     jp   nz, ApplyMapFadeOutTransition                            ; $6A21: $C2 $7D $0C
 
 jr_002_6A24:
-    ld   a, [$C14A]                               ; $6A24: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $6A24: $FA $4A $C1
     and  a                                        ; $6A27: $A7
     jr   z, jr_002_6A4C                           ; $6A28: $28 $22
 
@@ -6150,7 +6150,7 @@ jr_002_6ACB:
     jr   label_002_6ADB                           ; $6ACF: $18 $0A
 
 jr_002_6AD1:
-    ld   a, [$C14B]                               ; $6AD1: $FA $4B $C1
+    ld   a, [wPegagusBootsChargeMeter]                               ; $6AD1: $FA $4B $C1
     and  a                                        ; $6AD4: $A7
     jr   nz, label_002_6ADB                       ; $6AD5: $20 $04
 
@@ -6369,7 +6369,7 @@ jr_002_6BF6:
 
     ldh  a, [hLinkFinalPositionX]                               ; $6BFC: $F0 $9F
     ldh  [hLinkPositionX], a                      ; $6BFE: $E0 $98
-    ld   a, [$C14A]                               ; $6C00: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $6C00: $FA $4A $C1
     and  a                                        ; $6C03: $A7
     ret  z                                        ; $6C04: $C8
 
@@ -6657,7 +6657,7 @@ CheckPositionForMapTransition::
     cp   $51                                      ; $6D67: $FE $51
     jp   z, clearIncrementAndReturn               ; $6D69: $CA $0C $6E
 
-    ld   a, [wC11F]                               ; $6D6C: $FA $1F $C1
+    ld   a, [wLinkGroundStatus]                               ; $6D6C: $FA $1F $C1
     cp   $07                                      ; $6D6F: $FE $07
     jp   z, clearIncrementAndReturn               ; $6D71: $CA $0C $6E
 
@@ -6674,7 +6674,7 @@ CheckPositionForMapTransition::
     jp   nz, clearIncrementAndReturn              ; $6D85: $C2 $0C $6E
 
 .jr_002_6D88
-    ld   a, [$C14A]                               ; $6D88: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $6D88: $FA $4A $C1
     and  a                                        ; $6D8B: $A7
     jr   nz, .jr_002_6D94                         ; $6D8C: $20 $06
 
@@ -6692,7 +6692,7 @@ CheckPositionForMapTransition::
     cp   $88                                      ; $6D9F: $FE $88
     jr   nc, .initiateRoomTransition              ; $6DA1: $30 $29
 
-    ld   a, [$C14A]                               ; $6DA3: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $6DA3: $FA $4A $C1
     ld   hl, hIsSideScrolling                     ; $6DA6: $21 $F9 $FF
     or   [hl]                                     ; $6DA9: $B6
     ld   hl, $FFB2                                ; $6DAA: $21 $B2 $FF
@@ -6762,9 +6762,9 @@ CheckPositionForMapTransition::
 
     ; Clear some state before the transition
     xor  a                                        ; $6DED: $AF
-    ld   [$C14B], a                               ; $6DEE: $EA $4B $C1
+    ld   [wPegagusBootsChargeMeter], a                               ; $6DEE: $EA $4B $C1
     ld   [wIsUsingSpinAttack], a                  ; $6DF1: $EA $21 $C1
-    ld   [$C14A], a                               ; $6DF4: $EA $4A $C1
+    ld   [wIsRunningWithPegasusBoots], a                               ; $6DF4: $EA $4A $C1
     ld   [$C188], a                               ; $6DF7: $EA $88 $C1
 
     ; If Link's Y position >= $88…
@@ -7196,7 +7196,7 @@ jr_002_7085:
     or   [hl]                                     ; $7097: $B6
     jr   nz, label_002_70D8                       ; $7098: $20 $3E
 
-    ld   a, [$C14A]                               ; $709A: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $709A: $FA $4A $C1
     and  a                                        ; $709D: $A7
     jr   nz, jr_002_70B5                          ; $709E: $20 $15
 
@@ -7487,7 +7487,7 @@ label_002_723D::
     jp   label_002_7461                           ; $725D: $C3 $61 $74
 
 label_002_7260::
-    ld   hl, wC11F                                ; $7260: $21 $1F $C1
+    ld   hl, wLinkGroundStatus                                ; $7260: $21 $1F $C1
     ld   [hl], $01                                ; $7263: $36 $01
     cp   $0A                                      ; $7265: $FE $0A
     jp   z, label_002_7461                        ; $7267: $CA $61 $74
@@ -7549,7 +7549,7 @@ jr_002_728E:
     jr   nz, jr_002_72C3                          ; $72B9: $20 $08
 
 jr_002_72BB:
-    ld   a, [$C14A]                               ; $72BB: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $72BB: $FA $4A $C1
     and  a                                        ; $72BE: $A7
     jr   nz, jr_002_72FA                          ; $72BF: $20 $39
 
@@ -7595,7 +7595,7 @@ jr_002_72EC:
     call func_002_74FE                            ; $72F7: $CD $FE $74
 
 jr_002_72FA:
-    ld   a, [$C14A]                               ; $72FA: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $72FA: $FA $4A $C1
     and  a                                        ; $72FD: $A7
     jr   nz, jr_002_7330                          ; $72FE: $20 $30
 
@@ -7648,7 +7648,7 @@ jr_002_733B:
     jp   nz, label_002_73AD                       ; $734C: $C2 $AD $73
 
 jr_002_734F:
-    ld   a, [$C14A]                               ; $734F: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $734F: $FA $4A $C1
     and  a                                        ; $7352: $A7
     jp   z, label_002_7454                        ; $7353: $CA $54 $74
 
@@ -7883,7 +7883,7 @@ jr_002_74AC:
     ret                                           ; $74AC: $C9
 
 label_002_74AD::
-    ld   a, [$C14A]                               ; $74AD: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $74AD: $FA $4A $C1
     and  a                                        ; $74B0: $A7
     ret  z                                        ; $74B1: $C8
 
@@ -7984,7 +7984,7 @@ jr_002_7549:
     jr   z, jr_002_7587                           ; $754D: $28 $38
 
     ld   hl, $C146                                ; $754F: $21 $46 $C1
-    ld   a, [$C14A]                               ; $7552: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $7552: $FA $4A $C1
     or   [hl]                                     ; $7555: $B6
     jr   nz, func_002_755B                        ; $7556: $20 $03
 
@@ -8160,7 +8160,7 @@ jr_002_7644:
 jr_002_764C:
     call label_CAF                                ; $764C: $CD $AF $0C
     ld   a, $07                                   ; $764F: $3E $07
-    ld   [wC11F], a                               ; $7651: $EA $1F $C1
+    ld   [wLinkGroundStatus], a                               ; $7651: $EA $1F $C1
     ld   hl, $C1BB                                ; $7654: $21 $BB $C1
     inc  [hl]                                     ; $7657: $34
     ld   hl, wFreeMovementMode                    ; $7658: $21 $7B $C1
@@ -8353,7 +8353,7 @@ jr_002_7750:
     or   $20                                      ; $777C: $F6 $20
     ld   [hl], a                                  ; $777E: $77
     ld   a, $03                                   ; $777F: $3E $03
-    ld   [wC11F], a                               ; $7781: $EA $1F $C1
+    ld   [wLinkGroundStatus], a                               ; $7781: $EA $1F $C1
     ldh  a, [hFrameCounter]                       ; $7784: $F0 $E7
     and  $0F                                      ; $7786: $E6 $0F
     jr   nz, jr_002_779A                          ; $7788: $20 $10
@@ -8576,7 +8576,7 @@ jr_002_78CF:
     xor  $20                                      ; $78CF: $EE $20
     ld   [hl], a                                  ; $78D1: $77
     ld   a, $03                                   ; $78D2: $3E $03
-    ld   [wC11F], a                               ; $78D4: $EA $1F $C1
+    ld   [wLinkGroundStatus], a                               ; $78D4: $EA $1F $C1
     ret                                           ; $78D7: $C9
 
 include "code/room_transition.asm"

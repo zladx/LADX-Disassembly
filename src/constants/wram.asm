@@ -56,13 +56,25 @@ wLinkMotionState: ; C11C
 
 wC11D: ds 1
 wC11E: ds 1
-wC11F: ds 1
+
+
+wLinkGroundStatus:: ; C11F
+  ; The condition of the ground Link is standing on
+  ; 0:  dry ground
+  ; 1:  steps (only when moving)
+  ; 3:  wet or grassy
+  ; 7:  pit
+  ds 1
+
 wC120: ds 1
 
 wIsUsingSpinAttack:: ; C121
   ds 1
 
 wSwordCharge:: ; C122
+  ; Link's spin attack charging meter
+  ; 0:     not charged
+  ; 0x28:  fully charged
   ds 1
 
 wLinkWalkingFrameCount:: ; C123
@@ -150,13 +162,30 @@ wRandomSeed:: ; C13D
   ds 1
 
 ; Unlabeled
-wC140 equ $C13E
-  ds $E
+ds $5
+
+wIsLinkInTheAir:: ; C143
+  ; Is Link in the air (jumping with the feather, flying with roaster, etc)?
+  ds 1
+
+; Unlabeled
+ds $6
+
+wIsRunningWithPegasusBoots:: ; C14A
+  ds 1
+
+wPegagusBootsChargeMeter:: ; C14B
+  ; Pegasus Boots charge meter
+  ; 0:  not charged
+  ; 1F: fully charged
+  ds 1
 
 wIsShootingArrow:: ; C14C
   ds 1
 
 wProjectileCount:: ; C14D
+  ; Link's active projectiles.
+  ; If ≥0x02, Link cannot shoot any more projectiles.
   ds 1
 
 wHasPlacedBomb:: ; C14E
@@ -288,125 +317,127 @@ ds 2
 wScrollXOffset:: ; C1BF
   ds 1
 
-wC1C0 equ $C1C0 ; C1C0
-  ds $40
+wBombArrowCooldown:: ; C1C0
+  ; Gets set to 6 whenever Link uses the bow or drops a bomb,
+  ; and then decrements by 1 each frame.
+  ds 1
+
+; Unlabeled
+  ds $3F
 
 wEntitiesPosXTable:: ; C200
   ; X position of visible entities
-
-wEntity0PosX:: ; C200
-  ds $1
-wEntity1PosX:: ; C201
-  ds $1
-wEntity2PosX:: ; C202
-wIntroShipPosX:: ; C202
-  ; Position of the ship sprite during the intro sequence
-  ds $1
-wEntity3PosX:: ; C203
-  ds $1
-wEntity4PosX:: ; C204
-  ds $1
-wEntity5PosX:: ; C205
-  ds $1
-wEntity6PosX:: ; C206
-  ds $1
-wEntity7PosX:: ; C207
-  ds $1
-wEntity8PosX:: ; C208
-  ds $1
-wEntity9PosX:: ; C209
-  ds $1
-wEntity10PosX:: ; C20A
-  ds $1
-wEntity11PosX:: ; C20B
-  ds $1
-wEntity12PosX:: ; C20C
-  ds $1
-wEntity13PosX:: ; C20D
-  ds $1
-wEntity14PosX:: ; C20E
-  ds $1
-wEntity15PosX:: ; C20F
-  ds $1
+wEntity0PosX:: ds 1 ; C200
+wEntity1PosX:: ds 1 ; C201
+wEntity2PosX:: ds 1 ; C202
+wEntity3PosX:: ds 1 ; C203
+wEntity4PosX:: ds 1 ; C204
+wEntity5PosX:: ds 1 ; C205
+wEntity6PosX:: ds 1 ; C206
+wEntity7PosX:: ds 1 ; C207
+wEntity8PosX:: ds 1 ; C208
+wEntity9PosX:: ds 1 ; C209
+wEntityAPosX:: ds 1 ; C20A
+wEntityBPosX:: ds 1 ; C20B
+wEntityCPosX:: ds 1 ; C20C
+wEntityDPosX:: ds 1 ; C20D
+wEntityEPosX:: ds 1 ; C20E
+wEntityFPosX:: ds 1 ; C20F
 
 wEntitiesPosYTable:: ; C210
   ; Y position of visible entities
+wEntity0PosY:: ds 1 ; C210
+wEntity1PosY:: ds 1 ; C211
+wEntity2PosY:: ds 1 ; C212
+wEntity3PosY:: ds 1 ; C213
+wEntity4PosY:: ds 1 ; C214
+wEntity5PosY:: ds 1 ; C215
+wEntity6PosY:: ds 1 ; C216
+wEntity7PosY:: ds 1 ; C217
+wEntity8PosY:: ds 1 ; C218
+wEntity9PosY:: ds 1 ; C219
+wEntityAPosY:: ds 1 ; C21A
+wEntityBPosY:: ds 1 ; C21B
+wEntityCPosY:: ds 1 ; C21C
+wEntityDPosY:: ds 1 ; C21D
+wEntityEPosY:: ds 1 ; C21E
+wEntityFPosY:: ds 1 ; C21F
 
-wEntity0PosY:: ; C210
-  ds $1
-wEntity1PosY:: ; C211
-  ds $1
-wEntity2PosY:: ; C212
-  ds $1
-wEntity3PosY:: ; C213
-  ds $1
-wEntity4PosY:: ; C214
-  ds $1
-wEntity5PosY:: ; C215
-  ds $1
-wEntity6PosY:: ; C216
-  ds $1
-wEntity7PosY:: ; C217
-  ds $1
-wEntity8PosY:: ; C218
-  ds $1
-wEntity9PosY:: ; C219
-  ds $1
-wEntityAPosY:: ; C21A
-  ds $1
-wEntityBPosY:: ; C21B
-  ds $1
-wEntityCPosY:: ; C21C
-  ds $1
-wEntityDPosY:: ; C21D
-  ds $1
-wEntityEPosY:: ; C21E
-  ds $1
-wEntityFPosY:: ; C21F
-  ds $1
-
-; Unlabeled
+; Unlabeled entity attributes table
 wC220 equ $C220
-  ds $60
+  ds $10
+
+; Unlabeled entity attributes table
+wC230 equ $C230
+  ds $10
+
+wEntitiesSpeedXTable:: ; C240
+  ; X Velocity of visible entities
+wEntity0SpeedX:: ds 1 ; C240
+wEntity1SpeedX:: ds 1 ; C241
+wEntity2SpeedX:: ds 1 ; C242
+wEntity3SpeedX:: ds 1 ; C243
+wEntity4SpeedX:: ds 1 ; C244
+wEntity5SpeedX:: ds 1 ; C245
+wEntity6SpeedX:: ds 1 ; C246
+wEntity7SpeedX:: ds 1 ; C247
+wEntity8SpeedX:: ds 1 ; C248
+wEntity9SpeedX:: ds 1 ; C249
+wEntityASpeedX:: ds 1 ; C24A
+wEntityBSpeedX:: ds 1 ; C24B
+wEntityCSpeedX:: ds 1 ; C24C
+wEntityDSpeedX:: ds 1 ; C24D
+wEntityESpeedX:: ds 1 ; C24E
+wEntityFSpeedX:: ds 1 ; C24F
+
+wEntitiesSpeedYTable:: ; C250
+  ; X Velocity of visible entities
+wEntity0SpeedY:: ds 1 ; C250
+wEntity1SpeedY:: ds 1 ; C251
+wEntity2SpeedY:: ds 1 ; C252
+wEntity3SpeedY:: ds 1 ; C253
+wEntity4SpeedY:: ds 1 ; C254
+wEntity5SpeedY:: ds 1 ; C255
+wEntity6SpeedY:: ds 1 ; C256
+wEntity7SpeedY:: ds 1 ; C257
+wEntity8SpeedY:: ds 1 ; C258
+wEntity9SpeedY:: ds 1 ; C259
+wEntityASpeedY:: ds 1 ; C25A
+wEntityBSpeedY:: ds 1 ; C25B
+wEntityCSpeedY:: ds 1 ; C25C
+wEntityDSpeedY:: ds 1 ; C25D
+wEntityESpeedY:: ds 1 ; C25E
+wEntityFSpeedY:: ds 1 ; C25F
+
+; Unlabeled entity attributes table
+wC260 equ $C260
+  ds $10
+
+; Unlabeled entity attributes table
+wC270 equ $C270
+  ds $10
 
 wEntitiesTypeTable:: ; C280
   ; Type of visible entities
   ; 0: entity not present
   ; 5: Link's ship in intro
   ; 6: Marin
-
-wEntity0Type:: ; C280
-  ds $1
-wEntity1Type:: ; C281
-  ds $1
-wEntity2Type:: ; C282
-  ds $1
-wEntity3Type:: ; C283
-  ds $1
-wEntity4Type:: ; C284
-  ds $1
-wEntity5Type:: ; C285
-  ds $1
-wEntity6Type:: ; C286
-  ds $1
-wEntity7Type:: ; C287
-  ds $1
-wEntity8Type:: ; C288
-  ds $1
-wEntity9Type:: ; C289
-  ds $1
-wEntityAType:: ; C28A
-  ds $1
-wEntityBType:: ; C28B
-  ds $1
-wEntityCType:: ; C28C
-  ds $1
-wEntityDType:: ; C28D
-  ds $1
-wEntityEType:: ; C28E
-  ds $1
-wEntityFType:: ; C28F
-  ds $1
+wEntity0Type:: ds 1 ; C280
+wEntity1Type:: ds 1 ; C281
+wEntity2Type:: ds 1 ; C282
+wEntity3Type:: ds 1 ; C283
+wEntity4Type:: ds 1 ; C284
+wEntity5Type:: ds 1 ; C285
+wEntity6Type:: ds 1 ; C286
+wEntity7Type:: ds 1 ; C287
+wEntity8Type:: ds 1 ; C288
+wEntity9Type:: ds 1 ; C289
+wEntityAType:: ds 1 ; C28A
+wEntityBType:: ds 1 ; C28B
+wEntityCType:: ds 1 ; C28C
+wEntityDType:: ds 1 ; C28D
+wEntityEType:: ds 1 ; C28E
+wEntityFType:: ds 1 ; C28F
 
 wEntitiesWalkingTable:: ; C290
   ; Indicate if the designated entity is walking (1) or standing in place (0).

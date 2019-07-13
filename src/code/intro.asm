@@ -293,8 +293,8 @@ label_7013::
     ret
 
 label_7014::
-    ; If IntroShipPosX == $50…
-    ld   a, [wIntroShipPosX]
+    ; If Intro's ship X == $50…
+    ld   a, [wEntity2PosX]
     cp   $50
     jr   nz, .transitionEnd
 

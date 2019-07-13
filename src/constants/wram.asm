@@ -72,6 +72,9 @@ wIsUsingSpinAttack:: ; C121
   ds 1
 
 wSwordCharge:: ; C122
+  ; Link's spin attack charging meter
+  ; 0:     not charged
+  ; 0x28:  fully charged
   ds 1
 
 wLinkWalkingFrameCount:: ; C123
@@ -159,8 +162,14 @@ wRandomSeed:: ; C13D
   ds 1
 
 ; Unlabeled
-wC140 equ $C13E
-  ds $E
+ds $5
+
+wIsLinkInTheAir:: ; C143
+  ; Is Link in the air (jumping with the feather, flying with roaster, etc)?
+  ds 1
+
+; Unlabeled
+ds $8
 
 wIsShootingArrow:: ; C14C
   ds 1

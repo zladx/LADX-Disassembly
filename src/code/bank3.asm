@@ -5823,7 +5823,7 @@ label_EE8E::
     pop  hl
     push af
     inc  hl
-    ld   a, [$C143]
+    ld   a, [wIsLinkInTheAir]
     add  a, [hl]
     ld   e, a
     pop  af
@@ -6748,7 +6748,7 @@ label_F440::
     pop  hl
     push af
     inc  hl
-    ld   a, [$C143]
+    ld   a, [wIsLinkInTheAir]
     add  a, [hl]
     ld   e, a
     pop  af

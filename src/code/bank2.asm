@@ -779,7 +779,7 @@ jr_002_4745:
     ld   [$C140], a                               ; $4754: $EA $40 $C1
     ld   a, $18                                   ; $4757: $3E $18
     ld   [$C141], a                               ; $4759: $EA $41 $C1
-    ld   [$C143], a                               ; $475C: $EA $43 $C1
+    ld   [wIsLinkInTheAir], a                               ; $475C: $EA $43 $C1
     ld   a, [$C145]                               ; $475F: $FA $45 $C1
     add  $08                                      ; $4762: $C6 $08
     ld   [$C142], a                               ; $4764: $EA $42 $C1
@@ -983,7 +983,7 @@ jr_002_487E:
     ld   hl, $4606                                ; $48A0: $21 $06 $46
     add  hl, bc                                   ; $48A3: $09
     ld   a, [hl]                                  ; $48A4: $7E
-    ld   [$C143], a                               ; $48A5: $EA $43 $C1
+    ld   [wIsLinkInTheAir], a                               ; $48A5: $EA $43 $C1
     ld   a, $01                                   ; $48A8: $3E $01
     ld   [$C5B0], a                               ; $48AA: $EA $B0 $C5
 

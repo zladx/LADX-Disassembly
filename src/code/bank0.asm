@@ -837,7 +837,7 @@ label_CAF::
 label_CB6::
     xor  a
     ld   [wPegagusBootsChargeMeter], a
-    ld   [$C14A], a
+    ld   [wIsRunningWithPegasusBoots], a
     ret
 
 CopyLinkFinalPositionToPosition::
@@ -1612,7 +1612,7 @@ LinkMotionInteractiveHandler::
     ld   hl, $C1A4
     or   [hl]
     ret  nz
-    ld   a, [$C14A]
+    ld   a, [wIsRunningWithPegasusBoots]
     and  a
     jr   z, label_11BC
     ld   a, [wBButtonSlot]
@@ -2136,7 +2136,7 @@ label_14F8::
 label_1508::
     ld   a, $20
     ldh  [$FFA3], a
-    ld   a, [$C14A]
+    ld   a, [wIsRunningWithPegasusBoots]
     and  a
     ret  z
     ldh  a, [hLinkDirection]
@@ -2244,7 +2244,7 @@ CheckStaticSwordCollision::
     ld   a, [$C1C4]
     and  a
     ret  nz
-    ld   a, [$C14A]
+    ld   a, [wIsRunningWithPegasusBoots]
     and  a
     jr   nz, .label_15C0
     ld   a, [$C16A]
@@ -2338,7 +2338,7 @@ label_1637::
     ld   a, c
     ldh  [$FFF1], a
     call label_2178
-    ld   a, [$C14A]
+    ld   a, [wIsRunningWithPegasusBoots]
     and  a
     jr   nz, label_1653
     ld   a, [$C16A]
@@ -2475,7 +2475,7 @@ label_1705::
     ret  nz
 
 label_1713::
-    ld   a, [$C14A]
+    ld   a, [wIsRunningWithPegasusBoots]
     and  a
     ret  nz
     ldh  a, [$FFA2]
@@ -2491,7 +2491,7 @@ label_1713::
     ld   [wPegagusBootsChargeMeter], a
     cp   $20
     ret  nz
-    ld   [$C14A], a
+    ld   [wIsRunningWithPegasusBoots], a
     xor  a
     ld   [wIsUsingSpinAttack], a
     ld   [wSwordCharge], a
@@ -3285,7 +3285,7 @@ label_1F61::
     jp   SwitchBank
 
 label_1F69::
-    ld   hl, $C14A
+    ld   hl, wIsRunningWithPegasusBoots
     ld   a, [$C15C]
     or   [hl]
     ld   hl, $FFA2

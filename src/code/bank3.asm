@@ -5837,7 +5837,7 @@ label_EE8E::
     ld   a, [$C5B0]
     and  a
     jp   nz, label_EFE8
-    ld   a, [$C14A]
+    ld   a, [wIsRunningWithPegasusBoots]
     ldh  [$FFE9], a
     call label_CB6
     ldh  a, [$FFEB]
@@ -6146,7 +6146,7 @@ label_F07D::
     ld   a, [hl]
     cp   $04
     jp   nz, label_F09D
-    ld   a, [$C14A]
+    ld   a, [wIsRunningWithPegasusBoots]
     and  a
     jr   z, label_F102
     ld   hl, $C300
@@ -6155,7 +6155,7 @@ label_F07D::
     ret
 
 label_F09D::
-    ld   a, [$C14A]
+    ld   a, [wIsRunningWithPegasusBoots]
     and  a
     jr   z, label_F0AC
     call label_EDDF
@@ -6318,7 +6318,7 @@ label_F19D::
 label_F1AE::
     ld   hl, $C121
     or   [hl]
-    ld   hl, $C14A
+    ld   hl, wIsRunningWithPegasusBoots
     or   [hl]
     ld   a, [$DB4E]
     jr   z, label_F1BC
@@ -6369,7 +6369,7 @@ label_F1C0::
     ld   a, [$D219]
     cp   $04
     jr   nz, label_F215
-    ld   a, [$C14A]
+    ld   a, [wIsRunningWithPegasusBoots]
     push af
     call label_EDDF
     pop  af

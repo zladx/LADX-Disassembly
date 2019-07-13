@@ -9717,7 +9717,7 @@ jr_004_7D91:
     ld   [bc], a                                  ; $7DA0: $02
     ld   [bc], a                                  ; $7DA1: $02
     ld   [bc], a                                  ; $7DA2: $02
-    ld   a, [$C14A]                               ; $7DA3: $FA $4A $C1
+    ld   a, [wIsRunningWithPegasusBoots]                               ; $7DA3: $FA $4A $C1
     and  a                                        ; $7DA6: $A7
     jr   z, jr_004_7DAE                           ; $7DA7: $28 $05
 

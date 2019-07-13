@@ -333,8 +333,6 @@ wEntity0PosX:: ; C200
 wEntity1PosX:: ; C201
   ds $1
 wEntity2PosX:: ; C202
-wIntroShipPosX:: ; C202
-  ; Position of the ship sprite during the intro sequence
   ds $1
 wEntity3PosX:: ; C203
   ds $1

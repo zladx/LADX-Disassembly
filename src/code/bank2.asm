@@ -119,13 +119,13 @@ jr_002_424F:
     ld   hl, $424C                                ; $4272: $21 $4C $42
     add  hl, bc                                   ; $4275: $09
     ld   a, [hl]                                  ; $4276: $7E
-    ld   hl, $C240                                ; $4277: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                                ; $4277: $21 $40 $C2
     add  hl, de                                   ; $427A: $19
     ld   [hl], a                                  ; $427B: $77
     ld   hl, $4250                                ; $427C: $21 $50 $42
     add  hl, bc                                   ; $427F: $09
     ld   a, [hl]                                  ; $4280: $7E
-    ld   hl, $C250                                ; $4281: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                                ; $4281: $21 $50 $C2
     add  hl, de                                   ; $4284: $19
     ld   [hl], a                                  ; $4285: $77
 
@@ -1308,10 +1308,10 @@ jr_002_4AF1:
     ld   hl, $4A14                                ; $4B2A: $21 $14 $4A
     add  hl, bc                                   ; $4B2D: $09
     ld   a, [hl]                                  ; $4B2E: $7E
-    ld   hl, $C240                                ; $4B2F: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                                ; $4B2F: $21 $40 $C2
     add  hl, de                                   ; $4B32: $19
     ld   [hl], a                                  ; $4B33: $77
-    ld   hl, $C250                                ; $4B34: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                                ; $4B34: $21 $50 $C2
     add  hl, de                                   ; $4B37: $19
     ld   [hl], $FC                                ; $4B38: $36 $FC
     ld   hl, $C3D0                                ; $4B3A: $21 $D0 $C3
@@ -1651,13 +1651,13 @@ jr_002_4CDD:
     ldh  a, [hScratchA]                               ; $4D0D: $F0 $D7
     cpl                                           ; $4D0F: $2F
     inc  a                                        ; $4D10: $3C
-    ld   hl, $C250                                ; $4D11: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                                ; $4D11: $21 $50 $C2
     add  hl, bc                                   ; $4D14: $09
     ld   [hl], a                                  ; $4D15: $77
     ldh  a, [hScratchB]                               ; $4D16: $F0 $D8
     cpl                                           ; $4D18: $2F
     inc  a                                        ; $4D19: $3C
-    ld   hl, $C240                                ; $4D1A: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                                ; $4D1A: $21 $40 $C2
     add  hl, bc                                   ; $4D1D: $09
     ld   [hl], a                                  ; $4D1E: $77
 

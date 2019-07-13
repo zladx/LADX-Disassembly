@@ -992,10 +992,10 @@ label_CDD2::
     ld   a, $0B
     ld   [$C19E], a
     call label_F5A2
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     or   [hl]
     jr   nz, label_CE04
@@ -1101,7 +1101,7 @@ label_CE85::
     ld   hl, data_CE05
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     call label_FF32
@@ -1125,13 +1125,13 @@ data_CEA4::
     ld   hl, data_CEA0
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     ld   hl, data_CEA4
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
     ret
@@ -1393,7 +1393,7 @@ label_D081::
     ld   a, [hl]
     sub  a, $08
     ld   [hl], a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], $FC
     ld   hl, $C3B0
@@ -1547,13 +1547,13 @@ label_D16E::
     ld   hl, data_D23D
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     ld   hl, data_D241
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
     call label_D249
@@ -2269,7 +2269,7 @@ label_D6D1::
     jr   label_D6DF
 
 label_D6D9::
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, de
     ld   [hl], $EC
 
@@ -2553,13 +2553,13 @@ label_D8B9::
     ld   hl, data_D81B
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     ld   hl, data_D81F
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
     ret
@@ -2679,7 +2679,7 @@ label_D947::
     ld   hl, data_D93F
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, de
     ld   [hl], a
 
@@ -2687,7 +2687,7 @@ label_D974::
     ld   hl, data_D943
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchC]
@@ -2743,13 +2743,13 @@ label_D998::
     ld   hl, data_D992
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_D994
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, de
     ld   [hl], a
     pop  bc
@@ -3536,7 +3536,7 @@ label_DF5F::
     ld   hl, data_DF31
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchB]
@@ -3544,7 +3544,7 @@ label_DF5F::
     add  hl, de
     add  a, $F8
     ld   [hl], a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, de
     ld   [hl], $FD
     ld   hl, $C2E0
@@ -3707,7 +3707,7 @@ label_E0B3::
     and  $F0
     add  a, $05
     ld   [hl], a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   a, [hl]
     cpl
@@ -3740,10 +3740,10 @@ label_E0E3::
 label_E103::
     xor  a
     push hl
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
     pop  hl
@@ -3780,7 +3780,7 @@ label_E134::
 
 label_E136::
     ld   [hl], a
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   a, [hl]
     sra  a
@@ -3793,7 +3793,7 @@ label_E143::
     ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_E156
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   a, [hl]
     db $CB
@@ -3835,13 +3835,13 @@ label_E19C::
     call GetRandomByte
     and  $0F
     sub  a, $08
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     call GetRandomByte
     and  $0F
     sub  a, $08
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
     ret
@@ -3974,13 +3974,13 @@ label_E26B::
     ldh  a, [hScratchB]
     cpl
     inc  a
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     ldh  a, [hScratchA]
     cpl
     inc  a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
     ld   hl, $C320
@@ -5229,7 +5229,7 @@ label_EB13::
     cp   $00
     jr   nz, label_EB31
     call label_EB2C
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
 
 label_EB22::
     add  hl, bc
@@ -5242,14 +5242,14 @@ label_EB22::
     ret
 
 label_EB2C::
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     jr   label_EB22
 
 label_EB31::
     call label_EB43
 
 label_EB34::
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
 
 label_EB37::
     add  hl, bc
@@ -5265,7 +5265,7 @@ label_EB42::
     ret
 
 label_EB43::
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     jr   label_EB37
 
 data_EB48::
@@ -5325,7 +5325,7 @@ label_EB8C::
     ldh  a, [$FFE7]
     and  $07
     jr   nz, label_EBAB
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -5342,7 +5342,7 @@ label_EBAB::
     ld   hl, data_EB73
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     add  a, [hl]
     ld   [hl], a
@@ -5352,7 +5352,7 @@ label_EBAB::
     and  $80
     jr   nz, label_EBC5
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
 
@@ -5861,13 +5861,13 @@ label_EED1::
     ldh  a, [hActiveEntityWalking]
     cp   $02
     jp   nz, label_EF93
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   a, [hl]
     cpl
     inc  a
     ld   [hl], a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   a, [hl]
     cpl
@@ -5931,13 +5931,13 @@ label_EF2A::
     ld   hl, data_EF65
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     ld   hl, data_EF69
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
 
@@ -5970,12 +5970,12 @@ label_EF75::
     ldh  a, [hLinkDirection]
     and  $02
     jr   nz, label_EF81
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     jr   label_EF85
 
 label_EF81::
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
 
 label_EF85::
@@ -6110,13 +6110,13 @@ label_F042::
     ldh  a, [hScratchA]
     cpl
     inc  a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
     ldh  a, [hScratchB]
     cpl
     inc  a
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     call IncrementEntityWalkingAttr
@@ -7019,16 +7019,16 @@ label_F5FE::
     ld   a, [hl]
     cp   $55
     jr   nz, label_F630
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, de
     ld   [hl], a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, de
     ld   [hl], a
     ld   hl, $C2E0
@@ -7234,14 +7234,14 @@ label_F75A::
     and  a
     jr   nz, label_F79F
     ld   [hl], $0C
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     sra  [hl]
     sra  [hl]
     ld   a, [hl]
     cpl
     ld   [hl], a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     sra  [hl]
     sra  [hl]
@@ -7296,13 +7296,13 @@ label_F7A7::
     ret
 
 label_F7B8::
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   a, [hl]
     ld   hl, $C3F0
     add  hl, de
     ld   [hl], a
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   a, [hl]
     ld   hl, $C400
@@ -7523,13 +7523,13 @@ label_F93D::
     ldh  a, [$FFEB]
     cp   $AC
     jr   z, label_F954
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   a, [hl]
     bit  7, a
     jr   nz, label_F954
     ld   [hl], $00
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     sra  [hl]
 
@@ -7670,7 +7670,7 @@ label_FA18::
     add  hl, bc
     xor  a
     ld   [hl], a
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   a, [hl]
     cp   $00
@@ -7694,7 +7694,7 @@ label_FA47::
     ld   [hl], a
 
 label_FA5D::
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   a, [hl]
     cp   $00
@@ -8395,11 +8395,11 @@ label_FEC3::
 label_FEC7::
     call label_FE45
     ldh  a, [hScratchA]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
     ldh  a, [hScratchB]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     ret
@@ -8481,7 +8481,7 @@ label_FF25::
     ret
 
 label_FF32::
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -8575,24 +8575,24 @@ label_FFA9::
     dec  a
     ld   [hl], a
     call label_3E8E
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   a, [hl]
     push af
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   a, [hl]
     push af
     ld   hl, $C3F0
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], a
     ld   hl, $C400
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], a
     call label_FF25
@@ -8604,11 +8604,11 @@ label_FFA9::
     call label_F893
 
 label_FFE4::
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     pop  af
     ld   [hl], a
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     pop  af
     ld   [hl], a

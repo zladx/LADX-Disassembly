@@ -1995,13 +1995,13 @@ label_141A::
     ld   hl, data_13AD
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_13B5
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, de
     ld   [hl], a
 
@@ -2039,13 +2039,13 @@ label_142F::
     ld   hl, data_13A5
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_13A9
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hLinkDirection]
@@ -7611,10 +7611,10 @@ AdjustEntityPositionDuringRoomTransition::
     ret
 
 label_3D7F::
-    ld   hl, $C240
+    ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], b
-    ld   hl, $C250
+    ld   hl, wEntitiesSpeedYTable
     add  hl, bc
     ld   [hl], b
     ret

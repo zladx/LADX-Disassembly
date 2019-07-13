@@ -490,7 +490,7 @@ jr_002_4481:
     and  a                                        ; $4483: $A7
     jr   nz, jr_002_44A2                          ; $4484: $20 $1C
 
-    ld   hl, wC11F                                ; $4486: $21 $1F $C1
+    ld   hl, wLinkGroundStatus                                ; $4486: $21 $1F $C1
     ld   a, [hl]                                  ; $4489: $7E
     and  a                                        ; $448A: $A7
     jr   z, func_002_44AD                         ; $448B: $28 $20
@@ -529,10 +529,10 @@ func_002_44AD::
     call UpdateFinalLinkPosition                  ; $44B2: $CD $A8 $21
 
 label_002_44B5::
-    ld   a, [wC11F]                               ; $44B5: $FA $1F $C1
+    ld   a, [wLinkGroundStatus]                               ; $44B5: $FA $1F $C1
     ld   [$C130], a                               ; $44B8: $EA $30 $C1
     xor  a                                        ; $44BB: $AF
-    ld   [wC11F], a                               ; $44BC: $EA $1F $C1
+    ld   [wLinkGroundStatus], a                               ; $44BC: $EA $1F $C1
     jp   CheckPositionForMapTransition            ; $44BF: $C3 $75 $6C
 
 func_002_44C2::
@@ -6657,7 +6657,7 @@ CheckPositionForMapTransition::
     cp   $51                                      ; $6D67: $FE $51
     jp   z, clearIncrementAndReturn               ; $6D69: $CA $0C $6E
 
-    ld   a, [wC11F]                               ; $6D6C: $FA $1F $C1
+    ld   a, [wLinkGroundStatus]                               ; $6D6C: $FA $1F $C1
     cp   $07                                      ; $6D6F: $FE $07
     jp   z, clearIncrementAndReturn               ; $6D71: $CA $0C $6E
 
@@ -7487,7 +7487,7 @@ label_002_723D::
     jp   label_002_7461                           ; $725D: $C3 $61 $74
 
 label_002_7260::
-    ld   hl, wC11F                                ; $7260: $21 $1F $C1
+    ld   hl, wLinkGroundStatus                                ; $7260: $21 $1F $C1
     ld   [hl], $01                                ; $7263: $36 $01
     cp   $0A                                      ; $7265: $FE $0A
     jp   z, label_002_7461                        ; $7267: $CA $61 $74
@@ -8160,7 +8160,7 @@ jr_002_7644:
 jr_002_764C:
     call label_CAF                                ; $764C: $CD $AF $0C
     ld   a, $07                                   ; $764F: $3E $07
-    ld   [wC11F], a                               ; $7651: $EA $1F $C1
+    ld   [wLinkGroundStatus], a                               ; $7651: $EA $1F $C1
     ld   hl, $C1BB                                ; $7654: $21 $BB $C1
     inc  [hl]                                     ; $7657: $34
     ld   hl, wFreeMovementMode                    ; $7658: $21 $7B $C1
@@ -8353,7 +8353,7 @@ jr_002_7750:
     or   $20                                      ; $777C: $F6 $20
     ld   [hl], a                                  ; $777E: $77
     ld   a, $03                                   ; $777F: $3E $03
-    ld   [wC11F], a                               ; $7781: $EA $1F $C1
+    ld   [wLinkGroundStatus], a                               ; $7781: $EA $1F $C1
     ldh  a, [hFrameCounter]                       ; $7784: $F0 $E7
     and  $0F                                      ; $7786: $E6 $0F
     jr   nz, jr_002_779A                          ; $7788: $20 $10
@@ -8576,7 +8576,7 @@ jr_002_78CF:
     xor  $20                                      ; $78CF: $EE $20
     ld   [hl], a                                  ; $78D1: $77
     ld   a, $03                                   ; $78D2: $3E $03
-    ld   [wC11F], a                               ; $78D4: $EA $1F $C1
+    ld   [wLinkGroundStatus], a                               ; $78D4: $EA $1F $C1
     ret                                           ; $78D7: $C9
 
 include "code/room_transition.asm"

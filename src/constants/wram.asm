@@ -56,7 +56,16 @@ wLinkMotionState: ; C11C
 
 wC11D: ds 1
 wC11E: ds 1
-wC11F: ds 1
+
+
+wLinkGroundStatus:: ; C11F
+  ; The condition of the ground Link is standing on
+  ; 0:  dry ground
+  ; 1:  steps (only when moving)
+  ; 3:  wet or grassy
+  ; 7:  pit
+  ds 1
+
 wC120: ds 1
 
 wIsUsingSpinAttack:: ; C121

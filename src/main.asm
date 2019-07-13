@@ -114,7 +114,9 @@ include "text/dialog.asm"
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"
+OverworldPalettesBanks::
 incbin "data/palette_pointers/overworld_banks.bin"
+OverworldPalettesPointers::
 incbin "data/palette_pointers/overworld_pointers.bin"
 include "code/bank1A/map_loading.asm"
 OverworldBaseMap::

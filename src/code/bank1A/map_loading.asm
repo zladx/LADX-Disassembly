@@ -1,32 +1,52 @@
 ; Map-loading routines called from bank0
 
-func_01A_6576::
+; Retrieve the palettes addresses for the current room,
+; and store them into hRoomPaletteBank
+;
+; TODO: is this also copying the palettes into the
+; hardware palettes zone?
+ConfigureRoomPalettes::
     push hl                                       ; $6576: $E5
     push bc                                       ; $6577: $C5
+
+    ;
+    ; Configure overworld palette
+    ;
+
+    ; If on Overworld…
     ld   a, [wIsIndoor]                           ; $6578: $FA $A5 $DB
     and  a                                        ; $657B: $A7
-    jp   nz, label_01A_658B                       ; $657C: $C2 $8B $65
+    jp   nz, .overworldPaletteBankEnd             ; $657C: $C2 $8B $65
 
+    ; bc = hMapRoom
     ld   b, $00                                   ; $657F: $06 $00
     ldh  a, [hMapRoom]                            ; $6581: $F0 $F6
     ld   c, a                                     ; $6583: $4F
 
-label_01A_6584::
-    ld   hl, $6476                                ; $6584: $21 $76 $64
+    ; hRoomPaletteBank = OverworldPalettesPointers[hMapRoom]
+    ld   hl, OverworldPalettesPointers            ; $6584: $21 $76 $64
     add  hl, bc                                   ; $6587: $09
     ld   a, [hl]                                  ; $6588: $7E
     ldh  [hRoomPaletteBank], a                    ; $6589: $E0 $DF
+.overworldPaletteBankEnd
 
-label_01A_658B::
+    ; b = [hMapRoom] >> 7
+    ; c = [hMapRoom] << 1
     ld   b, $00                                   ; $658B: $06 $00
     ldh  a, [hMapRoom]                            ; $658D: $F0 $F6
     sla  a                                        ; $658F: $CB $27
     ld   c, a                                     ; $6591: $4F
     rl   b                                        ; $6592: $CB $10
+
+    ;
+    ; Configure indoor palette
+    ;
+
+    ; If is indoor…
     ld   hl, $5E76                                ; $6594: $21 $76 $5E
     ld   a, [wIsIndoor]                           ; $6597: $FA $A5 $DB
     and  a                                        ; $659A: $A7
-    jp   z, jr_01A_6630                           ; $659B: $CA $30 $66
+    jp   z, .indoorPaletteEnd                     ; $659B: $CA $30 $66
 
     ld   a, $23                                   ; $659E: $3E $23
     ldh  [hRoomPaletteBank], a                    ; $65A0: $E0 $DF
@@ -35,112 +55,113 @@ label_01A_658B::
     ld   b, $00                                   ; $65A4: $06 $00
     ldh  a, [hMapId]                              ; $65A6: $F0 $F7
     cp   $FF                                      ; $65A8: $FE $FF
-    jr   nz, jr_01A_65B2                          ; $65AA: $20 $06
+    jr   nz, .jr_01A_65B2                         ; $65AA: $20 $06
 
     ld   hl, $6000                                ; $65AC: $21 $00 $60
     jp   label_01A_6636                           ; $65AF: $C3 $36 $66
 
-jr_01A_65B2::
+.jr_01A_65B2
     ld   c, a                                     ; $65B2: $4F
     sla  c                                        ; $65B3: $CB $21
     rl   b                                        ; $65B5: $CB $10
     cp   $09                                      ; $65B7: $FE $09
-    jr   c, jr_01A_6630                           ; $65B9: $38 $75
+    jr   c, .indoorPaletteEnd                     ; $65B9: $38 $75
 
     cp   $0A                                      ; $65BB: $FE $0A
-    jr   nz, jr_01A_65C5                          ; $65BD: $20 $06
+    jr   nz, .jr_01A_65C5                         ; $65BD: $20 $06
 
     ldh  a, [hMapRoom]                            ; $65BF: $F0 $F6
     cp   $FD                                      ; $65C1: $FE $FD
-    jr   z, jr_01A_65D5                           ; $65C3: $28 $10
+    jr   z, .jr_01A_65D5                          ; $65C3: $28 $10
 
-jr_01A_65C5::
+.jr_01A_65C5
     ldh  a, [hMapId]                              ; $65C5: $F0 $F7
     cp   $11                                      ; $65C7: $FE $11
-    jr   nz, jr_01A_65D9                          ; $65C9: $20 $0E
+    jr   nz, .jr_01A_65D9                         ; $65C9: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65CB: $F0 $F6
     cp   $C0                                      ; $65CD: $FE $C0
-    jr   z, jr_01A_65D5                           ; $65CF: $28 $04
+    jr   z, .jr_01A_65D5                          ; $65CF: $28 $04
 
     cp   $C1                                      ; $65D1: $FE $C1
-    jr   nz, jr_01A_65D9                          ; $65D3: $20 $04
+    jr   nz, .jr_01A_65D9                         ; $65D3: $20 $04
 
-jr_01A_65D5::
+.jr_01A_65D5
     ld   c, $1E                                   ; $65D5: $0E $1E
-    jr   jr_01A_662A                              ; $65D7: $18 $51
+    jr   .jr_01A_662A                             ; $65D7: $18 $51
 
-jr_01A_65D9::
+.jr_01A_65D9
     ldh  a, [hMapId]                              ; $65D9: $F0 $F7
     cp   $0F                                      ; $65DB: $FE $0F
-    jr   nz, jr_01A_65E9                          ; $65DD: $20 $0A
+    jr   nz, .jr_01A_65E9                         ; $65DD: $20 $0A
 
     ldh  a, [hMapRoom]                            ; $65DF: $F0 $F6
     cp   $A0                                      ; $65E1: $FE $A0
-    jr   nz, jr_01A_65E9                          ; $65E3: $20 $04
+    jr   nz, .jr_01A_65E9                         ; $65E3: $20 $04
 
     ld   c, $00                                   ; $65E5: $0E $00
-    jr   jr_01A_662A                              ; $65E7: $18 $41
+    jr   .jr_01A_662A                             ; $65E7: $18 $41
 
-jr_01A_65E9::
+.jr_01A_65E9
     ldh  a, [hMapId]                              ; $65E9: $F0 $F7
     cp   $1F                                      ; $65EB: $FE $1F
-    jr   nz, jr_01A_65FD                          ; $65ED: $20 $0E
+    jr   nz, .jr_01A_65FD                         ; $65ED: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $65EF: $F0 $F6
     cp   $EB                                      ; $65F1: $FE $EB
-    jr   z, jr_01A_65F9                           ; $65F3: $28 $04
+    jr   z, .jr_01A_65F9                          ; $65F3: $28 $04
 
     cp   $EC                                      ; $65F5: $FE $EC
-    jr   nz, jr_01A_65FD                          ; $65F7: $20 $04
+    jr   nz, .jr_01A_65FD                         ; $65F7: $20 $04
 
-jr_01A_65F9::
+.jr_01A_65F9
     ld   c, $28                                   ; $65F9: $0E $28
-    jr   jr_01A_662A                              ; $65FB: $18 $2D
+    jr   .jr_01A_662A                             ; $65FB: $18 $2D
 
-jr_01A_65FD::
+.jr_01A_65FD
     ldh  a, [hMapId]                              ; $65FD: $F0 $F7
     cp   $10                                      ; $65FF: $FE $10
-    jr   nz, jr_01A_6616                          ; $6601: $20 $13
+    jr   nz, .jr_01A_6616                         ; $6601: $20 $13
 
     ldh  a, [hMapRoom]                            ; $6603: $F0 $F6
     cp   $E9                                      ; $6605: $FE $E9
-    jr   nz, jr_01A_660D                          ; $6607: $20 $04
+    jr   nz, .jr_01A_660D                         ; $6607: $20 $04
 
     ld   c, $26                                   ; $6609: $0E $26
-    jr   jr_01A_662A                              ; $660B: $18 $1D
+    jr   .jr_01A_662A                             ; $660B: $18 $1D
 
-jr_01A_660D::
+.jr_01A_660D
     cp   $B5                                      ; $660D: $FE $B5
-    jr   nz, jr_01A_6616                          ; $660F: $20 $05
+    jr   nz, .jr_01A_6616                         ; $660F: $20 $05
 
     ld   bc, $01FE                                ; $6611: $01 $FE $01
-    jr   jr_01A_662A                              ; $6614: $18 $14
+    jr   .jr_01A_662A                             ; $6614: $18 $14
 
-jr_01A_6616::
+.jr_01A_6616
     ldh  a, [hMapId]                              ; $6616: $F0 $F7
     cp   $16                                      ; $6618: $FE $16
-    jr   nz, jr_01A_662A                          ; $661A: $20 $0E
+    jr   nz, .jr_01A_662A                         ; $661A: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $661C: $F0 $F6
     cp   $6F                                      ; $661E: $FE $6F
-    jr   z, jr_01A_662E                           ; $6620: $28 $0C
+    jr   z, .jr_01A_662E                          ; $6620: $28 $0C
 
     cp   $7F                                      ; $6622: $FE $7F
-    jr   z, jr_01A_662E                           ; $6624: $28 $08
+    jr   z, .jr_01A_662E                          ; $6624: $28 $08
 
     cp   $8F                                      ; $6626: $FE $8F
-    jr   z, jr_01A_662E                           ; $6628: $28 $04
+    jr   z, .jr_01A_662E                          ; $6628: $28 $04
 
-jr_01A_662A::
+.jr_01A_662A
     ld   a, $24                                   ; $662A: $3E $24
     ldh  [hRoomPaletteBank], a                    ; $662C: $E0 $DF
 
-jr_01A_662E::
+.jr_01A_662E
     inc  h                                        ; $662E: $24
     inc  h                                        ; $662F: $24
 
-jr_01A_6630::
+.indoorPaletteEnd
+
     add  hl, bc                                   ; $6630: $09
     ld   c, [hl]                                  ; $6631: $4E
     inc  hl                                       ; $6632: $23
@@ -190,7 +211,7 @@ jr_01A_671B:
     sla  a                                        ; $6723: $CB $27
     rl   b                                        ; $6725: $CB $10
     ld   c, a                                     ; $6727: $4F
-    call func_01A_6576                            ; $6728: $CD $76 $65
+    call ConfigureRoomPalettes                    ; $6728: $CD $76 $65
     pop  bc                                       ; $672B: $C1
     ld   hl, $66A8                                ; $672C: $21 $A8 $66
     ld   a, b                                     ; $672F: $78

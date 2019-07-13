@@ -200,9 +200,7 @@ label_91D::
     push af
 
 label_92F::
-    ld   a, BANK(func_01A_6576)
-    ld   [MBC3SelectBank], a
-    call func_01A_6576
+    callsb ConfigureRoomPalettes
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ld   hl, $DC91
@@ -3830,9 +3828,7 @@ DoUpdateBGRegion::
 
     ; Set the palette bank in hRoomPaletteBank,
     ; and the target BG map offset in FFE0-FFE1
-    ld   a, $1A
-    ld   [MBC3SelectBank], a
-    call $6576
+    callsb ConfigureRoomPalettes
 
 .label_2299
     ; Switch to the bank containing the BG map
@@ -5045,9 +5041,7 @@ doCopyObjectToBG:
     sla  c
     rl   b
 
-    ld   a, BANK(func_01A_6576)
-    ld   [MBC3SelectBank], a
-    call func_01A_6576
+    callsb ConfigureRoomPalettes
 
     call SwitchToMapDataBank
 

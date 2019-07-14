@@ -23,8 +23,8 @@ ConfigureRoomPalettes::
     ldh  a, [hMapRoom]                            ; $6581: $F0 $F6
     ld   c, a                                     ; $6583: $4F
 
-    ; hRoomPaletteBank = OverworldPalettesPointers[hMapRoom]
-    ld   hl, OverworldPalettesPointers            ; $6584: $21 $76 $64
+    ; hRoomPaletteBank = OverworldPalettesBanks[hMapRoom]
+    ld   hl, OverworldPalettesBanks               ; $6584: $21 $76 $64
     add  hl, bc                                   ; $6587: $09
     ld   a, [hl]                                  ; $6588: $7E
     ldh  [hRoomPaletteBank], a                    ; $6589: $E0 $DF

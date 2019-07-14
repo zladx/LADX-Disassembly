@@ -297,7 +297,7 @@ label_C926::
     add  hl, de
     ld   a, [hl]
     jp   label_3B0C
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     sub  a, $03
@@ -341,7 +341,7 @@ label_C926::
     ld   a, [$DB15]
     cp   $06
     jr   c, label_C993
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   [hl], $58
     ld   hl, $C380
@@ -373,7 +373,7 @@ label_C99C::
     jr   label_C99C
     xor  a
     ld   [$C168], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     sub  a, $04
@@ -387,7 +387,7 @@ label_C99C::
     add  a, $10
     ld   [hl], a
     ret
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     add  a, $0A
@@ -463,7 +463,7 @@ label_CA4D::
 label_CA4F::
     call label_C995
     ld   de, $C220
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     jp   label_CF92
     ldh  a, [hMapRoom]
     cp   $E2
@@ -585,7 +585,7 @@ label_CB1A::
     ld   a, [$D477]
     and  a
     ret  nz
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     sub  a, $10
@@ -687,13 +687,13 @@ label_CBC2::
     ld   hl, $C360
     add  hl, bc
     ld   [hl], $10
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     sub  a, $08
     ld   [hl], a
     jp   label_CB56
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   [hl], $50
     ld   hl, $C2D0
@@ -706,7 +706,7 @@ label_CBC2::
     call label_CB84
     and  $10
     jp   z, label_CB56
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, $3C
     jr   label_CC15
@@ -716,7 +716,7 @@ label_CBC2::
     call label_CB84
     and  $10
     jp   z, label_CB56
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, $63
 
@@ -726,7 +726,7 @@ label_CC15::
     add  hl, bc
     ld   [hl], $04
     jp   label_CB56
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     add  a, $02
@@ -741,7 +741,7 @@ label_CC15::
     ld   hl, $C2D0
     add  hl, bc
     ld   [hl], a
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     add  a, $08
@@ -1143,7 +1143,7 @@ data_CEA4::
     ld   a, $FD
 
 label_CED0::
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     add  a, [hl]
     ld   [hl], a
@@ -1253,10 +1253,10 @@ label_CF67::
 
 label_CF83::
     ld   de, $C220
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     call label_CF92
     ld   de, $C230
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
 
 label_CF92::
     add  hl, bc
@@ -1273,7 +1273,7 @@ label_CF92::
     ld   [hl], a
     ret
     ld   de, $C220
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     jr   label_CF92
 
 label_CFA9::
@@ -1388,7 +1388,7 @@ label_D068::
 label_D081::
     ld   b, $A1
     call label_D1C9
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     sub  a, $08
@@ -1775,14 +1775,14 @@ label_D2D7::
     ld   a, [hl]
     and  $40
     jr   nz, label_D31E
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [wActiveEntityPosX]
     sub  a, [hl]
     add  a, $0C
     cp   $18
     jr   nc, label_D31E
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   a, [hl]
     ld   hl, $C310
@@ -1833,11 +1833,11 @@ label_D31E::
     call label_E4CA
     jr   c, label_D369
     ldh  a, [hScratchA]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchB]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchD]
@@ -2212,11 +2212,11 @@ label_D670::
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchA]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchB]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ld   hl, $C450
@@ -2381,7 +2381,7 @@ label_D795::
     ld   a, [hl]
     ld   hl, hLinkPositionX
     add  a, [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   [hl], a
     ld   hl, data_D711
@@ -2391,7 +2391,7 @@ label_D795::
     add  a, [hl]
     ld   hl, $C13B
     add  a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   [hl], a
     ldh  a, [hIsSideScrolling]
@@ -2666,14 +2666,14 @@ label_D947::
     add  hl, bc
     ldh  a, [hScratchA]
     add  a, [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_D93B
     add  hl, bc
     ldh  a, [hScratchB]
     add  a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_D93F
@@ -2730,14 +2730,14 @@ label_D998::
     add  hl, bc
     ldh  a, [hScratchA]
     add  a, [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_D98E
     add  hl, bc
     ldh  a, [hScratchB]
     add  a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_D992
@@ -2797,11 +2797,11 @@ label_DA14::
 
 label_DA17::
     ldh  a, [hLinkPositionX]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   [hl], a
     ldh  a, [hLinkPositionY]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     sub  a, $0C
     ld   [hl], a
@@ -3088,7 +3088,7 @@ label_DBE1::
     call label_DA17
     ld   a, $6B
     ldh  [$FF9D], a
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ldh  a, [hLinkPositionX]
     sub  a, $04
@@ -3489,11 +3489,11 @@ label_DF33::
     call label_E4CA
     ldh  a, [hScratchA]
     dec  a
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchB]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ld   hl, $C2B0
@@ -3530,7 +3530,7 @@ label_DF5F::
     add  hl, bc
     ldh  a, [hScratchA]
     add  a, [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_DF31
@@ -3540,7 +3540,7 @@ label_DF5F::
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchB]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     add  a, $F8
     ld   [hl], a
@@ -3701,7 +3701,7 @@ label_E0B3::
     ld   a, [hl]
     and  $08
     jp   z, label_E156
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     and  $F0
@@ -4023,16 +4023,16 @@ label_E2AF::
     jr   nz, label_E311
 
 label_E2D0::
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   [hl], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   [hl], a
     xor  a
@@ -4361,11 +4361,11 @@ label_E4E0::
     ld   hl, $C3A0
     add  hl, de
     ld   [hl], a
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchA], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchB], a
@@ -4695,7 +4695,7 @@ label_E771::
     and  a
     jp   nz, label_E8E5
     push bc
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     sub  a, $08
@@ -4705,7 +4705,7 @@ label_E771::
     and  $F0
     ldh  [hSwordIntersectedAreaX], a
     swap a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   c, a
     ld   a, [hl]
@@ -5005,12 +5005,12 @@ label_E964::
     jr   c, label_E9A0
     xor  a
     ld   [$C19B], a
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ld   [hl], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
@@ -5138,11 +5138,11 @@ label_EA70::
     call label_E4CA
     jr   c, label_EA93
     ldh  a, [hScratchA]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchB]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ld   hl, $C2E0
@@ -6470,11 +6470,11 @@ label_F293::
     ld   [hl], $80
 
 label_F29D::
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchA], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     ld   hl, $C310
@@ -6984,14 +6984,14 @@ label_F5A6::
     ld   a, [hl]
     and  $40
     jp   nz, label_F79F
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [wActiveEntityPosX]
     sub  a, [hl]
     add  a, $0C
     cp   $18
     jp   nc, label_F79F
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   a, [hl]
     ld   hl, $C310
@@ -7154,11 +7154,11 @@ label_F6AC::
     call label_E4CA
     jr   c, label_F70D
     ldh  a, [hScratchA]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratchB]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ld   hl, $C390
@@ -7340,14 +7340,14 @@ label_F7DD::
     ld   a, [hl]
     and  $80
     jr   nz, label_F834
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [wActiveEntityPosX]
     sub  a, [hl]
     add  a, $18
     cp   $30
     jr   nc, label_F834
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   a, [hl]
     ld   hl, $C310
@@ -7383,13 +7383,13 @@ label_F83B::
     ldh  [hScratchA], a
     ldh  a, [hLinkPositionX]
     push af
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   a, [hl]
     ldh  [hLinkPositionX], a
     ldh  a, [hLinkPositionY]
     push af
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   a, [hl]
     ldh  [hLinkPositionY], a
@@ -7541,11 +7541,11 @@ label_F954::
     jr   nz, label_F973
 
 label_F95C::
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchA], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchB], a
@@ -7568,14 +7568,14 @@ label_F973::
     ld   hl, data_F883
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     add  a, [hl]
     ld   [hl], a
     ld   hl, data_F88B
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     add  a, [hl]
     ld   [hl], a
@@ -7688,7 +7688,7 @@ label_FA47::
     ldh  a, [$FFBE]
     and  a
     jr   nz, label_FA5D
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ldh  a, [wActiveEntityPosX]
     ld   [hl], a
@@ -7712,7 +7712,7 @@ label_FA6E::
     ldh  a, [$FFBE]
     and  a
     jr   nz, label_FA84
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ldh  a, [$FFEF]
     ld   [hl], a
@@ -7729,7 +7729,7 @@ data_FA85::
 
 label_FACD::
     push bc
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     sub  a, $08
@@ -7757,7 +7757,7 @@ label_FACD::
     jr   nz, label_FB0E
 
 label_FAF9::
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     ld   hl, $C310
@@ -7773,7 +7773,7 @@ label_FB09::
     jr   label_FB13
 
 label_FB0E::
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
 
@@ -8037,14 +8037,14 @@ data_FCA9::
 label_FCAB::
     ld   de, $0000
     push bc
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFDB], a
     and  $F0
     ldh  [hSwordIntersectedAreaX], a
     swap a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   c, a
     ld   a, [hl]
@@ -8109,11 +8109,11 @@ label_FCFD::
     add  hl, bc
     ld   [hl], e
     ldh  a, [hSwordIntersectedAreaX]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   [hl], a
     ldh  a, [hSwordIntersectedAreaY]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   [hl], a
     ld   hl, $C290
@@ -8233,11 +8233,11 @@ label_FDE3::
     ret  z
 
 label_FDF3::
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ldh  a, [wActiveEntityPosX]
     ld   [hl], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ldh  a, [$FFEF]
     ld   [hl], a
@@ -8258,7 +8258,7 @@ label_FE09::
 
 label_FE0E::
     push bc
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     sub  a, $01
@@ -8266,7 +8266,7 @@ label_FE0E::
     and  $F0
     ldh  [hSwordIntersectedAreaX], a
     swap a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   c, a
     ld   a, [hl]
@@ -8407,7 +8407,7 @@ label_FEC7::
 label_FED9::
     ld   e, $00
     ldh  a, [hLinkPositionX]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     sub  a, [hl]
     bit  7, a
@@ -8421,7 +8421,7 @@ label_FEE7::
 label_FEE9::
     ld   e, $02
     ldh  a, [hLinkPositionY]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     sub  a, [hl]
     ld   hl, $C310
@@ -8494,7 +8494,7 @@ label_FF32::
     add  a, [hl]
     ld   [hl], a
     rl   d
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
 
 label_FF4A::
     add  hl, bc

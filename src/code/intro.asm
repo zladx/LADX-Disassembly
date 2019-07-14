@@ -318,7 +318,7 @@ label_7014::
     jp   nz, label_70B1
     ld   hl, hBaseScrollX
     inc  [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     dec  [hl]
     inc  hl
     dec  [hl]
@@ -378,10 +378,10 @@ label_7087::
     ld   hl, label_707B
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], $30
     ld   hl, $C2E0
@@ -508,9 +508,9 @@ label_7168::
     ld   a, $06
     ld   [wEntitiesTypeTable], a
     ld   a, $B0
-    ld   [$C200], a
+    ld   [wEntitiesPosXTable], a
     ld   a, $68
-    ld   [$C210], a
+    ld   [wEntitiesPosYTable], a
     ld   a, $01
     ld   [$C3D0], a
     ret
@@ -925,7 +925,7 @@ label_7404::
     ld   hl, label_73C0
     add  hl, bc
     ld   a, [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ld   hl, label_73C8
@@ -935,7 +935,7 @@ label_7411::
 
 label_7412::
     ld   a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
 
@@ -1309,7 +1309,7 @@ label_769C::
     dec  [hl]
     jr   nz, label_76AA
     ld   [hl], $04
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     dec  [hl]
 
@@ -1853,11 +1853,11 @@ label_7A6B::
     ld   [$D00E], a
     and  $03
     jr   nz, label_7AB2
-    ld   a, [$C210]
+    ld   a, [wEntitiesPosYTable]
     cp   $A0
     jr   nc, label_7A8B
     inc  a
-    ld   [$C210], a
+    ld   [wEntitiesPosYTable], a
 
 label_7A8B::
     ld   a, [$C211]

@@ -2619,7 +2619,7 @@ label_5EA6::
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchD], a
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [hScratchA]
     add  a, [hl]
@@ -2631,7 +2631,7 @@ label_5EA6::
     rl   c
     adc  a, [hl]
     ld   [hl], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ldh  a, [hScratchC]
     add  a, [hl]
@@ -2845,7 +2845,7 @@ label_5FF0::
     ld   a, $D5
     call label_3B86
     ldh  a, [hLinkPositionX]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [$FFA2]
@@ -2855,7 +2855,7 @@ label_5FF0::
     ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
 
@@ -2912,13 +2912,13 @@ label_6059::
     ld   a, $D4
     call label_3B86
     ldh  a, [hLinkPositionX]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ld   hl, $C2B0
@@ -2955,7 +2955,7 @@ label_609C::
     ld   a, $C1
     call label_3B86
     ldh  a, [hLinkPositionX]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ld   hl, $D155
@@ -2963,7 +2963,7 @@ label_609C::
     ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ld   hl, $D175
@@ -3001,12 +3001,12 @@ label_60F7::
     and  a
     jr   z, label_6117
     ldh  a, [hLinkPositionX]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     add  a, $20
     ld   [hl], a
     ldh  a, [hLinkPositionY]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     add  a, $10
     ld   [hl], a
@@ -3054,11 +3054,11 @@ label_6141::
     ld   a, $6D
     call label_3B86
     ldh  a, [hLinkPositionX]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hLinkPositionY]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ldh  a, [$FFA2]

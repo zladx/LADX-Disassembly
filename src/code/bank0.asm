@@ -733,11 +733,11 @@ label_C0C::
     ld   a, $AF
     call label_3B86
     ldh  a, [hLinkPositionX]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hLinkPositionY]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ret
@@ -2036,14 +2036,14 @@ label_142F::
     add  hl, bc
     ldh  a, [hLinkPositionX]
     add  a, [hl]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_13A1
     add  hl, bc
     ldh  a, [hLinkPositionY]
     add  a, [hl]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     ldh  a, [$FFA2]
@@ -2370,12 +2370,12 @@ label_1653::
     jr   c, label_167C
     xor  a
     ld   [$C19B], a
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ld   [hl], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
@@ -2404,12 +2404,12 @@ label_167C::
 label_1691::
     call label_3B86
     ret  c
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [hSwordIntersectedAreaX]
     add  a, $08
     ld   [hl], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
@@ -6734,11 +6734,11 @@ LoadRoomEntities::
     ld   a, $A8
     call label_3B86
     ld   a, [$DB70]
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ld   a, [$DB71]
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
     call label_38D4
@@ -6827,7 +6827,7 @@ label_38B4::
     ld   [hl], $04
     ld   a, [bc]
     and  $F0
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, de
     add  a, $10
     ld   [hl], a
@@ -6835,7 +6835,7 @@ label_38B4::
     inc  bc
     swap a
     and  $F0
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, de
     add  a, $08
     ld   [hl], a
@@ -7636,11 +7636,11 @@ label_3D7F::
     ret
 
 label_3D8A::
-    ld   hl, $C200
+    ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
     ldh  [wActiveEntityPosX], a
-    ld   hl, $C210
+    ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFEF], a

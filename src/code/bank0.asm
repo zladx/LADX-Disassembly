@@ -256,24 +256,39 @@ label_978::
     call $6D0E
     jr   RestoreStackedBankAndReturn
 
+; Load palette data
+; Inputs:
+;   b   ???
+;   de  ???
+; Returns:
+;   a   palette data
 label_983::
-    ld   a, $1A
-    ld   [MBC3SelectBank], a
-    call $6710
+    ; Retrieve and store palette data into hScratchE and hScratchF
+    callsb func_01A_6710
+
+    ; Switch to the bank containing this room's palettes
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
+
+    ; Read value from address [hScratchF hScratchE]
     ldh  a, [hScratchE]
     ld   h, a
     ldh  a, [hScratchF]
     ld   l, a
     ld   a, [hl]
+
     inc  de
     ret
 
+; Inputs:
+;   a   ???
+;   b   ???
+;   de  ???
 label_999::
     push af
     push bc
     call label_983
+
     ldh  [hScratchA], a
     pop  bc
     call label_983
@@ -4082,10 +4097,11 @@ label_2887::
     ld   hl, vBGMap0
     ld   b, $20
 
-label_289F::
+.loop
     add  hl, de
     dec  b
-    jr   nz, label_289F
+    jr   nz, .loop
+
     push hl
     ldh  a, [hSwordIntersectedAreaX]
     ld   hl, hBaseScrollX

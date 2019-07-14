@@ -1,16 +1,16 @@
 ; Map-loading routines called from bank0
 
-; Retrieve the palettes addresses for the current room,
-; and store them into hRoomPaletteBank
+; Retrieve the palettes address for the current room,
+; and store them into hScratchE and hScratchF.
 ;
-; TODO: is this also copying the palettes into the
-; hardware palettes zone?
+; Inputs:
+;   bc    ???
 ConfigureRoomPalettes::
     push hl                                       ; $6576: $E5
     push bc                                       ; $6577: $C5
 
     ;
-    ; Configure overworld palette
+    ; Retrieve overworld palette bank and pointers
     ;
 
     ; If on Overworld…
@@ -38,12 +38,13 @@ ConfigureRoomPalettes::
     ld   c, a                                     ; $6591: $4F
     rl   b                                        ; $6592: $CB $10
 
+    ld   hl, OverworldPalettesPointers            ; $6594: $21 $76 $5E
+
     ;
-    ; Configure indoor palette
+    ; Retrieve overworld palette bank and pointers
     ;
 
     ; If is indoor…
-    ld   hl, $5E76                                ; $6594: $21 $76 $5E
     ld   a, [wIsIndoor]                           ; $6597: $FA $A5 $DB
     and  a                                        ; $659A: $A7
     jp   z, .indoorPaletteEnd                     ; $659B: $CA $30 $66
@@ -53,14 +54,17 @@ ConfigureRoomPalettes::
     inc  h                                        ; $65A2: $24
     inc  h                                        ; $65A3: $24
     ld   b, $00                                   ; $65A4: $06 $00
+
+    ; If in the Color Dungeon…
     ldh  a, [hMapId]                              ; $65A6: $F0 $F7
-    cp   $FF                                      ; $65A8: $FE $FF
-    jr   nz, .jr_01A_65B2                         ; $65AA: $20 $06
+    cp   MAP_COLOR_DUNGEON                        ; $65A8: $FE $FF
+    jr   nz, .colorDungeonEnd                     ; $65AA: $20 $06
 
+    ; Set palette pointers base for color dungeon
     ld   hl, $6000                                ; $65AC: $21 $00 $60
-    jp   label_01A_6636                           ; $65AF: $C3 $36 $66
+    jp   .loadPalettesAdress                      ; $65AF: $C3 $36 $66
+.colorDungeonEnd
 
-.jr_01A_65B2
     ld   c, a                                     ; $65B2: $4F
     sla  c                                        ; $65B3: $CB $21
     rl   b                                        ; $65B5: $CB $10
@@ -162,47 +166,73 @@ ConfigureRoomPalettes::
 
 .indoorPaletteEnd
 
+    ; Load adress of palettes table
+
+    ; bc = PalettesTable
     add  hl, bc                                   ; $6630: $09
     ld   c, [hl]                                  ; $6631: $4E
     inc  hl                                       ; $6632: $23
     ld   b, [hl]                                  ; $6633: $46
+    ; hl = bc
     push bc                                       ; $6634: $C5
     pop  hl                                       ; $6635: $E1
 
-label_01A_6636::
+.loadPalettesAdress
     pop  bc                                       ; $6636: $C1
     add  hl, bc                                   ; $6637: $09
+    ; hScratchE, hScratchF = PalettesTable[palette offset]
     ld   a, h                                     ; $6638: $7C
-    ldh  [hBGMapOffsetHigh], a                    ; $6639: $E0 $E0
+    ldh  [hScratchE], a                           ; $6639: $E0 $E0
     ld   a, l                                     ; $663B: $7D
-    ldh  [hBGMapOffsetLow], a                     ; $663C: $E0 $E1
+    ldh  [hScratchF], a                           ; $663C: $E0 $E1
     pop  hl                                       ; $663E: $E1
     ret                                           ; $663F: $C9
 
 Data_01A_6640::
-    db   $2D, $2E, $43, $44, $8C, $08, $2F, $30, $31, $09, $32, $0A, $0B, $33, $0C, $34
-    db   $35, $36, $43, $44, $8C, $08, $37, $38, $39, $09, $3A, $0A, $0B, $3B, $0C, $3C
-    db   $A4, $A5, $43, $44, $43, $44, $43, $44, $8C, $08, $8C, $08, $09, $09, $0A, $0A
-    db   $0B, $0B, $0C, $0C, $43, $44, $43, $44, $8C, $08, $8C, $08, $09, $09, $0A, $0A
-    db   $0B, $0B, $0C, $0C, $43, $44, $43, $44, $35, $36, $43, $44, $8C, $08, $37, $38
-    db   $39, $09, $3A, $0A, $0B, $3B, $0C, $3C, $35, $36, $35, $36, $37, $38, $37, $38
-    db   $39, $39, $3A, $3A, $3B, $3B, $3C, $3C, $03, $02, $03, $02, $01, $00, $01, $00
-    db   $03, $03, $01, $01, $02, $02, $00, $00, $03, $02, $03, $02, $01, $00, $01, $00
-    db   $03, $03, $01, $01, $02, $02, $00, $00, $01, $00, $03, $02, $01, $00, $03, $02
+    db   $2D, $2E, $43, $44, $8C, $08, $2F, $30
+    db   $31, $09, $32, $0A, $0B, $33, $0C, $34
+    db   $35, $36, $43, $44, $8C, $08, $37, $38
+    db   $39, $09, $3A, $0A, $0B, $3B, $0C, $3C
+    db   $A4, $A5, $43, $44, $43, $44, $43, $44
+    db   $8C, $08, $8C, $08, $09, $09, $0A, $0A
+    db   $0B, $0B, $0C, $0C, $43, $44, $43, $44
+    db   $8C, $08, $8C, $08, $09, $09, $0A, $0A
+    db   $0B, $0B, $0C, $0C, $43, $44, $43, $44
+
+Data_01A_6688::
+    db   $35, $36, $43, $44, $8C, $08, $37, $38
+    db   $39, $09, $3A, $0A, $0B, $3B, $0C, $3C
+    db   $35, $36, $35, $36, $37, $38, $37, $38
+    db   $39, $39, $3A, $3A, $3B, $3B, $3C, $3C
+
+Data_01A_66A8::
+    db   $03, $02, $03, $02, $01, $00, $01, $00
+    db   $03, $03, $01, $01, $02, $02, $00, $00
+    db   $03, $02, $03, $02, $01, $00, $01, $00
+    db   $03, $03, $01, $01, $02, $02, $00, $00
+    db   $01, $00, $03, $02, $01, $00, $03, $02
     db   $01, $00, $03, $02, $02, $03, $00, $01, $02, $03, $00, $01, $01, $00, $03, $02
     db   $01, $00, $03, $02, $02, $03, $00, $01, $02, $03, $00, $01, $01, $00, $03, $02
+
+Data_01A_66F0::
     db   $03, $02, $03, $02, $01, $00, $01, $00, $03, $03, $01, $01, $02, $02, $00, $00
     db   $01, $00, $03, $02, $01, $00, $03, $02, $02, $03, $00, $01, $02, $03, $00, $01
 
+; Inputs:
+;   b     ???
+;   de    ???
+func_01A_6710::
     ld   hl, Data_01A_6640                        ; $6710: $21 $40 $66
     push bc                                       ; $6713: $C5
+
+    ; If b != 0…
     ld   a, b                                     ; $6714: $78
     and  a                                        ; $6715: $A7
-    jr   z, jr_01A_671B                           ; $6716: $28 $03
+    jr   z, .bNotZeroEnd                          ; $6716: $28 $03
+    ; use another table
+    ld   hl, Data_01A_6688                        ; $6718: $21 $88 $66
+.bNotZeroEnd
 
-    ld   hl, $6688                                ; $6718: $21 $88 $66
-
-jr_01A_671B:
     add  hl, de                                   ; $671B: $19
     ld   b, $00                                   ; $671C: $06 $00
     ld   a, [hl]                                  ; $671E: $7E
@@ -211,27 +241,29 @@ jr_01A_671B:
     sla  a                                        ; $6723: $CB $27
     rl   b                                        ; $6725: $CB $10
     ld   c, a                                     ; $6727: $4F
+
     call ConfigureRoomPalettes                    ; $6728: $CD $76 $65
+
     pop  bc                                       ; $672B: $C1
-    ld   hl, $66A8                                ; $672C: $21 $A8 $66
+    ld   hl, Data_01A_66A8                        ; $672C: $21 $A8 $66
     ld   a, b                                     ; $672F: $78
     and  a                                        ; $6730: $A7
     jr   z, jr_01A_6736                           ; $6731: $28 $03
 
-    ld   hl, $66F0                                ; $6733: $21 $F0 $66
+    ld   hl, Data_01A_66F0                        ; $6733: $21 $F0 $66
 
 jr_01A_6736:
     add  hl, de                                   ; $6736: $19
     ld   b, $00                                   ; $6737: $06 $00
     ld   a, [hl]                                  ; $6739: $7E
     ld   c, a                                     ; $673A: $4F
-    ldh  a, [hBGMapOffsetHigh]                    ; $673B: $F0 $E0
+    ldh  a, [hScratchE]                           ; $673B: $F0 $E0
     ld   h, a                                     ; $673D: $67
-    ldh  a, [hBGMapOffsetLow]                     ; $673E: $F0 $E1
+    ldh  a, [hScratchF]                           ; $673E: $F0 $E1
     ld   l, a                                     ; $6740: $6F
     add  hl, bc                                   ; $6741: $09
     ld   a, h                                     ; $6742: $7C
-    ldh  [hBGMapOffsetHigh], a                    ; $6743: $E0 $E0
+    ldh  [hScratchE], a                           ; $6743: $E0 $E0
     ld   a, l                                     ; $6745: $7D
-    ldh  [hBGMapOffsetLow], a                     ; $6746: $E0 $E1
+    ldh  [hScratchF], a                           ; $6746: $E0 $E1
     ret                                           ; $6748: $C9

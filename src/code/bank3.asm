@@ -4231,8 +4231,11 @@ jr_003_5FB9:
     call label_3C77                               ; $5FCB: $CD $77 $3C
     jp   label_003_60AA                           ; $5FCE: $C3 $AA $60
 
-    sbc  [hl]                                     ; $5FD1: $9E
-    inc  d                                        ; $5FD2: $14
+; Data for loading secret seashell when bush is clipped (and when dug from ground)
+data_003_5FD1::
+    db   $9E, $14
+
+func_003_5FD3::
     ld   a, [wSwordLevel]                         ; $5FD3: $FA $4E $DB
     cp   $02                                      ; $5FD6: $FE $02
     jp   nc, label_3F8D                           ; $5FD8: $D2 $8D $3F
@@ -4251,7 +4254,7 @@ jr_003_5FB9:
 
 jr_003_5FEF:
     call func_003_61DE                            ; $5FEF: $CD $DE $61
-    ld   de, $5FD1                                ; $5FF2: $11 $D1 $5F
+    ld   de, data_003_5FD1                        ; $5FF2: $11 $D1 $5F
     call label_3C77                               ; $5FF5: $CD $77 $3C
     jp   label_003_60AA                           ; $5FF8: $C3 $AA $60
 

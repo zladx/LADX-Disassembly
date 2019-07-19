@@ -916,7 +916,13 @@ wGoldenLeavesCount:: ; DB15
   ds 1
 
 ; Beginning of dungeon item flags.
-; 5 bytes fo each dungeon, 5th byte is quantity of keys for that dungeon
+; 5 bytes fo each dungeon.
+; For each dungeon:
+;   byte 0: has map?
+;   byte 1: has compass?
+;   byte 2: has stone slab?
+;   byte 3: has boss key?
+;   byte 4: small keys count
 wDungeonItemFlags:: ; DB16
   ds $2D
 
@@ -1168,20 +1174,17 @@ wTorchesCount:: ; DBC9
 ; Unlabeled
 ds 2
 
-wHasDungeonMap:: ; DBCC
-  ds 1
-
-wHasDungeonCompass:: ; DBCD
-  ds 1
-
-wHasDungeonStoneSlab:: ; DBCE
-  ds 1
-
-wHasDungeonBossKey:: ; DBCF
-  ds 1
+; A table of five items flags for the current dungeon
+; See also: wDungeonItemFlags
+wCurrentDungeonItemFlags:: ; DBCC
+wHasDungeonMap::       ds 1 ; DBCC
+wHasDungeonCompass::   ds 1 ; DBCD
+wHasDungeonStoneSlab:: ds 1 ; DBCE
+wHasDungeonBossKey::   ds 1 ; DBCF
+wSmallKeysCount::      ds 1 ; DBD0
 
 ; Unlabeled
-ds $30
+ds $2F
 
 wFile1DeathCountHigh:: ; DC00
   ds 1

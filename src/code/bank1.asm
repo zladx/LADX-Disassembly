@@ -2465,7 +2465,7 @@ label_5DE6::
     ld   [wHealth], a
 
 label_5DFA::
-    call label_2802
+    call SynchronizeDungeonsItemFlags_trampoline
     ld   a, [wSaveSlot]
     sla  a
     ld   e, a
@@ -2528,20 +2528,32 @@ label_5E3A::
     ldi  [hl], a
     ret
 
-label_5E67::
+; Copy the current dungeon item flags to the global and persistent
+; dungeons item flags table.
+SynchronizeDungeonsItemFlags::
     push bc
+
+    ; If on overworld, do nothing
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_5E95
+    jr   z, .return
+
+    ; If inside the Color dungeon…
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_5E79
-    ld   hl, $DDDA
-    jr   label_5E8A
+    jr   nz, .notColorDungeon
 
-label_5E79::
-    cp   $0A
-    jr   nc, label_5E95
+    ; hl = $DDDA
+    ld   hl, $DDDA
+    jr   .endIf
+
+.notColorDungeon
+    ; If the map is not a dungeon, return.
+    cp   MAP_CAVE_B
+    jr   nc, .return
+
+    ; Select the correct item flags slot for the current dungeon
+    ; hl = wDungeonItemFlags + (hMapId * 5)
     ld   hl, wDungeonItemFlags
     ld   e, a
     sla  a
@@ -2550,19 +2562,20 @@ label_5E79::
     ld   e, a
     ld   d, $00
     add  hl, de
+.endIf
 
-label_5E8A::
-    ld   de, wHasDungeonMap
+    ; Copy 5 values from wCurrentDungeonItemFlags to wDungeonItemFlags
+    ld   de, wCurrentDungeonItemFlags
     ld   c, $05
-
-label_5E8F::
+.loop
     ld   a, [de]
     inc  de
     ldi  [hl], a
+    ; loop while c > 0
     dec  c
-    jr   nz, label_5E8F
+    jr   nz, .loop
 
-label_5E95::
+.return
     pop  bc
     ret
 

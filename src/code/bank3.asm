@@ -1618,7 +1618,7 @@ jr_003_50D8:
     ld   hl, wHasDungeonMap                       ; $50E5: $21 $CC $DB
     add  hl, de                                   ; $50E8: $19
     inc  [hl]                                     ; $50E9: $34
-    call label_2802                               ; $50EA: $CD $02 $28
+    call SynchronizeDungeonsItemFlags_trampoline                               ; $50EA: $CD $02 $28
     jr   jr_003_512A                              ; $50ED: $18 $3B
 
 jr_003_50EF:
@@ -5107,9 +5107,9 @@ jr_003_64A5:
 
 jr_003_64AD:
     call func_003_512A                            ; $64AD: $CD $2A $51
-    ld   hl, $DBD0                                ; $64B0: $21 $D0 $DB
+    ld   hl, wSmallKeysCount                                ; $64B0: $21 $D0 $DB
     inc  [hl]                                     ; $64B3: $34
-    jp   label_2802                               ; $64B4: $C3 $02 $28
+    jp   SynchronizeDungeonsItemFlags_trampoline                               ; $64B4: $C3 $02 $28
 
     ld   a, $08                                   ; $64B7: $3E $08
 

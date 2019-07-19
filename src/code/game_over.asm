@@ -125,7 +125,7 @@ label_4259::
     ld   hl, $FF9C
     inc  [hl]
     call LoadFileMenuBG_trampoline
-    call label_2802
+    call SynchronizeDungeonsItemFlags_trampoline
     ret
     nop
     cp   $FD

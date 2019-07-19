@@ -2837,20 +2837,28 @@ label_002_538B::
     ld   [hl], d                                  ; $53AC: $72
     jp   label_140F                               ; $53AD: $C3 $0F $14
 
-func_002_53B0::
+; Try to open a locked door with a small key
+TryOpenLockedDoor::
     push bc                                       ; $53B0: $C5
     push de                                       ; $53B1: $D5
     ldh  a, [hFFE8]                               ; $53B2: $F0 $E8
     cp   $40                                      ; $53B4: $FE $40
-    jr   z, jr_002_53FB                           ; $53B6: $28 $43
+    jr   z, .jr_002_53FB                          ; $53B6: $28 $43
 
-    ld   a, [$DBD0]                               ; $53B8: $FA $D0 $DB
+    ; If the player doesn't have a small key for this dungeon,
+    ; return.
+    ld   a, [wSmallKeysCount]                     ; $53B8: $FA $D0 $DB
     and  a                                        ; $53BB: $A7
-    jr   z, label_002_541D                        ; $53BC: $28 $5F
+    jr   z, .return                               ; $53BC: $28 $5F
 
+    ;
+    ; Open locked door with a small key
+    ;
+
+    ; Decrease the player small key count
     dec  a                                        ; $53BE: $3D
-    ld   [$DBD0], a                               ; $53BF: $EA $D0 $DB
-    call label_2802                               ; $53C2: $CD $02 $28
+    ld   [wSmallKeysCount], a                     ; $53BF: $EA $D0 $DB
+    call SynchronizeDungeonsItemFlags_trampoline                               ; $53C2: $CD $02 $28
     call label_002_5420                           ; $53C5: $CD $20 $54
     call func_002_5B9F                            ; $53C8: $CD $9F $5B
     ld   a, [hl]                                  ; $53CB: $7E
@@ -2877,12 +2885,12 @@ func_002_53B0::
     ldh  [hScratchB], a                               ; $53F1: $E0 $D8
     ld   a, $02                                   ; $53F3: $3E $02
     call label_CC7                                ; $53F5: $CD $C7 $0C
-    jp   label_002_541D                           ; $53F8: $C3 $1D $54
+    jp   .return                                  ; $53F8: $C3 $1D $54
 
-jr_002_53FB:
+.jr_002_53FB
     ld   a, $06                                   ; $53FB: $3E $06
     call label_3B86                               ; $53FD: $CD $86 $3B
-    jr   c, label_002_541D                        ; $5400: $38 $1B
+    jr   c, .return                               ; $5400: $38 $1B
 
     ld   hl, wEntitiesTypeTable                   ; $5402: $21 $80 $C2
     add  hl, de                                   ; $5405: $19
@@ -2900,7 +2908,7 @@ jr_002_53FB:
     add  hl, de                                   ; $541B: $19
     ld   [hl], a                                  ; $541C: $77
 
-label_002_541D::
+.return
     pop  de                                       ; $541D: $D1
     pop  bc                                       ; $541E: $C1
     ret                                           ; $541F: $C9
@@ -7279,12 +7287,12 @@ jr_002_7112:
     cp   $94                                      ; $711B: $FE $94
     jr   nc, jr_002_712C                          ; $711D: $30 $0D
 
-    ld   a, [$DBD0]                               ; $711F: $FA $D0 $DB
+    ld   a, [wSmallKeysCount]                               ; $711F: $FA $D0 $DB
     and  a                                        ; $7122: $A7
     jp   z, label_002_7277                        ; $7123: $CA $77 $72
 
     dec  a                                        ; $7126: $3D
-    ld   [$DBD0], a                               ; $7127: $EA $D0 $DB
+    ld   [wSmallKeysCount], a                               ; $7127: $EA $D0 $DB
     jr   jr_002_7147                              ; $712A: $18 $1B
 
 jr_002_712C:
@@ -7314,7 +7322,7 @@ jr_002_7147:
     ld   [$DBAC], a                               ; $714F: $EA $AC $DB
     inc  a                                        ; $7152: $3C
     ld   [$C188], a                               ; $7153: $EA $88 $C1
-    call label_2802                               ; $7156: $CD $02 $28
+    call SynchronizeDungeonsItemFlags_trampoline                               ; $7156: $CD $02 $28
     call label_002_5420                           ; $7159: $CD $20 $54
     jp   label_002_7277                           ; $715C: $C3 $77 $72
 
@@ -7559,7 +7567,7 @@ jr_002_72C3:
     cp   $DE                                      ; $72C3: $FE $DE
     jr   nz, jr_002_72D1                          ; $72C5: $20 $0A
 
-    ld   a, [$DBD0]                               ; $72C7: $FA $D0 $DB
+    ld   a, [wSmallKeysCount]                               ; $72C7: $FA $D0 $DB
     and  a                                        ; $72CA: $A7
     jr   nz, jr_002_72FA                          ; $72CB: $20 $2D
 
@@ -7807,7 +7815,7 @@ jr_002_742F:
     ldh  [hFFE8], a                               ; $743A: $E0 $E8
     xor  a                                        ; $743C: $AF
     ld   [$C191], a                               ; $743D: $EA $91 $C1
-    call func_002_53B0                            ; $7440: $CD $B0 $53
+    call TryOpenLockedDoor                            ; $7440: $CD $B0 $53
     ld   a, [wIsIndoor]                         ; $7443: $FA $A5 $DB
     and  a                                        ; $7446: $A7
     jr   nz, label_002_7454                       ; $7447: $20 $0B

@@ -3998,8 +3998,8 @@ label_27F2::
 .skip
     jp   ReloadSavedBank
 
-label_2802::
-    callsb label_5E67
+SynchronizeDungeonsItemFlags_trampoline::
+    callsb SynchronizeDungeonsItemFlags
     jp   ReloadSavedBank
 
 ; Return a random number in `a`

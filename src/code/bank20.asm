@@ -5555,7 +5555,7 @@ jr_020_5A97:
     jr   nc, jr_020_5AD1                          ; $5AAC: $30 $23
 
 jr_020_5AAE:
-    ld   a, [$DBD0]                               ; $5AAE: $FA $D0 $DB
+    ld   a, [wSmallKeysCount]                               ; $5AAE: $FA $D0 $DB
     and  a                                        ; $5AB1: $A7
     jr   z, jr_020_5ADE                           ; $5AB2: $28 $2A
 

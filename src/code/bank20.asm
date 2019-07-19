@@ -5490,7 +5490,7 @@ overwriteInventoryDisplaySprite:
     ld   hl, wRequestDestinationHigh              ; $5A5F: $21 $01 $D6
     add  hl, de                                   ; $5A62: $19
 
-    ; Write $7F over sprite data
+    ; Write $7F over sprite data (won't display)
     ld   a, $7F                                   ; $5A63: $3E $7F
     ld   [hl+], a                                 ; $5A65: $22
     ld   [hl+], a                                 ; $5A66: $22

@@ -7258,7 +7258,7 @@ label_3B86::
     ld   a, $03
     ld   [MBC3SelectBank], a
     pop  af
-    call label_64CA
+    call func_003_64CA
     rr   l
     call ReloadSavedBank
     rl   l

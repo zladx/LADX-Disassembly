@@ -5128,13 +5128,15 @@ jr_003_64BC:
     ld   a, $30                                   ; $64C6: $3E $30
     jr   jr_003_64B9                              ; $64C8: $18 $EF
 
+; Inputs:
+;   a: ???
 func_003_64CA::
     ld   e, $0F                                   ; $64CA: $1E $0F
     push af                                       ; $64CC: $F5
     ld   d, $00                                   ; $64CD: $16 $00
 
 jr_003_64CF:
-    ld   hl, wEntity0Type                         ; $64CF: $21 $80 $C2
+    ld   hl, wEntitiesTypeTable                   ; $64CF: $21 $80 $C2
     add  hl, de                                   ; $64D2: $19
     ld   a, [hl]                                  ; $64D3: $7E
     and  a                                        ; $64D4: $A7
@@ -5155,11 +5157,13 @@ jr_003_64E0:
     ld   hl, $C3A0                                ; $64E3: $21 $A0 $C3
     add  hl, de                                   ; $64E6: $19
     ld   [hl], a                                  ; $64E7: $77
-    ld   hl, wEntity0PosX                         ; $64E8: $21 $00 $C2
+
+    ld   hl, wEntitiesPosXTable                   ; $64E8: $21 $00 $C2
     add  hl, bc                                   ; $64EB: $09
     ld   a, [hl]                                  ; $64EC: $7E
     ldh  [hScratchA], a                           ; $64ED: $E0 $D7
-    ld   hl, wEntity0PosY                         ; $64EF: $21 $10 $C2
+
+    ld   hl, wEntitiesPosYTable                   ; $64EF: $21 $10 $C2
     add  hl, bc                                   ; $64F2: $09
     ld   a, [hl]                                  ; $64F3: $7E
     ldh  [hScratchB], a                           ; $64F4: $E0 $D8

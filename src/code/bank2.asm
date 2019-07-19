@@ -2843,7 +2843,7 @@ TryOpenLockedDoor::
     push de                                       ; $53B1: $D5
     ldh  a, [hFFE8]                               ; $53B2: $F0 $E8
     cp   $40                                      ; $53B4: $FE $40
-    jr   z, .jr_002_53FB                          ; $53B6: $28 $43
+    jr   z, .FFE8Equals40                         ; $53B6: $28 $43
 
     ; If the player doesn't have a small key for this dungeon,
     ; return.
@@ -2879,6 +2879,7 @@ TryOpenLockedDoor::
     or   e                                        ; $53E0: $B3
     ld   e, a                                     ; $53E1: $5F
     ld   d, $00                                   ; $53E2: $16 $00
+
     call label_2178                               ; $53E4: $CD $78 $21
     ldh  a, [hSwordIntersectedAreaX]                               ; $53E7: $F0 $CE
     add  $08                                      ; $53E9: $C6 $08
@@ -2890,7 +2891,11 @@ TryOpenLockedDoor::
     call label_CC7                                ; $53F5: $CD $C7 $0C
     jp   .return                                  ; $53F8: $C3 $1D $54
 
-.jr_002_53FB
+.FFE8Equals40
+    ;
+    ; Unknown purpose
+    ;
+
     ld   a, $06                                   ; $53FB: $3E $06
     call label_3B86                               ; $53FD: $CD $86 $3B
     jr   c, .return                               ; $5400: $38 $1B
@@ -3245,6 +3250,8 @@ jr_002_557F:
     inc  b                                        ; $55D9: $04
     inc  b                                        ; $55DA: $04
     db   $10                                      ; $55DB: $10
+
+
     ldh  a, [hFrameCounter]                       ; $55DC: $F0 $E7
     xor  c                                        ; $55DE: $A9
     and  $01                                      ; $55DF: $E6 $01

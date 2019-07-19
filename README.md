@@ -93,6 +93,7 @@ The tool was initially developed by @devdri. @kemenaran is currently writing som
 
 Thanks to these people for contributing:
 
+* mojobojo - https://github.com/mojobojo
 * kemenaran - https://github.com/kemenaran
 * Drenn1 - https://github.com/Drenn1
 * Sanqui - https://github.com/Sanqui

@@ -107,7 +107,7 @@ rHDMA3      EQU $ff53 ; CGB Mode Only - New DMA Destination, High
 rHDMA4      EQU $ff54 ; CGB Mode Only - New DMA Destination, Low
 rHDMA5      EQU $ff55 ; CGB Mode Only - New DMA Length/Mode/Start
 rRP         EQU $ff56 ; CGB Mode Only - Infrared Communications Port
-rBGPI       EQU $ff68 ; CGB Mode Only - Background Palette Index
+rBCPS       EQU $ff68 ; CGB Mode Only - Background Palette Index
 rBGPD       EQU $ff69 ; CGB Mode Only - Background Palette Data
 rOBPI       EQU $ff6a ; CGB Mode Only - Sprite Palette Index
 rOBPD       EQU $ff6b ; CGB Mode Only - Sprite Palette Data

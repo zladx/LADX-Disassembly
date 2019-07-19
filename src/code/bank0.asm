@@ -1811,7 +1811,7 @@ ItemFunction::
     cp   $0B
     jp   z, UseShovel
     cp   $07 ; Magic wand
-    jr   nz, label_12ED
+    jr   nz, label_12ED ; Jump to use boots?
     ld   hl, wSwordAnimationState
     ld   a, [$C19B]
     or   [hl]

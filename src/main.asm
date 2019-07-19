@@ -126,6 +126,9 @@ include "code/bank1A/unknown.asm"
 section "bank1C",romx[$4001],bank[$1C]
 include "text/dialog_table.asm"
 
+section "bank20",romx[$4000],bank[$20]
+include "code/bank20.asm"
+
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"
 incbin "gfx/photos/photo_marin_cliff.2bpp"

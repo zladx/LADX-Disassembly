@@ -3233,11 +3233,11 @@ jr_003_59D6:
 
     ret                                           ; $59D7: $C9
 
-    xor  d                                        ; $59D8: $AA
-    inc  d                                        ; $59D9: $14
-    xor  d                                        ; $59DA: $AA
-    inc  [hl]                                     ; $59DB: $34
-    ld   de, $59D8                                ; $59DC: $11 $D8 $59
+HeartContainerTilesTable::
+    db   $AA, $14, $AA, $34
+
+LoadHeartContainer::
+    ld   de, HeartContainerTilesTable             ; $59DC: $11 $D8 $59
     call label_3BC0                               ; $59DF: $CD $C0 $3B
     call IsEntityFrameCounterZero                 ; $59E2: $CD $05 $0C
     jp   z, label_003_60AA                        ; $59E5: $CA $AA $60
@@ -3247,6 +3247,7 @@ jr_003_59D6:
 
     ld   a, $18                                   ; $59EB: $3E $18
     ld   [wWorldMusicTrack], a                    ; $59ED: $EA $68 $D3
+    ; Increase max health
     ld   hl, wMaxHealth                           ; $59F0: $21 $5B $DB
     inc  [hl]                                     ; $59F3: $34
     ld   hl, wSubstractRupeeBufferLow             ; $59F4: $21 $93 $DB
@@ -3256,21 +3257,22 @@ jr_003_59D6:
     or   $20                                      ; $59FD: $F6 $20
     ld   [hl], a                                  ; $59FF: $77
     ldh  [hRoomStatus], a                         ; $5A00: $E0 $F8
+
     ldh  a, [hMapId]                              ; $5A02: $F0 $F7
-    ld   hl, $DA2E                                ; $5A04: $21 $2E $DA
-    cp   $06                                      ; $5A07: $FE $06
+    ld   hl, wIndoorBRoomStatus + $2E             ; $5A04: $21 $2E $DA
+    cp   MAP_EAGLES_TOWER                         ; $5A07: $FE $06
     jr   z, jr_003_5A12                           ; $5A09: $28 $07
 
-    cp   $03                                      ; $5A0B: $FE $03
+    cp   MAP_ANGLERS_TUNNEL                       ; $5A0B: $FE $03
     jr   nz, jr_003_5A14                          ; $5A0D: $20 $05
 
-    ld   hl, $D966                                ; $5A0F: $21 $66 $D9
+    ld   hl, wIndoorARoomStatus + $66             ; $5A0F: $21 $66 $D9
 
 jr_003_5A12:
     set  5, [hl]                                  ; $5A12: $CB $EE
 
 jr_003_5A14:
-    jp   ClearEntityType                               ; $5A14: $C3 $8D $3F
+    jp   ClearEntityTypeAndReturn                 ; $5A14: $C3 $8D $3F
 
 func_003_5A17::
 label_003_5A17:

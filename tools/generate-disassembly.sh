@@ -17,4 +17,4 @@ if ! [[ -f tools/mgbdis/mgbdis.py ]]; then
 fi
 
 # Invoke the disassembler with the specific formatting options
-tools/mgbdis/mgbdis.py game.gbc --overwrite --print-hex --uppercase-hex --align-operands
+tools/mgbdis/mgbdis.py game.gbc --overwrite --print-hex --uppercase-hex --align-operands --ldh_a8 ldh_ffa8 --indent-spaces 4

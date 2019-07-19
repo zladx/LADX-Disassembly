@@ -115,6 +115,9 @@ include "data/maps/layouts.asm"
 section "bank14_dialog",romx[$5934], BANK[$14]
 include "text/dialog.asm"
 
+; Bank $16: contains sprite data for overworld
+; Starts on byte $3186, ends on byte $365D
+
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"

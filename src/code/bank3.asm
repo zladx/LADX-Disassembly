@@ -1565,7 +1565,7 @@ jr_003_5081:
     ld   a, [hl]                                  ; $5098: $7E
     ldh  [hFFE8], a                               ; $5099: $E0 $E8
     ld   d, b                                     ; $509B: $50
-    cp   $11                                      ; $509C: $FE $11
+    cp   CHEST_TAIL_KEY                           ; $509C: $FE $11
     jr   nz, jr_003_50AC                          ; $509E: $20 $0C
 
     push af                                       ; $50A0: $F5
@@ -1578,16 +1578,16 @@ jr_003_5081:
 
 jr_003_50AC:
     ld   e, a                                     ; $50AC: $5F
-    cp   $21                                      ; $50AD: $FE $21
+    cp   CHEST_MESSAGE                            ; $50AD: $FE $21
     jp   nc, label_003_512A                       ; $50AF: $D2 $2A $51
 
-    cp   $20                                      ; $50B2: $FE $20
+    cp   CHEST_SEASHELL                           ; $50B2: $FE $20
     jr   nz, jr_003_50B9                          ; $50B4: $20 $03
 
     jp   label_003_636D                           ; $50B6: $C3 $6D $63
 
 jr_003_50B9:
-    cp   $1B                                      ; $50B9: $FE $1B
+    cp   CHEST_RUPEES_50                          ; $50B9: $FE $1B
     jr   c, jr_003_50D8                           ; $50BB: $38 $1B
 
     cp   $20                                      ; $50BD: $FE $20
@@ -1606,10 +1606,10 @@ jr_003_50B9:
     jr   jr_003_512A                              ; $50D6: $18 $52
 
 jr_003_50D8:
-    cp   $16                                      ; $50D8: $FE $16
+    cp   CHEST_MAP                                ; $50D8: $FE $16
     jr   c, jr_003_50EF                           ; $50DA: $38 $13
 
-    cp   $1B                                      ; $50DC: $FE $1B
+    cp   CHEST_RUPEES_50                          ; $50DC: $FE $1B
     jr   nc, jr_003_50EF                          ; $50DE: $30 $0F
 
     sub  $16                                      ; $50E0: $D6 $16
@@ -1622,39 +1622,43 @@ jr_003_50D8:
     jr   jr_003_512A                              ; $50ED: $18 $3B
 
 jr_003_50EF:
-    cp   $0C                                      ; $50EF: $FE $0C
+    cp   CHEST_FLIPPERS                           ; $50EF: $FE $0C
     jr   nc, jr_003_5125                          ; $50F1: $30 $32
 
+    ; When finding the Shield chest…
     ldh  a, [hFFE8]                               ; $50F3: $F0 $E8
-    cp   $01                                      ; $50F5: $FE $01
-    jr   nz, jr_003_50FD                          ; $50F7: $20 $04
-
+    cp   CHEST_SHIELD                             ; $50F5: $FE $01
+    jr   nz, .shieldEnd                           ; $50F7: $20 $04
+    ; increment the Shield level.
     ld   hl, wShieldLevel                         ; $50F9: $21 $44 $DB
     inc  [hl]                                     ; $50FC: $34
+.shieldEnd
 
-jr_003_50FD:
-    cp   $00                                      ; $50FD: $FE $00
-    jr   nz, jr_003_510C                          ; $50FF: $20 $0B
-
+    ; When finding the Power bracelet chest…
+    cp   CHEST_POWER_BRACELET                     ; $50FD: $FE $00
+    jr   nz, .powerBraceletEnd                    ; $50FF: $20 $0B
+    ; … and the LV2 bracelet was not found yet…
     ld   a, [wPowerBraceletLevel]                 ; $5101: $FA $43 $DB
     cp   $02                                      ; $5104: $FE $02
-    jr   z, jr_003_510C                           ; $5106: $28 $04
+    jr   z, .powerBraceletEnd                     ; $5106: $28 $04
 
+    ; increment the Power bracelet lebel.
     ld   hl, wPowerBraceletLevel                  ; $5108: $21 $43 $DB
     inc  [hl]                                     ; $510B: $34
+.powerBraceletEnd
 
-jr_003_510C:
+    ; When finding a bomb's chest…
     ldh  a, [hFFE8]                               ; $510C: $F0 $E8
-    cp   $0A                                      ; $510E: $FE $0A
-    jr   nz, jr_003_511A                          ; $5110: $20 $08
-
+    cp   CHEST_BOMB                               ; $510E: $FE $0A
+    jr   nz, .bombsEnd                            ; $5110: $20 $08
+    ; increment the bomb's count by 10
     ld   hl, wBombCount                           ; $5112: $21 $4D $DB
     ld   a, [hl]                                  ; $5115: $7E
     add  $01                                      ; $5116: $C6 $01
     daa                                           ; $5118: $27
     ld   [hl], a                                  ; $5119: $77
+.bombsEnd
 
-jr_003_511A:
     ld   d, b                                     ; $511A: $50
     ld   hl, Data_003_5057                        ; $511B: $21 $57 $50
     add  hl, de                                   ; $511E: $19

@@ -214,7 +214,10 @@ hRoomBank::             ; FFE8
 hDialogBackgroundTile:: ; FFE8
   ds 1
 
-hFFE9:: ; FFE9
+; This location has diffent uses
+hFFE9::                   ; FFE9
+hDungeonFloorTile::       ; FFE9
+hIndexOfObjectBelowLink:: ; FFE9
   ds 1
 
 ; Entity type?

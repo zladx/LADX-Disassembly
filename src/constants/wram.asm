@@ -893,7 +893,7 @@ wTradeSequenceItem:: ; DB0E
 wSeashellsCount:: ; DB0F
   ds 1
 
-; Unlabeled
+; Unlabeled - Spacing byte used to check for dungeon map during InventoryDisplayLoop
 wDB10 equ $DB10
   ds 1
 

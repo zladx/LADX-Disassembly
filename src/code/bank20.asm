@@ -5335,7 +5335,6 @@ jr_020_5940:
     ret                                           ; $5969: $C9
 
 ; Palette Data ?
-; 596A
 data_020_596A::
     db $9C, $AA, $81, $06, $06, $9C, $AC, $81
     db $06, $06, $9C, $AE, $81, $06, $06, $9C
@@ -5345,7 +5344,7 @@ data_020_596A::
     db $03, $00
 
 ; Sprite Data ?
-; Start of data copied for dungeon inventory building
+; Start of data copied for inventory display
 data_020_5994::
     db $9C, $6A, $83, $94, $95, $C0, $C1, $9C
     db $6C, $83, $A0, $A1, $C2, $C3, $9C, $6E
@@ -5353,10 +5352,13 @@ data_020_5994::
     db $9C, $9D, $9C, $B0, $81, $C6, $C7, $9C
     db $71, $81, $9E, $9F, $9C, $B2, $81, $CA
     db $CB, $9C, $92, $01, $7F, $7F, $9C, $D3
-    db $00, $7F, $00, $03, $0A, $11, $22, $05
-    db $0C, $13, $1D, $27
+    db $00, $7F, $00
 
-; Start building display of dungeon inventory
+; Location for overwriting each inventory sprite
+data_020_59C7::
+    db $03, $0A, $11, $22, $05, $0C, $13, $1D, $27
+
+; Start building display of inventory
 ; Called from jp hl in 00:28CE (TABLEJUMP)
 ; Copies 51 bytes from data_020_5994 (above) to wRequestDestination (D601)                                          ; $59CF: $27
     ld   hl, wRequestDestinationHigh              ; $59D0: $21 $01 $D6
@@ -5372,7 +5374,7 @@ jr_020_59D8:
 
     ldh  a, [hIsGBC]                              ; $59DE: $F0 $FE
     and  a                                        ; $59E0: $A7
-    jr   z, jr_020_5A23                           ; $59E1: $28 $40
+    jr   z, inventoryDisplayEntryPoint            ; $59E1: $28 $40
 
 ; GBC Exclusive code
 ; Load 32 bytes from 596A into DC91
@@ -5389,21 +5391,28 @@ jr_020_59EB:
 
     ld   a, $1E                                   ; $59F1: $3E $1E
     ld   [$DC90], a                               ; $59F3: $EA $90 $DC
+
+    ; If on the overworld…
     ld   a, [wIsIndoor]                           ; $59F6: $FA $A5 $DB
     and  a                                        ; $59F9: $A7
-    jr   z, jr_020_5A23                           ; $59FA: $28 $27
+    ; start building the inventory
+    jr   z, inventoryDisplayEntryPoint            ; $59FA: $28 $27
 
-; Jump ahead if on Color Dungeon
+    ;
+    ; Dungeon inventory
+    ;
+
+; If inside Color Dungeon…
     ldh  a, [hMapId]                              ; $59FC: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $59FE: $FE $FF
-    jr   z, jr_020_5A06                           ; $5A00: $28 $04
+    jr   z, .colorDungeonEnd                      ; $5A00: $28 $04
 
-; Jump ahead if map is greater than MAP_CAVE_B
+    ; Jump ahead if map is greater than MAP_CAVE_B
     cp   MAP_CAVE_B                               ; $5A02: $FE $0A
-    jr   nc, jr_020_5A23                          ; $5A04: $30 $1D
+    jr   nc, inventoryDisplayEntryPoint           ; $5A04: $30 $1D
+.colorDungeonEnd
 
 ; Set BC and E to point to the end of the "Palette Data?" (12 bytes) above
-jr_020_5A06:
     ld   hl, $DC91                                ; $5A06: $21 $91 $DC
     ld   a, [$DC90]                               ; $5A09: $FA $90 $DC
     ld   c, a                                     ; $5A0C: $4F
@@ -5425,31 +5434,34 @@ jr_020_5A15:
     ld   [$DC90], a                               ; $5A20: $EA $90 $DC
 
 ; Palette loading complete, start building inventory
-jr_020_5A23:
+inventoryDisplayEntryPoint:
     ld   de, wHasFlippers                         ; $5A23: $11 $0C $DB
     ld   bc, $0000                                ; $5A26: $01 $00 $00
 
-jr_020_5A29:
+inventoryDisplayLoop:
+    ; c is the counted
     ld   a, c                                     ; $5A29: $79
     cp   $02                                      ; $5A2A: $FE $02
-    jr   nz, jr_020_5A34                          ; $5A2C: $20 $06
-; Always Skipped
+    jr   nz, .tradeSequenceItemEnd                ; $5A2C: $20 $06
+
+    ; Only executed for Trade Sequence items
     ld   a, [$DB7F]                               ; $5A2E: $FA $7F $DB
     and  a                                        ; $5A31: $A7
-    jr   nz, jr_020_5A57                          ; $5A32: $20 $23
+    jr   nz, overwriteInventoryDisplaySprite      ; $5A32: $20 $23
+.tradeSequenceItemEnd
 
-jr_020_5A34:
     ld   a, c                                     ; $5A34: $79
     cp   $04                                      ; $5A35: $FE $04
     jr   nz, jr_020_5A4F                          ; $5A37: $20 $16
-; Always Skipped
+
+    ; Only executed for dungeon keys
     ld   de, wHasTailKey                          ; $5A39: $11 $11 $DB
     ld   a, [wIsIndoor]                           ; $5A3C: $FA $A5 $DB
     and  a                                        ; $5A3F: $A7
     jr   z, jr_020_5A4F                           ; $5A40: $28 $0D
 
     ldh  a, [hMapId]                              ; $5A42: $F0 $F7
-    cp   $FF                                      ; $5A44: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $5A44: $FE $FF
     jr   z, jr_020_5A4C                           ; $5A46: $28 $04
 
     cp   $0A                                      ; $5A48: $FE $0A
@@ -5459,44 +5471,55 @@ jr_020_5A4C:
     ld   de, wHasDungeonMap                       ; $5A4C: $11 $CC $DB
 
 jr_020_5A4F:
+    ; Load current inventory display item memory
     ld   a, [de]                                  ; $5A4F: $1A
     cp   $FF                                      ; $5A50: $FE $FF
-    jr   z, jr_020_5A57                           ; $5A52: $28 $03
+    jr   z, overwriteInventoryDisplaySprite       ; $5A52: $28 $03
 
     and  a                                        ; $5A54: $A7
-    jr   nz, jr_020_5A75                          ; $5A55: $20 $1E
+    jr   nz, incrementInventoryDisplay            ; $5A55: $20 $1E
 
-jr_020_5A57:
+overwriteInventoryDisplaySprite:
+    ; Push current inventory item to the stack
     push de                                       ; $5A57: $D5
-    ld   hl, $59C7                                ; $5A58: $21 $C7 $59
+
+    ld   hl, data_020_59C7                        ; $5A58: $21 $C7 $59
     add  hl, bc                                   ; $5A5B: $09
     ld   e, [hl]                                  ; $5A5C: $5E
     ld   d, $00                                   ; $5A5D: $16 $00
     ld   hl, wRequestDestinationHigh              ; $5A5F: $21 $01 $D6
     add  hl, de                                   ; $5A62: $19
+
+    ; Write $7F over sprite data
     ld   a, $7F                                   ; $5A63: $3E $7F
     ld   [hl+], a                                 ; $5A65: $22
     ld   [hl+], a                                 ; $5A66: $22
+
+    ; Only executed for Trade Sequence items
     ld   a, c                                     ; $5A67: $79
     cp   $02                                      ; $5A68: $FE $02
-    jr   nz, jr_020_5A74                          ; $5A6A: $20 $08
+    jr   nz, .tradeSequenceItem2End                ; $5A6A: $20 $08
 
     ld   de, $0005                                ; $5A6C: $11 $05 $00
     add  hl, de                                   ; $5A6F: $19
     ld   a, $7F                                   ; $5A70: $3E $7F
     ld   [hl+], a                                 ; $5A72: $22
     ld   [hl], a                                  ; $5A73: $77
+.tradeSequenceItem2End
 
-jr_020_5A74:
+    ; Reload inventory item to de
     pop  de                                       ; $5A74: $D1
 
-; We have flippers
-jr_020_5A75:
+; Increment inventory memory pointer to display next item
+incrementInventoryDisplay:
     inc  de                                       ; $5A75: $13
     inc  c                                        ; $5A76: $0C
+
+    ; Loop until all 8 items are handled
     ld   a, c                                     ; $5A77: $79
     cp   $09                                      ; $5A78: $FE $09
-    jr   nz, jr_020_5A29                          ; $5A7A: $20 $AD
+    jr   nz, inventoryDisplayLoop                 ; $5A7A: $20 $AD
+
 
     ld   hl, wRequestDestinationHigh              ; $5A7C: $21 $01 $D6
     ld   de, $002C                                ; $5A7F: $11 $2C $00
@@ -5505,6 +5528,7 @@ jr_020_5A75:
     and  a                                        ; $5A86: $A7
     jr   z, jr_020_5A97                           ; $5A87: $28 $0E
 
+    ; Offset seashell count sprites to reflect seashell count in inventory
     ld   e, a                                     ; $5A89: $5F
     swap a                                        ; $5A8A: $CB $37
     and  $0F                                      ; $5A8C: $E6 $0F

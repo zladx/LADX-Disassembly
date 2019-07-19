@@ -2338,8 +2338,8 @@ TarinShield2Handler::
 
     ld   [wC167], a                               ; $4CCD: $EA $67 $C1
     ; Add the shield to the inventory
-    ld   d, $04                                   ; $4CD0: $16 $04
-    call AssignItemToSlot                            ; $4CD2: $CD $21 $53
+    ld   d, INVENTORY_SHIELD                      ; $4CD0: $16 $04
+    call AssignItemToSlot                         ; $4CD2: $CD $21 $53
 
     ld   a, $01                                   ; $4CD5: $3E $01
     ld   [wShieldLevel], a                        ; $4CD7: $EA $44 $DB

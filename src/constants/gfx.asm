@@ -153,7 +153,7 @@ ROOM_BORDER                 equ $FF
 ; Flags can be combined. For example, visiting the first dungeon's screen (80)
 ; and opening it with the key (10) would put that byte at 90.
 ROOM_STATUS_UNVISITED    equ $00
-ROOM_STATUS_DOOR_OPENED  equ $4  ; door or bombable entrance opened
+ROOM_STATUS_DOOR_OPENED  equ $04 ; door or bombable entrance opened
 ROOM_STATUS_CHANGED      equ $10 ; e.g. sword taken on the beach
 ROOM_STATUS_OWL_TALKED   equ $20
 ROOM_STATUS_VISITED      equ $80

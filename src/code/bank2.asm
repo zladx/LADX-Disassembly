@@ -2860,11 +2860,14 @@ TryOpenLockedDoor::
     ld   [wSmallKeysCount], a                     ; $53BF: $EA $D0 $DB
     call SynchronizeDungeonsItemFlags_trampoline                               ; $53C2: $CD $02 $28
     call EnqueueDoorUnlockedSfx                   ; $53C5: $CD $20 $54
-    call func_002_5B9F                            ; $53C8: $CD $9F $5B
+
+    ; Mark the room as opened
+    call GetRoomStatusAddress                     ; $53C8: $CD $9F $5B
     ld   a, [hl]                                  ; $53CB: $7E
     or   $40                                      ; $53CC: $F6 $40
     ld   [hl], a                                  ; $53CE: $77
     ldh  [hRoomStatus], a                               ; $53CF: $E0 $F8
+
     ldh  a, [$FFDB]                               ; $53D1: $F0 $DB
     and  $F0                                      ; $53D3: $E6 $F0
     ldh  [hSwordIntersectedAreaX], a                               ; $53D5: $E0 $CE
@@ -4149,7 +4152,7 @@ jr_002_5B4C:
     jr   jr_002_5B4C                              ; $5B6D: $18 $DD
 
 jr_002_5B6F:
-    call func_002_5B9F                            ; $5B6F: $CD $9F $5B
+    call GetRoomStatusAddress                     ; $5B6F: $CD $9F $5B
     ld   c, l                                     ; $5B72: $4D
     ld   b, h                                     ; $5B73: $44
     ld   a, [$C189]                               ; $5B74: $FA $89 $C1
@@ -4179,33 +4182,38 @@ jr_002_5B6F:
     ld   [bc], a                                  ; $5B9D: $02
     ret                                           ; $5B9E: $C9
 
-func_002_5B9F::
-    ld   hl, wOverworldRoomStatus                        ; $5B9F: $21 $00 $D8
-    ldh  a, [hMapRoom]                           ; $5BA2: $F0 $F6
+; Retrieve the address of the status flags for the current room.
+; Returns the address in hl.
+GetRoomStatusAddress::
+    ld   hl, wOverworldRoomStatus                 ; $5B9F: $21 $00 $D8
+    ldh  a, [hMapRoom]                            ; $5BA2: $F0 $F6
     ld   e, a                                     ; $5BA4: $5F
-    ld   a, [wIsIndoor]                         ; $5BA5: $FA $A5 $DB
+
+    ; If is indoor…
+    ld   a, [wIsIndoor]                           ; $5BA5: $FA $A5 $DB
     ld   d, a                                     ; $5BA8: $57
     and  a                                        ; $5BA9: $A7
-    jr   z, jr_002_5BC2                           ; $5BAA: $28 $16
+    jr   z, .computeAddress                       ; $5BAA: $28 $16
 
-    ldh  a, [hMapId]                         ; $5BAC: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $5BAE: $FE $FF
-    jr   nz, jr_002_5BB9                          ; $5BB0: $20 $07
+    ; If is color dungeon…
+    ldh  a, [hMapId]                              ; $5BAC: $F0 $F7
+    cp   MAP_COLOR_DUNGEON                        ; $5BAE: $FE $FF
+    jr   nz, .regularDungeon                      ; $5BB0: $20 $07
 
     ld   d, $00                                   ; $5BB2: $16 $00
-    ld   hl, $DDE0                                ; $5BB4: $21 $E0 $DD
-    jr   jr_002_5BC2                              ; $5BB7: $18 $09
+    ld   hl, wColorDungeonRoomStatus              ; $5BB4: $21 $E0 $DD
+    jr   .computeAddress                          ; $5BB7: $18 $09
 
-jr_002_5BB9:
-    cp   $1A                                      ; $5BB9: $FE $1A
-    jr   nc, jr_002_5BC2                          ; $5BBB: $30 $05
-
+.regularDungeon
+    ; If map > $1A && map < 6…
+    cp   MAP_UNKNOWN_1A                           ; $5BB9: $FE $1A
+    jr   nc, .computeAddress                      ; $5BBB: $30 $05
     cp   $06                                      ; $5BBD: $FE $06
-    jr   c, jr_002_5BC2                           ; $5BBF: $38 $01
-
+    jr   c, .computeAddress                           ; $5BBF: $38 $01
+    ; d += 1
     inc  d                                        ; $5BC1: $14
 
-jr_002_5BC2:
+.computeAddress
     add  hl, de                                   ; $5BC2: $19
     ret                                           ; $5BC3: $C9
 
@@ -4599,7 +4607,7 @@ jr_002_5DC0:
 
 label_002_5DF6::
     call label_CC7                                ; $5DF6: $CD $C7 $0C
-    call func_002_5B9F                            ; $5DF9: $CD $9F $5B
+    call GetRoomStatusAddress                     ; $5DF9: $CD $9F $5B
     ld   a, [hl]                                  ; $5DFC: $7E
     or   $10                                      ; $5DFD: $F6 $10
     ld   [hl], a                                  ; $5DFF: $77
@@ -4613,7 +4621,7 @@ label_002_5E02::
     cp   $69                                      ; $5E08: $FE $69
     jr   nz, jr_002_5E15                          ; $5E0A: $20 $09
 
-    call func_002_5B9F                            ; $5E0C: $CD $9F $5B
+    call GetRoomStatusAddress                     ; $5E0C: $CD $9F $5B
     ld   a, [hl]                                  ; $5E0F: $7E
     or   $10                                      ; $5E10: $F6 $10
     ld   [hl], a                                  ; $5E12: $77
@@ -5127,7 +5135,7 @@ jr_002_60BD:
 
     call label_C60                                ; $60C8: $CD $60 $0C
     call func_002_5DAF                            ; $60CB: $CD $AF $5D
-    call func_002_5B9F                            ; $60CE: $CD $9F $5B
+    call GetRoomStatusAddress                     ; $60CE: $CD $9F $5B
     ld   a, [hl]                                  ; $60D1: $7E
     or   $10                                      ; $60D2: $F6 $10
     ld   [hl], a                                  ; $60D4: $77

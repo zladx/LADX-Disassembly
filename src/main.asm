@@ -26,6 +26,7 @@ section "bank4",romx[$4000],bank[$04]
 include "code/bank4.asm"
 
 section "bank5",romx[$4000],bank[$05]
+include "code/bank5.asm"
 
 section "bank009",romx[$4000],bank[$09]
 OverworldRoomPointers::

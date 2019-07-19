@@ -2859,7 +2859,7 @@ TryOpenLockedDoor::
     dec  a                                        ; $53BE: $3D
     ld   [wSmallKeysCount], a                     ; $53BF: $EA $D0 $DB
     call SynchronizeDungeonsItemFlags_trampoline                               ; $53C2: $CD $02 $28
-    call label_002_5420                           ; $53C5: $CD $20 $54
+    call EnqueueDoorUnlockedSfx                   ; $53C5: $CD $20 $54
     call func_002_5B9F                            ; $53C8: $CD $9F $5B
     ld   a, [hl]                                  ; $53CB: $7E
     or   $40                                      ; $53CC: $F6 $40
@@ -2913,8 +2913,8 @@ TryOpenLockedDoor::
     pop  bc                                       ; $541E: $C1
     ret                                           ; $541F: $C9
 
-label_002_5420::
-    ld   a, $04                                   ; $5420: $3E $04
+EnqueueDoorUnlockedSfx::
+    ld   a, SFX_DOOR_UNLOCKED                     ; $5420: $3E $04
     ldh  [hNextSFX], a                            ; $5422: $E0 $F4
     ret                                           ; $5424: $C9
 
@@ -3336,7 +3336,7 @@ jr_002_565B:
     cp   $DE                                      ; $565B: $FE $DE
     jr   nz, jr_002_5664                          ; $565D: $20 $05
 
-    call label_002_5420                           ; $565F: $CD $20 $54
+    call EnqueueDoorUnlockedSfx                   ; $565F: $CD $20 $54
     ld   a, $DE                                   ; $5662: $3E $DE
 
 jr_002_5664:
@@ -4690,7 +4690,7 @@ jr_002_5E6A:
     ld   [$C18E], a                               ; $5E70: $EA $8E $C1
     ld   a, $01                                   ; $5E73: $3E $01
     ld   [$C18C], a                               ; $5E75: $EA $8C $C1
-    jp   label_002_5420                           ; $5E78: $C3 $20 $54
+    jp   EnqueueDoorUnlockedSfx                   ; $5E78: $C3 $20 $54
 
 func_002_5E7B::
     ldh  a, [hLinkPositionX]                      ; $5E7B: $F0 $98
@@ -7073,7 +7073,7 @@ jr_002_6FC6:
     jr   jr_002_6FD7                              ; $6FD2: $18 $03
 
 jr_002_6FD4:
-    call label_002_5420                           ; $6FD4: $CD $20 $54
+    call EnqueueDoorUnlockedSfx                   ; $6FD4: $CD $20 $54
 
 jr_002_6FD7:
     ld   a, $28                                   ; $6FD7: $3E $28
@@ -7323,7 +7323,7 @@ jr_002_7147:
     inc  a                                        ; $7152: $3C
     ld   [$C188], a                               ; $7153: $EA $88 $C1
     call SynchronizeDungeonsItemFlags_trampoline                               ; $7156: $CD $02 $28
-    call label_002_5420                           ; $7159: $CD $20 $54
+    call EnqueueDoorUnlockedSfx                   ; $7159: $CD $20 $54
     jp   label_002_7277                           ; $715C: $C3 $77 $72
 
 label_002_715F::

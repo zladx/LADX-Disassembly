@@ -38,6 +38,7 @@ JINGLE_ENNEMY_SHRIEK    equ $3C
 
 ; Values for hSfx
 SFX_SWORD_A         equ $02
+SFX_DOOR_UNLOCKED   equ $04
 SFX_RUPEE           equ $05
 SFX_TYPEWRITER      equ $0F
 SFX_BOSS_AGONY      equ $10

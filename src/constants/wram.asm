@@ -826,7 +826,7 @@ wOverworldRoomStatus:: ; D800
 wIndoorARoomStatus:: ; D900
   ds $100
 
-wIndoorBRoomStatus:: ; D900
+wIndoorBRoomStatus:: ; DA00
   ds $100
 
 wAButtonSlot:: ; DB00

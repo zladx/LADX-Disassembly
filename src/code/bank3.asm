@@ -245,7 +245,7 @@ func_003_4895::
 jr_003_48AD:
     ld   a, $01                                   ; $48AD: $3E $01
     ld   [$C18F], a                               ; $48AF: $EA $8F $C1
-    jp   label_3F8D                               ; $48B2: $C3 $8D $3F
+    jp   ClearEntityType                               ; $48B2: $C3 $8D $3F
 
     ld   hl, $C430                                ; $48B5: $21 $30 $C4
     add  hl, bc                                   ; $48B8: $09
@@ -257,7 +257,7 @@ jr_003_48AD:
     and  $30                                      ; $48C0: $E6 $30
     jr   z, jr_003_48C7                           ; $48C2: $28 $03
 
-    jp   label_3F8D                               ; $48C4: $C3 $8D $3F
+    jp   ClearEntityType                               ; $48C4: $C3 $8D $3F
 
 jr_003_48C7:
     ldh  a, [$FFEB]                               ; $48C7: $F0 $EB
@@ -367,7 +367,7 @@ Data_003_4924::
     ld   hl, $DB74                                ; $495A: $21 $74 $DB
     ld   a, [wIsMarinFollowingLink]               ; $495D: $FA $73 $DB
     or   [hl]                                     ; $4960: $B6
-    jp   nz, label_3F8D                           ; $4961: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4961: $C2 $8D $3F
 
     ret                                           ; $4964: $C9
 
@@ -484,7 +484,7 @@ jr_003_499C:
 
     ld   a, [$DB4B]                               ; $4A0B: $FA $4B $DB
     and  a                                        ; $4A0E: $A7
-    jp   nz, label_3F8D                           ; $4A0F: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4A0F: $C2 $8D $3F
 
 func_003_4A12::
 jr_003_4A12:
@@ -525,7 +525,7 @@ jr_003_4A32:
 jr_003_4A46:
     ld   a, [$C5A9]                               ; $4A46: $FA $A9 $C5
     and  a                                        ; $4A49: $A7
-    jp   nz, label_3F8D                           ; $4A4A: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4A4A: $C2 $8D $3F
 
 jr_003_4A4D:
     ld   a, $0C                                   ; $4A4D: $3E $0C
@@ -544,12 +544,12 @@ jr_003_4A4F:
     cp   $80                                      ; $4A64: $FE $80
     jr   z, jr_003_4A72                           ; $4A66: $28 $0A
 
-    jp   label_3F8D                               ; $4A68: $C3 $8D $3F
+    jp   ClearEntityType                               ; $4A68: $C3 $8D $3F
 
 jr_003_4A6B:
     ld   a, [wIsBowWowFollowingLink]              ; $4A6B: $FA $56 $DB
     and  a                                        ; $4A6E: $A7
-    jp   nz, label_3F8D                           ; $4A6F: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4A6F: $C2 $8D $3F
 
 jr_003_4A72:
     ret                                           ; $4A72: $C9
@@ -562,7 +562,7 @@ jr_003_4A72:
 
 jr_003_4A7A:
     and  $10                                      ; $4A7A: $E6 $10
-    jp   nz, label_3F8D                           ; $4A7C: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4A7C: $C2 $8D $3F
 
     ret                                           ; $4A7F: $C9
 
@@ -572,11 +572,11 @@ jr_003_4A7A:
 
     ld   a, [$DB74]                               ; $4A86: $FA $74 $DB
     and  a                                        ; $4A89: $A7
-    jp   z, label_3F8D                            ; $4A8A: $CA $8D $3F
+    jp   z, ClearEntityType                            ; $4A8A: $CA $8D $3F
 
     ld   a, [wIsMarinFollowingLink]               ; $4A8D: $FA $73 $DB
     and  a                                        ; $4A90: $A7
-    jp   nz, label_3F8D                           ; $4A91: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4A91: $C2 $8D $3F
 
     inc  a                                        ; $4A94: $3C
     ld   [$C3C8], a                               ; $4A95: $EA $C8 $C3
@@ -735,7 +735,7 @@ jr_003_4B56:
 
     ld   a, [wTradeSequenceItem]                  ; $4B6D: $FA $0E $DB
     cp   $0E                                      ; $4B70: $FE $0E
-    jp   nz, label_3F8D                           ; $4B72: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4B72: $C2 $8D $3F
 
     ld   a, [wPhotos2]                            ; $4B75: $FA $0D $DC
     and  $01                                      ; $4B78: $E6 $01
@@ -985,7 +985,7 @@ jr_003_4CEF:
     ld   [wDB71], a                               ; $4D01: $EA $71 $DB
 
 jr_003_4D04:
-    jp   label_3F8D                               ; $4D04: $C3 $8D $3F
+    jp   ClearEntityType                               ; $4D04: $C3 $8D $3F
 
 jr_003_4D07:
     cp   $40                                      ; $4D07: $FE $40
@@ -1356,10 +1356,10 @@ jr_003_4F24:
 
     ldh  a, [hRoomStatus]                         ; $4F33: $F0 $F8
     bit  4, a                                     ; $4F35: $CB $67
-    jp   nz, label_3F8D                           ; $4F37: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4F37: $C2 $8D $3F
 
     bit  5, a                                     ; $4F3A: $CB $6F
-    jp   z, label_3F8D                            ; $4F3C: $CA $8D $3F
+    jp   z, ClearEntityType                            ; $4F3C: $CA $8D $3F
 
     ld   a, $02                                   ; $4F3F: $3E $02
     jp   label_3B0C                               ; $4F41: $C3 $0C $3B
@@ -1370,7 +1370,7 @@ jr_003_4F44:
 
     ldh  a, [hRoomStatus]                         ; $4F48: $F0 $F8
     and  $10                                      ; $4F4A: $E6 $10
-    jp   nz, label_3F8D                           ; $4F4C: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4F4C: $C2 $8D $3F
 
     ld   a, $04                                   ; $4F4F: $3E $04
     jp   label_3B0C                               ; $4F51: $C3 $0C $3B
@@ -1381,11 +1381,11 @@ jr_003_4F54:
 
     ld   a, [$D969]                               ; $4F58: $FA $69 $D9
     and  $10                                      ; $4F5B: $E6 $10
-    jp   z, label_3F8D                            ; $4F5D: $CA $8D $3F
+    jp   z, ClearEntityType                            ; $4F5D: $CA $8D $3F
 
     ldh  a, [hRoomStatus]                         ; $4F60: $F0 $F8
     and  $10                                      ; $4F62: $E6 $10
-    jp   nz, label_3F8D                           ; $4F64: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $4F64: $C2 $8D $3F
 
 jr_003_4F67:
     ret                                           ; $4F67: $C9
@@ -1749,7 +1749,7 @@ jr_003_5154:
     and  a                                        ; $5192: $A7
     jr   z, jr_003_5198                           ; $5193: $28 $03
 
-    jp   label_3F8D                               ; $5195: $C3 $8D $3F
+    jp   ClearEntityType                               ; $5195: $C3 $8D $3F
 
 jr_003_5198:
     ld   a, $11                                   ; $5198: $3E $11
@@ -1931,7 +1931,7 @@ jr_003_5286:
     cp   $02                                      ; $529F: $FE $02
     ret  z                                        ; $52A1: $C8
 
-    call label_3F8D                               ; $52A2: $CD $8D $3F
+    call ClearEntityType                               ; $52A2: $CD $8D $3F
     ld   de, $5162                                ; $52A5: $11 $62 $51
     ld   b, $C4                                   ; $52A8: $06 $C4
     ld   a, [wIsIndoor]                           ; $52AA: $FA $A5 $DB
@@ -2088,7 +2088,7 @@ jr_003_5378:
     ; Open Marin reaction 1
     ld   a, $28                                   ; $5385: $3E $28
     call OpenDialog                               ; $5387: $CD $85 $23
-    jp   label_3F8D                               ; $538A: $C3 $8D $3F
+    jp   ClearEntityType                               ; $538A: $C3 $8D $3F
 
 jr_003_538D:
     ; Open Marin reaction 2
@@ -2096,7 +2096,7 @@ jr_003_538D:
     call OpenDialogInTable1                       ; $538F: $CD $73 $23
 
 jr_003_5392:
-    jp   label_3F8D                               ; $5392: $C3 $8D $3F
+    jp   ClearEntityType                               ; $5392: $C3 $8D $3F
 
 jr_003_5395:
     jp   label_3935                               ; $5395: $C3 $35 $39
@@ -2203,7 +2203,7 @@ jr_003_5406:
     ld   [hl], $C4                                ; $542F: $36 $C4
     ld   a, $09                                   ; $5431: $3E $09
     ldh  [hNextSFX], a                            ; $5433: $E0 $F4
-    jp   label_3F8D                               ; $5435: $C3 $8D $3F
+    jp   ClearEntityType                               ; $5435: $C3 $8D $3F
 
 func_003_5438::
     ld   hl, wEntitiesCollisionsTable             ; $5438: $21 $A0 $C2
@@ -2927,7 +2927,7 @@ jr_003_5821:
 
     ld   a, [wIsBowWowFollowingLink]              ; $582D: $FA $56 $DB
     cp   $80                                      ; $5830: $FE $80
-    jp   nz, label_3F8D                           ; $5832: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $5832: $C2 $8D $3F
 
 jr_003_5835:
     ld   a, c                                     ; $5835: $79
@@ -3270,7 +3270,7 @@ jr_003_5A12:
     set  5, [hl]                                  ; $5A12: $CB $EE
 
 jr_003_5A14:
-    jp   label_3F8D                               ; $5A14: $C3 $8D $3F
+    jp   ClearEntityType                               ; $5A14: $C3 $8D $3F
 
 func_003_5A17::
 label_003_5A17:
@@ -3310,7 +3310,7 @@ jr_003_5A17:
     ld   [hl+], a                                 ; $5A50: $22
     ldh  a, [hRoomStatus]                         ; $5A51: $F0 $F8
     and  $10                                      ; $5A53: $E6 $10
-    jp   nz, label_3F8D                           ; $5A55: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $5A55: $C2 $8D $3F
 
     ldh  a, [hActiveEntityWalking]                ; $5A58: $F0 $F0
     rst  $00                                      ; $5A5A: $C7
@@ -3421,7 +3421,7 @@ jr_003_5AED:
 
     ld   a, $06                                   ; $5B05: $3E $06
     ldh  [hNeedsUpdatingBGTiles], a               ; $5B07: $E0 $90
-    call label_3F8D                               ; $5B09: $CD $8D $3F
+    call ClearEntityType                               ; $5B09: $CD $8D $3F
     ld   a, $0D                                   ; $5B0C: $3E $0D
     ldh  [hFFA5], a                               ; $5B0E: $E0 $A5
     xor  a                                        ; $5B10: $AF
@@ -3530,7 +3530,7 @@ jr_003_5B7D:
 
     ldh  a, [hRoomStatus]                         ; $5BA2: $F0 $F8
     and  $10                                      ; $5BA4: $E6 $10
-    jp   nz, label_3F8D                           ; $5BA6: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $5BA6: $C2 $8D $3F
 
     ld   de, $5B97                                ; $5BA9: $11 $97 $5B
 
@@ -3610,7 +3610,7 @@ jr_003_5BE1:
     ld   a, $01                                   ; $5C2C: $3E $01
     ld   [wSwordLevel], a                         ; $5C2E: $EA $4E $DB
     call func_003_512A                            ; $5C31: $CD $2A $51
-    jp   label_3F8D                               ; $5C34: $C3 $8D $3F
+    jp   ClearEntityType                               ; $5C34: $C3 $8D $3F
 
 jr_003_5C37:
     cp   $1A                                      ; $5C37: $FE $1A
@@ -3631,7 +3631,7 @@ jr_003_5C46:
 label_003_5C49:
     ldh  a, [hRoomStatus]                         ; $5C49: $F0 $F8
     and  $10                                      ; $5C4B: $E6 $10
-    jp   nz, label_3F8D                           ; $5C4D: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $5C4D: $C2 $8D $3F
 
     ld   de, $5C47                                ; $5C50: $11 $47 $5C
     call label_3C77                               ; $5C53: $CD $77 $3C
@@ -3653,7 +3653,7 @@ jr_003_5C67:
     ld   d, $06                                   ; $5C6A: $16 $06
     call func_003_6472                            ; $5C6C: $CD $72 $64
     call func_003_512A                            ; $5C6F: $CD $2A $51
-    jp   label_3F8D                               ; $5C72: $C3 $8D $3F
+    jp   ClearEntityType                               ; $5C72: $C3 $8D $3F
 
 jr_003_5C75:
     jp   label_003_5A17                           ; $5C75: $C3 $17 $5A
@@ -3716,7 +3716,7 @@ jr_003_5CCD:
     dec  a                                        ; $5CCD: $3D
     jr   nz, jr_003_5CD3                          ; $5CCE: $20 $03
 
-    jp   label_3F8D                               ; $5CD0: $C3 $8D $3F
+    jp   ClearEntityType                               ; $5CD0: $C3 $8D $3F
 
 jr_003_5CD3:
     jp   label_003_5A17                           ; $5CD3: $C3 $17 $5A
@@ -3801,7 +3801,7 @@ jr_003_5D34:
     ld   hl, $DB4B                                ; $5D4B: $21 $4B $DB
     ld   a, [wMagicPowderCount]                   ; $5D4E: $FA $4C $DB
     or   [hl]                                     ; $5D51: $B6
-    jp   nz, label_3F8D                           ; $5D52: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $5D52: $C2 $8D $3F
 
     ld   de, $5D47                                ; $5D55: $11 $47 $5D
     call label_3BC0                               ; $5D58: $CD $C0 $3B
@@ -3826,7 +3826,7 @@ jr_003_5D6C:
     call func_003_6472                            ; $5D75: $CD $72 $64
     ld   a, $01                                   ; $5D78: $3E $01
     ld   [$DB4B], a                               ; $5D7A: $EA $4B $DB
-    jp   label_3F8D                               ; $5D7D: $C3 $8D $3F
+    jp   ClearEntityType                               ; $5D7D: $C3 $8D $3F
 
 jr_003_5D80:
     jp   label_003_5A17                           ; $5D80: $C3 $17 $5A
@@ -3910,7 +3910,7 @@ jr_003_5D80:
     call label_BFB                                ; $5DE1: $CD $FB $0B
     jr   nz, jr_003_5E29                          ; $5DE4: $20 $43
 
-    call label_3F8D                               ; $5DE6: $CD $8D $3F
+    call ClearEntityType                               ; $5DE6: $CD $8D $3F
     xor  a                                        ; $5DE9: $AF
     ldh  [hLinkAnimationState], a                 ; $5DEA: $E0 $9D
     ld   a, [$D201]                               ; $5DEC: $FA $01 $D2
@@ -4041,7 +4041,7 @@ jr_003_5E8A:
     call label_3BC0                               ; $5E96: $CD $C0 $3B
     call func_003_7F25                            ; $5E99: $CD $25 $7F
     call IsEntityFrameCounterZero                 ; $5E9C: $CD $05 $0C
-    jp   z, label_3F8D                            ; $5E9F: $CA $8D $3F
+    jp   z, ClearEntityType                            ; $5E9F: $CA $8D $3F
 
     ret                                           ; $5EA2: $C9
 
@@ -4057,7 +4057,7 @@ jr_003_5EAE:
     ld   [$D201], a                               ; $5EAF: $EA $01 $D2
     ldh  a, [hRoomStatus]                         ; $5EB2: $F0 $F8
     and  $10                                      ; $5EB4: $E6 $10
-    jp   nz, label_3F8D                           ; $5EB6: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $5EB6: $C2 $8D $3F
 
     ldh  a, [hMapId]                              ; $5EB9: $F0 $F7
     and  $03                                      ; $5EBB: $E6 $03
@@ -4242,11 +4242,11 @@ data_003_5FD1::
 func_003_5FD3::
     ld   a, [wSwordLevel]                         ; $5FD3: $FA $4E $DB
     cp   $02                                      ; $5FD6: $FE $02
-    jp   nc, label_3F8D                           ; $5FD8: $D2 $8D $3F
+    jp   nc, ClearEntityType                           ; $5FD8: $D2 $8D $3F
 
     ldh  a, [hRoomStatus]                         ; $5FDB: $F0 $F8
     and  $10                                      ; $5FDD: $E6 $10
-    jp   nz, label_3F8D                           ; $5FDF: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $5FDF: $C2 $8D $3F
 
     ldh  a, [hMapRoom]                            ; $5FE2: $F0 $F6
     cp   $E3                                      ; $5FE4: $FE $E3
@@ -4254,7 +4254,7 @@ func_003_5FD3::
 
     ldh  a, [hRoomStatus]                         ; $5FE8: $F0 $F8
     and  $40                                      ; $5FEA: $E6 $40
-    jp   z, label_3F8D                            ; $5FEC: $CA $8D $3F
+    jp   z, ClearEntityType                            ; $5FEC: $CA $8D $3F
 
 jr_003_5FEF:
     call func_003_61DE                            ; $5FEF: $CD $DE $61
@@ -4266,7 +4266,7 @@ jr_003_5FEF:
 
     ld   hl, sp-$1A                               ; $5FFE: $F8 $E6
     db   $10                                      ; $6000: $10
-    jp   nz, label_3F8D                           ; $6001: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $6001: $C2 $8D $3F
 
     call func_003_61DE                            ; $6004: $CD $DE $61
     ld   de, $5FFB                                ; $6007: $11 $FB $5F
@@ -4315,7 +4315,7 @@ jr_003_604C:
     dec  a                                        ; $604C: $3D
     jr   nz, jr_003_6052                          ; $604D: $20 $03
 
-    jp   label_3F8D                               ; $604F: $C3 $8D $3F
+    jp   ClearEntityType                               ; $604F: $C3 $8D $3F
 
 jr_003_6052:
     jp   label_003_5A17                           ; $6052: $C3 $17 $5A
@@ -4334,7 +4334,7 @@ jr_003_6052:
 jr_003_6063:
     ld   a, [$DB4B]                               ; $6063: $FA $4B $DB
     and  a                                        ; $6066: $A7
-    jp   nz, label_3F8D                           ; $6067: $C2 $8D $3F
+    jp   nz, ClearEntityType                           ; $6067: $C2 $8D $3F
 
 jr_003_606A:
     call func_003_61DE                            ; $606A: $CD $DE $61
@@ -4359,7 +4359,7 @@ func_003_608C::
     ret  nc                                       ; $6091: $D0
 
     and  a                                        ; $6092: $A7
-    jp   z, label_3F8D                            ; $6093: $CA $8D $3F
+    jp   z, ClearEntityType                            ; $6093: $CA $8D $3F
 
     and  $01                                      ; $6096: $E6 $01
     dec  a                                        ; $6098: $3D
@@ -5369,7 +5369,7 @@ label_003_65E2:
     and  a                                        ; $65EB: $A7
     jp   nz, label_003_65F2                       ; $65EC: $C2 $F2 $65
 
-    jp   label_3F8D                               ; $65EF: $C3 $8D $3F
+    jp   ClearEntityType                               ; $65EF: $C3 $8D $3F
 
 label_003_65F2:
     ld   e, a                                     ; $65F2: $5F
@@ -5488,7 +5488,7 @@ jr_003_668C:
     ldh  a, [wActiveEntityPosY]                   ; $6696: $F0 $EC
     add  $10                                      ; $6698: $C6 $10
     cp   $A0                                      ; $669A: $FE $A0
-    jp   nc, label_3F8D                           ; $669C: $D2 $8D $3F
+    jp   nc, ClearEntityType                           ; $669C: $D2 $8D $3F
 
     call IsEntityFrameCounterZero                 ; $669F: $CD $05 $0C
     cp   $18                                      ; $66A2: $FE $18
@@ -6049,7 +6049,7 @@ jr_003_69A0:
     jr   z, jr_003_69D9                           ; $69CD: $28 $0A
 
     dec  a                                        ; $69CF: $3D
-    jp   z, label_3F8D                            ; $69D0: $CA $8D $3F
+    jp   z, ClearEntityType                            ; $69D0: $CA $8D $3F
 
     ld   de, Data_003_4C44                        ; $69D3: $11 $44 $4C
     jp   label_3BC0                               ; $69D6: $C3 $C0 $3B
@@ -6139,7 +6139,7 @@ jr_003_6A2E:
     ret  nz                                       ; $6A5F: $C0
 
     call label_C60                                ; $6A60: $CD $60 $0C
-    jp   label_3F8D                               ; $6A63: $C3 $8D $3F
+    jp   ClearEntityType                               ; $6A63: $C3 $8D $3F
 
     add  b                                        ; $6A66: $80
     dec  d                                        ; $6A67: $15
@@ -6171,7 +6171,7 @@ jr_003_6A2E:
     call label_C4B                                ; $6A90: $CD $4B $0C
 
 jr_003_6A93:
-    jp   label_3F8D                               ; $6A93: $C3 $8D $3F
+    jp   ClearEntityType                               ; $6A93: $C3 $8D $3F
 
 jr_003_6A96:
     ldh  a, [hActiveEntityUnknownG]               ; $6A96: $F0 $F1
@@ -6303,7 +6303,7 @@ label_003_6B43:
     inc  bc                                       ; $6B49: $03
     ld   bc, $FE02                                ; $6B4A: $01 $02 $FE
     ld   bc, $0320                                ; $6B4D: $01 $20 $03
-    jp   label_3F8D                               ; $6B50: $C3 $8D $3F
+    jp   ClearEntityType                               ; $6B50: $C3 $8D $3F
 
     ldh  a, [$FFEB]                               ; $6B53: $F0 $EB
     cp   $0A                                      ; $6B55: $FE $0A
@@ -6506,7 +6506,7 @@ jr_003_6C5B:
     jr   nz, jr_003_6C54                          ; $6C66: $20 $EC
 
 jr_003_6C68:
-    jp   label_3F8D                               ; $6C68: $C3 $8D $3F
+    jp   ClearEntityType                               ; $6C68: $C3 $8D $3F
 
 func_003_6C6B::
     ldh  a, [hFrameCounter]                       ; $6C6B: $F0 $E7
@@ -8499,7 +8499,7 @@ jr_003_7782:
     jr   nz, jr_003_7798                          ; $7793: $20 $03
 
 jr_003_7795:
-    call label_3F8D                               ; $7795: $CD $8D $3F
+    call ClearEntityType                               ; $7795: $CD $8D $3F
 
 jr_003_7798:
     jr   jr_003_779F                              ; $7798: $18 $05
@@ -8721,7 +8721,7 @@ jr_003_78C5:
     cp   $C1                                      ; $78D9: $FE $C1
     jr   z, jr_003_7907                           ; $78DB: $28 $2A
 
-    call label_3F8D                               ; $78DD: $CD $8D $3F
+    call ClearEntityType                               ; $78DD: $CD $8D $3F
     jp   label_003_795C                           ; $78E0: $C3 $5C $79
 
 jr_003_78E3:
@@ -9374,7 +9374,7 @@ label_003_7C7B:
     cp   $26                                      ; $7C84: $FE $26
     jr   c, jr_003_7C8B                           ; $7C86: $38 $03
 
-    call label_3F8D                               ; $7C88: $CD $8D $3F
+    call ClearEntityType                               ; $7C88: $CD $8D $3F
 
 jr_003_7C8B:
     ld   hl, wEntitiesWalkingTable                ; $7C8B: $21 $90 $C2
@@ -9651,7 +9651,7 @@ label_003_7E05:
 label_003_7E09:
     jr   z, jr_003_7DE3                           ; $7E09: $28 $D8
 
-    jp   label_3F8D                               ; $7E0B: $C3 $8D $3F
+    jp   ClearEntityType                               ; $7E0B: $C3 $8D $3F
 
 func_003_7E0E::
     push bc                                       ; $7E0E: $C5

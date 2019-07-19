@@ -7920,7 +7920,7 @@ label_3F50::
     add  hl, bc
     ld   a, [hl]
     cp   $FF
-    jr   z, label_3F8D
+    jr   z, ClearEntityType
     push af
     ld   a, [wKillCount2]
     ld   e, a
@@ -7935,7 +7935,7 @@ label_3F50::
 
 label_3F78::
     cp   $08
-    jr   nc, label_3F8D
+    jr   nc, ClearEntityType
     ld   e, a
     ld   d, b
     ld   hl, data_3F48
@@ -7949,7 +7949,11 @@ label_3F78::
     or   [hl]
     ld   [hl], a
 
-label_3F8D::
+; Clear the type of an entity
+; Input:
+;   c:  index of the entity
+ClearEntityType::
+ClearEntityTypeAndReturn::
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], b

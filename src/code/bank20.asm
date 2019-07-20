@@ -794,9 +794,10 @@ func_020_4518::
     pop  hl                                       ; $4529: $E1
     ret                                           ; $452A: $C9
 
+BGMapToLoadAdjustementTable::
     nop                                           ; $452B: $00
     nop                                           ; $452C: $00
-    call z, func_020_4856                         ; $452D: $CC $56 $48
+    db   $CC, $56, $48
     ld   h, a                                     ; $4530: $67
     ld   [hl], $63                                ; $4531: $36 $63
     jr   z, jr_020_4598                           ; $4533: $28 $63
@@ -864,7 +865,10 @@ func_020_4518::
     ld   [hl], a                                  ; $4572: $77
     call nc, $374D                                ; $4573: $D4 $4D $37
     ld   l, h                                     ; $4576: $6C
-    ld   hl, $452B                                ; $4577: $21 $2B $45
+
+; Manipulate wBGMapToLoad
+func_020_4577::
+    ld   hl, BGMapToLoadAdjustementTable          ; $4577: $21 $2B $45
     ld   b, $00                                   ; $457A: $06 $00
     ld   a, [wBGMapToLoad]                        ; $457C: $FA $FF $D6
     sla  a                                        ; $457F: $CB $27
@@ -877,6 +881,7 @@ func_020_4518::
     ld   d, a                                     ; $4587: $57
     ret                                           ; $4588: $C9
 
+data_020_4589::
     ld   c, h                                     ; $4589: $4C
     ld   h, d                                     ; $458A: $62
     ld   h, e                                     ; $458B: $63
@@ -976,6 +981,8 @@ jr_020_4598:
     ld   a, h                                     ; $45E7: $7C
     ld   a, e                                     ; $45E8: $7B
     ld   a, d                                     ; $45E9: $7A
+
+data_020_45EA::
     ld   e, [hl]                                  ; $45EA: $5E
     dec  l                                        ; $45EB: $2D
     ld   e, [hl]                                  ; $45EC: $5E
@@ -1020,6 +1027,8 @@ jr_020_4598:
     dec  [hl]                                     ; $4613: $35
     ld   h, d                                     ; $4614: $62
     dec  [hl]                                     ; $4615: $35
+
+func_020_4616::
     push de                                       ; $4616: $D5
     ldh  a, [hMapRoom]                            ; $4617: $F0 $F6
     and  a                                        ; $4619: $A7
@@ -1052,7 +1061,7 @@ jr_020_462F:
     ret                                           ; $463F: $C9
 
 jr_020_4640:
-    ld   hl, $45EA                                ; $4640: $21 $EA $45
+    ld   hl, data_020_45EA                        ; $4640: $21 $EA $45
     ldh  a, [hMapRoom]                            ; $4643: $F0 $F6
     sla  a                                        ; $4645: $CB $27
     ld   e, a                                     ; $4647: $5F
@@ -1070,16 +1079,34 @@ jr_020_4640:
     pop  de                                       ; $4655: $D1
     ret                                           ; $4656: $C9
 
+; Retrieve the address of a tilemap loading handler
+;   input:  wTileMapToLoad in e
+;   output: address to jump to in hl
+GetTilemapHandlerAddress::
     dec  e                                        ; $4657: $1D
     sla  e                                        ; $4658: $CB $23
     ld   d, $00                                   ; $465A: $16 $00
-    ld   hl, $4664                                ; $465C: $21 $64 $46
+    ld   hl, TilemapLoadingHandlersTable          ; $465C: $21 $64 $46
     add  hl, de                                   ; $465F: $19
     ld   a, [hl+]                                 ; $4660: $2A
     ld   h, [hl]                                  ; $4661: $66
     ld   l, a                                     ; $4662: $6F
     ret                                           ; $4663: $C9
 
+; Pointers to addresses to execute for loading a specific tilemap
+; Table values:
+;   01  $309B
+;   02  $28F7
+;   03  $2BCF
+;   04  $2C03
+;   05  $2D2D
+;   06  $2C28
+;   07  $2D2D
+;   08  $28F0
+;   09  $2E73
+;   ...
+;   10  LoadIntroSequenceTiles
+TilemapLoadingHandlersTable::
     sbc  e                                        ; $4664: $9B
     jr   nc, @-$07                                ; $4665: $30 $F7
 
@@ -1142,6 +1169,8 @@ jr_020_469C:
     add  hl, sp                                   ; $46A7: $39
     dec  e                                        ; $46A8: $1D
     add  hl, sp                                   ; $46A9: $39
+
+data_020_46AA::
     ld   d, c                                     ; $46AA: $51
     dec  [hl]                                     ; $46AB: $35
     ld   c, a                                     ; $46AC: $4F
@@ -1317,7 +1346,10 @@ jr_020_46FC:
     dec  [hl]                                     ; $4757: $35
     nop                                           ; $4758: $00
     nop                                           ; $4759: $00
-    ld   hl, $46AA                                ; $475A: $21 $AA $46
+
+; Color-dungeon related function
+func_020_475A::
+    ld   hl, data_020_46AA                        ; $475A: $21 $AA $46
     ldh  a, [hMapRoom]                            ; $475D: $F0 $F6
     rla                                           ; $475F: $17
     ld   e, a                                     ; $4760: $5F
@@ -1402,6 +1434,7 @@ jr_020_47B7:
 jr_020_47C2:
     ret                                           ; $47C2: $C9
 
+data_020_47C3::
     nop                                           ; $47C3: $00
     ld   b, b                                     ; $47C4: $40
     add  b                                        ; $47C5: $80
@@ -1412,6 +1445,7 @@ jr_020_47C2:
     add  b                                        ; $47C9: $80
     ret  nz                                       ; $47CA: $C0
 
+MapRoomTable_b0::
     nop                                           ; $47CB: $00
     nop                                           ; $47CC: $00
     nop                                           ; $47CD: $00
@@ -1434,6 +1468,8 @@ jr_020_47C2:
     inc  b                                        ; $47DE: $04
     nop                                           ; $47DF: $00
     nop                                           ; $47E0: $00
+
+MapRoomTable_b1::
     nop                                           ; $47E1: $00
     nop                                           ; $47E2: $00
     nop                                           ; $47E3: $00
@@ -1456,16 +1492,23 @@ jr_020_47C2:
     nop                                           ; $47F4: $00
     nop                                           ; $47F5: $00
     dec  b                                        ; $47F6: $05
+
+; Configure the parameters for copying the animated tiles.
+; First called with b=1, then with b=0
+; Inputs:
+;   b:  ??? (0 or 1)
+ConfigureAnimatedTilesCopy::
     ldh  a, [hMapRoom]                            ; $47F7: $F0 $F6
     ld   c, a                                     ; $47F9: $4F
-    ld   hl, $47CB                                ; $47FA: $21 $CB $47
+
+    ; hl = (b == 0 ? MapRoomTable_b0 : MapRoomTable_b1)
+    ld   hl, MapRoomTable_b0                      ; $47FA: $21 $CB $47
     ld   a, b                                     ; $47FD: $78
     and  a                                        ; $47FE: $A7
-    jr   z, jr_020_4804                           ; $47FF: $28 $03
+    jr   z, .b1End                                ; $47FF: $28 $03
+    ld   hl, MapRoomTable_b1                      ; $4801: $21 $E1 $47
+.b1End
 
-    ld   hl, $47E1                                ; $4801: $21 $E1 $47
-
-jr_020_4804:
     ld   b, $00                                   ; $4804: $06 $00
     add  hl, bc                                   ; $4806: $09
     ld   a, [hl]                                  ; $4807: $7E
@@ -1481,7 +1524,7 @@ jr_020_4804:
     and  $07                                      ; $4812: $E6 $07
     ld   e, a                                     ; $4814: $5F
     ld   d, $00                                   ; $4815: $16 $00
-    ld   hl, $47C3                                ; $4817: $21 $C3 $47
+    ld   hl, data_020_47C3                       ; $4817: $21 $C3 $47
     add  hl, de                                   ; $481A: $19
     ld   l, [hl]                                  ; $481B: $6E
     ld   h, $00                                   ; $481C: $26 $00
@@ -1532,30 +1575,31 @@ ReplaceObjects56and57::
     ei                                            ; $4852: $FB
     ret                                           ; $4853: $C9
 
-func_020_4854:
+; On GBC, clear the $0C first bytes of WRAM bank 5
+ClearWRAMBank5::
+    ; If not on GBC, return
     ldh  a, [hIsGBC]                              ; $4854: $F0 $FE
-
-func_020_4856:
     and  a                                        ; $4856: $A7
     ret  z                                        ; $4857: $C8
 
     di                                            ; $4858: $F3
     ld   a, $05                                   ; $4859: $3E $05
     ld   [rSVBK], a                               ; $485B: $E0 $70
-    ld   hl, wIsFileSelectionArrowShifted         ; $485D: $21 $00 $D0
+    ld   hl, $D000                                ; $485D: $21 $00 $D0
 
-jr_020_4860:
+.loop
     xor  a                                        ; $4860: $AF
     ld   [hl+], a                                 ; $4861: $22
     ld   a, l                                     ; $4862: $7D
     cp   $C0                                      ; $4863: $FE $C0
-    jr   nz, jr_020_4860                          ; $4865: $20 $F9
+    jr   nz, .loop                                ; $4865: $20 $F9
 
     xor  a                                        ; $4867: $AF
     ld   [rSVBK], a                               ; $4868: $E0 $70
     ei                                            ; $486A: $FB
     ret                                           ; $486B: $C9
 
+func_020_486C::
     add  hl, bc                                   ; $486C: $09
     dec  b                                        ; $486D: $05
     ld   [$0A08], sp                              ; $486E: $08 $08 $0A
@@ -1782,7 +1826,7 @@ func_020_4985::
     ld   [$DDD9], a                               ; $49A5: $EA $D9 $DD
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $49A8: $3E $02
     ldh  [hJingle], a                             ; $49AA: $E0 $F2
-    call func_020_4854                            ; $49AC: $CD $54 $48
+    call ClearWRAMBank5                           ; $49AC: $CD $54 $48
 
 jr_020_49AF:
     pop  de                                       ; $49AF: $D1
@@ -3326,6 +3370,8 @@ jr_020_4FFB:
     inc  bc                                       ; $5221: $03
     inc  bc                                       ; $5222: $03
     inc  bc                                       ; $5223: $03
+
+data_020_5224::
     inc  h                                        ; $5224: $24
     ld   c, l                                     ; $5225: $4D
     ld   h, h                                     ; $5226: $64
@@ -3360,6 +3406,8 @@ jr_020_4FFB:
     ld   d, c                                     ; $5243: $51
     db   $e4                                      ; $5244: $E4
     ld   c, h                                     ; $5245: $4C
+
+data_020_5246::
     jr   z, @+$2C                                 ; $5246: $28 $2A
 
     inc  l                                        ; $5248: $2C
@@ -3373,8 +3421,14 @@ jr_020_4FFB:
     ld   [hl], $38                                ; $5253: $36 $38
     ld   a, [hl-]                                 ; $5255: $3A
     ld   a, [hl-]                                 ; $5256: $3A
+
+; Position sprites for the title screen (?)
+; Maybe also controls the apparition effect of
+; the title.
+PositionTitleScreenSprites::
+    ; If not on the intro title, return
     ld   a, [wGameplaySubtype]                    ; $5257: $FA $96 $DB
-    cp   $0A                                      ; $525A: $FE $0A
+    cp   GAMEPLAY_INTRO_TITLE - 1                 ; $525A: $FE $0A
     ret  nc                                       ; $525C: $D0
 
     ld   hl, $C17C                                ; $525D: $21 $7C $C1
@@ -3401,12 +3455,12 @@ jr_020_5279:
 jr_020_527C:
     ld   a, [$C17E]                               ; $527C: $FA $7E $C1
     ld   e, a                                     ; $527F: $5F
-    ld   hl, $5246                                ; $5280: $21 $46 $52
+    ld   hl, data_020_5246                        ; $5280: $21 $46 $52
     add  hl, de                                   ; $5283: $19
     ld   a, [hl]                                  ; $5284: $7E
     ldh  [hScratchA], a                           ; $5285: $E0 $D7
     sla  e                                        ; $5287: $CB $23
-    ld   hl, $5224                                ; $5289: $21 $24 $52
+    ld   hl, data_020_5224                        ; $5289: $21 $24 $52
     add  hl, de                                   ; $528C: $19
     ld   a, [hl+]                                 ; $528D: $2A
     ld   b, [hl]                                  ; $528E: $46
@@ -3517,6 +3571,7 @@ jr_020_5311:
 
     ret                                           ; $5318: $C9
 
+LinkAnimationStateTable::
     nop                                           ; $5319: $00
     ld   [bc], a                                  ; $531A: $02
     ld   [bc], a                                  ; $531B: $02
@@ -3731,6 +3786,8 @@ jr_020_538E:
 
     db   $fc                                      ; $5405: $FC
     and  b                                        ; $5406: $A0
+
+data_020_5407::
     nop                                           ; $5407: $00
     nop                                           ; $5408: $00
     jr   nz, jr_020_542B                          ; $5409: $20 $20
@@ -4020,18 +4077,20 @@ jr_020_54ED:
     nop                                           ; $54F2: $00
     jr   nz, @+$22                                ; $54F3: $20 $20
 
+; Called from SkipTilesGroupAnimation
+func_020_54F5::
     ldh  a, [hLinkAnimationState]                 ; $54F5: $F0 $9D
     cp   $FF                                      ; $54F7: $FE $FF
     ret  z                                        ; $54F9: $C8
 
-    ld   hl, $5319                                ; $54FA: $21 $19 $53
+    ld   hl, LinkAnimationStateTable              ; $54FA: $21 $19 $53
     sla  a                                        ; $54FD: $CB $27
     ld   c, a                                     ; $54FF: $4F
     ld   b, $00                                   ; $5500: $06 $00
     add  hl, bc                                   ; $5502: $09
     ld   e, [hl]                                  ; $5503: $5E
     push hl                                       ; $5504: $E5
-    ld   hl, $5407                                ; $5505: $21 $07 $54
+    ld   hl, data_020_5407                        ; $5505: $21 $07 $54
     add  hl, bc                                   ; $5508: $09
     ld   a, [wC11D]                               ; $5509: $FA $1D $C1
     and  $98                                      ; $550C: $E6 $98
@@ -4053,7 +4112,7 @@ jr_020_5516:
     rl   d                                        ; $5528: $CB $12
     sla  e                                        ; $552A: $CB $23
     rl   d                                        ; $552C: $CB $12
-    ld   hl, $5800                                ; $552E: $21 $00 $58
+    ld   hl, data_020_5800                        ; $552E: $21 $00 $58
     add  hl, de                                   ; $5531: $19
     ld   c, l                                     ; $5532: $4D
     ld   b, h                                     ; $5533: $44
@@ -4072,7 +4131,7 @@ jr_020_5516:
     rl   d                                        ; $554B: $CB $12
     sla  e                                        ; $554D: $CB $23
     rl   d                                        ; $554F: $CB $12
-    ld   hl, $5800                                ; $5551: $21 $00 $58
+    ld   hl, data_020_5800                        ; $5551: $21 $00 $58
     add  hl, de                                   ; $5554: $19
     ld   c, l                                     ; $5555: $4D
     ld   b, h                                     ; $5556: $44
@@ -4609,6 +4668,8 @@ jr_020_5795:
     nop                                           ; $57FD: $00
     nop                                           ; $57FE: $00
     nop                                           ; $57FF: $00
+
+data_020_5800::
     nop                                           ; $5800: $00
     ld   bc, $0401                                ; $5801: $01 $01 $04
     inc  b                                        ; $5804: $04

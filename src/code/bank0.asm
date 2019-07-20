@@ -7995,17 +7995,22 @@ label_3FBD::
     ld   a, $0C
     ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
+
+; Copy data to second half of tiles memory
+LoadColorDungeonTiles::
+    ; bank = hIsGBC ? $35 : $34
     ld   b, $34
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_3FD9
+    jr   z, .gbcEnd
     inc  b
+.gbcEnd
 
-label_3FD9::
+    ; Switch to bank $34 or $35
     ld   a, b
     ld   [MBC3SelectBank], a
-    ld   hl, $4000
-    ld   de, $8400
+    ld   hl, ColorDungeonTiles
+    ld   de, vTiles0 + $0400
     ld   bc, $0400
     call CopyData
     ld   a, $20

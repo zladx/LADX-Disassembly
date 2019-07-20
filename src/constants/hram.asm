@@ -228,8 +228,8 @@ hIndexOfObjectBelowLink:: ; FFE9
 hActiveEntityType:: ; FFEA
   ds 1
 
-; Unlabeled
-ds 1
+hActiveEntityId:: ; FFEB
+  ds 1
 
 wActiveEntityPosY:: ; FFEC
   ds 1

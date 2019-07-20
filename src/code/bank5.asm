@@ -3754,7 +3754,7 @@ func_005_54EA:
 
 func_005_5506:
     ld   e, b                                     ; $5506: $58
-    ldh  a, [$FFEB]                               ; $5507: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $5507: $F0 $EB
     cp   $40                                      ; $5509: $FE $40
     jr   nz, jr_005_5519                          ; $550B: $20 $0C
 
@@ -3783,7 +3783,7 @@ jr_005_5523:
     jr   nc, jr_005_5569                          ; $552F: $30 $38
 
     inc  e                                        ; $5531: $1C
-    ldh  a, [$FFEB]                               ; $5532: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $5532: $F0 $EB
     cp   $6D                                      ; $5534: $FE $6D
     jr   z, jr_005_5544                           ; $5536: $28 $0C
 
@@ -11193,7 +11193,7 @@ label_005_7E83:
 label_005_7E9D:
     ld   a, $1A                                   ; $7E9D: $3E $1A
     ldh  [hNextSFX], a                            ; $7E9F: $E0 $F4
-    ldh  a, [$FFEB]                               ; $7EA1: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $7EA1: $F0 $EB
     cp   $63                                      ; $7EA3: $FE $63
     jp   z, label_005_758C                        ; $7EA5: $CA $8C $75
 

@@ -3769,7 +3769,7 @@ jr_004_5B28:
     jr   nz, jr_004_5B66                          ; $5B2B: $20 $39
 
     ld   [hl], $04                                ; $5B2D: $36 $04
-    ldh  a, [$FFEB]                               ; $5B2F: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $5B2F: $F0 $EB
     cp   $59                                      ; $5B31: $FE $59
     jr   nz, jr_004_5B37                          ; $5B33: $20 $02
 
@@ -5950,7 +5950,7 @@ jr_004_6852:
     ldh  a, [hLinkPositionYIncrement]                               ; $685D: $F0 $9B
     push af                                       ; $685F: $F5
     ld   e, $00                                   ; $6860: $1E $00
-    ldh  a, [$FFEB]                               ; $6862: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $6862: $F0 $EB
     cp   $52                                      ; $6864: $FE $52
     ld   a, $14                                   ; $6866: $3E $14
     jr   nz, jr_004_686D                          ; $6868: $20 $03
@@ -5990,7 +5990,7 @@ jr_004_6884:
     ldh  [hLinkPositionXIncrement], a                               ; $6892: $E0 $9A
     xor  a                                        ; $6894: $AF
     ld   [$C144], a                               ; $6895: $EA $44 $C1
-    ldh  a, [$FFEB]                               ; $6898: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $6898: $F0 $EB
     cp   $52                                      ; $689A: $FE $52
     jp   nz, label_004_68E4                       ; $689C: $C2 $E4 $68
 
@@ -6109,7 +6109,7 @@ label_004_6910:
     ld   a, $10                                   ; $6946: $3E $10
     call label_3BB5                               ; $6948: $CD $B5 $3B
     ld   e, $00                                   ; $694B: $1E $00
-    ldh  a, [$FFEB]                               ; $694D: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $694D: $F0 $EB
     cp   $52                                      ; $694F: $FE $52
     jr   nz, jr_004_6954                          ; $6951: $20 $01
 

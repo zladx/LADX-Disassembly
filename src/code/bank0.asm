@@ -7068,7 +7068,7 @@ LoadEntity::
     ld   hl, $C3A0
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEB], a
+    ldh  [hActiveEntityId], a
     ld   hl, $C290
     add  hl, bc
     ld   a, [hl]
@@ -7080,7 +7080,7 @@ LoadEntity::
     ld   a, $19
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFEB]
+    ldh  a, [hActiveEntityId]
     cp   $6A
     jr   nz, label_3A40
     ldh  a, [$FFB2]
@@ -7128,13 +7128,14 @@ label_3A81::
     ld   [MBC3SelectBank], a
     ret
 
+; Load sprite code pointers and jump to execution
 label_3A8D::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFEB]
+    ldh  a, [hActiveEntityId]
     ld   e, a
     ld   d, b
-    ld   hl, $4000
+    ld   hl, EntityPointersTable
     add  hl, de
     add  hl, de
     add  hl, de
@@ -7882,7 +7883,7 @@ label_3F11::
     ld   a, [wTransitionSequenceCounter]
     cp   $04
     ret  nz
-    ldh  a, [$FFEB]
+    ldh  a, [hActiveEntityId]
     cp   $87
     jr   nz, label_3F26
     ld   a, $DA

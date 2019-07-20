@@ -118,7 +118,7 @@ include "code/bank14.asm"
 include "text/dialog.asm"
 
 ; Bank $16: contains sprite data for overworld
-; Starts on byte $3186, ends on byte $365D
+; Starts on byte $5186, ends on byte $565D
 
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::

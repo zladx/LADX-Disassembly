@@ -1633,6 +1633,7 @@ jr_014_50B2:
     ldh  [rSCY], a                                ; $50BE: $E0 $42
     jp   label_014_5067                           ; $50C0: $C3 $67 $50
 
+func_014_50C3:
     ld   e, $0F                                   ; $50C3: $1E $0F
     ld   d, $00                                   ; $50C5: $16 $00
 
@@ -2201,7 +2202,7 @@ jr_014_5328:
     jr   nz, jr_014_5360                          ; $5352: $20 $0C
 
 jr_014_5354:
-    ldh  a, [$FFEB]                               ; $5354: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $5354: $F0 $EB
     cp   $A8                                      ; $5356: $FE $A8
     jr   z, jr_014_5360                           ; $5358: $28 $06
 
@@ -2223,7 +2224,7 @@ jr_014_536B:
     jp   nz, label_014_5443                       ; $5370: $C2 $43 $54
 
     ld   d, $03                                   ; $5373: $16 $03
-    ldh  a, [$FFEB]                               ; $5375: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $5375: $F0 $EB
     cp   $02                                      ; $5377: $FE $02
     jr   nz, jr_014_537D                          ; $5379: $20 $02
 
@@ -2261,7 +2262,7 @@ func_014_53A3:
     ld   hl, wEntity0Type                         ; $53A3: $21 $80 $C2
     add  hl, bc                                   ; $53A6: $09
     ld   [hl], $05                                ; $53A7: $36 $05
-    ldh  a, [$FFEB]                               ; $53A9: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $53A9: $F0 $EB
     cp   $02                                      ; $53AB: $FE $02
     jr   nz, jr_014_53B6                          ; $53AD: $20 $07
 
@@ -2337,7 +2338,7 @@ jr_014_5409:
     ld   e, $08                                   ; $540F: $1E $08
 
 jr_014_5411:
-    ldh  a, [$FFEB]                               ; $5411: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $5411: $F0 $EB
     cp   $02                                      ; $5413: $FE $02
     jr   nz, jr_014_541B                          ; $5415: $20 $04
 

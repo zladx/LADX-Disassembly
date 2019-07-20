@@ -6127,7 +6127,7 @@ jr_007_6347:
     or   e                                        ; $636F: $B3
     jr   nz, jr_007_639E                          ; $6370: $20 $2C
 
-    ldh  a, [$FFEB]                               ; $6372: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $6372: $F0 $EB
     cp   $A4                                      ; $6374: $FE $A4
     jp   z, $63FB                                 ; $6376: $CA $FB $63
 
@@ -10659,7 +10659,7 @@ jr_007_7D4E:
     jr   nc, jr_007_7D94                          ; $7D5A: $30 $38
 
     inc  e                                        ; $7D5C: $1C
-    ldh  a, [$FFEB]                               ; $7D5D: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $7D5D: $F0 $EB
     cp   $B5                                      ; $7D5F: $FE $B5
     jr   z, jr_007_7D6F                           ; $7D61: $28 $0C
 
@@ -10959,7 +10959,7 @@ label_007_7EC1:
     call IsEntityFrameCounterZero                 ; $7ED6: $CD $05 $0C
     jr   nz, jr_007_7F13                          ; $7ED9: $20 $38
 
-    ldh  a, [$FFEB]                               ; $7EDB: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $7EDB: $F0 $EB
     cp   $5F                                      ; $7EDD: $FE $5F
     jr   nz, jr_007_7F0A                          ; $7EDF: $20 $29
 

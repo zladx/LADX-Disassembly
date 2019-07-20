@@ -108,16 +108,13 @@ RenderLoop::
     ; If GameplayType == INTRO...
     ld   a, [wGameplayType]
     cp   GAMEPLAY_INTRO
-    jr   nz, .fi
+    jr   nz, .titleScreenEnd
     ; ... and GameplaySubtype > INTRO_BEACH...
     ld   a, [wGameplaySubtype]
-    cp   $08
-    jr   c, .fi
-    ; Position sprites for the title screen (?)
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $5257
-.fi
+    cp   GAMEPLAY_INTRO_BEACH + 1
+    jr   c, .titleScreenEnd
+    callsb PositionTitleScreenSprites
+.titleScreenEnd
 
 .RenderLoop_TransitionSfx:
     ; If no transition special effect is active, go to the next step.

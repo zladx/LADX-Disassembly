@@ -47,6 +47,7 @@ SFX_TYPEWRITER      equ $0F
 SFX_BOSS_AGONY      equ $10
 SFX_SWORD_B         equ $14
 SFX_SWORD_C         equ $15
+SFX_DRAW_SHIELD     equ $16
 SFX_SWORD_D         equ $18
 SFX_HOOT            equ $19
 SFX_DOOR_RUMBLE     equ $2A

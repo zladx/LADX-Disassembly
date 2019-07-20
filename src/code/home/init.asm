@@ -115,11 +115,8 @@ Init::
     ; Enable interrupts
     ei
 
-    ; If GBC, clear WRAM Bank 5
-    ; (calls 20:4854)
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4854
+    ; On GBC, reset WRAM bank 5
+    callsb ClearWRAMBank5
 
     ; Start rendering
     jp   WaitForNextFrame

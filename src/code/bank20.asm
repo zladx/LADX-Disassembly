@@ -293,6 +293,8 @@ EntityPointersTable::
     ld   [$D45E], a                               ; $431E: $EA $5E $D4
     ret                                           ; $4321: $C9
 
+; Entity id table?
+data_020_4322::
     ld   c, h                                     ; $4322: $4C
     ld   c, e                                     ; $4323: $4B
     ld   c, h                                     ; $4324: $4C
@@ -776,10 +778,12 @@ jr_020_445A:
     bit  1, e                                     ; $4514: $CB $4B
     ld   d, [hl]                                  ; $4516: $56
     ld   c, e                                     ; $4517: $4B
+
+func_020_4518::
     ldh  a, [hActiveEntityId]                     ; $4518: $F0 $EB
     ld   e, a                                     ; $451A: $5F
     ld   d, $00                                   ; $451B: $16 $00
-    ld   hl, $4322                                ; $451D: $21 $22 $43
+    ld   hl, data_020_4322                        ; $451D: $21 $22 $43
     sla  e                                        ; $4520: $CB $23
     rl   d                                        ; $4522: $CB $12
     add  hl, de                                   ; $4524: $19
@@ -790,9 +794,10 @@ jr_020_445A:
     pop  hl                                       ; $4529: $E1
     ret                                           ; $452A: $C9
 
+BGMapToLoadAdjustementTable::
     nop                                           ; $452B: $00
     nop                                           ; $452C: $00
-    call z, func_020_4856                         ; $452D: $CC $56 $48
+    db   $CC, $56, $48
     ld   h, a                                     ; $4530: $67
     ld   [hl], $63                                ; $4531: $36 $63
     jr   z, jr_020_4598                           ; $4533: $28 $63
@@ -860,7 +865,10 @@ jr_020_445A:
     ld   [hl], a                                  ; $4572: $77
     call nc, $374D                                ; $4573: $D4 $4D $37
     ld   l, h                                     ; $4576: $6C
-    ld   hl, $452B                                ; $4577: $21 $2B $45
+
+; Manipulate wBGMapToLoad
+func_020_4577::
+    ld   hl, BGMapToLoadAdjustementTable          ; $4577: $21 $2B $45
     ld   b, $00                                   ; $457A: $06 $00
     ld   a, [wBGMapToLoad]                        ; $457C: $FA $FF $D6
     sla  a                                        ; $457F: $CB $27
@@ -873,6 +881,7 @@ jr_020_445A:
     ld   d, a                                     ; $4587: $57
     ret                                           ; $4588: $C9
 
+data_020_4589::
     ld   c, h                                     ; $4589: $4C
     ld   h, d                                     ; $458A: $62
     ld   h, e                                     ; $458B: $63
@@ -972,6 +981,8 @@ jr_020_4598:
     ld   a, h                                     ; $45E7: $7C
     ld   a, e                                     ; $45E8: $7B
     ld   a, d                                     ; $45E9: $7A
+
+data_020_45EA::
     ld   e, [hl]                                  ; $45EA: $5E
     dec  l                                        ; $45EB: $2D
     ld   e, [hl]                                  ; $45EC: $5E
@@ -1016,6 +1027,8 @@ jr_020_4598:
     dec  [hl]                                     ; $4613: $35
     ld   h, d                                     ; $4614: $62
     dec  [hl]                                     ; $4615: $35
+
+func_020_4616::
     push de                                       ; $4616: $D5
     ldh  a, [hMapRoom]                            ; $4617: $F0 $F6
     and  a                                        ; $4619: $A7
@@ -1048,7 +1061,7 @@ jr_020_462F:
     ret                                           ; $463F: $C9
 
 jr_020_4640:
-    ld   hl, $45EA                                ; $4640: $21 $EA $45
+    ld   hl, data_020_45EA                        ; $4640: $21 $EA $45
     ldh  a, [hMapRoom]                            ; $4643: $F0 $F6
     sla  a                                        ; $4645: $CB $27
     ld   e, a                                     ; $4647: $5F
@@ -1066,16 +1079,34 @@ jr_020_4640:
     pop  de                                       ; $4655: $D1
     ret                                           ; $4656: $C9
 
+; Retrieve the address of a tilemap loading handler
+;   input:  wTileMapToLoad in e
+;   output: address to jump to in hl
+GetTilemapHandlerAddress::
     dec  e                                        ; $4657: $1D
     sla  e                                        ; $4658: $CB $23
     ld   d, $00                                   ; $465A: $16 $00
-    ld   hl, $4664                                ; $465C: $21 $64 $46
+    ld   hl, TilemapLoadingHandlersTable          ; $465C: $21 $64 $46
     add  hl, de                                   ; $465F: $19
     ld   a, [hl+]                                 ; $4660: $2A
     ld   h, [hl]                                  ; $4661: $66
     ld   l, a                                     ; $4662: $6F
     ret                                           ; $4663: $C9
 
+; Pointers to addresses to execute for loading a specific tilemap
+; Table values:
+;   01  $309B
+;   02  $28F7
+;   03  $2BCF
+;   04  $2C03
+;   05  $2D2D
+;   06  $2C28
+;   07  $2D2D
+;   08  $28F0
+;   09  $2E73
+;   ...
+;   10  LoadIntroSequenceTiles
+TilemapLoadingHandlersTable::
     sbc  e                                        ; $4664: $9B
     jr   nc, @-$07                                ; $4665: $30 $F7
 
@@ -1138,6 +1169,8 @@ jr_020_469C:
     add  hl, sp                                   ; $46A7: $39
     dec  e                                        ; $46A8: $1D
     add  hl, sp                                   ; $46A9: $39
+
+data_020_46AA::
     ld   d, c                                     ; $46AA: $51
     dec  [hl]                                     ; $46AB: $35
     ld   c, a                                     ; $46AC: $4F
@@ -1313,7 +1346,10 @@ jr_020_46FC:
     dec  [hl]                                     ; $4757: $35
     nop                                           ; $4758: $00
     nop                                           ; $4759: $00
-    ld   hl, $46AA                                ; $475A: $21 $AA $46
+
+; Color-dungeon related function
+func_020_475A::
+    ld   hl, data_020_46AA                        ; $475A: $21 $AA $46
     ldh  a, [hMapRoom]                            ; $475D: $F0 $F6
     rla                                           ; $475F: $17
     ld   e, a                                     ; $4760: $5F
@@ -1398,6 +1434,7 @@ jr_020_47B7:
 jr_020_47C2:
     ret                                           ; $47C2: $C9
 
+data_020_47C3::
     nop                                           ; $47C3: $00
     ld   b, b                                     ; $47C4: $40
     add  b                                        ; $47C5: $80
@@ -1408,6 +1445,7 @@ jr_020_47C2:
     add  b                                        ; $47C9: $80
     ret  nz                                       ; $47CA: $C0
 
+MapRoomTable_b0::
     nop                                           ; $47CB: $00
     nop                                           ; $47CC: $00
     nop                                           ; $47CD: $00
@@ -1430,6 +1468,8 @@ jr_020_47C2:
     inc  b                                        ; $47DE: $04
     nop                                           ; $47DF: $00
     nop                                           ; $47E0: $00
+
+MapRoomTable_b1::
     nop                                           ; $47E1: $00
     nop                                           ; $47E2: $00
     nop                                           ; $47E3: $00
@@ -1452,16 +1492,23 @@ jr_020_47C2:
     nop                                           ; $47F4: $00
     nop                                           ; $47F5: $00
     dec  b                                        ; $47F6: $05
+
+; Configure the parameters for copying the animated tiles.
+; First called with b=1, then with b=0
+; Inputs:
+;   b:  ??? (0 or 1)
+ConfigureAnimatedTilesCopy::
     ldh  a, [hMapRoom]                            ; $47F7: $F0 $F6
     ld   c, a                                     ; $47F9: $4F
-    ld   hl, $47CB                                ; $47FA: $21 $CB $47
+
+    ; hl = (b == 0 ? MapRoomTable_b0 : MapRoomTable_b1)
+    ld   hl, MapRoomTable_b0                      ; $47FA: $21 $CB $47
     ld   a, b                                     ; $47FD: $78
     and  a                                        ; $47FE: $A7
-    jr   z, jr_020_4804                           ; $47FF: $28 $03
+    jr   z, .b1End                                ; $47FF: $28 $03
+    ld   hl, MapRoomTable_b1                      ; $4801: $21 $E1 $47
+.b1End
 
-    ld   hl, $47E1                                ; $4801: $21 $E1 $47
-
-jr_020_4804:
     ld   b, $00                                   ; $4804: $06 $00
     add  hl, bc                                   ; $4806: $09
     ld   a, [hl]                                  ; $4807: $7E
@@ -1477,7 +1524,7 @@ jr_020_4804:
     and  $07                                      ; $4812: $E6 $07
     ld   e, a                                     ; $4814: $5F
     ld   d, $00                                   ; $4815: $16 $00
-    ld   hl, $47C3                                ; $4817: $21 $C3 $47
+    ld   hl, data_020_47C3                       ; $4817: $21 $C3 $47
     add  hl, de                                   ; $481A: $19
     ld   l, [hl]                                  ; $481B: $6E
     ld   h, $00                                   ; $481C: $26 $00
@@ -1490,63 +1537,69 @@ jr_020_4804:
     and  a                                        ; $482B: $A7
     ret                                           ; $482C: $C9
 
+; Replace objects $56 and $57 by object $0D.
+; Used in the color dungeon.
+ReplaceObjects56and57::
     di                                            ; $482D: $F3
     ld   bc, wRoomObjectsArea                     ; $482E: $01 $00 $D7
     ld   de, wIsFileSelectionArrowShifted         ; $4831: $11 $00 $D0
-    ld   hl, $FF70                                ; $4834: $21 $70 $FF
+    ld   hl, rSVBK                                ; $4834: $21 $70 $FF
 
-jr_020_4837:
+    ; For each object in the room…
+.loop
+    ; If the object type is $56 or $57…
     ld   a, [bc]                                  ; $4837: $0A
     cp   $56                                      ; $4838: $FE $56
-    jr   z, jr_020_4840                           ; $483A: $28 $04
+    jr   z, .handleSpecialObject                  ; $483A: $28 $04
 
     cp   $57                                      ; $483C: $FE $57
-    jr   nz, jr_020_484B                          ; $483E: $20 $0B
+    jr   nz, .continue                            ; $483E: $20 $0B
 
-jr_020_4840:
+.handleSpecialObject
     ld   [hl], $05                                ; $4840: $36 $05
     ld   a, [de]                                  ; $4842: $1A
     ld   [hl], $00                                ; $4843: $36 $00
     and  a                                        ; $4845: $A7
-    jr   z, jr_020_484B                           ; $4846: $28 $03
+    jr   z, .continue                             ; $4846: $28 $03
 
     ld   a, $0D                                   ; $4848: $3E $0D
     ld   [bc], a                                  ; $484A: $02
 
-jr_020_484B:
+.continue
     inc  bc                                       ; $484B: $03
     inc  de                                       ; $484C: $13
     ld   a, e                                     ; $484D: $7B
     cp   $C0                                      ; $484E: $FE $C0
-    jr   nz, jr_020_4837                          ; $4850: $20 $E5
+    jr   nz, .loop                                ; $4850: $20 $E5
 
     ei                                            ; $4852: $FB
     ret                                           ; $4853: $C9
 
-func_020_4854:
+; On GBC, clear the $0C first bytes of WRAM bank 5
+ClearWRAMBank5::
+    ; If not on GBC, return
     ldh  a, [hIsGBC]                              ; $4854: $F0 $FE
-
-func_020_4856:
     and  a                                        ; $4856: $A7
     ret  z                                        ; $4857: $C8
 
     di                                            ; $4858: $F3
     ld   a, $05                                   ; $4859: $3E $05
     ld   [rSVBK], a                               ; $485B: $E0 $70
-    ld   hl, wIsFileSelectionArrowShifted         ; $485D: $21 $00 $D0
+    ld   hl, $D000                                ; $485D: $21 $00 $D0
 
-jr_020_4860:
+.loop
     xor  a                                        ; $4860: $AF
     ld   [hl+], a                                 ; $4861: $22
     ld   a, l                                     ; $4862: $7D
     cp   $C0                                      ; $4863: $FE $C0
-    jr   nz, jr_020_4860                          ; $4865: $20 $F9
+    jr   nz, .loop                                ; $4865: $20 $F9
 
     xor  a                                        ; $4867: $AF
     ld   [rSVBK], a                               ; $4868: $E0 $70
     ei                                            ; $486A: $FB
     ret                                           ; $486B: $C9
 
+func_020_486C::
     add  hl, bc                                   ; $486C: $09
     dec  b                                        ; $486D: $05
     ld   [$0A08], sp                              ; $486E: $08 $08 $0A
@@ -1554,7 +1607,7 @@ jr_020_4860:
     rlca                                          ; $4872: $07
     inc  c                                        ; $4873: $0C
 
-func_020_4874:
+func_020_4874::
     ld   hl, $486C                                ; $4874: $21 $6C $48
     add  hl, de                                   ; $4877: $19
     ldh  a, [hScratchA]                           ; $4878: $F0 $D7
@@ -1577,7 +1630,7 @@ func_020_4874:
     ld   e, a                                     ; $4896: $5F
     ret                                           ; $4897: $C9
 
-func_020_4898:
+func_020_4898::
     push de                                       ; $4898: $D5
     ld   hl, wRequestDestinationHigh              ; $4899: $21 $01 $D6
     ld   a, [wRequests]                           ; $489C: $FA $00 $D6
@@ -1614,12 +1667,16 @@ func_020_4898:
     ld   [hl], $00                                ; $48C7: $36 $00
     ret                                           ; $48C9: $C9
 
+; Special code for the Color Dungeon
+func_020_48CA::
+    ; If Free-movement mode is enabled, return
     ld   a, [wFreeMovementMode]                   ; $48CA: $FA $7B $C1
     and  a                                        ; $48CD: $A7
     ret  nz                                       ; $48CE: $C0
 
+    ; If not on color dungeon, return
     ldh  a, [hMapId]                              ; $48CF: $F0 $F7
-    cp   $FF                                      ; $48D1: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $48D1: $FE $FF
     ret  nz                                       ; $48D3: $C0
 
     ldh  a, [hSwordIntersectedAreaY]              ; $48D4: $F0 $CD
@@ -1707,7 +1764,7 @@ jr_020_4917:
     db   $76                                      ; $4952: $76
     ld   [hl], a                                  ; $4953: $77
 
-func_020_4954:
+func_020_4954::
     ld   a, [hl]                                  ; $4954: $7E
     inc  a                                        ; $4955: $3C
     ldh  [hScratchA], a                           ; $4956: $E0 $D7
@@ -1745,6 +1802,8 @@ jr_020_497F:
 
 jr_020_4984:
     rla                                           ; $4984: $17
+
+func_020_4985::
     push bc                                       ; $4985: $C5
     push de                                       ; $4986: $D5
     ld   hl, $4980                                ; $4987: $21 $80 $49
@@ -1765,9 +1824,9 @@ jr_020_4984:
 
     ld   a, $80                                   ; $49A3: $3E $80
     ld   [$DDD9], a                               ; $49A5: $EA $D9 $DD
-    ld   a, $02                                   ; $49A8: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $49A8: $3E $02
     ldh  [hJingle], a                             ; $49AA: $E0 $F2
-    call func_020_4854                            ; $49AC: $CD $54 $48
+    call ClearWRAMBank5                           ; $49AC: $CD $54 $48
 
 jr_020_49AF:
     pop  de                                       ; $49AF: $D1
@@ -2007,6 +2066,7 @@ jr_020_4AEF:
 jr_020_4B1E:
     ret                                           ; $4B1E: $C9
 
+func_20_4B1F::
     xor  a                                        ; $4B1F: $AF
     ld   [wHasPlacedBomb], a                      ; $4B20: $EA $4E $C1
     ld   [wProjectileCount], a                    ; $4B23: $EA $4D $C1
@@ -2023,31 +2083,39 @@ jr_020_4B1E:
 jr_020_4B39:
     ret                                           ; $4B39: $C9
 
-    stop                                          ; $4B3A: $10 $00
-    ld   [$0308], sp                              ; $4B3C: $08 $08 $03
-    inc  bc                                       ; $4B3F: $03
-    ld   [label_808], sp                          ; $4B40: $08 $08 $08
-    ld   [$0D00], sp                              ; $4B43: $08 $00 $0D
-    ld   [$0308], sp                              ; $4B46: $08 $08 $03
-    inc  b                                        ; $4B49: $04
+; Link's direction table
+data_020_4B3A::
+    db $10, $00, $08, $08
+
+data_020_4B3E::
+    db $03, $03, $08, $08
+
+data_020_4B42::
+    db $08, $08, $00, $0D
+
+data_020_4B46::
+    db $08, $08, $03, $04
+
+; Shield-related function
+func_020_4B4A::
     ldh  a, [hLinkDirection]                      ; $4B4A: $F0 $9E
     ld   e, a                                     ; $4B4C: $5F
     ld   d, $00                                   ; $4B4D: $16 $00
-    ld   hl, $4B3A                                ; $4B4F: $21 $3A $4B
+    ld   hl, data_020_4B3A                        ; $4B4F: $21 $3A $4B
     add  hl, de                                   ; $4B52: $19
     ldh  a, [hLinkPositionX]                      ; $4B53: $F0 $98
     add  [hl]                                     ; $4B55: $86
     ld   [$C140], a                               ; $4B56: $EA $40 $C1
-    ld   hl, $4B3E                                ; $4B59: $21 $3E $4B
+    ld   hl, data_020_4B3E                        ; $4B59: $21 $3E $4B
     add  hl, de                                   ; $4B5C: $19
     ld   a, [hl]                                  ; $4B5D: $7E
     ld   [$C141], a                               ; $4B5E: $EA $41 $C1
-    ld   hl, $4B42                                ; $4B61: $21 $42 $4B
+    ld   hl, data_020_4B42                        ; $4B61: $21 $42 $4B
     add  hl, de                                   ; $4B64: $19
     ld   a, [$C145]                               ; $4B65: $FA $45 $C1
     add  [hl]                                     ; $4B68: $86
     ld   [$C142], a                               ; $4B69: $EA $42 $C1
-    ld   hl, $4B46                                ; $4B6C: $21 $46 $4B
+    ld   hl, data_020_4B46                        ; $4B6C: $21 $46 $4B
     add  hl, de                                   ; $4B6F: $19
     ld   a, [hl]                                  ; $4B70: $7E
     ld   [wIsLinkInTheAir], a                     ; $4B71: $EA $43 $C1
@@ -2061,6 +2129,8 @@ jr_020_4B39:
     nop                                           ; $4B7E: $00
     db   $fd                                      ; $4B7F: $FD
     inc  b                                        ; $4B80: $04
+
+func_020_4B81::
     ld   hl, wEntitiesUnknowTableF                ; $4B81: $21 $F0 $C2
     add  hl, de                                   ; $4B84: $19
     ld   [hl], $10                                ; $4B85: $36 $10
@@ -2143,6 +2213,8 @@ jr_020_4BE3:
     nop                                           ; $4BFB: $00
     add  sp, $18                                  ; $4BFC: $E8 $18
     nop                                           ; $4BFE: $00
+
+func_020_4BFF::
     ld   hl, wEntitiesFrameCounterTable           ; $4BFF: $21 $E0 $C2
     add  hl, de                                   ; $4C02: $19
     ld   [hl], $28                                ; $4C03: $36 $28
@@ -3298,6 +3370,8 @@ jr_020_4FFB:
     inc  bc                                       ; $5221: $03
     inc  bc                                       ; $5222: $03
     inc  bc                                       ; $5223: $03
+
+data_020_5224::
     inc  h                                        ; $5224: $24
     ld   c, l                                     ; $5225: $4D
     ld   h, h                                     ; $5226: $64
@@ -3332,6 +3406,8 @@ jr_020_4FFB:
     ld   d, c                                     ; $5243: $51
     db   $e4                                      ; $5244: $E4
     ld   c, h                                     ; $5245: $4C
+
+data_020_5246::
     jr   z, @+$2C                                 ; $5246: $28 $2A
 
     inc  l                                        ; $5248: $2C
@@ -3345,8 +3421,14 @@ jr_020_4FFB:
     ld   [hl], $38                                ; $5253: $36 $38
     ld   a, [hl-]                                 ; $5255: $3A
     ld   a, [hl-]                                 ; $5256: $3A
+
+; Position sprites for the title screen (?)
+; Maybe also controls the apparition effect of
+; the title.
+PositionTitleScreenSprites::
+    ; If not on the intro title, return
     ld   a, [wGameplaySubtype]                    ; $5257: $FA $96 $DB
-    cp   $0A                                      ; $525A: $FE $0A
+    cp   GAMEPLAY_INTRO_TITLE - 1                 ; $525A: $FE $0A
     ret  nc                                       ; $525C: $D0
 
     ld   hl, $C17C                                ; $525D: $21 $7C $C1
@@ -3373,12 +3455,12 @@ jr_020_5279:
 jr_020_527C:
     ld   a, [$C17E]                               ; $527C: $FA $7E $C1
     ld   e, a                                     ; $527F: $5F
-    ld   hl, $5246                                ; $5280: $21 $46 $52
+    ld   hl, data_020_5246                        ; $5280: $21 $46 $52
     add  hl, de                                   ; $5283: $19
     ld   a, [hl]                                  ; $5284: $7E
     ldh  [hScratchA], a                           ; $5285: $E0 $D7
     sla  e                                        ; $5287: $CB $23
-    ld   hl, $5224                                ; $5289: $21 $24 $52
+    ld   hl, data_020_5224                        ; $5289: $21 $24 $52
     add  hl, de                                   ; $528C: $19
     ld   a, [hl+]                                 ; $528D: $2A
     ld   b, [hl]                                  ; $528E: $46
@@ -3489,6 +3571,7 @@ jr_020_5311:
 
     ret                                           ; $5318: $C9
 
+LinkAnimationStateTable::
     nop                                           ; $5319: $00
     ld   [bc], a                                  ; $531A: $02
     ld   [bc], a                                  ; $531B: $02
@@ -3703,6 +3786,8 @@ jr_020_538E:
 
     db   $fc                                      ; $5405: $FC
     and  b                                        ; $5406: $A0
+
+data_020_5407::
     nop                                           ; $5407: $00
     nop                                           ; $5408: $00
     jr   nz, jr_020_542B                          ; $5409: $20 $20
@@ -3992,18 +4077,20 @@ jr_020_54ED:
     nop                                           ; $54F2: $00
     jr   nz, @+$22                                ; $54F3: $20 $20
 
+; Called from SkipTilesGroupAnimation
+func_020_54F5::
     ldh  a, [hLinkAnimationState]                 ; $54F5: $F0 $9D
     cp   $FF                                      ; $54F7: $FE $FF
     ret  z                                        ; $54F9: $C8
 
-    ld   hl, $5319                                ; $54FA: $21 $19 $53
+    ld   hl, LinkAnimationStateTable              ; $54FA: $21 $19 $53
     sla  a                                        ; $54FD: $CB $27
     ld   c, a                                     ; $54FF: $4F
     ld   b, $00                                   ; $5500: $06 $00
     add  hl, bc                                   ; $5502: $09
     ld   e, [hl]                                  ; $5503: $5E
     push hl                                       ; $5504: $E5
-    ld   hl, $5407                                ; $5505: $21 $07 $54
+    ld   hl, data_020_5407                        ; $5505: $21 $07 $54
     add  hl, bc                                   ; $5508: $09
     ld   a, [wC11D]                               ; $5509: $FA $1D $C1
     and  $98                                      ; $550C: $E6 $98
@@ -4025,7 +4112,7 @@ jr_020_5516:
     rl   d                                        ; $5528: $CB $12
     sla  e                                        ; $552A: $CB $23
     rl   d                                        ; $552C: $CB $12
-    ld   hl, $5800                                ; $552E: $21 $00 $58
+    ld   hl, data_020_5800                        ; $552E: $21 $00 $58
     add  hl, de                                   ; $5531: $19
     ld   c, l                                     ; $5532: $4D
     ld   b, h                                     ; $5533: $44
@@ -4044,7 +4131,7 @@ jr_020_5516:
     rl   d                                        ; $554B: $CB $12
     sla  e                                        ; $554D: $CB $23
     rl   d                                        ; $554F: $CB $12
-    ld   hl, $5800                                ; $5551: $21 $00 $58
+    ld   hl, data_020_5800                        ; $5551: $21 $00 $58
     add  hl, de                                   ; $5554: $19
     ld   c, l                                     ; $5555: $4D
     ld   b, h                                     ; $5556: $44
@@ -4581,6 +4668,8 @@ jr_020_5795:
     nop                                           ; $57FD: $00
     nop                                           ; $57FE: $00
     nop                                           ; $57FF: $00
+
+data_020_5800::
     nop                                           ; $5800: $00
     ld   bc, $0401                                ; $5801: $01 $01 $04
     inc  b                                        ; $5804: $04
@@ -4806,6 +4895,7 @@ jr_020_5901:
 jr_020_5903:
     ret                                           ; $5903: $C9
 
+InventoryEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $5904: $FA $96 $DB
     rst  $00                                      ; $5907: $C7
     ld   [hl+], a                                 ; $5908: $22
@@ -5489,7 +5579,6 @@ jr_020_5C10:
     push hl                                       ; $5C9B: $E5
 
 func_020_5C9C:
-label_020_5C9C:
     push de                                       ; $5C9C: $D5
     push bc                                       ; $5C9D: $C5
     ld   hl, wAButtonSlot                         ; $5C9E: $21 $00 $DB
@@ -5590,7 +5679,7 @@ jr_020_5CB5:
     dec  c                                        ; $5D1E: $0D
     ld   a, c                                     ; $5D1F: $79
     cp   e                                        ; $5D20: $BB
-    jp   nz, label_020_5C9C                       ; $5D21: $C2 $9C $5C
+    jp   nz, func_020_5C9C                        ; $5D21: $C2 $9C $5C
 
     ret                                           ; $5D24: $C9
 
@@ -8185,7 +8274,7 @@ jr_020_6A1D:
     db   $f4                                      ; $6A2C: $F4
     ld   [$2240], sp                              ; $6A2D: $08 $40 $22
 
-func_020_6A30:
+func_020_6A30::
     ldh  a, [hIsGBC]                              ; $6A30: $F0 $FE
     and  a                                        ; $6A32: $A7
     jp   z, label_020_6B81                        ; $6A33: $CA $81 $6B
@@ -8292,6 +8381,7 @@ jr_020_6A9F:
     ld   [wPaletteUnknownA], a                    ; $6ABD: $EA $D1 $DD
     ret                                           ; $6AC0: $C9
 
+func_020_6AC1::
     ldh  a, [hIsGBC]                              ; $6AC1: $F0 $FE
     and  a                                        ; $6AC3: $A7
     jp   z, label_020_6B81                        ; $6AC4: $CA $81 $6B
@@ -8475,6 +8565,8 @@ func_020_6B86:
     db   $10                                      ; $6B9F: $10
     adc  h                                        ; $6BA0: $8C
     ld   sp, $1084                                ; $6BA1: $31 $84 $10
+
+func_020_6BA4::
     ldh  a, [hIsGBC]                              ; $6BA4: $F0 $FE
     and  a                                        ; $6BA6: $A7
     jp   z, label_020_6B81                        ; $6BA7: $CA $81 $6B
@@ -8514,6 +8606,7 @@ jr_020_6BC3:
 jr_020_6BDB:
     ret                                           ; $6BDB: $C9
 
+func_020_6BDC::
     ldh  a, [hIsGBC]                              ; $6BDC: $F0 $FE
     and  a                                        ; $6BDE: $A7
     ret  z                                        ; $6BDF: $C8
@@ -8541,6 +8634,7 @@ jr_020_6BE8:
     ld   [wPaletteUnknownE], a                    ; $6BFC: $EA $D5 $DD
     ret                                           ; $6BFF: $C9
 
+LoadFileMenuBG::
     ldh  a, [hIsGBC]                              ; $6C00: $F0 $FE
     and  a                                        ; $6C02: $A7
     jp   z, label_020_6B81                        ; $6C03: $CA $81 $6B
@@ -8567,6 +8661,7 @@ jr_020_6C0B:
     ld   [wPaletteUnknownE], a                    ; $6C20: $EA $D5 $DD
     ret                                           ; $6C23: $C9
 
+func_020_6C24::
     ldh  a, [hIsGBC]                              ; $6C24: $F0 $FE
     and  a                                        ; $6C26: $A7
     jr   z, jr_020_6C4E                           ; $6C27: $28 $25
@@ -8717,6 +8812,7 @@ jr_020_6CFA:
 jr_020_6D0D:
     ret                                           ; $6D0D: $C9
 
+func_020_6D0E::
     ld   a, [hl]                                  ; $6D0E: $7E
     dec  a                                        ; $6D0F: $3D
     cp   $04                                      ; $6D10: $FE $04
@@ -8988,7 +9084,11 @@ jr_020_6E63:
     db   $db                                      ; $6E6F: $DB
     pop  hl                                       ; $6E70: $E1
     db   $e3                                      ; $6E71: $E3
-    add  sp, $1C                                  ; $6E72: $E8 $1C
+    db   $E8                                      ; $6E72: $E8
+
+; Sprite table for overworld?
+data_020_6E73::
+    db   $1C                                      ; $6E73: $1C
     inc  e                                        ; $6E74: $1C
     ld   a, $3C                                   ; $6E75: $3E $3C
     ld   a, $3E                                   ; $6E77: $3E $3E
@@ -9045,6 +9145,9 @@ jr_020_6EB0:
     ld   a, [hl-]                                 ; $6EB0: $3A
     rrca                                          ; $6EB1: $0F
     inc  l                                        ; $6EB2: $2C
+
+; Sprites banks table for indoors?
+data_020_6EB3::
     rst  $38                                      ; $6EB3: $FF
     nop                                           ; $6EB4: $00
     nop                                           ; $6EB5: $00
@@ -9482,7 +9585,12 @@ jr_020_6EC7:
     jr   jr_020_70B5                              ; $70AE: $18 $05
 
     nop                                           ; $70B0: $00
-    ld   [$0000], sp                              ; $70B1: $08 $00 $00
+    db $08                                        ; $70B1: $08
+    nop                                           ; $70B2: $00
+
+; Sprites banks table for color dungeon?
+data_020_70B3::
+    nop                                           ; $70B3: $00
     nop                                           ; $70B4: $00
 
 jr_020_70B5:

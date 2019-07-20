@@ -284,18 +284,18 @@ LoadAnimatedTilesFrame::
     cp   MAP_COLOR_DUNGEON
     jr   nz, .endMapFF
 
-    ld   a, $20
+    ld   a, BANK(ConfigureAnimatedTilesCopy)
     ld   [MBC3SelectBank], a
     ld   b, $01
-    call $47F7
+    call ConfigureAnimatedTilesCopy
     jr   z, .next
     ld   [MBC3SelectBank], a
     call CopyData
 .next
-    ld   a, $20
+    ld   a, BANK(ConfigureAnimatedTilesCopy)
     ld   [MBC3SelectBank], a
     ld   b, $00
-    call $47F7
+    call ConfigureAnimatedTilesCopy
     jr   z, .endMapFF
     ld   [MBC3SelectBank], a
     ld   de, $96C0
@@ -412,9 +412,7 @@ label_1D12::
     ret
 
 SkipTilesGroupAnimation::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $54F5
+    callsb func_020_54F5
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a

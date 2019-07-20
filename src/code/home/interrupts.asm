@@ -158,26 +158,9 @@ LoadMapData::
 
 .ExecuteMapLoadHandler:
     ld   e, a
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    ; $4657
-    ;   input:  wTileMapToLoad in e
-    ;   output: address to jump to in hl
-    ; Table address: 20:4664
-    ; Table values:
-    ;   01  $309B
-    ;   02  $28F7
-    ;   03  $2BCF
-    ;   04  $2C03
-    ;   05  $2D2D
-    ;   06  $2C28
-    ;   07  $2D2D
-    ;   08  $28F0
-    ;   09  $2E73
-    ;   ...
-    ;   10  LoadIntroSequenceTiles
-    call $4657
-    jp   hl ; tail-call ; will return when done.
+    callsb GetTilemapHandlerAddress
+    ; Jump to the tilemap loading handler
+    jp   hl ; tail-call
 
     ; Special case for loading map n° 0
 .LoadMapZero:
@@ -187,10 +170,8 @@ LoadMapData::
     ld   [MBC3SelectBank], a
     call $5C2C
 
-    ; Manipulate wBGMapToLoad (calls 20:4577)
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4577
+    ; Manipulate wBGMapToLoad
+    callsb func_020_4577
 
     ld   a, $08
     ld   [MBC3SelectBank], a
@@ -576,28 +557,28 @@ label_69D::
     ret
 
 label_69E::
+    ; If on GBC and inside the Color Dungeon…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_6CB
+    jr   z, .colorDungeonEnd
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_6CB
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $475A
+    jr   nz, .colorDungeonEnd
+
+    callsb func_020_475A
     xor  a
     ld   [wNeedsUpdatingNPCTiles], a
     ld   [$C10F], a
-    ld   hl, $9000
+    ld   hl, vTiles2
     ld   bc, $0000
-    call $4616
+    call func_020_4616
     ld   c, $90
     ld   b, h
     ld   h, $00
     call Copy100BytesFromBankAtA
     jr   label_738
+.colorDungeonEnd
 
-label_6CB::
     ldh  a, [hNeedsUpdatingEnnemiesTiles]
     and  a
     jp   z, label_73E

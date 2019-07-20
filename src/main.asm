@@ -26,6 +26,10 @@ section "bank4",romx[$4000],bank[$04]
 include "code/bank4.asm"
 
 section "bank5",romx[$4000],bank[$05]
+include "code/bank5.asm"
+
+section "bank7",romx[$4000],bank[$07]
+include "code/bank7.asm"
 
 section "bank009",romx[$4000],bank[$09]
 OverworldRoomPointers::
@@ -106,10 +110,15 @@ incbin "gfx/items/items_3.dmg.2bpp"
 section "bank13",romx[$4000],bank[$13]
 incbin "gfx/ending/ending.dmg.2bpp"
 
-section "bank14_layouts",romx[$4220], BANK[$14]
+section "bank14",romx[$4000],bank[$14]
+include "data/events/dungeons.asm"
 include "data/maps/layouts.asm"
-section "bank14_dialog",romx[$5934], BANK[$14]
+include "data/chests/dungeons.asm"
+include "code/bank14.asm"
 include "text/dialog.asm"
+
+; Bank $16: contains sprite data for overworld
+; Starts on byte $5186, ends on byte $565D
 
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
@@ -125,6 +134,9 @@ include "code/bank1A/unknown.asm"
 
 section "bank1C",romx[$4001],bank[$1C]
 include "text/dialog_table.asm"
+
+section "bank20",romx[$4000],bank[$20]
+include "code/bank20.asm"
 
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"

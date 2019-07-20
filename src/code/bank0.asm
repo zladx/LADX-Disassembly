@@ -1811,7 +1811,7 @@ ItemFunction::
     cp   $0B
     jp   z, UseShovel
     cp   $07 ; Magic wand
-    jr   nz, label_12ED
+    jr   nz, label_12ED ; Jump to use boots?
     ld   hl, wSwordAnimationState
     ld   a, [$C19B]
     or   [hl]
@@ -3998,8 +3998,8 @@ label_27F2::
 .skip
     jp   ReloadSavedBank
 
-label_2802::
-    callsb label_5E67
+SynchronizeDungeonsItemFlags_trampoline::
+    callsb SynchronizeDungeonsItemFlags
     jp   ReloadSavedBank
 
 ; Return a random number in `a`
@@ -5508,7 +5508,7 @@ LoadRoom::
     ld   a, [bc]
     swap a
     and  $0F
-    call LoadRoomTemplate
+    call LoadRoomTemplate_trampoline
     jr   .parseRoomObjectsLoop
 
 .parseOverworldSecondByte
@@ -6247,6 +6247,7 @@ SetBankForRoom::
     ld   [MBC3SelectBank], a
     ret
 
+; Load object or objects?
 label_354B::
     push hl
     push de
@@ -6858,18 +6859,24 @@ label_38D4::
 
 ; Load the template for an indoor room
 ;   a: the template to use (see ROOM_TEMPLATE_* constants)
-LoadRoomTemplate::
+LoadRoomTemplate_trampoline::
+    ; Load bank for LoadRoomTemplate
     ld   e, a
-    ld   a, $14
+    ld   a, BANK(LoadRoomTemplate)
     ld   [MBC3SelectBank], a
     ld   a, e
+
+    ; Call function
     push bc
-    call $4880
+    call LoadRoomTemplate
     pop  bc
+
+    ; Restore previous bank
     ldh  a, [hRoomBank]
     ld   [MBC3SelectBank], a
     ret
 
+label_38FC::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $588B
@@ -7061,7 +7068,7 @@ LoadEntity::
     ld   hl, $C3A0
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEB], a
+    ldh  [hActiveEntityId], a
     ld   hl, $C290
     add  hl, bc
     ld   a, [hl]
@@ -7073,7 +7080,7 @@ LoadEntity::
     ld   a, $19
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFEB]
+    ldh  a, [hActiveEntityId]
     cp   $6A
     jr   nz, label_3A40
     ldh  a, [$FFB2]
@@ -7121,13 +7128,14 @@ label_3A81::
     ld   [MBC3SelectBank], a
     ret
 
+; Load sprite code pointers and jump to execution
 label_3A8D::
     ld   a, $20
     ld   [MBC3SelectBank], a
-    ldh  a, [$FFEB]
+    ldh  a, [hActiveEntityId]
     ld   e, a
     ld   d, b
-    ld   hl, $4000
+    ld   hl, EntityPointersTable
     add  hl, de
     add  hl, de
     add  hl, de
@@ -7258,7 +7266,7 @@ label_3B86::
     ld   a, $03
     ld   [MBC3SelectBank], a
     pop  af
-    call label_64CA
+    call func_003_64CA
     rr   l
     call ReloadSavedBank
     rl   l
@@ -7875,7 +7883,7 @@ label_3F11::
     ld   a, [wTransitionSequenceCounter]
     cp   $04
     ret  nz
-    ldh  a, [$FFEB]
+    ldh  a, [hActiveEntityId]
     cp   $87
     jr   nz, label_3F26
     ld   a, $DA
@@ -7920,7 +7928,7 @@ label_3F50::
     add  hl, bc
     ld   a, [hl]
     cp   $FF
-    jr   z, label_3F8D
+    jr   z, ClearEntityType
     push af
     ld   a, [wKillCount2]
     ld   e, a
@@ -7935,7 +7943,7 @@ label_3F50::
 
 label_3F78::
     cp   $08
-    jr   nc, label_3F8D
+    jr   nc, ClearEntityType
     ld   e, a
     ld   d, b
     ld   hl, data_3F48
@@ -7949,7 +7957,11 @@ label_3F78::
     or   [hl]
     ld   [hl], a
 
-label_3F8D::
+; Clear the type of an entity
+; Input:
+;   c:  index of the entity
+ClearEntityType::
+ClearEntityTypeAndReturn::
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   [hl], b

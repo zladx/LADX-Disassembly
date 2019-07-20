@@ -24,7 +24,7 @@
 13 Graphics: ending (DMG variant)
 14 Code and text
 15 Code
-16 Code and text
+16 Code, text, overworld sprite data
 17 Credits code and text
 18 Code and data
 19 Code (Link motions)
@@ -34,13 +34,13 @@
 1D Text
 1E Audio code and Music
 1F Audio code and Music
-20 Map loading code; Walls pointers table; Overworld tileset pointers (0x82E7B)
+20 Map loading code; Walls pointers table; Overworld tileset pointers (0x82E7B), inventory code
 21 Code and data
 22 Data
 23 Indoor palettes
 24 Indoor palettes; code for some overworld objects
-25 Data
-26 n/a
+25 Overworld tilemaps (00 -> CB)
+26 Overworld tilemaps (CC -> FF)
 27 Data
 28 Photo album and Game Boy Printer code
 29 Graphics: photo pictures

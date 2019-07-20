@@ -2,6 +2,11 @@
 section "RST 0x0000", rom0 [$0000]
     jp   TableJump
 
+; Debug Mode (see debug.asm)
+; Uncomment to enable
+;section "Enable debug tools", rom0 [$0003]
+;    db   01
+
 section "Interrupt VBlank", rom0 [$0040]
     jp   InterruptVBlank
 

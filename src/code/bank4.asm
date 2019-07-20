@@ -2,21 +2,20 @@
 ; This file was created with mgbdis v1.0.1 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
+; This is the code called when the Level 2 Boss is loaded
     call label_394D                               ; $4000: $CD $4D $39
     call label_3EE8                               ; $4003: $CD $E8 $3E
     ld   hl, wEntitiesUnknownTableB               ; $4006: $21 $B0 $C2
     add  hl, bc                                   ; $4009: $09
     ld   a, [hl]                                  ; $400A: $7E
     JP_TABLE                                      ; $400B: $C7
-    ld   d, $40                                   ; $400C: $16 $40
-    rst  $20                                      ; $400E: $E7
-    ld   b, d                                     ; $400F: $42
-    ccf                                           ; $4010: $3F
-    ld   c, b                                     ; $4011: $48
-    reti                                          ; $4012: $D9
+._00 dw EntityTableBHandler0
+._01 dw EntityTableBHandler1
+._02 dw $483F
+._03 dw EntityTableBHandler3
+._04 dw EntityTableBHandler4
 
-    ld   c, b                                     ; $4013: $48
-    ld   a, $49                                   ; $4014: $3E $49
+EntityTableBHandler0::
     ld   hl, $C440                                ; $4016: $21 $40 $C4
     add  hl, bc                                   ; $4019: $09
     ld   a, [hl]                                  ; $401A: $7E
@@ -25,11 +24,11 @@
 
     ld   a, $5C                                   ; $401F: $3E $5C
     call label_3B86                               ; $4021: $CD $86 $3B
-    ldh  a, [hScratchA]                               ; $4024: $F0 $D7
+    ldh  a, [hScratchA]                           ; $4024: $F0 $D7
     ld   hl, wEntity0PosX                         ; $4026: $21 $00 $C2
     add  hl, de                                   ; $4029: $19
     ld   [hl], a                                  ; $402A: $77
-    ldh  a, [hScratchB]                               ; $402B: $F0 $D8
+    ldh  a, [hScratchB]                           ; $402B: $F0 $D8
     ld   hl, wEntitiesPosYTable                   ; $402D: $21 $10 $C2
     add  hl, de                                   ; $4030: $19
     sub  $18                                      ; $4031: $D6 $18
@@ -81,7 +80,7 @@ jr_004_404E:
     ld   [hl], b                                  ; $4084: $70
 
 jr_004_4085:
-    ldh  a, [hActiveEntityWalking]                               ; $4085: $F0 $F0
+    ldh  a, [hActiveEntityWalking]                ; $4085: $F0 $F0
     JP_TABLE                                      ; $4087: $C7
     sub  b                                        ; $4088: $90
     ld   b, b                                     ; $4089: $40
@@ -438,33 +437,41 @@ func_004_42B3:
     call label_3C77                               ; $42E1: $CD $77 $3C
     jp   label_3D8A                               ; $42E4: $C3 $8A $3D
 
+; Called by TableJump above for Level 2 Boss
+EntityTableBHandler1::
     call func_004_46F9                            ; $42E7: $CD $F9 $46
-    ldh  a, [hActiveEntityType]                               ; $42EA: $F0 $EA
+    ldh  a, [hActiveEntityType]                   ; $42EA: $F0 $EA
     cp   $05                                      ; $42EC: $FE $05
     jr   z, jr_004_431A                           ; $42EE: $28 $2A
 
+; Level 2 Boss killed
+label_004_42F0::
     ld   hl, $C420                                ; $42F0: $21 $20 $C4
     add  hl, bc                                   ; $42F3: $09
     ldh  a, [hFrameCounter]                       ; $42F4: $F0 $E7
     ld   [hl], a                                  ; $42F6: $77
-    ldh  a, [hActiveEntityWalking]                               ; $42F7: $F0 $F0
+
+    ldh  a, [hActiveEntityWalking]                ; $42F7: $F0 $F0
     JP_TABLE                                      ; $42F9: $C7
-    nop                                           ; $42FA: $00
-    ld   b, e                                     ; $42FB: $43
-    ld   [label_10EF._05], sp                     ; $42FC: $08 $43 $11
-    ld   b, e                                     ; $42FF: $43
+._00 dw GenieKilledHandler0
+._01 dw GenieKilledHandler1
+._02 dw GenieKilledHandler2
+
+GenieKilledHandler0::
     call IsEntityFrameCounterZero                 ; $4300: $CD $05 $0C
     ld   [hl], $40                                ; $4303: $36 $40
     jp   IncrementEntityWalkingAttr               ; $4305: $C3 $12 $3B
 
+GenieKilledHandler1::
     call IsEntityFrameCounterZero                 ; $4308: $CD $05 $0C
     ret  nz                                       ; $430B: $C0
 
     ld   [hl], $A0                                ; $430C: $36 $A0
     jp   IncrementEntityWalkingAttr               ; $430E: $C3 $12 $3B
 
+GenieKilledHandler2::
     call IsEntityFrameCounterZero                 ; $4311: $CD $05 $0C
-    jp   z, label_004_5751                        ; $4314: $CA $51 $57
+    jp   z, DropHeartContainer                    ; $4314: $CA $51 $57
 
     jp   label_004_50EF                           ; $4317: $C3 $EF $50
 
@@ -1193,6 +1200,8 @@ jr_004_48A6:
     ld   [de], a                                  ; $48D6: $12
     inc  [hl]                                     ; $48D7: $34
     ld   [hl-], a                                 ; $48D8: $32
+
+EntityTableBHandler3::
     ld   de, $48D1                                ; $48D9: $11 $D1 $48
     call label_3BC0                               ; $48DC: $CD $C0 $3B
     call func_004_7FA3                            ; $48DF: $CD $A3 $7F
@@ -1255,6 +1264,7 @@ jr_004_4938:
     call IsEntityFrameCounterZero                 ; $4938: $CD $05 $0C
     jp   z, label_004_6D7A                        ; $493B: $CA $7A $6D
 
+EntityTableBHandler4::
     ld   de, $48D1                                ; $493E: $11 $D1 $48
     call label_3BC0                               ; $4941: $CD $C0 $3B
     call func_004_7FA3                            ; $4944: $CD $A3 $7F
@@ -1798,7 +1808,7 @@ jr_004_4E43:
     cp   $FF                                      ; $4E45: $FE $FF
     jr   nz, jr_004_4E2E                          ; $4E47: $20 $E5
 
-    jp   label_004_5751                           ; $4E49: $C3 $51 $57
+    jp   DropHeartContainer                       ; $4E49: $C3 $51 $57
 
 jr_004_4E4C:
     jp   label_004_6D7A                           ; $4E4C: $C3 $7A $6D
@@ -2194,7 +2204,7 @@ jr_004_50DB:
     jr   jr_004_50DB                              ; $50E7: $18 $F2
 
     call IsEntityFrameCounterZero                 ; $50E9: $CD $05 $0C
-    jp   z, label_004_5751                        ; $50EC: $CA $51 $57
+    jp   z, DropHeartContainer                    ; $50EC: $CA $51 $57
 
 label_004_50EF:
     and  $07                                      ; $50EF: $E6 $07
@@ -3218,16 +3228,14 @@ func_004_56A7:
     cp   $05                                      ; $56C5: $FE $05
     jp   z, label_004_5791                        ; $56C7: $CA $91 $57
 
-    ldh  a, [hActiveEntityWalking]                               ; $56CA: $F0 $F0
+; Where to jump to load reward for killing boss of level 1
+    ldh  a, [hActiveEntityWalking]                ; $56CA: $F0 $F0
     JP_TABLE                                      ; $56CC: $C7
-    push de                                       ; $56CD: $D5
-    ld   d, [hl]                                  ; $56CE: $56
-    db   $e3                                      ; $56CF: $E3
-    ld   d, [hl]                                  ; $56D0: $56
-    ld   a, [$ff00+c]                             ; $56D1: $F2
-    ld   d, [hl]                                  ; $56D2: $56
-    dec  e                                        ; $56D3: $1D
-    ld   d, a                                     ; $56D4: $57
+._00 dw $56D5
+._01 dw $56E3
+._02 dw $56F2
+._03 dw BossDestructionHandler
+
     call IsEntityFrameCounterZero                 ; $56D5: $CD $05 $0C
     ld   [hl], $60                                ; $56D8: $36 $60
     ld   hl, $C420                                ; $56DA: $21 $20 $C4
@@ -3270,9 +3278,13 @@ jr_004_5705:
     nop                                           ; $5717: $00
     ld   b, $08                                   ; $5718: $06 $08
     ld   b, $00                                   ; $571A: $06 $00
-    ld   a, [$05CD]                               ; $571C: $FA $CD $05
-    inc  c                                        ; $571F: $0C
-    jp   z, label_004_5751                        ; $5720: $CA $51 $57
+    db   $FA                                      ; $571C: $FA
+
+; Loop until boss destruction animation is done, then call to load heart
+; This particular counter is called on Level 1 and 2 Boss at least
+BossDestructionHandler::
+    call IsEntityFrameCounterZero                 ; $571D
+    jp   z, DropHeartContainer                    ; $5720: $CA $51 $57
 
     and  $03                                      ; $5723: $E6 $03
     jr   nz, jr_004_5750                          ; $5725: $20 $29
@@ -3305,10 +3317,11 @@ jr_004_5705:
 jr_004_5750:
     ret                                           ; $5750: $C9
 
-label_004_5751:
+; Load heart container value to load when boss is killed
+DropHeartContainer:
     ld   a, $36                                   ; $5751: $3E $36
     call label_3B86                               ; $5753: $CD $86 $3B
-    ldh  a, [hScratchA]                               ; $5756: $F0 $D7
+    ldh  a, [hScratchA]                           ; $5756: $F0 $D7
     cp   $88                                      ; $5758: $FE $88
     jr   c, jr_004_575E                           ; $575A: $38 $02
 
@@ -3756,7 +3769,7 @@ jr_004_5B28:
     jr   nz, jr_004_5B66                          ; $5B2B: $20 $39
 
     ld   [hl], $04                                ; $5B2D: $36 $04
-    ldh  a, [$FFEB]                               ; $5B2F: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $5B2F: $F0 $EB
     cp   $59                                      ; $5B31: $FE $59
     jr   nz, jr_004_5B37                          ; $5B33: $20 $02
 
@@ -5937,7 +5950,7 @@ jr_004_6852:
     ldh  a, [hLinkPositionYIncrement]                               ; $685D: $F0 $9B
     push af                                       ; $685F: $F5
     ld   e, $00                                   ; $6860: $1E $00
-    ldh  a, [$FFEB]                               ; $6862: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $6862: $F0 $EB
     cp   $52                                      ; $6864: $FE $52
     ld   a, $14                                   ; $6866: $3E $14
     jr   nz, jr_004_686D                          ; $6868: $20 $03
@@ -5977,7 +5990,7 @@ jr_004_6884:
     ldh  [hLinkPositionXIncrement], a                               ; $6892: $E0 $9A
     xor  a                                        ; $6894: $AF
     ld   [$C144], a                               ; $6895: $EA $44 $C1
-    ldh  a, [$FFEB]                               ; $6898: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $6898: $F0 $EB
     cp   $52                                      ; $689A: $FE $52
     jp   nz, label_004_68E4                       ; $689C: $C2 $E4 $68
 
@@ -6096,7 +6109,7 @@ label_004_6910:
     ld   a, $10                                   ; $6946: $3E $10
     call label_3BB5                               ; $6948: $CD $B5 $3B
     ld   e, $00                                   ; $694B: $1E $00
-    ldh  a, [$FFEB]                               ; $694D: $F0 $EB
+    ldh  a, [hActiveEntityId]                     ; $694D: $F0 $EB
     cp   $52                                      ; $694F: $FE $52
     jr   nz, jr_004_6954                          ; $6951: $20 $01
 

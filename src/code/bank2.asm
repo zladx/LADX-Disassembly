@@ -236,7 +236,7 @@ jr_002_4316:
 
     ld   a, $20                                   ; $432A: $3E $20
     ld   [wIsUsingSpinAttack], a                  ; $432C: $EA $21 $C1
-    ld   a, $03                                   ; $432F: $3E $03
+    ld   a, SFX_SPIN_ATTACK                       ; $432F: $3E $03
     ldh  [hNextSFX], a                            ; $4331: $E0 $F4
 
 jr_002_4333:
@@ -692,7 +692,7 @@ jr_002_456C:
     cp   $51                                      ; $45A4: $FE $51
     jr   z, label_002_45AC                        ; $45A6: $28 $04
 
-    ld   a, $07                                   ; $45A8: $3E $07
+    ld   a, SFX_FOOTSTEP                          ; $45A8: $3E $07
     ldh  [hNextSFX], a                            ; $45AA: $E0 $F4
 
 label_002_45AC::
@@ -2650,7 +2650,7 @@ jr_002_529F:
 
     jr   nz, jr_002_52B3                          ; $52AD: $20 $04
 
-    ld   a, $03                                   ; $52AF: $3E $03
+    ld   a, SFX_SPIN_ATTACK                       ; $52AF: $3E $03
     ldh  [hSFX], a                                ; $52B1: $E0 $F3
 
 jr_002_52B3:
@@ -2837,26 +2837,37 @@ label_002_538B::
     ld   [hl], d                                  ; $53AC: $72
     jp   label_140F                               ; $53AD: $C3 $0F $14
 
-func_002_53B0::
+; Try to open a locked door with a small key
+TryOpenLockedDoor::
     push bc                                       ; $53B0: $C5
     push de                                       ; $53B1: $D5
     ldh  a, [hFFE8]                               ; $53B2: $F0 $E8
     cp   $40                                      ; $53B4: $FE $40
-    jr   z, jr_002_53FB                           ; $53B6: $28 $43
+    jr   z, .FFE8Equals40                         ; $53B6: $28 $43
 
-    ld   a, [$DBD0]                               ; $53B8: $FA $D0 $DB
+    ; If the player doesn't have a small key for this dungeon,
+    ; return.
+    ld   a, [wSmallKeysCount]                     ; $53B8: $FA $D0 $DB
     and  a                                        ; $53BB: $A7
-    jr   z, label_002_541D                        ; $53BC: $28 $5F
+    jr   z, .return                               ; $53BC: $28 $5F
 
+    ;
+    ; Open locked door with a small key
+    ;
+
+    ; Decrease the player small key count
     dec  a                                        ; $53BE: $3D
-    ld   [$DBD0], a                               ; $53BF: $EA $D0 $DB
-    call label_2802                               ; $53C2: $CD $02 $28
-    call label_002_5420                           ; $53C5: $CD $20 $54
-    call func_002_5B9F                            ; $53C8: $CD $9F $5B
+    ld   [wSmallKeysCount], a                     ; $53BF: $EA $D0 $DB
+    call SynchronizeDungeonsItemFlags_trampoline                               ; $53C2: $CD $02 $28
+    call EnqueueDoorUnlockedSfx                   ; $53C5: $CD $20 $54
+
+    ; Mark the room as opened
+    call GetRoomStatusAddress                     ; $53C8: $CD $9F $5B
     ld   a, [hl]                                  ; $53CB: $7E
     or   $40                                      ; $53CC: $F6 $40
     ld   [hl], a                                  ; $53CE: $77
     ldh  [hRoomStatus], a                               ; $53CF: $E0 $F8
+
     ldh  a, [$FFDB]                               ; $53D1: $F0 $DB
     and  $F0                                      ; $53D3: $E6 $F0
     ldh  [hSwordIntersectedAreaX], a                               ; $53D5: $E0 $CE
@@ -2868,6 +2879,7 @@ func_002_53B0::
     or   e                                        ; $53E0: $B3
     ld   e, a                                     ; $53E1: $5F
     ld   d, $00                                   ; $53E2: $16 $00
+
     call label_2178                               ; $53E4: $CD $78 $21
     ldh  a, [hSwordIntersectedAreaX]                               ; $53E7: $F0 $CE
     add  $08                                      ; $53E9: $C6 $08
@@ -2877,12 +2889,16 @@ func_002_53B0::
     ldh  [hScratchB], a                               ; $53F1: $E0 $D8
     ld   a, $02                                   ; $53F3: $3E $02
     call label_CC7                                ; $53F5: $CD $C7 $0C
-    jp   label_002_541D                           ; $53F8: $C3 $1D $54
+    jp   .return                                  ; $53F8: $C3 $1D $54
 
-jr_002_53FB:
+.FFE8Equals40
+    ;
+    ; Unknown purpose
+    ;
+
     ld   a, $06                                   ; $53FB: $3E $06
     call label_3B86                               ; $53FD: $CD $86 $3B
-    jr   c, label_002_541D                        ; $5400: $38 $1B
+    jr   c, .return                               ; $5400: $38 $1B
 
     ld   hl, wEntitiesTypeTable                   ; $5402: $21 $80 $C2
     add  hl, de                                   ; $5405: $19
@@ -2900,13 +2916,13 @@ jr_002_53FB:
     add  hl, de                                   ; $541B: $19
     ld   [hl], a                                  ; $541C: $77
 
-label_002_541D::
+.return
     pop  de                                       ; $541D: $D1
     pop  bc                                       ; $541E: $C1
     ret                                           ; $541F: $C9
 
-label_002_5420::
-    ld   a, $04                                   ; $5420: $3E $04
+EnqueueDoorUnlockedSfx::
+    ld   a, SFX_DOOR_UNLOCKED                     ; $5420: $3E $04
     ldh  [hNextSFX], a                            ; $5422: $E0 $F4
     ret                                           ; $5424: $C9
 
@@ -3234,6 +3250,8 @@ jr_002_557F:
     inc  b                                        ; $55D9: $04
     inc  b                                        ; $55DA: $04
     db   $10                                      ; $55DB: $10
+
+
     ldh  a, [hFrameCounter]                       ; $55DC: $F0 $E7
     xor  c                                        ; $55DE: $A9
     and  $01                                      ; $55DF: $E6 $01
@@ -3328,7 +3346,7 @@ jr_002_565B:
     cp   $DE                                      ; $565B: $FE $DE
     jr   nz, jr_002_5664                          ; $565D: $20 $05
 
-    call label_002_5420                           ; $565F: $CD $20 $54
+    call EnqueueDoorUnlockedSfx                   ; $565F: $CD $20 $54
     ld   a, $DE                                   ; $5662: $3E $DE
 
 jr_002_5664:
@@ -3336,7 +3354,7 @@ jr_002_5664:
     jr   nz, jr_002_566D                          ; $5666: $20 $05
 
     ld   hl, hNextSFX                             ; $5668: $21 $F4 $FF
-    ld   [hl], $2A                                ; $566B: $36 $2A
+    ld   [hl], SFX_DOOR_RUMBLE                    ; $566B: $36 $2A
 
 jr_002_566D:
     cp   $0A                                      ; $566D: $FE $0A
@@ -4141,7 +4159,7 @@ jr_002_5B4C:
     jr   jr_002_5B4C                              ; $5B6D: $18 $DD
 
 jr_002_5B6F:
-    call func_002_5B9F                            ; $5B6F: $CD $9F $5B
+    call GetRoomStatusAddress                     ; $5B6F: $CD $9F $5B
     ld   c, l                                     ; $5B72: $4D
     ld   b, h                                     ; $5B73: $44
     ld   a, [$C189]                               ; $5B74: $FA $89 $C1
@@ -4171,33 +4189,38 @@ jr_002_5B6F:
     ld   [bc], a                                  ; $5B9D: $02
     ret                                           ; $5B9E: $C9
 
-func_002_5B9F::
-    ld   hl, wOverworldRoomStatus                        ; $5B9F: $21 $00 $D8
-    ldh  a, [hMapRoom]                           ; $5BA2: $F0 $F6
+; Retrieve the address of the status flags for the current room.
+; Returns the address in hl.
+GetRoomStatusAddress::
+    ld   hl, wOverworldRoomStatus                 ; $5B9F: $21 $00 $D8
+    ldh  a, [hMapRoom]                            ; $5BA2: $F0 $F6
     ld   e, a                                     ; $5BA4: $5F
-    ld   a, [wIsIndoor]                         ; $5BA5: $FA $A5 $DB
+
+    ; If is indoor…
+    ld   a, [wIsIndoor]                           ; $5BA5: $FA $A5 $DB
     ld   d, a                                     ; $5BA8: $57
     and  a                                        ; $5BA9: $A7
-    jr   z, jr_002_5BC2                           ; $5BAA: $28 $16
+    jr   z, .computeAddress                       ; $5BAA: $28 $16
 
-    ldh  a, [hMapId]                         ; $5BAC: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $5BAE: $FE $FF
-    jr   nz, jr_002_5BB9                          ; $5BB0: $20 $07
+    ; If is color dungeon…
+    ldh  a, [hMapId]                              ; $5BAC: $F0 $F7
+    cp   MAP_COLOR_DUNGEON                        ; $5BAE: $FE $FF
+    jr   nz, .regularDungeon                      ; $5BB0: $20 $07
 
     ld   d, $00                                   ; $5BB2: $16 $00
-    ld   hl, $DDE0                                ; $5BB4: $21 $E0 $DD
-    jr   jr_002_5BC2                              ; $5BB7: $18 $09
+    ld   hl, wColorDungeonRoomStatus              ; $5BB4: $21 $E0 $DD
+    jr   .computeAddress                          ; $5BB7: $18 $09
 
-jr_002_5BB9:
-    cp   $1A                                      ; $5BB9: $FE $1A
-    jr   nc, jr_002_5BC2                          ; $5BBB: $30 $05
-
+.regularDungeon
+    ; If map > $1A && map < 6…
+    cp   MAP_UNKNOWN_1A                           ; $5BB9: $FE $1A
+    jr   nc, .computeAddress                      ; $5BBB: $30 $05
     cp   $06                                      ; $5BBD: $FE $06
-    jr   c, jr_002_5BC2                           ; $5BBF: $38 $01
-
+    jr   c, .computeAddress                           ; $5BBF: $38 $01
+    ; d += 1
     inc  d                                        ; $5BC1: $14
 
-jr_002_5BC2:
+.computeAddress
     add  hl, de                                   ; $5BC2: $19
     ret                                           ; $5BC3: $C9
 
@@ -4591,7 +4614,7 @@ jr_002_5DC0:
 
 label_002_5DF6::
     call label_CC7                                ; $5DF6: $CD $C7 $0C
-    call func_002_5B9F                            ; $5DF9: $CD $9F $5B
+    call GetRoomStatusAddress                     ; $5DF9: $CD $9F $5B
     ld   a, [hl]                                  ; $5DFC: $7E
     or   $10                                      ; $5DFD: $F6 $10
     ld   [hl], a                                  ; $5DFF: $77
@@ -4605,7 +4628,7 @@ label_002_5E02::
     cp   $69                                      ; $5E08: $FE $69
     jr   nz, jr_002_5E15                          ; $5E0A: $20 $09
 
-    call func_002_5B9F                            ; $5E0C: $CD $9F $5B
+    call GetRoomStatusAddress                     ; $5E0C: $CD $9F $5B
     ld   a, [hl]                                  ; $5E0F: $7E
     or   $10                                      ; $5E10: $F6 $10
     ld   [hl], a                                  ; $5E12: $77
@@ -4682,7 +4705,7 @@ jr_002_5E6A:
     ld   [$C18E], a                               ; $5E70: $EA $8E $C1
     ld   a, $01                                   ; $5E73: $3E $01
     ld   [$C18C], a                               ; $5E75: $EA $8C $C1
-    jp   label_002_5420                           ; $5E78: $C3 $20 $54
+    jp   EnqueueDoorUnlockedSfx                   ; $5E78: $C3 $20 $54
 
 func_002_5E7B::
     ldh  a, [hLinkPositionX]                      ; $5E7B: $F0 $98
@@ -4704,7 +4727,7 @@ func_002_5E7B::
     ld   [$C190], a                               ; $5E96: $EA $90 $C1
     ld   a, $04                                   ; $5E99: $3E $04
     ld   [wC111], a                               ; $5E9B: $EA $11 $C1
-    ld   a, $10                                   ; $5E9E: $3E $10
+    ld   a, SFX_BOSS_AGONY                        ; $5E9E: $3E $10
     ldh  [hNextSFX], a                            ; $5EA0: $E0 $F4
 
 jr_002_5EA2:
@@ -5119,7 +5142,7 @@ jr_002_60BD:
 
     call label_C60                                ; $60C8: $CD $60 $0C
     call func_002_5DAF                            ; $60CB: $CD $AF $5D
-    call func_002_5B9F                            ; $60CE: $CD $9F $5B
+    call GetRoomStatusAddress                     ; $60CE: $CD $9F $5B
     ld   a, [hl]                                  ; $60D1: $7E
     or   $10                                      ; $60D2: $F6 $10
     ld   [hl], a                                  ; $60D4: $77
@@ -6114,7 +6137,7 @@ jr_002_6A94:
     and  a                                        ; $6A97: $A7
     jr   z, jr_002_6AAA                           ; $6A98: $28 $10
 
-    ld   a, $07                                   ; $6A9A: $3E $07
+    ld   a, SFX_FOOTSTEP                          ; $6A9A: $3E $07
     ldh  [hNextSFX], a                            ; $6A9C: $E0 $F4
     call label_CB6                                ; $6A9E: $CD $B6 $0C
     ld   [$C146], a                               ; $6AA1: $EA $46 $C1
@@ -7065,7 +7088,7 @@ jr_002_6FC6:
     jr   jr_002_6FD7                              ; $6FD2: $18 $03
 
 jr_002_6FD4:
-    call label_002_5420                           ; $6FD4: $CD $20 $54
+    call EnqueueDoorUnlockedSfx                   ; $6FD4: $CD $20 $54
 
 jr_002_6FD7:
     ld   a, $28                                   ; $6FD7: $3E $28
@@ -7279,12 +7302,12 @@ jr_002_7112:
     cp   $94                                      ; $711B: $FE $94
     jr   nc, jr_002_712C                          ; $711D: $30 $0D
 
-    ld   a, [$DBD0]                               ; $711F: $FA $D0 $DB
+    ld   a, [wSmallKeysCount]                               ; $711F: $FA $D0 $DB
     and  a                                        ; $7122: $A7
     jp   z, label_002_7277                        ; $7123: $CA $77 $72
 
     dec  a                                        ; $7126: $3D
-    ld   [$DBD0], a                               ; $7127: $EA $D0 $DB
+    ld   [wSmallKeysCount], a                               ; $7127: $EA $D0 $DB
     jr   jr_002_7147                              ; $712A: $18 $1B
 
 jr_002_712C:
@@ -7314,8 +7337,8 @@ jr_002_7147:
     ld   [$DBAC], a                               ; $714F: $EA $AC $DB
     inc  a                                        ; $7152: $3C
     ld   [$C188], a                               ; $7153: $EA $88 $C1
-    call label_2802                               ; $7156: $CD $02 $28
-    call label_002_5420                           ; $7159: $CD $20 $54
+    call SynchronizeDungeonsItemFlags_trampoline                               ; $7156: $CD $02 $28
+    call EnqueueDoorUnlockedSfx                   ; $7159: $CD $20 $54
     jp   label_002_7277                           ; $715C: $C3 $77 $72
 
 label_002_715F::
@@ -7559,7 +7582,7 @@ jr_002_72C3:
     cp   $DE                                      ; $72C3: $FE $DE
     jr   nz, jr_002_72D1                          ; $72C5: $20 $0A
 
-    ld   a, [$DBD0]                               ; $72C7: $FA $D0 $DB
+    ld   a, [wSmallKeysCount]                               ; $72C7: $FA $D0 $DB
     and  a                                        ; $72CA: $A7
     jr   nz, jr_002_72FA                          ; $72CB: $20 $2D
 
@@ -7683,7 +7706,7 @@ jr_002_734F:
     add  hl, de                                   ; $738D: $19
     ld   [hl], d                                  ; $738E: $72
     ld   hl, hNextSFX                             ; $738F: $21 $F4 $FF
-    ld   [hl], $09                                ; $7392: $36 $09
+    ld   [hl], SFX_CRISTAL_SMASHED                ; $7392: $36 $09
     ld   hl, wEntitiesUnknowTableF                ; $7394: $21 $F0 $C2
     add  hl, de                                   ; $7397: $19
     ld   [hl], $0F                                ; $7398: $36 $0F
@@ -7807,7 +7830,7 @@ jr_002_742F:
     ldh  [hFFE8], a                               ; $743A: $E0 $E8
     xor  a                                        ; $743C: $AF
     ld   [$C191], a                               ; $743D: $EA $91 $C1
-    call func_002_53B0                            ; $7440: $CD $B0 $53
+    call TryOpenLockedDoor                            ; $7440: $CD $B0 $53
     ld   a, [wIsIndoor]                         ; $7443: $FA $A5 $DB
     and  a                                        ; $7446: $A7
     jr   nz, label_002_7454                       ; $7447: $20 $0B
@@ -8422,7 +8445,7 @@ jr_002_77E9:
     and  a                                        ; $77EC: $A7
     jr   z, jr_002_77F7                           ; $77ED: $28 $08
 
-    ld   a, $07                                   ; $77EF: $3E $07
+    ld   a, SFX_FOOTSTEP                          ; $77EF: $3E $07
     ldh  [hNextSFX], a                            ; $77F1: $E0 $F4
     xor  a                                        ; $77F3: $AF
     ld   [$D6F9], a                               ; $77F4: $EA $F9 $D6

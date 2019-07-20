@@ -1801,7 +1801,7 @@ jr_003_51C9:
     or   e                                        ; $51E3: $B3
     ld   e, a                                     ; $51E4: $5F
     ld   d, $00                                   ; $51E5: $16 $00
-    ld   hl, $D711                                ; $51E7: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $51E7: $21 $11 $D7
     add  hl, de                                   ; $51EA: $19
     pop  af                                       ; $51EB: $F1
     ld   [hl], a                                  ; $51EC: $77
@@ -5676,7 +5676,7 @@ jr_003_6771:
     or   c                                        ; $679B: $B1
     ld   c, a                                     ; $679C: $4F
     ld   b, $00                                   ; $679D: $06 $00
-    ld   hl, $D711                                ; $679F: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $679F: $21 $11 $D7
     ld   a, h                                     ; $67A2: $7C
     add  hl, bc                                   ; $67A3: $09
     ld   h, a                                     ; $67A4: $67
@@ -5708,7 +5708,7 @@ jr_003_6771:
     ld   a, c                                     ; $67CF: $79
     and  $EE                                      ; $67D0: $E6 $EE
     ld   c, a                                     ; $67D2: $4F
-    ld   hl, $D711                                ; $67D3: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $67D3: $21 $11 $D7
     add  hl, bc                                   ; $67D6: $09
     ld   a, $09                                   ; $67D7: $3E $09
     ld   [hl+], a                                 ; $67D9: $22
@@ -5781,7 +5781,7 @@ jr_003_6828:
     ldh  a, [hFFE9]                               ; $6845: $F0 $E9
     ld   e, a                                     ; $6847: $5F
     ld   d, b                                     ; $6848: $50
-    ld   hl, $D711                                ; $6849: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $6849: $21 $11 $D7
     add  hl, de                                   ; $684C: $19
     ld   a, $E1                                   ; $684D: $3E $E1
     ld   [hl], a                                  ; $684F: $77
@@ -5868,7 +5868,7 @@ jr_003_68BE:
     or   e                                        ; $68C2: $B3
     ld   e, a                                     ; $68C3: $5F
     ld   d, $00                                   ; $68C4: $16 $00
-    ld   hl, $D711                                ; $68C6: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $68C6: $21 $11 $D7
     add  hl, de                                   ; $68C9: $19
     ld   e, l                                     ; $68CA: $5D
     ld   d, h                                     ; $68CB: $54
@@ -5925,7 +5925,7 @@ jr_003_690F:
     ldh  [hSwordIntersectedAreaY], a              ; $6914: $E0 $CD
     or   c                                        ; $6916: $B1
     ld   e, a                                     ; $6917: $5F
-    ld   hl, $D711                                ; $6918: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $6918: $21 $11 $D7
     add  hl, de                                   ; $691B: $19
     ld   a, h                                     ; $691C: $7C
     cp   $D7                                      ; $691D: $FE $D7
@@ -9127,7 +9127,7 @@ jr_003_7B13:
     ld   hl, hScratchB                            ; $7B24: $21 $D8 $FF
     or   [hl]                                     ; $7B27: $B6
     ld   c, a                                     ; $7B28: $4F
-    ld   hl, $D711                                ; $7B29: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $7B29: $21 $11 $D7
     ld   a, h                                     ; $7B2C: $7C
     add  hl, bc                                   ; $7B2D: $09
     ld   h, a                                     ; $7B2E: $67
@@ -9432,7 +9432,7 @@ func_003_7CAB::
     ld   c, a                                     ; $7CCB: $4F
     ldh  [hFFE9], a                               ; $7CCC: $E0 $E9
     ld   b, $00                                   ; $7CCE: $06 $00
-    ld   hl, $D711                                ; $7CD0: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $7CD0: $21 $11 $D7
     ld   a, h                                     ; $7CD3: $7C
     add  hl, bc                                   ; $7CD4: $09
     ld   h, a                                     ; $7CD5: $67
@@ -9676,7 +9676,7 @@ func_003_7E0E::
     or   c                                        ; $7E2C: $B1
     ld   c, a                                     ; $7E2D: $4F
     ld   b, $00                                   ; $7E2E: $06 $00
-    ld   hl, $D711                                ; $7E30: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $7E30: $21 $11 $D7
     ld   a, h                                     ; $7E33: $7C
     add  hl, bc                                   ; $7E34: $09
     ld   h, a                                     ; $7E35: $67

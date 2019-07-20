@@ -26,63 +26,63 @@ LoadRoomTemplate::
 
 RoomTemplateTopRightBottomLeftHandler::
     push bc                                       ; $48A1: $C5
-    ld   hl, $D711                                ; $48A2: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $48A2: $21 $11 $D7
     ld   bc, $4917                                ; $48A5: $01 $17 $49
     ld   de, $4938                                ; $48A8: $11 $38 $49
     jp   label_354B                               ; $48AB: $C3 $4B $35
 
 RoomTemplateRightBottomLeftHandler::
     push bc                                       ; $48AE: $C5
-    ld   hl, $D711                                ; $48AF: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $48AF: $21 $11 $D7
     ld   bc, $4958                                ; $48B2: $01 $58 $49
     ld   de, $4971                                ; $48B5: $11 $71 $49
     jp   label_354B                               ; $48B8: $C3 $4B $35
 
 RoomTemplateTopLeftBottomHandler::
     push bc                                       ; $48BB: $C5
-    ld   hl, $D711                                ; $48BC: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $48BC: $21 $11 $D7
     ld   bc, $4989                                ; $48BF: $01 $89 $49
     ld   de, $49A4                                ; $48C2: $11 $A4 $49
     jp   label_354B                               ; $48C5: $C3 $4B $35
 
 RoomTemplateLeftTopRightHandler::
     push bc                                       ; $48C8: $C5
-    ld   hl, $D711                                ; $48C9: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $48C9: $21 $11 $D7
     ld   bc, $49BE                                ; $48CC: $01 $BE $49
     ld   de, $49D7                                ; $48CF: $11 $D7 $49
     jp   label_354B                               ; $48D2: $C3 $4B $35
 
 RoomTemplateTopRightBottomHandler::
     push bc                                       ; $48D5: $C5
-    ld   hl, $D711                                ; $48D6: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $48D6: $21 $11 $D7
     ld   bc, $49EF                                ; $48D9: $01 $EF $49
     ld   de, $4A0A                                ; $48DC: $11 $0A $4A
     jp   label_354B                               ; $48DF: $C3 $4B $35
 
 RoomTemplateBottomLeftHandler::
     push bc                                       ; $48E2: $C5
-    ld   hl, $D711                                ; $48E3: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $48E3: $21 $11 $D7
     ld   bc, $4A24                                ; $48E6: $01 $24 $4A
     ld   de, $4A36                                ; $48E9: $11 $36 $4A
     jp   label_354B                               ; $48EC: $C3 $4B $35
 
 RoomTemplateBottomRightHandler::
     push bc                                       ; $48EF: $C5
-    ld   hl, $D711                                ; $48F0: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $48F0: $21 $11 $D7
     ld   bc, $4A47                                ; $48F3: $01 $47 $4A
     ld   de, $4A59                                ; $48F6: $11 $59 $4A
     jp   label_354B                               ; $48F9: $C3 $4B $35
 
 RoomTemplateTopRightHandler::
     push bc                                       ; $48FC: $C5
-    ld   hl, $D711                                ; $48FD: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $48FD: $21 $11 $D7
     ld   bc, $4A6A                                ; $4900: $01 $6A $4A
     ld   de, $4A7C                                ; $4903: $11 $7C $4A
     jp   label_354B                               ; $4906: $C3 $4B $35
 
 RoomTemplateTopLeftHandler::
     push bc                                       ; $4909: $C5
-    ld   hl, $D711                                ; $490A: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $490A: $21 $11 $D7
     ld   bc, $4A8D                                ; $490D: $01 $8D $4A
     ld   de, $4A9F                                ; $4910: $11 $9F $4A
     jp   label_354B                               ; $4913: $C3 $4B $35
@@ -2532,7 +2532,7 @@ jr_014_5502:
 jr_014_5525:
     ret                                           ; $5525: $C9
 
-    ld   hl, $D711                                ; $5526: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $5526: $21 $11 $D7
     add  hl, de                                   ; $5529: $19
     ldh  a, [hFFAF]                               ; $552A: $F0 $AF
     cp   $8E                                      ; $552C: $FE $8E
@@ -2924,7 +2924,7 @@ label_014_5743:
     jp   nz, label_014_57E1                       ; $5753: $C2 $E1 $57
 
 jr_014_5756:
-    ld   hl, $D711                                ; $5756: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $5756: $21 $11 $D7
     add  hl, de                                   ; $5759: $19
     push hl                                       ; $575A: $E5
     ldh  a, [hMapRoom]                            ; $575B: $F0 $F6
@@ -3008,7 +3008,7 @@ jr_014_5789:
     ret                                           ; $57E0: $C9
 
 label_014_57E1:
-    ld   hl, $D711                                ; $57E1: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $57E1: $21 $11 $D7
     add  hl, de                                   ; $57E4: $19
     ld   [hl], $E8                                ; $57E5: $36 $E8
     ld   a, $94                                   ; $57E7: $3E $94

@@ -813,10 +813,12 @@ wBGMapToLoad:: ; D6FF
 ; When loading a new room, room data is read and decoded into this
 ; area.
 wRoomObjectsArea:: ; D700
-  ds $100
+  ; First section is FF values padding…
+  ds $11
 
 ; Start of the actual map objects for the active room (ignoring the surrounding FF values)
-wRoomObjects equ $D711
+wRoomObjects:: ; D711
+  ds $EF
 
 ; World rooms status
 ; Each room is a byte combining ROOM_STATUS_* constants.

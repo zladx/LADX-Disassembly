@@ -2981,7 +2981,7 @@ jr_007_51AA:
     or   e                                        ; $51D5: $B3
     ld   e, a                                     ; $51D6: $5F
     ld   d, b                                     ; $51D7: $50
-    ld   hl, $D711                                ; $51D8: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $51D8: $21 $11 $D7
     add  hl, de                                   ; $51DB: $19
     ld   [hl], $0D                                ; $51DC: $36 $0D
     call label_2887                               ; $51DE: $CD $87 $28
@@ -3051,7 +3051,7 @@ jr_007_51F2:
     or   e                                        ; $5246: $B3
     ld   e, a                                     ; $5247: $5F
     ld   d, b                                     ; $5248: $50
-    ld   hl, $D711                                ; $5249: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $5249: $21 $11 $D7
     add  hl, de                                   ; $524C: $19
     ld   e, [hl]                                  ; $524D: $5E
     ld   d, $01                                   ; $524E: $16 $01
@@ -5965,7 +5965,7 @@ jr_007_625F:
     and  $80                                      ; $6284: $E6 $80
     jr   nz, jr_007_62D2                          ; $6286: $20 $4A
 
-    ld   hl, $D711                                ; $6288: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $6288: $21 $11 $D7
     add  hl, de                                   ; $628B: $19
     ld   [hl], $4D                                ; $628C: $36 $4D
     call label_2887                               ; $628E: $CD $87 $28
@@ -6015,7 +6015,7 @@ jr_007_62D1:
     ret                                           ; $62D1: $C9
 
 jr_007_62D2:
-    ld   hl, $D711                                ; $62D2: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $62D2: $21 $11 $D7
     add  hl, de                                   ; $62D5: $19
     ld   [hl], $04                                ; $62D6: $36 $04
     call label_2887                               ; $62D8: $CD $87 $28
@@ -7310,7 +7310,7 @@ label_007_69D0:
     ld   hl, $695B                                ; $6A08: $21 $5B $69
     add  hl, de                                   ; $6A0B: $19
     ld   e, [hl]                                  ; $6A0C: $5E
-    ld   hl, $D711                                ; $6A0D: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $6A0D: $21 $11 $D7
     add  hl, de                                   ; $6A10: $19
     ld   c, l                                     ; $6A11: $4D
     ld   b, h                                     ; $6A12: $44
@@ -8665,7 +8665,7 @@ jr_007_71B4:
     or   e                                        ; $7200: $B3
     ld   e, a                                     ; $7201: $5F
     ld   d, b                                     ; $7202: $50
-    ld   hl, $D711                                ; $7203: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $7203: $21 $11 $D7
     add  hl, de                                   ; $7206: $19
     ld   [hl], $91                                ; $7207: $36 $91
     call label_2887                               ; $7209: $CD $87 $28

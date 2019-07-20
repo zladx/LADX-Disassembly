@@ -1419,7 +1419,7 @@ func_020_4898:
     ldh  a, [hLinkPositionY]                      ; $48E4: $F0 $99
     ldh  [hScratchB], a                           ; $48E6: $E0 $D8
     call func_020_4874                            ; $48E8: $CD $74 $48
-    ld   hl, $D711                                ; $48EB: $21 $11 $D7
+    ld   hl, wRoomObjects                         ; $48EB: $21 $11 $D7
     add  hl, de                                   ; $48EE: $19
     ld   a, [hl]                                  ; $48EF: $7E
     cp   $53                                      ; $48F0: $FE $53
@@ -8722,7 +8722,7 @@ jr_020_6E2F:
     jr   jr_020_6E2F                              ; $6E3A: $18 $F3
 
 jr_020_6E3C:
-    ld   de, $D711                                ; $6E3C: $11 $11 $D7
+    ld   de, wRoomObjects                         ; $6E3C: $11 $11 $D7
 
 jr_020_6E3F:
     ld   bc, $000A                                ; $6E3F: $01 $0A $00

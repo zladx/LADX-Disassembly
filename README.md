@@ -97,3 +97,4 @@ Thanks to these people for contributing:
 * kemenaran - https://github.com/kemenaran
 * Drenn1 - https://github.com/Drenn1
 * Sanqui - https://github.com/Sanqui
+* Kyle McGuffin - https://github.com/kcmcg

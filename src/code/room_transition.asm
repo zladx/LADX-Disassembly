@@ -458,9 +458,9 @@ RoomTransitionPrepareHandler::
     ld   a, $01                                   ; $7AB4: $3E $01
     ldh  [hNeedsUpdatingBGTiles], a               ; $7AB6: $E0 $90
 
-    ; Copy some data
+    ; Replace objects $56 and $57 by object $0D
     ld   a, $02                                   ; $7AB8: $3E $02
-    call label_9F5                                ; $7ABA: $CD $F5 $09
+    call ReplaceObjects56and57_trampoline                                ; $7ABA: $CD $F5 $09
 .colorDungeonEnd
 
     call LoadRoomEntities                               ; $7ABD: $CD $FE $37

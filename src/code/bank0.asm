@@ -141,9 +141,7 @@ PlayAudioStep::
 ;
 
 label_8D7::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6A30
+    callsb func_020_6A30
 
 RestoreBankAndReturn::
     ld   a, [wCurrentBank]
@@ -151,36 +149,25 @@ RestoreBankAndReturn::
     ret
 
 label_8E6::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6AC1
+    callsb func_020_6AC1
     jr   RestoreBankAndReturn
 
 label_8F0::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6BA4
+    callsb func_020_6BA4
     jr   RestoreBankAndReturn
 
-; Call 20:6BDC, then switch back to bank 1
 ClearFileMenuBG_trampoline::
     push af
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6BDC
+    callsb func_020_6BDC
     jr   RestoreStackedBankAndReturn
 
 ; Load file menu background and palette, then switch back to bank 1
 LoadFileMenuBG_trampoline::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6C00
+    callsb LoadFileMenuBG
     jr   LoadBank1AndReturn
 
 label_90F::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6C24
+    callsb func_020_6C24
 
 LoadBank1AndReturn::
     ld   a, $01
@@ -251,9 +238,7 @@ RestoreStackedBankAndReturn::
 
 label_978::
     push af
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6D0E
+    callsb func_020_6D0E
     jr   RestoreStackedBankAndReturn
 
 ; Load palette data
@@ -316,37 +301,29 @@ label_999::
 
 label_9C8::
     push af
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4985
+    ; Will do stuff, and play JINGLE_PUZZLE_SOLVED
+    callsb func_020_4985
     jr   RestoreStackedBankAndReturn
 
 label_9D3::
     push af
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4518
+    ; Will lookup something in an entity id table
+    callsb func_020_4518
     jr   RestoreStackedBankAndReturn
 
 label_9DE::
     push af
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4874
+    callsb func_020_4874
     jr   RestoreStackedBankAndReturn
 
 label_9E9::
     push af
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call label_4954
+    callsb func_020_4954
     jp   RestoreStackedBankAndReturn
 
-label_9F5::
+ReplaceObjects56and57_trampoline::
     push af
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $482D
+    callsb ReplaceObjects56and57
     jp   RestoreStackedBankAndReturn
 
 ;
@@ -939,11 +916,11 @@ LoadRoomSprites::
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
-    ld   hl, $6EB3
+    ld   hl, data_020_6EB3
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .label_D3C
-    ld   hl, $70B3
+    ld   hl, data_020_70B3
     jr   .label_D45
 
 .label_D3C
@@ -991,7 +968,7 @@ LoadRoomSprites::
     or   e
     ld   e, a
     ld   d, $00
-    ld   hl, $6E73
+    ld   hl, data_020_6E73
     add  hl, de
     ldh  a, [$FF94]
     ld   e, a
@@ -1279,9 +1256,7 @@ WorldHandler::
     jpsw WorldHandlerEntryPoint
 
 InventoryHandler::
-    ld   a, $20
-    call SwitchBank
-    jp   $5904
+    jpsw InventoryEntryPoint
 
 PhotoAlbumHandler::
     ld   a, $28
@@ -1383,9 +1358,8 @@ WorldDefaultHandler::
 
     ld   a, [$C15C]
     ld   [$C3CF], a
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4B1F
+
+    callsb func_20_4B1F
 
     ld   a, $19
     call SwitchBank
@@ -1416,9 +1390,7 @@ label_1006::
     dec  e
 
 label_100A::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call label_5C9C
+    callsb func_020_5C9C
 
 label_1012::
     ld   a, $14
@@ -1644,7 +1616,7 @@ LinkMotionInteractiveHandler::
     jr   nz, label_11BA
 
 label_11A5::
-    call label_1340
+    call func_1340
     jr   label_11BA
 
 label_11AA::
@@ -1729,7 +1701,7 @@ label_1214::
     jr   z, label_1235
     cp   $02
     jr   z, label_1235
-    call label_1340
+    call func_1340
 
 label_1235::
     ld   a, [wAButtonSlot]
@@ -1740,7 +1712,7 @@ label_1235::
     ldh  a, [hPressedButtonsMask]
     and  $20
     jr   z, label_124B
-    call label_1340
+    call func_1340
 
 label_124B::
     ldh  a, [$FFCC]
@@ -1779,9 +1751,8 @@ label_1281::
     call label_1321
 
 label_128D::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $48CA
+    ; Special code for the Color Dungeon
+    callsb func_020_48CA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1829,7 +1800,7 @@ UseShield::
     ld   a, [$C144]
     and  a
     ret  nz
-    ld   a, $16
+    ld   a, SFX_DRAW_SHIELD
     ldh  [hNextSFX], a
     ret
 
@@ -1882,14 +1853,12 @@ label_1321::
     ld   [$C5B0], a
     ret
 
-label_1340::
+func_1340::
     ld   a, $01
     ld   [wIsUsingShield], a
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4B4A
+    callsb func_020_4B4A
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1907,9 +1876,9 @@ PlaceBomb::
     ld   a, $02
     call label_142F
     ret  c
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4B81
+
+func_1373::
+    callsb func_020_4B81
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1926,9 +1895,7 @@ label_1387::
     ld   a, $01
     call label_142F
     ret  c
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4BFF
+    callsb func_020_4BFF
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret

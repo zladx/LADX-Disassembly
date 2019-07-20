@@ -25,9 +25,17 @@ This repository produces a valid Zelda DX ROM from several different inputs:
 - Bank 0: disassembled, 35% documented
 - Bank 1: disassembled, 50% documented
 - Bank 2: disassembled, 20% documented
-- Bank 3: disassembled
-- Bank 4: disassembled
+- Bank 3: disassembled, 10% documented
+- Bank 4: disassembled, 10% documented
+- Bank 5: disassembled, 10% documented
+- Bank 7: disassembled, 10% documented
+- Bank 9: 100% disassembled ✅
+- Bank 0A: 100% disassembled ✅
+- Bank 0B: 100% disassembled ✅
+- Bank 0C-13: graphics, 100% disassembled ✅
+- Bank 14: disassembled, 50% documented
 - Other banks: not disassembled yet
+
 - Memory: 20% documented
 - Dialogs: extracted, 100%
 - Graphics: extracted, 100%
@@ -36,7 +44,8 @@ This repository produces a valid Zelda DX ROM from several different inputs:
   - minimaps: extracted, 100%
   - layouts: extracted, 100%
   - blocks : extracted, further formatting work needed
-- Wrap data, Chest data, Palettes: not extracted
+- Entities data: extracted, not documented
+- Warp data, Chest data, Palettes: not extracted
 - Music: not extracted
 
 ## How to label code

@@ -110,9 +110,10 @@ incbin "gfx/items/items_3.dmg.2bpp"
 section "bank13",romx[$4000],bank[$13]
 incbin "gfx/ending/ending.dmg.2bpp"
 
-section "bank14_layouts",romx[$4220], BANK[$14]
+section "bank14",romx[$4000],bank[$14]
+include "data/events/dungeons.asm"
 include "data/maps/layouts.asm"
-section "bank14_dialog",romx[$5934], BANK[$14]
+include "code/bank14.asm"
 include "text/dialog.asm"
 
 ; Bank $16: contains sprite data for overworld

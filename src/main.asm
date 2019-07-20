@@ -113,6 +113,7 @@ incbin "gfx/ending/ending.dmg.2bpp"
 section "bank14",romx[$4000],bank[$14]
 include "data/events/dungeons.asm"
 include "data/maps/layouts.asm"
+include "data/chests/dungeons.asm"
 include "code/bank14.asm"
 include "text/dialog.asm"
 

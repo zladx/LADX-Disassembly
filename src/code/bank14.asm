@@ -2,880 +2,92 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-; Unknown data
-    nop                                           ; $4560: $00
-    nop                                           ; $4561: $00
-    nop                                           ; $4562: $00
-    nop                                           ; $4563: $00
-    dec  de                                       ; $4564: $1B
-    nop                                           ; $4565: $00
-    nop                                           ; $4566: $00
-    dec  de                                       ; $4567: $1B
-    nop                                           ; $4568: $00
-    nop                                           ; $4569: $00
-    nop                                           ; $456A: $00
-    nop                                           ; $456B: $00
-    nop                                           ; $456C: $00
-    nop                                           ; $456D: $00
-    nop                                           ; $456E: $00
-    nop                                           ; $456F: $00
-    nop                                           ; $4570: $00
-    nop                                           ; $4571: $00
-    nop                                           ; $4572: $00
-    nop                                           ; $4573: $00
-    nop                                           ; $4574: $00
-    nop                                           ; $4575: $00
-    nop                                           ; $4576: $00
-    nop                                           ; $4577: $00
-    dec  de                                       ; $4578: $1B
-    dec  e                                        ; $4579: $1D
-    nop                                           ; $457A: $00
-    nop                                           ; $457B: $00
-    nop                                           ; $457C: $00
-    jr   nz, jr_014_457F                          ; $457D: $20 $00
+; Load the template for an indoor room
+; Inputs:
+;   a: the template to use (see ROOM_TEMPLATE_* constants)
+LoadRoomTemplate::
+    JP_TABLE                                      ; $4880: $C7
+._00 dw RoomTemplateTopRightBottomLeftHandler
+._01 dw RoomTemplateRightBottomLeftHandler
+._02 dw RoomTemplateTopLeftBottomHandler
+._03 dw RoomTemplateLeftTopRightHandler
+._04 dw RoomTemplateTopRightBottomHandler
+._05 dw RoomTemplateBottomLeftHandler
+._06 dw RoomTemplateBottomRightHandler
+._07 dw RoomTemplateTopRightHandler
+._08 dw RoomTemplateTopLeftHandler
+._09 dw RoomTemplatNotImplementedHandler
+._0A dw RoomTemplatNotImplementedHandler
+._0B dw RoomTemplatNotImplementedHandler
+._0C dw RoomTemplatNotImplementedHandler
+._0D dw RoomTemplatNotImplementedHandler
+._0E dw RoomTemplatNotImplementedHandler
+._0F dw RoomTemplatNotImplementedHandler
 
-jr_014_457F:
-    nop                                           ; $457F: $00
-    nop                                           ; $4580: $00
-    nop                                           ; $4581: $00
-    nop                                           ; $4582: $00
-    nop                                           ; $4583: $00
-    nop                                           ; $4584: $00
-    nop                                           ; $4585: $00
-    nop                                           ; $4586: $00
-    nop                                           ; $4587: $00
-    nop                                           ; $4588: $00
-    nop                                           ; $4589: $00
-    nop                                           ; $458A: $00
-    nop                                           ; $458B: $00
-    nop                                           ; $458C: $00
-    nop                                           ; $458D: $00
-    nop                                           ; $458E: $00
-    nop                                           ; $458F: $00
-    nop                                           ; $4590: $00
-    nop                                           ; $4591: $00
-    nop                                           ; $4592: $00
-    nop                                           ; $4593: $00
-    dec  de                                       ; $4594: $1B
-    nop                                           ; $4595: $00
-    nop                                           ; $4596: $00
-    nop                                           ; $4597: $00
-    nop                                           ; $4598: $00
-    nop                                           ; $4599: $00
-    nop                                           ; $459A: $00
-    nop                                           ; $459B: $00
-    nop                                           ; $459C: $00
-    nop                                           ; $459D: $00
-    nop                                           ; $459E: $00
-    nop                                           ; $459F: $00
-    nop                                           ; $45A0: $00
-    ld   de, $0000                                ; $45A1: $11 $00 $00
-    nop                                           ; $45A4: $00
-    nop                                           ; $45A5: $00
-    nop                                           ; $45A6: $00
-    nop                                           ; $45A7: $00
-    nop                                           ; $45A8: $00
-    nop                                           ; $45A9: $00
-    nop                                           ; $45AA: $00
-    nop                                           ; $45AB: $00
-    nop                                           ; $45AC: $00
-    nop                                           ; $45AD: $00
-    nop                                           ; $45AE: $00
-    nop                                           ; $45AF: $00
-    nop                                           ; $45B0: $00
-    nop                                           ; $45B1: $00
-    nop                                           ; $45B2: $00
-    nop                                           ; $45B3: $00
-    nop                                           ; $45B4: $00
-    nop                                           ; $45B5: $00
-    nop                                           ; $45B6: $00
-    nop                                           ; $45B7: $00
-    nop                                           ; $45B8: $00
-    nop                                           ; $45B9: $00
-    nop                                           ; $45BA: $00
-    nop                                           ; $45BB: $00
-    inc  e                                        ; $45BC: $1C
-    inc  e                                        ; $45BD: $1C
-    nop                                           ; $45BE: $00
-    nop                                           ; $45BF: $00
-    nop                                           ; $45C0: $00
-    nop                                           ; $45C1: $00
-    nop                                           ; $45C2: $00
-    nop                                           ; $45C3: $00
-    nop                                           ; $45C4: $00
-    nop                                           ; $45C5: $00
-    nop                                           ; $45C6: $00
-    nop                                           ; $45C7: $00
-    nop                                           ; $45C8: $00
-    nop                                           ; $45C9: $00
-    nop                                           ; $45CA: $00
-    nop                                           ; $45CB: $00
-    jr   nz, jr_014_45CE                          ; $45CC: $20 $00
-
-jr_014_45CE:
-    nop                                           ; $45CE: $00
-    nop                                           ; $45CF: $00
-    nop                                           ; $45D0: $00
-    jr   nz, jr_014_45D3                          ; $45D1: $20 $00
-
-jr_014_45D3:
-    nop                                           ; $45D3: $00
-    nop                                           ; $45D4: $00
-    nop                                           ; $45D5: $00
-    nop                                           ; $45D6: $00
-    nop                                           ; $45D7: $00
-    nop                                           ; $45D8: $00
-    nop                                           ; $45D9: $00
-    nop                                           ; $45DA: $00
-    nop                                           ; $45DB: $00
-    nop                                           ; $45DC: $00
-    nop                                           ; $45DD: $00
-    nop                                           ; $45DE: $00
-    nop                                           ; $45DF: $00
-    nop                                           ; $45E0: $00
-    nop                                           ; $45E1: $00
-    nop                                           ; $45E2: $00
-    nop                                           ; $45E3: $00
-    nop                                           ; $45E4: $00
-    nop                                           ; $45E5: $00
-    nop                                           ; $45E6: $00
-    nop                                           ; $45E7: $00
-    nop                                           ; $45E8: $00
-    nop                                           ; $45E9: $00
-    nop                                           ; $45EA: $00
-    nop                                           ; $45EB: $00
-    nop                                           ; $45EC: $00
-    nop                                           ; $45ED: $00
-    nop                                           ; $45EE: $00
-    nop                                           ; $45EF: $00
-    nop                                           ; $45F0: $00
-    nop                                           ; $45F1: $00
-    nop                                           ; $45F2: $00
-    nop                                           ; $45F3: $00
-    nop                                           ; $45F4: $00
-    nop                                           ; $45F5: $00
-    nop                                           ; $45F6: $00
-    nop                                           ; $45F7: $00
-    nop                                           ; $45F8: $00
-    nop                                           ; $45F9: $00
-    nop                                           ; $45FA: $00
-    nop                                           ; $45FB: $00
-    nop                                           ; $45FC: $00
-    nop                                           ; $45FD: $00
-    nop                                           ; $45FE: $00
-    nop                                           ; $45FF: $00
-    nop                                           ; $4600: $00
-    nop                                           ; $4601: $00
-    nop                                           ; $4602: $00
-    nop                                           ; $4603: $00
-    nop                                           ; $4604: $00
-    nop                                           ; $4605: $00
-    nop                                           ; $4606: $00
-    nop                                           ; $4607: $00
-    nop                                           ; $4608: $00
-    nop                                           ; $4609: $00
-    nop                                           ; $460A: $00
-    nop                                           ; $460B: $00
-    nop                                           ; $460C: $00
-    nop                                           ; $460D: $00
-    nop                                           ; $460E: $00
-    nop                                           ; $460F: $00
-    nop                                           ; $4610: $00
-    nop                                           ; $4611: $00
-    nop                                           ; $4612: $00
-    nop                                           ; $4613: $00
-    nop                                           ; $4614: $00
-    nop                                           ; $4615: $00
-    nop                                           ; $4616: $00
-    nop                                           ; $4617: $00
-    nop                                           ; $4618: $00
-    nop                                           ; $4619: $00
-    nop                                           ; $461A: $00
-    nop                                           ; $461B: $00
-    nop                                           ; $461C: $00
-    nop                                           ; $461D: $00
-    nop                                           ; $461E: $00
-    nop                                           ; $461F: $00
-    nop                                           ; $4620: $00
-    nop                                           ; $4621: $00
-    nop                                           ; $4622: $00
-    nop                                           ; $4623: $00
-    nop                                           ; $4624: $00
-    nop                                           ; $4625: $00
-    nop                                           ; $4626: $00
-    nop                                           ; $4627: $00
-    nop                                           ; $4628: $00
-    nop                                           ; $4629: $00
-    nop                                           ; $462A: $00
-    nop                                           ; $462B: $00
-    nop                                           ; $462C: $00
-    nop                                           ; $462D: $00
-    nop                                           ; $462E: $00
-    nop                                           ; $462F: $00
-    nop                                           ; $4630: $00
-    nop                                           ; $4631: $00
-    nop                                           ; $4632: $00
-    nop                                           ; $4633: $00
-    nop                                           ; $4634: $00
-    nop                                           ; $4635: $00
-    nop                                           ; $4636: $00
-    nop                                           ; $4637: $00
-    nop                                           ; $4638: $00
-    nop                                           ; $4639: $00
-    nop                                           ; $463A: $00
-    nop                                           ; $463B: $00
-    nop                                           ; $463C: $00
-    nop                                           ; $463D: $00
-    nop                                           ; $463E: $00
-    nop                                           ; $463F: $00
-    nop                                           ; $4640: $00
-    nop                                           ; $4641: $00
-    nop                                           ; $4642: $00
-    nop                                           ; $4643: $00
-    nop                                           ; $4644: $00
-    dec  de                                       ; $4645: $1B
-    nop                                           ; $4646: $00
-    nop                                           ; $4647: $00
-    nop                                           ; $4648: $00
-    nop                                           ; $4649: $00
-    nop                                           ; $464A: $00
-    nop                                           ; $464B: $00
-    nop                                           ; $464C: $00
-    nop                                           ; $464D: $00
-    nop                                           ; $464E: $00
-    nop                                           ; $464F: $00
-    nop                                           ; $4650: $00
-    nop                                           ; $4651: $00
-    nop                                           ; $4652: $00
-    nop                                           ; $4653: $00
-    nop                                           ; $4654: $00
-    nop                                           ; $4655: $00
-    nop                                           ; $4656: $00
-    nop                                           ; $4657: $00
-    nop                                           ; $4658: $00
-    nop                                           ; $4659: $00
-    nop                                           ; $465A: $00
-    nop                                           ; $465B: $00
-    nop                                           ; $465C: $00
-    nop                                           ; $465D: $00
-    nop                                           ; $465E: $00
-    nop                                           ; $465F: $00
-    nop                                           ; $4660: $00
-    nop                                           ; $4661: $00
-    nop                                           ; $4662: $00
-    nop                                           ; $4663: $00
-    nop                                           ; $4664: $00
-    nop                                           ; $4665: $00
-    nop                                           ; $4666: $00
-    nop                                           ; $4667: $00
-    add  hl, de                                   ; $4668: $19
-    nop                                           ; $4669: $00
-    jr   jr_014_466C                              ; $466A: $18 $00
-
-jr_014_466C:
-    jr   nz, jr_014_468A                          ; $466C: $20 $1C
-
-    ld   a, [de]                                  ; $466E: $1A
-    nop                                           ; $466F: $00
-    nop                                           ; $4670: $00
-    nop                                           ; $4671: $00
-    nop                                           ; $4672: $00
-    ld   a, [de]                                  ; $4673: $1A
-    ld   d, $17                                   ; $4674: $16 $17
-    ld   a, [de]                                  ; $4676: $1A
-    nop                                           ; $4677: $00
-    nop                                           ; $4678: $00
-    nop                                           ; $4679: $00
-    nop                                           ; $467A: $00
-    nop                                           ; $467B: $00
-    nop                                           ; $467C: $00
-    rlca                                          ; $467D: $07
-    nop                                           ; $467E: $00
-    nop                                           ; $467F: $00
-    nop                                           ; $4680: $00
-    inc  e                                        ; $4681: $1C
-    ld   a, [de]                                  ; $4682: $1A
-    nop                                           ; $4683: $00
-    nop                                           ; $4684: $00
-    nop                                           ; $4685: $00
-    ld   d, $19                                   ; $4686: $16 $19
-    nop                                           ; $4688: $00
-    nop                                           ; $4689: $00
-
-jr_014_468A:
-    nop                                           ; $468A: $00
-    nop                                           ; $468B: $00
-    nop                                           ; $468C: $00
-    nop                                           ; $468D: $00
-    jr   jr_014_4690                              ; $468E: $18 $00
-
-jr_014_4690:
-    nop                                           ; $4690: $00
-    nop                                           ; $4691: $00
-    nop                                           ; $4692: $00
-    nop                                           ; $4693: $00
-    nop                                           ; $4694: $00
-    nop                                           ; $4695: $00
-    dec  de                                       ; $4696: $1B
-    rla                                           ; $4697: $17
-    ld   a, [de]                                  ; $4698: $1A
-    ld   a, [de]                                  ; $4699: $1A
-    nop                                           ; $469A: $00
-    nop                                           ; $469B: $00
-    nop                                           ; $469C: $00
-    nop                                           ; $469D: $00
-    nop                                           ; $469E: $00
-    nop                                           ; $469F: $00
-    nop                                           ; $46A0: $00
-    nop                                           ; $46A1: $00
-    rla                                           ; $46A2: $17
-    nop                                           ; $46A3: $00
-    dec  de                                       ; $46A4: $1B
-    nop                                           ; $46A5: $00
-    dec  b                                        ; $46A6: $05
-    add  hl, de                                   ; $46A7: $19
-    nop                                           ; $46A8: $00
-    nop                                           ; $46A9: $00
-    nop                                           ; $46AA: $00
-    nop                                           ; $46AB: $00
-    jr   jr_014_46AE                              ; $46AC: $18 $00
-
-jr_014_46AE:
-    ld   e, $22                                   ; $46AE: $1E $22
-    ld   d, $1A                                   ; $46B0: $16 $1A
-    nop                                           ; $46B2: $00
-    ld   a, [de]                                  ; $46B3: $1A
-    ld   a, [de]                                  ; $46B4: $1A
-    ld   a, [de]                                  ; $46B5: $1A
-    nop                                           ; $46B6: $00
-    nop                                           ; $46B7: $00
-    nop                                           ; $46B8: $00
-    nop                                           ; $46B9: $00
-    nop                                           ; $46BA: $00
-    nop                                           ; $46BB: $00
-    nop                                           ; $46BC: $00
-    nop                                           ; $46BD: $00
-    nop                                           ; $46BE: $00
-    nop                                           ; $46BF: $00
-    inc  c                                        ; $46C0: $0C
-    nop                                           ; $46C1: $00
-    nop                                           ; $46C2: $00
-    nop                                           ; $46C3: $00
-    nop                                           ; $46C4: $00
-    ld   a, [de]                                  ; $46C5: $1A
-    nop                                           ; $46C6: $00
-    nop                                           ; $46C7: $00
-    ld   a, [de]                                  ; $46C8: $1A
-    ld   a, [de]                                  ; $46C9: $1A
-    ld   d, $00                                   ; $46CA: $16 $00
-    nop                                           ; $46CC: $00
-    ld   [hl+], a                                 ; $46CD: $22
-    dec  de                                       ; $46CE: $1B
-    nop                                           ; $46CF: $00
-    nop                                           ; $46D0: $00
-    ld   a, [de]                                  ; $46D1: $1A
-    nop                                           ; $46D2: $00
-    nop                                           ; $46D3: $00
-    nop                                           ; $46D4: $00
-    dec  de                                       ; $46D5: $1B
-    add  hl, de                                   ; $46D6: $19
-    nop                                           ; $46D7: $00
-    rla                                           ; $46D8: $17
-    jr   jr_014_46DB                              ; $46D9: $18 $00
-
-jr_014_46DB:
-    ld   a, [de]                                  ; $46DB: $1A
-    nop                                           ; $46DC: $00
-    nop                                           ; $46DD: $00
-    nop                                           ; $46DE: $00
-    nop                                           ; $46DF: $00
-    nop                                           ; $46E0: $00
-    nop                                           ; $46E1: $00
-    nop                                           ; $46E2: $00
-    ld   d, $00                                   ; $46E3: $16 $00
-    nop                                           ; $46E5: $00
-    add  hl, de                                   ; $46E6: $19
-    nop                                           ; $46E7: $00
-    dec  de                                       ; $46E8: $1B
-    nop                                           ; $46E9: $00
-    nop                                           ; $46EA: $00
-    nop                                           ; $46EB: $00
-    nop                                           ; $46EC: $00
-    nop                                           ; $46ED: $00
-    dec  de                                       ; $46EE: $1B
-    ld   a, [de]                                  ; $46EF: $1A
-    nop                                           ; $46F0: $00
-    nop                                           ; $46F1: $00
-    nop                                           ; $46F2: $00
-    nop                                           ; $46F3: $00
-    nop                                           ; $46F4: $00
-    nop                                           ; $46F5: $00
-    ld   hl, $001A                                ; $46F6: $21 $1A $00
-    nop                                           ; $46F9: $00
-    nop                                           ; $46FA: $00
-    jr   jr_014_46FD                              ; $46FB: $18 $00
-
-jr_014_46FD:
-    nop                                           ; $46FD: $00
-    rla                                           ; $46FE: $17
-    nop                                           ; $46FF: $00
-    ld   e, $00                                   ; $4700: $1E $00
-    nop                                           ; $4702: $00
-    nop                                           ; $4703: $00
-    nop                                           ; $4704: $00
-    nop                                           ; $4705: $00
-    nop                                           ; $4706: $00
-    nop                                           ; $4707: $00
-    nop                                           ; $4708: $00
-    nop                                           ; $4709: $00
-    nop                                           ; $470A: $00
-    nop                                           ; $470B: $00
-    nop                                           ; $470C: $00
-    nop                                           ; $470D: $00
-    nop                                           ; $470E: $00
-    nop                                           ; $470F: $00
-    dec  e                                        ; $4710: $1D
-    ld   e, $00                                   ; $4711: $1E $00
-    rla                                           ; $4713: $17
-    nop                                           ; $4714: $00
-    nop                                           ; $4715: $00
-    add  hl, de                                   ; $4716: $19
-    nop                                           ; $4717: $00
-    nop                                           ; $4718: $00
-    jr   jr_014_471B                              ; $4719: $18 $00
-
-jr_014_471B:
-    nop                                           ; $471B: $00
-    nop                                           ; $471C: $00
-    nop                                           ; $471D: $00
-    ld   a, [de]                                  ; $471E: $1A
-    nop                                           ; $471F: $00
-    ld   d, $00                                   ; $4720: $16 $00
-    nop                                           ; $4722: $00
-    nop                                           ; $4723: $00
-    nop                                           ; $4724: $00
-    nop                                           ; $4725: $00
-    nop                                           ; $4726: $00
-    nop                                           ; $4727: $00
-    nop                                           ; $4728: $00
-    dec  e                                        ; $4729: $1D
-    nop                                           ; $472A: $00
-    nop                                           ; $472B: $00
-    nop                                           ; $472C: $00
-    nop                                           ; $472D: $00
-    nop                                           ; $472E: $00
-    dec  de                                       ; $472F: $1B
-    nop                                           ; $4730: $00
-    stop                                          ; $4731: $10 $00
-    nop                                           ; $4733: $00
-    nop                                           ; $4734: $00
-    nop                                           ; $4735: $00
-    nop                                           ; $4736: $00
-    dec  de                                       ; $4737: $1B
-    nop                                           ; $4738: $00
-    nop                                           ; $4739: $00
-    nop                                           ; $473A: $00
-    nop                                           ; $473B: $00
-    nop                                           ; $473C: $00
-    nop                                           ; $473D: $00
-    nop                                           ; $473E: $00
-    nop                                           ; $473F: $00
-    nop                                           ; $4740: $00
-    nop                                           ; $4741: $00
-    nop                                           ; $4742: $00
-    nop                                           ; $4743: $00
-    nop                                           ; $4744: $00
-    nop                                           ; $4745: $00
-    nop                                           ; $4746: $00
-    nop                                           ; $4747: $00
-    nop                                           ; $4748: $00
-    nop                                           ; $4749: $00
-    nop                                           ; $474A: $00
-    nop                                           ; $474B: $00
-    nop                                           ; $474C: $00
-    nop                                           ; $474D: $00
-    nop                                           ; $474E: $00
-    nop                                           ; $474F: $00
-    nop                                           ; $4750: $00
-    nop                                           ; $4751: $00
-    nop                                           ; $4752: $00
-    nop                                           ; $4753: $00
-    nop                                           ; $4754: $00
-    nop                                           ; $4755: $00
-    nop                                           ; $4756: $00
-    nop                                           ; $4757: $00
-    nop                                           ; $4758: $00
-    nop                                           ; $4759: $00
-    nop                                           ; $475A: $00
-    nop                                           ; $475B: $00
-    ld   e, $20                                   ; $475C: $1E $20
-    nop                                           ; $475E: $00
-    nop                                           ; $475F: $00
-    nop                                           ; $4760: $00
-    jr   nz, jr_014_4763                          ; $4761: $20 $00
-
-jr_014_4763:
-    nop                                           ; $4763: $00
-    ld   a, [de]                                  ; $4764: $1A
-    nop                                           ; $4765: $00
-    nop                                           ; $4766: $00
-    nop                                           ; $4767: $00
-    nop                                           ; $4768: $00
-    jr   jr_014_476B                              ; $4769: $18 $00
-
-jr_014_476B:
-    nop                                           ; $476B: $00
-    nop                                           ; $476C: $00
-    nop                                           ; $476D: $00
-    nop                                           ; $476E: $00
-    nop                                           ; $476F: $00
-    nop                                           ; $4770: $00
-    rla                                           ; $4771: $17
-    ld   d, $00                                   ; $4772: $16 $00
-    nop                                           ; $4774: $00
-    nop                                           ; $4775: $00
-    nop                                           ; $4776: $00
-    nop                                           ; $4777: $00
-    nop                                           ; $4778: $00
-    nop                                           ; $4779: $00
-    ld   bc, $0A00                                ; $477A: $01 $00 $0A
-    nop                                           ; $477D: $00
-    nop                                           ; $477E: $00
-    nop                                           ; $477F: $00
-    stop                                          ; $4780: $10 $00
-    nop                                           ; $4782: $00
-    nop                                           ; $4783: $00
-    add  hl, de                                   ; $4784: $19
-    nop                                           ; $4785: $00
-    nop                                           ; $4786: $00
-    nop                                           ; $4787: $00
-    nop                                           ; $4788: $00
-    nop                                           ; $4789: $00
-    nop                                           ; $478A: $00
-    nop                                           ; $478B: $00
-    nop                                           ; $478C: $00
-    nop                                           ; $478D: $00
-    nop                                           ; $478E: $00
-    nop                                           ; $478F: $00
-    nop                                           ; $4790: $00
-    nop                                           ; $4791: $00
-    add  hl, de                                   ; $4792: $19
-    nop                                           ; $4793: $00
-    nop                                           ; $4794: $00
-    stop                                          ; $4795: $10 $00
-    inc  b                                        ; $4797: $04
-    nop                                           ; $4798: $00
-    nop                                           ; $4799: $00
-    dec  de                                       ; $479A: $1B
-    nop                                           ; $479B: $00
-    nop                                           ; $479C: $00
-    ld   a, [de]                                  ; $479D: $1A
-    nop                                           ; $479E: $00
-    nop                                           ; $479F: $00
-    ld   a, [de]                                  ; $47A0: $1A
-    nop                                           ; $47A1: $00
-    nop                                           ; $47A2: $00
-    nop                                           ; $47A3: $00
-    nop                                           ; $47A4: $00
-    nop                                           ; $47A5: $00
-    ld   a, [de]                                  ; $47A6: $1A
-    nop                                           ; $47A7: $00
-    nop                                           ; $47A8: $00
-    nop                                           ; $47A9: $00
-    nop                                           ; $47AA: $00
-    nop                                           ; $47AB: $00
-    nop                                           ; $47AC: $00
-    inc  e                                        ; $47AD: $1C
-    nop                                           ; $47AE: $00
-    ld   d, $00                                   ; $47AF: $16 $00
-    nop                                           ; $47B1: $00
-    nop                                           ; $47B2: $00
-    nop                                           ; $47B3: $00
-    nop                                           ; $47B4: $00
-    dec  de                                       ; $47B5: $1B
-    nop                                           ; $47B6: $00
-    nop                                           ; $47B7: $00
-    nop                                           ; $47B8: $00
-    ld   [hl+], a                                 ; $47B9: $22
-    nop                                           ; $47BA: $00
-    nop                                           ; $47BB: $00
-    rla                                           ; $47BC: $17
-    nop                                           ; $47BD: $00
-    nop                                           ; $47BE: $00
-    jr   jr_014_47C1                              ; $47BF: $18 $00
-
-jr_014_47C1:
-    nop                                           ; $47C1: $00
-    nop                                           ; $47C2: $00
-    nop                                           ; $47C3: $00
-    nop                                           ; $47C4: $00
-    nop                                           ; $47C5: $00
-    nop                                           ; $47C6: $00
-    nop                                           ; $47C7: $00
-    nop                                           ; $47C8: $00
-    nop                                           ; $47C9: $00
-    nop                                           ; $47CA: $00
-    nop                                           ; $47CB: $00
-    nop                                           ; $47CC: $00
-    nop                                           ; $47CD: $00
-    nop                                           ; $47CE: $00
-    nop                                           ; $47CF: $00
-    nop                                           ; $47D0: $00
-    nop                                           ; $47D1: $00
-    nop                                           ; $47D2: $00
-    nop                                           ; $47D3: $00
-    nop                                           ; $47D4: $00
-    nop                                           ; $47D5: $00
-    nop                                           ; $47D6: $00
-    nop                                           ; $47D7: $00
-    nop                                           ; $47D8: $00
-    nop                                           ; $47D9: $00
-    nop                                           ; $47DA: $00
-    nop                                           ; $47DB: $00
-    nop                                           ; $47DC: $00
-    nop                                           ; $47DD: $00
-    nop                                           ; $47DE: $00
-    nop                                           ; $47DF: $00
-    nop                                           ; $47E0: $00
-    nop                                           ; $47E1: $00
-    nop                                           ; $47E2: $00
-    nop                                           ; $47E3: $00
-    nop                                           ; $47E4: $00
-    nop                                           ; $47E5: $00
-    nop                                           ; $47E6: $00
-    nop                                           ; $47E7: $00
-    nop                                           ; $47E8: $00
-    nop                                           ; $47E9: $00
-    ld   [hl+], a                                 ; $47EA: $22
-    nop                                           ; $47EB: $00
-    nop                                           ; $47EC: $00
-    nop                                           ; $47ED: $00
-    nop                                           ; $47EE: $00
-    nop                                           ; $47EF: $00
-    nop                                           ; $47F0: $00
-    nop                                           ; $47F1: $00
-    nop                                           ; $47F2: $00
-    nop                                           ; $47F3: $00
-    nop                                           ; $47F4: $00
-    nop                                           ; $47F5: $00
-    nop                                           ; $47F6: $00
-    nop                                           ; $47F7: $00
-    nop                                           ; $47F8: $00
-    nop                                           ; $47F9: $00
-    nop                                           ; $47FA: $00
-    nop                                           ; $47FB: $00
-    nop                                           ; $47FC: $00
-    nop                                           ; $47FD: $00
-    nop                                           ; $47FE: $00
-    nop                                           ; $47FF: $00
-    nop                                           ; $4800: $00
-    nop                                           ; $4801: $00
-    nop                                           ; $4802: $00
-    nop                                           ; $4803: $00
-    ld   [bc], a                                  ; $4804: $02
-    nop                                           ; $4805: $00
-    nop                                           ; $4806: $00
-    nop                                           ; $4807: $00
-    nop                                           ; $4808: $00
-    nop                                           ; $4809: $00
-    nop                                           ; $480A: $00
-    inc  e                                        ; $480B: $1C
-    nop                                           ; $480C: $00
-    nop                                           ; $480D: $00
-    inc  e                                        ; $480E: $1C
-    dec  de                                       ; $480F: $1B
-    nop                                           ; $4810: $00
-    nop                                           ; $4811: $00
-    nop                                           ; $4812: $00
-    dec  de                                       ; $4813: $1B
-    nop                                           ; $4814: $00
-    nop                                           ; $4815: $00
-    nop                                           ; $4816: $00
-    nop                                           ; $4817: $00
-    nop                                           ; $4818: $00
-    nop                                           ; $4819: $00
-    dec  de                                       ; $481A: $1B
-    dec  de                                       ; $481B: $1B
-    nop                                           ; $481C: $00
-    dec  de                                       ; $481D: $1B
-    ld   b, $1D                                   ; $481E: $06 $1D
-    nop                                           ; $4820: $00
-    nop                                           ; $4821: $00
-    nop                                           ; $4822: $00
-    nop                                           ; $4823: $00
-    nop                                           ; $4824: $00
-    nop                                           ; $4825: $00
-    nop                                           ; $4826: $00
-    nop                                           ; $4827: $00
-    jr   nz, jr_014_482A                          ; $4828: $20 $00
-
-jr_014_482A:
-    nop                                           ; $482A: $00
-    nop                                           ; $482B: $00
-    nop                                           ; $482C: $00
-    dec  de                                       ; $482D: $1B
-    nop                                           ; $482E: $00
-    nop                                           ; $482F: $00
-    nop                                           ; $4830: $00
-    nop                                           ; $4831: $00
-    nop                                           ; $4832: $00
-    nop                                           ; $4833: $00
-    nop                                           ; $4834: $00
-    nop                                           ; $4835: $00
-    nop                                           ; $4836: $00
-    nop                                           ; $4837: $00
-    nop                                           ; $4838: $00
-    nop                                           ; $4839: $00
-    nop                                           ; $483A: $00
-    nop                                           ; $483B: $00
-    nop                                           ; $483C: $00
-    nop                                           ; $483D: $00
-    nop                                           ; $483E: $00
-    nop                                           ; $483F: $00
-    nop                                           ; $4840: $00
-    nop                                           ; $4841: $00
-    nop                                           ; $4842: $00
-    nop                                           ; $4843: $00
-    nop                                           ; $4844: $00
-    nop                                           ; $4845: $00
-    nop                                           ; $4846: $00
-    nop                                           ; $4847: $00
-    nop                                           ; $4848: $00
-    dec  de                                       ; $4849: $1B
-    nop                                           ; $484A: $00
-    nop                                           ; $484B: $00
-    nop                                           ; $484C: $00
-    nop                                           ; $484D: $00
-    nop                                           ; $484E: $00
-    nop                                           ; $484F: $00
-    nop                                           ; $4850: $00
-    nop                                           ; $4851: $00
-    inc  e                                        ; $4852: $1C
-    nop                                           ; $4853: $00
-    dec  de                                       ; $4854: $1B
-    nop                                           ; $4855: $00
-    ld   [$0000], sp                              ; $4856: $08 $00 $00
-    nop                                           ; $4859: $00
-    nop                                           ; $485A: $00
-    nop                                           ; $485B: $00
-    jr   nz, jr_014_485E                          ; $485C: $20 $00
-
-jr_014_485E:
-    nop                                           ; $485E: $00
-    nop                                           ; $485F: $00
-    nop                                           ; $4860: $00
-    nop                                           ; $4861: $00
-    add  hl, de                                   ; $4862: $19
-    nop                                           ; $4863: $00
-    nop                                           ; $4864: $00
-    nop                                           ; $4865: $00
-    ld   d, $00                                   ; $4866: $16 $00
-    nop                                           ; $4868: $00
-    nop                                           ; $4869: $00
-    nop                                           ; $486A: $00
-    nop                                           ; $486B: $00
-    nop                                           ; $486C: $00
-    nop                                           ; $486D: $00
-    nop                                           ; $486E: $00
-    rla                                           ; $486F: $17
-    nop                                           ; $4870: $00
-    jr   jr_014_4873                              ; $4871: $18 $00
-
-jr_014_4873:
-    nop                                           ; $4873: $00
-    ld   a, [de]                                  ; $4874: $1A
-    nop                                           ; $4875: $00
-    nop                                           ; $4876: $00
-    nop                                           ; $4877: $00
-    nop                                           ; $4878: $00
-    nop                                           ; $4879: $00
-    nop                                           ; $487A: $00
-    nop                                           ; $487B: $00
-    nop                                           ; $487C: $00
-    nop                                           ; $487D: $00
-    nop                                           ; $487E: $00
-    nop                                           ; $487F: $00
-    rst  $00                                      ; $4880: $C7
-    and  c                                        ; $4881: $A1
-    ld   c, b                                     ; $4882: $48
-    xor  [hl]                                     ; $4883: $AE
-    ld   c, b                                     ; $4884: $48
-    cp   e                                        ; $4885: $BB
-    ld   c, b                                     ; $4886: $48
-    ret  z                                        ; $4887: $C8
-
-    ld   c, b                                     ; $4888: $48
-    push de                                       ; $4889: $D5
-    ld   c, b                                     ; $488A: $48
-    ld   [c], a                                   ; $488B: $E2
-    ld   c, b                                     ; $488C: $48
-    rst  $28                                      ; $488D: $EF
-    ld   c, b                                     ; $488E: $48
-    db   $FC                                      ; $488F: $FC
-    ld   c, b                                     ; $4890: $48
-    add  hl, bc                                   ; $4891: $09
-    ld   c, c                                     ; $4892: $49
-    ld   d, $49                                   ; $4893: $16 $49
-    ld   d, $49                                   ; $4895: $16 $49
-    ld   d, $49                                   ; $4897: $16 $49
-    ld   d, $49                                   ; $4899: $16 $49
-    ld   d, $49                                   ; $489B: $16 $49
-    ld   d, $49                                   ; $489D: $16 $49
-    ld   d, $49                                   ; $489F: $16 $49
+RoomTemplateTopRightBottomLeftHandler::
     push bc                                       ; $48A1: $C5
     ld   hl, $D711                                ; $48A2: $21 $11 $D7
     ld   bc, $4917                                ; $48A5: $01 $17 $49
     ld   de, $4938                                ; $48A8: $11 $38 $49
     jp   label_354B                               ; $48AB: $C3 $4B $35
 
+RoomTemplateRightBottomLeftHandler::
     push bc                                       ; $48AE: $C5
     ld   hl, $D711                                ; $48AF: $21 $11 $D7
     ld   bc, $4958                                ; $48B2: $01 $58 $49
     ld   de, $4971                                ; $48B5: $11 $71 $49
     jp   label_354B                               ; $48B8: $C3 $4B $35
 
+RoomTemplateTopLeftBottomHandler::
     push bc                                       ; $48BB: $C5
     ld   hl, $D711                                ; $48BC: $21 $11 $D7
     ld   bc, $4989                                ; $48BF: $01 $89 $49
     ld   de, $49A4                                ; $48C2: $11 $A4 $49
     jp   label_354B                               ; $48C5: $C3 $4B $35
 
+RoomTemplateLeftTopRightHandler::
     push bc                                       ; $48C8: $C5
     ld   hl, $D711                                ; $48C9: $21 $11 $D7
     ld   bc, $49BE                                ; $48CC: $01 $BE $49
     ld   de, $49D7                                ; $48CF: $11 $D7 $49
     jp   label_354B                               ; $48D2: $C3 $4B $35
 
+RoomTemplateTopRightBottomHandler::
     push bc                                       ; $48D5: $C5
     ld   hl, $D711                                ; $48D6: $21 $11 $D7
     ld   bc, $49EF                                ; $48D9: $01 $EF $49
     ld   de, $4A0A                                ; $48DC: $11 $0A $4A
     jp   label_354B                               ; $48DF: $C3 $4B $35
 
+RoomTemplateBottomLeftHandler::
     push bc                                       ; $48E2: $C5
     ld   hl, $D711                                ; $48E3: $21 $11 $D7
     ld   bc, $4A24                                ; $48E6: $01 $24 $4A
     ld   de, $4A36                                ; $48E9: $11 $36 $4A
     jp   label_354B                               ; $48EC: $C3 $4B $35
 
+RoomTemplateBottomRightHandler::
     push bc                                       ; $48EF: $C5
     ld   hl, $D711                                ; $48F0: $21 $11 $D7
     ld   bc, $4A47                                ; $48F3: $01 $47 $4A
     ld   de, $4A59                                ; $48F6: $11 $59 $4A
     jp   label_354B                               ; $48F9: $C3 $4B $35
 
+RoomTemplateTopRightHandler::
     push bc                                       ; $48FC: $C5
     ld   hl, $D711                                ; $48FD: $21 $11 $D7
     ld   bc, $4A6A                                ; $4900: $01 $6A $4A
     ld   de, $4A7C                                ; $4903: $11 $7C $4A
     jp   label_354B                               ; $4906: $C3 $4B $35
 
+RoomTemplateTopLeftHandler::
     push bc                                       ; $4909: $C5
     ld   hl, $D711                                ; $490A: $21 $11 $D7
     ld   bc, $4A8D                                ; $490D: $01 $8D $4A
     ld   de, $4A9F                                ; $4910: $11 $9F $4A
     jp   label_354B                               ; $4913: $C3 $4B $35
 
+RoomTemplatNotImplementedHandler::
     ret                                           ; $4916: $C9
 
     nop                                           ; $4917: $00
@@ -3913,7 +3125,7 @@ jr_014_5883:
     jr   jr_014_5894                              ; $588F: $18 $03
 
 jr_014_5891:
-    ld   hl, $4560                                ; $5891: $21 $60 $45
+    ld   hl, DungeonChestsTable                   ; $5891: $21 $60 $45
 
 jr_014_5894:
     add  hl, de                                   ; $5894: $19

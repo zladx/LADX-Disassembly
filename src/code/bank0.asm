@@ -5508,7 +5508,7 @@ LoadRoom::
     ld   a, [bc]
     swap a
     and  $0F
-    call LoadRoomTemplate
+    call LoadRoomTemplate_trampoline
     jr   .parseRoomObjectsLoop
 
 .parseOverworldSecondByte
@@ -6247,6 +6247,7 @@ SetBankForRoom::
     ld   [MBC3SelectBank], a
     ret
 
+; Load object or objects?
 label_354B::
     push hl
     push de
@@ -6858,18 +6859,24 @@ label_38D4::
 
 ; Load the template for an indoor room
 ;   a: the template to use (see ROOM_TEMPLATE_* constants)
-LoadRoomTemplate::
+LoadRoomTemplate_trampoline::
+    ; Load bank for LoadRoomTemplate
     ld   e, a
-    ld   a, $14
+    ld   a, BANK(LoadRoomTemplate)
     ld   [MBC3SelectBank], a
     ld   a, e
+
+    ; Call function
     push bc
-    call $4880
+    call LoadRoomTemplate
     pop  bc
+
+    ; Restore previous bank
     ldh  a, [hRoomBank]
     ld   [MBC3SelectBank], a
     ret
 
+label_38FC::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $588B

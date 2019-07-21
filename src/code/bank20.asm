@@ -2155,7 +2155,7 @@ label_020_4B9E:
     ld   [$C1C1], a                               ; $4BA4: $EA $C1 $C1
     ld   a, $0C                                   ; $4BA7: $3E $0C
     ld   [$C19B], a                               ; $4BA9: $EA $9B $C1
-    ld   hl, wEntitiesFrameCounterTable           ; $4BAC: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable           ; $4BAC: $21 $E0 $C2
     add  hl, de                                   ; $4BAF: $19
     ld   [hl], $A0                                ; $4BB0: $36 $A0
     ld   hl, wEntitiesUnknownTableG               ; $4BB2: $21 $B0 $C3
@@ -2215,7 +2215,7 @@ jr_020_4BE3:
     nop                                           ; $4BFE: $00
 
 func_020_4BFF::
-    ld   hl, wEntitiesFrameCounterTable           ; $4BFF: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable           ; $4BFF: $21 $E0 $C2
     add  hl, de                                   ; $4C02: $19
     ld   [hl], $28                                ; $4C03: $36 $28
     ld   c, $04                                   ; $4C05: $0E $04
@@ -2316,7 +2316,7 @@ jr_020_4C6D:
     ld   hl, $C310                                ; $4C8B: $21 $10 $C3
     add  hl, de                                   ; $4C8E: $19
     ld   [hl], a                                  ; $4C8F: $77
-    ld   hl, wEntitiesFrameCounterTable           ; $4C90: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable           ; $4C90: $21 $E0 $C2
     add  hl, de                                   ; $4C93: $19
     ld   [hl], $17                                ; $4C94: $36 $17
     pop  bc                                       ; $4C96: $C1

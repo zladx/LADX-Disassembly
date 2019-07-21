@@ -426,9 +426,7 @@ wC270 equ $C270
 
 wEntitiesStateTable:: ; C280
   ; State of visible entities
-  ; 0: not present
-  ; 3: being destroyed
-  ; 5: active
+  ; See ENTITY_STATE_* constants
 wEntity0State:: ds 1 ; C280
 wEntity1State:: ds 1 ; C281
 wEntity2State:: ds 1 ; C282
@@ -469,16 +467,27 @@ wEntitiesUnknownTableC:: ; C2C0
 wEntitiesUnknownTableD:: ; C2D0
   ds $10
 
-wEntitiesFrameCounterTable:: ; C2E0
-  ; Frames count of the current animation for the entity.
+wEntitiesTransitionCountdownTable:: ; C2E0
+  ; Frames before the next state transition of the entity
   ds $10
 
 wEntitiesUnknowTableF:: ; C2F0
   ds $10
 
 ; Unlabeled
-wC300 equ $C300 ; C300
-  ds $AF
+wEntitiesUnknowTableG:: ; C300
+  ds $10
+
+wEntitiesAltitudeTable:: ; C310
+  ; When the altitude is higher than 0, the entity position is shifted vertically,
+  ; and a shadow is displayed underneath.
+  ds $10
+
+wEntitiesAltitudeVelocity:: ; C320
+  ; Positive numbers increase the altitude, negative numbers decrease it
+  ds $10
+
+ds $7F
 
 wDroppedItem:: ; C3AF
   ; Status of one of the items that can be dropped by cutting herbs

@@ -106,7 +106,7 @@ jr_002_424F:
     call label_142F                               ; $425C: $CD $2F $14
     jr   c, jr_002_4286                           ; $425F: $38 $25
 
-    ld   hl, wEntitiesFrameCounterTable           ; $4261: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable           ; $4261: $21 $E0 $C2
     add  hl, de                                   ; $4264: $19
     ld   [hl], $2A                                ; $4265: $36 $2A
     ld   hl, $C3B0                                ; $4267: $21 $B0 $C3

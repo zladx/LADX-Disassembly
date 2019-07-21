@@ -1,6 +1,7 @@
 include "constants/animated_tiles.asm"
 include "constants/charmap.asm"
 include "constants/debug.asm"
+include "constants/entities.asm"
 include "constants/gameplay.asm"
 include "constants/gbhw.asm"
 include "constants/hram.asm"

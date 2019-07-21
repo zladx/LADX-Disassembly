@@ -518,26 +518,30 @@ jr_014_4AE7:
     and  a                                        ; $4AEA: $A7
     jr   nz, .wavesSfxEnd                         ; $4AEB: $20 $1F
 
-    ; If $F0 <= map room < $F6…
+    ; …and $F0 <= map room < $F6…
     ldh  a, [hMapRoom]                            ; $4AED: $F0 $F6
     ld   [wDB54], a                               ; $4AEF: $EA $54 $DB
     ldh  a, [hMapRoom]                            ; $4AF2: $F0 $F6
     cp   $F0                                      ; $4AF4: $FE $F0
-    jr   c, .wavesSfxEnd                           ; $4AF6: $38 $14
+    jr   c, .wavesSfxEnd                          ; $4AF6: $38 $14
     cp   $F6                                      ; $4AF8: $FE $F6
     jr   nc, .wavesSfxEnd                         ; $4AFA: $30 $10
 
-    ld   a, [wC114]                               ; $4AFC: $FA $14 $C1
+    ; increment the sea waves counter.
+    ld   a, [wNoiseSfxSeaWavesCounter]            ; $4AFC: $FA $14 $C1
     inc  a                                        ; $4AFF: $3C
-    cp   $A0                                      ; $4B00: $FE $A0
-    jr   nz, .jr_014_4B09                         ; $4B02: $20 $05
 
+    ; When the counter reaches $A0…
+    cp   $A0                                      ; $4B00: $FE $A0
+    jr   nz, .updateCounter                       ; $4B02: $20 $05
+
+    ; play the sea waves sound effect once again.
     ld   a, NOISE_SFX_SEA_WAVES                   ; $4B04: $3E $0F
     ldh  [hNoiseSfx], a                           ; $4B06: $E0 $F4
     xor  a                                        ; $4B08: $AF
 
-.jr_014_4B09
-    ld   [wC114], a                               ; $4B09: $EA $14 $C1
+.updateCounter
+    ld   [wNoiseSfxSeaWavesCounter], a            ; $4B09: $EA $14 $C1
 .wavesSfxEnd
 
     ld   a, [wMaxHealth]                          ; $4B0C: $FA $5B $DB

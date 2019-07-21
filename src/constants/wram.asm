@@ -41,7 +41,12 @@ wC110: ds 1
 wC111: ds 1
 wDialogIndexHi: ds 1
 wC113: ds 1
-wC114: ds 1
+
+wNoiseSfxSeaWavesCounter::
+  ; Delay for repeatin the NOISE_SFX_SEA_WAVES sound effect
+  ; Plays when reaching $A0
+  ds 1
+
 wC115: ds 1
 wC116: ds 1
 wC117: ds 1

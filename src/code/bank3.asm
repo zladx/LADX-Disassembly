@@ -915,8 +915,8 @@ jr_003_4C8C:
     ld   [hl], $01                                ; $4C96: $36 $01
     ld   hl, $C340                                ; $4C98: $21 $40 $C3
     add  hl, bc                                   ; $4C9B: $09
-    ld   [hl], $04                                ; $4C9C: $36 $04
-    ld   hl, hNoiseSfx                             ; $4C9E: $21 $F4 $FF
+    ld   [hl], NOISE_SFX_DOOR_UNLOCKED            ; $4C9C: $36 $04
+    ld   hl, hNoiseSfx                            ; $4C9E: $21 $F4 $FF
     ld   [hl], $13                                ; $4CA1: $36 $13
     ret                                           ; $4CA3: $C9
 
@@ -1540,8 +1540,8 @@ Data_003_5057::
     db   $f4                                      ; $506C: $F4
     ld   a, $2A                                   ; $506D: $3E $2A
     ld   [wC111], a                               ; $506F: $EA $11 $C1
-    ld   a, $04                                   ; $5072: $3E $04
-    ldh  [hNoiseSfx], a                            ; $5074: $E0 $F4
+    ld   a, NOISE_SFX_DOOR_UNLOCKED               ; $5072: $3E $04
+    ldh  [hNoiseSfx], a                           ; $5074: $E0 $F4
     ld   de, Data_003_504F                        ; $5076: $11 $4F $50
     ldh  a, [hIsGBC]                              ; $5079: $F0 $FE
     and  a                                        ; $507B: $A7
@@ -1752,8 +1752,8 @@ jr_003_5154:
     jp   ClearEntityType                               ; $5195: $C3 $8D $3F
 
 jr_003_5198:
-    ld   a, $11                                   ; $5198: $3E $11
-    ldh  [hNoiseSfx], a                            ; $519A: $E0 $F4
+    ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $5198: $3E $11
+    ldh  [hNoiseSfx], a                           ; $519A: $E0 $F4
     ld   de, $5166                                ; $519C: $11 $66 $51
     ld   b, $C6                                   ; $519F: $06 $C6
     ldh  a, [hMapRoom]                            ; $51A1: $F0 $F6
@@ -2151,8 +2151,8 @@ jr_003_53B6:
 
 func_003_53E4::
 jr_003_53E4:
-    ld   hl, hNoiseSfx                             ; $53E4: $21 $F4 $FF
-    ld   [hl], $05                                ; $53E7: $36 $05
+    ld   hl, hNoiseSfx                            ; $53E4: $21 $F4 $FF
+    ld   [hl], NOISE_SFX_RUPEE                    ; $53E7: $36 $05
     ld   e, $1F                                   ; $53E9: $1E $1F
     ldh  a, [hActiveEntityUnknownG]               ; $53EB: $F0 $F1
     cp   $FF                                      ; $53ED: $FE $FF
@@ -2182,6 +2182,10 @@ jr_003_5406:
     call func_003_64CA                            ; $5409: $CD $CA $64
     ret  c                                        ; $540C: $D8
 
+    ;
+    ; Smash pot
+    ;
+
     ldh  a, [hScratchA]                           ; $540D: $F0 $D7
     ld   hl, wEntity0PosX                         ; $540F: $21 $00 $C2
     add  hl, de                                   ; $5412: $19
@@ -2201,9 +2205,9 @@ jr_003_5406:
     ld   hl, $C340                                ; $542B: $21 $40 $C3
     add  hl, de                                   ; $542E: $19
     ld   [hl], $C4                                ; $542F: $36 $C4
-    ld   a, $09                                   ; $5431: $3E $09
-    ldh  [hNoiseSfx], a                            ; $5433: $E0 $F4
-    jp   ClearEntityType                               ; $5435: $C3 $8D $3F
+    ld   a, NOISE_SFX_POT_SMASHED                 ; $5431: $3E $09
+    ldh  [hNoiseSfx], a                           ; $5433: $E0 $F4
+    jp   ClearEntityType                          ; $5435: $C3 $8D $3F
 
 func_003_5438::
     ld   hl, wEntitiesCollisionsTable             ; $5438: $21 $A0 $C2

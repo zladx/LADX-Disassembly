@@ -127,7 +127,7 @@ IntroSceneJumpTable::
 ._6 dw label_7158 ; transition?
 ._7 dw IntroBeachHandler
 ._8 dw label_7272 ; title screen animation?
-._9 dw label_7355 ; title screen animation?
+._9 dw TitleScreenSfxHandler
 ._A dw $7376 ; title screen animation?
 ._B dw TitleScreenHandler
 ._C dw $743A
@@ -563,7 +563,7 @@ label_71C7::
     inc  a
     cp   $A0
     jr   nz, label_71DB
-    ld   a, $0F
+    ld   a, NOISE_SFX_SEA_WAVES
     ldh  [hNoiseSfx], a
     xor  a
 
@@ -796,13 +796,13 @@ label_734C::
     ld   [hl], $00
     ret
 
-label_7355::
+TitleScreenSfxHandler::
     ; If $C17E != 10…
     ld   a, [$C17E]
     cp   $10
     jr   c, .return
 
-    ld   a, $19
+    ld   a, NOISE_SFX_TITLE_APPEARS
     ldh  [hNoiseSfx], a
     call IncrementGameplaySubtype
 .return

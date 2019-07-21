@@ -431,7 +431,7 @@ label_651E::
     inc  a
     cp   $A0
     jr   nz, label_652E
-    ld   a, $0F
+    ld   a, NOISE_SFX_SEA_WAVES
     ldh  [hNoiseSfx], a
     xor  a
 

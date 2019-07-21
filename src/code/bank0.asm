@@ -792,6 +792,8 @@ ApplyMapFadeOutTransition::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9A
+
+label_C83::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9E
@@ -805,7 +807,7 @@ ApplyMapFadeOutTransition::
     ldh  [hFFBC], a
 
 label_C9A::
-    ld   a, $06
+    ld   a, NOISE_SFX_STAIRS
     ldh  [hNoiseSfx], a
 
 label_C9E::
@@ -1664,7 +1666,7 @@ label_11E8::
     ldh  a, [hPressedButtonsMask]
     and  $20
     jr   z, label_11FA
-    call label_1705
+    call UsePegasusBoots
     jr   label_11FE
 
 label_11FA::
@@ -1678,7 +1680,7 @@ label_11FE::
     ldh  a, [hPressedButtonsMask]
     and  $10
     jr   z, label_1210
-    call label_1705
+    call UsePegasusBoots
 
 label_120E::
     jr   label_1214
@@ -1810,7 +1812,6 @@ UseShovel::
     or   [hl]
     ret  nz
 
-label_1300::
     call $4D20
     jr   nc, .notPoking
 
@@ -1819,7 +1820,7 @@ label_1300::
     jr   .endIf
 
 .notPoking
-    ld   a, $0E
+    ld   a, NOISE_SFX_SHOWEL_DIG
     ldh  [hNoiseSfx], a
 .endIf
 
@@ -1955,7 +1956,7 @@ ShootArrow::
     jr   label_1407
 
 label_1401::
-    ld   a, $0A
+    ld   a, NOISE_SFX_SHOOT_ARROW
     ldh  [hNoiseSfx], a
     ld   a, $06
 
@@ -2445,7 +2446,7 @@ data_16FD::
 data_1701::
     db   0, 0, $E0, $20
 
-label_1705::
+UsePegasusBoots::
     ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_1713
@@ -2507,7 +2508,7 @@ label_1756::
     ld   a, [$C181]
     cp   $05
     jr   z, label_1781
-    ld   a, $07
+    ld   a, NOISE_SFX_FOOTSTEP
     ldh  [hNoiseSfx], a
     ldh  a, [hLinkPositionY]
     add  a, $06
@@ -2586,7 +2587,7 @@ label_17DB::
     ld   a, $04
     call label_142F
     jr   c, label_1814
-    ld   a, $0D
+    ld   a, NOISE_SFX_MAGIC_ROD
     ldh  [hNoiseSfx], a
     callsw label_002_538B
 

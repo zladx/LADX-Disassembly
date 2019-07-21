@@ -4558,8 +4558,8 @@ jr_002_5D80:
     and  $F0                                      ; $5D9F: $E6 $F0
     or   $02                                      ; $5DA1: $F6 $02
     ld   [hl], a                                  ; $5DA3: $77
-    ld   a, $13                                   ; $5DA4: $3E $13
-    ldh  [hNoiseSfx], a                            ; $5DA6: $E0 $F4
+    ld   a, NOISE_SFX_ENEMY_DESTROYED             ; $5DA4: $3E $13
+    ldh  [hNoiseSfx], a                           ; $5DA6: $E0 $F4
 
 jr_002_5DA8:
     dec  c                                        ; $5DA8: $0D
@@ -7706,7 +7706,7 @@ jr_002_734F:
     add  hl, de                                   ; $738D: $19
     ld   [hl], d                                  ; $738E: $72
     ld   hl, hNoiseSfx                             ; $738F: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_CRISTAL_SMASHED                ; $7392: $36 $09
+    ld   [hl], NOISE_SFX_POT_SMASHED                ; $7392: $36 $09
     ld   hl, wEntitiesUnknowTableF                ; $7394: $21 $F0 $C2
     add  hl, de                                   ; $7397: $19
     ld   [hl], $0F                                ; $7398: $36 $0F
@@ -8519,8 +8519,8 @@ jr_002_783C:
     cp   $28                                      ; $7861: $FE $28
     jr   c, label_002_786E                        ; $7863: $38 $09
 
-    ld   a, $2B                                   ; $7865: $3E $2B
-    ldh  [hNoiseSfx], a                            ; $7867: $E0 $F4
+    ld   a, NOISE_SFX_ROCK_RUMBLE                 ; $7865: $3E $2B
+    ldh  [hNoiseSfx], a                           ; $7867: $E0 $F4
     jp   label_002_4D97                           ; $7869: $C3 $97 $4D
 
 jr_002_786C:

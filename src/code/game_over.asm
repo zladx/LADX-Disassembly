@@ -165,7 +165,7 @@ label_42F2::
 
 label_42F5::
     xor  a
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     ld   e, $10
 
 label_42FB::

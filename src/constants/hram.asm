@@ -229,7 +229,7 @@ hIndexOfObjectBelowLink:: ; FFE9
 ; 0-4: unknown
 ; 5: do nothing
 ; 6-9: unknown
-; See wEntitiesTypeTable
+; See wEntitiesStateTable
 hActiveEntityType:: ; FFEA
   ds 1
 

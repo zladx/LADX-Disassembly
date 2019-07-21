@@ -424,27 +424,27 @@ wC260 equ $C260
 wC270 equ $C270
   ds $10
 
-wEntitiesTypeTable:: ; C280
-  ; Type of visible entities
-  ; 0: entity not present
-  ; 5: Link's ship in intro
-  ; 6: Marin
-wEntity0Type:: ds 1 ; C280
-wEntity1Type:: ds 1 ; C281
-wEntity2Type:: ds 1 ; C282
-wEntity3Type:: ds 1 ; C283
-wEntity4Type:: ds 1 ; C284
-wEntity5Type:: ds 1 ; C285
-wEntity6Type:: ds 1 ; C286
-wEntity7Type:: ds 1 ; C287
-wEntity8Type:: ds 1 ; C288
-wEntity9Type:: ds 1 ; C289
-wEntityAType:: ds 1 ; C28A
-wEntityBType:: ds 1 ; C28B
-wEntityCType:: ds 1 ; C28C
-wEntityDType:: ds 1 ; C28D
-wEntityEType:: ds 1 ; C28E
-wEntityFType:: ds 1 ; C28F
+wEntitiesStateTable:: ; C280
+  ; State of visible entities
+  ; 0: not present
+  ; 3: being destroyed
+  ; 5: active
+wEntity0State:: ds 1 ; C280
+wEntity1State:: ds 1 ; C281
+wEntity2State:: ds 1 ; C282
+wEntity3State:: ds 1 ; C283
+wEntity4State:: ds 1 ; C284
+wEntity5State:: ds 1 ; C285
+wEntity6State:: ds 1 ; C286
+wEntity7State:: ds 1 ; C287
+wEntity8State:: ds 1 ; C288
+wEntity9State:: ds 1 ; C289
+wEntityAState:: ds 1 ; C28A
+wEntityBState:: ds 1 ; C28B
+wEntityCState:: ds 1 ; C28C
+wEntityDState:: ds 1 ; C28D
+wEntityEState:: ds 1 ; C28E
+wEntityFState:: ds 1 ; C28F
 
 wEntitiesWalkingTable:: ; C290
   ; Indicate if the designated entity is walking (1) or standing in place (0).

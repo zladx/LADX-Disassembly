@@ -2332,6 +2332,7 @@ jr_020_4C6D:
 jr_020_4CA2:
     ret                                           ; $4CA2: $C9
 
+ResetRoomVariables::
     xor  a                                        ; $4CA3: $AF
     ldh  [hFreeWarpDataAddress], a                ; $4CA4: $E0 $E6
     ld   [$C19C], a                               ; $4CA6: $EA $9C $C1
@@ -8931,6 +8932,7 @@ jr_020_6D92:
 
     ret                                           ; $6DAE: $C9
 
+func_020_6DAF::
     ld   a, [wIsIndoor]                           ; $6DAF: $FA $A5 $DB
     and  a                                        ; $6DB2: $A7
     ret  nz                                       ; $6DB3: $C0
@@ -9017,7 +9019,7 @@ jr_020_6E1A:
     sub  $CC                                      ; $6E28: $D6 $CC
 
 jr_020_6E2A:
-    ld   hl, EntityPointersTable                  ; $6E2A: $21 $00 $40
+    ld   hl, $4000                                ; $6E2A: $21 $00 $40
     ld   b, a                                     ; $6E2D: $47
     and  b                                        ; $6E2E: $A0
 

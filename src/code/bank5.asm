@@ -505,7 +505,7 @@ jr_005_42B9:
     cp   c                                        ; $42BA: $B9
     jr   z, jr_005_4323                           ; $42BB: $28 $66
 
-    ld   hl, wEntity0Type                         ; $42BD: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $42BD: $21 $80 $C2
     add  hl, de                                   ; $42C0: $19
     ld   a, [hl]                                  ; $42C1: $7E
     and  a                                        ; $42C2: $A7
@@ -588,7 +588,7 @@ label_005_4335:
     ld   a, [$D152]                               ; $4335: $FA $52 $D1
     ld   e, a                                     ; $4338: $5F
     ld   d, b                                     ; $4339: $50
-    ld   hl, wEntity0Type                         ; $433A: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $433A: $21 $80 $C2
     add  hl, de                                   ; $433D: $19
     ld   a, [hl]                                  ; $433E: $7E
     and  a                                        ; $433F: $A7
@@ -1132,7 +1132,7 @@ jr_005_45EC:
 
     inc  a                                        ; $45F2: $3C
     ld   [$C3CF], a                               ; $45F3: $EA $CF $C3
-    ld   hl, wEntity0Type                         ; $45F6: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $45F6: $21 $80 $C2
     add  hl, bc                                   ; $45F9: $09
     ld   [hl], $07                                ; $45FA: $36 $07
     ld   hl, $C490                                ; $45FC: $21 $90 $C4
@@ -3567,7 +3567,7 @@ jr_005_53E9:
     cp   c                                        ; $53EA: $B9
     jr   z, jr_005_53FF                           ; $53EB: $28 $12
 
-    ld   hl, wEntity0Type                         ; $53ED: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $53ED: $21 $80 $C2
     add  hl, de                                   ; $53F0: $19
     ld   a, [hl]                                  ; $53F1: $7E
     and  a                                        ; $53F2: $A7
@@ -3725,7 +3725,7 @@ label_005_54C3:
     cp   $03                                      ; $54DB: $FE $03
     jr   nz, jr_005_54E5                          ; $54DD: $20 $06
 
-    ld   hl, wEntityFType                         ; $54DF: $21 $8F $C2
+    ld   hl, wEntityFState                         ; $54DF: $21 $8F $C2
     add  hl, de                                   ; $54E2: $19
     ld   [hl], $00                                ; $54E3: $36 $00
 
@@ -4658,7 +4658,7 @@ jr_005_5A26:
     ld   d, b                                     ; $5A28: $50
 
 jr_005_5A29:
-    ld   hl, wEntity0Type                         ; $5A29: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $5A29: $21 $80 $C2
     add  hl, de                                   ; $5A2C: $19
     ld   [hl], b                                  ; $5A2D: $70
     dec  e                                        ; $5A2E: $1D
@@ -7331,7 +7331,7 @@ jr_005_689B:
     ld   d, b                                     ; $68F5: $50
 
 jr_005_68F6:
-    ld   hl, wEntity0Type                         ; $68F6: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $68F6: $21 $80 $C2
     add  hl, de                                   ; $68F9: $19
     ld   a, [hl]                                  ; $68FA: $7E
     cp   $05                                      ; $68FB: $FE $05
@@ -7371,7 +7371,7 @@ jr_005_68F6:
     and  a                                        ; $6930: $A7
     jr   nz, jr_005_6953                          ; $6931: $20 $20
 
-    ld   hl, wEntity0Type                         ; $6933: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $6933: $21 $80 $C2
     add  hl, de                                   ; $6936: $19
     ld   [hl], b                                  ; $6937: $70
     call IncrementEntityWalkingAttr               ; $6938: $CD $12 $3B
@@ -8190,7 +8190,7 @@ jr_005_6D7E:
     call label_BFB                                ; $6D80: $CD $FB $0B
     ld   [hl], $B0                                ; $6D83: $36 $B0
     call label_3E34                               ; $6D85: $CD $34 $3E
-    ld   hl, wEntity0Type                         ; $6D88: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $6D88: $21 $80 $C2
     add  hl, bc                                   ; $6D8B: $09
     ld   [hl], $05                                ; $6D8C: $36 $05
     ld   hl, wEntity0PosX                         ; $6D8E: $21 $00 $C2
@@ -8199,12 +8199,12 @@ jr_005_6D7E:
     add  $10                                      ; $6D93: $C6 $10
     ld   [hl], a                                  ; $6D95: $77
     call label_3E34                               ; $6D96: $CD $34 $3E
-    ld   hl, wEntity0Type                         ; $6D99: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $6D99: $21 $80 $C2
     add  hl, bc                                   ; $6D9C: $09
     ld   [hl], $05                                ; $6D9D: $36 $05
     call label_3E34                               ; $6D9F: $CD $34 $3E
     call PlayBombExplosionSfx                                ; $6DA2: $CD $4B $0C
-    ld   hl, wEntity0Type                         ; $6DA5: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $6DA5: $21 $80 $C2
     add  hl, bc                                   ; $6DA8: $09
     ld   [hl], $05                                ; $6DA9: $36 $05
     call label_2887                               ; $6DAB: $CD $87 $28
@@ -8502,7 +8502,7 @@ jr_005_6F78:
     add  hl, de                                   ; $6F7B: $19
     ld   [hl], a                                  ; $6F7C: $77
     call label_3E34                               ; $6F7D: $CD $34 $3E
-    ld   hl, wEntity0Type                         ; $6F80: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $6F80: $21 $80 $C2
     add  hl, bc                                   ; $6F83: $09
     ld   [hl], $05                                ; $6F84: $36 $05
     jp   PlayBombExplosionSfx                                ; $6F86: $C3 $4B $0C
@@ -9280,7 +9280,7 @@ jr_005_7395:
     ld   [$D202], a                               ; $73A4: $EA $02 $D2
     ld   e, a                                     ; $73A7: $5F
     ld   d, b                                     ; $73A8: $50
-    ld   hl, wEntity0Type                         ; $73A9: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $73A9: $21 $80 $C2
     add  hl, de                                   ; $73AC: $19
     ld   a, [hl]                                  ; $73AD: $7E
     and  a                                        ; $73AE: $A7
@@ -9366,7 +9366,7 @@ jr_005_7424:
     ld   a, [$D202]                               ; $742D: $FA $02 $D2
     ld   e, a                                     ; $7430: $5F
     ld   d, b                                     ; $7431: $50
-    ld   hl, wEntity0Type                         ; $7432: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $7432: $21 $80 $C2
     add  hl, de                                   ; $7435: $19
     ld   a, [hl]                                  ; $7436: $7E
     and  a                                        ; $7437: $A7
@@ -10321,7 +10321,7 @@ jr_005_79B3:
     ld   a, [$D201]                               ; $79F4: $FA $01 $D2
     ld   e, a                                     ; $79F7: $5F
     ld   d, b                                     ; $79F8: $50
-    ld   hl, wEntity0Type                         ; $79F9: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $79F9: $21 $80 $C2
     add  hl, de                                   ; $79FC: $19
     ld   [hl], b                                  ; $79FD: $70
     call IncrementEntityWalkingAttr               ; $79FE: $CD $12 $3B
@@ -10587,7 +10587,7 @@ jr_005_7B49:
 
 func_005_7B4B:
 label_005_7B4B:
-    ld   hl, wEntity0Type                         ; $7B4B: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $7B4B: $21 $80 $C2
     add  hl, bc                                   ; $7B4E: $09
     ld   [hl], b                                  ; $7B4F: $70
     ret                                           ; $7B50: $C9
@@ -11207,7 +11207,7 @@ label_005_7E9D:
     ld   d, b                                     ; $7EAD: $50
 
 jr_005_7EAE:
-    ld   hl, wEntity0Type                         ; $7EAE: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $7EAE: $21 $80 $C2
     add  hl, de                                   ; $7EB1: $19
     ld   a, [hl]                                  ; $7EB2: $7E
     and  a                                        ; $7EB3: $A7

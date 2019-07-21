@@ -10,7 +10,7 @@ label_002_41D0::
     call label_3B86                               ; $41D3: $CD $86 $3B
     jr   c, jr_002_41FA                           ; $41D6: $38 $22
 
-    ld   hl, wEntitiesTypeTable                   ; $41D8: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                   ; $41D8: $21 $80 $C2
     add  hl, de                                   ; $41DB: $19
     dec  [hl]                                     ; $41DC: $35
     ldh  a, [hSwordIntersectedAreaX]                               ; $41DD: $F0 $CE
@@ -2900,7 +2900,7 @@ TryOpenLockedDoor::
     call label_3B86                               ; $53FD: $CD $86 $3B
     jr   c, .return                               ; $5400: $38 $1B
 
-    ld   hl, wEntitiesTypeTable                   ; $5402: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                   ; $5402: $21 $80 $C2
     add  hl, de                                   ; $5405: $19
     dec  [hl]                                     ; $5406: $35
     ldh  a, [$FFDB]                               ; $5407: $F0 $DB
@@ -4542,7 +4542,7 @@ jr_002_5D80:
     and  $80                                      ; $5D85: $E6 $80
     jr   nz, jr_002_5DA8                          ; $5D87: $20 $1F
 
-    ld   hl, wEntitiesTypeTable                   ; $5D89: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                   ; $5D89: $21 $80 $C2
     add  hl, bc                                   ; $5D8C: $09
     ld   a, [hl]                                  ; $5D8D: $7E
     cp   $05                                      ; $5D8E: $FE $05
@@ -4987,7 +4987,7 @@ jr_002_5FF0:
     ld   b, $00                                   ; $5FFE: $06 $00
 
 jr_002_6000:
-    ld   hl, wEntitiesTypeTable                   ; $6000: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                   ; $6000: $21 $80 $C2
     add  hl, bc                                   ; $6003: $09
     ld   a, [hl]                                  ; $6004: $7E
     and  a                                        ; $6005: $A7
@@ -5048,7 +5048,7 @@ jr_002_603E:
     jr   nz, jr_002_6064                          ; $604D: $20 $15
 
 jr_002_604F:
-    ld   hl, wEntitiesTypeTable                   ; $604F: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                   ; $604F: $21 $80 $C2
     add  hl, de                                   ; $6052: $19
     ld   a, [hl]                                  ; $6053: $7E
     and  a                                        ; $6054: $A7
@@ -5115,7 +5115,7 @@ jr_002_609B:
     jr   nz, jr_002_60BD                          ; $60A6: $20 $15
 
 jr_002_60A8:
-    ld   hl, wEntitiesTypeTable                   ; $60A8: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                   ; $60A8: $21 $80 $C2
     add  hl, de                                   ; $60AB: $19
     ld   a, [hl]                                  ; $60AC: $7E
     and  a                                        ; $60AD: $A7
@@ -6595,7 +6595,7 @@ CheckPositionForMapTransition::
     cp   $50                                      ; $6CF6: $FE $50
     jr   nc, .jr_002_6D00                         ; $6CF8: $30 $06
 
-    ld   a, [wEntitiesTypeTable]                  ; $6CFA: $FA $80 $C2
+    ld   a, [wEntitiesStateTable]                  ; $6CFA: $FA $80 $C2
     and  a                                        ; $6CFD: $A7
     jr   z, .manualEntryPointsEnd                 ; $6CFE: $28 $5C
 

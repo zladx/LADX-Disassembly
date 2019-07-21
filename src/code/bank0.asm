@@ -1946,7 +1946,7 @@ ShootArrow::
     ld   a, [$C1C1]
     ld   c, a
     ld   b, d
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   [hl], b
     ld   hl, $C290
@@ -2635,7 +2635,7 @@ label_1847::
     ld   [$DDD6], a
     ld   [$DDD7], a
     ld   e, $10
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
 
 label_186C::
     ldi  [hl], a
@@ -3583,7 +3583,7 @@ label_2183::
     jr   c, label_21A7
     ld   a, $02
     ldh  [hWaveSfx], a
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   [hl], $07
     ld   hl, $C3B0
@@ -5204,9 +5204,7 @@ LoadRoom::
     ld   hl, $D47F
     inc  [hl]
 
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4CA3
+    callsb ResetRoomVariables
 
     ldh  a, [hIsGBC]
     and  a
@@ -5214,9 +5212,7 @@ LoadRoom::
     ld   a, $21
     ld   [MBC3SelectBank], a
     call $40B3
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6DAF
+    callsb func_020_6DAF
 .GBCEnd
 
     ;
@@ -6775,7 +6771,7 @@ label_389B::
     ld   d, e
 
 label_389E::
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   a, [hl]
     cp   $00
@@ -7003,7 +6999,7 @@ label_39E3::
     ld   [wLinkWalkingFrameCount], a
 
     ; Read entity type
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   a, [hl]
 
@@ -7747,7 +7743,7 @@ label_3E76::
 
 label_3E83::
     ld   e, $10
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
 
 label_3E88::
     xor  a
@@ -7930,7 +7926,7 @@ label_3F78::
 ;   c:  index of the entity
 ClearEntityType::
 ClearEntityTypeAndReturn::
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   [hl], b
     ret

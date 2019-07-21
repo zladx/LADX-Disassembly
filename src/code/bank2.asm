@@ -236,7 +236,7 @@ jr_002_4316:
 
     ld   a, $20                                   ; $432A: $3E $20
     ld   [wIsUsingSpinAttack], a                  ; $432C: $EA $21 $C1
-    ld   a, SFX_SPIN_ATTACK                       ; $432F: $3E $03
+    ld   a, NOISE_SFX_SPIN_ATTACK                       ; $432F: $3E $03
     ldh  [hNoiseSfx], a                            ; $4331: $E0 $F4
 
 jr_002_4333:
@@ -692,7 +692,7 @@ jr_002_456C:
     cp   $51                                      ; $45A4: $FE $51
     jr   z, label_002_45AC                        ; $45A6: $28 $04
 
-    ld   a, SFX_FOOTSTEP                          ; $45A8: $3E $07
+    ld   a, NOISE_SFX_FOOTSTEP                          ; $45A8: $3E $07
     ldh  [hNoiseSfx], a                            ; $45AA: $E0 $F4
 
 label_002_45AC::
@@ -2650,7 +2650,7 @@ jr_002_529F:
 
     jr   nz, jr_002_52B3                          ; $52AD: $20 $04
 
-    ld   a, SFX_SPIN_ATTACK                       ; $52AF: $3E $03
+    ld   a, NOISE_SFX_SPIN_ATTACK                       ; $52AF: $3E $03
     ldh  [hWaveSfx], a                                ; $52B1: $E0 $F3
 
 jr_002_52B3:
@@ -2922,7 +2922,7 @@ TryOpenLockedDoor::
     ret                                           ; $541F: $C9
 
 EnqueueDoorUnlockedSfx::
-    ld   a, SFX_DOOR_UNLOCKED                     ; $5420: $3E $04
+    ld   a, NOISE_SFX_DOOR_UNLOCKED                     ; $5420: $3E $04
     ldh  [hNoiseSfx], a                            ; $5422: $E0 $F4
     ret                                           ; $5424: $C9
 
@@ -3354,7 +3354,7 @@ jr_002_5664:
     jr   nz, jr_002_566D                          ; $5666: $20 $05
 
     ld   hl, hNoiseSfx                             ; $5668: $21 $F4 $FF
-    ld   [hl], SFX_DOOR_RUMBLE                    ; $566B: $36 $2A
+    ld   [hl], NOISE_SFX_DOOR_RUMBLE                    ; $566B: $36 $2A
 
 jr_002_566D:
     cp   $0A                                      ; $566D: $FE $0A
@@ -4727,7 +4727,7 @@ func_002_5E7B::
     ld   [$C190], a                               ; $5E96: $EA $90 $C1
     ld   a, $04                                   ; $5E99: $3E $04
     ld   [wC111], a                               ; $5E9B: $EA $11 $C1
-    ld   a, SFX_BOSS_AGONY                        ; $5E9E: $3E $10
+    ld   a, WAVE_SFX_BOSS_AGONY                        ; $5E9E: $3E $10
     ldh  [hNoiseSfx], a                            ; $5EA0: $E0 $F4
 
 jr_002_5EA2:
@@ -5429,7 +5429,7 @@ UpdateRupeesCount::
     or   [hl]                                     ; $627A: $B6
     ret  z                                        ; $627B: $C8
 
-    ld   a, SFX_RUPEE                             ; $627C: $3E $05
+    ld   a, NOISE_SFX_RUPEE                             ; $627C: $3E $05
     ldh  [hWaveSfx], a                                ; $627E: $E0 $F3
     ld   a, [wSubstractRupeeBufferHigh]           ; $6280: $FA $92 $DB
     ld   e, a                                     ; $6283: $5F
@@ -6137,7 +6137,7 @@ jr_002_6A94:
     and  a                                        ; $6A97: $A7
     jr   z, jr_002_6AAA                           ; $6A98: $28 $10
 
-    ld   a, SFX_FOOTSTEP                          ; $6A9A: $3E $07
+    ld   a, NOISE_SFX_FOOTSTEP                          ; $6A9A: $3E $07
     ldh  [hNoiseSfx], a                            ; $6A9C: $E0 $F4
     call label_CB6                                ; $6A9E: $CD $B6 $0C
     ld   [$C146], a                               ; $6AA1: $EA $46 $C1
@@ -7706,7 +7706,7 @@ jr_002_734F:
     add  hl, de                                   ; $738D: $19
     ld   [hl], d                                  ; $738E: $72
     ld   hl, hNoiseSfx                             ; $738F: $21 $F4 $FF
-    ld   [hl], SFX_CRISTAL_SMASHED                ; $7392: $36 $09
+    ld   [hl], NOISE_SFX_CRISTAL_SMASHED                ; $7392: $36 $09
     ld   hl, wEntitiesUnknowTableF                ; $7394: $21 $F0 $C2
     add  hl, de                                   ; $7397: $19
     ld   [hl], $0F                                ; $7398: $36 $0F
@@ -8445,7 +8445,7 @@ jr_002_77E9:
     and  a                                        ; $77EC: $A7
     jr   z, jr_002_77F7                           ; $77ED: $28 $08
 
-    ld   a, SFX_FOOTSTEP                          ; $77EF: $3E $07
+    ld   a, NOISE_SFX_FOOTSTEP                          ; $77EF: $3E $07
     ldh  [hNoiseSfx], a                            ; $77F1: $E0 $F4
     xor  a                                        ; $77F3: $AF
     ld   [$D6F9], a                               ; $77F4: $EA $F9 $D6

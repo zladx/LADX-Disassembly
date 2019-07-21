@@ -37,18 +37,29 @@ JINGLE_MANBO_WARP       equ $2C
 JINGLE_ENNEMY_SHRIEK    equ $3C
 
 ; Values for hWaveSfx
-SFX_SWORD_A         equ $02
-SFX_SPIN_ATTACK     equ $03
-SFX_DOOR_UNLOCKED   equ $04
-SFX_RUPEE           equ $05
-SFX_FOOTSTEP        equ $07
-SFX_CRISTAL_SMASHED equ $09
-SFX_TYPEWRITER      equ $0F
-SFX_BOSS_AGONY      equ $10
-SFX_SWORD_B         equ $14
-SFX_SWORD_C         equ $15
-SFX_DRAW_SHIELD     equ $16
-SFX_SWORD_D         equ $18
-SFX_HOOT            equ $19
-SFX_COMPASS         equ $1B
-SFX_DOOR_RUMBLE     equ $2A
+WAVE_SFX_SEASHELL        equ $01
+WAVE_SFX_LINK_HURT       equ $03
+WAVE_SFX_LOW_HEARTS      equ $04
+WAVE_SFX_RUPEE           equ $05
+WAVE_SFX_BOSS_GRAWL      equ $07
+WAVE_SFX_OCARINA_BALLAD  equ $09
+WAVE_SFX_TYPEWRITER      equ $0F
+WAVE_SFX_BOSS_AGONY      equ $10
+WAVE_SFX_HOOT            equ $19
+WAVE_SFX_COMPASS         equ $1B
+
+; Values for hNoiseSfx
+NOISE_SFX_SWORD_A         equ $02
+NOISE_SFX_SPIN_ATTACK     equ $03
+NOISE_SFX_DOOR_UNLOCKED   equ $04
+NOISE_SFX_RUPEE           equ $05
+NOISE_SFX_STAIRS          equ $06
+NOISE_SFX_FOOTSTEP        equ $07
+NOISE_SFX_CRISTAL_SMASHED equ $09
+NOISE_SFX_SEA_WAVES       equ $0F
+NOISE_SFX_DOOR_CLOSED     equ $10
+NOISE_SFX_SWORD_B         equ $14
+NOISE_SFX_SWORD_C         equ $15
+NOISE_SFX_DRAW_SHIELD     equ $16
+NOISE_SFX_SWORD_D         equ $18
+NOISE_SFX_DOOR_RUMBLE     equ $2A

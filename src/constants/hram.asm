@@ -264,12 +264,12 @@ hJingle:: ; FFF2
 
 hWaveSfx:: ; FFF3
   ; Start playing a waveform audio effect
-  ; See SFX_* constants for possible values
+  ; See WAVE_SFX_* constants for possible values
   ds 1
 
 hNoiseSfx:: ; FFF4
   ; Play a noise-generated audio effect next
-  ; See SFX_* constants for possible values
+  ; See NOISE_SFX_* constants for possible values
   ds 1
 
 hFFF5: ds 1

@@ -491,10 +491,10 @@ DialogDrawNextCharacterHandler::
     ld   a, [wDialogSFX]
     ld   d, a
     ld   e, $01
-    cp   SFX_TYPEWRITER
+    cp   WAVE_SFX_TYPEWRITER
     jr   z, .handleFrequency
     ld   e, $07
-    cp   SFX_HOOT
+    cp   WAVE_SFX_HOOT
     jr   z, .handleFrequency
     ld   e, $03
 .handleFrequency

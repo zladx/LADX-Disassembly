@@ -1800,7 +1800,7 @@ UseShield::
     ld   a, [$C144]
     and  a
     ret  nz
-    ld   a, SFX_DRAW_SHIELD
+    ld   a, NOISE_SFX_DRAW_SHIELD
     ldh  [hNoiseSfx], a
     ret
 
@@ -2137,7 +2137,7 @@ label_1523::
     ret
 
 SwordRandomSfxTable::
-    db   SFX_SWORD_A, SFX_SWORD_B, SFX_SWORD_C, SFX_SWORD_D
+    db   NOISE_SFX_SWORD_A, NOISE_SFX_SWORD_B, NOISE_SFX_SWORD_C, NOISE_SFX_SWORD_D
 
 UseSword::
     ld   a, [$C16D]
@@ -6940,7 +6940,7 @@ label_398D::
     jr   z, .bossAgonyEnd
     dec  [hl]
     jr   nz, .bossAgonyEnd
-    ld   a, SFX_BOSS_AGONY
+    ld   a, WAVE_SFX_BOSS_AGONY
     ldh  [hWaveSfx], a
 .bossAgonyEnd
 

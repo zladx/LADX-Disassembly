@@ -512,7 +512,7 @@ wAlternateBackgroundEnabled:: ; C500
 ds $A6
 
 wBossAgonySFXCountdown:: ; C5A7
-  ; When reaching zero, play the SFX_BOSS_AGONY sound effect
+  ; When reaching zero, play the WAVE_SFX_BOSS_AGONY sound effect
   ds 1
 
 ; Unlabeled

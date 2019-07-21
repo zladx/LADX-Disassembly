@@ -7080,20 +7080,24 @@ label_3A54::
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [hActiveEntityType]
-    cp   $05
-    jp   z, label_3A8D
-    ; Jump table on FFEA value.
-    ; 0-4: unknown
-    ; 5: return immediately
-    ; 6-9: unknown
-    ; Entity timer type?
-    JP_TABLE
-    db 9, $3A, $18, $55, $B6, $4C, $4C, $4C, $B5, $48, $8D, $3A, 7, $4E, $32, $57
-    db $94, $4D
 
-label_3A81::
-    call label_3A8D
+    ldh  a, [hActiveEntityState]
+    cp   ENTITY_STATE_ACTIVE
+    jp   z, ExecuteActiveEntityHandler
+    JP_TABLE
+._00 dw LoadEntity_return
+._01 dw EntityState1Handler
+._02 dw EntityState2Handler
+._03 dw EntityDestructionHandler
+._04 dw EntityState4Handler
+._05 dw ExecuteActiveEntityHandler
+._06 dw EntityThrownHandler
+._07 dw EntityLiftedHandler
+._08 dw EntityState8Handler
+
+; Execute active entity handler, then return to bank 3
+ExecuteActiveEntityHandler_trampoline::
+    call ExecuteActiveEntityHandler
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a

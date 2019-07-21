@@ -1085,7 +1085,8 @@ jr_003_4D66:
     ldh  [hLinkPositionX], a                      ; $4D8F: $E0 $98
     jp   label_003_7F25                           ; $4D91: $C3 $25 $7F
 
-    call ExecuteActiveEntityHandler_trampoline                               ; $4D94: $CD $81 $3A
+EntityState8Handler::
+    call ExecuteActiveEntityHandler_trampoline    ; $4D94: $CD $81 $3A
     call func_003_7F7E                            ; $4D97: $CD $7E $7F
     ld   hl, $C410                                ; $4D9A: $21 $10 $C4
     add  hl, bc                                   ; $4D9D: $09
@@ -1152,9 +1153,10 @@ jr_003_4E04:
     ret                                           ; $4E04: $C9
 
     db   $10                                      ; $4E05: $10
-    ldh  a, [hSwordIntersectedAreaY]              ; $4E06: $F0 $CD
-    add  c                                        ; $4E08: $81
-    ld   a, [hl-]                                 ; $4E09: $3A
+    db   $F0                                      ; $4E06: $F0
+
+EntityThrownHandler::
+    call ExecuteActiveEntityHandler_trampoline    ; $4E07: $CD $81 $3A
     call func_003_7F7E                            ; $4E0A: $CD $7E $7F
     call func_003_7FA9                            ; $4E0D: $CD $A9 $7F
     call func_003_60B3                            ; $4E10: $CD $B3 $60
@@ -2747,8 +2749,10 @@ jr_003_56DF:
     ld   [$000E], sp                              ; $572C: $08 $0E $00
     nop                                           ; $572F: $00
     nop                                           ; $5730: $00
-    ld   c, $F0                                   ; $5731: $0E $F0
-    db   $eb                                      ; $5733: $EB
+    db   $0E                                      ; $5731: $0E
+
+EntityLiftedHandler::
+    ldh  a, [hActiveEntityType]                   ; $5732: $F0, $EB
     ld   [$C5A8], a                               ; $5734: $EA $A8 $C5
     cp   $02                                      ; $5737: $FE $02
     jr   nz, jr_003_5745                          ; $5739: $20 $0A

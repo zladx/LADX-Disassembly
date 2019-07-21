@@ -1026,7 +1026,7 @@ jr_014_4D6F:
     cp   $04                                      ; $4D8A: $FE $04
     jr   z, jr_014_4D97                           ; $4D8C: $28 $09
 
-    ld   hl, $C3A0                                ; $4D8E: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $4D8E: $21 $A0 $C3
     add  hl, bc                                   ; $4D91: $09
     ld   a, [hl]                                  ; $4D92: $7E
     cp   $83                                      ; $4D93: $FE $83

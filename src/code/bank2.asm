@@ -5035,7 +5035,7 @@ jr_002_602C:
     jr   z, jr_002_609B                           ; $603C: $28 $5D
 
 jr_002_603E:
-    ld   hl, $C3A0                                ; $603E: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $603E: $21 $A0 $C3
     add  hl, de                                   ; $6041: $19
     ld   a, [hl]                                  ; $6042: $7E
     cp   $EF                                      ; $6043: $FE $EF
@@ -5105,7 +5105,7 @@ jr_002_6098:
     jp   label_002_5EAB                           ; $6098: $C3 $AB $5E
 
 jr_002_609B:
-    ld   hl, $C3A0                                ; $609B: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $609B: $21 $A0 $C3
     add  hl, de                                   ; $609E: $19
     ld   a, [hl]                                  ; $609F: $7E
     cp   $F6                                      ; $60A0: $FE $F6

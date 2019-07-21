@@ -487,11 +487,11 @@ wEntitiesAltitudeVelocity:: ; C320
   ; Positive numbers increase the altitude, negative numbers decrease it
   ds $10
 
-ds $7F
+ds $70
 
-wDroppedItem:: ; C3AF
-  ; Status of one of the items that can be dropped by cutting herbs
-  ds 1
+wEntitiesTypeTable:: ; C3A0
+  ; Type of the entity
+  ds $10
 
 wEntitiesUnknownTableG:: ; C3B0
   ; Entity custom state?

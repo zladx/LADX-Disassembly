@@ -116,7 +116,7 @@ jr_007_408A:
     ld   a, [hl]                                  ; $40A0: $7E
     xor  $01                                      ; $40A1: $EE $01
     call label_3B0C                               ; $40A3: $CD $0C $3B
-    ld   hl, $C3A0                                ; $40A6: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $40A6: $21 $A0 $C3
     add  hl, bc                                   ; $40A9: $09
     ld   [hl], $05                                ; $40AA: $36 $05
     ld   hl, hNoiseSfx                             ; $40AC: $21 $F4 $FF
@@ -250,7 +250,7 @@ jr_007_415A:
     ld   [hl], $02                                ; $4181: $36 $02
     ld   hl, hWaveSfx                                 ; $4183: $21 $F3 $FF
     ld   [hl], $02                                ; $4186: $36 $02
-    ld   hl, $C3A0                                ; $4188: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $4188: $21 $A0 $C3
     add  hl, bc                                   ; $418B: $09
     ld   [hl], $05                                ; $418C: $36 $05
     ld   hl, $C440                                ; $418E: $21 $40 $C4
@@ -528,7 +528,7 @@ label_007_4328:
     ld   b, l                                     ; $4332: $45
     adc  e                                        ; $4333: $8B
     ld   b, l                                     ; $4334: $45
-    ld   hl, $C3A0                                ; $4335: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $4335: $21 $A0 $C3
 
 jr_007_4338:
     ld   a, [hl+]                                 ; $4338: $2A
@@ -5772,7 +5772,7 @@ jr_007_6172:
     and  a                                        ; $6177: $A7
     jr   z, jr_007_6188                           ; $6178: $28 $0E
 
-    ld   hl, $C3A0                                ; $617A: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $617A: $21 $A0 $C3
     add  hl, de                                   ; $617D: $19
     ld   a, [hl]                                  ; $617E: $7E
     cp   $A7                                      ; $617F: $FE $A7
@@ -6078,7 +6078,7 @@ jr_007_6327:
     and  a                                        ; $632C: $A7
     jr   z, jr_007_6341                           ; $632D: $28 $12
 
-    ld   hl, $C3A0                                ; $632F: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $632F: $21 $A0 $C3
     add  hl, de                                   ; $6332: $19
     ld   a, [hl]                                  ; $6333: $7E
     cp   $A6                                      ; $6334: $FE $A6
@@ -8533,7 +8533,7 @@ jr_007_7131:
     ld   d, b                                     ; $713D: $50
 
 jr_007_713E:
-    ld   hl, $C3A0                                ; $713E: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $713E: $21 $A0 $C3
     add  hl, de                                   ; $7141: $19
     ld   a, [hl]                                  ; $7142: $7E
     cp   $82                                      ; $7143: $FE $82

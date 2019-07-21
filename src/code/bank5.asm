@@ -521,7 +521,7 @@ jr_005_42B9:
     jr   z, jr_005_4323                           ; $42CF: $28 $52
 
     push de                                       ; $42D1: $D5
-    ld   hl, $C3A0                                ; $42D2: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $42D2: $21 $A0 $C3
     add  hl, de                                   ; $42D5: $19
     ld   e, [hl]                                  ; $42D6: $5E
     call label_3925                               ; $42D7: $CD $25 $39
@@ -610,7 +610,7 @@ label_005_4335:
     cp   $20                                      ; $4356: $FE $20
     ret  nc                                       ; $4358: $D0
 
-    ld   hl, $C3A0                                ; $4359: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $4359: $21 $A0 $C3
     add  hl, de                                   ; $435C: $19
     ld   a, [hl]                                  ; $435D: $7E
     cp   $3D                                      ; $435E: $FE $3D
@@ -647,7 +647,7 @@ jr_005_4380:
 
     ld   a, $03                                   ; $4387: $3E $03
     ldh  [hJingle], a                             ; $4389: $E0 $F2
-    ld   hl, $C3A0                                ; $438B: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $438B: $21 $A0 $C3
     add  hl, de                                   ; $438E: $19
     ld   a, [hl]                                  ; $438F: $7E
     cp   $AD                                      ; $4390: $FE $AD
@@ -3573,7 +3573,7 @@ jr_005_53E9:
     and  a                                        ; $53F2: $A7
     jr   z, jr_005_53FF                           ; $53F3: $28 $0A
 
-    ld   hl, $C3A0                                ; $53F5: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $53F5: $21 $A0 $C3
     add  hl, de                                   ; $53F8: $19
     ld   a, [hl]                                  ; $53F9: $7E
     cp   $6A                                      ; $53FA: $FE $6A
@@ -7337,7 +7337,7 @@ jr_005_68F6:
     cp   $05                                      ; $68FB: $FE $05
     jr   nz, jr_005_6953                          ; $68FD: $20 $54
 
-    ld   hl, $C3A0                                ; $68FF: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $68FF: $21 $A0 $C3
     add  hl, de                                   ; $6902: $19
     ld   a, [hl]                                  ; $6903: $7E
     cp   $02                                      ; $6904: $FE $02
@@ -9286,7 +9286,7 @@ jr_005_7395:
     and  a                                        ; $73AE: $A7
     jr   z, jr_005_7424                           ; $73AF: $28 $73
 
-    ld   hl, $C3A0                                ; $73B1: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $73B1: $21 $A0 $C3
     add  hl, de                                   ; $73B4: $19
     ld   a, [hl]                                  ; $73B5: $7E
     cp   $03                                      ; $73B6: $FE $03

@@ -6804,7 +6804,7 @@ label_38B4::
     add  hl, de
     add  a, $08
     ld   [hl], a
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [bc]
     inc  bc
@@ -7029,7 +7029,7 @@ label_3A0A::
     ret
 
 LoadEntity::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hActiveEntityId], a

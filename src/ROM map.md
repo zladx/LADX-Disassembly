@@ -8,7 +8,7 @@
 03 Code and data
 04 Ennemies code?
 05 Code and data
-06 Code and data
+06 Physics and IA
 07 n/a
 08 Indoor map data
 09 Overworld map pointers, Overworld map data (rooms 0-7F), text

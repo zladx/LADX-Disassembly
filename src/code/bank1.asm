@@ -2838,7 +2838,7 @@ label_5FD3::
     ld   d, $00
 
 label_5FDE::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $D5
@@ -2905,7 +2905,7 @@ label_6043::
     ld   d, $00
 
 label_6047::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $D4
@@ -2948,7 +2948,7 @@ label_607F::
     ld   d, $00
 
 label_608A::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $C1
@@ -3047,7 +3047,7 @@ label_611F::
     ld   d, $00
 
 label_612F::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $6D

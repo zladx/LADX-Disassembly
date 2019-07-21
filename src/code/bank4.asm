@@ -1796,7 +1796,7 @@ jr_004_4E2E:
     and  a                                        ; $4E37: $A7
     jr   z, jr_004_4E43                           ; $4E38: $28 $09
 
-    ld   hl, $C3A0                                ; $4E3A: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $4E3A: $21 $A0 $C3
     add  hl, de                                   ; $4E3D: $19
     ld   a, [hl]                                  ; $4E3E: $7E
     cp   $5B                                      ; $4E3F: $FE $5B
@@ -7893,7 +7893,7 @@ jr_004_7362:
     and  a                                        ; $736F: $A7
     jr   nz, jr_004_73B0                          ; $7370: $20 $3E
 
-    ld   hl, $C3A0                                ; $7372: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $7372: $21 $A0 $C3
     add  hl, de                                   ; $7375: $19
     ld   a, [hl]                                  ; $7376: $7E
     cp   $4F                                      ; $7377: $FE $4F

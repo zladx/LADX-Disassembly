@@ -9,4 +9,10 @@ ENTITY_STATE_THROWN     equ 6
 ENTITY_STATE_LIFTED     equ 7
 
 ; Values for wEntitiesTypeTable
-ENTITY_TYPE_RAFT_MAN    equ $6A
+ENTITY_GOLDEN_LEAF       equ $30
+ENTITY_SWORD             equ $31
+ENTITY_HEART_PIECE       equ $35
+ENTITY_HEART_CONTAINER   equ $36
+ENTITY_MUSHROOM          equ $3A
+ENTITY_SEASHELL          equ $3D
+ENTITY_TYPE_RAFT_MAN     equ $6A

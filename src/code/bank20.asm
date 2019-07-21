@@ -6,18 +6,6 @@
 ; First 2 bytes - memory pointer
 ; Third byte - bank ID
 ; IE - db $DC, $59, $03 is for heart container. When loaded, code will jump to bank $03 - Pointer $59DC (LoadHeartContainer)
-;
-; Sprite ID table
-; 30 - Golden Leaf
-; 31 - Sword
-; 35 - Heart Piece
-; 36 - Heart Container
-; 3A - Mushroom
-; 3D - Secret Seashell
-; 4F - Items from shop game - prop 16 -Magic powder - 15 shield - 14 heart and rupee?
-; CF - Windfish? Jacks everything up
-; E6 - Also breaks a lot of things
-; FB, FC, FE - Null pointers / Unused?
 EntityPointersTable::
     db $34, $6A, $03 ; $00
     db $61, $44, $19

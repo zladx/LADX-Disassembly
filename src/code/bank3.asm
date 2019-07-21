@@ -6718,7 +6718,7 @@ jr_003_6D73:
     ld   a, [$DBC7]                               ; $6D73: $FA $C7 $DB
     ld   hl, $C1C6                                ; $6D76: $21 $C6 $C1
     or   [hl]                                     ; $6D79: $B6
-    ld   hl, wC166                                ; $6D7A: $21 $66 $C1
+    ld   hl, wLinkPlayingOcarinaCountdown                                ; $6D7A: $21 $66 $C1
     or   [hl]                                     ; $6D7D: $B6
     ld   hl, wDialogGotItem                       ; $6D7E: $21 $A9 $C1
     or   [hl]                                     ; $6D81: $B6

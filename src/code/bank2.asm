@@ -36,7 +36,7 @@ jr_002_41FA:
 
 UseOcarina::
     ld   hl, $C146                                ; $41FC: $21 $46 $C1
-    ld   a, [wC166]                               ; $41FF: $FA $66 $C1
+    ld   a, [wLinkPlayingOcarinaCountdown]        ; $41FF: $FA $66 $C1
     or   [hl]                                     ; $4202: $B6
     ld   hl, $C1A4                                ; $4203: $21 $A4 $C1
     or   [hl]                                     ; $4206: $B6
@@ -44,7 +44,7 @@ UseOcarina::
 
     ld   [$C5A4], a                               ; $4208: $EA $A4 $C5
     ld   [$C5A5], a                               ; $420B: $EA $A5 $C5
-    call CopyLinkFinalPositionToPosition                                ; $420E: $CD $BE $0C
+    call CopyLinkFinalPositionToPosition          ; $420E: $CD $BE $0C
     ld   a, [$DB49]                               ; $4211: $FA $49 $DB
     and  $07                                      ; $4214: $E6 $07
     jr   z, jr_002_4241                           ; $4216: $28 $29
@@ -57,30 +57,30 @@ UseOcarina::
     jr   z, jr_002_4237                           ; $4221: $28 $14
 
     ld   a, $DC                                   ; $4223: $3E $DC
-    ld   [wC166], a                               ; $4225: $EA $66 $C1
-    ld   a, $09                                   ; $4228: $3E $09
-    ldh  [hWaveSfx], a                                ; $422A: $E0 $F3
+    ld   [wLinkPlayingOcarinaCountdown], a        ; $4225: $EA $66 $C1
+    ld   a, WAVE_SFX_OCARINA_BALLAD               ; $4228: $3E $09
+    ldh  [hWaveSfx], a                            ; $422A: $E0 $F3
     ret                                           ; $422C: $C9
 
 jr_002_422D:
     ld   a, $D0                                   ; $422D: $3E $D0
-    ld   [wC166], a                               ; $422F: $EA $66 $C1
-    ld   a, $0B                                   ; $4232: $3E $0B
-    ldh  [hWaveSfx], a                                ; $4234: $E0 $F3
+    ld   [wLinkPlayingOcarinaCountdown], a        ; $422F: $EA $66 $C1
+    ld   a, WAVE_SFX_OCARINA_MAMBO                ; $4232: $3E $0B
+    ldh  [hWaveSfx], a                            ; $4234: $E0 $F3
     ret                                           ; $4236: $C9
 
 jr_002_4237:
     ld   a, $BB                                   ; $4237: $3E $BB
-    ld   [wC166], a                               ; $4239: $EA $66 $C1
-    ld   a, $0A                                   ; $423C: $3E $0A
-    ldh  [hWaveSfx], a                                ; $423E: $E0 $F3
+    ld   [wLinkPlayingOcarinaCountdown], a        ; $4239: $EA $66 $C1
+    ld   a, WAVE_SFX_OCARINA_FROG                 ; $423C: $3E $0A
+    ldh  [hWaveSfx], a                            ; $423E: $E0 $F3
     ret                                           ; $4240: $C9
 
 jr_002_4241:
     ld   a, $D0                                   ; $4241: $3E $D0
-    ld   [wC166], a                               ; $4243: $EA $66 $C1
-    ld   a, $15                                   ; $4246: $3E $15
-    ldh  [hWaveSfx], a                                ; $4248: $E0 $F3
+    ld   [wLinkPlayingOcarinaCountdown], a        ; $4243: $EA $66 $C1
+    ld   a, WAVE_SFX_OCARINA_UNUSED               ; $4246: $3E $15
+    ldh  [hWaveSfx], a                            ; $4248: $E0 $F3
     ret                                           ; $424A: $C9
 
     ret                                           ; $424B: $C9
@@ -1138,7 +1138,7 @@ jr_002_49B6:
     ld   b, $01                                   ; $4A14: $06 $01
 
 func_002_4A16::
-    ld   a, [wC166]                               ; $4A16: $FA $66 $C1
+    ld   a, [wLinkPlayingOcarinaCountdown]                               ; $4A16: $FA $66 $C1
     and  a                                        ; $4A19: $A7
     ret  z                                        ; $4A1A: $C8
 
@@ -1161,7 +1161,7 @@ func_002_4A16::
     jr   nz, jr_002_4A53                          ; $4A3D: $20 $14
 
     xor  a                                        ; $4A3F: $AF
-    ld   [wC166], a                               ; $4A40: $EA $66 $C1
+    ld   [wLinkPlayingOcarinaCountdown], a                               ; $4A40: $EA $66 $C1
     ld   [wC167], a                               ; $4A43: $EA $67 $C1
     ld   a, $03                                   ; $4A46: $3E $03
     ld   [$C5A3], a                               ; $4A48: $EA $A3 $C5
@@ -1181,7 +1181,7 @@ jr_002_4A53:
     jr   z, jr_002_4A7A                           ; $4A5E: $28 $1A
 
     xor  a                                        ; $4A60: $AF
-    ld   [wC166], a                               ; $4A61: $EA $66 $C1
+    ld   [wLinkPlayingOcarinaCountdown], a                               ; $4A61: $EA $66 $C1
     ld   [wC167], a                               ; $4A64: $EA $67 $C1
     ld   a, $03                                   ; $4A67: $3E $03
     ld   [$C5A3], a                               ; $4A69: $EA $A3 $C5
@@ -1201,7 +1201,7 @@ jr_002_4A7A:
 jr_002_4A7C:
     call ClearLinkPositionIncrement               ; $4A7C: $CD $8E $17
     call label_CAF                                ; $4A7F: $CD $AF $0C
-    ld   hl, wC166                                ; $4A82: $21 $66 $C1
+    ld   hl, wLinkPlayingOcarinaCountdown                                ; $4A82: $21 $66 $C1
     dec  [hl]                                     ; $4A85: $35
     jr   nz, jr_002_4AD1                          ; $4A86: $20 $49
 
@@ -1278,7 +1278,7 @@ jr_002_4AF1:
     ld   a, $02                                   ; $4AF4: $3E $02
     ld   [wC167], a                               ; $4AF6: $EA $67 $C1
     ld   [wC111], a                               ; $4AF9: $EA $11 $C1
-    ld   a, [wC166]                               ; $4AFC: $FA $66 $C1
+    ld   a, [wLinkPlayingOcarinaCountdown]                               ; $4AFC: $FA $66 $C1
     cp   $10                                      ; $4AFF: $FE $10
     ret  c                                        ; $4B01: $D8
 
@@ -5376,8 +5376,8 @@ UpdateRupeesCount::
     or   [hl]                                     ; $6221: $B6
     jr   z, .jr_002_6274                          ; $6222: $28 $50
 
-    ld   a, $05                                   ; $6224: $3E $05
-    ldh  [hWaveSfx], a                                ; $6226: $E0 $F3
+    ld   a, WAVE_SFX_RUPEE                        ; $6224: $3E $05
+    ldh  [hWaveSfx], a                            ; $6226: $E0 $F3
     ld   a, [wAddRupeeBufferHigh]                 ; $6228: $FA $90 $DB
     ld   e, a                                     ; $622B: $5F
     ld   a, [$DB8F]                               ; $622C: $FA $8F $DB
@@ -5596,11 +5596,11 @@ jr_002_6374:
     cp   $06                                      ; $637A: $FE $06
     jr   nz, jr_002_6382                          ; $637C: $20 $04
 
-    ld   a, $06                                   ; $637E: $3E $06
-    ldh  [hWaveSfx], a                                ; $6380: $E0 $F3
+    ld   a, WAVE_SFX_HEART_PICKED_UP              ; $637E: $3E $06
+    ldh  [hWaveSfx], a                            ; $6380: $E0 $F3
 
 jr_002_6382:
-    jp   LoadHeartsCount                            ; $6382: $C3 $14 $64
+    jp   LoadHeartsCount                          ; $6382: $C3 $14 $64
 
 jr_002_6385:
     ld   a, [wDB94]                               ; $6385: $FA $94 $DB

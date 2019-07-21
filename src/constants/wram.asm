@@ -234,7 +234,9 @@ wC162: ds 1
 wC163: ds 1
 wDialogCharacterIndexHi: ds 1
 wC165: ds 1
-wC166: ds 1
+wLinkPlayingOcarinaCountdown: ; C166
+  ; While not zero, Link is shown playing the Ocarina
+  ds 1
 wC167: ds 1
 wC168: ds 1
 wNextJingle: ds 1 ; C169

@@ -1038,7 +1038,7 @@ jr_014_4D97:
     or   [hl]                                     ; $4D9D: $B6
     ld   hl, wDialogState                         ; $4D9E: $21 $9F $C1
     or   [hl]                                     ; $4DA1: $B6
-    ld   hl, wC166                                ; $4DA2: $21 $66 $C1
+    ld   hl, wLinkPlayingOcarinaCountdown                                ; $4DA2: $21 $66 $C1
     or   [hl]                                     ; $4DA5: $B6
     jr   nz, jr_014_4DED                          ; $4DA6: $20 $45
 

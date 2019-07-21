@@ -1554,7 +1554,7 @@ label_10EF::
     ld   [$DDD7], a
     ld   [$D464], a
     call label_27F2
-    ld   a, $08
+    ld   a, WAVE_SFX_LINK_DIES
     ldh  [hWaveSfx], a
 
 .handleLinkMotion

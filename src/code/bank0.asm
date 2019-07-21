@@ -749,9 +749,9 @@ label_C3A::
     ld   [MBC3SelectBank], a
     ret
 
-label_C4B::
+PlayBombExplosionSfx::
     ld   hl, hNoiseSfx
-    ld   [hl], $0C
+    ld   [hl], NOISE_SFX_BOMB_EXPLOSION
 
 label_C50::
     ld   hl, $C502

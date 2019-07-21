@@ -4133,7 +4133,7 @@ jr_005_574A:
     ld   [$C157], a                               ; $575B: $EA $57 $C1
     xor  a                                        ; $575E: $AF
     ld   [$C158], a                               ; $575F: $EA $58 $C1
-    call label_C4B                                ; $5762: $CD $4B $0C
+    call PlayBombExplosionSfx                                ; $5762: $CD $4B $0C
     ld   hl, $C300                                ; $5765: $21 $00 $C3
     add  hl, bc                                   ; $5768: $09
     ld   [hl], $FF                                ; $5769: $36 $FF
@@ -7478,7 +7478,7 @@ jr_005_69C4:
     cp   $24                                      ; $69C4: $FE $24
     jr   nz, jr_005_69CB                          ; $69C6: $20 $03
 
-    call label_C4B                                ; $69C8: $CD $4B $0C
+    call PlayBombExplosionSfx                                ; $69C8: $CD $4B $0C
 
 jr_005_69CB:
     cp   $04                                      ; $69CB: $FE $04
@@ -8203,7 +8203,7 @@ jr_005_6D7E:
     add  hl, bc                                   ; $6D9C: $09
     ld   [hl], $05                                ; $6D9D: $36 $05
     call label_3E34                               ; $6D9F: $CD $34 $3E
-    call label_C4B                                ; $6DA2: $CD $4B $0C
+    call PlayBombExplosionSfx                                ; $6DA2: $CD $4B $0C
     ld   hl, wEntity0Type                         ; $6DA5: $21 $80 $C2
     add  hl, bc                                   ; $6DA8: $09
     ld   [hl], $05                                ; $6DA9: $36 $05
@@ -8505,7 +8505,7 @@ jr_005_6F78:
     ld   hl, wEntity0Type                         ; $6F80: $21 $80 $C2
     add  hl, bc                                   ; $6F83: $09
     ld   [hl], $05                                ; $6F84: $36 $05
-    jp   label_C4B                                ; $6F86: $C3 $4B $0C
+    jp   PlayBombExplosionSfx                                ; $6F86: $C3 $4B $0C
 
     ret  nc                                       ; $6F89: $D0
 
@@ -9666,7 +9666,7 @@ jr_005_75C0:
     ld   [hl], $1F                                ; $75F2: $36 $1F
     ld   a, $02                                   ; $75F4: $3E $02
     call label_3B86                               ; $75F6: $CD $86 $3B
-    call label_C4B                                ; $75F9: $CD $4B $0C
+    call PlayBombExplosionSfx                                ; $75F9: $CD $4B $0C
     ldh  a, [hScratchA]                           ; $75FC: $F0 $D7
     ld   hl, wEntity0PosX                         ; $75FE: $21 $00 $C2
     add  hl, de                                   ; $7601: $19

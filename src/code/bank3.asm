@@ -5502,7 +5502,7 @@ jr_003_668C:
     jr   nz, jr_003_66AD                          ; $66A7: $20 $04
 
     dec  [hl]                                     ; $66A9: $35
-    call label_C4B                                ; $66AA: $CD $4B $0C
+    call PlayBombExplosionSfx                                ; $66AA: $CD $4B $0C
 
 jr_003_66AD:
     ld   hl, wHasPlacedBomb                       ; $66AD: $21 $4E $C1
@@ -6173,7 +6173,7 @@ jr_003_6A2E:
     ld   hl, wEntitiesFrameCounterTable           ; $6A8A: $21 $E0 $C2
     add  hl, de                                   ; $6A8D: $19
     ld   [hl], $17                                ; $6A8E: $36 $17
-    call label_C4B                                ; $6A90: $CD $4B $0C
+    call PlayBombExplosionSfx                                ; $6A90: $CD $4B $0C
 
 jr_003_6A93:
     jp   ClearEntityType                               ; $6A93: $C3 $8D $3F

@@ -1433,7 +1433,7 @@ jr_004_4A41:
     ld   [$C158], a                               ; $4A51: $EA $58 $C1
     call IsEntityFrameCounterZero                 ; $4A54: $CD $05 $0C
     ld   [hl], $40                                ; $4A57: $36 $40
-    call label_C4B                                ; $4A59: $CD $4B $0C
+    call PlayBombExplosionSfx                                ; $4A59: $CD $4B $0C
     ld   a, [$C146]                               ; $4A5C: $FA $46 $C1
     and  a                                        ; $4A5F: $A7
     jr   nz, jr_004_4A67                          ; $4A60: $20 $05
@@ -9928,7 +9928,7 @@ func_004_7EC0:
     call label_3B86                               ; $7EC2: $CD $86 $3B
     jr   c, jr_004_7EE4                           ; $7EC5: $38 $1D
 
-    call label_C4B                                ; $7EC7: $CD $4B $0C
+    call PlayBombExplosionSfx                                ; $7EC7: $CD $4B $0C
     ldh  a, [hScratchA]                               ; $7ECA: $F0 $D7
     ld   hl, wEntity0PosX                         ; $7ECC: $21 $00 $C2
     add  hl, de                                   ; $7ECF: $19

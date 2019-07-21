@@ -3322,7 +3322,7 @@ label_6903::
     dec  a
     ld   [$D210], a
     jr   nz, label_6944
-    call label_C4B
+    call PlayBombExplosionSfx
     ld   a, $30
     ld   [$D210], a
     ld   a, $30

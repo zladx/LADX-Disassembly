@@ -391,7 +391,7 @@ label_7087::
 label_70A9::
     ld   a, $1C
     ld   [$D000], a
-    call label_C4B
+    call PlayBombExplosionSfx
 
 label_70B1::
     ret

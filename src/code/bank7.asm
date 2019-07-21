@@ -10986,7 +10986,7 @@ label_007_7EC1:
     jp   label_007_7F76                           ; $7F07: $C3 $76 $7F
 
 jr_007_7F0A:
-    call label_C4B                                ; $7F0A: $CD $4B $0C
+    call PlayBombExplosionSfx                                ; $7F0A: $CD $4B $0C
     call label_27DD                               ; $7F0D: $CD $DD $27
     jp   label_3F50                               ; $7F10: $C3 $50 $3F
 

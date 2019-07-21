@@ -258,17 +258,17 @@ hActiveEntityUnknownG:: ; FFF1
   ds 1
 
 hJingle:: ; FFF2
-  ; Play a jingle immediately
+  ; Start playing a jingle
   ; See JINGLE_* constants for possible values
   ds 1
 
-hSFX:: ; FFF3
-  ; Plays audio effect immediately
+hWaveSfx:: ; FFF3
+  ; Start playing a waveform audio effect
   ; See SFX_* constants for possible values
   ds 1
 
-hNextSFX:: ; FFF4
-  ; Play audio effect next
+hNoiseSfx:: ; FFF4
+  ; Play a noise-generated audio effect next
   ; See SFX_* constants for possible values
   ds 1
 

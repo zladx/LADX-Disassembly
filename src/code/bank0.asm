@@ -98,7 +98,7 @@ PlayAudioStep::
     call $4006
 
     ; If an SFX is playing, return early
-    ldh  a, [hSFX]
+    ldh  a, [hWaveSfx]
     and  a
     jr   nz, .return
 
@@ -750,7 +750,7 @@ label_C3A::
     ret
 
 label_C4B::
-    ld   hl, hNextSFX
+    ld   hl, hNoiseSfx
     ld   [hl], $0C
 
 label_C50::
@@ -806,7 +806,7 @@ ApplyMapFadeOutTransition::
 
 label_C9A::
     ld   a, $06
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
 
 label_C9E::
     ; Prevent Link from moving during the transition
@@ -1555,7 +1555,7 @@ label_10EF::
     ld   [$D464], a
     call label_27F2
     ld   a, $08
-    ldh  [hSFX], a
+    ldh  [hWaveSfx], a
 
 .handleLinkMotion
     ld   a, [wLinkMotionState]
@@ -1801,7 +1801,7 @@ UseShield::
     and  a
     ret  nz
     ld   a, SFX_DRAW_SHIELD
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
     ret
 
 UseShovel::
@@ -1820,7 +1820,7 @@ label_1300::
 
 .notPoking
     ld   a, $0E
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
 .endIf
 
     ld   a, $01
@@ -1956,7 +1956,7 @@ ShootArrow::
 
 label_1401::
     ld   a, $0A
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
     ld   a, $06
 
 label_1407::
@@ -2163,7 +2163,7 @@ label_1535::
     ld   hl, SwordRandomSfxTable
     add  hl, de
     ld   a, [hl]
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
 
     call label_157C
     ld   a, [$C146]
@@ -2436,7 +2436,7 @@ label_16F8::
     ld   a, $17
 
 label_16FA::
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
     ret
 
 data_16FD::
@@ -2508,7 +2508,7 @@ label_1756::
     cp   $05
     jr   z, label_1781
     ld   a, $07
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
     ldh  a, [hLinkPositionY]
     add  a, $06
     ldh  [hScratchB], a
@@ -2587,7 +2587,7 @@ label_17DB::
     call label_142F
     jr   c, label_1814
     ld   a, $0D
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
     callsw label_002_538B
 
 label_1814::
@@ -3581,7 +3581,7 @@ label_2183::
     call label_142F
     jr   c, label_21A7
     ld   a, $02
-    ldh  [hSFX], a
+    ldh  [hWaveSfx], a
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   [hl], $07
@@ -6941,7 +6941,7 @@ label_398D::
     dec  [hl]
     jr   nz, .bossAgonyEnd
     ld   a, SFX_BOSS_AGONY
-    ldh  [hSFX], a
+    ldh  [hWaveSfx], a
 .bossAgonyEnd
 
     ; If no dialog is open…

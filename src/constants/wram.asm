@@ -547,7 +547,14 @@ wIntroSubTimer:: ; D002
 
 ; Unlabeled
 wD003 equ $D003
-  ds $365
+  ds $35D
+
+wActiveJingle:: ; D360
+  ; The squareform jingle currently playing
+  ds 1
+
+; D361-D367: squareform jingle parameters
+ds 7
 
 wWorldMusicTrack:: ; D368
   ; World Music Track
@@ -645,8 +652,21 @@ wWorldMusicTrack:: ; D368
   ; FF: Nothing
   ds 1
 
+wActiveWaveSfx:: ; D370
+  ; The waveform sound effect currently playing
+  ds 1
+
+; D371-D377: wave sound effect parameters
+ds 7
+
+wActiveNoiseSfx:: ; D378
+  ; The noise generator sound effect currently playing
+  ds 1
+
+; D379-D???: noise sound effect parameters
+
 ; Unlabeled
-ds $98
+ds $8F
 
 ; Room warps
 ;

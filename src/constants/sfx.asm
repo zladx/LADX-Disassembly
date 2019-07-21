@@ -36,7 +36,7 @@ JINGLE_INSTRUMENT_WARP  equ $2B
 JINGLE_MANBO_WARP       equ $2C
 JINGLE_ENNEMY_SHRIEK    equ $3C
 
-; Values for hSfx
+; Values for hWaveSfx
 SFX_SWORD_A         equ $02
 SFX_SPIN_ATTACK     equ $03
 SFX_DOOR_UNLOCKED   equ $04

@@ -480,7 +480,7 @@ PerformOverworldAudioTasks::
     jr   nz, .compassSfxEnd                       ; $4AC6: $20 $04
     ; play the compass sfx.
     ld   a, SFX_COMPASS                           ; $4AC8: $3E $1B
-    ldh  [hSFX], a                                ; $4ACA: $E0 $F3
+    ldh  [hWaveSfx], a                                ; $4ACA: $E0 $F3
 .compassSfxEnd
 
     ;
@@ -533,7 +533,7 @@ jr_014_4AE7:
     jr   nz, .jr_014_4B09                         ; $4B02: $20 $05
 
     ld   a, $0F                                   ; $4B04: $3E $0F
-    ldh  [hNextSFX], a                            ; $4B06: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $4B06: $E0 $F4
     xor  a                                        ; $4B08: $AF
 
 .jr_014_4B09

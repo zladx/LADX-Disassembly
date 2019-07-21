@@ -916,7 +916,7 @@ jr_003_4C8C:
     ld   hl, $C340                                ; $4C98: $21 $40 $C3
     add  hl, bc                                   ; $4C9B: $09
     ld   [hl], $04                                ; $4C9C: $36 $04
-    ld   hl, hNextSFX                             ; $4C9E: $21 $F4 $FF
+    ld   hl, hNoiseSfx                             ; $4C9E: $21 $F4 $FF
     ld   [hl], $13                                ; $4CA1: $36 $13
     ret                                           ; $4CA3: $C9
 
@@ -1106,7 +1106,7 @@ jr_003_4D66:
     ld   hl, $C420                                ; $4DBC: $21 $20 $C4
     add  hl, bc                                   ; $4DBF: $09
     ld   [hl], $20                                ; $4DC0: $36 $20
-    ld   hl, hSFX                                 ; $4DC2: $21 $F3 $FF
+    ld   hl, hWaveSfx                                 ; $4DC2: $21 $F3 $FF
     ld   [hl], $07                                ; $4DC5: $36 $07
     ld   hl, $C440                                ; $4DC7: $21 $40 $C4
     add  hl, bc                                   ; $4DCA: $09
@@ -1203,7 +1203,7 @@ jr_003_4E35:
     add  hl, bc                                   ; $4E59: $09
     ld   [hl], $07                                ; $4E5A: $36 $07
     ld   a, $02                                   ; $4E5C: $3E $02
-    ldh  [hSFX], a                                ; $4E5E: $E0 $F3
+    ldh  [hWaveSfx], a                                ; $4E5E: $E0 $F3
     ld   hl, $C490                                ; $4E60: $21 $90 $C4
     add  hl, bc                                   ; $4E63: $09
     ld   [hl], b                                  ; $4E64: $70
@@ -1541,7 +1541,7 @@ Data_003_5057::
     ld   a, $2A                                   ; $506D: $3E $2A
     ld   [wC111], a                               ; $506F: $EA $11 $C1
     ld   a, $04                                   ; $5072: $3E $04
-    ldh  [hNextSFX], a                            ; $5074: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $5074: $E0 $F4
     ld   de, Data_003_504F                        ; $5076: $11 $4F $50
     ldh  a, [hIsGBC]                              ; $5079: $F0 $FE
     and  a                                        ; $507B: $A7
@@ -1753,7 +1753,7 @@ jr_003_5154:
 
 jr_003_5198:
     ld   a, $11                                   ; $5198: $3E $11
-    ldh  [hNextSFX], a                            ; $519A: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $519A: $E0 $F4
     ld   de, $5166                                ; $519C: $11 $66 $51
     ld   b, $C6                                   ; $519F: $06 $C6
     ldh  a, [hMapRoom]                            ; $51A1: $F0 $F6
@@ -2151,7 +2151,7 @@ jr_003_53B6:
 
 func_003_53E4::
 jr_003_53E4:
-    ld   hl, hNextSFX                             ; $53E4: $21 $F4 $FF
+    ld   hl, hNoiseSfx                             ; $53E4: $21 $F4 $FF
     ld   [hl], $05                                ; $53E7: $36 $05
     ld   e, $1F                                   ; $53E9: $1E $1F
     ldh  a, [hActiveEntityUnknownG]               ; $53EB: $F0 $F1
@@ -2202,7 +2202,7 @@ jr_003_5406:
     add  hl, de                                   ; $542E: $19
     ld   [hl], $C4                                ; $542F: $36 $C4
     ld   a, $09                                   ; $5431: $3E $09
-    ldh  [hNextSFX], a                            ; $5433: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $5433: $E0 $F4
     jp   ClearEntityType                               ; $5435: $C3 $8D $3F
 
 func_003_5438::
@@ -2444,10 +2444,10 @@ jr_003_556F:
     jr   nz, jr_003_5594                          ; $558E: $20 $04
 
     ld   a, $12                                   ; $5590: $3E $12
-    ldh  [hSFX], a                                ; $5592: $E0 $F3
+    ldh  [hWaveSfx], a                                ; $5592: $E0 $F3
 
 jr_003_5594:
-    ld   hl, hNextSFX                             ; $5594: $21 $F4 $FF
+    ld   hl, hNoiseSfx                             ; $5594: $21 $F4 $FF
     ld   [hl], $13                                ; $5597: $36 $13
 
 jr_003_5599:
@@ -3586,7 +3586,7 @@ jr_003_5BE1:
     ld   a, $20                                   ; $5BF5: $3E $20
     ld   [wIsUsingSpinAttack], a                  ; $5BF7: $EA $21 $C1
     ld   a, $03                                   ; $5BFA: $3E $03
-    ldh  [hNextSFX], a                            ; $5BFC: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $5BFC: $E0 $F4
     jp   IncrementEntityWalkingAttr               ; $5BFE: $C3 $12 $3B
 
     call IsEntityFrameCounterZero                 ; $5C01: $CD $05 $0C
@@ -3981,7 +3981,7 @@ jr_003_5E29:
     jr   nz, jr_003_5E45                          ; $5E3E: $20 $05
 
     ld   a, $2C                                   ; $5E40: $3E $2C
-    ldh  [hNextSFX], a                            ; $5E42: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $5E42: $E0 $F4
     xor  a                                        ; $5E44: $AF
 
 jr_003_5E45:
@@ -4456,7 +4456,7 @@ jr_003_6112:
     jr   nz, jr_003_6120                          ; $6118: $20 $06
 
     ld   a, $17                                   ; $611A: $3E $17
-    ldh  [hNextSFX], a                            ; $611C: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $611C: $E0 $F4
     jr   jr_003_6134                              ; $611E: $18 $14
 
 jr_003_6120:
@@ -4838,7 +4838,7 @@ jr_003_6311:
     jr   jr_003_632D                              ; $6326: $18 $05
 
 jr_003_6328:
-    ld   hl, hSFX                                 ; $6328: $21 $F3 $FF
+    ld   hl, hWaveSfx                                 ; $6328: $21 $F3 $FF
     ld   [hl], $01                                ; $632B: $36 $01
 
 jr_003_632D:
@@ -6099,7 +6099,7 @@ jr_003_69F8:
     ld   a, $08                                   ; $6A14: $3E $08
     call label_CC7                                ; $6A16: $CD $C7 $0C
     ld   a, $13                                   ; $6A19: $3E $13
-    ldh  [hNextSFX], a                            ; $6A1B: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $6A1B: $E0 $F4
 
 jr_003_6A1D:
     ret                                           ; $6A1D: $C9
@@ -6623,7 +6623,7 @@ label_003_6CD5:
     ldh  [hLinkPositionYIncrement], a             ; $6CEF: $E0 $9B
     call label_3D7F                               ; $6CF1: $CD $7F $3D
     ld   a, $0E                                   ; $6CF4: $3E $0E
-    ldh  [hSFX], a                                ; $6CF6: $E0 $F3
+    ldh  [hWaveSfx], a                                ; $6CF6: $E0 $F3
     ret                                           ; $6CF8: $C9
 
 jr_003_6CF9:
@@ -6663,7 +6663,7 @@ jr_003_6D1B:
     call IsEntityFrameCounterZero                 ; $6D25: $CD $05 $0C
     ld   [hl], $30                                ; $6D28: $36 $30
     ld   a, $0E                                   ; $6D2A: $3E $0E
-    ldh  [hSFX], a                                ; $6D2C: $E0 $F3
+    ldh  [hWaveSfx], a                                ; $6D2C: $E0 $F3
     ldh  a, [hIsSideScrolling]                    ; $6D2E: $F0 $F9
     and  a                                        ; $6D30: $A7
     jr   nz, jr_003_6D38                          ; $6D31: $20 $05
@@ -6711,7 +6711,7 @@ jr_003_6D5D:
     call IncrementEntityWalkingAttr               ; $6D69: $CD $12 $3B
     ld   [hl], $08                                ; $6D6C: $36 $08
     ld   a, $03                                   ; $6D6E: $3E $03
-    ldh  [hSFX], a                                ; $6D70: $E0 $F3
+    ldh  [hWaveSfx], a                                ; $6D70: $E0 $F3
     ret                                           ; $6D72: $C9
 
 jr_003_6D73:
@@ -6725,7 +6725,7 @@ jr_003_6D73:
     jp   nz, label_003_6E0A                       ; $6D82: $C2 $0A $6E
 
     ld   a, $03                                   ; $6D85: $3E $03
-    ldh  [hSFX], a                                ; $6D87: $E0 $F3
+    ldh  [hWaveSfx], a                                ; $6D87: $E0 $F3
     ld   hl, $C4D0                                ; $6D89: $21 $D0 $C4
     add  hl, bc                                   ; $6D8C: $09
     ld   d, b                                     ; $6D8D: $50
@@ -7215,7 +7215,7 @@ jr_003_7018:
     ld   [wC16A], a                               ; $7035: $EA $6A $C1
     ld   [wIsUsingSpinAttack], a                  ; $7038: $EA $21 $C1
     ld   a, $1C                                   ; $703B: $3E $1C
-    ldh  [hNextSFX], a                            ; $703D: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $703D: $E0 $F4
     jp   label_003_6CD5                           ; $703F: $C3 $D5 $6C
 
 jr_003_7042:
@@ -7427,7 +7427,7 @@ jr_003_717A:
     add  hl, bc                                   ; $7186: $09
     ld   [hl], $01                                ; $7187: $36 $01
     ld   a, $11                                   ; $7189: $3E $11
-    ldh  [hSFX], a                                ; $718B: $E0 $F3
+    ldh  [hWaveSfx], a                                ; $718B: $E0 $F3
     ld   hl, wEntity0Type                         ; $718D: $21 $80 $C2
     add  hl, bc                                   ; $7190: $09
     ld   a, [hl]                                  ; $7191: $7E
@@ -7534,7 +7534,7 @@ jr_003_7215:
     and  $80                                      ; $721F: $E6 $80
     jr   z, jr_003_7228                           ; $7221: $28 $05
 
-    ld   hl, hSFX                                 ; $7223: $21 $F3 $FF
+    ld   hl, hWaveSfx                                 ; $7223: $21 $F3 $FF
     ld   [hl], $07                                ; $7226: $36 $07
 
 jr_003_7228:
@@ -7545,7 +7545,7 @@ jr_003_7228:
     jr   nz, jr_003_7235                          ; $722F: $20 $04
 
     ld   a, $13                                   ; $7231: $3E $13
-    ldh  [hSFX], a                                ; $7233: $E0 $F3
+    ldh  [hWaveSfx], a                                ; $7233: $E0 $F3
 
 jr_003_7235:
     pop  af                                       ; $7235: $F1
@@ -7555,7 +7555,7 @@ jr_003_7235:
     cp   $FE                                      ; $723A: $FE $FE
     jr   nz, jr_003_7260                          ; $723C: $20 $22
 
-    ld   hl, hNextSFX                             ; $723E: $21 $F4 $FF
+    ld   hl, hNoiseSfx                             ; $723E: $21 $F4 $FF
     ld   [hl], $12                                ; $7241: $36 $12
     call func_003_73DB                            ; $7243: $CD $DB $73
     ld   hl, wEntity0Type                         ; $7246: $21 $80 $C2
@@ -9475,7 +9475,7 @@ jr_003_7CFD:
 
     push hl                                       ; $7D09: $E5
     ld   a, $12                                   ; $7D0A: $3E $12
-    ldh  [hNextSFX], a                            ; $7D0C: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $7D0C: $E0 $F4
     ld   a, $08                                   ; $7D0E: $3E $08
     call func_003_64CA                            ; $7D10: $CD $CA $64
     jr   c, jr_003_7D6A                           ; $7D13: $38 $55

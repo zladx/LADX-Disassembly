@@ -432,7 +432,7 @@ label_651E::
     cp   $A0
     jr   nz, label_652E
     ld   a, $0F
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
     xor  a
 
 label_652E::

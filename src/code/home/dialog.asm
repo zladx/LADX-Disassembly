@@ -503,7 +503,7 @@ DialogDrawNextCharacterHandler::
     and  e
     jr   nz, .skipSFX
     ld   a, d
-    ldh  [hSFX], a
+    ldh  [hWaveSfx], a
 .skipSFX
     pop  af
 

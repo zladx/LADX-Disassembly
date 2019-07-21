@@ -1249,10 +1249,10 @@ FileCopyHandler::
     jp   FileCopyEntryPoint
 
 WorldHandler::
-    ld   a, $14
+    ld   a, BANK(UpdatePaletteEffectForInteractiveObjects)
     ld   [MBC3SelectBank], a
-    call $4C4B
-    call $4ABC
+    call UpdatePaletteEffectForInteractiveObjects
+    call func_014_4ABC
     jpsw WorldHandlerEntryPoint
 
 InventoryHandler::

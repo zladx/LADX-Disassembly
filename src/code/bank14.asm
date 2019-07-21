@@ -462,6 +462,8 @@ jr_014_4A6B:
     ld   h, b                                     ; $4AB9: $60
     ld   l, b                                     ; $4ABA: $68
     ld   [hl], b                                  ; $4ABB: $70
+
+func_014_4ABC::
     ld   a, [wCompassSfxCountdown]                ; $4ABC: $FA $62 $D4
     and  a                                        ; $4ABF: $A7
     jr   z, jr_014_4ACC                           ; $4AC0: $28 $0A
@@ -760,51 +762,66 @@ jr_014_4C12:
     nop                                           ; $4C3D: $00
     nop                                           ; $4C3E: $00
     nop                                           ; $4C3F: $00
-    nop                                           ; $4C40: $00
-    nop                                           ; $4C41: $00
-    nop                                           ; $4C42: $00
-    ld   bc, $0001                                ; $4C43: $01 $01 $00
-    nop                                           ; $4C46: $00
-    nop                                           ; $4C47: $00
-    nop                                           ; $4C48: $00
-    nop                                           ; $4C49: $00
-    nop                                           ; $4C4A: $00
+
+; Indicates whether the palette effects applied by some specific
+; objects are disabled, depending on Link's motion state.
+PaletteEffectDisabledTable::
+.LINK_MOTION_INTERACTIVE    db 0
+.LINK_MOTION_FALLING_UP     db 0
+.LINK_MOTION_JUMPING        db 0
+.LINK_MOTION_MAP_FADE_OUT   db 1
+.LINK_MOTION_MAP_FADE_IN    db 1
+.LINK_MOTION_REVOLVING_DOOR db 0
+.LINK_MOTION_FALLING_DOWN   db 0
+.LINK_MOTION_PASS_OUT       db 0
+.LINK_MOTION_RECOVER        db 0
+.LINK_MOTION_TELEPORT       db 0
+.LINK_MOTION_UNKNOWN        db 0
+
+; Update the palette effects for interactive objects
+; (for instance a dark palette when torches are not lit)
+UpdatePaletteEffectForInteractiveObjects::
+    ; If gameplay subtype != GAMEPLAY_WORLD_DEFAULT, return
     ld   a, [wGameplaySubtype]                    ; $4C4B: $FA $96 $DB
-    cp   $07                                      ; $4C4E: $FE $07
+    cp   GAMEPLAY_WORLD_DEFAULT                   ; $4C4E: $FE $07
     ret  nz                                       ; $4C50: $C0
 
+    ; If Transition Sequence Counter != 4, return
     ld   a, [wTransitionSequenceCounter]          ; $4C51: $FA $6B $C1
     cp   $04                                      ; $4C54: $FE $04
     ret  nz                                       ; $4C56: $C0
 
+    ; If there is no object currently affecting the background palette, return
     ld   a, [wObjectAffectingBGPalette]           ; $4C57: $FA $CB $C3
     and  a                                        ; $4C5A: $A7
-    jr   z, jr_014_4CB1                           ; $4C5B: $28 $54
+    jr   z, .return                               ; $4C5B: $28 $54
 
+    ; If Link's motion state doesn't allow for palette effects, return
     xor  a                                        ; $4C5D: $AF
     ldh  [hScratchA], a                           ; $4C5E: $E0 $D7
     ld   d, a                                     ; $4C60: $57
     ld   a, [wLinkMotionState]                    ; $4C61: $FA $1C $C1
     ld   e, a                                     ; $4C64: $5F
-    ld   hl, $4C40                                ; $4C65: $21 $40 $4C
+    ld   hl, PaletteEffectDisabledTable           ; $4C65: $21 $40 $4C
     add  hl, de                                   ; $4C68: $19
     ld   a, [hl]                                  ; $4C69: $7E
     and  a                                        ; $4C6A: $A7
-    jr   nz, jr_014_4CB1                          ; $4C6B: $20 $44
+    jr   nz, .return                              ; $4C6B: $20 $44
+
 
     ld   a, [wWindowY]                            ; $4C6D: $FA $9A $DB
     cp   $00                                      ; $4C70: $FE $00
-    jr   z, jr_014_4C82                           ; $4C72: $28 $0E
+    jr   z, .jr_014_4C82                          ; $4C72: $28 $0E
 
     ld   hl, wTransitionGfx                       ; $4C74: $21 $7F $C1
     ld   a, [wDialogState]                        ; $4C77: $FA $9F $C1
     or   [hl]                                     ; $4C7A: $B6
-    jr   nz, jr_014_4C82                          ; $4C7B: $20 $05
+    jr   nz, .jr_014_4C82                         ; $4C7B: $20 $05
 
     ld   a, [wC3CD]                               ; $4C7D: $FA $CD $C3
     ldh  [hScratchA], a                           ; $4C80: $E0 $D7
 
-jr_014_4C82:
+.jr_014_4C82
     ld   a, [wBGPaletteEffectAddress]             ; $4C82: $FA $CC $C3
     ld   e, a                                     ; $4C85: $5F
     ldh  a, [hFrameCounter]                       ; $4C86: $F0 $E7
@@ -816,29 +833,30 @@ jr_014_4C82:
     ld   a, [hl]                                  ; $4C90: $7E
     ld   [wBGPalette], a                          ; $4C91: $EA $97 $DB
     ld   [$C5AD], a                               ; $4C94: $EA $AD $C5
+
     ldh  a, [hIsGBC]                              ; $4C97: $F0 $FE
     and  a                                        ; $4C99: $A7
     jr   nz, jr_014_4CB2                          ; $4C9A: $20 $16
 
     ldh  a, [hFrameCounter]                       ; $4C9C: $F0 $E7
     and  $01                                      ; $4C9E: $E6 $01
-    jr   nz, jr_014_4CB1                          ; $4CA0: $20 $0F
+    jr   nz, .return                              ; $4CA0: $20 $0F
 
     ldh  a, [hScratchA]                           ; $4CA2: $F0 $D7
     ld   hl, wBGPaletteEffectAddress              ; $4CA4: $21 $CC $C3
     sub  [hl]                                     ; $4CA7: $96
-    jr   z, jr_014_4CB1                           ; $4CA8: $28 $07
+    jr   z, .return                               ; $4CA8: $28 $07
 
     and  $80                                      ; $4CAA: $E6 $80
-    jr   nz, jr_014_4CB0                          ; $4CAC: $20 $02
+    jr   nz, .jr_014_4CB0                         ; $4CAC: $20 $02
 
     inc  [hl]                                     ; $4CAE: $34
     inc  [hl]                                     ; $4CAF: $34
 
-jr_014_4CB0:
+.jr_014_4CB0
     dec  [hl]                                     ; $4CB0: $35
 
-jr_014_4CB1:
+.return
     ret                                           ; $4CB1: $C9
 
 jr_014_4CB2:

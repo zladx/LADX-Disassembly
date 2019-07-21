@@ -50,4 +50,5 @@ SFX_SWORD_C         equ $15
 SFX_DRAW_SHIELD     equ $16
 SFX_SWORD_D         equ $18
 SFX_HOOT            equ $19
+SFX_COMPASS         equ $1B
 SFX_DOOR_RUMBLE     equ $2A

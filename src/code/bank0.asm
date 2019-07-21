@@ -1252,7 +1252,7 @@ WorldHandler::
     ld   a, BANK(UpdatePaletteEffectForInteractiveObjects)
     ld   [MBC3SelectBank], a
     call UpdatePaletteEffectForInteractiveObjects
-    call func_014_4ABC
+    call PerformOverworldAudioTasks
     jpsw WorldHandlerEntryPoint
 
 InventoryHandler::

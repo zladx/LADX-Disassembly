@@ -454,7 +454,7 @@ jr_014_4A6B:
 
     jr   z, jr_014_4AE4                           ; $4AB2: $28 $30
 
-    jr   c, jr_014_4AF6                           ; $4AB4: $38 $40
+    db   $38, $40                                 ; $4AB4: $38 $40
 
     ld   c, b                                     ; $4AB6: $48
     ld   d, b                                     ; $4AB7: $50
@@ -463,7 +463,8 @@ jr_014_4A6B:
     ld   l, b                                     ; $4ABA: $68
     ld   [hl], b                                  ; $4ABB: $70
 
-func_014_4ABC::
+; Execute recurrent audio tasks on each frame of the overworld
+PerformOverworldAudioTasks::
     ;
     ; Play compass SFX at countdown end
     ;
@@ -507,34 +508,38 @@ jr_014_4AE4:
     ld   [wWorldMusicTrack], a                    ; $4AE4: $EA $68 $D3
 
 jr_014_4AE7:
+
+    ;
+    ; Play waves SFX on beaches overworld rooms
+    ;
+
+    ; If is on overworld…
     ld   a, [wIsIndoor]                           ; $4AE7: $FA $A5 $DB
     and  a                                        ; $4AEA: $A7
-    jr   nz, jr_014_4B0C                          ; $4AEB: $20 $1F
+    jr   nz, .wavesSfxEnd                         ; $4AEB: $20 $1F
 
+    ; If $F0 <= map room < $F6…
     ldh  a, [hMapRoom]                            ; $4AED: $F0 $F6
     ld   [wDB54], a                               ; $4AEF: $EA $54 $DB
     ldh  a, [hMapRoom]                            ; $4AF2: $F0 $F6
     cp   $F0                                      ; $4AF4: $FE $F0
-
-jr_014_4AF6:
-    jr   c, jr_014_4B0C                           ; $4AF6: $38 $14
-
+    jr   c, .wavesSfxEnd                           ; $4AF6: $38 $14
     cp   $F6                                      ; $4AF8: $FE $F6
-    jr   nc, jr_014_4B0C                          ; $4AFA: $30 $10
+    jr   nc, .wavesSfxEnd                         ; $4AFA: $30 $10
 
     ld   a, [wC114]                               ; $4AFC: $FA $14 $C1
     inc  a                                        ; $4AFF: $3C
     cp   $A0                                      ; $4B00: $FE $A0
-    jr   nz, jr_014_4B09                          ; $4B02: $20 $05
+    jr   nz, .jr_014_4B09                         ; $4B02: $20 $05
 
     ld   a, $0F                                   ; $4B04: $3E $0F
     ldh  [hNextSFX], a                            ; $4B06: $E0 $F4
     xor  a                                        ; $4B08: $AF
 
-jr_014_4B09:
+.jr_014_4B09
     ld   [wC114], a                               ; $4B09: $EA $14 $C1
+.wavesSfxEnd
 
-jr_014_4B0C:
     ld   a, [wMaxHealth]                          ; $4B0C: $FA $5B $DB
     ld   e, a                                     ; $4B0F: $5F
     ld   d, b                                     ; $4B10: $50

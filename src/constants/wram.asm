@@ -41,7 +41,12 @@ wC110: ds 1
 wC111: ds 1
 wDialogIndexHi: ds 1
 wC113: ds 1
-wC114: ds 1
+
+wNoiseSfxSeaWavesCounter::
+  ; Delay for repeatin the NOISE_SFX_SEA_WAVES sound effect
+  ; Plays when reaching $A0
+  ds 1
+
 wC115: ds 1
 wC116: ds 1
 wC117: ds 1
@@ -229,7 +234,9 @@ wC162: ds 1
 wC163: ds 1
 wDialogCharacterIndexHi: ds 1
 wC165: ds 1
-wC166: ds 1
+wLinkPlayingOcarinaCountdown: ; C166
+  ; While not zero, Link is shown playing the Ocarina
+  ds 1
 wC167: ds 1
 wC168: ds 1
 wNextJingle: ds 1 ; C169
@@ -512,7 +519,7 @@ wAlternateBackgroundEnabled:: ; C500
 ds $A6
 
 wBossAgonySFXCountdown:: ; C5A7
-  ; When reaching zero, play the SFX_BOSS_AGONY sound effect
+  ; When reaching zero, play the WAVE_SFX_BOSS_AGONY sound effect
   ds 1
 
 ; Unlabeled
@@ -524,6 +531,13 @@ wEggMazeProgress:: ; C5AA
 
 wDialogSFX:: ; C5AB
     ds 1
+
+; Unlabeled
+ds 3
+
+wNextWorldMusicTrackCountdown:: ; C5AF
+  ; When reaching zero, play wNextWorldMusicTrack
+  ds 1
 
 section "WRAM Bank1", wramx[$d000], bank[1]
 
@@ -540,7 +554,14 @@ wIntroSubTimer:: ; D002
 
 ; Unlabeled
 wD003 equ $D003
-  ds $365
+  ds $35D
+
+wActiveJingle:: ; D360
+  ; The squareform jingle currently playing
+  ds 1
+
+; D361-D367: squareform jingle parameters
+ds 7
 
 wWorldMusicTrack:: ; D368
   ; World Music Track
@@ -638,8 +659,21 @@ wWorldMusicTrack:: ; D368
   ; FF: Nothing
   ds 1
 
+wActiveWaveSfx:: ; D370
+  ; The waveform sound effect currently playing
+  ds 1
+
+; D371-D377: wave sound effect parameters
+ds 7
+
+wActiveNoiseSfx:: ; D378
+  ; The noise generator sound effect currently playing
+  ds 1
+
+; D379-D???: noise sound effect parameters
+
 ; Unlabeled
-ds $98
+ds $8F
 
 ; Room warps
 ;
@@ -1113,7 +1147,11 @@ wWindowY:: ; DB9A
   ds 1
 
 ; Unlabeled
-ds 2
+ds 1
+
+wMapEntranceRoom:: ; DB9C
+  ; Initial room of Link when loading a new map
+  ds 1
 
 wMapEntrancePositionX:: ; DB9D
   ; Initial position of Link when loading a new map

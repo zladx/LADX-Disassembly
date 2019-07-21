@@ -149,7 +149,7 @@ SelectMusicTrackAfterTransition::
     ld   a, $49 ; Piece of Power / Accorn         ; $41C2: $3E $49
     ld   [wWorldMusicTrack], a                    ; $41C4: $EA $68 $D3
     ldh  [$FFBD], a                               ; $41C7: $E0 $BD
-    ldh  [$FFBF], a                               ; $41C9: $E0 $BF
+    ldh  [hNextWorldMusicTrack], a                ; $41C9: $E0 $BF
     xor  a                                        ; $41CB: $AF
     ld   [$C1CF], a                               ; $41CC: $EA $CF $C1
 

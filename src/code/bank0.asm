@@ -98,7 +98,7 @@ PlayAudioStep::
     call $4006
 
     ; If an SFX is playing, return early
-    ldh  a, [hSFX]
+    ldh  a, [hWaveSfx]
     and  a
     jr   nz, .return
 
@@ -749,9 +749,9 @@ label_C3A::
     ld   [MBC3SelectBank], a
     ret
 
-label_C4B::
-    ld   hl, hNextSFX
-    ld   [hl], $0C
+PlayBombExplosionSfx::
+    ld   hl, hNoiseSfx
+    ld   [hl], NOISE_SFX_BOMB_EXPLOSION
 
 label_C50::
     ld   hl, $C502
@@ -792,6 +792,8 @@ ApplyMapFadeOutTransition::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9A
+
+label_C83::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9E
@@ -805,8 +807,8 @@ ApplyMapFadeOutTransition::
     ldh  [hFFBC], a
 
 label_C9A::
-    ld   a, $06
-    ldh  [hNextSFX], a
+    ld   a, NOISE_SFX_STAIRS
+    ldh  [hNoiseSfx], a
 
 label_C9E::
     ; Prevent Link from moving during the transition
@@ -1249,10 +1251,10 @@ FileCopyHandler::
     jp   FileCopyEntryPoint
 
 WorldHandler::
-    ld   a, $14
+    ld   a, BANK(UpdatePaletteEffectForInteractiveObjects)
     ld   [MBC3SelectBank], a
-    call $4C4B
-    call $4ABC
+    call UpdatePaletteEffectForInteractiveObjects
+    call PerformOverworldAudioTasks
     jpsw WorldHandlerEntryPoint
 
 InventoryHandler::
@@ -1554,8 +1556,8 @@ label_10EF::
     ld   [$DDD7], a
     ld   [$D464], a
     call label_27F2
-    ld   a, $08
-    ldh  [hSFX], a
+    ld   a, WAVE_SFX_LINK_DIES
+    ldh  [hWaveSfx], a
 
 .handleLinkMotion
     ld   a, [wLinkMotionState]
@@ -1664,7 +1666,7 @@ label_11E8::
     ldh  a, [hPressedButtonsMask]
     and  $20
     jr   z, label_11FA
-    call label_1705
+    call UsePegasusBoots
     jr   label_11FE
 
 label_11FA::
@@ -1678,7 +1680,7 @@ label_11FE::
     ldh  a, [hPressedButtonsMask]
     and  $10
     jr   z, label_1210
-    call label_1705
+    call UsePegasusBoots
 
 label_120E::
     jr   label_1214
@@ -1800,8 +1802,8 @@ UseShield::
     ld   a, [$C144]
     and  a
     ret  nz
-    ld   a, SFX_DRAW_SHIELD
-    ldh  [hNextSFX], a
+    ld   a, NOISE_SFX_DRAW_SHIELD
+    ldh  [hNoiseSfx], a
     ret
 
 UseShovel::
@@ -1810,7 +1812,6 @@ UseShovel::
     or   [hl]
     ret  nz
 
-label_1300::
     call $4D20
     jr   nc, .notPoking
 
@@ -1819,8 +1820,8 @@ label_1300::
     jr   .endIf
 
 .notPoking
-    ld   a, $0E
-    ldh  [hNextSFX], a
+    ld   a, NOISE_SFX_SHOWEL_DIG
+    ldh  [hNoiseSfx], a
 .endIf
 
     ld   a, $01
@@ -1955,8 +1956,8 @@ ShootArrow::
     jr   label_1407
 
 label_1401::
-    ld   a, $0A
-    ldh  [hNextSFX], a
+    ld   a, NOISE_SFX_SHOOT_ARROW
+    ldh  [hNoiseSfx], a
     ld   a, $06
 
 label_1407::
@@ -2137,7 +2138,7 @@ label_1523::
     ret
 
 SwordRandomSfxTable::
-    db   SFX_SWORD_A, SFX_SWORD_B, SFX_SWORD_C, SFX_SWORD_D
+    db   NOISE_SFX_SWORD_A, NOISE_SFX_SWORD_B, NOISE_SFX_SWORD_C, NOISE_SFX_SWORD_D
 
 UseSword::
     ld   a, [$C16D]
@@ -2163,7 +2164,7 @@ label_1535::
     ld   hl, SwordRandomSfxTable
     add  hl, de
     ld   a, [hl]
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
 
     call label_157C
     ld   a, [$C146]
@@ -2436,7 +2437,7 @@ label_16F8::
     ld   a, $17
 
 label_16FA::
-    ldh  [hNextSFX], a
+    ldh  [hNoiseSfx], a
     ret
 
 data_16FD::
@@ -2445,7 +2446,7 @@ data_16FD::
 data_1701::
     db   0, 0, $E0, $20
 
-label_1705::
+UsePegasusBoots::
     ldh  a, [hIsSideScrolling]
     and  a
     jr   z, label_1713
@@ -2507,8 +2508,8 @@ label_1756::
     ld   a, [$C181]
     cp   $05
     jr   z, label_1781
-    ld   a, $07
-    ldh  [hNextSFX], a
+    ld   a, NOISE_SFX_FOOTSTEP
+    ldh  [hNoiseSfx], a
     ldh  a, [hLinkPositionY]
     add  a, $06
     ldh  [hScratchB], a
@@ -2586,8 +2587,8 @@ label_17DB::
     ld   a, $04
     call label_142F
     jr   c, label_1814
-    ld   a, $0D
-    ldh  [hNextSFX], a
+    ld   a, NOISE_SFX_MAGIC_ROD
+    ldh  [hNoiseSfx], a
     callsw label_002_538B
 
 label_1814::
@@ -3581,7 +3582,7 @@ label_2183::
     call label_142F
     jr   c, label_21A7
     ld   a, $02
-    ldh  [hSFX], a
+    ldh  [hWaveSfx], a
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   [hl], $07
@@ -3921,7 +3922,7 @@ include "code/home/dialog.asm"
 ;   a:   soundtrack id to load
 SetWorldMusicTrack::
     ld   [wWorldMusicTrack], a
-    ldh  [$FFBF], a
+    ldh  [hNextWorldMusicTrack], a
     ; $FFAB = a
     ld   a, $38
     ldh  [$FFAB], a
@@ -6940,8 +6941,8 @@ label_398D::
     jr   z, .bossAgonyEnd
     dec  [hl]
     jr   nz, .bossAgonyEnd
-    ld   a, SFX_BOSS_AGONY
-    ldh  [hSFX], a
+    ld   a, WAVE_SFX_BOSS_AGONY
+    ldh  [hWaveSfx], a
 .bossAgonyEnd
 
     ; If no dialog is open…

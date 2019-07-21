@@ -2327,7 +2327,7 @@ jr_020_4C6D:
     jr   nz, jr_020_4CA2                          ; $4C9C: $20 $04
 
     ld   a, $2D                                   ; $4C9E: $3E $2D
-    ldh  [hNextSFX], a                            ; $4CA0: $E0 $F4
+    ldh  [hNoiseSfx], a                            ; $4CA0: $E0 $F4
 
 jr_020_4CA2:
     ret                                           ; $4CA2: $C9

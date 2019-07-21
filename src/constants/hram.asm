@@ -134,7 +134,12 @@ hFFB6:: ; FFB6
 ; Seems to affect whether a music track is restarted afer
 ; a transition
 hFFBC:: ; FFBC
-  ds 4
+  ds 3
+
+; Music track to be played after countdown
+; See hNextMusicTrack and
+hNextWorldMusicTrack:: ; FFBF
+  ds 1
 
 ; DMA routine copied from ROM during initialization
 ; Copy the content of wOAMBuffer to the OAM memory
@@ -253,18 +258,18 @@ hActiveEntityUnknownG:: ; FFF1
   ds 1
 
 hJingle:: ; FFF2
-  ; Play a jingle immediately
+  ; Start playing a jingle
   ; See JINGLE_* constants for possible values
   ds 1
 
-hSFX:: ; FFF3
-  ; Plays audio effect immediately
-  ; See SFX_* constants for possible values
+hWaveSfx:: ; FFF3
+  ; Start playing a waveform audio effect
+  ; See WAVE_SFX_* constants for possible values
   ds 1
 
-hNextSFX:: ; FFF4
-  ; Play audio effect next
-  ; See SFX_* constants for possible values
+hNoiseSfx:: ; FFF4
+  ; Play a noise-generated audio effect next
+  ; See NOISE_SFX_* constants for possible values
   ds 1
 
 hFFF5: ds 1

@@ -5877,8 +5877,8 @@ jr_002_68E4:
     ld   a, [wDB94]                               ; $6919: $FA $94 $DB
     add  $04                                      ; $691C: $C6 $04
     ld   [wDB94], a                               ; $691E: $EA $94 $DB
-    ld   a, $03                                   ; $6921: $3E $03
-    ldh  [hWaveSfx], a                                ; $6923: $E0 $F3
+    ld   a, WAVE_SFX_LINK_HURT                    ; $6921: $3E $03
+    ldh  [hWaveSfx], a                            ; $6923: $E0 $F3
     ld   a, $80                                   ; $6925: $3E $80
     ld   [$DBC7], a                               ; $6927: $EA $C7 $DB
     ret                                           ; $692A: $C9
@@ -8157,8 +8157,8 @@ jr_002_761E:
     ld   a, [wDB94]                               ; $7628: $FA $94 $DB
     add  $04                                      ; $762B: $C6 $04
     ld   [wDB94], a                               ; $762D: $EA $94 $DB
-    ld   a, $03                                   ; $7630: $3E $03
-    ldh  [hWaveSfx], a                                ; $7632: $E0 $F3
+    ld   a, WAVE_SFX_LINK_HURT                    ; $7630: $3E $03
+    ldh  [hWaveSfx], a                            ; $7632: $E0 $F3
 
 jr_002_7634:
     ret                                           ; $7634: $C9
@@ -8239,14 +8239,14 @@ jr_002_7687:
     ldh  [hLinkPositionY], a                      ; $76A8: $E0 $99
 
 label_002_76AA::
-    ld   a, $06                                   ; $76AA: $3E $06
+    ld   a, LINK_MOTION_FALLING_DOWN              ; $76AA: $3E $06
     ld   [wLinkMotionState], a                    ; $76AC: $EA $1C $C1
     call label_CAF                                ; $76AF: $CD $AF $0C
     ld   [$C198], a                               ; $76B2: $EA $98 $C1
     ld   a, [$C181]                               ; $76B5: $FA $81 $C1
     ld   [$DBCB], a                               ; $76B8: $EA $CB $DB
-    ld   a, $0C                                   ; $76BB: $3E $0C
-    ldh  [hWaveSfx], a                                ; $76BD: $E0 $F3
+    ld   a, WAVE_SFX_LINK_FALLS                   ; $76BB: $3E $0C
+    ldh  [hWaveSfx], a                            ; $76BD: $E0 $F3
 
 jr_002_76BF:
     ret                                           ; $76BF: $C9

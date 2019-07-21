@@ -8494,8 +8494,8 @@ jr_007_70E0:
     ld   [wDB94], a                               ; $7105: $EA $94 $DB
     ld   a, $20                                   ; $7108: $3E $20
     ld   [$DBC7], a                               ; $710A: $EA $C7 $DB
-    ld   a, $03                                   ; $710D: $3E $03
-    ldh  [hWaveSfx], a                                ; $710F: $E0 $F3
+    ld   a, WAVE_SFX_LINK_HURT                    ; $710D: $3E $03
+    ldh  [hWaveSfx], a                            ; $710F: $E0 $F3
 
 jr_007_7111:
     ret                                           ; $7111: $C9

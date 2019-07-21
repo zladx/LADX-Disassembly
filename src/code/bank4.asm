@@ -6012,14 +6012,14 @@ jr_004_6884:
     ldh  [hLinkPositionX], a                      ; $68B9: $E0 $98
     ldh  a, [wActiveEntityPosY]                               ; $68BB: $F0 $EC
     ldh  [hLinkPositionY], a                      ; $68BD: $E0 $99
-    ld   a, $06                                   ; $68BF: $3E $06
+    ld   a, LINK_MOTION_FALLING_DOWN              ; $68BF: $3E $06
     ld   [wLinkMotionState], a                    ; $68C1: $EA $1C $C1
     call label_CAF                                ; $68C4: $CD $AF $0C
     ld   [$C198], a                               ; $68C7: $EA $98 $C1
     ld   a, $FF                                   ; $68CA: $3E $FF
     ld   [$DBCB], a                               ; $68CC: $EA $CB $DB
-    ld   a, $0C                                   ; $68CF: $3E $0C
-    ldh  [hWaveSfx], a                                ; $68D1: $E0 $F3
+    ld   a, WAVE_SFX_LINK_FALLS                   ; $68CF: $3E $0C
+    ldh  [hWaveSfx], a                            ; $68D1: $E0 $F3
     ret                                           ; $68D3: $C9
 
 jr_004_68D4:
@@ -8372,8 +8372,8 @@ jr_004_75F8:
 
 jr_004_762D:
     call func_004_6D7A                            ; $762D: $CD $7A $6D
-    ld   hl, hWaveSfx                                 ; $7630: $21 $F3 $FF
-    ld   [hl], $01                                ; $7633: $36 $01
+    ld   hl, hWaveSfx                             ; $7630: $21 $F3 $FF
+    ld   [hl], WAVE_SFX_SEASHELL                  ; $7633: $36 $01
     ldh  a, [$FFF1]                               ; $7635: $F0 $F1
     ld   e, a                                     ; $7637: $5F
     ld   d, b                                     ; $7638: $50

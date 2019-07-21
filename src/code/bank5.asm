@@ -210,8 +210,8 @@ jr_005_40FA:
     ld   [wWorldMusicTrack], a                    ; $4116: $EA $68 $D3
     ld   a, $6C                                   ; $4119: $3E $6C
     call OpenDialogInTable1                       ; $411B: $CD $73 $23
-    ld   a, $18                                   ; $411E: $3E $18
-    ldh  [hWaveSfx], a                                ; $4120: $E0 $F3
+    ld   a, WAVE_SFX_CHAIN_CHOMP                  ; $411E: $3E $18
+    ldh  [hWaveSfx], a                            ; $4120: $E0 $F3
     ld   a, $01                                   ; $4122: $3E $01
     ld   [wIsBowWowFollowingLink], a              ; $4124: $EA $56 $DB
 
@@ -1013,8 +1013,8 @@ jr_005_4538:
     and  $1F                                      ; $4546: $E6 $1F
     jr   nz, jr_005_454E                          ; $4548: $20 $04
 
-    ld   a, $13                                   ; $454A: $3E $13
-    ldh  [hWaveSfx], a                                ; $454C: $E0 $F3
+    ld   a, WAVE_SFX_CUCOO_HURT                   ; $454A: $3E $13
+    ldh  [hWaveSfx], a                            ; $454C: $E0 $F3
 
 jr_005_454E:
     ldh  a, [hFrameCounter]                       ; $454E: $F0 $E7
@@ -1318,23 +1318,28 @@ jr_005_46E9:
     call label_3B98                               ; $4703: $CD $98 $3B
     jr   c, jr_005_474D                           ; $4706: $38 $45
 
-    ld   a, $13                                   ; $4708: $3E $13
-    ldh  [hWaveSfx], a                                ; $470A: $E0 $F3
+    ld   a, WAVE_SFX_CUCOO_HURT                   ; $4708: $3E $13
+    ldh  [hWaveSfx], a                            ; $470A: $E0 $F3
     ld   hl, wEntitiesWalkingTable                ; $470C: $21 $90 $C2
     add  hl, de                                   ; $470F: $19
     ld   [hl], $03                                ; $4710: $36 $03
+
     ld   hl, $C310                                ; $4712: $21 $10 $C3
     add  hl, de                                   ; $4715: $19
     ld   [hl], $10                                ; $4716: $36 $10
+
     ld   hl, $C340                                ; $4718: $21 $40 $C3
     add  hl, de                                   ; $471B: $19
     ld   [hl], $12                                ; $471C: $36 $12
+
     ld   hl, $C350                                ; $471E: $21 $50 $C3
     add  hl, de                                   ; $4721: $19
     ld   [hl], $80                                ; $4722: $36 $80
+
     ld   hl, $C430                                ; $4724: $21 $30 $C4
     add  hl, de                                   ; $4727: $19
     ld   [hl], $40                                ; $4728: $36 $40
+
     push bc                                       ; $472A: $C5
     call GetRandomByte                            ; $472B: $CD $0D $28
     and  $0F                                      ; $472E: $E6 $0F
@@ -6440,8 +6445,8 @@ jr_005_63CC:
     ld   hl, $C320                                ; $63DB: $21 $20 $C3
     add  hl, bc                                   ; $63DE: $09
     ld   [hl], $18                                ; $63DF: $36 $18
-    ld   a, $16                                   ; $63E1: $3E $16
-    ldh  [hWaveSfx], a                                ; $63E3: $E0 $F3
+    ld   a, WAVE_SFX_BOSS_HIT                     ; $63E1: $3E $16
+    ldh  [hWaveSfx], a                            ; $63E3: $E0 $F3
     call func_005_65D9                            ; $63E5: $CD $D9 $65
     jp   IncrementEntityWalkingAttr               ; $63E8: $C3 $12 $3B
 
@@ -9151,8 +9156,8 @@ label_005_72CA:
     cp   $18                                      ; $730C: $FE $18
     jr   nz, jr_005_7314                          ; $730E: $20 $04
 
-    ld   a, $16                                   ; $7310: $3E $16
-    ldh  [hWaveSfx], a                                ; $7312: $E0 $F3
+    ld   a, WAVE_SFX_BOSS_HIT                     ; $7310: $3E $16
+    ldh  [hWaveSfx], a                            ; $7312: $E0 $F3
 
 jr_005_7314:
     ld   a, e                                     ; $7314: $7B
@@ -9233,8 +9238,8 @@ jr_005_7339:
     cp   $20                                      ; $736A: $FE $20
     jr   nz, jr_005_7372                          ; $736C: $20 $04
 
-    ld   a, $16                                   ; $736E: $3E $16
-    ldh  [hWaveSfx], a                                ; $7370: $E0 $F3
+    ld   a, WAVE_SFX_BOSS_HIT                     ; $736E: $3E $16
+    ldh  [hWaveSfx], a                            ; $7370: $E0 $F3
 
 jr_005_7372:
     ld   a, e                                     ; $7372: $7B
@@ -11038,8 +11043,8 @@ jr_005_7DA8:
     ld   hl, wEntity0SpeedY                       ; $7DBF: $21 $50 $C2
     add  hl, bc                                   ; $7DC2: $09
     ld   [hl], $F0                                ; $7DC3: $36 $F0
-    ld   a, $16                                   ; $7DC5: $3E $16
-    ldh  [hWaveSfx], a                                ; $7DC7: $E0 $F3
+    ld   a, WAVE_SFX_BOSS_HIT                     ; $7DC5: $3E $16
+    ldh  [hWaveSfx], a                            ; $7DC7: $E0 $F3
     jp   label_005_7DF0                           ; $7DC9: $C3 $F0 $7D
 
 jr_005_7DCC:

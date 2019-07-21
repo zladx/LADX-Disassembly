@@ -1106,8 +1106,8 @@ jr_003_4D66:
     ld   hl, $C420                                ; $4DBC: $21 $20 $C4
     add  hl, bc                                   ; $4DBF: $09
     ld   [hl], $20                                ; $4DC0: $36 $20
-    ld   hl, hWaveSfx                                 ; $4DC2: $21 $F3 $FF
-    ld   [hl], $07                                ; $4DC5: $36 $07
+    ld   hl, hWaveSfx                             ; $4DC2: $21 $F3 $FF
+    ld   [hl], WAVE_SFX_BOSS_GRAWL                ; $4DC5: $36 $07
     ld   hl, $C440                                ; $4DC7: $21 $40 $C4
     add  hl, bc                                   ; $4DCA: $09
     ld   a, [hl]                                  ; $4DCB: $7E
@@ -4834,12 +4834,12 @@ jr_003_6311:
     jr   nc, jr_003_6328                          ; $631F: $30 $07
 
     ld   hl, hJingle                              ; $6321: $21 $F2 $FF
-    ld   [hl], $14                                ; $6324: $36 $14
+    ld   [hl], JINGLE_GOT_HEART                   ; $6324: $36 $14
     jr   jr_003_632D                              ; $6326: $18 $05
 
 jr_003_6328:
-    ld   hl, hWaveSfx                                 ; $6328: $21 $F3 $FF
-    ld   [hl], $01                                ; $632B: $36 $01
+    ld   hl, hWaveSfx                             ; $6328: $21 $F3 $FF
+    ld   [hl], WAVE_SFX_SEASHELL                  ; $632B: $36 $01
 
 jr_003_632D:
     rst  $00                                      ; $632D: $C7
@@ -6604,6 +6604,7 @@ jr_003_6CCD:
     cp   $02                                      ; $6CD1: $FE $02
     jr   c, jr_003_6CC9                           ; $6CD3: $38 $F4
 
+; Handle collision between Link and an entity?
 func_003_6CD5::
 label_003_6CD5:
     ldh  a, [hActiveEntityId]                     ; $6CD5: $F0 $EB
@@ -6710,8 +6711,8 @@ jr_003_6D5D:
 
     call IncrementEntityWalkingAttr               ; $6D69: $CD $12 $3B
     ld   [hl], $08                                ; $6D6C: $36 $08
-    ld   a, $03                                   ; $6D6E: $3E $03
-    ldh  [hWaveSfx], a                                ; $6D70: $E0 $F3
+    ld   a, WAVE_SFX_LINK_HURT                    ; $6D6E: $3E $03
+    ldh  [hWaveSfx], a                            ; $6D70: $E0 $F3
     ret                                           ; $6D72: $C9
 
 jr_003_6D73:
@@ -6724,8 +6725,8 @@ jr_003_6D73:
     or   [hl]                                     ; $6D81: $B6
     jp   nz, label_003_6E0A                       ; $6D82: $C2 $0A $6E
 
-    ld   a, $03                                   ; $6D85: $3E $03
-    ldh  [hWaveSfx], a                                ; $6D87: $E0 $F3
+    ld   a, WAVE_SFX_LINK_HURT                    ; $6D85: $3E $03
+    ldh  [hWaveSfx], a                            ; $6D87: $E0 $F3
     ld   hl, $C4D0                                ; $6D89: $21 $D0 $C4
     add  hl, bc                                   ; $6D8C: $09
     ld   d, b                                     ; $6D8D: $50
@@ -7530,12 +7531,12 @@ jr_003_7215:
     add  hl, bc                                   ; $7218: $09
     ld   a, [hl]                                  ; $7219: $7E
     ld   hl, hJingle                              ; $721A: $21 $F2 $FF
-    ld   [hl], $03                                ; $721D: $36 $03
+    ld   [hl], JINGLE_BOW_WOW_CHOMP               ; $721D: $36 $03
     and  $80                                      ; $721F: $E6 $80
     jr   z, jr_003_7228                           ; $7221: $28 $05
 
-    ld   hl, hWaveSfx                                 ; $7223: $21 $F3 $FF
-    ld   [hl], $07                                ; $7226: $36 $07
+    ld   hl, hWaveSfx                             ; $7223: $21 $F3 $FF
+    ld   [hl], WAVE_SFX_BOSS_GRAWL                ; $7226: $36 $07
 
 jr_003_7228:
     ld   hl, $C3A0                                ; $7228: $21 $A0 $C3
@@ -7544,8 +7545,8 @@ jr_003_7228:
     cp   $6C                                      ; $722D: $FE $6C
     jr   nz, jr_003_7235                          ; $722F: $20 $04
 
-    ld   a, $13                                   ; $7231: $3E $13
-    ldh  [hWaveSfx], a                                ; $7233: $E0 $F3
+    ld   a, WAVE_SFX_CUCOO_HURT                   ; $7231: $3E $13
+    ldh  [hWaveSfx], a                            ; $7233: $E0 $F3
 
 jr_003_7235:
     pop  af                                       ; $7235: $F1

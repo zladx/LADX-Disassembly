@@ -3361,7 +3361,7 @@ jr_002_566D:
     jr   nz, jr_002_5678                          ; $566F: $20 $07
 
     ld   a, $50                                   ; $5671: $3E $50
-    ld   [$C5AF], a                               ; $5673: $EA $AF $C5
+    ld   [wNextWorldMusicTrackCountdown], a                               ; $5673: $EA $AF $C5
     ld   a, $0A                                   ; $5676: $3E $0A
 
 jr_002_5678:

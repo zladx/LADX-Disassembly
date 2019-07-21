@@ -3638,7 +3638,7 @@ jr_007_5572:
     ld   a, $10                                   ; $557F: $3E $10
     ld   [wWorldMusicTrack], a                    ; $5581: $EA $68 $D3
     ld   [wC167], a                               ; $5584: $EA $67 $C1
-    ldh  a, [$FFBF]                               ; $5587: $F0 $BF
+    ldh  a, [hNextWorldMusicTrack]                               ; $5587: $F0 $BF
     ldh  [hMusicTrack], a                         ; $5589: $E0 $B0
     call IsEntityFrameCounterZero                 ; $558B: $CD $05 $0C
     ld   a, $68                                   ; $558E: $3E $68

@@ -3921,7 +3921,7 @@ include "code/home/dialog.asm"
 ;   a:   soundtrack id to load
 SetWorldMusicTrack::
     ld   [wWorldMusicTrack], a
-    ldh  [$FFBF], a
+    ldh  [hNextWorldMusicTrack], a
     ; $FFAB = a
     ld   a, $38
     ldh  [$FFAB], a

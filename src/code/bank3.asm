@@ -415,7 +415,7 @@ jr_003_499C:
     ld   [wWorldMusicTrack], a                    ; $499C: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $499F: $E0 $B0
     ldh  [$FFBD], a                               ; $49A1: $E0 $BD
-    ldh  [$FFBF], a                               ; $49A3: $E0 $BF
+    ldh  [hNextWorldMusicTrack], a                               ; $49A3: $E0 $BF
     ret                                           ; $49A5: $C9
 
     xor  a                                        ; $49A6: $AF
@@ -3567,7 +3567,7 @@ jr_003_5BCB:
     ld   [wWorldMusicTrack], a                    ; $5BD0: $EA $68 $D3
     ld   a, $05                                   ; $5BD3: $3E $05
     ldh  [hMusicTrack], a                         ; $5BD5: $E0 $B0
-    ldh  [$FFBF], a                               ; $5BD7: $E0 $BF
+    ldh  [hNextWorldMusicTrack], a                               ; $5BD7: $E0 $BF
     call label_BFB                                ; $5BD9: $CD $FB $0B
     ld   [hl], $52                                ; $5BDC: $36 $52
     call IncrementEntityWalkingAttr               ; $5BDE: $CD $12 $3B
@@ -5002,7 +5002,7 @@ jr_003_6400:
     ld   [wWorldMusicTrack], a                    ; $6415: $EA $68 $D3
     ld   a, $49                                   ; $6418: $3E $49
     ldh  [$FFBD], a                               ; $641A: $E0 $BD
-    ldh  [$FFBF], a                               ; $641C: $E0 $BF
+    ldh  [hNextWorldMusicTrack], a                               ; $641C: $E0 $BF
 
 func_003_641E::
     ld   e, $03                                   ; $641E: $1E $03
@@ -5047,7 +5047,7 @@ jr_003_6422:
     call IsEntityFrameCounterZero                 ; $645E: $CD $05 $0C
     ld   [hl], $A0                                ; $6461: $36 $A0
     ld   a, $FF                                   ; $6463: $3E $FF
-    ldh  [$FFBF], a                               ; $6465: $E0 $BF
+    ldh  [hNextWorldMusicTrack], a                               ; $6465: $E0 $BF
     ret                                           ; $6467: $C9
 
 jr_003_6468:
@@ -6781,7 +6781,7 @@ jr_003_6DAB:
     ld   [wWorldMusicTrack], a                    ; $6DDA: $EA $68 $D3
 
 jr_003_6DDD:
-    ldh  [$FFBF], a                               ; $6DDD: $E0 $BF
+    ldh  [hNextWorldMusicTrack], a                               ; $6DDD: $E0 $BF
 
 func_003_6DDF::
 label_003_6DDF:

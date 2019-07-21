@@ -134,7 +134,12 @@ hFFB6:: ; FFB6
 ; Seems to affect whether a music track is restarted afer
 ; a transition
 hFFBC:: ; FFBC
-  ds 4
+  ds 3
+
+; Music track to be played after countdown
+; See hNextMusicTrack and
+hNextWorldMusicTrack:: ; FFBF
+  ds 1
 
 ; DMA routine copied from ROM during initialization
 ; Copy the content of wOAMBuffer to the OAM memory

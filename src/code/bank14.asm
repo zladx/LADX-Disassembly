@@ -487,15 +487,15 @@ jr_014_4AD2:
     ld   [$C502], a                               ; $4AD3: $EA $02 $C5
 
 jr_014_4AD6:
-    ld   a, [$C5AF]                               ; $4AD6: $FA $AF $C5
+    ld   a, [wNextWorldMusicTrackCountdown]                               ; $4AD6: $FA $AF $C5
     and  a                                        ; $4AD9: $A7
     jr   z, jr_014_4AE7                           ; $4ADA: $28 $0B
 
     dec  a                                        ; $4ADC: $3D
-    ld   [$C5AF], a                               ; $4ADD: $EA $AF $C5
+    ld   [wNextWorldMusicTrackCountdown], a                               ; $4ADD: $EA $AF $C5
     jr   nz, jr_014_4AE7                          ; $4AE0: $20 $05
 
-    ldh  a, [$FFBF]                               ; $4AE2: $F0 $BF
+    ldh  a, [hNextWorldMusicTrack]                               ; $4AE2: $F0 $BF
 
 jr_014_4AE4:
     ld   [wWorldMusicTrack], a                    ; $4AE4: $EA $68 $D3

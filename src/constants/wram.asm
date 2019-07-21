@@ -525,6 +525,13 @@ wEggMazeProgress:: ; C5AA
 wDialogSFX:: ; C5AB
     ds 1
 
+; Unlabeled
+ds 3
+
+wNextWorldMusicTrackCountdown:: ; C5AF
+  ; When reaching zero, play wNextWorldMusicTrack
+  ds 1
+
 section "WRAM Bank1", wramx[$d000], bank[1]
 
 wIsFileSelectionArrowShifted:: ; D000

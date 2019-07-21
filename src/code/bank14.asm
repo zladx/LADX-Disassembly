@@ -432,7 +432,7 @@ jr_014_4A6B:
     dec  b                                        ; $4A92: $05
     ld   b, $07                                   ; $4A93: $06 $07
     ld   [$1009], sp                              ; $4A95: $08 $09 $10
-    jr   nz, jr_014_4ACA                          ; $4A98: $20 $30
+    db   $20, $30                                 ; $4A98: $20 $30
 
     ld   b, b                                     ; $4A9A: $40
     ld   d, b                                     ; $4A9B: $50
@@ -450,7 +450,7 @@ jr_014_4A6B:
     inc  hl                                       ; $4AAD: $23
     inc  hl                                       ; $4AAE: $23
     inc  hl                                       ; $4AAF: $23
-    jr   jr_014_4AD2                              ; $4AB0: $18 $20
+    db   $18, $20                                 ; $4AB0: $18 $20
 
     jr   z, jr_014_4AE4                           ; $4AB2: $28 $30
 
@@ -464,29 +464,35 @@ jr_014_4A6B:
     ld   [hl], b                                  ; $4ABB: $70
 
 func_014_4ABC::
+    ;
+    ; Play compass SFX at countdown end
+    ;
+
+    ; If wCompassSfxCountdown > 0…
     ld   a, [wCompassSfxCountdown]                ; $4ABC: $FA $62 $D4
     and  a                                        ; $4ABF: $A7
-    jr   z, jr_014_4ACC                           ; $4AC0: $28 $0A
-
+    jr   z, .compassSfxEnd                        ; $4AC0: $28 $0A
+    ; decrement the countdown
     dec  a                                        ; $4AC2: $3D
     ld   [wCompassSfxCountdown], a                ; $4AC3: $EA $62 $D4
-    jr   nz, jr_014_4ACC                          ; $4AC6: $20 $04
-
-    ld   a, $1B                                   ; $4AC8: $3E $1B
-
-jr_014_4ACA:
+    ; If the countdown reached 0…
+    jr   nz, .compassSfxEnd                       ; $4AC6: $20 $04
+    ; play the compass sfx.
+    ld   a, SFX_COMPASS                           ; $4AC8: $3E $1B
     ldh  [hSFX], a                                ; $4ACA: $E0 $F3
+.compassSfxEnd
 
-jr_014_4ACC:
+    ;
+    ; Decrement $C502 counter
+    ;
+
     ld   a, [$C502]                               ; $4ACC: $FA $02 $C5
     and  a                                        ; $4ACF: $A7
-    jr   z, jr_014_4AD6                           ; $4AD0: $28 $04
-
-jr_014_4AD2:
+    jr   z, .C502End                              ; $4AD0: $28 $04
     dec  a                                        ; $4AD2: $3D
     ld   [$C502], a                               ; $4AD3: $EA $02 $C5
+.C502End
 
-jr_014_4AD6:
     ld   a, [wNextWorldMusicTrackCountdown]                               ; $4AD6: $FA $AF $C5
     and  a                                        ; $4AD9: $A7
     jr   z, jr_014_4AE7                           ; $4ADA: $28 $0B

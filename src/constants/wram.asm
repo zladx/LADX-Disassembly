@@ -1120,7 +1120,11 @@ wWindowY:: ; DB9A
   ds 1
 
 ; Unlabeled
-ds 2
+ds 1
+
+wMapEntranceRoom:: ; DB9C
+  ; Initial room of Link when loading a new map
+  ds 1
 
 wMapEntrancePositionX:: ; DB9D
   ; Initial position of Link when loading a new map

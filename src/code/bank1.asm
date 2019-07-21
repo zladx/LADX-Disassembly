@@ -911,7 +911,7 @@ label_531D::
 
     ld   a, [wSpawnMapRoom]
     ldh  [hMapRoom], a
-    ld   [$DB9C], a
+    ld   [wMapEntranceRoom], a
 
     ld   a, [wSpawnMapId]
     ldh  [hMapId], a
@@ -950,7 +950,7 @@ label_531D::
     ld   a, $20
     ld   [wMaxMagicPowder], a
     ld   a, $A3
-    ld   [$DB9C], a
+    ld   [wMapEntranceRoom], a
     ldh  [hMapRoom], a
     ld   [$DB54], a
     ld   a, $01

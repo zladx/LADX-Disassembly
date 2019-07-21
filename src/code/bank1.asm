@@ -2838,12 +2838,12 @@ label_5FD3::
     ld   d, $00
 
 label_5FDE::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $D5
     jr   nz, label_5FF0
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -2905,12 +2905,12 @@ label_6043::
     ld   d, $00
 
 label_6047::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $D4
     jr   nz, label_6059
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -2948,12 +2948,12 @@ label_607F::
     ld   d, $00
 
 label_608A::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $C1
     jr   nz, label_609C
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -3047,12 +3047,12 @@ label_611F::
     ld   d, $00
 
 label_612F::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
     cp   $6D
     jr   nz, label_6141
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   a, [hl]
     and  a

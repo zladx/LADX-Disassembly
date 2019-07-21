@@ -52,11 +52,11 @@ IntroHandlerEntryPoint::
     ld   [wGameplaySubtype], a
     xor  a
     ; Reset entities
-    ld   [wEntity0Type], a
-    ld   [wEntity1Type], a
-    ld   [wEntity2Type], a
-    ld   [wEntity3Type], a
-    ld   [wEntity4Type], a
+    ld   [wEntity0State], a
+    ld   [wEntity1State], a
+    ld   [wEntity2State], a
+    ld   [wEntity3State], a
+    ld   [wEntity4State], a
 
     ld   [rBGP], a
     ld   [wBGPalette], a
@@ -194,8 +194,8 @@ label_6F5F::
     dec  e
     jr   nz, label_6F5F
 
-    ld   [wEntity0Type], a
-    ld   [wEntity1Type], a
+    ld   [wEntity0State], a
+    ld   [wEntity1State], a
     ld   [$C3B0], a
     ld   [$C3B1], a
     ld   [$C3B2], a
@@ -203,7 +203,7 @@ label_6F5F::
 
     ; Configure Link's ship entity
     ld   a, $05
-    ld   [wEntity2Type], a
+    ld   [wEntity2State], a
     ld   a, $C0
     ld   [wEntity2PosX], a
     ld   a, $4E
@@ -267,7 +267,7 @@ IntroShipOnSeaHandler::
     cp   $08
     jp   nz, label_7013
     xor  a
-    ld   [wEntitiesTypeTable], a
+    ld   [wEntitiesStateTable], a
     ld   [$C281], a
     ld   [$C282], a
     ld   [$C290], a
@@ -349,7 +349,7 @@ label_7068::
     ld   d, $00
 
 label_706C::
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -372,7 +372,7 @@ label_7087::
     ld   hl, label_7081
     add  hl, bc
     ld   a, [hl]
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   [hl], a
     ld   hl, label_707B
@@ -437,7 +437,7 @@ IntroLinkFaceHandler::
     ld   a, $03
     ld   [rIE], a ; Enable interrupts on VBlank and LCDStat
     xor  a
-    ld   [wEntitiesTypeTable], a
+    ld   [wEntitiesStateTable], a
     ld   [$C281], a
     ld   a, $01
     ld   [wIntroSubTimer], a
@@ -506,7 +506,7 @@ label_7168::
     ld   a, $07
     ld   [wGameplaySubtype], a
     ld   a, $06
-    ld   [wEntitiesTypeTable], a
+    ld   [wEntitiesStateTable], a
     ld   a, $B0
     ld   [wEntitiesPosXTable], a
     ld   a, $68
@@ -898,7 +898,7 @@ TitleScreenHandler::
     ld   d, $00
 
 label_73E0::
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -1060,7 +1060,7 @@ RenderIntroEntities::
     ld   [wLinkWalkingFrameCount], a
 
     ; a = EntityType[c]
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -1101,8 +1101,8 @@ RenderIntroEntities::
 ; Inputs:
 ;   bc: index of entity in entities table
 RenderIntroEntity::
-    ; a = wEntitiesTypeTable[bc]
-    ld   hl, wEntitiesTypeTable
+    ; a = wEntitiesStateTable[bc]
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   a, [hl]
 
@@ -1114,9 +1114,9 @@ RenderIntroEntity::
     jp   z, RenderIntroInertLink
     cp   ENTITY_INTRO_SPARKLE
     jp   z, RenderIntroSparkle
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     jr   nz, label_7533
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   [hl], b
     ret
@@ -1243,7 +1243,7 @@ label_7629::
     ld   l, $01
 
 label_762B::
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   a, [hl]
     dec  a
@@ -1299,7 +1299,7 @@ label_7681::
     ldh  a, [wActiveEntityPosX]
     cp   $48
     jr   nc, label_769C
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     ld   [hl], $40
     call IncrementEntityWalkingAttr
 
@@ -1320,7 +1320,7 @@ label_76AB::
     call label_7D46
     ld   a, $01
     call label_3B0C
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     jr   nz, label_76D4
     call IncrementEntityWalkingAttr
     ld   a, $07
@@ -1352,7 +1352,7 @@ label_76D6::
     ld   a, [hl]
     cp   $30
     jr   nz, label_76F7
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     ld   [hl], $40
     jp   IncrementEntityWalkingAttr
 
@@ -1377,7 +1377,7 @@ label_7707::
     ret
 
 label_7711::
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     jr   nz, label_7778
     call label_7DCF
     ldh  a, [hFrameCounter]
@@ -1396,12 +1396,12 @@ label_7711::
     jr   z, label_7740
     cp   $3A
     jr   nz, label_7745
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     ld   [hl], $30
     jr   label_7745
 
 label_7740::
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     ld   [hl], $50
 
 label_7745::
@@ -1413,7 +1413,7 @@ label_7745::
     ld   [rSCX], a
     ld   a, $01
     ld   [rIE], a
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     ld   [hl], $E0
     jp   IncrementEntityWalkingAttr
 
@@ -1454,7 +1454,7 @@ label_7781::
     call label_3B0C
     ld   a, $00
     ld   [$C3B1], a
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     jr   z, label_779A
     dec  [hl]
 
@@ -1496,10 +1496,10 @@ RenderIntroSparkle::
     ld   [$C3C1], a
 
 label_77E1::
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     dec  [hl]
     jr   nz, label_77ED
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   [hl], b
     ret
@@ -1825,7 +1825,7 @@ label_7A47::
     dw $7a6e
     dw $7ac4
 
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     dec  [hl]
     jr   nz, label_7A5D
     ld   [hl], $90
@@ -1836,7 +1836,7 @@ label_7A5D::
     ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_7A6A
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     dec  [hl]
     jr   z, label_7A6B
 
@@ -1888,7 +1888,7 @@ label_7AB2::
 
 label_7AB3::
     call IncrementEntityWalkingAttr
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     ld   [hl], $17
     ld   a, $07
     ldh  [hWindowYUnused], a
@@ -1898,7 +1898,7 @@ label_7AB3::
     ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_7AE3
-    call IsEntityFrameCounterZero
+    call IsEntityTransitionCountdownZero
     dec  [hl]
     jr   nz, label_7AE3
     call IncrementGameplaySubtype
@@ -1906,7 +1906,7 @@ label_7AB3::
     ld   [$D002], a
     ld   [$D003], a
     ld   [$D004], a
-    ld   [wEntitiesTypeTable], a
+    ld   [wEntitiesStateTable], a
     ld   [$C281], a
 
 label_7AE3::

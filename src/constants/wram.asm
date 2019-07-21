@@ -424,27 +424,25 @@ wC260 equ $C260
 wC270 equ $C270
   ds $10
 
-wEntitiesTypeTable:: ; C280
-  ; Type of visible entities
-  ; 0: entity not present
-  ; 5: Link's ship in intro
-  ; 6: Marin
-wEntity0Type:: ds 1 ; C280
-wEntity1Type:: ds 1 ; C281
-wEntity2Type:: ds 1 ; C282
-wEntity3Type:: ds 1 ; C283
-wEntity4Type:: ds 1 ; C284
-wEntity5Type:: ds 1 ; C285
-wEntity6Type:: ds 1 ; C286
-wEntity7Type:: ds 1 ; C287
-wEntity8Type:: ds 1 ; C288
-wEntity9Type:: ds 1 ; C289
-wEntityAType:: ds 1 ; C28A
-wEntityBType:: ds 1 ; C28B
-wEntityCType:: ds 1 ; C28C
-wEntityDType:: ds 1 ; C28D
-wEntityEType:: ds 1 ; C28E
-wEntityFType:: ds 1 ; C28F
+wEntitiesStateTable:: ; C280
+  ; State of visible entities
+  ; See ENTITY_STATE_* constants
+wEntity0State:: ds 1 ; C280
+wEntity1State:: ds 1 ; C281
+wEntity2State:: ds 1 ; C282
+wEntity3State:: ds 1 ; C283
+wEntity4State:: ds 1 ; C284
+wEntity5State:: ds 1 ; C285
+wEntity6State:: ds 1 ; C286
+wEntity7State:: ds 1 ; C287
+wEntity8State:: ds 1 ; C288
+wEntity9State:: ds 1 ; C289
+wEntityAState:: ds 1 ; C28A
+wEntityBState:: ds 1 ; C28B
+wEntityCState:: ds 1 ; C28C
+wEntityDState:: ds 1 ; C28D
+wEntityEState:: ds 1 ; C28E
+wEntityFState:: ds 1 ; C28F
 
 wEntitiesWalkingTable:: ; C290
   ; Indicate if the designated entity is walking (1) or standing in place (0).
@@ -469,21 +467,33 @@ wEntitiesUnknownTableC:: ; C2C0
 wEntitiesUnknownTableD:: ; C2D0
   ds $10
 
-wEntitiesFrameCounterTable:: ; C2E0
-  ; Frames count of the current animation for the entity.
+wEntitiesTransitionCountdownTable:: ; C2E0
+  ; Frames before the next state transition of the entity
   ds $10
 
 wEntitiesUnknowTableF:: ; C2F0
   ds $10
 
 ; Unlabeled
-wC300 equ $C300 ; C300
-  ds $AF
+wEntitiesUnknowTableG:: ; C300
+  ds $10
 
-wDroppedItem:: ; C3AF
-  ; Status of one of the items that can be dropped by cutting herbs
-  ds 1
+wEntitiesAltitudeTable:: ; C310
+  ; When the altitude is higher than 0, the entity position is shifted vertically,
+  ; and a shadow is displayed underneath.
+  ds $10
 
+wEntitiesAltitudeVelocity:: ; C320
+  ; Positive numbers increase the altitude, negative numbers decrease it
+  ds $10
+
+ds $70
+
+wEntitiesTypeTable:: ; C3A0
+  ; Type of the entity
+  ds $10
+
+; Entity sprite index depending on the direction?
 wEntitiesUnknownTableG:: ; C3B0
   ; Entity custom state?
 

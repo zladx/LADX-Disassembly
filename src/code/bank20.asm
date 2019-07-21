@@ -6,18 +6,6 @@
 ; First 2 bytes - memory pointer
 ; Third byte - bank ID
 ; IE - db $DC, $59, $03 is for heart container. When loaded, code will jump to bank $03 - Pointer $59DC (LoadHeartContainer)
-;
-; Sprite ID table
-; 30 - Golden Leaf
-; 31 - Sword
-; 35 - Heart Piece
-; 36 - Heart Container
-; 3A - Mushroom
-; 3D - Secret Seashell
-; 4F - Items from shop game - prop 16 -Magic powder - 15 shield - 14 heart and rupee?
-; CF - Windfish? Jacks everything up
-; E6 - Also breaks a lot of things
-; FB, FC, FE - Null pointers / Unused?
 EntityPointersTable::
     db $34, $6A, $03 ; $00
     db $61, $44, $19
@@ -780,7 +768,7 @@ jr_020_445A:
     ld   c, e                                     ; $4517: $4B
 
 func_020_4518::
-    ldh  a, [hActiveEntityId]                     ; $4518: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $4518: $F0 $EB
     ld   e, a                                     ; $451A: $5F
     ld   d, $00                                   ; $451B: $16 $00
     ld   hl, data_020_4322                        ; $451D: $21 $22 $43
@@ -2155,7 +2143,7 @@ label_020_4B9E:
     ld   [$C1C1], a                               ; $4BA4: $EA $C1 $C1
     ld   a, $0C                                   ; $4BA7: $3E $0C
     ld   [$C19B], a                               ; $4BA9: $EA $9B $C1
-    ld   hl, wEntitiesFrameCounterTable           ; $4BAC: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable           ; $4BAC: $21 $E0 $C2
     add  hl, de                                   ; $4BAF: $19
     ld   [hl], $A0                                ; $4BB0: $36 $A0
     ld   hl, wEntitiesUnknownTableG               ; $4BB2: $21 $B0 $C3
@@ -2215,7 +2203,7 @@ jr_020_4BE3:
     nop                                           ; $4BFE: $00
 
 func_020_4BFF::
-    ld   hl, wEntitiesFrameCounterTable           ; $4BFF: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable           ; $4BFF: $21 $E0 $C2
     add  hl, de                                   ; $4C02: $19
     ld   [hl], $28                                ; $4C03: $36 $28
     ld   c, $04                                   ; $4C05: $0E $04
@@ -2316,7 +2304,7 @@ jr_020_4C6D:
     ld   hl, $C310                                ; $4C8B: $21 $10 $C3
     add  hl, de                                   ; $4C8E: $19
     ld   [hl], a                                  ; $4C8F: $77
-    ld   hl, wEntitiesFrameCounterTable           ; $4C90: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable           ; $4C90: $21 $E0 $C2
     add  hl, de                                   ; $4C93: $19
     ld   [hl], $17                                ; $4C94: $36 $17
     pop  bc                                       ; $4C96: $C1
@@ -2332,6 +2320,7 @@ jr_020_4C6D:
 jr_020_4CA2:
     ret                                           ; $4CA2: $C9
 
+ResetRoomVariables::
     xor  a                                        ; $4CA3: $AF
     ldh  [hFreeWarpDataAddress], a                ; $4CA4: $E0 $E6
     ld   [$C19C], a                               ; $4CA6: $EA $9C $C1
@@ -8931,6 +8920,7 @@ jr_020_6D92:
 
     ret                                           ; $6DAE: $C9
 
+func_020_6DAF::
     ld   a, [wIsIndoor]                           ; $6DAF: $FA $A5 $DB
     and  a                                        ; $6DB2: $A7
     ret  nz                                       ; $6DB3: $C0
@@ -9017,7 +9007,7 @@ jr_020_6E1A:
     sub  $CC                                      ; $6E28: $D6 $CC
 
 jr_020_6E2A:
-    ld   hl, EntityPointersTable                  ; $6E2A: $21 $00 $40
+    ld   hl, $4000                                ; $6E2A: $21 $00 $40
     ld   b, a                                     ; $6E2D: $47
     and  b                                        ; $6E2E: $A0
 
@@ -11390,7 +11380,7 @@ func_020_7679:
     rst  $38                                      ; $77F5: $FF
     db   $f4                                      ; $77F6: $F4
     add  sp, -$17                                 ; $77F7: $E8 $E9
-    ld_long hActiveEntityId, a                              ; $77F9: $EA $EB $FF
+    ld_long hActiveEntityType, a                              ; $77F9: $EA $EB $FF
     rst  $38                                      ; $77FC: $FF
     rst  $38                                      ; $77FD: $FF
     rst  $38                                      ; $77FE: $FF

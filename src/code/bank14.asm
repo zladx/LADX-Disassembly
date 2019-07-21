@@ -1026,7 +1026,7 @@ jr_014_4D6F:
     cp   $04                                      ; $4D8A: $FE $04
     jr   z, jr_014_4D97                           ; $4D8C: $28 $09
 
-    ld   hl, $C3A0                                ; $4D8E: $21 $A0 $C3
+    ld   hl, wEntitiesTypeTable                   ; $4D8E: $21 $A0 $C3
     add  hl, bc                                   ; $4D91: $09
     ld   a, [hl]                                  ; $4D92: $7E
     cp   $83                                      ; $4D93: $FE $83
@@ -1042,7 +1042,7 @@ jr_014_4D97:
     or   [hl]                                     ; $4DA5: $B6
     jr   nz, jr_014_4DED                          ; $4DA6: $20 $45
 
-    ld   hl, wEntitiesFrameCounterTable           ; $4DA8: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable           ; $4DA8: $21 $E0 $C2
     add  hl, bc                                   ; $4DAB: $09
     ld   a, [hl]                                  ; $4DAC: $7E
     and  a                                        ; $4DAD: $A7
@@ -1671,7 +1671,7 @@ func_014_50C3:
     ld   d, $00                                   ; $50C5: $16 $00
 
 jr_014_50C7:
-    ld   hl, wEntity0Type                         ; $50C7: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $50C7: $21 $80 $C2
     add  hl, de                                   ; $50CA: $19
     ld   a, [hl]                                  ; $50CB: $7E
     cp   $05                                      ; $50CC: $FE $05
@@ -2235,7 +2235,7 @@ jr_014_5328:
     jr   nz, jr_014_5360                          ; $5352: $20 $0C
 
 jr_014_5354:
-    ldh  a, [hActiveEntityId]                     ; $5354: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $5354: $F0 $EB
     cp   $A8                                      ; $5356: $FE $A8
     jr   z, jr_014_5360                           ; $5358: $28 $06
 
@@ -2257,7 +2257,7 @@ jr_014_536B:
     jp   nz, label_014_5443                       ; $5370: $C2 $43 $54
 
     ld   d, $03                                   ; $5373: $16 $03
-    ldh  a, [hActiveEntityId]                     ; $5375: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $5375: $F0 $EB
     cp   $02                                      ; $5377: $FE $02
     jr   nz, jr_014_537D                          ; $5379: $20 $02
 
@@ -2292,19 +2292,19 @@ jr_014_5391:
     ld   [hl], $08                                ; $53A1: $36 $08
 
 func_014_53A3:
-    ld   hl, wEntity0Type                         ; $53A3: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $53A3: $21 $80 $C2
     add  hl, bc                                   ; $53A6: $09
     ld   [hl], $05                                ; $53A7: $36 $05
-    ldh  a, [hActiveEntityId]                     ; $53A9: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $53A9: $F0 $EB
     cp   $02                                      ; $53AB: $FE $02
     jr   nz, jr_014_53B6                          ; $53AD: $20 $07
 
-    call IsEntityFrameCounterZero                 ; $53AF: $CD $05 $0C
+    call IsEntityTransitionCountdownZero                 ; $53AF: $CD $05 $0C
     ld   [hl], $A0                                ; $53B2: $36 $A0
     jr   jr_014_5409                              ; $53B4: $18 $53
 
 jr_014_53B6:
-    ld   hl, wEntity0Type                         ; $53B6: $21 $80 $C2
+    ld   hl, wEntity0State                         ; $53B6: $21 $80 $C2
     add  hl, bc                                   ; $53B9: $09
     cp   $D6                                      ; $53BA: $FE $D6
     jr   z, jr_014_53ED                           ; $53BC: $28 $2F
@@ -2334,7 +2334,7 @@ jr_014_53B6:
     ld   hl, $C380                                ; $53DC: $21 $80 $C3
     add  hl, bc                                   ; $53DF: $09
     ld   [hl], a                                  ; $53E0: $77
-    call IsEntityFrameCounterZero                 ; $53E1: $CD $05 $0C
+    call IsEntityTransitionCountdownZero                 ; $53E1: $CD $05 $0C
     call GetRandomByte                            ; $53E4: $CD $0D $28
     and  $1F                                      ; $53E7: $E6 $1F
     add  $30                                      ; $53E9: $C6 $30
@@ -2371,7 +2371,7 @@ jr_014_5409:
     ld   e, $08                                   ; $540F: $1E $08
 
 jr_014_5411:
-    ldh  a, [hActiveEntityId]                     ; $5411: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $5411: $F0 $EB
     cp   $02                                      ; $5413: $FE $02
     jr   nz, jr_014_541B                          ; $5415: $20 $04
 

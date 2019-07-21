@@ -690,8 +690,8 @@ label_C00::
 ; Output:
 ;  - a: the value read
 ;  - z: whether the value equal to zero
-IsEntityFrameCounterZero::
-    ld   hl, wEntitiesFrameCounterTable
+IsEntityTransitionCountdownZero::
+    ld   hl, wEntitiesTransitionCountdownTable
 
 ; Test if the value at given address is equal to zero
 ; Inputs:
@@ -1946,7 +1946,7 @@ ShootArrow::
     ld   a, [$C1C1]
     ld   c, a
     ld   b, d
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   [hl], b
     ld   hl, $C290
@@ -2635,7 +2635,7 @@ label_1847::
     ld   [$DDD6], a
     ld   [$DDD7], a
     ld   e, $10
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
 
 label_186C::
     ldi  [hl], a
@@ -3583,7 +3583,7 @@ label_2183::
     jr   c, label_21A7
     ld   a, $02
     ldh  [hWaveSfx], a
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   [hl], $07
     ld   hl, $C3B0
@@ -5204,9 +5204,7 @@ LoadRoom::
     ld   hl, $D47F
     inc  [hl]
 
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4CA3
+    callsb ResetRoomVariables
 
     ldh  a, [hIsGBC]
     and  a
@@ -5214,9 +5212,7 @@ LoadRoom::
     ld   a, $21
     ld   [MBC3SelectBank], a
     call $40B3
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6DAF
+    callsb func_020_6DAF
 .GBCEnd
 
     ;
@@ -6775,7 +6771,7 @@ label_389B::
     ld   d, e
 
 label_389E::
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, de
     ld   a, [hl]
     cp   $00
@@ -6808,7 +6804,7 @@ label_38B4::
     add  hl, de
     add  a, $08
     ld   [hl], a
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [bc]
     inc  bc
@@ -7003,7 +6999,7 @@ label_39E3::
     ld   [wLinkWalkingFrameCount], a
 
     ; Read entity type
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   a, [hl]
 
@@ -7012,7 +7008,7 @@ label_39E3::
     jr   z, .loadEntityEnd
 
     ; load the entity.
-    ldh  [hActiveEntityType], a
+    ldh  [hActiveEntityState], a
     call LoadEntity
 .loadEntityEnd
 
@@ -7022,6 +7018,7 @@ label_39E3::
     cp   $FF
     jr   nz, .loop
 
+LoadEntity_return::
     ret
 
 label_3A0A::
@@ -7033,31 +7030,35 @@ label_3A0A::
     ret
 
 LoadEntity::
-    ld   hl, $C3A0
+    ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [hActiveEntityId], a
-    ld   hl, $C290
+    ldh  [hActiveEntityType], a
+
+    ld   hl, wEntitiesWalkingTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hActiveEntityWalking], a
+
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFF1], a
+
     ld   a, $19
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [hActiveEntityId]
-    cp   $6A
-    jr   nz, label_3A40
+
+    ldh  a, [hActiveEntityType]
+    cp   ENTITY_TYPE_RAFT_MAN
+    jr   nz, .raftManEnd
     ldh  a, [$FFB2]
     and  a
     jr   nz, label_3A46
+.raftManEnd
 
-label_3A40::
-    ldh  a, [hActiveEntityType]
-    cp   $07
+    ldh  a, [hActiveEntityState]
+    cp   ENTITY_STATE_LIFTED
     jr   nz, label_3A4E
 
 label_3A46::
@@ -7074,48 +7075,67 @@ label_3A54::
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
     call $4D73
+
+    ; Select bank 3
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [hActiveEntityType]
-    cp   $05
-    jp   z, label_3A8D
-    ; Jump table on FFEA value.
-    ; 0-4: unknown
-    ; 5: return immediately
-    ; 6-9: unknown
-    ; Entity timer type?
-    JP_TABLE
-    db 9, $3A, $18, $55, $B6, $4C, $4C, $4C, $B5, $48, $8D, $3A, 7, $4E, $32, $57
-    db $94, $4D
 
-label_3A81::
-    call label_3A8D
+    ldh  a, [hActiveEntityState]
+    cp   ENTITY_STATE_ACTIVE
+    jp   z, ExecuteActiveEntityHandler
+    JP_TABLE
+._00 dw LoadEntity_return
+._01 dw EntityState1Handler
+._02 dw EntityState2Handler
+._03 dw EntityDestructionHandler
+._04 dw EntityState4Handler
+._05 dw ExecuteActiveEntityHandler
+._06 dw EntityThrownHandler
+._07 dw EntityLiftedHandler
+._08 dw EntityState8Handler
+
+; Execute active entity handler, then return to bank 3
+ExecuteActiveEntityHandler_trampoline::
+    call ExecuteActiveEntityHandler
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
     ret
 
-; Load sprite code pointers and jump to execution
-label_3A8D::
-    ld   a, $20
+; Read entity code pointers, then jump to execution
+ExecuteActiveEntityHandler::
+    ld   a, BANK(EntityPointersTable)
     ld   [MBC3SelectBank], a
-    ldh  a, [hActiveEntityId]
+
+    ; de = active entity id
+    ldh  a, [hActiveEntityType]
     ld   e, a
     ld   d, b
+
+    ; hl = de * 3
     ld   hl, EntityPointersTable
     add  hl, de
     add  hl, de
     add  hl, de
+
+    ; Read values from the entities pointers table:
+    ; a = entity handler bank
+    ; d = entity handler address (high)
+    ; e = entity handler address (low)
     ld   e, [hl]
     inc  hl
     ld   d, [hl]
     inc  hl
     ld   a, [hl]
+
+    ; Select entity handler bank
     ld   l, e
     ld   h, d
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
+
+    ; Jump to the entity handler
     jp   hl
 
 data_3AAA::
@@ -7747,7 +7767,7 @@ label_3E76::
 
 label_3E83::
     ld   e, $10
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
 
 label_3E88::
     xor  a
@@ -7851,7 +7871,7 @@ label_3F11::
     ld   a, [wTransitionSequenceCounter]
     cp   $04
     ret  nz
-    ldh  a, [hActiveEntityId]
+    ldh  a, [hActiveEntityType]
     cp   $87
     jr   nz, label_3F26
     ld   a, $DA
@@ -7930,7 +7950,7 @@ label_3F78::
 ;   c:  index of the entity
 ClearEntityType::
 ClearEntityTypeAndReturn::
-    ld   hl, wEntitiesTypeTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   [hl], b
     ret

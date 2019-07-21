@@ -7,3 +7,6 @@ ENTITY_STATE_4          equ 4
 ENTITY_STATE_ACTIVE     equ 5
 ENTITY_STATE_THROWN     equ 6
 ENTITY_STATE_LIFTED     equ 7
+
+; Values for wEntitiesTypeTable
+ENTITY_TYPE_RAFT_MAN    equ $6A

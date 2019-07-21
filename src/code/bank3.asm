@@ -247,6 +247,7 @@ jr_003_48AD:
     ld   [$C18F], a                               ; $48AF: $EA $8F $C1
     jp   ClearEntityType                               ; $48B2: $C3 $8D $3F
 
+EntityState4Handler::
     ld   hl, $C430                                ; $48B5: $21 $30 $C4
     add  hl, bc                                   ; $48B8: $09
     ld   a, [hl]                                  ; $48B9: $7E
@@ -260,7 +261,7 @@ jr_003_48AD:
     jp   ClearEntityType                               ; $48C4: $C3 $8D $3F
 
 jr_003_48C7:
-    ldh  a, [hActiveEntityId]                     ; $48C7: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $48C7: $F0 $EB
     cp   $5F                                      ; $48C9: $FE $5F
     jr   nz, jr_003_48F0                          ; $48CB: $20 $23
 
@@ -871,6 +872,7 @@ jr_003_4C15:
 Data_003_4C44::
     db   $34, $02, $34, $22, $34, $14, $34, $34
 
+EntityDestructionHandler::
     call IsEntityTransitionCountdownZero                 ; $4C4C: $CD $05 $0C
     jr   z, jr_003_4C77                           ; $4C4F: $28 $26
 
@@ -886,7 +888,7 @@ Data_003_4C44::
     add  hl, bc                                   ; $4C63: $09
     ld   a, [hl]                                  ; $4C64: $7E
     ldh  [hActiveEntityUnknownG], a               ; $4C65: $E0 $F1
-    call label_3A81                               ; $4C67: $CD $81 $3A
+    call ExecuteActiveEntityHandler_trampoline                               ; $4C67: $CD $81 $3A
     call func_003_7F7E                            ; $4C6A: $CD $7E $7F
     call func_003_7FA9                            ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
@@ -894,7 +896,7 @@ Data_003_4C44::
     ret                                           ; $4C76: $C9
 
 jr_003_4C77:
-    ldh  a, [hActiveEntityId]                     ; $4C77: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $4C77: $F0 $EB
     cp   $1F                                      ; $4C79: $FE $1F
     jr   nz, jr_003_4C8C                          ; $4C7B: $20 $0F
 
@@ -932,6 +934,7 @@ Data_003_4CAC::
 Data_003_4CB2::
     db   $1E, $01, $1E, $61
 
+EntityState2Handler::
     ldh  a, [hMapId]                              ; $4CB6: $F0 $F7
     cp   $FF                                      ; $4CB8: $FE $FF
     jr   nz, jr_003_4CDC                          ; $4CBA: $20 $20
@@ -973,7 +976,7 @@ jr_003_4CDC:
     ld   [hl], $01                                ; $4CED: $36 $01
 
 jr_003_4CEF:
-    ldh  a, [hActiveEntityId]                     ; $4CEF: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $4CEF: $F0 $EB
     cp   $A8                                      ; $4CF1: $FE $A8
     jr   nz, jr_003_4D04                          ; $4CF3: $20 $0F
 
@@ -991,7 +994,7 @@ jr_003_4D07:
     cp   $40                                      ; $4D07: $FE $40
     jr   c, jr_003_4D29                           ; $4D09: $38 $1E
 
-    ldh  a, [hActiveEntityId]                     ; $4D0B: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $4D0B: $F0 $EB
     cp   $09                                      ; $4D0D: $FE $09
     jr   z, jr_003_4D19                           ; $4D0F: $28 $08
 
@@ -1007,7 +1010,7 @@ jr_003_4D19:
     call func_003_58FC                            ; $4D1F: $CD $FC $58
 
 jr_003_4D22:
-    call label_3A81                               ; $4D22: $CD $81 $3A
+    call ExecuteActiveEntityHandler_trampoline                               ; $4D22: $CD $81 $3A
     call func_003_7F7E                            ; $4D25: $CD $7E $7F
     ret                                           ; $4D28: $C9
 
@@ -1082,7 +1085,7 @@ jr_003_4D66:
     ldh  [hLinkPositionX], a                      ; $4D8F: $E0 $98
     jp   label_003_7F25                           ; $4D91: $C3 $25 $7F
 
-    call label_3A81                               ; $4D94: $CD $81 $3A
+    call ExecuteActiveEntityHandler_trampoline                               ; $4D94: $CD $81 $3A
     call func_003_7F7E                            ; $4D97: $CD $7E $7F
     ld   hl, $C410                                ; $4D9A: $21 $10 $C4
     add  hl, bc                                   ; $4D9D: $09
@@ -1093,7 +1096,7 @@ jr_003_4D66:
     ld   [hl], b                                  ; $4DA7: $70
     call func_003_66FA                            ; $4DA8: $CD $FA $66
     call func_003_5438                            ; $4DAB: $CD $38 $54
-    ldh  a, [hActiveEntityId]                     ; $4DAE: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $4DAE: $F0 $EB
     cp   $5C                                      ; $4DB0: $FE $5C
     jr   nz, jr_003_4DD2                          ; $4DB2: $20 $1E
 
@@ -1129,7 +1132,7 @@ jr_003_4DD2:
     jr   nz, jr_003_4E04                          ; $4DE4: $20 $1E
 
     call func_003_7267                            ; $4DE6: $CD $67 $72
-    ldh  a, [hActiveEntityId]                     ; $4DE9: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $4DE9: $F0 $EB
     cp   $5C                                      ; $4DEB: $FE $5C
     jr   nz, jr_003_4E04                          ; $4DED: $20 $15
 
@@ -1446,7 +1449,7 @@ jr_003_4FA9:
     ld   [hl], $A0                                ; $4FB2: $36 $A0
     ret                                           ; $4FB4: $C9
 
-    ldh  a, [hActiveEntityId]                     ; $4FB5: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $4FB5: $F0 $EB
     cp   $12                                      ; $4FB7: $FE $12
     jr   nz, jr_003_4FC8                          ; $4FB9: $20 $0D
 
@@ -2364,13 +2367,15 @@ jr_003_54C5:
     ld   h, d                                     ; $5513: $62
     ld   [$1010], sp                              ; $5514: $08 $10 $10
     ld   h, d                                     ; $5517: $62
+
+EntityState1Handler::
     ld   hl, $C430                                ; $5518: $21 $30 $C4
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E
     and  $80                                      ; $551D: $E6 $80
     jr   z, jr_003_5524                           ; $551F: $28 $03
 
-    jp   label_3A8D                               ; $5521: $C3 $8D $3A
+    jp   ExecuteActiveEntityHandler                               ; $5521: $C3 $8D $3A
 
 jr_003_5524:
     ld   hl, $C480                                ; $5524: $21 $80 $C4
@@ -2428,7 +2433,7 @@ jr_003_5568:
     ret                                           ; $556E: $C9
 
 jr_003_556F:
-    call label_3A81                               ; $556F: $CD $81 $3A
+    call ExecuteActiveEntityHandler_trampoline                               ; $556F: $CD $81 $3A
     call func_003_7F7E                            ; $5572: $CD $7E $7F
     ld   hl, $C410                                ; $5575: $21 $10 $C4
     add  hl, bc                                   ; $5578: $09
@@ -2494,7 +2499,7 @@ jr_003_5599:
     ld   l, $2D                                   ; $55CB: $2E $2D
     jr   c, @+$39                                 ; $55CD: $38 $37
 
-    ldh  a, [hActiveEntityId]                     ; $55CF: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $55CF: $F0 $EB
     cp   $23                                      ; $55D1: $FE $23
     jr   nz, jr_003_55E2                          ; $55D3: $20 $0D
 
@@ -2645,7 +2650,7 @@ jr_003_5670:
     cp   $30                                      ; $56A8: $FE $30
     jr   nz, jr_003_56B8                          ; $56AA: $20 $0C
 
-    ldh  a, [hActiveEntityId]                     ; $56AC: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $56AC: $F0 $EB
     cp   $88                                      ; $56AE: $FE $88
     jr   nz, jr_003_56B8                          ; $56B0: $20 $06
 
@@ -2755,7 +2760,7 @@ jr_003_56DF:
     jr   jr_003_5748                              ; $5743: $18 $03
 
 jr_003_5745:
-    call label_3A81                               ; $5745: $CD $81 $3A
+    call ExecuteActiveEntityHandler_trampoline                               ; $5745: $CD $81 $3A
 
 jr_003_5748:
     ld   hl, $C490                                ; $5748: $21 $90 $C4
@@ -2776,7 +2781,7 @@ jr_003_5748:
 
     inc  [hl]                                     ; $5760: $34
     ld   hl, $56EA                                ; $5761: $21 $EA $56
-    ldh  a, [hActiveEntityId]                     ; $5764: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $5764: $F0 $EB
     cp   $02                                      ; $5766: $FE $02
     jr   z, jr_003_577F                           ; $5768: $28 $15
 
@@ -2980,7 +2985,7 @@ jr_003_5858:
     cp   [hl]                                     ; $5879: $BE
     jr   nz, jr_003_5889                          ; $587A: $20 $0D
 
-    ldh  a, [hActiveEntityId]                     ; $587C: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $587C: $F0 $EB
     cp   $24                                      ; $587E: $FE $24
     jr   z, jr_003_5889                           ; $5880: $28 $07
 
@@ -4455,7 +4460,7 @@ jr_003_6103:
 jr_003_6112:
     push af                                       ; $6112: $F5
     push hl                                       ; $6113: $E5
-    ldh  a, [hActiveEntityId]                     ; $6114: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6114: $F0 $EB
     cp   $30                                      ; $6116: $FE $30
     jr   nz, jr_003_6120                          ; $6118: $20 $06
 
@@ -4622,7 +4627,7 @@ func_003_61DE::
     cp   $02                                      ; $61EF: $FE $02
     jr   nz, jr_003_6243                          ; $61F1: $20 $50
 
-    ldh  a, [hActiveEntityId]                     ; $61F3: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $61F3: $F0 $EB
     cp   $3D                                      ; $61F5: $FE $3D
     jr   z, jr_003_6200                           ; $61F7: $28 $07
 
@@ -4632,7 +4637,7 @@ func_003_61DE::
 
 jr_003_6200:
     call func_003_7E0E                            ; $6200: $CD $0E $7E
-    ldh  a, [hActiveEntityId]                     ; $6203: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6203: $F0 $EB
     cp   $2D                                      ; $6205: $FE $2D
     jr   z, jr_003_6227                           ; $6207: $28 $1E
 
@@ -4801,7 +4806,7 @@ func_003_62EB::
     call label_C00                                ; $62EB: $CD $00 $0C
     jr   nz, jr_003_62EA                          ; $62EE: $20 $FA
 
-    ldh  a, [hActiveEntityId]                     ; $62F0: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $62F0: $F0 $EB
     sub  $2D                                      ; $62F2: $D6 $2D
     ld   e, a                                     ; $62F4: $5F
     ld   d, b                                     ; $62F5: $50
@@ -4832,7 +4837,7 @@ jr_003_6311:
     add  hl, bc                                   ; $6314: $09
     ld   a, [hl]                                  ; $6315: $7E
     call label_3F78                               ; $6316: $CD $78 $3F
-    ldh  a, [hActiveEntityId]                     ; $6319: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6319: $F0 $EB
     sub  $2D                                      ; $631B: $D6 $2D
     cp   $02                                      ; $631D: $FE $02
     jr   nc, jr_003_6328                          ; $631F: $30 $07
@@ -6239,7 +6244,7 @@ jr_003_6ADA:
     jr   z, jr_003_6B42                           ; $6AEE: $28 $52
 
     call IsEntityTransitionCountdownZero                 ; $6AF0: $CD $05 $0C
-    ldh  a, [hActiveEntityId]                     ; $6AF3: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6AF3: $F0 $EB
     cp   $04                                      ; $6AF5: $FE $04
     jr   nz, jr_003_6AFF                          ; $6AF7: $20 $06
 
@@ -6263,7 +6268,7 @@ jr_003_6AFF:
 
 jr_003_6B13:
     call label_C50                                ; $6B13: $CD $50 $0C
-    ldh  a, [hActiveEntityId]                     ; $6B16: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6B16: $F0 $EB
     cp   $00                                      ; $6B18: $FE $00
     jr   nz, jr_003_6B31                          ; $6B1A: $20 $15
 
@@ -6314,7 +6319,7 @@ label_003_6B43:
     ld   bc, $0320                                ; $6B4D: $01 $20 $03
     jp   ClearEntityType                               ; $6B50: $C3 $8D $3F
 
-    ldh  a, [hActiveEntityId]                     ; $6B53: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6B53: $F0 $EB
     cp   $0A                                      ; $6B55: $FE $0A
     jr   z, jr_003_6B6E                           ; $6B57: $28 $15
 
@@ -6446,7 +6451,7 @@ func_003_6BDE::
     and  a                                        ; $6C05: $A7
     jr   z, jr_003_6C5B                           ; $6C06: $28 $53
 
-    ldh  a, [hActiveEntityId]                     ; $6C08: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6C08: $F0 $EB
     cp   $2B                                      ; $6C0A: $FE $2B
     jr   nz, jr_003_6C41                          ; $6C0C: $20 $33
 
@@ -6507,7 +6512,7 @@ jr_003_6C5A:
 
 jr_003_6C5B:
     call func_003_6CC0                            ; $6C5B: $CD $C0 $6C
-    ldh  a, [hActiveEntityId]                     ; $6C5E: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6C5E: $F0 $EB
     cp   $2B                                      ; $6C60: $FE $2B
     jr   z, jr_003_6C68                           ; $6C62: $28 $04
 
@@ -6611,7 +6616,7 @@ jr_003_6CCD:
 ; Handle collision between Link and an entity?
 func_003_6CD5::
 label_003_6CD5:
-    ldh  a, [hActiveEntityId]                     ; $6CD5: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6CD5: $F0 $EB
     cp   $AC                                      ; $6CD7: $FE $AC
     jr   nz, jr_003_6CF9                          ; $6CD9: $20 $1E
 
@@ -6632,7 +6637,7 @@ label_003_6CD5:
     ret                                           ; $6CF8: $C9
 
 jr_003_6CF9:
-    ldh  a, [hActiveEntityId]                     ; $6CF9: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6CF9: $F0 $EB
     cp   $9F                                      ; $6CFB: $FE $9F
     jr   nz, jr_003_6D3D                          ; $6CFD: $20 $3E
 
@@ -6683,7 +6688,7 @@ jr_003_6D38:
     ret                                           ; $6D3C: $C9
 
 jr_003_6D3D:
-    ldh  a, [hActiveEntityId]                     ; $6D3D: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6D3D: $F0 $EB
     cp   $1C                                      ; $6D3F: $FE $1C
     jr   nz, jr_003_6D4E                          ; $6D41: $20 $0B
 
@@ -6705,7 +6710,7 @@ jr_003_6D4E:
     jp   nz, label_003_6E0A                       ; $6D5A: $C2 $0A $6E
 
 jr_003_6D5D:
-    ldh  a, [hActiveEntityId]                     ; $6D5D: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6D5D: $F0 $EB
     cp   $E4                                      ; $6D5F: $FE $E4
     jr   nz, jr_003_6D73                          ; $6D61: $20 $10
 
@@ -6794,7 +6799,7 @@ jr_003_6DDF:
     call label_CB6                                ; $6DDF: $CD $B6 $0C
     ld   a, $10                                   ; $6DE2: $3E $10
     ld   [$C13E], a                               ; $6DE4: $EA $3E $C1
-    ldh  a, [hActiveEntityId]                     ; $6DE7: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6DE7: $F0 $EB
     ld   e, $18                                   ; $6DE9: $1E $18
     cp   $82                                      ; $6DEB: $FE $82
     jp   z, label_003_6FA7                        ; $6DED: $CA $A7 $6F
@@ -6946,7 +6951,7 @@ jr_003_6E8E:
     ld   a, [wIsRunningWithPegasusBoots]          ; $6EAC: $FA $4A $C1
     ldh  [hFFE9], a                               ; $6EAF: $E0 $E9
     call label_CB6                                ; $6EB1: $CD $B6 $0C
-    ldh  a, [hActiveEntityId]                     ; $6EB4: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6EB4: $F0 $EB
     cp   $E2                                      ; $6EB6: $FE $E2
     jr   nz, jr_003_6ED1                          ; $6EB8: $20 $17
 
@@ -7110,7 +7115,7 @@ label_003_6F93:
     call label_CB6                                ; $6F97: $CD $B6 $0C
     ld   a, $0C                                   ; $6F9A: $3E $0C
     ld   [$C13E], a                               ; $6F9C: $EA $3E $C1
-    ldh  a, [hActiveEntityId]                     ; $6F9F: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6F9F: $F0 $EB
     cp   $82                                      ; $6FA1: $FE $82
     jr   nz, jr_003_6FB9                          ; $6FA3: $20 $14
 
@@ -7167,7 +7172,7 @@ jr_003_6FCC:
     ld   bc, $0302                                ; $6FE5: $01 $02 $03
 
 label_003_6FE8:
-    ldh  a, [hActiveEntityId]                     ; $6FE8: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6FE8: $F0 $EB
     cp   $E2                                      ; $6FEA: $FE $E2
     ret  z                                        ; $6FEC: $C8
 
@@ -7199,13 +7204,13 @@ label_003_6FE8:
 jr_003_7013:
     jp   IncrementEntityWalkingAttr               ; $7013: $C3 $12 $3B
 
-    ldh  a, [hActiveEntityId]                     ; $7016: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7016: $F0 $EB
 
 jr_003_7018:
     cp   $B9                                      ; $7018: $FE $B9
     jr   nz, jr_003_7042                          ; $701A: $20 $26
 
-    ldh  a, [hActiveEntityType]                   ; $701C: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $701C: $F0 $EA
     cp   $05                                      ; $701E: $FE $05
     jr   nz, jr_003_7042                          ; $7020: $20 $20
 
@@ -7224,7 +7229,7 @@ jr_003_7018:
     jp   label_003_6CD5                           ; $703F: $C3 $D5 $6C
 
 jr_003_7042:
-    ldh  a, [hActiveEntityId]                     ; $7042: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7042: $F0 $EB
     cp   $55                                      ; $7044: $FE $55
     jr   nz, jr_003_706F                          ; $7046: $20 $27
 
@@ -7307,7 +7312,7 @@ jr_003_70B9:
     and  $40                                      ; $70BE: $E6 $40
     jr   z, jr_003_7102                           ; $70C0: $28 $40
 
-    ldh  a, [hActiveEntityId]                     ; $70C2: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $70C2: $F0 $EB
     cp   $51                                      ; $70C4: $FE $51
     jp   z, label_003_6F04                        ; $70C6: $CA $04 $6F
 
@@ -7350,7 +7355,7 @@ jr_003_70E7:
 
 label_003_7102:
 jr_003_7102:
-    ldh  a, [hActiveEntityId]                     ; $7102: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7102: $F0 $EB
     cp   $8E                                      ; $7104: $FE $8E
     jr   nz, jr_003_710D                          ; $7106: $20 $05
 
@@ -7394,7 +7399,7 @@ label_003_713B:
     jp   label_D15                                ; $7143: $C3 $15 $0D
 
 jr_003_7146:
-    ldh  a, [hActiveEntityId]                     ; $7146: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7146: $F0 $EB
     cp   $15                                      ; $7148: $FE $15
     jp   z, label_003_73E6                        ; $714A: $CA $E6 $73
 
@@ -7508,7 +7513,7 @@ label_003_71C0:
     ret  z                                        ; $71F3: $C8
 
     push af                                       ; $71F4: $F5
-    ldh  a, [hActiveEntityId]                     ; $71F5: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $71F5: $F0 $EB
     cp   $E6                                      ; $71F7: $FE $E6
     jr   nz, jr_003_7215                          ; $71F9: $20 $1A
 
@@ -7969,7 +7974,7 @@ jr_003_7440:
     ld   [wC16D], a                               ; $7488: $EA $6D $C1
 
 jr_003_748B:
-    ldh  a, [hActiveEntityId]                     ; $748B: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $748B: $F0 $EB
     cp   $BE                                      ; $748D: $FE $BE
     jr   nz, jr_003_74C1                          ; $748F: $20 $30
 
@@ -8099,7 +8104,7 @@ jr_003_752D:
     jr   nz, jr_003_7570                          ; $753C: $20 $32
 
     call func_003_6CD5                            ; $753E: $CD $D5 $6C
-    ldh  a, [hActiveEntityId]                     ; $7541: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7541: $F0 $EB
     cp   $BE                                      ; $7543: $FE $BE
     jr   nz, jr_003_7570                          ; $7545: $20 $29
 
@@ -8219,7 +8224,7 @@ label_003_75A6:
     cp   $FF                                      ; $75EF: $FE $FF
     jp   z, label_003_779F                        ; $75F1: $CA $9F $77
 
-    ldh  a, [hActiveEntityId]                     ; $75F4: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $75F4: $F0 $EB
     cp   $55                                      ; $75F6: $FE $55
     jr   nz, jr_003_75FE                          ; $75F8: $20 $04
 
@@ -8263,7 +8268,7 @@ jr_003_7630:
     and  $20                                      ; $7635: $E6 $20
     jp   nz, label_003_7715                       ; $7637: $C2 $15 $77
 
-    ldh  a, [hActiveEntityId]                     ; $763A: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $763A: $F0 $EB
     cp   $08                                      ; $763C: $FE $08
     jr   z, jr_003_7668                           ; $763E: $28 $28
 
@@ -8296,7 +8301,7 @@ jr_003_765F:
     jp   label_003_7737                           ; $7665: $C3 $37 $77
 
 jr_003_7668:
-    ldh  a, [hActiveEntityId]                     ; $7668: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7668: $F0 $EB
     cp   $08                                      ; $766A: $FE $08
     jr   nz, jr_003_76AC                          ; $766C: $20 $3E
 
@@ -8375,7 +8380,7 @@ jr_003_76AC:
     and  a                                        ; $76DB: $A7
     jr   nz, jr_003_7710                          ; $76DC: $20 $32
 
-    ldh  a, [hActiveEntityId]                     ; $76DE: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $76DE: $F0 $EB
     cp   $03                                      ; $76E0: $FE $03
     jp   nz, label_003_765F                       ; $76E2: $C2 $5F $76
 
@@ -8413,7 +8418,7 @@ jr_003_7710:
     jr   jr_003_7737                              ; $7713: $18 $22
 
 label_003_7715:
-    ldh  a, [hActiveEntityId]                     ; $7715: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7715: $F0 $EB
     cp   $01                                      ; $7717: $FE $01
     jr   z, jr_003_771F                           ; $7719: $28 $04
 
@@ -8441,7 +8446,7 @@ jr_003_7734:
 
 label_003_7737:
 jr_003_7737:
-    ldh  a, [hActiveEntityId]                     ; $7737: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7737: $F0 $EB
     cp   $A8                                      ; $7739: $FE $A8
     jr   z, jr_003_775A                           ; $773B: $28 $1D
 
@@ -8500,7 +8505,7 @@ jr_003_7782:
     and  a                                        ; $7787: $A7
     jr   nz, jr_003_779A                          ; $7788: $20 $10
 
-    ldh  a, [hActiveEntityId]                     ; $778A: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $778A: $F0 $EB
     cp   $00                                      ; $778C: $FE $00
     jr   nz, jr_003_7795                          ; $778E: $20 $05
 
@@ -8529,7 +8534,7 @@ jr_003_779F:
     ret                                           ; $77A6: $C9
 
 func_003_77A7::
-    ldh  a, [hActiveEntityId]                     ; $77A7: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $77A7: $F0 $EB
     cp   $00                                      ; $77A9: $FE $00
     jr   nz, jr_003_77B8                          ; $77AB: $20 $0B
 
@@ -8715,7 +8720,7 @@ jr_003_78B1:
 
 jr_003_78C5:
     ld   e, $02                                   ; $78C5: $1E $02
-    ldh  a, [hActiveEntityId]                     ; $78C7: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $78C7: $F0 $EB
     cp   $CC                                      ; $78C9: $FE $CC
     jr   z, jr_003_7907                           ; $78CB: $28 $3A
 
@@ -8804,7 +8809,7 @@ jr_003_790C:
     jr   jr_003_7954                              ; $793B: $18 $17
 
 jr_003_793D:
-    ldh  a, [hActiveEntityId]                     ; $793D: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $793D: $F0 $EB
     cp   $AC                                      ; $793F: $FE $AC
     jr   z, jr_003_7954                           ; $7941: $28 $11
 
@@ -8884,7 +8889,7 @@ jr_003_799C:
     jr   nz, jr_003_7A18                          ; $79AA: $20 $6C
 
 jr_003_79AC:
-    ldh  a, [hActiveEntityId]                     ; $79AC: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $79AC: $F0 $EB
     cp   $6D                                      ; $79AE: $FE $6D
     jr   z, jr_003_7A18                           ; $79B0: $28 $66
 
@@ -8931,7 +8936,7 @@ jr_003_79CB:
     ld   [hl], a                                  ; $79F1: $77
     call IsEntityTransitionCountdownZero                 ; $79F2: $CD $05 $0C
     ld   [hl], $6F                                ; $79F5: $36 $6F
-    ldh  a, [hActiveEntityId]                     ; $79F7: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $79F7: $F0 $EB
     cp   $14                                      ; $79F9: $FE $14
     jr   z, jr_003_7A18                           ; $79FB: $28 $1B
 
@@ -8955,7 +8960,7 @@ jr_003_79CB:
 
 label_003_7A18:
 jr_003_7A18:
-    ldh  a, [hActiveEntityId]                     ; $7A18: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7A18: $F0 $EB
     cp   $6D                                      ; $7A1A: $FE $6D
     jp   z, label_003_7A84                        ; $7A1C: $CA $84 $7A
 
@@ -9091,7 +9096,7 @@ jr_003_7A84:
     cp   $03                                      ; $7AEB: $FE $03
     jr   nz, jr_003_7B0E                          ; $7AED: $20 $1F
 
-    ldh  a, [hActiveEntityId]                     ; $7AEF: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7AEF: $F0 $EB
     cp   $A8                                      ; $7AF1: $FE $A8
     jr   z, jr_003_7AF9                           ; $7AF3: $28 $04
 
@@ -9152,7 +9157,7 @@ jr_003_7B13:
     call label_2A2C                               ; $7B3E: $CD $2C $2A
     pop  de                                       ; $7B41: $D1
     ldh  [hScratchD], a                           ; $7B42: $E0 $DA
-    ldh  a, [hActiveEntityId]                     ; $7B44: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7B44: $F0 $EB
     cp   $CC                                      ; $7B46: $FE $CC
     jr   z, jr_003_7B4E                           ; $7B48: $28 $04
 
@@ -9196,7 +9201,7 @@ jr_003_7B6F:
     and  a                                        ; $7B7D: $A7
     jp   z, label_003_7C75                        ; $7B7E: $CA $75 $7C
 
-    ldh  a, [hActiveEntityId]                     ; $7B81: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7B81: $F0 $EB
     cp   $59                                      ; $7B83: $FE $59
     jp   z, label_003_7C75                        ; $7B85: $CA $75 $7C
 
@@ -9210,7 +9215,7 @@ jr_003_7B8B:
     jp   nc, label_003_7BE4                       ; $7B92: $D2 $E4 $7B
 
     cp   $80                                      ; $7B95: $FE $80
-    ldh  a, [hActiveEntityId]                     ; $7B97: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7B97: $F0 $EB
     jr   c, jr_003_7BA7                           ; $7B99: $38 $0C
 
     cp   $A8                                      ; $7B9B: $FE $A8
@@ -9277,7 +9282,7 @@ label_003_7BE4:
     cp   [hl]                                     ; $7BF4: $BE
     jr   z, jr_003_7C1A                           ; $7BF5: $28 $23
 
-    ldh  a, [hActiveEntityId]                     ; $7BF7: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7BF7: $F0 $EB
     cp   $A8                                      ; $7BF9: $FE $A8
     jr   z, jr_003_7C75                           ; $7BFB: $28 $78
 
@@ -9336,7 +9341,7 @@ jr_003_7C2B:
     cp   $04                                      ; $7C3F: $FE $04
     jr   nz, jr_003_7CA7                          ; $7C41: $20 $64
 
-    ldh  a, [hActiveEntityId]                     ; $7C43: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7C43: $F0 $EB
     cp   $A8                                      ; $7C45: $FE $A8
     jp   z, label_003_7CA7                        ; $7C47: $CA $A7 $7C
 
@@ -9376,7 +9381,7 @@ jr_003_7C75:
     jr   nz, jr_003_7C91                          ; $7C79: $20 $16
 
 label_003_7C7B:
-    ldh  a, [hActiveEntityId]                     ; $7C7B: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7C7B: $F0 $EB
     cp   $03                                      ; $7C7D: $FE $03
     jr   nz, jr_003_7C91                          ; $7C7F: $20 $10
 
@@ -9470,7 +9475,7 @@ func_003_7CAB::
     jp   nz, label_003_7E03                       ; $7CFA: $C2 $03 $7E
 
 jr_003_7CFD:
-    ldh  a, [hActiveEntityId]                     ; $7CFD: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7CFD: $F0 $EB
     cp   $04                                      ; $7CFF: $FE $04
     jr   nz, jr_003_7D6B                          ; $7D01: $20 $68
 
@@ -9630,7 +9635,7 @@ jr_003_7DE3:
     ld   hl, wEntitiesCollisionsTable             ; $7DE3: $21 $A0 $C2
     add  hl, bc                                   ; $7DE6: $09
     ld   [hl], $01                                ; $7DE7: $36 $01
-    ldh  a, [hActiveEntityId]                     ; $7DE9: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7DE9: $F0 $EB
     cp   $01                                      ; $7DEB: $FE $01
     jr   nz, jr_003_7DF3                          ; $7DED: $20 $04
 
@@ -9655,7 +9660,7 @@ jr_003_7E03:
     ret                                           ; $7E04: $C9
 
 label_003_7E05:
-    ldh  a, [hActiveEntityId]                     ; $7E05: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7E05: $F0 $EB
     cp   $01                                      ; $7E07: $FE $01
 
 label_003_7E09:
@@ -9959,7 +9964,7 @@ func_003_7F5E::
     jr   jr_003_7F4A                              ; $7F76: $18 $D2
 
 func_003_7F78::
-    ldh  a, [hActiveEntityType]                   ; $7F78: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $7F78: $F0 $EA
     cp   $05                                      ; $7F7A: $FE $05
     jr   nz, jr_003_7FA7                          ; $7F7C: $20 $29
 

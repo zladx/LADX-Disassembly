@@ -5560,7 +5560,7 @@ jr_007_602A:
     and  a                                        ; $6047: $A7
     ret  nz                                       ; $6048: $C0
 
-    ldh  a, [hActiveEntityType]                   ; $6049: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $6049: $F0 $EA
     cp   $02                                      ; $604B: $FE $02
     ret  z                                        ; $604D: $C8
 
@@ -5698,7 +5698,7 @@ jr_007_6104:
 
     inc  a                                        ; $610A: $3C
     ld   [$C3CF], a                               ; $610B: $EA $CF $C3
-    ldh  a, [hActiveEntityType]                   ; $610E: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $610E: $F0 $EA
     cp   $07                                      ; $6110: $FE $07
     jr   z, jr_007_6133                           ; $6112: $28 $1F
 
@@ -6127,7 +6127,7 @@ jr_007_6347:
     or   e                                        ; $636F: $B3
     jr   nz, jr_007_639E                          ; $6370: $20 $2C
 
-    ldh  a, [hActiveEntityId]                     ; $6372: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $6372: $F0 $EB
     cp   $A4                                      ; $6374: $FE $A4
     jp   z, $63FB                                 ; $6376: $CA $FB $63
 
@@ -7362,7 +7362,7 @@ label_007_6A34:
 
 jr_007_6A52:
     call func_007_6FB1                            ; $6A52: $CD $B1 $6F
-    ldh  a, [hActiveEntityType]                   ; $6A55: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $6A55: $F0 $EA
     cp   $05                                      ; $6A57: $FE $05
     jp   nz, label_007_7EAA                       ; $6A59: $C2 $AA $7E
 
@@ -10659,7 +10659,7 @@ jr_007_7D4E:
     jr   nc, jr_007_7D94                          ; $7D5A: $30 $38
 
     inc  e                                        ; $7D5C: $1C
-    ldh  a, [hActiveEntityId]                     ; $7D5D: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7D5D: $F0 $EB
     cp   $B5                                      ; $7D5F: $FE $B5
     jr   z, jr_007_7D6F                           ; $7D61: $28 $0C
 
@@ -10699,7 +10699,7 @@ jr_007_7D94:
     ret                                           ; $7D95: $C9
 
 func_007_7D96:
-    ldh  a, [hActiveEntityType]                   ; $7D96: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $7D96: $F0 $EA
     cp   $05                                      ; $7D98: $FE $05
     jr   nz, jr_007_7DC1                          ; $7D9A: $20 $25
 
@@ -10959,7 +10959,7 @@ label_007_7EC1:
     call IsEntityTransitionCountdownZero                 ; $7ED6: $CD $05 $0C
     jr   nz, jr_007_7F13                          ; $7ED9: $20 $38
 
-    ldh  a, [hActiveEntityId]                     ; $7EDB: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7EDB: $F0 $EB
     cp   $5F                                      ; $7EDD: $FE $5F
     jr   nz, jr_007_7F0A                          ; $7EDF: $20 $29
 

@@ -1005,7 +1005,7 @@ jr_005_4509:
 jr_005_4538:
     ld   de, $4514                                ; $4538: $11 $14 $45
     call label_3BC0                               ; $453B: $CD $C0 $3B
-    ldh  a, [hActiveEntityType]                   ; $453E: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $453E: $F0 $EA
     cp   $07                                      ; $4540: $FE $07
     jr   nz, jr_005_4557                          ; $4542: $20 $13
 
@@ -3759,7 +3759,7 @@ func_005_54EA:
 
 func_005_5506:
     ld   e, b                                     ; $5506: $58
-    ldh  a, [hActiveEntityId]                     ; $5507: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $5507: $F0 $EB
     cp   $40                                      ; $5509: $FE $40
     jr   nz, jr_005_5519                          ; $550B: $20 $0C
 
@@ -3788,7 +3788,7 @@ jr_005_5523:
     jr   nc, jr_005_5569                          ; $552F: $30 $38
 
     inc  e                                        ; $5531: $1C
-    ldh  a, [hActiveEntityId]                     ; $5532: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $5532: $F0 $EB
     cp   $6D                                      ; $5534: $FE $6D
     jr   z, jr_005_5544                           ; $5536: $28 $0C
 
@@ -3845,7 +3845,7 @@ jr_005_5569:
     ld   e, c                                     ; $5583: $59
     call label_3EE8                               ; $5584: $CD $E8 $3E
     call $58D4                                    ; $5587: $CD $D4 $58
-    ldh  a, [hActiveEntityType]                   ; $558A: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $558A: $F0 $EA
     cp   $05                                      ; $558C: $FE $05
     jr   z, @+$3C                                 ; $558E: $28 $3A
 
@@ -4740,7 +4740,7 @@ jr_005_5A9B:
     ret                                           ; $5A9B: $C9
 
     call func_005_5B5A                            ; $5A9C: $CD $5A $5B
-    ldh  a, [hActiveEntityType]                   ; $5A9F: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $5A9F: $F0 $EA
     cp   $05                                      ; $5AA1: $FE $05
     jr   nz, jr_005_5A9B                          ; $5AA3: $20 $F6
 
@@ -4869,7 +4869,7 @@ label_005_5B5A:
     inc  b                                        ; $5B69: $04
     inc  b                                        ; $5B6A: $04
     call func_005_61F2                            ; $5B6B: $CD $F2 $61
-    ldh  a, [hActiveEntityType]                   ; $5B6E: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $5B6E: $F0 $EA
     cp   $05                                      ; $5B70: $FE $05
     jp   nz, label_005_7E6C                       ; $5B72: $C2 $6C $7E
 
@@ -6314,7 +6314,7 @@ jr_005_62F5:
 
 jr_005_632F:
     call func_005_6705                            ; $632F: $CD $05 $67
-    ldh  a, [hActiveEntityType]                   ; $6332: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $6332: $F0 $EA
     cp   $01                                      ; $6334: $FE $01
     jr   nz, jr_005_6375                          ; $6336: $20 $3D
 
@@ -10362,7 +10362,7 @@ jr_005_7A39:
     ret                                           ; $7A39: $C9
 
 func_005_7A3A:
-    ldh  a, [hActiveEntityType]                   ; $7A3A: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $7A3A: $F0 $EA
     cp   $05                                      ; $7A3C: $FE $05
     jr   nz, jr_005_7A65                          ; $7A3E: $20 $25
 
@@ -10759,7 +10759,7 @@ jr_005_7BF6:
     call label_3CE6                               ; $7C0A: $CD $E6 $3C
     ld   a, $06                                   ; $7C0D: $3E $06
     call label_3DA0                               ; $7C0F: $CD $A0 $3D
-    ldh  a, [hActiveEntityType]                   ; $7C12: $F0 $EA
+    ldh  a, [hActiveEntityState]                   ; $7C12: $F0 $EA
     cp   $05                                      ; $7C14: $FE $05
     jp   nz, label_005_7E6C                       ; $7C16: $C2 $6C $7E
 
@@ -11198,7 +11198,7 @@ label_005_7E83:
 label_005_7E9D:
     ld   a, $1A                                   ; $7E9D: $3E $1A
     ldh  [hNoiseSfx], a                            ; $7E9F: $E0 $F4
-    ldh  a, [hActiveEntityId]                     ; $7EA1: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $7EA1: $F0 $EB
     cp   $63                                      ; $7EA3: $FE $63
     jp   z, label_005_758C                        ; $7EA5: $CA $8C $75
 

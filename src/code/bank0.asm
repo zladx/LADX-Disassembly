@@ -7008,7 +7008,7 @@ label_39E3::
     jr   z, .loadEntityEnd
 
     ; load the entity.
-    ldh  [hActiveEntityType], a
+    ldh  [hActiveEntityState], a
     call LoadEntity
 .loadEntityEnd
 
@@ -7018,6 +7018,7 @@ label_39E3::
     cp   $FF
     jr   nz, .loop
 
+LoadEntity_return::
     ret
 
 label_3A0A::
@@ -7032,28 +7033,32 @@ LoadEntity::
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [hActiveEntityId], a
-    ld   hl, $C290
+    ldh  [hActiveEntityType], a
+
+    ld   hl, wEntitiesWalkingTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hActiveEntityWalking], a
+
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFF1], a
+
     ld   a, $19
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    ldh  a, [hActiveEntityId]
-    cp   $6A
-    jr   nz, label_3A40
+
+    ldh  a, [hActiveEntityType]
+    cp   ENTITY_TYPE_RAFT_MAN
+    jr   nz, .raftManEnd
     ldh  a, [$FFB2]
     and  a
     jr   nz, label_3A46
+.raftManEnd
 
-label_3A40::
-    ldh  a, [hActiveEntityType]
-    cp   $07
+    ldh  a, [hActiveEntityState]
+    cp   ENTITY_STATE_LIFTED
     jr   nz, label_3A4E
 
 label_3A46::
@@ -7070,6 +7075,8 @@ label_3A54::
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
     call $4D73
+
+    ; Select bank 3
     ld   a, $03
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
@@ -7092,26 +7099,39 @@ label_3A81::
     ld   [MBC3SelectBank], a
     ret
 
-; Load sprite code pointers and jump to execution
-label_3A8D::
-    ld   a, $20
+; Read entity code pointers, then jump to execution
+ExecuteActiveEntityHandler::
+    ld   a, BANK(EntityPointersTable)
     ld   [MBC3SelectBank], a
-    ldh  a, [hActiveEntityId]
+
+    ; de = active entity id
+    ldh  a, [hActiveEntityType]
     ld   e, a
     ld   d, b
+
+    ; hl = de * 3
     ld   hl, EntityPointersTable
     add  hl, de
     add  hl, de
     add  hl, de
+
+    ; Read values from the entities pointers table:
+    ; a = entity handler bank
+    ; d = entity handler address (high)
+    ; e = entity handler address (low)
     ld   e, [hl]
     inc  hl
     ld   d, [hl]
     inc  hl
     ld   a, [hl]
+
+    ; Select entity handler bank
     ld   l, e
     ld   h, d
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
+
+    ; Jump to the entity handler
     jp   hl
 
 data_3AAA::
@@ -7847,7 +7867,7 @@ label_3F11::
     ld   a, [wTransitionSequenceCounter]
     cp   $04
     ret  nz
-    ldh  a, [hActiveEntityId]
+    ldh  a, [hActiveEntityType]
     cp   $87
     jr   nz, label_3F26
     ld   a, $DA

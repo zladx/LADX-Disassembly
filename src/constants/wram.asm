@@ -493,6 +493,7 @@ wEntitiesTypeTable:: ; C3A0
   ; Type of the entity
   ds $10
 
+; Entity sprite index depending on the direction?
 wEntitiesUnknownTableG:: ; C3B0
   ; Entity custom state?
 

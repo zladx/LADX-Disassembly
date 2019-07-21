@@ -780,7 +780,7 @@ jr_020_445A:
     ld   c, e                                     ; $4517: $4B
 
 func_020_4518::
-    ldh  a, [hActiveEntityId]                     ; $4518: $F0 $EB
+    ldh  a, [hActiveEntityType]                     ; $4518: $F0 $EB
     ld   e, a                                     ; $451A: $5F
     ld   d, $00                                   ; $451B: $16 $00
     ld   hl, data_020_4322                        ; $451D: $21 $22 $43
@@ -11392,7 +11392,7 @@ func_020_7679:
     rst  $38                                      ; $77F5: $FF
     db   $f4                                      ; $77F6: $F4
     add  sp, -$17                                 ; $77F7: $E8 $E9
-    ld_long hActiveEntityId, a                              ; $77F9: $EA $EB $FF
+    ld_long hActiveEntityType, a                              ; $77F9: $EA $EB $FF
     rst  $38                                      ; $77FC: $FF
     rst  $38                                      ; $77FD: $FF
     rst  $38                                      ; $77FE: $FF

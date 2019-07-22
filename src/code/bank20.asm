@@ -6675,7 +6675,7 @@ jr_020_6226:
     and  $38                                      ; $6234: $E6 $38
     add  $60                                      ; $6236: $C6 $60
     ld   l, a                                     ; $6238: $6F
-    ld   a, [$DBB0]                               ; $6239: $FA $B0 $DB
+    ld   a, [wMinimapLayout]                               ; $6239: $FA $B0 $DB
     and  $20                                      ; $623C: $E6 $20
     jr   z, jr_020_624D                           ; $623E: $28 $0D
 
@@ -6689,7 +6689,7 @@ jr_020_6226:
     ld   h, a                                     ; $624C: $67
 
 jr_020_624D:
-    ld   a, [$DBB0]                               ; $624D: $FA $B0 $DB
+    ld   a, [wMinimapLayout]                               ; $624D: $FA $B0 $DB
     and  $10                                      ; $6250: $E6 $10
     jr   z, jr_020_6261                           ; $6252: $28 $0D
 

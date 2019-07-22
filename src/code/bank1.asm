@@ -1274,7 +1274,7 @@ label_5519::
     ld   b, a
     ld   e, a
     ld   d, a
-    ld   a, [$DBB0]
+    ld   a, [wMinimapLayout]
     swap a
     and  $03
     ld   e, a
@@ -1334,7 +1334,7 @@ label_5544::
     ld   b, a
     ld   e, a
     ld   d, a
-    ld   a, [$DBB0]
+    ld   a, [wMinimapLayout]
     swap a
     and  $03
     ld   e, a
@@ -1350,10 +1350,10 @@ label_558C::
     ld   a, e
     and  a
     jr   nz, label_558C
-    ld   a, [$DBB0]
+    ld   a, [wMinimapLayout]
     and  $03
     jr   z, label_55C0
-    ld   a, [$DBB0]
+    ld   a, [wMinimapLayout]
     and  $30
     cp   $30
     jr   z, label_55AF
@@ -1364,7 +1364,7 @@ label_558C::
     jr   label_55C0
 
 label_55AF::
-    ld   a, [$DBB0]
+    ld   a, [wMinimapLayout]
     and  $03
     ld   e, a
 
@@ -1410,7 +1410,7 @@ label_55EA::
     xor  a
     ld   b, a
     ld   c, a
-    ld   a, [$DBB0]
+    ld   a, [wMinimapLayout]
     bit  5, a
     jr   z, label_55F5
     inc  bc

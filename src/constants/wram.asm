@@ -1194,8 +1194,9 @@ wIndoorRoom:: ; DBAE
 wCurrentBank:: ; DBAF
   ds 1
 
-; Unlabeled
-wDBB0 equ $DBB0
+wMinimapLayout ; DBB0
+  ; Layout of the dungeon map in the inventory
+  ; See INVENTORY_MINIMAP_* constants for values
   ds 1
 
 wLinkMapEntryPositionX:: ; DBB1

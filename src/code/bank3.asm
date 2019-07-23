@@ -236,7 +236,7 @@ func_003_4895::
     ld   hl, Data_003_47BC                        ; $48A1: $21 $BC $47
     add  hl, de                                   ; $48A4: $19
     ld   a, [hl]                                  ; $48A5: $7E
-    ld   hl, $C360                                ; $48A6: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $48A6: $21 $60 $C3
     add  hl, bc                                   ; $48A9: $09
     ld   [hl], a                                  ; $48AA: $77
     pop  de                                       ; $48AB: $D1
@@ -360,7 +360,7 @@ Data_003_4924::
     inc  [hl]                                     ; $4951: $34
     ret                                           ; $4952: $C9
 
-    ld   hl, $C360                                ; $4953: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $4953: $21 $60 $C3
     add  hl, bc                                   ; $4956: $09
     ld   [hl], $02                                ; $4957: $36 $02
     ret                                           ; $4959: $C9
@@ -797,7 +797,7 @@ jr_003_4BC2:
     ld   [hl], $10                                ; $4BC6: $36 $10
     jp   label_3B0C                               ; $4BC8: $C3 $0C $3B
 
-    ld   hl, $C360                                ; $4BCB: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $4BCB: $21 $60 $C3
     add  hl, bc                                   ; $4BCE: $09
     ld   [hl], $10                                ; $4BCF: $36 $10
     ld   hl, wEntity0PosX                         ; $4BD1: $21 $00 $C2
@@ -855,7 +855,7 @@ jr_003_4C15:
     ld   hl, $C310                                ; $4C27: $21 $10 $C3
     add  hl, bc                                   ; $4C2A: $09
     ld   [hl], $04                                ; $4C2B: $36 $04
-    ld   hl, $C360                                ; $4C2D: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $4C2D: $21 $60 $C3
     add  hl, bc                                   ; $4C30: $09
     ld   [hl], $0C                                ; $4C31: $36 $0C
     xor  a                                        ; $4C33: $AF
@@ -7652,7 +7652,7 @@ jr_003_729D:
 
 jr_003_72B5:
     ld   e, a                                     ; $72B5: $5F
-    ld   hl, $C360                                ; $72B6: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $72B6: $21 $60 $C3
     add  hl, bc                                   ; $72B9: $09
     ld   a, [hl]                                  ; $72BA: $7E
     sub  e                                        ; $72BB: $93

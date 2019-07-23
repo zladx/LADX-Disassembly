@@ -39,7 +39,7 @@ EntityTableBHandler0::
     ld   hl, wEntitiesTransitionCountdownTable           ; $403A: $21 $E0 $C2
     add  hl, de                                   ; $403D: $19
     ld   [hl], $27                                ; $403E: $36 $27
-    ld   hl, $C360                                ; $4040: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $4040: $21 $60 $C3
     add  hl, de                                   ; $4043: $19
     ld   [hl], $08                                ; $4044: $36 $08
     call label_3E34                               ; $4046: $CD $34 $3E
@@ -48,7 +48,7 @@ EntityTableBHandler0::
     ret                                           ; $404D: $C9
 
 jr_004_404E:
-    ld   hl, $C360                                ; $404E: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $404E: $21 $60 $C3
     add  hl, bc                                   ; $4051: $09
     ld   [hl], $20                                ; $4052: $36 $20
     ld   a, c                                     ; $4054: $79
@@ -525,7 +525,7 @@ jr_004_4336:
 
     call IncrementEntityWalkingAttr               ; $4360: $CD $12 $3B
     ld   [hl], $04                                ; $4363: $36 $04
-    ld   hl, $C360                                ; $4365: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $4365: $21 $60 $C3
     add  hl, bc                                   ; $4368: $09
     ld   [hl], $08                                ; $4369: $36 $08
     ld   a, $53                                   ; $436B: $3E $53
@@ -1328,7 +1328,7 @@ jr_004_4972:
     ld   hl, wEntitiesPosYTable                   ; $49A5: $21 $10 $C2
     add  hl, de                                   ; $49A8: $19
     ld   [hl], a                                  ; $49A9: $77
-    ld   hl, $C360                                ; $49AA: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $49AA: $21 $60 $C3
     add  hl, de                                   ; $49AD: $19
     ld   [hl], $05                                ; $49AE: $36 $05
     pop  bc                                       ; $49B0: $C1
@@ -1356,7 +1356,7 @@ jr_004_4972:
     JP_TABLE                                      ; $49D7: $C7
     call c, $FB49                                 ; $49D8: $DC $49 $FB
     ld   c, l                                     ; $49DB: $4D
-    ld   hl, $C360                                ; $49DC: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $49DC: $21 $60 $C3
     add  hl, bc                                   ; $49DF: $09
     ld   [hl], $50                                ; $49E0: $36 $50
     ldh  a, [hActiveEntityWalking]                               ; $49E2: $F0 $F0
@@ -2100,7 +2100,7 @@ jr_004_5048:
     ld   hl, $C410                                ; $5050: $21 $10 $C4
     add  hl, bc                                   ; $5053: $09
     ld   [hl], $08                                ; $5054: $36 $08
-    ld   hl, $C360                                ; $5056: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $5056: $21 $60 $C3
     add  hl, bc                                   ; $5059: $09
     ld   [hl], $12                                ; $505A: $36 $12
     ld   hl, wEntity0PosX                         ; $505C: $21 $00 $C2
@@ -3370,7 +3370,7 @@ label_004_5791:
     xor  a                                        ; $5797: $AF
     ld   [$D3D6], a                               ; $5798: $EA $D6 $D3
     ld   e, $10                                   ; $579B: $1E $10
-    ld   hl, $C360                                ; $579D: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $579D: $21 $60 $C3
     add  hl, bc                                   ; $57A0: $09
     ld   a, [hl]                                  ; $57A1: $7E
     cp   $02                                      ; $57A2: $FE $02

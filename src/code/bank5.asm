@@ -989,7 +989,7 @@ jr_005_4509:
     ld   hl, $2150                                ; $451D: $21 $50 $21
     ld   d, [hl]                                  ; $4520: $56
     ld   hl, $2154                                ; $4521: $21 $54 $21
-    ld   hl, $C360                                ; $4524: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $4524: $21 $60 $C3
     add  hl, bc                                   ; $4527: $09
     ld   [hl], $4C                                ; $4528: $36 $4C
     ld   hl, $C380                                ; $452A: $21 $80 $C3
@@ -3964,7 +3964,7 @@ jr_005_561E:
     ld   [hl], a                                  ; $564F: $77
 
 jr_005_5650:
-    ld   hl, $C360                                ; $5650: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $5650: $21 $60 $C3
     add  hl, bc                                   ; $5653: $09
     ld   a, [hl]                                  ; $5654: $7E
     cp   $0A                                      ; $5655: $FE $0A
@@ -3989,7 +3989,7 @@ jr_005_5650:
     ld   hl, $C430                                ; $5676: $21 $30 $C4
     add  hl, de                                   ; $5679: $19
     ld   [hl], d                                  ; $567A: $72
-    ld   hl, $C360                                ; $567B: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $567B: $21 $60 $C3
     add  hl, de                                   ; $567E: $19
     ld   [hl], d                                  ; $567F: $72
     ld   hl, wEntitiesUnknownTableD               ; $5680: $21 $D0 $C2
@@ -4805,7 +4805,7 @@ jr_005_5AFE:
 func_005_5B03:
     ld   a, $63                                   ; $5B03: $3E $63
     call label_3B86                               ; $5B05: $CD $86 $3B
-    ld   hl, $C360                                ; $5B08: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $5B08: $21 $60 $C3
     add  hl, de                                   ; $5B0B: $19
     ld   [hl], $0C                                ; $5B0C: $36 $0C
     ld   hl, wEntity0PosX                         ; $5B0E: $21 $00 $C2
@@ -6291,7 +6291,7 @@ jr_005_62F5:
     ld   hl, wEntitiesUnknownTableG               ; $6307: $21 $B0 $C3
     add  hl, bc                                   ; $630A: $09
     ld   [hl], $FF                                ; $630B: $36 $FF
-    ld   hl, $C360                                ; $630D: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $630D: $21 $60 $C3
     add  hl, bc                                   ; $6310: $09
     ld   [hl], $FF                                ; $6311: $36 $FF
     ret                                           ; $6313: $C9
@@ -6702,7 +6702,7 @@ jr_005_655B:
     call IncrementEntityWalkingAttr               ; $655E: $CD $12 $3B
     ld   [hl], $01                                ; $6561: $36 $01
     call label_3D7F                               ; $6563: $CD $7F $3D
-    ld   hl, $C360                                ; $6566: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $6566: $21 $60 $C3
     add  hl, bc                                   ; $6569: $09
     ld   [hl], $08                                ; $656A: $36 $08
     ret                                           ; $656C: $C9
@@ -8800,7 +8800,7 @@ jr_005_70F6:
     call label_3B86                               ; $70FE: $CD $86 $3B
     jr   c, jr_005_7151                           ; $7101: $38 $4E
 
-    ld   hl, $C360                                ; $7103: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $7103: $21 $60 $C3
     add  hl, de                                   ; $7106: $19
     ld   [hl], $FF                                ; $7107: $36 $FF
     ld   hl, wEntitiesUnknownTableG               ; $7109: $21 $B0 $C3

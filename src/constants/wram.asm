@@ -487,7 +487,12 @@ wEntitiesAltitudeVelocity:: ; C320
   ; Positive numbers increase the altitude, negative numbers decrease it
   ds $10
 
-ds $70
+ds $30
+
+wEntitiesHealthTable:: ; C360
+  ds $10
+
+ds $30
 
 wEntitiesTypeTable:: ; C3A0
   ; Type of the entity

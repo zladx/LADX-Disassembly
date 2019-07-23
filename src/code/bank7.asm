@@ -101,7 +101,7 @@ jr_007_406F:
 
 jr_007_408A:
     call func_007_7D96                            ; $408A: $CD $96 $7D
-    ld   hl, $C360                                ; $408D: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $408D: $21 $60 $C3
     add  hl, bc                                   ; $4090: $09
     ld   [hl], $04                                ; $4091: $36 $04
     ld   hl, $C420                                ; $4093: $21 $20 $C4
@@ -8137,7 +8137,7 @@ func_007_6ED0:
     ld   hl, $C390                                ; $6EDD: $21 $90 $C3
     add  hl, bc                                   ; $6EE0: $09
     ld   [hl], a                                  ; $6EE1: $77
-    ld   hl, $C360                                ; $6EE2: $21 $60 $C3
+    ld   hl, wEntitiesHealthTable                                ; $6EE2: $21 $60 $C3
     add  hl, bc                                   ; $6EE5: $09
     ld   [hl], $FF                                ; $6EE6: $36 $FF
     ldh  a, [hMapRoom]                            ; $6EE8: $F0 $F6

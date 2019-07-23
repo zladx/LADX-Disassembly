@@ -2028,6 +2028,8 @@ jr_003_531E:
     ret                                           ; $5325: $C9
 
     ld   d, $03                                   ; $5326: $16 $03
+
+Entity05Handler::
     ld   a, c                                     ; $5328: $79
     ld   [$C50C], a                               ; $5329: $EA $0C $C5
     call label_C00                                ; $532C: $CD $00 $0C
@@ -5503,6 +5505,7 @@ jr_003_668C:
     call func_003_7F78                            ; $6692: $CD $78 $7F
     ret                                           ; $6695: $C9
 
+Entity02Handler::
     ldh  a, [wActiveEntityPosY]                   ; $6696: $F0 $EC
     add  $10                                      ; $6698: $C6 $10
     cp   $A0                                      ; $669A: $FE $A0
@@ -6050,6 +6053,8 @@ jr_003_69A0:
     ld   [hl], $22                                ; $69AC: $36 $22
     ld   [hl], $12                                ; $69AE: $36 $12
     ld   [hl], $32                                ; $69B0: $36 $32
+
+Entity04Handler::
     ld   hl, wProjectileCount                     ; $69B2: $21 $4D $C1
     inc  [hl]                                     ; $69B5: $34
     ld   a, $0A                                   ; $69B6: $3E $0A
@@ -6130,6 +6135,7 @@ jr_003_6A2E:
     ld   de, $6A1E                                ; $6A2E: $11 $1E $6A
     jp   label_003_6AD7                           ; $6A31: $C3 $D7 $6A
 
+BombExplosionEntityHandler::
     ld   hl, wProjectileCount                     ; $6A34: $21 $4D $C1
     inc  [hl]                                     ; $6A37: $34
     ldh  a, [hActiveEntityWalking]                ; $6A38: $F0 $F0

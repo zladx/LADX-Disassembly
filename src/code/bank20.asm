@@ -2161,7 +2161,7 @@ label_020_4B9E:
     jr   jr_020_4BCD                              ; $4BC6: $18 $05
 
 jr_020_4BC8:
-    ld   hl, $C310                                ; $4BC8: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                                ; $4BC8: $21 $10 $C3
     add  hl, de                                   ; $4BCB: $19
     ld   [hl], d                                  ; $4BCC: $72
 
@@ -2172,7 +2172,7 @@ jr_020_4BCD:
     ld   hl, wEntity0SpeedY                       ; $4BD2: $21 $50 $C2
     add  hl, de                                   ; $4BD5: $19
     ld   [hl], d                                  ; $4BD6: $72
-    ld   hl, $C320                                ; $4BD7: $21 $20 $C3
+    ld   hl, wEntitiesSpeedZTable                                ; $4BD7: $21 $20 $C3
     add  hl, de                                   ; $4BDA: $19
     ld   [hl], d                                  ; $4BDB: $72
     ldh  a, [hLinkDirection]                      ; $4BDC: $F0 $9E
@@ -2301,7 +2301,7 @@ jr_020_4C6D:
     add  hl, de                                   ; $4C87: $19
     ld   [hl], a                                  ; $4C88: $77
     ldh  a, [$FFA2]                               ; $4C89: $F0 $A2
-    ld   hl, $C310                                ; $4C8B: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                                ; $4C8B: $21 $10 $C3
     add  hl, de                                   ; $4C8E: $19
     ld   [hl], a                                  ; $4C8F: $77
     ld   hl, wEntitiesTransitionCountdownTable           ; $4C90: $21 $E0 $C2

@@ -1641,7 +1641,7 @@ jr_002_4CDD:
     ld   hl, wEntitiesUnknowTableF                ; $4CFA: $21 $F0 $C2
     add  hl, de                                   ; $4CFD: $19
     ld   [hl], $18                                ; $4CFE: $36 $18
-    ld   hl, $C320                                ; $4D00: $21 $20 $C3
+    ld   hl, wEntitiesSpeedZTable                                ; $4D00: $21 $20 $C3
     add  hl, de                                   ; $4D03: $19
     ld   [hl], $20                                ; $4D04: $36 $20
     ld   c, e                                     ; $4D06: $4B
@@ -2270,7 +2270,7 @@ jr_002_503B:
     ld   hl, wEntitiesPosYTable                   ; $5068: $21 $10 $C2
     add  hl, de                                   ; $506B: $19
     ld   [hl], a                                  ; $506C: $77
-    ld   hl, $C310                                ; $506D: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                                ; $506D: $21 $10 $C3
     add  hl, de                                   ; $5070: $19
     ld   [hl], $03                                ; $5071: $36 $03
     ld   hl, $C340                                ; $5073: $21 $40 $C3
@@ -2974,7 +2974,7 @@ jr_002_5453:
     ld   [hl], $3C                                ; $5467: $36 $3C
 
 jr_002_5469:
-    ld   hl, $C310                                ; $5469: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                                ; $5469: $21 $10 $C3
     add  hl, de                                   ; $546C: $19
     ld   [hl], $70                                ; $546D: $36 $70
 

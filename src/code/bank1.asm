@@ -2862,7 +2862,7 @@ label_5FF0::
     add  hl, de
     ld   [hl], a
     ldh  a, [$FFA2]
-    ld   hl, $C310
+    ld   hl, wEntitiesPosZTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hLinkPositionY]
@@ -2982,7 +2982,7 @@ label_609C::
     ld   hl, $D175
     call label_6118
     ldh  a, [$FFA2]
-    ld   hl, $C310
+    ld   hl, wEntitiesPosZTable
     add  hl, de
     ld   [hl], a
     ld   hl, $D195
@@ -3075,7 +3075,7 @@ label_6141::
     add  hl, de
     ld   [hl], a
     ldh  a, [$FFA2]
-    ld   hl, $C310
+    ld   hl, wEntitiesPosZTable
     add  hl, de
     ld   [hl], a
 

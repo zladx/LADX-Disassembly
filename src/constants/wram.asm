@@ -478,12 +478,12 @@ wEntitiesUnknowTableF:: ; C2F0
 wEntitiesUnknowTableG:: ; C300
   ds $10
 
-wEntitiesAltitudeTable:: ; C310
+wEntitiesPosZTable:: ; C310
   ; When the altitude is higher than 0, the entity position is shifted vertically,
   ; and a shadow is displayed underneath.
   ds $10
 
-wEntitiesAltitudeVelocity:: ; C320
+wEntitiesSpeedZTable:: ; C320
   ; Positive numbers increase the altitude, negative numbers decrease it
   ds $10
 

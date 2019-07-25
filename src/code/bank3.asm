@@ -5505,13 +5505,14 @@ jr_003_668C:
     call func_003_7F78                            ; $6692: $CD $78 $7F
     ret                                           ; $6695: $C9
 
-Entity02Handler::
+BombEntityHandler::
+    ; If bomb is outside of the screen, clear it.
     ldh  a, [wActiveEntityPosY]                   ; $6696: $F0 $EC
     add  $10                                      ; $6698: $C6 $10
     cp   $A0                                      ; $669A: $FE $A0
-    jp   nc, ClearEntityType                           ; $669C: $D2 $8D $3F
+    jp   nc, ClearEntityType                      ; $669C: $D2 $8D $3F
 
-    call IsEntityTransitionCountdownZero                 ; $669F: $CD $05 $0C
+    call IsEntityTransitionCountdownZero          ; $669F: $CD $05 $0C
     cp   $18                                      ; $66A2: $FE $18
     jp   c, label_003_65E2                        ; $66A4: $DA $E2 $65
 
@@ -6135,7 +6136,7 @@ jr_003_6A2E:
     ld   de, $6A1E                                ; $6A2E: $11 $1E $6A
     jp   label_003_6AD7                           ; $6A31: $C3 $D7 $6A
 
-BombExplosionEntityHandler::
+ExplosionEntityHandler::
     ld   hl, wProjectileCount                     ; $6A34: $21 $4D $C1
     inc  [hl]                                     ; $6A37: $34
     ldh  a, [hActiveEntityWalking]                ; $6A38: $F0 $F0

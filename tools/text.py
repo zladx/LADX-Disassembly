@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import struct
 from pprint import pprint
 
@@ -30,7 +30,7 @@ for line in open("src/constants/charmap.asm"):
         string = string.strip()[1:-1]
         num = int(num.strip().lstrip("$"), 16)
         charmap[num] = string
-    
+
 
 rom = open("Zelda.gbc", "br")
 
@@ -41,7 +41,7 @@ for i in range(NUMSTRINGS):
     pointer = readshort()
     pointers.append(pointer)
     #print(i, hex(offset))
-    
+
 rom.seek(BANK_TABLE_ADDRESS)
 banks = []
 
@@ -86,7 +86,7 @@ for i in range(NUMSTRINGS):
 
 def print_strings():
     last_address = None
-    
+
     for address in sorted(addresses):
         indexes = addresses[address]
         string = strings[indexes[0]]
@@ -94,7 +94,7 @@ def print_strings():
         if last_address != address:
             print("SECTION \"Text at {1:02x}:{0:04x}\", ROMX[${0:04x}], BANK[${1:02x}]".format(address%0x4000 + 0x4000, address//0x4000))
         for index in indexes:
-            label = "Dialog{}".format(index)
+            label = "Dialog{:03X}".format(index)
             print("{}::".format(label))
         for line in string:
             print("\tdb \"{}\"".format(line))
@@ -107,8 +107,8 @@ def print_pointer_table():
     pointer = POINTER_TABLE_ADDRESS % 0x4000 + 0x4000
     print("SECTION \"Text pointer table\", ROMX[${:04x}], BANK[${:02x}]".format(pointer, bank))
     for i in range(NUMSTRINGS):
-        print("\tdw Dialog{}".format(i))
-    
+        print("\tdw Dialog{:03X}".format(i))
+
     print()
     bank = BANK_TABLE_ADDRESS // 0x4000
     pointer = BANK_TABLE_ADDRESS % 0x4000 + 0x4000
@@ -117,13 +117,13 @@ def print_pointer_table():
         bank = banks[i]
         bank_high = bank & 0xc0
         if bank_high:
-            print("\tdb BANK(Dialog{}) | ${:02x}".format(i, bank_high))
+            print("\tdb BANK(Dialog{:03X}) | ${:02x}".format(i, bank_high))
         else:
-            print("\tdb BANK(Dialog{})".format(i))
+            print("\tdb BANK(Dialog{:03X})".format(i))
 
 if __name__ == "__main__":
     # comment/uncomment whichever you want
 
-    pprint(dict(enumerate(strings)))
+    #pprint(dict(enumerate(strings)))
     #print_strings()
-    #print_pointer_table()
+    print_pointer_table()

@@ -1,104 +1,262 @@
+SECTION "Text pointer table", ROMX[$4001], BANK[$1c]
+
 DialogPointerTable::
-	dw Dialog0
-	dw Dialog1
-	dw Dialog2
-	dw Dialog3
-	dw Dialog4
-	dw Dialog5
-	dw Dialog6
-	dw Dialog7
-	dw Dialog8
-	dw Dialog9
-	dw Dialog10
-	dw Dialog11
-	dw Dialog12
-	dw Dialog13
-	dw Dialog14
-	dw Dialog15
-	dw Dialog16
-	dw Dialog17
-	dw Dialog18
-	dw Dialog19
-	dw Dialog20
-	dw Dialog21
-	dw Dialog22
-	dw Dialog23
-	dw Dialog24
-	dw Dialog25
-	dw Dialog26
-	dw Dialog27
-	dw Dialog28
-	dw Dialog29
-	dw Dialog30
-	dw Dialog31
-	dw Dialog32
-	dw Dialog33
-	dw Dialog34
-	dw Dialog35
-	dw Dialog36
-	dw Dialog37
-	dw Dialog38
-	dw Dialog39
-	dw Dialog40
-	dw Dialog41
-	dw Dialog42
-	dw Dialog43
-	dw Dialog44
-	dw Dialog45
-	dw Dialog46
-	dw Dialog47
-	dw Dialog48
-	dw Dialog49
-	dw Dialog50
-	dw Dialog51
-	dw Dialog52
-	dw Dialog53
-	dw Dialog54
-	dw Dialog55
-	dw Dialog56
-	dw Dialog57
-	dw Dialog58
-	dw Dialog59
-	dw Dialog60
-	dw Dialog61
-	dw Dialog62
-	dw Dialog63
-	dw Dialog64
-	dw Dialog65
-	dw Dialog66
-	dw Dialog67
-	dw Dialog68
-	dw Dialog69
-	dw Dialog70
-	dw Dialog71
-	dw Dialog72
-	dw Dialog73
-	dw Dialog74
-	dw Dialog75
-	dw Dialog76
-	dw Dialog77
-	dw Dialog78
-	dw Dialog79
-	dw Dialog80
-	dw Dialog81
-	dw Dialog82
-	dw Dialog83
-	dw Dialog84
-	dw Dialog85
-	dw Dialog86
-	dw Dialog87
-	dw Dialog88
-	dw Dialog89
-	dw Dialog90
-	dw Dialog91
-	dw Dialog92
-	dw Dialog93
-	dw Dialog94
-	dw Dialog95
-	dw Dialog96
-	dw Dialog97
-	dw Dialog98
-	dw Dialog99
+	dw Dialog000
+	dw Dialog001
+	dw Dialog002
+	dw Dialog003
+	dw Dialog004
+	dw Dialog005
+	dw Dialog006
+	dw Dialog007
+	dw Dialog008
+	dw Dialog009
+	dw Dialog00A
+	dw Dialog00B
+	dw Dialog00C
+	dw Dialog00D
+	dw Dialog00E
+	dw Dialog00F
+	dw Dialog010
+	dw Dialog011
+	dw Dialog012
+	dw Dialog013
+	dw Dialog014
+	dw Dialog015
+	dw Dialog016
+	dw Dialog017
+	dw Dialog018
+	dw Dialog019
+	dw Dialog01A
+	dw Dialog01B
+	dw Dialog01C
+	dw Dialog01D
+	dw Dialog01E
+	dw Dialog01F
+	dw Dialog020
+	dw Dialog021
+	dw Dialog022
+	dw Dialog023
+	dw Dialog024
+	dw Dialog025
+	dw Dialog026
+	dw Dialog027
+	dw Dialog028
+	dw Dialog029
+	dw Dialog02A
+	dw Dialog02B
+	dw Dialog02C
+	dw Dialog02D
+	dw Dialog02E
+	dw Dialog02F
+	dw Dialog030
+	dw Dialog031
+	dw Dialog032
+	dw Dialog033
+	dw Dialog034
+	dw Dialog035
+	dw Dialog036
+	dw Dialog037
+	dw Dialog038
+	dw Dialog039
+	dw Dialog03A
+	dw Dialog03B
+	dw Dialog03C
+	dw Dialog03D
+	dw Dialog03E
+	dw Dialog03F
+	dw Dialog040
+	dw Dialog041
+	dw Dialog042
+	dw Dialog043
+	dw Dialog044
+	dw Dialog045
+	dw Dialog046
+	dw Dialog047
+	dw Dialog048
+	dw Dialog049
+	dw Dialog04A
+	dw Dialog04B
+	dw Dialog04C
+	dw Dialog04D
+	dw Dialog04E
+	dw Dialog04F
+	dw Dialog050
+	dw Dialog051
+	dw Dialog052
+	dw Dialog053
+	dw Dialog054
+	dw Dialog055
+	dw Dialog056
+	dw Dialog057
+	dw Dialog058
+	dw Dialog059
+	dw Dialog05A
+	dw Dialog05B
+	dw Dialog05C
+	dw Dialog05D
+	dw Dialog05E
+	dw Dialog05F
+	dw Dialog060
+	dw Dialog061
+	dw Dialog062
+	dw Dialog063
+	dw Dialog064
+	dw Dialog065
+	dw Dialog066
+	dw Dialog067
+	dw Dialog068
+	dw Dialog069
+	dw Dialog06A
+	dw Dialog06B
+	dw Dialog06C
+	dw Dialog06D
+	dw Dialog06E
+	dw Dialog06F
+	dw Dialog070
+	dw Dialog071
+	dw Dialog072
+	dw Dialog073
+	dw Dialog074
+	dw Dialog075
+	dw Dialog076
+	dw Dialog077
+	dw Dialog078
+	dw Dialog079
+	dw Dialog07A
+	dw Dialog07B
+	dw Dialog07C
+	dw Dialog07D
+	dw Dialog07E
+	dw Dialog07F
+	dw Dialog080
+	dw Dialog081
+	dw Dialog082
+	dw Dialog083
+	dw Dialog084
+	dw Dialog085
+	dw Dialog086
+	dw Dialog087
+	dw Dialog088
+	dw Dialog089
+	dw Dialog08A
+	dw Dialog08B
+	dw Dialog08C
+	dw Dialog08D
+	dw Dialog08E
+	dw Dialog08F
+	dw Dialog090
+	dw Dialog091
+	dw Dialog092
+	dw Dialog093
+	dw Dialog094
+	dw Dialog095
+	dw Dialog096
+	dw Dialog097
+	dw Dialog098
+	dw Dialog099
+	dw Dialog09A
+	dw Dialog09B
+	dw Dialog09C
+	dw Dialog09D
+	dw Dialog09E
+	dw Dialog09F
+	dw Dialog0A0
+	dw Dialog0A1
+	dw Dialog0A2
+	dw Dialog0A3
+	dw Dialog0A4
+	dw Dialog0A5
+	dw Dialog0A6
+	dw Dialog0A7
+	dw Dialog0A8
+	dw Dialog0A9
+	dw Dialog0AA
+	dw Dialog0AB
+	dw Dialog0AC
+	dw Dialog0AD
+	dw Dialog0AE
+	dw Dialog0AF
+	dw Dialog0B0
+	dw Dialog0B1
+	dw Dialog0B2
+	dw Dialog0B3
+	dw Dialog0B4
+	dw Dialog0B5
+	dw Dialog0B6
+	dw Dialog0B7
+	dw Dialog0B8
+	dw Dialog0B9
+	dw Dialog0BA
+	dw Dialog0BB
+	dw Dialog0BC
+	dw Dialog0BD
+	dw Dialog0BE
+	dw Dialog0BF
+	dw Dialog0C0
+	dw Dialog0C1
+	dw Dialog0C2
+	dw Dialog0C3
+	dw Dialog0C4
+	dw Dialog0C5
+	dw Dialog0C6
+	dw Dialog0C7
+	dw Dialog0C8
+	dw Dialog0C9
+	dw Dialog0CA
+	dw Dialog0CB
+	dw Dialog0CC
+	dw Dialog0CD
+	dw Dialog0CE
+	dw Dialog0CF
+	dw Dialog0D0
+	dw Dialog0D1
+	dw Dialog0D2
+	dw Dialog0D3
+	dw Dialog0D4
+	dw Dialog0D5
+	dw Dialog0D6
+	dw Dialog0D7
+	dw Dialog0D8
+	dw Dialog0D9
+	dw Dialog0DA
+	dw Dialog0DB
+	dw Dialog0DC
+	dw Dialog0DD
+	dw Dialog0DE
+	dw Dialog0DF
+	dw Dialog0E0
+	dw Dialog0E1
+	dw Dialog0E2
+	dw Dialog0E3
+	dw Dialog0E4
+	dw Dialog0E5
+	dw Dialog0E6
+	dw Dialog0E7
+	dw Dialog0E8
+	dw Dialog0E9
+	dw Dialog0EA
+	dw Dialog0EB
+	dw Dialog0EC
+	dw Dialog0ED
+	dw Dialog0EE
+	dw Dialog0EF
+	dw Dialog0F0
+	dw Dialog0F1
+	dw Dialog0F2
+	dw Dialog0F3
+	dw Dialog0F4
+	dw Dialog0F5
+	dw Dialog0F6
+	dw Dialog0F7
+	dw Dialog0F8
+	dw Dialog0F9
+	dw Dialog0FA
+	dw Dialog0FB
+	dw Dialog0FC
+	dw Dialog0FD
+	dw Dialog0FE
+	dw Dialog0FF
 	dw Dialog100
 	dw Dialog101
 	dw Dialog102
@@ -109,6 +267,12 @@ DialogPointerTable::
 	dw Dialog107
 	dw Dialog108
 	dw Dialog109
+	dw Dialog10A
+	dw Dialog10B
+	dw Dialog10C
+	dw Dialog10D
+	dw Dialog10E
+	dw Dialog10F
 	dw Dialog110
 	dw Dialog111
 	dw Dialog112
@@ -119,6 +283,12 @@ DialogPointerTable::
 	dw Dialog117
 	dw Dialog118
 	dw Dialog119
+	dw Dialog11A
+	dw Dialog11B
+	dw Dialog11C
+	dw Dialog11D
+	dw Dialog11E
+	dw Dialog11F
 	dw Dialog120
 	dw Dialog121
 	dw Dialog122
@@ -129,6 +299,12 @@ DialogPointerTable::
 	dw Dialog127
 	dw Dialog128
 	dw Dialog129
+	dw Dialog12A
+	dw Dialog12B
+	dw Dialog12C
+	dw Dialog12D
+	dw Dialog12E
+	dw Dialog12F
 	dw Dialog130
 	dw Dialog131
 	dw Dialog132
@@ -139,6 +315,12 @@ DialogPointerTable::
 	dw Dialog137
 	dw Dialog138
 	dw Dialog139
+	dw Dialog13A
+	dw Dialog13B
+	dw Dialog13C
+	dw Dialog13D
+	dw Dialog13E
+	dw Dialog13F
 	dw Dialog140
 	dw Dialog141
 	dw Dialog142
@@ -149,6 +331,12 @@ DialogPointerTable::
 	dw Dialog147
 	dw Dialog148
 	dw Dialog149
+	dw Dialog14A
+	dw Dialog14B
+	dw Dialog14C
+	dw Dialog14D
+	dw Dialog14E
+	dw Dialog14F
 	dw Dialog150
 	dw Dialog151
 	dw Dialog152
@@ -159,6 +347,12 @@ DialogPointerTable::
 	dw Dialog157
 	dw Dialog158
 	dw Dialog159
+	dw Dialog15A
+	dw Dialog15B
+	dw Dialog15C
+	dw Dialog15D
+	dw Dialog15E
+	dw Dialog15F
 	dw Dialog160
 	dw Dialog161
 	dw Dialog162
@@ -169,6 +363,12 @@ DialogPointerTable::
 	dw Dialog167
 	dw Dialog168
 	dw Dialog169
+	dw Dialog16A
+	dw Dialog16B
+	dw Dialog16C
+	dw Dialog16D
+	dw Dialog16E
+	dw Dialog16F
 	dw Dialog170
 	dw Dialog171
 	dw Dialog172
@@ -179,6 +379,12 @@ DialogPointerTable::
 	dw Dialog177
 	dw Dialog178
 	dw Dialog179
+	dw Dialog17A
+	dw Dialog17B
+	dw Dialog17C
+	dw Dialog17D
+	dw Dialog17E
+	dw Dialog17F
 	dw Dialog180
 	dw Dialog181
 	dw Dialog182
@@ -189,6 +395,12 @@ DialogPointerTable::
 	dw Dialog187
 	dw Dialog188
 	dw Dialog189
+	dw Dialog18A
+	dw Dialog18B
+	dw Dialog18C
+	dw Dialog18D
+	dw Dialog18E
+	dw Dialog18F
 	dw Dialog190
 	dw Dialog191
 	dw Dialog192
@@ -199,6 +411,108 @@ DialogPointerTable::
 	dw Dialog197
 	dw Dialog198
 	dw Dialog199
+	dw Dialog19A
+	dw Dialog19B
+	dw Dialog19C
+	dw Dialog19D
+	dw Dialog19E
+	dw Dialog19F
+	dw Dialog1A0
+	dw Dialog1A1
+	dw Dialog1A2
+	dw Dialog1A3
+	dw Dialog1A4
+	dw Dialog1A5
+	dw Dialog1A6
+	dw Dialog1A7
+	dw Dialog1A8
+	dw Dialog1A9
+	dw Dialog1AA
+	dw Dialog1AB
+	dw Dialog1AC
+	dw Dialog1AD
+	dw Dialog1AE
+	dw Dialog1AF
+	dw Dialog1B0
+	dw Dialog1B1
+	dw Dialog1B2
+	dw Dialog1B3
+	dw Dialog1B4
+	dw Dialog1B5
+	dw Dialog1B6
+	dw Dialog1B7
+	dw Dialog1B8
+	dw Dialog1B9
+	dw Dialog1BA
+	dw Dialog1BB
+	dw Dialog1BC
+	dw Dialog1BD
+	dw Dialog1BE
+	dw Dialog1BF
+	dw Dialog1C0
+	dw Dialog1C1
+	dw Dialog1C2
+	dw Dialog1C3
+	dw Dialog1C4
+	dw Dialog1C5
+	dw Dialog1C6
+	dw Dialog1C7
+	dw Dialog1C8
+	dw Dialog1C9
+	dw Dialog1CA
+	dw Dialog1CB
+	dw Dialog1CC
+	dw Dialog1CD
+	dw Dialog1CE
+	dw Dialog1CF
+	dw Dialog1D0
+	dw Dialog1D1
+	dw Dialog1D2
+	dw Dialog1D3
+	dw Dialog1D4
+	dw Dialog1D5
+	dw Dialog1D6
+	dw Dialog1D7
+	dw Dialog1D8
+	dw Dialog1D9
+	dw Dialog1DA
+	dw Dialog1DB
+	dw Dialog1DC
+	dw Dialog1DD
+	dw Dialog1DE
+	dw Dialog1DF
+	dw Dialog1E0
+	dw Dialog1E1
+	dw Dialog1E2
+	dw Dialog1E3
+	dw Dialog1E4
+	dw Dialog1E5
+	dw Dialog1E6
+	dw Dialog1E7
+	dw Dialog1E8
+	dw Dialog1E9
+	dw Dialog1EA
+	dw Dialog1EB
+	dw Dialog1EC
+	dw Dialog1ED
+	dw Dialog1EE
+	dw Dialog1EF
+	dw Dialog1F0
+	dw Dialog1F1
+	dw Dialog1F2
+	dw Dialog1F3
+	dw Dialog1F4
+	dw Dialog1F5
+	dw Dialog1F6
+	dw Dialog1F7
+	dw Dialog1F8
+	dw Dialog1F9
+	dw Dialog1FA
+	dw Dialog1FB
+	dw Dialog1FC
+	dw Dialog1FD
+	dw Dialog1FE
+	dw Dialog1FF
 	dw Dialog200
 	dw Dialog201
 	dw Dialog202
@@ -209,6 +523,12 @@ DialogPointerTable::
 	dw Dialog207
 	dw Dialog208
 	dw Dialog209
+	dw Dialog20A
+	dw Dialog20B
+	dw Dialog20C
+	dw Dialog20D
+	dw Dialog20E
+	dw Dialog20F
 	dw Dialog210
 	dw Dialog211
 	dw Dialog212
@@ -219,6 +539,12 @@ DialogPointerTable::
 	dw Dialog217
 	dw Dialog218
 	dw Dialog219
+	dw Dialog21A
+	dw Dialog21B
+	dw Dialog21C
+	dw Dialog21D
+	dw Dialog21E
+	dw Dialog21F
 	dw Dialog220
 	dw Dialog221
 	dw Dialog222
@@ -229,6 +555,12 @@ DialogPointerTable::
 	dw Dialog227
 	dw Dialog228
 	dw Dialog229
+	dw Dialog22A
+	dw Dialog22B
+	dw Dialog22C
+	dw Dialog22D
+	dw Dialog22E
+	dw Dialog22F
 	dw Dialog230
 	dw Dialog231
 	dw Dialog232
@@ -239,6 +571,12 @@ DialogPointerTable::
 	dw Dialog237
 	dw Dialog238
 	dw Dialog239
+	dw Dialog23A
+	dw Dialog23B
+	dw Dialog23C
+	dw Dialog23D
+	dw Dialog23E
+	dw Dialog23F
 	dw Dialog240
 	dw Dialog241
 	dw Dialog242
@@ -249,6 +587,12 @@ DialogPointerTable::
 	dw Dialog247
 	dw Dialog248
 	dw Dialog249
+	dw Dialog24A
+	dw Dialog24B
+	dw Dialog24C
+	dw Dialog24D
+	dw Dialog24E
+	dw Dialog24F
 	dw Dialog250
 	dw Dialog251
 	dw Dialog252
@@ -259,6 +603,12 @@ DialogPointerTable::
 	dw Dialog257
 	dw Dialog258
 	dw Dialog259
+	dw Dialog25A
+	dw Dialog25B
+	dw Dialog25C
+	dw Dialog25D
+	dw Dialog25E
+	dw Dialog25F
 	dw Dialog260
 	dw Dialog261
 	dw Dialog262
@@ -269,6 +619,12 @@ DialogPointerTable::
 	dw Dialog267
 	dw Dialog268
 	dw Dialog269
+	dw Dialog26A
+	dw Dialog26B
+	dw Dialog26C
+	dw Dialog26D
+	dw Dialog26E
+	dw Dialog26F
 	dw Dialog270
 	dw Dialog271
 	dw Dialog272
@@ -279,6 +635,12 @@ DialogPointerTable::
 	dw Dialog277
 	dw Dialog278
 	dw Dialog279
+	dw Dialog27A
+	dw Dialog27B
+	dw Dialog27C
+	dw Dialog27D
+	dw Dialog27E
+	dw Dialog27F
 	dw Dialog280
 	dw Dialog281
 	dw Dialog282
@@ -289,6 +651,12 @@ DialogPointerTable::
 	dw Dialog287
 	dw Dialog288
 	dw Dialog289
+	dw Dialog28A
+	dw Dialog28B
+	dw Dialog28C
+	dw Dialog28D
+	dw Dialog28E
+	dw Dialog28F
 	dw Dialog290
 	dw Dialog291
 	dw Dialog292
@@ -299,500 +667,291 @@ DialogPointerTable::
 	dw Dialog297
 	dw Dialog298
 	dw Dialog299
-	dw Dialog300
-	dw Dialog301
-	dw Dialog302
-	dw Dialog303
-	dw Dialog304
-	dw Dialog305
-	dw Dialog306
-	dw Dialog307
-	dw Dialog308
-	dw Dialog309
-	dw Dialog310
-	dw Dialog311
-	dw Dialog312
-	dw Dialog313
-	dw Dialog314
-	dw Dialog315
-	dw Dialog316
-	dw Dialog317
-	dw Dialog318
-	dw Dialog319
-	dw Dialog320
-	dw Dialog321
-	dw Dialog322
-	dw Dialog323
-	dw Dialog324
-	dw Dialog325
-	dw Dialog326
-	dw Dialog327
-	dw Dialog328
-	dw Dialog329
-	dw Dialog330
-	dw Dialog331
-	dw Dialog332
-	dw Dialog333
-	dw Dialog334
-	dw Dialog335
-	dw Dialog336
-	dw Dialog337
-	dw Dialog338
-	dw Dialog339
-	dw Dialog340
-	dw Dialog341
-	dw Dialog342
-	dw Dialog343
-	dw Dialog344
-	dw Dialog345
-	dw Dialog346
-	dw Dialog347
-	dw Dialog348
-	dw Dialog349
-	dw Dialog350
-	dw Dialog351
-	dw Dialog352
-	dw Dialog353
-	dw Dialog354
-	dw Dialog355
-	dw Dialog356
-	dw Dialog357
-	dw Dialog358
-	dw Dialog359
-	dw Dialog360
-	dw Dialog361
-	dw Dialog362
-	dw Dialog363
-	dw Dialog364
-	dw Dialog365
-	dw Dialog366
-	dw Dialog367
-	dw Dialog368
-	dw Dialog369
-	dw Dialog370
-	dw Dialog371
-	dw Dialog372
-	dw Dialog373
-	dw Dialog374
-	dw Dialog375
-	dw Dialog376
-	dw Dialog377
-	dw Dialog378
-	dw Dialog379
-	dw Dialog380
-	dw Dialog381
-	dw Dialog382
-	dw Dialog383
-	dw Dialog384
-	dw Dialog385
-	dw Dialog386
-	dw Dialog387
-	dw Dialog388
-	dw Dialog389
-	dw Dialog390
-	dw Dialog391
-	dw Dialog392
-	dw Dialog393
-	dw Dialog394
-	dw Dialog395
-	dw Dialog396
-	dw Dialog397
-	dw Dialog398
-	dw Dialog399
-	dw Dialog400
-	dw Dialog401
-	dw Dialog402
-	dw Dialog403
-	dw Dialog404
-	dw Dialog405
-	dw Dialog406
-	dw Dialog407
-	dw Dialog408
-	dw Dialog409
-	dw Dialog410
-	dw Dialog411
-	dw Dialog412
-	dw Dialog413
-	dw Dialog414
-	dw Dialog415
-	dw Dialog416
-	dw Dialog417
-	dw Dialog418
-	dw Dialog419
-	dw Dialog420
-	dw Dialog421
-	dw Dialog422
-	dw Dialog423
-	dw Dialog424
-	dw Dialog425
-	dw Dialog426
-	dw Dialog427
-	dw Dialog428
-	dw Dialog429
-	dw Dialog430
-	dw Dialog431
-	dw Dialog432
-	dw Dialog433
-	dw Dialog434
-	dw Dialog435
-	dw Dialog436
-	dw Dialog437
-	dw Dialog438
-	dw Dialog439
-	dw Dialog440
-	dw Dialog441
-	dw Dialog442
-	dw Dialog443
-	dw Dialog444
-	dw Dialog445
-	dw Dialog446
-	dw Dialog447
-	dw Dialog448
-	dw Dialog449
-	dw Dialog450
-	dw Dialog451
-	dw Dialog452
-	dw Dialog453
-	dw Dialog454
-	dw Dialog455
-	dw Dialog456
-	dw Dialog457
-	dw Dialog458
-	dw Dialog459
-	dw Dialog460
-	dw Dialog461
-	dw Dialog462
-	dw Dialog463
-	dw Dialog464
-	dw Dialog465
-	dw Dialog466
-	dw Dialog467
-	dw Dialog468
-	dw Dialog469
-	dw Dialog470
-	dw Dialog471
-	dw Dialog472
-	dw Dialog473
-	dw Dialog474
-	dw Dialog475
-	dw Dialog476
-	dw Dialog477
-	dw Dialog478
-	dw Dialog479
-	dw Dialog480
-	dw Dialog481
-	dw Dialog482
-	dw Dialog483
-	dw Dialog484
-	dw Dialog485
-	dw Dialog486
-	dw Dialog487
-	dw Dialog488
-	dw Dialog489
-	dw Dialog490
-	dw Dialog491
-	dw Dialog492
-	dw Dialog493
-	dw Dialog494
-	dw Dialog495
-	dw Dialog496
-	dw Dialog497
-	dw Dialog498
-	dw Dialog499
-	dw Dialog500
-	dw Dialog501
-	dw Dialog502
-	dw Dialog503
-	dw Dialog504
-	dw Dialog505
-	dw Dialog506
-	dw Dialog507
-	dw Dialog508
-	dw Dialog509
-	dw Dialog510
-	dw Dialog511
-	dw Dialog512
-	dw Dialog513
-	dw Dialog514
-	dw Dialog515
-	dw Dialog516
-	dw Dialog517
-	dw Dialog518
-	dw Dialog519
-	dw Dialog520
-	dw Dialog521
-	dw Dialog522
-	dw Dialog523
-	dw Dialog524
-	dw Dialog525
-	dw Dialog526
-	dw Dialog527
-	dw Dialog528
-	dw Dialog529
-	dw Dialog530
-	dw Dialog531
-	dw Dialog532
-	dw Dialog533
-	dw Dialog534
-	dw Dialog535
-	dw Dialog536
-	dw Dialog537
-	dw Dialog538
-	dw Dialog539
-	dw Dialog540
-	dw Dialog541
-	dw Dialog542
-	dw Dialog543
-	dw Dialog544
-	dw Dialog545
-	dw Dialog546
-	dw Dialog547
-	dw Dialog548
-	dw Dialog549
-	dw Dialog550
-	dw Dialog551
-	dw Dialog552
-	dw Dialog553
-	dw Dialog554
-	dw Dialog555
-	dw Dialog556
-	dw Dialog557
-	dw Dialog558
-	dw Dialog559
-	dw Dialog560
-	dw Dialog561
-	dw Dialog562
-	dw Dialog563
-	dw Dialog564
-	dw Dialog565
-	dw Dialog566
-	dw Dialog567
-	dw Dialog568
-	dw Dialog569
-	dw Dialog570
-	dw Dialog571
-	dw Dialog572
-	dw Dialog573
-	dw Dialog574
-	dw Dialog575
-	dw Dialog576
-	dw Dialog577
-	dw Dialog578
-	dw Dialog579
-	dw Dialog580
-	dw Dialog581
-	dw Dialog582
-	dw Dialog583
-	dw Dialog584
-	dw Dialog585
-	dw Dialog586
-	dw Dialog587
-	dw Dialog588
-	dw Dialog589
-	dw Dialog590
-	dw Dialog591
-	dw Dialog592
-	dw Dialog593
-	dw Dialog594
-	dw Dialog595
-	dw Dialog596
-	dw Dialog597
-	dw Dialog598
-	dw Dialog599
-	dw Dialog600
-	dw Dialog601
-	dw Dialog602
-	dw Dialog603
-	dw Dialog604
-	dw Dialog605
-	dw Dialog606
-	dw Dialog607
-	dw Dialog608
-	dw Dialog609
-	dw Dialog610
-	dw Dialog611
-	dw Dialog612
-	dw Dialog613
-	dw Dialog614
-	dw Dialog615
-	dw Dialog616
-	dw Dialog617
-	dw Dialog618
-	dw Dialog619
-	dw Dialog620
-	dw Dialog621
-	dw Dialog622
-	dw Dialog623
-	dw Dialog624
-	dw Dialog625
-	dw Dialog626
-	dw Dialog627
-	dw Dialog628
-	dw Dialog629
-	dw Dialog630
-	dw Dialog631
-	dw Dialog632
-	dw Dialog633
-	dw Dialog634
-	dw Dialog635
-	dw Dialog636
-	dw Dialog637
-	dw Dialog638
-	dw Dialog639
-	dw Dialog640
-	dw Dialog641
-	dw Dialog642
-	dw Dialog643
-	dw Dialog644
-	dw Dialog645
-	dw Dialog646
-	dw Dialog647
-	dw Dialog648
-	dw Dialog649
-	dw Dialog650
-	dw Dialog651
-	dw Dialog652
-	dw Dialog653
-	dw Dialog654
-	dw Dialog655
-	dw Dialog656
-	dw Dialog657
-	dw Dialog658
-	dw Dialog659
-	dw Dialog660
-	dw Dialog661
-	dw Dialog662
-	dw Dialog663
-	dw Dialog664
-	dw Dialog665
-	dw Dialog666
-	dw Dialog667
-	dw Dialog668
-	dw Dialog669
-	dw Dialog670
-	dw Dialog671
-	dw Dialog672
-	dw Dialog673
-	dw Dialog674
-	dw Dialog675
-	dw Dialog676
-	dw Dialog677
-	dw Dialog678
-	dw Dialog679
-	dw Dialog680
-	dw Dialog681
-	dw Dialog682
-	dw Dialog683
-	dw Dialog684
-	dw Dialog685
-	dw Dialog686
-	dw Dialog687
+	dw Dialog29A
+	dw Dialog29B
+	dw Dialog29C
+	dw Dialog29D
+	dw Dialog29E
+	dw Dialog29F
+	dw Dialog2A0
+	dw Dialog2A1
+	dw Dialog2A2
+	dw Dialog2A3
+	dw Dialog2A4
+	dw Dialog2A5
+	dw Dialog2A6
+	dw Dialog2A7
+	dw Dialog2A8
+	dw Dialog2A9
+	dw Dialog2AA
+	dw Dialog2AB
+	dw Dialog2AC
+	dw Dialog2AD
+	dw Dialog2AE
+	dw Dialog2AF
 
-SECTION "Dialog bank table", ROMX[$4741], BANK[$1c]
-DialogBankTable::
+SECTION "Text bank table", ROMX[$4741], BANK[$1c]
+
 ; Some bank numbers have the high bit set for an unknown reason.
 ; The routine DrawNextCharacter does `and $3f`, so the bit
 ; is dropped.  It is unknown if it's used anywhere else.
-	db BANK(Dialog0)
-	db BANK(Dialog1) | $80
-	db BANK(Dialog2)
-	db BANK(Dialog3)
-	db BANK(Dialog4)
-	db BANK(Dialog5)
-	db BANK(Dialog6)
-	db BANK(Dialog7)
-	db BANK(Dialog8)
-	db BANK(Dialog9)
-	db BANK(Dialog10)
-	db BANK(Dialog11)
-	db BANK(Dialog12)
-	db BANK(Dialog13)
-	db BANK(Dialog14)
-	db BANK(Dialog15) | $80
-	db BANK(Dialog16)
-	db BANK(Dialog17)
-	db BANK(Dialog18)
-	db BANK(Dialog19) | $80
-	db BANK(Dialog20)
-	db BANK(Dialog21)
-	db BANK(Dialog22) | $80
-	db BANK(Dialog23)
-	db BANK(Dialog24)
-	db BANK(Dialog25)
-	db BANK(Dialog26)
-	db BANK(Dialog27)
-	db BANK(Dialog28)
-	db BANK(Dialog29)
-	db BANK(Dialog30)
-	db BANK(Dialog31)
-	db BANK(Dialog32)
-	db BANK(Dialog33)
-	db BANK(Dialog34)
-	db BANK(Dialog35)
-	db BANK(Dialog36)
-	db BANK(Dialog37)
-	db BANK(Dialog38) | $80
-	db BANK(Dialog39)
-	db BANK(Dialog40)
-	db BANK(Dialog41)
-	db BANK(Dialog42)
-	db BANK(Dialog43)
-	db BANK(Dialog44)
-	db BANK(Dialog45)
-	db BANK(Dialog46)
-	db BANK(Dialog47)
-	db BANK(Dialog48)
-	db BANK(Dialog49)
-	db BANK(Dialog50)
-	db BANK(Dialog51)
-	db BANK(Dialog52)
-	db BANK(Dialog53)
-	db BANK(Dialog54) | $80
-	db BANK(Dialog55)
-	db BANK(Dialog56) | $80
-	db BANK(Dialog57)
-	db BANK(Dialog58)
-	db BANK(Dialog59)
-	db BANK(Dialog60)
-	db BANK(Dialog61)
-	db BANK(Dialog62)
-	db BANK(Dialog63)
-	db BANK(Dialog64)
-	db BANK(Dialog65)
-	db BANK(Dialog66)
-	db BANK(Dialog67)
-	db BANK(Dialog68)
-	db BANK(Dialog69) | $80
-	db BANK(Dialog70) | $80
-	db BANK(Dialog71) | $80
-	db BANK(Dialog72) | $80
-	db BANK(Dialog73) | $80
-	db BANK(Dialog74) | $80
-	db BANK(Dialog75) | $80
-	db BANK(Dialog76) | $80
-	db BANK(Dialog77) | $80
-	db BANK(Dialog78) | $80
-	db BANK(Dialog79) | $80
-	db BANK(Dialog80) | $80
-	db BANK(Dialog81) | $80
-	db BANK(Dialog82) | $80
-	db BANK(Dialog83) | $80
-	db BANK(Dialog84) | $80
-	db BANK(Dialog85)
-	db BANK(Dialog86)
-	db BANK(Dialog87)
-	db BANK(Dialog88)
-	db BANK(Dialog89)
-	db BANK(Dialog90)
-	db BANK(Dialog91)
-	db BANK(Dialog92)
-	db BANK(Dialog93)
-	db BANK(Dialog94)
-	db BANK(Dialog95)
-	db BANK(Dialog96)
-	db BANK(Dialog97)
-	db BANK(Dialog98)
-	db BANK(Dialog99)
+DialogBankTable::
+	db BANK(Dialog000)
+	db BANK(Dialog001) | $80
+	db BANK(Dialog002)
+	db BANK(Dialog003)
+	db BANK(Dialog004)
+	db BANK(Dialog005)
+	db BANK(Dialog006)
+	db BANK(Dialog007)
+	db BANK(Dialog008)
+	db BANK(Dialog009)
+	db BANK(Dialog00A)
+	db BANK(Dialog00B)
+	db BANK(Dialog00C)
+	db BANK(Dialog00D)
+	db BANK(Dialog00E)
+	db BANK(Dialog00F) | $80
+	db BANK(Dialog010)
+	db BANK(Dialog011)
+	db BANK(Dialog012)
+	db BANK(Dialog013) | $80
+	db BANK(Dialog014)
+	db BANK(Dialog015)
+	db BANK(Dialog016) | $80
+	db BANK(Dialog017)
+	db BANK(Dialog018)
+	db BANK(Dialog019)
+	db BANK(Dialog01A)
+	db BANK(Dialog01B)
+	db BANK(Dialog01C)
+	db BANK(Dialog01D)
+	db BANK(Dialog01E)
+	db BANK(Dialog01F)
+	db BANK(Dialog020)
+	db BANK(Dialog021)
+	db BANK(Dialog022)
+	db BANK(Dialog023)
+	db BANK(Dialog024)
+	db BANK(Dialog025)
+	db BANK(Dialog026) | $80
+	db BANK(Dialog027)
+	db BANK(Dialog028)
+	db BANK(Dialog029)
+	db BANK(Dialog02A)
+	db BANK(Dialog02B)
+	db BANK(Dialog02C)
+	db BANK(Dialog02D)
+	db BANK(Dialog02E)
+	db BANK(Dialog02F)
+	db BANK(Dialog030)
+	db BANK(Dialog031)
+	db BANK(Dialog032)
+	db BANK(Dialog033)
+	db BANK(Dialog034)
+	db BANK(Dialog035)
+	db BANK(Dialog036) | $80
+	db BANK(Dialog037)
+	db BANK(Dialog038) | $80
+	db BANK(Dialog039)
+	db BANK(Dialog03A)
+	db BANK(Dialog03B)
+	db BANK(Dialog03C)
+	db BANK(Dialog03D)
+	db BANK(Dialog03E)
+	db BANK(Dialog03F)
+	db BANK(Dialog040)
+	db BANK(Dialog041)
+	db BANK(Dialog042)
+	db BANK(Dialog043)
+	db BANK(Dialog044)
+	db BANK(Dialog045) | $80
+	db BANK(Dialog046) | $80
+	db BANK(Dialog047) | $80
+	db BANK(Dialog048) | $80
+	db BANK(Dialog049) | $80
+	db BANK(Dialog04A) | $80
+	db BANK(Dialog04B) | $80
+	db BANK(Dialog04C) | $80
+	db BANK(Dialog04D) | $80
+	db BANK(Dialog04E) | $80
+	db BANK(Dialog04F) | $80
+	db BANK(Dialog050) | $80
+	db BANK(Dialog051) | $80
+	db BANK(Dialog052) | $80
+	db BANK(Dialog053) | $80
+	db BANK(Dialog054) | $80
+	db BANK(Dialog055)
+	db BANK(Dialog056)
+	db BANK(Dialog057)
+	db BANK(Dialog058)
+	db BANK(Dialog059)
+	db BANK(Dialog05A)
+	db BANK(Dialog05B)
+	db BANK(Dialog05C)
+	db BANK(Dialog05D)
+	db BANK(Dialog05E)
+	db BANK(Dialog05F)
+	db BANK(Dialog060)
+	db BANK(Dialog061)
+	db BANK(Dialog062)
+	db BANK(Dialog063)
+	db BANK(Dialog064)
+	db BANK(Dialog065)
+	db BANK(Dialog066)
+	db BANK(Dialog067)
+	db BANK(Dialog068)
+	db BANK(Dialog069)
+	db BANK(Dialog06A)
+	db BANK(Dialog06B)
+	db BANK(Dialog06C)
+	db BANK(Dialog06D)
+	db BANK(Dialog06E)
+	db BANK(Dialog06F)
+	db BANK(Dialog070)
+	db BANK(Dialog071)
+	db BANK(Dialog072)
+	db BANK(Dialog073)
+	db BANK(Dialog074)
+	db BANK(Dialog075)
+	db BANK(Dialog076)
+	db BANK(Dialog077)
+	db BANK(Dialog078)
+	db BANK(Dialog079)
+	db BANK(Dialog07A)
+	db BANK(Dialog07B)
+	db BANK(Dialog07C)
+	db BANK(Dialog07D)
+	db BANK(Dialog07E)
+	db BANK(Dialog07F)
+	db BANK(Dialog080)
+	db BANK(Dialog081)
+	db BANK(Dialog082)
+	db BANK(Dialog083)
+	db BANK(Dialog084)
+	db BANK(Dialog085)
+	db BANK(Dialog086)
+	db BANK(Dialog087)
+	db BANK(Dialog088)
+	db BANK(Dialog089)
+	db BANK(Dialog08A)
+	db BANK(Dialog08B)
+	db BANK(Dialog08C)
+	db BANK(Dialog08D)
+	db BANK(Dialog08E)
+	db BANK(Dialog08F)
+	db BANK(Dialog090) | $80
+	db BANK(Dialog091) | $80
+	db BANK(Dialog092) | $80
+	db BANK(Dialog093) | $80
+	db BANK(Dialog094) | $80
+	db BANK(Dialog095) | $80
+	db BANK(Dialog096) | $80
+	db BANK(Dialog097) | $80
+	db BANK(Dialog098) | $80
+	db BANK(Dialog099) | $80
+	db BANK(Dialog09A) | $80
+	db BANK(Dialog09B) | $80
+	db BANK(Dialog09C) | $80
+	db BANK(Dialog09D) | $80
+	db BANK(Dialog09E) | $80
+	db BANK(Dialog09F) | $80
+	db BANK(Dialog0A0) | $80
+	db BANK(Dialog0A1) | $80
+	db BANK(Dialog0A2) | $80
+	db BANK(Dialog0A3) | $80
+	db BANK(Dialog0A4) | $80
+	db BANK(Dialog0A5) | $80
+	db BANK(Dialog0A6) | $80
+	db BANK(Dialog0A7) | $80
+	db BANK(Dialog0A8) | $80
+	db BANK(Dialog0A9) | $80
+	db BANK(Dialog0AA) | $80
+	db BANK(Dialog0AB) | $80
+	db BANK(Dialog0AC) | $80
+	db BANK(Dialog0AD) | $80
+	db BANK(Dialog0AE) | $80
+	db BANK(Dialog0AF) | $80
+	db BANK(Dialog0B0) | $80
+	db BANK(Dialog0B1) | $80
+	db BANK(Dialog0B2) | $80
+	db BANK(Dialog0B3) | $80
+	db BANK(Dialog0B4) | $80
+	db BANK(Dialog0B5) | $80
+	db BANK(Dialog0B6) | $80
+	db BANK(Dialog0B7) | $80
+	db BANK(Dialog0B8) | $80
+	db BANK(Dialog0B9) | $80
+	db BANK(Dialog0BA) | $80
+	db BANK(Dialog0BB) | $80
+	db BANK(Dialog0BC) | $80
+	db BANK(Dialog0BD) | $80
+	db BANK(Dialog0BE) | $80
+	db BANK(Dialog0BF) | $80
+	db BANK(Dialog0C0) | $80
+	db BANK(Dialog0C1) | $80
+	db BANK(Dialog0C2) | $80
+	db BANK(Dialog0C3) | $80
+	db BANK(Dialog0C4) | $80
+	db BANK(Dialog0C5) | $80
+	db BANK(Dialog0C6) | $80
+	db BANK(Dialog0C7) | $80
+	db BANK(Dialog0C8) | $80
+	db BANK(Dialog0C9) | $80
+	db BANK(Dialog0CA) | $80
+	db BANK(Dialog0CB) | $80
+	db BANK(Dialog0CC) | $80
+	db BANK(Dialog0CD) | $80
+	db BANK(Dialog0CE) | $80
+	db BANK(Dialog0CF) | $80
+	db BANK(Dialog0D0) | $80
+	db BANK(Dialog0D1) | $80
+	db BANK(Dialog0D2) | $80
+	db BANK(Dialog0D3) | $80
+	db BANK(Dialog0D4) | $80
+	db BANK(Dialog0D5) | $80
+	db BANK(Dialog0D6) | $80
+	db BANK(Dialog0D7) | $80
+	db BANK(Dialog0D8) | $80
+	db BANK(Dialog0D9) | $80
+	db BANK(Dialog0DA)
+	db BANK(Dialog0DB)
+	db BANK(Dialog0DC) | $80
+	db BANK(Dialog0DD)
+	db BANK(Dialog0DE)
+	db BANK(Dialog0DF)
+	db BANK(Dialog0E0)
+	db BANK(Dialog0E1) | $80
+	db BANK(Dialog0E2) | $80
+	db BANK(Dialog0E3) | $80
+	db BANK(Dialog0E4) | $80
+	db BANK(Dialog0E5) | $80
+	db BANK(Dialog0E6)
+	db BANK(Dialog0E7)
+	db BANK(Dialog0E8)
+	db BANK(Dialog0E9) | $80
+	db BANK(Dialog0EA)
+	db BANK(Dialog0EB)
+	db BANK(Dialog0EC)
+	db BANK(Dialog0ED)
+	db BANK(Dialog0EE)
+	db BANK(Dialog0EF)
+	db BANK(Dialog0F0)
+	db BANK(Dialog0F1)
+	db BANK(Dialog0F2)
+	db BANK(Dialog0F3)
+	db BANK(Dialog0F4)
+	db BANK(Dialog0F5) | $80
+	db BANK(Dialog0F6) | $80
+	db BANK(Dialog0F7) | $80
+	db BANK(Dialog0F8)
+	db BANK(Dialog0F9)
+	db BANK(Dialog0FA)
+	db BANK(Dialog0FB)
+	db BANK(Dialog0FC)
+	db BANK(Dialog0FD)
+	db BANK(Dialog0FE) | $80
+	db BANK(Dialog0FF)
 	db BANK(Dialog100)
 	db BANK(Dialog101)
 	db BANK(Dialog102)
@@ -801,10 +960,16 @@ DialogBankTable::
 	db BANK(Dialog105)
 	db BANK(Dialog106)
 	db BANK(Dialog107)
-	db BANK(Dialog108)
-	db BANK(Dialog109)
-	db BANK(Dialog110)
-	db BANK(Dialog111)
+	db BANK(Dialog108) | $80
+	db BANK(Dialog109) | $80
+	db BANK(Dialog10A) | $80
+	db BANK(Dialog10B) | $80
+	db BANK(Dialog10C) | $80
+	db BANK(Dialog10D) | $80
+	db BANK(Dialog10E) | $80
+	db BANK(Dialog10F) | $80
+	db BANK(Dialog110) | $80
+	db BANK(Dialog111) | $80
 	db BANK(Dialog112)
 	db BANK(Dialog113)
 	db BANK(Dialog114)
@@ -813,6 +978,12 @@ DialogBankTable::
 	db BANK(Dialog117)
 	db BANK(Dialog118)
 	db BANK(Dialog119)
+	db BANK(Dialog11A)
+	db BANK(Dialog11B)
+	db BANK(Dialog11C)
+	db BANK(Dialog11D)
+	db BANK(Dialog11E)
+	db BANK(Dialog11F)
 	db BANK(Dialog120)
 	db BANK(Dialog121)
 	db BANK(Dialog122)
@@ -823,6 +994,12 @@ DialogBankTable::
 	db BANK(Dialog127)
 	db BANK(Dialog128)
 	db BANK(Dialog129)
+	db BANK(Dialog12A)
+	db BANK(Dialog12B)
+	db BANK(Dialog12C)
+	db BANK(Dialog12D)
+	db BANK(Dialog12E)
+	db BANK(Dialog12F)
 	db BANK(Dialog130)
 	db BANK(Dialog131)
 	db BANK(Dialog132)
@@ -833,551 +1010,377 @@ DialogBankTable::
 	db BANK(Dialog137)
 	db BANK(Dialog138)
 	db BANK(Dialog139)
+	db BANK(Dialog13A)
+	db BANK(Dialog13B)
+	db BANK(Dialog13C)
+	db BANK(Dialog13D)
+	db BANK(Dialog13E)
+	db BANK(Dialog13F)
 	db BANK(Dialog140)
 	db BANK(Dialog141)
 	db BANK(Dialog142)
 	db BANK(Dialog143)
-	db BANK(Dialog144) | $80
-	db BANK(Dialog145) | $80
-	db BANK(Dialog146) | $80
-	db BANK(Dialog147) | $80
-	db BANK(Dialog148) | $80
-	db BANK(Dialog149) | $80
-	db BANK(Dialog150) | $80
-	db BANK(Dialog151) | $80
-	db BANK(Dialog152) | $80
-	db BANK(Dialog153) | $80
-	db BANK(Dialog154) | $80
-	db BANK(Dialog155) | $80
-	db BANK(Dialog156) | $80
-	db BANK(Dialog157) | $80
-	db BANK(Dialog158) | $80
-	db BANK(Dialog159) | $80
-	db BANK(Dialog160) | $80
-	db BANK(Dialog161) | $80
-	db BANK(Dialog162) | $80
-	db BANK(Dialog163) | $80
-	db BANK(Dialog164) | $80
-	db BANK(Dialog165) | $80
-	db BANK(Dialog166) | $80
+	db BANK(Dialog144)
+	db BANK(Dialog145)
+	db BANK(Dialog146)
+	db BANK(Dialog147)
+	db BANK(Dialog148)
+	db BANK(Dialog149)
+	db BANK(Dialog14A)
+	db BANK(Dialog14B)
+	db BANK(Dialog14C)
+	db BANK(Dialog14D)
+	db BANK(Dialog14E)
+	db BANK(Dialog14F)
+	db BANK(Dialog150)
+	db BANK(Dialog151)
+	db BANK(Dialog152)
+	db BANK(Dialog153)
+	db BANK(Dialog154)
+	db BANK(Dialog155)
+	db BANK(Dialog156)
+	db BANK(Dialog157)
+	db BANK(Dialog158)
+	db BANK(Dialog159)
+	db BANK(Dialog15A)
+	db BANK(Dialog15B)
+	db BANK(Dialog15C)
+	db BANK(Dialog15D)
+	db BANK(Dialog15E)
+	db BANK(Dialog15F)
+	db BANK(Dialog160)
+	db BANK(Dialog161)
+	db BANK(Dialog162)
+	db BANK(Dialog163)
+	db BANK(Dialog164)
+	db BANK(Dialog165)
+	db BANK(Dialog166)
 	db BANK(Dialog167) | $80
-	db BANK(Dialog168) | $80
-	db BANK(Dialog169) | $80
-	db BANK(Dialog170) | $80
-	db BANK(Dialog171) | $80
-	db BANK(Dialog172) | $80
-	db BANK(Dialog173) | $80
-	db BANK(Dialog174) | $80
-	db BANK(Dialog175) | $80
-	db BANK(Dialog176) | $80
-	db BANK(Dialog177) | $80
-	db BANK(Dialog178) | $80
-	db BANK(Dialog179) | $80
-	db BANK(Dialog180) | $80
-	db BANK(Dialog181) | $80
-	db BANK(Dialog182) | $80
-	db BANK(Dialog183) | $80
-	db BANK(Dialog184) | $80
-	db BANK(Dialog185) | $80
-	db BANK(Dialog186) | $80
-	db BANK(Dialog187) | $80
-	db BANK(Dialog188) | $80
-	db BANK(Dialog189) | $80
-	db BANK(Dialog190) | $80
+	db BANK(Dialog168)
+	db BANK(Dialog169)
+	db BANK(Dialog16A)
+	db BANK(Dialog16B)
+	db BANK(Dialog16C)
+	db BANK(Dialog16D)
+	db BANK(Dialog16E)
+	db BANK(Dialog16F)
+	db BANK(Dialog170)
+	db BANK(Dialog171)
+	db BANK(Dialog172)
+	db BANK(Dialog173)
+	db BANK(Dialog174)
+	db BANK(Dialog175)
+	db BANK(Dialog176)
+	db BANK(Dialog177)
+	db BANK(Dialog178)
+	db BANK(Dialog179)
+	db BANK(Dialog17A)
+	db BANK(Dialog17B)
+	db BANK(Dialog17C)
+	db BANK(Dialog17D)
+	db BANK(Dialog17E)
+	db BANK(Dialog17F)
+	db BANK(Dialog180)
+	db BANK(Dialog181)
+	db BANK(Dialog182)
+	db BANK(Dialog183)
+	db BANK(Dialog184)
+	db BANK(Dialog185)
+	db BANK(Dialog186)
+	db BANK(Dialog187)
+	db BANK(Dialog188)
+	db BANK(Dialog189)
+	db BANK(Dialog18A)
+	db BANK(Dialog18B)
+	db BANK(Dialog18C)
+	db BANK(Dialog18D)
+	db BANK(Dialog18E)
+	db BANK(Dialog18F)
+	db BANK(Dialog190)
 	db BANK(Dialog191) | $80
-	db BANK(Dialog192) | $80
-	db BANK(Dialog193) | $80
+	db BANK(Dialog192)
+	db BANK(Dialog193)
 	db BANK(Dialog194) | $80
-	db BANK(Dialog195) | $80
-	db BANK(Dialog196) | $80
-	db BANK(Dialog197) | $80
-	db BANK(Dialog198) | $80
-	db BANK(Dialog199) | $80
-	db BANK(Dialog200) | $80
-	db BANK(Dialog201) | $80
-	db BANK(Dialog202) | $80
-	db BANK(Dialog203) | $80
-	db BANK(Dialog204) | $80
-	db BANK(Dialog205) | $80
-	db BANK(Dialog206) | $80
-	db BANK(Dialog207) | $80
-	db BANK(Dialog208) | $80
-	db BANK(Dialog209) | $80
+	db BANK(Dialog195)
+	db BANK(Dialog196)
+	db BANK(Dialog197)
+	db BANK(Dialog198)
+	db BANK(Dialog199)
+	db BANK(Dialog19A)
+	db BANK(Dialog19B)
+	db BANK(Dialog19C)
+	db BANK(Dialog19D)
+	db BANK(Dialog19E)
+	db BANK(Dialog19F)
+	db BANK(Dialog1A0)
+	db BANK(Dialog1A1)
+	db BANK(Dialog1A2)
+	db BANK(Dialog1A3)
+	db BANK(Dialog1A4)
+	db BANK(Dialog1A5)
+	db BANK(Dialog1A6)
+	db BANK(Dialog1A7)
+	db BANK(Dialog1A8)
+	db BANK(Dialog1A9)
+	db BANK(Dialog1AA)
+	db BANK(Dialog1AB)
+	db BANK(Dialog1AC)
+	db BANK(Dialog1AD)
+	db BANK(Dialog1AE)
+	db BANK(Dialog1AF)
+	db BANK(Dialog1B0)
+	db BANK(Dialog1B1)
+	db BANK(Dialog1B2)
+	db BANK(Dialog1B3)
+	db BANK(Dialog1B4)
+	db BANK(Dialog1B5)
+	db BANK(Dialog1B6)
+	db BANK(Dialog1B7)
+	db BANK(Dialog1B8)
+	db BANK(Dialog1B9)
+	db BANK(Dialog1BA)
+	db BANK(Dialog1BB)
+	db BANK(Dialog1BC)
+	db BANK(Dialog1BD)
+	db BANK(Dialog1BE)
+	db BANK(Dialog1BF)
+	db BANK(Dialog1C0)
+	db BANK(Dialog1C1) | $80
+	db BANK(Dialog1C2)
+	db BANK(Dialog1C3)
+	db BANK(Dialog1C4)
+	db BANK(Dialog1C5)
+	db BANK(Dialog1C6)
+	db BANK(Dialog1C7)
+	db BANK(Dialog1C8)
+	db BANK(Dialog1C9)
+	db BANK(Dialog1CA)
+	db BANK(Dialog1CB)
+	db BANK(Dialog1CC)
+	db BANK(Dialog1CD)
+	db BANK(Dialog1CE)
+	db BANK(Dialog1CF)
+	db BANK(Dialog1D0)
+	db BANK(Dialog1D1)
+	db BANK(Dialog1D2)
+	db BANK(Dialog1D3)
+	db BANK(Dialog1D4)
+	db BANK(Dialog1D5) | $80
+	db BANK(Dialog1D6)
+	db BANK(Dialog1D7)
+	db BANK(Dialog1D8) | $80
+	db BANK(Dialog1D9) | $80
+	db BANK(Dialog1DA)
+	db BANK(Dialog1DB)
+	db BANK(Dialog1DC)
+	db BANK(Dialog1DD)
+	db BANK(Dialog1DE)
+	db BANK(Dialog1DF)
+	db BANK(Dialog1E0)
+	db BANK(Dialog1E1)
+	db BANK(Dialog1E2)
+	db BANK(Dialog1E3)
+	db BANK(Dialog1E4)
+	db BANK(Dialog1E5)
+	db BANK(Dialog1E6)
+	db BANK(Dialog1E7)
+	db BANK(Dialog1E8)
+	db BANK(Dialog1E9)
+	db BANK(Dialog1EA)
+	db BANK(Dialog1EB) | $80
+	db BANK(Dialog1EC)
+	db BANK(Dialog1ED)
+	db BANK(Dialog1EE)
+	db BANK(Dialog1EF)
+	db BANK(Dialog1F0)
+	db BANK(Dialog1F1)
+	db BANK(Dialog1F2)
+	db BANK(Dialog1F3)
+	db BANK(Dialog1F4)
+	db BANK(Dialog1F5) | $80
+	db BANK(Dialog1F6)
+	db BANK(Dialog1F7)
+	db BANK(Dialog1F8)
+	db BANK(Dialog1F9)
+	db BANK(Dialog1FA)
+	db BANK(Dialog1FB)
+	db BANK(Dialog1FC)
+	db BANK(Dialog1FD)
+	db BANK(Dialog1FE) | $80
+	db BANK(Dialog1FF) | $80
+	db BANK(Dialog200)
+	db BANK(Dialog201)
+	db BANK(Dialog202)
+	db BANK(Dialog203)
+	db BANK(Dialog204)
+	db BANK(Dialog205)
+	db BANK(Dialog206)
+	db BANK(Dialog207)
+	db BANK(Dialog208)
+	db BANK(Dialog209)
+	db BANK(Dialog20A)
+	db BANK(Dialog20B)
+	db BANK(Dialog20C)
+	db BANK(Dialog20D)
+	db BANK(Dialog20E)
+	db BANK(Dialog20F)
 	db BANK(Dialog210) | $80
 	db BANK(Dialog211) | $80
-	db BANK(Dialog212) | $80
+	db BANK(Dialog212)
 	db BANK(Dialog213) | $80
 	db BANK(Dialog214) | $80
 	db BANK(Dialog215) | $80
 	db BANK(Dialog216) | $80
-	db BANK(Dialog217) | $80
+	db BANK(Dialog217)
 	db BANK(Dialog218)
 	db BANK(Dialog219)
-	db BANK(Dialog220) | $80
+	db BANK(Dialog21A)
+	db BANK(Dialog21B)
+	db BANK(Dialog21C)
+	db BANK(Dialog21D)
+	db BANK(Dialog21E)
+	db BANK(Dialog21F)
+	db BANK(Dialog220)
 	db BANK(Dialog221)
 	db BANK(Dialog222)
 	db BANK(Dialog223)
 	db BANK(Dialog224)
-	db BANK(Dialog225) | $80
-	db BANK(Dialog226) | $80
-	db BANK(Dialog227) | $80
-	db BANK(Dialog228) | $80
-	db BANK(Dialog229) | $80
+	db BANK(Dialog225)
+	db BANK(Dialog226)
+	db BANK(Dialog227)
+	db BANK(Dialog228)
+	db BANK(Dialog229)
+	db BANK(Dialog22A)
+	db BANK(Dialog22B)
+	db BANK(Dialog22C)
+	db BANK(Dialog22D)
+	db BANK(Dialog22E)
+	db BANK(Dialog22F)
 	db BANK(Dialog230)
 	db BANK(Dialog231)
 	db BANK(Dialog232)
-	db BANK(Dialog233) | $80
+	db BANK(Dialog233)
 	db BANK(Dialog234)
-	db BANK(Dialog235)
-	db BANK(Dialog236)
-	db BANK(Dialog237)
-	db BANK(Dialog238)
-	db BANK(Dialog239)
+	db BANK(Dialog235) | $80
+	db BANK(Dialog236) | $80
+	db BANK(Dialog237) | $80
+	db BANK(Dialog238) | $80
+	db BANK(Dialog239) | $80
+	db BANK(Dialog23A) | $80
+	db BANK(Dialog23B) | $80
+	db BANK(Dialog23C)
+	db BANK(Dialog23D)
+	db BANK(Dialog23E)
+	db BANK(Dialog23F)
 	db BANK(Dialog240)
 	db BANK(Dialog241)
 	db BANK(Dialog242)
 	db BANK(Dialog243)
 	db BANK(Dialog244)
-	db BANK(Dialog245) | $80
-	db BANK(Dialog246) | $80
-	db BANK(Dialog247) | $80
+	db BANK(Dialog245)
+	db BANK(Dialog246)
+	db BANK(Dialog247)
 	db BANK(Dialog248)
 	db BANK(Dialog249)
+	db BANK(Dialog24A)
+	db BANK(Dialog24B)
+	db BANK(Dialog24C)
+	db BANK(Dialog24D)
+	db BANK(Dialog24E)
+	db BANK(Dialog24F)
 	db BANK(Dialog250)
 	db BANK(Dialog251)
 	db BANK(Dialog252)
 	db BANK(Dialog253)
-	db BANK(Dialog254) | $80
+	db BANK(Dialog254)
 	db BANK(Dialog255)
 	db BANK(Dialog256)
 	db BANK(Dialog257)
 	db BANK(Dialog258)
 	db BANK(Dialog259)
+	db BANK(Dialog25A) | $80
+	db BANK(Dialog25B) | $80
+	db BANK(Dialog25C) | $80
+	db BANK(Dialog25D) | $80
+	db BANK(Dialog25E)
+	db BANK(Dialog25F)
 	db BANK(Dialog260)
 	db BANK(Dialog261)
 	db BANK(Dialog262)
 	db BANK(Dialog263)
-	db BANK(Dialog264) | $80
-	db BANK(Dialog265) | $80
-	db BANK(Dialog266) | $80
-	db BANK(Dialog267) | $80
+	db BANK(Dialog264)
+	db BANK(Dialog265)
+	db BANK(Dialog266)
+	db BANK(Dialog267)
 	db BANK(Dialog268) | $80
-	db BANK(Dialog269) | $80
-	db BANK(Dialog270) | $80
-	db BANK(Dialog271) | $80
-	db BANK(Dialog272) | $80
-	db BANK(Dialog273) | $80
+	db BANK(Dialog269)
+	db BANK(Dialog26A)
+	db BANK(Dialog26B) | $80
+	db BANK(Dialog26C) | $80
+	db BANK(Dialog26D)
+	db BANK(Dialog26E)
+	db BANK(Dialog26F)
+	db BANK(Dialog270)
+	db BANK(Dialog271)
+	db BANK(Dialog272)
+	db BANK(Dialog273)
 	db BANK(Dialog274)
 	db BANK(Dialog275)
 	db BANK(Dialog276)
 	db BANK(Dialog277)
 	db BANK(Dialog278)
 	db BANK(Dialog279)
-	db BANK(Dialog280)
-	db BANK(Dialog281)
-	db BANK(Dialog282)
-	db BANK(Dialog283)
-	db BANK(Dialog284)
-	db BANK(Dialog285)
-	db BANK(Dialog286)
-	db BANK(Dialog287)
-	db BANK(Dialog288)
-	db BANK(Dialog289)
-	db BANK(Dialog290)
-	db BANK(Dialog291)
-	db BANK(Dialog292)
-	db BANK(Dialog293)
-	db BANK(Dialog294)
-	db BANK(Dialog295)
+	db BANK(Dialog27A)
+	db BANK(Dialog27B)
+	db BANK(Dialog27C)
+	db BANK(Dialog27D)
+	db BANK(Dialog27E)
+	db BANK(Dialog27F)
+	db BANK(Dialog280) | $80
+	db BANK(Dialog281) | $80
+	db BANK(Dialog282) | $80
+	db BANK(Dialog283) | $80
+	db BANK(Dialog284) | $80
+	db BANK(Dialog285) | $80
+	db BANK(Dialog286) | $80
+	db BANK(Dialog287) | $80
+	db BANK(Dialog288) | $80
+	db BANK(Dialog289) | $80
+	db BANK(Dialog28A) | $80
+	db BANK(Dialog28B) | $80
+	db BANK(Dialog28C) | $80
+	db BANK(Dialog28D) | $80
+	db BANK(Dialog28E) | $80
+	db BANK(Dialog28F) | $80
+	db BANK(Dialog290) | $80
+	db BANK(Dialog291) | $80
+	db BANK(Dialog292) | $80
+	db BANK(Dialog293) | $80
+	db BANK(Dialog294) | $80
+	db BANK(Dialog295) | $80
 	db BANK(Dialog296)
 	db BANK(Dialog297)
-	db BANK(Dialog298)
-	db BANK(Dialog299)
-	db BANK(Dialog300)
-	db BANK(Dialog301)
-	db BANK(Dialog302)
-	db BANK(Dialog303)
-	db BANK(Dialog304)
-	db BANK(Dialog305)
-	db BANK(Dialog306)
-	db BANK(Dialog307)
-	db BANK(Dialog308)
-	db BANK(Dialog309)
-	db BANK(Dialog310)
-	db BANK(Dialog311)
-	db BANK(Dialog312)
-	db BANK(Dialog313)
-	db BANK(Dialog314)
-	db BANK(Dialog315)
-	db BANK(Dialog316)
-	db BANK(Dialog317)
-	db BANK(Dialog318)
-	db BANK(Dialog319)
-	db BANK(Dialog320)
-	db BANK(Dialog321)
-	db BANK(Dialog322)
-	db BANK(Dialog323)
-	db BANK(Dialog324)
-	db BANK(Dialog325)
-	db BANK(Dialog326)
-	db BANK(Dialog327)
-	db BANK(Dialog328)
-	db BANK(Dialog329)
-	db BANK(Dialog330)
-	db BANK(Dialog331)
-	db BANK(Dialog332)
-	db BANK(Dialog333)
-	db BANK(Dialog334)
-	db BANK(Dialog335)
-	db BANK(Dialog336)
-	db BANK(Dialog337)
-	db BANK(Dialog338)
-	db BANK(Dialog339)
-	db BANK(Dialog340)
-	db BANK(Dialog341)
-	db BANK(Dialog342)
-	db BANK(Dialog343)
-	db BANK(Dialog344)
-	db BANK(Dialog345)
-	db BANK(Dialog346)
-	db BANK(Dialog347)
-	db BANK(Dialog348)
-	db BANK(Dialog349)
-	db BANK(Dialog350)
-	db BANK(Dialog351)
-	db BANK(Dialog352)
-	db BANK(Dialog353)
-	db BANK(Dialog354)
-	db BANK(Dialog355)
-	db BANK(Dialog356)
-	db BANK(Dialog357)
-	db BANK(Dialog358)
-	db BANK(Dialog359) | $80
-	db BANK(Dialog360)
-	db BANK(Dialog361)
-	db BANK(Dialog362)
-	db BANK(Dialog363)
-	db BANK(Dialog364)
-	db BANK(Dialog365)
-	db BANK(Dialog366)
-	db BANK(Dialog367)
-	db BANK(Dialog368)
-	db BANK(Dialog369)
-	db BANK(Dialog370)
-	db BANK(Dialog371)
-	db BANK(Dialog372)
-	db BANK(Dialog373)
-	db BANK(Dialog374)
-	db BANK(Dialog375)
-	db BANK(Dialog376)
-	db BANK(Dialog377)
-	db BANK(Dialog378)
-	db BANK(Dialog379)
-	db BANK(Dialog380)
-	db BANK(Dialog381)
-	db BANK(Dialog382)
-	db BANK(Dialog383)
-	db BANK(Dialog384)
-	db BANK(Dialog385)
-	db BANK(Dialog386)
-	db BANK(Dialog387)
-	db BANK(Dialog388)
-	db BANK(Dialog389)
-	db BANK(Dialog390)
-	db BANK(Dialog391)
-	db BANK(Dialog392)
-	db BANK(Dialog393)
-	db BANK(Dialog394)
-	db BANK(Dialog395)
-	db BANK(Dialog396)
-	db BANK(Dialog397)
-	db BANK(Dialog398)
-	db BANK(Dialog399)
-	db BANK(Dialog400)
-	db BANK(Dialog401) | $80
-	db BANK(Dialog402)
-	db BANK(Dialog403)
-	db BANK(Dialog404) | $80
-	db BANK(Dialog405)
-	db BANK(Dialog406)
-	db BANK(Dialog407)
-	db BANK(Dialog408)
-	db BANK(Dialog409)
-	db BANK(Dialog410)
-	db BANK(Dialog411)
-	db BANK(Dialog412)
-	db BANK(Dialog413)
-	db BANK(Dialog414)
-	db BANK(Dialog415)
-	db BANK(Dialog416)
-	db BANK(Dialog417)
-	db BANK(Dialog418)
-	db BANK(Dialog419)
-	db BANK(Dialog420)
-	db BANK(Dialog421)
-	db BANK(Dialog422)
-	db BANK(Dialog423)
-	db BANK(Dialog424)
-	db BANK(Dialog425)
-	db BANK(Dialog426)
-	db BANK(Dialog427)
-	db BANK(Dialog428)
-	db BANK(Dialog429)
-	db BANK(Dialog430)
-	db BANK(Dialog431)
-	db BANK(Dialog432)
-	db BANK(Dialog433)
-	db BANK(Dialog434)
-	db BANK(Dialog435)
-	db BANK(Dialog436)
-	db BANK(Dialog437)
-	db BANK(Dialog438)
-	db BANK(Dialog439)
-	db BANK(Dialog440)
-	db BANK(Dialog441)
-	db BANK(Dialog442)
-	db BANK(Dialog443)
-	db BANK(Dialog444)
-	db BANK(Dialog445)
-	db BANK(Dialog446)
-	db BANK(Dialog447)
-	db BANK(Dialog448)
-	db BANK(Dialog449) | $80
-	db BANK(Dialog450)
-	db BANK(Dialog451)
-	db BANK(Dialog452)
-	db BANK(Dialog453)
-	db BANK(Dialog454)
-	db BANK(Dialog455)
-	db BANK(Dialog456)
-	db BANK(Dialog457)
-	db BANK(Dialog458)
-	db BANK(Dialog459)
-	db BANK(Dialog460)
-	db BANK(Dialog461)
-	db BANK(Dialog462)
-	db BANK(Dialog463)
-	db BANK(Dialog464)
-	db BANK(Dialog465)
-	db BANK(Dialog466)
-	db BANK(Dialog467)
-	db BANK(Dialog468)
-	db BANK(Dialog469) | $80
-	db BANK(Dialog470)
-	db BANK(Dialog471)
-	db BANK(Dialog472) | $80
-	db BANK(Dialog473) | $80
-	db BANK(Dialog474)
-	db BANK(Dialog475)
-	db BANK(Dialog476)
-	db BANK(Dialog477)
-	db BANK(Dialog478)
-	db BANK(Dialog479)
-	db BANK(Dialog480)
-	db BANK(Dialog481)
-	db BANK(Dialog482)
-	db BANK(Dialog483)
-	db BANK(Dialog484)
-	db BANK(Dialog485)
-	db BANK(Dialog486)
-	db BANK(Dialog487)
-	db BANK(Dialog488)
-	db BANK(Dialog489)
-	db BANK(Dialog490)
-	db BANK(Dialog491) | $80
-	db BANK(Dialog492)
-	db BANK(Dialog493)
-	db BANK(Dialog494)
-	db BANK(Dialog495)
-	db BANK(Dialog496)
-	db BANK(Dialog497)
-	db BANK(Dialog498)
-	db BANK(Dialog499)
-	db BANK(Dialog500)
-	db BANK(Dialog501) | $80
-	db BANK(Dialog502)
-	db BANK(Dialog503)
-	db BANK(Dialog504)
-	db BANK(Dialog505)
-	db BANK(Dialog506)
-	db BANK(Dialog507)
-	db BANK(Dialog508)
-	db BANK(Dialog509)
-	db BANK(Dialog510) | $80
-	db BANK(Dialog511) | $80
-	db BANK(Dialog512)
-	db BANK(Dialog513)
-	db BANK(Dialog514)
-	db BANK(Dialog515)
-	db BANK(Dialog516)
-	db BANK(Dialog517)
-	db BANK(Dialog518)
-	db BANK(Dialog519)
-	db BANK(Dialog520)
-	db BANK(Dialog521)
-	db BANK(Dialog522)
-	db BANK(Dialog523)
-	db BANK(Dialog524)
-	db BANK(Dialog525)
-	db BANK(Dialog526)
-	db BANK(Dialog527)
-	db BANK(Dialog528) | $80
-	db BANK(Dialog529) | $80
-	db BANK(Dialog530)
-	db BANK(Dialog531) | $80
-	db BANK(Dialog532) | $80
-	db BANK(Dialog533) | $80
-	db BANK(Dialog534) | $80
-	db BANK(Dialog535)
-	db BANK(Dialog536)
-	db BANK(Dialog537)
-	db BANK(Dialog538)
-	db BANK(Dialog539)
-	db BANK(Dialog540)
-	db BANK(Dialog541)
-	db BANK(Dialog542)
-	db BANK(Dialog543)
-	db BANK(Dialog544)
-	db BANK(Dialog545)
-	db BANK(Dialog546)
-	db BANK(Dialog547)
-	db BANK(Dialog548)
-	db BANK(Dialog549)
-	db BANK(Dialog550)
-	db BANK(Dialog551)
-	db BANK(Dialog552)
-	db BANK(Dialog553)
-	db BANK(Dialog554)
-	db BANK(Dialog555)
-	db BANK(Dialog556)
-	db BANK(Dialog557)
-	db BANK(Dialog558)
-	db BANK(Dialog559)
-	db BANK(Dialog560)
-	db BANK(Dialog561)
-	db BANK(Dialog562)
-	db BANK(Dialog563)
-	db BANK(Dialog564)
-	db BANK(Dialog565) | $80
-	db BANK(Dialog566) | $80
-	db BANK(Dialog567) | $80
-	db BANK(Dialog568) | $80
-	db BANK(Dialog569) | $80
-	db BANK(Dialog570) | $80
-	db BANK(Dialog571) | $80
-	db BANK(Dialog572)
-	db BANK(Dialog573)
-	db BANK(Dialog574)
-	db BANK(Dialog575)
-	db BANK(Dialog576)
-	db BANK(Dialog577)
-	db BANK(Dialog578)
-	db BANK(Dialog579)
-	db BANK(Dialog580)
-	db BANK(Dialog581)
-	db BANK(Dialog582)
-	db BANK(Dialog583)
-	db BANK(Dialog584)
-	db BANK(Dialog585)
-	db BANK(Dialog586)
-	db BANK(Dialog587)
-	db BANK(Dialog588)
-	db BANK(Dialog589)
-	db BANK(Dialog590)
-	db BANK(Dialog591)
-	db BANK(Dialog592)
-	db BANK(Dialog593)
-	db BANK(Dialog594)
-	db BANK(Dialog595)
-	db BANK(Dialog596)
-	db BANK(Dialog597)
-	db BANK(Dialog598)
-	db BANK(Dialog599)
-	db BANK(Dialog600)
-	db BANK(Dialog601)
-	db BANK(Dialog602) | $80
-	db BANK(Dialog603) | $80
-	db BANK(Dialog604) | $80
-	db BANK(Dialog605) | $80
-	db BANK(Dialog606)
-	db BANK(Dialog607)
-	db BANK(Dialog608)
-	db BANK(Dialog609)
-	db BANK(Dialog610)
-	db BANK(Dialog611)
-	db BANK(Dialog612)
-	db BANK(Dialog613)
-	db BANK(Dialog614)
-	db BANK(Dialog615)
-	db BANK(Dialog616) | $80
-	db BANK(Dialog617)
-	db BANK(Dialog618)
-	db BANK(Dialog619) | $80
-	db BANK(Dialog620) | $80
-	db BANK(Dialog621)
-	db BANK(Dialog622)
-	db BANK(Dialog623)
-	db BANK(Dialog624)
-	db BANK(Dialog625)
-	db BANK(Dialog626)
-	db BANK(Dialog627)
-	db BANK(Dialog628)
-	db BANK(Dialog629)
-	db BANK(Dialog630)
-	db BANK(Dialog631)
-	db BANK(Dialog632)
-	db BANK(Dialog633)
-	db BANK(Dialog634)
-	db BANK(Dialog635)
-	db BANK(Dialog636)
-	db BANK(Dialog637)
-	db BANK(Dialog638)
-	db BANK(Dialog639)
-	db BANK(Dialog640) | $80
-	db BANK(Dialog641) | $80
-	db BANK(Dialog642) | $80
-	db BANK(Dialog643) | $80
-	db BANK(Dialog644) | $80
-	db BANK(Dialog645) | $80
-	db BANK(Dialog646) | $80
-	db BANK(Dialog647) | $80
-	db BANK(Dialog648) | $80
-	db BANK(Dialog649) | $80
-	db BANK(Dialog650) | $80
-	db BANK(Dialog651) | $80
-	db BANK(Dialog652) | $80
-	db BANK(Dialog653) | $80
-	db BANK(Dialog654) | $80
-	db BANK(Dialog655) | $80
-	db BANK(Dialog656) | $80
-	db BANK(Dialog657) | $80
-	db BANK(Dialog658) | $80
-	db BANK(Dialog659) | $80
-	db BANK(Dialog660) | $80
-	db BANK(Dialog661) | $80
-	db BANK(Dialog662)
-	db BANK(Dialog663)
-	db BANK(Dialog664) | $80
-	db BANK(Dialog665) | $80
-	db BANK(Dialog666) | $80
-	db BANK(Dialog667) | $80
-	db BANK(Dialog668) | $80
-	db BANK(Dialog669) | $80
-	db BANK(Dialog670) | $80
-	db BANK(Dialog671) | $80
-	db BANK(Dialog672) | $80
-	db BANK(Dialog673) | $80
-	db BANK(Dialog674) | $80
-	db BANK(Dialog675) | $80
-	db BANK(Dialog676) | $80
-	db BANK(Dialog677) | $80
-	db BANK(Dialog678)
-	db BANK(Dialog679)
-	db BANK(Dialog680)
-	db BANK(Dialog681)
-	db BANK(Dialog682)
-	db BANK(Dialog683)
-	db BANK(Dialog684)
-	db BANK(Dialog685)
-	db BANK(Dialog686)
-	db BANK(Dialog687) | $80
+	db BANK(Dialog298) | $80
+	db BANK(Dialog299) | $80
+	db BANK(Dialog29A) | $80
+	db BANK(Dialog29B) | $80
+	db BANK(Dialog29C) | $80
+	db BANK(Dialog29D) | $80
+	db BANK(Dialog29E) | $80
+	db BANK(Dialog29F) | $80
+	db BANK(Dialog2A0) | $80
+	db BANK(Dialog2A1) | $80
+	db BANK(Dialog2A2) | $80
+	db BANK(Dialog2A3) | $80
+	db BANK(Dialog2A4) | $80
+	db BANK(Dialog2A5) | $80
+	db BANK(Dialog2A6)
+	db BANK(Dialog2A7)
+	db BANK(Dialog2A8)
+	db BANK(Dialog2A9)
+	db BANK(Dialog2AA)
+	db BANK(Dialog2AB)
+	db BANK(Dialog2AC)
+	db BANK(Dialog2AD)
+	db BANK(Dialog2AE)
+	db BANK(Dialog2AF) | $80

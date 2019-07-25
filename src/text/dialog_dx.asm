@@ -1,4 +1,4 @@
-Dialog590::
+Dialog24E::
 	db "Have you heard  "
 	db "of the Flying   "
 	db "Rooster?  They  "
@@ -8,32 +8,32 @@ Dialog590::
 	db "I wonder if it's"
 	db "true...@"
 
-Dialog591::
+Dialog24F::
 	db "Aaaah, Little   "
 	db "Marin... I want "
 	db "her to come back"
 	db "again...Her song"
 	db "is the best...@"
 
-Dialog592::
+Dialog250::
 	db "I dreamed that  "
 	db "I turned into a "
 	db "carrot last     "
 	db "night...  What  "
 	db "an odd dream...@"
 
-Dialog593::
+Dialog251::
 	db "Eh?  How can an "
 	db "animal talk?    "
 	db "How?  Hey, I'm  "
 	db "just a rabbit,  "
 	db "so I don't know!@"
 
-Dialog594::
+Dialog252::
 	db "Ahhh!  It's her!"
 	db "Little Marin!!@"
 
-Dialog595::
+Dialog253::
 	db "If you have no  "
 	db "courage,then    "
 	db "you have no     "
@@ -42,29 +42,29 @@ Dialog595::
 	db "won't move for  "
 	db "cowards.@"
 
-Dialog596::
+Dialog254::
 	db "I'm not afraid. "
 	db "I just decided  "
 	db "to wait at home.@"
 
-Dialog597::
+Dialog255::
 	db "This is my first"
 	db "walk with you,  "
 	db "#####.@"
 
-Dialog598::
+Dialog256::
 	db ". . . . .@"
 
-Dialog599::
+Dialog257::
 	db "This cliff will "
 	db "be our secret   "
 	db "place. @"
 
-Dialog600::
+Dialog258::
 	db "Aren't you going"
 	db "to say anything?@"
 
-Dialog601::
+Dialog259::
 	db "Oh how I love   "
 	db "pictures! Why   "
 	db "don't you take  "
@@ -73,42 +73,42 @@ Dialog601::
 	db "around? You can "
 	db "call it . . .@"
 
-Dialog602::
+Dialog25A::
 	db "You've got the  "
 	db "Blue Clothes!   "
 	db "Your damage will"
 	db "be reduced by   "
 	db "half!@"
 
-Dialog603::
+Dialog25B::
 	db "You've got the  "
 	db "Red Clothes!    "
 	db "Your body is    "
 	db "full of energy! @"
 
-Dialog604::
+Dialog25C::
 	db "Red for offense,"
 	db "blue for        "
 	db "defense. Which  "
 	db "do you choose?  "
 	db "    RED  BLUE<ask>"
 
-Dialog605::
+Dialog25D::
 	db "Are you sure?   "
 	db "    YES  NO<ask>"
 
-Dialog606::
+Dialog25E::
 	db "The fairy queen "
 	db "is waiting for  "
 	db "you.@"
 
-Dialog607::
+Dialog25F::
 	db "Do you have the "
 	db "powder? If not, "
 	db "you must go     "
 	db "back.@"
 
-Dialog608::
+Dialog260::
 	db "Our colors are  "
 	db "never the same! "
 	db "If I am red, he "
@@ -118,13 +118,13 @@ Dialog608::
 	db "is my cloth?    "
 	db "    Red  Blue<ask>"
 
-Dialog609::
+Dialog261::
 	db "BOO! I am no    "
 	db "weakling! Your  "
 	db "pitiful sword is"
 	db "no match for me!@"
 
-Dialog610::
+Dialog262::
 	db "I am sorry, but "
 	db "this is the     "
 	db "Color Dungeon.  "
@@ -138,27 +138,27 @@ Dialog610::
 	db "enter.          "
 	db "Farewell.@"
 
-Dialog611::
+Dialog263::
 	db "Here is your    "
 	db "clue. Make      "
 	db "all the red     "
 	db "blue.@"
 
-Dialog612::
+Dialog264::
 	db "No,  no. Take a "
 	db "closer look and "
 	db "try again.@"
 
-Dialog613::
+Dialog265::
 	db "Don't tell      "
 	db "anyone.@"
 
-Dialog614::
+Dialog266::
 	db "Do you want to  "
 	db "read this book? "
 	db "    YES  NO<ask>"
 
-Dialog615::
+Dialog267::
 	db "New world of    "
 	db "color under the "
 	db "5 gravestones.  "
@@ -175,7 +175,7 @@ Dialog615::
 	db "what the world  "
 	db "of color is?@"
 
-Dialog616::
+Dialog268::
 	db "Welcome, #####. "
 	db "I admire you for"
 	db "coming this far."
@@ -190,13 +190,13 @@ Dialog616::
 	db "you want?       "
 	db "    RED  BLUE<ask>"
 
-Dialog617::
+Dialog269::
 	db "You fool! Your  "
 	db "sword won't     "
 	db "work! Try       "
 	db "something else!@"
 
-Dialog618::
+Dialog26A::
 	db "What a greedy   "
 	db "fool! You want  "
 	db "more power?! A  "
@@ -205,33 +205,33 @@ Dialog618::
 	db "give up and     "
 	db "go home!@"
 
-Dialog619::
+Dialog26B::
 	db "Relax and close "
 	db "your eyes.@"
 
-Dialog620::
+Dialog26C::
 	db "I will now take "
 	db "you out.@"
 
-Dialog621::
+Dialog26D::
 	db "Blue is safe.   "
 	db "Yellow is       "
 	db "caution. Red is "
 	db "danger.@"
 
-Dialog622::
+Dialog26E::
 	db "Yellow is       "
 	db "caution. Red is "
 	db "danger,Take     "
 	db "your time.@"
 
-Dialog623::
+Dialog26F::
 	db "Blue. Start     "
 	db "over. Yellow is "
 	db "caution. Red is "
 	db "danger.@"
 
-Dialog624::
+Dialog270::
 	db "Hey, that looks "
 	db "great! I'll call"
 	db "it '##### Plays "
@@ -239,26 +239,26 @@ Dialog624::
 	db "Now get closer  "
 	db "to BowWow!@"
 
-Dialog625::
+Dialog271::
 	db "Grrrr!@"
 
-Dialog626::
+Dialog272::
 	db "#####, get      "
 	db "closer!@"
 
-Dialog627::
+Dialog273::
 	db "Grrrr! Grrrr!!@"
 
-Dialog628::
+Dialog274::
 	db "Much closer! OK,"
 	db "I'm ready.      "
 	db "Smile!@"
 
-Dialog629::
+Dialog275::
 	db "Grrrr! Grrrr!!  "
 	db "GRRRR!@"
 
-Dialog630::
+Dialog276::
 	db "Ha ha ha! Do it!"
 	db "Do it!  Do it   "
 	db "moooore! ... ..."
@@ -266,114 +266,114 @@ Dialog630::
 	db "nothing... I    "
 	db "didn't mean it.@"
 
-Dialog631::
+Dialog277::
 	db "Not very good..."
 	db "Eh?  What?  Did "
 	db "I say something?"
 	db "No, you're hear-"
 	db "ing things...@"
 
-Dialog632::
+Dialog278::
 	db "#####, do you   "
 	db "always look in  "
 	db "other people's  "
 	db "drawers?@"
 
-Dialog633::
+Dialog279::
 	db "Great!  Dig it! "
 	db "Dig it!  Dig to "
 	db "the center of   "
 	db "the earth!!@"
 
-Dialog634::
+Dialog27A::
 	db "Whew!  What a   "
 	db "surprise!@"
 
-Dialog635::
+Dialog27B::
 	db "Ohh!  I'm sorry!"
 	db "Are you okay?!  "
 	db "#####?@"
 
-Dialog636::
+Dialog27C::
 	db "Hey Mon!@"
 
-Dialog637::
+Dialog27D::
 	db "You know me, I  "
 	db "like short names"
 	db "the best...@"
 
-Dialog638::
+Dialog27E::
 	db "It can display  "
 	db "millions of     "
 	db "polygons!@"
 
-Dialog639::
+Dialog27F::
 	db "I definitely    "
 	db "need it, as soon"
 	db "as possible!@"
 
-Dialog640::
+Dialog280::
 	db "Turn aside the  "
 	db "spined ones with"
 	db "a shield...@"
 
-Dialog641::
+Dialog281::
 	db "First, defeat   "
 	db "the imprisoned  "
 	db "Pols Voice,     "
 	db "Last, Stalfos...@@"
 
-Dialog642::
+Dialog282::
 	db "Far away...     "
 	db "Do not fear,    "
 	db "dash and fly!@"
 
-Dialog643::
+Dialog283::
 	db "The glint of the"
 	db "tile will be    "
 	db "your guide...@"
 
-Dialog644::
+Dialog284::
 	db "Dive under where"
 	db "torchlight beams"
 	db "do cross...@"
 
-Dialog645::
+Dialog285::
 	db "Enter the space "
 	db "where the eyes  "
 	db "have walls...@"
 
-Dialog646::
+Dialog286::
 	db "The riddle is   "
 	db "solved when the "
 	db "pillars fall!@"
 
-Dialog647::
+Dialog287::
 	db "Fill all the    "
 	db "holes with the  "
 	db "rock that rolls,"
 	db "this (<dpad>) is the "
 	db "key!@"
 
-Dialog648::
+Dialog288::
 	db "If there is a   "
 	db "door that you   "
 	db "can't open, move"
 	db "a stone block.@"
 
-Dialog649::
+Dialog289::
 	db "Make every block"
 	db "design the same."
 	db "A new path will "
 	db "open.@"
 
-Dialog650::
+Dialog28A::
 	db "Part of the     "
 	db "floor is raised."
 	db "Tap the blue    "
 	db "crystal.@"
 
-Dialog651::
+Dialog28B::
 	db "To defeat the   "
 	db "black monster   "
 	db "with the hard   "
@@ -381,7 +381,7 @@ Dialog651::
 	db "something ex-   "
 	db "plosive.@"
 
-Dialog652::
+Dialog28C::
 	db "Poke suspicious "
 	db "parts of the    "
 	db "wall with your  "
@@ -389,70 +389,70 @@ Dialog652::
 	db "to the sounds it"
 	db "makes.@"
 
-Dialog653::
+Dialog28D::
 	db "If you can't    "
 	db "destroy a       "
 	db "skeleton with   "
 	db "your sword, try "
 	db "using a bomb.@"
 
-Dialog654::
+Dialog28E::
 	db "To open a       "
 	db "treasure chest, "
 	db "use the pots    "
 	db "around it.@"
 
-Dialog655::
+Dialog28F::
 	db "Hop on top of   "
 	db "the crystals to "
 	db "move forward.@"
 
-Dialog656::
+Dialog290::
 	db "If you can't go "
 	db "over the poles, "
 	db "try throwing    "
 	db "things you have "
 	db "in your hands.@"
 
-Dialog657::
+Dialog291::
 	db "Jump off the    "
 	db "floor above to  "
 	db "reach the chest "
 	db "on the table.@"
 
-Dialog658::
+Dialog292::
 	db "To defeat the   "
 	db "monsters who    "
 	db "hold the key,   "
 	db "attack them from"
 	db "a higher place.@"
 
-Dialog659::
+Dialog293::
 	db "If the statue   "
 	db "looks strange,  "
 	db "shoot it with   "
 	db "the bow.@"
 
-Dialog660::
+Dialog294::
 	db "Let's take a    "
 	db "picture!        "
 	db "    YES  NO<ask>"
 
-Dialog661::
+Dialog295::
 	db "No picture?! Are"
 	db "you pullin' my  "
 	db "leg?            "
 	db "    Yes  No way<ask>"
 
-Dialog662::
+Dialog296::
 	db "What a bummer!@"
 
-Dialog663::
+Dialog297::
 	db "Beautiful! I'll "
 	db "call this 'Game "
 	db "Over.'@"
 
-Dialog664::
+Dialog298::
 	db "What's your     "
 	db "name, young man?"
 	db "#####? Well     "
@@ -462,85 +462,85 @@ Dialog664::
 	db "before you      "
 	db "leave!@"
 
-Dialog665::
+Dialog299::
 	db "Let's see if we "
 	db "can fill that   "
 	db "album!@"
 
-Dialog666::
+Dialog29A::
 	db "11 shots left!  "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog667::
+Dialog29B::
 	db "10 shots left!  "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog668::
+Dialog29C::
 	db "9 shots left!   "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog669::
+Dialog29D::
 	db "8 shots left!   "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog670::
+Dialog29E::
 	db "7 shots left!   "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog671::
+Dialog29F::
 	db "6 shots left!   "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog672::
+Dialog2A0::
 	db "5 shots left!   "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog673::
+Dialog2A1::
 	db "4 shots left!   "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog674::
+Dialog2A2::
 	db "3 shots left!   "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog675::
+Dialog2A3::
 	db "2 shots left!   "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog676::
+Dialog2A4::
 	db "1 shots left!   "
 	db "What kind of    "
 	db "picture should  "
 	db "I take?@"
 
-Dialog677::
+Dialog2A5::
 	db "Oh no! You're   "
 	db "out of film!    "
 	db "Don't forget to "
 	db "look at your    "
 	db "album!@"
 
-Dialog678::
+Dialog2A6::
 	db "Hi! I'm the     "
 	db "photographer!   "
 	db "What a great    "
@@ -548,42 +548,42 @@ Dialog678::
 	db "I'll call this  "
 	db "'Heads Up!'@"
 
-Dialog679::
+Dialog2A7::
 	db "Hey, this       "
 	db "represents your "
 	db "adventures      "
 	db "perfectly!@"
 
-Dialog680::
+Dialog2A8::
 	db "I'll call this  "
 	db "one 'Close      "
 	db "Call.' Hmm.@"
 
-Dialog681::
+Dialog2A9::
 	db "I'm too close.@"
 
-Dialog682::
+Dialog2AA::
 	db "I should back up"
 	db ".@"
 
-Dialog683::
+Dialog2AB::
 	db "Aaaaaah!@"
 
-Dialog684::
+Dialog2AC::
 	db "I'm going back  "
 	db "to the store.   "
 	db "Bye!@"
 
-Dialog685::
+Dialog2AD::
 	db "See me later,   "
 	db "when you're     "
 	db "alone!@"
 
-Dialog686::
+Dialog2AE::
 	db "Are you sure?   "
 	db "    YES  NO<ask>"
 
-Dialog687::
+Dialog2AF::
 	db "Ah how I love   "
 	db "pictures. Hey,  "
 	db "#####! What are "

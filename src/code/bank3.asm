@@ -343,7 +343,7 @@ Data_003_4924::
     ld   [hl], a                                  ; $493B: $77
     ret                                           ; $493C: $C9
 
-    call label_C00                                ; $493D: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $493D: $CD $00 $0C
     ld   [hl], $30                                ; $4940: $36 $30
     ret                                           ; $4942: $C9
 
@@ -1447,7 +1447,7 @@ jr_003_4FA9:
     ld   [hl], $80                                ; $4FAC: $36 $80
     ret                                           ; $4FAE: $C9
 
-    call label_C00                                ; $4FAF: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $4FAF: $CD $00 $0C
     ld   [hl], $A0                                ; $4FB2: $36 $A0
     ret                                           ; $4FB4: $C9
 
@@ -2032,7 +2032,7 @@ jr_003_531E:
 Entity05Handler::
     ld   a, c                                     ; $5328: $79
     ld   [$C50C], a                               ; $5329: $EA $0C $C5
-    call label_C00                                ; $532C: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $532C: $CD $00 $0C
     ldh  [hScratchA], a                           ; $532F: $E0 $D7
     jp   z, $53A8                                 ; $5331: $CA $A8 $53
 
@@ -2981,7 +2981,7 @@ jr_003_5858:
     cp   $0A                                      ; $5868: $FE $0A
     jr   nz, jr_003_5889                          ; $586A: $20 $1D
 
-    call label_C00                                ; $586C: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $586C: $CD $00 $0C
     jr   nz, jr_003_5889                          ; $586F: $20 $18
 
     call func_003_7EFE                            ; $5871: $CD $FE $7E
@@ -4724,7 +4724,7 @@ jr_003_626B:
     ld   hl, $C440                                ; $6270: $21 $40 $C4
     add  hl, bc                                   ; $6273: $09
     ld   [hl], b                                  ; $6274: $70
-    call label_C00                                ; $6275: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $6275: $CD $00 $0C
     ld   [hl], $18                                ; $6278: $36 $18
     ld   a, $0C                                   ; $627A: $3E $0C
     call func_003_7E45                            ; $627C: $CD $45 $7E
@@ -4809,7 +4809,7 @@ jr_003_62EA:
     ret                                           ; $62EA: $C9
 
 func_003_62EB::
-    call label_C00                                ; $62EB: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $62EB: $CD $00 $0C
     jr   nz, jr_003_62EA                          ; $62EE: $20 $FA
 
     ldh  a, [hActiveEntityType]                     ; $62F0: $F0 $EB
@@ -5542,7 +5542,7 @@ jr_003_66BF:
     ld   hl, $C300                                ; $66CB: $21 $00 $C3
     add  hl, bc                                   ; $66CE: $09
     ld   [hl], $FF                                ; $66CF: $36 $FF
-    call label_C00                                ; $66D1: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $66D1: $CD $00 $0C
     ld   hl, $C440                                ; $66D4: $21 $40 $C4
     add  hl, bc                                   ; $66D7: $09
     or   [hl]                                     ; $66D8: $B6
@@ -6069,7 +6069,7 @@ Entity04Handler::
     ld   hl, wEntitiesUnknownTableG               ; $69C5: $21 $B0 $C3
     add  hl, bc                                   ; $69C8: $09
     ld   [hl], a                                  ; $69C9: $77
-    call label_C00                                ; $69CA: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $69CA: $CD $00 $0C
     jr   z, jr_003_69D9                           ; $69CD: $28 $0A
 
     dec  a                                        ; $69CF: $3D
@@ -6103,7 +6103,7 @@ jr_003_69F8:
     ld   hl, wEntitiesCollisionsTable             ; $69F8: $21 $A0 $C2
     add  hl, bc                                   ; $69FB: $09
     ld   [hl], b                                  ; $69FC: $70
-    call label_C00                                ; $69FD: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $69FD: $CD $00 $0C
     ld   [hl], b                                  ; $6A00: $70
     ldh  a, [hFFE9]                               ; $6A01: $F0 $E9
     ld   e, a                                     ; $6A03: $5F
@@ -6259,7 +6259,7 @@ jr_003_6ADA:
     cp   $04                                      ; $6AF5: $FE $04
     jr   nz, jr_003_6AFF                          ; $6AF7: $20 $06
 
-    call label_C00                                ; $6AF9: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $6AF9: $CD $00 $0C
     ld   [hl], $30                                ; $6AFC: $36 $30
     ret                                           ; $6AFE: $C9
 
@@ -7002,7 +7002,7 @@ jr_003_6ED1:
     ld   [hl], a                                  ; $6EEB: $77
     call GetEntityTransitionCountdown                 ; $6EEC: $CD $05 $0C
     ld   [hl], $40                                ; $6EEF: $36 $40
-    call label_C00                                ; $6EF1: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $6EF1: $CD $00 $0C
     ld   [hl], $08                                ; $6EF4: $36 $08
     ret                                           ; $6EF6: $C9
 
@@ -7023,7 +7023,7 @@ label_003_6F04:
     inc  a                                        ; $6F0A: $3C
     ld   [hl], a                                  ; $6F0B: $77
     call func_003_6F5C                            ; $6F0C: $CD $5C $6F
-    call label_C00                                ; $6F0F: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $6F0F: $CD $00 $0C
     ld   [hl], $0C                                ; $6F12: $36 $0C
     ld   a, $01                                   ; $6F14: $3E $01
     ld   [wC160], a                               ; $6F16: $EA $60 $C1
@@ -7262,7 +7262,7 @@ jr_003_7042:
     ld   [hl], $02                                ; $7062: $36 $02
     call GetEntityTransitionCountdown                 ; $7064: $CD $05 $0C
     ld   [hl], $40                                ; $7067: $36 $40
-    call label_C00                                ; $7069: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $7069: $CD $00 $0C
     ld   [hl], $08                                ; $706C: $36 $08
     ret                                           ; $706E: $C9
 
@@ -8132,7 +8132,7 @@ jr_003_752D:
     cp   $02                                      ; $7555: $FE $02
     jr   nz, jr_003_7571                          ; $7557: $20 $18
 
-    call label_C00                                ; $7559: $CD $00 $0C
+    call IsEntityUnknownFZero                                ; $7559: $CD $00 $0C
     ld   [hl], $A0                                ; $755C: $36 $A0
     ld   a, $20                                   ; $755E: $3E $20
     ld   [$C13E], a                               ; $7560: $EA $3E $C1

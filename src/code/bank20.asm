@@ -8225,7 +8225,7 @@ jr_020_6801:
     ld   d, [hl]                                  ; $69EE: $56
     ld   bc, $0400                                ; $69EF: $01 $00 $04
     ld   e, b                                     ; $69F2: $58
-    ld   bc, label_C00                            ; $69F3: $01 $00 $0C
+    ld   bc, $C00                                 ; $69F3: $01 $00 $0C
     ld   e, d                                     ; $69F6: $5A
     ld   bc, $FCF0                                ; $69F7: $01 $F0 $FC
     ld   d, b                                     ; $69FA: $50
@@ -8237,7 +8237,7 @@ jr_020_6801:
     ld   e, h                                     ; $6A06: $5C
     ld   bc, $0400                                ; $6A07: $01 $00 $04
     ld   e, b                                     ; $6A0A: $58
-    ld   bc, label_C00                            ; $6A0B: $01 $00 $0C
+    ld   bc, $C00                                 ; $6A0B: $01 $00 $0C
     ld   e, [hl]                                  ; $6A0E: $5E
     ld   bc, $04F4                                ; $6A0F: $01 $F4 $04
     jr   nz, @+$23                                ; $6A12: $20 $21
@@ -9343,7 +9343,7 @@ jr_020_6EC7:
     rrca                                          ; $6F93: $0F
     rrca                                          ; $6F94: $0F
     rrca                                          ; $6F95: $0F
-    ld   [label_C00], sp                          ; $6F96: $08 $00 $0C
+    ld   [$C00], sp                               ; $6F96: $08 $00 $0C
     inc  c                                        ; $6F99: $0C
     inc  bc                                       ; $6F9A: $03
     inc  c                                        ; $6F9B: $0C
@@ -9538,7 +9538,7 @@ jr_020_6EC7:
     nop                                           ; $7077: $00
     inc  bc                                       ; $7078: $03
     rst  $38                                      ; $7079: $FF
-    ld   [label_C00], sp                          ; $707A: $08 $00 $0C
+    ld   [$C00], sp                               ; $707A: $08 $00 $0C
     inc  c                                        ; $707D: $0C
     inc  b                                        ; $707E: $04
     inc  b                                        ; $707F: $04

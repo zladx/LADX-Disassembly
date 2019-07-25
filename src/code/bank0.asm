@@ -680,7 +680,7 @@ label_BFB::
     ld   hl, $C450
     jr   IsZero
 
-label_C00::
+IsEntityUnknownFZero::
     ld   hl, wEntitiesUnknowTableF
     jr   IsZero
 

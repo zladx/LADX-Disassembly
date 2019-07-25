@@ -2029,7 +2029,7 @@ jr_003_531E:
 
     ld   d, $03                                   ; $5326: $16 $03
 
-Entity05Handler::
+LiftableRockEntityHandler::
     ld   a, c                                     ; $5328: $79
     ld   [$C50C], a                               ; $5329: $EA $0C $C5
     call IsEntityUnknownFZero                                ; $532C: $CD $00 $0C
@@ -2074,12 +2074,12 @@ jr_003_5369:
     and  a                                        ; $536B: $A7
     jr   nz, jr_003_5392                          ; $536C: $20 $24
 
-    ; If in a house…
+    ; If not in a house, and not on map MAP_UNKNOWN_1E…
     ldh  a, [hMapId]                              ; $536E: $F0 $F7
-    cp   $1E                                      ; $5370: $FE $1E
+    cp   MAP_UNKNOWN_1E                           ; $5370: $FE $1E
     jr   z, jr_003_5378                           ; $5372: $28 $04
 
-    cp   $10                                      ; $5374: $FE $10
+    cp   MAP_HOUSE                                ; $5374: $FE $10
     jr   nz, jr_003_5392                          ; $5376: $20 $1A
 
 jr_003_5378:
@@ -2090,15 +2090,16 @@ jr_003_5378:
 
     ; draw a random number
     call GetRandomByte                            ; $537E: $CD $0D $28
+    ; … if the random number is < $3F…
     and  $3F                                      ; $5381: $E6 $3F
-    jr   nz, jr_003_538D                          ; $5383: $20 $08
-    ; Open Marin reaction 1
+    jr   nz, .marinReaction2                      ; $5383: $20 $08
+    ; Open Marin reaction 1 (Dialog40)
     ld   a, $28                                   ; $5385: $3E $28
     call OpenDialog                               ; $5387: $CD $85 $23
-    jp   ClearEntityType                               ; $538A: $C3 $8D $3F
+    jp   ClearEntityType                          ; $538A: $C3 $8D $3F
 
-jr_003_538D:
-    ; Open Marin reaction 2
+.marinReaction2
+    ; Open Marin reaction 2 (Dialog409)
     ld   a, $99                                   ; $538D: $3E $99
     call OpenDialogInTable1                       ; $538F: $CD $73 $23
 
@@ -6055,7 +6056,7 @@ jr_003_69A0:
     ld   [hl], $12                                ; $69AE: $36 $12
     ld   [hl], $32                                ; $69B0: $36 $32
 
-Entity04Handler::
+FlameEntityHandler::
     ld   hl, wProjectileCount                     ; $69B2: $21 $4D $C1
     inc  [hl]                                     ; $69B5: $34
     ld   a, $0A                                   ; $69B6: $3E $0A

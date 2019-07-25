@@ -15,8 +15,8 @@ EntityPointersTable::
 ._01 db $61, $44, $19 ; entity_pointer BoomerangEntityHandler
 ._02 entity_pointer BombEntityHandler
 ._03 db $E3, $7B, $18 ; entity_pointer Entity03Handler
-._04 entity_pointer Entity04Handler
-._05 entity_pointer Entity05Handler
+._04 entity_pointer FlameEntityHandler
+._05 entity_pointer LiftableRockEntityHandler
 ._06 db $49, $52, $03 ; entity_pointer Entity06Handler
 ._07 db $DD, $7B, $07 ; entity_pointer Entity07Handler
 ._08 db $66, $79, $18 ; entity_pointer Entity08Handler

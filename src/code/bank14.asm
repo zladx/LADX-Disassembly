@@ -2299,7 +2299,7 @@ func_014_53A3:
     cp   $02                                      ; $53AB: $FE $02
     jr   nz, jr_014_53B6                          ; $53AD: $20 $07
 
-    call IsEntityTransitionCountdownZero                 ; $53AF: $CD $05 $0C
+    call GetEntityTransitionCountdown                 ; $53AF: $CD $05 $0C
     ld   [hl], $A0                                ; $53B2: $36 $A0
     jr   jr_014_5409                              ; $53B4: $18 $53
 
@@ -2334,7 +2334,7 @@ jr_014_53B6:
     ld   hl, $C380                                ; $53DC: $21 $80 $C3
     add  hl, bc                                   ; $53DF: $09
     ld   [hl], a                                  ; $53E0: $77
-    call IsEntityTransitionCountdownZero                 ; $53E1: $CD $05 $0C
+    call GetEntityTransitionCountdown                 ; $53E1: $CD $05 $0C
     call GetRandomByte                            ; $53E4: $CD $0D $28
     and  $1F                                      ; $53E7: $E6 $1F
     add  $30                                      ; $53E9: $C6 $30

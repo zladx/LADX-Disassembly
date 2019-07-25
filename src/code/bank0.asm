@@ -680,7 +680,7 @@ label_BFB::
     ld   hl, $C450
     jr   IsZero
 
-label_C00::
+IsEntityUnknownFZero::
     ld   hl, wEntitiesUnknowTableF
     jr   IsZero
 
@@ -690,7 +690,7 @@ label_C00::
 ; Output:
 ;  - a: the value read
 ;  - z: whether the value equal to zero
-IsEntityTransitionCountdownZero::
+GetEntityTransitionCountdown::
     ld   hl, wEntitiesTransitionCountdownTable
 
 ; Test if the value at given address is equal to zero

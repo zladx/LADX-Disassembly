@@ -11,14 +11,14 @@ endm
 ; Third byte - bank ID
 ; IE - db $DC, $59, $03 is for heart container. When loaded, code will jump to bank $03 - Pointer $59DC (LoadHeartContainer)
 EntityPointersTable::
-._00 entity_pointer BombExplosionEntityHandler
+._00 entity_pointer ExplosionEntityHandler
 ._01 db $61, $44, $19 ; entity_pointer BoomerangEntityHandler
-._02 entity_pointer Entity02Handler
+._02 entity_pointer BombEntityHandler
 ._03 db $E3, $7B, $18 ; entity_pointer Entity03Handler
-._04 entity_pointer Entity04Handler
-._05 entity_pointer Entity05Handler
-._06 db $49, $52, $03 ; entity_pointer Entity06Handler
-._07 db $DD, $7B, $07 ; entity_pointer Entity07Handler
+._04 entity_pointer FlameEntityHandler
+._05 entity_pointer LiftableRockEntityHandler
+._06 entity_pointer Entity06Handler
+._07 entity_pointer SpitObjectEntityHandler
 ._08 db $66, $79, $18 ; entity_pointer Entity08Handler
 ._09 db $E9, $57, $03 ; entity_pointer Entity09Handler
 ._0A db $26, $6A, $03 ; entity_pointer Entity0AHandler
@@ -46,7 +46,7 @@ EntityPointersTable::
 ._20 db $3C, $4F, $06 ; entity_pointer Entity20Handler ; $20
 ._21 db $28, $76, $06 ; entity_pointer Entity21Handler
 ._22 db $F1, $65, $06 ; entity_pointer Entity22Handler
-._23 db $DC, $7D, $06 ; entity_pointer Entity23Handler
+._23 db $DC, $7D, $06 ; entity_pointer LikeLikeEntityHandler
 ._24 db $FB, $4F, $03 ; entity_pointer Entity24Handler ; $24
 ._25 db $44, $4C, $03 ; entity_pointer Entity25Handler
 ._26 db $44, $4C, $03 ; entity_pointer Entity26Handler
@@ -76,7 +76,7 @@ EntityPointersTable::
 ._3E db $62, $4E, $05 ; entity_pointer Entity3EHandler
 ._3F db $6A, $49, $05 ; entity_pointer Entity3FHandler
 ._40 db $D3, $47, $05 ; entity_pointer Entity40Handler ; $40
-._41 db $F5, $67, $06 ; entity_pointer Entity41Handler
+._41 db $F5, $67, $06 ; entity_pointer HowlEntityHandler
 ._42 db $7A, $5E, $18 ; entity_pointer Entity42Handler
 ._43 db $93, $44, $15 ; entity_pointer Entity43Handler
 ._44 db $3F, $44, $15 ; entity_pointer Entity44Handler ; $44
@@ -8225,7 +8225,7 @@ jr_020_6801:
     ld   d, [hl]                                  ; $69EE: $56
     ld   bc, $0400                                ; $69EF: $01 $00 $04
     ld   e, b                                     ; $69F2: $58
-    ld   bc, label_C00                            ; $69F3: $01 $00 $0C
+    ld   bc, $C00                                 ; $69F3: $01 $00 $0C
     ld   e, d                                     ; $69F6: $5A
     ld   bc, $FCF0                                ; $69F7: $01 $F0 $FC
     ld   d, b                                     ; $69FA: $50
@@ -8237,7 +8237,7 @@ jr_020_6801:
     ld   e, h                                     ; $6A06: $5C
     ld   bc, $0400                                ; $6A07: $01 $00 $04
     ld   e, b                                     ; $6A0A: $58
-    ld   bc, label_C00                            ; $6A0B: $01 $00 $0C
+    ld   bc, $C00                                 ; $6A0B: $01 $00 $0C
     ld   e, [hl]                                  ; $6A0E: $5E
     ld   bc, $04F4                                ; $6A0F: $01 $F4 $04
     jr   nz, @+$23                                ; $6A12: $20 $21
@@ -9343,7 +9343,7 @@ jr_020_6EC7:
     rrca                                          ; $6F93: $0F
     rrca                                          ; $6F94: $0F
     rrca                                          ; $6F95: $0F
-    ld   [label_C00], sp                          ; $6F96: $08 $00 $0C
+    ld   [$C00], sp                               ; $6F96: $08 $00 $0C
     inc  c                                        ; $6F99: $0C
     inc  bc                                       ; $6F9A: $03
     inc  c                                        ; $6F9B: $0C
@@ -9538,7 +9538,7 @@ jr_020_6EC7:
     nop                                           ; $7077: $00
     inc  bc                                       ; $7078: $03
     rst  $38                                      ; $7079: $FF
-    ld   [label_C00], sp                          ; $707A: $08 $00 $0C
+    ld   [$C00], sp                               ; $707A: $08 $00 $0C
     inc  c                                        ; $707D: $0C
     inc  b                                        ; $707E: $04
     inc  b                                        ; $707F: $04

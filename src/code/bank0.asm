@@ -690,7 +690,7 @@ label_C00::
 ; Output:
 ;  - a: the value read
 ;  - z: whether the value equal to zero
-IsEntityTransitionCountdownZero::
+GetEntityTransitionCountdown::
     ld   hl, wEntitiesTransitionCountdownTable
 
 ; Test if the value at given address is equal to zero

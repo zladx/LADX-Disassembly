@@ -1114,7 +1114,7 @@ RenderIntroEntity::
     jp   z, RenderIntroInertLink
     cp   ENTITY_INTRO_SPARKLE
     jp   z, RenderIntroSparkle
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     jr   nz, label_7533
     ld   hl, wEntitiesStateTable
     add  hl, bc
@@ -1299,7 +1299,7 @@ label_7681::
     ldh  a, [wActiveEntityPosX]
     cp   $48
     jr   nc, label_769C
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     ld   [hl], $40
     call IncrementEntityWalkingAttr
 
@@ -1320,7 +1320,7 @@ label_76AB::
     call label_7D46
     ld   a, $01
     call label_3B0C
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     jr   nz, label_76D4
     call IncrementEntityWalkingAttr
     ld   a, $07
@@ -1352,7 +1352,7 @@ label_76D6::
     ld   a, [hl]
     cp   $30
     jr   nz, label_76F7
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     ld   [hl], $40
     jp   IncrementEntityWalkingAttr
 
@@ -1377,7 +1377,7 @@ label_7707::
     ret
 
 label_7711::
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     jr   nz, label_7778
     call label_7DCF
     ldh  a, [hFrameCounter]
@@ -1396,12 +1396,12 @@ label_7711::
     jr   z, label_7740
     cp   $3A
     jr   nz, label_7745
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     ld   [hl], $30
     jr   label_7745
 
 label_7740::
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     ld   [hl], $50
 
 label_7745::
@@ -1413,7 +1413,7 @@ label_7745::
     ld   [rSCX], a
     ld   a, $01
     ld   [rIE], a
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     ld   [hl], $E0
     jp   IncrementEntityWalkingAttr
 
@@ -1454,7 +1454,7 @@ label_7781::
     call label_3B0C
     ld   a, $00
     ld   [$C3B1], a
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     jr   z, label_779A
     dec  [hl]
 
@@ -1496,7 +1496,7 @@ RenderIntroSparkle::
     ld   [$C3C1], a
 
 label_77E1::
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     dec  [hl]
     jr   nz, label_77ED
     ld   hl, wEntitiesStateTable
@@ -1825,7 +1825,7 @@ label_7A47::
     dw $7a6e
     dw $7ac4
 
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     dec  [hl]
     jr   nz, label_7A5D
     ld   [hl], $90
@@ -1836,7 +1836,7 @@ label_7A5D::
     ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_7A6A
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     dec  [hl]
     jr   z, label_7A6B
 
@@ -1888,7 +1888,7 @@ label_7AB2::
 
 label_7AB3::
     call IncrementEntityWalkingAttr
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     ld   [hl], $17
     ld   a, $07
     ldh  [hWindowYUnused], a
@@ -1898,7 +1898,7 @@ label_7AB3::
     ldh  a, [hFrameCounter]
     and  $03
     jr   nz, label_7AE3
-    call IsEntityTransitionCountdownZero
+    call GetEntityTransitionCountdown
     dec  [hl]
     jr   nz, label_7AE3
     call IncrementGameplaySubtype

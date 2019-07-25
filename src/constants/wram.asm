@@ -478,16 +478,21 @@ wEntitiesUnknowTableF:: ; C2F0
 wEntitiesUnknowTableG:: ; C300
   ds $10
 
-wEntitiesAltitudeTable:: ; C310
+wEntitiesPosZTable:: ; C310
   ; When the altitude is higher than 0, the entity position is shifted vertically,
   ; and a shadow is displayed underneath.
   ds $10
 
-wEntitiesAltitudeVelocity:: ; C320
+wEntitiesSpeedZTable:: ; C320
   ; Positive numbers increase the altitude, negative numbers decrease it
   ds $10
 
-ds $70
+ds $30
+
+wEntitiesHealthTable:: ; C360
+  ds $10
+
+ds $30
 
 wEntitiesTypeTable:: ; C3A0
   ; Type of the entity
@@ -1194,8 +1199,9 @@ wIndoorRoom:: ; DBAE
 wCurrentBank:: ; DBAF
   ds 1
 
-; Unlabeled
-wDBB0 equ $DBB0
+wMinimapLayout ; DBB0
+  ; Layout of the dungeon map in the inventory
+  ; See INVENTORY_MINIMAP_* constants for values
   ds 1
 
 wLinkMapEntryPositionX:: ; DBB1

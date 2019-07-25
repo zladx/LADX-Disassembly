@@ -2399,7 +2399,7 @@ jr_014_541B:
     ld   hl, $5333                                ; $5434: $21 $33 $53
     add  hl, de                                   ; $5437: $19
     ld   a, [hl]                                  ; $5438: $7E
-    ld   hl, $C320                                ; $5439: $21 $20 $C3
+    ld   hl, wEntitiesSpeedZTable                                ; $5439: $21 $20 $C3
     add  hl, bc                                   ; $543C: $09
     ld   [hl], a                                  ; $543D: $77
     ld   a, $0C                                   ; $543E: $3E $0C

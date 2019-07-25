@@ -14,8 +14,23 @@ WorldHandlerEntryPoint::
 ._6 dw GameplayWorldSubtype6Handler
 ._7 dw WorldDefaultHandler
 
-data_4385::
-    db $00, $00, $00, $00, $00, $00, $30, $00, $00, $00, $00, $00, $00, $00, $00, $00
+MinimapLayoutTable::
+._00 db INVENTORY_MINIMAP_SINGLE_FLOOR
+._01 db INVENTORY_MINIMAP_SINGLE_FLOOR
+._02 db INVENTORY_MINIMAP_SINGLE_FLOOR
+._03 db INVENTORY_MINIMAP_SINGLE_FLOOR
+._04 db INVENTORY_MINIMAP_SINGLE_FLOOR
+._05 db INVENTORY_MINIMAP_SINGLE_FLOOR
+._06 db INVENTORY_MINIMAP_FOUR_FLOORS_A
+._07 db INVENTORY_MINIMAP_SINGLE_FLOOR
+._08 db INVENTORY_MINIMAP_SINGLE_FLOOR
+._09 db INVENTORY_MINIMAP_SINGLE_FLOOR
+._0A db INVENTORY_MINIMAP_SINGLE_FLOOR
+._0B db INVENTORY_MINIMAP_SINGLE_FLOOR
+._0C db INVENTORY_MINIMAP_SINGLE_FLOOR
+._0D db INVENTORY_MINIMAP_SINGLE_FLOOR
+._0E db INVENTORY_MINIMAP_SINGLE_FLOOR
+._0F db INVENTORY_MINIMAP_SINGLE_FLOOR
 
 GameplayWorldSubtype0Handler::
     call label_27F2
@@ -72,18 +87,23 @@ label_43DC::
     inc  de
     dec  c
     jr   nz, label_43CA
+
+    ; If inside the color dungeon ($FF),
+    ; lookup for dungeon $0F in the table instead.
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_43E9
+    jr   nz, .colorDungeonIndexEnd
     ld   a, $0F
+.colorDungeonIndexEnd
 
-label_43E9::
+    ; Lookup the minimap layout for the dungeon in a
     ld   e, a
     ld   d, $00
-    ld   hl, data_4385
+    ld   hl, MinimapLayoutTable
     add  hl, de
     ld   a, [hl]
-    ld   [$DBB0], a
+    ld   [wMinimapLayout], a
+
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   z, label_440B

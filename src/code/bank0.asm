@@ -2016,7 +2016,7 @@ label_142F::
     ld   [hl], a
     ldh  a, [$FFA2]
     inc  a
-    ld   hl, $C310
+    ld   hl, wEntitiesPosZTable
     add  hl, de
     ld   [hl], a
     ld   hl, data_13A5
@@ -2388,7 +2388,7 @@ label_1691::
     ld   hl, $C2F0
     add  hl, de
     ld   [hl], $18
-    ld   hl, $C320
+    ld   hl, wEntitiesSpeedZTable
     add  hl, de
     ld   [hl], $10
     ret
@@ -7640,7 +7640,7 @@ label_3D8A::
     add  hl, bc
     ld   a, [hl]
     ldh  [$FFEF], a
-    ld   hl, $C310
+    ld   hl, wEntitiesPosZTable
     add  hl, bc
     sub  a, [hl]
     ldh  [wActiveEntityPosY], a

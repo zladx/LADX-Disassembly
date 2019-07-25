@@ -10366,8 +10366,14 @@ data_007_7B53::
     db $C2, $14, $C4, $14, $C6, $14, $CA, $14
     db $C0, $14, $C2, $15, $C4, $14, $C6, $14
     db $CA, $17, $A6, $15, $A6, $15, $A6, $15
-    db $A6, $15, $A6, $15, $9E, $14, $90, $91
-    db $92, $93, $94, $95, $96, $97, $98, $99
+    db $A6, $15, $A6, $15, $9E, $14
+
+SpitObjectDialog::
+    db $90 ; Dialog144
+    db $91 ; Dialog145
+    db $92 ; Dialog146
+    db $93 ; Dialog147
+    db $94, $95, $96, $97, $98, $99
     db $9A, $9B, $9C, $9D, $9E, $9F, $A0, $A1
     db $A2, $A3, $A4, $A5, $A6, $A7, $A8, $A9
     db $AA, $AC, $AB, $AD, $AE, $AE, $EF, $06
@@ -10377,7 +10383,8 @@ data_007_7B53::
     db $01, $01, $01, $01, $01, $01, $01, $01
     db $01, $00
 
-func_007_7BDD::
+; Used when an object is spit out after a Like-like ate it
+SpitObjectEntityHandler::
     ld   a, $02                                   ; $7BDD: $3E $02
     ldh  [$FFA1], a                               ; $7BDF: $E0 $A1
     xor  a                                        ; $7BE1: $AF
@@ -10559,7 +10566,7 @@ jr_007_7CD1:
     jr   jr_007_7CE6                              ; $7CDF: $18 $05
 
 jr_007_7CE1:
-    ld   hl, $7B99                                ; $7CE1: $21 $99 $7B
+    ld   hl, SpitObjectDialog                     ; $7CE1: $21 $99 $7B
     add  hl, de                                   ; $7CE4: $19
     ld   a, [hl]                                  ; $7CE5: $7E
 

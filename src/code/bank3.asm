@@ -1746,7 +1746,7 @@ jr_003_5154:
     ld   hl, wEntity0SpeedY                       ; $5182: $21 $50 $C2
     add  hl, bc                                   ; $5185: $09
     ld   [hl], a                                  ; $5186: $77
-    call func_003_5249                            ; $5187: $CD $49 $52
+    call Entity06Handler                            ; $5187: $CD $49 $52
     call func_003_7893                            ; $518A: $CD $93 $78
     ld   hl, wEntitiesCollisionsTable             ; $518D: $21 $A0 $C2
     add  hl, bc                                   ; $5190: $09
@@ -1862,6 +1862,7 @@ label_003_51F5:
 jr_003_5234:
     ret                                           ; $5234: $C9
 
+data_003_5235::
     ld   l, [hl]                                  ; $5235: $6E
     rlca                                          ; $5236: $07
     ld   l, [hl]                                  ; $5237: $6E
@@ -1871,15 +1872,18 @@ jr_003_5234:
     ld   [$0000], sp                              ; $523E: $08 $00 $00
     nop                                           ; $5241: $00
     nop                                           ; $5242: $00
-    ld   [$7EF8], sp                              ; $5243: $08 $F8 $7E
+    db   $08, $F8                                 ; $5243: $08 $F8
+
+data_003_5245::
+    db   $7E
     rlca                                          ; $5246: $07
     ld   a, [hl]                                  ; $5247: $7E
     daa                                           ; $5248: $27
 
-func_003_5249::
+Entity06Handler::
     ld   a, [wIsIndoor]                           ; $5249: $FA $A5 $DB
     ldh  [hActiveEntityUnknownG], a               ; $524C: $E0 $F1
-    ld   de, $5235                                ; $524E: $11 $35 $52
+    ld   de, data_003_5235                        ; $524E: $11 $35 $52
     and  a                                        ; $5251: $A7
     jr   nz, jr_003_525D                          ; $5252: $20 $09
 
@@ -1887,7 +1891,7 @@ func_003_5249::
     cp   $77                                      ; $5256: $FE $77
     jr   nz, jr_003_525D                          ; $5258: $20 $03
 
-    ld   de, $5245                                ; $525A: $11 $45 $52
+    ld   de, data_003_5245                        ; $525A: $11 $45 $52
 
 jr_003_525D:
     call label_3BC0                               ; $525D: $CD $C0 $3B

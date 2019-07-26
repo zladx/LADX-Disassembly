@@ -128,6 +128,9 @@ include "code/bank15.asm"
 ; Bank $16: contains sprite data for overworld
 ; Starts on byte $5186, ends on byte $565D
 
+section "bank18",romx[$4000],bank[$18]
+include "code/bank18.asm"
+
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"

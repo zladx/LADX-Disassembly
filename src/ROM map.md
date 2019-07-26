@@ -27,7 +27,7 @@
 16 Code, text, overworld sprite data
 17 Credits code and text
 18 Entities code
-19 Code (Link motions)
+19 Entities code
 1A Code, Overworld map data (rooms 80-FF), Overworld palette (0x6476)
 1B Audio code and Music
 1C Map data?

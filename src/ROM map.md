@@ -56,7 +56,7 @@
 33 Graphics: ending (CGB variant)
 34 Graphics: printer UI
 35 Graphics: Color dungeon
-36 Code
+36 Entities code
 37 Code
 38 Graphics: large font, misc
 39 Graphics: photo elements

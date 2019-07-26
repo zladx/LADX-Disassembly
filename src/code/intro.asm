@@ -1274,7 +1274,7 @@ RenderIntroMarin::
     xor  a
     ld   [$C340], a
     ld   de, data_764F
-    call label_3BC0
+    call RenderAnimatedActiveEntity
 
     ld   a, [$C3C0]
     add  a, $08
@@ -1514,7 +1514,7 @@ label_77ED::
     xor  a
     ld   [$C340], a
     ld   de, label_77BD
-    call label_3BC0
+    call RenderAnimatedActiveEntity
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a
@@ -1812,7 +1812,7 @@ RenderIntroInertLink::
 label_7A36::
     ld   [$C340], a
     ld   de, data_7A27
-    call label_3BC0
+    call RenderAnimatedActiveEntity
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a

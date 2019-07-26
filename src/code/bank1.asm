@@ -2606,6 +2606,8 @@ label_5EA6::
     rst  $38
     nop
     nop
+
+func_001_5EAB::
     ld   hl, $C460
     add  hl, de
     ldh  a, [$FFE4]
@@ -2638,7 +2640,7 @@ label_5EA6::
     add  a, [hl]
     ld   [hl], a
     rr   c
-    ld   hl, $C220
+    ld   hl, wEntitiesTransitionIntersectingXTable
     add  hl, de
     ldh  a, [hScratchB]
     rl   c
@@ -2650,7 +2652,7 @@ label_5EA6::
     add  a, [hl]
     ld   [hl], a
     rr   c
-    ld   hl, $C230
+    ld   hl, wEntitiesTransitionIntersectingYTable
     add  hl, de
     ldh  a, [hScratchD]
     rl   c

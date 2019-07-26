@@ -7283,25 +7283,37 @@ label_3BB5::
     call $7E45
     jp   ReloadSavedBank
 
-; Render active NPC
-label_3BC0::
+; Render an animated active entity to wOAMBuffer
+; The wOAMBuffer attributes are updated.
+;
+; This is not called for unanimated entities (like butterflies,
+; which are animated only by the actual tile changing.)
+RenderAnimatedActiveEntity::
+    ; Increment hActiveEntityUnknownG
     ldh  a, [hActiveEntityUnknownG]
     inc  a
+    ; If hActiveEntityUnknownG = 0, return
     ret  z
 
     call SkipDisabledEntityDuringRoomTransition
 
     push de
+
+    ; de = wOAMBuffer + $30 + [$C3C0]
     ld   a, [$C3C0]
     ld   e, a
     ld   d, b
-    ld   hl, $C030
+    ld   hl, wOAMBuffer + $30
     add  hl, de
     ld   e, l
     ld   d, h
+
+    ; [de++] = [wActiveEntityPosY]
     ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
+
+    ; [de++] = [$FFED] + [wActiveEntityPosX] - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
     ldh  a, [$FFED]
@@ -7313,6 +7325,8 @@ label_3BC0::
     sub  a, c
     ld   [de], a
     inc  de
+
+    ; hl = pop de + [hActiveEntityUnknownG] * 2
     ldh  a, [hActiveEntityUnknownG]
     ld   c, a
     ld   b, $00
@@ -7322,6 +7336,8 @@ label_3BC0::
     rl   b
     pop  hl
     add  hl, bc
+
+    ; [de] = [hl++] + [$FFF5]
     ldh  a, [$FFF5]
     ld   c, a
     ld   a, [hli]
@@ -7405,12 +7421,14 @@ label_3C63::
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   b, $00
-    ld   a, $15
+    ld   a, BANK(func_015_795D)
     ld   [MBC3SelectBank], a
-    call label_795D
+    call func_015_795D
 
 label_3C71::
-    call $7995
+    call func_015_7995
+
+    ; Reload saved bank and return
     jp   ReloadSavedBank
 
 label_3C77::
@@ -7602,15 +7620,15 @@ SkipDisabledEntityDuringRoomTransition::
     cp   $88
     jr   nc, .popTwiceAndReturn
 
-    ; and $C220[c] == 0…
-    ld   hl, $C220
+    ; and wEntitiesTransitionIntersectingXTable[c] == 0…
+    ld   hl, wEntitiesTransitionIntersectingXTable
     add  hl, bc
     ld   a, [hl]
     and  a
     jr   nz, .popTwiceAndReturn
 
-    ; and $C230[c] == 0…
-    ld   hl, $C230
+    ; and wEntitiesTransitionIntersectingYTable[c] == 0…
+    ld   hl, wEntitiesTransitionIntersectingYTable
     add  hl, bc
     ld   a, [hl]
     and  a

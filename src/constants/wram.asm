@@ -370,12 +370,16 @@ wEntityDPosY:: ds 1 ; C21D
 wEntityEPosY:: ds 1 ; C21E
 wEntityFPosY:: ds 1 ; C21F
 
-; Unlabeled entity attributes table
-wC220 equ $C220
+wEntitiesTransitionIntersectingXTable:: ; C220
+  ; Value attributed to entities during room transition
+  ; The purpose is not entirely clear yet.
+  ; If the value is != 0, the entity rendering is skipped.
   ds $10
 
-; Unlabeled entity attributes table
-wC230 equ $C230
+wEntitiesTransitionIntersectingYTable:: ; C230
+  ; Value attributed to entities during room transition
+  ; The purpose is not entirely clear yet.
+  ; If the value is != 0, the entity rendering is skipped.
   ds $10
 
 wEntitiesSpeedXTable:: ; C240
@@ -502,7 +506,12 @@ wEntitiesTypeTable:: ; C3A0
 wEntitiesUnknownTableG:: ; C3B0
   ; Entity custom state?
 
-ds $1B
+; Unlabeled
+wC3C0 equ $C3C0
+  ds 1
+
+; Unlabeled
+ds $1A
 
 wObjectAffectingBGPalette:: ; C3CB
   ; Type of the object affecting the background palette

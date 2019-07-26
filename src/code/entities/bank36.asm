@@ -14,7 +14,7 @@ label_036_4000:
     jr   c, jr_036_4011                           ; $4009: $38 $06
 
     ld   de, $490A                                ; $400B: $11 $0A $49
-    call label_3BC0                               ; $400E: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $400E: $CD $C0 $3B
 
 jr_036_4011:
     call func_036_6A40                            ; $4011: $CD $40 $6A
@@ -263,7 +263,7 @@ jr_036_4144:
 
 label_036_4178:
     ld   de, $48F2                                ; $4178: $11 $F2 $48
-    call label_3BC0                               ; $417B: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $417B: $CD $C0 $3B
     call func_036_6B5C                            ; $417E: $CD $5C $6B
     call func_036_6A46                            ; $4181: $CD $46 $6A
     ldh  a, [hActiveEntityWalking]                ; $4184: $F0 $F0
@@ -1303,7 +1303,7 @@ label_036_4791:
     ret  nz                                       ; $4795: $C0
 
     ld   de, $48FA                                ; $4796: $11 $FA $48
-    call label_3BC0                               ; $4799: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $4799: $CD $C0 $3B
     call func_036_6A40                            ; $479C: $CD $40 $6A
     ld   a, [wGameplayType]                       ; $479F: $FA $95 $DB
     cp   $0B                                      ; $47A2: $FE $0B
@@ -1578,7 +1578,7 @@ jr_036_4859:
     jr   nz, jr_036_4925                          ; $491C: $20 $07
 
     ld   de, $48E2                                ; $491E: $11 $E2 $48
-    call label_3BC0                               ; $4921: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $4921: $CD $C0 $3B
     ret                                           ; $4924: $C9
 
 jr_036_4925:
@@ -1608,7 +1608,7 @@ jr_036_492F:
     jp   c, ClearEntityTypeAndReturn              ; $494D: $DA $8D $3F
 
     ld   de, $48CE                                ; $4950: $11 $CE $48
-    call label_3BC0                               ; $4953: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $4953: $CD $C0 $3B
     call func_036_6A40                            ; $4956: $CD $40 $6A
     ldh  a, [hActiveEntityWalking]                ; $4959: $F0 $F0
     rst  $00                                      ; $495B: $C7
@@ -4334,7 +4334,7 @@ jr_036_5870:
     jr   z, jr_036_588C                           ; $5882: $28 $08
 
     ld   de, $5877                                ; $5884: $11 $77 $58
-    call label_3BC0                               ; $5887: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $5887: $CD $C0 $3B
     jr   jr_036_5892                              ; $588A: $18 $06
 
 jr_036_588C:
@@ -4756,7 +4756,7 @@ func_036_5AC8:
     ld   e, [hl]                                  ; $5AD5: $5E
     inc  hl                                       ; $5AD6: $23
     ld   d, [hl]                                  ; $5AD7: $56
-    call label_3BC0                               ; $5AD8: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $5AD8: $CD $C0 $3B
     ret                                           ; $5ADB: $C9
 
     ld   b, b                                     ; $5ADC: $40
@@ -4766,7 +4766,7 @@ func_036_5AC8:
 
 label_036_5AE4:
     ld   de, $5ADC                                ; $5AE4: $11 $DC $5A
-    call label_3BC0                               ; $5AE7: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $5AE7: $CD $C0 $3B
     call func_036_6A40                            ; $5AEA: $CD $40 $6A
     call label_C56                                ; $5AED: $CD $56 $0C
     call label_3B39                               ; $5AF0: $CD $39 $3B
@@ -4801,7 +4801,7 @@ label_036_5AE4:
 
 jr_036_5B1C:
     ld   de, $5AFC                                ; $5B1C: $11 $FC $5A
-    call label_3BC0                               ; $5B1F: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $5B1F: $CD $C0 $3B
     call func_036_6A40                            ; $5B22: $CD $40 $6A
     call label_C56                                ; $5B25: $CD $56 $0C
     call label_3B39                               ; $5B28: $CD $39 $3B
@@ -4868,7 +4868,7 @@ jr_036_5B73:
     jp   nz, label_036_5AE4                       ; $5B7B: $C2 $E4 $5A
 
     ld   de, $5B42                                ; $5B7E: $11 $42 $5B
-    call label_3BC0                               ; $5B81: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $5B81: $CD $C0 $3B
     call func_036_6A40                            ; $5B84: $CD $40 $6A
     call label_C56                                ; $5B87: $CD $56 $0C
     call label_3B39                               ; $5B8A: $CD $39 $3B
@@ -6332,7 +6332,7 @@ func_036_6382:
 
 func_036_63C2:
     ld   de, $6392                                ; $63C2: $11 $92 $63
-    call label_3BC0                               ; $63C5: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $63C5: $CD $C0 $3B
     ret                                           ; $63C8: $C9
 
     call func_036_6629                            ; $63C9: $CD $29 $66
@@ -8378,7 +8378,7 @@ jr_036_6E3F:
     and  $03                                      ; $6E4C: $E6 $03
     call label_3B0C                               ; $6E4E: $CD $0C $3B
     ld   de, $6DA7                                ; $6E51: $11 $A7 $6D
-    call label_3BC0                               ; $6E54: $CD $C0 $3B
+    call RenderAnimatedActiveEntity                               ; $6E54: $CD $C0 $3B
 
 jr_036_6E57:
     ld   hl, $C3D0                                ; $6E57: $21 $D0 $C3

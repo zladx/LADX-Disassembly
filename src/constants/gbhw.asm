@@ -109,7 +109,7 @@ rHDMA5      EQU $ff55 ; CGB Mode Only - New DMA Length/Mode/Start
 rRP         EQU $ff56 ; CGB Mode Only - Infrared Communications Port
 rBCPS       EQU $ff68 ; CGB Mode Only - Background Palette Index
 rBGPD       EQU $ff69 ; CGB Mode Only - Background Palette Data
-rOBPI       EQU $ff6a ; CGB Mode Only - Sprite Palette Index
+rOCPS       EQU $ff6a ; CGB Mode Only - Sprite Palette Index
 rOBPD       EQU $ff6b ; CGB Mode Only - Sprite Palette Data
 rUNKN1      EQU $ff6c ; (FEh) Bit 0 (Read/Write) - CGB Mode Only
 rSVBK       EQU $ff70 ; CGB Mode Only - WRAM Bank
@@ -117,7 +117,7 @@ rUNKN2      EQU $ff72 ; (00h) - Bit 0-7 (Read/Write)
 rUNKN3      EQU $ff73 ; (00h) - Bit 0-7 (Read/Write)
 rUNKN4      EQU $ff74 ; (00h) - Bit 0-7 (Read/Write) - CGB Mode Only
 rUNKN5      EQU $ff75 ; (8Fh) - Bit 4-6 (Read/Write)
-rUNKN6      EQU $ff76 ; (00h) - Always 00h (Read Only)
+rPCM12      EQU $ff76 ; (00h) - Always 00h (Read Only)
 rUNKN7      EQU $ff77 ; (00h) - Always 00h (Read Only)
 rIE         EQU $ffff ; Interrupt Enable (R/W)
 

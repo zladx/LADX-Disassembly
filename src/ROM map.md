@@ -5,11 +5,11 @@
 00 Home (main code)
 01 Main code
 02 Code, minimaps
-03 Code and data
-04 Ennemies code?
-05 Code and data
-06 Physics and IA
-07 n/a
+03 Entities code
+04 Entities code
+05 Entities code
+06 Entities code
+07 Entities code
 08 Indoor map data
 09 Overworld map pointers, Overworld map data (rooms 0-7F), text
 0A Room pointers data (L1-6)
@@ -26,8 +26,8 @@
 15 Code
 16 Code, text, overworld sprite data
 17 Credits code and text
-18 Code and data
-19 Code (Link motions)
+18 Entities code
+19 Entities code
 1A Code, Overworld map data (rooms 80-FF), Overworld palette (0x6476)
 1B Audio code and Music
 1C Map data?
@@ -56,7 +56,7 @@
 33 Graphics: ending (CGB variant)
 34 Graphics: printer UI
 35 Graphics: Color dungeon
-36 Code
+36 Entities code
 37 Code
 38 Graphics: large font, misc
 39 Graphics: photo elements

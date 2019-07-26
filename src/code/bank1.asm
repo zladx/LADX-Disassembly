@@ -2176,7 +2176,7 @@ label_5C72::
 
 label_5C7B::
     ld   [$C1B0], a
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
     ld   a, $00
     ld   [$C3C0], a
     ld   a, $08
@@ -2234,7 +2234,7 @@ label_5CBD::
     dec  a
     cp   $80
     jr   nc, label_5D13
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
     ld   de, $C030
     ldh  a, [wActiveEntityPosY]
     ld   [de], a
@@ -2242,7 +2242,7 @@ label_5CBD::
     ldh  a, [wActiveEntityPosX]
     ld   [de], a
     inc  de
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     ld   c, a
     ld   b, $00
     sla  c
@@ -2579,83 +2579,111 @@ SynchronizeDungeonsItemFlags::
     pop  bc
     ret
 
-label_5E97::
-    and  b
-    ld   h, b
-    nop
-    nop
-    nop
+EntityPosXOffsetTable::
+.right   db $A0
+.left    db $60
+.top     db $00
+.bottom  db $00
+.default db $00
 
-label_5E9C::
-    nop
-    rst  $38
-    nop
-    nop
-    nop
+EntityPosXSignTable::
+.right   db $00
+.left    db $FF
+.top     db $00
+.bottom  db $00
+.default db $00
 
-label_5EA1::
-    nop
-    nop
-    add  a, b
-    add  a, b
-    nop
+EntityPosYOffsetTable::
+.right   db $00
+.left    db $00
+.top     db $80
+.bottom  db $80
+.default db $00
 
-label_5EA6::
-    nop
-    nop
-    rst  $38
-    nop
-    nop
-    ld   hl, $C460
+EntityPosYSignTable::
+.right   db $00
+.left    db $00
+.top     db $FF
+.bottom  db $00
+.default db $00
+
+; Configure the position a newly created entity position before a room transition.
+;
+; Input:
+;   de:  entity index
+PrepareEntityPositionForRoomTransition::
+    ; Set the entity load order
+    ld   hl, wEntitiesLoadOrderTable
     add  hl, de
-    ldh  a, [$FFE4]
+    ldh  a, [hScratchI]
     ld   [hl], a
+
+    ; Increment the load order
     inc  a
-    ldh  [$FFE4], a
+    ldh  [hScratchI], a
+
     push bc
+    ; bc = wRoomTransitionDirection
     ld   a, [wRoomTransitionDirection]
     ld   c, a
     ld   b, $00
-    ld   hl, label_5E97
+
+    ; hScratchA = EntityPosXOffsetTable[wRoomTransitionDirection]
+    ld   hl, EntityPosXOffsetTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchA], a
-    ld   hl, label_5E9C
+
+    ; hScratchB = EntityPosXSignTable[wRoomTransitionDirection]
+    ld   hl, EntityPosXSignTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchB], a
-    ld   hl, label_5EA1
+
+    ; hScratchC = EntityPosYOffsetTable[wRoomTransitionDirection]
+    ld   hl, EntityPosYOffsetTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchC], a
-    ld   hl, label_5EA6
+
+    ; hScratchD = EntityPosYSignTable[wRoomTransitionDirection]
+    ld   hl, EntityPosYSignTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchD], a
+
+    ; [wEntitiesPosXTable + de] += [hScratchA]
     ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [hScratchA]
     add  a, [hl]
     ld   [hl], a
+
+    ; [wEntitiesPosXSignTable + de] += [hScratchB] + carry
     rr   c
-    ld   hl, $C220
+    ld   hl, wEntitiesPosXSignTable
     add  hl, de
     ldh  a, [hScratchB]
     rl   c
     adc  a, [hl]
     ld   [hl], a
+
+    ; [wEntitiesPosYTable + de] += [hScratchC]
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ldh  a, [hScratchC]
     add  a, [hl]
     ld   [hl], a
+
+    ; [wEntitiesPosYSignTable + de] += [hScratchD] + carry
     rr   c
-    ld   hl, $C230
+    ld   hl, wEntitiesPosYSignTable
     add  hl, de
     ldh  a, [hScratchD]
     rl   c
     adc  a, [hl]
     ld   [hl], a
+
     pop  bc
     ret
 
@@ -3476,7 +3504,7 @@ label_6A7C::
     cp   MAP_EAGLES_TOWER
     ret  nz
     xor  a
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
     ldh  [$FFED], a
     ldh  [$FFF5], a
     ld   a, $38

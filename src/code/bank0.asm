@@ -2319,7 +2319,7 @@ label_1629::
 
 label_1637::
     ld   a, c
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
     call label_2178
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
@@ -2350,7 +2350,7 @@ label_1653::
     ld   [hl], a
     ld   hl, $C3B0
     add  hl, de
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     ld   [hl], a
     ld   c, e
     ld   b, d
@@ -6678,8 +6678,11 @@ LoadRoomEntities::
 
     ld   a, $16
     ld   [MBC3SelectBank], a
+
+    ; Reset the entities load order
     xor  a
-    ldh  [$FFE4], a
+    ldh  [hScratchI], a
+
     ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
@@ -6811,12 +6814,8 @@ label_38B4::
     ld   [hl], a
 
 label_38D4::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $6524
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call $5EAB
+    callsb func_003_6524
+    callsb PrepareEntityPositionForRoomTransition
     ld   a, $16
     ld   [MBC3SelectBank], a
     ret
@@ -7043,9 +7042,9 @@ LoadEntity::
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
 
-    ld   a, $19
+    ld   a, BANK(UpdateEntityPositionForRoomTransition)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
 
@@ -7054,23 +7053,21 @@ LoadEntity::
     jr   nz, .raftManEnd
     ldh  a, [$FFB2]
     and  a
-    jr   nz, label_3A46
+    jr   nz, .entityLifted
 .raftManEnd
 
     ldh  a, [hActiveEntityState]
     cp   ENTITY_STATE_LIFTED
-    jr   nz, label_3A4E
-
-label_3A46::
-    call $7964
+    jr   nz, .notLifted
+.entityLifted
+    call UpdateEntityPositionForRoomTransition
     call label_3D8A
-    jr   label_3A54
-
-label_3A4E::
+    jr   .liftedEnd
+.notLifted
     call label_3D8A
-    call $7964
+    call UpdateEntityPositionForRoomTransition
+.liftedEnd
 
-label_3A54::
     ld   a, $14
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
@@ -7283,24 +7280,37 @@ label_3BB5::
     call $7E45
     jp   ReloadSavedBank
 
-; Render active NPC
-label_3BC0::
-    ldh  a, [$FFF1]
+; Render an animated active entity to wOAMBuffer
+; The wOAMBuffer attributes are updated.
+;
+; This is not called for unanimated entities (like butterflies,
+; which are animated only by the actual tile changing.)
+RenderAnimatedActiveEntity::
+    ; Increment hActiveEntityUnknownG
+    ldh  a, [hActiveEntityUnknownG]
     inc  a
+    ; If hActiveEntityUnknownG = 0, return
     ret  z
 
-    call AdjustEntityPositionDuringRoomTransition
+    call SkipDisabledEntityDuringRoomTransition
+
     push de
+
+    ; de = wOAMBuffer + $30 + [$C3C0]
     ld   a, [$C3C0]
     ld   e, a
     ld   d, b
-    ld   hl, $C030
+    ld   hl, wOAMBuffer + $30
     add  hl, de
     ld   e, l
     ld   d, h
+
+    ; [de++] = [wActiveEntityPosY]
     ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
+
+    ; [de++] = [$FFED] + [wActiveEntityPosX] - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
     ldh  a, [$FFED]
@@ -7312,7 +7322,9 @@ label_3BC0::
     sub  a, c
     ld   [de], a
     inc  de
-    ldh  a, [$FFF1]
+
+    ; hl = pop de + [hActiveEntityUnknownG] * 2
+    ldh  a, [hActiveEntityUnknownG]
     ld   c, a
     ld   b, $00
     sla  c
@@ -7321,6 +7333,8 @@ label_3BC0::
     rl   b
     pop  hl
     add  hl, bc
+
+    ; [de] = [hl++] + [$FFF5]
     ldh  a, [$FFF5]
     ld   c, a
     ld   a, [hli]
@@ -7404,19 +7418,21 @@ label_3C63::
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   b, $00
-    ld   a, $15
+    ld   a, BANK(func_015_795D)
     ld   [MBC3SelectBank], a
-    call label_795D
+    call func_015_795D
 
 label_3C71::
-    call $7995
+    call func_015_7995
+
+    ; Reload saved bank and return
     jp   ReloadSavedBank
 
 label_3C77::
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     inc  a
     ret  z
-    call AdjustEntityPositionDuringRoomTransition
+    call SkipDisabledEntityDuringRoomTransition
     push de
     ld   a, [$C3C0]
     ld   l, a
@@ -7445,7 +7461,7 @@ label_3C9C::
     sub  a, h
     ld   [de], a
     inc  de
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     ld   c, a
     ld   b, $00
     sla  c
@@ -7491,7 +7507,7 @@ label_3CE0::
     jr   label_3CF6
 
 label_3CE6::
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     inc  a
     jr   z, label_3D52
     push hl
@@ -7509,7 +7525,7 @@ label_3CF6::
     ldh  [hScratchA], a
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
-    call AdjustEntityPositionDuringRoomTransition
+    call SkipDisabledEntityDuringRoomTransition
     ldh  a, [hScratchA]
     ld   c, a
 
@@ -7576,49 +7592,54 @@ label_3D52::
     ld   c, a
     ret
 
-; Adjusts NPC position during room transition
+; If the active entity rendering is disabled during
+; the room transition, return to the parent of the caller.
+; Otherwise, return to caller normally.
+;
 ; Inputs:
-;  c:   ???
-; Returns:
-;  a:   ???
-AdjustEntityPositionDuringRoomTransition::
-    ; If a room transition is active…
+;  bc:   active entity index?
+SkipDisabledEntityDuringRoomTransition::
+    ; If no room transition is active, return.
     push hl
     ld   a, [wRoomTransitionState]
     and  a
-    jr   z, .popAndReturn
+    jr   z, .return
 
-    ; and wActiveEntityPosX - 1 is still on screen…
+    ; If wActiveEntityPosX - 1 is outside of screen, skip
     ldh  a, [wActiveEntityPosX]
     dec  a
     cp   $C0
-    jr   nc, .popTwiceAndReturn
+    jr   nc, .skip
 
-    ; and wActiveEntityPosY - 1 is still on screen…
+    ; If wActiveEntityPosY - 1 is outside of the screen, skip
     ldh  a, [wActiveEntityPosY]
     dec  a
     cp   $88
-    jr   nc, .popTwiceAndReturn
+    jr   nc, .skip
 
-    ; and $C220[c] == 0…
-    ld   hl, $C220
+    ; If wEntitiesPosXSignTable[c] != 0, skip
+    ld   hl, wEntitiesPosXSignTable
     add  hl, bc
     ld   a, [hl]
     and  a
-    jr   nz, .popTwiceAndReturn
+    jr   nz, .skip
 
-    ; and (a = $C230[c]) == 0…
-    ld   hl, $C230
+    ; If wEntitiesPosYSignTable[c] != 0, skip
+    ld   hl, wEntitiesPosYSignTable
     add  hl, bc
     ld   a, [hl]
     and  a
-    ; return a
-    jr   z, .popAndReturn
 
-.popTwiceAndReturn
+    ; Otherwise, don't skip and simply return to caller.
+    jr   z, .return
+
+.skip
+    ; Pop the caller return address.
+    ; The next value to be popped will be the parent caller
+    ; address, thus returning to the parent of the parent early.
     pop  af
 
-.popAndReturn
+.return
     pop  hl
     ret
 

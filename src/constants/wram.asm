@@ -370,12 +370,16 @@ wEntityDPosY:: ds 1 ; C21D
 wEntityEPosY:: ds 1 ; C21E
 wEntityFPosY:: ds 1 ; C21F
 
-; Unlabeled entity attributes table
-wC220 equ $C220
+wEntitiesPosXSignTable:: ; C220
+  ; Controls the sign of the X position
+  ; 00:  position is positive
+  ; FF:  position is negative
   ds $10
 
-; Unlabeled entity attributes table
-wC230 equ $C230
+wEntitiesPosYSignTable:: ; C230
+  ; Controls the sign of the Y position
+  ; 00:  position is positive
+  ; FF:  position is negative
   ds $10
 
 wEntitiesSpeedXTable:: ; C240
@@ -502,7 +506,12 @@ wEntitiesTypeTable:: ; C3A0
 wEntitiesUnknownTableG:: ; C3B0
   ; Entity custom state?
 
-ds $1B
+; Unlabeled
+wC3C0 equ $C3C0
+  ds 1
+
+; Unlabeled
+ds $1A
 
 wObjectAffectingBGPalette:: ; C3CB
   ; Type of the object affecting the background palette
@@ -523,8 +532,11 @@ wDroppedItemsCountdown:: ; C458
   ; Number of frame before a dropped item disappears
   ds 8
 
+wEntitiesLoadOrderTable:: ; C460
+  ds $10
+
 ; Unlabeled
-ds $A0
+ds $90
 
 wAlternateBackgroundEnabled:: ; C500
   ; If enabled, alternate between two Background position every frame.

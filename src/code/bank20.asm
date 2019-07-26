@@ -12,7 +12,7 @@ endm
 ; IE - db $DC, $59, $03 is for heart container. When loaded, code will jump to bank $03 - Pointer $59DC (LoadHeartContainer)
 EntityPointersTable::
 ._00 entity_pointer ExplosionEntityHandler
-._01 db $61, $44, $19 ; entity_pointer BoomerangEntityHandler
+._01 entity_pointer BoomerangEntityHandler
 ._02 entity_pointer BombEntityHandler
 ._03 db $E3, $7B, $18 ; entity_pointer Entity03Handler
 ._04 entity_pointer FlameEntityHandler

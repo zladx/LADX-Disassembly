@@ -19,21 +19,20 @@ include "code/bank1.asm"
 section "bank2",romx[$4000],bank[$02]
 include "code/bank2.asm"
 
-; Entities
 section "bank3",romx[$4000],bank[$03]
-include "code/bank3.asm"
+include "code/entities/bank3.asm"
 
 section "bank4",romx[$4000],bank[$04]
-include "code/bank4.asm"
+include "code/entities/bank4.asm"
 
 section "bank5",romx[$4000],bank[$05]
-include "code/bank5.asm"
+include "code/entities/bank5.asm"
 
 section "bank6",romx[$4000],bank[$06]
-include "code/bank6.asm"
+include "code/entities/bank6.asm"
 
 section "bank7",romx[$4000],bank[$07]
-include "code/bank7.asm"
+include "code/entities/bank7.asm"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]
@@ -123,16 +122,16 @@ include "code/bank14.asm"
 include "text/dialog.asm"
 
 section "bank15",romx[$4000],bank[$15]
-include "code/bank15.asm"
+include "code/entities/bank15.asm"
 
 ; Bank $16: contains sprite data for overworld
 ; Starts on byte $5186, ends on byte $565D
 
 section "bank18",romx[$4000],bank[$18]
-include "code/bank18.asm"
+include "code/entities/bank18.asm"
 
 section "bank19",romx[$4000],bank[$19]
-include "code/bank19.asm"
+include "code/entities/bank19.asm"
 
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
@@ -241,7 +240,7 @@ ColorDungeonTiles::
 incbin "gfx/world/color_dungeon.2bpp"
 
 section "bank36",romx[$4000],bank[$36]
-include "code/bank36.asm"
+include "code/entities/bank36.asm"
 
 section "bank38",romx[$4000],bank[$38]
 incbin "gfx/cgb_misc.2bpp"

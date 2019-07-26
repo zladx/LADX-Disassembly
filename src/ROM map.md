@@ -5,11 +5,11 @@
 00 Home (main code)
 01 Main code
 02 Code, minimaps
-03 Code and data
-04 Ennemies code?
-05 Code and data
-06 Physics and IA
-07 n/a
+03 Entities code
+04 Entities code
+05 Entities code
+06 Entities code
+07 Entities code
 08 Indoor map data
 09 Overworld map pointers, Overworld map data (rooms 0-7F), text
 0A Room pointers data (L1-6)

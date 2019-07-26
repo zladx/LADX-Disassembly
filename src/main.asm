@@ -19,6 +19,7 @@ include "code/bank1.asm"
 section "bank2",romx[$4000],bank[$02]
 include "code/bank2.asm"
 
+; Entities
 section "bank3",romx[$4000],bank[$03]
 include "code/bank3.asm"
 
@@ -34,6 +35,7 @@ include "code/bank6.asm"
 section "bank7",romx[$4000],bank[$07]
 include "code/bank7.asm"
 
+; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]
 OverworldRoomPointers::
 include "data/maps/overworld.asm"
@@ -119,6 +121,9 @@ include "data/maps/layouts.asm"
 include "data/chests/dungeons.asm"
 include "code/bank14.asm"
 include "text/dialog.asm"
+
+section "bank15",romx[$4000],bank[$15]
+include "code/bank15.asm"
 
 ; Bank $16: contains sprite data for overworld
 ; Starts on byte $5186, ends on byte $565D

@@ -5536,10 +5536,10 @@ jr_007_6019:
     ld   hl, $C3E0                                ; $601B: $21 $E0 $C3
     add  hl, bc                                   ; $601E: $09
     ld   [hl], a                                  ; $601F: $77
-    ld   hl, wEntitiesTransitionIntersectingXTable                                ; $6020: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable                                ; $6020: $21 $20 $C2
     add  hl, bc                                   ; $6023: $09
     ld   [hl], b                                  ; $6024: $70
-    ld   hl, wEntitiesTransitionIntersectingYTable                                ; $6025: $21 $30 $C2
+    ld   hl, wEntitiesPosYSignTable                                ; $6025: $21 $30 $C2
     add  hl, bc                                   ; $6028: $09
     ld   [hl], b                                  ; $6029: $70
 

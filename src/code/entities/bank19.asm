@@ -4390,10 +4390,10 @@ jr_019_59B7:
     ld   hl, $C3E0                                ; $59E5: $21 $E0 $C3
     add  hl, bc                                   ; $59E8: $09
     ld   [hl], a                                  ; $59E9: $77
-    ld   hl, wEntitiesTransitionIntersectingXTable                                ; $59EA: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable                                ; $59EA: $21 $20 $C2
     add  hl, bc                                   ; $59ED: $09
     ld   [hl], b                                  ; $59EE: $70
-    ld   hl, wEntitiesTransitionIntersectingYTable                                ; $59EF: $21 $30 $C2
+    ld   hl, wEntitiesPosYSignTable                                ; $59EF: $21 $30 $C2
     add  hl, bc                                   ; $59F2: $09
     ld   [hl], b                                  ; $59F3: $70
     ld   de, $59BC                                ; $59F4: $11 $BC $59
@@ -5237,10 +5237,10 @@ label_019_5E09:
     ld   hl, $C3E0                                ; $5E22: $21 $E0 $C3
     add  hl, bc                                   ; $5E25: $09
     ld   [hl], a                                  ; $5E26: $77
-    ld   hl, wEntitiesTransitionIntersectingXTable                                ; $5E27: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable                                ; $5E27: $21 $20 $C2
     add  hl, bc                                   ; $5E2A: $09
     ld   [hl], b                                  ; $5E2B: $70
-    ld   hl, wEntitiesTransitionIntersectingYTable                                ; $5E2C: $21 $30 $C2
+    ld   hl, wEntitiesPosYSignTable                                ; $5E2C: $21 $30 $C2
     add  hl, bc                                   ; $5E2F: $09
     ld   [hl], b                                  ; $5E30: $70
     ldh  a, [hFrameCounter]                       ; $5E31: $F0 $E7
@@ -10235,7 +10235,7 @@ jr_019_7985:
     add  [hl]                                     ; $7994: $86
     rl   d                                        ; $7995: $CB $12
     ld   [hl], a                                  ; $7997: $77
-    ld   hl, wEntitiesTransitionIntersectingXTable                                ; $7998: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable                                ; $7998: $21 $20 $C2
     add  hl, bc                                   ; $799B: $09
     ldh  a, [hScratchB]                           ; $799C: $F0 $D8
     rr   d                                        ; $799E: $CB $1A
@@ -10247,7 +10247,7 @@ jr_019_7985:
     add  [hl]                                     ; $79A8: $86
     rl   d                                        ; $79A9: $CB $12
     ld   [hl], a                                  ; $79AB: $77
-    ld   hl, wEntitiesTransitionIntersectingYTable                                ; $79AC: $21 $30 $C2
+    ld   hl, wEntitiesPosYSignTable                                ; $79AC: $21 $30 $C2
     add  hl, bc                                   ; $79AF: $09
     ldh  a, [hScratchD]                           ; $79B0: $F0 $DA
     rr   d                                        ; $79B2: $CB $1A

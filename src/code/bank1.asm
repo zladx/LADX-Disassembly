@@ -2586,7 +2586,7 @@ EntityPosXOffsetTable::
 .bottom  db $00
 .default db $00
 
-data_001_5E9C::
+EntityPosXSignTable::
 .right   db $00
 .left    db $FF
 .top     db $00
@@ -2600,7 +2600,7 @@ EntityPosYOffsetTable::
 .bottom  db $80
 .default db $00
 
-data_001_5EA6::
+EntityPosYSignTable::
 .right   db $00
 .left    db $00
 .top     db $FF
@@ -2608,9 +2608,6 @@ data_001_5EA6::
 .default db $00
 
 ; Configure the position a newly created entity position before a room transition.
-; - Sets the initial position offset.
-; - In case of TOP or LEFT transitions, mark the entity as initially hidden.
-;   (UpdateEntityPositionForRoomTransition will make it visible when it reaches the viewport)
 ;
 ; Input:
 ;   de:  entity index
@@ -2637,8 +2634,8 @@ PrepareEntityPositionForRoomTransition::
     ld   a, [hl]
     ldh  [hScratchA], a
 
-    ; hScratchB = data_001_5E9C[wRoomTransitionDirection]
-    ld   hl, data_001_5E9C
+    ; hScratchB = EntityPosXSignTable[wRoomTransitionDirection]
+    ld   hl, EntityPosXSignTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchB], a
@@ -2649,8 +2646,8 @@ PrepareEntityPositionForRoomTransition::
     ld   a, [hl]
     ldh  [hScratchC], a
 
-    ; hScratchD = data_001_5EA6[wRoomTransitionDirection]
-    ld   hl, data_001_5EA6
+    ; hScratchD = EntityPosYSignTable[wRoomTransitionDirection]
+    ld   hl, EntityPosYSignTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchD], a
@@ -2662,9 +2659,9 @@ PrepareEntityPositionForRoomTransition::
     add  a, [hl]
     ld   [hl], a
 
-    ; [wEntitiesTransitionIntersectingXTable + de] += [hScratchB]
+    ; [wEntitiesPosXSignTable + de] += [hScratchB] + carry
     rr   c
-    ld   hl, wEntitiesTransitionIntersectingXTable
+    ld   hl, wEntitiesPosXSignTable
     add  hl, de
     ldh  a, [hScratchB]
     rl   c
@@ -2678,9 +2675,9 @@ PrepareEntityPositionForRoomTransition::
     add  a, [hl]
     ld   [hl], a
 
-    ; [wEntitiesTransitionIntersectingYTable + de] += [hScratchD] + carry
+    ; [wEntitiesPosYSignTable + de] += [hScratchD] + carry
     rr   c
-    ld   hl, wEntitiesTransitionIntersectingYTable
+    ld   hl, wEntitiesPosYSignTable
     add  hl, de
     ldh  a, [hScratchD]
     rl   c

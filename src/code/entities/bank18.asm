@@ -4716,10 +4716,10 @@ label_018_5C6A:
     ld   hl, $C3E0                                ; $5C72: $21 $E0 $C3
     add  hl, bc                                   ; $5C75: $09
     ld   [hl], a                                  ; $5C76: $77
-    ld   hl, wEntitiesTransitionIntersectingXTable                                ; $5C77: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable                                ; $5C77: $21 $20 $C2
     add  hl, bc                                   ; $5C7A: $09
     ld   [hl], b                                  ; $5C7B: $70
-    ld   hl, wEntitiesTransitionIntersectingYTable                                ; $5C7C: $21 $30 $C2
+    ld   hl, wEntitiesPosYSignTable                                ; $5C7C: $21 $30 $C2
     add  hl, bc                                   ; $5C7F: $09
     ld   [hl], b                                  ; $5C80: $70
     ld   hl, $C380                                ; $5C81: $21 $80 $C3

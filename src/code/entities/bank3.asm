@@ -533,7 +533,7 @@ jr_003_4A4D:
 
 jr_003_4A4F:
     call func_003_4995                            ; $4A4F: $CD $95 $49
-    ld   de, wEntitiesTransitionIntersectingXTable                                ; $4A52: $11 $20 $C2
+    ld   de, wEntitiesPosXSignTable                                ; $4A52: $11 $20 $C2
     ld   hl, wEntity0PosX                         ; $4A55: $21 $00 $C2
     jp   label_003_4F92                           ; $4A58: $C3 $92 $4F
 
@@ -1415,10 +1415,10 @@ jr_003_4F67:
 
 func_003_4F83::
 jr_003_4F83:
-    ld   de, wEntitiesTransitionIntersectingXTable                                ; $4F83: $11 $20 $C2
+    ld   de, wEntitiesPosXSignTable                                ; $4F83: $11 $20 $C2
     ld   hl, wEntity0PosX                         ; $4F86: $21 $00 $C2
     call func_003_4F92                            ; $4F89: $CD $92 $4F
-    ld   de, wEntitiesTransitionIntersectingYTable                                ; $4F8C: $11 $30 $C2
+    ld   de, wEntitiesPosYSignTable                                ; $4F8C: $11 $30 $C2
     ld   hl, wEntity0PosY                         ; $4F8F: $21 $10 $C2
 
 func_003_4F92::
@@ -1438,7 +1438,7 @@ jr_003_4F92:
     ld   [hl], a                                  ; $4F9F: $77
     ret                                           ; $4FA0: $C9
 
-    ld   de, wEntitiesTransitionIntersectingXTable                                ; $4FA1: $11 $20 $C2
+    ld   de, wEntitiesPosXSignTable                                ; $4FA1: $11 $20 $C2
     ld   hl, wEntity0PosX                         ; $4FA4: $21 $00 $C2
     jr   jr_003_4F92                              ; $4FA7: $18 $E9
 
@@ -5204,16 +5204,16 @@ jr_003_64E0:
     ld   hl, $C410                                ; $6507: $21 $10 $C4
     add  hl, de                                   ; $650A: $19
     ld   [hl], $01                                ; $650B: $36 $01
-    ld   hl, wEntitiesTransitionIntersectingXTable                                ; $650D: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable                                ; $650D: $21 $20 $C2
     add  hl, bc                                   ; $6510: $09
     ld   a, [hl]                                  ; $6511: $7E
-    ld   hl, wEntitiesTransitionIntersectingXTable                                ; $6512: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable                                ; $6512: $21 $20 $C2
     add  hl, de                                   ; $6515: $19
     ld   [hl], a                                  ; $6516: $77
-    ld   hl, wEntitiesTransitionIntersectingYTable                                ; $6517: $21 $30 $C2
+    ld   hl, wEntitiesPosYSignTable                                ; $6517: $21 $30 $C2
     add  hl, bc                                   ; $651A: $09
     ld   a, [hl]                                  ; $651B: $7E
-    ld   hl, wEntitiesTransitionIntersectingYTable                                ; $651C: $21 $30 $C2
+    ld   hl, wEntitiesPosYSignTable                                ; $651C: $21 $30 $C2
     add  hl, de                                   ; $651F: $19
     ld   [hl], a                                  ; $6520: $77
     scf                                           ; $6521: $37

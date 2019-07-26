@@ -69,10 +69,10 @@ Data_005_4000::
     ld   hl, $C3E0                                ; $4045: $21 $E0 $C3
     add  hl, bc                                   ; $4048: $09
     ld   [hl], a                                  ; $4049: $77
-    ld   hl, wEntitiesTransitionIntersectingXTable                                ; $404A: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable                                ; $404A: $21 $20 $C2
     add  hl, bc                                   ; $404D: $09
     ld   [hl], b                                  ; $404E: $70
-    ld   hl, wEntitiesTransitionIntersectingYTable                                ; $404F: $21 $30 $C2
+    ld   hl, wEntitiesPosYSignTable                                ; $404F: $21 $30 $C2
     add  hl, bc                                   ; $4052: $09
     ld   [hl], b                                  ; $4053: $70
 

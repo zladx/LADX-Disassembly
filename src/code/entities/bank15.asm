@@ -64,10 +64,10 @@ SECTION "ROM Bank $015", ROMX[$4000], BANK[$15]
     ld   hl, $C410                                ; $4061: $21 $10 $C4
     add  hl, bc                                   ; $4064: $09
     ld   [hl], b                                  ; $4065: $70
-    ld   hl, wEntitiesTransitionIntersectingXTable                                ; $4066: $21 $20 $C2
+    ld   hl, wEntitiesPosXSignTable                                ; $4066: $21 $20 $C2
     add  hl, bc                                   ; $4069: $09
     ld   [hl], b                                  ; $406A: $70
-    ld   hl, wEntitiesTransitionIntersectingYTable                                ; $406B: $21 $30 $C2
+    ld   hl, wEntitiesPosYSignTable                                ; $406B: $21 $30 $C2
     add  hl, bc                                   ; $406E: $09
     ld   [hl], b                                  ; $406F: $70
     ld   hl, $C470                                ; $4070: $21 $70 $C4

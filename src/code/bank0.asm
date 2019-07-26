@@ -7617,15 +7617,15 @@ SkipDisabledEntityDuringRoomTransition::
     cp   $88
     jr   nc, .skip
 
-    ; If wEntitiesTransitionIntersectingXTable[c] != 0, skip
-    ld   hl, wEntitiesTransitionIntersectingXTable
+    ; If wEntitiesPosXSignTable[c] != 0, skip
+    ld   hl, wEntitiesPosXSignTable
     add  hl, bc
     ld   a, [hl]
     and  a
     jr   nz, .skip
 
-    ; If wEntitiesTransitionIntersectingYTable[c] != 0, skip
-    ld   hl, wEntitiesTransitionIntersectingYTable
+    ; If wEntitiesPosYSignTable[c] != 0, skip
+    ld   hl, wEntitiesPosYSignTable
     add  hl, bc
     ld   a, [hl]
     and  a

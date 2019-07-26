@@ -370,16 +370,16 @@ wEntityDPosY:: ds 1 ; C21D
 wEntityEPosY:: ds 1 ; C21E
 wEntityFPosY:: ds 1 ; C21F
 
-wEntitiesTransitionIntersectingXTable:: ; C220
-  ; Value attributed to entities during room transition
-  ; The purpose is not entirely clear yet.
-  ; If the value is != 0, the entity rendering is skipped.
+wEntitiesPosXSignTable:: ; C220
+  ; Controls the sign of the X position
+  ; 00:  position is positive
+  ; FF:  position is negative
   ds $10
 
-wEntitiesTransitionIntersectingYTable:: ; C230
-  ; Value attributed to entities during room transition
-  ; The purpose is not entirely clear yet.
-  ; If the value is != 0, the entity rendering is skipped.
+wEntitiesPosYSignTable:: ; C230
+  ; Controls the sign of the Y position
+  ; 00:  position is positive
+  ; FF:  position is negative
   ds $10
 
 wEntitiesSpeedXTable:: ; C240

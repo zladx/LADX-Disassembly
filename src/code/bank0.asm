@@ -7289,7 +7289,8 @@ label_3BC0::
     inc  a
     ret  z
 
-    call AdjustEntityPositionDuringRoomTransition
+    call SkipDisabledEntityDuringRoomTransition
+
     push de
     ld   a, [$C3C0]
     ld   e, a
@@ -7416,7 +7417,7 @@ label_3C77::
     ldh  a, [hActiveEntityUnknownG]
     inc  a
     ret  z
-    call AdjustEntityPositionDuringRoomTransition
+    call SkipDisabledEntityDuringRoomTransition
     push de
     ld   a, [$C3C0]
     ld   l, a
@@ -7509,7 +7510,7 @@ label_3CF6::
     ldh  [hScratchA], a
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
-    call AdjustEntityPositionDuringRoomTransition
+    call SkipDisabledEntityDuringRoomTransition
     ldh  a, [hScratchA]
     ld   c, a
 
@@ -7576,12 +7577,13 @@ label_3D52::
     ld   c, a
     ret
 
-; Adjusts NPC position during room transition
+; If the active entity rendering is disabled during
+; the room transition, return to the parent of the caller.
+; Otherwise, return to caller normally.
+;
 ; Inputs:
-;  c:   ???
-; Returns:
-;  a:   ???
-AdjustEntityPositionDuringRoomTransition::
+;  c:   active entity index?
+SkipDisabledEntityDuringRoomTransition::
     ; If a room transition is active…
     push hl
     ld   a, [wRoomTransitionState]
@@ -7607,15 +7609,18 @@ AdjustEntityPositionDuringRoomTransition::
     and  a
     jr   nz, .popTwiceAndReturn
 
-    ; and (a = $C230[c]) == 0…
+    ; and $C230[c] == 0…
     ld   hl, $C230
     add  hl, bc
     ld   a, [hl]
     and  a
-    ; return a
+    ; return to caller
     jr   z, .popAndReturn
 
 .popTwiceAndReturn
+    ; Pop the caller return address.
+    ; The next value to be popped will be the parent caller
+    ; address, thus returning to the parent of the parent early.
     pop  af
 
 .popAndReturn

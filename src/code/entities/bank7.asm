@@ -10259,7 +10259,7 @@ jr_007_7A6C:
     inc  hl                                       ; $7AB4: $23
 
 func_007_7AB5:
-    call AdjustEntityPositionDuringRoomTransition ; $7AB5: $CD $57 $3D
+    call SkipDisabledEntityDuringRoomTransition ; $7AB5: $CD $57 $3D
     ldh  a, [hActiveEntityUnknownG]               ; $7AB8: $F0 $F1
     cp   $02                                      ; $7ABA: $FE $02
     jr   nc, jr_007_7AC1                          ; $7ABC: $30 $03

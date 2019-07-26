@@ -6903,7 +6903,7 @@ jr_018_691B:
     ldh  [hScratchA], a                           ; $6930: $E0 $D7
     ld   a, [wLinkWalkingFrameCount]              ; $6932: $FA $23 $C1
     ld   c, a                                     ; $6935: $4F
-    call AdjustEntityPositionDuringRoomTransition ; $6936: $CD $57 $3D
+    call SkipDisabledEntityDuringRoomTransition ; $6936: $CD $57 $3D
     ldh  a, [hScratchA]                           ; $6939: $F0 $D7
     ld   c, a                                     ; $693B: $4F
 

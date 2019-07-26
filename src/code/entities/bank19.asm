@@ -700,8 +700,12 @@ func_019_442C:
     rst  $38                                      ; $445E: $FF
     and  h                                        ; $445F: $A4
     inc  [hl]                                     ; $4460: $34
+
+BoomerangEntityHandler::
+    ; wProjectileCount = 1
     ld   a, $01                                   ; $4461: $3E $01
     ld   [wProjectileCount], a                    ; $4463: $EA $4D $C1
+
     ld   de, $4451                                ; $4466: $11 $51 $44
     call label_3BC0                               ; $4469: $CD $C0 $3B
     call func_019_7D3D                            ; $446C: $CD $3D $7D

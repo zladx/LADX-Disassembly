@@ -28,6 +28,9 @@ include "code/bank4.asm"
 section "bank5",romx[$4000],bank[$05]
 include "code/bank5.asm"
 
+section "bank6",romx[$4000],bank[$06]
+include "code/bank6.asm"
+
 section "bank7",romx[$4000],bank[$07]
 include "code/bank7.asm"
 

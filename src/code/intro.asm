@@ -1078,11 +1078,11 @@ RenderIntroEntities::
     ld   a, [hl]
     ldh  [wActiveEntityPosY], a
 
-    ; $FFF1 = wEntitiesUnknownTableG[c]
+    ; hActiveEntityUnknownG = wEntitiesUnknownTableG[c]
     ld   hl, wEntitiesUnknownTableG
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
 
     ; hActiveEntityWalking = wEntitiesWalkingTable[c]
     ld   hl, wEntitiesWalkingTable
@@ -1510,7 +1510,7 @@ label_77ED::
     rra
     rra
     and  $07
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
     xor  a
     ld   [$C340], a
     ld   de, label_77BD

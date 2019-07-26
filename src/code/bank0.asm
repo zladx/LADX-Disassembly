@@ -2319,7 +2319,7 @@ label_1629::
 
 label_1637::
     ld   a, c
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
     call label_2178
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
@@ -2350,7 +2350,7 @@ label_1653::
     ld   [hl], a
     ld   hl, $C3B0
     add  hl, de
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     ld   [hl], a
     ld   c, e
     ld   b, d
@@ -7043,7 +7043,7 @@ LoadEntity::
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
 
     ld   a, $19
     ld   [wCurrentBank], a
@@ -7285,7 +7285,7 @@ label_3BB5::
 
 ; Render active NPC
 label_3BC0::
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     inc  a
     ret  z
 
@@ -7312,7 +7312,7 @@ label_3BC0::
     sub  a, c
     ld   [de], a
     inc  de
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     ld   c, a
     ld   b, $00
     sla  c
@@ -7413,7 +7413,7 @@ label_3C71::
     jp   ReloadSavedBank
 
 label_3C77::
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     inc  a
     ret  z
     call AdjustEntityPositionDuringRoomTransition
@@ -7445,7 +7445,7 @@ label_3C9C::
     sub  a, h
     ld   [de], a
     inc  de
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     ld   c, a
     ld   b, $00
     sla  c
@@ -7491,7 +7491,7 @@ label_3CE0::
     jr   label_3CF6
 
 label_3CE6::
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     inc  a
     jr   z, label_3D52
     push hl

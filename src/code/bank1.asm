@@ -2176,7 +2176,7 @@ label_5C72::
 
 label_5C7B::
     ld   [$C1B0], a
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
     ld   a, $00
     ld   [$C3C0], a
     ld   a, $08
@@ -2234,7 +2234,7 @@ label_5CBD::
     dec  a
     cp   $80
     jr   nc, label_5D13
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
     ld   de, $C030
     ldh  a, [wActiveEntityPosY]
     ld   [de], a
@@ -2242,7 +2242,7 @@ label_5CBD::
     ldh  a, [wActiveEntityPosX]
     ld   [de], a
     inc  de
-    ldh  a, [$FFF1]
+    ldh  a, [hActiveEntityUnknownG]
     ld   c, a
     ld   b, $00
     sla  c
@@ -3476,7 +3476,7 @@ label_6A7C::
     cp   MAP_EAGLES_TOWER
     ret  nz
     xor  a
-    ldh  [$FFF1], a
+    ldh  [hActiveEntityUnknownG], a
     ldh  [$FFED], a
     ldh  [$FFF5], a
     ld   a, $38

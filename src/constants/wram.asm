@@ -532,8 +532,11 @@ wDroppedItemsCountdown:: ; C458
   ; Number of frame before a dropped item disappears
   ds 8
 
+wEntitiesLoadOrderTable:: ; C460
+  ds $10
+
 ; Unlabeled
-ds $A0
+ds $90
 
 wAlternateBackgroundEnabled:: ; C500
   ; If enabled, alternate between two Background position every frame.

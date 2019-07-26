@@ -2579,66 +2579,90 @@ SynchronizeDungeonsItemFlags::
     pop  bc
     ret
 
-label_5E97::
-    and  b
-    ld   h, b
-    nop
-    nop
-    nop
+EntityPosXOffsetTable::
+.right   db $A0
+.left    db $60
+.top     db $00
+.bottom  db $00
+.default db $00
 
-label_5E9C::
-    nop
-    rst  $38
-    nop
-    nop
-    nop
+data_001_5E9C::
+.right   db $00
+.left    db $FF
+.top     db $00
+.bottom  db $00
+.default db $00
 
-label_5EA1::
-    nop
-    nop
-    add  a, b
-    add  a, b
-    nop
+EntityPosYOffsetTable::
+.right   db $00
+.left    db $00
+.top     db $80
+.bottom  db $80
+.default db $00
 
-label_5EA6::
-    nop
-    nop
-    rst  $38
-    nop
-    nop
+data_001_5EA6::
+.right   db $00
+.left    db $00
+.top     db $FF
+.bottom  db $00
+.default db $00
 
-func_001_5EAB::
-    ld   hl, $C460
+; Configure the position a newly created entity position before a room transition.
+; - Sets the initial position offset.
+; - In case of TOP or LEFT transitions, mark the entity as initially hidden.
+;   (UpdateEntityPositionForRoomTransition will make it visible when it reaches the viewport)
+;
+; Input:
+;   de:  entity index
+PrepareEntityPositionForRoomTransition::
+    ; Set the entity load order
+    ld   hl, wEntitiesLoadOrderTable
     add  hl, de
-    ldh  a, [$FFE4]
+    ldh  a, [hScratchI]
     ld   [hl], a
+
+    ; Increment the load order
     inc  a
-    ldh  [$FFE4], a
+    ldh  [hScratchI], a
+
     push bc
+    ; bc = wRoomTransitionDirection
     ld   a, [wRoomTransitionDirection]
     ld   c, a
     ld   b, $00
-    ld   hl, label_5E97
+
+    ; hScratchA = EntityPosXOffsetTable[wRoomTransitionDirection]
+    ld   hl, EntityPosXOffsetTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchA], a
-    ld   hl, label_5E9C
+
+    ; hScratchB = data_001_5E9C[wRoomTransitionDirection]
+    ld   hl, data_001_5E9C
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchB], a
-    ld   hl, label_5EA1
+
+    ; hScratchC = EntityPosYOffsetTable[wRoomTransitionDirection]
+    ld   hl, EntityPosYOffsetTable
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchC], a
-    ld   hl, label_5EA6
+
+    ; hScratchD = data_001_5EA6[wRoomTransitionDirection]
+    ld   hl, data_001_5EA6
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratchD], a
+
+    ; [wEntitiesPosXTable + de] += [hScratchA]
     ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [hScratchA]
     add  a, [hl]
     ld   [hl], a
+
+    ; [wEntitiesTransitionIntersectingXTable + de] += [hScratchB]
     rr   c
     ld   hl, wEntitiesTransitionIntersectingXTable
     add  hl, de
@@ -2646,11 +2670,15 @@ func_001_5EAB::
     rl   c
     adc  a, [hl]
     ld   [hl], a
+
+    ; [wEntitiesPosYTable + de] += [hScratchC]
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ldh  a, [hScratchC]
     add  a, [hl]
     ld   [hl], a
+
+    ; [wEntitiesTransitionIntersectingYTable + de] += [hScratchD] + carry
     rr   c
     ld   hl, wEntitiesTransitionIntersectingYTable
     add  hl, de
@@ -2658,6 +2686,7 @@ func_001_5EAB::
     rl   c
     adc  a, [hl]
     ld   [hl], a
+
     pop  bc
     ret
 

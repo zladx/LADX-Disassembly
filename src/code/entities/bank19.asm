@@ -1,3 +1,4 @@
+
 ; Disassembly of "game.gbc"
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
@@ -10198,6 +10199,8 @@ jr_019_792F:
     jr   nc, @+$3E                                ; $7961: $30 $3C
 
     ld   c, b                                     ; $7963: $48
+
+UpdateEntityPositionForRoomTransition::
     ld   a, [wRoomTransitionState]                ; $7964: $FA $24 $C1
     cp   $04                                      ; $7967: $FE $04
     jr   nc, jr_019_796C                          ; $7969: $30 $01

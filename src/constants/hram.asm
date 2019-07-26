@@ -202,8 +202,17 @@ hScratchF          ; FFE1
 hBGMapOffsetLow::  ; FFE1
   ds 1
 
-; Unlabeled
-ds 4
+hScratchG:: ; FFE2
+  ds 1
+
+hScratchH:: ; FFE3
+  ds 1
+
+hScratchI:: ; FFE4
+  ds 1
+
+hScratchJ:: ; FFE5
+  ds 1
 
 hFreeWarpDataAddress ; FFE6
   ; Address of the first free warp data slot

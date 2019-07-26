@@ -6678,8 +6678,11 @@ LoadRoomEntities::
 
     ld   a, $16
     ld   [MBC3SelectBank], a
+
+    ; Reset the entities load order
     xor  a
-    ldh  [$FFE4], a
+    ldh  [hScratchI], a
+
     ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
@@ -6811,12 +6814,8 @@ label_38B4::
     ld   [hl], a
 
 label_38D4::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $6524
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call $5EAB
+    callsb func_003_6524
+    callsb PrepareEntityPositionForRoomTransition
     ld   a, $16
     ld   [MBC3SelectBank], a
     ret
@@ -7045,7 +7044,7 @@ LoadEntity::
     ld   a, [hl]
     ldh  [hActiveEntityUnknownG], a
 
-    ld   a, $19
+    ld   a, BANK(UpdateEntityPositionForRoomTransition)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
 
@@ -7054,23 +7053,21 @@ LoadEntity::
     jr   nz, .raftManEnd
     ldh  a, [$FFB2]
     and  a
-    jr   nz, label_3A46
+    jr   nz, .entityLifted
 .raftManEnd
 
     ldh  a, [hActiveEntityState]
     cp   ENTITY_STATE_LIFTED
-    jr   nz, label_3A4E
-
-label_3A46::
-    call $7964
+    jr   nz, .notLifted
+.entityLifted
+    call UpdateEntityPositionForRoomTransition
     call label_3D8A
-    jr   label_3A54
-
-label_3A4E::
+    jr   .liftedEnd
+.notLifted
     call label_3D8A
-    call $7964
+    call UpdateEntityPositionForRoomTransition
+.liftedEnd
 
-label_3A54::
     ld   a, $14
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
@@ -7600,48 +7597,49 @@ label_3D52::
 ; Otherwise, return to caller normally.
 ;
 ; Inputs:
-;  c:   active entity index?
+;  bc:   active entity index?
 SkipDisabledEntityDuringRoomTransition::
-    ; If a room transition is active…
+    ; If no room transition is active, return.
     push hl
     ld   a, [wRoomTransitionState]
     and  a
-    jr   z, .popAndReturn
+    jr   z, .return
 
-    ; and wActiveEntityPosX - 1 is still on screen…
+    ; If wActiveEntityPosX - 1 is outside of screen, skip
     ldh  a, [wActiveEntityPosX]
     dec  a
     cp   $C0
-    jr   nc, .popTwiceAndReturn
+    jr   nc, .skip
 
-    ; and wActiveEntityPosY - 1 is still on screen…
+    ; If wActiveEntityPosY - 1 is outside of the screen, skip
     ldh  a, [wActiveEntityPosY]
     dec  a
     cp   $88
-    jr   nc, .popTwiceAndReturn
+    jr   nc, .skip
 
-    ; and wEntitiesTransitionIntersectingXTable[c] == 0…
+    ; If wEntitiesTransitionIntersectingXTable[c] != 0, skip
     ld   hl, wEntitiesTransitionIntersectingXTable
     add  hl, bc
     ld   a, [hl]
     and  a
-    jr   nz, .popTwiceAndReturn
+    jr   nz, .skip
 
-    ; and wEntitiesTransitionIntersectingYTable[c] == 0…
+    ; If wEntitiesTransitionIntersectingYTable[c] != 0, skip
     ld   hl, wEntitiesTransitionIntersectingYTable
     add  hl, bc
     ld   a, [hl]
     and  a
-    ; return to caller
-    jr   z, .popAndReturn
 
-.popTwiceAndReturn
+    ; Otherwise, don't skip and simply return to caller.
+    jr   z, .return
+
+.skip
     ; Pop the caller return address.
     ; The next value to be popped will be the parent caller
     ; address, thus returning to the parent of the parent early.
     pop  af
 
-.popAndReturn
+.return
     pop  hl
     ret
 

@@ -179,7 +179,7 @@ ds $6
 wIsRunningWithPegasusBoots:: ; C14A
   ds 1
 
-wPegagusBootsChargeMeter:: ; C14B
+wPegasusBootsChargeMeter:: ; C14B
   ; Pegasus Boots charge meter
   ; 0:  not charged
   ; 1F: fully charged

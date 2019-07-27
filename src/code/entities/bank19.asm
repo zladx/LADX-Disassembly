@@ -369,7 +369,7 @@ jr_019_4226:
     ld   [wWarp0PositionTileIndex], a             ; $425F: $EA $16 $D4
     ld   a, $06                                   ; $4262: $3E $06
     ld   [wLinkMotionState], a                    ; $4264: $EA $1C $C1
-    call label_CAF                                ; $4267: $CD $AF $0C
+    call ResetSpinAttack                                ; $4267: $CD $AF $0C
     ld   [$C198], a                               ; $426A: $EA $98 $C1
     ld   a, $51                                   ; $426D: $3E $51
     ld   [$DBCB], a                               ; $426F: $EA $CB $DB
@@ -1225,7 +1225,7 @@ jr_019_476A:
     ldh  [hLinkAnimationState], a                 ; $477D: $E0 $9D
     ld   a, $02                                   ; $477F: $3E $02
     ldh  [$FFA1], a                               ; $4781: $E0 $A1
-    call label_CAF                                ; $4783: $CD $AF $0C
+    call ResetSpinAttack                                ; $4783: $CD $AF $0C
     ld   hl, wEntitiesUnknownTableB               ; $4786: $21 $B0 $C2
     add  hl, bc                                   ; $4789: $09
     ld   a, [hl]                                  ; $478A: $7E
@@ -3655,7 +3655,7 @@ jr_019_55A1:
     and  a                                        ; $55B9: $A7
     ret  z                                        ; $55BA: $C8
 
-    call label_CAF                                ; $55BB: $CD $AF $0C
+    call ResetSpinAttack                                ; $55BB: $CD $AF $0C
 
 jr_019_55BE:
     ldh  a, [hLinkPositionXIncrement]             ; $55BE: $F0 $9A
@@ -4326,7 +4326,7 @@ jr_019_598B:
     jp   label_019_7E61                           ; $5998: $C3 $61 $7E
 
 func_019_599B:
-    call label_CB6                                ; $599B: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $599B: $CD $B6 $0C
     ld   a, [$C146]                               ; $599E: $FA $46 $C1
     and  a                                        ; $59A1: $A7
     jr   nz, jr_019_59B7                          ; $59A2: $20 $13
@@ -8862,7 +8862,7 @@ jr_019_7215:
     jr   c, jr_019_7255                           ; $7245: $38 $0E
 
     call ClearLinkPositionIncrement               ; $7247: $CD $8E $17
-    call label_CAF                                ; $724A: $CD $AF $0C
+    call ResetSpinAttack                                ; $724A: $CD $AF $0C
     call IncrementEntityWalkingAttr               ; $724D: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $7250: $CD $05 $0C
     ld   [hl], $58                                ; $7253: $36 $58
@@ -10898,7 +10898,7 @@ label_019_7CA2:
 jr_019_7CC1:
     ld   a, [wIsRunningWithPegasusBoots]          ; $7CC1: $FA $4A $C1
     ld   e, a                                     ; $7CC4: $5F
-    call label_CB6                                ; $7CC5: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $7CC5: $CD $B6 $0C
     call ClearLinkPositionIncrement               ; $7CC8: $CD $8E $17
     ld   a, e                                     ; $7CCB: $7B
     scf                                           ; $7CCC: $37

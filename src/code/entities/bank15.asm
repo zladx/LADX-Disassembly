@@ -253,7 +253,7 @@ jr_015_416F:
     cp   $1C                                      ; $4180: $FE $1C
     jr   nc, jr_015_41C9                          ; $4182: $30 $45
 
-    call label_CB6                                ; $4184: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $4184: $CD $B6 $0C
     call ClearLinkPositionIncrement               ; $4187: $CD $8E $17
     call func_015_7C0A                            ; $418A: $CD $0A $7C
     ld   a, e                                     ; $418D: $7B
@@ -1162,7 +1162,7 @@ jr_015_469C:
     push bc                                       ; $46A7: $C5
     call $0BF0                                    ; $46A8: $CD $F0 $0B
     pop  bc                                       ; $46AB: $C1
-    call label_CAF                                ; $46AC: $CD $AF $0C
+    call ResetSpinAttack                                ; $46AC: $CD $AF $0C
     ld   [wSwordAnimationState], a                ; $46AF: $EA $37 $C1
     ld   [wC16A], a                               ; $46B2: $EA $6A $C1
     ret                                           ; $46B5: $C9
@@ -9779,7 +9779,7 @@ jr_015_7619:
     cpl                                           ; $761B: $2F
     inc  a                                        ; $761C: $3C
     ld   [hl], a                                  ; $761D: $77
-    call label_CAF                                ; $761E: $CD $AF $0C
+    call ResetSpinAttack                                ; $761E: $CD $AF $0C
     ld   a, $10                                   ; $7621: $3E $10
     ld   [$C13E], a                               ; $7623: $EA $3E $C1
     ldh  a, [hLinkDirection]                      ; $7626: $F0 $9E
@@ -10535,7 +10535,7 @@ func_015_7A6E:
 jr_015_7A8D:
     ld   a, [wIsRunningWithPegasusBoots]          ; $7A8D: $FA $4A $C1
     ld   e, a                                     ; $7A90: $5F
-    call label_CB6                                ; $7A91: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $7A91: $CD $B6 $0C
     call ClearLinkPositionIncrement               ; $7A94: $CD $8E $17
     ld   a, e                                     ; $7A97: $7B
     scf                                           ; $7A98: $37

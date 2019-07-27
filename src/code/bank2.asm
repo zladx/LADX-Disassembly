@@ -393,7 +393,7 @@ jr_002_43F4:
     ld   a, [$C199]                               ; $43F7: $FA $99 $C1
     add  $0C                                      ; $43FA: $C6 $0C
     ld   [$C199], a                               ; $43FC: $EA $99 $C1
-    call label_CAF                                ; $43FF: $CD $AF $0C
+    call ResetSpinAttack                                ; $43FF: $CD $AF $0C
 
 jr_002_4402:
     ld   a, [$C146]                               ; $4402: $FA $46 $C1
@@ -459,7 +459,7 @@ jr_002_4457:
     jr   label_002_4464                           ; $4457: $18 $0B
 
 jr_002_4459:
-    ld   a, [wPegagusBootsChargeMeter]                               ; $4459: $FA $4B $C1
+    ld   a, [wPegasusBootsChargeMeter]                               ; $4459: $FA $4B $C1
     and  a                                        ; $445C: $A7
     jr   nz, label_002_4464                       ; $445D: $20 $05
 
@@ -577,7 +577,7 @@ jr_002_44E3:
     jp   nz, label_002_45AC                       ; $44F7: $C2 $AC $45
 
 func_002_44FA::
-    call $21E1                                    ; $44FA: $CD $E1 $21
+    call func_21E1                                ; $44FA: $CD $E1 $21
     ldh  a, [$FFA3]                               ; $44FD: $F0 $A3
     sub  $02                                      ; $44FF: $D6 $02
     ldh  [$FFA3], a                               ; $4501: $E0 $A3
@@ -659,7 +659,7 @@ jr_002_4563:
     jr   z, label_002_45AC                        ; $456A: $28 $40
 
 jr_002_456C:
-    call label_CB6                                ; $456C: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $456C: $CD $B6 $0C
     ldh  [$FFA2], a                               ; $456F: $E0 $A2
     ld   [$C149], a                               ; $4571: $EA $49 $C1
     ldh  [$FFA3], a                               ; $4574: $E0 $A3
@@ -1200,7 +1200,7 @@ jr_002_4A7A:
 
 jr_002_4A7C:
     call ClearLinkPositionIncrement               ; $4A7C: $CD $8E $17
-    call label_CAF                                ; $4A7F: $CD $AF $0C
+    call ResetSpinAttack                                ; $4A7F: $CD $AF $0C
     ld   hl, wLinkPlayingOcarinaCountdown                                ; $4A82: $21 $66 $C1
     dec  [hl]                                     ; $4A85: $35
     jr   nz, jr_002_4AD1                          ; $4A86: $20 $49
@@ -2060,7 +2060,7 @@ jr_002_4EEF:
     ret                                           ; $4F3B: $C9
 
 jr_002_4F3C:
-    call label_CAF                                ; $4F3C: $CD $AF $0C
+    call ResetSpinAttack                                ; $4F3C: $CD $AF $0C
     ldh  [$FFA2], a                               ; $4F3F: $E0 $A2
     ld   [$C146], a                               ; $4F41: $EA $46 $C1
     ld   [$C19B], a                               ; $4F44: $EA $9B $C1
@@ -2309,7 +2309,7 @@ jr_002_50A2:
     ld   a, $01                                   ; $50A3: $3E $01
     ldh  [$FFA1], a                               ; $50A5: $E0 $A1
     call UpdateFinalLinkPosition                  ; $50A7: $CD $A8 $21
-    call $21E1                                    ; $50AA: $CD $E1 $21
+    call func_21E1                                ; $50AA: $CD $E1 $21
     ldh  a, [hLinkPositionX]                      ; $50AD: $F0 $98
     and  $F0                                      ; $50AF: $E6 $F0
     cp   $E0                                      ; $50B1: $FE $E0
@@ -2495,12 +2495,12 @@ HandleGotItemA::
     ldh  [hJingle], a                             ; $51C5: $E0 $F2
 
 HandleGotItemB::
-    call label_CAF                                ; $51C7: $CD $AF $0C
+    call ResetSpinAttack                                ; $51C7: $CD $AF $0C
     ld   [wC16A], a                               ; $51CA: $EA $6A $C1
     ld   [wSwordAnimationState], a                               ; $51CD: $EA $37 $C1
     ld   [$C13E], a                               ; $51D0: $EA $3E $C1
     call ApplyLinkMotionState                               ; $51D3: $CD $94 $17
-    call $21E1                                    ; $51D6: $CD $E1 $21
+    call func_21E1                                ; $51D6: $CD $E1 $21
     ldh  a, [$FFA3]                               ; $51D9: $F0 $A3
     sub  $02                                      ; $51DB: $D6 $02
     ldh  [$FFA3], a                               ; $51DD: $E0 $A3
@@ -2604,7 +2604,7 @@ jr_002_524F:
     ldh  [hScratchC], a                               ; $5262: $E0 $D9
     jp   label_1819                               ; $5264: $C3 $19 $18
 
-    call label_CAF                                ; $5267: $CD $AF $0C
+    call ResetSpinAttack                                ; $5267: $CD $AF $0C
     call ClearLinkPositionIncrement               ; $526A: $CD $8E $17
     ldh  a, [$FFB7]                               ; $526D: $F0 $B7
     and  a                                        ; $526F: $A7
@@ -5890,7 +5890,7 @@ jr_002_692B:
 
     ld   hl, hLinkDirection                                ; $6932: $21 $9E $FF
     res  1, [hl]                                  ; $6935: $CB $8E
-    call label_CB6                                ; $6937: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $6937: $CD $B6 $0C
     ld   [$C146], a                               ; $693A: $EA $46 $C1
     ldh  a, [hFrameCounter]                       ; $693D: $F0 $E7
     and  $01                                      ; $693F: $E6 $01
@@ -5969,7 +5969,7 @@ jr_002_699C:
 jr_002_699E:
     jp   func_002_6B56                            ; $699E: $C3 $56 $6B
 
-    call label_CB6                                ; $69A1: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $69A1: $CD $B6 $0C
     ld   [$C146], a                               ; $69A4: $EA $46 $C1
     ld   [$C153], a                               ; $69A7: $EA $53 $C1
     ld   [$C152], a                               ; $69AA: $EA $52 $C1
@@ -6076,7 +6076,7 @@ jr_002_6A3E:
     ld   a, [$C199]                               ; $6A41: $FA $99 $C1
     add  $0C                                      ; $6A44: $C6 $0C
     ld   [$C199], a                               ; $6A46: $EA $99 $C1
-    call label_CAF                                ; $6A49: $CD $AF $0C
+    call ResetSpinAttack                                ; $6A49: $CD $AF $0C
 
 jr_002_6A4C:
     ld   a, [$C147]                               ; $6A4C: $FA $47 $C1
@@ -6139,7 +6139,7 @@ jr_002_6A94:
 
     ld   a, NOISE_SFX_FOOTSTEP                          ; $6A9A: $3E $07
     ldh  [hNoiseSfx], a                            ; $6A9C: $E0 $F4
-    call label_CB6                                ; $6A9E: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $6A9E: $CD $B6 $0C
     ld   [$C146], a                               ; $6AA1: $EA $46 $C1
     ld   [$C152], a                               ; $6AA4: $EA $52 $C1
     ld   [$C153], a                               ; $6AA7: $EA $53 $C1
@@ -6173,7 +6173,7 @@ jr_002_6ACB:
     jr   label_002_6ADB                           ; $6ACF: $18 $0A
 
 jr_002_6AD1:
-    ld   a, [wPegagusBootsChargeMeter]                               ; $6AD1: $FA $4B $C1
+    ld   a, [wPegasusBootsChargeMeter]                               ; $6AD1: $FA $4B $C1
     and  a                                        ; $6AD4: $A7
     jr   nz, label_002_6ADB                       ; $6AD5: $20 $04
 
@@ -6396,7 +6396,7 @@ jr_002_6BF6:
     and  a                                        ; $6C03: $A7
     ret  z                                        ; $6C04: $C8
 
-    call label_CAF                                ; $6C05: $CD $AF $0C
+    call ResetSpinAttack                                ; $6C05: $CD $AF $0C
     ldh  a, [hLinkPositionXIncrement]                               ; $6C08: $F0 $9A
     cpl                                           ; $6C0A: $2F
     inc  a                                        ; $6C0B: $3C
@@ -6785,7 +6785,7 @@ CheckPositionForMapTransition::
 
     ; Clear some state before the transition
     xor  a                                        ; $6DED: $AF
-    ld   [wPegagusBootsChargeMeter], a                               ; $6DEE: $EA $4B $C1
+    ld   [wPegasusBootsChargeMeter], a                               ; $6DEE: $EA $4B $C1
     ld   [wIsUsingSpinAttack], a                  ; $6DF1: $EA $21 $C1
     ld   [wIsRunningWithPegasusBoots], a                               ; $6DF4: $EA $4A $C1
     ld   [$C188], a                               ; $6DF7: $EA $88 $C1
@@ -6907,7 +6907,7 @@ jr_002_6EB5:
     ldh  a, [hLinkPositionY]                      ; $6EBD: $F0 $99
     sub  $08                                      ; $6EBF: $D6 $08
     ldh  [hLinkPositionY], a                      ; $6EC1: $E0 $99
-    jp   label_CB6                                ; $6EC3: $C3 $B6 $0C
+    jp   ResetPegasusBoots                                ; $6EC3: $C3 $B6 $0C
 
 jr_002_6EC6:
     ld   a, [wCollisionType]                               ; $6EC6: $FA $33 $C1
@@ -7236,7 +7236,7 @@ jr_002_7085:
     jp   c, label_002_7277                        ; $70B2: $DA $77 $72
 
 jr_002_70B5:
-    call label_CB6                                ; $70B5: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $70B5: $CD $B6 $0C
     ld   hl, $6E3D                                ; $70B8: $21 $3D $6E
     add  hl, de                                   ; $70BB: $19
     ld   a, [hl]                                  ; $70BC: $7E
@@ -7881,7 +7881,7 @@ jr_002_7472:
     ld   [$C198], a                               ; $7489: $EA $98 $C1
     ldh  [$FFA2], a                               ; $748C: $E0 $A2
     ldh  [$FFA3], a                               ; $748E: $E0 $A3
-    jp   label_CAF                                ; $7490: $C3 $AF $0C
+    jp   ResetSpinAttack                                ; $7490: $C3 $AF $0C
 
 jr_002_7493:
     cp   $C1                                      ; $7493: $FE $C1
@@ -7925,7 +7925,7 @@ label_002_74AD::
     ret  nz                                       ; $74C8: $C0
 
 jr_002_74C9:
-    call label_CAF                                ; $74C9: $CD $AF $0C
+    call ResetSpinAttack                                ; $74C9: $CD $AF $0C
     ldh  a, [hLinkPositionXIncrement]                               ; $74CC: $F0 $9A
     cpl                                           ; $74CE: $2F
     inc  a                                        ; $74CF: $3C
@@ -8128,7 +8128,7 @@ func_002_75F5::
     and  a                                        ; $75F8: $A7
     jr   nz, jr_002_7634                          ; $75F9: $20 $39
 
-    call label_CAF                                ; $75FB: $CD $AF $0C
+    call ResetSpinAttack                                ; $75FB: $CD $AF $0C
     ldh  a, [hLinkPositionXIncrement]                               ; $75FE: $F0 $9A
     cpl                                           ; $7600: $2F
     inc  a                                        ; $7601: $3C
@@ -8181,7 +8181,7 @@ jr_002_7644:
     jr   nz, label_002_76C0                       ; $764A: $20 $74
 
 jr_002_764C:
-    call label_CAF                                ; $764C: $CD $AF $0C
+    call ResetSpinAttack                                ; $764C: $CD $AF $0C
     ld   a, $07                                   ; $764F: $3E $07
     ld   [wLinkGroundStatus], a                               ; $7651: $EA $1F $C1
     ld   hl, $C1BB                                ; $7654: $21 $BB $C1
@@ -8241,7 +8241,7 @@ jr_002_7687:
 label_002_76AA::
     ld   a, LINK_MOTION_FALLING_DOWN              ; $76AA: $3E $06
     ld   [wLinkMotionState], a                    ; $76AC: $EA $1C $C1
-    call label_CAF                                ; $76AF: $CD $AF $0C
+    call ResetSpinAttack                                ; $76AF: $CD $AF $0C
     ld   [$C198], a                               ; $76B2: $EA $98 $C1
     ld   a, [$C181]                               ; $76B5: $FA $81 $C1
     ld   [$DBCB], a                               ; $76B8: $EA $CB $DB

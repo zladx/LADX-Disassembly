@@ -704,7 +704,7 @@ jr_036_4429:
     cp   $78                                      ; $442B: $FE $78
     jr   c, jr_036_4444                           ; $442D: $38 $15
 
-    call label_CB6                                ; $442F: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $442F: $CD $B6 $0C
     ld   a, $77                                   ; $4432: $3E $77
     ldh  [hLinkPositionY], a                      ; $4434: $E0 $99
     ld   [wMapEntrancePositionY], a               ; $4436: $EA $9E $DB
@@ -7743,7 +7743,7 @@ func_036_6B5C:
 jr_036_6B7B:
     ld   a, [wIsRunningWithPegasusBoots]          ; $6B7B: $FA $4A $C1
     ld   e, a                                     ; $6B7E: $5F
-    call label_CB6                                ; $6B7F: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $6B7F: $CD $B6 $0C
     call ClearLinkPositionIncrement               ; $6B82: $CD $8E $17
     ld   a, e                                     ; $6B85: $7B
     scf                                           ; $6B86: $37

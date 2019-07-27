@@ -13,14 +13,14 @@ endm
 ;
 ; See ENTITY_* constants for values
 EntityPointersTable::
-._00 entity_pointer ExplosionEntityHandler
+._00 entity_pointer ArrowEntityHandler
 ._01 entity_pointer BoomerangEntityHandler
 ._02 entity_pointer BombEntityHandler
 ._03 db $E3, $7B, $18 ; entity_pointer Entity03Handler
-._04 entity_pointer FlameEntityHandler
+._04 entity_pointer HookshotHitEntityHandler
 ._05 entity_pointer LiftableRockEntityHandler
 ._06 entity_pointer Entity06Handler
-._07 entity_pointer SpitObjectEntityHandler
+._07 entity_pointer ChestWithItemEntityHandler
 ._08 db $66, $79, $18 ; entity_pointer Entity08Handler
 ._09 db $E9, $57, $03 ; entity_pointer Entity09Handler
 ._0A db $26, $6A, $03 ; entity_pointer Entity0AHandler

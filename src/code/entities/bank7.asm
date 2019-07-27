@@ -10384,7 +10384,7 @@ SpitObjectDialog::
     db $01, $00
 
 ; Used when an object is spit out after a Like-like ate it
-SpitObjectEntityHandler::
+ChestWithItemEntityHandler::
     ld   a, $02                                   ; $7BDD: $3E $02
     ldh  [$FFA1], a                               ; $7BDF: $E0 $A1
     xor  a                                        ; $7BE1: $AF

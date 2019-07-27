@@ -7049,7 +7049,7 @@ LoadEntity::
     ld   [MBC3SelectBank], a
 
     ldh  a, [hActiveEntityType]
-    cp   ENTITY_TYPE_RAFT_MAN
+    cp   ENTITY_RAFT_RAFT_OWNER
     jr   nz, .raftManEnd
     ldh  a, [$FFB2]
     and  a

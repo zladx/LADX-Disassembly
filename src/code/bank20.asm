@@ -6,10 +6,12 @@ entity_pointer: macro
     db LOW(\1), HIGH(\1), BANK(\1)
 endm
 
-; Data for sprite loading - 3 bytes per sprite ID
-; First 2 bytes - memory pointer
-; Third byte - bank ID
-; IE - db $DC, $59, $03 is for heart container. When loaded, code will jump to bank $03 - Pointer $59DC (LoadHeartContainer)
+; Table of entities handlers
+;
+; First 2 bytes: memory address; third byte: bank id
+; E.g. db $DC, $59, $03 is for heart container. When loaded, code will jump to bank $03 - Pointer $59DC (HeartContainerHandler)
+;
+; See ENTITY_* constants for values
 EntityPointersTable::
 ._00 entity_pointer ExplosionEntityHandler
 ._01 entity_pointer BoomerangEntityHandler

@@ -4989,7 +4989,7 @@ jr_003_63DB:
     ld   hl, wEntity0State                         ; $63DB: $21 $80 $C2
     add  hl, bc                                   ; $63DE: $09
     ld   [hl], $05                                ; $63DF: $36 $05
-    jp   label_CAF                                ; $63E1: $C3 $AF $0C
+    jp   ResetSpinAttack                                ; $63E1: $C3 $AF $0C
 
     ld   a, $10                                   ; $63E4: $3E $10
     ld   [wWorldMusicTrack], a                    ; $63E6: $EA $68 $D3
@@ -6812,7 +6812,7 @@ jr_003_6DDD:
 func_003_6DDF::
 label_003_6DDF:
 jr_003_6DDF:
-    call label_CB6                                ; $6DDF: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $6DDF: $CD $B6 $0C
     ld   a, $10                                   ; $6DE2: $3E $10
     ld   [$C13E], a                               ; $6DE4: $EA $3E $C1
     ldh  a, [hActiveEntityType]                     ; $6DE7: $F0 $EB
@@ -6966,7 +6966,7 @@ jr_003_6E8E:
 
     ld   a, [wIsRunningWithPegasusBoots]          ; $6EAC: $FA $4A $C1
     ldh  [hFFE9], a                               ; $6EAF: $E0 $E9
-    call label_CB6                                ; $6EB1: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $6EB1: $CD $B6 $0C
     ldh  a, [hActiveEntityType]                     ; $6EB4: $F0 $EB
     cp   $E2                                      ; $6EB6: $FE $E2
     jr   nz, jr_003_6ED1                          ; $6EB8: $20 $17
@@ -7128,7 +7128,7 @@ func_003_6F93::
 label_003_6F93:
     ld   a, $09                                   ; $6F93: $3E $09
     ldh  [hJingle], a                             ; $6F95: $E0 $F2
-    call label_CB6                                ; $6F97: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $6F97: $CD $B6 $0C
     ld   a, $0C                                   ; $6F9A: $3E $0C
     ld   [$C13E], a                               ; $6F9C: $EA $3E $C1
     ldh  a, [hActiveEntityType]                     ; $6F9F: $F0 $EB
@@ -7375,7 +7375,7 @@ jr_003_7102:
     cp   $8E                                      ; $7104: $FE $8E
     jr   nz, jr_003_710D                          ; $7106: $20 $05
 
-    call label_CB6                                ; $7108: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $7108: $CD $B6 $0C
     jr   jr_003_714D                              ; $710B: $18 $40
 
 jr_003_710D:
@@ -7399,7 +7399,7 @@ jr_003_710D:
     cp   [hl]                                     ; $7126: $BE
     jr   z, jr_003_714D                           ; $7127: $28 $24
 
-    call label_CB6                                ; $7129: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $7129: $CD $B6 $0C
     ld   a, $10                                   ; $712C: $3E $10
     ld   [$C13E], a                               ; $712E: $EA $3E $C1
     ld   a, $10                                   ; $7131: $3E $10
@@ -7957,7 +7957,7 @@ jr_003_7440:
     cp   e                                        ; $7449: $BB
     jp   nc, label_003_74E1                       ; $744A: $D2 $E1 $74
 
-    call label_CB6                                ; $744D: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $744D: $CD $B6 $0C
     ld   a, $08                                   ; $7450: $3E $08
     ld   [$C13E], a                               ; $7452: $EA $3E $C1
     ld   a, $12                                   ; $7455: $3E $12

@@ -108,7 +108,7 @@ jr_004_409E:
     call label_3B44                               ; $40A9: $CD $44 $3B
     jr   nc, jr_004_40C7                          ; $40AC: $30 $19
 
-    call label_CB6                                ; $40AE: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $40AE: $CD $B6 $0C
     ld   a, JINGLE_BUMP                           ; $40B1: $3E $09
     ldh  [hJingle], a                             ; $40B3: $E0 $F2
     ld   a, $10                                   ; $40B5: $3E $10
@@ -293,7 +293,7 @@ jr_004_41AC:
     cp   $20                                      ; $41C9: $FE $20
     jr   nc, jr_004_4210                          ; $41CB: $30 $43
 
-    call label_CB6                                ; $41CD: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $41CD: $CD $B6 $0C
     ld   a, [wAButtonSlot]                        ; $41D0: $FA $00 $DB
     cp   $03                                      ; $41D3: $FE $03
     jr   nz, jr_004_41DF                          ; $41D5: $20 $08
@@ -2903,7 +2903,7 @@ jr_004_547E:
     ldh  [hLinkPositionX], a                      ; $54D9: $E0 $98
     ld   a, $06                                   ; $54DB: $3E $06
     ld   [wLinkMotionState], a                    ; $54DD: $EA $1C $C1
-    call label_CAF                                ; $54E0: $CD $AF $0C
+    call ResetSpinAttack                                ; $54E0: $CD $AF $0C
     ld   [$C198], a                               ; $54E3: $EA $98 $C1
     call GetEntityTransitionCountdown                 ; $54E6: $CD $05 $0C
     ld   [hl], $40                                ; $54E9: $36 $40
@@ -6014,7 +6014,7 @@ jr_004_6884:
     ldh  [hLinkPositionY], a                      ; $68BD: $E0 $99
     ld   a, LINK_MOTION_FALLING_DOWN              ; $68BF: $3E $06
     ld   [wLinkMotionState], a                    ; $68C1: $EA $1C $C1
-    call label_CAF                                ; $68C4: $CD $AF $0C
+    call ResetSpinAttack                                ; $68C4: $CD $AF $0C
     ld   [$C198], a                               ; $68C7: $EA $98 $C1
     ld   a, $FF                                   ; $68CA: $3E $FF
     ld   [$DBCB], a                               ; $68CC: $EA $CB $DB
@@ -9445,7 +9445,7 @@ func_004_7BB7:
     ldh  [hActiveEntityUnknownG], a                               ; $7BBD: $E0 $F1
     ld   a, $01                                   ; $7BBF: $3E $01
     ld   [wC15C], a                               ; $7BC1: $EA $5C $C1
-    call label_CAF                                ; $7BC4: $CD $AF $0C
+    call ResetSpinAttack                                ; $7BC4: $CD $AF $0C
     ldh  a, [hLinkPositionX]                      ; $7BC7: $F0 $98
     ldh  [wActiveEntityPosX], a                               ; $7BC9: $E0 $EE
     ldh  a, [hLinkPositionY]                      ; $7BCB: $F0 $99
@@ -9467,7 +9467,7 @@ func_004_7BE3:
     jr   nc, jr_004_7C05                          ; $7BE6: $30 $1D
 
     call CopyLinkFinalPositionToPosition          ; $7BE8: $CD $BE $0C
-    call label_CB6                                ; $7BEB: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $7BEB: $CD $B6 $0C
     ld   a, [$C1A6]                               ; $7BEE: $FA $A6 $C1
     and  a                                        ; $7BF1: $A7
     jr   z, jr_004_7C05                           ; $7BF2: $28 $11

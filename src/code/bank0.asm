@@ -823,14 +823,14 @@ label_C9E::
     and  a
     ret
 
-label_CAF::
+ResetSpinAttack::
     xor  a
     ld   [wIsUsingSpinAttack], a
     ld   [wSwordCharge], a
 
-label_CB6::
+ResetPegasusBoots::
     xor  a
-    ld   [wPegagusBootsChargeMeter], a
+    ld   [wPegasusBootsChargeMeter], a
     ld   [wIsRunningWithPegasusBoots], a
     ret
 
@@ -1618,7 +1618,7 @@ LinkMotionInteractiveHandler::
     jr   nz, label_11BA
 
 label_11A5::
-    call func_1340
+    call SetShieldVals
     jr   label_11BA
 
 label_11AA::
@@ -1671,7 +1671,7 @@ label_11E8::
 
 label_11FA::
     xor  a
-    ld   [wPegagusBootsChargeMeter], a
+    ld   [wPegasusBootsChargeMeter], a
 
 label_11FE::
     ld   a, [wBButtonSlot]
@@ -1687,7 +1687,7 @@ label_120E::
 
 label_1210::
     xor  a
-    ld   [wPegagusBootsChargeMeter], a
+    ld   [wPegasusBootsChargeMeter], a
 
 label_1214::
     ld   a, [wBButtonSlot]
@@ -1703,7 +1703,7 @@ label_1214::
     jr   z, label_1235
     cp   $02
     jr   z, label_1235
-    call func_1340
+    call SetShieldVals
 
 label_1235::
     ld   a, [wAButtonSlot]
@@ -1714,7 +1714,7 @@ label_1235::
     ldh  a, [hPressedButtonsMask]
     and  $20
     jr   z, label_124B
-    call func_1340
+    call SetShieldVals
 
 label_124B::
     ldh  a, [$FFCC]
@@ -1854,7 +1854,7 @@ label_1321::
     ld   [$C5B0], a
     ret
 
-func_1340::
+SetShieldVals::
     ld   a, $01
     ld   [wIsUsingShield], a
     ld   a, [wShieldLevel]
@@ -2170,7 +2170,7 @@ label_1535::
     ld   a, [$C146]
     and  a
     jr   nz, label_1562
-    call label_CAF
+    call ResetSpinAttack
     call ClearLinkPositionIncrement
 
 label_1562::
@@ -2469,9 +2469,9 @@ label_1713::
     add  a, $02
     ld   [$C120], a
     call label_1756
-    ld   a, [wPegagusBootsChargeMeter]
+    ld   a, [wPegasusBootsChargeMeter]
     inc  a
-    ld   [wPegagusBootsChargeMeter], a
+    ld   [wPegasusBootsChargeMeter], a
     cp   $20
     ret  nz
     ld   [wIsRunningWithPegasusBoots], a

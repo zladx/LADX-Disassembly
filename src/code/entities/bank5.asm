@@ -3712,7 +3712,7 @@ label_005_54C3:
     jr   nc, jr_005_54E5                          ; $54C6: $30 $1D
 
     call CopyLinkFinalPositionToPosition          ; $54C8: $CD $BE $0C
-    call label_CB6                                ; $54CB: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $54CB: $CD $B6 $0C
     ld   a, [$C1A6]                               ; $54CE: $FA $A6 $C1
     and  a                                        ; $54D1: $A7
     jr   z, jr_005_54E5                           ; $54D2: $28 $11

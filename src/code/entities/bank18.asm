@@ -57,7 +57,7 @@ jr_018_404A:
     ld   a, $4C                                   ; $4050: $3E $4C
     ldh  [hLinkPositionY], a                      ; $4052: $E0 $99
     call ClearLinkPositionIncrement               ; $4054: $CD $8E $17
-    call label_CAF                                ; $4057: $CD $AF $0C
+    call ResetSpinAttack                                ; $4057: $CD $AF $0C
     ld   e, $0B                                   ; $405A: $1E $0B
     ld   hl, wAButtonSlot                         ; $405C: $21 $00 $DB
 
@@ -1640,7 +1640,7 @@ jr_018_4A18:
     ret  nc                                       ; $4A23: $D0
 
     call CopyLinkFinalPositionToPosition          ; $4A24: $CD $BE $0C
-    jp   label_CB6                                ; $4A27: $C3 $B6 $0C
+    jp   ResetPegasusBoots                                ; $4A27: $C3 $B6 $0C
 
 jr_018_4A2A:
     call func_018_7DE8                            ; $4A2A: $CD $E8 $7D
@@ -3336,7 +3336,7 @@ jr_018_5417:
     ldh  [hLinkDirection], a                      ; $5426: $E0 $9E
     ld   a, $01                                   ; $5428: $3E $01
     ldh  [$FFA1], a                               ; $542A: $E0 $A1
-    call label_CAF                                ; $542C: $CD $AF $0C
+    call ResetSpinAttack                                ; $542C: $CD $AF $0C
     ldh  a, [wActiveEntityPosX]                   ; $542F: $F0 $EE
     ldh  [hLinkPositionX], a                      ; $5431: $E0 $98
     ldh  a, [wActiveEntityPosY]                   ; $5433: $F0 $EC
@@ -3579,7 +3579,7 @@ jr_018_558A:
     cp   $40                                      ; $5597: $FE $40
     ret  nc                                       ; $5599: $D0
 
-    call label_CAF                                ; $559A: $CD $AF $0C
+    call ResetSpinAttack                                ; $559A: $CD $AF $0C
     call ClearLinkPositionIncrement               ; $559D: $CD $8E $17
     ld   a, [$C146]                               ; $55A0: $FA $46 $C1
     and  a                                        ; $55A3: $A7
@@ -10252,7 +10252,7 @@ jr_018_7BD1:
     inc  a                                        ; $7BF5: $3C
     ld   [$C1A6], a                               ; $7BF6: $EA $A6 $C1
     xor  a                                        ; $7BF9: $AF
-    call label_CAF                                ; $7BFA: $CD $AF $0C
+    call ResetSpinAttack                                ; $7BFA: $CD $AF $0C
     ld   [$C13E], a                               ; $7BFD: $EA $3E $C1
     ldh  a, [hLinkDirection]                      ; $7C00: $F0 $9E
     ld   e, a                                     ; $7C02: $5F
@@ -10457,7 +10457,7 @@ func_018_7D36:
 
 func_018_7D3B:
     call CopyLinkFinalPositionToPosition          ; $7D3B: $CD $BE $0C
-    call label_CB6                                ; $7D3E: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $7D3E: $CD $B6 $0C
     ld   a, [$C1A6]                               ; $7D41: $FA $A6 $C1
     and  a                                        ; $7D44: $A7
     jr   z, jr_018_7D58                           ; $7D45: $28 $11

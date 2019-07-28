@@ -6103,7 +6103,7 @@ func_006_641A:
 
 label_006_641F:
     call CopyLinkFinalPositionToPosition          ; $641F: $CD $BE $0C
-    call label_CB6                                ; $6422: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $6422: $CD $B6 $0C
     ld   a, [$C1A6]                               ; $6425: $FA $A6 $C1
     and  a                                        ; $6428: $A7
     jr   z, jr_006_643C                           ; $6429: $28 $11

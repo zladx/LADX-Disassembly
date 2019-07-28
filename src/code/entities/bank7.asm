@@ -3645,7 +3645,7 @@ jr_007_5572:
     ld   [hl], a                                  ; $5590: $77
     ld   a, $66                                   ; $5591: $3E $66
     ld   [wC111], a                               ; $5593: $EA $11 $C1
-    jp   label_CAF                                ; $5596: $C3 $AF $0C
+    jp   ResetSpinAttack                                ; $5596: $C3 $AF $0C
 
 jr_007_5599:
     ret                                           ; $5599: $C9
@@ -10587,7 +10587,7 @@ func_007_7CF0:
     jr   nc, jr_007_7D14                          ; $7CF3: $30 $1F
 
     call CopyLinkFinalPositionToPosition          ; $7CF5: $CD $BE $0C
-    call label_CB6                                ; $7CF8: $CD $B6 $0C
+    call ResetPegasusBoots                                ; $7CF8: $CD $B6 $0C
     ld   a, [$C1A6]                               ; $7CFB: $FA $A6 $C1
     and  a                                        ; $7CFE: $A7
     jr   z, jr_007_7D12                           ; $7CFF: $28 $11

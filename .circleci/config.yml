@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: kemenaran/rgbds:0.3.8
+
+    steps:
+      - checkout
+      - run:
+          name: Retrieving stub file
+          command: curl --fail https://www.winosx.com/hosted_files/zladx/Zelda.gbc --output Zelda.gbc
+      - run:
+          name: Building
+          command: make

@@ -11,27 +11,6 @@ jobs:
       - run:
           name: Building
           command: make build
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - Zelda.gbc
-
-  test:
-    docker:
-      - image: kemenaran/rgbds:0.3.8
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ./
       - run:
           name: Testing checksum
           command: make test
-
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build

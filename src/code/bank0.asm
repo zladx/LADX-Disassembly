@@ -3781,39 +3781,41 @@ DoUpdateBGRegion::
     ld   a, [wIsIndoor]
     and  a
     jr   z, .baseAddress_isOverworld
-    ; hl = $4000.
-    ld   hl, $4000
+    ld   hl, IndoorBaseMapDMG
     ; if IsGBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .label_2299
-    ; … hl = (MapId == MAP_COLOR_DUNGEON ? $4760: $43B0)
-    ld   hl, $43B0
+    jr   z, .palettesDone
+    ; … hl = (MapId == MAP_COLOR_DUNGEON ? ColorDungeonBaseMap : IndoorBaseMapGBC)
+    ld   hl, IndoorBaseMapGBC
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, .mapBaseAddressDone
-    ld   hl, $4760
-    jr   .mapBaseAddressDone
+    jr   nz, .configurePalettes
+    ld   hl, ColorDungeonBaseMap
+    jr   .configurePalettes
 
 .baseAddress_isOverworld
-    ; hl = (hIsGBC ? $6B1D : OverworldBaseMap)
-    ld   hl, OverworldBaseMap
+    ; hl = (hIsGBC ? OverworldBaseMapGBC : OverworldBaseMapDMG)
+    ld   hl, OverworldBaseMapDMG
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .label_2299
-    ld   hl, $6B1D
+    jr   z, .palettesDone
+    ld   hl, OverworldBaseMapGBC
 
-.mapBaseAddressDone
+    ;
+    ; Palettes configuration (GBC only)
+    ;
+
+.configurePalettes
+    ; Set the palette bank in hRoomPaletteBank,
+    ; and the target BG map offset in FFE0-FFE1
+    callsb ConfigureRoomPalettes
+.palettesDone
 
     ;
     ; BG map offset selection
     ;
 
-    ; Set the palette bank in hRoomPaletteBank,
-    ; and the target BG map offset in FFE0-FFE1
-    callsb ConfigureRoomPalettes
-
-.label_2299
     ; Switch to the bank containing the BG map
     call SwitchToMapDataBank
     ; hl = base map address + BG map offset
@@ -6850,7 +6852,7 @@ SwitchToMapDataBank::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, .indoor
-    ld   a, BANK(OverworldBaseMap)
+    ld   a, BANK(OverworldBaseMapDMG)
     jr   .end
 .indoor
     ld   a, $08

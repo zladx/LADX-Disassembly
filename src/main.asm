@@ -34,6 +34,9 @@ include "code/entities/bank6.asm"
 section "bank7",romx[$4000],bank[$07]
 include "code/entities/bank7.asm"
 
+section "bank8",romx[$4000],bank[$08]
+include "data/base_maps/indoor.asm"
+
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]
 OverworldRoomPointers::
@@ -141,8 +144,10 @@ incbin "data/palette_pointers/overworld_pointers.bin"
 OverworldPalettesBanks::
 incbin "data/palette_pointers/overworld_banks.bin"
 include "code/bank1A/map_loading.asm"
-OverworldBaseMap::
-incbin "data/overworld_base_map.bin"
+OverworldBaseMapDMG::
+incbin "data/base_maps/overworld.dmg.bin"
+OverworldBaseMapGBC::
+incbin "data/base_maps/overworld.cgb.bin"
 include "code/bank1A/unknown.asm"
 
 section "bank1C",romx[$4001],bank[$1C]

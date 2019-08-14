@@ -122,13 +122,15 @@ include "data/events/dungeons.asm"
 include "data/maps/layouts.asm"
 include "data/chests/dungeons.asm"
 include "code/bank14.asm"
-include "text/dialog.asm"
+include "text/dialog_1.asm"
 
 section "bank15",romx[$4000],bank[$15]
 include "code/entities/bank15.asm"
 
 ; Bank $16: contains sprite data for overworld
 ; Starts on byte $5186, ends on byte $565D
+section "Text at 16:5701", ROMX[$5701], BANK[$16]
+include "text/dialog_2.asm"
 
 section "bank18",romx[$4000],bank[$18]
 include "code/entities/bank18.asm"
@@ -152,6 +154,11 @@ include "code/bank1A/unknown.asm"
 
 section "bank1C",romx[$4001],bank[$1C]
 include "text/dialog_table.asm"
+section "Text at 1c:4b2a", ROMX[$4B2A], BANK[$1C]
+include "text/dialog_3.asm"
+
+section "bank1D", romx[$4000], bank[$1D]
+include "text/dialog_4.asm"
 
 section "bank20",romx[$4000],bank[$20]
 include "code/bank20.asm"

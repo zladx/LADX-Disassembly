@@ -24,7 +24,7 @@
 13 Graphics: ending (DMG variant)
 14 Code and text
 15 Code
-16 Code, text, overworld sprite data
+16 Entities pointer table and data, text
 17 Credits code and text
 18 Entities code
 19 Entities code

@@ -129,7 +129,9 @@ include "code/entities/bank15.asm"
 
 ; Bank $16: contains sprite data for overworld
 ; Starts on byte $5186, ends on byte $565D
-section "Text at 16:5701", ROMX[$5701], BANK[$16]
+section "bank16",romx[$4000],bank[$16]
+include "data/entities/pointer_table.asm"
+include "data/entities/entities.asm"
 include "text/dialog_2.asm"
 
 section "bank18",romx[$4000],bank[$18]

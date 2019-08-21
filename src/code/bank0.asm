@@ -128,10 +128,7 @@ PlayAudioStep::
     call SwitchBank
     call $4006
 
-    ; Call 1E:4006
-    ld   a, $1E
-    call SwitchBank
-    call $4006
+    callsw Func_01E_4006
 
 .return
     ret

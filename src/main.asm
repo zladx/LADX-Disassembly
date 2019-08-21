@@ -160,6 +160,9 @@ include "text/dialog_3.asm"
 section "bank1D", romx[$4000], bank[$1D]
 include "text/dialog_4.asm"
 
+section "bank1E", romx[$4000], bank[$1E]
+include "code/audio/bank1E.asm"
+
 section "bank20",romx[$4000],bank[$20]
 include "code/bank20.asm"
 

@@ -38,6 +38,7 @@ JINGLE_ENNEMY_SHRIEK    equ $3C
 
 ; Values for hWaveSfx
 WAVE_SFX_SEASHELL        equ $01
+WAVE_SFX_ZIP             equ $02
 WAVE_SFX_LINK_HURT       equ $03
 WAVE_SFX_LOW_HEARTS      equ $04
 WAVE_SFX_RUPEE           equ $05

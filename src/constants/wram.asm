@@ -686,6 +686,9 @@ wWorldMusicTrack:: ; D368
   ; FF: Nothing
   ds 1
 
+; Unlabeled
+ds 7
+
 wActiveWaveSfx:: ; D370
   ; The waveform sound effect currently playing
   ds 1
@@ -700,7 +703,7 @@ wActiveNoiseSfx:: ; D378
 ; D379-D???: noise sound effect parameters
 
 ; Unlabeled
-ds $8F
+ds $88
 
 ; Room warps
 ;

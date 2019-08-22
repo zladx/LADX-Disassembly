@@ -590,7 +590,7 @@ wActiveJingle:: ; D360
 ; D361-D367: squareform jingle parameters
 ds 7
 
-wWorldMusicTrack:: ; D368
+wActiveMusicTrack:: ; D368
   ; World Music Track
   ; 00: No music
   ; 01: Title music when zelda logo appears

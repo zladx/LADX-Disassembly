@@ -3920,7 +3920,7 @@ include "code/home/dialog.asm"
 ; Input:
 ;   a:   soundtrack id to load
 SetWorldMusicTrack::
-    ld   [wWorldMusicTrack], a
+    ld   [wActiveMusicTrack], a
     ldh  [hNextWorldMusicTrack], a
     ; $FFAB = a
     ld   a, $38
@@ -7886,7 +7886,7 @@ label_3EFB::
     ld   a, $50
 
 label_3F11::
-    ld   [wWorldMusicTrack], a
+    ld   [wActiveMusicTrack], a
     ldh  [$FFBD], a
     ld   a, [wTransitionSequenceCounter]
     cp   $04

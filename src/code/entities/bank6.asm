@@ -5559,7 +5559,7 @@ jr_006_60D0:
     ld   a, $0E                                   ; $60EE: $3E $0E
 
 jr_006_60F0:
-    ld   [wWorldMusicTrack], a                    ; $60F0: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $60F0: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $60F3: $E0 $B0
     ldh  [$FFBD], a                               ; $60F5: $E0 $BD
 
@@ -7006,7 +7006,7 @@ jr_006_68F6:
     add  hl, bc                                   ; $68FB: $09
     ld   [hl], a                                  ; $68FC: $77
     ld   a, $22                                   ; $68FD: $3E $22
-    ld   [wWorldMusicTrack], a                    ; $68FF: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $68FF: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $6902: $E0 $B0
     ldh  [$FFBD], a                               ; $6904: $E0 $BD
     ldh  a, [hMapRoom]                            ; $6906: $F0 $F6
@@ -7146,7 +7146,7 @@ jr_006_69BD:
     ld   hl, wEntitiesUnknownTableB               ; $69E7: $21 $B0 $C2
     add  hl, bc                                   ; $69EA: $09
     ld   a, [hl]                                  ; $69EB: $7E
-    ld   [wWorldMusicTrack], a                    ; $69EC: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $69EC: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $69EF: $E0 $B0
     ld   a, [wActivePowerUp]                      ; $69F1: $FA $7C $D4
     and  a                                        ; $69F4: $A7
@@ -7157,7 +7157,7 @@ jr_006_69BD:
     jr   nz, jr_006_6A04                          ; $69FB: $20 $07
 
     ld   a, $49                                   ; $69FD: $3E $49
-    ld   [wWorldMusicTrack], a                    ; $69FF: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $69FF: $EA $68 $D3
     ldh  [$FFBD], a                               ; $6A02: $E0 $BD
 
 jr_006_6A04:

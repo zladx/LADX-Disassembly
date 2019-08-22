@@ -543,7 +543,7 @@ FileSelectionPrepare6::
     ld   [wForceFileSelectionScreenMusic], a
     ; … and set the music to the file menu selection track
     ld   a, $11
-    ld   [wWorldMusicTrack], a
+    ld   [wActiveMusicTrack], a
 .dontForceMusicTrack
 
     ; If there are no saved files yet…

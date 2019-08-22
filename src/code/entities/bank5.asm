@@ -207,7 +207,7 @@ jr_005_40FA:
     jr   z, jr_005_4127                           ; $4112: $28 $13
 
     ld   a, $10                                   ; $4114: $3E $10
-    ld   [wWorldMusicTrack], a                    ; $4116: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $4116: $EA $68 $D3
     ld   a, $6C                                   ; $4119: $3E $6C
     call OpenDialogInTable1                       ; $411B: $CD $73 $23
     ld   a, WAVE_SFX_CHAIN_CHOMP                  ; $411E: $3E $18
@@ -1595,7 +1595,7 @@ jr_005_4853:
     jr   nz, jr_005_48AE                          ; $489F: $20 $0D
 
     ldh  a, [hMusicTrack]                         ; $48A1: $F0 $B0
-    ld   [wWorldMusicTrack], a                    ; $48A3: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $48A3: $EA $68 $D3
     ld   a, $01                                   ; $48A6: $3E $01
     ld   [wC10B], a                               ; $48A8: $EA $0B $C1
     ld   [wC167], a                               ; $48AB: $EA $67 $C1
@@ -1614,7 +1614,7 @@ jr_005_48AE:
     ld   [wC10B], a                               ; $48BC: $EA $0B $C1
     ld   [wC167], a                               ; $48BF: $EA $67 $C1
     ldh  a, [hMusicTrack]                         ; $48C2: $F0 $B0
-    ld   [wWorldMusicTrack], a                    ; $48C4: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $48C4: $EA $68 $D3
     ld   a, $FE                                   ; $48C7: $3E $FE
     call OpenDialog                               ; $48C9: $CD $85 $23
     jp   IncrementEntityWalkingAttr               ; $48CC: $C3 $12 $3B
@@ -2308,7 +2308,7 @@ TarinShield1Handler::
     call GetEntityTransitionCountdown                 ; $4CA1: $CD $05 $0C
     ld   [hl], $80                                ; $4CA4: $36 $80
     ld   a, $10                                   ; $4CA6: $3E $10
-    ld   [wWorldMusicTrack], a                    ; $4CA8: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $4CA8: $EA $68 $D3
     ldh  a, [hIsGBC]                              ; $4CAB: $F0 $FE
     and  a                                        ; $4CAD: $A7
     jr   z, jr_005_4CC3                           ; $4CAE: $28 $13
@@ -2918,7 +2918,7 @@ jr_005_5018:
     jr   nz, jr_005_503E                          ; $502F: $20 $0D
 
     inc  [hl]                                     ; $5031: $34
-    ld   [wWorldMusicTrack], a                    ; $5032: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $5032: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $5035: $E0 $B0
     ldh  [$FFBD], a                               ; $5037: $E0 $BD
     ld   hl, $C3C8                                ; $5039: $21 $C8 $C3
@@ -3088,7 +3088,7 @@ jr_005_512A:
     ld   a, $01                                   ; $513A: $3E $01
     ld   [$DE00], a                               ; $513C: $EA $00 $DE
     ld   a, $10                                   ; $513F: $3E $10
-    ld   [wWorldMusicTrack], a                    ; $5141: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $5141: $EA $68 $D3
     ld   a, $05                                   ; $5144: $3E $05
     call label_AC6                                ; $5146: $CD $C6 $0A
     call GetEntityTransitionCountdown                 ; $5149: $CD $05 $0C
@@ -4705,7 +4705,7 @@ jr_005_5A6F:
     ld   a, $02                                   ; $5A73: $3E $02
     ld   [$D205], a                               ; $5A75: $EA $05 $D2
     ld   a, $5C                                   ; $5A78: $3E $5C
-    ld   [wWorldMusicTrack], a                    ; $5A7A: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $5A7A: $EA $68 $D3
     ret                                           ; $5A7D: $C9
 
     db   $10                                      ; $5A7E: $10
@@ -4800,7 +4800,7 @@ jr_005_5AA7:
 
 jr_005_5AFE:
     ld   a, $54                                   ; $5AFE: $3E $54
-    ld   [wWorldMusicTrack], a                    ; $5B00: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $5B00: $EA $68 $D3
 
 func_005_5B03:
     ld   a, $63                                   ; $5B03: $3E $63
@@ -10332,7 +10332,7 @@ jr_005_79B3:
     ld   a, $03                                   ; $7A0B: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $7A0D: $EA $A7 $C5
     ld   a, $5E                                   ; $7A10: $3E $5E
-    ld   [wWorldMusicTrack], a                    ; $7A12: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $7A12: $EA $68 $D3
     ld   a, $B5                                   ; $7A15: $3E $B5
     call OpenDialog                               ; $7A17: $CD $85 $23
 

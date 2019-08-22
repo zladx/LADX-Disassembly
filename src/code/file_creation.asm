@@ -137,7 +137,7 @@ label_4A98::
     cp   $42
     jr   nz, label_4AFE
     ld   a, $60
-    ld   [wWorldMusicTrack], a
+    ld   [wActiveMusicTrack], a
 
 label_4AFE::
     ld   hl, $DB80

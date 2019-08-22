@@ -149,7 +149,7 @@ jr_018_40D6:
     jr   nz, jr_018_40F0                          ; $40E1: $20 $0D
 
     ld   a, $35                                   ; $40E3: $3E $35
-    ld   [wWorldMusicTrack], a                    ; $40E5: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $40E5: $EA $68 $D3
     ld   a, $01                                   ; $40E8: $3E $01
     ld   [$D215], a                               ; $40EA: $EA $15 $D2
     jp   IncrementEntityWalkingAttr               ; $40ED: $C3 $12 $3B
@@ -282,7 +282,7 @@ jr_018_4230:
     call GetEntityTransitionCountdown             ; $425B: $CD $05 $0C
     ld   [hl], $70                                ; $425E: $36 $70
     ld   a, $10                                   ; $4260: $3E $10
-    ld   [wWorldMusicTrack], a                    ; $4262: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $4262: $EA $68 $D3
     call IncrementEntityWalkingAttr               ; $4265: $CD $12 $3B
 
 jr_018_4268:
@@ -821,7 +821,7 @@ jr_018_458A:
     jr   nz, jr_018_45B6                          ; $4596: $20 $1E
 
     ld   a, $30                                   ; $4598: $3E $30
-    ld   [wWorldMusicTrack], a                    ; $459A: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $459A: $EA $68 $D3
     call IncrementEntityWalkingAttr               ; $459D: $CD $12 $3B
 
 func_018_45A0:
@@ -1116,7 +1116,7 @@ jr_018_4722:
 
     ld   [hl], $70                                ; $4739: $36 $70
     ld   a, $10                                   ; $473B: $3E $10
-    ld   [wWorldMusicTrack], a                    ; $473D: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $473D: $EA $68 $D3
     ld   [wC167], a                               ; $4740: $EA $67 $C1
     call IncrementEntityWalkingAttr               ; $4743: $CD $12 $3B
 
@@ -3609,7 +3609,7 @@ jr_018_558A:
     jr   nz, jr_018_55D8                          ; $55C8: $20 $0E
 
     ld   a, $2F                                   ; $55CA: $3E $2F
-    ld   [wWorldMusicTrack], a                    ; $55CC: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $55CC: $EA $68 $D3
     ld   [$C3C8], a                               ; $55CF: $EA $C8 $C3
     call label_BFB                                ; $55D2: $CD $FB $0B
     ld   [hl], $50                                ; $55D5: $36 $50
@@ -3853,7 +3853,7 @@ label_018_572E:
 
     call IncrementEntityWalkingAttr               ; $5757: $CD $12 $3B
     ldh  a, [hMusicTrack]                         ; $575A: $F0 $B0
-    ld   [wWorldMusicTrack], a                    ; $575C: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $575C: $EA $68 $D3
     ld   a, $FF                                   ; $575F: $3E $FF
     call label_3B0C                               ; $5761: $CD $0C $3B
     ld   a, $E2                                   ; $5764: $3E $E2
@@ -4317,7 +4317,7 @@ jr_018_5A07:
     xor  a                                        ; $5A0B: $AF
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
     ld   a, $31                                   ; $5A0F: $3E $31
-    ld   [wWorldMusicTrack], a                    ; $5A11: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $5A11: $EA $68 $D3
     ld   a, $05                                   ; $5A14: $3E $05
     ldh  [hMusicTrack], a                         ; $5A16: $E0 $B0
 
@@ -4358,7 +4358,7 @@ jr_018_5A3F:
     call GetEntityTransitionCountdown             ; $5A4F: $CD $05 $0C
     ld   [hl], $70                                ; $5A52: $36 $70
     ld   a, $10                                   ; $5A54: $3E $10
-    ld   [wWorldMusicTrack], a                    ; $5A56: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $5A56: $EA $68 $D3
     ld   a, $FF                                   ; $5A59: $3E $FF
     ldh  [hNextWorldMusicTrack], a                ; $5A5B: $E0 $BF
     ldh  a, [hLinkPositionX]                      ; $5A5D: $F0 $98
@@ -5581,7 +5581,7 @@ jr_018_6163:
     ld   h, a                                     ; $61CF: $67
     ld   h, d                                     ; $61D0: $62
     ld   a, $4D                                   ; $61D1: $3E $4D
-    ld   [wWorldMusicTrack], a                    ; $61D3: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $61D3: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $61D6: $E0 $B0
     ldh  [$FFBD], a                               ; $61D8: $E0 $BD
     jp   IncrementEntityWalkingAttr               ; $61DA: $C3 $12 $3B
@@ -5641,7 +5641,7 @@ jr_018_6211:
     ld   a, $09                                   ; $6232: $3E $09
     ld   [wGameplayType], a                       ; $6234: $EA $95 $DB
     ld   a, $4E                                   ; $6237: $3E $4E
-    ld   [wWorldMusicTrack], a                    ; $6239: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $6239: $EA $68 $D3
     ret                                           ; $623C: $C9
 
 jr_018_623D:
@@ -8808,7 +8808,7 @@ jr_018_7395:
     call GetEntityTransitionCountdown             ; $73B1: $CD $05 $0C
     ld   [hl], $80                                ; $73B4: $36 $80
     ld   a, $39                                   ; $73B6: $3E $39
-    ld   [wWorldMusicTrack], a                    ; $73B8: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $73B8: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $73BB: $E0 $B0
     ldh  [$FFBD], a                               ; $73BD: $E0 $BD
     ldh  [hNextWorldMusicTrack], a                ; $73BF: $E0 $BF

@@ -66,7 +66,7 @@ IntroHandlerEntryPoint::
 
     call ResetIntroTimers
     ld   a, $0D
-    ld   [wWorldMusicTrack], a
+    ld   [wActiveMusicTrack], a
     ld   [$D00F], a
     call label_7D4E
     jr   .enableVBlankInterruptAndReturn
@@ -1881,7 +1881,7 @@ label_7A96::
     cp   $0B
     jr   nz, label_7AB2
     ld   a, $01
-    ld   [wWorldMusicTrack], a
+    ld   [wActiveMusicTrack], a
 
 label_7AB2::
     ret

@@ -1,4 +1,5 @@
 ; Overworld music tracks, indexed by map index
+; See MUSIC_* constants for values
 OverworldMusicTracks::
     db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06
     db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06
@@ -18,6 +19,7 @@ OverworldMusicTracks::
     db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
 
 ; Music tracks for inside houses, indexed by map index
+; See MUSIC_* constants for values
 HouseMusicTracks::
     db   $14, $15, $16, $17, $4B, $58, $5B, $5A, $12, $61, $26, $26, $26, $26, $07, $02
     db   $0A, $26, $0A, $53, $13, $3E, $1F, $00, $00, $00, $00, $00, $00, $0A, $48, $26
@@ -146,8 +148,8 @@ SelectMusicTrackAfterTransition::
     jr   z, .return                               ; $41C0: $28 $0D
 
     ; Replace the current music by the power-up music
-    ld   a, $49 ; Piece of Power / Accorn         ; $41C2: $3E $49
-    ld   [wWorldMusicTrack], a                    ; $41C4: $EA $68 $D3
+    ld   a, MUSIC_ACTIVE_POWER_UP                 ; $41C2: $3E $49
+    ld   [wActiveMusicTrack], a                   ; $41C4: $EA $68 $D3
     ldh  [$FFBD], a                               ; $41C7: $E0 $BD
     ldh  [hNextWorldMusicTrack], a                ; $41C9: $E0 $BF
     xor  a                                        ; $41CB: $AF

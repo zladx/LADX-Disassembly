@@ -144,7 +144,7 @@ label_4259::
     ld   hl, $FF9C
     inc  [hl]
     ld   a, $03
-    ld   [wWorldMusicTrack], a
+    ld   [wActiveMusicTrack], a
 
 label_42D8::
     ret

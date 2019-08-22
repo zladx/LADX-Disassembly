@@ -111,6 +111,8 @@ hFFAF:: ; FFAF
   ds 1
 
 hMusicTrack:: ; FFB0
+  ; Music track to play
+  ; See MUSIC_* constants for possible values
   ds 1
 
 ; Next music to be played after room transition

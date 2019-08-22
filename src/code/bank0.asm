@@ -128,10 +128,7 @@ PlayAudioStep::
     call SwitchBank
     call $4006
 
-    ; Call 1E:4006
-    ld   a, $1E
-    call SwitchBank
-    call $4006
+    callsw Func_01E_4006
 
 .return
     ret
@@ -3923,7 +3920,7 @@ include "code/home/dialog.asm"
 ; Input:
 ;   a:   soundtrack id to load
 SetWorldMusicTrack::
-    ld   [wWorldMusicTrack], a
+    ld   [wActiveMusicTrack], a
     ldh  [hNextWorldMusicTrack], a
     ; $FFAB = a
     ld   a, $38
@@ -7889,7 +7886,7 @@ label_3EFB::
     ld   a, $50
 
 label_3F11::
-    ld   [wWorldMusicTrack], a
+    ld   [wActiveMusicTrack], a
     ldh  [$FFBD], a
     ld   a, [wTransitionSequenceCounter]
     cp   $04

@@ -590,101 +590,12 @@ wActiveJingle:: ; D360
 ; D361-D367: squareform jingle parameters
 ds 7
 
-wWorldMusicTrack:: ; D368
-  ; World Music Track
-  ; 00: No music
-  ; 01: Title music when zelda logo appears
-  ; 02: Trendy game/Witch hut
-  ; 03: Game Over screen
-  ; 04: Mabe Village
-  ; 05: Overworld music
-  ; 06: Tal Tal Heights
-  ; 07: Village Shop
-  ; 08: Raft Ride Rapids
-  ; 09: Mysterious Forest
-  ; 0A: Home/trader house
-  ; 0B: Animal Village
-  ; 0C: Fairy House
-  ; 0D: Title music
-  ; 0E: BowWow kidnapped music
-  ; 0F: Found level 2 sword
-  ; 10: Found new weapon
-  ; 11: 2D underground dungeon
-  ; 12: Owl song
-  ; 13: Final Knightmare in Egg song
-  ; 14: Dream Shrine Entrance music
-  ; 15: Found an instrument
-  ; 16: Overworld cave
-  ; 17: Piece of Power/Acorn
-  ; 18: Received horn instrument
-  ; 19: Received bell instrument
-  ; 1A: Received harp instrument
-  ; 1B: Received xylophone instrument
-  ; 1C: Received ?? instrument
-  ; 1D: Received ?? instrument
-  ; 1E: Received thunder drum instrument
-  ; 1F: Marin singing
-  ; 20: Manbo's Mambo fish song
-  ; 21: Received ?? instrument
-  ; 22: Instruments song ??
-  ; 23: Instruments song ??
-  ; 24: Instruments song ??
-  ; 25: Instruments song when opening Egg
-  ; 26: Instruments song when opening Egg part 2
-  ; 27: Instruments song ??
-  ; 28: Lonely/ghost house
-  ; 29: Piece of Power part 2
-  ; 2A: Marin singing + Links ocarina
-  ; 2B: Level 5
-  ; 2C: Dungeon entrance Unlocking
-  ; 2D: Dream sequence sound?
-  ; 2E: At beach with Marin song
-  ; 2F: Unknown
-  ; 30: Dungeon sub-boss music
-  ; 31: Received level 1 sword at beach
-  ; 32: Mr Write's house
-  ; 33: Ulrira's house
-  ; 34: Tarin attacked by Bee's
-  ; 35: Song of Soul by Mamu frogs
-  ; 36: Monkey's building bridge
-  ; 37: Mr Write's house version 2
-  ; 38: Richard House Secret Song
-  ; 39: Turtle Rock entrance boss
-  ; 3A: Fishing/crane game
-  ; 3B: Received item
-  ; 3C: Hidden/Unused song!?
-  ; 3D: Nothing
-  ; 3E: BowWow stolen music
-  ; 3F: Ending music
-  ; 40: Richard's House
-  ; 41: Glitched noise, possibly unfinished song or Sound effect
-  ; 42: Glitched noise, possibly unfinished song or Sound effect
-  ; 43: Glitched noise, possibly unfinished song or Sound effect
-  ; 44: Glitchy music
-  ; 45: Glitchy music
-  ; 46: Glitchy music
-  ; 47: Silence
-  ; 48: Silence
-  ; 49: Glitchy noise
-  ; 4A: Silence
-  ; 4B: Glitchy music
-  ; 4C: Glitchy music
-  ; 4D: - 4F Silence
-  ; 50: - 57 Silence
-  ; 58: Glitchy music
-  ; 59: Silence
-  ; 5A: Glitchy music
-  ; 5B: Silence
-  ; 5C: Silence
-  ; 5D: Glitchy music
-  ; 5E: Silence
-  ; 5F: Silence
-  ; 60: Silence
-  ; 61: - 69 Color dungeon (DX only)
-  ; 6A: - F9 Untested
-  ; F0: Glitched music
-  ; FF: Nothing
+wActiveMusicTrack:: ; D368
+  ; The music track currently playing
   ds 1
+
+; Unlabeled
+ds 7
 
 wActiveWaveSfx:: ; D370
   ; The waveform sound effect currently playing
@@ -700,7 +611,7 @@ wActiveNoiseSfx:: ; D378
 ; D379-D???: noise sound effect parameters
 
 ; Unlabeled
-ds $8F
+ds $88
 
 ; Room warps
 ;

@@ -484,10 +484,10 @@ RoomTransitionPrepareHandler::
 
     ld   a, [wActivePowerUp]                      ; $7AD8: $FA $7C $D4
     and  a                                        ; $7ADB: $A7
-    ldh  a, [hMusicTrack]                               ; $7ADC: $F0 $B0
+    ldh  a, [hMusicTrack]                         ; $7ADC: $F0 $B0
     jr   z, .jr_002_7AE2                          ; $7ADE: $28 $02
 
-    ld   a, $49                                   ; $7AE0: $3E $49
+    ld   a, MUSIC_ACTIVE_POWER_UP                 ; $7AE0: $3E $49
 
 .jr_002_7AE2
     ldh  [hNextMusicTrack], a                     ; $7AE2: $E0 $B1
@@ -533,11 +533,11 @@ jr_002_7B14:
     jr   z, SetNextMusicTrack                     ; $7B18: $28 $13
 
     ldh  a, [$FFBD]                               ; $7B1A: $F0 $BD
-    cp   $49                                      ; $7B1C: $FE $49
+    cp   MUSIC_ACTIVE_POWER_UP                    ; $7B1C: $FE $49
     jr   z, SetNextMusicTrack.setMusicTrack       ; $7B1E: $28 $13
 
     call SetNextMusicTrack                        ; $7B20: $CD $2D $7B
-    ld   a, $49                                   ; $7B23: $3E $49
+    ld   a, MUSIC_ACTIVE_POWER_UP                 ; $7B23: $3E $49
     ldh  [hNextMusicTrack], a                     ; $7B25: $E0 $B1
     ldh  [$FFBD], a                               ; $7B27: $E0 $BD
     ret                                           ; $7B29: $C9

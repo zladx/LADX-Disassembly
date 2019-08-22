@@ -2589,7 +2589,7 @@ jr_007_4F7B:
     jr   nz, jr_007_4FA5                          ; $4F94: $20 $0F
 
     ld   a, $34                                   ; $4F96: $3E $34
-    ld   [wWorldMusicTrack], a                    ; $4F98: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $4F98: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $4F9B: $E0 $B0
     call GetEntityTransitionCountdown                 ; $4F9D: $CD $05 $0C
     ld   [hl], $C0                                ; $4FA0: $36 $C0
@@ -3636,7 +3636,7 @@ jr_007_5572:
     jr   nc, jr_007_5599                          ; $557D: $30 $1A
 
     ld   a, $10                                   ; $557F: $3E $10
-    ld   [wWorldMusicTrack], a                    ; $5581: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $5581: $EA $68 $D3
     ld   [wC167], a                               ; $5584: $EA $67 $C1
     ldh  a, [hNextWorldMusicTrack]                               ; $5587: $F0 $BF
     ldh  [hMusicTrack], a                         ; $5589: $E0 $B0
@@ -4326,7 +4326,7 @@ jr_007_5948:
     jr   nz, jr_007_596A                          ; $5959: $20 $0F
 
     ld   a, $36                                   ; $595B: $3E $36
-    ld   [wWorldMusicTrack], a                    ; $595D: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $595D: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $5960: $E0 $B0
     call label_BFB                                ; $5962: $CD $FB $0B
     ld   [hl], $80                                ; $5965: $36 $80
@@ -7228,7 +7228,7 @@ label_007_696A:
 
 jr_007_698E:
     ld   a, $4C                                   ; $698E: $3E $4C
-    ld   [wWorldMusicTrack], a                    ; $6990: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $6990: $EA $68 $D3
     jp   IncrementEntityWalkingAttr               ; $6993: $C3 $12 $3B
 
     ld   a, $1D                                   ; $6996: $3E $1D
@@ -10506,7 +10506,7 @@ jr_007_7C76:
     jr   jr_007_7C93                              ; $7C8E: $18 $03
 
 jr_007_7C90:
-    ld   [wWorldMusicTrack], a                    ; $7C90: $EA $68 $D3
+    ld   [wActiveMusicTrack], a                   ; $7C90: $EA $68 $D3
 
 jr_007_7C93:
     ld   hl, $C3D0                                ; $7C93: $21 $D0 $C3

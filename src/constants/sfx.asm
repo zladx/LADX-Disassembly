@@ -2,6 +2,100 @@
 ; Constants for audio effects
 ;
 
+; Values for hMusicTrack
+MUSIC_NONE                                      equ $00
+MUSIC_TITLE_SCREEN                              equ $01
+MUSIC_TRENDY_GAME                               equ $02
+MUSIC_GAME_OVER                                 equ $03
+MUSIC_MABE_VILLAGE                              equ $04
+MUSIC_OVERWORLD                                 equ $05
+MUSIC_TAL_TAL_HEIGHTS                           equ $06
+MUSIC_VILLAGE_SHOP                              equ $07
+MUSIC_RAFT_RIDE_RAPIDS                          equ $08
+MUSIC_MYSTERIOUS_FOREST                         equ $09
+MUSIC_HOME_TRADER_HOUSE                         equ $0A
+MUSIC_ANIMAL_VILLAGE                            equ $0B
+MUSIC_FAIRY_HOUSE                               equ $0C
+MUSIC_TITLE                                     equ $0D
+MUSIC_BOWWOW_KIDNAPPED                          equ $0E
+MUSIC_FOUND_LEVEL_2_SWORD                       equ $0F
+MUSIC_FOUND_NEW_WEAPON                          equ $10
+MUSIC_2D_UNDERGROUND_DUNGEON                    equ $11
+MUSIC_OWL                                       equ $12
+MUSIC_FINAL_NIGHTMARE_IN_EGG                    equ $13
+MUSIC_DREAM_SHRINE_ENTRANCE                     equ $14
+MUSIC_FOUND_INSTRUMENT                          equ $15
+MUSIC_OVERWORLD_CAVE                            equ $16
+MUSIC_PIECE_OF_POWER                            equ $17
+MUSIC_RECEIVED_HORN_INSTRUMENT                  equ $18
+MUSIC_RECEIVED_BELL_INSTRUMENT                  equ $19
+MUSIC_RECEIVED_HARP_INSTRUMENT                  equ $1A
+MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT             equ $1B
+;MUSIC_RECEIVED_UNKNOWN_INSTRUMENT              equ $1C
+;MUSIC_RECEIVED_UNKNOWN_INSTRUMENT              equ $1D
+MUSIC_RECEIVED_THUNDER_DRUM_INSTRUMENT          equ $1E
+MUSIC_MARIN_SINGING                             equ $1F
+MUSIC_MANBO_SONG                                equ $20
+;MUSIC_RECEIVED ?? INSTRUMENT                   equ $21
+;MUSIC_INSTRUMENTS_SONG ??                      equ $22
+;MUSIC_INSTRUMENTS_SONG ??                      equ $23
+;MUSIC_INSTRUMENTS_SONG ??                      equ $24
+MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25
+MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_2          equ $26
+;MUSIC_INSTRUMENTS_SONG ??                      equ $27
+MUSIC_LONELY_HOUSE                              equ $28
+MUSIC_PIECE_OF_POWER_PART_2                     equ $29
+MUSIC_MARIN_SINGING_LINKS_OCARINA               equ $2A
+MUSIC_LEVEL_5                                   equ $2B
+MUSIC_DUNGEON_ENTRANCE_UNLOCKING                equ $2C
+MUSIC_DREAM_SEQUENCE_SOUND                      equ $2D
+MUSIC_AT_BEACH_WITH_MARIN                       equ $2E
+MUSIC_UNKNOWN                                   equ $2F
+MUSIC_DUNGEON_SUB_BOSS                          equ $30
+MUSIC_RECEIVED_LEVEL_1_SWORD                    equ $31
+MUSIC_MR_WRITE_HOUSE                            equ $32
+MUSIC_ULRIRA_HOUSE                              equ $33
+MUSIC_TARIN_ATTACKED_BY_BEES                    equ $34
+MUSIC_MAMU_SONG                                 equ $35
+MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
+MUSIC_MR_WRITE_HOUSE_VERSION_2                  equ $37
+MUSIC_RICHARD_HOUSE_SECRET_SONG                 equ $38
+MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
+MUSIC_FISHING_GAME                              equ $3A
+MUSIC_RECEIVED_ITEM                             equ $3B
+MUSIC_HIDDEN_UNUSED_SONG                        equ $3C
+MUSIC_NOTHING                                   equ $3D
+MUSIC_BOWWOW_STOLEN                             equ $3E
+MUSIC_ENDING                                    equ $3F
+MUSIC_RICHARD_S_HOUSE                           equ $40
+;MUSIC_GLITCHED_NOISE                           equ $41
+;MUSIC_GLITCHED_NOISE                           equ $42
+;MUSIC_GLITCHED_NOISE                           equ $43
+;MUSIC_GLITCHY                                  equ $44
+;MUSIC_GLITCHY                                  equ $45
+;MUSIC_GLITCHY                                  equ $46
+;MUSIC_SILENCE                                  equ $47
+;MUSIC_SILENCE                                  equ $48
+MUSIC_ACTIVE_POWER_UP                           equ $49
+;MUSIC_SILENCE                                  equ $4A
+;MUSIC_GLITCHY                                  equ $4B
+;MUSIC_GLITCHY                                  equ $4C
+;MUSIC_SILENCE                                  equ $4D
+;MUSIC_SILENCE                                  equ $50
+;MUSIC_GLITCHY                                  equ $58
+;MUSIC_SILENCE                                  equ $59
+;MUSIC_GLITCHY                                  equ $5A
+;MUSIC_SILENCE                                  equ $5B
+;MUSIC_SILENCE                                  equ $5C
+;MUSIC_GLITCHY                                  equ $5D
+;MUSIC_SILENCE                                  equ $5E
+;MUSIC_SILENCE                                  equ $5F
+;MUSIC_SILENCE                                  equ $60
+MUSIC_COLOR_DUNGEON                             equ $61
+;MUSIC_UNTESTED                                 equ $6A
+;MUSIC_GLITCHED                                 equ $F0
+;MUSIC_NOTHING                                  equ $FF
+
 ; Values for hJingle
 JINGLE_TREASURE_FOUND   equ $01
 JINGLE_PUZZLE_SOLVED    equ $02

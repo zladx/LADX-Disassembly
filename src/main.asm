@@ -166,7 +166,7 @@ section "bank1D", romx[$4000], bank[$1D]
 include "text/dialog_4.asm"
 
 section "bank1E", romx[$4000], bank[$1E]
-include "code/audio/bank1E.asm"
+include "code/audio/music_2.asm"
 
 section "bank1F", romx[$4000], bank[$1F]
 include "code/audio/sfx_entry_point.asm"

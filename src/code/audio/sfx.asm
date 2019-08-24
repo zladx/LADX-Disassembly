@@ -30,7 +30,7 @@ jr_01F_421C:
     ld   hl, $4182                                ; $4220: $21 $82 $41
 
 jr_01F_4223:
-    call func_01F_7A64                            ; $4223: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $4223: $CD $64 $7A
     ld   de, $D390                                ; $4226: $11 $90 $D3
     ld   bc, $D394                                ; $4229: $01 $94 $D3
     jp   hl                                       ; $422C: $E9
@@ -53,10 +53,10 @@ jr_01F_4223:
     ld   hl, $42D3                                ; $4254: $21 $D3 $42
     jp   label_01F_5395                           ; $4257: $C3 $95 $53
 
-    call func_01F_7A71                            ; $425A: $CD $71 $7A
+    call DecrementValueAtDE                            ; $425A: $CD $71 $7A
     ret  nz                                       ; $425D: $C0
 
-    call func_01F_7A75                            ; $425E: $CD $75 $7A
+    call IncrementValueAtBC                            ; $425E: $CD $75 $7A
     cp   $01                                      ; $4261: $FE $01
     jr   z, jr_01F_4273                           ; $4263: $28 $0E
 
@@ -200,15 +200,15 @@ jr_01F_4318:
     ld   b, e                                     ; $4324: $43
     jp   label_01F_5395                           ; $4325: $C3 $95 $53
 
-    call func_01F_7A71                            ; $4328: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4328: $CD $71 $7A
     ret  nz                                       ; $432B: $C0
 
-    call func_01F_7A75                            ; $432C: $CD $75 $7A
+    call IncrementValueAtBC                            ; $432C: $CD $75 $7A
     cp   $08                                      ; $432F: $FE $08
     jp   z, label_01F_53BB                        ; $4331: $CA $BB $53
 
     ld   hl, $4345                                ; $4334: $21 $45 $43
-    call func_01F_7A64                            ; $4337: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $4337: $CD $64 $7A
     ld   a, $80                                   ; $433A: $3E $80
     ldh  [rNR11], a                               ; $433C: $E0 $11
     ld   a, $F1                                   ; $433E: $3E $F1
@@ -248,7 +248,7 @@ jr_01F_4318:
     call func_01F_7AB7                            ; $4371: $CD $B7 $7A
     jp   label_01F_539A                           ; $4374: $C3 $9A $53
 
-    call func_01F_7A75                            ; $4377: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4377: $CD $75 $7A
     cp   $0D                                      ; $437A: $FE $0D
 
 jr_01F_437C:
@@ -297,7 +297,7 @@ jr_01F_4390:
     call func_01F_7AB7                            ; $43AB: $CD $B7 $7A
     jp   label_01F_539A                           ; $43AE: $C3 $9A $53
 
-    call func_01F_7A71                            ; $43B1: $CD $71 $7A
+    call DecrementValueAtDE                            ; $43B1: $CD $71 $7A
     ret  nz                                       ; $43B4: $C0
 
     ld   a, [$D379]                               ; $43B5: $FA $79 $D3
@@ -306,7 +306,7 @@ jr_01F_4390:
 
     ld   a, $02                                   ; $43BD: $3E $02
     ld   [de], a                                  ; $43BF: $12
-    call func_01F_7A75                            ; $43C0: $CD $75 $7A
+    call IncrementValueAtBC                            ; $43C0: $CD $75 $7A
     cp   $03                                      ; $43C3: $FE $03
     jr   z, jr_01F_43CD                           ; $43C5: $28 $06
 
@@ -338,12 +338,12 @@ jr_01F_43CD:
     call func_01F_7AB7                            ; $43EA: $CD $B7 $7A
     jp   label_01F_539A                           ; $43ED: $C3 $9A $53
 
-    call func_01F_7A71                            ; $43F0: $CD $71 $7A
+    call DecrementValueAtDE                            ; $43F0: $CD $71 $7A
     ret  nz                                       ; $43F3: $C0
 
     ld   a, $04                                   ; $43F4: $3E $04
     ld   [de], a                                  ; $43F6: $12
-    call func_01F_7A75                            ; $43F7: $CD $75 $7A
+    call IncrementValueAtBC                            ; $43F7: $CD $75 $7A
     cp   $05                                      ; $43FA: $FE $05
     jr   z, jr_01F_4404                           ; $43FC: $28 $06
 
@@ -379,7 +379,7 @@ jr_01F_4404:
     call func_01F_7AB7                            ; $4425: $CD $B7 $7A
     jp   label_01F_5395                           ; $4428: $C3 $95 $53
 
-    call func_01F_7A75                            ; $442B: $CD $75 $7A
+    call IncrementValueAtBC                            ; $442B: $CD $75 $7A
     cp   $09                                      ; $442E: $FE $09
     jr   z, jr_01F_4438                           ; $4430: $28 $06
 
@@ -422,10 +422,10 @@ jr_01F_4438:
     ld   b, h                                     ; $445B: $44
     jp   label_01F_539A                           ; $445C: $C3 $9A $53
 
-    call func_01F_7A71                            ; $445F: $CD $71 $7A
+    call DecrementValueAtDE                            ; $445F: $CD $71 $7A
     ret  nz                                       ; $4462: $C0
 
-    call func_01F_7A75                            ; $4463: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4463: $CD $75 $7A
     cp   $02                                      ; $4466: $FE $02
     jp   z, label_01F_53BB                        ; $4468: $CA $BB $53
 
@@ -446,10 +446,10 @@ func_01F_4471:
     ld   b, h                                     ; $447F: $44
     jp   label_01F_539A                           ; $4480: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4483: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4483: $CD $71 $7A
     ret  nz                                       ; $4486: $C0
 
-    call func_01F_7A75                            ; $4487: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4487: $CD $75 $7A
     cp   $02                                      ; $448A: $FE $02
     jp   z, label_01F_53BB                        ; $448C: $CA $BB $53
 
@@ -470,7 +470,7 @@ func_01F_4471:
     call func_01F_7AB7                            ; $44A4: $CD $B7 $7A
     jp   label_01F_539A                           ; $44A7: $C3 $9A $53
 
-    call func_01F_7A75                            ; $44AA: $CD $75 $7A
+    call IncrementValueAtBC                            ; $44AA: $CD $75 $7A
     cp   $09                                      ; $44AD: $FE $09
     jp   z, label_01F_53B5                        ; $44AF: $CA $B5 $53
 
@@ -517,10 +517,10 @@ jr_01F_44E2:
     ld   hl, $450F                                ; $44E2: $21 $0F $45
     jr   jr_01F_44DF                              ; $44E5: $18 $F8
 
-    call func_01F_7A71                            ; $44E7: $CD $71 $7A
+    call DecrementValueAtDE                            ; $44E7: $CD $71 $7A
     ret  nz                                       ; $44EA: $C0
 
-    call func_01F_7A75                            ; $44EB: $CD $75 $7A
+    call IncrementValueAtBC                            ; $44EB: $CD $75 $7A
     cp   $02                                      ; $44EE: $FE $02
     jp   z, label_01F_53BB                        ; $44F0: $CA $BB $53
 
@@ -559,12 +559,12 @@ jr_01F_4505:
     call func_01F_7AB7                            ; $451D: $CD $B7 $7A
     jp   label_01F_5395                           ; $4520: $C3 $95 $53
 
-    call func_01F_7A71                            ; $4523: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4523: $CD $71 $7A
     ret  nz                                       ; $4526: $C0
 
     ld   a, $02                                   ; $4527: $3E $02
     ld   [de], a                                  ; $4529: $12
-    call func_01F_7A75                            ; $452A: $CD $75 $7A
+    call IncrementValueAtBC                            ; $452A: $CD $75 $7A
     cp   $07                                      ; $452D: $FE $07
     jr   z, jr_01F_4537                           ; $452F: $28 $06
 
@@ -606,7 +606,7 @@ jr_01F_454A:
     call func_01F_7AB7                            ; $455C: $CD $B7 $7A
     jp   label_01F_539A                           ; $455F: $C3 $9A $53
 
-    call func_01F_7A75                            ; $4562: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4562: $CD $75 $7A
     cp   $04                                      ; $4565: $FE $04
     jr   z, jr_01F_456F                           ; $4567: $28 $06
 
@@ -654,7 +654,7 @@ jr_01F_458C:
     ld   hl, $45A8                                ; $459B: $21 $A8 $45
     jp   label_01F_539A                           ; $459E: $C3 $9A $53
 
-    call func_01F_7A71                            ; $45A1: $CD $71 $7A
+    call DecrementValueAtDE                            ; $45A1: $CD $71 $7A
     ret  nz                                       ; $45A4: $C0
 
     jp   label_01F_53BB                           ; $45A5: $C3 $BB $53
@@ -679,7 +679,7 @@ jr_01F_45B9:
     ld   hl, $45C6                                ; $45B9: $21 $C6 $45
     jp   label_01F_539A                           ; $45BC: $C3 $9A $53
 
-    call func_01F_7A71                            ; $45BF: $CD $71 $7A
+    call DecrementValueAtDE                            ; $45BF: $CD $71 $7A
     ret  nz                                       ; $45C2: $C0
 
     jp   label_01F_53BB                           ; $45C3: $C3 $BB $53
@@ -691,10 +691,10 @@ jr_01F_45B9:
     ld   hl, $45E4                                ; $45CC: $21 $E4 $45
     jp   label_01F_539A                           ; $45CF: $C3 $9A $53
 
-    call func_01F_7A71                            ; $45D2: $CD $71 $7A
+    call DecrementValueAtDE                            ; $45D2: $CD $71 $7A
     ret  nz                                       ; $45D5: $C0
 
-    call func_01F_7A75                            ; $45D6: $CD $75 $7A
+    call IncrementValueAtBC                            ; $45D6: $CD $75 $7A
     cp   $02                                      ; $45D9: $FE $02
     jp   z, label_01F_53BB                        ; $45DB: $CA $BB $53
 
@@ -725,7 +725,7 @@ jr_01F_45B9:
     call func_01F_7AB7                            ; $4609: $CD $B7 $7A
     jp   label_01F_539A                           ; $460C: $C3 $9A $53
 
-    call func_01F_7A75                            ; $460F: $CD $75 $7A
+    call IncrementValueAtBC                            ; $460F: $CD $75 $7A
     cp   $02                                      ; $4612: $FE $02
     jr   z, jr_01F_4625                           ; $4614: $28 $0F
 
@@ -778,7 +778,7 @@ label_01F_463D:
     call func_01F_7AB7                            ; $4669: $CD $B7 $7A
     jp   label_01F_539A                           ; $466C: $C3 $9A $53
 
-    call func_01F_7A75                            ; $466F: $CD $75 $7A
+    call IncrementValueAtBC                            ; $466F: $CD $75 $7A
     cp   $02                                      ; $4672: $FE $02
     jr   z, jr_01F_4685                           ; $4674: $28 $0F
 
@@ -828,12 +828,12 @@ jr_01F_46B1:
     ld   hl, $46E1                                ; $46B1: $21 $E1 $46
     jr   jr_01F_46AB                              ; $46B4: $18 $F5
 
-    call func_01F_7A71                            ; $46B6: $CD $71 $7A
+    call DecrementValueAtDE                            ; $46B6: $CD $71 $7A
     ret  nz                                       ; $46B9: $C0
 
     ld   a, $03                                   ; $46BA: $3E $03
     ld   [de], a                                  ; $46BC: $12
-    call func_01F_7A75                            ; $46BD: $CD $75 $7A
+    call IncrementValueAtBC                            ; $46BD: $CD $75 $7A
     cp   $04                                      ; $46C0: $FE $04
     jr   z, jr_01F_46CA                           ; $46C2: $28 $06
 
@@ -876,7 +876,7 @@ jr_01F_46CA:
     ld   hl, $46FB                                ; $46EE: $21 $FB $46
     jp   label_01F_539A                           ; $46F1: $C3 $9A $53
 
-    call func_01F_7A71                            ; $46F4: $CD $71 $7A
+    call DecrementValueAtDE                            ; $46F4: $CD $71 $7A
     ret  nz                                       ; $46F7: $C0
 
     jp   label_01F_53BB                           ; $46F8: $C3 $BB $53
@@ -890,15 +890,15 @@ jr_01F_46CA:
     ld   hl, $4720                                ; $4701: $21 $20 $47
     jp   label_01F_539A                           ; $4704: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4707: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4707: $CD $71 $7A
     ret  nz                                       ; $470A: $C0
 
-    call func_01F_7A75                            ; $470B: $CD $75 $7A
+    call IncrementValueAtBC                            ; $470B: $CD $75 $7A
     cp   $03                                      ; $470E: $FE $03
     jp   z, label_01F_53BB                        ; $4710: $CA $BB $53
 
     ld   hl, $471C                                ; $4713: $21 $1C $47
-    call func_01F_7A64                            ; $4716: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $4716: $CD $64 $7A
     jp   label_01F_7A79                           ; $4719: $C3 $79 $7A
 
     ld   h, $47                                   ; $471C: $26 $47
@@ -923,7 +923,7 @@ jr_01F_46CA:
     ld   hl, $473F                                ; $4732: $21 $3F $47
     jp   label_01F_539A                           ; $4735: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4738: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4738: $CD $71 $7A
     ret  nz                                       ; $473B: $C0
 
     jp   label_01F_53BB                           ; $473C: $C3 $BB $53
@@ -941,7 +941,7 @@ jr_01F_46CA:
     call func_01F_7AB7                            ; $474D: $CD $B7 $7A
     jp   label_01F_5395                           ; $4750: $C3 $95 $53
 
-    call func_01F_7A75                            ; $4753: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4753: $CD $75 $7A
     cp   $03                                      ; $4756: $FE $03
     jr   z, jr_01F_4760                           ; $4758: $28 $06
 
@@ -986,10 +986,10 @@ jr_01F_4784:
     ld   b, a                                     ; $478C: $47
     jp   label_01F_539A                           ; $478D: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4790: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4790: $CD $71 $7A
     ret  nz                                       ; $4793: $C0
 
-    call func_01F_7A75                            ; $4794: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4794: $CD $75 $7A
     cp   $02                                      ; $4797: $FE $02
     jp   z, label_01F_53B5                        ; $4799: $CA $B5 $53
 
@@ -1009,15 +1009,15 @@ jr_01F_4784:
     ld   hl, $47D1                                ; $47AE: $21 $D1 $47
     jp   label_01F_5395                           ; $47B1: $C3 $95 $53
 
-    call func_01F_7A71                            ; $47B4: $CD $71 $7A
+    call DecrementValueAtDE                            ; $47B4: $CD $71 $7A
     ret  nz                                       ; $47B7: $C0
 
-    call func_01F_7A75                            ; $47B8: $CD $75 $7A
+    call IncrementValueAtBC                            ; $47B8: $CD $75 $7A
     cp   $05                                      ; $47BB: $FE $05
     jp   z, label_01F_53BB                        ; $47BD: $CA $BB $53
 
     ld   hl, $47C9                                ; $47C0: $21 $C9 $47
-    call func_01F_7A64                            ; $47C3: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $47C3: $CD $64 $7A
     jp   label_01F_7A79                           ; $47C6: $C3 $79 $7A
 
     rst  $10                                      ; $47C9: $D7
@@ -1066,10 +1066,10 @@ jr_01F_47EA:
     ld   hl, $480F                                ; $47F7: $21 $0F $48
     jp   label_01F_539A                           ; $47FA: $C3 $9A $53
 
-    call func_01F_7A71                            ; $47FD: $CD $71 $7A
+    call DecrementValueAtDE                            ; $47FD: $CD $71 $7A
     ret  nz                                       ; $4800: $C0
 
-    call func_01F_7A75                            ; $4801: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4801: $CD $75 $7A
     cp   $02                                      ; $4804: $FE $02
     jp   z, label_01F_53B5                        ; $4806: $CA $B5 $53
 
@@ -1089,12 +1089,12 @@ jr_01F_47EA:
     call func_01F_7AB7                            ; $4820: $CD $B7 $7A
     jp   label_01F_5395                           ; $4823: $C3 $95 $53
 
-    call func_01F_7A71                            ; $4826: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4826: $CD $71 $7A
     ret  nz                                       ; $4829: $C0
 
     ld   a, $04                                   ; $482A: $3E $04
     ld   [de], a                                  ; $482C: $12
-    call func_01F_7A75                            ; $482D: $CD $75 $7A
+    call IncrementValueAtBC                            ; $482D: $CD $75 $7A
     cp   $08                                      ; $4830: $FE $08
     jr   z, jr_01F_483A                           ; $4832: $28 $06
 
@@ -1157,7 +1157,7 @@ jr_01F_4850:
     call func_01F_7AB7                            ; $487D: $CD $B7 $7A
     jp   label_01F_539A                           ; $4880: $C3 $9A $53
 
-    call func_01F_7A75                            ; $4883: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4883: $CD $75 $7A
     cp   $03                                      ; $4886: $FE $03
     jr   z, jr_01F_4894                           ; $4888: $28 $0A
 
@@ -1217,18 +1217,18 @@ jr_01F_48B0:
     ld   hl, $4901                                ; $48D4: $21 $01 $49
     jp   label_01F_539A                           ; $48D7: $C3 $9A $53
 
-    call func_01F_7A71                            ; $48DA: $CD $71 $7A
+    call DecrementValueAtDE                            ; $48DA: $CD $71 $7A
     ret  nz                                       ; $48DD: $C0
 
     ld   a, $79                                   ; $48DE: $3E $79
     ldh  [rNR11], a                               ; $48E0: $E0 $11
-    call func_01F_7A75                            ; $48E2: $CD $75 $7A
+    call IncrementValueAtBC                            ; $48E2: $CD $75 $7A
     cp   $03                                      ; $48E5: $FE $03
     jr   z, jr_01F_48F2                           ; $48E7: $28 $09
 
 jr_01F_48E9:
     ld   hl, $48FD                                ; $48E9: $21 $FD $48
-    call func_01F_7A64                            ; $48EC: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $48EC: $CD $64 $7A
     jp   $53DF                                    ; $48EF: $C3 $DF $53
 
 jr_01F_48F2:
@@ -1254,15 +1254,15 @@ jr_01F_48FA:
     ld   c, c                                     ; $490C: $49
     jp   label_01F_5395                           ; $490D: $C3 $95 $53
 
-    call func_01F_7A71                            ; $4910: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4910: $CD $71 $7A
     ret  nz                                       ; $4913: $C0
 
-    call func_01F_7A75                            ; $4914: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4914: $CD $75 $7A
     cp   $05                                      ; $4917: $FE $05
     jp   z, label_01F_53BB                        ; $4919: $CA $BB $53
 
     ld   hl, $4925                                ; $491C: $21 $25 $49
-    call func_01F_7A64                            ; $491F: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $491F: $CD $64 $7A
     jp   $53DF                                    ; $4922: $C3 $DF $53
 
     inc  sp                                       ; $4925: $33
@@ -1287,7 +1287,7 @@ jr_01F_48FA:
     call func_01F_7AB7                            ; $4941: $CD $B7 $7A
     jp   label_01F_5395                           ; $4944: $C3 $95 $53
 
-    call func_01F_7A75                            ; $4947: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4947: $CD $75 $7A
     cp   $09                                      ; $494A: $FE $09
     jr   z, jr_01F_4954                           ; $494C: $28 $06
 
@@ -1342,7 +1342,7 @@ jr_01F_4980:
     call func_01F_7AB7                            ; $4988: $CD $B7 $7A
     jp   label_01F_539A                           ; $498B: $C3 $9A $53
 
-    call func_01F_7A75                            ; $498E: $CD $75 $7A
+    call IncrementValueAtBC                            ; $498E: $CD $75 $7A
     cp   $03                                      ; $4991: $FE $03
     jr   z, jr_01F_499B                           ; $4993: $28 $06
 
@@ -1374,7 +1374,7 @@ jr_01F_499B:
     call func_01F_7AB7                            ; $49B8: $CD $B7 $7A
     jp   label_01F_539A                           ; $49BB: $C3 $9A $53
 
-    call func_01F_7A75                            ; $49BE: $CD $75 $7A
+    call IncrementValueAtBC                            ; $49BE: $CD $75 $7A
     cp   $02                                      ; $49C1: $FE $02
     jr   z, jr_01F_49CB                           ; $49C3: $28 $06
 
@@ -1433,7 +1433,7 @@ jr_01F_49F7:
     jp   z, label_01F_53E6                        ; $4A0D: $CA $E6 $53
 
     ld   bc, $D3D7                                ; $4A10: $01 $D7 $D3
-    call func_01F_7A75                            ; $4A13: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4A13: $CD $75 $7A
     cp   $04                                      ; $4A16: $FE $04
     jr   nc, jr_01F_4A20                          ; $4A18: $30 $06
 
@@ -1515,15 +1515,15 @@ jr_01F_4A4A:
     ld   hl, $4AAD                                ; $4A75: $21 $AD $4A
     jp   label_01F_5395                           ; $4A78: $C3 $95 $53
 
-    call func_01F_7A71                            ; $4A7B: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4A7B: $CD $71 $7A
     ret  nz                                       ; $4A7E: $C0
 
-    call func_01F_7A75                            ; $4A7F: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4A7F: $CD $75 $7A
     cp   $08                                      ; $4A82: $FE $08
     jr   z, jr_01F_4A97                           ; $4A84: $28 $11
 
     ld   hl, $4A9F                                ; $4A86: $21 $9F $4A
-    call func_01F_7A64                            ; $4A89: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $4A89: $CD $64 $7A
     ld   a, [$D394]                               ; $4A8C: $FA $94 $D3
     and  $01                                      ; $4A8F: $E6 $01
     jp   nz, label_01F_7A7F                       ; $4A91: $C2 $7F $7A
@@ -1588,7 +1588,7 @@ jr_01F_4AC1:
     ld   hl, $4AE6                                ; $4AD9: $21 $E6 $4A
     jp   label_01F_539A                           ; $4ADC: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4ADF: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4ADF: $CD $71 $7A
     ret  nz                                       ; $4AE2: $C0
 
     jp   label_01F_53BB                           ; $4AE3: $C3 $BB $53
@@ -1605,10 +1605,10 @@ jr_01F_4AC1:
     ld   hl, $4B2B                                ; $4AF1: $21 $2B $4B
     jp   label_01F_5395                           ; $4AF4: $C3 $95 $53
 
-    call func_01F_7A71                            ; $4AF7: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4AF7: $CD $71 $7A
     ret  nz                                       ; $4AFA: $C0
 
-    call func_01F_7A75                            ; $4AFB: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4AFB: $CD $75 $7A
     cp   $06                                      ; $4AFE: $FE $06
     jr   z, jr_01F_4B0F                           ; $4B00: $28 $0D
 
@@ -1617,7 +1617,7 @@ jr_01F_4AC1:
 
 jr_01F_4B06:
     ld   hl, $4B1F                                ; $4B06: $21 $1F $4B
-    call func_01F_7A64                            ; $4B09: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $4B09: $CD $64 $7A
     jp   $53DF                                    ; $4B0C: $C3 $DF $53
 
 jr_01F_4B0F:
@@ -1671,12 +1671,12 @@ jr_01F_4B2B:
     call func_01F_7AB7                            ; $4B4B: $CD $B7 $7A
     jp   label_01F_5395                           ; $4B4E: $C3 $95 $53
 
-    call func_01F_7A71                            ; $4B51: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4B51: $CD $71 $7A
     ret  nz                                       ; $4B54: $C0
 
     ld   a, $03                                   ; $4B55: $3E $03
     ld   [de], a                                  ; $4B57: $12
-    call func_01F_7A75                            ; $4B58: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4B58: $CD $75 $7A
     cp   $04                                      ; $4B5B: $FE $04
     jr   z, jr_01F_4B65                           ; $4B5D: $28 $06
 
@@ -1719,10 +1719,10 @@ jr_01F_4B74:
     ld   hl, $4BAB                                ; $4B91: $21 $AB $4B
     jp   label_01F_539A                           ; $4B94: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4B97: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4B97: $CD $71 $7A
     ret  nz                                       ; $4B9A: $C0
 
-    call func_01F_7A75                            ; $4B9B: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4B9B: $CD $75 $7A
     cp   $02                                      ; $4B9E: $FE $02
     jp   z, label_01F_53B5                        ; $4BA0: $CA $B5 $53
 
@@ -1742,15 +1742,15 @@ jr_01F_4B74:
     ld   hl, $4BDE                                ; $4BB1: $21 $DE $4B
     jp   label_01F_539A                           ; $4BB4: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4BB7: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4BB7: $CD $71 $7A
     ret  nz                                       ; $4BBA: $C0
 
-    call func_01F_7A75                            ; $4BBB: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4BBB: $CD $75 $7A
     cp   $08                                      ; $4BBE: $FE $08
     jp   z, label_01F_53BB                        ; $4BC0: $CA $BB $53
 
     ld   hl, $4BD0                                ; $4BC3: $21 $D0 $4B
-    call func_01F_7A64                            ; $4BC6: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $4BC6: $CD $64 $7A
     ld   a, $BD                                   ; $4BC9: $3E $BD
     ldh  [rNR11], a                               ; $4BCB: $E0 $11
     jp   $53DF                                    ; $4BCD: $C3 $DF $53
@@ -1793,10 +1793,10 @@ jr_01F_4B74:
     ld   hl, $4C13                                ; $4BF9: $21 $13 $4C
     jp   label_01F_539A                           ; $4BFC: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4BFF: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4BFF: $CD $71 $7A
     ret  nz                                       ; $4C02: $C0
 
-    call func_01F_7A75                            ; $4C03: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4C03: $CD $75 $7A
     cp   $02                                      ; $4C06: $FE $02
     jp   z, label_01F_53BB                        ; $4C08: $CA $BB $53
 
@@ -1814,7 +1814,7 @@ jr_01F_4B74:
     ld   hl, $4C26                                ; $4C19: $21 $26 $4C
     jp   label_01F_539A                           ; $4C1C: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4C1F: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4C1F: $CD $71 $7A
     ret  nz                                       ; $4C22: $C0
 
     jp   label_01F_53B5                           ; $4C23: $C3 $B5 $53
@@ -1829,7 +1829,7 @@ jr_01F_4B74:
     call func_01F_7AB7                            ; $4C34: $CD $B7 $7A
     jp   label_01F_539A                           ; $4C37: $C3 $9A $53
 
-    call func_01F_7A75                            ; $4C3A: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4C3A: $CD $75 $7A
     cp   $0B                                      ; $4C3D: $FE $0B
     jr   z, jr_01F_4C47                           ; $4C3F: $28 $06
 
@@ -1884,7 +1884,7 @@ jr_01F_4C56:
     call func_01F_7AB7                            ; $4C89: $CD $B7 $7A
     jp   label_01F_5395                           ; $4C8C: $C3 $95 $53
 
-    call func_01F_7A75                            ; $4C8F: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4C8F: $CD $75 $7A
     cp   $07                                      ; $4C92: $FE $07
     jr   z, jr_01F_4C9C                           ; $4C94: $28 $06
 
@@ -1949,12 +1949,12 @@ jr_01F_4CBE:
     call func_01F_7AB7                            ; $4CE9: $CD $B7 $7A
     jp   label_01F_5395                           ; $4CEC: $C3 $95 $53
 
-    call func_01F_7A71                            ; $4CEF: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4CEF: $CD $71 $7A
     ret  nz                                       ; $4CF2: $C0
 
     ld   a, $08                                   ; $4CF3: $3E $08
     ld   [de], a                                  ; $4CF5: $12
-    call func_01F_7A75                            ; $4CF6: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4CF6: $CD $75 $7A
     cp   $05                                      ; $4CF9: $FE $05
     jr   z, jr_01F_4D03                           ; $4CFB: $28 $06
 
@@ -1997,7 +1997,7 @@ jr_01F_4D12:
     call func_01F_7AB7                            ; $4D2E: $CD $B7 $7A
     jp   label_01F_539A                           ; $4D31: $C3 $9A $53
 
-    call func_01F_7A75                            ; $4D34: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4D34: $CD $75 $7A
     cp   $29                                      ; $4D37: $FE $29
     jr   z, jr_01F_4D41                           ; $4D39: $28 $06
 
@@ -2130,7 +2130,7 @@ jr_01F_4D7C:
     call func_01F_7AB7                            ; $4DBF: $CD $B7 $7A
     jp   label_01F_539A                           ; $4DC2: $C3 $9A $53
 
-    call func_01F_7A75                            ; $4DC5: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4DC5: $CD $75 $7A
     cp   $07                                      ; $4DC8: $FE $07
     jr   z, jr_01F_4DD2                           ; $4DCA: $28 $06
 
@@ -2169,7 +2169,7 @@ jr_01F_4DD2:
     ld   hl, $4E0A                                ; $4DF4: $21 $0A $4E
     jp   label_01F_539A                           ; $4DF7: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4DFA: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4DFA: $CD $71 $7A
     ret  nz                                       ; $4DFD: $C0
 
     call func_01F_7A9A                            ; $4DFE: $CD $9A $7A
@@ -2190,7 +2190,7 @@ jr_01F_4DD2:
     call func_01F_7AB7                            ; $4E18: $CD $B7 $7A
     jp   label_01F_539A                           ; $4E1B: $C3 $9A $53
 
-    call func_01F_7A75                            ; $4E1E: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4E1E: $CD $75 $7A
     cp   $03                                      ; $4E21: $FE $03
     jr   z, jr_01F_4E2B                           ; $4E23: $28 $06
 
@@ -2232,15 +2232,15 @@ jr_01F_4E3A:
     ld   c, [hl]                                  ; $4E58: $4E
     jp   label_01F_5395                           ; $4E59: $C3 $95 $53
 
-    call func_01F_7A71                            ; $4E5C: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4E5C: $CD $71 $7A
     ret  nz                                       ; $4E5F: $C0
 
-    call func_01F_7A75                            ; $4E60: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4E60: $CD $75 $7A
     cp   $03                                      ; $4E63: $FE $03
     jp   z, label_01F_53B5                        ; $4E65: $CA $B5 $53
 
     ld   hl, $4E71                                ; $4E68: $21 $71 $4E
-    call func_01F_7A64                            ; $4E6B: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $4E6B: $CD $64 $7A
     jp   label_01F_7A79                           ; $4E6E: $C3 $79 $7A
 
     ld   a, e                                     ; $4E71: $7B
@@ -2271,12 +2271,12 @@ jr_01F_4E3A:
     call func_01F_7AB7                            ; $4E8F: $CD $B7 $7A
     jp   label_01F_539A                           ; $4E92: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4E95: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4E95: $CD $71 $7A
     ret  nz                                       ; $4E98: $C0
 
     ld   a, $08                                   ; $4E99: $3E $08
     ld   [de], a                                  ; $4E9B: $12
-    call func_01F_7A75                            ; $4E9C: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4E9C: $CD $75 $7A
     cp   $04                                      ; $4E9F: $FE $04
     jr   z, jr_01F_4EAD                           ; $4EA1: $28 $0A
 
@@ -2317,7 +2317,7 @@ jr_01F_4EB8:
     call func_01F_7AB7                            ; $4ED2: $CD $B7 $7A
     jp   label_01F_539A                           ; $4ED5: $C3 $9A $53
 
-    call func_01F_7A75                            ; $4ED8: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4ED8: $CD $75 $7A
     cp   $09                                      ; $4EDB: $FE $09
     jr   z, jr_01F_4EE9                           ; $4EDD: $28 $0A
 
@@ -2374,12 +2374,12 @@ jr_01F_4F00:
     call func_01F_7AB7                            ; $4F2B: $CD $B7 $7A
     jp   label_01F_539A                           ; $4F2E: $C3 $9A $53
 
-    call func_01F_7A71                            ; $4F31: $CD $71 $7A
+    call DecrementValueAtDE                            ; $4F31: $CD $71 $7A
     ret  nz                                       ; $4F34: $C0
 
     ld   a, $02                                   ; $4F35: $3E $02
     ld   [de], a                                  ; $4F37: $12
-    call func_01F_7A75                            ; $4F38: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4F38: $CD $75 $7A
     cp   $09                                      ; $4F3B: $FE $09
     jr   z, jr_01F_4F49                           ; $4F3D: $28 $0A
 
@@ -2478,7 +2478,7 @@ jr_01F_4FB7:
 jr_01F_4FBB:
     push bc                                       ; $4FBB: $C5
     ld   bc, $D3E2                                ; $4FBC: $01 $E2 $D3
-    call func_01F_7A75                            ; $4FBF: $CD $75 $7A
+    call IncrementValueAtBC                            ; $4FBF: $CD $75 $7A
     pop  bc                                       ; $4FC2: $C1
     cp   $05                                      ; $4FC3: $FE $05
     jr   z, jr_01F_4FDB                           ; $4FC5: $28 $14
@@ -2524,7 +2524,7 @@ jr_01F_4FE3:
     call func_01F_7AB7                            ; $4FFD: $CD $B7 $7A
     jp   label_01F_5395                           ; $5000: $C3 $95 $53
 
-    call func_01F_7A75                            ; $5003: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5003: $CD $75 $7A
     cp   $09                                      ; $5006: $FE $09
     jr   z, jr_01F_5014                           ; $5008: $28 $0A
 
@@ -2593,7 +2593,7 @@ jr_01F_5052:
     ld   hl, $5088                                ; $5052: $21 $88 $50
     jr   jr_01F_504C                              ; $5055: $18 $F5
 
-    call func_01F_7A75                            ; $5057: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5057: $CD $75 $7A
     cp   $0B                                      ; $505A: $FE $0B
     jr   z, jr_01F_5064                           ; $505C: $28 $06
 
@@ -2646,7 +2646,7 @@ jr_01F_5077:
     call func_01F_7AB7                            ; $5096: $CD $B7 $7A
     jp   label_01F_5395                           ; $5099: $C3 $95 $53
 
-    call func_01F_7A75                            ; $509C: $CD $75 $7A
+    call IncrementValueAtBC                            ; $509C: $CD $75 $7A
     cp   $0E                                      ; $509F: $FE $0E
     jr   z, jr_01F_50BA                           ; $50A1: $28 $17
 
@@ -2762,7 +2762,7 @@ jr_01F_5103:
     call func_01F_7AB7                            ; $5128: $CD $B7 $7A
     jp   label_01F_539A                           ; $512B: $C3 $9A $53
 
-    call func_01F_7A75                            ; $512E: $CD $75 $7A
+    call IncrementValueAtBC                            ; $512E: $CD $75 $7A
     cp   $09                                      ; $5131: $FE $09
     jr   z, jr_01F_513F                           ; $5133: $28 $0A
 
@@ -2810,7 +2810,7 @@ jr_01F_514A:
     call func_01F_7AB7                            ; $516F: $CD $B7 $7A
     jp   label_01F_539A                           ; $5172: $C3 $9A $53
 
-    call func_01F_7A75                            ; $5175: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5175: $CD $75 $7A
     cp   $0C                                      ; $5178: $FE $0C
     jr   z, jr_01F_518B                           ; $517A: $28 $0F
 
@@ -2871,7 +2871,7 @@ jr_01F_518B:
     call func_01F_7AB7                            ; $51BC: $CD $B7 $7A
     jp   label_01F_539A                           ; $51BF: $C3 $9A $53
 
-    call func_01F_7A75                            ; $51C2: $CD $75 $7A
+    call IncrementValueAtBC                            ; $51C2: $CD $75 $7A
     cp   $09                                      ; $51C5: $FE $09
     jr   z, jr_01F_51CF                           ; $51C7: $28 $06
 
@@ -2936,7 +2936,7 @@ jr_01F_51CF:
     call func_01F_7AB7                            ; $5220: $CD $B7 $7A
     jp   label_01F_539A                           ; $5223: $C3 $9A $53
 
-    call func_01F_7A75                            ; $5226: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5226: $CD $75 $7A
     cp   $04                                      ; $5229: $FE $04
     jr   z, jr_01F_523C                           ; $522B: $28 $0F
 
@@ -2998,7 +2998,7 @@ label_01F_5253:
     ld   hl, $5283                                ; $5276: $21 $83 $52
     jp   label_01F_539A                           ; $5279: $C3 $9A $53
 
-    call func_01F_7A71                            ; $527C: $CD $71 $7A
+    call DecrementValueAtDE                            ; $527C: $CD $71 $7A
     ret  nz                                       ; $527F: $C0
 
     jp   label_01F_53BB                           ; $5280: $C3 $BB $53
@@ -3016,7 +3016,7 @@ label_01F_5253:
     call func_01F_7AB7                            ; $5291: $CD $B7 $7A
     jp   label_01F_539A                           ; $5294: $C3 $9A $53
 
-    call func_01F_7A75                            ; $5297: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5297: $CD $75 $7A
     cp   $03                                      ; $529A: $FE $03
     jr   z, jr_01F_52A8                           ; $529C: $28 $0A
 
@@ -3093,7 +3093,7 @@ jr_01F_52FC:
 jr_01F_5300:
     push bc                                       ; $5300: $C5
     ld   bc, $D3E2                                ; $5301: $01 $E2 $D3
-    call func_01F_7A75                            ; $5304: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5304: $CD $75 $7A
     pop  bc                                       ; $5307: $C1
     cp   $14                                      ; $5308: $FE $14
     jp   z, label_01F_53BB                        ; $530A: $CA $BB $53
@@ -3128,15 +3128,15 @@ label_01F_5319:
     ld   d, e                                     ; $5339: $53
     jp   label_01F_5395                           ; $533A: $C3 $95 $53
 
-    call func_01F_7A71                            ; $533D: $CD $71 $7A
+    call DecrementValueAtDE                            ; $533D: $CD $71 $7A
     ret  nz                                       ; $5340: $C0
 
-    call func_01F_7A75                            ; $5341: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5341: $CD $75 $7A
     cp   $08                                      ; $5344: $FE $08
     jp   z, label_01F_53BB                        ; $5346: $CA $BB $53
 
     ld   hl, $5352                                ; $5349: $21 $52 $53
-    call func_01F_7A64                            ; $534C: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $534C: $CD $64 $7A
     jp   label_01F_7A79                           ; $534F: $C3 $79 $7A
 
     ld   a, b                                     ; $5352: $78
@@ -3278,7 +3278,7 @@ jr_01F_5405:
     ld   hl, $5461                                ; $5409: $21 $61 $54
 
 jr_01F_540C:
-    call func_01F_7A64                            ; $540C: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $540C: $CD $64 $7A
     ld   de, $D392                                ; $540F: $11 $92 $D3
     ld   bc, $D396                                ; $5412: $01 $96 $D3
     ld   a, [$D3CD]                               ; $5415: $FA $CD $D3
@@ -3425,15 +3425,15 @@ jr_01F_5476:
     ld   hl, $54CF                                ; $54AA: $21 $CF $54
     jp   label_01F_62F3                           ; $54AD: $C3 $F3 $62
 
-    call func_01F_7A71                            ; $54B0: $CD $71 $7A
+    call DecrementValueAtDE                            ; $54B0: $CD $71 $7A
     ret  nz                                       ; $54B3: $C0
 
-    call func_01F_7A75                            ; $54B4: $CD $75 $7A
+    call IncrementValueAtBC                            ; $54B4: $CD $75 $7A
     cp   $06                                      ; $54B7: $FE $06
     jp   z, label_01F_632D                        ; $54B9: $CA $2D $63
 
     ld   hl, $54C5                                ; $54BC: $21 $C5 $54
-    call func_01F_7A64                            ; $54BF: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $54BF: $CD $64 $7A
     jp   label_01F_7A85                           ; $54C2: $C3 $85 $7A
 
     push de                                       ; $54C5: $D5
@@ -3481,7 +3481,7 @@ jr_01F_5476:
     call func_01F_7ABD                            ; $54FE: $CD $BD $7A
     jp   label_01F_62F8                           ; $5501: $C3 $F8 $62
 
-    call func_01F_7A75                            ; $5504: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5504: $CD $75 $7A
     cp   $02                                      ; $5507: $FE $02
     jr   z, jr_01F_5516                           ; $5509: $28 $0B
 
@@ -3532,7 +3532,7 @@ jr_01F_552D:
     call func_01F_7ABD                            ; $5544: $CD $BD $7A
     jp   label_01F_62F8                           ; $5547: $C3 $F8 $62
 
-    call func_01F_7A75                            ; $554A: $CD $75 $7A
+    call IncrementValueAtBC                            ; $554A: $CD $75 $7A
     cp   $05                                      ; $554D: $FE $05
     jp   z, label_01F_632D                        ; $554F: $CA $2D $63
 
@@ -3565,10 +3565,10 @@ jr_01F_5562:
     ld   hl, $55A4                                ; $557F: $21 $A4 $55
     jp   label_01F_62F8                           ; $5582: $C3 $F8 $62
 
-    call func_01F_7A71                            ; $5585: $CD $71 $7A
+    call DecrementValueAtDE                            ; $5585: $CD $71 $7A
     ret  nz                                       ; $5588: $C0
 
-    call func_01F_7A75                            ; $5589: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5589: $CD $75 $7A
     cp   $02                                      ; $558C: $FE $02
     jr   z, jr_01F_5596                           ; $558E: $28 $06
 
@@ -3598,10 +3598,10 @@ jr_01F_5596:
     ld   hl, $55F0                                ; $55B6: $21 $F0 $55
     jp   label_01F_62F8                           ; $55B9: $C3 $F8 $62
 
-    call func_01F_7A71                            ; $55BC: $CD $71 $7A
+    call DecrementValueAtDE                            ; $55BC: $CD $71 $7A
     ret  nz                                       ; $55BF: $C0
 
-    call func_01F_7A75                            ; $55C0: $CD $75 $7A
+    call IncrementValueAtBC                            ; $55C0: $CD $75 $7A
     cp   $06                                      ; $55C3: $FE $06
     jp   z, label_01F_632D                        ; $55C5: $CA $2D $63
 
@@ -3613,7 +3613,7 @@ jr_01F_5596:
 
 jr_01F_55D2:
     ld   hl, $55E6                                ; $55D2: $21 $E6 $55
-    call func_01F_7A64                            ; $55D5: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $55D5: $CD $64 $7A
     jp   label_01F_637E                           ; $55D8: $C3 $7E $63
 
 label_01F_55DB:
@@ -3651,7 +3651,7 @@ label_01F_55E2:
     call func_01F_7ABD                            ; $560A: $CD $BD $7A
     jp   label_01F_62F8                           ; $560D: $C3 $F8 $62
 
-    call func_01F_7A75                            ; $5610: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5610: $CD $75 $7A
     cp   $02                                      ; $5613: $FE $02
     jr   z, jr_01F_5628                           ; $5615: $28 $11
 
@@ -3698,12 +3698,12 @@ jr_01F_5628:
     call func_01F_7ABD                            ; $5658: $CD $BD $7A
     jp   label_01F_62F8                           ; $565B: $C3 $F8 $62
 
-    call func_01F_7A71                            ; $565E: $CD $71 $7A
+    call DecrementValueAtDE                            ; $565E: $CD $71 $7A
     ret  nz                                       ; $5661: $C0
 
     ld   a, $01                                   ; $5662: $3E $01
     ld   [de], a                                  ; $5664: $12
-    call func_01F_7A75                            ; $5665: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5665: $CD $75 $7A
     cp   $1D                                      ; $5668: $FE $1D
     jr   z, jr_01F_5676                           ; $566A: $28 $0A
 
@@ -3799,7 +3799,7 @@ jr_01F_5688:
     call func_01F_7ABD                            ; $56DC: $CD $BD $7A
     jp   label_01F_62F3                           ; $56DF: $C3 $F3 $62
 
-    call func_01F_7A75                            ; $56E2: $CD $75 $7A
+    call IncrementValueAtBC                            ; $56E2: $CD $75 $7A
     cp   $0F                                      ; $56E5: $FE $0F
     jr   z, jr_01F_56EF                           ; $56E7: $28 $06
 
@@ -3870,19 +3870,19 @@ func_01F_572C:
     ld   hl, $5790                                ; $573A: $21 $90 $57
     jp   label_01F_62F3                           ; $573D: $C3 $F3 $62
 
-    call func_01F_7A71                            ; $5740: $CD $71 $7A
+    call DecrementValueAtDE                            ; $5740: $CD $71 $7A
 
 jr_01F_5743:
     ret  nz                                       ; $5743: $C0
 
-    call func_01F_7A75                            ; $5744: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5744: $CD $75 $7A
     cp   $14                                      ; $5747: $FE $14
     jr   z, jr_01F_575C                           ; $5749: $28 $11
 
     ld   hl, $576A                                ; $574B: $21 $6A $57
 
 jr_01F_574E:
-    call func_01F_7A64                            ; $574E: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $574E: $CD $64 $7A
 
 label_01F_5751:
     ld   a, [$D396]                               ; $5751: $FA $96 $D3
@@ -4032,17 +4032,17 @@ jr_01F_577C:
     ld   hl, $584B                                ; $5806: $21 $4B $58
     jp   label_01F_62F3                           ; $5809: $C3 $F3 $62
 
-    call func_01F_7A71                            ; $580C: $CD $71 $7A
+    call DecrementValueAtDE                            ; $580C: $CD $71 $7A
     ret  nz                                       ; $580F: $C0
 
-    call func_01F_7A75                            ; $5810: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5810: $CD $75 $7A
     cp   $16                                      ; $5813: $FE $16
     jp   z, label_01F_575C                        ; $5815: $CA $5C $57
 
     ld   hl, $5821                                ; $5818: $21 $21 $58
 
 jr_01F_581B:
-    call func_01F_7A64                            ; $581B: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $581B: $CD $64 $7A
     jp   label_01F_5751                           ; $581E: $C3 $51 $57
 
     ld   a, e                                     ; $5821: $7B
@@ -4190,15 +4190,15 @@ jr_01F_5875:
     ld   hl, $584B                                ; $58A9: $21 $4B $58
     jp   label_01F_62F3                           ; $58AC: $C3 $F3 $62
 
-    call func_01F_7A71                            ; $58AF: $CD $71 $7A
+    call DecrementValueAtDE                            ; $58AF: $CD $71 $7A
     ret  nz                                       ; $58B2: $C0
 
-    call func_01F_7A75                            ; $58B3: $CD $75 $7A
+    call IncrementValueAtBC                            ; $58B3: $CD $75 $7A
     cp   $12                                      ; $58B6: $FE $12
     jp   z, label_01F_575C                        ; $58B8: $CA $5C $57
 
     ld   hl, $58C4                                ; $58BB: $21 $C4 $58
-    call func_01F_7A64                            ; $58BE: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $58BE: $CD $64 $7A
 
 jr_01F_58C1:
     jp   label_01F_5751                           ; $58C1: $C3 $51 $57
@@ -4337,7 +4337,7 @@ jr_01F_592F:
     call func_01F_7ABD                            ; $5954: $CD $BD $7A
     jp   label_01F_62F3                           ; $5957: $C3 $F3 $62
 
-    call func_01F_7A75                            ; $595A: $CD $75 $7A
+    call IncrementValueAtBC                            ; $595A: $CD $75 $7A
     cp   $09                                      ; $595D: $FE $09
     jr   z, jr_01F_5967                           ; $595F: $28 $06
 
@@ -4393,7 +4393,7 @@ jr_01F_5976:
     call func_01F_7ABD                            ; $59A4: $CD $BD $7A
     jp   label_01F_62F8                           ; $59A7: $C3 $F8 $62
 
-    call func_01F_7A75                            ; $59AA: $CD $75 $7A
+    call IncrementValueAtBC                            ; $59AA: $CD $75 $7A
     cp   $03                                      ; $59AD: $FE $03
     jr   z, jr_01F_59B7                           ; $59AF: $28 $06
 
@@ -4440,15 +4440,15 @@ jr_01F_59C6:
     ld   hl, $5A07                                ; $59E4: $21 $07 $5A
     jp   label_01F_62F8                           ; $59E7: $C3 $F8 $62
 
-    call func_01F_7A71                            ; $59EA: $CD $71 $7A
+    call DecrementValueAtDE                            ; $59EA: $CD $71 $7A
     ret  nz                                       ; $59ED: $C0
 
-    call func_01F_7A75                            ; $59EE: $CD $75 $7A
+    call IncrementValueAtBC                            ; $59EE: $CD $75 $7A
     cp   $05                                      ; $59F1: $FE $05
     jp   z, label_01F_632D                        ; $59F3: $CA $2D $63
 
     ld   hl, $59FF                                ; $59F6: $21 $FF $59
-    call func_01F_7A64                            ; $59F9: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $59F9: $CD $64 $7A
     jp   label_01F_7A85                           ; $59FC: $C3 $85 $7A
 
     dec  c                                        ; $59FF: $0D
@@ -4484,7 +4484,7 @@ jr_01F_5A0B:
     ld   hl, $5A38                                ; $5A24: $21 $38 $5A
     jp   label_01F_62F8                           ; $5A27: $C3 $F8 $62
 
-    call func_01F_7A75                            ; $5A2A: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5A2A: $CD $75 $7A
     cp   $02                                      ; $5A2D: $FE $02
     jp   z, label_01F_632D                        ; $5A2F: $CA $2D $63
 
@@ -4510,12 +4510,12 @@ jr_01F_5A49:
     call func_01F_7ABD                            ; $5A4F: $CD $BD $7A
     jp   label_01F_62F3                           ; $5A52: $C3 $F3 $62
 
-    call func_01F_7A71                            ; $5A55: $CD $71 $7A
+    call DecrementValueAtDE                            ; $5A55: $CD $71 $7A
     ret  nz                                       ; $5A58: $C0
 
     ld   a, $01                                   ; $5A59: $3E $01
     ld   [de], a                                  ; $5A5B: $12
-    call func_01F_7A75                            ; $5A5C: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5A5C: $CD $75 $7A
     cp   $71                                      ; $5A5F: $FE $71
     jr   z, jr_01F_5A69                           ; $5A61: $28 $06
 
@@ -4780,7 +4780,7 @@ jr_01F_5AFF:
     call func_01F_7ABD                            ; $5B72: $CD $BD $7A
     jp   label_01F_62F8                           ; $5B75: $C3 $F8 $62
 
-    call func_01F_7A75                            ; $5B78: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5B78: $CD $75 $7A
     cp   $03                                      ; $5B7B: $FE $03
     jr   z, jr_01F_5B85                           ; $5B7D: $28 $06
 
@@ -4839,7 +4839,7 @@ jr_01F_5BB6:
     call func_01F_7ABD                            ; $5BCF: $CD $BD $7A
     jp   label_01F_62F8                           ; $5BD2: $C3 $F8 $62
 
-    call func_01F_7A75                            ; $5BD5: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5BD5: $CD $75 $7A
     cp   $03                                      ; $5BD8: $FE $03
     jr   z, jr_01F_5BE2                           ; $5BDA: $28 $06
 
@@ -4888,12 +4888,12 @@ jr_01F_5BF1:
     call func_01F_7ABD                            ; $5C17: $CD $BD $7A
     jp   label_01F_62F8                           ; $5C1A: $C3 $F8 $62
 
-    call func_01F_7A71                            ; $5C1D: $CD $71 $7A
+    call DecrementValueAtDE                            ; $5C1D: $CD $71 $7A
     ret  nz                                       ; $5C20: $C0
 
     ld   a, $01                                   ; $5C21: $3E $01
     ld   [de], a                                  ; $5C23: $12
-    call func_01F_7A75                            ; $5C24: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5C24: $CD $75 $7A
     cp   $06                                      ; $5C27: $FE $06
     jr   z, jr_01F_5C4E                           ; $5C29: $28 $23
 
@@ -4991,15 +4991,15 @@ jr_01F_5C88:
     ld   hl, $5CD8                                ; $5CB3: $21 $D8 $5C
     jp   label_01F_62F3                           ; $5CB6: $C3 $F3 $62
 
-    call func_01F_7A71                            ; $5CB9: $CD $71 $7A
+    call DecrementValueAtDE                            ; $5CB9: $CD $71 $7A
     ret  nz                                       ; $5CBC: $C0
 
-    call func_01F_7A75                            ; $5CBD: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5CBD: $CD $75 $7A
     cp   $06                                      ; $5CC0: $FE $06
     jp   z, label_01F_632D                        ; $5CC2: $CA $2D $63
 
     ld   hl, $5CCE                                ; $5CC5: $21 $CE $5C
-    call func_01F_7A64                            ; $5CC8: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $5CC8: $CD $64 $7A
     jp   label_01F_7A85                           ; $5CCB: $C3 $85 $7A
 
     sbc  $5C                                      ; $5CCE: $DE $5C
@@ -5065,7 +5065,7 @@ jr_01F_5CF7:
     call func_01F_7ABD                            ; $5D14: $CD $BD $7A
     jp   label_01F_62F8                           ; $5D17: $C3 $F8 $62
 
-    call func_01F_7A71                            ; $5D1A: $CD $71 $7A
+    call DecrementValueAtDE                            ; $5D1A: $CD $71 $7A
     ret  nz                                       ; $5D1D: $C0
 
     ld   a, $01                                   ; $5D1E: $3E $01
@@ -5075,7 +5075,7 @@ jr_01F_5CF7:
     jr   nc, jr_01F_5D33                          ; $5D24: $30 $0D
 
 jr_01F_5D26:
-    call func_01F_7A75                            ; $5D26: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5D26: $CD $75 $7A
     cp   $10                                      ; $5D29: $FE $10
     jr   z, jr_01F_5D38                           ; $5D2B: $28 $0B
 
@@ -5172,7 +5172,7 @@ jr_01F_5D58:
     call func_01F_7ABD                            ; $5DA0: $CD $BD $7A
     jp   label_01F_62F3                           ; $5DA3: $C3 $F3 $62
 
-    call func_01F_7A75                            ; $5DA6: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5DA6: $CD $75 $7A
     cp   $55                                      ; $5DA9: $FE $55
     jr   z, jr_01F_5DCE                           ; $5DAB: $28 $21
 
@@ -5390,7 +5390,7 @@ jr_01F_5E5D:
     call func_01F_7ABD                            ; $5EE2: $CD $BD $7A
     jp   label_01F_62F3                           ; $5EE5: $C3 $F3 $62
 
-    call func_01F_7A75                            ; $5EE8: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5EE8: $CD $75 $7A
     cp   $03                                      ; $5EEB: $FE $03
     jr   z, jr_01F_5EF5                           ; $5EED: $28 $06
 
@@ -5431,7 +5431,7 @@ jr_01F_5F04:
     call func_01F_7ABD                            ; $5F1F: $CD $BD $7A
     jp   label_01F_62F8                           ; $5F22: $C3 $F8 $62
 
-    call func_01F_7A75                            ; $5F25: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5F25: $CD $75 $7A
     cp   $13                                      ; $5F28: $FE $13
     jp   z, label_01F_6327                        ; $5F2A: $CA $27 $63
 
@@ -5514,15 +5514,15 @@ jr_01F_5F73:
     ld   hl, $5FAE                                ; $5F8D: $21 $AE $5F
     jp   label_01F_62F8                           ; $5F90: $C3 $F8 $62
 
-    call func_01F_7A71                            ; $5F93: $CD $71 $7A
+    call DecrementValueAtDE                            ; $5F93: $CD $71 $7A
     ret  nz                                       ; $5F96: $C0
 
-    call func_01F_7A75                            ; $5F97: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5F97: $CD $75 $7A
     cp   $04                                      ; $5F9A: $FE $04
     jp   z, label_01F_632D                        ; $5F9C: $CA $2D $63
 
     ld   hl, $5FA8                                ; $5F9F: $21 $A8 $5F
-    call func_01F_7A64                            ; $5FA2: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $5FA2: $CD $64 $7A
     jp   label_01F_7A85                           ; $5FA5: $C3 $85 $7A
 
     or   h                                        ; $5FA8: $B4
@@ -5554,15 +5554,15 @@ jr_01F_5F73:
     ld   hl, $5FEC                                ; $5FC3: $21 $EC $5F
     jp   label_01F_62F3                           ; $5FC6: $C3 $F3 $62
 
-    call func_01F_7A71                            ; $5FC9: $CD $71 $7A
+    call DecrementValueAtDE                            ; $5FC9: $CD $71 $7A
     ret  nz                                       ; $5FCC: $C0
 
-    call func_01F_7A75                            ; $5FCD: $CD $75 $7A
+    call IncrementValueAtBC                            ; $5FCD: $CD $75 $7A
     cp   $08                                      ; $5FD0: $FE $08
     jp   z, label_01F_632D                        ; $5FD2: $CA $2D $63
 
     ld   hl, $5FDE                                ; $5FD5: $21 $DE $5F
-    call func_01F_7A64                            ; $5FD8: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $5FD8: $CD $64 $7A
     jp   label_01F_7A85                           ; $5FDB: $C3 $85 $7A
 
     inc  b                                        ; $5FDE: $04
@@ -5608,7 +5608,7 @@ jr_01F_5F73:
     call func_01F_7ABD                            ; $6027: $CD $BD $7A
     jp   label_01F_62F8                           ; $602A: $C3 $F8 $62
 
-    call func_01F_7A75                            ; $602D: $CD $75 $7A
+    call IncrementValueAtBC                            ; $602D: $CD $75 $7A
     cp   $07                                      ; $6030: $FE $07
     jr   z, jr_01F_603A                           ; $6032: $28 $06
 
@@ -5690,7 +5690,7 @@ jr_01F_60A2:
 label_01F_60A6:
     push de                                       ; $60A6: $D5
     ld   de, $D3DC                                ; $60A7: $11 $DC $D3
-    call func_01F_7A71                            ; $60AA: $CD $71 $7A
+    call DecrementValueAtDE                            ; $60AA: $CD $71 $7A
     pop  de                                       ; $60AD: $D1
     jp   z, label_01F_6327                        ; $60AE: $CA $27 $63
 
@@ -5761,7 +5761,7 @@ jr_01F_6111:
 jr_01F_6115:
     push bc                                       ; $6115: $C5
     ld   bc, $D3DD                                ; $6116: $01 $DD $D3
-    call func_01F_7A75                            ; $6119: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6119: $CD $75 $7A
     pop  bc                                       ; $611C: $C1
     cp   $12                                      ; $611D: $FE $12
     jr   z, jr_01F_6135                           ; $611F: $28 $14
@@ -5836,7 +5836,7 @@ jr_01F_6180:
 jr_01F_6184:
     push de                                       ; $6184: $D5
     ld   de, $D3DE                                ; $6185: $11 $DE $D3
-    call func_01F_7A71                            ; $6188: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6188: $CD $71 $7A
     pop  de                                       ; $618B: $D1
     jp   z, label_01F_6327                        ; $618C: $CA $27 $63
 
@@ -5872,7 +5872,7 @@ jr_01F_6184:
     call func_01F_7AD0                            ; $61C9: $CD $D0 $7A
     jp   label_01F_7A7F                           ; $61CC: $C3 $7F $7A
 
-    call func_01F_7A75                            ; $61CF: $CD $75 $7A
+    call IncrementValueAtBC                            ; $61CF: $CD $75 $7A
     cp   $09                                      ; $61D2: $FE $09
     jr   z, jr_01F_61E0                           ; $61D4: $28 $0A
 
@@ -5960,7 +5960,7 @@ jr_01F_6247:
 jr_01F_624E:
     push bc                                       ; $624E: $C5
     ld   bc, $D3E1                                ; $624F: $01 $E1 $D3
-    call func_01F_7A75                            ; $6252: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6252: $CD $75 $7A
     pop  bc                                       ; $6255: $C1
     cp   $04                                      ; $6256: $FE $04
     jp   z, label_01F_6327                        ; $6258: $CA $27 $63
@@ -5997,15 +5997,15 @@ jr_01F_626A:
     ld   hl, $62C9                                ; $627F: $21 $C9 $62
     jp   label_01F_62F3                           ; $6282: $C3 $F3 $62
 
-    call func_01F_7A71                            ; $6285: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6285: $CD $71 $7A
     ret  nz                                       ; $6288: $C0
 
-    call func_01F_7A75                            ; $6289: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6289: $CD $75 $7A
     cp   $0D                                      ; $628C: $FE $0D
     jp   z, label_01F_6327                        ; $628E: $CA $27 $63
 
     ld   hl, $62B1                                ; $6291: $21 $B1 $62
-    call func_01F_7A64                            ; $6294: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6294: $CD $64 $7A
     ld   a, [$D396]                               ; $6297: $FA $96 $D3
     cp   $01                                      ; $629A: $FE $01
     jp   z, label_01F_7A85                        ; $629C: $CA $85 $7A
@@ -6525,7 +6525,7 @@ jr_01F_6500:
     ld   hl, $646C                                ; $6505: $21 $6C $64
 
 jr_01F_6508:
-    call func_01F_7A64                            ; $6508: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6508: $CD $64 $7A
 
 jr_01F_650B:
     ld   de, $D393                                ; $650B: $11 $93 $D3
@@ -6564,15 +6564,15 @@ jr_01F_6512:
     ld   hl, $6564                                ; $653D: $21 $64 $65
     jp   label_01F_79E9                           ; $6540: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6543: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6543: $CD $71 $7A
     ret  nz                                       ; $6546: $C0
 
-    call func_01F_7A75                            ; $6547: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6547: $CD $75 $7A
     cp   $07                                      ; $654A: $FE $07
     jp   z, label_01F_7A07                        ; $654C: $CA $07 $7A
 
     ld   hl, $6558                                ; $654F: $21 $58 $65
-    call func_01F_7A64                            ; $6552: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6552: $CD $64 $7A
     jp   label_01F_7A8B                           ; $6555: $C3 $8B $7A
 
     ld   l, c                                     ; $6558: $69
@@ -6613,15 +6613,15 @@ jr_01F_6512:
     ld   h, l                                     ; $6589: $65
     jp   label_01F_79E9                           ; $658A: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $658D: $CD $71 $7A
+    call DecrementValueAtDE                            ; $658D: $CD $71 $7A
     ret  nz                                       ; $6590: $C0
 
-    call func_01F_7A75                            ; $6591: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6591: $CD $75 $7A
     cp   $11                                      ; $6594: $FE $11
     jp   z, label_01F_7A07                        ; $6596: $CA $07 $7A
 
     ld   hl, $65A2                                ; $6599: $21 $A2 $65
-    call func_01F_7A64                            ; $659C: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $659C: $CD $64 $7A
     jp   label_01F_7A8B                           ; $659F: $C3 $8B $7A
 
     rst  $00                                      ; $65A2: $C7
@@ -6695,15 +6695,15 @@ jr_01F_65E3:
     ld   hl, $6610                                ; $65EF: $21 $10 $66
     jp   label_01F_79E9                           ; $65F2: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $65F5: $CD $71 $7A
+    call DecrementValueAtDE                            ; $65F5: $CD $71 $7A
     ret  nz                                       ; $65F8: $C0
 
-    call func_01F_7A75                            ; $65F9: $CD $75 $7A
+    call IncrementValueAtBC                            ; $65F9: $CD $75 $7A
     cp   $04                                      ; $65FC: $FE $04
     jp   z, label_01F_7A07                        ; $65FE: $CA $07 $7A
 
     ld   hl, $660A                                ; $6601: $21 $0A $66
-    call func_01F_7A64                            ; $6604: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6604: $CD $64 $7A
     jp   label_01F_7A8B                           ; $6607: $C3 $8B $7A
 
     dec  d                                        ; $660A: $15
@@ -6743,15 +6743,15 @@ jr_01F_6627:
     ld   hl, $6659                                ; $6636: $21 $59 $66
     jp   label_01F_79E9                           ; $6639: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $663C: $CD $71 $7A
+    call DecrementValueAtDE                            ; $663C: $CD $71 $7A
     ret  nz                                       ; $663F: $C0
 
-    call func_01F_7A75                            ; $6640: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6640: $CD $75 $7A
     cp   $05                                      ; $6643: $FE $05
     jp   z, label_01F_7A07                        ; $6645: $CA $07 $7A
 
     ld   hl, $6651                                ; $6648: $21 $51 $66
-    call func_01F_7A64                            ; $664B: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $664B: $CD $64 $7A
     jp   label_01F_7A8B                           ; $664E: $C3 $8B $7A
 
     ld   e, [hl]                                  ; $6651: $5E
@@ -6786,15 +6786,15 @@ jr_01F_6627:
     ld   h, [hl]                                  ; $666F: $66
     jp   label_01F_79E9                           ; $6670: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6673: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6673: $CD $71 $7A
     ret  nz                                       ; $6676: $C0
 
-    call func_01F_7A75                            ; $6677: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6677: $CD $75 $7A
     cp   $04                                      ; $667A: $FE $04
     jp   z, label_01F_7A07                        ; $667C: $CA $07 $7A
 
     ld   hl, $6688                                ; $667F: $21 $88 $66
-    call func_01F_7A64                            ; $6682: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6682: $CD $64 $7A
     jp   label_01F_7A8B                           ; $6685: $C3 $8B $7A
 
     sub  e                                        ; $6688: $93
@@ -6844,10 +6844,10 @@ jr_01F_669F:
     ld   hl, $66D6                                ; $66BE: $21 $D6 $66
     jp   label_01F_79E9                           ; $66C1: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $66C4: $CD $71 $7A
+    call DecrementValueAtDE                            ; $66C4: $CD $71 $7A
     ret  nz                                       ; $66C7: $C0
 
-    call func_01F_7A75                            ; $66C8: $CD $75 $7A
+    call IncrementValueAtBC                            ; $66C8: $CD $75 $7A
     cp   $02                                      ; $66CB: $FE $02
     jp   z, label_01F_7A07                        ; $66CD: $CA $07 $7A
 
@@ -6873,16 +6873,16 @@ jr_01F_669F:
     ld   hl, $6718                                ; $66ED: $21 $18 $67
     jp   label_01F_79E9                           ; $66F0: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $66F3: $CD $71 $7A
+    call DecrementValueAtDE                            ; $66F3: $CD $71 $7A
     ret  nz                                       ; $66F6: $C0
 
-    call func_01F_7A75                            ; $66F7: $CD $75 $7A
+    call IncrementValueAtBC                            ; $66F7: $CD $75 $7A
     cp   $04                                      ; $66FA: $FE $04
     jr   z, jr_01F_6707                           ; $66FC: $28 $09
 
 jr_01F_66FE:
     ld   hl, $6712                                ; $66FE: $21 $12 $67
-    call func_01F_7A64                            ; $6701: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6701: $CD $64 $7A
     jp   $7A25                                    ; $6704: $C3 $25 $7A
 
 jr_01F_6707:
@@ -6917,17 +6917,17 @@ jr_01F_671C:
     ld   hl, $674F                                ; $6726: $21 $4F $67
     jp   label_01F_79E9                           ; $6729: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $672C: $CD $71 $7A
+    call DecrementValueAtDE                            ; $672C: $CD $71 $7A
     ret  nz                                       ; $672F: $C0
 
     ld   a, $33                                   ; $6730: $3E $33
     ldh  [rNR41], a                               ; $6732: $E0 $20
-    call func_01F_7A75                            ; $6734: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6734: $CD $75 $7A
     cp   $06                                      ; $6737: $FE $06
     jp   z, label_01F_7A07                        ; $6739: $CA $07 $7A
 
     ld   hl, $6745                                ; $673C: $21 $45 $67
-    call func_01F_7A64                            ; $673F: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $673F: $CD $64 $7A
     jp   $7A25                                    ; $6742: $C3 $25 $7A
 
     ld   d, h                                     ; $6745: $54
@@ -6964,15 +6964,15 @@ jr_01F_671C:
     ld   hl, $6783                                ; $6760: $21 $83 $67
     jp   label_01F_79E9                           ; $6763: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6766: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6766: $CD $71 $7A
     ret  nz                                       ; $6769: $C0
 
-    call func_01F_7A75                            ; $676A: $CD $75 $7A
+    call IncrementValueAtBC                            ; $676A: $CD $75 $7A
     cp   $05                                      ; $676D: $FE $05
     jp   z, label_01F_7A07                        ; $676F: $CA $07 $7A
 
     ld   hl, $677B                                ; $6772: $21 $7B $67
-    call func_01F_7A64                            ; $6775: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6775: $CD $64 $7A
     jp   label_01F_7A8B                           ; $6778: $C3 $8B $7A
 
     adc  b                                        ; $677B: $88
@@ -7002,10 +7002,10 @@ jr_01F_677D:
     ld   hl, $67AA                                ; $6792: $21 $AA $67
     jp   label_01F_79E9                           ; $6795: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6798: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6798: $CD $71 $7A
     ret  nz                                       ; $679B: $C0
 
-    call func_01F_7A75                            ; $679C: $CD $75 $7A
+    call IncrementValueAtBC                            ; $679C: $CD $75 $7A
     cp   $02                                      ; $679F: $FE $02
     jp   z, label_01F_7A07                        ; $67A1: $CA $07 $7A
 
@@ -7031,15 +7031,15 @@ jr_01F_677D:
     ld   hl, $67E4                                ; $67C1: $21 $E4 $67
     jp   label_01F_79E9                           ; $67C4: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $67C7: $CD $71 $7A
+    call DecrementValueAtDE                            ; $67C7: $CD $71 $7A
     ret  nz                                       ; $67CA: $C0
 
-    call func_01F_7A75                            ; $67CB: $CD $75 $7A
+    call IncrementValueAtBC                            ; $67CB: $CD $75 $7A
     cp   $05                                      ; $67CE: $FE $05
     jp   z, label_01F_7A07                        ; $67D0: $CA $07 $7A
 
     ld   hl, $67DC                                ; $67D3: $21 $DC $67
-    call func_01F_7A64                            ; $67D6: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $67D6: $CD $64 $7A
     jp   $7A25                                    ; $67D9: $C3 $25 $7A
 
     jp   hl                                       ; $67DC: $E9
@@ -7073,16 +7073,16 @@ jr_01F_677D:
     ld   hl, $6823                                ; $67FA: $21 $23 $68
     jp   label_01F_79E9                           ; $67FD: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6800: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6800: $CD $71 $7A
     ret  nz                                       ; $6803: $C0
 
-    call func_01F_7A75                            ; $6804: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6804: $CD $75 $7A
     cp   $03                                      ; $6807: $FE $03
     jr   z, jr_01F_6814                           ; $6809: $28 $09
 
 jr_01F_680B:
     ld   hl, $681F                                ; $680B: $21 $1F $68
-    call func_01F_7A64                            ; $680E: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $680E: $CD $64 $7A
     jp   $7A25                                    ; $6811: $C3 $25 $7A
 
 jr_01F_6814:
@@ -7112,15 +7112,15 @@ jr_01F_6814:
     jp   label_01F_79E9                           ; $6831: $C3 $E9 $79
 
 jr_01F_6834:
-    call func_01F_7A71                            ; $6834: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6834: $CD $71 $7A
     ret  nz                                       ; $6837: $C0
 
-    call func_01F_7A75                            ; $6838: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6838: $CD $75 $7A
     cp   $03                                      ; $683B: $FE $03
     jp   z, label_01F_7A07                        ; $683D: $CA $07 $7A
 
     ld   hl, $6849                                ; $6840: $21 $49 $68
-    call func_01F_7A64                            ; $6843: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6843: $CD $64 $7A
     jp   label_01F_7A8B                           ; $6846: $C3 $8B $7A
 
     ld   d, d                                     ; $6849: $52
@@ -7147,15 +7147,15 @@ jr_01F_6834:
     ld   hl, $6882                                ; $6863: $21 $82 $68
     jp   label_01F_79E9                           ; $6866: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6869: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6869: $CD $71 $7A
     ret  nz                                       ; $686C: $C0
 
-    call func_01F_7A75                            ; $686D: $CD $75 $7A
+    call IncrementValueAtBC                            ; $686D: $CD $75 $7A
     cp   $03                                      ; $6870: $FE $03
     jp   z, label_01F_7A07                        ; $6872: $CA $07 $7A
 
     ld   hl, $687E                                ; $6875: $21 $7E $68
-    call func_01F_7A64                            ; $6878: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6878: $CD $64 $7A
     jp   label_01F_7A8B                           ; $687B: $C3 $8B $7A
 
     add  a                                        ; $687E: $87
@@ -7187,15 +7187,15 @@ jr_01F_688D:
     ld   hl, $68D2                                ; $6896: $21 $D2 $68
     jp   label_01F_79E9                           ; $6899: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $689C: $CD $71 $7A
+    call DecrementValueAtDE                            ; $689C: $CD $71 $7A
     ret  nz                                       ; $689F: $C0
 
-    call func_01F_7A75                            ; $68A0: $CD $75 $7A
+    call IncrementValueAtBC                            ; $68A0: $CD $75 $7A
     cp   $06                                      ; $68A3: $FE $06
     jr   z, jr_01F_68B0                           ; $68A5: $28 $09
 
     ld   hl, $68C8                                ; $68A7: $21 $C8 $68
-    call func_01F_7A64                            ; $68AA: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $68AA: $CD $64 $7A
     jp   $7A25                                    ; $68AD: $C3 $25 $7A
 
 jr_01F_68B0:
@@ -7250,7 +7250,7 @@ jr_01F_68D0:
     ld   l, b                                     ; $68F2: $68
     jp   label_01F_79E9                           ; $68F3: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $68F6: $CD $71 $7A
+    call DecrementValueAtDE                            ; $68F6: $CD $71 $7A
     ret  nz                                       ; $68F9: $C0
 
     jp   label_01F_7A01                           ; $68FA: $C3 $01 $7A
@@ -7264,15 +7264,15 @@ jr_01F_68D0:
     ld   l, c                                     ; $6904: $69
     jp   label_01F_79E9                           ; $6905: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6908: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6908: $CD $71 $7A
     ret  nz                                       ; $690B: $C0
 
-    call func_01F_7A75                            ; $690C: $CD $75 $7A
+    call IncrementValueAtBC                            ; $690C: $CD $75 $7A
     cp   $08                                      ; $690F: $FE $08
     jp   z, label_01F_7A01                        ; $6911: $CA $01 $7A
 
     ld   hl, $691D                                ; $6914: $21 $1D $69
-    call func_01F_7A64                            ; $6917: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6917: $CD $64 $7A
     jp   $7A25                                    ; $691A: $C3 $25 $7A
 
     jr   nc, jr_01F_6988                          ; $691D: $30 $69
@@ -7314,15 +7314,15 @@ jr_01F_6924:
     ld   hl, $699C                                ; $693F: $21 $9C $69
     jp   label_01F_79E9                           ; $6942: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6945: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6945: $CD $71 $7A
     ret  nz                                       ; $6948: $C0
 
-    call func_01F_7A75                            ; $6949: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6949: $CD $75 $7A
     cp   $1A                                      ; $694C: $FE $1A
     jp   z, label_01F_7A07                        ; $694E: $CA $07 $7A
 
     ld   hl, $696A                                ; $6951: $21 $6A $69
-    call func_01F_7A64                            ; $6954: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6954: $CD $64 $7A
     ld   a, [$D398]                               ; $6957: $FA $98 $D3
     cp   $11                                      ; $695A: $FE $11
     jr   nc, jr_01F_6961                          ; $695C: $30 $03
@@ -7430,12 +7430,12 @@ jr_01F_69C4:
     ld   hl, $69EC                                ; $69C9: $21 $EC $69
     jp   label_01F_79E9                           ; $69CC: $C3 $E9 $79
 
-    call func_01F_7A75                            ; $69CF: $CD $75 $7A
+    call IncrementValueAtBC                            ; $69CF: $CD $75 $7A
     cp   $07                                      ; $69D2: $FE $07
     jp   z, label_01F_7A07                        ; $69D4: $CA $07 $7A
 
     ld   hl, $69E0                                ; $69D7: $21 $E0 $69
-    call func_01F_7A64                            ; $69DA: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $69DA: $CD $64 $7A
     jp   label_01F_7A8B                           ; $69DD: $C3 $8B $7A
 
     pop  af                                       ; $69E0: $F1
@@ -7474,12 +7474,12 @@ jr_01F_69C4:
     ld   l, d                                     ; $6A11: $6A
     jp   label_01F_79E9                           ; $6A12: $C3 $E9 $79
 
-    call func_01F_7A75                            ; $6A15: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6A15: $CD $75 $7A
     cp   $06                                      ; $6A18: $FE $06
     jp   z, label_01F_7A07                        ; $6A1A: $CA $07 $7A
 
     ld   hl, $6A26                                ; $6A1D: $21 $26 $6A
-    call func_01F_7A64                            ; $6A20: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6A20: $CD $64 $7A
     jp   label_01F_7A8B                           ; $6A23: $C3 $8B $7A
 
     dec  [hl]                                     ; $6A26: $35
@@ -7522,12 +7522,12 @@ jr_01F_69C4:
     ld   hl, $6A71                                ; $6A56: $21 $71 $6A
     jp   label_01F_79E9                           ; $6A59: $C3 $E9 $79
 
-    call func_01F_7A75                            ; $6A5C: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6A5C: $CD $75 $7A
     cp   $03                                      ; $6A5F: $FE $03
     jp   z, label_01F_7A07                        ; $6A61: $CA $07 $7A
 
     ld   hl, $6A6D                                ; $6A64: $21 $6D $6A
-    call func_01F_7A64                            ; $6A67: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6A67: $CD $64 $7A
     jp   label_01F_7A8B                           ; $6A6A: $C3 $8B $7A
 
     db   $76                                      ; $6A6D: $76
@@ -7553,10 +7553,10 @@ jr_01F_6A7A:
     ld   l, d                                     ; $6A82: $6A
     jp   label_01F_79E9                           ; $6A83: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6A86: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6A86: $CD $71 $7A
     ret  nz                                       ; $6A89: $C0
 
-    call func_01F_7A75                            ; $6A8A: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6A8A: $CD $75 $7A
     cp   $02                                      ; $6A8D: $FE $02
     jp   z, label_01F_7A07                        ; $6A8F: $CA $07 $7A
 
@@ -7575,15 +7575,15 @@ jr_01F_6A7A:
     ld   hl, $6AC9                                ; $6AA2: $21 $C9 $6A
     jp   label_01F_79E9                           ; $6AA5: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6AA8: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6AA8: $CD $71 $7A
     ret  nz                                       ; $6AAB: $C0
 
-    call func_01F_7A75                            ; $6AAC: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6AAC: $CD $75 $7A
     cp   $07                                      ; $6AAF: $FE $07
     jp   z, label_01F_7A07                        ; $6AB1: $CA $07 $7A
 
     ld   hl, $6ABD                                ; $6AB4: $21 $BD $6A
-    call func_01F_7A64                            ; $6AB7: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6AB7: $CD $64 $7A
     jp   label_01F_7A8B                           ; $6ABA: $C3 $8B $7A
 
     adc  $6A                                      ; $6ABD: $CE $6A
@@ -7625,15 +7625,15 @@ jr_01F_6A7A:
     ld   l, e                                     ; $6AEE: $6B
     jp   label_01F_79E9                           ; $6AEF: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6AF2: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6AF2: $CD $71 $7A
     ret  nz                                       ; $6AF5: $C0
 
-    call func_01F_7A75                            ; $6AF6: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6AF6: $CD $75 $7A
     cp   $0B                                      ; $6AF9: $FE $0B
     jp   z, label_01F_7A07                        ; $6AFB: $CA $07 $7A
 
     ld   hl, $6B07                                ; $6AFE: $21 $07 $6B
-    call func_01F_7A64                            ; $6B01: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6B01: $CD $64 $7A
     jp   $7A25                                    ; $6B04: $C3 $25 $7A
 
     jr   nz, jr_01F_6B74                          ; $6B07: $20 $6B
@@ -7670,15 +7670,15 @@ jr_01F_6A7A:
     ld   l, e                                     ; $6B34: $6B
     jp   label_01F_79E4                           ; $6B35: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $6B38: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6B38: $CD $71 $7A
     ret  nz                                       ; $6B3B: $C0
 
-    call func_01F_7A75                            ; $6B3C: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6B3C: $CD $75 $7A
     cp   $16                                      ; $6B3F: $FE $16
     jp   z, label_01F_7A07                        ; $6B41: $CA $07 $7A
 
     ld   hl, $6B4D                                ; $6B44: $21 $4D $6B
-    call func_01F_7A64                            ; $6B47: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6B47: $CD $64 $7A
     jp   $7A25                                    ; $6B4A: $C3 $25 $7A
 
     ld   a, h                                     ; $6B4D: $7C
@@ -7786,10 +7786,10 @@ jr_01F_6BAA:
     ld   hl, $6C09                                ; $6BAA: $21 $09 $6C
     jr   jr_01F_6BA7                              ; $6BAD: $18 $F8
 
-    call func_01F_7A71                            ; $6BAF: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6BAF: $CD $71 $7A
     ret  nz                                       ; $6BB2: $C0
 
-    call func_01F_7A75                            ; $6BB3: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6BB3: $CD $75 $7A
     cp   $03                                      ; $6BB6: $FE $03
     jr   z, jr_01F_6BD4                           ; $6BB8: $28 $1A
 
@@ -7805,7 +7805,7 @@ jr_01F_6BC5:
 
 jr_01F_6BC8:
     ld   a, [bc]                                  ; $6BC8: $0A
-    call func_01F_7A64                            ; $6BC9: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6BC9: $CD $64 $7A
     jp   label_01F_7A8B                           ; $6BCC: $C3 $8B $7A
 
 jr_01F_6BCF:
@@ -7874,16 +7874,16 @@ label_01F_6BDD:
 jr_01F_6C1B:
     jp   label_01F_79E9                           ; $6C1B: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6C1E: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6C1E: $CD $71 $7A
     ret  nz                                       ; $6C21: $C0
 
-    call func_01F_7A75                            ; $6C22: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6C22: $CD $75 $7A
     cp   $03                                      ; $6C25: $FE $03
     jr   z, jr_01F_6C32                           ; $6C27: $28 $09
 
 jr_01F_6C29:
     ld   hl, $6C3D                                ; $6C29: $21 $3D $6C
-    call func_01F_7A64                            ; $6C2C: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6C2C: $CD $64 $7A
     jp   $7A25                                    ; $6C2F: $C3 $25 $7A
 
 jr_01F_6C32:
@@ -7915,16 +7915,16 @@ jr_01F_6C32:
     ld   hl, $6C87                                ; $6C51: $21 $87 $6C
     jp   label_01F_79E4                           ; $6C54: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $6C57: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6C57: $CD $71 $7A
     ret  nz                                       ; $6C5A: $C0
 
-    call func_01F_7A75                            ; $6C5B: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6C5B: $CD $75 $7A
     cp   $03                                      ; $6C5E: $FE $03
     jr   z, jr_01F_6C6B                           ; $6C60: $28 $09
 
 jr_01F_6C62:
     ld   hl, $6C83                                ; $6C62: $21 $83 $6C
-    call func_01F_7A64                            ; $6C65: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6C65: $CD $64 $7A
     jp   $7A25                                    ; $6C68: $C3 $25 $7A
 
 jr_01F_6C6B:
@@ -7975,7 +7975,7 @@ jr_01F_6C7A:
     and  a                                        ; $6CA7: $A7
     jr   z, jr_01F_6CB1                           ; $6CA8: $28 $07
 
-    call func_01F_7A71                            ; $6CAA: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6CAA: $CD $71 $7A
     ret  nz                                       ; $6CAD: $C0
 
     jp   label_01F_7A07                           ; $6CAE: $C3 $07 $7A
@@ -8000,13 +8000,13 @@ jr_01F_6CB1:
     ld   hl, $6CFB                                ; $6CC9: $21 $FB $6C
     jp   label_01F_79E9                           ; $6CCC: $C3 $E9 $79
 
-    call func_01F_7A75                            ; $6CCF: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6CCF: $CD $75 $7A
     cp   $03                                      ; $6CD2: $FE $03
     jr   z, jr_01F_6CDF                           ; $6CD4: $28 $09
 
 jr_01F_6CD6:
     ld   hl, $6CF7                                ; $6CD6: $21 $F7 $6C
-    call func_01F_7A64                            ; $6CD9: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6CD9: $CD $64 $7A
     jp   $7A25                                    ; $6CDC: $C3 $25 $7A
 
 jr_01F_6CDF:
@@ -8039,13 +8039,13 @@ jr_01F_6CEE:
     ld   l, l                                     ; $6D0D: $6D
     jp   label_01F_79E9                           ; $6D0E: $C3 $E9 $79
 
-    call func_01F_7A75                            ; $6D11: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6D11: $CD $75 $7A
     cp   $03                                      ; $6D14: $FE $03
     jr   z, jr_01F_6D21                           ; $6D16: $28 $09
 
 jr_01F_6D18:
     ld   hl, $6D26                                ; $6D18: $21 $26 $6D
-    call func_01F_7A64                            ; $6D1B: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6D1B: $CD $64 $7A
     jp   $7A25                                    ; $6D1E: $C3 $25 $7A
 
 jr_01F_6D21:
@@ -8067,15 +8067,15 @@ jr_01F_6D21:
     ld   l, l                                     ; $6D37: $6D
     jp   label_01F_79E4                           ; $6D38: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $6D3B: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6D3B: $CD $71 $7A
     ret  nz                                       ; $6D3E: $C0
 
-    call func_01F_7A75                            ; $6D3F: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6D3F: $CD $75 $7A
     cp   $05                                      ; $6D42: $FE $05
     jp   z, label_01F_7A07                        ; $6D44: $CA $07 $7A
 
     ld   hl, $6D58                                ; $6D47: $21 $58 $6D
-    call func_01F_7A64                            ; $6D4A: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6D4A: $CD $64 $7A
     ld   a, [$D398]                               ; $6D4D: $FA $98 $D3
     cp   $01                                      ; $6D50: $FE $01
     jp   z, label_01F_7A8B                        ; $6D52: $CA $8B $7A
@@ -8114,10 +8114,10 @@ jr_01F_6D66:
     ld   l, l                                     ; $6D75: $6D
     jp   label_01F_79E4                           ; $6D76: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $6D79: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6D79: $CD $71 $7A
     ret  nz                                       ; $6D7C: $C0
 
-    call func_01F_7A75                            ; $6D7D: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6D7D: $CD $75 $7A
     cp   $02                                      ; $6D80: $FE $02
     jp   z, label_01F_7A01                        ; $6D82: $CA $01 $7A
 
@@ -8139,10 +8139,10 @@ jr_01F_6D95:
     ld   hl, $6DAD                                ; $6D95: $21 $AD $6D
     jp   label_01F_79E9                           ; $6D98: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6D9B: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6D9B: $CD $71 $7A
     ret  nz                                       ; $6D9E: $C0
 
-    call func_01F_7A75                            ; $6D9F: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6D9F: $CD $75 $7A
     cp   $02                                      ; $6DA2: $FE $02
     jp   z, label_01F_7A07                        ; $6DA4: $CA $07 $7A
 
@@ -8160,15 +8160,15 @@ jr_01F_6D95:
     ld   hl, $6E20                                ; $6DB7: $21 $20 $6E
     jp   label_01F_79E4                           ; $6DBA: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $6DBD: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6DBD: $CD $71 $7A
     ret  nz                                       ; $6DC0: $C0
 
-    call func_01F_7A75                            ; $6DC1: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6DC1: $CD $75 $7A
     cp   $24                                      ; $6DC4: $FE $24
     jp   z, label_01F_7A01                        ; $6DC6: $CA $01 $7A
 
     ld   hl, $6DDA                                ; $6DC9: $21 $DA $6D
-    call func_01F_7A64                            ; $6DCC: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6DCC: $CD $64 $7A
     ld   a, [$D398]                               ; $6DCF: $FA $98 $D3
     cp   $1E                                      ; $6DD2: $FE $1E
     jp   z, label_01F_7A8B                        ; $6DD4: $CA $8B $7A
@@ -8276,10 +8276,10 @@ jr_01F_6D95:
     ld   hl, $6E7C                                ; $6E53: $21 $7C $6E
     jp   label_01F_79E9                           ; $6E56: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6E59: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6E59: $CD $71 $7A
     ret  nz                                       ; $6E5C: $C0
 
-    call func_01F_7A75                            ; $6E5D: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6E5D: $CD $75 $7A
 
 jr_01F_6E60:
     cp   $03                                      ; $6E60: $FE $03
@@ -8287,7 +8287,7 @@ jr_01F_6E60:
 
 jr_01F_6E64:
     ld   hl, $6E78                                ; $6E64: $21 $78 $6E
-    call func_01F_7A64                            ; $6E67: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6E67: $CD $64 $7A
     jp   $7A25                                    ; $6E6A: $C3 $25 $7A
 
 jr_01F_6E6D:
@@ -8314,15 +8314,15 @@ jr_01F_6E6D:
     ld   l, [hl]                                  ; $6E89: $6E
     jp   label_01F_79E9                           ; $6E8A: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6E8D: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6E8D: $CD $71 $7A
     ret  nz                                       ; $6E90: $C0
 
-    call func_01F_7A75                            ; $6E91: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6E91: $CD $75 $7A
     cp   $0D                                      ; $6E94: $FE $0D
     jp   z, label_01F_7A07                        ; $6E96: $CA $07 $7A
 
     ld   hl, $6EA2                                ; $6E99: $21 $A2 $6E
-    call func_01F_7A64                            ; $6E9C: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6E9C: $CD $64 $7A
     jp   $7A25                                    ; $6E9F: $C3 $25 $7A
 
     cp   a                                        ; $6EA2: $BF
@@ -8362,16 +8362,16 @@ jr_01F_6E6D:
     ld   hl, $6F1D                                ; $6EE2: $21 $1D $6F
     jp   label_01F_79E9                           ; $6EE5: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6EE8: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6EE8: $CD $71 $7A
     ret  nz                                       ; $6EEB: $C0
 
-    call func_01F_7A75                            ; $6EEC: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6EEC: $CD $75 $7A
     cp   $0C                                      ; $6EEF: $FE $0C
     jr   z, jr_01F_6EFC                           ; $6EF1: $28 $09
 
 jr_01F_6EF3:
     ld   hl, $6F07                                ; $6EF3: $21 $07 $6F
-    call func_01F_7A64                            ; $6EF6: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6EF6: $CD $64 $7A
     jp   $7A25                                    ; $6EF9: $C3 $25 $7A
 
 jr_01F_6EFC:
@@ -8418,16 +8418,16 @@ jr_01F_6EFC:
     ld   hl, $6F67                                ; $6F36: $21 $67 $6F
     jp   label_01F_79E4                           ; $6F39: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $6F3C: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6F3C: $CD $71 $7A
     ret  nz                                       ; $6F3F: $C0
 
-    call func_01F_7A75                            ; $6F40: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6F40: $CD $75 $7A
     cp   $07                                      ; $6F43: $FE $07
     jr   z, jr_01F_6F50                           ; $6F45: $28 $09
 
 jr_01F_6F47:
     ld   hl, $6F5B                                ; $6F47: $21 $5B $6F
-    call func_01F_7A64                            ; $6F4A: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6F4A: $CD $64 $7A
     jp   $7A25                                    ; $6F4D: $C3 $25 $7A
 
 jr_01F_6F50:
@@ -8474,10 +8474,10 @@ jr_01F_6F7A:
     ld   hl, $6FBE                                ; $6F7D: $21 $BE $6F
     jp   label_01F_79E4                           ; $6F80: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $6F83: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6F83: $CD $71 $7A
     ret  nz                                       ; $6F86: $C0
 
-    call func_01F_7A75                            ; $6F87: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6F87: $CD $75 $7A
 
 jr_01F_6F8A:
     cp   $0A                                      ; $6F8A: $FE $0A
@@ -8485,7 +8485,7 @@ jr_01F_6F8A:
 
 jr_01F_6F8E:
     ld   hl, $6FAA                                ; $6F8E: $21 $AA $6F
-    call func_01F_7A64                            ; $6F91: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $6F91: $CD $64 $7A
     ld   a, [$D398]                               ; $6F94: $FA $98 $D3
     cp   $01                                      ; $6F97: $FE $01
     jp   z, label_01F_7A8B                        ; $6F99: $CA $8B $7A
@@ -8533,7 +8533,7 @@ jr_01F_6F9F:
     ld   l, a                                     ; $6FDF: $6F
     jp   label_01F_79E9                           ; $6FE0: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6FE3: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6FE3: $CD $71 $7A
     ret  nz                                       ; $6FE6: $C0
 
     jp   label_01F_7A07                           ; $6FE7: $C3 $07 $7A
@@ -8546,15 +8546,15 @@ jr_01F_6F9F:
     ld   hl, $7038                                ; $6FEF: $21 $38 $70
     jp   label_01F_79E9                           ; $6FF2: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $6FF5: $CD $71 $7A
+    call DecrementValueAtDE                            ; $6FF5: $CD $71 $7A
     ret  nz                                       ; $6FF8: $C0
 
-    call func_01F_7A75                            ; $6FF9: $CD $75 $7A
+    call IncrementValueAtBC                            ; $6FF9: $CD $75 $7A
     cp   $14                                      ; $6FFC: $FE $14
     jp   z, label_01F_7A01                        ; $6FFE: $CA $01 $7A
 
     ld   hl, $7012                                ; $7001: $21 $12 $70
-    call func_01F_7A64                            ; $7004: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $7004: $CD $64 $7A
     ld   a, [$D398]                               ; $7007: $FA $98 $D3
     cp   $13                                      ; $700A: $FE $13
     jp   z, label_01F_7A8B                        ; $700C: $CA $8B $7A
@@ -8648,15 +8648,15 @@ jr_01F_6F9F:
     ld   [hl], b                                  ; $707A: $70
     jp   label_01F_79E9                           ; $707B: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $707E: $CD $71 $7A
+    call DecrementValueAtDE                            ; $707E: $CD $71 $7A
     ret  nz                                       ; $7081: $C0
 
-    call func_01F_7A75                            ; $7082: $CD $75 $7A
+    call IncrementValueAtBC                            ; $7082: $CD $75 $7A
     cp   $08                                      ; $7085: $FE $08
     jp   z, label_01F_7A07                        ; $7087: $CA $07 $7A
 
     ld   hl, $7093                                ; $708A: $21 $93 $70
-    call func_01F_7A64                            ; $708D: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $708D: $CD $64 $7A
     jp   label_01F_7A8B                           ; $7090: $C3 $8B $7A
 
     and  [hl]                                     ; $7093: $A6
@@ -8715,16 +8715,16 @@ jr_01F_709A:
     ld   hl, $710C                                ; $70C9: $21 $0C $71
     jp   label_01F_79E4                           ; $70CC: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $70CF: $CD $71 $7A
+    call DecrementValueAtDE                            ; $70CF: $CD $71 $7A
     ret  nz                                       ; $70D2: $C0
 
-    call func_01F_7A75                            ; $70D3: $CD $75 $7A
+    call IncrementValueAtBC                            ; $70D3: $CD $75 $7A
     cp   $0C                                      ; $70D6: $FE $0C
     jr   z, jr_01F_70EB                           ; $70D8: $28 $11
 
 jr_01F_70DA:
     ld   hl, $70F6                                ; $70DA: $21 $F6 $70
-    call func_01F_7A64                            ; $70DD: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $70DD: $CD $64 $7A
     ld   a, [$D398]                               ; $70E0: $FA $98 $D3
     cp   $02                                      ; $70E3: $FE $02
     jp   z, label_01F_7A8B                        ; $70E5: $CA $8B $7A
@@ -8765,10 +8765,10 @@ jr_01F_70EB:
     ld   hl, $712C                                ; $7114: $21 $2C $71
     jp   label_01F_79E9                           ; $7117: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $711A: $CD $71 $7A
+    call DecrementValueAtDE                            ; $711A: $CD $71 $7A
     ret  nz                                       ; $711D: $C0
 
-    call func_01F_7A75                            ; $711E: $CD $75 $7A
+    call IncrementValueAtBC                            ; $711E: $CD $75 $7A
     cp   $02                                      ; $7121: $FE $02
 
 jr_01F_7123:
@@ -8791,15 +8791,15 @@ jr_01F_7123:
     ld   [hl], c                                  ; $7138: $71
     jp   label_01F_79E9                           ; $7139: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $713C: $CD $71 $7A
+    call DecrementValueAtDE                            ; $713C: $CD $71 $7A
     ret  nz                                       ; $713F: $C0
 
-    call func_01F_7A75                            ; $7140: $CD $75 $7A
+    call IncrementValueAtBC                            ; $7140: $CD $75 $7A
     cp   $23                                      ; $7143: $FE $23
     jp   z, label_01F_7A07                        ; $7145: $CA $07 $7A
 
     ld   hl, $7151                                ; $7148: $21 $51 $71
-    call func_01F_7A64                            ; $714B: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $714B: $CD $64 $7A
     jp   label_01F_7A8B                           ; $714E: $C3 $8B $7A
 
     sbc  d                                        ; $7151: $9A
@@ -8913,15 +8913,15 @@ jr_01F_719B:
     ld   hl, $7216                                ; $71C7: $21 $16 $72
     jp   label_01F_79E4                           ; $71CA: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $71CD: $CD $71 $7A
+    call DecrementValueAtDE                            ; $71CD: $CD $71 $7A
     ret  nz                                       ; $71D0: $C0
 
-    call func_01F_7A75                            ; $71D1: $CD $75 $7A
+    call IncrementValueAtBC                            ; $71D1: $CD $75 $7A
     cp   $1B                                      ; $71D4: $FE $1B
     jp   z, label_01F_7A01                        ; $71D6: $CA $01 $7A
 
     ld   hl, $71E2                                ; $71D9: $21 $E2 $71
-    call func_01F_7A64                            ; $71DC: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $71DC: $CD $64 $7A
     jp   label_01F_7A8B                           ; $71DF: $C3 $8B $7A
 
     dec  de                                       ; $71E2: $1B
@@ -9009,15 +9009,15 @@ jr_01F_721C:
     ld   hl, $726D                                ; $723E: $21 $6D $72
     jp   label_01F_79E9                           ; $7241: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $7244: $CD $71 $7A
+    call DecrementValueAtDE                            ; $7244: $CD $71 $7A
     ret  nz                                       ; $7247: $C0
 
-    call func_01F_7A75                            ; $7248: $CD $75 $7A
+    call IncrementValueAtBC                            ; $7248: $CD $75 $7A
     cp   $0B                                      ; $724B: $FE $0B
     jp   z, label_01F_7A07                        ; $724D: $CA $07 $7A
 
     ld   hl, $7259                                ; $7250: $21 $59 $72
-    call func_01F_7A64                            ; $7253: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $7253: $CD $64 $7A
     jp   label_01F_7A8B                           ; $7256: $C3 $8B $7A
 
     ld   [hl], d                                  ; $7259: $72
@@ -9086,15 +9086,15 @@ jr_01F_725A:
     ld   hl, $72CE                                ; $7295: $21 $CE $72
     jp   label_01F_79E9                           ; $7298: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $729B: $CD $71 $7A
+    call DecrementValueAtDE                            ; $729B: $CD $71 $7A
     ret  nz                                       ; $729E: $C0
 
-    call func_01F_7A75                            ; $729F: $CD $75 $7A
+    call IncrementValueAtBC                            ; $729F: $CD $75 $7A
     cp   $0C                                      ; $72A2: $FE $0C
     jp   z, label_01F_7A01                        ; $72A4: $CA $01 $7A
 
     ld   hl, $72B8                                ; $72A7: $21 $B8 $72
-    call func_01F_7A64                            ; $72AA: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $72AA: $CD $64 $7A
     ld   a, [$D398]                               ; $72AD: $FA $98 $D3
     cp   $06                                      ; $72B0: $FE $06
     jp   z, label_01F_7A8B                        ; $72B2: $CA $8B $7A
@@ -9146,10 +9146,10 @@ jr_01F_725A:
     ld   hl, $7415                                ; $72EE: $21 $15 $74
     jp   label_01F_79E9                           ; $72F1: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $72F4: $CD $71 $7A
+    call DecrementValueAtDE                            ; $72F4: $CD $71 $7A
     ret  nz                                       ; $72F7: $C0
 
-    call func_01F_7A75                            ; $72F8: $CD $75 $7A
+    call IncrementValueAtBC                            ; $72F8: $CD $75 $7A
     cp   $05                                      ; $72FB: $FE $05
     jr   z, jr_01F_733B                           ; $72FD: $28 $3C
 
@@ -9164,7 +9164,7 @@ jr_01F_725A:
 
 jr_01F_730C:
     ld   hl, $7373                                ; $730C: $21 $73 $73
-    call func_01F_7A64                            ; $730F: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $730F: $CD $64 $7A
     ld   a, [$D398]                               ; $7312: $FA $98 $D3
     cp   $1A                                      ; $7315: $FE $1A
     jp   z, label_01F_7A8B                        ; $7317: $CA $8B $7A
@@ -9192,7 +9192,7 @@ jr_01F_730C:
 jr_01F_733B:
     push de                                       ; $733B: $D5
     ld   de, $D3DF                                ; $733C: $11 $DF $D3
-    call func_01F_7A71                            ; $733F: $CD $71 $7A
+    call DecrementValueAtDE                            ; $733F: $CD $71 $7A
     pop  de                                       ; $7342: $D1
     jr   z, jr_01F_7359                           ; $7343: $28 $14
 
@@ -9203,7 +9203,7 @@ jr_01F_733B:
 jr_01F_734A:
     push de                                       ; $734A: $D5
     ld   de, $D3E0                                ; $734B: $11 $E0 $D3
-    call func_01F_7A71                            ; $734E: $CD $71 $7A
+    call DecrementValueAtDE                            ; $734E: $CD $71 $7A
     pop  de                                       ; $7351: $D1
     jr   z, jr_01F_735E                           ; $7352: $28 $0A
 
@@ -9488,17 +9488,17 @@ jr_01F_73FD:
     ld   hl, $74EB                                ; $7490: $21 $EB $74
     jp   label_01F_79E9                           ; $7493: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $7496: $CD $71 $7A
+    call DecrementValueAtDE                            ; $7496: $CD $71 $7A
 
 jr_01F_7499:
     ret  nz                                       ; $7499: $C0
 
-    call func_01F_7A75                            ; $749A: $CD $75 $7A
+    call IncrementValueAtBC                            ; $749A: $CD $75 $7A
     cp   $21                                      ; $749D: $FE $21
     jp   z, label_01F_7A01                        ; $749F: $CA $01 $7A
 
     ld   hl, $74AB                                ; $74A2: $21 $AB $74
-    call func_01F_7A64                            ; $74A5: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $74A5: $CD $64 $7A
     jp   label_01F_7A8B                           ; $74A8: $C3 $8B $7A
 
     ldh  a, [$FF74]                               ; $74AB: $F0 $74
@@ -9735,13 +9735,13 @@ jr_01F_758C:
     ld   hl, $75C6                                ; $7595: $21 $C6 $75
     jp   label_01F_79E4                           ; $7598: $C3 $E4 $79
 
-    call func_01F_7A75                            ; $759B: $CD $75 $7A
+    call IncrementValueAtBC                            ; $759B: $CD $75 $7A
     cp   $09                                      ; $759E: $FE $09
     jr   z, jr_01F_75AB                           ; $75A0: $28 $09
 
 jr_01F_75A2:
     ld   hl, $75B6                                ; $75A2: $21 $B6 $75
-    call func_01F_7A64                            ; $75A5: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $75A5: $CD $64 $7A
     jp   $7A25                                    ; $75A8: $C3 $25 $7A
 
 jr_01F_75AB:
@@ -9777,7 +9777,7 @@ jr_01F_75AB:
     call func_01F_7AD0                            ; $75E5: $CD $D0 $7A
     jp   label_01F_7A7F                           ; $75E8: $C3 $7F $7A
 
-    call func_01F_7A75                            ; $75EB: $CD $75 $7A
+    call IncrementValueAtBC                            ; $75EB: $CD $75 $7A
     cp   $09                                      ; $75EE: $FE $09
     jr   z, jr_01F_75FC                           ; $75F0: $28 $0A
 
@@ -9803,15 +9803,15 @@ jr_01F_7605:
     ld   hl, $7647                                ; $760A: $21 $47 $76
     jp   label_01F_79E9                           ; $760D: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $7610: $CD $71 $7A
+    call DecrementValueAtDE                            ; $7610: $CD $71 $7A
     ret  nz                                       ; $7613: $C0
 
-    call func_01F_7A75                            ; $7614: $CD $75 $7A
+    call IncrementValueAtBC                            ; $7614: $CD $75 $7A
     cp   $12                                      ; $7617: $FE $12
     jp   z, label_01F_7A07                        ; $7619: $CA $07 $7A
 
     ld   hl, $7625                                ; $761C: $21 $25 $76
-    call func_01F_7A64                            ; $761F: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $761F: $CD $64 $7A
     jp   label_01F_7A8B                           ; $7622: $C3 $8B $7A
 
     ld   c, h                                     ; $7625: $4C
@@ -9925,15 +9925,15 @@ jr_01F_7605:
     ld   hl, $76D6                                ; $76A1: $21 $D6 $76
     jp   label_01F_79E9                           ; $76A4: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $76A7: $CD $71 $7A
+    call DecrementValueAtDE                            ; $76A7: $CD $71 $7A
     ret  nz                                       ; $76AA: $C0
 
-    call func_01F_7A75                            ; $76AB: $CD $75 $7A
+    call IncrementValueAtBC                            ; $76AB: $CD $75 $7A
     cp   $0E                                      ; $76AE: $FE $0E
     jp   z, label_01F_7A07                        ; $76B0: $CA $07 $7A
 
     ld   hl, $76BC                                ; $76B3: $21 $BC $76
-    call func_01F_7A64                            ; $76B6: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $76B6: $CD $64 $7A
     jp   label_01F_7A8B                           ; $76B9: $C3 $8B $7A
 
     db   $DB                                      ; $76BC: $DB
@@ -10043,15 +10043,15 @@ jr_01F_7716:
     ld   hl, $775E                                ; $772A: $21 $5E $77
     jp   label_01F_79E4                           ; $772D: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $7730: $CD $71 $7A
+    call DecrementValueAtDE                            ; $7730: $CD $71 $7A
     ret  nz                                       ; $7733: $C0
 
-    call func_01F_7A75                            ; $7734: $CD $75 $7A
+    call IncrementValueAtBC                            ; $7734: $CD $75 $7A
     cp   $03                                      ; $7737: $FE $03
     jr   z, jr_01F_774C                           ; $7739: $28 $11
 
     ld   hl, $775A                                ; $773B: $21 $5A $77
-    call func_01F_7A64                            ; $773E: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $773E: $CD $64 $7A
     ld   a, [$D398]                               ; $7741: $FA $98 $D3
     cp   $01                                      ; $7744: $FE $01
     jp   z, label_01F_7A79                        ; $7746: $CA $79 $7A
@@ -10167,15 +10167,15 @@ jr_01F_77C0:
     ld   a, b                                     ; $77E8: $78
     jp   label_01F_79E4                           ; $77E9: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $77EC: $CD $71 $7A
+    call DecrementValueAtDE                            ; $77EC: $CD $71 $7A
     ret  nz                                       ; $77EF: $C0
 
-    call func_01F_7A75                            ; $77F0: $CD $75 $7A
+    call IncrementValueAtBC                            ; $77F0: $CD $75 $7A
     cp   $51                                      ; $77F3: $FE $51
     jp   z, label_01F_7A01                        ; $77F5: $CA $01 $7A
 
     ld   hl, $7801                                ; $77F8: $21 $01 $78
-    call func_01F_7A64                            ; $77FB: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $77FB: $CD $64 $7A
     jp   $7A25                                    ; $77FE: $C3 $25 $7A
 
     xor  b                                        ; $7801: $A8
@@ -10431,15 +10431,15 @@ jr_01F_7825:
     and  a                                        ; $790E: $A7
     ret  nz                                       ; $790F: $C0
 
-    call func_01F_7A71                            ; $7910: $CD $71 $7A
+    call DecrementValueAtDE                            ; $7910: $CD $71 $7A
     ret  nz                                       ; $7913: $C0
 
-    call func_01F_7A75                            ; $7914: $CD $75 $7A
+    call IncrementValueAtBC                            ; $7914: $CD $75 $7A
     cp   $08                                      ; $7917: $FE $08
     jp   z, label_01F_7A07                        ; $7919: $CA $07 $7A
 
     ld   hl, $7925                                ; $791C: $21 $25 $79
-    call func_01F_7A64                            ; $791F: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $791F: $CD $64 $7A
     jp   label_01F_7A8B                           ; $7922: $C3 $8B $7A
 
     jr   c, jr_01F_79A0                           ; $7925: $38 $79
@@ -10494,15 +10494,15 @@ jr_01F_7825:
     ld   a, c                                     ; $795D: $79
     jp   label_01F_79E4                           ; $795E: $C3 $E4 $79
 
-    call func_01F_7A71                            ; $7961: $CD $71 $7A
+    call DecrementValueAtDE                            ; $7961: $CD $71 $7A
     ret  nz                                       ; $7964: $C0
 
-    call func_01F_7A75                            ; $7965: $CD $75 $7A
+    call IncrementValueAtBC                            ; $7965: $CD $75 $7A
     cp   $10                                      ; $7968: $FE $10
     jp   z, label_01F_7A07                        ; $796A: $CA $07 $7A
 
     ld   hl, $7976                                ; $796D: $21 $76 $79
-    call func_01F_7A64                            ; $7970: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $7970: $CD $64 $7A
     jp   label_01F_7A8B                           ; $7973: $C3 $8B $7A
 
     sbc  c                                        ; $7976: $99
@@ -10691,7 +10691,12 @@ label_01F_7A51:
     res  7, [hl]                                  ; $7A61: $CB $BE
     ret                                           ; $7A63: $C9
 
-func_01F_7A64:
+; Read a two-bytes address in a pointers table
+; Inputs:
+;   a   the item index in the pointers table
+; Output:
+;   hl  the handler index for the item at index a
+GetHandlerAddressInTable::
     dec  a                                        ; $7A64: $3D
     sla  a                                        ; $7A65: $CB $27
     ld   c, a                                     ; $7A67: $4F
@@ -10704,13 +10709,13 @@ func_01F_7A64:
     ld   l, c                                     ; $7A6F: $69
     ret                                           ; $7A70: $C9
 
-func_01F_7A71:
+DecrementValueAtDE::
     ld   a, [de]                                  ; $7A71: $1A
     dec  a                                        ; $7A72: $3D
     ld   [de], a                                  ; $7A73: $12
     ret                                           ; $7A74: $C9
 
-func_01F_7A75:
+IncrementValueAtBC::
     ld   a, [bc]                                  ; $7A75: $0A
     inc  a                                        ; $7A76: $3C
     ld   [bc], a                                  ; $7A77: $02
@@ -10772,7 +10777,7 @@ func_01F_7AAC:
     jr   jr_01F_7AB2                              ; $7AB0: $18 $00
 
 jr_01F_7AB2:
-    call func_01F_7A71                            ; $7AB2: $CD $71 $7A
+    call DecrementValueAtDE                            ; $7AB2: $CD $71 $7A
     pop  de                                       ; $7AB5: $D1
     ret                                           ; $7AB6: $C9
 
@@ -10874,15 +10879,15 @@ label_01F_7B11:
     ld   hl, $7B3E                                ; $7B1B: $21 $3E $7B
     jp   label_01F_79E9                           ; $7B1E: $C3 $E9 $79
 
-    call func_01F_7A71                            ; $7B21: $CD $71 $7A
+    call DecrementValueAtDE                            ; $7B21: $CD $71 $7A
     ret  nz                                       ; $7B24: $C0
 
-    call func_01F_7A75                            ; $7B25: $CD $75 $7A
+    call IncrementValueAtBC                            ; $7B25: $CD $75 $7A
     cp   $05                                      ; $7B28: $FE $05
     jp   z, label_01F_7A01                        ; $7B2A: $CA $01 $7A
 
     ld   hl, $7B36                                ; $7B2D: $21 $36 $7B
-    call func_01F_7A64                            ; $7B30: $CD $64 $7A
+    call GetHandlerAddressInTable                 ; $7B30: $CD $64 $7A
     jp   label_01F_7A8B                           ; $7B33: $C3 $8B $7A
 
     ld   c, b                                     ; $7B36: $48

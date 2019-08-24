@@ -6,8 +6,8 @@
 
     jp   label_01E_4CFF                           ; $4003: $C3 $FF $4C
 
-Func_01E_4006::
-    jp   label_01E_401E                           ; $4006: $C3 $1E $40
+PlayMusicTrack_1E::
+    jp   PlayMusicTrack_1E_EntryPoint             ; $4006: $C3 $1E $40
 
 label_01E_4009:
     ld   hl, $D300                                ; $4009: $21 $00 $D3
@@ -25,7 +25,7 @@ jr_01E_400C:
     ldh  [rNR51], a                               ; $401B: $E0 $25
     ret                                           ; $401D: $C9
 
-label_01E_401E:
+PlayMusicTrack_1E_EntryPoint::
     ld   hl, wActiveMusicTrack                                ; $401E: $21 $68 $D3
     ld   a, [hl+]                                 ; $4021: $2A
     and  a                                        ; $4022: $A7
@@ -1277,7 +1277,7 @@ label_01E_4854:
     ld   [$D3CE], a                               ; $4855: $EA $CE $D3
     ldh  a, [$FFBF]                               ; $4858: $F0 $BF
     ld   [wActiveMusicTrack], a                               ; $485A: $EA $68 $D3
-    jp   label_01E_401E                           ; $485D: $C3 $1E $40
+    jp   PlayMusicTrack_1E_EntryPoint             ; $485D: $C3 $1E $40
 
 label_01E_4860:
     ld   a, $01                                   ; $4860: $3E $01

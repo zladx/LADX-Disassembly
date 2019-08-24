@@ -119,11 +119,9 @@ PlayAudioStep::
     ; Fallthrough to doAudioStep a second time
 
 .doAudioStep
-    ; Call 1B:4006 (play active music track)
+    ; TODO: clarify the respective purpose of these two functions
     callsw PlayMusicTrack_1B
-
-    ; configure track advancement?
-    callsw Func_01E_4006
+    callsw PlayMusicTrack_1E
 
 .return
     ret

@@ -120,9 +120,7 @@ PlayAudioStep::
 
 .doAudioStep
     ; Call 1B:4006 (play active music track)
-    ld   a, $1B
-    call SwitchBank
-    call $4006
+    callsw PlayMusicTrack_1B
 
     ; configure track advancement?
     callsw Func_01E_4006

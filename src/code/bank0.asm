@@ -92,10 +92,7 @@ label_826::
     ret
 
 PlayAudioStep::
-    ; Play SFX
-    ld   a, $1F
-    call SwitchBank
-    call $4006
+    callsw PlaySfx
 
     ; If a wave SFX is playing, return early
     ldh  a, [hWaveSfx]

@@ -588,7 +588,10 @@ wIntroSubTimer:: ; D002
 
 ; Unlabeled
 wD003 equ $D003
-  ds $35D
+  ds $D300 - $D003
+
+; D300 (unlabeled, audio related)
+ds $60
 
 wActiveJingle:: ; D360
   ; The squareform jingle currently playing

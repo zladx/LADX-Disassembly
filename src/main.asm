@@ -163,6 +163,12 @@ include "text/dialog_4.asm"
 section "bank1E", romx[$4000], bank[$1E]
 include "code/audio/bank1E.asm"
 
+section "bank1F", romx[$4000], bank[$1F]
+include "code/audio/sfx_entry_point.asm"
+section "sfx pointers table", romx[$4100], bank[$1F]
+include "data/sfx/pointers_table.asm"
+include "code/audio/sfx.asm"
+
 section "bank20",romx[$4000],bank[$20]
 include "code/bank20.asm"
 

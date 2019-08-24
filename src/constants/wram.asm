@@ -29,7 +29,14 @@ wNameIndex:: ds 1
 
 wC109: ds 1
 wC10A: ds 1
-wC10B: ds 1
+
+wMusicTrackTiming: ; C10B
+  ; Music timing
+  ; 0: normal
+  ; 1: double-speed
+  ; 2: half-speed
+  ds 1
+
 wC10C: ds 1
 wC10D: ds 1
 

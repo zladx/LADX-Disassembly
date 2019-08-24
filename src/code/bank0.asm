@@ -92,26 +92,25 @@ label_826::
     ret
 
 PlayAudioStep::
-    ; Call $1F:4006
+    ; Play SFX
     ld   a, $1F
     call SwitchBank
     call $4006
 
-    ; If an SFX is playing, return early
+    ; If a wave SFX is playing, return early
     ldh  a, [hWaveSfx]
     and  a
     jr   nz, .return
 
-    ; If $C10B != 0…
-    ld   a, [$C10B]
+    ; If wMusicTrackTiming != 0…
+    ld   a, [wMusicTrackTiming]
     and  a
     jr   z, .doAudioStep
-    ; … and $C10B != 2…
+    ; … and wMusicTrackTiming != 2…
     cp   $02
-    ; … play two audio steps.
+    ; … play two audio steps (double speed)
     jr   nz, .doAudioStepTwice
-
-    ; Otherwise, play the audio step only on odd frames
+    ; Otherwise, play the audio step only on odd frames (half speed)
     ldh  a, [hFrameCounter]
     and  $01
     jr   nz, .return
@@ -123,11 +122,12 @@ PlayAudioStep::
     ; Fallthrough to doAudioStep a second time
 
 .doAudioStep
-    ; Call 1B:4006
+    ; Call 1B:4006 (play active music track)
     ld   a, $1B
     call SwitchBank
     call $4006
 
+    ; configure track advancement?
     callsw Func_01E_4006
 
 .return

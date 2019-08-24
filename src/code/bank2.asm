@@ -2,7 +2,7 @@
 ; This file was created with mgbdis v1.0.1 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-include "code/audio/music.asm"
+include "code/audio/select_music_track.asm"
 
 label_002_41D0::
     push bc                                       ; $41D0: $C5

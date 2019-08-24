@@ -29,7 +29,14 @@ wNameIndex:: ds 1
 
 wC109: ds 1
 wC10A: ds 1
-wC10B: ds 1
+
+wMusicTrackTiming: ; C10B
+  ; Music timing
+  ; 0: normal
+  ; 1: double-speed
+  ; 2: half-speed
+  ds 1
+
 wC10C: ds 1
 wC10D: ds 1
 
@@ -581,7 +588,10 @@ wIntroSubTimer:: ; D002
 
 ; Unlabeled
 wD003 equ $D003
-  ds $35D
+  ds $D300 - $D003
+
+; D300 (unlabeled, audio related)
+ds $60
 
 wActiveJingle:: ; D360
   ; The squareform jingle currently playing

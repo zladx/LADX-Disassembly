@@ -152,6 +152,11 @@ OverworldBaseMapGBC::
 incbin "data/base_maps/overworld.cgb.bin"
 include "code/bank1A/unknown.asm"
 
+section "bank1B",romx[$4000],bank[$1B]
+include "code/audio/music_1.asm"
+section "Music tracks section 1",romx[$5000],bank[$1B]
+include "data/music/music_tracks_data_1.asm"
+
 section "bank1C",romx[$4001],bank[$1C]
 include "text/dialog_table.asm"
 section "Text at 1c:4b2a", ROMX[$4B2A], BANK[$1C]
@@ -161,7 +166,15 @@ section "bank1D", romx[$4000], bank[$1D]
 include "text/dialog_4.asm"
 
 section "bank1E", romx[$4000], bank[$1E]
-include "code/audio/bank1E.asm"
+include "code/audio/music_2.asm"
+section "Music tracks section 2",romx[$5000],bank[$1E]
+include "data/music/music_tracks_data_2.asm"
+
+section "bank1F", romx[$4000], bank[$1F]
+include "code/audio/sfx_entry_point.asm"
+section "sfx pointers table", romx[$4100], bank[$1F]
+include "data/sfx/pointers_table.asm"
+include "code/audio/sfx.asm"
 
 section "bank20",romx[$4000],bank[$20]
 include "code/bank20.asm"

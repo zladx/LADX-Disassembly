@@ -827,7 +827,7 @@ jr_007_4503:
     ld   a, $02                                   ; $4509: $3E $02
     ldh  [$FFA1], a                               ; $450B: $E0 $A1
     ld   a, $01                                   ; $450D: $3E $01
-    ld   [wC10B], a                               ; $450F: $EA $0B $C1
+    ld   [wMusicTrackTiming], a                               ; $450F: $EA $0B $C1
     call GetEntityTransitionCountdown                 ; $4512: $CD $05 $0C
     jr   nz, jr_007_4521                          ; $4515: $20 $0A
 
@@ -860,7 +860,7 @@ jr_007_4533:
     call GetEntityTransitionCountdown                 ; $453B: $CD $05 $0C
     jr   nz, jr_007_4586                          ; $453E: $20 $46
 
-    ld   [wC10B], a                               ; $4540: $EA $0B $C1
+    ld   [wMusicTrackTiming], a                               ; $4540: $EA $0B $C1
     call IncrementEntityWalkingAttr               ; $4543: $CD $12 $3B
     ld   a, $54                                   ; $4546: $3E $54
     call label_3B86                               ; $4548: $CD $86 $3B
@@ -1843,7 +1843,7 @@ jr_007_4B0E:
     call GetEntityTransitionCountdown                 ; $4B22: $CD $05 $0C
     jr   nz, jr_007_4B3B                          ; $4B25: $20 $14
 
-    ld   [wC10B], a                               ; $4B27: $EA $0B $C1
+    ld   [wMusicTrackTiming], a                               ; $4B27: $EA $0B $C1
     ld   a, $73                                   ; $4B2A: $3E $73
     call OpenDialogInTable1                       ; $4B2C: $CD $73 $23
     ld   a, $08                                   ; $4B2F: $3E $08
@@ -1856,7 +1856,7 @@ jr_007_4B3B:
     ld   a, $02                                   ; $4B3B: $3E $02
     ldh  [$FFA1], a                               ; $4B3D: $E0 $A1
     ld   a, $01                                   ; $4B3F: $3E $01
-    ld   [wC10B], a                               ; $4B41: $EA $0B $C1
+    ld   [wMusicTrackTiming], a                               ; $4B41: $EA $0B $C1
 
 func_007_4B44:
 jr_007_4B44:

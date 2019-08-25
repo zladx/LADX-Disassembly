@@ -7973,26 +7973,26 @@ ClearEntityTypeAndReturn::
     ret
 
 label_3F93::
-    ld   a, $05
+    ld   a, BANK(Data_005_59DE)
     ld   [MBC3SelectBank], a
-    ld   hl, $59DE
-    ld   de, $8460
+    ld   hl, Data_005_59DE
+    ld   de, vTiles0 + $460
     ld   bc, $0010
     call CopyData
-    ld   hl, $59EE
+    ld   hl, Data_005_59EE
     jr   label_3FBD
 
 label_3FA9::
-    ld   a, $05
+    ld   a, BANK(Data_005_59FE)
     ld   [MBC3SelectBank], a
-    ld   hl, $59FE
-    ld   de, $8460
+    ld   hl, Data_005_59FE
+    ld   de, vTiles0 + $460
     ld   bc, $0010
     call CopyData
-    ld   hl, $5A0E
+    ld   hl, Data_005_5A0E
 
 label_3FBD::
-    ld   de, $8480
+    ld   de, vTiles0 + $480
     ld   bc, $0010
     call CopyData
     xor  a

@@ -1009,6 +1009,7 @@ jr_014_4D6F:
     ld   [$DDD7], a                               ; $4D6F: $EA $D7 $DD
     ret                                           ; $4D72: $C9
 
+Func_014_4D73::
     xor  a                                        ; $4D73: $AF
     ldh  [$FFBE], a                               ; $4D74: $E0 $BE
     ldh  [hFFF5], a                               ; $4D76: $E0 $F5

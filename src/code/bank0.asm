@@ -7064,10 +7064,10 @@ AnimateEntity::
     call UpdateEntityPositionForRoomTransition
 .liftedEnd
 
-    ld   a, $14
+    ld   a, BANK(Func_014_4D73)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    call $4D73
+    call Func_014_4D73
 
     ; Select bank 3
     ld   a, $03

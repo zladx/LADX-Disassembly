@@ -1,3 +1,6 @@
+; Maximum number of loaded entities
+MAX_ENTITIES equ 16
+
 ; Values for wEntitiesStateTable
 ENTITY_STATE_DISABLED   equ 0
 ENTITY_STATE_DYING      equ 1

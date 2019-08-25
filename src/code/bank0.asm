@@ -6982,27 +6982,30 @@ label_39E3::
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
     call $6352
-    ld   b, $00
-    ld   c, $0F
 
+    ; Initialize the entities counter
+    ld   b, $00
+    ld   c, MAX_ENTITIES - 1
+
+    ; For each entity slot…
 .loop
-    ; Write active entity index to wLinkWalkingFrameCount
+    ; Save the active entity index to wLinkWalkingFrameCount
     ld   a, c
     ld   [wLinkWalkingFrameCount], a
 
-    ; Read entity type
+    ; Read the entity state
     ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   a, [hl]
 
-    ; If type != 0…
+    ; If state != 0…
     and  a
-    jr   z, .loadEntityEnd
+    jr   z, .AnimateEntityEnd
 
-    ; load the entity.
+    ; animate the entity.
     ldh  [hActiveEntityState], a
-    call LoadEntity
-.loadEntityEnd
+    call AnimateEntity
+.AnimateEntityEnd
 
     ; While c >= 0, loop
     dec  c
@@ -7010,7 +7013,7 @@ label_39E3::
     cp   $FF
     jr   nz, .loop
 
-LoadEntity_return::
+AnimateEntity_return::
     ret
 
 label_3A0A::
@@ -7021,7 +7024,7 @@ label_3A0A::
     ld   [MBC3SelectBank], a
     ret
 
-LoadEntity::
+AnimateEntity::
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
@@ -7075,7 +7078,7 @@ LoadEntity::
     cp   ENTITY_STATE_ACTIVE
     jp   z, ExecuteActiveEntityHandler
     JP_TABLE
-._00 dw LoadEntity_return
+._00 dw AnimateEntity_return
 ._01 dw EntityState1Handler
 ._02 dw EntityState2Handler
 ._03 dw EntityDestructionHandler

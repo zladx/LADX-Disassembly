@@ -1205,28 +1205,29 @@ EndCreditsHandler::
     call $4AB7
     jp   returnFromGameplayHandler
 
-label_EED::
+AnimateEntitiesAndRestoreBank17::
     ld   a, $03
     ld   [MBC3SelectBank], a
     ld   a, $17
 
-label_EF4::
+; Call AnimateEntities, then restore bank in a
+AnimateEntitiesAndRestoreBank::
     push af
-    call label_398D
+    call AnimateEntities
     pop  af
     jp   SwitchBank
 
-label_EFC::
+AnimateEntitiesAndRestoreBank01::
     ld   a, $03
     ld   [MBC3SelectBank], a
     ld   a, $01
-    jr   label_EF4
+    jr   AnimateEntitiesAndRestoreBank
 
-label_F05::
+AnimateEntitiesAndRestoreBank02::
     ld   a, $03
     ld   [MBC3SelectBank], a
     ld   a, $02
-    jr   label_EF4
+    jr   AnimateEntitiesAndRestoreBank
 
 FileSelectionHandler::
     jp   FileSelectionEntryPoint
@@ -1357,7 +1358,7 @@ WorldDefaultHandler::
     call SwitchBank
     call $7A9A
 
-    call label_398D
+    call AnimateEntities
     callsw label_002_5487
 
     ld   hl, wRequestDestination
@@ -1495,7 +1496,7 @@ InitGotItemSequence::
     ld   [wGameplayType], a
     callsb func_002_755B
     call DrawLinkSprite
-    call label_398D
+    call AnimateEntities
     pop  af
     ret
 
@@ -6920,7 +6921,7 @@ label_397B::
 data_3989::
     db   0, 8, $10, $18
 
-label_398D::
+AnimateEntities::
     ; Play the Boss Agony audio effect if needed
     ld   hl, wBossAgonySFXCountdown
     ld   a, [hl]

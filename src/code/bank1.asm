@@ -1515,7 +1515,7 @@ label_5674::
 
 label_5678::
     call DrawLinkSprite
-    call label_EFC
+    call AnimateEntitiesAndRestoreBank01
     call label_1A22
     ld   a, [$C16B]
     cp   $04

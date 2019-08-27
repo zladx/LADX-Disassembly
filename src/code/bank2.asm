@@ -5301,7 +5301,7 @@ func_002_61BA::
     call func_002_755B                            ; $61BA: $CD $5B $75
     call $1797                                    ; $61BD: $CD $97 $17
     call DrawLinkSpriteAndReturn                  ; $61C0: $CD $2E $1D
-    jp   label_F05                                ; $61C3: $C3 $05 $0F
+    jp   AnimateEntitiesAndRestoreBank02                                ; $61C3: $C3 $05 $0F
 
 jr_002_61C6:
     ld   a, [$C150]                               ; $61C6: $FA $50 $C1

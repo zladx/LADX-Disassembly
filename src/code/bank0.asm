@@ -1200,33 +1200,32 @@ IntroHandler::
     jp   IntroHandlerEntryPoint
 
 EndCreditsHandler::
-    ld   a, $17
-    call SwitchBank
-    call $4AB7
+    callsw EndCreditsEntryPoint
     jp   returnFromGameplayHandler
 
-label_EED::
+AnimateEntitiesAndRestoreBank17::
     ld   a, $03
     ld   [MBC3SelectBank], a
     ld   a, $17
 
-label_EF4::
+; Call AnimateEntities, then restore bank in a
+AnimateEntitiesAndRestoreBank::
     push af
-    call label_398D
+    call AnimateEntities
     pop  af
     jp   SwitchBank
 
-label_EFC::
+AnimateEntitiesAndRestoreBank01::
     ld   a, $03
     ld   [MBC3SelectBank], a
     ld   a, $01
-    jr   label_EF4
+    jr   AnimateEntitiesAndRestoreBank
 
-label_F05::
+AnimateEntitiesAndRestoreBank02::
     ld   a, $03
     ld   [MBC3SelectBank], a
     ld   a, $02
-    jr   label_EF4
+    jr   AnimateEntitiesAndRestoreBank
 
 FileSelectionHandler::
     jp   FileSelectionEntryPoint
@@ -1357,7 +1356,7 @@ WorldDefaultHandler::
     call SwitchBank
     call $7A9A
 
-    call label_398D
+    call AnimateEntities
     callsw label_002_5487
 
     ld   hl, wRequestDestination
@@ -1495,7 +1494,7 @@ InitGotItemSequence::
     ld   [wGameplayType], a
     callsb func_002_755B
     call DrawLinkSprite
-    call label_398D
+    call AnimateEntities
     pop  af
     ret
 
@@ -6920,7 +6919,7 @@ label_397B::
 data_3989::
     db   0, 8, $10, $18
 
-label_398D::
+AnimateEntities::
     ; Play the Boss Agony audio effect if needed
     ld   hl, wBossAgonySFXCountdown
     ld   a, [hl]
@@ -6981,27 +6980,30 @@ label_39E3::
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
     call $6352
-    ld   b, $00
-    ld   c, $0F
 
+    ; Initialize the entities counter
+    ld   b, $00
+    ld   c, MAX_ENTITIES - 1
+
+    ; For each entity slot…
 .loop
-    ; Write active entity index to wLinkWalkingFrameCount
+    ; Save the active entity index to wLinkWalkingFrameCount
     ld   a, c
     ld   [wLinkWalkingFrameCount], a
 
-    ; Read entity type
+    ; Read the entity state
     ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   a, [hl]
 
-    ; If type != 0…
+    ; If state != 0…
     and  a
-    jr   z, .loadEntityEnd
+    jr   z, .AnimateEntityEnd
 
-    ; load the entity.
+    ; animate the entity.
     ldh  [hActiveEntityState], a
-    call LoadEntity
-.loadEntityEnd
+    call AnimateEntity
+.AnimateEntityEnd
 
     ; While c >= 0, loop
     dec  c
@@ -7009,7 +7011,7 @@ label_39E3::
     cp   $FF
     jr   nz, .loop
 
-LoadEntity_return::
+AnimateEntity_return::
     ret
 
 label_3A0A::
@@ -7020,7 +7022,7 @@ label_3A0A::
     ld   [MBC3SelectBank], a
     ret
 
-LoadEntity::
+AnimateEntity::
     ld   hl, wEntitiesTypeTable
     add  hl, bc
     ld   a, [hl]
@@ -7060,10 +7062,10 @@ LoadEntity::
     call UpdateEntityPositionForRoomTransition
 .liftedEnd
 
-    ld   a, $14
+    ld   a, BANK(Func_014_4D73)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    call $4D73
+    call Func_014_4D73
 
     ; Select bank 3
     ld   a, $03
@@ -7074,7 +7076,7 @@ LoadEntity::
     cp   ENTITY_STATE_ACTIVE
     jp   z, ExecuteActiveEntityHandler
     JP_TABLE
-._00 dw LoadEntity_return
+._00 dw AnimateEntity_return
 ._01 dw EntityState1Handler
 ._02 dw EntityState2Handler
 ._03 dw EntityDestructionHandler
@@ -7969,26 +7971,26 @@ ClearEntityTypeAndReturn::
     ret
 
 label_3F93::
-    ld   a, $05
+    ld   a, BANK(Data_005_59DE)
     ld   [MBC3SelectBank], a
-    ld   hl, $59DE
-    ld   de, $8460
+    ld   hl, Data_005_59DE
+    ld   de, vTiles0 + $460
     ld   bc, $0010
     call CopyData
-    ld   hl, $59EE
+    ld   hl, Data_005_59EE
     jr   label_3FBD
 
 label_3FA9::
-    ld   a, $05
+    ld   a, BANK(Data_005_59FE)
     ld   [MBC3SelectBank], a
-    ld   hl, $59FE
-    ld   de, $8460
+    ld   hl, Data_005_59FE
+    ld   de, vTiles0 + $460
     ld   bc, $0010
     call CopyData
-    ld   hl, $5A0E
+    ld   hl, Data_005_5A0E
 
 label_3FBD::
-    ld   de, $8480
+    ld   de, vTiles0 + $480
     ld   bc, $0010
     call CopyData
     xor  a

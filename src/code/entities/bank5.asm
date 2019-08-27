@@ -4585,6 +4585,7 @@ jr_005_59CE:
 jr_005_59DD:
     ret                                           ; $59DD: $C9
 
+Data_005_59DE::
     rlca                                          ; $59DE: $07
     nop                                           ; $59DF: $00
     rrca                                          ; $59E0: $0F
@@ -4602,6 +4603,8 @@ jr_005_59E4:
     db   $10                                      ; $59EB: $10
     daa                                           ; $59EC: $27
     dec  de                                       ; $59ED: $1B
+
+Data_005_59EE::
     ldh  [rP1], a                                 ; $59EE: $E0 $00
     ldh  a, [hBGMapOffsetHigh]                    ; $59F0: $F0 $E0
     jr   jr_005_59E4                              ; $59F2: $18 $F0
@@ -4616,6 +4619,8 @@ jr_005_59E4:
     rst  $38                                      ; $59FA: $FF
     ld   a, $EF                                   ; $59FB: $3E $EF
     pop  af                                       ; $59FD: $F1
+
+Data_005_59FE::
     nop                                           ; $59FE: $00
     nop                                           ; $59FF: $00
     nop                                           ; $5A00: $00
@@ -4632,6 +4637,8 @@ jr_005_59E4:
     nop                                           ; $5A0B: $00
     rlca                                          ; $5A0C: $07
     inc  bc                                       ; $5A0D: $03
+
+Data_005_5A0E::
     nop                                           ; $5A0E: $00
     nop                                           ; $5A0F: $00
     nop                                           ; $5A10: $00

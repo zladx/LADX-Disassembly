@@ -132,6 +132,9 @@ include "data/entities/pointer_table.asm"
 include "data/entities/entities.asm"
 include "text/dialog_2.asm"
 
+section "bank17",romx[$4000],bank[$17]
+include "code/credits.asm"
+
 section "bank18",romx[$4000],bank[$18]
 include "code/entities/bank18.asm"
 

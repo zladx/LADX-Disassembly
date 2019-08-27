@@ -1200,9 +1200,7 @@ IntroHandler::
     jp   IntroHandlerEntryPoint
 
 EndCreditsHandler::
-    ld   a, $17
-    call SwitchBank
-    call $4AB7
+    callsw EndCreditsEntryPoint
     jp   returnFromGameplayHandler
 
 AnimateEntitiesAndRestoreBank17::

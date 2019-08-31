@@ -41,7 +41,7 @@
 24 Indoor palettes; code for some overworld objects
 25 Overworld tilemaps (00 -> CB)
 26 Overworld tilemaps (CC -> FF)
-27 Data
+27 Data and code
 28 Photo album and Game Boy Printer code
 29 Graphics: photo pictures
 2A Graphics: photo pictures

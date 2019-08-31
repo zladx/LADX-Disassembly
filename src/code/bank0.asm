@@ -573,24 +573,34 @@ func_B5D::
     ld   [MBC3SelectBank], a
     ret
 
-func_B69::
+; Copy data to vBGMap0
+; Inputs:
+;   a           source bank
+;   hl          source address
+;   hhScratchK  return bank to restore
+CopyBGMapFromBank::
     push hl
     ld   [MBC3SelectBank], a
+
+    ; If on GBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_B80
+    jr   z, .gbcEnd
+    ; hl += $168
     ld   de, $0168
     add  hl, de
+    ; Switch to RAM bank 1
     ld   a, $01
     ld   [rVBK], a
-    call label_B96
+    call CopyToBGMap0
+    ; Switch back to RAM bank 0
     xor  a
     ld   [rVBK], a
+.gbcEnd
 
-label_B80::
     pop  hl
     push hl
-    call label_B96
+    call CopyToBGMap0
     pop  hl
 
     ld   a, [wGameplayType]
@@ -599,21 +609,21 @@ label_B80::
     call label_BB5
 .photoAlbumEnd
 
-    ldh  a, [hFreeWarpDataAddress]
+    ldh  a, [hScratchK]
     ld   [MBC3SelectBank], a
     ret
 
-label_B96::
+CopyToBGMap0::
     ld   de, vBGMap0
 
-label_B99::
+.loop
     ld   a, [hli]
     ld   [de], a
     inc  e
     ld   a, e
     and  $1F
     cp   $14
-    jr   nz, label_B99
+    jr   nz, .loop
     ld   a, e
     add  a, $0C
     ld   e, a
@@ -621,10 +631,10 @@ label_B99::
     adc  a, $00
     ld   d, a
     cp   $9A
-    jr   nz, label_B99
+    jr   nz, .loop
     ld   a, e
     cp   $40
-    jr   nz, label_B99
+    jr   nz, .loop
     ret
 
 label_BB5::
@@ -661,7 +671,7 @@ label_BE7::
     ld   a, [$DE03]
     ld   l, a
     jp   hl
-    ld   a, $02
+    ld   a, BANK(Data_002_4948)
     ld   [MBC3SelectBank], a
     call label_1A50
     jp   ReloadSavedBank
@@ -2946,14 +2956,14 @@ label_1A50::
     or   d
     ld   c, a
     ld   b, $00
-    ld   hl, $4948
+    ld   hl, Data_002_4948
     ld   a, [wLinkMotionState]
     cp   $01
     jr   nz, label_1A78
     ldh  a, [$FF9C]
     and  a
     jr   z, label_1A76
-    ld   hl, $4950
+    ld   hl, Data_002_4950
 
 label_1A76::
     jr   label_1AC7
@@ -2965,7 +2975,7 @@ label_1A78::
     ldh  a, [$FF9C]
     cp   $02
     jr   nz, label_1A88
-    ld   hl, $4958
+    ld   hl, Data_002_4958
     jr   label_1AC7
 
 label_1A88::
@@ -7497,7 +7507,7 @@ label_3CD9::
 
 label_3CE0::
     push hl
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
     jr   label_3CF6
 
 label_3CE6::

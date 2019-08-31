@@ -132,9 +132,7 @@ RenderLoop::
     jr   nz, .elsif
 .interactiveTransition
     ; Apply the transition effect...
-    ld   a, $17
-    ld   [MBC3SelectBank], a
-    call $48DD
+    callsb ApplyWindFishVfx
     ; ... and continue rendering a new frame.
     jp   RenderInteractiveFrame
 .elsif
@@ -163,7 +161,7 @@ RenderLoop::
     cp   TRANSITION_GFX_MANBO_IN
     jr   nz, .finishTransition
     ; ... teleport to Manbo Pond.
-    call $4E51
+    call TeleportToManboPond
 
 .finishTransition
     ; Reset transition state
@@ -192,17 +190,15 @@ RenderLoop::
     jr   .transitionDone
 .renderDMGFadeOut
     ; Render fade-to-white effect for DMG
-    ; (calls 14:4FE8)
-    call $4FE8
+    call ApplyFadeToWhite_DMG
 .transitionFadeOutEnd
 
 .transitionDone
     ; Render transition effect
-    ; (calls 14:5038)
-    ld   a, $14
+    ld   a, BANK(RenderTransitionEffect)
     ld   [MBC3SelectBank], a
     pop  af
-    call $5038
+    call RenderTransitionEffect
 
     ; Play some audio
     call PlayAudioStep

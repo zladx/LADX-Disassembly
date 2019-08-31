@@ -593,7 +593,7 @@ func_017_4839:
     jr   c, jr_017_4846                           ; $483F: $38 $05
 
     ld   a, $0F                                   ; $4841: $3E $0F
-    ldh  [$FFF4], a                               ; $4843: $E0 $F4
+    ldh  [hNoiseSfx], a                               ; $4843: $E0 $F4
     xor  a                                        ; $4845: $AF
 
 jr_017_4846:
@@ -603,7 +603,7 @@ jr_017_4846:
     jr   nz, jr_017_485D                          ; $484D: $20 $0E
 
     ld   a, $21                                   ; $484F: $3E $21
-    ldh  [$FFF2], a                               ; $4851: $E0 $F2
+    ldh  [hJingle], a                               ; $4851: $E0 $F2
     call GetRandomByte                            ; $4853: $CD $0D $28
     and  $7F                                      ; $4856: $E6 $7F
     add  $50                                      ; $4858: $C6 $50
@@ -1499,7 +1499,7 @@ CreditsWindFishPrepare3Handler::
     ld   a, $09                                   ; $50EF: $3E $09
     ld   [wCreditsSubscene], a                               ; $50F1: $EA $0E $D0
     ld   a, $1F                                   ; $50F4: $3E $1F
-    ldh  [$FFF3], a                               ; $50F6: $E0 $F3
+    ldh  [hWaveSfx], a                               ; $50F6: $E0 $F3
     ret                                           ; $50F8: $C9
 
 jr_017_50F9:
@@ -1729,7 +1729,7 @@ CreditsWindFishFloatingHandler::
 CreditsOpenWindFishDialog::
     call CreditsOpenDialog                        ; $53EB: $CD $F0 $7C
     ld   a, $17                                   ; $53EE: $3E $17
-    ldh  [$FFF3], a                               ; $53F0: $E0 $F3
+    ldh  [hWaveSfx], a                               ; $53F0: $E0 $F3
 
 jr_017_53F2:
     ret                                           ; $53F2: $C9
@@ -1758,7 +1758,7 @@ CreditsWindFishPrepareDisapparitionHandler::
     ld   a, $50                                   ; $5411: $3E $50
     ld   [$D006], a                               ; $5413: $EA $06 $D0
     ld   a, $1F                                   ; $5416: $3E $1F
-    ldh  [$FFF3], a                               ; $5418: $E0 $F3
+    ldh  [hWaveSfx], a                               ; $5418: $E0 $F3
     call IncrementCreditsSubscene                            ; $541A: $CD $D9 $4C
 
 jr_017_541D:
@@ -2037,7 +2037,7 @@ CreditsLinkShowsInstrumentsHandler::
     cp   $9E                                      ; $55ED: $FE $9E
     jr   nz, jr_017_55F6                          ; $55EF: $20 $05
 
-    ld   hl, $FFF2                                ; $55F1: $21 $F2 $FF
+    ld   hl, hJingle                                ; $55F1: $21 $F2 $FF
     ld   [hl], $34                                ; $55F4: $36 $34
 
 jr_017_55F6:
@@ -2531,7 +2531,7 @@ Func_017_590B::
     cp   $01                                      ; $590E: $FE $01
     jr   nz, jr_017_5917                          ; $5910: $20 $05
 
-    ld   hl, $FFF4                                ; $5912: $21 $F4 $FF
+    ld   hl, hNoiseSfx                                ; $5912: $21 $F4 $FF
     ld   [hl], $35                                ; $5915: $36 $35
 
 jr_017_5917:
@@ -2829,8 +2829,10 @@ Func_017_5A66::
     ld   [wBGPalette], a                               ; $5ABF: $EA $97 $DB
     ld   a, $5C                                   ; $5AC2: $3E $5C
     ldh  [hLinkPositionY], a                               ; $5AC4: $E0 $99
+
     ld   a, $34                                   ; $5AC6: $3E $34
-    ldh  [$FFF4], a                               ; $5AC8: $E0 $F4
+    ldh  [hNoiseSfx], a                               ; $5AC8: $E0 $F4
+
     jp   IncrementD000AndReturn                                    ; $5ACA: $C3 $25 $56
 
 Func_017_5ACD::
@@ -5302,7 +5304,7 @@ jr_017_72A6:
     jr   nz, jr_017_72BC                          ; $72B6: $20 $04
 
     ld   a, $21                                   ; $72B8: $3E $21
-    ldh  [$FFF2], a                               ; $72BA: $E0 $F2
+    ldh  [hJingle], a                               ; $72BA: $E0 $F2
 
 jr_017_72BC:
     ret                                           ; $72BC: $C9
@@ -5832,7 +5834,7 @@ jr_017_75D7:
     ld   [hl], $C0                                ; $75D7: $36 $C0
     call IncrementEntityWalkingAttr               ; $75D9: $CD $12 $3B
     ld   a, $17                                   ; $75DC: $3E $17
-    ldh  [$FFF3], a                               ; $75DE: $E0 $F3
+    ldh  [hWaveSfx], a                               ; $75DE: $E0 $F3
 
 jr_017_75E0:
     ret                                           ; $75E0: $C9
@@ -7202,7 +7204,7 @@ jr_017_7CC8:
     jr   nz, jr_017_7CD4                          ; $7CCE: $20 $04
 
     ld   a, $26                                   ; $7CD0: $3E $26
-    ldh  [$FFF2], a                               ; $7CD2: $E0 $F2
+    ldh  [hJingle], a                               ; $7CD2: $E0 $F2
 
 jr_017_7CD4:
     ld   hl, $C2D0                                ; $7CD4: $21 $D0 $C2

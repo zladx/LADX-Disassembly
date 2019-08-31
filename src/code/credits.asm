@@ -893,6 +893,9 @@ jr_017_48CC:
     or   $F5                                      ; $48D9: $F6 $F5
     db   $F4                                      ; $48DB: $F4
     db   $F4                                      ; $48DC: $F4
+; Apply the waving visual effect when the Wind Fish appears
+; or disappears.
+ApplyWindFishVfx::
     ldh  a, [$FFE7]                               ; $48DD: $F0 $E7
     rra                                           ; $48DF: $1F
     rra                                           ; $48E0: $1F

@@ -1188,6 +1188,8 @@ jr_014_4DED:
     nop                                           ; $4E4E: $00
     nop                                           ; $4E4F: $00
     nop                                           ; $4E50: $00
+
+TeleportToManboPond::
     ld   a, $01                                   ; $4E51: $3E $01
     ld   [$D474], a                               ; $4E53: $EA $74 $D4
     ld   a, $03                                   ; $4E56: $3E $03
@@ -1524,6 +1526,11 @@ jr_014_4EFC:
     rst  $38                                      ; $4FE5: $FF
     nop                                           ; $4FE6: $00
     nop                                           ; $4FE7: $00
+
+; Progressively fade the screen to white (DMG version)
+;
+; See also: the CGB implementation at 20:6CA7
+ApplyFadeToWhite_DMG::
     ld   a, [wTransitionGfxFrameCount]            ; $4FE8: $FA $80 $C1
     push af                                       ; $4FEB: $F5
     and  $07                                      ; $4FEC: $E6 $07
@@ -1574,6 +1581,7 @@ jr_014_5036:
     pop  af                                       ; $5036: $F1
     ret                                           ; $5037: $C9
 
+RenderTransitionEffect::
     srl  a                                        ; $5038: $CB $3F
     srl  a                                        ; $503A: $CB $3F
     ldh  [hScratchA], a                           ; $503C: $E0 $D7

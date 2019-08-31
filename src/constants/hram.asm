@@ -216,6 +216,7 @@ hScratchI:: ; FFE4
 hScratchJ:: ; FFE5
   ds 1
 
+hScratchK:: ; FFE6
 hFreeWarpDataAddress ; FFE6
   ; Address of the first free warp data slot
   ds 1

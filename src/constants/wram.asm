@@ -587,8 +587,13 @@ wIntroSubTimer:: ; D002
   ds 1
 
 ; Unlabeled
-wD003 equ $D003
-  ds $D300 - $D003
+ds $D00E - $D003
+
+wCreditsSubscene:: ; $D00E
+  ds 1
+
+; Unlabeled
+ds $D300 - $D00F
 
 ; D300 (unlabeled, audio related)
 ds $60

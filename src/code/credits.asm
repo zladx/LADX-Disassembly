@@ -284,7 +284,7 @@ jr_017_462F:
 
 Func_017_4630::
     ld   a, $E8                                   ; $4630: $3E $E8
-    call $3B86                                    ; $4632: $CD $86 $3B
+    call label_3B86                                    ; $4632: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $4635: $21 $00 $C2
     add  hl, de                                   ; $4638: $19
     ld   [hl], $E0                                ; $4639: $36 $E0
@@ -321,7 +321,7 @@ jr_017_466A:
 jr_017_466B:
     ld   [$D01E], a                               ; $466B: $EA $1E $D0
     xor  a                                        ; $466E: $AF
-    ld   [$D00E], a                               ; $466F: $EA $0E $D0
+    ld   [wCreditsSubscene], a                               ; $466F: $EA $0E $D0
     call ResetCreditsSceneVariables                            ; $4672: $CD $A5 $4D
     jp   IncrementCreditsGameplaySubtypeAndReturn                           ; $4675: $C3 $5B $4C
 
@@ -593,7 +593,7 @@ func_017_4839:
     jr   c, jr_017_4846                           ; $483F: $38 $05
 
     ld   a, $0F                                   ; $4841: $3E $0F
-    ldh  [$FFF4], a                               ; $4843: $E0 $F4
+    ldh  [hNoiseSfx], a                               ; $4843: $E0 $F4
     xor  a                                        ; $4845: $AF
 
 jr_017_4846:
@@ -603,8 +603,8 @@ jr_017_4846:
     jr   nz, jr_017_485D                          ; $484D: $20 $0E
 
     ld   a, $21                                   ; $484F: $3E $21
-    ldh  [$FFF2], a                               ; $4851: $E0 $F2
-    call $280D                                    ; $4853: $CD $0D $28
+    ldh  [hJingle], a                               ; $4851: $E0 $F2
+    call GetRandomByte                            ; $4853: $CD $0D $28
     and  $7F                                      ; $4856: $E6 $7F
     add  $50                                      ; $4858: $C6 $50
     ld   [$D466], a                               ; $485A: $EA $66 $D4
@@ -1008,7 +1008,7 @@ jr_017_4C03:
     ret                                           ; $4C21: $C9
 
 label_017_4C22:
-    call $29C1                                    ; $4C22: $CD $C1 $29
+    call ClearLowerAndMiddleWRAM                  ; $4C22: $CD $C1 $29
     ld   hl, $D700                                ; $4C25: $21 $00 $D7
     ld   de, $4B3A                                ; $4C28: $11 $3A $4B
     ld   c, $80                                   ; $4C2B: $0E $80
@@ -1021,7 +1021,7 @@ jr_017_4C2F:
     dec  c                                        ; $4C32: $0D
     jr   nz, jr_017_4C2F                          ; $4C33: $20 $FA
 
-    call $27F2                                    ; $4C35: $CD $F2 $27
+    call label_27F2                               ; $4C35: $CD $F2 $27
     ld   a, $01                                   ; $4C38: $3E $01
     ldh  [rIE], a                                 ; $4C3A: $E0 $FF
     ld   a, $00                                   ; $4C3C: $3E $00
@@ -1057,8 +1057,8 @@ CreditsWindFishHandler::
     ldh  [$FFF6], a                               ; $4C72: $E0 $F6
     ld   a, $FF                                   ; $4C74: $3E $FF
     ld   [$DBC7], a                               ; $4C76: $EA $C7 $DB
-    call $0EED                                    ; $4C79: $CD $ED $0E
-    ld   a, [$D00E]                               ; $4C7C: $FA $0E $D0
+    call AnimateEntitiesAndRestoreBank17                                    ; $4C79: $CD $ED $0E
+    ld   a, [wCreditsSubscene]                               ; $4C7C: $FA $0E $D0
     JP_TABLE                                      ; $4C7F: $C7
 ._00 dw CreditsStairsPrepare1Handler              ; $4C80
 ._01 dw CreditsStairsPrepare2Handler              ; $4C82
@@ -1115,9 +1115,9 @@ CreditsStairsPrepare1Handler::
     cp   $0C                                      ; $4CD5: $FE $0C
     jr   nz, .loop                                ; $4CD7: $20 $F8
 
-IncrementD00E::
-IncrementD00EAndReturn::
-    ld   hl, $D00E                                ; $4CD9: $21 $0E $D0
+IncrementCreditsSubscene::
+IncrementCreditsSubsceneAndReturn::
+    ld   hl, wCreditsSubscene                     ; $4CD9: $21 $0E $D0
     inc  [hl]                                     ; $4CDC: $34
     ret                                           ; $4CDD: $C9
 
@@ -1127,7 +1127,7 @@ CreditsStairsPrepare2Handler::
     ld   [wBGMapToLoad], a                        ; $4CE0: $EA $FF $D6
 
     ld   a, $E8                                   ; $4CE3: $3E $E8
-    call $3B86                                    ; $4CE5: $CD $86 $3B
+    call label_3B86                               ; $4CE5: $CD $86 $3B
 
     ;
     ; Set Link initial position
@@ -1151,7 +1151,7 @@ CreditsStairsPrepare2Handler::
     ldh  [hLinkPositionX], a                      ; $4D00: $E0 $98
     ld   a, $98                                   ; $4D02: $3E $98
     ldh  [hLinkPositionY], a                      ; $4D04: $E0 $99
-    jp   IncrementD00EAndReturn                   ; $4D06: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                   ; $4D06: $C3 $D9 $4C
 
 Data_017_4D09::
     db   $00, $00, $00, $00, $01, $01, $01, $01  ; $4D09 |........|
@@ -1177,7 +1177,7 @@ jr_017_4D3D:
     cp   $0C                                      ; $4D4B: $FE $0C
     jr   nz, jr_017_4D52                          ; $4D4D: $20 $03
 
-    call IncrementD00E                            ; $4D4F: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $4D4F: $CD $D9 $4C
 
 jr_017_4D52:
     ldh  a, [$FFFE]                               ; $4D52: $F0 $FE
@@ -1230,7 +1230,7 @@ jr_017_4D8F:
     cp   $90                                      ; $4D9E: $FE $90
     jr   nz, jr_017_4DD0                          ; $4DA0: $20 $2E
 
-    call IncrementD00E                            ; $4DA2: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $4DA2: $CD $D9 $4C
 
 ResetCreditsSceneVariables::
     xor  a                                        ; $4DA5: $AF
@@ -1270,7 +1270,7 @@ CreditsStairsReachingPlatformHandler::
 
     ld   a, $F0                                   ; $4E20: $3E $F0
     ldh  [hBaseScrollY], a                               ; $4E22: $E0 $97
-    jp   IncrementD00EAndReturn                           ; $4E24: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $4E24: $C3 $D9 $4C
 
 jr_017_4E27:
     ld   e, a                                     ; $4E27: $5F
@@ -1352,7 +1352,7 @@ CreditsWindFishPrepare1Handler::
     ld   a, $08                                   ; $4E88: $3E $08
     ld   [$D006], a                               ; $4E8A: $EA $06 $D0
     call func_017_4E93                            ; $4E8D: $CD $93 $4E
-    jp   IncrementD00EAndReturn                           ; $4E90: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $4E90: $C3 $D9 $4C
 
 func_017_4E93:
     ldh  a, [$FFFE]                               ; $4E93: $F0 $FE
@@ -1413,7 +1413,7 @@ CreditsWindFishPrepare2Handler::
     jr   nz, jr_017_4EEE                          ; $4EE6: $20 $06
 
     call ResetCreditsSceneVariables                            ; $4EE8: $CD $A5 $4D
-    jp   IncrementD00EAndReturn                           ; $4EEB: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $4EEB: $C3 $D9 $4C
 
 jr_017_4EEE:
     ret                                           ; $4EEE: $C9
@@ -1497,9 +1497,9 @@ CreditsWindFishPrepare3Handler::
     ld   a, $FF                                   ; $50EA: $3E $FF
     ld   [$C17F], a                               ; $50EC: $EA $7F $C1
     ld   a, $09                                   ; $50EF: $3E $09
-    ld   [$D00E], a                               ; $50F1: $EA $0E $D0
+    ld   [wCreditsSubscene], a                               ; $50F1: $EA $0E $D0
     ld   a, $1F                                   ; $50F4: $3E $1F
-    ldh  [$FFF3], a                               ; $50F6: $E0 $F3
+    ldh  [hWaveSfx], a                               ; $50F6: $E0 $F3
     ret                                           ; $50F8: $C9
 
 jr_017_50F9:
@@ -1609,7 +1609,7 @@ jr_017_5176:
     ld   [$D006], a                               ; $519C: $EA $06 $D0
     ld   a, $03                                   ; $519F: $3E $03
     ldh  [rIE], a                                 ; $51A1: $E0 $FF
-    jp   IncrementD00EAndReturn                           ; $51A3: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $51A3: $C3 $D9 $4C
 
 jr_017_51A6:
     ret                                           ; $51A6: $C9
@@ -1707,7 +1707,7 @@ jr_017_53B8:
     add  hl, bc                                   ; $53C7: $09
     ld   bc, $0040                                ; $53C8: $01 $40 $00
     ld   de, $DC10                                ; $53CB: $11 $10 $DC
-    call $2914                                    ; $53CE: $CD $14 $29
+    call CopyData                                 ; $53CE: $CD $14 $29
     xor  a                                        ; $53D1: $AF
     ld   [$DDD3], a                               ; $53D2: $EA $D3 $DD
     ld   a, $20                                   ; $53D5: $3E $20
@@ -1721,13 +1721,15 @@ CreditsWindFishFloatingHandler::
     and  a                                        ; $53E3: $A7
     jr   nz, jr_017_53F2                          ; $53E4: $20 $0C
 
-    call IncrementD00E                            ; $53E6: $CD $D9 $4C
+    call IncrementCreditsSubscene                 ; $53E6: $CD $D9 $4C
+
+    ; Open Wind Fish Speech
     ld   a, $D0                                   ; $53E9: $3E $D0
 
-func_017_53EB:
-    call func_017_7CF0                            ; $53EB: $CD $F0 $7C
+CreditsOpenWindFishDialog::
+    call CreditsOpenDialog                        ; $53EB: $CD $F0 $7C
     ld   a, $17                                   ; $53EE: $3E $17
-    ldh  [$FFF3], a                               ; $53F0: $E0 $F3
+    ldh  [hWaveSfx], a                               ; $53F0: $E0 $F3
 
 jr_017_53F2:
     ret                                           ; $53F2: $C9
@@ -1737,7 +1739,7 @@ CreditsWindFishSpeechHandler::
     and  a                                        ; $53F6: $A7
     jr   nz, jr_017_53FC                          ; $53F7: $20 $03
 
-    call IncrementD00E                            ; $53F9: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $53F9: $CD $D9 $4C
 
 jr_017_53FC:
     ret                                           ; $53FC: $C9
@@ -1756,8 +1758,8 @@ CreditsWindFishPrepareDisapparitionHandler::
     ld   a, $50                                   ; $5411: $3E $50
     ld   [$D006], a                               ; $5413: $EA $06 $D0
     ld   a, $1F                                   ; $5416: $3E $1F
-    ldh  [$FFF3], a                               ; $5418: $E0 $F3
-    call IncrementD00E                            ; $541A: $CD $D9 $4C
+    ldh  [hWaveSfx], a                               ; $5418: $E0 $F3
+    call IncrementCreditsSubscene                            ; $541A: $CD $D9 $4C
 
 jr_017_541D:
     ret                                           ; $541D: $C9
@@ -1812,7 +1814,7 @@ jr_017_544D:
     ld   [$D006], a                               ; $5473: $EA $06 $D0
     ld   a, $01                                   ; $5476: $3E $01
     ldh  [rIE], a                                 ; $5478: $E0 $FF
-    jp   IncrementD00EAndReturn                           ; $547A: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $547A: $C3 $D9 $4C
 
 jr_017_547D:
     ld   a, [$D00B]                               ; $547D: $FA $0B $D0
@@ -1847,11 +1849,13 @@ CreditsWindFishDisappearedHandler::
     cp   $0A                                      ; $54C4: $FE $0A
     jr   nz, jr_017_54D5                          ; $54C6: $20 $0D
 
+    ; Open the "Play the intruments!" dialog
     ld   a, $D2                                   ; $54C8: $3E $D2
-    call func_017_53EB                            ; $54CA: $CD $EB $53
+    call CreditsOpenWindFishDialog                ; $54CA: $CD $EB $53
+
     ld   a, $27                                   ; $54CD: $3E $27
     ld   [wBGPalette], a                               ; $54CF: $EA $97 $DB
-    jp   IncrementD00EAndReturn                           ; $54D2: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $54D2: $C3 $D9 $4C
 
 jr_017_54D5:
     ld   e, a                                     ; $54D5: $5F
@@ -1910,7 +1914,7 @@ CreditsPlayInstrumentsDialogHandler::
     ldh  [$FF9D], a                               ; $5516: $E0 $9D
     ld   a, $0C                                   ; $5518: $3E $0C
     ldh  [$FFA5], a                               ; $551A: $E0 $A5
-    call IncrementD00E                            ; $551C: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $551C: $CD $D9 $4C
 
 jr_017_551F:
     ret                                           ; $551F: $C9
@@ -1923,7 +1927,7 @@ CreditsLinkTurnsToPlayHandler::
     call ResetCreditsSceneVariables                            ; $5527: $CD $A5 $4D
     ld   a, $80                                   ; $552A: $3E $80
     ld   [$D006], a                               ; $552C: $EA $06 $D0
-    jp   IncrementD00EAndReturn                           ; $552F: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $552F: $C3 $D9 $4C
 
 jr_017_5532:
     inc  a                                        ; $5532: $3C
@@ -1962,7 +1966,7 @@ CreditsLinkPreparesToPlayHandler::
 
 jr_017_557A:
     ld   a, $E8                                   ; $557A: $3E $E8
-    call $3B86                                    ; $557C: $CD $86 $3B
+    call label_3B86                                    ; $557C: $CD $86 $3B
     ld   a, [$D000]                               ; $557F: $FA $00 $D0
     ld   c, a                                     ; $5582: $4F
     ld   b, $00                                   ; $5583: $06 $00
@@ -2023,7 +2027,7 @@ jr_017_55A3:
     call ResetCreditsSceneVariables                            ; $55DE: $CD $A5 $4D
     ld   a, $A0                                   ; $55E1: $3E $A0
     ld   [$D006], a                               ; $55E3: $EA $06 $D0
-    call IncrementD00E                            ; $55E6: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $55E6: $CD $D9 $4C
 
 jr_017_55E9:
     ret                                           ; $55E9: $C9
@@ -2033,14 +2037,14 @@ CreditsLinkShowsInstrumentsHandler::
     cp   $9E                                      ; $55ED: $FE $9E
     jr   nz, jr_017_55F6                          ; $55EF: $20 $05
 
-    ld   hl, $FFF2                                ; $55F1: $21 $F2 $FF
+    ld   hl, hJingle                                ; $55F1: $21 $F2 $FF
     ld   [hl], $34                                ; $55F4: $36 $34
 
 jr_017_55F6:
     and  a                                        ; $55F6: $A7
     jr   nz, jr_017_55FC                          ; $55F7: $20 $03
 
-    call IncrementD00E                            ; $55F9: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $55F9: $CD $D9 $4C
 
 jr_017_55FC:
     ret                                           ; $55FC: $C9
@@ -2181,7 +2185,7 @@ jr_017_56D7:
 
 jr_017_56DC:
     ld   a, $6D                                   ; $56DC: $3E $6D
-    call $3B86                                    ; $56DE: $CD $86 $3B
+    call label_3B86                               ; $56DE: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $56E1: $21 $00 $C2
     add  hl, de                                   ; $56E4: $19
     ld   [hl], $48                                ; $56E5: $36 $48
@@ -2189,7 +2193,7 @@ jr_017_56DC:
     add  hl, de                                   ; $56EA: $19
     ld   [hl], $50                                ; $56EB: $36 $50
     ld   a, $6F                                   ; $56ED: $3E $6F
-    call $3B86                                    ; $56EF: $CD $86 $3B
+    call label_3B86                                    ; $56EF: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $56F2: $21 $00 $C2
     add  hl, de                                   ; $56F5: $19
     ld   [hl], $68                                ; $56F6: $36 $68
@@ -2197,7 +2201,7 @@ jr_017_56DC:
     add  hl, de                                   ; $56FB: $19
     ld   [hl], $30                                ; $56FC: $36 $30
     ld   a, $78                                   ; $56FE: $3E $78
-    call $3B86                                    ; $5700: $CD $86 $3B
+    call label_3B86                                    ; $5700: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5703: $21 $00 $C2
     add  hl, de                                   ; $5706: $19
     ld   [hl], $2C                                ; $5707: $36 $2C
@@ -2205,7 +2209,7 @@ jr_017_56DC:
     add  hl, de                                   ; $570C: $19
     ld   [hl], $58                                ; $570D: $36 $58
     ld   a, $78                                   ; $570F: $3E $78
-    call $3B86                                    ; $5711: $CD $86 $3B
+    call label_3B86                                    ; $5711: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5714: $21 $00 $C2
     add  hl, de                                   ; $5717: $19
     ld   [hl], $60                                ; $5718: $36 $60
@@ -2259,7 +2263,7 @@ jr_017_5755:
 jr_017_575A:
     call func_017_562A                            ; $575A: $CD $2A $56
     ld   a, $71                                   ; $575D: $3E $71
-    call $3B86                                    ; $575F: $CD $86 $3B
+    call label_3B86                                    ; $575F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5762: $21 $00 $C2
     add  hl, de                                   ; $5765: $19
     ld   [hl], $48                                ; $5766: $36 $48
@@ -2276,7 +2280,7 @@ jr_017_575A:
     add  hl, de                                   ; $577C: $19
     ld   [hl], $02                                ; $577D: $36 $02
     ld   a, $72                                   ; $577F: $3E $72
-    call $3B86                                    ; $5781: $CD $86 $3B
+    call label_3B86                                    ; $5781: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5784: $21 $00 $C2
     add  hl, de                                   ; $5787: $19
     ld   [hl], $78                                ; $5788: $36 $78
@@ -2322,7 +2326,7 @@ jr_017_57BA:
 jr_017_57BF:
     call func_017_562A                            ; $57BF: $CD $2A $56
     ld   a, $C5                                   ; $57C2: $3E $C5
-    call $3B86                                    ; $57C4: $CD $86 $3B
+    call label_3B86                                    ; $57C4: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $57C7: $21 $00 $C2
     add  hl, de                                   ; $57CA: $19
     ld   [hl], $28                                ; $57CB: $36 $28
@@ -2330,7 +2334,7 @@ jr_017_57BF:
     add  hl, de                                   ; $57D0: $19
     ld   [hl], $40                                ; $57D1: $36 $40
     ld   a, $09                                   ; $57D3: $3E $09
-    call $3B86                                    ; $57D5: $CD $86 $3B
+    call label_3B86                                    ; $57D5: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $57D8: $21 $00 $C2
     add  hl, de                                   ; $57DB: $19
     ld   [hl], $48                                ; $57DC: $36 $48
@@ -2338,7 +2342,7 @@ jr_017_57BF:
     add  hl, de                                   ; $57E1: $19
     ld   [hl], $50                                ; $57E2: $36 $50
     ld   a, $09                                   ; $57E4: $3E $09
-    call $3B86                                    ; $57E6: $CD $86 $3B
+    call label_3B86                                    ; $57E6: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $57E9: $21 $00 $C2
     add  hl, de                                   ; $57EC: $19
     ld   [hl], $68                                ; $57ED: $36 $68
@@ -2384,7 +2388,7 @@ jr_017_581F:
 jr_017_5824:
     call func_017_562A                            ; $5824: $CD $2A $56
     ld   a, $3F                                   ; $5827: $3E $3F
-    call $3B86                                    ; $5829: $CD $86 $3B
+    call label_3B86                                    ; $5829: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $582C: $21 $00 $C2
     add  hl, de                                   ; $582F: $19
     ld   [hl], $78                                ; $5830: $36 $78
@@ -2430,7 +2434,7 @@ jr_017_5862:
 jr_017_5867:
     call func_017_562A                            ; $5867: $CD $2A $56
     ld   a, $3E                                   ; $586A: $3E $3E
-    call $3B86                                    ; $586C: $CD $86 $3B
+    call label_3B86                                    ; $586C: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $586F: $21 $00 $C2
     add  hl, de                                   ; $5872: $19
     ld   [hl], $28                                ; $5873: $36 $28
@@ -2438,7 +2442,7 @@ jr_017_5867:
     add  hl, de                                   ; $5878: $19
     ld   [hl], $50                                ; $5879: $36 $50
     ld   a, $6E                                   ; $587B: $3E $6E
-    call $3B86                                    ; $587D: $CD $86 $3B
+    call label_3B86                                    ; $587D: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5880: $21 $00 $C2
     add  hl, de                                   ; $5883: $19
     ld   [hl], $18                                ; $5884: $36 $18
@@ -2446,7 +2450,7 @@ jr_017_5867:
     add  hl, de                                   ; $5889: $19
     ld   [hl], $4C                                ; $588A: $36 $4C
     ld   a, $6E                                   ; $588C: $3E $6E
-    call $3B86                                    ; $588E: $CD $86 $3B
+    call label_3B86                                    ; $588E: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5891: $21 $00 $C2
     add  hl, de                                   ; $5894: $19
     ld   [hl], $38                                ; $5895: $36 $38
@@ -2454,7 +2458,7 @@ jr_017_5867:
     add  hl, de                                   ; $589A: $19
     ld   [hl], $54                                ; $589B: $36 $54
     ld   a, $6E                                   ; $589D: $3E $6E
-    call $3B86                                    ; $589F: $CD $86 $3B
+    call label_3B86                                    ; $589F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $58A2: $21 $00 $C2
     add  hl, de                                   ; $58A5: $19
     ld   [hl], $28                                ; $58A6: $36 $28
@@ -2462,7 +2466,7 @@ jr_017_5867:
     add  hl, de                                   ; $58AB: $19
     ld   [hl], $30                                ; $58AC: $36 $30
     ld   a, $6F                                   ; $58AE: $3E $6F
-    call $3B86                                    ; $58B0: $CD $86 $3B
+    call label_3B86                                    ; $58B0: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $58B3: $21 $00 $C2
     add  hl, de                                   ; $58B6: $19
     ld   [hl], $78                                ; $58B7: $36 $78
@@ -2527,7 +2531,7 @@ Func_017_590B::
     cp   $01                                      ; $590E: $FE $01
     jr   nz, jr_017_5917                          ; $5910: $20 $05
 
-    ld   hl, $FFF4                                ; $5912: $21 $F4 $FF
+    ld   hl, hNoiseSfx                                ; $5912: $21 $F4 $FF
     ld   [hl], $35                                ; $5915: $36 $35
 
 jr_017_5917:
@@ -2551,7 +2555,7 @@ jr_017_5917:
 jr_017_5930:
     ld   a, $40                                   ; $5930: $3E $40
     ld   [$D006], a                               ; $5932: $EA $06 $D0
-    jp   IncrementD000AndReturn                                    ; $5935: $C3 $25 $56
+    jp   IncrementD000AndReturn                   ; $5935: $C3 $25 $56
 
 Func_017_5938::
     ld   a, [$D006]                               ; $5938: $FA $06 $D0
@@ -2559,12 +2563,12 @@ Func_017_5938::
     ret  nz                                       ; $593C: $C0
 
     xor  a                                        ; $593D: $AF
-    ld   [wBGPalette], a                               ; $593E: $EA $97 $DB
-    ld   [wOBJ0Palette], a                               ; $5941: $EA $98 $DB
-    ld   [wOBJ1Palette], a                               ; $5944: $EA $99 $DB
-    ld   a, $17                                   ; $5947: $3E $17
-    call $08FA                                    ; $5949: $CD $FA $08
-    jp   IncrementD000AndReturn                                    ; $594C: $C3 $25 $56
+    ld   [wBGPalette], a                          ; $593E: $EA $97 $DB
+    ld   [wOBJ0Palette], a                        ; $5941: $EA $98 $DB
+    ld   [wOBJ1Palette], a                        ; $5944: $EA $99 $DB
+    ld   a, BANK(Func_017_5938)                   ; $5947: $3E $17
+    call ClearFileMenuBG_trampoline               ; $5949: $CD $FA $08
+    jp   IncrementD000AndReturn                   ; $594C: $C3 $25 $56
 
 jr_017_594F:
     ret                                           ; $594F: $C9
@@ -2800,7 +2804,7 @@ Func_017_5A66::
     xor  a                                        ; $5A8A: $AF
     ld   [$DDD5], a                               ; $5A8B: $EA $D5 $DD
     ld   a, $E8                                   ; $5A8E: $3E $E8
-    call $3B86                                    ; $5A90: $CD $86 $3B
+    call label_3B86                                    ; $5A90: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5A93: $21 $00 $C2
     add  hl, de                                   ; $5A96: $19
     ld   [hl], $40                                ; $5A97: $36 $40
@@ -2811,7 +2815,7 @@ Func_017_5A66::
     add  hl, de                                   ; $5AA2: $19
     ld   [hl], $02                                ; $5AA3: $36 $02
     ld   a, $E8                                   ; $5AA5: $3E $E8
-    call $3B86                                    ; $5AA7: $CD $86 $3B
+    call label_3B86                                    ; $5AA7: $CD $86 $3B
     ld   hl, $C2B0                                ; $5AAA: $21 $B0 $C2
     add  hl, de                                   ; $5AAD: $19
     inc  [hl]                                     ; $5AAE: $34
@@ -2825,8 +2829,10 @@ Func_017_5A66::
     ld   [wBGPalette], a                               ; $5ABF: $EA $97 $DB
     ld   a, $5C                                   ; $5AC2: $3E $5C
     ldh  [hLinkPositionY], a                               ; $5AC4: $E0 $99
+
     ld   a, $34                                   ; $5AC6: $3E $34
-    ldh  [$FFF4], a                               ; $5AC8: $E0 $F4
+    ldh  [hNoiseSfx], a                               ; $5AC8: $E0 $F4
+
     jp   IncrementD000AndReturn                                    ; $5ACA: $C3 $25 $56
 
 Func_017_5ACD::
@@ -2836,7 +2842,7 @@ Func_017_5ACD::
 
     ld   [$C155], a                               ; $5AD4: $EA $55 $C1
     call ResetCreditsSceneVariables                            ; $5AD7: $CD $A5 $4D
-    jp   IncrementD00EAndReturn                           ; $5ADA: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $5ADA: $C3 $D9 $4C
 
 CreditsWaterAppearingHandler::
     ldh  a, [hLinkPositionY]                               ; $5ADD: $F0 $99
@@ -2853,15 +2859,15 @@ CreditsWaterAppearingHandler::
     ld   [$C29F], a                               ; $5AF1: $EA $9F $C2
     ld   a, $40                                   ; $5AF4: $3E $40
     ld   [$D009], a                               ; $5AF6: $EA $09 $D0
-    call IncrementD00E                            ; $5AF9: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $5AF9: $CD $D9 $4C
 
 jr_017_5AFC:
     call func_017_5B96                            ; $5AFC: $CD $96 $5B
     ret                                           ; $5AFF: $C9
 
 func_017_5B00:
-    call $28CF                                    ; $5B00: $CD $CF $28
-    call func_017_5B19                            ; $5B03: $CD $19 $5B
+    call LCDOff                                   ; $5B00: $CD $CF $28
+    call CreditsLoadBGMap                         ; $5B03: $CD $19 $5B
     call func_017_5B37                            ; $5B06: $CD $37 $5B
     ld   a, [$D6FD]                               ; $5B09: $FA $FD $D6
     ldh  [rLCDC], a                               ; $5B0C: $E0 $40
@@ -2879,7 +2885,8 @@ func_017_5B00:
     nop                                           ; $5B17: $00
     ld   l, b                                     ; $5B18: $68
 
-func_017_5B19:
+CreditsLoadBGMap:
+    ; Source address
     ld   hl, $5B0F                                ; $5B19: $21 $0F $5B
     ld   a, [$D000]                               ; $5B1C: $FA $00 $D0
     dec  a                                        ; $5B1F: $3D
@@ -2888,12 +2895,14 @@ func_017_5B19:
     add  hl, de                                   ; $5B23: $19
     ld   a, [hl+]                                 ; $5B24: $2A
     ld   b, a                                     ; $5B25: $47
-    ld   a, $17                                   ; $5B26: $3E $17
-    ldh  [$FFE6], a                               ; $5B28: $E0 $E6
+    ; Return bank to restore
+    ld   a, BANK(CreditsLoadBGMap)                   ; $5B26: $3E $17
+    ldh  [hScratchK], a                           ; $5B28: $E0 $E6
     ld   h, [hl]                                  ; $5B2A: $66
     ld   l, b                                     ; $5B2B: $68
+    ; Source bank
     ld   a, $23                                   ; $5B2C: $3E $23
-    call $0B69                                    ; $5B2E: $CD $69 $0B
+    call CopyBGMapFromBank                        ; $5B2E: $CD $69 $0B
     ret                                           ; $5B31: $C9
 
     nop                                           ; $5B32: $00
@@ -2952,7 +2961,7 @@ CreditsWaterSplashingHandler::
     and  a                                        ; $5B6D: $A7
     jr   nz, jr_017_5B73                          ; $5B6E: $20 $03
 
-    jp   IncrementD00EAndReturn                           ; $5B70: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $5B70: $C3 $D9 $4C
 
 jr_017_5B73:
     ld   a, [$C21E]                               ; $5B73: $FA $1E $C2
@@ -3176,7 +3185,7 @@ jr_017_5F39:
     jr   nz, jr_017_5F4D                          ; $5F44: $20 $07
 
     call ResetCreditsSceneVariables                            ; $5F46: $CD $A5 $4D
-    call IncrementD00E                            ; $5F49: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $5F49: $CD $D9 $4C
     ret                                           ; $5F4C: $C9
 
 jr_017_5F4D:
@@ -3265,7 +3274,7 @@ jr_017_5FC9:
     call ResetCreditsSceneVariables                            ; $5FE4: $CD $A5 $4D
     ld   a, $C0                                   ; $5FE7: $3E $C0
     ld   [$D006], a                               ; $5FE9: $EA $06 $D0
-    jp   IncrementD00EAndReturn                           ; $5FEC: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $5FEC: $C3 $D9 $4C
 
 jr_017_5FEF:
     inc  a                                        ; $5FEF: $3C
@@ -3306,7 +3315,7 @@ CreditsWaterNoiseFadingOutHandler::
     jr   nz, jr_017_6045                          ; $6028: $20 $1B
 
     xor  a                                        ; $602A: $AF
-    ld   [$D00E], a                               ; $602B: $EA $0E $D0
+    ld   [wCreditsSubscene], a                               ; $602B: $EA $0E $D0
     ld   [$C28E], a                               ; $602E: $EA $8E $C2
     ld   [$C28F], a                               ; $6031: $EA $8F $C2
     ld   [$C114], a                               ; $6034: $EA $14 $C1
@@ -3324,8 +3333,8 @@ CreditsLinkOnSeaLargeHandler::
     call func_017_4839                            ; $6046: $CD $39 $48
     ld   de, $98E0                                ; $6049: $11 $E0 $98
     call func_017_488C                            ; $604C: $CD $8C $48
-    call $0EED                                    ; $604F: $CD $ED $0E
-    ld   a, [$D00E]                               ; $6052: $FA $0E $D0
+    call AnimateEntitiesAndRestoreBank17                                    ; $604F: $CD $ED $0E
+    ld   a, [wCreditsSubscene]                               ; $6052: $FA $0E $D0
     JP_TABLE                                      ; $6055: $C7
 ._00 dw LinkOnSeaLarge0Handler                    ; $6056
 ._01 dw LinkOnSeaLarge1Handler                    ; $6058
@@ -3340,17 +3349,17 @@ LinkOnSeaLarge0Handler::
     call ResetCreditsSceneVariables                            ; $6067: $CD $A5 $4D
     ldh  a, [$FFFE]                               ; $606A: $F0 $FE
     and  a                                        ; $606C: $A7
-    jp   z, IncrementD00EAndReturn                        ; $606D: $CA $D9 $4C
+    jp   z, IncrementCreditsSubsceneAndReturn     ; $606D: $CA $D9 $4C
 
     ld   hl, $D6FD                                ; $6070: $21 $FD $D6
     res  2, [hl]                                  ; $6073: $CB $96
-    jp   IncrementD00EAndReturn                           ; $6075: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6075: $C3 $D9 $4C
 
 LinkOnSeaLarge1Handler::
     ld   a, $17                                   ; $6078: $3E $17
     ld   [wBGMapToLoad], a                               ; $607A: $EA $FF $D6
     ld   a, $E8                                   ; $607D: $3E $E8
-    call $3B86                                    ; $607F: $CD $86 $3B
+    call label_3B86                                    ; $607F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6082: $21 $00 $C2
     add  hl, de                                   ; $6085: $19
     ld   [hl], $48                                ; $6086: $36 $48
@@ -3361,7 +3370,7 @@ LinkOnSeaLarge1Handler::
     add  hl, de                                   ; $6091: $19
     ld   [hl], $04                                ; $6092: $36 $04
     ld   a, $E8                                   ; $6094: $3E $E8
-    call $3B86                                    ; $6096: $CD $86 $3B
+    call label_3B86                                    ; $6096: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6099: $21 $00 $C2
     add  hl, de                                   ; $609C: $19
     ld   [hl], $28                                ; $609D: $36 $28
@@ -3372,7 +3381,7 @@ LinkOnSeaLarge1Handler::
     add  hl, de                                   ; $60A8: $19
     ld   [hl], $05                                ; $60A9: $36 $05
     ld   a, $E8                                   ; $60AB: $3E $E8
-    call $3B86                                    ; $60AD: $CD $86 $3B
+    call label_3B86                                    ; $60AD: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $60B0: $21 $00 $C2
     add  hl, de                                   ; $60B3: $19
     ld   [hl], $78                                ; $60B4: $36 $78
@@ -3385,7 +3394,7 @@ LinkOnSeaLarge1Handler::
     ld   hl, $C3B0                                ; $60C2: $21 $B0 $C3
     add  hl, de                                   ; $60C5: $19
     inc  [hl]                                     ; $60C6: $34
-    jp   IncrementD00EAndReturn                           ; $60C7: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $60C7: $C3 $D9 $4C
 
 ; Palettes indices
 Data_017_60CA::
@@ -3401,7 +3410,7 @@ LinkOnSeaLarge2Handler::
     call ResetCreditsSceneVariables                            ; $60EA: $CD $A5 $4D
     ld   a, $60                                   ; $60ED: $3E $60
     ld   [$D009], a                               ; $60EF: $EA $09 $D0
-    jp   IncrementD00EAndReturn                           ; $60F2: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $60F2: $C3 $D9 $4C
 
 LinkOnSeaLarge3Handler::
     ld   a, [$D009]                               ; $60F5: $FA $09 $D0
@@ -3409,14 +3418,16 @@ LinkOnSeaLarge3Handler::
     jr   nz, jr_017_6114                          ; $60F9: $20 $19
 
     xor  a                                        ; $60FB: $AF
-    ld   [$D00E], a                               ; $60FC: $EA $0E $D0
+    ld   [wCreditsSubscene], a                               ; $60FC: $EA $0E $D0
     ld   [$C28C], a                               ; $60FF: $EA $8C $C2
     ld   [$C28D], a                               ; $6102: $EA $8D $C2
     ld   [$C28E], a                               ; $6105: $EA $8E $C2
     ld   [$C28F], a                               ; $6108: $EA $8F $C2
-    ld   a, $17                                   ; $610B: $3E $17
-    call $08FA                                    ; $610D: $CD $FA $08
-    ld   hl, wGameplaySubtype                                ; $6110: $21 $96 $DB
+
+    ld   a, BANK(LinkOnSeaLarge3Handler)          ; $610B: $3E $17
+    call ClearFileMenuBG_trampoline               ; $610D: $CD $FA $08
+
+    ld   hl, wGameplaySubtype                     ; $6110: $21 $96 $DB
     inc  [hl]                                     ; $6113: $34
 
 jr_017_6114:
@@ -3424,8 +3435,8 @@ jr_017_6114:
 
 CreditsSunAboveHandler::
     call func_017_4839                            ; $6115: $CD $39 $48
-    call $0EED                                    ; $6118: $CD $ED $0E
-    ld   a, [$D00E]                               ; $611B: $FA $0E $D0
+    call AnimateEntitiesAndRestoreBank17                                    ; $6118: $CD $ED $0E
+    ld   a, [wCreditsSubscene]                               ; $611B: $FA $0E $D0
     JP_TABLE                                      ; $611E: $C7
 ._00 dw CreditsSunAbove0Handler
 ._01 dw CreditsSunAbove1Handler
@@ -3446,13 +3457,13 @@ CreditsSunAbove0Handler::
     ld   a, $3D                                   ; $613E: $3E $3D
     ld   [$D368], a                               ; $6140: $EA $68 $D3
     call ResetCreditsSceneVariables                            ; $6143: $CD $A5 $4D
-    jp   IncrementD00EAndReturn                           ; $6146: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6146: $C3 $D9 $4C
 
 CreditsSunAbove1Handler::
     ld   a, $18                                   ; $6149: $3E $18
     ld   [wBGMapToLoad], a                               ; $614B: $EA $FF $D6
     ld   a, $E8                                   ; $614E: $3E $E8
-    call $3B86                                    ; $6150: $CD $86 $3B
+    call label_3B86                                    ; $6150: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6153: $21 $00 $C2
     add  hl, de                                   ; $6156: $19
     ld   [hl], $18                                ; $6157: $36 $18
@@ -3466,7 +3477,7 @@ CreditsSunAbove1Handler::
     add  hl, de                                   ; $6168: $19
     ld   [hl], $03                                ; $6169: $36 $03
     ld   a, $E8                                   ; $616B: $3E $E8
-    call $3B86                                    ; $616D: $CD $86 $3B
+    call label_3B86                                    ; $616D: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6170: $21 $00 $C2
     add  hl, de                                   ; $6173: $19
     ld   [hl], $78                                ; $6174: $36 $78
@@ -3485,7 +3496,7 @@ jr_017_618B:
     add  hl, de                                   ; $618B: $19
     ld   [hl], $03                                ; $618C: $36 $03
     ld   a, $E8                                   ; $618E: $3E $E8
-    call $3B86                                    ; $6190: $CD $86 $3B
+    call label_3B86                                    ; $6190: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6193: $21 $00 $C2
     add  hl, de                                   ; $6196: $19
     ld   [hl], $68                                ; $6197: $36 $68
@@ -3497,7 +3508,7 @@ jr_017_618B:
     ld   [hl], $07                                ; $61A3: $36 $07
     ld   a, $60                                   ; $61A5: $3E $60
     ld   [$D009], a                               ; $61A7: $EA $09 $D0
-    jp   IncrementD00EAndReturn                           ; $61AA: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $61AA: $C3 $D9 $4C
 
 ; Palettes indices
 Data_017_61AD::
@@ -3524,7 +3535,7 @@ CreditsSunAbove2Handler::
     call ResetCreditsSceneVariables                            ; $61E3: $CD $A5 $4D
     ld   a, $60                                   ; $61E6: $3E $60
     ld   [$D009], a                               ; $61E8: $EA $09 $D0
-    jp   IncrementD00EAndReturn                           ; $61EB: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $61EB: $C3 $D9 $4C
 
 jr_017_61EE:
     inc  a                                        ; $61EE: $3C
@@ -3565,7 +3576,7 @@ CreditsSunAbove3Handler::
     jr   nz, jr_017_622F                          ; $6227: $20 $06
 
     call ResetCreditsSceneVariables                            ; $6229: $CD $A5 $4D
-    jp   IncrementD00EAndReturn                           ; $622C: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $622C: $C3 $D9 $4C
 
 jr_017_622F:
     ret                                           ; $622F: $C9
@@ -3573,12 +3584,12 @@ jr_017_622F:
 CreditsSunAbove4Handler::
     call ResetCreditsSceneVariables                            ; $6230: $CD $A5 $4D
     xor  a                                        ; $6233: $AF
-    ld   [$D00E], a                               ; $6234: $EA $0E $D0
+    ld   [wCreditsSubscene], a                               ; $6234: $EA $0E $D0
     ld   [$C28D], a                               ; $6237: $EA $8D $C2
     ld   [$C28E], a                               ; $623A: $EA $8E $C2
     ld   [$C28F], a                               ; $623D: $EA $8F $C2
     ld   a, $17                                   ; $6240: $3E $17
-    call $08FA                                    ; $6242: $CD $FA $08
+    call ClearFileMenuBG_trampoline               ; $6242: $CD $FA $08
     ld   hl, wGameplaySubtype                                ; $6245: $21 $96 $DB
     inc  [hl]                                     ; $6248: $34
     ret                                           ; $6249: $C9
@@ -3587,7 +3598,7 @@ CreditsLinkOnSeaCloseHandler::
     call func_017_4839                            ; $624A: $CD $39 $48
     ld   de, $98E0                                ; $624D: $11 $E0 $98
     call func_017_488C                            ; $6250: $CD $8C $48
-    call $0EED                                    ; $6253: $CD $ED $0E
+    call AnimateEntitiesAndRestoreBank17                                    ; $6253: $CD $ED $0E
     ld   a, [$D00F]                               ; $6256: $FA $0F $D0
     inc  a                                        ; $6259: $3C
     ld   [$D00F], a                               ; $625A: $EA $0F $D0
@@ -3616,7 +3627,7 @@ jr_017_6271:
     add  $00                                      ; $627C: $C6 $00
     ld   [$D000], a                               ; $627E: $EA $00 $D0
     call func_017_7971                            ; $6281: $CD $71 $79
-    ld   a, [$D00E]                               ; $6284: $FA $0E $D0
+    ld   a, [wCreditsSubscene]                               ; $6284: $FA $0E $D0
     rst  $00                                      ; $6287: $C7
     sub  d                                        ; $6288: $92
     ld   h, d                                     ; $6289: $62
@@ -3633,7 +3644,7 @@ jr_017_6271:
     ld   [wTileMapToLoad], a                               ; $6294: $EA $FE $D6
     xor  a                                        ; $6297: $AF
     ld   [$DDD5], a                               ; $6298: $EA $D5 $DD
-    jp   IncrementD00EAndReturn                           ; $629B: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $629B: $C3 $D9 $4C
 
     ld   a, $19                                   ; $629E: $3E $19
     ld   [wBGMapToLoad], a                               ; $62A0: $EA $FF $D6
@@ -3642,7 +3653,7 @@ jr_017_6271:
     ld   a, $42                                   ; $62A8: $3E $42
     ldh  [rLYC], a                                ; $62AA: $E0 $45
     ld   a, $E8                                   ; $62AC: $3E $E8
-    call $3B86                                    ; $62AE: $CD $86 $3B
+    call label_3B86                                    ; $62AE: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $62B1: $21 $00 $C2
     add  hl, de                                   ; $62B4: $19
     ld   [hl], $18                                ; $62B5: $36 $18
@@ -3656,7 +3667,7 @@ jr_017_6271:
     add  hl, de                                   ; $62C6: $19
     ld   [hl], $02                                ; $62C7: $36 $02
     ld   a, $E8                                   ; $62C9: $3E $E8
-    call $3B86                                    ; $62CB: $CD $86 $3B
+    call label_3B86                                    ; $62CB: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $62CE: $21 $00 $C2
     add  hl, de                                   ; $62D1: $19
     ld   [hl], $68                                ; $62D2: $36 $68
@@ -3670,7 +3681,7 @@ jr_017_6271:
     add  hl, de                                   ; $62E3: $19
     inc  [hl]                                     ; $62E4: $34
     ld   a, $E8                                   ; $62E5: $3E $E8
-    call $3B86                                    ; $62E7: $CD $86 $3B
+    call label_3B86                                    ; $62E7: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $62EA: $21 $00 $C2
     add  hl, de                                   ; $62ED: $19
     ld   [hl], $88                                ; $62EE: $36 $88
@@ -3681,7 +3692,7 @@ jr_017_6271:
     add  hl, de                                   ; $62F9: $19
     ld   [hl], $08                                ; $62FA: $36 $08
     ld   a, $E8                                   ; $62FC: $3E $E8
-    call $3B86                                    ; $62FE: $CD $86 $3B
+    call label_3B86                                    ; $62FE: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6301: $21 $00 $C2
     add  hl, de                                   ; $6304: $19
     ld   [hl], $08                                ; $6305: $36 $08
@@ -3702,10 +3713,10 @@ jr_017_6271:
     ld   [$D009], a                               ; $6324: $EA $09 $D0
     ldh  a, [$FFFE]                               ; $6327: $F0 $FE
     and  a                                        ; $6329: $A7
-    jp   z, IncrementD00EAndReturn                        ; $632A: $CA $D9 $4C
+    jp   z, IncrementCreditsSubsceneAndReturn                        ; $632A: $CA $D9 $4C
 
     ld   a, $E8                                   ; $632D: $3E $E8
-    call $3B86                                    ; $632F: $CD $86 $3B
+    call label_3B86                                    ; $632F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6332: $21 $00 $C2
     add  hl, de                                   ; $6335: $19
     ld   [hl], $40                                ; $6336: $36 $40
@@ -3717,7 +3728,7 @@ jr_017_6271:
     ld   [hl], $11                                ; $6342: $36 $11
     ld   hl, $D6FD                                ; $6344: $21 $FD $D6
     res  2, [hl]                                  ; $6347: $CB $96
-    jp   IncrementD00EAndReturn                           ; $6349: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6349: $C3 $D9 $4C
 
 Data_017_634C::
     db   $00, $00, $00, $00, $01, $01, $01, $02  ; $634C |........|
@@ -3832,7 +3843,7 @@ Func_017_6447::
 
     xor  a                                        ; $644D: $AF
     ld   [$D005], a                               ; $644E: $EA $05 $D0
-    call IncrementD00E                            ; $6451: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $6451: $CD $D9 $4C
     ret                                           ; $6454: $C9
 
 jr_017_6455:
@@ -3866,7 +3877,7 @@ Data_017_6466::
     ld   [wBGPalette], a                               ; $6490: $EA $97 $DB
     ld   [wOBJ0Palette], a                               ; $6493: $EA $98 $DB
     ld   [wOBJ1Palette], a                               ; $6496: $EA $99 $DB
-    jp   IncrementD00EAndReturn                           ; $6499: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6499: $C3 $D9 $4C
 
 jr_017_649C:
     inc  a                                        ; $649C: $3C
@@ -3913,7 +3924,7 @@ jr_017_64B3:
 func_017_64DE:
 label_017_64DE:
     xor  a                                        ; $64DE: $AF
-    ld   [$D00E], a                               ; $64DF: $EA $0E $D0
+    ld   [wCreditsSubscene], a                               ; $64DF: $EA $0E $D0
     ld   [$C287], a                               ; $64E2: $EA $87 $C2
     ld   [$C288], a                               ; $64E5: $EA $88 $C2
     ld   [$C289], a                               ; $64E8: $EA $89 $C2
@@ -4085,8 +4096,8 @@ jr_017_6808:
     ret                                           ; $6808: $C9
 
 CreditsLinkSeatedOnLogHandler::
-    call $0EED                                    ; $6809: $CD $ED $0E
-    ld   a, [$D00E]                               ; $680C: $FA $0E $D0
+    call AnimateEntitiesAndRestoreBank17                                    ; $6809: $CD $ED $0E
+    ld   a, [wCreditsSubscene]                               ; $680C: $FA $0E $D0
     rst  $00                                      ; $680F: $C7
 ._00 dw LinkSeatedOnLog0Handler                   ; $6810
 ._01 dw LinkSeatedOnLog1Handler                   ; $6812
@@ -4103,13 +4114,13 @@ LinkSeatedOnLog0Handler::
     ld   [wTileMapToLoad], a                               ; $6824: $EA $FE $D6
     ld   a, $01                                   ; $6827: $3E $01
     ld   [$DDD5], a                               ; $6829: $EA $D5 $DD
-    jp   IncrementD00EAndReturn                           ; $682C: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $682C: $C3 $D9 $4C
 
 LinkSeatedOnLog1Handler::
     ld   a, $1A                                   ; $682F: $3E $1A
     ld   [wBGMapToLoad], a                               ; $6831: $EA $FF $D6
     ld   a, $E8                                   ; $6834: $3E $E8
-    call $3B86                                    ; $6836: $CD $86 $3B
+    call label_3B86                                    ; $6836: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6839: $21 $00 $C2
     add  hl, de                                   ; $683C: $19
     ld   [hl], $40                                ; $683D: $36 $40
@@ -4119,7 +4130,7 @@ LinkSeatedOnLog1Handler::
     ld   hl, $C2B0                                ; $6845: $21 $B0 $C2
     add  hl, de                                   ; $6848: $19
     ld   [hl], $0A                                ; $6849: $36 $0A
-    jp   IncrementD00EAndReturn                           ; $684B: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $684B: $C3 $D9 $4C
 
 LinkSeatedOnLog2Handler
     ld   de, $9960                                ; $684E: $11 $60 $99
@@ -4135,7 +4146,7 @@ LinkSeatedOnLog2Handler
     call ResetCreditsSceneVariables                            ; $6861: $CD $A5 $4D
     ld   a, $60                                   ; $6864: $3E $60
     ld   [$D009], a                               ; $6866: $EA $09 $D0
-    jp   IncrementD00EAndReturn                           ; $6869: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6869: $C3 $D9 $4C
 
 jr_017_686C:
     inc  a                                        ; $686C: $3C
@@ -4179,7 +4190,7 @@ LinkSeatedOnLog3Handler::
     jr   nz, jr_017_68B6                          ; $68AE: $20 $06
 
     call ResetCreditsSceneVariables                            ; $68B0: $CD $A5 $4D
-    jp   IncrementD00EAndReturn                           ; $68B3: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $68B3: $C3 $D9 $4C
 
 jr_017_68B6:
     ret                                           ; $68B6: $C9
@@ -4203,7 +4214,7 @@ LinkSeatedOnLog4Handler::
     call ResetCreditsSceneVariables                            ; $68D6: $CD $A5 $4D
     ld   a, $20                                   ; $68D9: $3E $20
     ld   [$D006], a                               ; $68DB: $EA $06 $D0
-    jp   IncrementD00EAndReturn                           ; $68DE: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $68DE: $C3 $D9 $4C
 
 jr_017_68E1:
     inc  a                                        ; $68E1: $3C
@@ -4291,7 +4302,7 @@ label_017_6A80:
     add  hl, bc                                   ; $6A93: $09
     ld   bc, $0030                                ; $6A94: $01 $30 $00
     ld   de, $DC50                                ; $6A97: $11 $50 $DC
-    call $2914                                    ; $6A9A: $CD $14 $29
+    call CopyData                                 ; $6A9A: $CD $14 $29
     xor  a                                        ; $6A9D: $AF
     ld   [$DDD3], a                               ; $6A9E: $EA $D3 $DD
     ld   a, $18                                   ; $6AA1: $3E $18
@@ -4317,7 +4328,7 @@ LinkSeatedOnLog5Handler::
 
     ld   a, $20                                   ; $6AC8: $3E $20
     ld   [$D006], a                               ; $6ACA: $EA $06 $D0
-    jp   IncrementD00EAndReturn                           ; $6ACD: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6ACD: $C3 $D9 $4C
 
 jr_017_6AD0:
     ret                                           ; $6AD0: $C9
@@ -4329,7 +4340,7 @@ LinkSeatedOnLog6Handler::
     and  a                                        ; $6ADA: $A7
     jr   nz, jr_017_6AE0                          ; $6ADB: $20 $03
 
-    jp   IncrementD00EAndReturn                           ; $6ADD: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6ADD: $C3 $D9 $4C
 
 jr_017_6AE0:
     ret                                           ; $6AE0: $C9
@@ -4406,7 +4417,7 @@ jr_017_6BD6:
     ld   [$D008], a                               ; $6C0A: $EA $08 $D0
     ld   a, $A8                                   ; $6C0D: $3E $A8
     ld   [$D009], a                               ; $6C0F: $EA $09 $D0
-    jp   IncrementD00EAndReturn                           ; $6C12: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6C12: $C3 $D9 $4C
 
 jr_017_6C15:
     ld   hl, Data_017_6AE1                        ; $6C15: $21 $E1 $6A
@@ -4449,7 +4460,7 @@ jr_017_6C4A:
     ld   a, $E3                                   ; $6C51: $3E $E3
     ld   [wOBJ1Palette], a                               ; $6C53: $EA $99 $DB
     ld   a, $E8                                   ; $6C56: $3E $E8
-    call $3B86                                    ; $6C58: $CD $86 $3B
+    call label_3B86                                    ; $6C58: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6C5B: $21 $00 $C2
     add  hl, de                                   ; $6C5E: $19
     ld   [hl], $50                                ; $6C5F: $36 $50
@@ -4495,7 +4506,7 @@ LinkSeatedOnLog8Handler::
     xor  a                                        ; $6C9D: $AF
     ld   [wBGPalette], a                               ; $6C9E: $EA $97 $DB
     ld   a, $17                                   ; $6CA1: $3E $17
-    call $08FA                                    ; $6CA3: $CD $FA $08
+    call ClearFileMenuBG_trampoline               ; $6CA3: $CD $FA $08
     jp   label_017_64DE                           ; $6CA6: $C3 $DE $64
 
 jr_017_6CA9:
@@ -4540,7 +4551,7 @@ jr_017_6CDD:
     ld   a, $1E                                   ; $6CE8: $3E $1E
     ld   [wOBJ0Palette], a                               ; $6CEA: $EA $98 $DB
     ld   a, $E8                                   ; $6CED: $3E $E8
-    call $3B86                                    ; $6CEF: $CD $86 $3B
+    call label_3B86                                    ; $6CEF: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6CF2: $21 $00 $C2
     add  hl, de                                   ; $6CF5: $19
     ld   [hl], $62                                ; $6CF6: $36 $62
@@ -4570,8 +4581,8 @@ func_017_6D0B:
     jp   $0BD7                                    ; $6D1A: $C3 $D7 $0B
 
 CreditsLinkFaceCloseUpHandler::
-    call $0EED                                    ; $6D1D: $CD $ED $0E
-    ld   a, [$D00E]                               ; $6D20: $FA $0E $D0
+    call AnimateEntitiesAndRestoreBank17                                    ; $6D1D: $CD $ED $0E
+    ld   a, [wCreditsSubscene]                               ; $6D20: $FA $0E $D0
     JP_TABLE                                      ; $6D23: $C7
 ._00 dw CreditsLinkFaceCloseUp0Handler            ; $6D24
 ._01 dw CreditsLinkFaceCloseUp1Handler            ; $6D26
@@ -4588,7 +4599,7 @@ CreditsLinkFaceCloseUp0Handler::
     ld   [$DDD5], a                               ; $6D38: $EA $D5 $DD
     dec  a                                        ; $6D3B: $3D
     ld   [$D022], a                               ; $6D3C: $EA $22 $D0
-    jp   IncrementD00EAndReturn                           ; $6D3F: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6D3F: $C3 $D9 $4C
 
 CreditsLinkFaceCloseUp1Handler::
     ld   a, $1B                                   ; $6D42: $3E $1B
@@ -4599,7 +4610,7 @@ CreditsLinkFaceCloseUp1Handler::
     ld   a, $6E                                   ; $6D4F: $3E $6E
     ld   [wOBJ0Palette], a                               ; $6D51: $EA $98 $DB
     ld   a, $E8                                   ; $6D54: $3E $E8
-    call $3B86                                    ; $6D56: $CD $86 $3B
+    call label_3B86                                    ; $6D56: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6D59: $21 $00 $C2
     add  hl, de                                   ; $6D5C: $19
     ld   [hl], $38                                ; $6D5D: $36 $38
@@ -4611,14 +4622,14 @@ CreditsLinkFaceCloseUp1Handler::
     ld   [hl], $0D                                ; $6D69: $36 $0D
     ld   a, $20                                   ; $6D6B: $3E $20
     ld   [$D006], a                               ; $6D6D: $EA $06 $D0
-    jp   IncrementD00EAndReturn                           ; $6D70: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6D70: $C3 $D9 $4C
 
 CreditsLinkFaceCloseUp2Handler::
     ld   a, [$D006]                               ; $6D73: $FA $06 $D0
     and  a                                        ; $6D76: $A7
     jr   nz, jr_017_6D7C                          ; $6D77: $20 $03
 
-    call IncrementD00E                            ; $6D79: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $6D79: $CD $D9 $4C
 
 func_017_6D7C:
 jr_017_6D7C:
@@ -4668,7 +4679,7 @@ CreditsLinkFaceCloseUp3Handler::
 
     ld   a, $FF                                   ; $6DB9: $3E $FF
     ld   [$D006], a                               ; $6DBB: $EA $06 $D0
-    jp   IncrementD00EAndReturn                           ; $6DBE: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6DBE: $C3 $D9 $4C
 
 jr_017_6DC1:
     ldh  a, [$FFFE]                               ; $6DC1: $F0 $FE
@@ -4716,7 +4727,7 @@ jr_017_6DF8:
 
     ld   a, $E0                                   ; $6DFE: $3E $E0
     ld   [$D006], a                               ; $6E00: $EA $06 $D0
-    jp   IncrementD00EAndReturn                           ; $6E03: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6E03: $C3 $D9 $4C
 
     ret                                           ; $6E06: $C9
 
@@ -4750,7 +4761,7 @@ CreditsLinkFaceCloseUp5Handler::
 
     ld   a, $40                                   ; $6E2C: $3E $40
     ld   [$D006], a                               ; $6E2E: $EA $06 $D0
-    call IncrementD00E                            ; $6E31: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $6E31: $CD $D9 $4C
 
 jr_017_6E34:
     ldh  a, [$FFFE]                               ; $6E34: $F0 $FE
@@ -4801,8 +4812,8 @@ CreditsRollHandler::
     cp   $09                                      ; $6E7B: $FE $09
     ret  z                                        ; $6E7D: $C8
 
-    call $0EED                                    ; $6E7E: $CD $ED $0E
-    ld   a, [$D00E]                               ; $6E81
+    call AnimateEntitiesAndRestoreBank17                                    ; $6E7E: $CD $ED $0E
+    ld   a, [wCreditsSubscene]                               ; $6E81
     JP_TABLE                                      ; $6E84
 ._00 dw CreditsRollLoadHandler                    ; $6E85
 ._01 dw CreditsRoll1Handler                       ; $6E87
@@ -4818,14 +4829,14 @@ CreditsRollLoadHandler::
     ld   [$DDD5], a                               ; $6E98: $EA $D5 $DD
     ld   hl, $D6FD                                ; $6E9B: $21 $FD $D6
     res  2, [hl]                                  ; $6E9E: $CB $96
-    jp   IncrementD00EAndReturn                           ; $6EA0: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6EA0: $C3 $D9 $4C
 
 CreditsRoll1Handler::
     ld   a, $1C                                   ; $6EA3: $3E $1C
     ld   [wBGMapToLoad], a                               ; $6EA5: $EA $FF $D6
     call ResetCreditsSceneVariables                            ; $6EA8: $CD $A5 $4D
     ld   a, $E8                                   ; $6EAB: $3E $E8
-    call $3B86                                    ; $6EAD: $CD $86 $3B
+    call label_3B86                                    ; $6EAD: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6EB0: $21 $00 $C2
     add  hl, de                                   ; $6EB3: $19
     ld   [hl], $50                                ; $6EB4: $36 $50
@@ -4844,7 +4855,7 @@ CreditsRoll1Handler::
     xor  a                                        ; $6ECF: $AF
     ldh  [hFrameCounter], a                               ; $6ED0: $E0 $E7
     ld   [wOBJ1Palette], a                               ; $6ED2: $EA $99 $DB
-    jp   IncrementD00EAndReturn                           ; $6ED5: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6ED5: $C3 $D9 $4C
 
 ; Palettes indices
 Data_017_6ED8::
@@ -4866,7 +4877,7 @@ CreditsRoll2Handler::
     ld   [$D013], a                               ; $6EFB: $EA $13 $D0
     xor  a                                        ; $6EFE: $AF
     ldh  [hFrameCounter], a                               ; $6EFF: $E0 $E7
-    call IncrementD00E                            ; $6F01: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $6F01: $CD $D9 $4C
 
 jr_017_6F04:
     ldh  a, [$FFFE]                               ; $6F04: $F0 $FE
@@ -4907,7 +4918,7 @@ CreditsRoll3Handler::
     cp   $70                                      ; $6F39: $FE $70
     jr   nz, jr_017_6F40                          ; $6F3B: $20 $03
 
-    jp   IncrementD00EAndReturn                           ; $6F3D: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6F3D: $C3 $D9 $4C
 
 jr_017_6F40:
     cp   $A0                                      ; $6F40: $FE $A0
@@ -4922,7 +4933,7 @@ jr_017_6F4C:
     jr   nz, jr_017_6F67                          ; $6F4E: $20 $17
 
     ld   a, $E8                                   ; $6F50: $3E $E8
-    call $3B86                                    ; $6F52: $CD $86 $3B
+    call label_3B86                                    ; $6F52: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6F55: $21 $00 $C2
     add  hl, de                                   ; $6F58: $19
     ld   [hl], $18                                ; $6F59: $36 $18
@@ -4981,7 +4992,7 @@ jr_017_6FB9:
     ret                                           ; $6FBF: $C9
 
 CreditsTheEndHandler::
-    ld   a, [$D00E]                               ; $6FC0: $FA $0E $D0
+    ld   a, [wCreditsSubscene]                               ; $6FC0: $FA $0E $D0
     JP_TABLE                                      ; $6FC3: $C7
 ._00 dw CreditsTheEnd0Handler                     ; $6FC4 (jumpTable [0]) $D2 $6F
 ._01 dw CreditsTheEnd1Handler                     ; $6FC6 (jumpTable [1]) $F7 $6F
@@ -5009,7 +5020,7 @@ CreditsTheEnd0Handler::
     ld   [$DDD1], a                               ; $6FEC: $EA $D1 $DD
     ld   a, $B4                                   ; $6FEF: $3E $B4
     ld   [$D006], a                               ; $6FF1: $EA $06 $D0
-    jp   IncrementD00EAndReturn                           ; $6FF4: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $6FF4: $C3 $D9 $4C
 
 CreditsTheEnd1Handler::
     call func_017_469D                            ; $6FF7: $CD $9D $46
@@ -5029,14 +5040,14 @@ CreditsTheEnd1Handler::
     ldh  [$FFAA], a                               ; $700E: $E0 $AA
     ld   a, $B4                                   ; $7010: $3E $B4
     ld   [$D006], a                               ; $7012: $EA $06 $D0
-    jp   IncrementD00EAndReturn                           ; $7015: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $7015: $C3 $D9 $4C
 
 CreditsTheEnd2Handler::
     ld   a, [$D006]                               ; $7018: $FA $06 $D0
     and  a                                        ; $701B: $A7
     ret  nz                                       ; $701C: $C0
 
-    call $0EED                                    ; $701D: $CD $ED $0E
+    call AnimateEntitiesAndRestoreBank17                                    ; $701D: $CD $ED $0E
     ret                                           ; $7020: $C9
 
 CreditsTheEnd3Handler::
@@ -5049,7 +5060,7 @@ CreditsTheEnd3Handler::
     inc  a                                        ; $702C: $3C
     ld   [$D01F], a                               ; $702D: $EA $1F $D0
     cp   $10                                      ; $7030: $FE $10
-    jp   z, IncrementD00EAndReturn                        ; $7032: $CA $D9 $4C
+    jp   z, IncrementCreditsSubsceneAndReturn                        ; $7032: $CA $D9 $4C
 
     ret                                           ; $7035: $C9
 
@@ -5071,7 +5082,7 @@ CreditsTheEnd4Handler::
     ldh  [$FF96], a                               ; $7055: $E0 $96
     xor  a                                        ; $7057: $AF
     ldh  [hBaseScrollY], a                               ; $7058: $E0 $97
-    jp   IncrementD00EAndReturn                           ; $705A: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $705A: $C3 $D9 $4C
 
 Data_017_705D::
     db   $98, $A2, $0E, $01, $02, $03, $00, $04  ; $705D |........|
@@ -5109,7 +5120,7 @@ CreditsTheEnd5Handler::
     dec  c                                        ; $70CA: $0D
     jr   nz, .loop_017_70C7                       ; $70CB: $20 $FA
 
-    jp   IncrementD00EAndReturn                           ; $70CD: $C3 $D9 $4C
+    jp   IncrementCreditsSubsceneAndReturn                           ; $70CD: $C3 $D9 $4C
 
 CreditsTheEnd6Handler::
     ret                                           ; $70D0: $C9
@@ -5172,9 +5183,9 @@ jr_017_7188:
     ld   hl, Data_017_70D1                        ; $719E: $21 $D1 $70
     add  hl, de                                   ; $71A1: $19
     ld   c, $0A                                   ; $71A2: $0E $0A
-    call $3CE0                                    ; $71A4: $CD $E0 $3C
+    call label_3CE0                               ; $71A4: $CD $E0 $3C
     ld   a, $0A                                   ; $71A7: $3E $0A
-    call $3DA0                                    ; $71A9: $CD $A0 $3D
+    call label_3DA0                               ; $71A9: $CD $A0 $3D
 
 jr_017_71AC:
     ldh  a, [hFrameCounter]                       ; $71AC: $F0 $E7
@@ -5192,7 +5203,7 @@ jr_017_71AC:
     cp   $A8                                      ; $71C3: $FE $A8
     ret  c                                        ; $71C5: $D8
 
-    call IncrementD00E                            ; $71C6: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $71C6: $CD $D9 $4C
     jp   label_017_7CC2                           ; $71C9: $C3 $C2 $7C
 
 jr_017_71CC:
@@ -5261,9 +5272,9 @@ Func_017_725C::
     ld   hl, Data_017_71DF                        ; $7285: $21 $DF $71
     add  hl, de                                   ; $7288: $19
     ld   c, $08                                   ; $7289: $0E $08
-    call $3CE0                                    ; $728B: $CD $E0 $3C
+    call label_3CE0                               ; $728B: $CD $E0 $3C
     ld   a, $08                                   ; $728E: $3E $08
-    call $3DA0                                    ; $7290: $CD $A0 $3D
+    call label_3DA0                               ; $7290: $CD $A0 $3D
 
 jr_017_7293:
     call func_017_7E2D                            ; $7293: $CD $2D $7E
@@ -5293,7 +5304,7 @@ jr_017_72A6:
     jr   nz, jr_017_72BC                          ; $72B6: $20 $04
 
     ld   a, $21                                   ; $72B8: $3E $21
-    ldh  [$FFF2], a                               ; $72BA: $E0 $F2
+    ldh  [hJingle], a                               ; $72BA: $E0 $F2
 
 jr_017_72BC:
     ret                                           ; $72BC: $C9
@@ -5309,7 +5320,7 @@ jr_017_72BD:
     ld   [hl+], a                                 ; $72CB: $22
     ld   a, $17                                   ; $72CC: $3E $17
     ld   [hl], a                                  ; $72CE: $77
-    call $0BD7                                    ; $72CF: $CD $D7 $0B
+    call label_BD7                                ; $72CF: $CD $D7 $0B
     ld   a, $17                                   ; $72D2: $3E $17
     ld   [$DBAF], a                               ; $72D4: $EA $AF $DB
     ret                                           ; $72D7: $C9
@@ -5398,9 +5409,9 @@ jr_017_73AF:
     ld   hl, Data_017_72D8                        ; $73DE: $21 $D8 $72
     add  hl, de                                   ; $73E1: $19
     ld   c, $0C                                   ; $73E2: $0E $0C
-    call $3CE0                                    ; $73E4: $CD $E0 $3C
+    call label_3CE0                                    ; $73E4: $CD $E0 $3C
     ld   a, $0C                                   ; $73E7: $3E $0C
-    call $3DA0                                    ; $73E9: $CD $A0 $3D
+    call label_3DA0                                    ; $73E9: $CD $A0 $3D
     ret                                           ; $73EC: $C9
 
 jr_017_73ED:
@@ -5645,9 +5656,9 @@ jr_017_74E0:
 
     ld   hl, $73FF                                ; $74E2: $21 $FF $73
     ld   c, $1B                                   ; $74E5: $0E $1B
-    call $3CE0                                    ; $74E7: $CD $E0 $3C
+    call label_3CE0                               ; $74E7: $CD $E0 $3C
     ld   a, $1B                                   ; $74EA: $3E $1B
-    call $3DA0                                    ; $74EC: $CD $A0 $3D
+    call label_3DA0                               ; $74EC: $CD $A0 $3D
     ld   a, [$D003]                               ; $74EF: $FA $03 $D0
     rla                                           ; $74F2: $17
     rla                                           ; $74F3: $17
@@ -5662,9 +5673,9 @@ jr_017_74E0:
     ld   c, $07                                   ; $74FF: $0E $07
     ld   a, $40                                   ; $7501: $3E $40
     ld   [$C3C0], a                               ; $7503: $EA $C0 $C3
-    call $3CE6                                    ; $7506: $CD $E6 $3C
+    call label_3CE6                               ; $7506: $CD $E6 $3C
     ld   a, $07                                   ; $7509: $3E $07
-    call $3DA0                                    ; $750B: $CD $A0 $3D
+    call label_3DA0                               ; $750B: $CD $A0 $3D
     ret                                           ; $750E: $C9
 
 jr_017_750F:
@@ -5723,8 +5734,8 @@ jr_017_750F:
     ld   hl, $7521                                ; $7558: $21 $21 $75
     add  hl, de                                   ; $755B: $19
     ld   c, $03                                   ; $755C: $0E $03
-    call $3CE6                                    ; $755E: $CD $E6 $3C
-    call $0C05                                    ; $7561: $CD $05 $0C
+    call label_3CE6                               ; $755E: $CD $E6 $3C
+    call GetEntityTransitionCountdown             ; $7561: $CD $05 $0C
     cp   $01                                      ; $7564: $FE $01
     jr   z, jr_017_756C                           ; $7566: $28 $04
 
@@ -5805,9 +5816,9 @@ jr_017_75B4:
     ldh  [$FFEC], a                               ; $75B4: $E0 $EC
     ld   hl, $7572                                ; $75B6: $21 $72 $75
     ld   c, $0E                                   ; $75B9: $0E $0E
-    call $3CE6                                    ; $75BB: $CD $E6 $3C
+    call label_3CE6                               ; $75BB: $CD $E6 $3C
     ld   a, $0E                                   ; $75BE: $3E $0E
-    call $3DA0                                    ; $75C0: $CD $A0 $3D
+    call label_3DA0                               ; $75C0: $CD $A0 $3D
     ld   hl, wEntitiesSpeedYTable                                ; $75C3: $21 $50 $C2
     add  hl, bc                                   ; $75C6: $09
     ld   [hl], $FE                                ; $75C7: $36 $FE
@@ -5816,14 +5827,14 @@ jr_017_75B4:
     cp   $02                                      ; $75CE: $FE $02
     jr   nc, jr_017_75E0                          ; $75D0: $30 $0E
 
-    call $0C05                                    ; $75D2: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $75D2: $CD $05 $0C
     jr   nz, jr_017_75E0                          ; $75D5: $20 $09
 
 jr_017_75D7:
     ld   [hl], $C0                                ; $75D7: $36 $C0
-    call $3B12                                    ; $75D9: $CD $12 $3B
+    call IncrementEntityWalkingAttr               ; $75D9: $CD $12 $3B
     ld   a, $17                                   ; $75DC: $3E $17
-    ldh  [$FFF3], a                               ; $75DE: $E0 $F3
+    ldh  [hWaveSfx], a                               ; $75DE: $E0 $F3
 
 jr_017_75E0:
     ret                                           ; $75E0: $C9
@@ -6152,9 +6163,9 @@ jr_017_76FD:
     ld   hl, $75E1                                ; $772A: $21 $E1 $75
     add  hl, de                                   ; $772D: $19
     ld   c, $11                                   ; $772E: $0E $11
-    call $3CE6                                    ; $7730: $CD $E6 $3C
+    call label_3CE6                                    ; $7730: $CD $E6 $3C
     ld   a, $11                                   ; $7733: $3E $11
-    call $3DA0                                    ; $7735: $CD $A0 $3D
+    call label_3DA0                                    ; $7735: $CD $A0 $3D
     ret                                           ; $7738: $C9
 
 jr_017_7739:
@@ -6182,7 +6193,7 @@ jr_017_7739:
     ld   [hl], $C3                                ; $775B: $36 $C3
     ld   hl, $774B                                ; $775D: $21 $4B $77
     ld   c, $03                                   ; $7760: $0E $03
-    call $3CE6                                    ; $7762: $CD $E6 $3C
+    call label_3CE6                                    ; $7762: $CD $E6 $3C
     ret                                           ; $7765: $C9
 
     ld   d, b                                     ; $7766: $50
@@ -6228,7 +6239,7 @@ jr_017_7784:
 
 jr_017_7798:
     ld   de, $7766                                ; $7798: $11 $66 $77
-    call $3C77                                    ; $779B: $CD $77 $3C
+    call label_3C77                                    ; $779B: $CD $77 $3C
     call func_017_7E3A                            ; $779E: $CD $3A $7E
     ldh  a, [$FFEE]                               ; $77A1: $F0 $EE
     cp   $B0                                      ; $77A3: $FE $B0
@@ -6325,7 +6336,7 @@ jr_017_77FE:
 
 jr_017_7820:
     ld   c, $07                                   ; $7820: $0E $07
-    call $3CE6                                    ; $7822: $CD $E6 $3C
+    call label_3CE6                                    ; $7822: $CD $E6 $3C
     ret                                           ; $7825: $C9
 
 jr_017_7826:
@@ -6370,7 +6381,7 @@ jr_017_7826:
     jr   nz, jr_017_7867                          ; $785E: $20 $07
 
     ld   de, $7838                                ; $7860: $11 $38 $78
-    call $3C77                                    ; $7863: $CD $77 $3C
+    call label_3C77                                    ; $7863: $CD $77 $3C
     ret                                           ; $7866: $C9
 
 jr_017_7867:
@@ -6430,7 +6441,7 @@ jr_017_78A1:
     jr   nz, jr_017_78DD                          ; $78AE: $20 $2D
 
     ld   de, $7879                                ; $78B0: $11 $79 $78
-    call $3BC0                                    ; $78B3: $CD $C0 $3B
+    call RenderAnimatedActiveEntity               ; $78B3: $CD $C0 $3B
     ret                                           ; $78B6: $C9
 
 jr_017_78B7:
@@ -6514,10 +6525,10 @@ jr_017_78DD:
 
 jr_017_791D:
     ld   de, $78EF                                ; $791D: $11 $EF $78
-    call $3BC0                                    ; $7920: $CD $C0 $3B
+    call RenderAnimatedActiveEntity               ; $7920: $CD $C0 $3B
 
 jr_017_7923:
-    call $0C05                                    ; $7923: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $7923: $CD $05 $0C
     jr   nz, jr_017_793E                          ; $7926: $20 $16
 
     push hl                                       ; $7928: $E5
@@ -6617,7 +6628,7 @@ Func_017_79A4::
     call func_017_7A01                            ; $79B0: $CD $01 $7A
     ld   de, Data_017_7987                        ; $79B3: $11 $87 $79
     call func_017_7A29                            ; $79B6: $CD $29 $7A
-    call $0BFB                                    ; $79B9: $CD $FB $0B
+    call label_BFB                                ; $79B9: $CD $FB $0B
     ret  z                                        ; $79BC: $C8
 
     call func_017_7E2D                            ; $79BD: $CD $2D $7E
@@ -6689,7 +6700,7 @@ jr_017_7A01:
     and  a                                        ; $7A03: $A7
     ret  z                                        ; $7A04: $C8
 
-    ld   a, [$D00E]                               ; $7A05: $FA $0E $D0
+    ld   a, [wCreditsSubscene]                               ; $7A05: $FA $0E $D0
     cp   $13                                      ; $7A08: $FE $13
     ret  nc                                       ; $7A0A: $D0
 
@@ -6859,7 +6870,7 @@ func_017_7AFA:
     push bc                                       ; $7AFA: $C5
     xor  a                                        ; $7AFB: $AF
     ldh  [$FF9A], a                               ; $7AFC: $E0 $9A
-    call $21A8                                    ; $7AFE: $CD $A8 $21
+    call UpdateFinalLinkPosition                  ; $7AFE: $CD $A8 $21
     call Func_017_7D34                            ; $7B01: $CD $34 $7D
     pop  bc                                       ; $7B04: $C1
     ret                                           ; $7B05: $C9
@@ -6877,7 +6888,7 @@ Func_017_7B06::
     ld   a, $02                                   ; $7B16: $3E $02
     ldh  [$FF9D], a                               ; $7B18: $E0 $9D
     ld   a, $E8                                   ; $7B1A: $3E $E8
-    call $3B86                                    ; $7B1C: $CD $86 $3B
+    call label_3B86                                    ; $7B1C: $CD $86 $3B
     ld   hl, $C2B0                                ; $7B1F: $21 $B0 $C2
     add  hl, de                                   ; $7B22: $19
     ld   [hl], $02                                ; $7B23: $36 $02
@@ -6893,7 +6904,7 @@ Func_017_7B06::
     ld   hl, $C2E0                                ; $7B37: $21 $E0 $C2
     add  hl, de                                   ; $7B3A: $19
     ld   [hl], $30                                ; $7B3B: $36 $30
-    call $3B12                                    ; $7B3D: $CD $12 $3B
+    call IncrementEntityWalkingAttr                                    ; $7B3D: $CD $12 $3B
 
 jr_017_7B40:
     ret                                           ; $7B40: $C9
@@ -6903,7 +6914,7 @@ Func_017_7B41::
 
 Func_017_7B43::
     call func_017_7AFA                            ; $7B43: $CD $FA $7A
-    call $0C05                                    ; $7B46: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $7B46: $CD $05 $0C
     jr   nz, Func_017_7B5B                        ; $7B49: $20 $10
 
     ld   [hl], $08                                ; $7B4B: $36 $08
@@ -6915,7 +6926,7 @@ Func_017_7B43::
     cp   $05                                      ; $7B54: $FE $05
     jr   nz, Func_017_7B5B                        ; $7B56: $20 $03
 
-    call $3B12                                    ; $7B58: $CD $12 $3B
+    call IncrementEntityWalkingAttr                                    ; $7B58: $CD $12 $3B
 
 Func_017_7B5B::
     call func_017_7AFA                            ; $7B5B: $CD $FA $7A
@@ -7076,15 +7087,15 @@ jr_017_7BF2:
     ld   d, b                                     ; $7C2C: $50
     add  hl, de                                   ; $7C2D: $19
     ld   c, $04                                   ; $7C2E: $0E $04
-    call $3CE6                                    ; $7C30: $CD $E6 $3C
+    call label_3CE6                                    ; $7C30: $CD $E6 $3C
     ld   a, $04                                   ; $7C33: $3E $04
-    call $3DA0                                    ; $7C35: $CD $A0 $3D
+    call label_3DA0                                    ; $7C35: $CD $A0 $3D
     ldh  a, [hFrameCounter]                               ; $7C38: $F0 $E7
     rra                                           ; $7C3A: $1F
     rra                                           ; $7C3B: $1F
     rra                                           ; $7C3C: $1F
     and  $03                                      ; $7C3D: $E6 $03
-    call $3B0C                                    ; $7C3F: $CD $0C $3B
+    call label_3B0C                                    ; $7C3F: $CD $0C $3B
     ldh  a, [hActiveEntityWalking]                               ; $7C42: $F0 $F0
     rst  $00                                      ; $7C44: $C7
     ld   c, l                                     ; $7C45: $4D
@@ -7095,7 +7106,7 @@ jr_017_7BF2:
     ld   a, h                                     ; $7C4A: $7C
     or   a                                        ; $7C4B: $B7
     ld   a, h                                     ; $7C4C: $7C
-    call $0C05                                    ; $7C4D: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $7C4D: $CD $05 $0C
     jr   nz, jr_017_7C6A                          ; $7C50: $20 $18
 
     call func_017_7E30                            ; $7C52: $CD $30 $7E
@@ -7108,9 +7119,9 @@ jr_017_7BF2:
     dec  [hl]                                     ; $7C5F: $35
     jr   nz, jr_017_7C6A                          ; $7C60: $20 $08
 
-    call $0C05                                    ; $7C62: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $7C62: $CD $05 $0C
     ld   [hl], $80                                ; $7C65: $36 $80
-    call $3B12                                    ; $7C67: $CD $12 $3B
+    call IncrementEntityWalkingAttr                                    ; $7C67: $CD $12 $3B
 
 jr_017_7C6A:
     ret                                           ; $7C6A: $C9
@@ -7132,11 +7143,13 @@ jr_017_7C6A:
     inc  c                                        ; $7C7D: $0C
     jr   nz, jr_017_7C8D                          ; $7C7E: $20 $0D
 
+    ; Open Owl Speech dialog
     ld   a, $CF                                   ; $7C80: $3E $CF
-    call func_017_7CF0                            ; $7C82: $CD $F0 $7C
+    call CreditsOpenDialog                        ; $7C82: $CD $F0 $7C
+
     ld   a, $19                                   ; $7C85: $3E $19
     ld   [$C5AB], a                               ; $7C87: $EA $AB $C5
-    call $3B12                                    ; $7C8A: $CD $12 $3B
+    call IncrementEntityWalkingAttr                                    ; $7C8A: $CD $12 $3B
 
 func_017_7C8D:
 jr_017_7C8D:
@@ -7163,19 +7176,19 @@ jr_017_7C8D:
     and  a                                        ; $7CAB: $A7
     jr   nz, jr_017_7CB6                          ; $7CAC: $20 $08
 
-    call $0C05                                    ; $7CAE: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $7CAE: $CD $05 $0C
     ld   [hl], $FF                                ; $7CB1: $36 $FF
-    call $3B12                                    ; $7CB3: $CD $12 $3B
+    call IncrementEntityWalkingAttr                                    ; $7CB3: $CD $12 $3B
 
 jr_017_7CB6:
     ret                                           ; $7CB6: $C9
 
     call func_017_7C8D                            ; $7CB7: $CD $8D $7C
-    call $0C05                                    ; $7CBA: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $7CBA: $CD $05 $0C
     jr   nz, jr_017_7CC8                          ; $7CBD: $20 $09
 
 jr_017_7CBF:
-    call IncrementD00E                            ; $7CBF: $CD $D9 $4C
+    call IncrementCreditsSubscene                            ; $7CBF: $CD $D9 $4C
 
 label_017_7CC2:
     ld   hl, $C280                                ; $7CC2: $21 $80 $C2
@@ -7191,7 +7204,7 @@ jr_017_7CC8:
     jr   nz, jr_017_7CD4                          ; $7CCE: $20 $04
 
     ld   a, $26                                   ; $7CD0: $3E $26
-    ldh  [$FFF2], a                               ; $7CD2: $E0 $F2
+    ldh  [hJingle], a                               ; $7CD2: $E0 $F2
 
 jr_017_7CD4:
     ld   hl, $C2D0                                ; $7CD4: $21 $D0 $C2
@@ -7211,19 +7224,19 @@ jr_017_7CD4:
     jr   nc, jr_017_7CEF                          ; $7CE8: $30 $05
 
     ld   a, $FF                                   ; $7CEA: $3E $FF
-    call $3B0C                                    ; $7CEC: $CD $0C $3B
+    call label_3B0C                                    ; $7CEC: $CD $0C $3B
 
 jr_017_7CEF:
     ret                                           ; $7CEF: $C9
 
-func_017_7CF0:
+CreditsOpenDialog::
     ld   e, a                                     ; $7CF0: $5F
     ldh  a, [hLinkPositionY]                               ; $7CF1: $F0 $99
     push af                                       ; $7CF3: $F5
     ld   a, $10                                   ; $7CF4: $3E $10
     ldh  [hLinkPositionY], a                               ; $7CF6: $E0 $99
     ld   a, e                                     ; $7CF8: $7B
-    call $2385                                    ; $7CF9: $CD $85 $23
+    call OpenDialog                               ; $7CF9: $CD $85 $23
     pop  af                                       ; $7CFC: $F1
     ldh  [hLinkPositionY], a                               ; $7CFD: $E0 $99
     ret                                           ; $7CFF: $C9

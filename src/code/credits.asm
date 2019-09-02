@@ -1047,7 +1047,7 @@ IncrementCreditsGameplaySubtypeAndReturn::
 ; Owl speech, Wind Fish speech, song of awakening sequence
 CreditsWindFishHandler::
     ld   a, $80                                   ; $4C60: $3E $80
-    ld   [wIsBowWowFollowingLink], a                               ; $4C62: $EA $56 $DB
+    ld   [wIsBowWowFollowingLink], a              ; $4C62: $EA $56 $DB
     xor  a                                        ; $4C65: $AF
     ld   [wIsIndoor], a                           ; $4C66: $EA $A5 $DB
     ldh  [hRoomStatus], a                         ; $4C69: $E0 $F8
@@ -2057,24 +2057,24 @@ jr_017_55FC:
 CreditsInstrumentsPlayingHandler::
     ld   a, [$D000]                              ; $55FD: $FA $00 $D0
     JP_TABLE                                     ; $5600
-._00 dw Func_017_5665                             ; $5601
-._01 dw Func_017_56C9                             ; $5603
-._02 dw Func_017_5728                             ; $5605
-._03 dw Func_017_573D                             ; $5607
-._04 dw Func_017_5794                             ; $5609
-._05 dw Func_017_57A2                             ; $560B
-._06 dw Func_017_57F9                             ; $560D
-._07 dw Func_017_5807                             ; $560F
-._08 dw Func_017_583C                             ; $5611
-._09 dw Func_017_584A                             ; $5613
-._0A dw Func_017_58C3                             ; $5615
-._0B dw Func_017_58D1                             ; $5617
-._0C dw Func_017_58F0                             ; $5619
-._0D dw Func_017_58F8                             ; $561B
-._0E dw Func_017_590B                             ; $561D
-._0F dw Func_017_5938                             ; $561F
-._10 dw Func_017_5A66                             ; $5621
-._11 dw Func_017_5ACD                             ; $5623
+._00 dw Func_017_5665                            ; $5601
+._01 dw Func_017_56C9                            ; $5603
+._02 dw Func_017_5728                            ; $5605
+._03 dw Func_017_573D                            ; $5607
+._04 dw Func_017_5794                            ; $5609
+._05 dw Func_017_57A2                            ; $560B
+._06 dw Func_017_57F9                            ; $560D
+._07 dw Func_017_5807                            ; $560F
+._08 dw Func_017_583C                            ; $5611
+._09 dw Func_017_584A                            ; $5613
+._0A dw Func_017_58C3                            ; $5615
+._0B dw Func_017_58D1                            ; $5617
+._0C dw Func_017_58F0                            ; $5619
+._0D dw Func_017_58F8                            ; $561B
+._0E dw Func_017_590B                            ; $561D
+._0F dw Func_017_5938                            ; $561F
+._10 dw Func_017_5A66                            ; $5621
+._11 dw Func_017_5ACD                            ; $5623
 
 IncrementD000AndReturn::                         ; Sources: jp @ $5686, jp @ $5725, jp @ $5732, jp @ $5790, jp @ $579E, jp @ $57F5, jp @ $5803, jp @ $5838, jp @ $5846, jp @ $58BF, jp @ $58CD, jp @ $58EC, jp @ $58F5, jp @ $5907, jp @ $5935, jp @ $594C, jp @ $5ACA
     ld   hl, $D000                               ; $5625 (17): $21 $00 $D0

@@ -2081,16 +2081,15 @@ IncrementD000AndReturn::                         ; Sources: jp @ $5686, jp @ $57
     inc  [hl]                                    ; $5628 (17): $34
     ret                                          ; $5629 (17): $C9
 
-func_017_562A::
-    ld   e, $10                                   ; $562A: $1E $10
-    ld   hl, $C280                                ; $562C: $21 $80 $C2
+DisableAllEntities::
+    ; For each entity, set the state to 0 (ENTITY_STATE_DISABLED)
+    ld   e, MAX_ENTITIES                          ; $562A: $1E $10
+    ld   hl, wEntitiesStateTable                  ; $562C: $21 $80 $C2
     xor  a                                        ; $562F: $AF
-
-jr_017_5630:
+.loop
     ld   [hl+], a                                 ; $5630: $22
     dec  e                                        ; $5631: $1D
-    jr   nz, jr_017_5630                          ; $5632: $20 $FC
-
+    jr   nz, .loop                                ; $5632: $20 $FC
     ret                                           ; $5634: $C9
 
 Data_017_5635::
@@ -2122,7 +2121,7 @@ Func_017_5665::
     ld   [$DDD5], a                               ; $567D: $EA $D5 $DD
     xor  a                                        ; $5680: $AF
     ldh  [hBaseScrollY], a                               ; $5681: $E0 $97
-    call func_017_562A                            ; $5683: $CD $2A $56
+    call DisableAllEntities                       ; $5683: $CD $2A $56
     jp   IncrementD000AndReturn                       ; $5686: $C3 $25 $56
 
 jr_017_5689:
@@ -2261,7 +2260,7 @@ jr_017_5755:
     ld   [wBGMapToLoad], a                               ; $5757: $EA $FF $D6
 
 jr_017_575A:
-    call func_017_562A                            ; $575A: $CD $2A $56
+    call DisableAllEntities                       ; $575A: $CD $2A $56
     ld   a, $71                                   ; $575D: $3E $71
     call label_3B86                                    ; $575F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5762: $21 $00 $C2
@@ -2324,7 +2323,7 @@ jr_017_57BA:
     ld   [wBGMapToLoad], a                               ; $57BC: $EA $FF $D6
 
 jr_017_57BF:
-    call func_017_562A                            ; $57BF: $CD $2A $56
+    call DisableAllEntities                       ; $57BF: $CD $2A $56
     ld   a, $C5                                   ; $57C2: $3E $C5
     call label_3B86                                    ; $57C4: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $57C7: $21 $00 $C2
@@ -2386,7 +2385,7 @@ jr_017_581F:
     ld   [wBGMapToLoad], a                               ; $5821: $EA $FF $D6
 
 jr_017_5824:
-    call func_017_562A                            ; $5824: $CD $2A $56
+    call DisableAllEntities                       ; $5824: $CD $2A $56
     ld   a, $3F                                   ; $5827: $3E $3F
     call label_3B86                                    ; $5829: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $582C: $21 $00 $C2
@@ -2432,7 +2431,7 @@ jr_017_5862:
     ld   [wBGMapToLoad], a                               ; $5864: $EA $FF $D6
 
 jr_017_5867:
-    call func_017_562A                            ; $5867: $CD $2A $56
+    call DisableAllEntities                       ; $5867: $CD $2A $56
     ld   a, $3E                                   ; $586A: $3E $3E
     call label_3B86                                    ; $586C: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $586F: $21 $00 $C2
@@ -2502,7 +2501,7 @@ Func_017_58D1::
     ld   [wTileMapToLoad], a                               ; $58E1: $EA $FE $D6
     ld   a, $01                                   ; $58E4: $3E $01
     ld   [$DDD5], a                               ; $58E6: $EA $D5 $DD
-    call func_017_562A                            ; $58E9: $CD $2A $56
+    call DisableAllEntities                       ; $58E9: $CD $2A $56
     jp   IncrementD000AndReturn                                    ; $58EC: $C3 $25 $56
 
 jr_017_58EF:

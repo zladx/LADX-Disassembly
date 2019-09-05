@@ -1646,7 +1646,7 @@ jr_005_48AE:
     and  a                                        ; $48FF: $A7
     ret  nz                                       ; $4900: $C0
 
-    ld   a, [wPaletteUnknownA]                    ; $4901: $FA $D1 $DD
+    ld   a, [wPaletteDataFlags]                    ; $4901: $FA $D1 $DD
     and  a                                        ; $4904: $A7
     ret  nz                                       ; $4905: $C0
 
@@ -2325,7 +2325,7 @@ jr_005_4CB6:
     jr   nz, jr_005_4CB6                          ; $4CBC: $20 $F8
 
     ld   a, $02                                   ; $4CBE: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $4CC0: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $4CC0: $EA $D1 $DD
 
 jr_005_4CC3:
     jp   IncrementEntityWalkingAttr               ; $4CC3: $C3 $12 $3B

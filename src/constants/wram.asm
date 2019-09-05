@@ -1222,8 +1222,10 @@ wTunicType:: ; DC0F
 ; Unlabeled
 ds $DDD1 - $DC10
 
-; Unknown palette-related value
-wPaletteUnknownA:: ; DDD1
+wPaletteDataFlags:: ; DDD1
+  ; Palette flags for copying palettes to hardware
+  ; byte 0:   if enabled, palette data is for BG (otherwise for objects)
+  ; byte 2:   unknown
   ds 1
 
 wPaletteToLoadForTileMap:: ; DDD2

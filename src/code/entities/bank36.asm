@@ -139,7 +139,7 @@ jr_036_40B0:
 
     ei                                            ; $40B8: $FB
     ld   a, $02                                   ; $40B9: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $40BB: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $40BB: $EA $D1 $DD
     ld   a, $0B                                   ; $40BE: $3E $0B
     ldh  [hAnimatedTilesGroup], a                 ; $40C0: $E0 $A4
     jp   IncrementEntityWalkingAttr               ; $40C2: $C3 $12 $3B
@@ -1091,7 +1091,7 @@ jr_036_4650:
     jr   nz, jr_036_4650                          ; $465C: $20 $F2
 
     ld   a, $01                                   ; $465E: $3E $01
-    ld   [wPaletteUnknownA], a                    ; $4660: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $4660: $EA $D1 $DD
     ei                                            ; $4663: $FB
     ret                                           ; $4664: $C9
 
@@ -1111,7 +1111,7 @@ jr_036_466C:
     jr   nz, jr_036_466C                          ; $4676: $20 $F4
 
     ld   a, $01                                   ; $4678: $3E $01
-    ld   [wPaletteUnknownA], a                    ; $467A: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $467A: $EA $D1 $DD
     ei                                            ; $467D: $FB
     ret                                           ; $467E: $C9
 
@@ -1143,7 +1143,7 @@ jr_036_469A:
     jr   z, jr_036_46A9                           ; $46A1: $28 $06
 
     ld   a, $02                                   ; $46A3: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $46A5: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $46A5: $EA $D1 $DD
     ret                                           ; $46A8: $C9
 
 jr_036_46A9:
@@ -1157,7 +1157,7 @@ jr_036_46A9:
 
 jr_036_46B2:
     ld   a, $02                                   ; $46B2: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $46B4: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $46B4: $EA $D1 $DD
     ld   hl, wBGPalette                           ; $46B7: $21 $97 $DB
     ld   a, $E4                                   ; $46BA: $3E $E4
     ld   [hl+], a                                 ; $46BC: $22
@@ -2386,7 +2386,7 @@ jr_036_4D89:
     ld   [$DC8D], a                               ; $4DA0: $EA $8D $DC
     ld   [hl], $00                                ; $4DA3: $36 $00
     ld   a, $02                                   ; $4DA5: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $4DA7: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $4DA7: $EA $D1 $DD
     ld   hl, wEntitiesUnknowTableF                ; $4DAA: $21 $F0 $C2
     add  hl, bc                                   ; $4DAD: $09
     ld   [hl], $60                                ; $4DAE: $36 $60
@@ -3246,7 +3246,7 @@ jr_036_5297:
     or   e                                        ; $52AC: $B3
     ld   [hl], a                                  ; $52AD: $77
     ld   a, $02                                   ; $52AE: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $52B0: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $52B0: $EA $D1 $DD
     call func_036_51DF                            ; $52B3: $CD $DF $51
     ld   hl, wEntitiesUnknownTableD               ; $52B6: $21 $D0 $C2
     add  hl, bc                                   ; $52B9: $09
@@ -3558,7 +3558,7 @@ jr_036_542F:
     jr   nz, jr_036_542F                          ; $5439: $20 $F4
 
     ld   a, $01                                   ; $543B: $3E $01
-    ld   [wPaletteUnknownA], a                    ; $543D: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $543D: $EA $D1 $DD
     ei                                            ; $5440: $FB
     ld   a, $3A                                   ; $5441: $3E $3A
     ldh  [hLinkPositionY], a                      ; $5443: $E0 $99
@@ -8185,7 +8185,7 @@ jr_036_6D00:
     ld   bc, $0008                                ; $6D6C: $01 $08 $00
     call CopyData                                 ; $6D6F: $CD $14 $29
     ld   a, $01                                   ; $6D72: $3E $01
-    ld   [wPaletteUnknownA], a                    ; $6D74: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6D74: $EA $D1 $DD
     ret                                           ; $6D77: $C9
 
 jr_036_6D78:
@@ -8217,7 +8217,7 @@ jr_036_6D8E:
 jr_036_6D9E:
     call CopyData                                 ; $6D9E: $CD $14 $29
     ld   a, $02                                   ; $6DA1: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $6DA3: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6DA3: $EA $D1 $DD
     ret                                           ; $6DA6: $C9
 
     rst  $38                                      ; $6DA7: $FF
@@ -8746,7 +8746,7 @@ jr_036_7044:
     jr   nz, jr_036_7044                          ; $704A: $20 $F8
 
     ld   a, $02                                   ; $704C: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $704E: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $704E: $EA $D1 $DD
     ret                                           ; $7051: $C9
 
     ld   [$0818], sp                              ; $7052: $08 $18 $08
@@ -8888,7 +8888,7 @@ jr_036_70F3:
     jr   nz, jr_036_70F3                          ; $70F9: $20 $F8
 
     ld   a, $02                                   ; $70FB: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $70FD: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $70FD: $EA $D1 $DD
     ret                                           ; $7100: $C9
 
 label_036_7101:
@@ -9179,7 +9179,7 @@ jr_036_72A9:
     ld   [hl], a                                  ; $72B8: $77
     ret                                           ; $72B9: $C9
 
-    ld   a, [wPaletteUnknownA]                    ; $72BA: $FA $D1 $DD
+    ld   a, [wPaletteDataFlags]                    ; $72BA: $FA $D1 $DD
     and  a                                        ; $72BD: $A7
     ret  nz                                       ; $72BE: $C0
 

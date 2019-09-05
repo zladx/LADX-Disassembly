@@ -5207,14 +5207,14 @@ LoadRoom::
 
     callsb ResetRoomVariables
 
+    ; If running on GBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .GBCEnd
-    ld   a, $21
-    ld   [MBC3SelectBank], a
-    call $40B3
+    jr   z, .gbcEnd
+    ; load palettes.
+    callsb Func_021_40B3
     callsb func_020_6DAF
-.GBCEnd
+.gbcEnd
 
     ;
     ; Load map pointers bank
@@ -5542,10 +5542,8 @@ LoadRoom::
     ; do stuff that returns early if end-of-room
     call $6D4D
 
-    ld   a, $21
-    ld   [MBC3SelectBank], a
-    ; stuff that returns early when DBA5 is 0
-    call $53F3
+    ; Load palette for room objects?
+    callsb Func_021_53F3
 
     ; Reload saved bank and return
     jp   ReloadSavedBank

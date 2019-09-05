@@ -1054,7 +1054,7 @@ jr_019_467B:
     jr   nz, jr_019_467B                          ; $4683: $20 $F6
 
     ld   a, $02                                   ; $4685: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $4687: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $4687: $EA $D1 $DD
     call IncrementEntityWalkingAttr               ; $468A: $CD $12 $3B
     ld   [hl], $03                                ; $468D: $36 $03
     ret                                           ; $468F: $C9
@@ -1784,7 +1784,7 @@ jr_019_4AAD:
     jr   nz, jr_019_4AAD                          ; $4AB3: $20 $F8
 
     ld   a, $02                                   ; $4AB5: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $4AB7: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $4AB7: $EA $D1 $DD
     ret                                           ; $4ABA: $C9
 
     ld   h, b                                     ; $4ABB: $60
@@ -2143,7 +2143,7 @@ jr_019_4CD6:
     jr   nz, jr_019_4CD6                          ; $4CE0: $20 $F4
 
     ld   a, $02                                   ; $4CE2: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $4CE4: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $4CE4: $EA $D1 $DD
     jp   label_019_7E61                           ; $4CE7: $C3 $61 $7E
 
 label_019_4CEA:
@@ -8053,7 +8053,7 @@ jr_019_6D86:
     ld   a, $52                                   ; $6DCC: $3E $52
     ld   [hl+], a                                 ; $6DCE: $22
     ld   a, $02                                   ; $6DCF: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $6DD1: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6DD1: $EA $D1 $DD
 
 jr_019_6DD4:
     call GetEntityTransitionCountdown             ; $6DD4: $CD $05 $0C

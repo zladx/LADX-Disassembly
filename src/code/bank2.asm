@@ -1881,7 +1881,7 @@ jr_002_4E37:
 
     ei                                            ; $4E40: $FB
     ld   a, $02                                   ; $4E41: $3E $02
-    ld   [wPaletteUnknownA], a                               ; $4E43: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                               ; $4E43: $EA $D1 $DD
     pop  bc                                       ; $4E46: $C1
     ret                                           ; $4E47: $C9
 
@@ -1907,7 +1907,7 @@ func_002_4E48::
 
     ei                                            ; $4E5F: $FB
     ld   a, $02                                   ; $4E60: $3E $02
-    ld   [wPaletteUnknownA], a                               ; $4E62: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                               ; $4E62: $EA $D1 $DD
     ret                                           ; $4E65: $C9
 
     ld   d, b                                     ; $4E66: $50

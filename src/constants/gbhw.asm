@@ -118,6 +118,6 @@ rUNKN3      EQU $ff73 ; (00h) - Bit 0-7 (Read/Write)
 rUNKN4      EQU $ff74 ; (00h) - Bit 0-7 (Read/Write) - CGB Mode Only
 rUNKN5      EQU $ff75 ; (8Fh) - Bit 4-6 (Read/Write)
 rPCM12      EQU $ff76 ; (00h) - Always 00h (Read Only)
-rUNKN7      EQU $ff77 ; (00h) - Always 00h (Read Only)
+rPCM34      EQU $ff77 ; (00h) - Always 00h (Read Only)
 rIE         EQU $ffff ; Interrupt Enable (R/W)
 

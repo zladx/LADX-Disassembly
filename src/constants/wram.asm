@@ -1222,7 +1222,7 @@ wTunicType:: ; DC0F
 ; Unlabeled
 ds $DDD1 - $DC10
 
-; Unknown palette-related value
+; Palette flags
 wPaletteUnknownA:: ; DDD1
   ds 1
 

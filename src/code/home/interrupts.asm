@@ -369,13 +369,15 @@ label_52B::
     ld   a, $36
     ld   [MBC3SelectBank], a
     call $72BA
+
     call hDMARoutine
+
+    ; If on GBC…
     ldh  a, [hIsGBC]
     and  a
     jr   z, WaitForVBlankAndReturn
-    ld   a, $21
-    ld   [MBC3SelectBank], a
-    call $4000
+    callsb CopyPalettesToHardware
+    ; Restore the current bank
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
 

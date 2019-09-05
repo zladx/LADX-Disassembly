@@ -298,12 +298,11 @@ RenderPalettes::
     ldh  a, [hIsGBC]
     and  a
     jr   z, .clearPaletteToLoad
-    ; Load palette set defined in wPaletteToLoadForTileMap
-    ld   a, $21
-    call SwitchBank
-    call $406E
+    ; load pending tilemap palette.
+    callsw LoadPaletteForTilemap
 
 .clearPaletteToLoad
+    ; Clear the palette to be loaded anyway
     xor  a
     ld   [wPaletteToLoadForTileMap], a
 

@@ -602,8 +602,8 @@ jr_017_4846:
     and  a                                        ; $484C: $A7
     jr   nz, jr_017_485D                          ; $484D: $20 $0E
 
-    ld   a, $21                                   ; $484F: $3E $21
-    ldh  [hJingle], a                               ; $4851: $E0 $F2
+    ld   a, JINGLE_SEAGULL                        ; $484F: $3E $21
+    ldh  [hJingle], a                             ; $4851: $E0 $F2
     call GetRandomByte                            ; $4853: $CD $0D $28
     and  $7F                                      ; $4856: $E6 $7F
     add  $50                                      ; $4858: $C6 $50
@@ -5302,8 +5302,8 @@ jr_017_72A6:
     and  $7F                                      ; $72B4: $E6 $7F
     jr   nz, jr_017_72BC                          ; $72B6: $20 $04
 
-    ld   a, $21                                   ; $72B8: $3E $21
-    ldh  [hJingle], a                               ; $72BA: $E0 $F2
+    ld   a, JINGLE_SEAGULL                        ; $72B8: $3E $21
+    ldh  [hJingle], a                             ; $72BA: $E0 $F2
 
 jr_017_72BC:
     ret                                           ; $72BC: $C9

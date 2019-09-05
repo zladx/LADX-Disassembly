@@ -8,8 +8,11 @@ cd "$ROOT_DIR"
 
 # Generate the ROM and the debug symbols if not found
 if ! [[ -f game.gbc ]] || ! [[ -f game.sym ]]; then
-  make
+  make game.gbc
 fi
+
+# Ensure the built ROM is correct
+make test
 
 # Retrieve the disassembler submodule if not initialized yet
 if ! [[ -f tools/mgbdis/mgbdis.py ]]; then

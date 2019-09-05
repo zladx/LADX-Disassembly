@@ -602,8 +602,8 @@ jr_017_4846:
     and  a                                        ; $484C: $A7
     jr   nz, jr_017_485D                          ; $484D: $20 $0E
 
-    ld   a, $21                                   ; $484F: $3E $21
-    ldh  [hJingle], a                               ; $4851: $E0 $F2
+    ld   a, JINGLE_SEAGULL                        ; $484F: $3E $21
+    ldh  [hJingle], a                             ; $4851: $E0 $F2
     call GetRandomByte                            ; $4853: $CD $0D $28
     and  $7F                                      ; $4856: $E6 $7F
     add  $50                                      ; $4858: $C6 $50
@@ -1047,7 +1047,7 @@ IncrementCreditsGameplaySubtypeAndReturn::
 ; Owl speech, Wind Fish speech, song of awakening sequence
 CreditsWindFishHandler::
     ld   a, $80                                   ; $4C60: $3E $80
-    ld   [wIsBowWowFollowingLink], a                               ; $4C62: $EA $56 $DB
+    ld   [wIsBowWowFollowingLink], a              ; $4C62: $EA $56 $DB
     xor  a                                        ; $4C65: $AF
     ld   [wIsIndoor], a                           ; $4C66: $EA $A5 $DB
     ldh  [hRoomStatus], a                         ; $4C69: $E0 $F8
@@ -2057,40 +2057,39 @@ jr_017_55FC:
 CreditsInstrumentsPlayingHandler::
     ld   a, [$D000]                              ; $55FD: $FA $00 $D0
     JP_TABLE                                     ; $5600
-._00 dw Func_017_5665                             ; $5601
-._01 dw Func_017_56C9                             ; $5603
-._02 dw Func_017_5728                             ; $5605
-._03 dw Func_017_573D                             ; $5607
-._04 dw Func_017_5794                             ; $5609
-._05 dw Func_017_57A2                             ; $560B
-._06 dw Func_017_57F9                             ; $560D
-._07 dw Func_017_5807                             ; $560F
-._08 dw Func_017_583C                             ; $5611
-._09 dw Func_017_584A                             ; $5613
-._0A dw Func_017_58C3                             ; $5615
-._0B dw Func_017_58D1                             ; $5617
-._0C dw Func_017_58F0                             ; $5619
-._0D dw Func_017_58F8                             ; $561B
-._0E dw Func_017_590B                             ; $561D
-._0F dw Func_017_5938                             ; $561F
-._10 dw Func_017_5A66                             ; $5621
-._11 dw Func_017_5ACD                             ; $5623
+._00 dw Func_017_5665                            ; $5601
+._01 dw Func_017_56C9                            ; $5603
+._02 dw Func_017_5728                            ; $5605
+._03 dw Func_017_573D                            ; $5607
+._04 dw Func_017_5794                            ; $5609
+._05 dw Func_017_57A2                            ; $560B
+._06 dw Func_017_57F9                            ; $560D
+._07 dw Func_017_5807                            ; $560F
+._08 dw Func_017_583C                            ; $5611
+._09 dw Func_017_584A                            ; $5613
+._0A dw Func_017_58C3                            ; $5615
+._0B dw Func_017_58D1                            ; $5617
+._0C dw Func_017_58F0                            ; $5619
+._0D dw Func_017_58F8                            ; $561B
+._0E dw Func_017_590B                            ; $561D
+._0F dw Func_017_5938                            ; $561F
+._10 dw Func_017_5A66                            ; $5621
+._11 dw Func_017_5ACD                            ; $5623
 
 IncrementD000AndReturn::                         ; Sources: jp @ $5686, jp @ $5725, jp @ $5732, jp @ $5790, jp @ $579E, jp @ $57F5, jp @ $5803, jp @ $5838, jp @ $5846, jp @ $58BF, jp @ $58CD, jp @ $58EC, jp @ $58F5, jp @ $5907, jp @ $5935, jp @ $594C, jp @ $5ACA
     ld   hl, $D000                               ; $5625 (17): $21 $00 $D0
     inc  [hl]                                    ; $5628 (17): $34
     ret                                          ; $5629 (17): $C9
 
-func_017_562A::
-    ld   e, $10                                   ; $562A: $1E $10
-    ld   hl, $C280                                ; $562C: $21 $80 $C2
+DisableAllEntities::
+    ; For each entity, set the state to 0 (ENTITY_STATE_DISABLED)
+    ld   e, MAX_ENTITIES                          ; $562A: $1E $10
+    ld   hl, wEntitiesStateTable                  ; $562C: $21 $80 $C2
     xor  a                                        ; $562F: $AF
-
-jr_017_5630:
+.loop
     ld   [hl+], a                                 ; $5630: $22
     dec  e                                        ; $5631: $1D
-    jr   nz, jr_017_5630                          ; $5632: $20 $FC
-
+    jr   nz, .loop                                ; $5632: $20 $FC
     ret                                           ; $5634: $C9
 
 Data_017_5635::
@@ -2122,7 +2121,7 @@ Func_017_5665::
     ld   [$DDD5], a                               ; $567D: $EA $D5 $DD
     xor  a                                        ; $5680: $AF
     ldh  [hBaseScrollY], a                               ; $5681: $E0 $97
-    call func_017_562A                            ; $5683: $CD $2A $56
+    call DisableAllEntities                       ; $5683: $CD $2A $56
     jp   IncrementD000AndReturn                       ; $5686: $C3 $25 $56
 
 jr_017_5689:
@@ -2261,7 +2260,7 @@ jr_017_5755:
     ld   [wBGMapToLoad], a                               ; $5757: $EA $FF $D6
 
 jr_017_575A:
-    call func_017_562A                            ; $575A: $CD $2A $56
+    call DisableAllEntities                       ; $575A: $CD $2A $56
     ld   a, $71                                   ; $575D: $3E $71
     call label_3B86                                    ; $575F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5762: $21 $00 $C2
@@ -2324,7 +2323,7 @@ jr_017_57BA:
     ld   [wBGMapToLoad], a                               ; $57BC: $EA $FF $D6
 
 jr_017_57BF:
-    call func_017_562A                            ; $57BF: $CD $2A $56
+    call DisableAllEntities                       ; $57BF: $CD $2A $56
     ld   a, $C5                                   ; $57C2: $3E $C5
     call label_3B86                                    ; $57C4: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $57C7: $21 $00 $C2
@@ -2386,7 +2385,7 @@ jr_017_581F:
     ld   [wBGMapToLoad], a                               ; $5821: $EA $FF $D6
 
 jr_017_5824:
-    call func_017_562A                            ; $5824: $CD $2A $56
+    call DisableAllEntities                       ; $5824: $CD $2A $56
     ld   a, $3F                                   ; $5827: $3E $3F
     call label_3B86                                    ; $5829: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $582C: $21 $00 $C2
@@ -2432,7 +2431,7 @@ jr_017_5862:
     ld   [wBGMapToLoad], a                               ; $5864: $EA $FF $D6
 
 jr_017_5867:
-    call func_017_562A                            ; $5867: $CD $2A $56
+    call DisableAllEntities                       ; $5867: $CD $2A $56
     ld   a, $3E                                   ; $586A: $3E $3E
     call label_3B86                                    ; $586C: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $586F: $21 $00 $C2
@@ -2502,7 +2501,7 @@ Func_017_58D1::
     ld   [wTileMapToLoad], a                               ; $58E1: $EA $FE $D6
     ld   a, $01                                   ; $58E4: $3E $01
     ld   [$DDD5], a                               ; $58E6: $EA $D5 $DD
-    call func_017_562A                            ; $58E9: $CD $2A $56
+    call DisableAllEntities                       ; $58E9: $CD $2A $56
     jp   IncrementD000AndReturn                                    ; $58EC: $C3 $25 $56
 
 jr_017_58EF:
@@ -5303,8 +5302,8 @@ jr_017_72A6:
     and  $7F                                      ; $72B4: $E6 $7F
     jr   nz, jr_017_72BC                          ; $72B6: $20 $04
 
-    ld   a, $21                                   ; $72B8: $3E $21
-    ldh  [hJingle], a                               ; $72BA: $E0 $F2
+    ld   a, JINGLE_SEAGULL                        ; $72B8: $3E $21
+    ldh  [hJingle], a                             ; $72BA: $E0 $F2
 
 jr_017_72BC:
     ret                                           ; $72BC: $C9

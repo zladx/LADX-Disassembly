@@ -6043,7 +6043,7 @@ jr_020_5EE1:
     jr   nz, jr_020_5EE1                          ; $5EE7: $20 $F8
 
     ld   a, $01                                   ; $5EE9: $3E $01
-    ld   [wPaletteUnknownA], a                    ; $5EEB: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $5EEB: $EA $D1 $DD
 
 jr_020_5EEE:
     ret                                           ; $5EEE: $C9
@@ -8373,7 +8373,7 @@ jr_020_6A9F:
     jr   nz, jr_020_6A68                          ; $6AB9: $20 $AD
 
     ld   a, $03                                   ; $6ABB: $3E $03
-    ld   [wPaletteUnknownA], a                    ; $6ABD: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6ABD: $EA $D1 $DD
     ret                                           ; $6AC0: $C9
 
 func_020_6AC1::
@@ -8526,7 +8526,7 @@ jr_020_6B5C:
     jp   nz, label_020_6AF5                       ; $6B79: $C2 $F5 $6A
 
     ld   a, $03                                   ; $6B7C: $3E $03
-    ld   [wPaletteUnknownA], a                    ; $6B7E: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6B7E: $EA $D1 $DD
 
 label_020_6B81:
     xor  a                                        ; $6B81: $AF
@@ -8596,7 +8596,7 @@ jr_020_6BC3:
     jr   nz, jr_020_6BC3                          ; $6BD4: $20 $ED
 
     ld   a, $01                                   ; $6BD6: $3E $01
-    ld   [wPaletteUnknownA], a                    ; $6BD8: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6BD8: $EA $D1 $DD
 
 jr_020_6BDB:
     ret                                           ; $6BDB: $C9
@@ -8624,7 +8624,7 @@ jr_020_6BE8:
     jr   nz, jr_020_6BE8                          ; $6BF3: $20 $F3
 
     ld   a, $03                                   ; $6BF5: $3E $03
-    ld   [wPaletteUnknownA], a                    ; $6BF7: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6BF7: $EA $D1 $DD
     ld   a, $01                                   ; $6BFA: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6BFC: $EA $D5 $DD
     ret                                           ; $6BFF: $C9
@@ -8651,7 +8651,7 @@ jr_020_6C0B:
     jr   nz, jr_020_6C0B                          ; $6C18: $20 $F1
 
     ld   a, $03                                   ; $6C1A: $3E $03
-    ld   [wPaletteUnknownA], a                    ; $6C1C: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6C1C: $EA $D1 $DD
     xor  a                                        ; $6C1F: $AF
     ld   [wPaletteUnknownE], a                    ; $6C20: $EA $D5 $DD
     ret                                           ; $6C23: $C9
@@ -8717,7 +8717,7 @@ jr_020_6C60:
     ld   a, $01                                   ; $6C74: $3E $01
 
 jr_020_6C76:
-    ld   [wPaletteUnknownA], a                    ; $6C76: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6C76: $EA $D1 $DD
     ret                                           ; $6C79: $C9
 
     ldh  a, [hIsGBC]                              ; $6C7A: $F0 $FE
@@ -8745,7 +8745,7 @@ jr_020_6C8B:
     ld   a, $01                                   ; $6CA1: $3E $01
 
 jr_020_6CA3:
-    ld   [wPaletteUnknownA], a                    ; $6CA3: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6CA3: $EA $D1 $DD
     ret                                           ; $6CA6: $C9
 
     ld   a, [$C3CA]                               ; $6CA7: $FA $CA $C3
@@ -8760,7 +8760,7 @@ jr_020_6CA3:
 
 jr_020_6CB5:
     or   $80                                      ; $6CB5: $F6 $80
-    ld   [wPaletteUnknownA], a                    ; $6CB7: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6CB7: $EA $D1 $DD
     ld   a, [$C3CA]                               ; $6CBA: $FA $CA $C3
     and  $01                                      ; $6CBD: $E6 $01
     swap a                                        ; $6CBF: $CB $37
@@ -8783,11 +8783,11 @@ jr_020_6CB5:
     cp   $03                                      ; $6CE4: $FE $03
     jr   z, jr_020_6CFA                           ; $6CE6: $28 $12
 
-    ld   a, [wPaletteUnknownA]                    ; $6CE8: $FA $D1 $DD
+    ld   a, [wPaletteDataFlags]                    ; $6CE8: $FA $D1 $DD
     push af                                       ; $6CEB: $F5
     call func_020_6A30                            ; $6CEC: $CD $30 $6A
     pop  af                                       ; $6CEF: $F1
-    ld   [wPaletteUnknownA], a                    ; $6CF0: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6CF0: $EA $D1 $DD
     ld   a, $01                                   ; $6CF3: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6CF5: $EA $D5 $DD
     jr   jr_020_6D0D                              ; $6CF8: $18 $13
@@ -8798,11 +8798,11 @@ jr_020_6CFA:
     and  $03                                      ; $6CFE: $E6 $03
     jr   nz, jr_020_6D0D                          ; $6D00: $20 $0B
 
-    ld   a, [wPaletteUnknownA]                    ; $6D02: $FA $D1 $DD
+    ld   a, [wPaletteDataFlags]                    ; $6D02: $FA $D1 $DD
     push af                                       ; $6D05: $F5
     call func_020_6AF5                            ; $6D06: $CD $F5 $6A
     pop  af                                       ; $6D09: $F1
-    ld   [wPaletteUnknownA], a                    ; $6D0A: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6D0A: $EA $D1 $DD
 
 jr_020_6D0D:
     ret                                           ; $6D0D: $C9
@@ -8849,7 +8849,7 @@ jr_020_6D38:
     ld   a, $01                                   ; $6D4C: $3E $01
 
 jr_020_6D4E:
-    ld   [wPaletteUnknownA], a                    ; $6D4E: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6D4E: $EA $D1 $DD
 
 jr_020_6D51:
     ret                                           ; $6D51: $C9
@@ -8868,7 +8868,7 @@ jr_020_6D60:
     ld   a, $01                                   ; $6D63: $3E $01
 
 jr_020_6D65:
-    ld   [wPaletteUnknownA], a                    ; $6D65: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $6D65: $EA $D1 $DD
 
 jr_020_6D68:
     push hl                                       ; $6D68: $E5
@@ -11637,7 +11637,7 @@ jr_020_78CC:
     ld   a, $1C                                   ; $790A: $3E $1C
     ld   [wPaletteUnknownD], a                    ; $790C: $EA $D4 $DD
     ld   a, $81                                   ; $790F: $3E $81
-    ld   [wPaletteUnknownA], a                    ; $7911: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $7911: $EA $D1 $DD
     ret                                           ; $7914: $C9
 
     nop                                           ; $7915: $00
@@ -12527,7 +12527,7 @@ jr_020_7C5B:
     xor  a                                        ; $7C5E: $AF
     ld   [wPaletteUnknownC], a                    ; $7C5F: $EA $D3 $DD
     ld   a, $81                                   ; $7C62: $3E $81
-    ld   [wPaletteUnknownA], a                    ; $7C64: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $7C64: $EA $D1 $DD
     ret                                           ; $7C67: $C9
 
     nop                                           ; $7C68: $00
@@ -12734,7 +12734,7 @@ jr_020_7D74:
     ld   d, $24                                   ; $7D8B: $16 $24
     call func_020_7D97                            ; $7D8D: $CD $97 $7D
     ld   a, $01                                   ; $7D90: $3E $01
-    ld   [wPaletteUnknownA], a                    ; $7D92: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $7D92: $EA $D1 $DD
     xor  a                                        ; $7D95: $AF
     ret                                           ; $7D96: $C9
 

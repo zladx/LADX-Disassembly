@@ -6547,7 +6547,7 @@ jr_007_65B9:
     jr   nz, jr_007_65B9                          ; $65C3: $20 $F4
 
     ld   a, $01                                   ; $65C5: $3E $01
-    ld   [wPaletteUnknownA], a                    ; $65C7: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $65C7: $EA $D1 $DD
     ei                                            ; $65CA: $FB
 
 jr_007_65CB:

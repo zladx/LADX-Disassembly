@@ -685,7 +685,7 @@ jr_014_4BBE:
     ld   a, $02                                   ; $4BD4: $3E $02
 
 jr_014_4BD6:
-    ld   [wPaletteUnknownA], a                    ; $4BD6: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $4BD6: $EA $D1 $DD
     ret                                           ; $4BD9: $C9
 
 func_014_4BDA:
@@ -728,7 +728,7 @@ jr_014_4C04:
     ld   hl, $DC50                                ; $4C04: $21 $50 $DC
     call func_014_4C10                            ; $4C07: $CD $10 $4C
     ld   a, $02                                   ; $4C0A: $3E $02
-    ld   [wPaletteUnknownA], a                    ; $4C0C: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $4C0C: $EA $D1 $DD
     ret                                           ; $4C0F: $C9
 
 func_014_4C10:
@@ -990,7 +990,7 @@ jr_014_4D4A:
     ld   a, $10                                   ; $4D54: $3E $10
     ld   [wPaletteUnknownD], a                    ; $4D56: $EA $D4 $DD
     ld   a, $81                                   ; $4D59: $3E $81
-    ld   [wPaletteUnknownA], a                    ; $4D5B: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                    ; $4D5B: $EA $D1 $DD
     ld   a, [$DDD7]                               ; $4D5E: $FA $D7 $DD
     and  a                                        ; $4D61: $A7
     ret  nz                                       ; $4D62: $C0

@@ -144,10 +144,8 @@ include "code/entities/bank19.asm"
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"
-OverworldPalettesPointers::
-incbin "data/palette_pointers/overworld_pointers.bin"
-OverworldPalettesBanks::
-incbin "data/palette_pointers/overworld_banks.bin"
+include "data/palette_pointers/overworld_pointers.asm"
+include "data/palette_pointers/overworld_banks.asm"
 include "code/bank1A/map_loading.asm"
 OverworldBaseMapDMG::
 incbin "data/base_maps/overworld.dmg.bin"

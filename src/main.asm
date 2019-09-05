@@ -183,6 +183,9 @@ include "code/bank20.asm"
 section "bank21",romx[$4000],bank[$21]
 include "code/palettes.asm"
 
+section "bank22",romx[$4000],bank[$22]
+include "data/palette_pointers/overworld_lists.asm"
+
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"
 incbin "gfx/photos/photo_marin_cliff.2bpp"

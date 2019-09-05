@@ -36,7 +36,7 @@
 1F SFX code and Music
 20 Map loading code; Walls pointers table; Overworld tileset pointers (0x82E7B), inventory code
 21 Code and data
-22 Overworld tilemap palettes (see OverworldPalettesBanks)
+22 Overworld palettes lists
 23 Indoor palettes
 24 Indoor palettes; code for some overworld objects
 25 Overworld tilemaps (00 -> CB)

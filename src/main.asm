@@ -186,6 +186,13 @@ include "code/palettes.asm"
 section "bank22",romx[$4000],bank[$22]
 include "data/palette_pointers/overworld_lists.asm"
 
+section "bank23",romx[$4000],bank[$23]
+include "data/palette_pointers/indoors_lists_a.asm"
+
+section "bank24",romx[$4000],bank[$24]
+include "data/palette_pointers/indoors_lists_b.asm"
+; TODO: add missing code and data
+
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"
 incbin "gfx/photos/photo_marin_cliff.2bpp"

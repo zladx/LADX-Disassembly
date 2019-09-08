@@ -49,7 +49,7 @@ ConfigureRoomPalettes::
     and  a                                        ; $659A: $A7
     jp   z, .indoorPaletteEnd                     ; $659B: $CA $30 $66
 
-    ld   a, $23                                   ; $659E: $3E $23
+    ld   a, BANK(IndoorsPalettesListsA)           ; $659E: $3E $23
     ldh  [hRoomPaletteBank], a                    ; $65A0: $E0 $DF
     inc  h                                        ; $65A2: $24
     inc  h                                        ; $65A3: $24
@@ -157,7 +157,7 @@ ConfigureRoomPalettes::
     jr   z, .jr_01A_662E                          ; $6628: $28 $04
 
 .useSecondaryIndoorsPaletteBank
-    ld   a, $24                                   ; $662A: $3E $24
+    ld   a, BANK(IndoorsPalettesListsB)           ; $662A: $3E $24
     ldh  [hRoomPaletteBank], a                    ; $662C: $E0 $DF
 
 .jr_01A_662E

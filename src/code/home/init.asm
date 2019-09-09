@@ -50,13 +50,10 @@ Init::
     ld   bc, $1800
     call ClearBytes
 
-    ; Clear Tiles Map 1 (if GBC)
-    ld   a, $24
-    ld   [MBC3SelectBank], a
-    call $5C00
-
-    ; Clear Background Map
+    ; Clear Background Maps
+    callsb ClearBGMap0Attributes
     call ClearBGMap
+
     call ClearHRAMAndWRAM
 
     ; Copy DMA routine to HRAM

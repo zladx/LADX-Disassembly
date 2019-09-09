@@ -191,7 +191,8 @@ include "data/palette_pointers/indoors_lists_a.asm"
 
 section "bank24",romx[$4000],bank[$24]
 include "data/palette_pointers/indoors_lists_b.asm"
-; TODO: add missing code and data
+include "code/background_colors.asm"
+include "code/overworld_macros.asm"
 
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"

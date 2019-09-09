@@ -438,7 +438,7 @@ label_A8F::
 
 label_A9B::
     push af
-    ld   a, $0F
+    ld   a, BANK(FontTiles)
     call SwitchBank
     call ExecuteDialog
     jp   RestoreStackedBankAndReturn
@@ -449,19 +449,17 @@ label_AA7::
     call SwitchBank
     call $705A
 
-label_AB0::
+RestoreStackedBank::
     pop  af
     call SwitchBank
     ret
 
 label_AB5::
     push af
-    ld   a, $24
-    ld   [MBC3SelectBank], a
-    call $5C1A
+    callsb Func_024_5C1A
     ld   de, wRequest
     call ExecuteBackgroundCopyRequest
-    jr   label_AB0
+    jr   RestoreStackedBank
 
 label_AC6::
     push af
@@ -1399,22 +1397,24 @@ label_1012::
     call $54F8
 
 returnFromGameplayHandler::
-    ld   a, $0F
+    ; Present dialog if needed
+    ld   a, BANK(FontTiles)
     call SwitchBank
-
-label_101F::
     call ExecuteDialog
+
+    ; If on DMG, return now to the main game loop
     ldh  a, [hIsGBC]
     and  a
     ret  z
-    ld   a, $24
+
+    ; Load Background palettes if needed
+    ; (and then return to the main game loop)
+    ld   a, BANK(LoadBGPalettes)
     call SwitchBank
-    ; will return to main game loop
-    jp   $7405
+    jp   LoadBGPalettes
 
 label_102E::
-    ld   [$990E], sp
-    jr   z, label_101F
+    db $08, $0E, $99, $28, $EC
 
 ApplyGotItem::
     ldh  a, [hLinkPositionY]
@@ -5609,10 +5609,8 @@ LoadRoomObject::
     ld   e, a
     ; (re-increment bc to be at the object type again)
     inc  bc
-    ; Call $7578 (handle Overworld macro)
-    ld   a, $24
-    ld   [MBC3SelectBank], a
-    call $7578
+    ; Handle the macro
+    callsb ApplyOverworldObjectMacro
     call SetBankForRoom
     ; Return early
     ret

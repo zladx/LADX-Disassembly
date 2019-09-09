@@ -1222,6 +1222,9 @@ wTunicType:: ; DC0F
 ; Unlabeled
 ds $DDD1 - $DC10
 
+; DC10: palette data?
+; DC30: palette data?
+
 wPaletteDataFlags:: ; DDD1
   ; Palette flags for copying palettes to hardware
   ; byte 0:   if enabled, palette data is for BG (otherwise for objects)

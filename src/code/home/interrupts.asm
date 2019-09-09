@@ -165,10 +165,7 @@ LoadMapData::
     ; Special case for loading map n° 0
 .LoadMapZero:
     call LCDOff
-    ; Do some GBC-only stuff (calls 24:5C2C)
-    ld   a, $24
-    ld   [MBC3SelectBank], a
-    call $5C2C
+    callsb LoadBGMapAttributes
 
     ; Manipulate wBGMapToLoad
     callsb func_020_4577

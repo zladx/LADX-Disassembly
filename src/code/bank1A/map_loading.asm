@@ -49,7 +49,7 @@ ConfigureRoomPalettes::
     and  a                                        ; $659A: $A7
     jp   z, .indoorPaletteEnd                     ; $659B: $CA $30 $66
 
-    ld   a, $23                                   ; $659E: $3E $23
+    ld   a, BANK(IndoorsPalettesListsA)           ; $659E: $3E $23
     ldh  [hRoomPaletteBank], a                    ; $65A0: $E0 $DF
     inc  h                                        ; $65A2: $24
     inc  h                                        ; $65A3: $24
@@ -92,7 +92,7 @@ ConfigureRoomPalettes::
 
 .jr_01A_65D5
     ld   c, $1E                                   ; $65D5: $0E $1E
-    jr   .jr_01A_662A                             ; $65D7: $18 $51
+    jr   .useSecondaryIndoorsPaletteBank          ; $65D7: $18 $51
 
 .jr_01A_65D9
     ldh  a, [hMapId]                              ; $65D9: $F0 $F7
@@ -104,7 +104,7 @@ ConfigureRoomPalettes::
     jr   nz, .jr_01A_65E9                         ; $65E3: $20 $04
 
     ld   c, $00                                   ; $65E5: $0E $00
-    jr   .jr_01A_662A                             ; $65E7: $18 $41
+    jr   .useSecondaryIndoorsPaletteBank          ; $65E7: $18 $41
 
 .jr_01A_65E9
     ldh  a, [hMapId]                              ; $65E9: $F0 $F7
@@ -120,7 +120,7 @@ ConfigureRoomPalettes::
 
 .jr_01A_65F9
     ld   c, $28                                   ; $65F9: $0E $28
-    jr   .jr_01A_662A                             ; $65FB: $18 $2D
+    jr   .useSecondaryIndoorsPaletteBank          ; $65FB: $18 $2D
 
 .jr_01A_65FD
     ldh  a, [hMapId]                              ; $65FD: $F0 $F7
@@ -132,19 +132,19 @@ ConfigureRoomPalettes::
     jr   nz, .jr_01A_660D                         ; $6607: $20 $04
 
     ld   c, $26                                   ; $6609: $0E $26
-    jr   .jr_01A_662A                             ; $660B: $18 $1D
+    jr   .useSecondaryIndoorsPaletteBank          ; $660B: $18 $1D
 
 .jr_01A_660D
     cp   $B5                                      ; $660D: $FE $B5
     jr   nz, .jr_01A_6616                         ; $660F: $20 $05
 
     ld   bc, $01FE                                ; $6611: $01 $FE $01
-    jr   .jr_01A_662A                             ; $6614: $18 $14
+    jr   .useSecondaryIndoorsPaletteBank          ; $6614: $18 $14
 
 .jr_01A_6616
     ldh  a, [hMapId]                              ; $6616: $F0 $F7
     cp   $16                                      ; $6618: $FE $16
-    jr   nz, .jr_01A_662A                         ; $661A: $20 $0E
+    jr   nz, .useSecondaryIndoorsPaletteBank                         ; $661A: $20 $0E
 
     ldh  a, [hMapRoom]                            ; $661C: $F0 $F6
     cp   $6F                                      ; $661E: $FE $6F
@@ -156,8 +156,8 @@ ConfigureRoomPalettes::
     cp   $8F                                      ; $6626: $FE $8F
     jr   z, .jr_01A_662E                          ; $6628: $28 $04
 
-.jr_01A_662A
-    ld   a, $24                                   ; $662A: $3E $24
+.useSecondaryIndoorsPaletteBank
+    ld   a, BANK(IndoorsPalettesListsB)           ; $662A: $3E $24
     ldh  [hRoomPaletteBank], a                    ; $662C: $E0 $DF
 
 .jr_01A_662E

@@ -144,10 +144,8 @@ include "code/entities/bank19.asm"
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"
-OverworldPalettesPointers::
-incbin "data/palette_pointers/overworld_pointers.bin"
-OverworldPalettesBanks::
-incbin "data/palette_pointers/overworld_banks.bin"
+include "data/palette_pointers/overworld_pointers.asm"
+include "data/palette_pointers/overworld_banks.asm"
 include "code/bank1A/map_loading.asm"
 OverworldBaseMapDMG::
 incbin "data/base_maps/overworld.dmg.bin"
@@ -184,6 +182,16 @@ include "code/bank20.asm"
 
 section "bank21",romx[$4000],bank[$21]
 include "code/palettes.asm"
+
+section "bank22",romx[$4000],bank[$22]
+include "data/palette_pointers/overworld_lists.asm"
+
+section "bank23",romx[$4000],bank[$23]
+include "data/palette_pointers/indoors_lists_a.asm"
+
+section "bank24",romx[$4000],bank[$24]
+include "data/palette_pointers/indoors_lists_b.asm"
+; TODO: add missing code and data
 
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"

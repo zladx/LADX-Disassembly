@@ -3285,6 +3285,6 @@ jr_014_5920:
     ld   a, $1C                                   ; $592F: $3E $1C
 
 jr_014_5931:
-    ldh  [hRoomPaletteBank], a                    ; $5931: $E0 $DF
+    ldh  [hBGAttributesBank], a                    ; $5931: $E0 $DF
     ret                                           ; $5933: $C9
 

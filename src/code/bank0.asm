@@ -178,7 +178,7 @@ label_91D::
 
 label_92F::
     callsb GetBGAttributesAddressForObject
-    ldh  a, [hRoomPaletteBank]
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     ld   hl, $DC91
     ld   a, [$DC90]
@@ -242,7 +242,7 @@ label_983::
     callsb func_01A_6710
 
     ; Switch to the bank containing this room's palettes
-    ldh  a, [hRoomPaletteBank]
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
 
     ; Read value from address [hScratchF hScratchE]
@@ -3806,7 +3806,7 @@ DoUpdateBGRegion::
     ;
 
 .configurePalettes
-    ; Set the BG attributes bank in hRoomPaletteBank,
+    ; Set the BG attributes bank in hBGAttributesBank,
     ; and the target BG attributes address in FFE0-FFE1
     callsb GetBGAttributesAddressForObject
 .palettesDone
@@ -3838,8 +3838,8 @@ DoUpdateBGRegion::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $49D9
-    ; Select palettes bank
-    ldh  a, [hRoomPaletteBank]
+    ; Select BG attributes bank
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     ; Increment again the source and target destination
     call IncrementBGMapSourceAndDestination_Vertical
@@ -3871,8 +3871,8 @@ DoUpdateBGRegion::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $49D9
-    ; Select palettes bank
-    ldh  a, [hRoomPaletteBank]
+    ; Select BG attributes bank
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     call IncrementBGMapSourceAndDestination_Horizontal
     ld   a, b
@@ -5075,7 +5075,7 @@ doCopyObjectToBG:
 
     ; Copy tile attributes to BG map for tiles on the upper row
     push hl
-    ldh  a, [hRoomPaletteBank]
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     ldh  a, [hScratchE]
     ld   h, a
@@ -5111,7 +5111,7 @@ doCopyObjectToBG:
     pop  de
 
     ; Copy palettes from WRAM1 for tiles on the lower row
-    ldh  a, [hRoomPaletteBank]
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     ldh  a, [hScratchE]
     ld   h, a

@@ -1,6 +1,6 @@
-; TODO: replace this by proper references to the palettes banks
+; TODO: replace this by proper references to the BG attributes banks
 
-OverworldPalettesBanks::
+OverworldBGAttributesBanks::
     db $25, $25, $25, $25, $25, $25, $27, $27, $27, $27, $27, $27, $27, $27, $27, $27
     db $25, $25, $25, $25, $25, $25, $27, $27, $27, $27, $27, $27, $27, $27, $27, $27
     db $25, $25, $22, $22, $22, $22, $22, $22, $27, $27, $27, $27, $27, $27, $27, $27

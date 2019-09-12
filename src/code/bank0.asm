@@ -5007,10 +5007,17 @@ label_2FFA::
     ret
 
 ; Given an overworld object, retrieve its tiles and palettes (2x2), and copy them to the BG map
+; (CGB only)
+;
+; Inputs:
+;   hl   address of the object in the object map (see wRoomObjects)
 WriteOverworldObjectToBG::
+    ; Switch to RAM bank 2 (object attributes?)
     ld   a, $02
     ld   [rSVBK], a
+    ; ObjectAttributeValue = [hl]
     ld   c, [hl]
+    ; Switch back to RAM bank 0
     xor  a
     ld   [rSVBK], a
     jr   doCopyObjectToBG
@@ -5020,6 +5027,7 @@ WriteIndoorObjectToBG::
     ld   c, [hl]
 
 doCopyObjectToBG:
+    ; bc = ObjectAttributeValue * 4
     ld   b, $00
     sla  c
     rl   b
@@ -5059,13 +5067,13 @@ doCopyObjectToBG:
     ld   hl, $6B1D
 .baseAddressDone
 
-    ; Copy tile numbers for tiles on the upper row
+    ; Copy tile numbers to BG map for tiles on the upper row
     push de
     add  hl, bc
     call CopyWord
     pop  de
 
-    ; Copy palettes from WRAM1 for tiles on the upper row
+    ; Copy tile attributes to BG map for tiles on the upper row
     push hl
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a

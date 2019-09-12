@@ -30,8 +30,7 @@ ConfigureRoomPalettes::
     ldh  [hRoomPaletteBank], a                    ; $6589: $E0 $DF
 .overworldPaletteBankEnd
 
-    ; b = [hMapRoom] >> 7
-    ; c = [hMapRoom] << 1
+    ; bc = [hMapRoom] * 2
     ld   b, $00                                   ; $658B: $06 $00
     ldh  a, [hMapRoom]                            ; $658D: $F0 $F6
     sla  a                                        ; $658F: $CB $27
@@ -65,6 +64,7 @@ ConfigureRoomPalettes::
     jp   .loadPalettesAdress                      ; $65AF: $C3 $36 $66
 .colorDungeonEnd
 
+    ; bc = hMapId * 2
     ld   c, a                                     ; $65B2: $4F
     sla  c                                        ; $65B3: $CB $21
     rl   b                                        ; $65B5: $CB $10
@@ -168,7 +168,7 @@ ConfigureRoomPalettes::
 
     ; Load adress of palettes table
 
-    ; bc = PalettesTable
+    ; bc = OverworldPalettesPointers[hMapId * 2]
     add  hl, bc                                   ; $6630: $09
     ld   c, [hl]                                  ; $6631: $4E
     inc  hl                                       ; $6632: $23
@@ -180,7 +180,7 @@ ConfigureRoomPalettes::
 .loadPalettesAdress
     pop  bc                                       ; $6636: $C1
     add  hl, bc                                   ; $6637: $09
-    ; hScratchE, hScratchF = PalettesTable[palette offset]
+    ; hScratchE, hScratchF = PalettesTable[ObjectAttributeValue * 4]
     ld   a, h                                     ; $6638: $7C
     ldh  [hScratchE], a                           ; $6639: $E0 $E0
     ld   a, l                                     ; $663B: $7D

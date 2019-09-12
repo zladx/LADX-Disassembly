@@ -799,6 +799,9 @@ wBGMapToLoad:: ; D6FF
 ;
 ; When loading a new room, room data is read and decoded into this
 ; area.
+;
+; NB: this area is also used in RAM bank 2, where it contains
+; the object attributes.
 wRoomObjectsArea:: ; D700
   ; First section is FF values padding…
   ds $11

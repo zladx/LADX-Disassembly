@@ -177,7 +177,7 @@ label_91D::
     push af
 
 label_92F::
-    callsb ConfigureRoomPalettes
+    callsb GetBGAttributesAddressForObject
     ldh  a, [hRoomPaletteBank]
     ld   [MBC3SelectBank], a
     ld   hl, $DC91
@@ -3806,9 +3806,9 @@ DoUpdateBGRegion::
     ;
 
 .configurePalettes
-    ; Set the palette bank in hRoomPaletteBank,
-    ; and the target BG map offset in FFE0-FFE1
-    callsb ConfigureRoomPalettes
+    ; Set the BG attributes bank in hRoomPaletteBank,
+    ; and the target BG attributes address in FFE0-FFE1
+    callsb GetBGAttributesAddressForObject
 .palettesDone
 
     ;
@@ -5034,7 +5034,7 @@ doCopyObjectToBG:
     sla  c
     rl   b
 
-    callsb ConfigureRoomPalettes
+    callsb GetBGAttributesAddressForObject
 
     call SwitchToMapDataBank
 

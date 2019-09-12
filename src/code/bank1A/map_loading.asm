@@ -1,16 +1,22 @@
 ; Map-loading routines called from bank0
 
-; Retrieve the palettes address for the current room,
-; and store them into hScratchE and hScratchF.
+; Retrieve the address of the BG attributes for a given object.
+;
+; BG attributes are represented by 4 bytes; each byte is a BG
+; attribute for one of the objects tile.
 ;
 ; Inputs:
-;   bc    ???
-ConfigureRoomPalettes::
+;   hl   address of the object in the object map (see wRoomObjects)
+;   bc   object attribute value * 4
+; Returns:
+;   hRoomPaletteBank      the bank of the BG attributes
+;   hScratchE, hScratchF  the address of the BG attributes
+GetBGAttributesAddressForObject::
     push hl                                       ; $6576: $E5
     push bc                                       ; $6577: $C5
 
     ;
-    ; Retrieve overworld palette bank and pointers
+    ; Retrieve overworld bank and pointers
     ;
 
     ; If on Overworld…
@@ -40,7 +46,7 @@ ConfigureRoomPalettes::
     ld   hl, OverworldPalettesPointers            ; $6594: $21 $76 $5E
 
     ;
-    ; Retrieve overworld palette bank and pointers
+    ; Retrieve indoors bank and pointers
     ;
 
     ; If is indoor…
@@ -242,7 +248,7 @@ func_01A_6710::
     rl   b                                        ; $6725: $CB $10
     ld   c, a                                     ; $6727: $4F
 
-    call ConfigureRoomPalettes                    ; $6728: $CD $76 $65
+    call GetBGAttributesAddressForObject                    ; $6728: $CD $76 $65
 
     pop  bc                                       ; $672B: $C1
     ld   hl, Data_01A_66A8                        ; $672C: $21 $A8 $66

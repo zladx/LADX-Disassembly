@@ -184,7 +184,7 @@ section "bank21",romx[$4000],bank[$21]
 include "code/palettes.asm"
 
 section "bank22",romx[$4000],bank[$22]
-include "data/bg_attributes/overworld.asm"
+include "data/bg_attributes/overworld_a.asm"
 
 section "bank23",romx[$4000],bank[$23]
 include "data/bg_attributes/indoors_a.asm"
@@ -193,6 +193,13 @@ section "bank24",romx[$4000],bank[$24]
 include "data/bg_attributes/indoors_b.asm"
 include "code/background_colors.asm"
 include "code/overworld_macros.asm"
+
+section "bank25",romx[$4000],bank[$25]
+include "data/bg_attributes/overworld_b.asm"
+
+section "bank27",romx[$4000],bank[$27]
+include "data/bg_attributes/overworld_c.asm"
+include "code/bank27.asm"
 
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"

@@ -6865,9 +6865,7 @@ SwitchToMapDataBank::
     ret
 
 label_3915::
-    ld   a, $27
-    ld   [MBC3SelectBank], a
-    jp   $7FC5
+    jpsb Func_027_7FC5
 
 label_391D::
     ld   a, $20

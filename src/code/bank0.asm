@@ -520,7 +520,14 @@ AdjustBankNumberForGBC::
     pop  bc
     ret
 
-label_0B1A::
+; Copy a block of data from a given bank to a target address in WRAM2,
+; then return to bank 20.
+; Inputs:
+;   hScratchA : source bank
+;   bc :        number of bytes to copy
+;   de :        destination address
+;   hl :        source address
+CopyObjectsAttributesToWRAM2::
     ldh  a, [hScratchA]
     ld   [MBC3SelectBank], a
     ld   a, $02
@@ -528,6 +535,7 @@ label_0B1A::
     call CopyData
     xor  a
     ld   [rSVBK], a
+    ; Restore bank $20
     ld   a, $20
     ld   [MBC3SelectBank], a
     ret
@@ -5219,9 +5227,10 @@ LoadRoom::
     ldh  a, [hIsGBC]
     and  a
     jr   z, .gbcEnd
-    ; load palettes.
-    callsb Func_021_40B3
-    callsb func_020_6DAF
+    ; load palettes
+    callsb LoadRoomPalettes
+    ; load tile attributes
+    callsb LoadRoomObjectsAttributes
 .gbcEnd
 
     ;

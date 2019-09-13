@@ -8926,99 +8926,102 @@ jr_020_6D92:
 
     ret                                           ; $6DAE: $C9
 
-func_020_6DAF::
+LoadRoomObjectsAttributes::
     ld   a, [wIsIndoor]                           ; $6DAF: $FA $A5 $DB
     and  a                                        ; $6DB2: $A7
     ret  nz                                       ; $6DB3: $C0
 
     ldh  a, [hMapRoom]                            ; $6DB4: $F0 $F6
     cp   $0E                                      ; $6DB6: $FE $0E
-    jr   nz, jr_020_6DC6                          ; $6DB8: $20 $0C
+    jr   nz, .jr_020_6DC6                         ; $6DB8: $20 $0C
 
     ld   a, [$D80E]                               ; $6DBA: $FA $0E $D8
     and  $10                                      ; $6DBD: $E6 $10
-    jr   z, jr_020_6E1A                           ; $6DBF: $28 $59
+    jr   z, .jr_020_6E1A                          ; $6DBF: $28 $59
 
     ld   hl, $5090                                ; $6DC1: $21 $90 $50
-    jr   jr_020_6E14                              ; $6DC4: $18 $4E
+    jr   .jr_020_6E14                              ; $6DC4: $18 $4E
 
-jr_020_6DC6:
+.jr_020_6DC6
     cp   $8C                                      ; $6DC6: $FE $8C
-    jr   nz, jr_020_6DD6                          ; $6DC8: $20 $0C
+    jr   nz, .jr_020_6DD6                         ; $6DC8: $20 $0C
 
     ld   a, [$D88C]                               ; $6DCA: $FA $8C $D8
     and  $10                                      ; $6DCD: $E6 $10
-    jr   z, jr_020_6E1A                           ; $6DCF: $28 $49
+    jr   z, .jr_020_6E1A                          ; $6DCF: $28 $49
 
     ld   hl, $51D0                                ; $6DD1: $21 $D0 $51
-    jr   jr_020_6E14                              ; $6DD4: $18 $3E
+    jr   .jr_020_6E14                              ; $6DD4: $18 $3E
 
-jr_020_6DD6:
+.jr_020_6DD6
     cp   $79                                      ; $6DD6: $FE $79
-    jr   nz, jr_020_6DE6                          ; $6DD8: $20 $0C
+    jr   nz, .jr_020_6DE6                         ; $6DD8: $20 $0C
 
     ld   a, [$D879]                               ; $6DDA: $FA $79 $D8
     and  $10                                      ; $6DDD: $E6 $10
-    jr   z, jr_020_6E1A                           ; $6DDF: $28 $39
+    jr   z, .jr_020_6E1A                          ; $6DDF: $28 $39
 
     ld   hl, $5180                                ; $6DE1: $21 $80 $51
-    jr   jr_020_6E14                              ; $6DE4: $18 $2E
+    jr   .jr_020_6E14                              ; $6DE4: $18 $2E
 
-jr_020_6DE6:
+.jr_020_6DE6
     cp   $06                                      ; $6DE6: $FE $06
-    jr   nz, jr_020_6DF6                          ; $6DE8: $20 $0C
+    jr   nz, .jr_020_6DF6                         ; $6DE8: $20 $0C
 
     ld   a, [$D806]                               ; $6DEA: $FA $06 $D8
     and  $10                                      ; $6DED: $E6 $10
-    jr   z, jr_020_6E1A                           ; $6DEF: $28 $29
+    jr   z, .jr_020_6E1A                          ; $6DEF: $28 $29
 
     ld   hl, $5040                                ; $6DF1: $21 $40 $50
-    jr   jr_020_6E14                              ; $6DF4: $18 $1E
+    jr   .jr_020_6E14                             ; $6DF4: $18 $1E
 
-jr_020_6DF6:
+.jr_020_6DF6
     cp   $1B                                      ; $6DF6: $FE $1B
-    jr   nz, jr_020_6E06                          ; $6DF8: $20 $0C
+    jr   nz, .jr_020_6E06                         ; $6DF8: $20 $0C
 
     ld   a, [$D82B]                               ; $6DFA: $FA $2B $D8
     and  $10                                      ; $6DFD: $E6 $10
-    jr   z, jr_020_6E1A                           ; $6DFF: $28 $19
+    jr   z, .jr_020_6E1A                          ; $6DFF: $28 $19
 
     ld   hl, $50E0                                ; $6E01: $21 $E0 $50
-    jr   jr_020_6E14                              ; $6E04: $18 $0E
+    jr   .jr_020_6E14                             ; $6E04: $18 $0E
 
-jr_020_6E06:
+.jr_020_6E06
     cp   $2B                                      ; $6E06: $FE $2B
-    jr   nz, jr_020_6E1A                          ; $6E08: $20 $10
+    jr   nz, .jr_020_6E1A                         ; $6E08: $20 $10
 
     ld   a, [$D82B]                               ; $6E0A: $FA $2B $D8
     and  $10                                      ; $6E0D: $E6 $10
-    jr   z, jr_020_6E1A                           ; $6E0F: $28 $09
+    jr   z, .jr_020_6E1A                          ; $6E0F: $28 $09
 
     ld   hl, $5130                                ; $6E11: $21 $30 $51
 
-jr_020_6E14:
+.jr_020_6E14
     ld   a, $27                                   ; $6E14: $3E $27
     ldh  [hScratchA], a                           ; $6E16: $E0 $D7
-    jr   jr_020_6E3C                              ; $6E18: $18 $22
+    jr   .copyAttributes                          ; $6E18: $18 $22
 
-jr_020_6E1A:
-    ld   a, $26                                   ; $6E1A: $3E $26
+.jr_020_6E1A
+    ; Set attributes bank for rooms < $CC
+    ld   a, BANK(OverworldObjectsAttributesTableA) ; $6E1A: $3E $26
     ldh  [hScratchA], a                           ; $6E1C: $E0 $D7
+    ; If the room id >= $CC…
     ldh  a, [hMapRoom]                            ; $6E1E: $F0 $F6
     cp   $CC                                      ; $6E20: $FE $CC
-    jr   c, jr_020_6E2A                           ; $6E22: $38 $06
-
+    jr   c, .bankEnd                              ; $6E22: $38 $06
     ld   hl, hScratchA                            ; $6E24: $21 $D7 $FF
+    ; … use BANK(OverworldObjectsAttributesTableA) + 1 for the attributes bank
     inc  [hl]                                     ; $6E27: $34
     sub  $CC                                      ; $6E28: $D6 $CC
+.bankEnd
 
-jr_020_6E2A:
-    ld   hl, $4000                                ; $6E2A: $21 $00 $40
+    ld   hl, OverworldObjectsAttributesTableA     ; $6E2A: $21 $00 $40
     ld   b, a                                     ; $6E2D: $47
     and  b                                        ; $6E2E: $A0
 
-jr_020_6E2F:
-    jr   z, jr_020_6E3C                           ; $6E2F: $28 $0B
+    ; hl += $50 * MapRoom
+.mapRoomLoop
+    jr   z, .copyAttributes                       ; $6E2F: $28 $0B
 
     ld   a, l                                     ; $6E31: $7D
     add  $50                                      ; $6E32: $C6 $50
@@ -9027,24 +9030,25 @@ jr_020_6E2F:
     adc  $00                                      ; $6E36: $CE $00
     ld   h, a                                     ; $6E38: $67
     dec  b                                        ; $6E39: $05
-    jr   jr_020_6E2F                              ; $6E3A: $18 $F3
+    jr   .mapRoomLoop                             ; $6E3A: $18 $F3
 
-jr_020_6E3C:
+.copyAttributes
+    ; Copy the objects attributes to the room objects attributes in WRAM 2
     ld   de, wRoomObjects                         ; $6E3C: $11 $11 $D7
-
-jr_020_6E3F:
+.loop
     ld   bc, $000A                                ; $6E3F: $01 $0A $00
     push de                                       ; $6E42: $D5
-    call label_0B1A                               ; $6E43: $CD $1A $0B
+    call CopyObjectsAttributesToWRAM2                  ; $6E43: $CD $1A $0B
     pop  de                                       ; $6E46: $D1
     ld   a, e                                     ; $6E47: $7B
     add  $10                                      ; $6E48: $C6 $10
     ld   e, a                                     ; $6E4A: $5F
     cp   $91                                      ; $6E4B: $FE $91
-    jr   nz, jr_020_6E3F                          ; $6E4D: $20 $F0
+    jr   nz, .loop                                ; $6E4D: $20 $F0
 
     ret                                           ; $6E4F: $C9
 
+Func_020_6E50::
     push hl                                       ; $6E50: $E5
     ld   c, [hl]                                  ; $6E51: $4E
     ld   b, $0E                                   ; $6E52: $06 $0E

@@ -184,7 +184,7 @@ section "bank21",romx[$4000],bank[$21]
 include "code/palettes.asm"
 
 section "bank22",romx[$4000],bank[$22]
-include "data/bg_attributes/overworld.asm"
+include "data/bg_attributes/overworld_a.asm"
 
 section "bank23",romx[$4000],bank[$23]
 include "data/bg_attributes/indoors_a.asm"

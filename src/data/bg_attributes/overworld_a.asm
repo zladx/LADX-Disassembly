@@ -3,7 +3,7 @@
 ; TODO: write a Python script to properly cross-reference
 ; with the pointers table
 
-OverworldBGAttributes::
+OverworldBGAttributesA::
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $4000 |........|
     db   $00, $00, $00, $00, $03, $03, $03, $03  ; $4008 |........|
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $4010 |........|

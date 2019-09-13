@@ -197,6 +197,10 @@ include "code/overworld_macros.asm"
 section "bank25",romx[$4000],bank[$25]
 include "data/bg_attributes/overworld_b.asm"
 
+section "bank27",romx[$4000],bank[$27]
+include "data/bg_attributes/overworld_c.asm"
+include "code/bank27.asm"
+
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"
 incbin "gfx/photos/photo_marin_cliff.2bpp"

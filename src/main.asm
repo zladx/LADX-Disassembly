@@ -194,6 +194,9 @@ include "data/bg_attributes/indoors_b.asm"
 include "code/background_colors.asm"
 include "code/overworld_macros.asm"
 
+section "bank25",romx[$4000],bank[$25]
+include "data/bg_attributes/overworld_b.asm"
+
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"
 incbin "gfx/photos/photo_marin_cliff.2bpp"

@@ -132,7 +132,7 @@ jr_021_40AE:
     ld   [wPaletteToLoadForTileMap], a            ; $40AF: $EA $D2 $DD
     ret                                           ; $40B2: $C9
 
-Func_021_40B3::
+LoadRoomPalettes::
     call func_021_5185                            ; $40B3: $CD $85 $51
     ld   a, [wPaletteDataFlags]                    ; $40B6: $FA $D1 $DD
     ld   b, a                                     ; $40B9: $47

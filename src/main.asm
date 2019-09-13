@@ -197,7 +197,11 @@ include "code/overworld_macros.asm"
 section "bank25",romx[$4000],bank[$25]
 include "data/bg_attributes/overworld_b.asm"
 
+section "bank26",romx[$4000],bank[$26]
+include "data/rooms_attributes/overworld_a.asm"
+
 section "bank27",romx[$4000],bank[$27]
+include "data/rooms_attributes/overworld_b.asm"
 include "data/bg_attributes/overworld_c.asm"
 include "code/bank27.asm"
 

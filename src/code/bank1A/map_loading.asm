@@ -1,16 +1,22 @@
 ; Map-loading routines called from bank0
 
-; Retrieve the palettes address for the current room,
-; and store them into hScratchE and hScratchF.
+; Retrieve the address of the BG attributes for a given object.
+;
+; BG attributes are represented by 4 bytes; each byte is a BG
+; attribute for one of the objects tile.
 ;
 ; Inputs:
-;   bc    ???
-ConfigureRoomPalettes::
+;   hl   address of the object in the object map (see wRoomObjects)
+;   bc   object attribute value * 4
+; Returns:
+;   hBGAttributesBank      the bank of the BG attributes
+;   hScratchE, hScratchF   the address of the BG attributes
+GetBGAttributesAddressForObject::
     push hl                                       ; $6576: $E5
     push bc                                       ; $6577: $C5
 
     ;
-    ; Retrieve overworld palette bank and pointers
+    ; Retrieve overworld bank and pointers
     ;
 
     ; If on Overworld…
@@ -23,25 +29,24 @@ ConfigureRoomPalettes::
     ldh  a, [hMapRoom]                            ; $6581: $F0 $F6
     ld   c, a                                     ; $6583: $4F
 
-    ; hRoomPaletteBank = OverworldPalettesBanks[hMapRoom]
-    ld   hl, OverworldPalettesBanks               ; $6584: $21 $76 $64
+    ; hBGAttributesBank = OverworldBGAttributesBanks[hMapRoom]
+    ld   hl, OverworldBGAttributesBanks           ; $6584: $21 $76 $64
     add  hl, bc                                   ; $6587: $09
     ld   a, [hl]                                  ; $6588: $7E
-    ldh  [hRoomPaletteBank], a                    ; $6589: $E0 $DF
+    ldh  [hBGAttributesBank], a                    ; $6589: $E0 $DF
 .overworldPaletteBankEnd
 
-    ; b = [hMapRoom] >> 7
-    ; c = [hMapRoom] << 1
+    ; bc = [hMapRoom] * 2
     ld   b, $00                                   ; $658B: $06 $00
     ldh  a, [hMapRoom]                            ; $658D: $F0 $F6
     sla  a                                        ; $658F: $CB $27
     ld   c, a                                     ; $6591: $4F
     rl   b                                        ; $6592: $CB $10
 
-    ld   hl, OverworldPalettesPointers            ; $6594: $21 $76 $5E
+    ld   hl, OverworldBGAttributesPointers            ; $6594: $21 $76 $5E
 
     ;
-    ; Retrieve overworld palette bank and pointers
+    ; Retrieve indoors bank and pointers
     ;
 
     ; If is indoor…
@@ -49,8 +54,8 @@ ConfigureRoomPalettes::
     and  a                                        ; $659A: $A7
     jp   z, .indoorPaletteEnd                     ; $659B: $CA $30 $66
 
-    ld   a, BANK(IndoorsPalettesListsA)           ; $659E: $3E $23
-    ldh  [hRoomPaletteBank], a                    ; $65A0: $E0 $DF
+    ld   a, BANK(IndoorsBGAttributesA)            ; $659E: $3E $23
+    ldh  [hBGAttributesBank], a                    ; $65A0: $E0 $DF
     inc  h                                        ; $65A2: $24
     inc  h                                        ; $65A3: $24
     ld   b, $00                                   ; $65A4: $06 $00
@@ -65,6 +70,7 @@ ConfigureRoomPalettes::
     jp   .loadPalettesAdress                      ; $65AF: $C3 $36 $66
 .colorDungeonEnd
 
+    ; bc = hMapId * 2
     ld   c, a                                     ; $65B2: $4F
     sla  c                                        ; $65B3: $CB $21
     rl   b                                        ; $65B5: $CB $10
@@ -157,8 +163,8 @@ ConfigureRoomPalettes::
     jr   z, .jr_01A_662E                          ; $6628: $28 $04
 
 .useSecondaryIndoorsPaletteBank
-    ld   a, BANK(IndoorsPalettesListsB)           ; $662A: $3E $24
-    ldh  [hRoomPaletteBank], a                    ; $662C: $E0 $DF
+    ld   a, BANK(IndoorsBGAttributesB)           ; $662A: $3E $24
+    ldh  [hBGAttributesBank], a                    ; $662C: $E0 $DF
 
 .jr_01A_662E
     inc  h                                        ; $662E: $24
@@ -168,7 +174,7 @@ ConfigureRoomPalettes::
 
     ; Load adress of palettes table
 
-    ; bc = PalettesTable
+    ; bc = OverworldBGAttributesPointers[hMapId * 2]
     add  hl, bc                                   ; $6630: $09
     ld   c, [hl]                                  ; $6631: $4E
     inc  hl                                       ; $6632: $23
@@ -180,7 +186,7 @@ ConfigureRoomPalettes::
 .loadPalettesAdress
     pop  bc                                       ; $6636: $C1
     add  hl, bc                                   ; $6637: $09
-    ; hScratchE, hScratchF = PalettesTable[palette offset]
+    ; hScratchE, hScratchF = PalettesTable[ObjectAttributeValue * 4]
     ld   a, h                                     ; $6638: $7C
     ldh  [hScratchE], a                           ; $6639: $E0 $E0
     ld   a, l                                     ; $663B: $7D
@@ -242,7 +248,7 @@ func_01A_6710::
     rl   b                                        ; $6725: $CB $10
     ld   c, a                                     ; $6727: $4F
 
-    call ConfigureRoomPalettes                    ; $6728: $CD $76 $65
+    call GetBGAttributesAddressForObject                    ; $6728: $CD $76 $65
 
     pop  bc                                       ; $672B: $C1
     ld   hl, Data_01A_66A8                        ; $672C: $21 $A8 $66

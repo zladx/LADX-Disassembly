@@ -1,9 +1,9 @@
-; Lists of palettes for Overworld rooms
+; Lists of Background attributes for overworld rooms
 ;
 ; TODO: write a Python script to properly cross-reference
-; with the actual palettes
+; with the pointers table
 
-OverworldPalettesLists::
+OverworldBGAttributes::
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $4000 |........|
     db   $00, $00, $00, $00, $03, $03, $03, $03  ; $4008 |........|
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $4010 |........|

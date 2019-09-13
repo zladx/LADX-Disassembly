@@ -1,6 +1,6 @@
-; TODO: convert this to proper references to the palette data
+; TODO: convert this to proper references to the BG attributes data
 
-OverworldPalettesPointers::
+OverworldBGAttributesPointers::
     dw $7400
     dw $7400
     dw $7400

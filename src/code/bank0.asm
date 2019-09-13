@@ -177,8 +177,8 @@ label_91D::
     push af
 
 label_92F::
-    callsb ConfigureRoomPalettes
-    ldh  a, [hRoomPaletteBank]
+    callsb GetBGAttributesAddressForObject
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     ld   hl, $DC91
     ld   a, [$DC90]
@@ -242,7 +242,7 @@ label_983::
     callsb func_01A_6710
 
     ; Switch to the bank containing this room's palettes
-    ldh  a, [hRoomPaletteBank]
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
 
     ; Read value from address [hScratchF hScratchE]
@@ -3806,9 +3806,9 @@ DoUpdateBGRegion::
     ;
 
 .configurePalettes
-    ; Set the palette bank in hRoomPaletteBank,
-    ; and the target BG map offset in FFE0-FFE1
-    callsb ConfigureRoomPalettes
+    ; Set the BG attributes bank in hBGAttributesBank,
+    ; and the target BG attributes address in FFE0-FFE1
+    callsb GetBGAttributesAddressForObject
 .palettesDone
 
     ;
@@ -3838,8 +3838,8 @@ DoUpdateBGRegion::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $49D9
-    ; Select palettes bank
-    ldh  a, [hRoomPaletteBank]
+    ; Select BG attributes bank
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     ; Increment again the source and target destination
     call IncrementBGMapSourceAndDestination_Vertical
@@ -3871,8 +3871,8 @@ DoUpdateBGRegion::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $49D9
-    ; Select palettes bank
-    ldh  a, [hRoomPaletteBank]
+    ; Select BG attributes bank
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     call IncrementBGMapSourceAndDestination_Horizontal
     ld   a, b
@@ -5007,10 +5007,17 @@ label_2FFA::
     ret
 
 ; Given an overworld object, retrieve its tiles and palettes (2x2), and copy them to the BG map
+; (CGB only)
+;
+; Inputs:
+;   hl   address of the object in the object map (see wRoomObjects)
 WriteOverworldObjectToBG::
+    ; Switch to RAM bank 2 (object attributes?)
     ld   a, $02
     ld   [rSVBK], a
+    ; ObjectAttributeValue = [hl]
     ld   c, [hl]
+    ; Switch back to RAM bank 0
     xor  a
     ld   [rSVBK], a
     jr   doCopyObjectToBG
@@ -5020,13 +5027,14 @@ WriteIndoorObjectToBG::
     ld   c, [hl]
 
 doCopyObjectToBG:
+    ; bc = ObjectAttributeValue * 4
     ld   b, $00
     sla  c
     rl   b
     sla  c
     rl   b
 
-    callsb ConfigureRoomPalettes
+    callsb GetBGAttributesAddressForObject
 
     call SwitchToMapDataBank
 
@@ -5059,15 +5067,15 @@ doCopyObjectToBG:
     ld   hl, $6B1D
 .baseAddressDone
 
-    ; Copy tile numbers for tiles on the upper row
+    ; Copy tile numbers to BG map for tiles on the upper row
     push de
     add  hl, bc
     call CopyWord
     pop  de
 
-    ; Copy palettes from WRAM1 for tiles on the upper row
+    ; Copy tile attributes to BG map for tiles on the upper row
     push hl
-    ldh  a, [hRoomPaletteBank]
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     ldh  a, [hScratchE]
     ld   h, a
@@ -5103,7 +5111,7 @@ doCopyObjectToBG:
     pop  de
 
     ; Copy palettes from WRAM1 for tiles on the lower row
-    ldh  a, [hRoomPaletteBank]
+    ldh  a, [hBGAttributesBank]
     ld   [MBC3SelectBank], a
     ldh  a, [hScratchE]
     ld   h, a

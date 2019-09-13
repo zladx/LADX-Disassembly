@@ -2247,7 +2247,7 @@ jr_003_5455:
     ld   a, $20                                   ; $5459: $3E $20
     ldh  [hSwordIntersectedAreaY], a              ; $545B: $E0 $CD
     ld   a, $19                                   ; $545D: $3E $19
-    ldh  [hRoomPaletteBank], a                    ; $545F: $E0 $DF
+    ldh  [hBGAttributesBank], a                    ; $545F: $E0 $DF
     call label_3E4D                               ; $5461: $CD $4D $3E
     jp   label_C60                                ; $5464: $C3 $60 $0C
 

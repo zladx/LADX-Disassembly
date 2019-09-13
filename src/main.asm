@@ -144,8 +144,8 @@ include "code/entities/bank19.asm"
 section "bank1A",romx[$4000],bank[$1A]
 OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"
-include "data/palette_pointers/overworld_pointers.asm"
-include "data/palette_pointers/overworld_banks.asm"
+include "data/bg_attributes/overworld_pointers.asm"
+include "data/bg_attributes/overworld_banks.asm"
 include "code/bank1A/map_loading.asm"
 OverworldBaseMapDMG::
 incbin "data/base_maps/overworld.dmg.bin"
@@ -184,13 +184,13 @@ section "bank21",romx[$4000],bank[$21]
 include "code/palettes.asm"
 
 section "bank22",romx[$4000],bank[$22]
-include "data/palette_pointers/overworld_lists.asm"
+include "data/bg_attributes/overworld.asm"
 
 section "bank23",romx[$4000],bank[$23]
-include "data/palette_pointers/indoors_lists_a.asm"
+include "data/bg_attributes/indoors_a.asm"
 
 section "bank24",romx[$4000],bank[$24]
-include "data/palette_pointers/indoors_lists_b.asm"
+include "data/bg_attributes/indoors_b.asm"
 include "code/background_colors.asm"
 include "code/overworld_macros.asm"
 

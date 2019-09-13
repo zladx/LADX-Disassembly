@@ -191,7 +191,7 @@ hScratchD:: ; FFDA
 ; Unlabeled
 ds 4
 
-hRoomPaletteBank ; FFDF
+hBGAttributesBank ; FFDF
   ds 1
 
 ; Scratch hram address with different uses

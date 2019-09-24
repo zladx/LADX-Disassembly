@@ -126,9 +126,7 @@ restoreSavedWRAMBankAndReturn::
 
 InterruptSerial::
     push af
-    ld   a, $28
-    ld   [MBC3SelectBank], a
-    call $4601
+    callsb PrinterInterruptSerial
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     pop  af
@@ -420,9 +418,7 @@ label_598::
     ld   [$DC91], a
 
 label_5AB::
-    ld   a, $28
-    call SwitchBank
-    call $4616
+    callsw PrinterInterruptVBlank
     pop  af
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a

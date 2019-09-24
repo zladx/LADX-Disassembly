@@ -572,7 +572,8 @@ label_B54::
     pop  bc
     ret
 
-func_B5D::
+; Copy data from bank in a, then switch back to bank $28
+CopyData_trampoline::
     ld   [MBC3SelectBank], a
     call CopyData
     ld   a, $28
@@ -647,18 +648,22 @@ label_BB5::
     ld   bc, $0168
     ld   de, $D000
     jp   CopyData
+
+label_BBE::
     push af
     call LoadBaseTiles
     jp   RestoreStackedBankAndReturn
+
+label_BC5::
     ld   a, [$D16A]
     ld   [MBC3SelectBank], a
-
-label_BCB::
+.loop
     ld   a, [hli]
     ld   [de], a
     inc  de
     dec  b
-    jr   nz, label_BCB
+    jr   nz, .loop
+
     ld   a, $28
     ld   [MBC3SelectBank], a
     ret
@@ -1266,9 +1271,7 @@ InventoryHandler::
     jpsw InventoryEntryPoint
 
 PhotoAlbumHandler::
-    ld   a, $28
-    call SwitchBank
-    call $4000
+    callsw PhotoAlbumEntryPoint
     jp   returnFromGameplayHandler
 
 PhotoPictureHandler::

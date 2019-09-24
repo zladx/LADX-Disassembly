@@ -369,7 +369,7 @@ jr_002_43CE:
     and  a                                        ; $43D1: $A7
     jr   z, jr_002_4402                           ; $43D2: $28 $2E
 
-    ldh  a, [hFFCC]                               ; $43D4: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $43D4: $F0 $CC
     and  $0F                                      ; $43D6: $E6 $0F
     jr   z, jr_002_43E6                           ; $43D8: $28 $0C
 
@@ -1184,7 +1184,7 @@ jr_002_4A53:
     cp   $47                                      ; $4A56: $FE $47
     jr   z, jr_002_4A7A                           ; $4A58: $28 $20
 
-    ldh  a, [hFFCC]                               ; $4A5A: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $4A5A: $F0 $CC
     and  $30                                      ; $4A5C: $E6 $30
     jr   z, jr_002_4A7A                           ; $4A5E: $28 $1A
 
@@ -2094,7 +2094,7 @@ jr_002_4F6A:
     jp   label_1A50                               ; $4F6A: $C3 $50 $1A
 
 label_002_4F6D::
-    ldh  a, [hFFCC]                               ; $4F6D: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $4F6D: $F0 $CC
     and  $20                                      ; $4F6F: $E6 $20
     jr   z, jr_002_4F86                           ; $4F71: $28 $13
 
@@ -2119,7 +2119,7 @@ jr_002_4F86:
     jr   jr_002_4FA1                              ; $4F90: $18 $0F
 
 jr_002_4F92:
-    ldh  a, [hFFCC]                               ; $4F92: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $4F92: $F0 $CC
     and  $10                                      ; $4F94: $E6 $10
     jr   z, jr_002_4FA1                           ; $4F96: $28 $09
 
@@ -3031,7 +3031,7 @@ jr_002_54A2:
 jr_002_54A6:
     jr   z, jr_002_54E4                           ; $54A6: $28 $3C
 
-    ldh  a, [hFFCC]                               ; $54A8: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $54A8: $F0 $CC
     and  $40                                      ; $54AA: $E6 $40
     jr   jr_002_54E4                              ; $54AC: $18 $36
 
@@ -5203,7 +5203,7 @@ func_002_60E0::
     and  $40                                      ; $6110: $E6 $40
     jp   nz, label_002_61E7                       ; $6112: $C2 $E7 $61
 
-    ldh  a, [hFFCC]                               ; $6115: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $6115: $F0 $CC
     and  $80                                      ; $6117: $E6 $80
     jp   z, label_002_61E7                        ; $6119: $CA $E7 $61
 
@@ -5251,7 +5251,7 @@ jr_002_613D:
     ld   [wTransitionSequenceCounter], a          ; $6164: $EA $6B $C1
     ld   [wC16C], a                               ; $6167: $EA $6C $C1
     ldh  [hPressedButtonsMask], a                 ; $616A: $E0 $CB
-    ldh  [hFFCC], a                               ; $616C: $E0 $CC
+    ldh  [hJoypadState], a                               ; $616C: $E0 $CC
     ld   [wGameplaySubtype], a                    ; $616E: $EA $96 $DB
     ld   a, GAMEPLAY_INVENTORY                    ; $6171: $3E $0C
     ld   [wGameplayType], a                       ; $6173: $EA $95 $DB
@@ -6060,7 +6060,7 @@ jr_002_6A00:
     cp   $08                                      ; $6A19: $FE $08
     jr   nc, jr_002_6A24                          ; $6A1B: $30 $07
 
-    ldh  a, [hFFCC]                               ; $6A1D: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $6A1D: $F0 $CC
     and  $04                                      ; $6A1F: $E6 $04
     jp   nz, ApplyMapFadeOutTransition                            ; $6A21: $C2 $7D $0C
 
@@ -6069,7 +6069,7 @@ jr_002_6A24:
     and  a                                        ; $6A27: $A7
     jr   z, jr_002_6A4C                           ; $6A28: $28 $22
 
-    ldh  a, [hFFCC]                               ; $6A2A: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $6A2A: $F0 $CC
     and  $0F                                      ; $6A2C: $E6 $0F
     jr   nz, jr_002_6A3E                          ; $6A2E: $20 $0E
 

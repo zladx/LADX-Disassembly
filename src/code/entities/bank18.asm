@@ -4905,7 +4905,7 @@ jr_018_5D7D:
     inc  a                                        ; $5D8C: $3C
     ldh  [$FFA1], a                               ; $5D8D: $E0 $A1
     ld   [wC167], a                               ; $5D8F: $EA $67 $C1
-    ldh  a, [hFFCC]                               ; $5D92: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $5D92: $F0 $CC
     and  $03                                      ; $5D94: $E6 $03
     ld   e, a                                     ; $5D96: $5F
     ld   d, b                                     ; $5D97: $50
@@ -4920,7 +4920,7 @@ jr_018_5D7D:
     and  $F0                                      ; $5DA5: $E6 $F0
     or   e                                        ; $5DA7: $B3
     ld   [wC109], a                               ; $5DA8: $EA $09 $C1
-    ldh  a, [hFFCC]                               ; $5DAB: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $5DAB: $F0 $CC
     rra                                           ; $5DAD: $1F
     rra                                           ; $5DAE: $1F
     and  $03                                      ; $5DAF: $E6 $03
@@ -4935,7 +4935,7 @@ jr_018_5D7D:
     and  a                                        ; $5DC1: $A7
     jr   nz, jr_018_5DDC                          ; $5DC2: $20 $18
 
-    ldh  a, [hFFCC]                               ; $5DC4: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $5DC4: $F0 $CC
     and  $10                                      ; $5DC6: $E6 $10
     jr   z, jr_018_5DD0                           ; $5DC8: $28 $06
 
@@ -4943,7 +4943,7 @@ jr_018_5D7D:
     jp   OpenDialog                               ; $5DCD: $C3 $85 $23
 
 jr_018_5DD0:
-    ldh  a, [hFFCC]                               ; $5DD0: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $5DD0: $F0 $CC
     and  $20                                      ; $5DD2: $E6 $20
     jr   z, jr_018_5DDC                           ; $5DD4: $28 $06
 
@@ -4951,7 +4951,7 @@ jr_018_5DD0:
     jp   OpenDialogInTable1                       ; $5DD9: $C3 $73 $23
 
 jr_018_5DDC:
-    ldh  a, [hFFCC]                               ; $5DDC: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $5DDC: $F0 $CC
     and  $40                                      ; $5DDE: $E6 $40
     jr   z, jr_018_5DE8                           ; $5DE0: $28 $06
 
@@ -10572,7 +10572,7 @@ jr_018_7DC1:
     cp   $80                                      ; $7DDA: $FE $80
     jr   nz, jr_018_7DE6                          ; $7DDC: $20 $08
 
-    ldh  a, [hFFCC]                               ; $7DDE: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $7DDE: $F0 $CC
     and  $10                                      ; $7DE0: $E6 $10
     jr   z, jr_018_7DE6                           ; $7DE2: $28 $02
 

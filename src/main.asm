@@ -205,6 +205,10 @@ include "data/rooms_attributes/overworld_b.asm"
 include "data/bg_attributes/overworld_c.asm"
 include "code/bank27.asm"
 
+section "bank28",romx[$4000],bank[$28]
+include "src/code/photo_album.asm"
+include "data/photo_album/background.asm"
+
 section "bank29",romx[$4000],bank[$29]
 incbin "gfx/photos/photo_nice_link.2bpp"
 incbin "gfx/photos/photo_marin_cliff.2bpp"

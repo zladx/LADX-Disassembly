@@ -1166,7 +1166,7 @@ EntityThrownHandler::
     cp   $03                                      ; $4E1C: $FE $03
     jr   nz, jr_003_4E28                          ; $4E1E: $20 $08
 
-    ldh  a, [hFFCC]                               ; $4E20: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $4E20: $F0 $CC
     and  $20                                      ; $4E22: $E6 $20
     jr   nz, jr_003_4E35                          ; $4E24: $20 $0F
 
@@ -1177,7 +1177,7 @@ jr_003_4E28:
     cp   $03                                      ; $4E2B: $FE $03
     jr   nz, jr_003_4E72                          ; $4E2D: $20 $43
 
-    ldh  a, [hFFCC]                               ; $4E2F: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $4E2F: $F0 $CC
     and  $10                                      ; $4E31: $E6 $10
     jr   z, jr_003_4E72                           ; $4E33: $28 $3D
 
@@ -5557,7 +5557,7 @@ jr_003_66BF:
     cp   $02                                      ; $66DE: $FE $02
     jr   nz, jr_003_66EA                          ; $66E0: $20 $08
 
-    ldh  a, [hFFCC]                               ; $66E2: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $66E2: $F0 $CC
     and  $20                                      ; $66E4: $E6 $20
     jr   nz, jr_003_66F7                          ; $66E6: $20 $0F
 
@@ -5568,7 +5568,7 @@ jr_003_66EA:
     cp   $02                                      ; $66ED: $FE $02
     jr   nz, jr_003_66FA                          ; $66EF: $20 $09
 
-    ldh  a, [hFFCC]                               ; $66F1: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $66F1: $F0 $CC
     and  $10                                      ; $66F3: $E6 $10
     jr   z, jr_003_66FA                           ; $66F5: $28 $03
 

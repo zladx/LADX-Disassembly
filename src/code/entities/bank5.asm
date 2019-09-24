@@ -1110,7 +1110,7 @@ jr_005_45BF:
     cp   $03                                      ; $45D3: $FE $03
     jr   nz, jr_005_45DF                          ; $45D5: $20 $08
 
-    ldh  a, [hFFCC]                               ; $45D7: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $45D7: $F0 $CC
     and  $20                                      ; $45D9: $E6 $20
     jr   nz, jr_005_45EC                          ; $45DB: $20 $0F
 
@@ -1121,7 +1121,7 @@ jr_005_45DF:
     cp   $03                                      ; $45E2: $FE $03
     jr   nz, jr_005_4611                          ; $45E4: $20 $2B
 
-    ldh  a, [hFFCC]                               ; $45E6: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $45E6: $F0 $CC
     and  $10                                      ; $45E8: $E6 $10
     jr   z, jr_005_4611                           ; $45EA: $28 $25
 
@@ -1517,7 +1517,7 @@ func_005_47C0:
     cp   $0C                                      ; $482A: $FE $0C
     jr   nz, jr_005_483C                          ; $482C: $20 $0E
 
-    ldh  a, [hFFCC]                               ; $482E: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $482E: $F0 $CC
     and  $20                                      ; $4830: $E6 $20
     ret  z                                        ; $4832: $C8
 
@@ -1532,7 +1532,7 @@ jr_005_483C:
     cp   $0C                                      ; $483E: $FE $0C
     jr   nz, jr_005_484A                          ; $4840: $20 $08
 
-    ldh  a, [hFFCC]                               ; $4842: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $4842: $F0 $CC
     and  $10                                      ; $4844: $E6 $10
     ret  z                                        ; $4846: $C8
 
@@ -3816,7 +3816,7 @@ jr_005_5544:
     cp   $80                                      ; $555D: $FE $80
     jr   nz, jr_005_5569                          ; $555F: $20 $08
 
-    ldh  a, [hFFCC]                               ; $5561: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $5561: $F0 $CC
     and  $10                                      ; $5563: $E6 $10
     jr   z, jr_005_5569                           ; $5565: $28 $02
 

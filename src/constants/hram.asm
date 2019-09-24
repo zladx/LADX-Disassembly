@@ -156,7 +156,7 @@ hPressedButtonsMask:: ; FFCB
  ds 1
 
 ; Unlabeled
-hFFCC:: ; hFFCC
+hJoypadState:: ; FFCC
   ds 1
 
 hSwordIntersectedAreaY:: ; FFCD

@@ -4747,7 +4747,7 @@ jr_004_6120:
     and  a                                        ; $6157: $A7
     jr   nz, jr_004_616C                          ; $6158: $20 $12
 
-    ldh  a, [hFFCC]                               ; $615A: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $615A: $F0 $CC
     and  $30                                      ; $615C: $E6 $30
     jr   z, jr_004_616C                           ; $615E: $28 $0C
 
@@ -5094,7 +5094,7 @@ jr_004_6353:
     dec  [hl]                                     ; $6353: $35
 
 jr_004_6354:
-    ldh  a, [hFFCC]                               ; $6354: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $6354: $F0 $CC
     and  $30                                      ; $6356: $E6 $30
     jr   z, jr_004_63B9                           ; $6358: $28 $5F
 
@@ -5162,7 +5162,7 @@ jr_004_63AD:
     jr   jr_004_63DE                              ; $63B7: $18 $25
 
 jr_004_63B9:
-    ldh  a, [hFFCC]                               ; $63B9: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $63B9: $F0 $CC
     and  $05                                      ; $63BB: $E6 $05
     jr   z, jr_004_63DE                           ; $63BD: $28 $1F
 
@@ -5524,7 +5524,7 @@ jr_004_65D5:
     ldh  [hLinkPositionX], a                      ; $65D9: $E0 $98
 
 jr_004_65DB:
-    ldh  a, [hFFCC]                               ; $65DB: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $65DB: $F0 $CC
     and  $30                                      ; $65DD: $E6 $30
     jr   z, jr_004_6631                           ; $65DF: $28 $50
 
@@ -8912,7 +8912,7 @@ jr_004_78D4:
     cp   $02                                      ; $78DC: $FE $02
     jr   nz, jr_004_7940                          ; $78DE: $20 $60
 
-    ldh  a, [hFFCC]                               ; $78E0: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $78E0: $F0 $CC
     and  $30                                      ; $78E2: $E6 $30
     jr   z, jr_004_7940                           ; $78E4: $28 $5A
 
@@ -9521,7 +9521,7 @@ func_004_7C06:
     cp   $80                                      ; $7C3D: $FE $80
     jr   nz, jr_004_7C49                          ; $7C3F: $20 $08
 
-    ldh  a, [hFFCC]                               ; $7C41: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $7C41: $F0 $CC
     and  $10                                      ; $7C43: $E6 $10
     jr   z, jr_004_7C49                           ; $7C45: $28 $02
 
@@ -9568,7 +9568,7 @@ func_004_7C4B:
 
     ld   hl, $C1AD                                ; $7C85: $21 $AD $C1
     ld   [hl], $01                                ; $7C88: $36 $01
-    ldh  a, [hFFCC]                               ; $7C8A: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $7C8A: $F0 $CC
     and  $10                                      ; $7C8C: $E6 $10
     jr   z, jr_004_7C92                           ; $7C8E: $28 $02
 

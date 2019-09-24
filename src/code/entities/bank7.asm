@@ -211,7 +211,7 @@ jr_007_4128:
     cp   $03                                      ; $4143: $FE $03
     jr   nz, jr_007_414E                          ; $4145: $20 $07
 
-    ldh  a, [hFFCC]                               ; $4147: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $4147: $F0 $CC
     and  $20                                      ; $4149: $E6 $20
     jr   nz, jr_007_415A                          ; $414B: $20 $0D
 
@@ -222,7 +222,7 @@ jr_007_414E:
     cp   $03                                      ; $4151: $FE $03
     ret  nz                                       ; $4153: $C0
 
-    ldh  a, [hFFCC]                               ; $4154: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $4154: $F0 $CC
     and  $10                                      ; $4156: $E6 $10
     jr   z, jr_007_41B8                           ; $4158: $28 $5E
 
@@ -2919,7 +2919,7 @@ jr_007_5173:
     ldh  [$FFA1], a                               ; $517E: $E0 $A1
     ld   a, $3E                                   ; $5180: $3E $3E
     ldh  [hJingle], a                             ; $5182: $E0 $F2
-    ldh  a, [hFFCC]                               ; $5184: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $5184: $F0 $CC
     and  $0F                                      ; $5186: $E6 $0F
     ld   d, a                                     ; $5188: $57
     jr   z, jr_007_51AA                           ; $5189: $28 $1F
@@ -3938,7 +3938,7 @@ label_007_5721:
     cp   $01                                      ; $573E: $FE $01
     jr   nz, jr_007_574A                          ; $5740: $20 $08
 
-    ldh  a, [hFFCC]                               ; $5742: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $5742: $F0 $CC
     and  $20                                      ; $5744: $E6 $20
     jr   nz, jr_007_5757                          ; $5746: $20 $0F
 
@@ -3949,7 +3949,7 @@ jr_007_574A:
     cp   $01                                      ; $574D: $FE $01
     jr   nz, jr_007_5777                          ; $574F: $20 $26
 
-    ldh  a, [hFFCC]                               ; $5751: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $5751: $F0 $CC
     and  $10                                      ; $5753: $E6 $10
     jr   z, jr_007_5777                           ; $5755: $28 $20
 
@@ -5676,7 +5676,7 @@ jr_007_60DD:
     cp   $03                                      ; $60EB: $FE $03
     jr   nz, jr_007_60F7                          ; $60ED: $20 $08
 
-    ldh  a, [hFFCC]                               ; $60EF: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $60EF: $F0 $CC
     and  $20                                      ; $60F1: $E6 $20
     jr   nz, jr_007_6104                          ; $60F3: $20 $0F
 
@@ -5687,7 +5687,7 @@ jr_007_60F7:
     cp   $03                                      ; $60FA: $FE $03
     jr   nz, jr_007_6133                          ; $60FC: $20 $35
 
-    ldh  a, [hFFCC]                               ; $60FE: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $60FE: $F0 $CC
     and  $10                                      ; $6100: $E6 $10
     jr   z, jr_007_6133                           ; $6102: $28 $2F
 
@@ -9612,7 +9612,7 @@ label_007_7733:
     cp   $03                                      ; $7741: $FE $03
     jr   nz, jr_007_774D                          ; $7743: $20 $08
 
-    ldh  a, [hFFCC]                               ; $7745: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $7745: $F0 $CC
     and  $20                                      ; $7747: $E6 $20
     jr   nz, jr_007_775A                          ; $7749: $20 $0F
 
@@ -9623,7 +9623,7 @@ jr_007_774D:
     cp   $03                                      ; $7750: $FE $03
     jr   nz, jr_007_7783                          ; $7752: $20 $2F
 
-    ldh  a, [hFFCC]                               ; $7754: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $7754: $F0 $CC
     and  $10                                      ; $7756: $E6 $10
     jr   z, jr_007_7783                           ; $7758: $28 $29
 
@@ -10694,7 +10694,7 @@ jr_007_7D6F:
     cp   $80                                      ; $7D88: $FE $80
     jr   nz, jr_007_7D94                          ; $7D8A: $20 $08
 
-    ldh  a, [hFFCC]                               ; $7D8C: $F0 $CC
+    ldh  a, [hJoypadState]                               ; $7D8C: $F0 $CC
     and  $10                                      ; $7D8E: $E6 $10
     jr   z, jr_007_7D94                           ; $7D90: $28 $02
 

@@ -55,10 +55,7 @@ hLinkAnimationState:: ; FF9D
 
 hLinkDirection:: ; FF9E
   ; Direction Link is facing
-  ; 0 Right
-  ; 1 Left
-  ; 2 Top
-  ; 3 Down
+  ; See DIRECTION_* constants for possible values
   ds 1
 
 hLinkFinalPositionX:: ; FF9F

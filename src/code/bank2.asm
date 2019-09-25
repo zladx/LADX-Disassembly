@@ -6520,7 +6520,7 @@ CheckPositionForMapTransition::
     ;
 
     ; If Link is at the top of the room, TOP
-    ld   e, ROOM_TRANSITION_DIR_TOP               ; $6C99: $1E $02
+    ld   e, DIRECTION_UP               ; $6C99: $1E $02
     ldh  a, [hLinkPositionY]                      ; $6C9B: $F0 $99
     cp   $0C                                      ; $6C9D: $FE $0C
     jr   c, .verticalTransition                   ; $6C9F: $38 $15
@@ -6531,7 +6531,7 @@ CheckPositionForMapTransition::
     jr   nc, .verticalTransition                  ; $6CA4: $30 $10
 
     ; If Link is on the left, LEFT
-    ld   e, ROOM_TRANSITION_DIR_LEFT              ; $6CA6: $1E $01
+    ld   e, DIRECTION_LEFT              ; $6CA6: $1E $01
     ldh  a, [hLinkPositionX]                      ; $6CA8: $F0 $98
     cp   $04                                      ; $6CAA: $FE $04
     jr   c, .horizontalTransition                 ; $6CAC: $38 $65

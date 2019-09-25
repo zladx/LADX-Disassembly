@@ -98,7 +98,7 @@ wRoomTransitionState:: ; C124
   ds 1
 
 wRoomTransitionDirection:: ; C125
-  ; See ROOM_TRANSITION_DIR_* constants for possible values
+  ; See DIRECTION_* constants for possible values
   ds 1
 
 wBGUpdateRegionOriginHigh:: ; C126

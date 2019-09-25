@@ -43,7 +43,7 @@ GAMEPLAY_PHOTO_FISHERMAN   equ $16
 GAMEPLAY_PHOTO_ZORA        equ $17
 GAMEPLAY_PHOTO_KANALET     equ $18
 GAMEPLAY_PHOTO_GHOST       equ $19
-GAMEPLAY_PHOTO_BRIDGE      equ $20
+GAMEPLAY_PHOTO_BRIDGE      equ $1A
 
 ; Values for wGameplaySubtype
 ; (depends on the gameplay type)

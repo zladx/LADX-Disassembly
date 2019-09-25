@@ -113,7 +113,7 @@ ApplyRoomTransition::
 
     ; If the transition direction was to the bottom…
     ld   a, [wRoomTransitionDirection]            ; $794F: $FA $25 $C1
-    cp   ROOM_TRANSITION_DIR_BOTTOM               ; $7952: $FE $03
+    cp   DIRECTION_DOWN               ; $7952: $FE $03
     jr   nz, .bottomDirectionEnd                  ; $7954: $20 $24
 
     ; Initiate a jump if Link landed on a ledge
@@ -239,38 +239,38 @@ ApplyRoomTransition::
     ret                                           ; $79D9: $C9
 
 WindFishEggMazeSequence::
-    db ROOM_TRANSITION_DIR_LEFT
-    db ROOM_TRANSITION_DIR_LEFT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_LEFT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_LEFT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_LEFT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_RIGHT
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_TOP
-    db ROOM_TRANSITION_DIR_TOP
+    db DIRECTION_LEFT
+    db DIRECTION_LEFT
+    db DIRECTION_UP
+    db DIRECTION_RIGHT
+    db DIRECTION_RIGHT
+    db DIRECTION_UP
+    db DIRECTION_LEFT
+    db DIRECTION_UP
+    db DIRECTION_RIGHT
+    db DIRECTION_UP
+    db DIRECTION_UP
+    db DIRECTION_RIGHT
+    db DIRECTION_UP
+    db DIRECTION_UP
+    db DIRECTION_RIGHT
+    db DIRECTION_UP
+    db DIRECTION_LEFT
+    db DIRECTION_UP
+    db DIRECTION_RIGHT
+    db DIRECTION_UP
+    db DIRECTION_LEFT
+    db DIRECTION_UP
+    db DIRECTION_RIGHT
+    db DIRECTION_UP
+    db DIRECTION_RIGHT
+    db DIRECTION_RIGHT
+    db DIRECTION_RIGHT
+    db DIRECTION_RIGHT
+    db DIRECTION_UP
+    db DIRECTION_UP
+    db DIRECTION_UP
+    db DIRECTION_UP
 
 RoomTransitionPrepareHandler::
     ld   a, [wRoomTransitionDirection]            ; $79FA: $FA $25 $C1
@@ -306,7 +306,7 @@ RoomTransitionPrepareHandler::
 
     ; … and is not sliding to the bottom…
     ld   a, c                                     ; $7A1A: $79
-    cp   ROOM_TRANSITION_DIR_BOTTOM               ; $7A1B: $FE $03
+    cp   DIRECTION_DOWN               ; $7A1B: $FE $03
     jr   z, .noWindFishEggMaze                    ; $7A1D: $28 $29
 
     ; hl = WindFishEggMazeSequence + $DB7C
@@ -356,7 +356,7 @@ RoomTransitionPrepareHandler::
 
     ; If wRoomTransitionDirection == Top…
     ld   a, c                                     ; $7A50: $79
-    cp   ROOM_TRANSITION_DIR_TOP                  ; $7A51: $FE $02
+    cp   DIRECTION_UP                  ; $7A51: $FE $02
     jr   nz, .noFaceShrineHack                    ; $7A53: $20 $12
 
     ; … and dungeon is Face Shrine…
@@ -392,7 +392,7 @@ RoomTransitionPrepareHandler::
 
     ; … and direction == top…
     ld   a, c                                     ; $7A73: $79
-    cp   ROOM_TRANSITION_DIR_TOP                  ; $7A74: $FE $02
+    cp   DIRECTION_UP                  ; $7A74: $FE $02
     jr   nz, .mysteriousWoodsEnd                  ; $7A76: $20 $0C
 
     ; … Link got lost in the Mysterious Woods
@@ -427,7 +427,7 @@ RoomTransitionPrepareHandler::
 
     ; … and direction == top…
     ld   a, c                                     ; $7A92: $79
-    cp   ROOM_TRANSITION_DIR_TOP                  ; $7A93: $FE $02
+    cp   DIRECTION_UP                  ; $7A93: $FE $02
     jr   nz, .forestRoomEnd                       ; $7A95: $20 $0E
 
     ; … and this room has not been visited yet…

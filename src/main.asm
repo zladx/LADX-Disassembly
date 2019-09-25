@@ -300,6 +300,9 @@ incbin "gfx/world/color_dungeon.2bpp"
 section "bank36",romx[$4000],bank[$36]
 include "code/entities/bank36.asm"
 
+section "bank37",romx[$4000],bank[$37]
+include "code/photos.asm"
+
 section "bank38",romx[$4000],bank[$38]
 incbin "gfx/cgb_misc.2bpp"
 

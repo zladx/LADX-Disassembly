@@ -43,7 +43,7 @@ GAMEPLAY_PHOTO_FISHERMAN   equ $16
 GAMEPLAY_PHOTO_ZORA        equ $17
 GAMEPLAY_PHOTO_KANALET     equ $18
 GAMEPLAY_PHOTO_GHOST       equ $19
-GAMEPLAY_PHOTO_BRIDGE      equ $20
+GAMEPLAY_PHOTO_BRIDGE      equ $1A
 
 ; Values for wGameplaySubtype
 ; (depends on the gameplay type)
@@ -102,12 +102,6 @@ ROOM_TRANSITION_LOAD_SPRITES     equ $02
 ROOM_TRANSITION_CONFIGURE_SCROLL equ $03
 ROOM_TRANSITION_FIRST_HALF       equ $04
 ROOM_TRANSITION_SECOND_HALF      equ $05
-
-; Values for wRoomTransitionDirection
-ROOM_TRANSITION_DIR_RIGHT  equ $00
-ROOM_TRANSITION_DIR_LEFT   equ $01
-ROOM_TRANSITION_DIR_TOP    equ $02
-ROOM_TRANSITION_DIR_BOTTOM equ $03
 
 ; Values for wDialogState
 DIALOG_CLOSED              equ $00

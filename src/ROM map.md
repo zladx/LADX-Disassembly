@@ -57,7 +57,7 @@
 34 Graphics: printer UI
 35 Graphics: Color dungeon
 36 Entities code
-37 Code
+37 Photo pictures code
 38 Graphics: large font, misc
 39 Graphics: photo elements
 3A Graphics: photo elements

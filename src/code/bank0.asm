@@ -496,7 +496,8 @@ label_AF6::
     call $7161
     jp   RestoreStackedBankAndReturn
 
-label_B02::
+; Save picture to photo album?
+Func_03D_4029_trampoline::
     ld   a, $3D
     ld   [MBC3SelectBank], a
     call $4029
@@ -1275,9 +1276,7 @@ PhotoAlbumHandler::
     jp   returnFromGameplayHandler
 
 PhotoPictureHandler::
-    ld   a, $37
-    call SwitchBank
-    jp   $4000
+    jpsw PhotosEntryPoint
 
 ; World handler for GAMEPLAY_WORLD_DEFAULT (dispatched from WorldHandlerEntryPoint)
 WorldDefaultHandler::

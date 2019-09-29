@@ -2062,7 +2062,7 @@ UseMagicPowder::
     ld   a, [$C19B]
     and  a
     ret  nz
-    ld   a, [$DB4B]
+    ld   a, [wHasToadstool]
     and  a
     jr   z, label_14A7
     ldh  a, [$FFA2]
@@ -4566,7 +4566,7 @@ label_2CF5::
     call CopyData
 
 label_2CFE::
-    ld   a, [$DB4B]
+    ld   a, [wHasToadstool]
     and  a
     jr   z, label_2D07
     call label_1E2B

@@ -3513,7 +3513,7 @@ func_015_542E:
     jp   label_015_5383                           ; $5432: $C3 $83 $53
 
 func_015_5435:
-    ld   a, [$DB4B]                               ; $5435: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $5435: $FA $4B $DB
     and  a                                        ; $5438: $A7
     jr   z, jr_015_5465                           ; $5439: $28 $2A
 

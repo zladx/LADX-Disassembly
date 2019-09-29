@@ -940,7 +940,12 @@ wOcarinaSongFlags:: ; DB49
 
 ; Unlabeled
 wDB4A equ $DB4A
-  ds 2
+  ds 1
+
+; 0 means that the player does not have the Toadstool
+; 1 means that the player has the Toadstool
+wHasToadstool:: ; DB4B
+  ds 1
 
 wMagicPowderCount:: ; DB4C
   ds 1

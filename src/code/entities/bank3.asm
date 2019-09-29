@@ -483,7 +483,7 @@ jr_003_499C:
     cp   $01                                      ; $4A07: $FE $01
     jr   nz, jr_003_4A12                          ; $4A09: $20 $07
 
-    ld   a, [$DB4B]                               ; $4A0B: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $4A0B: $FA $4B $DB
     and  a                                        ; $4A0E: $A7
     jp   nz, ClearEntityType                           ; $4A0F: $C2 $8D $3F
 
@@ -3822,7 +3822,7 @@ jr_003_5D34:
     ld   [bc], a                                  ; $5D48: $02
     ld   e, [hl]                                  ; $5D49: $5E
     ld   [hl+], a                                 ; $5D4A: $22
-    ld   hl, $DB4B                                ; $5D4B: $21 $4B $DB
+    ld   hl, wHasToadstool                        ; $5D4B: $21 $4B $DB
     ld   a, [wMagicPowderCount]                   ; $5D4E: $FA $4C $DB
     or   [hl]                                     ; $5D51: $B6
     jp   nz, ClearEntityType                           ; $5D52: $C2 $8D $3F
@@ -3849,7 +3849,7 @@ jr_003_5D6C:
     ld   d, $0C                                   ; $5D73: $16 $0C
     call func_003_6472                            ; $5D75: $CD $72 $64
     ld   a, $01                                   ; $5D78: $3E $01
-    ld   [$DB4B], a                               ; $5D7A: $EA $4B $DB
+    ld   [wHasToadstool], a                       ; $5D7A: $EA $4B $DB
     jp   ClearEntityType                               ; $5D7D: $C3 $8D $3F
 
 jr_003_5D80:
@@ -4357,7 +4357,7 @@ jr_003_6052:
     jr   z, jr_003_606A                           ; $6061: $28 $07
 
 jr_003_6063:
-    ld   a, [$DB4B]                               ; $6063: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $6063: $FA $4B $DB
     and  a                                        ; $6066: $A7
     jp   nz, ClearEntityType                           ; $6067: $C2 $8D $3F
 

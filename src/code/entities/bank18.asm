@@ -2630,7 +2630,7 @@ jr_018_5001:
     ld   d, $0C                                   ; $5036: $16 $0C
     call label_3E6B                               ; $5038: $CD $6B $3E
     xor  a                                        ; $503B: $AF
-    ld   [$DB4B], a                               ; $503C: $EA $4B $DB
+    ld   [wHasToadstool], a                       ; $503C: $EA $4B $DB
     ld   a, $0B                                   ; $503F: $3E $0B
     ldh  [hFFA5], a                               ; $5041: $E0 $A5
     ret                                           ; $5043: $C9

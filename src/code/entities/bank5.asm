@@ -1503,7 +1503,7 @@ func_005_47C0:
     and  a                                        ; $4818: $A7
     ret  nz                                       ; $4819: $C0
 
-    ld   a, [$DB4B]                               ; $481A: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $481A: $FA $4B $DB
     and  a                                        ; $481D: $A7
     jr   z, jr_005_484A                           ; $481E: $28 $2A
 
@@ -1549,7 +1549,7 @@ jr_005_484A:
 
 jr_005_4853:
     xor  a                                        ; $4853: $AF
-    ld   [$DB4B], a                               ; $4854: $EA $4B $DB
+    ld   [wHasToadstool], a                       ; $4854: $EA $4B $DB
     call GetEntityTransitionCountdown                 ; $4857: $CD $05 $0C
     ld   [hl], $08                                ; $485A: $36 $08
     jp   IncrementEntityWalkingAttr               ; $485C: $C3 $12 $3B

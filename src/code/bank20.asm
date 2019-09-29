@@ -5340,7 +5340,7 @@ jr_020_5B76:
     ret                                           ; $5B7F: $C9
 
 jr_020_5B80:
-    ld   a, [$DB4B]                               ; $5B80: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $5B80: $FA $4B $DB
     and  a                                        ; $5B83: $A7
     jr   nz, jr_020_5B62                          ; $5B84: $20 $DC
 
@@ -5431,7 +5431,7 @@ jr_020_5BF9:
     cp   $18                                      ; $5BF9: $FE $18
     jr   nz, jr_020_5C0B                          ; $5BFB: $20 $0E
 
-    ld   a, [$DB4B]                               ; $5BFD: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $5BFD: $FA $4B $DB
     and  a                                        ; $5C00: $A7
     jr   z, jr_020_5C0B                           ; $5C01: $28 $08
 

@@ -1503,7 +1503,7 @@ func_005_47C0:
     and  a                                        ; $4818: $A7
     ret  nz                                       ; $4819: $C0
 
-    ld   a, [$DB4B]                               ; $481A: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $481A: $FA $4B $DB
     and  a                                        ; $481D: $A7
     jr   z, jr_005_484A                           ; $481E: $28 $2A
 
@@ -1549,7 +1549,7 @@ jr_005_484A:
 
 jr_005_4853:
     xor  a                                        ; $4853: $AF
-    ld   [$DB4B], a                               ; $4854: $EA $4B $DB
+    ld   [wHasToadstool], a                       ; $4854: $EA $4B $DB
     call GetEntityTransitionCountdown                 ; $4857: $CD $05 $0C
     ld   [hl], $08                                ; $485A: $36 $08
     jp   IncrementEntityWalkingAttr               ; $485C: $C3 $12 $3B
@@ -2791,7 +2791,7 @@ jr_005_4F6F:
     jp   OpenDialogInTable1                       ; $4F86: $C3 $73 $23
 
 jr_005_4F89:
-    ld   a, [$DB49]                               ; $4F89: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $4F89: $FA $49 $DB
     and  $04                                      ; $4F8C: $E6 $04
     jr   z, jr_005_4F95                           ; $4F8E: $28 $05
 
@@ -2855,7 +2855,7 @@ jr_005_4FD6:
 
     ld   e, $04                                   ; $4FDB: $1E $04
     ld   d, $4A                                   ; $4FDD: $16 $4A
-    ld   a, [$DB49]                               ; $4FDF: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $4FDF: $FA $49 $DB
     and  $04                                      ; $4FE2: $E6 $04
     jr   z, jr_005_4FFA                           ; $4FE4: $28 $14
 
@@ -2928,7 +2928,7 @@ jr_005_503E:
     cp   $4A                                      ; $503E: $FE $4A
     jr   nz, jr_005_5054                          ; $5040: $20 $12
 
-    ld   a, [$DB49]                               ; $5042: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $5042: $FA $49 $DB
     and  $04                                      ; $5045: $E6 $04
     jr   nz, jr_005_5054                          ; $5047: $20 $0B
 
@@ -3118,7 +3118,7 @@ jr_005_515E:
     and  a                                        ; $516E: $A7
     ret  nz                                       ; $516F: $C0
 
-    ld   hl, $DB49                                ; $5170: $21 $49 $DB
+    ld   hl, wOcarinaSongFlags                   ; $5170: $21 $49 $DB
     set  2, [hl]                                  ; $5173: $CB $D6
     xor  a                                        ; $5175: $AF
     ld   [$DB4A], a                               ; $5176: $EA $4A $DB

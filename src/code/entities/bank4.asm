@@ -8141,7 +8141,7 @@ jr_004_74F1:
     cp   $03                                      ; $74F1: $FE $03
     jr   nz, jr_004_74FE                          ; $74F3: $20 $09
 
-    ld   a, [$DB4B]                               ; $74F5: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $74F5: $FA $4B $DB
     and  a                                        ; $74F8: $A7
     jp   nz, label_004_6D7A                       ; $74F9: $C2 $7A $6D
 

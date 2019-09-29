@@ -7364,7 +7364,7 @@ jr_006_6B3F:
     jr   z, jr_006_6BAD                           ; $6B46: $28 $65
 
     ld   e, $45                                   ; $6B48: $1E $45
-    ld   a, [$DB49]                               ; $6B4A: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $6B4A: $FA $49 $DB
     and  $01                                      ; $6B4D: $E6 $01
     jp   z, label_006_6BB3                        ; $6B4F: $CA $B3 $6B
 
@@ -8791,7 +8791,7 @@ label_006_7372:
     cp   $01                                      ; $737E: $FE $01
     jr   nz, jr_006_73AD                          ; $7380: $20 $2B
 
-    ld   a, [$DB49]                               ; $7382: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $7382: $FA $49 $DB
     and  $04                                      ; $7385: $E6 $04
     jr   z, jr_006_73AD                           ; $7387: $28 $24
 

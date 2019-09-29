@@ -2062,7 +2062,7 @@ UseMagicPowder::
     ld   a, [$C19B]
     and  a
     ret  nz
-    ld   a, [$DB4B]
+    ld   a, [wHasToadstool]
     and  a
     jr   z, label_14A7
     ldh  a, [$FFA2]
@@ -3409,7 +3409,7 @@ label_2049::
     ld   [MBC3SelectBank], a
     ld   hl, $5118
     add  hl, de
-    ld   a, [$DB49]
+    ld   a, [wOcarinaSongFlags]
     ld   e, a
     ld   a, [hl]
     cp   $A9
@@ -4566,7 +4566,7 @@ label_2CF5::
     call CopyData
 
 label_2CFE::
-    ld   a, [$DB4B]
+    ld   a, [wHasToadstool]
     and  a
     jr   z, label_2D07
     call label_1E2B

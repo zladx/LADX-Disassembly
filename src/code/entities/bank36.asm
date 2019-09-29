@@ -3577,7 +3577,7 @@ jr_036_542F:
     ret                                           ; $545C: $C9
 
 func_036_545D:
-    ld   a, [$DB4B]                               ; $545D: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $545D: $FA $4B $DB
     and  a                                        ; $5460: $A7
     ret  nz                                       ; $5461: $C0
 
@@ -3643,7 +3643,7 @@ func_036_54B0:
     and  a                                        ; $54B3: $A7
     ret  nz                                       ; $54B4: $C0
 
-    ld   a, [$DB4B]                               ; $54B5: $FA $4B $DB
+    ld   a, [wHasToadstool]                       ; $54B5: $FA $4B $DB
     and  a                                        ; $54B8: $A7
     ret  z                                        ; $54B9: $C8
 

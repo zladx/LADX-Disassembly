@@ -5348,7 +5348,7 @@ jr_020_5B80:
     jr   jr_020_5BA8                              ; $5B89: $18 $1D
 
 jr_020_5B8B:
-    ld   a, [$DB49]                               ; $5B8B: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $5B8B: $FA $49 $DB
     and  a                                        ; $5B8E: $A7
     jp   z, label_020_5B62                        ; $5B8F: $CA $62 $5B
 
@@ -6164,7 +6164,7 @@ jr_020_5F85:
     cp   $09                                      ; $5F9B: $FE $09
     jr   nz, jr_020_5FB2                          ; $5F9D: $20 $13
 
-    ld   a, [$DB49]                               ; $5F9F: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $5F9F: $FA $49 $DB
     and  a                                        ; $5FA2: $A7
     jr   z, jr_020_5FB2                           ; $5FA3: $28 $0D
 
@@ -6239,7 +6239,7 @@ jr_020_600D:
     cp   $09                                      ; $600D: $FE $09
     jr   nz, jr_020_6027                          ; $600F: $20 $16
 
-    ld   a, [$DB49]                               ; $6011: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $6011: $FA $49 $DB
     and  a                                        ; $6014: $A7
     jr   z, jr_020_6027                           ; $6015: $28 $10
 
@@ -6552,7 +6552,7 @@ jr_020_618D:
     ld   b, $01                                   ; $618D: $06 $01
 
 jr_020_618F:
-    ld   a, [$DB49]                               ; $618F: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $618F: $FA $49 $DB
     and  b                                        ; $6192: $A0
     jr   nz, jr_020_619A                          ; $6193: $20 $05
 
@@ -6591,7 +6591,7 @@ jr_020_61B7:
     ld   d, $00                                   ; $61B9: $16 $00
     ld   hl, $610E                                ; $61BB: $21 $0E $61
     add  hl, de                                   ; $61BE: $19
-    ld   a, [$DB49]                               ; $61BF: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $61BF: $FA $49 $DB
     and  [hl]                                     ; $61C2: $A6
     jr   z, jr_020_61AD                           ; $61C3: $28 $E8
 
@@ -6615,7 +6615,7 @@ jr_020_61D6:
     ld   d, $00                                   ; $61D8: $16 $00
     ld   hl, $610E                                ; $61DA: $21 $0E $61
     add  hl, de                                   ; $61DD: $19
-    ld   a, [$DB49]                               ; $61DE: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $61DE: $FA $49 $DB
     and  [hl]                                     ; $61E1: $A6
     jr   z, jr_020_61CB                           ; $61E2: $28 $E7
 

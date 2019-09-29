@@ -45,7 +45,7 @@ UseOcarina::
     ld   [$C5A4], a                               ; $4208: $EA $A4 $C5
     ld   [$C5A5], a                               ; $420B: $EA $A5 $C5
     call CopyLinkFinalPositionToPosition          ; $420E: $CD $BE $0C
-    ld   a, [$DB49]                               ; $4211: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $4211: $FA $49 $DB
     and  $07                                      ; $4214: $E6 $07
     jr   z, jr_002_4241                           ; $4216: $28 $29
 
@@ -1230,7 +1230,7 @@ jr_002_4A7C:
     jr   jr_002_4AB2                              ; $4AA0: $18 $10
 
 jr_002_4AA2:
-    ld   a, [$DB49]                               ; $4AA2: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $4AA2: $FA $49 $DB
     and  a                                        ; $4AA5: $A7
     jr   nz, jr_002_4AB2                          ; $4AA6: $20 $0A
 

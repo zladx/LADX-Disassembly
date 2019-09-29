@@ -3409,7 +3409,7 @@ label_2049::
     ld   [MBC3SelectBank], a
     ld   hl, $5118
     add  hl, de
-    ld   a, [$DB49]
+    ld   a, [wOcarinaSongFlags]
     ld   e, a
     ld   a, [hl]
     cp   $A9

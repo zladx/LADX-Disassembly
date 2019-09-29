@@ -929,7 +929,18 @@ wArrowCount:: ; DB45
 
 ; Unlabeled
 wDB46 equ $DB46
-  ds 6
+  ds 3
+
+; $0111 means that the player has every song.
+;   byte 0: has Ballad of the Wind Fish?
+;   byte 1: has Manbo's Mambo?
+;   byte 2: has Frog's Song of the Soul?
+wOcarinaSongFlags:: ; DB49
+  ds 1
+
+; Unlabeled
+wDB4A equ $DB4A
+  ds 2
 
 wMagicPowderCount:: ; DB4C
   ds 1

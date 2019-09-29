@@ -1831,7 +1831,7 @@ jr_019_4AEA:
 
 jr_019_4AEB:
     ld   c, e                                     ; $4AEB: $4B
-    ld   a, [$DB49]                               ; $4AEC: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $4AEC: $FA $49 $DB
     and  $04                                      ; $4AEF: $E6 $04
     ret  z                                        ; $4AF1: $C8
 
@@ -2291,7 +2291,7 @@ label_019_4D9B:
     add  hl, bc                                   ; $4DC3: $09
     ld   [hl], $50                                ; $4DC4: $36 $50
     call func_019_4E00                            ; $4DC6: $CD $00 $4E
-    ld   a, [$DB49]                               ; $4DC9: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $4DC9: $FA $49 $DB
     and  $01                                      ; $4DCC: $E6 $01
     ret  z                                        ; $4DCE: $C8
 

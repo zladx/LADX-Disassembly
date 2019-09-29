@@ -35,7 +35,7 @@ jr_018_400F:
     ld   b, d                                     ; $402C: $42
     xor  a                                        ; $402D: $AF
     ld   [$D201], a                               ; $402E: $EA $01 $D2
-    ld   a, [$DB49]                               ; $4031: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $4031: $FA $49 $DB
     and  $01                                      ; $4034: $E6 $01
     jr   z, jr_018_404A                           ; $4036: $28 $12
 
@@ -293,7 +293,7 @@ jr_018_4268:
 
     ld   a, $02                                   ; $4270: $3E $02
     ld   [$DB4A], a                               ; $4272: $EA $4A $DB
-    ld   hl, $DB49                                ; $4275: $21 $49 $DB
+    ld   hl, wOcarinaSongFlags                   ; $4275: $21 $49 $DB
     set  0, [hl]                                  ; $4278: $CB $C6
     jp   IncrementEntityWalkingAttr               ; $427A: $C3 $12 $3B
 
@@ -752,7 +752,7 @@ jr_018_4521:
     ld   b, a                                     ; $4533: $47
     ld   c, a                                     ; $4534: $4F
     ld   b, a                                     ; $4535: $47
-    ld   a, [$DB49]                               ; $4536: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                  ; $4536: $FA $49 $DB
     and  $02                                      ; $4539: $E6 $02
     jr   z, jr_018_4547                           ; $453B: $28 $0A
 
@@ -1133,7 +1133,7 @@ jr_018_4746:
 
     ld   a, $01                                   ; $4757: $3E $01
     ld   [$DB4A], a                               ; $4759: $EA $4A $DB
-    ld   hl, $DB49                                ; $475C: $21 $49 $DB
+    ld   hl, wOcarinaSongFlags                   ; $475C: $21 $49 $DB
     set  1, [hl]                                  ; $475F: $CB $CE
     xor  a                                        ; $4761: $AF
     ld   [wC167], a                               ; $4762: $EA $67 $C1

@@ -316,6 +316,10 @@ section "bank3B",romx[$4000],bank[$3B]
 incbin "gfx/photos/photo_elements_3.2bpp"
 incbin "gfx/photos/photo_dizzy_link.2bpp"
 
+section "bank3C",romx[$4000],bank[$3C]
+include "data/super_gameboy.asm"
+include "code/super_gameboy.asm"
+
 ; Unused banks; make blank sections so they are filled with $00 instead of $ff to match
 ; the rom
 section "bank3E",romx[$4000],bank[$3E]

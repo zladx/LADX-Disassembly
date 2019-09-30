@@ -34,10 +34,8 @@ Init::
     call LCDOff      ; Turn off screen
     ld   sp, $DFFF   ; Init stack pointer
 
-    ; Call 003C:6A22
-    ld   a, $3C
-    ld   [MBC3SelectBank], a
-    call $6A22
+    ; Super GameBoy detection and initialization
+    callsb SuperGameBoyInit
 
     ; Clear registers
     xor  a

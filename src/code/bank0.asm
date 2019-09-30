@@ -498,9 +498,7 @@ label_AF6::
 
 ; Save picture to photo album?
 Func_03D_4029_trampoline::
-    ld   a, $3D
-    ld   [MBC3SelectBank], a
-    call $4029
+    callsb Func_03D_4029
     ret
 
 ; Toogle an extra byte to the bank number on GBC (on DMG, does nothing)

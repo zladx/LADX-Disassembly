@@ -320,6 +320,9 @@ section "bank3C",romx[$4000],bank[$3C]
 include "data/super_gameboy.asm"
 include "code/super_gameboy.asm"
 
+section "bank3D",romx[$4000],bank[$3D]
+include "code/photos_bg.asm"
+
 ; Unused banks; make blank sections so they are filled with $00 instead of $ff to match
 ; the rom
 section "bank3E",romx[$4000],bank[$3E]

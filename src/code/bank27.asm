@@ -10,7 +10,7 @@ Data_027_SourceTable::
 
 ; Copy data from a source specified in the table
 ; to a destination specified by $D01A
-Func_027_7FC5::
+LoadTilemap21::
     ; Destination address higher byte
     ld   a, [$D01A]                              ; $7FC5: $FA $1A $D0
     cp   $05                                     ; $7FC8: $FE $05
@@ -33,6 +33,6 @@ Func_027_7FC5::
     ; Source bank
     ld   a, [hl]                                 ; $7FDC: $7E
     ; Bank to switch back after the transfert
-    ld   h, BANK(Func_027_7FC5)                  ; $7FDD: $26 $27
+    ld   h, BANK(LoadTilemap21)                  ; $7FDD: $26 $27
     ; Execute the copy
     jp   Copy100BytesFromBankAtA                 ; $7FDF: $C3 $13 $0A

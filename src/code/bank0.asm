@@ -6897,8 +6897,8 @@ SwitchToMapDataBank::
     ld   [MBC3SelectBank], a
     ret
 
-label_3915::
-    jpsb Func_027_7FC5
+LoadTilemap21_trampoline::
+    jpsb LoadTilemap21
 
 label_391D::
     ld   a, $20

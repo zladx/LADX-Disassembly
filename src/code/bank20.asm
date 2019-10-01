@@ -1122,7 +1122,7 @@ TilemapLoadingHandlersTable::
 ._1E dw label_2A57
 ._1F dw label_2E0B
 ._20 dw label_2E21
-._21 dw label_3915
+._21 dw LoadTilemap21_trampoline
 ._22 dw label_391D
 
 data_020_46AA::

@@ -40,7 +40,7 @@ Func_017_4062::
     ld   d, a                                     ; $407C: $57
 
 jr_017_407D:
-    ldh  [$FFD9], a                               ; $407D: $E0 $D9
+    ldh  [hScratch2], a                               ; $407D: $E0 $D9
     sla  a                                        ; $407F: $CB $27
     ld   e, a                                     ; $4081: $5F
     ld   hl, Data_017_4048                        ; $4082: $21 $48 $40
@@ -377,18 +377,18 @@ jr_017_46C9:
     ld   a, $18                                   ; $46D2: $3E $18
 
 jr_017_46D4:
-    ldh  [$FFD7], a                               ; $46D4: $E0 $D7
+    ldh  [hScratch0], a                               ; $46D4: $E0 $D7
     ld   c, $09                                   ; $46D6: $0E $09
 
 jr_017_46D8:
     ld   a, $40                                   ; $46D8: $3E $40
     ld   [de], a                                  ; $46DA: $12
     inc  de                                       ; $46DB: $13
-    ldh  a, [$FFD7]                               ; $46DC: $F0 $D7
+    ldh  a, [hScratch0]                               ; $46DC: $F0 $D7
     ld   [de], a                                  ; $46DE: $12
     inc  de                                       ; $46DF: $13
     add  $10                                      ; $46E0: $C6 $10
-    ldh  [$FFD7], a                               ; $46E2: $E0 $D7
+    ldh  [hScratch0], a                               ; $46E2: $E0 $D7
     ld   a, [hl+]                                 ; $46E4: $2A
     inc  hl                                       ; $46E5: $23
     push hl                                       ; $46E6: $E5
@@ -471,7 +471,7 @@ func_017_4784:
     add  hl, de                                   ; $47A1: $19
     push hl                                       ; $47A2: $E5
     xor  a                                        ; $47A3: $AF
-    ldh  [$FFD8], a                               ; $47A4: $E0 $D8
+    ldh  [hScratch1], a                               ; $47A4: $E0 $D8
     ld   de, $C054                                ; $47A6: $11 $54 $C0
     ldh  a, [$FFFE]                               ; $47A9: $F0 $FE
     and  a                                        ; $47AB: $A7
@@ -482,7 +482,7 @@ func_017_4784:
 jr_017_47B1:
     ld   a, $55                                   ; $47B1: $3E $55
     call func_017_47C8                            ; $47B3: $CD $C8 $47
-    ld   hl, $FFD8                                ; $47B6: $21 $D8 $FF
+    ld   hl, hScratch1                                ; $47B6: $21 $D8 $FF
     inc  [hl]                                     ; $47B9: $34
     pop  hl                                       ; $47BA: $E1
     ld   de, $C078                                ; $47BB: $11 $78 $C0
@@ -515,17 +515,17 @@ func_017_47C8:
     ld   a, $18                                   ; $47E4: $3E $18
 
 jr_017_47E6:
-    ldh  [$FFD7], a                               ; $47E6: $E0 $D7
+    ldh  [hScratch0], a                               ; $47E6: $E0 $D7
 
 jr_017_47E8:
     ldh  a, [$FFE9]                               ; $47E8: $F0 $E9
     ld   [de], a                                  ; $47EA: $12
     inc  de                                       ; $47EB: $13
-    ldh  a, [$FFD7]                               ; $47EC: $F0 $D7
+    ldh  a, [hScratch0]                               ; $47EC: $F0 $D7
     ld   [de], a                                  ; $47EE: $12
     inc  de                                       ; $47EF: $13
     add  b                                        ; $47F0: $80
-    ldh  [$FFD7], a                               ; $47F1: $E0 $D7
+    ldh  [hScratch0], a                               ; $47F1: $E0 $D7
     ld   a, [$D011]                               ; $47F3: $FA $11 $D0
     cp   $25                                      ; $47F6: $FE $25
     ld   a, [hl+]                                 ; $47F8: $2A
@@ -561,7 +561,7 @@ jr_017_4816:
 
 jr_017_4818:
     sla  a                                        ; $4818: $CB $27
-    ld   hl, $FFD8                                ; $481A: $21 $D8 $FF
+    ld   hl, hScratch1                                ; $481A: $21 $D8 $FF
     add  [hl]                                     ; $481D: $86
     ld   e, a                                     ; $481E: $5F
     ld   d, $00                                   ; $481F: $16 $00
@@ -710,7 +710,7 @@ ApplyWindFishVfx::
     inc  a                                        ; $48FC: $3C
     ld   [$C180], a                               ; $48FD: $EA $80 $C1
     ld   a, [$D005]                               ; $4900: $FA $05 $D0
-    ldh  [$FFD8], a                               ; $4903: $E0 $D8
+    ldh  [hScratch1], a                               ; $4903: $E0 $D8
     ld   hl, $C17C                                ; $4905: $21 $7C $C1
     xor  a                                        ; $4908: $AF
     ld   [hl+], a                                 ; $4909: $22
@@ -748,7 +748,7 @@ jr_017_4919:
     ld   a, [$C17C]                               ; $493E: $FA $7C $C1
     add  [hl]                                     ; $4941: $86
     and  $1F                                      ; $4942: $E6 $1F
-    ld   hl, $FFD8                                ; $4944: $21 $D8 $FF
+    ld   hl, hScratch1                                ; $4944: $21 $D8 $FF
     or   [hl]                                     ; $4947: $B6
     ld   e, a                                     ; $4948: $5F
     ld   hl, Data_017_49B7                        ; $4949: $21 $B7 $49
@@ -798,7 +798,7 @@ jr_017_496C:
     ld   a, [$C17C]                               ; $4991: $FA $7C $C1
     add  [hl]                                     ; $4994: $86
     and  $1F                                      ; $4995: $E6 $1F
-    ld   hl, $FFD8                                ; $4997: $21 $D8 $FF
+    ld   hl, hScratch1                                ; $4997: $21 $D8 $FF
     or   [hl]                                     ; $499A: $B6
     ld   e, a                                     ; $499B: $5F
     ld   hl, Data_017_49B7                        ; $499C: $21 $B7 $49
@@ -6113,7 +6113,7 @@ jr_017_76BF:
     ld   d, a                                     ; $76E5: $57
     sra  a                                        ; $76E6: $CB $2F
     add  d                                        ; $76E8: $82
-    ldh  [$FFD7], a                               ; $76E9: $E0 $D7
+    ldh  [hScratch0], a                               ; $76E9: $E0 $D7
     ldh  a, [hFrameCounter]                               ; $76EB: $F0 $E7
     and  $03                                      ; $76ED: $E6 $03
     jr   nz, jr_017_76FD                          ; $76EF: $20 $0C
@@ -6136,7 +6136,7 @@ jr_017_76FD:
     add  hl, de                                   ; $7705: $19
     ldh  a, [$FFEC]                               ; $7706: $F0 $EC
     add  [hl]                                     ; $7708: $86
-    ld   hl, $FFD7                                ; $7709: $21 $D7 $FF
+    ld   hl, hScratch0                                ; $7709: $21 $D7 $FF
     sub  [hl]                                     ; $770C: $96
     ldh  [$FFEC], a                               ; $770D: $E0 $EC
     cp   $A8                                      ; $770F: $FE $A8
@@ -6623,7 +6623,7 @@ Func_017_79A4::
     add  hl, bc                                   ; $79AA: $09
     ld   a, [hl]                                  ; $79AB: $7E
     add  $50                                      ; $79AC: $C6 $50
-    ldh  [$FFD7], a                               ; $79AE: $E0 $D7
+    ldh  [hScratch0], a                               ; $79AE: $E0 $D7
     call func_017_7A01                            ; $79B0: $CD $01 $7A
     ld   de, Data_017_7987                        ; $79B3: $11 $87 $79
     call func_017_7A29                            ; $79B6: $CD $29 $7A
@@ -6727,7 +6727,7 @@ jr_017_7A1B:
 func_017_7A29:
     push bc                                       ; $7A29: $C5
     push de                                       ; $7A2A: $D5
-    ldh  a, [$FFD7]                               ; $7A2B: $F0 $D7
+    ldh  a, [hScratch0]                               ; $7A2B: $F0 $D7
     ld   e, a                                     ; $7A2D: $5F
     ld   d, b                                     ; $7A2E: $50
     ld   hl, $C000                                ; $7A2F: $21 $00 $C0
@@ -7317,7 +7317,7 @@ jr_017_7D4D:
     inc  de                                       ; $7D52: $13
     ld   [hl+], a                                 ; $7D53: $22
     push hl                                       ; $7D54: $E5
-    ld   hl, $FFD7                                ; $7D55: $21 $D7 $FF
+    ld   hl, hScratch0                                ; $7D55: $21 $D7 $FF
     ld   a, [$DC0F]                               ; $7D58: $FA $0F $DC
     and  a                                        ; $7D5B: $A7
     jr   z, jr_017_7D5F                           ; $7D5C: $28 $01
@@ -7341,7 +7341,7 @@ jr_017_7D5F:
     inc  de                                       ; $7D6F: $13
     ld   [hl+], a                                 ; $7D70: $22
     push hl                                       ; $7D71: $E5
-    ld   hl, $FFD7                                ; $7D72: $21 $D7 $FF
+    ld   hl, hScratch0                                ; $7D72: $21 $D7 $FF
     ld   a, [de]                                  ; $7D75: $1A
     or   [hl]                                     ; $7D76: $B6
     pop  hl                                       ; $7D77: $E1
@@ -7544,7 +7544,7 @@ jr_017_7E88:
     ldh  [$FFE6], a                               ; $7E92: $E0 $E6
     ld   hl, $DC10                                ; $7E94: $21 $10 $DC
     ld   a, $40                                   ; $7E97: $3E $40
-    ldh  [$FFDA], a                               ; $7E99: $E0 $DA
+    ldh  [hScratch3], a                               ; $7E99: $E0 $DA
     call func_017_7EA4                            ; $7E9B: $CD $A4 $7E
     ld   a, $01                                   ; $7E9E: $3E $01
 
@@ -7586,7 +7586,7 @@ jr_017_7EC6:
     ld   a, b                                     ; $7EC6: $78
 
 jr_017_7EC7:
-    ldh  [$FFD7], a                               ; $7EC7: $E0 $D7
+    ldh  [hScratch0], a                               ; $7EC7: $E0 $D7
     ld   a, e                                     ; $7EC9: $7B
     and  $E0                                      ; $7ECA: $E6 $E0
     swap a                                        ; $7ECC: $CB $37
@@ -7623,7 +7623,7 @@ jr_017_7EF2:
     ld   a, b                                     ; $7EF2: $78
 
 jr_017_7EF3:
-    ldh  [$FFD8], a                               ; $7EF3: $E0 $D8
+    ldh  [hScratch1], a                               ; $7EF3: $E0 $D8
     ldh  a, [$FFE6]                               ; $7EF5: $F0 $E6
     ld   c, a                                     ; $7EF7: $4F
     ld   a, d                                     ; $7EF8: $7A
@@ -7646,25 +7646,25 @@ jr_017_7F0A:
     ld   a, b                                     ; $7F0A: $78
 
 jr_017_7F0B:
-    ldh  [$FFD9], a                               ; $7F0B: $E0 $D9
+    ldh  [hScratch2], a                               ; $7F0B: $E0 $D9
     pop  hl                                       ; $7F0D: $E1
-    ldh  a, [$FFD7]                               ; $7F0E: $F0 $D7
+    ldh  a, [hScratch0]                               ; $7F0E: $F0 $D7
     ld   b, a                                     ; $7F10: $47
-    ldh  a, [$FFD8]                               ; $7F11: $F0 $D8
+    ldh  a, [hScratch1]                               ; $7F11: $F0 $D8
     swap a                                        ; $7F13: $CB $37
     ld   c, a                                     ; $7F15: $4F
     and  $E0                                      ; $7F16: $E6 $E0
     or   b                                        ; $7F18: $B0
     ld   [hl+], a                                 ; $7F19: $22
-    ldh  a, [$FFD9]                               ; $7F1A: $F0 $D9
+    ldh  a, [hScratch2]                               ; $7F1A: $F0 $D9
     ld   b, a                                     ; $7F1C: $47
     ld   a, c                                     ; $7F1D: $79
     and  $03                                      ; $7F1E: $E6 $03
     or   b                                        ; $7F20: $B0
     ld   [hl+], a                                 ; $7F21: $22
-    ldh  a, [$FFDA]                               ; $7F22: $F0 $DA
+    ldh  a, [hScratch3]                               ; $7F22: $F0 $DA
     dec  a                                        ; $7F24: $3D
-    ldh  [$FFDA], a                               ; $7F25: $E0 $DA
+    ldh  [hScratch3], a                               ; $7F25: $E0 $DA
     and  a                                        ; $7F27: $A7
     jp   nz, label_017_7EA4                       ; $7F28: $C2 $A4 $7E
 
@@ -7713,7 +7713,7 @@ jr_017_7F57:
     ld   a, $1F                                   ; $7F63: $3E $1F
 
 jr_017_7F65:
-    ldh  [$FFD7], a                               ; $7F65: $E0 $D7
+    ldh  [hScratch0], a                               ; $7F65: $E0 $D7
     ldh  a, [$FFE5]                               ; $7F67: $F0 $E5
     ld   c, a                                     ; $7F69: $4F
     ld   a, [hl+]                                 ; $7F6A: $2A
@@ -7732,7 +7732,7 @@ jr_017_7F65:
     ld   a, $3E                                   ; $7F7D: $3E $3E
 
 jr_017_7F7F:
-    ldh  [$FFD8], a                               ; $7F7F: $E0 $D8
+    ldh  [hScratch1], a                               ; $7F7F: $E0 $D8
     ldh  a, [$FFE6]                               ; $7F81: $F0 $E6
     ld   c, a                                     ; $7F83: $4F
     ld   a, [hl]                                  ; $7F84: $7E
@@ -7744,17 +7744,17 @@ jr_017_7F7F:
     ld   a, $7C                                   ; $7F8C: $3E $7C
 
 jr_017_7F8E:
-    ldh  [$FFD9], a                               ; $7F8E: $E0 $D9
+    ldh  [hScratch2], a                               ; $7F8E: $E0 $D9
     pop  hl                                       ; $7F90: $E1
-    ldh  a, [$FFD7]                               ; $7F91: $F0 $D7
+    ldh  a, [hScratch0]                               ; $7F91: $F0 $D7
     ld   b, a                                     ; $7F93: $47
-    ldh  a, [$FFD8]                               ; $7F94: $F0 $D8
+    ldh  a, [hScratch1]                               ; $7F94: $F0 $D8
     swap a                                        ; $7F96: $CB $37
     ld   c, a                                     ; $7F98: $4F
     and  $E0                                      ; $7F99: $E6 $E0
     or   b                                        ; $7F9B: $B0
     ld   [hl+], a                                 ; $7F9C: $22
-    ldh  a, [$FFD9]                               ; $7F9D: $F0 $D9
+    ldh  a, [hScratch2]                               ; $7F9D: $F0 $D9
     ld   b, a                                     ; $7F9F: $47
     ld   a, c                                     ; $7FA0: $79
     and  $03                                      ; $7FA1: $E6 $03

@@ -9,8 +9,8 @@
 ;   hl   address of the object in the object map (see wRoomObjects)
 ;   bc   object attribute value * 4
 ; Returns:
-;   hBGAttributesBank      the bank of the BG attributes
-;   hScratchE, hScratchF   the address of the BG attributes
+;   hScratch8      the bank of the BG attributes
+;   hScratch9, hScratchA   the address of the BG attributes
 GetBGAttributesAddressForObject::
     push hl                                       ; $6576: $E5
     push bc                                       ; $6577: $C5
@@ -29,11 +29,11 @@ GetBGAttributesAddressForObject::
     ldh  a, [hMapRoom]                            ; $6581: $F0 $F6
     ld   c, a                                     ; $6583: $4F
 
-    ; hBGAttributesBank = OverworldBGAttributesBanks[hMapRoom]
+    ; hScratch8 = OverworldBGAttributesBanks[hMapRoom]
     ld   hl, OverworldBGAttributesBanks           ; $6584: $21 $76 $64
     add  hl, bc                                   ; $6587: $09
     ld   a, [hl]                                  ; $6588: $7E
-    ldh  [hBGAttributesBank], a                    ; $6589: $E0 $DF
+    ldh  [hScratch8], a                           ; $6589: $E0 $DF
 .overworldPaletteBankEnd
 
     ; bc = [hMapRoom] * 2
@@ -55,7 +55,7 @@ GetBGAttributesAddressForObject::
     jp   z, .indoorPaletteEnd                     ; $659B: $CA $30 $66
 
     ld   a, BANK(IndoorsBGAttributesA)            ; $659E: $3E $23
-    ldh  [hBGAttributesBank], a                    ; $65A0: $E0 $DF
+    ldh  [hScratch8], a                           ; $65A0: $E0 $DF
     inc  h                                        ; $65A2: $24
     inc  h                                        ; $65A3: $24
     ld   b, $00                                   ; $65A4: $06 $00
@@ -163,8 +163,8 @@ GetBGAttributesAddressForObject::
     jr   z, .jr_01A_662E                          ; $6628: $28 $04
 
 .useSecondaryIndoorsPaletteBank
-    ld   a, BANK(IndoorsBGAttributesB)           ; $662A: $3E $24
-    ldh  [hBGAttributesBank], a                    ; $662C: $E0 $DF
+    ld   a, BANK(IndoorsBGAttributesB)            ; $662A: $3E $24
+    ldh  [hScratch8], a                           ; $662C: $E0 $DF
 
 .jr_01A_662E
     inc  h                                        ; $662E: $24
@@ -186,11 +186,11 @@ GetBGAttributesAddressForObject::
 .loadPalettesAdress
     pop  bc                                       ; $6636: $C1
     add  hl, bc                                   ; $6637: $09
-    ; hScratchE, hScratchF = PalettesTable[ObjectAttributeValue * 4]
+    ; hScratch9, hScratchA = PalettesTable[ObjectAttributeValue * 4]
     ld   a, h                                     ; $6638: $7C
-    ldh  [hScratchE], a                           ; $6639: $E0 $E0
+    ldh  [hScratch9], a                           ; $6639: $E0 $E0
     ld   a, l                                     ; $663B: $7D
-    ldh  [hScratchF], a                           ; $663C: $E0 $E1
+    ldh  [hScratchA], a                           ; $663C: $E0 $E1
     pop  hl                                       ; $663E: $E1
     ret                                           ; $663F: $C9
 
@@ -263,13 +263,13 @@ jr_01A_6736:
     ld   b, $00                                   ; $6737: $06 $00
     ld   a, [hl]                                  ; $6739: $7E
     ld   c, a                                     ; $673A: $4F
-    ldh  a, [hScratchE]                           ; $673B: $F0 $E0
+    ldh  a, [hScratch9]                           ; $673B: $F0 $E0
     ld   h, a                                     ; $673D: $67
-    ldh  a, [hScratchF]                           ; $673E: $F0 $E1
+    ldh  a, [hScratchA]                           ; $673E: $F0 $E1
     ld   l, a                                     ; $6740: $6F
     add  hl, bc                                   ; $6741: $09
     ld   a, h                                     ; $6742: $7C
-    ldh  [hScratchE], a                           ; $6743: $E0 $E0
+    ldh  [hScratch9], a                           ; $6743: $E0 $E0
     ld   a, l                                     ; $6745: $7D
-    ldh  [hScratchF], a                           ; $6746: $E0 $E1
+    ldh  [hScratchA], a                           ; $6746: $E0 $E1
     ret                                           ; $6748: $C9

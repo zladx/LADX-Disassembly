@@ -1388,7 +1388,7 @@ jr_021_5491:
     ld   a, e                                     ; $5491: $7B
     and  $1F                                      ; $5492: $E6 $1F
     call func_021_54F9                            ; $5494: $CD $F9 $54
-    ldh  [hBGAttributesBank], a                    ; $5497: $E0 $DF
+    ldh  [hScratch8], a                           ; $5497: $E0 $DF
     ld   a, e                                     ; $5499: $7B
     and  $E0                                      ; $549A: $E6 $E0
     swap a                                        ; $549C: $CB $37
@@ -1420,7 +1420,7 @@ jr_021_5491:
     swap a                                        ; $54CB: $CB $37
     sla  a                                        ; $54CD: $CB $27
     ld   e, a                                     ; $54CF: $5F
-    ldh  a, [hBGAttributesBank]                    ; $54D0: $F0 $DF
+    ldh  a, [hScratch8]                    ; $54D0: $F0 $DF
     or   e                                        ; $54D2: $B3
     ld   e, a                                     ; $54D3: $5F
     pop  hl                                       ; $54D4: $E1

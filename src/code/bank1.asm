@@ -475,7 +475,7 @@ func_4852::
     ld   a, $05
 
 .loop
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     ld   a, [de]
     and  a
     ld   a, $7E
@@ -493,7 +493,7 @@ func_4852::
 
     ldi  [hl], a
     inc  de
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     dec  a
     jr   nz, .loop
     ld   a, b
@@ -507,7 +507,7 @@ func_4852::
     ld   a, $05
 
 label_4894::
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     ld   a, [de]
     and  a
     jr   label_489D
@@ -526,7 +526,7 @@ label_489D::
 label_48A9::
     ldi  [hl], a
     inc  de
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     dec  a
     jr   nz, label_4894
     xor  a
@@ -1266,10 +1266,10 @@ label_5519::
     jr   nz, label_5519
     push de
     xor  a
-    ldh  [hScratchA], a
-    ldh  [hScratchB], a
-    ldh  [hScratchC], a
-    ldh  [hScratchD], a
+    ldh  [hScratch0], a
+    ldh  [hScratch1], a
+    ldh  [hScratch2], a
+    ldh  [hScratch3], a
     ld   c, a
     ld   b, a
     ld   e, a
@@ -1299,19 +1299,19 @@ label_5544::
     ld   hl, label_53D8
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     ld   hl, label_53E8
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchB], a
+    ldh  [hScratch1], a
     ld   hl, label_53F8
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchC], a
+    ldh  [hScratch2], a
     ld   hl, label_5408
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchD], a
+    ldh  [hScratch3], a
     pop  hl
     call label_5619
     push hl
@@ -1326,10 +1326,10 @@ label_5544::
     xor  a
     ld   [hl], a
     xor  a
-    ldh  [hScratchA], a
-    ldh  [hScratchB], a
-    ldh  [hScratchC], a
-    ldh  [hScratchD], a
+    ldh  [hScratch0], a
+    ldh  [hScratch1], a
+    ldh  [hScratch2], a
+    ldh  [hScratch3], a
     ld   c, a
     ld   b, a
     ld   e, a
@@ -1383,17 +1383,17 @@ label_55C0::
     ld   hl, label_5418
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     ld   hl, label_545C
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchB], a
+    ldh  [hScratch1], a
     xor  a
-    ldh  [hScratchC], a
+    ldh  [hScratch2], a
     ld   hl, label_54A0
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchD], a
+    ldh  [hScratch3], a
     pop  hl
     call label_5619
     push hl
@@ -1420,18 +1420,18 @@ label_55F5::
     ld   hl, label_54E4
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     ld   hl, label_54E6
 
 label_5600::
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchB], a
+    ldh  [hScratch1], a
     ld   a, $01
-    ldh  [hScratchC], a
+    ldh  [hScratch2], a
     ldh  a, [hMapId]
     add  a, $B1
-    ldh  [hScratchD], a
+    ldh  [hScratch3], a
     pop  hl
     call label_5619
     inc  hl
@@ -1442,13 +1442,13 @@ label_5600::
     ret
 
 label_5619::
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     ldi  [hl], a
-    ldh  a, [hScratchB]
+    ldh  a, [hScratch1]
     ldi  [hl], a
-    ldh  a, [hScratchC]
+    ldh  a, [hScratch2]
     ldi  [hl], a
-    ldh  a, [hScratchD]
+    ldh  a, [hScratch3]
     ld   [hl], a
     ret
 
@@ -1913,7 +1913,7 @@ label_5A6E::
 
 label_5A71::
     ld   a, [$DBB4]
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     ld   a, [$C1B3]
     ld   hl, $C1B2
     or   [hl]
@@ -1968,7 +1968,7 @@ label_5AA0::
     add  hl, de
     ld   a, [$DBB4]
     add  a, [hl]
-    ld   hl, hScratchA
+    ld   hl, hScratch0
     ld   [$DBB4], a
     cp   [hl]
     jr   z, label_5B3F
@@ -1987,7 +1987,7 @@ label_5AA0::
     jr   nz, label_5AF5
     ld   a, JINGLE_BUMP
     ldh  [hJingle], a
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     ld   [$DBB4], a
     jr   label_5B3F
 
@@ -2367,15 +2367,15 @@ label_5D77::
     ld   hl, $D604
     add  hl, de
     ld   c, $00
-    ldh  a, [hScratchC]
+    ldh  a, [hScratch2]
     and  a
     jr   z, label_5DAB
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
 
 label_5D8B::
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     sub  a, $08
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     jr   c, label_5DA2
     ld   a, $AE
     ldi  [hl], a
@@ -2398,7 +2398,7 @@ label_5DA2::
     jr   label_5DB3
 
 label_5DAB::
-    ldh  a, [hScratchD]
+    ldh  a, [hScratch3]
     cp   c
     jr   z, label_5DBF
     ld   a, $AE
@@ -2615,12 +2615,12 @@ PrepareEntityPositionForRoomTransition::
     ; Set the entity load order
     ld   hl, wEntitiesLoadOrderTable
     add  hl, de
-    ldh  a, [hScratchI]
+    ldh  a, [hScratchD]
     ld   [hl], a
 
     ; Increment the load order
     inc  a
-    ldh  [hScratchI], a
+    ldh  [hScratchD], a
 
     push bc
     ; bc = wRoomTransitionDirection
@@ -2628,58 +2628,58 @@ PrepareEntityPositionForRoomTransition::
     ld   c, a
     ld   b, $00
 
-    ; hScratchA = EntityPosXOffsetTable[wRoomTransitionDirection]
+    ; hScratch0 = EntityPosXOffsetTable[wRoomTransitionDirection]
     ld   hl, EntityPosXOffsetTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
 
-    ; hScratchB = EntityPosXSignTable[wRoomTransitionDirection]
+    ; hScratch1 = EntityPosXSignTable[wRoomTransitionDirection]
     ld   hl, EntityPosXSignTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchB], a
+    ldh  [hScratch1], a
 
-    ; hScratchC = EntityPosYOffsetTable[wRoomTransitionDirection]
+    ; hScratch2 = EntityPosYOffsetTable[wRoomTransitionDirection]
     ld   hl, EntityPosYOffsetTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchC], a
+    ldh  [hScratch2], a
 
-    ; hScratchD = EntityPosYSignTable[wRoomTransitionDirection]
+    ; hScratch3 = EntityPosYSignTable[wRoomTransitionDirection]
     ld   hl, EntityPosYSignTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [hScratchD], a
+    ldh  [hScratch3], a
 
-    ; [wEntitiesPosXTable + de] += [hScratchA]
+    ; [wEntitiesPosXTable + de] += [hScratch0]
     ld   hl, wEntitiesPosXTable
     add  hl, de
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     add  a, [hl]
     ld   [hl], a
 
-    ; [wEntitiesPosXSignTable + de] += [hScratchB] + carry
+    ; [wEntitiesPosXSignTable + de] += [hScratch1] + carry
     rr   c
     ld   hl, wEntitiesPosXSignTable
     add  hl, de
-    ldh  a, [hScratchB]
+    ldh  a, [hScratch1]
     rl   c
     adc  a, [hl]
     ld   [hl], a
 
-    ; [wEntitiesPosYTable + de] += [hScratchC]
+    ; [wEntitiesPosYTable + de] += [hScratch2]
     ld   hl, wEntitiesPosYTable
     add  hl, de
-    ldh  a, [hScratchC]
+    ldh  a, [hScratch2]
     add  a, [hl]
     ld   [hl], a
 
-    ; [wEntitiesPosYSignTable + de] += [hScratchD] + carry
+    ; [wEntitiesPosYSignTable + de] += [hScratch3] + carry
     rr   c
     ld   hl, wEntitiesPosYSignTable
     add  hl, de
-    ldh  a, [hScratchD]
+    ldh  a, [hScratch3]
     rl   c
     adc  a, [hl]
     ld   [hl], a
@@ -3626,15 +3626,15 @@ label_6BF0::
 
 label_6BF4::
     ld   a, c
-    ldh  [hScratchE], a
+    ldh  [hScratch9], a
     ld   d, $00
 
 label_6BF9::
     xor  a
-    ldh  [hScratchA], a
-    ldh  [hScratchB], a
-    ldh  [hScratchC], a
-    ldh  [hScratchD], a
+    ldh  [hScratch0], a
+    ldh  [hScratch1], a
+    ldh  [hScratch2], a
+    ldh  [hScratch3], a
     ld   hl, $DB65
     add  hl, de
     ld   a, [hl]
@@ -3649,13 +3649,13 @@ label_6BF9::
     ld   h, $9D
     push hl
     ld   a, $7C
-    ldh  [hScratchA], a
-    ldh  [hScratchB], a
-    ldh  [hScratchC], a
+    ldh  [hScratch0], a
+    ldh  [hScratch1], a
+    ldh  [hScratch2], a
     ld   hl, label_6BD7
     add  hl, de
     ld   a, [hl]
-    ldh  [hScratchD], a
+    ldh  [hScratch3], a
     pop  hl
     jr   label_6C48
 
@@ -3671,32 +3671,32 @@ label_6C2A::
     ld   hl, label_6BDF
     add  hl, de
     ld   a, [hl]
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     inc  a
-    ldh  [hScratchB], a
+    ldh  [hScratch1], a
     add  a, $0F
-    ldh  [hScratchC], a
+    ldh  [hScratch2], a
     inc  a
-    ldh  [hScratchD], a
+    ldh  [hScratch3], a
     pop  hl
 
 label_6C48::
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     ld   [hl], a
     call label_6C69
-    ldh  a, [hScratchB]
-    ld   [hl], a
-    inc  c
-    call label_6C69
-    ldh  a, [hScratchC]
+    ldh  a, [hScratch1]
     ld   [hl], a
     inc  c
     call label_6C69
-    ldh  a, [hScratchD]
+    ldh  a, [hScratch2]
+    ld   [hl], a
+    inc  c
+    call label_6C69
+    ldh  a, [hScratch3]
     ld   [hl], a
     inc  e
     ld   a, e
-    ld   hl, hScratchE
+    ld   hl, hScratch9
     cp   [hl]
     jp   nz, label_6BF9
     ret

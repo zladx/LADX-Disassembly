@@ -105,9 +105,9 @@ label_4DA6::
     xor  a
     ldh  [$FFDB], a
     ld   a, [$DC06]
-    ldh  [hScratchC], a
+    ldh  [hScratch2], a
     ld   a, [$DC09]
-    ldh  [hScratchD], a
+    ldh  [hScratch3], a
     jp   label_5D53
 
 label_4DBD::
@@ -120,9 +120,9 @@ label_4DBE::
     ld   a, $01
     ldh  [$FFDB], a
     ld   a, [$DC07]
-    ldh  [hScratchC], a
+    ldh  [hScratch2], a
     ld   a, [$DC0A]
-    ldh  [hScratchD], a
+    ldh  [hScratch3], a
     jp   label_5D53
 
 label_4DD6::
@@ -132,9 +132,9 @@ label_4DD6::
     ld   a, $02
     ldh  [$FFDB], a
     ld   a, [$DC08]
-    ldh  [hScratchC], a
+    ldh  [hScratch2], a
     ld   a, [$DC0B]
-    ldh  [hScratchD], a
+    ldh  [hScratch3], a
     jp   label_5D53
 
 label_4DEE::

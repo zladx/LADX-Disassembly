@@ -27,7 +27,7 @@ label_002_41D0::
     ld   [hl], a                                  ; $41F2: $77
     ld   hl, $C3B0                                ; $41F3: $21 $B0 $C3
     add  hl, de                                   ; $41F6: $19
-    ldh  a, [hBGAttributesBank]                               ; $41F7: $F0 $DF
+    ldh  a, [hScratch8]                               ; $41F7: $F0 $DF
     ld   [hl], a                                  ; $41F9: $77
 
 jr_002_41FA:
@@ -700,9 +700,9 @@ label_002_45AC::
 
 jr_002_45AD:
     ldh  a, [hLinkPositionY]                      ; $45AD: $F0 $99
-    ldh  [hScratchB], a                               ; $45AF: $E0 $D8
+    ldh  [hScratch1], a                               ; $45AF: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $45B1: $F0 $98
-    ldh  [hScratchA], a                               ; $45B3: $E0 $D7
+    ldh  [hScratch0], a                               ; $45B3: $E0 $D7
     ld   a, JINGLE_WATER_DIVE                     ; $45B5: $3E $0E
     ldh  [hJingle], a                             ; $45B7: $E0 $F2
     ld   a, $0C                                   ; $45B9: $3E $0C
@@ -1582,7 +1582,7 @@ jr_002_4C8B:
     ret                                           ; $4C91: $C9
 
 label_002_4C92::
-    ldh  a, [hScratchB]                               ; $4C92: $F0 $D8
+    ldh  a, [hScratch1]                               ; $4C92: $F0 $D8
     ld   e, a                                     ; $4C94: $5F
     ld   d, $00                                   ; $4C95: $16 $00
     ld   hl, wRoomObjects                       ; $4C97: $21 $11 $D7
@@ -1656,13 +1656,13 @@ jr_002_4CDD:
     ld   b, d                                     ; $4D07: $42
     ld   a, $0C                                   ; $4D08: $3E $0C
     call label_3BAA                               ; $4D0A: $CD $AA $3B
-    ldh  a, [hScratchA]                               ; $4D0D: $F0 $D7
+    ldh  a, [hScratch0]                               ; $4D0D: $F0 $D7
     cpl                                           ; $4D0F: $2F
     inc  a                                        ; $4D10: $3C
     ld   hl, wEntitiesSpeedYTable                                ; $4D11: $21 $50 $C2
     add  hl, bc                                   ; $4D14: $09
     ld   [hl], a                                  ; $4D15: $77
-    ldh  a, [hScratchB]                               ; $4D16: $F0 $D8
+    ldh  a, [hScratch1]                               ; $4D16: $F0 $D8
     cpl                                           ; $4D18: $2F
     inc  a                                        ; $4D19: $3C
     ld   hl, wEntitiesSpeedXTable                                ; $4D1A: $21 $40 $C2
@@ -1703,7 +1703,7 @@ func_002_4D20::
     ldh  [hSwordIntersectedAreaY], a                               ; $4D52: $E0 $CD
     or   c                                        ; $4D54: $B1
     ld   e, a                                     ; $4D55: $5F
-    ldh  [hScratchB], a                               ; $4D56: $E0 $D8
+    ldh  [hScratch1], a                               ; $4D56: $E0 $D8
     ld   hl, wRoomObjects                       ; $4D58: $21 $11 $D7
     add  hl, de                                   ; $4D5B: $19
     ld   a, h                                     ; $4D5C: $7C
@@ -1711,7 +1711,7 @@ func_002_4D20::
     jp   nz, label_002_4D95                       ; $4D5F: $C2 $95 $4D
 
     ld   a, [hl]                                  ; $4D62: $7E
-    ldh  [hScratchA], a                               ; $4D63: $E0 $D7
+    ldh  [hScratch0], a                               ; $4D63: $E0 $D7
     ld   e, a                                     ; $4D65: $5F
     ld   a, [wIsIndoor]                         ; $4D66: $FA $A5 $DB
     ld   d, a                                     ; $4D69: $57
@@ -1723,7 +1723,7 @@ func_002_4D20::
     and  a                                        ; $4D72: $A7
     jr   nz, jr_002_4D8D                          ; $4D73: $20 $18
 
-    ldh  a, [hScratchA]                               ; $4D75: $F0 $D7
+    ldh  a, [hScratch0]                               ; $4D75: $F0 $D7
     cp   $0C                                      ; $4D77: $FE $0C
     jr   z, label_002_4D95                        ; $4D79: $28 $1A
 
@@ -1742,7 +1742,7 @@ func_002_4D20::
     jr   jr_002_4D93                              ; $4D8B: $18 $06
 
 jr_002_4D8D:
-    ldh  a, [hScratchA]                               ; $4D8D: $F0 $D7
+    ldh  a, [hScratch0]                               ; $4D8D: $F0 $D7
     cp   $05                                      ; $4D8F: $FE $05
     jr   nz, label_002_4D95                       ; $4D91: $20 $02
 
@@ -1755,12 +1755,12 @@ label_002_4D95::
     ret                                           ; $4D96: $C9
 
 label_002_4D97::
-    ldh  a, [hScratchA]                               ; $4D97: $F0 $D7
+    ldh  a, [hScratch0]                               ; $4D97: $F0 $D7
     ldh  [hSwordIntersectedAreaX], a                               ; $4D99: $E0 $CE
     swap a                                        ; $4D9B: $CB $37
     and  $0F                                      ; $4D9D: $E6 $0F
     ld   e, a                                     ; $4D9F: $5F
-    ldh  a, [hScratchB]                               ; $4DA0: $F0 $D8
+    ldh  a, [hScratch1]                               ; $4DA0: $F0 $D8
     ldh  [hSwordIntersectedAreaY], a                               ; $4DA2: $E0 $CD
     and  $F0                                      ; $4DA4: $E6 $F0
     or   e                                        ; $4DA6: $B3
@@ -2531,12 +2531,12 @@ jr_002_51ED:
     ld   hl, $C13B                                ; $51FA: $21 $3B $C1
     add  [hl]                                     ; $51FD: $86
     sub  $10                                      ; $51FE: $D6 $10
-    ldh  [hScratchA], a                               ; $5200: $E0 $D7
+    ldh  [hScratch0], a                               ; $5200: $E0 $D7
     ld   a, [wDialogGotItem]                               ; $5202: $FA $A9 $C1
     cp   $01                                      ; $5205: $FE $01
     jr   z, jr_002_524F                           ; $5207: $28 $46
 
-    ldh  a, [hScratchA]                               ; $5209: $F0 $D7
+    ldh  a, [hScratch0]                               ; $5209: $F0 $D7
     add  $02                                      ; $520B: $C6 $02
     ld   [bc], a                                  ; $520D: $02
     inc  bc                                       ; $520E: $03
@@ -2599,17 +2599,17 @@ func_002_524A::
 jr_002_524F:
     ldh  a, [hLinkPositionX]                      ; $524F: $F0 $98
     sub  $08                                      ; $5251: $D6 $08
-    ldh  [hScratchB], a                               ; $5253: $E0 $D8
+    ldh  [hScratch1], a                               ; $5253: $E0 $D8
     ldh  a, [hFrameCounter]                       ; $5255: $F0 $E7
     rla                                           ; $5257: $17
     rla                                           ; $5258: $17
     and  $10                                      ; $5259: $E6 $10
-    ldh  [hScratchD], a                               ; $525B: $E0 $DA
+    ldh  [hScratch3], a                               ; $525B: $E0 $DA
     xor  a                                        ; $525D: $AF
     ld   h, a                                     ; $525E: $67
     ld   l, a                                     ; $525F: $6F
     ld   a, $06                                   ; $5260: $3E $06
-    ldh  [hScratchC], a                               ; $5262: $E0 $D9
+    ldh  [hScratch2], a                               ; $5262: $E0 $D9
     jp   label_1819                               ; $5264: $C3 $19 $18
 
     call ResetSpinAttack                                ; $5267: $CD $AF $0C
@@ -2749,33 +2749,33 @@ jr_002_531D:
     ld   hl, $52E8                                ; $5320: $21 $E8 $52
     add  hl, de                                   ; $5323: $19
     ld   a, [hl]                                  ; $5324: $7E
-    ldh  [hScratchA], a                               ; $5325: $E0 $D7
+    ldh  [hScratch0], a                               ; $5325: $E0 $D7
     ld   hl, $52E0                                ; $5327: $21 $E0 $52
     add  hl, de                                   ; $532A: $19
     ld   a, [hl]                                  ; $532B: $7E
-    ldh  [hScratchB], a                               ; $532C: $E0 $D8
+    ldh  [hScratch1], a                               ; $532C: $E0 $D8
     sla  e                                        ; $532E: $CB $23
     ld   hl, $52F0                                ; $5330: $21 $F0 $52
     add  hl, de                                   ; $5333: $19
     ld   a, [hl+]                                 ; $5334: $2A
-    ldh  [hScratchC], a                               ; $5335: $E0 $D9
+    ldh  [hScratch2], a                               ; $5335: $E0 $D9
     ld   a, [hl]                                  ; $5337: $7E
-    ldh  [hScratchD], a                               ; $5338: $E0 $DA
+    ldh  [hScratch3], a                               ; $5338: $E0 $DA
     ld   hl, $5300                                ; $533A: $21 $00 $53
     add  hl, de                                   ; $533D: $19
     ld   a, [hl+]                                 ; $533E: $2A
     ldh  [$FFDB], a                               ; $533F: $E0 $DB
     ld   a, [hl]                                  ; $5341: $7E
-    ldh  [$FFDC], a                               ; $5342: $E0 $DC
+    ldh  [hScratch5], a                               ; $5342: $E0 $DC
     ld   de, $C010                                ; $5344: $11 $10 $C0
     ld   bc, $C014                                ; $5347: $01 $14 $C0
     ld   a, [$C145]                               ; $534A: $FA $45 $C1
     ld   hl, $C13B                                ; $534D: $21 $3B $C1
     add  [hl]                                     ; $5350: $86
-    ld   hl, hScratchA                                ; $5351: $21 $D7 $FF
+    ld   hl, hScratch0                                ; $5351: $21 $D7 $FF
     add  [hl]                                     ; $5354: $86
     ld   [hl], a                                  ; $5355: $77
-    ldh  a, [hScratchC]                               ; $5356: $F0 $D9
+    ldh  a, [hScratch2]                               ; $5356: $F0 $D9
     cp   $FF                                      ; $5358: $FE $FF
     jr   z, jr_002_535E                           ; $535A: $28 $02
 
@@ -2783,7 +2783,7 @@ jr_002_531D:
     ld   [de], a                                  ; $535D: $12
 
 jr_002_535E:
-    ldh  a, [hScratchD]                               ; $535E: $F0 $DA
+    ldh  a, [hScratch3]                               ; $535E: $F0 $DA
     cp   $FF                                      ; $5360: $FE $FF
     jr   z, jr_002_5366                           ; $5362: $28 $02
 
@@ -2793,7 +2793,7 @@ jr_002_535E:
 jr_002_5366:
     inc  de                                       ; $5366: $13
     inc  bc                                       ; $5367: $03
-    ldh  a, [hScratchB]                               ; $5368: $F0 $D8
+    ldh  a, [hScratch1]                               ; $5368: $F0 $D8
     ld   hl, hLinkPositionX                       ; $536A: $21 $98 $FF
     add  [hl]                                     ; $536D: $86
     ld   [de], a                                  ; $536E: $12
@@ -2801,15 +2801,15 @@ jr_002_5366:
     ld   [bc], a                                  ; $5371: $02
     inc  de                                       ; $5372: $13
     inc  bc                                       ; $5373: $03
-    ldh  a, [hScratchC]                               ; $5374: $F0 $D9
+    ldh  a, [hScratch2]                               ; $5374: $F0 $D9
     ld   [de], a                                  ; $5376: $12
-    ldh  a, [hScratchD]                               ; $5377: $F0 $DA
+    ldh  a, [hScratch3]                               ; $5377: $F0 $DA
     ld   [bc], a                                  ; $5379: $02
     inc  de                                       ; $537A: $13
     inc  bc                                       ; $537B: $03
     ldh  a, [$FFDB]                               ; $537C: $F0 $DB
     ld   [de], a                                  ; $537E: $12
-    ldh  a, [$FFDC]                               ; $537F: $F0 $DC
+    ldh  a, [hScratch5]                               ; $537F: $F0 $DC
     ld   [bc], a                                  ; $5381: $02
     ret                                           ; $5382: $C9
 
@@ -2881,7 +2881,7 @@ TryOpenLockedDoor::
     ldh  [hSwordIntersectedAreaX], a                               ; $53D5: $E0 $CE
     swap a                                        ; $53D7: $CB $37
     ld   e, a                                     ; $53D9: $5F
-    ldh  a, [$FFDC]                               ; $53DA: $F0 $DC
+    ldh  a, [hScratch5]                               ; $53DA: $F0 $DC
     and  $F0                                      ; $53DC: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a                               ; $53DE: $E0 $CD
     or   e                                        ; $53E0: $B3
@@ -2891,10 +2891,10 @@ TryOpenLockedDoor::
     call label_2178                               ; $53E4: $CD $78 $21
     ldh  a, [hSwordIntersectedAreaX]                               ; $53E7: $F0 $CE
     add  $08                                      ; $53E9: $C6 $08
-    ldh  [hScratchA], a                               ; $53EB: $E0 $D7
+    ldh  [hScratch0], a                               ; $53EB: $E0 $D7
     ldh  a, [hSwordIntersectedAreaY]                               ; $53ED: $F0 $CD
     add  $10                                      ; $53EF: $C6 $10
-    ldh  [hScratchB], a                               ; $53F1: $E0 $D8
+    ldh  [hScratch1], a                               ; $53F1: $E0 $D8
     ld   a, $02                                   ; $53F3: $3E $02
     call label_CC7                                ; $53F5: $CD $C7 $0C
     jp   .return                                  ; $53F8: $C3 $1D $54
@@ -2917,7 +2917,7 @@ TryOpenLockedDoor::
     ld   hl, wEntity0PosX                         ; $540D: $21 $00 $C2
     add  hl, de                                   ; $5410: $19
     ld   [hl], a                                  ; $5411: $77
-    ldh  a, [$FFDC]                               ; $5412: $F0 $DC
+    ldh  a, [hScratch5]                               ; $5412: $F0 $DC
     and  $F0                                      ; $5414: $E6 $F0
     add  $10                                      ; $5416: $C6 $10
     ld   hl, wEntitiesPosYTable                   ; $5418: $21 $10 $C2
@@ -3175,7 +3175,7 @@ func_002_5567::
 
     dec  a                                        ; $5576: $3D
     ld   [hl], a                                  ; $5577: $77
-    ldh  [hScratchA], a                               ; $5578: $E0 $D7
+    ldh  [hScratch0], a                               ; $5578: $E0 $D7
     jr   nz, jr_002_557F                          ; $557A: $20 $03
 
 jr_002_557C:
@@ -3308,10 +3308,10 @@ jr_002_55FD:
     ld   c, $04                                   ; $561C: $0E $04
 
 jr_002_561E:
-    ldh  a, [hScratchB]                               ; $561E: $F0 $D8
+    ldh  a, [hScratch1]                               ; $561E: $F0 $D8
     ld   [de], a                                  ; $5620: $12
     inc  de                                       ; $5621: $13
-    ldh  a, [hScratchC]                               ; $5622: $F0 $D9
+    ldh  a, [hScratch2]                               ; $5622: $F0 $D9
     ld   hl, $55FF                                ; $5624: $21 $FF $55
     add  hl, bc                                   ; $5627: $09
     add  [hl]                                     ; $5628: $86
@@ -3343,7 +3343,7 @@ jr_002_561E:
     ld   [wC167], a                               ; $564A: $EA $67 $C1
     xor  a                                        ; $564D: $AF
     ld   [wScreenShakeHorizontal], a              ; $564E: $EA $55 $C1
-    ldh  a, [hScratchA]                               ; $5651: $F0 $D7
+    ldh  a, [hScratch0]                               ; $5651: $F0 $D7
     cp   $02                                      ; $5653: $FE $02
     jr   nc, jr_002_565B                          ; $5655: $30 $04
 
@@ -3395,7 +3395,7 @@ jr_002_568C:
     cp   $08                                      ; $568E: $FE $08
     jp   nz, label_002_5707                       ; $5690: $C2 $07 $57
 
-    ldh  a, [hScratchA]                               ; $5693: $F0 $D7
+    ldh  a, [hScratch0]                               ; $5693: $F0 $D7
     rra                                           ; $5695: $1F
     rra                                           ; $5696: $1F
     rra                                           ; $5697: $1F
@@ -3405,9 +3405,9 @@ jr_002_568C:
     ld   hl, $5642                                ; $569C: $21 $42 $56
     add  hl, de                                   ; $569F: $19
     ld   a, [hl+]                                 ; $56A0: $2A
-    ldh  [hScratchA], a                               ; $56A1: $E0 $D7
+    ldh  [hScratch0], a                               ; $56A1: $E0 $D7
     ld   a, [hl]                                  ; $56A3: $7E
-    ldh  [hScratchB], a                               ; $56A4: $E0 $D8
+    ldh  [hScratch1], a                               ; $56A4: $E0 $D8
     ld   a, $60                                   ; $56A6: $3E $60
     ldh  [hSwordIntersectedAreaX], a                               ; $56A8: $E0 $CE
     ldh  a, [hMapRoom]                           ; $56AA: $F0 $F6
@@ -3433,7 +3433,7 @@ jr_002_56B8:
     ld   [hl+], a                                 ; $56CB: $22
     ld   a, $41                                   ; $56CC: $3E $41
     ld   [hl+], a                                 ; $56CE: $22
-    ldh  a, [hScratchA]                               ; $56CF: $F0 $D7
+    ldh  a, [hScratch0]                               ; $56CF: $F0 $D7
     ld   [hl+], a                                 ; $56D1: $22
     ldh  a, [$FFCF]                               ; $56D2: $F0 $CF
     ld   [hl+], a                                 ; $56D4: $22
@@ -3442,7 +3442,7 @@ jr_002_56B8:
     ld   [hl+], a                                 ; $56D9: $22
     ld   a, $41                                   ; $56DA: $3E $41
     ld   [hl+], a                                 ; $56DC: $22
-    ldh  a, [hScratchB]                               ; $56DD: $F0 $D8
+    ldh  a, [hScratch1]                               ; $56DD: $F0 $D8
     ld   [hl+], a                                 ; $56DF: $22
     ld   [hl], b                                  ; $56E0: $70
     ld   a, e                                     ; $56E1: $7B
@@ -3481,7 +3481,7 @@ label_002_5707::
     nop                                           ; $5714: $00
     ld   [$611E], sp                              ; $5715: $08 $1E $61
     call func_002_58D0                            ; $5718: $CD $D0 $58
-    ldh  a, [hScratchA]                               ; $571B: $F0 $D7
+    ldh  a, [hScratch0]                               ; $571B: $F0 $D7
     and  $08                                      ; $571D: $E6 $08
     ld   d, $00                                   ; $571F: $16 $00
     ld   e, a                                     ; $5721: $5F
@@ -3509,7 +3509,7 @@ label_002_5707::
 jr_002_5743:
     ld   [$6130], sp                              ; $5743: $08 $30 $61
     call func_002_58D0                            ; $5746: $CD $D0 $58
-    ldh  a, [hScratchA]                               ; $5749: $F0 $D7
+    ldh  a, [hScratch0]                               ; $5749: $F0 $D7
     and  $08                                      ; $574B: $E6 $08
     ld   d, $00                                   ; $574D: $16 $00
     ld   e, a                                     ; $574F: $5F
@@ -3520,7 +3520,7 @@ jr_002_5743:
     rst  $38                                      ; $5759: $FF
     ld   bc, $FF01                                ; $575A: $01 $01 $FF
     rst  $38                                      ; $575D: $FF
-    ldh  a, [hScratchA]                               ; $575E: $F0 $D7
+    ldh  a, [hScratch0]                               ; $575E: $F0 $D7
     cp   $0A                                      ; $5760: $FE $0A
     jr   c, jr_002_5780                           ; $5762: $38 $1C
 
@@ -3547,7 +3547,7 @@ jr_002_5780:
     call func_002_58D0                            ; $5780: $CD $D0 $58
     push bc                                       ; $5783: $C5
     ld   c, $3A                                   ; $5784: $0E $3A
-    ldh  a, [hScratchA]                               ; $5786: $F0 $D7
+    ldh  a, [hScratch0]                               ; $5786: $F0 $D7
     cp   $07                                      ; $5788: $FE $07
     jr   nc, jr_002_578E                          ; $578A: $30 $02
 
@@ -3559,17 +3559,17 @@ jr_002_578E:
     ld   d, $00                                   ; $5792: $16 $00
     ld   hl, $C030                                ; $5794: $21 $30 $C0
     add  hl, de                                   ; $5797: $19
-    ldh  a, [hScratchB]                               ; $5798: $F0 $D8
+    ldh  a, [hScratch1]                               ; $5798: $F0 $D8
     ld   [hl+], a                                 ; $579A: $22
-    ldh  a, [hScratchC]                               ; $579B: $F0 $D9
+    ldh  a, [hScratch2]                               ; $579B: $F0 $D9
     ld   [hl+], a                                 ; $579D: $22
     ld   a, c                                     ; $579E: $79
     ld   [hl+], a                                 ; $579F: $22
     xor  a                                        ; $57A0: $AF
     ld   [hl+], a                                 ; $57A1: $22
-    ldh  a, [hScratchB]                               ; $57A2: $F0 $D8
+    ldh  a, [hScratch1]                               ; $57A2: $F0 $D8
     ld   [hl+], a                                 ; $57A4: $22
-    ldh  a, [hScratchC]                               ; $57A5: $F0 $D9
+    ldh  a, [hScratch2]                               ; $57A5: $F0 $D9
     add  $08                                      ; $57A7: $C6 $08
     ld   [hl+], a                                 ; $57A9: $22
     ld   a, c                                     ; $57AA: $79
@@ -3587,9 +3587,9 @@ jr_002_57BB:
     ld   d, $00                                   ; $57BB: $16 $00
     ld   hl, $C030                                ; $57BD: $21 $30 $C0
     add  hl, de                                   ; $57C0: $19
-    ldh  a, [hScratchB]                               ; $57C1: $F0 $D8
+    ldh  a, [hScratch1]                               ; $57C1: $F0 $D8
     ld   [hl+], a                                 ; $57C3: $22
-    ldh  a, [hScratchC]                               ; $57C4: $F0 $D9
+    ldh  a, [hScratch2]                               ; $57C4: $F0 $D9
     ld   [hl+], a                                 ; $57C6: $22
     ld   a, $24                                   ; $57C7: $3E $24
     ld   [hl+], a                                 ; $57C9: $22
@@ -3625,7 +3625,7 @@ jr_002_57E6:
     ret  nc                                       ; $57EE: $D0
 
     ld   e, b                                     ; $57EF: $58
-    ldh  a, [hScratchA]                               ; $57F0: $F0 $D7
+    ldh  a, [hScratch0]                               ; $57F0: $F0 $D7
     and  $08                                      ; $57F2: $E6 $08
     ld   d, $00                                   ; $57F4: $16 $00
     ld   e, a                                     ; $57F6: $5F
@@ -3676,7 +3676,7 @@ jr_002_582D:
     ld   hl, $57FD                                ; $5830: $21 $FD $57
 
 jr_002_5833:
-    ldh  a, [hScratchA]                               ; $5833: $F0 $D7
+    ldh  a, [hScratch0]                               ; $5833: $F0 $D7
     and  $08                                      ; $5835: $E6 $08
     ld   e, a                                     ; $5837: $5F
     ld   d, $00                                   ; $5838: $16 $00
@@ -3698,12 +3698,12 @@ label_002_583A::
     jp   label_002_58F5                           ; $5851: $C3 $F5 $58
 
 label_002_5854::
-    ldh  a, [hScratchB]                               ; $5854: $F0 $D8
+    ldh  a, [hScratch1]                               ; $5854: $F0 $D8
     add  [hl]                                     ; $5856: $86
     ld   [de], a                                  ; $5857: $12
     inc  hl                                       ; $5858: $23
     inc  de                                       ; $5859: $13
-    ldh  a, [hScratchC]                               ; $585A: $F0 $D9
+    ldh  a, [hScratch2]                               ; $585A: $F0 $D9
     add  [hl]                                     ; $585C: $86
     ld   [de], a                                  ; $585D: $12
     inc  hl                                       ; $585E: $23
@@ -3730,7 +3730,7 @@ label_002_5854::
     ld   [$2078], sp                              ; $5874: $08 $78 $20
 
 label_002_5877::
-    ldh  a, [hScratchA]                               ; $5877: $F0 $D7
+    ldh  a, [hScratch0]                               ; $5877: $F0 $D7
     and  $08                                      ; $5879: $E6 $08
     ld   d, $00                                   ; $587B: $16 $00
     ld   e, a                                     ; $587D: $5F
@@ -3762,7 +3762,7 @@ jr_002_5899:
 jr_002_58A1:
     ld   [$2130], sp                              ; $58A1: $08 $30 $21
     call func_002_58D0                            ; $58A4: $CD $D0 $58
-    ldh  a, [hScratchA]                               ; $58A7: $F0 $D7
+    ldh  a, [hScratch0]                               ; $58A7: $F0 $D7
     cp   $04                                      ; $58A9: $FE $04
     jr   nz, jr_002_58BB                          ; $58AB: $20 $0E
 
@@ -3782,7 +3782,7 @@ jr_002_58BB:
     call func_002_5F5C                            ; $58BF: $CD $5C $5F
 
 jr_002_58C2:
-    ldh  a, [hScratchA]                               ; $58C2: $F0 $D7
+    ldh  a, [hScratch0]                               ; $58C2: $F0 $D7
     rla                                           ; $58C4: $17
     and  $18                                      ; $58C5: $E6 $18
     ld   d, $00                                   ; $58C7: $16 $00
@@ -3794,14 +3794,14 @@ func_002_58D0::
     ld   hl, $C540                                ; $58D0: $21 $40 $C5
     add  hl, bc                                   ; $58D3: $09
     ld   a, [hl]                                  ; $58D4: $7E
-    ldh  [hScratchB], a                               ; $58D5: $E0 $D8
+    ldh  [hScratch1], a                               ; $58D5: $E0 $D8
     cp   $88                                      ; $58D7: $FE $88
     jr   nc, func_002_58E6                        ; $58D9: $30 $0B
 
     ld   hl, $C530                                ; $58DB: $21 $30 $C5
     add  hl, bc                                   ; $58DE: $09
     ld   a, [hl]                                  ; $58DF: $7E
-    ldh  [hScratchC], a                               ; $58E0: $E0 $D9
+    ldh  [hScratch2], a                               ; $58E0: $E0 $D9
     cp   $A8                                      ; $58E2: $FE $A8
     jr   c, jr_002_58EC                           ; $58E4: $38 $06
 
@@ -3859,9 +3859,9 @@ func_002_5926::
     ldh  a, [hLinkPositionY]                      ; $5926: $F0 $99
 
 func_002_5928::
-    ldh  [hScratchB], a                               ; $5928: $E0 $D8
+    ldh  [hScratch1], a                               ; $5928: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $592A: $F0 $98
-    ldh  [hScratchA], a                               ; $592C: $E0 $D7
+    ldh  [hScratch0], a                               ; $592C: $E0 $D7
     ld   a, JINGLE_WATER_DIVE                     ; $592E: $3E $0E
     ldh  [hJingle], a                             ; $5930: $E0 $F2
     ld   a, $01                                   ; $5932: $3E $01
@@ -4137,7 +4137,7 @@ jr_002_5B31:
     ld   hl, $C1F0                                ; $5B41: $21 $F0 $C1
     add  hl, bc                                   ; $5B44: $09
     ld   a, [hl]                                  ; $5B45: $7E
-    ldh  [hScratchA], a                               ; $5B46: $E0 $D7
+    ldh  [hScratch0], a                               ; $5B46: $E0 $D7
     ld   a, c                                     ; $5B48: $79
     and  $07                                      ; $5B49: $E6 $07
     ld   c, a                                     ; $5B4B: $4F
@@ -4146,7 +4146,7 @@ jr_002_5B4C:
     ld   hl, $5A40                                ; $5B4C: $21 $40 $5A
     add  hl, bc                                   ; $5B4F: $09
     ld   a, [hl]                                  ; $5B50: $7E
-    ld   hl, hScratchA                                ; $5B51: $21 $D7 $FF
+    ld   hl, hScratch0                                ; $5B51: $21 $D7 $FF
     add  [hl]                                     ; $5B54: $86
     ld   e, a                                     ; $5B55: $5F
     ld   d, $00                                   ; $5B56: $16 $00
@@ -4449,13 +4449,13 @@ jr_002_5CE5:
     ld   hl, $C1F4                                ; $5CF7: $21 $F4 $C1
     add  hl, bc                                   ; $5CFA: $09
     ld   a, [hl]                                  ; $5CFB: $7E
-    ldh  [hScratchA], a                               ; $5CFC: $E0 $D7
+    ldh  [hScratch0], a                               ; $5CFC: $E0 $D7
 
 jr_002_5CFE:
     ld   hl, $5BF4                                ; $5CFE: $21 $F4 $5B
     add  hl, bc                                   ; $5D01: $09
     ld   a, [hl]                                  ; $5D02: $7E
-    ld   hl, hScratchA                                ; $5D03: $21 $D7 $FF
+    ld   hl, hScratch0                                ; $5D03: $21 $D7 $FF
     add  [hl]                                     ; $5D06: $86
     ld   e, a                                     ; $5D07: $5F
     ld   d, $00                                   ; $5D08: $16 $00
@@ -4607,17 +4607,17 @@ jr_002_5DC0:
     add  hl, de                                   ; $5DD9: $19
     ld   [hl], $80                                ; $5DDA: $36 $80
     ld   a, $88                                   ; $5DDC: $3E $88
-    ldh  [hScratchA], a                               ; $5DDE: $E0 $D7
+    ldh  [hScratch0], a                               ; $5DDE: $E0 $D7
     ld   a, $30                                   ; $5DE0: $3E $30
-    ldh  [hScratchB], a                               ; $5DE2: $E0 $D8
+    ldh  [hScratch1], a                               ; $5DE2: $E0 $D8
     ld   a, $02                                   ; $5DE4: $3E $02
     jp   label_002_5DF6                           ; $5DE6: $C3 $F6 $5D
 
     call func_002_5DAF                            ; $5DE9: $CD $AF $5D
     ld   a, $88                                   ; $5DEC: $3E $88
-    ldh  [hScratchA], a                               ; $5DEE: $E0 $D7
+    ldh  [hScratch0], a                               ; $5DEE: $E0 $D7
     ld   a, $20                                   ; $5DF0: $3E $20
-    ldh  [hScratchB], a                               ; $5DF2: $E0 $D8
+    ldh  [hScratch1], a                               ; $5DF2: $E0 $D8
     ld   a, $04                                   ; $5DF4: $3E $04
 
 label_002_5DF6::
@@ -4753,7 +4753,7 @@ jr_002_5EA2:
 label_002_5EAB::
     call func_002_5DAF                            ; $5EAB: $CD $AF $5D
     ld   a, $88                                   ; $5EAE: $3E $88
-    ldh  [hScratchA], a                               ; $5EB0: $E0 $D7
+    ldh  [hScratch0], a                               ; $5EB0: $E0 $D7
     ldh  a, [hLinkPositionY]                      ; $5EB2: $F0 $99
     sub  $30                                      ; $5EB4: $D6 $30
     add  $08                                      ; $5EB6: $C6 $08
@@ -4773,7 +4773,7 @@ jr_002_5ECA:
     ld   a, $30                                   ; $5ECA: $3E $30
 
 jr_002_5ECC:
-    ldh  [hScratchB], a                               ; $5ECC: $E0 $D8
+    ldh  [hScratch1], a                               ; $5ECC: $E0 $D8
     ld   a, $03                                   ; $5ECE: $3E $03
     jp   label_CC7                                ; $5ED0: $C3 $C7 $0C
 
@@ -4913,7 +4913,7 @@ func_002_5F5C::
 
 func_002_5F9F::
     and  $1F                                      ; $5F9F: $E6 $1F
-    ldh  [hScratchA], a                               ; $5FA1: $E0 $D7
+    ldh  [hScratch0], a                               ; $5FA1: $E0 $D7
     dec  a                                        ; $5FA3: $3D
     JP_TABLE                                      ; $5FA4: $C7
     db   $fc                                      ; $5FA5: $FC
@@ -5013,7 +5013,7 @@ jr_002_6011:
     cp   $FF                                      ; $6013: $FE $FF
     jr   nz, jr_002_6000                          ; $6015: $20 $E9
 
-    ldh  a, [hScratchA]                               ; $6017: $F0 $D7
+    ldh  a, [hScratch0]                               ; $6017: $F0 $D7
     cp   $08                                      ; $6019: $FE $08
     jr   nz, jr_002_6029                          ; $601B: $20 $0C
 
@@ -5036,7 +5036,7 @@ jr_002_602C:
     ret  nz                                       ; $6031: $C0
 
     xor  a                                        ; $6032: $AF
-    ldh  [hScratchA], a                               ; $6033: $E0 $D7
+    ldh  [hScratch0], a                               ; $6033: $E0 $D7
     ld   de, $0000                                ; $6035: $11 $00 $00
     ldh  a, [hMapRoom]                           ; $6038: $F0 $F6
     cp   $12                                      ; $603A: $FE $12
@@ -5068,7 +5068,7 @@ jr_002_604F:
     cp   $08                                      ; $605C: $FE $08
     jr   nz, jr_002_6064                          ; $605E: $20 $04
 
-    ld   hl, hScratchA                                ; $6060: $21 $D7 $FF
+    ld   hl, hScratch0                                ; $6060: $21 $D7 $FF
     inc  [hl]                                     ; $6063: $34
 
 jr_002_6064:
@@ -5085,7 +5085,7 @@ jr_002_6064:
     ld   e, $04                                   ; $6072: $1E $04
 
 jr_002_6074:
-    ldh  a, [hScratchA]                               ; $6074: $F0 $D7
+    ldh  a, [hScratch0]                               ; $6074: $F0 $D7
     cp   e                                        ; $6076: $BB
     ret  nz                                       ; $6077: $C0
 
@@ -5135,7 +5135,7 @@ jr_002_60A8:
     cp   $04                                      ; $60B5: $FE $04
     jr   nz, jr_002_60BD                          ; $60B7: $20 $04
 
-    ld   hl, hScratchA                                ; $60B9: $21 $D7 $FF
+    ld   hl, hScratch0                                ; $60B9: $21 $D7 $FF
     inc  [hl]                                     ; $60BC: $34
 
 jr_002_60BD:
@@ -5144,7 +5144,7 @@ jr_002_60BD:
     and  $0F                                      ; $60BF: $E6 $0F
     jr   nz, jr_002_609B                          ; $60C1: $20 $D8
 
-    ldh  a, [hScratchA]                               ; $60C3: $F0 $D7
+    ldh  a, [hScratch0]                               ; $60C3: $F0 $D7
     cp   $02                                      ; $60C5: $FE $02
     ret  nz                                       ; $60C7: $C0
 
@@ -5745,12 +5745,12 @@ LoadHeartsCount::
     and  a                                        ; $643D: $A7
     jr   z, jr_002_6462                           ; $643E: $28 $22
 
-    ldh  [hScratchA], a                               ; $6440: $E0 $D7
+    ldh  [hScratch0], a                               ; $6440: $E0 $D7
 
 jr_002_6442:
-    ldh  a, [hScratchA]                               ; $6442: $F0 $D7
+    ldh  a, [hScratch0]                               ; $6442: $F0 $D7
     sub  $08                                      ; $6444: $D6 $08
-    ldh  [hScratchA], a                               ; $6446: $E0 $D7
+    ldh  [hScratch0], a                               ; $6446: $E0 $D7
     jr   c, jr_002_6459                           ; $6448: $38 $0F
 
     ld   a, $A9                                   ; $644A: $3E $A9
@@ -5958,7 +5958,7 @@ jr_002_6982:
     and  a                                        ; $698B: $A7
     ret  nz                                       ; $698C: $C0
 
-    ldh  a, [hScratchA]                               ; $698D: $F0 $D7
+    ldh  a, [hScratch0]                               ; $698D: $F0 $D7
     cp   $B0                                      ; $698F: $FE $B0
     jr   z, jr_002_699E                           ; $6991: $28 $0B
 
@@ -6014,7 +6014,7 @@ jr_002_69D7:
     and  a                                        ; $69E0: $A7
     ret  nz                                       ; $69E1: $C0
 
-    ldh  a, [hScratchA]                               ; $69E2: $F0 $D7
+    ldh  a, [hScratch0]                               ; $69E2: $F0 $D7
     cp   $B1                                      ; $69E4: $FE $B1
     jr   z, jr_002_69F3                           ; $69E6: $28 $0B
 
@@ -6219,7 +6219,7 @@ jr_002_6AFC:
     and  a                                        ; $6B02: $A7
     ret  nz                                       ; $6B03: $C0
 
-    ldh  a, [hScratchA]                               ; $6B04: $F0 $D7
+    ldh  a, [hScratch0]                               ; $6B04: $F0 $D7
     cp   $B1                                      ; $6B06: $FE $B1
     jr   z, jr_002_6B2A                           ; $6B08: $28 $20
 
@@ -6299,8 +6299,8 @@ label_002_6B66::
     ld   c, $04                                   ; $6B66: $0E $04
     ld   b, $00                                   ; $6B68: $06 $00
     call func_002_6C2F                            ; $6B6A: $CD $2F $6C
-    ldh  a, [hScratchB]                               ; $6B6D: $F0 $D8
-    ldh  [hScratchA], a                               ; $6B6F: $E0 $D7
+    ldh  a, [hScratch1]                               ; $6B6D: $F0 $D8
+    ldh  [hScratch0], a                               ; $6B6F: $E0 $D7
     xor  a                                        ; $6B71: $AF
     ld   [wCollisionType], a                               ; $6B72: $EA $33 $C1
     ld   c, $00                                   ; $6B75: $0E $00
@@ -6454,7 +6454,7 @@ func_002_6C2F::
     ld   a, [wIsIndoor]                         ; $6C58: $FA $A5 $DB
     ld   d, a                                     ; $6C5B: $57
     call label_2A26                               ; $6C5C: $CD $26 $2A
-    ldh  [hScratchB], a                               ; $6C5F: $E0 $D8
+    ldh  [hScratch1], a                               ; $6C5F: $E0 $D8
     cp   $60                                      ; $6C61: $FE $60
     jr   z, func_002_6C69                         ; $6C63: $28 $04
 
@@ -7005,7 +7005,7 @@ jr_002_6F25:
     ldh  a, [hLinkPositionY]                      ; $6F40: $F0 $99
     add  [hl]                                     ; $6F42: $86
     sub  $10                                      ; $6F43: $D6 $10
-    ldh  [$FFDC], a                               ; $6F45: $E0 $DC
+    ldh  [hScratch5], a                               ; $6F45: $E0 $DC
     and  $F0                                      ; $6F47: $E6 $F0
     or   e                                        ; $6F49: $B3
     ld   e, a                                     ; $6F4A: $5F
@@ -7142,9 +7142,9 @@ jr_002_700D:
 
 jr_002_7015:
     ldh  a, [hLinkPositionY]                      ; $7015: $F0 $99
-    ldh  [hScratchB], a                               ; $7017: $E0 $D8
+    ldh  [hScratch1], a                               ; $7017: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $7019: $F0 $98
-    ldh  [hScratchA], a                               ; $701B: $E0 $D7
+    ldh  [hScratch0], a                               ; $701B: $E0 $D7
     ld   a, $09                                   ; $701D: $3E $09
     call label_CC7                                ; $701F: $CD $C7 $0C
     ld   [hl], $DF                                ; $7022: $36 $DF
@@ -7380,7 +7380,7 @@ jr_002_716E:
     rra                                           ; $7185: $1F
     and  $01                                      ; $7186: $E6 $01
     ld   e, a                                     ; $7188: $5F
-    ldh  a, [$FFDC]                               ; $7189: $F0 $DC
+    ldh  a, [hScratch5]                               ; $7189: $F0 $DC
     rra                                           ; $718B: $1F
     rra                                           ; $718C: $1F
     and  $02                                      ; $718D: $E6 $02
@@ -7403,7 +7403,7 @@ label_002_719C::
     cp   $D5                                      ; $71A7: $FE $D5
     jp   z, label_002_7454                        ; $71A9: $CA $54 $74
 
-    ldh  a, [$FFDC]                               ; $71AC: $F0 $DC
+    ldh  a, [hScratch5]                               ; $71AC: $F0 $DC
     and  $0F                                      ; $71AE: $E6 $0F
     cp   $08                                      ; $71B0: $FE $08
     jp   c, label_002_7461                        ; $71B2: $DA $61 $74
@@ -7416,7 +7416,7 @@ label_002_71BB::
     and  a                                        ; $71BE: $A7
     jp   nz, label_002_7454                       ; $71BF: $C2 $54 $74
 
-    ldh  a, [$FFDC]                               ; $71C2: $F0 $DC
+    ldh  a, [hScratch5]                               ; $71C2: $F0 $DC
     and  $0F                                      ; $71C4: $E6 $0F
     cp   $06                                      ; $71C6: $FE $06
     jp   nc, label_002_726A                       ; $71C8: $D2 $6A $72
@@ -7686,7 +7686,7 @@ jr_002_734F:
     ldh  a, [$FFDB]                               ; $7356: $F0 $DB
     and  $F0                                      ; $7358: $E6 $F0
     ldh  [hSwordIntersectedAreaX], a                               ; $735A: $E0 $CE
-    ldh  a, [$FFDC]                               ; $735C: $F0 $DC
+    ldh  a, [hScratch5]                               ; $735C: $F0 $DC
     and  $F0                                      ; $735E: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a                               ; $7360: $E0 $CD
     ldh  a, [hFFE9]                               ; $7362: $F0 $E9
@@ -7753,14 +7753,14 @@ label_002_73AD::
     ldh  a, [hLinkPositionY]                      ; $73CA: $F0 $99
     and  $F0                                      ; $73CC: $E6 $F0
     or   e                                        ; $73CE: $B3
-    ldh  [hScratchA], a                               ; $73CF: $E0 $D7
+    ldh  [hScratch0], a                               ; $73CF: $E0 $D7
     ld   e, $00                                   ; $73D1: $1E $00
     ld   d, e                                     ; $73D3: $53
 
 jr_002_73D4:
     ld   hl, $73A3                                ; $73D4: $21 $A3 $73
     add  hl, de                                   ; $73D7: $19
-    ldh  a, [hScratchA]                               ; $73D8: $F0 $D7
+    ldh  a, [hScratch0]                               ; $73D8: $F0 $D7
     cp   [hl]                                     ; $73DA: $BE
     jr   nz, jr_002_73E6                          ; $73DB: $20 $09
 
@@ -7875,7 +7875,7 @@ func_002_7468::
     jr   nz, jr_002_7493                          ; $7470: $20 $21
 
 jr_002_7472:
-    ldh  a, [$FFDC]                               ; $7472: $F0 $DC
+    ldh  a, [hScratch5]                               ; $7472: $F0 $DC
     and  $0F                                      ; $7474: $E6 $0F
     cp   $06                                      ; $7476: $FE $06
     jr   nc, jr_002_74AC                          ; $7478: $30 $32
@@ -7905,7 +7905,7 @@ jr_002_7493:
     jr   nz, jr_002_74AC                          ; $74A1: $20 $09
 
 jr_002_74A3:
-    ldh  a, [$FFDC]                               ; $74A3: $F0 $DC
+    ldh  a, [hScratch5]                               ; $74A3: $F0 $DC
     and  $0F                                      ; $74A5: $E6 $0F
     cp   $0C                                      ; $74A7: $FE $0C
     jp   nc, ApplyMapFadeOutTransition                            ; $74A9: $D2 $7D $0C
@@ -7977,13 +7977,13 @@ func_002_7504::
 func_002_7512::
     ldh  a, [hLinkPositionX]                      ; $7512: $F0 $98
     and  $F0                                      ; $7514: $E6 $F0
-    ldh  [hScratchA], a                               ; $7516: $E0 $D7
+    ldh  [hScratch0], a                               ; $7516: $E0 $D7
     swap a                                        ; $7518: $CB $37
     ld   e, a                                     ; $751A: $5F
     ldh  a, [hLinkPositionY]                      ; $751B: $F0 $99
     sub  $04                                      ; $751D: $D6 $04
     and  $F0                                      ; $751F: $E6 $F0
-    ldh  [hScratchB], a                               ; $7521: $E0 $D8
+    ldh  [hScratch1], a                               ; $7521: $E0 $D8
     or   e                                        ; $7523: $B3
     ld   e, a                                     ; $7524: $5F
     ldh  [hLinkRoomPosition], a                               ; $7525: $E0 $FA
@@ -8202,7 +8202,7 @@ jr_002_764C:
 
     ldh  a, [hLinkPositionX]                      ; $7662: $F0 $98
     sub  $08                                      ; $7664: $D6 $08
-    ld   hl, hScratchA                                ; $7666: $21 $D7 $FF
+    ld   hl, hScratch0                                ; $7666: $21 $D7 $FF
     sub  [hl]                                     ; $7669: $96
     bit  7, a                                     ; $766A: $CB $7F
     ld   a, $FF                                   ; $766C: $3E $FF
@@ -8214,7 +8214,7 @@ jr_002_7672:
     ld   hl, hLinkPositionX                       ; $7672: $21 $98 $FF
     add  [hl]                                     ; $7675: $86
     ld   [hl], a                                  ; $7676: $77
-    ldh  a, [hScratchB]                               ; $7677: $F0 $D8
+    ldh  a, [hScratch1]                               ; $7677: $F0 $D8
     add  $10                                      ; $7679: $C6 $10
     ld   hl, hLinkPositionY                       ; $767B: $21 $99 $FF
     sub  [hl]                                     ; $767E: $96

@@ -176,44 +176,40 @@ hFFD2:: ; FFD2
   ds 5
 
 ; Scratch values, used for many different uses
-hScratchA:: ; FFD7
-  ds 1
-hScratchB:: ; FFD8
-  ds 1
-hScratchC:: ; FFD9
-  ds 1
-hScratchD:: ; FFDA
-  ds 1
 
-; Unlabeled
-ds 4
-
-hBGAttributesBank ; FFDF
+hScratch0:: ; FFD7
   ds 1
-
-; Scratch hram address with different uses
-hScratchE          ; FFE0
+hScratch1:: ; FFD8
+  ds 1
+hScratch2:: ; FFD9
+  ds 1
+hScratch3:: ; FFDA
+  ds 1
+hScratch4:: ; FFDB
+  ds 1
+hScratch5:: ; FFDC
+  ds 1
+hScratch6:: ; FFDD
+  ds 1
+hScratch7:: ; FFDE
+  ds 1
+hScratch8 ; FFDF
+  ds 1
+hScratch9          ; FFE0
 hBGMapOffsetHigh:: ; FFE0
   ds 1
-
-; This location has different uses
-hScratchF          ; FFE1
+hScratchA          ; FFE1
 hBGMapOffsetLow::  ; FFE1
   ds 1
-
-hScratchG:: ; FFE2
+hScratchB:: ; FFE2
   ds 1
-
-hScratchH:: ; FFE3
+hScratchC:: ; FFE3
   ds 1
-
-hScratchI:: ; FFE4
+hScratchD:: ; FFE4
   ds 1
-
-hScratchJ:: ; FFE5
+hScratchE:: ; FFE5
   ds 1
-
-hScratchK:: ; FFE6
+hScratchF:: ; FFE6
 hFreeWarpDataAddress ; FFE6
   ; Address of the first free warp data slot
   ds 1

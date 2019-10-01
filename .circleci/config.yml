@@ -6,9 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Retrieving stub file
-          command: curl --fail https://www.winosx.com/hosted_files/zladx/Zelda.gbc --output Zelda.gbc
-      - run:
           name: Building
           command: make build
       - run:

@@ -4273,6 +4273,8 @@ label_2A66::
     ld   hl, $7500
     ld   bc, $0200
     jp   CopyData
+
+label_2AAE::
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4294,6 +4296,8 @@ label_2A66::
     ld   de, $8800
     ld   bc, $0800
     jp   CopyData
+
+label_2AEA::
     ld   hl, $4000
     ldh  a, [hIsGBC]
     and  a
@@ -4301,8 +4305,12 @@ label_2A66::
     ld   hl, $6800
     ld   a, $35
     jr   label_2B06
+
+label_2AF9::
     ld   hl, $4800
     jr   label_2B01
+
+label_2AFE::
     ld   hl, $6000
 
 label_2B01::
@@ -4321,6 +4329,8 @@ label_2B06::
     ld   de, $8800
     ld   bc, $1000
     jp   CopyData
+
+label_2B26::
     call PlayAudioStep
     ld   hl, $6800
     ld   a, $10
@@ -4351,6 +4361,8 @@ label_2B61::
     ld   de, $8000
     ld   bc, $0800
     jp   CopyData
+
+label_2B72::
     ld   hl, $7800
     ldh  a, [hIsGBC]
     and  a
@@ -4358,6 +4370,8 @@ label_2B61::
     ld   hl, $7800
     ld   a, $35
     jr   label_2B95
+
+label_2B81::
     ld   hl, $4800
     ldh  a, [hIsGBC]
     and  a
@@ -4595,7 +4609,7 @@ label_2D21::
 .return
     ret
 
-func_2D2D::
+label_2D2D::
     ld   a, $0C
     call SwitchAdjustedBank
     ld   hl, $5200
@@ -4693,6 +4707,8 @@ label_2DE0::
     ld   de, $8200
     ld   bc, $0100
     jp   CopyData
+
+label_2DE9::
     ld   a, $0C
     call SwitchAdjustedBank
     ld   hl, $7800
@@ -4704,10 +4720,15 @@ label_2DE0::
     ld   bc, $0100
     jp   CopyData
 
+label_2E06::
     ld   hl, $7000
     jr   label_2E13
+
+label_2E0B::
     ld   hl, $7800
     jr   label_2E13
+
+label_2E10::
     ld   hl, $5800
 
 label_2E13::
@@ -4717,6 +4738,7 @@ label_2E13::
     ld   bc, $0800
     jp   CopyData
 
+label_2E21::
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4729,6 +4751,7 @@ label_2E13::
     ld   bc, $0400
     jp   CopyData
 
+label_2E41::
     ld   a, $10
     call SwitchAdjustedBank
     ld   hl, $6700
@@ -4740,6 +4763,7 @@ label_2E13::
     ld   bc, $0600
     jp   CopyData
 
+label_2E5E::
     ld   a, $0F
     call SwitchBank
     ld   hl, $4400
@@ -6873,8 +6897,8 @@ SwitchToMapDataBank::
     ld   [MBC3SelectBank], a
     ret
 
-label_3915::
-    jpsb Func_027_7FC5
+LoadTilemap21_trampoline::
+    jpsb LoadTilemap21
 
 label_391D::
     ld   a, $20

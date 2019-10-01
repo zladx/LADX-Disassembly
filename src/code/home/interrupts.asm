@@ -182,6 +182,7 @@ LoadMapData::
     ld   [wTileMapToLoad], a
     ld   a, [wLCDControl]
     ld   [rLCDC], a
+.return:
     ret
 
 data_046A::

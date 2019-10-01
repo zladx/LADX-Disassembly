@@ -144,12 +144,12 @@ OverworldRoomsSecondHalf::
 include "data/rooms/overworld_b.asm"
 include "data/bg_attributes/overworld_pointers.asm"
 include "data/bg_attributes/overworld_banks.asm"
-include "code/bank1A/map_loading.asm"
+include "code/map_loading.asm"
 OverworldBaseMapDMG::
 incbin "data/base_maps/overworld.dmg.bin"
 OverworldBaseMapGBC::
 incbin "data/base_maps/overworld.cgb.bin"
-include "code/bank1A/unknown.asm"
+include "code/bank1A.asm"
 
 section "bank1B",romx[$4000],bank[$1B]
 include "code/audio/music_1.asm"

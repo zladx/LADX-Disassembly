@@ -496,9 +496,9 @@ label_AF6::
     call $7161
     jp   RestoreStackedBankAndReturn
 
-; Save picture to photo album?
-Func_03D_4029_trampoline::
-    callsb Func_03D_4029
+; Load Background map and attributes for photo
+LoadPhotoBgMap_trampoline::
+    callsb LoadPhotoBgMap
     ret
 
 ; Toogle an extra byte to the bank number on GBC (on DMG, does nothing)

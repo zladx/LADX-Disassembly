@@ -1077,6 +1077,7 @@ jr_020_4640:
 ;   input:  wTileMapToLoad in e
 ;   output: address to jump to in hl
 GetTilemapHandlerAddress::
+    ; de = (e - 1) * 2
     dec  e                                        ; $4657: $1D
     sla  e                                        ; $4658: $CB $23
     ld   d, $00                                   ; $465A: $16 $00
@@ -1089,41 +1090,41 @@ GetTilemapHandlerAddress::
 
 ; Pointers to addresses to execute for loading a specific tilemap
 TilemapLoadingHandlersTable::
-._00 dw label_309B
-._01 dw ClearBGMap
-._02 dw LoadBaseTiles
-._03 dw LoadInventoryTiles
-._04 dw label_2D2D
-._05 dw LoadDungeonTiles
-._06 dw label_2D2D
-._07 dw label_28F0
-._08 dw label_2E73
-._09 dw LoadMapData.return
-._0A dw label_2DE9
-._0B dw LoadMapData.return
-._0C dw label_2E5E
-._0D dw label_38FC
-._0E dw label_28E8
-._0F dw LoadIntroSequenceTiles
-._10 dw label_2DA7
-._11 dw label_2E10
-._12 dw label_2E41
-._13 dw label_2E06
-._14 dw label_2A66
-._15 dw label_2AFE
-._16 dw label_2AF9
-._17 dw label_2AEA
-._18 dw label_2B81
-._19 dw label_2B72
-._1A dw label_2B26
-._1B dw label_2B72
-._1C dw label_2AAE
-._1D dw label_2A37
-._1E dw label_2A57
-._1F dw label_2E0B
-._20 dw label_2E21
-._21 dw LoadTilemap21_trampoline
-._22 dw label_391D
+._01 dw LoadTilemap1
+._02 dw ClearBGMap
+._03 dw LoadBaseTiles
+._04 dw LoadInventoryTiles
+._05 dw label_2D2D
+._06 dw LoadDungeonTiles
+._07 dw label_2D2D
+._08 dw label_28F0
+._09 dw label_2E73
+._0A dw LoadMapData.return
+._0B dw label_2DE9
+._0C dw LoadMapData.return
+._0D dw label_2E5E
+._0E dw label_38FC
+._0F dw label_28E8
+._10 dw LoadIntroSequenceTiles
+._11 dw label_2DA7
+._12 dw label_2E10
+._13 dw label_2E41
+._14 dw label_2E06
+._15 dw label_2A66
+._16 dw label_2AFE
+._17 dw label_2AF9
+._18 dw label_2AEA
+._19 dw label_2B81
+._1A dw label_2B72
+._1B dw label_2B26
+._1C dw label_2B72
+._1D dw label_2AAE
+._1E dw label_2A37
+._1F dw label_2A57
+._20 dw label_2E0B
+._21 dw label_2E21
+._22 dw LoadTilemap21_trampoline
+._23 dw label_391D
 
 data_020_46AA::
     db   $51, $35

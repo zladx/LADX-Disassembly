@@ -5165,7 +5165,7 @@ doCopyObjectToBG:
 ; This is used when loading a map in one go (instead
 ; of having a sliding screen transition.)
 ; (called by LoadMapData)
-label_309B::
+LoadTilemap1::
     call SwitchToMapDataBank
     call SwitchBank
     ld   de, vBGMap0

@@ -158,7 +158,8 @@ include "code/audio/music_1.asm"
 section "Music tracks section 1",romx[$5000],bank[$1B]
 include "data/music/music_tracks_data_1.asm"
 
-section "bank1C",romx[$4001],bank[$1C]
+section "bank1C",romx[$4000],bank[$1C]
+db $01 ; Extra byte present in the original ROM
 include "text/dialog_table.asm"
 include "code/dialog_letters.asm"
 include "text/dialog_3.asm"

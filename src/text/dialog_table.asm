@@ -1,5 +1,3 @@
-SECTION "Text pointer table", ROMX[$4001], BANK[$1c]
-
 DialogPointerTable::
 	dw Dialog000
 	dw Dialog001

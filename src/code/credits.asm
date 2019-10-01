@@ -55,7 +55,7 @@ jr_017_407D:
     ld   a, [hl]                                  ; $408D: $7E
     and  c                                        ; $408E: $A1
     ld   [hl], a                                  ; $408F: $77
-    ldh  a, [hScratchC]                           ; $4090: $F0 $D9
+    ldh  a, [hScratch2]                           ; $4090: $F0 $D9
     inc  a                                        ; $4092: $3C
     cp   $0D                                      ; $4093: $FE $0D
     jr   nz, jr_017_407D                          ; $4095: $20 $E6
@@ -2896,7 +2896,7 @@ CreditsLoadBGMap:
     ld   b, a                                     ; $5B25: $47
     ; Return bank to restore
     ld   a, BANK(CreditsLoadBGMap)                   ; $5B26: $3E $17
-    ldh  [hScratchK], a                           ; $5B28: $E0 $E6
+    ldh  [hScratchF], a                           ; $5B28: $E0 $E6
     ld   h, [hl]                                  ; $5B2A: $66
     ld   l, b                                     ; $5B2B: $68
     ; Source bank

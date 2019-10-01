@@ -36,7 +36,7 @@ AnimateMarinBeachTiles::
     jp   CopyData
     jr   nz, AnimateTiles.doWorldAnimations
     and  b
-    ldh  [hScratchE], a
+    ldh  [hScratch9], a
     ldh  [hLinkFinalPositionY], a
     ld   h, b
 

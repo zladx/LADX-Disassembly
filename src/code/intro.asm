@@ -486,8 +486,8 @@ label_7148::
     db 0, 0, 0, 0, $40, $40, $40, $40, $90, $90, $90, $90
 
 label_7154::
-    ldh  [hScratchE], a
-    ldh  [hScratchE], a
+    ldh  [hScratch9], a
+    ldh  [hScratch9], a
 
 label_7158::
     call label_71C7
@@ -986,11 +986,11 @@ RenderRain::
     call GetRandomByte
     and  $18
     add  a, $10
-    ldh  [hScratchB], a
+    ldh  [hScratch1], a
     call GetRandomByte
     and  $18
     add  a, $10
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     ld   hl, $C04C
     ; On the sea, limit the rain to the top section of the screen ($10)
     ld   c, $10
@@ -1001,9 +1001,9 @@ RenderRain::
     ld   c, $15
 
 .loop
-    ldh  a, [hScratchB]
+    ldh  a, [hScratch1]
     ldi  [hl], a
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     ldi  [hl], a
     call GetRandomByte
     and  $01       ; if random(0,1) == 0
@@ -1017,16 +1017,16 @@ RenderRain::
     ldi  [hl], a
     ld   a, $00
     ldi  [hl], a
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     add  a, $1C
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     cp   $A0
     jr   c, .continue
     sub  a, $98
-    ldh  [hScratchA], a
-    ldh  a, [hScratchB]
+    ldh  [hScratch0], a
+    ldh  a, [hScratch1]
     add  a, $25
-    ldh  [hScratchB], a
+    ldh  [hScratch1], a
 
 .continue
     dec  c

@@ -435,7 +435,7 @@ jr_01F_4438:
 func_01F_4471:
     nop                                           ; $4471: $00
     dec  a                                        ; $4472: $3D
-    ldh  a, [hScratchB]                           ; $4473: $F0 $D8
+    ldh  a, [hScratch1]                           ; $4473: $F0 $D8
     rst  $00                                      ; $4475: $C7
     inc  bc                                       ; $4476: $03
     nop                                           ; $4477: $00

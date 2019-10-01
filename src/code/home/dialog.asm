@@ -172,13 +172,13 @@ label_23EF::
     ld   a, [wBGOriginLow]
     add  a, [hl]
     ld   l, a
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     ld   hl, data_23D6
     add  hl, de
     ld   a, [wBGOriginHigh]
     add  a, [hl]
     ld   h, a
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     ld   l, a
     xor  a
     ld   e, a
@@ -205,9 +205,9 @@ label_242B::
     cp   $12
     jr   nz, label_241E
     ld   e, $00
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     add  a, $20
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     jr   nc, label_243C
     inc  h
 
@@ -252,9 +252,9 @@ label_2464::
     cp   $12
     jr   nz, label_2444
     ld   e, $00
-    ldh  a, [hScratchA]
+    ldh  a, [hScratch0]
     add  a, $20
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     jr   nc, label_2475
     inc  h
 
@@ -446,7 +446,7 @@ DialogDrawNextCharacterHandler::
     ld   [$C3C3], a ; upcoming character, used in code for the arrow
     call ReloadSavedBank
     ld   a, e
-    ldh  [hScratchA], a
+    ldh  [hScratch0], a
     cp   "<ask>" ; $fe
     jr   nz, .notChoice
     pop  hl
@@ -531,7 +531,7 @@ DialogDrawNextCharacterHandler::
 .handleNameChar
 
 .notName
-    ldh  [hScratchB], a
+    ldh  [hScratch1], a
     ld   e, a
     ld   a, BANK(AsciiToTileMap)
     ld   [MBC3SelectBank], a
@@ -567,7 +567,7 @@ DialogDrawNextCharacterHandler::
      ; stubbed out bit of code accessing a table for (han)dakutens
     ld   a, $1C ; BANK(DakutenTable)
     ld   [MBC3SelectBank], a ; current character
-    ldh  a, [hScratchB]
+    ldh  a, [hScratch1]
     ld   e, a
     ld   d, $00
     xor  a

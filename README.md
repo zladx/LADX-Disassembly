@@ -10,16 +10,6 @@ MD5 - 07C211479386825042EFB4AD31BB525F
 1. Install [rgbds](https://github.com/rednex/rgbds#1-installing-rgbds) (version >= 0.2.5 required).
 2. `make all`
 
-## Overview
-
-This repository produces a valid Zelda DX ROM from several different inputs:
-
-- Disassembled and labeled assembly code (in `./src`),
-- Extracted PNG graphics (in `./src/gfx`),
-- Extracted dialog texts (in `./src/text`),
-- Extracted maps (in `./src/data/maps`),
-- The original ROM (used to fill-in sections not disassembled yet).
-
 ## How to contribute
 
 - Read the [disassembling How-Tos](https://github.com/zladx/LADX-Disassembly/wiki) in the Wiki

@@ -315,13 +315,10 @@ UpdateDialogState_return:
     ret
 
 DialogClosingBeginHandler::
-    ld   a, $1C
-    ld   [MBC3SelectBank], a
-    ; Call 1C:4AA8 (start open dialog animation)
-    jp   $4AA8
+    jpsb Func_01C_4AA8
 
 DialogLetterAnimationStartHandler::
-    ld   a, $1C
+    ld   a, BANK(Func_01C_49F1)
     ld   [MBC3SelectBank], a
     ld   a, [wDialogScrollDelay]
     and  a
@@ -331,7 +328,7 @@ DialogLetterAnimationStartHandler::
     ret
 
 .delayOver
-    call $49F1
+    call Func_01C_49F1
     jp   IncrementDialogStateAndReturn
 
 DialogLetterAnimationEndHandler::

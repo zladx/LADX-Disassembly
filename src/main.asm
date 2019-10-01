@@ -160,7 +160,7 @@ include "data/music/music_tracks_data_1.asm"
 
 section "bank1C",romx[$4001],bank[$1C]
 include "text/dialog_table.asm"
-section "Text at 1c:4b2a", ROMX[$4B2A], BANK[$1C]
+include "code/dialog_letters.asm"
 include "text/dialog_3.asm"
 
 section "bank1D", romx[$4000], bank[$1D]

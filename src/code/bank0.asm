@@ -3316,11 +3316,11 @@ label_1F69::
     ld   a, [wIsIndoor]
     ld   d, a
     call label_2A26
-    ldh  [$FFDC], a
+    ldh  [hScratch5], a
     ldh  a, [hScratch0]
     cp   $9A
     jr   z, label_1FFE
-    ldh  a, [$FFDC]
+    ldh  a, [hScratch5]
     cp   $00
     jp   z, label_214E
     cp   $01

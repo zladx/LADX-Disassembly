@@ -2766,7 +2766,7 @@ jr_002_531D:
     ld   a, [hl+]                                 ; $533E: $2A
     ldh  [$FFDB], a                               ; $533F: $E0 $DB
     ld   a, [hl]                                  ; $5341: $7E
-    ldh  [$FFDC], a                               ; $5342: $E0 $DC
+    ldh  [hScratch5], a                               ; $5342: $E0 $DC
     ld   de, $C010                                ; $5344: $11 $10 $C0
     ld   bc, $C014                                ; $5347: $01 $14 $C0
     ld   a, [$C145]                               ; $534A: $FA $45 $C1
@@ -2809,7 +2809,7 @@ jr_002_5366:
     inc  bc                                       ; $537B: $03
     ldh  a, [$FFDB]                               ; $537C: $F0 $DB
     ld   [de], a                                  ; $537E: $12
-    ldh  a, [$FFDC]                               ; $537F: $F0 $DC
+    ldh  a, [hScratch5]                               ; $537F: $F0 $DC
     ld   [bc], a                                  ; $5381: $02
     ret                                           ; $5382: $C9
 
@@ -2881,7 +2881,7 @@ TryOpenLockedDoor::
     ldh  [hSwordIntersectedAreaX], a                               ; $53D5: $E0 $CE
     swap a                                        ; $53D7: $CB $37
     ld   e, a                                     ; $53D9: $5F
-    ldh  a, [$FFDC]                               ; $53DA: $F0 $DC
+    ldh  a, [hScratch5]                               ; $53DA: $F0 $DC
     and  $F0                                      ; $53DC: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a                               ; $53DE: $E0 $CD
     or   e                                        ; $53E0: $B3
@@ -2917,7 +2917,7 @@ TryOpenLockedDoor::
     ld   hl, wEntity0PosX                         ; $540D: $21 $00 $C2
     add  hl, de                                   ; $5410: $19
     ld   [hl], a                                  ; $5411: $77
-    ldh  a, [$FFDC]                               ; $5412: $F0 $DC
+    ldh  a, [hScratch5]                               ; $5412: $F0 $DC
     and  $F0                                      ; $5414: $E6 $F0
     add  $10                                      ; $5416: $C6 $10
     ld   hl, wEntitiesPosYTable                   ; $5418: $21 $10 $C2
@@ -7005,7 +7005,7 @@ jr_002_6F25:
     ldh  a, [hLinkPositionY]                      ; $6F40: $F0 $99
     add  [hl]                                     ; $6F42: $86
     sub  $10                                      ; $6F43: $D6 $10
-    ldh  [$FFDC], a                               ; $6F45: $E0 $DC
+    ldh  [hScratch5], a                               ; $6F45: $E0 $DC
     and  $F0                                      ; $6F47: $E6 $F0
     or   e                                        ; $6F49: $B3
     ld   e, a                                     ; $6F4A: $5F
@@ -7380,7 +7380,7 @@ jr_002_716E:
     rra                                           ; $7185: $1F
     and  $01                                      ; $7186: $E6 $01
     ld   e, a                                     ; $7188: $5F
-    ldh  a, [$FFDC]                               ; $7189: $F0 $DC
+    ldh  a, [hScratch5]                               ; $7189: $F0 $DC
     rra                                           ; $718B: $1F
     rra                                           ; $718C: $1F
     and  $02                                      ; $718D: $E6 $02
@@ -7403,7 +7403,7 @@ label_002_719C::
     cp   $D5                                      ; $71A7: $FE $D5
     jp   z, label_002_7454                        ; $71A9: $CA $54 $74
 
-    ldh  a, [$FFDC]                               ; $71AC: $F0 $DC
+    ldh  a, [hScratch5]                               ; $71AC: $F0 $DC
     and  $0F                                      ; $71AE: $E6 $0F
     cp   $08                                      ; $71B0: $FE $08
     jp   c, label_002_7461                        ; $71B2: $DA $61 $74
@@ -7416,7 +7416,7 @@ label_002_71BB::
     and  a                                        ; $71BE: $A7
     jp   nz, label_002_7454                       ; $71BF: $C2 $54 $74
 
-    ldh  a, [$FFDC]                               ; $71C2: $F0 $DC
+    ldh  a, [hScratch5]                               ; $71C2: $F0 $DC
     and  $0F                                      ; $71C4: $E6 $0F
     cp   $06                                      ; $71C6: $FE $06
     jp   nc, label_002_726A                       ; $71C8: $D2 $6A $72
@@ -7686,7 +7686,7 @@ jr_002_734F:
     ldh  a, [$FFDB]                               ; $7356: $F0 $DB
     and  $F0                                      ; $7358: $E6 $F0
     ldh  [hSwordIntersectedAreaX], a                               ; $735A: $E0 $CE
-    ldh  a, [$FFDC]                               ; $735C: $F0 $DC
+    ldh  a, [hScratch5]                               ; $735C: $F0 $DC
     and  $F0                                      ; $735E: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a                               ; $7360: $E0 $CD
     ldh  a, [hFFE9]                               ; $7362: $F0 $E9
@@ -7875,7 +7875,7 @@ func_002_7468::
     jr   nz, jr_002_7493                          ; $7470: $20 $21
 
 jr_002_7472:
-    ldh  a, [$FFDC]                               ; $7472: $F0 $DC
+    ldh  a, [hScratch5]                               ; $7472: $F0 $DC
     and  $0F                                      ; $7474: $E6 $0F
     cp   $06                                      ; $7476: $FE $06
     jr   nc, jr_002_74AC                          ; $7478: $30 $32
@@ -7905,7 +7905,7 @@ jr_002_7493:
     jr   nz, jr_002_74AC                          ; $74A1: $20 $09
 
 jr_002_74A3:
-    ldh  a, [$FFDC]                               ; $74A3: $F0 $DC
+    ldh  a, [hScratch5]                               ; $74A3: $F0 $DC
     and  $0F                                      ; $74A5: $E6 $0F
     cp   $0C                                      ; $74A7: $FE $0C
     jp   nc, ApplyMapFadeOutTransition                            ; $74A9: $D2 $7D $0C

@@ -6567,7 +6567,7 @@ func_004_6BE1:
     ldh  a, [wActiveEntityPosY]                               ; $6BEA: $F0 $EC
     sub  $10                                      ; $6BEC: $D6 $10
     add  $04                                      ; $6BEE: $C6 $04
-    ldh  [$FFDC], a                               ; $6BF0: $E0 $DC
+    ldh  [hScratch5], a                               ; $6BF0: $E0 $DC
     and  $F0                                      ; $6BF2: $E6 $F0
     or   e                                        ; $6BF4: $B3
     ld   e, a                                     ; $6BF5: $5F

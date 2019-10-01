@@ -9151,7 +9151,7 @@ jr_003_7B13:
     add  hl, bc                                   ; $7B1D: $09
     add  hl, de                                   ; $7B1E: $19
     add  [hl]                                     ; $7B1F: $86
-    ldh  [$FFDC], a                               ; $7B20: $E0 $DC
+    ldh  [hScratch5], a                               ; $7B20: $E0 $DC
     and  $F0                                      ; $7B22: $E6 $F0
     ld   hl, hScratch1                            ; $7B24: $21 $D8 $FF
     or   [hl]                                     ; $7B27: $B6
@@ -9271,7 +9271,7 @@ jr_003_7BBB:
     rra                                           ; $7BCF: $1F
     and  $01                                      ; $7BD0: $E6 $01
     ld   e, a                                     ; $7BD2: $5F
-    ldh  a, [$FFDC]                               ; $7BD3: $F0 $DC
+    ldh  a, [hScratch5]                               ; $7BD3: $F0 $DC
     rra                                           ; $7BD5: $1F
     rra                                           ; $7BD6: $1F
     and  $02                                      ; $7BD7: $E6 $02
@@ -9454,7 +9454,7 @@ func_003_7CAB::
     ld   c, a                                     ; $7CC0: $4F
     ld   a, [hl]                                  ; $7CC1: $7E
     sub  $08                                      ; $7CC2: $D6 $08
-    ldh  [$FFDC], a                               ; $7CC4: $E0 $DC
+    ldh  [hScratch5], a                               ; $7CC4: $E0 $DC
     and  $F0                                      ; $7CC6: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a              ; $7CC8: $E0 $CD
     or   c                                        ; $7CCA: $B1
@@ -9699,7 +9699,7 @@ func_003_7E0E::
     ld   c, a                                     ; $7E22: $4F
     ld   a, [hl]                                  ; $7E23: $7E
     sub  $07                                      ; $7E24: $D6 $07
-    ldh  [$FFDC], a                               ; $7E26: $E0 $DC
+    ldh  [hScratch5], a                               ; $7E26: $E0 $DC
     and  $F0                                      ; $7E28: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a              ; $7E2A: $E0 $CD
     or   c                                        ; $7E2C: $B1

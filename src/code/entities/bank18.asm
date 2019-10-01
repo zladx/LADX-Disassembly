@@ -6057,7 +6057,7 @@ func_018_6493:
     ld   c, a                                     ; $64A7: $4F
     ld   a, [hl]                                  ; $64A8: $7E
     sub  $07                                      ; $64A9: $D6 $07
-    ldh  [$FFDC], a                               ; $64AB: $E0 $DC
+    ldh  [hScratch5], a                               ; $64AB: $E0 $DC
     and  $F0                                      ; $64AD: $E6 $F0
     ldh  [hSwordIntersectedAreaY], a              ; $64AF: $E0 $CD
     or   c                                        ; $64B1: $B1

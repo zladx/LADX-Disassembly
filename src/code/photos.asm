@@ -28,7 +28,7 @@ LinkPictureHandler::
     dw JumpTable_037_40EC
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_462F
     dw JumpTable_037_5393
@@ -40,7 +40,7 @@ MarineCliffPictureHandler::
     dw JumpTable_037_417F
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_4659
     dw JumpTable_037_5393
@@ -52,7 +52,7 @@ MabePictureHandler::
     dw JumpTable_037_417F
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_4781
     dw JumpTable_037_5393
@@ -64,7 +64,7 @@ UlriraPictureHandler::
     dw JumpTable_037_417F
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_4AE8
     dw JumpTable_037_5393
@@ -75,7 +75,7 @@ BowWowPictureHandler::
     dw JumpTable_037_40EC
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_4B05
     dw JumpTable_037_5393
@@ -87,7 +87,7 @@ FishermanPictureHandler::
     dw JumpTable_037_417F
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_4F5B
     dw JumpTable_037_5393
@@ -98,7 +98,7 @@ ZoraPictureHandler::
     dw JumpTable_037_40EC
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_4F9B
     dw JumpTable_037_5393
@@ -110,7 +110,7 @@ KanaletPictureHandler::
     dw JumpTable_037_417F
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_4FB7
     dw JumpTable_037_5393
@@ -122,7 +122,7 @@ GhostPictureHandler::
     dw JumpTable_037_417F
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_51F4
     dw JumpTable_037_5393
@@ -133,7 +133,7 @@ BridgePictureHandler::
     dw JumpTable_037_40EC
     dw JumpTable_037_4185
     dw JumpTable_037_4229
-    dw Func_03D_4029_trampoline
+    dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
     dw JumpTable_037_535E
     dw JumpTable_037_5393

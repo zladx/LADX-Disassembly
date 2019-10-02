@@ -4140,12 +4140,10 @@ LCDOff::
     ld   [rIE], a    ; Restore interrupts configuration
     ret
 
-LoadTilemap0F::
-    ld   a, $01
-    call SwitchBank
-    jp   $6CE3
+LoadTilemap0F_trampoline::
+    jpsw LoadTilemap0F
 
-LoadTilemap8:: ; label accessed directly by a jump table
+LoadTilemap8::
     ld   a, $7E    ; value
     ld   bc, $0400 ; count
     jr   ClearMap
@@ -4231,30 +4229,34 @@ LoadTilemap1E::
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
+
     ld   hl, $6800
-    ld   de, $9000
-    ld   bc, $0800
+    ld   de, vTiles2
+    ld   bc, TILE_SIZE * $80
     call CopyData
+
     ld   hl, $7000
-    ld   de, $8800
-    ld   bc, $0800
+    ld   de, vTiles1
+    ld   bc, TILE_SIZE * $80
     jp   CopyData
 
 LoadTilemap1F::
     call LoadTilemap15
-    ld   de, $8400
+    ld   de, vTiles0 + $400
     ld   hl, $7600
-    ld   bc, $0100
+    ld   bc, TILE_SIZE * $10
     jp   CopyData
 
 LoadTilemap15::
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
+
     ld   hl, $4000
-    ld   de, $8000
-    ld   bc, $1800
+    ld   de, vTiles0
+    ld   bc, TILE_SIZE * $180
     call CopyData
+
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4262,6 +4264,7 @@ LoadTilemap15::
     ld   de, $97F0
     ld   bc, $0010
     call CopyData
+
     ld   a, $12
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4269,6 +4272,7 @@ LoadTilemap15::
     ld   de, $8000
     ld   bc, $0040
     call CopyData
+
     ld   de, $8D00
     ld   hl, $7500
     ld   bc, $0200

@@ -1104,7 +1104,7 @@ TilemapLoadingHandlersTable::
 ._0C dw LoadMapData.return
 ._0D dw LoadTilemap0D
 ._0E dw LoadTilemap0E
-._0F dw LoadTilemap0F
+._0F dw LoadTilemap0F_trampoline
 ._10 dw LoadIntroSequenceTiles
 ._11 dw LoadTilemap11
 ._12 dw LoadTilemap12

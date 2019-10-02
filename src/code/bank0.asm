@@ -4140,12 +4140,12 @@ LCDOff::
     ld   [rIE], a    ; Restore interrupts configuration
     ret
 
-label_28E8::
+LoadTilemap0F::
     ld   a, $01
     call SwitchBank
     jp   $6CE3
 
-label_28F0:: ; label accessed directly by a jump table
+LoadTilemap8:: ; label accessed directly by a jump table
     ld   a, $7E    ; value
     ld   bc, $0400 ; count
     jr   ClearMap
@@ -4227,7 +4227,7 @@ label_2A2C::
     pop  af
     ret
 
-label_2A37::
+LoadTilemap1E::
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4240,14 +4240,14 @@ label_2A37::
     ld   bc, $0800
     jp   CopyData
 
-label_2A57::
-    call label_2A66
+LoadTilemap1F::
+    call LoadTilemap15
     ld   de, $8400
     ld   hl, $7600
     ld   bc, $0100
     jp   CopyData
 
-label_2A66::
+LoadTilemap15::
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4274,7 +4274,7 @@ label_2A66::
     ld   bc, $0200
     jp   CopyData
 
-label_2AAE::
+LoadTilemap1D::
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4297,7 +4297,7 @@ label_2AAE::
     ld   bc, $0800
     jp   CopyData
 
-label_2AEA::
+LoadTilemap18::
     ld   hl, $4000
     ldh  a, [hIsGBC]
     and  a
@@ -4306,11 +4306,11 @@ label_2AEA::
     ld   a, $35
     jr   label_2B06
 
-label_2AF9::
+LoadTilemap17::
     ld   hl, $4800
     jr   label_2B01
 
-label_2AFE::
+LoadTilemap16::
     ld   hl, $6000
 
 label_2B01::
@@ -4330,7 +4330,7 @@ label_2B06::
     ld   bc, $1000
     jp   CopyData
 
-label_2B26::
+LoadTilemap1B::
     call PlayAudioStep
     ld   hl, $6800
     ld   a, $10
@@ -4362,7 +4362,7 @@ label_2B61::
     ld   bc, $0800
     jp   CopyData
 
-label_2B72::
+LoadTilemap1A::
     ld   hl, $7800
     ldh  a, [hIsGBC]
     and  a
@@ -4371,7 +4371,7 @@ label_2B72::
     ld   a, $35
     jr   label_2B95
 
-label_2B81::
+LoadTilemap19::
     ld   hl, $4800
     ldh  a, [hIsGBC]
     and  a
@@ -4609,7 +4609,7 @@ label_2D21::
 .return
     ret
 
-label_2D2D::
+LoadTilemap5::
     ld   a, $0C
     call SwitchAdjustedBank
     ld   hl, $5200
@@ -4672,7 +4672,7 @@ LoadIntroSequenceTiles::
     ld   bc, $1000
     jp   CopyData ; tail-call ; will return afterwards.
 
-label_2DA7::
+LoadTilemap11::
     ld   a, $0F
     call SwitchAdjustedBank
     ld   hl, $4900
@@ -4708,7 +4708,7 @@ label_2DE0::
     ld   bc, $0100
     jp   CopyData
 
-label_2DE9::
+LoadTilemap0B::
     ld   a, $0C
     call SwitchAdjustedBank
     ld   hl, $7800
@@ -4720,15 +4720,15 @@ label_2DE9::
     ld   bc, $0100
     jp   CopyData
 
-label_2E06::
+LoadTilemap14::
     ld   hl, $7000
     jr   label_2E13
 
-label_2E0B::
+LoadTilemap20::
     ld   hl, $7800
     jr   label_2E13
 
-label_2E10::
+LoadTilemap12::
     ld   hl, $5800
 
 label_2E13::
@@ -4738,7 +4738,7 @@ label_2E13::
     ld   bc, $0800
     jp   CopyData
 
-label_2E21::
+LoadTilemap21::
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4751,7 +4751,7 @@ label_2E21::
     ld   bc, $0400
     jp   CopyData
 
-label_2E41::
+LoadTilemap13::
     ld   a, $10
     call SwitchAdjustedBank
     ld   hl, $6700
@@ -4763,7 +4763,7 @@ label_2E41::
     ld   bc, $0600
     jp   CopyData
 
-label_2E5E::
+LoadTilemap0D::
     ld   a, $0F
     call SwitchBank
     ld   hl, $4400
@@ -4777,7 +4777,7 @@ data_2E6F::
 label_2E70::
     ld   de, $120E
 
-label_2E73::
+LoadTilemap9::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, label_2E84
@@ -6877,7 +6877,7 @@ LoadRoomTemplate_trampoline::
     ld   [MBC3SelectBank], a
     ret
 
-label_38FC::
+LoadTilemap0E::
     ld   a, $20
     ld   [MBC3SelectBank], a
     call $588B
@@ -6897,10 +6897,10 @@ SwitchToMapDataBank::
     ld   [MBC3SelectBank], a
     ret
 
-LoadTilemap21_trampoline::
-    jpsb LoadTilemap21
+LoadTilemap22_trampoline::
+    jpsb LoadTilemap22
 
-label_391D::
+LoadTilemap23::
     ld   a, $20
     ld   [MBC3SelectBank], a
     jp   $7DE6

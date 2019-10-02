@@ -4186,10 +4186,9 @@ GetChestsStatusForRoom::
     call $5884
     jp   ReloadSavedBank
 
-label_29F8::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4C98
+; Play the boomerang sound effect, then reload the current bank
+PlayBoomerangSfx_trampoline::
+    callsb PlayBoomerangSfx
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret

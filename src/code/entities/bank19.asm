@@ -710,7 +710,7 @@ BoomerangEntityHandler::
     ld   de, $4451                                ; $4466: $11 $51 $44
     call RenderAnimatedActiveEntity                               ; $4469: $CD $C0 $3B
     call func_019_7D3D                            ; $446C: $CD $3D $7D
-    call label_29F8                               ; $446F: $CD $F8 $29
+    call PlayBoomerangSfx_trampoline               ; $446F: $CD $F8 $29
     ldh  a, [hFrameCounter]                       ; $4472: $F0 $E7
     and  $03                                      ; $4474: $E6 $03
     jr   nz, jr_019_4481                          ; $4476: $20 $09
@@ -4702,7 +4702,7 @@ jr_019_5B93:
     ldh  [hLinkPositionXIncrement], a             ; $5B9B: $E0 $9A
 
 jr_019_5B9D:
-    jp   label_29F8                               ; $5B9D: $C3 $F8 $29
+    jp   PlayBoomerangSfx_trampoline               ; $5B9D: $C3 $F8 $29
 
     ld   h, h                                     ; $5BA0: $64
     nop                                           ; $5BA1: $00

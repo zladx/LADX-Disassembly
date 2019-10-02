@@ -5058,7 +5058,7 @@ jr_006_5E08:
     jp   label_3B0C                               ; $5E11: $C3 $0C $3B
 
 func_006_5E14:
-    jp   label_29F8                               ; $5E14: $C3 $F8 $29
+    jp   PlayBoomerangSfx_trampoline               ; $5E14: $C3 $F8 $29
 
     call label_3B39                               ; $5E17: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $5E1A: $F0 $E7
@@ -7059,7 +7059,7 @@ jr_006_6951:
     add  hl, bc                                   ; $6954: $09
     ld   [hl], $FC                                ; $6955: $36 $FC
     call func_006_657A                            ; $6957: $CD $7A $65
-    call label_29F8                               ; $695A: $CD $F8 $29
+    call PlayBoomerangSfx_trampoline               ; $695A: $CD $F8 $29
     ldh  a, [hFrameCounter]                       ; $695D: $F0 $E7
     and  $03                                      ; $695F: $E6 $03
     ret  nz                                       ; $6961: $C0

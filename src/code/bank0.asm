@@ -4777,70 +4777,74 @@ data_2E6F::
 label_2E70::
     ld   de, $120E
 
+; Load lower section of OAM tiles (NPCs),
+; and upper section of BG tiles
 LoadTilemap9::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2E84
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $475A
-    jp   label_2F12
+    jr   nz, .colorDungeonEnd
+    callsb func_020_475A
+    jp   .oamTilesEnd
+.colorDungeonEnd
 
-label_2E84::
+    ;
+    ; Load 4 rows of tiles (64 tiles) to NPCs tiles VRAM
+    ;
+
     xor  a
-
-label_2E85::
+    ; Copy a row of 16 tiles
+.copyOAMTilesRow
     ldh  [hScratch0], a
     ld   hl, $C193
     ld   e, a
     ld   d, $00
     add  hl, de
     and  a
-    jr   nz, label_2ED3
+    jr   nz, .label_2ED3
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_2EB0
+    jr   z, .label_2EB0
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   nz, label_2ED3
+    jr   nz, .label_2ED3
     ldh  a, [hMapId]
     cp   MAP_KANALET
-    jr   z, label_2ED3
+    jr   z, .label_2ED3
     cp   MAP_CAVE_B
-    jr   c, label_2ED3
+    jr   c, .label_2ED3
     ldh  a, [hMapRoom]
     cp   $FD
-    jr   z, label_2ED3
+    jr   z, .label_2ED3
     cp   $B1
-    jr   z, label_2ED3
+    jr   z, .label_2ED3
 
-label_2EB0::
+.label_2EB0
     ld   a, [wIsBowWowFollowingLink]
     cp   $01
     ld   a, $A4
-    jr   z, label_2ED1
+    jr   z, .label_2ED1
     ld   a, [wIsGhostFollowingLink]
     and  a
     ld   a, $D8
-    jr   nz, label_2ED1
+    jr   nz, .label_2ED1
     ld   a, [wIsRoosterFollowingLink]
     and  a
     ld   a, $DD
-    jr   nz, label_2ED1
+    jr   nz, .label_2ED1
     ld   a, [wIsMarinFollowingLink]
     and  a
-    jr   z, label_2ED3
+    jr   z, .label_2ED3
     ld   a, $8F
 
-label_2ED1::
-    jr   label_2ED4
+.label_2ED1
+    jr   .jr_2ED4
 
-label_2ED3::
+.label_2ED3
     ld   a, [hl]
 
-label_2ED4::
+.jr_2ED4
     and  a
-    jr   z, label_2F0A
+    jr   z, .copyDone
     push af
     and  $3F
     ld   b, a
@@ -4856,30 +4860,39 @@ label_2ED4::
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_2EF2
+    jr   z, .bankAdjustmentEnd
     call AdjustBankNumberForGBC
+.bankAdjustmentEnd
 
-label_2EF2::
+    ; Do the actual copy to OAM tiles
     ld   [MBC3SelectBank], a
     ldh  a, [hScratch0]
     ld   d, a
     ld   e, $00
-    ld   hl, $8400
+    ; destination = Lower-half of the OAM tiles section (NPCs tiles)
+    ld   hl, vTiles0 + $400
     add  hl, de
     ld   e, l
     ld   d, h
+    ; source = $4000 + bc
     ld   hl, $4000
     add  hl, bc
-    ld   bc, $0100
+    ; length = $100
+    ld   bc, TILE_SIZE * 16
     call CopyData
+.copyDone
 
-label_2F0A::
+    ; while hScratch0 < 4, copy the next row
     ldh  a, [hScratch0]
     inc  a
     cp   $04
-    jp   nz, label_2E85
+    jp   nz, .copyOAMTilesRow
+.oamTilesEnd
 
-label_2F12::
+    ;
+    ; Load 8 rows (128 tiles) to the BG-only tiles
+    ;
+
     ld   de, $9000
     ld   a, [wIsIndoor]
     and  a
@@ -4893,23 +4906,25 @@ label_2F12::
     ld   hl, $7000
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
-    jr   z, label_2F41
+    jr   z, .label_2F41
     cp   MAP_CAVE_B
-    jr   nc, label_2F3B
+    jr   nc, .label_2F3B
 
-label_2F36::
+.label_2F36
     ld   hl, $7800
-    jr   label_2F41
+    jr   .label_2F41
 
-label_2F3B::
+.label_2F3B
     ldh  a, [hMapRoom]
     cp   $E9
-    jr   z, label_2F36
+    jr   z, .label_2F36
+.label_2F41
 
-label_2F41::
-    ld   de, $9000
-    ld   bc, $0800
+    ; Copy tiles to the BG tiles
+    ld   de, vTiles2
+    ld   bc, TILE_SIZE * 128
     call CopyData
+
     ret
 
 label_2F4B::

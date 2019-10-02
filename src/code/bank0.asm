@@ -4143,30 +4143,31 @@ LCDOff::
 LoadTilemap0F_trampoline::
     jpsw LoadTilemap0F
 
+; Fill the Background Map with all 7Es
 LoadTilemap8::
     ld   a, $7E    ; value
     ld   bc, $0400 ; count
-    jr   ClearMap
+    jr   FillBGMap
 
 ; Fill the Background Map with all 7Fs
 ClearBGMap::
     ld   a, $7F    ; value
     ld   bc, $0800 ; count
 
-; Fill the Background Map with a value
+; Fill the Background map with a value
 ; Inputs:
 ;   a  : value to fill
 ;   bc : count
-ClearMap::
+FillBGMap::
     ld   d, a
     ld   hl, vBGMap0
-.clearMap_loop
+.loop
     ld   a, d
     ldi  [hl], a
     dec  bc
     ld   a, b
     or   c
-    jr   nz, .clearMap_loop
+    jr   nz, .loop
     ret
 
 include "code/home/copy_data.asm"

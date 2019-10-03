@@ -194,7 +194,7 @@ ApplyRoomTransition::
     ldh  a, [hMapRoom]                            ; $79A6: $F0 $F6
     ld   e, a                                     ; $79A8: $5F
 
-    call GetChestsStatusForRoom                   ; $79A9: $CD $ED $29
+    call GetChestsStatusForRoom_trampoline                   ; $79A9: $CD $ED $29
 
     ; If chest status is not some key, and $C18E != 80, return.
     cp   CHEST_SMALL_KEY                          ; $79AC: $FE $1A

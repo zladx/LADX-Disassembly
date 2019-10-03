@@ -1340,6 +1340,7 @@ jr_004_4972:
 
     jp   label_004_6D7A                           ; $49BA: $C3 $7A $6D
 
+func_014_49BD::
     ld   hl, wEntitiesPosZTable                                ; $49BD: $21 $10 $C3
     add  hl, bc                                   ; $49C0: $09
     ld   [hl], $7E                                ; $49C1: $36 $7E
@@ -2095,6 +2096,7 @@ func_004_4FFE:
 jr_004_5048:
     jp   label_3D8A                               ; $5048: $C3 $8A $3D
 
+func_004_504B::
     call GetEntityTransitionCountdown                 ; $504B: $CD $05 $0C
     ld   [hl], $FF                                ; $504E: $36 $FF
     ld   hl, $C410                                ; $5050: $21 $10 $C4
@@ -3191,6 +3193,7 @@ jr_004_565F:
     ld   [hl], a                                  ; $568E: $77
     ret                                           ; $568F: $C9
 
+func_004_5690::
 label_004_5690:
     xor  a                                        ; $5690: $AF
     ld   [$D201], a                               ; $5691: $EA $01 $D2
@@ -3619,7 +3622,7 @@ label_004_5A05:
     ldh  [hNoiseSfx], a                            ; $5A17: $E0 $F4
     ret                                           ; $5A19: $C9
 
-func_004_5A1A:
+func_004_5A1A::
     ld   hl, $C460                                ; $5A1A: $21 $60 $C4
     add  hl, bc                                   ; $5A1D: $09
     ld   e, [hl]                                  ; $5A1E: $5E
@@ -3964,6 +3967,8 @@ jr_004_5C5A:
     call func_004_7FA3                            ; $5C5A: $CD $A3 $7F
     call func_004_6D80                            ; $5C5D: $CD $80 $6D
     call label_3B70                               ; $5C60: $CD $70 $3B
+
+func_004_5C63::
     call func_004_6DCA                            ; $5C63: $CD $CA $6D
     call func_004_6E03                            ; $5C66: $CD $03 $6E
     call func_004_5D08                            ; $5C69: $CD $08 $5D

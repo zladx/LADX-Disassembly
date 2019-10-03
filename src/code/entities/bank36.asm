@@ -8168,6 +8168,9 @@ jr_036_6D00:
     ld   l, h                                     ; $6D4A: $6C
     ld   sp, hl                                   ; $6D4B: $F9
     ld   l, h                                     ; $6D4C: $6C
+
+; Do stuff that returns early if end-of-room
+Func_036_6D4D::
     ldh  a, [hMapId]                              ; $6D4D: $F0 $F7
     cp   $FF                                      ; $6D4F: $FE $FF
     ret  nz                                       ; $6D51: $C0
@@ -9123,6 +9126,7 @@ label_036_7228:
 
     jr   jr_036_7288                              ; $7258: $18 $2E
 
+Func_036_725A::
     ld   a, [wRoomTransitionState]                ; $725A: $FA $24 $C1
     and  a                                        ; $725D: $A7
     jr   nz, jr_036_7288                          ; $725E: $20 $28
@@ -9180,6 +9184,7 @@ jr_036_729E:
 jr_036_72A9:
     jr   jr_036_7288                              ; $72A9: $18 $DD
 
+func_014_72AB::
     xor  a                                        ; $72AB: $AF
     ld   hl, $C390                                ; $72AC: $21 $90 $C3
     add  hl, bc                                   ; $72AF: $09

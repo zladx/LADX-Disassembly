@@ -1378,9 +1378,7 @@ label_100A::
     callsb Func_020_5C9C
 
 label_1012::
-    ld   a, $14
-    call SwitchBank
-    call $54F8
+    callsw Func_014_54F8
 
 returnFromGameplayHandler::
     ; Present dialog if needed
@@ -1501,18 +1499,18 @@ label_10DB::
 label_10DF::
     ldh  a, [$FFB7]
     and  a
-    jr   z, label_10E7
+    jr   z, .jp_10E7
     dec  a
     ldh  [$FFB7], a
 
-label_10E7::
+.jp_10E7
     ldh  a, [$FFB6]
     and  a
-    jr   z, label_10EF
+    jr   z, .jp_10EF
     dec  a
     ldh  [$FFB6], a
 
-label_10EF::
+.jp_10EF
     ld   a, [wDialogState]
     and  a
     jp   nz, ApplyLinkMotionState
@@ -1565,17 +1563,13 @@ label_114F::
     jp   DrawLinkSpriteAndReturn
 
 LinkMotionTeleportUpHandler::
-    ld   a, $19
-    call SwitchBank
-    jp   $5D6A
+    jpsw func_019_5D6A
 
 LinkMotionPassOutHandler::
     jpsw LinkPassOut
 
 LinkMotionInteractiveHandler::
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    call $725A
+    callsb Func_036_725A
     and  a
     ret  z
 
@@ -1797,7 +1791,7 @@ UseShovel::
     or   [hl]
     ret  nz
 
-    call $4D20
+    call func_002_4D20
     jr   nc, .notPoking
 
     ld   a, JINGLE_SWORD_POKING
@@ -1819,7 +1813,7 @@ UseHookshot::
     ld   a, [$C1A4]
     and  a
     ret  nz
-    jp   $4254
+    jp   func_002_4254
 
 label_1321::
     cp   $01
@@ -2057,9 +2051,7 @@ label_14A7::
     ld   a, $08
     call func_003_64CA_trampoline
     ret  c
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4C47
+    callsb Func_020_4C47
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -2582,21 +2574,19 @@ label_1814::
     ret
 
 label_1819::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4AB3
+    callsb Func_020_4AB3
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $49BA
+
+label_1828::
+    callsb Func_020_49BA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
 LinkMotionMapFadeOutHandler::
-    call $754F
+    call func_002_754F
     ld   a, [$C3C9]
     and  a
     jr   z, label_1847
@@ -2869,7 +2859,7 @@ label_19DA::
     ret
 
 LinkMotionMapFadeInHandler::
-    call $754F
+    call func_002_754F
     ld   a, [$D474]
     and  a
     jr   z, label_19FC
@@ -2909,23 +2899,15 @@ label_1A21::
     ret
 
 label_1A22::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6C4F
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $55CA
+    callsb Func_020_6C4F
+    callsb Func_020_55CA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
 label_1A39::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6C7A
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $563B
+    callsb Func_020_6C7A
+    callsb Func_020_563B
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -3449,9 +3431,7 @@ label_2098::
     jr   nz, label_20CF
 
 label_20BF::
-    ld   a, $14
-    ld   [MBC3SelectBank], a
-    call $5900
+    callsb func_014_5900
     callsb label_002_41D0
 
 label_20CF::
@@ -3534,9 +3514,7 @@ label_214E::
 
 label_2153::
     call label_2165
-    ld   a, $14
-    ld   [MBC3SelectBank], a
-    call $50C3
+    callsb func_014_50C3
     jp   ReloadSavedBank
 
 label_2161::
@@ -3557,9 +3535,7 @@ label_2177::
     ret
 
 label_2178::
-    ld   a, $14
-    ld   [MBC3SelectBank], a
-    call $5526
+    callsb func_014_5526
     jp   ReloadSavedBank
 
 label_2183::
@@ -3578,9 +3554,7 @@ label_2183::
     ld   c, e
     ld   b, d
     ld   e, $01
-    ld   a, $03
-    call SwitchBank
-    jp   $5795
+    jpsw func_003_5795
 
 label_21A7::
     ret
@@ -3712,9 +3686,7 @@ IncrementBGMapSourceAndDestination_Horizontal::
 ; Update a region (row or column) of the BG map during room transition
 DoUpdateBGRegion::
     ; Configures an async data request to copy background tilemap
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4A76
+    callsb Func_020_4A76
 
     ; Switch back to Map Data bank
     ld   a, $08
@@ -3821,9 +3793,8 @@ DoUpdateBGRegion::
     jr   z, .verticalIncrementEnd
     push bc
     push de
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $49D9
+    callsb Func_020_49D9
+
     ; Select BG attributes bank
     ldh  a, [hScratch8]
     ld   [MBC3SelectBank], a
@@ -3854,9 +3825,7 @@ DoUpdateBGRegion::
     ; Load BG palette data
     push bc
     push de
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $49D9
+    callsb Func_020_49D9
     ; Select BG attributes bank
     ldh  a, [hScratch8]
     ld   [MBC3SelectBank], a
@@ -3898,9 +3867,7 @@ DoUpdateBGRegion::
     jp   nz, .loop
 
     ; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    jp   $5570
+    jpsb Func_020_5570
 
 include "code/home/dialog.asm"
 
@@ -3947,9 +3914,7 @@ label_27F2::
     ldh  a, [hFFBC]
     and  a
     jr   nz, .skip
-    ld   a, $1F
-    ld   [MBC3SelectBank], a
-    call $4003
+    callsb Func_01F_4003
 .skip
     jp   ReloadSavedBank
 
@@ -4152,16 +4117,8 @@ include "code/home/copy_data.asm"
 
 include "src/code/home/clear_memory.asm"
 
-; Retrieve the status of chests in the given room
-; Inputs:
-;   d    is room indoor
-;   e    room id
-; Output:
-;   a    status of chests (eg. $19, $1A, etc.)
-GetChestsStatusForRoom::
-    ld   a, $14
-    ld   [MBC3SelectBank], a
-    call $5884
+GetChestsStatusForRoom_trampoline::
+    callsb GetChestsStatusForRoom
     jp   ReloadSavedBank
 
 ; Play the boomerang sound effect, then reload the current bank
@@ -4387,9 +4344,7 @@ label_2B95::
 
 label_2BC1::
     push bc
-    ld   a, $14
-    ld   [MBC3SelectBank], a
-    call $5838
+    callsb func_014_5838
     call ReloadSavedBank
     pop  bc
     ret
@@ -4450,7 +4405,7 @@ LoadDungeonTiles::
     ; Switch to bank $20
     ld   a, $20
     call SwitchBank
-    ld   hl, $4589
+    ld   hl, data_020_4589
     ; e = [hMapId]
     ldh  a, [hMapId]
     ld   e, a
@@ -5265,10 +5220,10 @@ LoadRoom::
     and  a
     jr   z, .indoorSpecialCodeEnd
     ; Do some stuff
-    ld   a, $14
+    ld   a, BANK(func_014_5897)
     ld   [MBC3SelectBank], a
     ldh  [hRoomBank], a
-    call $5897
+    call func_014_5897
     ld   e, a
     ld   hl, wKillCount2
 .loop
@@ -5575,10 +5530,8 @@ LoadRoom::
     ; Surround the objects area defining a room by ROOM_BORDER values
     callsb PadRoomObjectsArea
 
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    ; do stuff that returns early if end-of-room
-    call $6D4D
+    ; Do stuff that returns early if end-of-room
+    callsb Func_036_6D4D
 
     ; Load palette for room objects?
     callsb Func_021_53F3
@@ -6873,10 +6826,8 @@ LoadRoomTemplate_trampoline::
     ld   [MBC3SelectBank], a
     ret
 
-LoadTilemap0E::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $588B
+LoadTilemap0E_trampoline::
+    callsb LoadTilemap0E
     ret
 
 SwitchToMapDataBank::
@@ -6896,10 +6847,8 @@ SwitchToMapDataBank::
 LoadTilemap22_trampoline::
     jpsb LoadTilemap22
 
-LoadTilemap23::
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    jp   $7DE6
+LoadTilemap23_trampoline::
+    jpsb LoadTilemap23
 
 label_3925::
     ld   a, $14
@@ -6912,22 +6861,16 @@ label_3925::
     ret
 
 label_3935::
-    ld   a, $19
-    call SwitchBank
-    call $7C50
+    callsw Func_019_7C50
     ld   a, $03
     jp   SwitchBank
 
 label_3942::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $53E4
+    callsb func_003_53E4
     jp   ReloadSavedBank
 
 label_394D::
-    ld   a, $14
-    ld   [MBC3SelectBank], a
-    call $54AC
+    callsb func_014_54AC
     jp   ReloadSavedBank
 
 label_3958::
@@ -6938,21 +6881,15 @@ label_3958::
     jp   SwitchBank
 
 label_3965::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $485B
+    callsb func_003_485B
     jp   ReloadSavedBank
 
 label_3970::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $7EFE
+    callsb func_003_7EFE
     jp   ReloadSavedBank
 
 label_397B::
-    ld   a, $14
-    ld   [MBC3SelectBank], a
-    call $5347
+    callsb func_014_5347
     ld   a, $03
     ld   [MBC3SelectBank], a
     ret
@@ -7006,9 +6943,7 @@ label_39C1::
     add  hl, de
     ld   a, [hl]
     ld   [$C3C0], a
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4303
+    callsb Func_020_4303
     xor  a
     ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
@@ -7017,10 +6952,10 @@ label_39C1::
     ld   [$C1AD], a
 
 label_39E3::
-    ld   a, $20
+    ld   a, BANK(Func_020_6352)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    call $6352
+    call Func_020_6352
 
     ; Initialize the entities counter
     ld   b, $00
@@ -7056,9 +6991,7 @@ AnimateEntity_return::
     ret
 
 label_3A0A::
-    ld   a, $15
-    ld   [MBC3SelectBank], a
-    call $4000
+    callsb func_015_4000
     ld   a, $03
     ld   [MBC3SelectBank], a
     ret
@@ -7228,33 +7161,23 @@ label_3B18::
     jp   ReloadSavedBank
 
 label_3B23::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $7893
+    callsb func_003_7893
     jp   ReloadSavedBank
 
 label_3B2E::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $7CAB
+    callsb func_003_7CAB
     jp   ReloadSavedBank
 
 label_3B39::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $6E28
+    callsb func_003_6E28
     jp   ReloadSavedBank
 
 label_3B44::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $6C6B
+    callsb func_003_6C6B
     jp   ReloadSavedBank
 
 label_3B4F::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $6BDE
+    callsb func_003_6BDE
     jp   ReloadSavedBank
 
 label_3B5A::
@@ -7264,21 +7187,15 @@ label_3B5A::
     jp   ReloadSavedBank
 
 label_3B65::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $73EB
+    callsb func_003_73EB
     jp   ReloadSavedBank
 
 label_3B70::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $6E2B
+    callsb func_003_6E2B
     jp   ReloadSavedBank
 
 label_3B7B::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $75A2
+    callsb func_003_75A2
     jp   ReloadSavedBank
 
 func_003_64CA_trampoline::
@@ -7294,10 +7211,10 @@ func_003_64CA_trampoline::
 
 label_3B98::
     push af
-    ld   a, $03
+    ld   a, BANK(func_003_64CC)
     ld   [MBC3SelectBank], a
     pop  af
-    call $64CC
+    call func_003_64CC
     rr   l
     call ReloadSavedBank
     rl   l
@@ -7305,14 +7222,14 @@ label_3B98::
 
 label_3BAA::
     ld   hl, MBC3SelectBank
-    ld   [hl], $03
-    call $7EC7
+    ld   [hl], BANK(func_003_7EC7)
+    call func_003_7EC7
     jp   ReloadSavedBank
 
 label_3BB5::
     ld   hl, MBC3SelectBank
-    ld   [hl], $03
-    call $7E45
+    ld   [hl], BANK(func_003_7E45)
+    call func_003_7E45
     jp   ReloadSavedBank
 
 ; Render an animated active entity to wOAMBuffer
@@ -7703,69 +7620,47 @@ label_3D8A::
     ret
 
 label_3DA0::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $15
-    call $7964
+    callhl func_015_7964
     jp   ReloadSavedBank
 
 label_3DAB::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $04
-    call $5A1A
+    callhl func_004_5A1A
     jp   ReloadSavedBank
 
 label_3DB6::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $04
-    call $5690
+    callhl func_004_5690
     jp   ReloadSavedBank
 
 label_3DC1::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $04
-    call $504B
+    callhl func_004_504B
     jp   ReloadSavedBank
 
 label_3DCC::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $04
-    call $49BD
+    callhl func_014_49BD
     jp   ReloadSavedBank
 
 label_3DD7::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $36
-    call $72AB
+    callhl func_014_72AB
     jp   ReloadSavedBank
 
 label_3DE2::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $05
-    call $6CC6
+    callhl func_005_6CC6
     jp   ReloadSavedBank
 
 label_3DED::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $05
-    call $6818
+    callhl func_005_6818
     jp   ReloadSavedBank
 
 label_3DF8::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $05
-    call $6302
+    callhl func_005_6302
     jp   ReloadSavedBank
 
 label_3E03::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $05
-    call $5A1E
+    callhl func_005_5A1E
     jp   ReloadSavedBank
 
 label_3E0E::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $05
-    call $556B
+    callhl func_005_556B
     jp   ReloadSavedBank
 
 label_3E19::
@@ -7776,15 +7671,11 @@ label_3E19::
     jp   SwitchBank
 
 label_3E29::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $04
-    call $5C63
+    callhl func_004_5C63
     jp   ReloadSavedBank
 
 label_3E34::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $03
-    call $5407
+    callhl func_003_5407
     jp   ReloadSavedBank
 
 LoadHeartsAndRuppeesCount::
@@ -7809,15 +7700,11 @@ label_3E5A::
     jp   ReloadSavedBank
 
 label_3E6B::
-    ld   hl, MBC3SelectBank
-    ld   [hl], $03
-    call $6472
+    callhl func_003_6472
     jp   ReloadSavedBank
 
 label_3E76::
-    ld   a, $06
-    call SwitchBank
-    call $783C
+    callsw func_006_783C
     ld   a, $03
     jp   SwitchBank
 
@@ -7963,11 +7850,12 @@ data_3F48::
     db 1, 2, 4, 8, $10, $20, $40, $80
 
 label_3F50::
-    ld   a, $03
+    ld   a, BANK(func_003_55CF)
     ld   [$C113], a
     ld   [MBC3SelectBank], a
-    call $55CF
+    call func_003_55CF
     call ReloadSavedBank
+
     ld   hl, $C460
     add  hl, bc
     ld   a, [hl]

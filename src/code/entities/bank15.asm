@@ -2,8 +2,7 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-SECTION "ROM Bank $015", ROMX[$4000], BANK[$15]
-
+func_015_4000::
     call label_3D7F                               ; $4000: $CD $7F $3D
     ld   hl, $C330                                ; $4003: $21 $30 $C3
     add  hl, bc                                   ; $4006: $09
@@ -10323,6 +10322,7 @@ func_015_795D::
     ld   a, [hl]                                  ; $7961: $7E
     and  $0F                                      ; $7962: $E6 $0F
 
+func_015_7964::
 label_015_7964:
     sla  a                                        ; $7964: $CB $27
     sla  a                                        ; $7966: $CB $27

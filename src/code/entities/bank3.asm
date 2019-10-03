@@ -2190,6 +2190,7 @@ label_003_5406:
 jr_003_5406:
     ret                                           ; $5406: $C9
 
+func_003_5407::
     ld   a, $05                                   ; $5407: $3E $05
     call func_003_64CA                            ; $5409: $CD $CA $64
     ret  c                                        ; $540C: $D8
@@ -2508,6 +2509,7 @@ jr_003_5599:
     ld   l, $2D                                   ; $55CB: $2E $2D
     jr   c, @+$39                                 ; $55CD: $38 $37
 
+func_003_55CF::
     ldh  a, [hActiveEntityType]                     ; $55CF: $F0 $EB
     cp   $23                                      ; $55D1: $FE $23
     jr   nz, jr_003_55E2                          ; $55D3: $20 $0D
@@ -5159,6 +5161,8 @@ jr_003_64BC:
 ;   a: ???
 func_003_64CA::
     ld   e, $0F                                   ; $64CA: $1E $0F
+
+func_003_64CC::
     push af                                       ; $64CC: $F5
     ld   d, $00                                   ; $64CD: $16 $00
 
@@ -7892,6 +7896,8 @@ label_003_73E6:
     dec  l                                        ; $73E7: $2D
     ld   l, $38                                   ; $73E8: $2E $38
     scf                                           ; $73EA: $37
+
+func_003_73EB::
     ld   hl, $C1AC                                ; $73EB: $21 $AC $C1
     ld   a, [$C13E]                               ; $73EE: $FA $3E $C1
     or   [hl]                                     ; $73F1: $B6

@@ -5105,6 +5105,8 @@ jr_019_5C61:
     nop                                           ; $5D67: $00
     nop                                           ; $5D68: $00
     nop                                           ; $5D69: $00
+
+func_019_5D6A::
     ld   a, $01                                   ; $5D6A: $3E $01
     ldh  [$FFA1], a                               ; $5D6C: $E0 $A1
     ld   [wC167], a                               ; $5D6E: $EA $67 $C1
@@ -10811,6 +10813,7 @@ jr_019_7C46:
 jr_019_7C4E:
     jr   z, jr_019_7C56                           ; $7C4E: $28 $06
 
+Func_019_7C50::
     ldh  a, [hActiveEntityUnknownG]               ; $7C50: $F0 $F1
 
 jr_019_7C52:

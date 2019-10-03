@@ -95,10 +95,10 @@ jr_002_424F:
     nop                                           ; $4251: $00
     ret  nc                                       ; $4252: $D0
 
-    jr   nc, jr_002_424F                          ; $4253: $30 $FA
+    db   $30                                      ; $4253: $30
 
-    ld   b, [hl]                                  ; $4255: $46
-    pop  bc                                       ; $4256: $C1
+func_002_4254::
+    ld   a, [$C146]
     and  a                                        ; $4257: $A7
     jr   nz, jr_002_4286                          ; $4258: $20 $2C
 
@@ -8014,6 +8014,7 @@ jr_002_7549:
     and  a                                        ; $754C: $A7
     jr   z, jr_002_7587                           ; $754D: $28 $38
 
+func_002_754F::
     ld   hl, $C146                                ; $754F: $21 $46 $C1
     ld   a, [wIsRunningWithPegasusBoots]                               ; $7552: $FA $4A $C1
     or   [hl]                                     ; $7555: $B6

@@ -274,6 +274,7 @@ EntityPointersTable::
     ld   h, d                                     ; $4301: $62
     ret                                           ; $4302: $C9
 
+Func_020_4303::
     ld   a, [$C5A0]                               ; $4303: $FA $A0 $C5
     ld   [$C5A1], a                               ; $4306: $EA $A1 $C5
     xor  a                                        ; $4309: $AF
@@ -1103,7 +1104,7 @@ TilemapLoadingHandlersTable::
 ._0B dw LoadTilemap0B
 ._0C dw LoadMapData.return
 ._0D dw LoadTilemap0D
-._0E dw LoadTilemap0E
+._0E dw LoadTilemap0E_trampoline
 ._0F dw LoadTilemap0F_trampoline
 ._10 dw LoadIntroSequenceTiles
 ._11 dw LoadTilemap11
@@ -1124,7 +1125,7 @@ TilemapLoadingHandlersTable::
 ._20 dw LoadTilemap20
 ._21 dw LoadTilemap21
 ._22 dw LoadTilemap22_trampoline
-._23 dw LoadTilemap23
+._23 dw LoadTilemap23_trampoline
 
 data_020_46AA::
     db   $51, $35
@@ -1641,6 +1642,8 @@ jr_020_49AF:
     ldh  a, [$FF08]                               ; $49B3: $F0 $08
     ld   [label_C0C], sp                          ; $49B5: $08 $0C $0C
     ld   a, [rNR10]                               ; $49B8: $F0 $10
+
+Func_020_49BA::
     ldh  a, [hLinkDirection]                      ; $49BA: $F0 $9E
     ld   e, a                                     ; $49BC: $5F
     ld   d, $00                                   ; $49BD: $16 $00
@@ -1658,6 +1661,8 @@ jr_020_49AF:
     ld   [wC178], a                               ; $49D5: $EA $78 $C1
     ret                                           ; $49D8: $C9
 
+; Load BG palette data
+Func_020_49D9::
     ldh  a, [hBGMapOffsetHigh]                    ; $49D9: $F0 $E0
     ld   h, a                                     ; $49DB: $67
     ldh  a, [hBGMapOffsetLow]                     ; $49DC: $F0 $E1
@@ -1736,6 +1741,8 @@ Func_020_4A22:
     ldh  [$FFE5], a                               ; $4A73: $E0 $E5
     ret                                           ; $4A75: $C9
 
+; Configures an async data request to copy background tilemap
+Func_020_4A76::
     ld   a, [wRoomTransitionDirection]            ; $4A76: $FA $25 $C1
     ld   c, a                                     ; $4A79: $4F
     ld   b, $00                                   ; $4A7A: $06 $00
@@ -1785,6 +1792,8 @@ jr_020_4A92:
     ld   b, e                                     ; $4AB0: $43
     inc  hl                                       ; $4AB1: $23
     inc  hl                                       ; $4AB2: $23
+
+Func_020_4AB3::
     push hl                                       ; $4AB3: $E5
     ldh  a, [hScratch0]                           ; $4AB4: $F0 $D7
     add  h                                        ; $4AB6: $84
@@ -2073,6 +2082,8 @@ jr_020_4C3E:
     nop                                           ; $4C44: $00
     db   $f4                                      ; $4C45: $F4
     inc  c                                        ; $4C46: $0C
+
+Func_020_4C47::
     ld   a, $05                                   ; $4C47: $3E $05
     ldh  [hJingle], a                             ; $4C49: $E0 $F2
     ld   a, $0E                                   ; $4C4B: $3E $0E
@@ -3953,9 +3964,11 @@ jr_020_5516:
     inc  bc                                       ; $556A: $03
     nop                                           ; $556B: $00
     ld   bc, $E01F                                ; $556C: $01 $1F $E0
-    jr   nz, @+$20                                ; $556F: $20 $1E
+    db   $20                                      ; $556F: $20
 
-    rst  $38                                      ; $5571: $FF
+; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
+Func_020_5570::
+    ld   e, $FF                                   ; $5570: $FF
     ld   a, [wRoomTransitionDirection]            ; $5572: $FA $25 $C1
     ld   c, a                                     ; $5575: $4F
     ld   b, $00                                   ; $5576: $06 $00
@@ -4010,6 +4023,7 @@ label_020_55C2:
     ld   [wRoomTransitionState], a                ; $55C6: $EA $24 $C1
     ret                                           ; $55C9: $C9
 
+Func_020_55CA::
     ldh  a, [hFFA8]                               ; $55CA: $F0 $A8
     and  a                                        ; $55CC: $A7
     jr   z, jr_020_55F0                           ; $55CD: $28 $21
@@ -4094,6 +4108,8 @@ jr_020_562E:
     inc  bc                                       ; $5634: $03
     ld   bc, $0000                                ; $5635: $01 $00 $00
     ld   bc, $0302                                ; $5638: $01 $02 $03
+
+Func_020_563B::
     ld   hl, wC16C                                ; $563B: $21 $6C $C1
     inc  [hl]                                     ; $563E: $34
     ld   a, [wC16C]                               ; $563F: $FA $6C $C1
@@ -4604,6 +4620,8 @@ data_020_5800::
     nop                                           ; $5888: $00
     inc  bc                                       ; $5889: $03
     inc  bc                                       ; $588A: $03
+
+LoadTilemap0E::
     ld   a, $8B                                   ; $588B: $3E $8B
     ldh  [hBGMapOffsetLow], a                     ; $588D: $E0 $E1
     ld   a, $56                                   ; $588F: $3E $56
@@ -6703,6 +6721,8 @@ jr_020_634F:
 
 jr_020_6351:
     add  [hl]                                     ; $6351: $86
+
+Func_020_6352::
     ld   a, [wBGPalette]                          ; $6352: $FA $97 $DB
 
 jr_020_6355:
@@ -8504,6 +8524,7 @@ jr_020_6C3F:
 jr_020_6C4E:
     ret                                           ; $6C4E: $C9
 
+Func_020_6C4F::
     ldh  a, [hIsGBC]                              ; $6C4F: $F0 $FE
     and  a                                        ; $6C51: $A7
     jp   z, label_020_6B81                        ; $6C52: $CA $81 $6B
@@ -8531,6 +8552,7 @@ jr_020_6C76:
     ld   [wPaletteDataFlags], a                    ; $6C76: $EA $D1 $DD
     ret                                           ; $6C79: $C9
 
+Func_020_6C7A::
     ldh  a, [hIsGBC]                              ; $6C7A: $F0 $FE
     and  a                                        ; $6C7C: $A7
     jp   z, label_020_6B81                        ; $6C7D: $CA $81 $6B
@@ -12623,6 +12645,7 @@ jr_020_7DCB:
 
     ret                                           ; $7DE5: $C9
 
+LoadTilemap23::
     ld   c, $10                                   ; $7DE6: $0E $10
     ld   b, $68                                   ; $7DE8: $06 $68
     ld   a, $38                                   ; $7DEA: $3E $38
@@ -12639,4 +12662,3 @@ jr_020_7DCB:
     ld   h, $20                                   ; $7E02: $26 $20
     call Copy100BytesFromBankAtA                  ; $7E04: $CD $13 $0A
     ret                                           ; $7E07: $C9
-

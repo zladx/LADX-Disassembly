@@ -3827,6 +3827,7 @@ jr_005_5569:
     and  a                                        ; $5569: $A7
     ret                                           ; $556A: $C9
 
+func_005_556B::
     call label_BFB                                ; $556B: $CD $FB $0B
     ld   [hl], $C0                                ; $556E: $36 $C0
     ld   a, $18                                   ; $5570: $3E $18
@@ -4654,6 +4655,8 @@ Data_005_5A0E::
     rst  $38                                      ; $5A1A: $FF
     ld   a, $EF                                   ; $5A1B: $3E $EF
     pop  af                                       ; $5A1D: $F1
+
+func_005_5A1E::
     ld   hl, $C430                                ; $5A1E: $21 $30 $C4
     add  hl, bc                                   ; $5A21: $09
     ld   a, [hl]                                  ; $5A22: $7E
@@ -6293,6 +6296,7 @@ jr_005_62F5:
 
     ret                                           ; $6301: $C9
 
+func_005_6302::
     call GetEntityTransitionCountdown                 ; $6302: $CD $05 $0C
     ld   [hl], $40                                ; $6305: $36 $40
     ld   hl, wEntitiesUnknownTableG               ; $6307: $21 $B0 $C3
@@ -7196,6 +7200,7 @@ label_005_67EA:
     ld   a, $FF                                   ; $6813: $3E $FF
     jp   label_3B0C                               ; $6815: $C3 $0C $3B
 
+func_005_6818::
     ld   hl, $C460                                ; $6818: $21 $60 $C4
     add  hl, bc                                   ; $681B: $09
     ld   e, [hl]                                  ; $681C: $5E
@@ -8085,6 +8090,7 @@ jr_005_6CAE:
     ld   a, $02                                   ; $6CC1: $3E $02
     jp   label_3DA0                               ; $6CC3: $C3 $A0 $3D
 
+func_005_6CC6::
     call GetEntityTransitionCountdown                 ; $6CC6: $CD $05 $0C
     ld   [hl], $80                                ; $6CC9: $36 $80
     xor  a                                        ; $6CCB: $AF

@@ -2296,7 +2296,7 @@ label_1629::
 
 label_1637::
     ld   a, c
-    ldh  [hActiveEntityUnknownG], a
+    ldh  [hActiveEntitySpriteVariant], a
     call label_2178
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
@@ -2327,7 +2327,7 @@ label_1653::
     ld   [hl], a
     ld   hl, $C3B0
     add  hl, de
-    ldh  a, [hActiveEntityUnknownG]
+    ldh  a, [hActiveEntitySpriteVariant]
     ld   [hl], a
     ld   c, e
     ld   b, d
@@ -7012,7 +7012,7 @@ AnimateEntity::
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
-    ldh  [hActiveEntityUnknownG], a
+    ldh  [hActiveEntitySpriteVariant], a
 
     ld   a, BANK(UpdateEntityPositionForRoomTransition)
     ld   [wCurrentBank], a
@@ -7240,10 +7240,10 @@ label_3BB5::
 ; This is not called for unanimated entities (like butterflies,
 ; which are animated only by the actual tile changing.)
 RenderAnimatedActiveEntity::
-    ; Increment hActiveEntityUnknownG
-    ldh  a, [hActiveEntityUnknownG]
+    ; Increment hActiveEntitySpriteVariant
+    ldh  a, [hActiveEntitySpriteVariant]
     inc  a
-    ; If hActiveEntityUnknownG = 0, return
+    ; If hActiveEntitySpriteVariant = 0, return
     ret  z
 
     call SkipDisabledEntityDuringRoomTransition
@@ -7277,8 +7277,8 @@ RenderAnimatedActiveEntity::
     ld   [de], a
     inc  de
 
-    ; hl = pop de + [hActiveEntityUnknownG] * 2
-    ldh  a, [hActiveEntityUnknownG]
+    ; hl = pop de + [hActiveEntitySpriteVariant] * 2
+    ldh  a, [hActiveEntitySpriteVariant]
     ld   c, a
     ld   b, $00
     sla  c
@@ -7383,7 +7383,7 @@ label_3C71::
     jp   ReloadSavedBank
 
 label_3C77::
-    ldh  a, [hActiveEntityUnknownG]
+    ldh  a, [hActiveEntitySpriteVariant]
     inc  a
     ret  z
     call SkipDisabledEntityDuringRoomTransition
@@ -7415,7 +7415,7 @@ label_3C9C::
     sub  a, h
     ld   [de], a
     inc  de
-    ldh  a, [hActiveEntityUnknownG]
+    ldh  a, [hActiveEntitySpriteVariant]
     ld   c, a
     ld   b, $00
     sla  c
@@ -7461,7 +7461,7 @@ label_3CE0::
     jr   label_3CF6
 
 label_3CE6::
-    ldh  a, [hActiveEntityUnknownG]
+    ldh  a, [hActiveEntitySpriteVariant]
     inc  a
     jr   z, label_3D52
     push hl

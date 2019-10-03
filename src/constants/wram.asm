@@ -510,16 +510,14 @@ wEntitiesTypeTable:: ; C3A0
   ; Type of the entity
   ds $10
 
-; Entity sprite index depending on the direction?
-wEntitiesUnknownTableG:: ; C3B0
-  ; Entity custom state?
+wEntitiesSpriteVariantTable:: ; C3B0
+  ; Index of an entity sprite variant, depending for instance on the direction,
+  ; the tail waving, etc.
+  ; A sprite variant may use entirerly different tiles, or change only some of them.
+  ds $10
 
 ; Unlabeled
-wC3C0 equ $C3C0
-  ds 1
-
-; Unlabeled
-ds $1A
+ds $C3CB - $C3C0
 
 wObjectAffectingBGPalette:: ; C3CB
   ; Type of the object affecting the background palette

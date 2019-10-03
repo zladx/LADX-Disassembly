@@ -1078,11 +1078,11 @@ RenderIntroEntities::
     ld   a, [hl]
     ldh  [wActiveEntityPosY], a
 
-    ; hActiveEntityUnknownG = wEntitiesUnknownTableG[c]
-    ld   hl, wEntitiesUnknownTableG
+    ; hActiveEntitySpriteVariant = wEntitiesSpriteVariantTable[c]
+    ld   hl, wEntitiesSpriteVariantTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [hActiveEntityUnknownG], a
+    ldh  [hActiveEntitySpriteVariant], a
 
     ; hActiveEntityWalking = wEntitiesWalkingTable[c]
     ld   hl, wEntitiesWalkingTable
@@ -1510,7 +1510,7 @@ label_77ED::
     rra
     rra
     and  $07
-    ldh  [hActiveEntityUnknownG], a
+    ldh  [hActiveEntitySpriteVariant], a
     xor  a
     ld   [$C340], a
     ld   de, label_77BD

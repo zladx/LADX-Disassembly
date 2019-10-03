@@ -258,8 +258,8 @@ hActiveEntityWalking:: ; FFF0
   ; See wEntitiesWalkingTable
   ds 1
 
-hActiveEntityUnknownG:: ; FFF1
-  ; See wEntitiesUnknownTableG
+hActiveEntitySpriteVariant:: ; FFF1
+  ; See wEntitiesSpriteVariantTable
   ds 1
 
 hJingle:: ; FFF2

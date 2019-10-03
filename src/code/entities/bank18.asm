@@ -317,7 +317,7 @@ jr_018_4287:
     ldh  [wActiveEntityPosY], a                   ; $4297: $E0 $EC
     ld   de, $474D                                ; $4299: $11 $4D $47
     xor  a                                        ; $429C: $AF
-    ldh  [hActiveEntityUnknownG], a               ; $429D: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $429D: $E0 $F1
     call label_3C77                               ; $429F: $CD $77 $3C
     jp   label_018_407C                           ; $42A2: $C3 $7C $40
 
@@ -515,7 +515,7 @@ jr_018_43E0:
     ld   [$2054], sp                              ; $43E0: $08 $54 $20
 
 func_018_43E3:
-    ldh  a, [hActiveEntityUnknownG]               ; $43E3: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $43E3: $F0 $F1
     cp   $04                                      ; $43E5: $FE $04
     jr   nc, jr_018_43EF                          ; $43E7: $30 $06
 
@@ -1161,7 +1161,7 @@ jr_018_4774:
     ldh  [wActiveEntityPosY], a                   ; $4784: $E0 $EC
     ld   de, $474D                                ; $4786: $11 $4D $47
     xor  a                                        ; $4789: $AF
-    ldh  [hActiveEntityUnknownG], a               ; $478A: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $478A: $E0 $F1
     jp   label_3C77                               ; $478C: $C3 $77 $3C
 
     nop                                           ; $478F: $00
@@ -1305,7 +1305,7 @@ jr_018_4834:
     or   b                                        ; $4834: $B0
     jp   nz, $7E09                                ; $4835: $C2 $09 $7E
 
-    ldh  [hActiveEntityUnknownG], a               ; $4838: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $4838: $E0 $F1
     ldh  a, [wActiveEntityPosY]                   ; $483A: $F0 $EC
     add  $03                                      ; $483C: $C6 $03
     ldh  [wActiveEntityPosY], a                   ; $483E: $E0 $EC
@@ -1323,7 +1323,7 @@ jr_018_4855:
     jr   jr_018_485C                              ; $4855: $18 $05
 
 jr_018_4857:
-    ld   hl, wEntitiesUnknownTableG               ; $4857: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable               ; $4857: $21 $B0 $C3
     add  hl, bc                                   ; $485A: $09
     ld   a, [hl]                                  ; $485B: $7E
 
@@ -1445,10 +1445,10 @@ jr_018_4896:
     call label_3DA0                               ; $48FA: $CD $A0 $3D
     call label_3D8A                               ; $48FD: $CD $8A $3D
     ld   a, $07                                   ; $4900: $3E $07
-    ldh  [hActiveEntityUnknownG], a               ; $4902: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $4902: $E0 $F1
 
 jr_018_4904:
-    ldh  a, [hActiveEntityUnknownG]               ; $4904: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $4904: $F0 $F1
     cp   $02                                      ; $4906: $FE $02
     jr   nc, jr_018_491D                          ; $4908: $30 $13
 
@@ -1880,7 +1880,7 @@ jr_018_4B7A:
     ld   [bc], a                                  ; $4B9A: $02
     ld   a, [hl]                                  ; $4B9B: $7E
     ld   [hl+], a                                 ; $4B9C: $22
-    ldh  a, [hActiveEntityUnknownG]               ; $4B9D: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $4B9D: $F0 $F1
     rla                                           ; $4B9F: $17
     rla                                           ; $4BA0: $17
     rla                                           ; $4BA1: $17
@@ -1941,7 +1941,7 @@ jr_018_4BE4:
 
 jr_018_4BFB:
     xor  a                                        ; $4BFB: $AF
-    ldh  [hActiveEntityUnknownG], a               ; $4BFC: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $4BFC: $E0 $F1
     ldh  a, [wActiveEntityPosX]                   ; $4BFE: $F0 $EE
     add  $18                                      ; $4C00: $C6 $18
     ldh  [wActiveEntityPosX], a                   ; $4C02: $E0 $EE
@@ -2270,7 +2270,7 @@ jr_018_4DF3:
     ldh  [$FFA1], a                               ; $4DF5: $E0 $A1
     ld   [wC167], a                               ; $4DF7: $EA $67 $C1
     xor  a                                        ; $4DFA: $AF
-    ldh  [hActiveEntityUnknownG], a               ; $4DFB: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $4DFB: $E0 $F1
     ldh  a, [wActiveEntityPosY]                   ; $4DFD: $F0 $EC
     sub  $0E                                      ; $4DFF: $D6 $0E
     ldh  [wActiveEntityPosY], a                   ; $4E01: $E0 $EC
@@ -2310,7 +2310,7 @@ jr_018_4E2A:
     ld   l, d                                     ; $4E41: $6A
     ld   bc, $0002                                ; $4E42: $01 $02 $00
     ld   b, $04                                   ; $4E45: $06 $04
-    ldh  a, [hActiveEntityUnknownG]               ; $4E47: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $4E47: $F0 $F1
     sla  a                                        ; $4E49: $CB $27
     sla  a                                        ; $4E4B: $CB $27
     ld   e, a                                     ; $4E4D: $5F
@@ -2744,7 +2744,7 @@ func_018_50C3:
     rra                                           ; $50C6: $1F
     rra                                           ; $50C7: $1F
     and  $01                                      ; $50C8: $E6 $01
-    ldh  [hActiveEntityUnknownG], a               ; $50CA: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $50CA: $E0 $F1
     ld   de, $50BB                                ; $50CC: $11 $BB $50
     call RenderAnimatedActiveEntity                               ; $50CF: $CD $C0 $3B
 
@@ -3256,7 +3256,7 @@ jr_018_5397:
     rra                                           ; $53A6: $1F
     and  $01                                      ; $53A7: $E6 $01
     add  $04                                      ; $53A9: $C6 $04
-    ld   hl, wEntitiesUnknownTableG               ; $53AB: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable               ; $53AB: $21 $B0 $C3
     add  hl, de                                   ; $53AE: $19
     ld   [hl], a                                  ; $53AF: $77
     push de                                       ; $53B0: $D5
@@ -3403,7 +3403,7 @@ func_018_548A:
     cp   $01                                      ; $548C: $FE $01
     jr   nz, jr_018_5492                          ; $548E: $20 $02
 
-    ldh  [hActiveEntityUnknownG], a               ; $5490: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $5490: $E0 $F1
 
 jr_018_5492:
     ld   de, $547A                                ; $5492: $11 $7A $54
@@ -3796,7 +3796,7 @@ jr_018_56E6:
     ld   a, [hl]                                  ; $56F8: $7E
     add  $04                                      ; $56F9: $C6 $04
     ld   [hl], a                                  ; $56FB: $77
-    ld   hl, wEntitiesUnknownTableG               ; $56FC: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable               ; $56FC: $21 $B0 $C3
     add  hl, bc                                   ; $56FF: $09
     ld   a, [hl]                                  ; $5700: $7E
     inc  a                                        ; $5701: $3C
@@ -4023,7 +4023,7 @@ jr_018_5778:
     ld   h, $00                                   ; $5869: $26 $00
 
 func_018_586B:
-    ldh  a, [hActiveEntityUnknownG]               ; $586B: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $586B: $F0 $F1
     rla                                           ; $586D: $17
     rla                                           ; $586E: $17
     rla                                           ; $586F: $17
@@ -4230,10 +4230,10 @@ jr_018_591E:
     rra                                           ; $598F: $1F
     and  $01                                      ; $5990: $E6 $01
     inc  a                                        ; $5992: $3C
-    ldh  [hActiveEntityUnknownG], a               ; $5993: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $5993: $E0 $F1
 
 jr_018_5995:
-    ldh  a, [hActiveEntityUnknownG]               ; $5995: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $5995: $F0 $F1
     rla                                           ; $5997: $17
     rla                                           ; $5998: $17
     and  $FC                                      ; $5999: $E6 $FC
@@ -4323,7 +4323,7 @@ jr_018_5A07:
 
 jr_018_5A18:
     xor  a                                        ; $5A18: $AF
-    ld   [wEntitiesUnknownTableG], a              ; $5A19: $EA $B0 $C3
+    ld   [wEntitiesSpriteVariantTable], a              ; $5A19: $EA $B0 $C3
     ld   de, $59B8                                ; $5A1C: $11 $B8 $59
     call RenderAnimatedActiveEntity                               ; $5A1F: $CD $C0 $3B
     ld   a, $6C                                   ; $5A22: $3E $6C
@@ -4406,7 +4406,7 @@ jr_018_5A7F:
     ld   hl, $5A80                                ; $5A9C: $21 $80 $5A
     add  hl, de                                   ; $5A9F: $19
     ld   a, [hl]                                  ; $5AA0: $7E
-    ldh  [hActiveEntityUnknownG], a               ; $5AA1: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $5AA1: $E0 $F1
     ldh  a, [hFrameCounter]                       ; $5AA3: $F0 $E7
     and  $1F                                      ; $5AA5: $E6 $1F
     jr   nz, jr_018_5AE7                          ; $5AA7: $20 $3E
@@ -4628,7 +4628,7 @@ jr_018_5BE7:
     cp   $04                                      ; $5BF0: $FE $04
     ret  nc                                       ; $5BF2: $D0
 
-    ld   hl, wEntitiesUnknownTableG               ; $5BF3: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable               ; $5BF3: $21 $B0 $C3
     add  hl, bc                                   ; $5BF6: $09
     ld   [hl], $02                                ; $5BF7: $36 $02
     ld   hl, $C380                                ; $5BF9: $21 $80 $C3
@@ -6859,7 +6859,7 @@ func_018_68EA:
     ld   a, $80                                   ; $68EA: $3E $80
     ld   [$D5C0], a                               ; $68EC: $EA $C0 $D5
     ld   [$D5C2], a                               ; $68EF: $EA $C2 $D5
-    ldh  a, [hActiveEntityUnknownG]               ; $68F2: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $68F2: $F0 $F1
     sla  a                                        ; $68F4: $CB $27
     sla  a                                        ; $68F6: $CB $27
     ld   d, b                                     ; $68F8: $50
@@ -7930,7 +7930,7 @@ jr_018_6ED0:
     ld   [hl+], a                                 ; $6EFA: $22
 
 func_018_6EFB:
-    ldh  a, [hActiveEntityUnknownG]               ; $6EFB: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $6EFB: $F0 $F1
     cp   $FF                                      ; $6EFD: $FE $FF
     ret  z                                        ; $6EFF: $C8
 
@@ -8369,7 +8369,7 @@ jr_018_7157:
     ld   [RenderLoop.RenderLoop_TransitionSfx], sp; $717E: $08 $64 $02
 
 func_018_7181:
-    ldh  a, [hActiveEntityUnknownG]               ; $7181: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $7181: $F0 $F1
     rla                                           ; $7183: $17
     rla                                           ; $7184: $17
     and  $FC                                      ; $7185: $E6 $FC
@@ -8720,7 +8720,7 @@ jr_018_7330:
     jr   z, jr_018_733C                           ; $7336: $28 $04
 
     ld   a, $07                                   ; $7338: $3E $07
-    ldh  [hActiveEntityUnknownG], a               ; $733A: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $733A: $E0 $F1
 
 jr_018_733C:
     call func_018_766A                            ; $733C: $CD $6A $76
@@ -8871,7 +8871,7 @@ jr_018_7416:
     and  $1F                                      ; $7416: $E6 $1F
     jr   nz, jr_018_7479                          ; $7418: $20 $5F
 
-    ldh  a, [hActiveEntityUnknownG]               ; $741A: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $741A: $F0 $F1
     cp   $06                                      ; $741C: $FE $06
     jr   z, jr_018_746E                           ; $741E: $28 $4E
 
@@ -8880,9 +8880,9 @@ jr_018_7416:
     ld   a, $7F                                   ; $7424: $3E $7F
     call func_003_64CA_trampoline                               ; $7426: $CD $86 $3B
     push bc                                       ; $7429: $C5
-    ldh  a, [hActiveEntityUnknownG]               ; $742A: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $742A: $F0 $F1
     ld   c, a                                     ; $742C: $4F
-    ld   hl, wEntitiesUnknownTableG               ; $742D: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable               ; $742D: $21 $B0 $C3
     add  hl, de                                   ; $7430: $19
     ld   [hl], a                                  ; $7431: $77
     ld   hl, $73EE                                ; $7432: $21 $EE $73
@@ -8923,7 +8923,7 @@ jr_018_7416:
     pop  bc                                       ; $746D: $C1
 
 jr_018_746E:
-    ld   hl, wEntitiesUnknownTableG               ; $746E: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable               ; $746E: $21 $B0 $C3
     add  hl, bc                                   ; $7471: $09
     ld   a, [hl]                                  ; $7472: $7E
     cp   $07                                      ; $7473: $FE $07
@@ -9265,7 +9265,7 @@ jr_018_7585:
     daa                                           ; $7669: $27
 
 func_018_766A:
-    ldh  a, [hActiveEntityUnknownG]               ; $766A: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $766A: $F0 $F1
     rla                                           ; $766C: $17
     rla                                           ; $766D: $17
     rla                                           ; $766E: $17
@@ -9319,7 +9319,7 @@ jr_018_7691:
 
     ldh  [wActiveEntityPosY], a                   ; $76C1: $E0 $EC
     xor  a                                        ; $76C3: $AF
-    ldh  [hActiveEntityUnknownG], a               ; $76C4: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a               ; $76C4: $E0 $F1
     ld   hl, hBGMapOffsetLow                      ; $76C6: $21 $E1 $FF
 
 jr_018_76C9:
@@ -9579,7 +9579,7 @@ jr_018_77E7:
     ld   [hl+], a                                 ; $781C: $22
     db   $10                                      ; $781D: $10
     ld   de, $1112                                ; $781E: $11 $12 $11
-    ldh  a, [hActiveEntityUnknownG]               ; $7821: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $7821: $F0 $F1
     rla                                           ; $7823: $17
     rla                                           ; $7824: $17
     and  $FC                                      ; $7825: $E6 $FC

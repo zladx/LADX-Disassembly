@@ -1971,7 +1971,7 @@ label_020_4B9E:
     ld   hl, wEntitiesTransitionCountdownTable           ; $4BAC: $21 $E0 $C2
     add  hl, de                                   ; $4BAF: $19
     ld   [hl], $A0                                ; $4BB0: $36 $A0
-    ld   hl, wEntitiesUnknownTableG               ; $4BB2: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable               ; $4BB2: $21 $B0 $C3
     add  hl, de                                   ; $4BB5: $19
     ld   [hl], d                                  ; $4BB6: $72
     ld   hl, $C480                                ; $4BB7: $21 $80 $C4
@@ -2563,7 +2563,7 @@ jr_020_4E95:
     add  sp, -$17                                 ; $4EED: $E8 $E9
     ld   [$ECEB], a                               ; $4EEF: $EA $EB $EC
     xor  $EF                                      ; $4EF2: $EE $EF
-    ldh  a, [hActiveEntityUnknownG]               ; $4EF4: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $4EF4: $F0 $F1
     ld   a, [$ff00+c]                             ; $4EF6: $F2
     di                                            ; $4EF7: $F3
     db   $f4                                      ; $4EF8: $F4
@@ -2604,7 +2604,7 @@ jr_020_4F01:
     ld   [$ECEB], a                               ; $4F2D: $EA $EB $EC
     db   $ed                                      ; $4F30: $ED
     xor  $EF                                      ; $4F31: $EE $EF
-    ldh  a, [hActiveEntityUnknownG]               ; $4F33: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $4F33: $F0 $F1
     ld   a, [$ff00+c]                             ; $4F35: $F2
     di                                            ; $4F36: $F3
     db   $f4                                      ; $4F37: $F4
@@ -2691,7 +2691,7 @@ jr_020_4F76:
     db   $ec                                      ; $4FAD: $EC
     db   $ed                                      ; $4FAE: $ED
     xor  $EF                                      ; $4FAF: $EE $EF
-    ldh  a, [hActiveEntityUnknownG]               ; $4FB1: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $4FB1: $F0 $F1
     ld   a, [$ff00+c]                             ; $4FB3: $F2
     ld   a, [$ff00+c]                             ; $4FB4: $F2
     di                                            ; $4FB5: $F3
@@ -2875,7 +2875,7 @@ jr_020_4FFB:
     db   $10                                      ; $509F: $10
     ld   de, $1212                                ; $50A0: $11 $12 $12
     inc  de                                       ; $50A3: $13
-    ldh  a, [hActiveEntityUnknownG]               ; $50A4: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $50A4: $F0 $F1
     pop  af                                       ; $50A6: $F1
     ld   a, [$ff00+c]                             ; $50A7: $F2
     ld   a, [$ff00+c]                             ; $50A8: $F2
@@ -12217,7 +12217,7 @@ jr_020_7B8A:
     add  hl, de                                   ; $7BB1: $19
     ld   b, [hl]                                  ; $7BB2: $46
     ld   hl, $7915                                ; $7BB3: $21 $15 $79
-    ldh  a, [hActiveEntityUnknownG]               ; $7BB6: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]               ; $7BB6: $F0 $F1
     cp   $05                                      ; $7BB8: $FE $05
     jr   z, jr_020_7BFC                           ; $7BBA: $28 $40
 

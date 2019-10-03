@@ -1348,9 +1348,7 @@ WorldDefaultHandler::
 
     callsb func_20_4B1F
 
-    ld   a, $19
-    call SwitchBank
-    call $7A9A
+    callsw Func_019_7A9A
 
     call AnimateEntities
     callsw label_002_5487

@@ -10427,6 +10427,7 @@ jr_019_7A8F:
     ld   [hl], b                                  ; $7A98: $70
     ret                                           ; $7A99: $C9
 
+Func_019_7A9A::
     ld   a, [wConveyorBeltsCount]                 ; $7A9A: $FA $A5 $C1
     and  a                                        ; $7A9D: $A7
     ret  z                                        ; $7A9E: $C8

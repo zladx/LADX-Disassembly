@@ -1768,7 +1768,7 @@ ItemFunction::
     ld   a, [$C19B]
     or   [hl]
     jr   nz, label_12ED
-    ld   a, [wProjectileCount]
+    ld   a, [wActiveProjectileCount]
     cp   $02
     jr   nc, label_12ED
     ld   a, $8E
@@ -1867,7 +1867,7 @@ UsePowerBracelet::
     ret
 
 UseBoomerang::
-    ld   a, [wProjectileCount]
+    ld   a, [wActiveProjectileCount]
     and  a
 
 label_1387::
@@ -1902,7 +1902,7 @@ ShootArrow::
     ld   a, [wIsShootingArrow]
     and  a
     ret  nz
-    ld   a, [wProjectileCount]
+    ld   a, [wActiveProjectileCount]
     cp   $02
     jr   nc, label_142E
     ld   a, $10
@@ -2151,7 +2151,7 @@ label_1535::
     call ClearLinkPositionIncrement
 
 label_1562::
-    ld   a, [wProjectileCount]
+    ld   a, [wActiveProjectileCount]
     and  a
     ret  nz
     ld   a, [$C5A9]

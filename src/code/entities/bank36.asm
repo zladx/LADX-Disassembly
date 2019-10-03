@@ -3908,7 +3908,7 @@ jr_036_5603:
     ld   a, [wC16E]                               ; $563C: $FA $6E $C1
     ld   hl, wSwordAnimationState                 ; $563F: $21 $37 $C1
     or   [hl]                                     ; $5642: $B6
-    ld   hl, wProjectileCount                     ; $5643: $21 $4D $C1
+    ld   hl, wActiveProjectileCount                     ; $5643: $21 $4D $C1
     or   [hl]                                     ; $5646: $B6
     and  a                                        ; $5647: $A7
     jr   nz, jr_036_5652                          ; $5648: $20 $08

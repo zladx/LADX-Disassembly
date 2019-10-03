@@ -6067,7 +6067,7 @@ jr_003_69A0:
     ld   [hl], $32                                ; $69B0: $36 $32
 
 HookshotHitEntityHandler::
-    ld   hl, wProjectileCount                     ; $69B2: $21 $4D $C1
+    ld   hl, wActiveProjectileCount                     ; $69B2: $21 $4D $C1
     inc  [hl]                                     ; $69B5: $34
     ld   a, $0A                                   ; $69B6: $3E $0A
     ld   [$C19E], a                               ; $69B8: $EA $9E $C1
@@ -6148,8 +6148,9 @@ jr_003_6A2E:
     jp   label_003_6AD7                           ; $6A31: $C3 $D7 $6A
 
 ArrowEntityHandler::
-    ld   hl, wProjectileCount                     ; $6A34: $21 $4D $C1
+    ld   hl, wActiveProjectileCount                     ; $6A34: $21 $4D $C1
     inc  [hl]                                     ; $6A37: $34
+
     ldh  a, [hActiveEntityWalking]                ; $6A38: $F0 $F0
     and  a                                        ; $6A3A: $A7
     jr   nz, @+$35                                ; $6A3B: $20 $33

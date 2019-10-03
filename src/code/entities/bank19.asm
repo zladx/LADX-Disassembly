@@ -703,9 +703,9 @@ func_019_442C:
     inc  [hl]                                     ; $4460: $34
 
 BoomerangEntityHandler::
-    ; wProjectileCount = 1
+    ; wActiveProjectileCount = 1
     ld   a, $01                                   ; $4461: $3E $01
-    ld   [wProjectileCount], a                    ; $4463: $EA $4D $C1
+    ld   [wActiveProjectileCount], a                    ; $4463: $EA $4D $C1
 
     ld   de, $4451                                ; $4466: $11 $51 $44
     call RenderAnimatedActiveEntity                               ; $4469: $CD $C0 $3B
@@ -837,7 +837,7 @@ jr_019_44DA:
     inc  b                                        ; $451F: $04
     ld   bc, $0001                                ; $4520: $01 $01 $00
     nop                                           ; $4523: $00
-    ld   hl, wProjectileCount                     ; $4524: $21 $4D $C1
+    ld   hl, wActiveProjectileCount                     ; $4524: $21 $4D $C1
     inc  [hl]                                     ; $4527: $34
     ldh  a, [hActiveEntityWalking]                ; $4528: $F0 $F0
     and  a                                        ; $452A: $A7

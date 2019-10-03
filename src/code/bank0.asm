@@ -34,7 +34,7 @@ label_826::
     cp   $08
     jr   c, .jr_873
     jr   nz, .jr_843
-    callsb label_002_6843
+    callsb CopyDungeonMinimapPalette
 
     ld   hl, $FF92
     inc  [hl]

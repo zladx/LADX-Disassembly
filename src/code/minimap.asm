@@ -206,51 +206,51 @@ jr_002_6807:
     ld   e, $04                                   ; $6807: $1E $04
     jr   jr_002_6848                              ; $6809: $18 $3D
 
+; Configure palette copy, then jump to do the copy
 label_002_680B::
     ld   a, [wMinimapLayout]                               ; $680B: $FA $B0 $DB
     and  $30                                      ; $680E: $E6 $30
     swap a                                        ; $6810: $CB $37
     JP_TABLE                                      ; $6812: $C7
-    dec  de                                       ; $6813: $1B
-    ld   l, b                                     ; $6814: $68
-    jr   nz, @+$6A                                ; $6815: $20 $68
+._00 dw Func_002_681B
+._01 dw Func_002_6820
+._02 dw Func_002_681B
+._03 dw Func_002_6820
 
-    dec  de                                       ; $6817: $1B
-    ld   l, b                                     ; $6818: $68
-    jr   nz, jr_002_6883                          ; $6819: $20 $68
-
+Func_002_681B::
     ld   hl, $9D8F                                ; $681B: $21 $8F $9D
     jr   jr_002_6823                              ; $681E: $18 $03
 
+Func_002_6820::
     ld   hl, $9D90                                ; $6820: $21 $90 $9D
 
 jr_002_6823:
     ld   e, $24                                   ; $6823: $1E $24
     jr   jr_002_6848                              ; $6825: $18 $21
 
+; Configure palette copy, then jump to do the copy
 label_002_6827::
     ld   a, [wMinimapLayout]                               ; $6827: $FA $B0 $DB
     and  $30                                      ; $682A: $E6 $30
     swap a                                        ; $682C: $CB $37
     JP_TABLE                                      ; $682E: $C7
-    scf                                           ; $682F: $37
-    ld   l, b                                     ; $6830: $68
-    scf                                           ; $6831: $37
-    ld   l, b                                     ; $6832: $68
-    inc  a                                        ; $6833: $3C
-    ld   l, b                                     ; $6834: $68
-    inc  a                                        ; $6835: $3C
-    ld   l, b                                     ; $6836: $68
+._00 dw Func_002_6837
+._01 dw Func_002_6837
+._02 dw Func_002_683C
+._03 dw Func_002_683C
+
+Func_002_6837::
     ld   hl, $9D0B                                ; $6837: $21 $0B $9D
     jr   jr_002_683F                              ; $683A: $18 $03
 
+Func_002_683C::
     ld   hl, $9CEB                                ; $683C: $21 $EB $9C
 
 jr_002_683F:
     ld   e, $00                                   ; $683F: $1E $00
     jr   jr_002_6848                              ; $6841: $18 $05
 
-label_002_6843::
+CopyDungeonMinimapPalette::
     ld   hl, $9D8B                                ; $6843: $21 $8B $9D
     ld   e, $20                                   ; $6846: $1E $20
 

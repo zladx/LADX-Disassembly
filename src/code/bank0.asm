@@ -378,9 +378,9 @@ SelectBankAtHAndReturn::
     ret
 
 ; Copy Color Dungeon tiles?
-label_A32::
+CopyColorDungeonSymbols::
     push af
-    ld   a, $35
+    ld   a, BANK(ColorDungeonTiles)
     ld   [MBC3SelectBank], a
     ld   hl, $4F00
     ld   de, $DCC0
@@ -388,18 +388,14 @@ label_A32::
     call CopyData
     jp   RestoreStackedBankAndReturn
 
-label_A47::
+Func_036_505F_trampoline::
     push af
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    call $505F
+    callsb Func_036_505F
     jp   RestoreStackedBankAndReturn
 
-label_A53::
+Func_036_4F9B_trampoline::
     push af
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    call $4F9B
+    callsb Func_036_4F9B
     jp   RestoreStackedBankAndReturn
 
 label_A5F::
@@ -409,32 +405,24 @@ label_A5F::
     call label_3CE6
     jp   RestoreStackedBankAndReturn
 
-label_A6B::
+func_003_5A2E_trampoline::
     push af
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call $5A2E
+    callsb func_003_5A2E
     jp   RestoreStackedBankAndReturn
 
-label_A77::
+Func_036_4F68_trampoline::
     push af
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    call $4F68
+    callsb Func_036_4F68
     jp   RestoreStackedBankAndReturn
 
-label_A83::
+Func_020_6D52_trampoline::
     push af
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6D52
+    callsb Func_020_6D52
     jp   RestoreStackedBankAndReturn
 
-label_A8F::
+Func_036_4BE8_trampoline::
     push af
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    call $4BE8
+    callsb Func_036_4BE8
     jp   RestoreStackedBankAndReturn
 
 label_A9B::
@@ -444,11 +432,9 @@ label_A9B::
     call ExecuteDialog
     jp   RestoreStackedBankAndReturn
 
-label_AA7::
+Func_036_705A_trampoline::
     push af
-    ld   a, $36
-    call SwitchBank
-    call $705A
+    callsw Func_036_705A
 
 RestoreStackedBank::
     pop  af
@@ -462,39 +448,29 @@ label_AB5::
     call ExecuteBackgroundCopyRequest
     jr   RestoreStackedBank
 
-label_AC6::
+Func_036_703E_trampoline::
     push af
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    call $703E
+    callsb Func_036_703E
     jp   RestoreStackedBankAndReturn
 
-label_AD2::
+Func_036_70D6_trampoline::
     push af
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    call $70D6
+    callsb Func_036_70D6
     jp   RestoreStackedBankAndReturn
 
-label_ADE::
+Func_036_4A77_trampoline::
     push af
-    ld   a, $36
-    call SwitchBank
-    call $4A77
+    callsw Func_036_4A77
     jp   RestoreStackedBankAndReturn
 
-label_AEA::
+Func_036_4A4C_trampoline::
     push af
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    call $4A4C
+    callsb Func_036_4A4C
     jp   RestoreStackedBankAndReturn
 
-label_AF6::
+Func_036_7161_trampoline::
     push af
-    ld   a, $36
-    ld   [MBC3SelectBank], a
-    call $7161
+    callsb Func_036_7161
     jp   RestoreStackedBankAndReturn
 
 ; Load Background map and attributes for photo

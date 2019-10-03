@@ -1233,7 +1233,7 @@ jr_020_47B7:
     jr   nz, jr_020_47C2                          ; $47BB: $20 $05
 
     ld   a, $20                                   ; $47BD: $3E $20
-    call label_A32                                ; $47BF: $CD $32 $0A
+    call CopyColorDungeonSymbols                                ; $47BF: $CD $32 $0A
 
 jr_020_47C2:
     ret                                           ; $47C2: $C9
@@ -8665,6 +8665,7 @@ jr_020_6D4E:
 jr_020_6D51:
     ret                                           ; $6D51: $C9
 
+Func_020_6D52::
     ld   e, $20                                   ; $6D52: $1E $20
     ld   a, [hl]                                  ; $6D54: $7E
     cp   $30                                      ; $6D55: $FE $30

@@ -1621,7 +1621,7 @@ jr_018_49B6:
     jr   nz, jr_018_4A0E                          ; $4A07: $20 $05
 
     ld   a, $18                                   ; $4A09: $3E $18
-    jp   label_ADE                                ; $4A0B: $C3 $DE $0A
+    jp   Func_036_4A77_trampoline                                ; $4A0B: $C3 $DE $0A
 
 jr_018_4A0E:
     call func_018_7D95                            ; $4A0E: $CD $95 $7D
@@ -2135,7 +2135,7 @@ jr_018_4CEC:
 
     inc  [hl]                                     ; $4D1F: $34
     ld   a, $18                                   ; $4D20: $3E $18
-    call label_AF6                                ; $4D22: $CD $F6 $0A
+    call Func_036_7161_trampoline                                ; $4D22: $CD $F6 $0A
     ld   a, [wHasInstrument5]                     ; $4D25: $FA $69 $DB
     ld   d, $B1                                   ; $4D28: $16 $B1
     and  $02                                      ; $4D2A: $E6 $02
@@ -5089,7 +5089,7 @@ jr_018_5EA2:
 
 jr_018_5EAD:
     ld   a, $18                                   ; $5EAD: $3E $18
-    call label_AEA                                ; $5EAF: $CD $EA $0A
+    call Func_036_4A4C_trampoline                                ; $5EAF: $CD $EA $0A
     ldh  a, [hScratch0]                           ; $5EB2: $F0 $D7
     jp   OpenDialogInTable2                       ; $5EB4: $C3 $7C $23
 
@@ -9435,7 +9435,7 @@ jr_018_774E:
     jr   nz, jr_018_7764                          ; $775D: $20 $05
 
     ld   a, $18                                   ; $775F: $3E $18
-    jp   label_A77                                ; $7761: $C3 $77 $0A
+    jp   Func_036_4F68_trampoline                                ; $7761: $C3 $77 $0A
 
 jr_018_7764:
     ld   de, $7729                                ; $7764: $11 $29 $77

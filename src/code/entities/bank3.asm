@@ -3312,6 +3312,8 @@ jr_003_5A17:
     ld   hl, wEntitiesPosZTable                                ; $5A29: $21 $10 $C3
     add  hl, bc                                   ; $5A2C: $09
     ld   [hl], a                                  ; $5A2D: $77
+
+func_003_5A2E::
     ld   a, $6C                                   ; $5A2E: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $5A30: $E0 $9D
     ld   a, $03                                   ; $5A32: $3E $03
@@ -4074,7 +4076,7 @@ jr_003_5E8A:
     jr   nc, jr_003_5EAE                          ; $5EA7: $30 $05
 
     ld   a, $03                                   ; $5EA9: $3E $03
-    call label_AD2                                ; $5EAB: $CD $D2 $0A
+    call Func_036_70D6_trampoline                                ; $5EAB: $CD $D2 $0A
 
 jr_003_5EAE:
     ld   a, c                                     ; $5EAE: $79
@@ -5729,7 +5731,7 @@ jr_003_6771:
     and  $E0                                      ; $67C6: $E6 $E0
     ldh  [hSwordIntersectedAreaX], a              ; $67C8: $E0 $CE
     ld   a, $03                                   ; $67CA: $3E $03
-    call label_AA7                                ; $67CC: $CD $A7 $0A
+    call Func_036_705A_trampoline                                ; $67CC: $CD $A7 $0A
     ld   a, c                                     ; $67CF: $79
     and  $EE                                      ; $67D0: $E6 $EE
     ld   c, a                                     ; $67D2: $4F

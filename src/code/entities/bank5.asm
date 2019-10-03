@@ -3090,7 +3090,7 @@ jr_005_512A:
     ld   a, $10                                   ; $513F: $3E $10
     ld   [wActiveMusicTrack], a                   ; $5141: $EA $68 $D3
     ld   a, $05                                   ; $5144: $3E $05
-    call label_AC6                                ; $5146: $CD $C6 $0A
+    call Func_036_703E_trampoline                                ; $5146: $CD $C6 $0A
     call GetEntityTransitionCountdown                 ; $5149: $CD $05 $0C
     ld   [hl], $80                                ; $514C: $36 $80
     ret                                           ; $514E: $C9

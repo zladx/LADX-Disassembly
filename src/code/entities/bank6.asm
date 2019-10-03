@@ -1811,7 +1811,7 @@ label_006_4AA7:
     jr   nz, jr_006_4ACE                          ; $4AC7: $20 $05
 
     ld   a, $06                                   ; $4AC9: $3E $06
-    jp   label_A8F                                ; $4ACB: $C3 $8F $0A
+    jp   Func_036_4BE8_trampoline                                ; $4ACB: $C3 $8F $0A
 
 jr_006_4ACE:
     ldh  a, [hActiveEntityWalking]                ; $4ACE: $F0 $F0
@@ -8319,7 +8319,7 @@ jr_006_706B:
     jr   nz, jr_006_70B8                          ; $70B1: $20 $05
 
     ld   a, $06                                   ; $70B3: $3E $06
-    jp   label_A47                                ; $70B5: $C3 $47 $0A
+    jp   Func_036_505F_trampoline                                ; $70B5: $C3 $47 $0A
 
 jr_006_70B8:
     ld   hl, wEntitiesUnknownTableD               ; $70B8: $21 $D0 $C2
@@ -10191,7 +10191,7 @@ jr_006_7AF4:
     jr   nz, jr_006_7B1C                          ; $7B15: $20 $05
 
     ld   a, $06                                   ; $7B17: $3E $06
-    jp   label_A53                                ; $7B19: $C3 $53 $0A
+    jp   Func_036_4F9B_trampoline                                ; $7B19: $C3 $53 $0A
 
 jr_006_7B1C:
     ld   a, [wIsIndoor]                           ; $7B1C: $FA $A5 $DB

@@ -1808,6 +1808,8 @@ jr_036_49C6:
     ld   [hl], $4A                                ; $4A48: $36 $4A
     add  hl, sp                                   ; $4A4A: $39
     ld   c, d                                     ; $4A4B: $4A
+
+Func_036_4A4C::
     push bc                                       ; $4A4C: $C5
     ld   hl, $4A3C                                ; $4A4D: $21 $3C $4A
     ldh  a, [hMapId]                              ; $4A50: $F0 $F7
@@ -1845,6 +1847,7 @@ jr_036_4A6A:
     pop  bc                                       ; $4A75: $C1
     ret                                           ; $4A76: $C9
 
+Func_036_4A77::
     ld   a, $02                                   ; $4A77: $3E $02
     ldh  [$FFA1], a                               ; $4A79: $E0 $A1
     ld   [wC167], a                               ; $4A7B: $EA $67 $C1
@@ -2088,6 +2091,7 @@ jr_036_4BA4:
     ld   [wC16C], a                               ; $4BE4: $EA $6C $C1
     ret                                           ; $4BE7: $C9
 
+Func_036_4BE8::
     ld   a, [$D202]                               ; $4BE8: $FA $02 $D2
     ld   e, a                                     ; $4BEB: $5F
     ld   d, $00                                   ; $4BEC: $16 $00
@@ -2695,6 +2699,7 @@ func_036_4F4E:
     call label_3DA0                               ; $4F64: $CD $A0 $3D
     ret                                           ; $4F67: $C9
 
+Func_036_4F68::
     ld   a, [wCurrentBank]                        ; $4F68: $FA $AF $DB
     push af                                       ; $4F6B: $F5
     ld   a, $36                                   ; $4F6C: $3E $36
@@ -2727,6 +2732,7 @@ jr_036_4F96:
     ld   [wCurrentBank], a                        ; $4F97: $EA $AF $DB
     ret                                           ; $4F9A: $C9
 
+Func_036_4F9B::
     ld   a, [$D202]                               ; $4F9B: $FA $02 $D2
     ld   e, a                                     ; $4F9E: $5F
     ld   d, $00                                   ; $4F9F: $16 $00
@@ -2847,6 +2853,7 @@ jr_036_505D:
 jr_036_505E:
     ret                                           ; $505E: $C9
 
+Func_036_505F::
     ld   hl, $69E0                                ; $505F: $21 $E0 $69
     ldh  a, [hFrameCounter]                       ; $5062: $F0 $E7
     and  $08                                      ; $5064: $E6 $08
@@ -3005,7 +3012,7 @@ jr_036_5148:
 
 func_036_5153:
     ld   a, $36                                   ; $5153: $3E $36
-    call label_A6B                                ; $5155: $CD $6B $0A
+    call func_003_5A2E_trampoline                                ; $5155: $CD $6B $0A
     ret                                           ; $5158: $C9
 
     ld   a, $01                                   ; $5159: $3E $01
@@ -3306,7 +3313,7 @@ jr_036_52F2:
     add  hl, bc                                   ; $530E: $09
     push hl                                       ; $530F: $E5
     ld   a, $36                                   ; $5310: $3E $36
-    call label_A83                                ; $5312: $CD $83 $0A
+    call Func_020_6D52_trampoline                                ; $5312: $CD $83 $0A
     pop  hl                                       ; $5315: $E1
     inc  [hl]                                     ; $5316: $34
     ld   a, [hl]                                  ; $5317: $7E
@@ -8734,6 +8741,8 @@ func_036_7022:
     ld   a, [bc]                                  ; $703A: $0A
     stop                                          ; $703B: $10 $00
     nop                                           ; $703D: $00
+
+Func_036_703E::
     ld   hl, $DC88                                ; $703E: $21 $88 $DC
     ld   de, $7036                                ; $7041: $11 $36 $70
 
@@ -8755,6 +8764,7 @@ jr_036_7044:
     db   $10                                      ; $7057: $10
     jr   nz, jr_036_707A                          ; $7058: $20 $20
 
+Func_036_705A::
     push bc                                       ; $705A: $C5
     ld   c, $03                                   ; $705B: $0E $03
     ld   b, $00                                   ; $705D: $06 $00
@@ -8803,7 +8813,7 @@ jr_036_708E:
     add  b                                        ; $7096: $80
     ld   h, $95                                   ; $7097: $26 $95
     ld   h, e                                     ; $7099: $63
-    jr   nz, jr_036_70D6                          ; $709A: $20 $3A
+    jr   nz, Func_036_70D6                          ; $709A: $20 $3A
 
     ld   [hl], l                                  ; $709C: $75
     ld   l, e                                     ; $709D: $6B
@@ -8860,7 +8870,7 @@ jr_036_708E:
     sub  l                                        ; $70D4: $95
     ld   d, a                                     ; $70D5: $57
 
-jr_036_70D6:
+Func_036_70D6::
     ld   a, [wPaletteUnknownE]                    ; $70D6: $FA $D5 $DD
     ld   a, [wTransitionSequenceCounter]          ; $70D9: $FA $6B $C1
     cp   $04                                      ; $70DC: $FE $04
@@ -8951,6 +8961,8 @@ label_036_712D:
     ld   b, h                                     ; $715E: $44
     ld   a, a                                     ; $715F: $7F
     ld   a, l                                     ; $7160: $7D
+
+Func_036_7161::
     ldh  a, [hMapRoom]                            ; $7161: $F0 $F6
     cp   $B1                                      ; $7163: $FE $B1
     ret  nz                                       ; $7165: $C0

@@ -1393,7 +1393,7 @@ jr_005_4777:
     ld   hl, $C380                                ; $4777: $21 $80 $C3
     add  hl, bc                                   ; $477A: $09
     ld   [hl], e                                  ; $477B: $73
-    jp   label_29F8                               ; $477C: $C3 $F8 $29
+    jp   PlayBoomerangSfx_trampoline               ; $477C: $C3 $F8 $29
 
     ret                                           ; $477F: $C9
 

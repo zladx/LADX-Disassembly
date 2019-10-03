@@ -3773,7 +3773,7 @@ PadRoomObjectsArea::
 .end
     ret
 
-label_6CE3::
+LoadTilemap0F::
     ld   bc, $400
     ld   hl, $9800
 

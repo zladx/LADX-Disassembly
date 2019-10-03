@@ -1104,7 +1104,7 @@ TilemapLoadingHandlersTable::
 ._0C dw LoadMapData.return
 ._0D dw LoadTilemap0D
 ._0E dw LoadTilemap0E
-._0F dw LoadTilemap0F
+._0F dw LoadTilemap0F_trampoline
 ._10 dw LoadIntroSequenceTiles
 ._11 dw LoadTilemap11
 ._12 dw LoadTilemap12
@@ -2126,14 +2126,14 @@ jr_020_4C6D:
     pop  bc                                       ; $4C96: $C1
     ret                                           ; $4C97: $C9
 
+PlayBoomerangSfx::
     ld   a, [$C5AC]                               ; $4C98: $FA $AC $C5
     and  a                                        ; $4C9B: $A7
-    jr   nz, jr_020_4CA2                          ; $4C9C: $20 $04
+    jr   nz, .return                              ; $4C9C: $20 $04
 
-    ld   a, $2D                                   ; $4C9E: $3E $2D
-    ldh  [hNoiseSfx], a                            ; $4CA0: $E0 $F4
-
-jr_020_4CA2:
+    ld   a, NOISE_SFX_BOOMERANG                   ; $4C9E: $3E $2D
+    ldh  [hNoiseSfx], a                           ; $4CA0: $E0 $F4
+.return
     ret                                           ; $4CA2: $C9
 
 ResetRoomVariables::

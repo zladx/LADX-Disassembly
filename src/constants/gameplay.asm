@@ -1,6 +1,8 @@
 ; Gameplay-related enums values
 
 ; Constants
+; Size of a single tile in bytes
+TILE_SIZE                  equ $10
 TILES_PER_ROW              equ $0B
 TILES_PER_MAP              equ $80
 

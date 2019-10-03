@@ -86,6 +86,7 @@ Data_003_43A0::
 Data_003_43E0::
     db   $00, $00, $00, $04, $04, $94, $42, $00, $00, $94, $90, $12
 
+; Indexed by $C19E
 Data_003_43EC::
     db   $01, $01, $01, $00, $00, $01, $02, $01, $02, $03, $03, $02, $00, $00, $00, $00
     db   $01, $01, $01, $00, $00, $02, $02, $02, $02, $03, $03, $02, $00, $00, $00, $00
@@ -8195,40 +8196,51 @@ jr_003_758B:
     ld   a, $20                                   ; $759E: $3E $20
     jr   jr_003_7565                              ; $75A0: $18 $C3
 
+; Check collision with other entities?
+; Inputs:
+;   c :  entity index
 func_003_75A2::
     ld   e, $0F                                   ; $75A2: $1E $0F
     ld   d, $00                                   ; $75A4: $16 $00
 
-label_003_75A6:
+    ; For each entity…
+entitiesLoop:
+    ; If we are checking collision against ourselves,
+    ; move to the next entity
     ld   a, e                                     ; $75A6: $7B
     cp   c                                        ; $75A7: $B9
-    jp   z, label_003_779F                        ; $75A8: $CA $9F $77
+    jp   z, checkNextEntity                        ; $75A8: $CA $9F $77
 
+    ; If we are on an even frame, move to next
     ldh  a, [hFrameCounter]                       ; $75AB: $F0 $E7
     xor  e                                        ; $75AD: $AB
     and  $01                                      ; $75AE: $E6 $01
-    jp   nz, label_003_779F                       ; $75B0: $C2 $9F $77
+    jp   nz, checkNextEntity                       ; $75B0: $C2 $9F $77
 
-    ld   hl, wEntity0State                         ; $75B3: $21 $80 $C2
+    ; If the entity is not interactive, move to next
+    ld   hl, wEntity0State                        ; $75B3: $21 $80 $C2
     add  hl, de                                   ; $75B6: $19
     ld   a, [hl]                                  ; $75B7: $7E
-    cp   $05                                      ; $75B8: $FE $05
-    jp   c, label_003_779F                        ; $75BA: $DA $9F $77
+    cp   ENTITY_STATE_ACTIVE                      ; $75B8: $FE $05
+    jp   c, checkNextEntity                    ; $75BA: $DA $9F $77
 
+    ; If $C340[de] is not 0, move to next
     ld   hl, $C340                                ; $75BD: $21 $40 $C3
     add  hl, de                                   ; $75C0: $19
     ld   a, [hl]                                  ; $75C1: $7E
     and  $40                                      ; $75C2: $E6 $40
-    jp   nz, label_003_779F                       ; $75C4: $C2 $9F $77
+    jp   nz, checkNextEntity                       ; $75C4: $C2 $9F $77
 
+    ; If the entities X are far appart, move to next
     ld   hl, wEntity0PosX                         ; $75C7: $21 $00 $C2
     add  hl, de                                   ; $75CA: $19
     ldh  a, [wActiveEntityPosX]                   ; $75CB: $F0 $EE
     sub  [hl]                                     ; $75CD: $96
     add  $0C                                      ; $75CE: $C6 $0C
     cp   $18                                      ; $75D0: $FE $18
-    jp   nc, label_003_779F                       ; $75D2: $D2 $9F $77
+    jp   nc, checkNextEntity                       ; $75D2: $D2 $9F $77
 
+    ; If the entitiesY are far appart, more to next
     ld   hl, wEntity0PosY                         ; $75D5: $21 $10 $C2
     add  hl, de                                   ; $75D8: $19
     ld   a, [hl]                                  ; $75D9: $7E
@@ -8239,27 +8251,30 @@ label_003_75A6:
     sub  [hl]                                     ; $75E2: $96
     add  $0C                                      ; $75E3: $C6 $0C
     cp   $18                                      ; $75E5: $FE $18
-    jp   nc, label_003_779F                       ; $75E7: $D2 $9F $77
+    jp   nc, checkNextEntity                       ; $75E7: $D2 $9F $77
 
+    ; If wEntitiesUnknownTableG is $FF, move to next
     ld   hl, wEntitiesUnknownTableG               ; $75EA: $21 $B0 $C3
     add  hl, de                                   ; $75ED: $19
     ld   a, [hl]                                  ; $75EE: $7E
     cp   $FF                                      ; $75EF: $FE $FF
-    jp   z, label_003_779F                        ; $75F1: $CA $9F $77
+    jp   z, checkNextEntity                        ; $75F1: $CA $9F $77
 
+    ; If the active entity is a Bouncing Bombite…
     ldh  a, [hActiveEntityType]                     ; $75F4: $F0 $EB
-    cp   $55                                      ; $75F6: $FE $55
-    jr   nz, jr_003_75FE                          ; $75F8: $20 $04
-
+    cp   ENTITY_BOUNCING_BOMBITE                  ; $75F6: $FE $55
+    jr   nz, .selfBombiteEnd                          ; $75F8: $20 $04
+    ; wEntitiesUnknownTableG[de] = GetEntityTransitionCountdown
     call GetEntityTransitionCountdown                 ; $75FA: $CD $05 $0C
     ld   [hl], b                                  ; $75FD: $70
+.selfBombiteEnd
 
-jr_003_75FE:
+    ; If the collisionned entity is a Bouncing Bombite…
     ld   hl, wEntitiesTypeTable                   ; $75FE: $21 $A0 $C3
     add  hl, de                                   ; $7601: $19
     ld   a, [hl]                                  ; $7602: $7E
-    cp   $55                                      ; $7603: $FE $55
-    jr   nz, jr_003_7630                          ; $7605: $20 $29
+    cp   ENTITY_BOUNCING_BOMBITE                  ; $7603: $FE $55
+    jr   nz, .bombiteEnd                          ; $7605: $20 $29
 
     ld   hl, wEntity0SpeedX                       ; $7607: $21 $40 $C2
     add  hl, bc                                   ; $760A: $09
@@ -8282,9 +8297,10 @@ jr_003_75FE:
     ld   hl, wEntitiesUnknowTableF                ; $7627: $21 $F0 $C2
     add  hl, de                                   ; $762A: $19
     ld   [hl], $08                                ; $762B: $36 $08
-    jp   label_003_779F                           ; $762D: $C3 $9F $77
 
-jr_003_7630:
+    jp   checkNextEntity                           ; $762D: $C3 $9F $77
+.bombiteEnd
+
     ld   hl, $C340                                ; $7630: $21 $40 $C3
     add  hl, de                                   ; $7633: $19
     ld   a, [hl]                                  ; $7634: $7E
@@ -8374,13 +8390,13 @@ jr_003_76AC:
     add  hl, de                                   ; $76AF: $19
     ld   a, [hl]                                  ; $76B0: $7E
     and  $80                                      ; $76B1: $E6 $80
-    jp   nz, label_003_779F                       ; $76B3: $C2 $9F $77
+    jp   nz, checkNextEntity                       ; $76B3: $C2 $9F $77
 
     ld   hl, $C410                                ; $76B6: $21 $10 $C4
     add  hl, de                                   ; $76B9: $19
     ld   a, [hl]                                  ; $76BA: $7E
     and  a                                        ; $76BB: $A7
-    jp   nz, label_003_779F                       ; $76BC: $C2 $9F $77
+    jp   nz, checkNextEntity                       ; $76BC: $C2 $9F $77
 
     ld   hl, wEntitiesTypeTable                   ; $76BF: $21 $A0 $C3
     add  hl, de                                   ; $76C2: $19
@@ -8465,7 +8481,7 @@ jr_003_771F:
     ld   [hl], a                                  ; $7733: $77
 
 jr_003_7734:
-    jp   label_003_779F                           ; $7734: $C3 $9F $77
+    jp   checkNextEntity                           ; $7734: $C3 $9F $77
 
 label_003_7737:
 jr_003_7737:
@@ -8485,7 +8501,7 @@ jr_003_7737:
     push de                                       ; $7749: $D5
     call func_003_53E4                            ; $774A: $CD $E4 $53
     pop  de                                       ; $774D: $D1
-    jp   label_003_779F                           ; $774E: $C3 $9F $77
+    jp   checkNextEntity                           ; $774E: $C3 $9F $77
 
 jr_003_7751:
     ld   hl, wEntity0State                         ; $7751: $21 $80 $C2
@@ -8499,7 +8515,7 @@ jr_003_775A:
     add  hl, bc                                   ; $775D: $09
     ld   a, [hl]                                  ; $775E: $7E
     and  a                                        ; $775F: $A7
-    jr   nz, jr_003_779F                          ; $7760: $20 $3D
+    jr   nz, checkNextEntity                          ; $7760: $20 $3D
 
     ld   [hl], $0C                                ; $7762: $36 $0C
     ld   hl, wEntity0SpeedX                       ; $7764: $21 $40 $C2
@@ -8540,19 +8556,18 @@ jr_003_7795:
     call ClearEntityType                               ; $7795: $CD $8D $3F
 
 jr_003_7798:
-    jr   jr_003_779F                              ; $7798: $18 $05
+    jr   checkNextEntity                              ; $7798: $18 $05
 
 jr_003_779A:
     call GetEntityTransitionCountdown                 ; $779A: $CD $05 $0C
     xor  a                                        ; $779D: $AF
     ld   [hl], a                                  ; $779E: $77
 
-label_003_779F:
-jr_003_779F:
+checkNextEntity:
     dec  e                                        ; $779F: $1D
     ld   a, e                                     ; $77A0: $7B
     cp   $FF                                      ; $77A1: $FE $FF
-    jp   nz, label_003_75A6                       ; $77A3: $C2 $A6 $75
+    jp   nz, entitiesLoop                       ; $77A3: $C2 $A6 $75
 
     ret                                           ; $77A6: $C9
 

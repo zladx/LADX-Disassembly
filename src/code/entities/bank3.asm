@@ -247,7 +247,7 @@ jr_003_48AD:
     ld   [$C18F], a                               ; $48AF: $EA $8F $C1
     jp   ClearEntityType                               ; $48B2: $C3 $8D $3F
 
-EntityState4Handler::
+EntityInitHandler::
     ld   hl, $C430                                ; $48B5: $21 $30 $C4
     add  hl, bc                                   ; $48B8: $09
     ld   a, [hl]                                  ; $48B9: $7E
@@ -934,7 +934,7 @@ Data_003_4CAC::
 Data_003_4CB2::
     db   $1E, $01, $1E, $61
 
-EntityState2Handler::
+EntityFallHandler::
     ldh  a, [hMapId]                              ; $4CB6: $F0 $F7
     cp   $FF                                      ; $4CB8: $FE $FF
     jr   nz, jr_003_4CDC                          ; $4CBA: $20 $20
@@ -1085,7 +1085,7 @@ jr_003_4D66:
     ldh  [hLinkPositionX], a                      ; $4D8F: $E0 $98
     jp   label_003_7F25                           ; $4D91: $C3 $25 $7F
 
-EntityState8Handler::
+EntityThrownHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4D94: $CD $81 $3A
     call func_003_7F7E                            ; $4D97: $CD $7E $7F
     ld   hl, $C410                                ; $4D9A: $21 $10 $C4
@@ -1155,7 +1155,7 @@ jr_003_4E04:
     db   $10                                      ; $4E05: $10
     db   $F0                                      ; $4E06: $F0
 
-EntityThrownHandler::
+EntityStunnedHandler::
     call ExecuteActiveEntityHandler_trampoline    ; $4E07: $CD $81 $3A
     call func_003_7F7E                            ; $4E0A: $CD $7E $7F
     call func_003_7FA9                            ; $4E0D: $CD $A9 $7F
@@ -2378,7 +2378,7 @@ jr_003_54C5:
     ld   [$1010], sp                              ; $5514: $08 $10 $10
     ld   h, d                                     ; $5517: $62
 
-EntityState1Handler::
+EntityDeathHandler::
     ld   hl, $C430                                ; $5518: $21 $30 $C4
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E

@@ -6934,10 +6934,10 @@ AnimateEntities::
     ldh  a, [hMapId]
     cp   MAP_CAVE_B
     ldh  a, [hFrameCounter]
-    jr   c, label_39C1
+    jr   c, .label_39C1
     xor  a
 
-label_39C1::
+.label_39C1
     and  $03
     ld   e, a
     ld   d, $00
@@ -6950,10 +6950,10 @@ label_39C1::
     ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_39E3
+    jr   nz, .label_39E3
     ld   [$C1AD], a
 
-label_39E3::
+.label_39E3
     ld   a, BANK(Func_020_6352)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
@@ -6989,7 +6989,7 @@ label_39E3::
     cp   $FF
     jr   nz, .loop
 
-AnimateEntity_return::
+.return:
     ret
 
 label_3A0A::
@@ -7052,15 +7052,15 @@ AnimateEntity::
     cp   ENTITY_STATE_ACTIVE
     jp   z, ExecuteActiveEntityHandler
     JP_TABLE
-._00 dw AnimateEntity_return
-._01 dw EntityState1Handler
-._02 dw EntityState2Handler
+._00 dw AnimateEntities.return
+._01 dw EntityDeathHandler
+._02 dw EntityFallHandler
 ._03 dw EntityDestructionHandler
-._04 dw EntityState4Handler
+._04 dw EntityInitHandler
 ._05 dw ExecuteActiveEntityHandler
-._06 dw EntityThrownHandler
+._06 dw EntityStunnedHandler
 ._07 dw EntityLiftedHandler
-._08 dw EntityState8Handler
+._08 dw EntityThrownHandler
 
 ; Execute active entity handler, then return to bank 3
 ExecuteActiveEntityHandler_trampoline::

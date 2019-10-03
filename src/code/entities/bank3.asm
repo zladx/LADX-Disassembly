@@ -321,7 +321,7 @@ jr_003_4918:
     add  hl, bc                                   ; $491B: $09
     ld   [hl], $05                                ; $491C: $36 $05
     ld   a, $03                                   ; $491E: $3E $03
-    call label_9D3                                ; $4920: $CD $D3 $09
+    call Func_020_4518_trampoline                                ; $4920: $CD $D3 $09
     jp   hl                                       ; $4923: $E9
 
 Data_003_4924::
@@ -4033,7 +4033,7 @@ jr_003_5E5B:
     push bc                                       ; $5E6B: $C5
     push de                                       ; $5E6C: $D5
     ld   a, $03                                   ; $5E6D: $3E $03
-    call label_978                                ; $5E6F: $CD $78 $09
+    call Func_020_6D0E_trampoline                                ; $5E6F: $CD $78 $09
     pop  de                                       ; $5E72: $D1
     pop  bc                                       ; $5E73: $C1
     jr   jr_003_5E8A                              ; $5E74: $18 $14

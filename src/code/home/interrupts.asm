@@ -166,7 +166,7 @@ LoadMapData::
     callsb LoadBGMapAttributes
 
     ; Manipulate wBGMapToLoad
-    callsb func_020_4577
+    callsb Func_020_4577
 
     ld   a, $08
     ld   [MBC3SelectBank], a
@@ -561,13 +561,13 @@ label_69E::
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
 
-    callsb func_020_475A
+    callsb Func_020_475A
     xor  a
     ld   [wNeedsUpdatingNPCTiles], a
     ld   [$C10F], a
     ld   hl, vTiles2
     ld   bc, $0000
-    call func_020_4616
+    call Func_020_4616
     ld   c, $90
     ld   b, h
     ld   h, $00

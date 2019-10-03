@@ -1476,7 +1476,7 @@ jr_018_4923:
     ld   [hl], b                                  ; $492A: $70
 
 jr_018_492B:
-    ld   bc, label_8F0                            ; $492B: $01 $F0 $08
+    ld   bc, Func_020_6BA4_trampoline                            ; $492B: $01 $F0 $08
     ld   [hl], d                                  ; $492E: $72
     ld   bc, $0000                                ; $492F: $01 $00 $00
     ld   [hl], h                                  ; $4932: $74

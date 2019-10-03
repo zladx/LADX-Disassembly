@@ -5657,7 +5657,7 @@ jr_036_6014:
     ld   a, [hl]                                  ; $6030: $7E
     ldh  [hScratch1], a                           ; $6031: $E0 $D8
     ld   a, $36                                   ; $6033: $3E $36
-    call label_9DE                                ; $6035: $CD $DE $09
+    call Func_020_4874_trampoline                                ; $6035: $CD $DE $09
     ld   hl, wRoomObjects                         ; $6038: $21 $11 $D7
     add  hl, de                                   ; $603B: $19
     ld   a, [hl]                                  ; $603C: $7E
@@ -5672,7 +5672,7 @@ jr_036_6014:
 
 jr_036_6049:
     ld   a, $36                                   ; $6049: $3E $36
-    call label_9E9                                ; $604B: $CD $E9 $09
+    call Func_020_4954_trampoline                                ; $604B: $CD $E9 $09
 
 jr_036_604E:
     ret                                           ; $604E: $C9

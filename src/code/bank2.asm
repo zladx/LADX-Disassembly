@@ -7848,7 +7848,7 @@ jr_002_742F:
     jr   nz, label_002_7454                       ; $744D: $20 $05
 
     ld   a, $02                                   ; $744F: $3E $02
-    call label_9C8                                ; $7451: $CD $C8 $09
+    call Func_020_4985_trampoline                                ; $7451: $CD $C8 $09
 
 label_002_7454::
     ld   hl, $6E29                                ; $7454: $21 $29 $6E

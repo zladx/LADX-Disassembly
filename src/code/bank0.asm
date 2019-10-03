@@ -130,25 +130,25 @@ PlayAudioStep::
 ; Palette-related code in bank $20
 ;
 
-label_8D7::
-    callsb func_020_6A30
+Func_020_6A30_trampoline::
+    callsb Func_020_6A30
 
 RestoreBankAndReturn::
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
-label_8E6::
-    callsb func_020_6AC1
+Func_020_6AC1_trampoline::
+    callsb Func_020_6AC1
     jr   RestoreBankAndReturn
 
-label_8F0::
-    callsb func_020_6BA4
+Func_020_6BA4_trampoline::
+    callsb Func_020_6BA4
     jr   RestoreBankAndReturn
 
 ClearFileMenuBG_trampoline::
     push af
-    callsb func_020_6BDC
+    callsb Func_020_6BDC
     jr   RestoreStackedBankAndReturn
 
 ; Load file menu background and palette, then switch back to bank 1
@@ -156,8 +156,8 @@ LoadFileMenuBG_trampoline::
     callsb LoadFileMenuBG
     jr   LoadBank1AndReturn
 
-label_90F::
-    callsb func_020_6C24
+Func_020_6C24_trampoline::
+    callsb Func_020_6C24
 
 LoadBank1AndReturn::
     ld   a, $01
@@ -173,10 +173,10 @@ label_91D::
     sla  a
     rl   b
     ld   c, a
-    jr   label_92F
+    jr   .jp_92F
     push af
 
-label_92F::
+.jp_92F
     callsb GetBGAttributesAddressForObject
     ldh  a, [hScratch8]
     ld   [MBC3SelectBank], a
@@ -226,9 +226,9 @@ RestoreStackedBankAndReturn::
     ld   [MBC3SelectBank], a
     ret
 
-label_978::
+Func_020_6D0E_trampoline::
     push af
-    callsb func_020_6D0E
+    callsb Func_020_6D0E
     jr   RestoreStackedBankAndReturn
 
 ; Load palette data
@@ -289,26 +289,26 @@ label_999::
     ldi  [hl], a
     jr   RestoreStackedBankAndReturn
 
-label_9C8::
+Func_020_4985_trampoline::
     push af
     ; Will do stuff, and play JINGLE_PUZZLE_SOLVED
-    callsb func_020_4985
+    callsb Func_020_4985
     jr   RestoreStackedBankAndReturn
 
-label_9D3::
+Func_020_4518_trampoline::
     push af
     ; Will lookup something in an entity id table
-    callsb func_020_4518
+    callsb Func_020_4518
     jr   RestoreStackedBankAndReturn
 
-label_9DE::
+Func_020_4874_trampoline::
     push af
-    callsb func_020_4874
+    callsb Func_020_4874
     jr   RestoreStackedBankAndReturn
 
-label_9E9::
+Func_020_4954_trampoline::
     push af
-    callsb func_020_4954
+    callsb Func_020_4954
     jp   RestoreStackedBankAndReturn
 
 ReplaceObjects56and57_trampoline::
@@ -377,6 +377,7 @@ SelectBankAtHAndReturn::
     ld   [MBC3SelectBank], a
     ret
 
+; Copy Color Dungeon tiles?
 label_A32::
     push af
     ld   a, $35
@@ -1397,7 +1398,7 @@ label_1006::
     dec  e
 
 label_100A::
-    callsb func_020_5C9C
+    callsb Func_020_5C9C
 
 label_1012::
     ld   a, $14
@@ -1761,7 +1762,7 @@ label_1281::
 
 label_128D::
     ; Special code for the Color Dungeon
-    callsb func_020_48CA
+    callsb Func_020_48CA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1866,7 +1867,7 @@ SetShieldVals::
     ld   [wIsUsingShield], a
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
-    callsb func_020_4B4A
+    callsb Func_020_4B4A
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1886,7 +1887,7 @@ PlaceBomb::
     ret  c
 
 func_1373::
-    callsb func_020_4B81
+    callsb Func_020_4B81
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1903,7 +1904,7 @@ label_1387::
     ld   a, $01
     call label_142F
     ret  c
-    callsb func_020_4BFF
+    callsb Func_020_4BFF
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -4787,7 +4788,7 @@ LoadTilemap9::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    callsb func_020_475A
+    callsb Func_020_475A
     jp   .oamTilesEnd
 .colorDungeonEnd
 

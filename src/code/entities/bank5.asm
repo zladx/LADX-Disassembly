@@ -6916,7 +6916,7 @@ jr_005_665F:
     ld   h, [hl]                                  ; $6687: $66
     ld   hl, $00F0                                ; $6688: $21 $F0 $00
     ld   h, h                                     ; $668B: $64
-    ld   hl, label_8F0                            ; $668C: $21 $F0 $08
+    ld   hl, Func_020_6BA4_trampoline                            ; $668C: $21 $F0 $08
     ld   h, d                                     ; $668F: $62
     ld   hl, $10F0                                ; $6690: $21 $F0 $10
     ld   h, b                                     ; $6693: $60

@@ -1606,7 +1606,7 @@ jr_007_4977:
 
     ldh  a, [rP1]                                 ; $499C: $F0 $00
     ld   [hl], b                                  ; $499E: $70
-    ld   bc, label_8F0                            ; $499F: $01 $F0 $08
+    ld   bc, Func_020_6BA4_trampoline                            ; $499F: $01 $F0 $08
     ld   [hl], d                                  ; $49A2: $72
     ld   bc, $0000                                ; $49A3: $01 $00 $00
     ld   [hl], h                                  ; $49A6: $74
@@ -1614,7 +1614,7 @@ jr_007_4977:
     db   $76                                      ; $49AA: $76
     ld   bc, $00F0                                ; $49AB: $01 $F0 $00
     ld   [hl], d                                  ; $49AE: $72
-    ld   hl, label_8F0                            ; $49AF: $21 $F0 $08
+    ld   hl, Func_020_6BA4_trampoline                            ; $49AF: $21 $F0 $08
     ld   [hl], b                                  ; $49B2: $70
     ld   hl, $0000                                ; $49B3: $21 $00 $00
     db   $76                                      ; $49B6: $76

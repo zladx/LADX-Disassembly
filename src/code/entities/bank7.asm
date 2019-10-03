@@ -261,7 +261,7 @@ jr_007_415A:
 
 label_007_4198:
     ld   a, $BB                                   ; $4198: $3E $BB
-    call label_3B86                               ; $419A: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $419A: $CD $86 $3B
     ret  c                                        ; $419D: $D8
 
     ldh  a, [hScratch0]                           ; $419E: $F0 $D7
@@ -415,7 +415,7 @@ jr_007_4233:
     add  $08                                      ; $4297: $C6 $08
     ld   [hl], a                                  ; $4299: $77
     ld   a, $B8                                   ; $429A: $3E $B8
-    call label_3B86                               ; $429C: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $429C: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $429F: $F0 $D7
     ld   hl, wEntity0PosX                         ; $42A1: $21 $00 $C2
     add  hl, de                                   ; $42A4: $19
@@ -863,7 +863,7 @@ jr_007_4533:
     ld   [wMusicTrackTiming], a                               ; $4540: $EA $0B $C1
     call IncrementEntityWalkingAttr               ; $4543: $CD $12 $3B
     ld   a, $54                                   ; $4546: $3E $54
-    call label_3B86                               ; $4548: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $4548: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $454B: $F0 $D7
     sub  $20                                      ; $454D: $D6 $20
     ld   hl, wEntity0PosX                         ; $454F: $21 $00 $C2
@@ -1606,7 +1606,7 @@ jr_007_4977:
 
     ldh  a, [rP1]                                 ; $499C: $F0 $00
     ld   [hl], b                                  ; $499E: $70
-    ld   bc, label_8F0                            ; $499F: $01 $F0 $08
+    ld   bc, Func_020_6BA4_trampoline                            ; $499F: $01 $F0 $08
     ld   [hl], d                                  ; $49A2: $72
     ld   bc, $0000                                ; $49A3: $01 $00 $00
     ld   [hl], h                                  ; $49A6: $74
@@ -1614,7 +1614,7 @@ jr_007_4977:
     db   $76                                      ; $49AA: $76
     ld   bc, $00F0                                ; $49AB: $01 $F0 $00
     ld   [hl], d                                  ; $49AE: $72
-    ld   hl, label_8F0                            ; $49AF: $21 $F0 $08
+    ld   hl, Func_020_6BA4_trampoline                            ; $49AF: $21 $F0 $08
     ld   [hl], b                                  ; $49B2: $70
     ld   hl, $0000                                ; $49B3: $21 $00 $00
     db   $76                                      ; $49B6: $76
@@ -2131,7 +2131,7 @@ jr_007_4CE7:
 
 func_007_4CEE:
     ld   a, $B3                                   ; $4CEE: $3E $B3
-    call label_3B86                               ; $4CF0: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $4CF0: $CD $86 $3B
     jr   c, jr_007_4D1D                           ; $4CF3: $38 $28
 
     ldh  a, [hScratch0]                           ; $4CF5: $F0 $D7
@@ -4014,7 +4014,7 @@ jr_007_579F:
 
 func_007_57B0:
     ld   a, $0A                                   ; $57B0: $3E $0A
-    call label_3B86                               ; $57B2: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $57B2: $CD $86 $3B
     jr   c, jr_007_57F4                           ; $57B5: $38 $3D
 
     push bc                                       ; $57B7: $C5
@@ -4425,7 +4425,7 @@ jr_007_59E2:
     jr   z, jr_007_5A2A                           ; $59E2: $28 $46
 
     ld   a, $AD                                   ; $59E4: $3E $AD
-    call label_3B86                               ; $59E6: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $59E6: $CD $86 $3B
     jr   c, jr_007_5A2A                           ; $59E9: $38 $3F
 
     push bc                                       ; $59EB: $C5
@@ -5255,7 +5255,7 @@ jr_007_5E67:
     jr   nz, jr_007_5EA6                          ; $5E6B: $20 $39
 
     ld   a, $A7                                   ; $5E6D: $3E $A7
-    call label_3B86                               ; $5E6F: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $5E6F: $CD $86 $3B
     jr   c, jr_007_5EA6                           ; $5E72: $38 $32
 
     call GetRandomByte                            ; $5E74: $CD $0D $28
@@ -5414,7 +5414,7 @@ label_007_5F4D:
 
 func_007_5F61:
     ld   a, $A7                                   ; $5F61: $3E $A7
-    call label_3B86                               ; $5F63: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $5F63: $CD $86 $3B
     jr   c, jr_007_5F9A                           ; $5F66: $38 $32
 
     ld   hl, wEntitiesUnknownTableB               ; $5F68: $21 $B0 $C2
@@ -8571,7 +8571,7 @@ jr_007_7168:
     ret  nz                                       ; $716C: $C0
 
     ld   a, $7D                                   ; $716D: $3E $7D
-    call label_3B86                               ; $716F: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $716F: $CD $86 $3B
     jr   c, jr_007_7197                           ; $7172: $38 $23
 
     ldh  a, [hScratch0]                           ; $7174: $F0 $D7
@@ -8631,7 +8631,7 @@ jr_007_71B4:
     jp   z, label_007_7246                        ; $71C2: $CA $46 $72
 
     ld   a, $14                                   ; $71C5: $3E $14
-    call label_3B86                               ; $71C7: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $71C7: $CD $86 $3B
     jr   c, jr_007_7246                           ; $71CA: $38 $7A
 
     ld   hl, $C4E0                                ; $71CC: $21 $E0 $C4
@@ -9157,7 +9157,7 @@ func_007_73F7:
     pop  hl                                       ; $74C1: $E1
     ld   [hl], a                                  ; $74C2: $77
     ld   a, $5A                                   ; $74C3: $3E $5A
-    call label_3B86                               ; $74C5: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $74C5: $CD $86 $3B
     jr   c, jr_007_752C                           ; $74C8: $38 $62
 
 jr_007_74CA:
@@ -9588,7 +9588,7 @@ jr_007_7716:
     ld   [hl], $40                                ; $771A: $36 $40
     call GetEntityTransitionCountdown                 ; $771C: $CD $05 $0C
     ld   [hl], $40                                ; $771F: $36 $40
-    jp   label_C20                                ; $7721: $C3 $20 $0C
+    jp   PlayWrongAnswerJingle                                ; $7721: $C3 $20 $0C
 
     call GetEntityTransitionCountdown                 ; $7724: $CD $05 $0C
     cp   $01                                      ; $7727: $FE $01
@@ -10395,7 +10395,7 @@ ChestWithItemEntityHandler::
     jr   nz, jr_007_7C29                          ; $7BEC: $20 $3B
 
     ld   a, $1B                                   ; $7BEE: $3E $1B
-    call label_3B86                               ; $7BF0: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $7BF0: $CD $86 $3B
     jp   c, label_007_7EA4                        ; $7BF3: $DA $A4 $7E
 
     ldh  a, [hScratch0]                           ; $7BF6: $F0 $D7
@@ -10971,7 +10971,7 @@ label_007_7EC1:
     jr   nz, jr_007_7F0A                          ; $7EDF: $20 $29
 
     ld   a, $30                                   ; $7EE1: $3E $30
-    call label_3B86                               ; $7EE3: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $7EE3: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $7EE6: $F0 $D7
     ld   hl, wEntity0PosX                         ; $7EE8: $21 $00 $C2
     add  hl, de                                   ; $7EEB: $19
@@ -11033,7 +11033,7 @@ label_007_7F36:
     ret                                           ; $7F4A: $C9
 
     ld   a, $36                                   ; $7F4B: $3E $36
-    call label_3B86                               ; $7F4D: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $7F4D: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $7F50: $F0 $D7
     ld   hl, wEntity0PosX                         ; $7F52: $21 $00 $C2
     add  hl, de                                   ; $7F55: $19

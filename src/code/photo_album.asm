@@ -718,7 +718,7 @@ JumpTable_028_4469:
 JumpTable_028_44AA:
     call LCDOff                                 ; $44AA: JumpTable_028_44AA $CD $CF $28
     ld   a, $28                                 ; $44AD: JumpTable_028_44AA $3E $28
-    call label_BBE                              ; $44AF: JumpTable_028_44AA $CD $BE $0B
+    call LoadBaseTiles_trampoline                              ; $44AF: JumpTable_028_44AA $CD $BE $0B
     ldh  a, [hLinkPositionX]                    ; $44B2: JumpTable_028_44AA $F0 $98
     ld   [$DB9D], a                             ; $44B4: JumpTable_028_44AA $EA $9D $DB
     ldh  a, [hLinkPositionY]                    ; $44B7: JumpTable_028_44AA $F0 $99

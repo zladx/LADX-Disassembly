@@ -1675,7 +1675,7 @@ jr_014_50B2:
     ldh  [rSCY], a                                ; $50BE: $E0 $42
     jp   label_014_5067                           ; $50C0: $C3 $67 $50
 
-func_014_50C3:
+func_014_50C3::
     ld   e, $0F                                   ; $50C3: $1E $0F
     ld   d, $00                                   ; $50C5: $16 $00
 
@@ -2235,6 +2235,8 @@ jr_014_5328:
     ld   [bc], a                                  ; $5343: $02
     ld   b, $00                                   ; $5344: $06 $00
     inc  b                                        ; $5346: $04
+
+func_014_5347::
     ld   a, [wRoomTransitionState]                ; $5347: $FA $24 $C1
     and  a                                        ; $534A: $A7
     jr   nz, jr_014_5354                          ; $534B: $20 $07
@@ -2484,6 +2486,7 @@ jr_014_547F:
     ld   [$DE04], a                               ; $54A6: $EA $04 $DE
     jp   label_BD7                                ; $54A9: $C3 $D7 $0B
 
+func_014_54AC::
     ld   hl, wFreeMovementMode                    ; $54AC: $21 $7B $C1
     ld   a, [wRoomTransitionState]                ; $54AF: $FA $24 $C1
     or   [hl]                                     ; $54B2: $B6
@@ -2542,9 +2545,10 @@ jr_014_54E7:
     nop                                           ; $54F4: $00
     ld   [bc], a                                  ; $54F5: $02
     nop                                           ; $54F6: $00
-    cp   $FA                                      ; $54F7: $FE $FA
-    ld   a, b                                     ; $54F9: $78
-    pop  bc                                       ; $54FA: $C1
+    db   $FE                                      ; $54F7: $FE
+
+Func_014_54F8::
+    ld   a, [wC178]
     and  a                                        ; $54FB: $A7
     jr   z, jr_014_5502                           ; $54FC: $28 $04
 
@@ -2575,6 +2579,7 @@ jr_014_5502:
 jr_014_5525:
     ret                                           ; $5525: $C9
 
+func_014_5526::
     ld   hl, wRoomObjects                         ; $5526: $21 $11 $D7
     add  hl, de                                   ; $5529: $19
     ldh  a, [hFFAF]                               ; $552A: $F0 $AF
@@ -3104,6 +3109,7 @@ jr_014_5807:
     ld   [hl], $00                                ; $5835: $36 $00
     ret                                           ; $5837: $C9
 
+func_014_5838::
     ld   hl, MapLayout11                          ; $5838: $21 $E0 $44
     ldh  a, [hMapId]                              ; $583B: $F0 $F7
     cp   $FF                                      ; $583D: $FE $FF
@@ -3159,6 +3165,13 @@ jr_014_5882:
 jr_014_5883:
     ret                                           ; $5883: $C9
 
+; Retrieve the status of chests in the given room
+; Inputs:
+;   d    is room indoor
+;   e    room id
+; Output:
+;   a    status of chests (eg. $19, $1A, etc.)
+GetChestsStatusForRoom::
     ldh  a, [hMapId]                              ; $5884: $F0 $F7
     cp   $FF                                      ; $5886: $FE $FF
     jr   nz, jr_014_5891                          ; $5888: $20 $07
@@ -3175,6 +3188,7 @@ jr_014_5894:
     ld   a, [hl]                                  ; $5895: $7E
     ret                                           ; $5896: $C9
 
+func_014_5897::
     ldh  a, [hMapId]                              ; $5897: $F0 $F7
     cp   $FF                                      ; $5899: $FE $FF
     jr   nz, jr_014_58A2                          ; $589B: $20 $05
@@ -3247,6 +3261,7 @@ jr_014_58ED:
     ld   [$C18F], a                               ; $58FC: $EA $8F $C1
     ret                                           ; $58FF: $C9
 
+func_014_5900::
     ldh  a, [hMapRoom]                            ; $5900: $F0 $F6
     ld   e, a                                     ; $5902: $5F
     ld   a, [wIsIndoor]                           ; $5903: $FA $A5 $DB

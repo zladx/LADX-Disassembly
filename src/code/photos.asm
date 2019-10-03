@@ -3067,7 +3067,7 @@ JumpTable_037_5393::
 
     call LCDOff                                 ; $53A6: $CD $CF $28
     ld   a, $37                                 ; $53A9: $3E $37
-    call label_BBE                              ; $53AB: $CD $BE $0B
+    call LoadBaseTiles_trampoline                              ; $53AB: $CD $BE $0B
     ld   a, [wGameplayType]                     ; $53AE: $FA $95 $DB
     cp   GAMEPLAY_PHOTO_GHOST                   ; $53B1: $FE $19
     jr   nz, .else_53C9_37                      ; $53B3: $20 $14

@@ -10,6 +10,13 @@ callsb: macro
     call \1
 endm
 
+; Farcall using direct bank selection with hl
+callhl: macro
+    ld   hl, MBC3SelectBank
+    ld   [hl], BANK(\1)
+    call \1
+endm
+
 ; Farcall using SwitchBank
 callsw: macro
     ld   a, BANK(\1)

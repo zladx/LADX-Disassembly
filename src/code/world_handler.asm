@@ -184,7 +184,7 @@ label_4475::
 label_447E::
     ldh  a, [hMapRoom]
     ld   e, a
-    call GetChestsStatusForRoom
+    call GetChestsStatusForRoom_trampoline
     cp   $1A
     jr   z, label_4495
     cp   $19

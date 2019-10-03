@@ -1901,7 +1901,7 @@ jr_005_4A46:
     jr   nz, jr_005_4A9E                          ; $4A57: $20 $45
 
     ld   a, $02                                   ; $4A59: $3E $02
-    call label_3B86                               ; $4A5B: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $4A5B: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $4A5E: $F0 $D7
     ld   hl, wEntity0PosX                         ; $4A60: $21 $00 $C2
     add  hl, de                                   ; $4A63: $19
@@ -2447,7 +2447,7 @@ jr_005_4D5D:
     jr   nc, jr_005_4DA2                          ; $4D65: $30 $3B
 
     ld   a, $3F                                   ; $4D67: $3E $3F
-    call label_3B86                               ; $4D69: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $4D69: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $4D6C: $F0 $D7
     add  $06                                      ; $4D6E: $C6 $06
     ld   hl, wEntity0PosX                         ; $4D70: $21 $00 $C2
@@ -2695,7 +2695,7 @@ label_005_4EE0:
     jr   nz, jr_005_4F39                          ; $4EF7: $20 $40
 
     ld   a, $C9                                   ; $4EF9: $3E $C9
-    call label_3B86                               ; $4EFB: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $4EFB: $CD $86 $3B
     jr   c, jr_005_4F39                           ; $4EFE: $38 $39
 
     ldh  a, [hScratch1]                           ; $4F00: $F0 $D8
@@ -3034,7 +3034,7 @@ jr_005_50E2:
     jr   nz, jr_005_512A                          ; $50E9: $20 $3F
 
     ld   a, $C9                                   ; $50EB: $3E $C9
-    call label_3B86                               ; $50ED: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $50ED: $CD $86 $3B
     jr   c, jr_005_512A                           ; $50F0: $38 $38
 
     ldh  a, [hLinkPositionY]                      ; $50F2: $F0 $99
@@ -3090,7 +3090,7 @@ jr_005_512A:
     ld   a, $10                                   ; $513F: $3E $10
     ld   [wActiveMusicTrack], a                   ; $5141: $EA $68 $D3
     ld   a, $05                                   ; $5144: $3E $05
-    call label_AC6                                ; $5146: $CD $C6 $0A
+    call Func_036_703E_trampoline                                ; $5146: $CD $C6 $0A
     call GetEntityTransitionCountdown                 ; $5149: $CD $05 $0C
     ld   [hl], $80                                ; $514C: $36 $80
     ret                                           ; $514E: $C9
@@ -3827,6 +3827,7 @@ jr_005_5569:
     and  a                                        ; $5569: $A7
     ret                                           ; $556A: $C9
 
+func_005_556B::
     call label_BFB                                ; $556B: $CD $FB $0B
     ld   [hl], $C0                                ; $556E: $36 $C0
     ld   a, $18                                   ; $5570: $3E $18
@@ -4654,6 +4655,8 @@ Data_005_5A0E::
     rst  $38                                      ; $5A1A: $FF
     ld   a, $EF                                   ; $5A1B: $3E $EF
     pop  af                                       ; $5A1D: $F1
+
+func_005_5A1E::
     ld   hl, $C430                                ; $5A1E: $21 $30 $C4
     add  hl, bc                                   ; $5A21: $09
     ld   a, [hl]                                  ; $5A22: $7E
@@ -4756,7 +4759,7 @@ jr_005_5A9B:
 jr_005_5AA7:
     ldh  [hFFE8], a                               ; $5AA7: $E0 $E8
     ld   a, $63                                   ; $5AA9: $3E $63
-    call label_3B86                               ; $5AAB: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $5AAB: $CD $86 $3B
     push bc                                       ; $5AAE: $C5
     ldh  a, [hFFE8]                               ; $5AAF: $F0 $E8
     ld   c, a                                     ; $5AB1: $4F
@@ -4811,7 +4814,7 @@ jr_005_5AFE:
 
 func_005_5B03:
     ld   a, $63                                   ; $5B03: $3E $63
-    call label_3B86                               ; $5B05: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $5B05: $CD $86 $3B
     ld   hl, wEntitiesHealthTable                                ; $5B08: $21 $60 $C3
     add  hl, de                                   ; $5B0B: $19
     ld   [hl], $0C                                ; $5B0C: $36 $0C
@@ -6293,6 +6296,7 @@ jr_005_62F5:
 
     ret                                           ; $6301: $C9
 
+func_005_6302::
     call GetEntityTransitionCountdown                 ; $6302: $CD $05 $0C
     ld   [hl], $40                                ; $6305: $36 $40
     ld   hl, wEntitiesUnknownTableG               ; $6307: $21 $B0 $C3
@@ -6737,7 +6741,7 @@ func_005_657F:
 jr_005_6581:
     ldh  [hFFE8], a                               ; $6581: $E0 $E8
     ld   a, $62                                   ; $6583: $3E $62
-    call label_3B86                               ; $6585: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $6585: $CD $86 $3B
     jr   c, jr_005_65D3                           ; $6588: $38 $49
 
     ld   hl, wEntitiesUnknownTableB               ; $658A: $21 $B0 $C2
@@ -6792,7 +6796,7 @@ jr_005_65D3:
 
 func_005_65D9:
     ld   a, $62                                   ; $65D9: $3E $62
-    call label_3B86                               ; $65DB: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $65DB: $CD $86 $3B
     jr   c, jr_005_6600                           ; $65DE: $38 $20
 
     ld   hl, wEntitiesUnknownTableB               ; $65E0: $21 $B0 $C2
@@ -6837,7 +6841,7 @@ func_005_6611:
 jr_005_6613:
     ldh  [hFFE8], a                               ; $6613: $E0 $E8
     ld   a, $62                                   ; $6615: $3E $62
-    call label_3B86                               ; $6617: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $6617: $CD $86 $3B
     jr   c, jr_005_665F                           ; $661A: $38 $43
 
     ld   hl, wEntitiesUnknownTableB               ; $661C: $21 $B0 $C2
@@ -6916,7 +6920,7 @@ jr_005_665F:
     ld   h, [hl]                                  ; $6687: $66
     ld   hl, $00F0                                ; $6688: $21 $F0 $00
     ld   h, h                                     ; $668B: $64
-    ld   hl, label_8F0                            ; $668C: $21 $F0 $08
+    ld   hl, Func_020_6BA4_trampoline                            ; $668C: $21 $F0 $08
     ld   h, d                                     ; $668F: $62
     ld   hl, $10F0                                ; $6690: $21 $F0 $10
     ld   h, b                                     ; $6693: $60
@@ -7196,6 +7200,7 @@ label_005_67EA:
     ld   a, $FF                                   ; $6813: $3E $FF
     jp   label_3B0C                               ; $6815: $C3 $0C $3B
 
+func_005_6818::
     ld   hl, $C460                                ; $6818: $21 $60 $C4
     add  hl, bc                                   ; $681B: $09
     ld   e, [hl]                                  ; $681C: $5E
@@ -7519,7 +7524,7 @@ jr_005_69EB:
     ret  nz                                       ; $69F5: $C0
 
     ld   a, $02                                   ; $69F6: $3E $02
-    call label_3B86                               ; $69F8: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $69F8: $CD $86 $3B
     ret  c                                        ; $69FB: $D8
 
     ld   hl, wEntitiesTransitionCountdownTable           ; $69FC: $21 $E0 $C2
@@ -8085,6 +8090,7 @@ jr_005_6CAE:
     ld   a, $02                                   ; $6CC1: $3E $02
     jp   label_3DA0                               ; $6CC3: $C3 $A0 $3D
 
+func_005_6CC6::
     call GetEntityTransitionCountdown                 ; $6CC6: $CD $05 $0C
     ld   [hl], $80                                ; $6CC9: $36 $80
     xor  a                                        ; $6CCB: $AF
@@ -8466,7 +8472,7 @@ jr_005_6EB0:
     ld   [$D784], a                               ; $6F2E: $EA $84 $D7
     ld   [$D788], a                               ; $6F31: $EA $88 $D7
     ld   a, $5D                                   ; $6F34: $3E $5D
-    call label_3B86                               ; $6F36: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $6F36: $CD $86 $3B
     ld   hl, wEntitiesUnknownTableB               ; $6F39: $21 $B0 $C2
     add  hl, de                                   ; $6F3C: $19
     ld   [hl], $01                                ; $6F3D: $36 $01
@@ -8804,7 +8810,7 @@ jr_005_70F6:
 
     ld   [hl], $2C                                ; $70FA: $36 $2C
     ld   a, $5D                                   ; $70FC: $3E $5D
-    call label_3B86                               ; $70FE: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $70FE: $CD $86 $3B
     jr   c, jr_005_7151                           ; $7101: $38 $4E
 
     ld   hl, wEntitiesHealthTable                                ; $7103: $21 $60 $C3
@@ -9603,12 +9609,12 @@ label_005_7570:
 func_005_7585:
 label_005_7585:
     ld   a, $36                                   ; $7585: $3E $36
-    call label_3B86                               ; $7587: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $7587: $CD $86 $3B
     jr   jr_005_7599                              ; $758A: $18 $0D
 
 label_005_758C:
     ld   a, $36                                   ; $758C: $3E $36
-    call label_3B86                               ; $758E: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $758E: $CD $86 $3B
     ld   a, $48                                   ; $7591: $3E $48
     ldh  [hScratch0], a                           ; $7593: $E0 $D7
     ld   a, $10                                   ; $7595: $3E $10
@@ -9672,7 +9678,7 @@ jr_005_75C0:
     add  hl, de                                   ; $75F1: $19
     ld   [hl], $1F                                ; $75F2: $36 $1F
     ld   a, $02                                   ; $75F4: $3E $02
-    call label_3B86                               ; $75F6: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $75F6: $CD $86 $3B
     call PlayBombExplosionSfx                                ; $75F9: $CD $4B $0C
     ldh  a, [hScratch0]                           ; $75FC: $F0 $D7
     ld   hl, wEntity0PosX                         ; $75FE: $21 $00 $C2
@@ -11139,7 +11145,7 @@ jr_005_7E3A:
     jr   nz, jr_005_7E61                          ; $7E3C: $20 $23
 
     ld   a, $7D                                   ; $7E3E: $3E $7D
-    call label_3B86                               ; $7E40: $CD $86 $3B
+    call func_003_64CA_trampoline                               ; $7E40: $CD $86 $3B
     jr   c, jr_005_7E61                           ; $7E43: $38 $1C
 
     ldh  a, [hScratch0]                           ; $7E45: $F0 $D7

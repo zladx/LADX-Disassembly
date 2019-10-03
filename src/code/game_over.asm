@@ -105,8 +105,8 @@ label_4259::
     ld   a, [wBGPalette]
     ld   [wOBJ1Palette], a
     ld   e, $08
-    call label_8D7
-    call label_90F
+    call Func_020_6A30_trampoline
+    call Func_020_6C24_trampoline
     ret
     ld   a, $0D
     ld   [wTileMapToLoad], a

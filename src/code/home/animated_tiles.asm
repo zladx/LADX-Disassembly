@@ -412,7 +412,7 @@ label_1D12::
     ret
 
 SkipTilesGroupAnimation::
-    callsb func_020_54F5
+    callsb Func_020_54F5
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a

@@ -6148,13 +6148,16 @@ jr_003_6A2E:
     jp   label_003_6AD7                           ; $6A31: $C3 $D7 $6A
 
 ArrowEntityHandler::
+    ; Increment the active projectiles count
     ld   hl, wActiveProjectileCount                     ; $6A34: $21 $4D $C1
     inc  [hl]                                     ; $6A37: $34
 
+    ; If the entity is not "walking"…
     ldh  a, [hActiveEntityWalking]                ; $6A38: $F0 $F0
     and  a                                        ; $6A3A: $A7
-    jr   nz, @+$35                                ; $6A3B: $20 $33
+    jr   nz, Func_003_6A70                        ; $6A3B: $20 $33
 
+    ; …
     call GetEntityTransitionCountdown                 ; $6A3D: $CD $05 $0C
     jp   nz, label_003_6AD4                       ; $6A40: $C2 $D4 $6A
 
@@ -6178,16 +6181,11 @@ ArrowEntityHandler::
     call label_C60                                ; $6A60: $CD $60 $0C
     jp   ClearEntityType                               ; $6A63: $C3 $8D $3F
 
-    add  b                                        ; $6A66: $80
-    dec  d                                        ; $6A67: $15
-    inc  b                                        ; $6A68: $04
-    db   $fc                                      ; $6A69: $FC
-    nop                                           ; $6A6A: $00
-    nop                                           ; $6A6B: $00
-    cp   $FE                                      ; $6A6C: $FE $FE
-    ld   a, [$CD04]                               ; $6A6E: $FA $04 $CD
-    dec  b                                        ; $6A71: $05
-    inc  c                                        ; $6A72: $0C
+Data_003_6A66::
+    db $80, $15, $04, $FC, $00, $00, $FE, $FE, $FA, $04
+
+Func_003_6A70::
+    call GetEntityTransitionCountdown             ; $6A70:
     jr   z, jr_003_6A96                           ; $6A73: $28 $21
 
     ld   a, $02                                   ; $6A75: $3E $02
@@ -6227,7 +6225,7 @@ jr_003_6A96:
     ldh  a, [wActiveEntityPosY]                   ; $6AAB: $F0 $EC
     add  [hl]                                     ; $6AAD: $86
     ldh  [wActiveEntityPosY], a                   ; $6AAE: $E0 $EC
-    ld   de, $6A66                                ; $6AB0: $11 $66 $6A
+    ld   de, Data_003_6A66                        ; $6AB0: $11 $66 $6A
     call label_3C77                               ; $6AB3: $CD $77 $3C
     call label_3D8A                               ; $6AB6: $CD $8A $3D
     pop  af                                       ; $6AB9: $F1

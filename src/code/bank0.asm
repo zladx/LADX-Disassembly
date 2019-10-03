@@ -388,6 +388,10 @@ CopyColorDungeonSymbols::
     call CopyData
     jp   RestoreStackedBankAndReturn
 
+;
+; Various trampolines
+;
+
 Func_036_505F_trampoline::
     push af
     callsb Func_036_505F
@@ -516,32 +520,32 @@ CopyObjectsAttributesToWRAM2::
     ld   [MBC3SelectBank], a
     ret
 
+; On GBC, copy some overworld objects to ram bank 2
 label_B2F::
     ldh  [hScratch2], a
     ldh  a, [hIsGBC]
     and  a
     ret  z
+
     ld   a, [wIsIndoor]
     and  a
     ret  nz
+
     push bc
     ldh  a, [hScratch2]
     and  $80
-    jr   nz, label_B4B
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6E50
-    jr   c, label_B54
-
-label_B4B::
+    jr   nz, .else
+    callsb Func_020_6E50
+    jr   c, .endIf
+.else
     ld   b, [hl]
     ld   a, $02
     ld   [rSVBK], a
     ld   [hl], b
     xor  a
     ld   [rSVBK], a
+.endIf
 
-label_B54::
     ldh  a, [hScratch2]
     and  $7F
     ld   [MBC3SelectBank], a
@@ -625,7 +629,7 @@ label_BB5::
     ld   de, $D000
     jp   CopyData
 
-label_BBE::
+LoadBaseTiles_trampoline::
     push af
     call LoadBaseTiles
     jp   RestoreStackedBankAndReturn
@@ -687,7 +691,7 @@ GetEntityTransitionCountdown::
 ; Output:
 ;  - a: the value read
 ;  - z: whether the value equal to zero
-IsZero:
+IsZero::
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -695,7 +699,7 @@ IsZero:
 
 label_C0C::
     ld   a, $AF
-    call label_3B86
+    call func_003_64CA_trampoline
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -706,7 +710,7 @@ label_C0C::
     ld   [hl], a
     ret
 
-label_C20::
+PlayWrongAnswerJingle::
     ld   a, JINGLE_WRONG_ANSWER
     ldh  [hJingle], a
     ret
@@ -750,28 +754,26 @@ label_C56::
     add  hl, bc
     ld   a, [hl]
     and  a
-    jr   z, label_C5F
+    jr   z, .endIf
     dec  [hl]
-
-label_C5F::
+.endIf
     ret
 
 label_C60::
     push af
     ld   a, [$C18F]
     and  a
-    jr   nz, label_C7B
+    jr   nz, .return
     ld   [$C1CF], a
     inc  a
     ld   [$C18F], a
     ld   [$C5A6], a
     ld   a, [$C19D]
     and  a
-    jr   nz, label_C7B
+    jr   nz, .return
     ld   a, JINGLE_PUZZLE_SOLVED
     ldh  [hJingle], a
-
-label_C7B::
+.return
     pop  af
     ret
 
@@ -833,29 +835,30 @@ label_CC7::
     ld   e, $0F
     ld   d, $00
 
-label_CCC::
+.loop
     ld   hl, $C510
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_CEC
+    jr   z, .jp_CEC
     dec  e
     ld   a, e
     cp   $FF
-    jr   nz, label_CCC
+    jr   nz, .loop
+
     ld   hl, $C5C0
     dec  [hl]
     ld   a, [hl]
     cp   $FF
-    jr   nz, label_CE8
+    jr   nz, .endIf
     ld   a, $0F
     ld   [$C5C0], a
+.endIf
 
-label_CE8::
     ld   a, [$C5C0]
     ld   e, a
 
-label_CEC::
+.jp_CEC
     pop  af
     ld   hl, $C510
     add  hl, de
@@ -1854,7 +1857,7 @@ PlaceBomb::
     ret  nc
     ld   a, [wBombCount]
     and  a
-    jp   z, label_C20
+    jp   z, PlayWrongAnswerJingle
     sub  a, $01
     daa
     ld   [wBombCount], a
@@ -1914,7 +1917,7 @@ ShootArrow::
     ld   [wIsShootingArrow], a
     ld   a, [wArrowCount]
     and  a
-    jp   z, label_C20
+    jp   z, PlayWrongAnswerJingle
     sub  a, $01
     daa
     ld   [wArrowCount], a
@@ -1976,7 +1979,7 @@ label_142E::
     ret
 
 label_142F::
-    call label_3B86
+    call func_003_64CA_trampoline
     ret  c
     ld   a, $0C
     ld   [$C19B], a
@@ -2052,9 +2055,9 @@ UseMagicPowder::
 label_14A7::
     ld   a, [wMagicPowderCount]
     and  a
-    jp   z, label_C20
+    jp   z, PlayWrongAnswerJingle
     ld   a, $08
-    call label_3B86
+    call func_003_64CA_trampoline
     ret  c
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -2354,7 +2357,7 @@ label_167C::
     ld   a, $2D
 
 label_1691::
-    call label_3B86
+    call func_003_64CA_trampoline
     ret  c
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -6203,7 +6206,6 @@ label_3527::
     ld   a, $1A
 
 label_3529::
-    ; On GBC, copy some overworld objects to ram bank 2
     call label_B2F
     ret
 
@@ -6734,7 +6736,7 @@ LoadRoomEntities::
     cp   [hl]
     jr   nz, label_3850
     ld   a, $A8
-    call label_3B86
+    call func_003_64CA_trampoline
     ld   a, [$DB70]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -7281,9 +7283,9 @@ label_3B7B::
     call $75A2
     jp   ReloadSavedBank
 
-label_3B86::
+func_003_64CA_trampoline::
     push af
-    ld   a, $03
+    ld   a, BANK(func_003_64CA)
     ld   [MBC3SelectBank], a
     pop  af
     call func_003_64CA

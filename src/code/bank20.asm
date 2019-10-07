@@ -16,7 +16,7 @@ EntityPointersTable::
 ._00 entity_pointer ArrowEntityHandler
 ._01 entity_pointer BoomerangEntityHandler
 ._02 entity_pointer BombEntityHandler
-._03 db $E3, $7B, $18 ; entity_pointer Entity03Handler
+._03 entity_pointer HookshotChainEntityHandler
 ._04 entity_pointer HookshotHitEntityHandler
 ._05 entity_pointer LiftableRockEntityHandler
 ._06 entity_pointer Entity06Handler

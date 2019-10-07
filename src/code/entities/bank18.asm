@@ -10238,9 +10238,10 @@ jr_018_7BD1:
     ret                                           ; $7BDE: $C9
 
     ld   de, $0F10                                ; $7BDF: $11 $10 $0F
-    ld   c, $FA                                   ; $7BE2: $0E $FA
-    ld   h, [hl]                                  ; $7BE4: $66
-    pop  bc                                       ; $7BE5: $C1
+    db   $0E                                      ; $7BE2: $0E
+
+HookshotChainEntityHandler::
+    ld   a, [wLinkPlayingOcarinaCountdown]        ; $7DBE3
     and  a                                        ; $7BE6: $A7
     jp   nz, label_018_7F08                       ; $7BE7: $C2 $08 $7F
 

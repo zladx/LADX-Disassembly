@@ -138,7 +138,7 @@ CatfishMawMacroHandler::
     call Func_024_7625                            ; $7619: $CD $25 $76
     ld   bc, Data_024_760B                        ; $761C: $01 $0B $76
     ld   de, Data_024_7612                        ; $761F: $11 $12 $76
-    jp   label_358B                               ; $7622: $C3 $8B $35
+    jp   Func_358B                               ; $7622: $C3 $8B $35
 
 Func_024_7625::
     dec  bc                                       ; $7625: $0B
@@ -161,7 +161,7 @@ TwoDoorsHouseMacroHandler::
     call Func_024_7625                            ; $764E: $CD $25 $76
     ld   bc, Data_024_762E                        ; $7651: $01 $2E $76
     ld   de, Data_024_763E                        ; $7654: $11 $3E $76
-    jp   label_358B                               ; $7657: $C3 $8B $35
+    jp   Func_358B                               ; $7657: $C3 $8B $35
 
 Data_024_765A::
     db $00, $01, $02, $10, $11, $12, $20, $21, $22, $FF
@@ -174,7 +174,7 @@ LargeHouseMacroHandler::
     call Func_024_7625                            ; $766E: $CD $25 $76
     ld   bc, Data_024_765A                        ; $7671: $01 $5A $76
     ld   de, Data_024_7664                        ; $7674: $11 $64 $76
-    jp   label_358B                               ; $7677: $C3 $8B $35
+    jp   Func_358B                               ; $7677: $C3 $8B $35
 
 Data_024_767A::
     db $00, $01, $02, $10, $11, $12, $FF
@@ -187,7 +187,7 @@ PalaceDoorMacroHandler::
     call Func_024_7625                            ; $7688: $CD $25 $76
     ld   bc, Data_024_767A                        ; $768B: $01 $7A $76
     ld   de, Data_024_7681                        ; $768E: $11 $81 $76
-    jp   label_358B                               ; $7691: $C3 $8B $35
+    jp   Func_358B                               ; $7691: $C3 $8B $35
 
 Data_024_7694::
     db $00, $01, $10, $11, $FF, $BB, $BC, $BD, $BE, $09, $09, $09, $09
@@ -204,7 +204,7 @@ StonePigHeadMacroHandler::
     ld   de, $769D                                ; $76B1: $11 $9D $76
 
 jr_024_76B4:
-    jp   label_358B                               ; $76B4: $C3 $8B $35
+    jp   Func_358B                               ; $76B4: $C3 $8B $35
 
 Data_024_76B7::
     db $00, $01, $10, $11, $FF
@@ -217,7 +217,7 @@ PalmTreeMacroHandler::
     call Func_024_7625                            ; $76C1: $CD $25 $76
     ld   bc, $76B7                                ; $76C4: $01 $B7 $76
     ld   de, $76BC                                ; $76C7: $11 $BC $76
-    jp   label_358B                               ; $76CA: $C3 $8B $35
+    jp   Func_358B                               ; $76CA: $C3 $8B $35
 
 Data_024_76CD::
     db $00, $01, $02, $10, $11, $12, $1F, $20
@@ -232,7 +232,7 @@ Func_024_76EA::
     call Func_024_7625                            ; $76EB: $CD $25 $76
     ld   bc, Data_024_76CD                        ; $76EE: $01 $CD $76
     ld   de, Data_024_76DC                        ; $76F1: $11 $DC $76
-    jp   label_358B                               ; $76F4: $C3 $8B $35
+    jp   Func_358B                               ; $76F4: $C3 $8B $35
 
 Data_024_76F7::
     db $00, $01, $02, $10, $11, $12, $FF
@@ -245,7 +245,7 @@ SmallHouseMacroHandler::
     call Func_024_7625                            ; $7705: $CD $25 $76
     ld   bc, Data_024_76F7                        ; $7708: $01 $F7 $76
     ld   de, Data_024_76FE                        ; $770B: $11 $FE $76
-    jp   label_358B                               ; $770E: $C3 $8B $35
+    jp   Func_358B                               ; $770E: $C3 $8B $35
 
 ; Palette data?
 Data_024_7711::

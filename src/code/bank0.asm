@@ -1768,7 +1768,7 @@ ItemFunction::
     ld   a, [$C19B]
     or   [hl]
     jr   nz, label_12ED
-    ld   a, [wProjectileCount]
+    ld   a, [wActiveProjectileCount]
     cp   $02
     jr   nc, label_12ED
     ld   a, $8E
@@ -1867,7 +1867,7 @@ UsePowerBracelet::
     ret
 
 UseBoomerang::
-    ld   a, [wProjectileCount]
+    ld   a, [wActiveProjectileCount]
     and  a
 
 label_1387::
@@ -1902,7 +1902,7 @@ ShootArrow::
     ld   a, [wIsShootingArrow]
     and  a
     ret  nz
-    ld   a, [wProjectileCount]
+    ld   a, [wActiveProjectileCount]
     cp   $02
     jr   nc, label_142E
     ld   a, $10
@@ -2151,7 +2151,7 @@ label_1535::
     call ClearLinkPositionIncrement
 
 label_1562::
-    ld   a, [wProjectileCount]
+    ld   a, [wActiveProjectileCount]
     and  a
     ret  nz
     ld   a, [$C5A9]
@@ -4197,15 +4197,15 @@ LoadTilemap15::
     ld   [MBC3SelectBank], a
     ld   hl, $57E0
     ld   de, $97F0
-    ld   bc, $0010
+    ld   bc, TILE_SIZE
     call CopyData
 
     ld   a, $12
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   hl, $7500
-    ld   de, $8000
-    ld   bc, $0040
+    ld   de, vTiles0
+    ld   bc, TILE_SIZE * 4
     call CopyData
 
     ld   de, $8D00
@@ -4218,9 +4218,10 @@ LoadTilemap1D::
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   hl, $5000
-    ld   de, $9000
-    ld   bc, $0800
+    ld   de, vTiles2
+    ld   bc, TILE_SIZE * $80
     call CopyData
+
     ld   a, $12
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4502,14 +4503,14 @@ LoadDungeonTiles::
     ld   hl, $7D00
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, label_2CF5
+    jr   z, .label_2CF5
     cp   MAP_CAVE_B
-    jr   c, label_2CF5
+    jr   c, .label_2CF5
     ld   a, $0C
     call SwitchAdjustedBank
     ld   hl, $4C00
 
-label_2CF5::
+.label_2CF5
     ld   de, $8C00
     ld   bc, $0300
     call CopyData
@@ -4618,29 +4619,28 @@ LoadTilemap11::
     call CopyData
     ld   a, $38
     call SwitchBank
+
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_2DC7
+    jr   nz, .else
     ld   hl, $5C00
-    jr   label_2DCA
-
-label_2DC7::
+    jr   .endIf
+.else
     ld   hl, $5800
+.endIf
 
-label_2DCA::
     ld   de, $8400
     ld   bc, $0400
     call CopyData
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_2DDD
+    jr   nz, .label_2DDD
     ld   hl, $6600
-    jr   label_2DE0
-
-label_2DDD::
+    jr   .label_2DE0
+.label_2DDD
     ld   hl, $6500
+.label_2DE0
 
-label_2DE0::
     ld   de, $8200
     ld   bc, $0100
     jp   CopyData
@@ -4652,6 +4652,7 @@ LoadTilemap0B::
     ld   de, $8F00
     ld   bc, $0800
     call CopyData
+
     ld   hl, $5000
     ld   de, $8200
     ld   bc, $0100
@@ -4659,20 +4660,20 @@ LoadTilemap0B::
 
 LoadTilemap14::
     ld   hl, $7000
-    jr   label_2E13
+    jr   CopyTilesToVTiles2
 
 LoadTilemap20::
     ld   hl, $7800
-    jr   label_2E13
+    jr   CopyTilesToVTiles2
 
 LoadTilemap12::
     ld   hl, $5800
 
-label_2E13::
+CopyTilesToVTiles2::
     ld   a, $10
     call SwitchAdjustedBank
-    ld   de, $9000
-    ld   bc, $0800
+    ld   de, vTiles2
+    ld   bc, TILE_SIZE * $80
     jp   CopyData
 
 LoadTilemap21::
@@ -4683,6 +4684,7 @@ LoadTilemap21::
     ld   de, $8C00
     ld   bc, $0400
     call CopyData
+
     ld   hl, $6800
     ld   de, $9000
     ld   bc, $0400
@@ -4695,6 +4697,7 @@ LoadTilemap13::
     ld   de, $8400
     ld   bc, $0400
     call CopyData
+
     ld   hl, $6000
     ld   de, $9000
     ld   bc, $0600
@@ -4922,14 +4925,13 @@ label_2FAD::
     ld   [MBC3SelectBank], a
     ldh  a, [$FF94]
     cp   $0F
-    jr   z, label_2FC6
+    jr   z, .return
     add  a, $40
     ld   h, a
     ld   l, $00
     ld   bc, $0200
     call CopyData
-
-label_2FC6::
+.return
     ret
 
 ; Copy two bytes from hl to de
@@ -6199,7 +6201,7 @@ SetBankForRoom::
     ret
 
 ; Load object or objects?
-label_354B::
+Func_354B::
     push hl
     push de
     ld   a, [bc]
@@ -6209,13 +6211,13 @@ label_354B::
     pop  de
     ld   a, [de]
     cp   $E1
-    jr   z, label_3560
+    jr   z, .label_3560
     cp   $E2
-    jr   z, label_3560
+    jr   z, .label_3560
     cp   $E3
-    jr   nz, label_357C
+    jr   nz, .label_357C
 
-label_3560::
+.label_3560
     push af
     push hl
     push de
@@ -6236,7 +6238,7 @@ label_3560::
     pop  hl
     pop  af
 
-label_357C::
+.label_357C
     ld   [hl], a
     call label_3500
     inc  de
@@ -6245,11 +6247,11 @@ label_357C::
     ld   a, [bc]
     and  a
     cp   $FF
-    jr   nz, label_354B
+    jr   nz, Func_354B
     pop  bc
     ret
 
-label_358B::
+Func_358B::
     push hl
     push de
     ld   a, [bc]
@@ -6259,13 +6261,13 @@ label_358B::
     pop  de
     ld   a, [de]
     cp   $E1
-    jr   z, label_35A0
+    jr   z, .label_35A0
     cp   $E2
-    jr   z, label_35A0
+    jr   z, .label_35A0
     cp   $E3
-    jr   nz, label_35BC
+    jr   nz, .label_35BC
 
-label_35A0::
+.label_35A0
     push af
     push hl
     push de
@@ -6286,7 +6288,7 @@ label_35A0::
     pop  hl
     pop  af
 
-label_35BC::
+.label_35BC
     ld   [hl], a
     call label_35CB
     inc  de
@@ -6295,7 +6297,7 @@ label_35BC::
     ld   a, [bc]
     and  a
     cp   $FF
-    jr   nz, label_358B
+    jr   nz, Func_358B
     pop  bc
     ret
 
@@ -6303,13 +6305,13 @@ label_35CB::
     cp   $04
     ret  z
     cp   $09
-    jr   nz, label_35D9
+    jr   nz, .label_35D9
     ldh  a, [hMapRoom]
     cp   $97
     ret  nz
     jr   label_35E8
 
-label_35D9::
+.label_35D9
     cp   $E1
     jr   nz, label_35E8
     ldh  a, [hMapRoom]
@@ -6347,7 +6349,7 @@ LoadObject_KeyDoorTop::
     call label_35EE
     ld   bc, data_37E1
     ld   de, data_35F8
-    jp   label_354B
+    jp   Func_354B
 
 data_3613::
     db   $2F, $30
@@ -6363,7 +6365,7 @@ LoadObject_KeyDoorBottom::
     call label_35EE
     ld   bc, data_37E1
     ld   de, data_3613
-    jp   label_354B
+    jp   Func_354B
 
 data_362E::
     db   $31, $32
@@ -6379,7 +6381,7 @@ LoadObject_KeyDoorLeft::
     call label_35EE
     ld   bc, data_37E4
     ld   de, data_362E
-    jp   label_354B
+    jp   Func_354B
 
 data_3649::
     db   $33, $34
@@ -6395,7 +6397,7 @@ LoadObject_KeyDoorRight::
     call label_35EE
     ld   bc, data_37E4
     ld   de, data_3649
-    jp   label_354B
+    jp   Func_354B
 
 LoadObject_ClosedDoorTop::
     ld   e, $04
@@ -6443,7 +6445,7 @@ LoadObject_OpenDoorTop::
     call label_35EE
     ld   bc, data_37E1
     ld   de, data_36B0
-    jp   label_354B
+    jp   Func_354B
 
 ; Set hRoomStatus depending on the map and room
 label_36C4::
@@ -6483,7 +6485,7 @@ LoadObject_OpenDoorBottom::
     call label_35EE
     ld   bc, data_37E1
     ld   de, data_36E8
-    jp   label_354B
+    jp   Func_354B
 
 data_36FC::
     db 9, $A
@@ -6495,7 +6497,7 @@ LoadObject_OpenDoorLeft::
     call label_35EE
     ld   bc, data_37E4
     ld   de, data_36FC
-    jp   label_354B
+    jp   Func_354B
 
 data_3710::
     db $B, $C
@@ -6507,7 +6509,7 @@ LoadObject_OpenDoorRight::
     call label_35EE
     ld   bc, data_37E4
     ld   de, data_3710
-    jp   label_354B
+    jp   Func_354B
 
 data_3724::
     db $A4, $A5
@@ -6522,7 +6524,7 @@ LoadObject_BossDoor::
     call label_35EE
     ld   bc, data_37E1
     ld   de, data_3724
-    jp   label_354B
+    jp   Func_354B
 
 func_373F::
     ld   d, $00
@@ -6553,7 +6555,7 @@ LoadObject_StairsDoor::
     call label_35EE                               ; $375F: $CD $EE $35
     ld   bc, data_37E4                            ; $3762: $01 $E4 $37
     ld   de, data_375C                            ; $3765: $11 $5C $37
-    jp   label_354B                               ; $3768: $C3 $4B $35
+    jp   Func_354B                               ; $3768: $C3 $4B $35
 
 data_376B::
     db   $B1, $B2
@@ -6563,7 +6565,7 @@ LoadObject_FlipWall::
     call label_35EE                               ; $376E: $CD $EE $35
     ld   bc, data_37E1                            ; $3771: $01 $E1 $37
     ld   de, data_376B                            ; $3774: $11 $6B $37
-    jp   label_354B                               ; $3777: $C3 $4B $35
+    jp   Func_354B                               ; $3777: $C3 $4B $35
 
 data_377A::
     db   $45, $46
@@ -6573,7 +6575,7 @@ LoadObject_OneWayArrow::
     call label_35EE                               ; $377D: $CD $EE $35
     ld   bc, data_37E1                            ; $3780: $01 $E1 $37
     ld   de, data_377A                            ; $3783: $11 $7A $37
-    jp   label_354B                               ; $3786: $C3 $4B $35
+    jp   Func_354B                               ; $3786: $C3 $4B $35
 
 data_3789::
     db   0, 1, 2, 3, $10, $11, $12, $13, $20, $21, $22, $23, $FF
@@ -6588,7 +6590,7 @@ LoadObject_DungeonEntrance::
     call label_35EE                               ; $37A8: $CD $EE $35
     ld   bc, data_3789                            ; $37AB: $01 $89 $37
     ld   de, data_3796                            ; $37AE: $11 $96 $37
-    jp   label_354B                               ; $37B1: $C3 $4B $35
+    jp   Func_354B                               ; $37B1: $C3 $4B $35
 
 data_37B4::
     db   $C1, $C2
@@ -6625,7 +6627,7 @@ LoadObject_IndoorEntrance::
     ld   bc, data_37E1
     ld   de, data_37B4
     ; tail-call jump
-    jp   label_354B
+    jp   Func_354B
 
 data_37E1::
     db   $00
@@ -6932,10 +6934,10 @@ AnimateEntities::
     ldh  a, [hMapId]
     cp   MAP_CAVE_B
     ldh  a, [hFrameCounter]
-    jr   c, label_39C1
+    jr   c, .label_39C1
     xor  a
 
-label_39C1::
+.label_39C1
     and  $03
     ld   e, a
     ld   d, $00
@@ -6948,10 +6950,10 @@ label_39C1::
     ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
     and  a
-    jr   nz, label_39E3
+    jr   nz, .label_39E3
     ld   [$C1AD], a
 
-label_39E3::
+.label_39E3
     ld   a, BANK(Func_020_6352)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
@@ -6987,7 +6989,7 @@ label_39E3::
     cp   $FF
     jr   nz, .loop
 
-AnimateEntity_return::
+.return:
     ret
 
 label_3A0A::
@@ -7050,15 +7052,15 @@ AnimateEntity::
     cp   ENTITY_STATE_ACTIVE
     jp   z, ExecuteActiveEntityHandler
     JP_TABLE
-._00 dw AnimateEntity_return
-._01 dw EntityState1Handler
-._02 dw EntityState2Handler
+._00 dw AnimateEntities.return
+._01 dw EntityDeathHandler
+._02 dw EntityFallHandler
 ._03 dw EntityDestructionHandler
-._04 dw EntityState4Handler
+._04 dw EntityInitHandler
 ._05 dw ExecuteActiveEntityHandler
-._06 dw EntityThrownHandler
+._06 dw EntityStunnedHandler
 ._07 dw EntityLiftedHandler
-._08 dw EntityState8Handler
+._08 dw EntityThrownHandler
 
 ; Execute active entity handler, then return to bank 3
 ExecuteActiveEntityHandler_trampoline::

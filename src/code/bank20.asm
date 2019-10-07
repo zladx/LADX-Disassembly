@@ -1882,7 +1882,7 @@ jr_020_4B1E:
 func_20_4B1F::
     xor  a                                        ; $4B1F: $AF
     ld   [wHasPlacedBomb], a                      ; $4B20: $EA $4E $C1
-    ld   [wProjectileCount], a                    ; $4B23: $EA $4D $C1
+    ld   [wActiveProjectileCount], a                    ; $4B23: $EA $4D $C1
     ld   [$C1A4], a                               ; $4B26: $EA $A4 $C1
     ld   [wC15C], a                               ; $4B29: $EA $5C $C1
     ld   [$C1AE], a                               ; $4B2C: $EA $AE $C1

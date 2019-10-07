@@ -195,9 +195,10 @@ wPegasusBootsChargeMeter:: ; C14B
 wIsShootingArrow:: ; C14C
   ds 1
 
-wProjectileCount:: ; C14D
+wActiveProjectileCount:: ; C14D
   ; Link's active projectiles.
   ; If ≥0x02, Link cannot shoot any more projectiles.
+  ; Re-initialized to 0 at the end of each frame.
   ds 1
 
 wHasPlacedBomb:: ; C14E

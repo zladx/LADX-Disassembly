@@ -375,11 +375,15 @@ wEntitiesSpeedYTable:: ; C250
   ds $10
 
 ; Unlabeled entity attributes table
+; Related to speed X: many code occurence do somethinkg like:
+;   [wC260 + entity index] = [wC260 + entity index] + (EntitySpeedX * 16)
 wC260 equ $C260
   ds $10
 
-; Unlabeled entity attributes table
 wC270 equ $C270
+; Unlabeled entity attributes table
+; Related to speed Y: many code occurence do somethinkg like:
+;   [wC260 + entity index] = [wC260 + entity index] + (EntitySpeedY * 16)
   ds $10
 
 wEntitiesStateTable:: ; C280
@@ -401,6 +405,11 @@ wEntitiesCollisionsTable:: ; C2A0
   ; 4: collision on the top
   ds $10
 
+; Unknown. Maybe entity-specific IA state?
+;
+; Octorock: enumerates 1-2-3-0
+; Moblin: enumerates 1-2-3-0
+; Cucoo: stays to 0
 wEntitiesUnknownTableB:: ; C2B0
   ds $10
 

@@ -340,43 +340,19 @@ wBombArrowCooldown:: ; C1C0
 ; Unlabeled
   ds $3F
 
+; ---------------------------------------------------------
+;
+; Entities state
+;
+;----------------------------------------------------------
+
 wEntitiesPosXTable:: ; C200
   ; X position of visible entities
-wEntity0PosX:: ds 1 ; C200
-wEntity1PosX:: ds 1 ; C201
-wEntity2PosX:: ds 1 ; C202
-wEntity3PosX:: ds 1 ; C203
-wEntity4PosX:: ds 1 ; C204
-wEntity5PosX:: ds 1 ; C205
-wEntity6PosX:: ds 1 ; C206
-wEntity7PosX:: ds 1 ; C207
-wEntity8PosX:: ds 1 ; C208
-wEntity9PosX:: ds 1 ; C209
-wEntityAPosX:: ds 1 ; C20A
-wEntityBPosX:: ds 1 ; C20B
-wEntityCPosX:: ds 1 ; C20C
-wEntityDPosX:: ds 1 ; C20D
-wEntityEPosX:: ds 1 ; C20E
-wEntityFPosX:: ds 1 ; C20F
+  ds $10
 
 wEntitiesPosYTable:: ; C210
   ; Y position of visible entities
-wEntity0PosY:: ds 1 ; C210
-wEntity1PosY:: ds 1 ; C211
-wEntity2PosY:: ds 1 ; C212
-wEntity3PosY:: ds 1 ; C213
-wEntity4PosY:: ds 1 ; C214
-wEntity5PosY:: ds 1 ; C215
-wEntity6PosY:: ds 1 ; C216
-wEntity7PosY:: ds 1 ; C217
-wEntity8PosY:: ds 1 ; C218
-wEntity9PosY:: ds 1 ; C219
-wEntityAPosY:: ds 1 ; C21A
-wEntityBPosY:: ds 1 ; C21B
-wEntityCPosY:: ds 1 ; C21C
-wEntityDPosY:: ds 1 ; C21D
-wEntityEPosY:: ds 1 ; C21E
-wEntityFPosY:: ds 1 ; C21F
+  ds $10
 
 wEntitiesPosXSignTable:: ; C220
   ; Controls the sign of the X position
@@ -392,41 +368,11 @@ wEntitiesPosYSignTable:: ; C230
 
 wEntitiesSpeedXTable:: ; C240
   ; X Velocity of visible entities
-wEntity0SpeedX:: ds 1 ; C240
-wEntity1SpeedX:: ds 1 ; C241
-wEntity2SpeedX:: ds 1 ; C242
-wEntity3SpeedX:: ds 1 ; C243
-wEntity4SpeedX:: ds 1 ; C244
-wEntity5SpeedX:: ds 1 ; C245
-wEntity6SpeedX:: ds 1 ; C246
-wEntity7SpeedX:: ds 1 ; C247
-wEntity8SpeedX:: ds 1 ; C248
-wEntity9SpeedX:: ds 1 ; C249
-wEntityASpeedX:: ds 1 ; C24A
-wEntityBSpeedX:: ds 1 ; C24B
-wEntityCSpeedX:: ds 1 ; C24C
-wEntityDSpeedX:: ds 1 ; C24D
-wEntityESpeedX:: ds 1 ; C24E
-wEntityFSpeedX:: ds 1 ; C24F
+  ds $10
 
 wEntitiesSpeedYTable:: ; C250
   ; X Velocity of visible entities
-wEntity0SpeedY:: ds 1 ; C250
-wEntity1SpeedY:: ds 1 ; C251
-wEntity2SpeedY:: ds 1 ; C252
-wEntity3SpeedY:: ds 1 ; C253
-wEntity4SpeedY:: ds 1 ; C254
-wEntity5SpeedY:: ds 1 ; C255
-wEntity6SpeedY:: ds 1 ; C256
-wEntity7SpeedY:: ds 1 ; C257
-wEntity8SpeedY:: ds 1 ; C258
-wEntity9SpeedY:: ds 1 ; C259
-wEntityASpeedY:: ds 1 ; C25A
-wEntityBSpeedY:: ds 1 ; C25B
-wEntityCSpeedY:: ds 1 ; C25C
-wEntityDSpeedY:: ds 1 ; C25D
-wEntityESpeedY:: ds 1 ; C25E
-wEntityFSpeedY:: ds 1 ; C25F
+  ds $10
 
 ; Unlabeled entity attributes table
 wC260 equ $C260
@@ -439,22 +385,7 @@ wC270 equ $C270
 wEntitiesStateTable:: ; C280
   ; State of visible entities
   ; See ENTITY_STATE_* constants
-wEntity0State:: ds 1 ; C280
-wEntity1State:: ds 1 ; C281
-wEntity2State:: ds 1 ; C282
-wEntity3State:: ds 1 ; C283
-wEntity4State:: ds 1 ; C284
-wEntity5State:: ds 1 ; C285
-wEntity6State:: ds 1 ; C286
-wEntity7State:: ds 1 ; C287
-wEntity8State:: ds 1 ; C288
-wEntity9State:: ds 1 ; C289
-wEntityAState:: ds 1 ; C28A
-wEntityBState:: ds 1 ; C28B
-wEntityCState:: ds 1 ; C28C
-wEntityDState:: ds 1 ; C28D
-wEntityEState:: ds 1 ; C28E
-wEntityFState:: ds 1 ; C28F
+  ds $10
 
 wEntitiesWalkingTable:: ; C290
   ; Indicate if the designated entity is walking (1) or standing in place (0).

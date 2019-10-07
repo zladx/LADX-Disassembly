@@ -171,7 +171,7 @@ jr_015_40F7:
     ld   b, c                                     ; $4110: $41
     daa                                           ; $4111: $27
     ld   b, c                                     ; $4112: $41
-    ld   hl, wEntity0PosY                         ; $4113: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4113: $21 $10 $C2
     add  hl, bc                                   ; $4116: $09
     ld   a, [hl]                                  ; $4117: $7E
     ld   hl, wEntitiesUnknownTableC               ; $4118: $21 $C0 $C2
@@ -203,7 +203,7 @@ jr_015_40F7:
     ld   hl, wEntitiesUnknownTableC               ; $413F: $21 $C0 $C2
     add  hl, bc                                   ; $4142: $09
     ld   a, [hl]                                  ; $4143: $7E
-    ld   hl, wEntity0PosY                         ; $4144: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4144: $21 $10 $C2
     add  hl, bc                                   ; $4147: $09
     cp   [hl]                                     ; $4148: $BE
     jr   z, jr_015_414C                           ; $4149: $28 $01
@@ -217,7 +217,7 @@ jr_015_414D:
     ld   hl, wEntitiesUnknownTableB               ; $414D: $21 $B0 $C2
     add  hl, bc                                   ; $4150: $09
     ld   a, [hl]                                  ; $4151: $7E
-    ld   hl, wEntity0PosY                         ; $4152: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4152: $21 $10 $C2
     add  hl, bc                                   ; $4155: $09
     cp   [hl]                                     ; $4156: $BE
     jr   z, jr_015_416B                           ; $4157: $28 $12
@@ -230,7 +230,7 @@ jr_015_414D:
     jr   c, jr_015_416F                           ; $4161: $38 $0C
 
     ld   [hl], b                                  ; $4163: $70
-    ld   hl, wEntity0PosY                         ; $4164: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4164: $21 $10 $C2
     add  hl, bc                                   ; $4167: $09
     inc  [hl]                                     ; $4168: $34
     jr   jr_015_416F                              ; $4169: $18 $04
@@ -319,7 +319,7 @@ jr_015_41C9:
     ld   b, c                                     ; $41DA: $41
     pop  af                                       ; $41DB: $F1
     ld   b, c                                     ; $41DC: $41
-    ld   hl, wEntity0PosY                         ; $41DD: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $41DD: $21 $10 $C2
     add  hl, bc                                   ; $41E0: $09
     ld   a, [hl]                                  ; $41E1: $7E
     ld   hl, wEntitiesUnknownTableC               ; $41E2: $21 $C0 $C2
@@ -351,7 +351,7 @@ jr_015_41C9:
     ld   hl, wEntitiesUnknownTableC               ; $4209: $21 $C0 $C2
     add  hl, bc                                   ; $420C: $09
     ld   a, [hl]                                  ; $420D: $7E
-    ld   hl, wEntity0PosY                         ; $420E: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $420E: $21 $10 $C2
     add  hl, bc                                   ; $4211: $09
     cp   [hl]                                     ; $4212: $BE
     jr   z, jr_015_4216                           ; $4213: $28 $01
@@ -365,7 +365,7 @@ jr_015_4217:
     ld   hl, wEntitiesUnknownTableB               ; $4217: $21 $B0 $C2
     add  hl, bc                                   ; $421A: $09
     ld   a, [hl]                                  ; $421B: $7E
-    ld   hl, wEntity0PosY                         ; $421C: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $421C: $21 $10 $C2
     add  hl, bc                                   ; $421F: $09
     cp   [hl]                                     ; $4220: $BE
     jr   z, jr_015_4235                           ; $4221: $28 $12
@@ -378,7 +378,7 @@ jr_015_4217:
     jr   c, jr_015_4239                           ; $422B: $38 $0C
 
     ld   [hl], b                                  ; $422D: $70
-    ld   hl, wEntity0PosY                         ; $422E: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $422E: $21 $10 $C2
     add  hl, bc                                   ; $4231: $09
     dec  [hl]                                     ; $4232: $35
     jr   jr_015_4239                              ; $4233: $18 $04
@@ -401,7 +401,7 @@ jr_015_4239:
     ld   b, d                                     ; $424C: $42
     ld   h, e                                     ; $424D: $63
     ld   b, d                                     ; $424E: $42
-    ld   hl, wEntity0PosX                         ; $424F: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $424F: $21 $00 $C2
     add  hl, bc                                   ; $4252: $09
     ld   a, [hl]                                  ; $4253: $7E
     ld   hl, wEntitiesUnknownTableC               ; $4254: $21 $C0 $C2
@@ -433,7 +433,7 @@ jr_015_4239:
     ld   hl, wEntitiesUnknownTableC               ; $427B: $21 $C0 $C2
     add  hl, bc                                   ; $427E: $09
     ld   a, [hl]                                  ; $427F: $7E
-    ld   hl, wEntity0PosX                         ; $4280: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4280: $21 $00 $C2
     add  hl, bc                                   ; $4283: $09
     cp   [hl]                                     ; $4284: $BE
     jr   z, jr_015_4288                           ; $4285: $28 $01
@@ -447,7 +447,7 @@ jr_015_4289:
     ld   hl, wEntitiesUnknownTableB               ; $4289: $21 $B0 $C2
     add  hl, bc                                   ; $428C: $09
     ld   a, [hl]                                  ; $428D: $7E
-    ld   hl, wEntity0PosX                         ; $428E: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $428E: $21 $00 $C2
     add  hl, bc                                   ; $4291: $09
     cp   [hl]                                     ; $4292: $BE
     jr   z, jr_015_42A7                           ; $4293: $28 $12
@@ -460,7 +460,7 @@ jr_015_4289:
     jr   c, jr_015_42AB                           ; $429D: $38 $0C
 
     ld   [hl], b                                  ; $429F: $70
-    ld   hl, wEntity0PosX                         ; $42A0: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $42A0: $21 $00 $C2
     add  hl, bc                                   ; $42A3: $09
     inc  [hl]                                     ; $42A4: $34
     jr   jr_015_42AB                              ; $42A5: $18 $04
@@ -483,7 +483,7 @@ jr_015_42AB:
     ld   b, d                                     ; $42BE: $42
     push de                                       ; $42BF: $D5
     ld   b, d                                     ; $42C0: $42
-    ld   hl, wEntity0PosX                         ; $42C1: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $42C1: $21 $00 $C2
     add  hl, bc                                   ; $42C4: $09
     ld   a, [hl]                                  ; $42C5: $7E
     ld   hl, wEntitiesUnknownTableC               ; $42C6: $21 $C0 $C2
@@ -515,7 +515,7 @@ jr_015_42AB:
     ld   hl, wEntitiesUnknownTableC               ; $42ED: $21 $C0 $C2
     add  hl, bc                                   ; $42F0: $09
     ld   a, [hl]                                  ; $42F1: $7E
-    ld   hl, wEntity0PosX                         ; $42F2: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $42F2: $21 $00 $C2
     add  hl, bc                                   ; $42F5: $09
     cp   [hl]                                     ; $42F6: $BE
     jr   z, jr_015_42FA                           ; $42F7: $28 $01
@@ -529,7 +529,7 @@ jr_015_42FB:
     ld   hl, wEntitiesUnknownTableB               ; $42FB: $21 $B0 $C2
     add  hl, bc                                   ; $42FE: $09
     ld   a, [hl]                                  ; $42FF: $7E
-    ld   hl, wEntity0PosX                         ; $4300: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4300: $21 $00 $C2
     add  hl, bc                                   ; $4303: $09
     cp   [hl]                                     ; $4304: $BE
     jr   z, jr_015_4319                           ; $4305: $28 $12
@@ -542,7 +542,7 @@ jr_015_42FB:
     jr   c, jr_015_431D                           ; $430F: $38 $0C
 
     ld   [hl], b                                  ; $4311: $70
-    ld   hl, wEntity0PosX                         ; $4312: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4312: $21 $00 $C2
     add  hl, bc                                   ; $4315: $09
     dec  [hl]                                     ; $4316: $35
     jr   jr_015_431D                              ; $4317: $18 $04
@@ -620,10 +620,10 @@ jr_015_4364:
     rla                                           ; $438C: $17
     and  $70                                      ; $438D: $E6 $70
     add  $18                                      ; $438F: $C6 $18
-    ld   hl, wEntity0PosX                         ; $4391: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4391: $21 $00 $C2
     add  hl, de                                   ; $4394: $19
     ld   [hl], a                                  ; $4395: $77
-    ld   hl, wEntity0PosY                         ; $4396: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4396: $21 $10 $C2
     add  hl, de                                   ; $4399: $19
     ld   [hl], $10                                ; $439A: $36 $10
     ld   hl, $C340                                ; $439C: $21 $40 $C3
@@ -700,7 +700,7 @@ jr_015_43DC:
     ld   hl, $43BE                                ; $4400: $21 $BE $43
     add  hl, de                                   ; $4403: $19
     ld   a, [hl]                                  ; $4404: $7E
-    ld   hl, wEntity0SpeedX                       ; $4405: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4405: $21 $40 $C2
     add  hl, bc                                   ; $4408: $09
     ld   [hl], a                                  ; $4409: $77
     call GetRandomByte                            ; $440A: $CD $0D $28
@@ -714,7 +714,7 @@ jr_015_4411:
 
 jr_015_4415:
     ld   a, [hl]                                  ; $4415: $7E
-    ld   hl, wEntity0SpeedY                       ; $4416: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4416: $21 $50 $C2
     add  hl, bc                                   ; $4419: $09
     ld   [hl], a                                  ; $441A: $77
     call GetRandomByte                            ; $441B: $CD $0D $28
@@ -746,7 +746,7 @@ jr_015_4430:
     ld   d, b                                     ; $4444: $50
 
 jr_015_4445:
-    ld   hl, wEntity0State                        ; $4445: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                        ; $4445: $21 $80 $C2
     add  hl, de                                   ; $4448: $19
     ld   a, [hl]                                  ; $4449: $7E
     cp   $05                                      ; $444A: $FE $05
@@ -764,7 +764,7 @@ jr_015_4445:
     cp   $08                                      ; $445C: $FE $08
     jr   nz, jr_015_448C                          ; $445E: $20 $2C
 
-    ld   hl, wEntity0PosX                         ; $4460: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4460: $21 $00 $C2
     add  hl, de                                   ; $4463: $19
     ldh  a, [wActiveEntityPosX]                   ; $4464: $F0 $EE
     sub  [hl]                                     ; $4466: $96
@@ -772,7 +772,7 @@ jr_015_4445:
     cp   $10                                      ; $4469: $FE $10
     jr   nc, jr_015_448C                          ; $446B: $30 $1F
 
-    ld   hl, wEntity0PosY                         ; $446D: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $446D: $21 $10 $C2
     add  hl, de                                   ; $4470: $19
     ldh  a, [wActiveEntityPosY]                   ; $4471: $F0 $EC
     sub  [hl]                                     ; $4473: $96
@@ -867,7 +867,7 @@ jr_015_44D7:
     ld   b, l                                     ; $44E9: $45
     ld   d, e                                     ; $44EA: $53
     ld   b, l                                     ; $44EB: $45
-    ld   hl, wEntity0SpeedX                       ; $44EC: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $44EC: $21 $40 $C2
     add  hl, bc                                   ; $44EF: $09
     ld   [hl], $08                                ; $44F0: $36 $08
     call GetEntityTransitionCountdown             ; $44F2: $CD $05 $0C
@@ -888,7 +888,7 @@ jr_015_44D7:
     add  hl, bc                                   ; $4511: $09
     ld   [hl], $18                                ; $4512: $36 $18
     call IncrementEntityWalkingAttr               ; $4514: $CD $12 $3B
-    ld   hl, wEntity0SpeedX                       ; $4517: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4517: $21 $40 $C2
     add  hl, bc                                   ; $451A: $09
     sla  [hl]                                     ; $451B: $CB $26
 
@@ -910,7 +910,7 @@ jr_015_4530:
     and  $03                                      ; $4535: $E6 $03
     jr   z, jr_015_4541                           ; $4537: $28 $08
 
-    ld   hl, wEntity0SpeedX                       ; $4539: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4539: $21 $40 $C2
     add  hl, bc                                   ; $453C: $09
     ld   a, [hl]                                  ; $453D: $7E
     cpl                                           ; $453E: $2F
@@ -918,7 +918,7 @@ jr_015_4530:
     ld   [hl], a                                  ; $4540: $77
 
 jr_015_4541:
-    ld   hl, wEntity0SpeedX                       ; $4541: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4541: $21 $40 $C2
     add  hl, bc                                   ; $4544: $09
     ld   e, $06                                   ; $4545: $1E $06
     ld   a, [hl]                                  ; $4547: $7E
@@ -951,7 +951,7 @@ jr_015_454E:
     and  $7F                                      ; $4571: $E6 $7F
     add  $50                                      ; $4573: $C6 $50
     ld   [hl], a                                  ; $4575: $77
-    ld   hl, wEntity0SpeedX                       ; $4576: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4576: $21 $40 $C2
     add  hl, bc                                   ; $4579: $09
     sra  [hl]                                     ; $457A: $CB $2E
     ld   hl, $C340                                ; $457C: $21 $40 $C3
@@ -963,7 +963,7 @@ jr_015_454E:
 
 jr_015_4588:
     ld   e, $01                                   ; $4588: $1E $01
-    ld   hl, wEntity0SpeedX                       ; $458A: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $458A: $21 $40 $C2
     add  hl, bc                                   ; $458D: $09
     ld   a, [hl]                                  ; $458E: $7E
     and  $80                                      ; $458F: $E6 $80
@@ -1319,26 +1319,26 @@ jr_015_475C:
     add  hl, bc                                   ; $479B: $09
     ldh  a, [hScratch0]                           ; $479C: $F0 $D7
     add  [hl]                                     ; $479E: $86
-    ld   hl, wEntity0PosX                         ; $479F: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $479F: $21 $00 $C2
     add  hl, de                                   ; $47A2: $19
     ld   [hl], a                                  ; $47A3: $77
     ld   hl, $4778                                ; $47A4: $21 $78 $47
     add  hl, bc                                   ; $47A7: $09
     ldh  a, [hScratch1]                           ; $47A8: $F0 $D8
     add  [hl]                                     ; $47AA: $86
-    ld   hl, wEntity0PosY                         ; $47AB: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $47AB: $21 $10 $C2
     add  hl, de                                   ; $47AE: $19
     ld   [hl], a                                  ; $47AF: $77
     ld   hl, $477A                                ; $47B0: $21 $7A $47
     add  hl, bc                                   ; $47B3: $09
     ld   a, [hl]                                  ; $47B4: $7E
-    ld   hl, wEntity0SpeedX                       ; $47B5: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $47B5: $21 $40 $C2
     add  hl, de                                   ; $47B8: $19
     ld   [hl], a                                  ; $47B9: $77
     ld   hl, $477C                                ; $47BA: $21 $7C $47
     add  hl, bc                                   ; $47BD: $09
     ld   a, [hl]                                  ; $47BE: $7E
-    ld   hl, wEntity0SpeedY                       ; $47BF: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $47BF: $21 $50 $C2
     add  hl, de                                   ; $47C2: $19
     ld   [hl], a                                  ; $47C3: $77
     ldh  a, [hScratch2]                           ; $47C4: $F0 $D9
@@ -1434,7 +1434,7 @@ jr_015_483C:
     ld   hl, $483D                                ; $484F: $21 $3D $48
     add  hl, de                                   ; $4852: $19
     ld   a, [hl]                                  ; $4853: $7E
-    ld   hl, wEntity0SpeedX                       ; $4854: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4854: $21 $40 $C2
     add  hl, bc                                   ; $4857: $09
     ld   [hl], a                                  ; $4858: $77
     jp   IncrementEntityWalkingAttr               ; $4859: $C3 $12 $3B
@@ -1475,7 +1475,7 @@ jr_015_487E:
     ld   [$C157], a                               ; $488D: $EA $57 $C1
     ld   a, $0B                                   ; $4890: $3E $0B
     ldh  [hJingle], a                             ; $4892: $E0 $F2
-    ld   hl, wEntity0SpeedX                       ; $4894: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4894: $21 $40 $C2
     add  hl, bc                                   ; $4897: $09
     sra  [hl]                                     ; $4898: $CB $2E
     sra  [hl]                                     ; $489A: $CB $2E
@@ -1596,7 +1596,7 @@ func_015_4928:
     pop  bc                                       ; $494A: $C1
     ret                                           ; $494B: $C9
 
-    ld   hl, wEntity0SpeedX                       ; $494C: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $494C: $21 $40 $C2
     add  hl, bc                                   ; $494F: $09
     ld   a, [hl]                                  ; $4950: $7E
     and  $FE                                      ; $4951: $E6 $FE
@@ -1608,7 +1608,7 @@ func_015_4928:
     jp   IncrementEntityWalkingAttr               ; $495D: $C3 $12 $3B
 
 jr_015_4960:
-    ld   hl, wEntity0SpeedX                       ; $4960: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4960: $21 $40 $C2
     add  hl, bc                                   ; $4963: $09
     ld   a, [hl]                                  ; $4964: $7E
     and  $80                                      ; $4965: $E6 $80
@@ -1653,7 +1653,7 @@ jr_015_4990:
     call IncrementEntityWalkingAttr               ; $499C: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $499F: $CD $05 $0C
     ld   [hl], $60                                ; $49A2: $36 $60
-    ld   hl, wEntity0SpeedX                       ; $49A4: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $49A4: $21 $40 $C2
     add  hl, bc                                   ; $49A7: $09
     ld   a, [hl]                                  ; $49A8: $7E
     ldh  [hLinkPositionXIncrement], a             ; $49A9: $E0 $9A
@@ -2150,11 +2150,11 @@ jr_015_4BD0:
     jr   c, jr_015_4C49                           ; $4C13: $38 $34
 
     ldh  a, [hScratch0]                           ; $4C15: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $4C17: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4C17: $21 $00 $C2
     add  hl, de                                   ; $4C1A: $19
     ld   [hl], a                                  ; $4C1B: $77
     ldh  a, [hScratch1]                           ; $4C1C: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $4C1E: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4C1E: $21 $10 $C2
     add  hl, de                                   ; $4C21: $19
     ld   [hl], a                                  ; $4C22: $77
     ld   hl, wEntitiesUnknownTableB               ; $4C23: $21 $B0 $C2
@@ -2168,13 +2168,13 @@ jr_015_4BD0:
     ldh  a, [hScratch1]                           ; $4C30: $F0 $D8
     cpl                                           ; $4C32: $2F
     inc  a                                        ; $4C33: $3C
-    ld   hl, wEntity0SpeedX                       ; $4C34: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4C34: $21 $40 $C2
     add  hl, bc                                   ; $4C37: $09
     ld   [hl], a                                  ; $4C38: $77
     ldh  a, [hScratch0]                           ; $4C39: $F0 $D7
     cpl                                           ; $4C3B: $2F
     inc  a                                        ; $4C3C: $3C
-    ld   hl, wEntity0SpeedY                       ; $4C3D: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4C3D: $21 $50 $C2
     add  hl, bc                                   ; $4C40: $09
     ld   [hl], a                                  ; $4C41: $77
     ld   hl, wEntitiesTransitionCountdownTable    ; $4C42: $21 $E0 $C2
@@ -2205,13 +2205,13 @@ jr_015_4C49:
     ld   hl, $4BD9                                ; $4C6B: $21 $D9 $4B
     add  hl, de                                   ; $4C6E: $19
     ld   a, [hl]                                  ; $4C6F: $7E
-    ld   hl, wEntity0SpeedX                       ; $4C70: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4C70: $21 $40 $C2
     add  hl, bc                                   ; $4C73: $09
     ld   [hl], a                                  ; $4C74: $77
     ld   hl, $4BD7                                ; $4C75: $21 $D7 $4B
     add  hl, de                                   ; $4C78: $19
     ld   a, [hl]                                  ; $4C79: $7E
-    ld   hl, wEntity0SpeedY                       ; $4C7A: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4C7A: $21 $50 $C2
     add  hl, bc                                   ; $4C7D: $09
     ld   [hl], a                                  ; $4C7E: $77
 
@@ -2297,7 +2297,7 @@ jr_015_4CED:
     and  $03                                      ; $4CF8: $E6 $03
     jr   z, jr_015_4D03                           ; $4CFA: $28 $07
 
-    ld   hl, wEntity0SpeedX                       ; $4CFC: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4CFC: $21 $40 $C2
     call func_015_4D0F                            ; $4CFF: $CD $0F $4D
     ret  c                                        ; $4D02: $D8
 
@@ -2308,7 +2308,7 @@ jr_015_4D03:
     and  $0C                                      ; $4D08: $E6 $0C
     jr   z, jr_015_4D39                           ; $4D0A: $28 $2D
 
-    ld   hl, wEntity0SpeedY                       ; $4D0C: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4D0C: $21 $50 $C2
 
 func_015_4D0F:
     add  hl, bc                                   ; $4D0F: $09
@@ -2385,18 +2385,18 @@ jr_015_4D5B:
     ld   a, $12                                   ; $4D77: $3E $12
     ldh  [hNoiseSfx], a                           ; $4D79: $E0 $F4
     ldh  a, [hScratch0]                           ; $4D7B: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $4D7D: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4D7D: $21 $00 $C2
     add  hl, de                                   ; $4D80: $19
     ld   [hl], a                                  ; $4D81: $77
     ldh  a, [hScratch1]                           ; $4D82: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $4D84: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4D84: $21 $10 $C2
     add  hl, de                                   ; $4D87: $19
     add  $04                                      ; $4D88: $C6 $04
     ld   [hl], a                                  ; $4D8A: $77
     ld   hl, wEntitiesUnknownTableB               ; $4D8B: $21 $B0 $C2
     add  hl, de                                   ; $4D8E: $19
     inc  [hl]                                     ; $4D8F: $34
-    ld   hl, wEntity0SpeedY                       ; $4D90: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4D90: $21 $50 $C2
     add  hl, de                                   ; $4D93: $19
     ld   [hl], $10                                ; $4D94: $36 $10
     ld   hl, wEntitiesTransitionCountdownTable    ; $4D96: $21 $E0 $C2
@@ -2491,21 +2491,21 @@ jr_015_4DFB:
     add  hl, bc                                   ; $4E16: $09
     ldh  a, [hScratch0]                           ; $4E17: $F0 $D7
     add  [hl]                                     ; $4E19: $86
-    ld   hl, wEntity0PosX                         ; $4E1A: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4E1A: $21 $00 $C2
     add  hl, de                                   ; $4E1D: $19
     ld   [hl], a                                  ; $4E1E: $77
     ld   hl, $4DB3                                ; $4E1F: $21 $B3 $4D
     add  hl, bc                                   ; $4E22: $09
     ld   a, [hl]                                  ; $4E23: $7E
-    ld   hl, wEntity0SpeedX                       ; $4E24: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4E24: $21 $40 $C2
     add  hl, de                                   ; $4E27: $19
     ld   [hl], a                                  ; $4E28: $77
     ldh  a, [hScratch1]                           ; $4E29: $F0 $D8
     add  $00                                      ; $4E2B: $C6 $00
-    ld   hl, wEntity0PosY                         ; $4E2D: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4E2D: $21 $10 $C2
     add  hl, de                                   ; $4E30: $19
     ld   [hl], a                                  ; $4E31: $77
-    ld   hl, wEntity0SpeedY                       ; $4E32: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4E32: $21 $50 $C2
     add  hl, de                                   ; $4E35: $19
     ld   [hl], $0C                                ; $4E36: $36 $0C
     ld   hl, wEntitiesTransitionCountdownTable    ; $4E38: $21 $E0 $C2
@@ -2659,11 +2659,11 @@ jr_015_4F02:
     set  1, [hl]                                  ; $4F29: $CB $CE
     set  4, [hl]                                  ; $4F2B: $CB $E6
     ldh  a, [hScratch0]                           ; $4F2D: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $4F2F: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4F2F: $21 $00 $C2
     add  hl, de                                   ; $4F32: $19
     ld   [hl], a                                  ; $4F33: $77
     ldh  a, [hScratch1]                           ; $4F34: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $4F36: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4F36: $21 $10 $C2
     add  hl, de                                   ; $4F39: $19
     ld   [hl], a                                  ; $4F3A: $77
     ldh  a, [hScratch3]                           ; $4F3B: $F0 $DA
@@ -2722,13 +2722,13 @@ jr_015_4F50:
     ldh  a, [hScratch0]                           ; $4F95: $F0 $D7
     cpl                                           ; $4F97: $2F
     inc  a                                        ; $4F98: $3C
-    ld   hl, wEntity0SpeedY                       ; $4F99: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4F99: $21 $50 $C2
     add  hl, bc                                   ; $4F9C: $09
     ld   [hl], a                                  ; $4F9D: $77
     ldh  a, [hScratch1]                           ; $4F9E: $F0 $D8
     cpl                                           ; $4FA0: $2F
     inc  a                                        ; $4FA1: $3C
-    ld   hl, wEntity0SpeedX                       ; $4FA2: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4FA2: $21 $40 $C2
     add  hl, bc                                   ; $4FA5: $09
     ld   [hl], a                                  ; $4FA6: $77
     ld   hl, wEntitiesSpriteVariantTable               ; $4FA7: $21 $B0 $C3
@@ -2747,7 +2747,7 @@ jr_015_4FAE:
     and  $0C                                      ; $4FB8: $E6 $0C
     jr   z, jr_015_4FCE                           ; $4FBA: $28 $12
 
-    ld   hl, wEntity0SpeedY                       ; $4FBC: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4FBC: $21 $50 $C2
     add  hl, bc                                   ; $4FBF: $09
     ld   a, [hl]                                  ; $4FC0: $7E
     xor  $F0                                      ; $4FC1: $EE $F0
@@ -2755,7 +2755,7 @@ jr_015_4FAE:
     jr   jr_015_4FCE                              ; $4FC4: $18 $08
 
 jr_015_4FC6:
-    ld   hl, wEntity0SpeedX                       ; $4FC6: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4FC6: $21 $40 $C2
     add  hl, bc                                   ; $4FC9: $09
     ld   a, [hl]                                  ; $4FCA: $7E
     xor  $F0                                      ; $4FCB: $EE $F0
@@ -2774,7 +2774,7 @@ jr_015_4FCE:
 
 jr_015_4FDD:
     xor  a                                        ; $4FDD: $AF
-    ld   hl, wEntity0SpeedY                       ; $4FDE: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4FDE: $21 $50 $C2
     add  hl, bc                                   ; $4FE1: $09
     ld   [hl], a                                  ; $4FE2: $77
     call GetRandomByte                            ; $4FE3: $CD $0D $28
@@ -2784,7 +2784,7 @@ jr_015_4FDD:
     ld   hl, $4E89                                ; $4FEA: $21 $89 $4E
     add  hl, de                                   ; $4FED: $19
     ld   a, [hl]                                  ; $4FEE: $7E
-    ld   hl, wEntity0SpeedX                       ; $4FEF: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4FEF: $21 $40 $C2
     add  hl, bc                                   ; $4FF2: $09
     ld   [hl], a                                  ; $4FF3: $77
     and  a                                        ; $4FF4: $A7
@@ -2798,7 +2798,7 @@ jr_015_4FDD:
     ld   hl, $4E89                                ; $5000: $21 $89 $4E
     add  hl, de                                   ; $5003: $19
     ld   a, [hl]                                  ; $5004: $7E
-    ld   hl, wEntity0SpeedY                       ; $5005: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $5005: $21 $50 $C2
     add  hl, bc                                   ; $5008: $09
     ld   [hl], a                                  ; $5009: $77
 
@@ -2837,10 +2837,10 @@ jr_015_500A:
     ld   hl, wEntitiesSpeedZTable                 ; $503C: $21 $20 $C3
     add  hl, bc                                   ; $503F: $09
     ld   [hl], b                                  ; $5040: $70
-    ld   hl, wEntity0SpeedY                       ; $5041: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $5041: $21 $50 $C2
     add  hl, bc                                   ; $5044: $09
     ld   [hl], $08                                ; $5045: $36 $08
-    ld   hl, wEntity0SpeedX                       ; $5047: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $5047: $21 $40 $C2
     add  hl, bc                                   ; $504A: $09
     ld   [hl], $08                                ; $504B: $36 $08
     ld   hl, $C3D0                                ; $504D: $21 $D0 $C3
@@ -2943,7 +2943,7 @@ jr_015_5093:
     call GetEntityTransitionCountdown             ; $50D6: $CD $05 $0C
     ld   [hl], $50                                ; $50D9: $36 $50
     ldh  a, [hLinkPositionX]                      ; $50DB: $F0 $98
-    ld   hl, wEntity0PosX                         ; $50DD: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $50DD: $21 $00 $C2
     add  hl, bc                                   ; $50E0: $09
     ld   [hl], a                                  ; $50E1: $77
     ld   e, $80                                   ; $50E2: $1E $80
@@ -2955,7 +2955,7 @@ jr_015_50E7:
     jr   nz, jr_015_50E7                          ; $50E9: $20 $FC
 
     ldh  a, [hLinkPositionY]                      ; $50EB: $F0 $99
-    ld   hl, wEntity0PosY                         ; $50ED: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $50ED: $21 $10 $C2
     add  hl, bc                                   ; $50F0: $09
     ld   [hl], a                                  ; $50F1: $77
     ld   e, $80                                   ; $50F2: $1E $80
@@ -3006,7 +3006,7 @@ jr_015_5137:
 
     call func_015_5631                            ; $5138: $CD $31 $56
     call func_015_7B0D                            ; $513B: $CD $0D $7B
-    ld   hl, wEntity0SpeedY                       ; $513E: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $513E: $21 $50 $C2
     add  hl, bc                                   ; $5141: $09
     dec  [hl]                                     ; $5142: $35
     ld   a, [hl]                                  ; $5143: $7E
@@ -3026,7 +3026,7 @@ jr_015_5150:
     call GetEntityTransitionCountdown             ; $515C: $CD $05 $0C
     ret  nz                                       ; $515F: $C0
 
-    ld   hl, wEntity0SpeedY                       ; $5160: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $5160: $21 $50 $C2
     add  hl, bc                                   ; $5163: $09
     inc  [hl]                                     ; $5164: $34
     ret  nz                                       ; $5165: $C0
@@ -3337,13 +3337,13 @@ label_015_5335:
     ld   hl, $5911                                ; $533C: $21 $11 $59
     add  hl, de                                   ; $533F: $19
     ld   a, [hl]                                  ; $5340: $7E
-    ld   hl, wEntity0PosX                         ; $5341: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5341: $21 $00 $C2
     add  hl, bc                                   ; $5344: $09
     ld   [hl], a                                  ; $5345: $77
     ld   hl, $5919                                ; $5346: $21 $19 $59
     add  hl, de                                   ; $5349: $19
     ld   a, [hl]                                  ; $534A: $7E
-    ld   hl, wEntity0PosY                         ; $534B: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $534B: $21 $10 $C2
     add  hl, bc                                   ; $534E: $09
     ld   [hl], a                                  ; $534F: $77
     call IncrementEntityWalkingAttr               ; $5350: $CD $12 $3B
@@ -3406,14 +3406,14 @@ jr_015_5384:
     ld   hl, $5356                                ; $5392: $21 $56 $53
     add  hl, bc                                   ; $5395: $09
     add  [hl]                                     ; $5396: $86
-    ld   hl, wEntity0PosX                         ; $5397: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5397: $21 $00 $C2
     add  hl, de                                   ; $539A: $19
     ld   [hl], a                                  ; $539B: $77
     ldh  a, [hScratch1]                           ; $539C: $F0 $D8
     ld   hl, $535E                                ; $539E: $21 $5E $53
     add  hl, bc                                   ; $53A1: $09
     add  [hl]                                     ; $53A2: $86
-    ld   hl, wEntity0PosY                         ; $53A3: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $53A3: $21 $10 $C2
     add  hl, de                                   ; $53A6: $19
     ld   [hl], a                                  ; $53A7: $77
     ldh  a, [hScratch3]                           ; $53A8: $F0 $DA
@@ -3425,13 +3425,13 @@ jr_015_53AF:
     ld   hl, $5368                                ; $53AF: $21 $68 $53
     add  hl, bc                                   ; $53B2: $09
     ld   a, [hl]                                  ; $53B3: $7E
-    ld   hl, wEntity0SpeedX                       ; $53B4: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $53B4: $21 $40 $C2
     add  hl, de                                   ; $53B7: $19
     ld   [hl], a                                  ; $53B8: $77
     ld   hl, $5366                                ; $53B9: $21 $66 $53
     add  hl, bc                                   ; $53BC: $09
     ld   a, [hl]                                  ; $53BD: $7E
-    ld   hl, wEntity0SpeedY                       ; $53BE: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $53BE: $21 $50 $C2
     add  hl, de                                   ; $53C1: $19
     ld   [hl], a                                  ; $53C2: $77
     ld   hl, wEntitiesTransitionCountdownTable    ; $53C3: $21 $E0 $C2
@@ -3546,7 +3546,7 @@ jr_015_5465:
     ld   d, b                                     ; $5467: $50
 
 jr_015_5468:
-    ld   hl, wEntity0State                        ; $5468: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                        ; $5468: $21 $80 $C2
     add  hl, de                                   ; $546B: $19
     ld   a, [hl]                                  ; $546C: $7E
     cp   $05                                      ; $546D: $FE $05
@@ -3564,7 +3564,7 @@ jr_015_5468:
     cp   $08                                      ; $547F: $FE $08
     jr   nz, jr_015_54B7                          ; $5481: $20 $34
 
-    ld   hl, wEntity0PosX                         ; $5483: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5483: $21 $00 $C2
     add  hl, de                                   ; $5486: $19
     ldh  a, [wActiveEntityPosX]                   ; $5487: $F0 $EE
     sub  [hl]                                     ; $5489: $96
@@ -3572,7 +3572,7 @@ jr_015_5468:
     cp   $18                                      ; $548C: $FE $18
     jr   nc, jr_015_54B7                          ; $548E: $30 $27
 
-    ld   hl, wEntity0PosY                         ; $5490: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $5490: $21 $10 $C2
     add  hl, de                                   ; $5493: $19
     ldh  a, [wActiveEntityPosY]                   ; $5494: $F0 $EC
     sub  [hl]                                     ; $5496: $96
@@ -3922,7 +3922,7 @@ jr_015_5652:
     cp   $00                                      ; $565B: $FE $00
     jr   z, jr_015_566B                           ; $565D: $28 $0C
 
-    ld   hl, wEntity0PosY                         ; $565F: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $565F: $21 $10 $C2
     add  hl, bc                                   ; $5662: $09
     ldh  a, [wActiveEntityPosY]                   ; $5663: $F0 $EC
     cp   [hl]                                     ; $5665: $BE
@@ -4216,7 +4216,7 @@ jr_015_57E5:
     xor  a                                        ; $57E5: $AF
     ld   [$D21A], a                               ; $57E6: $EA $1A $D2
     call func_015_5819                            ; $57E9: $CD $19 $58
-    ld   hl, wEntity0PosY                         ; $57EC: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $57EC: $21 $10 $C2
     add  hl, bc                                   ; $57EF: $09
     ld   a, [hl]                                  ; $57F0: $7E
     sub  $08                                      ; $57F1: $D6 $08
@@ -4306,14 +4306,14 @@ label_015_582B:
     add  hl, bc                                   ; $5870: $09
     ldh  a, [hScratch0]                           ; $5871: $F0 $D7
     add  [hl]                                     ; $5873: $86
-    ld   hl, wEntity0PosX                         ; $5874: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5874: $21 $00 $C2
     add  hl, de                                   ; $5877: $19
     ld   [hl], a                                  ; $5878: $77
     ld   hl, $5850                                ; $5879: $21 $50 $58
     add  hl, bc                                   ; $587C: $09
     ldh  a, [hScratch1]                           ; $587D: $F0 $D8
     add  [hl]                                     ; $587F: $86
-    ld   hl, wEntity0PosY                         ; $5880: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $5880: $21 $10 $C2
     add  hl, de                                   ; $5883: $19
     ld   [hl], a                                  ; $5884: $77
     ld   hl, $C340                                ; $5885: $21 $40 $C3
@@ -4386,7 +4386,7 @@ jr_015_58C0:
     ld   [hl], $27                                ; $58F2: $36 $27
     ld   a, $35                                   ; $58F4: $3E $35
     ldh  [hJingle], a                             ; $58F6: $E0 $F2
-    ld   hl, wEntity0PosY                         ; $58F8: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $58F8: $21 $10 $C2
     add  hl, bc                                   ; $58FB: $09
     ld   a, [hl]                                  ; $58FC: $7E
     add  $08                                      ; $58FD: $C6 $08
@@ -5426,11 +5426,11 @@ func_015_5E38:
     add  hl, de                                   ; $5E57: $19
     inc  [hl]                                     ; $5E58: $34
     ldh  a, [hScratch0]                           ; $5E59: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $5E5B: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5E5B: $21 $00 $C2
     add  hl, de                                   ; $5E5E: $19
     ld   [hl], a                                  ; $5E5F: $77
     ldh  a, [hScratch1]                           ; $5E60: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $5E62: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $5E62: $21 $10 $C2
     add  hl, de                                   ; $5E65: $19
     ld   [hl], a                                  ; $5E66: $77
     ld   hl, wEntitiesUnknowTableF                ; $5E67: $21 $F0 $C2
@@ -5463,14 +5463,14 @@ jr_015_5E84:
     ldh  [hLinkPositionYIncrement], a             ; $5E90: $E0 $9B
     cpl                                           ; $5E92: $2F
     inc  a                                        ; $5E93: $3C
-    ld   hl, wEntity0SpeedY                       ; $5E94: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $5E94: $21 $50 $C2
     add  hl, bc                                   ; $5E97: $09
     ld   [hl], a                                  ; $5E98: $77
     ldh  a, [hScratch1]                           ; $5E99: $F0 $D8
     ldh  [hLinkPositionXIncrement], a             ; $5E9B: $E0 $9A
     cpl                                           ; $5E9D: $2F
     inc  a                                        ; $5E9E: $3C
-    ld   hl, wEntity0SpeedX                       ; $5E9F: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $5E9F: $21 $40 $C2
     add  hl, bc                                   ; $5EA2: $09
     ld   [hl], a                                  ; $5EA3: $77
     ld   a, $10                                   ; $5EA4: $3E $10
@@ -5485,7 +5485,7 @@ jr_015_5E84:
     ld   a, [$D201]                               ; $5EB4: $FA $01 $D2
     ld   e, a                                     ; $5EB7: $5F
     ld   d, b                                     ; $5EB8: $50
-    ld   hl, wEntity0PosX                         ; $5EB9: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5EB9: $21 $00 $C2
     add  hl, de                                   ; $5EBC: $19
     ldh  a, [wActiveEntityPosX]                   ; $5EBD: $F0 $EE
     sub  [hl]                                     ; $5EBF: $96
@@ -5493,7 +5493,7 @@ jr_015_5E84:
     cp   $20                                      ; $5EC2: $FE $20
     jr   nc, jr_015_5F19                          ; $5EC4: $30 $53
 
-    ld   hl, wEntity0PosY                         ; $5EC6: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $5EC6: $21 $10 $C2
     add  hl, de                                   ; $5EC9: $19
     ldh  a, [wActiveEntityPosY]                   ; $5ECA: $F0 $EC
     sub  [hl]                                     ; $5ECC: $96
@@ -5501,14 +5501,14 @@ jr_015_5E84:
     cp   $18                                      ; $5ECF: $FE $18
     jr   nc, jr_015_5F19                          ; $5ED1: $30 $46
 
-    ld   hl, wEntity0SpeedX                       ; $5ED3: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $5ED3: $21 $40 $C2
     add  hl, bc                                   ; $5ED6: $09
     ld   a, [hl]                                  ; $5ED7: $7E
     sla  a                                        ; $5ED8: $CB $27
     ld   hl, $C3F0                                ; $5EDA: $21 $F0 $C3
     add  hl, de                                   ; $5EDD: $19
     ld   [hl], a                                  ; $5EDE: $77
-    ld   hl, wEntity0SpeedY                       ; $5EDF: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $5EDF: $21 $50 $C2
     add  hl, bc                                   ; $5EE2: $09
     ld   a, [hl]                                  ; $5EE3: $7E
     sla  a                                        ; $5EE4: $CB $27
@@ -5590,11 +5590,11 @@ jr_015_5F4C:
     jr   c, jr_015_5F96                           ; $5F53: $38 $41
 
     ldh  a, [hScratch0]                           ; $5F55: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $5F57: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5F57: $21 $00 $C2
     add  hl, de                                   ; $5F5A: $19
     ld   [hl], a                                  ; $5F5B: $77
     ldh  a, [hScratch1]                           ; $5F5C: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $5F5E: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $5F5E: $21 $10 $C2
     add  hl, de                                   ; $5F61: $19
     ld   [hl], a                                  ; $5F62: $77
     ld   hl, wEntitiesUnknownTableB               ; $5F63: $21 $B0 $C2
@@ -5602,11 +5602,11 @@ jr_015_5F4C:
     inc  [hl]                                     ; $5F67: $34
     push bc                                       ; $5F68: $C5
     ldh  a, [hScratch0]                           ; $5F69: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $5F6B: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5F6B: $21 $00 $C2
     add  hl, de                                   ; $5F6E: $19
     ld   [hl], a                                  ; $5F6F: $77
     ldh  a, [hScratch1]                           ; $5F70: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $5F72: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $5F72: $21 $10 $C2
     add  hl, de                                   ; $5F75: $19
     ld   [hl], a                                  ; $5F76: $77
     ldh  a, [hFFE8]                               ; $5F77: $F0 $E8
@@ -5614,13 +5614,13 @@ jr_015_5F4C:
     ld   hl, $5F1A                                ; $5F7A: $21 $1A $5F
     add  hl, bc                                   ; $5F7D: $09
     ld   a, [hl]                                  ; $5F7E: $7E
-    ld   hl, wEntity0SpeedX                       ; $5F7F: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $5F7F: $21 $40 $C2
     add  hl, de                                   ; $5F82: $19
     ld   [hl], a                                  ; $5F83: $77
     ld   hl, $5F1E                                ; $5F84: $21 $1E $5F
     add  hl, bc                                   ; $5F87: $09
     ld   a, [hl]                                  ; $5F88: $7E
-    ld   hl, wEntity0SpeedY                       ; $5F89: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $5F89: $21 $50 $C2
     add  hl, de                                   ; $5F8C: $19
     ld   [hl], a                                  ; $5F8D: $77
     pop  bc                                       ; $5F8E: $C1
@@ -6345,13 +6345,13 @@ jr_015_6379:
     ld   hl, $5FB5                                ; $639B: $21 $B5 $5F
     add  hl, de                                   ; $639E: $19
     ld   a, [hl]                                  ; $639F: $7E
-    ld   hl, wEntity0SpeedY                       ; $63A0: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $63A0: $21 $50 $C2
     add  hl, bc                                   ; $63A3: $09
     ld   [hl], a                                  ; $63A4: $77
     ld   hl, $5FB9                                ; $63A5: $21 $B9 $5F
     add  hl, de                                   ; $63A8: $19
     ld   a, [hl]                                  ; $63A9: $7E
-    ld   hl, wEntity0SpeedX                       ; $63AA: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $63AA: $21 $40 $C2
     add  hl, bc                                   ; $63AD: $09
     ld   [hl], a                                  ; $63AE: $77
 
@@ -6626,7 +6626,7 @@ jr_015_64F8:
     jr   nz, jr_015_652E                          ; $6511: $20 $1B
 
     ld   [$D224], a                               ; $6513: $EA $24 $D2
-    ld   hl, wEntity0PosY                         ; $6516: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $6516: $21 $10 $C2
     add  hl, bc                                   ; $6519: $09
     ld   a, [hl]                                  ; $651A: $7E
     sub  $08                                      ; $651B: $D6 $08
@@ -6911,7 +6911,7 @@ jr_015_66A0:
     add  [hl]                                     ; $66A8: $86
     ld   hl, hScratch0                            ; $66A9: $21 $D7 $FF
     add  [hl]                                     ; $66AC: $86
-    ld   hl, wEntity0PosX                         ; $66AD: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $66AD: $21 $00 $C2
     add  hl, de                                   ; $66B0: $19
     ld   [hl], a                                  ; $66B1: $77
     ld   hl, $6608                                ; $66B2: $21 $08 $66
@@ -6920,7 +6920,7 @@ jr_015_66A0:
     sub  $0C                                      ; $66B7: $D6 $0C
     ld   hl, hScratch1                            ; $66B9: $21 $D8 $FF
     add  [hl]                                     ; $66BC: $86
-    ld   hl, wEntity0PosY                         ; $66BD: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $66BD: $21 $10 $C2
     add  hl, de                                   ; $66C0: $19
     ld   [hl], a                                  ; $66C1: $77
     ld   hl, $D221                                ; $66C2: $21 $21 $D2
@@ -6975,7 +6975,7 @@ jr_015_66D6:
     inc  [hl]                                     ; $670B: $34
     ldh  a, [hScratch1]                           ; $670C: $F0 $D8
     sub  $10                                      ; $670E: $D6 $10
-    ld   hl, wEntity0PosY                         ; $6710: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $6710: $21 $10 $C2
     add  hl, de                                   ; $6713: $19
     ld   [hl], a                                  ; $6714: $77
     ld   a, [$D21E]                               ; $6715: $FA $1E $D2
@@ -6991,7 +6991,7 @@ jr_015_66D6:
 jr_015_6724:
     ld   hl, hScratch0                            ; $6724: $21 $D7 $FF
     add  [hl]                                     ; $6727: $86
-    ld   hl, wEntity0PosX                         ; $6728: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $6728: $21 $00 $C2
     add  hl, de                                   ; $672B: $19
     ld   [hl], a                                  ; $672C: $77
     ld   hl, $C340                                ; $672D: $21 $40 $C3
@@ -7159,7 +7159,7 @@ jr_015_67F9:
     ld   a, $18                                   ; $6820: $3E $18
     call label_3BB5                               ; $6822: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $6825: $F0 $D7
-    ld   hl, wEntity0SpeedY                       ; $6827: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $6827: $21 $50 $C2
     sub  [hl]                                     ; $682A: $96
     bit  7, a                                     ; $682B: $CB $7F
     jr   z, jr_015_6831                           ; $682D: $28 $02
@@ -7170,7 +7170,7 @@ jr_015_67F9:
 jr_015_6831:
     inc  [hl]                                     ; $6831: $34
     ldh  a, [hScratch1]                           ; $6832: $F0 $D8
-    ld   hl, wEntity0SpeedX                       ; $6834: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $6834: $21 $40 $C2
     sub  [hl]                                     ; $6837: $96
     bit  7, a                                     ; $6838: $CB $7F
     jr   z, jr_015_683E                           ; $683A: $28 $02
@@ -7213,11 +7213,11 @@ jr_015_685F:
     ret  c                                        ; $686E: $D8
 
     ldh  a, [hScratch0]                           ; $686F: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $6871: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $6871: $21 $00 $C2
     add  hl, de                                   ; $6874: $19
     ld   [hl], a                                  ; $6875: $77
     ldh  a, [hScratch1]                           ; $6876: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $6878: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $6878: $21 $10 $C2
     add  hl, de                                   ; $687B: $19
     ld   [hl], a                                  ; $687C: $77
     ld   hl, wEntitiesUnknownTableB               ; $687D: $21 $B0 $C2
@@ -8109,18 +8109,18 @@ jr_015_6CBC:
     ld   a, [$D201]                               ; $6CC2: $FA $01 $D2
     ld   e, a                                     ; $6CC5: $5F
     ld   d, b                                     ; $6CC6: $50
-    ld   hl, wEntity0PosX                         ; $6CC7: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $6CC7: $21 $00 $C2
     add  hl, de                                   ; $6CCA: $19
     ld   a, [hl]                                  ; $6CCB: $7E
     ldh  [hLinkPositionX], a                      ; $6CCC: $E0 $98
-    ld   hl, wEntity0PosY                         ; $6CCE: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $6CCE: $21 $10 $C2
     add  hl, de                                   ; $6CD1: $19
     ld   a, [hl]                                  ; $6CD2: $7E
     sub  $0C                                      ; $6CD3: $D6 $0C
     ldh  [hLinkPositionY], a                      ; $6CD5: $E0 $99
     ld   a, $10                                   ; $6CD7: $3E $10
     call label_3BB5                               ; $6CD9: $CD $B5 $3B
-    ld   hl, wEntity0SpeedY                       ; $6CDC: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $6CDC: $21 $50 $C2
     add  hl, bc                                   ; $6CDF: $09
     ldh  a, [hScratch0]                           ; $6CE0: $F0 $D7
     sub  [hl]                                     ; $6CE2: $96
@@ -8132,7 +8132,7 @@ jr_015_6CBC:
 
 jr_015_6CE9:
     dec  [hl]                                     ; $6CE9: $35
-    ld   hl, wEntity0SpeedX                       ; $6CEA: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $6CEA: $21 $40 $C2
     add  hl, bc                                   ; $6CED: $09
     ldh  a, [hScratch1]                           ; $6CEE: $F0 $D8
     sub  [hl]                                     ; $6CF0: $96
@@ -8586,7 +8586,7 @@ jr_015_6F40:
     ld   a, $08                                   ; $6F4C: $3E $08
     call label_3BB5                               ; $6F4E: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $6F51: $F0 $D7
-    ld   hl, wEntity0SpeedY                       ; $6F53: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $6F53: $21 $50 $C2
     add  hl, bc                                   ; $6F56: $09
     sub  [hl]                                     ; $6F57: $96
     and  $80                                      ; $6F58: $E6 $80
@@ -8598,7 +8598,7 @@ jr_015_6F40:
 jr_015_6F5E:
     dec  [hl]                                     ; $6F5E: $35
     ldh  a, [hScratch1]                           ; $6F5F: $F0 $D8
-    ld   hl, wEntity0SpeedX                       ; $6F61: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $6F61: $21 $40 $C2
     add  hl, bc                                   ; $6F64: $09
     sub  [hl]                                     ; $6F65: $96
     and  $80                                      ; $6F66: $E6 $80
@@ -8681,10 +8681,10 @@ jr_015_6FAD:
     ld   hl, $C390                                ; $6FD8: $21 $90 $C3
     add  hl, de                                   ; $6FDB: $19
     ld   [hl], $02                                ; $6FDC: $36 $02
-    ld   hl, wEntity0PosY                         ; $6FDE: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $6FDE: $21 $10 $C2
     add  hl, de                                   ; $6FE1: $19
     ld   [hl], $30                                ; $6FE2: $36 $30
-    ld   hl, wEntity0PosX                         ; $6FE4: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $6FE4: $21 $00 $C2
     add  hl, de                                   ; $6FE7: $19
     ld   [hl], $50                                ; $6FE8: $36 $50
     ld   hl, wEntitiesSpriteVariantTable               ; $6FEA: $21 $B0 $C3
@@ -8828,7 +8828,7 @@ jr_015_704B:
     call label_3CE6                               ; $7089: $CD $E6 $3C
     ld   a, $03                                   ; $708C: $3E $03
     call label_3DA0                               ; $708E: $CD $A0 $3D
-    ld   hl, wEntity0PosY                         ; $7091: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $7091: $21 $10 $C2
     add  hl, bc                                   ; $7094: $09
     ld   a, [hl]                                  ; $7095: $7E
     push af                                       ; $7096: $F5
@@ -9317,13 +9317,13 @@ jr_015_735C:
     ld   hl, $7328                                ; $736E: $21 $28 $73
     add  hl, de                                   ; $7371: $19
     ld   a, [hl]                                  ; $7372: $7E
-    ld   hl, wEntity0SpeedX                       ; $7373: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $7373: $21 $40 $C2
     add  hl, bc                                   ; $7376: $09
     ld   [hl], a                                  ; $7377: $77
     ld   hl, $732C                                ; $7378: $21 $2C $73
     add  hl, de                                   ; $737B: $19
     ld   a, [hl]                                  ; $737C: $7E
-    ld   hl, wEntity0SpeedY                       ; $737D: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $737D: $21 $50 $C2
     add  hl, bc                                   ; $7380: $09
     ld   [hl], a                                  ; $7381: $77
 
@@ -9420,7 +9420,7 @@ jr_015_73E9:
     ld   hl, $73A3                                ; $73FF: $21 $A3 $73
     add  hl, de                                   ; $7402: $19
     ld   a, [hl]                                  ; $7403: $7E
-    ld   hl, wEntity0SpeedX                       ; $7404: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $7404: $21 $40 $C2
     add  hl, bc                                   ; $7407: $09
 
 jr_015_7408:
@@ -9428,7 +9428,7 @@ jr_015_7408:
     ld   hl, $73A7                                ; $7409: $21 $A7 $73
     add  hl, de                                   ; $740C: $19
     ld   a, [hl]                                  ; $740D: $7E
-    ld   hl, wEntity0SpeedY                       ; $740E: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $740E: $21 $50 $C2
     add  hl, bc                                   ; $7411: $09
     ld   [hl], a                                  ; $7412: $77
     ld   a, $3E                                   ; $7413: $3E $3E
@@ -9464,7 +9464,7 @@ jr_015_7433:
     ld   hl, $7436                                ; $7441: $21 $36 $74
     add  hl, de                                   ; $7444: $19
     ld   a, [hl]                                  ; $7445: $7E
-    ld   hl, wEntity0SpeedY                       ; $7446: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7446: $21 $50 $C2
     add  hl, bc                                   ; $7449: $09
     ld   [hl], a                                  ; $744A: $77
     call func_015_7B8B                            ; $744B: $CD $8B $7B
@@ -9480,7 +9480,7 @@ jr_015_7433:
     jr   nz, jr_015_746A                          ; $745E: $20 $0A
 
     call func_015_7C31                            ; $7460: $CD $31 $7C
-    ld   hl, wEntity0State                        ; $7463: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                        ; $7463: $21 $80 $C2
     add  hl, bc                                   ; $7466: $09
     ld   a, [hl]                                  ; $7467: $7E
     ldh  [hActiveEntityState], a                  ; $7468: $E0 $EA
@@ -9633,11 +9633,11 @@ jr_015_7506:
     jr   c, jr_015_756E                           ; $753D: $38 $2F
 
     ldh  a, [hScratch0]                           ; $753F: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $7541: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $7541: $21 $00 $C2
     add  hl, de                                   ; $7544: $19
     ld   [hl], a                                  ; $7545: $77
     ldh  a, [hScratch1]                           ; $7546: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $7548: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $7548: $21 $10 $C2
     add  hl, de                                   ; $754B: $19
     ld   [hl], a                                  ; $754C: $77
     ld   hl, $C340                                ; $754D: $21 $40 $C3
@@ -9709,13 +9709,13 @@ jr_015_75A0:
     ld   hl, $756F                                ; $75B7: $21 $6F $75
     add  hl, de                                   ; $75BA: $19
     ld   a, [hl]                                  ; $75BB: $7E
-    ld   hl, wEntity0SpeedX                       ; $75BC: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $75BC: $21 $40 $C2
     add  hl, bc                                   ; $75BF: $09
     ld   [hl], a                                  ; $75C0: $77
     ld   hl, $7573                                ; $75C1: $21 $73 $75
     add  hl, de                                   ; $75C4: $19
     ld   a, [hl]                                  ; $75C5: $7E
-    ld   hl, wEntity0SpeedY                       ; $75C6: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $75C6: $21 $50 $C2
     add  hl, bc                                   ; $75C9: $09
     ld   [hl], a                                  ; $75CA: $77
 
@@ -9766,11 +9766,11 @@ jr_015_75E1:
     and  $02                                      ; $760D: $E6 $02
     jr   nz, jr_015_7616                          ; $760F: $20 $05
 
-    ld   hl, wEntity0SpeedX                       ; $7611: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $7611: $21 $40 $C2
     jr   jr_015_7619                              ; $7614: $18 $03
 
 jr_015_7616:
-    ld   hl, wEntity0SpeedY                       ; $7616: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7616: $21 $50 $C2
 
 jr_015_7619:
     add  hl, bc                                   ; $7619: $09
@@ -9891,7 +9891,7 @@ jr_015_7639:
     cp   $20                                      ; $76C5: $FE $20
     jr   nc, jr_015_76EF                          ; $76C7: $30 $26
 
-    ld   hl, wEntity0PosY                         ; $76C9: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $76C9: $21 $10 $C2
     add  hl, bc                                   ; $76CC: $09
     ld   a, [hl]                                  ; $76CD: $7E
     add  $18                                      ; $76CE: $C6 $18
@@ -9904,10 +9904,10 @@ jr_015_7639:
     ld   hl, wEntitiesSpeedZTable                 ; $76DC: $21 $20 $C3
     add  hl, bc                                   ; $76DF: $09
     ld   [hl], $15                                ; $76E0: $36 $15
-    ld   hl, wEntity0SpeedY                       ; $76E2: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $76E2: $21 $50 $C2
     add  hl, bc                                   ; $76E5: $09
     ld   [hl], $0C                                ; $76E6: $36 $0C
-    ld   hl, wEntity0SpeedX                       ; $76E8: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $76E8: $21 $40 $C2
     add  hl, bc                                   ; $76EB: $09
     ld   [hl], $FA                                ; $76EC: $36 $FA
     ret                                           ; $76EE: $C9
@@ -9921,7 +9921,7 @@ jr_015_76EF:
     ld   [hl], a                                  ; $76F7: $77
     cp   a                                        ; $76F8: $BF
     ld   [hl], a                                  ; $76F9: $77
-    ld   hl, wEntity0PosX                         ; $76FA: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $76FA: $21 $00 $C2
     add  hl, bc                                   ; $76FD: $09
     ld   a, [hl]                                  ; $76FE: $7E
     add  $08                                      ; $76FF: $C6 $08
@@ -9970,11 +9970,11 @@ jr_015_773A:
     ret  c                                        ; $773D: $D8
 
     ldh  a, [hScratch0]                           ; $773E: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $7740: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $7740: $21 $00 $C2
     add  hl, de                                   ; $7743: $19
     ld   [hl], a                                  ; $7744: $77
     ldh  a, [hScratch1]                           ; $7745: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $7747: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $7747: $21 $10 $C2
     add  hl, de                                   ; $774A: $19
     sub  $0C                                      ; $774B: $D6 $0C
     add  $18                                      ; $774D: $C6 $18
@@ -9996,10 +9996,10 @@ jr_015_773A:
     ld   a, $08                                   ; $7769: $3E $08
 
 jr_015_776B:
-    ld   hl, wEntity0SpeedX                       ; $776B: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $776B: $21 $40 $C2
     add  hl, de                                   ; $776E: $19
     ld   [hl], a                                  ; $776F: $77
-    ld   hl, wEntity0SpeedY                       ; $7770: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7770: $21 $50 $C2
     add  hl, de                                   ; $7773: $19
     ld   [hl], $0C                                ; $7774: $36 $0C
     ld   hl, $C340                                ; $7776: $21 $40 $C3
@@ -10074,13 +10074,13 @@ jr_015_77BE:
     ldh  a, [hScratch0]                           ; $77EC: $F0 $D7
     cpl                                           ; $77EE: $2F
     inc  a                                        ; $77EF: $3C
-    ld   hl, wEntity0SpeedY                       ; $77F0: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $77F0: $21 $50 $C2
     add  hl, bc                                   ; $77F3: $09
     ld   [hl], a                                  ; $77F4: $77
     ldh  a, [hScratch1]                           ; $77F5: $F0 $D8
     cpl                                           ; $77F7: $2F
     inc  a                                        ; $77F8: $3C
-    ld   hl, wEntity0SpeedX                       ; $77F9: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $77F9: $21 $40 $C2
     add  hl, bc                                   ; $77FC: $09
     ld   [hl], a                                  ; $77FD: $77
 
@@ -10152,13 +10152,13 @@ label_015_7825:
     ld   hl, $781D                                ; $7868: $21 $1D $78
     add  hl, de                                   ; $786B: $19
     ld   a, [hl]                                  ; $786C: $7E
-    ld   hl, wEntity0SpeedX                       ; $786D: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $786D: $21 $40 $C2
     add  hl, bc                                   ; $7870: $09
     ld   [hl], a                                  ; $7871: $77
     ld   hl, $781B                                ; $7872: $21 $1B $78
     add  hl, de                                   ; $7875: $19
     ld   a, [hl]                                  ; $7876: $7E
-    ld   hl, wEntity0SpeedY                       ; $7877: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7877: $21 $50 $C2
     add  hl, bc                                   ; $787A: $09
     ld   [hl], a                                  ; $787B: $77
     ld   hl, $C3D0                                ; $787C: $21 $D0 $C3
@@ -10244,7 +10244,7 @@ jr_015_78CF:
     ld   hl, $78D6                                ; $78EA: $21 $D6 $78
     add  hl, de                                   ; $78ED: $19
     ld   a, [hl]                                  ; $78EE: $7E
-    ld   hl, wEntity0SpeedX                       ; $78EF: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $78EF: $21 $40 $C2
     add  hl, bc                                   ; $78F2: $09
     ld   [hl], a                                  ; $78F3: $77
     ld   a, e                                     ; $78F4: $7B
@@ -10258,7 +10258,7 @@ jr_015_78CF:
     ld   hl, $78D6                                ; $7902: $21 $D6 $78
     add  hl, de                                   ; $7905: $19
     ld   a, [hl]                                  ; $7906: $7E
-    ld   hl, wEntity0SpeedY                       ; $7907: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7907: $21 $50 $C2
     add  hl, bc                                   ; $790A: $09
     ld   [hl], a                                  ; $790B: $77
     call GetEntityTransitionCountdown             ; $790C: $CD $05 $0C
@@ -10464,10 +10464,10 @@ label_015_7A27:
     ld   hl, $C3D0                                ; $7A28: $21 $D0 $C3
     add  hl, bc                                   ; $7A2B: $09
     ld   e, [hl]                                  ; $7A2C: $5E
-    ld   hl, wEntity0SpeedX                       ; $7A2D: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $7A2D: $21 $40 $C2
     add  hl, bc                                   ; $7A30: $09
     ld   a, [hl]                                  ; $7A31: $7E
-    ld   hl, wEntity0SpeedY                       ; $7A32: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7A32: $21 $50 $C2
     add  hl, bc                                   ; $7A35: $09
     ld   c, b                                     ; $7A36: $48
     or   [hl]                                     ; $7A37: $B6
@@ -10528,7 +10528,7 @@ func_015_7A6E:
     cp   $03                                      ; $7A83: $FE $03
     jr   nz, jr_015_7A8D                          ; $7A85: $20 $06
 
-    ld   hl, wEntityFState                        ; $7A87: $21 $8F $C2
+    ld   hl, wEntitiesStateTable + $0F                        ; $7A87: $21 $8F $C2
     add  hl, de                                   ; $7A8A: $19
     ld   [hl], $00                                ; $7A8B: $36 $00
 
@@ -10669,24 +10669,24 @@ func_015_7B3E:
     dec  a                                        ; $7B46: $3D
     ld   [hl], a                                  ; $7B47: $77
     call label_3E8E                               ; $7B48: $CD $8E $3E
-    ld   hl, wEntity0SpeedX                       ; $7B4B: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $7B4B: $21 $40 $C2
     add  hl, bc                                   ; $7B4E: $09
     ld   a, [hl]                                  ; $7B4F: $7E
     push af                                       ; $7B50: $F5
-    ld   hl, wEntity0SpeedY                       ; $7B51: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7B51: $21 $50 $C2
     add  hl, bc                                   ; $7B54: $09
     ld   a, [hl]                                  ; $7B55: $7E
     push af                                       ; $7B56: $F5
     ld   hl, $C3F0                                ; $7B57: $21 $F0 $C3
     add  hl, bc                                   ; $7B5A: $09
     ld   a, [hl]                                  ; $7B5B: $7E
-    ld   hl, wEntity0SpeedX                       ; $7B5C: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $7B5C: $21 $40 $C2
     add  hl, bc                                   ; $7B5F: $09
     ld   [hl], a                                  ; $7B60: $77
     ld   hl, $C400                                ; $7B61: $21 $00 $C4
     add  hl, bc                                   ; $7B64: $09
     ld   a, [hl]                                  ; $7B65: $7E
-    ld   hl, wEntity0SpeedY                       ; $7B66: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7B66: $21 $50 $C2
     add  hl, bc                                   ; $7B69: $09
     ld   [hl], a                                  ; $7B6A: $77
     call func_015_7B88                            ; $7B6B: $CD $88 $7B
@@ -10699,11 +10699,11 @@ func_015_7B3E:
     call label_3B23                               ; $7B77: $CD $23 $3B
 
 jr_015_7B7A:
-    ld   hl, wEntity0SpeedY                       ; $7B7A: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7B7A: $21 $50 $C2
     add  hl, bc                                   ; $7B7D: $09
     pop  af                                       ; $7B7E: $F1
     ld   [hl], a                                  ; $7B7F: $77
-    ld   hl, wEntity0SpeedX                       ; $7B80: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $7B80: $21 $40 $C2
     add  hl, bc                                   ; $7B83: $09
     pop  af                                       ; $7B84: $F1
     ld   [hl], a                                  ; $7B85: $77
@@ -10727,7 +10727,7 @@ label_015_7B8B:
     ret                                           ; $7B94: $C9
 
 func_015_7B95:
-    ld   hl, wEntity0SpeedX                       ; $7B95: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $7B95: $21 $40 $C2
     add  hl, bc                                   ; $7B98: $09
     ld   a, [hl]                                  ; $7B99: $7E
     and  a                                        ; $7B9A: $A7
@@ -10741,7 +10741,7 @@ func_015_7B95:
     add  [hl]                                     ; $7BA6: $86
     ld   [hl], a                                  ; $7BA7: $77
     rl   d                                        ; $7BA8: $CB $12
-    ld   hl, wEntity0PosX                         ; $7BAA: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $7BAA: $21 $00 $C2
 
 jr_015_7BAD:
     add  hl, bc                                   ; $7BAD: $09
@@ -10784,7 +10784,7 @@ func_015_7BC1:
 func_015_7BDB:
     ld   e, $00                                   ; $7BDB: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7BDD: $F0 $98
-    ld   hl, wEntity0PosX                         ; $7BDF: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $7BDF: $21 $00 $C2
     add  hl, bc                                   ; $7BE2: $09
     sub  [hl]                                     ; $7BE3: $96
     bit  7, a                                     ; $7BE4: $CB $7F
@@ -10799,7 +10799,7 @@ jr_015_7BE9:
 func_015_7BEB:
     ld   e, $02                                   ; $7BEB: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7BED: $F0 $99
-    ld   hl, wEntity0PosY                         ; $7BEF: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $7BEF: $21 $10 $C2
     add  hl, bc                                   ; $7BF2: $09
     sub  [hl]                                     ; $7BF3: $96
     bit  7, a                                     ; $7BF4: $CB $7F
@@ -10864,7 +10864,7 @@ jr_015_7C2F:
 
 func_015_7C31:
 label_015_7C31:
-    ld   hl, wEntity0State                        ; $7C31: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                        ; $7C31: $21 $80 $C2
     add  hl, bc                                   ; $7C34: $09
     ld   [hl], b                                  ; $7C35: $70
     ret                                           ; $7C36: $C9
@@ -10945,18 +10945,18 @@ label_015_7C91:
     ld   a, $36                                   ; $7CA6: $3E $36
     call func_003_64CA_trampoline                               ; $7CA8: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $7CAB: $F0 $D7
-    ld   hl, wEntity0PosX                         ; $7CAD: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $7CAD: $21 $00 $C2
     add  hl, de                                   ; $7CB0: $19
     ld   [hl], a                                  ; $7CB1: $77
     ldh  a, [hScratch1]                           ; $7CB2: $F0 $D8
-    ld   hl, wEntity0PosY                         ; $7CB4: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $7CB4: $21 $10 $C2
     add  hl, de                                   ; $7CB7: $19
     ld   [hl], a                                  ; $7CB8: $77
     ldh  a, [hIsSideScrolling]                    ; $7CB9: $F0 $F9
     and  a                                        ; $7CBB: $A7
     jr   z, jr_015_7CC6                           ; $7CBC: $28 $08
 
-    ld   hl, wEntity0SpeedY                       ; $7CBE: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $7CBE: $21 $50 $C2
     add  hl, bc                                   ; $7CC1: $09
     ld   [hl], $F0                                ; $7CC2: $36 $F0
     jr   jr_015_7CD2                              ; $7CC4: $18 $0C
@@ -11481,7 +11481,7 @@ jr_015_7F82:
     ld   a, [$C50F]                               ; $7FA3: $FA $0F $C5
     ld   e, a                                     ; $7FA6: $5F
     ld   d, b                                     ; $7FA7: $50
-    ld   hl, wEntity0PosX                         ; $7FA8: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $7FA8: $21 $00 $C2
     add  hl, de                                   ; $7FAB: $19
     ldh  a, [wActiveEntityPosX]                   ; $7FAC: $F0 $EE
     ld   e, $00                                   ; $7FAE: $1E $00

@@ -1991,10 +1991,10 @@ jr_020_4BC8:
     ld   [hl], d                                  ; $4BCC: $72
 
 jr_020_4BCD:
-    ld   hl, wEntity0SpeedX                       ; $4BCD: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4BCD: $21 $40 $C2
     add  hl, de                                   ; $4BD0: $19
     ld   [hl], d                                  ; $4BD1: $72
-    ld   hl, wEntity0SpeedY                       ; $4BD2: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4BD2: $21 $50 $C2
     add  hl, de                                   ; $4BD5: $19
     ld   [hl], d                                  ; $4BD6: $72
     ld   hl, wEntitiesSpeedZTable                                ; $4BD7: $21 $20 $C3
@@ -2009,14 +2009,14 @@ jr_020_4BE3:
     add  hl, bc                                   ; $4BE3: $09
     ldh  a, [hLinkPositionX]                      ; $4BE4: $F0 $98
     add  [hl]                                     ; $4BE6: $86
-    ld   hl, wEntity0PosX                         ; $4BE7: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4BE7: $21 $00 $C2
     add  hl, de                                   ; $4BEA: $19
     ld   [hl], a                                  ; $4BEB: $77
     ld   hl, $4B7D                                ; $4BEC: $21 $7D $4B
     add  hl, bc                                   ; $4BEF: $09
     ldh  a, [hLinkPositionY]                      ; $4BF0: $F0 $99
     add  [hl]                                     ; $4BF2: $86
-    ld   hl, wEntity0PosY                         ; $4BF3: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4BF3: $21 $10 $C2
     add  hl, de                                   ; $4BF6: $19
     ld   [hl], a                                  ; $4BF7: $77
     ret                                           ; $4BF8: $C9
@@ -2056,7 +2056,7 @@ jr_020_4C10:
     ld   hl, $4BF8                                ; $4C1F: $21 $F8 $4B
     add  hl, bc                                   ; $4C22: $09
     ld   a, [hl]                                  ; $4C23: $7E
-    ld   hl, wEntity0SpeedX                       ; $4C24: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $4C24: $21 $40 $C2
     add  hl, de                                   ; $4C27: $19
     ld   [hl], a                                  ; $4C28: $77
     ldh  a, [hPressedButtonsMask]                 ; $4C29: $F0 $CB
@@ -2068,7 +2068,7 @@ jr_020_4C10:
     ld   hl, $4BFB                                ; $4C34: $21 $FB $4B
     add  hl, bc                                   ; $4C37: $09
     ld   a, [hl]                                  ; $4C38: $7E
-    ld   hl, wEntity0SpeedY                       ; $4C39: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $4C39: $21 $50 $C2
     add  hl, de                                   ; $4C3C: $19
     ld   [hl], a                                  ; $4C3D: $77
 
@@ -2117,14 +2117,14 @@ jr_020_4C6D:
     add  hl, bc                                   ; $4C74: $09
     ldh  a, [hLinkPositionX]                      ; $4C75: $F0 $98
     add  [hl]                                     ; $4C77: $86
-    ld   hl, wEntity0PosX                         ; $4C78: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4C78: $21 $00 $C2
     add  hl, de                                   ; $4C7B: $19
     ld   [hl], a                                  ; $4C7C: $77
     ld   hl, $4C43                                ; $4C7D: $21 $43 $4C
     add  hl, bc                                   ; $4C80: $09
     ldh  a, [hLinkPositionY]                      ; $4C81: $F0 $99
     add  [hl]                                     ; $4C83: $86
-    ld   hl, wEntity0PosY                         ; $4C84: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $4C84: $21 $10 $C2
     add  hl, de                                   ; $4C87: $19
     ld   [hl], a                                  ; $4C88: $77
     ldh  a, [$FFA2]                               ; $4C89: $F0 $A2

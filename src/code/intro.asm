@@ -52,11 +52,11 @@ IntroHandlerEntryPoint::
     ld   [wGameplaySubtype], a
     xor  a
     ; Reset entities
-    ld   [wEntity0State], a
-    ld   [wEntity1State], a
-    ld   [wEntity2State], a
-    ld   [wEntity3State], a
-    ld   [wEntity4State], a
+    ld   [wEntitiesStateTable + $00], a
+    ld   [wEntitiesStateTable + $01], a
+    ld   [wEntitiesStateTable + $02], a
+    ld   [wEntitiesStateTable + $03], a
+    ld   [wEntitiesStateTable + $04], a
 
     ld   [rBGP], a
     ld   [wBGPalette], a
@@ -194,8 +194,8 @@ label_6F5F::
     dec  e
     jr   nz, label_6F5F
 
-    ld   [wEntity0State], a
-    ld   [wEntity1State], a
+    ld   [wEntitiesStateTable + $00], a
+    ld   [wEntitiesStateTable + $01], a
     ld   [$C3B0], a
     ld   [$C3B1], a
     ld   [$C3B2], a
@@ -203,11 +203,11 @@ label_6F5F::
 
     ; Configure Link's ship entity
     ld   a, $05
-    ld   [wEntity2State], a
+    ld   [wEntitiesStateTable + $02], a
     ld   a, $C0
-    ld   [wEntity2PosX], a
+    ld   [wEntitiesPosXTable + $02], a
     ld   a, $4E
-    ld   [wEntity2PosY], a
+    ld   [wEntitiesPosYTable + $02], a
 
     xor  a
     ld   [$C340], a
@@ -294,7 +294,7 @@ label_7013::
 
 label_7014::
     ; If Intro's ship X == $50…
-    ld   a, [wEntity2PosX]
+    ld   a, [wEntitiesPosXTable + $02]
     cp   $50
     jr   nz, .transitionEnd
 

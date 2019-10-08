@@ -467,7 +467,7 @@ label_655F::
     ldh  [wActiveEntityPosY], a
     ld   a, $58
     ldh  [wActiveEntityPosX], a
-    ld   hl, $C030
+    ld   hl, wDynamicOAMBuffer
     call label_658B
     ld   a, $48
     ldh  [wActiveEntityPosX], a

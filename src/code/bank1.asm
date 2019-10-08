@@ -653,7 +653,7 @@ label_4954::
     and  $08
     jr   z, label_497B
     ld   a, [hl]
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
     push af
     ldi  [hl], a
     ld   a, $18
@@ -673,7 +673,7 @@ label_4954::
 
 label_497B::
     ld   a, [hl]
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
     push af
     ldi  [hl], a
     ld   a, $18
@@ -2235,7 +2235,7 @@ label_5CBD::
     cp   $80
     jr   nc, label_5D13
     ldh  [hActiveEntitySpriteVariant], a
-    ld   de, $C030
+    ld   de, wDynamicOAMBuffer
     ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
@@ -2761,7 +2761,7 @@ UpdateWindowPosition::
     ld   a, [wInventoryAppearing]
     and  a
     jr   z, label_5F6A
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
     ld   a, [wWindowY]
     add  a, $08
     ld   d, a

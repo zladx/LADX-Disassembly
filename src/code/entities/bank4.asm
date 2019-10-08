@@ -6523,7 +6523,7 @@ jr_004_6B7C:
     ld   a, [$C3C0]                               ; $6B9C: $FA $C0 $C3
     ld   e, a                                     ; $6B9F: $5F
     ld   d, $00                                   ; $6BA0: $16 $00
-    ld   hl, $C030                                ; $6BA2: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $6BA2: $21 $30 $C0
     add  hl, de                                   ; $6BA5: $19
     ld   e, l                                     ; $6BA6: $5D
     ld   d, h                                     ; $6BA7: $54

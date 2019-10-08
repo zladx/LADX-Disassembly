@@ -7955,7 +7955,7 @@ jr_006_6E04:
     ld   a, [$C3C0]                               ; $6EA7: $FA $C0 $C3
     ld   e, a                                     ; $6EAA: $5F
     ld   d, b                                     ; $6EAB: $50
-    ld   hl, $C030                                ; $6EAC: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $6EAC: $21 $30 $C0
     add  hl, de                                   ; $6EAF: $19
     ldh  a, [$FFEF]                               ; $6EB0: $F0 $EF
     add  $0C                                      ; $6EB2: $C6 $0C

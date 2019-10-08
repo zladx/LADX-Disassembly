@@ -418,7 +418,7 @@ label_4C63::
     ld   b, $00
     add  hl, bc
     ld   d, [hl]
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
     ld   a, d
     add  a, $0B
     ldi  [hl], a

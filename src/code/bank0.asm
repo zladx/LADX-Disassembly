@@ -7456,7 +7456,7 @@ RenderSimpleEntityWithSpriteVariantToOAM::
     ldh  a, [$FFED]
     and  a
     jr   z, .gbcEnd
-    ; ($C030 + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) & 0xf8 | 4
+    ; (wDynamicOAMBuffer + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) & 0xf8 | 4
     ld   a, [hl]
     and  $F8
     or   $04
@@ -7464,7 +7464,7 @@ RenderSimpleEntityWithSpriteVariantToOAM::
     jr   .functionEnd
 .gbcEnd
 
-    ; ($C030 + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) ^ [$FFED]
+    ; (wDynamicOAMBuffer + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) ^ [$FFED]
     ld   a, [hli]
     ld   hl, $FFED
     xor  [hl]
@@ -7492,7 +7492,7 @@ label_3CE6::
     ld   a, [$C3C0]
     ld   e, a
     ld   d, $00
-    ld   hl, $C030
+    ld   hl, wDynamicOAMBuffer
     add  hl, de
 
 label_3CF6::

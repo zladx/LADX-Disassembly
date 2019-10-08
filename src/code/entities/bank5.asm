@@ -430,7 +430,7 @@ label_005_4253:
     ld   a, [$C3C0]                               ; $4259: $FA $C0 $C3
     ld   e, a                                     ; $425C: $5F
     ld   d, $00                                   ; $425D: $16 $00
-    ld   hl, $C030                                ; $425F: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $425F: $21 $30 $C0
     add  hl, de                                   ; $4262: $19
     ld   e, l                                     ; $4263: $5D
     ld   d, h                                     ; $4264: $54

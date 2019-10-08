@@ -3300,7 +3300,7 @@ jr_002_55FD:
     ld   a, [$C3C0]                               ; $560F: $FA $C0 $C3
     ld   e, a                                     ; $5612: $5F
     ld   d, $00                                   ; $5613: $16 $00
-    ld   hl, $C030                                ; $5615: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $5615: $21 $30 $C0
     add  hl, de                                   ; $5618: $19
     ld   e, l                                     ; $5619: $5D
     ld   d, h                                     ; $561A: $54
@@ -3557,7 +3557,7 @@ jr_002_578E:
     ld   a, [$C3C0]                               ; $578E: $FA $C0 $C3
     ld   e, a                                     ; $5791: $5F
     ld   d, $00                                   ; $5792: $16 $00
-    ld   hl, $C030                                ; $5794: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $5794: $21 $30 $C0
     add  hl, de                                   ; $5797: $19
     ldh  a, [hScratch1]                               ; $5798: $F0 $D8
     ld   [hl+], a                                 ; $579A: $22
@@ -3585,7 +3585,7 @@ jr_002_578E:
 
 jr_002_57BB:
     ld   d, $00                                   ; $57BB: $16 $00
-    ld   hl, $C030                                ; $57BD: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $57BD: $21 $30 $C0
     add  hl, de                                   ; $57C0: $19
     ldh  a, [hScratch1]                               ; $57C1: $F0 $D8
     ld   [hl+], a                                 ; $57C3: $22
@@ -3687,7 +3687,7 @@ label_002_583A::
     ld   a, [$C3C0]                               ; $583C: $FA $C0 $C3
     ld   e, a                                     ; $583F: $5F
     ld   d, $00                                   ; $5840: $16 $00
-    ld   hl, $C030                                ; $5842: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $5842: $21 $30 $C0
     add  hl, de                                   ; $5845: $19
     ld   e, l                                     ; $5846: $5D
     ld   d, h                                     ; $5847: $54

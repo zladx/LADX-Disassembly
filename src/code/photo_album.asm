@@ -552,7 +552,7 @@ Func_028_4385::
     ld   d, $00                                 ; $438F: $16 $00
     ld   hl, $436D                              ; $4391: $21 $6D $43
     add  hl, de                                 ; $4394: $19
-    ld   de, $C000                              ; $4395: $11 $00 $C0
+    ld   de, wOAMBuffer                         ; $4395: $11 $00 $C0
     ld   c, $02                                 ; $4398: $0E $02
 .loop_439A_28:
     ld   a, [$D1CE]                             ; $439A: $FA $CE $D1
@@ -694,7 +694,7 @@ JumpTable_028_4469:
     call Func_028_44DB                          ; $448F: JumpTable_028_4469 $CD $DB $44
 .else_4492_28:
     ld   hl, $4439                              ; $4492: JumpTable_028_4469 $21 $39 $44
-    ld   de, $C000                              ; $4495: JumpTable_028_4469 $11 $00 $C0
+    ld   de, wOAMBuffer                              ; $4495: JumpTable_028_4469 $11 $00 $C0
     ld   c, $0C                                 ; $4498: JumpTable_028_4469 $0E $0C
 .loop_449A_28:
     ldi  a, [hl]                                ; $449A: JumpTable_028_4469 $2A
@@ -791,7 +791,7 @@ JumpTable_028_457E:
     ld   a, JINGLE_VALIDATE                     ; $45A3: JumpTable_028_457E $3E $13
     ldh  [hJingle], a                           ; $45A5: JumpTable_028_457E $E0 $F2
 .else_45A7_28:
-    ld   de, $C000                              ; $45A7: JumpTable_028_457E $11 $00 $C0
+    ld   de, wOAMBuffer                              ; $45A7: JumpTable_028_457E $11 $00 $C0
     ld   hl, $452E                              ; $45AA: JumpTable_028_457E $21 $2E $45
     ld   c, $14                                 ; $45AD: JumpTable_028_457E $0E $14
     ldh  a, [hFrameCounter]                     ; $45AF: JumpTable_028_457E $F0 $E7

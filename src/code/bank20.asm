@@ -6772,7 +6772,7 @@ jr_020_636E:
     ld   a, [$C3C0]                               ; $638A: $FA $C0 $C3
     ld   e, a                                     ; $638D: $5F
     ld   d, $00                                   ; $638E: $16 $00
-    ld   hl, $C030                                ; $6390: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $6390: $21 $30 $C0
     ld   a, [wGameplayType]                       ; $6393: $FA $95 $DB
     cp   $0C                                      ; $6396: $FE $0C
     jr   nz, jr_020_63A1                          ; $6398: $20 $07

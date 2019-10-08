@@ -1163,7 +1163,7 @@ RenderIntroShip::
     add  a, [hl]
     ld   [hl], a
     ld   hl, data_7538
-    ld   de, $C000
+    ld   de, wOAMBuffer
     push bc
     ld   c, $06
 

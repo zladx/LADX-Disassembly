@@ -103,7 +103,7 @@ label_5055::
     ldh  a, [hFrameCounter]
     and  $08
     ld   a, [hl]
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
 
 label_5067::
     jr   z, label_507D
@@ -150,7 +150,7 @@ label_5094::
     ld   hl, label_48E4
     add  hl, de
     ld   a, [hl]
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
     add  a, $05
     ldi  [hl], a
     ld   a, $14

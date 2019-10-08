@@ -6894,7 +6894,7 @@ jr_018_691B:
     ld   a, [$C3C0]                               ; $6922: $FA $C0 $C3
     ld   e, a                                     ; $6925: $5F
     ld   d, $00                                   ; $6926: $16 $00
-    ld   hl, $C030                                ; $6928: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $6928: $21 $30 $C0
     add  hl, de                                   ; $692B: $19
     ld   e, l                                     ; $692C: $5D
     ld   d, h                                     ; $692D: $54
@@ -10405,7 +10405,7 @@ func_018_7CC8:
     ld   a, [$C3C0]                               ; $7CEA: $FA $C0 $C3
     ld   e, a                                     ; $7CED: $5F
     ld   d, $00                                   ; $7CEE: $16 $00
-    ld   hl, $C030                                ; $7CF0: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $7CF0: $21 $30 $C0
     add  hl, de                                   ; $7CF3: $19
     ld   e, l                                     ; $7CF4: $5D
     ld   d, h                                     ; $7CF5: $54

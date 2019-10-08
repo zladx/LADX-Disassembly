@@ -3442,7 +3442,7 @@ func_007_5453:
     ld   a, [$C3C0]                               ; $547C: $FA $C0 $C3
     ld   e, a                                     ; $547F: $5F
     ld   d, $00                                   ; $5480: $16 $00
-    ld   hl, $C030                                ; $5482: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $5482: $21 $30 $C0
     add  hl, de                                   ; $5485: $19
     ld   e, l                                     ; $5486: $5D
     ld   d, h                                     ; $5487: $54
@@ -4902,7 +4902,7 @@ func_007_5CA5:
     ld   a, [$C3C0]                               ; $5CAB: $FA $C0 $C3
     ld   e, a                                     ; $5CAE: $5F
     ld   d, $00                                   ; $5CAF: $16 $00
-    ld   hl, $C030                                ; $5CB1: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $5CB1: $21 $30 $C0
     add  hl, de                                   ; $5CB4: $19
     ld   e, l                                     ; $5CB5: $5D
     ld   d, h                                     ; $5CB6: $54
@@ -10313,7 +10313,7 @@ jr_007_7AD1:
     ld   a, [$C3C0]                               ; $7B09: $FA $C0 $C3
     ld   e, a                                     ; $7B0C: $5F
     ld   d, $00                                   ; $7B0D: $16 $00
-    ld   hl, $C030                                ; $7B0F: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $7B0F: $21 $30 $C0
     add  hl, de                                   ; $7B12: $19
     ld   c, l                                     ; $7B13: $4D
     ld   b, h                                     ; $7B14: $44
@@ -10340,7 +10340,7 @@ func_007_7B30:
     ld   a, [$C3C0]                               ; $7B33: $FA $C0 $C3
     ld   l, a                                     ; $7B36: $6F
     ld   h, $00                                   ; $7B37: $26 $00
-    ld   de, $C030                                ; $7B39: $11 $30 $C0
+    ld   de, wDynamicOAMBuffer                    ; $7B39: $11 $30 $C0
     add  hl, de                                   ; $7B3C: $19
     pop  de                                       ; $7B3D: $D1
     ldh  a, [wActiveEntityPosY]                   ; $7B3E: $F0 $EC

@@ -1044,7 +1044,7 @@ jr_003_4D29:
 
 jr_003_4D51:
     ld   de, Data_003_4CAC                        ; $4D51: $11 $AC $4C
-    call label_3C77                               ; $4D54: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $4D54: $CD $77 $3C
 
 jr_003_4D57:
     call func_003_7F7E                            ; $4D57: $CD $7E $7F
@@ -3510,7 +3510,7 @@ jr_003_5B41:
     xor  [hl]                                     ; $5B5B: $AE
     inc  d                                        ; $5B5C: $14
     ld   de, $5B5B                                ; $5B5D: $11 $5B $5B
-    call label_3C77                               ; $5B60: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5B60: $CD $77 $3C
     jr   jr_003_5B7D                              ; $5B63: $18 $18
 
     inc  d                                        ; $5B65: $14
@@ -3564,7 +3564,7 @@ jr_003_5B7D:
     ld   de, $5B97                                ; $5BA9: $11 $97 $5B
 
 jr_003_5BAC:
-    call label_3C77                               ; $5BAC: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5BAC: $CD $77 $3C
     ldh  a, [hActiveEntityWalking]                ; $5BAF: $F0 $F0
     rst  $00                                      ; $5BB1: $C7
     cp   d                                        ; $5BB2: $BA
@@ -3663,7 +3663,7 @@ label_003_5C49:
     jp   nz, ClearEntityType                           ; $5C4D: $C2 $8D $3F
 
     ld   de, $5C47                                ; $5C50: $11 $47 $5C
-    call label_3C77                               ; $5C53: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5C53: $CD $77 $3C
     call GetEntityTransitionCountdown                 ; $5C56: $CD $05 $0C
     jp   z, label_003_60AA                        ; $5C59: $CA $AA $60
 
@@ -3715,7 +3715,7 @@ jr_003_5C99:
     jp   z, label_003_5C49                        ; $5C9D: $CA $49 $5C
 
     ld   de, $5C78                                ; $5CA0: $11 $78 $5C
-    call label_3C77                               ; $5CA3: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5CA3: $CD $77 $3C
     call GetEntityTransitionCountdown                 ; $5CA6: $CD $05 $0C
     jp   z, label_003_5CD6                        ; $5CA9: $CA $D6 $5C
 
@@ -3820,7 +3820,7 @@ jr_003_5D34:
     call func_003_61DE                            ; $5D38: $CD $DE $61
     call func_003_608C                            ; $5D3B: $CD $8C $60
     ld   de, $5D36                                ; $5D3E: $11 $36 $5D
-    call label_3C77                               ; $5D41: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5D41: $CD $77 $3C
     jp   label_003_60AA                           ; $5D44: $C3 $AA $60
 
     ld   e, [hl]                                  ; $5D47: $5E
@@ -4261,7 +4261,7 @@ jr_003_5FB9:
     call func_003_61DE                            ; $5FC2: $CD $DE $61
     call func_003_608C                            ; $5FC5: $CD $8C $60
     ld   de, $5FC0                                ; $5FC8: $11 $C0 $5F
-    call label_3C77                               ; $5FCB: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5FCB: $CD $77 $3C
     jp   label_003_60AA                           ; $5FCE: $C3 $AA $60
 
 ; Data for loading secret seashell when bush is clipped (and when dug from ground)
@@ -4289,7 +4289,7 @@ func_003_5FD3::
 jr_003_5FEF:
     call func_003_61DE                            ; $5FEF: $CD $DE $61
     ld   de, data_003_5FD1                        ; $5FF2: $11 $D1 $5F
-    call label_3C77                               ; $5FF5: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5FF5: $CD $77 $3C
     jp   label_003_60AA                           ; $5FF8: $C3 $AA $60
 
     jp   z, $F014                                 ; $5FFB: $CA $14 $F0
@@ -4300,7 +4300,7 @@ jr_003_5FEF:
 
     call func_003_61DE                            ; $6004: $CD $DE $61
     ld   de, $5FFB                                ; $6007: $11 $FB $5F
-    call label_3C77                               ; $600A: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $600A: $CD $77 $3C
     call GetEntityTransitionCountdown                 ; $600D: $CD $05 $0C
     jp   z, label_003_60AA                        ; $6010: $CA $AA $60
 
@@ -4370,7 +4370,7 @@ jr_003_606A:
     call func_003_61DE                            ; $606A: $CD $DE $61
     call func_003_608C                            ; $606D: $CD $8C $60
     ld   de, $6055                                ; $6070: $11 $55 $60
-    call label_3C77                               ; $6073: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $6073: $CD $77 $3C
     jp   label_003_60AA                           ; $6076: $C3 $AA $60
 
     ld   a, [hl+]                                 ; $6079: $2A
@@ -4400,7 +4400,7 @@ func_003_608C::
     call func_003_61DE                            ; $609E: $CD $DE $61
     call func_003_608C                            ; $60A1: $CD $8C $60
     ld   de, $609C                                ; $60A4: $11 $9C $60
-    call label_3C77                               ; $60A7: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $60A7: $CD $77 $3C
 
 label_003_60AA:
     call func_003_7F78                            ; $60AA: $CD $78 $7F
@@ -4544,7 +4544,7 @@ jr_003_6156:
     call func_003_61DE                            ; $615B: $CD $DE $61
     call func_003_608C                            ; $615E: $CD $8C $60
     ld   de, $6157                                ; $6161: $11 $57 $61
-    call label_3C77                               ; $6164: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $6164: $CD $77 $3C
     call func_003_7F78                            ; $6167: $CD $78 $7F
     call func_003_62AF                            ; $616A: $CD $AF $62
     call func_003_62EB                            ; $616D: $CD $EB $62
@@ -5608,7 +5608,7 @@ func_003_6711::
     inc  [hl]                                     ; $6714: $34
     inc  [hl]                                     ; $6715: $34
     ld   de, $652E                                ; $6716: $11 $2E $65
-    call label_3C77                               ; $6719: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $6719: $CD $77 $3C
     jp   label_3D8A                               ; $671C: $C3 $8A $3D
 
     ld   hl, sp+$08                               ; $671F: $F8 $08
@@ -6227,7 +6227,7 @@ jr_003_6A96:
     add  [hl]                                     ; $6AAD: $86
     ldh  [wActiveEntityPosY], a                   ; $6AAE: $E0 $EC
     ld   de, Data_003_6A66                        ; $6AB0: $11 $66 $6A
-    call label_3C77                               ; $6AB3: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $6AB3: $CD $77 $3C
     call label_3D8A                               ; $6AB6: $CD $8A $3D
     pop  af                                       ; $6AB9: $F1
     ldh  [hActiveEntitySpriteVariant], a               ; $6ABA: $E0 $F1

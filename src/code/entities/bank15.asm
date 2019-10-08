@@ -847,7 +847,7 @@ jr_015_448C:
     sub  $05                                      ; $44C5: $D6 $05
     ldh  [hActiveEntitySpriteVariant], a               ; $44C7: $E0 $F1
     ld   de, $44B3                                ; $44C9: $11 $B3 $44
-    call label_3C77                               ; $44CC: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $44CC: $CD $77 $3C
     jr   jr_015_44D7                              ; $44CF: $18 $06
 
 jr_015_44D1:
@@ -11295,12 +11295,12 @@ jr_015_7E96:
     ld   a, [hl]                                  ; $7E98: $7E
     ld   d, a                                     ; $7E99: $57
     pop  bc                                       ; $7E9A: $C1
-    call label_3C77                               ; $7E9B: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $7E9B: $CD $77 $3C
     jr   jr_015_7EA6                              ; $7E9E: $18 $06
 
 jr_015_7EA0:
     ld   de, $7E6F                                ; $7EA0: $11 $6F $7E
-    call label_3C77                               ; $7EA3: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $7EA3: $CD $77 $3C
 
 jr_015_7EA6:
     call func_015_7B0D                            ; $7EA6: $CD $0D $7B

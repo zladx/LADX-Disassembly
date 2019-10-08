@@ -318,7 +318,7 @@ jr_018_4287:
     ld   de, $474D                                ; $4299: $11 $4D $47
     xor  a                                        ; $429C: $AF
     ldh  [hActiveEntitySpriteVariant], a               ; $429D: $E0 $F1
-    call label_3C77                               ; $429F: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $429F: $CD $77 $3C
     jp   label_018_407C                           ; $42A2: $C3 $7C $40
 
     ld   a, [wDialogState]                        ; $42A5: $FA $9F $C1
@@ -1162,7 +1162,7 @@ jr_018_4774:
     ld   de, $474D                                ; $4786: $11 $4D $47
     xor  a                                        ; $4789: $AF
     ldh  [hActiveEntitySpriteVariant], a               ; $478A: $E0 $F1
-    jp   label_3C77                               ; $478C: $C3 $77 $3C
+    jp   RenderSimpleEntityWithSpriteVariantToOAM                               ; $478C: $C3 $77 $3C
 
     nop                                           ; $478F: $00
     nop                                           ; $4790: $00
@@ -3435,7 +3435,7 @@ jr_018_54A4:
 
 label_018_54BD:
     ld   de, $54B9                                ; $54BD: $11 $B9 $54
-    call label_3C77                               ; $54C0: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $54C0: $CD $77 $3C
     call func_018_7DE8                            ; $54C3: $CD $E8 $7D
     call GetEntityTransitionCountdown             ; $54C6: $CD $05 $0C
     jp   z, label_018_7F08                        ; $54C9: $CA $08 $7F
@@ -8696,7 +8696,7 @@ jr_018_72EC:
     jr   z, jr_018_7330                           ; $730E: $28 $20
 
     ld   de, $72F5                                ; $7310: $11 $F5 $72
-    call label_3C77                               ; $7313: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $7313: $CD $77 $3C
     call func_018_7DE8                            ; $7316: $CD $E8 $7D
     call func_018_7E5F                            ; $7319: $CD $5F $7E
     call func_018_7E98                            ; $731C: $CD $98 $7E

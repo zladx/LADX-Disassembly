@@ -42,7 +42,16 @@ J_SELECT EQU 1 << 6
 J_START  EQU 1 << 7
 
 ; OAM attribute flags
-OAM_PALETTE   EQU %111
+OAMF_PRI        EQU %10000000 ; Priority
+OAMF_YFLIP      EQU %01000000 ; Y flip
+OAMF_XFLIP      EQU %00100000 ; X flip
+OAMF_PAL0       EQU %00000000 ; Palette number; 0,1 (DMG)
+OAMF_PAL1       EQU %00010000 ; Palette number; 0,1 (DMG)
+OAMF_BANK0      EQU %00000000 ; Bank number; 0,1 (GBC)
+OAMF_BANK1      EQU %00001000 ; Bank number; 0,1 (GBC)
+
+OAMF_PALMASK    EQU %00000111 ; Palette (GBC)
+
 OAM_TILE_BANK EQU 3
 OAM_OBP_NUM   EQU 4 ; Non CGB Mode Only
 OAM_X_FLIP    EQU 5

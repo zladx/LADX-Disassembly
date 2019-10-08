@@ -6238,7 +6238,7 @@ jr_017_7784:
 
 jr_017_7798:
     ld   de, $7766                                ; $7798: $11 $66 $77
-    call label_3C77                                    ; $779B: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM                                    ; $779B: $CD $77 $3C
     call func_017_7E3A                            ; $779E: $CD $3A $7E
     ldh  a, [$FFEE]                               ; $77A1: $F0 $EE
     cp   $B0                                      ; $77A3: $FE $B0
@@ -6380,7 +6380,7 @@ jr_017_7826:
     jr   nz, jr_017_7867                          ; $785E: $20 $07
 
     ld   de, $7838                                ; $7860: $11 $38 $78
-    call label_3C77                                    ; $7863: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM                                    ; $7863: $CD $77 $3C
     ret                                           ; $7866: $C9
 
 jr_017_7867:

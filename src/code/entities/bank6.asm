@@ -4251,7 +4251,7 @@ jr_006_597D:
 
 label_006_5988:
     ld   de, $5980                                ; $5988: $11 $80 $59
-    call label_3C77                               ; $598B: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $598B: $CD $77 $3C
     call func_006_64C6                            ; $598E: $CD $C6 $64
     call func_006_6541                            ; $5991: $CD $41 $65
     ld   hl, wEntitiesSpeedYTable                       ; $5994: $21 $50 $C2
@@ -5188,7 +5188,7 @@ label_006_5E54:
     ld   [wSwordCharge], a                        ; $5ECF: $EA $22 $C1
     ld   [wIsUsingSpinAttack], a                  ; $5ED2: $EA $21 $C1
     ld   de, $5E93                                ; $5ED5: $11 $93 $5E
-    call label_3C77                               ; $5ED8: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5ED8: $CD $77 $3C
     call label_3D8A                               ; $5EDB: $CD $8A $3D
 
 jr_006_5EDE:
@@ -5489,7 +5489,7 @@ jr_006_6048:
     jr   z, jr_006_60A2                           ; $6085: $28 $1B
 
     ld   de, $607D                                ; $6087: $11 $7D $60
-    call label_3C77                               ; $608A: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $608A: $CD $77 $3C
     call func_006_64C6                            ; $608D: $CD $C6 $64
     call func_006_6541                            ; $6090: $CD $41 $65
     call func_006_657A                            ; $6093: $CD $7A $65
@@ -7441,25 +7441,30 @@ jr_006_6BB7:
     set  5, [hl]                                  ; $6BBA: $CB $EE
     ret                                           ; $6BBC: $C9
 
-    ld   e, [hl]                                  ; $6BBD: $5E
-    ld   bc, $415E                                ; $6BBE: $01 $5E $41
-    inc  b                                        ; $6BC1: $04
-    db   $FC                                      ; $6BC2: $FC
-    inc  bc                                       ; $6BC3: $03
-    db   $FD                                      ; $6BC4: $FD
-    ld   [bc], a                                  ; $6BC5: $02
-    cp   $05                                      ; $6BC6: $FE $05
-    ld   a, [$F1F0]                               ; $6BC8: $FA $F0 $F1
-    cp   $01                                      ; $6BCB: $FE $01
-    jr   nz, jr_006_6BD5                          ; $6BCD: $20 $06
+; Array, indexed by hActiveEntitySpriteVariant
+;  byte 0: tile n°
+;  byte 1: OAM attribute (palette index and flags)
+ButterflyOAMData::
+._00 db $5E, %001
+._01 db $5E, %001 | OAMF_YFLIP
 
+; Randomly-selected X or Y speed
+ButterflyPossibleSpeeds::
+    db $04, -$04, $03, -$03, $02, -$02, $05, -$06
+
+ButterflyEntityHandler::
+    ; If the butterfly wings are downwards…
+    ldh  a, [hActiveEntitySpriteVariant]          ; $6BC9
+    cp   $01                                      ; $6BCB: $FE $01
+    jr   nz, .downwardsEnd                        ; $6BCD: $20 $06
+    ; … wActiveEntityPosY = wActiveEntityPosY - 0 (unused?)
     ldh  a, [wActiveEntityPosY]                   ; $6BCF: $F0 $EC
     sub  $00                                      ; $6BD1: $D6 $00
     ldh  [wActiveEntityPosY], a                   ; $6BD3: $E0 $EC
+.downwardsEnd
 
-jr_006_6BD5:
-    ld   de, $6BBD                                ; $6BD5: $11 $BD $6B
-    call label_3C77                               ; $6BD8: $CD $77 $3C
+    ld   de, ButterflyOAMData                     ; $6BD5: $11 $BD $6B
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $6BD8: $CD $77 $3C
     call func_006_64C6                            ; $6BDB: $CD $C6 $64
     ld   a, c                                     ; $6BDE: $79
     sla  a                                        ; $6BDF: $CB $27
@@ -7482,7 +7487,7 @@ jr_006_6BD5:
     and  $07                                      ; $6BFF: $E6 $07
     ld   e, a                                     ; $6C01: $5F
     ld   d, b                                     ; $6C02: $50
-    ld   hl, $6BC1                                ; $6C03: $21 $C1 $6B
+    ld   hl, ButterflyPossibleSpeeds                        ; $6C03: $21 $C1 $6B
     add  hl, de                                   ; $6C06: $19
     ld   a, [hl]                                  ; $6C07: $7E
     ld   hl, wEntitiesUnknownTableB               ; $6C08: $21 $B0 $C2
@@ -7502,7 +7507,7 @@ jr_006_6C12:
     and  $07                                      ; $6C1D: $E6 $07
     ld   e, a                                     ; $6C1F: $5F
     ld   d, b                                     ; $6C20: $50
-    ld   hl, $6BC1                                ; $6C21: $21 $C1 $6B
+    ld   hl, ButterflyPossibleSpeeds                        ; $6C21: $21 $C1 $6B
     add  hl, de                                   ; $6C24: $19
     ld   a, [hl]                                  ; $6C25: $7E
     ld   hl, wEntitiesUnknownTableC               ; $6C26: $21 $C0 $C2
@@ -8340,7 +8345,7 @@ jr_006_70B8:
     ld   a, [$D202]                               ; $70CF: $FA $02 $D2
     ldh  [hActiveEntitySpriteVariant], a               ; $70D2: $E0 $F1
     ld   de, $70A1                                ; $70D4: $11 $A1 $70
-    call label_3C77                               ; $70D7: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $70D7: $CD $77 $3C
     ldh  a, [hFrameCounter]                       ; $70DA: $F0 $E7
     and  $01                                      ; $70DC: $E6 $01
     jr   nz, jr_006_7120                          ; $70DE: $20 $40
@@ -10242,7 +10247,7 @@ jr_006_7B3D:
 
 jr_006_7B5B:
     ld   de, $7ADD                                ; $7B5B: $11 $DD $7A
-    call label_3C77                               ; $7B5E: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $7B5E: $CD $77 $3C
 
 jr_006_7B61:
     ldh  a, [hFrameCounter]                       ; $7B61: $F0 $E7
@@ -10363,7 +10368,7 @@ jr_006_7BF0:
     ld   [hl+], a                                 ; $7BFD: $22
     call func_006_7BE2                            ; $7BFE: $CD $E2 $7B
     ld   de, $7BFA                                ; $7C01: $11 $FA $7B
-    call label_3C77                               ; $7C04: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $7C04: $CD $77 $3C
     jr   jr_006_7C2E                              ; $7C07: $18 $25
 
     ld   d, d                                     ; $7C09: $52

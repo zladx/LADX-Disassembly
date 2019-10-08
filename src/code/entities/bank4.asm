@@ -434,7 +434,7 @@ func_004_42B3:
     xor  a                                        ; $42DB: $AF
     ldh  [hActiveEntitySpriteVariant], a                               ; $42DC: $E0 $F1
     ld   de, $42B1                                ; $42DE: $11 $B1 $42
-    call label_3C77                               ; $42E1: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $42E1: $CD $77 $3C
     jp   label_3D8A                               ; $42E4: $C3 $8A $3D
 
 ; Called by TableJump above for Level 2 Boss
@@ -1075,7 +1075,7 @@ jr_004_4713:
     and  $01                                      ; $4740: $E6 $01
     ldh  [hActiveEntitySpriteVariant], a                               ; $4742: $E0 $F1
     ld   de, $46F5                                ; $4744: $11 $F5 $46
-    call label_3C77                               ; $4747: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $4747: $CD $77 $3C
     jp   label_3D8A                               ; $474A: $C3 $8A $3D
 
 Data_004_474D::
@@ -5477,7 +5477,7 @@ jr_004_6575:
     ld   hl, hActiveEntitySpriteVariant                                ; $6589: $21 $F1 $FF
     ld   [hl], b                                  ; $658C: $70
     ld   de, $6576                                ; $658D: $11 $76 $65
-    call label_3C77                               ; $6590: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $6590: $CD $77 $3C
     call label_3D8A                               ; $6593: $CD $8A $3D
     ldh  a, [hFrameCounter]                       ; $6596: $F0 $E7
     rra                                           ; $6598: $1F
@@ -8168,7 +8168,7 @@ jr_004_750C:
 
 jr_004_7511:
     ld   de, $74C1                                ; $7511: $11 $C1 $74
-    call label_3C77                               ; $7514: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $7514: $CD $77 $3C
 
 jr_004_7517:
     call func_004_7FA3                            ; $7517: $CD $A3 $7F
@@ -9431,7 +9431,7 @@ jr_004_7B9A:
 
 jr_004_7BA6:
     ld   de, $7B5A                                ; $7BA6: $11 $5A $7B
-    call label_3C77                               ; $7BA9: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $7BA9: $CD $77 $3C
 
 jr_004_7BAC:
     ldh  a, [hFreeWarpDataAddress]                               ; $7BAC: $F0 $E6
@@ -9465,7 +9465,7 @@ func_004_7BB7:
 
 jr_004_7BDD:
     ld   de, $7B5A                                ; $7BDD: $11 $5A $7B
-    jp   label_3C77                               ; $7BE0: $C3 $77 $3C
+    jp   RenderSimpleEntityWithSpriteVariantToOAM                               ; $7BE0: $C3 $77 $3C
 
 func_004_7BE3:
     call label_3B5A                               ; $7BE3: $CD $5A $3B

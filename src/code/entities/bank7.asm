@@ -1953,7 +1953,7 @@ jr_007_4B44:
     ld   a, $38                                   ; $4BD7: $3E $38
     ldh  [wActiveEntityPosY], a                   ; $4BD9: $E0 $EC
     ld   de, $4BAB                                ; $4BDB: $11 $AB $4B
-    call label_3C77                               ; $4BDE: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $4BDE: $CD $77 $3C
 
 jr_007_4BE1:
     call label_3D8A                               ; $4BE1: $CD $8A $3D
@@ -2233,7 +2233,7 @@ jr_007_4D4C:
 
 label_007_4D84:
     ld   de, $4D80                                ; $4D84: $11 $80 $4D
-    call label_3C77                               ; $4D87: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $4D87: $CD $77 $3C
     ldh  a, [hFrameCounter]                       ; $4D8A: $F0 $E7
     rra                                           ; $4D8C: $1F
     rra                                           ; $4D8D: $1F
@@ -5466,7 +5466,7 @@ label_007_5FAB:
 
 jr_007_5FB1:
     ld   de, $5F9B                                ; $5FB1: $11 $9B $5F
-    call label_3C77                               ; $5FB4: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5FB4: $CD $77 $3C
     call func_007_7E0A                            ; $5FB7: $CD $0A $7E
     call func_007_7E43                            ; $5FBA: $CD $43 $7E
     ld   hl, wEntitiesSpeedZTable                                ; $5FBD: $21 $20 $C3
@@ -8791,7 +8791,7 @@ jr_007_7291:
     jr   nz, jr_007_72BD                          ; $72B3: $20 $08
 
     ld   de, $72AB                                ; $72B5: $11 $AB $72
-    call label_3C77                               ; $72B8: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $72B8: $CD $77 $3C
     jr   jr_007_72C3                              ; $72BB: $18 $06
 
 jr_007_72BD:
@@ -10466,7 +10466,7 @@ jr_007_7C58:
     ld   de, $7B57                                ; $7C58: $11 $57 $7B
 
 jr_007_7C5B:
-    call label_3C77                               ; $7C5B: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $7C5B: $CD $77 $3C
 
 jr_007_7C5E:
     ld   a, [wDialogState]                        ; $7C5E: $FA $9F $C1

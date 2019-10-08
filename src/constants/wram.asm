@@ -2,9 +2,19 @@ section "WRAM Bank0", wram0[$c000]
 
 wram0Section EQU $C000
 
+; Buffer for OAM data. Copied to OAM by DMA.
+; Structure:
+;  byte 0: Y position
+;  byte 1: X position
+;  byte 2: tile n°
+;  byte 3: attribute
 wOAMBuffer:: ; C000
-  ; Buffer for OAM data. Copied to OAM by DMA
-  ds 4 * 40
+wLinkOAMBuffer:: ; C000
+  ; Area for Link OAM data
+  ds 4 * 12
+wDynamicOAMBuffer:: ; C030
+  ; Area for dynamically allocated OAM elements
+  ds 4 * 28
 
 ; Unlabeled
 wC0A0:: ; C0A0

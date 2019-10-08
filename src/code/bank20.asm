@@ -123,7 +123,7 @@ EntityPointersTable::
 ._6B db $85, $5D, $18 ; entity_pointer Entity6BHandler
 ._6C db $24, $45, $05 ; entity_pointer Entity6CHandler ; $6C
 ._6D db $38, $40, $05 ; entity_pointer Entity6DHandler
-._6E db $C9, $6B, $06 ; entity_pointer Entity6EHandler
+._6E entity_pointer ButterflyEntityHandler
 ._6F db $DA, $48, $19 ; entity_pointer Entity6FHandler
 ._70 db $0E, $62, $06 ; entity_pointer Entity70Handler ; $70
 ._71 db $7F, $60, $06 ; entity_pointer Entity71Handler

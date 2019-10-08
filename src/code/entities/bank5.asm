@@ -2162,7 +2162,7 @@ label_005_4BC1:
     jr   z, jr_005_4BF1                           ; $4BC7: $28 $28
 
     ld   de, $4BBF                                ; $4BC9: $11 $BF $4B
-    call label_3C77                               ; $4BCC: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $4BCC: $CD $77 $3C
     call func_005_7A3A                            ; $4BCF: $CD $3A $7A
     call func_005_7AB1                            ; $4BD2: $CD $B1 $7A
     call GetEntityTransitionCountdown                 ; $4BD5: $CD $05 $0C
@@ -2363,7 +2363,7 @@ jr_005_4CE6:
     xor  a                                        ; $4CF0: $AF
     ldh  [hActiveEntitySpriteVariant], a               ; $4CF1: $E0 $F1
     ld   de, data_005_4cc6                        ; $4CF3: $11 $C6 $4C
-    call label_3C77                               ; $4CF6: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $4CF6: $CD $77 $3C
     call label_3D8A                               ; $4CF9: $CD $8A $3D
     ld   a, $6C                                   ; $4CFC: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4CFE: $E0 $9D
@@ -3164,7 +3164,7 @@ jr_005_51A1:
     ld   de, $515F                                ; $51B3: $11 $5F $51
     xor  a                                        ; $51B6: $AF
     ldh  [hActiveEntitySpriteVariant], a               ; $51B7: $E0 $F1
-    jp   label_3C77                               ; $51B9: $C3 $77 $3C
+    jp   RenderSimpleEntityWithSpriteVariantToOAM                               ; $51B9: $C3 $77 $3C
 
     ld   a, [wDialogState]                        ; $51BC: $FA $9F $C1
     and  a                                        ; $51BF: $A7
@@ -4442,7 +4442,7 @@ jr_005_58F2:
 
     db   $FD                                      ; $5902: $FD
     ld   e, b                                     ; $5903: $58
-    call label_3C77                               ; $5904: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $5904: $CD $77 $3C
     call func_005_7A3A                            ; $5907: $CD $3A $7A
     ld   hl, $C3D0                                ; $590A: $21 $D0 $C3
 
@@ -11280,7 +11280,7 @@ jr_005_7EF2:
 
     ld   c, $03                                   ; $7EF6: $0E $03
     ld   de, $7EF6                                ; $7EF8: $11 $F6 $7E
-    call label_3C77                               ; $7EFB: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $7EFB: $CD $77 $3C
     ld   hl, $C3D0                                ; $7EFE: $21 $D0 $C3
     add  hl, bc                                   ; $7F01: $09
     ld   a, [hl]                                  ; $7F02: $7E

@@ -4348,7 +4348,7 @@ jr_036_588C:
     ld   de, $5879                                ; $588C: $11 $79 $58
 
 jr_036_588F:
-    call label_3C77                               ; $588F: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM ; $588F: $CD $77 $3C
 
 jr_036_5892:
     ldh  a, [hActiveEntityWalking]                ; $5892: $F0 $F0

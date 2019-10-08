@@ -653,7 +653,7 @@ label_4954::
     and  $08
     jr   z, label_497B
     ld   a, [hl]
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
     push af
     ldi  [hl], a
     ld   a, $18
@@ -673,7 +673,7 @@ label_4954::
 
 label_497B::
     ld   a, [hl]
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
     push af
     ldi  [hl], a
     ld   a, $18
@@ -2176,7 +2176,7 @@ label_5C72::
 
 label_5C7B::
     ld   [$C1B0], a
-    ldh  [hActiveEntityUnknownG], a
+    ldh  [hActiveEntitySpriteVariant], a
     ld   a, $00
     ld   [$C3C0], a
     ld   a, $08
@@ -2234,15 +2234,15 @@ label_5CBD::
     dec  a
     cp   $80
     jr   nc, label_5D13
-    ldh  [hActiveEntityUnknownG], a
-    ld   de, $C030
+    ldh  [hActiveEntitySpriteVariant], a
+    ld   de, wDynamicOAMBuffer
     ldh  a, [wActiveEntityPosY]
     ld   [de], a
     inc  de
     ldh  a, [wActiveEntityPosX]
     ld   [de], a
     inc  de
-    ldh  a, [hActiveEntityUnknownG]
+    ldh  a, [hActiveEntitySpriteVariant]
     ld   c, a
     ld   b, $00
     sla  c
@@ -2761,7 +2761,7 @@ UpdateWindowPosition::
     ld   a, [wInventoryAppearing]
     and  a
     jr   z, label_5F6A
-    ld   hl, $C000
+    ld   hl, wOAMBuffer
     ld   a, [wWindowY]
     add  a, $08
     ld   d, a
@@ -3504,7 +3504,7 @@ label_6A7C::
     cp   MAP_EAGLES_TOWER
     ret  nz
     xor  a
-    ldh  [hActiveEntityUnknownG], a
+    ldh  [hActiveEntitySpriteVariant], a
     ldh  [$FFED], a
     ldh  [$FFF5], a
     ld   a, $38

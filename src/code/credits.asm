@@ -360,12 +360,12 @@ func_017_469D:
 
 jr_017_46BD:
     add  hl, de                                   ; $46BD: $19
-    ld   de, $C030                                ; $46BE: $11 $30 $C0
+    ld   de, wDynamicOAMBuffer                    ; $46BE: $11 $30 $C0
     ldh  a, [$FFFE]                               ; $46C1: $F0 $FE
     and  a                                        ; $46C3: $A7
     jr   z, jr_017_46C9                           ; $46C4: $28 $03
 
-    ld   de, $C000                                ; $46C6: $11 $00 $C0
+    ld   de, wOAMBuffer                                ; $46C6: $11 $00 $C0
 
 jr_017_46C9:
     ldh  a, [hFrameCounter]                               ; $46C9: $F0 $E7
@@ -6238,7 +6238,7 @@ jr_017_7784:
 
 jr_017_7798:
     ld   de, $7766                                ; $7798: $11 $66 $77
-    call label_3C77                                    ; $779B: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM                                    ; $779B: $CD $77 $3C
     call func_017_7E3A                            ; $779E: $CD $3A $7E
     ldh  a, [$FFEE]                               ; $77A1: $F0 $EE
     cp   $B0                                      ; $77A3: $FE $B0
@@ -6380,7 +6380,7 @@ jr_017_7826:
     jr   nz, jr_017_7867                          ; $785E: $20 $07
 
     ld   de, $7838                                ; $7860: $11 $38 $78
-    call label_3C77                                    ; $7863: $CD $77 $3C
+    call RenderSimpleEntityWithSpriteVariantToOAM                                    ; $7863: $CD $77 $3C
     ret                                           ; $7866: $C9
 
 jr_017_7867:
@@ -6730,7 +6730,7 @@ func_017_7A29:
     ldh  a, [hScratch0]                               ; $7A2B: $F0 $D7
     ld   e, a                                     ; $7A2D: $5F
     ld   d, b                                     ; $7A2E: $50
-    ld   hl, $C000                                ; $7A2F: $21 $00 $C0
+    ld   hl, wOAMBuffer                                ; $7A2F: $21 $00 $C0
     add  hl, de                                   ; $7A32: $19
     push hl                                       ; $7A33: $E5
     pop  de                                       ; $7A34: $D1
@@ -7385,7 +7385,7 @@ jr_017_7DAC:
     ld   a, [hl]                                  ; $7DB0: $7E
     ld   hl, hBaseScrollY                                ; $7DB1: $21 $97 $FF
     sub  [hl]                                     ; $7DB4: $96
-    ld   [$C000], a                               ; $7DB5: $EA $00 $C0
+    ld   [wOAMBuffer], a                               ; $7DB5: $EA $00 $C0
     ld   a, $97                                   ; $7DB8: $3E $97
     ld   [$C001], a                               ; $7DBA: $EA $01 $C0
     ld   a, $FE                                   ; $7DBD: $3E $FE
@@ -7439,7 +7439,7 @@ jr_017_7E04:
     ld   a, [hl]                                  ; $7E08: $7E
     ld   hl, hBaseScrollY                                ; $7E09: $21 $97 $FF
     sub  [hl]                                     ; $7E0C: $96
-    ld   [$C000], a                               ; $7E0D: $EA $00 $C0
+    ld   [wOAMBuffer], a                               ; $7E0D: $EA $00 $C0
     ld   e, $00                                   ; $7E10: $1E $00
     ld   a, [$C177]                               ; $7E12: $FA $77 $C1
     and  $01                                      ; $7E15: $E6 $01

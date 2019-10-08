@@ -1680,7 +1680,7 @@ func_014_50C3::
     ld   d, $00                                   ; $50C5: $16 $00
 
 jr_014_50C7:
-    ld   hl, wEntity0State                         ; $50C7: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                         ; $50C7: $21 $80 $C2
     add  hl, de                                   ; $50CA: $19
     ld   a, [hl]                                  ; $50CB: $7E
     cp   $05                                      ; $50CC: $FE $05
@@ -1698,7 +1698,7 @@ jr_014_50C7:
     cp   $02                                      ; $50DE: $FE $02
     jr   nz, jr_014_5111                          ; $50E0: $20 $2F
 
-    ld   hl, wEntity0PosX                         ; $50E2: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $50E2: $21 $00 $C2
     add  hl, de                                   ; $50E5: $19
     ldh  a, [hSwordIntersectedAreaX]              ; $50E6: $F0 $CE
     add  $08                                      ; $50E8: $C6 $08
@@ -1707,7 +1707,7 @@ jr_014_50C7:
     cp   $10                                      ; $50ED: $FE $10
     jr   nc, jr_014_5111                          ; $50EF: $30 $20
 
-    ld   hl, wEntity0PosY                         ; $50F1: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                         ; $50F1: $21 $10 $C2
     add  hl, de                                   ; $50F4: $19
     ldh  a, [hSwordIntersectedAreaY]              ; $50F5: $F0 $CD
     add  $10                                      ; $50F7: $C6 $10
@@ -2303,7 +2303,7 @@ jr_014_5391:
     ld   [hl], $08                                ; $53A1: $36 $08
 
 func_014_53A3:
-    ld   hl, wEntity0State                         ; $53A3: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                         ; $53A3: $21 $80 $C2
     add  hl, bc                                   ; $53A6: $09
     ld   [hl], $05                                ; $53A7: $36 $05
     ldh  a, [hActiveEntityType]                     ; $53A9: $F0 $EB
@@ -2315,7 +2315,7 @@ func_014_53A3:
     jr   jr_014_5409                              ; $53B4: $18 $53
 
 jr_014_53B6:
-    ld   hl, wEntity0State                         ; $53B6: $21 $80 $C2
+    ld   hl, wEntitiesStateTable                         ; $53B6: $21 $80 $C2
     add  hl, bc                                   ; $53B9: $09
     cp   $D6                                      ; $53BA: $FE $D6
     jr   z, jr_014_53ED                           ; $53BC: $28 $2F
@@ -2398,13 +2398,13 @@ jr_014_541B:
     ld   hl, $5313                                ; $5420: $21 $13 $53
     add  hl, de                                   ; $5423: $19
     ld   a, [hl]                                  ; $5424: $7E
-    ld   hl, wEntity0SpeedX                       ; $5425: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                       ; $5425: $21 $40 $C2
     add  hl, bc                                   ; $5428: $09
     ld   [hl], a                                  ; $5429: $77
     ld   hl, $5323                                ; $542A: $21 $23 $53
     add  hl, de                                   ; $542D: $19
     ld   a, [hl]                                  ; $542E: $7E
-    ld   hl, wEntity0SpeedY                       ; $542F: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                       ; $542F: $21 $50 $C2
     add  hl, bc                                   ; $5432: $09
     ld   [hl], a                                  ; $5433: $77
     ld   hl, $5333                                ; $5434: $21 $33 $53

@@ -16,7 +16,7 @@ label_002_41D0::
     ldh  a, [hSwordIntersectedAreaX]                               ; $41DD: $F0 $CE
     and  $F0                                      ; $41DF: $E6 $F0
     add  $08                                      ; $41E1: $C6 $08
-    ld   hl, wEntity0PosX                         ; $41E3: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $41E3: $21 $00 $C2
     add  hl, de                                   ; $41E6: $19
     ld   [hl], a                                  ; $41E7: $77
     ldh  a, [hSwordIntersectedAreaY]                               ; $41E8: $F0 $CD
@@ -1310,7 +1310,7 @@ jr_002_4AF1:
     add  hl, bc                                   ; $4B21: $09
     ldh  a, [hLinkPositionX]                      ; $4B22: $F0 $98
     add  [hl]                                     ; $4B24: $86
-    ld   hl, wEntity0PosX                         ; $4B25: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4B25: $21 $00 $C2
     add  hl, de                                   ; $4B28: $19
     ld   [hl], a                                  ; $4B29: $77
     ld   hl, $4A14                                ; $4B2A: $21 $14 $4A
@@ -1633,7 +1633,7 @@ jr_002_4CDD:
     call func_003_64CA_trampoline                               ; $4CDD: $CD $86 $3B
     jr   c, jr_002_4D1F                           ; $4CE0: $38 $3D
 
-    ld   hl, wEntity0PosX                         ; $4CE2: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $4CE2: $21 $00 $C2
     add  hl, de                                   ; $4CE5: $19
     ldh  a, [hSwordIntersectedAreaX]                               ; $4CE6: $F0 $CE
     add  $08                                      ; $4CE8: $C6 $08
@@ -2271,7 +2271,7 @@ jr_002_503B:
     jr   c, jr_002_5079                           ; $505D: $38 $1A
 
     ldh  a, [hLinkPositionX]                      ; $505F: $F0 $98
-    ld   hl, wEntity0PosX                         ; $5061: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5061: $21 $00 $C2
     add  hl, de                                   ; $5064: $19
     ld   [hl], a                                  ; $5065: $77
     ldh  a, [hLinkPositionY]                      ; $5066: $F0 $99
@@ -2830,7 +2830,7 @@ label_002_538B::
     add  hl, bc                                   ; $5393: $09
     ldh  a, [hLinkPositionX]                      ; $5394: $F0 $98
     add  [hl]                                     ; $5396: $86
-    ld   hl, wEntity0PosX                         ; $5397: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5397: $21 $00 $C2
     add  hl, de                                   ; $539A: $19
     ld   [hl], a                                  ; $539B: $77
     ld   hl, $5387                                ; $539C: $21 $87 $53
@@ -2914,7 +2914,7 @@ TryOpenLockedDoor::
     ldh  a, [$FFDB]                               ; $5407: $F0 $DB
     and  $F0                                      ; $5409: $E6 $F0
     add  $08                                      ; $540B: $C6 $08
-    ld   hl, wEntity0PosX                         ; $540D: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $540D: $21 $00 $C2
     add  hl, de                                   ; $5410: $19
     ld   [hl], a                                  ; $5411: $77
     ldh  a, [hScratch5]                               ; $5412: $F0 $DC
@@ -2952,7 +2952,7 @@ jr_002_5438:
     call func_003_64CA_trampoline                               ; $5438: $CD $86 $3B
     jr   c, jr_002_546F                           ; $543B: $38 $32
 
-    ld   hl, wEntity0PosX                         ; $543D: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $543D: $21 $00 $C2
     add  hl, de                                   ; $5440: $19
     ld   [hl], $28                                ; $5441: $36 $28
     ldh  a, [hMapId]                         ; $5443: $F0 $F7
@@ -3300,7 +3300,7 @@ jr_002_55FD:
     ld   a, [$C3C0]                               ; $560F: $FA $C0 $C3
     ld   e, a                                     ; $5612: $5F
     ld   d, $00                                   ; $5613: $16 $00
-    ld   hl, $C030                                ; $5615: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $5615: $21 $30 $C0
     add  hl, de                                   ; $5618: $19
     ld   e, l                                     ; $5619: $5D
     ld   d, h                                     ; $561A: $54
@@ -3557,7 +3557,7 @@ jr_002_578E:
     ld   a, [$C3C0]                               ; $578E: $FA $C0 $C3
     ld   e, a                                     ; $5791: $5F
     ld   d, $00                                   ; $5792: $16 $00
-    ld   hl, $C030                                ; $5794: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $5794: $21 $30 $C0
     add  hl, de                                   ; $5797: $19
     ldh  a, [hScratch1]                               ; $5798: $F0 $D8
     ld   [hl+], a                                 ; $579A: $22
@@ -3585,7 +3585,7 @@ jr_002_578E:
 
 jr_002_57BB:
     ld   d, $00                                   ; $57BB: $16 $00
-    ld   hl, $C030                                ; $57BD: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $57BD: $21 $30 $C0
     add  hl, de                                   ; $57C0: $19
     ldh  a, [hScratch1]                               ; $57C1: $F0 $D8
     ld   [hl+], a                                 ; $57C3: $22
@@ -3687,7 +3687,7 @@ label_002_583A::
     ld   a, [$C3C0]                               ; $583C: $FA $C0 $C3
     ld   e, a                                     ; $583F: $5F
     ld   d, $00                                   ; $5840: $16 $00
-    ld   hl, $C030                                ; $5842: $21 $30 $C0
+    ld   hl, wDynamicOAMBuffer                    ; $5842: $21 $30 $C0
     add  hl, de                                   ; $5845: $19
     ld   e, l                                     ; $5846: $5D
     ld   d, h                                     ; $5847: $54
@@ -4597,7 +4597,7 @@ jr_002_5DC0:
     call func_002_5DAF                            ; $5DC2: $CD $AF $5D
     ld   a, $2F                                   ; $5DC5: $3E $2F
     call func_003_64CA_trampoline                               ; $5DC7: $CD $86 $3B
-    ld   hl, wEntity0PosX                         ; $5DCA: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $5DCA: $21 $00 $C2
     add  hl, de                                   ; $5DCD: $19
     ld   [hl], $88                                ; $5DCE: $36 $88
     ld   hl, wEntitiesPosYTable                   ; $5DD0: $21 $10 $C2
@@ -7697,7 +7697,7 @@ jr_002_734F:
     call func_003_64CA_trampoline                               ; $736C: $CD $86 $3B
     jp   c, label_002_7454                        ; $736F: $DA $54 $74
 
-    ld   hl, wEntity0PosX                         ; $7372: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                         ; $7372: $21 $00 $C2
     add  hl, de                                   ; $7375: $19
     ldh  a, [hFFE9]                               ; $7376: $F0 $E9
     swap a                                        ; $7378: $CB $37

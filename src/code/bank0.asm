@@ -2296,7 +2296,7 @@ label_1629::
 
 label_1637::
     ld   a, c
-    ldh  [hActiveEntityUnknownG], a
+    ldh  [hActiveEntitySpriteVariant], a
     call label_2178
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
@@ -2327,7 +2327,7 @@ label_1653::
     ld   [hl], a
     ld   hl, $C3B0
     add  hl, de
-    ldh  a, [hActiveEntityUnknownG]
+    ldh  a, [hActiveEntitySpriteVariant]
     ld   [hl], a
     ld   c, e
     ld   b, d
@@ -7012,7 +7012,7 @@ AnimateEntity::
     ld   hl, $C3B0
     add  hl, bc
     ld   a, [hl]
-    ldh  [hActiveEntityUnknownG], a
+    ldh  [hActiveEntitySpriteVariant], a
 
     ld   a, BANK(UpdateEntityPositionForRoomTransition)
     ld   [wCurrentBank], a
@@ -7240,21 +7240,21 @@ label_3BB5::
 ; This is not called for unanimated entities (like butterflies,
 ; which are animated only by the actual tile changing.)
 RenderAnimatedActiveEntity::
-    ; Increment hActiveEntityUnknownG
-    ldh  a, [hActiveEntityUnknownG]
+    ; Increment hActiveEntitySpriteVariant
+    ldh  a, [hActiveEntitySpriteVariant]
     inc  a
-    ; If hActiveEntityUnknownG = 0, return
+    ; If hActiveEntitySpriteVariant = 0, return
     ret  z
 
     call SkipDisabledEntityDuringRoomTransition
 
     push de
 
-    ; de = wOAMBuffer + $30 + [$C3C0]
+    ; de = wDynamicOAMBuffer + [$C3C0]
     ld   a, [$C3C0]
     ld   e, a
     ld   d, b
-    ld   hl, wOAMBuffer + $30
+    ld   hl, wDynamicOAMBuffer
     add  hl, de
     ld   e, l
     ld   d, h
@@ -7277,8 +7277,8 @@ RenderAnimatedActiveEntity::
     ld   [de], a
     inc  de
 
-    ; hl = pop de + [hActiveEntityUnknownG] * 2
-    ldh  a, [hActiveEntityUnknownG]
+    ; hl = pop de + [hActiveEntitySpriteVariant] * 2
+    ldh  a, [hActiveEntitySpriteVariant]
     ld   c, a
     ld   b, $00
     sla  c
@@ -7382,32 +7382,49 @@ label_3C71::
     ; Reload saved bank and return
     jp   ReloadSavedBank
 
-label_3C77::
-    ldh  a, [hActiveEntityUnknownG]
+; Take a sprite variants table, and copy the correct value to the OAM buffer.
+;
+; Inputs:
+;   de    address of a OAM data table
+;         (2 bytes per entry: first is the tile n°, second the tile attributes)
+;   $C3C0 index of the dynamically allocated OAM slot
+RenderSimpleEntityWithSpriteVariantToOAM::
+    ; If hActiveEntitySpriteVariant == -1, return.
+    ldh  a, [hActiveEntitySpriteVariant]
     inc  a
     ret  z
+
     call SkipDisabledEntityDuringRoomTransition
+
     push de
+
+    ; de = wDynamicOAMBuffer + [$C3C0]
     ld   a, [$C3C0]
     ld   l, a
     ld   h, $00
-    ld   bc, $C030
+    ld   bc, wDynamicOAMBuffer
     add  hl, bc
     ld   e, l
     ld   d, h
+    ; bc = [wLinkWalkingFrameCount]
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   b, $00
+
+    ; If in a side-scrolling room…
     ldh  a, [hIsSideScrolling]
     and  a
     ldh  a, [wActiveEntityPosY]
-    jr   z, label_3C9C
+    jr   z, .sideScrollingEnd
+    ; … wActiveEntityPosY -= 4
     sub  a, $04
     ldh  [wActiveEntityPosY], a
+.sideScrollingEnd
 
-label_3C9C::
+    ; (wDynamicOAMBuffer + [$C3C0] + 0) = [wActiveEntityPosY]
     ld   [de], a
     inc  de
+    ; (wDynamicOAMBuffer + [$C3C0] + 1) = [wActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   h, a
     ldh  a, [wActiveEntityPosX]
@@ -7415,7 +7432,8 @@ label_3C9C::
     sub  a, h
     ld   [de], a
     inc  de
-    ldh  a, [hActiveEntityUnknownG]
+    ; (wDynamicOAMBuffer + [$C3C0] + 2) = DataTable[hActiveEntitySpriteVariant * 2]
+    ldh  a, [hActiveEntitySpriteVariant]
     ld   c, a
     ld   b, $00
     sla  c
@@ -7424,29 +7442,35 @@ label_3C9C::
     add  hl, bc
     ld   a, [hli]
     ld   [de], a
+
+    ; If on GBC…
     inc  de
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_3CD0
+    jr   z, .gbcEnd
+    ; and not during credits…
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
-    jr   z, label_3CD0
+    jr   z, .gbcEnd
+    ; and $FFED != 0…
     ldh  a, [$FFED]
     and  a
-    jr   z, label_3CD0
+    jr   z, .gbcEnd
+    ; (wDynamicOAMBuffer + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) & 0xf8 | 4
     ld   a, [hl]
     and  $F8
     or   $04
     ld   [de], a
-    jr   label_3CD6
+    jr   .functionEnd
+.gbcEnd
 
-label_3CD0::
+    ; (wDynamicOAMBuffer + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) ^ [$FFED]
     ld   a, [hli]
     ld   hl, $FFED
     xor  [hl]
     ld   [de], a
 
-label_3CD6::
+.functionEnd
     inc  de
     jr   label_3C63
 
@@ -7461,14 +7485,14 @@ label_3CE0::
     jr   label_3CF6
 
 label_3CE6::
-    ldh  a, [hActiveEntityUnknownG]
+    ldh  a, [hActiveEntitySpriteVariant]
     inc  a
     jr   z, label_3D52
     push hl
     ld   a, [$C3C0]
     ld   e, a
     ld   d, $00
-    ld   hl, $C030
+    ld   hl, wDynamicOAMBuffer
     add  hl, de
 
 label_3CF6::

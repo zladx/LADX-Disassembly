@@ -2082,9 +2082,9 @@ IncrementD000AndReturn::                         ; Sources: jp @ $5686, jp @ $57
     ret                                          ; $5629 (17): $C9
 
 DisableAllEntities::
-    ; For each entity, set the state to 0 (ENTITY_STATE_DISABLED)
+    ; For each entity, set the state to 0 (ENTITY_STATUS_DISABLED)
     ld   e, MAX_ENTITIES                          ; $562A: $1E $10
-    ld   hl, wEntitiesStateTable                  ; $562C: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $562C: $21 $80 $C2
     xor  a                                        ; $562F: $AF
 .loop
     ld   [hl+], a                                 ; $5630: $22

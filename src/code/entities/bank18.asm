@@ -4850,7 +4850,7 @@ jr_018_5CEF:
     jr   nz, jr_018_5D7A                          ; $5D42: $20 $36
 
     call label_3B23                               ; $5D44: $CD $23 $3B
-    ld   hl, wEntitiesStateTable                        ; $5D47: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $5D47: $21 $80 $C2
     add  hl, bc                                   ; $5D4A: $09
     ld   a, [hl]                                  ; $5D4B: $7E
     cp   $02                                      ; $5D4C: $FE $02
@@ -6080,7 +6080,7 @@ func_018_6493:
     db   $EC                                      ; $64CA: $EC
     inc  d                                        ; $64CB: $14
     call func_018_68EA                            ; $64CC: $CD $EA $68
-    ldh  a, [hActiveEntityState]                  ; $64CF: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                 ; $64CF: $F0 $EA
     cp   $01                                      ; $64D1: $FE $01
     jp   z, label_018_7F0F                        ; $64D3: $CA $0F $7F
 
@@ -7064,7 +7064,7 @@ func_018_69D8:
     and  a                                        ; $6A06: $A7
     jp   nz, $6F70                                ; $6A07: $C2 $70 $6F
 
-    ldh  a, [hActiveEntityState]                  ; $6A0A: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                 ; $6A0A: $F0 $EA
     cp   $01                                      ; $6A0C: $FE $01
     jr   nz, jr_018_6A71                          ; $6A0E: $20 $61
 
@@ -7701,7 +7701,7 @@ func_018_6DB9:
     ld   d, b                                     ; $6DC2: $50
 
 jr_018_6DC3:
-    ld   hl, wEntitiesStateTable                        ; $6DC3: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $6DC3: $21 $80 $C2
     add  hl, de                                   ; $6DC6: $19
     ld   a, [hl]                                  ; $6DC7: $7E
     and  a                                        ; $6DC8: $A7
@@ -7803,7 +7803,7 @@ func_018_6E57:
 
 jr_018_6E59:
     ld   d, b                                     ; $6E59: $50
-    ld   hl, wEntitiesStateTable                        ; $6E5A: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $6E5A: $21 $80 $C2
     add  hl, de                                   ; $6E5D: $19
     ld   a, [hl]                                  ; $6E5E: $7E
     cp   $05                                      ; $6E5F: $FE $05
@@ -8182,7 +8182,7 @@ jr_018_7069:
     and  a                                        ; $7077: $A7
     jr   z, jr_018_707F                           ; $7078: $28 $05
 
-    ld   hl, wEntitiesStateTable                        ; $707A: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $707A: $21 $80 $C2
     add  hl, de                                   ; $707D: $19
     ld   [hl], b                                  ; $707E: $70
 
@@ -8747,12 +8747,12 @@ jr_018_733C:
     ret                                           ; $7362: $C9
 
 jr_018_7363:
-    ldh  a, [hActiveEntityState]                  ; $7363: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                 ; $7363: $F0 $EA
     cp   $05                                      ; $7365: $FE $05
     jr   z, jr_018_737E                           ; $7367: $28 $15
 
     call func_018_7F0F                            ; $7369: $CD $0F $7F
-    ld   hl, wEntitiesStateTable                        ; $736C: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $736C: $21 $80 $C2
     add  hl, bc                                   ; $736F: $09
     ld   a, [hl]                                  ; $7370: $7E
     and  a                                        ; $7371: $A7
@@ -9281,7 +9281,7 @@ func_018_766A:
     call label_3CE6                               ; $767C: $CD $E6 $3C
     ld   a, $06                                   ; $767F: $3E $06
     call label_3DA0                               ; $7681: $CD $A0 $3D
-    ldh  a, [hActiveEntityState]                  ; $7684: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                 ; $7684: $F0 $EA
     cp   $01                                      ; $7686: $FE $01
     jr   z, jr_018_7691                           ; $7688: $28 $07
 
@@ -10471,7 +10471,7 @@ func_018_7D3B:
     cp   $03                                      ; $7D4E: $FE $03
     jr   nz, jr_018_7D58                          ; $7D50: $20 $06
 
-    ld   hl, wEntitiesStateTable + $0F                        ; $7D52: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable + $0F                        ; $7D52: $21 $8F $C2
     add  hl, de                                   ; $7D55: $19
     ld   [hl], $00                                ; $7D56: $36 $00
 
@@ -10585,7 +10585,7 @@ jr_018_7DE6:
     ret                                           ; $7DE7: $C9
 
 func_018_7DE8:
-    ldh  a, [hActiveEntityState]                  ; $7DE8: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                 ; $7DE8: $F0 $EA
     cp   $05                                      ; $7DEA: $FE $05
     jr   nz, jr_018_7E13                          ; $7DEC: $20 $25
 
@@ -10825,7 +10825,7 @@ jr_018_7F06:
 
 func_018_7F08:
 label_018_7F08:
-    ld   hl, wEntitiesStateTable                        ; $7F08: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $7F08: $21 $80 $C2
     add  hl, bc                                   ; $7F0B: $09
     ld   [hl], $00                                ; $7F0C: $36 $00
     ret                                           ; $7F0E: $C9

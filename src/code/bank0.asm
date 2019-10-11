@@ -1925,7 +1925,7 @@ ShootArrow::
     ld   a, [$C1C1]
     ld   c, a
     ld   b, d
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   [hl], b
     ld   hl, $C290
@@ -2610,7 +2610,7 @@ label_1847::
     ld   [$DDD6], a
     ld   [$DDD7], a
     ld   e, $10
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
 
 label_186C::
     ldi  [hl], a
@@ -3544,7 +3544,7 @@ label_2183::
     jr   c, label_21A7
     ld   a, $02
     ldh  [hWaveSfx], a
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   [hl], $07
     ld   hl, $C3B0
@@ -6763,7 +6763,7 @@ label_389B::
     ld   d, e
 
 label_389E::
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     cp   $00
@@ -6970,7 +6970,7 @@ AnimateEntities::
     ld   [wLinkWalkingFrameCount], a
 
     ; Read the entity state
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   a, [hl]
 
@@ -6979,7 +6979,7 @@ AnimateEntities::
     jr   z, .AnimateEntityEnd
 
     ; animate the entity.
-    ldh  [hActiveEntityState], a
+    ldh  [hActiveEntityStatus], a
     call AnimateEntity
 .AnimateEntityEnd
 
@@ -7026,8 +7026,8 @@ AnimateEntity::
     jr   nz, .entityLifted
 .raftManEnd
 
-    ldh  a, [hActiveEntityState]
-    cp   ENTITY_STATE_LIFTED
+    ldh  a, [hActiveEntityStatus]
+    cp   ENTITY_STATUS_LIFTED
     jr   nz, .notLifted
 .entityLifted
     call UpdateEntityPositionForRoomTransition
@@ -7048,8 +7048,8 @@ AnimateEntity::
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
 
-    ldh  a, [hActiveEntityState]
-    cp   ENTITY_STATE_ACTIVE
+    ldh  a, [hActiveEntityStatus]
+    cp   ENTITY_STATUS_ACTIVE
     jp   z, ExecuteActiveEntityHandler
     JP_TABLE
 ._00 dw AnimateEntities.return
@@ -7736,7 +7736,7 @@ label_3E76::
 
 label_3E83::
     ld   e, $10
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
 
 label_3E88::
     xor  a
@@ -7920,7 +7920,7 @@ label_3F78::
 ;   c:  index of the entity
 ClearEntityType::
 ClearEntityTypeAndReturn::
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   [hl], b
     ret

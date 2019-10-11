@@ -52,11 +52,11 @@ IntroHandlerEntryPoint::
     ld   [wGameplaySubtype], a
     xor  a
     ; Reset entities
-    ld   [wEntitiesStateTable + $00], a
-    ld   [wEntitiesStateTable + $01], a
-    ld   [wEntitiesStateTable + $02], a
-    ld   [wEntitiesStateTable + $03], a
-    ld   [wEntitiesStateTable + $04], a
+    ld   [wEntitiesStatusTable + $00], a
+    ld   [wEntitiesStatusTable + $01], a
+    ld   [wEntitiesStatusTable + $02], a
+    ld   [wEntitiesStatusTable + $03], a
+    ld   [wEntitiesStatusTable + $04], a
 
     ld   [rBGP], a
     ld   [wBGPalette], a
@@ -194,8 +194,8 @@ label_6F5F::
     dec  e
     jr   nz, label_6F5F
 
-    ld   [wEntitiesStateTable + $00], a
-    ld   [wEntitiesStateTable + $01], a
+    ld   [wEntitiesStatusTable + $00], a
+    ld   [wEntitiesStatusTable + $01], a
     ld   [$C3B0], a
     ld   [$C3B1], a
     ld   [$C3B2], a
@@ -203,7 +203,7 @@ label_6F5F::
 
     ; Configure Link's ship entity
     ld   a, $05
-    ld   [wEntitiesStateTable + $02], a
+    ld   [wEntitiesStatusTable + $02], a
     ld   a, $C0
     ld   [wEntitiesPosXTable + $02], a
     ld   a, $4E
@@ -267,7 +267,7 @@ IntroShipOnSeaHandler::
     cp   $08
     jp   nz, label_7013
     xor  a
-    ld   [wEntitiesStateTable], a
+    ld   [wEntitiesStatusTable], a
     ld   [$C281], a
     ld   [$C282], a
     ld   [$C290], a
@@ -349,7 +349,7 @@ label_7068::
     ld   d, $00
 
 label_706C::
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -372,7 +372,7 @@ label_7087::
     ld   hl, label_7081
     add  hl, bc
     ld   a, [hl]
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   [hl], a
     ld   hl, label_707B
@@ -437,7 +437,7 @@ IntroLinkFaceHandler::
     ld   a, $03
     ld   [rIE], a ; Enable interrupts on VBlank and LCDStat
     xor  a
-    ld   [wEntitiesStateTable], a
+    ld   [wEntitiesStatusTable], a
     ld   [$C281], a
     ld   a, $01
     ld   [wIntroSubTimer], a
@@ -506,7 +506,7 @@ label_7168::
     ld   a, $07
     ld   [wGameplaySubtype], a
     ld   a, $06
-    ld   [wEntitiesStateTable], a
+    ld   [wEntitiesStatusTable], a
     ld   a, $B0
     ld   [wEntitiesPosXTable], a
     ld   a, $68
@@ -898,7 +898,7 @@ TitleScreenHandler::
     ld   d, $00
 
 label_73E0::
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -1060,7 +1060,7 @@ RenderIntroEntities::
     ld   [wLinkWalkingFrameCount], a
 
     ; a = EntityType[c]
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -1101,8 +1101,8 @@ RenderIntroEntities::
 ; Inputs:
 ;   bc: index of entity in entities table
 RenderIntroEntity::
-    ; a = wEntitiesStateTable[bc]
-    ld   hl, wEntitiesStateTable
+    ; a = wEntitiesStatusTable[bc]
+    ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   a, [hl]
 
@@ -1116,7 +1116,7 @@ RenderIntroEntity::
     jp   z, RenderIntroSparkle
     call GetEntityTransitionCountdown
     jr   nz, label_7533
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   [hl], b
     ret
@@ -1243,7 +1243,7 @@ label_7629::
     ld   l, $01
 
 label_762B::
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   a, [hl]
     dec  a
@@ -1499,7 +1499,7 @@ label_77E1::
     call GetEntityTransitionCountdown
     dec  [hl]
     jr   nz, label_77ED
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   [hl], b
     ret
@@ -1906,7 +1906,7 @@ label_7AB3::
     ld   [$D002], a
     ld   [$D003], a
     ld   [$D004], a
-    ld   [wEntitiesStateTable], a
+    ld   [wEntitiesStatusTable], a
     ld   [$C281], a
 
 label_7AE3::

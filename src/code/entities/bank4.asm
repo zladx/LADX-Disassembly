@@ -320,7 +320,7 @@ jr_004_41EC:
 
     inc  a                                        ; $41F2: $3C
     ld   [$C3CF], a                               ; $41F3: $EA $CF $C3
-    ld   hl, wEntitiesStateTable                   ; $41F6: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $41F6: $21 $80 $C2
     add  hl, bc                                   ; $41F9: $09
     ld   [hl], $07                                ; $41FA: $36 $07
     ld   hl, $C490                                ; $41FC: $21 $90 $C4
@@ -440,7 +440,7 @@ func_004_42B3:
 ; Called by TableJump above for Level 2 Boss
 EntityTableBHandler1::
     call func_004_46F9                            ; $42E7: $CD $F9 $46
-    ldh  a, [hActiveEntityState]                   ; $42EA: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                   ; $42EA: $F0 $EA
     cp   $05                                      ; $42EC: $FE $05
     jr   z, jr_004_431A                           ; $42EE: $28 $2A
 
@@ -516,7 +516,7 @@ jr_004_4336:
     ld   a, [wIntroSubTimer]                      ; $4351: $FA $02 $D0
     ld   e, a                                     ; $4354: $5F
     ld   d, b                                     ; $4355: $50
-    ld   hl, wEntitiesStateTable                   ; $4356: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $4356: $21 $80 $C2
     add  hl, de                                   ; $4359: $19
     ld   a, [hl]                                  ; $435A: $7E
     and  a                                        ; $435B: $A7
@@ -1755,7 +1755,7 @@ Data_004_4BDD::
     jp   label_3D8A                               ; $4DF8: $C3 $8A $3D
 
     call func_004_4FFE                            ; $4DFB: $CD $FE $4F
-    ldh  a, [hActiveEntityState]                               ; $4DFE: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                               ; $4DFE: $F0 $EA
     cp   $05                                      ; $4E00: $FE $05
     jp   z, label_004_4E60                        ; $4E02: $CA $60 $4E
 
@@ -1791,7 +1791,7 @@ jr_004_4E2E:
     cp   e                                        ; $4E2F: $BB
     jr   z, jr_004_4E43                           ; $4E30: $28 $11
 
-    ld   hl, wEntitiesStateTable                   ; $4E32: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $4E32: $21 $80 $C2
     add  hl, de                                   ; $4E35: $19
     ld   a, [hl]                                  ; $4E36: $7E
     and  a                                        ; $4E37: $A7
@@ -2135,7 +2135,7 @@ func_004_5067:
     call label_3EE8                               ; $5082: $CD $E8 $3E
     call label_394D                               ; $5085: $CD $4D $39
     call func_004_542F                            ; $5088: $CD $2F $54
-    ldh  a, [hActiveEntityState]                               ; $508B: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                               ; $508B: $F0 $EA
     cp   $05                                      ; $508D: $FE $05
     jp   z, label_004_510F                        ; $508F: $CA $0F $51
 
@@ -2170,7 +2170,7 @@ jr_004_50AD:
     and  $80                                      ; $50B6: $E6 $80
     jr   nz, jr_004_50D5                          ; $50B8: $20 $1B
 
-    ld   hl, wEntitiesStateTable                   ; $50BA: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $50BA: $21 $80 $C2
     add  hl, de                                   ; $50BD: $19
     ld   a, [hl]                                  ; $50BE: $7E
     cp   $05                                      ; $50BF: $FE $05
@@ -3227,7 +3227,7 @@ func_004_56A7:
     jp   nz, label_004_5690                       ; $56BD: $C2 $90 $56
 
     call label_3EE8                               ; $56C0: $CD $E8 $3E
-    ldh  a, [hActiveEntityState]                               ; $56C3: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                               ; $56C3: $F0 $EA
     cp   $05                                      ; $56C5: $FE $05
     jp   z, label_004_5791                        ; $56C7: $CA $91 $57
 
@@ -5130,7 +5130,7 @@ jr_004_6354:
     ld   d, b                                     ; $6389: $50
 
 jr_004_638A:
-    ld   hl, wEntitiesStateTable                   ; $638A: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $638A: $21 $80 $C2
     add  hl, de                                   ; $638D: $19
     ld   a, [hl]                                  ; $638E: $7E
     and  a                                        ; $638F: $A7
@@ -5455,7 +5455,7 @@ jr_004_6504:
     ld   a, [$D003]                               ; $656B: $FA $03 $D0
     ld   e, a                                     ; $656E: $5F
     ld   d, b                                     ; $656F: $50
-    ld   hl, wEntitiesStateTable                   ; $6570: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $6570: $21 $80 $C2
     add  hl, de                                   ; $6573: $19
     ld   [hl], b                                  ; $6574: $70
 
@@ -5833,7 +5833,7 @@ func_004_679B:
     ld   a, [$D003]                               ; $67A1: $FA $03 $D0
     ld   e, a                                     ; $67A4: $5F
     ld   d, b                                     ; $67A5: $50
-    ld   hl, wEntitiesStateTable                   ; $67A6: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $67A6: $21 $80 $C2
     add  hl, de                                   ; $67A9: $19
     ld   a, [hl]                                  ; $67AA: $7E
     and  a                                        ; $67AB: $A7
@@ -6080,7 +6080,7 @@ label_004_6910:
     cp   c                                        ; $6912: $B9
     jp   z, label_004_69A5                        ; $6913: $CA $A5 $69
 
-    ld   hl, wEntitiesStateTable                   ; $6916: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $6916: $21 $80 $C2
     add  hl, de                                   ; $6919: $19
     ld   a, [hl]                                  ; $691A: $7E
     and  a                                        ; $691B: $A7
@@ -6835,7 +6835,7 @@ jr_004_6D5C:
 
 func_004_6D7A:
 label_004_6D7A:
-    ld   hl, wEntitiesStateTable                   ; $6D7A: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $6D7A: $21 $80 $C2
     add  hl, bc                                   ; $6D7D: $09
     ld   [hl], b                                  ; $6D7E: $70
     ret                                           ; $6D7F: $C9
@@ -7886,7 +7886,7 @@ jr_004_735F:
     ld   d, b                                     ; $7361: $50
 
 jr_004_7362:
-    ld   hl, wEntitiesStateTable                   ; $7362: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                   ; $7362: $21 $80 $C2
     add  hl, de                                   ; $7365: $19
     ld   a, [hl]                                  ; $7366: $7E
     and  a                                        ; $7367: $A7
@@ -10081,7 +10081,7 @@ jr_004_7F9D:
     ret                                           ; $7FA2: $C9
 
 func_004_7FA3:
-    ldh  a, [hActiveEntityState]                               ; $7FA3: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                               ; $7FA3: $F0 $EA
     cp   $05                                      ; $7FA5: $FE $05
     jr   nz, jr_004_7FCE                          ; $7FA7: $20 $25
 

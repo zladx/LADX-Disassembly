@@ -2871,7 +2871,7 @@ label_5FDE::
     ld   a, [hl]
     cp   $D5
     jr   nz, label_5FF0
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -2938,7 +2938,7 @@ label_6047::
     ld   a, [hl]
     cp   $D4
     jr   nz, label_6059
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -2981,7 +2981,7 @@ label_608A::
     ld   a, [hl]
     cp   $C1
     jr   nz, label_609C
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -3080,7 +3080,7 @@ label_612F::
     ld   a, [hl]
     cp   $6D
     jr   nz, label_6141
-    ld   hl, wEntitiesStateTable
+    ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a

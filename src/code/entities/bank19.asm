@@ -143,7 +143,7 @@ jr_019_40F4:
 
     call IncrementEntityWalkingAttr               ; $40FD: $CD $12 $3B
     ld   [hl], $02                                ; $4100: $36 $02
-    ld   hl, wEntitiesStateTable                        ; $4102: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $4102: $21 $80 $C2
     add  hl, bc                                   ; $4105: $09
     ld   [hl], $07                                ; $4106: $36 $07
     ld   hl, $C490                                ; $4108: $21 $90 $C4
@@ -4284,7 +4284,7 @@ jr_019_5950:
 
     inc  a                                        ; $5955: $3C
     ld   [$C3CF], a                               ; $5956: $EA $CF $C3
-    ld   hl, wEntitiesStateTable                        ; $5959: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $5959: $21 $80 $C2
     add  hl, bc                                   ; $595C: $09
     ld   [hl], $07                                ; $595D: $36 $07
     ld   hl, $C490                                ; $595F: $21 $90 $C4
@@ -4398,7 +4398,7 @@ jr_019_59B7:
     ld   [hl], b                                  ; $59F3: $70
     ld   de, $59BC                                ; $59F4: $11 $BC $59
     call RenderAnimatedActiveEntity                               ; $59F7: $CD $C0 $3B
-    ldh  a, [hActiveEntityState]                  ; $59FA: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                 ; $59FA: $F0 $EA
     cp   $07                                      ; $59FC: $FE $07
     jp   z, label_019_5B3C                        ; $59FE: $CA $3C $5B
 
@@ -4556,7 +4556,7 @@ jr_019_5AC4:
     ld   [wLinkMotionState], a                    ; $5ACF: $EA $1C $C1
     inc  a                                        ; $5AD2: $3C
     ld   [$C3CF], a                               ; $5AD3: $EA $CF $C3
-    ld   hl, wEntitiesStateTable                        ; $5AD6: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $5AD6: $21 $80 $C2
     add  hl, bc                                   ; $5AD9: $09
     ld   [hl], $07                                ; $5ADA: $36 $07
     ld   hl, $C490                                ; $5ADC: $21 $90 $C4
@@ -10424,7 +10424,7 @@ jr_019_7A8F:
     cp   $A7                                      ; $7A91: $FE $A7
     ret  z                                        ; $7A93: $C8
 
-    ld   hl, wEntitiesStateTable                        ; $7A94: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $7A94: $21 $80 $C2
     add  hl, bc                                   ; $7A97: $09
     ld   [hl], b                                  ; $7A98: $70
     ret                                           ; $7A99: $C9
@@ -10895,7 +10895,7 @@ label_019_7CA2:
     cp   $03                                      ; $7CB7: $FE $03
     jr   nz, jr_019_7CC1                          ; $7CB9: $20 $06
 
-    ld   hl, wEntitiesStateTable + $0F                        ; $7CBB: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable + $0F                        ; $7CBB: $21 $8F $C2
     add  hl, de                                   ; $7CBE: $19
     ld   [hl], $00                                ; $7CBF: $36 $00
 
@@ -10992,7 +10992,7 @@ jr_019_7D3B:
     ret                                           ; $7D3C: $C9
 
 func_019_7D3D:
-    ldh  a, [hActiveEntityState]                  ; $7D3D: $F0 $EA
+    ldh  a, [hActiveEntityStatus]                 ; $7D3D: $F0 $EA
     cp   $05                                      ; $7D3F: $FE $05
     jr   nz, jr_019_7D6C                          ; $7D41: $20 $29
 
@@ -11236,7 +11236,7 @@ jr_019_7E5F:
 
 func_019_7E61:
 label_019_7E61:
-    ld   hl, wEntitiesStateTable                        ; $7E61: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                        ; $7E61: $21 $80 $C2
     add  hl, bc                                   ; $7E64: $09
     ld   [hl], b                                  ; $7E65: $70
     ret                                           ; $7E66: $C9

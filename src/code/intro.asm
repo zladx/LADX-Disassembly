@@ -1295,7 +1295,7 @@ label_7681::
     rra
     rra
     and  $01
-    call label_3B0C
+    call SetEntitySpriteVariant
     ldh  a, [wActiveEntityPosX]
     cp   $48
     jr   nc, label_769C
@@ -1319,7 +1319,7 @@ label_76AA::
 label_76AB::
     call label_7D46
     ld   a, $01
-    call label_3B0C
+    call SetEntitySpriteVariant
     call GetEntityTransitionCountdown
     jr   nz, label_76D4
     call IncrementEntityWalkingAttr
@@ -1373,7 +1373,7 @@ label_7707::
     rra
     rra
     and  $01
-    call label_3B0C
+    call SetEntitySpriteVariant
     ret
 
 label_7711::
@@ -1436,14 +1436,14 @@ label_776C::
     rra
     rra
     and  $01
-    call label_3B0C
+    call SetEntitySpriteVariant
     ret
 
 label_7778::
     dec  [hl]
     call label_7D46
     ld   a, $01
-    jp   label_3B0C
+    jp   SetEntitySpriteVariant
 
 label_7781::
     call label_7D46
@@ -1451,7 +1451,7 @@ label_7781::
     and  $01
     jr   nz, label_77BC
     ld   a, $02
-    call label_3B0C
+    call SetEntitySpriteVariant
     ld   a, $00
     ld   [$C3B1], a
     call GetEntityTransitionCountdown
@@ -1474,7 +1474,7 @@ label_779A::
 
 label_77B2::
     ld   a, $03
-    call label_3B0C
+    call SetEntitySpriteVariant
     ld   a, $01
     ld   [$C3B1], a
 

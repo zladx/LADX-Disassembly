@@ -296,7 +296,7 @@ jr_006_41C0:
     inc  a                                        ; $41C6: $3C
 
 jr_006_41C7:
-    jp   label_3B0C                               ; $41C7: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $41C7: $C3 $0C $3B
 
     call label_3B39                               ; $41CA: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $41CD: $CD $05 $0C
@@ -354,7 +354,7 @@ jr_006_4218:
     inc  a                                        ; $421E: $3C
 
 jr_006_421F:
-    jp   label_3B0C                               ; $421F: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $421F: $C3 $0C $3B
 
     call GetEntityTransitionCountdown             ; $4222: $CD $05 $0C
     jr   nz, jr_006_4230                          ; $4225: $20 $09
@@ -362,7 +362,7 @@ jr_006_421F:
     call IncrementEntityWalkingAttr               ; $4227: $CD $12 $3B
     ld   [hl], b                                  ; $422A: $70
     ld   a, $FF                                   ; $422B: $3E $FF
-    jp   label_3B0C                               ; $422D: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $422D: $C3 $0C $3B
 
 jr_006_4230:
     cp   $08                                      ; $4230: $FE $08
@@ -372,7 +372,7 @@ jr_006_4230:
     inc  a                                        ; $4236: $3C
 
 jr_006_4237:
-    jp   label_3B0C                               ; $4237: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $4237: $C3 $0C $3B
 
     call $44B6                                    ; $423A: $CD $B6 $44
     call func_006_64C6                            ; $423D: $CD $C6 $64
@@ -458,7 +458,7 @@ jr_006_42AD:
     ld   a, [hl]                                  ; $42B7: $7E
     rla                                           ; $42B8: $17
     and  $06                                      ; $42B9: $E6 $06
-    call label_3B0C                               ; $42BB: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $42BB: $CD $0C $3B
     jp   label_3B39                               ; $42BE: $C3 $39 $3B
 
     ld   [$08F8], sp                              ; $42C1: $08 $F8 $08
@@ -629,7 +629,7 @@ jr_006_43B8:
     rla                                           ; $43BD: $17
     and  $06                                      ; $43BE: $E6 $06
     or   $01                                      ; $43C0: $F6 $01
-    jp   label_3B0C                               ; $43C2: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $43C2: $C3 $0C $3B
 
     call GetEntityTransitionCountdown             ; $43C5: $CD $05 $0C
     jr   z, jr_006_43F5                           ; $43C8: $28 $2B
@@ -656,7 +656,7 @@ jr_006_43E2:
     add  hl, bc                                   ; $43E5: $09
     ld   a, [hl]                                  ; $43E6: $7E
     add  $08                                      ; $43E7: $C6 $08
-    call label_3B0C                               ; $43E9: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $43E9: $CD $0C $3B
     ld   a, $FF                                   ; $43EC: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $43EE: $E0 $9D
     ld   a, $02                                   ; $43F0: $3E $02
@@ -971,7 +971,7 @@ jr_006_45F0:
     add  hl, bc                                   ; $45F3: $09
     ld   a, [hl]                                  ; $45F4: $7E
     and  $01                                      ; $45F5: $E6 $01
-    jp   label_3B0C                               ; $45F7: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $45F7: $C3 $0C $3B
 
     inc  c                                        ; $45FA: $0C
     db   $F4                                      ; $45FB: $F4
@@ -1115,7 +1115,7 @@ func_006_46BD:
     ld   a, [hl]                                  ; $46C1: $7E
     and  $01                                      ; $46C2: $E6 $01
     or   $02                                      ; $46C4: $F6 $02
-    jp   label_3B0C                               ; $46C6: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $46C6: $C3 $0C $3B
 
     xor  a                                        ; $46C9: $AF
     call func_006_468C                            ; $46CA: $CD $8C $46
@@ -1168,7 +1168,7 @@ jr_006_471D:
     add  hl, bc                                   ; $4720: $09
     ld   a, [hl]                                  ; $4721: $7E
     and  $01                                      ; $4722: $E6 $01
-    jp   label_3B0C                               ; $4724: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $4724: $C3 $0C $3B
 
     nop                                           ; $4727: $00
     db   $FC                                      ; $4728: $FC
@@ -1574,7 +1574,7 @@ jr_006_4976:
     rra                                           ; $4980: $1F
     and  $01                                      ; $4981: $E6 $01
     or   e                                        ; $4983: $B3
-    call label_3B0C                               ; $4984: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $4984: $CD $0C $3B
     ld   hl, $C410                                ; $4987: $21 $10 $C4
     add  hl, bc                                   ; $498A: $09
     ld   a, [hl]                                  ; $498B: $7E
@@ -1862,7 +1862,7 @@ jr_006_4B0C:
     rra                                           ; $4B14: $1F
     rra                                           ; $4B15: $1F
     and  $01                                      ; $4B16: $E6 $01
-    jp   label_3B0C                               ; $4B18: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $4B18: $C3 $0C $3B
 
     call func_006_6541                            ; $4B1B: $CD $41 $65
     call label_3B23                               ; $4B1E: $CD $23 $3B
@@ -1883,7 +1883,7 @@ jr_006_4B0C:
 
 jr_006_4B3C:
     ld   a, $02                                   ; $4B3C: $3E $02
-    jp   label_3B0C                               ; $4B3E: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $4B3E: $C3 $0C $3B
 
     call GetEntityTransitionCountdown             ; $4B41: $CD $05 $0C
     ret  nz                                       ; $4B44: $C0
@@ -2161,7 +2161,7 @@ jr_006_4C91:
     ld   hl, $4BF0                                ; $4CBA: $21 $F0 $4B
     add  hl, de                                   ; $4CBD: $19
     ld   a, [hl]                                  ; $4CBE: $7E
-    call label_3B0C                               ; $4CBF: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $4CBF: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $4CC2: $F0 $E7
     and  $0F                                      ; $4CC4: $E6 $0F
     jr   nz, jr_006_4D3A                          ; $4CC6: $20 $72
@@ -2459,7 +2459,7 @@ jr_006_4F48:
     rra                                           ; $4F5D: $1F
     rra                                           ; $4F5E: $1F
     and  $01                                      ; $4F5F: $E6 $01
-    call label_3B0C                               ; $4F61: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $4F61: $CD $0C $3B
     ldh  a, [hFrameCounter]                       ; $4F64: $F0 $E7
     xor  c                                        ; $4F66: $A9
     and  $03                                      ; $4F67: $E6 $03
@@ -2677,7 +2677,7 @@ func_006_5099:
     rra                                           ; $50A1: $1F
     rra                                           ; $50A2: $1F
     and  $01                                      ; $50A3: $E6 $01
-    jp   label_3B0C                               ; $50A5: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $50A5: $C3 $0C $3B
 
     call label_3B39                               ; $50A8: $CD $39 $3B
     call GetEntityTransitionCountdown             ; $50AB: $CD $05 $0C
@@ -2823,7 +2823,7 @@ jr_006_5179:
     ld   hl, $5119                                ; $5180: $21 $19 $51
     add  hl, de                                   ; $5183: $19
     ld   a, [hl]                                  ; $5184: $7E
-    call label_3B0C                               ; $5185: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $5185: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $5188: $CD $05 $0C
     cp   $20                                      ; $518B: $FE $20
     jr   c, jr_006_51BB                           ; $518D: $38 $2C
@@ -2898,7 +2898,7 @@ jr_006_51D0:
 
 jr_006_51F6:
     ld   a, e                                     ; $51F6: $7B
-    jp   label_3B0C                               ; $51F7: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $51F7: $C3 $0C $3B
 
     db   $F4                                      ; $51FA: $F4
     ld   hl, sp+$60                               ; $51FB: $F8 $60
@@ -3083,7 +3083,7 @@ jr_006_52D8:
 
 jr_006_52FB:
     ld   a, e                                     ; $52FB: $7B
-    call label_3B0C                               ; $52FC: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $52FC: $CD $0C $3B
 
 jr_006_52FF:
     call func_006_55B3                            ; $52FF: $CD $B3 $55
@@ -3313,7 +3313,7 @@ jr_006_544F:
     rra                                           ; $544F: $1F
     rra                                           ; $5450: $1F
     and  $01                                      ; $5451: $E6 $01
-    jp   label_3B0C                               ; $5453: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $5453: $C3 $0C $3B
 
     call label_C56                                ; $5456: $CD $56 $0C
     call GetEntityTransitionCountdown             ; $5459: $CD $05 $0C
@@ -3934,7 +3934,7 @@ jr_006_57E0:
     rra                                           ; $57E5: $1F
     and  $01                                      ; $57E6: $E6 $01
     add  $05                                      ; $57E8: $C6 $05
-    jp   label_3B0C                               ; $57EA: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $57EA: $C3 $0C $3B
 
     call GetEntityTransitionCountdown             ; $57ED: $CD $05 $0C
     jr   nz, jr_006_5803                          ; $57F0: $20 $11
@@ -4064,7 +4064,7 @@ jr_006_5888:
 
 jr_006_589A:
     ld   a, $02                                   ; $589A: $3E $02
-    jp   label_3B0C                               ; $589C: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $589C: $C3 $0C $3B
 
     ld   [hl], d                                  ; $589F: $72
     inc  bc                                       ; $58A0: $03
@@ -4242,7 +4242,7 @@ jr_006_597B:
     ld   a, $03                                   ; $597B: $3E $03
 
 jr_006_597D:
-    jp   label_3B0C                               ; $597D: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $597D: $C3 $0C $3B
 
     ld   a, h                                     ; $5980: $7C
     ld   hl, $217E                                ; $5981: $21 $7E $21
@@ -4506,7 +4506,7 @@ jr_006_5ADE:
     cp   $F8                                      ; $5AE3: $FE $F8
     db   $F4                                      ; $5AE5: $F4
     ld   hl, sp-$51                               ; $5AE6: $F8 $AF
-    call label_3B0C                               ; $5AE8: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $5AE8: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $5AEB: $CD $05 $0C
     jr   nz, jr_006_5B27                          ; $5AEE: $20 $37
 
@@ -4573,7 +4573,7 @@ jr_006_5B4C:
     rra                                           ; $5B4F: $1F
     rra                                           ; $5B50: $1F
     and  $01                                      ; $5B51: $E6 $01
-    jp   label_3B0C                               ; $5B53: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $5B53: $C3 $0C $3B
 
     ld   h, b                                     ; $5B56: $60
     ld   bc, $0162                                ; $5B57: $01 $62 $01
@@ -4715,7 +4715,7 @@ label_006_5C04:
     rra                                           ; $5C33: $1F
     rra                                           ; $5C34: $1F
     and  $01                                      ; $5C35: $E6 $01
-    call label_3B0C                               ; $5C37: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $5C37: $CD $0C $3B
     call func_006_641A                            ; $5C3A: $CD $1A $64
     call func_006_645D                            ; $5C3D: $CD $5D $64
     ret  nc                                       ; $5C40: $D0
@@ -5055,7 +5055,7 @@ jr_006_5E08:
     rra                                           ; $5E0D: $1F
     rra                                           ; $5E0E: $1F
     and  $01                                      ; $5E0F: $E6 $01
-    jp   label_3B0C                               ; $5E11: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $5E11: $C3 $0C $3B
 
 func_006_5E14:
     jp   PlayBoomerangSfx_trampoline               ; $5E14: $C3 $F8 $29
@@ -5541,7 +5541,7 @@ jr_006_60D0:
     rra                                           ; $60D2: $1F
     and  $01                                      ; $60D3: $E6 $01
     add  e                                        ; $60D5: $83
-    call label_3B0C                               ; $60D6: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $60D6: $CD $0C $3B
     ld   hl, wEntitiesUnknownTableD               ; $60D9: $21 $D0 $C2
     add  hl, bc                                   ; $60DC: $09
     ld   a, [hl]                                  ; $60DD: $7E
@@ -5685,7 +5685,7 @@ jr_006_619F:
     ld   [hl], $80                                ; $61AB: $36 $80
     call IncrementEntityWalkingAttr               ; $61AD: $CD $12 $3B
     ld   a, $01                                   ; $61B0: $3E $01
-    call label_3B0C                               ; $61B2: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $61B2: $CD $0C $3B
     ld   a, $71                                   ; $61B5: $3E $71
     call func_003_64CA_trampoline                               ; $61B7: $CD $86 $3B
     jr   c, jr_006_61EB                           ; $61BA: $38 $2F
@@ -5747,7 +5747,7 @@ jr_006_61F8:
 
 jr_006_620A:
     xor  a                                        ; $620A: $AF
-    jp   label_3B0C                               ; $620B: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $620B: $C3 $0C $3B
 
     ldh  a, [hMapRoom]                            ; $620E: $F0 $F6
     cp   $92                                      ; $6210: $FE $92
@@ -5767,7 +5767,7 @@ jr_006_621C:
     rra                                           ; $6229: $1F
     rra                                           ; $622A: $1F
     and  $01                                      ; $622B: $E6 $01
-    call label_3B0C                               ; $622D: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $622D: $CD $0C $3B
 
 func_006_6230:
     ldh  a, [$FFEF]                               ; $6230: $F0 $EF
@@ -5884,7 +5884,7 @@ jr_006_62DD:
     rra                                           ; $62DF: $1F
     rra                                           ; $62E0: $1F
     and  $01                                      ; $62E1: $E6 $01
-    jp   label_3B0C                               ; $62E3: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $62E3: $C3 $0C $3B
 
     call GetEntityTransitionCountdown             ; $62E6: $CD $05 $0C
     jr   nz, jr_006_62EF                          ; $62E9: $20 $04
@@ -5917,7 +5917,7 @@ jr_006_62EF:
 
 jr_006_6311:
     ld   a, $02                                   ; $6311: $3E $02
-    jp   label_3B0C                               ; $6313: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $6313: $C3 $0C $3B
 
     ld   hl, sp-$08                               ; $6316: $F8 $F8
     ld   [hl], b                                  ; $6318: $70
@@ -6046,7 +6046,7 @@ jr_006_63B5:
     rra                                           ; $63C6: $1F
     and  $01                                      ; $63C7: $E6 $01
     add  $02                                      ; $63C9: $C6 $02
-    jp   label_3B0C                               ; $63CB: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $63CB: $C3 $0C $3B
 
 jr_006_63CE:
     ld   hl, $C410                                ; $63CE: $21 $10 $C4
@@ -6067,7 +6067,7 @@ jr_006_63DD:
     rra                                           ; $63E4: $1F
     rra                                           ; $63E5: $1F
     and  $01                                      ; $63E6: $E6 $01
-    call label_3B0C                               ; $63E8: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $63E8: $CD $0C $3B
     call label_3B39                               ; $63EB: $CD $39 $3B
     call func_006_6541                            ; $63EE: $CD $41 $65
     jp   label_006_5E54                           ; $63F1: $C3 $54 $5E
@@ -6095,7 +6095,7 @@ jr_006_63DD:
 
 jr_006_6416:
     ld   a, e                                     ; $6416: $7B
-    jp   label_3B0C                               ; $6417: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $6417: $C3 $0C $3B
 
 func_006_641A:
     call label_3B5A                               ; $641A: $CD $5A $3B
@@ -6146,7 +6146,7 @@ func_006_6441:
     pop  hl                                       ; $6456: $E1
     and  $01                                      ; $6457: $E6 $01
     or   [hl]                                     ; $6459: $B6
-    jp   label_3B0C                               ; $645A: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $645A: $C3 $0C $3B
 
 func_006_645D:
     ld   e, b                                     ; $645D: $58
@@ -6805,7 +6805,7 @@ jr_006_67E6:
     and  $01                                      ; $67F0: $E6 $01
 
 jr_006_67F2:
-    jp   label_3B0C                               ; $67F2: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $67F2: $C3 $0C $3B
 
     ld   a, c                                     ; $67F5: $79
     ld   [$C501], a                               ; $67F6: $EA $01 $C5
@@ -6960,7 +6960,7 @@ jr_006_68B7:
     inc  a                                        ; $68BF: $3C
 
 jr_006_68C0:
-    call label_3B0C                               ; $68C0: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $68C0: $CD $0C $3B
     ld   a, [wRoomTransitionState]                ; $68C3: $FA $24 $C1
     and  a                                        ; $68C6: $A7
     ret  nz                                       ; $68C7: $C0
@@ -7127,7 +7127,7 @@ jr_006_69BD:
     rra                                           ; $69C3: $1F
     rra                                           ; $69C4: $1F
     and  $02                                      ; $69C5: $E6 $02
-    jp   label_3B0C                               ; $69C7: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $69C7: $C3 $0C $3B
 
     call func_006_64C6                            ; $69CA: $CD $C6 $64
     call func_006_69BD                            ; $69CD: $CD $BD $69
@@ -7479,7 +7479,7 @@ ButterflyEntityHandler::
     rra                                           ; $6BEC: $1F
     rra                                           ; $6BED: $1F
     and  $01                                      ; $6BEE: $E6 $01
-    call label_3B0C                               ; $6BF0: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $6BF0: $CD $0C $3B
     call func_006_6541                            ; $6BF3: $CD $41 $65
     ldh  a, [hActiveEntityState]                  ; $6BF6: $F0 $F0
     and  $1F                                      ; $6BF8: $E6 $1F
@@ -7749,7 +7749,7 @@ jr_006_6D68:
 
 jr_006_6D76:
     ld   a, $01                                   ; $6D76: $3E $01
-    jp   label_3B0C                               ; $6D78: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $6D78: $C3 $0C $3B
 
     call GetEntityTransitionCountdown             ; $6D7B: $CD $05 $0C
     ret  nz                                       ; $6D7E: $C0
@@ -7779,7 +7779,7 @@ jr_006_6D8B:
     ld   [hl], $20                                ; $6DA0: $36 $20
     call IncrementEntityWalkingAttr               ; $6DA2: $CD $12 $3B
     xor  a                                        ; $6DA5: $AF
-    jp   label_3B0C                               ; $6DA6: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $6DA6: $C3 $0C $3B
 
     call GetEntityTransitionCountdown             ; $6DA9: $CD $05 $0C
     ret  nz                                       ; $6DAC: $C0
@@ -7796,7 +7796,7 @@ jr_006_6D8B:
     inc  a                                        ; $6DBB: $3C
 
 jr_006_6DBC:
-    call label_3B0C                               ; $6DBC: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $6DBC: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $6DBF: $CD $05 $0C
     cp   $01                                      ; $6DC2: $FE $01
     jr   z, jr_006_6DD4                           ; $6DC4: $28 $0E
@@ -8119,7 +8119,7 @@ jr_006_6F7B:
 
 jr_006_6F82:
     ld   a, d                                     ; $6F82: $7A
-    call label_3B0C                               ; $6F83: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $6F83: $CD $0C $3B
 
 jr_006_6F86:
     ldh  a, [hActiveEntityState]                  ; $6F86: $F0 $F0
@@ -8540,7 +8540,7 @@ jr_006_71F0:
 
 jr_006_7201:
     ld   [$D202], a                               ; $7201: $EA $02 $D2
-    call label_3B0C                               ; $7204: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $7204: $CD $0C $3B
     ld   a, $02                                   ; $7207: $3E $02
     ldh  [$FFA1], a                               ; $7209: $E0 $A1
     ret                                           ; $720B: $C9
@@ -8651,7 +8651,7 @@ jr_006_728C:
     ld   a, [$FAF8]                               ; $729A: $FA $F8 $FA
     call func_006_7335                            ; $729D: $CD $35 $73
     xor  a                                        ; $72A0: $AF
-    call label_3B0C                               ; $72A1: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $72A1: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $72A4: $CD $05 $0C
 
 jr_006_72A7:
@@ -8721,7 +8721,7 @@ jr_006_7308:
     rra                                           ; $730B: $1F
     rra                                           ; $730C: $1F
     and  $01                                      ; $730D: $E6 $01
-    jp   label_3B0C                               ; $730F: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $730F: $C3 $0C $3B
 
     call func_006_6541                            ; $7312: $CD $41 $65
     call label_3B23                               ; $7315: $CD $23 $3B
@@ -8745,7 +8745,7 @@ jr_006_732C:
     ldh  a, [hFrameCounter]                       ; $732C: $F0 $E7
     rra                                           ; $732E: $1F
     and  $02                                      ; $732F: $E6 $02
-    call label_3B0C                               ; $7331: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $7331: $CD $0C $3B
     ret                                           ; $7334: $C9
 
 func_006_7335:
@@ -8892,7 +8892,7 @@ jr_006_7409:
 
 jr_006_741F:
     xor  a                                        ; $741F: $AF
-    jp   label_3B0C                               ; $7420: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $7420: $C3 $0C $3B
 
     call func_006_657A                            ; $7423: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $7426: $21 $20 $C3
@@ -9029,7 +9029,7 @@ jr_006_74EF:
     rra                                           ; $74F3: $1F
     rra                                           ; $74F4: $1F
     and  $01                                      ; $74F5: $E6 $01
-    jp   label_3B0C                               ; $74F7: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $74F7: $C3 $0C $3B
 
     ld   d, b                                     ; $74FA: $50
     ld   [bc], a                                  ; $74FB: $02
@@ -9292,16 +9292,16 @@ jr_006_7679:
 
 jr_006_767E:
     ld   a, $FF                                   ; $767E: $3E $FF
-    call label_3B0C                               ; $7680: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $7680: $CD $0C $3B
     jp   label_006_7735                           ; $7683: $C3 $35 $77
 
 jr_006_7686:
     xor  a                                        ; $7686: $AF
-    call label_3B0C                               ; $7687: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $7687: $CD $0C $3B
     jp   label_006_7735                           ; $768A: $C3 $35 $77
 
     xor  a                                        ; $768D: $AF
-    call label_3B0C                               ; $768E: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $768E: $CD $0C $3B
     call IsEntityUnknownFZero                     ; $7691: $CD $00 $0C
     cp   $02                                      ; $7694: $FE $02
     jr   nc, jr_006_76B6                          ; $7696: $30 $1E
@@ -9765,7 +9765,7 @@ jr_006_78AD:
     rra                                           ; $78B0: $1F
     rra                                           ; $78B1: $1F
     and  $01                                      ; $78B2: $E6 $01
-    jp   label_3B0C                               ; $78B4: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $78B4: $C3 $0C $3B
 
     ld   e, b                                     ; $78B7: $58
     ld   [bc], a                                  ; $78B8: $02
@@ -9827,7 +9827,7 @@ jr_006_78F0:
     add  $10                                      ; $7910: $C6 $10
     ld   [hl], a                                  ; $7912: $77
     ld   a, $01                                   ; $7913: $3E $01
-    jp   label_3B0C                               ; $7915: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $7915: $C3 $0C $3B
 
 jr_006_7918:
     call func_006_657A                            ; $7918: $CD $7A $65
@@ -9846,7 +9846,7 @@ jr_006_7921:
     srl  a                                        ; $792B: $CB $3F
     srl  a                                        ; $792D: $CB $3F
     srl  a                                        ; $792F: $CB $3F
-    call label_3B0C                               ; $7931: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $7931: $CD $0C $3B
     and  a                                        ; $7934: $A7
     ret  nz                                       ; $7935: $C0
 
@@ -9888,7 +9888,7 @@ jr_006_7970:
     add  hl, bc                                   ; $7973: $09
     xor  a                                        ; $7974: $AF
     ld   [hl], a                                  ; $7975: $77
-    jp   label_3B0C                               ; $7976: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $7976: $C3 $0C $3B
 
 func_006_7979:
     ld   hl, wEntitiesSpeedXTable                       ; $7979: $21 $40 $C2
@@ -10020,7 +10020,7 @@ jr_006_7A27:
     rra                                           ; $7A31: $1F
     and  $01                                      ; $7A32: $E6 $01
     add  e                                        ; $7A34: $83
-    jp   label_3B0C                               ; $7A35: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $7A35: $C3 $0C $3B
 
 label_006_7A38:
     call IncrementEntityWalkingAttr               ; $7A38: $CD $12 $3B
@@ -10136,7 +10136,7 @@ jr_006_7AC7:
     ld   a, $FF                                   ; $7AC7: $3E $FF
 
 jr_006_7AC9:
-    call label_3B0C                               ; $7AC9: $CD $0C $3B
+    call SetEntitySpriteVariant                   ; $7AC9: $CD $0C $3B
     ld   hl, wEntitiesUnknownTableB               ; $7ACC: $21 $B0 $C2
     add  hl, bc                                   ; $7ACF: $09
     ld   [hl], b                                  ; $7AD0: $70
@@ -10903,4 +10903,4 @@ label_006_7F05:
     rra                                           ; $7F0D: $1F
     rra                                           ; $7F0E: $1F
     and  $01                                      ; $7F0F: $E6 $01
-    jp   label_3B0C                               ; $7F11: $C3 $0C $3B
+    jp   SetEntitySpriteVariant                   ; $7F11: $C3 $0C $3B

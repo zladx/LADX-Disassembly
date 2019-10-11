@@ -7143,8 +7143,13 @@ label_3B04::
     pop  bc
     ret
 
-label_3B0C::
-    ld   hl, $C3B0
+; Set the given value to the entity sprite variants table.
+;
+; Inputs:
+;   a    variant value
+;   bc   entity index
+SetEntitySpriteVariant::
+    ld   hl, wEntitiesSpriteVariantTable
     add  hl, bc
     ld   [hl], a
     ret

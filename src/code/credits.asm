@@ -7094,7 +7094,7 @@ jr_017_7BF2:
     rra                                           ; $7C3B: $1F
     rra                                           ; $7C3C: $1F
     and  $03                                      ; $7C3D: $E6 $03
-    call label_3B0C                                    ; $7C3F: $CD $0C $3B
+    call SetEntitySpriteVariant                                    ; $7C3F: $CD $0C $3B
     ldh  a, [hActiveEntityState]                               ; $7C42: $F0 $F0
     rst  $00                                      ; $7C44: $C7
     ld   c, l                                     ; $7C45: $4D
@@ -7223,7 +7223,7 @@ jr_017_7CD4:
     jr   nc, jr_017_7CEF                          ; $7CE8: $30 $05
 
     ld   a, $FF                                   ; $7CEA: $3E $FF
-    call label_3B0C                                    ; $7CEC: $CD $0C $3B
+    call SetEntitySpriteVariant                                    ; $7CEC: $CD $0C $3B
 
 jr_017_7CEF:
     ret                                           ; $7CEF: $C9

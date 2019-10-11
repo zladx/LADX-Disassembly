@@ -7004,10 +7004,10 @@ AnimateEntity::
     ld   a, [hl]
     ldh  [hActiveEntityType], a
 
-    ld   hl, wEntitiesWalkingTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [hActiveEntityWalking], a
+    ldh  [hActiveEntityState], a
 
     ld   hl, $C3B0
     add  hl, bc
@@ -7153,7 +7153,7 @@ label_3B0C::
 ; Input:
 ;  - bc: the entity number
 IncrementEntityWalkingAttr::
-    ld   hl, wEntitiesWalkingTable
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     inc  [hl]
     ret

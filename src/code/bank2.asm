@@ -1198,7 +1198,7 @@ jr_002_4A6C:
     ld   a, [$D461]                               ; $4A6C: $FA $61 $D4
     ld   e, a                                     ; $4A6F: $5F
     ld   d, b                                     ; $4A70: $50
-    ld   hl, wEntitiesWalkingTable                ; $4A71: $21 $90 $C2
+    ld   hl, wEntitiesStateTable                  ; $4A71: $21 $90 $C2
     add  hl, de                                   ; $4A74: $19
     ld   [hl], $00                                ; $4A75: $36 $00
     jp   label_27DD                               ; $4A77: $C3 $DD $27
@@ -5129,7 +5129,7 @@ jr_002_60A8:
     and  a                                        ; $60AD: $A7
     jr   z, jr_002_60BD                           ; $60AE: $28 $0D
 
-    ld   hl, wEntitiesWalkingTable                ; $60B0: $21 $90 $C2
+    ld   hl, wEntitiesStateTable                  ; $60B0: $21 $90 $C2
     add  hl, de                                   ; $60B3: $19
     ld   a, [hl]                                  ; $60B4: $7E
     cp   $04                                      ; $60B5: $FE $04

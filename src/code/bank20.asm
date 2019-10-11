@@ -1956,7 +1956,7 @@ Func_020_4B81::
     ld   a, [$C1C2]                               ; $4B92: $FA $C2 $C1
     ld   c, a                                     ; $4B95: $4F
     ld   b, d                                     ; $4B96: $42
-    ld   hl, wEntitiesWalkingTable                ; $4B97: $21 $90 $C2
+    ld   hl, wEntitiesStateTable                  ; $4B97: $21 $90 $C2
     add  hl, bc                                   ; $4B9A: $09
     ld   [hl], $01                                ; $4B9B: $36 $01
     ret                                           ; $4B9D: $C9
@@ -2237,14 +2237,14 @@ ResetRoomVariables::
     nop                                           ; $4D21: $00
     nop                                           ; $4D22: $00
     nop                                           ; $4D23: $00
-    ldh  a, [hActiveEntityWalking]                ; $4D24: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D26: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D28: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D2A: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D2C: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D2E: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D30: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D32: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D24: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D26: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D28: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D2A: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D2C: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D2E: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D30: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D32: $F0 $F0
     ldh  [hBGMapOffsetHigh], a                    ; $4D34: $E0 $E0
     ldh  [hBGMapOffsetHigh], a                    ; $4D36: $E0 $E0
     ldh  [$FFE2], a                               ; $4D38: $E0 $E2
@@ -2282,15 +2282,15 @@ ResetRoomVariables::
     ld   b, d                                     ; $4D61: $42
     ld   b, l                                     ; $4D62: $45
     ld   c, b                                     ; $4D63: $48
-    ldh  a, [hActiveEntityWalking]                ; $4D64: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D66: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D64: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D66: $F0 $F0
 
 jr_020_4D68:
-    ldh  a, [hActiveEntityWalking]                ; $4D68: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D6A: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D6C: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D6E: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4D70: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D68: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D6A: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D6C: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D6E: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4D70: $F0 $F0
     ldh  a, [hBGMapOffsetHigh]                    ; $4D72: $F0 $E0
     ld   [$ff00+c], a                             ; $4D74: $E2
     db   $e4                                      ; $4D75: $E4
@@ -2328,10 +2328,10 @@ jr_020_4D88:
     ld   a, [hl+]                                 ; $4DA1: $2A
     inc  l                                        ; $4DA2: $2C
     ld   l, $F0                                   ; $4DA3: $2E $F0
-    ldh  a, [hActiveEntityWalking]                ; $4DA5: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4DA7: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4DA9: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4DAB: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4DA5: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4DA7: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4DA9: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4DAB: $F0 $F0
     rst  $18                                      ; $4DAD: $DF
     ldh  [$FFE2], a                               ; $4DAE: $E0 $E2
     db   $e3                                      ; $4DB0: $E3
@@ -2373,11 +2373,11 @@ jr_020_4D88:
     inc  e                                        ; $4DDE: $1C
     ld   e, $1F                                   ; $4DDF: $1E $1F
     ld   hl, $2422                                ; $4DE1: $21 $22 $24
-    ldh  a, [hActiveEntityWalking]                ; $4DE4: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4DE6: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4DE8: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4DEA: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4DEC: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4DE4: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4DE6: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4DE8: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4DEA: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4DEC: $F0 $F0
     ld   [$ff00+c], a                             ; $4DEE: $E2
     db   $e3                                      ; $4DEF: $E3
     push hl                                       ; $4DF0: $E5
@@ -2418,10 +2418,10 @@ jr_020_4D88:
     dec  hl                                       ; $4E20: $2B
     inc  l                                        ; $4E21: $2C
     ld   l, $2F                                   ; $4E22: $2E $2F
-    ldh  a, [hActiveEntityWalking]                ; $4E24: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4E26: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4E28: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4E2A: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4E24: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4E26: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4E28: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4E2A: $F0 $F0
     pop  hl                                       ; $4E2C: $E1
     ld   [$ff00+c], a                             ; $4E2D: $E2
     db   $e4                                      ; $4E2E: $E4
@@ -2464,9 +2464,9 @@ jr_020_4D88:
     jr   z, jr_020_4E8D                           ; $4E61: $28 $2A
 
     dec  hl                                       ; $4E63: $2B
-    ldh  a, [hActiveEntityWalking]                ; $4E64: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4E66: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4E68: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4E64: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4E66: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4E68: $F0 $F0
     ldh  a, [$FFE2]                               ; $4E6A: $F0 $E2
     db   $e3                                      ; $4E6C: $E3
     db   $e4                                      ; $4E6D: $E4
@@ -2510,8 +2510,8 @@ jr_020_4E95:
     ld   h, $27                                   ; $4EA1: $26 $27
     jr   z, jr_020_4E95                           ; $4EA3: $28 $F0
 
-    ldh  a, [hActiveEntityWalking]                ; $4EA5: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4EA7: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4EA5: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4EA7: $F0 $F0
     ldh  a, [$FFE3]                               ; $4EA9: $F0 $E3
     db   $e4                                      ; $4EAB: $E4
     push hl                                       ; $4EAC: $E5
@@ -2555,8 +2555,8 @@ jr_020_4E95:
     inc  hl                                       ; $4EE1: $23
     inc  h                                        ; $4EE2: $24
     dec  h                                        ; $4EE3: $25
-    ldh  a, [hActiveEntityWalking]                ; $4EE4: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4EE6: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4EE4: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4EE6: $F0 $F0
     ldh  a, [$FFE4]                               ; $4EE8: $F0 $E4
     push hl                                       ; $4EEA: $E5
     and  $E7                                      ; $4EEB: $E6 $E7
@@ -2596,8 +2596,8 @@ jr_020_4F01:
     dec  e                                        ; $4F1E: $1D
     ld   e, $1F                                   ; $4F1F: $1E $1F
     ld   hl, $2322                                ; $4F21: $21 $22 $23
-    ldh  a, [hActiveEntityWalking]                ; $4F24: $F0 $F0
-    ldh  a, [hActiveEntityWalking]                ; $4F26: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4F24: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4F26: $F0 $F0
     push hl                                       ; $4F28: $E5
     and  $E7                                      ; $4F29: $E6 $E7
     add  sp, -$17                                 ; $4F2B: $E8 $E9
@@ -2638,7 +2638,7 @@ jr_020_4F01:
     ld   e, $1F                                   ; $4F61: $1E $1F
     jr   nz, @-$0E                                ; $4F63: $20 $F0
 
-    ldh  a, [hActiveEntityWalking]                ; $4F65: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4F65: $F0 $F0
     and  $E7                                      ; $4F67: $E6 $E7
     add  sp, -$18                                 ; $4F69: $E8 $E8
     jp   hl                                       ; $4F6B: $E9
@@ -2646,7 +2646,7 @@ jr_020_4F01:
     ld   [$ECEB], a                               ; $4F6C: $EA $EB $EC
     db   $ed                                      ; $4F6F: $ED
     xor  $EF                                      ; $4F70: $EE $EF
-    ldh  a, [hActiveEntityWalking]                ; $4F72: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4F72: $F0 $F0
     pop  af                                       ; $4F74: $F1
     ld   a, [$ff00+c]                             ; $4F75: $F2
 
@@ -2683,7 +2683,7 @@ jr_020_4F76:
     dec  de                                       ; $4FA1: $1B
     inc  e                                        ; $4FA2: $1C
     dec  e                                        ; $4FA3: $1D
-    ldh  a, [hActiveEntityWalking]                ; $4FA4: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4FA4: $F0 $F0
     rst  $20                                      ; $4FA6: $E7
     add  sp, -$17                                 ; $4FA7: $E8 $E9
     ld   [$ECEB], a                               ; $4FA9: $EA $EB $EC
@@ -2737,7 +2737,7 @@ jr_020_4FB8:
     db   $ed                                      ; $4FEB: $ED
     xor  $EE                                      ; $4FEC: $EE $EE
     rst  $28                                      ; $4FEE: $EF
-    ldh  a, [hActiveEntityWalking]                ; $4FEF: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $4FEF: $F0 $F0
     pop  af                                       ; $4FF1: $F1
     ld   a, [$ff00+c]                             ; $4FF2: $F2
     di                                            ; $4FF3: $F3
@@ -2783,7 +2783,7 @@ jr_020_4FFB:
     db   $ed                                      ; $5027: $ED
     xor  $EE                                      ; $5028: $EE $EE
     rst  $28                                      ; $502A: $EF
-    ldh  a, [hActiveEntityWalking]                ; $502B: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $502B: $F0 $F0
     pop  af                                       ; $502D: $F1
     ld   a, [$ff00+c]                             ; $502E: $F2
     ld   a, [$ff00+c]                             ; $502F: $F2
@@ -2829,7 +2829,7 @@ jr_020_4FFB:
     db   $ed                                      ; $5064: $ED
     xor  $EE                                      ; $5065: $EE $EE
     rst  $28                                      ; $5067: $EF
-    ldh  a, [hActiveEntityWalking]                ; $5068: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $5068: $F0 $F0
     pop  af                                       ; $506A: $F1
     pop  af                                       ; $506B: $F1
     ld   a, [$ff00+c]                             ; $506C: $F2

@@ -1084,11 +1084,11 @@ RenderIntroEntities::
     ld   a, [hl]
     ldh  [hActiveEntitySpriteVariant], a
 
-    ; hActiveEntityWalking = wEntitiesWalkingTable[c]
-    ld   hl, wEntitiesWalkingTable
+    ; hActiveEntityState = wEntitiesStateTable[c]
+    ld   hl, wEntitiesStateTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [hActiveEntityWalking], a
+    ldh  [hActiveEntityState], a
     call RenderIntroEntity
 
 .continue
@@ -1279,7 +1279,7 @@ RenderIntroMarin::
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a
-    ldh  a, [hActiveEntityWalking]
+    ldh  a, [hActiveEntityState]
 
     JP_TABLE
 ._0 dw label_7681
@@ -1818,7 +1818,7 @@ label_7A36::
     ld   [$C3C0], a
 
 label_7A47::
-    ldh  a, [hActiveEntityWalking]
+    ldh  a, [hActiveEntityState]
     JP_TABLE
     dw $7a52
     dw $7a5e

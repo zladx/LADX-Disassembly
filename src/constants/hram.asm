@@ -250,9 +250,8 @@ wActiveEntityPosX:: ; FFEE
 ; Unlabeled
 ds 1 ; FFEF
 
-hActiveEntityWalking:: ; FFF0
-  ; Is the active entity walking
-  ; See wEntitiesWalkingTable
+hActiveEntityState:: ; FFF0
+  ; See wEntitiesStateTable
   ds 1
 
 hActiveEntitySpriteVariant:: ; FFF1

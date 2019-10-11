@@ -5822,7 +5822,7 @@ jr_017_75B4:
     add  hl, bc                                   ; $75C6: $09
     ld   [hl], $FE                                ; $75C7: $36 $FE
     call func_017_7E30                            ; $75C9: $CD $30 $7E
-    ldh  a, [hActiveEntityWalking]                               ; $75CC: $F0 $F0
+    ldh  a, [hActiveEntityState]                               ; $75CC: $F0 $F0
     cp   $02                                      ; $75CE: $FE $02
     jr   nc, jr_017_75E0                          ; $75D0: $30 $0E
 
@@ -6817,7 +6817,7 @@ func_017_7A29:
 
 Func_017_7AB1::
     call func_017_7B5F                            ; $7AB1: $CD $5F $7B
-    ldh  a, [hActiveEntityWalking]                ; $7AB4: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $7AB4: $F0 $F0
     JP_TABLE                                      ; $7AB6: $C7
 ._00 dw Func_017_7AC1
 ._01 dw Func_017_7B06
@@ -7095,7 +7095,7 @@ jr_017_7BF2:
     rra                                           ; $7C3C: $1F
     and  $03                                      ; $7C3D: $E6 $03
     call label_3B0C                                    ; $7C3F: $CD $0C $3B
-    ldh  a, [hActiveEntityWalking]                               ; $7C42: $F0 $F0
+    ldh  a, [hActiveEntityState]                               ; $7C42: $F0 $F0
     rst  $00                                      ; $7C44: $C7
     ld   c, l                                     ; $7C45: $4D
     ld   a, h                                     ; $7C46: $7C

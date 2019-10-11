@@ -251,6 +251,7 @@ wActiveEntityPosX:: ; FFEE
 ds 1 ; FFEF
 
 hActiveEntityState:: ; FFF0
+  ; The entity-specific state of the active entity
   ; See wEntitiesStateTable
   ds 1
 

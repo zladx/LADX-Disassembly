@@ -7467,6 +7467,10 @@ ButterflyEntityHandler::
     call RenderSimpleEntityWithSpriteVariantToOAM ; $6BD8: $CD $77 $3C
     call func_006_64C6                            ; $6BDB: $CD $C6 $64
 
+    ;
+    ; Flip the wings every 8 frames
+    ;
+
     ; a = c * 8 + [hFrameCounter]
     ld   a, c                                     ; $6BDE: $79
     sla  a                                        ; $6BDF: $CB $27
@@ -7481,10 +7485,12 @@ ButterflyEntityHandler::
     and  $01                                      ; $6BEE: $E6 $01
     call SetEntitySpriteVariant                   ; $6BF0: $CD $0C $3B
     call func_006_6541                            ; $6BF3: $CD $41 $65
+
+    ; If [hActiveEntityState] & $1F == 0…
     ldh  a, [hActiveEntityState]                  ; $6BF6: $F0 $F0
     and  $1F                                      ; $6BF8: $E6 $1F
-    jr   nz, jr_006_6C12                          ; $6BFA: $20 $16
-
+    jr   nz, .speedXEnd                           ; $6BFA: $20 $16
+    ; Set a random horizontal speed
     call GetRandomByte                            ; $6BFC: $CD $0D $28
     and  $07                                      ; $6BFF: $E6 $07
     ld   e, a                                     ; $6C01: $5F
@@ -7498,13 +7504,14 @@ ButterflyEntityHandler::
     ld   hl, wEntitiesSpeedXTable                       ; $6C0D: $21 $40 $C2
     add  hl, bc                                   ; $6C10: $09
     ld   [hl], a                                  ; $6C11: $77
+.speedXEnd
 
-jr_006_6C12:
+    ; If [hActiveEntityState] + $10 & $1F == 0…
     ldh  a, [hActiveEntityState]                  ; $6C12: $F0 $F0
     add  $10                                      ; $6C14: $C6 $10
     and  $1F                                      ; $6C16: $E6 $1F
-    jr   nz, jr_006_6C30                          ; $6C18: $20 $16
-
+    jr   nz, .speedYEnd                           ; $6C18: $20 $16
+    ; Set a random vertical speed
     call GetRandomByte                            ; $6C1A: $CD $0D $28
     and  $07                                      ; $6C1D: $E6 $07
     ld   e, a                                     ; $6C1F: $5F
@@ -7518,11 +7525,16 @@ jr_006_6C12:
     ld   hl, wEntitiesSpeedYTable                       ; $6C2B: $21 $50 $C2
     add  hl, bc                                   ; $6C2E: $09
     ld   [hl], a                                  ; $6C2F: $77
+.speedYEnd
 
-jr_006_6C30:
+    ;
+    ; Move closer to Link if he is standing still
+    ;
+
+    ; If [hActiveEntityState] & $3F == 0…
     ldh  a, [hActiveEntityState]                  ; $6C30: $F0 $F0
     and  $3F                                      ; $6C32: $E6 $3F
-    jr   nz, jr_006_6C6C                          ; $6C34: $20 $36
+    jr   nz, .moveCloserToLinkEnd                 ; $6C34: $20 $36
 
     ldh  a, [hLinkPositionX]                      ; $6C36: $F0 $98
     push af                                       ; $6C38: $F5
@@ -7530,7 +7542,7 @@ jr_006_6C30:
     push af                                       ; $6C3B: $F5
     ld   a, [$C50F]                               ; $6C3C: $FA $0F $C5
     cp   $FF                                      ; $6C3F: $FE $FF
-    jr   z, jr_006_6C53                           ; $6C41: $28 $10
+    jr   z, .C50FEnd                              ; $6C41: $28 $10
 
     ld   e, a                                     ; $6C43: $5F
     ld   d, b                                     ; $6C44: $50
@@ -7542,8 +7554,8 @@ jr_006_6C30:
     add  hl, de                                   ; $6C4F: $19
     ld   a, [hl]                                  ; $6C50: $7E
     ldh  [hLinkPositionY], a                      ; $6C51: $E0 $99
+.C50FEnd
 
-jr_006_6C53:
     ld   a, $02                                   ; $6C53: $3E $02
     call label_3BB5                               ; $6C55: $CD $B5 $3B
     pop  af                                       ; $6C58: $F1
@@ -7558,8 +7570,7 @@ jr_006_6C53:
     ld   hl, wEntitiesUnknownTableB               ; $6C67: $21 $B0 $C2
     add  hl, bc                                   ; $6C6A: $09
     ld   [hl], a                                  ; $6C6B: $77
-
-jr_006_6C6C:
+.moveCloserToLinkEnd
     ret                                           ; $6C6C: $C9
 
     ld   a, c                                     ; $6C6D: $79

@@ -411,8 +411,6 @@ wEntitiesStateTable:: ; C290
   ; Village kids: 0 when standing still, 1 when bouncing
   ; Moblin: 0 when walking, 1 when standing still
   ; etc.
-  ;
-  ; TODO: maybe some generic flags are stored with a $E0 mask
   ds $10
 
 wEntitiesCollisionsTable:: ; C2A0

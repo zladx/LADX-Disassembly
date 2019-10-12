@@ -179,6 +179,7 @@ include "data/sfx/pointers_table.asm"
 include "code/audio/sfx.asm"
 
 section "bank20",romx[$4000],bank[$20]
+include "code/entities/_handlers_table.asm"
 include "code/bank20.asm"
 
 section "bank21",romx[$4000],bank[$21]

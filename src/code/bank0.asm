@@ -7229,14 +7229,14 @@ label_3B98::
 
 label_3BAA::
     ld   hl, MBC3SelectBank
-    ld   [hl], BANK(func_003_7EC7)
-    call func_003_7EC7
+    ld   [hl], BANK(ApplyVectorTowardsLink)
+    call ApplyVectorTowardsLink
     jp   ReloadSavedBank
 
-GetPositionCloserToLink_trampoline::
+GetVectorTowardsLink_trampoline::
     ld   hl, MBC3SelectBank
-    ld   [hl], BANK(GetPositionCloserToLink)
-    call GetPositionCloserToLink
+    ld   [hl], BANK(GetVectorTowardsLink)
+    call GetVectorTowardsLink
     jp   ReloadSavedBank
 
 ; Render an animated active entity to wOAMBuffer

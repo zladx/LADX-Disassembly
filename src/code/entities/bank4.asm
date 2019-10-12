@@ -114,7 +114,7 @@ jr_004_409E:
     ld   a, $10                                   ; $40B5: $3E $10
     ld   [$C13E], a                               ; $40B7: $EA $3E $C1
     ld   a, $14                                   ; $40BA: $3E $14
-    call GetPositionCloserToLink_trampoline       ; $40BC: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $40BC: $CD $B5 $3B
     ldh  a, [hScratch0]                               ; $40BF: $F0 $D7
     ldh  [hLinkPositionYIncrement], a                               ; $40C1: $E0 $9B
     ldh  a, [hScratch1]                               ; $40C3: $F0 $D8
@@ -350,7 +350,7 @@ jr_004_4210:
     add  hl, bc                                   ; $4225: $09
     ld   [hl], $20                                ; $4226: $36 $20
     ld   a, $08                                   ; $4228: $3E $08
-    call GetPositionCloserToLink_trampoline       ; $422A: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $422A: $CD $B5 $3B
     ldh  a, [hScratch0]                               ; $422D: $F0 $D7
     cpl                                           ; $422F: $2F
     inc  a                                        ; $4230: $3C
@@ -840,7 +840,7 @@ jr_004_4535:
     jr   nz, jr_004_4568                          ; $4545: $20 $21
 
     ld   a, $10                                   ; $4547: $3E $10
-    call GetPositionCloserToLink_trampoline       ; $4549: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $4549: $CD $B5 $3B
     ld   hl, wEntitiesSpeedXTable                                ; $454C: $21 $40 $C2
     add  hl, bc                                   ; $454F: $09
     ldh  a, [hScratch1]                               ; $4550: $F0 $D8
@@ -962,7 +962,7 @@ jr_004_45F1:
     ld   a, $48                                   ; $45FB: $3E $48
     ldh  [hLinkPositionY], a                      ; $45FD: $E0 $99
     ld   a, $20                                   ; $45FF: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $4601: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $4601: $CD $B5 $3B
     ldh  a, [hScratch1]                               ; $4604: $F0 $D8
     cpl                                           ; $4606: $2F
     inc  a                                        ; $4607: $3C
@@ -970,7 +970,7 @@ jr_004_45F1:
     ldh  a, [hScratch0]                               ; $4609: $F0 $D7
     push af                                       ; $460B: $F5
     ld   a, $04                                   ; $460C: $3E $04
-    call GetPositionCloserToLink_trampoline       ; $460E: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $460E: $CD $B5 $3B
     ld   hl, hScratch1                                ; $4611: $21 $D8 $FF
     pop  af                                       ; $4614: $F1
     add  [hl]                                     ; $4615: $86
@@ -2879,7 +2879,7 @@ jr_004_547E:
     jr   nc, jr_004_54F0                          ; $54AD: $30 $41
 
     ld   a, $0C                                   ; $54AF: $3E $0C
-    call GetPositionCloserToLink_trampoline       ; $54B1: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $54B1: $CD $B5 $3B
     ldh  a, [hScratch0]                               ; $54B4: $F0 $D7
     cpl                                           ; $54B6: $2F
     inc  a                                        ; $54B7: $3C
@@ -5498,7 +5498,7 @@ jr_004_6575:
     ld   a, $59                                   ; $65B0: $3E $59
     ldh  [hLinkPositionY], a                      ; $65B2: $E0 $99
     ld   a, $08                                   ; $65B4: $3E $08
-    call GetPositionCloserToLink_trampoline       ; $65B6: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $65B6: $CD $B5 $3B
     ldh  a, [hScratch0]                               ; $65B9: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                                ; $65BB: $21 $50 $C2
     add  hl, bc                                   ; $65BE: $09
@@ -5553,7 +5553,7 @@ jr_004_65F1:
     add  $08                                      ; $65FB: $C6 $08
     ldh  [hLinkPositionY], a                      ; $65FD: $E0 $99
     ld   a, $03                                   ; $65FF: $3E $03
-    call GetPositionCloserToLink_trampoline       ; $6601: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $6601: $CD $B5 $3B
     ldh  a, [hScratch0]                               ; $6604: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                                ; $6606: $21 $50 $C2
     add  hl, bc                                   ; $6609: $09
@@ -5965,7 +5965,7 @@ jr_004_6852:
 
 jr_004_686D:
     push de                                       ; $686D: $D5
-    call GetPositionCloserToLink_trampoline       ; $686E: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $686E: $CD $B5 $3B
     pop  de                                       ; $6871: $D1
     ldh  a, [hScratch0]                               ; $6872: $F0 $D7
     bit  0, e                                     ; $6874: $CB $43
@@ -6112,7 +6112,7 @@ label_004_6910:
     ld   a, [hl]                                  ; $6944: $7E
     push af                                       ; $6945: $F5
     ld   a, $10                                   ; $6946: $3E $10
-    call GetPositionCloserToLink_trampoline       ; $6948: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $6948: $CD $B5 $3B
     ld   e, $00                                   ; $694B: $1E $00
     ldh  a, [hActiveEntityType]                     ; $694D: $F0 $EB
     cp   $52                                      ; $694F: $FE $52

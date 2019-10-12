@@ -6188,7 +6188,7 @@ jr_018_655B:
     jr   c, jr_018_6588                           ; $6579: $38 $0D
 
     ld   a, $08                                   ; $657B: $3E $08
-    call GetPositionCloserToLink_trampoline       ; $657D: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $657D: $CD $B5 $3B
     ldh  a, [hScratch1]                           ; $6580: $F0 $D8
     ld   hl, wEntitiesSpeedXTable                       ; $6582: $21 $40 $C2
     add  hl, bc                                   ; $6585: $09
@@ -7188,7 +7188,7 @@ jr_018_6A8B:
     jr   nc, jr_018_6B02                          ; $6ADE: $30 $22
 
     ld   a, $10                                   ; $6AE0: $3E $10
-    call GetPositionCloserToLink_trampoline       ; $6AE2: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $6AE2: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $6AE5: $F0 $D7
     cpl                                           ; $6AE7: $2F
     inc  a                                        ; $6AE8: $3C
@@ -7385,7 +7385,7 @@ jr_018_6BD4:
     jr   z, jr_018_6C27                           ; $6C03: $28 $22
 
     ld   a, $20                                   ; $6C05: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $6C07: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $6C07: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $6C0A: $F0 $D7
     cpl                                           ; $6C0C: $2F
     inc  a                                        ; $6C0D: $3C
@@ -7419,7 +7419,7 @@ jr_018_6C27:
 
 jr_018_6C38:
     ld   a, $20                                   ; $6C38: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $6C3A: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $6C3A: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $6C3D: $F0 $D7
     cpl                                           ; $6C3F: $2F
     inc  a                                        ; $6C40: $3C
@@ -7682,7 +7682,7 @@ func_018_6D98:
     sub  $08                                      ; $6D9F: $D6 $08
     ldh  [hLinkPositionY], a                      ; $6DA1: $E0 $99
     ld   a, $1F                                   ; $6DA3: $3E $1F
-    call GetPositionCloserToLink_trampoline       ; $6DA5: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $6DA5: $CD $B5 $3B
     pop  af                                       ; $6DA8: $F1
     ldh  [hLinkPositionY], a                      ; $6DA9: $E0 $99
     call func_018_7B9D                            ; $6DAB: $CD $9D $7B
@@ -7850,7 +7850,7 @@ jr_018_6E74:
     ldh  [hLinkPositionX], a                      ; $6E9C: $E0 $98
     push de                                       ; $6E9E: $D5
     ld   a, $20                                   ; $6E9F: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $6EA1: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $6EA1: $CD $B5 $3B
     pop  de                                       ; $6EA4: $D1
     ldh  a, [hScratch1]                           ; $6EA5: $F0 $D8
     cpl                                           ; $6EA7: $2F
@@ -9733,7 +9733,7 @@ jr_018_78F1:
     call GetEntityTransitionCountdown             ; $7918: $CD $05 $0C
     ld   [hl], $12                                ; $791B: $36 $12
     ld   a, $20                                   ; $791D: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $791F: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $791F: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $7922: $F0 $D7
     cpl                                           ; $7924: $2F
     inc  a                                        ; $7925: $3C
@@ -10237,150 +10237,7 @@ jr_018_7BD1:
     ld   a, [hl]                                  ; $7BDD: $7E
     ret                                           ; $7BDE: $C9
 
-    ld   de, $0F10                                ; $7BDF: $11 $10 $0F
-    db   $0E                                      ; $7BE2: $0E
-
-HookshotChainEntityHandler::
-    ld   a, [wLinkPlayingOcarinaCountdown]        ; $7DBE3
-    and  a                                        ; $7BE6: $A7
-    jp   nz, label_018_7F08                       ; $7BE7: $C2 $08 $7F
-
-    ld   a, $02                                   ; $7BEA: $3E $02
-    ldh  [$FFA1], a                               ; $7BEC: $E0 $A1
-    ld   [$C1A4], a                               ; $7BEE: $EA $A4 $C1
-    ld   [$C1C6], a                               ; $7BF1: $EA $C6 $C1
-    ld   a, c                                     ; $7BF4: $79
-    inc  a                                        ; $7BF5: $3C
-    ld   [$C1A6], a                               ; $7BF6: $EA $A6 $C1
-    xor  a                                        ; $7BF9: $AF
-    call ResetSpinAttack                                ; $7BFA: $CD $AF $0C
-    ld   [$C13E], a                               ; $7BFD: $EA $3E $C1
-    ldh  a, [hLinkDirection]                      ; $7C00: $F0 $9E
-    ld   e, a                                     ; $7C02: $5F
-    ld   d, $00                                   ; $7C03: $16 $00
-    ld   hl, $7BDF                                ; $7C05: $21 $DF $7B
-    add  hl, de                                   ; $7C08: $19
-    ld   a, [hl]                                  ; $7C09: $7E
-    ldh  [hLinkAnimationState], a                 ; $7C0A: $E0 $9D
-    call func_018_7CC8                            ; $7C0C: $CD $C8 $7C
-    call func_018_7DE8                            ; $7C0F: $CD $E8 $7D
-    ldh  a, [hFrameCounter]                       ; $7C12: $F0 $E7
-    and  $03                                      ; $7C14: $E6 $03
-    jr   nz, jr_018_7C1C                          ; $7C16: $20 $04
-
-    ld   a, $0B                                   ; $7C18: $3E $0B
-    ldh  [hNoiseSfx], a                           ; $7C1A: $E0 $F4
-
-jr_018_7C1C:
-    ldh  a, [hActiveEntityState]                  ; $7C1C: $F0 $F0
-    and  a                                        ; $7C1E: $A7
-    jr   z, jr_018_7C39                           ; $7C1F: $28 $18
-
-    ld   a, $30                                   ; $7C21: $3E $30
-    call GetPositionCloserToLink_trampoline       ; $7C23: $CD $B5 $3B
-    ldh  a, [hScratch0]                           ; $7C26: $F0 $D7
-    cpl                                           ; $7C28: $2F
-    inc  a                                        ; $7C29: $3C
-    ldh  [hLinkPositionYIncrement], a             ; $7C2A: $E0 $9B
-    ldh  a, [hScratch1]                           ; $7C2C: $F0 $D8
-    cpl                                           ; $7C2E: $2F
-    inc  a                                        ; $7C2F: $3C
-    ldh  [hLinkPositionXIncrement], a             ; $7C30: $E0 $9A
-    push bc                                       ; $7C32: $C5
-    call UpdateFinalLinkPosition                  ; $7C33: $CD $A8 $21
-    pop  bc                                       ; $7C36: $C1
-    jr   jr_018_7C46                              ; $7C37: $18 $0D
-
-jr_018_7C39:
-    call func_018_7E5F                            ; $7C39: $CD $5F $7E
-    call GetEntityTransitionCountdown             ; $7C3C: $CD $05 $0C
-    jr   nz, jr_018_7C54                          ; $7C3F: $20 $13
-
-    ld   a, $30                                   ; $7C41: $3E $30
-    call label_3BAA                               ; $7C43: $CD $AA $3B
-
-jr_018_7C46:
-    call label_3B5A                               ; $7C46: $CD $5A $3B
-    jr   nc, jr_018_7CAE                          ; $7C49: $30 $63
-
-    xor  a                                        ; $7C4B: $AF
-    ld   [$C1C6], a                               ; $7C4C: $EA $C6 $C1
-    call func_018_7F08                            ; $7C4F: $CD $08 $7F
-    jr   jr_018_7CAE                              ; $7C52: $18 $5A
-
-jr_018_7C54:
-    ld   a, $06                                   ; $7C54: $3E $06
-    ld   [$C19E], a                               ; $7C56: $EA $9E $C1
-    call label_3B7B                               ; $7C59: $CD $7B $3B
-    ld   hl, wEntitiesCollisionsTable             ; $7C5C: $21 $A0 $C2
-    add  hl, bc                                   ; $7C5F: $09
-    ld   a, [hl]                                  ; $7C60: $7E
-    and  a                                        ; $7C61: $A7
-    jr   nz, jr_018_7CAF                          ; $7C62: $20 $4B
-
-    call label_3B23                               ; $7C64: $CD $23 $3B
-    ld   a, [wIsIndoor]                           ; $7C67: $FA $A5 $DB
-    and  a                                        ; $7C6A: $A7
-    jr   z, jr_018_7CAE                           ; $7C6B: $28 $41
-
-    call func_018_6493                            ; $7C6D: $CD $93 $64
-    ld   hl, wEntitiesSpeedYTable                       ; $7C70: $21 $50 $C2
-    add  hl, bc                                   ; $7C73: $09
-    ld   a, [hl]                                  ; $7C74: $7E
-    and  a                                        ; $7C75: $A7
-    jr   z, jr_018_7CAE                           ; $7C76: $28 $36
-
-    ld   e, $9E                                   ; $7C78: $1E $9E
-    bit  7, a                                     ; $7C7A: $CB $7F
-    jr   nz, jr_018_7C80                          ; $7C7C: $20 $02
-
-    ld   e, $9F                                   ; $7C7E: $1E $9F
-
-jr_018_7C80:
-    ldh  a, [hFFAF]                               ; $7C80: $F0 $AF
-    cp   e                                        ; $7C82: $BB
-    jr   nz, jr_018_7CAE                          ; $7C83: $20 $29
-
-    ld   a, $68                                   ; $7C85: $3E $68
-    call func_003_64CA_trampoline                               ; $7C87: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                         ; $7C8A: $21 $00 $C2
-    add  hl, de                                   ; $7C8D: $19
-    ldh  a, [hSwordIntersectedAreaX]              ; $7C8E: $F0 $CE
-    add  $08                                      ; $7C90: $C6 $08
-    ld   [hl], a                                  ; $7C92: $77
-    ld   hl, wEntitiesPosYTable                         ; $7C93: $21 $10 $C2
-    add  hl, de                                   ; $7C96: $19
-    ldh  a, [hSwordIntersectedAreaY]              ; $7C97: $F0 $CD
-    add  $10                                      ; $7C99: $C6 $10
-    ld   [hl], a                                  ; $7C9B: $77
-    ldh  a, [hFFAF]                               ; $7C9C: $F0 $AF
-    cp   $9E                                      ; $7C9E: $FE $9E
-    ld   a, $00                                   ; $7CA0: $3E $00
-    jr   z, jr_018_7CA5                           ; $7CA2: $28 $01
-
-    inc  a                                        ; $7CA4: $3C
-
-jr_018_7CA5:
-    ld   hl, $C380                                ; $7CA5: $21 $80 $C3
-    add  hl, de                                   ; $7CA8: $19
-    ld   [hl], a                                  ; $7CA9: $77
-    call GetEntityTransitionCountdown             ; $7CAA: $CD $05 $0C
-    ld   [hl], b                                  ; $7CAD: $70
-
-jr_018_7CAE:
-    ret                                           ; $7CAE: $C9
-
-jr_018_7CAF:
-    call GetEntityTransitionCountdown             ; $7CAF: $CD $05 $0C
-    ld   [hl], b                                  ; $7CB2: $70
-    ld   a, $07                                   ; $7CB3: $3E $07
-    ldh  [hJingle], a                             ; $7CB5: $E0 $F2
-    ldh  a, [wActiveEntityPosX]                   ; $7CB7: $F0 $EE
-    ldh  [hScratch0], a                           ; $7CB9: $E0 $D7
-    ldh  a, [wActiveEntityPosY]                   ; $7CBB: $F0 $EC
-    ldh  [hScratch1], a                           ; $7CBD: $E0 $D8
-    ld   a, $05                                   ; $7CBF: $3E $05
-    jp   label_CC7                                ; $7CC1: $C3 $C7 $0C
+include "code/entities/hookshot_chain.asm"
 
     ld   [hl], $00                                ; $7CC4: $36 $00
     ld   [hl], $20                                ; $7CC6: $36 $20

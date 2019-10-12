@@ -230,12 +230,9 @@ hDungeonFloorTile::       ; FFE9
 hIndexOfObjectBelowLink:: ; FFE9
   ds 1
 
-; Entity type?
-; 0-4: unknown
-; 5: do nothing
-; 6-9: unknown
-; See wEntitiesStateTable
-hActiveEntityState:: ; FFEA
+; Entity status
+; See wEntitiesStatusTable
+hActiveEntityStatus:: ; FFEA
   ds 1
 
 hActiveEntityType:: ; FFEB
@@ -253,9 +250,9 @@ wActiveEntityPosX:: ; FFEE
 ; Unlabeled
 ds 1 ; FFEF
 
-hActiveEntityWalking:: ; FFF0
-  ; Is the active entity walking
-  ; See wEntitiesWalkingTable
+hActiveEntityState:: ; FFF0
+  ; The entity-specific state of the active entity
+  ; See wEntitiesStateTable
   ds 1
 
 hActiveEntitySpriteVariant:: ; FFF1

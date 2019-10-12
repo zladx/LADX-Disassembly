@@ -1,16 +1,16 @@
 ; Maximum number of loaded entities
 MAX_ENTITIES equ 16
 
-; Values for wEntitiesStateTable
-ENTITY_STATE_DISABLED   equ 0
-ENTITY_STATE_DYING      equ 1
-ENTITY_STATE_FALLING    equ 2
-ENTITY_STATE_DESTROYING equ 3
-ENTITY_STATE_INIT       equ 4
-ENTITY_STATE_ACTIVE     equ 5
-ENTITY_STATE_STUNNED    equ 6
-ENTITY_STATE_LIFTED     equ 7
-ENTITY_STATE_THROWN     equ 8
+; Values for wEntitiesStatusTable
+ENTITY_STATUS_DISABLED   equ 0
+ENTITY_STATUS_DYING      equ 1
+ENTITY_STATUS_FALLING    equ 2
+ENTITY_STATUS_DESTROYING equ 3
+ENTITY_STATUS_INIT       equ 4
+ENTITY_STATUS_ACTIVE     equ 5
+ENTITY_STATUS_STUNNED    equ 6
+ENTITY_STATUS_LIFTED     equ 7
+ENTITY_STATUS_THROWN     equ 8
 
 ; Values for wEntitiesTypeTable
 ; (See also EntityPointersTable)

@@ -396,14 +396,21 @@ wC270 equ $C270
 ;   [wC260 + entity index] = [wC260 + entity index] + (EntitySpeedY * 16)
   ds $10
 
-wEntitiesStateTable:: ; C280
+wEntitiesStatusTable:: ; C280
   ; State of visible entities
-  ; See ENTITY_STATE_* constants
+  ; See ENTITY_STATUS_* constants
   ds $10
 
-wEntitiesWalkingTable:: ; C290
-  ; Indicate if the designated entity is walking (1) or standing in place (0).
-  ; e.g. Mabe village dog has 1 when jumping around, and 0 when standing in place moving the tail.
+wEntitiesStateTable:: ; C290
+  ; Store the main state of an entity. Meaning of values is entity-specific.
+  ;
+  ; For instance:
+  ; Mabe fox:  1 when jumping around, and 0 when standing in place moving the tail.
+  ; Cucoo: 1 when jumping around, and 0 when standing in place
+  ; BowWow: 0 when standing still, 1 when bouncing lightly, 2 when making a big jump, 3 after a jump
+  ; Village kids: 0 when standing still, 1 when bouncing
+  ; Moblin: 0 when walking, 1 when standing still
+  ; etc.
   ds $10
 
 wEntitiesCollisionsTable:: ; C2A0
@@ -420,9 +427,11 @@ wEntitiesCollisionsTable:: ; C2A0
 ; Octorock: enumerates 1-2-3-0
 ; Moblin: enumerates 1-2-3-0
 ; Cucoo: stays to 0
+; Butterfly: stores a delta X to move closer to Link
 wEntitiesUnknownTableB:: ; C2B0
   ds $10
 
+; Butterfly: stores a delta Y to move closer to Link
 wEntitiesUnknownTableC:: ; C2C0
   ds $10
 

@@ -2082,9 +2082,9 @@ IncrementD000AndReturn::                         ; Sources: jp @ $5686, jp @ $57
     ret                                          ; $5629 (17): $C9
 
 DisableAllEntities::
-    ; For each entity, set the state to 0 (ENTITY_STATE_DISABLED)
+    ; For each entity, set the state to 0 (ENTITY_STATUS_DISABLED)
     ld   e, MAX_ENTITIES                          ; $562A: $1E $10
-    ld   hl, wEntitiesStateTable                  ; $562C: $21 $80 $C2
+    ld   hl, wEntitiesStatusTable                 ; $562C: $21 $80 $C2
     xor  a                                        ; $562F: $AF
 .loop
     ld   [hl+], a                                 ; $5630: $22
@@ -5822,7 +5822,7 @@ jr_017_75B4:
     add  hl, bc                                   ; $75C6: $09
     ld   [hl], $FE                                ; $75C7: $36 $FE
     call func_017_7E30                            ; $75C9: $CD $30 $7E
-    ldh  a, [hActiveEntityWalking]                               ; $75CC: $F0 $F0
+    ldh  a, [hActiveEntityState]                               ; $75CC: $F0 $F0
     cp   $02                                      ; $75CE: $FE $02
     jr   nc, jr_017_75E0                          ; $75D0: $30 $0E
 
@@ -6817,7 +6817,7 @@ func_017_7A29:
 
 Func_017_7AB1::
     call func_017_7B5F                            ; $7AB1: $CD $5F $7B
-    ldh  a, [hActiveEntityWalking]                ; $7AB4: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $7AB4: $F0 $F0
     JP_TABLE                                      ; $7AB6: $C7
 ._00 dw Func_017_7AC1
 ._01 dw Func_017_7B06
@@ -7094,8 +7094,8 @@ jr_017_7BF2:
     rra                                           ; $7C3B: $1F
     rra                                           ; $7C3C: $1F
     and  $03                                      ; $7C3D: $E6 $03
-    call label_3B0C                                    ; $7C3F: $CD $0C $3B
-    ldh  a, [hActiveEntityWalking]                               ; $7C42: $F0 $F0
+    call SetEntitySpriteVariant                                    ; $7C3F: $CD $0C $3B
+    ldh  a, [hActiveEntityState]                               ; $7C42: $F0 $F0
     rst  $00                                      ; $7C44: $C7
     ld   c, l                                     ; $7C45: $4D
     ld   a, h                                     ; $7C46: $7C
@@ -7223,7 +7223,7 @@ jr_017_7CD4:
     jr   nc, jr_017_7CEF                          ; $7CE8: $30 $05
 
     ld   a, $FF                                   ; $7CEA: $3E $FF
-    call label_3B0C                                    ; $7CEC: $CD $0C $3B
+    call SetEntitySpriteVariant                                    ; $7CEC: $CD $0C $3B
 
 jr_017_7CEF:
     ret                                           ; $7CEF: $C9

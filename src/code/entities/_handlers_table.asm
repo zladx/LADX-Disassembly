@@ -18,7 +18,7 @@ EntityPointersTable::
 ._03 entity_pointer HookshotChainEntityHandler
 ._04 entity_pointer HookshotHitEntityHandler
 ._05 entity_pointer LiftableRockEntityHandler
-._06 entity_pointer Entity06Handler
+._06 entity_pointer PushedBlockEntityHandler
 ._07 entity_pointer ChestWithItemEntityHandler
 ._08 db $66, $79, $18 ; entity_pointer Entity08Handler
 ._09 db $E9, $57, $03 ; entity_pointer Entity09Handler

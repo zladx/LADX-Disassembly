@@ -427,9 +427,11 @@ wEntitiesCollisionsTable:: ; C2A0
 ; Octorock: enumerates 1-2-3-0
 ; Moblin: enumerates 1-2-3-0
 ; Cucoo: stays to 0
+; Butterfly: stores a delta X to move closer to Link
 wEntitiesUnknownTableB:: ; C2B0
   ds $10
 
+; Butterfly: stores a delta Y to move closer to Link
 wEntitiesUnknownTableC:: ; C2C0
   ds $10
 

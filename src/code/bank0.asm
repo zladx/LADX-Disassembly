@@ -7233,10 +7233,10 @@ label_3BAA::
     call func_003_7EC7
     jp   ReloadSavedBank
 
-label_3BB5::
+GetPositionCloserToLink_trampoline::
     ld   hl, MBC3SelectBank
-    ld   [hl], BANK(func_003_7E45)
-    call func_003_7E45
+    ld   [hl], BANK(GetPositionCloserToLink)
+    call GetPositionCloserToLink
     jp   ReloadSavedBank
 
 ; Render an animated active entity to wOAMBuffer

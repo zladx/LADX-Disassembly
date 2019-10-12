@@ -4737,7 +4737,7 @@ jr_003_626B:
     call IsEntityUnknownFZero                                ; $6275: $CD $00 $0C
     ld   [hl], $18                                ; $6278: $36 $18
     ld   a, $0C                                   ; $627A: $3E $0C
-    call func_003_7E45                            ; $627C: $CD $45 $7E
+    call GetPositionCloserToLink                  ; $627C: $CD $45 $7E
     ldh  a, [hScratch1]                           ; $627F: $F0 $D8
     cpl                                           ; $6281: $2F
     inc  a                                        ; $6282: $3C
@@ -7175,7 +7175,7 @@ jr_003_6FB9:
 
 func_003_6FCC::
 jr_003_6FCC:
-    call func_003_7E45                            ; $6FCC: $CD $45 $7E
+    call GetPositionCloserToLink                  ; $6FCC: $CD $45 $7E
     ldh  a, [hScratch0]                           ; $6FCF: $F0 $D7
     cpl                                           ; $6FD1: $2F
     inc  a                                        ; $6FD2: $3C
@@ -7256,7 +7256,7 @@ jr_003_7042:
     jr   nz, jr_003_706F                          ; $7046: $20 $27
 
     ld   a, $30                                   ; $7048: $3E $30
-    call func_003_7E45                            ; $704A: $CD $45 $7E
+    call GetPositionCloserToLink                  ; $704A: $CD $45 $7E
     ldh  a, [hScratch0]                           ; $704D: $F0 $D7
     cpl                                           ; $704F: $2F
     inc  a                                        ; $7050: $3C
@@ -7971,7 +7971,7 @@ jr_003_7440:
     ld   a, $12                                   ; $7455: $3E $12
     call func_003_7565                            ; $7457: $CD $65 $75
     ld   a, $18                                   ; $745A: $3E $18
-    call func_003_7E45                            ; $745C: $CD $45 $7E
+    call GetPositionCloserToLink                  ; $745C: $CD $45 $7E
     ldh  a, [hScratch0]                           ; $745F: $F0 $D7
     cpl                                           ; $7461: $2F
     inc  a                                        ; $7462: $3C
@@ -8153,7 +8153,7 @@ jr_003_752D:
 
 func_003_7565::
 jr_003_7565:
-    call func_003_7E45                            ; $7565: $CD $45 $7E
+    call GetPositionCloserToLink                  ; $7565: $CD $45 $7E
     ldh  a, [hScratch0]                           ; $7568: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $756A: $E0 $9B
     ldh  a, [hScratch1]                           ; $756C: $F0 $D8
@@ -8690,7 +8690,7 @@ func_003_783B::
     ldh  [hLinkPositionY], a                      ; $784F: $E0 $99
     push de                                       ; $7851: $D5
     ldh  a, [hScratch0]                           ; $7852: $F0 $D7
-    call func_003_7E45                            ; $7854: $CD $45 $7E
+    call GetPositionCloserToLink                  ; $7854: $CD $45 $7E
     pop  de                                       ; $7857: $D1
     pop  af                                       ; $7858: $F1
     ldh  [hLinkPositionY], a                      ; $7859: $E0 $99
@@ -9741,7 +9741,19 @@ func_003_7E0E::
     ldh  [hScratch3], a                           ; $7E42: $E0 $DA
     ret                                           ; $7E44: $C9
 
-func_003_7E45::
+; Probably something like:
+; Compute the coordinates of a position closer to Link by A pixels.
+; Useful to move an entity in the direction of another.
+;
+; Inputs:
+;   a    number of pixels closer
+;   ???  initial X position
+;   ???  initial Y position
+;
+; Outputs:
+;   hScratch0   resulting Y position
+;   hScratch1   resulting X position
+GetPositionCloserToLink::
     ldh  [hScratch1], a                           ; $7E45: $E0 $D8
     and  a                                        ; $7E47: $A7
     jp   z, label_003_7EC3                        ; $7E48: $CA $C3 $7E
@@ -9853,7 +9865,7 @@ label_003_7EC3:
 
 func_003_7EC7::
 label_003_7EC7:
-    call func_003_7E45                            ; $7EC7: $CD $45 $7E
+    call GetPositionCloserToLink                  ; $7EC7: $CD $45 $7E
     ldh  a, [hScratch0]                           ; $7ECA: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                       ; $7ECC: $21 $50 $C2
     add  hl, bc                                   ; $7ECF: $09

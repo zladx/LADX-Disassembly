@@ -2164,7 +2164,7 @@ jr_015_4BD0:
     ld   c, e                                     ; $4C29: $4B
     ld   b, d                                     ; $4C2A: $42
     ld   a, $20                                   ; $4C2B: $3E $20
-    call label_3BB5                               ; $4C2D: $CD $B5 $3B
+    call GetPositionCloserToLink_trampoline       ; $4C2D: $CD $B5 $3B
     ldh  a, [hScratch1]                           ; $4C30: $F0 $D8
     cpl                                           ; $4C32: $2F
     inc  a                                        ; $4C33: $3C
@@ -2460,7 +2460,7 @@ label_015_4DB5:
     ld   a, $1F                                   ; $4DE4: $3E $1F
     ld   [$DBC7], a                               ; $4DE6: $EA $C7 $DB
     ld   a, $30                                   ; $4DE9: $3E $30
-    call label_3BB5                               ; $4DEB: $CD $B5 $3B
+    call GetPositionCloserToLink_trampoline       ; $4DEB: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $4DEE: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $4DF0: $E0 $9B
 
@@ -2718,7 +2718,7 @@ jr_015_4F50:
     ld   a, $24                                   ; $4F8C: $3E $24
     ldh  [hJingle], a                             ; $4F8E: $E0 $F2
     ld   a, $12                                   ; $4F90: $3E $12
-    call label_3BB5                               ; $4F92: $CD $B5 $3B
+    call GetPositionCloserToLink_trampoline       ; $4F92: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $4F95: $F0 $D7
     cpl                                           ; $4F97: $2F
     inc  a                                        ; $4F98: $3C
@@ -5458,7 +5458,7 @@ jr_015_5E84:
     ld   a, $08                                   ; $5E85: $3E $08
     ldh  [hNoiseSfx], a                           ; $5E87: $E0 $F4
     ld   a, $18                                   ; $5E89: $3E $18
-    call label_3BB5                               ; $5E8B: $CD $B5 $3B
+    call GetPositionCloserToLink_trampoline       ; $5E8B: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $5E8E: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $5E90: $E0 $9B
     cpl                                           ; $5E92: $2F
@@ -7157,7 +7157,7 @@ jr_015_67F9:
     jr   nz, jr_015_683F                          ; $681E: $20 $1F
 
     ld   a, $18                                   ; $6820: $3E $18
-    call label_3BB5                               ; $6822: $CD $B5 $3B
+    call GetPositionCloserToLink_trampoline       ; $6822: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $6825: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                       ; $6827: $21 $50 $C2
     sub  [hl]                                     ; $682A: $96
@@ -8119,7 +8119,7 @@ jr_015_6CBC:
     sub  $0C                                      ; $6CD3: $D6 $0C
     ldh  [hLinkPositionY], a                      ; $6CD5: $E0 $99
     ld   a, $10                                   ; $6CD7: $3E $10
-    call label_3BB5                               ; $6CD9: $CD $B5 $3B
+    call GetPositionCloserToLink_trampoline       ; $6CD9: $CD $B5 $3B
     ld   hl, wEntitiesSpeedYTable                       ; $6CDC: $21 $50 $C2
     add  hl, bc                                   ; $6CDF: $09
     ldh  a, [hScratch0]                           ; $6CE0: $F0 $D7
@@ -8584,7 +8584,7 @@ jr_015_6F40:
     sub  $20                                      ; $6F48: $D6 $20
     ldh  [hLinkPositionY], a                      ; $6F4A: $E0 $99
     ld   a, $08                                   ; $6F4C: $3E $08
-    call label_3BB5                               ; $6F4E: $CD $B5 $3B
+    call GetPositionCloserToLink_trampoline       ; $6F4E: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $6F51: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                       ; $6F53: $21 $50 $C2
     add  hl, bc                                   ; $6F56: $09
@@ -9252,7 +9252,7 @@ label_015_72CF:
     ld   a, $08                                   ; $72FD: $3E $08
     ld   [wDB94], a                               ; $72FF: $EA $94 $DB
     ld   a, $20                                   ; $7302: $3E $20
-    call label_3BB5                               ; $7304: $CD $B5 $3B
+    call GetPositionCloserToLink_trampoline       ; $7304: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $7307: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $7309: $E0 $9B
     ldh  a, [hScratch1]                           ; $730B: $F0 $D8
@@ -10070,7 +10070,7 @@ jr_015_77BE:
     add  hl, bc                                   ; $77E5: $09
     ld   [hl], a                                  ; $77E6: $77
     ld   a, $10                                   ; $77E7: $3E $10
-    call label_3BB5                               ; $77E9: $CD $B5 $3B
+    call GetPositionCloserToLink_trampoline       ; $77E9: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $77EC: $F0 $D7
     cpl                                           ; $77EE: $2F
     inc  a                                        ; $77EF: $3C

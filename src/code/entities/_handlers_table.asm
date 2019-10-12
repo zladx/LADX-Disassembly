@@ -59,7 +59,7 @@ EntityPointersTable::
 ._2C db $A4, $77, $07 ; entity_pointer Entity2CHandler ; $2C
 ._2D db $38, $5D, $03 ; entity_pointer Entity2DHandler
 ._2E db $9E, $60, $03 ; entity_pointer Entity2EHandler
-._2F db $5B, $61, $03 ; entity_pointer Entity2FHandler
+._2F entity_pointer DroppableFairyEntityHandler
 ._30 db $89, $5C, $03 ; entity_pointer Entity30Handler ; $30
 ._31 db $99, $5B, $03 ; entity_pointer Entity31Handler
 ._32 db $88, $5B, $03 ; entity_pointer Entity32Handler

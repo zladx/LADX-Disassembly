@@ -7557,6 +7557,7 @@ ButterflyEntityHandler::
     ldh  [hLinkPositionY], a                      ; $6C51: $E0 $99
 .C50FEnd
 
+    ; Move closer to Link by $02 pixels
     ld   a, $02                                   ; $6C53: $3E $02
     call GetPositionCloserToLink_trampoline       ; $6C55: $CD $B5 $3B
     pop  af                                       ; $6C58: $F1

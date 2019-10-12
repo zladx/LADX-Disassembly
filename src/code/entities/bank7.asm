@@ -8481,7 +8481,7 @@ jr_007_70E0:
     jr   nc, jr_007_7111                          ; $70EB: $30 $24
 
     ld   a, $28                                   ; $70ED: $3E $28
-    call GetPositionCloserToLink_trampoline       ; $70EF: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $70EF: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $70F2: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $70F4: $E0 $9B
     ldh  a, [hScratch1]                           ; $70F6: $F0 $D8

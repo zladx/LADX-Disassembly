@@ -3982,7 +3982,7 @@ jr_019_581D:
     ret  nz                                       ; $5821: $C0
 
     ld   a, $1F                                   ; $5822: $3E $1F
-    call GetPositionCloserToLink_trampoline       ; $5824: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $5824: $CD $B5 $3B
     call func_019_567B                            ; $5827: $CD $7B $56
     rra                                           ; $582A: $1F
     and  $07                                      ; $582B: $E6 $07
@@ -4069,7 +4069,7 @@ label_019_58A2:
 
     call label_3B18                               ; $58AF: $CD $18 $3B
     ld   a, $10                                   ; $58B2: $3E $10
-    call GetPositionCloserToLink_trampoline       ; $58B4: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $58B4: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $58B7: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $58B9: $E0 $9B
     ldh  a, [hScratch1]                           ; $58BB: $F0 $D8

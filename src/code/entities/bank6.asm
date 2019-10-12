@@ -590,7 +590,7 @@ jr_006_434B:
     jr   nc, jr_006_43B8                          ; $437D: $30 $39
 
     ld   a, $08                                   ; $437F: $3E $08
-    call GetPositionCloserToLink_trampoline       ; $4381: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $4381: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $4384: $F0 $D7
     cpl                                           ; $4386: $2F
     inc  a                                        ; $4387: $3C
@@ -2403,7 +2403,7 @@ jr_006_4EF2:
     ld   a, $08                                   ; $4EFB: $3E $08
     ld   [$C13E], a                               ; $4EFD: $EA $3E $C1
     ld   a, $10                                   ; $4F00: $3E $10
-    call GetPositionCloserToLink_trampoline       ; $4F02: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $4F02: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $4F05: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $4F07: $E0 $9B
     ldh  a, [hScratch1]                           ; $4F09: $F0 $D8
@@ -2469,7 +2469,7 @@ jr_006_4F48:
     xor  c                                        ; $4F6E: $A9
     and  $07                                      ; $4F6F: $E6 $07
     add  $04                                      ; $4F71: $C6 $04
-    call GetPositionCloserToLink_trampoline       ; $4F73: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $4F73: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $4F76: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                       ; $4F78: $21 $50 $C2
     call func_006_4FA3                            ; $4F7B: $CD $A3 $4F
@@ -5010,7 +5010,7 @@ jr_006_5DBA:
     jr   nz, jr_006_5E02                          ; $5DD3: $20 $2D
 
     ld   a, $20                                   ; $5DD5: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $5DD7: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $5DD7: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $5DDA: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                       ; $5DDC: $21 $50 $C2
     add  hl, bc                                   ; $5DDF: $09
@@ -5066,7 +5066,7 @@ func_006_5E14:
     jr   nz, jr_006_5E51                          ; $5E1E: $20 $31
 
     ld   a, $20                                   ; $5E20: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $5E22: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $5E22: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $5E25: $F0 $D7
     cpl                                           ; $5E27: $2F
     inc  a                                        ; $5E28: $3C
@@ -7177,7 +7177,7 @@ jr_006_6A0F:
     jr   nz, jr_006_6A36                          ; $6A13: $20 $21
 
     ld   a, $20                                   ; $6A15: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $6A17: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $6A17: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $6A1A: $F0 $D7
     cpl                                           ; $6A1C: $2F
     inc  a                                        ; $6A1D: $3C
@@ -7559,7 +7559,7 @@ ButterflyEntityHandler::
 
     ; Move closer to Link by $02 pixels
     ld   a, $02                                   ; $6C53: $3E $02
-    call GetPositionCloserToLink_trampoline       ; $6C55: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $6C55: $CD $B5 $3B
     pop  af                                       ; $6C58: $F1
     ldh  [hLinkPositionY], a                      ; $6C59: $E0 $99
     pop  af                                       ; $6C5B: $F1
@@ -8781,7 +8781,7 @@ func_006_7335:
     call IncrementEntityWalkingAttr               ; $734E: $CD $12 $3B
     ld   [hl], $02                                ; $7351: $36 $02
     ld   a, $10                                   ; $7353: $3E $10
-    call GetPositionCloserToLink_trampoline       ; $7355: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $7355: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $7358: $F0 $D7
     cpl                                           ; $735A: $2F
     inc  a                                        ; $735B: $3C
@@ -9982,7 +9982,7 @@ jr_006_7982:
     xor  c                                        ; $79DD: $A9
     and  $07                                      ; $79DE: $E6 $07
     add  $06                                      ; $79E0: $C6 $06
-    call GetPositionCloserToLink_trampoline       ; $79E2: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $79E2: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $79E5: $F0 $D7
     ld   hl, wEntitiesSpeedYTable                       ; $79E7: $21 $50 $C2
     call func_006_7A79                            ; $79EA: $CD $79 $7A
@@ -10051,7 +10051,7 @@ label_006_7A38:
     ld   [hl], $01                                ; $7A48: $36 $01
     call label_3B39                               ; $7A4A: $CD $39 $3B
     ld   a, $04                                   ; $7A4D: $3E $04
-    call GetPositionCloserToLink_trampoline       ; $7A4F: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $7A4F: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $7A52: $F0 $D7
     cpl                                           ; $7A54: $2F
     inc  a                                        ; $7A55: $3C

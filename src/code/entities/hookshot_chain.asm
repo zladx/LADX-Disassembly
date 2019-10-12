@@ -38,7 +38,7 @@ jr_018_7C1C:
     jr   z, jr_018_7C39                           ; $7C1F: $28 $18
 
     ld   a, $30                                   ; $7C21: $3E $30
-    call GetPositionCloserToLink_trampoline       ; $7C23: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $7C23: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $7C26: $F0 $D7
     cpl                                           ; $7C28: $2F
     inc  a                                        ; $7C29: $3C

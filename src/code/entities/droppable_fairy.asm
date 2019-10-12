@@ -57,4 +57,4 @@ jr_003_619C:
 
 jr_003_61BB:
     ld   a, $09                                   ; $61BB: $3E $09
-    jp   label_003_7EC7                           ; $61BD: $C3 $C7 $7E
+    jp   ApplyVectorTowardsLinkAndReturn          ; $61BD: $C3 $C7 $7E

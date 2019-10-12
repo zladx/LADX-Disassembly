@@ -2348,7 +2348,7 @@ jr_036_4D5C:
     ld   a, $10                                   ; $4D5C: $3E $10
     ld   [$C13E], a                               ; $4D5E: $EA $3E $C1
     ld   a, $14                                   ; $4D61: $3E $14
-    call GetPositionCloserToLink_trampoline       ; $4D63: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $4D63: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $4D66: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $4D68: $E0 $9B
     ldh  a, [hScratch1]                           ; $4D6A: $F0 $D8
@@ -3933,7 +3933,7 @@ jr_036_5661:
     ld   a, $10                                   ; $5661: $3E $10
     ld   [$C13E], a                               ; $5663: $EA $3E $C1
     ld   a, $20                                   ; $5666: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $5668: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $5668: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $566B: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $566D: $E0 $9B
     ldh  a, [hScratch1]                           ; $566F: $F0 $D8
@@ -5091,7 +5091,7 @@ func_036_5CBD:
     ld   a, $10                                   ; $5CC7: $3E $10
     ld   [$C13E], a                               ; $5CC9: $EA $3E $C1
     ld   a, $20                                   ; $5CCC: $3E $20
-    call GetPositionCloserToLink_trampoline       ; $5CCE: $CD $B5 $3B
+    call GetVectorTowardsLink_trampoline          ; $5CCE: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $5CD1: $F0 $D7
     ldh  [hLinkPositionYIncrement], a             ; $5CD3: $E0 $9B
     ldh  a, [hScratch1]                           ; $5CD5: $F0 $D8

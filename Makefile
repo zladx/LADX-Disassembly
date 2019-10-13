@@ -11,20 +11,12 @@ all: build test
 build: game.gbc
 
 test: build
-	@md5sum -c ladx.md5
+	@tools/md5sum.sh -c ladx.md5
 
 clean:
 	rm -f $(obj)
 	rm -f game.{gbc,sym,map}
 	find . -iname '*.2bpp' -exec rm {} +
-
-Z80Dis: tools/deprecatd/Z80Dis.c
-	gcc -std=c99 -o Z80Dis tools/Z80Dis.c
-	chmod a+x Z80Dis
-
-DumpBanks: tools/deprecated/DumpBanks.c
-	gcc -std=c99 -o DumpBanks tools/DumpBanks.c
-	chmod a+x DumpBanks
 
 # Objects are assembled from source.
 # src/main.o is built from src/main.asm.

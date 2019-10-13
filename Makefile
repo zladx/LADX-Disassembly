@@ -11,7 +11,7 @@ all: build test
 build: game.gbc
 
 test: build
-	@md5sum -c ladx.md5
+	@tools/md5sum.sh -c ladx.md5
 
 clean:
 	rm -f $(obj)

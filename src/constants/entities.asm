@@ -90,7 +90,7 @@ ENTITY_MOVING_BLOCK_BOTTOM_LEFT      equ $48
 ENTITY_MOVING_BLOCK_BOTTOM_RIGHT     equ $49
 ENTITY_COLOR_DUNGEON_BOOK            equ $4A
 ENTITY_POT                           equ $4B
-;ENTITY_UNKNOWN                      equ $4C
+;ENTITY_DISABLED                     equ $4C
 ENTITY_SHOP_OWNER                    equ $4D
 ;ENTITY_UNKNOWN                      equ $4E
 ENTITY_TRENDY_GAME_OWNER             equ $4F

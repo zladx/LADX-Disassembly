@@ -21,17 +21,17 @@ EntityPointersTable::
 ._06 entity_pointer PushedBlockEntityHandler
 ._07 entity_pointer ChestWithItemEntityHandler
 ._08 db $66, $79, $18 ; entity_pointer Entity08Handler
-._09 db $E9, $57, $03 ; entity_pointer Entity09Handler
-._0A db $26, $6A, $03 ; entity_pointer Entity0AHandler
-._0B db $27, $58, $03 ; entity_pointer Entity0BHandler
-._0C db $CC, $6A, $03 ; entity_pointer Entity0CHandler
+._09 entity_pointer OctorockEntityHandler
+._0A entity_pointer OctorockRockEntityHandler
+._0B entity_pointer MoblinEntityHandler
+._0C entity_pointer MoblinArrowEntityHandler
 ._0D db $C7, $78, $06 ; entity_pointer Entity0DHandler
 ._0E db $F5, $7E, $04 ; entity_pointer Entity0EHandler
 ._0F db $4E, $74, $06 ; entity_pointer Entity0FHandler
 ._10 db $0D, $5C, $04 ; entity_pointer Entity10Handler
 ._11 db $08, $5C, $04 ; entity_pointer Entity11Handler
 ._12 db $0D, $5C, $04 ; entity_pointer Entity12Handler
-._13 db $D8, $59, $03 ; entity_pointer Entity13Handler
+._13 entity_pointer HeartContainerTilesTable
 ._14 db $41, $79, $07 ; entity_pointer Entity14Handler ; $14
 ._15 db $76, $78, $06 ; entity_pointer Entity15Handler
 ._16 db $35, $66, $06 ; entity_pointer Entity16Handler
@@ -48,32 +48,32 @@ EntityPointersTable::
 ._21 db $28, $76, $06 ; entity_pointer Entity21Handler
 ._22 db $F1, $65, $06 ; entity_pointer Entity22Handler
 ._23 db $DC, $7D, $06 ; entity_pointer LikeLikeEntityHandler
-._24 db $FB, $4F, $03 ; entity_pointer Entity24Handler ; $24
-._25 db $44, $4C, $03 ; entity_pointer Entity25Handler
-._26 db $44, $4C, $03 ; entity_pointer Entity26Handler
+._24 entity_pointer IronMaskEntityHandler ; $24
+._25 entity_pointer EntityDestructionData ; small exploding ennemy
+._26 entity_pointer EntityDestructionData ; small exploding ennemy 2
 ._27 db $10, $75, $06 ; entity_pointer Entity27Handler
 ._28 db $AF, $6A, $19 ; entity_pointer Entity28Handler ; $28
 ._29 db $95, $5A, $04 ; entity_pointer Entity29Handler
 ._2A db $61, $6C, $04 ; entity_pointer Entity2AHandler
 ._2B db $D6, $75, $15 ; entity_pointer Entity2BHandler
 ._2C db $A4, $77, $07 ; entity_pointer Entity2CHandler ; $2C
-._2D db $38, $5D, $03 ; entity_pointer Entity2DHandler
-._2E db $9E, $60, $03 ; entity_pointer Entity2EHandler
+._2D entity_pointer DroppableHeartEntityHandler
+._2E entity_pointer DroppableRupeeEntityHandler
 ._2F entity_pointer DroppableFairyEntityHandler
-._30 db $89, $5C, $03 ; entity_pointer Entity30Handler ; $30
-._31 db $99, $5B, $03 ; entity_pointer Entity31Handler
-._32 db $88, $5B, $03 ; entity_pointer Entity32Handler
-._33 db $6D, $5B, $03 ; entity_pointer Entity33Handler
-._34 db $5D, $5B, $03 ; entity_pointer Entity34Handler ; $34
-._35 db $51, $5A, $03 ; entity_pointer Entity35Handler
-._36 db $DC, $59, $03 ; entity_pointer Entity36Handler
-._37 db $7D, $60, $03 ; entity_pointer Entity37Handler
-._38 db $C2, $5F, $03 ; entity_pointer Entity38Handler ; $38
-._39 db $93, $5D, $03 ; entity_pointer Entity39Handler
-._3A db $4B, $5D, $03 ; entity_pointer Entity3AHandler
-._3B db $57, $60, $03 ; entity_pointer Entity3BHandler
-._3C db $FD, $5F, $03 ; entity_pointer Entity3CHandler ; $3C
-._3D db $D3, $5F, $03 ; entity_pointer Entity3DHandler
+._30 entity_pointer KeyDropPointEntityHandler ; $30
+._31 entity_pointer SwordEntityHandler
+._32 entity_pointer Entity32Handler
+._33 entity_pointer PieceOfPowerEntityHandler
+._34 entity_pointer GuardianAcornEntityHandler ; $34
+._35 entity_pointer HeartPieceEntityHandler
+._36 entity_pointer HeartContainerEntityHandler
+._37 entity_pointer DroppableArrowsEntityHandler
+._38 entity_pointer DroppableBombsEntityHandler ; $38
+._39 entity_pointer SirensInstrumentEntityHandler
+._3A entity_pointer SleepyToadstoolEntityHandler
+._3B entity_pointer DroppableMagicPowderEntityHandler
+._3C entity_pointer HidingSlimeKeyEntityHandler ; $3C
+._3D entity_pointer DroppableSeashellEntityHandler
 ._3E db $62, $4E, $05 ; entity_pointer Entity3EHandler
 ._3F db $6A, $49, $05 ; entity_pointer Entity3FHandler
 ._40 db $D3, $47, $05 ; entity_pointer Entity40Handler ; $40
@@ -87,8 +87,8 @@ EntityPointersTable::
 ._48 db $3C, $42, $15 ; entity_pointer Entity48Handler ; $48
 ._49 db $AE, $42, $15 ; entity_pointer Entity49Handler
 ._4A db $7F, $58, $36 ; entity_pointer Entity4AHandler
-._4B db $26, $53, $03 ; entity_pointer Entity4BHandler
-._4C db $00, $00, $00 ; entity_pointer Entity4CHandler ; $4C
+._4B entity_pointer PotEntityHandler
+._4C db $00, $00, $00 ; disabled
 ._4D db $EB, $76, $04 ; entity_pointer Entity4DHandler
 ._4E db $CA, $76, $04 ; entity_pointer Entity4EHandler
 ._4F db $7C, $6E, $04 ; entity_pointer Entity4FHandler

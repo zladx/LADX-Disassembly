@@ -6069,7 +6069,7 @@ func_018_6493:
     ld   h, a                                     ; $64BA: $67
     pop  bc                                       ; $64BB: $C1
     ld   a, [hl]                                  ; $64BC: $7E
-    ldh  [hFFAF], a                               ; $64BD: $E0 $AF
+    ldh  [hObjectUnderEntity], a                  ; $64BD: $E0 $AF
     ld   e, a                                     ; $64BF: $5F
     ld   a, [wIsIndoor]                           ; $64C0: $FA $A5 $DB
     ld   d, a                                     ; $64C3: $57
@@ -9826,7 +9826,7 @@ jr_018_795B:
     ld   h, a                                     ; $79A6: $67
     pop  bc                                       ; $79A7: $C1
     ld   a, [hl]                                  ; $79A8: $7E
-    ldh  [hFFAF], a                               ; $79A9: $E0 $AF
+    ldh  [hObjectUnderEntity], a                  ; $79A9: $E0 $AF
     cp   $D3                                      ; $79AB: $FE $D3
     jr   z, jr_018_79B3                           ; $79AD: $28 $04
 
@@ -9854,7 +9854,7 @@ jr_018_79CF:
     and  a                                        ; $79D2: $A7
     jp   z, label_018_7A4B                        ; $79D3: $CA $4B $7A
 
-    ldh  a, [hFFAF]                               ; $79D6: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $79D6: $F0 $AF
     cp   $AB                                      ; $79D8: $FE $AB
     ret  nz                                       ; $79DA: $C0
 

@@ -103,8 +103,8 @@ hWindowXUnused:: ; FFAA
 hFFAB:: ; hFFAB
   ds 4
 
-; Related to ennemies IA state?
-hFFAF:: ; FFAF
+hObjectUnderEntity:: ; FFAF
+  ; Type of the object under the active entity
   ds 1
 
 hMusicTrack:: ; FFB0

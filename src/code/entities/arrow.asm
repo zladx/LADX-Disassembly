@@ -34,7 +34,7 @@ ArrowEntityHandler::
     cp   $0F                                      ; $6A58: $FE $0F
     ret  nz                                       ; $6A5A: $C0
 
-    ldh  a, [hFFAF]                               ; $6A5B: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $6A5B: $F0 $AF
     cp   $C0                                      ; $6A5D: $FE $C0
     ret  nz                                       ; $6A5F: $C0
 

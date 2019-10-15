@@ -2582,7 +2582,7 @@ jr_014_5525:
 func_014_5526::
     ld   hl, wRoomObjects                         ; $5526: $21 $11 $D7
     add  hl, de                                   ; $5529: $19
-    ldh  a, [hFFAF]                               ; $552A: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $552A: $F0 $AF
     cp   $8E                                      ; $552C: $FE $8E
     jr   nz, jr_014_557D                          ; $552E: $20 $4D
 
@@ -2648,7 +2648,7 @@ jr_014_5584:
     and  a                                        ; $558D: $A7
     jr   z, jr_014_55E3                           ; $558E: $28 $53
 
-    ldh  a, [hFFAF]                               ; $5590: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $5590: $F0 $AF
     cp   $8A                                      ; $5592: $FE $8A
     jr   nz, jr_014_55E3                          ; $5594: $20 $4D
 
@@ -2748,7 +2748,7 @@ jr_014_5600:
     jp   label_014_573E                           ; $562D: $C3 $3E $57
 
 label_014_5630:
-    ldh  a, [hFFAF]                               ; $5630: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $5630: $F0 $AF
     cp   $20                                      ; $5632: $FE $20
     jr   nz, jr_014_564E                          ; $5634: $20 $18
 
@@ -2796,7 +2796,7 @@ jr_014_564E:
     cp   $FF                                      ; $5669: $FE $FF
     jr   nz, jr_014_5677                          ; $566B: $20 $0A
 
-    ldh  a, [hFFAF]                               ; $566D: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $566D: $F0 $AF
     cp   $20                                      ; $566F: $FE $20
     jr   z, jr_014_5677                           ; $5671: $28 $04
 
@@ -2835,7 +2835,7 @@ jr_014_5679:
     cp   $FF                                      ; $569D: $FE $FF
     jr   nz, jr_014_56A9                          ; $569F: $20 $08
 
-    ldh  a, [hFFAF]                               ; $56A1: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $56A1: $F0 $AF
     cp   $20                                      ; $56A3: $FE $20
     jr   nz, jr_014_56B3                          ; $56A5: $20 $0C
 
@@ -2845,7 +2845,7 @@ jr_014_56A9:
     cp   $75                                      ; $56A9: $FE $75
     jr   nz, jr_014_56B7                          ; $56AB: $20 $0A
 
-    ldh  a, [hFFAF]                               ; $56AD: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $56AD: $F0 $AF
     cp   $20                                      ; $56AF: $FE $20
     jr   nz, jr_014_56B7                          ; $56B1: $20 $04
 
@@ -2903,7 +2903,7 @@ jr_014_56C9:
     cp   $FF                                      ; $56FC: $FE $FF
     jr   nz, jr_014_5708                          ; $56FE: $20 $08
 
-    ldh  a, [hFFAF]                               ; $5700: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $5700: $F0 $AF
     cp   $20                                      ; $5702: $FE $20
     jr   nz, jr_014_5729                          ; $5704: $20 $23
 
@@ -2913,7 +2913,7 @@ jr_014_5708:
     cp   $75                                      ; $5708: $FE $75
     jr   nz, jr_014_5712                          ; $570A: $20 $06
 
-    ldh  a, [hFFAF]                               ; $570C: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $570C: $F0 $AF
     cp   $20                                      ; $570E: $FE $20
     jr   z, jr_014_5729                           ; $5710: $28 $17
 

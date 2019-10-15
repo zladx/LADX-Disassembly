@@ -98,7 +98,7 @@ jr_018_7C54:
     ld   e, $9F                                   ; $7C7E: $1E $9F
 
 jr_018_7C80:
-    ldh  a, [hFFAF]                               ; $7C80: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $7C80: $F0 $AF
     cp   e                                        ; $7C82: $BB
     jr   nz, jr_018_7CAE                          ; $7C83: $20 $29
 
@@ -114,7 +114,7 @@ jr_018_7C80:
     ldh  a, [hSwordIntersectedAreaY]              ; $7C97: $F0 $CD
     add  $10                                      ; $7C99: $C6 $10
     ld   [hl], a                                  ; $7C9B: $77
-    ldh  a, [hFFAF]                               ; $7C9C: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $7C9C: $F0 $AF
     cp   $9E                                      ; $7C9E: $FE $9E
     ld   a, $00                                   ; $7CA0: $3E $00
     jr   z, jr_018_7CA5                           ; $7CA2: $28 $01

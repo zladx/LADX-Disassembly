@@ -4500,7 +4500,7 @@ jr_003_6200:
     jr   z, jr_003_622F                           ; $6225: $28 $08
 
 jr_003_6227:
-    ldh  a, [hFFAF]                               ; $6227: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $6227: $F0 $AF
     cp   $04                                      ; $6229: $FE $04
     jr   z, jr_003_623B                           ; $622B: $28 $0E
 
@@ -4512,7 +4512,7 @@ jr_003_622F:
     ld   [hl], $01                                ; $6233: $36 $01
 
 jr_003_6235:
-    ldh  a, [hFFAF]                               ; $6235: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $6235: $F0 $AF
     cp   $CC                                      ; $6237: $FE $CC
     jr   nz, jr_003_629C                          ; $6239: $20 $61
 
@@ -5451,7 +5451,7 @@ jr_003_6771:
     ld   a, c                                     ; $67A5: $79
     ldh  [hFFE9], a                               ; $67A6: $E0 $E9
     ld   a, [hl]                                  ; $67A8: $7E
-    ldh  [hFFAF], a                               ; $67A9: $E0 $AF
+    ldh  [hObjectUnderEntity], a                  ; $67A9: $E0 $AF
     ld   e, a                                     ; $67AB: $5F
     cp   $BB                                      ; $67AC: $FE $BB
     jr   c, jr_003_6828                           ; $67AE: $38 $78
@@ -5702,7 +5702,7 @@ jr_003_690F:
     ld   a, [wIsIndoor]                           ; $6922: $FA $A5 $DB
     and  a                                        ; $6925: $A7
     ld   a, [hl]                                  ; $6926: $7E
-    ldh  [hFFAF], a                               ; $6927: $E0 $AF
+    ldh  [hObjectUnderEntity], a                  ; $6927: $E0 $AF
     jr   nz, jr_003_693C                          ; $6929: $20 $11
 
     ldh  [hFFE9], a                               ; $692B: $E0 $E9
@@ -8387,7 +8387,6 @@ func_003_7893::
     jp   nz, label_003_7A18                       ; $78AE: $C2 $18 $7A
 jr_003_78B1:
 
-
     ld   hl, wEntitiesUnknowTableJ                ; $78B1: $21 $F0 $C4
     add  hl, bc                                   ; $78B4: $09
     ld   [hl], b                                  ; $78B5: $70
@@ -8423,7 +8422,7 @@ jr_003_78C5:
 
 jr_003_78E3:
     ld   e, $01                                   ; $78E3: $1E $01
-    ldh  a, [hFFAF]                               ; $78E5: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $78E5: $F0 $AF
     cp   $67                                      ; $78E7: $FE $67
     jr   z, jr_003_7907                           ; $78E9: $28 $1C
 
@@ -8559,7 +8558,7 @@ jr_003_799A:
     jr   jr_003_7A18                              ; $799A: $18 $7C
 
 jr_003_799C:
-    ldh  a, [hFFAF]                               ; $799C: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $799C: $F0 $AF
     cp   $61                                      ; $799E: $FE $61
     jr   z, jr_003_79AC                           ; $79A0: $28 $0A
 
@@ -8588,7 +8587,7 @@ jr_003_79AC:
     cp   $06                                      ; $79C1: $FE $06
     jr   nz, jr_003_7A18                          ; $79C3: $20 $53
 
-    ldh  a, [hFFAF]                               ; $79C5: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $79C5: $F0 $AF
     cp   $61                                      ; $79C7: $FE $61
     jr   nz, jr_003_7A18                          ; $79C9: $20 $4D
 
@@ -8675,7 +8674,7 @@ jr_003_7A47:
     call ApplyEntityPhysics                            ; $7A47: $CD $CD $7A
     jr   c, jr_003_7A5D                           ; $7A4A: $38 $11
 
-    ldh  a, [hFFAF]                               ; $7A4C: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $7A4C: $F0 $AF
     ld   [$C503], a                               ; $7A4E: $EA $03 $C5
     ldh  a, [$FFBE]                               ; $7A51: $F0 $BE
     and  a                                        ; $7A53: $A7
@@ -8703,7 +8702,7 @@ jr_003_7A6E:
     call ApplyEntityPhysics                            ; $7A6E: $CD $CD $7A
     jr   c, jr_003_7A84                           ; $7A71: $38 $11
 
-    ldh  a, [hFFAF]                               ; $7A73: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $7A73: $F0 $AF
     ld   [$C50D], a                               ; $7A75: $EA $0D $C5
     ldh  a, [$FFBE]                               ; $7A78: $F0 $BE
     and  a                                        ; $7A7A: $A7
@@ -8768,7 +8767,7 @@ jr_003_7A84:
 ;   bc   entity index
 ;
 ; Output:
-;   hFFAF type of the object under the entity
+;   hObjectUnderEntity type of the object under the entity
 ApplyEntityPhysics::
     ;
     ; Compute the type of the object under the given entity
@@ -8848,9 +8847,9 @@ jr_003_7B13:
     add  hl, bc                                   ; $7B2D: $09
     ld   h, a                                     ; $7B2E: $67
     pop  bc                                       ; $7B2F: $C1
-    ; Save it into hFFAF
+    ; Save it into hObjectUnderEntity
     ld   a, [hl]                                  ; $7B30: $7E
-    ldh  [hFFAF], a                               ; $7B31: $E0 $AF
+    ldh  [hObjectUnderEntity], a                  ; $7B31: $E0 $AF
 
     ;
     ; Entities special cases
@@ -9065,7 +9064,7 @@ jr_003_7C2B:
     jp   nz, setCarryFlagAndReturn                ; $7C57: $C2 $A7 $7C
 
 jr_003_7C5A:
-    ldh  a, [hFFAF]                               ; $7C5A: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $7C5A: $F0 $AF
     cp   $DB                                      ; $7C5C: $FE $DB
     jr   c, jr_003_7C9A                           ; $7C5E: $38 $3A
 
@@ -9160,7 +9159,7 @@ func_003_7CAB::
     ld   h, a                                     ; $7CD5: $67
     pop  bc                                       ; $7CD6: $C1
     ld   a, [hl]                                  ; $7CD7: $7E
-    ldh  [hFFAF], a                               ; $7CD8: $E0 $AF
+    ldh  [hObjectUnderEntity], a                  ; $7CD8: $E0 $AF
     cp   $AC                                      ; $7CDA: $FE $AC
     jp   z, label_003_7E03                        ; $7CDC: $CA $03 $7E
 
@@ -9404,7 +9403,7 @@ func_003_7E0E::
     ld   h, a                                     ; $7E35: $67
     pop  bc                                       ; $7E36: $C1
     ld   a, [hl]                                  ; $7E37: $7E
-    ldh  [hFFAF], a                               ; $7E38: $E0 $AF
+    ldh  [hObjectUnderEntity], a                  ; $7E38: $E0 $AF
     ld   e, a                                     ; $7E3A: $5F
     ld   a, [wIsIndoor]                           ; $7E3B: $FA $A5 $DB
     ld   d, a                                     ; $7E3E: $57

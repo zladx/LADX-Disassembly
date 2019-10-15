@@ -9469,7 +9469,7 @@ jr_015_7433:
     ld   [hl], a                                  ; $744A: $77
     call func_015_7B8B                            ; $744B: $CD $8B $7B
     call label_3B23                               ; $744E: $CD $23 $3B
-    ldh  a, [hFFAF]                               ; $7451: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $7451: $F0 $AF
     cp   $9D                                      ; $7453: $FE $9D
     jr   z, jr_015_746A                           ; $7455: $28 $13
 

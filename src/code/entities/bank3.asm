@@ -8354,16 +8354,13 @@ func_003_783B::
     db   $10                                      ; $787A: $10
     ld   [$0208], sp                              ; $787B: $08 $08 $02
     dec  c                                        ; $787E: $0D
-    ld   bc, $0402                                ; $787F: $01 $02 $04
-    ld   [$0000], sp                              ; $7882: $08 $00 $00
-    rst  $38                                      ; $7885: $FF
-    ld   bc, $FF01                                ; $7886: $01 $01 $FF
-    ld   bc, $01FF                                ; $7889: $01 $FF $01
-    rst  $38                                      ; $788C: $FF
-    nop                                           ; $788D: $00
-    nop                                           ; $788E: $00
-    ld   bc, $FF01                                ; $788F: $01 $01 $FF
-    rst  $38                                      ; $7892: $FF
+
+; Entities collision mask?
+Data_003_787F::
+    db   $01, $02, $04, $08, $00, $00, $FF, $01, $01, $FF, $01, $FF
+
+Data_003_788B::
+    db   $01, $FF, $00, $00, $01, $01, $FF, $FF
 
 func_003_7893::
     ld   hl, $C470                                ; $7893: $21 $70 $C4
@@ -8544,7 +8541,7 @@ jr_003_7973:
     add  hl, bc                                   ; $798C: $09
     add  [hl]                                     ; $798D: $86
     ld   [hl], a                                  ; $798E: $77
-    ld   hl, $788B                                ; $798F: $21 $8B $78
+    ld   hl, Data_003_788B                        ; $798F: $21 $8B $78
     add  hl, de                                   ; $7992: $19
     ld   a, [hl]                                  ; $7993: $7E
     ld   hl, wEntitiesPosYTable                         ; $7994: $21 $10 $C2
@@ -8669,7 +8666,7 @@ jr_003_7A18:
     inc  e                                        ; $7A46: $1C
 
 jr_003_7A47:
-    call $7ACD                                    ; $7A47: $CD $CD $7A
+    call ApplyEntityPhysics                            ; $7A47: $CD $CD $7A
     jr   c, jr_003_7A5D                           ; $7A4A: $38 $11
 
     ldh  a, [hFFAF]                               ; $7A4C: $F0 $AF
@@ -8697,7 +8694,7 @@ jr_003_7A5D:
     inc  e                                        ; $7A6D: $1C
 
 jr_003_7A6E:
-    call $7ACD                                    ; $7A6E: $CD $CD $7A
+    call ApplyEntityPhysics                            ; $7A6E: $CD $CD $7A
     jr   c, jr_003_7A84                           ; $7A71: $38 $11
 
     ldh  a, [hFFAF]                               ; $7A73: $F0 $AF
@@ -8752,10 +8749,29 @@ jr_003_7A84:
     ld   bc, $0100                                ; $7AC7: $01 $00 $01
     nop                                           ; $7ACA: $00
     nop                                           ; $7ACB: $00
-    ld   bc, $21C5                                ; $7ACC: $01 $C5 $21
-    nop                                           ; $7ACF: $00
-    jp   nz, label_003_7E09                       ; $7AD0: $C2 $09 $7E
+    db   $01                                      ; $7ACC: $01
 
+; Entities collision physics?
+;
+; Does several things:
+; - Compute the type of the object under an entity
+; - Special cases depending on entity type
+; - Hookshot chain
+;
+; Inputs:
+;   bc   entity index
+;
+; Output:
+;   hFFAF type of the object under the entity
+ApplyEntityPhysics::
+    ;
+    ; Compute the type of the object under the given entity
+    ;
+
+    push bc                                       ; $7ACD
+    ld   hl, wEntitiesPosXTable
+    add  hl, bc
+    ld   a, [hl]
     sub  $08                                      ; $7AD3: $D6 $08
     push af                                       ; $7AD5: $F5
     ldh  a, [hScratch0]                           ; $7AD6: $F0 $D7
@@ -8819,13 +8835,21 @@ jr_003_7B13:
     ld   hl, hScratch1                            ; $7B24: $21 $D8 $FF
     or   [hl]                                     ; $7B27: $B6
     ld   c, a                                     ; $7B28: $4F
+
+    ; Retrieve the room object at index
     ld   hl, wRoomObjects                         ; $7B29: $21 $11 $D7
     ld   a, h                                     ; $7B2C: $7C
     add  hl, bc                                   ; $7B2D: $09
     ld   h, a                                     ; $7B2E: $67
     pop  bc                                       ; $7B2F: $C1
+    ; Save it into hFFAF
     ld   a, [hl]                                  ; $7B30: $7E
     ldh  [hFFAF], a                               ; $7B31: $E0 $AF
+
+    ;
+    ; Entities special cases
+    ;
+
     cp   $20                                      ; $7B33: $FE $20
     jp   z, label_003_7C7B                        ; $7B35: $CA $7B $7C
 
@@ -8846,17 +8870,17 @@ jr_003_7B13:
 jr_003_7B4E:
     ldh  a, [hScratch3]                           ; $7B4E: $F0 $DA
     cp   $05                                      ; $7B50: $FE $05
-    jp   z, label_003_7CA7                        ; $7B52: $CA $A7 $7C
+    jp   z, setCarryFlagAndReturn                 ; $7B52: $CA $A7 $7C
 
     cp   $07                                      ; $7B55: $FE $07
-    jp   z, label_003_7CA7                        ; $7B57: $CA $A7 $7C
+    jp   z, setCarryFlagAndReturn                 ; $7B57: $CA $A7 $7C
 
     jp   label_003_7C75                           ; $7B5A: $C3 $75 $7C
 
 jr_003_7B5D:
     ldh  a, [hScratch3]                           ; $7B5D: $F0 $DA
     and  a                                        ; $7B5F: $A7
-    jp   z, label_003_7CA7                        ; $7B60: $CA $A7 $7C
+    jp   z, setCarryFlagAndReturn                 ; $7B60: $CA $A7 $7C
 
     cp   $0B                                      ; $7B63: $FE $0B
     jr   z, jr_003_7B6F                           ; $7B65: $28 $08
@@ -8872,7 +8896,7 @@ jr_003_7B6F:
     add  hl, bc                                   ; $7B72: $09
     ld   a, [hl]                                  ; $7B73: $7E
     and  a                                        ; $7B74: $A7
-    jp   nz, label_003_7CA7                       ; $7B75: $C2 $A7 $7C
+    jp   nz, setCarryFlagAndReturn                ; $7B75: $C2 $A7 $7C
 
     ld   hl, $C410                                ; $7B78: $21 $10 $C4
     add  hl, bc                                   ; $7B7B: $09
@@ -8884,7 +8908,7 @@ jr_003_7B6F:
     cp   $59                                      ; $7B83: $FE $59
     jp   z, label_003_7C75                        ; $7B85: $CA $75 $7C
 
-    jp   label_003_7CA7                           ; $7B88: $C3 $A7 $7C
+    jp   setCarryFlagAndReturn                           ; $7B88: $C3 $A7 $7C
 
 jr_003_7B8B:
     cp   $7C                                      ; $7B8B: $FE $7C
@@ -8898,10 +8922,10 @@ jr_003_7B8B:
     jr   c, jr_003_7BA7                           ; $7B99: $38 $0C
 
     cp   $A8                                      ; $7B9B: $FE $A8
-    jp   z, label_003_7CA7                        ; $7B9D: $CA $A7 $7C
+    jp   z, setCarryFlagAndReturn                 ; $7B9D: $CA $A7 $7C
 
     cp   $02                                      ; $7BA0: $FE $02
-    jp   z, label_003_7CA7                        ; $7BA2: $CA $A7 $7C
+    jp   z, setCarryFlagAndReturn                 ; $7BA2: $CA $A7 $7C
 
     jr   jr_003_7BBB                              ; $7BA5: $18 $14
 
@@ -8945,7 +8969,7 @@ jr_003_7BBB:
     ld   a, [hl]                                  ; $7BDE: $7E
     pop  de                                       ; $7BDF: $D1
     and  a                                        ; $7BE0: $A7
-    jp   z, label_003_7CA7                        ; $7BE1: $CA $A7 $7C
+    jp   z, setCarryFlagAndReturn                 ; $7BE1: $CA $A7 $7C
 
 label_003_7BE4:
     ldh  a, [hScratch3]                           ; $7BE4: $F0 $DA
@@ -8999,40 +9023,40 @@ jr_003_7C1A:
     inc  [hl]                                     ; $7C27: $34
 
 jr_003_7C28:
-    jp   label_003_7CA7                           ; $7C28: $C3 $A7 $7C
+    jp   setCarryFlagAndReturn                    ; $7C28: $C3 $A7 $7C
 
 jr_003_7C2B:
     cp   $FF                                      ; $7C2B: $FE $FF
     jr   z, jr_003_7C9A                           ; $7C2D: $28 $6B
 
     cp   $A0                                      ; $7C2F: $FE $A0
-    jr   nc, jr_003_7CA7                          ; $7C31: $30 $74
+    jr   nc, setCarryFlagAndReturn                          ; $7C31: $30 $74
 
     cp   $10                                      ; $7C33: $FE $10
     jr   nc, jr_003_7C75                          ; $7C35: $30 $3E
 
     cp   $01                                      ; $7C37: $FE $01
-    jr   z, jr_003_7C91                           ; $7C39: $28 $56
+    jr   z, hookshotEnd                           ; $7C39: $28 $56
 
     cp   $03                                      ; $7C3B: $FE $03
-    jr   z, jr_003_7C91                           ; $7C3D: $28 $52
+    jr   z, hookshotEnd                           ; $7C3D: $28 $52
 
     cp   $04                                      ; $7C3F: $FE $04
-    jr   nz, jr_003_7CA7                          ; $7C41: $20 $64
+    jr   nz, setCarryFlagAndReturn                ; $7C41: $20 $64
 
     ldh  a, [hActiveEntityType]                     ; $7C43: $F0 $EB
     cp   $A8                                      ; $7C45: $FE $A8
-    jp   z, label_003_7CA7                        ; $7C47: $CA $A7 $7C
+    jp   z, setCarryFlagAndReturn                 ; $7C47: $CA $A7 $7C
 
     cp   $02                                      ; $7C4A: $FE $02
-    jp   z, label_003_7CA7                        ; $7C4C: $CA $A7 $7C
+    jp   z, setCarryFlagAndReturn                 ; $7C4C: $CA $A7 $7C
 
     cp   $03                                      ; $7C4F: $FE $03
     jr   nz, jr_003_7C5A                          ; $7C51: $20 $07
 
     ld   a, [$D6F9]                               ; $7C53: $FA $F9 $D6
     and  a                                        ; $7C56: $A7
-    jp   nz, label_003_7CA7                       ; $7C57: $C2 $A7 $7C
+    jp   nz, setCarryFlagAndReturn                ; $7C57: $C2 $A7 $7C
 
 jr_003_7C5A:
     ldh  a, [hFFAF]                               ; $7C5A: $F0 $AF
@@ -9046,45 +9070,46 @@ jr_003_7C5A:
     sub  $DB                                      ; $7C65: $D6 $DB
     ld   e, a                                     ; $7C67: $5F
     ld   d, $00                                   ; $7C68: $16 $00
-    ld   hl, $7CA9                                ; $7C6A: $21 $A9 $7C
+    ld   hl, Data_003_7CA9                        ; $7C6A: $21 $A9 $7C
     add  hl, de                                   ; $7C6D: $19
     pop  de                                       ; $7C6E: $D1
     ld   a, [$D6FB]                               ; $7C6F: $FA $FB $D6
     xor  [hl]                                     ; $7C72: $AE
-    jr   z, jr_003_7CA7                           ; $7C73: $28 $32
+    jr   z, setCarryFlagAndReturn                 ; $7C73: $28 $32
 
 label_003_7C75:
 jr_003_7C75:
     ldh  a, [hScratch3]                           ; $7C75: $F0 $DA
     cp   $60                                      ; $7C77: $FE $60
-    jr   nz, jr_003_7C91                          ; $7C79: $20 $16
+    jr   nz, hookshotEnd                          ; $7C79: $20 $16
 
 label_003_7C7B:
-    ldh  a, [hActiveEntityType]                     ; $7C7B: $F0 $EB
-    cp   $03                                      ; $7C7D: $FE $03
-    jr   nz, jr_003_7C91                          ; $7C7F: $20 $10
 
-    call GetEntityTransitionCountdown                 ; $7C81: $CD $05 $0C
+    ldh  a, [hActiveEntityType]                   ; $7C7B: $F0 $EB
+    cp   ENTITY_HOOKSHOT_CHAIN                    ; $7C7D: $FE $03
+    jr   nz, hookshotEnd                          ; $7C7F: $20 $10
+
+    call GetEntityTransitionCountdown             ; $7C81: $CD $05 $0C
     cp   $26                                      ; $7C84: $FE $26
-    jr   c, jr_003_7C8B                           ; $7C86: $38 $03
+    jr   c, .hookshotClearEnd                     ; $7C86: $38 $03
+    call ClearEntityType                          ; $7C88: $CD $8D $3F
+.hookshotClearEnd
 
-    call ClearEntityType                               ; $7C88: $CD $8D $3F
-
-jr_003_7C8B:
     ld   hl, wEntitiesStateTable                  ; $7C8B: $21 $90 $C2
     add  hl, bc                                   ; $7C8E: $09
     ld   [hl], $01                                ; $7C8F: $36 $01
+hookshotEnd:
 
-jr_003_7C91:
     ld   hl, $C430                                ; $7C91: $21 $30 $C4
     add  hl, bc                                   ; $7C94: $09
     ld   a, [hl]                                  ; $7C95: $7E
     and  $01                                      ; $7C96: $E6 $01
-    jr   nz, jr_003_7CA7                          ; $7C98: $20 $0D
+    jr   nz, setCarryFlagAndReturn                ; $7C98: $20 $0D
 
 label_003_7C9A:
 jr_003_7C9A:
-    ld   hl, $787F                                ; $7C9A: $21 $7F $78
+    ; wEntitiesCollisionsTable[bc] |= Data_003_787F[de]
+    ld   hl, Data_003_787F                        ; $7C9A: $21 $7F $78
     add  hl, de                                   ; $7C9D: $19
     ld   a, [hl]                                  ; $7C9E: $7E
     ld   hl, wEntitiesCollisionsTable             ; $7C9F: $21 $A0 $C2
@@ -9094,13 +9119,12 @@ jr_003_7C9A:
     and  a                                        ; $7CA5: $A7
     ret                                           ; $7CA6: $C9
 
-label_003_7CA7:
-jr_003_7CA7:
+setCarryFlagAndReturn:
     scf                                           ; $7CA7: $37
     ret                                           ; $7CA8: $C9
 
-    nop                                           ; $7CA9: $00
-    ld   [bc], a                                  ; $7CAA: $02
+Data_003_7CA9::
+    db $00, $02
 
 func_003_7CAB::
     ld   de, $0000                                ; $7CAB: $11 $00 $00

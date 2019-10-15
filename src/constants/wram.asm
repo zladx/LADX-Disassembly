@@ -491,7 +491,13 @@ wC3CD:: ; C3CD
   ds 1
 
 ; Unlabeled
-ds $8A
+ds $C430 - $C3CE
+
+wEntitiesUnknowTableH::  ; C430
+  ds $10
+
+; Unlabeled
+ds $C458 - $C440
 
 wDroppedItemsCountdown:: ; C458
   ; Number of frame before a dropped item disappears
@@ -500,8 +506,14 @@ wDroppedItemsCountdown:: ; C458
 wEntitiesLoadOrderTable:: ; C460
   ds $10
 
+wEntitiesUnknowTableI:: ; C470
+  ds $10
+
 ; Unlabeled
-ds $90
+ds $70
+
+wEntitiesUnknowTableJ:: ; C4F0
+  ds $10
 
 wAlternateBackgroundEnabled:: ; C500
   ; If enabled, alternate between two Background position every frame.

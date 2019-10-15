@@ -5968,7 +5968,7 @@ jr_036_61AA:
     call func_003_64CA_trampoline                               ; $61CD: $CD $86 $3B
     jr   c, jr_036_6205                           ; $61D0: $38 $33
 
-    ld   hl, $C430                                ; $61D2: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $61D2: $21 $30 $C4
     add  hl, de                                   ; $61D5: $19
     res  0, [hl]                                  ; $61D6: $CB $86
     call func_036_6C23                            ; $61D8: $CD $23 $6C
@@ -7705,7 +7705,7 @@ func_036_6B15:
     call func_036_6BF3                            ; $6B3A: $CD $F3 $6B
     ld   [hl], a                                  ; $6B3D: $77
     call func_036_6A62                            ; $6B3E: $CD $62 $6A
-    ld   hl, $C430                                ; $6B41: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $6B41: $21 $30 $C4
     add  hl, bc                                   ; $6B44: $09
     ld   a, [hl]                                  ; $6B45: $7E
     and  $20                                      ; $6B46: $E6 $20

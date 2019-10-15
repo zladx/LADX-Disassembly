@@ -375,11 +375,11 @@ jr_004_4245:
     ld   hl, $C350                                ; $424E: $21 $50 $C3
     add  hl, bc                                   ; $4251: $09
     ld   [hl], $00                                ; $4252: $36 $00
-    ld   hl, $C430                                ; $4254: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $4254: $21 $30 $C4
     add  hl, bc                                   ; $4257: $09
     ld   [hl], $00                                ; $4258: $36 $00
     call label_3B39                               ; $425A: $CD $39 $3B
-    ld   hl, $C430                                ; $425D: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $425D: $21 $30 $C4
     add  hl, bc                                   ; $4260: $09
     ld   [hl], $D0                                ; $4261: $36 $D0
     ldh  a, [hFFE8]                               ; $4263: $F0 $E8
@@ -816,7 +816,7 @@ jr_004_4516:
     ld   hl, $C350                                ; $4517: $21 $50 $C3
     add  hl, bc                                   ; $451A: $09
     ld   [hl], $0C                                ; $451B: $36 $0C
-    ld   hl, $C430                                ; $451D: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $451D: $21 $30 $C4
     add  hl, bc                                   ; $4520: $09
     ld   [hl], $81                                ; $4521: $36 $81
     ld   hl, $C420                                ; $4523: $21 $20 $C4
@@ -2505,7 +2505,7 @@ jr_004_5254:
     ld   hl, $C350                                ; $5266: $21 $50 $C3
     add  hl, de                                   ; $5269: $19
     ld   [hl], $00                                ; $526A: $36 $00
-    ld   hl, $C430                                ; $526C: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $526C: $21 $30 $C4
     add  hl, de                                   ; $526F: $19
     ld   [hl], $00                                ; $5270: $36 $00
     pop  bc                                       ; $5272: $C1
@@ -2554,7 +2554,7 @@ jr_004_5273:
     ld   hl, $C350                                ; $52B6: $21 $50 $C3
     add  hl, de                                   ; $52B9: $19
     ld   [hl], $00                                ; $52BA: $36 $00
-    ld   hl, $C430                                ; $52BC: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $52BC: $21 $30 $C4
     add  hl, de                                   ; $52BF: $19
     ld   [hl], $00                                ; $52C0: $36 $00
     ld   hl, $C4D0                                ; $52C2: $21 $D0 $C4
@@ -2614,7 +2614,7 @@ jr_004_52C9:
     ld   hl, $C350                                ; $5317: $21 $50 $C3
     add  hl, de                                   ; $531A: $19
     ld   [hl], $00                                ; $531B: $36 $00
-    ld   hl, $C430                                ; $531D: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $531D: $21 $30 $C4
     add  hl, de                                   ; $5320: $19
     ld   [hl], $00                                ; $5321: $36 $00
     ld   hl, $C4D0                                ; $5323: $21 $D0 $C4
@@ -3597,11 +3597,11 @@ jr_004_5924:
     and  a                                        ; $59F2: $A7
     jr   nz, jr_004_5A04                          ; $59F3: $20 $0F
 
-    ld   hl, $C430                                ; $59F5: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $59F5: $21 $30 $C4
     add  hl, bc                                   ; $59F8: $09
     ld   [hl], $90                                ; $59F9: $36 $90
     call label_3B70                               ; $59FB: $CD $70 $3B
-    ld   hl, $C430                                ; $59FE: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $59FE: $21 $30 $C4
     add  hl, bc                                   ; $5A01: $09
     ld   [hl], $D0                                ; $5A02: $36 $D0
 
@@ -6218,7 +6218,7 @@ jr_004_69D5:
     call label_3D8A                               ; $69D8: $CD $8A $3D
     call func_004_7FA3                            ; $69DB: $CD $A3 $7F
     call func_004_6D80                            ; $69DE: $CD $80 $6D
-    ld   hl, $C430                                ; $69E1: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $69E1: $21 $30 $C4
     add  hl, bc                                   ; $69E4: $09
     ld   [hl], $00                                ; $69E5: $36 $00
     call label_3B39                               ; $69E7: $CD $39 $3B
@@ -6496,7 +6496,7 @@ jr_004_6B51:
     call IsEntityUnknownFZero                                ; $6B6B: $CD $00 $0C
     jr   nz, jr_004_6B7C                          ; $6B6E: $20 $0C
 
-    ld   hl, $C430                                ; $6B70: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $6B70: $21 $30 $C4
     add  hl, bc                                   ; $6B73: $09
     ld   [hl], $40                                ; $6B74: $36 $40
     call label_3B39                               ; $6B76: $CD $39 $3B
@@ -6871,7 +6871,7 @@ func_004_6D80:
     add  hl, bc                                   ; $6DAB: $09
     ld   [hl], a                                  ; $6DAC: $77
     call func_004_6DCA                            ; $6DAD: $CD $CA $6D
-    ld   hl, $C430                                ; $6DB0: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $6DB0: $21 $30 $C4
     add  hl, bc                                   ; $6DB3: $09
     ld   a, [hl]                                  ; $6DB4: $7E
     and  $20                                      ; $6DB5: $E6 $20

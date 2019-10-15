@@ -2020,7 +2020,7 @@ label_142F::
     ld   hl, $C5D0
     add  hl, de
     ld   [hl], a
-    ld   hl, $C4F0
+    ld   hl, wEntitiesUnknowTableJ
     add  hl, de
     ld   [hl], $01
     pop  bc
@@ -7820,26 +7820,26 @@ label_3EE8::
     ret  nz
     ld   a, [$C165]
     and  a
-    jr   z, label_3EFB
+    jr   z, jp_3EFB
     dec  a
     ld   [$C165], a
     ret
 
-label_3EFB::
+jp_3EFB::
     ld   a, [$C1BD]
     and  a
     ret  nz
     inc  a
     ld   [$C1BD], a
-    ld   hl, $C430
+    ld   hl, wEntitiesUnknowTableH
     add  hl, bc
     ld   a, [hl]
     and  $04
     ld   a, $19
-    jr   z, label_3F11
+    jr   z, jp_3F11
     ld   a, $50
 
-label_3F11::
+jp_3F11::
     ld   [wActiveMusicTrack], a
     ldh  [$FFBD], a
     ld   a, [wTransitionSequenceCounter]
@@ -7847,18 +7847,18 @@ label_3F11::
     ret  nz
     ldh  a, [hActiveEntityType]
     cp   $87
-    jr   nz, label_3F26
+    jr   nz, jp_3F26
     ld   a, $DA
-    jr   label_3F45
+    jr   jp_3F45
 
-label_3F26::
+jp_3F26::
     cp   $BC
-    jr   nz, label_3F2E
+    jr   nz, jp_3F2E
     ld   a, $26
-    jr   label_3F45
+    jr   jp_3F45
 
-label_3F2E::
-    ld   hl, $C430
+jp_3F2E::
+    ld   hl, wEntitiesUnknowTableH
     add  hl, bc
     ld   a, [hl]
     and  $04
@@ -7874,7 +7874,7 @@ label_3F2E::
     add  hl, de
     ld   a, [hl]
 
-label_3F45::
+jp_3F45::
     jp   OpenDialog
 
 data_3F48::

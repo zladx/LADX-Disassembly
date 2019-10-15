@@ -1178,7 +1178,7 @@ jr_019_476A:
     call RenderAnimatedActiveEntity                               ; $47C6: $CD $C0 $3B
     call func_019_7D3D                            ; $47C9: $CD $3D $7D
     call func_019_7D6E                            ; $47CC: $CD $6E $7D
-    ld   hl, $C430                                ; $47CF: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $47CF: $21 $30 $C4
     add  hl, bc                                   ; $47D2: $09
     ld   [hl], $48                                ; $47D3: $36 $48
     call func_019_7E3A                            ; $47D5: $CD $3A $7E
@@ -1189,7 +1189,7 @@ jr_019_476A:
     cp   e                                        ; $47DF: $BB
     jr   nz, jr_019_47E8                          ; $47E0: $20 $06
 
-    ld   hl, $C430                                ; $47E2: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $47E2: $21 $30 $C4
     add  hl, bc                                   ; $47E5: $09
     ld   [hl], $08                                ; $47E6: $36 $08
 
@@ -7752,11 +7752,11 @@ jr_019_6C96:
 
 func_019_6C99:
 jr_019_6C99:
-    ld   hl, $C430                                ; $6C99: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $6C99: $21 $30 $C4
     add  hl, bc                                   ; $6C9C: $09
     set  0, [hl]                                  ; $6C9D: $CB $C6
     call label_3B23                               ; $6C9F: $CD $23 $3B
-    ld   hl, $C430                                ; $6CA2: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $6CA2: $21 $30 $C4
     add  hl, bc                                   ; $6CA5: $09
     res  0, [hl]                                  ; $6CA6: $CB $86
     ret                                           ; $6CA8: $C9
@@ -7769,7 +7769,7 @@ jr_019_6C99:
     add  hl, bc                                   ; $6CB4: $09
     inc  [hl]                                     ; $6CB5: $34
     push hl                                       ; $6CB6: $E5
-    ld   hl, $C470                                ; $6CB7: $21 $70 $C4
+    ld   hl, wEntitiesUnknowTableI                ; $6CB7: $21 $70 $C4
     add  hl, bc                                   ; $6CBA: $09
     ld   a, [hl]                                  ; $6CBB: $7E
     pop  hl                                       ; $6CBC: $E1
@@ -10958,7 +10958,7 @@ func_019_7D6E:
     add  hl, bc                                   ; $7D99: $09
     ld   [hl], a                                  ; $7D9A: $77
     call func_019_7DB8                            ; $7D9B: $CD $B8 $7D
-    ld   hl, $C430                                ; $7D9E: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7D9E: $21 $30 $C4
     add  hl, bc                                   ; $7DA1: $09
     ld   a, [hl]                                  ; $7DA2: $7E
     and  $20                                      ; $7DA3: $E6 $20

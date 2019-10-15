@@ -3102,7 +3102,7 @@ jr_007_5287:
     dec  c                                        ; $5298: $0D
     jr   nz, jr_007_5287                          ; $5299: $20 $EC
 
-    call label_C60                                ; $529B: $CD $60 $0C
+    call MarkPuzzleAsSolved                       ; $529B: $CD $60 $0C
 
 jr_007_529E:
     pop  bc                                       ; $529E: $C1
@@ -9580,7 +9580,7 @@ jr_007_76ED:
     add  hl, de                                   ; $770F: $19
     ld   a, [hl]                                  ; $7710: $7E
     cp   $00                                      ; $7711: $FE $00
-    jp   z, label_C60                             ; $7713: $CA $60 $0C
+    jp   z, MarkPuzzleAsSolved                             ; $7713: $CA $60 $0C
 
 jr_007_7716:
     ld   hl, wEntitiesTransitionCountdownTable           ; $7716: $21 $E0 $C2

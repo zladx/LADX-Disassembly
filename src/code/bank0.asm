@@ -759,7 +759,7 @@ label_C56::
 .endIf
     ret
 
-label_C60::
+MarkPuzzleAsSolved::
     push af
 
     ; If $C18F != 0, return

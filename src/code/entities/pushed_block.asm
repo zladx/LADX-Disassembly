@@ -94,4 +94,4 @@ jr_003_52B5:
     ret  nz                                       ; $52D0: $C0
 
 jr_003_52D1:
-    jp   label_C60                                ; $52D1: $C3 $60 $0C
+    jp   MarkPuzzleAsSolved                       ; $52D1: $C3 $60 $0C

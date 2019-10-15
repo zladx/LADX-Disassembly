@@ -8433,7 +8433,7 @@ jr_036_6E57:
     jr   nz, jr_036_6EA0                          ; $6E96: $20 $08
 
     call func_036_6C89                            ; $6E98: $CD $89 $6C
-    call label_C60                                ; $6E9B: $CD $60 $0C
+    call MarkPuzzleAsSolved                       ; $6E9B: $CD $60 $0C
     jr   jr_036_6ECD                              ; $6E9E: $18 $2D
 
 jr_036_6EA0:

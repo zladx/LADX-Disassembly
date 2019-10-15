@@ -4960,19 +4960,19 @@ jr_002_5FD1:
 
 jr_002_5FD4:
     and  $20                                      ; $5FD4: $E6 $20
-    jp   nz, label_C60                            ; $5FD6: $C2 $60 $0C
+    jp   nz, MarkPuzzleAsSolved                            ; $5FD6: $C2 $60 $0C
 
     ret                                           ; $5FD9: $C9
 
     ld   a, [$C1A2]                               ; $5FDA: $FA $A2 $C1
     cp   $02                                      ; $5FDD: $FE $02
-    jp   z, label_C60                             ; $5FDF: $CA $60 $0C
+    jp   z, MarkPuzzleAsSolved                             ; $5FDF: $CA $60 $0C
 
     ret                                           ; $5FE2: $C9
 
     ld   a, [$C1CB]                               ; $5FE3: $FA $CB $C1
     and  a                                        ; $5FE6: $A7
-    jp   nz, label_C60                            ; $5FE7: $C2 $60 $0C
+    jp   nz, MarkPuzzleAsSolved                            ; $5FE7: $C2 $60 $0C
 
     ret                                           ; $5FEA: $C9
 
@@ -4989,7 +4989,7 @@ jr_002_5FF0:
     cp   $03                                      ; $5FF5: $FE $03
     jr   nz, jr_002_5FF0                          ; $5FF7: $20 $F7
 
-    jp   label_C60                                ; $5FF9: $C3 $60 $0C
+    jp   MarkPuzzleAsSolved                       ; $5FF9: $C3 $60 $0C
 
     ld   c, $0F                                   ; $5FFC: $0E $0F
     ld   b, $00                                   ; $5FFE: $06 $00
@@ -5026,7 +5026,7 @@ jr_002_6011:
     jr   nz, jr_002_602C                          ; $6027: $20 $03
 
 jr_002_6029:
-    jp   label_C60                                ; $6029: $C3 $60 $0C
+    jp   MarkPuzzleAsSolved                       ; $6029: $C3 $60 $0C
 
 jr_002_602C:
     ret                                           ; $602C: $C9
@@ -5089,7 +5089,7 @@ jr_002_6074:
     cp   e                                        ; $6076: $BB
     ret  nz                                       ; $6077: $C0
 
-    call label_C60                                ; $6078: $CD $60 $0C
+    call MarkPuzzleAsSolved                       ; $6078: $CD $60 $0C
     ldh  a, [hMapRoom]                           ; $607B: $F0 $F6
     cp   $08                                      ; $607D: $FE $08
     ret  z                                        ; $607F: $C8
@@ -5148,7 +5148,7 @@ jr_002_60BD:
     cp   $02                                      ; $60C5: $FE $02
     ret  nz                                       ; $60C7: $C0
 
-    call label_C60                                ; $60C8: $CD $60 $0C
+    call MarkPuzzleAsSolved                       ; $60C8: $CD $60 $0C
     call func_002_5DAF                            ; $60CB: $CD $AF $5D
     call GetRoomStatusAddress                     ; $60CE: $CD $9F $5B
     ld   a, [hl]                                  ; $60D1: $7E

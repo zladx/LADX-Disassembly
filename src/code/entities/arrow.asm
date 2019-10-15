@@ -23,20 +23,23 @@ ArrowEntityHandler::
     call func_003_75A2                            ; $6A48: $CD $A2 $75
     call func_003_6AD4                            ; $6A4B: $CD $D4 $6A
 
-    ; If hActiveEntitySpriteVariant != 2, return.
+    ;
+    ; Allow shooting the Dungeon 8 statue in the eye
+    ;
+
+    ; If hActiveEntitySpriteVariant == 2…
     ldh  a, [hActiveEntitySpriteVariant]          ; $6A4E: $F0 $F1
     cp   $02                                      ; $6A50: $FE $02
     ret  nz                                       ; $6A52: $C0
-
-    ;
+    ; and $C18E & $1F == $0F…
     ld   a, [$C18E]                               ; $6A53: $FA $8E $C1
     and  $1F                                      ; $6A56: $E6 $1F
     cp   $0F                                      ; $6A58: $FE $0F
     ret  nz                                       ; $6A5A: $C0
-
+    ; and hObjectUnderEntity == OBJECT_ONE_EYED_STATUE…
     ldh  a, [hObjectUnderEntity]                  ; $6A5B: $F0 $AF
-    cp   $C0                                      ; $6A5D: $FE $C0
+    cp   OBJECT_ONE_EYED_STATUE                   ; $6A5D: $FE $C0
     ret  nz                                       ; $6A5F: $C0
-
+    ; call label_C60, and clear entity
     call label_C60                                ; $6A60: $CD $60 $0C
-    jp   ClearEntityType                               ; $6A63: $C3 $8D $3F
+    jp   ClearEntityTypeAndReturn                 ; $6A63: $C3 $8D $3F

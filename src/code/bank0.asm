@@ -761,16 +761,24 @@ label_C56::
 
 label_C60::
     push af
+
+    ; If $C18F != 0, return
     ld   a, [$C18F]
     and  a
     jr   nz, .return
+
+    ; $C1CF = 0
     ld   [$C1CF], a
+    ; $C18F = $C5A6 = 1
     inc  a
     ld   [$C18F], a
     ld   [$C5A6], a
+
+    ; If $C19D == 0…
     ld   a, [$C19D]
     and  a
     jr   nz, .return
+    ; play puzzle solved jingle
     ld   a, JINGLE_PUZZLE_SOLVED
     ldh  [hJingle], a
 .return

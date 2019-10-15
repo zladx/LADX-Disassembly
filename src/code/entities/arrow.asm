@@ -31,10 +31,10 @@ ArrowEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $6A4E: $F0 $F1
     cp   $02                                      ; $6A50: $FE $02
     ret  nz                                       ; $6A52: $C0
-    ; and $C18E & $1F == $0F…
+    ; and $C18E & $1F == TRIGGER_SHOOT_STATUE_EYE…
     ld   a, [$C18E]                               ; $6A53: $FA $8E $C1
     and  $1F                                      ; $6A56: $E6 $1F
-    cp   $0F                                      ; $6A58: $FE $0F
+    cp   TRIGGER_SHOOT_STATUE_EYE                 ; $6A58: $FE $0F
     ret  nz                                       ; $6A5A: $C0
     ; and hObjectUnderEntity == OBJECT_ONE_EYED_STATUE…
     ldh  a, [hObjectUnderEntity]                  ; $6A5B: $F0 $AF

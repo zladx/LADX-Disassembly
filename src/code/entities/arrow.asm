@@ -1,25 +1,34 @@
 ArrowEntityHandler::
     ; Increment the active projectiles count
-    ld   hl, wActiveProjectileCount                     ; $6A34: $21 $4D $C1
+    ld   hl, wActiveProjectileCount               ; $6A34: $21 $4D $C1
     inc  [hl]                                     ; $6A37: $34
 
-    ; If the entity is not "walking"…
+    ; If hActiveEntityState == 1…
     ldh  a, [hActiveEntityState]                  ; $6A38: $F0 $F0
     and  a                                        ; $6A3A: $A7
+    ; call Func_003_6A70 and return
     jr   nz, Func_003_6A70                        ; $6A3B: $20 $33
 
-    ; …
-    call GetEntityTransitionCountdown                 ; $6A3D: $CD $05 $0C
-    jp   nz, label_003_6AD4                       ; $6A40: $C2 $D4 $6A
+    ; If GetEntityTransitionCountdown != 0…
+    call GetEntityTransitionCountdown             ; $6A3D: $CD $05 $0C
+    ; call func_003_6AD4 and return
+    jp   nz, func_003_6AD4                        ; $6A40: $C2 $D4 $6A
+
+    ;
+    ; hActiveEntityState == 0 and GetEntityTransitionCountdown == 0
+    ;
 
     ld   a, $05                                   ; $6A43: $3E $05
     ld   [$C19E], a                               ; $6A45: $EA $9E $C1
     call func_003_75A2                            ; $6A48: $CD $A2 $75
     call func_003_6AD4                            ; $6A4B: $CD $D4 $6A
-    ldh  a, [hActiveEntitySpriteVariant]               ; $6A4E: $F0 $F1
+
+    ; If hActiveEntitySpriteVariant != 2, return.
+    ldh  a, [hActiveEntitySpriteVariant]          ; $6A4E: $F0 $F1
     cp   $02                                      ; $6A50: $FE $02
     ret  nz                                       ; $6A52: $C0
 
+    ;
     ld   a, [$C18E]                               ; $6A53: $FA $8E $C1
     and  $1F                                      ; $6A56: $E6 $1F
     cp   $0F                                      ; $6A58: $FE $0F

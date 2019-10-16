@@ -3077,9 +3077,9 @@ jr_007_51F2:
     add  hl, de                                   ; $5273: $19
     ld   [hl], $0F                                ; $5274: $36 $0F
     call func_007_7EA4                            ; $5276: $CD $A4 $7E
-    ld   a, [$C18E]                               ; $5279: $FA $8E $C1
+    ld   a, [wRoomEvent]                          ; $5279: $FA $8E $C1
     and  $0F                                      ; $527C: $E6 $0F
-    cp   $0E                                      ; $527E: $FE $0E
+    cp   TRIGGER_FILL_LAVA_GAPS                   ; $527E: $FE $0E
     jr   nz, jr_007_529F                          ; $5280: $20 $1D
 
     push bc                                       ; $5282: $C5
@@ -9187,9 +9187,9 @@ jr_007_74E8:
     cp   $0F                                      ; $74E9: $FE $0F
     jr   nz, jr_007_74F8                          ; $74EB: $20 $0B
 
-    ld   a, [$C18E]                               ; $74ED: $FA $8E $C1
-    and  $1F                                      ; $74F0: $E6 $1F
-    cp   $03                                      ; $74F2: $FE $03
+    ld   a, [wRoomEvent]                          ; $74ED: $FA $8E $C1
+    and  EVENT_TRIGGER_MASK                       ; $74F0: $E6 $1F
+    cp   TRIGGER_STEP_ON_BUTTON                   ; $74F2: $FE $03
     jr   nz, jr_007_74F8                          ; $74F4: $20 $02
 
     ld   [hl], $01                                ; $74F6: $36 $01

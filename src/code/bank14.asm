@@ -3253,7 +3253,7 @@ jr_014_58EA:
 jr_014_58ED:
     add  hl, bc                                   ; $58ED: $09
     ld   a, [hl]                                  ; $58EE: $7E
-    ld   [$C18E], a                               ; $58EF: $EA $8E $C1
+    ld   [wRoomEvent], a                          ; $58EF: $EA $8E $C1
     xor  a                                        ; $58F2: $AF
     ld   [$C18A], a                               ; $58F3: $EA $8A $C1
     ld   [$C18B], a                               ; $58F6: $EA $8B $C1

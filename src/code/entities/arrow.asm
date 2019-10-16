@@ -31,9 +31,9 @@ ArrowEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $6A4E: $F0 $F1
     cp   $02                                      ; $6A50: $FE $02
     ret  nz                                       ; $6A52: $C0
-    ; and $C18E & $1F == TRIGGER_SHOOT_STATUE_EYE…
-    ld   a, [$C18E]                               ; $6A53: $FA $8E $C1
-    and  $1F                                      ; $6A56: $E6 $1F
+    ; and the event trigger is TRIGGER_SHOOT_STATUE_EYE…
+    ld   a, [wRoomEvent]                          ; $6A53: $FA $8E $C1
+    and  EVENT_TRIGGER_MASK                       ; $6A56: $E6 $1F
     cp   TRIGGER_SHOOT_STATUE_EYE                 ; $6A58: $FE $0F
     ret  nz                                       ; $6A5A: $C0
     ; and hObjectUnderEntity == OBJECT_ONE_EYED_STATUE…

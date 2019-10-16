@@ -187,9 +187,9 @@ jr_019_4122:
 
 jr_019_4143:
     call func_019_4183                            ; $4143: $CD $83 $41
-    ld   a, [$C18E]                               ; $4146: $FA $8E $C1
-    and  $1F                                      ; $4149: $E6 $1F
-    cp   $0B                                      ; $414B: $FE $0B
+    ld   a, [wRoomEvent]                          ; $4146: $FA $8E $C1
+    and  EVENT_TRIGGER_MASK                       ; $4149: $E6 $1F
+    cp   TRIGGER_THROW_AT_DOOR                    ; $414B: $FE $0B
     ret  nz                                       ; $414D: $C0
 
     ld   a, [$C50D]                               ; $414E: $FA $0D $C5

@@ -2086,9 +2086,9 @@ func_003_5438::
     and  a                                        ; $543D: $A7
     ret  z                                        ; $543E: $C8
 
-    ld   a, [$C18E]                               ; $543F: $FA $8E $C1
-    and  $1F                                      ; $5442: $E6 $1F
-    cp   $0D                                      ; $5444: $FE $0D
+    ld   a, [wRoomEvent]                          ; $543F: $FA $8E $C1
+    and  EVENT_TRIGGER_MASK                       ; $5442: $E6 $1F
+    cp   TRIGGER_THROW_POT_AT_CHEST               ; $5444: $FE $0D
     jr   nz, jr_003_5467                          ; $5446: $20 $1F
 
     ld   a, [$C503]                               ; $5448: $FA $03 $C5

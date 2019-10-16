@@ -4508,13 +4508,13 @@ jr_002_5D36:
     ret                                           ; $5D4E: $C9
 
 func_002_5D4F::
-    ld   a, [$C18E]                               ; $5D4F: $FA $8E $C1
+    ld   a, [wRoomEvent]                          ; $5D4F: $FA $8E $C1
     and  a                                        ; $5D52: $A7
     jp   z, label_002_5E02                        ; $5D53: $CA $02 $5E
 
     call func_002_5F9F                            ; $5D56: $CD $9F $5F
-    ld   a, [$C18E]                               ; $5D59: $FA $8E $C1
-    and  $E0                                      ; $5D5C: $E6 $E0
+    ld   a, [wRoomEvent]                          ; $5D59: $FA $8E $C1
+    and  EVENT_EFFECT_MASK                        ; $5D5C: $E6 $E0
     srl  a                                        ; $5D5E: $CB $3F
     srl  a                                        ; $5D60: $CB $3F
     srl  a                                        ; $5D62: $CB $3F
@@ -4587,7 +4587,7 @@ func_002_5DAF::
     jr   z, jr_002_5DC0                           ; $5DB9: $28 $05
 
     xor  a                                        ; $5DBB: $AF
-    ld   [$C18E], a                               ; $5DBC: $EA $8E $C1
+    ld   [wRoomEvent], a                          ; $5DBC: $EA $8E $C1
     ret                                           ; $5DBF: $C9
 
 jr_002_5DC0:
@@ -4666,8 +4666,8 @@ jr_002_5E2E:
     and  a                                        ; $5E31: $A7
     ret  z                                        ; $5E32: $C8
 
-    ld   a, [$C18E]                               ; $5E33: $FA $8E $C1
-    cp   $C1                                      ; $5E36: $FE $C1
+    ld   a, [wRoomEvent]                          ; $5E33: $FA $8E $C1
+    cp   TRIGGER_KILL_ALL_ENEMIES | EFFECT_CLEAR_MIDBOSS ; $5E36: $FE $C1
     jr   nz, jr_002_5E6A                          ; $5E38: $20 $30
 
     ldh  a, [hMapId]                         ; $5E3A: $F0 $F7
@@ -4710,7 +4710,7 @@ jr_002_5E6A:
     ret  z                                        ; $5E6E: $C8
 
     xor  a                                        ; $5E6F: $AF
-    ld   [$C18E], a                               ; $5E70: $EA $8E $C1
+    ld   [wRoomEvent], a                          ; $5E70: $EA $8E $C1
     ld   a, $01                                   ; $5E73: $3E $01
     ld   [$C18C], a                               ; $5E75: $EA $8C $C1
     jp   EnqueueDoorUnlockedSfx                   ; $5E78: $C3 $20 $54
@@ -7322,7 +7322,7 @@ jr_002_712C:
     cp   $98                                      ; $712C: $FE $98
     jr   z, jr_002_7139                           ; $712E: $28 $09
 
-    ld   a, [$C18E]                               ; $7130: $FA $8E $C1
+    ld   a, [wRoomEvent]                          ; $7130: $FA $8E $C1
     and  a                                        ; $7133: $A7
     jr   z, jr_002_7147                           ; $7134: $28 $11
 

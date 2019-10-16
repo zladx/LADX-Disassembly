@@ -3420,7 +3420,7 @@ label_2093::
 label_2098::
     cp   $A0
     jr   nz, label_20CF
-    ld   a, [$C18E]
+    ld   a, [wRoomEvent]
     and  $1F
     cp   $0D
     jr   z, label_20CF

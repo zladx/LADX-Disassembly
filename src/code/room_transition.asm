@@ -196,16 +196,16 @@ ApplyRoomTransition::
 
     call GetChestsStatusForRoom_trampoline                   ; $79A9: $CD $ED $29
 
-    ; If chest status is not some key, and $C18E != 80, return.
+    ; If chest status is not some key, and room trigger != EFFECT_DROP_KEY, return.
     cp   CHEST_SMALL_KEY                          ; $79AC: $FE $1A
     jr   z, .hasCompassDetectableTreasure         ; $79AE: $28 $0C
 
     cp   CHEST_NIGHTMARE_KEY                      ; $79B0: $FE $19
     jr   z, .hasCompassDetectableTreasure         ; $79B2: $28 $08
 
-    ld   a, [$C18E]                               ; $79B4: $FA $8E $C1
-    and  $E0                                      ; $79B7: $E6 $E0
-    cp   $80                                      ; $79B9: $FE $80
+    ld   a, [wRoomEvent]                          ; $79B4: $FA $8E $C1
+    and  EVENT_EFFECT_MASK                        ; $79B7: $E6 $E0
+    cp   EFFECT_DROP_KEY                          ; $79B9: $FE $80
     ret  nz                                       ; $79BB: $C0
 
 .hasCompassDetectableTreasure

@@ -302,8 +302,20 @@ wTransitionGfxFrameCount:: ; C180
   ds 1
 
 ; Unlabeled
-wC181 equ $C181
-  ds $1E
+ds $C18E - $C181
+
+wRoomEvent:: ; C18E
+  ; Event for the current room
+  ; A combination of trigger and effect values
+  ; See TRIGGER_* and EFFECT_* constants for possible values
+  ds 1
+
+wRoomEventEffectExecuted:: ; C18F
+  ; Has the event effect for the current room been executed already?
+  ds 1
+
+; Unlabeled
+ds $C19F - $C190
 
 wDialogState:: ; C19F
   ; Upper bit:    set if the dialog is displayed on bottom (instead of top)
@@ -491,7 +503,13 @@ wC3CD:: ; C3CD
   ds 1
 
 ; Unlabeled
-ds $8A
+ds $C430 - $C3CE
+
+wEntitiesUnknowTableH::  ; C430
+  ds $10
+
+; Unlabeled
+ds $C458 - $C440
 
 wDroppedItemsCountdown:: ; C458
   ; Number of frame before a dropped item disappears
@@ -500,8 +518,14 @@ wDroppedItemsCountdown:: ; C458
 wEntitiesLoadOrderTable:: ; C460
   ds $10
 
+wEntitiesUnknowTableI:: ; C470
+  ds $10
+
 ; Unlabeled
-ds $90
+ds $70
+
+wEntitiesUnknowTableJ:: ; C4F0
+  ds $10
 
 wAlternateBackgroundEnabled:: ; C500
   ; If enabled, alternate between two Background position every frame.

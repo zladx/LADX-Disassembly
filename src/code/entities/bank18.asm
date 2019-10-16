@@ -4856,7 +4856,7 @@ jr_018_5CEF:
     cp   $02                                      ; $5D4C: $FE $02
     ret  z                                        ; $5D4E: $C8
 
-    ld   hl, $C470                                ; $5D4F: $21 $70 $C4
+    ld   hl, wEntitiesUnknowTableI                ; $5D4F: $21 $70 $C4
     add  hl, bc                                   ; $5D52: $09
     ld   a, [hl]                                  ; $5D53: $7E
     dec  a                                        ; $5D54: $3D
@@ -6069,7 +6069,7 @@ func_018_6493:
     ld   h, a                                     ; $64BA: $67
     pop  bc                                       ; $64BB: $C1
     ld   a, [hl]                                  ; $64BC: $7E
-    ldh  [hFFAF], a                               ; $64BD: $E0 $AF
+    ldh  [hObjectUnderEntity], a                  ; $64BD: $E0 $AF
     ld   e, a                                     ; $64BF: $5F
     ld   a, [wIsIndoor]                           ; $64C0: $FA $A5 $DB
     ld   d, a                                     ; $64C3: $57
@@ -8091,7 +8091,7 @@ jr_018_6FDB:
     call label_394D                               ; $6FE8: $CD $4D $39
     call label_3EE8                               ; $6FEB: $CD $E8 $3E
     call func_018_7DE8                            ; $6FEE: $CD $E8 $7D
-    ld   a, [$C18F]                               ; $6FF1: $FA $8F $C1
+    ld   a, [wRoomEventEffectExecuted]            ; $6FF1: $FA $8F $C1
     and  a                                        ; $6FF4: $A7
     jr   z, jr_018_7028                           ; $6FF5: $28 $31
 
@@ -8163,7 +8163,7 @@ jr_018_7028:
     jr   nz, jr_018_7088                          ; $705C: $20 $2A
 
     ld   [hl], $FF                                ; $705E: $36 $FF
-    ld   hl, $C430                                ; $7060: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7060: $21 $30 $C4
     add  hl, bc                                   ; $7063: $09
     res  1, [hl]                                  ; $7064: $CB $8E
     ld   e, $0F                                   ; $7066: $1E $0F
@@ -8212,7 +8212,7 @@ jr_018_7088:
     call GetEntityTransitionCountdown             ; $7095: $CD $05 $0C
     jr   nz, jr_018_70A4                          ; $7098: $20 $0A
 
-    ld   hl, $C430                                ; $709A: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $709A: $21 $30 $C4
     add  hl, bc                                   ; $709D: $09
     set  1, [hl]                                  ; $709E: $CB $CE
     call IncrementEntityWalkingAttr               ; $70A0: $CD $12 $3B
@@ -8257,7 +8257,7 @@ jr_018_70A4:
     ld   hl, $C3D0                                ; $70DD: $21 $D0 $C3
     add  hl, de                                   ; $70E0: $19
     ld   [hl], c                                  ; $70E1: $71
-    ld   hl, $C430                                ; $70E2: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $70E2: $21 $30 $C4
     add  hl, de                                   ; $70E5: $19
     ld   a, [hl]                                  ; $70E6: $7E
     and  $7B                                      ; $70E7: $E6 $7B
@@ -8316,7 +8316,7 @@ jr_018_7121:
     and  a                                        ; $713B: $A7
     jr   nz, jr_018_7157                          ; $713C: $20 $19
 
-    ld   a, [$C18F]                               ; $713E: $FA $8F $C1
+    ld   a, [wRoomEventEffectExecuted]            ; $713E: $FA $8F $C1
     and  a                                        ; $7141: $A7
     jr   nz, jr_018_7152                          ; $7142: $20 $0E
 
@@ -8737,7 +8737,7 @@ jr_018_733C:
     jr   z, jr_018_7363                           ; $734F: $28 $12
 
     call IncrementEntityWalkingAttr               ; $7351: $CD $12 $3B
-    ld   hl, $C430                                ; $7354: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7354: $21 $30 $C4
     add  hl, bc                                   ; $7357: $09
     set  7, [hl]                                  ; $7358: $CB $FE
     set  2, [hl]                                  ; $735A: $CB $D6
@@ -8969,7 +8969,7 @@ jr_018_7497:
     ld   hl, $C340                                ; $74A2: $21 $40 $C3
     add  hl, bc                                   ; $74A5: $09
     res  7, [hl]                                  ; $74A6: $CB $BE
-    ld   hl, $C430                                ; $74A8: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $74A8: $21 $30 $C4
     add  hl, bc                                   ; $74AB: $09
     res  6, [hl]                                  ; $74AC: $CB $B6
     call IncrementEntityWalkingAttr               ; $74AE: $CD $12 $3B
@@ -9674,7 +9674,7 @@ jr_018_78A6:
     call func_003_64CA_trampoline                               ; $78B2: $CD $86 $3B
     jr   c, jr_018_78F1                           ; $78B5: $38 $3A
 
-    ld   hl, $C430                                ; $78B7: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $78B7: $21 $30 $C4
     add  hl, de                                   ; $78BA: $19
     res  0, [hl]                                  ; $78BB: $CB $86
     ldh  a, [hScratch0]                           ; $78BD: $F0 $D7
@@ -9826,7 +9826,7 @@ jr_018_795B:
     ld   h, a                                     ; $79A6: $67
     pop  bc                                       ; $79A7: $C1
     ld   a, [hl]                                  ; $79A8: $7E
-    ldh  [hFFAF], a                               ; $79A9: $E0 $AF
+    ldh  [hObjectUnderEntity], a                  ; $79A9: $E0 $AF
     cp   $D3                                      ; $79AB: $FE $D3
     jr   z, jr_018_79B3                           ; $79AD: $28 $04
 
@@ -9854,7 +9854,7 @@ jr_018_79CF:
     and  a                                        ; $79D2: $A7
     jp   z, label_018_7A4B                        ; $79D3: $CA $4B $7A
 
-    ldh  a, [hFFAF]                               ; $79D6: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $79D6: $F0 $AF
     cp   $AB                                      ; $79D8: $FE $AB
     ret  nz                                       ; $79DA: $C0
 
@@ -10506,7 +10506,7 @@ func_018_7E15:
     add  hl, bc                                   ; $7E40: $09
     ld   [hl], a                                  ; $7E41: $77
     call func_018_7E5F                            ; $7E42: $CD $5F $7E
-    ld   hl, $C430                                ; $7E45: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7E45: $21 $30 $C4
     add  hl, bc                                   ; $7E48: $09
     ld   a, [hl]                                  ; $7E49: $7E
     and  $20                                      ; $7E4A: $E6 $20

@@ -46,7 +46,7 @@ func_007_4005:
     rla                                           ; $4033: $17
     and  $40                                      ; $4034: $E6 $40
     push af                                       ; $4036: $F5
-    ld   hl, $C430                                ; $4037: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $4037: $21 $30 $C4
     add  hl, bc                                   ; $403A: $09
     or   [hl]                                     ; $403B: $B6
     ld   [hl], a                                  ; $403C: $77
@@ -3077,9 +3077,9 @@ jr_007_51F2:
     add  hl, de                                   ; $5273: $19
     ld   [hl], $0F                                ; $5274: $36 $0F
     call func_007_7EA4                            ; $5276: $CD $A4 $7E
-    ld   a, [$C18E]                               ; $5279: $FA $8E $C1
+    ld   a, [wRoomEvent]                          ; $5279: $FA $8E $C1
     and  $0F                                      ; $527C: $E6 $0F
-    cp   $0E                                      ; $527E: $FE $0E
+    cp   TRIGGER_FILL_LAVA_GAPS                   ; $527E: $FE $0E
     jr   nz, jr_007_529F                          ; $5280: $20 $1D
 
     push bc                                       ; $5282: $C5
@@ -3102,7 +3102,7 @@ jr_007_5287:
     dec  c                                        ; $5298: $0D
     jr   nz, jr_007_5287                          ; $5299: $20 $EC
 
-    call label_C60                                ; $529B: $CD $60 $0C
+    call MarkTriggerAsResolved                    ; $529B: $CD $60 $0C
 
 jr_007_529E:
     pop  bc                                       ; $529E: $C1
@@ -3219,7 +3219,7 @@ jr_007_5314:
     ld   a, [hl]                                  ; $5320: $7E
     ret                                           ; $5321: $C9
 
-    ld   hl, $C470                                ; $5322: $21 $70 $C4
+    ld   hl, wEntitiesUnknowTableI                ; $5322: $21 $70 $C4
     add  hl, bc                                   ; $5325: $09
     ld   [hl], b                                  ; $5326: $70
     ld   hl, $C3F0                                ; $5327: $21 $F0 $C3
@@ -4778,7 +4778,7 @@ jr_007_5BE8:
 
 jr_007_5C0B:
     call label_3B23                               ; $5C0B: $CD $23 $3B
-    ld   hl, $C470                                ; $5C0E: $21 $70 $C4
+    ld   hl, wEntitiesUnknowTableI                ; $5C0E: $21 $70 $C4
     add  hl, bc                                   ; $5C11: $09
     ld   a, [hl]                                  ; $5C12: $7E
     and  a                                        ; $5C13: $A7
@@ -6779,7 +6779,7 @@ func_007_66FE:
     ld   hl, $C350                                ; $6721: $21 $50 $C3
     add  hl, bc                                   ; $6724: $09
     set  7, [hl]                                  ; $6725: $CB $FE
-    ld   hl, $C430                                ; $6727: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $6727: $21 $30 $C4
     add  hl, bc                                   ; $672A: $09
     set  6, [hl]                                  ; $672B: $CB $F6
     ldh  a, [hActiveEntityState]                  ; $672D: $F0 $F0
@@ -6806,7 +6806,7 @@ jr_007_6747:
     ld   hl, $C350                                ; $6747: $21 $50 $C3
     add  hl, bc                                   ; $674A: $09
     res  7, [hl]                                  ; $674B: $CB $BE
-    ld   hl, $C430                                ; $674D: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $674D: $21 $30 $C4
     add  hl, bc                                   ; $6750: $09
     res  6, [hl]                                  ; $6751: $CB $B6
 
@@ -7695,7 +7695,7 @@ label_007_6C3E:
     ld   hl, $C350                                ; $6C48: $21 $50 $C3
     add  hl, bc                                   ; $6C4B: $09
     set  7, [hl]                                  ; $6C4C: $CB $FE
-    ld   hl, $C430                                ; $6C4E: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $6C4E: $21 $30 $C4
     add  hl, bc                                   ; $6C51: $09
     res  6, [hl]                                  ; $6C52: $CB $B6
     ret                                           ; $6C54: $C9
@@ -7881,7 +7881,7 @@ jr_007_6D70:
     ld   hl, $C350                                ; $6D8C: $21 $50 $C3
     add  hl, bc                                   ; $6D8F: $09
     res  7, [hl]                                  ; $6D90: $CB $BE
-    ld   hl, $C430                                ; $6D92: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $6D92: $21 $30 $C4
     add  hl, bc                                   ; $6D95: $09
     set  6, [hl]                                  ; $6D96: $CB $F6
     ld   a, $28                                   ; $6D98: $3E $28
@@ -8566,7 +8566,7 @@ jr_007_7161:
     ret                                           ; $7167: $C9
 
 jr_007_7168:
-    ld   a, [$C18F]                               ; $7168: $FA $8F $C1
+    ld   a, [wRoomEventEffectExecuted]            ; $7168: $FA $8F $C1
     and  a                                        ; $716B: $A7
     ret  nz                                       ; $716C: $C0
 
@@ -9187,9 +9187,9 @@ jr_007_74E8:
     cp   $0F                                      ; $74E9: $FE $0F
     jr   nz, jr_007_74F8                          ; $74EB: $20 $0B
 
-    ld   a, [$C18E]                               ; $74ED: $FA $8E $C1
-    and  $1F                                      ; $74F0: $E6 $1F
-    cp   $03                                      ; $74F2: $FE $03
+    ld   a, [wRoomEvent]                          ; $74ED: $FA $8E $C1
+    and  EVENT_TRIGGER_MASK                       ; $74F0: $E6 $1F
+    cp   TRIGGER_STEP_ON_BUTTON                   ; $74F2: $FE $03
     jr   nz, jr_007_74F8                          ; $74F4: $20 $02
 
     ld   [hl], $01                                ; $74F6: $36 $01
@@ -9217,7 +9217,7 @@ jr_007_74F8:
     ld   hl, $C350                                ; $7519: $21 $50 $C3
     add  hl, de                                   ; $751C: $19
     ld   [hl], $00                                ; $751D: $36 $00
-    ld   hl, $C430                                ; $751F: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $751F: $21 $30 $C4
     add  hl, de                                   ; $7522: $19
     ld   [hl], $00                                ; $7523: $36 $00
     ld   hl, $C4D0                                ; $7525: $21 $D0 $C4
@@ -9580,7 +9580,7 @@ jr_007_76ED:
     add  hl, de                                   ; $770F: $19
     ld   a, [hl]                                  ; $7710: $7E
     cp   $00                                      ; $7711: $FE $00
-    jp   z, label_C60                             ; $7713: $CA $60 $0C
+    jp   z, MarkTriggerAsResolved                             ; $7713: $CA $60 $0C
 
 jr_007_7716:
     ld   hl, wEntitiesTransitionCountdownTable           ; $7716: $21 $E0 $C2
@@ -9833,7 +9833,7 @@ jr_007_786E:
     ld   hl, $C350                                ; $786E: $21 $50 $C3
     add  hl, bc                                   ; $7871: $09
     ld   [hl], $80                                ; $7872: $36 $80
-    ld   hl, $C430                                ; $7874: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7874: $21 $30 $C4
     add  hl, bc                                   ; $7877: $09
     ld   [hl], $48                                ; $7878: $36 $48
     call func_007_7E5D                            ; $787A: $CD $5D $7E
@@ -9927,7 +9927,7 @@ jr_007_78E1:
     and  $01                                      ; $78E7: $E6 $01
     jp   SetEntitySpriteVariant                   ; $78E9: $C3 $0C $3B
 
-    ld   hl, $C430                                ; $78EC: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $78EC: $21 $30 $C4
     add  hl, bc                                   ; $78EF: $09
     ld   [hl], $08                                ; $78F0: $36 $08
     ld   hl, $C350                                ; $78F2: $21 $50 $C3
@@ -10544,7 +10544,7 @@ func_007_7DC3:
     call func_007_4005                            ; $7DEA: $CD $05 $40
     ld   [hl], a                                  ; $7DED: $77
     call func_007_7E0A                            ; $7DEE: $CD $0A $7E
-    ld   hl, $C430                                ; $7DF1: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7DF1: $21 $30 $C4
     add  hl, bc                                   ; $7DF4: $09
     ld   a, [hl]                                  ; $7DF5: $7E
     and  $20                                      ; $7DF6: $E6 $20

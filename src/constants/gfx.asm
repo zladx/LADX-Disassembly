@@ -42,6 +42,7 @@ OBJECT_SHORT_GRASS          equ $04
 OBJECT_ROCKY_GROUND         equ $09
 OBJECT_TALL_GRASS           equ $0A
 OBJECT_PATH                 equ $0B
+OBJECT_TILES                equ $0C
 OBJECT_WATER_BANK_BOTTOM    equ $0F
 OBJECT_WATER_BANK_TOP       equ $10
 OBJECT_WATER_BANK_RIGHT     equ $11
@@ -68,6 +69,7 @@ OBJECT_ROUNDED_BLOCK        equ $6E
 OBJECT_OWN_STATUE           equ $6F
 OBJECT_WEATHER_VANE_TOP     equ $91
 OBJECT_BOMBABLE_CAVE_DOOR   equ $BA
+OBJECT_FLAGELLO_KEYHOLE     equ $C0
 OBJECT_CLOSED_GATE          equ $C2
 OBJECT_GROUND_STAIRS        equ $C6
 OBJECT_BUSH_GROUND_STAIRS   equ $D3
@@ -111,6 +113,7 @@ OBJECT_TORCH_UNLIT                 equ $AB
 OBJECT_TORCH_LIT                   equ $AC
 OBJECT_STAIRS_DOWN                 equ $BE
 OBJECT_HIDDEN_STAIRS_DOWN          equ $BF
+OBJECT_ONE_EYED_STATUE             equ $C0
 OBJECT_STAIRS_UP                   equ $CB
 OBJECT_CONVEYOR_BOTTOM             equ $CF
 OBJECT_CONVEYOR_TOP                equ $D0

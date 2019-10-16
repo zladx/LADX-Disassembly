@@ -27,7 +27,7 @@ jr_003_69D9:
     call func_003_7F78                            ; $69DF: $CD $78 $7F
     ld   a, [wIsIndoor]                           ; $69E2: $FA $A5 $DB
     and  a                                        ; $69E5: $A7
-    ldh  a, [hFFAF]                               ; $69E6: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $69E6: $F0 $AF
     jr   z, jr_003_69F0                           ; $69E8: $28 $06
 
     cp   $8A                                      ; $69EA: $FE $8A

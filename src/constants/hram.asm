@@ -103,8 +103,8 @@ hWindowXUnused:: ; FFAA
 hFFAB:: ; hFFAB
   ds 4
 
-; Related to ennemies IA state?
-hFFAF:: ; FFAF
+hObjectUnderEntity:: ; FFAF
+  ; Type of the object under the active entity
   ds 1
 
 hMusicTrack:: ; FFB0
@@ -288,8 +288,8 @@ hMapId:: ; FFF7
 hRoomStatus:: ; FFF8
   ; Status of the current room
   ; 00 : not visited
+  ; 10 : special event occured
   ; 80 : visited
-  ; ?? : visited and special event occured
   ds 1
 
 hIsSideScrolling:: ; FFF9

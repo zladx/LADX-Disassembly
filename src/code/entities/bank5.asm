@@ -1336,7 +1336,7 @@ jr_005_46E9:
     add  hl, de                                   ; $4721: $19
     ld   [hl], $80                                ; $4722: $36 $80
 
-    ld   hl, $C430                                ; $4724: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $4724: $21 $30 $C4
     add  hl, de                                   ; $4727: $19
     ld   [hl], $40                                ; $4728: $36 $40
 
@@ -3908,7 +3908,7 @@ label_005_55BC:
     ld   hl, $C350                                ; $55E8: $21 $50 $C3
     add  hl, de                                   ; $55EB: $19
     ld   [hl], $80                                ; $55EC: $36 $80
-    ld   hl, $C430                                ; $55EE: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $55EE: $21 $30 $C4
     add  hl, de                                   ; $55F1: $19
     ld   [hl], $40                                ; $55F2: $36 $40
     ld   hl, wEntitiesUnknownTableD               ; $55F4: $21 $D0 $C2
@@ -3987,7 +3987,7 @@ jr_005_5650:
     ld   hl, $C340                                ; $5670: $21 $40 $C3
     add  hl, de                                   ; $5673: $19
     ld   [hl], $02                                ; $5674: $36 $02
-    ld   hl, $C430                                ; $5676: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $5676: $21 $30 $C4
     add  hl, de                                   ; $5679: $19
     ld   [hl], d                                  ; $567A: $72
     ld   hl, wEntitiesHealthTable                                ; $567B: $21 $60 $C3
@@ -4657,7 +4657,7 @@ Data_005_5A0E::
     pop  af                                       ; $5A1D: $F1
 
 func_005_5A1E::
-    ld   hl, $C430                                ; $5A1E: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $5A1E: $21 $30 $C4
     add  hl, bc                                   ; $5A21: $09
     ld   a, [hl]                                  ; $5A22: $7E
     and  $7F                                      ; $5A23: $E6 $7F
@@ -5541,7 +5541,7 @@ jr_005_5EB0:
     ld   hl, $C340                                ; $5F1D: $21 $40 $C3
     add  hl, de                                   ; $5F20: $19
     ld   [hl], $02                                ; $5F21: $36 $02
-    ld   hl, $C430                                ; $5F23: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $5F23: $21 $30 $C4
     add  hl, de                                   ; $5F26: $19
     ld   [hl], $00                                ; $5F27: $36 $00
     ld   hl, $C4D0                                ; $5F29: $21 $D0 $C4
@@ -10363,11 +10363,11 @@ jr_005_7A1F:
     and  a                                        ; $7A27: $A7
     jr   nz, jr_005_7A39                          ; $7A28: $20 $0F
 
-    ld   hl, $C430                                ; $7A2A: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7A2A: $21 $30 $C4
     add  hl, bc                                   ; $7A2D: $09
     ld   [hl], $C0                                ; $7A2E: $36 $C0
     call label_3B70                               ; $7A30: $CD $70 $3B
-    ld   hl, $C430                                ; $7A33: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7A33: $21 $30 $C4
     add  hl, bc                                   ; $7A36: $09
     ld   [hl], $80                                ; $7A37: $36 $80
 
@@ -10438,7 +10438,7 @@ jr_005_7A66:
     add  hl, bc                                   ; $7A92: $09
     ld   [hl], a                                  ; $7A93: $77
     call func_005_7AB1                            ; $7A94: $CD $B1 $7A
-    ld   hl, $C430                                ; $7A97: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7A97: $21 $30 $C4
     add  hl, bc                                   ; $7A9A: $09
     ld   a, [hl]                                  ; $7A9B: $7E
     and  $20                                      ; $7A9C: $E6 $20
@@ -11226,7 +11226,7 @@ jr_005_7EAE:
     and  a                                        ; $7EB3: $A7
     jr   z, jr_005_7EBF                           ; $7EB4: $28 $09
 
-    ld   hl, $C430                                ; $7EB6: $21 $30 $C4
+    ld   hl, wEntitiesUnknowTableH                ; $7EB6: $21 $30 $C4
     add  hl, de                                   ; $7EB9: $19
     ld   a, [hl]                                  ; $7EBA: $7E
     and  $80                                      ; $7EBB: $E6 $80

@@ -75,7 +75,7 @@ func_019_44CC:
     ret  nz                                       ; $44D0: $C0
 
 jr_019_44D1:
-    ldh  a, [hFFAF]                               ; $44D1: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $44D1: $F0 $AF
     cp   $D3                                      ; $44D3: $FE $D3
     jr   z, jr_019_44DA                           ; $44D5: $28 $03
 

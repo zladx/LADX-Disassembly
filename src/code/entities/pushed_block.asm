@@ -77,12 +77,12 @@ jr_003_5286:
 
 jr_003_52B5:
     call func_003_51C9                            ; $52B5: $CD $C9 $51
-    ld   a, [$C18E]                               ; $52B8: $FA $8E $C1
-    and  $1F                                      ; $52BB: $E6 $1F
-    cp   $02                                      ; $52BD: $FE $02
+    ld   a, [wRoomEvent]                          ; $52B8: $FA $8E $C1
+    and  EVENT_TRIGGER_MASK                       ; $52BB: $E6 $1F
+    cp   TRIGGER_PUSH_SINGLE_BLOCK                ; $52BD: $FE $02
     jr   z, jr_003_52D1                           ; $52BF: $28 $10
 
-    cp   $07                                      ; $52C1: $FE $07
+    cp   TRIGGER_PUSH_BLOCKS                      ; $52C1: $FE $07
     ret  nz                                       ; $52C3: $C0
 
     call func_003_7893                            ; $52C4: $CD $93 $78
@@ -94,4 +94,4 @@ jr_003_52B5:
     ret  nz                                       ; $52D0: $C0
 
 jr_003_52D1:
-    jp   label_C60                                ; $52D1: $C3 $60 $0C
+    jp   MarkTriggerAsResolved                       ; $52D1: $C3 $60 $0C

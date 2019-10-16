@@ -189,9 +189,9 @@ label_447E::
     jr   z, label_4495
     cp   $19
     jr   z, label_4495
-    ld   a, [$C18E]
-    and  $E0
-    cp   $80
+    ld   a, [wRoomEvent]
+    and  EVENT_EFFECT_MASK
+    cp   EFFECT_DROP_KEY
     jr   nz, label_44A6
 
 label_4495::

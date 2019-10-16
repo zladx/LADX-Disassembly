@@ -304,14 +304,18 @@ wTransitionGfxFrameCount:: ; C180
 ; Unlabeled
 ds $C18E - $C181
 
-wRoomEvent ; C18E
+wRoomEvent:: ; C18E
   ; Event for the current room
   ; A combination of trigger and effect values
   ; See TRIGGER_* and EFFECT_* constants for possible values
   ds 1
 
+wRoomEventEffectExecuted:: ; C18F
+  ; Has the event effect for the current room been executed already?
+  ds 1
+
 ; Unlabeled
-ds $C19F - $C18F
+ds $C19F - $C190
 
 wDialogState:: ; C19F
   ; Upper bit:    set if the dialog is displayed on bottom (instead of top)

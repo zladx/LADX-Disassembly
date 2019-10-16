@@ -759,19 +759,19 @@ label_C56::
 .endIf
     ret
 
-MarkPuzzleAsSolved::
+MarkTriggerAsResolved::
     push af
 
-    ; If $C18F != 0, return
-    ld   a, [$C18F]
+    ; If the event effect was already executed, return.
+    ld   a, [wRoomEventEffectExecuted]
     and  a
     jr   nz, .return
 
     ; $C1CF = 0
     ld   [$C1CF], a
-    ; $C18F = $C5A6 = 1
+    ; wRoomEventEffectExecuted = $C5A6 = 1
     inc  a
-    ld   [$C18F], a
+    ld   [wRoomEventEffectExecuted], a
     ld   [$C5A6], a
 
     ; If $C19D == 0…
@@ -1345,6 +1345,7 @@ WorldDefaultHandler::
     ld   hl, $C11E
     res  7, [hl]
 
+    ; Execute room events
     call label_002_593B
 
     callsw ApplyRoomTransition

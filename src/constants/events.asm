@@ -19,6 +19,7 @@ TRIGGER_HORSE_HEADS          equ $0C ; Get both horse heads (sprite 0x98) to sta
 TRIGGER_THROW_POT_AT_CHEST   equ $0D ; Throw a pot at a chest in position 23 to open it and obtain the Nightmare Key
 TRIGGER_FILL_LAVA_GAPS       equ $0E ; Fill in the gaps with that rolling thing from Turtle Rock (sprite 0xB1).
 TRIGGER_SHOOT_STATUE_EYE     equ $0F ; Shoot an arrow at the eye of a statue (tile 0xC0). You can have as many statues as you want; shooting any of them will work.
+TRIGGER_ANSWER_TUNICS        equ $10 ; Answer the questions of the skeletons about their tunics colors. Only works on a room id $12.
 
 EFFECT_NONE              equ $00
 EFFECT_OPEN_LOCKED_DOORS equ $20

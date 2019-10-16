@@ -8091,7 +8091,7 @@ jr_018_6FDB:
     call label_394D                               ; $6FE8: $CD $4D $39
     call label_3EE8                               ; $6FEB: $CD $E8 $3E
     call func_018_7DE8                            ; $6FEE: $CD $E8 $7D
-    ld   a, [$C18F]                               ; $6FF1: $FA $8F $C1
+    ld   a, [wRoomEventEffectExecuted]            ; $6FF1: $FA $8F $C1
     and  a                                        ; $6FF4: $A7
     jr   z, jr_018_7028                           ; $6FF5: $28 $31
 
@@ -8316,7 +8316,7 @@ jr_018_7121:
     and  a                                        ; $713B: $A7
     jr   nz, jr_018_7157                          ; $713C: $20 $19
 
-    ld   a, [$C18F]                               ; $713E: $FA $8F $C1
+    ld   a, [wRoomEventEffectExecuted]            ; $713E: $FA $8F $C1
     and  a                                        ; $7141: $A7
     jr   nz, jr_018_7152                          ; $7142: $20 $0E
 

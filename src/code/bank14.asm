@@ -3258,7 +3258,7 @@ jr_014_58ED:
     ld   [$C18A], a                               ; $58F3: $EA $8A $C1
     ld   [$C18B], a                               ; $58F6: $EA $8B $C1
     ld   [$C190], a                               ; $58F9: $EA $90 $C1
-    ld   [$C18F], a                               ; $58FC: $EA $8F $C1
+    ld   [wRoomEventEffectExecuted], a                               ; $58FC: $EA $8F $C1
     ret                                           ; $58FF: $C9
 
 func_014_5900::

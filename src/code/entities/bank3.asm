@@ -245,7 +245,7 @@ func_003_4895::
 
 jr_003_48AD:
     ld   a, $01                                   ; $48AD: $3E $01
-    ld   [$C18F], a                               ; $48AF: $EA $8F $C1
+    ld   [wRoomEventEffectExecuted], a                               ; $48AF: $EA $8F $C1
     jp   ClearEntityType                               ; $48B2: $C3 $8D $3F
 
 EntityInitHandler::
@@ -2107,7 +2107,7 @@ jr_003_5455:
     ld   a, $19                                   ; $545D: $3E $19
     ldh  [hScratch8], a                           ; $545F: $E0 $DF
     call label_3E4D                               ; $5461: $CD $4D $3E
-    jp   MarkPuzzleAsSolved                       ; $5464: $C3 $60 $0C
+    jp   MarkTriggerAsResolved                       ; $5464: $C3 $60 $0C
 
 jr_003_5467:
     cp   $0B                                      ; $5467: $FE $0B
@@ -2128,7 +2128,7 @@ jr_003_5467:
     ret  nc                                       ; $547C: $D0
 
 jr_003_547D:
-    jp   MarkPuzzleAsSolved                       ; $547D: $C3 $60 $0C
+    jp   MarkTriggerAsResolved                       ; $547D: $C3 $60 $0C
 
     ld   [hl-], a                                 ; $5480: $32
     ld   bc, $6132                                ; $5481: $01 $32 $61

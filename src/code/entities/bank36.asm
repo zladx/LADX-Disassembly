@@ -6045,7 +6045,7 @@ func_036_6219:
     ld   [hl], $FF                                ; $6245: $36 $FF
     call func_036_63C2                            ; $6247: $CD $C2 $63
     call func_036_6B5C                            ; $624A: $CD $5C $6B
-    ld   a, [$C18F]                               ; $624D: $FA $8F $C1
+    ld   a, [wRoomEventEffectExecuted]            ; $624D: $FA $8F $C1
     and  a                                        ; $6250: $A7
     jr   z, jr_036_625F                           ; $6251: $28 $0C
 
@@ -8433,7 +8433,7 @@ jr_036_6E57:
     jr   nz, jr_036_6EA0                          ; $6E96: $20 $08
 
     call func_036_6C89                            ; $6E98: $CD $89 $6C
-    call MarkPuzzleAsSolved                       ; $6E9B: $CD $60 $0C
+    call MarkTriggerAsResolved                    ; $6E9B: $CD $60 $0C
     jr   jr_036_6ECD                              ; $6E9E: $18 $2D
 
 jr_036_6EA0:

@@ -40,6 +40,6 @@ ArrowEntityHandler::
     ldh  a, [hObjectUnderEntity]                  ; $6A5B: $F0 $AF
     cp   OBJECT_ONE_EYED_STATUE                   ; $6A5D: $FE $C0
     ret  nz                                       ; $6A5F: $C0
-    ; call MarkPuzzleAsSolved, and clear entity
-    call MarkPuzzleAsSolved                       ; $6A60: $CD $60 $0C
+    ; call MarkTriggerAsResolved, and clear entity
+    call MarkTriggerAsResolved                    ; $6A60: $CD $60 $0C
     jp   ClearEntityTypeAndReturn                 ; $6A63: $C3 $8D $3F

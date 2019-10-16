@@ -208,7 +208,7 @@ jr_019_4159:
     ret  nc                                       ; $4161: $D0
 
 jr_019_4162:
-    jp   MarkPuzzleAsSolved                       ; $4162: $C3 $60 $0C
+    jp   MarkTriggerAsResolved                    ; $4162: $C3 $60 $0C
 
     nop                                           ; $4165: $00
     ld   [label_800], sp                          ; $4166: $08 $00 $08

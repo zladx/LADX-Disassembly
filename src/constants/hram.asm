@@ -288,8 +288,8 @@ hMapId:: ; FFF7
 hRoomStatus:: ; FFF8
   ; Status of the current room
   ; 00 : not visited
+  ; 10 : special event occured
   ; 80 : visited
-  ; ?? : visited and special event occured
   ds 1
 
 hIsSideScrolling:: ; FFF9

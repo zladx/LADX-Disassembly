@@ -6,6 +6,7 @@ Data_006_4000::
     db   $50, $03, $52, $03, $54, $03, $56, $03, $50, $03, $52, $03, $54, $03, $56, $03
     db   $58, $03, $5A, $03, $5C, $03, $5E, $03, $5A, $23, $58, $23, $5E, $23, $5C, $23
 
+RichardEntityHandler::
     ld   a, $21                                   ; $4020: $3E $21
     ldh  [wActiveEntityPosY], a                   ; $4022: $E0 $EC
     ld   de, Data_006_4000                        ; $4024: $11 $00 $40
@@ -215,6 +216,8 @@ jr_006_40FC:
     ld   b, b                                     ; $4147: $40
     ld   b, b                                     ; $4148: $40
     ld   b, b                                     ; $4149: $40
+
+MadBomberEntityHandler::
     ldh  a, [hRoomStatus]                         ; $414A: $F0 $F8
     and  $10                                      ; $414C: $E6 $10
     jp   nz, label_006_65DB                       ; $414E: $C2 $DB $65
@@ -374,6 +377,7 @@ jr_006_4230:
 jr_006_4237:
     jp   SetEntitySpriteVariant                   ; $4237: $C3 $0C $3B
 
+AntiKirbyEntityHandler::
     call $44B6                                    ; $423A: $CD $B6 $44
     call func_006_64C6                            ; $423D: $CD $C6 $64
     call func_006_64F7                            ; $4240: $CD $F7 $64
@@ -820,6 +824,7 @@ jr_006_44F1:
     call label_3CE6                               ; $4503: $CD $E6 $3C
     jp   label_3CD9                               ; $4506: $C3 $D9 $3C
 
+SmasherEntityHandler::
     ld   hl, $C440                                ; $4509: $21 $40 $C4
     add  hl, bc                                   ; $450C: $09
     ld   a, [hl]                                  ; $450D: $7E
@@ -1521,6 +1526,8 @@ jr_006_4910:
     inc  hl                                       ; $492E: $23
     ld   a, h                                     ; $492F: $7C
     inc  hl                                       ; $4930: $23
+
+ThreeOfAKindEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4931: $21 $60 $C3
     add  hl, bc                                   ; $4934: $09
     ld   [hl], $20                                ; $4935: $36 $20
@@ -1798,8 +1805,10 @@ label_006_4AA7:
 
     nop                                           ; $4AB1: $00
     ld   c, [hl]                                  ; $4AB2: $4E
-    jr   nz, @+$13                                ; $4AB3: $20 $11
+    db   $20                                      ; $4AB3: $20
 
+StalfosAggressiveEntityHandler::
+    db   $11                                      ; $4AB4
     xor  b                                        ; $4AB5: $A8
     ld   c, d                                     ; $4AB6: $4A
     call RenderAnimatedActiveEntity                               ; $4AB7: $CD $C0 $3B
@@ -1923,7 +1932,10 @@ jr_006_4B53:
 
     nop                                           ; $4B76: $00
     inc  bc                                       ; $4B77: $03
-    ld   bc, $2102                                ; $4B78: $01 $02 $21
+    db   $01, $02                                ; $4B78: $01 $02
+
+CueBallEntityHandler::
+    db   $21
     or   b                                        ; $4B7B: $B0
     jp   nz, label_006_7E09                       ; $4B7C: $C2 $09 $7E
 
@@ -2329,7 +2341,10 @@ label_006_4E88:
     jp   label_006_6541                           ; $4E9A: $C3 $41 $65
 
     ld   hl, sp+$10                               ; $4E9D: $F8 $10
-    ld   a, [$F010]                               ; $4E9F: $FA $10 $F0
+    db   $FA, $10                                 ; $4E9F: $FA $10
+
+Entity8CHandler::
+    db   $F0
     ldh  a, [hAnimatedTilesDataOffset]            ; $4EA2: $F0 $A7
     jr   nz, jr_006_4EB7                          ; $4EA4: $20 $11
 
@@ -2418,6 +2433,7 @@ jr_006_4F0E:
 
     jp   label_006_641F                           ; $4F12: $C3 $1F $64
 
+Entity8DHandler::
     ldh  a, [hActiveEntityState]                  ; $4F15: $F0 $F0
     and  a                                        ; $4F17: $A7
     jp   nz, label_006_4EB7                       ; $4F18: $C2 $B7 $4E
@@ -2440,6 +2456,8 @@ jr_006_4F0E:
     ld   bc, $2164                                ; $4F35: $01 $64 $21
     ld   h, [hl]                                  ; $4F38: $66
     ld   bc, $2166                                ; $4F39: $01 $66 $21
+
+HardHatBeetleEntityHandler::
     ld   de, $4F2C                                ; $4F3C: $11 $2C $4F
     ldh  a, [hMapId]                              ; $4F3F: $F0 $F7
     cp   $0A                                      ; $4F41: $FE $0A
@@ -2522,6 +2540,8 @@ jr_006_4FAF:
     nop                                           ; $4FB4: $00
     nop                                           ; $4FB5: $00
     ld   hl, sp+$08                               ; $4FB6: $F8 $08
+
+HinoxEntityHandler::
     call func_006_52BA                            ; $4FB8: $CD $BA $52
     xor  a                                        ; $4FBB: $AF
     ld   [wC167], a                               ; $4FBC: $EA $67 $C1
@@ -3063,6 +3083,7 @@ jr_006_52D8:
     ld   c, $08                                   ; $52D9: $0E $08
     jp   label_3CE6                               ; $52DB: $C3 $E6 $3C
 
+ArmosKnightEntityHandler::
     ld   hl, $C460                                ; $52DE: $21 $60 $C4
     add  hl, bc                                   ; $52E1: $09
     ld   [hl], $FF                                ; $52E2: $36 $FF
@@ -3594,9 +3615,10 @@ jr_006_55E0:
     nop                                           ; $55E3: $00
     inc  b                                        ; $55E4: $04
     db   $FC                                      ; $55E5: $FC
-    ld   [$21F8], sp                              ; $55E6: $08 $F8 $21
-    ret  nc                                       ; $55E9: $D0
+    db   $08, $F8                                 ; $55E6: $08 $F8
 
+DesertLanmolaEntityHandler::
+    db   $21, $D0
     jp   nz, label_006_7E09                       ; $55EA: $C2 $09 $7E
 
     cp   $02                                      ; $55ED: $FE $02
@@ -4331,6 +4353,8 @@ jr_006_59A2:
     ld   d, $22                                   ; $59E4: $16 $22
     inc  d                                        ; $59E6: $14
     ld   [hl+], a                                 ; $59E7: $22
+
+YipYipEntityHandler::
     ld   a, [wDialogState]                        ; $59E8: $FA $9F $C1
     and  a                                        ; $59EB: $A7
     jr   z, jr_006_5A0D                           ; $59EC: $28 $1F
@@ -4591,6 +4615,8 @@ jr_006_5B4C:
     ld   hl, $2168                                ; $5B6F: $21 $68 $21
     ld   l, [hl]                                  ; $5B72: $6E
     ld   hl, $216C                                ; $5B73: $21 $6C $21
+
+MadamMeowMeowEntityHandler::
     call GetEntityTransitionCountdown             ; $5B76: $CD $05 $0C
     cp   $01                                      ; $5B79: $FE $01
     jr   nz, jr_006_5B83                          ; $5B7B: $20 $06
@@ -4689,7 +4715,8 @@ label_006_5C04:
     set  7, [hl]                                  ; $5C0B: $CB $FE
     ret                                           ; $5C0D: $C9
 
-    ld   hl, wEntitiesPosYTable                         ; $5C0E: $21 $10 $C2
+GrandpaUlriraEntityHandler::
+    ld   hl, wEntitiesPosYTable                   ; $5C0E: $21 $10 $C2
     add  hl, bc                                   ; $5C11: $09
     ld   a, $49                                   ; $5C12: $3E $49
     ld   [hl], a                                  ; $5C14: $77
@@ -4788,6 +4815,8 @@ func_006_5C71:
     inc  hl                                       ; $5C96: $23
     ld   d, h                                     ; $5C97: $54
     inc  hl                                       ; $5C98: $23
+
+CrowEntityHandler::
     ldh  a, [hMapRoom]                            ; $5C99: $F0 $F6
     cp   $58                                      ; $5C9B: $FE $58
     jr   nz, jr_006_5CBE                          ; $5C9D: $20 $1F
@@ -5153,6 +5182,8 @@ label_006_5E54:
     ld   [$2268], sp                              ; $5E90: $08 $68 $22
     and  b                                        ; $5E93: $A0
     inc  d                                        ; $5E94: $14
+
+CrazyTracyEntityHandler::
     push bc                                       ; $5E95: $C5
     sla  c                                        ; $5E96: $CB $21
     sla  c                                        ; $5E98: $CB $21
@@ -5482,6 +5513,9 @@ jr_006_6048:
     jr   nz, jr_006_60BC                          ; $607C: $20 $3E
 
     nop                                           ; $607E: $00
+
+Kid71EntityHandler::
+Kid72EntityHandler::
     ld   hl, wEntitiesUnknownTableB               ; $607F: $21 $B0 $C2
     add  hl, bc                                   ; $6082: $09
     ld   a, [hl]                                  ; $6083: $7E
@@ -5749,6 +5783,8 @@ jr_006_620A:
     xor  a                                        ; $620A: $AF
     jp   SetEntitySpriteVariant                   ; $620B: $C3 $0C $3B
 
+Kid70EntityHandler::
+Kid73EntityHandler::
     ldh  a, [hMapRoom]                            ; $620E: $F0 $F6
     cp   $92                                      ; $6210: $FE $92
     jr   nz, jr_006_621C                          ; $6212: $20 $08
@@ -5857,6 +5893,7 @@ jr_006_62A9:
     add  $1C                                      ; $62AE: $C6 $1C
     jp   OpenDialogInTable1                       ; $62B0: $C3 $73 $23
 
+GiantGopongaFlowerEntityHandler::
     call func_006_6376                            ; $62B3: $CD $76 $63
     call func_006_64C6                            ; $62B6: $CD $C6 $64
     call label_C56                                ; $62B9: $CD $56 $0C
@@ -6017,6 +6054,7 @@ func_006_6376:
     nop                                           ; $639C: $00
     jr   nc, @+$22                                ; $639D: $30 $20
 
+GopongaProjectileEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $639F: $21 $60 $C3
     add  hl, bc                                   ; $63A2: $09
     ld   [hl], $30                                ; $63A3: $36 $30
@@ -6080,6 +6118,8 @@ jr_006_63DD:
     ld   [bc], a                                  ; $63F9: $02
     ld   d, d                                     ; $63FA: $52
     ld   [hl+], a                                 ; $63FB: $22
+
+GopongaFlowerEntityHandler::
     ld   de, $63F4                                ; $63FC: $11 $F4 $63
     call RenderAnimatedActiveEntity                               ; $63FF: $CD $C0 $3B
     call func_006_64C6                            ; $6402: $CD $C6 $64
@@ -6472,6 +6512,8 @@ label_006_65DB:
     inc  bc                                       ; $65EE: $03
     ld   l, h                                     ; $65EF: $6C
     inc  hl                                       ; $65F0: $23
+
+WizrobeProjectileEntityHandler::
     ldh  a, [hFrameCounter]                       ; $65F1: $F0 $E7
     rla                                           ; $65F3: $17
     rla                                           ; $65F4: $17
@@ -6511,7 +6553,11 @@ label_006_65DB:
     ld   bc, $0208                                ; $662D: $01 $08 $02
     inc  b                                        ; $6630: $04
     ld   bc, $0204                                ; $6631: $01 $04 $02
-    ld   [$013E], sp                              ; $6634: $08 $3E $01
+    db   $08                                      ; $6634: $08
+
+SparkClockwiseEntityHandler::
+SparkCounterClockwiseEntityHandler::
+    db   $3E, $01                                 ; $6635
     ldh  [$FFBE], a                               ; $6637: $E0 $BE
     ldh  a, [hFrameCounter]                       ; $6639: $F0 $E7
     rra                                           ; $663B: $1F
@@ -6683,7 +6729,10 @@ jr_006_6719:
     dec  c                                        ; $672B: $0D
     inc  c                                        ; $672C: $0C
     inc  b                                        ; $672D: $04
-    ld   [$1100], sp                              ; $672E: $08 $00 $11
+    db   $08, $00                                 ; $672E: $08 $00
+
+KeeseEntityHandler::
+    db    $11                                     ; $6730
     ld   [$F067], sp                              ; $6731: $08 $67 $F0
     rst  $30                                      ; $6734: $F7
     cp   $0A                                      ; $6735: $FE $0A
@@ -6807,6 +6856,7 @@ jr_006_67E6:
 jr_006_67F2:
     jp   SetEntitySpriteVariant                   ; $67F2: $C3 $0C $3B
 
+OwlEventEntityHandler::
     ld   a, c                                     ; $67F5: $79
     ld   [$C501], a                               ; $67F6: $EA $01 $C5
     ldh  a, [hMapRoom]                            ; $67F9: $F0 $F6
@@ -7247,6 +7297,8 @@ jr_006_6A71:
     ld   [bc], a                                  ; $6A79: $02
     ld   d, d                                     ; $6A7A: $52
     ld   [bc], a                                  ; $6A7B: $02
+
+TelephoneEntityHandler::
     ldh  a, [wActiveEntityPosY]                   ; $6A7C: $F0 $EC
     sub  $05                                      ; $6A7E: $D6 $05
     ldh  [wActiveEntityPosY], a                   ; $6A80: $E0 $EC
@@ -7577,6 +7629,7 @@ ButterflyEntityHandler::
 .moveCloserToLinkEnd
     ret                                           ; $6C6C: $C9
 
+RollingBonesEntityHandler::
     ld   a, c                                     ; $6C6D: $79
     ld   [$D202], a                               ; $6C6E: $EA $02 $D2
     ldh  a, [hMapId]                              ; $6C71: $F0 $F7
@@ -8011,6 +8064,7 @@ jr_006_6E04:
     ld   b, b                                     ; $6EE0: $40
     jr   nc, jr_006_6F03                          ; $6EE1: $30 $20
 
+RollingBonesBarEntityHandler::
     ldh  a, [hMapId]                              ; $6EE3: $F0 $F7
     cp   $07                                      ; $6EE5: $FE $07
     jr   nz, jr_006_6EED                          ; $6EE7: $20 $04
@@ -8330,7 +8384,10 @@ jr_006_706B:
     ld   e, [hl]                                  ; $709F: $5E
     ld   bc, $14A8                                ; $70A0: $01 $A8 $14
     ld   bc, $18FF                                ; $70A3: $01 $FF $18
-    add  sp, -$06                                 ; $70A6: $E8 $FA
+    db   $E8                                      ; $70A6: $E8
+
+BigFairyEntityHandler::
+    db   $FA                                      ; $70A7
     and  l                                        ; $70A8: $A5
     db   $DB                                      ; $70A9: $DB
     and  a                                        ; $70AA: $A7
@@ -8595,8 +8652,10 @@ jr_006_7201:
 
     jr   nz, jr_006_72A7                          ; $7239: $20 $6C
 
-    jr   nz, @+$23                                ; $723B: $20 $21
+    db   $20                                      ; $723B: $20
 
+MrWriteBirdEntityHandler::
+    db   $21
     add  b                                        ; $723D: $80
     jp   $F009                                    ; $723E: $C3 $09 $F0
 
@@ -8809,6 +8868,8 @@ label_006_7372:
     ld   bc, $2170                                ; $7374: $01 $70 $21
     ld   [hl], d                                  ; $7377: $72
     ld   bc, $2172                                ; $7378: $01 $72 $21
+
+PolsVoiceEntityHandler::
     ld   a, [wLinkPlayingOcarinaCountdown]        ; $737B: $FA $66 $C1
     cp   $01                                      ; $737E: $FE $01
     jr   nz, jr_006_73AD                          ; $7380: $20 $2B
@@ -8937,6 +8998,8 @@ jr_006_741F:
     rlca                                          ; $744B: $07
     ld   h, [hl]                                  ; $744C: $66
     rlca                                          ; $744D: $07
+
+ArmosStatueEntityHandler::
     ld   de, $7446                                ; $744E: $11 $46 $74
     call RenderAnimatedActiveEntity                               ; $7451: $CD $C0 $3B
     call func_006_64C6                            ; $7454: $CD $C6 $64
@@ -9063,8 +9126,10 @@ jr_006_74EF:
     nop                                           ; $750A: $00
     nop                                           ; $750B: $00
     ld   [$30F8], sp                              ; $750C: $08 $F8 $30
-    jr   nz, @+$40                                ; $750F: $20 $3E
+    db   $20                                      ; $750F: $20
 
+SpikeTrapEntityHandler::
+    db   $3E
     ld   bc, $BEE0                                ; $7511: $01 $E0 $BE
     ld   de, $74FA                                ; $7514: $11 $FA $74
     call RenderAnimatedActiveEntity                               ; $7517: $CD $C0 $3B
@@ -9249,8 +9314,10 @@ jr_006_75B5:
     nop                                           ; $7624: $00
     nop                                           ; $7625: $00
     ldh  [rNR41], a                               ; $7626: $E0 $20
+
+WizrobeEntityHandler::
     ld   de, $7604                                ; $7628: $11 $04 $76
-    call RenderAnimatedActiveEntity                               ; $762B: $CD $C0 $3B
+    call RenderAnimatedActiveEntity               ; $762B: $CD $C0 $3B
     call func_006_64C6                            ; $762E: $CD $C6 $64
     call func_006_64F7                            ; $7631: $CD $F7 $64
     call func_006_6541                            ; $7634: $CD $41 $65
@@ -9728,6 +9795,7 @@ jr_006_783F:
     ld   a, $10                                   ; $7869: $3E $10
     jp   label_3DA0                               ; $786B: $C3 $A0 $3D
 
+Data_006_786E::
     ld   e, d                                     ; $786E: $5A
     nop                                           ; $786F: $00
     ld   e, d                                     ; $7870: $5A
@@ -9736,8 +9804,10 @@ jr_006_783F:
     inc  d                                        ; $7873: $14
     ld   e, d                                     ; $7874: $5A
     inc  [hl]                                     ; $7875: $34
-    ld   de, $786E                                ; $7876: $11 $6E $78
-    call RenderAnimatedActiveEntity                               ; $7879: $CD $C0 $3B
+
+AntiFairyEntityHandler::
+    ld   de, Data_006_786E                        ; $7876: $11 $6E $78
+    call RenderAnimatedActiveEntity               ; $7879: $CD $C0 $3B
     call func_006_64C6                            ; $787C: $CD $C6 $64
 
 jr_006_787F:
@@ -9795,6 +9865,8 @@ jr_006_78AD:
     ldh  a, [rNR10]                               ; $78C2: $F0 $10
     db   $10                                      ; $78C4: $10
     ldh  a, [hActiveEntityState]                  ; $78C5: $F0 $F0
+
+TektiteEntityHandler::
     ld   de, $78B7                                ; $78C7: $11 $B7 $78
     call RenderAnimatedActiveEntity                               ; $78CA: $CD $C0 $3B
 
@@ -9953,6 +10025,8 @@ jr_006_7982:
     nop                                           ; $79A6: $00
     ld   l, [hl]                                  ; $79A7: $6E
     nop                                           ; $79A8: $00
+
+BooBuddyEntityHandler::
     ld   de, $7989                                ; $79A9: $11 $89 $79
     call RenderAnimatedActiveEntity                               ; $79AC: $CD $C0 $3B
     call func_006_64C6                            ; $79AF: $CD $C6 $64
@@ -10204,7 +10278,10 @@ jr_006_7AF4:
     nop                                           ; $7B04: $00
     ld   bc, $0202                                ; $7B05: $01 $02 $02
     ld   [bc], a                                  ; $7B08: $02
-    ld   bc, $FA00                                ; $7B09: $01 $00 $FA
+    db   $01, $00                                 ; $7B09: $01 $00
+
+FloatingItemEntityHandler::
+    db   $FA
     and  l                                        ; $7B0C: $A5
     db   $DB                                      ; $7B0D: $DB
     and  a                                        ; $7B0E: $A7
@@ -10218,6 +10295,7 @@ jr_006_7AF4:
     jp   Func_036_4F9B_trampoline                                ; $7B19: $C3 $53 $0A
 
 jr_006_7B1C:
+FloatingItem2EntityHandler::
     ld   a, [wIsIndoor]                           ; $7B1C: $FA $A5 $DB
     and  a                                        ; $7B1F: $A7
     jr   z, jr_006_7B32                           ; $7B20: $28 $10
@@ -10383,6 +10461,8 @@ jr_006_7BF0:
     ld   [bc], a                                  ; $7BFB: $02
     ld   d, [hl]                                  ; $7BFC: $56
     ld   [hl+], a                                 ; $7BFD: $22
+
+MiniGelEntityHandler::
     call func_006_7BE2                            ; $7BFE: $CD $E2 $7B
     ld   de, $7BFA                                ; $7C01: $11 $FA $7B
     call RenderSimpleEntityWithSpriteVariantToOAM ; $7C04: $CD $77 $3C
@@ -10403,8 +10483,10 @@ jr_006_7BF0:
 
     nop                                           ; $7C16: $00
     ld   d, h                                     ; $7C17: $54
-    jr   nz, jr_006_7BE7                          ; $7C18: $20 $CD
+    db   $20                                      ; $7C18: $20
 
+GelEntityHandler::
+    db   $CD                                      ; $7C19
     ld   [c], a                                   ; $7C1A: $E2
     ld   a, e                                     ; $7C1B: $7B
     ld   de, $7C09                                ; $7C1C: $11 $09 $7C
@@ -10698,12 +10780,12 @@ func_006_7DCD:
 jr_006_7DD3:
     ret                                           ; $7DD3: $C9
 
-    ld   a, h                                     ; $7DD4: $7C
-    ld   bc, $217C                                ; $7DD5: $01 $7C $21
-    ld   a, [hl]                                  ; $7DD8: $7E
-    ld   bc, $217E                                ; $7DD9: $01 $7E $21
-    ld   de, $7DD4                                ; $7DDC: $11 $D4 $7D
-    call RenderAnimatedActiveEntity                               ; $7DDF: $CD $C0 $3B
+Data_003_7DD4::
+    db $7C, $01, $7C, $21, $7E, $01, $7E, $21
+
+LikeLikeEntityHandler::
+    ld   de, Data_003_7DD4                        ; $7DDC: $11 $D4 $7D
+    call RenderAnimatedActiveEntity               ; $7DDF: $CD $C0 $3B
     call func_006_64C6                            ; $7DE2: $CD $C6 $64
     call func_006_64F7                            ; $7DE5: $CD $F7 $64
     ld   hl, wEntitiesUnknownTableD               ; $7DE8: $21 $D0 $C2
@@ -10820,6 +10902,8 @@ jr_006_7E55:
     nop                                           ; $7E7F: $00
     ld   [$00F8], sp                              ; $7E80: $08 $F8 $00
     ld   hl, sp+$08                               ; $7E83: $F8 $08
+
+GibdoEntityHandler::
     ld   de, $7E6F                                ; $7E85: $11 $6F $7E
     ldh  a, [hMapId]                              ; $7E88: $F0 $F7
     cp   $07                                      ; $7E8A: $FE $07

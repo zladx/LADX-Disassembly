@@ -43,7 +43,7 @@ ENTITY_KEESE                         equ $19
 ENTITY_STALFOS_AGGRESSIVE            equ $1A
 ENTITY_GEL                           equ $1B
 ENTITY_MINI_GEL                      equ $1C
-;ENTITY_UNKNOWN                      equ $1D
+;ENTITY_DISABLED                     equ $1D
 ENTITY_STALFOS_EVASIVE               equ $1E
 ENTITY_GIBDO                         equ $1F
 ENTITY_HARDHAT_BEETLE                equ $20

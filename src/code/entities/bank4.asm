@@ -2,20 +2,20 @@
 ; This file was created with mgbdis v1.0.1 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-; This is the code called when the Level 2 Boss is loaded
+GenieEntityHandler::
     call label_394D                               ; $4000: $CD $4D $39
     call label_3EE8                               ; $4003: $CD $E8 $3E
     ld   hl, wEntitiesUnknownTableB               ; $4006: $21 $B0 $C2
     add  hl, bc                                   ; $4009: $09
     ld   a, [hl]                                  ; $400A: $7E
     JP_TABLE                                      ; $400B: $C7
-._00 dw EntityTableBHandler0
-._01 dw EntityTableBHandler1
-._02 dw $483F
-._03 dw EntityTableBHandler3
-._04 dw EntityTableBHandler4
+._00 dw GenieState0Handler
+._01 dw GenieState1Handler
+._02 dw GenieState2Handler
+._03 dw GenieState3Handler
+._04 dw GenieState4Handler
 
-EntityTableBHandler0::
+GenieState0Handler::
     ld   hl, $C440                                ; $4016: $21 $40 $C4
     add  hl, bc                                   ; $4019: $09
     ld   a, [hl]                                  ; $401A: $7E
@@ -438,7 +438,7 @@ func_004_42B3:
     jp   label_3D8A                               ; $42E4: $C3 $8A $3D
 
 ; Called by TableJump above for Level 2 Boss
-EntityTableBHandler1::
+GenieState1Handler::
     call func_004_46F9                            ; $42E7: $CD $F9 $46
     ldh  a, [hActiveEntityStatus]                   ; $42EA: $F0 $EA
     cp   $05                                      ; $42EC: $FE $05
@@ -1096,7 +1096,10 @@ Data_004_474D::
     db   $06, $05, $04, $05, $04, $03, $02, $01, $00, $00, $01, $02, $03, $04, $05, $04
     db   $05
 
-    ld   b, $CD                                   ; $483E: $06 $CD
+    db   $06                                      ; $483E: $06
+
+GenieState2Handler::
+    db   $CD                                      ; $483F
     cp   b                                        ; $4840: $B8
     ld   c, b                                     ; $4841: $48
     call func_004_7FA3                            ; $4842: $CD $A3 $7F
@@ -1201,7 +1204,7 @@ jr_004_48A6:
     inc  [hl]                                     ; $48D7: $34
     ld   [hl-], a                                 ; $48D8: $32
 
-EntityTableBHandler3::
+GenieState3Handler::
     ld   de, $48D1                                ; $48D9: $11 $D1 $48
     call RenderAnimatedActiveEntity                               ; $48DC: $CD $C0 $3B
     call func_004_7FA3                            ; $48DF: $CD $A3 $7F
@@ -1264,7 +1267,7 @@ jr_004_4938:
     call GetEntityTransitionCountdown                 ; $4938: $CD $05 $0C
     jp   z, label_004_6D7A                        ; $493B: $CA $7A $6D
 
-EntityTableBHandler4::
+GenieState4Handler::
     ld   de, $48D1                                ; $493E: $11 $D1 $48
     call RenderAnimatedActiveEntity                               ; $4941: $CD $C0 $3B
     call func_004_7FA3                            ; $4944: $CD $A3 $7F
@@ -1348,6 +1351,7 @@ func_014_49BD::
     ld   [hl], $A0                                ; $49C6: $36 $A0
     ret                                           ; $49C8: $C9
 
+SlimeEyeEntityHandler::
     call label_394D                               ; $49C9: $CD $4D $39
     call label_3EE8                               ; $49CC: $CD $E8 $3E
     call func_004_4E52                            ; $49CF: $CD $52 $4E
@@ -2118,6 +2122,7 @@ func_004_5067:
     ld   a, $FF                                   ; $506B: $3E $FF
     jp   SetEntitySpriteVariant                   ; $506D: $C3 $0C $3B
 
+FacadeEntityHandler::
     ld   hl, wEntitiesUnknownTableB               ; $5070: $21 $B0 $C2
     add  hl, bc                                   ; $5073: $09
     ld   a, [hl]                                  ; $5074: $7E
@@ -3218,6 +3223,7 @@ func_004_56A7:
     call func_004_7FA3                            ; $56A7: $CD $A3 $7F
     jp   label_3B39                               ; $56AA: $C3 $39 $3B
 
+MoldormEntityHandler::
     call label_394D                               ; $56AD: $CD $4D $39
     call func_004_56A7                            ; $56B0: $CD $A7 $56
     call $5902                                    ; $56B3: $CD $02 $59
@@ -3415,11 +3421,11 @@ jr_004_57C6:
     ld   d, b                                     ; $57D0: $50
     ld   hl, $D000                                ; $57D1: $21 $00 $D0
     add  hl, de                                   ; $57D4: $19
-    ldh  a, [wActiveEntityPosX]                               ; $57D5: $F0 $EE
+    ldh  a, [wActiveEntityPosX]                   ; $57D5: $F0 $EE
     ld   [hl], a                                  ; $57D7: $77
     ld   hl, $D100                                ; $57D8: $21 $00 $D1
     add  hl, de                                   ; $57DB: $19
-    ldh  a, [wActiveEntityPosY]                               ; $57DC: $F0 $EC
+    ldh  a, [wActiveEntityPosY]                   ; $57DC: $F0 $EC
     ld   [hl], a                                  ; $57DE: $77
     call func_004_5AE6                            ; $57DF: $CD $E6 $5A
     ld   hl, wEntitiesUnknownTableB               ; $57E2: $21 $B0 $C2
@@ -3665,8 +3671,10 @@ Data_004_5A49::
     db   $76, $00, $78, $00, $78, $20, $76, $20, $76, $40, $78, $40, $78, $60, $76, $60
     db   $7A, $00, $7A, $20, $7C, $00, $7C, $20, $03, $03, $05, $05, $00, $00, $04, $04
     db   $02, $02, $06, $06, $01, $01, $07, $07, $00, $06, $0C, $0E, $10, $0E, $0C, $06
-    db   $00, $FA, $F4, $F2, $F0, $F2, $F4, $FA, $00, $06, $0C, $0E, $CD, $7F, $5B
+    db   $00, $FA, $F4, $F2, $F0, $F2, $F4, $FA, $00, $06, $0C, $0E
 
+MiniMoldromEntityHandler::
+    db   $CD, $7F, $5B                            ; $5A95
     ld   a, [wRoomTransitionState]                ; $5A98: $FA $24 $C1
     and  a                                        ; $5A9B: $A7
     jr   nz, jr_004_5AA6                          ; $5A9C: $20 $08
@@ -3908,11 +3916,16 @@ jr_004_5B7E:
     ld   [bc], a                                  ; $5C03: $02
     inc  c                                        ; $5C04: $0C
     db   $f4                                      ; $5C05: $F4
-    ld   [$CDF8], sp                              ; $5C06: $08 $F8 $CD
+    db   $08, $F8                                 ; $5C06: $08 $F8
+
+GiantGhiniEntityHandler::
+    db   $CD                                      ; $50C8
     and  [hl]                                     ; $5C09: $A6
     ld   e, l                                     ; $5C0A: $5D
     jr   jr_004_5C16                              ; $5C0B: $18 $09
 
+GhiniEntityHandler::
+HidingGhiniEntityHandler::
     call func_004_7F90                            ; $5C0D: $CD $90 $7F
     ld   de, $5BFC                                ; $5C10: $11 $FC $5B
     call RenderAnimatedActiveEntity                               ; $5C13: $CD $C0 $3B
@@ -4248,7 +4261,9 @@ jr_004_5D25:
     ld   bc, $0178                                ; $5DEA: $01 $78 $01
     ld   a, b                                     ; $5DED: $78
     ld   hl, $2176                                ; $5DEE: $21 $76 $21
-    ldh  a, [hActiveEntitySpriteVariant]                               ; $5DF1: $F0 $F1
+
+PairoddEntityHandler::
+    ldh  a, [hActiveEntitySpriteVariant]          ; $5DF1: $F0 $F1
     cp   $03                                      ; $5DF3: $FE $03
     jr   nz, jr_004_5E1C                          ; $5DF5: $20 $25
 
@@ -4428,8 +4443,11 @@ jr_004_5EE5:
 
     nop                                           ; $5EF9: $00
     ld   a, [hl]                                  ; $5EFA: $7E
-    jr   nz, @+$13                                ; $5EFB: $20 $11
+    db   $20                                      ; $5EFB: $20
 
+; TODO: figure out which entity this is
+Entity58Handler::
+    db   $11
     db   $f4                                      ; $5EFD: $F4
     ld   e, [hl]                                  ; $5EFE: $5E
     call RenderAnimatedActiveEntity                               ; $5EFF: $CD $C0 $3B
@@ -4460,7 +4478,10 @@ Data_004_5F28::
 
     ld   bc, $169A                                ; $5F57: $01 $9A $16
     sbc  h                                        ; $5F5A: $9C
-    ld   d, $21                                   ; $5F5B: $16 $21
+    db   $16                                      ; $5F5B: $16
+
+FishermanFishingGameEntityHandler::
+    db   $21                                      ; $5F5C
     ld   b, b                                     ; $5F5D: $40
     call nz, func_004_7E09                        ; $5F5E: $C4 $09 $7E
     and  a                                        ; $5F61: $A7
@@ -5916,6 +5937,9 @@ label_004_67FB:
     inc  b                                        ; $6821: $04
     ld   a, [hl]                                  ; $6822: $7E
     inc  h                                        ; $6823: $24
+
+TractorDeviceEntityHandler::
+ReversedTractorDeviceEntityHandler::
     ld   hl, $D45E                                ; $6824: $21 $5E $D4
     inc  [hl]                                     ; $6827: $34
     ld   de, $6814                                ; $6828: $11 $14 $68
@@ -6188,6 +6212,7 @@ label_004_69A5:
 
     ret                                           ; $69AD: $C9
 
+KnightEntityHandler::
     ldh  a, [hMapId]                              ; $69AE: $F0 $F7
     cp   $14                                      ; $69B0: $FE $14
     jr   c, jr_004_69C9                           ; $69B2: $38 $15
@@ -6654,8 +6679,11 @@ label_004_6C20:
     inc  c                                        ; $6C5B: $0C
     ld   c, $10                                   ; $6C5C: $0E $10
     ld   c, $0C                                   ; $6C5E: $0E $0C
-    ld   b, $F0                                   ; $6C60: $06 $F0
-    ldh  a, [hAnimatedTilesDataOffset]                               ; $6C62: $F0 $A7
+    db   $06                                      ; $6C60: $06
+
+LaserEntityHandler::
+    db   $F0                                      ; $6C61
+    ldh  a, [hAnimatedTilesDataOffset]            ; $6C62: $F0 $A7
     jp   nz, label_004_6D0F                       ; $6C64: $C2 $0F $6D
 
     ld   de, $6C2D                                ; $6C67: $11 $2D $6C
@@ -7045,6 +7073,7 @@ jr_004_6E7A:
     ld   e, a                                     ; $6E7A: $5F
     ret                                           ; $6E7B: $C9
 
+TrendyGameOwnerEntityHandler::
     ld   a, [wIsMarinFollowingLink]               ; $6E7C: $FA $73 $DB
     push af                                       ; $6E7F: $F5
     ldh  a, [hRoomStatus]                               ; $6E80: $F0 $F8
@@ -8484,6 +8513,7 @@ func_004_76B3:
     ld   [hl], a                                  ; $76C8: $77
     ret                                           ; $76C9: $C9
 
+Disabled4EEntityHandler::
     ret                                           ; $76CA: $C9
 
     ld   h, b                                     ; $76CB: $60
@@ -8518,6 +8548,8 @@ func_004_76B3:
     inc  hl                                       ; $76E8: $23
     ld   l, h                                     ; $76E9: $6C
     inc  hl                                       ; $76EA: $23
+
+ShopOwnerEntityHandler::
     ld   a, [$C50A]                               ; $76EB: $FA $0A $C5
     and  a                                        ; $76EE: $A7
     jr   nz, jr_004_76F9                          ; $76EF: $20 $08
@@ -9649,8 +9681,9 @@ Data_004_7CEF::
     db   $7A, $20, $78, $20, $78, $00, $7A, $00, $7E, $00, $7E, $20, $70, $00, $72, $00
     db   $74, $00, $76, $00, $7C, $00, $7C, $20, $6A, $20, $68, $20, $68, $00, $6A, $00
     db   $6E, $00, $6E, $20, $60, $00, $62, $00, $64, $00, $66, $00, $6C, $00, $6C, $20
-    db   $11, $EF, $7C
 
+TimerBombiteEntityHandler::
+    db   $11, $EF, $7C                            ; $7D1F
     ldh  a, [hMapId]                              ; $7D22: $F0 $F7
     cp   $07                                      ; $7D24: $FE $07
     jr   nz, jr_004_7D2B                          ; $7D26: $20 $03
@@ -9803,6 +9836,8 @@ label_004_7E09:
     nop                                           ; $7E09: $00
     nop                                           ; $7E0A: $00
     ld   hl, sp+$08                               ; $7E0B: $F8 $08
+
+BouncingBombiteEntityHandler::
     ld   de, Data_004_7DF5                        ; $7E0D: $11 $F5 $7D
     ldh  a, [hMapId]                              ; $7E10: $F0 $F7
     cp   $07                                      ; $7E12: $FE $07
@@ -9952,6 +9987,7 @@ func_004_7EC0:
 jr_004_7EE4:
     ret                                           ; $7EE4: $C9
 
+Data_004_7EE5::
     ld   d, [hl]                                  ; $7EE5: $56
     ld   [bc], a                                  ; $7EE6: $02
     ld   d, [hl]                                  ; $7EE7: $56
@@ -9968,8 +10004,10 @@ jr_004_7EE4:
     ld   [bc], a                                  ; $7EF2: $02
     ld   d, b                                     ; $7EF3: $50
     ld   [hl+], a                                 ; $7EF4: $22
-    ld   de, $7EE5                                ; $7EF5: $11 $E5 $7E
-    call RenderAnimatedActiveEntity                               ; $7EF8: $CD $C0 $3B
+
+LeeverEntityHandler::
+    ld   de, Data_004_7EE5                        ; $7EF5: $11 $E5 $7E
+    call RenderAnimatedActiveEntity               ; $7EF8: $CD $C0 $3B
     call func_004_7FA3                            ; $7EFB: $CD $A3 $7F
     call func_004_6D80                            ; $7EFE: $CD $80 $6D
     call func_004_6DCA                            ; $7F01: $CD $CA $6D
@@ -9977,17 +10015,14 @@ jr_004_7EE4:
     ldh  a, [hActiveEntityState]                               ; $7F07: $F0 $F0
     and  $03                                      ; $7F09: $E6 $03
     JP_TABLE                                      ; $7F0B: $C7
-    inc  d                                        ; $7F0C: $14
-    ld   a, a                                     ; $7F0D: $7F
-    daa                                           ; $7F0E: $27
-    ld   a, a                                     ; $7F0F: $7F
-    ld   c, c                                     ; $7F10: $49
-    ld   a, a                                     ; $7F11: $7F
-    ld   [hl], l                                  ; $7F12: $75
-    ld   a, a                                     ; $7F13: $7F
+._00 dw $7F14
+._01 dw $7F27
+._02 dw $7F49
+._03 dw $7F75
+
     ld   a, $FF                                   ; $7F14: $3E $FF
     call SetEntitySpriteVariant                   ; $7F16: $CD $0C $3B
-    call GetEntityTransitionCountdown                 ; $7F19: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $7F19: $CD $05 $0C
     ret  nz                                       ; $7F1C: $C0
 
     ld   [hl], $1F                                ; $7F1D: $36 $1F

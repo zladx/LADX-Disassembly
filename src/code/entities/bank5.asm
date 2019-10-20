@@ -59,6 +59,8 @@ Data_005_4000::
     inc  bc                                       ; $4035: $03
     ld   c, h                                     ; $4036: $4C
     inc  hl                                       ; $4037: $23
+
+BowWowEntityHandler::
     ld   a, c                                     ; $4038: $79
     ld   [$D154], a                               ; $4039: $EA $54 $D1
     ld   a, [wIsBowWowFollowingLink]              ; $403C: $FA $56 $DB
@@ -989,7 +991,9 @@ jr_005_4509:
     ld   hl, $2150                                ; $451D: $21 $50 $21
     ld   d, [hl]                                  ; $4520: $56
     ld   hl, $2154                                ; $4521: $21 $54 $21
-    ld   hl, wEntitiesHealthTable                                ; $4524: $21 $60 $C3
+
+CucooEntityHandler::
+    ld   hl, wEntitiesHealthTable                 ; $4524: $21 $60 $C3
     add  hl, bc                                   ; $4527: $09
     ld   [hl], $4C                                ; $4528: $36 $4C
     ld   hl, $C380                                ; $452A: $21 $80 $C3
@@ -1452,6 +1456,7 @@ func_005_47C0:
     ld   c, $04                                   ; $47CE: $0E $04
     jp   label_3CE6                               ; $47D0: $C3 $E6 $3C
 
+WitchEntityHandler::
     push bc                                       ; $47D3: $C5
     sla  c                                        ; $47D4: $CB $21
     sla  c                                        ; $47D6: $CB $21
@@ -1738,6 +1743,8 @@ jr_005_48AE:
     ld   [bc], a                                  ; $4965: $02
     nop                                           ; $4966: $00
     ld   [$0228], sp                              ; $4967: $08 $28 $02
+
+RacoonEntityHandler::
     ld   a, [wGameplayType]                       ; $496A: $FA $95 $DB
     cp   $01                                      ; $496D: $FE $01
     jr   nz, jr_005_4995                          ; $496F: $20 $24
@@ -2599,7 +2606,10 @@ jr_005_4DF3:
     ld   a, [bc]                                  ; $4E5C: $0A
     add  hl, bc                                   ; $4E5D: $09
     ld   [$06F8], sp                              ; $4E5E: $08 $F8 $06
-    ld   bc, $95FA                                ; $4E61: $01 $FA $95
+    db   $01                                      ; $4E61: $01
+
+MarinEntityHandler::
+    db   $FA, $95
     db   $DB                                      ; $4E64: $DB
     cp   $01                                      ; $4E65: $FE $01
     jp   z, label_005_4EE0                        ; $4E67: $CA $E0 $4E
@@ -3466,7 +3476,10 @@ jr_005_5359:
 
     jr   nz, @+$6E                                ; $535B: $20 $6C
 
-    jr   nz, jr_005_5359                          ; $535D: $20 $FA
+    db   $20                                      ; $535D: $20
+
+EntityRaftOwnerHandler::
+    db   $FA                                      ; $535E
 
     and  l                                        ; $535F: $A5
     db   $DB                                      ; $5360: $DB
@@ -3827,13 +3840,16 @@ jr_005_5569:
     and  a                                        ; $5569: $A7
     ret                                           ; $556A: $C9
 
+; TODO: find out which entity this is (probably a disabled one)
 func_005_556B::
+Entity67Handler::
     call label_BFB                                ; $556B: $CD $FB $0B
     ld   [hl], $C0                                ; $556E: $36 $C0
     ld   a, $18                                   ; $5570: $3E $18
     ld   [$D202], a                               ; $5572: $EA $02 $D2
     ret                                           ; $5575: $C9
 
+AnglerFishEntityHandler::
     ld   hl, wEntitiesUnknownTableD               ; $5576: $21 $D0 $C2
     add  hl, bc                                   ; $5579: $09
     ld   a, [hl]                                  ; $557A: $7E
@@ -4719,7 +4735,10 @@ jr_005_5A6F:
     ret                                           ; $5A7D: $C9
 
     db   $10                                      ; $5A7E: $10
-    ldh  a, [rNR42]                               ; $5A7F: $F0 $21
+    db   $F0                                      ; $5A7F: $F0
+
+EvilEagleEntityHandler::
+    db   $21
     or   b                                        ; $5A81: $B0
     jp   nz, $7E09                                ; $5A82: $C2 $09 $7E
 
@@ -6307,6 +6326,7 @@ func_005_6302::
     ld   [hl], $FF                                ; $6311: $36 $FF
     ret                                           ; $6313: $C9
 
+HotHeadEntityHandler::
     call label_394D                               ; $6314: $CD $4D $39
     call label_3EE8                               ; $6317: $CD $E8 $3E
     ld   hl, wEntitiesUnknownTableB               ; $631A: $21 $B0 $C2
@@ -7258,6 +7278,8 @@ jr_005_6840:
     ld   bc, $0100                                ; $6868: $01 $00 $01
     ld   hl, $2322                                ; $686B: $21 $22 $23
     ld   [hl+], a                                 ; $686E: $22
+
+DodongoSnakeEntityHandler::
     ldh  a, [hMapId]                              ; $686F: $F0 $F7
     cp   $07                                      ; $6871: $FE $07
     jr   nz, jr_005_6879                          ; $6873: $20 $04
@@ -8102,6 +8124,7 @@ func_005_6CC6::
     ld   [hl], $01                                ; $6CD9: $36 $01
     ret                                           ; $6CDB: $C9
 
+SlimeEelEntityHandler::
     call label_394D                               ; $6CDC: $CD $4D $39
     call label_3EE8                               ; $6CDF: $CD $E8 $3E
     call label_C56                                ; $6CE2: $CD $56 $0C
@@ -10741,8 +10764,10 @@ jr_005_7BE0:
 jr_005_7BE2:
     jr   @+$66                                    ; $7BE2: $18 $64
 
-    jr   nz, jr_005_7BE0                          ; $7BE4: $20 $FA
+    db   $20                                      ; $7BE4: $20
 
+GhomaEntityHandler::
+    db   $FA
     ld   h, [hl]                                  ; $7BE6: $66
     pop  bc                                       ; $7BE7: $C1
     cp   $01                                      ; $7BE8: $FE $01
@@ -11278,8 +11303,11 @@ jr_005_7EF2:
     set  5, [hl]                                  ; $7EF3: $CB $EE
     ret                                           ; $7EF5: $C9
 
-    ld   c, $03                                   ; $7EF6: $0E $03
-    ld   de, $7EF6                                ; $7EF8: $11 $F6 $7E
+MusicalNoteSpriteVariants::
+    db   $0E, $03
+
+MusicalNoteEntityHandler::
+    ld   de, MusicalNoteSpriteVariants            ; $7EF8: $11 $F6 $7E
     call RenderSimpleEntityWithSpriteVariantToOAM ; $7EFB: $CD $77 $3C
     ld   hl, $C3D0                                ; $7EFE: $21 $D0 $C3
     add  hl, bc                                   ; $7F01: $09
@@ -11315,6 +11343,8 @@ jr_005_7F1B:
     ld   bc, $0156                                ; $7F27: $01 $56 $01
     ld   d, [hl]                                  ; $7F2A: $56
     ld   hl, $2154                                ; $7F2B: $21 $54 $21
+
+AnimalD0EntityHandler::
     ld   a, [$DB74]                               ; $7F2E: $FA $74 $DB
     and  a                                        ; $7F31: $A7
     jp   z, label_005_7B4B                        ; $7F32: $CA $4B $7B

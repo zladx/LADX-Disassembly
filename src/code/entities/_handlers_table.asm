@@ -74,9 +74,9 @@ EntityPointersTable::
 ._3B entity_pointer DroppableMagicPowderEntityHandler
 ._3C entity_pointer HidingSlimeKeyEntityHandler ; $3C
 ._3D entity_pointer DroppableSeashellEntityHandler
-._3E db $62, $4E, $05 ; entity_pointer Entity3EHandler
-._3F db $6A, $49, $05 ; entity_pointer Entity3FHandler
-._40 db $D3, $47, $05 ; entity_pointer Entity40Handler ; $40
+._3E entity_pointer MarinEntityHandler
+._3F entity_pointer RacoonEntityHandler
+._40 entity_pointer WitchEntityHandler ; $40
 ._41 db $F5, $67, $06 ; entity_pointer HowlEntityHandler
 ._42 db $7A, $5E, $18 ; entity_pointer Entity42Handler
 ._43 db $93, $44, $15 ; entity_pointer Entity43Handler
@@ -105,23 +105,23 @@ EntityPointersTable::
 ._5A entity_pointer FacadeEntityHandler
 ._5B entity_pointer SlimeEyeEntityHandler
 ._5C entity_pointer GenieEntityHandler ; $5C
-._5D db $DC, $6C, $05 ; entity_pointer Entity5DHandler
-._5E db $E5, $7B, $05 ; entity_pointer Entity5EHandler
+._5D entity_pointer SlimeEelEntityHandler
+._5E entity_pointer GhomaEntityHandler
 ._5F db $41, $6A, $07 ; entity_pointer Entity5FHandler
-._60 db $6F, $68, $05 ; entity_pointer Entity60Handler ; $60
+._60 entity_pointer DodongoSnakeEntityHandler ; $60
 ._61 db $11, $42, $19 ; entity_pointer Entity61Handler
-._62 db $14, $63, $05 ; entity_pointer Entity62Handler
-._63 db $80, $5A, $05 ; entity_pointer Entity63Handler
+._62 entity_pointer HotHeadEntityHandler
+._63 entity_pointer EvilEagleEntityHandler
 ._64 db $E9, $5D, $18 ; entity_pointer Entity64Handler ; $64
-._65 db $76, $55, $05 ; entity_pointer Entity65Handler
+._65 entity_pointer AnglerFishEntityHandler
 ._66 db $24, $43, $15 ; entity_pointer Entity66Handler
-._67 db $6B, $55, $05 ; entity_pointer Entity67Handler
+._67 entity_pointer Entity67Handler
 ._68 db $38, $74, $15 ; entity_pointer Entity68Handler ; $68
 ._69 db $CE, $53, $18 ; entity_pointer Entity69Handler
-._6A db $5E, $53, $05 ; entity_pointer Entity6AHandler
+._6A entity_pointer EntityRaftOwnerHandler
 ._6B db $85, $5D, $18 ; entity_pointer Entity6BHandler
-._6C db $24, $45, $05 ; entity_pointer Entity6CHandler ; $6C
-._6D db $38, $40, $05 ; entity_pointer Entity6DHandler
+._6C entity_pointer CucooEntityHandler ; $6C
+._6D entity_pointer BowWowEntityHandler
 ._6E entity_pointer ButterflyEntityHandler
 ._6F db $DA, $48, $19 ; entity_pointer Entity6FHandler
 ._70 db $0E, $62, $06 ; entity_pointer Entity70Handler ; $70
@@ -213,14 +213,14 @@ EntityPointersTable::
 ._C6 db $30, $73, $15 ; entity_pointer EntityC6Handler
 ._C7 db $00, $45, $18 ; entity_pointer EntityC7Handler
 ._C8 db $A6, $52, $18 ; entity_pointer EntityC8Handler ; $C8
-._C9 db $F8, $7E, $05 ; entity_pointer EntityC9Handler
+._C9 entity_pointer MusicalNoteEntityHandler
 ._CA db $DD, $4E, $18 ; entity_pointer EntityCAHandler
 ._CB db $D4, $49, $18 ; entity_pointer EntityCBHandler
 ._CC db $BB, $44, $15 ; entity_pointer EntityCCHandler ; $CC
 ._CD db $11, $6F, $19 ; entity_pointer EntityCDHandler
 ._CE db $38, $49, $18 ; entity_pointer EntityCEHandler
 ._CF db $BC, $71, $19 ; entity_pointer EntityCFHandler
-._D0 db $2E, $7F, $05 ; entity_pointer EntityD0Handler ; $D0
+._D0 entity_pointer AnimalD0EntityHandler ; $D0
 ._D1 db $96, $7F, $15 ; entity_pointer EntityD1Handler
 ._D2 db $6B, $52, $18 ; entity_pointer EntityD2Handler
 ._D3 db $D8, $51, $18 ; entity_pointer EntityD3Handler

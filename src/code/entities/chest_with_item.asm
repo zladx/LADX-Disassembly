@@ -124,7 +124,7 @@ jr_007_7C5E:
     cp   $10                                      ; $7C6D: $FE $10
     jr   nz, jr_007_7C76                          ; $7C6F: $20 $05
 
-    call func_007_4005                            ; $7C71: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $7C71: $CD $05 $40
     ld   [hl], $00                                ; $7C74: $36 $00
 
 jr_007_7C76:

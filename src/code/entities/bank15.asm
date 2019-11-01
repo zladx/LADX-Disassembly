@@ -2924,7 +2924,7 @@ jr_015_5093:
     and  a                                        ; $509D: $A7
     jp   nz, label_015_54D6                       ; $509E: $C2 $D6 $54
 
-    ld   a, [$D219]                               ; $50A1: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                               ; $50A1: $FA $19 $D2
     JP_TABLE                                      ; $50A4: $C7
 ._00 dw FinalNightmareForm1Handler
 ._01 dw FinalNightmareForm2Handler
@@ -3107,7 +3107,7 @@ jr_015_5185:
     call GetEntityTransitionCountdown             ; $51B8: $CD $05 $0C
     jr   nz, jr_015_51D0                          ; $51BB: $20 $13
 
-    ld   hl, $D219                                ; $51BD: $21 $19 $D2
+    ld   hl, wFinalNightmareForm                                ; $51BD: $21 $19 $D2
     inc  [hl]                                     ; $51C0: $34
     xor  a                                        ; $51C1: $AF
     call SetEntitySpriteVariant                   ; $51C2: $CD $0C $3B
@@ -3275,9 +3275,9 @@ label_015_52B1:
     jr   nz, jr_015_52FF                          ; $52B9: $20 $44
 
 func_015_52BB:
-    ld   a, [$D219]                               ; $52BB: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                               ; $52BB: $FA $19 $D2
     inc  a                                        ; $52BE: $3C
-    ld   [$D219], a                               ; $52BF: $EA $19 $D2
+    ld   [wFinalNightmareForm], a                               ; $52BF: $EA $19 $D2
     call func_015_5064                            ; $52C2: $CD $64 $50
     xor  a                                        ; $52C5: $AF
     ld   [$D221], a                               ; $52C6: $EA $21 $D2

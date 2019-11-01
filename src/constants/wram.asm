@@ -571,11 +571,18 @@ wIntroSubTimer:: ; D002
 ; Unlabeled
 ds $D00E - $D003
 
-wCreditsSubscene:: ; $D00E
+wCreditsSubscene:: ; D00E
   ds 1
 
 ; Unlabeled
-ds $D300 - $D00F
+ds $D219 - $D00F
+
+wFinalNightmareForm:: ; D219
+  ; Current form of the Final Nightmare (0-5)
+  ds 1
+
+; Unlabeled
+ds $D300 - $D21A
 
 ; D300 (unlabeled, audio related)
 ds $60

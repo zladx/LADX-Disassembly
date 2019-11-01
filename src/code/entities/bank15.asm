@@ -98,9 +98,10 @@ func_015_4000::
     ld   [hl], b                                  ; $409D: $70
     ret                                           ; $409E: $C9
 
+KanaletCastleGateSwitchEntityHandler::
     ldh  a, [hRoomStatus]                         ; $409F: $F0 $F8
     and  $20                                      ; $40A1: $E6 $20
-    jp   nz, label_015_7C31                       ; $40A3: $C2 $31 $7C
+    jp   nz, ClearEntityStatusAndReturn           ; $40A3: $C2 $31 $7C
 
     call func_015_7B0D                            ; $40A6: $CD $0D $7B
     ldh  a, [hActiveEntityState]                  ; $40A9: $F0 $F0
@@ -143,7 +144,7 @@ jr_015_40C0:
     ld   a, $39                                   ; $40E4: $3E $39
     call OpenDialog                               ; $40E6: $CD $85 $23
     call func_015_7CDB                            ; $40E9: $CD $DB $7C
-    jp   label_015_7C31                           ; $40EC: $C3 $31 $7C
+    jp   ClearEntityStatusAndReturn               ; $40EC: $C3 $31 $7C
 
 jr_015_40EF:
     ld   e, $01                                   ; $40EF: $1E $01
@@ -158,7 +159,10 @@ jr_015_40F7:
     ret                                           ; $40FB: $C9
 
     ld   hl, sp+$17                               ; $40FC: $F8 $17
-    ld   a, [$1117]                               ; $40FE: $FA $17 $11
+    db   $FA, $17                                 ; $40FE: $FA $17
+
+MovingBlockLeftTopEntityHandler::
+    db   $11                                      ; $4100
     db   $FC                                      ; $4101: $FC
     ld   b, b                                     ; $4102: $40
     call RenderAnimatedActiveEntity                               ; $4103: $CD $C0 $3B
@@ -308,6 +312,7 @@ jr_015_41C3:
 jr_015_41C9:
     ret                                           ; $41C9: $C9
 
+MovingBlockLeftBottomEntityHandler::
     ld   de, $40FC                                ; $41CA: $11 $FC $40
     call RenderAnimatedActiveEntity                               ; $41CD: $CD $C0 $3B
     call func_015_7B0D                            ; $41D0: $CD $0D $7B
@@ -390,6 +395,7 @@ jr_015_4235:
 jr_015_4239:
     jp   label_015_416F                           ; $4239: $C3 $6F $41
 
+MovingBlockBottomLeftEntityHandler::
     ld   de, $40FC                                ; $423C: $11 $FC $40
     call RenderAnimatedActiveEntity                               ; $423F: $CD $C0 $3B
     call func_015_7B0D                            ; $4242: $CD $0D $7B
@@ -472,6 +478,7 @@ jr_015_42A7:
 jr_015_42AB:
     jp   label_015_416F                           ; $42AB: $C3 $6F $41
 
+MovingBlockBottomRightEntityHandler
     ld   de, $40FC                                ; $42AE: $11 $FC $40
     call RenderAnimatedActiveEntity                               ; $42B1: $CD $C0 $3B
     call func_015_7B0D                            ; $42B4: $CD $0D $7B
@@ -558,6 +565,8 @@ jr_015_431D:
     inc  bc                                       ; $4321: $03
     ld   e, b                                     ; $4322: $58
     inc  hl                                       ; $4323: $23
+
+CrystalSwitchEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4324: $21 $60 $C3
     add  hl, bc                                   ; $4327: $09
     ld   [hl], $FF                                ; $4328: $36 $FF
@@ -593,6 +602,7 @@ jr_015_431D:
 jr_015_4364:
     ret                                           ; $4364: $C9
 
+BouldersEntityHandler::
     ldh  a, [hActiveEntityState]                  ; $4365: $F0 $F0
     and  a                                        ; $4367: $A7
     jp   nz, $43CA                                ; $4368: $C2 $CA $43
@@ -733,14 +743,15 @@ jr_015_4415:
 jr_015_4430:
     ldh  a, [wActiveEntityPosX]                   ; $4430: $F0 $EE
     cp   $A8                                      ; $4432: $FE $A8
-    jp   nc, label_015_7C31                       ; $4434: $D2 $31 $7C
+    jp   nc, ClearEntityStatusAndReturn                       ; $4434: $D2 $31 $7C
 
     ldh  a, [wActiveEntityPosY]                   ; $4437: $F0 $EC
     cp   $84                                      ; $4439: $FE $84
-    jp   nc, label_015_7C31                       ; $443B: $D2 $31 $7C
+    jp   nc, ClearEntityStatusAndReturn                       ; $443B: $D2 $31 $7C
 
     ret                                           ; $443E: $C9
 
+YarnaTalkingBonesEntityHandler::
     call func_015_7B0D                            ; $443F: $CD $0D $7B
     ld   e, $0F                                   ; $4442: $1E $0F
     ld   d, b                                     ; $4444: $50
@@ -802,8 +813,9 @@ jr_015_448C:
 
     ret                                           ; $4492: $C9
 
+SeashellMansionTreesEntityHandler::
     call func_015_7B0D                            ; $4493: $CD $0D $7B
-    call func_015_7ABC                            ; $4496: $CD $BC $7A
+    call ShouldLinkTalkToEntity                   ; $4496: $CD $BC $7A
     ret  nc                                       ; $4499: $D0
 
     ld   a, $12                                   ; $449A: $3E $12
@@ -837,7 +849,9 @@ jr_015_448C:
     nop                                           ; $44B8: $00
     ld   e, [hl]                                  ; $44B9: $5E
     nop                                           ; $44BA: $00
-    ldh  a, [hActiveEntitySpriteVariant]               ; $44BB: $F0 $F1
+
+FishEntityHandler::
+    ldh  a, [hActiveEntitySpriteVariant]          ; $44BB: $F0 $F1
     cp   $FF                                      ; $44BD: $FE $FF
     jr   z, jr_015_44D7                           ; $44BF: $28 $16
 
@@ -1166,9 +1180,10 @@ jr_015_469C:
     ld   [wC16A], a                               ; $46B2: $EA $6A $C1
     ret                                           ; $46B5: $C9
 
+MoblinKingEntityHandler::
     ld   a, [wIsBowWowFollowingLink]              ; $46B6: $FA $56 $DB
     cp   $80                                      ; $46B9: $FE $80
-    jp   nz, label_015_7C31                       ; $46BB: $C2 $31 $7C
+    jp   nz, ClearEntityStatusAndReturn           ; $46BB: $C2 $31 $7C
 
     ld   hl, $C380                                ; $46BE: $21 $80 $C3
     add  hl, bc                                   ; $46C1: $09
@@ -2117,7 +2132,10 @@ jr_015_4BD0:
     ld   b, $04                                   ; $4BDB: $06 $04
     nop                                           ; $4BDD: $00
     db   $FC                                      ; $4BDE: $FC
-    ld   a, [$21FC]                               ; $4BDF: $FA $FC $21
+    db   $FA, $FC                                 ; $4BDF: $FA $FC
+
+PokeyEntityHandler::
+    db   $21
     or   b                                        ; $4BE2: $B0
     jp   nz, label_015_7E09                       ; $4BE3: $C2 $09 $7E
 
@@ -2334,7 +2352,7 @@ func_015_4D0F:
     call label_CC7                                ; $4D2D: $CD $C7 $0C
     ld   a, $2F                                   ; $4D30: $3E $2F
     ldh  [hJingle], a                             ; $4D32: $E0 $F2
-    call func_015_7C31                            ; $4D34: $CD $31 $7C
+    call ClearEntityStatus                        ; $4D34: $CD $31 $7C
     scf                                           ; $4D37: $37
     ret                                           ; $4D38: $C9
 
@@ -2350,6 +2368,8 @@ jr_015_4D39:
     inc  bc                                       ; $4D40: $03
     ld   [hl], d                                  ; $4D41: $72
     inc  hl                                       ; $4D42: $23
+
+FlameShooterEntityHandler::
     ld   hl, wEntitiesUnknownTableB               ; $4D43: $21 $B0 $C2
     add  hl, bc                                   ; $4D46: $09
     ld   a, [hl]                                  ; $4D47: $7E
@@ -2518,11 +2538,11 @@ jr_015_4DFB:
     jr   c, jr_015_4DFB                           ; $4E44: $38 $B5
 
 jr_015_4E46:
-    jp   label_015_7C31                           ; $4E46: $C3 $31 $7C
+    jp   ClearEntityStatusAndReturn               ; $4E46: $C3 $31 $7C
 
 jr_015_4E49:
     call GetEntityTransitionCountdown             ; $4E49: $CD $05 $0C
-    jp   z, label_015_7C31                        ; $4E4C: $CA $31 $7C
+    jp   z, ClearEntityStatusAndReturn            ; $4E4C: $CA $31 $7C
 
     ld   hl, wEntitiesSpriteVariantTable               ; $4E4F: $21 $B0 $C3
     add  hl, bc                                   ; $4E52: $09
@@ -2553,7 +2573,7 @@ label_015_4E62:
     call func_015_7B0D                            ; $4E70: $CD $0D $7B
     call func_015_7B88                            ; $4E73: $CD $88 $7B
     call GetEntityTransitionCountdown             ; $4E76: $CD $05 $0C
-    jp   z, label_015_7C31                        ; $4E79: $CA $31 $7C
+    jp   z, ClearEntityStatusAndReturn            ; $4E79: $CA $31 $7C
 
     ret                                           ; $4E7C: $C9
 
@@ -2570,7 +2590,10 @@ label_015_4E62:
     ld   c, b                                     ; $4E92: $48
     ld   b, c                                     ; $4E93: $41
     ld   c, b                                     ; $4E94: $48
-    ld   hl, $B021                                ; $4E95: $21 $21 $B0
+    db   $21                                      ; $4E95: $21
+
+StalfosEvasiveEntityHandler::
+    db   $21, $B0                                 ; $4E96
     jp   nz, label_015_7E09                       ; $4E98: $C2 $09 $7E
 
     and  a                                        ; $4E9B: $A7
@@ -2609,16 +2632,16 @@ label_015_4ECB:
     ldh  [hJingle], a                             ; $4ED5: $E0 $F2
     ld   a, $05                                   ; $4ED7: $3E $05
     call label_CC7                                ; $4ED9: $CD $C7 $0C
-    jp   label_015_7C31                           ; $4EDC: $C3 $31 $7C
+    jp   ClearEntityStatusAndReturn               ; $4EDC: $C3 $31 $7C
 
 jr_015_4EDF:
     ldh  a, [wActiveEntityPosX]                   ; $4EDF: $F0 $EE
     cp   $A8                                      ; $4EE1: $FE $A8
-    jp   nc, label_015_7C31                       ; $4EE3: $D2 $31 $7C
+    jp   nc, ClearEntityStatusAndReturn                       ; $4EE3: $D2 $31 $7C
 
     ldh  a, [wActiveEntityPosY]                   ; $4EE6: $F0 $EC
     cp   $84                                      ; $4EE8: $FE $84
-    jp   nc, label_015_7C31                       ; $4EEA: $D2 $31 $7C
+    jp   nc, ClearEntityStatusAndReturn                       ; $4EEA: $D2 $31 $7C
 
     ret                                           ; $4EED: $C9
 
@@ -2862,7 +2885,7 @@ jr_015_5057:
     di                                            ; $5063: $F3
 
 func_015_5064:
-    ld   a, [$D219]                               ; $5064: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                               ; $5064: $FA $19 $D2
     rla                                           ; $5067: $17
     and  $FE                                      ; $5068: $E6 $FE
     ld   e, a                                     ; $506A: $5F
@@ -2878,6 +2901,7 @@ func_015_5064:
     ld   [wNeedsUpdatingNPCTiles], a              ; $507C: $EA $0E $C1
     ret                                           ; $507F: $C9
 
+FinalNightmareEntityHandler::
     ld   a, [wRoomTransitionState]                ; $5080: $FA $24 $C1
     and  a                                        ; $5083: $A7
     jr   nz, jr_015_5093                          ; $5084: $20 $0D
@@ -2901,20 +2925,15 @@ jr_015_5093:
     jp   nz, label_015_54D6                       ; $509E: $C2 $D6 $54
 
     ld   a, [$D219]                               ; $50A1: $FA $19 $D2
-    rst  $00                                      ; $50A4: $C7
-    or   c                                        ; $50A5: $B1
-    ld   d, b                                     ; $50A6: $50
-    rst  $18                                      ; $50A7: $DF
-    ld   d, c                                     ; $50A8: $51
-    ld   b, e                                     ; $50A9: $43
-    ld   d, a                                     ; $50AA: $57
-    rst  $10                                      ; $50AB: $D7
-    ld   e, a                                     ; $50AC: $5F
-    ret  z                                        ; $50AD: $C8
+    JP_TABLE                                      ; $50A4: $C7
+._00 dw FinalNightmareForm1Handler
+._01 dw FinalNightmareForm2Handler
+._02 dw FinalNightmareForm3Handler
+._03 dw FinalNightmareForm4Handler
+._04 dw FinalNightmareForm5Handler
+._05 dw FinalNightmareForm6Handler
 
-    ld   h, e                                     ; $50AE: $63
-    dec  hl                                       ; $50AF: $2B
-    ld   l, [hl]                                  ; $50B0: $6E
+FinalNightmareForm1Handler::
     ldh  a, [hActiveEntityState]                  ; $50B1: $F0 $F0
     rst  $00                                      ; $50B3: $C7
     jp   nz, $1D50                                ; $50B4: $C2 $50 $1D
@@ -3111,6 +3130,7 @@ jr_015_51D0:
     ld   a, [hl]                                  ; $51DB: $7E
     jp   SetEntitySpriteVariant                   ; $51DC: $C3 $0C $3B
 
+FinalNightmareForm2Handler::
     call $572B                                    ; $51DF: $CD $2B $57
     call func_015_7B0D                            ; $51E2: $CD $0D $7B
     call label_C56                                ; $51E5: $CD $56 $0C
@@ -3632,7 +3652,7 @@ label_015_54D6:
     call RenderAnimatedActiveEntity                               ; $54D9: $CD $C0 $3B
     call func_015_7B0D                            ; $54DC: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $54DF: $CD $05 $0C
-    jp   z, label_015_7C31                        ; $54E2: $CA $31 $7C
+    jp   z, ClearEntityStatusAndReturn            ; $54E2: $CA $31 $7C
 
     rra                                           ; $54E5: $1F
     rra                                           ; $54E6: $1F
@@ -4104,6 +4124,7 @@ jr_015_571C:
     ld   a, $04                                   ; $573E: $3E $04
     jp   label_3DA0                               ; $5740: $C3 $A0 $3D
 
+FinalNightmareForm3Handler::
     ld   hl, $C440                                ; $5743: $21 $40 $C4
     add  hl, bc                                   ; $5746: $09
     ld   a, [hl]                                  ; $5747: $7E
@@ -5370,7 +5391,7 @@ jr_015_5DDE:
     jr   nz, jr_015_5E24                          ; $5E06: $20 $1C
 
     call IsEntityUnknownFZero                     ; $5E08: $CD $00 $0C
-    jp   z, label_015_7C31                        ; $5E0B: $CA $31 $7C
+    jp   z, ClearEntityStatusAndReturn            ; $5E0B: $CA $31 $7C
 
     xor  c                                        ; $5E0E: $A9
     bit  0, a                                     ; $5E0F: $CB $47
@@ -5450,7 +5471,7 @@ jr_015_5E79:
     and  a                                        ; $5E7E: $A7
     jr   z, jr_015_5E84                           ; $5E7F: $28 $03
 
-    jp   label_015_7C31                           ; $5E81: $C3 $31 $7C
+    jp   ClearEntityStatusAndReturn               ; $5E81: $C3 $31 $7C
 
 jr_015_5E84:
     ret                                           ; $5E84: $C9
@@ -5518,7 +5539,7 @@ jr_015_5E84:
     ld   hl, $C410                                ; $5EEB: $21 $10 $C4
     add  hl, de                                   ; $5EEE: $19
     ld   [hl], $12                                ; $5EEF: $36 $12
-    call func_015_7C31                            ; $5EF1: $CD $31 $7C
+    call ClearEntityStatus                        ; $5EF1: $CD $31 $7C
     ld   a, [$D220]                               ; $5EF4: $FA $20 $D2
     inc  a                                        ; $5EF7: $3C
     ld   [$D220], a                               ; $5EF8: $EA $20 $D2
@@ -5630,7 +5651,7 @@ jr_015_5F4C:
     jr   nz, jr_015_5F4C                          ; $5F94: $20 $B6
 
 jr_015_5F96:
-    jp   label_015_7C31                           ; $5F96: $C3 $31 $7C
+    jp   ClearEntityStatusAndReturn               ; $5F96: $C3 $31 $7C
 
 jr_015_5F99:
     ret                                           ; $5F99: $C9
@@ -5681,6 +5702,7 @@ func_015_5FD1:
     call func_015_7B0D                            ; $5FD1: $CD $0D $7B
     jp   label_3B39                               ; $5FD4: $C3 $39 $3B
 
+FinalNightmareForm4Handler::
     ldh  a, [hActiveEntityState]                  ; $5FD7: $F0 $F0
     rst  $00                                      ; $5FD9: $C7
     ld   c, d                                     ; $5FDA: $4A
@@ -6373,6 +6395,7 @@ jr_015_63AF:
 jr_015_63C7:
     ret                                           ; $63C7: $C9
 
+FinalNightmareForm5Handler::
     ld   hl, wEntitiesUnknownTableB               ; $63C8: $21 $B0 $C2
     add  hl, bc                                   ; $63CB: $09
     ld   a, [hl]                                  ; $63CC: $7E
@@ -8051,7 +8074,7 @@ label_015_6C61:
     add  hl, de                                   ; $6C69: $19
     ld   a, [hl]                                  ; $6C6A: $7E
     cp   $09                                      ; $6C6B: $FE $09
-    jp   nc, label_015_7C31                       ; $6C6D: $D2 $31 $7C
+    jp   nc, ClearEntityStatusAndReturn                       ; $6C6D: $D2 $31 $7C
 
     ld   hl, $C3D0                                ; $6C70: $21 $D0 $C3
     add  hl, bc                                   ; $6C73: $09
@@ -8171,7 +8194,7 @@ jr_015_6CF7:
     ld   hl, wEntitiesTransitionCountdownTable    ; $6D20: $21 $E0 $C2
     add  hl, de                                   ; $6D23: $19
     ld   [hl], $4C                                ; $6D24: $36 $4C
-    call func_015_7C31                            ; $6D26: $CD $31 $7C
+    call ClearEntityStatus                        ; $6D26: $CD $31 $7C
 
 jr_015_6D29:
     pop  af                                       ; $6D29: $F1
@@ -8201,7 +8224,7 @@ jr_015_6D3D:
     call RenderAnimatedActiveEntity                               ; $6D43: $CD $C0 $3B
     call func_015_7B0D                            ; $6D46: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $6D49: $CD $05 $0C
-    jp   z, label_015_7C31                        ; $6D4C: $CA $31 $7C
+    jp   z, ClearEntityStatusAndReturn            ; $6D4C: $CA $31 $7C
 
     rra                                           ; $6D4F: $1F
     rra                                           ; $6D50: $1F
@@ -8294,11 +8317,11 @@ jr_015_6DC1:
 jr_015_6DC4:
     ldh  a, [wActiveEntityPosX]                   ; $6DC4: $F0 $EE
     cp   $A8                                      ; $6DC6: $FE $A8
-    jp   nc, label_015_7C31                       ; $6DC8: $D2 $31 $7C
+    jp   nc, ClearEntityStatusAndReturn                       ; $6DC8: $D2 $31 $7C
 
     ldh  a, [wActiveEntityPosY]                   ; $6DCB: $F0 $EC
     cp   $88                                      ; $6DCD: $FE $88
-    jp   nc, label_015_7C31                       ; $6DCF: $D2 $31 $7C
+    jp   nc, ClearEntityStatusAndReturn                       ; $6DCF: $D2 $31 $7C
 
     ret                                           ; $6DD2: $C9
 
@@ -8327,7 +8350,7 @@ jr_015_6DC4:
 
     jr   c, jr_015_6E29                           ; $6DEF: $38 $38
 
-    jr   c, jr_015_6E2B                           ; $6DF1: $38 $38
+    db   $38, $38                                 ; $6DF1: $38 $38
 
     jr   nz, jr_015_6E18                          ; $6DF3: $20 $23
 
@@ -8389,7 +8412,7 @@ jr_015_6E29:
     nop                                           ; $6E29: $00
     nop                                           ; $6E2A: $00
 
-jr_015_6E2B:
+FinalNightmareForm6Handler::
     ld   hl, wEntitiesUnknowTableG                ; $6E2B: $21 $00 $C3
     add  hl, bc                                   ; $6E2E: $09
     ld   a, [hl]                                  ; $6E2F: $7E
@@ -8675,7 +8698,7 @@ jr_015_6FAD:
 
     call PlayBombExplosionSfx                     ; $6FCA: $CD $4B $0C
     call func_015_5383                            ; $6FCD: $CD $83 $53
-    call func_015_7C31                            ; $6FD0: $CD $31 $7C
+    call ClearEntityStatus                        ; $6FD0: $CD $31 $7C
     ld   a, $E6                                   ; $6FD3: $3E $E6
     call func_003_64CA_trampoline                               ; $6FD5: $CD $86 $3B
     ld   hl, $C390                                ; $6FD8: $21 $90 $C3
@@ -9282,6 +9305,8 @@ jr_015_731D:
     nop                                           ; $732D: $00
     ei                                            ; $732E: $FB
     dec  b                                        ; $732F: $05
+
+SandCrabEntityHandler::
     ld   de, $7320                                ; $7330: $11 $20 $73
     call RenderAnimatedActiveEntity                               ; $7333: $CD $C0 $3B
     call func_015_7B0D                            ; $7336: $CD $0D $7B
@@ -9366,6 +9391,8 @@ jr_015_7382:
     nop                                           ; $73A8: $00
     inc  bc                                       ; $73A9: $03
     db   $FD                                      ; $73AA: $FD
+
+UrchinEntityHandler::
     ld   de, $7383                                ; $73AB: $11 $83 $73
     ld   a, [wGameplayType]                       ; $73AE: $FA $95 $DB
     cp   $01                                      ; $73B1: $FE $01
@@ -9456,6 +9483,7 @@ jr_015_7433:
 
     jr   nc, jr_015_7408                          ; $7436: $30 $D0
 
+Entity68Handler::
     call func_015_7B0D                            ; $7438: $CD $0D $7B
     ld   hl, $C380                                ; $743B: $21 $80 $C3
     add  hl, bc                                   ; $743E: $09
@@ -9479,7 +9507,7 @@ jr_015_7433:
     and  a                                        ; $745D: $A7
     jr   nz, jr_015_746A                          ; $745E: $20 $0A
 
-    call func_015_7C31                            ; $7460: $CD $31 $7C
+    call ClearEntityStatus                        ; $7460: $CD $31 $7C
     ld   hl, wEntitiesStatusTable                        ; $7463: $21 $80 $C2
     add  hl, bc                                   ; $7466: $09
     ld   a, [hl]                                  ; $7467: $7E
@@ -9602,6 +9630,7 @@ jr_015_7506:
     ld   [hl], $00                                ; $750A: $36 $00
     ret                                           ; $750C: $C9
 
+BeetleSpawnerEntityHandler::
     ld   hl, wEntitiesUnknownTableD               ; $750D: $21 $D0 $C2
     add  hl, bc                                   ; $7510: $09
     ld   a, [hl]                                  ; $7511: $7E
@@ -9728,7 +9757,10 @@ jr_015_75CB:
     nop                                           ; $75D1: $00
     nop                                           ; $75D2: $00
     nop                                           ; $75D3: $00
-    ld   [$CDF8], sp                              ; $75D4: $08 $F8 $CD
+    db   $08, $F8                                 ; $75D4: $08 $F8
+
+LaserBeamEntityHandler::
+    db   $CD                                      ; $75D6
     dec  c                                        ; $75D7: $0D
     ld   a, e                                     ; $75D8: $7B
     ldh  a, [hActiveEntityState]                  ; $75D9: $F0 $F0
@@ -9756,7 +9788,7 @@ jr_015_75E1:
     pop  hl                                       ; $75FD: $E1
     ld   a, [hl]                                  ; $75FE: $7E
     cp   $02                                      ; $75FF: $FE $02
-    jp   nz, label_015_7C31                       ; $7601: $C2 $31 $7C
+    jp   nz, ClearEntityStatusAndReturn           ; $7601: $C2 $31 $7C
 
     ld   [hl], $00                                ; $7604: $36 $00
     ld   hl, wEntitiesStateTable                  ; $7606: $21 $90 $C2
@@ -9843,6 +9875,8 @@ jr_015_7639:
     nop                                           ; $7678: $00
     rst  $38                                      ; $7679: $FF
     ld   [bc], a                                  ; $767A: $02
+
+MonkeyEntityHandler::
     ld   hl, wEntitiesUnknownTableB               ; $767B: $21 $B0 $C2
     add  hl, bc                                   ; $767E: $09
     ld   a, [hl]                                  ; $767F: $7E
@@ -10087,11 +10121,11 @@ jr_015_77BE:
 jr_015_77FE:
     ldh  a, [wActiveEntityPosX]                   ; $77FE: $F0 $EE
     cp   $A8                                      ; $7800: $FE $A8
-    jp   nc, label_015_7C31                       ; $7802: $D2 $31 $7C
+    jp   nc, ClearEntityStatusAndReturn                       ; $7802: $D2 $31 $7C
 
     ldh  a, [wActiveEntityPosY]                   ; $7805: $F0 $EC
     cp   $80                                      ; $7807: $FE $80
-    jp   nc, label_015_7C31                       ; $7809: $D2 $31 $7C
+    jp   nc, ClearEntityStatusAndReturn                       ; $7809: $D2 $31 $7C
 
     ldh  a, [hFrameCounter]                       ; $780C: $F0 $E7
     and  $0F                                      ; $780E: $E6 $0F
@@ -10167,7 +10201,7 @@ label_015_7825:
     inc  [hl]                                     ; $7881: $34
     ld   a, [hl]                                  ; $7882: $7E
     cp   $04                                      ; $7883: $FE $04
-    jp   z, label_015_7C31                        ; $7885: $CA $31 $7C
+    jp   z, ClearEntityStatusAndReturn            ; $7885: $CA $31 $7C
 
     ld   a, $09                                   ; $7888: $3E $09
     ldh  [hJingle], a                             ; $788A: $E0 $F2
@@ -10191,6 +10225,8 @@ jr_015_788C:
     inc  hl                                       ; $789A: $23
     ld   d, h                                     ; $789B: $54
     inc  hl                                       ; $789C: $23
+
+WitchRatEntityHandler::
     ld   hl, $C380                                ; $789D: $21 $80 $C3
     add  hl, bc                                   ; $78A0: $09
     ld   a, [hl]                                  ; $78A1: $7E
@@ -10568,7 +10604,17 @@ jr_015_7A9A:
     or   [hl]                                     ; $7AB8: $B6
     jp   SetEntitySpriteVariant                   ; $7AB9: $C3 $0C $3B
 
-func_015_7ABC:
+; Tell if the player is currently trying to talk to an entity.
+; That is when:
+;  - Link is close to the entity
+;  - Link is facing the entity
+;  - A dialog box can appear at this time
+;  - The A button is pressed
+;
+; Return:
+;   The carry flag is set if Link is trying to talk to the entity.
+;   It is not set otherwise.
+ShouldLinkTalkToEntity::
     ld   e, b                                     ; $7ABC: $58
     ldh  a, [hLinkPositionY]                      ; $7ABD: $F0 $99
     ld   hl, $FFEF                                ; $7ABF: $21 $EF $FF
@@ -10862,8 +10908,8 @@ jr_015_7C2F:
     ld   e, a                                     ; $7C2F: $5F
     ret                                           ; $7C30: $C9
 
-func_015_7C31:
-label_015_7C31:
+ClearEntityStatus::
+ClearEntityStatusAndReturn::
     ld   hl, wEntitiesStatusTable                        ; $7C31: $21 $80 $C2
     add  hl, bc                                   ; $7C34: $09
     ld   [hl], b                                  ; $7C35: $70
@@ -10970,7 +11016,7 @@ jr_015_7CC6:
     ld   [hl], $08                                ; $7CD0: $36 $08
 
 jr_015_7CD2:
-    call func_015_7C31                            ; $7CD2: $CD $31 $7C
+    call ClearEntityStatus                        ; $7CD2: $CD $31 $7C
     ld   hl, hNoiseSfx                            ; $7CD5: $21 $F4 $FF
     ld   [hl], $1A                                ; $7CD8: $36 $1A
     ret                                           ; $7CDA: $C9
@@ -10998,6 +11044,7 @@ jr_015_7CF0:
     ldh  [hRoomStatus], a                         ; $7CF5: $E0 $F8
     ret                                           ; $7CF7: $C9
 
+DreamShrineBedEntityHandler::
     ldh  a, [hActiveEntityState]                  ; $7CF8: $F0 $F0
     rst  $00                                      ; $7CFA: $C7
     ld   bc, $787D                                ; $7CFB: $01 $7D $78
@@ -11232,7 +11279,7 @@ jr_015_7E2E:
     ld   [hl+], a                                 ; $7E4B: $22
     ld   a, $7C                                   ; $7E4C: $3E $7C
     ld   [hl], a                                  ; $7E4E: $77
-    call func_015_7C31                            ; $7E4F: $CD $31 $7C
+    call ClearEntityStatus                        ; $7E4F: $CD $31 $7C
     jp   label_C9E                                ; $7E52: $C3 $9E $0C
 
     ld   e, b                                     ; $7E55: $58
@@ -11264,8 +11311,10 @@ jr_015_7E66:
     ld   e, d                                     ; $7E71: $5A
     nop                                           ; $7E72: $00
     ld   e, d                                     ; $7E73: $5A
-    jr   nz, jr_015_7E66                          ; $7E74: $20 $F0
+    db   $20                                      ; $7E74: $20
 
+BookEntityHandler::
+    db   $F0
     pop  af                                       ; $7E76: $F1
     and  a                                        ; $7E77: $A7
     jr   z, jr_015_7E82                           ; $7E78: $28 $08
@@ -11326,7 +11375,7 @@ jr_015_7EA6:
 jr_015_7EC4:
     xor  a                                        ; $7EC4: $AF
     call SetEntitySpriteVariant                   ; $7EC5: $CD $0C $3B
-    call func_015_7ABC                            ; $7EC8: $CD $BC $7A
+    call ShouldLinkTalkToEntity                   ; $7EC8: $CD $BC $7A
     ret  nc                                       ; $7ECB: $D0
 
     ldh  a, [hMapRoom]                            ; $7ECC: $F0 $F6
@@ -11472,9 +11521,11 @@ jr_015_7F82:
     inc  hl                                       ; $7F93: $23
     ld   [hl], b                                  ; $7F94: $70
     inc  hl                                       ; $7F95: $23
+
+AnimalD1EntityHandler::
     ld   a, [$DB74]                               ; $7F96: $FA $74 $DB
     and  a                                        ; $7F99: $A7
-    jp   z, label_015_7C31                        ; $7F9A: $CA $31 $7C
+    jp   z, ClearEntityStatusAndReturn            ; $7F9A: $CA $31 $7C
 
     ld   de, $7F86                                ; $7F9D: $11 $86 $7F
     call RenderAnimatedActiveEntity                               ; $7FA0: $CD $C0 $3B
@@ -11501,8 +11552,8 @@ jr_015_7FB5:
     add  e                                        ; $7FBE: $83
     call SetEntitySpriteVariant                   ; $7FBF: $CD $0C $3B
     call func_015_7A6E                            ; $7FC2: $CD $6E $7A
-    call func_015_7ABC                            ; $7FC5: $CD $BC $7A
-    ret  nc                                       ; $7FC8: $D0
 
+    call ShouldLinkTalkToEntity                   ; $7FC5: $CD $BC $7A
+    ret  nc                                       ; $7FC8: $D0
     ld   a, $96                                   ; $7FC9: $3E $96
     jp   OpenDialogInTable1                       ; $7FCB: $C3 $73 $23

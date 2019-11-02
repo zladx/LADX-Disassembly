@@ -400,7 +400,7 @@ jr_007_4233:
     db   $76                                      ; $4282: $76
     db   $01                                      ; $4283: $01
 
-BuzzBlobEntityHandler::
+FishermanUnderBridgeEntityHandler::
     db   $21, $B0
     jp   nz, label_007_7E09                       ; $4286: $C2 $09 $7E
 
@@ -1121,7 +1121,7 @@ jr_007_469C:
     ld   [bc], a                                  ; $46B8: $02
     db   $01, $00                                 ; $46B9: $01 $00
 
-FishermanUnderBridgeEntityHandler::
+MermaidEntityHandler::
     db   $21, $D0
     jp   nz, label_007_7E09                       ; $46BD: $C2 $09 $7E
 
@@ -10041,7 +10041,7 @@ jr_007_792B:
     ld   [bc], a                                  ; $793F: $02
     nop                                           ; $7940: $00
 
-MagicPowderSprinkleEntityHandler::
+MoblinSwordEntityHandler::
     ldh  a, [hMapId]                              ; $7941: $F0 $F7
     cp   $15                                      ; $7943: $FE $15
     jr   nz, jr_007_794F                          ; $7945: $20 $08

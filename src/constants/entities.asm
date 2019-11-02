@@ -205,7 +205,7 @@ ENTITY_BUSH_CRAWLER                  equ $BB
 ENTITY_GRIM_CREEPER                  equ $BC
 ENTITY_VIRE                          equ $BD
 ENTITY_BLAINO                        equ $BE
-ENTITY_ZOMBIES                       equ $BF
+ENTITY_ZOMBIE                        equ $BF
 ENTITY_MAZE_SIGNPOST                 equ $C0
 ENTITY_MARIN_AT_THE_SHORE            equ $C1
 ENTITY_MARIN_AT_TAL_TAL_HEIGHTS      equ $C2
@@ -214,7 +214,7 @@ ENTITY_WALRUS                        equ $C4
 ENTITY_URCHIN                        equ $C5
 ENTITY_SAND_CRAB                     equ $C6
 ENTITY_MANBO_AND_FISHES              equ $C7
-ENTITY_BUNNY_CALLS_MARIN             equ $C8
+ENTITY_BUNNY_CALLING_MARIN           equ $C8
 ENTITY_MUSICAL_NOTE                  equ $C9
 ENTITY_MAD_BATTER                    equ $CA
 ENTITY_ZORA                          equ $CB

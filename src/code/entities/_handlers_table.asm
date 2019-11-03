@@ -244,7 +244,7 @@ EntityPointersTable::
 ._E5 entity_pointer FloatingItem2EntityHandler
 ._E6 entity_pointer FinalNightmareEntityHandler
 ._E7 entity_pointer KanaletCastleGateSwitchEntityHandler
-._E8 db $87, $7A, $17 ; entity_pointer EntityE8Handler ; $E8
+._E8 entity_pointer EndingOwlStairClimbingEntityHandler ; $E8
 ._E9 db $68, $66, $36 ; entity_pointer EntityE9Handler
 ._EA db $68, $66, $36 ; entity_pointer EntityEAHandler
 ._EB db $68, $66, $36 ; entity_pointer EntityEBHandler

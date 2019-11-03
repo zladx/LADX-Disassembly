@@ -6792,6 +6792,7 @@ func_017_7A29:
     pop  bc                                       ; $7A85: $C1
     ret                                           ; $7A86: $C9
 
+EndingOwlStairClimbingEntityHandler::
     ld   hl, $C2B0                                ; $7A87: $21 $B0 $C2
     add  hl, bc                                   ; $7A8A: $09
     ld   a, [hl]                                  ; $7A8B: $7E

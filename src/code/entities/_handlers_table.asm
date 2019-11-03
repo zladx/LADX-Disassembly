@@ -7,6 +7,10 @@ entity_pointer: macro
     db LOW(\1), HIGH(\1), BANK(\1)
 endm
 
+entity_disabled: macro
+    db $00, $00, $00
+endm
+
 ; Table of entities handlers
 ; See ENTITY_* constants for values
 ;
@@ -41,7 +45,7 @@ EntityPointersTable::
 ._1A entity_pointer StalfosAggressiveEntityHandler
 ._1B entity_pointer GelEntityHandler
 ._1C entity_pointer MiniGelEntityHandler ; $1C
-._1D db $00, $00, $00 ; (disabled)
+._1D entity_disabled
 ._1E entity_pointer StalfosEvasiveEntityHandler
 ._1F entity_pointer GibdoEntityHandler
 ._20 entity_pointer HardHatBeetleEntityHandler ; $20
@@ -88,7 +92,7 @@ EntityPointersTable::
 ._49 entity_pointer MovingBlockBottomRightEntityHandler
 ._4A db $7F, $58, $36 ; entity_pointer Entity4AHandler
 ._4B entity_pointer PotEntityHandler
-._4C db $00, $00, $00 ; disabled
+._4C entity_disabled
 ._4D entity_pointer ShopOwnerEntityHandler
 ._4E entity_pointer Disabled4EEntityHandler
 ._4F entity_pointer TrendyGameOwnerEntityHandler
@@ -263,9 +267,9 @@ EntityPointersTable::
 ._F8 db $E2, $54, $36 ; entity_pointer EntityF8Handler ; $F8
 ._F9 db $B6, $4C, $36 ; entity_pointer EntityF9Handler
 ._FA db $12, $49, $36 ; entity_pointer EntityFAHandler
-._FB db $F0, $EB, $5F ; (unused)
-._FC db $50, $21, $00 ; (unused)
-._FD db $40, $19, $19 ; (unused)
-._FE db $19, $5E, $23 ; (unused)
-._FF db $56, $23, $7E ; (unused)
+._FB db $F0, $EB, $5F ; unused
+._FC db $50, $21, $00 ; unused
+._FD db $40, $19, $19 ; unused
+._FE db $19, $5E, $23 ; unused
+._FF db $56, $23, $7E ; unused
 .overflow db $6B, $62, $C9

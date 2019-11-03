@@ -13,8 +13,6 @@ endm
 
 ; Table of entities handlers
 ; See ENTITY_* constants for values
-;
-; TODO: convert the remaining raw addresses to labels
 EntityPointersTable::
 ._00 entity_pointer ArrowEntityHandler
 ._01 entity_pointer BoomerangEntityHandler
@@ -90,7 +88,7 @@ EntityPointersTable::
 ._47 entity_pointer MovingBlockLeftBottomEntityHandler
 ._48 entity_pointer MovingBlockBottomLeftEntityHandler ; $48
 ._49 entity_pointer MovingBlockBottomRightEntityHandler
-._4A db $7F, $58, $36 ; entity_pointer Entity4AHandler
+._4A entity_pointer ColorDungeonBookEntityHandler
 ._4B entity_pointer PotEntityHandler
 ._4C entity_disabled
 ._4D entity_pointer ShopOwnerEntityHandler
@@ -154,8 +152,8 @@ EntityPointersTable::
 ._87 entity_pointer DesertLanmolaEntityHandler
 ._88 entity_pointer ArmosKnightEntityHandler ; $88
 ._89 entity_pointer HinoxEntityHandler
-._8A db $1F, $6E, $36 ; entity_pointer Entity8AHandler
-._8B db $1F, $6E, $36 ; entity_pointer Entity8BHandler
+._8A entity_pointer TileGlintShownEntityHandler
+._8B entity_pointer TileGlintHiddenEntityHandler
 ._8C entity_pointer Entity8CHandler ; $8C
 ._8D entity_pointer Entity8DHandler
 ._8E entity_pointer CueBallEntityHandler
@@ -178,7 +176,7 @@ EntityPointersTable::
 ._9F entity_pointer GoombaEntityHandler
 ._A0 entity_pointer PeaHatEntityHandler ; $A0
 ._A1 entity_pointer SnakeEntityHandler
-._A2 db $D5, $6E, $36 ; entity_pointer EntityA2Handler
+._A2 entity_pointer PiranhaPlantEntityHandler
 ._A3 entity_pointer SideViewPlatformHorizontalEntityHandler
 ._A4 entity_pointer SideViewPlatformVerticalEntityHandler ; $A4
 ._A5 entity_pointer SideViewPlatformEntityHandler
@@ -249,24 +247,24 @@ EntityPointersTable::
 ._E6 entity_pointer FinalNightmareEntityHandler
 ._E7 entity_pointer KanaletCastleGateSwitchEntityHandler
 ._E8 entity_pointer EndingOwlStairClimbingEntityHandler ; $E8
-._E9 db $68, $66, $36 ; entity_pointer EntityE9Handler
-._EA db $68, $66, $36 ; entity_pointer EntityEAHandler
-._EB db $68, $66, $36 ; entity_pointer EntityEBHandler
-._EC db $C9, $63, $36 ; entity_pointer EntityECHandler ; $EC
-._ED db $C9, $63, $36 ; entity_pointer EntityEDHandler
-._EE db $C9, $63, $36 ; entity_pointer EntityEEHandler
-._EF db $41, $62, $36 ; entity_pointer EntityEFHandler
-._F0 db $41, $62, $36 ; entity_pointer EntityF0Handler ; $F0
-._F1 db $41, $62, $36 ; entity_pointer EntityF1Handler
-._F2 db $A2, $5F, $36 ; entity_pointer EntityF2Handler
-._F3 db $A2, $5F, $36 ; entity_pointer EntityF3Handler
-._F4 db $F7, $5B, $36 ; entity_pointer EntityF4Handler ; $F4
-._F5 db $5E, $5B, $36 ; entity_pointer EntityF5Handler
-._F6 db $3F, $59, $36 ; entity_pointer EntityF6Handler
-._F7 db $3F, $59, $36 ; entity_pointer EntityF7Handler
-._F8 db $E2, $54, $36 ; entity_pointer EntityF8Handler ; $F8
-._F9 db $B6, $4C, $36 ; entity_pointer EntityF9Handler
-._FA db $12, $49, $36 ; entity_pointer EntityFAHandler
+._E9 entity_pointer ColorShellRedEntityHandler
+._EA entity_pointer ColorShellGreenEntityHandler
+._EB entity_pointer ColorShellBlueEntityHandler
+._EC entity_pointer ColorGhoulRedEntityHandler ; $EC
+._ED entity_pointer ColorGhoulGreenEntityHandler
+._EE entity_pointer ColorGhoulBlueEntityHandler
+._EF entity_pointer RotoswitchRedEntityHandler
+._F0 entity_pointer RotoswitchYellowEntityHandler ; $F0
+._F1 entity_pointer RotoswitchBlueEntityHandler
+._F2 entity_pointer FlyingHopperBombsEntityHandler
+._F3 entity_pointer HopperEntityHandler
+._F4 entity_pointer AvalaunchEntityHandler ; $F4
+._F5 entity_pointer BouncingBoulderEntityHandler
+._F6 entity_pointer ColorGuardianBlueEntityHandler
+._F7 entity_pointer ColorGuardianRedEntityHandler
+._F8 entity_pointer GiantBuzzBlobEntityHandler ; $F8
+._F9 entity_pointer HardhitBeetleEntityHandler
+._FA entity_pointer PhotographerEntityHandler
 ._FB db $F0, $EB, $5F ; unused
 ._FC db $50, $21, $00 ; unused
 ._FD db $40, $19, $19 ; unused

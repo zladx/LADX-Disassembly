@@ -4,6 +4,10 @@
 
 SECTION "ROM Bank $036", ROMX[$4000], BANK[$36]
 
+;
+; Photographer scenes
+;
+
 label_036_4000:
     ld   a, [wRoomTransitionState]                ; $4000: $FA $24 $C1
     and  a                                        ; $4003: $A7
@@ -1567,28 +1571,29 @@ jr_036_4859:
     ld   h, $4C                                   ; $490B: $26 $4C
     ld   h, $4A                                   ; $490D: $26 $4A
     ld   h, $48                                   ; $490F: $26 $48
-    ld   h, $FA                                   ; $4911: $26 $FA
-    and  l                                        ; $4913: $A5
-    db   $DB                                      ; $4914: $DB
+    db   $26                                      ; $4911: $26
+
+PhotographerEntityHandler::
+    ld   a, [wIsIndoor]                           ; $4912
     and  a                                        ; $4915: $A7
-    jr   z, jr_036_492F                           ; $4916: $28 $17
+    jr   z, .overworld                            ; $4916: $28 $17
 
     ldh  a, [hMapRoom]                            ; $4918: $F0 $F6
     cp   $DA                                      ; $491A: $FE $DA
-    jr   nz, jr_036_4925                          ; $491C: $20 $07
+    jr   nz, .jr_036_4925                         ; $491C: $20 $07
 
     ld   de, $48E2                                ; $491E: $11 $E2 $48
     call RenderAnimatedActiveEntity                               ; $4921: $CD $C0 $3B
     ret                                           ; $4924: $C9
 
-jr_036_4925:
+.jr_036_4925
     cp   $B5                                      ; $4925: $FE $B5
     jp   z, label_036_429A                        ; $4927: $CA $9A $42
 
     cp   $A4                                      ; $492A: $FE $A4
     jp   z, label_036_4178                        ; $492C: $CA $78 $41
 
-jr_036_492F:
+.overworld
     ldh  a, [hMapRoom]                            ; $492F: $F0 $F6
     cp   $B1                                      ; $4931: $FE $B1
     jp   z, label_036_4791                        ; $4933: $CA $91 $47
@@ -1611,27 +1616,16 @@ jr_036_492F:
     call RenderAnimatedActiveEntity                               ; $4953: $CD $C0 $3B
     call func_036_6A40                            ; $4956: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $4959: $F0 $F0
-    rst  $00                                      ; $495B: $C7
-    ret  nc                                       ; $495C: $D0
-
-    ld   c, c                                     ; $495D: $49
-    ld   a, e                                     ; $495E: $7B
-    ld   c, c                                     ; $495F: $49
-    sub  d                                        ; $4960: $92
-    ld   c, c                                     ; $4961: $49
-    ret  nc                                       ; $4962: $D0
-
-    ld   c, c                                     ; $4963: $49
-    ld   a, e                                     ; $4964: $7B
-    ld   c, c                                     ; $4965: $49
-    sub  d                                        ; $4966: $92
-    ld   c, c                                     ; $4967: $49
-    ret  nc                                       ; $4968: $D0
-
-    ld   c, c                                     ; $4969: $49
-    jp   c, $F649                                 ; $496A: $DA $49 $F6
-
-    ld   c, c                                     ; $496D: $49
+    JP_TABLE                                      ; $495B: $C7
+._00 dw $49D0
+._01 dw $497B
+._02 dw $4992
+._03 dw $49D0
+._04 dw $497B
+._05 dw $4992
+._06 dw $49D0
+._07 dw $49DA
+._08 dw $49F6
 
 func_036_496E:
     ldh  a, [hFrameCounter]                       ; $496E: $F0 $E7
@@ -2220,8 +2214,11 @@ jr_036_4C7C:
     ret                                           ; $4CB3: $C9
 
     inc  e                                        ; $4CB4: $1C
-    jr   z, @-$31                                 ; $4CB5: $28 $CD
+    db   $28                                      ; $4CB5: $28
 
+; Color Dungeon Boss
+HardhitBeetleEntityHandler::
+    db   $CD                                      ; $4CB6
     ld   c, l                                     ; $4CB7: $4D
     add  hl, sp                                   ; $4CB8: $39
     ld   a, c                                     ; $4CB9: $79
@@ -3684,6 +3681,7 @@ jr_036_54D3:
     pop  af                                       ; $54E0: $F1
     ret                                           ; $54E1: $C9
 
+GiantBuzzBlobEntityHandler::
     call label_394D                               ; $54E2: $CD $4D $39
     ld   a, c                                     ; $54E5: $79
     ld   [$D202], a                               ; $54E6: $EA $02 $D2
@@ -4334,8 +4332,10 @@ jr_036_5870:
     ld   e, d                                     ; $587B: $5A
     nop                                           ; $587C: $00
     ld   e, d                                     ; $587D: $5A
-    jr   nz, jr_036_5870                          ; $587E: $20 $F0
+    db   $20                                      ; $587E: $20
 
+ColorDungeonBookEntityHandler::
+    db   $F0
     pop  af                                       ; $5880: $F1
     and  a                                        ; $5881: $A7
     jr   z, jr_036_588C                           ; $5882: $28 $08
@@ -4474,6 +4474,8 @@ jr_036_592F:
 jr_036_593E:
     ret                                           ; $593E: $C9
 
+ColorGuardianBlueEntityHandler::
+ColorGuardianRedEntityHandler::
     push bc                                       ; $593F: $C5
     sla  c                                        ; $5940: $CB $21
     sla  c                                        ; $5942: $CB $21
@@ -4851,8 +4853,10 @@ jr_036_5B59:
     jr   @+$22                                    ; $5B5A: $18 $20
 
     inc  e                                        ; $5B5C: $1C
-    jr   z, jr_036_5B59                           ; $5B5D: $28 $FA
+    db   $28                                      ; $5B5D: $28
 
+BouncingBoulderEntityHandler::
+    db   $FA                                      ; $5B5E
     ld   [bc], a                                  ; $5B5F: $02
     jp   nc, $165F                                ; $5B60: $D2 $5F $16
 
@@ -4943,6 +4947,7 @@ jr_036_5BE8:
 
     ret                                           ; $5BF6: $C9
 
+AvalaunchEntityHandler::
     call label_394D                               ; $5BF7: $CD $4D $39
     ld   a, c                                     ; $5BFA: $79
     ld   [$D202], a                               ; $5BFB: $EA $02 $D2
@@ -5567,6 +5572,8 @@ jr_036_5F92:
     call label_3DA0                               ; $5F9E: $CD $A0 $3D
     ret                                           ; $5FA1: $C9
 
+FlyingHopperBombsEntityHandler::
+HopperEntityHandler::
     call func_036_6219                            ; $5FA2: $CD $19 $62
     call func_036_6A40                            ; $5FA5: $CD $40 $6A
     call label_3B70                               ; $5FA8: $CD $70 $3B
@@ -6040,6 +6047,9 @@ func_036_6219:
     call label_3DA0                               ; $623D: $CD $A0 $3D
     ret                                           ; $6240: $C9
 
+RotoswitchRedEntityHandler::
+RotoswitchYellowEntityHandler::
+RotoswitchBlueEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $6241: $21 $60 $C3
     add  hl, bc                                   ; $6244: $09
     ld   [hl], $FF                                ; $6245: $36 $FF
@@ -6342,6 +6352,9 @@ func_036_63C2:
     call RenderAnimatedActiveEntity                               ; $63C5: $CD $C0 $3B
     ret                                           ; $63C8: $C9
 
+ColorGhoulRedEntityHandler::
+ColorGhoulGreenEntityHandler::
+ColorGhoulBlueEntityHandler::
     call func_036_6629                            ; $63C9: $CD $29 $66
     ldh  a, [hActiveEntityStatus]                 ; $63CC: $F0 $EA
     cp   $05                                      ; $63CE: $FE $05
@@ -6831,6 +6844,9 @@ jr_036_665C:
     pop  bc                                       ; $6666: $C1
     ret                                           ; $6667: $C9
 
+ColorShellRedEntityHandler::
+ColorShellGreenEntityHandler::
+ColorShellBlueEntityHandler::
     call $69D9                                    ; $6668: $CD $D9 $69
     call func_036_6A40                            ; $666B: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $666E: $F0 $F0
@@ -8349,8 +8365,11 @@ jr_036_6E10:
     ld   a, [hl-]                                 ; $6E1D: $3A
 
 jr_036_6E1E:
-    jr   nz, jr_036_6E10                          ; $6E1E: $20 $F0
+    db   $20                                      ; $6E1E: $20
 
+TileGlintShownEntityHandler::
+TileGlintHiddenEntityHandler::
+    db   $F0                                      ; $6E1F
     ldh  a, [hAnimatedTilesDataOffset]            ; $6E20: $F0 $A7
     jr   z, jr_036_6E3F                           ; $6E22: $28 $1B
 
@@ -8475,6 +8494,7 @@ jr_036_6ECD:
     ld   [hl], a                                  ; $6ED3: $77
     ret                                           ; $6ED4: $C9
 
+PiranhaPlantEntityHandler::
     ld   hl, $C3F0                                ; $6ED5: $21 $F0 $C3
     add  hl, bc                                   ; $6ED8: $09
     ld   [hl], b                                  ; $6ED9: $70

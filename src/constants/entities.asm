@@ -258,13 +258,13 @@ ENTITY_ROTOSWITCH_YELLOW             equ $F0
 ENTITY_ROTOSWITCH_BLUE               equ $F1
 ENTITY_FLYING_HOPPER_BOMBS           equ $F2
 ENTITY_HOPPER                        equ $F3
-ENTITY_GOLEM_BOSS                    equ $F4
+ENTITY_AVALAUNCH                     equ $F4
 ENTITY_BOUNCING_BOULDER              equ $F5
 ENTITY_COLOR_GUARDIAN_BLUE           equ $F6
 ENTITY_COLOR_GUARDIAN_RED            equ $F7
 ENTITY_GIANT_BUZZ_BLOB               equ $F8
-ENTITY_COLOR_DUNGEON_BOSS            equ $F9
-ENTITY_PHOTOGRAPHER_RELATED          equ $FA
+ENTITY_HARDHIT_BEETLE                equ $F9
+ENTITY_PHOTOGRAPHER                  equ $FA
 ; unused                             equ $FB
 ; unused                             equ $FC
 ; unused                             equ $FD

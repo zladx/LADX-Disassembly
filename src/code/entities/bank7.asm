@@ -2,35 +2,34 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-func_007_4000:
-    ld   a, $04                                   ; $4000: $3E $04
-    ldh  [hNoiseSfx], a                            ; $4002: $E0 $F4
+PlayDoorUnlockedSfx::
+    ld   a, NOISE_SFX_DOOR_UNLOCKED               ; $4000: $3E $04
+    ldh  [hNoiseSfx], a                           ; $4002: $E0 $F4
     ret                                           ; $4004: $C9
 
-func_007_4005:
-    ld   hl, wEntitiesSpeedYTable                       ; $4005: $21 $50 $C2
+GetEntitySpeedYAddress::
+    ld   hl, wEntitiesSpeedYTable                 ; $4005: $21 $50 $C2
     add  hl, bc                                   ; $4008: $09
     ret                                           ; $4009: $C9
 
-    ld   a, h                                     ; $400A: $7C
-    ld   [bc], a                                  ; $400B: $02
-    ld   a, [hl]                                  ; $400C: $7E
-    ld   [bc], a                                  ; $400D: $02
-    ld   a, [hl]                                  ; $400E: $7E
-    ld   [hl+], a                                 ; $400F: $22
-    ld   a, h                                     ; $4010: $7C
-    ld   [hl+], a                                 ; $4011: $22
-    db   $F4                                      ; $4012: $F4
-    ld   d, $F6                                   ; $4013: $16 $F6
-    ld   d, $F0                                   ; $4015: $16 $F0
-    rla                                           ; $4017: $17
-    ld   a, [c]                                   ; $4018: $F2
-    rla                                           ; $4019: $17
-    db   $F4                                      ; $401A: $F4
-    ld   d, $F6                                   ; $401B: $16 $F6
-    ld   d, $F0                                   ; $401D: $16 $F0
-    ld   d, $F2                                   ; $401F: $16 $F2
-    ld   d, $21                                   ; $4021: $16 $21
+;
+; Bush Crawler
+;
+
+Data_007_400A::
+    db   $7C, $02
+    db   $7E, $02
+    db   $7E, $22
+    db   $7C, $22
+
+Data_007_4012::
+    db   $F4, $16, $F6, $16, $F0, $17, $F2, $17
+
+Data_007_401A::
+    db   $F4, $16, $F6, $16, $F0, $16, $F2, $16
+
+BushCrawlerEntityHandler::
+    db   $21
     or   b                                        ; $4023: $B0
     jp   nz, label_007_7E09                       ; $4024: $C2 $09 $7E
 
@@ -76,12 +75,12 @@ jr_007_4053:
     add  hl, bc                                   ; $405F: $09
     ld   a, [hl]                                  ; $4060: $7E
     ldh  [hActiveEntitySpriteVariant], a               ; $4061: $E0 $F1
-    ld   de, $4012                                ; $4063: $11 $12 $40
+    ld   de, Data_007_4012                        ; $4063: $11 $12 $40
     ld   a, [wIsIndoor]                           ; $4066: $FA $A5 $DB
     and  a                                        ; $4069: $A7
     jr   z, jr_007_406F                           ; $406A: $28 $03
 
-    ld   de, $401A                                ; $406C: $11 $1A $40
+    ld   de, Data_007_401A                        ; $406C: $11 $1A $40
 
 jr_007_406F:
     call RenderAnimatedActiveEntity                               ; $406F: $CD $C0 $3B
@@ -96,7 +95,7 @@ jr_007_406F:
     add  hl, bc                                   ; $4080: $09
     ld   a, [hl]                                  ; $4081: $7E
     ldh  [hActiveEntitySpriteVariant], a               ; $4082: $E0 $F1
-    ld   de, $400A                                ; $4084: $11 $0A $40
+    ld   de, Data_007_400A                        ; $4084: $11 $0A $40
     call RenderAnimatedActiveEntity                               ; $4087: $CD $C0 $3B
 
 jr_007_408A:
@@ -179,7 +178,7 @@ jr_007_40F9:
     ld   hl, $40D2                                ; $410A: $21 $D2 $40
     add  hl, de                                   ; $410D: $19
     ld   a, [hl]                                  ; $410E: $7E
-    call func_007_4005                            ; $410F: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $410F: $CD $05 $40
     ld   [hl], a                                  ; $4112: $77
     ld   hl, $C340                                ; $4113: $21 $40 $C3
     add  hl, bc                                   ; $4116: $09
@@ -321,7 +320,7 @@ jr_007_41C8:
     ldh  a, [hNoiseSfx]                            ; $41EE: $F0 $F4
 
 label_007_41F0:
-    ld   de, $400A                                ; $41F0: $11 $0A $40
+    ld   de, Data_007_400A                        ; $41F0: $11 $0A $40
     call RenderAnimatedActiveEntity                               ; $41F3: $CD $C0 $3B
     call func_007_7D96                            ; $41F6: $CD $96 $7D
     call func_007_7DC3                            ; $41F9: $CD $C3 $7D
@@ -353,7 +352,7 @@ label_007_41F0:
     ld   hl, $41E6                                ; $422A: $21 $E6 $41
     add  hl, de                                   ; $422D: $19
     ld   a, [hl]                                  ; $422E: $7E
-    call func_007_4005                            ; $422F: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $422F: $CD $05 $40
     ld   [hl], a                                  ; $4232: $77
 
 jr_007_4233:
@@ -399,7 +398,10 @@ jr_007_4233:
     ld   [hl], h                                  ; $427E: $74
     ld   bc, label_800                            ; $427F: $01 $00 $08
     db   $76                                      ; $4282: $76
-    ld   bc, $B021                                ; $4283: $01 $21 $B0
+    db   $01                                      ; $4283: $01
+
+FishermanUnderBridgeEntityHandler::
+    db   $21, $B0
     jp   nz, label_007_7E09                       ; $4286: $C2 $09 $7E
 
     cp   $02                                      ; $4289: $FE $02
@@ -687,7 +689,7 @@ jr_007_4429:
     cp   $0C                                      ; $442B: $FE $0C
     jr   c, jr_007_4436                           ; $442D: $38 $07
 
-    call func_007_4005                            ; $442F: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $442F: $CD $05 $40
     ld   a, [hl]                                  ; $4432: $7E
     bit  7, a                                     ; $4433: $CB $7F
     ret  z                                        ; $4435: $C8
@@ -727,7 +729,7 @@ jr_007_4436:
     ld   hl, wEntitiesSpeedXTable                       ; $4469: $21 $40 $C2
     add  hl, bc                                   ; $446C: $09
     ld   [hl], $F8                                ; $446D: $36 $F8
-    call func_007_4005                            ; $446F: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $446F: $CD $05 $40
     ld   [hl], $F8                                ; $4472: $36 $F8
     ret                                           ; $4474: $C9
 
@@ -747,7 +749,7 @@ jr_007_4436:
 
 jr_007_4491:
     call func_007_7E0A                            ; $4491: $CD $0A $7E
-    call func_007_4005                            ; $4494: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $4494: $CD $05 $40
     inc  [hl]                                     ; $4497: $34
     ret                                           ; $4498: $C9
 
@@ -1117,9 +1119,10 @@ jr_007_469C:
     ld   hl, $0000                                ; $46B2: $21 $00 $00
     ld   bc, $0202                                ; $46B5: $01 $02 $02
     ld   [bc], a                                  ; $46B8: $02
-    ld   bc, $2100                                ; $46B9: $01 $00 $21
-    ret  nc                                       ; $46BC: $D0
+    db   $01, $00                                 ; $46B9: $01 $00
 
+MermaidEntityHandler::
+    db   $21, $D0
     jp   nz, label_007_7E09                       ; $46BD: $C2 $09 $7E
 
     and  a                                        ; $46C0: $A7
@@ -1561,7 +1564,7 @@ label_007_490F:
     ld   hl, wEntitiesSpeedZTable                                ; $4948: $21 $20 $C3
     add  hl, bc                                   ; $494B: $09
     ld   [hl], $20                                ; $494C: $36 $20
-    call func_007_4005                            ; $494E: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $494E: $CD $05 $40
     ld   [hl], $FC                                ; $4951: $36 $FC
     call func_007_48FD                            ; $4953: $CD $FD $48
     jp   IncrementEntityWalkingAttr               ; $4956: $C3 $12 $3B
@@ -1676,8 +1679,10 @@ jr_007_4977:
     ld   a, h                                     ; $4A15: $7C
     ld   hl, $017E                                ; $4A16: $21 $7E $01
     ld   a, [hl]                                  ; $4A19: $7E
-    ld   hl, $A5FA                                ; $4A1A: $21 $FA $A5
-    db   $DB                                      ; $4A1D: $DB
+    db   $21                                      ; $4A1A: $21
+
+PapahlEntityHandler::
+    db   $FA, $A5, $DB
     and  a                                        ; $4A1E: $A7
     jr   z, jr_007_4A69                           ; $4A1F: $28 $48
 
@@ -1934,6 +1939,8 @@ jr_007_4B44:
     ld   bc, $017C                                ; $4BAE: $01 $7C $01
     ld   a, h                                     ; $4BB1: $7C
     ld   hl, $217A                                ; $4BB2: $21 $7A $21
+
+BearEntityHandler::
     xor  a                                        ; $4BB5: $AF
     ldh  [hActiveEntitySpriteVariant], a               ; $4BB6: $E0 $F1
     ld   a, $4A                                   ; $4BB8: $3E $4A
@@ -2075,6 +2082,8 @@ label_007_4C83:
 
     ld   [hl], b                                  ; $4C93: $70
     ld   bc, $2170                                ; $4C94: $01 $70 $21
+
+HoneycombEntityHandler::
     ldh  a, [hRoomStatus]                         ; $4C97: $F0 $F8
     and  $20                                      ; $4C99: $E6 $20
     jp   nz, label_007_7EA4                       ; $4C9B: $C2 $A4 $7E
@@ -2285,7 +2294,7 @@ jr_007_4DCB:
     ld   hl, $4D9F                                ; $4DD1: $21 $9F $4D
     add  hl, de                                   ; $4DD4: $19
     ld   a, [hl]                                  ; $4DD5: $7E
-    call func_007_4005                            ; $4DD6: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $4DD6: $CD $05 $40
     add  [hl]                                     ; $4DD9: $86
     ld   [hl], a                                  ; $4DDA: $77
     ld   hl, $4DA3                                ; $4DDB: $21 $A3 $4D
@@ -2454,6 +2463,9 @@ jr_007_4E89:
     ld   [bc], a                                  ; $4EAE: $02
     db   $76                                      ; $4EAF: $76
     ld   [bc], a                                  ; $4EB0: $02
+
+; Tarin picking up the honeycomb
+TarinEntityHandler::
     ld   a, c                                     ; $4EB1: $79
     ld   [$D204], a                               ; $4EB2: $EA $04 $D2
     ld   hl, $C390                                ; $4EB5: $21 $90 $C3
@@ -2582,7 +2594,7 @@ jr_007_4F7B:
     ld   hl, wEntitiesSpeedXTable                       ; $4F83: $21 $40 $C2
     add  hl, bc                                   ; $4F86: $09
     ld   [hl], $FE                                ; $4F87: $36 $FE
-    call func_007_4005                            ; $4F89: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $4F89: $CD $05 $40
     ld   [hl], $F4                                ; $4F8C: $36 $F4
     call func_007_7E0A                            ; $4F8E: $CD $0A $7E
     call GetEntityTransitionCountdown                 ; $4F91: $CD $05 $0C
@@ -2755,7 +2767,7 @@ jr_007_5071:
     ld   hl, $5036                                ; $5081: $21 $36 $50
     add  hl, de                                   ; $5084: $19
     ld   a, [hl]                                  ; $5085: $7E
-    call func_007_4005                            ; $5086: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $5086: $CD $05 $40
     ld   [hl], a                                  ; $5089: $77
     ld   hl, $503A                                ; $508A: $21 $3A $50
     add  hl, de                                   ; $508D: $19
@@ -2793,7 +2805,7 @@ jr_007_509A:
     ld   hl, wEntitiesSpeedXTable                       ; $50BF: $21 $40 $C2
     add  hl, bc                                   ; $50C2: $09
     ld   [hl], $E4                                ; $50C3: $36 $E4
-    call func_007_4005                            ; $50C5: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $50C5: $CD $05 $40
     ld   [hl], $08                                ; $50C8: $36 $08
     call func_007_7E0A                            ; $50CA: $CD $0A $7E
     ldh  a, [wActiveEntityPosX]                   ; $50CD: $F0 $EE
@@ -2839,6 +2851,8 @@ jr_007_50DF:
     ld   [bc], a                                  ; $5109: $02
     ld   b, d                                     ; $510A: $42
     ld   [hl+], a                                 ; $510B: $22
+
+HoleFillerEntityHandler::
     ld   de, $5104                                ; $510C: $11 $04 $51
     call RenderAnimatedActiveEntity                               ; $510F: $CD $C0 $3B
     call func_007_7D96                            ; $5112: $CD $96 $7D
@@ -2897,7 +2911,7 @@ func_007_5159:
     ld   hl, $512B                                ; $5164: $21 $2B $51
     add  hl, de                                   ; $5167: $19
     ld   a, [hl]                                  ; $5168: $7E
-    call func_007_4005                            ; $5169: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $5169: $CD $05 $40
     ld   [hl], a                                  ; $516C: $77
     ret                                           ; $516D: $C9
 
@@ -3219,6 +3233,7 @@ jr_007_5314:
     ld   a, [hl]                                  ; $5320: $7E
     ret                                           ; $5321: $C9
 
+PincerEntityHandler::
     ld   hl, wEntitiesUnknowTableI                ; $5322: $21 $70 $C4
     add  hl, bc                                   ; $5325: $09
     ld   [hl], b                                  ; $5326: $70
@@ -3556,6 +3571,8 @@ jr_007_549C:
     rla                                           ; $550D: $17
     sbc  h                                        ; $550E: $9C
     rla                                           ; $550F: $17
+
+TradingItemEntityHandler::
     ld   a, [wIsIndoor]                           ; $5510: $FA $A5 $DB
     and  a                                        ; $5513: $A7
     jr   nz, jr_007_552E                          ; $5514: $20 $18
@@ -3635,7 +3652,7 @@ jr_007_5572:
     call label_3B5A                               ; $557A: $CD $5A $3B
     jr   nc, jr_007_5599                          ; $557D: $30 $1A
 
-    ld   a, $10                                   ; $557F: $3E $10
+    ld   a, MUSIC_FOUND_NEW_WEAPON                ; $557F: $3E $10
     ld   [wActiveMusicTrack], a                   ; $5581: $EA $68 $D3
     ld   [wC167], a                               ; $5584: $EA $67 $C1
     ldh  a, [hNextWorldMusicTrack]                               ; $5587: $F0 $BF
@@ -3783,6 +3800,8 @@ jr_007_5622:
     ld   [hl+], a                                 ; $564A: $22
     ld   e, b                                     ; $564B: $58
     ld   [hl+], a                                 ; $564C: $22
+
+WingedOctorockEntityHandler::
     ld   de, $562D                                ; $564D: $11 $2D $56
     call RenderAnimatedActiveEntity                               ; $5650: $CD $C0 $3B
     call $5805                                    ; $5653: $CD $05 $58
@@ -3890,7 +3909,7 @@ jr_007_56E0:
     ld   hl, $5629                                ; $56F3: $21 $29 $56
     add  hl, de                                   ; $56F6: $19
     ld   a, [hl]                                  ; $56F7: $7E
-    call func_007_4005                            ; $56F8: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $56F8: $CD $05 $40
     ld   [hl], a                                  ; $56FB: $77
     jp   label_007_5721                           ; $56FC: $C3 $21 $57
 
@@ -4132,6 +4151,8 @@ jr_007_5827:
     ld   [hl+], a                                 ; $583F: $22
     ld   [hl], h                                  ; $5840: $74
     ld   [hl+], a                                 ; $5841: $22
+
+KikiTheMonkeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5842: $F0 $F8
     and  $10                                      ; $5844: $E6 $10
     jp   nz, label_007_7EA4                       ; $5846: $C2 $A4 $7E
@@ -4571,7 +4592,7 @@ jr_007_5AD1:
     ld   hl, wEntitiesSpeedXTable                       ; $5AD1: $21 $40 $C2
     add  hl, bc                                   ; $5AD4: $09
     ld   [hl], e                                  ; $5AD5: $73
-    call func_007_4005                            ; $5AD6: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $5AD6: $CD $05 $40
     ld   [hl], $F0                                ; $5AD9: $36 $F0
     jp   label_007_5B08                           ; $5ADB: $C3 $08 $5B
 
@@ -4706,7 +4727,7 @@ jr_007_5B94:
     jr   z, jr_007_5BBE                           ; $5BA2: $28 $1A
 
     ldh  a, [hScratch0]                           ; $5BA4: $F0 $D7
-    call func_007_4005                            ; $5BA6: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $5BA6: $CD $05 $40
     cpl                                           ; $5BA9: $2F
     inc  a                                        ; $5BAA: $3C
     ld   [hl], a                                  ; $5BAB: $77
@@ -4731,7 +4752,7 @@ jr_007_5BBE:
     call func_007_5B08                            ; $5BC7: $CD $08 $5B
 
 jr_007_5BCA:
-    call func_007_4005                            ; $5BCA: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $5BCA: $CD $05 $40
     ld   a, [hl]                                  ; $5BCD: $7E
     and  $80                                      ; $5BCE: $E6 $80
     ld   a, $02                                   ; $5BD0: $3E $02
@@ -4756,7 +4777,6 @@ jr_007_5BE8:
     ld   a, $03                                   ; $5BE8: $3E $03
     call SetEntitySpriteVariant                   ; $5BEA: $CD $0C $3B
     jp   label_007_7E0A                           ; $5BED: $C3 $0A $7E
-
     ret                                           ; $5BF0: $C9
 
     ld   l, d                                     ; $5BF1: $6A
@@ -4766,8 +4786,10 @@ jr_007_5BE8:
 
     nop                                           ; $5BF6: $00
     ld   l, b                                     ; $5BF7: $68
-    jr   nz, jr_007_5C0B                          ; $5BF8: $20 $11
+    db   $20                                      ; $5BF8: $20
 
+BlooperEntityHandler::
+    db   $11                                      ; $5BF9
     pop  af                                       ; $5BFA: $F1
     ld   e, e                                     ; $5BFB: $5B
     call RenderAnimatedActiveEntity                               ; $5BFC: $CD $C0 $3B
@@ -4825,7 +4847,7 @@ jr_007_5C2A:
     ret                                           ; $5C57: $C9
 
 jr_007_5C58:
-    call func_007_4005                            ; $5C58: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $5C58: $CD $05 $40
     ld   a, [hl]                                  ; $5C5B: $7E
     sub  $04                                      ; $5C5C: $D6 $04
 
@@ -4875,7 +4897,7 @@ jr_007_5C85:
     and  $01                                      ; $5C87: $E6 $01
     jr   nz, jr_007_5CA0                          ; $5C89: $20 $15
 
-    call func_007_4005                            ; $5C8B: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $5C8B: $CD $05 $40
     dec  [hl]                                     ; $5C8E: $35
     ld   hl, $C380                                ; $5C8F: $21 $80 $C3
     add  hl, bc                                   ; $5C92: $09
@@ -5135,6 +5157,8 @@ jr_007_5CF3:
     ret  nz                                       ; $5DBC: $C0
 
     ld   [label_27F2.skip], sp                    ; $5DBD: $08 $FF $27
+
+SmashablePillarEntityHandler::
     ldh  a, [hLinkPositionY]                      ; $5DC0: $F0 $99
     ld   e, a                                     ; $5DC2: $5F
     ld   hl, wEntitiesPosYTable                         ; $5DC3: $21 $10 $C2
@@ -5510,7 +5534,7 @@ jr_007_5FB1:
 
 jr_007_5FF8:
     ld   a, [hl]                                  ; $5FF8: $7E
-    call func_007_4005                            ; $5FF9: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $5FF9: $CD $05 $40
     ld   [hl], a                                  ; $5FFC: $77
     ld   a, e                                     ; $5FFD: $7B
     and  $01                                      ; $5FFE: $E6 $01
@@ -5519,8 +5543,10 @@ jr_007_5FF8:
     ld   c, [hl]                                  ; $6003: $4E
     nop                                           ; $6004: $00
     ld   c, [hl]                                  ; $6005: $4E
-    jr   nz, jr_007_5FF8                          ; $6006: $20 $F0
+    db   $20                                      ; $6006: $20
 
+EntityA8Handler::
+    db   $F0                                      ; $6007
     ld   [$07FE], a                               ; $6008: $EA $FE $07
     jr   nz, jr_007_602A                          ; $600B: $20 $1D
 
@@ -5603,7 +5629,7 @@ jr_007_6083:
     ld   hl, wEntitiesSpeedXTable                       ; $6084: $21 $40 $C2
     add  hl, bc                                   ; $6087: $09
     sra  [hl]                                     ; $6088: $CB $2E
-    call func_007_4005                            ; $608A: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $608A: $CD $05 $40
     sra  [hl]                                     ; $608D: $CB $2E
 
 jr_007_608F:
@@ -5742,7 +5768,7 @@ func_007_6142:
     inc  a                                        ; $614C: $3C
     sra  a                                        ; $614D: $CB $2F
     ld   [hl], a                                  ; $614F: $77
-    call func_007_4005                            ; $6150: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6150: $CD $05 $40
     ld   a, [hl]                                  ; $6153: $7E
     cpl                                           ; $6154: $2F
     inc  a                                        ; $6155: $3C
@@ -5835,6 +5861,8 @@ jr_007_61CD:
     rlca                                          ; $61CF: $07
     ld   d, b                                     ; $61D0: $50
     daa                                           ; $61D1: $27
+
+SideViewWeightsEntityHandler::
     ld   de, $61CE                                ; $61D2: $11 $CE $61
     call RenderAnimatedActiveEntity                               ; $61D5: $CD $C0 $3B
     call func_007_7D96                            ; $61D8: $CD $96 $7D
@@ -5863,7 +5891,7 @@ jr_007_61FA:
     and  $01                                      ; $61FC: $E6 $01
     jr   nz, jr_007_620E                          ; $61FE: $20 $0E
 
-    call func_007_4005                            ; $6200: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6200: $CD $05 $40
     ld   a, [hl]                                  ; $6203: $7E
     sub  e                                        ; $6204: $93
     jr   z, jr_007_620E                           ; $6205: $28 $07
@@ -5881,7 +5909,7 @@ jr_007_620E:
     ld   hl, $C350                                ; $620E: $21 $50 $C3
     add  hl, bc                                   ; $6211: $09
     ld   [hl], $02                                ; $6212: $36 $02
-    call func_007_4005                            ; $6214: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6214: $CD $05 $40
     ld   a, [hl]                                  ; $6217: $7E
     push hl                                       ; $6218: $E5
     push af                                       ; $6219: $F5
@@ -5907,7 +5935,7 @@ jr_007_620E:
     and  a                                        ; $6236: $A7
     jr   z, jr_007_6246                           ; $6237: $28 $0D
 
-    call func_007_4005                            ; $6239: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6239: $CD $05 $40
     ld   [hl], b                                  ; $623C: $70
     call func_007_631C                            ; $623D: $CD $1C $63
     ld   hl, wEntitiesSpeedYTable                       ; $6240: $21 $50 $C2
@@ -5918,7 +5946,7 @@ jr_007_6246:
     jr   jr_007_625F                              ; $6246: $18 $17
 
 jr_007_6248:
-    call func_007_4005                            ; $6248: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6248: $CD $05 $40
     ld   a, [hl]                                  ; $624B: $7E
     and  a                                        ; $624C: $A7
     jr   z, jr_007_6256                           ; $624D: $28 $07
@@ -5957,7 +5985,7 @@ jr_007_625F:
     or   e                                        ; $627A: $B3
     ld   e, a                                     ; $627B: $5F
     ld   d, b                                     ; $627C: $50
-    call func_007_4005                            ; $627D: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $627D: $CD $05 $40
     ld   a, [hl]                                  ; $6280: $7E
     and  a                                        ; $6281: $A7
     jr   z, jr_007_62D1                           ; $6282: $28 $4D
@@ -6113,6 +6141,9 @@ jr_007_6347:
     jr   @+$52                                    ; $6355: $18 $50
 
     daa                                           ; $6357: $27
+
+SideViewPlatformHorizontalEntityHandler::
+SideViewPlatformVerticalEntityHandler::
     ld   hl, $6348                                ; $6358: $21 $48 $63
     ld   c, $04                                   ; $635B: $0E $04
     call label_3CE6                               ; $635D: $CD $E6 $3C
@@ -6220,7 +6251,7 @@ jr_007_63F6:
     ld   hl, $63F7                                ; $6401: $21 $F7 $63
     add  hl, de                                   ; $6404: $19
     ld   a, [hl]                                  ; $6405: $7E
-    call func_007_4005                            ; $6406: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6406: $CD $05 $40
     add  [hl]                                     ; $6409: $86
     ld   [hl], a                                  ; $640A: $77
     ld   hl, $63F9                                ; $640B: $21 $F9 $63
@@ -6253,7 +6284,9 @@ jr_007_641F:
     jr   jr_007_6481                              ; $642F: $18 $50
 
     daa                                           ; $6431: $27
-    call IsEntityUnknownFZero                                ; $6432: $CD $00 $0C
+
+SideViewPlatformEntityHandler::
+    call IsEntityUnknownFZero                     ; $6432: $CD $00 $0C
     jr   z, jr_007_643B                           ; $6435: $28 $04
 
     ld   a, $04                                   ; $6437: $3E $04
@@ -6303,7 +6336,7 @@ jr_007_6478:
     and  $03                                      ; $647A: $E6 $03
     jr   nz, jr_007_6488                          ; $647C: $20 $0A
 
-    call func_007_4005                            ; $647E: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $647E: $CD $05 $40
 
 jr_007_6481:
     ld   a, [hl]                                  ; $6481: $7E
@@ -6317,7 +6350,7 @@ jr_007_6488:
     ret                                           ; $6488: $C9
 
 jr_007_6489:
-    call func_007_4005                            ; $6489: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6489: $CD $05 $40
     ld   [hl], b                                  ; $648C: $70
     ld   hl, $C440                                ; $648D: $21 $40 $C4
     add  hl, bc                                   ; $6490: $09
@@ -6565,6 +6598,8 @@ jr_007_65CB:
     ld   [bc], a                                  ; $65D7: $02
     ld   c, [hl]                                  ; $65D8: $4E
     ld   [hl+], a                                 ; $65D9: $22
+
+GoombaEntityHandler::
     ld   hl, wEntitiesUnknownTableB               ; $65DA: $21 $B0 $C2
     add  hl, bc                                   ; $65DD: $09
     ld   a, [hl]                                  ; $65DE: $7E
@@ -6628,7 +6663,7 @@ jr_007_6630:
     ld   hl, $6602                                ; $663B: $21 $02 $66
     add  hl, de                                   ; $663E: $19
     ld   a, [hl]                                  ; $663F: $7E
-    call func_007_4005                            ; $6640: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6640: $CD $05 $40
     ld   [hl], a                                  ; $6643: $77
     call IncrementEntityWalkingAttr               ; $6644: $CD $12 $3B
 
@@ -6709,7 +6744,7 @@ jr_007_66B0:
     jp   IncrementEntityWalkingAttr               ; $66B5: $C3 $12 $3B
 
     call func_007_7E0A                            ; $66B8: $CD $0A $7E
-    call func_007_4005                            ; $66BB: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $66BB: $CD $05 $40
     inc  [hl]                                     ; $66BE: $34
     inc  [hl]                                     ; $66BF: $34
     call label_3B23                               ; $66C0: $CD $23 $3B
@@ -6739,7 +6774,7 @@ jr_007_66D4:
     and  $F0                                      ; $66E2: $E6 $F0
     add  $03                                      ; $66E4: $C6 $03
     ld   [hl], a                                  ; $66E6: $77
-    call func_007_4005                            ; $66E7: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $66E7: $CD $05 $40
     ld   [hl], b                                  ; $66EA: $70
     jp   label_007_6660                           ; $66EB: $C3 $60 $66
 
@@ -6768,6 +6803,8 @@ func_007_66FE:
     ld   [bc], a                                  ; $6706: $02
     ld   b, d                                     ; $6707: $42
     ld   [hl+], a                                 ; $6708: $22
+
+PeaHatEntityHandler::
     ld   de, $6701                                ; $6709: $11 $01 $67
     call RenderAnimatedActiveEntity                               ; $670C: $CD $C0 $3B
     call func_007_7D96                            ; $670F: $CD $96 $7D
@@ -6831,7 +6868,7 @@ jr_007_6767:
     dec  [hl]                                     ; $6767: $35
 
 jr_007_6768:
-    call func_007_4005                            ; $6768: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6768: $CD $05 $40
     ld   a, [hl]                                  ; $676B: $7E
     and  a                                        ; $676C: $A7
     jr   z, jr_007_6776                           ; $676D: $28 $07
@@ -6971,7 +7008,7 @@ jr_007_67F6:
     add  hl, de                                   ; $6817: $19
     ld   a, [hl]                                  ; $6818: $7E
     sra  a                                        ; $6819: $CB $2F
-    call func_007_4005                            ; $681B: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $681B: $CD $05 $40
     ld   [hl], a                                  ; $681E: $77
     ld   hl, $67C7                                ; $681F: $21 $C7 $67
     add  hl, de                                   ; $6822: $19
@@ -7010,6 +7047,8 @@ jr_007_683D:
     inc  hl                                       ; $684B: $23
     ld   b, h                                     ; $684C: $44
     inc  hl                                       ; $684D: $23
+
+SnakeEntityHandler::
     ld   hl, $C380                                ; $684E: $21 $80 $C3
     add  hl, bc                                   ; $6851: $09
     ldh  a, [hActiveEntitySpriteVariant]               ; $6852: $F0 $F1
@@ -7077,7 +7116,7 @@ func_007_68AD:
     ld   hl, $688F                                ; $68B8: $21 $8F $68
     add  hl, de                                   ; $68BB: $19
     ld   a, [hl]                                  ; $68BC: $7E
-    call func_007_4005                            ; $68BD: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $68BD: $CD $05 $40
     ld   [hl], a                                  ; $68C0: $77
     ld   hl, $6893                                ; $68C1: $21 $93 $68
     add  hl, de                                   ; $68C4: $19
@@ -7131,7 +7170,7 @@ jr_007_6901:
     ld   hl, wEntitiesSpeedXTable                       ; $6904: $21 $40 $C2
     add  hl, bc                                   ; $6907: $09
     sla  [hl]                                     ; $6908: $CB $26
-    call func_007_4005                            ; $690A: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $690A: $CD $05 $40
     sla  [hl]                                     ; $690D: $CB $26
     call IncrementEntityWalkingAttr               ; $690F: $CD $12 $3B
     ld   [hl], $02                                ; $6912: $36 $02
@@ -7218,7 +7257,7 @@ label_007_696A:
     ld   l, c                                     ; $697C: $69
     and  d                                        ; $697D: $A2
     ld   l, c                                     ; $697E: $69
-    call func_007_4000                            ; $697F: $CD $00 $40
+    call PlayDoorUnlockedSfx                            ; $697F: $CD $00 $40
     call GetEntityTransitionCountdown                 ; $6982: $CD $05 $0C
     ld   [hl], $28                                ; $6985: $36 $28
     jp   IncrementEntityWalkingAttr               ; $6987: $C3 $12 $3B
@@ -7348,6 +7387,7 @@ label_007_6A34:
     call label_27DD                               ; $6A3B: $CD $DD $27
     jp   label_007_7EA4                           ; $6A3E: $C3 $A4 $7E
 
+MasterStalfosEntityHandler::
     ld   hl, $C440                                ; $6A41: $21 $40 $C4
     add  hl, bc                                   ; $6A44: $09
     ld   a, [hl]                                  ; $6A45: $7E
@@ -7832,7 +7872,7 @@ jr_007_6CFE:
 jr_007_6D3B:
     ld   a, $08                                   ; $6D3B: $3E $08
     call label_3BAA                               ; $6D3D: $CD $AA $3B
-    call func_007_4005                            ; $6D40: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $6D40: $CD $05 $40
     ld   [hl], $F0                                ; $6D43: $36 $F0
     ret                                           ; $6D45: $C9
 
@@ -8509,6 +8549,8 @@ jr_007_7111:
     ld   a, [de]                                  ; $7119: $1A
     ld   a, [de]                                  ; $711A: $1A
     ld   a, [de]                                  ; $711B: $1A
+
+FireballShooterEntityHandler::
     call func_007_7D96                            ; $711C: $CD $96 $7D
     call func_007_7E5D                            ; $711F: $CD $5D $7E
     add  $20                                      ; $7122: $C6 $20
@@ -8602,6 +8644,7 @@ jr_007_7193:
 jr_007_7197:
     ret                                           ; $7197: $C9
 
+KanaletBombableWallEntityHandler::
     ld   hl, $C460                                ; $7198: $21 $60 $C4
     add  hl, bc                                   ; $719B: $09
     ld   a, [hl]                                  ; $719C: $7E
@@ -8723,8 +8766,10 @@ jr_007_7246:
     ld   hl, $2176                                ; $7254: $21 $76 $21
     ld   a, h                                     ; $7257: $7C
     ld   bc, $017C                                ; $7258: $01 $7C $01
+
+StarEntityHandler::
     ld   de, $7247                                ; $725B: $11 $47 $72
-    call RenderAnimatedActiveEntity                               ; $725E: $CD $C0 $3B
+    call RenderAnimatedActiveEntity               ; $725E: $CD $C0 $3B
     call func_007_7D96                            ; $7261: $CD $96 $7D
     call func_007_7DC3                            ; $7264: $CD $C3 $7D
     call label_3B39                               ; $7267: $CD $39 $3B
@@ -8752,7 +8797,7 @@ jr_007_7280:
     jr   jr_007_7291                              ; $7288: $18 $07
 
 jr_007_728A:
-    call func_007_4005                            ; $728A: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $728A: $CD $05 $40
     ld   a, [hl]                                  ; $728D: $7E
     cpl                                           ; $728E: $2F
     inc  a                                        ; $728F: $3C
@@ -8786,7 +8831,9 @@ jr_007_7291:
     nop                                           ; $72AC: $00
     ld   d, [hl]                                  ; $72AD: $56
     nop                                           ; $72AE: $00
-    ldh  a, [hActiveEntitySpriteVariant]               ; $72AF: $F0 $F1
+
+HidingGelEntityHandler::
+    ldh  a, [hActiveEntitySpriteVariant]          ; $72AF: $F0 $F1
     cp   $01                                      ; $72B1: $FE $01
     jr   nz, jr_007_72BD                          ; $72B3: $20 $08
 
@@ -9005,6 +9052,7 @@ func_007_73F7:
     ld   [hl], b                                  ; $7404: $70
     ret                                           ; $7405: $C9
 
+FlyingTilesEntityHandler::
     call func_007_7D96                            ; $7406: $CD $96 $7D
     ldh  a, [hActiveEntityState]                  ; $7409: $F0 $F0
     rst  $00                                      ; $740B: $C7
@@ -9235,8 +9283,10 @@ jr_007_752C:
 
     nop                                           ; $7532: $00
     ld   [hl], d                                  ; $7533: $72
-    jr   nz, jr_007_7547                          ; $7534: $20 $11
+    db   $20                          ; $7534: $20
 
+WaterTektiteEntityHandler::
+    db   $11                                      ; $7535
     dec  l                                        ; $7536: $2D
     ld   [hl], l                                  ; $7537: $75
     call RenderAnimatedActiveEntity                               ; $7538: $CD $C0 $3B
@@ -9316,7 +9366,7 @@ jr_007_75A4:
     ld   hl, wEntitiesUnknownTableC               ; $75AC: $21 $C0 $C2
     add  hl, bc                                   ; $75AF: $09
     ld   a, [hl]                                  ; $75B0: $7E
-    call func_007_4005                            ; $75B1: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $75B1: $CD $05 $40
     add  [hl]                                     ; $75B4: $86
     ld   [hl], a                                  ; $75B5: $77
 
@@ -9341,7 +9391,7 @@ jr_007_75B6:
 
 jr_007_75CF:
     call func_007_75D6                            ; $75CF: $CD $D6 $75
-    call func_007_4005                            ; $75D2: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $75D2: $CD $05 $40
     ld   a, [hl]                                  ; $75D5: $7E
 
 func_007_75D6:
@@ -9377,6 +9427,8 @@ jr_007_75DD:
     inc  hl                                       ; $75EF: $23
     ld   h, h                                     ; $75F0: $64
     inc  hl                                       ; $75F1: $23
+
+HorsePieceEntityHandler::
     ld   hl, $C460                                ; $75F2: $21 $60 $C4
     add  hl, bc                                   ; $75F5: $09
     ld   a, [hl]                                  ; $75F6: $7E
@@ -9517,7 +9569,7 @@ jr_007_76A1:
     ld   hl, $764B                                ; $76B6: $21 $4B $76
     add  hl, de                                   ; $76B9: $19
     ld   a, [hl]                                  ; $76BA: $7E
-    call func_007_4005                            ; $76BB: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $76BB: $CD $05 $40
     ld   [hl], a                                  ; $76BE: $77
     call func_007_76E7                            ; $76BF: $CD $E7 $76
 
@@ -9683,8 +9735,10 @@ jr_007_7783:
 
     nop                                           ; $77A1: $00
     ld   h, [hl]                                  ; $77A2: $66
-    jr   nz, jr_007_77B6                          ; $77A3: $20 $11
+    db   $20                                      ; $77A3: $20
 
+SpikedBeetleEntityHandler::
+    db   $11                                      ; $77A4
     add  h                                        ; $77A5: $84
     ld   [hl], a                                  ; $77A6: $77
     ldh  a, [hMapId]                              ; $77A7: $F0 $F7
@@ -9734,7 +9788,7 @@ jr_007_77E2:
     ld   hl, wEntitiesSpeedXTable                       ; $77E9: $21 $40 $C2
     add  hl, bc                                   ; $77EC: $09
     sra  [hl]                                     ; $77ED: $CB $2E
-    call func_007_4005                            ; $77EF: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $77EF: $CD $05 $40
     sra  [hl]                                     ; $77F2: $CB $2E
     ld   hl, wEntitiesSpeedZTable                                ; $77F4: $21 $20 $C3
     add  hl, bc                                   ; $77F7: $09
@@ -9813,7 +9867,7 @@ jr_007_784A:
     ld   hl, $7821                                ; $7855: $21 $21 $78
     add  hl, de                                   ; $7858: $19
     ld   a, [hl]                                  ; $7859: $7E
-    call func_007_4005                            ; $785A: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $785A: $CD $05 $40
     ld   [hl], a                                  ; $785D: $77
 
 jr_007_785E:
@@ -9893,7 +9947,7 @@ jr_007_78C3:
     ld   hl, $78A1                                ; $78C3: $21 $A1 $78
     add  hl, de                                   ; $78C6: $19
     ld   a, [hl]                                  ; $78C7: $7E
-    call func_007_4005                            ; $78C8: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $78C8: $CD $05 $40
     sub  [hl]                                     ; $78CB: $96
     jr   z, jr_007_78D5                           ; $78CC: $28 $07
 
@@ -9986,6 +10040,8 @@ jr_007_792B:
     ld   b, $04                                   ; $793D: $06 $04
     ld   [bc], a                                  ; $793F: $02
     nop                                           ; $7940: $00
+
+MoblinSwordEntityHandler::
     ldh  a, [hMapId]                              ; $7941: $F0 $F7
     cp   $15                                      ; $7943: $FE $15
     jr   nz, jr_007_794F                          ; $7945: $20 $08
@@ -10057,7 +10113,7 @@ func_007_7996:
     ld   hl, $797C                                ; $79AA: $21 $7C $79
     add  hl, de                                   ; $79AD: $19
     ld   a, [hl]                                  ; $79AE: $7E
-    call func_007_4005                            ; $79AF: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $79AF: $CD $05 $40
     ld   [hl], a                                  ; $79B2: $77
 
 jr_007_79B3:
@@ -10529,7 +10585,7 @@ func_007_7DC3:
     add  hl, bc                                   ; $7DD3: $09
     ld   a, [hl]                                  ; $7DD4: $7E
     push af                                       ; $7DD5: $F5
-    call func_007_4005                            ; $7DD6: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $7DD6: $CD $05 $40
     ld   a, [hl]                                  ; $7DD9: $7E
     push af                                       ; $7DDA: $F5
     ld   hl, $C3F0                                ; $7DDB: $21 $F0 $C3
@@ -10541,7 +10597,7 @@ func_007_7DC3:
     ld   hl, $C400                                ; $7DE5: $21 $00 $C4
     add  hl, bc                                   ; $7DE8: $09
     ld   a, [hl]                                  ; $7DE9: $7E
-    call func_007_4005                            ; $7DEA: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $7DEA: $CD $05 $40
     ld   [hl], a                                  ; $7DED: $77
     call func_007_7E0A                            ; $7DEE: $CD $0A $7E
     ld   hl, wEntitiesUnknowTableH                ; $7DF1: $21 $30 $C4
@@ -10553,7 +10609,7 @@ func_007_7DC3:
     call label_3B23                               ; $7DFA: $CD $23 $3B
 
 jr_007_7DFD:
-    call func_007_4005                            ; $7DFD: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $7DFD: $CD $05 $40
     pop  af                                       ; $7E00: $F1
     ld   [hl], a                                  ; $7E01: $77
     ld   hl, wEntitiesSpeedXTable                       ; $7E02: $21 $40 $C2
@@ -10822,7 +10878,7 @@ label_007_7F36:
     and  a                                        ; $7F60: $A7
     jr   z, jr_007_7F6A                           ; $7F61: $28 $07
 
-    call func_007_4005                            ; $7F63: $CD $05 $40
+    call GetEntitySpeedYAddress                            ; $7F63: $CD $05 $40
     ld   [hl], $F0                                ; $7F66: $36 $F0
     jr   jr_007_7F76                              ; $7F68: $18 $0C
 

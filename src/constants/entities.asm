@@ -205,7 +205,7 @@ ENTITY_BUSH_CRAWLER                  equ $BB
 ENTITY_GRIM_CREEPER                  equ $BC
 ENTITY_VIRE                          equ $BD
 ENTITY_BLAINO                        equ $BE
-ENTITY_ZOMBIES                       equ $BF
+ENTITY_ZOMBIE                        equ $BF
 ENTITY_MAZE_SIGNPOST                 equ $C0
 ENTITY_MARIN_AT_THE_SHORE            equ $C1
 ENTITY_MARIN_AT_TAL_TAL_HEIGHTS      equ $C2
@@ -214,7 +214,7 @@ ENTITY_WALRUS                        equ $C4
 ENTITY_URCHIN                        equ $C5
 ENTITY_SAND_CRAB                     equ $C6
 ENTITY_MANBO_AND_FISHES              equ $C7
-ENTITY_BUNNY_CALLS_MARIN             equ $C8
+ENTITY_BUNNY_CALLING_MARIN           equ $C8
 ENTITY_MUSICAL_NOTE                  equ $C9
 ENTITY_MAD_BATTER                    equ $CA
 ENTITY_ZORA                          equ $CB
@@ -245,7 +245,7 @@ ENTITY_POKEY                         equ $E3
 ENTITY_MOBLIN_KING                   equ $E4
 ENTITY_FLOATING_ITEM_2               equ $E5
 ENTITY_FINAL_NIGHTMARE               equ $E6
-ENTITY_KANLET_CASTLE_GATE_SWITCH     equ $E7
+ENTITY_KANALET_CASTLE_GATE_SWITCH    equ $E7
 ENTITY_ENDING_OWL_STAIR_CLIMBING     equ $E8
 ENTITY_COLOR_SHELL_RED               equ $E9
 ENTITY_COLOR_SHELL_GREEN             equ $EA
@@ -258,13 +258,13 @@ ENTITY_ROTOSWITCH_YELLOW             equ $F0
 ENTITY_ROTOSWITCH_BLUE               equ $F1
 ENTITY_FLYING_HOPPER_BOMBS           equ $F2
 ENTITY_HOPPER                        equ $F3
-ENTITY_GOLEM_BOSS                    equ $F4
+ENTITY_AVALAUNCH                     equ $F4
 ENTITY_BOUNCING_BOULDER              equ $F5
 ENTITY_COLOR_GUARDIAN_BLUE           equ $F6
 ENTITY_COLOR_GUARDIAN_RED            equ $F7
 ENTITY_GIANT_BUZZ_BLOB               equ $F8
-ENTITY_COLOR_DUNGEON_BOSS            equ $F9
-ENTITY_PHOTOGRAPHER_RELATED          equ $FA
+ENTITY_HARDHIT_BEETLE                equ $F9
+ENTITY_PHOTOGRAPHER                  equ $FA
 ; unused                             equ $FB
 ; unused                             equ $FC
 ; unused                             equ $FD

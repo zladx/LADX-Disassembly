@@ -1347,7 +1347,7 @@ func_002_4B49::
     cp   MAP_WINDFISHS_EGG                        ; $4B51: $FE $08
     jr   nz, jr_002_4B64                          ; $4B53: $20 $0F
 
-    ld   a, [$D219]                               ; $4B55: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                               ; $4B55: $FA $19 $D2
     cp   $02                                      ; $4B58: $FE $02
     jr   nz, jr_002_4B64                          ; $4B5A: $20 $08
 

@@ -421,7 +421,7 @@ jr_003_499C:
     ret                                           ; $49A5: $C9
 
     xor  a                                        ; $49A6: $AF
-    ld   [$D219], a                               ; $49A7: $EA $19 $D2
+    ld   [wFinalNightmareForm], a                               ; $49A7: $EA $19 $D2
     jp   label_27F2                               ; $49AA: $C3 $F2 $27
 
     ld   a, $24                                   ; $49AD: $3E $24
@@ -6842,7 +6842,7 @@ label_003_6FE8:
     cp   $E6                                      ; $6FED: $FE $E6
     jr   nz, jr_003_7018                          ; $6FEF: $20 $27
 
-    ld   a, [$D219]                               ; $6FF1: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                               ; $6FF1: $FA $19 $D2
     rst  $00                                      ; $6FF4: $C7
     ld   d, [hl]                                  ; $6FF5: $56
     ld   c, e                                     ; $6FF6: $4B
@@ -7180,7 +7180,7 @@ label_003_71C0:
     cp   $E6                                      ; $71F7: $FE $E6
     jr   nz, jr_003_7215                          ; $71F9: $20 $1A
 
-    ld   a, [$D219]                               ; $71FB: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                               ; $71FB: $FA $19 $D2
     cp   $04                                      ; $71FE: $FE $04
     jr   nz, jr_003_7215                          ; $7200: $20 $13
 
@@ -7502,7 +7502,7 @@ jr_003_73B6:
     cp   $E6                                      ; $73BF: $FE $E6
     jr   nz, jr_003_73CC                          ; $73C1: $20 $09
 
-    ld   a, [$D219]                               ; $73C3: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                               ; $73C3: $FA $19 $D2
     cp   $03                                      ; $73C6: $FE $03
     jr   z, jr_003_73D0                           ; $73C8: $28 $06
 
@@ -7958,7 +7958,7 @@ entitiesLoop:
     cp   $E6                                      ; $7645: $FE $E6
     jr   nz, jr_003_7656                          ; $7647: $20 $0D
 
-    ld   a, [$D219]                               ; $7649: $FA $19 $D2
+    ld   a, [wFinalNightmareForm]                               ; $7649: $FA $19 $D2
     cp   $05                                      ; $764C: $FE $05
     jr   nz, jr_003_7656                          ; $764E: $20 $06
 

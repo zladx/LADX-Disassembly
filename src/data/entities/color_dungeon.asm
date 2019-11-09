@@ -1,137 +1,137 @@
 ; File generated automatically by `tools/generate_entities_data.py`
 
 ColorDungeon00Entities::
-  db   $25, ENTITY_HARDHIT_BEETLE
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_HARDHIT_BEETLE
+  entities_end
 
 ColorDungeon01Entities::
-  db   $24, ENTITY_BIG_FAIRY
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_BIG_FAIRY
+  entities_end
 
 ColorDungeon02Entities::
-  db   ENTITIES_END
+  entities_end
 
 ColorDungeon03Entities::
-  db   $24, ENTITY_GIANT_BUZZ_BLOB
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_GIANT_BUZZ_BLOB
+  entities_end
 
 ColorDungeon04Entities::
-  db   $61, ENTITY_CRYSTAL_SWITCH
-  db   ENTITIES_END
+  entity $6, $1, ENTITY_CRYSTAL_SWITCH
+  entities_end
 
 ColorDungeon05Entities::
-  db   $23, ENTITY_HIDING_GEL
-  db   $53, ENTITY_HIDING_GEL
-  db   $26, ENTITY_HIDING_GEL
-  db   $56, ENTITY_HIDING_GEL
-  db   $18, ENTITY_DROPPABLE_FAIRY
-  db   $61, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_HIDING_GEL
+  entity $5, $3, ENTITY_HIDING_GEL
+  entity $2, $6, ENTITY_HIDING_GEL
+  entity $5, $6, ENTITY_HIDING_GEL
+  entity $1, $8, ENTITY_DROPPABLE_FAIRY
+  entity $6, $1, ENTITY_DROPPABLE_HEART
+  entities_end
 
 ColorDungeon06Entities::
-  db   $42, ENTITY_HIDING_GEL
-  db   $33, ENTITY_HIDING_GEL
-  db   $32, ENTITY_GEL
-  db   $14, ENTITY_GEL
-  db   $38, ENTITY_HIDING_GEL
-  db   $47, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_HIDING_GEL
+  entity $3, $3, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_GEL
+  entity $1, $4, ENTITY_GEL
+  entity $3, $8, ENTITY_HIDING_GEL
+  entity $4, $7, ENTITY_HIDING_GEL
+  entities_end
 
 ColorDungeon07Entities::
-  db   $35, ENTITY_COLOR_SHELL_GREEN
-  db   $44, ENTITY_COLOR_SHELL_GREEN
-  db   $34, ENTITY_COLOR_SHELL_RED
-  db   $45, ENTITY_COLOR_SHELL_BLUE
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_COLOR_SHELL_GREEN
+  entity $4, $4, ENTITY_COLOR_SHELL_GREEN
+  entity $3, $4, ENTITY_COLOR_SHELL_RED
+  entity $4, $5, ENTITY_COLOR_SHELL_BLUE
+  entities_end
 
 ColorDungeon08Entities::
-  db   $23, ENTITY_ROTOSWITCH_RED
-  db   $26, ENTITY_ROTOSWITCH_BLUE
-  db   $53, ENTITY_ROTOSWITCH_BLUE
-  db   $56, ENTITY_ROTOSWITCH_YELLOW
-  db   $04, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_ROTOSWITCH_RED
+  entity $2, $6, ENTITY_ROTOSWITCH_BLUE
+  entity $5, $3, ENTITY_ROTOSWITCH_BLUE
+  entity $5, $6, ENTITY_ROTOSWITCH_YELLOW
+  entity $0, $4, ENTITY_OWL_STATUE
+  entities_end
 
 ColorDungeon09Entities::
-  db   $68, ENTITY_COLOR_GHOUL_RED
-  db   $52, ENTITY_COLOR_GHOUL_GREEN
-  db   $15, ENTITY_COLOR_GHOUL_BLUE
-  db   ENTITIES_END
+  entity $6, $8, ENTITY_COLOR_GHOUL_RED
+  entity $5, $2, ENTITY_COLOR_GHOUL_GREEN
+  entity $1, $5, ENTITY_COLOR_GHOUL_BLUE
+  entities_end
 
 ColorDungeon0AEntities::
-  db   $22, ENTITY_ROTOSWITCH_BLUE
-  db   $42, ENTITY_ROTOSWITCH_RED
-  db   $62, ENTITY_ROTOSWITCH_BLUE
-  db   $24, ENTITY_ROTOSWITCH_RED
-  db   $44, ENTITY_ROTOSWITCH_BLUE
-  db   $64, ENTITY_ROTOSWITCH_RED
-  db   $26, ENTITY_ROTOSWITCH_BLUE
-  db   $46, ENTITY_ROTOSWITCH_RED
-  db   $66, ENTITY_ROTOSWITCH_BLUE
-  db   $03, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_ROTOSWITCH_BLUE
+  entity $4, $2, ENTITY_ROTOSWITCH_RED
+  entity $6, $2, ENTITY_ROTOSWITCH_BLUE
+  entity $2, $4, ENTITY_ROTOSWITCH_RED
+  entity $4, $4, ENTITY_ROTOSWITCH_BLUE
+  entity $6, $4, ENTITY_ROTOSWITCH_RED
+  entity $2, $6, ENTITY_ROTOSWITCH_BLUE
+  entity $4, $6, ENTITY_ROTOSWITCH_RED
+  entity $6, $6, ENTITY_ROTOSWITCH_BLUE
+  entity $0, $3, ENTITY_OWL_STATUE
+  entities_end
 
 ColorDungeon0BEntities::
-  db   $33, ENTITY_FLYING_HOPPER_BOMBS
-  db   $45, ENTITY_HOPPER
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_FLYING_HOPPER_BOMBS
+  entity $4, $5, ENTITY_HOPPER
+  entities_end
 
 ColorDungeon0CEntities::
-  db   $15, ENTITY_AVALAUNCH
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_AVALAUNCH
+  entities_end
 
 ColorDungeon0DEntities::
-  db   $33, ENTITY_FLYING_HOPPER_BOMBS
-  db   $46, ENTITY_FLYING_HOPPER_BOMBS
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_FLYING_HOPPER_BOMBS
+  entity $4, $6, ENTITY_FLYING_HOPPER_BOMBS
+  entities_end
 
 ColorDungeon0EEntities::
-  db   $25, ENTITY_COLOR_GHOUL_RED
-  db   $52, ENTITY_COLOR_GHOUL_GREEN
-  db   $57, ENTITY_COLOR_GHOUL_GREEN
-  db   $11, ENTITY_DROPPABLE_MAGIC_POWDER
-  db   $18, ENTITY_DROPPABLE_RUPEE
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_COLOR_GHOUL_RED
+  entity $5, $2, ENTITY_COLOR_GHOUL_GREEN
+  entity $5, $7, ENTITY_COLOR_GHOUL_GREEN
+  entity $1, $1, ENTITY_DROPPABLE_MAGIC_POWDER
+  entity $1, $8, ENTITY_DROPPABLE_RUPEE
+  entities_end
 
 ColorDungeon0FEntities::
-  db   $22, ENTITY_ROTOSWITCH_RED
-  db   $27, ENTITY_ROTOSWITCH_BLUE
-  db   $52, ENTITY_ROTOSWITCH_BLUE
-  db   $57, ENTITY_ROTOSWITCH_RED
-  db   $05, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_ROTOSWITCH_RED
+  entity $2, $7, ENTITY_ROTOSWITCH_BLUE
+  entity $5, $2, ENTITY_ROTOSWITCH_BLUE
+  entity $5, $7, ENTITY_ROTOSWITCH_RED
+  entity $0, $5, ENTITY_OWL_STATUE
+  entities_end
 
 ColorDungeon10Entities::
-  db   $55, ENTITY_FLYING_HOPPER_BOMBS
-  db   $63, ENTITY_DROPPABLE_BOMBS
-  db   ENTITIES_END
+  entity $5, $5, ENTITY_FLYING_HOPPER_BOMBS
+  entity $6, $3, ENTITY_DROPPABLE_BOMBS
+  entities_end
 
 ColorDungeon11Entities::
-  db   $34, ENTITY_COLOR_SHELL_GREEN
-  db   $45, ENTITY_COLOR_SHELL_RED
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_COLOR_SHELL_GREEN
+  entity $4, $5, ENTITY_COLOR_SHELL_RED
+  entities_end
 
 ColorDungeon12Entities::
-  db   $14, ENTITY_COLOR_GUARDIAN_BLUE
-  db   $15, ENTITY_COLOR_GUARDIAN_RED
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_COLOR_GUARDIAN_BLUE
+  entity $1, $5, ENTITY_COLOR_GUARDIAN_RED
+  entities_end
 
 ColorDungeon13Entities::
-  db   ENTITIES_END
+  entities_end
 
 ColorDungeon14Entities::
-  db   $43, ENTITY_HOPPER
-  db   $63, ENTITY_HOPPER
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_HOPPER
+  entity $6, $3, ENTITY_HOPPER
+  entities_end
 
 ColorDungeon15Entities::
-  db   $22, ENTITY_COLOR_GHOUL_RED
-  db   $27, ENTITY_COLOR_GHOUL_RED
-  db   $52, ENTITY_COLOR_GHOUL_GREEN
-  db   $57, ENTITY_COLOR_GHOUL_GREEN
-  db   $18, ENTITY_DROPPABLE_MAGIC_POWDER
-  db   $61, ENTITY_DROPPABLE_RUPEE
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_COLOR_GHOUL_RED
+  entity $2, $7, ENTITY_COLOR_GHOUL_RED
+  entity $5, $2, ENTITY_COLOR_GHOUL_GREEN
+  entity $5, $7, ENTITY_COLOR_GHOUL_GREEN
+  entity $1, $8, ENTITY_DROPPABLE_MAGIC_POWDER
+  entity $6, $1, ENTITY_DROPPABLE_RUPEE
+  entities_end
 
 ColorDungeon16Entities::
 ColorDungeon17Entities::
@@ -143,5 +143,5 @@ ColorDungeon1CEntities::
 ColorDungeon1DEntities::
 ColorDungeon1EEntities::
 ColorDungeon1FEntities::
-  db   ENTITIES_END
+  entities_end
 

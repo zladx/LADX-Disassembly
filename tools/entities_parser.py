@@ -28,7 +28,6 @@ class EntitiesTableParser:
 
     def pointers_for_list(self, list):
         local_list_address = list.address - (0x16 * 0x4000) + 0x4000
-        #print(f"Finding address {local_list_address} in pointers")
         return [pointer for pointer in self.pointers if pointer.address == local_list_address]
 
     def _parse_pointers_table(self, rom, table_descriptor):
@@ -104,5 +103,5 @@ class Entity:
     """Represent an entity type and position in a room"""
     def __init__(self, type, position):
         self.type = type
-        self.position = position
-
+        self.horizontal = position & 0x0F
+        self.vertical = position >> 4

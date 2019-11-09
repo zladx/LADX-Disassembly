@@ -1,1265 +1,1265 @@
 ; File generated automatically by `tools/generate_entities_data.py`
 
 Overworld00Entities::
-  db   $67, ENTITY_MINI_MOLDORM
-  db   $24, ENTITY_HEART_PIECE
-  db   $26, ENTITY_CROW
-  db   ENTITIES_END
+  entity $6, $7, ENTITY_MINI_MOLDORM
+  entity $2, $4, ENTITY_HEART_PIECE
+  entity $2, $6, ENTITY_CROW
+  entities_end
 
 Overworld01Entities::
-  db   $46, ENTITY_WARP
-  db   $53, ENTITY_CROW
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_WARP
+  entity $5, $3, ENTITY_CROW
+  entities_end
 
 Overworld02Entities::
-  db   $64, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $6, $4, ENTITY_MOBLIN
+  entities_end
 
 Overworld03Entities::
-  db   $63, ENTITY_LEEVER
-  db   ENTITIES_END
+  entity $6, $3, ENTITY_LEEVER
+  entities_end
 
 Overworld04Entities::
-  db   $53, ENTITY_MINI_MOLDORM
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_MINI_MOLDORM
+  entities_end
 
 Overworld05Entities::
-  db   $45, ENTITY_MINI_MOLDORM
-  db   ENTITIES_END
+  entity $4, $5, ENTITY_MINI_MOLDORM
+  entities_end
 
 Overworld06Entities::
-  db   $00, ENTITY_EGG_SONG_EVENT
-  db   $F0, ENTITY_OWL_EVENT
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_EGG_SONG_EVENT
+  entity $F, $0, ENTITY_OWL_EVENT
+  entities_end
 
 Overworld07Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld08Entities::
-  db   $00, ENTITY_OWL_EVENT
-  db   $24, ENTITY_MARIN_AT_TAL_TAL_HEIGHTS
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_OWL_EVENT
+  entity $2, $4, ENTITY_MARIN_AT_TAL_TAL_HEIGHTS
+  entities_end
 
 Overworld09Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld0AEntities::
-  db   $32, ENTITY_TEKTITE
-  db   $36, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_TEKTITE
+  entity $3, $6, ENTITY_TEKTITE
+  entities_end
 
 Overworld0BEntities::
-  db   $12, ENTITY_TEKTITE
-  db   $56, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_TEKTITE
+  entity $5, $6, ENTITY_TEKTITE
+  entities_end
 
 Overworld0CEntities::
-  db   $28, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $37, ENTITY_BUSH_CRAWLER
-  db   ENTITIES_END
+  entity $2, $8, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $3, $7, ENTITY_BUSH_CRAWLER
+  entities_end
 
 Overworld0DEntities::
-  db   $46, ENTITY_BUSH_CRAWLER
-  db   $49, ENTITY_PHOTOGRAPHER
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_BUSH_CRAWLER
+  entity $4, $9, ENTITY_PHOTOGRAPHER
+  entities_end
 
 Overworld0EEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld0FEntities::
-  db   $52, ENTITY_TEKTITE
-  db   $57, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $5, $2, ENTITY_TEKTITE
+  entity $5, $7, ENTITY_TEKTITE
+  entities_end
 
 Overworld10Entities::
-  db   $15, ENTITY_TURTLE_ROCK_HEAD
-  db   $13, ENTITY_CROW
-  db   $17, ENTITY_CROW
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_TURTLE_ROCK_HEAD
+  entity $1, $3, ENTITY_CROW
+  entity $1, $7, ENTITY_CROW
+  entities_end
 
 Overworld11Entities::
-  db   $33, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_MOBLIN
+  entities_end
 
 Overworld12Entities::
-  db   $13, ENTITY_LEEVER
-  db   $25, ENTITY_LIKE_LIKE
-  db   $32, ENTITY_LEEVER
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_LEEVER
+  entity $2, $5, ENTITY_LIKE_LIKE
+  entity $3, $2, ENTITY_LEEVER
+  entities_end
 
 Overworld13Entities::
-  db   $44, ENTITY_MOBLIN
-  db   $55, ENTITY_LIKE_LIKE
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_MOBLIN
+  entity $5, $5, ENTITY_LIKE_LIKE
+  entities_end
 
 Overworld14Entities::
-  db   $53, ENTITY_MINI_MOLDORM
-  db   $00, ENTITY_BOULDERS
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_MINI_MOLDORM
+  entity $0, $0, ENTITY_BOULDERS
+  entities_end
 
 Overworld15Entities::
-  db   $00, ENTITY_BOULDERS
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_BOULDERS
+  entities_end
 
 Overworld16Entities::
-  db   $35, ENTITY_OWL_EVENT
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_OWL_EVENT
+  entities_end
 
 Overworld17Entities::
-  db   $00, ENTITY_OWL_EVENT
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_OWL_EVENT
+  entities_end
 
 Overworld18Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld19Entities::
-  db   $26, ENTITY_PAPAHL
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_PAPAHL
+  entities_end
 
 Overworld1AEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld1BEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld1CEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld1DEntities::
-  db   $23, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_TEKTITE
+  entities_end
 
 Overworld1EEntities::
-  db   $56, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $5, $6, ENTITY_TEKTITE
+  entities_end
 
 Overworld1FEntities::
-  db   $57, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $5, $7, ENTITY_TEKTITE
+  entities_end
 
 Overworld20Entities::
-  db   $25, ENTITY_MOBLIN
-  db   $32, ENTITY_LIKE_LIKE
-  db   $45, ENTITY_LIKE_LIKE
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_MOBLIN
+  entity $3, $2, ENTITY_LIKE_LIKE
+  entity $4, $5, ENTITY_LIKE_LIKE
+  entities_end
 
 Overworld21Entities::
-  db   $36, ENTITY_LIKE_LIKE
-  db   $53, ENTITY_MOBLIN
-  db   $56, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $6, ENTITY_LIKE_LIKE
+  entity $5, $3, ENTITY_MOBLIN
+  entity $5, $6, ENTITY_MOBLIN
+  entities_end
 
 Overworld22Entities::
-  db   $38, ENTITY_GOPONGA_FLOWER
-  db   $67, ENTITY_GOPONGA_FLOWER
-  db   $53, ENTITY_FISH
-  db   ENTITIES_END
+  entity $3, $8, ENTITY_GOPONGA_FLOWER
+  entity $6, $7, ENTITY_GOPONGA_FLOWER
+  entity $5, $3, ENTITY_FISH
+  entities_end
 
 Overworld23Entities::
-  db   $35, ENTITY_GIANT_GOPONGA_FLOWER
-  db   $54, ENTITY_FISH
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_GIANT_GOPONGA_FLOWER
+  entity $5, $4, ENTITY_FISH
+  entities_end
 
 Overworld24Entities::
-  db   $22, ENTITY_GOPONGA_FLOWER
-  db   $24, ENTITY_GOPONGA_FLOWER
-  db   $32, ENTITY_GOPONGA_FLOWER
-  db   $34, ENTITY_GOPONGA_FLOWER
-  db   $43, ENTITY_GOPONGA_FLOWER
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_GOPONGA_FLOWER
+  entity $2, $4, ENTITY_GOPONGA_FLOWER
+  entity $3, $2, ENTITY_GOPONGA_FLOWER
+  entity $3, $4, ENTITY_GOPONGA_FLOWER
+  entity $4, $3, ENTITY_GOPONGA_FLOWER
+  entities_end
 
 Overworld25Entities::
-  db   $43, ENTITY_MOBLIN
-  db   $55, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_MOBLIN
+  entity $5, $5, ENTITY_MOBLIN
+  entities_end
 
 Overworld26Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld27Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld28Entities::
-  db   $33, ENTITY_MOBLIN
-  db   $53, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_MOBLIN
+  entity $5, $3, ENTITY_MOBLIN
+  entities_end
 
 Overworld29Entities::
-  db   $55, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $5, $5, ENTITY_MOBLIN
+  entities_end
 
 Overworld2AEntities::
-  db   $64, ENTITY_TEKTITE
-  db   $67, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $6, $4, ENTITY_TEKTITE
+  entity $6, $7, ENTITY_TEKTITE
+  entities_end
 
 Overworld2BEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld2CEntities::
-  db   $46, ENTITY_WARP
-  db   $54, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_WARP
+  entity $5, $4, ENTITY_TEKTITE
+  entities_end
 
 Overworld2DEntities::
-  db   $53, ENTITY_LIKE_LIKE
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_LIKE_LIKE
+  entities_end
 
 Overworld2EEntities::
-  db   $47, ENTITY_LIKE_LIKE
-  db   ENTITIES_END
+  entity $4, $7, ENTITY_LIKE_LIKE
+  entities_end
 
 Overworld2FEntities::
-  db   $43, ENTITY_OCTOROCK
-  db   $54, ENTITY_OCTOROCK
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_OCTOROCK
+  entity $5, $4, ENTITY_OCTOROCK
+  entities_end
 
 Overworld30Entities::
-  db   $43, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_MOBLIN
+  entities_end
 
 Overworld31Entities::
-  db   $22, ENTITY_MOBLIN
-  db   $52, ENTITY_LIKE_LIKE
-  db   $63, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_MOBLIN
+  entity $5, $2, ENTITY_LIKE_LIKE
+  entity $6, $3, ENTITY_MOBLIN
+  entities_end
 
 Overworld32Entities::
-  db   $27, ENTITY_FISH
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_FISH
+  entities_end
 
 Overworld33Entities::
-  db   $17, ENTITY_GIANT_GOPONGA_FLOWER
-  db   $25, ENTITY_GOPONGA_FLOWER
-  db   $32, ENTITY_FISH
-  db   ENTITIES_END
+  entity $1, $7, ENTITY_GIANT_GOPONGA_FLOWER
+  entity $2, $5, ENTITY_GOPONGA_FLOWER
+  entity $3, $2, ENTITY_FISH
+  entities_end
 
 Overworld34Entities::
-  db   $15, ENTITY_FISH
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_FISH
+  entities_end
 
 Overworld35Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld36Entities::
-  db   $45, ENTITY_OWL_EVENT
-  db   ENTITIES_END
+  entity $4, $5, ENTITY_OWL_EVENT
+  entities_end
 
 Overworld37Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld38Entities::
-  db   $42, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_MOBLIN
+  entities_end
 
 Overworld39Entities::
-  db   $35, ENTITY_MOBLIN
-  db   $46, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_MOBLIN
+  entity $4, $6, ENTITY_MOBLIN
+  entities_end
 
 Overworld3AEntities::
-  db   $24, ENTITY_MOBLIN
-  db   $44, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_MOBLIN
+  entity $4, $4, ENTITY_TEKTITE
+  entities_end
 
 Overworld3BEntities::
-  db   $37, ENTITY_BOMBER
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_BOMBER
+  entities_end
 
 Overworld3CEntities::
-  db   $24, ENTITY_TEKTITE
-  db   $36, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_TEKTITE
+  entity $3, $6, ENTITY_TEKTITE
+  entities_end
 
 Overworld3DEntities::
-  db   $36, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $3, $6, ENTITY_TEKTITE
+  entities_end
 
 Overworld3EEntities::
-  db   $26, ENTITY_LIKE_LIKE
-  db   $37, ENTITY_LIKE_LIKE
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_LIKE_LIKE
+  entity $3, $7, ENTITY_LIKE_LIKE
+  entities_end
 
 Overworld3FEntities::
-  db   $54, ENTITY_RAFT_RAFT_OWNER
-  db   ENTITIES_END
+  entity $5, $4, ENTITY_RAFT_RAFT_OWNER
+  entities_end
 
 Overworld40Entities::
-  db   $24, ENTITY_MOBLIN
-  db   $56, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_MOBLIN
+  entity $5, $6, ENTITY_MOBLIN
+  entities_end
 
 Overworld41Entities::
-  db   $00, ENTITY_OWL_EVENT
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_OWL_EVENT
+  entities_end
 
 Overworld42Entities::
-  db   $45, ENTITY_GEL
-  db   $54, ENTITY_GEL
-  db   $47, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $4, $5, ENTITY_GEL
+  entity $5, $4, ENTITY_GEL
+  entity $4, $7, ENTITY_MOBLIN
+  entities_end
 
 Overworld43Entities::
-  db   $33, ENTITY_MOBLIN
-  db   $55, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_MOBLIN
+  entity $5, $5, ENTITY_MOBLIN
+  entities_end
 
 Overworld44Entities::
-  db   $44, ENTITY_HEART_PIECE
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_HEART_PIECE
+  entities_end
 
 Overworld45Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld46Entities::
-  db   $37, ENTITY_CROW
-  db   $54, ENTITY_CROW
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_CROW
+  entity $5, $4, ENTITY_CROW
+  entities_end
 
 Overworld47Entities::
-  db   $26, ENTITY_CROW
-  db   $53, ENTITY_CROW
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_CROW
+  entity $5, $3, ENTITY_CROW
+  entities_end
 
 Overworld48Entities::
-  db   $36, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $6, ENTITY_MOBLIN
+  entities_end
 
 Overworld49Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld4AEntities::
-  db   $35, ENTITY_MOBLIN_SWORD
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_MOBLIN_SWORD
+  entities_end
 
 Overworld4BEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld4CEntities::
-  db   $44, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld4DEntities::
-  db   $35, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld4EEntities::
-  db   $66, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $6, $6, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld4FEntities::
-  db   $26, ENTITY_FLOATING_ITEM
-  db   $35, ENTITY_FLOATING_ITEM
-  db   $48, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_FLOATING_ITEM
+  entity $3, $5, ENTITY_FLOATING_ITEM
+  entity $4, $8, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld50Entities::
-  db   $32, ENTITY_SLEEPY_TOADSTOOL
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_SLEEPY_TOADSTOOL
+  entities_end
 
 Overworld51Entities::
-  db   $37, ENTITY_RACOON
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_RACOON
+  entities_end
 
 Overworld52Entities::
-  db   $42, ENTITY_MOBLIN_SWORD
-  db   $45, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_MOBLIN_SWORD
+  entity $4, $5, ENTITY_MOBLIN
+  entities_end
 
 Overworld53Entities::
-  db   $34, ENTITY_BIG_FAIRY
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_BIG_FAIRY
+  entities_end
 
 Overworld54Entities::
-  db   $37, ENTITY_BUZZ_BLOB
-  db   $43, ENTITY_ZORA
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_BUZZ_BLOB
+  entity $4, $3, ENTITY_ZORA
+  entities_end
 
 Overworld55Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld56Entities::
-  db   $23, ENTITY_CROW
-  db   $35, ENTITY_CROW
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_CROW
+  entity $3, $5, ENTITY_CROW
+  entities_end
 
 Overworld57Entities::
-  db   $23, ENTITY_CROW
-  db   $46, ENTITY_CROW
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_CROW
+  entity $4, $6, ENTITY_CROW
+  entities_end
 
 Overworld58Entities::
-  db   $14, ENTITY_CROW
-  db   $47, ENTITY_MOBLIN_SWORD
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_CROW
+  entity $4, $7, ENTITY_MOBLIN_SWORD
+  entities_end
 
 Overworld59Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld5AEntities::
-  db   $34, ENTITY_MAD_BOMBER
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_MAD_BOMBER
+  entities_end
 
 Overworld5BEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld5CEntities::
-  db   $31, ENTITY_FLOATING_ITEM_2
-  db   $41, ENTITY_FLOATING_ITEM
-  db   $52, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $3, $1, ENTITY_FLOATING_ITEM_2
+  entity $4, $1, ENTITY_FLOATING_ITEM
+  entity $5, $2, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld5DEntities::
-  db   $67, ENTITY_FLOATING_ITEM
-  db   $54, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $6, $7, ENTITY_FLOATING_ITEM
+  entity $5, $4, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 Overworld5EEntities::
-  db   $16, ENTITY_FLOATING_ITEM
-  db   $55, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $1, $6, ENTITY_FLOATING_ITEM
+  entity $5, $5, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 Overworld5FEntities::
-  db   $48, ENTITY_FLOATING_ITEM
-  db   $62, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $4, $8, ENTITY_FLOATING_ITEM
+  entity $6, $2, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 Overworld60Entities::
-  db   $35, ENTITY_MOBLIN
-  db   $55, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_MOBLIN
+  entity $5, $5, ENTITY_MOBLIN
+  entities_end
 
 Overworld61Entities::
-  db   $23, ENTITY_MOBLIN
-  db   $34, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_MOBLIN
+  entity $3, $4, ENTITY_MOBLIN
+  entities_end
 
 Overworld62Entities::
-  db   $65, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $6, $5, ENTITY_MOBLIN
+  entities_end
 
 Overworld63Entities::
-  db   $37, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_MOBLIN
+  entities_end
 
 Overworld64Entities::
-  db   $2D, ENTITY_OWL_EVENT
-  db   $52, ENTITY_YARNA_TALKING_BONES
-  db   ENTITIES_END
+  entity $2, $D, ENTITY_OWL_EVENT
+  entity $5, $2, ENTITY_YARNA_TALKING_BONES
+  entities_end
 
 Overworld65Entities::
-  db   $19, ENTITY_DROPPABLE_FAIRY
-  db   ENTITIES_END
+  entity $1, $9, ENTITY_DROPPABLE_FAIRY
+  entities_end
 
 Overworld66Entities::
-  db   $37, ENTITY_HIDING_GHINI
-  db   $53, ENTITY_HIDING_GHINI
-  db   $57, ENTITY_HIDING_GHINI
-  db   $45, ENTITY_GHINI
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_HIDING_GHINI
+  entity $5, $3, ENTITY_HIDING_GHINI
+  entity $5, $7, ENTITY_HIDING_GHINI
+  entity $4, $5, ENTITY_GHINI
+  entities_end
 
 Overworld67Entities::
-  db   $33, ENTITY_HIDING_GHINI
-  db   $53, ENTITY_HIDING_GHINI
-  db   $45, ENTITY_GHINI
-  db   $57, ENTITY_GIANT_GHINI
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_HIDING_GHINI
+  entity $5, $3, ENTITY_HIDING_GHINI
+  entity $4, $5, ENTITY_GHINI
+  entity $5, $7, ENTITY_GIANT_GHINI
+  entities_end
 
 Overworld68Entities::
-  db   $64, ENTITY_MOBLIN_SWORD
-  db   ENTITIES_END
+  entity $6, $4, ENTITY_MOBLIN_SWORD
+  entities_end
 
 Overworld69Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld6AEntities::
-  db   $32, ENTITY_MOBLIN_SWORD
-  db   $66, ENTITY_MOBLIN_SWORD
-  db   $12, ENTITY_DROPPABLE_FAIRY
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_MOBLIN_SWORD
+  entity $6, $6, ENTITY_MOBLIN_SWORD
+  entity $1, $2, ENTITY_DROPPABLE_FAIRY
+  entities_end
 
 Overworld6BEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld6CEntities::
-  db   $66, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $6, $6, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld6DEntities::
-  db   $57, ENTITY_FLOATING_ITEM_2
-  db   $58, ENTITY_FLOATING_ITEM_2
-  db   $67, ENTITY_FLOATING_ITEM
-  db   $68, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $5, $7, ENTITY_FLOATING_ITEM_2
+  entity $5, $8, ENTITY_FLOATING_ITEM_2
+  entity $6, $7, ENTITY_FLOATING_ITEM
+  entity $6, $8, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld6EEntities::
-  db   $24, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld6FEntities::
-  db   $26, ENTITY_FLOATING_ITEM
-  db   $28, ENTITY_FLOATING_ITEM
-  db   $48, ENTITY_FLOATING_ITEM
-  db   $51, ENTITY_FLOATING_ITEM
-  db   $68, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_FLOATING_ITEM
+  entity $2, $8, ENTITY_FLOATING_ITEM
+  entity $4, $8, ENTITY_FLOATING_ITEM
+  entity $5, $1, ENTITY_FLOATING_ITEM
+  entity $6, $8, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld70Entities::
-  db   $27, ENTITY_MOBLIN
-  db   $36, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_MOBLIN
+  entity $3, $6, ENTITY_MOBLIN
+  entities_end
 
 Overworld71Entities::
-  db   $42, ENTITY_GEL
-  db   $66, ENTITY_GEL
-  db   $22, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_GEL
+  entity $6, $6, ENTITY_GEL
+  entity $2, $2, ENTITY_MOBLIN
+  entities_end
 
 Overworld72Entities::
-  db   $42, ENTITY_MOBLIN
-  db   $46, ENTITY_MOBLIN
-  db   $32, ENTITY_GEL
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_MOBLIN
+  entity $4, $6, ENTITY_MOBLIN
+  entity $3, $2, ENTITY_GEL
+  entities_end
 
 Overworld73Entities::
-  db   $24, ENTITY_MOBLIN
-  db   $35, ENTITY_MOBLIN
-  db   $57, ENTITY_GEL
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_MOBLIN
+  entity $3, $5, ENTITY_MOBLIN
+  entity $5, $7, ENTITY_GEL
+  entities_end
 
 Overworld74Entities::
-  db   $36, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $00, ENTITY_ZOMBIE
-  db   ENTITIES_END
+  entity $3, $6, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $0, $0, ENTITY_ZOMBIE
+  entities_end
 
 Overworld75Entities::
-  db   $00, ENTITY_ZOMBIE
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_ZOMBIE
+  entities_end
 
 Overworld76Entities::
-  db   $00, ENTITY_ZOMBIE
-  db   $14, ENTITY_HIDING_GHINI
-  db   $16, ENTITY_HIDING_GHINI
-  db   $34, ENTITY_HIDING_GHINI
-  db   $25, ENTITY_GHINI
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_ZOMBIE
+  entity $1, $4, ENTITY_HIDING_GHINI
+  entity $1, $6, ENTITY_HIDING_GHINI
+  entity $3, $4, ENTITY_HIDING_GHINI
+  entity $2, $5, ENTITY_GHINI
+  entities_end
 
 Overworld77Entities::
-  db   $13, ENTITY_HIDING_GHINI
-  db   $17, ENTITY_HIDING_GHINI
-  db   $35, ENTITY_HIDING_GHINI
-  db   $24, ENTITY_GHINI
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_HIDING_GHINI
+  entity $1, $7, ENTITY_HIDING_GHINI
+  entity $3, $5, ENTITY_HIDING_GHINI
+  entity $2, $4, ENTITY_GHINI
+  entities_end
 
 Overworld78Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld79Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld7AEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld7BEntities::
-  db   $24, ENTITY_TRADING_ITEM
-  db   $54, ENTITY_KIKI_THE_MONKEY
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_TRADING_ITEM
+  entity $5, $4, ENTITY_KIKI_THE_MONKEY
+  entities_end
 
 Overworld7CEntities::
-  db   $21, ENTITY_FLOATING_ITEM_2
-  db   $28, ENTITY_FLOATING_ITEM
-  db   $31, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $2, $1, ENTITY_FLOATING_ITEM_2
+  entity $2, $8, ENTITY_FLOATING_ITEM
+  entity $3, $1, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld7DEntities::
-  db   $24, ENTITY_FLOATING_ITEM
-  db   $48, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_FLOATING_ITEM
+  entity $4, $8, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld7EEntities::
-  db   $22, ENTITY_FLOATING_ITEM
-  db   $24, ENTITY_FLOATING_ITEM
-  db   $26, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_FLOATING_ITEM
+  entity $2, $4, ENTITY_FLOATING_ITEM
+  entity $2, $6, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld7FEntities::
-  db   $22, ENTITY_FLOATING_ITEM
-  db   $34, ENTITY_FLOATING_ITEM
-  db   $43, ENTITY_FLOATING_ITEM_2
-  db   $45, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_FLOATING_ITEM
+  entity $3, $4, ENTITY_FLOATING_ITEM
+  entity $4, $3, ENTITY_FLOATING_ITEM_2
+  entity $4, $5, ENTITY_FLOATING_ITEM
+  entities_end
 
 Overworld80Entities::
-  db   $11, ENTITY_OWL_EVENT
-  db   ENTITIES_END
+  entity $1, $1, ENTITY_OWL_EVENT
+  entities_end
 
 Overworld81Entities::
-  db   $46, ENTITY_FISHERMAN_FISHING_GAME
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_FISHERMAN_FISHING_GAME
+  entities_end
 
 Overworld82Entities::
-  db   $26, ENTITY_BUTTERFLY
-  db   $32, ENTITY_BUTTERFLY
-  db   $55, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_BUTTERFLY
+  entity $3, $2, ENTITY_BUTTERFLY
+  entity $5, $5, ENTITY_BUTTERFLY
+  entities_end
 
 Overworld83Entities::
-  db   $25, ENTITY_KID_70
-  db   $22, ENTITY_BUTTERFLY
-  db   $56, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_KID_70
+  entity $2, $2, ENTITY_BUTTERFLY
+  entity $5, $6, ENTITY_BUTTERFLY
+  entities_end
 
 Overworld84Entities::
-  db   $23, ENTITY_BUTTERFLY
-  db   $41, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_BUTTERFLY
+  entity $4, $1, ENTITY_BUTTERFLY
+  entities_end
 
 Overworld85Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld86Entities::
-  db   $27, ENTITY_PINCER
-  db   $34, ENTITY_PINCER
-  db   $54, ENTITY_PINCER
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_PINCER
+  entity $3, $4, ENTITY_PINCER
+  entity $5, $4, ENTITY_PINCER
+  entities_end
 
 Overworld87Entities::
-  db   $24, ENTITY_HONEYCOMB
-  db   $45, ENTITY_TARIN
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_HONEYCOMB
+  entity $4, $5, ENTITY_TARIN
+  entities_end
 
 Overworld88Entities::
-  db   $27, ENTITY_WINGED_OCTOROK
-  db   $32, ENTITY_WINGED_OCTOROK
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_WINGED_OCTOROK
+  entity $3, $2, ENTITY_WINGED_OCTOROK
+  entities_end
 
 Overworld89Entities::
-  db   $34, ENTITY_PINCER
-  db   $56, ENTITY_BEETLE_SPAWNER
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_PINCER
+  entity $5, $6, ENTITY_BEETLE_SPAWNER
+  entities_end
 
 Overworld8AEntities::
-  db   $54, ENTITY_MOBLIN
-  db   $56, ENTITY_MOBLIN
-  db   $52, ENTITY_SEASHELL_MANSION_TREES
-  db   $57, ENTITY_SEASHELL_MANSION_TREES
-  db   ENTITIES_END
+  entity $5, $4, ENTITY_MOBLIN
+  entity $5, $6, ENTITY_MOBLIN
+  entity $5, $2, ENTITY_SEASHELL_MANSION_TREES
+  entity $5, $7, ENTITY_SEASHELL_MANSION_TREES
+  entities_end
 
 Overworld8BEntities::
-  db   $44, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $38, ENTITY_ZORA
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $3, $8, ENTITY_ZORA
+  entities_end
 
 Overworld8CEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld8DEntities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld8EEntities::
-  db   $25, ENTITY_BOMBER
-  db   $43, ENTITY_BOMBER
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_BOMBER
+  entity $4, $3, ENTITY_BOMBER
+  entities_end
 
 Overworld8FEntities::
-  db   $26, ENTITY_DROPPABLE_FAIRY
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_DROPPABLE_FAIRY
+  entities_end
 
 Overworld90Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld91Entities::
-  db   $22, ENTITY_DROPPABLE_BOMBS
-  db   $44, ENTITY_CUCCO
-  db   $26, ENTITY_BUTTERFLY
-  db   $32, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_DROPPABLE_BOMBS
+  entity $4, $4, ENTITY_CUCCO
+  entity $2, $6, ENTITY_BUTTERFLY
+  entity $3, $2, ENTITY_BUTTERFLY
+  entities_end
 
 Overworld92Entities::
-  db   $57, ENTITY_KID_73
-  db   $42, ENTITY_MARIN
-  db   $63, ENTITY_DOG
-  db   $11, ENTITY_BUTTERFLY
-  db   $17, ENTITY_BUTTERFLY
-  db   $23, ENTITY_BUTTERFLY
-  db   $45, ENTITY_FLYING_ROOSTER_EVENTS
-  db   ENTITIES_END
+  entity $5, $7, ENTITY_KID_73
+  entity $4, $2, ENTITY_MARIN
+  entity $6, $3, ENTITY_DOG
+  entity $1, $1, ENTITY_BUTTERFLY
+  entity $1, $7, ENTITY_BUTTERFLY
+  entity $2, $3, ENTITY_BUTTERFLY
+  entity $4, $5, ENTITY_FLYING_ROOSTER_EVENTS
+  entities_end
 
 Overworld93Entities::
-  db   $22, ENTITY_CUCCO
-  db   $46, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_CUCCO
+  entity $4, $6, ENTITY_BUTTERFLY
+  entities_end
 
 Overworld94Entities::
-  db   ENTITIES_END
+  entities_end
 
 Overworld95Entities::
-  db   $46, ENTITY_WARP
-  db   $25, ENTITY_WINGED_OCTOROK
-  db   $23, ENTITY_DROPPABLE_FAIRY
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_WARP
+  entity $2, $5, ENTITY_WINGED_OCTOROK
+  entity $2, $3, ENTITY_DROPPABLE_FAIRY
+  entities_end
 
 Overworld96Entities::
-  db   $23, ENTITY_PINCER
-  db   $56, ENTITY_PINCER
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_PINCER
+  entity $5, $6, ENTITY_PINCER
+  entities_end
 
 Overworld97Entities::
-  db   $22, ENTITY_PINCER
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_PINCER
+  entities_end
 
 Overworld98Entities::
-  db   $12, ENTITY_WINGED_OCTOROK
-  db   $35, ENTITY_WINGED_OCTOROK
-  db   $58, ENTITY_BOMBER
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_WINGED_OCTOROK
+  entity $3, $5, ENTITY_WINGED_OCTOROK
+  entity $5, $8, ENTITY_BOMBER
+  entities_end
 
 Overworld99Entities::
-  db   $33, ENTITY_WINGED_OCTOROK
-  db   $56, ENTITY_WINGED_OCTOROK
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_WINGED_OCTOROK
+  entity $5, $6, ENTITY_WINGED_OCTOROK
+  entities_end
 
 Overworld9AEntities::
-  db   $46, ENTITY_MOBLIN
-  db   $54, ENTITY_MOBLIN_SWORD
-  db   $57, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_MOBLIN
+  entity $5, $4, ENTITY_MOBLIN_SWORD
+  entity $5, $7, ENTITY_MOBLIN
+  entities_end
 
 Overworld9BEntities::
-  db   $44, ENTITY_BOMBER
-  db   $38, ENTITY_ZORA
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_BOMBER
+  entity $3, $8, ENTITY_ZORA
+  entities_end
 
 Overworld9CEntities::
-  db   $F0, ENTITY_OWL_EVENT
-  db   ENTITIES_END
+  entity $F, $0, ENTITY_OWL_EVENT
+  entities_end
 
 Overworld9DEntities::
-  db   $0F, ENTITY_OWL_EVENT
-  db   $22, ENTITY_ARMOS_STATUE
-  db   $64, ENTITY_BOMBER
-  db   ENTITIES_END
+  entity $0, $F, ENTITY_OWL_EVENT
+  entity $2, $2, ENTITY_ARMOS_STATUE
+  entity $6, $4, ENTITY_BOMBER
+  entities_end
 
 Overworld9EEntities::
-  db   $43, ENTITY_TEKTITE
-  db   $56, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_TEKTITE
+  entity $5, $6, ENTITY_TEKTITE
+  entities_end
 
 Overworld9FEntities::
-  db   $44, ENTITY_BOMBER
-  db   $37, ENTITY_TEKTITE
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_BOMBER
+  entity $3, $7, ENTITY_TEKTITE
+  entities_end
 
 OverworldA0Entities::
-  db   $13, ENTITY_BUTTERFLY
-  db   $26, ENTITY_BUTTERFLY
-  db   $52, ENTITY_BUTTERFLY
-  db   $24, ENTITY_DROPPABLE_HEART
-  db   $25, ENTITY_DROPPABLE_HEART
-  db   $26, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_BUTTERFLY
+  entity $2, $6, ENTITY_BUTTERFLY
+  entity $5, $2, ENTITY_BUTTERFLY
+  entity $2, $4, ENTITY_DROPPABLE_HEART
+  entity $2, $5, ENTITY_DROPPABLE_HEART
+  entity $2, $6, ENTITY_DROPPABLE_HEART
+  entities_end
 
 OverworldA1Entities::
-  db   $17, ENTITY_DOG
-  db   $23, ENTITY_BUTTERFLY
-  db   $58, ENTITY_BUTTERFLY
-  db   $44, ENTITY_BOW_WOW
-  db   ENTITIES_END
+  entity $1, $7, ENTITY_DOG
+  entity $2, $3, ENTITY_BUTTERFLY
+  entity $5, $8, ENTITY_BUTTERFLY
+  entity $4, $4, ENTITY_BOW_WOW
+  entities_end
 
 OverworldA2Entities::
-  db   $27, ENTITY_DROPPABLE_FAIRY
-  db   $53, ENTITY_CUCCO
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_DROPPABLE_FAIRY
+  entity $5, $3, ENTITY_CUCCO
+  entities_end
 
 OverworldA3Entities::
-  db   $35, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $13, ENTITY_BUTTERFLY
-  db   $32, ENTITY_BUTTERFLY
-  db   $57, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $1, $3, ENTITY_BUTTERFLY
+  entity $3, $2, ENTITY_BUTTERFLY
+  entity $5, $7, ENTITY_BUTTERFLY
+  entities_end
 
 OverworldA4Entities::
-  db   $26, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $51, ENTITY_WINGED_OCTOROK
-  db   $46, ENTITY_WINGED_OCTOROK
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $5, $1, ENTITY_WINGED_OCTOROK
+  entity $4, $6, ENTITY_WINGED_OCTOROK
+  entities_end
 
 OverworldA5Entities::
-  db   $34, ENTITY_WINGED_OCTOROK
-  db   $65, ENTITY_WINGED_OCTOROK
-  db   $45, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_WINGED_OCTOROK
+  entity $6, $5, ENTITY_WINGED_OCTOROK
+  entity $4, $5, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entities_end
 
 OverworldA6Entities::
-  db   $46, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entities_end
 
 OverworldA7Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldA8Entities::
-  db   $53, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $46, ENTITY_WINGED_OCTOROK
-  db   $64, ENTITY_WINGED_OCTOROK
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $4, $6, ENTITY_WINGED_OCTOROK
+  entity $6, $4, ENTITY_WINGED_OCTOROK
+  entities_end
 
 OverworldA9Entities::
-  db   $33, ENTITY_MOBLIN
-  db   $46, ENTITY_MOBLIN
-  db   $54, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_MOBLIN
+  entity $4, $6, ENTITY_MOBLIN
+  entity $5, $4, ENTITY_MOBLIN
+  entities_end
 
 OverworldAAEntities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldABEntities::
-  db   $28, ENTITY_BUZZ_BLOB
-  db   $34, ENTITY_BOMBER
-  db   $42, ENTITY_BUZZ_BLOB
-  db   ENTITIES_END
+  entity $2, $8, ENTITY_BUZZ_BLOB
+  entity $3, $4, ENTITY_BOMBER
+  entity $4, $2, ENTITY_BUZZ_BLOB
+  entities_end
 
 OverworldACEntities::
-  db   $41, ENTITY_OWL_EVENT
-  db   $63, ENTITY_ARMOS_STATUE
-  db   $67, ENTITY_ARMOS_STATUE
-  db   ENTITIES_END
+  entity $4, $1, ENTITY_OWL_EVENT
+  entity $6, $3, ENTITY_ARMOS_STATUE
+  entity $6, $7, ENTITY_ARMOS_STATUE
+  entities_end
 
 OverworldADEntities::
-  db   $23, ENTITY_ARMOS_STATUE
-  db   $27, ENTITY_ARMOS_STATUE
-  db   $24, ENTITY_HIDING_GEL
-  db   $26, ENTITY_HIDING_GEL
-  db   $44, ENTITY_HIDING_GEL
-  db   $46, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_ARMOS_STATUE
+  entity $2, $7, ENTITY_ARMOS_STATUE
+  entity $2, $4, ENTITY_HIDING_GEL
+  entity $2, $6, ENTITY_HIDING_GEL
+  entity $4, $4, ENTITY_HIDING_GEL
+  entity $4, $6, ENTITY_HIDING_GEL
+  entities_end
 
 OverworldAEEntities::
-  db   $34, ENTITY_ARMOS_STATUE
-  db   $36, ENTITY_ARMOS_STATUE
-  db   $54, ENTITY_ARMOS_STATUE
-  db   $56, ENTITY_ARMOS_STATUE
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_ARMOS_STATUE
+  entity $3, $6, ENTITY_ARMOS_STATUE
+  entity $5, $4, ENTITY_ARMOS_STATUE
+  entity $5, $6, ENTITY_ARMOS_STATUE
+  entities_end
 
 OverworldAFEntities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldB0Entities::
-  db   $44, ENTITY_KID_71
-  db   $47, ENTITY_KID_72
-  db   $15, ENTITY_BUTTERFLY
-  db   $17, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_KID_71
+  entity $4, $7, ENTITY_KID_72
+  entity $1, $5, ENTITY_BUTTERFLY
+  entity $1, $7, ENTITY_BUTTERFLY
+  entities_end
 
 OverworldB1Entities::
-  db   $03, ENTITY_CUCCO
-  db   $57, ENTITY_GRANDMA_ULRIRA
-  db   ENTITIES_END
+  entity $0, $3, ENTITY_CUCCO
+  entity $5, $7, ENTITY_GRANDMA_ULRIRA
+  entities_end
 
 OverworldB2Entities::
-  db   $23, ENTITY_BUTTERFLY
-  db   $27, ENTITY_CUCCO
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_BUTTERFLY
+  entity $2, $7, ENTITY_CUCCO
+  entities_end
 
 OverworldB3Entities::
-  db   $26, ENTITY_BUTTERFLY
-  db   $33, ENTITY_BUTTERFLY
-  db   $47, ENTITY_BUTTERFLY
-  db   $22, ENTITY_DOG
-  db   $52, ENTITY_KID_73
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_BUTTERFLY
+  entity $3, $3, ENTITY_BUTTERFLY
+  entity $4, $7, ENTITY_BUTTERFLY
+  entity $2, $2, ENTITY_DOG
+  entity $5, $2, ENTITY_KID_73
+  entities_end
 
 OverworldB4Entities::
-  db   $00, ENTITY_MAZE_SIGNPOST
-  db   $42, ENTITY_MOBLIN_SWORD
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_MAZE_SIGNPOST
+  entity $4, $2, ENTITY_MOBLIN_SWORD
+  entities_end
 
 OverworldB5Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldB6Entities::
-  db   $F1, ENTITY_OWL_EVENT
-  db   ENTITIES_END
+  entity $F, $1, ENTITY_OWL_EVENT
+  entities_end
 
 OverworldB7Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldB8Entities::
-  db   $37, ENTITY_BOMBER
-  db   $42, ENTITY_BOMBER
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_BOMBER
+  entity $4, $2, ENTITY_BOMBER
+  entities_end
 
 OverworldB9Entities::
-  db   $34, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $22, ENTITY_MOBLIN
-  db   $26, ENTITY_MOBLIN
-  db   $42, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $2, $2, ENTITY_MOBLIN
+  entity $2, $6, ENTITY_MOBLIN
+  entity $4, $2, ENTITY_MOBLIN
+  entities_end
 
 OverworldBAEntities::
-  db   $22, ENTITY_BOMBER
-  db   $55, ENTITY_ZORA
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_BOMBER
+  entity $5, $5, ENTITY_ZORA
+  entities_end
 
 OverworldBBEntities::
-  db   $46, ENTITY_BUZZ_BLOB
-  db   $53, ENTITY_BUZZ_BLOB
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_BUZZ_BLOB
+  entity $5, $3, ENTITY_BUZZ_BLOB
+  entities_end
 
 OverworldBCEntities::
-  db   $12, ENTITY_ARMOS_STATUE
-  db   $64, ENTITY_ARMOS_STATUE
-  db   $13, ENTITY_HIDING_GEL
-  db   $42, ENTITY_HIDING_GEL
-  db   $66, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_ARMOS_STATUE
+  entity $6, $4, ENTITY_ARMOS_STATUE
+  entity $1, $3, ENTITY_HIDING_GEL
+  entity $4, $2, ENTITY_HIDING_GEL
+  entity $6, $6, ENTITY_HIDING_GEL
+  entities_end
 
 OverworldBDEntities::
-  db   $22, ENTITY_ARMOS_STATUE
-  db   $26, ENTITY_ARMOS_STATUE
-  db   $44, ENTITY_ARMOS_STATUE
-  db   $57, ENTITY_ARMOS_STATUE
-  db   $25, ENTITY_HIDING_GEL
-  db   $32, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_ARMOS_STATUE
+  entity $2, $6, ENTITY_ARMOS_STATUE
+  entity $4, $4, ENTITY_ARMOS_STATUE
+  entity $5, $7, ENTITY_ARMOS_STATUE
+  entity $2, $5, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_HIDING_GEL
+  entities_end
 
 OverworldBEEntities::
-  db   $12, ENTITY_ARMOS_STATUE
-  db   $14, ENTITY_ARMOS_STATUE
-  db   $46, ENTITY_ARMOS_STATUE
-  db   $41, ENTITY_HIDING_GEL
-  db   $53, ENTITY_HIDING_GEL
-  db   $56, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_ARMOS_STATUE
+  entity $1, $4, ENTITY_ARMOS_STATUE
+  entity $4, $6, ENTITY_ARMOS_STATUE
+  entity $4, $1, ENTITY_HIDING_GEL
+  entity $5, $3, ENTITY_HIDING_GEL
+  entity $5, $6, ENTITY_HIDING_GEL
+  entities_end
 
 OverworldBFEntities::
-  db   $31, ENTITY_ARMOS_STATUE
-  db   $35, ENTITY_ARMOS_STATUE
-  db   $53, ENTITY_ARMOS_STATUE
-  db   $23, ENTITY_GEL
-  db   $26, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $3, $1, ENTITY_ARMOS_STATUE
+  entity $3, $5, ENTITY_ARMOS_STATUE
+  entity $5, $3, ENTITY_ARMOS_STATUE
+  entity $2, $3, ENTITY_GEL
+  entity $2, $6, ENTITY_HIDING_GEL
+  entities_end
 
 OverworldC0Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldC1Entities::
-  db   $33, ENTITY_OCTOROCK
-  db   $54, ENTITY_OCTOROCK
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_OCTOROCK
+  entity $5, $4, ENTITY_OCTOROCK
+  entities_end
 
 OverworldC2Entities::
-  db   $13, ENTITY_OCTOROCK
-  db   $26, ENTITY_OCTOROCK
-  db   $56, ENTITY_OCTOROCK
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_OCTOROCK
+  entity $2, $6, ENTITY_OCTOROCK
+  entity $5, $6, ENTITY_OCTOROCK
+  entities_end
 
 OverworldC3Entities::
-  db   $24, ENTITY_OCTOROCK
-  db   $47, ENTITY_OCTOROCK
-  db   $52, ENTITY_OCTOROCK
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_OCTOROCK
+  entity $4, $7, ENTITY_OCTOROCK
+  entity $5, $2, ENTITY_OCTOROCK
+  entities_end
 
 OverworldC4Entities::
-  db   $00, ENTITY_MAZE_SIGNPOST
-  db   $23, ENTITY_HIDING_GEL
-  db   $44, ENTITY_HIDING_GEL
-  db   $56, ENTITY_GEL
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_MAZE_SIGNPOST
+  entity $2, $3, ENTITY_HIDING_GEL
+  entity $4, $4, ENTITY_HIDING_GEL
+  entity $5, $6, ENTITY_GEL
+  entities_end
 
 OverworldC5Entities::
-  db   $00, ENTITY_MAZE_SIGNPOST
-  db   $43, ENTITY_HIDING_GEL
-  db   $58, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_MAZE_SIGNPOST
+  entity $4, $3, ENTITY_HIDING_GEL
+  entity $5, $8, ENTITY_HIDING_GEL
+  entities_end
 
 OverworldC6Entities::
-  db   $27, ENTITY_HIDING_SLIME_KEY
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_HIDING_SLIME_KEY
+  entities_end
 
 OverworldC7Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldC8Entities::
-  db   $35, ENTITY_MOBLIN
-  db   $44, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_MOBLIN
+  entity $4, $4, ENTITY_MOBLIN
+  entities_end
 
 OverworldC9Entities::
-  db   $47, ENTITY_MERMAID
-  db   ENTITIES_END
+  entity $4, $7, ENTITY_MERMAID
+  entities_end
 
 OverworldCAEntities::
-  db   $22, ENTITY_ZORA
-  db   $36, ENTITY_ZORA
-  db   $54, ENTITY_ZORA
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_ZORA
+  entity $3, $6, ENTITY_ZORA
+  entity $5, $4, ENTITY_ZORA
+  entities_end
 
 OverworldCBEntities::
-  db   $22, ENTITY_BUTTERFLY
-  db   $37, ENTITY_BUTTERFLY
-  db   $54, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_BUTTERFLY
+  entity $3, $7, ENTITY_BUTTERFLY
+  entity $5, $4, ENTITY_BUTTERFLY
+  entities_end
 
 OverworldCCEntities::
-  db   $54, ENTITY_BUNNY_D3
-  db   $22, ENTITY_BUTTERFLY
-  db   $43, ENTITY_BUTTERFLY
-  db   $58, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $5, $4, ENTITY_BUNNY_D3
+  entity $2, $2, ENTITY_BUTTERFLY
+  entity $4, $3, ENTITY_BUTTERFLY
+  entity $5, $8, ENTITY_BUTTERFLY
+  entities_end
 
 OverworldCDEntities::
-  db   $53, ENTITY_BUNNY_D3
-  db   $56, ENTITY_GRANDMA_ULRIRA
-  db   $54, ENTITY_BUTTERFLY
-  db   $62, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_BUNNY_D3
+  entity $5, $6, ENTITY_GRANDMA_ULRIRA
+  entity $5, $4, ENTITY_BUTTERFLY
+  entity $6, $2, ENTITY_BUTTERFLY
+  entities_end
 
 OverworldCEEntities::
-  db   $43, ENTITY_DESERT_LANMOLA
-  db   $00, ENTITY_WARP
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_DESERT_LANMOLA
+  entity $0, $0, ENTITY_WARP
+  entities_end
 
 OverworldCFEntities::
-  db   $25, ENTITY_LEEVER
-  db   $33, ENTITY_LEEVER
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_LEEVER
+  entity $3, $3, ENTITY_LEEVER
+  entities_end
 
 OverworldD0Entities::
-  db   $17, ENTITY_OCTOROCK
-  db   ENTITIES_END
+  entity $1, $7, ENTITY_OCTOROCK
+  entities_end
 
 OverworldD1Entities::
-  db   $37, ENTITY_OCTOROCK
-  db   $43, ENTITY_OCTOROCK
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_OCTOROCK
+  entity $4, $3, ENTITY_OCTOROCK
+  entities_end
 
 OverworldD2Entities::
-  db   $45, ENTITY_OWL_EVENT
-  db   $43, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   ENTITIES_END
+  entity $4, $5, ENTITY_OWL_EVENT
+  entity $4, $3, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entities_end
 
 OverworldD3Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldD4Entities::
-  db   $00, ENTITY_MAZE_SIGNPOST
-  db   $22, ENTITY_HIDING_GEL
-  db   $36, ENTITY_BUSH_CRAWLER
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_MAZE_SIGNPOST
+  entity $2, $2, ENTITY_HIDING_GEL
+  entity $3, $6, ENTITY_BUSH_CRAWLER
+  entities_end
 
 OverworldD5Entities::
-  db   $00, ENTITY_MAZE_SIGNPOST
-  db   $24, ENTITY_HIDING_GEL
-  db   $33, ENTITY_HIDING_GEL
-  db   $47, ENTITY_HIDING_GEL
-  db   $64, ENTITY_BUSH_CRAWLER
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_MAZE_SIGNPOST
+  entity $2, $4, ENTITY_HIDING_GEL
+  entity $3, $3, ENTITY_HIDING_GEL
+  entity $4, $7, ENTITY_HIDING_GEL
+  entity $6, $4, ENTITY_BUSH_CRAWLER
+  entities_end
 
 OverworldD6Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldD7Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldD8Entities::
-  db   $32, ENTITY_BOMBER
-  db   $38, ENTITY_ZORA
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_BOMBER
+  entity $3, $8, ENTITY_ZORA
+  entities_end
 
 OverworldD9Entities::
-  db   $52, ENTITY_97
-  db   $54, ENTITY_97
-  db   ENTITIES_END
+  entity $5, $2, ENTITY_97
+  entity $5, $4, ENTITY_97
+  entities_end
 
 OverworldDAEntities::
-  db   $33, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $26, ENTITY_ZORA
-  db   $62, ENTITY_ZORA
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $2, $6, ENTITY_ZORA
+  entity $6, $2, ENTITY_ZORA
+  entities_end
 
 OverworldDBEntities::
-  db   $32, ENTITY_BOMBER
-  db   $34, ENTITY_BUSH_CRAWLER
-  db   $55, ENTITY_BUSH_CRAWLER
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_BOMBER
+  entity $3, $4, ENTITY_BUSH_CRAWLER
+  entity $5, $5, ENTITY_BUSH_CRAWLER
+  entities_end
 
 OverworldDCEntities::
-  db   $35, ENTITY_MARIN
-  db   $38, ENTITY_BUTTERFLY
-  db   $26, ENTITY_ANIMAL_D0
-  db   $23, ENTITY_ANIMAL_D2
-  db   $53, ENTITY_ANIMAL_D0
-  db   $57, ENTITY_ANIMAL_D1
-  db   $65, ENTITY_ANIMAL_D0
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_MARIN
+  entity $3, $8, ENTITY_BUTTERFLY
+  entity $2, $6, ENTITY_ANIMAL_D0
+  entity $2, $3, ENTITY_ANIMAL_D2
+  entity $5, $3, ENTITY_ANIMAL_D0
+  entity $5, $7, ENTITY_ANIMAL_D1
+  entity $6, $5, ENTITY_ANIMAL_D0
+  entities_end
 
 OverworldDDEntities::
-  db   $42, ENTITY_BUNNY_D3
-  db   $18, ENTITY_BUTTERFLY
-  db   $33, ENTITY_BUTTERFLY
-  db   $47, ENTITY_BUTTERFLY
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_BUNNY_D3
+  entity $1, $8, ENTITY_BUTTERFLY
+  entity $3, $3, ENTITY_BUTTERFLY
+  entity $4, $7, ENTITY_BUTTERFLY
+  entities_end
 
 OverworldDEEntities::
-  db   $27, ENTITY_LEEVER
-  db   $34, ENTITY_LEEVER
-  db   $57, ENTITY_LEEVER
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_LEEVER
+  entity $3, $4, ENTITY_LEEVER
+  entity $5, $7, ENTITY_LEEVER
+  entities_end
 
 OverworldDFEntities::
-  db   $37, ENTITY_POKEY
-  db   $63, ENTITY_POKEY
-  db   $32, ENTITY_LEEVER
-  db   $65, ENTITY_LEEVER
-  db   $66, ENTITY_YARNA_TALKING_BONES
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_POKEY
+  entity $6, $3, ENTITY_POKEY
+  entity $3, $2, ENTITY_LEEVER
+  entity $6, $5, ENTITY_LEEVER
+  entity $6, $6, ENTITY_YARNA_TALKING_BONES
+  entities_end
 
 OverworldE0Entities::
-  db   $14, ENTITY_OCTOROCK
-  db   $42, ENTITY_OCTOROCK
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_OCTOROCK
+  entity $4, $2, ENTITY_OCTOROCK
+  entities_end
 
 OverworldE1Entities::
-  db   $23, ENTITY_URCHIN
-  db   $46, ENTITY_URCHIN
-  db   $47, ENTITY_URCHIN
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_URCHIN
+  entity $4, $6, ENTITY_URCHIN
+  entity $4, $7, ENTITY_URCHIN
+  entities_end
 
 OverworldE2Entities::
-  db   $26, ENTITY_OCTOROCK
-  db   $55, ENTITY_OCTOROCK
-  db   $52, ENTITY_URCHIN
-  db   $62, ENTITY_URCHIN
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_OCTOROCK
+  entity $5, $5, ENTITY_OCTOROCK
+  entity $5, $2, ENTITY_URCHIN
+  entity $6, $2, ENTITY_URCHIN
+  entities_end
 
 OverworldE3Entities::
-  db   $10, ENTITY_BANANAS_SCHULE_SALE
-  db   $16, ENTITY_BANANAS_SCHULE_SALE
-  db   $50, ENTITY_BANANAS_SCHULE_SALE
-  db   $56, ENTITY_BANANAS_SCHULE_SALE
-  db   ENTITIES_END
+  entity $1, $0, ENTITY_BANANAS_SCHULE_SALE
+  entity $1, $6, ENTITY_BANANAS_SCHULE_SALE
+  entity $5, $0, ENTITY_BANANAS_SCHULE_SALE
+  entity $5, $6, ENTITY_BANANAS_SCHULE_SALE
+  entities_end
 
 OverworldE4Entities::
-  db   $14, ENTITY_MONKEY
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_MONKEY
+  entities_end
 
 OverworldE5Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldE6Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldE7Entities::
-  db   $34, ENTITY_BUZZ_BLOB
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_BUZZ_BLOB
+  entities_end
 
 OverworldE8Entities::
-  db   $33, ENTITY_BUZZ_BLOB
-  db   $46, ENTITY_BUZZ_BLOB
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_BUZZ_BLOB
+  entity $4, $6, ENTITY_BUZZ_BLOB
+  entities_end
 
 OverworldE9Entities::
-  db   $26, ENTITY_MERMAID_STATUE
-  db   $62, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_MERMAID_STATUE
+  entity $6, $2, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entities_end
 
 OverworldEAEntities::
-  db   $26, ENTITY_97
-  db   $66, ENTITY_BUZZ_BLOB
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_97
+  entity $6, $6, ENTITY_BUZZ_BLOB
+  entities_end
 
 OverworldEBEntities::
-  db   $32, ENTITY_BUZZ_BLOB
-  db   $33, ENTITY_BOMBER
-  db   $46, ENTITY_BUZZ_BLOB
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_BUZZ_BLOB
+  entity $3, $3, ENTITY_BOMBER
+  entity $4, $6, ENTITY_BUZZ_BLOB
+  entities_end
 
 OverworldECEntities::
-  db   $46, ENTITY_WARP
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_WARP
+  entities_end
 
 OverworldEDEntities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldEEEntities::
-  db   $01, ENTITY_OWL_EVENT
-  db   ENTITIES_END
+  entity $0, $1, ENTITY_OWL_EVENT
+  entities_end
 
 OverworldEFEntities::
-  db   $46, ENTITY_POKEY
-  db   $53, ENTITY_POKEY
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_POKEY
+  entity $5, $3, ENTITY_POKEY
+  entities_end
 
 OverworldF0Entities::
-  db   $44, ENTITY_LEEVER
-  db   $47, ENTITY_LEEVER
-  db   $22, ENTITY_OCTOROCK
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_LEEVER
+  entity $4, $7, ENTITY_LEEVER
+  entity $2, $2, ENTITY_OCTOROCK
+  entities_end
 
 OverworldF1Entities::
-  db   $13, ENTITY_OCTOROCK
-  db   $23, ENTITY_LEEVER
-  db   $45, ENTITY_LEEVER
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_OCTOROCK
+  entity $2, $3, ENTITY_LEEVER
+  entity $4, $5, ENTITY_LEEVER
+  entities_end
 
 OverworldF2Entities::
-  db   $00, ENTITY_OWL_EVENT
-  db   $55, ENTITY_SWORD
-  db   $32, ENTITY_URCHIN
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_OWL_EVENT
+  entity $5, $5, ENTITY_SWORD
+  entity $3, $2, ENTITY_URCHIN
+  entities_end
 
 OverworldF3Entities::
-  db   $32, ENTITY_SAND_CRAB
-  db   $46, ENTITY_SAND_CRAB
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_SAND_CRAB
+  entity $4, $6, ENTITY_SAND_CRAB
+  entities_end
 
 OverworldF4Entities::
-  db   $24, ENTITY_LEEVER
-  db   $26, ENTITY_LEEVER
-  db   $28, ENTITY_SAND_CRAB
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_LEEVER
+  entity $2, $6, ENTITY_LEEVER
+  entity $2, $8, ENTITY_SAND_CRAB
+  entities_end
 
 OverworldF5Entities::
-  db   $45, ENTITY_MARIN_AT_THE_SHORE
-  db   ENTITIES_END
+  entity $4, $5, ENTITY_MARIN_AT_THE_SHORE
+  entities_end
 
 OverworldF6Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldF7Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldF8Entities::
-  db   $44, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $21, ENTITY_ZORA
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $2, $1, ENTITY_ZORA
+  entities_end
 
 OverworldF9Entities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldFAEntities::
-  db   $22, ENTITY_BUZZ_BLOB
-  db   $51, ENTITY_ZORA
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_BUZZ_BLOB
+  entity $5, $1, ENTITY_ZORA
+  entities_end
 
 OverworldFBEntities::
-  db   $24, ENTITY_BUZZ_BLOB
-  db   $22, ENTITY_BUSH_CRAWLER
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_BUZZ_BLOB
+  entity $2, $2, ENTITY_BUSH_CRAWLER
+  entities_end
 
 OverworldFCEntities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldFDEntities::
-  db   $38, ENTITY_WALRUS
-  db   ENTITIES_END
+  entity $3, $8, ENTITY_WALRUS
+  entities_end
 
 OverworldFEEntities::
-  db   ENTITIES_END
+  entities_end
 
 OverworldFFEntities::
-  db   $45, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   $23, ENTITY_LEEVER
-  db   $42, ENTITY_LEEVER
-  db   ENTITIES_END
+  entity $4, $5, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entity $2, $3, ENTITY_LEEVER
+  entity $4, $2, ENTITY_LEEVER
+  entities_end
 

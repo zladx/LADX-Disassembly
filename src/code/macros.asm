@@ -46,6 +46,17 @@ JP_TABLE: macro
     rst 0
 endm
 
+; Define an entity in an entities list
+; Usage:
+;   entity <vertical-position>, <horizontal-position>, <type>
+entity: macro
+    db   \1 * $10 + \2, \3
+endm
+
+entities_end: macro
+    db   ENTITIES_END
+endm
+
 ; mgbdis macro
 ; RGBDS optimises instructions like `ld [$FF40],a` to `LDH [$FF00+40],a`,
 ; so these are encoded as data bytes using a macro to ensure exact

@@ -1,1457 +1,1457 @@
 ; File generated automatically by `tools/generate_entities_data.py`
 
 IndoorsA00Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA01Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA02Entities::
-  db   $24, ENTITY_INSTRUMENT_OF_THE_SIRENS
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_INSTRUMENT_OF_THE_SIRENS
+  entities_end
 
 IndoorsA03Entities::
-  db   $05, ENTITY_OWL_STATUE
-  db   $32, ENTITY_SPIKED_BEETLE
-  db   $55, ENTITY_SPIKED_BEETLE
-  db   ENTITIES_END
+  entity $0, $5, ENTITY_OWL_STATUE
+  entity $3, $2, ENTITY_SPIKED_BEETLE
+  entity $5, $5, ENTITY_SPIKED_BEETLE
+  entities_end
 
 IndoorsA04Entities::
-  db   $14, ENTITY_SPARK_CLOCKWISE
-  db   $03, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_SPARK_CLOCKWISE
+  entity $0, $3, ENTITY_OWL_STATUE
+  entities_end
 
 IndoorsA05Entities::
-  db   $13, ENTITY_SPARK_CLOCKWISE
-  db   $66, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $15, ENTITY_MINI_GEL
-  db   $33, ENTITY_MINI_GEL
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_SPARK_CLOCKWISE
+  entity $6, $6, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $1, $5, ENTITY_MINI_GEL
+  entity $3, $3, ENTITY_MINI_GEL
+  entities_end
 
 IndoorsA06Entities::
-  db   $23, ENTITY_MOLDORM
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_MOLDORM
+  entities_end
 
 IndoorsA07Entities::
-  db   $31, ENTITY_SPIKE_TRAP
-  db   $45, ENTITY_KEESE
-  db   ENTITIES_END
+  entity $3, $1, ENTITY_SPIKE_TRAP
+  entity $4, $5, ENTITY_KEESE
+  entities_end
 
 IndoorsA08Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA09Entities::
-  db   $27, ENTITY_HARDHAT_BEETLE
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_HARDHAT_BEETLE
+  entities_end
 
 IndoorsA0AEntities::
-  db   $22, ENTITY_THREE_OF_A_KIND
-  db   $27, ENTITY_THREE_OF_A_KIND
-  db   $34, ENTITY_THREE_OF_A_KIND
-  db   $05, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_THREE_OF_A_KIND
+  entity $2, $7, ENTITY_THREE_OF_A_KIND
+  entity $3, $4, ENTITY_THREE_OF_A_KIND
+  entity $0, $5, ENTITY_OWL_STATUE
+  entities_end
 
 IndoorsA0BEntities::
-  db   $11, ENTITY_SPIKE_TRAP
-  db   $18, ENTITY_SPIKE_TRAP
-  db   $61, ENTITY_SPIKE_TRAP
-  db   $68, ENTITY_SPIKE_TRAP
-  db   ENTITIES_END
+  entity $1, $1, ENTITY_SPIKE_TRAP
+  entity $1, $8, ENTITY_SPIKE_TRAP
+  entity $6, $1, ENTITY_SPIKE_TRAP
+  entity $6, $8, ENTITY_SPIKE_TRAP
+  entities_end
 
 IndoorsA0CEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA0DEntities::
-  db   $24, ENTITY_MINI_MOLDORM
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_MINI_MOLDORM
+  entities_end
 
 IndoorsA0EEntities::
-  db   $35, ENTITY_MINI_MOLDORM
-  db   $14, ENTITY_SPARK_CLOCKWISE
-  db   $67, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_MINI_MOLDORM
+  entity $1, $4, ENTITY_SPARK_CLOCKWISE
+  entity $6, $7, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entities_end
 
 IndoorsA0FEntities::
-  db   $44, ENTITY_STALFOS_EVASIVE
-  db   $26, ENTITY_KEESE
-  db   $35, ENTITY_KEESE
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_STALFOS_EVASIVE
+  entity $2, $6, ENTITY_KEESE
+  entity $3, $5, ENTITY_KEESE
+  entities_end
 
 IndoorsA10Entities::
-  db   $67, ENTITY_SPARK_CLOCKWISE
-  db   $55, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $23, ENTITY_STALFOS_EVASIVE
-  db   ENTITIES_END
+  entity $6, $7, ENTITY_SPARK_CLOCKWISE
+  entity $5, $5, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $2, $3, ENTITY_STALFOS_EVASIVE
+  entities_end
 
 IndoorsA11Entities::
-  db   $34, ENTITY_WARP
-  db   $38, ENTITY_ROLLING_BONES
-  db   $36, ENTITY_ROLLING_BONES_BAR
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_WARP
+  entity $3, $8, ENTITY_ROLLING_BONES
+  entity $3, $6, ENTITY_ROLLING_BONES_BAR
+  entities_end
 
 IndoorsA12Entities::
-  db   $34, ENTITY_KEESE
-  db   $35, ENTITY_KEESE
-  db   $44, ENTITY_KEESE
-  db   $45, ENTITY_KEESE
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_KEESE
+  entity $3, $5, ENTITY_KEESE
+  entity $4, $4, ENTITY_KEESE
+  entity $4, $5, ENTITY_KEESE
+  entities_end
 
 IndoorsA13Entities::
-  db   $14, ENTITY_HARDHAT_BEETLE
-  db   $52, ENTITY_MINI_GEL
-  db   $57, ENTITY_MINI_GEL
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_HARDHAT_BEETLE
+  entity $5, $2, ENTITY_MINI_GEL
+  entity $5, $7, ENTITY_MINI_GEL
+  entities_end
 
 IndoorsA14Entities::
-  db   $43, ENTITY_STALFOS_EVASIVE
-  db   $46, ENTITY_STALFOS_EVASIVE
-  db   $54, ENTITY_KEESE
-  db   $55, ENTITY_KEESE
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_STALFOS_EVASIVE
+  entity $4, $6, ENTITY_STALFOS_EVASIVE
+  entity $5, $4, ENTITY_KEESE
+  entity $5, $5, ENTITY_KEESE
+  entities_end
 
 IndoorsA15Entities::
-  db   $42, ENTITY_HIDING_GEL
-  db   $32, ENTITY_HIDING_GEL
-  db   $34, ENTITY_HIDING_GEL
-  db   $44, ENTITY_HIDING_GEL
-  db   $11, ENTITY_FIREBALL_SHOOTER
-  db   $15, ENTITY_FIREBALL_SHOOTER
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_HIDING_GEL
+  entity $3, $4, ENTITY_HIDING_GEL
+  entity $4, $4, ENTITY_HIDING_GEL
+  entity $1, $1, ENTITY_FIREBALL_SHOOTER
+  entity $1, $5, ENTITY_FIREBALL_SHOOTER
+  entities_end
 
 IndoorsA16Entities::
-  db   $23, ENTITY_HARDHAT_BEETLE
-  db   $26, ENTITY_HARDHAT_BEETLE
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_HARDHAT_BEETLE
+  entity $2, $6, ENTITY_HARDHAT_BEETLE
+  entities_end
 
 IndoorsA17Entities::
-  db   $34, ENTITY_WARP
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_WARP
+  entities_end
 
 IndoorsA18Entities::
-  db   $65, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $6, $5, ENTITY_GOOMBA
+  entities_end
 
 IndoorsA19Entities::
-  db   $62, ENTITY_GOOMBA
-  db   $65, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $6, $2, ENTITY_GOOMBA
+  entity $6, $5, ENTITY_GOOMBA
+  entities_end
 
 IndoorsA1AEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA1BEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA1CEntities::
-  db   $44, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA1DEntities::
-  db   $51, ENTITY_SPIKE_TRAP
-  db   $58, ENTITY_SPIKE_TRAP
-  db   ENTITIES_END
+  entity $5, $1, ENTITY_SPIKE_TRAP
+  entity $5, $8, ENTITY_SPIKE_TRAP
+  entities_end
 
 IndoorsA1EEntities::
-  db   $25, ENTITY_THWOMP
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_THWOMP
+  entities_end
 
 IndoorsA1FEntities::
-  db   $14, ENTITY_THWOMP
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_THWOMP
+  entities_end
 
 IndoorsA20Entities::
-  db   $24, ENTITY_BOO_BUDDY
-  db   $45, ENTITY_BOO_BUDDY
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_BOO_BUDDY
+  entity $4, $5, ENTITY_BOO_BUDDY
+  entities_end
 
 IndoorsA21Entities::
-  db   $32, ENTITY_KEESE
-  db   $37, ENTITY_KEESE
-  db   $18, ENTITY_DROPPABLE_HEART
-  db   $24, ENTITY_DROPPABLE_RUPEE
-  db   $57, ENTITY_DROPPABLE_RUPEE
-  db   $25, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_KEESE
+  entity $3, $7, ENTITY_KEESE
+  entity $1, $8, ENTITY_DROPPABLE_HEART
+  entity $2, $4, ENTITY_DROPPABLE_RUPEE
+  entity $5, $7, ENTITY_DROPPABLE_RUPEE
+  entity $2, $5, ENTITY_FLOATING_ITEM
+  entities_end
 
 IndoorsA22Entities::
-  db   $24, ENTITY_CRYSTAL_SWITCH
-  db   $53, ENTITY_DROPPABLE_HEART
-  db   $54, ENTITY_DROPPABLE_HEART
-  db   $55, ENTITY_DROPPABLE_HEART
-  db   $56, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_CRYSTAL_SWITCH
+  entity $5, $3, ENTITY_DROPPABLE_HEART
+  entity $5, $4, ENTITY_DROPPABLE_HEART
+  entity $5, $5, ENTITY_DROPPABLE_HEART
+  entity $5, $6, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsA23Entities::
-  db   $17, ENTITY_HARDHAT_BEETLE
-  db   $23, ENTITY_MINI_GEL
-  db   $64, ENTITY_KEESE
-  db   ENTITIES_END
+  entity $1, $7, ENTITY_HARDHAT_BEETLE
+  entity $2, $3, ENTITY_MINI_GEL
+  entity $6, $4, ENTITY_KEESE
+  entities_end
 
 IndoorsA24Entities::
-  db   $23, ENTITY_KEESE
-  db   $25, ENTITY_KEESE
-  db   $43, ENTITY_KEESE
-  db   $45, ENTITY_KEESE
-  db   $34, ENTITY_CRYSTAL_SWITCH
-  db   $18, ENTITY_STALFOS_AGGRESSIVE
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_KEESE
+  entity $2, $5, ENTITY_KEESE
+  entity $4, $3, ENTITY_KEESE
+  entity $4, $5, ENTITY_KEESE
+  entity $3, $4, ENTITY_CRYSTAL_SWITCH
+  entity $1, $8, ENTITY_STALFOS_AGGRESSIVE
+  entities_end
 
 IndoorsA25Entities::
-  db   $44, ENTITY_POLS_VOICE
-  db   $67, ENTITY_POLS_VOICE
-  db   $46, ENTITY_GEL
-  db   $55, ENTITY_DROPPABLE_RUPEE
-  db   $63, ENTITY_DROPPABLE_FAIRY
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_POLS_VOICE
+  entity $6, $7, ENTITY_POLS_VOICE
+  entity $4, $6, ENTITY_GEL
+  entity $5, $5, ENTITY_DROPPABLE_RUPEE
+  entity $6, $3, ENTITY_DROPPABLE_FAIRY
+  entities_end
 
 IndoorsA26Entities::
-  db   $61, ENTITY_TRACTOR_DEVICE
-  db   $24, ENTITY_KEESE
-  db   $35, ENTITY_KEESE
-  db   $46, ENTITY_KEESE
-  db   ENTITIES_END
+  entity $6, $1, ENTITY_TRACTOR_DEVICE
+  entity $2, $4, ENTITY_KEESE
+  entity $3, $5, ENTITY_KEESE
+  entity $4, $6, ENTITY_KEESE
+  entities_end
 
 IndoorsA27Entities::
-  db   $64, ENTITY_POLS_VOICE
-  db   $67, ENTITY_KEESE
-  db   $33, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $6, $4, ENTITY_POLS_VOICE
+  entity $6, $7, ENTITY_KEESE
+  entity $3, $3, ENTITY_MOBLIN
+  entities_end
 
 IndoorsA28Entities::
-  db   $25, ENTITY_HINOX
-  db   $34, ENTITY_WARP
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_HINOX
+  entity $3, $4, ENTITY_WARP
+  entities_end
 
 IndoorsA29Entities::
-  db   $22, ENTITY_KEESE
-  db   $57, ENTITY_KEESE
-  db   $05, ENTITY_OWL_STATUE
-  db   $32, ENTITY_DROPPABLE_HEART
-  db   $66, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_KEESE
+  entity $5, $7, ENTITY_KEESE
+  entity $0, $5, ENTITY_OWL_STATUE
+  entity $3, $2, ENTITY_DROPPABLE_HEART
+  entity $6, $6, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA2AEntities::
-  db   $24, ENTITY_INSTRUMENT_OF_THE_SIRENS
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_INSTRUMENT_OF_THE_SIRENS
+  entities_end
 
 IndoorsA2BEntities::
-  db   $24, ENTITY_GENIE
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_GENIE
+  entities_end
 
 IndoorsA2CEntities::
-  db   $22, ENTITY_KEESE
-  db   $21, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $44, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_KEESE
+  entity $2, $1, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $4, $4, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA2DEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA2EEntities::
-  db   $15, ENTITY_HARDHAT_BEETLE
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_HARDHAT_BEETLE
+  entities_end
 
 IndoorsA2FEntities::
-  db   $24, ENTITY_KEESE
-  db   $54, ENTITY_KEESE
-  db   $62, ENTITY_SPARK_CLOCKWISE
-  db   $24, ENTITY_DROPPABLE_HEART
-  db   $65, ENTITY_DROPPABLE_HEART
-  db   $02, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_KEESE
+  entity $5, $4, ENTITY_KEESE
+  entity $6, $2, ENTITY_SPARK_CLOCKWISE
+  entity $2, $4, ENTITY_DROPPABLE_HEART
+  entity $6, $5, ENTITY_DROPPABLE_HEART
+  entity $0, $2, ENTITY_OWL_STATUE
+  entities_end
 
 IndoorsA30Entities::
-  db   $11, ENTITY_SPIKE_TRAP
-  db   $18, ENTITY_SPIKE_TRAP
-  db   $61, ENTITY_SPIKE_TRAP
-  db   $68, ENTITY_SPIKE_TRAP
-  db   $33, ENTITY_KEESE
-  db   $36, ENTITY_KEESE
-  db   ENTITIES_END
+  entity $1, $1, ENTITY_SPIKE_TRAP
+  entity $1, $8, ENTITY_SPIKE_TRAP
+  entity $6, $1, ENTITY_SPIKE_TRAP
+  entity $6, $8, ENTITY_SPIKE_TRAP
+  entity $3, $3, ENTITY_KEESE
+  entity $3, $6, ENTITY_KEESE
+  entities_end
 
 IndoorsA31Entities::
-  db   $12, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entities_end
 
 IndoorsA32Entities::
-  db   $34, ENTITY_STALFOS_EVASIVE
-  db   $35, ENTITY_STALFOS_AGGRESSIVE
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_STALFOS_EVASIVE
+  entity $3, $5, ENTITY_STALFOS_AGGRESSIVE
+  entities_end
 
 IndoorsA33Entities::
-  db   $04, ENTITY_OWL_STATUE
-  db   $35, ENTITY_CRYSTAL_SWITCH
-  db   $12, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   ENTITIES_END
+  entity $0, $4, ENTITY_OWL_STATUE
+  entity $3, $5, ENTITY_CRYSTAL_SWITCH
+  entity $1, $2, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entities_end
 
 IndoorsA34Entities::
-  db   $35, ENTITY_MASKED_MIMIC_GORIYA
-  db   $36, ENTITY_MASKED_MIMIC_GORIYA
-  db   $68, ENTITY_DROPPABLE_RUPEE
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_MASKED_MIMIC_GORIYA
+  entity $3, $6, ENTITY_MASKED_MIMIC_GORIYA
+  entity $6, $8, ENTITY_DROPPABLE_RUPEE
+  entities_end
 
 IndoorsA35Entities::
-  db   $25, ENTITY_SPIKED_BEETLE
-  db   $68, ENTITY_SPIKED_BEETLE
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_SPIKED_BEETLE
+  entity $6, $8, ENTITY_SPIKED_BEETLE
+  entities_end
 
 IndoorsA36Entities::
-  db   $34, ENTITY_WARP
-  db   $17, ENTITY_DROPPABLE_HEART
-  db   $18, ENTITY_DROPPABLE_HEART
-  db   $27, ENTITY_DROPPABLE_HEART
-  db   $28, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_WARP
+  entity $1, $7, ENTITY_DROPPABLE_HEART
+  entity $1, $8, ENTITY_DROPPABLE_HEART
+  entity $2, $7, ENTITY_DROPPABLE_HEART
+  entity $2, $8, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsA37Entities::
-  db   $54, ENTITY_MASKED_MIMIC_GORIYA
-  db   $44, ENTITY_DROPPABLE_RUPEE
-  db   $46, ENTITY_DROPPABLE_RUPEE
-  db   ENTITIES_END
+  entity $5, $4, ENTITY_MASKED_MIMIC_GORIYA
+  entity $4, $4, ENTITY_DROPPABLE_RUPEE
+  entity $4, $6, ENTITY_DROPPABLE_RUPEE
+  entities_end
 
 IndoorsA38Entities::
-  db   $62, ENTITY_MOBLIN_SWORD
-  db   $45, ENTITY_CRYSTAL_SWITCH
-  db   ENTITIES_END
+  entity $6, $2, ENTITY_MOBLIN_SWORD
+  entity $4, $5, ENTITY_CRYSTAL_SWITCH
+  entities_end
 
 IndoorsA39Entities::
-  db   $68, ENTITY_CRYSTAL_SWITCH
-  db   $11, ENTITY_DROPPABLE_HEART
-  db   $21, ENTITY_DROPPABLE_HEART
-  db   $45, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $6, $8, ENTITY_CRYSTAL_SWITCH
+  entity $1, $1, ENTITY_DROPPABLE_HEART
+  entity $2, $1, ENTITY_DROPPABLE_HEART
+  entity $4, $5, ENTITY_FLOATING_ITEM
+  entities_end
 
 IndoorsA3AEntities::
-  db   $43, ENTITY_SIDE_VIEW_PLATFORM
-  db   $66, ENTITY_SIDE_VIEW_POT
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_SIDE_VIEW_PLATFORM
+  entity $6, $6, ENTITY_SIDE_VIEW_POT
+  entities_end
 
 IndoorsA3BEntities::
-  db   $43, ENTITY_SIDE_VIEW_PLATFORM
-  db   $66, ENTITY_SIDE_VIEW_POT
-  db   $67, ENTITY_SIDE_VIEW_POT
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_SIDE_VIEW_PLATFORM
+  entity $6, $6, ENTITY_SIDE_VIEW_POT
+  entity $6, $7, ENTITY_SIDE_VIEW_POT
+  entities_end
 
 IndoorsA3CEntities::
-  db   $53, ENTITY_PIRANHA_PLANT
-  db   $57, ENTITY_PIRANHA_PLANT
-  db   $55, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_PIRANHA_PLANT
+  entity $5, $7, ENTITY_PIRANHA_PLANT
+  entity $5, $5, ENTITY_GOOMBA
+  entities_end
 
 IndoorsA3DEntities::
-  db   $54, ENTITY_PIRANHA_PLANT
-  db   $62, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $5, $4, ENTITY_PIRANHA_PLANT
+  entity $6, $2, ENTITY_GOOMBA
+  entities_end
 
 IndoorsA3EEntities::
-  db   $33, ENTITY_SIDE_VIEW_PLATFORM_VERTICAL
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_SIDE_VIEW_PLATFORM_VERTICAL
+  entities_end
 
 IndoorsA3FEntities::
-  db   $63, ENTITY_SIDE_VIEW_PLATFORM_HORIZONTAL
-  db   ENTITIES_END
+  entity $6, $3, ENTITY_SIDE_VIEW_PLATFORM_HORIZONTAL
+  entities_end
 
 IndoorsA40Entities::
-  db   $15, ENTITY_BOUNCING_BOMBITE
-  db   $42, ENTITY_BOUNCING_BOMBITE
-  db   $37, ENTITY_MOBLIN_SWORD
-  db   $34, ENTITY_FLOATING_ITEM
-  db   $04, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_BOUNCING_BOMBITE
+  entity $4, $2, ENTITY_BOUNCING_BOMBITE
+  entity $3, $7, ENTITY_MOBLIN_SWORD
+  entity $3, $4, ENTITY_FLOATING_ITEM
+  entity $0, $4, ENTITY_OWL_STATUE
+  entities_end
 
 IndoorsA41Entities::
-  db   $18, ENTITY_BOUNCING_BOMBITE
-  db   $41, ENTITY_BOUNCING_BOMBITE
-  db   $43, ENTITY_BOUNCING_BOMBITE
-  db   $44, ENTITY_DROPPABLE_FAIRY
-  db   ENTITIES_END
+  entity $1, $8, ENTITY_BOUNCING_BOMBITE
+  entity $4, $1, ENTITY_BOUNCING_BOMBITE
+  entity $4, $3, ENTITY_BOUNCING_BOMBITE
+  entity $4, $4, ENTITY_DROPPABLE_FAIRY
+  entities_end
 
 IndoorsA42Entities::
-  db   $23, ENTITY_HIDING_GEL
-  db   $32, ENTITY_MOBLIN
-  db   $35, ENTITY_HIDING_GEL
-  db   $46, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_MOBLIN
+  entity $3, $5, ENTITY_HIDING_GEL
+  entity $4, $6, ENTITY_HIDING_GEL
+  entities_end
 
 IndoorsA43Entities::
-  db   $12, ENTITY_TIMER_BOMBITE
-  db   $26, ENTITY_TIMER_BOMBITE
-  db   $47, ENTITY_TIMER_BOMBITE
-  db   $33, ENTITY_HIDING_GEL
-  db   $37, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_TIMER_BOMBITE
+  entity $2, $6, ENTITY_TIMER_BOMBITE
+  entity $4, $7, ENTITY_TIMER_BOMBITE
+  entity $3, $3, ENTITY_HIDING_GEL
+  entity $3, $7, ENTITY_HIDING_GEL
+  entities_end
 
 IndoorsA44Entities::
-  db   $23, ENTITY_STALFOS_AGGRESSIVE
-  db   $35, ENTITY_GEL
-  db   $42, ENTITY_GEL
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_STALFOS_AGGRESSIVE
+  entity $3, $5, ENTITY_GEL
+  entity $4, $2, ENTITY_GEL
+  entities_end
 
 IndoorsA45Entities::
-  db   $23, ENTITY_DODONGO_SNAKE
-  db   $25, ENTITY_DODONGO_SNAKE
-  db   $34, ENTITY_WARP
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_DODONGO_SNAKE
+  entity $2, $5, ENTITY_DODONGO_SNAKE
+  entity $3, $4, ENTITY_WARP
+  entities_end
 
 IndoorsA46Entities::
-  db   $64, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $6, $4, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA47Entities::
-  db   $13, ENTITY_STALFOS_AGGRESSIVE
-  db   $46, ENTITY_STALFOS_AGGRESSIVE
-  db   $32, ENTITY_HIDING_GEL
-  db   $03, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_STALFOS_AGGRESSIVE
+  entity $4, $6, ENTITY_STALFOS_AGGRESSIVE
+  entity $3, $2, ENTITY_HIDING_GEL
+  entity $0, $3, ENTITY_OWL_STATUE
+  entities_end
 
 IndoorsA48Entities::
-  db   $22, ENTITY_PAIRODD
-  db   $56, ENTITY_PAIRODD
-  db   $33, ENTITY_HIDING_GEL
-  db   $36, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_PAIRODD
+  entity $5, $6, ENTITY_PAIRODD
+  entity $3, $3, ENTITY_HIDING_GEL
+  entity $3, $6, ENTITY_HIDING_GEL
+  entities_end
 
 IndoorsA49Entities::
-  db   $34, ENTITY_MINI_GEL
-  db   $43, ENTITY_MINI_GEL
-  db   $45, ENTITY_MINI_GEL
-  db   $54, ENTITY_MINI_GEL
-  db   $44, ENTITY_GEL
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_MINI_GEL
+  entity $4, $3, ENTITY_MINI_GEL
+  entity $4, $5, ENTITY_MINI_GEL
+  entity $5, $4, ENTITY_MINI_GEL
+  entity $4, $4, ENTITY_GEL
+  entities_end
 
 IndoorsA4AEntities::
-  db   $24, ENTITY_MOBLIN
-  db   $47, ENTITY_MOBLIN
-  db   $67, ENTITY_DROPPABLE_HEART
-  db   $68, ENTITY_DROPPABLE_BOMBS
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_MOBLIN
+  entity $4, $7, ENTITY_MOBLIN
+  entity $6, $7, ENTITY_DROPPABLE_HEART
+  entity $6, $8, ENTITY_DROPPABLE_BOMBS
+  entities_end
 
 IndoorsA4BEntities::
-  db   $62, ENTITY_MOBLIN
-  db   $64, ENTITY_MOBLIN
-  db   $66, ENTITY_DROPPABLE_HEART
-  db   $67, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $6, $2, ENTITY_MOBLIN
+  entity $6, $4, ENTITY_MOBLIN
+  entity $6, $6, ENTITY_DROPPABLE_HEART
+  entity $6, $7, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsA4CEntities::
-  db   $25, ENTITY_HIDING_GEL
-  db   $27, ENTITY_HIDING_GEL
-  db   $45, ENTITY_HIDING_GEL
-  db   $47, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_HIDING_GEL
+  entity $2, $7, ENTITY_HIDING_GEL
+  entity $4, $5, ENTITY_HIDING_GEL
+  entity $4, $7, ENTITY_HIDING_GEL
+  entities_end
 
 IndoorsA4DEntities::
-  db   $12, ENTITY_HIDING_GEL
-  db   $21, ENTITY_HIDING_GEL
-  db   $26, ENTITY_HIDING_GEL
-  db   $28, ENTITY_HIDING_GEL
-  db   $68, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_HIDING_GEL
+  entity $2, $1, ENTITY_HIDING_GEL
+  entity $2, $6, ENTITY_HIDING_GEL
+  entity $2, $8, ENTITY_HIDING_GEL
+  entity $6, $8, ENTITY_HIDING_GEL
+  entities_end
 
 IndoorsA4EEntities::
-  db   $31, ENTITY_MINI_GEL
-  db   $35, ENTITY_STALFOS_EVASIVE
-  db   $45, ENTITY_STALFOS_EVASIVE
-  db   ENTITIES_END
+  entity $3, $1, ENTITY_MINI_GEL
+  entity $3, $5, ENTITY_STALFOS_EVASIVE
+  entity $4, $5, ENTITY_STALFOS_EVASIVE
+  entities_end
 
 IndoorsA4FEntities::
-  db   $36, ENTITY_HIDING_GEL
-  db   $46, ENTITY_HIDING_GEL
-  db   $37, ENTITY_HIDING_GEL
-  db   $47, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $3, $6, ENTITY_HIDING_GEL
+  entity $4, $6, ENTITY_HIDING_GEL
+  entity $3, $7, ENTITY_HIDING_GEL
+  entity $4, $7, ENTITY_HIDING_GEL
+  entities_end
 
 IndoorsA50Entities::
-  db   $32, ENTITY_KEESE
-  db   $61, ENTITY_KEESE
-  db   $46, ENTITY_MOBLIN_SWORD
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_KEESE
+  entity $6, $1, ENTITY_KEESE
+  entity $4, $6, ENTITY_MOBLIN_SWORD
+  entities_end
 
 IndoorsA51Entities::
-  db   $31, ENTITY_MINI_GEL
-  db   $41, ENTITY_BOUNCING_BOMBITE
-  db   $48, ENTITY_BOUNCING_BOMBITE
-  db   $35, ENTITY_MOBLIN_SWORD
-  db   ENTITIES_END
+  entity $3, $1, ENTITY_MINI_GEL
+  entity $4, $1, ENTITY_BOUNCING_BOMBITE
+  entity $4, $8, ENTITY_BOUNCING_BOMBITE
+  entity $3, $5, ENTITY_MOBLIN_SWORD
+  entities_end
 
 IndoorsA52Entities::
-  db   $34, ENTITY_WARP
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_WARP
+  entities_end
 
 IndoorsA53Entities::
-  db   $37, ENTITY_TRACTOR_DEVICE_REVERSE
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_TRACTOR_DEVICE_REVERSE
+  entities_end
 
 IndoorsA54Entities::
-  db   $33, ENTITY_OWL_STATUE
-  db   $36, ENTITY_CRYSTAL_SWITCH
-  db   $41, ENTITY_MOBLIN
-  db   $48, ENTITY_STALFOS_AGGRESSIVE
-  db   $21, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_OWL_STATUE
+  entity $3, $6, ENTITY_CRYSTAL_SWITCH
+  entity $4, $1, ENTITY_MOBLIN
+  entity $4, $8, ENTITY_STALFOS_AGGRESSIVE
+  entity $2, $1, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsA55Entities::
-  db   $27, ENTITY_PAIRODD
-  db   $36, ENTITY_HIDING_GEL
-  db   $41, ENTITY_HIDING_GEL
-  db   $57, ENTITY_PAIRODD
-  db   $42, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_PAIRODD
+  entity $3, $6, ENTITY_HIDING_GEL
+  entity $4, $1, ENTITY_HIDING_GEL
+  entity $5, $7, ENTITY_PAIRODD
+  entity $4, $2, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA56Entities::
-  db   $25, ENTITY_HIDING_GEL
-  db   $45, ENTITY_HIDING_GEL
-  db   $27, ENTITY_HIDING_GEL
-  db   $47, ENTITY_HIDING_GEL
-  db   $32, ENTITY_MINI_GEL
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_HIDING_GEL
+  entity $4, $5, ENTITY_HIDING_GEL
+  entity $2, $7, ENTITY_HIDING_GEL
+  entity $4, $7, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_MINI_GEL
+  entities_end
 
 IndoorsA57Entities::
-  db   $26, ENTITY_PAIRODD
-  db   $33, ENTITY_KEESE
-  db   $57, ENTITY_KEESE
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_PAIRODD
+  entity $3, $3, ENTITY_KEESE
+  entity $5, $7, ENTITY_KEESE
+  entities_end
 
 IndoorsA58Entities::
-  db   $34, ENTITY_HIDING_GEL
-  db   $41, ENTITY_HIDING_GEL
-  db   $56, ENTITY_HIDING_GEL
-  db   $36, ENTITY_PAIRODD
-  db   $52, ENTITY_MOBLIN
-  db   $54, ENTITY_DROPPABLE_BOMBS
-  db   $55, ENTITY_DROPPABLE_BOMBS
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_HIDING_GEL
+  entity $4, $1, ENTITY_HIDING_GEL
+  entity $5, $6, ENTITY_HIDING_GEL
+  entity $3, $6, ENTITY_PAIRODD
+  entity $5, $2, ENTITY_MOBLIN
+  entity $5, $4, ENTITY_DROPPABLE_BOMBS
+  entity $5, $5, ENTITY_DROPPABLE_BOMBS
+  entities_end
 
 IndoorsA59Entities::
-  db   $24, ENTITY_INSTRUMENT_OF_THE_SIRENS
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_INSTRUMENT_OF_THE_SIRENS
+  entities_end
 
 IndoorsA5AEntities::
-  db   $34, ENTITY_SLIME_EYE
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_SLIME_EYE
+  entities_end
 
 IndoorsA5BEntities::
-  db   $13, ENTITY_KEESE
-  db   $25, ENTITY_KEESE
-  db   $42, ENTITY_KEESE
-  db   $55, ENTITY_KEESE
-  db   $67, ENTITY_KEESE
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_KEESE
+  entity $2, $5, ENTITY_KEESE
+  entity $4, $2, ENTITY_KEESE
+  entity $5, $5, ENTITY_KEESE
+  entity $6, $7, ENTITY_KEESE
+  entities_end
 
 IndoorsA5CEntities::
-  db   $15, ENTITY_PAIRODD
-  db   $32, ENTITY_PAIRODD
-  db   $67, ENTITY_PAIRODD
-  db   $34, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_PAIRODD
+  entity $3, $2, ENTITY_PAIRODD
+  entity $6, $7, ENTITY_PAIRODD
+  entity $3, $4, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA5DEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA5EEntities::
-  db   $37, ENTITY_CHEEP_CHEEP_VERTICAL
-  db   $53, ENTITY_CHEEP_CHEEP_HORIZONTAL
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_CHEEP_CHEEP_VERTICAL
+  entity $5, $3, ENTITY_CHEEP_CHEEP_HORIZONTAL
+  entities_end
 
 IndoorsA5FEntities::
-  db   $34, ENTITY_CHEEP_CHEEP_VERTICAL
-  db   $62, ENTITY_CHEEP_CHEEP_HORIZONTAL
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_CHEEP_CHEEP_VERTICAL
+  entity $6, $2, ENTITY_CHEEP_CHEEP_HORIZONTAL
+  entities_end
 
 IndoorsA60Entities::
-  db   $03, ENTITY_FIREBALL_SHOOTER
-  db   $05, ENTITY_FIREBALL_SHOOTER
-  db   $53, ENTITY_GEL
-  db   $55, ENTITY_GEL
-  db   ENTITIES_END
+  entity $0, $3, ENTITY_FIREBALL_SHOOTER
+  entity $0, $5, ENTITY_FIREBALL_SHOOTER
+  entity $5, $3, ENTITY_GEL
+  entity $5, $5, ENTITY_GEL
+  entities_end
 
 IndoorsA61Entities::
-  db   $07, ENTITY_MOVING_BLOCK_MOVER
-  db   $53, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $21, ENTITY_MOVING_BLOCK_LEFT_TOP
-  db   $51, ENTITY_MOVING_BLOCK_LEFT_BOTTOM
-  db   $63, ENTITY_MOVING_BLOCK_BOTTOM_LEFT
-  db   $66, ENTITY_MOVING_BLOCK_BOTTOM_RIGHT
-  db   ENTITIES_END
+  entity $0, $7, ENTITY_MOVING_BLOCK_MOVER
+  entity $5, $3, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $2, $1, ENTITY_MOVING_BLOCK_LEFT_TOP
+  entity $5, $1, ENTITY_MOVING_BLOCK_LEFT_BOTTOM
+  entity $6, $3, ENTITY_MOVING_BLOCK_BOTTOM_LEFT
+  entity $6, $6, ENTITY_MOVING_BLOCK_BOTTOM_RIGHT
+  entities_end
 
 IndoorsA62Entities::
-  db   $24, ENTITY_INSTRUMENT_OF_THE_SIRENS
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_INSTRUMENT_OF_THE_SIRENS
+  entities_end
 
 IndoorsA63Entities::
-  db   $34, ENTITY_TILE_GLINT_SHOWN
-  db   $33, ENTITY_IRON_MASK
-  db   $36, ENTITY_IRON_MASK
-  db   $45, ENTITY_GEL
-  db   $44, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_TILE_GLINT_SHOWN
+  entity $3, $3, ENTITY_IRON_MASK
+  entity $3, $6, ENTITY_IRON_MASK
+  entity $4, $5, ENTITY_GEL
+  entity $4, $4, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA64Entities::
-  db   $11, ENTITY_CUE_BALL
-  db   $14, ENTITY_WARP
-  db   ENTITIES_END
+  entity $1, $1, ENTITY_CUE_BALL
+  entity $1, $4, ENTITY_WARP
+  entities_end
 
 IndoorsA65Entities::
-  db   $13, ENTITY_ANTI_FAIRY
-  db   $17, ENTITY_ANTI_FAIRY
-  db   $35, ENTITY_WATER_TEKTITE
-  db   $32, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_ANTI_FAIRY
+  entity $1, $7, ENTITY_ANTI_FAIRY
+  entity $3, $5, ENTITY_WATER_TEKTITE
+  entity $3, $2, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA66Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA67Entities::
-  db   $34, ENTITY_TILE_GLINT_HIDDEN
-  db   $23, ENTITY_WATER_TEKTITE
-  db   $36, ENTITY_WATER_TEKTITE
-  db   $55, ENTITY_WATER_TEKTITE
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_TILE_GLINT_HIDDEN
+  entity $2, $3, ENTITY_WATER_TEKTITE
+  entity $3, $6, ENTITY_WATER_TEKTITE
+  entity $5, $5, ENTITY_WATER_TEKTITE
+  entities_end
 
 IndoorsA68Entities::
-  db   $04, ENTITY_FIREBALL_SHOOTER
-  db   $05, ENTITY_FIREBALL_SHOOTER
-  db   $37, ENTITY_HIDING_GEL
-  db   $58, ENTITY_HIDING_GEL
-  db   $61, ENTITY_SPARK_CLOCKWISE
-  db   ENTITIES_END
+  entity $0, $4, ENTITY_FIREBALL_SHOOTER
+  entity $0, $5, ENTITY_FIREBALL_SHOOTER
+  entity $3, $7, ENTITY_HIDING_GEL
+  entity $5, $8, ENTITY_HIDING_GEL
+  entity $6, $1, ENTITY_SPARK_CLOCKWISE
+  entities_end
 
 IndoorsA69Entities::
-  db   $44, ENTITY_GEL
-  db   $45, ENTITY_GEL
-  db   $67, ENTITY_DROPPABLE_RUPEE
-  db   $68, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_GEL
+  entity $4, $5, ENTITY_GEL
+  entity $6, $7, ENTITY_DROPPABLE_RUPEE
+  entity $6, $8, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsA6AEntities::
-  db   $13, ENTITY_STAR
-  db   $24, ENTITY_HIDING_GEL
-  db   $32, ENTITY_MOBLIN_SWORD
-  db   $58, ENTITY_GEL
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_STAR
+  entity $2, $4, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_MOBLIN_SWORD
+  entity $5, $8, ENTITY_GEL
+  entities_end
 
 IndoorsA6BEntities::
-  db   $28, ENTITY_WATER_TEKTITE
-  db   $35, ENTITY_PEAHAT
-  db   $43, ENTITY_WATER_TEKTITE
-  db   $57, ENTITY_PEAHAT
-  db   $58, ENTITY_DROPPABLE_BOMBS
-  db   ENTITIES_END
+  entity $2, $8, ENTITY_WATER_TEKTITE
+  entity $3, $5, ENTITY_PEAHAT
+  entity $4, $3, ENTITY_WATER_TEKTITE
+  entity $5, $7, ENTITY_PEAHAT
+  entity $5, $8, ENTITY_DROPPABLE_BOMBS
+  entities_end
 
 IndoorsA6CEntities::
-  db   $23, ENTITY_GEL
-  db   $53, ENTITY_GEL
-  db   $56, ENTITY_GEL
-  db   $54, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_GEL
+  entity $5, $3, ENTITY_GEL
+  entity $5, $6, ENTITY_GEL
+  entity $5, $4, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsA6DEntities::
-  db   $37, ENTITY_MOBLIN_SWORD
-  db   $48, ENTITY_GEL
-  db   $55, ENTITY_MOBLIN
-  db   $18, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_MOBLIN_SWORD
+  entity $4, $8, ENTITY_GEL
+  entity $5, $5, ENTITY_MOBLIN
+  entity $1, $8, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsA6EEntities::
-  db   $37, ENTITY_WATER_TEKTITE
-  db   $46, ENTITY_WATER_TEKTITE
-  db   $52, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_WATER_TEKTITE
+  entity $4, $6, ENTITY_WATER_TEKTITE
+  entity $5, $2, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA6FEntities::
-  db   $43, ENTITY_OWL_STATUE
-  db   $33, ENTITY_HIDING_GEL
-  db   $36, ENTITY_SPIKED_BEETLE
-  db   $42, ENTITY_SPIKED_BEETLE
-  db   $25, ENTITY_DROPPABLE_FAIRY
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_OWL_STATUE
+  entity $3, $3, ENTITY_HIDING_GEL
+  entity $3, $6, ENTITY_SPIKED_BEETLE
+  entity $4, $2, ENTITY_SPIKED_BEETLE
+  entity $2, $5, ENTITY_DROPPABLE_FAIRY
+  entities_end
 
 IndoorsA70Entities::
-  db   $55, ENTITY_GEL
-  db   $58, ENTITY_GEL
-  db   ENTITIES_END
+  entity $5, $5, ENTITY_GEL
+  entity $5, $8, ENTITY_GEL
+  entities_end
 
 IndoorsA71Entities::
-  db   $35, ENTITY_ANTI_FAIRY
-  db   $43, ENTITY_WATER_TEKTITE
-  db   $58, ENTITY_PEAHAT
-  db   $51, ENTITY_DROPPABLE_RUPEE
-  db   $61, ENTITY_DROPPABLE_RUPEE
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_ANTI_FAIRY
+  entity $4, $3, ENTITY_WATER_TEKTITE
+  entity $5, $8, ENTITY_PEAHAT
+  entity $5, $1, ENTITY_DROPPABLE_RUPEE
+  entity $6, $1, ENTITY_DROPPABLE_RUPEE
+  entities_end
 
 IndoorsA72Entities::
-  db   $13, ENTITY_PEAHAT
-  db   $28, ENTITY_PEAHAT
-  db   $36, ENTITY_PEAHAT
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_PEAHAT
+  entity $2, $8, ENTITY_PEAHAT
+  entity $3, $6, ENTITY_PEAHAT
+  entities_end
 
 IndoorsA73Entities::
-  db   $22, ENTITY_WATER_TEKTITE
-  db   $26, ENTITY_WATER_TEKTITE
-  db   $34, ENTITY_WATER_TEKTITE
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_WATER_TEKTITE
+  entity $2, $6, ENTITY_WATER_TEKTITE
+  entity $3, $4, ENTITY_WATER_TEKTITE
+  entities_end
 
 IndoorsA74Entities::
-  db   $22, ENTITY_WATER_TEKTITE
-  db   $35, ENTITY_PEAHAT
-  db   $44, ENTITY_WATER_TEKTITE
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_WATER_TEKTITE
+  entity $3, $5, ENTITY_PEAHAT
+  entity $4, $4, ENTITY_WATER_TEKTITE
+  entities_end
 
 IndoorsA75Entities::
-  db   $25, ENTITY_WATER_TEKTITE
-  db   $28, ENTITY_WATER_TEKTITE
-  db   $42, ENTITY_PEAHAT
-  db   $47, ENTITY_WATER_TEKTITE
-  db   $21, ENTITY_DROPPABLE_FAIRY
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_WATER_TEKTITE
+  entity $2, $8, ENTITY_WATER_TEKTITE
+  entity $4, $2, ENTITY_PEAHAT
+  entity $4, $7, ENTITY_WATER_TEKTITE
+  entity $2, $1, ENTITY_DROPPABLE_FAIRY
+  entities_end
 
 IndoorsA76Entities::
-  db   $51, ENTITY_DROPPABLE_HEART
-  db   $61, ENTITY_DROPPABLE_HEART
-  db   $65, ENTITY_WATER_TEKTITE
-  db   $36, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $5, $1, ENTITY_DROPPABLE_HEART
+  entity $6, $1, ENTITY_DROPPABLE_HEART
+  entity $6, $5, ENTITY_WATER_TEKTITE
+  entity $3, $6, ENTITY_FLOATING_ITEM
+  entities_end
 
 IndoorsA77Entities::
-  db   $42, ENTITY_SPIKED_BEETLE
-  db   $46, ENTITY_SPIKED_BEETLE
-  db   $55, ENTITY_GEL
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_SPIKED_BEETLE
+  entity $4, $6, ENTITY_SPIKED_BEETLE
+  entity $5, $5, ENTITY_GEL
+  entities_end
 
 IndoorsA78Entities::
-  db   $35, ENTITY_SPIKED_BEETLE
-  db   $53, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $56, ENTITY_GEL
-  db   $62, ENTITY_SPIKED_BEETLE
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_SPIKED_BEETLE
+  entity $5, $3, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $5, $6, ENTITY_GEL
+  entity $6, $2, ENTITY_SPIKED_BEETLE
+  entities_end
 
 IndoorsA79Entities::
-  db   $36, ENTITY_WATER_TEKTITE
-  db   $48, ENTITY_WATER_TEKTITE
-  db   $54, ENTITY_WATER_TEKTITE
-  db   ENTITIES_END
+  entity $3, $6, ENTITY_WATER_TEKTITE
+  entity $4, $8, ENTITY_WATER_TEKTITE
+  entity $5, $4, ENTITY_WATER_TEKTITE
+  entities_end
 
 IndoorsA7AEntities::
-  db   $34, ENTITY_WARP
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_WARP
+  entities_end
 
 IndoorsA7BEntities::
-  db   $21, ENTITY_WATER_TEKTITE
-  db   $28, ENTITY_WATER_TEKTITE
-  db   $52, ENTITY_WATER_TEKTITE
-  db   $68, ENTITY_WATER_TEKTITE
-  db   ENTITIES_END
+  entity $2, $1, ENTITY_WATER_TEKTITE
+  entity $2, $8, ENTITY_WATER_TEKTITE
+  entity $5, $2, ENTITY_WATER_TEKTITE
+  entity $6, $8, ENTITY_WATER_TEKTITE
+  entities_end
 
 IndoorsA7CEntities::
-  db   $23, ENTITY_KEY_DROP_POINT
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_KEY_DROP_POINT
+  entities_end
 
 IndoorsA7DEntities::
-  db   $32, ENTITY_SIDE_VIEW_PLATFORM_HORIZONTAL
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_SIDE_VIEW_PLATFORM_HORIZONTAL
+  entities_end
 
 IndoorsA7EEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA7FEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA80Entities::
-  db   $34, ENTITY_MASTER_STALFOS
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_MASTER_STALFOS
+  entities_end
 
 IndoorsA81Entities::
-  db   $13, ENTITY_STALFOS_EVASIVE
-  db   $51, ENTITY_STALFOS_EVASIVE
-  db   $18, ENTITY_STALFOS_AGGRESSIVE
-  db   $65, ENTITY_STALFOS_AGGRESSIVE
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_STALFOS_EVASIVE
+  entity $5, $1, ENTITY_STALFOS_EVASIVE
+  entity $1, $8, ENTITY_STALFOS_AGGRESSIVE
+  entity $6, $5, ENTITY_STALFOS_AGGRESSIVE
+  entities_end
 
 IndoorsA82Entities::
-  db   $24, ENTITY_INSTRUMENT_OF_THE_SIRENS
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_INSTRUMENT_OF_THE_SIRENS
+  entities_end
 
 IndoorsA83Entities::
-  db   $33, ENTITY_STALFOS_EVASIVE
-  db   $34, ENTITY_STALFOS_AGGRESSIVE
-  db   $35, ENTITY_STALFOS_EVASIVE
-  db   $54, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_STALFOS_EVASIVE
+  entity $3, $4, ENTITY_STALFOS_AGGRESSIVE
+  entity $3, $5, ENTITY_STALFOS_EVASIVE
+  entity $5, $4, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA84Entities::
-  db   $34, ENTITY_MASTER_STALFOS
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_MASTER_STALFOS
+  entities_end
 
 IndoorsA85Entities::
-  db   $34, ENTITY_SLIME_EEL
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_SLIME_EEL
+  entities_end
 
 IndoorsA86Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA87Entities::
-  db   $16, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $25, ENTITY_HIDING_GEL
-  db   $37, ENTITY_HIDING_GEL
-  db   $42, ENTITY_HIDING_GEL
-  db   $18, ENTITY_DROPPABLE_HEART
-  db   $61, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $1, $6, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $2, $5, ENTITY_HIDING_GEL
+  entity $3, $7, ENTITY_HIDING_GEL
+  entity $4, $2, ENTITY_HIDING_GEL
+  entity $1, $8, ENTITY_DROPPABLE_HEART
+  entity $6, $1, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsA88Entities::
-  db   $32, ENTITY_MOBLIN_SWORD
-  db   $44, ENTITY_STAR
-  db   $62, ENTITY_DROPPABLE_RUPEE
-  db   $64, ENTITY_DROPPABLE_RUPEE
-  db   $58, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_MOBLIN_SWORD
+  entity $4, $4, ENTITY_STAR
+  entity $6, $2, ENTITY_DROPPABLE_RUPEE
+  entity $6, $4, ENTITY_DROPPABLE_RUPEE
+  entity $5, $8, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA89Entities::
-  db   $41, ENTITY_FIREBALL_SHOOTER
-  db   $48, ENTITY_FIREBALL_SHOOTER
-  db   $26, ENTITY_MOBLIN
-  db   $56, ENTITY_MOBLIN_SWORD
-  db   $18, ENTITY_DROPPABLE_HEART
-  db   $61, ENTITY_DROPPABLE_RUPEE
-  db   $62, ENTITY_DROPPABLE_RUPEE
-  db   ENTITIES_END
+  entity $4, $1, ENTITY_FIREBALL_SHOOTER
+  entity $4, $8, ENTITY_FIREBALL_SHOOTER
+  entity $2, $6, ENTITY_MOBLIN
+  entity $5, $6, ENTITY_MOBLIN_SWORD
+  entity $1, $8, ENTITY_DROPPABLE_HEART
+  entity $6, $1, ENTITY_DROPPABLE_RUPEE
+  entity $6, $2, ENTITY_DROPPABLE_RUPEE
+  entities_end
 
 IndoorsA8AEntities::
-  db   $05, ENTITY_OWL_STATUE
-  db   $24, ENTITY_STAR
-  db   $26, ENTITY_ANTI_FAIRY
-  db   $64, ENTITY_STAR
-  db   $66, ENTITY_STAR
-  db   ENTITIES_END
+  entity $0, $5, ENTITY_OWL_STATUE
+  entity $2, $4, ENTITY_STAR
+  entity $2, $6, ENTITY_ANTI_FAIRY
+  entity $6, $4, ENTITY_STAR
+  entity $6, $6, ENTITY_STAR
+  entities_end
 
 IndoorsA8BEntities::
-  db   $65, ENTITY_SPARK_CLOCKWISE
-  db   ENTITIES_END
+  entity $6, $5, ENTITY_SPARK_CLOCKWISE
+  entities_end
 
 IndoorsA8CEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsA8DEntities::
-  db   $15, ENTITY_WATER_TEKTITE
-  db   $41, ENTITY_WATER_TEKTITE
-  db   $48, ENTITY_WATER_TEKTITE
-  db   $65, ENTITY_WATER_TEKTITE
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_WATER_TEKTITE
+  entity $4, $1, ENTITY_WATER_TEKTITE
+  entity $4, $8, ENTITY_WATER_TEKTITE
+  entity $6, $5, ENTITY_WATER_TEKTITE
+  entities_end
 
 IndoorsA8EEntities::
-  db   $22, ENTITY_MOBLIN
-  db   $35, ENTITY_MOBLIN
-  db   $43, ENTITY_STAR
-  db   $13, ENTITY_DROPPABLE_RUPEE
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_MOBLIN
+  entity $3, $5, ENTITY_MOBLIN
+  entity $4, $3, ENTITY_STAR
+  entity $1, $3, ENTITY_DROPPABLE_RUPEE
+  entities_end
 
 IndoorsA8FEntities::
-  db   $42, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $64, ENTITY_GEL
-  db   $66, ENTITY_MOBLIN_SWORD
-  db   $54, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $6, $4, ENTITY_GEL
+  entity $6, $6, ENTITY_MOBLIN_SWORD
+  entity $5, $4, ENTITY_FLOATING_ITEM
+  entities_end
 
 IndoorsA90Entities::
-  db   $11, ENTITY_SPIKE_TRAP
-  db   $18, ENTITY_SPIKE_TRAP
-  db   $61, ENTITY_SPIKE_TRAP
-  db   $68, ENTITY_SPIKE_TRAP
-  db   $23, ENTITY_STAR
-  db   $42, ENTITY_MOBLIN_SWORD
-  db   ENTITIES_END
+  entity $1, $1, ENTITY_SPIKE_TRAP
+  entity $1, $8, ENTITY_SPIKE_TRAP
+  entity $6, $1, ENTITY_SPIKE_TRAP
+  entity $6, $8, ENTITY_SPIKE_TRAP
+  entity $2, $3, ENTITY_STAR
+  entity $4, $2, ENTITY_MOBLIN_SWORD
+  entities_end
 
 IndoorsA91Entities::
-  db   $31, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $57, ENTITY_SPARK_CLOCKWISE
-  db   ENTITIES_END
+  entity $3, $1, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $5, $7, ENTITY_SPARK_CLOCKWISE
+  entities_end
 
 IndoorsA92Entities::
-  db   $34, ENTITY_MASTER_STALFOS
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_MASTER_STALFOS
+  entities_end
 
 IndoorsA93Entities::
-  db   $12, ENTITY_GHOMA
-  db   $42, ENTITY_GHOMA
-  db   $34, ENTITY_WARP
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_GHOMA
+  entity $4, $2, ENTITY_GHOMA
+  entity $3, $4, ENTITY_WARP
+  entities_end
 
 IndoorsA94Entities::
-  db   $24, ENTITY_GEL
-  db   $43, ENTITY_GEL
-  db   $55, ENTITY_ANTI_FAIRY
-  db   $34, ENTITY_DROPPABLE_HEART
-  db   $35, ENTITY_DROPPABLE_ARROWS
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_GEL
+  entity $4, $3, ENTITY_GEL
+  entity $5, $5, ENTITY_ANTI_FAIRY
+  entity $3, $4, ENTITY_DROPPABLE_HEART
+  entity $3, $5, ENTITY_DROPPABLE_ARROWS
+  entities_end
 
 IndoorsA95Entities::
-  db   $34, ENTITY_MASTER_STALFOS
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_MASTER_STALFOS
+  entities_end
 
 IndoorsA96Entities::
-  db   $24, ENTITY_HIDING_GEL
-  db   $32, ENTITY_HIDING_GEL
-  db   $44, ENTITY_HIDING_GEL
-  db   $25, ENTITY_DROPPABLE_BOMBS
-  db   $26, ENTITY_DROPPABLE_BOMBS
-  db   $36, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_HIDING_GEL
+  entity $4, $4, ENTITY_HIDING_GEL
+  entity $2, $5, ENTITY_DROPPABLE_BOMBS
+  entity $2, $6, ENTITY_DROPPABLE_BOMBS
+  entity $3, $6, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsA97Entities::
-  db   $42, ENTITY_IRON_MASK
-  db   $53, ENTITY_IRON_MASK
-  db   $66, ENTITY_IRON_MASK
-  db   $21, ENTITY_DROPPABLE_HEART
-  db   $53, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_IRON_MASK
+  entity $5, $3, ENTITY_IRON_MASK
+  entity $6, $6, ENTITY_IRON_MASK
+  entity $2, $1, ENTITY_DROPPABLE_HEART
+  entity $5, $3, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA98Entities::
-  db   $14, ENTITY_SPIKE_TRAP
-  db   $16, ENTITY_SPIKE_TRAP
-  db   $64, ENTITY_SPIKE_TRAP
-  db   $66, ENTITY_SPIKE_TRAP
-  db   $22, ENTITY_HIDING_GEL
-  db   $52, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_SPIKE_TRAP
+  entity $1, $6, ENTITY_SPIKE_TRAP
+  entity $6, $4, ENTITY_SPIKE_TRAP
+  entity $6, $6, ENTITY_SPIKE_TRAP
+  entity $2, $2, ENTITY_HIDING_GEL
+  entity $5, $2, ENTITY_HIDING_GEL
+  entities_end
 
 IndoorsA99Entities::
-  db   $15, ENTITY_FIREBALL_SHOOTER
-  db   $32, ENTITY_GEL
-  db   $34, ENTITY_GEL
-  db   $37, ENTITY_DROPPABLE_FAIRY
-  db   $43, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_FIREBALL_SHOOTER
+  entity $3, $2, ENTITY_GEL
+  entity $3, $4, ENTITY_GEL
+  entity $3, $7, ENTITY_DROPPABLE_FAIRY
+  entity $4, $3, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsA9AEntities::
-  db   $12, ENTITY_STALFOS_AGGRESSIVE
-  db   $17, ENTITY_STALFOS_AGGRESSIVE
-  db   $46, ENTITY_STALFOS_EVASIVE
-  db   $07, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_STALFOS_AGGRESSIVE
+  entity $1, $7, ENTITY_STALFOS_AGGRESSIVE
+  entity $4, $6, ENTITY_STALFOS_EVASIVE
+  entity $0, $7, ENTITY_OWL_STATUE
+  entities_end
 
 IndoorsA9BEntities::
-  db   $24, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $33, ENTITY_IRON_MASK
-  db   $55, ENTITY_IRON_MASK
-  db   $54, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $3, $3, ENTITY_IRON_MASK
+  entity $5, $5, ENTITY_IRON_MASK
+  entity $5, $4, ENTITY_FLOATING_ITEM
+  entities_end
 
 IndoorsA9CEntities::
-  db   $11, ENTITY_SPIKE_TRAP
-  db   $18, ENTITY_SPIKE_TRAP
-  db   $61, ENTITY_SPIKE_TRAP
-  db   $68, ENTITY_SPIKE_TRAP
-  db   $55, ENTITY_IRON_MASK
-  db   $33, ENTITY_IRON_MASK
-  db   ENTITIES_END
+  entity $1, $1, ENTITY_SPIKE_TRAP
+  entity $1, $8, ENTITY_SPIKE_TRAP
+  entity $6, $1, ENTITY_SPIKE_TRAP
+  entity $6, $8, ENTITY_SPIKE_TRAP
+  entity $5, $5, ENTITY_IRON_MASK
+  entity $3, $3, ENTITY_IRON_MASK
+  entities_end
 
 IndoorsA9DEntities::
-  db   $26, ENTITY_STALFOS_AGGRESSIVE
-  db   $32, ENTITY_IRON_MASK
-  db   $53, ENTITY_STALFOS_EVASIVE
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_STALFOS_AGGRESSIVE
+  entity $3, $2, ENTITY_IRON_MASK
+  entity $5, $3, ENTITY_STALFOS_EVASIVE
+  entities_end
 
 IndoorsA9EEntities::
-  db   $34, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $35, ENTITY_IRON_MASK
-  db   $44, ENTITY_IRON_MASK
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $3, $5, ENTITY_IRON_MASK
+  entity $4, $4, ENTITY_IRON_MASK
+  entities_end
 
 IndoorsA9FEntities::
-  db   $23, ENTITY_KEESE
-  db   $26, ENTITY_KEESE
-  db   $43, ENTITY_KEESE
-  db   $46, ENTITY_KEESE
-  db   $34, ENTITY_IRON_MASK
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_KEESE
+  entity $2, $6, ENTITY_KEESE
+  entity $4, $3, ENTITY_KEESE
+  entity $4, $6, ENTITY_KEESE
+  entity $3, $4, ENTITY_IRON_MASK
+  entities_end
 
 IndoorsAA0Entities::
-  db   $44, ENTITY_IRON_MASK
-  db   $45, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $55, ENTITY_GEL
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_IRON_MASK
+  entity $4, $5, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $5, $5, ENTITY_GEL
+  entities_end
 
 IndoorsAA1Entities::
-  db   $34, ENTITY_WARP
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_WARP
+  entities_end
 
 IndoorsAA2Entities::
-  db   $33, ENTITY_BLOOPER
-  db   $34, ENTITY_BLOOPER
-  db   $37, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $3, $3, ENTITY_BLOOPER
+  entity $3, $4, ENTITY_BLOOPER
+  entity $3, $7, ENTITY_GOOMBA
+  entities_end
 
 IndoorsAA3Entities::
-  db   $42, ENTITY_BLOOPER
-  db   $52, ENTITY_BLOOPER
-  db   ENTITIES_END
+  entity $4, $2, ENTITY_BLOOPER
+  entity $5, $2, ENTITY_BLOOPER
+  entities_end
 
 IndoorsAA4Entities::
-  db   $51, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $5, $1, ENTITY_GOOMBA
+  entities_end
 
 IndoorsAA5Entities::
-  db   $32, ENTITY_GOOMBA
-  db   $34, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_GOOMBA
+  entity $3, $4, ENTITY_GOOMBA
+  entities_end
 
 IndoorsAA6Entities::
-  db   $53, ENTITY_CHEEP_CHEEP_JUMPING
-  db   $56, ENTITY_CHEEP_CHEEP_JUMPING
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_CHEEP_CHEEP_JUMPING
+  entity $5, $6, ENTITY_CHEEP_CHEEP_JUMPING
+  entities_end
 
 IndoorsAA7Entities::
-  db   $52, ENTITY_CHEEP_CHEEP_JUMPING
-  db   $56, ENTITY_CHEEP_CHEEP_JUMPING
-  db   ENTITIES_END
+  entity $5, $2, ENTITY_CHEEP_CHEEP_JUMPING
+  entity $5, $6, ENTITY_CHEEP_CHEEP_JUMPING
+  entities_end
 
 IndoorsAA8Entities::
-  db   $52, ENTITY_SIDE_VIEW_WEIGHTS
-  db   $36, ENTITY_SIDE_VIEW_WEIGHTS
-  db   $54, ENTITY_SIDE_VIEW_WEIGHTS
-  db   $38, ENTITY_SIDE_VIEW_WEIGHTS
-  db   ENTITIES_END
+  entity $5, $2, ENTITY_SIDE_VIEW_WEIGHTS
+  entity $3, $6, ENTITY_SIDE_VIEW_WEIGHTS
+  entity $5, $4, ENTITY_SIDE_VIEW_WEIGHTS
+  entity $3, $8, ENTITY_SIDE_VIEW_WEIGHTS
+  entities_end
 
 IndoorsAA9Entities::
-  db   $54, ENTITY_SIDE_VIEW_WEIGHTS
-  db   $36, ENTITY_SIDE_VIEW_WEIGHTS
-  db   ENTITIES_END
+  entity $5, $4, ENTITY_SIDE_VIEW_WEIGHTS
+  entity $3, $6, ENTITY_SIDE_VIEW_WEIGHTS
+  entities_end
 
 IndoorsAAAEntities::
-  db   $15, ENTITY_THWOMP_RAMMABLE
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_THWOMP_RAMMABLE
+  entities_end
 
 IndoorsAABEntities::
-  db   $37, ENTITY_PIRANHA_PLANT
-  db   ENTITIES_END
+  entity $3, $7, ENTITY_PIRANHA_PLANT
+  entities_end
 
 IndoorsAACEntities::
-  db   $24, ENTITY_BIG_FAIRY
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_BIG_FAIRY
+  entities_end
 
 IndoorsAADEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAAEEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAAFEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAB0Entities::
-  db   $53, ENTITY_HORSE_PIECE
-  db   $56, ENTITY_HORSE_PIECE
-  db   $22, ENTITY_CRYSTAL_SWITCH
-  db   $21, ENTITY_STAR
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_HORSE_PIECE
+  entity $5, $6, ENTITY_HORSE_PIECE
+  entity $2, $2, ENTITY_CRYSTAL_SWITCH
+  entity $2, $1, ENTITY_STAR
+  entities_end
 
 IndoorsAB1Entities::
-  db   $53, ENTITY_HORSE_PIECE
-  db   $56, ENTITY_HORSE_PIECE
-  db   $27, ENTITY_CRYSTAL_SWITCH
-  db   $28, ENTITY_STAR
-  db   $64, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_HORSE_PIECE
+  entity $5, $6, ENTITY_HORSE_PIECE
+  entity $2, $7, ENTITY_CRYSTAL_SWITCH
+  entity $2, $8, ENTITY_STAR
+  entity $6, $4, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsAB2Entities::
-  db   $15, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $32, ENTITY_LIFTABLE_STATUE
-  db   $34, ENTITY_LIFTABLE_STATUE
-  db   $42, ENTITY_SPARK_CLOCKWISE
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $3, $2, ENTITY_LIFTABLE_STATUE
+  entity $3, $4, ENTITY_LIFTABLE_STATUE
+  entity $4, $2, ENTITY_SPARK_CLOCKWISE
+  entities_end
 
 IndoorsAB3Entities::
-  db   $00, ENTITY_CRYSTAL_SWITCH
-  db   $35, ENTITY_STAR
-  db   $38, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_CRYSTAL_SWITCH
+  entity $3, $5, ENTITY_STAR
+  entity $3, $8, ENTITY_FLOATING_ITEM
+  entities_end
 
 IndoorsAB4Entities::
-  db   $14, ENTITY_ANTI_FAIRY
-  db   $33, ENTITY_WIZROBE
-  db   $36, ENTITY_WIZROBE
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_ANTI_FAIRY
+  entity $3, $3, ENTITY_WIZROBE
+  entity $3, $6, ENTITY_WIZROBE
+  entities_end
 
 IndoorsAB5Entities::
-  db   $24, ENTITY_INSTRUMENT_OF_THE_SIRENS
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_INSTRUMENT_OF_THE_SIRENS
+  entities_end
 
 IndoorsAB6Entities::
-  db   $26, ENTITY_CRYSTAL_SWITCH
-  db   $04, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_CRYSTAL_SWITCH
+  entity $0, $4, ENTITY_OWL_STATUE
+  entities_end
 
 IndoorsAB7Entities::
-  db   $31, ENTITY_SPARK_CLOCKWISE
-  db   $48, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $34, ENTITY_FLOATING_ITEM
-  db   $23, ENTITY_DROPPABLE_ARROWS
-  db   $28, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $3, $1, ENTITY_SPARK_CLOCKWISE
+  entity $4, $8, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $3, $4, ENTITY_FLOATING_ITEM
+  entity $2, $3, ENTITY_DROPPABLE_ARROWS
+  entity $2, $8, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsAB8Entities::
-  db   $57, ENTITY_DROPPABLE_BOMBS
-  db   $58, ENTITY_DROPPABLE_BOMBS
-  db   $25, ENTITY_HIDING_GEL
-  db   $32, ENTITY_HIDING_GEL
-  db   $34, ENTITY_HIDING_GEL
-  db   $32, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $5, $7, ENTITY_DROPPABLE_BOMBS
+  entity $5, $8, ENTITY_DROPPABLE_BOMBS
+  entity $2, $5, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_HIDING_GEL
+  entity $3, $4, ENTITY_HIDING_GEL
+  entity $3, $2, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsAB9Entities::
-  db   $17, ENTITY_FIREBALL_SHOOTER
-  db   ENTITIES_END
+  entity $1, $7, ENTITY_FIREBALL_SHOOTER
+  entities_end
 
 IndoorsABAEntities::
-  db   $34, ENTITY_HORSE_PIECE
-  db   $45, ENTITY_HORSE_PIECE
-  db   $36, ENTITY_DROPPABLE_HEART
-  db   $43, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_HORSE_PIECE
+  entity $4, $5, ENTITY_HORSE_PIECE
+  entity $3, $6, ENTITY_DROPPABLE_HEART
+  entity $4, $3, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsABBEntities::
-  db   $55, ENTITY_OWL_STATUE
-  db   $38, ENTITY_FLOATING_ITEM
-  db   $14, ENTITY_LIFTABLE_STATUE
-  db   $32, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $42, ENTITY_SPARK_CLOCKWISE
-  db   ENTITIES_END
+  entity $5, $5, ENTITY_OWL_STATUE
+  entity $3, $8, ENTITY_FLOATING_ITEM
+  entity $1, $4, ENTITY_LIFTABLE_STATUE
+  entity $3, $2, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $4, $2, ENTITY_SPARK_CLOCKWISE
+  entities_end
 
 IndoorsABCEntities::
-  db   $34, ENTITY_FACADE
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_FACADE
+  entities_end
 
 IndoorsABDEntities::
-  db   $32, ENTITY_LIFTABLE_STATUE
-  db   $37, ENTITY_LIFTABLE_STATUE
-  db   $34, ENTITY_FLOATING_ITEM
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_LIFTABLE_STATUE
+  entity $3, $7, ENTITY_LIFTABLE_STATUE
+  entity $3, $4, ENTITY_FLOATING_ITEM
+  entities_end
 
 IndoorsABEEntities::
-  db   $25, ENTITY_WATER_TEKTITE
-  db   $27, ENTITY_WATER_TEKTITE
-  db   $46, ENTITY_WATER_TEKTITE
-  db   $31, ENTITY_STAR
-  db   $63, ENTITY_DROPPABLE_HEART
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_WATER_TEKTITE
+  entity $2, $7, ENTITY_WATER_TEKTITE
+  entity $4, $6, ENTITY_WATER_TEKTITE
+  entity $3, $1, ENTITY_STAR
+  entity $6, $3, ENTITY_DROPPABLE_HEART
+  entities_end
 
 IndoorsABFEntities::
-  db   $31, ENTITY_POLS_VOICE
-  db   $34, ENTITY_POLS_VOICE
-  db   $52, ENTITY_POLS_VOICE
-  db   $11, ENTITY_DROPPABLE_BOMBS
-  db   ENTITIES_END
+  entity $3, $1, ENTITY_POLS_VOICE
+  entity $3, $4, ENTITY_POLS_VOICE
+  entity $5, $2, ENTITY_POLS_VOICE
+  entity $1, $1, ENTITY_DROPPABLE_BOMBS
+  entities_end
 
 IndoorsAC0Entities::
-  db   $61, ENTITY_CRYSTAL_SWITCH
-  db   $27, ENTITY_WIZROBE
-  db   $34, ENTITY_WIZROBE
-  db   $52, ENTITY_WIZROBE
-  db   $33, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $6, $1, ENTITY_CRYSTAL_SWITCH
+  entity $2, $7, ENTITY_WIZROBE
+  entity $3, $4, ENTITY_WIZROBE
+  entity $5, $2, ENTITY_WIZROBE
+  entity $3, $3, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsAC1Entities::
-  db   $46, ENTITY_HIDING_GEL
-  db   $53, ENTITY_HIDING_GEL
-  db   $11, ENTITY_DROPPABLE_HEART
-  db   $25, ENTITY_DROPPABLE_BOMBS
-  db   $61, ENTITY_DROPPABLE_ARROWS
-  db   ENTITIES_END
+  entity $4, $6, ENTITY_HIDING_GEL
+  entity $5, $3, ENTITY_HIDING_GEL
+  entity $1, $1, ENTITY_DROPPABLE_HEART
+  entity $2, $5, ENTITY_DROPPABLE_BOMBS
+  entity $6, $1, ENTITY_DROPPABLE_ARROWS
+  entities_end
 
 IndoorsAC2Entities::
-  db   $23, ENTITY_HIDING_GEL
-  db   $25, ENTITY_HIDING_GEL
-  db   $45, ENTITY_HIDING_GEL
-  db   $53, ENTITY_HIDING_GEL
-  db   $34, ENTITY_LIFTABLE_STATUE
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_HIDING_GEL
+  entity $2, $5, ENTITY_HIDING_GEL
+  entity $4, $5, ENTITY_HIDING_GEL
+  entity $5, $3, ENTITY_HIDING_GEL
+  entity $3, $4, ENTITY_LIFTABLE_STATUE
+  entities_end
 
 IndoorsAC3Entities::
-  db   $22, ENTITY_FLYING_TILES
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_FLYING_TILES
+  entities_end
 
 IndoorsAC4Entities::
-  db   $22, ENTITY_SPARK_CLOCKWISE
-  db   $26, ENTITY_SPARK_CLOCKWISE
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_SPARK_CLOCKWISE
+  entity $2, $6, ENTITY_SPARK_CLOCKWISE
+  entities_end
 
 IndoorsAC5Entities::
-  db   $35, ENTITY_SMASHER
-  db   $34, ENTITY_WARP
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_SMASHER
+  entity $3, $4, ENTITY_WARP
+  entities_end
 
 IndoorsAC6Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAC7Entities::
-  db   $25, ENTITY_DODONGO_SNAKE
-  db   $54, ENTITY_DODONGO_SNAKE
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_DODONGO_SNAKE
+  entity $5, $4, ENTITY_DODONGO_SNAKE
+  entities_end
 
 IndoorsAC8Entities::
-  db   $34, ENTITY_CRYSTAL_SWITCH
-  db   $25, ENTITY_MASKED_MIMIC_GORIYA
-  db   $54, ENTITY_LIFTABLE_STATUE
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_CRYSTAL_SWITCH
+  entity $2, $5, ENTITY_MASKED_MIMIC_GORIYA
+  entity $5, $4, ENTITY_LIFTABLE_STATUE
+  entities_end
 
 IndoorsAC9Entities::
-  db   $14, ENTITY_LIFTABLE_STATUE
-  db   $22, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_LIFTABLE_STATUE
+  entity $2, $2, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsACAEntities::
-  db   $44, ENTITY_TRACTOR_DEVICE
-  db   $24, ENTITY_HIDING_GEL
-  db   $51, ENTITY_HIDING_GEL
-  db   $46, ENTITY_HIDING_GEL
-  db   $64, ENTITY_HIDING_GEL
-  db   ENTITIES_END
+  entity $4, $4, ENTITY_TRACTOR_DEVICE
+  entity $2, $4, ENTITY_HIDING_GEL
+  entity $5, $1, ENTITY_HIDING_GEL
+  entity $4, $6, ENTITY_HIDING_GEL
+  entity $6, $4, ENTITY_HIDING_GEL
+  entities_end
 
 IndoorsACBEntities::
-  db   $35, ENTITY_WIZROBE
-  db   $68, ENTITY_LASER
-  db   ENTITIES_END
+  entity $3, $5, ENTITY_WIZROBE
+  entity $6, $8, ENTITY_LASER
+  entities_end
 
 IndoorsACCEntities::
-  db   $11, ENTITY_FIREBALL_SHOOTER
-  db   $18, ENTITY_FIREBALL_SHOOTER
-  db   $34, ENTITY_GEL
-  db   $35, ENTITY_GEL
-  db   $37, ENTITY_DROPPABLE_HEART
-  db   $42, ENTITY_DROPPABLE_BOMBS
-  db   ENTITIES_END
+  entity $1, $1, ENTITY_FIREBALL_SHOOTER
+  entity $1, $8, ENTITY_FIREBALL_SHOOTER
+  entity $3, $4, ENTITY_GEL
+  entity $3, $5, ENTITY_GEL
+  entity $3, $7, ENTITY_DROPPABLE_HEART
+  entity $4, $2, ENTITY_DROPPABLE_BOMBS
+  entities_end
 
 IndoorsACDEntities::
-  db   $27, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $22, ENTITY_WATER_TEKTITE
-  db   $53, ENTITY_WATER_TEKTITE
-  db   $38, ENTITY_STAR
-  db   $17, ENTITY_DROPPABLE_BOMBS
-  db   $18, ENTITY_DROPPABLE_ARROWS
-  db   ENTITIES_END
+  entity $2, $7, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $2, $2, ENTITY_WATER_TEKTITE
+  entity $5, $3, ENTITY_WATER_TEKTITE
+  entity $3, $8, ENTITY_STAR
+  entity $1, $7, ENTITY_DROPPABLE_BOMBS
+  entity $1, $8, ENTITY_DROPPABLE_ARROWS
+  entities_end
 
 IndoorsACEEntities::
-  db   $34, ENTITY_LIFTABLE_STATUE
-  db   $35, ENTITY_LIFTABLE_STATUE
-  db   $18, ENTITY_DROPPABLE_FAIRY
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_LIFTABLE_STATUE
+  entity $3, $5, ENTITY_LIFTABLE_STATUE
+  entity $1, $8, ENTITY_DROPPABLE_FAIRY
+  entities_end
 
 IndoorsACFEntities::
-  db   $23, ENTITY_MINI_MOLDORM
-  db   $38, ENTITY_LIFTABLE_STATUE
-  db   $63, ENTITY_SPARK_CLOCKWISE
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_MINI_MOLDORM
+  entity $3, $8, ENTITY_LIFTABLE_STATUE
+  entity $6, $3, ENTITY_SPARK_CLOCKWISE
+  entities_end
 
 IndoorsAD0Entities::
-  db   $13, ENTITY_FIREBALL_SHOOTER
-  db   $16, ENTITY_FIREBALL_SHOOTER
-  db   $43, ENTITY_LIFTABLE_STATUE
-  db   $46, ENTITY_LIFTABLE_STATUE
-  db   ENTITIES_END
+  entity $1, $3, ENTITY_FIREBALL_SHOOTER
+  entity $1, $6, ENTITY_FIREBALL_SHOOTER
+  entity $4, $3, ENTITY_LIFTABLE_STATUE
+  entity $4, $6, ENTITY_LIFTABLE_STATUE
+  entities_end
 
 IndoorsAD1Entities::
-  db   $23, ENTITY_WIZROBE
-  db   $34, ENTITY_WIZROBE
-  db   $45, ENTITY_WIZROBE
-  db   $56, ENTITY_WIZROBE
-  db   $25, ENTITY_FLOATING_ITEM_2
-  db   ENTITIES_END
+  entity $2, $3, ENTITY_WIZROBE
+  entity $3, $4, ENTITY_WIZROBE
+  entity $4, $5, ENTITY_WIZROBE
+  entity $5, $6, ENTITY_WIZROBE
+  entity $2, $5, ENTITY_FLOATING_ITEM_2
+  entities_end
 
 IndoorsAD2Entities::
-  db   $48, ENTITY_MINI_MOLDORM
-  db   $38, ENTITY_WIZROBE
-  db   $58, ENTITY_WIZROBE
-  db   ENTITIES_END
+  entity $4, $8, ENTITY_MINI_MOLDORM
+  entity $3, $8, ENTITY_WIZROBE
+  entity $5, $8, ENTITY_WIZROBE
+  entities_end
 
 IndoorsAD3Entities::
-  db   $24, ENTITY_WIZROBE
-  db   $43, ENTITY_WIZROBE
-  db   $45, ENTITY_WIZROBE
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_WIZROBE
+  entity $4, $3, ENTITY_WIZROBE
+  entity $4, $5, ENTITY_WIZROBE
+  entities_end
 
 IndoorsAD4Entities::
-  db   $34, ENTITY_WARP
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_WARP
+  entities_end
 
 IndoorsAD5Entities::
-  db   $43, ENTITY_LIFTABLE_STATUE
-  db   $46, ENTITY_LIFTABLE_STATUE
-  db   $13, ENTITY_SPIKE_TRAP
-  db   $16, ENTITY_SPIKE_TRAP
-  db   ENTITIES_END
+  entity $4, $3, ENTITY_LIFTABLE_STATUE
+  entity $4, $6, ENTITY_LIFTABLE_STATUE
+  entity $1, $3, ENTITY_SPIKE_TRAP
+  entity $1, $6, ENTITY_SPIKE_TRAP
+  entities_end
 
 IndoorsAD6Entities::
-  db   $00, ENTITY_FLYING_TILES
-  db   ENTITIES_END
+  entity $0, $0, ENTITY_FLYING_TILES
+  entities_end
 
 IndoorsAD7Entities::
-  db   $32, ENTITY_STAR
-  db   $36, ENTITY_STAR
-  db   $68, ENTITY_SPIKE_TRAP
-  db   $11, ENTITY_DROPPABLE_HEART
-  db   $01, ENTITY_OWL_STATUE
-  db   ENTITIES_END
+  entity $3, $2, ENTITY_STAR
+  entity $3, $6, ENTITY_STAR
+  entity $6, $8, ENTITY_SPIKE_TRAP
+  entity $1, $1, ENTITY_DROPPABLE_HEART
+  entity $0, $1, ENTITY_OWL_STATUE
+  entities_end
 
 IndoorsAD8Entities::
-  db   $25, ENTITY_GIANT_BUBBLE
-  db   $64, ENTITY_GOOMBA
-  db   $66, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_GIANT_BUBBLE
+  entity $6, $4, ENTITY_GOOMBA
+  entity $6, $6, ENTITY_GOOMBA
+  entities_end
 
 IndoorsAD9Entities::
-  db   $12, ENTITY_GIANT_BUBBLE
-  db   $64, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $1, $2, ENTITY_GIANT_BUBBLE
+  entity $6, $4, ENTITY_GOOMBA
+  entities_end
 
 IndoorsADAEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsADBEntities::
-  db   $25, ENTITY_SPARK_CLOCKWISE
-  db   $53, ENTITY_SPARK_COUNTER_CLOCKWISE
-  db   $66, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $2, $5, ENTITY_SPARK_CLOCKWISE
+  entity $5, $3, ENTITY_SPARK_COUNTER_CLOCKWISE
+  entity $6, $6, ENTITY_GOOMBA
+  entities_end
 
 IndoorsADCEntities::
-  db   $24, ENTITY_THWIMP
-  db   $25, ENTITY_THWIMP
-  db   $26, ENTITY_THWIMP
-  db   $27, ENTITY_THWIMP
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_THWIMP
+  entity $2, $5, ENTITY_THWIMP
+  entity $2, $6, ENTITY_THWIMP
+  entity $2, $7, ENTITY_THWIMP
+  entities_end
 
 IndoorsADDEntities::
-  db   $22, ENTITY_THWIMP
-  db   $24, ENTITY_THWIMP
-  db   $33, ENTITY_THWIMP
-  db   ENTITIES_END
+  entity $2, $2, ENTITY_THWIMP
+  entity $2, $4, ENTITY_THWIMP
+  entity $3, $3, ENTITY_THWIMP
+  entities_end
 
 IndoorsADEEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsADFEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAE0Entities::
 IndoorsAE1Entities::
 IndoorsAE2Entities::
-  db   $34, ENTITY_MAD_BATTER
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_MAD_BATTER
+  entities_end
 
 IndoorsAE3Entities::
-  db   $68, ENTITY_DROPPABLE_SECRET_SEASHELL
-  db   ENTITIES_END
+  entity $6, $8, ENTITY_DROPPABLE_SECRET_SEASHELL
+  entities_end
 
 IndoorsAE4Entities::
-  db   $34, ENTITY_FLYING_ROOSTER_EVENTS
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_FLYING_ROOSTER_EVENTS
+  entities_end
 
 IndoorsAE5Entities::
-  db   $55, ENTITY_FISH
-  db   ENTITIES_END
+  entity $5, $5, ENTITY_FISH
+  entities_end
 
 IndoorsAE6Entities::
-  db   $53, ENTITY_FISH
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_FISH
+  entities_end
 
 IndoorsAE7Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAE8Entities::
-  db   $14, ENTITY_HEART_PIECE
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_HEART_PIECE
+  entities_end
 
 IndoorsAE9Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAEAEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAEBEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAECEntities::
-  db   $62, ENTITY_GOOMBA
-  db   $64, ENTITY_GOOMBA
-  db   ENTITIES_END
+  entity $6, $2, ENTITY_GOOMBA
+  entity $6, $4, ENTITY_GOOMBA
+  entities_end
 
 IndoorsAEDEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAEEEntities::
-  db   $08, ENTITY_FLAME_SHOOTER
-  db   ENTITIES_END
+  entity $0, $8, ENTITY_FLAME_SHOOTER
+  entities_end
 
 IndoorsAEFEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAF0Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAF1Entities::
-  db   $53, ENTITY_FISH
-  db   $64, ENTITY_FISH
-  db   ENTITIES_END
+  entity $5, $3, ENTITY_FISH
+  entity $6, $4, ENTITY_FISH
+  entities_end
 
 IndoorsAF2Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAF3Entities::
-  db   $24, ENTITY_BIG_FAIRY
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_BIG_FAIRY
+  entities_end
 
 IndoorsAF4Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAF5Entities::
-  db   $14, ENTITY_MASKED_MIMIC_GORIYA
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_MASKED_MIMIC_GORIYA
+  entities_end
 
 IndoorsAF6Entities::
-  db   $15, ENTITY_FISH
-  db   ENTITIES_END
+  entity $1, $5, ENTITY_FISH
+  entities_end
 
 IndoorsAF7Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAF8Entities::
-  db   $34, ENTITY_KEY_DROP_POINT
-  db   $38, ENTITY_PINCER
-  db   $42, ENTITY_PINCER
-  db   $62, ENTITY_PINCER
-  db   ENTITIES_END
+  entity $3, $4, ENTITY_KEY_DROP_POINT
+  entity $3, $8, ENTITY_PINCER
+  entity $4, $2, ENTITY_PINCER
+  entity $6, $2, ENTITY_PINCER
+  entities_end
 
 IndoorsAF9Entities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAFAEntities::
-  db   $21, ENTITY_BOOK
-  db   $23, ENTITY_BOOK
-  db   $26, ENTITY_BOOK
-  db   $28, ENTITY_BOOK
-  db   $51, ENTITY_BOOK
-  db   $53, ENTITY_BOOK
-  db   $56, ENTITY_BOOK
-  db   $58, ENTITY_BOOK
-  db   $04, ENTITY_COLOR_DUNGEON_BOOK
-  db   ENTITIES_END
+  entity $2, $1, ENTITY_BOOK
+  entity $2, $3, ENTITY_BOOK
+  entity $2, $6, ENTITY_BOOK
+  entity $2, $8, ENTITY_BOOK
+  entity $5, $1, ENTITY_BOOK
+  entity $5, $3, ENTITY_BOOK
+  entity $5, $6, ENTITY_BOOK
+  entity $5, $8, ENTITY_BOOK
+  entity $0, $4, ENTITY_COLOR_DUNGEON_BOOK
+  entities_end
 
 IndoorsAFBEntities::
-  db   $24, ENTITY_BIG_FAIRY
-  db   ENTITIES_END
+  entity $2, $4, ENTITY_BIG_FAIRY
+  entities_end
 
 IndoorsAFCEntities::
-  db   $14, ENTITY_MOBLIN_SWORD
-  db   $23, ENTITY_MOBLIN
-  db   $26, ENTITY_MOBLIN
-  db   ENTITIES_END
+  entity $1, $4, ENTITY_MOBLIN_SWORD
+  entity $2, $3, ENTITY_MOBLIN
+  entity $2, $6, ENTITY_MOBLIN
+  entities_end
 
 IndoorsAFDEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAFEEntities::
-  db   ENTITIES_END
+  entities_end
 
 IndoorsAFFEntities::
-  db   $26, ENTITY_ANGLER_FISH
-  db   ENTITIES_END
+  entity $2, $6, ENTITY_ANGLER_FISH
+  entities_end
 

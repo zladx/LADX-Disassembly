@@ -126,8 +126,11 @@ section "bank15",romx[$4000],bank[$15]
 include "code/entities/bank15.asm"
 
 section "bank16",romx[$4000],bank[$16]
-include "data/entities/pointer_table.asm"
-include "data/entities/entities.asm"
+include "data/entities/pointers_table.asm"
+include "data/entities/indoors_a.asm"
+include "data/entities/indoors_b.asm"
+include "data/entities/overworld.asm"
+include "data/entities/color_dungeon.asm"
 include "text/dialog_2.asm"
 
 section "bank17",romx[$4000],bank[$17]

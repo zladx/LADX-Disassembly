@@ -1,6 +1,9 @@
 ; Maximum number of loaded entities
 MAX_ENTITIES equ 16
 
+; End marker in a list of entities
+ENTITIES_END equ $FF
+
 ; Values for wEntitiesStatusTable
 ENTITY_STATUS_DISABLED   equ 0
 ENTITY_STATUS_DYING      equ 1

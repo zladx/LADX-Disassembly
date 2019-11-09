@@ -67,7 +67,7 @@ ENTITY_DROPPABLE_RUPEE               equ $2E
 ENTITY_DROPPABLE_FAIRY               equ $2F
 ENTITY_KEY_DROP_POINT                equ $30
 ENTITY_SWORD                         equ $31
-;ENTITY_UNKNOWN                      equ $32
+ENTITY_32                            equ $32 ; unknown
 ENTITY_PIECE_OF_POWER                equ $33
 ENTITY_GUARDIAN_ACORN                equ $34
 ENTITY_HEART_PIECE                   equ $35
@@ -77,7 +77,7 @@ ENTITY_DROPPABLE_BOMBS               equ $38
 ENTITY_INSTRUMENT_OF_THE_SIRENS      equ $39
 ENTITY_SLEEPY_TOADSTOOL              equ $3A
 ENTITY_DROPPABLE_MAGIC_POWDER        equ $3B
-;ENTITY_HIDING_SLIME_KEY?            equ $3C
+ENTITY_HIDING_SLIME_KEY              equ $3C
 ENTITY_DROPPABLE_SECRET_SEASHELL     equ $3D
 ENTITY_MARIN                         equ $3E
 ENTITY_RACOON                        equ $3F
@@ -95,7 +95,7 @@ ENTITY_COLOR_DUNGEON_BOOK            equ $4A
 ENTITY_POT                           equ $4B
 ;ENTITY_DISABLED                     equ $4C
 ENTITY_SHOP_OWNER                    equ $4D
-;ENTITY_UNKNOWN                      equ $4E
+ENTITY_4D                            equ $4E ; unknown
 ENTITY_TRENDY_GAME_OWNER             equ $4F
 ENTITY_BOO_BUDDY                     equ $50
 ENTITY_KNIGHT                        equ $51
@@ -105,7 +105,7 @@ ENTITY_FISHERMAN_FISHING_GAME        equ $54
 ENTITY_BOUNCING_BOMBITE              equ $55
 ENTITY_TIMER_BOMBITE                 equ $56
 ENTITY_PAIRODD                       equ $57
-;ENTITY_UNKNOWN                      equ $58
+ENTITY_58                            equ $58 ; unknown
 ENTITY_MOLDORM                       equ $59
 ENTITY_FACADE                        equ $5A
 ENTITY_SLIME_EYE                     equ $5B
@@ -117,11 +117,11 @@ ENTITY_DODONGO_SNAKE                 equ $60
 ENTITY_WARP                          equ $61
 ENTITY_HOT_HEAD                      equ $62
 ENTITY_EVIL_EAGLE                    equ $63
-;ENTITY_UNKOWN (weird split screen)  equ $64
+ENTITY_64                            equ $64 ; unknown
 ENTITY_ANGLER_FISH                   equ $65
 ENTITY_CRYSTAL_SWITCH                equ $66
-;ENTITY_UNKNOWN                      equ $67
-;ENTITY_WEIRD_TILE_OVERWRITING       equ $68
+ENTITY_67                            equ $67 ; unknown
+ENTITY_68                            equ $68 ; unknown
 ENTITY_MOVING_BLOCK_MOVER            equ $69
 ENTITY_RAFT_RAFT_OWNER               equ $6A
 ENTITY_TEXT_DEBUGGER                 equ $6B
@@ -157,8 +157,8 @@ ENTITY_ARMOS_KNIGHT                  equ $88
 ENTITY_HINOX                         equ $89
 ENTITY_TILE_GLINT_SHOWN              equ $8A
 ENTITY_TILE_GLINT_HIDDEN             equ $8B
-;ENTITY_UNKNOWN (lands slowly)       equ $8C
-;ENTITY_UNKNOWN (lands slowly)       equ $8D
+ENTITY_8C                            equ $8C ; unknown
+ENTITY_8D                            equ $8D ; unknown
 ENTITY_CUE_BALL                      equ $8E
 ENTITY_MASKED_MIMIC_GORIYA           equ $8F
 ENTITY_THREE_OF_A_KIND               equ $90
@@ -168,7 +168,7 @@ ENTITY_MAD_BOMBER                    equ $93
 ENTITY_KANALET_BOMBABLE_WALL         equ $94
 ENTITY_RICHARD                       equ $95
 ENTITY_RICHARD_FROG                  equ $96
-;ENTITY_UNKOWN (diving warp event?)  equ $97
+ENTITY_97                            equ $97 ; unknown
 ENTITY_HORSE_PIECE                   equ $98
 ENTITY_WATER_TEKTITE                 equ $99
 ENTITY_FLYING_TILES                  equ $9A
@@ -185,7 +185,7 @@ ENTITY_SIDE_VIEW_PLATFORM_VERTICAL   equ $A4
 ENTITY_SIDE_VIEW_PLATFORM            equ $A5
 ENTITY_SIDE_VIEW_WEIGHTS             equ $A6
 ENTITY_SMASHABLE_PILLAR              equ $A7
-;ENTITY_UNKNOWN                      equ $A8
+ENTITY_A8                            equ $A8 ; unknown
 ENTITY_BLOOPER                       equ $A9
 ENTITY_CHEEP_CHEEP_HORIZONTAL        equ $AA
 ENTITY_CHEEP_CHEEP_VERTICAL          equ $AB
@@ -229,8 +229,8 @@ ENTITY_ANIMAL_D0                     equ $D0
 ENTITY_ANIMAL_D1                     equ $D1
 ENTITY_ANIMAL_D2                     equ $D2
 ENTITY_BUNNY_D3                      equ $D3
-;ENTITY_UNKNOWN                      equ $D4
-;ENTITY_UNKNOWN                      equ $D5
+ENTITY_D4                            equ $D4 ; unknown
+ENTITY_D5                            equ $D5 ; unknown
 ENTITY_SIDE_VIEW_POT                 equ $D6
 ENTITY_THWIMP                        equ $D7
 ENTITY_THWOMP                        equ $D8

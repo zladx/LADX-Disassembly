@@ -555,6 +555,27 @@ wNextWorldMusicTrackCountdown:: ; C5AF
   ; When reaching zero, play wNextWorldMusicTrack
   ds 1
 
+; Unlabeled
+ds $CE80 - $C5B0
+
+wRecentRoomsIndex:: ; CE80
+  ; Index of the next slot to use in wRecentRooms
+  ds 1
+
+wRecentRooms:: ; CE81
+  ; List of the 6 most recently loaded rooms.
+  ds $6
+
+; Unlabeled
+ds $CF00 - $CE87
+
+wEntitiesClearedRooms:: ; CF00
+  ; For each room, store the number of entities not to load
+  ; when entering the room next time.
+  ; Used to avoid respawning enemies as soon as the player moves to
+  ; the next room.
+  ds $FF
+
 section "WRAM Bank1", wramx[$d000], bank[1]
 
 wIsFileSelectionArrowShifted:: ; D000

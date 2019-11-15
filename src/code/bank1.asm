@@ -2687,38 +2687,56 @@ PrepareEntityPositionForRoomTransition::
     pop  bc
     ret
 
-; Called during room loading
-func_001_5F02::
+; Add the current room to the recent rooms list (if not already present).
+UpdateRecentRoomsList::
+    ; The recent rooms list has 6 slots
     ld   c, $06
     ldh  a, [hMapRoom]
-    ld   hl, $CE81
+    ld   hl, wRecentRooms
 
-label_5F09::
+    ; For each slot…
+.loop
+    ; if the slot already contains the current room,
+    ; don't add it again and simply return.
     cp   [hl]
-    jr   z, label_5F2D
+    jr   z, .return
     inc  hl
     dec  c
-    jr   nz, label_5F09
-    ld   a, [$CE80]
-    inc  a
-    cp   $06
-    jr   nz, label_5F19
-    xor  a
+    jr   nz, .loop
 
-label_5F19::
-    ld   [$CE80], a
+    ;
+    ; Append the current room to the recents rooms list
+    ;
+
+    ; Increment the index of the next slot
+    ld   a, [wRecentRoomsIndex]
+    inc  a
+    ; (if the index goes past 5, reset it to 0)
+    cp   $06
+    jr   nz, .wrapIndexEnd
+    xor  a
+.wrapIndexEnd
+    ld   [wRecentRoomsIndex], a
+
+    ; Read the previous value of the slot into DE
     ld   e, a
     ld   d, $00
-    ld   hl, $CE81
+    ld   hl, wRecentRooms
     add  hl, de
     ld   e, [hl]
+
+    ; Write the current room id to the slot
     ldh  a, [hMapRoom]
     ld   [hl], a
-    ld   hl, $CF00
+
+    ; Clear the flag indicating cleared entities for the evicted room.
+    ; (This means that enemies will not respawn in a room before 6
+    ; other different rooms have been visited.)
+    ld   hl, wEntitiesClearedRooms
     add  hl, de
     ld   [hl], $00
 
-label_5F2D::
+.return
     ret
 
 HideAllSprites::

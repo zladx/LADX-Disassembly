@@ -6672,7 +6672,7 @@ FillRoomMapWithObject::
     ret
 
 LoadRoomEntities::
-    callsb func_001_5F02
+    callsb UpdateRecentRoomsList
 
     ld   a, $16
     ld   [MBC3SelectBank], a
@@ -6762,7 +6762,7 @@ label_3883::
     ldh  a, [hMapRoom]
     ld   e, a
     ld   a, [hl]
-    ld   hl, $CF00
+    ld   hl, wEntitiesClearedRooms
     add  hl, de
     and  [hl]
     jr   nz, label_38AD
@@ -7924,7 +7924,7 @@ label_3F78::
     ld   e, a
     ld   d, b
     ld   a, [hl]
-    ld   hl, $CF00
+    ld   hl, wEntitiesClearedRooms
     add  hl, de
     or   [hl]
     ld   [hl], a

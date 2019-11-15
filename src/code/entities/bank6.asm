@@ -8120,7 +8120,7 @@ jr_006_6F03:
     ld   e, a                                     ; $6F33: $5F
     ld   d, b                                     ; $6F34: $50
     ld   a, [hl]                                  ; $6F35: $7E
-    ld   hl, $CF00                                ; $6F36: $21 $00 $CF
+    ld   hl, wEntitiesClearedRooms                ; $6F36: $21 $00 $CF
     add  hl, de                                   ; $6F39: $19
     or   [hl]                                     ; $6F3A: $B6
     ld   [hl], a                                  ; $6F3B: $77

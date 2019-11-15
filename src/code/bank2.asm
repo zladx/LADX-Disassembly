@@ -4290,7 +4290,7 @@ func_002_5C04::
     ld   b, e                                     ; $5C08: $43
     xor  a                                        ; $5C09: $AF
     ldh  [$FFE3], a                               ; $5C0A: $E0 $E3
-    ldh  [$FFE4], a                               ; $5C0C: $E0 $E4
+    ldh  [hScratchD], a                           ; $5C0C: $E0 $E4
     ldh  [$FFE5], a                               ; $5C0E: $E0 $E5
     ld   a, [$C189]                               ; $5C10: $FA $89 $C1
     sub  $04                                      ; $5C13: $D6 $04
@@ -6374,7 +6374,7 @@ jr_002_6F25:
     ld   a, [wIsIndoor]                         ; $6F59: $FA $A5 $DB
     ld   d, a                                     ; $6F5C: $57
     call label_2A26                               ; $6F5D: $CD $26 $2A
-    ldh  [$FFE4], a                               ; $6F60: $E0 $E4
+    ldh  [hScratchD], a                           ; $6F60: $E0 $E4
     and  a                                        ; $6F62: $A7
     jp   z, label_002_7461                        ; $6F63: $CA $61 $74
 
@@ -6534,7 +6534,7 @@ label_002_7045::
     jp   z, label_002_7277                        ; $7050: $CA $77 $72
 
 jr_002_7053:
-    ldh  a, [$FFE4]                               ; $7053: $F0 $E4
+    ldh  a, [hScratchD]                           ; $7053: $F0 $E4
     cp   $D0                                      ; $7055: $FE $D0
     jp   c, label_002_70DF                        ; $7057: $DA $DF $70
 
@@ -6659,7 +6659,7 @@ jr_002_7112:
     and  a                                        ; $7115: $A7
     jp   nz, label_002_7277                       ; $7116: $C2 $77 $72
 
-    ldh  a, [$FFE4]                               ; $7119: $F0 $E4
+    ldh  a, [hScratchD]                           ; $7119: $F0 $E4
     cp   $94                                      ; $711B: $FE $94
     jr   nc, jr_002_712C                          ; $711D: $30 $0D
 
@@ -6691,7 +6691,7 @@ jr_002_7139:
     jp   label_002_7277                           ; $7144: $C3 $77 $72
 
 jr_002_7147:
-    ldh  a, [$FFE4]                               ; $7147: $F0 $E4
+    ldh  a, [hScratchD]                           ; $7147: $F0 $E4
     sub  $90                                      ; $7149: $D6 $90
     ld   [$C189], a                               ; $714B: $EA $89 $C1
     xor  a                                        ; $714E: $AF

@@ -2647,7 +2647,7 @@ label_186C::
 
 label_1898::
     ldh  a, [hIsSideScrolling]
-    ldh  [$FFE4], a
+    ldh  [hScratchD], a
     ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     xor  a
@@ -2789,7 +2789,7 @@ label_196F::
     ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_19DA
-    ldh  a, [$FFE4]
+    ldh  a, [hScratchD]
     and  a
     jr   nz, label_19D9
     ld   a, [wIsIndoor]
@@ -3814,7 +3814,7 @@ DoUpdateBGRegion::
     ld   a, c
     ldh  [$FFE3], a
     ld   a, d
-    ldh  [$FFE4], a
+    ldh  [hScratchD], a
     ld   a, e
     ldh  [$FFE5], a
     ; Restore state
@@ -3844,7 +3844,7 @@ DoUpdateBGRegion::
     ld   a, c
     ldh  [$FFE3], a
     ld   a, d
-    ldh  [$FFE4], a
+    ldh  [hScratchD], a
     ld   a, e
     ldh  [$FFE5], a
     ; Cleanup
@@ -6775,7 +6775,7 @@ data_387B::
     db 1, 2, 4, 8, $10, $20, $40, $80
 
 LoadEntityDefinition::
-    ldh  a, [$FFE4]
+    ldh  a, [hScratchD]
     cp   $08
     jr   nc, label_389B
     ld   e, a
@@ -6806,7 +6806,7 @@ label_389E::
     jr   nz, label_389E
 
 label_38AD::
-    ld   hl, $FFE4
+    ld   hl, hScratchD
     inc  [hl]
     inc  bc
     inc  bc

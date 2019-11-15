@@ -205,7 +205,7 @@ label_017_45B5:
 
 Func_017_45BA::
     ld   a, [$D00A]                               ; $45BA: $FA $0A $D0
-    ldh  [$FFE4], a                               ; $45BD: $E0 $E4
+    ldh  [hScratchD], a                           ; $45BD: $E0 $E4
     cp   $26                                      ; $45BF: $FE $26
     jr   c, jr_017_45F9                           ; $45C1: $38 $36
 
@@ -232,7 +232,7 @@ Func_017_45BA::
 
 jr_017_45E3:
     ld   a, [$D00A]                               ; $45E3: $FA $0A $D0
-    ldh  [$FFE4], a                               ; $45E6: $E0 $E4
+    ldh  [hScratchD], a                           ; $45E6: $E0 $E4
 
 jr_017_45E8:
     ldh  a, [hFrameCounter]                               ; $45E8: $F0 $E7
@@ -246,7 +246,7 @@ jr_017_45E8:
     jr   nz, jr_017_4612                          ; $45F7: $20 $19
 
 jr_017_45F9:
-    ldh  a, [$FFE4]                               ; $45F9: $F0 $E4
+    ldh  a, [hScratchD]                           ; $45F9: $F0 $E4
     cp   $26                                      ; $45FB: $FE $26
     ld   a, $10                                   ; $45FD: $3E $10
     jr   c, jr_017_4603                           ; $45FF: $38 $02
@@ -269,7 +269,7 @@ jr_017_4612:
     add  e                                        ; $461A: $83
     ld   e, a                                     ; $461B: $5F
     ld   d, $00                                   ; $461C: $16 $00
-    ldh  a, [$FFE4]                               ; $461E: $F0 $E4
+    ldh  a, [hScratchD]                           ; $461E: $F0 $E4
     cp   $26                                      ; $4620: $FE $26
     jr   c, jr_017_462F                           ; $4622: $38 $0B
 
@@ -7538,7 +7538,7 @@ label_017_7E80:
 
 jr_017_7E88:
     ld   a, $06                                   ; $7E88: $3E $06
-    ldh  [$FFE4], a                               ; $7E8A: $E0 $E4
+    ldh  [hScratchD], a                           ; $7E8A: $E0 $E4
     ld   a, $0C                                   ; $7E8C: $3E $0C
     ldh  [$FFE5], a                               ; $7E8E: $E0 $E5
     ld   a, $18                                   ; $7E90: $3E $18
@@ -7565,7 +7565,7 @@ label_017_7EA4:
     dec  hl                                       ; $7EAD: $2B
     xor  a                                        ; $7EAE: $AF
     ldh  [rSVBK], a                               ; $7EAF: $E0 $70
-    ldh  a, [$FFE4]                               ; $7EB1: $F0 $E4
+    ldh  a, [hScratchD]                           ; $7EB1: $F0 $E4
     ld   c, a                                     ; $7EB3: $4F
     ld   a, e                                     ; $7EB4: $7B
     and  $1F                                      ; $7EB5: $E6 $1F
@@ -7685,7 +7685,7 @@ label_017_7F30:
 
 jr_017_7F3C:
     ld   a, $06                                   ; $7F3C: $3E $06
-    ldh  [$FFE4], a                               ; $7F3E: $E0 $E4
+    ldh  [hScratchD], a                           ; $7F3E: $E0 $E4
     ld   a, $0C                                   ; $7F40: $3E $0C
     ldh  [$FFE5], a                               ; $7F42: $E0 $E5
     ld   a, $18                                   ; $7F44: $3E $18
@@ -7703,7 +7703,7 @@ jr_017_7F52:
 func_017_7F57:
 jr_017_7F57:
     push hl                                       ; $7F57: $E5
-    ldh  a, [$FFE4]                               ; $7F58: $F0 $E4
+    ldh  a, [hScratchD]                           ; $7F58: $F0 $E4
     ld   c, a                                     ; $7F5A: $4F
     ld   a, [hl]                                  ; $7F5B: $7E
     and  $1F                                      ; $7F5C: $E6 $1F

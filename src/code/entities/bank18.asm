@@ -9343,7 +9343,7 @@ jr_018_7691:
     sra  a                                        ; $76A3: $CB $2F
     ldh  [$FFE3], a                               ; $76A5: $E0 $E3
     sra  a                                        ; $76A7: $CB $2F
-    ldh  [$FFE4], a                               ; $76A9: $E0 $E4
+    ldh  [hScratchD], a                           ; $76A9: $E0 $E4
     sra  a                                        ; $76AB: $CB $2F
     ldh  [$FFE5], a                               ; $76AD: $E0 $E5
     sra  a                                        ; $76AF: $CB $2F

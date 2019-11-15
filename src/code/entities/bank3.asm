@@ -9453,17 +9453,17 @@ jr_003_7E5A:
     inc  a                                        ; $7E68: $3C
 
 jr_003_7E69:
-    ldh  [$FFE4], a                               ; $7E69: $E0 $E4
+    ldh  [hScratchD], a                           ; $7E69: $E0 $E4
     ld   e, $00                                   ; $7E6B: $1E $00
     ld   hl, $FFE3                                ; $7E6D: $21 $E3 $FF
-    ldh  a, [$FFE4]                               ; $7E70: $F0 $E4
+    ldh  a, [hScratchD]                           ; $7E70: $F0 $E4
     cp   [hl]                                     ; $7E72: $BE
     jr   nc, jr_003_7E7E                          ; $7E73: $30 $09
 
     inc  e                                        ; $7E75: $1C
     push af                                       ; $7E76: $F5
     ldh  a, [$FFE3]                               ; $7E77: $F0 $E3
-    ldh  [$FFE4], a                               ; $7E79: $E0 $E4
+    ldh  [hScratchD], a                           ; $7E79: $E0 $E4
     pop  af                                       ; $7E7B: $F1
     ldh  [$FFE3], a                               ; $7E7C: $E0 $E3
 
@@ -9480,7 +9480,7 @@ jr_003_7E86:
     add  [hl]                                     ; $7E8B: $86
     jr   c, jr_003_7E94                           ; $7E8C: $38 $06
 
-    ld   hl, $FFE4                                ; $7E8E: $21 $E4 $FF
+    ld   hl, hScratchD                                ; $7E8E: $21 $E4 $FF
     cp   [hl]                                     ; $7E91: $BE
     jr   c, jr_003_7E99                           ; $7E92: $38 $05
 

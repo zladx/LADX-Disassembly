@@ -6708,7 +6708,7 @@ LoadRoomEntities::
     add  hl, de
     ld   [hl], a
     call label_38D4
-    ld   hl, $C460
+    ld   hl, wEntitiesLoadOrderTable
     add  hl, de
     ld   [hl], $FF
     xor  a
@@ -7896,7 +7896,7 @@ label_3F50::
     call func_003_55CF
     call ReloadSavedBank
 
-    ld   hl, $C460
+    ld   hl, wEntitiesLoadOrderTable
     add  hl, bc
     ld   a, [hl]
     cp   $FF

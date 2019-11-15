@@ -7124,10 +7124,10 @@ func_018_6A31:
     call func_003_64CA_trampoline                               ; $6A33: $CD $86 $3B
     jr   c, jr_018_6A70                           ; $6A36: $38 $38
 
-    ld   hl, $C460                                ; $6A38: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $6A38: $21 $60 $C4
     add  hl, bc                                   ; $6A3B: $09
     ld   a, [hl]                                  ; $6A3C: $7E
-    ld   hl, $C460                                ; $6A3D: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $6A3D: $21 $60 $C4
     add  hl, de                                   ; $6A40: $19
     ld   [hl], a                                  ; $6A41: $77
     ldh  a, [hScratch0]                           ; $6A42: $F0 $D7

@@ -6091,7 +6091,7 @@ jr_007_62EC:
     ret                                           ; $631B: $C9
 
 func_007_631C:
-    ld   hl, $C460                                ; $631C: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $631C: $21 $60 $C4
     add  hl, bc                                   ; $631F: $09
     ld   a, [hl]                                  ; $6320: $7E
     xor  $01                                      ; $6321: $EE $01
@@ -6112,7 +6112,7 @@ jr_007_6327:
     cp   $A6                                      ; $6334: $FE $A6
     jr   nz, jr_007_6341                          ; $6336: $20 $09
 
-    ld   hl, $C460                                ; $6338: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $6338: $21 $60 $C4
     add  hl, de                                   ; $633B: $19
     ldh  a, [hScratch0]                           ; $633C: $F0 $D7
     cp   [hl]                                     ; $633E: $BE
@@ -8645,7 +8645,7 @@ jr_007_7197:
     ret                                           ; $7197: $C9
 
 KanaletBombableWallEntityHandler::
-    ld   hl, $C460                                ; $7198: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $7198: $21 $60 $C4
     add  hl, bc                                   ; $719B: $09
     ld   a, [hl]                                  ; $719C: $7E
     cp   $00                                      ; $719D: $FE $00
@@ -8655,7 +8655,7 @@ KanaletBombableWallEntityHandler::
     and  $10                                      ; $71A3: $E6 $10
     jp   nz, label_007_7EA4                       ; $71A5: $C2 $A4 $7E
 
-    ld   hl, $C460                                ; $71A8: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $71A8: $21 $60 $C4
     add  hl, bc                                   ; $71AB: $09
     ld   [hl], $FF                                ; $71AC: $36 $FF
     ld   hl, $C4E0                                ; $71AE: $21 $E0 $C4
@@ -9429,7 +9429,7 @@ jr_007_75DD:
     inc  hl                                       ; $75F1: $23
 
 HorsePieceEntityHandler::
-    ld   hl, $C460                                ; $75F2: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $75F2: $21 $60 $C4
     add  hl, bc                                   ; $75F5: $09
     ld   a, [hl]                                  ; $75F6: $7E
     and  a                                        ; $75F7: $A7
@@ -9607,7 +9607,7 @@ func_007_76E7:
 jr_007_76ED:
     ret                                           ; $76ED: $C9
 
-    ld   hl, $C460                                ; $76EE: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $76EE: $21 $60 $C4
     add  hl, bc                                   ; $76F1: $09
     ld   a, [hl]                                  ; $76F2: $7E
     and  a                                        ; $76F3: $A7

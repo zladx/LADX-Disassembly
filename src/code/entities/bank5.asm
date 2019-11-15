@@ -7221,7 +7221,7 @@ label_005_67EA:
     jp   SetEntitySpriteVariant                   ; $6815: $C3 $0C $3B
 
 func_005_6818::
-    ld   hl, $C460                                ; $6818: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $6818: $21 $60 $C4
     add  hl, bc                                   ; $681B: $09
     ld   e, [hl]                                  ; $681C: $5E
     sla  e                                        ; $681D: $CB $23
@@ -7333,7 +7333,7 @@ jr_005_689B:
     ld   hl, wEntitiesUnknownTableC               ; $68BD: $21 $C0 $C2
     add  hl, bc                                   ; $68C0: $09
     ld   [hl], a                                  ; $68C1: $77
-    ld   hl, $C460                                ; $68C2: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $68C2: $21 $60 $C4
     add  hl, bc                                   ; $68C5: $09
     ld   e, [hl]                                  ; $68C6: $5E
     sla  e                                        ; $68C7: $CB $23
@@ -7622,7 +7622,7 @@ func_005_6A5F:
     ld   a, [hl]                                  ; $6A63: $7E
     ldh  [hScratch0], a                           ; $6A64: $E0 $D7
     push bc                                       ; $6A66: $C5
-    ld   hl, $C460                                ; $6A67: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $6A67: $21 $60 $C4
     add  hl, bc                                   ; $6A6A: $09
     ld   e, [hl]                                  ; $6A6B: $5E
     ld   hl, wEntitiesUnknownTableB               ; $6A6C: $21 $B0 $C2
@@ -7667,7 +7667,7 @@ func_005_6AA5:
     ld   a, [hl]                                  ; $6AA9: $7E
     ldh  [hScratch0], a                           ; $6AAA: $E0 $D7
     push bc                                       ; $6AAC: $C5
-    ld   hl, $C460                                ; $6AAD: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $6AAD: $21 $60 $C4
     add  hl, bc                                   ; $6AB0: $09
     ld   e, [hl]                                  ; $6AB1: $5E
     ld   hl, wEntitiesUnknownTableC               ; $6AB2: $21 $C0 $C2

@@ -195,7 +195,7 @@ func_003_485B::
     ld   hl, $C3E0                                ; $4860: $21 $E0 $C3
     add  hl, bc                                   ; $4863: $09
     ld   [hl], a                                  ; $4864: $77
-    ld   hl, $C460                                ; $4865: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $4865: $21 $60 $C4
     add  hl, bc                                   ; $4868: $09
     ld   [hl], $FF                                ; $4869: $36 $FF
 
@@ -328,7 +328,7 @@ jr_003_4918:
 Data_003_4924::
     db   $01, $04
 
-    ld   hl, $C460                                ; $4926: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $4926: $21 $60 $C4
     add  hl, bc                                   ; $4929: $09
     ld   e, [hl]                                  ; $492A: $5E
     ld   d, b                                     ; $492B: $50
@@ -4669,7 +4669,7 @@ jr_003_630C:
 
 label_003_6311:
 jr_003_6311:
-    ld   hl, $C460                                ; $6311: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $6311: $21 $60 $C4
     add  hl, bc                                   ; $6314: $09
     ld   a, [hl]                                  ; $6315: $7E
     call label_3F78                               ; $6316: $CD $78 $3F

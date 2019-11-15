@@ -3629,7 +3629,7 @@ label_004_5A05:
     ret                                           ; $5A19: $C9
 
 func_004_5A1A::
-    ld   hl, $C460                                ; $5A1A: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $5A1A: $21 $60 $C4
     add  hl, bc                                   ; $5A1D: $09
     ld   e, [hl]                                  ; $5A1E: $5E
     sla  e                                        ; $5A1F: $CB $23
@@ -3697,7 +3697,7 @@ jr_004_5AA9:
     and  $1F                                      ; $5AB2: $E6 $1F
     ld   [hl], a                                  ; $5AB4: $77
     ldh  [hScratch0], a                               ; $5AB5: $E0 $D7
-    ld   hl, $C460                                ; $5AB7: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $5AB7: $21 $60 $C4
     add  hl, bc                                   ; $5ABA: $09
     ld   e, [hl]                                  ; $5ABB: $5E
     sla  e                                        ; $5ABC: $CB $23
@@ -3841,7 +3841,7 @@ jr_004_5B7E:
     add  hl, bc                                   ; $5B8B: $09
     ld   a, [hl]                                  ; $5B8C: $7E
     ldh  [hScratch0], a                               ; $5B8D: $E0 $D7
-    ld   hl, $C460                                ; $5B8F: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $5B8F: $21 $60 $C4
     add  hl, bc                                   ; $5B92: $09
     ld   e, [hl]                                  ; $5B93: $5E
     sla  e                                        ; $5B94: $CB $23
@@ -6221,7 +6221,7 @@ KnightEntityHandler::
     and  $10                                      ; $69B6: $E6 $10
     jp   nz, label_004_6D7A                       ; $69B8: $C2 $7A $6D
 
-    ld   hl, $C460                                ; $69BB: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $69BB: $21 $60 $C4
     add  hl, bc                                   ; $69BE: $09
     ld   [hl], $FF                                ; $69BF: $36 $FF
     ld   hl, $C4E0                                ; $69C1: $21 $E0 $C4

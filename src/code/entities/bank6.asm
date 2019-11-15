@@ -225,7 +225,7 @@ MadBomberEntityHandler::
     ld   hl, $C4E0                                ; $4151: $21 $E0 $C4
     add  hl, bc                                   ; $4154: $09
     ld   [hl], $3C                                ; $4155: $36 $3C
-    ld   hl, $C460                                ; $4157: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $4157: $21 $60 $C4
     add  hl, bc                                   ; $415A: $09
     ld   [hl], $FF                                ; $415B: $36 $FF
     ld   de, $4126                                ; $415D: $11 $26 $41
@@ -1636,7 +1636,7 @@ jr_006_49A6:
 jr_006_49D2:
     jr   jr_006_4967                              ; $49D2: $18 $93
 
-    ld   hl, $C460                                ; $49D4: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $49D4: $21 $60 $C4
     add  hl, bc                                   ; $49D7: $09
     ld   a, [hl]                                  ; $49D8: $7E
     and  a                                        ; $49D9: $A7
@@ -3084,7 +3084,7 @@ jr_006_52D8:
     jp   label_3CE6                               ; $52DB: $C3 $E6 $3C
 
 ArmosKnightEntityHandler::
-    ld   hl, $C460                                ; $52DE: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $52DE: $21 $60 $C4
     add  hl, bc                                   ; $52E1: $09
     ld   [hl], $FF                                ; $52E2: $36 $FF
     ld   hl, $C4E0                                ; $52E4: $21 $E0 $C4
@@ -4835,7 +4835,7 @@ jr_006_5CAB:
     and  $10                                      ; $5CAD: $E6 $10
     jp   nz, label_006_65DB                       ; $5CAF: $C2 $DB $65
 
-    ld   hl, $C460                                ; $5CB2: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $5CB2: $21 $60 $C4
     add  hl, bc                                   ; $5CB5: $09
     ld   [hl], $FF                                ; $5CB6: $36 $FF
     ld   hl, $C4E0                                ; $5CB8: $21 $E0 $C4
@@ -8110,7 +8110,7 @@ jr_006_6F03:
     jr   nz, jr_006_6F3C                          ; $6F22: $20 $18
 
     call func_006_65DB                            ; $6F24: $CD $DB $65
-    ld   hl, $C460                                ; $6F27: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $6F27: $21 $60 $C4
     add  hl, bc                                   ; $6F2A: $09
     ld   e, [hl]                                  ; $6F2B: $5E
     ld   d, b                                     ; $6F2C: $50
@@ -10535,7 +10535,7 @@ jr_006_7C50:
     jr   nz, jr_006_7CB7                          ; $7C5D: $20 $58
 
     ld   [hl], b                                  ; $7C5F: $70
-    ld   hl, $C460                                ; $7C60: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $7C60: $21 $60 $C4
     add  hl, bc                                   ; $7C63: $09
     ld   a, [hl]                                  ; $7C64: $7E
     push hl                                       ; $7C65: $E5
@@ -10565,10 +10565,10 @@ jr_006_7C6A:
     call func_003_64CA_trampoline                               ; $7C8B: $CD $86 $3B
     jr   c, jr_006_7CB7                           ; $7C8E: $38 $27
 
-    ld   hl, $C460                                ; $7C90: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $7C90: $21 $60 $C4
     add  hl, bc                                   ; $7C93: $09
     ld   a, [hl]                                  ; $7C94: $7E
-    ld   hl, $C460                                ; $7C95: $21 $60 $C4
+    ld   hl, wEntitiesLoadOrderTable              ; $7C95: $21 $60 $C4
     add  hl, de                                   ; $7C98: $19
     ld   [hl], a                                  ; $7C99: $77
     ldh  a, [hScratch0]                           ; $7C9A: $F0 $D7

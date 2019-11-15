@@ -6671,32 +6671,46 @@ FillRoomMapWithObject::
     jr   nz, .loop
     ret
 
+; Retrieve the entities list for this room, and load each entity from its definition.
 LoadRoomEntities::
     callsb UpdateRecentRoomsList
 
-    ld   a, $16
+    ld   a, BANK(OverworldEntitiesPointersTable)
     ld   [MBC3SelectBank], a
 
     ; Reset the entities load order
     xor  a
     ldh  [hScratchD], a
 
+    ; bc = [hMapRoom] * 2
     ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
     sla  c
     rl   b
-    ld   hl, $4000
+
+    ;
+    ; Compute the proper entities pointers table for the room
+    ;
+
+    ; If on overworld, we're done.
+    ld   hl, OverworldEntitiesPointersTable
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_3868
+    jr   z, .pointersTableEnd
+
+    ; The room is indoors.
+
+    ; If in Eagle's Tower…
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
-    jr   nz, label_3850
+    jr   nz, .eaglesTowerEnd
+    ; … and [hMapRoom] == [$DB6F]…
     ld   a, [$DB6F]
     ld   hl, hMapRoom
     cp   [hl]
-    jr   nz, label_3850
+    jr   nz, .eaglesTowerEnd
+    ; do some special casing for this room entities
     ld   a, $A8
     call func_003_64CA_trampoline
     ld   a, [$DB70]
@@ -6707,51 +6721,60 @@ LoadRoomEntities::
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
-    call label_38D4
+    call func_38D4
     ld   hl, wEntitiesLoadOrderTable
     add  hl, de
     ld   [hl], $FF
     xor  a
-    ldh  [$FFE4], a
+    ldh  [hScratchD], a
+.eaglesTowerEnd
 
-label_3850::
-    ld   hl, $4200
+    ; By default, use the IndoorsA pointers table
+    ld   hl, IndoorsAEntitiesPointersTable
+
+    ; If on the Color Dungeon, use ColorDungeonEntitiesPointersTable
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_385E
-    ld   hl, $4600
-    jr   label_3868
-
-label_385E::
-    cp   $1A
-    jr   nc, label_3868
-    cp   $06
-    jr   c, label_3868
+    jr   nz, .useIndoorsBTable
+    ld   hl, ColorDungeonEntitiesPointersTable
+    jr   .pointersTableEnd
+.useIndoorsBTable
+    ; If on a map between $06 and $1A…
+    cp   MAP_UNKNOWN_1A
+    jr   nc, .pointersTableEnd
+    cp   MAP_EAGLES_TOWER
+    jr   c, .pointersTableEnd
+    ; … use IndoorsBEntitiesPointersTable
+    ; (by incrementing H from $42 to $44)
     inc  h
     inc  h
+.pointersTableEnd
 
-label_3868::
+    ; Read the entities list address in the pointers table
     add  hl, bc
     ld   a, [hli]
     ld   c, a
     ld   a, [hl]
     ld   b, a
 
-label_386D::
+    ; For each entity definition in the target list…
+.loop
+    ; if the end of list is reached, break
     ld   a, [bc]
-    cp   $FF
-    jr   z, label_3877
-    call label_3883
-    jr   label_386D
+    cp   ENTITIES_END
+    jr   z, .break
+    ; otherwise load the entity definition.
+    call LoadEntityDefinition
+    jr   .loop
+.break
 
-label_3877::
     call ReloadSavedBank
     ret
 
 data_387B::
     db 1, 2, 4, 8, $10, $20, $40, $80
 
-label_3883::
+LoadEntityDefinition::
     ldh  a, [$FFE4]
     cp   $08
     jr   nc, label_389B
@@ -6811,7 +6834,7 @@ label_38B4::
     inc  bc
     ld   [hl], a
 
-label_38D4::
+func_38D4::
     callsb func_003_6524
     callsb PrepareEntityPositionForRoomTransition
     ld   a, $16

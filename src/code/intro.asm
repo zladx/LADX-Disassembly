@@ -210,7 +210,7 @@ label_6F5F::
     ld   [wEntitiesPosYTable + $02], a
 
     xor  a
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ld   [$C341], a
     ld   [$C342], a
     ld   [$C343], a
@@ -512,7 +512,7 @@ label_7168::
     ld   a, $68
     ld   [wEntitiesPosYTable], a
     ld   a, $01
-    ld   [$C3D0], a
+    ld   [wEntitiesUnknowTableY], a
     ret
 
 label_7188::
@@ -1272,7 +1272,7 @@ data_764F::
 RenderIntroMarin::
     call label_71C7
     xor  a
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ld   de, data_764F
     call RenderAnimatedActiveEntity
 
@@ -1304,7 +1304,7 @@ label_7681::
     call IncrementEntityWalkingAttr
 
 label_769C::
-    ld   hl, $C3D0
+    ld   hl, wEntitiesUnknowTableY
     add  hl, bc
     dec  [hl]
     jr   nz, label_76AA
@@ -1512,7 +1512,7 @@ label_77ED::
     and  $07
     ldh  [hActiveEntitySpriteVariant], a
     xor  a
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ld   de, label_77BD
     call RenderAnimatedActiveEntity
     ld   a, [$C3C0]
@@ -1810,7 +1810,7 @@ RenderIntroInertLink::
     xor  a
 
 label_7A36::
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ld   de, data_7A27
     call RenderAnimatedActiveEntity
     ld   a, [$C3C0]

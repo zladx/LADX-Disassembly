@@ -1053,7 +1053,7 @@ label_020_4B9E:
     ld   hl, wEntitiesSpriteVariantTable               ; $4BB2: $21 $B0 $C3
     add  hl, de                                   ; $4BB5: $19
     ld   [hl], d                                  ; $4BB6: $72
-    ld   hl, $C480                                ; $4BB7: $21 $80 $C4
+    ld   hl, wEntitiesUnknowTableV                ; $4BB7: $21 $80 $C4
     add  hl, de                                   ; $4BBA: $19
     ld   [hl], $03                                ; $4BBB: $36 $03
     ldh  a, [hIsSideScrolling]                    ; $4BBD: $F0 $F9

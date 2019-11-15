@@ -668,7 +668,7 @@ label_BE7::
     jp   ReloadSavedBank
 
 label_BFB::
-    ld   hl, $C450
+    ld   hl, wEntitiesDropTimerTable
     jr   IsZero
 
 IsEntityUnknownFZero::
@@ -750,7 +750,7 @@ label_C50::
     ret
 
 label_C56::
-    ld   hl, $C410
+    ld   hl, wEntitiesUnknowTableT
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -2023,7 +2023,7 @@ label_142F::
     ld   hl, $C3B0
     add  hl, de
     ld   [hl], a
-    ld   hl, $C380
+    ld   hl, wEntitiesUnknowTableQ
     add  hl, de
     ld   [hl], a
     ld   hl, $C5D0
@@ -2368,7 +2368,7 @@ label_1691::
     ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
     ld   [hl], a
-    ld   hl, $C450
+    ld   hl, wEntitiesDropTimerTable
     add  hl, de
     ld   [hl], $80
     ld   hl, $C2F0
@@ -7055,8 +7055,8 @@ AnimateEntities::
 .return:
     ret
 
-label_3A0A::
-    callsb func_015_4000
+ResetEntity_trampoline::
+    callsb ResetEntity
     ld   a, $03
     ld   [MBC3SelectBank], a
     ret
@@ -7180,7 +7180,7 @@ data_3AD7::
     db 8, 2, 8
 
 label_3AEA::
-    ld      hl, $C350
+    ld      hl, wEntitiesUnknowTableM
     add     hl, bc
     ld      a, [hl]
     and     $7C ; '|'
@@ -7816,7 +7816,7 @@ label_3E88::
     ret
 
 label_3E8E::
-    ld   hl, $C4A0
+    ld   hl, wEntitiesUnknowTableZ
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -7847,7 +7847,7 @@ label_3EAF::
 
 label_3EBA::
     ldh  [hScratch0], a
-    ld   hl, $C400
+    ld   hl, wEntitiesUnknowTableS
     add  hl, bc
     ld   a, [hl]
     bit  7, a
@@ -7868,7 +7868,7 @@ label_3ED1::
     add  hl, bc
     and  [hl]
     jr   z, label_3EDE
-    ld   hl, $C410
+    ld   hl, wEntitiesUnknowTableT
     add  hl, bc
     ld   [hl], b
 

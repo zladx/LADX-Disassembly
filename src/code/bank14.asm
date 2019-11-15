@@ -1070,7 +1070,7 @@ jr_014_4DBA:
     dec  [hl]                                     ; $4DC2: $35
 
 jr_014_4DC3:
-    ld   hl, $C480                                ; $4DC3: $21 $80 $C4
+    ld   hl, wEntitiesUnknowTableV                ; $4DC3: $21 $80 $C4
     add  hl, bc                                   ; $4DC6: $09
     ld   a, [hl]                                  ; $4DC7: $7E
     and  a                                        ; $4DC8: $A7
@@ -1083,7 +1083,7 @@ jr_014_4DCC:
     and  $03                                      ; $4DCE: $E6 $03
     jr   nz, jr_014_4DDB                          ; $4DD0: $20 $09
 
-    ld   hl, $C450                                ; $4DD2: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable                                ; $4DD2: $21 $50 $C4
     add  hl, bc                                   ; $4DD5: $09
     ld   a, [hl]                                  ; $4DD6: $7E
     and  a                                        ; $4DD7: $A7
@@ -1092,7 +1092,7 @@ jr_014_4DCC:
     dec  [hl]                                     ; $4DDA: $35
 
 jr_014_4DDB:
-    ld   hl, $C420                                ; $4DDB: $21 $20 $C4
+    ld   hl, wEntitiesUnknowTableU                ; $4DDB: $21 $20 $C4
     add  hl, bc                                   ; $4DDE: $09
     ld   a, [hl]                                  ; $4DDF: $7E
     and  a                                        ; $4DE0: $A7
@@ -1686,7 +1686,7 @@ jr_014_50C7:
     cp   $05                                      ; $50CC: $FE $05
     jr   nz, jr_014_5111                          ; $50CE: $20 $41
 
-    ld   hl, $C340                                ; $50D0: $21 $40 $C3
+    ld   hl, wEntitiesUnknowTableL                ; $50D0: $21 $40 $C3
     add  hl, de                                   ; $50D3: $19
     ld   a, [hl]                                  ; $50D4: $7E
     and  $20                                      ; $50D5: $E6 $20
@@ -1716,7 +1716,7 @@ jr_014_50C7:
     cp   $10                                      ; $50FC: $FE $10
     jr   nc, jr_014_5111                          ; $50FE: $30 $11
 
-    ld   hl, $C450                                ; $5100: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable                                ; $5100: $21 $50 $C4
     add  hl, de                                   ; $5103: $19
     ld   [hl], $80                                ; $5104: $36 $80
     ld   hl, wEntitiesUnknownTableD               ; $5106: $21 $D0 $C2
@@ -2342,7 +2342,7 @@ jr_014_53B6:
     ld   hl, $5343                                ; $53D7: $21 $43 $53
     add  hl, de                                   ; $53DA: $19
     ld   a, [hl]                                  ; $53DB: $7E
-    ld   hl, $C380                                ; $53DC: $21 $80 $C3
+    ld   hl, wEntitiesUnknowTableQ                ; $53DC: $21 $80 $C3
     add  hl, bc                                   ; $53DF: $09
     ld   [hl], a                                  ; $53E0: $77
     call GetEntityTransitionCountdown                 ; $53E1: $CD $05 $0C

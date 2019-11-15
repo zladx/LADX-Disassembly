@@ -1322,7 +1322,7 @@ jr_002_4AF1:
     ld   hl, wEntitiesSpeedYTable                                ; $4B34: $21 $50 $C2
     add  hl, de                                   ; $4B37: $19
     ld   [hl], $FC                                ; $4B38: $36 $FC
-    ld   hl, $C3D0                                ; $4B3A: $21 $D0 $C3
+    ld   hl, wEntitiesUnknowTableY                ; $4B3A: $21 $D0 $C3
     add  hl, de                                   ; $4B3D: $19
     ld   [hl], $40                                ; $4B3E: $36 $40
 
@@ -1643,7 +1643,7 @@ jr_002_4CDD:
     ldh  a, [hSwordIntersectedAreaY]                               ; $4CEF: $F0 $CD
     add  $10                                      ; $4CF1: $C6 $10
     ld   [hl], a                                  ; $4CF3: $77
-    ld   hl, $C450                                ; $4CF4: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable                                ; $4CF4: $21 $50 $C4
     add  hl, de                                   ; $4CF7: $19
     ld   [hl], $80                                ; $4CF8: $36 $80
     ld   hl, wEntitiesUnknowTableF                ; $4CFA: $21 $F0 $C2
@@ -2281,7 +2281,7 @@ jr_002_503B:
     ld   hl, wEntitiesPosZTable                                ; $506D: $21 $10 $C3
     add  hl, de                                   ; $5070: $19
     ld   [hl], $03                                ; $5071: $36 $03
-    ld   hl, $C340                                ; $5073: $21 $40 $C3
+    ld   hl, wEntitiesUnknowTableL                ; $5073: $21 $40 $C3
     add  hl, de                                   ; $5076: $19
     res  4, [hl]                                  ; $5077: $CB $A6
 
@@ -6471,7 +6471,7 @@ jr_002_6FE3:
     call label_27F2                               ; $6FEF: $CD $F2 $27
     ld   a, $5F                                   ; $6FF2: $3E $5F
     call func_003_64CA_trampoline                               ; $6FF4: $CD $86 $3B
-    ld   hl, $C440                                ; $6FF7: $21 $40 $C4
+    ld   hl, wEntitiesUnknowTableP                ; $6FF7: $21 $40 $C4
     add  hl, de                                   ; $6FFA: $19
     dec  [hl]                                     ; $6FFB: $35
     jr   jr_002_702C                              ; $6FFC: $18 $2E
@@ -7071,7 +7071,7 @@ jr_002_734F:
     ld   hl, wEntitiesUnknowTableF                ; $7394: $21 $F0 $C2
     add  hl, de                                   ; $7397: $19
     ld   [hl], $0F                                ; $7398: $36 $0F
-    ld   hl, $C340                                ; $739A: $21 $40 $C3
+    ld   hl, wEntitiesUnknowTableL                ; $739A: $21 $40 $C3
     add  hl, de                                   ; $739D: $19
     ld   [hl], $C4                                ; $739E: $36 $C4
     jp   label_002_7461                           ; $73A0: $C3 $61 $74

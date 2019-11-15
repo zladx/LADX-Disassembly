@@ -2139,11 +2139,11 @@ label_5C45::
     db $28, $28, $78, $78
 
 label_5C49::
-    ld   a, [$C340]
+    ld   a, [wEntitiesUnknowTableL]
     push af
     call label_5C55
     pop  af
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ret
 
 label_5C55::
@@ -2180,7 +2180,7 @@ label_5C7B::
     ld   a, $00
     ld   [$C3C0], a
     ld   a, $08
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ld   a, $00
     ld   [wLinkWalkingFrameCount], a
     ldh  [$FFED], a
@@ -3033,7 +3033,7 @@ label_609C::
     ld   [hl], a
     ld   hl, $D195
     call label_6118
-    ld   hl, $C440
+    ld   hl, wEntitiesUnknowTableP
     add  hl, de
     ld   [hl], $01
     ld   hl, $C2F0

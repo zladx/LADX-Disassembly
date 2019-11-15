@@ -8,7 +8,7 @@ LiftableRockEntityHandler::
     cp   $01                                      ; $5334: $FE $01
     jr   nz, jr_003_5395                          ; $5336: $20 $5D
 
-    ld   hl, $C390                                ; $5338: $21 $90 $C3
+    ld   hl, wEntitiesUnknowTableR                ; $5338: $21 $90 $C3
     add  hl, bc                                   ; $533B: $09
     ld   a, [hl]                                  ; $533C: $7E
     and  a                                        ; $533D: $A7
@@ -34,7 +34,7 @@ LiftableRockEntityHandler::
     ld   hl, wEntitiesPosZTable                                ; $535E: $21 $10 $C3
     add  hl, de                                   ; $5361: $19
     ld   [hl], a                                  ; $5362: $77
-    ld   hl, $C450                                ; $5363: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable                                ; $5363: $21 $50 $C4
     add  hl, de                                   ; $5366: $19
     ld   [hl], $80                                ; $5367: $36 $80
 

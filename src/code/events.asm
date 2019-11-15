@@ -36,7 +36,7 @@ KillAllEnemiesEffectHandler::
 
     ; Enumerate all entities
 .forEachEntity
-    ld   hl, $C340                                ; $5D80: $21 $40 $C3
+    ld   hl, wEntitiesUnknowTableL                ; $5D80: $21 $40 $C3
     add  hl, bc                                   ; $5D83: $09
     ld   a, [hl]                                  ; $5D84: $7E
     and  $80                                      ; $5D85: $E6 $80
@@ -51,10 +51,10 @@ KillAllEnemiesEffectHandler::
 
     ; make the entity explode
     ld   [hl], $01                                ; $5D92: $36 $01
-    ld   hl, $C480                                ; $5D94: $21 $80 $C4
+    ld   hl, wEntitiesUnknowTableV                ; $5D94: $21 $80 $C4
     add  hl, bc                                   ; $5D97: $09
     ld   [hl], $1F                                ; $5D98: $36 $1F
-    ld   hl, $C340                                ; $5D9A: $21 $40 $C3
+    ld   hl, wEntitiesUnknowTableL                ; $5D9A: $21 $40 $C3
     add  hl, bc                                   ; $5D9D: $09
     ld   a, [hl]                                  ; $5D9E: $7E
     and  $F0                                      ; $5D9F: $E6 $F0
@@ -114,7 +114,7 @@ DropFairyEffectHandler::
     add  hl, de                                   ; $5DD3: $19
     ld   [hl], $30                                ; $5DD4: $36 $30
 
-    ld   hl, $C450                                ; $5DD6: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable                                ; $5DD6: $21 $50 $C4
     add  hl, de                                   ; $5DD9: $19
     ld   [hl], $80                                ; $5DDA: $36 $80
 

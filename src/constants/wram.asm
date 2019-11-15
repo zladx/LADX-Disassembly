@@ -396,16 +396,16 @@ wEntitiesSpeedYTable:: ; C250
   ; X Velocity of visible entities
   ds $10
 
-; Unlabeled entity attributes table
-; Related to speed X: many code occurence do somethinkg like:
-;   [wC260 + entity index] = [wC260 + entity index] + (EntitySpeedX * 16)
-wC260 equ $C260
+wEntitiesUnknowTableN:: ; C260
+  ; Unlabeled entity attributes table
+  ; Related to speed X: many code occurence do somethinkg like:
+  ;   [wEntitiesUnknowTableN + entity index] = [wEntitiesUnknowTableN + entity index] + (EntitySpeedX * 16)
   ds $10
 
-wC270 equ $C270
-; Unlabeled entity attributes table
-; Related to speed Y: many code occurence do somethinkg like:
-;   [wC260 + entity index] = [wC260 + entity index] + (EntitySpeedY * 16)
+wEntitiesUnknowTableO:: ; C270
+  ; Unlabeled entity attributes table
+  ; Related to speed Y: many code occurence do somethinkg like:
+  ;   [wEntitiesUnknowTableN + entity index] = [wEntitiesUnknowTableN + entity index] + (EntitySpeedY * 16)
   ds $10
 
 wEntitiesStatusTable:: ; C280
@@ -470,12 +470,27 @@ wEntitiesSpeedZTable:: ; C320
   ; Positive numbers increase the altitude, negative numbers decrease it
   ds $10
 
-ds $30
+wEntitiesUnknowTableK:: ; C330
+  ds $10
+
+wEntitiesUnknowTableL:: ; C340
+  ds $10
+
+wEntitiesUnknowTableM:: ; C350
+  ds $10
 
 wEntitiesHealthTable:: ; C360
   ds $10
 
-ds $30
+wEntitiesUnusedTableA:: ; C370
+  ; Unused value
+  ds $10
+
+wEntitiesUnknowTableQ:: ; C380
+  ds $10
+
+wEntitiesUnknowTableR:: ; C390
+  ds $10
 
 wEntitiesTypeTable:: ; C3A0
   ; Type of the entity
@@ -503,17 +518,32 @@ wC3CD:: ; C3CD
   ds 1
 
 ; Unlabeled
-ds $C430 - $C3CE
+ds $C3D0 - $C3CE
+
+wEntitiesUnknowTableY:: ; C3D0
+  ds $10
+
+; Unlabeled
+ds $20
+
+wEntitiesUnknowTableS:: ; C400
+  ds $10
+
+wEntitiesUnknowTableT:: ; C410
+  ds $10
+
+wEntitiesUnknowTableU:: ; C420
+  ds $10
 
 wEntitiesUnknowTableH::  ; C430
   ds $10
 
-; Unlabeled
-ds $C458 - $C440
+wEntitiesUnknowTableP:: ; C440
+  ds $10
 
-wDroppedItemsCountdown:: ; C458
+wEntitiesDropTimerTable:: ; C450
   ; Number of frame before a dropped item disappears
-  ds 8
+  ds $10
 
 wEntitiesLoadOrderTable:: ; C460
   ds $10
@@ -521,8 +551,20 @@ wEntitiesLoadOrderTable:: ; C460
 wEntitiesUnknowTableI:: ; C470
   ds $10
 
+wEntitiesUnknowTableV:: ; C480
+  ds $10
+
+wEntitiesUnknowTableW:: ; C490
+  ds $10
+
+wEntitiesUnknowTableZ:: ; C4A0
+  ds $10
+
 ; Unlabeled
-ds $70
+ds $30
+
+wEntitiesUnknowTableX:: ; C4E0
+  ds $10
 
 wEntitiesUnknowTableJ:: ; C4F0
   ds $10

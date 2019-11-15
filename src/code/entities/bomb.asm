@@ -23,7 +23,7 @@ jr_003_66AD:
     cp   $48                                      ; $66B5: $FE $48
     jr   nz, jr_003_66BF                          ; $66B7: $20 $06
 
-    ld   hl, $C420                                ; $66B9: $21 $20 $C4
+    ld   hl, wEntitiesUnknowTableU                ; $66B9: $21 $20 $C4
     add  hl, bc                                   ; $66BC: $09
     ld   [hl], $30                                ; $66BD: $36 $30
 
@@ -36,7 +36,7 @@ jr_003_66BF:
     add  hl, bc                                   ; $66CE: $09
     ld   [hl], $FF                                ; $66CF: $36 $FF
     call IsEntityUnknownFZero                                ; $66D1: $CD $00 $0C
-    ld   hl, $C440                                ; $66D4: $21 $40 $C4
+    ld   hl, wEntitiesUnknowTableP                ; $66D4: $21 $40 $C4
     add  hl, bc                                   ; $66D7: $09
     or   [hl]                                     ; $66D8: $B6
     jr   nz, jr_003_66FA                          ; $66D9: $20 $1F

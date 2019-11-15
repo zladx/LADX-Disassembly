@@ -116,7 +116,7 @@ jr_007_7C5E:
     ret  nz                                       ; $7C62: $C0
 
     call func_007_7E0A                            ; $7C63: $CD $0A $7E
-    ld   hl, $C3D0                                ; $7C66: $21 $D0 $C3
+    ld   hl, wEntitiesUnknowTableY                ; $7C66: $21 $D0 $C3
     add  hl, bc                                   ; $7C69: $09
     ld   a, [hl]                                  ; $7C6A: $7E
     inc  a                                        ; $7C6B: $3C
@@ -151,7 +151,7 @@ jr_007_7C90:
     ld   [wActiveMusicTrack], a                   ; $7C90: $EA $68 $D3
 
 jr_007_7C93:
-    ld   hl, $C3D0                                ; $7C93: $21 $D0 $C3
+    ld   hl, wEntitiesUnknowTableY                ; $7C93: $21 $D0 $C3
     add  hl, bc                                   ; $7C96: $09
     ld   a, [hl]                                  ; $7C97: $7E
     cp   $26                                      ; $7C98: $FE $26

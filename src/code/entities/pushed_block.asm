@@ -44,7 +44,7 @@ jr_003_5282:
     ldh  [$FFA1], a                               ; $5284: $E0 $A1
 
 jr_003_5286:
-    ld   hl, $C3D0                                ; $5286: $21 $D0 $C3
+    ld   hl, wEntitiesUnknowTableY                ; $5286: $21 $D0 $C3
     add  hl, bc                                   ; $5289: $09
     ld   a, [hl]                                  ; $528A: $7E
     inc  a                                        ; $528B: $3C
@@ -52,7 +52,7 @@ jr_003_5286:
     cp   $21                                      ; $528D: $FE $21
     ret  nz                                       ; $528F: $C0
 
-    ld   hl, $C410                                ; $5290: $21 $10 $C4
+    ld   hl, wEntitiesUnknowTableT                ; $5290: $21 $10 $C4
     add  hl, bc                                   ; $5293: $09
     ld   [hl], a                                  ; $5294: $77
     call func_003_7893                            ; $5295: $CD $93 $78

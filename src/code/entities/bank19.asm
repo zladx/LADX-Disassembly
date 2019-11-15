@@ -3814,7 +3814,7 @@ ThwimpEntityHandler::
     cp   $30                                      ; $5702: $FE $30
     ret  nc                                       ; $5704: $D0
 
-    call label_3D7F                               ; $5705: $CD $7F $3D
+    call ClearEntitySpeed                         ; $5705: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $5708: $CD $05 $0C
     ld   [hl], $08                                ; $570B: $36 $08
     jp   IncrementEntityWalkingAttr               ; $570D: $C3 $12 $3B
@@ -3998,7 +3998,7 @@ jr_019_57FB:
     cp   $30                                      ; $580A: $FE $30
     jr   nc, jr_019_581D                          ; $580C: $30 $0F
 
-    call label_3D7F                               ; $580E: $CD $7F $3D
+    call ClearEntitySpeed                         ; $580E: $CD $7F $3D
     ld   a, $08                                   ; $5811: $3E $08
     ldh  [hJingle], a                             ; $5813: $E0 $F2
     ld   a, $00                                   ; $5815: $3E $00
@@ -4447,7 +4447,7 @@ jr_019_5A9C:
     jr   jr_019_5A7F                              ; $5A9D: $18 $E0
 
 jr_019_5A9F:
-    call label_3D7F                               ; $5A9F: $CD $7F $3D
+    call ClearEntitySpeed                         ; $5A9F: $CD $7F $3D
     call label_3B5A                               ; $5AA2: $CD $5A $3B
     ret  nc                                       ; $5AA5: $D0
 
@@ -4771,7 +4771,7 @@ jr_019_5C41:
     and  $1F                                      ; $5C54: $E6 $1F
     add  $10                                      ; $5C56: $C6 $10
     ld   [hl], a                                  ; $5C58: $77
-    call label_3D7F                               ; $5C59: $CD $7F $3D
+    call ClearEntitySpeed                         ; $5C59: $CD $7F $3D
     call IncrementEntityWalkingAttr               ; $5C5C: $CD $12 $3B
     ld   [hl], b                                  ; $5C5F: $70
     ret                                           ; $5C60: $C9
@@ -7562,7 +7562,7 @@ jr_019_6B11:
     jp   SetEntitySpriteVariant                   ; $6B3E: $C3 $0C $3B
 
 jr_019_6B41:
-    jp   label_3D7F                               ; $6B41: $C3 $7F $3D
+    jp   ClearEntitySpeed                               ; $6B41: $C3 $7F $3D
 
     ld   h, b                                     ; $6B44: $60
     ld   bc, $0162                                ; $6B45: $01 $62 $01

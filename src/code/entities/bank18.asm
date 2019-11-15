@@ -2620,7 +2620,7 @@ jr_018_5001:
     call GetEntityTransitionCountdown             ; $500F: $CD $05 $0C
     ret  nz                                       ; $5012: $C0
 
-    call label_3D7F                               ; $5013: $CD $7F $3D
+    call ClearEntitySpeed                         ; $5013: $CD $7F $3D
     ld   a, $E5                                   ; $5016: $3E $E5
     call func_018_5080                            ; $5018: $CD $80 $50
     call IncrementEntityWalkingAttr               ; $501B: $CD $12 $3B
@@ -6183,7 +6183,7 @@ jr_018_6519:
     ld   hl, wEntitiesSpeedZTable                 ; $6536: $21 $20 $C3
     add  hl, bc                                   ; $6539: $09
     ld   [hl], b                                  ; $653A: $70
-    call label_3D7F                               ; $653B: $CD $7F $3D
+    call ClearEntitySpeed                         ; $653B: $CD $7F $3D
 
 jr_018_653E:
     call func_018_65CF                            ; $653E: $CD $CF $65
@@ -7203,7 +7203,7 @@ jr_018_6A8B:
     ld   hl, $C450                                ; $6AB5: $21 $50 $C4
     add  hl, bc                                   ; $6AB8: $09
     ld   [hl], $80                                ; $6AB9: $36 $80
-    call label_3D7F                               ; $6ABB: $CD $7F $3D
+    call ClearEntitySpeed                         ; $6ABB: $CD $7F $3D
     ld   hl, wEntitiesSpeedXTable                       ; $6ABE: $21 $40 $C2
     add  hl, bc                                   ; $6AC1: $09
     ld   [hl], $08                                ; $6AC2: $36 $08
@@ -7560,7 +7560,7 @@ jr_018_6CB8:
     and  a                                        ; $6CC0: $A7
     jr   z, jr_018_6CCD                           ; $6CC1: $28 $0A
 
-    call label_3D7F                               ; $6CC3: $CD $7F $3D
+    call ClearEntitySpeed                         ; $6CC3: $CD $7F $3D
     ld   hl, wEntitiesUnknownTableC               ; $6CC6: $21 $C0 $C2
     add  hl, bc                                   ; $6CC9: $09
     ld   [hl], $FF                                ; $6CCA: $36 $FF
@@ -7572,7 +7572,7 @@ jr_018_6CCD:
 
 func_018_6CD3:
 label_018_6CD3:
-    call label_3D7F                               ; $6CD3: $CD $7F $3D
+    call ClearEntitySpeed                         ; $6CD3: $CD $7F $3D
     ld   hl, wEntitiesSpeedZTable                 ; $6CD6: $21 $20 $C3
     add  hl, bc                                   ; $6CD9: $09
     ld   [hl], b                                  ; $6CDA: $70
@@ -8088,7 +8088,7 @@ jr_018_6F95:
     ret  nz                                       ; $6FAB: $C0
 
     ld   [hl], $20                                ; $6FAC: $36 $20
-    call label_3D7F                               ; $6FAE: $CD $7F $3D
+    call ClearEntitySpeed                         ; $6FAE: $CD $7F $3D
     jp   IncrementEntityWalkingAttr               ; $6FB1: $C3 $12 $3B
 
     call GetEntityTransitionCountdown             ; $6FB4: $CD $05 $0C
@@ -9809,7 +9809,7 @@ label_018_7938:
     ld   [hl], $20                                ; $7946: $36 $20
     call IncrementEntityWalkingAttr               ; $7948: $CD $12 $3B
     ld   [hl], b                                  ; $794B: $70
-    call label_3D7F                               ; $794C: $CD $7F $3D
+    call ClearEntitySpeed                         ; $794C: $CD $7F $3D
 
 jr_018_794F:
     jp   label_018_78A6                           ; $794F: $C3 $A6 $78

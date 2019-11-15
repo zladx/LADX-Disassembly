@@ -2251,7 +2251,7 @@ jr_014_5354:
     jr   z, jr_014_5360                           ; $5358: $28 $06
 
     call func_014_53A3                            ; $535A: $CD $A3 $53
-    jp   label_3D7F                               ; $535D: $C3 $7F $3D
+    jp   ClearEntitySpeed                               ; $535D: $C3 $7F $3D
 
 jr_014_5360:
     ld   a, [$C5AE]                               ; $5360: $FA $AE $C5

@@ -7689,7 +7689,9 @@ SkipDisabledEntityDuringRoomTransition::
     pop  hl
     ret
 
-label_3D7F::
+; Inputs:
+;   bc   entity slot index
+ClearEntitySpeed::
     ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], b

@@ -3867,7 +3867,7 @@ jr_007_5693:
     call func_007_57B0                            ; $56B4: $CD $B0 $57
 
 jr_007_56B7:
-    call label_3D7F                               ; $56B7: $CD $7F $3D
+    call ClearEntitySpeed                         ; $56B7: $CD $7F $3D
     jp   label_007_5721                           ; $56BA: $C3 $21 $57
 
 jr_007_56BD:
@@ -3931,7 +3931,7 @@ jr_007_570D:
     ld   hl, wEntitiesStateTable                  ; $5715: $21 $90 $C2
     add  hl, bc                                   ; $5718: $09
     ld   [hl], $01                                ; $5719: $36 $01
-    call label_3D7F                               ; $571B: $CD $7F $3D
+    call ClearEntitySpeed                         ; $571B: $CD $7F $3D
 
 jr_007_571E:
     call func_007_7D1A                            ; $571E: $CD $1A $7D
@@ -4835,7 +4835,7 @@ jr_007_5C2A:
     cp   $03                                      ; $5C3E: $FE $03
     jr   z, jr_007_5C58                           ; $5C40: $28 $16
 
-    call label_3D7F                               ; $5C42: $CD $7F $3D
+    call ClearEntitySpeed                         ; $5C42: $CD $7F $3D
     call GetEntityTransitionCountdown                 ; $5C45: $CD $05 $0C
     ld   [hl], $25                                ; $5C48: $36 $25
     call func_007_7E5D                            ; $5C4A: $CD $5D $7E
@@ -7132,7 +7132,7 @@ jr_007_68CF:
     ret                                           ; $68CF: $C9
 
 jr_007_68D0:
-    call label_3D7F                               ; $68D0: $CD $7F $3D
+    call ClearEntitySpeed                         ; $68D0: $CD $7F $3D
     call func_007_68F0                            ; $68D3: $CD $F0 $68
     jr   jr_007_68E6                              ; $68D6: $18 $0E
 
@@ -8955,7 +8955,7 @@ jr_007_734C:
     jr   nz, jr_007_736C                          ; $7362: $20 $08
 
     ld   [hl], $10                                ; $7364: $36 $10
-    call label_3D7F                               ; $7366: $CD $7F $3D
+    call ClearEntitySpeed                         ; $7366: $CD $7F $3D
     jp   IncrementEntityWalkingAttr               ; $7369: $C3 $12 $3B
 
 jr_007_736C:
@@ -8996,7 +8996,7 @@ jr_007_739B:
     and  a                                        ; $73AB: $A7
     jr   z, jr_007_73D2                           ; $73AC: $28 $24
 
-    call label_3D7F                               ; $73AE: $CD $7F $3D
+    call ClearEntitySpeed                         ; $73AE: $CD $7F $3D
     call IncrementEntityWalkingAttr               ; $73B1: $CD $12 $3B
     ld   [hl], $04                                ; $73B4: $36 $04
     call GetEntityTransitionCountdown                 ; $73B6: $CD $05 $0C
@@ -9311,7 +9311,7 @@ jr_007_7547:
 
     call GetEntityTransitionCountdown                 ; $755B: $CD $05 $0C
     ld   [hl], $10                                ; $755E: $36 $10
-    call label_3D7F                               ; $7560: $CD $7F $3D
+    call ClearEntitySpeed                         ; $7560: $CD $7F $3D
     call IncrementEntityWalkingAttr               ; $7563: $CD $12 $3B
     xor  a                                        ; $7566: $AF
     ld   [hl], a                                  ; $7567: $77
@@ -9505,7 +9505,7 @@ jr_007_7633:
     call GetEntityTransitionCountdown                 ; $7657: $CD $05 $0C
     jr   nz, jr_007_7671                          ; $765A: $20 $15
 
-    call label_3D7F                               ; $765C: $CD $7F $3D
+    call ClearEntitySpeed                         ; $765C: $CD $7F $3D
     call IncrementEntityWalkingAttr               ; $765F: $CD $12 $3B
     call GetRandomByte                            ; $7662: $CD $0D $28
     and  $03                                      ; $7665: $E6 $03
@@ -9758,7 +9758,7 @@ jr_007_77B6:
     and  a                                        ; $77BB: $A7
     jr   z, jr_007_77C1                           ; $77BC: $28 $03
 
-    call label_3D7F                               ; $77BE: $CD $7F $3D
+    call ClearEntitySpeed                         ; $77BE: $CD $7F $3D
 
 jr_007_77C1:
     call func_007_7DC3                            ; $77C1: $CD $C3 $7D
@@ -9802,7 +9802,7 @@ jr_007_77FB:
     jp   nc, label_007_780D                       ; $77FF: $D2 $0D $78
 
     ld   [hl], b                                  ; $7802: $70
-    call label_3D7F                               ; $7803: $CD $7F $3D
+    call ClearEntitySpeed                         ; $7803: $CD $7F $3D
     jr   jr_007_780D                              ; $7806: $18 $05
 
 jr_007_7808:

@@ -2173,7 +2173,7 @@ jr_036_4C4C:
     ld   [hl], $C0                                ; $4C6F: $36 $C0
     ld   a, $10                                   ; $4C71: $3E $10
     call func_036_6C83                            ; $4C73: $CD $83 $6C
-    call label_3D7F                               ; $4C76: $CD $7F $3D
+    call ClearEntitySpeed                         ; $4C76: $CD $7F $3D
     call IncrementEntityWalkingAttr               ; $4C79: $CD $12 $3B
 
 jr_036_4C7C:

@@ -894,7 +894,7 @@ EntityDestructionHandler::
     call func_003_7F7E                            ; $4C6A: $CD $7E $7F
     call func_003_7FA9                            ; $4C6D: $CD $A9 $7F
     call func_003_60B3                            ; $4C70: $CD $B3 $60
-    call label_3D7F                               ; $4C73: $CD $7F $3D
+    call ClearEntitySpeed                         ; $4C73: $CD $7F $3D
     ret                                           ; $4C76: $C9
 
 jr_003_4C77:
@@ -1162,7 +1162,7 @@ EntityStunnedHandler::
     call func_003_7F7E                            ; $4E0A: $CD $7E $7F
     call func_003_7FA9                            ; $4E0D: $CD $A9 $7F
     call func_003_60B3                            ; $4E10: $CD $B3 $60
-    call label_3D7F                               ; $4E13: $CD $7F $3D
+    call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
     ld   a, [wAButtonSlot]                        ; $4E19: $FA $00 $DB
     cp   $03                                      ; $4E1C: $FE $03
@@ -1250,7 +1250,7 @@ jr_003_4E85:
     add  hl, bc                                   ; $4E98: $09
     ld   [hl], a                                  ; $4E99: $77
     call func_003_7F32                            ; $4E9A: $CD $32 $7F
-    jp   label_3D7F                               ; $4E9D: $C3 $7F $3D
+    jp   ClearEntitySpeed                               ; $4E9D: $C3 $7F $3D
 
     inc  c                                        ; $4EA0: $0C
     inc  c                                        ; $4EA1: $0C
@@ -2940,7 +2940,7 @@ jr_003_58E5:
     ld   hl, wEntitiesStateTable                  ; $58ED: $21 $90 $C2
     add  hl, bc                                   ; $58F0: $09
     ld   [hl], $01                                ; $58F1: $36 $01
-    call label_3D7F                               ; $58F3: $CD $7F $3D
+    call ClearEntitySpeed                         ; $58F3: $CD $7F $3D
 
 jr_003_58F6:
     call func_003_7F25                            ; $58F6: $CD $25 $7F
@@ -5047,12 +5047,17 @@ jr_003_64E0:
     ccf                                           ; $6522: $3F
     ret                                           ; $6523: $C9
 
+; Wrapper for func_003_485B
+; Inputs:
+;   de   entity slot index
 func_003_6524::
     push bc                                       ; $6524: $C5
     push de                                       ; $6525: $D5
+    ; bc = de
     ld   c, e                                     ; $6526: $4B
     ld   b, d                                     ; $6527: $42
     call func_003_485B                            ; $6528: $CD $5B $48
+    ; Restore bc and de
     pop  de                                       ; $652B: $D1
     pop  bc                                       ; $652C: $C1
     ret                                           ; $652D: $C9
@@ -6294,7 +6299,7 @@ label_003_6CD5:
     ld   [$C146], a                               ; $6CEA: $EA $46 $C1
     ld   a, $F0                                   ; $6CED: $3E $F0
     ldh  [hLinkPositionYIncrement], a             ; $6CEF: $E0 $9B
-    call label_3D7F                               ; $6CF1: $CD $7F $3D
+    call ClearEntitySpeed                         ; $6CF1: $CD $7F $3D
     ld   a, $0E                                   ; $6CF4: $3E $0E
     ldh  [hWaveSfx], a                                ; $6CF6: $E0 $F3
     ret                                           ; $6CF8: $C9

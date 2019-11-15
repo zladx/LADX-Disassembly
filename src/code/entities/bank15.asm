@@ -3,7 +3,7 @@
 ; https://github.com/mattcurrie/mgbdis
 
 func_015_4000::
-    call label_3D7F                               ; $4000: $CD $7F $3D
+    call ClearEntitySpeed                         ; $4000: $CD $7F $3D
     ld   hl, $C330                                ; $4003: $21 $30 $C3
     add  hl, bc                                   ; $4006: $09
     ld   [hl], b                                  ; $4007: $70
@@ -1376,7 +1376,7 @@ jr_015_47D1:
 jr_015_47DC:
     ld   a, e                                     ; $47DC: $7B
     call SetEntitySpriteVariant                   ; $47DD: $CD $0C $3B
-    jp   label_3D7F                               ; $47E0: $C3 $7F $3D
+    jp   ClearEntitySpeed                               ; $47E0: $C3 $7F $3D
 
 jr_015_47E3:
     call label_BFB                                ; $47E3: $CD $FB $0B
@@ -1384,7 +1384,7 @@ jr_015_47E3:
 
     call GetEntityTransitionCountdown             ; $47E8: $CD $05 $0C
     ld   [hl], $30                                ; $47EB: $36 $30
-    call label_3D7F                               ; $47ED: $CD $7F $3D
+    call ClearEntitySpeed                         ; $47ED: $CD $7F $3D
     jp   IncrementEntityWalkingAttr               ; $47F0: $C3 $12 $3B
 
 jr_015_47F3:
@@ -1441,7 +1441,7 @@ jr_015_483C:
     jr   nz, jr_015_485C                          ; $4842: $20 $18
 
     ld   [hl], $22                                ; $4844: $36 $22
-    call label_3D7F                               ; $4846: $CD $7F $3D
+    call ClearEntitySpeed                         ; $4846: $CD $7F $3D
     ld   hl, $C380                                ; $4849: $21 $80 $C3
     add  hl, bc                                   ; $484C: $09
     ld   e, [hl]                                  ; $484D: $5E
@@ -1462,7 +1462,7 @@ jr_015_485C:
     ldh  [hJingle], a                             ; $4862: $E0 $F2
 
 jr_015_4864:
-    call label_3D7F                               ; $4864: $CD $7F $3D
+    call ClearEntitySpeed                         ; $4864: $CD $7F $3D
     ldh  a, [hFrameCounter]                       ; $4867: $F0 $E7
     rra                                           ; $4869: $1F
     rra                                           ; $486A: $1F
@@ -1551,7 +1551,7 @@ jr_015_48F0:
     and  a                                        ; $48F2: $A7
     jr   z, jr_015_48F8                           ; $48F3: $28 $03
 
-    call label_3D7F                               ; $48F5: $CD $7F $3D
+    call ClearEntitySpeed                         ; $48F5: $CD $7F $3D
 
 jr_015_48F8:
     ldh  a, [hFrameCounter]                       ; $48F8: $F0 $E7
@@ -1617,7 +1617,7 @@ func_015_4928:
     and  $FE                                      ; $4951: $E6 $FE
     jr   nz, jr_015_4960                          ; $4953: $20 $0B
 
-    call label_3D7F                               ; $4955: $CD $7F $3D
+    call ClearEntitySpeed                         ; $4955: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $4958: $CD $05 $0C
     ld   [hl], $40                                ; $495B: $36 $40
     jp   IncrementEntityWalkingAttr               ; $495D: $C3 $12 $3B
@@ -1641,7 +1641,7 @@ jr_015_496D:
     ld   [$D228], a                               ; $4971: $EA $28 $D2
     jp   SetEntitySpriteVariant                   ; $4974: $C3 $0C $3B
 
-    call label_3D7F                               ; $4977: $CD $7F $3D
+    call ClearEntitySpeed                         ; $4977: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $497A: $CD $05 $0C
     jr   nz, jr_015_4990                          ; $497D: $20 $11
 
@@ -1683,7 +1683,7 @@ jr_015_4990:
     ldh  [hJingle], a                             ; $49BF: $E0 $F2
     ret                                           ; $49C1: $C9
 
-    call label_3D7F                               ; $49C2: $CD $7F $3D
+    call ClearEntitySpeed                         ; $49C2: $CD $7F $3D
     call GetEntityTransitionCountdown             ; $49C5: $CD $05 $0C
     jr   nz, jr_015_49CD                          ; $49C8: $20 $03
 
@@ -7170,7 +7170,7 @@ jr_015_67F9:
     add  hl, bc                                   ; $6808: $09
     res  6, [hl]                                  ; $6809: $CB $B6
     call IncrementEntityWalkingAttr               ; $680B: $CD $12 $3B
-    jp   label_3D7F                               ; $680E: $C3 $7F $3D
+    jp   ClearEntitySpeed                               ; $680E: $C3 $7F $3D
 
     call label_3B39                               ; $6811: $CD $39 $3B
     call func_015_7B88                            ; $6814: $CD $88 $7B
@@ -7312,7 +7312,7 @@ jr_015_68D6:
     call GetEntityTransitionCountdown             ; $68E7: $CD $05 $0C
     jr   nz, jr_015_6914                          ; $68EA: $20 $28
 
-    call label_3D7F                               ; $68EC: $CD $7F $3D
+    call ClearEntitySpeed                         ; $68EC: $CD $7F $3D
     call func_015_52BB                            ; $68EF: $CD $BB $52
     ld   hl, wEntitiesHealthTable                 ; $68F2: $21 $60 $C3
     add  hl, bc                                   ; $68F5: $09
@@ -10072,7 +10072,7 @@ jr_015_7792:
     ld   hl, wEntitiesSpeedZTable                 ; $77AE: $21 $20 $C3
     add  hl, bc                                   ; $77B1: $09
     ld   [hl], $20                                ; $77B2: $36 $20
-    call label_3D7F                               ; $77B4: $CD $7F $3D
+    call ClearEntitySpeed                         ; $77B4: $CD $7F $3D
     call IncrementEntityWalkingAttr               ; $77B7: $CD $12 $3B
 
 jr_015_77BA:

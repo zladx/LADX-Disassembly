@@ -3751,7 +3751,7 @@ DoUpdateBGRegion::
     ; if IsGBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .palettesDone
+    jr   z, .palettesskipEntityLoad
     ; … hl = (MapId == MAP_COLOR_DUNGEON ? ColorDungeonBaseMap : IndoorBaseMapGBC)
     ld   hl, IndoorBaseMapGBC
     ldh  a, [hMapId]
@@ -3765,7 +3765,7 @@ DoUpdateBGRegion::
     ld   hl, OverworldBaseMapDMG
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .palettesDone
+    jr   z, .palettesskipEntityLoad
     ld   hl, OverworldBaseMapGBC
 
     ;
@@ -3776,7 +3776,7 @@ DoUpdateBGRegion::
     ; Set the BG attributes bank in hScratch8,
     ; and the target BG attributes address in FFE0-FFE1
     callsb GetBGAttributesAddressForObject
-.palettesDone
+.palettesskipEntityLoad
 
     ;
     ; BG map offset selection
@@ -4793,7 +4793,7 @@ LoadTilemap9::
 
 .jr_2ED4
     and  a
-    jr   z, .copyDone
+    jr   z, .copyskipEntityLoad
     push af
     and  $3F
     ld   b, a
@@ -4829,7 +4829,7 @@ LoadTilemap9::
     ; length = $100
     ld   bc, TILE_SIZE * 16
     call CopyData
-.copyDone
+.copyskipEntityLoad
 
     ; while hScratch0 < 4, copy the next row
     ldh  a, [hScratch0]
@@ -5049,18 +5049,18 @@ doCopyObjectToBG:
     jr   z, .hasSpecialBaseAddress
     ; If MapId == MAP_HOUSE && MapRoom == $B5, hl = $4760
     cp   MAP_HOUSE
-    jr   nz, .baseAddressDone
+    jr   nz, .baseAddressskipEntityLoad
     ldh  a, [hMapRoom]
     cp   $B5
-    jr   nz, .baseAddressDone
+    jr   nz, .baseAddressskipEntityLoad
 
 .hasSpecialBaseAddress
     ld   hl, $4760
-    jr   .baseAddressDone
+    jr   .baseAddressskipEntityLoad
 
 .isOverworld
     ld   hl, $6B1D
-.baseAddressDone
+.baseAddressskipEntityLoad
 
     ; Copy tile numbers to BG map for tiles on the upper row
     push de
@@ -6693,7 +6693,7 @@ LoadRoomEntities::
     ; Compute the proper entities pointers table for the room
     ;
 
-    ; If on overworld, we're done.
+    ; If on overworld, we're skipEntityLoad.
     ld   hl, OverworldEntitiesPointersTable
     ld   a, [wIsIndoor]
     and  a
@@ -6721,7 +6721,7 @@ LoadRoomEntities::
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
-    call func_38D4
+    call LoadEntityFromDefinition.didLoadEntity
     ld   hl, wEntitiesLoadOrderTable
     add  hl, de
     ld   [hl], $FF
@@ -6764,23 +6764,43 @@ LoadRoomEntities::
     cp   ENTITIES_END
     jr   z, .break
     ; otherwise load the entity definition.
-    call LoadEntityDefinition
+    call LoadEntityFromDefinition
     jr   .loop
 .break
 
     call ReloadSavedBank
     ret
 
-data_387B::
-    db 1, 2, 4, 8, $10, $20, $40, $80
+; Array indexed by load order
+EntityMask_387B::
+    db   %00000001
+    db   %00000010
+    db   %00000100
+    db   %00001000
+    db   %00010000
+    db   %00100000
+    db   %01000000
+    db   %10000000
 
-LoadEntityDefinition::
+; Load an entity for the current room from an entity definition.
+; An entity definition is 2 bytes:
+;   - vertical and horizontal position
+;   - entity type
+; See files in `data/entities/` for more infos.
+;
+; Inputs:
+;   bc   address of the entity definition
+LoadEntityFromDefinition::
+    ; a = entity load order
     ldh  a, [hScratchD]
+
+    ; If the load order < 8…
     cp   $08
-    jr   nc, label_389B
+    jr   nc, .skipClearedEntityEnd
+    ; and EntityMask_387B[hScratchD] & wEntitiesClearedRooms[hMapRoom] != 0,
     ld   e, a
     ld   d, $00
-    ld   hl, data_387B
+    ld   hl, EntityMask_387B
     add  hl, de
     ldh  a, [hMapRoom]
     ld   e, a
@@ -6788,38 +6808,47 @@ LoadEntityDefinition::
     ld   hl, wEntitiesClearedRooms
     add  hl, de
     and  [hl]
-    jr   nz, label_38AD
+    ; … then the entity has been cleared previously: don't load it.
+    jr   nz, .skipEntityLoad
+.skipClearedEntityEnd
 
-label_389B::
+    ; de = $0000
     ld   e, $00
     ld   d, e
-
-label_389E::
+    ; Find the first available slot (i.e. ENTITY_STATUS_DISABLED)
+.loop
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
-    cp   $00
-    jr   z, label_38B4
+    cp   ENTITY_STATUS_DISABLED
+    jr   z, .createEntityAndReturn
+    ; If this slot is not available, try until we reach the last slot
     inc  e
     ld   a, e
     cp   $10
-    jr   nz, label_389E
+    jr   nz, .loop
+    ; If all slots are unavailable, skip this entity
 
-label_38AD::
+.skipEntityLoad
+    ; Increment the entity load order anyway
     ld   hl, hScratchD
     inc  [hl]
+    ; Increment the address to the next definition in the list
     inc  bc
     inc  bc
     ret
 
-label_38B4::
-    ld   [hl], $04
+.createEntityAndReturn
+    ; Mark the entity as being initialized
+    ld   [hl], ENTITY_STATUS_INIT
+    ; Set the entity horizontal position (lowest nybble of first byte)
     ld   a, [bc]
     and  $F0
     ld   hl, wEntitiesPosYTable
     add  hl, de
     add  a, $10
     ld   [hl], a
+    ; Set the entity horizontal position (highest nybble of first byte)
     ld   a, [bc]
     inc  bc
     swap a
@@ -6828,16 +6857,18 @@ label_38B4::
     add  hl, de
     add  a, $08
     ld   [hl], a
+    ; Set the entity type
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [bc]
     inc  bc
     ld   [hl], a
 
-func_38D4::
+.didLoadEntity
     callsb func_003_6524
     callsb PrepareEntityPositionForRoomTransition
-    ld   a, $16
+    ; Restore bank for entities placement data
+    ld   a, BANK(OverworldEntitiesPointersTable)
     ld   [MBC3SelectBank], a
     ret
 

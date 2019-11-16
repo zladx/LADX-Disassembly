@@ -1395,7 +1395,7 @@ jr_007_4854:
     ld   a, $0D                                   ; $4854: $3E $0D
     ld   [wTradeSequenceItem], a                  ; $4856: $EA $0E $DB
     ldh  [hFFA5], a                               ; $4859: $E0 $A5
-    call label_C0C                                ; $485B: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $485B: $CD $0C $0C
     call IncrementEntityWalkingAttr               ; $485E: $CD $12 $3B
     call GetEntityTransitionCountdown                 ; $4861: $CD $05 $0C
     ld   [hl], $30                                ; $4864: $36 $30
@@ -1858,7 +1858,7 @@ jr_007_4B44:
     and  a                                        ; $4B53: $A7
     ret  nz                                       ; $4B54: $C0
 
-    call label_C0C                                ; $4B55: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $4B55: $CD $0C $0C
     jp   IncrementEntityWalkingAttr               ; $4B58: $C3 $12 $3B
 
     call func_007_4B44                            ; $4B5B: $CD $44 $4B
@@ -2026,7 +2026,7 @@ jr_007_4C5E:
     ld   [wTradeSequenceItem], a                  ; $4C60: $EA $0E $DB
     ld   a, $0D                                   ; $4C63: $3E $0D
     ldh  [hFFA5], a                               ; $4C65: $E0 $A5
-    call label_C0C                                ; $4C67: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $4C67: $CD $0C $0C
     call GetEntityTransitionCountdown                 ; $4C6A: $CD $05 $0C
     ld   [hl], $70                                ; $4C6D: $36 $70
 
@@ -2212,7 +2212,7 @@ jr_007_4D4C:
     ld   [wTradeSequenceItem], a                  ; $4D73: $EA $0E $DB
     ld   a, $0D                                   ; $4D76: $3E $0D
     ldh  [hFFA5], a                               ; $4D78: $E0 $A5
-    call label_C0C                                ; $4D7A: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $4D7A: $CD $0C $0C
     jp   label_007_7EA4                           ; $4D7D: $C3 $A4 $7E
 
     ld   [hl], d                                  ; $4D80: $72

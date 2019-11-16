@@ -4515,7 +4515,7 @@ jr_006_5AD0:
     and  a                                        ; $5AD4: $A7
     jr   nz, jr_006_5ADE                          ; $5AD5: $20 $07
 
-    call label_C0C                                ; $5AD7: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $5AD7: $CD $0C $0C
     call IncrementEntityWalkingAttr               ; $5ADA: $CD $12 $3B
     ld   [hl], b                                  ; $5ADD: $70
 

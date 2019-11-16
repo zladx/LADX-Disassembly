@@ -8003,7 +8003,7 @@ jr_019_6DD4:
     ld   [wTradeSequenceItem], a                  ; $6DF2: $EA $0E $DB
     ld   a, $0D                                   ; $6DF5: $3E $0D
     ldh  [hFFA5], a                               ; $6DF7: $E0 $A5
-    call label_C0C                                ; $6DF9: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $6DF9: $CD $0C $0C
     call IncrementEntityWalkingAttr               ; $6DFC: $CD $12 $3B
     ld   [hl], b                                  ; $6DFF: $70
     ret                                           ; $6E00: $C9

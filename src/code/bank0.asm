@@ -697,8 +697,10 @@ IsZero::
     and  a
     ret
 
-label_C0C::
-    ld   a, $AF
+; Create a new temporary entity with the current trading item.
+; Used when Link trades a new item.
+CreateTradingItemEntity::
+    ld   a, ENTITY_TRADING_ITEM
     call CreateNewTemporaryEntity_trampoline
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
@@ -715,15 +717,15 @@ PlayWrongAnswerJingle::
     ldh  [hJingle], a
     ret
 
-label_C25::
-    ld   hl, $4641
-    jr   label_C2D
+ReadTileValueFromAsciiTable::
+    ld   hl, AsciiToTileMap
+    jr   ReadValueInDialogsBank
 
-label_C2A::
-    ld   hl, $4741
+ReadDialogBankFromTable::
+    ld   hl, DialogBankTable
 
-label_C2D::
-    ld   a, $1C
+ReadValueInDialogsBank::
+    ld   a, BANK(AsciiToTileMap) ; or BANK(DialogBankTable)
     ld   [MBC3SelectBank], a
     add  hl, bc
     ld   a, [hl]

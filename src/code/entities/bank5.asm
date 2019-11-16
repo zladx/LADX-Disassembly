@@ -2483,7 +2483,7 @@ TarinShield4Handler::
     ld   [wTradeSequenceItem], a                  ; $4DB1: $EA $0E $DB
     ld   a, $0D                                   ; $4DB4: $3E $0D
     ldh  [hFFA5], a                               ; $4DB6: $E0 $A5
-    call label_C0C                                ; $4DB8: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $4DB8: $CD $0C $0C
     jr   jr_005_4DC2                              ; $4DBB: $18 $05
 
 jr_005_4DBD:

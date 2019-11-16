@@ -486,7 +486,7 @@ func_4852::
     push hl
     ld   c, a
     ld   b, $00
-    call label_C25
+    call ReadTileValueFromAsciiTable
     pop  hl
     pop  bc
 .skipDE

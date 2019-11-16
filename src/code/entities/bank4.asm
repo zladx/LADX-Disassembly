@@ -4505,7 +4505,7 @@ FishermanFishingGameEntityHandler::
     xor  a                                        ; $5F87: $AF
     ld   [$DB7F], a                               ; $5F88: $EA $7F $DB
     ld   [wC167], a                               ; $5F8B: $EA $67 $C1
-    jp   label_C0C                                ; $5F8E: $C3 $0C $0C
+    jp   CreateTradingItemEntity                                ; $5F8E: $C3 $0C $0C
 
 jr_004_5F91:
     ld   a, $02                                   ; $5F91: $3E $02
@@ -8383,7 +8383,7 @@ jr_004_75F8:
 
     ld   a, $01                                   ; $7622: $3E $01
     ld   [wTradeSequenceItem], a                  ; $7624: $EA $0E $DB
-    call label_C0C                                ; $7627: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $7627: $CD $0C $0C
     jp   label_004_6D7A                           ; $762A: $C3 $7A $6D
 
 jr_004_762D:

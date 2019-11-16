@@ -2007,7 +2007,7 @@ jr_018_4C58:
 
     call IncrementEntityWalkingAttr               ; $4C64: $CD $12 $3B
     ld   [hl], b                                  ; $4C67: $70
-    call label_C0C                                ; $4C68: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $4C68: $CD $0C $0C
     ld   a, $09                                   ; $4C6B: $3E $09
     ld   [wTradeSequenceItem], a                  ; $4C6D: $EA $0E $DB
     ld   a, $0D                                   ; $4C70: $3E $0D
@@ -2088,7 +2088,7 @@ func_018_4CB0:
     and  a                                        ; $4CDC: $A7
     jr   nz, jr_018_4CEC                          ; $4CDD: $20 $0D
 
-    call label_C0C                                ; $4CDF: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $4CDF: $CD $0C $0C
     ld   a, $0A                                   ; $4CE2: $3E $0A
     ld   [wTradeSequenceItem], a                  ; $4CE4: $EA $0E $DB
     ld   a, $0D                                   ; $4CE7: $3E $0D
@@ -2280,7 +2280,7 @@ jr_018_4DF3:
 
     ld   [$DB7F], a                               ; $4E1D: $EA $7F $DB
     ld   [wC167], a                               ; $4E20: $EA $67 $C1
-    call label_C0C                                ; $4E23: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $4E23: $CD $0C $0C
     call IncrementEntityWalkingAttr               ; $4E26: $CD $12 $3B
     ld   [hl], b                                  ; $4E29: $70
 
@@ -2395,7 +2395,7 @@ jr_018_4ECE:
     and  a                                        ; $4ED2: $A7
     jr   nz, jr_018_4EDC                          ; $4ED3: $20 $07
 
-    call label_C0C                                ; $4ED5: $CD $0C $0C
+    call CreateTradingItemEntity                                ; $4ED5: $CD $0C $0C
     call IncrementEntityWalkingAttr               ; $4ED8: $CD $12 $3B
     ld   [hl], b                                  ; $4EDB: $70
 
@@ -4169,13 +4169,13 @@ jr_018_591E:
     ld   [hl], d                                  ; $5941: $72
     ld   bc, $040C                                ; $5942: $01 $0C $04
     ld   [hl], h                                  ; $5945: $74
-    ld   bc, label_C0C                            ; $5946: $01 $0C $0C
+    ld   bc, CreateTradingItemEntity                            ; $5946: $01 $0C $0C
     db   $76                                      ; $5949: $76
     ld   bc, $140C                                ; $594A: $01 $0C $14
     ld   a, b                                     ; $594D: $78
     ld   bc, $040C                                ; $594E: $01 $0C $04
     ld   a, d                                     ; $5951: $7A
-    ld   bc, label_C0C                            ; $5952: $01 $0C $0C
+    ld   bc, CreateTradingItemEntity                            ; $5952: $01 $0C $0C
     ld   a, h                                     ; $5955: $7C
     ld   bc, $140C                                ; $5956: $01 $0C $14
     ld   a, [hl]                                  ; $5959: $7E
@@ -6403,7 +6403,7 @@ jr_018_6678:
     ld   c, $0F                                   ; $669C: $0E $0F
     db   $10                                      ; $669E: $10
     ld   de, $1111                                ; $669F: $11 $11 $11
-    ld   bc, label_C0C                            ; $66A2: $01 $0C $0C
+    ld   bc, CreateTradingItemEntity                            ; $66A2: $01 $0C $0C
     inc  c                                        ; $66A5: $0C
     inc  c                                        ; $66A6: $0C
     inc  c                                        ; $66A7: $0C

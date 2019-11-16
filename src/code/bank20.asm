@@ -719,7 +719,7 @@ jr_020_49AF:
 
     db   $10                                      ; $49B2: $10
     ldh  a, [$FF08]                               ; $49B3: $F0 $08
-    ld   [label_C0C], sp                          ; $49B5: $08 $0C $0C
+    db   $08, $0C, $0C                            ; $49B5: $08 $0C $0C
     ld   a, [rNR10]                               ; $49B8: $F0 $10
 
 Func_020_49BA::
@@ -7576,7 +7576,7 @@ jr_020_6EC7:
     inc  c                                        ; $702F: $0C
     inc  c                                        ; $7030: $0C
     inc  c                                        ; $7031: $0C
-    ld   bc, label_C0C                            ; $7032: $01 $0C $0C
+    db   $01, $0C, $0C                            ; $7032: $01 $0C $0C
     inc  c                                        ; $7035: $0C
     inc  c                                        ; $7036: $0C
     inc  c                                        ; $7037: $0C
@@ -7610,7 +7610,7 @@ jr_020_6EC7:
     ld   [label_808], sp                          ; $705B: $08 $08 $08
     dec  b                                        ; $705E: $05
     dec  b                                        ; $705F: $05
-    ld   [label_C0C], sp                          ; $7060: $08 $0C $0C
+    db   $08, $0C, $0C                            ; $7060: $08 $0C $0C
     ld   [vBlankContinue.linkSpriteDone], sp      ; $7063: $08 $04 $05
     inc  c                                        ; $7066: $0C
     inc  b                                        ; $7067: $04
@@ -7652,7 +7652,7 @@ jr_020_6EC7:
     inc  c                                        ; $7099: $0C
     inc  c                                        ; $709A: $0C
     nop                                           ; $709B: $00
-    ld   [label_C0C], sp                          ; $709C: $08 $0C $0C
+    db   $08, $0C, $0C                            ; $709C: $08 $0C $0C
     inc  c                                        ; $709F: $0C
     inc  c                                        ; $70A0: $0C
     inc  c                                        ; $70A1: $0C

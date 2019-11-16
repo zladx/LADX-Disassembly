@@ -581,7 +581,12 @@ wEntitiesUnknowTableZ:: ; C4A0
   ds $10
 
 ; Unlabeled
-ds $30
+ds $20
+
+; Maybe the entities health group?
+; See ConfigureNewEntity
+wEntitiesHealthGroup:: ; C4D0
+  ds $10
 
 wEntitiesUnknowTableX:: ; C4E0
   ds $10

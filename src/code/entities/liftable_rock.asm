@@ -63,14 +63,12 @@ jr_003_5378:
     and  $3F                                      ; $5381: $E6 $3F
     jr   nz, .marinReaction2                      ; $5383: $20 $08
     ; Open Marin reaction 1 (Dialog028)
-    ld   a, $28                                   ; $5385: $3E $28
-    call OpenDialog                               ; $5387: $CD $85 $23
+    call_open_dialog $028                         ; $5385
     jp   ClearEntityType                          ; $538A: $C3 $8D $3F
 
 .marinReaction2
-    ; Open Marin reaction 2 (Dialog199)
-    ld   a, LOW($199)                             ; $538D: $3E $99
-    call OpenDialogInTable1                       ; $538F: $CD $73 $23
+    ; Open Marin reaction 2
+    call_open_dialog $199                         ; $538D
 
 jr_003_5392:
     jp   ClearEntityType                               ; $5392: $C3 $8D $3F

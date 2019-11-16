@@ -167,8 +167,7 @@ jr_007_7C93:
     cp   $96                                      ; $7CA6: $FE $96
     jr   nz, jr_007_7CB1                          ; $7CA8: $20 $07
 
-    ld   a, $11                                   ; $7CAA: $3E $11
-    call OpenDialogInTable1                       ; $7CAC: $CD $73 $23
+    call_open_dialog $111                         ; $7CAA
     jr   jr_007_7CE9                              ; $7CAF: $18 $38
 
 jr_007_7CB1:

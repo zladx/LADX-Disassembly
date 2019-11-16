@@ -210,8 +210,7 @@ jr_005_40FA:
 
     ld   a, $10                                   ; $4114: $3E $10
     ld   [wActiveMusicTrack], a                   ; $4116: $EA $68 $D3
-    ld   a, $6C                                   ; $4119: $3E $6C
-    call OpenDialogInTable1                       ; $411B: $CD $73 $23
+    call_open_dialog $16C                         ; $4119
     ld   a, WAVE_SFX_CHAIN_CHOMP                  ; $411E: $3E $18
     ldh  [hWaveSfx], a                            ; $4120: $E0 $F3
     ld   a, $01                                   ; $4122: $3E $01
@@ -637,8 +636,7 @@ label_005_4335:
     ret  nz                                       ; $4378: $C0
 
     ld   [hl], $80                                ; $4379: $36 $80
-    ld   a, $15                                   ; $437B: $3E $15
-    jp   OpenDialogInTable1                       ; $437D: $C3 $73 $23
+    jp_open_dialog $115                           ; $437B
 
 jr_005_4380:
     ld   hl, wEntitiesUnknowTableU                ; $4380: $21 $20 $C4
@@ -1075,13 +1073,11 @@ jr_005_4580:
     and  $3F                                      ; $459D: $E6 $3F
     jr   nz, jr_005_45A8                          ; $459F: $20 $07
 
-    ld   a, $76                                   ; $45A1: $3E $76
-    call OpenDialogInTable2                       ; $45A3: $CD $7C $23
+    call_open_dialog $276                         ; $45A1
     jr   jr_005_45AD                              ; $45A6: $18 $05
 
 jr_005_45A8:
-    ld   a, $8F                                   ; $45A8: $3E $8F
-    call OpenDialog                               ; $45AA: $CD $85 $23
+    call_open_dialog $08F                         ; $45A8
 
 jr_005_45AD:
     ld   hl, wEntitiesUnknownTableB               ; $45AD: $21 $B0 $C2
@@ -1549,8 +1545,7 @@ jr_005_484A:
     call func_005_5506                            ; $484A: $CD $06 $55
     ret  nc                                       ; $484D: $D0
 
-    ld   a, $0C                                   ; $484E: $3E $0C
-    jp   OpenDialog                               ; $4850: $C3 $85 $23
+    jp_open_dialog $00C                           ; $484E
 
 jr_005_4853:
     xor  a                                        ; $4853: $AF
@@ -1585,8 +1580,7 @@ jr_005_4853:
     cp   $04                                      ; $4886: $FE $04
     ret  nz                                       ; $4888: $C0
 
-    ld   a, $09                                   ; $4889: $3E $09
-    call OpenDialog                               ; $488B: $CD $85 $23
+    call_open_dialog $009                         ; $4889
     call GetEntityTransitionCountdown                 ; $488E: $CD $05 $0C
     ld   [hl], $C0                                ; $4891: $36 $C0
     jp   IncrementEntityWalkingAttr               ; $4893: $C3 $12 $3B
@@ -1620,8 +1614,7 @@ jr_005_48AE:
     ld   [wC167], a                               ; $48BF: $EA $67 $C1
     ldh  a, [hMusicTrack]                         ; $48C2: $F0 $B0
     ld   [wActiveMusicTrack], a                   ; $48C4: $EA $68 $D3
-    ld   a, $FE                                   ; $48C7: $3E $FE
-    call OpenDialog                               ; $48C9: $CD $85 $23
+    call_open_dialog $0FE                         ; $48C7
     jp   IncrementEntityWalkingAttr               ; $48CC: $C3 $12 $3B
 
     ld   a, [wDialogState]                        ; $48CF: $FA $9F $C1
@@ -1657,8 +1650,7 @@ jr_005_48AE:
 
     jp   IncrementEntityWalkingAttr               ; $4906: $C3 $12 $3B
 
-    ld   a, $7E                                   ; $4909: $3E $7E
-    call OpenDialogInTable1                       ; $490B: $CD $73 $23
+    call_open_dialog $17E                         ; $4909
     jp   IncrementEntityWalkingAttr               ; $490E: $C3 $12 $3B
 
     ret                                           ; $4911: $C9
@@ -1839,8 +1831,7 @@ jr_005_49D1:
     jr   nz, jr_005_49FD                          ; $49F4: $20 $07
 
     ld   [hl], $01                                ; $49F6: $36 $01
-    ld   a, $21                                   ; $49F8: $3E $21
-    jp   OpenDialog                               ; $49FA: $C3 $85 $23
+    jp_open_dialog $021                           ; $49F8
 
 jr_005_49FD:
     call func_005_5506                            ; $49FD: $CD $06 $55
@@ -1850,8 +1841,7 @@ jr_005_49FD:
     and  a                                        ; $4A05: $A7
     ret  nz                                       ; $4A06: $C0
 
-    ld   a, $0D                                   ; $4A07: $3E $0D
-    jp   OpenDialog                               ; $4A09: $C3 $85 $23
+    jp_open_dialog $00D                           ; $4A07
 
 jr_005_4A0C:
     ld   hl, $C1AD                                ; $4A0C: $21 $AD $C1
@@ -2122,8 +2112,7 @@ jr_005_4B86:
     cp   $01                                      ; $4B8C: $FE $01
     jr   nz, jr_005_4B95                          ; $4B8E: $20 $05
 
-    ld   a, $0A                                   ; $4B90: $3E $0A
-    jp   OpenDialog                               ; $4B92: $C3 $85 $23
+    jp_open_dialog $00A                           ; $4B90
 
 jr_005_4B95:
     and  a                                        ; $4B95: $A7
@@ -2155,8 +2144,7 @@ jr_005_4BB6:
     call func_005_5506                            ; $4BB6: $CD $06 $55
     ret  nc                                       ; $4BB9: $D0
 
-    ld   a, $0B                                   ; $4BBA: $3E $0B
-    jp   OpenDialog                               ; $4BBC: $C3 $85 $23
+    jp_open_dialog $00B                           ; $4BBA
 
     ld   a, b                                     ; $4BBF: $78
     nop                                           ; $4BC0: $00
@@ -2292,15 +2280,13 @@ jr_005_4C79:
 
     sub  $02                                      ; $4C7F: $D6 $02
     ldh  [hLinkPositionY], a                      ; $4C81: $E0 $99
-    ld   a, $00                                   ; $4C83: $3E $00
-    jp   OpenDialog                               ; $4C85: $C3 $85 $23
+    jp_open_dialog $000                           ; $4C83
 
 jr_005_4C88:
     call func_005_5506                            ; $4C88: $CD $06 $55
     ret  nc                                       ; $4C8B: $D0
 
-    ld   a, $54                                   ; $4C8C: $3E $54
-    call OpenDialog                               ; $4C8E: $CD $85 $23
+    call_open_dialog $054                         ; $4C8C
     jp   IncrementEntityWalkingAttr               ; $4C91: $C3 $12 $3B
 
 ; This data is pushed into DC88
@@ -2357,8 +2343,7 @@ TarinShield2Handler::
     ld   [wShieldLevel], a                        ; $4CD7: $EA $44 $DB
     ld   a, $22                                   ; $4CDA: $3E $22
     ldh  [hLinkAnimationState], a                 ; $4CDC: $E0 $9D
-    ld   a, $91                                   ; $4CDE: $3E $91
-    call OpenDialog                               ; $4CE0: $CD $85 $23
+    call_open_dialog $091                         ; $4CDE
     jp   IncrementEntityWalkingAttr               ; $4CE3: $C3 $12 $3B
 
 jr_005_4CE6:
@@ -2400,8 +2385,7 @@ TarinShield3Handler::
     cp   $03                                      ; $4D23: $FE $03
     jr   nz, jr_005_4D33                          ; $4D25: $20 $0C
 
-    ld   a, $C5                                   ; $4D27: $3E $C5
-    call OpenDialogInTable1                       ; $4D29: $CD $73 $23
+    call_open_dialog $1C5                         ; $4D27
 
 jr_005_4D2C:
     ld   a, [wIsMarinFollowingLink]               ; $4D2C: $FA $73 $DB
@@ -2437,8 +2421,7 @@ jr_005_4D4D:
     call func_005_5506                            ; $4D4D: $CD $06 $55
     ret  nc                                       ; $4D50: $D0
 
-    ld   a, $55                                   ; $4D51: $3E $55
-    jp   OpenDialog                               ; $4D53: $C3 $85 $23
+    jp_open_dialog $055                           ; $4D51
 
 jr_005_4D56:
     ld   a, [$DB48]                               ; $4D56: $FA $48 $DB
@@ -2504,8 +2487,7 @@ TarinShield4Handler::
     jr   jr_005_4DC2                              ; $4DBB: $18 $05
 
 jr_005_4DBD:
-    ld   a, $C9                                   ; $4DBD: $3E $C9
-    call OpenDialogInTable1                       ; $4DBF: $CD $73 $23
+    call_open_dialog $1C9                         ; $4DBD
 
 jr_005_4DC2:
     call IncrementEntityWalkingAttr               ; $4DC2: $CD $12 $3B
@@ -2797,8 +2779,7 @@ jr_005_4F6F:
     jr   nz, jr_005_4F89                          ; $4F80: $20 $07
 
     set  6, [hl]                                  ; $4F82: $CB $F6
-    ld   a, $94                                   ; $4F84: $3E $94
-    jp   OpenDialogInTable1                       ; $4F86: $C3 $73 $23
+    jp_open_dialog $194                           ; $4F84
 
 jr_005_4F89:
     ld   a, [wOcarinaSongFlags]                  ; $4F89: $FA $49 $DB
@@ -2806,8 +2787,7 @@ jr_005_4F89:
     jr   z, jr_005_4F95                           ; $4F8E: $28 $05
 
 jr_005_4F90:
-    ld   a, $95                                   ; $4F90: $3E $95
-    jp   OpenDialogInTable1                       ; $4F92: $C3 $73 $23
+    jp_open_dialog $195                           ; $4F90
 
 jr_005_4F95:
     ld   e, $0B                                   ; $4F95: $1E $0B
@@ -2967,8 +2947,7 @@ jr_005_5054:
     cp   $E8                                      ; $506F: $FE $E8
     jr   nz, jr_005_508A                          ; $5071: $20 $17
 
-    ld   a, $16                                   ; $5073: $3E $16
-    call OpenDialog                               ; $5075: $CD $85 $23
+    call_open_dialog $016                         ; $5073
     push bc                                       ; $5078: $C5
     call $0BF0                                    ; $5079: $CD $F0 $0B
     pop  bc                                       ; $507C: $C1
@@ -3106,8 +3085,7 @@ jr_005_512A:
     ret                                           ; $514E: $C9
 
 jr_005_514F:
-    ld   a, $15                                   ; $514F: $3E $15
-    call OpenDialog                               ; $5151: $CD $85 $23
+    call_open_dialog $015                         ; $514F
     call IncrementEntityWalkingAttr               ; $5154: $CD $12 $3B
     ld   [hl], $01                                ; $5157: $36 $01
     ld   hl, wEntitiesUnknownTableD               ; $5159: $21 $D0 $C2
@@ -3146,20 +3124,17 @@ jr_005_5183:
     cp   $C0                                      ; $5189: $FE $C0
     jr   nc, jr_005_5192                          ; $518B: $30 $05
 
-    ld   a, $14                                   ; $518D: $3E $14
-    jp   OpenDialog                               ; $518F: $C3 $85 $23
+    jp_open_dialog $014                           ; $518D
 
 jr_005_5192:
-    ld   a, $93                                   ; $5192: $3E $93
-    jp   OpenDialogInTable1                       ; $5194: $C3 $73 $23
+    jp_open_dialog $193                           ; $5192
 
 jr_005_5197:
     cp   $08                                      ; $5197: $FE $08
     jr   nz, jr_005_51A1                          ; $5199: $20 $06
 
     dec  [hl]                                     ; $519B: $35
-    ld   a, $13                                   ; $519C: $3E $13
-    call OpenDialog                               ; $519E: $CD $85 $23
+    call_open_dialog $013                         ; $519C
 
 jr_005_51A1:
     ld   a, $6C                                   ; $51A1: $3E $6C
@@ -3183,8 +3158,7 @@ jr_005_51A1:
     call func_005_5506                            ; $51C1: $CD $06 $55
     ret  nc                                       ; $51C4: $D0
 
-    ld   a, $97                                   ; $51C5: $3E $97
-    jp   OpenDialogInTable1                       ; $51C7: $C3 $73 $23
+    jp_open_dialog $197                           ; $51C5
 
     ld   e, h                                     ; $51CA: $5C
     nop                                           ; $51CB: $00
@@ -3211,8 +3185,7 @@ jr_005_51A1:
     call func_005_5506                            ; $51F2: $CD $06 $55
     ret  nc                                       ; $51F5: $D0
 
-    ld   a, $D7                                   ; $51F6: $3E $D7
-    jp   OpenDialogInTable1                       ; $51F8: $C3 $73 $23
+    jp_open_dialog $1D7                           ; $51F6
 
 jr_005_51FB:
     ld   a, [wSwordLevel]                         ; $51FB: $FA $4E $DB
@@ -3329,8 +3302,7 @@ jr_005_5245:
     dec  bc                                       ; $5296: $0B
     jr   nz, jr_005_52A4                          ; $5297: $20 $0B
 
-    ld   a, $01                                   ; $5299: $3E $01
-    call OpenDialog                               ; $529B: $CD $85 $23
+    call_open_dialog $001                         ; $5299
     ld   [hl], $40                                ; $529E: $36 $40
     call IncrementEntityWalkingAttr               ; $52A0: $CD $12 $3B
     xor  a                                        ; $52A3: $AF
@@ -3406,8 +3378,7 @@ jr_005_5311:
     call func_005_5506                            ; $5318: $CD $06 $55
     ret  nc                                       ; $531B: $D0
 
-    ld   a, $02                                   ; $531C: $3E $02
-    jp   OpenDialog                               ; $531E: $C3 $85 $23
+    jp_open_dialog $002                           ; $531C
 
 ; Add item to inventory slot (used for assigning the shield)
 AssignItemToSlot:
@@ -3515,8 +3486,7 @@ jr_005_5372:
     call func_005_5506                            ; $5390: $CD $06 $55
     ret  nc                                       ; $5393: $D0
 
-    ld   a, $F0                                   ; $5394: $3E $F0
-    call OpenDialog                               ; $5396: $CD $85 $23
+    call_open_dialog $0F0                         ; $5394
     jp   IncrementEntityWalkingAttr               ; $5399: $C3 $12 $3B
 
     ld   a, [wDialogState]                        ; $539C: $FA $9F $C1
@@ -3550,15 +3520,13 @@ jr_005_53B1:
 
 jr_005_53C5:
     ld   [hl], b                                  ; $53C5: $70
-    ld   a, $4E                                   ; $53C6: $3E $4E
-    jp   OpenDialog                               ; $53C8: $C3 $85 $23
+    jp_open_dialog $04E                           ; $53C6
 
 jr_005_53CB:
     call func_005_5506                            ; $53CB: $CD $06 $55
     ret  nc                                       ; $53CE: $D0
 
-    ld   a, $F1                                   ; $53CF: $3E $F1
-    jp   OpenDialog                               ; $53D1: $C3 $85 $23
+    jp_open_dialog $0F1                           ; $53CF
 
     ld   e, h                                     ; $53D4: $5C
     ld   bc, $215C                                ; $53D5: $01 $5C $21
@@ -4821,8 +4789,7 @@ jr_005_5AA7:
     push af                                       ; $5AF0: $F5
     ld   a, $10                                   ; $5AF1: $3E $10
     ldh  [hLinkPositionY], a                      ; $5AF3: $E0 $99
-    ld   a, $BA                                   ; $5AF5: $3E $BA
-    call OpenDialog                               ; $5AF7: $CD $85 $23
+    call_open_dialog $0BA                         ; $5AF5
     pop  af                                       ; $5AFA: $F1
     ldh  [hLinkPositionY], a                      ; $5AFB: $E0 $99
     ret                                           ; $5AFD: $C9
@@ -10369,8 +10336,7 @@ jr_005_79B3:
     ld   [wBossAgonySFXCountdown], a              ; $7A0D: $EA $A7 $C5
     ld   a, $5E                                   ; $7A10: $3E $5E
     ld   [wActiveMusicTrack], a                   ; $7A12: $EA $68 $D3
-    ld   a, $B5                                   ; $7A15: $3E $B5
-    call OpenDialog                               ; $7A17: $CD $85 $23
+    call_open_dialog $0B5                         ; $7A15
 
 jr_005_7A1A:
     call label_3B44                               ; $7A1A: $CD $44 $3B
@@ -11377,8 +11343,7 @@ jr_005_7F4D:
     call func_005_5506                            ; $7F5D: $CD $06 $55
     ret  nc                                       ; $7F60: $D0
 
-    ld   a, $96                                   ; $7F61: $3E $96
-    jp   OpenDialogInTable1                       ; $7F63: $C3 $73 $23
+    jp_open_dialog $196                           ; $7F61
 
     nop                                           ; $7F66: $00
     nop                                           ; $7F67: $00

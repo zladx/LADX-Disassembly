@@ -57,6 +57,34 @@ entities_end: macro
     db   ENTITIES_END
 endm
 
+; Open a dialog in the correct dialogs table (using a `call` instruction)
+; Usage:
+;   call_open_dialog $123 ; will open Dialog123
+call_open_dialog: macro
+    ld   a, LOW(\1)
+    if HIGH(\1) == 1
+        call OpenDialogInTable1
+    elif HIGH(\1) == 2
+        call OpenDialogInTable2
+    else
+        call OpenDialog
+    endc
+endm
+
+; Open a dialog in the correct dialogs table (using a `jp` instruction)
+; Usage:
+;   jp_open_dialog $123 ; will open Dialog123
+jp_open_dialog: macro
+    ld   a, LOW(\1)
+    if HIGH(\1) == 1
+        jp   OpenDialogInTable1
+    elif HIGH(\1) == 2
+        jp   OpenDialogInTable2
+    else
+        jp   OpenDialog
+    endc
+endm
+
 ; mgbdis macro
 ; RGBDS optimises instructions like `ld [$FF40],a` to `LDH [$FF00+40],a`,
 ; so these are encoded as data bytes using a macro to ensure exact

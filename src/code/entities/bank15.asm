@@ -144,8 +144,7 @@ jr_015_40C0:
 
     ld   [wC167], a                               ; $40DE: $EA $67 $C1
     ld   [wScreenShakeHorizontal], a              ; $40E1: $EA $55 $C1
-    ld   a, $39                                   ; $40E4: $3E $39
-    call OpenDialog                               ; $40E6: $CD $85 $23
+    call_open_dialog $039                         ; $40E4
     call func_015_7CDB                            ; $40E9: $CD $DB $7C
     jp   ClearEntityStatusAndReturn               ; $40EC: $C3 $31 $7C
 
@@ -821,8 +820,7 @@ SeashellMansionTreesEntityHandler::
     call ShouldLinkTalkToEntity                   ; $4496: $CD $BC $7A
     ret  nc                                       ; $4499: $D0
 
-    ld   a, $12                                   ; $449A: $3E $12
-    jp   OpenDialog                               ; $449C: $C3 $85 $23
+    jp_open_dialog $012                           ; $449A
 
     rst  $38                                      ; $449F: $FF
     nop                                           ; $44A0: $00
@@ -1071,8 +1069,7 @@ label_015_45CB:
     jr   nz, jr_015_460B                          ; $4603: $20 $06
 
     dec  [hl]                                     ; $4605: $35
-    ld   a, $D7                                   ; $4606: $3E $D7
-    jp   OpenDialog                               ; $4608: $C3 $85 $23
+    jp_open_dialog $0D7                           ; $4606
 
 jr_015_460B:
     and  a                                        ; $460B: $A7
@@ -1290,8 +1287,7 @@ jr_015_474E:
     call GetEntityTransitionCountdown             ; $4750: $CD $05 $0C
     ret  nz                                       ; $4753: $C0
 
-    ld   a, $91                                   ; $4754: $3E $91
-    call OpenDialogInTable1                       ; $4756: $CD $73 $23
+    call_open_dialog $191                         ; $4754
     ld   hl, wDialogState                         ; $4759: $21 $9F $C1
 
 jr_015_475C:
@@ -2960,8 +2956,7 @@ FinalNightmareForm1Handler::
     ld   [wActiveMusicTrack], a                   ; $50C9: $EA $68 $D3
     ld   hl, $DA74                                ; $50CC: $21 $74 $DA
     set  6, [hl]                                  ; $50CF: $CB $F6
-    ld   a, $F5                                   ; $50D1: $3E $F5
-    call OpenDialog                               ; $50D3: $CD $85 $23
+    call_open_dialog $0F5                         ; $50D1
     call GetEntityTransitionCountdown             ; $50D6: $CD $05 $0C
     ld   [hl], $50                                ; $50D9: $36 $50
     ldh  a, [hLinkPositionX]                      ; $50DB: $F0 $98
@@ -8474,8 +8469,7 @@ jr_015_6E5A:
 
     ld   a, $03                                   ; $6E6F: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $6E71: $EA $A7 $C5
-    ld   a, $F6                                   ; $6E74: $3E $F6
-    call OpenDialog                               ; $6E76: $CD $85 $23
+    call_open_dialog $0F6                         ; $6E74
     ld   a, $5E                                   ; $6E79: $3E $5E
     ld   [wActiveMusicTrack], a                   ; $6E7B: $EA $68 $D3
     call GetEntityTransitionCountdown             ; $6E7E: $CD $05 $0C
@@ -11558,5 +11552,4 @@ jr_015_7FB5:
 
     call ShouldLinkTalkToEntity                   ; $7FC5: $CD $BC $7A
     ret  nc                                       ; $7FC8: $D0
-    ld   a, $96                                   ; $7FC9: $3E $96
-    jp   OpenDialogInTable1                       ; $7FCB: $C3 $73 $23
+    jp_open_dialog $196                           ; $7FC9

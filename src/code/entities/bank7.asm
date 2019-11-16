@@ -650,8 +650,7 @@ jr_007_43D7:
     cp   e                                        ; $43E9: $BB
     ret  c                                        ; $43EA: $D8
 
-    ld   a, $24                                   ; $43EB: $3E $24
-    call OpenDialogInTable1                       ; $43ED: $CD $73 $23
+    call_open_dialog $124                         ; $43EB
     ld   a, $04                                   ; $43F0: $3E $04
     call SetEntitySpriteVariant                   ; $43F2: $CD $0C $3B
     call GetEntityTransitionCountdown                 ; $43F5: $CD $05 $0C
@@ -741,8 +740,7 @@ jr_007_4436:
     jr   c, jr_007_4491                           ; $447F: $38 $10
 
     call func_007_48FD                            ; $4481: $CD $FD $48
-    ld   a, $17                                   ; $4484: $3E $17
-    call OpenDialogInTable1                       ; $4486: $CD $73 $23
+    call_open_dialog $117                         ; $4484
     ld   a, $04                                   ; $4489: $3E $04
     call SetEntitySpriteVariant                   ; $448B: $CD $0C $3B
     jp   IncrementEntityWalkingAttr               ; $448E: $C3 $12 $3B
@@ -779,20 +777,17 @@ jr_007_44BF:
     cp   $0B                                      ; $44C2: $FE $0B
     jr   nz, jr_007_44CE                          ; $44C4: $20 $08
 
-    ld   a, $E8                                   ; $44C6: $3E $E8
-    call OpenDialogInTable1                       ; $44C8: $CD $73 $23
+    call_open_dialog $1E8                         ; $44C6
     jp   IncrementEntityWalkingAttr               ; $44CB: $C3 $12 $3B
 
 jr_007_44CE:
     cp   $0C                                      ; $44CE: $FE $0C
     jr   nc, jr_007_44D7                          ; $44D0: $30 $05
 
-    ld   a, $E7                                   ; $44D2: $3E $E7
-    jp   OpenDialogInTable1                       ; $44D4: $C3 $73 $23
+    jp_open_dialog $1E7                           ; $44D2
 
 jr_007_44D7:
-    ld   a, $ED                                   ; $44D7: $3E $ED
-    jp   OpenDialogInTable1                       ; $44D9: $C3 $73 $23
+    jp_open_dialog $1ED                           ; $44D7
 
 func_007_44DC:
 label_007_44DC:
@@ -818,13 +813,11 @@ jr_007_44E4:
     ld   [wC167], a                               ; $44F6: $EA $67 $C1
     call GetEntityTransitionCountdown                 ; $44F9: $CD $05 $0C
     ld   [hl], $D0                                ; $44FC: $36 $D0
-    ld   a, $E9                                   ; $44FE: $3E $E9
-    jp   OpenDialogInTable1                       ; $4500: $C3 $73 $23
+    jp_open_dialog $1E9                           ; $44FE
 
 jr_007_4503:
     ld   [hl], b                                  ; $4503: $70
-    ld   a, $EA                                   ; $4504: $3E $EA
-    jp   OpenDialogInTable1                       ; $4506: $C3 $73 $23
+    jp_open_dialog $1EA                           ; $4504
 
     ld   a, $02                                   ; $4509: $3E $02
     ldh  [$FFA1], a                               ; $450B: $E0 $A1
@@ -834,8 +827,7 @@ jr_007_4503:
     jr   nz, jr_007_4521                          ; $4515: $20 $0A
 
     ld   [hl], $20                                ; $4517: $36 $20
-    ld   a, $EB                                   ; $4519: $3E $EB
-    call OpenDialogInTable1                       ; $451B: $CD $73 $23
+    call_open_dialog $1EB                         ; $4519
     call IncrementEntityWalkingAttr               ; $451E: $CD $12 $3B
 
 jr_007_4521:
@@ -1271,8 +1263,7 @@ jr_007_4734:
     call IncrementEntityWalkingAttr               ; $4786: $CD $12 $3B
     call GetEntityTransitionCountdown                 ; $4789: $CD $05 $0C
     ld   [hl], $14                                ; $478C: $36 $14
-    ld   a, $F1                                   ; $478E: $3E $F1
-    jp   OpenDialogInTable1                       ; $4790: $C3 $73 $23
+    jp_open_dialog $1F1                           ; $478E
 
 jr_007_4793:
     call func_007_7D43                            ; $4793: $CD $43 $7D
@@ -1282,15 +1273,13 @@ jr_007_4793:
     cp   $0C                                      ; $479A: $FE $0C
     jr   nz, jr_007_47A9                          ; $479C: $20 $0B
 
-    ld   a, $F2                                   ; $479E: $3E $F2
-    call OpenDialogInTable1                       ; $47A0: $CD $73 $23
+    call_open_dialog $1F2                         ; $479E
     call IncrementEntityWalkingAttr               ; $47A3: $CD $12 $3B
     ld   [hl], $05                                ; $47A6: $36 $05
     ret                                           ; $47A8: $C9
 
 jr_007_47A9:
-    ld   a, $F0                                   ; $47A9: $3E $F0
-    jp   OpenDialogInTable1                       ; $47AB: $C3 $73 $23
+    jp_open_dialog $1F0                           ; $47A9
 
     jp   IncrementEntityWalkingAttr               ; $47AE: $C3 $12 $3B
 
@@ -1351,8 +1340,7 @@ jr_007_47D5:
 
 jr_007_4804:
     ld   [hl], b                                  ; $4804: $70
-    ld   a, $F4                                   ; $4805: $3E $F4
-    jp   OpenDialogInTable1                       ; $4807: $C3 $73 $23
+    jp_open_dialog $1F4                           ; $4805
 
     ld   a, [wDialogState]                        ; $480A: $FA $9F $C1
     and  a                                        ; $480D: $A7
@@ -1366,8 +1354,7 @@ jr_007_4804:
 
     dec  [hl]                                     ; $4818: $35
     push af                                       ; $4819: $F5
-    ld   a, $F3                                   ; $481A: $3E $F3
-    call OpenDialogInTable1                       ; $481C: $CD $73 $23
+    call_open_dialog $1F3                         ; $481A
     pop  af                                       ; $481F: $F1
 
 jr_007_4820:
@@ -1604,8 +1591,7 @@ jr_007_4977:
     call func_007_7D43                            ; $4993: $CD $43 $7D
     ret  nc                                       ; $4996: $D0
 
-    ld   a, $F7                                   ; $4997: $3E $F7
-    jp   OpenDialogInTable1                       ; $4999: $C3 $73 $23
+    jp_open_dialog $1F7                           ; $4997
 
     ldh  a, [rP1]                                 ; $499C: $F0 $00
     ld   [hl], b                                  ; $499E: $70
@@ -1722,12 +1708,10 @@ jr_007_4A43:
     cp   $08                                      ; $4A5B: $FE $08
     jr   nc, jr_007_4A64                          ; $4A5D: $30 $05
 
-    ld   a, $27                                   ; $4A5F: $3E $27
-    jp   OpenDialog                               ; $4A61: $C3 $85 $23
+    jp_open_dialog $027                           ; $4A5F
 
 jr_007_4A64:
-    ld   a, $76                                   ; $4A64: $3E $76
-    jp   OpenDialogInTable1                       ; $4A66: $C3 $73 $23
+    jp_open_dialog $176                           ; $4A64
 
 jr_007_4A69:
     ldh  a, [hRoomStatus]                         ; $4A69: $F0 $F8
@@ -1825,16 +1809,14 @@ jr_007_4AE9:
     cp   $07                                      ; $4AFC: $FE $07
     jr   nz, jr_007_4B0E                          ; $4AFE: $20 $0E
 
-    ld   a, $72                                   ; $4B00: $3E $72
-    call OpenDialogInTable1                       ; $4B02: $CD $73 $23
+    call_open_dialog $172                         ; $4B00
     call IncrementEntityWalkingAttr               ; $4B05: $CD $12 $3B
     call GetEntityTransitionCountdown                 ; $4B08: $CD $05 $0C
     ld   [hl], $C0                                ; $4B0B: $36 $C0
     ret                                           ; $4B0D: $C9
 
 jr_007_4B0E:
-    ld   a, $71                                   ; $4B0E: $3E $71
-    call OpenDialogInTable1                       ; $4B10: $CD $73 $23
+    call_open_dialog $171                         ; $4B0E
     xor  a                                        ; $4B13: $AF
     ld   [wC167], a                               ; $4B14: $EA $67 $C1
     call IncrementEntityWalkingAttr               ; $4B17: $CD $12 $3B
@@ -1849,8 +1831,7 @@ jr_007_4B0E:
     jr   nz, jr_007_4B3B                          ; $4B25: $20 $14
 
     ld   [wMusicTrackTiming], a                               ; $4B27: $EA $0B $C1
-    ld   a, $73                                   ; $4B2A: $3E $73
-    call OpenDialogInTable1                       ; $4B2C: $CD $73 $23
+    call_open_dialog $173                         ; $4B2A
     ld   a, $08                                   ; $4B2F: $3E $08
     ld   [wTradeSequenceItem], a                  ; $4B31: $EA $0E $DB
     ld   a, $0D                                   ; $4B34: $3E $0D
@@ -1886,8 +1867,7 @@ jr_007_4B44:
 
     xor  a                                        ; $4B62: $AF
     ld   [wC167], a                               ; $4B63: $EA $67 $C1
-    ld   a, $75                                   ; $4B66: $3E $75
-    jp   OpenDialogInTable1                       ; $4B68: $C3 $73 $23
+    jp_open_dialog $175                           ; $4B66
 
     ld   a, [$7000]                               ; $4B6B: $FA $00 $70
     inc  bc                                       ; $4B6E: $03
@@ -2531,8 +2511,7 @@ jr_007_4EEE:
     call func_007_7D43                            ; $4F13: $CD $43 $7D
     ret  nc                                       ; $4F16: $D0
 
-    ld   a, $C0                                   ; $4F17: $3E $C0
-    call OpenDialogInTable1                       ; $4F19: $CD $73 $23
+    call_open_dialog $1C0                         ; $4F17
     jp   IncrementEntityWalkingAttr               ; $4F1C: $C3 $12 $3B
 
     call func_007_7CF0                            ; $4F1F: $CD $F0 $7C
@@ -2555,8 +2534,7 @@ jr_007_4EEE:
     jp   IncrementEntityWalkingAttr               ; $4F41: $C3 $12 $3B
 
 jr_007_4F44:
-    ld   a, $C2                                   ; $4F44: $3E $C2
-    call OpenDialogInTable1                       ; $4F46: $CD $73 $23
+    call_open_dialog $1C2                         ; $4F44
     call IncrementEntityWalkingAttr               ; $4F49: $CD $12 $3B
     ld   [hl], b                                  ; $4F4C: $70
 
@@ -8036,8 +8014,7 @@ jr_007_6E16:
     add  hl, bc                                   ; $6E21: $09
     set  7, [hl]                                  ; $6E22: $CB $FE
     call IncrementEntityWalkingAttr               ; $6E24: $CD $12 $3B
-    ld   a, $13                                   ; $6E27: $3E $13
-    call OpenDialogInTable1                       ; $6E29: $CD $73 $23
+    call_open_dialog $113                         ; $6E27
     call GetEntityTransitionCountdown                 ; $6E2C: $CD $05 $0C
     ld   [hl], $04                                ; $6E2F: $36 $04
     ret                                           ; $6E31: $C9
@@ -10162,8 +10139,7 @@ jr_007_79D6:
     jr   nz, jr_007_7A1E                          ; $79EF: $20 $2D
 
     inc  [hl]                                     ; $79F1: $34
-    ld   a, $90                                   ; $79F2: $3E $90
-    call OpenDialogInTable1                       ; $79F4: $CD $73 $23
+    call_open_dialog $190                         ; $79F2
     jr   jr_007_7A1E                              ; $79F7: $18 $25
 
 jr_007_79F9:

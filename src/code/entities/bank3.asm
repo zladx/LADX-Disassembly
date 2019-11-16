@@ -3250,8 +3250,7 @@ HeartPieceEntityHandler::
     ldh  [hNeedsUpdatingBGTiles], a               ; $5A85: $E0 $90
     jp   IncrementEntityWalkingAttr               ; $5A87: $C3 $12 $3B
 
-    ld   a, $4F                                   ; $5A8A: $3E $4F
-    call OpenDialog                               ; $5A8C: $CD $85 $23
+    call_open_dialog $04F                         ; $5A8A
     call IncrementEntityWalkingAttr               ; $5A8F: $CD $12 $3B
     ld   a, $01                                   ; $5A92: $3E $01
     ld   [$C1AB], a                               ; $5A94: $EA $AB $C1
@@ -3305,8 +3304,7 @@ jr_003_5ABA:
     ld   hl, wMaxHealth                           ; $5AE4: $21 $5B $DB
     inc  [hl]                                     ; $5AE7: $34
     ; Open the "4 pieces of heart collected" dialog
-    ld   a, $50                                   ; $5AE8: $3E $50
-    call OpenDialog                               ; $5AEA: $CD $85 $23
+    call_open_dialog $050                         ; $5AE8
 
 jr_003_5AED:
     jp   IncrementEntityWalkingAttr               ; $5AED: $C3 $12 $3B
@@ -3457,8 +3455,7 @@ jr_003_5BAC:
     jr   nz, jr_003_5BCB                          ; $5BC2: $20 $07
 
     dec  [hl]                                     ; $5BC4: $35
-    ld   a, $9B                                   ; $5BC5: $3E $9B
-    call OpenDialog                               ; $5BC7: $CD $85 $23
+    call_open_dialog $09B                         ; $5BC5
     xor  a                                        ; $5BCA: $AF
 
 jr_003_5BCB:
@@ -3548,8 +3545,7 @@ label_003_5C49:
     jr   nz, jr_003_5C67                          ; $5C5E: $20 $07
 
     dec  [hl]                                     ; $5C60: $35
-    ld   a, $93                                   ; $5C61: $3E $93
-    call OpenDialog                               ; $5C63: $CD $85 $23
+    call_open_dialog $093                         ; $5C61
     xor  a                                        ; $5C66: $AF
 
 jr_003_5C67:
@@ -3724,8 +3720,7 @@ SleepyToadstoolEntityHandler::
     jr   nz, jr_003_5D6C                          ; $5D63: $20 $07
 
     dec  [hl]                                     ; $5D65: $35
-    ld   a, $0F                                   ; $5D66: $3E $0F
-    call OpenDialog                               ; $5D68: $CD $85 $23
+    call_open_dialog $00F                         ; $5D66
     xor  a                                        ; $5D6B: $AF
 
 jr_003_5D6C:
@@ -4752,8 +4747,7 @@ jr_003_635F:
 jr_003_6367:
     ret                                           ; $6367: $C9
 
-    ld   a, $EF                                   ; $6368: $3E $EF
-    call OpenDialog                               ; $636A: $CD $85 $23
+    call_open_dialog $0EF                         ; $6368
 
 label_003_636D:
     call func_003_512A                            ; $636D: $CD $2A $51

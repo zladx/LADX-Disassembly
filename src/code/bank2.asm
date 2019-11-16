@@ -1225,8 +1225,7 @@ jr_002_4A7C:
     and  a                                        ; $4A98: $A7
     jr   nz, jr_002_4AB2                          ; $4A99: $20 $17
 
-    ld   a, $77                                   ; $4A9B: $3E $77
-    call OpenDialogInTable2                               ; $4A9D: $CD $7C $23
+    call_open_dialog $277                         ; $4A9B
     jr   jr_002_4AB2                              ; $4AA0: $18 $10
 
 jr_002_4AA2:
@@ -1234,8 +1233,7 @@ jr_002_4AA2:
     and  a                                        ; $4AA5: $A7
     jr   nz, jr_002_4AB2                          ; $4AA6: $20 $0A
 
-    ld   a, $8E                                   ; $4AA8: $3E $8E
-    call OpenDialog                               ; $4AAA: $CD $85 $23
+    call_open_dialog $08E                         ; $4AA8
     xor  a                                        ; $4AAD: $AF
     ld   [wC167], a                               ; $4AAE: $EA $67 $C1
     ret                                           ; $4AB1: $C9
@@ -1388,8 +1386,7 @@ jr_002_4B85:
     and  a                                        ; $4B99: $A7
     jr   nz, jr_002_4BA1                          ; $4B9A: $20 $05
 
-    ld   a, $79                                   ; $4B9C: $3E $79
-    call OpenDialogInTable2                               ; $4B9E: $CD $7C $23
+    call_open_dialog $279                         ; $4B9C
 
 jr_002_4BA1:
     xor  a                                        ; $4BA1: $AF
@@ -5678,8 +5675,7 @@ jr_002_6B81:
 
     inc  a                                        ; $6B90: $3C
     ld   [$C5A6], a                               ; $6B91: $EA $A6 $C5
-    ld   a, $51                                   ; $6B94: $3E $51
-    call OpenDialog                               ; $6B96: $CD $85 $23
+    call_open_dialog $051                         ; $6B94
 
 jr_002_6B99:
     ldh  a, [$FFAF]                               ; $6B99: $F0 $AF
@@ -7161,8 +7157,7 @@ jr_002_7402:
     jr   z, jr_002_742D                           ; $7413: $28 $18
 
 jr_002_7415:
-    ld   a, $53                                   ; $7415: $3E $53
-    call OpenDialogInTable2                               ; $7417: $CD $7C $23
+    call_open_dialog $253            ; $7415
     jp   label_002_7454                           ; $741A: $C3 $54 $74
 
 jr_002_741D:

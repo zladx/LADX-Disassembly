@@ -248,8 +248,7 @@ jr_004_4163:
     jr   nz, jr_004_418D                          ; $4185: $20 $06
 
     inc  [hl]                                     ; $4187: $34
-    ld   a, $7F                                   ; $4188: $3E $7F
-    call OpenDialogInTable1                       ; $418A: $CD $73 $23
+    call_open_dialog $17F                         ; $4188
 
 jr_004_418D:
     call ClearEntitySpeed                         ; $418D: $CD $7F $3D
@@ -2307,8 +2306,7 @@ jr_004_516C:
     ld   [hl], $A0                                ; $5172: $36 $A0
     call label_BFB                                ; $5174: $CD $FB $0B
     ld   [hl], $FF                                ; $5177: $36 $FF
-    ld   a, $B6                                   ; $5179: $3E $B6
-    jp   OpenDialog                               ; $517B: $C3 $85 $23
+    jp_open_dialog $0B6                           ; $5179
 
     inc  bc                                       ; $517E: $03
     ld   [bc], a                                  ; $517F: $02
@@ -4565,8 +4563,7 @@ jr_004_5FC2:
 
     ld   a, $02                                   ; $5FE2: $3E $02
     ld   [wC167], a                               ; $5FE4: $EA $67 $C1
-    ld   a, $45                                   ; $5FE7: $3E $45
-    call OpenDialog                               ; $5FE9: $CD $85 $23
+    call_open_dialog $045                         ; $5FE7
     jp   IncrementEntityWalkingAttr               ; $5FEC: $C3 $12 $3B
 
     ld   a, [wDialogState]                        ; $5FEF: $FA $9F $C1
@@ -4581,8 +4578,7 @@ jr_004_5FC2:
     ld   [hl], b                                  ; $5FFD: $70
     xor  a                                        ; $5FFE: $AF
     ld   [wC167], a                               ; $5FFF: $EA $67 $C1
-    ld   a, $46                                   ; $6002: $3E $46
-    jp   OpenDialog                               ; $6004: $C3 $85 $23
+    jp_open_dialog $046                           ; $6002
 
 jr_004_6007:
     push hl                                       ; $6007: $E5
@@ -4618,15 +4614,13 @@ jr_004_6023:
 
     ld   a, $0A                                   ; $602D: $3E $0A
     ld   [wSubstractRupeeBufferHigh], a           ; $602F: $EA $92 $DB
-    ld   a, $47                                   ; $6032: $3E $47
-    jp   OpenDialog                               ; $6034: $C3 $85 $23
+    jp_open_dialog $047                           ; $6032
 
 jr_004_6037:
     ld   [hl], b                                  ; $6037: $70
     xor  a                                        ; $6038: $AF
     ld   [wC167], a                               ; $6039: $EA $67 $C1
-    ld   a, $4E                                   ; $603C: $3E $4E
-    jp   OpenDialog                               ; $603E: $C3 $85 $23
+    jp_open_dialog $04E                           ; $603C
 
     ld   a, [wDialogState]                        ; $6041: $FA $9F $C1
 
@@ -4865,8 +4859,7 @@ label_004_61BA:
     cp   $05                                      ; $61F3: $FE $05
     jr   c, jr_004_6202                           ; $61F5: $38 $0B
 
-    ld   a, $4B                                   ; $61F7: $3E $4B
-    call OpenDialog                               ; $61F9: $CD $85 $23
+    call_open_dialog $04B                         ; $61F7
     call IncrementEntityWalkingAttr               ; $61FC: $CD $12 $3B
     ld   [hl], $05                                ; $61FF: $36 $05
     ret                                           ; $6201: $C9
@@ -4905,20 +4898,17 @@ jr_004_621E:
 
     ld   a, $0A                                   ; $6228: $3E $0A
     ld   [wSubstractRupeeBufferHigh], a           ; $622A: $EA $92 $DB
-    ld   a, $47                                   ; $622D: $3E $47
-    call OpenDialog                               ; $622F: $CD $85 $23
+    call_open_dialog $047                         ; $622D
     call IncrementEntityWalkingAttr               ; $6232: $CD $12 $3B
     ld   [hl], b                                  ; $6235: $70
     ret                                           ; $6236: $C9
 
 jr_004_6237:
-    ld   a, $46                                   ; $6237: $3E $46
-    call OpenDialog                               ; $6239: $CD $85 $23
+    call_open_dialog $046                         ; $6237
     jp   IncrementEntityWalkingAttr               ; $623C: $C3 $12 $3B
 
 jr_004_623F:
-    ld   a, $4E                                   ; $623F: $3E $4E
-    call OpenDialog                               ; $6241: $CD $85 $23
+    call_open_dialog $04E                         ; $623F
     jp   IncrementEntityWalkingAttr               ; $6244: $C3 $12 $3B
 
     ld   a, [wDialogState]                        ; $6247: $FA $9F $C1
@@ -4938,12 +4928,10 @@ jr_004_623F:
     and  a                                        ; $625F: $A7
     jr   nz, jr_004_6267                          ; $6260: $20 $05
 
-    ld   a, $4C                                   ; $6262: $3E $4C
-    jp   OpenDialog                               ; $6264: $C3 $85 $23
+    jp_open_dialog $04C                           ; $6262
 
 jr_004_6267:
-    ld   a, $46                                   ; $6267: $3E $46
-    jp   OpenDialog                               ; $6269: $C3 $85 $23
+    jp_open_dialog $046                           ; $6267
 
     ret                                           ; $626C: $C9
 
@@ -5144,8 +5132,7 @@ jr_004_6354:
 
     ld   hl, wEntitiesStateTable                  ; $637A: $21 $90 $C2
     ld   [hl], $03                                ; $637D: $36 $03
-    ld   a, $48                                   ; $637F: $3E $48
-    call OpenDialog                               ; $6381: $CD $85 $23
+    call_open_dialog $048                         ; $637F
     call func_004_6D7A                            ; $6384: $CD $7A $6D
     ld   e, $0F                                   ; $6387: $1E $0F
     ld   d, b                                     ; $6389: $50
@@ -5664,8 +5651,7 @@ jr_004_6677:
 
     ld   hl, wEntitiesStateTable                  ; $667C: $21 $90 $C2
     ld   [hl], $03                                ; $667F: $36 $03
-    ld   a, $49                                   ; $6681: $3E $49
-    call OpenDialog                               ; $6683: $CD $85 $23
+    call_open_dialog $049                         ; $6681
     jp   label_004_6D7A                           ; $6686: $C3 $7A $6D
 
     ld   hl, $C3B0                                ; $6689: $21 $B0 $C3
@@ -7339,8 +7325,7 @@ jr_004_6FF7:
     cp   e                                        ; $6FFC: $BB
     jr   c, jr_004_7004                           ; $6FFD: $38 $05
 
-    ld   a, $40                                   ; $6FFF: $3E $40
-    jp   OpenDialog                               ; $7001: $C3 $85 $23
+    jp_open_dialog $040                           ; $6FFF
 
 jr_004_7004:
     ld   a, [wIsMarinFollowingLink]               ; $7004: $FA $73 $DB
@@ -7385,8 +7370,7 @@ jr_004_7038:
     sbc  $00                                      ; $7040: $DE $00
     jr   nc, jr_004_705D                          ; $7042: $30 $19
 
-    ld   a, $34                                   ; $7044: $3E $34
-    call OpenDialog                               ; $7046: $CD $85 $23
+    call_open_dialog $034                         ; $7044
     jr   jr_004_7056                              ; $7049: $18 $0B
 
 jr_004_704B:
@@ -7394,8 +7378,7 @@ jr_004_704B:
     and  a                                        ; $704E: $A7
     jr   z, jr_004_7056                           ; $704F: $28 $05
 
-    ld   a, $F8                                   ; $7051: $3E $F8
-    jp   OpenDialog                               ; $7053: $C3 $85 $23
+    jp_open_dialog $0F8                           ; $7051
 
 label_004_7056:
 jr_004_7056:
@@ -8366,8 +8349,7 @@ jr_004_75EA:
     cp   $06                                      ; $75EC: $FE $06
     jr   c, jr_004_75F8                           ; $75EE: $38 $08
 
-    ld   a, $F9                                   ; $75F0: $3E $F9
-    call OpenDialog                               ; $75F2: $CD $85 $23
+    call_open_dialog $0F9                         ; $75F0
     jp   IncrementEntityWalkingAttr               ; $75F5: $C3 $12 $3B
 
 jr_004_75F8:
@@ -8806,8 +8788,7 @@ jr_004_77FC:
     cp   $74                                      ; $7824: $FE $74
     jr   nz, jr_004_7838                          ; $7826: $20 $10
 
-    ld   a, $38                                   ; $7828: $3E $38
-    call OpenDialog                               ; $782A: $CD $85 $23
+    call_open_dialog $038                         ; $7828
     ld   hl, wEntitiesStateTable                  ; $782D: $21 $90 $C2
     add  hl, bc                                   ; $7830: $09
     ld   [hl], $04                                ; $7831: $36 $04
@@ -8937,8 +8918,7 @@ jr_004_78A0:
 
     sub  $02                                      ; $78CB: $D6 $02
     ldh  [hLinkPositionY], a                      ; $78CD: $E0 $99
-    ld   a, $2F                                   ; $78CF: $3E $2F
-    jp   OpenDialog                               ; $78D1: $C3 $85 $23
+    jp_open_dialog $02F                           ; $78CF
 
 jr_004_78D4:
     ldh  a, [hLinkPositionY]                      ; $78D4: $F0 $99
@@ -9034,8 +9014,7 @@ jr_004_7940:
     jp   IncrementEntityWalkingAttr               ; $7955: $C3 $12 $3B
 
 jr_004_7958:
-    ld   a, $2E                                   ; $7958: $3E $2E
-    jp   OpenDialog                               ; $795A: $C3 $85 $23
+    jp_open_dialog $02E                           ; $7958
 
     ld   a, [wDialogState]                        ; $795D: $FA $9F $C1
     and  a                                        ; $7960: $A7
@@ -9227,8 +9206,7 @@ jr_004_7A2E:
     ld   [hl], $01                                ; $7A55: $36 $01
     pop  af                                       ; $7A57: $F1
     push af                                       ; $7A58: $F5
-    ld   a, $35                                   ; $7A59: $3E $35
-    call OpenDialog                               ; $7A5B: $CD $85 $23
+    call_open_dialog $035                         ; $7A59
     pop  af                                       ; $7A5E: $F1
 
 label_004_7A5F::

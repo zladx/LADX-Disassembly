@@ -3375,8 +3375,7 @@ label_1FFE::
     ld   a, [wIsMarinFollowingLink]
     and  a
     jr   z, label_2030
-    ld   a, $78
-    call OpenDialogInTable2
+    call_open_dialog $278
     jp   potThrownAtChestEnd
 
 label_2030::

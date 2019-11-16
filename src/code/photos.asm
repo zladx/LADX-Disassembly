@@ -1120,8 +1120,7 @@ JumpTable_037_473B::
 
     xor  a                                      ; $4748: $AF
     ld   [hl], a                                ; $4749: $77
-    ld   a, $0B                                 ; $474A: $3E $0B
-    call OpenDialogInTable1                     ; $474C: $CD $73 $23
+    call_open_dialog $10B                         ; $474A
     call JumpTable_037_46F6.Func_037_4705       ; $474F: $CD $05 $47
     ret                                         ; $4752: $C9
 
@@ -1244,8 +1243,7 @@ JumpTable_037_47E9::
 
     xor  a                                      ; $4817: $AF
     ld   [$C210], a                             ; $4818: $EA $10 $C2
-    ld   a, $3D                                 ; $481B: $3E $3D
-    call OpenDialogInTable2                     ; $481D: $CD $7C $23
+    call_open_dialog $23D                         ; $481B
     call Func_037_47E4                          ; $4820: $CD $E4 $47
     ld   a, $80                                 ; $4823: $3E $80
 .else_4825_37:
@@ -1310,8 +1308,7 @@ JumpTable_037_485E::
 
 
 .else_4876_37:
-    ld   a, $3E                                 ; $4876: $3E $3E
-    call OpenDialogInTable2                     ; $4878: $CD $7C $23
+    call_open_dialog $23E                         ; $4876
     ld   a, $10                                 ; $487B: $3E $10
     ld   [$C213], a                             ; $487D: $EA $13 $C2
     call Func_037_47E4                          ; $4880: $CD $E4 $47
@@ -1352,8 +1349,7 @@ JumpTable_037_48A0::
 
     xor  a                                      ; $48AD: $AF
     ld   [hl], a                                ; $48AE: $77
-    ld   a, $3F                                 ; $48AF: $3E $3F
-    call OpenDialogInTable2                     ; $48B1: $CD $7C $23
+    call_open_dialog $23F                         ; $48AF
     call Func_037_47E4                          ; $48B4: $CD $E4 $47
     ret                                         ; $48B7: $C9
 
@@ -1890,8 +1886,7 @@ JumpTable_037_4C36::
     xor  a                                      ; $4C3E: $AF
     ld   [hl], a                                ; $4C3F: $77
     ld   [$C204], a                             ; $4C40: $EA $04 $C2
-    ld   a, $70                                 ; $4C43: $3E $70
-    call OpenDialogInTable2                     ; $4C45: $CD $7C $23
+    call_open_dialog $270                         ; $4C43
 .Func_037_4C48::
     ld   hl, $C224                              ; $4C48: $21 $24 $C2
     inc  [hl]                                   ; $4C4B: $34
@@ -1991,8 +1986,7 @@ JumpTable_037_4CF9::
 
     xor  a                                      ; $4D11: $AF
     ld   [hl], a                                ; $4D12: $77
-    ld   a, $71                                 ; $4D13: $3E $71
-    call OpenDialogInTable2                     ; $4D15: $CD $7C $23
+    call_open_dialog $271                         ; $4D13
     jp   JumpTable_037_4C36.Func_037_4C48       ; $4D18: $C3 $48 $4C
 
 .else_4D1B_37:
@@ -2018,8 +2012,7 @@ JumpTable_037_4D2E::
     xor  a                                      ; $4D36: $AF
     ld   [hl], a                                ; $4D37: $77
     ld   [$C204], a                             ; $4D38: $EA $04 $C2
-    ld   a, $72                                 ; $4D3B: $3E $72
-    call OpenDialogInTable2                     ; $4D3D: $CD $7C $23
+    call_open_dialog $272                         ; $4D3B
     jp   JumpTable_037_4C36.Func_037_4C48       ; $4D40: $C3 $48 $4C
 
 JumpTable_037_4D43::
@@ -2039,8 +2032,7 @@ JumpTable_037_4D43::
     xor  a                                      ; $4D59: $AF
     ld   [hl], a                                ; $4D5A: $77
     ld   [$C204], a                             ; $4D5B: $EA $04 $C2
-    ld   a, $73                                 ; $4D5E: $3E $73
-    call OpenDialogInTable2                     ; $4D60: $CD $7C $23
+    call_open_dialog $273                         ; $4D5E
     jp   JumpTable_037_4C36.Func_037_4C48       ; $4D63: $C3 $48 $4C
 
 .else_4D66_37:
@@ -2075,8 +2067,7 @@ JumpTable_037_4D7B::
     ld   [$C275], a                             ; $4D93: $EA $75 $C2
     xor  a                                      ; $4D96: $AF
     ld   [hl], a                                ; $4D97: $77
-    ld   a, $75                                 ; $4D98: $3E $75
-    call OpenDialogInTable2                     ; $4D9A: $CD $7C $23
+    call_open_dialog $275                         ; $4D98
     jp   JumpTable_037_4C36.Func_037_4C48       ; $4D9D: $C3 $48 $4C
 
 .else_4DA0_37:
@@ -2096,8 +2087,7 @@ JumpTable_037_4D7B::
 JumpTable_037_4DB5::
     ld   a, $02                                 ; $4DB5: $3E $02
     ld   [$C275], a                             ; $4DB7: $EA $75 $C2
-    ld   a, $74                                 ; $4DBA: $3E $74
-    call OpenDialogInTable2                     ; $4DBC: $CD $7C $23
+    call_open_dialog $274                         ; $4DBA
     jp   JumpTable_037_4C36.Func_037_4C48       ; $4DBF: $C3 $48 $4C
 
 JumpTable_037_4DC2::
@@ -2515,8 +2505,7 @@ Func_037_5028::
     cp   $52                                    ; $5032: $FE $52
     ret  nz                                     ; $5034: $C0
 
-    ld   a, $2E                                 ; $5035: $3E $2E
-    call OpenDialogInTable2                     ; $5037: $CD $7C $23
+    call_open_dialog $22E                         ; $5035
     call JumpTable_037_506F.Func_037_507C       ; $503A: $CD $7C $50
     ld   [hl], $04                              ; $503D: $36 $04
     ret                                         ; $503F: $C9
@@ -2649,8 +2638,7 @@ JumpTable_037_50D5::
     ld   [$C217], a                             ; $50FA: $EA $17 $C2
     xor  a                                      ; $50FD: $AF
     ld   [$C219], a                             ; $50FE: $EA $19 $C2
-    ld   a, $3C                                 ; $5101: $3E $3C
-    call OpenDialogInTable2                     ; $5103: $CD $7C $23
+    call_open_dialog $23C                         ; $5101
     call JumpTable_037_506F.Func_037_507C       ; $5106: $CD $7C $50
     ret                                         ; $5109: $C9
 
@@ -2700,8 +2688,7 @@ JumpTable_037_510A::
     ld   [$C217], a                             ; $5154: $EA $17 $C2
     ld   a, $04                                 ; $5157: $3E $04
     ld   [$C219], a                             ; $5159: $EA $19 $C2
-    ld   a, $49                                 ; $515C: $3E $49
-    call OpenDialogInTable2                     ; $515E: $CD $7C $23
+    call_open_dialog $249                         ; $515C
     call JumpTable_037_506F.Func_037_507C       ; $5161: $CD $7C $50
     ret                                         ; $5164: $C9
 
@@ -2749,8 +2736,7 @@ JumpTable_037_5192::
 
     xor  a                                      ; $519F: $AF
     ld   [$C219], a                             ; $51A0: $EA $19 $C2
-    ld   a, $54                                 ; $51A3: $3E $54
-    call OpenDialogInTable2                     ; $51A5: $CD $7C $23
+    call_open_dialog $254                         ; $51A3
     jp   JumpTable_037_506F.Func_037_507C       ; $51A8: $C3 $7C $50
 
 JumpTable_037_51AB::
@@ -2848,8 +2834,7 @@ JumpTable_037_5228::
     xor  a                                      ; $524A: $AF
     ld   [$C24E], a                             ; $524B: $EA $4E $C2
     call Func_037_49CE                          ; $524E: $CD $CE $49
-    ld   a, $AF                                 ; $5251: $3E $AF
-    call OpenDialogInTable2                     ; $5253: $CD $7C $23
+    call_open_dialog $2AF                         ; $5251
     ret                                         ; $5256: $C9
 
 
@@ -2858,8 +2843,7 @@ JumpTable_037_5257::
     and  a                                      ; $525A: $A7
     ret  nz                                     ; $525B: $C0
 
-    ld   a, $2E                                 ; $525C: $3E $2E
-    call OpenDialogInTable1                     ; $525E: $CD $73 $23
+    call_open_dialog $12E                         ; $525C
     ld   a, $01                                 ; $5261: $3E $01
     ld   [$C201], a                             ; $5263: $EA $01 $C2
     ld   hl, $C202                              ; $5266: $21 $02 $C2
@@ -2908,8 +2892,7 @@ JumpTable_037_527D::
     ret  c                                      ; $52A6: $D8
 
     call Func_037_49CE                          ; $52A7: $CD $CE $49
-    ld   a, $F6                                 ; $52AA: $3E $F6
-    call OpenDialogInTable1                     ; $52AC: $CD $73 $23
+    call_open_dialog $1F6                         ; $52AA
     ret                                         ; $52AF: $C9
 
 

@@ -18,7 +18,7 @@ LiftableRockEntityHandler::
     and  $03                                      ; $5343: $E6 $03
     jr   nz, jr_003_5369                          ; $5345: $20 $22
 
-    ld   a, $2F                                   ; $5347: $3E $2F
+    ld   a, ENTITY_DROPPABLE_FAIRY                ; $5347: $3E $2F
     call SpawnNewEntity                           ; $5349: $CD $CA $64
     jr   c, jr_003_5369                           ; $534C: $38 $1B
 

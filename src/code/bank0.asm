@@ -3492,7 +3492,7 @@ label_2098::
 
 .label_20BF
     callsb func_014_5900
-    callsb label_002_41D0
+    callsb SpawnChestWithItem
 specialCasesEnd:
 
     ld   a, [wAButtonSlot]
@@ -7822,7 +7822,7 @@ label_3E29::
     jp   ReloadSavedBank
 
 label_3E34::
-    callhl func_003_5407
+    callhl SmashRock
     jp   ReloadSavedBank
 
 LoadHeartsAndRuppeesCount::
@@ -7833,7 +7833,7 @@ LoadHeartsAndRuppeesCount::
     jp   ReloadSavedBank
 
 label_3E4D::
-    callsw label_002_41D0
+    callsw SpawnChestWithItem
     ld   a, $03
     jp   SwitchBank
 

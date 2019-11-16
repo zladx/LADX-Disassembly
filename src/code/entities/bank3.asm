@@ -2060,13 +2060,13 @@ label_003_5406:
 jr_003_5406:
     ret                                           ; $5406: $C9
 
-func_003_5407::
-    ld   a, $05                                   ; $5407: $3E $05
+SmashRock::
+    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $5407: $3E $05
     call SpawnNewEntity                           ; $5409: $CD $CA $64
     ret  c                                        ; $540C: $D8
 
     ;
-    ; Smash pot
+    ; Smash rock
     ;
 
     ldh  a, [hScratch0]                           ; $540D: $F0 $D7
@@ -2878,7 +2878,7 @@ jr_003_5858:
     cp   $09                                      ; $5882: $FE $09
     jr   z, jr_003_588D                           ; $5884: $28 $07
 
-    call func_003_5947                            ; $5886: $CD $47 $59
+    call SpawnMoblinArrow                            ; $5886: $CD $47 $59
 
 jr_003_5889:
     call func_003_7893                            ; $5889: $CD $93 $78
@@ -2889,7 +2889,7 @@ jr_003_588D:
     cp   $01                                      ; $5890: $FE $01
     ret  z                                        ; $5892: $C8
 
-    jp   label_003_5998                           ; $5893: $C3 $98 $59
+    jp   SpawnOctorockRock                           ; $5893: $C3 $98 $59
 
 jr_003_5896:
     call GetRandomByte                            ; $5896: $CD $0D $28
@@ -3026,8 +3026,8 @@ jr_003_5921:
     nop                                           ; $5944: $00
     ld   [rNR41], a                               ; $5945: $E0 $20
 
-func_003_5947::
-    ld   a, $0C                                   ; $5947: $3E $0C
+SpawnMoblinArrow::
+    ld   a, ENTITY_MOBLIN_ARROW                   ; $5947: $3E $0C
     call SpawnNewEntity                           ; $5949: $CD $CA $64
     jr   c, jr_003_598B                           ; $594C: $38 $3D
 
@@ -3083,8 +3083,8 @@ jr_003_598B:
     nop                                           ; $5995: $00
     ld   [rNR41], a                               ; $5996: $E0 $20
 
-label_003_5998:
-    ld   a, $0A                                   ; $5998: $3E $0A
+SpawnOctorockRock:
+    ld   a, ENTITY_OCTOROCK_ROCK                  ; $5998: $3E $0A
     call SpawnNewEntity                           ; $599A: $CD $CA $64
     jr   c, jr_003_59D6                           ; $599D: $38 $37
 
@@ -3894,7 +3894,7 @@ jr_003_5E45:
     cp   $18                                      ; $5E46: $FE $18
     jr   nz, jr_003_5E5B                          ; $5E48: $20 $11
 
-    ld   a, $9F                                   ; $5E4A: $3E $9F
+    ld   a, ENTITY_GOOMBA                         ; $5E4A: $3E $9F
     call SpawnNewEntity                           ; $5E4C: $CD $CA $64
     ld   hl, wEntitiesUnknownTableB               ; $5E4F: $21 $B0 $C2
     add  hl, de                                   ; $5E52: $19
@@ -4054,9 +4054,10 @@ jr_003_5F2C:
     call GetEntityTransitionCountdown                 ; $5F33: $CD $05 $0C
     jr   nz, jr_003_5F5F                          ; $5F36: $20 $27
 
-    ld   a, $2B                                   ; $5F38: $3E $2B
+    ld   a, JINGLE_INSTRUMENT_WARP                ; $5F38: $3E $2B
     ldh  [hJingle], a                             ; $5F3A: $E0 $F2
-    ld   a, $39                                   ; $5F3C: $3E $39
+
+    ld   a, ENTITY_INSTRUMENT_OF_THE_SIRENS       ; $5F3C: $3E $39
     call SpawnNewEntity                           ; $5F3E: $CD $CA $64
     ldh  a, [hScratch0]                           ; $5F41: $F0 $D7
     dec  a                                        ; $5F43: $3D
@@ -5795,9 +5796,10 @@ jr_003_695D:
 
 jr_003_6964:
     call func_014_5526_trampoline                 ; $6964: $CD $78 $21
-    ld   a, $05                                   ; $6967: $3E $05
+
+    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $6967: $3E $05
     call SpawnNewEntity                           ; $6969: $CD $CA $64
-    jr   c, jr_003_69A0                           ; $696C: $38 $32
+    jr   c, .return                               ; $696C: $38 $32
 
     xor  a                                        ; $696E: $AF
     ld   [$C19B], a                               ; $696F: $EA $9B $C1
@@ -5819,19 +5821,19 @@ jr_003_6964:
     ldh  [hActiveEntitySpriteVariant], a               ; $698E: $E0 $F1
     ldh  a, [hFFE9]                               ; $6990: $F0 $E9
     cp   $0A                                      ; $6992: $FE $0A
-    jr   nz, jr_003_699B                          ; $6994: $20 $05
+    jr   nz, .jr_003_699B                         ; $6994: $20 $05
 
     ld   a, $FF                                   ; $6996: $3E $FF
     ld   [hl], a                                  ; $6998: $77
     ldh  [hActiveEntitySpriteVariant], a               ; $6999: $E0 $F1
 
-jr_003_699B:
+.jr_003_699B
     ld   c, e                                     ; $699B: $4B
     ld   b, d                                     ; $699C: $42
     call func_003_53E4                            ; $699D: $CD $E4 $53
 
+.return
 label_003_69A0:
-jr_003_69A0:
     pop  bc                                       ; $69A0: $C1
     ret                                           ; $69A1: $C9
 
@@ -5874,7 +5876,7 @@ Func_003_6A70::
     call GetEntityTransitionCountdown             ; $6A70:
     jr   z, jr_003_6A96                           ; $6A73: $28 $21
 
-    ld   a, $02                                   ; $6A75: $3E $02
+    ld   a, ENTITY_BOMB                           ; $6A75: $3E $02
     call SpawnNewEntity                           ; $6A77: $CD $CA $64
     jr   c, jr_003_6A93                           ; $6A7A: $38 $17
 
@@ -8111,7 +8113,8 @@ jr_003_76AC:
 
     ld   [hl], $01                                ; $76E5: $36 $01
     push de                                       ; $76E7: $D5
-    ld   a, $32                                   ; $76E8: $3E $32
+
+    ld   a, ENTITY_32                             ; $76E8: $3E $32
     call SpawnNewEntity                           ; $76EA: $CD $CA $64
     jr   c, jr_003_770D                           ; $76ED: $38 $1E
 
@@ -9237,9 +9240,10 @@ jr_003_7CFD:
     jr   z, jr_003_7D6B                           ; $7D07: $28 $62
 
     push hl                                       ; $7D09: $E5
-    ld   a, $12                                   ; $7D0A: $3E $12
-    ldh  [hNoiseSfx], a                            ; $7D0C: $E0 $F4
-    ld   a, $08                                   ; $7D0E: $3E $08
+    ld   a, NOISE_SFX_BURSTING_FLAME              ; $7D0A: $3E $12
+    ldh  [hNoiseSfx], a                           ; $7D0C: $E0 $F4
+
+    ld   a, ENTITY_MAGIC_POWDER_SPRINKLE          ; $7D0E: $3E $08
     call SpawnNewEntity                           ; $7D10: $CD $CA $64
     jr   c, jr_003_7D6A                           ; $7D13: $38 $55
 

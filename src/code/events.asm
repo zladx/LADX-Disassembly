@@ -103,7 +103,7 @@ EventEffectGuard::
 DropFairyEffectHandler::
     call EventEffectGuard                         ; $5DC2: $CD $AF $5D
 
-    ld   a, $2F                                   ; $5DC5: $3E $2F
+    ld   a, ENTITY_DROPPABLE_FAIRY                ; $5DC5: $3E $2F
     call SpawnNewEntity_trampoline                ; $5DC7: $CD $86 $3B
 
     ld   hl, wEntitiesPosXTable                   ; $5DCA: $21 $00 $C2

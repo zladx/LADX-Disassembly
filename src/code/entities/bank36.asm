@@ -1213,7 +1213,8 @@ jr_036_4709:
     jp   IncrementEntityWalkingAttr               ; $471B: $C3 $12 $3B
 
 func_036_471E:
-    ld   a, $DD                                   ; $471E: $3E $DD
+
+    ld   a, ENTITY_BOOK                           ; $471E: $3E $DD
     call SpawnNewEntity_trampoline                ; $4720: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                         ; $4723: $21 $00 $C2
     add  hl, de                                   ; $4726: $19

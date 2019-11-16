@@ -117,7 +117,7 @@ jr_017_4509:
     cp   $27                                      ; $450B: $FE $27
     jr   nz, jr_017_4514                          ; $450D: $20 $05
 
-    ldh  a, [$FFFE]                               ; $450F: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $450F: $F0 $FE
     and  a                                        ; $4511: $A7
     jr   z, jr_017_4519                           ; $4512: $28 $05
 
@@ -209,7 +209,7 @@ Func_017_45BA::
     cp   $26                                      ; $45BF: $FE $26
     jr   c, jr_017_45F9                           ; $45C1: $38 $36
 
-    ldh  a, [$FFFE]                               ; $45C3: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $45C3: $F0 $FE
     and  a                                        ; $45C5: $A7
     jr   z, jr_017_45E8                           ; $45C6: $28 $20
 
@@ -283,9 +283,10 @@ jr_017_462F:
     ret                                           ; $462F: $C9
 
 Func_017_4630::
-    ld   a, $E8                                   ; $4630: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $4632: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                                ; $4635: $21 $00 $C2
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $4630: $3E $E8
+    call SpawnNewEntity_trampoline                ; $4632: $CD $86 $3B
+
+    ld   hl, wEntitiesPosXTable                   ; $4635: $21 $00 $C2
     add  hl, de                                   ; $4638: $19
     ld   [hl], $E0                                ; $4639: $36 $E0
     ld   hl, wEntitiesPosYTable                                ; $463B: $21 $10 $C2
@@ -300,7 +301,7 @@ Func_017_4630::
     ld   hl, $C2B0                                ; $464D: $21 $B0 $C2
     add  hl, de                                   ; $4650: $19
     ld   [hl], $10                                ; $4651: $36 $10
-    ldh  a, [$FFFE]                               ; $4653: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $4653: $F0 $FE
     and  a                                        ; $4655: $A7
     jp   z, label_017_45B5                        ; $4656: $CA $B5 $45
 
@@ -361,7 +362,7 @@ func_017_469D:
 jr_017_46BD:
     add  hl, de                                   ; $46BD: $19
     ld   de, wDynamicOAMBuffer                    ; $46BE: $11 $30 $C0
-    ldh  a, [$FFFE]                               ; $46C1: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $46C1: $F0 $FE
     and  a                                        ; $46C3: $A7
     jr   z, jr_017_46C9                           ; $46C4: $28 $03
 
@@ -473,7 +474,7 @@ func_017_4784:
     xor  a                                        ; $47A3: $AF
     ldh  [hScratch1], a                               ; $47A4: $E0 $D8
     ld   de, $C054                                ; $47A6: $11 $54 $C0
-    ldh  a, [$FFFE]                               ; $47A9: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $47A9: $F0 $FE
     and  a                                        ; $47AB: $A7
     jr   z, jr_017_47B1                           ; $47AC: $28 $03
 
@@ -486,7 +487,7 @@ jr_017_47B1:
     inc  [hl]                                     ; $47B9: $34
     pop  hl                                       ; $47BA: $E1
     ld   de, $C078                                ; $47BB: $11 $78 $C0
-    ldh  a, [$FFFE]                               ; $47BE: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $47BE: $F0 $FE
     and  a                                        ; $47C0: $A7
     jr   z, jr_017_47C6                           ; $47C1: $28 $03
 
@@ -716,7 +717,7 @@ ApplyWindFishVfx::
     ld   [hl+], a                                 ; $4909: $22
     ld   [hl+], a                                 ; $490A: $22
     ld   [hl+], a                                 ; $490B: $22
-    ldh  a, [$FFFE]                               ; $490C: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $490C: $F0 $FE
     and  a                                        ; $490E: $A7
     jr   nz, jr_017_4964                          ; $490F: $20 $53
 
@@ -980,7 +981,7 @@ CreditsFadeoutHandler::
     jp   label_017_4C22                           ; $4BF4: $C3 $22 $4C
 
 jr_017_4BF7:
-    ldh  a, [$FFFE]                               ; $4BF7: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $4BF7: $F0 $FE
     and  a                                        ; $4BF9: $A7
     jr   z, jr_017_4C03                           ; $4BFA: $28 $07
 
@@ -1126,7 +1127,7 @@ CreditsStairsPrepare2Handler::
     ld   a, $16                                   ; $4CDE: $3E $16
     ld   [wBGMapToLoad], a                        ; $4CE0: $EA $FF $D6
 
-    ld   a, $E8                                   ; $4CE3: $3E $E8
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $4CE3: $3E $E8
     call SpawnNewEntity_trampoline                ; $4CE5: $CD $86 $3B
 
     ;
@@ -1141,7 +1142,7 @@ CreditsStairsPrepare2Handler::
     add  hl, de                                   ; $4CF1: $19
     ld   [hl], $E0                                ; $4CF2: $36 $E0
 
-    ld   a, $E8                                   ; $4CF4: $3E $E8
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $4CF4: $3E $E8
     call SpawnNewEntity_trampoline                ; $4CF6: $CD $86 $3B
 
     ld   hl, wEntitiesUnknownTableB               ; $4CF9: $21 $B0 $C2
@@ -1180,7 +1181,7 @@ jr_017_4D3D:
     call IncrementCreditsSubscene                            ; $4D4F: $CD $D9 $4C
 
 jr_017_4D52:
-    ldh  a, [$FFFE]                               ; $4D52: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $4D52: $F0 $FE
     and  a                                        ; $4D54: $A7
     jr   z, jr_017_4D5E                           ; $4D55: $28 $07
 
@@ -1297,7 +1298,7 @@ jr_017_4E3D:
     ret                                           ; $4E45: $C9
 
 CreditsStairsOwlSpeechHandler::
-    ldh  a, [$FFFE]                               ; $4E46: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $4E46: $F0 $FE
     and  a                                        ; $4E48: $A7
     ret  z                                        ; $4E49: $C8
 
@@ -1355,7 +1356,7 @@ CreditsWindFishPrepare1Handler::
     jp   IncrementCreditsSubsceneAndReturn                           ; $4E90: $C3 $D9 $4C
 
 func_017_4E93:
-    ldh  a, [$FFFE]                               ; $4E93: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $4E93: $F0 $FE
     and  a                                        ; $4E95: $A7
     ret  z                                        ; $4E96: $C8
 
@@ -1528,7 +1529,7 @@ jr_017_5115:
     jr   nz, jr_017_5115                          ; $5119: $20 $FA
 
     pop  de                                       ; $511B: $D1
-    ldh  a, [$FFFE]                               ; $511C: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $511C: $F0 $FE
     and  a                                        ; $511E: $A7
     ret  z                                        ; $511F: $C8
 
@@ -1554,7 +1555,7 @@ CreditsWindFishApparitionHandler::
     ldh  a, [hFrameCounter]                               ; $5140: $F0 $E7
     and  $03                                      ; $5142: $E6 $03
     ld   e, a                                     ; $5144: $5F
-    ldh  a, [$FFFE]                               ; $5145: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $5145: $F0 $FE
     and  a                                        ; $5147: $A7
     jr   z, jr_017_5151                           ; $5148: $28 $07
 
@@ -1772,7 +1773,7 @@ CreditsWindFishDisapparitionHandler::
     ldh  a, [hFrameCounter]                               ; $542E: $F0 $E7
     and  $03                                      ; $5430: $E6 $03
     ld   e, a                                     ; $5432: $5F
-    ldh  a, [$FFFE]                               ; $5433: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $5433: $F0 $FE
     and  a                                        ; $5435: $A7
     jr   z, jr_017_543E                           ; $5436: $28 $06
 
@@ -1880,7 +1881,7 @@ jr_017_54EA:
     xor  a                                        ; $54F0: $AF
     ld   [de], a                                  ; $54F1: $12
     pop  de                                       ; $54F2: $D1
-    ldh  a, [$FFFE]                               ; $54F3: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $54F3: $F0 $FE
     and  a                                        ; $54F5: $A7
 
 jr_017_54F6:
@@ -1965,8 +1966,9 @@ CreditsLinkPreparesToPlayHandler::
     ld   [$D368], a                               ; $5577: $EA $68 $D3
 
 jr_017_557A:
-    ld   a, $E8                                   ; $557A: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $557C: $CD $86 $3B
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $557A: $3E $E8
+    call SpawnNewEntity_trampoline                ; $557C: $CD $86 $3B
+
     ld   a, [$D000]                               ; $557F: $FA $00 $D0
     ld   c, a                                     ; $5582: $4F
     ld   b, $00                                   ; $5583: $06 $00
@@ -2058,15 +2060,15 @@ CreditsInstrumentsPlayingHandler::
     ld   a, [$D000]                              ; $55FD: $FA $00 $D0
     JP_TABLE                                     ; $5600
 ._00 dw Func_017_5665                            ; $5601
-._01 dw Func_017_56C9                            ; $5603
+._01 dw MrsMeowMeowsHouseSceneHandler            ; $5603
 ._02 dw Func_017_5728                            ; $5605
-._03 dw Func_017_573D                            ; $5607
+._03 dw KidsSceneHandler                         ; $5607
 ._04 dw Func_017_5794                            ; $5609
-._05 dw Func_017_57A2                            ; $560B
+._05 dw BeachSceneHandler                        ; $560B
 ._06 dw Func_017_57F9                            ; $560D
-._07 dw Func_017_5807                            ; $560F
+._07 dw TarinSceneHandler                        ; $560F
 ._08 dw Func_017_583C                            ; $5611
-._09 dw Func_017_584A                            ; $5613
+._09 dw MarinSingingSceneHandler                 ; $5613
 ._0A dw Func_017_58C3                            ; $5615
 ._0B dw Func_017_58D1                            ; $5617
 ._0C dw Func_017_58F0                            ; $5619
@@ -2125,7 +2127,7 @@ Func_017_5665::
     jp   IncrementD000AndReturn                       ; $5686: $C3 $25 $56
 
 jr_017_5689:
-    ldh  a, [$FFFE]                               ; $5689: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $5689: $F0 $FE
     and  a                                        ; $568B: $A7
     jr   z, jr_017_5695                           ; $568C: $28 $07
 
@@ -2168,10 +2170,10 @@ jr_017_56C4:
     ld   [hl], e                                  ; $56C7: $73
     ret                                           ; $56C8: $C9
 
-Func_017_56C9::
+MrsMeowMeowsHouseSceneHandler::
     xor  a                                        ; $56C9: $AF
     ld   [$D00A], a                               ; $56CA: $EA $0A $D0
-    ldh  a, [$FFFE]                               ; $56CD: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $56CD: $F0 $FE
     and  a                                        ; $56CF: $A7
     jr   z, jr_017_56D7                           ; $56D0: $28 $05
 
@@ -2183,7 +2185,7 @@ jr_017_56D7:
     ld   [wBGMapToLoad], a                               ; $56D9: $EA $FF $D6
 
 jr_017_56DC:
-    ld   a, $6D                                   ; $56DC: $3E $6D
+    ld   a, ENTITY_BOW_WOW                        ; $56DC: $3E $6D
     call SpawnNewEntity_trampoline                ; $56DE: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $56E1: $21 $00 $C2
     add  hl, de                                   ; $56E4: $19
@@ -2191,24 +2193,27 @@ jr_017_56DC:
     ld   hl, wEntitiesPosYTable                                ; $56E7: $21 $10 $C2
     add  hl, de                                   ; $56EA: $19
     ld   [hl], $50                                ; $56EB: $36 $50
-    ld   a, $6F                                   ; $56ED: $3E $6F
-    call SpawnNewEntity_trampoline                                    ; $56EF: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                                ; $56F2: $21 $00 $C2
+
+    ld   a, ENTITY_DOG                            ; $56ED: $3E $6F
+    call SpawnNewEntity_trampoline                ; $56EF: $CD $86 $3B
+    ld   hl, wEntitiesPosXTable                   ; $56F2: $21 $00 $C2
     add  hl, de                                   ; $56F5: $19
     ld   [hl], $68                                ; $56F6: $36 $68
     ld   hl, wEntitiesPosYTable                                ; $56F8: $21 $10 $C2
     add  hl, de                                   ; $56FB: $19
     ld   [hl], $30                                ; $56FC: $36 $30
-    ld   a, $78                                   ; $56FE: $3E $78
-    call SpawnNewEntity_trampoline                                    ; $5700: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                                ; $5703: $21 $00 $C2
+
+    ld   a, ENTITY_YIP_YIP                        ; $56FE: $3E $78
+    call SpawnNewEntity_trampoline                ; $5700: $CD $86 $3B
+    ld   hl, wEntitiesPosXTable                   ; $5703: $21 $00 $C2
     add  hl, de                                   ; $5706: $19
     ld   [hl], $2C                                ; $5707: $36 $2C
     ld   hl, wEntitiesPosYTable                                ; $5709: $21 $10 $C2
     add  hl, de                                   ; $570C: $19
     ld   [hl], $58                                ; $570D: $36 $58
-    ld   a, $78                                   ; $570F: $3E $78
-    call SpawnNewEntity_trampoline                                    ; $5711: $CD $86 $3B
+
+    ld   a, ENTITY_YIP_YIP                        ; $570F: $3E $78
+    call SpawnNewEntity_trampoline                ; $5711: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5714: $21 $00 $C2
     add  hl, de                                   ; $5717: $19
     ld   [hl], $60                                ; $5718: $36 $60
@@ -2239,7 +2244,7 @@ func_017_5736:
     nop                                           ; $573B: $00
     ret                                           ; $573C: $C9
 
-Func_017_573D::
+KidsSceneHandler::
     ld   a, [$D006]                               ; $573D: $FA $06 $D0
     and  a                                        ; $5740: $A7
     jr   nz, jr_017_5793                          ; $5741: $20 $50
@@ -2248,7 +2253,7 @@ Func_017_573D::
     call func_017_59FD                            ; $5746: $CD $FD $59
     jr   nz, jr_017_5793                          ; $5749: $20 $48
 
-    ldh  a, [$FFFE]                               ; $574B: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $574B: $F0 $FE
     and  a                                        ; $574D: $A7
     jr   z, jr_017_5755                           ; $574E: $28 $05
 
@@ -2261,12 +2266,13 @@ jr_017_5755:
 
 jr_017_575A:
     call DisableAllEntities                       ; $575A: $CD $2A $56
-    ld   a, $71                                   ; $575D: $3E $71
-    call SpawnNewEntity_trampoline                                    ; $575F: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                                ; $5762: $21 $00 $C2
+
+    ld   a, ENTITY_KID_71                         ; $575D: $3E $71
+    call SpawnNewEntity_trampoline                ; $575F: $CD $86 $3B
+    ld   hl, wEntitiesPosXTable                   ; $5762: $21 $00 $C2
     add  hl, de                                   ; $5765: $19
     ld   [hl], $48                                ; $5766: $36 $48
-    ld   hl, wEntitiesPosYTable                                ; $5768: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $5768: $21 $10 $C2
     add  hl, de                                   ; $576B: $19
     ld   [hl], $50                                ; $576C: $36 $50
     ld   hl, $C290                                ; $576E: $21 $90 $C2
@@ -2278,15 +2284,16 @@ jr_017_575A:
     ld   hl, wEntitiesUnknowTableQ                ; $5779: $21 $80 $C3
     add  hl, de                                   ; $577C: $19
     ld   [hl], $02                                ; $577D: $36 $02
-    ld   a, $72                                   ; $577F: $3E $72
-    call SpawnNewEntity_trampoline                                    ; $5781: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                                ; $5784: $21 $00 $C2
+
+    ld   a, ENTITY_KID_72                         ; $577F: $3E $72
+    call SpawnNewEntity_trampoline                ; $5781: $CD $86 $3B
+    ld   hl, wEntitiesPosXTable                   ; $5784: $21 $00 $C2
     add  hl, de                                   ; $5787: $19
     ld   [hl], $78                                ; $5788: $36 $78
-    ld   hl, wEntitiesPosYTable                                ; $578A: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $578A: $21 $10 $C2
     add  hl, de                                   ; $578D: $19
     ld   [hl], $50                                ; $578E: $36 $50
-    jp   IncrementD000AndReturn                                    ; $5790: $C3 $25 $56
+    jp   IncrementD000AndReturn                   ; $5790: $C3 $25 $56
 
 jr_017_5793:
     ret                                           ; $5793: $C9
@@ -2302,7 +2309,7 @@ Func_017_5794::
 jr_017_57A1:
     ret                                           ; $57A1: $C9
 
-Func_017_57A2::
+BeachSceneHandler::
     ld   a, [$D006]                               ; $57A2: $FA $06 $D0
     and  a                                        ; $57A5: $A7
     jr   nz, jr_017_57F8                          ; $57A6: $20 $50
@@ -2311,7 +2318,7 @@ Func_017_57A2::
     call func_017_59FD                            ; $57AB: $CD $FD $59
     jr   nz, jr_017_57F8                          ; $57AE: $20 $48
 
-    ldh  a, [$FFFE]                               ; $57B0: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $57B0: $F0 $FE
     and  a                                        ; $57B2: $A7
     jr   z, jr_017_57BA                           ; $57B3: $28 $05
 
@@ -2324,31 +2331,34 @@ jr_017_57BA:
 
 jr_017_57BF:
     call DisableAllEntities                       ; $57BF: $CD $2A $56
-    ld   a, $C5                                   ; $57C2: $3E $C5
-    call SpawnNewEntity_trampoline                                    ; $57C4: $CD $86 $3B
+
+    ld   a, ENTITY_URCHIN                         ; $57C2: $3E $C5
+    call SpawnNewEntity_trampoline                ; $57C4: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $57C7: $21 $00 $C2
     add  hl, de                                   ; $57CA: $19
     ld   [hl], $28                                ; $57CB: $36 $28
     ld   hl, wEntitiesPosYTable                                ; $57CD: $21 $10 $C2
     add  hl, de                                   ; $57D0: $19
     ld   [hl], $40                                ; $57D1: $36 $40
-    ld   a, $09                                   ; $57D3: $3E $09
-    call SpawnNewEntity_trampoline                                    ; $57D5: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                                ; $57D8: $21 $00 $C2
+
+    ld   a, ENTITY_OCTOROCK                       ; $57D3: $3E $09
+    call SpawnNewEntity_trampoline                ; $57D5: $CD $86 $3B
+    ld   hl, wEntitiesPosXTable                   ; $57D8: $21 $00 $C2
     add  hl, de                                   ; $57DB: $19
     ld   [hl], $48                                ; $57DC: $36 $48
     ld   hl, wEntitiesPosYTable                                ; $57DE: $21 $10 $C2
     add  hl, de                                   ; $57E1: $19
     ld   [hl], $50                                ; $57E2: $36 $50
-    ld   a, $09                                   ; $57E4: $3E $09
-    call SpawnNewEntity_trampoline                                    ; $57E6: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                                ; $57E9: $21 $00 $C2
+
+    ld   a, ENTITY_OCTOROCK                       ; $57E4: $3E $09
+    call SpawnNewEntity_trampoline                ; $57E6: $CD $86 $3B
+    ld   hl, wEntitiesPosXTable                   ; $57E9: $21 $00 $C2
     add  hl, de                                   ; $57EC: $19
     ld   [hl], $68                                ; $57ED: $36 $68
-    ld   hl, wEntitiesPosYTable                                ; $57EF: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $57EF: $21 $10 $C2
     add  hl, de                                   ; $57F2: $19
     ld   [hl], $60                                ; $57F3: $36 $60
-    jp   IncrementD000AndReturn                                    ; $57F5: $C3 $25 $56
+    jp   IncrementD000AndReturn                   ; $57F5: $C3 $25 $56
 
 jr_017_57F8:
     ret                                           ; $57F8: $C9
@@ -2364,7 +2374,7 @@ Func_017_57F9::
 jr_017_5806:
     ret                                           ; $5806: $C9
 
-Func_017_5807::
+TarinSceneHandler::
     ld   a, [$D006]                               ; $5807: $FA $06 $D0
     and  a                                        ; $580A: $A7
     jr   nz, jr_017_583B                          ; $580B: $20 $2E
@@ -2373,7 +2383,7 @@ Func_017_5807::
     call func_017_59FD                            ; $5810: $CD $FD $59
     jr   nz, jr_017_583B                          ; $5813: $20 $26
 
-    ldh  a, [$FFFE]                               ; $5815: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $5815: $F0 $FE
     and  a                                        ; $5817: $A7
     jr   z, jr_017_581F                           ; $5818: $28 $05
 
@@ -2386,8 +2396,9 @@ jr_017_581F:
 
 jr_017_5824:
     call DisableAllEntities                       ; $5824: $CD $2A $56
-    ld   a, $3F                                   ; $5827: $3E $3F
-    call SpawnNewEntity_trampoline                                    ; $5829: $CD $86 $3B
+
+    ld   a, ENTITY_RACOON                         ; $5827: $3E $3F
+    call SpawnNewEntity_trampoline                ; $5829: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $582C: $21 $00 $C2
     add  hl, de                                   ; $582F: $19
     ld   [hl], $78                                ; $5830: $36 $78
@@ -2410,7 +2421,7 @@ Func_017_583C::
 jr_017_5849:
     ret                                           ; $5849: $C9
 
-Func_017_584A::
+MarinSingingSceneHandler
     ld   a, [$D006]                               ; $584A: $FA $06 $D0
     and  a                                        ; $584D: $A7
     jr   nz, jr_017_58C2                          ; $584E: $20 $72
@@ -2419,7 +2430,7 @@ Func_017_584A::
     call func_017_59FD                            ; $5853: $CD $FD $59
     jr   nz, jr_017_58C2                          ; $5856: $20 $6A
 
-    ldh  a, [$FFFE]                               ; $5858: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $5858: $F0 $FE
     and  a                                        ; $585A: $A7
     jr   z, jr_017_5862                           ; $585B: $28 $05
 
@@ -2432,40 +2443,45 @@ jr_017_5862:
 
 jr_017_5867:
     call DisableAllEntities                       ; $5867: $CD $2A $56
-    ld   a, $3E                                   ; $586A: $3E $3E
-    call SpawnNewEntity_trampoline                                    ; $586C: $CD $86 $3B
+
+    ld   a, ENTITY_MARIN                          ; $586A: $3E $3E
+    call SpawnNewEntity_trampoline                ; $586C: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $586F: $21 $00 $C2
     add  hl, de                                   ; $5872: $19
     ld   [hl], $28                                ; $5873: $36 $28
     ld   hl, wEntitiesPosYTable                                ; $5875: $21 $10 $C2
     add  hl, de                                   ; $5878: $19
     ld   [hl], $50                                ; $5879: $36 $50
-    ld   a, $6E                                   ; $587B: $3E $6E
-    call SpawnNewEntity_trampoline                                    ; $587D: $CD $86 $3B
+
+    ld   a, ENTITY_BUTTERFLY                      ; $587B: $3E $6E
+    call SpawnNewEntity_trampoline                ; $587D: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5880: $21 $00 $C2
     add  hl, de                                   ; $5883: $19
     ld   [hl], $18                                ; $5884: $36 $18
     ld   hl, wEntitiesPosYTable                                ; $5886: $21 $10 $C2
     add  hl, de                                   ; $5889: $19
     ld   [hl], $4C                                ; $588A: $36 $4C
-    ld   a, $6E                                   ; $588C: $3E $6E
-    call SpawnNewEntity_trampoline                                    ; $588E: $CD $86 $3B
+
+    ld   a, ENTITY_BUTTERFLY                      ; $588C: $3E $6E
+    call SpawnNewEntity_trampoline                ; $588E: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5891: $21 $00 $C2
     add  hl, de                                   ; $5894: $19
     ld   [hl], $38                                ; $5895: $36 $38
     ld   hl, wEntitiesPosYTable                                ; $5897: $21 $10 $C2
     add  hl, de                                   ; $589A: $19
     ld   [hl], $54                                ; $589B: $36 $54
-    ld   a, $6E                                   ; $589D: $3E $6E
-    call SpawnNewEntity_trampoline                                    ; $589F: $CD $86 $3B
+
+    ld   a, ENTITY_BUTTERFLY                      ; $589D: $3E $6E
+    call SpawnNewEntity_trampoline                ; $589F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $58A2: $21 $00 $C2
     add  hl, de                                   ; $58A5: $19
     ld   [hl], $28                                ; $58A6: $36 $28
     ld   hl, wEntitiesPosYTable                                ; $58A8: $21 $10 $C2
     add  hl, de                                   ; $58AB: $19
     ld   [hl], $30                                ; $58AC: $36 $30
-    ld   a, $6F                                   ; $58AE: $3E $6F
-    call SpawnNewEntity_trampoline                                    ; $58B0: $CD $86 $3B
+
+    ld   a, ENTITY_DOG                            ; $58AE: $3E $6F
+    call SpawnNewEntity_trampoline                ; $58B0: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $58B3: $21 $00 $C2
     add  hl, de                                   ; $58B6: $19
     ld   [hl], $78                                ; $58B7: $36 $78
@@ -2613,7 +2629,7 @@ func_017_5970:
     ld   a, [$D00A]                               ; $5976: $FA $0A $D0
     inc  a                                        ; $5979: $3C
     ld   [$D00A], a                               ; $597A: $EA $0A $D0
-    ldh  a, [$FFFE]                               ; $597D: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $597D: $F0 $FE
     and  a                                        ; $597F: $A7
     jr   z, jr_017_598F                           ; $5980: $28 $0D
 
@@ -2649,7 +2665,7 @@ func_017_59A9:
     ld   a, [$D00A]                               ; $59AF: $FA $0A $D0
     inc  a                                        ; $59B2: $3C
     ld   [$D00A], a                               ; $59B3: $EA $0A $D0
-    ldh  a, [$FFFE]                               ; $59B6: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $59B6: $F0 $FE
     and  a                                        ; $59B8: $A7
     jr   z, jr_017_59C7                           ; $59B9: $28 $0C
 
@@ -2716,7 +2732,7 @@ func_017_59FD:
     ld   a, [$D00A]                               ; $5A03: $FA $0A $D0
     inc  a                                        ; $5A06: $3C
     ld   [$D00A], a                               ; $5A07: $EA $0A $D0
-    ldh  a, [$FFFE]                               ; $5A0A: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $5A0A: $F0 $FE
     and  a                                        ; $5A0C: $A7
 
 jr_017_5A0D:
@@ -2803,7 +2819,7 @@ Func_017_5A66::
     xor  a                                        ; $5A8A: $AF
     ld   [$DDD5], a                               ; $5A8B: $EA $D5 $DD
     ld   a, $E8                                   ; $5A8E: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $5A90: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $5A90: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5A93: $21 $00 $C2
     add  hl, de                                   ; $5A96: $19
     ld   [hl], $40                                ; $5A97: $36 $40
@@ -2814,7 +2830,7 @@ Func_017_5A66::
     add  hl, de                                   ; $5AA2: $19
     ld   [hl], $02                                ; $5AA3: $36 $02
     ld   a, $E8                                   ; $5AA5: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $5AA7: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $5AA7: $CD $86 $3B
     ld   hl, $C2B0                                ; $5AAA: $21 $B0 $C2
     add  hl, de                                   ; $5AAD: $19
     inc  [hl]                                     ; $5AAE: $34
@@ -3007,7 +3023,7 @@ func_017_5B96:
     ld   [$D000], a                               ; $5BB8: $EA $00 $D0
 
 jr_017_5BBB:
-    ldh  a, [$FFFE]                               ; $5BBB: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $5BBB: $F0 $FE
     and  a                                        ; $5BBD: $A7
     jp   nz, label_017_5BD0                       ; $5BBE: $C2 $D0 $5B
 
@@ -3220,7 +3236,7 @@ jr_017_5F75:
     jr   nz, jr_017_5F75                          ; $5F79: $20 $FA
 
     pop  hl                                       ; $5F7B: $E1
-    ldh  a, [$FFFE]                               ; $5F7C: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $5F7C: $F0 $FE
     and  a                                        ; $5F7E: $A7
     ret  z                                        ; $5F7F: $C8
 
@@ -3278,7 +3294,7 @@ jr_017_5FC9:
 jr_017_5FEF:
     inc  a                                        ; $5FEF: $3C
     ld   [$D00A], a                               ; $5FF0: $EA $0A $D0
-    ldh  a, [$FFFE]                               ; $5FF3: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $5FF3: $F0 $FE
     and  a                                        ; $5FF5: $A7
     jr   z, jr_017_5FFF                           ; $5FF6: $28 $07
 
@@ -3346,7 +3362,7 @@ LinkOnSeaLarge0Handler::
     xor  a                                        ; $6063: $AF
     ld   [$DDD5], a                               ; $6064: $EA $D5 $DD
     call ResetCreditsSceneVariables                            ; $6067: $CD $A5 $4D
-    ldh  a, [$FFFE]                               ; $606A: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $606A: $F0 $FE
     and  a                                        ; $606C: $A7
     jp   z, IncrementCreditsSubsceneAndReturn     ; $606D: $CA $D9 $4C
 
@@ -3357,8 +3373,9 @@ LinkOnSeaLarge0Handler::
 LinkOnSeaLarge1Handler::
     ld   a, $17                                   ; $6078: $3E $17
     ld   [wBGMapToLoad], a                               ; $607A: $EA $FF $D6
-    ld   a, $E8                                   ; $607D: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $607F: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $607D: $3E $E8
+    call SpawnNewEntity_trampoline                ; $607F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6082: $21 $00 $C2
     add  hl, de                                   ; $6085: $19
     ld   [hl], $48                                ; $6086: $36 $48
@@ -3368,8 +3385,9 @@ LinkOnSeaLarge1Handler::
     ld   hl, $C2B0                                ; $608E: $21 $B0 $C2
     add  hl, de                                   ; $6091: $19
     ld   [hl], $04                                ; $6092: $36 $04
-    ld   a, $E8                                   ; $6094: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $6096: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6094: $3E $E8
+    call SpawnNewEntity_trampoline                ; $6096: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6099: $21 $00 $C2
     add  hl, de                                   ; $609C: $19
     ld   [hl], $28                                ; $609D: $36 $28
@@ -3379,8 +3397,9 @@ LinkOnSeaLarge1Handler::
     ld   hl, $C2B0                                ; $60A5: $21 $B0 $C2
     add  hl, de                                   ; $60A8: $19
     ld   [hl], $05                                ; $60A9: $36 $05
-    ld   a, $E8                                   ; $60AB: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $60AD: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $60AB: $3E $E8
+    call SpawnNewEntity_trampoline                ; $60AD: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $60B0: $21 $00 $C2
     add  hl, de                                   ; $60B3: $19
     ld   [hl], $78                                ; $60B4: $36 $78
@@ -3460,9 +3479,10 @@ CreditsSunAbove0Handler::
 
 CreditsSunAbove1Handler::
     ld   a, $18                                   ; $6149: $3E $18
-    ld   [wBGMapToLoad], a                               ; $614B: $EA $FF $D6
-    ld   a, $E8                                   ; $614E: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $6150: $CD $86 $3B
+    ld   [wBGMapToLoad], a                        ; $614B: $EA $FF $D6
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $614E: $3E $E8
+    call SpawnNewEntity_trampoline                ; $6150: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6153: $21 $00 $C2
     add  hl, de                                   ; $6156: $19
     ld   [hl], $18                                ; $6157: $36 $18
@@ -3475,8 +3495,9 @@ CreditsSunAbove1Handler::
     ld   hl, wEntitiesSpeedXTable                                ; $6165: $21 $40 $C2
     add  hl, de                                   ; $6168: $19
     ld   [hl], $03                                ; $6169: $36 $03
-    ld   a, $E8                                   ; $616B: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $616D: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $616B: $3E $E8
+    call SpawnNewEntity_trampoline                ; $616D: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6170: $21 $00 $C2
     add  hl, de                                   ; $6173: $19
     ld   [hl], $78                                ; $6174: $36 $78
@@ -3494,8 +3515,8 @@ CreditsSunAbove1Handler::
 jr_017_618B:
     add  hl, de                                   ; $618B: $19
     ld   [hl], $03                                ; $618C: $36 $03
-    ld   a, $E8                                   ; $618E: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $6190: $CD $86 $3B
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $618E: $3E $E8
+    call SpawnNewEntity_trampoline                ; $6190: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6193: $21 $00 $C2
     add  hl, de                                   ; $6196: $19
     ld   [hl], $68                                ; $6197: $36 $68
@@ -3539,7 +3560,7 @@ CreditsSunAbove2Handler::
 jr_017_61EE:
     inc  a                                        ; $61EE: $3C
     ld   [$D00A], a                               ; $61EF: $EA $0A $D0
-    ldh  a, [$FFFE]                               ; $61F2: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $61F2: $F0 $FE
     and  a                                        ; $61F4: $A7
     jr   z, jr_017_61FE                           ; $61F5: $28 $07
 
@@ -3651,8 +3672,9 @@ jr_017_6271:
     set  1, [hl]                                  ; $62A6: $CB $CE
     ld   a, $42                                   ; $62A8: $3E $42
     ldh  [rLYC], a                                ; $62AA: $E0 $45
-    ld   a, $E8                                   ; $62AC: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $62AE: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $62AC: $3E $E8
+    call SpawnNewEntity_trampoline                ; $62AE: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $62B1: $21 $00 $C2
     add  hl, de                                   ; $62B4: $19
     ld   [hl], $18                                ; $62B5: $36 $18
@@ -3665,8 +3687,9 @@ jr_017_6271:
     ld   hl, $C3B0                                ; $62C3: $21 $B0 $C3
     add  hl, de                                   ; $62C6: $19
     ld   [hl], $02                                ; $62C7: $36 $02
-    ld   a, $E8                                   ; $62C9: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $62CB: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $62C9: $3E $E8
+    call SpawnNewEntity_trampoline                ; $62CB: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $62CE: $21 $00 $C2
     add  hl, de                                   ; $62D1: $19
     ld   [hl], $68                                ; $62D2: $36 $68
@@ -3679,8 +3702,9 @@ jr_017_6271:
     ld   hl, $C3B0                                ; $62E0: $21 $B0 $C3
     add  hl, de                                   ; $62E3: $19
     inc  [hl]                                     ; $62E4: $34
-    ld   a, $E8                                   ; $62E5: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $62E7: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $62E5: $3E $E8
+    call SpawnNewEntity_trampoline                ; $62E7: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $62EA: $21 $00 $C2
     add  hl, de                                   ; $62ED: $19
     ld   [hl], $88                                ; $62EE: $36 $88
@@ -3690,8 +3714,9 @@ jr_017_6271:
     ld   hl, $C2B0                                ; $62F6: $21 $B0 $C2
     add  hl, de                                   ; $62F9: $19
     ld   [hl], $08                                ; $62FA: $36 $08
-    ld   a, $E8                                   ; $62FC: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $62FE: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $62FC: $3E $E8
+    call SpawnNewEntity_trampoline                ; $62FE: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6301: $21 $00 $C2
     add  hl, de                                   ; $6304: $19
     ld   [hl], $08                                ; $6305: $36 $08
@@ -3710,12 +3735,12 @@ jr_017_6271:
     call ResetCreditsSceneVariables                            ; $631F: $CD $A5 $4D
     ld   a, $50                                   ; $6322: $3E $50
     ld   [$D009], a                               ; $6324: $EA $09 $D0
-    ldh  a, [$FFFE]                               ; $6327: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $6327: $F0 $FE
     and  a                                        ; $6329: $A7
     jp   z, IncrementCreditsSubsceneAndReturn                        ; $632A: $CA $D9 $4C
 
-    ld   a, $E8                                   ; $632D: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $632F: $CD $86 $3B
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $632D: $3E $E8
+    call SpawnNewEntity_trampoline                ; $632F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6332: $21 $00 $C2
     add  hl, de                                   ; $6335: $19
     ld   [hl], $40                                ; $6336: $36 $40
@@ -3881,7 +3906,7 @@ Data_017_6466::
 jr_017_649C:
     inc  a                                        ; $649C: $3C
     ld   [$D005], a                               ; $649D: $EA $05 $D0
-    ldh  a, [$FFFE]                               ; $64A0: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $64A0: $F0 $FE
     and  a                                        ; $64A2: $A7
     jr   z, jr_017_64B3                           ; $64A3: $28 $0E
 
@@ -4069,7 +4094,7 @@ jr_017_67E7:
     xor  a                                        ; $67ED: $AF
     ld   [de], a                                  ; $67EE: $12
     pop  de                                       ; $67EF: $D1
-    ldh  a, [$FFFE]                               ; $67F0: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $67F0: $F0 $FE
     and  a                                        ; $67F2: $A7
     ret  z                                        ; $67F3: $C8
 
@@ -4117,9 +4142,10 @@ LinkSeatedOnLog0Handler::
 
 LinkSeatedOnLog1Handler::
     ld   a, $1A                                   ; $682F: $3E $1A
-    ld   [wBGMapToLoad], a                               ; $6831: $EA $FF $D6
-    ld   a, $E8                                   ; $6834: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $6836: $CD $86 $3B
+    ld   [wBGMapToLoad], a                        ; $6831: $EA $FF $D6
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6834: $3E $E8
+    call SpawnNewEntity_trampoline                ; $6836: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6839: $21 $00 $C2
     add  hl, de                                   ; $683C: $19
     ld   [hl], $40                                ; $683D: $36 $40
@@ -4150,7 +4176,7 @@ LinkSeatedOnLog2Handler
 jr_017_686C:
     inc  a                                        ; $686C: $3C
     ld   [$D00A], a                               ; $686D: $EA $0A $D0
-    ldh  a, [$FFFE]                               ; $6870: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $6870: $F0 $FE
     and  a                                        ; $6872: $A7
     jr   z, jr_017_687C                           ; $6873: $28 $07
 
@@ -4218,7 +4244,7 @@ LinkSeatedOnLog4Handler::
 jr_017_68E1:
     inc  a                                        ; $68E1: $3C
     ld   [$D00A], a                               ; $68E2: $EA $0A $D0
-    ldh  a, [$FFFE]                               ; $68E5: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $68E5: $F0 $FE
     and  a                                        ; $68E7: $A7
     jp   nz, label_017_6A80                       ; $68E8: $C2 $80 $6A
 
@@ -4445,7 +4471,7 @@ jr_017_6C15:
 
     inc  a                                        ; $6C3E: $3C
     ld   [$D00D], a                               ; $6C3F: $EA $0D $D0
-    ldh  a, [$FFFE]                               ; $6C42: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $6C42: $F0 $FE
     and  a                                        ; $6C44: $A7
     jr   z, jr_017_6C4A                           ; $6C45: $28 $03
 
@@ -4459,7 +4485,7 @@ jr_017_6C4A:
     ld   a, $E3                                   ; $6C51: $3E $E3
     ld   [wOBJ1Palette], a                               ; $6C53: $EA $99 $DB
     ld   a, $E8                                   ; $6C56: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $6C58: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $6C58: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6C5B: $21 $00 $C2
     add  hl, de                                   ; $6C5E: $19
     ld   [hl], $50                                ; $6C5F: $36 $50
@@ -4534,7 +4560,7 @@ jr_017_6CA9:
     cp   $24                                      ; $6CD1: $FE $24
     jr   z, jr_017_6D0A                           ; $6CD3: $28 $35
 
-    ldh  a, [$FFFE]                               ; $6CD5: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $6CD5: $F0 $FE
     and  a                                        ; $6CD7: $A7
     jr   z, jr_017_6CDD                           ; $6CD8: $28 $03
 
@@ -4548,9 +4574,9 @@ jr_017_6CDD:
     jr   nz, jr_017_6D0A                          ; $6CE6: $20 $22
 
     ld   a, $1E                                   ; $6CE8: $3E $1E
-    ld   [wOBJ0Palette], a                               ; $6CEA: $EA $98 $DB
-    ld   a, $E8                                   ; $6CED: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $6CEF: $CD $86 $3B
+    ld   [wOBJ0Palette], a                        ; $6CEA: $EA $98 $DB
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6CED: $3E $E8
+    call SpawnNewEntity_trampoline                ; $6CEF: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6CF2: $21 $00 $C2
     add  hl, de                                   ; $6CF5: $19
     ld   [hl], $62                                ; $6CF6: $36 $62
@@ -4608,8 +4634,9 @@ CreditsLinkFaceCloseUp1Handler::
     ld   [wBGPalette], a                               ; $6D4C: $EA $97 $DB
     ld   a, $6E                                   ; $6D4F: $3E $6E
     ld   [wOBJ0Palette], a                               ; $6D51: $EA $98 $DB
-    ld   a, $E8                                   ; $6D54: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $6D56: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6D54: $3E $E8
+    call SpawnNewEntity_trampoline                ; $6D56: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6D59: $21 $00 $C2
     add  hl, de                                   ; $6D5C: $19
     ld   [hl], $38                                ; $6D5D: $36 $38
@@ -4681,7 +4708,7 @@ CreditsLinkFaceCloseUp3Handler::
     jp   IncrementCreditsSubsceneAndReturn                           ; $6DBE: $C3 $D9 $4C
 
 jr_017_6DC1:
-    ldh  a, [$FFFE]                               ; $6DC1: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $6DC1: $F0 $FE
     and  a                                        ; $6DC3: $A7
     jr   nz, jr_017_6DDB                          ; $6DC4: $20 $15
 
@@ -4713,7 +4740,7 @@ jr_017_6DDB:
 
 CreditsLinkFaceCloseUp4Handler::
     call func_017_6D7C                            ; $6DED: $CD $7C $6D
-    ldh  a, [$FFFE]                               ; $6DF0: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $6DF0: $F0 $FE
     and  a                                        ; $6DF2: $A7
     jr   z, jr_017_6DF8                           ; $6DF3: $28 $03
 
@@ -4763,7 +4790,7 @@ CreditsLinkFaceCloseUp5Handler::
     call IncrementCreditsSubscene                            ; $6E31: $CD $D9 $4C
 
 jr_017_6E34:
-    ldh  a, [$FFFE]                               ; $6E34: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $6E34: $F0 $FE
     and  a                                        ; $6E36: $A7
     jr   z, jr_017_6E40                           ; $6E37: $28 $07
 
@@ -4835,7 +4862,7 @@ CreditsRoll1Handler::
     ld   [wBGMapToLoad], a                               ; $6EA5: $EA $FF $D6
     call ResetCreditsSceneVariables                            ; $6EA8: $CD $A5 $4D
     ld   a, $E8                                   ; $6EAB: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $6EAD: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $6EAD: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6EB0: $21 $00 $C2
     add  hl, de                                   ; $6EB3: $19
     ld   [hl], $50                                ; $6EB4: $36 $50
@@ -4879,7 +4906,7 @@ CreditsRoll2Handler::
     call IncrementCreditsSubscene                            ; $6F01: $CD $D9 $4C
 
 jr_017_6F04:
-    ldh  a, [$FFFE]                               ; $6F04: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $6F04: $F0 $FE
     and  a                                        ; $6F06: $A7
     jr   z, jr_017_6F10                           ; $6F07: $28 $07
 
@@ -4931,12 +4958,12 @@ jr_017_6F4C:
     cp   $C0                                      ; $6F4C: $FE $C0
     jr   nz, jr_017_6F67                          ; $6F4E: $20 $17
 
-    ld   a, $E8                                   ; $6F50: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $6F52: $CD $86 $3B
-    ld   hl, wEntitiesPosXTable                                ; $6F55: $21 $00 $C2
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $6F50: $3E $E8
+    call SpawnNewEntity_trampoline                ; $6F52: $CD $86 $3B
+    ld   hl, wEntitiesPosXTable                   ; $6F55: $21 $00 $C2
     add  hl, de                                   ; $6F58: $19
     ld   [hl], $18                                ; $6F59: $36 $18
-    ld   hl, wEntitiesPosYTable                                ; $6F5B: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $6F5B: $21 $10 $C2
     add  hl, de                                   ; $6F5E: $19
     ld   [hl], $B0                                ; $6F5F: $36 $B0
     ld   hl, $C2B0                                ; $6F61: $21 $B0 $C2
@@ -4973,7 +5000,7 @@ jr_017_6FA7:
     dec  c                                        ; $6FAA: $0D
     jr   nz, jr_017_6FA7                          ; $6FAB: $20 $FA
 
-    ldh  a, [$FFFE]                               ; $6FAD: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $6FAD: $F0 $FE
     and  a                                        ; $6FAF: $A7
     ret  z                                        ; $6FB0: $C8
 
@@ -5153,7 +5180,7 @@ Data_017_70D1::
     ldh  a, [$FFEC]                               ; $7179: $F0 $EC
     sub  e                                        ; $717B: $93
     ldh  [$FFEC], a                               ; $717C: $E0 $EC
-    ldh  a, [$FFFE]                               ; $717E: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $717E: $F0 $FE
     and  a                                        ; $7180: $A7
     jr   z, jr_017_7188                           ; $7181: $28 $05
 
@@ -5247,7 +5274,7 @@ Func_017_725C::
     or   [hl]                                     ; $7263: $B6
     jr   nz, jr_017_7293                          ; $7264: $20 $2D
 
-    ldh  a, [$FFFE]                               ; $7266: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $7266: $F0 $FE
     and  a                                        ; $7268: $A7
     jr   nz, jr_017_72BD                          ; $7269: $20 $52
 
@@ -5385,7 +5412,7 @@ jr_017_73AF:
     add  e                                        ; $73C1: $83
     sub  d                                        ; $73C2: $92
     ldh  [$FFEC], a                               ; $73C3: $E0 $EC
-    ldh  a, [$FFFE]                               ; $73C5: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $73C5: $F0 $FE
     and  a                                        ; $73C7: $A7
     jr   nz, jr_017_73ED                          ; $73C8: $20 $23
 
@@ -5647,7 +5674,7 @@ jr_017_74C5:
     ldh  [$FFEC], a                               ; $74DB: $E0 $EC
 
 jr_017_74DD:
-    ldh  a, [$FFFE]                               ; $74DD: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $74DD: $F0 $FE
     and  a                                        ; $74DF: $A7
 
 jr_017_74E0:
@@ -6142,7 +6169,7 @@ jr_017_76FD:
     cp   $A8                                      ; $770F: $FE $A8
     jp   nc, label_017_7CC2                       ; $7711: $D2 $C2 $7C
 
-    ldh  a, [$FFFE]                               ; $7714: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $7714: $F0 $FE
     and  a                                        ; $7716: $A7
     jr   nz, jr_017_7739                          ; $7717: $20 $20
 
@@ -6322,7 +6349,7 @@ jr_017_77FE:
     ldh  a, [$FFEC]                               ; $780A: $F0 $EC
     add  [hl]                                     ; $780C: $86
     ldh  [$FFEC], a                               ; $780D: $E0 $EC
-    ldh  a, [$FFFE]                               ; $780F: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $780F: $F0 $FE
     and  a                                        ; $7811: $A7
     jr   nz, jr_017_7826                          ; $7812: $20 $12
 
@@ -6375,7 +6402,7 @@ jr_017_7826:
     ldh  a, [$FFEC]                               ; $7856: $F0 $EC
     add  [hl]                                     ; $7858: $86
     ldh  [$FFEC], a                               ; $7859: $E0 $EC
-    ldh  a, [$FFFE]                               ; $785B: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $785B: $F0 $FE
     and  a                                        ; $785D: $A7
     jr   nz, jr_017_7867                          ; $785E: $20 $07
 
@@ -6435,7 +6462,7 @@ jr_017_78A1:
     ldh  a, [$FFEC]                               ; $78A6: $F0 $EC
     add  e                                        ; $78A8: $83
     ldh  [$FFEC], a                               ; $78A9: $E0 $EC
-    ldh  a, [$FFFE]                               ; $78AB: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $78AB: $F0 $FE
     and  a                                        ; $78AD: $A7
     jr   nz, jr_017_78DD                          ; $78AE: $20 $2D
 
@@ -6590,7 +6617,7 @@ func_017_795E:
     ret                                           ; $7970: $C9
 
 func_017_7971:
-    ldh  a, [$FFFE]                               ; $7971: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $7971: $F0 $FE
     and  a                                        ; $7973: $A7
 
 jr_017_7974:
@@ -6695,7 +6722,7 @@ Func_017_79A4::
 
 func_017_7A01:
 jr_017_7A01:
-    ldh  a, [$FFFE]                               ; $7A01: $F0 $FE
+    ldh  a, [hIsGBC]                               ; $7A01: $F0 $FE
     and  a                                        ; $7A03: $A7
     ret  z                                        ; $7A04: $C8
 
@@ -6887,8 +6914,9 @@ Func_017_7B06::
     ldh  [$FF9B], a                               ; $7B14: $E0 $9B
     ld   a, $02                                   ; $7B16: $3E $02
     ldh  [$FF9D], a                               ; $7B18: $E0 $9D
-    ld   a, $E8                                   ; $7B1A: $3E $E8
-    call SpawnNewEntity_trampoline                                    ; $7B1C: $CD $86 $3B
+
+    ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $7B1A: $3E $E8
+    call SpawnNewEntity_trampoline                ; $7B1C: $CD $86 $3B
     ld   hl, $C2B0                                ; $7B1F: $21 $B0 $C2
     add  hl, de                                   ; $7B22: $19
     ld   [hl], $02                                ; $7B23: $36 $02

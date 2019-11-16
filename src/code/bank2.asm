@@ -4,11 +4,12 @@
 
 include "code/audio/select_music_track.asm"
 
-label_002_41D0::
+SpawnChestWithItem::
     push bc                                       ; $41D0: $C5
-    ld   a, $07                                   ; $41D1: $3E $07
+
+    ld   a, ENTITY_CHEST_WITH_ITEM                ; $41D1: $3E $07
     call SpawnNewEntity_trampoline                ; $41D3: $CD $86 $3B
-    jr   c, jr_002_41FA                           ; $41D6: $38 $22
+    jr   c, .return                               ; $41D6: $38 $22
 
     ld   hl, wEntitiesStatusTable                   ; $41D8: $21 $80 $C2
     add  hl, de                                   ; $41DB: $19
@@ -30,7 +31,7 @@ label_002_41D0::
     ldh  a, [hScratch8]                               ; $41F7: $F0 $DF
     ld   [hl], a                                  ; $41F9: $77
 
-jr_002_41FA:
+.return
     pop  bc                                       ; $41FA: $C1
     ret                                           ; $41FB: $C9
 
@@ -175,7 +176,7 @@ jr_002_42B2:
     ldh  [hLinkPositionXIncrement], a                               ; $42BB: $E0 $9A
     ldh  [hLinkPositionYIncrement], a                               ; $42BD: $E0 $9B
     ldh  [$FFA3], a                               ; $42BF: $E0 $A3
-    call func_002_4A16                            ; $42C1: $CD $16 $4A
+    call LinkPlayingOcarinaHandler                            ; $42C1: $CD $16 $4A
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
 
 jr_002_42C7:
@@ -190,7 +191,7 @@ jr_002_42C7:
     call func_002_4B49                            ; $42DC: $CD $49 $4B
     call ApplyLinkMotionState                               ; $42DF: $CD $94 $17
     call func_002_4338                            ; $42E2: $CD $38 $43
-    call func_002_4A16                            ; $42E5: $CD $16 $4A
+    call LinkPlayingOcarinaHandler                            ; $42E5: $CD $16 $4A
     ld   a, [wRoomTransitionState]                ; $42E8: $FA $24 $C1
     and  a                                        ; $42EB: $A7
     jr   nz, jr_002_4315                          ; $42EC: $20 $27
@@ -1145,7 +1146,7 @@ jr_002_49B6:
     ld   bc, $F808                                ; $4A11: $01 $08 $F8
     ld   b, $01                                   ; $4A14: $06 $01
 
-func_002_4A16::
+LinkPlayingOcarinaHandler::
     ld   a, [wLinkPlayingOcarinaCountdown]                               ; $4A16: $FA $66 $C1
     and  a                                        ; $4A19: $A7
     ret  z                                        ; $4A1A: $C8
@@ -1292,7 +1293,7 @@ jr_002_4AF1:
     cp   $14                                      ; $4B05: $FE $14
     jr   nz, jr_002_4B40                          ; $4B07: $20 $37
 
-    ld   a, $C9                                   ; $4B09: $3E $C9
+    ld   a, ENTITY_MUSICAL_NOTE                   ; $4B09: $3E $C9
     call SpawnNewEntity_trampoline                ; $4B0B: $CD $86 $3B
     jr   c, jr_002_4B40                           ; $4B0E: $38 $30
 
@@ -1619,14 +1620,14 @@ jr_002_4CC1:
     ret  z                                        ; $4CD2: $C8
 
 jr_002_4CD3:
+
     call GetRandomByte                            ; $4CD3: $CD $0D $28
     rra                                           ; $4CD6: $1F
-    ld   a, $2E                                   ; $4CD7: $3E $2E
-    jr   nc, jr_002_4CDD                          ; $4CD9: $30 $02
+    ld   a, ENTITY_DROPPABLE_RUPEE                ; $4CD7: $3E $2E
+    jr   nc, .randomDropEnd                       ; $4CD9: $30 $02
+    ld   a, ENTITY_DROPPABLE_HEART                ; $4CDB: $3E $2D
+.randomDropEnd
 
-    ld   a, $2D                                   ; $4CDB: $3E $2D
-
-jr_002_4CDD:
     call SpawnNewEntity_trampoline                ; $4CDD: $CD $86 $3B
     jr   c, jr_002_4D1F                           ; $4CE0: $38 $3D
 
@@ -2263,7 +2264,7 @@ jr_002_503B:
     jr   nz, jr_002_5079                          ; $5054: $20 $23
 
     set  5, [hl]                                  ; $5056: $CB $EE
-    ld   a, $35                                   ; $5058: $3E $35
+    ld   a, ENTITY_HEART_PIECE                    ; $5058: $3E $35
     call SpawnNewEntity_trampoline                ; $505A: $CD $86 $3B
     jr   c, jr_002_5079                           ; $505D: $38 $1A
 
@@ -2848,7 +2849,7 @@ TryOpenLockedDoor::
     push de                                       ; $53B1: $D5
     ldh  a, [hFFE8]                               ; $53B2: $F0 $E8
     cp   $40                                      ; $53B4: $FE $40
-    jr   z, .FFE8Equals40                         ; $53B6: $28 $43
+    jr   z, .spawnPushedBlock                     ; $53B6: $28 $43
 
     ; If the player doesn't have a small key for this dungeon,
     ; return.
@@ -2896,12 +2897,8 @@ TryOpenLockedDoor::
     call label_CC7                                ; $53F5: $CD $C7 $0C
     jp   .return                                  ; $53F8: $C3 $1D $54
 
-.FFE8Equals40
-    ;
-    ; Unknown purpose
-    ;
-
-    ld   a, $06                                   ; $53FB: $3E $06
+.spawnPushedBlock
+    ld   a, ENTITY_PUSHED_BLOCK                   ; $53FB: $3E $06
     call SpawnNewEntity_trampoline                ; $53FD: $CD $86 $3B
     jr   c, .return                               ; $5400: $38 $1B
 
@@ -2933,19 +2930,18 @@ EnqueueDoorUnlockedSfx::
 
 label_002_5425::
     push bc                                       ; $5425: $C5
-    ldh  a, [hMapId]                         ; $5426: $F0 $F7
-    cp   MAP_COLOR_DUNGEON                                      ; $5428: $FE $FF
-    ld   a, $30                                   ; $542A: $3E $30
-    jr   z, jr_002_5438                           ; $542C: $28 $0A
+    ldh  a, [hMapId]                              ; $5426: $F0 $F7
+    cp   MAP_COLOR_DUNGEON                        ; $5428: $FE $FF
+    ld   a, ENTITY_KEY_DROP_POINT                 ; $542A: $3E $30
+    jr   z, .spawnEntity                          ; $542C: $28 $0A
 
-    ldh  a, [hMapId]                         ; $542E: $F0 $F7
-    cp   MAP_CAVE_B                                      ; $5430: $FE $0A
-    ld   a, $30                                   ; $5432: $3E $30
-    jr   c, jr_002_5438                           ; $5434: $38 $02
+    ldh  a, [hMapId]                              ; $542E: $F0 $F7
+    cp   MAP_CAVE_B                               ; $5430: $FE $0A
+    ld   a, ENTITY_KEY_DROP_POINT                 ; $5432: $3E $30
+    jr   c, .spawnEntity                          ; $5434: $38 $02
+    ld   a, ENTITY_HIDING_SLIME_KEY               ; $5436: $3E $3C
 
-    ld   a, $3C                                   ; $5436: $3E $3C
-
-jr_002_5438:
+.spawnEntity
     call SpawnNewEntity_trampoline                ; $5438: $CD $86 $3B
     jr   c, jr_002_546F                           ; $543B: $38 $32
 
@@ -6448,8 +6444,9 @@ jr_002_6FD4:
     call EnqueueDoorUnlockedSfx                   ; $6FD4: $CD $20 $54
 
 jr_002_6FD7:
-    ld   a, $28                                   ; $6FD7: $3E $28
+    ld   a, ENTITY_MIMIC                          ; $6FD7: $3E $28
     call SpawnNewEntity_trampoline                ; $6FD9: $CD $86 $3B
+
     ld   hl, wEntitiesUnknownTableC               ; $6FDC: $21 $C0 $C2
     add  hl, de                                   ; $6FDF: $19
     inc  [hl]                                     ; $6FE0: $34
@@ -6465,8 +6462,10 @@ jr_002_6FE3:
     jr   z, jr_002_703E                           ; $6FED: $28 $4F
 
     call label_27F2                               ; $6FEF: $CD $F2 $27
-    ld   a, $5F                                   ; $6FF2: $3E $5F
+
+    ld   a, ENTITY_MASTER_STALFOS                 ; $6FF2: $3E $5F
     call SpawnNewEntity_trampoline                ; $6FF4: $CD $86 $3B
+
     ld   hl, wEntitiesUnknowTableP                ; $6FF7: $21 $40 $C4
     add  hl, de                                   ; $6FFA: $19
     dec  [hl]                                     ; $6FFB: $35
@@ -7042,7 +7041,8 @@ jr_002_734F:
     ld   e, a                                     ; $7364: $5F
     ld   d, $00                                   ; $7365: $16 $00
     call func_014_5526_trampoline                 ; $7367: $CD $78 $21
-    ld   a, $05                                   ; $736A: $3E $05
+
+    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $736A: $3E $05
     call SpawnNewEntity_trampoline                ; $736C: $CD $86 $3B
     jp   c, label_002_7454                        ; $736F: $DA $54 $74
 

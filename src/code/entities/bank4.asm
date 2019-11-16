@@ -22,8 +22,9 @@ GenieState0Handler::
     cp   $03                                      ; $401B: $FE $03
     jr   c, jr_004_404E                           ; $401D: $38 $2F
 
-    ld   a, $5C                                   ; $401F: $3E $5C
+    ld   a, ENTITY_GENIE                          ; $401F: $3E $5C
     call SpawnNewEntity_trampoline                ; $4021: $CD $86 $3B
+
     ldh  a, [hScratch0]                           ; $4024: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $4026: $21 $00 $C2
     add  hl, de                                   ; $4029: $19
@@ -178,7 +179,7 @@ jr_004_4118:
     cp   $01                                      ; $411B: $FE $01
     jr   nz, jr_004_4144                          ; $411D: $20 $25
 
-    ld   a, $5C                                   ; $411F: $3E $5C
+    ld   a, ENTITY_GENIE                          ; $411F: $3E $5C
     call SpawnNewEntity_trampoline                ; $4121: $CD $86 $3B
     ldh  a, [hScratch0]                               ; $4124: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $4126: $21 $00 $C2
@@ -645,7 +646,8 @@ jr_004_43FF:
     ld   a, [hl]                                  ; $4404: $7E
     pop  hl                                       ; $4405: $E1
     ld   [hl], a                                  ; $4406: $77
-    ld   a, $5C                                   ; $4407: $3E $5C
+
+    ld   a, ENTITY_GENIE                          ; $4407: $3E $5C
     call SpawnNewEntity_trampoline                ; $4409: $CD $86 $3B
     jr   c, jr_004_4438                           ; $440C: $38 $2A
 
@@ -677,7 +679,8 @@ jr_004_4438:
     jr   nz, jr_004_4487                          ; $443B: $20 $4A
 
     ld   [hl], $30                                ; $443D: $36 $30
-    ld   a, $5C                                   ; $443F: $3E $5C
+
+    ld   a, ENTITY_GENIE                          ; $443F: $3E $5C
     call SpawnNewEntity_trampoline                ; $4441: $CD $86 $3B
     jr   c, jr_004_4487                           ; $4444: $38 $41
 
@@ -790,7 +793,7 @@ jr_004_44E2:
     cp   $04                                      ; $44EF: $FE $04
     jr   nz, jr_004_4516                          ; $44F1: $20 $23
 
-    ld   a, $5C                                   ; $44F3: $3E $5C
+    ld   a, ENTITY_GENIE                          ; $44F3: $3E $5C
     call SpawnNewEntity_trampoline                ; $44F5: $CD $86 $3B
     ldh  a, [hScratch0]                               ; $44F8: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $44FA: $21 $00 $C2

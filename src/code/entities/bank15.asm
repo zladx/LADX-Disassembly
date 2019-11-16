@@ -621,7 +621,7 @@ BouldersEntityHandler::
     cp   $18                                      ; $437D: $FE $18
     ret  c                                        ; $437F: $D8
 
-    ld   a, $45                                   ; $4380: $3E $45
+    ld   a, ENTITY_BOULDERS                       ; $4380: $3E $45
     call SpawnNewEntity_trampoline                ; $4382: $CD $86 $3B
     ret  c                                        ; $4385: $D8
 
@@ -1320,7 +1320,7 @@ jr_015_475C:
     cp   $0C                                      ; $4785: $FE $0C
     jr   nz, jr_015_47D1                          ; $4787: $20 $48
 
-    ld   a, $0C                                   ; $4789: $3E $0C
+    ld   a, ENTITY_MOBLIN_ARROW                   ; $4789: $3E $0C
     call SpawnNewEntity_trampoline                ; $478B: $CD $86 $3B
     jr   c, jr_015_47D1                           ; $478E: $38 $41
 
@@ -2162,7 +2162,8 @@ PokeyEntityHandler::
     ld   hl, wEntitiesUnknowTableY                ; $4C09: $21 $D0 $C3
     add  hl, bc                                   ; $4C0C: $09
     inc  [hl]                                     ; $4C0D: $34
-    ld   a, $E3                                   ; $4C0E: $3E $E3
+
+    ld   a, ENTITY_POKEY                          ; $4C0E: $3E $E3
     call SpawnNewEntity_trampoline                ; $4C10: $CD $86 $3B
     jr   c, jr_015_4C49                           ; $4C13: $38 $34
 
@@ -2397,7 +2398,8 @@ jr_015_4D5B:
 
     call IsEntityUnknownFZero                     ; $4D6C: $CD $00 $0C
     ld   [hl], $08                                ; $4D6F: $36 $08
-    ld   a, $E2                                   ; $4D71: $3E $E2
+
+    ld   a, ENTITY_FLAME_SHOOTER                  ; $4D71: $3E $E2
     call SpawnNewEntity_trampoline                ; $4D73: $CD $86 $3B
     ret  c                                        ; $4D76: $D8
 
@@ -2493,7 +2495,7 @@ jr_015_4DF2:
 
 jr_015_4DFB:
     ldh  [hFFE8], a                               ; $4DFB: $E0 $E8
-    ld   a, $E2                                   ; $4DFD: $3E $E2
+    ld   a, ENTITY_FLAME_SHOOTER                  ; $4DFD: $3E $E2
     call SpawnNewEntity_trampoline                ; $4DFF: $CD $86 $3B
     jr   c, jr_015_4E46                           ; $4E02: $38 $42
 

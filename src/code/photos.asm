@@ -171,7 +171,7 @@ JumpTable_037_40EC::
 
     ld   a, $90                                 ; $4111: $3E $90
     ld   [$DB9A], a                             ; $4113: $EA $9A $DB
-    ld   a, [$FFFE]                             ; $4116: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $4116: $F0 $FE
     and  a                                      ; $4118: $A7
     jr   z, .else_4174_37                       ; $4119: $28 $59
 
@@ -301,7 +301,7 @@ JumpTable_037_4229::
     push de                                     ; $4238: $D5
     push de                                     ; $4239: $D5
     ld   hl, $41A7                              ; $423A: $21 $A7 $41
-    ld   a, [$FFFE]                             ; $423D: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $423D: $F0 $FE
     and  a                                      ; $423F: $A7
     jr   z, .else_4245_37                       ; $4240: $28 $03
 
@@ -319,7 +319,7 @@ JumpTable_037_4229::
     pop  de                                     ; $424F: $D1
     ld   c, $10                                 ; $4250: $0E $10
     ld   hl, $41C1                              ; $4252: $21 $C1 $41
-    ld   a, [$FFFE]                             ; $4255: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $4255: $F0 $FE
     and  a                                      ; $4257: $A7
     jr   z, .else_425D_37                       ; $4258: $28 $03
 
@@ -339,7 +339,7 @@ JumpTable_037_4229::
     cp   GAMEPLAY_PHOTO_GHOST                   ; $426B: $FE $19
     jr   nz, .else_4288_37                      ; $426D: $20 $19
 
-    ld   a, [$FFFE]                             ; $426F: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $426F: $F0 $FE
     and  a                                      ; $4271: $A7
     jr   nz, .else_427A_37                      ; $4272: $20 $06
 
@@ -526,7 +526,7 @@ JumpTable_037_4371::
     ld   hl, $C238                              ; $4395: $21 $38 $C2
     ld   [hl], $70                              ; $4398: $36 $70
     inc  hl                                     ; $439A: $23
-    ld   a, [$FFFE]                             ; $439B: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $439B: $F0 $FE
     and  a                                      ; $439D: $A7
     jr   nz, .else_43A3_37                      ; $439E: $20 $03
 
@@ -573,7 +573,7 @@ JumpTable_037_43A6::
     inc  hl                                     ; $43E2: $23
     ld   [hl], b                                ; $43E3: $70
     ld   hl, $C232                              ; $43E4: $21 $32 $C2
-    ld   a, [$FFFE]                             ; $43E7: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $43E7: $F0 $FE
     and  a                                      ; $43E9: $A7
     jr   nz, .else_43FB_37                      ; $43EA: $20 $0F
 
@@ -748,7 +748,7 @@ Func_037_44EF::
     inc  de                                     ; $4537: $13
     ld   a, [hl]                                ; $4538: $7E
     ld   [de], a                                ; $4539: $12
-    ld   a, [$FFFE]                             ; $453A: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $453A: $F0 $FE
     and  a                                      ; $453C: $A7
     jr   nz, .else_4543_37                      ; $453D: $20 $04
 
@@ -778,7 +778,7 @@ Func_037_4552::
     ld   [$C214], a                             ; $455C: $EA $14 $C2
     ld   a, $40                                 ; $455F: $3E $40
     ldh  [hNoiseSfx], a                         ; $4561: $E0 $F4
-    ld   a, [$FFFE]                             ; $4563: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $4563: $F0 $FE
     and  a                                      ; $4565: $A7
     jr   nz, .else_4570_37                      ; $4566: $20 $08
 
@@ -822,7 +822,7 @@ Func_037_4552::
     inc  a                                      ; $4592: $3C
     and  %00001111                              ; $4593: $E6 $0F
     ld   [$C214], a                             ; $4595: $EA $14 $C2
-    ld   a, [$FFFE]                             ; $4598: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $4598: $F0 $FE
     and  a                                      ; $459A: $A7
     jr   nz, .else_45AF_37                      ; $459B: $20 $12
 
@@ -908,7 +908,7 @@ Func_037_4552::
     ld   [rLCDC], a                             ; $460D: $E0 $40
     xor  a                                      ; $460F: $AF
     ld   [$DB9A], a                             ; $4610: $EA $9A $DB
-    ld   a, [$FFFE]                             ; $4613: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $4613: $F0 $FE
     and  a                                      ; $4615: $A7
     ret  z                                      ; $4616: $C8
 
@@ -3055,7 +3055,7 @@ JumpTable_037_5393::
     cp   GAMEPLAY_PHOTO_GHOST                   ; $53B1: $FE $19
     jr   nz, .else_53C9_37                      ; $53B3: $20 $14
 
-    ld   a, [$FFFE]                             ; $53B5: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $53B5: $F0 $FE
     and  a                                      ; $53B7: $A7
     jr   nz, .else_53BE_37                      ; $53B8: $20 $04
 

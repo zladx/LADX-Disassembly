@@ -204,7 +204,7 @@ JumpTable_028_40FB:
     jp   Func_028_44DB                          ; $4173: JumpTable_028_40FB $C3 $DB $44
 
 Func_028_4176::
-    ld   a, [$FFFE]                             ; $4176: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $4176: $F0 $FE
     and  a                                      ; $4178: $A7
     ret  z                                      ; $4179: $C8
 
@@ -272,7 +272,7 @@ Func_028_4185::
     ld   a, $0C                                 ; $41D3: $3E $0C
     ld   [hl], a                                ; $41D5: $77
     pop  hl                                     ; $41D6: $E1
-    ld   a, [$FFFE]                             ; $41D7: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $41D7: $F0 $FE
     and  a                                      ; $41D9: $A7
     jr   z, .else_41F5_28                       ; $41DA: $28 $19
 

@@ -224,7 +224,7 @@ InitSaveFiles::
     ld   e, $00
     ld   d, $00
     ld   bc, $A405
-.loop
+.roosterSearchLoop
     ld   hl, label_4667
     add  hl, de
     ld   a, [hli]
@@ -233,7 +233,7 @@ InitSaveFiles::
     inc  e
     ld   a, e
     cp   $43
-    jr   nz, .loop
+    jr   nz, .roosterSearchLoop
 
     ld   a, $01
     ld   [$A453], a
@@ -245,10 +245,10 @@ InitSaveFiles::
     ld   hl, $A46A
     ld   e, $09
     ld   a, $02
-.loop2
+.roosterSearchLoop2
     ldi  [hl], a
     dec  e
-    jr   nz, .loop2
+    jr   nz, .roosterSearchLoop2
 
     ld   a, $60
     ld   [$A452], a
@@ -306,10 +306,10 @@ InitSaveFiles::
     ld   hl, $A105
     ld   a, $80
     ld   e, $00
-.loop3
+.roosterSearchLoop3
     ldi  [hl], a
     dec  e
-    jr   nz, .loop3
+    jr   nz, .roosterSearchLoop3
 
     ld   a, $01
     ld   [$DDDA], a
@@ -474,7 +474,7 @@ func_4852::
     push de
     ld   a, $05
 
-.loop
+.roosterSearchLoop
     ldh  [hScratch0], a
     ld   a, [de]
     and  a
@@ -495,7 +495,7 @@ func_4852::
     inc  de
     ldh  a, [hScratch0]
     dec  a
-    jr   nz, .loop
+    jr   nz, .roosterSearchLoop
     ld   a, b
     ldi  [hl], a
     ld   a, c
@@ -710,12 +710,12 @@ FileSelectionExecuteChoice::
     ld   hl, $DB80
     add  hl, de
 
-.loop
+.roosterSearchLoop
     ld   a, [hli]
     and  a
     jr   nz, LoadSelectedFile
     dec  c
-    jr   nz, .loop
+    jr   nz, .roosterSearchLoop
 
     ; Go to the file new dialog
     xor  a
@@ -2567,13 +2567,13 @@ SynchronizeDungeonsItemFlags::
     ; Copy 5 values from wCurrentDungeonItemFlags to wDungeonItemFlags
     ld   de, wCurrentDungeonItemFlags
     ld   c, $05
-.loop
+.roosterSearchLoop
     ld   a, [de]
     inc  de
     ldi  [hl], a
-    ; loop while c > 0
+    ; roosterSearchLoop while c > 0
     dec  c
-    jr   nz, .loop
+    jr   nz, .roosterSearchLoop
 
 .return
     pop  bc
@@ -2695,14 +2695,14 @@ UpdateRecentRoomsList::
     ld   hl, wRecentRooms
 
     ; For each slot…
-.loop
+.roosterSearchLoop
     ; if the slot already contains the current room,
     ; don't add it again and simply return.
     cp   [hl]
     jr   z, .return
     inc  hl
     dec  c
-    jr   nz, .loop
+    jr   nz, .roosterSearchLoop
 
     ;
     ; Append the current room to the recents rooms list
@@ -2757,7 +2757,7 @@ HideAllSprites::
     ld   [hl], $FF
 .endIf
 
-    ; loop counter
+    ; roosterSearchLoop counter
     ld   b, $28
     ; value to write
     ld   a, $F4
@@ -2766,13 +2766,13 @@ HideAllSprites::
 
     ; Write $F4 to every first byte (Y position) of the OAM buffer
     ; This ensures the sprite is hidden.
-.loop
+.roosterSearchLoop
     ldi  [hl], a
     inc  hl
     inc  hl
     inc  hl
     dec  b
-    jr   nz, .loop
+    jr   nz, .roosterSearchLoop
     ret
 
 UpdateWindowPosition::
@@ -2854,13 +2854,22 @@ label_5FAB::
     jr   nz, label_5F84
     ret
 
-label_5FB3::
+; Create the entity for the NPC currently following Link (if any).
+; This can be either:
+;  - The Flying Rooster
+;  - The friendly Ghost
+;  - Marin
+;  - Bow-Wow
+CreateFollowingNpcEntity::
+    ; If indoors…
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_5FD3
+    jr   z, .excludedRoomsEnd
+    ; Exclude side-scrolling rooms
     ldh  a, [hIsSideScrolling]
     and  a
     ret  nz
+    ; Exclude some maps
     ldh  a, [hMapId]
     cp   MAP_S_FACE_SHRINE
     ret  z
@@ -2870,39 +2879,49 @@ label_5FB3::
     ret  z
     cp   MAP_CAVE_B
     ret  c
+    ; Exclude some rooms
     ldh  a, [hMapRoom]
     cp   $FD
     ret  z
     cp   $B1
     ret  z
+.excludedRoomsEnd
 
-label_5FD3::
-    ld   a, [$DB7B]
+    ;
+    ; Flying Rooster entity
+    ;
+
+    ; If the Rooster is following Link…
+    ld   a, [wIsRoosterFollowingLink]
     cp   $01
-    jr   nz, label_6014
+    jr   nz, .roosterEnd
+
+    ; Search existing entities for an already loaded Roster
     ld   e, $0F
     ld   d, $00
-
-label_5FDE::
+.roosterSearchLoop
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
-    cp   $D5
-    jr   nz, label_5FF0
+    cp   ENTITY_ROOSTER
+    jr   nz, .roosterContinue
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_5FF0
+    jr   z, .roosterContinue
     ld   [hl], d
-
-label_5FF0::
+.roosterContinue
     dec  e
     ld   a, e
     cp   $FF
-    jr   nz, label_5FDE
-    ld   a, $D5
+    jr   nz, .roosterSearchLoop
+
+    ; Create the new Rooster entity
+    ld   a, ENTITY_ROOSTER
     call CreateNewTemporaryEntity_trampoline
+
+    ; Configure the entity
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -2917,59 +2936,68 @@ label_5FF0::
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
+.roosterEnd
 
-label_6014::
-    ld   a, [$DB79]
+    ;
+    ; Ghost entity
+    ;
+
+    ld   a, [wIsGhostFollowingLink]
     cp   $01
-    jr   z, label_6043
+    jr   z, .createGhostEntity
     cp   $02
-    jr   nz, label_607F
+    jr   nz, .ghostEnd
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_607F
+    jr   nz, .ghostEnd
     ldh  a, [hMapRoom]
     cp   $40
-    jr   c, label_607F
+    jr   c, .ghostEnd
     ld   a, [$DB68]
     and  $02
-    jr   z, label_607F
+    jr   z, .ghostEnd
     ld   a, [wPowerBraceletLevel]
     cp   $02
-    jr   c, label_603C
+    jr   c, .markGhostAsFollowing
+    ; Mark Ghost as not following Link anymore
     xor  a
-    jr   label_603E
-
-label_603C::
+    jr   .ghostStatusEnd
+.markGhostAsFollowing
+    ; Mark Ghost as following Link
     ld   a, $01
+.ghostStatusEnd
 
-label_603E::
-    ld   [$DB79], a
-    jr   label_607F
+    ld   [wIsGhostFollowingLink], a
+    jr   .ghostEnd
 
-label_6043::
+.createGhostEntity
     ld   e, $0F
     ld   d, $00
 
-label_6047::
+    ; Search for an existing Ghost entity
+.ghostSearchLoop
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
-    cp   $D4
-    jr   nz, label_6059
+    cp   ENTITY_GHOST
+    jr   nz, .ghostContinue
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_6059
+    jr   z, .ghostContinue
     ld   [hl], d
-
-label_6059::
+.ghostContinue
     dec  e
     ld   a, e
-    cp   $FF
-    jr   nz, label_6047
-    ld   a, $D4
+    cp   -1
+    jr   nz, .ghostSearchLoop
+
+    ; Create the Ghost entity
+    ld   a, ENTITY_GHOST
     call CreateNewTemporaryEntity_trampoline
+
+    ; Configure the entity
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -2983,42 +3011,53 @@ label_6059::
     ld   hl, $C2B0
     add  hl, de
     inc  [hl]
-    ld   a, $2D
-    ldh  [hJingle], a
 
-label_607F::
-    ld   a, [$DB73]
+    ; Play the eerie ghost sound effect
+    ld   a, JINGLE_GHOST_PRESENCE
+    ldh  [hJingle], a
+.ghostEnd
+
+    ;
+    ; Marin entity
+    ;
+
+    ; If Marin is following Link…
+    ld   a, [wIsMarinFollowingLink]
     and  a
-    jp   z, label_611F
+    jp   z, .marinEnd
+
+    ; Search for an existing Marin entity
     ld   e, $0F
     ld   d, $00
-
-label_608A::
+.marinSearchLoop
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
-    cp   $C1
-    jr   nz, label_609C
+    cp   ENTITY_MARIN_AT_THE_SHORE
+    jr   nz, .marinContinue
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_609C
+    jr   z, .marinContinue
     ld   [hl], d
-
-label_609C::
+.marinContinue
     dec  e
     ld   a, e
-    cp   $FF
-    jr   nz, label_608A
-    ld   a, $C1
+    cp   -1
+    jr   nz, .marinSearchLoop
+
+    ; Create a new Marin entity
+    ld   a, ENTITY_MARIN_AT_THE_SHORE
     call CreateNewTemporaryEntity_trampoline
+
+    ; Configure the entity
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
     ld   hl, $D155
-    call label_6118
+    call .decrementConsecutiveBytes
     ldh  a, [hLinkPositionY]
     ld   hl, $C13B
     add  a, [hl]
@@ -3026,39 +3065,42 @@ label_609C::
     add  hl, de
     ld   [hl], a
     ld   hl, $D175
-    call label_6118
+    call .decrementConsecutiveBytes
     ldh  a, [$FFA2]
     ld   hl, wEntitiesPosZTable
     add  hl, de
     ld   [hl], a
     ld   hl, $D195
-    call label_6118
+    call .decrementConsecutiveBytes
     ld   hl, wEntitiesUnknowTableP
     add  hl, de
     ld   [hl], $01
     ld   hl, $C2F0
     add  hl, de
     ld   [hl], $0C
+
+    ; If on room $A4 (bottom of the well),
+    ; make Marin being dropped from above.
     ldh  a, [hMapRoom]
     cp   $A4
-    jr   nz, label_60F7
+    jr   nz, .marinFallEnd
     ldh  a, [hMapId]
     cp   MAP_CAVE_C
-    jr   nz, label_60F7
+    jr   nz, .marinFallEnd
     ld   a, JINGLE_JUMP_DOWN
     ldh  [hJingle], a
     ld   [$C167], a
     ld   hl, $C300
     add  hl, de
     ld   [hl], $79
+.marinFallEnd
 
-label_60F7::
     ldh  a, [hLinkDirection]
     ld   hl, $D1B5
-    call label_6118
+    call .decrementConsecutiveBytes
     ld   a, [$DB10]
     and  a
-    jr   z, label_6117
+    jr   z, .jp_6117
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -3069,49 +3111,59 @@ label_60F7::
     add  hl, de
     add  a, $10
     ld   [hl], a
-
-label_6117::
+.jp_6117
     ret
 
-label_6118::
+.decrementConsecutiveBytes
     ld   c, $10
-
-label_611A::
+.loop
     ldi  [hl], a
     dec  c
-    jr   nz, label_611A
+    jr   nz, .loop
     ret
 
-label_611F::
+.marinEnd
+
+    ;
+    ; Bow-Wow entity
+    ;
+
+    ; If inside Mrs. Meow-Meow house, never load Bow-Wow
     ldh  a, [hMapRoom]
     cp   $A7
     ret  z
-    ld   a, [$DB56]
+
+    ; If Bow-Wow is following Link…
+    ld   a, [wIsBowWowFollowingLink]
     cp   $01
-    jr   nz, label_6161
+    jr   nz, .bowWowEnd
+
+    ; Search for an existing Bow-Wow entity
     ld   e, $0F
     ld   d, $00
-
-label_612F::
+.bowWowSearchLoop
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [hl]
-    cp   $6D
-    jr   nz, label_6141
+    cp   ENTITY_BOW_WOW
+    jr   nz, .bowWowContinue
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_6141
+    jr   z, .bowWowContinue
     ld   [hl], d
-
-label_6141::
+.bowWowContinue
     dec  e
     ld   a, e
-    cp   $FF
-    jr   nz, label_612F
-    ld   a, $6D
+    cp   -1
+    jr   nz, .bowWowSearchLoop
+
+    ; Create a new Bow-Wow entity
+    ld   a, ENTITY_BOW_WOW
     call CreateNewTemporaryEntity_trampoline
+
+    ; Configure the entity
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -3125,7 +3177,7 @@ label_6141::
     add  hl, de
     ld   [hl], a
 
-label_6161::
+.bowWowEnd
     ret
 
 ; Reset?
@@ -3768,11 +3820,11 @@ RoomBorderCoordinates::
 ; Surround the objects area defining a room by ROOM_BORDER values
 PadRoomObjectsArea::
     ld   bc, RoomBorderCoordinates
-.loop
+.roosterSearchLoop
     ; a = next border coordinate
     ld   a, [bc]
 
-    ; if the border reached $FF, exit loop
+    ; if the border reached $FF, exit roosterSearchLoop
     cp   $FF
     jr   z, .end
 
@@ -3785,9 +3837,9 @@ PadRoomObjectsArea::
     ; write the border
     ld   [hl], ROOM_BORDER
 
-    ; increment and continue
+    ; increment and roosterContinue
     inc  bc
-    jr   .loop
+    jr   .roosterSearchLoop
 .end
     ret
 

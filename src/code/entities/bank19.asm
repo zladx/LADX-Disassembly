@@ -4304,7 +4304,7 @@ jr_019_59B7:
     ld   c, d                                     ; $59DA: $4A
     inc  hl                                       ; $59DB: $23
 
-EntityD5Handler::
+RoosterEntityHandler::
     ld   a, [wIsRoosterFollowingLink]             ; $59DC: $FA $7B $DB
     and  a                                        ; $59DF: $A7
     jp   z, label_019_7E61                        ; $59E0: $CA $61 $7E
@@ -5156,7 +5156,8 @@ label_019_5E09:
     ld   [de], a                                  ; $5E15: $12
     db   $11, $10                                 ; $5E16: $11 $10
 
-EntityD4Handler::
+; Friendly ghost following Link after Dungeon 4
+GhostEntityHandler::
     db   $FA
     ld   a, c                                     ; $5E19: $79
     db   $DB                                      ; $5E1A: $DB

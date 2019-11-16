@@ -226,8 +226,8 @@ EntityPointersTable::
 ._D1 entity_pointer AnimalD1EntityHandler
 ._D2 entity_pointer AnimalD2EntityHandler
 ._D3 entity_pointer BunnyD3EntityHandler
-._D4 entity_pointer EntityD4Handler ; $D4
-._D5 entity_pointer EntityD5Handler
+._D4 entity_pointer GhostEntityHandler ; $D4
+._D5 entity_pointer RoosterEntityHandler
 ._D6 entity_pointer SideViewPotEntityHandler
 ._D7 entity_pointer ThwimpEntityHandler
 ._D8 entity_pointer ThwompEntityHandler ; $D8

@@ -229,8 +229,8 @@ ENTITY_ANIMAL_D0                     equ $D0
 ENTITY_ANIMAL_D1                     equ $D1
 ENTITY_ANIMAL_D2                     equ $D2
 ENTITY_BUNNY_D3                      equ $D3
-ENTITY_D4                            equ $D4 ; unknown
-ENTITY_D5                            equ $D5 ; unknown
+ENTITY_GHOST                         equ $D4
+ENTITY_ROOSTER                       equ $D5
 ENTITY_SIDE_VIEW_POT                 equ $D6
 ENTITY_THWIMP                        equ $D7
 ENTITY_THWOMP                        equ $D8

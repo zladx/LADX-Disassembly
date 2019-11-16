@@ -393,7 +393,7 @@ MarineBeachDialog4::
     call label_27F2
     call label_68D9
     ld   a, $01
-    ld   [$DB73], a
+    ld   [wIsMarinFollowingLink], a
 
 label_64FF::
     ld   e, $10

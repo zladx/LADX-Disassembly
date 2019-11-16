@@ -2324,7 +2324,7 @@ label_1637::
 label_1653::
     ld   a, $05
     call label_142F
-    jr   c, label_167C
+    jr   c, .dropRandomItem
     xor  a
     ld   [$C19B], a
     ld   hl, wEntitiesPosXTable
@@ -2345,22 +2345,28 @@ label_1653::
     ld   b, d
     call label_3942
 
-label_167C::
+.dropRandomItem
+    ; In some random cases, don't drop anything.
     call GetRandomByte
     and  $07
     ret  nz
+
+    ; If stairs are hiding behind the cut bush, don't drop anything.
     ldh  a, [hObjectUnderEntity]
-    cp   $D3
+    cp   OBJECT_BUSH_GROUND_STAIRS
     ret  z
+
+    ; Randomly drop a rupee or heart
     call GetRandomByte
     rra
-    ld   a, $2E
-    jr   nc, label_1691
-    ld   a, $2D
-
-label_1691::
+    ld   a, ENTITY_DROPPABLE_RUPEE
+    jr   nc, .randomEnd
+    ld   a, ENTITY_DROPPABLE_HEART
+.randomEnd
     call CreateNewTemporaryEntity_trampoline
     ret  c
+
+    ; Configure the dropped entity
     ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [hSwordIntersectedAreaX]
@@ -6758,7 +6764,7 @@ LoadRoomEntities::
     cp   [hl]
     jr   nz, .eaglesTowerEnd
     ; do some special casing for this room entities
-    ld   a, $A8
+    ld   a, ENTITY_A8
     call CreateNewTemporaryEntity_trampoline
     ld   a, [$DB70]
     ld   hl, wEntitiesPosXTable
@@ -6985,10 +6991,8 @@ label_394D::
     callsb func_014_54AC
     jp   ReloadSavedBank
 
-label_3958::
-    ld   a, $01
-    call SwitchBank
-    call label_5FB3
+CreateFollowingNpcEntity_trampoline::
+    callsw CreateFollowingNpcEntity
     ld   a, $02
     jp   SwitchBank
 

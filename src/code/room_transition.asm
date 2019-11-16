@@ -155,7 +155,7 @@ ApplyRoomTransition::
     ld   [wNextJingle], a                         ; $7983: $EA $69 $C1
 .noJingle
 
-    call label_3958                               ; $7986: $CD $58 $39
+    call CreateFollowingNpcEntity_trampoline      ; $7986: $CD $58 $39
 
     ; Reset animated tiles frame
     ld   a, $FF                                   ; $7989: $3E $FF

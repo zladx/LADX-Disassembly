@@ -210,7 +210,7 @@ label_6F5F::
     ld   [wEntitiesPosYTable + $02], a
 
     xor  a
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ld   [$C341], a
     ld   [$C342], a
     ld   [$C343], a
@@ -512,7 +512,7 @@ label_7168::
     ld   a, $68
     ld   [wEntitiesPosYTable], a
     ld   a, $01
-    ld   [$C3D0], a
+    ld   [wEntitiesUnknowTableY], a
     ret
 
 label_7188::
@@ -1272,7 +1272,7 @@ data_764F::
 RenderIntroMarin::
     call label_71C7
     xor  a
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ld   de, data_764F
     call RenderAnimatedActiveEntity
 
@@ -1301,10 +1301,10 @@ label_7681::
     jr   nc, label_769C
     call GetEntityTransitionCountdown
     ld   [hl], $40
-    call IncrementEntityWalkingAttr
+    call IncrementEntityState
 
 label_769C::
-    ld   hl, $C3D0
+    ld   hl, wEntitiesUnknowTableY
     add  hl, bc
     dec  [hl]
     jr   nz, label_76AA
@@ -1322,7 +1322,7 @@ label_76AB::
     call SetEntitySpriteVariant
     call GetEntityTransitionCountdown
     jr   nz, label_76D4
-    call IncrementEntityWalkingAttr
+    call IncrementEntityState
     ld   a, $07
     ld   [$C281], a
     ld   a, $FE
@@ -1354,7 +1354,7 @@ label_76D6::
     jr   nz, label_76F7
     call GetEntityTransitionCountdown
     ld   [hl], $40
-    jp   IncrementEntityWalkingAttr
+    jp   IncrementEntityState
 
 label_76F7::
     cp   $20
@@ -1415,7 +1415,7 @@ label_7745::
     ld   [rIE], a
     call GetEntityTransitionCountdown
     ld   [hl], $E0
-    jp   IncrementEntityWalkingAttr
+    jp   IncrementEntityState
 
 label_775C::
     cp   $20
@@ -1512,7 +1512,7 @@ label_77ED::
     and  $07
     ldh  [hActiveEntitySpriteVariant], a
     xor  a
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ld   de, label_77BD
     call RenderAnimatedActiveEntity
     ld   a, [$C3C0]
@@ -1810,7 +1810,7 @@ RenderIntroInertLink::
     xor  a
 
 label_7A36::
-    ld   [$C340], a
+    ld   [wEntitiesUnknowTableL], a
     ld   de, data_7A27
     call RenderAnimatedActiveEntity
     ld   a, [$C3C0]
@@ -1829,7 +1829,7 @@ label_7A47::
     dec  [hl]
     jr   nz, label_7A5D
     ld   [hl], $90
-    call IncrementEntityWalkingAttr
+    call IncrementEntityState
 
 label_7A5D::
     ret
@@ -1844,7 +1844,7 @@ label_7A6A::
     ret
 
 label_7A6B::
-    jp   IncrementEntityWalkingAttr
+    jp   IncrementEntityState
     ld   a, [$D00A]
     cp   $13
     jr   z, label_7AB3
@@ -1887,7 +1887,7 @@ label_7AB2::
     ret
 
 label_7AB3::
-    call IncrementEntityWalkingAttr
+    call IncrementEntityState
     call GetEntityTransitionCountdown
     ld   [hl], $17
     ld   a, $07

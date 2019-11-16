@@ -37,8 +37,8 @@ jr_019_4489:
     jr   nz, jr_019_44A6                          ; $449C: $20 $08
 
     ld   a, $08                                   ; $449E: $3E $08
-    call label_3BAA                               ; $44A0: $CD $AA $3B
-    jp   IncrementEntityWalkingAttr               ; $44A3: $C3 $12 $3B
+    call ApplyVectorTowardsLink_trampoline        ; $44A0: $CD $AA $3B
+    jp   IncrementEntityState                     ; $44A3: $C3 $12 $3B
 
 jr_019_44A6:
     ld   hl, wEntitiesCollisionsTable             ; $44A6: $21 $A0 $C2
@@ -61,7 +61,7 @@ jr_019_44B9:
     jr   nz, jr_019_44C5                          ; $44BE: $20 $05
 
     ld   a, $20                                   ; $44C0: $3E $20
-    call label_3BAA                               ; $44C2: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $44C2: $CD $AA $3B
 
 jr_019_44C5:
     call label_3B44                               ; $44C5: $CD $44 $3B
@@ -89,7 +89,7 @@ jr_019_44DA:
     ldh  a, [hDungeonFloorTile]                   ; $44DF: $F0 $E9
     ld   e, a                                     ; $44E1: $5F
     ld   d, b                                     ; $44E2: $50
-    call label_2178                               ; $44E3: $CD $78 $21
+    call func_014_5526_trampoline                 ; $44E3: $CD $78 $21
     ldh  a, [hSwordIntersectedAreaX]              ; $44E6: $F0 $CE
     add  $08                                      ; $44E8: $C6 $08
     ldh  [hScratch0], a                           ; $44EA: $E0 $D7

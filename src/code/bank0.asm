@@ -668,7 +668,7 @@ label_BE7::
     jp   ReloadSavedBank
 
 label_BFB::
-    ld   hl, $C450
+    ld   hl, wEntitiesDropTimerTable
     jr   IsZero
 
 IsEntityUnknownFZero::
@@ -697,9 +697,11 @@ IsZero::
     and  a
     ret
 
-label_C0C::
-    ld   a, $AF
-    call func_003_64CA_trampoline
+; Create a new temporary entity with the current trading item.
+; Used when Link trades a new item.
+CreateTradingItemEntity::
+    ld   a, ENTITY_TRADING_ITEM
+    call SpawnNewEntity_trampoline
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -715,15 +717,15 @@ PlayWrongAnswerJingle::
     ldh  [hJingle], a
     ret
 
-label_C25::
-    ld   hl, $4641
-    jr   label_C2D
+ReadTileValueFromAsciiTable::
+    ld   hl, AsciiToTileMap
+    jr   ReadValueInDialogsBank
 
-label_C2A::
-    ld   hl, $4741
+ReadDialogBankFromTable::
+    ld   hl, DialogBankTable
 
-label_C2D::
-    ld   a, $1C
+ReadValueInDialogsBank::
+    ld   a, BANK(AsciiToTileMap) ; or BANK(DialogBankTable)
     ld   [MBC3SelectBank], a
     add  hl, bc
     ld   a, [hl]
@@ -750,7 +752,7 @@ label_C50::
     ret
 
 label_C56::
-    ld   hl, $C410
+    ld   hl, wEntitiesUnknowTableT
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -1304,7 +1306,7 @@ WorldDefaultHandler::
     jr   z, .normalFlow
 
     ; … decrement the counter
-    ld   hl, $FFA1
+    ld   hl, hLinkInteractiveMotionBlocked
     ld   [hl], $02
     dec  a
     ld   [wLoadPreviousMapCountdown], a
@@ -1469,7 +1471,7 @@ InitGotItemSequence::
     ld   [$D45F], a
     cp   $04
     jr   c, label_10DF
-    ldh  a, [$FFA1]
+    ldh  a, [hLinkInteractiveMotionBlocked]
     cp   $02
     jr   z, label_10DB
     ldh  a, [hLinkAnimationState]
@@ -1643,7 +1645,7 @@ label_11C3::
     jr   nc, label_11E8
 
 label_11E2::
-    ldh  a, [$FFA1]
+    ldh  a, [hLinkInteractiveMotionBlocked]
     and  a
     jp   nz, label_12ED
 
@@ -1980,7 +1982,7 @@ label_142E::
     ret
 
 label_142F::
-    call func_003_64CA_trampoline
+    call SpawnNewEntity_trampoline
     ret  c
     ld   a, $0C
     ld   [$C19B], a
@@ -2023,7 +2025,7 @@ label_142F::
     ld   hl, $C3B0
     add  hl, de
     ld   [hl], a
-    ld   hl, $C380
+    ld   hl, wEntitiesUnknowTableQ
     add  hl, de
     ld   [hl], a
     ld   hl, $C5D0
@@ -2057,8 +2059,9 @@ label_14A7::
     ld   a, [wMagicPowderCount]
     and  a
     jp   z, PlayWrongAnswerJingle
-    ld   a, $08
-    call func_003_64CA_trampoline
+
+    ld   a, ENTITY_MAGIC_POWDER_SPRINKLE
+    call SpawnNewEntity_trampoline
     ret  c
     callsb Func_020_4C47
     ld   a, [wCurrentBank]
@@ -2166,7 +2169,7 @@ label_1562::
     ld   a, [$C5A9]
     and  a
     ret  z
-    ld   a, [$DB4E]
+    ld   a, [wSwordLevel]
     cp   $02
     ret  nz
     ld   a, $DF
@@ -2262,11 +2265,11 @@ CheckStaticSwordCollision::
     ret  nz
     push de
     ld   a, [hl]
-    ldh  [$FFAF], a
+    ldh  [hObjectUnderEntity], a
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
-    call label_2A26
+    call ReadValueFromBaseMap_trampoline
     pop  de
 
     cp   $D0
@@ -2285,7 +2288,7 @@ CheckStaticSwordCollision::
     ld   c, $00
     ld   a, [wIsIndoor]
     and  a
-    ldh  a, [$FFAF]
+    ldh  a, [hObjectUnderEntity]
     jr   z, label_1629
 
     cp   $DD
@@ -2306,7 +2309,7 @@ label_1629::
 label_1637::
     ld   a, c
     ldh  [hActiveEntitySpriteVariant], a
-    call label_2178
+    call func_014_5526_trampoline
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
     jr   nz, label_1653
@@ -2321,7 +2324,7 @@ label_1637::
 label_1653::
     ld   a, $05
     call label_142F
-    jr   c, label_167C
+    jr   c, .dropRandomItem
     xor  a
     ld   [$C19B], a
     ld   hl, wEntitiesPosXTable
@@ -2342,22 +2345,28 @@ label_1653::
     ld   b, d
     call label_3942
 
-label_167C::
+.dropRandomItem
+    ; In some random cases, don't drop anything.
     call GetRandomByte
     and  $07
     ret  nz
-    ldh  a, [$FFAF]
-    cp   $D3
+
+    ; If stairs are hiding behind the cut bush, don't drop anything.
+    ldh  a, [hObjectUnderEntity]
+    cp   OBJECT_BUSH_GROUND_STAIRS
     ret  z
+
+    ; Randomly drop a rupee or heart
     call GetRandomByte
     rra
-    ld   a, $2E
-    jr   nc, label_1691
-    ld   a, $2D
-
-label_1691::
-    call func_003_64CA_trampoline
+    ld   a, ENTITY_DROPPABLE_RUPEE
+    jr   nc, .randomEnd
+    ld   a, ENTITY_DROPPABLE_HEART
+.randomEnd
+    call SpawnNewEntity_trampoline
     ret  c
+
+    ; Configure the dropped entity
     ld   hl, wEntitiesPosXTable
     add  hl, de
     ldh  a, [hSwordIntersectedAreaX]
@@ -2368,7 +2377,7 @@ label_1691::
     ldh  a, [hSwordIntersectedAreaY]
     add  a, $10
     ld   [hl], a
-    ld   hl, $C450
+    ld   hl, wEntitiesDropTimerTable
     add  hl, de
     ld   [hl], $80
     ld   hl, $C2F0
@@ -2484,7 +2493,7 @@ label_1756::
     and  $07
     ld   hl, $FFA2
     or   [hl]
-    ld   hl, $FFA1
+    ld   hl, hLinkInteractiveMotionBlocked
     or   [hl]
     ld   hl, $C146
     or   [hl]
@@ -2647,7 +2656,7 @@ label_186C::
 
 label_1898::
     ldh  a, [hIsSideScrolling]
-    ldh  [$FFE4], a
+    ldh  [hScratchD], a
     ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     xor  a
@@ -2789,7 +2798,7 @@ label_196F::
     ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, label_19DA
-    ldh  a, [$FFE4]
+    ldh  a, [hScratchD]
     and  a
     jr   nz, label_19D9
     ld   a, [wIsIndoor]
@@ -3147,7 +3156,7 @@ label_1ED7::
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     pop  af
-    ld   hl, $FFA1
+    ld   hl, hLinkInteractiveMotionBlocked
     ld   [hl], $01
     ld   hl, $D6FB
     ld   e, [hl]
@@ -3220,12 +3229,21 @@ label_1F3E::
     ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
-data_1F49::
-    db   $C, 3, 8, 8
+; Number of horizontal pixels the sword reaches in Link's direction when drawing the sword
+SwordAreaXForDirection::
+.right db $0C
+.left  db $03
+.up    db $08
+.down  db $08
 
-data_1F4D::
-    db   $A, $A, 5, $10
+; Number of vertical pixels the sword reaches in Link's direction when drawing the sword
+SwordAreaYForDirection::
+.right db $0A
+.left  db $0A
+.up    db $05
+.down  db $10
 
+; Array of constants for Link animation state
 data_1F51::
     db   $36, $38, $3A, $3C
 
@@ -3238,12 +3256,17 @@ data_1F59::
 data_1F5D::
     db   0, 0, 4, 0
 
-label_1F61::
+; Call label_1F69, then restore bank 2
+; (Only ever called from label_002_4287)
+label_1F69_trampoline::
     call label_1F69
-    ld   a, 2
+    ld   a, $02
     jp   SwitchBank
 
+; Physics for Link interactive motion?
+; (Only ever called from label_002_4287)
 label_1F69::
+    ; If running with pegagus boots, or $FFA2 != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
     ld   hl, wIsRunningWithPegasusBoots
     ld   a, [$C15C]
     or   [hl]
@@ -3251,88 +3274,113 @@ label_1F69::
     or   [hl]
     ld   hl, wLinkMotionState
     or   [hl]
-    jp   nz, label_2177
+    jp   nz, label_1F69_return
+
+    ; Update hSwordIntersectedAreaX according to Link's position and direction
     ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
-    ld   hl, data_1F49
+    ld   hl, SwordAreaXForDirection
     add  hl, de
+
     ldh  a, [hLinkPositionX]
     add  a, [hl]
     sub  a, $08
     and  $F0
     ldh  [hSwordIntersectedAreaX], a
+
+    ; Update hSwordIntersectedAreaY according to Link's position and direction
     swap a
     ld   c, a
-    ld   hl, data_1F4D
+    ld   hl, SwordAreaYForDirection
     add  hl, de
     ldh  a, [hLinkPositionY]
     add  a, [hl]
     sub  a, $10
     and  $F0
     ldh  [hSwordIntersectedAreaY], a
+
+    ; hl = address of the room object that would intersect with the sword
     or   c
     ld   e, a
     ldh  [hScratch1], a
     ld   hl, wRoomObjects
     add  hl, de
+
+    ; (Sanity check: if HIGH(hl) != $D7, then we're far out of bounds: return)
     ld   a, h
     cp   $D7
-    jp   nz, label_214E
+    jp   nz, clearC15FAndReturn
+
+    ; hScratch0 = id of room object under the sword
     ld   a, [hl]
     ldh  [hScratch0], a
+
+    ; hScratch5 = unknown value read from the base map
+    ; d = map group id
+    ; e = room object
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
-    call label_2A26
+    call ReadValueFromBaseMap_trampoline
     ldh  [hScratch5], a
+
+    ; If the object is $9A, skip this section
+
     ldh  a, [hScratch0]
     cp   $9A
-    jr   z, label_1FFE
+    jr   z, .notObject9AEnd
+
     ldh  a, [hScratch5]
     cp   $00
-    jp   z, label_214E
+    jp   z, clearC15FAndReturn
     cp   $01
-    jr   z, label_1FE6
+    jr   z, .jp_1FE6
     cp   $50
-    jp   z, label_214E
+    jp   z, clearC15FAndReturn
     cp   $51
-    jp   z, label_214E
+    jp   z, clearC15FAndReturn
     cp   $11
-    jp  c, label_214E
+    jp  c, clearC15FAndReturn
     cp   $D4
-    jp   nc, label_214E
+    jp   nc, clearC15FAndReturn
     cp   $D0
-    jr   nc, label_1FE6
+    jr   nc, .jp_1FE6
     cp   $7C
-    jp   nc, label_214E
+    jp   nc, clearC15FAndReturn
 
-label_1FE6::
+.jp_1FE6
     ldh  a, [hScratch0]
     ld   e, a
     cp   $6F
-    jr   z, label_1FF6
+    jr   z, .jp_1FF6
     cp   $5E
-    jr   z, label_1FF6
+    jr   z, .jp_1FF6
     cp   $D4
     jp   nz, label_2098
 
-label_1FF6::
+.jp_1FF6
     ld   a, [wIsIndoor]
     and  a
+
     ld   a, e
     jp   nz, label_2098
+.notObject9AEnd
 
-label_1FFE::
     ld   e, a
+
+    ; If Link is facing up, handle some special cases.
     ldh  a, [hLinkDirection]
-    cp   $02
-    jp   nz, label_20CF
+    cp   DIRECTION_UP
+    jp   nz, specialCasesEnd
+    ; Set [$C1AD] = 2
     ld   a, $02
     ld   [$C1AD], a
-    ldh  a, [$FFCC]
-    and  $30
-    jp   z, label_20CF
+
+    ; If A or B is pressed…
+    ldh  a, [hJoypadState]
+    and  J_A | J_B
+    jp   z, specialCasesEnd
     ld   a, e
     cp   $5E
     ld   a, $8E
@@ -3345,20 +3393,21 @@ label_1FFE::
     ld   a, [wIsMarinFollowingLink]
     and  a
     jr   z, label_2030
-    ld   a, $78
-    call OpenDialogInTable2
-    jp   label_20CF
+    ; Open Marin's "Do you look in people's drawers?" dialog
+    call_open_dialog $278
+    jp   specialCasesEnd
 
 label_2030::
-    ld   a, [$DB4E]
+    ; If no sword yet…
+    ld   a, [wSwordLevel]
     and  a
     ldh  a, [hMapRoom]
-    jr   nz, label_203E
+    jr   nz, .noSwordEnd
     ld   e, $FF
     cp   $A3
     jr   z, label_2046
+.noSwordEnd
 
-label_203E::
     ld   e, $FC
     cp   $FA
     jr   z, label_2046
@@ -3398,7 +3447,7 @@ label_2066::
     and  $F0
     or   e
     ld   [$D473], a
-    jp   label_20CF
+    jp   specialCasesEnd
 
 label_2080::
     cp   $83
@@ -3408,44 +3457,46 @@ label_2080::
 
 label_2088::
     call OpenDialogInTable1
-    jp   label_20CF
+    jp   specialCasesEnd
 
 label_208E::
     call OpenDialog
-    jr   label_20CF
+    jr   specialCasesEnd
 
 label_2093::
     call OpenDialogInTable2
-    jr   label_20CF
+    jr   specialCasesEnd
 
 label_2098::
-    cp   $A0
-    jr   nz, label_20CF
+
+    ; When throwing a pot at a chest in the right room, open the chest
+    cp   OBJECT_CHEST_CLOSED
+    jr   nz, specialCasesEnd
     ld   a, [wRoomEvent]
-    and  $1F
-    cp   $0D
-    jr   z, label_20CF
+    and  EVENT_TRIGGER_MASK
+    cp   TRIGGER_THROW_POT_AT_CHEST
+    jr   z, specialCasesEnd
     ldh  a, [hLinkDirection]
     cp   $02
-    jr   nz, label_20CF
+    jr   nz, specialCasesEnd
     ld   [$C1AD], a
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $30
-    jr   z, label_20CF
+    jr   z, specialCasesEnd
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   nz, label_20BF
+    jr   nz, .label_20BF
     ldh  a, [hLinkDirection]
     cp   $02
-    jr   nz, label_20CF
+    jr   nz, specialCasesEnd
 
-label_20BF::
+.label_20BF
     callsb func_014_5900
-    callsb label_002_41D0
+    callsb SpawnChestWithItem
+specialCasesEnd:
 
-label_20CF::
     ld   a, [wAButtonSlot]
-    cp   $03
+    cp   INVENTORY_POWER_BRACELET
     jr   nz, label_20DD
     ldh  a, [hPressedButtonsMask]
     and  $20
@@ -3454,16 +3505,16 @@ label_20CF::
 
 label_20DD::
     ld   a, [wBButtonSlot]
-    cp   $03
-    jp   nz, label_2177
+    cp   INVENTORY_POWER_BRACELET
+    jp   nz, label_1F69_return
     ldh  a, [hPressedButtonsMask]
     and  $10
-    jp   z, label_2177
+    jp   z, label_1F69_return
 
 label_20EC::
     callsb label_002_48B0
     ld   a, $01
-    ldh  [$FFA1], a
+    ldh  [hLinkInteractiveMotionBlocked], a
     ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
@@ -3476,7 +3527,7 @@ label_20EC::
     add  hl, de
     ldh  a, [hPressedButtonsMask]
     and  [hl]
-    jr   z, label_214E
+    jr   z, clearC15FAndReturn
     ld   hl, data_1F59
     add  hl, de
     ld   a, [hl]
@@ -3490,15 +3541,15 @@ label_20EC::
     ld   e, $08
     ld   a, [wActivePowerUp]
     cp   $01
-    jr   nz, label_212C
+    jr   nz, .jp_212C
     ld   e, $03
 
-label_212C::
+.jp_212C
     ld   hl, $C15F
     inc  [hl]
     ld   a, [hl]
     cp   e
-    jr   c, label_214D
+    jr   c, .return
     xor  a
     ldh  [$FFE5], a
     ldh  a, [hScratch0]
@@ -3508,15 +3559,15 @@ label_212C::
     jr   z, label_2153
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_214D
+    jr   nz, .return
     ldh  a, [hScratch0]
     cp   $5C
     jr   z, label_2161
 
-label_214D::
+.return
     ret
 
-label_214E::
+clearC15FAndReturn::
     xor  a
     ld   [$C15F], a
     ret
@@ -3534,16 +3585,16 @@ label_2165::
     ldh  a, [hScratch1]
     ld   e, a
     ldh  a, [hScratch0]
-    ldh  [$FFAF], a
-    call label_2178
+    ldh  [hObjectUnderEntity], a
+    call func_014_5526_trampoline
     ldh  a, [hLinkDirection]
     ld   [$C15D], a
     jp   label_2183
 
-label_2177::
+label_1F69_return::
     ret
 
-label_2178::
+func_014_5526_trampoline::
     callsb func_014_5526
     jp   ReloadSavedBank
 
@@ -3551,8 +3602,10 @@ label_2183::
     ld   a, $05
     call label_142F
     jr   c, label_21A7
-    ld   a, $02
+
+    ld   a, WAVE_SFX_ZIP
     ldh  [hWaveSfx], a
+
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   [hl], $07
@@ -3751,7 +3804,7 @@ DoUpdateBGRegion::
     ; if IsGBC…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .palettesDone
+    jr   z, .palettesskipEntityLoad
     ; … hl = (MapId == MAP_COLOR_DUNGEON ? ColorDungeonBaseMap : IndoorBaseMapGBC)
     ld   hl, IndoorBaseMapGBC
     ldh  a, [hMapId]
@@ -3765,7 +3818,7 @@ DoUpdateBGRegion::
     ld   hl, OverworldBaseMapDMG
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .palettesDone
+    jr   z, .palettesskipEntityLoad
     ld   hl, OverworldBaseMapGBC
 
     ;
@@ -3776,7 +3829,7 @@ DoUpdateBGRegion::
     ; Set the BG attributes bank in hScratch8,
     ; and the target BG attributes address in FFE0-FFE1
     callsb GetBGAttributesAddressForObject
-.palettesDone
+.palettesskipEntityLoad
 
     ;
     ; BG map offset selection
@@ -3814,7 +3867,7 @@ DoUpdateBGRegion::
     ld   a, c
     ldh  [$FFE3], a
     ld   a, d
-    ldh  [$FFE4], a
+    ldh  [hScratchD], a
     ld   a, e
     ldh  [$FFE5], a
     ; Restore state
@@ -3844,7 +3897,7 @@ DoUpdateBGRegion::
     ld   a, c
     ldh  [$FFE3], a
     ld   a, d
-    ldh  [$FFE4], a
+    ldh  [hScratchD], a
     ld   a, e
     ldh  [$FFE5], a
     ; Cleanup
@@ -4143,26 +4196,26 @@ label_2A07::
     call label_5A59
     jp   ReloadSavedBank
 
-label_2A12::
+; Read an unknown value from the base map bank
+ReadValueFromBaseMap::
     ld   a, $08
     ld   [MBC3SelectBank], a
     ld   hl, $4AD4
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2A23
+    jr   nz, .colorDungeonEnd
     ld   hl, $4BD4
-
-label_2A23::
+.colorDungeonEnd
     add  hl, de
     ld   a, [hl]
     ret
 
-label_2A26::
-    call label_2A12
+ReadValueFromBaseMap_trampoline::
+    call ReadValueFromBaseMap
     jp   ReloadSavedBank
 
 label_2A2C::
-    call label_2A12
+    call ReadValueFromBaseMap
     push af
     ld   a, $03
     ld   [MBC3SelectBank], a
@@ -4793,7 +4846,7 @@ LoadTilemap9::
 
 .jr_2ED4
     and  a
-    jr   z, .copyDone
+    jr   z, .copyskipEntityLoad
     push af
     and  $3F
     ld   b, a
@@ -4829,7 +4882,7 @@ LoadTilemap9::
     ; length = $100
     ld   bc, TILE_SIZE * 16
     call CopyData
-.copyDone
+.copyskipEntityLoad
 
     ; while hScratch0 < 4, copy the next row
     ldh  a, [hScratch0]
@@ -5049,18 +5102,18 @@ doCopyObjectToBG:
     jr   z, .hasSpecialBaseAddress
     ; If MapId == MAP_HOUSE && MapRoom == $B5, hl = $4760
     cp   MAP_HOUSE
-    jr   nz, .baseAddressDone
+    jr   nz, .baseAddressskipEntityLoad
     ldh  a, [hMapRoom]
     cp   $B5
-    jr   nz, .baseAddressDone
+    jr   nz, .baseAddressskipEntityLoad
 
 .hasSpecialBaseAddress
     ld   hl, $4760
-    jr   .baseAddressDone
+    jr   .baseAddressskipEntityLoad
 
 .isOverworld
     ld   hl, $6B1D
-.baseAddressDone
+.baseAddressskipEntityLoad
 
     ; Copy tile numbers to BG map for tiles on the upper row
     push de
@@ -6671,34 +6724,48 @@ FillRoomMapWithObject::
     jr   nz, .loop
     ret
 
+; Retrieve the entities list for this room, and load each entity from its definition.
 LoadRoomEntities::
-    callsb func_001_5F02
+    callsb UpdateRecentRoomsList
 
-    ld   a, $16
+    ld   a, BANK(OverworldEntitiesPointersTable)
     ld   [MBC3SelectBank], a
 
     ; Reset the entities load order
     xor  a
     ldh  [hScratchD], a
 
+    ; bc = [hMapRoom] * 2
     ldh  a, [hMapRoom]
     ld   c, a
     ld   b, $00
     sla  c
     rl   b
-    ld   hl, $4000
+
+    ;
+    ; Compute the proper entities pointers table for the room
+    ;
+
+    ; If on overworld, we're skipEntityLoad.
+    ld   hl, OverworldEntitiesPointersTable
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_3868
+    jr   z, .pointersTableEnd
+
+    ; The room is indoors.
+
+    ; If in Eagle's Tower…
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
-    jr   nz, label_3850
+    jr   nz, .eaglesTowerEnd
+    ; … and [hMapRoom] == [$DB6F]…
     ld   a, [$DB6F]
     ld   hl, hMapRoom
     cp   [hl]
-    jr   nz, label_3850
-    ld   a, $A8
-    call func_003_64CA_trampoline
+    jr   nz, .eaglesTowerEnd
+    ; do some special casing for this room entities
+    ld   a, ENTITY_A8
+    call SpawnNewEntity_trampoline
     ld   a, [$DB70]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -6707,96 +6774,134 @@ LoadRoomEntities::
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
-    call label_38D4
-    ld   hl, $C460
+    call LoadEntityFromDefinition.didLoadEntity
+    ld   hl, wEntitiesLoadOrderTable
     add  hl, de
     ld   [hl], $FF
     xor  a
-    ldh  [$FFE4], a
+    ldh  [hScratchD], a
+.eaglesTowerEnd
 
-label_3850::
-    ld   hl, $4200
+    ; By default, use the IndoorsA pointers table
+    ld   hl, IndoorsAEntitiesPointersTable
+
+    ; If on the Color Dungeon, use ColorDungeonEntitiesPointersTable
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_385E
-    ld   hl, $4600
-    jr   label_3868
-
-label_385E::
-    cp   $1A
-    jr   nc, label_3868
-    cp   $06
-    jr   c, label_3868
+    jr   nz, .useIndoorsBTable
+    ld   hl, ColorDungeonEntitiesPointersTable
+    jr   .pointersTableEnd
+.useIndoorsBTable
+    ; If on a map between $06 and $1A…
+    cp   MAP_UNKNOWN_1A
+    jr   nc, .pointersTableEnd
+    cp   MAP_EAGLES_TOWER
+    jr   c, .pointersTableEnd
+    ; … use IndoorsBEntitiesPointersTable
+    ; (by incrementing H from $42 to $44)
     inc  h
     inc  h
+.pointersTableEnd
 
-label_3868::
+    ; Read the entities list address in the pointers table
     add  hl, bc
     ld   a, [hli]
     ld   c, a
     ld   a, [hl]
     ld   b, a
 
-label_386D::
+    ; For each entity definition in the target list…
+.loop
+    ; if the end of list is reached, break
     ld   a, [bc]
-    cp   $FF
-    jr   z, label_3877
-    call label_3883
-    jr   label_386D
+    cp   ENTITIES_END
+    jr   z, .break
+    ; otherwise load the entity definition.
+    call LoadEntityFromDefinition
+    jr   .loop
+.break
 
-label_3877::
     call ReloadSavedBank
     ret
 
-data_387B::
-    db 1, 2, 4, 8, $10, $20, $40, $80
+; Array indexed by load order
+EntityMask_387B::
+    db   %00000001
+    db   %00000010
+    db   %00000100
+    db   %00001000
+    db   %00010000
+    db   %00100000
+    db   %01000000
+    db   %10000000
 
-label_3883::
-    ldh  a, [$FFE4]
+; Load an entity for the current room from an entity definition.
+; An entity definition is 2 bytes:
+;   - vertical and horizontal position
+;   - entity type
+; See files in `data/entities/` for more infos.
+;
+; Inputs:
+;   bc   address of the entity definition
+LoadEntityFromDefinition::
+    ; a = entity load order
+    ldh  a, [hScratchD]
+
+    ; If the load order < 8…
     cp   $08
-    jr   nc, label_389B
+    jr   nc, .skipClearedEntityEnd
+    ; and EntityMask_387B[hScratchD] & wEntitiesClearedRooms[hMapRoom] != 0,
     ld   e, a
     ld   d, $00
-    ld   hl, data_387B
+    ld   hl, EntityMask_387B
     add  hl, de
     ldh  a, [hMapRoom]
     ld   e, a
     ld   a, [hl]
-    ld   hl, $CF00
+    ld   hl, wEntitiesClearedRooms
     add  hl, de
     and  [hl]
-    jr   nz, label_38AD
+    ; … then the entity has been cleared previously: don't load it.
+    jr   nz, .skipEntityLoad
+.skipClearedEntityEnd
 
-label_389B::
+    ; de = $0000
     ld   e, $00
     ld   d, e
-
-label_389E::
+    ; Find the first available slot (i.e. ENTITY_STATUS_DISABLED)
+.loop
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
-    cp   $00
-    jr   z, label_38B4
+    cp   ENTITY_STATUS_DISABLED
+    jr   z, .createEntityAndReturn
+    ; If this slot is not available, try until we reach the last slot
     inc  e
     ld   a, e
     cp   $10
-    jr   nz, label_389E
+    jr   nz, .loop
+    ; If all slots are unavailable, skip this entity
 
-label_38AD::
-    ld   hl, $FFE4
+.skipEntityLoad
+    ; Increment the entity load order anyway
+    ld   hl, hScratchD
     inc  [hl]
+    ; Increment the address to the next definition in the list
     inc  bc
     inc  bc
     ret
 
-label_38B4::
-    ld   [hl], $04
+.createEntityAndReturn
+    ; Mark the entity as being initialized
+    ld   [hl], ENTITY_STATUS_INIT
+    ; Set the entity horizontal position (lowest nybble of first byte)
     ld   a, [bc]
     and  $F0
     ld   hl, wEntitiesPosYTable
     add  hl, de
     add  a, $10
     ld   [hl], a
+    ; Set the entity horizontal position (highest nybble of first byte)
     ld   a, [bc]
     inc  bc
     swap a
@@ -6805,16 +6910,18 @@ label_38B4::
     add  hl, de
     add  a, $08
     ld   [hl], a
+    ; Set the entity type
     ld   hl, wEntitiesTypeTable
     add  hl, de
     ld   a, [bc]
     inc  bc
     ld   [hl], a
 
-label_38D4::
-    callsb func_003_6524
+.didLoadEntity
+    callsb ConfigureNewEntity_helper
     callsb PrepareEntityPositionForRoomTransition
-    ld   a, $16
+    ; Restore bank for entities placement data
+    ld   a, BANK(OverworldEntitiesPointersTable)
     ld   [MBC3SelectBank], a
     ret
 
@@ -6884,15 +6991,13 @@ label_394D::
     callsb func_014_54AC
     jp   ReloadSavedBank
 
-label_3958::
-    ld   a, $01
-    call SwitchBank
-    call label_5FB3
+CreateFollowingNpcEntity_trampoline::
+    callsw CreateFollowingNpcEntity
     ld   a, $02
     jp   SwitchBank
 
 label_3965::
-    callsb func_003_485B
+    callsb ConfigureNewEntity
     jp   ReloadSavedBank
 
 label_3970::
@@ -7001,8 +7106,8 @@ AnimateEntities::
 .return:
     ret
 
-label_3A0A::
-    callsb func_015_4000
+ResetEntity_trampoline::
+    callsb ResetEntity
     ld   a, $03
     ld   [MBC3SelectBank], a
     ret
@@ -7126,7 +7231,7 @@ data_3AD7::
     db 8, 2, 8
 
 label_3AEA::
-    ld      hl, $C350
+    ld      hl, wEntitiesUnknowTableM
     add     hl, bc
     ld      a, [hl]
     and     $7C ; '|'
@@ -7163,10 +7268,10 @@ SetEntitySpriteVariant::
     ld   [hl], a
     ret
 
-; Increment the "is walking" attribute of the given entity
+; Increment the state attribute of the given entity
 ; Input:
 ;  - bc: the entity number
-IncrementEntityWalkingAttr::
+IncrementEntityState::
     ld   hl, wEntitiesStateTable
     add  hl, bc
     inc  [hl]
@@ -7214,29 +7319,29 @@ label_3B7B::
     callsb func_003_75A2
     jp   ReloadSavedBank
 
-func_003_64CA_trampoline::
+SpawnNewEntity_trampoline::
     push af
-    ld   a, BANK(func_003_64CA)
+    ld   a, BANK(SpawnNewEntity)
     ld   [MBC3SelectBank], a
     pop  af
-    call func_003_64CA
+    call SpawnNewEntity
     rr   l
     call ReloadSavedBank
     rl   l
     ret
 
-label_3B98::
+SpawnNewEntityInRange_trampoline::
     push af
-    ld   a, BANK(func_003_64CC)
+    ld   a, BANK(SpawnNewEntityInRange)
     ld   [MBC3SelectBank], a
     pop  af
-    call func_003_64CC
+    call SpawnNewEntityInRange
     rr   l
     call ReloadSavedBank
     rl   l
     ret
 
-label_3BAA::
+ApplyVectorTowardsLink_trampoline::
     ld   hl, MBC3SelectBank
     ld   [hl], BANK(ApplyVectorTowardsLink)
     call ApplyVectorTowardsLink
@@ -7635,7 +7740,9 @@ SkipDisabledEntityDuringRoomTransition::
     pop  hl
     ret
 
-label_3D7F::
+; Inputs:
+;   bc   entity slot index
+ClearEntitySpeed::
     ld   hl, wEntitiesSpeedXTable
     add  hl, bc
     ld   [hl], b
@@ -7715,7 +7822,7 @@ label_3E29::
     jp   ReloadSavedBank
 
 label_3E34::
-    callhl func_003_5407
+    callhl SmashRock
     jp   ReloadSavedBank
 
 LoadHeartsAndRuppeesCount::
@@ -7726,7 +7833,7 @@ LoadHeartsAndRuppeesCount::
     jp   ReloadSavedBank
 
 label_3E4D::
-    callsw label_002_41D0
+    callsw SpawnChestWithItem
     ld   a, $03
     jp   SwitchBank
 
@@ -7760,7 +7867,7 @@ label_3E88::
     ret
 
 label_3E8E::
-    ld   hl, $C4A0
+    ld   hl, wEntitiesUnknowTableZ
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -7791,7 +7898,7 @@ label_3EAF::
 
 label_3EBA::
     ldh  [hScratch0], a
-    ld   hl, $C400
+    ld   hl, wEntitiesUnknowTableS
     add  hl, bc
     ld   a, [hl]
     bit  7, a
@@ -7812,7 +7919,7 @@ label_3ED1::
     add  hl, bc
     and  [hl]
     jr   z, label_3EDE
-    ld   hl, $C410
+    ld   hl, wEntitiesUnknowTableT
     add  hl, bc
     ld   [hl], b
 
@@ -7896,7 +8003,7 @@ label_3F50::
     call func_003_55CF
     call ReloadSavedBank
 
-    ld   hl, $C460
+    ld   hl, wEntitiesLoadOrderTable
     add  hl, bc
     ld   a, [hl]
     cp   $FF
@@ -7924,7 +8031,7 @@ label_3F78::
     ld   e, a
     ld   d, b
     ld   a, [hl]
-    ld   hl, $CF00
+    ld   hl, wEntitiesClearedRooms
     add  hl, de
     or   [hl]
     ld   [hl], a

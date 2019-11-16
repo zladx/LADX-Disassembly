@@ -121,9 +121,9 @@ ApplyRoomTransition::
     ldh  [hLinkPositionYIncrement], a             ; $7958: $E0 $9B
     call CheckForLedgeJump                        ; $795A: $CD $45 $6E
 
-    ; If ($FFAF != $DB && $FFAF != $DC && ($FFAF == $E1 || wCollisionType != 0),
+    ; If (hObjectUnderEntity != $DB && hObjectUnderEntity != $DC && (hObjectUnderEntity == $E1 || wCollisionType != 0),
     ; handle special case.
-    ldh  a, [$FFAF]                               ; $795D: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $795D: $F0 $AF
     cp   $DB                                      ; $795F: $FE $DB
     jr   z, .bottomDirectionEnd                   ; $7961: $28 $17
 
@@ -155,7 +155,7 @@ ApplyRoomTransition::
     ld   [wNextJingle], a                         ; $7983: $EA $69 $C1
 .noJingle
 
-    call label_3958                               ; $7986: $CD $58 $39
+    call CreateFollowingNpcEntity_trampoline      ; $7986: $CD $58 $39
 
     ; Reset animated tiles frame
     ld   a, $FF                                   ; $7989: $3E $FF
@@ -758,7 +758,7 @@ label_002_7C14::
     and  $03                                      ; $7C16: $E6 $03
     ld   hl, wC167                                ; $7C18: $21 $67 $C1
     or   [hl]                                     ; $7C1B: $B6
-    ld   hl, $FFA1                                ; $7C1C: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked                                ; $7C1C: $21 $A1 $FF
     or   [hl]                                     ; $7C1F: $B6
     ld   hl, wDialogGotItem                       ; $7C20: $21 $A9 $C1
     or   [hl]                                     ; $7C23: $B6
@@ -792,7 +792,7 @@ label_002_7C50::
     or   [hl]                                     ; $7C57: $B6
     ld   hl, wDialogGotItem                       ; $7C58: $21 $A9 $C1
     or   [hl]                                     ; $7C5B: $B6
-    ld   hl, $FFA1                                ; $7C5C: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked                                ; $7C5C: $21 $A1 $FF
     or   [hl]                                     ; $7C5F: $B6
     ld   hl, wDialogState                         ; $7C60: $21 $9F $C1
     or   [hl]                                     ; $7C63: $B6
@@ -801,7 +801,7 @@ label_002_7C50::
     ret  nz                                       ; $7C68: $C0
 
     ld   e, $01                                   ; $7C69: $1E $01
-    ldh  a, [$FFAF]                               ; $7C6B: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $7C6B: $F0 $AF
     cp   $0E                                      ; $7C6D: $FE $0E
     jr   nz, jr_002_7C88                          ; $7C6F: $20 $17
 

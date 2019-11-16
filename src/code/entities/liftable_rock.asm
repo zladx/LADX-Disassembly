@@ -8,7 +8,7 @@ LiftableRockEntityHandler::
     cp   $01                                      ; $5334: $FE $01
     jr   nz, jr_003_5395                          ; $5336: $20 $5D
 
-    ld   hl, $C390                                ; $5338: $21 $90 $C3
+    ld   hl, wEntitiesUnknowTableR                ; $5338: $21 $90 $C3
     add  hl, bc                                   ; $533B: $09
     ld   a, [hl]                                  ; $533C: $7E
     and  a                                        ; $533D: $A7
@@ -18,8 +18,8 @@ LiftableRockEntityHandler::
     and  $03                                      ; $5343: $E6 $03
     jr   nz, jr_003_5369                          ; $5345: $20 $22
 
-    ld   a, $2F                                   ; $5347: $3E $2F
-    call func_003_64CA                            ; $5349: $CD $CA $64
+    ld   a, ENTITY_DROPPABLE_FAIRY                ; $5347: $3E $2F
+    call SpawnNewEntity                           ; $5349: $CD $CA $64
     jr   c, jr_003_5369                           ; $534C: $38 $1B
 
     ldh  a, [hScratch0]                           ; $534E: $F0 $D7
@@ -34,7 +34,7 @@ LiftableRockEntityHandler::
     ld   hl, wEntitiesPosZTable                                ; $535E: $21 $10 $C3
     add  hl, de                                   ; $5361: $19
     ld   [hl], a                                  ; $5362: $77
-    ld   hl, $C450                                ; $5363: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable                                ; $5363: $21 $50 $C4
     add  hl, de                                   ; $5366: $19
     ld   [hl], $80                                ; $5367: $36 $80
 
@@ -63,14 +63,12 @@ jr_003_5378:
     and  $3F                                      ; $5381: $E6 $3F
     jr   nz, .marinReaction2                      ; $5383: $20 $08
     ; Open Marin reaction 1 (Dialog028)
-    ld   a, $28                                   ; $5385: $3E $28
-    call OpenDialog                               ; $5387: $CD $85 $23
+    call_open_dialog $028                         ; $5385
     jp   ClearEntityType                          ; $538A: $C3 $8D $3F
 
 .marinReaction2
-    ; Open Marin reaction 2 (Dialog199)
-    ld   a, LOW($199)                             ; $538D: $3E $99
-    call OpenDialogInTable1                       ; $538F: $CD $73 $23
+    ; Open Marin reaction 2
+    call_open_dialog $199                         ; $538D
 
 jr_003_5392:
     jp   ClearEntityType                               ; $5392: $C3 $8D $3F

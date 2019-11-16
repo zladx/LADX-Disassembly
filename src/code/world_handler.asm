@@ -161,7 +161,7 @@ label_4452::
     ld   [wRoomTransitionDirection], a
     call LoadRoom
     call LoadRoomEntities
-    call label_5FB3
+    call CreateFollowingNpcEntity
     ld   a, $FF
     ldh  [hAnimatedTilesFrameCount], a
     ld   a, [wIsIndoor]

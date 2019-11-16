@@ -65,7 +65,7 @@ Func_01C_4A3D::
     ldh  a, [hFFE8]                             ; $4A5F: $F0 $E8
     ldi  [hl], a                                ; $4A61: $22
     ld   [hl], $00                              ; $4A62: $36 $00
-    ld   a, [$FFFE]                             ; $4A64: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $4A64: $F0 $FE
     and  a                                      ; $4A66: $A7
     jr   z, Func_01C_4A6C                       ; $4A67: $28 $03
 
@@ -158,7 +158,7 @@ Func_01C_4AED::
     jr   nz, Func_01C_4AED                      ; $4AF1: $20 $FA
 
     ld   [hl], $00                              ; $4AF3: $36 $00
-    ld   a, [$FFFE]                             ; $4AF5: $F0 $FE
+    ldh  a, [hIsGBC]                            ; $4AF5: $F0 $FE
     and  a                                      ; $4AF7: $A7
     jr   z, Func_01C_4AFD                       ; $4AF8: $28 $03
 

@@ -28,7 +28,7 @@ SpitObjectDialog::
 ; Also used when an object is spit out after a Like-like ate it
 ChestWithItemEntityHandler::
     ld   a, $02                                   ; $7BDD: $3E $02
-    ldh  [$FFA1], a                               ; $7BDF: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $7BDF: $E0 $A1
     xor  a                                        ; $7BE1: $AF
     ld   [wSwordAnimationState], a                ; $7BE2: $EA $37 $C1
     ld   [wC16A], a                               ; $7BE5: $EA $6A $C1
@@ -36,8 +36,8 @@ ChestWithItemEntityHandler::
     cp   $22                                      ; $7BEA: $FE $22
     jr   nz, jr_007_7C29                          ; $7BEC: $20 $3B
 
-    ld   a, $1B                                   ; $7BEE: $3E $1B
-    call func_003_64CA_trampoline                               ; $7BF0: $CD $86 $3B
+    ld   a, ENTITY_GEL                            ; $7BEE: $3E $1B
+    call SpawnNewEntity_trampoline                ; $7BF0: $CD $86 $3B
     jp   c, label_007_7EA4                        ; $7BF3: $DA $A4 $7E
 
     ldh  a, [hScratch0]                           ; $7BF6: $F0 $D7
@@ -116,7 +116,7 @@ jr_007_7C5E:
     ret  nz                                       ; $7C62: $C0
 
     call func_007_7E0A                            ; $7C63: $CD $0A $7E
-    ld   hl, $C3D0                                ; $7C66: $21 $D0 $C3
+    ld   hl, wEntitiesUnknowTableY                ; $7C66: $21 $D0 $C3
     add  hl, bc                                   ; $7C69: $09
     ld   a, [hl]                                  ; $7C6A: $7E
     inc  a                                        ; $7C6B: $3C
@@ -151,7 +151,7 @@ jr_007_7C90:
     ld   [wActiveMusicTrack], a                   ; $7C90: $EA $68 $D3
 
 jr_007_7C93:
-    ld   hl, $C3D0                                ; $7C93: $21 $D0 $C3
+    ld   hl, wEntitiesUnknowTableY                ; $7C93: $21 $D0 $C3
     add  hl, bc                                   ; $7C96: $09
     ld   a, [hl]                                  ; $7C97: $7E
     cp   $26                                      ; $7C98: $FE $26
@@ -167,8 +167,7 @@ jr_007_7C93:
     cp   $96                                      ; $7CA6: $FE $96
     jr   nz, jr_007_7CB1                          ; $7CA8: $20 $07
 
-    ld   a, $11                                   ; $7CAA: $3E $11
-    call OpenDialogInTable1                       ; $7CAC: $CD $73 $23
+    call_open_dialog $111                         ; $7CAA
     jr   jr_007_7CE9                              ; $7CAF: $18 $38
 
 jr_007_7CB1:

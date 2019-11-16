@@ -7,7 +7,7 @@ HookshotChainEntityHandler::
     jp   nz, label_018_7F08                       ; $7BE7: $C2 $08 $7F
 
     ld   a, $02                                   ; $7BEA: $3E $02
-    ldh  [$FFA1], a                               ; $7BEC: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $7BEC: $E0 $A1
     ld   [$C1A4], a                               ; $7BEE: $EA $A4 $C1
     ld   [$C1C6], a                               ; $7BF1: $EA $C6 $C1
     ld   a, c                                     ; $7BF4: $79
@@ -58,7 +58,7 @@ jr_018_7C39:
     jr   nz, jr_018_7C54                          ; $7C3F: $20 $13
 
     ld   a, $30                                   ; $7C41: $3E $30
-    call label_3BAA                               ; $7C43: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $7C43: $CD $AA $3B
 
 jr_018_7C46:
     call label_3B5A                               ; $7C46: $CD $5A $3B
@@ -102,8 +102,8 @@ jr_018_7C80:
     cp   e                                        ; $7C82: $BB
     jr   nz, jr_018_7CAE                          ; $7C83: $20 $29
 
-    ld   a, $68                                   ; $7C85: $3E $68
-    call func_003_64CA_trampoline                               ; $7C87: $CD $86 $3B
+    ld   a, ENTITY_68                             ; $7C85: $3E $68
+    call SpawnNewEntity_trampoline                ; $7C87: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                         ; $7C8A: $21 $00 $C2
     add  hl, de                                   ; $7C8D: $19
     ldh  a, [hSwordIntersectedAreaX]              ; $7C8E: $F0 $CE
@@ -122,7 +122,7 @@ jr_018_7C80:
     inc  a                                        ; $7CA4: $3C
 
 jr_018_7CA5:
-    ld   hl, $C380                                ; $7CA5: $21 $80 $C3
+    ld   hl, wEntitiesUnknowTableQ                ; $7CA5: $21 $80 $C3
     add  hl, de                                   ; $7CA8: $19
     ld   [hl], a                                  ; $7CA9: $77
     call GetEntityTransitionCountdown             ; $7CAA: $CD $05 $0C

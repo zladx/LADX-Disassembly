@@ -631,7 +631,7 @@ jr_014_4B7D:
 
 jr_014_4B8A:
     ld   a, $02                                   ; $4B8A: $3E $02
-    ldh  [$FFA1], a                               ; $4B8C: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4B8C: $E0 $A1
 
 jr_014_4B8E:
     ret                                           ; $4B8E: $C9
@@ -1070,7 +1070,7 @@ jr_014_4DBA:
     dec  [hl]                                     ; $4DC2: $35
 
 jr_014_4DC3:
-    ld   hl, $C480                                ; $4DC3: $21 $80 $C4
+    ld   hl, wEntitiesUnknowTableV                ; $4DC3: $21 $80 $C4
     add  hl, bc                                   ; $4DC6: $09
     ld   a, [hl]                                  ; $4DC7: $7E
     and  a                                        ; $4DC8: $A7
@@ -1083,7 +1083,7 @@ jr_014_4DCC:
     and  $03                                      ; $4DCE: $E6 $03
     jr   nz, jr_014_4DDB                          ; $4DD0: $20 $09
 
-    ld   hl, $C450                                ; $4DD2: $21 $50 $C4
+    ld   hl, wEntitiesDropTimerTable                                ; $4DD2: $21 $50 $C4
     add  hl, bc                                   ; $4DD5: $09
     ld   a, [hl]                                  ; $4DD6: $7E
     and  a                                        ; $4DD7: $A7
@@ -1092,7 +1092,7 @@ jr_014_4DCC:
     dec  [hl]                                     ; $4DDA: $35
 
 jr_014_4DDB:
-    ld   hl, $C420                                ; $4DDB: $21 $20 $C4
+    ld   hl, wEntitiesUnknowTableU                ; $4DDB: $21 $20 $C4
     add  hl, bc                                   ; $4DDE: $09
     ld   a, [hl]                                  ; $4DDF: $7E
     and  a                                        ; $4DE0: $A7
@@ -1676,61 +1676,72 @@ jr_014_50B2:
     jp   label_014_5067                           ; $50C0: $C3 $67 $50
 
 func_014_50C3::
+    ; de = entity slot
     ld   e, $0F                                   ; $50C3: $1E $0F
     ld   d, $00                                   ; $50C5: $16 $00
 
-jr_014_50C7:
+    ; For each entity:
+.loop
+    ; If the entity is active…
     ld   hl, wEntitiesStatusTable                         ; $50C7: $21 $80 $C2
     add  hl, de                                   ; $50CA: $19
     ld   a, [hl]                                  ; $50CB: $7E
-    cp   $05                                      ; $50CC: $FE $05
-    jr   nz, jr_014_5111                          ; $50CE: $20 $41
+    cp   ENTITY_STATUS_ACTIVE                     ; $50CC: $FE $05
+    jr   nz, .continue                            ; $50CE: $20 $41
 
-    ld   hl, $C340                                ; $50D0: $21 $40 $C3
+    ; and the wEntitiesUnknowTableL flag 00100000 is set
+    ld   hl, wEntitiesUnknowTableL                ; $50D0: $21 $40 $C3
     add  hl, de                                   ; $50D3: $19
     ld   a, [hl]                                  ; $50D4: $7E
-    and  $20                                      ; $50D5: $E6 $20
-    jr   z, jr_014_5111                           ; $50D7: $28 $38
+    and  %00100000                                ; $50D5: $E6 $20
+    jr   z, .continue                             ; $50D7: $28 $38
 
+    ; and the wEntitiesUnknownTableD value == 2
     ld   hl, wEntitiesUnknownTableD               ; $50D9: $21 $D0 $C2
     add  hl, de                                   ; $50DC: $19
     ld   a, [hl]                                  ; $50DD: $7E
     cp   $02                                      ; $50DE: $FE $02
-    jr   nz, jr_014_5111                          ; $50E0: $20 $2F
+    jr   nz, .continue                            ; $50E0: $20 $2F
 
-    ld   hl, wEntitiesPosXTable                         ; $50E2: $21 $00 $C2
+    ; and the sword X position intersects with the entity…
+    ld   hl, wEntitiesPosXTable                   ; $50E2: $21 $00 $C2
     add  hl, de                                   ; $50E5: $19
     ldh  a, [hSwordIntersectedAreaX]              ; $50E6: $F0 $CE
     add  $08                                      ; $50E8: $C6 $08
     sub  [hl]                                     ; $50EA: $96
     add  $08                                      ; $50EB: $C6 $08
     cp   $10                                      ; $50ED: $FE $10
-    jr   nc, jr_014_5111                          ; $50EF: $30 $20
+    jr   nc, .continue                            ; $50EF: $30 $20
 
-    ld   hl, wEntitiesPosYTable                         ; $50F1: $21 $10 $C2
+    ; and the sword Y position intersects with the entity…
+    ld   hl, wEntitiesPosYTable                   ; $50F1: $21 $10 $C2
     add  hl, de                                   ; $50F4: $19
     ldh  a, [hSwordIntersectedAreaY]              ; $50F5: $F0 $CD
     add  $10                                      ; $50F7: $C6 $10
     sub  [hl]                                     ; $50F9: $96
     add  $08                                      ; $50FA: $C6 $08
     cp   $10                                      ; $50FC: $FE $10
-    jr   nc, jr_014_5111                          ; $50FE: $30 $11
+    jr   nc, .continue                            ; $50FE: $30 $11
 
-    ld   hl, $C450                                ; $5100: $21 $50 $C4
+    ; Set the drop timer to $80
+    ld   hl, wEntitiesDropTimerTable              ; $5100: $21 $50 $C4
     add  hl, de                                   ; $5103: $19
     ld   [hl], $80                                ; $5104: $36 $80
+    ; Clear the wEntitiesUnknownTableD value
     ld   hl, wEntitiesUnknownTableD               ; $5106: $21 $D0 $C2
     add  hl, de                                   ; $5109: $19
     ld   [hl], d                                  ; $510A: $72
+    ; Set the wEntitiesUnknowTableF value to $18
     ld   hl, wEntitiesUnknowTableF                ; $510B: $21 $F0 $C2
     add  hl, de                                   ; $510E: $19
     ld   [hl], $18                                ; $510F: $36 $18
 
-jr_014_5111:
+.continue
+    ; Loop until reaching entity 0
     dec  e                                        ; $5111: $1D
     ld   a, e                                     ; $5112: $7B
     cp   $FF                                      ; $5113: $FE $FF
-    jr   nz, jr_014_50C7                          ; $5115: $20 $B0
+    jr   nz, .loop                                ; $5115: $20 $B0
 
     ret                                           ; $5117: $C9
 
@@ -2251,7 +2262,7 @@ jr_014_5354:
     jr   z, jr_014_5360                           ; $5358: $28 $06
 
     call func_014_53A3                            ; $535A: $CD $A3 $53
-    jp   label_3D7F                               ; $535D: $C3 $7F $3D
+    jp   ClearEntitySpeed                               ; $535D: $C3 $7F $3D
 
 jr_014_5360:
     ld   a, [$C5AE]                               ; $5360: $FA $AE $C5
@@ -2342,7 +2353,7 @@ jr_014_53B6:
     ld   hl, $5343                                ; $53D7: $21 $43 $53
     add  hl, de                                   ; $53DA: $19
     ld   a, [hl]                                  ; $53DB: $7E
-    ld   hl, $C380                                ; $53DC: $21 $80 $C3
+    ld   hl, wEntitiesUnknowTableQ                ; $53DC: $21 $80 $C3
     add  hl, bc                                   ; $53DF: $09
     ld   [hl], a                                  ; $53E0: $77
     call GetEntityTransitionCountdown                 ; $53E1: $CD $05 $0C
@@ -2354,7 +2365,7 @@ jr_014_53B6:
 
 jr_014_53ED:
     ld   [hl], $05                                ; $53ED: $36 $05
-    call IncrementEntityWalkingAttr               ; $53EF: $CD $12 $3B
+    call IncrementEntityState                     ; $53EF: $CD $12 $3B
     ld   [hl], $02                                ; $53F2: $36 $02
     jr   jr_014_5409                              ; $53F4: $18 $13
 
@@ -2363,7 +2374,7 @@ jr_014_53F6:
     jr   nz, jr_014_5403                          ; $53F8: $20 $09
 
     ld   [hl], $05                                ; $53FA: $36 $05
-    call IncrementEntityWalkingAttr               ; $53FC: $CD $12 $3B
+    call IncrementEntityState                     ; $53FC: $CD $12 $3B
     ld   [hl], $03                                ; $53FF: $36 $03
     jr   jr_014_5409                              ; $5401: $18 $06
 
@@ -2524,7 +2535,7 @@ jr_014_54D1:
 
 jr_014_54DE:
     ld   a, $01                                   ; $54DE: $3E $01
-    ldh  [$FFA1], a                               ; $54E0: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $54E0: $E0 $A1
     ld   a, $02                                   ; $54E2: $3E $02
     ld   [wC111], a                               ; $54E4: $EA $11 $C1
 

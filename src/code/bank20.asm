@@ -719,7 +719,7 @@ jr_020_49AF:
 
     db   $10                                      ; $49B2: $10
     ldh  a, [$FF08]                               ; $49B3: $F0 $08
-    ld   [label_C0C], sp                          ; $49B5: $08 $0C $0C
+    db   $08, $0C, $0C                            ; $49B5: $08 $0C $0C
     ld   a, [rNR10]                               ; $49B8: $F0 $10
 
 Func_020_49BA::
@@ -750,7 +750,7 @@ Func_020_49D9::
     ld   b, a                                     ; $49E1: $47
     ldh  a, [$FFE3]                               ; $49E2: $F0 $E3
     ld   c, a                                     ; $49E4: $4F
-    ldh  a, [$FFE4]                               ; $49E5: $F0 $E4
+    ldh  a, [hScratchD]                           ; $49E5: $F0 $E4
     ld   d, a                                     ; $49E7: $57
     ldh  a, [$FFE5]                               ; $49E8: $F0 $E5
     ld   e, a                                     ; $49EA: $5F
@@ -813,7 +813,7 @@ Func_020_4A22:
     ld   [$DCA7], a                               ; $4A64: $EA $A7 $DC
     ld   a, $DC                                   ; $4A67: $3E $DC
     ldh  [$FFE2], a                               ; $4A69: $E0 $E2
-    ldh  [$FFE4], a                               ; $4A6B: $E0 $E4
+    ldh  [hScratchD], a                           ; $4A6B: $E0 $E4
     ld   a, $94                                   ; $4A6D: $3E $94
     ldh  [$FFE3], a                               ; $4A6F: $E0 $E3
     ld   a, $AB                                   ; $4A71: $3E $AB
@@ -1053,7 +1053,7 @@ label_020_4B9E:
     ld   hl, wEntitiesSpriteVariantTable               ; $4BB2: $21 $B0 $C3
     add  hl, de                                   ; $4BB5: $19
     ld   [hl], d                                  ; $4BB6: $72
-    ld   hl, $C480                                ; $4BB7: $21 $80 $C4
+    ld   hl, wEntitiesUnknowTableV                ; $4BB7: $21 $80 $C4
     add  hl, de                                   ; $4BBA: $19
     ld   [hl], $03                                ; $4BBB: $36 $03
     ldh  a, [hIsSideScrolling]                    ; $4BBD: $F0 $F9
@@ -1636,7 +1636,7 @@ jr_020_4E95:
     dec  h                                        ; $4EE3: $25
     ldh  a, [hActiveEntityState]                  ; $4EE4: $F0 $F0
     ldh  a, [hActiveEntityState]                  ; $4EE6: $F0 $F0
-    ldh  a, [$FFE4]                               ; $4EE8: $F0 $E4
+    ldh  a, [hScratchD]                           ; $4EE8: $F0 $E4
     push hl                                       ; $4EEA: $E5
     and  $E7                                      ; $4EEB: $E6 $E7
     add  sp, -$17                                 ; $4EED: $E8 $E9
@@ -6362,7 +6362,7 @@ Func_020_6A30::
     ret  c                                        ; $6A39: $D8
 
     ld   a, $01                                   ; $6A3A: $3E $01
-    ldh  [$FFE4], a                               ; $6A3C: $E0 $E4
+    ldh  [hScratchD], a                           ; $6A3C: $E0 $E4
     ld   a, $02                                   ; $6A3E: $3E $02
     ldh  [$FFE5], a                               ; $6A40: $E0 $E5
     ld   a, $04                                   ; $6A42: $3E $04
@@ -6379,9 +6379,9 @@ jr_020_6A52:
     and  $10                                      ; $6A52: $E6 $10
     jr   z, jr_020_6A68                           ; $6A54: $28 $12
 
-    ldh  a, [$FFE4]                               ; $6A56: $F0 $E4
+    ldh  a, [hScratchD]                           ; $6A56: $F0 $E4
     sla  a                                        ; $6A58: $CB $27
-    ldh  [$FFE4], a                               ; $6A5A: $E0 $E4
+    ldh  [hScratchD], a                           ; $6A5A: $E0 $E4
     ldh  a, [$FFE5]                               ; $6A5C: $F0 $E5
     sla  a                                        ; $6A5E: $CB $27
     ldh  [$FFE5], a                               ; $6A60: $E0 $E5
@@ -6392,7 +6392,7 @@ jr_020_6A52:
 Func_020_6A68:
 jr_020_6A68:
     push hl                                       ; $6A68: $E5
-    ldh  a, [$FFE4]                               ; $6A69: $F0 $E4
+    ldh  a, [hScratchD]                           ; $6A69: $F0 $E4
     ld   c, a                                     ; $6A6B: $4F
     ld   a, [hl]                                  ; $6A6C: $7E
     and  $1F                                      ; $6A6D: $E6 $1F
@@ -6469,7 +6469,7 @@ Func_020_6AC1::
     ret  c                                        ; $6ACA: $D8
 
     ld   a, $01                                   ; $6ACB: $3E $01
-    ldh  [$FFE4], a                               ; $6ACD: $E0 $E4
+    ldh  [hScratchD], a                           ; $6ACD: $E0 $E4
     ld   a, $02                                   ; $6ACF: $3E $02
     ldh  [$FFE5], a                               ; $6AD1: $E0 $E5
     ld   a, $04                                   ; $6AD3: $3E $04
@@ -6481,9 +6481,9 @@ Func_020_6AC1::
     and  $10                                      ; $6ADF: $E6 $10
     jr   z, jr_020_6AF5                           ; $6AE1: $28 $12
 
-    ldh  a, [$FFE4]                               ; $6AE3: $F0 $E4
+    ldh  a, [hScratchD]                           ; $6AE3: $F0 $E4
     sla  a                                        ; $6AE5: $CB $27
-    ldh  [$FFE4], a                               ; $6AE7: $E0 $E4
+    ldh  [hScratchD], a                           ; $6AE7: $E0 $E4
     ldh  a, [$FFE5]                               ; $6AE9: $F0 $E5
     sla  a                                        ; $6AEB: $CB $27
     ldh  [$FFE5], a                               ; $6AED: $E0 $E5
@@ -6504,7 +6504,7 @@ jr_020_6AF5:
     dec  hl                                       ; $6AFE: $2B
     xor  a                                        ; $6AFF: $AF
     ld   [rSVBK], a                               ; $6B00: $E0 $70
-    ldh  a, [$FFE4]                               ; $6B02: $F0 $E4
+    ldh  a, [hScratchD]                           ; $6B02: $F0 $E4
     ld   c, a                                     ; $6B04: $4F
     ld   a, e                                     ; $6B05: $7B
     and  $1F                                      ; $6B06: $E6 $1F
@@ -6790,7 +6790,7 @@ Func_020_6C4F::
 
 jr_020_6C60:
     ld   a, $04                                   ; $6C60: $3E $04
-    ldh  [$FFE4], a                               ; $6C62: $E0 $E4
+    ldh  [hScratchD], a                           ; $6C62: $E0 $E4
     ld   a, $08                                   ; $6C64: $3E $08
     ldh  [$FFE5], a                               ; $6C66: $E0 $E5
     ld   a, $10                                   ; $6C68: $3E $10
@@ -6818,7 +6818,7 @@ Func_020_6C7A::
 
 jr_020_6C8B:
     ld   a, $04                                   ; $6C8B: $3E $04
-    ldh  [$FFE4], a                               ; $6C8D: $E0 $E4
+    ldh  [hScratchD], a                           ; $6C8D: $E0 $E4
     ld   a, $08                                   ; $6C8F: $3E $08
     ldh  [$FFE5], a                               ; $6C91: $E0 $E5
     ld   a, $10                                   ; $6C93: $3E $10
@@ -6856,7 +6856,7 @@ jr_020_6CB5:
     inc  a                                        ; $6CCA: $3C
     ld   [$C3CA], a                               ; $6CCB: $EA $CA $C3
     ld   a, $08                                   ; $6CCE: $3E $08
-    ldh  [$FFE4], a                               ; $6CD0: $E0 $E4
+    ldh  [hScratchD], a                           ; $6CD0: $E0 $E4
     ld   a, $10                                   ; $6CD2: $3E $10
     ldh  [$FFE5], a                               ; $6CD4: $E0 $E5
     ld   a, $20                                   ; $6CD6: $3E $20
@@ -6912,7 +6912,7 @@ jr_020_6D1E:
     jr   c, jr_020_6D38                           ; $6D22: $38 $14
 
     ld   a, $01                                   ; $6D24: $3E $01
-    ldh  [$FFE4], a                               ; $6D26: $E0 $E4
+    ldh  [hScratchD], a                           ; $6D26: $E0 $E4
     ld   a, $02                                   ; $6D28: $3E $02
     ldh  [$FFE5], a                               ; $6D2A: $E0 $E5
     ld   a, $04                                   ; $6D2C: $3E $04
@@ -6923,7 +6923,7 @@ jr_020_6D1E:
 
 jr_020_6D38:
     ld   a, $01                                   ; $6D38: $3E $01
-    ldh  [$FFE4], a                               ; $6D3A: $E0 $E4
+    ldh  [hScratchD], a                           ; $6D3A: $E0 $E4
     ld   a, $02                                   ; $6D3C: $3E $02
     ldh  [$FFE5], a                               ; $6D3E: $E0 $E5
     ld   a, $04                                   ; $6D40: $3E $04
@@ -7576,7 +7576,7 @@ jr_020_6EC7:
     inc  c                                        ; $702F: $0C
     inc  c                                        ; $7030: $0C
     inc  c                                        ; $7031: $0C
-    ld   bc, label_C0C                            ; $7032: $01 $0C $0C
+    db   $01, $0C, $0C                            ; $7032: $01 $0C $0C
     inc  c                                        ; $7035: $0C
     inc  c                                        ; $7036: $0C
     inc  c                                        ; $7037: $0C
@@ -7610,7 +7610,7 @@ jr_020_6EC7:
     ld   [label_808], sp                          ; $705B: $08 $08 $08
     dec  b                                        ; $705E: $05
     dec  b                                        ; $705F: $05
-    ld   [label_C0C], sp                          ; $7060: $08 $0C $0C
+    db   $08, $0C, $0C                            ; $7060: $08 $0C $0C
     ld   [vBlankContinue.linkSpriteDone], sp      ; $7063: $08 $04 $05
     inc  c                                        ; $7066: $0C
     inc  b                                        ; $7067: $04
@@ -7652,7 +7652,7 @@ jr_020_6EC7:
     inc  c                                        ; $7099: $0C
     inc  c                                        ; $709A: $0C
     nop                                           ; $709B: $00
-    ld   [label_C0C], sp                          ; $709C: $08 $0C $0C
+    db   $08, $0C, $0C                            ; $709C: $08 $0C $0C
     inc  c                                        ; $709F: $0C
     inc  c                                        ; $70A0: $0C
     inc  c                                        ; $70A1: $0C
@@ -10815,7 +10815,7 @@ jr_020_7D74:
     ret                                           ; $7D7B: $C9
 
     ld   a, $03                                   ; $7D7C: $3E $03
-    ldh  [$FFE4], a                               ; $7D7E: $E0 $E4
+    ldh  [hScratchD], a                           ; $7D7E: $E0 $E4
     ld   a, $06                                   ; $7D80: $3E $06
     ldh  [$FFE5], a                               ; $7D82: $E0 $E5
     ld   a, $0C                                   ; $7D84: $3E $0C
@@ -10831,7 +10831,7 @@ jr_020_7D74:
 Func_020_7D97:
 jr_020_7D97:
     push hl                                       ; $7D97: $E5
-    ldh  a, [$FFE4]                               ; $7D98: $F0 $E4
+    ldh  a, [hScratchD]                           ; $7D98: $F0 $E4
     ld   c, a                                     ; $7D9A: $4F
     ld   a, [hl]                                  ; $7D9B: $7E
     and  $1F                                      ; $7D9C: $E6 $1F

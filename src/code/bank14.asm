@@ -2365,7 +2365,7 @@ jr_014_53B6:
 
 jr_014_53ED:
     ld   [hl], $05                                ; $53ED: $36 $05
-    call IncrementEntityWalkingAttr               ; $53EF: $CD $12 $3B
+    call IncrementEntityState                     ; $53EF: $CD $12 $3B
     ld   [hl], $02                                ; $53F2: $36 $02
     jr   jr_014_5409                              ; $53F4: $18 $13
 
@@ -2374,7 +2374,7 @@ jr_014_53F6:
     jr   nz, jr_014_5403                          ; $53F8: $20 $09
 
     ld   [hl], $05                                ; $53FA: $36 $05
-    call IncrementEntityWalkingAttr               ; $53FC: $CD $12 $3B
+    call IncrementEntityState                     ; $53FC: $CD $12 $3B
     ld   [hl], $03                                ; $53FF: $36 $03
     jr   jr_014_5409                              ; $5401: $18 $06
 

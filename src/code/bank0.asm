@@ -7268,10 +7268,10 @@ SetEntitySpriteVariant::
     ld   [hl], a
     ret
 
-; Increment the "is walking" attribute of the given entity
+; Increment the state attribute of the given entity
 ; Input:
 ;  - bc: the entity number
-IncrementEntityWalkingAttr::
+IncrementEntityState::
     ld   hl, wEntitiesStateTable
     add  hl, bc
     inc  [hl]

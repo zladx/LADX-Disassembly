@@ -38,7 +38,7 @@ jr_019_4489:
 
     ld   a, $08                                   ; $449E: $3E $08
     call ApplyVectorTowardsLink_trampoline        ; $44A0: $CD $AA $3B
-    jp   IncrementEntityWalkingAttr               ; $44A3: $C3 $12 $3B
+    jp   IncrementEntityState                     ; $44A3: $C3 $12 $3B
 
 jr_019_44A6:
     ld   hl, wEntitiesCollisionsTable             ; $44A6: $21 $A0 $C2

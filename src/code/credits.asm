@@ -5858,7 +5858,7 @@ jr_017_75B4:
 
 jr_017_75D7:
     ld   [hl], $C0                                ; $75D7: $36 $C0
-    call IncrementEntityWalkingAttr               ; $75D9: $CD $12 $3B
+    call IncrementEntityState                     ; $75D9: $CD $12 $3B
     ld   a, $17                                   ; $75DC: $3E $17
     ldh  [hWaveSfx], a                               ; $75DE: $E0 $F3
 
@@ -6932,7 +6932,7 @@ Func_017_7B06::
     ld   hl, $C2E0                                ; $7B37: $21 $E0 $C2
     add  hl, de                                   ; $7B3A: $19
     ld   [hl], $30                                ; $7B3B: $36 $30
-    call IncrementEntityWalkingAttr                                    ; $7B3D: $CD $12 $3B
+    call IncrementEntityState                     ; $7B3D: $CD $12 $3B
 
 jr_017_7B40:
     ret                                           ; $7B40: $C9
@@ -6954,7 +6954,7 @@ Func_017_7B43::
     cp   $05                                      ; $7B54: $FE $05
     jr   nz, Func_017_7B5B                        ; $7B56: $20 $03
 
-    call IncrementEntityWalkingAttr                                    ; $7B58: $CD $12 $3B
+    call IncrementEntityState                     ; $7B58: $CD $12 $3B
 
 Func_017_7B5B::
     call func_017_7AFA                            ; $7B5B: $CD $FA $7A
@@ -7149,7 +7149,7 @@ jr_017_7BF2:
 
     call GetEntityTransitionCountdown             ; $7C62: $CD $05 $0C
     ld   [hl], $80                                ; $7C65: $36 $80
-    call IncrementEntityWalkingAttr                                    ; $7C67: $CD $12 $3B
+    call IncrementEntityState                     ; $7C67: $CD $12 $3B
 
 jr_017_7C6A:
     ret                                           ; $7C6A: $C9
@@ -7177,7 +7177,7 @@ jr_017_7C6A:
 
     ld   a, $19                                   ; $7C85: $3E $19
     ld   [$C5AB], a                               ; $7C87: $EA $AB $C5
-    call IncrementEntityWalkingAttr                                    ; $7C8A: $CD $12 $3B
+    call IncrementEntityState                     ; $7C8A: $CD $12 $3B
 
 func_017_7C8D:
 jr_017_7C8D:
@@ -7206,7 +7206,7 @@ jr_017_7C8D:
 
     call GetEntityTransitionCountdown             ; $7CAE: $CD $05 $0C
     ld   [hl], $FF                                ; $7CB1: $36 $FF
-    call IncrementEntityWalkingAttr                                    ; $7CB3: $CD $12 $3B
+    call IncrementEntityState                     ; $7CB3: $CD $12 $3B
 
 jr_017_7CB6:
     ret                                           ; $7CB6: $C9

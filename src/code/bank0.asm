@@ -701,7 +701,7 @@ IsZero::
 ; Used when Link trades a new item.
 CreateTradingItemEntity::
     ld   a, ENTITY_TRADING_ITEM
-    call CreateNewTemporaryEntity_trampoline
+    call SpawnNewEntity_trampoline
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -1982,7 +1982,7 @@ label_142E::
     ret
 
 label_142F::
-    call CreateNewTemporaryEntity_trampoline
+    call SpawnNewEntity_trampoline
     ret  c
     ld   a, $0C
     ld   [$C19B], a
@@ -2061,7 +2061,7 @@ label_14A7::
     jp   z, PlayWrongAnswerJingle
 
     ld   a, ENTITY_MAGIC_POWDER_SPRINKLE
-    call CreateNewTemporaryEntity_trampoline
+    call SpawnNewEntity_trampoline
     ret  c
     callsb Func_020_4C47
     ld   a, [wCurrentBank]
@@ -2363,7 +2363,7 @@ label_1653::
     jr   nc, .randomEnd
     ld   a, ENTITY_DROPPABLE_HEART
 .randomEnd
-    call CreateNewTemporaryEntity_trampoline
+    call SpawnNewEntity_trampoline
     ret  c
 
     ; Configure the dropped entity
@@ -6765,7 +6765,7 @@ LoadRoomEntities::
     jr   nz, .eaglesTowerEnd
     ; do some special casing for this room entities
     ld   a, ENTITY_A8
-    call CreateNewTemporaryEntity_trampoline
+    call SpawnNewEntity_trampoline
     ld   a, [$DB70]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -7319,23 +7319,23 @@ label_3B7B::
     callsb func_003_75A2
     jp   ReloadSavedBank
 
-CreateNewTemporaryEntity_trampoline::
+SpawnNewEntity_trampoline::
     push af
-    ld   a, BANK(CreateNewTemporaryEntity)
+    ld   a, BANK(SpawnNewEntity)
     ld   [MBC3SelectBank], a
     pop  af
-    call CreateNewTemporaryEntity
+    call SpawnNewEntity
     rr   l
     call ReloadSavedBank
     rl   l
     ret
 
-CreateNewTemporaryEntityInRange_trampoline::
+SpawnNewEntityInRange_trampoline::
     push af
-    ld   a, BANK(CreateNewTemporaryEntityInRange)
+    ld   a, BANK(SpawnNewEntityInRange)
     ld   [MBC3SelectBank], a
     pop  af
-    call CreateNewTemporaryEntityInRange
+    call SpawnNewEntityInRange
     rr   l
     call ReloadSavedBank
     rl   l

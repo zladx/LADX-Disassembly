@@ -284,7 +284,7 @@ jr_017_462F:
 
 Func_017_4630::
     ld   a, $E8                                   ; $4630: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $4632: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $4632: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $4635: $21 $00 $C2
     add  hl, de                                   ; $4638: $19
     ld   [hl], $E0                                ; $4639: $36 $E0
@@ -1127,7 +1127,7 @@ CreditsStairsPrepare2Handler::
     ld   [wBGMapToLoad], a                        ; $4CE0: $EA $FF $D6
 
     ld   a, $E8                                   ; $4CE3: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                               ; $4CE5: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $4CE5: $CD $86 $3B
 
     ;
     ; Set Link initial position
@@ -1142,7 +1142,7 @@ CreditsStairsPrepare2Handler::
     ld   [hl], $E0                                ; $4CF2: $36 $E0
 
     ld   a, $E8                                   ; $4CF4: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                               ; $4CF6: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $4CF6: $CD $86 $3B
 
     ld   hl, wEntitiesUnknownTableB               ; $4CF9: $21 $B0 $C2
     add  hl, de                                   ; $4CFC: $19
@@ -1966,7 +1966,7 @@ CreditsLinkPreparesToPlayHandler::
 
 jr_017_557A:
     ld   a, $E8                                   ; $557A: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $557C: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $557C: $CD $86 $3B
     ld   a, [$D000]                               ; $557F: $FA $00 $D0
     ld   c, a                                     ; $5582: $4F
     ld   b, $00                                   ; $5583: $06 $00
@@ -2184,7 +2184,7 @@ jr_017_56D7:
 
 jr_017_56DC:
     ld   a, $6D                                   ; $56DC: $3E $6D
-    call CreateNewTemporaryEntity_trampoline                               ; $56DE: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $56DE: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $56E1: $21 $00 $C2
     add  hl, de                                   ; $56E4: $19
     ld   [hl], $48                                ; $56E5: $36 $48
@@ -2192,7 +2192,7 @@ jr_017_56DC:
     add  hl, de                                   ; $56EA: $19
     ld   [hl], $50                                ; $56EB: $36 $50
     ld   a, $6F                                   ; $56ED: $3E $6F
-    call CreateNewTemporaryEntity_trampoline                                    ; $56EF: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $56EF: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $56F2: $21 $00 $C2
     add  hl, de                                   ; $56F5: $19
     ld   [hl], $68                                ; $56F6: $36 $68
@@ -2200,7 +2200,7 @@ jr_017_56DC:
     add  hl, de                                   ; $56FB: $19
     ld   [hl], $30                                ; $56FC: $36 $30
     ld   a, $78                                   ; $56FE: $3E $78
-    call CreateNewTemporaryEntity_trampoline                                    ; $5700: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $5700: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5703: $21 $00 $C2
     add  hl, de                                   ; $5706: $19
     ld   [hl], $2C                                ; $5707: $36 $2C
@@ -2208,7 +2208,7 @@ jr_017_56DC:
     add  hl, de                                   ; $570C: $19
     ld   [hl], $58                                ; $570D: $36 $58
     ld   a, $78                                   ; $570F: $3E $78
-    call CreateNewTemporaryEntity_trampoline                                    ; $5711: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $5711: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5714: $21 $00 $C2
     add  hl, de                                   ; $5717: $19
     ld   [hl], $60                                ; $5718: $36 $60
@@ -2262,7 +2262,7 @@ jr_017_5755:
 jr_017_575A:
     call DisableAllEntities                       ; $575A: $CD $2A $56
     ld   a, $71                                   ; $575D: $3E $71
-    call CreateNewTemporaryEntity_trampoline                                    ; $575F: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $575F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5762: $21 $00 $C2
     add  hl, de                                   ; $5765: $19
     ld   [hl], $48                                ; $5766: $36 $48
@@ -2279,7 +2279,7 @@ jr_017_575A:
     add  hl, de                                   ; $577C: $19
     ld   [hl], $02                                ; $577D: $36 $02
     ld   a, $72                                   ; $577F: $3E $72
-    call CreateNewTemporaryEntity_trampoline                                    ; $5781: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $5781: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5784: $21 $00 $C2
     add  hl, de                                   ; $5787: $19
     ld   [hl], $78                                ; $5788: $36 $78
@@ -2325,7 +2325,7 @@ jr_017_57BA:
 jr_017_57BF:
     call DisableAllEntities                       ; $57BF: $CD $2A $56
     ld   a, $C5                                   ; $57C2: $3E $C5
-    call CreateNewTemporaryEntity_trampoline                                    ; $57C4: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $57C4: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $57C7: $21 $00 $C2
     add  hl, de                                   ; $57CA: $19
     ld   [hl], $28                                ; $57CB: $36 $28
@@ -2333,7 +2333,7 @@ jr_017_57BF:
     add  hl, de                                   ; $57D0: $19
     ld   [hl], $40                                ; $57D1: $36 $40
     ld   a, $09                                   ; $57D3: $3E $09
-    call CreateNewTemporaryEntity_trampoline                                    ; $57D5: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $57D5: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $57D8: $21 $00 $C2
     add  hl, de                                   ; $57DB: $19
     ld   [hl], $48                                ; $57DC: $36 $48
@@ -2341,7 +2341,7 @@ jr_017_57BF:
     add  hl, de                                   ; $57E1: $19
     ld   [hl], $50                                ; $57E2: $36 $50
     ld   a, $09                                   ; $57E4: $3E $09
-    call CreateNewTemporaryEntity_trampoline                                    ; $57E6: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $57E6: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $57E9: $21 $00 $C2
     add  hl, de                                   ; $57EC: $19
     ld   [hl], $68                                ; $57ED: $36 $68
@@ -2387,7 +2387,7 @@ jr_017_581F:
 jr_017_5824:
     call DisableAllEntities                       ; $5824: $CD $2A $56
     ld   a, $3F                                   ; $5827: $3E $3F
-    call CreateNewTemporaryEntity_trampoline                                    ; $5829: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $5829: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $582C: $21 $00 $C2
     add  hl, de                                   ; $582F: $19
     ld   [hl], $78                                ; $5830: $36 $78
@@ -2433,7 +2433,7 @@ jr_017_5862:
 jr_017_5867:
     call DisableAllEntities                       ; $5867: $CD $2A $56
     ld   a, $3E                                   ; $586A: $3E $3E
-    call CreateNewTemporaryEntity_trampoline                                    ; $586C: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $586C: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $586F: $21 $00 $C2
     add  hl, de                                   ; $5872: $19
     ld   [hl], $28                                ; $5873: $36 $28
@@ -2441,7 +2441,7 @@ jr_017_5867:
     add  hl, de                                   ; $5878: $19
     ld   [hl], $50                                ; $5879: $36 $50
     ld   a, $6E                                   ; $587B: $3E $6E
-    call CreateNewTemporaryEntity_trampoline                                    ; $587D: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $587D: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5880: $21 $00 $C2
     add  hl, de                                   ; $5883: $19
     ld   [hl], $18                                ; $5884: $36 $18
@@ -2449,7 +2449,7 @@ jr_017_5867:
     add  hl, de                                   ; $5889: $19
     ld   [hl], $4C                                ; $588A: $36 $4C
     ld   a, $6E                                   ; $588C: $3E $6E
-    call CreateNewTemporaryEntity_trampoline                                    ; $588E: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $588E: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5891: $21 $00 $C2
     add  hl, de                                   ; $5894: $19
     ld   [hl], $38                                ; $5895: $36 $38
@@ -2457,7 +2457,7 @@ jr_017_5867:
     add  hl, de                                   ; $589A: $19
     ld   [hl], $54                                ; $589B: $36 $54
     ld   a, $6E                                   ; $589D: $3E $6E
-    call CreateNewTemporaryEntity_trampoline                                    ; $589F: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $589F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $58A2: $21 $00 $C2
     add  hl, de                                   ; $58A5: $19
     ld   [hl], $28                                ; $58A6: $36 $28
@@ -2465,7 +2465,7 @@ jr_017_5867:
     add  hl, de                                   ; $58AB: $19
     ld   [hl], $30                                ; $58AC: $36 $30
     ld   a, $6F                                   ; $58AE: $3E $6F
-    call CreateNewTemporaryEntity_trampoline                                    ; $58B0: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $58B0: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $58B3: $21 $00 $C2
     add  hl, de                                   ; $58B6: $19
     ld   [hl], $78                                ; $58B7: $36 $78
@@ -2803,7 +2803,7 @@ Func_017_5A66::
     xor  a                                        ; $5A8A: $AF
     ld   [$DDD5], a                               ; $5A8B: $EA $D5 $DD
     ld   a, $E8                                   ; $5A8E: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $5A90: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $5A90: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $5A93: $21 $00 $C2
     add  hl, de                                   ; $5A96: $19
     ld   [hl], $40                                ; $5A97: $36 $40
@@ -2814,7 +2814,7 @@ Func_017_5A66::
     add  hl, de                                   ; $5AA2: $19
     ld   [hl], $02                                ; $5AA3: $36 $02
     ld   a, $E8                                   ; $5AA5: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $5AA7: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $5AA7: $CD $86 $3B
     ld   hl, $C2B0                                ; $5AAA: $21 $B0 $C2
     add  hl, de                                   ; $5AAD: $19
     inc  [hl]                                     ; $5AAE: $34
@@ -3358,7 +3358,7 @@ LinkOnSeaLarge1Handler::
     ld   a, $17                                   ; $6078: $3E $17
     ld   [wBGMapToLoad], a                               ; $607A: $EA $FF $D6
     ld   a, $E8                                   ; $607D: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $607F: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $607F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6082: $21 $00 $C2
     add  hl, de                                   ; $6085: $19
     ld   [hl], $48                                ; $6086: $36 $48
@@ -3369,7 +3369,7 @@ LinkOnSeaLarge1Handler::
     add  hl, de                                   ; $6091: $19
     ld   [hl], $04                                ; $6092: $36 $04
     ld   a, $E8                                   ; $6094: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $6096: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $6096: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6099: $21 $00 $C2
     add  hl, de                                   ; $609C: $19
     ld   [hl], $28                                ; $609D: $36 $28
@@ -3380,7 +3380,7 @@ LinkOnSeaLarge1Handler::
     add  hl, de                                   ; $60A8: $19
     ld   [hl], $05                                ; $60A9: $36 $05
     ld   a, $E8                                   ; $60AB: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $60AD: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $60AD: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $60B0: $21 $00 $C2
     add  hl, de                                   ; $60B3: $19
     ld   [hl], $78                                ; $60B4: $36 $78
@@ -3462,7 +3462,7 @@ CreditsSunAbove1Handler::
     ld   a, $18                                   ; $6149: $3E $18
     ld   [wBGMapToLoad], a                               ; $614B: $EA $FF $D6
     ld   a, $E8                                   ; $614E: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $6150: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $6150: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6153: $21 $00 $C2
     add  hl, de                                   ; $6156: $19
     ld   [hl], $18                                ; $6157: $36 $18
@@ -3476,7 +3476,7 @@ CreditsSunAbove1Handler::
     add  hl, de                                   ; $6168: $19
     ld   [hl], $03                                ; $6169: $36 $03
     ld   a, $E8                                   ; $616B: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $616D: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $616D: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6170: $21 $00 $C2
     add  hl, de                                   ; $6173: $19
     ld   [hl], $78                                ; $6174: $36 $78
@@ -3495,7 +3495,7 @@ jr_017_618B:
     add  hl, de                                   ; $618B: $19
     ld   [hl], $03                                ; $618C: $36 $03
     ld   a, $E8                                   ; $618E: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $6190: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $6190: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6193: $21 $00 $C2
     add  hl, de                                   ; $6196: $19
     ld   [hl], $68                                ; $6197: $36 $68
@@ -3652,7 +3652,7 @@ jr_017_6271:
     ld   a, $42                                   ; $62A8: $3E $42
     ldh  [rLYC], a                                ; $62AA: $E0 $45
     ld   a, $E8                                   ; $62AC: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $62AE: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $62AE: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $62B1: $21 $00 $C2
     add  hl, de                                   ; $62B4: $19
     ld   [hl], $18                                ; $62B5: $36 $18
@@ -3666,7 +3666,7 @@ jr_017_6271:
     add  hl, de                                   ; $62C6: $19
     ld   [hl], $02                                ; $62C7: $36 $02
     ld   a, $E8                                   ; $62C9: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $62CB: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $62CB: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $62CE: $21 $00 $C2
     add  hl, de                                   ; $62D1: $19
     ld   [hl], $68                                ; $62D2: $36 $68
@@ -3680,7 +3680,7 @@ jr_017_6271:
     add  hl, de                                   ; $62E3: $19
     inc  [hl]                                     ; $62E4: $34
     ld   a, $E8                                   ; $62E5: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $62E7: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $62E7: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $62EA: $21 $00 $C2
     add  hl, de                                   ; $62ED: $19
     ld   [hl], $88                                ; $62EE: $36 $88
@@ -3691,7 +3691,7 @@ jr_017_6271:
     add  hl, de                                   ; $62F9: $19
     ld   [hl], $08                                ; $62FA: $36 $08
     ld   a, $E8                                   ; $62FC: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $62FE: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $62FE: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6301: $21 $00 $C2
     add  hl, de                                   ; $6304: $19
     ld   [hl], $08                                ; $6305: $36 $08
@@ -3715,7 +3715,7 @@ jr_017_6271:
     jp   z, IncrementCreditsSubsceneAndReturn                        ; $632A: $CA $D9 $4C
 
     ld   a, $E8                                   ; $632D: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $632F: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $632F: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6332: $21 $00 $C2
     add  hl, de                                   ; $6335: $19
     ld   [hl], $40                                ; $6336: $36 $40
@@ -4119,7 +4119,7 @@ LinkSeatedOnLog1Handler::
     ld   a, $1A                                   ; $682F: $3E $1A
     ld   [wBGMapToLoad], a                               ; $6831: $EA $FF $D6
     ld   a, $E8                                   ; $6834: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $6836: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $6836: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6839: $21 $00 $C2
     add  hl, de                                   ; $683C: $19
     ld   [hl], $40                                ; $683D: $36 $40
@@ -4459,7 +4459,7 @@ jr_017_6C4A:
     ld   a, $E3                                   ; $6C51: $3E $E3
     ld   [wOBJ1Palette], a                               ; $6C53: $EA $99 $DB
     ld   a, $E8                                   ; $6C56: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $6C58: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $6C58: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6C5B: $21 $00 $C2
     add  hl, de                                   ; $6C5E: $19
     ld   [hl], $50                                ; $6C5F: $36 $50
@@ -4550,7 +4550,7 @@ jr_017_6CDD:
     ld   a, $1E                                   ; $6CE8: $3E $1E
     ld   [wOBJ0Palette], a                               ; $6CEA: $EA $98 $DB
     ld   a, $E8                                   ; $6CED: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $6CEF: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $6CEF: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6CF2: $21 $00 $C2
     add  hl, de                                   ; $6CF5: $19
     ld   [hl], $62                                ; $6CF6: $36 $62
@@ -4609,7 +4609,7 @@ CreditsLinkFaceCloseUp1Handler::
     ld   a, $6E                                   ; $6D4F: $3E $6E
     ld   [wOBJ0Palette], a                               ; $6D51: $EA $98 $DB
     ld   a, $E8                                   ; $6D54: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $6D56: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $6D56: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6D59: $21 $00 $C2
     add  hl, de                                   ; $6D5C: $19
     ld   [hl], $38                                ; $6D5D: $36 $38
@@ -4835,7 +4835,7 @@ CreditsRoll1Handler::
     ld   [wBGMapToLoad], a                               ; $6EA5: $EA $FF $D6
     call ResetCreditsSceneVariables                            ; $6EA8: $CD $A5 $4D
     ld   a, $E8                                   ; $6EAB: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $6EAD: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $6EAD: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6EB0: $21 $00 $C2
     add  hl, de                                   ; $6EB3: $19
     ld   [hl], $50                                ; $6EB4: $36 $50
@@ -4932,7 +4932,7 @@ jr_017_6F4C:
     jr   nz, jr_017_6F67                          ; $6F4E: $20 $17
 
     ld   a, $E8                                   ; $6F50: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $6F52: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $6F52: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                                ; $6F55: $21 $00 $C2
     add  hl, de                                   ; $6F58: $19
     ld   [hl], $18                                ; $6F59: $36 $18
@@ -6888,7 +6888,7 @@ Func_017_7B06::
     ld   a, $02                                   ; $7B16: $3E $02
     ldh  [$FF9D], a                               ; $7B18: $E0 $9D
     ld   a, $E8                                   ; $7B1A: $3E $E8
-    call CreateNewTemporaryEntity_trampoline                                    ; $7B1C: $CD $86 $3B
+    call SpawnNewEntity_trampoline                                    ; $7B1C: $CD $86 $3B
     ld   hl, $C2B0                                ; $7B1F: $21 $B0 $C2
     add  hl, de                                   ; $7B22: $19
     ld   [hl], $02                                ; $7B23: $36 $02

@@ -2062,7 +2062,7 @@ jr_003_5406:
 
 func_003_5407::
     ld   a, $05                                   ; $5407: $3E $05
-    call CreateNewTemporaryEntity                            ; $5409: $CD $CA $64
+    call SpawnNewEntity                           ; $5409: $CD $CA $64
     ret  c                                        ; $540C: $D8
 
     ;
@@ -2495,7 +2495,7 @@ jr_003_5655:
 
 label_003_5670:
 jr_003_5670:
-    call CreateNewTemporaryEntity                            ; $5670: $CD $CA $64
+    call SpawnNewEntity                           ; $5670: $CD $CA $64
     ret  c                                        ; $5673: $D8
 
     ld   hl, wEntitiesUnknownTableB               ; $5674: $21 $B0 $C2
@@ -3028,7 +3028,7 @@ jr_003_5921:
 
 func_003_5947::
     ld   a, $0C                                   ; $5947: $3E $0C
-    call CreateNewTemporaryEntity                            ; $5949: $CD $CA $64
+    call SpawnNewEntity                           ; $5949: $CD $CA $64
     jr   c, jr_003_598B                           ; $594C: $38 $3D
 
     push bc                                       ; $594E: $C5
@@ -3085,7 +3085,7 @@ jr_003_598B:
 
 label_003_5998:
     ld   a, $0A                                   ; $5998: $3E $0A
-    call CreateNewTemporaryEntity                            ; $599A: $CD $CA $64
+    call SpawnNewEntity                           ; $599A: $CD $CA $64
     jr   c, jr_003_59D6                           ; $599D: $38 $37
 
     push bc                                       ; $599F: $C5
@@ -3895,7 +3895,7 @@ jr_003_5E45:
     jr   nz, jr_003_5E5B                          ; $5E48: $20 $11
 
     ld   a, $9F                                   ; $5E4A: $3E $9F
-    call CreateNewTemporaryEntity                            ; $5E4C: $CD $CA $64
+    call SpawnNewEntity                           ; $5E4C: $CD $CA $64
     ld   hl, wEntitiesUnknownTableB               ; $5E4F: $21 $B0 $C2
     add  hl, de                                   ; $5E52: $19
     ld   [hl], $01                                ; $5E53: $36 $01
@@ -4057,7 +4057,7 @@ jr_003_5F2C:
     ld   a, $2B                                   ; $5F38: $3E $2B
     ldh  [hJingle], a                             ; $5F3A: $E0 $F2
     ld   a, $39                                   ; $5F3C: $3E $39
-    call CreateNewTemporaryEntity                            ; $5F3E: $CD $CA $64
+    call SpawnNewEntity                           ; $5F3E: $CD $CA $64
     ldh  a, [hScratch0]                           ; $5F41: $F0 $D7
     dec  a                                        ; $5F43: $3D
     ld   hl, wEntitiesPosXTable                         ; $5F44: $21 $00 $C2
@@ -4091,7 +4091,7 @@ jr_003_5F5F:
     and  $01                                      ; $5F71: $E6 $01
     ldh  [hFFE8], a                               ; $5F73: $E0 $E8
     ld   a, $39                                   ; $5F75: $3E $39
-    call CreateNewTemporaryEntity                            ; $5F77: $CD $CA $64
+    call SpawnNewEntity                           ; $5F77: $CD $CA $64
     push bc                                       ; $5F7A: $C5
     ld   hl, wEntitiesUnknownTableB               ; $5F7B: $21 $B0 $C2
     add  hl, de                                   ; $5F7E: $19
@@ -4991,8 +4991,8 @@ jr_003_64BC:
 ;   bc:  ???
 ; Outputs:
 ;   c:   set the carry flag if no slots were available
-CreateNewTemporaryEntity::
-    ; Enumer@ate all entities (starting from the last one)
+SpawnNewEntity::
+    ; Enumerate all entities (starting from the last one)
     ld   e, MAX_ENTITIES - 1                      ; $64CA: $1E $0F
 
 ; Create a new active entity in the last available slot starting from E?
@@ -5002,7 +5002,7 @@ CreateNewTemporaryEntity::
 ;   e:   index of slot to start the search from
 ; Outputs:
 ;   c:   set the carry flag if no slots were available
-CreateNewTemporaryEntityInRange::
+SpawnNewEntityInRange::
     push af                                       ; $64CC: $F5
     ld   d, $00                                   ; $64CD: $16 $00
 
@@ -5796,7 +5796,7 @@ jr_003_695D:
 jr_003_6964:
     call func_014_5526_trampoline                 ; $6964: $CD $78 $21
     ld   a, $05                                   ; $6967: $3E $05
-    call CreateNewTemporaryEntity                            ; $6969: $CD $CA $64
+    call SpawnNewEntity                           ; $6969: $CD $CA $64
     jr   c, jr_003_69A0                           ; $696C: $38 $32
 
     xor  a                                        ; $696E: $AF
@@ -5875,7 +5875,7 @@ Func_003_6A70::
     jr   z, jr_003_6A96                           ; $6A73: $28 $21
 
     ld   a, $02                                   ; $6A75: $3E $02
-    call CreateNewTemporaryEntity                            ; $6A77: $CD $CA $64
+    call SpawnNewEntity                           ; $6A77: $CD $CA $64
     jr   c, jr_003_6A93                           ; $6A7A: $38 $17
 
     ldh  a, [hScratch0]                           ; $6A7C: $F0 $D7
@@ -8112,7 +8112,7 @@ jr_003_76AC:
     ld   [hl], $01                                ; $76E5: $36 $01
     push de                                       ; $76E7: $D5
     ld   a, $32                                   ; $76E8: $3E $32
-    call CreateNewTemporaryEntity                            ; $76EA: $CD $CA $64
+    call SpawnNewEntity                           ; $76EA: $CD $CA $64
     jr   c, jr_003_770D                           ; $76ED: $38 $1E
 
     ldh  a, [hScratch0]                           ; $76EF: $F0 $D7
@@ -9240,7 +9240,7 @@ jr_003_7CFD:
     ld   a, $12                                   ; $7D0A: $3E $12
     ldh  [hNoiseSfx], a                            ; $7D0C: $E0 $F4
     ld   a, $08                                   ; $7D0E: $3E $08
-    call CreateNewTemporaryEntity                            ; $7D10: $CD $CA $64
+    call SpawnNewEntity                           ; $7D10: $CD $CA $64
     jr   c, jr_003_7D6A                           ; $7D13: $38 $55
 
     pop  hl                                       ; $7D15: $E1

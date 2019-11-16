@@ -7,7 +7,7 @@ include "code/audio/select_music_track.asm"
 label_002_41D0::
     push bc                                       ; $41D0: $C5
     ld   a, $07                                   ; $41D1: $3E $07
-    call CreateNewTemporaryEntity_trampoline                               ; $41D3: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $41D3: $CD $86 $3B
     jr   c, jr_002_41FA                           ; $41D6: $38 $22
 
     ld   hl, wEntitiesStatusTable                   ; $41D8: $21 $80 $C2
@@ -1293,7 +1293,7 @@ jr_002_4AF1:
     jr   nz, jr_002_4B40                          ; $4B07: $20 $37
 
     ld   a, $C9                                   ; $4B09: $3E $C9
-    call CreateNewTemporaryEntity_trampoline                               ; $4B0B: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $4B0B: $CD $86 $3B
     jr   c, jr_002_4B40                           ; $4B0E: $38 $30
 
     ldh  a, [hLinkPositionY]                      ; $4B10: $F0 $99
@@ -1627,7 +1627,7 @@ jr_002_4CD3:
     ld   a, $2D                                   ; $4CDB: $3E $2D
 
 jr_002_4CDD:
-    call CreateNewTemporaryEntity_trampoline                               ; $4CDD: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $4CDD: $CD $86 $3B
     jr   c, jr_002_4D1F                           ; $4CE0: $38 $3D
 
     ld   hl, wEntitiesPosXTable                         ; $4CE2: $21 $00 $C2
@@ -2264,7 +2264,7 @@ jr_002_503B:
 
     set  5, [hl]                                  ; $5056: $CB $EE
     ld   a, $35                                   ; $5058: $3E $35
-    call CreateNewTemporaryEntity_trampoline                               ; $505A: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $505A: $CD $86 $3B
     jr   c, jr_002_5079                           ; $505D: $38 $1A
 
     ldh  a, [hLinkPositionX]                      ; $505F: $F0 $98
@@ -2902,7 +2902,7 @@ TryOpenLockedDoor::
     ;
 
     ld   a, $06                                   ; $53FB: $3E $06
-    call CreateNewTemporaryEntity_trampoline                               ; $53FD: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $53FD: $CD $86 $3B
     jr   c, .return                               ; $5400: $38 $1B
 
     ld   hl, wEntitiesStatusTable                   ; $5402: $21 $80 $C2
@@ -2946,7 +2946,7 @@ label_002_5425::
     ld   a, $3C                                   ; $5436: $3E $3C
 
 jr_002_5438:
-    call CreateNewTemporaryEntity_trampoline                               ; $5438: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $5438: $CD $86 $3B
     jr   c, jr_002_546F                           ; $543B: $38 $32
 
     ld   hl, wEntitiesPosXTable                         ; $543D: $21 $00 $C2
@@ -6449,7 +6449,7 @@ jr_002_6FD4:
 
 jr_002_6FD7:
     ld   a, $28                                   ; $6FD7: $3E $28
-    call CreateNewTemporaryEntity_trampoline                               ; $6FD9: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $6FD9: $CD $86 $3B
     ld   hl, wEntitiesUnknownTableC               ; $6FDC: $21 $C0 $C2
     add  hl, de                                   ; $6FDF: $19
     inc  [hl]                                     ; $6FE0: $34
@@ -6466,7 +6466,7 @@ jr_002_6FE3:
 
     call label_27F2                               ; $6FEF: $CD $F2 $27
     ld   a, $5F                                   ; $6FF2: $3E $5F
-    call CreateNewTemporaryEntity_trampoline                               ; $6FF4: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $6FF4: $CD $86 $3B
     ld   hl, wEntitiesUnknowTableP                ; $6FF7: $21 $40 $C4
     add  hl, de                                   ; $6FFA: $19
     dec  [hl]                                     ; $6FFB: $35
@@ -7043,7 +7043,7 @@ jr_002_734F:
     ld   d, $00                                   ; $7365: $16 $00
     call func_014_5526_trampoline                 ; $7367: $CD $78 $21
     ld   a, $05                                   ; $736A: $3E $05
-    call CreateNewTemporaryEntity_trampoline                               ; $736C: $CD $86 $3B
+    call SpawnNewEntity_trampoline                ; $736C: $CD $86 $3B
     jp   c, label_002_7454                        ; $736F: $DA $54 $74
 
     ld   hl, wEntitiesPosXTable                         ; $7372: $21 $00 $C2

@@ -19,7 +19,7 @@ LiftableRockEntityHandler::
     jr   nz, jr_003_5369                          ; $5345: $20 $22
 
     ld   a, $2F                                   ; $5347: $3E $2F
-    call CreateNewTemporaryEntity                            ; $5349: $CD $CA $64
+    call SpawnNewEntity                           ; $5349: $CD $CA $64
     jr   c, jr_003_5369                           ; $534C: $38 $1B
 
     ldh  a, [hScratch0]                           ; $534E: $F0 $D7

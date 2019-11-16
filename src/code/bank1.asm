@@ -2919,7 +2919,7 @@ CreateFollowingNpcEntity::
 
     ; Create the new Rooster entity
     ld   a, ENTITY_ROOSTER
-    call CreateNewTemporaryEntity_trampoline
+    call SpawnNewEntity_trampoline
 
     ; Configure the entity
     ldh  a, [hLinkPositionX]
@@ -2995,7 +2995,7 @@ CreateFollowingNpcEntity::
 
     ; Create the Ghost entity
     ld   a, ENTITY_GHOST
-    call CreateNewTemporaryEntity_trampoline
+    call SpawnNewEntity_trampoline
 
     ; Configure the entity
     ldh  a, [hLinkPositionX]
@@ -3049,7 +3049,7 @@ CreateFollowingNpcEntity::
 
     ; Create a new Marin entity
     ld   a, ENTITY_MARIN_AT_THE_SHORE
-    call CreateNewTemporaryEntity_trampoline
+    call SpawnNewEntity_trampoline
 
     ; Configure the entity
     ldh  a, [hLinkPositionX]
@@ -3161,7 +3161,7 @@ CreateFollowingNpcEntity::
 
     ; Create a new Bow-Wow entity
     ld   a, ENTITY_BOW_WOW
-    call CreateNewTemporaryEntity_trampoline
+    call SpawnNewEntity_trampoline
 
     ; Configure the entity
     ldh  a, [hLinkPositionX]

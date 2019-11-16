@@ -37,7 +37,7 @@ ChestWithItemEntityHandler::
     jr   nz, jr_007_7C29                          ; $7BEC: $20 $3B
 
     ld   a, $1B                                   ; $7BEE: $3E $1B
-    call func_003_64CA_trampoline                               ; $7BF0: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $7BF0: $CD $86 $3B
     jp   c, label_007_7EA4                        ; $7BF3: $DA $A4 $7E
 
     ldh  a, [hScratch0]                           ; $7BF6: $F0 $D7

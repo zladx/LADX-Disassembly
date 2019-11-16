@@ -58,7 +58,7 @@ jr_018_7C39:
     jr   nz, jr_018_7C54                          ; $7C3F: $20 $13
 
     ld   a, $30                                   ; $7C41: $3E $30
-    call label_3BAA                               ; $7C43: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $7C43: $CD $AA $3B
 
 jr_018_7C46:
     call label_3B5A                               ; $7C46: $CD $5A $3B
@@ -103,7 +103,7 @@ jr_018_7C80:
     jr   nz, jr_018_7CAE                          ; $7C83: $20 $29
 
     ld   a, $68                                   ; $7C85: $3E $68
-    call func_003_64CA_trampoline                               ; $7C87: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $7C87: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                         ; $7C8A: $21 $00 $C2
     add  hl, de                                   ; $7C8D: $19
     ldh  a, [hSwordIntersectedAreaX]              ; $7C8E: $F0 $CE

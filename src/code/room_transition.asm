@@ -121,9 +121,9 @@ ApplyRoomTransition::
     ldh  [hLinkPositionYIncrement], a             ; $7958: $E0 $9B
     call CheckForLedgeJump                        ; $795A: $CD $45 $6E
 
-    ; If ($FFAF != $DB && $FFAF != $DC && ($FFAF == $E1 || wCollisionType != 0),
+    ; If (hObjectUnderEntity != $DB && hObjectUnderEntity != $DC && (hObjectUnderEntity == $E1 || wCollisionType != 0),
     ; handle special case.
-    ldh  a, [$FFAF]                               ; $795D: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $795D: $F0 $AF
     cp   $DB                                      ; $795F: $FE $DB
     jr   z, .bottomDirectionEnd                   ; $7961: $28 $17
 
@@ -801,7 +801,7 @@ label_002_7C50::
     ret  nz                                       ; $7C68: $C0
 
     ld   e, $01                                   ; $7C69: $1E $01
-    ldh  a, [$FFAF]                               ; $7C6B: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $7C6B: $F0 $AF
     cp   $0E                                      ; $7C6D: $FE $0E
     jr   nz, jr_002_7C88                          ; $7C6F: $20 $17
 

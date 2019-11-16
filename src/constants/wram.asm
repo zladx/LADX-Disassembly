@@ -243,7 +243,10 @@ wIsUsingShield:: ; C15B
   ds 1
 
 wC15C: ds 1
+
+; Contains a DIRECTION_* value taken from Link's irection
 wC15D: ds 1
+
 wC15E: ds 1
 wC15F: ds 1
 wC160: ds 1

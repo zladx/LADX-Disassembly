@@ -2902,7 +2902,7 @@ label_5FF0::
     cp   $FF
     jr   nz, label_5FDE
     ld   a, $D5
-    call func_003_64CA_trampoline
+    call CreateNewTemporaryEntity_trampoline
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -2969,7 +2969,7 @@ label_6059::
     cp   $FF
     jr   nz, label_6047
     ld   a, $D4
-    call func_003_64CA_trampoline
+    call CreateNewTemporaryEntity_trampoline
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -3012,7 +3012,7 @@ label_609C::
     cp   $FF
     jr   nz, label_608A
     ld   a, $C1
-    call func_003_64CA_trampoline
+    call CreateNewTemporaryEntity_trampoline
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -3111,7 +3111,7 @@ label_6141::
     cp   $FF
     jr   nz, label_612F
     ld   a, $6D
-    call func_003_64CA_trampoline
+    call CreateNewTemporaryEntity_trampoline
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de

@@ -7,7 +7,7 @@ include "code/audio/select_music_track.asm"
 label_002_41D0::
     push bc                                       ; $41D0: $C5
     ld   a, $07                                   ; $41D1: $3E $07
-    call func_003_64CA_trampoline                               ; $41D3: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $41D3: $CD $86 $3B
     jr   c, jr_002_41FA                           ; $41D6: $38 $22
 
     ld   hl, wEntitiesStatusTable                   ; $41D8: $21 $80 $C2
@@ -1069,7 +1069,7 @@ jr_002_4978:
     add  $08                                      ; $4989: $C6 $08
     ldh  [$FFA2], a                               ; $498B: $E0 $A2
     call CheckForLedgeJump                        ; $498D: $CD $45 $6E
-    ldh  a, [$FFAF]                               ; $4990: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $4990: $F0 $AF
     cp   $E1                                      ; $4992: $FE $E1
     jr   z, jr_002_4978                           ; $4994: $28 $E2
 
@@ -1293,7 +1293,7 @@ jr_002_4AF1:
     jr   nz, jr_002_4B40                          ; $4B07: $20 $37
 
     ld   a, $C9                                   ; $4B09: $3E $C9
-    call func_003_64CA_trampoline                               ; $4B0B: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $4B0B: $CD $86 $3B
     jr   c, jr_002_4B40                           ; $4B0E: $38 $30
 
     ldh  a, [hLinkPositionY]                      ; $4B10: $F0 $99
@@ -1627,7 +1627,7 @@ jr_002_4CD3:
     ld   a, $2D                                   ; $4CDB: $3E $2D
 
 jr_002_4CDD:
-    call func_003_64CA_trampoline                               ; $4CDD: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $4CDD: $CD $86 $3B
     jr   c, jr_002_4D1F                           ; $4CE0: $38 $3D
 
     ld   hl, wEntitiesPosXTable                         ; $4CE2: $21 $00 $C2
@@ -1652,7 +1652,7 @@ jr_002_4CDD:
     ld   c, e                                     ; $4D06: $4B
     ld   b, d                                     ; $4D07: $42
     ld   a, $0C                                   ; $4D08: $3E $0C
-    call label_3BAA                               ; $4D0A: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $4D0A: $CD $AA $3B
     ldh  a, [hScratch0]                               ; $4D0D: $F0 $D7
     cpl                                           ; $4D0F: $2F
     inc  a                                        ; $4D10: $3C
@@ -2264,7 +2264,7 @@ jr_002_503B:
 
     set  5, [hl]                                  ; $5056: $CB $EE
     ld   a, $35                                   ; $5058: $3E $35
-    call func_003_64CA_trampoline                               ; $505A: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $505A: $CD $86 $3B
     jr   c, jr_002_5079                           ; $505D: $38 $1A
 
     ldh  a, [hLinkPositionX]                      ; $505F: $F0 $98
@@ -2885,7 +2885,7 @@ TryOpenLockedDoor::
     ld   e, a                                     ; $53E1: $5F
     ld   d, $00                                   ; $53E2: $16 $00
 
-    call label_2178                               ; $53E4: $CD $78 $21
+    call func_014_5526_trampoline                 ; $53E4: $CD $78 $21
     ldh  a, [hSwordIntersectedAreaX]                               ; $53E7: $F0 $CE
     add  $08                                      ; $53E9: $C6 $08
     ldh  [hScratch0], a                               ; $53EB: $E0 $D7
@@ -2902,7 +2902,7 @@ TryOpenLockedDoor::
     ;
 
     ld   a, $06                                   ; $53FB: $3E $06
-    call func_003_64CA_trampoline                               ; $53FD: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $53FD: $CD $86 $3B
     jr   c, .return                               ; $5400: $38 $1B
 
     ld   hl, wEntitiesStatusTable                   ; $5402: $21 $80 $C2
@@ -2946,7 +2946,7 @@ label_002_5425::
     ld   a, $3C                                   ; $5436: $3E $3C
 
 jr_002_5438:
-    call func_003_64CA_trampoline                               ; $5438: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $5438: $CD $86 $3B
     jr   c, jr_002_546F                           ; $543B: $38 $32
 
     ld   hl, wEntitiesPosXTable                         ; $543D: $21 $00 $C2
@@ -5665,7 +5665,7 @@ label_002_6B66::
 
 jr_002_6B81:
     call func_002_6C2F                            ; $6B81: $CD $2F $6C
-    ldh  a, [$FFAF]                               ; $6B84: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $6B84: $F0 $AF
     cp   $8A                                      ; $6B86: $FE $8A
     jr   nz, jr_002_6B99                          ; $6B88: $20 $0F
 
@@ -5678,7 +5678,7 @@ jr_002_6B81:
     call_open_dialog $051                         ; $6B94
 
 jr_002_6B99:
-    ldh  a, [$FFAF]                               ; $6B99: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $6B99: $F0 $AF
     cp   $FF                                      ; $6B9B: $FE $FF
     jr   nz, jr_002_6BA2                          ; $6B9D: $20 $03
 
@@ -5708,7 +5708,7 @@ jr_002_6BAC:
     cp   $03                                      ; $6BBF: $FE $03
     jr   nc, jr_002_6BD1                          ; $6BC1: $30 $0E
 
-    ldh  a, [$FFAF]                               ; $6BC3: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $6BC3: $F0 $AF
     cp   $62                                      ; $6BC5: $FE $62
     jr   z, jr_002_6BD8                           ; $6BC7: $28 $0F
 
@@ -5798,7 +5798,7 @@ func_002_6C2F::
     add  hl, de                                   ; $6C52: $19
     ld   h, a                                     ; $6C53: $67
     ld   a, [hl]                                  ; $6C54: $7E
-    ldh  [$FFAF], a                               ; $6C55: $E0 $AF
+    ldh  [hObjectUnderEntity], a                               ; $6C55: $E0 $AF
     ld   e, a                                     ; $6C57: $5F
     ld   a, [wIsIndoor]                         ; $6C58: $FA $A5 $DB
     ld   d, a                                     ; $6C5B: $57
@@ -6226,7 +6226,7 @@ jr_002_6E72:
     and  a                                        ; $6E86: $A7
     jr   nz, jr_002_6EC6                          ; $6E87: $20 $3D
 
-    ldh  a, [$FFAF]                               ; $6E89: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $6E89: $F0 $AF
     cp   $E9                                      ; $6E8B: $FE $E9
     jr   nz, jr_002_6EC6                          ; $6E8D: $20 $37
 
@@ -6365,7 +6365,7 @@ jr_002_6F25:
     add  hl, de                                   ; $6F53: $19
     ld   h, a                                     ; $6F54: $67
     ld   a, [hl]                                  ; $6F55: $7E
-    ldh  [$FFAF], a                               ; $6F56: $E0 $AF
+    ldh  [hObjectUnderEntity], a                               ; $6F56: $E0 $AF
     ld   e, a                                     ; $6F58: $5F
     ld   a, [wIsIndoor]                         ; $6F59: $FA $A5 $DB
     ld   d, a                                     ; $6F5C: $57
@@ -6449,7 +6449,7 @@ jr_002_6FD4:
 
 jr_002_6FD7:
     ld   a, $28                                   ; $6FD7: $3E $28
-    call func_003_64CA_trampoline                               ; $6FD9: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $6FD9: $CD $86 $3B
     ld   hl, wEntitiesUnknownTableC               ; $6FDC: $21 $C0 $C2
     add  hl, de                                   ; $6FDF: $19
     inc  [hl]                                     ; $6FE0: $34
@@ -6466,7 +6466,7 @@ jr_002_6FE3:
 
     call label_27F2                               ; $6FEF: $CD $F2 $27
     ld   a, $5F                                   ; $6FF2: $3E $5F
-    call func_003_64CA_trampoline                               ; $6FF4: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $6FF4: $CD $86 $3B
     ld   hl, wEntitiesUnknowTableP                ; $6FF7: $21 $40 $C4
     add  hl, de                                   ; $6FFA: $19
     dec  [hl]                                     ; $6FFB: $35
@@ -6521,7 +6521,7 @@ jr_002_703E:
     jp   label_002_7277                           ; $7042: $C3 $77 $72
 
 label_002_7045::
-    ldh  a, [$FFAF]                               ; $7045: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $7045: $F0 $AF
     cp   $DB                                      ; $7047: $FE $DB
     jr   nz, jr_002_7053                          ; $7049: $20 $08
 
@@ -6848,7 +6848,7 @@ label_002_723D::
     and  a                                        ; $7240: $A7
     jp   nz, label_002_7461                       ; $7241: $C2 $61 $74
 
-    ldh  a, [$FFAF]                               ; $7244: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $7244: $F0 $AF
     cp   $DB                                      ; $7246: $FE $DB
     jr   c, label_002_7277                        ; $7248: $38 $2D
 
@@ -6882,7 +6882,7 @@ label_002_726A::
     jp   c, label_002_7461                        ; $7274: $DA $61 $74
 
 label_002_7277::
-    ldh  a, [$FFAF]                               ; $7277: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $7277: $F0 $AF
     cp   $69                                      ; $7279: $FE $69
     jr   nz, jr_002_728E                          ; $727B: $20 $11
 
@@ -6911,7 +6911,7 @@ jr_002_728E:
 
     ld   a, [wIsIndoor]                         ; $729F: $FA $A5 $DB
     and  a                                        ; $72A2: $A7
-    ldh  a, [$FFAF]                               ; $72A3: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $72A3: $F0 $AF
     jr   z, jr_002_72D1                           ; $72A5: $28 $2A
 
     ld   e, $8A                                   ; $72A7: $1E $8A
@@ -7015,7 +7015,7 @@ jr_002_7330:
 jr_002_733B:
     ldh  a, [hMapId]                         ; $733B: $F0 $F7
     and  a                                        ; $733D: $A7
-    ldh  a, [$FFAF]                               ; $733E: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $733E: $F0 $AF
     jr   z, label_002_73AD                        ; $7340: $28 $6B
 
     cp   $88                                      ; $7342: $FE $88
@@ -7041,9 +7041,9 @@ jr_002_734F:
     ldh  a, [hFFE9]                               ; $7362: $F0 $E9
     ld   e, a                                     ; $7364: $5F
     ld   d, $00                                   ; $7365: $16 $00
-    call label_2178                               ; $7367: $CD $78 $21
+    call func_014_5526_trampoline                 ; $7367: $CD $78 $21
     ld   a, $05                                   ; $736A: $3E $05
-    call func_003_64CA_trampoline                               ; $736C: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $736C: $CD $86 $3B
     jp   c, label_002_7454                        ; $736F: $DA $54 $74
 
     ld   hl, wEntitiesPosXTable                         ; $7372: $21 $00 $C2
@@ -7165,7 +7165,7 @@ jr_002_741D:
     and  a                                        ; $7420: $A7
     jr   z, label_002_7454                        ; $7421: $28 $31
 
-    ldh  a, [$FFAF]                               ; $7423: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $7423: $F0 $AF
     cp   $DE                                      ; $7425: $FE $DE
     jr   z, jr_002_742F                           ; $7427: $28 $06
 
@@ -7215,7 +7215,7 @@ label_002_7461::
     ret                                           ; $7467: $C9
 
 func_002_7468::
-    ldh  a, [$FFAF]                               ; $7468: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $7468: $F0 $AF
     cp   $B1                                      ; $746A: $FE $B1
     jr   z, jr_002_7472                           ; $746C: $28 $04
 
@@ -7344,7 +7344,7 @@ func_002_7512::
     ld   d, a                                     ; $7532: $57
     ld   a, [hl]                                  ; $7533: $7E
     ldh  [$FFB8], a                               ; $7534: $E0 $B8
-    ldh  [$FFAF], a                               ; $7536: $E0 $AF
+    ldh  [hObjectUnderEntity], a                               ; $7536: $E0 $AF
     ld   e, a                                     ; $7538: $5F
     ret                                           ; $7539: $C9
 
@@ -7657,7 +7657,7 @@ jr_002_76F4:
     ldh  a, [hLinkPositionY]                      ; $7706: $F0 $99
     add  $FE                                      ; $7708: $C6 $FE
     call func_002_5928                            ; $770A: $CD $28 $59
-    ldh  a, [$FFAF]                               ; $770D: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $770D: $F0 $AF
     cp   $06                                      ; $770F: $FE $06
     jr   z, label_002_7719                        ; $7711: $28 $06
 
@@ -7670,7 +7670,7 @@ label_002_7719::
     ldh  [$FFB7], a                               ; $771B: $E0 $B7
     ld   a, $08                                   ; $771D: $3E $08
     ld   [wLinkMotionState], a                    ; $771F: $EA $1C $C1
-    ldh  a, [$FFAF]                               ; $7722: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $7722: $F0 $AF
     ldh  [$FF9C], a                               ; $7724: $E0 $9C
     ldh  a, [hLinkPositionY]                      ; $7726: $F0 $99
     add  $02                                      ; $7728: $C6 $02
@@ -7769,7 +7769,7 @@ jr_002_77B2:
     cp   $04                                      ; $77B5: $FE $04
     jr   nz, jr_002_77E9                          ; $77B7: $20 $30
 
-    ldh  a, [$FFAF]                               ; $77B9: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $77B9: $F0 $AF
     cp   $DB                                      ; $77BB: $FE $DB
     jr   c, jr_002_77E9                           ; $77BD: $38 $2A
 
@@ -7816,7 +7816,7 @@ jr_002_77F7:
     and  a                                        ; $7801: $A7
     jr   nz, label_002_786E                       ; $7802: $20 $6A
 
-    ldh  a, [$FFAF]                               ; $7804: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $7804: $F0 $AF
     cp   $AA                                      ; $7806: $FE $AA
     jr   nz, jr_002_783C                          ; $7808: $20 $32
 
@@ -7858,7 +7858,7 @@ jr_002_783C:
     ld   hl, $C1C9                                ; $7846: $21 $C9 $C1
     jr   nz, jr_002_786C                          ; $7849: $20 $21
 
-    ldh  a, [$FFAF]                               ; $784B: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                               ; $784B: $F0 $AF
     cp   $DF                                      ; $784D: $FE $DF
     jr   nz, jr_002_786C                          ; $784F: $20 $1B
 

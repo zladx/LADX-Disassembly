@@ -23,7 +23,7 @@ GenieState0Handler::
     jr   c, jr_004_404E                           ; $401D: $38 $2F
 
     ld   a, $5C                                   ; $401F: $3E $5C
-    call func_003_64CA_trampoline                               ; $4021: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $4021: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $4024: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $4026: $21 $00 $C2
     add  hl, de                                   ; $4029: $19
@@ -147,7 +147,7 @@ jr_004_40DF:
     ld   a, $48                                   ; $40E9: $3E $48
     ldh  [hLinkPositionY], a                      ; $40EB: $E0 $99
     ld   a, $08                                   ; $40ED: $3E $08
-    call label_3BAA                               ; $40EF: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $40EF: $CD $AA $3B
     ldh  a, [wActiveEntityPosX]                               ; $40F2: $F0 $EE
     ld   hl, hLinkPositionX                       ; $40F4: $21 $98 $FF
     sub  [hl]                                     ; $40F7: $96
@@ -179,7 +179,7 @@ jr_004_4118:
     jr   nz, jr_004_4144                          ; $411D: $20 $25
 
     ld   a, $5C                                   ; $411F: $3E $5C
-    call func_003_64CA_trampoline                               ; $4121: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $4121: $CD $86 $3B
     ldh  a, [hScratch0]                               ; $4124: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $4126: $21 $00 $C2
     add  hl, de                                   ; $4129: $19
@@ -391,7 +391,7 @@ jr_004_4245:
     ld   a, JINGLE_BIG_BUMP                       ; $426F: $3E $20
     ldh  [hJingle], a                             ; $4271: $E0 $F2
     ld   a, $0C                                   ; $4273: $3E $0C
-    call label_3BAA                               ; $4275: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $4275: $CD $AA $3B
 
 jr_004_4278:
     call func_004_6DCA                            ; $4278: $CD $CA $6D
@@ -646,7 +646,7 @@ jr_004_43FF:
     pop  hl                                       ; $4405: $E1
     ld   [hl], a                                  ; $4406: $77
     ld   a, $5C                                   ; $4407: $3E $5C
-    call func_003_64CA_trampoline                               ; $4409: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $4409: $CD $86 $3B
     jr   c, jr_004_4438                           ; $440C: $38 $2A
 
     ldh  a, [hScratch0]                               ; $440E: $F0 $D7
@@ -678,7 +678,7 @@ jr_004_4438:
 
     ld   [hl], $30                                ; $443D: $36 $30
     ld   a, $5C                                   ; $443F: $3E $5C
-    call func_003_64CA_trampoline                               ; $4441: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $4441: $CD $86 $3B
     jr   c, jr_004_4487                           ; $4444: $38 $41
 
     push bc                                       ; $4446: $C5
@@ -711,7 +711,7 @@ jr_004_4438:
     ld   c, e                                     ; $4475: $4B
     ld   b, d                                     ; $4476: $42
     ld   a, $1F                                   ; $4477: $3E $1F
-    call label_3BAA                               ; $4479: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $4479: $CD $AA $3B
     pop  bc                                       ; $447C: $C1
     ld   hl, $C300                                ; $447D: $21 $00 $C3
     add  hl, bc                                   ; $4480: $09
@@ -757,7 +757,7 @@ jr_004_449A:
     sub  $20                                      ; $44B6: $D6 $20
     ldh  [hLinkPositionY], a                      ; $44B8: $E0 $99
     ld   a, $10                                   ; $44BA: $3E $10
-    call label_3BAA                               ; $44BC: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $44BC: $CD $AA $3B
     call func_004_6DCA                            ; $44BF: $CD $CA $6D
     ld   hl, hLinkPositionX                       ; $44C2: $21 $98 $FF
     ldh  a, [wActiveEntityPosX]                               ; $44C5: $F0 $EE
@@ -791,7 +791,7 @@ jr_004_44E2:
     jr   nz, jr_004_4516                          ; $44F1: $20 $23
 
     ld   a, $5C                                   ; $44F3: $3E $5C
-    call func_003_64CA_trampoline                               ; $44F5: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $44F5: $CD $86 $3B
     ldh  a, [hScratch0]                               ; $44F8: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $44FA: $21 $00 $C2
     add  hl, de                                   ; $44FD: $19
@@ -910,7 +910,7 @@ jr_004_45A6:
     add  hl, bc                                   ; $45AC: $09
     ld   [hl], b                                  ; $45AD: $70
     ld   a, $5C                                   ; $45AE: $3E $5C
-    call func_003_64CA_trampoline                               ; $45B0: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $45B0: $CD $86 $3B
     jr   c, jr_004_45F0                           ; $45B3: $38 $3B
 
     push bc                                       ; $45B5: $C5
@@ -943,7 +943,7 @@ jr_004_45A6:
     ld   c, e                                     ; $45E4: $4B
     ld   b, d                                     ; $45E5: $42
     ld   a, $1F                                   ; $45E6: $3E $1F
-    call label_3BAA                               ; $45E8: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $45E8: $CD $AA $3B
     pop  bc                                       ; $45EB: $C1
     ld   a, $28                                   ; $45EC: $3E $28
     ldh  [hNoiseSfx], a                            ; $45EE: $E0 $F4
@@ -1137,7 +1137,7 @@ jr_004_486D:
     jr   nz, jr_004_48A6                          ; $4873: $20 $31
 
     ld   a, $5C                                   ; $4875: $3E $5C
-    call func_003_64CA_trampoline                               ; $4877: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $4877: $CD $86 $3B
     ldh  a, [hScratch0]                               ; $487A: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $487C: $21 $00 $C2
     add  hl, de                                   ; $487F: $19
@@ -1300,7 +1300,7 @@ label_004_496F:
 
 jr_004_4972:
     ld   a, $5B                                   ; $4972: $3E $5B
-    call func_003_64CA_trampoline                               ; $4974: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $4974: $CD $86 $3B
     ld   hl, wEntitiesUnknowTableR                ; $4977: $21 $90 $C3
     add  hl, de                                   ; $497A: $19
     ld   [hl], $01                                ; $497B: $36 $01
@@ -1391,7 +1391,7 @@ jr_004_49FB:
     jr   nc, jr_004_4A2C                          ; $4A07: $30 $23
 
     ld   a, $1B                                   ; $4A09: $3E $1B
-    call func_003_64CA_trampoline                               ; $4A0B: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $4A0B: $CD $86 $3B
     call GetRandomByte                            ; $4A0E: $CD $0D $28
     and  $3F                                      ; $4A11: $E6 $3F
     add  $40                                      ; $4A13: $C6 $40
@@ -1911,7 +1911,7 @@ jr_004_4E83:
     jr   nz, jr_004_4ED8                          ; $4ED1: $20 $05
 
     ld   a, $18                                   ; $4ED3: $3E $18
-    call label_3BAA                               ; $4ED5: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $4ED5: $CD $AA $3B
 
 jr_004_4ED8:
     call GetRandomByte                            ; $4ED8: $CD $0D $28
@@ -2467,7 +2467,7 @@ jr_004_5202:
     jr   c, jr_004_5273                           ; $5228: $38 $49
 
     ld   a, $5A                                   ; $522A: $3E $5A
-    call func_003_64CA_trampoline                               ; $522C: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $522C: $CD $86 $3B
     jr   c, jr_004_5273                           ; $522F: $38 $42
 
     ld   hl, wEntitiesUnknownTableB               ; $5231: $21 $B0 $C2
@@ -2525,7 +2525,7 @@ jr_004_5273:
     jr   nc, jr_004_52C9                          ; $5281: $30 $46
 
     ld   a, $5A                                   ; $5283: $3E $5A
-    call func_003_64CA_trampoline                               ; $5285: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $5285: $CD $86 $3B
     jr   c, jr_004_52C9                           ; $5288: $38 $3F
 
     ld   hl, wEntitiesUnknownTableB               ; $528A: $21 $B0 $C2
@@ -2586,7 +2586,7 @@ jr_004_52C9:
     jr   c, jr_004_5340                           ; $52E3: $38 $5B
 
     ld   a, $5A                                   ; $52E5: $3E $5A
-    call func_003_64CA_trampoline                               ; $52E7: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $52E7: $CD $86 $3B
     jr   c, jr_004_5340                           ; $52EA: $38 $54
 
     ld   hl, wEntitiesUnknownTableB               ; $52EC: $21 $B0 $C2
@@ -3014,7 +3014,7 @@ jr_004_557D:
 jr_004_557E:
     call IncrementEntityWalkingAttr               ; $557E: $CD $12 $3B
     ld   a, $18                                   ; $5581: $3E $18
-    jp   label_3BAA                               ; $5583: $C3 $AA $3B
+    jp   ApplyVectorTowardsLink_trampoline                               ; $5583: $C3 $AA $3B
 
     call func_004_6DCA                            ; $5586: $CD $CA $6D
     call label_3B23                               ; $5589: $CD $23 $3B
@@ -3073,7 +3073,7 @@ jr_004_55D7:
 jr_004_55D8:
     call IncrementEntityWalkingAttr               ; $55D8: $CD $12 $3B
     ld   a, $18                                   ; $55DB: $3E $18
-    jp   label_3BAA                               ; $55DD: $C3 $AA $3B
+    jp   ApplyVectorTowardsLink_trampoline                               ; $55DD: $C3 $AA $3B
 
     call func_004_6DCA                            ; $55E0: $CD $CA $6D
     call label_3B23                               ; $55E3: $CD $23 $3B
@@ -3327,7 +3327,7 @@ jr_004_5750:
 ; Load heart container value to load when boss is killed
 DropHeartContainer:
     ld   a, $36                                   ; $5751: $3E $36
-    call func_003_64CA_trampoline                               ; $5753: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $5753: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $5756: $F0 $D7
     cp   $88                                      ; $5758: $FE $88
     jr   c, jr_004_575E                           ; $575A: $38 $02
@@ -4401,7 +4401,7 @@ jr_004_5EA4:
 
 func_004_5EC6:
     ld   a, $58                                   ; $5EC6: $3E $58
-    call func_003_64CA_trampoline                               ; $5EC8: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $5EC8: $CD $86 $3B
     jr   c, jr_004_5EE4                           ; $5ECB: $38 $17
 
     ld   hl, wEntitiesPosXTable                         ; $5ECD: $21 $00 $C2
@@ -4416,7 +4416,7 @@ func_004_5EC6:
     ld   c, e                                     ; $5EDC: $4B
     ld   b, d                                     ; $5EDD: $42
     ld   a, $18                                   ; $5EDE: $3E $18
-    call label_3BAA                               ; $5EE0: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $5EE0: $CD $AA $3B
     pop  bc                                       ; $5EE3: $C1
 
 jr_004_5EE4:
@@ -4688,7 +4688,7 @@ Data_004_604C::
 
 jr_004_60E0:
     ld   a, $54                                   ; $60E0: $3E $54
-    call func_003_64CA_trampoline                               ; $60E2: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $60E2: $CD $86 $3B
     ld   hl, $60B6                                ; $60E5: $21 $B6 $60
     add  hl, bc                                   ; $60E8: $09
     ld   a, [hl]                                  ; $60E9: $7E
@@ -4792,7 +4792,7 @@ jr_004_616C:
     ld   a, $02                                   ; $6183: $3E $02
     ld   [$C3B0], a                               ; $6185: $EA $B0 $C3
     ld   a, $54                                   ; $6188: $3E $54
-    call func_003_64CA_trampoline                               ; $618A: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $618A: $CD $86 $3B
     ld   hl, wEntitiesPosXTable                         ; $618D: $21 $00 $C2
     add  hl, de                                   ; $6190: $19
     ld   [hl], $78                                ; $6191: $36 $78
@@ -5119,7 +5119,7 @@ jr_004_6354:
     sub  $17                                      ; $6362: $D6 $17
     ldh  [hLinkPositionX], a                      ; $6364: $E0 $98
     ld   a, $04                                   ; $6366: $3E $04
-    call label_3BAA                               ; $6368: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $6368: $CD $AA $3B
     pop  af                                       ; $636B: $F1
     ldh  [hLinkPositionX], a                      ; $636C: $E0 $98
     ldh  a, [wActiveEntityPosY]                               ; $636E: $F0 $EC
@@ -5422,7 +5422,7 @@ jr_004_6504:
     ld   a, [wIntroTimer]                         ; $651A: $FA $01 $D0
     ldh  [hLinkPositionY], a                      ; $651D: $E0 $99
     ld   a, $04                                   ; $651F: $3E $04
-    call label_3BAA                               ; $6521: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $6521: $CD $AA $3B
     pop  af                                       ; $6524: $F1
     ldh  [hLinkPositionY], a                      ; $6525: $E0 $99
     pop  af                                       ; $6527: $F1
@@ -5445,7 +5445,7 @@ jr_004_6504:
     ld   a, [wIntroTimer]                         ; $6545: $FA $01 $D0
     ldh  [hLinkPositionY], a                      ; $6548: $E0 $99
     ld   a, $10                                   ; $654A: $3E $10
-    call label_3BAA                               ; $654C: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $654C: $CD $AA $3B
     pop  af                                       ; $654F: $F1
     ldh  [hLinkPositionY], a                      ; $6550: $E0 $99
     pop  af                                       ; $6552: $F1
@@ -6250,7 +6250,7 @@ jr_004_69D5:
     jr   nz, jr_004_6A04                          ; $69FD: $20 $05
 
     ld   a, $04                                   ; $69FF: $3E $04
-    call label_3BAA                               ; $6A01: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $6A01: $CD $AA $3B
 
 jr_004_6A04:
     call func_004_6DCA                            ; $6A04: $CD $CA $6D
@@ -6593,7 +6593,7 @@ func_004_6BE1:
     add  hl, de                                   ; $6BFC: $19
     ld   h, a                                     ; $6BFD: $67
     ld   a, [hl]                                  ; $6BFE: $7E
-    ldh  [$FFAF], a                               ; $6BFF: $E0 $AF
+    ldh  [hObjectUnderEntity], a                               ; $6BFF: $E0 $AF
     ld   e, a                                     ; $6C01: $5F
     ld   a, [wIsIndoor]                         ; $6C02: $FA $A5 $DB
     ld   d, a                                     ; $6C05: $57
@@ -6684,7 +6684,7 @@ LaserEntityHandler::
     jr   nz, jr_004_6CB3                          ; $6C7D: $20 $34
 
     ld   a, $2B                                   ; $6C7F: $3E $2B
-    call func_003_64CA_trampoline                               ; $6C81: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $6C81: $CD $86 $3B
     jr   c, jr_004_6CB3                           ; $6C84: $38 $2D
 
     ld   a, $08                                   ; $6C86: $3E $08
@@ -6737,7 +6737,7 @@ jr_004_6CB4:
     add  hl, bc                                   ; $6CCD: $09
     ld   [hl], a                                  ; $6CCE: $77
     ld   a, $2A                                   ; $6CCF: $3E $2A
-    call func_003_64CA_trampoline                               ; $6CD1: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $6CD1: $CD $86 $3B
     jr   c, jr_004_6D0E                           ; $6CD4: $38 $38
 
     ldh  a, [hScratch0]                               ; $6CD6: $F0 $D7
@@ -6822,7 +6822,7 @@ label_004_6D0F:
     ld   c, e                                     ; $6D53: $4B
     ld   b, d                                     ; $6D54: $42
     ld   a, $40                                   ; $6D55: $3E $40
-    call label_3BAA                               ; $6D57: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $6D57: $CD $AA $3B
     pop  bc                                       ; $6D5A: $C1
     ret                                           ; $6D5B: $C9
 
@@ -7205,7 +7205,7 @@ jr_004_6F3C:
     push de                                       ; $6F3C: $D5
     ld   a, $4F                                   ; $6F3D: $3E $4F
     ld   e, $0E                                   ; $6F3F: $1E $0E
-    call label_3B98                               ; $6F41: $CD $98 $3B
+    call CreateNewTemporaryEntityInRange_trampoline                               ; $6F41: $CD $98 $3B
     ld   hl, wEntitiesUnknownTableB               ; $6F44: $21 $B0 $C2
     add  hl, de                                   ; $6F47: $19
     ld   [hl], $01                                ; $6F48: $36 $01
@@ -7798,7 +7798,7 @@ jr_004_7274:
     push bc                                       ; $72BA: $C5
     ld   c, $01                                   ; $72BB: $0E $01
     ld   a, $04                                   ; $72BD: $3E $04
-    call label_3BAA                               ; $72BF: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $72BF: $CD $AA $3B
     call func_004_6DCA                            ; $72C2: $CD $CA $6D
     ld   a, [wEntitiesPosXTable + $01]            ; $72C5: $FA $01 $C2
     ld   [$D204], a                               ; $72C8: $EA $04 $D2
@@ -7876,7 +7876,7 @@ label_004_7332:
     ld   a, $FF                                   ; $7338: $3E $FF
     call SetEntitySpriteVariant                   ; $733A: $CD $0C $3B
     ld   a, $4F                                   ; $733D: $3E $4F
-    call func_003_64CA_trampoline                               ; $733F: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $733F: $CD $86 $3B
     ld   a, [$D204]                               ; $7342: $FA $04 $D2
     ld   hl, wEntitiesPosXTable                         ; $7345: $21 $00 $C2
     add  hl, de                                   ; $7348: $19
@@ -9317,7 +9317,7 @@ jr_004_7ACA:
     jr   nz, jr_004_7B3F                          ; $7AF1: $20 $4C
 
     ld   a, $CA                                   ; $7AF3: $3E $CA
-    call func_003_64CA_trampoline                               ; $7AF5: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $7AF5: $CD $86 $3B
     ld   a, $26                                   ; $7AF8: $3E $26
     ldh  [hNoiseSfx], a                            ; $7AFA: $E0 $F4
     ldh  a, [hScratch0]                               ; $7AFC: $F0 $D7
@@ -9773,7 +9773,7 @@ jr_004_7DC3:
     jr   nz, jr_004_7DCF                          ; $7DC8: $20 $05
 
     ld   a, $0E                                   ; $7DCA: $3E $0E
-    call label_3BAA                               ; $7DCC: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $7DCC: $CD $AA $3B
 
 jr_004_7DCF:
     jr   jr_004_7DD4                              ; $7DCF: $18 $03
@@ -9943,7 +9943,7 @@ jr_004_7EBA:
 
 func_004_7EC0:
     ld   a, $02                                   ; $7EC0: $3E $02
-    call func_003_64CA_trampoline                               ; $7EC2: $CD $86 $3B
+    call CreateNewTemporaryEntity_trampoline                               ; $7EC2: $CD $86 $3B
     jr   c, jr_004_7EE4                           ; $7EC5: $38 $1D
 
     call PlayBombExplosionSfx                                ; $7EC7: $CD $4B $0C
@@ -10048,7 +10048,7 @@ jr_004_7F59:
     jr   nz, jr_004_7F66                          ; $7F5F: $20 $05
 
     ld   a, $08                                   ; $7F61: $3E $08
-    call label_3BAA                               ; $7F63: $CD $AA $3B
+    call ApplyVectorTowardsLink_trampoline        ; $7F63: $CD $AA $3B
 
 jr_004_7F66:
     pop  af                                       ; $7F66: $F1
@@ -10071,7 +10071,7 @@ jr_004_7F66:
     ld   [hl], a                                  ; $7F81: $77
     call IncrementEntityWalkingAttr               ; $7F82: $CD $12 $3B
     ld   a, $08                                   ; $7F85: $3E $08
-    jp   label_3BAA                               ; $7F87: $C3 $AA $3B
+    jp   ApplyVectorTowardsLink_trampoline                               ; $7F87: $C3 $AA $3B
 
 jr_004_7F8A:
     ld   hl, $7F73                                ; $7F8A: $21 $73 $7F

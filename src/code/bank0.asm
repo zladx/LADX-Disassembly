@@ -699,7 +699,7 @@ IsZero::
 
 label_C0C::
     ld   a, $AF
-    call func_003_64CA_trampoline
+    call CreateNewTemporaryEntity_trampoline
     ldh  a, [hLinkPositionX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -1980,7 +1980,7 @@ label_142E::
     ret
 
 label_142F::
-    call func_003_64CA_trampoline
+    call CreateNewTemporaryEntity_trampoline
     ret  c
     ld   a, $0C
     ld   [$C19B], a
@@ -2057,8 +2057,9 @@ label_14A7::
     ld   a, [wMagicPowderCount]
     and  a
     jp   z, PlayWrongAnswerJingle
-    ld   a, $08
-    call func_003_64CA_trampoline
+
+    ld   a, ENTITY_MAGIC_POWDER_SPRINKLE
+    call CreateNewTemporaryEntity_trampoline
     ret  c
     callsb Func_020_4C47
     ld   a, [wCurrentBank]
@@ -2166,7 +2167,7 @@ label_1562::
     ld   a, [$C5A9]
     and  a
     ret  z
-    ld   a, [$DB4E]
+    ld   a, [wSwordLevel]
     cp   $02
     ret  nz
     ld   a, $DF
@@ -2262,7 +2263,7 @@ CheckStaticSwordCollision::
     ret  nz
     push de
     ld   a, [hl]
-    ldh  [$FFAF], a
+    ldh  [hObjectUnderEntity], a
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
@@ -2285,7 +2286,7 @@ CheckStaticSwordCollision::
     ld   c, $00
     ld   a, [wIsIndoor]
     and  a
-    ldh  a, [$FFAF]
+    ldh  a, [hObjectUnderEntity]
     jr   z, label_1629
 
     cp   $DD
@@ -2306,7 +2307,7 @@ label_1629::
 label_1637::
     ld   a, c
     ldh  [hActiveEntitySpriteVariant], a
-    call label_2178
+    call func_014_5526_trampoline
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
     jr   nz, label_1653
@@ -2346,7 +2347,7 @@ label_167C::
     call GetRandomByte
     and  $07
     ret  nz
-    ldh  a, [$FFAF]
+    ldh  a, [hObjectUnderEntity]
     cp   $D3
     ret  z
     call GetRandomByte
@@ -2356,7 +2357,7 @@ label_167C::
     ld   a, $2D
 
 label_1691::
-    call func_003_64CA_trampoline
+    call CreateNewTemporaryEntity_trampoline
     ret  c
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -3316,14 +3317,17 @@ label_1F69::
     call ReadValueFromBaseMap_trampoline
     ldh  [hScratch5], a
 
+    ; If the object is $9A, skip this section
+
     ldh  a, [hScratch0]
     cp   $9A
-    jr   z, label_1FFE
+    jr   z, .notObject9AEnd
+
     ldh  a, [hScratch5]
     cp   $00
     jp   z, clearC15FAndReturn
     cp   $01
-    jr   z, label_1FE6
+    jr   z, .jp_1FE6
     cp   $50
     jp   z, clearC15FAndReturn
     cp   $51
@@ -3333,36 +3337,42 @@ label_1F69::
     cp   $D4
     jp   nc, clearC15FAndReturn
     cp   $D0
-    jr   nc, label_1FE6
+    jr   nc, .jp_1FE6
     cp   $7C
     jp   nc, clearC15FAndReturn
 
-label_1FE6::
+.jp_1FE6
     ldh  a, [hScratch0]
     ld   e, a
     cp   $6F
-    jr   z, label_1FF6
+    jr   z, .jp_1FF6
     cp   $5E
-    jr   z, label_1FF6
+    jr   z, .jp_1FF6
     cp   $D4
     jp   nz, label_2098
 
-label_1FF6::
+.jp_1FF6
     ld   a, [wIsIndoor]
     and  a
+
     ld   a, e
     jp   nz, label_2098
+.notObject9AEnd
 
-label_1FFE::
     ld   e, a
+
+    ; If Link is facing up, handle some special cases.
     ldh  a, [hLinkDirection]
-    cp   $02
-    jp   nz, potThrownAtChestEnd
+    cp   DIRECTION_UP
+    jp   nz, specialCasesEnd
+    ; Set [$C1AD] = 2
     ld   a, $02
     ld   [$C1AD], a
-    ldh  a, [$FFCC]
-    and  $30
-    jp   z, potThrownAtChestEnd
+
+    ; If A or B is pressed…
+    ldh  a, [hJoypadState]
+    and  J_A | J_B
+    jp   z, specialCasesEnd
     ld   a, e
     cp   $5E
     ld   a, $8E
@@ -3375,19 +3385,21 @@ label_1FFE::
     ld   a, [wIsMarinFollowingLink]
     and  a
     jr   z, label_2030
+    ; Open Marin's "Do you look in people's drawers?" dialog
     call_open_dialog $278
-    jp   potThrownAtChestEnd
+    jp   specialCasesEnd
 
 label_2030::
-    ld   a, [$DB4E]
+    ; If no sword yet…
+    ld   a, [wSwordLevel]
     and  a
     ldh  a, [hMapRoom]
-    jr   nz, label_203E
+    jr   nz, .noSwordEnd
     ld   e, $FF
     cp   $A3
     jr   z, label_2046
+.noSwordEnd
 
-label_203E::
     ld   e, $FC
     cp   $FA
     jr   z, label_2046
@@ -3427,7 +3439,7 @@ label_2066::
     and  $F0
     or   e
     ld   [$D473], a
-    jp   potThrownAtChestEnd
+    jp   specialCasesEnd
 
 label_2080::
     cp   $83
@@ -3437,43 +3449,43 @@ label_2080::
 
 label_2088::
     call OpenDialogInTable1
-    jp   potThrownAtChestEnd
+    jp   specialCasesEnd
 
 label_208E::
     call OpenDialog
-    jr   potThrownAtChestEnd
+    jr   specialCasesEnd
 
 label_2093::
     call OpenDialogInTable2
-    jr   potThrownAtChestEnd
+    jr   specialCasesEnd
 
 label_2098::
 
     ; When throwing a pot at a chest in the right room, open the chest
     cp   OBJECT_CHEST_CLOSED
-    jr   nz, potThrownAtChestEnd
+    jr   nz, specialCasesEnd
     ld   a, [wRoomEvent]
     and  EVENT_TRIGGER_MASK
     cp   TRIGGER_THROW_POT_AT_CHEST
-    jr   z, potThrownAtChestEnd
+    jr   z, specialCasesEnd
     ldh  a, [hLinkDirection]
     cp   $02
-    jr   nz, potThrownAtChestEnd
+    jr   nz, specialCasesEnd
     ld   [$C1AD], a
     ldh  a, [hJoypadState]
     and  $30
-    jr   z, potThrownAtChestEnd
+    jr   z, specialCasesEnd
     ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, .label_20BF
     ldh  a, [hLinkDirection]
     cp   $02
-    jr   nz, potThrownAtChestEnd
+    jr   nz, specialCasesEnd
 
 .label_20BF
     callsb func_014_5900
     callsb label_002_41D0
-potThrownAtChestEnd:
+specialCasesEnd:
 
     ld   a, [wAButtonSlot]
     cp   INVENTORY_POWER_BRACELET
@@ -3529,7 +3541,7 @@ label_20EC::
     inc  [hl]
     ld   a, [hl]
     cp   e
-    jr   c, label_214D
+    jr   c, .return
     xor  a
     ldh  [$FFE5], a
     ldh  a, [hScratch0]
@@ -3539,12 +3551,12 @@ label_20EC::
     jr   z, label_2153
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, label_214D
+    jr   nz, .return
     ldh  a, [hScratch0]
     cp   $5C
     jr   z, label_2161
 
-label_214D::
+.return
     ret
 
 clearC15FAndReturn::
@@ -3565,8 +3577,8 @@ label_2165::
     ldh  a, [hScratch1]
     ld   e, a
     ldh  a, [hScratch0]
-    ldh  [$FFAF], a
-    call label_2178
+    ldh  [hObjectUnderEntity], a
+    call func_014_5526_trampoline
     ldh  a, [hLinkDirection]
     ld   [$C15D], a
     jp   label_2183
@@ -3574,7 +3586,7 @@ label_2165::
 label_1F69_return::
     ret
 
-label_2178::
+func_014_5526_trampoline::
     callsb func_014_5526
     jp   ReloadSavedBank
 
@@ -3582,8 +3594,10 @@ label_2183::
     ld   a, $05
     call label_142F
     jr   c, label_21A7
-    ld   a, $02
+
+    ld   a, WAVE_SFX_ZIP
     ldh  [hWaveSfx], a
+
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   [hl], $07
@@ -6743,7 +6757,7 @@ LoadRoomEntities::
     jr   nz, .eaglesTowerEnd
     ; do some special casing for this room entities
     ld   a, $A8
-    call func_003_64CA_trampoline
+    call CreateNewTemporaryEntity_trampoline
     ld   a, [$DB70]
     ld   hl, wEntitiesPosXTable
     add  hl, de
@@ -6896,7 +6910,7 @@ LoadEntityFromDefinition::
     ld   [hl], a
 
 .didLoadEntity
-    callsb func_003_6524
+    callsb ConfigureNewEntity_helper
     callsb PrepareEntityPositionForRoomTransition
     ; Restore bank for entities placement data
     ld   a, BANK(OverworldEntitiesPointersTable)
@@ -6977,7 +6991,7 @@ label_3958::
     jp   SwitchBank
 
 label_3965::
-    callsb func_003_485B
+    callsb ConfigureNewEntity
     jp   ReloadSavedBank
 
 label_3970::
@@ -7299,29 +7313,29 @@ label_3B7B::
     callsb func_003_75A2
     jp   ReloadSavedBank
 
-func_003_64CA_trampoline::
+CreateNewTemporaryEntity_trampoline::
     push af
-    ld   a, BANK(func_003_64CA)
+    ld   a, BANK(CreateNewTemporaryEntity)
     ld   [MBC3SelectBank], a
     pop  af
-    call func_003_64CA
+    call CreateNewTemporaryEntity
     rr   l
     call ReloadSavedBank
     rl   l
     ret
 
-label_3B98::
+CreateNewTemporaryEntityInRange_trampoline::
     push af
-    ld   a, BANK(func_003_64CC)
+    ld   a, BANK(CreateNewTemporaryEntityInRange)
     ld   [MBC3SelectBank], a
     pop  af
-    call func_003_64CC
+    call CreateNewTemporaryEntityInRange
     rr   l
     call ReloadSavedBank
     rl   l
     ret
 
-label_3BAA::
+ApplyVectorTowardsLink_trampoline::
     ld   hl, MBC3SelectBank
     ld   [hl], BANK(ApplyVectorTowardsLink)
     call ApplyVectorTowardsLink

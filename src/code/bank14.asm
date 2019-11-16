@@ -631,7 +631,7 @@ jr_014_4B7D:
 
 jr_014_4B8A:
     ld   a, $02                                   ; $4B8A: $3E $02
-    ldh  [$FFA1], a                               ; $4B8C: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4B8C: $E0 $A1
 
 jr_014_4B8E:
     ret                                           ; $4B8E: $C9
@@ -2535,7 +2535,7 @@ jr_014_54D1:
 
 jr_014_54DE:
     ld   a, $01                                   ; $54DE: $3E $01
-    ldh  [$FFA1], a                               ; $54E0: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $54E0: $E0 $A1
     ld   a, $02                                   ; $54E2: $3E $02
     ld   [wC111], a                               ; $54E4: $EA $11 $C1
 

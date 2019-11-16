@@ -7,7 +7,7 @@ HookshotChainEntityHandler::
     jp   nz, label_018_7F08                       ; $7BE7: $C2 $08 $7F
 
     ld   a, $02                                   ; $7BEA: $3E $02
-    ldh  [$FFA1], a                               ; $7BEC: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $7BEC: $E0 $A1
     ld   [$C1A4], a                               ; $7BEE: $EA $A4 $C1
     ld   [$C1C6], a                               ; $7BF1: $EA $C6 $C1
     ld   a, c                                     ; $7BF4: $79

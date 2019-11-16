@@ -3202,7 +3202,7 @@ func_003_5A2E::
     add  hl, bc                                   ; $5A46: $09
     ld   [hl], a                                  ; $5A47: $77
     ld   a, $02                                   ; $5A48: $3E $02
-    ldh  [$FFA1], a                               ; $5A4A: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $5A4A: $E0 $A1
     ret                                           ; $5A4C: $C9
 
     xor  h                                        ; $5A4D: $AC

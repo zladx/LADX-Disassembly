@@ -41,7 +41,7 @@ jr_003_5276:
 
 jr_003_5282:
     ld   a, $02                                   ; $5282: $3E $02
-    ldh  [$FFA1], a                               ; $5284: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $5284: $E0 $A1
 
 jr_003_5286:
     ld   hl, wEntitiesUnknowTableY                ; $5286: $21 $D0 $C3

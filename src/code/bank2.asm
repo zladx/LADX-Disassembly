@@ -166,12 +166,12 @@ jr_002_42A5:
     ld   [wC16E], a                               ; $42AF: $EA $6E $C1
 
 jr_002_42B2:
-    ldh  a, [$FFA1]                               ; $42B2: $F0 $A1
+    ldh  a, [hLinkInteractiveMotionBlocked]       ; $42B2: $F0 $A1
     cp   $02                                      ; $42B4: $FE $02
     jr   nz, jr_002_42C7                          ; $42B6: $20 $0F
 
     xor  a                                        ; $42B8: $AF
-    ldh  [$FFA1], a                               ; $42B9: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $42B9: $E0 $A1
     ldh  [hLinkPositionXIncrement], a                               ; $42BB: $E0 $9A
     ldh  [hLinkPositionYIncrement], a                               ; $42BD: $E0 $9B
     ldh  [$FFA3], a                               ; $42BF: $E0 $A3
@@ -181,7 +181,7 @@ jr_002_42B2:
 jr_002_42C7:
     call label_1A50                               ; $42C7: $CD $50 $1A
     xor  a                                        ; $42CA: $AF
-    ldh  [$FFA1], a                               ; $42CB: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
     call $1177                                    ; $42D0: $CD $77 $11
     call $44ED                                    ; $42D3: $CD $ED $44
@@ -253,7 +253,7 @@ func_002_4338::
 
     ldh  [hLinkAnimationState], a                 ; $433F: $E0 $9D
     ld   a, $01                                   ; $4341: $3E $01
-    ldh  [$FFA1], a                               ; $4343: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4343: $E0 $A1
 
 jr_002_4345:
     ret                                           ; $4345: $C9
@@ -360,7 +360,7 @@ jr_002_43BA:
     and  a                                        ; $43C5: $A7
     jr   nz, jr_002_43CE                          ; $43C6: $20 $06
 
-    ldh  a, [$FFA1]                               ; $43C8: $F0 $A1
+    ldh  a, [hLinkInteractiveMotionBlocked]       ; $43C8: $F0 $A1
     and  a                                        ; $43CA: $A7
     jp   nz, label_002_44B5                       ; $43CB: $C2 $B5 $44
 
@@ -734,7 +734,7 @@ Data_002_45BE::
 label_002_4709::
     dec  a                                        ; $4709: $3D
     ld   [wIsUsingSpinAttack], a                  ; $470A: $EA $21 $C1
-    ld   hl, $FFA1                                ; $470D: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked                                ; $470D: $21 $A1 $FF
     ld   [hl], $01                                ; $4710: $36 $01
     srl  a                                        ; $4712: $CB $3F
     srl  a                                        ; $4714: $CB $3F
@@ -798,7 +798,7 @@ label_002_476B::
     jr   nz, jr_002_4781                          ; $477B: $20 $04
 
     ld   a, $01                                   ; $477D: $3E $01
-    ldh  [$FFA1], a                               ; $477F: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $477F: $E0 $A1
 
 jr_002_4781:
     ld   a, $03                                   ; $4781: $3E $03
@@ -886,7 +886,7 @@ jr_002_47E0:
     jr   nz, jr_002_4809                          ; $4803: $20 $04
 
     ld   a, $01                                   ; $4805: $3E $01
-    ldh  [$FFA1], a                               ; $4807: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4807: $E0 $A1
 
 jr_002_4809:
     ld   a, [$C138]                               ; $4809: $FA $38 $C1
@@ -1150,7 +1150,7 @@ func_002_4A16::
     and  a                                        ; $4A19: $A7
     ret  z                                        ; $4A1A: $C8
 
-    ld   hl, $FFA1                                ; $4A1B: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked                                ; $4A1B: $21 $A1 $FF
     ld   [hl], $02                                ; $4A1E: $36 $02
     cp   $FF                                      ; $4A20: $FE $FF
     jr   nz, jr_002_4A7C                          ; $4A22: $20 $58
@@ -1354,7 +1354,7 @@ func_002_4B49::
     ld   [$C5B0], a                               ; $4B61: $EA $B0 $C5
 
 jr_002_4B64:
-    ld   hl, $FFA1                                ; $4B64: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked                                ; $4B64: $21 $A1 $FF
     ld   [hl], $01                                ; $4B67: $36 $01
     call ClearLinkPositionIncrement               ; $4B69: $CD $8E $17
     ld   [wSwordAnimationState], a                               ; $4B6C: $EA $37 $C1
@@ -2075,17 +2075,17 @@ jr_002_4F3C:
     ld   a, [wIndoorRoom]                               ; $4F50: $FA $AE $DB
     ld   [$D46B], a                               ; $4F53: $EA $6B $D4
     ld   hl, wDialogState                         ; $4F56: $21 $9F $C1
-    ldh  a, [$FFA1]                               ; $4F59: $F0 $A1
+    ldh  a, [hLinkInteractiveMotionBlocked]       ; $4F59: $F0 $A1
     or   [hl]                                     ; $4F5B: $B6
     jp   z, label_002_4F6D                        ; $4F5C: $CA $6D $4F
 
     call ClearLinkPositionIncrement               ; $4F5F: $CD $8E $17
-    ldh  a, [$FFA1]                               ; $4F62: $F0 $A1
+    ldh  a, [hLinkInteractiveMotionBlocked]       ; $4F62: $F0 $A1
     and  a                                        ; $4F64: $A7
     jr   z, jr_002_4F6A                           ; $4F65: $28 $03
 
     xor  a                                        ; $4F67: $AF
-    ldh  [$FFA1], a                               ; $4F68: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4F68: $E0 $A1
 
 jr_002_4F6A:
     jp   label_1A50                               ; $4F6A: $C3 $50 $1A
@@ -2203,12 +2203,12 @@ jr_002_4FFA:
 
 jr_002_5005:
     call label_1A50                               ; $5005: $CD $50 $1A
-    ldh  a, [$FFA1]                               ; $5008: $F0 $A1
+    ldh  a, [hLinkInteractiveMotionBlocked]       ; $5008: $F0 $A1
     and  a                                        ; $500A: $A7
     jr   z, jr_002_5012                           ; $500B: $28 $05
 
     xor  a                                        ; $500D: $AF
-    ldh  [$FFA1], a                               ; $500E: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $500E: $E0 $A1
     jr   jr_002_5015                              ; $5010: $18 $03
 
 jr_002_5012:
@@ -2312,7 +2312,7 @@ jr_002_50A2:
     ret                                           ; $50A2: $C9
 
     ld   a, $01                                   ; $50A3: $3E $01
-    ldh  [$FFA1], a                               ; $50A5: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $50A5: $E0 $A1
     call UpdateFinalLinkPosition                  ; $50A7: $CD $A8 $21
     call func_21E1                                ; $50AA: $CD $E1 $21
     ldh  a, [hLinkPositionX]                      ; $50AD: $F0 $98
@@ -3336,7 +3336,7 @@ jr_002_561E:
     inc  c                                        ; $5644: $0C
     rra                                           ; $5645: $1F
     ld   a, $02                                   ; $5646: $3E $02
-    ldh  [$FFA1], a                               ; $5648: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $5648: $E0 $A1
     ld   [wC167], a                               ; $564A: $EA $67 $C1
     xor  a                                        ; $564D: $AF
     ld   [wScreenShakeHorizontal], a              ; $564E: $EA $55 $C1
@@ -3890,7 +3890,7 @@ label_002_593B::
 
     cp   $02                                      ; $5957: $FE $02
     ld   a, $01                                   ; $5959: $3E $01
-    ldh  [$FFA1], a                               ; $595B: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $595B: $E0 $A1
     jr   z, .jr_002_5964                          ; $595D: $28 $05
 
     call $5A7B                                    ; $595F: $CD $7B $5A
@@ -4569,7 +4569,7 @@ func_002_60E0::
     and  a                                        ; $612C: $A7
     jp   nz, label_002_61E7                       ; $612D: $C2 $E7 $61
 
-    ldh  a, [$FFA1]                               ; $6130: $F0 $A1
+    ldh  a, [hLinkInteractiveMotionBlocked]       ; $6130: $F0 $A1
     cp   $02                                      ; $6132: $FE $02
     jp   z, label_002_61E7                        ; $6134: $CA $E7 $61
 
@@ -5167,7 +5167,7 @@ Data_002_68AB::
     and  a                                        ; $68BA: $A7
     jr   nz, jr_002_68C7                          ; $68BB: $20 $0A
 
-    ldh  a, [$FFA1]                               ; $68BD: $F0 $A1
+    ldh  a, [hLinkInteractiveMotionBlocked]       ; $68BD: $F0 $A1
     cp   $01                                      ; $68BF: $FE $01
     jr   z, jr_002_68E3                           ; $68C1: $28 $20
 
@@ -5543,7 +5543,7 @@ label_002_6ADB::
     and  a                                        ; $6ADE: $A7
     jr   nz, jr_002_6AE6                          ; $6ADF: $20 $05
 
-    ldh  a, [$FFA1]                               ; $6AE1: $F0 $A1
+    ldh  a, [hLinkInteractiveMotionBlocked]       ; $6AE1: $F0 $A1
     and  a                                        ; $6AE3: $A7
     jr   nz, jr_002_6AFC                          ; $6AE4: $20 $16
 
@@ -7862,7 +7862,7 @@ jr_002_783C:
     cp   $DF                                      ; $784D: $FE $DF
     jr   nz, jr_002_786C                          ; $784F: $20 $1B
 
-    ldh  a, [$FFA1]                               ; $7851: $F0 $A1
+    ldh  a, [hLinkInteractiveMotionBlocked]       ; $7851: $F0 $A1
     ld   e, a                                     ; $7853: $5F
     ld   a, [wDialogGotItem]                               ; $7854: $FA $A9 $C1
     ld   d, a                                     ; $7857: $57

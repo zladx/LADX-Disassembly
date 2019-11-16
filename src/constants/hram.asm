@@ -66,7 +66,20 @@ hLinkFinalPositionY:: ; FFA0
   ; Final computed position of Link, once every modifiers added
   ds 1
 
-ds 3
+hLinkInteractiveMotionBlocked:: ; FFA1
+  ; Whether the interactive motion of Link (i.e. responding to directionnal pad presses)
+  ; is temporary blocked.
+  ; For instance when grabbing an object with the Power Bracelet, giving
+  ; a sword slash, or talking to some NPCs.
+  ;
+  ; Values:
+  ;   0: interactive motion autorized
+  ;   1: interactive motion locked (e.g. during grab or sword slash)
+  ;   2: interactive motion locked (e.g. talking to Trendy game owner)
+  ds 1
+
+; Unlabeled
+ds 2
 
 hAnimatedTilesGroup:: ; FFA4
   ; Animated tiles are grouped by groups of 4 tiles.

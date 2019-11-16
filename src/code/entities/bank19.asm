@@ -101,7 +101,7 @@ jr_019_40AD:
     jr   nz, jr_019_411C                          ; $40B1: $20 $69
 
     ld   a, $01                                   ; $40B3: $3E $01
-    ldh  [$FFA1], a                               ; $40B5: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $40B5: $E0 $A1
     ld   [$C3CF], a                               ; $40B7: $EA $CF $C3
     ldh  a, [hLinkDirection]                      ; $40BA: $F0 $9E
     ld   e, a                                     ; $40BC: $5F
@@ -525,7 +525,7 @@ jr_019_434A:
     jp   label_C9E                                ; $4352: $C3 $9E $0C
 
 jr_019_4355:
-    ld   hl, $FFA1                                ; $4355: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked                                ; $4355: $21 $A1 $FF
     ld   [hl], $01                                ; $4358: $36 $01
     push af                                       ; $435A: $F5
     ldh  a, [hFrameCounter]                       ; $435B: $F0 $E7
@@ -1126,7 +1126,7 @@ jr_019_476A:
     ld   a, $6C                                   ; $477B: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $477D: $E0 $9D
     ld   a, $02                                   ; $477F: $3E $02
-    ldh  [$FFA1], a                               ; $4781: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4781: $E0 $A1
     call ResetSpinAttack                                ; $4783: $CD $AF $0C
     ld   hl, wEntitiesUnknownTableB               ; $4786: $21 $B0 $C2
     add  hl, bc                                   ; $4789: $09
@@ -1279,7 +1279,7 @@ Entity97Handler::
 
 jr_019_485C:
     ld   a, $02                                   ; $485C: $3E $02
-    ldh  [$FFA1], a                               ; $485E: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $485E: $E0 $A1
     ld   [wC167], a                               ; $4860: $EA $67 $C1
     ld   a, $04                                   ; $4863: $3E $04
     ld   [$C13B], a                               ; $4865: $EA $3B $C1
@@ -1762,7 +1762,7 @@ jr_019_4AFD:
     jp   IncrementEntityWalkingAttr               ; $4B0A: $C3 $12 $3B
 
     ld   a, $02                                   ; $4B0D: $3E $02
-    ldh  [$FFA1], a                               ; $4B0F: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4B0F: $E0 $A1
     ld   [wC167], a                               ; $4B11: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $4B14: $CD $05 $0C
     ret  nz                                       ; $4B17: $C0
@@ -1770,7 +1770,7 @@ jr_019_4AFD:
     jp   IncrementEntityWalkingAttr               ; $4B18: $C3 $12 $3B
 
     ld   a, $02                                   ; $4B1B: $3E $02
-    ldh  [$FFA1], a                               ; $4B1D: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4B1D: $E0 $A1
     call GetEntityTransitionCountdown             ; $4B1F: $CD $05 $0C
     ret  nz                                       ; $4B22: $C0
 
@@ -1793,7 +1793,7 @@ jr_019_4B36:
     ret                                           ; $4B3E: $C9
 
     ld   a, $02                                   ; $4B3F: $3E $02
-    ldh  [$FFA1], a                               ; $4B41: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4B41: $E0 $A1
     call GetEntityTransitionCountdown             ; $4B43: $CD $05 $0C
     ret  nz                                       ; $4B46: $C0
 
@@ -1942,7 +1942,7 @@ jr_019_4C1A:
 
 jr_019_4C21:
     ld   a, $02                                   ; $4C21: $3E $02
-    ldh  [$FFA1], a                               ; $4C23: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4C23: $E0 $A1
     ld   [wC167], a                               ; $4C25: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $4C28: $CD $05 $0C
     jp   nz, label_019_4CEA                       ; $4C2B: $C2 $EA $4C
@@ -2084,7 +2084,7 @@ label_019_4CFF:
     jr   z, jr_019_4D1A                           ; $4D13: $28 $05
 
     ld   a, $02                                   ; $4D15: $3E $02
-    ldh  [$FFA1], a                               ; $4D17: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4D17: $E0 $A1
     ret                                           ; $4D19: $C9
 
 jr_019_4D1A:
@@ -2238,7 +2238,7 @@ func_019_4E00:
     jp   label_019_7CA2                           ; $4E06: $C3 $A2 $7C
 
     ld   a, $02                                   ; $4E09: $3E $02
-    ldh  [$FFA1], a                               ; $4E0B: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4E0B: $E0 $A1
     ld   [wC167], a                               ; $4E0D: $EA $67 $C1
     call func_019_4E00                            ; $4E10: $CD $00 $4E
     call GetEntityTransitionCountdown             ; $4E13: $CD $05 $0C
@@ -2273,7 +2273,7 @@ jr_019_4E36:
     nop                                           ; $4E3F: $00
     ld   [$0368], sp                              ; $4E40: $08 $68 $03
     ld   a, $02                                   ; $4E43: $3E $02
-    ldh  [$FFA1], a                               ; $4E45: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4E45: $E0 $A1
     ld   [wC167], a                               ; $4E47: $EA $67 $C1
     ld   hl, $4E37                                ; $4E4A: $21 $37 $4E
     ld   c, $03                                   ; $4E4D: $0E $03
@@ -2301,7 +2301,7 @@ label_019_4E62:
     jp   IncrementEntityWalkingAttr               ; $4E71: $C3 $12 $3B
 
     ld   a, $02                                   ; $4E74: $3E $02
-    ldh  [$FFA1], a                               ; $4E76: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4E76: $E0 $A1
     ld   [wC167], a                               ; $4E78: $EA $67 $C1
     ld   hl, $4E37                                ; $4E7B: $21 $37 $4E
     ld   c, $03                                   ; $4E7E: $0E $03
@@ -2460,7 +2460,7 @@ label_019_4F30:
 
 jr_019_4F5A:
     ld   a, $02                                   ; $4F5A: $3E $02
-    ldh  [$FFA1], a                               ; $4F5C: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $4F5C: $E0 $A1
     ld   [wC167], a                               ; $4F5E: $EA $67 $C1
     ld   hl, wEntitiesUnknowTableY                ; $4F61: $21 $D0 $C3
     add  hl, bc                                   ; $4F64: $09
@@ -3039,7 +3039,7 @@ label_019_52AB:
 jr_019_52B1:
     call func_019_7D3D                            ; $52B1: $CD $3D $7D
     ld   a, $02                                   ; $52B4: $3E $02
-    ldh  [$FFA1], a                               ; $52B6: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $52B6: $E0 $A1
     ld   [wC167], a                               ; $52B8: $EA $67 $C1
     ld   hl, $51AD                                ; $52BB: $21 $AD $51
     ld   c, $04                                   ; $52BE: $0E $04
@@ -5033,7 +5033,7 @@ jr_019_5C61:
 
 func_019_5D6A::
     ld   a, $01                                   ; $5D6A: $3E $01
-    ldh  [$FFA1], a                               ; $5D6C: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $5D6C: $E0 $A1
     ld   [wC167], a                               ; $5D6E: $EA $67 $C1
     call ClearLinkPositionIncrement               ; $5D71: $CD $8E $17
     ldh  a, [hFF9C]                               ; $5D74: $F0 $9C
@@ -5294,7 +5294,7 @@ jr_019_5EAF:
     jp   IncrementEntityWalkingAttr               ; $5EDD: $C3 $12 $3B
 
     ld   a, $02                                   ; $5EE0: $3E $02
-    ldh  [$FFA1], a                               ; $5EE2: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $5EE2: $E0 $A1
     ldh  a, [hLinkPositionY]                      ; $5EE4: $F0 $99
     push af                                       ; $5EE6: $F5
     ldh  a, [hLinkPositionX]                      ; $5EE7: $F0 $98
@@ -5347,7 +5347,7 @@ jr_019_5F30:
     jp   label_019_6053                           ; $5F39: $C3 $53 $60
 
     ld   a, $02                                   ; $5F3C: $3E $02
-    ldh  [$FFA1], a                               ; $5F3E: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $5F3E: $E0 $A1
     call func_019_7D3D                            ; $5F40: $CD $3D $7D
     ld   hl, wEntitiesPosZTable                   ; $5F43: $21 $10 $C3
     add  hl, bc                                   ; $5F46: $09
@@ -5447,7 +5447,7 @@ label_019_5FBF:
     ret  nz                                       ; $5FD0: $C0
 
     ld   a, $02                                   ; $5FD1: $3E $02
-    ldh  [$FFA1], a                               ; $5FD3: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $5FD3: $E0 $A1
     ld   [wC167], a                               ; $5FD5: $EA $67 $C1
     ldh  a, [hActiveEntityState]                  ; $5FD8: $F0 $F0
     rst  $00                                      ; $5FDA: $C7
@@ -5813,7 +5813,7 @@ jr_019_608D:
 
 label_019_61F8:
     ld   a, $02                                   ; $61F8: $3E $02
-    ldh  [$FFA1], a                               ; $61FA: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $61FA: $E0 $A1
     ld   [wC167], a                               ; $61FC: $EA $67 $C1
     call $650F                                    ; $61FF: $CD $0F $65
     ldh  a, [hActiveEntityState]                  ; $6202: $F0 $F0
@@ -7047,7 +7047,7 @@ label_019_6841:
     jp   z, label_019_61F8                        ; $6845: $CA $F8 $61
 
     ld   a, $02                                   ; $6848: $3E $02
-    ldh  [$FFA1], a                               ; $684A: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $684A: $E0 $A1
     ld   [wC167], a                               ; $684C: $EA $67 $C1
     ldh  a, [hActiveEntityState]                  ; $684F: $F0 $F0
     rst  $00                                      ; $6851: $C7
@@ -7992,7 +7992,7 @@ jr_019_6DD4:
     nop                                           ; $6DDC: $00
     ld   bc, $0102                                ; $6DDD: $01 $02 $01
     ld   a, $02                                   ; $6DE0: $3E $02
-    ldh  [$FFA1], a                               ; $6DE2: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $6DE2: $E0 $A1
     ld   [wC167], a                               ; $6DE4: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $6DE7: $CD $05 $0C
     jr   nz, jr_019_6E01                          ; $6DEA: $20 $15
@@ -8809,7 +8809,7 @@ jr_019_7255:
     ret                                           ; $7262: $C9
 
     ld   a, $02                                   ; $7263: $3E $02
-    ldh  [$FFA1], a                               ; $7265: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $7265: $E0 $A1
     call GetEntityTransitionCountdown             ; $7267: $CD $05 $0C
     ret  nz                                       ; $726A: $C0
 
@@ -8854,7 +8854,7 @@ jr_019_729A:
     ret                                           ; $729A: $C9
 
     ld   a, $02                                   ; $729B: $3E $02
-    ldh  [$FFA1], a                               ; $729D: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $729D: $E0 $A1
     ld   [wC167], a                               ; $729F: $EA $67 $C1
     ld   a, [wSeashellsCount]                     ; $72A2: $FA $0F $DB
     cp   $20                                      ; $72A5: $FE $20
@@ -8918,7 +8918,7 @@ jr_019_72F4:
     ret                                           ; $7306: $C9
 
     ld   a, $02                                   ; $7307: $3E $02
-    ldh  [$FFA1], a                               ; $7309: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $7309: $E0 $A1
     ld   [wC167], a                               ; $730B: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $730E: $CD $05 $0C
     cp   $3E                                      ; $7311: $FE $3E
@@ -9281,7 +9281,7 @@ jr_019_74E1:
     ld   b, h                                     ; $74E9: $44
     ld   [hl], a                                  ; $74EA: $77
     ld   a, $02                                   ; $74EB: $3E $02
-    ldh  [$FFA1], a                               ; $74ED: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $74ED: $E0 $A1
     ld   [wC167], a                               ; $74EF: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $74F2: $CD $05 $0C
     jr   z, jr_019_7509                           ; $74F5: $28 $12
@@ -9306,7 +9306,7 @@ jr_019_7509:
     jp   IncrementEntityWalkingAttr               ; $750E: $C3 $12 $3B
 
     ld   a, $02                                   ; $7511: $3E $02
-    ldh  [$FFA1], a                               ; $7513: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $7513: $E0 $A1
     ld   [wC167], a                               ; $7515: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $7518: $CD $05 $0C
     jr   nz, jr_019_7526                          ; $751B: $20 $09
@@ -9370,7 +9370,7 @@ jr_019_7547:
     jr   nz, jr_019_75AE                          ; $756E: $20 $3E
 
     ld   [bc], a                                  ; $7570: $02
-    ldh  [$FFA1], a                               ; $7571: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $7571: $E0 $A1
     ld   [wC167], a                               ; $7573: $EA $67 $C1
     call func_019_7526                            ; $7576: $CD $26 $75
     call GetEntityTransitionCountdown             ; $7579: $CD $05 $0C
@@ -9526,7 +9526,7 @@ jr_019_7601:
     ld   [$5610], sp                              ; $763C: $08 $10 $56
     ld   h, b                                     ; $763F: $60
     ld   a, $02                                   ; $7640: $3E $02
-    ldh  [$FFA1], a                               ; $7642: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $7642: $E0 $A1
     ld   [wC167], a                               ; $7644: $EA $67 $C1
     ldh  a, [hFrameCounter]                       ; $7647: $F0 $E7
     and  $0F                                      ; $7649: $E6 $0F
@@ -9565,7 +9565,7 @@ jr_019_7664:
     jp   label_3DA0                               ; $7678: $C3 $A0 $3D
 
     ld   a, $02                                   ; $767B: $3E $02
-    ldh  [$FFA1], a                               ; $767D: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $767D: $E0 $A1
     ld   [wC167], a                               ; $767F: $EA $67 $C1
     call func_019_78F1                            ; $7682: $CD $F1 $78
     call func_019_7DBB                            ; $7685: $CD $BB $7D
@@ -9663,7 +9663,7 @@ jr_019_7709:
     ld   a, $6B                                   ; $7725: $3E $6B
     ldh  [hLinkAnimationState], a                 ; $7727: $E0 $9D
     ld   a, $02                                   ; $7729: $3E $02
-    ldh  [$FFA1], a                               ; $772B: $E0 $A1
+    ldh  [hLinkInteractiveMotionBlocked], a       ; $772B: $E0 $A1
     ld   a, $03                                   ; $772D: $3E $03
     ldh  [hLinkDirection], a                      ; $772F: $E0 $9E
     xor  a                                        ; $7731: $AF

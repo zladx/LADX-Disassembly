@@ -1304,7 +1304,7 @@ WorldDefaultHandler::
     jr   z, .normalFlow
 
     ; … decrement the counter
-    ld   hl, $FFA1
+    ld   hl, hLinkInteractiveMotionBlocked
     ld   [hl], $02
     dec  a
     ld   [wLoadPreviousMapCountdown], a
@@ -1469,7 +1469,7 @@ InitGotItemSequence::
     ld   [$D45F], a
     cp   $04
     jr   c, label_10DF
-    ldh  a, [$FFA1]
+    ldh  a, [hLinkInteractiveMotionBlocked]
     cp   $02
     jr   z, label_10DB
     ldh  a, [hLinkAnimationState]
@@ -1643,7 +1643,7 @@ label_11C3::
     jr   nc, label_11E8
 
 label_11E2::
-    ldh  a, [$FFA1]
+    ldh  a, [hLinkInteractiveMotionBlocked]
     and  a
     jp   nz, label_12ED
 
@@ -2484,7 +2484,7 @@ label_1756::
     and  $07
     ld   hl, $FFA2
     or   [hl]
-    ld   hl, $FFA1
+    ld   hl, hLinkInteractiveMotionBlocked
     or   [hl]
     ld   hl, $C146
     or   [hl]
@@ -3147,7 +3147,7 @@ label_1ED7::
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     pop  af
-    ld   hl, $FFA1
+    ld   hl, hLinkInteractiveMotionBlocked
     ld   [hl], $01
     ld   hl, $D6FB
     ld   e, [hl]
@@ -3494,7 +3494,7 @@ label_20DD::
 label_20EC::
     callsb label_002_48B0
     ld   a, $01
-    ldh  [$FFA1], a
+    ldh  [hLinkInteractiveMotionBlocked], a
     ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00

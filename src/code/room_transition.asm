@@ -758,7 +758,7 @@ label_002_7C14::
     and  $03                                      ; $7C16: $E6 $03
     ld   hl, wC167                                ; $7C18: $21 $67 $C1
     or   [hl]                                     ; $7C1B: $B6
-    ld   hl, $FFA1                                ; $7C1C: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked                                ; $7C1C: $21 $A1 $FF
     or   [hl]                                     ; $7C1F: $B6
     ld   hl, wDialogGotItem                       ; $7C20: $21 $A9 $C1
     or   [hl]                                     ; $7C23: $B6
@@ -792,7 +792,7 @@ label_002_7C50::
     or   [hl]                                     ; $7C57: $B6
     ld   hl, wDialogGotItem                       ; $7C58: $21 $A9 $C1
     or   [hl]                                     ; $7C5B: $B6
-    ld   hl, $FFA1                                ; $7C5C: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked                                ; $7C5C: $21 $A1 $FF
     or   [hl]                                     ; $7C5F: $B6
     ld   hl, wDialogState                         ; $7C60: $21 $9F $C1
     or   [hl]                                     ; $7C63: $B6

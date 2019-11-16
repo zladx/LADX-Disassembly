@@ -2585,7 +2585,7 @@ label_015_4E62:
     ld   c, h                                     ; $4E81: $4C
     ld   hl, $214A                                ; $4E82: $21 $4A $21
     ld   c, [hl]                                  ; $4E85: $4E
-    ld   bc, label_214E                           ; $4E86: $01 $4E $21
+    ld   bc, clearC15FAndReturn                   ; $4E86: $01 $4E $21
     nop                                           ; $4E89: $00
     ld   b, $FA                                   ; $4E8A: $06 $FA
     ld   a, [$4806]                               ; $4E8C: $FA $06 $48
@@ -9506,7 +9506,7 @@ Entity68Handler::
 
     ld   e, a                                     ; $7457: $5F
     ld   d, $01                                   ; $7458: $16 $01
-    call label_2A26                               ; $745A: $CD $26 $2A
+    call ReadValueFromBaseMap_trampoline                               ; $745A: $CD $26 $2A
     and  a                                        ; $745D: $A7
     jr   nz, jr_015_746A                          ; $745E: $20 $0A
 

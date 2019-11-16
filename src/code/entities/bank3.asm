@@ -4,6 +4,8 @@
 
 SECTION "ROM Bank $003", ROMX[$4000], BANK[$3]
 
+; Array indexed by entity type
+; See wEntitiesUnknowTableL
 Data_003_4000::
     db   $42, $C2, $D2, $C2, $C2, $D2, $C2, $C2, $C3, $12, $42, $12, $42, $12, $12, $92
     db   $12, $18, $12, $11, $12, $02, $02, $02, $12, $02, $12, $12, $11, $02, $12, $12
@@ -189,29 +191,38 @@ Data_003_4826::
     db   $03, $02, $00, $00, $02, $00, $00, $00, $00, $06, $06, $0D, $0E, $00, $09, $03
     db   $06, $00, $02, $0E, $0E
 
+; Prepare entity newly loaded from definition?
 ; Inputs:
 ;   bc   entity slot index
 func_003_485B::
     call ResetEntity_trampoline                 ; $485B: $CD $0A $3A
+
+    ; Store the entity room id
     ldh  a, [hMapRoom]                            ; $485E: $F0 $F6
-    ld   hl, $C3E0                                ; $4860: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $4860: $21 $E0 $C3
     add  hl, bc                                   ; $4863: $09
     ld   [hl], a                                  ; $4864: $77
+
+    ; Set the entity load order to a default value
     ld   hl, wEntitiesLoadOrderTable              ; $4865: $21 $60 $C4
     add  hl, bc                                   ; $4868: $09
     ld   [hl], $FF                                ; $4869: $36 $FF
 
 label_003_486B:
+    ; de = entity type
     ld   hl, wEntitiesTypeTable                   ; $486B: $21 $A0 $C3
     add  hl, bc                                   ; $486E: $09
     ld   e, [hl]                                  ; $486F: $5E
     ld   d, b                                     ; $4870: $50
+
+    ; wEntitiesUnknowTableL = Data_003_4000[EntityType]
     ld   hl, Data_003_4000                        ; $4871: $21 $00 $40
     add  hl, de                                   ; $4874: $19
     ld   a, [hl]                                  ; $4875: $7E
     ld   hl, wEntitiesUnknowTableL                ; $4876: $21 $40 $C3
     add  hl, bc                                   ; $4879: $09
     ld   [hl], a                                  ; $487A: $77
+
     ld   hl, Data_003_40FB                        ; $487B: $21 $FB $40
     add  hl, de                                   ; $487E: $19
     ld   a, [hl]                                  ; $487F: $7E
@@ -921,9 +932,9 @@ jr_003_4C8C:
     ld   [hl], $01                                ; $4C96: $36 $01
     ld   hl, wEntitiesUnknowTableL                ; $4C98: $21 $40 $C3
     add  hl, bc                                   ; $4C9B: $09
-    ld   [hl], NOISE_SFX_DOOR_UNLOCKED            ; $4C9C: $36 $04
+    ld   [hl], $04                                ; $4C9C: $36 $04
     ld   hl, hNoiseSfx                            ; $4C9E: $21 $F4 $FF
-    ld   [hl], $13                                ; $4CA1: $36 $13
+    ld   [hl], NOISE_SFX_ENEMY_DESTROYED          ; $4CA1: $36 $13
     ret                                           ; $4CA3: $C9
 
 Data_003_4CA4::
@@ -5538,7 +5549,7 @@ func_003_6822::
 jr_003_6828:
     ld   a, [wIsIndoor]                           ; $6828: $FA $A5 $DB
     ld   d, a                                     ; $682B: $57
-    call label_2A26                               ; $682C: $CD $26 $2A
+    call ReadValueFromBaseMap_trampoline                               ; $682C: $CD $26 $2A
     sub  $99                                      ; $682F: $D6 $99
     jp   c, label_003_68E4                        ; $6831: $DA $E4 $68
 

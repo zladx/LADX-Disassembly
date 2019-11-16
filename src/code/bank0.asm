@@ -2266,7 +2266,7 @@ CheckStaticSwordCollision::
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
-    call label_2A26
+    call ReadValueFromBaseMap_trampoline
     pop  de
 
     cp   $D0
@@ -3220,12 +3220,21 @@ label_1F3E::
     ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
-data_1F49::
-    db   $C, 3, 8, 8
+; Number of horizontal pixels the sword reaches in Link's direction when drawing the sword
+SwordAreaXForDirection::
+.right db $0C
+.left  db $03
+.up    db $08
+.down  db $08
 
-data_1F4D::
-    db   $A, $A, 5, $10
+; Number of vertical pixels the sword reaches in Link's direction when drawing the sword
+SwordAreaYForDirection::
+.right db $0A
+.left  db $0A
+.up    db $05
+.down  db $10
 
+; Array of constants for Link animation state
 data_1F51::
     db   $36, $38, $3A, $3C
 
@@ -3238,12 +3247,17 @@ data_1F59::
 data_1F5D::
     db   0, 0, 4, 0
 
-label_1F61::
+; Call label_1F69, then restore bank 2
+; (Only ever called from label_002_4287)
+label_1F69_trampoline::
     call label_1F69
-    ld   a, 2
+    ld   a, $02
     jp   SwitchBank
 
+; Physics for Link interactive motion?
+; (Only ever called from label_002_4287)
 label_1F69::
+    ; If running with pegagus boots, or $FFA2 != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
     ld   hl, wIsRunningWithPegasusBoots
     ld   a, [$C15C]
     or   [hl]
@@ -3251,61 +3265,77 @@ label_1F69::
     or   [hl]
     ld   hl, wLinkMotionState
     or   [hl]
-    jp   nz, label_2177
+    jp   nz, label_1F69_return
+
+    ; Update hSwordIntersectedAreaX according to Link's position and direction
     ldh  a, [hLinkDirection]
     ld   e, a
     ld   d, $00
-    ld   hl, data_1F49
+    ld   hl, SwordAreaXForDirection
     add  hl, de
+
     ldh  a, [hLinkPositionX]
     add  a, [hl]
     sub  a, $08
     and  $F0
     ldh  [hSwordIntersectedAreaX], a
+
+    ; Update hSwordIntersectedAreaY according to Link's position and direction
     swap a
     ld   c, a
-    ld   hl, data_1F4D
+    ld   hl, SwordAreaYForDirection
     add  hl, de
     ldh  a, [hLinkPositionY]
     add  a, [hl]
     sub  a, $10
     and  $F0
     ldh  [hSwordIntersectedAreaY], a
+
+    ; hl = address of the room object that would intersect with the sword
     or   c
     ld   e, a
     ldh  [hScratch1], a
     ld   hl, wRoomObjects
     add  hl, de
+
+    ; (Sanity check: if HIGH(hl) != $D7, then we're far out of bounds: return)
     ld   a, h
     cp   $D7
-    jp   nz, label_214E
+    jp   nz, clearC15FAndReturn
+
+    ; hScratch0 = id of room object under the sword
     ld   a, [hl]
     ldh  [hScratch0], a
+
+    ; hScratch5 = unknown value read from the base map
+    ; d = map group id
+    ; e = room object
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
-    call label_2A26
+    call ReadValueFromBaseMap_trampoline
     ldh  [hScratch5], a
+
     ldh  a, [hScratch0]
     cp   $9A
     jr   z, label_1FFE
     ldh  a, [hScratch5]
     cp   $00
-    jp   z, label_214E
+    jp   z, clearC15FAndReturn
     cp   $01
     jr   z, label_1FE6
     cp   $50
-    jp   z, label_214E
+    jp   z, clearC15FAndReturn
     cp   $51
-    jp   z, label_214E
+    jp   z, clearC15FAndReturn
     cp   $11
-    jp  c, label_214E
+    jp  c, clearC15FAndReturn
     cp   $D4
-    jp   nc, label_214E
+    jp   nc, clearC15FAndReturn
     cp   $D0
     jr   nc, label_1FE6
     cp   $7C
-    jp   nc, label_214E
+    jp   nc, clearC15FAndReturn
 
 label_1FE6::
     ldh  a, [hScratch0]
@@ -3327,12 +3357,12 @@ label_1FFE::
     ld   e, a
     ldh  a, [hLinkDirection]
     cp   $02
-    jp   nz, label_20CF
+    jp   nz, potThrownAtChestEnd
     ld   a, $02
     ld   [$C1AD], a
     ldh  a, [$FFCC]
     and  $30
-    jp   z, label_20CF
+    jp   z, potThrownAtChestEnd
     ld   a, e
     cp   $5E
     ld   a, $8E
@@ -3347,7 +3377,7 @@ label_1FFE::
     jr   z, label_2030
     ld   a, $78
     call OpenDialogInTable2
-    jp   label_20CF
+    jp   potThrownAtChestEnd
 
 label_2030::
     ld   a, [$DB4E]
@@ -3398,7 +3428,7 @@ label_2066::
     and  $F0
     or   e
     ld   [$D473], a
-    jp   label_20CF
+    jp   potThrownAtChestEnd
 
 label_2080::
     cp   $83
@@ -3408,44 +3438,46 @@ label_2080::
 
 label_2088::
     call OpenDialogInTable1
-    jp   label_20CF
+    jp   potThrownAtChestEnd
 
 label_208E::
     call OpenDialog
-    jr   label_20CF
+    jr   potThrownAtChestEnd
 
 label_2093::
     call OpenDialogInTable2
-    jr   label_20CF
+    jr   potThrownAtChestEnd
 
 label_2098::
-    cp   $A0
-    jr   nz, label_20CF
+
+    ; When throwing a pot at a chest in the right room, open the chest
+    cp   OBJECT_CHEST_CLOSED
+    jr   nz, potThrownAtChestEnd
     ld   a, [wRoomEvent]
-    and  $1F
-    cp   $0D
-    jr   z, label_20CF
+    and  EVENT_TRIGGER_MASK
+    cp   TRIGGER_THROW_POT_AT_CHEST
+    jr   z, potThrownAtChestEnd
     ldh  a, [hLinkDirection]
     cp   $02
-    jr   nz, label_20CF
+    jr   nz, potThrownAtChestEnd
     ld   [$C1AD], a
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $30
-    jr   z, label_20CF
+    jr   z, potThrownAtChestEnd
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   nz, label_20BF
+    jr   nz, .label_20BF
     ldh  a, [hLinkDirection]
     cp   $02
-    jr   nz, label_20CF
+    jr   nz, potThrownAtChestEnd
 
-label_20BF::
+.label_20BF
     callsb func_014_5900
     callsb label_002_41D0
+potThrownAtChestEnd:
 
-label_20CF::
     ld   a, [wAButtonSlot]
-    cp   $03
+    cp   INVENTORY_POWER_BRACELET
     jr   nz, label_20DD
     ldh  a, [hPressedButtonsMask]
     and  $20
@@ -3454,11 +3486,11 @@ label_20CF::
 
 label_20DD::
     ld   a, [wBButtonSlot]
-    cp   $03
-    jp   nz, label_2177
+    cp   INVENTORY_POWER_BRACELET
+    jp   nz, label_1F69_return
     ldh  a, [hPressedButtonsMask]
     and  $10
-    jp   z, label_2177
+    jp   z, label_1F69_return
 
 label_20EC::
     callsb label_002_48B0
@@ -3476,7 +3508,7 @@ label_20EC::
     add  hl, de
     ldh  a, [hPressedButtonsMask]
     and  [hl]
-    jr   z, label_214E
+    jr   z, clearC15FAndReturn
     ld   hl, data_1F59
     add  hl, de
     ld   a, [hl]
@@ -3490,10 +3522,10 @@ label_20EC::
     ld   e, $08
     ld   a, [wActivePowerUp]
     cp   $01
-    jr   nz, label_212C
+    jr   nz, .jp_212C
     ld   e, $03
 
-label_212C::
+.jp_212C
     ld   hl, $C15F
     inc  [hl]
     ld   a, [hl]
@@ -3516,7 +3548,7 @@ label_212C::
 label_214D::
     ret
 
-label_214E::
+clearC15FAndReturn::
     xor  a
     ld   [$C15F], a
     ret
@@ -3540,7 +3572,7 @@ label_2165::
     ld   [$C15D], a
     jp   label_2183
 
-label_2177::
+label_1F69_return::
     ret
 
 label_2178::
@@ -4143,26 +4175,26 @@ label_2A07::
     call label_5A59
     jp   ReloadSavedBank
 
-label_2A12::
+; Read an unknown value from the base map bank
+ReadValueFromBaseMap::
     ld   a, $08
     ld   [MBC3SelectBank], a
     ld   hl, $4AD4
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2A23
+    jr   nz, .colorDungeonEnd
     ld   hl, $4BD4
-
-label_2A23::
+.colorDungeonEnd
     add  hl, de
     ld   a, [hl]
     ret
 
-label_2A26::
-    call label_2A12
+ReadValueFromBaseMap_trampoline::
+    call ReadValueFromBaseMap
     jp   ReloadSavedBank
 
 label_2A2C::
-    call label_2A12
+    call ReadValueFromBaseMap
     push af
     ld   a, $03
     ld   [MBC3SelectBank], a

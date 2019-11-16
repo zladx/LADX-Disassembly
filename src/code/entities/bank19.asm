@@ -4317,7 +4317,7 @@ EntityD5Handler::
     jp   z, label_019_7E61                        ; $59E0: $CA $61 $7E
 
     ldh  a, [hMapRoom]                            ; $59E3: $F0 $F6
-    ld   hl, $C3E0                                ; $59E5: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $59E5: $21 $E0 $C3
     add  hl, bc                                   ; $59E8: $09
     ld   [hl], a                                  ; $59E9: $77
     ld   hl, wEntitiesPosXSignTable                                ; $59EA: $21 $20 $C2
@@ -5171,7 +5171,7 @@ EntityD4Handler::
     jp   nz, label_019_7E61                       ; $5E1D: $C2 $61 $7E
 
     ldh  a, [hMapRoom]                            ; $5E20: $F0 $F6
-    ld   hl, $C3E0                                ; $5E22: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $5E22: $21 $E0 $C3
     add  hl, bc                                   ; $5E25: $09
     ld   [hl], a                                  ; $5E26: $77
     ld   hl, wEntitiesPosXSignTable                                ; $5E27: $21 $20 $C2
@@ -10346,7 +10346,7 @@ jr_019_7A64:
 label_019_7A74:
 jr_019_7A74:
     ldh  a, [hMapRoom]                            ; $7A74: $F0 $F6
-    ld   hl, $C3E0                                ; $7A76: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $7A76: $21 $E0 $C3
     add  hl, bc                                   ; $7A79: $09
     cp   [hl]                                     ; $7A7A: $BE
     ret  z                                        ; $7A7B: $C8

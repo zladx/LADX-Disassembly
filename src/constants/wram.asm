@@ -474,6 +474,19 @@ wEntitiesUnknowTableK:: ; C330
   ds $10
 
 wEntitiesUnknowTableL:: ; C340
+  ; Physics attribute flags?
+  ;
+  ; 0000 0000: hurts links; flickers
+  ; 0000 0010: left half semi-transparent?
+  ;
+  ;
+  ;
+  ;
+  ;
+  ; 1000 0000: doesn't hurt Link if set (Link's go through)
+
+  ; Hen, Dog: $92
+  ;
   ds $10
 
 wEntitiesUnknowTableM:: ; C350
@@ -523,8 +536,12 @@ ds $C3D0 - $C3CE
 wEntitiesUnknowTableY:: ; C3D0
   ds $10
 
+wEntitiesRoomTable:: ; C3E0
+  ; Room id of the entity
+  ds $10
+
 ; Unlabeled
-ds $20
+ds $10
 
 wEntitiesUnknowTableS:: ; C400
   ds $10

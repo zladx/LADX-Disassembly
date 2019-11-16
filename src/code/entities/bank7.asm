@@ -3069,7 +3069,7 @@ jr_007_51F2:
     add  hl, de                                   ; $524C: $19
     ld   e, [hl]                                  ; $524D: $5E
     ld   d, $01                                   ; $524E: $16 $01
-    call label_2A26                               ; $5250: $CD $26 $2A
+    call ReadValueFromBaseMap_trampoline                               ; $5250: $CD $26 $2A
     cp   $0B                                      ; $5253: $FE $0B
     jr   z, jr_007_529F                           ; $5255: $28 $48
 
@@ -3105,7 +3105,7 @@ jr_007_5287:
     push hl                                       ; $5288: $E5
     ld   e, a                                     ; $5289: $5F
     ld   d, $01                                   ; $528A: $16 $01
-    call label_2A26                               ; $528C: $CD $26 $2A
+    call ReadValueFromBaseMap_trampoline                               ; $528C: $CD $26 $2A
     pop  hl                                       ; $528F: $E1
     cp   $50                                      ; $5290: $FE $50
     jr   z, jr_007_529E                           ; $5292: $28 $0A
@@ -5188,7 +5188,7 @@ jr_007_5DD0:
     and  a                                        ; $5DE8: $A7
     jr   nz, jr_007_5DF5                          ; $5DE9: $20 $0A
 
-    ld   hl, $C3E0                                ; $5DEB: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $5DEB: $21 $E0 $C3
     add  hl, bc                                   ; $5DEE: $09
     ldh  a, [hMapRoom]                            ; $5DEF: $F0 $F6
     cp   [hl]                                     ; $5DF1: $BE
@@ -5559,7 +5559,7 @@ EntityA8Handler::
 
 jr_007_6019:
     ldh  a, [hMapRoom]                            ; $6019: $F0 $F6
-    ld   hl, $C3E0                                ; $601B: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $601B: $21 $E0 $C3
     add  hl, bc                                   ; $601E: $09
     ld   [hl], a                                  ; $601F: $77
     ld   hl, wEntitiesPosXSignTable                                ; $6020: $21 $20 $C2

@@ -68,7 +68,7 @@ BowWowEntityHandler::
     jr   nz, jr_005_4054                          ; $4041: $20 $11
 
     ldh  a, [hMapRoom]                            ; $4043: $F0 $F6
-    ld   hl, $C3E0                                ; $4045: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $4045: $21 $E0 $C3
     add  hl, bc                                   ; $4048: $09
     ld   [hl], a                                  ; $4049: $77
     ld   hl, wEntitiesPosXSignTable                                ; $404A: $21 $20 $C2
@@ -96,7 +96,7 @@ jr_005_4060:
     cp   $01                                      ; $406C: $FE $01
     jp   z, label_005_40A2                        ; $406E: $CA $A2 $40
 
-    ld   hl, $C3E0                                ; $4071: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $4071: $21 $E0 $C3
     add  hl, bc                                   ; $4074: $09
     ldh  a, [hMapRoom]                            ; $4075: $F0 $F6
     cp   [hl]                                     ; $4077: $BE
@@ -3694,7 +3694,7 @@ jr_005_5487:
     and  $01                                      ; $5496: $E6 $01
     ld   [$C13B], a                               ; $5498: $EA $3B $C1
     ldh  a, [hMapRoom]                            ; $549B: $F0 $F6
-    ld   hl, $C3E0                                ; $549D: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $549D: $21 $E0 $C3
     add  hl, bc                                   ; $54A0: $09
     ld   [hl], a                                  ; $54A1: $77
     ldh  a, [hLinkPositionX]                      ; $54A2: $F0 $98

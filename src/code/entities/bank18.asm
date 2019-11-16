@@ -4734,7 +4734,7 @@ label_018_5C6A:
     ret  nz                                       ; $5C6F: $C0
 
     ldh  a, [hMapRoom]                            ; $5C70: $F0 $F6
-    ld   hl, $C3E0                                ; $5C72: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $5C72: $21 $E0 $C3
     add  hl, bc                                   ; $5C75: $09
     ld   [hl], a                                  ; $5C76: $77
     ld   hl, wEntitiesPosXSignTable                                ; $5C77: $21 $20 $C2
@@ -6106,7 +6106,7 @@ func_018_6493:
     ld   e, a                                     ; $64BF: $5F
     ld   a, [wIsIndoor]                           ; $64C0: $FA $A5 $DB
     ld   d, a                                     ; $64C3: $57
-    call label_2A26                               ; $64C4: $CD $26 $2A
+    call ReadValueFromBaseMap_trampoline                               ; $64C4: $CD $26 $2A
     ldh  [hScratch3], a                           ; $64C7: $E0 $DA
     ret                                           ; $64C9: $C9
 
@@ -7162,7 +7162,7 @@ jr_018_6A70:
 jr_018_6A71:
     call func_018_6EFB                            ; $6A71: $CD $FB $6E
     ldh  a, [hMapRoom]                            ; $6A74: $F0 $F6
-    ld   hl, $C3E0                                ; $6A76: $21 $E0 $C3
+    ld   hl, wEntitiesRoomTable                   ; $6A76: $21 $E0 $C3
     add  hl, bc                                   ; $6A79: $09
     cp   [hl]                                     ; $6A7A: $BE
     jr   z, jr_018_6A8B                           ; $6A7B: $28 $0E

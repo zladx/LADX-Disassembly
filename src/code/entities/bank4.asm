@@ -6611,7 +6611,7 @@ func_004_6BE1:
     ld   e, a                                     ; $6C01: $5F
     ld   a, [wIsIndoor]                         ; $6C02: $FA $A5 $DB
     ld   d, a                                     ; $6C05: $57
-    call label_2A26                               ; $6C06: $CD $26 $2A
+    call ReadValueFromBaseMap_trampoline                               ; $6C06: $CD $26 $2A
     cp   $00                                      ; $6C09: $FE $00
     ret  z                                        ; $6C0B: $C8
 

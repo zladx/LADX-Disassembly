@@ -1331,7 +1331,7 @@ WorldDefaultHandler::
     ldh  a, [hLinkPositionY]
     ldh  [hLinkFinalPositionY], a
 
-    ld   hl, $FFA2
+    ld   hl, hLinkPositionZ
     sub  a, [hl]
     ldh  [$FFB3], a
     call func_002_60E0
@@ -1413,7 +1413,7 @@ label_102E::
 
 ApplyGotItem::
     ldh  a, [hLinkPositionY]
-    ld   hl, $FFA2
+    ld   hl, hLinkPositionZ
     sub  a, [hl]
     ld   [$C145], a
     ld   a, [wDialogGotItem]
@@ -2007,7 +2007,7 @@ SpawnPlayerProjectile::
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFA2]
+    ldh  a, [hLinkPositionZ]
     inc  a
     ld   hl, wEntitiesPosZTable
     add  hl, de
@@ -2049,7 +2049,7 @@ UseMagicPowder::
     ld   a, [wHasToadstool]
     and  a
     jr   z, label_14A7
-    ldh  a, [$FFA2]
+    ldh  a, [hLinkPositionZ]
     and  a
     ret  nz
     ld   a, $02
@@ -2459,7 +2459,7 @@ label_1713::
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
     ret  nz
-    ldh  a, [$FFA2]
+    ldh  a, [hLinkPositionZ]
     ld   hl, $C146
     or   [hl]
     ret  nz
@@ -2494,7 +2494,7 @@ label_1713::
 label_1756::
     ldh  a, [hFrameCounter]
     and  $07
-    ld   hl, $FFA2
+    ld   hl, hLinkPositionZ
     or   [hl]
     ld   hl, hLinkInteractiveMotionBlocked
     or   [hl]
@@ -3269,11 +3269,11 @@ label_1F69_trampoline::
 ; Physics for Link interactive motion?
 ; (Only ever called from label_002_4287)
 label_1F69::
-    ; If running with pegagus boots, or $FFA2 != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
+    ; If running with pegagus boots, or hLinkPositionZ != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
     ld   hl, wIsRunningWithPegasusBoots
     ld   a, [$C15C]
     or   [hl]
-    ld   hl, $FFA2
+    ld   hl, hLinkPositionZ
     or   [hl]
     ld   hl, wLinkMotionState
     or   [hl]
@@ -3684,7 +3684,7 @@ func_21E1::
     add  a, [hl]
     ld   [hl], a
     rl   d
-    ld   hl, $FFA2
+    ld   hl, hLinkPositionZ
     pop  af
     ld   e, $00
     bit  7, a

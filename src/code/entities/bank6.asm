@@ -2861,7 +2861,7 @@ jr_006_5179:
     ld   hl, $512F                                ; $51A0: $21 $2F $51
     add  hl, de                                   ; $51A3: $19
     ld   a, [hl]                                  ; $51A4: $7E
-    ldh  [$FFA2], a                               ; $51A5: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $51A5: $E0 $A2
     ld   a, $02                                   ; $51A7: $3E $02
     ld   [$C146], a                               ; $51A9: $EA $46 $C1
     ldh  a, [$FFEF]                               ; $51AC: $F0 $EF
@@ -8123,7 +8123,7 @@ jr_006_6F47:
 
 jr_006_6F48:
     call label_C56                                ; $6F48: $CD $56 $0C
-    ldh  a, [$FFA2]                               ; $6F4B: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $6F4B: $F0 $A2
     and  a                                        ; $6F4D: $A7
     jr   nz, jr_006_6F53                          ; $6F4E: $20 $03
 
@@ -10345,7 +10345,7 @@ jr_006_7B61:
     and  a                                        ; $7B7D: $A7
     jr   nz, jr_006_7B85                          ; $7B7E: $20 $05
 
-    ldh  a, [$FFA2]                               ; $7B80: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $7B80: $F0 $A2
     cp   $0C                                      ; $7B82: $FE $0C
     ret  c                                        ; $7B84: $D8
 
@@ -10740,7 +10740,7 @@ jr_006_7D91:
     ld   hl, wEntitiesPosYTable                         ; $7DAB: $21 $10 $C2
     add  hl, bc                                   ; $7DAE: $09
     ld   [hl], a                                  ; $7DAF: $77
-    ldh  a, [$FFA2]                               ; $7DB0: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $7DB0: $F0 $A2
     ld   hl, wEntitiesPosZTable                   ; $7DB2: $21 $10 $C3
     add  hl, bc                                   ; $7DB5: $09
     ld   [hl], a                                  ; $7DB6: $77
@@ -10863,7 +10863,7 @@ jr_006_7E55:
     ldh  [hLinkPositionY], a                      ; $7E61: $E0 $99
     xor  a                                        ; $7E63: $AF
     ld   [$C146], a                               ; $7E64: $EA $46 $C1
-    ldh  [$FFA2], a                               ; $7E67: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $7E67: $E0 $A2
     call func_006_7F05                            ; $7E69: $CD $05 $7F
     jp   label_006_7F05                           ; $7E6C: $C3 $05 $7F
 

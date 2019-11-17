@@ -3704,7 +3704,7 @@ jr_007_55DF:
     add  hl, bc                                   ; $55E8: $09
     sub  $10                                      ; $55E9: $D6 $10
     ld   [hl], a                                  ; $55EB: $77
-    ldh  a, [$FFA2]                               ; $55EC: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $55EC: $F0 $A2
     ld   hl, wEntitiesPosZTable                                ; $55EE: $21 $10 $C3
     add  hl, bc                                   ; $55F1: $09
     ld   [hl], a                                  ; $55F2: $77
@@ -6761,7 +6761,7 @@ jr_007_66EE:
     jp   SetEntitySpriteVariant                   ; $66EF: $C3 $0C $3B
 
 func_007_66F2:
-    ldh  a, [$FFA2]                               ; $66F2: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $66F2: $F0 $A2
     and  a                                        ; $66F4: $A7
     jp   z, label_3B5A                            ; $66F5: $CA $5A $3B
 
@@ -8471,7 +8471,7 @@ func_007_70B7:
     add  $18                                      ; $70C2: $C6 $18
     ld   e, a                                     ; $70C4: $5F
     ldh  a, [hLinkPositionY]                      ; $70C5: $F0 $99
-    ld   hl, $FFA2                                ; $70C7: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                                ; $70C7: $21 $A2 $FF
     sub  [hl]                                     ; $70CA: $96
     add  $08                                      ; $70CB: $C6 $08
     sub  e                                        ; $70CD: $93

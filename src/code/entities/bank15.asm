@@ -11072,7 +11072,7 @@ DreamShrineBedEntityHandler::
     call GetEntityTransitionCountdown             ; $7D21: $CD $05 $0C
     ld   [hl], $A0                                ; $7D24: $36 $A0
     ld   a, $01                                   ; $7D26: $3E $01
-    ldh  [$FFA2], a                               ; $7D28: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $7D28: $E0 $A2
     ld   a, $02                                   ; $7D2A: $3E $02
     ld   [$C146], a                               ; $7D2C: $EA $46 $C1
     ld   a, $12                                   ; $7D2F: $3E $12

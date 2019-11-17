@@ -78,8 +78,11 @@ hLinkInteractiveMotionBlocked:: ; FFA1
   ;   2: interactive motion locked (e.g. talking to Trendy game owner)
   ds 1
 
+hLinkPositionZ:: ; FFA2
+  ds 1
+
 ; Unlabeled
-ds 2
+ds 1
 
 hAnimatedTilesGroup:: ; FFA4
   ; Animated tiles are grouped by groups of 4 tiles.

@@ -334,7 +334,7 @@ jr_036_41D2:
     ret                                           ; $41DE: $C9
 
     ld   a, $70                                   ; $41DF: $3E $70
-    ldh  [$FFA2], a                               ; $41E1: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $41E1: $E0 $A2
     ld   a, $02                                   ; $41E3: $3E $02
     ld   [$C146], a                               ; $41E5: $EA $46 $C1
     ld   a, $E0                                   ; $41E8: $3E $E0

@@ -150,7 +150,7 @@ GameplayWorldSubtype1Handler::
     ldh  [hLinkPositionY], a
     ld   [wLinkMapEntryPositionY], a
     ld   a, [$DBC8]
-    ldh  [$FFA2], a
+    ldh  [hLinkPositionZ], a
     and  a
     jr   z, label_4452
     ld   a, $02

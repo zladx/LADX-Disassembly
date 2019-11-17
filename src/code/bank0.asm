@@ -1864,8 +1864,8 @@ PlaceBomb::
     sub  a, $01
     daa
     ld   [wBombCount], a
-    ld   a, $02
-    call label_142F
+    ld   a, ENTITY_BOMB
+    call SpawnPlayerProjectile
     ret  c
 
 func_1373::
@@ -1883,8 +1883,8 @@ UseBoomerang::
 
 label_1387::
     ret  nz
-    ld   a, $01
-    call label_142F
+    ld   a, ENTITY_BOOMERANG
+    call SpawnPlayerProjectile
     ret  c
     callsb Func_020_4BFF
     ld   a, [wCurrentBank]
@@ -1925,8 +1925,8 @@ ShootArrow::
     daa
     ld   [wArrowCount], a
     call label_157C
-    ld   a, $00
-    call label_142F
+    ld   a, ENTITY_ARROW
+    call SpawnPlayerProjectile
     ret  c
     ld   a, e
     ld   [$C1C2], a
@@ -1981,9 +1981,12 @@ label_141A::
 label_142E::
     ret
 
-label_142F::
+; Spawn a arrow, liftable rock, hookshot element…
+; with the same X, Y, Z and speed than the player.
+SpawnPlayerProjectile::
     call SpawnNewEntity_trampoline
     ret  c
+
     ld   a, $0C
     ld   [$C19B], a
     push bc
@@ -2172,8 +2175,8 @@ label_1562::
     ld   a, [wSwordLevel]
     cp   $02
     ret  nz
-    ld   a, $DF
-    call label_142F
+    ld   a, ENTITY_SWORD_BEAM
+    call SpawnPlayerProjectile
     xor  a
     ld   [$C19B], a
     ret
@@ -2322,8 +2325,8 @@ label_1637::
     ld   [$C16D], a
 
 label_1653::
-    ld   a, $05
-    call label_142F
+    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK
+    call SpawnPlayerProjectile
     jr   c, .dropRandomItem
     xor  a
     ld   [$C19B], a
@@ -2579,8 +2582,8 @@ label_17DB::
     or   [hl]
     jr   nz, label_1814
     call label_157C
-    ld   a, $04
-    call label_142F
+    ld   a, ENTITY_HOOKSHOT_HIT
+    call SpawnPlayerProjectile
     jr   c, label_1814
     ld   a, NOISE_SFX_MAGIC_ROD
     ldh  [hNoiseSfx], a
@@ -3599,8 +3602,8 @@ func_014_5526_trampoline::
     jp   ReloadSavedBank
 
 label_2183::
-    ld   a, $05
-    call label_142F
+    ld   a, ENTITY_ENTITY_LIFTABLE_ROCK
+    call SpawnPlayerProjectile
     jr   c, label_21A7
 
     ld   a, WAVE_SFX_ZIP

@@ -103,8 +103,8 @@ func_002_4254::
     and  a                                        ; $4257: $A7
     jr   nz, jr_002_4286                          ; $4258: $20 $2C
 
-    ld   a, $03                                   ; $425A: $3E $03
-    call label_142F                               ; $425C: $CD $2F $14
+    ld   a, ENTITY_HOOKSHOT_CHAIN                 ; $425A: $3E $03
+    call SpawnPlayerProjectile                    ; $425C: $CD $2F $14
     jr   c, jr_002_4286                           ; $425F: $38 $25
 
     ld   hl, wEntitiesTransitionCountdownTable           ; $4261: $21 $E0 $C2

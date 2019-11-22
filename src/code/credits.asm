@@ -2281,7 +2281,7 @@ jr_017_575A:
     ld   hl, $C2E0                                ; $5773: $21 $E0 $C2
     add  hl, de                                   ; $5776: $19
     ld   [hl], $20                                ; $5777: $36 $20
-    ld   hl, wEntitiesUnknowTableQ                ; $5779: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $5779: $21 $80 $C3
     add  hl, de                                   ; $577C: $19
     ld   [hl], $02                                ; $577D: $36 $02
 

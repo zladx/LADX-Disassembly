@@ -2353,7 +2353,7 @@ jr_014_53B6:
     ld   hl, $5343                                ; $53D7: $21 $43 $53
     add  hl, de                                   ; $53DA: $19
     ld   a, [hl]                                  ; $53DB: $7E
-    ld   hl, wEntitiesUnknowTableQ                ; $53DC: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $53DC: $21 $80 $C3
     add  hl, bc                                   ; $53DF: $09
     ld   [hl], a                                  ; $53E0: $77
     call GetEntityTransitionCountdown                 ; $53E1: $CD $05 $0C

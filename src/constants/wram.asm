@@ -492,7 +492,12 @@ wEntitiesUnknowTableL:: ; C340
   ;
   ds $10
 
-wEntitiesUnknowTableM:: ; C350
+wEntitiesHitboxFlagsTable:: ; C350
+  ; Type of hitbox (plus maybe other flags)
+  ; - bit 0-4: hitbox type (see HitboxPositions)
+  ; - bit 5:
+  ; - bit 6:
+  ; - bit 7: force collision (for some entities only)
   ds $10
 
 wEntitiesHealthTable:: ; C360
@@ -502,7 +507,13 @@ wEntitiesUnusedTableA:: ; C370
   ; Unused value
   ds $10
 
-wEntitiesUnknowTableQ:: ; C380
+wEntitiesDirectionTable:: ; C380
+  ; Direction of the entity.
+  ; See DIRECTION_* constants for possible values.
+  ;
+  ; This direction is always relevant for projectile-throwing entities
+  ; (like Moblins or Octorocks). Other entities may not be as strict to
+  ; update their direction.
   ds $10
 
 wEntitiesUnknowTableR:: ; C390
@@ -827,7 +838,13 @@ wDungeonMinimap:: ; D480
   ds $40
 
 ; Unlabeled
-ds $D600 - $D4C0
+ds $D580 - $D4C0
+
+wEntitiesHitboxPositionTable:: ; D580
+  ds MAX_ENTITIES * 4
+
+; Unlabeled
+ds $D600 - $D5C0
 
 ; Data structures for copying data to vram during blanking times
 wRequests::               ; D600

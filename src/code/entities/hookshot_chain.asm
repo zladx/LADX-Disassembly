@@ -122,7 +122,7 @@ jr_018_7C80:
     inc  a                                        ; $7CA4: $3C
 
 jr_018_7CA5:
-    ld   hl, wEntitiesUnknowTableQ                ; $7CA5: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $7CA5: $21 $80 $C3
     add  hl, de                                   ; $7CA8: $19
     ld   [hl], a                                  ; $7CA9: $77
     call GetEntityTransitionCountdown             ; $7CAA: $CD $05 $0C

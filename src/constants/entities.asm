@@ -1,5 +1,5 @@
 ; Maximum number of loaded entities
-MAX_ENTITIES equ 16
+MAX_ENTITIES equ $10
 
 ; End marker in a list of entities
 ENTITIES_END equ $FF

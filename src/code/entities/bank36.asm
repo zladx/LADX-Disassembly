@@ -378,7 +378,7 @@ jr_036_421B:
     rl   b                                        ; $4224: $CB $10
     sla  c                                        ; $4226: $CB $21
     rl   b                                        ; $4228: $CB $10
-    ld   hl, $D580                                ; $422A: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $422A: $21 $80 $D5
     add  hl, bc                                   ; $422D: $09
     inc  hl                                       ; $422E: $23
     ld   [hl], $08                                ; $422F: $36 $08
@@ -468,7 +468,7 @@ label_036_429A:
     rl   b                                        ; $42AC: $CB $10
     sla  c                                        ; $42AE: $CB $21
     rl   b                                        ; $42B0: $CB $10
-    ld   hl, $D580                                ; $42B2: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $42B2: $21 $80 $D5
     add  hl, bc                                   ; $42B5: $09
     inc  hl                                       ; $42B6: $23
     ld   [hl], $10                                ; $42B7: $36 $10
@@ -2382,7 +2382,7 @@ jr_036_4D89:
     push bc                                       ; $4DB7: $C5
     sla  c                                        ; $4DB8: $CB $21
     sla  c                                        ; $4DBA: $CB $21
-    ld   hl, $D580                                ; $4DBC: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $4DBC: $21 $80 $D5
     add  hl, bc                                   ; $4DBF: $09
     inc  hl                                       ; $4DC0: $23
     inc  hl                                       ; $4DC1: $23
@@ -2433,7 +2433,7 @@ jr_036_4D89:
     ld   hl, wEntitiesUnknowTableL                ; $4E08: $21 $40 $C3
     add  hl, de                                   ; $4E0B: $19
     ld   [hl], $12                                ; $4E0C: $36 $12
-    ld   hl, wEntitiesUnknowTableM                ; $4E0E: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $4E0E: $21 $50 $C3
     add  hl, de                                   ; $4E11: $19
     set  7, [hl]                                  ; $4E12: $CB $FE
     ld   c, e                                     ; $4E14: $4B
@@ -4035,7 +4035,7 @@ func_036_56CD:
     ld   hl, wEntitiesUnknowTableL                ; $5713: $21 $40 $C3
     add  hl, de                                   ; $5716: $19
     ld   [hl], $12                                ; $5717: $36 $12
-    ld   hl, wEntitiesUnknowTableM                ; $5719: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $5719: $21 $50 $C3
     add  hl, de                                   ; $571C: $19
     set  7, [hl]                                  ; $571D: $CB $FE
     pop  hl                                       ; $571F: $E1
@@ -4452,7 +4452,7 @@ ColorGuardianRedEntityHandler::
     push bc                                       ; $593F: $C5
     sla  c                                        ; $5940: $CB $21
     sla  c                                        ; $5942: $CB $21
-    ld   hl, $D580                                ; $5944: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $5944: $21 $80 $D5
     add  hl, bc                                   ; $5947: $09
     inc  hl                                       ; $5948: $23
     inc  hl                                       ; $5949: $23
@@ -5427,7 +5427,7 @@ jr_036_5EDC:
     ld   hl, wEntitiesUnknowTableL                ; $5F03: $21 $40 $C3
     add  hl, de                                   ; $5F06: $19
     ld   [hl], $12                                ; $5F07: $36 $12
-    ld   hl, wEntitiesUnknowTableM                ; $5F09: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $5F09: $21 $50 $C3
     add  hl, de                                   ; $5F0C: $19
     set  7, [hl]                                  ; $5F0D: $CB $FE
     ld   hl, wEntitiesStateTable                  ; $5F0F: $21 $90 $C2
@@ -7844,7 +7844,7 @@ func_036_6BF8:
     ret                                           ; $6BFC: $C9
 
 func_036_6BFD:
-    ld   hl, wEntitiesUnknowTableQ                ; $6BFD: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $6BFD: $21 $80 $C3
     add  hl, bc                                   ; $6C00: $09
     ret                                           ; $6C01: $C9
 

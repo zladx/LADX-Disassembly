@@ -7858,7 +7858,7 @@ label_019_6D00:
     push bc                                       ; $6D00: $C5
     sla  c                                        ; $6D01: $CB $21
     sla  c                                        ; $6D03: $CB $21
-    ld   hl, $D580                                ; $6D05: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $6D05: $21 $80 $D5
     add  hl, bc                                   ; $6D08: $09
     ld   a, $0B                                   ; $6D09: $3E $0B
     ld   [hl+], a                                 ; $6D0B: $22
@@ -8272,7 +8272,7 @@ jr_019_6F66:
     push bc                                       ; $6F66: $C5
     sla  c                                        ; $6F67: $CB $21
     sla  c                                        ; $6F69: $CB $21
-    ld   hl, $D580                                ; $6F6B: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $6F6B: $21 $80 $D5
     add  hl, bc                                   ; $6F6E: $09
     ld   a, $0A                                   ; $6F6F: $3E $0A
     ld   [hl+], a                                 ; $6F71: $22
@@ -8479,7 +8479,7 @@ label_019_70A9:
     push bc                                       ; $70A9: $C5
     sla  c                                        ; $70AA: $CB $21
     sla  c                                        ; $70AC: $CB $21
-    ld   hl, $D580                                ; $70AE: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $70AE: $21 $80 $D5
     add  hl, bc                                   ; $70B1: $09
     inc  hl                                       ; $70B2: $23
     inc  hl                                       ; $70B3: $23

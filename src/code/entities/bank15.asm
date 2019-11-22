@@ -641,7 +641,7 @@ BouldersEntityHandler::
     ld   hl, wEntitiesUnknowTableL                ; $439C: $21 $40 $C3
     add  hl, de                                   ; $439F: $19
     ld   [hl], $12                                ; $43A0: $36 $12
-    ld   hl, wEntitiesUnknowTableM                ; $43A2: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $43A2: $21 $50 $C3
     add  hl, de                                   ; $43A5: $19
     set  7, [hl]                                  ; $43A6: $CB $FE
     ld   hl, wEntitiesStateTable                  ; $43A8: $21 $90 $C2
@@ -4340,7 +4340,7 @@ label_015_582B:
     ld   hl, wEntitiesUnknowTableL                ; $5885: $21 $40 $C3
     add  hl, de                                   ; $5888: $19
     ld   [hl], $42                                ; $5889: $36 $42
-    ld   hl, wEntitiesUnknowTableM                ; $588B: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $588B: $21 $50 $C3
     add  hl, de                                   ; $588E: $19
     ld   [hl], d                                  ; $588F: $72
     ld   a, $38                                   ; $5890: $3E $38
@@ -5440,7 +5440,7 @@ func_015_5E38:
     ld   hl, wEntitiesUnknowTableL                ; $5E49: $21 $40 $C3
     add  hl, de                                   ; $5E4C: $19
     ld   [hl], $C2                                ; $5E4D: $36 $C2
-    ld   hl, wEntitiesUnknowTableM                ; $5E4F: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $5E4F: $21 $50 $C3
     add  hl, de                                   ; $5E52: $19
     ld   [hl], d                                  ; $5E53: $72
     ld   hl, wEntitiesUnknowTableP                ; $5E54: $21 $40 $C4
@@ -5866,13 +5866,13 @@ jr_015_6069:
     ld   hl, wEntitiesUnknowTableL                ; $60A0: $21 $40 $C3
     add  hl, bc                                   ; $60A3: $09
     ld   [hl], $40                                ; $60A4: $36 $40
-    ld   hl, wEntitiesUnknowTableM                ; $60A6: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $60A6: $21 $50 $C3
     add  hl, bc                                   ; $60A9: $09
     ld   [hl], $0A                                ; $60AA: $36 $0A
     ld   hl, wEntitiesUnknowTableH                ; $60AC: $21 $30 $C4
     add  hl, bc                                   ; $60AF: $09
     ld   [hl], $90                                ; $60B0: $36 $90
-    jp   label_3AEA                               ; $60B2: $C3 $EA $3A
+    jp   ConfigureEntityHitbox                               ; $60B2: $C3 $EA $3A
 
 jr_015_60B5:
     rra                                           ; $60B5: $1F
@@ -6911,13 +6911,13 @@ jr_015_6651:
     ld   hl, wEntitiesUnknowTableL                ; $6682: $21 $40 $C3
     add  hl, de                                   ; $6685: $19
     ld   [hl], $42                                ; $6686: $36 $42
-    ld   hl, wEntitiesUnknowTableM                ; $6688: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $6688: $21 $50 $C3
     add  hl, de                                   ; $668B: $19
     ld   [hl], $00                                ; $668C: $36 $00
     push de                                       ; $668E: $D5
     ld   c, e                                     ; $668F: $4B
     ld   b, d                                     ; $6690: $42
-    call label_3AEA                               ; $6691: $CD $EA $3A
+    call ConfigureEntityHitbox                               ; $6691: $CD $EA $3A
     pop  de                                       ; $6694: $D1
     ld   a, [$D21E]                               ; $6695: $FA $1E $D2
     and  a                                        ; $6698: $A7
@@ -7020,13 +7020,13 @@ jr_015_6724:
     ld   hl, wEntitiesUnknowTableL                ; $672D: $21 $40 $C3
     add  hl, de                                   ; $6730: $19
     ld   [hl], $40                                ; $6731: $36 $40
-    ld   hl, wEntitiesUnknowTableM                ; $6733: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $6733: $21 $50 $C3
     add  hl, de                                   ; $6736: $19
     ld   [hl], $08                                ; $6737: $36 $08
     push bc                                       ; $6739: $C5
     ld   c, e                                     ; $673A: $4B
     ld   b, d                                     ; $673B: $42
-    call label_3AEA                               ; $673C: $CD $EA $3A
+    call ConfigureEntityHitbox                               ; $673C: $CD $EA $3A
     ld   a, $18                                   ; $673F: $3E $18
     call ApplyVectorTowardsLink_trampoline        ; $6741: $CD $AA $3B
     call GetEntityTransitionCountdown             ; $6744: $CD $05 $0C
@@ -8479,7 +8479,7 @@ jr_015_6E5A:
     ld   hl, wEntitiesUnknowTableU                ; $6E83: $21 $20 $C4
     add  hl, bc                                   ; $6E86: $09
     ld   [hl], $80                                ; $6E87: $36 $80
-    ld   hl, wEntitiesUnknowTableM                ; $6E89: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $6E89: $21 $50 $C3
     add  hl, bc                                   ; $6E8C: $09
     res  7, [hl]                                  ; $6E8D: $CB $BE
     ld   hl, wEntitiesUnknowTableL                ; $6E8F: $21 $40 $C3
@@ -8561,7 +8561,7 @@ jr_015_6EEA:
     ld   [hl], $7F                                ; $6F09: $36 $7F
 
 jr_015_6F0B:
-    ld   hl, wEntitiesUnknowTableM                ; $6F0B: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $6F0B: $21 $50 $C3
     add  hl, bc                                   ; $6F0E: $09
     set  7, [hl]                                  ; $6F0F: $CB $FE
     call IsEntityUnknownFZero                     ; $6F11: $CD $00 $0C
@@ -8581,7 +8581,7 @@ jr_015_6F0B:
     cp   $03                                      ; $6F26: $FE $03
     jr   nz, jr_015_6F30                          ; $6F28: $20 $06
 
-    ld   hl, wEntitiesUnknowTableM                ; $6F2A: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $6F2A: $21 $50 $C3
     add  hl, bc                                   ; $6F2D: $09
     res  7, [hl]                                  ; $6F2E: $CB $BE
 

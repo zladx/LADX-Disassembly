@@ -7,24 +7,260 @@ SECTION "ROM Bank $003", ROMX[$4000], BANK[$3]
 ; Array indexed by entity type
 ; See wEntitiesUnknowTableL
 Data_003_4000::
-    db   $42, $C2, $D2, $C2, $C2, $D2, $C2, $C2, $C3, $12, $42, $12, $42, $12, $12, $92
-    db   $12, $18, $12, $11, $12, $02, $02, $02, $12, $02, $12, $12, $11, $02, $12, $12
-    db   $12, $02, $42, $92, $12, $E2, $E2, $02, $12, $02, $02, $41, $12, $B1, $B1, $B1
-    db   $B1, $B1, $B2, $B2, $B1, $B2, $B2, $B2, $B1, $92, $B2, $B1, $B2, $B1, $82, $92
-    db   $84, $92, $82, $C0, $C0, $C2, $82, $82, $82, $82, $F2, $82, $41, $82, $82, $82
-    db   $12, $02, $42, $42, $C2, $02, $02, $02, $42, $08, $48, $00, $91, $02, $00, $00
-    db   $02, $C2, $08, $02, $C0, $00, $82, $02, $C0, $C2, $92, $82, $92, $12, $C1, $92
-    db   $92, $92, $92, $92, $93, $92, $92, $92, $92, $92, $52, $92, $00, $42, $02, $82
-    db   $92, $00, $42, $C2, $D1, $D2, $D1, $12, $84, $0C, $C2, $C2, $92, $92, $08, $12
-    db   $12, $13, $14, $12, $80, $92, $92, $C0, $D2, $12, $C0, $D2, $12, $94, $C0, $12
-    db   $12, $12, $14, $C4, $C4, $C4, $C2, $8A, $D2, $02, $12, $12, $12, $92, $12, $B2
-    db   $02, $82, $C0, $82, $92, $82, $92, $94, $95, $12, $13, $12, $12, $13, $16, $52
-    db   $C0, $D2, $D2, $94, $98, $12, $12, $D0, $D2, $C1, $88, $02, $52, $85, $84, $C2
-    db   $82, $82, $82, $D2, $D2, $D2, $82, $02, $C2, $C8, $42, $48, $C4, $C2, $C2, $C2
-    db   $D3, $D2, $42, $12, $13, $D2, $50, $C0, $00, $13, $13, $13, $74, $74, $74, $82
-    db   $82, $82, $94, $94, $0C, $C2, $82, $82, $06, $0C, $83
+    db   $42
+    db   $C2
+    db   $D2
+    db   $C2
+    db   $C2
+    db   $D2
+    db   $C2
+    db   $C2
+    db   $C3
+    db   $12
+    db   $42
+    db   $12
+    db   $42
+    db   $12
+    db   $12
+    db   $92
+    db   $12
+    db   $18
+    db   $12
+    db   $11
+    db   $12
+    db   $02
+    db   $02
+    db   $02
+    db   $12
+    db   $02
+    db   $12
+    db   $12
+    db   $11
+    db   $02
+    db   $12
+    db   $12
+    db   $12
+    db   $02
+    db   $42
+    db   $92
+    db   $12
+    db   $E2
+    db   $E2
+    db   $02
+    db   $12
+    db   $02
+    db   $02
+    db   $41
+    db   $12
+    db   $B1
+    db   $B1
+    db   $B1
+    db   $B1
+    db   $B1
+    db   $B2
+    db   $B2
+    db   $B1
+    db   $B2
+    db   $B2
+    db   $B2
+    db   $B1
+    db   $92
+    db   $B2
+    db   $B1
+    db   $B2
+    db   $B1
+    db   $82
+    db   $92
+    db   $84
+    db   $92
+    db   $82
+    db   $C0
+    db   $C0
+    db   $C2
+    db   $82
+    db   $82
+    db   $82
+    db   $82
+    db   $F2
+    db   $82
+    db   $41
+    db   $82
+    db   $82
+    db   $82
+    db   $12
+    db   $02
+    db   $42
+    db   $42
+    db   $C2
+    db   $02
+    db   $02
+    db   $02
+    db   $42
+    db   $08
+    db   $48
+    db   $00
+    db   $91
+    db   $02
+    db   $00
+    db   $00
+    db   $02
+    db   $C2
+    db   $08
+    db   $02
+    db   $C0
+    db   $00
+    db   $82
+    db   $02
+    db   $C0
+    db   $C2
+    db   $92
+    db   $82
+    db   $92
+    db   $12
+    db   $C1
+    db   $92
+    db   $92
+    db   $92
+    db   $92
+    db   $92
+    db   $93
+    db   $92
+    db   $92
+    db   $92
+    db   $92
+    db   $92
+    db   $52
+    db   $92
+    db   $00
+    db   $42
+    db   $02
+    db   $82
+    db   $92
+    db   $00
+    db   $42
+    db   $C2
+    db   $D1
+    db   $D2
+    db   $D1
+    db   $12
+    db   $84
+    db   $0C
+    db   $C2
+    db   $C2
+    db   $92
+    db   $92
+    db   $08
+    db   $12
+    db   $12
+    db   $13
+    db   $14
+    db   $12
+    db   $80
+    db   $92
+    db   $92
+    db   $C0
+    db   $D2
+    db   $12
+    db   $C0
+    db   $D2
+    db   $12
+    db   $94
+    db   $C0
+    db   $12
+    db   $12
+    db   $12
+    db   $14
+    db   $C4
+    db   $C4
+    db   $C4
+    db   $C2
+    db   $8A
+    db   $D2
+    db   $02
+    db   $12
+    db   $12
+    db   $12
+    db   $92
+    db   $12
+    db   $B2
+    db   $02
+    db   $82
+    db   $C0
+    db   $82
+    db   $92
+    db   $82
+    db   $92
+    db   $94
+    db   $95
+    db   $12
+    db   $13
+    db   $12
+    db   $12
+    db   $13
+    db   $16
+    db   $52
+    db   $C0
+    db   $D2
+    db   $D2
+    db   $94
+    db   $98
+    db   $12
+    db   $12
+    db   $D0
+    db   $D2
+    db   $C1
+    db   $88
+    db   $02
+    db   $52
+    db   $85
+    db   $84
+    db   $C2
+    db   $82
+    db   $82
+    db   $82
+    db   $D2
+    db   $D2
+    db   $D2
+    db   $82
+    db   $02
+    db   $C2
+    db   $C8
+    db   $42
+    db   $48
+    db   $C4
+    db   $C2
+    db   $C2
+    db   $C2
+    db   $D3
+    db   $D2
+    db   $42
+    db   $12
+    db   $13
+    db   $D2
+    db   $50
+    db   $C0
+    db   $00
+    db   $13
+    db   $13
+    db   $13
+    db   $74
+    db   $74
+    db   $74
+    db   $82
+    db   $82
+    db   $82
+    db   $94
+    db   $94
+    db   $0C
+    db   $C2
+    db   $82
+    db   $82
+    db   $06
+    db   $0C
+    db   $83
 
-Data_003_40FB::
+; Table of hitbox flags, indexed by entity type
+HitboxFlagsForEntity::
     db   $00, $00, $01, $01, $01, $00, $06, $00, $00, $00, $00, $00, $00, $00, $00, $80
     db   $00, $08, $00, $01, $00, $00, $03, $03, $00, $00, $00, $00, $10, $02, $00, $00
     db   $00, $00, $00, $00, $00, $80, $80, $82, $00, $00, $80, $00, $80, $1D, $1D, $1D
@@ -197,7 +433,7 @@ Data_003_4826::
 ; Inputs:
 ;   bc   entity index
 ConfigureNewEntity::
-    call ResetEntity_trampoline                 ; $485B: $CD $0A $3A
+    call ResetEntity_trampoline                   ; $485B: $CD $0A $3A
 
     ; Store the entity room id
     ldh  a, [hMapRoom]                            ; $485E: $F0 $F6
@@ -225,12 +461,14 @@ label_003_486B:
     add  hl, bc                                   ; $4879: $09
     ld   [hl], a                                  ; $487A: $77
 
-    ld   hl, Data_003_40FB                        ; $487B: $21 $FB $40
+    ; wEntitiesHitboxFlagsTable = HitboxFlagsForEntity[EntityType]
+    ld   hl, HitboxFlagsForEntity                        ; $487B: $21 $FB $40
     add  hl, de                                   ; $487E: $19
     ld   a, [hl]                                  ; $487F: $7E
-    ld   hl, wEntitiesUnknowTableM                ; $4880: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $4880: $21 $50 $C3
     add  hl, bc                                   ; $4883: $09
     ld   [hl], a                                  ; $4884: $77
+
     call func_003_4895                            ; $4885: $CD $95 $48
     ld   hl, Data_003_42F1                        ; $4888: $21 $F1 $42
     add  hl, de                                   ; $488B: $19
@@ -238,7 +476,7 @@ label_003_486B:
     ld   hl, wEntitiesUnknowTableH                ; $488D: $21 $30 $C4
     add  hl, bc                                   ; $4890: $09
     ld   [hl], a                                  ; $4891: $77
-    jp   label_3AEA                               ; $4892: $C3 $EA $3A
+    jp   ConfigureEntityHitbox                               ; $4892: $C3 $EA $3A
 
 func_003_4895::
     push de                                       ; $4895: $D5
@@ -6245,17 +6483,21 @@ func_003_6C72::
     and  a                                        ; $6C74: $A7
     jr   nz, jr_003_6C5A                          ; $6C75: $20 $E3
 
+; Inputs:
+;   bc  entity index
 func_003_6C77::
     ld   a, [wLinkMotionState]                    ; $6C77: $FA $1C $C1
     cp   $02                                      ; $6C7A: $FE $02
     jr   nc, jr_003_6C5A                          ; $6C7C: $30 $DC
 
     push bc                                       ; $6C7E: $C5
+    ; c = (entity index * 4)
     sla  c                                        ; $6C7F: $CB $21
     sla  c                                        ; $6C81: $CB $21
-    ld   hl, $D580                                ; $6C83: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $6C83: $21 $80 $D5
     add  hl, bc                                   ; $6C86: $09
     pop  bc                                       ; $6C87: $C1
+    ; wActiveEntityPosX + wEntitiesHitboxPositionTable[c + 0]
     ldh  a, [wActiveEntityPosX]                   ; $6C88: $F0 $EE
     add  [hl]                                     ; $6C8A: $86
     push hl                                       ; $6C8B: $E5
@@ -6599,7 +6841,7 @@ jr_003_6E4B:
     push bc                                       ; $6E57: $C5
     sla  c                                        ; $6E58: $CB $21
     sla  c                                        ; $6E5A: $CB $21
-    ld   hl, $D580                                ; $6E5C: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $6E5C: $21 $80 $D5
     add  hl, bc                                   ; $6E5F: $09
     pop  bc                                       ; $6E60: $C1
     ld   a, [de]                                  ; $6E61: $1A
@@ -7997,39 +8239,40 @@ entitiesLoop:
     and  $20                                      ; $7635: $E6 $20
     jp   nz, label_003_7715                       ; $7637: $C2 $15 $77
 
-    ldh  a, [hActiveEntityType]                     ; $763A: $F0 $EB
+    ldh  a, [hActiveEntityType]                   ; $763A: $F0 $EB
     cp   $08                                      ; $763C: $FE $08
-    jr   z, jr_003_7668                           ; $763E: $28 $28
+    jr   z, forceCollisionEnd                     ; $763E: $28 $28
 
+    ; If checking collisions against the Final Nightmare…
     ld   hl, wEntitiesTypeTable                   ; $7640: $21 $A0 $C3
     add  hl, de                                   ; $7643: $19
     ld   a, [hl]                                  ; $7644: $7E
-    cp   $E6                                      ; $7645: $FE $E6
-    jr   nz, jr_003_7656                          ; $7647: $20 $0D
-
-    ld   a, [wFinalNightmareForm]                               ; $7649: $FA $19 $D2
+    cp   ENTITY_FINAL_NIGHTMARE                   ; $7645: $FE $E6
+    jr   nz, .finalNightmareEnd                   ; $7647: $20 $0D
+    ; … and this is Final Nightmare final form…
+    ld   a, [wFinalNightmareForm]                 ; $7649: $FA $19 $D2
     cp   $05                                      ; $764C: $FE $05
-    jr   nz, jr_003_7656                          ; $764E: $20 $06
-
-    ldh  a, [hActiveEntitySpriteVariant]               ; $7650: $F0 $F1
+    jr   nz, .finalNightmareEnd                   ; $764E: $20 $06
+    ; … and active sprite != 2…
+    ldh  a, [hActiveEntitySpriteVariant]          ; $7650: $F0 $F1
     cp   $02                                      ; $7652: $FE $02
-    jr   nz, jr_003_765F                          ; $7654: $20 $09
+    ; … force a collisition.
+    jr   nz, forceCollision                       ; $7654: $20 $09
+.finalNightmareEnd
 
-jr_003_7656:
-    ld   hl, wEntitiesUnknowTableM                ; $7656: $21 $50 $C3
+    ; If bit 7 of entity hitbox flag is set…
+    ld   hl, wEntitiesHitboxFlagsTable            ; $7656: $21 $50 $C3
     add  hl, de                                   ; $7659: $19
     ld   a, [hl]                                  ; $765A: $7E
     and  $80                                      ; $765B: $E6 $80
-    jr   z, jr_003_7668                           ; $765D: $28 $09
-
-label_003_765F:
-jr_003_765F:
+    jr   z, forceCollisionEnd                     ; $765D: $28 $09
+forceCollision:
     ld   hl, wEntitiesCollisionsTable             ; $765F: $21 $A0 $C2
     add  hl, bc                                   ; $7662: $09
     ld   [hl], $01                                ; $7663: $36 $01
     jp   label_003_7737                           ; $7665: $C3 $37 $77
+forceCollisionEnd:
 
-jr_003_7668:
     ldh  a, [hActiveEntityType]                     ; $7668: $F0 $EB
     cp   $08                                      ; $766A: $FE $08
     jr   nz, jr_003_76AC                          ; $766C: $20 $3E
@@ -8076,7 +8319,7 @@ jr_003_7680:
     ld   [wCurrentBank], a                        ; $76A9: $EA $AF $DB
 
 jr_003_76AC:
-    ld   hl, wEntitiesUnknowTableM                ; $76AC: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $76AC: $21 $50 $C3
     add  hl, de                                   ; $76AF: $19
     ld   a, [hl]                                  ; $76B0: $7E
     and  $80                                      ; $76B1: $E6 $80
@@ -8109,9 +8352,9 @@ jr_003_76AC:
     and  a                                        ; $76DB: $A7
     jr   nz, jr_003_7710                          ; $76DC: $20 $32
 
-    ldh  a, [hActiveEntityType]                     ; $76DE: $F0 $EB
-    cp   $03                                      ; $76E0: $FE $03
-    jp   nz, label_003_765F                       ; $76E2: $C2 $5F $76
+    ldh  a, [hActiveEntityType]                   ; $76DE: $F0 $EB
+    cp   ENTITY_HOOKSHOT_CHAIN                    ; $76E0: $FE $03
+    jp   nz, forceCollision                       ; $76E2: $C2 $5F $76
 
     ld   [hl], $01                                ; $76E5: $36 $01
     push de                                       ; $76E7: $D5
@@ -8176,17 +8419,17 @@ jr_003_7734:
 
 label_003_7737:
 jr_003_7737:
-    ldh  a, [hActiveEntityType]                     ; $7737: $F0 $EB
-    cp   $A8                                      ; $7739: $FE $A8
+    ldh  a, [hActiveEntityType]                   ; $7737: $F0 $EB
+    cp   ENTITY_A8                                ; $7739: $FE $A8
     jr   z, jr_003_775A                           ; $773B: $28 $1D
 
-    cp   $01                                      ; $773D: $FE $01
+    cp   ENTITY_BOOMERANG                         ; $773D: $FE $01
     jr   z, jr_003_779A                           ; $773F: $28 $59
 
-    cp   $03                                      ; $7741: $FE $03
+    cp   ENTITY_HOOKSHOT_CHAIN                    ; $7741: $FE $03
     jr   z, jr_003_779A                           ; $7743: $28 $55
 
-    cp   $05                                      ; $7745: $FE $05
+    cp   ENTITY_ENTITY_LIFTABLE_ROCK              ; $7745: $FE $05
     jr   nz, jr_003_7751                          ; $7747: $20 $08
 
     push de                                       ; $7749: $D5
@@ -8317,7 +8560,7 @@ jr_003_77DD:
     and  $60                                      ; $77EB: $E6 $60
     jr   nz, jr_003_7834                          ; $77ED: $20 $45
 
-    ld   hl, wEntitiesUnknowTableM                ; $77EF: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $77EF: $21 $50 $C3
     add  hl, de                                   ; $77F2: $19
     ld   a, [hl]                                  ; $77F3: $7E
     and  $80                                      ; $77F4: $E6 $80
@@ -8697,7 +8940,7 @@ jr_003_7A18:
 
     xor  a                                        ; $7A1F: $AF
     ld   [$C503], a                               ; $7A20: $EA $03 $C5
-    ld   hl, wEntitiesUnknowTableM                ; $7A23: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $7A23: $21 $50 $C3
     add  hl, bc                                   ; $7A26: $09
     ld   a, [hl]                                  ; $7A27: $7E
     and  $03                                      ; $7A28: $E6 $03

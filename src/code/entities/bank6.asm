@@ -3344,7 +3344,7 @@ jr_006_544F:
     ld   hl, wEntitiesUnknowTableL                ; $5463: $21 $40 $C3
     add  hl, bc                                   ; $5466: $09
     res  7, [hl]                                  ; $5467: $CB $BE
-    ld   hl, wEntitiesUnknowTableM                ; $5469: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $5469: $21 $50 $C3
     add  hl, bc                                   ; $546C: $09
     res  7, [hl]                                  ; $546D: $CB $BE
     ld   hl, wEntitiesUnknowTableH                ; $546F: $21 $30 $C4
@@ -4720,7 +4720,7 @@ GrandpaUlriraEntityHandler::
     push bc                                       ; $5C15: $C5
     sla  c                                        ; $5C16: $CB $21
     sla  c                                        ; $5C18: $CB $21
-    ld   hl, $D580                                ; $5C1A: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $5C1A: $21 $80 $D5
     add  hl, bc                                   ; $5C1D: $09
     inc  hl                                       ; $5C1E: $23
     inc  hl                                       ; $5C1F: $23
@@ -5183,7 +5183,7 @@ CrazyTracyEntityHandler::
     push bc                                       ; $5E95: $C5
     sla  c                                        ; $5E96: $CB $21
     sla  c                                        ; $5E98: $CB $21
-    ld   hl, $D580                                ; $5E9A: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $5E9A: $21 $80 $D5
     add  hl, bc                                   ; $5E9D: $09
     inc  hl                                       ; $5E9E: $23
     inc  hl                                       ; $5E9F: $23
@@ -9033,7 +9033,7 @@ jr_006_7494:
     ld   hl, wEntitiesUnknowTableL                ; $749D: $21 $40 $C3
     add  hl, bc                                   ; $74A0: $09
     res  7, [hl]                                  ; $74A1: $CB $BE
-    ld   hl, wEntitiesUnknowTableM                ; $74A3: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $74A3: $21 $50 $C3
     add  hl, bc                                   ; $74A6: $09
     res  7, [hl]                                  ; $74A7: $CB $BE
     ld   hl, wEntitiesUnknowTableH                ; $74A9: $21 $30 $C4

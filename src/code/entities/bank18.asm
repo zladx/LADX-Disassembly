@@ -429,10 +429,10 @@ label_018_4373:
     ld   hl, wEntitiesPosYTable                         ; $4373: $21 $10 $C2
     add  hl, bc                                   ; $4376: $09
     ld   [hl], $4A                                ; $4377: $36 $4A
-    ld   hl, wEntitiesUnknowTableM                ; $4379: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $4379: $21 $50 $C3
     add  hl, bc                                   ; $437C: $09
     ld   [hl], $98                                ; $437D: $36 $98
-    call label_3AEA                               ; $437F: $CD $EA $3A
+    call ConfigureEntityHitbox                               ; $437F: $CD $EA $3A
     call func_018_43E3                            ; $4382: $CD $E3 $43
     call func_018_7D36                            ; $4385: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $4388: $F0 $F0

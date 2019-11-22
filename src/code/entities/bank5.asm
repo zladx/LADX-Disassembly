@@ -1332,7 +1332,7 @@ jr_005_46E9:
     add  hl, de                                   ; $471B: $19
     ld   [hl], $12                                ; $471C: $36 $12
 
-    ld   hl, wEntitiesUnknowTableM                ; $471E: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $471E: $21 $50 $C3
     add  hl, de                                   ; $4721: $19
     ld   [hl], $80                                ; $4722: $36 $80
 
@@ -1457,7 +1457,7 @@ WitchEntityHandler::
     sla  c                                        ; $47D4: $CB $21
     sla  c                                        ; $47D6: $CB $21
     ld   a, $0C                                   ; $47D8: $3E $0C
-    ld   hl, $D580                                ; $47DA: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $47DA: $21 $80 $D5
     add  hl, bc                                   ; $47DD: $09
     inc  hl                                       ; $47DE: $23
     inc  hl                                       ; $47DF: $23
@@ -2463,7 +2463,7 @@ jr_005_4D5D:
     ld   hl, wEntitiesUnknowTableL                ; $4D96: $21 $40 $C3
     add  hl, de                                   ; $4D99: $19
     ld   [hl], $C1                                ; $4D9A: $36 $C1
-    ld   hl, wEntitiesUnknowTableM                ; $4D9C: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $4D9C: $21 $50 $C3
     add  hl, de                                   ; $4D9F: $19
     ld   [hl], $00                                ; $4DA0: $36 $00
 
@@ -2629,7 +2629,7 @@ jr_005_4E96:
     rl   b                                        ; $4E99: $CB $10
     sla  c                                        ; $4E9B: $CB $21
     rl   b                                        ; $4E9D: $CB $10
-    ld   hl, $D580                                ; $4E9F: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $4E9F: $21 $80 $D5
     add  hl, bc                                   ; $4EA2: $09
     inc  hl                                       ; $4EA3: $23
     inc  hl                                       ; $4EA4: $23
@@ -3889,7 +3889,7 @@ label_005_55BC:
     ld   hl, wEntitiesUnknowTableL                ; $55E2: $21 $40 $C3
     add  hl, de                                   ; $55E5: $19
     ld   [hl], $02                                ; $55E6: $36 $02
-    ld   hl, wEntitiesUnknowTableM                ; $55E8: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $55E8: $21 $50 $C3
     add  hl, de                                   ; $55EB: $19
     ld   [hl], $80                                ; $55EC: $36 $80
     ld   hl, wEntitiesUnknowTableH                ; $55EE: $21 $30 $C4
@@ -4028,16 +4028,16 @@ jr_005_56C7:
     ldh  a, [wActiveEntityPosY]                   ; $56CB: $F0 $EC
     sub  $10                                      ; $56CD: $D6 $10
     ldh  [wActiveEntityPosY], a                   ; $56CF: $E0 $EC
-    ld   hl, wEntitiesUnknowTableM                ; $56D1: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $56D1: $21 $50 $C3
     add  hl, bc                                   ; $56D4: $09
     ld   [hl], $00                                ; $56D5: $36 $00
-    call label_3AEA                               ; $56D7: $CD $EA $3A
+    call ConfigureEntityHitbox                               ; $56D7: $CD $EA $3A
     call label_3B70                               ; $56DA: $CD $70 $3B
     call label_3D8A                               ; $56DD: $CD $8A $3D
-    ld   hl, wEntitiesUnknowTableM                ; $56E0: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $56E0: $21 $50 $C3
     add  hl, bc                                   ; $56E3: $09
     ld   [hl], $14                                ; $56E4: $36 $14
-    call label_3AEA                               ; $56E6: $CD $EA $3A
+    call ConfigureEntityHitbox                               ; $56E6: $CD $EA $3A
     call label_3B44                               ; $56E9: $CD $44 $3B
     ldh  a, [hActiveEntityState]                  ; $56EC: $F0 $F0
     rst  $00                                      ; $56EE: $C7
@@ -6133,7 +6133,7 @@ jr_005_6234:
     push bc                                       ; $623B: $C5
     sla  c                                        ; $623C: $CB $21
     sla  c                                        ; $623E: $CB $21
-    ld   hl, $D580                                ; $6240: $21 $80 $D5
+    ld   hl, wEntitiesHitboxPositionTable                                ; $6240: $21 $80 $D5
     add  hl, bc                                   ; $6243: $09
     ld   c, $04                                   ; $6244: $0E $04
 
@@ -11115,7 +11115,7 @@ jr_005_7E13:
     cp   $00                                      ; $7E1A: $FE $00
     jr   z, jr_005_7E35                           ; $7E1C: $28 $17
 
-    ld   hl, wEntitiesUnknowTableM                ; $7E1E: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $7E1E: $21 $50 $C3
     add  hl, bc                                   ; $7E21: $09
     ld   [hl], $80                                ; $7E22: $36 $80
     ld   a, $01                                   ; $7E24: $3E $01
@@ -11158,7 +11158,7 @@ jr_005_7E3A:
     pop  bc                                       ; $7E60: $C1
 
 jr_005_7E61:
-    ld   hl, wEntitiesUnknowTableM                ; $7E61: $21 $50 $C3
+    ld   hl, wEntitiesHitboxFlagsTable                ; $7E61: $21 $50 $C3
     add  hl, bc                                   ; $7E64: $09
     ld   [hl], $00                                ; $7E65: $36 $00
     ld   a, $04                                   ; $7E67: $3E $04

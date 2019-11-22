@@ -7222,41 +7222,65 @@ ExecuteActiveEntityHandler::
     ; Jump to the entity handler
     jp   hl
 
-data_3AAA::
-    db   8, 5, 8, 5, 8, $A, 8, $A, 8, $A, 8, $A, 8, $10, 4, $A
-    db   8, 2, 8, 2, 8, $13, 8, $13, 8, 6, 6, 8, 8, 7
+; Types of entity hitboxes
+; Array indexed par (wEntitiesHitboxFlagsTable & $7C)
+; Content goes into wEntitiesHitboxPositionTable
+; Values:
+;  - hitbox X
+;  - hitbox Y
+;  - ???
+;  - ???
+HitboxPositions::
+._00 db   $08, $05, $08, $05
+._04 db   $08, $0A, $08, $0A
+._08 db   $08, $0A, $08, $0A
+._0C db   $08, $10, $04, $0A
+._10 db   $08, $02, $08, $02
+._14 db   $08, $13, $08, $13
+._18 db   $08, $06, $06, $08
+._1C db   $08, $07, $06, $0A
+._20 db   $08, $06, $10, $30
+._24 db   $08, $07, $04, $0A
+._28 db   $0C, $07, $FC, $04
+._2C db   $10, $10, $0C, $12
+._30 db   $08, $08, $02, $08
+._34 db   $10, $0C, $08, $10
+._38 db   $08, $07, $0C, $08
+._3C db   $08, $08, $02, $08
 
-data_3AC8::
-    db   6, $A, 8, 6, $10, $30, 8, 7, 4, $A, $C, 7, $FC, 4, $10
+; Read hitbox params from the hitbox types table, and copy them
+; to the entities hitbox table.
+; Inputs:
+;   bc    entity index
+ConfigureEntityHitbox::
+    ; de = HitboxPositions[wEntitiesHitboxFlagsTable & $7C]
+    ld   hl, wEntitiesHitboxFlagsTable
+    add  hl, bc
+    ld   a, [hl]
+    and  $7C ; '|'
+    ld   e, a
+    ld   d, b
+    ld   hl, HitboxPositions
+    add  hl, de
+    ld   e, l
+    ld   d, h
+    push bc
+    ; c = c * 4
+    sla  c
+    sla  c
+    ; Destination: hl = wEntitiesHitboxPositionTable + (entity index * 4)
+    ld   hl, wEntitiesHitboxPositionTable
+    add  hl, bc
 
-data_3AD7::
-    db $10, $C, $12, 8, 8, 2, 8, $10, $C, 8, $10, 8, 7, $C, 8, 8
-    db 8, 2, 8
-
-label_3AEA::
-    ld      hl, wEntitiesUnknowTableM
-    add     hl, bc
-    ld      a, [hl]
-    and     $7C ; '|'
-    ld      e, a
-    ld      d, b
-    ld      hl, data_3AAA
-    add     hl, de
-    ld      e, l
-    ld      d, h
-    push    bc
-    sla     c
-    sla     c
-    ld      hl, $D580
-    add     hl, bc
-    ld      c, 4
-
-label_3B04::
+    ; Copy 4 bytes from HitboxPositions to wEntitiesHitboxPositionTable
+    ld   c, 4
+    ; While c != 0
+.loop
     ld   a, [de]
     inc  de
     ldi  [hl], a
     dec  c
-    jr   nz, label_3B04
+    jr   nz, .loop
     pop  bc
     ret
 

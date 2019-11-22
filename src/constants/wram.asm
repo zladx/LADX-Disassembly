@@ -507,7 +507,13 @@ wEntitiesUnusedTableA:: ; C370
   ; Unused value
   ds $10
 
-wEntitiesUnknowTableQ:: ; C380
+wEntitiesDirectionTable:: ; C380
+  ; Direction of the entity.
+  ; See DIRECTION_* constants for possible values.
+  ;
+  ; This direction is always relevant for projectile-throwing entities
+  ; (like Moblins or Octorocks). Other entities may not be as strict to
+  ; update their direction.
   ds $10
 
 wEntitiesUnknowTableR:: ; C390

@@ -2028,7 +2028,7 @@ SpawnPlayerProjectile::
     ld   hl, $C3B0
     add  hl, de
     ld   [hl], a
-    ld   hl, wEntitiesUnknowTableQ
+    ld   hl, wEntitiesDirectionTable
     add  hl, de
     ld   [hl], a
     ld   hl, $C5D0
@@ -7324,8 +7324,8 @@ label_3B44::
     callsb func_003_6C6B
     jp   ReloadSavedBank
 
-label_3B4F::
-    callsb func_003_6BDE
+CheckLinkCollisionWithProjectile_trampoline::
+    callsb CheckLinkCollisionWithProjectile
     jp   ReloadSavedBank
 
 label_3B5A::

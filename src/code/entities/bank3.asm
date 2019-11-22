@@ -649,7 +649,7 @@ Data_003_4924::
     ld   hl, wEntitiesPosXTable                         ; $4987: $21 $00 $C2
     add  hl, bc                                   ; $498A: $09
     ld   [hl], $58                                ; $498B: $36 $58
-    ld   hl, wEntitiesUnknowTableQ                ; $498D: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $498D: $21 $80 $C3
     add  hl, bc                                   ; $4990: $09
     ld   [hl], $03                                ; $4991: $36 $03
 
@@ -748,7 +748,7 @@ jr_003_4A12:
     ld   [hl], $13                                ; $4A16: $36 $13
     ret                                           ; $4A18: $C9
 
-    ld   hl, wEntitiesUnknowTableQ                ; $4A19: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $4A19: $21 $80 $C3
     add  hl, bc                                   ; $4A1C: $09
     ld   [hl], $02                                ; $4A1D: $36 $02
     call IncrementEntityState                     ; $4A1F: $CD $12 $3B
@@ -939,7 +939,7 @@ jr_003_4B1A:
 
 label_003_4B2F:
 jr_003_4B2F:
-    ld   hl, wEntitiesUnknowTableQ                ; $4B2F: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $4B2F: $21 $80 $C3
     add  hl, bc                                   ; $4B32: $09
     ld   [hl], $03                                ; $4B33: $36 $03
     ld   a, [wShieldLevel]                        ; $4B35: $FA $44 $DB
@@ -965,7 +965,7 @@ jr_003_4B48:
     and  $03                                      ; $4B4F: $E6 $03
 
 jr_003_4B51:
-    ld   hl, wEntitiesUnknowTableQ                ; $4B51: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $4B51: $21 $80 $C3
     add  hl, bc                                   ; $4B54: $09
     ld   [hl], a                                  ; $4B55: $77
 
@@ -1449,7 +1449,7 @@ jr_003_4E35:
     push af                                       ; $4E41: $F5
     or   $80                                      ; $4E42: $F6 $80
     ld   [hl], a                                  ; $4E44: $77
-    call func_003_6C72                            ; $4E45: $CD $72 $6C
+    call HurtLinkIfCollisioningWithEnemy                            ; $4E45: $CD $72 $6C
     rl   e                                        ; $4E48: $CB $13
     pop  af                                       ; $4E4A: $F1
     pop  hl                                       ; $4E4B: $E1
@@ -1561,7 +1561,7 @@ jr_003_4ED0:
     ld   a, $03                                   ; $4EEA: $3E $03
 
 jr_003_4EEC:
-    ld   hl, wEntitiesUnknowTableQ                ; $4EEC: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $4EEC: $21 $80 $C3
     add  hl, bc                                   ; $4EEF: $09
     ld   [hl], a                                  ; $4EF0: $77
     push hl                                       ; $4EF1: $E5
@@ -3105,7 +3105,7 @@ jr_003_5858:
     jr   nz, jr_003_5889                          ; $586F: $20 $18
 
     call func_003_7EFE                            ; $5871: $CD $FE $7E
-    ld   hl, wEntitiesUnknowTableQ                ; $5874: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $5874: $21 $80 $C3
     add  hl, bc                                   ; $5877: $09
     ld   a, e                                     ; $5878: $7B
     cp   [hl]                                     ; $5879: $BE
@@ -3156,7 +3156,7 @@ jr_003_58B6:
 
 jr_003_58B9:
     and  $03                                      ; $58B9: $E6 $03
-    ld   hl, wEntitiesUnknowTableQ                ; $58BB: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $58BB: $21 $80 $C3
     add  hl, bc                                   ; $58BE: $09
     ld   [hl], a                                  ; $58BF: $77
     ld   e, a                                     ; $58C0: $5F
@@ -3200,7 +3200,7 @@ jr_003_58F6:
     call func_003_7893                            ; $58F9: $CD $93 $78
 
 func_003_58FC::
-    ld   hl, wEntitiesUnknowTableQ                ; $58FC: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $58FC: $21 $80 $C3
     add  hl, bc                                   ; $58FF: $09
     ld   e, [hl]                                  ; $5900: $5E
     ld   d, b                                     ; $5901: $50
@@ -3306,7 +3306,7 @@ jr_003_5974:
     ld   hl, wEntitiesSpriteVariantTable               ; $5980: $21 $B0 $C3
     add  hl, de                                   ; $5983: $19
     ld   [hl], a                                  ; $5984: $77
-    ld   hl, wEntitiesUnknowTableQ                ; $5985: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $5985: $21 $80 $C3
     add  hl, de                                   ; $5988: $19
     ld   [hl], a                                  ; $5989: $77
     pop  bc                                       ; $598A: $C1
@@ -3330,7 +3330,7 @@ SpawnOctorockRock:
 
     push bc                                       ; $599F: $C5
     ldh  a, [hScratch2]                           ; $59A0: $F0 $D9
-    ld   hl, wEntitiesUnknowTableQ                ; $59A2: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $59A2: $21 $80 $C3
     add  hl, de                                   ; $59A5: $19
     ld   [hl], a                                  ; $59A6: $77
     ld   c, a                                     ; $59A7: $4F
@@ -3761,7 +3761,7 @@ jr_003_5C37:
 
     ldh  a, [$FFEF]                               ; $5C3B: $F0 $EF
     sub  $0C                                      ; $5C3D: $D6 $0C
-    call func_003_6C36                            ; $5C3F: $CD $36 $6C
+    call CheckLinkCollisionWithProjectile.func_003_6C36              ; $5C3F: $CD $36 $6C
     ld   a, $07                                   ; $5C42: $3E $07
     ldh  [hJingle], a                             ; $5C44: $E0 $F2
 
@@ -5290,8 +5290,8 @@ SpawnNewEntityInRange::
     ld   a, [hl]                                  ; $64F3: $7E
     ldh  [hScratch1], a                           ; $64F4: $E0 $D8
 
-    ; hScratch2 = previous entity wEntitiesUnknowTableQ
-    ld   hl, wEntitiesUnknowTableQ                ; $64F6: $21 $80 $C3
+    ; hScratch2 = previous entity wEntitiesDirectionTable
+    ld   hl, wEntitiesDirectionTable              ; $64F6: $21 $80 $C3
     add  hl, bc                                   ; $64F9: $09
     ld   a, [hl]                                  ; $64FA: $7E
     ldh  [hScratch2], a                           ; $64FB: $E0 $D9
@@ -6101,7 +6101,7 @@ OctorockRockEntityHandler::
     call GetEntityTransitionCountdown                 ; $6A26: $CD $05 $0C
     jr   nz, jr_003_6A2E                          ; $6A29: $20 $03
 
-    call func_003_6BDE                            ; $6A2B: $CD $DE $6B
+    call CheckLinkCollisionWithProjectile                            ; $6A2B: $CD $DE $6B
 
 jr_003_6A2E:
     ld   de, $6A1E                                ; $6A2E: $11 $1E $6A
@@ -6158,7 +6158,7 @@ jr_003_6A96:
     call label_3D8A                               ; $6AB6: $CD $8A $3D
     pop  af                                       ; $6AB9: $F1
     ldh  [hActiveEntitySpriteVariant], a               ; $6ABA: $E0 $F1
-    ld   de, $6BC6                                ; $6ABC: $11 $C6 $6B
+    ld   de, Data_003_6BC6                        ; $6ABC: $11 $C6 $6B
     call RenderAnimatedActiveEntity                               ; $6ABF: $CD $C0 $3B
     ld   a, $0C                                   ; $6AC2: $3E $0C
     ld   [$C19E], a                               ; $6AC4: $EA $9E $C1
@@ -6169,12 +6169,12 @@ MoblinArrowEntityHandler::
     call GetEntityTransitionCountdown                 ; $6ACC: $CD $05 $0C
     jr   nz, jr_003_6AD4                          ; $6ACF: $20 $03
 
-    call func_003_6BDE                            ; $6AD1: $CD $DE $6B
+    call CheckLinkCollisionWithProjectile                            ; $6AD1: $CD $DE $6B
 
 func_003_6AD4::
 label_003_6AD4:
 jr_003_6AD4:
-    ld   de, $6BC6                                ; $6AD4: $11 $C6 $6B
+    ld   de, Data_003_6BC6                        ; $6AD4: $11 $C6 $6B
 
 func_003_6AD7::
 label_003_6AD7:
@@ -6358,118 +6358,150 @@ jr_003_6BAB:
 jr_003_6BC5:
     ret                                           ; $6BC5: $C9
 
-    ld   l, $21                                   ; $6BC6: $2E $21
-    inc  l                                        ; $6BC8: $2C
-    ld   hl, $012C                                ; $6BC9: $21 $2C $01
-    ld   l, $01                                   ; $6BCC: $2E $01
-    ld   a, [hl+]                                 ; $6BCE: $2A
-    ld   b, c                                     ; $6BCF: $41
-    ld   a, [hl+]                                 ; $6BD0: $2A
-    ld   h, c                                     ; $6BD1: $61
-    ld   a, [hl+]                                 ; $6BD2: $2A
-    ld   bc, $212A                                ; $6BD3: $01 $2A $21
-    ld   bc, $0300                                ; $6BD6: $01 $00 $03
-    ld   [bc], a                                  ; $6BD9: $02
-    ld   [bc], a                                  ; $6BDA: $02
-    ld   a, [bc]                                  ; $6BDB: $0A
-    ld   c, $06                                   ; $6BDC: $0E $06
+Data_003_6BC6::
+    db    $2E
+    db    $21
+    db    $2C
+    db    $21
+    db    $2C
+    db    $01
+    db    $2E
+    db    $01
+    db    $2A
+    db    $41
+    db    $2A
+    db    $61
+    db    $2A
+    db    $01
+    db    $2A
+    db    $21
 
-func_003_6BDE::
+; For a given direction, get the opposite direction
+ReversedDirectionsTable::
+._right db DIRECTION_LEFT
+._left  db DIRECTION_RIGHT
+._up    db DIRECTION_DOWN
+._down  db DIRECTION_UP
+
+; Array indexed by Link direction
+Data_003_6BDA::
+._00 db $02
+._01 db $0A
+._02 db $0E
+._03 db $06
+
+; Check the collision of the active entity (an enemy projectile) with Link.
+; If the entity is collisioning, handle whether Link has its shield up or not.
+CheckLinkCollisionWithProjectile::
+    ; If Link is not interactive of falling up, return.
     ld   a, [wLinkMotionState]                    ; $6BDE: $FA $1C $C1
-    cp   $02                                      ; $6BE1: $FE $02
-    jr   nc, jr_003_6C5A                          ; $6BE3: $30 $75
+    cp   LINK_MOTION_JUMPING                      ; $6BE1: $FE $02
+    jr   nc, .return                              ; $6BE3: $30 $75
 
+    ; If Link is in the air, return.
     ldh  a, [hLinkPositionZ]                      ; $6BE5: $F0 $A2
     and  a                                        ; $6BE7: $A7
-    jr   nz, jr_003_6C5A                          ; $6BE8: $20 $70
+    jr   nz, .return                              ; $6BE8: $20 $70
 
+    ; If Link is not touching the entity, return.
     ld   hl, wActiveEntityPosX                    ; $6BEA: $21 $EE $FF
     ldh  a, [hLinkPositionX]                      ; $6BED: $F0 $98
     sub  [hl]                                     ; $6BEF: $96
     add  $06                                      ; $6BF0: $C6 $06
     cp   $0C                                      ; $6BF2: $FE $0C
-    jr   nc, jr_003_6C5A                          ; $6BF4: $30 $64
+    jr   nc, .return                              ; $6BF4: $30 $64
 
     ld   hl, wActiveEntityPosY                    ; $6BF6: $21 $EC $FF
     ldh  a, [hLinkPositionY]                      ; $6BF9: $F0 $99
     sub  [hl]                                     ; $6BFB: $96
     add  $06                                      ; $6BFC: $C6 $06
     cp   $0C                                      ; $6BFE: $FE $0C
-    jr   nc, jr_003_6C5A                          ; $6C00: $30 $58
+    jr   nc, .return                              ; $6C00: $30 $58
+
+    ;
+    ; Check shield usage
+    ;
 
     ld   a, [wIsUsingShield]                      ; $6C02: $FA $5B $C1
     and  a                                        ; $6C05: $A7
-    jr   z, jr_003_6C5B                           ; $6C06: $28 $53
+    jr   z, .shieldEnd                            ; $6C06: $28 $53
 
-    ldh  a, [hActiveEntityType]                     ; $6C08: $F0 $EB
-    cp   $2B                                      ; $6C0A: $FE $2B
-    jr   nz, jr_003_6C41                          ; $6C0C: $20 $33
+    ; Special case: laser beam against mirror shield
+
+    ldh  a, [hActiveEntityType]                   ; $6C08: $F0 $EB
+    cp   ENTITY_LASER_BEAM                        ; $6C0A: $FE $2B
+    jr   nz, .laserBeamEnd                        ; $6C0C: $20 $33
 
     ld   a, [wShieldLevel]                        ; $6C0E: $FA $44 $DB
     cp   $02                                      ; $6C11: $FE $02
-    jr   c, jr_003_6C5B                           ; $6C13: $38 $46
+    jr   c, .shieldEnd                            ; $6C13: $38 $46
 
     ldh  a, [hLinkDirection]                      ; $6C15: $F0 $9E
     ld   e, a                                     ; $6C17: $5F
     ld   d, b                                     ; $6C18: $50
-    ld   hl, $6BDA                                ; $6C19: $21 $DA $6B
+    ld   hl, Data_003_6BDA                        ; $6C19: $21 $DA $6B
     add  hl, de                                   ; $6C1C: $19
     ld   e, [hl]                                  ; $6C1D: $5E
-    ld   hl, wEntitiesUnknowTableQ                ; $6C1E: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $6C1E: $21 $80 $C3
     add  hl, bc                                   ; $6C21: $09
     ld   a, [hl]                                  ; $6C22: $7E
     sub  e                                        ; $6C23: $93
     and  $0F                                      ; $6C24: $E6 $0F
     cp   $05                                      ; $6C26: $FE $05
-    jr   nc, jr_003_6C5B                          ; $6C28: $30 $31
+    jr   nc, .shieldEnd                           ; $6C28: $30 $31
 
     ld   hl, wEntitiesCollisionsTable             ; $6C2A: $21 $A0 $C2
     add  hl, bc                                   ; $6C2D: $09
     ld   [hl], $02                                ; $6C2E: $36 $02
-    ld   a, $07                                   ; $6C30: $3E $07
-    ldh  [hJingle], a                             ; $6C32: $E0 $F2
-    ldh  a, [$FFEF]                               ; $6C34: $F0 $EF
 
-func_003_6C36::
+    ld   a, JINGLE_SWORD_POKING                   ; $6C30: $3E $07
+    ldh  [hJingle], a                             ; $6C32: $E0 $F2
+
+    ldh  a, [$FFEF]                               ; $6C34: $F0 $EF
+.func_003_6C36
     ldh  [hScratch1], a                           ; $6C36: $E0 $D8
     ldh  a, [wActiveEntityPosX]                   ; $6C38: $F0 $EE
     ldh  [hScratch0], a                           ; $6C3A: $E0 $D7
     ld   a, $05                                   ; $6C3C: $3E $05
     jp   label_CC7                                ; $6C3E: $C3 $C7 $0C
 
-jr_003_6C41:
-    ld   hl, wEntitiesUnknowTableQ                ; $6C41: $21 $80 $C3
+.laserBeamEnd
+
+    ; If the entity is in a direction opposite to Link's direction…
+    ld   hl, wEntitiesDirectionTable              ; $6C41: $21 $80 $C3
     add  hl, bc                                   ; $6C44: $09
     ld   e, [hl]                                  ; $6C45: $5E
     ld   d, b                                     ; $6C46: $50
-    ld   hl, $6BD6                                ; $6C47: $21 $D6 $6B
+    ld   hl, ReversedDirectionsTable              ; $6C47: $21 $D6 $6B
     add  hl, de                                   ; $6C4A: $19
     ldh  a, [hLinkDirection]                      ; $6C4B: $F0 $9E
     cp   [hl]                                     ; $6C4D: $BE
-    jr   nz, jr_003_6C5B                          ; $6C4E: $20 $0B
+    jr   nz, .shieldEnd                           ; $6C4E: $20 $0B
 
-    ld   a, $16                                   ; $6C50: $3E $16
+    ; Play the "a projectile hits the shield" sound
+    ld   a, JINGLE_SHIELD_TING                    ; $6C50: $3E $16
     ldh  [hJingle], a                             ; $6C52: $E0 $F2
 
-label_003_6C54:
-jr_003_6C54:
+.jr_003_6C54
     ld   hl, wEntitiesCollisionsTable             ; $6C54: $21 $A0 $C2
     add  hl, bc                                   ; $6C57: $09
     ld   [hl], $FF                                ; $6C58: $36 $FF
 
-jr_003_6C5A:
+.return
     ret                                           ; $6C5A: $C9
 
-jr_003_6C5B:
+.shieldEnd
+    ; Does a lot of stuff!
     call func_003_6CC0                            ; $6C5B: $CD $C0 $6C
-    ldh  a, [hActiveEntityType]                     ; $6C5E: $F0 $EB
-    cp   $2B                                      ; $6C60: $FE $2B
-    jr   z, jr_003_6C68                           ; $6C62: $28 $04
 
-    cp   $0C                                      ; $6C64: $FE $0C
-    jr   nz, jr_003_6C54                          ; $6C66: $20 $EC
+    ldh  a, [hActiveEntityType]                   ; $6C5E: $F0 $EB
+    cp   ENTITY_LASER_BEAM                        ; $6C60: $FE $2B
+    jr   z, .jr_003_6C68                          ; $6C62: $28 $04
 
-jr_003_6C68:
+    cp   ENTITY_MOBLIN_ARROW                      ; $6C64: $FE $0C
+    jr   nz, .jr_003_6C54                         ; $6C66: $20 $EC
+
+.jr_003_6C68
     jp   ClearEntityType                               ; $6C68: $C3 $8D $3F
 
 func_003_6C6B::
@@ -6478,17 +6510,21 @@ func_003_6C6B::
     rra                                           ; $6C6E: $1F
     jp   nc, label_003_6CCB                       ; $6C6F: $D2 $CB $6C
 
-func_003_6C72::
-    ldh  a, [hLinkPositionZ]                      ; $6C72: $F0 $A2
-    and  a                                        ; $6C74: $A7
-    jr   nz, jr_003_6C5A                          ; $6C75: $20 $E3
-
+; If Link is collisioning with an enemy entity, make it hurt and bumped back.
 ; Inputs:
 ;   bc  entity index
-func_003_6C77::
+HurtLinkIfCollisioningWithEnemy::
+    ; If Link is in the air, skip the collision check
+    ldh  a, [hLinkPositionZ]                      ; $6C72: $F0 $A2
+    and  a                                        ; $6C74: $A7
+    jr   nz, CheckLinkCollisionWithProjectile.return                          ; $6C75: $20 $E3
+
+.collisionEvenInTheAir
+    ; If Link is not interactive of falling up…
     ld   a, [wLinkMotionState]                    ; $6C77: $FA $1C $C1
-    cp   $02                                      ; $6C7A: $FE $02
-    jr   nc, jr_003_6C5A                          ; $6C7C: $30 $DC
+    cp   LINK_MOTION_JUMPING                      ; $6C7A: $FE $02
+    ; … return.
+    jr   nc, CheckLinkCollisionWithProjectile.return                          ; $6C7C: $30 $DC
 
     push bc                                       ; $6C7E: $C5
     ; c = (entity index * 4)
@@ -6980,7 +7016,7 @@ jr_003_6F20:
 
 label_003_6F24:
     call func_003_6F93                            ; $6F24: $CD $93 $6F
-    jp   label_003_6C54                           ; $6F27: $C3 $54 $6C
+    jp   CheckLinkCollisionWithProjectile.jr_003_6C54                ; $6F27: $C3 $54 $6C
 
 jr_003_6F2A:
     cp   $2C                                      ; $6F2A: $FE $2C
@@ -7332,7 +7368,7 @@ jr_003_710D:
     ld   hl, $6FE4                                ; $711D: $21 $E4 $6F
     add  hl, de                                   ; $7120: $19
     ld   a, [hl]                                  ; $7121: $7E
-    ld   hl, wEntitiesUnknowTableQ                ; $7122: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $7122: $21 $80 $C3
     add  hl, bc                                   ; $7125: $09
     cp   [hl]                                     ; $7126: $BE
     jr   z, jr_003_714D                           ; $7127: $28 $24
@@ -7843,7 +7879,7 @@ func_003_73EB::
     cp   $00                                      ; $7400: $FE $00
     jp   z, label_003_74E1                        ; $7402: $CA $E1 $74
 
-    ld   hl, wEntitiesUnknowTableQ                ; $7405: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $7405: $21 $80 $C3
     add  hl, bc                                   ; $7408: $09
     ldh  a, [hLinkDirection]                      ; $7409: $F0 $9E
     cp   [hl]                                     ; $740B: $BE
@@ -8104,7 +8140,7 @@ jr_003_7571:
 
     ld   a, $0A                                   ; $757A: $3E $0A
     ld   [wLinkMotionState], a                    ; $757C: $EA $1C $C1
-    ld   hl, wEntitiesUnknowTableQ                ; $757F: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $757F: $21 $80 $C3
     add  hl, bc                                   ; $7582: $09
     ld   a, [hl]                                  ; $7583: $7E
     and  a                                        ; $7584: $A7
@@ -8337,11 +8373,11 @@ jr_003_76AC:
     cp   $24                                      ; $76C4: $FE $24
     jr   nz, jr_003_7710                          ; $76C6: $20 $48
 
-    ld   hl, wEntitiesUnknowTableQ                ; $76C8: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $76C8: $21 $80 $C3
     add  hl, de                                   ; $76CB: $19
     ld   a, [hl]                                  ; $76CC: $7E
     xor  $01                                      ; $76CD: $EE $01
-    ld   hl, wEntitiesUnknowTableQ                ; $76CF: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $76CF: $21 $80 $C3
     add  hl, bc                                   ; $76D2: $09
     cp   [hl]                                     ; $76D3: $BE
     jr   nz, jr_003_7710                          ; $76D4: $20 $3A

@@ -7844,7 +7844,7 @@ func_036_6BF8:
     ret                                           ; $6BFC: $C9
 
 func_036_6BFD:
-    ld   hl, wEntitiesUnknowTableQ                ; $6BFD: $21 $80 $C3
+    ld   hl, wEntitiesDirectionTable              ; $6BFD: $21 $80 $C3
     add  hl, bc                                   ; $6C00: $09
     ret                                           ; $6C01: $C9
 

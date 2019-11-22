@@ -2750,7 +2750,7 @@ jr_003_57D7:
     ld   hl, $5721                                ; $57D7: $21 $21 $57
     add  hl, de                                   ; $57DA: $19
     ld   a, [hl]                                  ; $57DB: $7E
-    ld   hl, $FFA2                                ; $57DC: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                                ; $57DC: $21 $A2 $FF
     add  [hl]                                     ; $57DF: $86
     ld   hl, wEntitiesPosZTable                                ; $57E0: $21 $10 $C3
     add  hl, bc                                   ; $57E3: $09
@@ -3185,7 +3185,7 @@ jr_003_5A17:
     add  hl, bc                                   ; $5A23: $09
     sub  $0C                                      ; $5A24: $D6 $0C
     ld   [hl], a                                  ; $5A26: $77
-    ldh  a, [$FFA2]                               ; $5A27: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $5A27: $F0 $A2
     ld   hl, wEntitiesPosZTable                                ; $5A29: $21 $10 $C3
     add  hl, bc                                   ; $5A2C: $09
     ld   [hl], a                                  ; $5A2D: $77
@@ -6141,7 +6141,7 @@ func_003_6BDE::
     cp   $02                                      ; $6BE1: $FE $02
     jr   nc, jr_003_6C5A                          ; $6BE3: $30 $75
 
-    ldh  a, [$FFA2]                               ; $6BE5: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $6BE5: $F0 $A2
     and  a                                        ; $6BE7: $A7
     jr   nz, jr_003_6C5A                          ; $6BE8: $20 $70
 
@@ -6241,7 +6241,7 @@ func_003_6C6B::
     jp   nc, label_003_6CCB                       ; $6C6F: $D2 $CB $6C
 
 func_003_6C72::
-    ldh  a, [$FFA2]                               ; $6C72: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $6C72: $F0 $A2
     and  a                                        ; $6C74: $A7
     jr   nz, jr_003_6C5A                          ; $6C75: $20 $E3
 

@@ -3355,7 +3355,7 @@ jr_005_52D8:
 
     call IncrementEntityState                     ; $52EF: $CD $12 $3B
     ld   a, $01                                   ; $52F2: $3E $01
-    ldh  [$FFA2], a                               ; $52F4: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $52F4: $E0 $A2
     ld   a, $02                                   ; $52F6: $3E $02
     ld   [$C146], a                               ; $52F8: $EA $46 $C1
     ld   a, $12                                   ; $52FB: $3E $12
@@ -3681,7 +3681,7 @@ jr_005_5487:
     cp   $02                                      ; $54BA: $FE $02
     jr   nz, jr_005_54C1                          ; $54BC: $20 $03
 
-    ldh  a, [$FFA2]                               ; $54BE: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $54BE: $F0 $A2
     ld   [hl], a                                  ; $54C0: $77
 
 jr_005_54C1:

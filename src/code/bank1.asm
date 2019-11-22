@@ -2926,7 +2926,7 @@ CreateFollowingNpcEntity::
     ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFA2]
+    ldh  a, [hLinkPositionZ]
     ld   hl, wEntitiesPosZTable
     add  hl, de
     ld   [hl], a
@@ -3066,7 +3066,7 @@ CreateFollowingNpcEntity::
     ld   [hl], a
     ld   hl, $D175
     call .decrementConsecutiveBytes
-    ldh  a, [$FFA2]
+    ldh  a, [hLinkPositionZ]
     ld   hl, wEntitiesPosZTable
     add  hl, de
     ld   [hl], a
@@ -3172,7 +3172,7 @@ CreateFollowingNpcEntity::
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
-    ldh  a, [$FFA2]
+    ldh  a, [hLinkPositionZ]
     ld   hl, wEntitiesPosZTable
     add  hl, de
     ld   [hl], a

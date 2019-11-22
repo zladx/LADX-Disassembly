@@ -103,8 +103,8 @@ func_002_4254::
     and  a                                        ; $4257: $A7
     jr   nz, jr_002_4286                          ; $4258: $20 $2C
 
-    ld   a, $03                                   ; $425A: $3E $03
-    call label_142F                               ; $425C: $CD $2F $14
+    ld   a, ENTITY_HOOKSHOT_CHAIN                 ; $425A: $3E $03
+    call SpawnPlayerProjectile                    ; $425C: $CD $2F $14
     jr   c, jr_002_4286                           ; $425F: $38 $25
 
     ld   hl, wEntitiesTransitionCountdownTable           ; $4261: $21 $E0 $C2
@@ -357,7 +357,7 @@ jr_002_43BA:
     ld   a, [wIndoorRoom]                               ; $43BA: $FA $AE $DB
     ld   [$D46B], a                               ; $43BD: $EA $6B $D4
     call func_002_44C2                            ; $43C0: $CD $C2 $44
-    ldh  a, [$FFA2]                               ; $43C3: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $43C3: $F0 $A2
     and  a                                        ; $43C5: $A7
     jr   nz, jr_002_43CE                          ; $43C6: $20 $06
 
@@ -652,7 +652,7 @@ jr_002_455E:
     ldh  [hLinkPositionYIncrement], a                               ; $4561: $E0 $9B
 
 jr_002_4563:
-    ldh  a, [$FFA2]                               ; $4563: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $4563: $F0 $A2
     and  a                                        ; $4565: $A7
     jr   z, jr_002_456C                           ; $4566: $28 $04
 
@@ -661,7 +661,7 @@ jr_002_4563:
 
 jr_002_456C:
     call ResetPegasusBoots                                ; $456C: $CD $B6 $0C
-    ldh  [$FFA2], a                               ; $456F: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $456F: $E0 $A2
     ld   [$C149], a                               ; $4571: $EA $49 $C1
     ldh  [$FFA3], a                               ; $4574: $E0 $A3
     ld   [$C146], a                               ; $4576: $EA $46 $C1
@@ -1053,9 +1053,9 @@ Data_002_4958::
     add  $10                                      ; $496C: $C6 $10
     ldh  [hLinkPositionY], a                      ; $496E: $E0 $99
     ldh  [hLinkFinalPositionY], a                               ; $4970: $E0 $A0
-    ldh  a, [$FFA2]                               ; $4972: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $4972: $F0 $A2
     add  $10                                      ; $4974: $C6 $10
-    ldh  [$FFA2], a                               ; $4976: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $4976: $E0 $A2
 
 jr_002_4978:
     ld   a, $FF                                   ; $4978: $3E $FF
@@ -1066,9 +1066,9 @@ jr_002_4978:
     add  $08                                      ; $4981: $C6 $08
     ldh  [hLinkPositionY], a                      ; $4983: $E0 $99
     ldh  [hLinkFinalPositionY], a                               ; $4985: $E0 $A0
-    ldh  a, [$FFA2]                               ; $4987: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $4987: $F0 $A2
     add  $08                                      ; $4989: $C6 $08
-    ldh  [$FFA2], a                               ; $498B: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $498B: $E0 $A2
     call CheckForLedgeJump                        ; $498D: $CD $45 $6E
     ldh  a, [hObjectUnderEntity]                               ; $4990: $F0 $AF
     cp   $E1                                      ; $4992: $FE $E1
@@ -1090,7 +1090,7 @@ jr_002_49A0:
 
 jr_002_49AA:
     call func_002_44FA                            ; $49AA: $CD $FA $44
-    ldh  a, [$FFA2]                               ; $49AD: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $49AD: $F0 $A2
     and  a                                        ; $49AF: $A7
     jr   nz, jr_002_49B6                          ; $49B0: $20 $04
 
@@ -1672,7 +1672,7 @@ jr_002_4D1F:
 
 func_002_4D20::
     ld   a, [wC15C]                               ; $4D20: $FA $5C $C1
-    ld   hl, $FFA2                                ; $4D23: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                                ; $4D23: $21 $A2 $FF
     or   [hl]                                     ; $4D26: $B6
     ld   hl, wLinkMotionState                     ; $4D27: $21 $1C $C1
     or   [hl]                                     ; $4D2A: $B6
@@ -2067,7 +2067,7 @@ jr_002_4EEF:
 
 jr_002_4F3C:
     call ResetSpinAttack                                ; $4F3C: $CD $AF $0C
-    ldh  [$FFA2], a                               ; $4F3F: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $4F3F: $E0 $A2
     ld   [$C146], a                               ; $4F41: $EA $46 $C1
     ld   [$C19B], a                               ; $4F44: $EA $9B $C1
     ld   [wSwordAnimationState], a                               ; $4F47: $EA $37 $C1
@@ -2321,14 +2321,14 @@ jr_002_50A2:
     cp   $E0                                      ; $50B1: $FE $E0
     jr   z, jr_002_50BA                           ; $50B3: $28 $05
 
-    ldh  a, [$FFA2]                               ; $50B5: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $50B5: $F0 $A2
     cp   $78                                      ; $50B7: $FE $78
     ret  c                                        ; $50B9: $D8
 
 jr_002_50BA:
     call $0C83                                    ; $50BA: $CD $83 $0C
     call ClearLinkPositionIncrement               ; $50BD: $CD $8E $17
-    ldh  [$FFA2], a                               ; $50C0: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $50C0: $E0 $A2
     ldh  [$FFA3], a                               ; $50C2: $E0 $A3
     ld   a, $70                                   ; $50C4: $3E $70
     ld   [$DBC8], a                               ; $50C6: $EA $C8 $DB
@@ -2510,12 +2510,12 @@ HandleGotItemB::
     ldh  a, [$FFA3]                               ; $51D9: $F0 $A3
     sub  $02                                      ; $51DB: $D6 $02
     ldh  [$FFA3], a                               ; $51DD: $E0 $A3
-    ldh  a, [$FFA2]                               ; $51DF: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $51DF: $F0 $A2
     and  $80                                      ; $51E1: $E6 $80
     jr   z, jr_002_51ED                           ; $51E3: $28 $08
 
     xor  a                                        ; $51E5: $AF
-    ldh  [$FFA2], a                               ; $51E6: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $51E6: $E0 $A2
     ld   [$C149], a                               ; $51E8: $EA $49 $C1
     ldh  [$FFA3], a                               ; $51EB: $E0 $A3
 
@@ -2524,7 +2524,7 @@ jr_002_51ED:
     ldh  [hLinkAnimationState], a                 ; $51EF: $E0 $9D
     ld   bc, $C010                                ; $51F1: $01 $10 $C0
     ldh  a, [hLinkPositionY]                      ; $51F4: $F0 $99
-    ld   hl, $FFA2                                ; $51F6: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                                ; $51F6: $21 $A2 $FF
     sub  [hl]                                     ; $51F9: $96
     ld   hl, $C13B                                ; $51FA: $21 $3B $C1
     add  [hl]                                     ; $51FD: $86
@@ -2676,7 +2676,7 @@ label_002_52B9::
     ld   a, [wLinkMapEntryPositionY]              ; $52C5: $FA $B2 $DB
     ldh  [hLinkPositionY], a                      ; $52C8: $E0 $99
     ldh  [hLinkFinalPositionY], a                 ; $52CA: $E0 $A0
-    ld   hl, $FFA2                                ; $52CC: $21 $A2 $FF
+    ld   hl, hLinkPositionZ                                ; $52CC: $21 $A2 $FF
     sub  [hl]                                     ; $52CF: $96
     ld   [$C145], a                               ; $52D0: $EA $45 $C1
     call func_002_4EDD                            ; $52D3: $CD $DD $4E
@@ -3112,7 +3112,7 @@ jr_002_5529:
     ret                                           ; $5529: $C9
 
 jr_002_552A:
-    ldh  a, [$FFA2]                               ; $552A: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $552A: $F0 $A2
     and  a                                        ; $552C: $A7
     jr   nz, jr_002_5566                          ; $552D: $20 $37
 
@@ -6152,7 +6152,7 @@ CheckPositionForMapTransition::
     ld   a, $02                                   ; $6E00: $3E $02
     ld   [$C146], a                               ; $6E02: $EA $46 $C1
     ld   a, $08                                   ; $6E05: $3E $08
-    ldh  [$FFA2], a                               ; $6E07: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $6E07: $E0 $A2
 
 .return
     jp   CheckForLedgeJumpAndReturn               ; $6E09: $C3 $45 $6E
@@ -7235,7 +7235,7 @@ jr_002_7472:
     call ClearLinkPositionIncrement               ; $7483: $CD $8E $17
     ld   [$DBC7], a                               ; $7486: $EA $C7 $DB
     ld   [$C198], a                               ; $7489: $EA $98 $C1
-    ldh  [$FFA2], a                               ; $748C: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $748C: $E0 $A2
     ldh  [$FFA3], a                               ; $748E: $E0 $A3
     jp   ResetSpinAttack                                ; $7490: $C3 $AF $0C
 
@@ -7410,7 +7410,7 @@ jr_002_7587:
     and  a                                        ; $758E: $A7
     ret  nz                                       ; $758F: $C0
 
-    ldh  a, [$FFA2]                               ; $7590: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $7590: $F0 $A2
     and  a                                        ; $7592: $A7
     jr   z, jr_002_75B2                           ; $7593: $28 $1D
 
@@ -7502,9 +7502,9 @@ func_002_75F5::
 
     ld   a, $10                                   ; $7614: $3E $10
     ldh  [$FFA3], a                               ; $7616: $E0 $A3
-    ldh  a, [$FFA2]                               ; $7618: $F0 $A2
+    ldh  a, [hLinkPositionZ]                      ; $7618: $F0 $A2
     add  $02                                      ; $761A: $C6 $02
-    ldh  [$FFA2], a                               ; $761C: $E0 $A2
+    ldh  [hLinkPositionZ], a                      ; $761C: $E0 $A2
 
 jr_002_761E:
     ld   a, $10                                   ; $761E: $3E $10

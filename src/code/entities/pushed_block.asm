@@ -65,7 +65,7 @@ jr_003_5286:
     cp   $02                                      ; $529F: $FE $02
     ret  z                                        ; $52A1: $C8
 
-    call ClearEntityType                               ; $52A2: $CD $8D $3F
+    call UnloadEntity                             ; $52A2: $CD $8D $3F
     ld   de, $5162                                ; $52A5: $11 $62 $51
     ld   b, $C4                                   ; $52A8: $06 $C4
     ld   a, [wIsIndoor]                           ; $52AA: $FA $A5 $DB

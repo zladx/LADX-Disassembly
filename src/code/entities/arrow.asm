@@ -42,4 +42,4 @@ ArrowEntityHandler::
     ret  nz                                       ; $6A5F: $C0
     ; call MarkTriggerAsResolved, and clear entity
     call MarkTriggerAsResolved                    ; $6A60: $CD $60 $0C
-    jp   ClearEntityTypeAndReturn                 ; $6A63: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $6A63: $C3 $8D $3F

@@ -3,16 +3,16 @@ BombEntityHandler::
     ldh  a, [wActiveEntityPosY]                   ; $6696: $F0 $EC
     add  $10                                      ; $6698: $C6 $10
     cp   $A0                                      ; $669A: $FE $A0
-    jp   nc, ClearEntityType                      ; $669C: $D2 $8D $3F
+    jp   nc, UnloadEntity                         ; $669C: $D2 $8D $3F
 
-    call GetEntityTransitionCountdown          ; $669F: $CD $05 $0C
+    call GetEntityTransitionCountdown             ; $669F: $CD $05 $0C
     cp   $18                                      ; $66A2: $FE $18
     jp   c, label_003_65E2                        ; $66A4: $DA $E2 $65
 
     jr   nz, jr_003_66AD                          ; $66A7: $20 $04
 
     dec  [hl]                                     ; $66A9: $35
-    call PlayBombExplosionSfx                                ; $66AA: $CD $4B $0C
+    call PlayBombExplosionSfx                     ; $66AA: $CD $4B $0C
 
 jr_003_66AD:
     ld   hl, wHasPlacedBomb                       ; $66AD: $21 $4E $C1

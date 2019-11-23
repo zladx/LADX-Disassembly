@@ -64,14 +64,14 @@ jr_003_5378:
     jr   nz, .marinReaction2                      ; $5383: $20 $08
     ; Open Marin reaction 1 (Dialog028)
     call_open_dialog $028                         ; $5385
-    jp   ClearEntityType                          ; $538A: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $538A: $C3 $8D $3F
 
 .marinReaction2
     ; Open Marin reaction 2
     call_open_dialog $199                         ; $538D
 
 jr_003_5392:
-    jp   ClearEntityType                               ; $5392: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $5392: $C3 $8D $3F
 
 jr_003_5395:
     jp   label_3935                               ; $5395: $C3 $35 $39

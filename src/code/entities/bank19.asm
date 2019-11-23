@@ -11202,7 +11202,7 @@ label_019_7E7E:
 
     call PlayBombExplosionSfx                     ; $7E98: $CD $4B $0C
     call label_27DD                               ; $7E9B: $CD $DD $27
-    jp   label_3F50                               ; $7E9E: $C3 $50 $3F
+    jp   DidKillEnemy                             ; $7E9E: $C3 $50 $3F
 
 jr_019_7EA1:
     jp   label_019_7EA4                           ; $7EA1: $C3 $A4 $7E

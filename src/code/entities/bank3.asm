@@ -499,7 +499,7 @@ func_003_4895::
 jr_003_48AD:
     ld   a, $01                                   ; $48AD: $3E $01
     ld   [wRoomEventEffectExecuted], a                               ; $48AF: $EA $8F $C1
-    jp   ClearEntityType                               ; $48B2: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $48B2: $C3 $8D $3F
 
 EntityInitHandler::
     ld   hl, wEntitiesUnknowTableH                ; $48B5: $21 $30 $C4
@@ -512,7 +512,7 @@ EntityInitHandler::
     and  $30                                      ; $48C0: $E6 $30
     jr   z, jr_003_48C7                           ; $48C2: $28 $03
 
-    jp   ClearEntityType                               ; $48C4: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $48C4: $C3 $8D $3F
 
 jr_003_48C7:
     ldh  a, [hActiveEntityType]                     ; $48C7: $F0 $EB
@@ -622,7 +622,7 @@ Data_003_4924::
     ld   hl, $DB74                                ; $495A: $21 $74 $DB
     ld   a, [wIsMarinFollowingLink]               ; $495D: $FA $73 $DB
     or   [hl]                                     ; $4960: $B6
-    jp   nz, ClearEntityType                           ; $4961: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4961: $C2 $8D $3F
 
     ret                                           ; $4964: $C9
 
@@ -739,7 +739,7 @@ jr_003_499C:
 
     ld   a, [wHasToadstool]                       ; $4A0B: $FA $4B $DB
     and  a                                        ; $4A0E: $A7
-    jp   nz, ClearEntityType                           ; $4A0F: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4A0F: $C2 $8D $3F
 
 func_003_4A12::
 jr_003_4A12:
@@ -780,7 +780,7 @@ jr_003_4A32:
 jr_003_4A46:
     ld   a, [$C5A9]                               ; $4A46: $FA $A9 $C5
     and  a                                        ; $4A49: $A7
-    jp   nz, ClearEntityType                           ; $4A4A: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4A4A: $C2 $8D $3F
 
 jr_003_4A4D:
     ld   a, $0C                                   ; $4A4D: $3E $0C
@@ -799,12 +799,12 @@ jr_003_4A4F:
     cp   $80                                      ; $4A64: $FE $80
     jr   z, jr_003_4A72                           ; $4A66: $28 $0A
 
-    jp   ClearEntityType                               ; $4A68: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $4A68: $C3 $8D $3F
 
 jr_003_4A6B:
     ld   a, [wIsBowWowFollowingLink]              ; $4A6B: $FA $56 $DB
     and  a                                        ; $4A6E: $A7
-    jp   nz, ClearEntityType                           ; $4A6F: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4A6F: $C2 $8D $3F
 
 jr_003_4A72:
     ret                                           ; $4A72: $C9
@@ -817,7 +817,7 @@ jr_003_4A72:
 
 jr_003_4A7A:
     and  $10                                      ; $4A7A: $E6 $10
-    jp   nz, ClearEntityType                           ; $4A7C: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4A7C: $C2 $8D $3F
 
     ret                                           ; $4A7F: $C9
 
@@ -827,11 +827,11 @@ jr_003_4A7A:
 
     ld   a, [$DB74]                               ; $4A86: $FA $74 $DB
     and  a                                        ; $4A89: $A7
-    jp   z, ClearEntityType                            ; $4A8A: $CA $8D $3F
+    jp   z, UnloadEntity                            ; $4A8A: $CA $8D $3F
 
     ld   a, [wIsMarinFollowingLink]               ; $4A8D: $FA $73 $DB
     and  a                                        ; $4A90: $A7
-    jp   nz, ClearEntityType                           ; $4A91: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4A91: $C2 $8D $3F
 
     inc  a                                        ; $4A94: $3C
     ld   [$C3C8], a                               ; $4A95: $EA $C8 $C3
@@ -990,7 +990,7 @@ jr_003_4B56:
 
     ld   a, [wTradeSequenceItem]                  ; $4B6D: $FA $0E $DB
     cp   $0E                                      ; $4B70: $FE $0E
-    jp   nz, ClearEntityType                           ; $4B72: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4B72: $C2 $8D $3F
 
     ld   a, [wPhotos2]                            ; $4B75: $FA $0D $DC
     and  $01                                      ; $4B78: $E6 $01
@@ -1243,7 +1243,7 @@ jr_003_4CEF:
     ld   [wDB71], a                               ; $4D01: $EA $71 $DB
 
 jr_003_4D04:
-    jp   ClearEntityType                               ; $4D04: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $4D04: $C3 $8D $3F
 
 jr_003_4D07:
     cp   $40                                      ; $4D07: $FE $40
@@ -1616,10 +1616,10 @@ jr_003_4F24:
 
     ldh  a, [hRoomStatus]                         ; $4F33: $F0 $F8
     bit  4, a                                     ; $4F35: $CB $67
-    jp   nz, ClearEntityType                           ; $4F37: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4F37: $C2 $8D $3F
 
     bit  5, a                                     ; $4F3A: $CB $6F
-    jp   z, ClearEntityType                            ; $4F3C: $CA $8D $3F
+    jp   z, UnloadEntity                            ; $4F3C: $CA $8D $3F
 
     ld   a, $02                                   ; $4F3F: $3E $02
     jp   SetEntitySpriteVariant                   ; $4F41: $C3 $0C $3B
@@ -1630,7 +1630,7 @@ jr_003_4F44:
 
     ldh  a, [hRoomStatus]                         ; $4F48: $F0 $F8
     and  $10                                      ; $4F4A: $E6 $10
-    jp   nz, ClearEntityType                           ; $4F4C: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4F4C: $C2 $8D $3F
 
     ld   a, $04                                   ; $4F4F: $3E $04
     jp   SetEntitySpriteVariant                   ; $4F51: $C3 $0C $3B
@@ -1641,11 +1641,11 @@ jr_003_4F54:
 
     ld   a, [$D969]                               ; $4F58: $FA $69 $D9
     and  $10                                      ; $4F5B: $E6 $10
-    jp   z, ClearEntityType                            ; $4F5D: $CA $8D $3F
+    jp   z, UnloadEntity                            ; $4F5D: $CA $8D $3F
 
     ldh  a, [hRoomStatus]                         ; $4F60: $F0 $F8
     and  $10                                      ; $4F62: $E6 $10
-    jp   nz, ClearEntityType                           ; $4F64: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4F64: $C2 $8D $3F
 
 jr_003_4F67:
     ret                                           ; $4F67: $C9
@@ -2048,7 +2048,7 @@ jr_003_5154:
     and  a                                        ; $5192: $A7
     jr   z, jr_003_5198                           ; $5193: $28 $03
 
-    jp   ClearEntityType                               ; $5195: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $5195: $C3 $8D $3F
 
 jr_003_5198:
     ld   a, NOISE_SFX_BLOCK_RUMBLE                ; $5198: $3E $11
@@ -2330,7 +2330,7 @@ SmashRock::
     ld   [hl], $C4                                ; $542F: $36 $C4
     ld   a, NOISE_SFX_POT_SMASHED                 ; $5431: $3E $09
     ldh  [hNoiseSfx], a                           ; $5433: $E0 $F4
-    jp   ClearEntityType                          ; $5435: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $5435: $C3 $8D $3F
 
 func_003_5438::
     ld   hl, wEntitiesCollisionsTable             ; $5438: $21 $A0 $C2
@@ -2502,7 +2502,7 @@ jr_003_5524:
     add  hl, bc                                   ; $5527: $09
     ld   a, [hl]                                  ; $5528: $7E
     and  a                                        ; $5529: $A7
-    jp   z, label_3F50                            ; $552A: $CA $50 $3F
+    jp   z, DidKillEnemy                            ; $552A: $CA $50 $3F
 
     push af                                       ; $552D: $F5
     ld   hl, wEntitiesUnknowTableZ                ; $552E: $21 $A0 $C4
@@ -2583,6 +2583,7 @@ jr_003_5599:
     call func_003_7FA9                            ; $5599: $CD $A9 $7F
     ret                                           ; $559C: $C9
 
+; Entities random drop tables
     ld   l, $2E                                   ; $559D: $2E $2E
     dec  l                                        ; $559F: $2D
     dec  l                                        ; $55A0: $2D
@@ -2614,56 +2615,63 @@ jr_003_5599:
     nop                                           ; $55C4: $00
     ld   bc, $2E00                                ; $55C5: $01 $00 $2E
     dec  l                                        ; $55C8: $2D
-    jr   c, jr_003_55FA                           ; $55C9: $38 $2F
+    db   $38, $2F                                 ; $55C9: $38 $2F
 
     ld   l, $2D                                   ; $55CB: $2E $2D
     jr   c, @+$39                                 ; $55CD: $38 $37
 
-func_003_55CF::
-    ldh  a, [hActiveEntityType]                     ; $55CF: $F0 $EB
-    cp   $23                                      ; $55D1: $FE $23
-    jr   nz, jr_003_55E2                          ; $55D3: $20 $0D
+; Spawn a dropped item when an enemy is destroyed.
+; The item can be:
+;  - The sword eaten by a Like-Like
+;  - A specific dropped item defined by the entity
+;  - A power-up (fragment of power or guardian acorn)
+;  - A random object set by the drop table
+;
+; Input:
+;   bc   destroyed entity index
+SpawnEnemyDrop::
+    ldh  a, [hActiveEntityType]                   ; $55CF: $F0 $EB
+    cp   ENTITY_LIKE_LIKE                         ; $55D1: $FE $23
+    jr   nz, .likeLikeEnd                         ; $55D3: $20 $0D
 
     ld   hl, wEntitiesUnknownTableB               ; $55D5: $21 $B0 $C2
     add  hl, bc                                   ; $55D8: $09
     ld   a, [hl]                                  ; $55D9: $7E
     and  a                                        ; $55DA: $A7
-    jr   z, jr_003_55E2                           ; $55DB: $28 $05
+    jr   z, .likeLikeEnd                          ; $55DB: $28 $05
 
-    ld   a, $31                                   ; $55DD: $3E $31
-    jp   label_003_5670                           ; $55DF: $C3 $70 $56
+    ld   a, ENTITY_SWORD                          ; $55DD: $3E $31
+    jp   .dropEntity                              ; $55DF: $C3 $70 $56
+.likeLikeEnd
 
-jr_003_55E2:
-    ld   hl, wEntitiesUnknowTableX                ; $55E2: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $55E2: $21 $E0 $C4
     add  hl, bc                                   ; $55E5: $09
     ld   a, [hl]                                  ; $55E6: $7E
     cp   $FF                                      ; $55E7: $FE $FF
     ret  z                                        ; $55E9: $C8
 
     and  a                                        ; $55EA: $A7
-    jp   nz, label_003_5670                       ; $55EB: $C2 $70 $56
+    jp   nz, .dropEntity                          ; $55EB: $C2 $70 $56
 
     ld   a, [$D471]                               ; $55EE: $FA $71 $D4
     inc  a                                        ; $55F1: $3C
     ld   [$D471], a                               ; $55F2: $EA $71 $D4
     cp   $0C                                      ; $55F5: $FE $0C
-    jr   c, jr_003_560F                           ; $55F7: $38 $16
+    jr   c, .jr_003_560F                          ; $55F7: $38 $16
 
     xor  a                                        ; $55F9: $AF
-
-jr_003_55FA:
     ld   [$D471], a                               ; $55FA: $EA $71 $D4
     ld   a, [$C1BE]                               ; $55FD: $FA $BE $C1
     ld   hl, wActivePowerUp                       ; $5600: $21 $7C $D4
     or   [hl]                                     ; $5603: $B6
     ld   hl, hIsSideScrolling                     ; $5604: $21 $F9 $FF
     or   [hl]                                     ; $5607: $B6
-    jr   nz, jr_003_560F                          ; $5608: $20 $05
+    jr   nz, .jr_003_560F                         ; $5608: $20 $05
 
     ld   a, $34                                   ; $560A: $3E $34
-    jp   label_003_5670                           ; $560C: $C3 $70 $56
+    jp   .dropEntity                              ; $560C: $C3 $70 $56
 
-jr_003_560F:
+.jr_003_560F
     ld   hl, $C4D0                                ; $560F: $21 $D0 $C4
     add  hl, bc                                   ; $5612: $09
     ld   d, b                                     ; $5613: $50
@@ -2678,20 +2686,20 @@ jr_003_560F:
     ld   d, $1E                                   ; $561D: $16 $1E
     ld   a, [wMaxHealth]                          ; $561F: $FA $5B $DB
     cp   $07                                      ; $5622: $FE $07
-    jr   c, jr_003_562E                           ; $5624: $38 $08
+    jr   c, .jr_003_562E                          ; $5624: $38 $08
 
     ld   d, $23                                   ; $5626: $16 $23
     cp   $0B                                      ; $5628: $FE $0B
-    jr   c, jr_003_562E                           ; $562A: $38 $02
+    jr   c, .jr_003_562E                          ; $562A: $38 $02
 
     ld   d, $28                                   ; $562C: $16 $28
 
-jr_003_562E:
+.jr_003_562E
     ld   hl, wPieceOfPowerKillCount               ; $562E: $21 $15 $D4
     inc  [hl]                                     ; $5631: $34
     ld   a, [hl]                                  ; $5632: $7E
     cp   d                                        ; $5633: $BA
-    jr   c, jr_003_5648                           ; $5634: $38 $12
+    jr   c, .jr_003_5648                          ; $5634: $38 $12
 
     ld   [hl], b                                  ; $5636: $70
     ld   a, [$C1BE]                               ; $5637: $FA $BE $C1
@@ -2699,21 +2707,21 @@ jr_003_562E:
     or   [hl]                                     ; $563D: $B6
     ld   hl, wActivePowerUp                       ; $563E: $21 $7C $D4
     or   [hl]                                     ; $5641: $B6
-    jr   nz, jr_003_5648                          ; $5642: $20 $04
+    jr   nz, .jr_003_5648                         ; $5642: $20 $04
 
-    ld   a, $33                                   ; $5644: $3E $33
-    jr   jr_003_5670                              ; $5646: $18 $28
+    ld   a, ENTITY_PIECE_OF_POWER                 ; $5644: $3E $33
+    jr   .dropEntity                              ; $5646: $18 $28
 
-jr_003_5648:
+.jr_003_5648
     ld   d, b                                     ; $5648: $50
     ld   hl, $55AA                                ; $5649: $21 $AA $55
     ld   a, [wC163]                               ; $564C: $FA $63 $C1
     and  a                                        ; $564F: $A7
-    jr   z, jr_003_5655                           ; $5650: $28 $03
+    jr   z, .jr_003_5655                          ; $5650: $28 $03
 
     ld   hl, $55B8                                ; $5652: $21 $B8 $55
 
-jr_003_5655:
+.jr_003_5655
     add  hl, de                                   ; $5655: $19
     call GetRandomByte                            ; $5656: $CD $0D $28
     and  [hl]                                     ; $5659: $A6
@@ -2723,7 +2731,7 @@ jr_003_5655:
     add  hl, de                                   ; $565E: $19
     ld   a, [hl]                                  ; $565F: $7E
     cp   $FF                                      ; $5660: $FE $FF
-    jr   nz, jr_003_5670                          ; $5662: $20 $0C
+    jr   nz, .dropEntity                          ; $5662: $20 $0C
 
     call GetRandomByte                            ; $5664: $CD $0D $28
     and  $07                                      ; $5667: $E6 $07
@@ -2733,17 +2741,19 @@ jr_003_5655:
     add  hl, de                                   ; $566E: $19
     ld   a, [hl]                                  ; $566F: $7E
 
-label_003_5670:
-jr_003_5670:
+.dropEntity
+    ; Spawn the entity (and return if the entity could not be created)
     call SpawnNewEntity                           ; $5670: $CD $CA $64
     ret  c                                        ; $5673: $D8
 
+    ; Configure the dropped item entity
     ld   hl, wEntitiesUnknownTableB               ; $5674: $21 $B0 $C2
     add  hl, bc                                   ; $5677: $09
     ld   a, [hl]                                  ; $5678: $7E
     ld   hl, wEntitiesUnknownTableB               ; $5679: $21 $B0 $C2
     add  hl, de                                   ; $567C: $19
     ld   [hl], a                                  ; $567D: $77
+
     ldh  a, [hScratch0]                           ; $567E: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $5680: $21 $00 $C2
     add  hl, de                                   ; $5683: $19
@@ -2752,45 +2762,49 @@ jr_003_5670:
     ld   hl, wEntitiesPosYTable                         ; $5687: $21 $10 $C2
     add  hl, de                                   ; $568A: $19
     ld   [hl], a                                  ; $568B: $77
+
     ld   hl, wEntitiesDropTimerTable                                ; $568C: $21 $50 $C4
     add  hl, de                                   ; $568F: $19
     ld   [hl], $80                                ; $5690: $36 $80
+
     ld   hl, wEntitiesUnknowTableF                ; $5692: $21 $F0 $C2
     add  hl, de                                   ; $5695: $19
     ld   [hl], $18                                ; $5696: $36 $18
+
     ld   hl, wEntitiesUnknowTableV                ; $5698: $21 $80 $C4
     add  hl, de                                   ; $569B: $19
     ld   [hl], $03                                ; $569C: $36 $03
+
     ldh  a, [hIsSideScrolling]                    ; $569E: $F0 $F9
     and  a                                        ; $56A0: $A7
-    jr   nz, jr_003_56D9                          ; $56A1: $20 $36
+    jr   nz, .isSideScrolling                     ; $56A1: $20 $36
 
     ld   hl, wEntitiesTypeTable                   ; $56A3: $21 $A0 $C3
     add  hl, de                                   ; $56A6: $19
     ld   a, [hl]                                  ; $56A7: $7E
-    cp   $30                                      ; $56A8: $FE $30
-    jr   nz, jr_003_56B8                          ; $56AA: $20 $0C
+    cp   ENTITY_KEY_DROP_POINT                    ; $56A8: $FE $30
+    jr   nz, .jr_003_56B8                         ; $56AA: $20 $0C
 
-    ldh  a, [hActiveEntityType]                     ; $56AC: $F0 $EB
-    cp   $88                                      ; $56AE: $FE $88
-    jr   nz, jr_003_56B8                          ; $56B0: $20 $06
+    ldh  a, [hActiveEntityType]                   ; $56AC: $F0 $EB
+    cp   ENTITY_ARMOS_KNIGHT                      ; $56AE: $FE $88
+    jr   nz, .jr_003_56B8                         ; $56B0: $20 $06
 
     ld   hl, wEntitiesSpriteVariantTable               ; $56B2: $21 $B0 $C3
     add  hl, de                                   ; $56B5: $19
     ld   [hl], $03                                ; $56B6: $36 $03
 
-jr_003_56B8:
-    cp   $3C                                      ; $56B8: $FE $3C
-    jr   nz, jr_003_56D1                          ; $56BA: $20 $15
+.jr_003_56B8
+    cp   ENTITY_HIDING_SLIME_KEY                  ; $56B8: $FE $3C
+    jr   nz, .slimeKeyEnd                         ; $56BA: $20 $15
 
     ldh  a, [hMapRoom]                            ; $56BC: $F0 $F6
     cp   $58                                      ; $56BE: $FE $58
-    jr   z, jr_003_56C6                           ; $56C0: $28 $04
+    jr   z, .moveKeyTowardsLink                   ; $56C0: $28 $04
 
     cp   $5A                                      ; $56C2: $FE $5A
-    jr   nz, jr_003_56D1                          ; $56C4: $20 $0B
+    jr   nz, .slimeKeyEnd                         ; $56C4: $20 $0B
 
-jr_003_56C6:
+.moveKeyTowardsLink
     push bc                                       ; $56C6: $C5
     push de                                       ; $56C7: $D5
     ld   c, e                                     ; $56C8: $4B
@@ -2799,25 +2813,27 @@ jr_003_56C6:
     call ApplyVectorTowardsLink                   ; $56CC: $CD $C7 $7E
     pop  de                                       ; $56CF: $D1
     pop  bc                                       ; $56D0: $C1
+.slimeKeyEnd
 
-jr_003_56D1:
     ld   hl, wEntitiesSpeedZTable                                ; $56D1: $21 $20 $C3
     add  hl, de                                   ; $56D4: $19
     ld   [hl], $18                                ; $56D5: $36 $18
-    jr   jr_003_56DF                              ; $56D7: $18 $06
+    jr   .applyDefaultPosZ                        ; $56D7: $18 $06
 
-jr_003_56D9:
-    ld   hl, wEntitiesSpeedYTable                       ; $56D9: $21 $50 $C2
+.isSideScrolling
+    ld   hl, wEntitiesSpeedYTable                 ; $56D9: $21 $50 $C2
     add  hl, de                                   ; $56DC: $19
     ld   [hl], $EC                                ; $56DD: $36 $EC
 
-jr_003_56DF:
-    ld   hl, wEntitiesPosZTable                                ; $56DF: $21 $10 $C3
+.applyDefaultPosZ
+    ; Give the dropped item the same Z position than the destroyed enemy
+    ld   hl, wEntitiesPosZTable                   ; $56DF: $21 $10 $C3
     add  hl, bc                                   ; $56E2: $09
     ld   a, [hl]                                  ; $56E3: $7E
-    ld   hl, wEntitiesPosZTable                                ; $56E4: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                   ; $56E4: $21 $10 $C3
     add  hl, de                                   ; $56E7: $19
     ld   [hl], a                                  ; $56E8: $77
+
     ret                                           ; $56E9: $C9
 
     ld   bc, label_808                            ; $56EA: $01 $08 $08
@@ -3062,7 +3078,7 @@ MoblinEntityHandler::
 
     ld   a, [wIsBowWowFollowingLink]              ; $582D: $FA $56 $DB
     cp   $80                                      ; $5830: $FE $80
-    jp   nz, ClearEntityType                           ; $5832: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $5832: $C2 $8D $3F
 
 jr_003_5835:
     ld   a, c                                     ; $5835: $79
@@ -3409,7 +3425,7 @@ jr_003_5A12:
     set  5, [hl]                                  ; $5A12: $CB $EE
 
 jr_003_5A14:
-    jp   ClearEntityTypeAndReturn                 ; $5A14: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $5A14: $C3 $8D $3F
 
 func_003_5A17::
 label_003_5A17:
@@ -3453,7 +3469,7 @@ func_003_5A2E::
 HeartPieceEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5A51: $F0 $F8
     and  $10                                      ; $5A53: $E6 $10
-    jp   nz, ClearEntityType                           ; $5A55: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $5A55: $C2 $8D $3F
 
     ldh  a, [hActiveEntityState]                  ; $5A58: $F0 $F0
     rst  $00                                      ; $5A5A: $C7
@@ -3562,7 +3578,7 @@ jr_003_5AED:
 
     ld   a, $06                                   ; $5B05: $3E $06
     ldh  [hNeedsUpdatingBGTiles], a               ; $5B07: $E0 $90
-    call ClearEntityType                               ; $5B09: $CD $8D $3F
+    call UnloadEntity                             ; $5B09: $CD $8D $3F
     ld   a, $0D                                   ; $5B0C: $3E $0D
     ldh  [hFFA5], a                               ; $5B0E: $E0 $A5
     xor  a                                        ; $5B10: $AF
@@ -3674,7 +3690,7 @@ SwordEntityHandler::
 
     ldh  a, [hRoomStatus]                         ; $5BA2: $F0 $F8
     and  $10                                      ; $5BA4: $E6 $10
-    jp   nz, ClearEntityType                           ; $5BA6: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $5BA6: $C2 $8D $3F
 
     ld   de, $5B97                                ; $5BA9: $11 $97 $5B
 
@@ -3753,7 +3769,7 @@ jr_003_5BE1:
     ld   a, $01                                   ; $5C2C: $3E $01
     ld   [wSwordLevel], a                         ; $5C2E: $EA $4E $DB
     call func_003_512A                            ; $5C31: $CD $2A $51
-    jp   ClearEntityType                               ; $5C34: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $5C34: $C3 $8D $3F
 
 jr_003_5C37:
     cp   $1A                                      ; $5C37: $FE $1A
@@ -3774,7 +3790,7 @@ jr_003_5C46:
 label_003_5C49:
     ldh  a, [hRoomStatus]                         ; $5C49: $F0 $F8
     and  $10                                      ; $5C4B: $E6 $10
-    jp   nz, ClearEntityType                           ; $5C4D: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                 ; $5C4D: $C2 $8D $3F
 
     ld   de, $5C47                                ; $5C50: $11 $47 $5C
     call RenderSimpleEntityWithSpriteVariantToOAM ; $5C53: $CD $77 $3C
@@ -3795,7 +3811,7 @@ jr_003_5C67:
     ld   d, $06                                   ; $5C6A: $16 $06
     call func_003_6472                            ; $5C6C: $CD $72 $64
     call func_003_512A                            ; $5C6F: $CD $2A $51
-    jp   ClearEntityType                               ; $5C72: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
 jr_003_5C75:
     jp   label_003_5A17                           ; $5C75: $C3 $17 $5A
@@ -3860,7 +3876,7 @@ jr_003_5CCD:
     dec  a                                        ; $5CCD: $3D
     jr   nz, jr_003_5CD3                          ; $5CCE: $20 $03
 
-    jp   ClearEntityType                               ; $5CD0: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $5CD0: $C3 $8D $3F
 
 jr_003_5CD3:
     jp   label_003_5A17                           ; $5CD3: $C3 $17 $5A
@@ -3949,7 +3965,7 @@ SleepyToadstoolEntityHandler::
     ld   hl, wHasToadstool                        ; $5D4B: $21 $4B $DB
     ld   a, [wMagicPowderCount]                   ; $5D4E: $FA $4C $DB
     or   [hl]                                     ; $5D51: $B6
-    jp   nz, ClearEntityType                           ; $5D52: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $5D52: $C2 $8D $3F
 
     ld   de, $5D47                                ; $5D55: $11 $47 $5D
     call RenderAnimatedActiveEntity                               ; $5D58: $CD $C0 $3B
@@ -3973,7 +3989,7 @@ jr_003_5D6C:
     call func_003_6472                            ; $5D75: $CD $72 $64
     ld   a, $01                                   ; $5D78: $3E $01
     ld   [wHasToadstool], a                       ; $5D7A: $EA $4B $DB
-    jp   ClearEntityType                               ; $5D7D: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F
 
 jr_003_5D80:
     jp   label_003_5A17                           ; $5D80: $C3 $17 $5A
@@ -4059,7 +4075,7 @@ SirensInstrumentEntityHandler::
     call label_BFB                                ; $5DE1: $CD $FB $0B
     jr   nz, jr_003_5E29                          ; $5DE4: $20 $43
 
-    call ClearEntityType                               ; $5DE6: $CD $8D $3F
+    call UnloadEntity                             ; $5DE6: $CD $8D $3F
     xor  a                                        ; $5DE9: $AF
     ldh  [hLinkAnimationState], a                 ; $5DEA: $E0 $9D
     ld   a, [$D201]                               ; $5DEC: $FA $01 $D2
@@ -4190,7 +4206,7 @@ jr_003_5E8A:
     call RenderAnimatedActiveEntity                               ; $5E96: $CD $C0 $3B
     call func_003_7F25                            ; $5E99: $CD $25 $7F
     call GetEntityTransitionCountdown                 ; $5E9C: $CD $05 $0C
-    jp   z, ClearEntityType                            ; $5E9F: $CA $8D $3F
+    jp   z, UnloadEntity                            ; $5E9F: $CA $8D $3F
 
     ret                                           ; $5EA2: $C9
 
@@ -4206,7 +4222,7 @@ jr_003_5EAE:
     ld   [$D201], a                               ; $5EAF: $EA $01 $D2
     ldh  a, [hRoomStatus]                         ; $5EB2: $F0 $F8
     and  $10                                      ; $5EB4: $E6 $10
-    jp   nz, ClearEntityType                           ; $5EB6: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $5EB6: $C2 $8D $3F
 
     ldh  a, [hMapId]                              ; $5EB9: $F0 $F7
     and  $03                                      ; $5EBB: $E6 $03
@@ -4394,11 +4410,11 @@ data_003_5FD1::
 DroppableSeashellEntityHandler::
     ld   a, [wSwordLevel]                         ; $5FD3: $FA $4E $DB
     cp   $02                                      ; $5FD6: $FE $02
-    jp   nc, ClearEntityType                           ; $5FD8: $D2 $8D $3F
+    jp   nc, UnloadEntity                           ; $5FD8: $D2 $8D $3F
 
     ldh  a, [hRoomStatus]                         ; $5FDB: $F0 $F8
     and  $10                                      ; $5FDD: $E6 $10
-    jp   nz, ClearEntityType                           ; $5FDF: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $5FDF: $C2 $8D $3F
 
     ldh  a, [hMapRoom]                            ; $5FE2: $F0 $F6
     cp   $E3                                      ; $5FE4: $FE $E3
@@ -4406,7 +4422,7 @@ DroppableSeashellEntityHandler::
 
     ldh  a, [hRoomStatus]                         ; $5FE8: $F0 $F8
     and  $40                                      ; $5FEA: $E6 $40
-    jp   z, ClearEntityType                            ; $5FEC: $CA $8D $3F
+    jp   z, UnloadEntity                            ; $5FEC: $CA $8D $3F
 
 jr_003_5FEF:
     call func_003_61DE                            ; $5FEF: $CD $DE $61
@@ -4419,7 +4435,7 @@ jr_003_5FEF:
 HidingSlimeKeyEntityHandler::
     ldh  a, [hRoomStatus]                         ; $5FFD
     and  a, $10
-    jp   nz, ClearEntityType                      ; $6001: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $6001: $C2 $8D $3F
 
     call func_003_61DE                            ; $6004: $CD $DE $61
     ld   de, $5FFB                                ; $6007: $11 $FB $5F
@@ -4468,7 +4484,7 @@ jr_003_604C:
     dec  a                                        ; $604C: $3D
     jr   nz, jr_003_6052                          ; $604D: $20 $03
 
-    jp   ClearEntityType                               ; $604F: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $604F: $C3 $8D $3F
 
 jr_003_6052:
     jp   label_003_5A17                           ; $6052: $C3 $17 $5A
@@ -4488,7 +4504,7 @@ DroppableMagicPowderEntityHandler::
 jr_003_6063:
     ld   a, [wHasToadstool]                       ; $6063: $FA $4B $DB
     and  a                                        ; $6066: $A7
-    jp   nz, ClearEntityType                           ; $6067: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $6067: $C2 $8D $3F
 
 jr_003_606A:
     call func_003_61DE                            ; $606A: $CD $DE $61
@@ -4515,7 +4531,7 @@ func_003_608C::
     ret  nc                                       ; $6091: $D0
 
     and  a                                        ; $6092: $A7
-    jp   z, ClearEntityType                            ; $6093: $CA $8D $3F
+    jp   z, UnloadEntity                            ; $6093: $CA $8D $3F
 
     and  $01                                      ; $6096: $E6 $01
     dec  a                                        ; $6098: $3D
@@ -5507,7 +5523,7 @@ label_003_65E2:
     and  a                                        ; $65EB: $A7
     jp   nz, label_003_65F2                       ; $65EC: $C2 $F2 $65
 
-    jp   ClearEntityType                               ; $65EF: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $65EF: $C3 $8D $3F
 
 label_003_65F2:
     ld   e, a                                     ; $65F2: $5F
@@ -6134,7 +6150,7 @@ Func_003_6A70::
     call PlayBombExplosionSfx                                ; $6A90: $CD $4B $0C
 
 jr_003_6A93:
-    jp   ClearEntityType                               ; $6A93: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $6A93: $C3 $8D $3F
 
 jr_003_6A96:
     ldh  a, [hActiveEntitySpriteVariant]               ; $6A96: $F0 $F1
@@ -6267,7 +6283,7 @@ label_003_6B43:
     inc  bc                                       ; $6B49: $03
     ld   bc, $FE02                                ; $6B4A: $01 $02 $FE
     ld   bc, $0320                                ; $6B4D: $01 $20 $03
-    jp   ClearEntityType                               ; $6B50: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $6B50: $C3 $8D $3F
 
     ldh  a, [hActiveEntityType]                     ; $6B53: $F0 $EB
     cp   $0A                                      ; $6B55: $FE $0A
@@ -6502,7 +6518,7 @@ CheckLinkCollisionWithProjectile::
     jr   nz, .jr_003_6C54                         ; $6C66: $20 $EC
 
 .jr_003_6C68
-    jp   ClearEntityType                               ; $6C68: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $6C68: $C3 $8D $3F
 
 func_003_6C6B::
     ldh  a, [hFrameCounter]                       ; $6C6B: $F0 $E7
@@ -7804,7 +7820,7 @@ jr_003_737E:
     ld   hl, $73E7                                ; $739F: $21 $E7 $73
     add  hl, bc                                   ; $73A2: $09
     ld   a, [hl]                                  ; $73A3: $7E
-    ld   hl, wEntitiesUnknowTableX                ; $73A4: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $73A4: $21 $E0 $C4
     add  hl, de                                   ; $73A7: $19
     ld   [hl], a                                  ; $73A8: $77
     pop  bc                                       ; $73A9: $C1
@@ -7815,9 +7831,9 @@ jr_003_73AA:
     cp   $FF                                      ; $73AC: $FE $FF
     jr   nz, jr_003_736D                          ; $73AE: $20 $BD
 
-    ld   hl, wEntitiesUnknowTableX                ; $73B0: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $73B0: $21 $E0 $C4
     add  hl, bc                                   ; $73B3: $09
-    ld   [hl], $2E                                ; $73B4: $36 $2E
+    ld   [hl], ENTITY_DROPPABLE_RUPEE             ; $73B4: $36 $2E
 
 label_003_73B6:
 jr_003_73B6:
@@ -8523,7 +8539,7 @@ jr_003_7782:
     jr   nz, jr_003_7798                          ; $7793: $20 $03
 
 jr_003_7795:
-    call ClearEntityType                               ; $7795: $CD $8D $3F
+    call UnloadEntity                             ; $7795: $CD $8D $3F
 
 jr_003_7798:
     jr   checkNextEntity                              ; $7798: $18 $05
@@ -8746,7 +8762,7 @@ jr_003_78C5:
     cp   $C1                                      ; $78D9: $FE $C1
     jr   z, jr_003_7907                           ; $78DB: $28 $2A
 
-    call ClearEntityType                               ; $78DD: $CD $8D $3F
+    call UnloadEntity                             ; $78DD: $CD $8D $3F
     jp   label_003_795C                           ; $78E0: $C3 $5C $79
 
 jr_003_78E3:
@@ -9426,7 +9442,7 @@ label_003_7C7B:
     call GetEntityTransitionCountdown             ; $7C81: $CD $05 $0C
     cp   $26                                      ; $7C84: $FE $26
     jr   c, .hookshotClearEnd                     ; $7C86: $38 $03
-    call ClearEntityType                          ; $7C88: $CD $8D $3F
+    call UnloadEntity                             ; $7C88: $CD $8D $3F
 .hookshotClearEnd
 
     ld   hl, wEntitiesStateTable                  ; $7C8B: $21 $90 $C2
@@ -9704,7 +9720,7 @@ label_003_7E05:
 label_003_7E09:
     jr   z, jr_003_7DE3                           ; $7E09: $28 $D8
 
-    jp   ClearEntityType                               ; $7E0B: $C3 $8D $3F
+    jp   UnloadEntityAndReturn                    ; $7E0B: $C3 $8D $3F
 
 func_003_7E0E::
     push bc                                       ; $7E0E: $C5

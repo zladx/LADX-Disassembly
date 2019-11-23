@@ -8023,18 +8023,18 @@ jp_3F45::
 data_3F48::
     db 1, 2, 4, 8, $10, $20, $40, $80
 
-label_3F50::
-    ld   a, BANK(func_003_55CF)
+DidKillEnemy::
+    ld   a, BANK(SpawnEnemyDrop)
     ld   [$C113], a
     ld   [MBC3SelectBank], a
-    call func_003_55CF
+    call SpawnEnemyDrop
     call ReloadSavedBank
 
     ld   hl, wEntitiesLoadOrderTable
     add  hl, bc
     ld   a, [hl]
     cp   $FF
-    jr   z, ClearEntityType
+    jr   z, UnloadEntity
     push af
     ld   a, [wKillCount2]
     ld   e, a
@@ -8049,7 +8049,7 @@ label_3F50::
 
 label_3F78::
     cp   $08
-    jr   nc, ClearEntityType
+    jr   nc, UnloadEntity
     ld   e, a
     ld   d, b
     ld   hl, data_3F48
@@ -8062,12 +8062,13 @@ label_3F78::
     add  hl, de
     or   [hl]
     ld   [hl], a
+    ; fall through UnloadEntity
 
-; Clear the type of an entity
+; Unload an entity by setting its status to 0 (ENTITY_STATUS_DISABLED)
 ; Input:
-;   c:  index of the entity
-ClearEntityType::
-ClearEntityTypeAndReturn::
+;   bc:  index of the entity
+UnloadEntity::
+UnloadEntityAndReturn::
     ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   [hl], b

@@ -6678,9 +6678,9 @@ jr_007_666B:
     call GetEntityTransitionCountdown                 ; $6671: $CD $05 $0C
     jr   nz, jr_007_668E                          ; $6674: $20 $18
 
-    ld   hl, wEntitiesUnknowTableX                ; $6676: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $6676: $21 $E0 $C4
     add  hl, bc                                   ; $6679: $09
-    ld   [hl], $2D                                ; $667A: $36 $2D
+    ld   [hl], ENTITY_DROPPABLE_HEART             ; $667A: $36 $2D
     ld   hl, wEntitiesUnknowTableV                ; $667C: $21 $80 $C4
     add  hl, bc                                   ; $667F: $09
     ld   [hl], $0C                                ; $6680: $36 $0C
@@ -8635,7 +8635,7 @@ KanaletBombableWallEntityHandler::
     ld   hl, wEntitiesLoadOrderTable              ; $71A8: $21 $60 $C4
     add  hl, bc                                   ; $71AB: $09
     ld   [hl], $FF                                ; $71AC: $36 $FF
-    ld   hl, wEntitiesUnknowTableX                ; $71AE: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $71AE: $21 $E0 $C4
     add  hl, bc                                   ; $71B1: $09
     ld   [hl], $3C                                ; $71B2: $36 $3C
 
@@ -8654,10 +8654,10 @@ jr_007_71B4:
     call SpawnNewEntity_trampoline                ; $71C7: $CD $86 $3B
     jr   c, jr_007_7246                           ; $71CA: $38 $7A
 
-    ld   hl, wEntitiesUnknowTableX                ; $71CC: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $71CC: $21 $E0 $C4
     add  hl, bc                                   ; $71CF: $09
     ld   a, [hl]                                  ; $71D0: $7E
-    ld   hl, wEntitiesUnknowTableX                ; $71D1: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $71D1: $21 $E0 $C4
     add  hl, de                                   ; $71D4: $19
     ld   [hl], a                                  ; $71D5: $77
     ldh  a, [hScratch0]                           ; $71D6: $F0 $D7
@@ -10803,7 +10803,7 @@ label_007_7EC1:
 jr_007_7F0A:
     call PlayBombExplosionSfx                                ; $7F0A: $CD $4B $0C
     call label_27DD                               ; $7F0D: $CD $DD $27
-    jp   label_3F50                               ; $7F10: $C3 $50 $3F
+    jp   DidKillEnemy                             ; $7F10: $C3 $50 $3F
 
 jr_007_7F13:
     jp   label_007_7F16                           ; $7F13: $C3 $16 $7F

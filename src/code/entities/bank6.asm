@@ -221,9 +221,9 @@ MadBomberEntityHandler::
     and  $10                                      ; $414C: $E6 $10
     jp   nz, label_006_65DB                       ; $414E: $C2 $DB $65
 
-    ld   hl, wEntitiesUnknowTableX                ; $4151: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $4151: $21 $E0 $C4
     add  hl, bc                                   ; $4154: $09
-    ld   [hl], $3C                                ; $4155: $36 $3C
+    ld   [hl], ENTITY_HIDING_SLIME_KEY            ; $4155: $36 $3C
     ld   hl, wEntitiesLoadOrderTable              ; $4157: $21 $60 $C4
     add  hl, bc                                   ; $415A: $09
     ld   [hl], $FF                                ; $415B: $36 $FF
@@ -1769,7 +1769,7 @@ jr_006_4A68:
     jr   jr_006_4AA1                              ; $4A83: $18 $1C
 
 jr_006_4A85:
-    ld   hl, wEntitiesUnknowTableX                ; $4A85: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $4A85: $21 $E0 $C4
     add  hl, de                                   ; $4A88: $19
     ld   [hl], a                                  ; $4A89: $77
     ld   hl, wEntitiesUnknowTableV                ; $4A8A: $21 $80 $C4
@@ -3086,9 +3086,9 @@ ArmosKnightEntityHandler::
     ld   hl, wEntitiesLoadOrderTable              ; $52DE: $21 $60 $C4
     add  hl, bc                                   ; $52E1: $09
     ld   [hl], $FF                                ; $52E2: $36 $FF
-    ld   hl, wEntitiesUnknowTableX                ; $52E4: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $52E4: $21 $E0 $C4
     add  hl, bc                                   ; $52E7: $09
-    ld   [hl], $30                                ; $52E8: $36 $30
+    ld   [hl], ENTITY_KEY_DROP_POINT              ; $52E8: $36 $30
     ld   hl, wEntitiesHealthTable                 ; $52EA: $21 $60 $C3
     add  hl, bc                                   ; $52ED: $09
     ld   a, [hl]                                  ; $52EE: $7E
@@ -3145,7 +3145,7 @@ label_006_5308:
     ld   a, $1A                                   ; $5338: $3E $1A
     ldh  [hNoiseSfx], a                           ; $533A: $E0 $F4
     call label_27DD                               ; $533C: $CD $DD $27
-    call label_3F50                               ; $533F: $CD $50 $3F
+    call DidKillEnemy                             ; $533F: $CD $50 $3F
     ldh  a, [hActiveEntityType]                   ; $5342: $F0 $EB
     cp   $88                                      ; $5344: $FE $88
     ret  z                                        ; $5346: $C8
@@ -4834,9 +4834,9 @@ jr_006_5CAB:
     ld   hl, wEntitiesLoadOrderTable              ; $5CB2: $21 $60 $C4
     add  hl, bc                                   ; $5CB5: $09
     ld   [hl], $FF                                ; $5CB6: $36 $FF
-    ld   hl, wEntitiesUnknowTableX                ; $5CB8: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $5CB8: $21 $E0 $C4
     add  hl, bc                                   ; $5CBB: $09
-    ld   [hl], $3C                                ; $5CBC: $36 $3C
+    ld   [hl], ENTITY_HIDING_SLIME_KEY            ; $5CBC: $36 $3C
 
 jr_006_5CBE:
     ld   hl, wEntitiesDirectionTable              ; $5CBE: $21 $80 $C3
@@ -7669,7 +7669,7 @@ jr_006_6CBD:
 
 label_006_6CBE:
     call label_27DD                               ; $6CBE: $CD $DD $27
-    call label_3F50                               ; $6CC1: $CD $50 $3F
+    call DidKillEnemy                             ; $6CC1: $CD $50 $3F
     ldh  a, [hMapId]                              ; $6CC4: $F0 $F7
     cp   $07                                      ; $6CC6: $FE $07
     ret  z                                        ; $6CC8: $C8

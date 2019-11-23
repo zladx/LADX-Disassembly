@@ -24,7 +24,7 @@ jr_036_4011:
     call func_036_6A40                            ; $4011: $CD $40 $6A
     ld   a, [wPhotos2]                            ; $4014: $FA $0D $DC
     and  $08                                      ; $4017: $E6 $08
-    jp   nz, ClearEntityTypeAndReturn             ; $4019: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4019: $C2 $8D $3F
 
     ld   a, [wDialogState]                        ; $401C: $FA $9F $C1
     and  a                                        ; $401F: $A7
@@ -55,13 +55,13 @@ jr_036_4011:
     ld   b, c                                     ; $4039: $41
     ld   a, [wPhotos1]                            ; $403A: $FA $0C $DC
     and  $01                                      ; $403D: $E6 $01
-    call z, ClearEntityTypeAndReturn              ; $403F: $CC $8D $3F
+    call z, UnloadEntity                          ; $403F: $CC $8D $3F
     ld   a, [wIsMarinFollowingLink]               ; $4042: $FA $73 $DB
     ld   hl, wIsGhostFollowingLink                ; $4045: $21 $79 $DB
     or   [hl]                                     ; $4048: $B6
     ld   hl, wIsRoosterFollowingLink              ; $4049: $21 $7B $DB
     or   [hl]                                     ; $404C: $B6
-    call nz, ClearEntityTypeAndReturn             ; $404D: $C4 $8D $3F
+    call nz, UnloadEntity                         ; $404D: $C4 $8D $3F
     call func_036_6C23                            ; $4050: $CD $23 $6C
     ld   [hl], $E8                                ; $4053: $36 $E8
     call func_036_6C28                            ; $4055: $CD $28 $6C
@@ -366,7 +366,7 @@ jr_036_4201:
 
 label_036_4217:
 jr_036_4217:
-    call ClearEntityTypeAndReturn                 ; $4217: $CD $8D $3F
+    call UnloadEntity                             ; $4217: $CD $8D $3F
     ret                                           ; $421A: $C9
 
 jr_036_421B:
@@ -431,7 +431,7 @@ jr_036_421B:
 jr_036_427A:
     xor  a                                        ; $427A: $AF
     ld   [wC167], a                               ; $427B: $EA $67 $C1
-    call ClearEntityTypeAndReturn                 ; $427E: $CD $8D $3F
+    call UnloadEntity                             ; $427E: $CD $8D $3F
     ret                                           ; $4281: $C9
 
     nop                                           ; $4282: $00
@@ -1589,14 +1589,14 @@ PhotographerEntityHandler::
 
     ld   a, [wPhotos1]                            ; $493B: $FA $0C $DC
     bit  0, a                                     ; $493E: $CB $47
-    jp   z, ClearEntityTypeAndReturn              ; $4940: $CA $8D $3F
+    jp   z, UnloadEntityAndReturn                 ; $4940: $CA $8D $3F
 
     bit  7, a                                     ; $4943: $CB $7F
-    jp   nz, ClearEntityTypeAndReturn             ; $4945: $C2 $8D $3F
+    jp   nz, UnloadEntityAndReturn                ; $4945: $C2 $8D $3F
 
     ld   a, [wTradeSequenceItem]                  ; $4948: $FA $0E $DB
     cp   $0D                                      ; $494B: $FE $0D
-    jp   c, ClearEntityTypeAndReturn              ; $494D: $DA $8D $3F
+    jp   c, UnloadEntityAndReturn                 ; $494D: $DA $8D $3F
 
     ld   de, $48CE                                ; $4950: $11 $CE $48
     call RenderAnimatedActiveEntity                               ; $4953: $CD $C0 $3B
@@ -2703,7 +2703,7 @@ jr_036_4F7F:
     and  a                                        ; $4F90: $A7
     jr   z, jr_036_4F96                           ; $4F91: $28 $03
 
-    call ClearEntityTypeAndReturn                 ; $4F93: $CD $8D $3F
+    call UnloadEntity                             ; $4F93: $CD $8D $3F
 
 jr_036_4F96:
     pop  af                                       ; $4F96: $F1
@@ -3553,7 +3553,7 @@ jr_036_542F:
     and  a                                        ; $5454: $A7
     ret  nz                                       ; $5455: $C0
 
-    call ClearEntityTypeAndReturn                 ; $5456: $CD $8D $3F
+    call UnloadEntity                             ; $5456: $CD $8D $3F
     call label_C9E                                ; $5459: $CD $9E $0C
     ret                                           ; $545C: $C9
 
@@ -5013,7 +5013,7 @@ jr_036_5C72:
     ld   a, $1A                                   ; $5C72: $3E $1A
     ldh  [hNoiseSfx], a                           ; $5C74: $E0 $F4
     call label_27DD                               ; $5C76: $CD $DD $27
-    call label_3F50                               ; $5C79: $CD $50 $3F
+    call DidKillEnemy                             ; $5C79: $CD $50 $3F
     xor  a                                        ; $5C7C: $AF
     ld   [wC167], a                               ; $5C7D: $EA $67 $C1
     ld   hl, wColorDungeonRoomStatus              ; $5C80: $21 $E0 $DD

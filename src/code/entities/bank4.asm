@@ -6215,9 +6215,9 @@ KnightEntityHandler::
     ld   hl, wEntitiesLoadOrderTable              ; $69BB: $21 $60 $C4
     add  hl, bc                                   ; $69BE: $09
     ld   [hl], $FF                                ; $69BF: $36 $FF
-    ld   hl, wEntitiesUnknowTableX                ; $69C1: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $69C1: $21 $E0 $C4
     add  hl, bc                                   ; $69C4: $09
-    ld   [hl], $3C                                ; $69C5: $36 $3C
+    ld   [hl], ENTITY_HIDING_SLIME_KEY            ; $69C5: $36 $3C
     jr   jr_004_69D5                              ; $69C7: $18 $0C
 
 jr_004_69C9:

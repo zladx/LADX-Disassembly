@@ -2644,7 +2644,7 @@ SpawnEnemyDrop::
     jp   .dropEntity                              ; $55DF: $C3 $70 $56
 .likeLikeEnd
 
-    ld   hl, wEntitiesUnknowTableX                ; $55E2: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $55E2: $21 $E0 $C4
     add  hl, bc                                   ; $55E5: $09
     ld   a, [hl]                                  ; $55E6: $7E
     cp   $FF                                      ; $55E7: $FE $FF
@@ -7820,7 +7820,7 @@ jr_003_737E:
     ld   hl, $73E7                                ; $739F: $21 $E7 $73
     add  hl, bc                                   ; $73A2: $09
     ld   a, [hl]                                  ; $73A3: $7E
-    ld   hl, wEntitiesUnknowTableX                ; $73A4: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $73A4: $21 $E0 $C4
     add  hl, de                                   ; $73A7: $19
     ld   [hl], a                                  ; $73A8: $77
     pop  bc                                       ; $73A9: $C1
@@ -7831,9 +7831,9 @@ jr_003_73AA:
     cp   $FF                                      ; $73AC: $FE $FF
     jr   nz, jr_003_736D                          ; $73AE: $20 $BD
 
-    ld   hl, wEntitiesUnknowTableX                ; $73B0: $21 $E0 $C4
+    ld   hl, wEntitiesDroppedItemTable            ; $73B0: $21 $E0 $C4
     add  hl, bc                                   ; $73B3: $09
-    ld   [hl], $2E                                ; $73B4: $36 $2E
+    ld   [hl], ENTITY_DROPPABLE_RUPEE             ; $73B4: $36 $2E
 
 label_003_73B6:
 jr_003_73B6:

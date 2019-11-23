@@ -601,9 +601,12 @@ ds $20
 wEntitiesHealthGroup:: ; C4D0
   ds $10
 
-; What item an entity will drop?
-; See SpawnEnemyDrop
-wEntitiesUnknowTableX:: ; C4E0
+wEntitiesDroppedItemTable:: ; C4E0
+  ; Item to drop when this entity is destroyed.
+  ; Possible values:
+  ;  0:     drop a random item or power-up
+  ;  01-FE: dropped entity type
+  ;  FF:    don't drop anything at all
   ds $10
 
 wEntitiesUnknowTableJ:: ; C4F0

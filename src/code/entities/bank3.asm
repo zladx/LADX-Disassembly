@@ -2502,7 +2502,7 @@ jr_003_5524:
     add  hl, bc                                   ; $5527: $09
     ld   a, [hl]                                  ; $5528: $7E
     and  a                                        ; $5529: $A7
-    jp   z, label_3F50                            ; $552A: $CA $50 $3F
+    jp   z, DidKillEnemy                            ; $552A: $CA $50 $3F
 
     push af                                       ; $552D: $F5
     ld   hl, wEntitiesUnknowTableZ                ; $552E: $21 $A0 $C4
@@ -2583,6 +2583,7 @@ jr_003_5599:
     call func_003_7FA9                            ; $5599: $CD $A9 $7F
     ret                                           ; $559C: $C9
 
+; Entities random drop tables
     ld   l, $2E                                   ; $559D: $2E $2E
     dec  l                                        ; $559F: $2D
     dec  l                                        ; $55A0: $2D
@@ -2614,26 +2615,35 @@ jr_003_5599:
     nop                                           ; $55C4: $00
     ld   bc, $2E00                                ; $55C5: $01 $00 $2E
     dec  l                                        ; $55C8: $2D
-    jr   c, jr_003_55FA                           ; $55C9: $38 $2F
+    db   $38, $2F                                 ; $55C9: $38 $2F
 
     ld   l, $2D                                   ; $55CB: $2E $2D
     jr   c, @+$39                                 ; $55CD: $38 $37
 
-func_003_55CF::
-    ldh  a, [hActiveEntityType]                     ; $55CF: $F0 $EB
-    cp   $23                                      ; $55D1: $FE $23
-    jr   nz, jr_003_55E2                          ; $55D3: $20 $0D
+; Spawn a dropped item when an enemy is destroyed.
+; The item can be:
+;  - The sword eaten by a Like-Like
+;  - A specific dropped item defined by the entity
+;  - A power-up (fragment of power or guardian acorn)
+;  - A random object set by the drop table
+;
+; Input:
+;   bc   destroyed entity index
+SpawnEnemyDrop::
+    ldh  a, [hActiveEntityType]                   ; $55CF: $F0 $EB
+    cp   ENTITY_LIKE_LIKE                         ; $55D1: $FE $23
+    jr   nz, .likeLikeEnd                         ; $55D3: $20 $0D
 
     ld   hl, wEntitiesUnknownTableB               ; $55D5: $21 $B0 $C2
     add  hl, bc                                   ; $55D8: $09
     ld   a, [hl]                                  ; $55D9: $7E
     and  a                                        ; $55DA: $A7
-    jr   z, jr_003_55E2                           ; $55DB: $28 $05
+    jr   z, .likeLikeEnd                          ; $55DB: $28 $05
 
-    ld   a, $31                                   ; $55DD: $3E $31
-    jp   label_003_5670                           ; $55DF: $C3 $70 $56
+    ld   a, ENTITY_SWORD                          ; $55DD: $3E $31
+    jp   .dropEntity                              ; $55DF: $C3 $70 $56
+.likeLikeEnd
 
-jr_003_55E2:
     ld   hl, wEntitiesUnknowTableX                ; $55E2: $21 $E0 $C4
     add  hl, bc                                   ; $55E5: $09
     ld   a, [hl]                                  ; $55E6: $7E
@@ -2641,29 +2651,27 @@ jr_003_55E2:
     ret  z                                        ; $55E9: $C8
 
     and  a                                        ; $55EA: $A7
-    jp   nz, label_003_5670                       ; $55EB: $C2 $70 $56
+    jp   nz, .dropEntity                          ; $55EB: $C2 $70 $56
 
     ld   a, [$D471]                               ; $55EE: $FA $71 $D4
     inc  a                                        ; $55F1: $3C
     ld   [$D471], a                               ; $55F2: $EA $71 $D4
     cp   $0C                                      ; $55F5: $FE $0C
-    jr   c, jr_003_560F                           ; $55F7: $38 $16
+    jr   c, .jr_003_560F                          ; $55F7: $38 $16
 
     xor  a                                        ; $55F9: $AF
-
-jr_003_55FA:
     ld   [$D471], a                               ; $55FA: $EA $71 $D4
     ld   a, [$C1BE]                               ; $55FD: $FA $BE $C1
     ld   hl, wActivePowerUp                       ; $5600: $21 $7C $D4
     or   [hl]                                     ; $5603: $B6
     ld   hl, hIsSideScrolling                     ; $5604: $21 $F9 $FF
     or   [hl]                                     ; $5607: $B6
-    jr   nz, jr_003_560F                          ; $5608: $20 $05
+    jr   nz, .jr_003_560F                         ; $5608: $20 $05
 
     ld   a, $34                                   ; $560A: $3E $34
-    jp   label_003_5670                           ; $560C: $C3 $70 $56
+    jp   .dropEntity                              ; $560C: $C3 $70 $56
 
-jr_003_560F:
+.jr_003_560F
     ld   hl, $C4D0                                ; $560F: $21 $D0 $C4
     add  hl, bc                                   ; $5612: $09
     ld   d, b                                     ; $5613: $50
@@ -2678,20 +2686,20 @@ jr_003_560F:
     ld   d, $1E                                   ; $561D: $16 $1E
     ld   a, [wMaxHealth]                          ; $561F: $FA $5B $DB
     cp   $07                                      ; $5622: $FE $07
-    jr   c, jr_003_562E                           ; $5624: $38 $08
+    jr   c, .jr_003_562E                          ; $5624: $38 $08
 
     ld   d, $23                                   ; $5626: $16 $23
     cp   $0B                                      ; $5628: $FE $0B
-    jr   c, jr_003_562E                           ; $562A: $38 $02
+    jr   c, .jr_003_562E                          ; $562A: $38 $02
 
     ld   d, $28                                   ; $562C: $16 $28
 
-jr_003_562E:
+.jr_003_562E
     ld   hl, wPieceOfPowerKillCount               ; $562E: $21 $15 $D4
     inc  [hl]                                     ; $5631: $34
     ld   a, [hl]                                  ; $5632: $7E
     cp   d                                        ; $5633: $BA
-    jr   c, jr_003_5648                           ; $5634: $38 $12
+    jr   c, .jr_003_5648                          ; $5634: $38 $12
 
     ld   [hl], b                                  ; $5636: $70
     ld   a, [$C1BE]                               ; $5637: $FA $BE $C1
@@ -2699,21 +2707,21 @@ jr_003_562E:
     or   [hl]                                     ; $563D: $B6
     ld   hl, wActivePowerUp                       ; $563E: $21 $7C $D4
     or   [hl]                                     ; $5641: $B6
-    jr   nz, jr_003_5648                          ; $5642: $20 $04
+    jr   nz, .jr_003_5648                         ; $5642: $20 $04
 
-    ld   a, $33                                   ; $5644: $3E $33
-    jr   jr_003_5670                              ; $5646: $18 $28
+    ld   a, ENTITY_PIECE_OF_POWER                 ; $5644: $3E $33
+    jr   .dropEntity                              ; $5646: $18 $28
 
-jr_003_5648:
+.jr_003_5648
     ld   d, b                                     ; $5648: $50
     ld   hl, $55AA                                ; $5649: $21 $AA $55
     ld   a, [wC163]                               ; $564C: $FA $63 $C1
     and  a                                        ; $564F: $A7
-    jr   z, jr_003_5655                           ; $5650: $28 $03
+    jr   z, .jr_003_5655                          ; $5650: $28 $03
 
     ld   hl, $55B8                                ; $5652: $21 $B8 $55
 
-jr_003_5655:
+.jr_003_5655
     add  hl, de                                   ; $5655: $19
     call GetRandomByte                            ; $5656: $CD $0D $28
     and  [hl]                                     ; $5659: $A6
@@ -2723,7 +2731,7 @@ jr_003_5655:
     add  hl, de                                   ; $565E: $19
     ld   a, [hl]                                  ; $565F: $7E
     cp   $FF                                      ; $5660: $FE $FF
-    jr   nz, jr_003_5670                          ; $5662: $20 $0C
+    jr   nz, .dropEntity                          ; $5662: $20 $0C
 
     call GetRandomByte                            ; $5664: $CD $0D $28
     and  $07                                      ; $5667: $E6 $07
@@ -2733,17 +2741,19 @@ jr_003_5655:
     add  hl, de                                   ; $566E: $19
     ld   a, [hl]                                  ; $566F: $7E
 
-label_003_5670:
-jr_003_5670:
+.dropEntity
+    ; Spawn the entity (and return if the entity could not be created)
     call SpawnNewEntity                           ; $5670: $CD $CA $64
     ret  c                                        ; $5673: $D8
 
+    ; Configure the dropped item entity
     ld   hl, wEntitiesUnknownTableB               ; $5674: $21 $B0 $C2
     add  hl, bc                                   ; $5677: $09
     ld   a, [hl]                                  ; $5678: $7E
     ld   hl, wEntitiesUnknownTableB               ; $5679: $21 $B0 $C2
     add  hl, de                                   ; $567C: $19
     ld   [hl], a                                  ; $567D: $77
+
     ldh  a, [hScratch0]                           ; $567E: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $5680: $21 $00 $C2
     add  hl, de                                   ; $5683: $19
@@ -2752,45 +2762,49 @@ jr_003_5670:
     ld   hl, wEntitiesPosYTable                         ; $5687: $21 $10 $C2
     add  hl, de                                   ; $568A: $19
     ld   [hl], a                                  ; $568B: $77
+
     ld   hl, wEntitiesDropTimerTable                                ; $568C: $21 $50 $C4
     add  hl, de                                   ; $568F: $19
     ld   [hl], $80                                ; $5690: $36 $80
+
     ld   hl, wEntitiesUnknowTableF                ; $5692: $21 $F0 $C2
     add  hl, de                                   ; $5695: $19
     ld   [hl], $18                                ; $5696: $36 $18
+
     ld   hl, wEntitiesUnknowTableV                ; $5698: $21 $80 $C4
     add  hl, de                                   ; $569B: $19
     ld   [hl], $03                                ; $569C: $36 $03
+
     ldh  a, [hIsSideScrolling]                    ; $569E: $F0 $F9
     and  a                                        ; $56A0: $A7
-    jr   nz, jr_003_56D9                          ; $56A1: $20 $36
+    jr   nz, .isSideScrolling                     ; $56A1: $20 $36
 
     ld   hl, wEntitiesTypeTable                   ; $56A3: $21 $A0 $C3
     add  hl, de                                   ; $56A6: $19
     ld   a, [hl]                                  ; $56A7: $7E
-    cp   $30                                      ; $56A8: $FE $30
-    jr   nz, jr_003_56B8                          ; $56AA: $20 $0C
+    cp   ENTITY_KEY_DROP_POINT                    ; $56A8: $FE $30
+    jr   nz, .jr_003_56B8                         ; $56AA: $20 $0C
 
-    ldh  a, [hActiveEntityType]                     ; $56AC: $F0 $EB
-    cp   $88                                      ; $56AE: $FE $88
-    jr   nz, jr_003_56B8                          ; $56B0: $20 $06
+    ldh  a, [hActiveEntityType]                   ; $56AC: $F0 $EB
+    cp   ENTITY_ARMOS_KNIGHT                      ; $56AE: $FE $88
+    jr   nz, .jr_003_56B8                         ; $56B0: $20 $06
 
     ld   hl, wEntitiesSpriteVariantTable               ; $56B2: $21 $B0 $C3
     add  hl, de                                   ; $56B5: $19
     ld   [hl], $03                                ; $56B6: $36 $03
 
-jr_003_56B8:
-    cp   $3C                                      ; $56B8: $FE $3C
-    jr   nz, jr_003_56D1                          ; $56BA: $20 $15
+.jr_003_56B8
+    cp   ENTITY_HIDING_SLIME_KEY                  ; $56B8: $FE $3C
+    jr   nz, .slimeKeyEnd                         ; $56BA: $20 $15
 
     ldh  a, [hMapRoom]                            ; $56BC: $F0 $F6
     cp   $58                                      ; $56BE: $FE $58
-    jr   z, jr_003_56C6                           ; $56C0: $28 $04
+    jr   z, .moveKeyTowardsLink                   ; $56C0: $28 $04
 
     cp   $5A                                      ; $56C2: $FE $5A
-    jr   nz, jr_003_56D1                          ; $56C4: $20 $0B
+    jr   nz, .slimeKeyEnd                         ; $56C4: $20 $0B
 
-jr_003_56C6:
+.moveKeyTowardsLink
     push bc                                       ; $56C6: $C5
     push de                                       ; $56C7: $D5
     ld   c, e                                     ; $56C8: $4B
@@ -2799,25 +2813,27 @@ jr_003_56C6:
     call ApplyVectorTowardsLink                   ; $56CC: $CD $C7 $7E
     pop  de                                       ; $56CF: $D1
     pop  bc                                       ; $56D0: $C1
+.slimeKeyEnd
 
-jr_003_56D1:
     ld   hl, wEntitiesSpeedZTable                                ; $56D1: $21 $20 $C3
     add  hl, de                                   ; $56D4: $19
     ld   [hl], $18                                ; $56D5: $36 $18
-    jr   jr_003_56DF                              ; $56D7: $18 $06
+    jr   .applyDefaultPosZ                        ; $56D7: $18 $06
 
-jr_003_56D9:
-    ld   hl, wEntitiesSpeedYTable                       ; $56D9: $21 $50 $C2
+.isSideScrolling
+    ld   hl, wEntitiesSpeedYTable                 ; $56D9: $21 $50 $C2
     add  hl, de                                   ; $56DC: $19
     ld   [hl], $EC                                ; $56DD: $36 $EC
 
-jr_003_56DF:
-    ld   hl, wEntitiesPosZTable                                ; $56DF: $21 $10 $C3
+.applyDefaultPosZ
+    ; Give the dropped item the same Z position than the destroyed enemy
+    ld   hl, wEntitiesPosZTable                   ; $56DF: $21 $10 $C3
     add  hl, bc                                   ; $56E2: $09
     ld   a, [hl]                                  ; $56E3: $7E
-    ld   hl, wEntitiesPosZTable                                ; $56E4: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                   ; $56E4: $21 $10 $C3
     add  hl, de                                   ; $56E7: $19
     ld   [hl], a                                  ; $56E8: $77
+
     ret                                           ; $56E9: $C9
 
     ld   bc, label_808                            ; $56EA: $01 $08 $08

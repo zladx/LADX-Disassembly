@@ -3145,7 +3145,7 @@ label_006_5308:
     ld   a, $1A                                   ; $5338: $3E $1A
     ldh  [hNoiseSfx], a                           ; $533A: $E0 $F4
     call label_27DD                               ; $533C: $CD $DD $27
-    call label_3F50                               ; $533F: $CD $50 $3F
+    call DidKillEnemy                             ; $533F: $CD $50 $3F
     ldh  a, [hActiveEntityType]                   ; $5342: $F0 $EB
     cp   $88                                      ; $5344: $FE $88
     ret  z                                        ; $5346: $C8
@@ -7669,7 +7669,7 @@ jr_006_6CBD:
 
 label_006_6CBE:
     call label_27DD                               ; $6CBE: $CD $DD $27
-    call label_3F50                               ; $6CC1: $CD $50 $3F
+    call DidKillEnemy                             ; $6CC1: $CD $50 $3F
     ldh  a, [hMapId]                              ; $6CC4: $F0 $F7
     cp   $07                                      ; $6CC6: $FE $07
     ret  z                                        ; $6CC8: $C8

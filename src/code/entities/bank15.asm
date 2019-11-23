@@ -10950,7 +10950,7 @@ label_015_7C4E:
     jr   nz, jr_015_7C6E                          ; $7C66: $20 $06
 
     call PlayBombExplosionSfx                     ; $7C68: $CD $4B $0C
-    jp   label_3F50                               ; $7C6B: $C3 $50 $3F
+    jp   DidKillEnemy                             ; $7C6B: $C3 $50 $3F
 
 jr_015_7C6E:
     jp   label_015_7C71                           ; $7C6E: $C3 $71 $7C

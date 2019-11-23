@@ -437,12 +437,14 @@ wEntitiesCollisionsTable:: ; C2A0
   ; 4: collision on the top
   ds $10
 
-; Unknown. Maybe entity-specific IA state?
+; Unknown. Maybe entity-specific IA state? Often incremented
 ;
 ; Octorock: enumerates 1-2-3-0
 ; Moblin: enumerates 1-2-3-0
 ; Cucoo: stays to 0
 ; Butterfly: stores a delta X to move closer to Link
+; Genie: store the substate
+; LikeLike: swallowed item
 wEntitiesUnknownTableB:: ; C2B0
   ds $10
 
@@ -599,6 +601,8 @@ ds $20
 wEntitiesHealthGroup:: ; C4D0
   ds $10
 
+; What item an entity will drop?
+; See SpawnEnemyDrop
 wEntitiesUnknowTableX:: ; C4E0
   ds $10
 

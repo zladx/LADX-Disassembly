@@ -10803,7 +10803,7 @@ label_007_7EC1:
 jr_007_7F0A:
     call PlayBombExplosionSfx                                ; $7F0A: $CD $4B $0C
     call label_27DD                               ; $7F0D: $CD $DD $27
-    jp   label_3F50                               ; $7F10: $C3 $50 $3F
+    jp   DidKillEnemy                             ; $7F10: $C3 $50 $3F
 
 jr_007_7F13:
     jp   label_007_7F16                           ; $7F13: $C3 $16 $7F

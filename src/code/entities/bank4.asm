@@ -83,14 +83,12 @@ jr_004_404E:
 jr_004_4085:
     ldh  a, [hActiveEntityState]                  ; $4085: $F0 $F0
     JP_TABLE                                      ; $4087: $C7
-    sub  b                                        ; $4088: $90
-    ld   b, b                                     ; $4089: $40
-    and  e                                        ; $408A: $A3
-    ld   b, b                                     ; $408B: $40
-    ld   d, l                                     ; $408C: $55
-    ld   b, c                                     ; $408D: $41
-    inc  d                                        ; $408E: $14
-    ld   b, d                                     ; $408F: $42
+._00 dw func_004_4090
+._01 dw func_004_40A3
+._02 dw func_004_4155
+._03 dw func_004_4214
+
+func_004_4090::
     ldh  a, [hLinkPositionY]                      ; $4090: $F0 $99
     cp   $70                                      ; $4092: $FE $70
     jr   nc, jr_004_409E                          ; $4094: $30 $08
@@ -104,6 +102,8 @@ jr_004_409E:
 
     nop                                           ; $409F: $00
     ld   bc, $0200                                ; $40A0: $01 $00 $02
+
+func_004_40A3::
     call label_C56                                ; $40A3: $CD $56 $0C
     call label_3B70                               ; $40A6: $CD $70 $3B
     call label_3B44                               ; $40A9: $CD $44 $3B
@@ -213,7 +213,8 @@ jr_004_4144:
     ld   a, [hl]                                  ; $4151: $7E
     jp   SetEntitySpriteVariant                   ; $4152: $C3 $0C $3B
 
-    call GetEntityTransitionCountdown                 ; $4155: $CD $05 $0C
+func_004_4155::
+    call GetEntityTransitionCountdown             ; $4155: $CD $05 $0C
     jr   z, jr_004_41AC                           ; $4158: $28 $52
 
     dec  a                                        ; $415A: $3D
@@ -337,6 +338,7 @@ jr_004_4210:
     xor  a                                        ; $4210: $AF
     jp   SetEntitySpriteVariant                   ; $4211: $C3 $0C $3B
 
+func_004_4214::
     ld   hl, wEntitiesUnknowTableU                ; $4214: $21 $20 $C4
     add  hl, bc                                   ; $4217: $09
     ld   a, [hl]                                  ; $4218: $7E

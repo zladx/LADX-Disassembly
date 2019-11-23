@@ -5013,7 +5013,7 @@ jr_036_5C72:
     ld   a, $1A                                   ; $5C72: $3E $1A
     ldh  [hNoiseSfx], a                           ; $5C74: $E0 $F4
     call label_27DD                               ; $5C76: $CD $DD $27
-    call label_3F50                               ; $5C79: $CD $50 $3F
+    call DidKillEnemy                             ; $5C79: $CD $50 $3F
     xor  a                                        ; $5C7C: $AF
     ld   [wC167], a                               ; $5C7D: $EA $67 $C1
     ld   hl, wColorDungeonRoomStatus              ; $5C80: $21 $E0 $DD

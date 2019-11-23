@@ -10727,7 +10727,7 @@ label_018_7F26:
     call PlayBombExplosionSfx                     ; $7F40: $CD $4B $0C
     call label_27DD                               ; $7F43: $CD $DD $27
     call func_018_7FB9                            ; $7F46: $CD $B9 $7F
-    jp   label_3F50                               ; $7F49: $C3 $50 $3F
+    jp   DidKillEnemy                             ; $7F49: $C3 $50 $3F
 
 jr_018_7F4C:
     jp   label_018_7F4F                           ; $7F4C: $C3 $4F $7F

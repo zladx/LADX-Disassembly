@@ -665,7 +665,7 @@ jr_005_43A0:
     push bc                                       ; $43A0: $C5
     ld   c, e                                     ; $43A1: $4B
     ld   b, d                                     ; $43A2: $42
-    call label_3F50                               ; $43A3: $CD $50 $3F
+    call DidKillEnemy                             ; $43A3: $CD $50 $3F
     pop  bc                                       ; $43A6: $C1
     ret                                           ; $43A7: $C9
 
@@ -11206,7 +11206,7 @@ label_005_7E9D:
     cp   $63                                      ; $7EA3: $FE $63
     jp   z, label_005_758C                        ; $7EA5: $CA $8C $75
 
-    call label_3F50                               ; $7EA8: $CD $50 $3F
+    call DidKillEnemy                             ; $7EA8: $CD $50 $3F
     ld   e, $0F                                   ; $7EAB: $1E $0F
     ld   d, b                                     ; $7EAD: $50
 

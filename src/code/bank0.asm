@@ -28,56 +28,55 @@ ReloadSavedBank::
 
 ; Load the dungeon minimap tiles and palettes.
 ;
-; The loading is done in several stages. $FF92 controls which stage is to be executed.
-; At the end of this function, $FF92 has been incremented by 1.
+; The loading is done in several stages. hBGTilesLoadingStage controls which stage
+; is to be executed. At the end of this function, hBGTilesLoadingStage is incremented by 1.
 LoadDungeonMinimapTiles::
     ; Select the bank containing the dungeon minimap tiles
     ld   a, BANK(DungeonMinimapTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-    ; $FF92 is the loading stage
-    ; If the loading stage is < 8, load the tiles
-    ldh  a, [$FF92]
+    ; If hBGTilesLoadingStage < 8, load the tiles
+    ldh  a, [hBGTilesLoadingStage]
     cp   $08
     jr   c, .loadTiles
 
-    ; If the loading stage is == 8, load the palette stage 1
+    ; If hBGTilesLoadingStage == 8, load the palette stage 1
     jr   nz, .paletteStage1End
     callsb CopyDungeonMinimapPalette
-    ld   hl, $FF92
+    ld   hl, hBGTilesLoadingStage
     inc  [hl]
     ret
 .paletteStage1End
 
-    ; If the loading stage is == 9, load the palette stage 2
+    ; If hBGTilesLoadingStage == 9, load the palette stage 2
     cp   $09
     jr   nz, .paletteStage2End
     callsb label_002_6827
-    ld   hl, $FF92
+    ld   hl, hBGTilesLoadingStage
     inc  [hl]
     ret
 .paletteStage2End
 
-    ; If the loading stage is == $0A, load the palette stage 3
+    ; If hBGTilesLoadingStage == $0A, load the palette stage 3
     cp   $0A
     jr   nz, .paletteStage3End
     callsb label_002_680B
-    ld   hl, $FF92
+    ld   hl, hBGTilesLoadingStage
     inc  [hl]
     ret
 .paletteStage3End
 
-    ; If the loading stage is >= $0B, load the palette stage 4…
+    ; else if hBGTilesLoadingStage >= $0B, load the palette stage 4…
     callsb label_002_67E5
-    ; … then reset the loading stage to zero
+    ; … and reset the loading stage to zero.
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
-    ldh  [$FF92], a
+    ldh  [hBGTilesLoadingStage], a
     ret
 
 .loadTiles
-    ; tiles offset = [hFF92] * $40
+    ; tiles offset = [hBGTilesLoadingStage] * $40
     ld   c, a
     ld   b, $00
     sla  c
@@ -103,10 +102,10 @@ LoadDungeonMinimapTiles::
     ld   bc, $0040
     ; Copy the tiles from ROM to tiles memory
     call CopyData
-    ; Increment $FF92
-    ldh  a, [$FF92]
+    ; Increment hBGTilesLoadingStage
+    ldh  a, [hBGTilesLoadingStage]
     inc  a
-    ldh  [$FF92], a
+    ldh  [hBGTilesLoadingStage], a
     ret
 
 PlayAudioStep::

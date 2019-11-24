@@ -3662,12 +3662,12 @@ label_6BB4::
     ret
 
 func_001_6BB5::
-    ldh  a, [$FF92]
+    ldh  a, [hBGTilesLoadingStage]
     cp   $08
     jp  c, label_6C77
     jr   nz, label_6BC6
     call label_6BF0
-    ld   hl, $FF92
+    ld   hl, hBGTilesLoadingStage
     inc  [hl]
     ret
 
@@ -3675,7 +3675,7 @@ label_6BC6::
     call label_6BEA
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
-    ldh  [$FF92], a
+    ldh  [hBGTilesLoadingStage], a
     ret
 
 label_6BCF::
@@ -3808,9 +3808,9 @@ label_6C77::
     ld   hl, $4D00
     add  hl, bc
     call label_C3A
-    ldh  a, [$FF92]
+    ldh  a, [hBGTilesLoadingStage]
     inc  a
-    ldh  [$FF92], a
+    ldh  [hBGTilesLoadingStage], a
     ret
 
 ; Coordinates of the borders surrounding the room objects

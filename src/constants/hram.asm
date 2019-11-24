@@ -17,14 +17,35 @@ hFF83:: ; FF83
 hGameValuesSection EQU $FF90
 
 hNeedsUpdatingBGTiles:: ; FF90
+ ; Commands for loading tiles into VRAM at the next vblank period (see label_5BC)
+ ;
+ ; Commands:
+ ;   0:   do nothing
+ ;   1:
+ ;   2:   load dungeon minimap tiles
+ ;   3:
+ ;   4:
+ ;   5:
+ ;   6:
+ ;   7:
  ds 1
 
 hNeedsUpdatingEnnemiesTiles:: ; FF91
+
+ ds 1
+
+hBGTilesLoadingStage:: ; FF92
+ ; Tiles are loaded in several passes. This stores the stage where the data loading
+ ; function is at.
+ ;
+ ; Possible values: 0 -> $0B
+ ds 1
+
+hFF93:: ; FF93
  ds 1
 
 ; Unlabeled
-hFF92:: ; hFF92
-  ds 4
+ds 2
 
 hBaseScrollX:: ; FF96
  ds 1

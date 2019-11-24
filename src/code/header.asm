@@ -48,7 +48,7 @@ Copy48BytesAndClearFlags::
     call CopyData
     xor  a
     ldh  [$FF90], a
-    ldh  [$FF92], a
+    ldh  [hBGTilesLoadingStage], a
     ld   a, $0C
     ld   [$2100], a
     ret

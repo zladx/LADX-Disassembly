@@ -451,7 +451,7 @@ label_5BC::
     ld   a, $0D
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ldh  a, [$FF92]
+    ldh  a, [hBGTilesLoadingStage]
     ld   c, a
     ld   b, $00
     sla  c
@@ -488,7 +488,7 @@ label_62F::
     ldh  a, [$FFBB]
     and  a
     jr   z, label_641
-    ldh  a, [$FF92]
+    ldh  a, [hBGTilesLoadingStage]
     dec  a
     cp   $02
     jr   c, label_647
@@ -498,14 +498,14 @@ label_641::
     call CopyData
 
 label_647::
-    ldh  a, [$FF92]
+    ldh  a, [hBGTilesLoadingStage]
     inc  a
-    ldh  [$FF92], a
+    ldh  [hBGTilesLoadingStage], a
     cp   $04
     jr   nz, label_655
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
-    ldh  [$FF92], a
+    ldh  [hBGTilesLoadingStage], a
 
 label_655::
     ret
@@ -514,7 +514,7 @@ label_656::
     ld   a, $0F
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ldh  a, [$FF92]
+    ldh  a, [hBGTilesLoadingStage]
     ld   c, a
     ld   b, $00
     sla  c
@@ -540,14 +540,14 @@ label_656::
     add  hl, bc
     ld   bc, $0040
     call CopyData
-    ldh  a, [$FF92]
+    ldh  a, [hBGTilesLoadingStage]
     inc  a
-    ldh  [$FF92], a
+    ldh  [hBGTilesLoadingStage], a
     cp   $08
     jr   nz, label_69D
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
-    ldh  [$FF92], a
+    ldh  [hBGTilesLoadingStage], a
 
 label_69D::
     ret

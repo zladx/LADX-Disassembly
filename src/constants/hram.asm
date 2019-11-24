@@ -31,7 +31,6 @@ hNeedsUpdatingBGTiles:: ; FF90
  ds 1
 
 hNeedsUpdatingEnnemiesTiles:: ; FF91
-
  ds 1
 
 hBGTilesLoadingStage:: ; FF92
@@ -41,7 +40,11 @@ hBGTilesLoadingStage:: ; FF92
  ; Possible values: 0 -> $0B
  ds 1
 
-hFF93:: ; FF93
+hEnemiesTilesLoadingStage:: ; FF93
+ ; Tiles are loaded in several passes. This stores the stage where the data loading
+ ; function is at.
+ ;
+ ; Possible values: 0 -> $0B
  ds 1
 
 ; Unlabeled

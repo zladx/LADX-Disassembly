@@ -604,7 +604,7 @@ label_69E::
 
 label_6F7::
     ld   [MBC3SelectBank], a
-    ldh  a, [$FF93]
+    ldh  a, [hEnemiesTilesLoadingStage]
     ld   c, a
     ld   b, $00
     sla  c
@@ -633,16 +633,16 @@ label_6F7::
     pop  hl
     ld   bc, $0040
     call CopyData
-    ldh  a, [$FF93]
+    ldh  a, [hEnemiesTilesLoadingStage]
     inc  a
-    ldh  [$FF93], a
+    ldh  [hEnemiesTilesLoadingStage], a
     cp   $04
     jr   nz, label_73D
 
 label_738::
     xor  a
     ldh  [hNeedsUpdatingEnnemiesTiles], a
-    ldh  [$FF93], a
+    ldh  [hEnemiesTilesLoadingStage], a
 
 label_73D::
     ret

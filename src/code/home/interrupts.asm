@@ -447,7 +447,7 @@ label_5BC::
     jp   z, label_656
     ldh  a, [hNeedsUpdatingBGTiles]
     cp   $02
-    jp   z, label_826
+    jp   z, LoadDungeonMinimapTiles
     ld   a, $0D
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -716,9 +716,7 @@ label_7AF::
     ret
 
 label_7B0::
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call $6BB5
+    callsb func_001_6BB5
     jp   $008B
 
 data_07BB::

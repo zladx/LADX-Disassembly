@@ -26,44 +26,58 @@ ReloadSavedBank::
     pop  af
     ret
 
-label_826::
-    ld   a, $12
+; Load the dungeon minimap tiles and palettes.
+;
+; The loading is done in several stages. $FF92 controls which stage is to be executed.
+; At the end of this function, $FF92 has been incremented by 1.
+LoadDungeonMinimapTiles::
+    ; Select the bank containing the dungeon minimap tiles
+    ld   a, BANK(DungeonMinimapTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
+
+    ; $FF92 is the loading stage
+    ; If the loading stage is < 8, load the tiles
     ldh  a, [$FF92]
     cp   $08
-    jr   c, .jr_873
-    jr   nz, .jr_843
+    jr   c, .loadTiles
+
+    ; If the loading stage is == 8, load the palette stage 1
+    jr   nz, .paletteStage1End
     callsb CopyDungeonMinimapPalette
-
     ld   hl, $FF92
     inc  [hl]
     ret
+.paletteStage1End
 
-.jr_843
+    ; If the loading stage is == 9, load the palette stage 2
     cp   $09
-    jr   nz, .jr_854
-    callsb label_002_6827 ; minimap-related
+    jr   nz, .paletteStage2End
+    callsb label_002_6827
     ld   hl, $FF92
     inc  [hl]
     ret
+.paletteStage2End
 
-.jr_854
+    ; If the loading stage is == $0A, load the palette stage 3
     cp   $0A
-    jr   nz, .jr_865
+    jr   nz, .paletteStage3End
     callsb label_002_680B
     ld   hl, $FF92
     inc  [hl]
     ret
+.paletteStage3End
 
-.jr_865
+    ; If the loading stage is >= $0B, load the palette stage 4…
     callsb label_002_67E5
+    ; … then reset the loading stage to zero
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
     ldh  [$FF92], a
     ret
 
-.jr_873
+.loadTiles
+    ; tiles offset = [hFF92] * $40
     ld   c, a
     ld   b, $00
     sla  c
@@ -78,14 +92,18 @@ label_826::
     rl   b
     sla  c
     rl   b
-    ld   hl, $8D00
+    ; destination = (vTiles1 + $500) + tiles offset
+    ld   hl, vTiles1 + $500
     add  hl, bc
     ld   e, l
     ld   d, h
-    ld   hl, $7E00
+    ; origin = DungeonMinimapTiles + tiles offset
+    ld   hl, DungeonMinimapTiles
     add  hl, bc
     ld   bc, $0040
+    ; Copy the tiles from ROM to tiles memory
     call CopyData
+    ; Increment $FF92
     ldh  a, [$FF92]
     inc  a
     ldh  [$FF92], a

@@ -3660,6 +3660,8 @@ label_6BAE::
 
 label_6BB4::
     ret
+
+func_001_6BB5::
     ldh  a, [$FF92]
     cp   $08
     jp  c, label_6C77

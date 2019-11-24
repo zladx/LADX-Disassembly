@@ -111,6 +111,8 @@ incbin "gfx/characters/npc_3.dmg.2bpp"
 incbin "gfx/characters/nightmare.dmg.2bpp"
 incbin "gfx/characters/npc_4.dmg.2bpp"
 incbin "gfx/items/items_3.dmg.2bpp"
+DungeonMinimapTiles::
+incbin "gfx/items/minimap_dmg.2bpp"
 
 section "bank13",romx[$4000],bank[$13]
 incbin "gfx/ending/ending.dmg.2bpp"
@@ -291,6 +293,7 @@ incbin "gfx/characters/npc_3.cgb.2bpp"
 incbin "gfx/characters/nightmare.cgb.2bpp"
 incbin "gfx/characters/npc_4.cgb.2bpp"
 incbin "gfx/items/items_3.cgb.2bpp"
+incbin "gfx/items/minimap_cgb.2bpp"
 
 section "bank33",romx[$4000],bank[$33]
 incbin "gfx/ending/ending.cgb.2bpp"

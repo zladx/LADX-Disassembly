@@ -2015,7 +2015,7 @@ jr_006_4BE1:
     db   $EC                                      ; $4BEF: $EC
     ld   b, $07                                   ; $4BF0: $06 $07
     nop                                           ; $4BF2: $00
-    ld   bc, vBlankContinue.linkSpriteDone        ; $4BF3: $01 $04 $05
+    db   $01, $04, $05                            ; $4BF3: $01 $04 $05
     ld   [bc], a                                  ; $4BF6: $02
     inc  bc                                       ; $4BF7: $03
     db   $10                                      ; $4BF8: $10
@@ -7249,7 +7249,7 @@ jr_006_6A36:
     ld   hl, sp+$7C                               ; $6A40: $F8 $7C
     ld   bc, $0000                                ; $6A42: $01 $00 $00
     ld   a, [hl]                                  ; $6A45: $7E
-    ld   bc, label_800                            ; $6A46: $01 $00 $08
+    ld   bc, $800                            ; $6A46: $01 $00 $08
     ld   a, [hl]                                  ; $6A49: $7E
     ld   hl, label_1000                           ; $6A4A: $21 $00 $10
     ld   a, h                                     ; $6A4D: $7C

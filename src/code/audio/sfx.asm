@@ -1863,7 +1863,7 @@ jr_01F_4C56:
     ld   b, $FF                                   ; $4C6A: $06 $FF
     ld   hl, sp+$00                               ; $4C6C: $F8 $00
     ld   b, $FF                                   ; $4C6E: $06 $FF
-    ld   a, [label_800]                           ; $4C70: $FA $00 $08
+    ld   a, [$800]                           ; $4C70: $FA $00 $08
     rst  $38                                      ; $4C73: $FF
     rst  $38                                      ; $4C74: $FF
     nop                                           ; $4C75: $00

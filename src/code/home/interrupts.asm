@@ -770,23 +770,20 @@ label_7D3::
     ld   [MBC3SelectBank], a
     ld   bc, $0040
     call CopyData
+
     ldh  a, [hNeedsUpdatingBGTiles]
     cp   $0A
-    jr   z, label_808
+    jr   z, .clearBGTilesFlag
     cp   $0D
+    jr   z, .clearBGTilesFlag
 
-label_800::
-    jr   z, label_808
-
-label_802::
+    ; Increment BG Tiles flag
     ldh  a, [hNeedsUpdatingBGTiles]
     inc  a
-
-label_805::
     ldh  [hNeedsUpdatingBGTiles], a
     ret
 
-label_808::
+.clearBGTilesFlag
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
     ret

@@ -7472,7 +7472,7 @@ jr_020_6EC7:
     inc  bc                                       ; $6FBE: $03
     inc  bc                                       ; $6FBF: $03
     rst  $38                                      ; $6FC0: $FF
-    ld   bc, restoreSavedWRAMBankAndReturn        ; $6FC1: $01 $FF $03
+    db   $01, $FF, $03                            ; $6FC1: $01 $FF $03
     inc  bc                                       ; $6FC4: $03
     inc  bc                                       ; $6FC5: $03
     rst  $38                                      ; $6FC6: $FF

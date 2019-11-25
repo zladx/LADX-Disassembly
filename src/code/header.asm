@@ -49,8 +49,9 @@ Copy48BytesAndClearFlags::
     xor  a
     ldh  [$FF90], a
     ldh  [hBGTilesLoadingStage], a
+.restoreBank0C
     ld   a, $0C
-    ld   [$2100], a
+    ld   [MBC3SelectBank], a
     ret
 
 section "Entry", rom0 [$100]

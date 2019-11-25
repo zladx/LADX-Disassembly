@@ -17,7 +17,7 @@ hFF83:: ; FF83
 hGameValuesSection EQU $FF90
 
 hNeedsUpdatingBGTiles:: ; FF90
- ; Commands for loading tiles into VRAM at the next vblank period (see label_5BC)
+ ; Commands for loading tiles into VRAM at the next vblank period (see LoadTiles)
  ;
  ; Commands:
  ;   0:   do nothing

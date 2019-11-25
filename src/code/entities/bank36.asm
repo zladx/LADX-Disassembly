@@ -9185,6 +9185,8 @@ func_014_72AB::
     ld   [hl], a                                  ; $72B8: $77
     ret                                           ; $72B9: $C9
 
+; On Overworld, copy some palette data to OAM buffer
+Func_036_72BA::
     ld   a, [wPaletteDataFlags]                    ; $72BA: $FA $D1 $DD
     and  a                                        ; $72BD: $A7
     ret  nz                                       ; $72BE: $C0
@@ -9198,20 +9200,21 @@ func_014_72AB::
     ret  z                                        ; $72C7: $C8
 
     ld   a, [wGameplayType]                       ; $72C8: $FA $95 $DB
-    cp   $0B                                      ; $72CB: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $72CB: $FE $0B
     ret  nz                                       ; $72CD: $C0
 
     ld   a, [wGameplaySubtype]                    ; $72CE: $FA $96 $DB
-    cp   $07                                      ; $72D1: $FE $07
+    cp   GAMEPLAY_WORLD_DEFAULT                   ; $72D1: $FE $07
     ret  nz                                       ; $72D3: $C0
 
     xor  a                                        ; $72D4: $AF
     ld   [$DE00], a                               ; $72D5: $EA $00 $DE
+
     ld   hl, wOAMBuffer                           ; $72D8: $21 $00 $C0
     ld   de, $C09C                                ; $72DB: $11 $9C $C0
     ld   b, $14                                   ; $72DE: $06 $14
 
-jr_036_72E0:
+.loop
     ld   c, [hl]                                  ; $72E0: $4E
     ld   a, [de]                                  ; $72E1: $1A
     ld   [hl+], a                                 ; $72E2: $22
@@ -9240,6 +9243,6 @@ jr_036_72E0:
     sub  c                                        ; $72FA: $91
     ld   e, a                                     ; $72FB: $5F
     dec  b                                        ; $72FC: $05
-    jr   nz, jr_036_72E0                          ; $72FD: $20 $E1
+    jr   nz, .loop                                ; $72FD: $20 $E1
 
     ret                                           ; $72FF: $C9

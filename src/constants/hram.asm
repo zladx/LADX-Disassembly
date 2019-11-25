@@ -28,6 +28,8 @@ hNeedsUpdatingBGTiles:: ; FF90
  ;   5:
  ;   6:
  ;   7:
+ ;   8-A: load inventory tiles for ocarina songs
+ ;   B-D: load shared gfx: shadows, explosions, etc
  ds 1
 
 hNeedsUpdatingEnnemiesTiles:: ; FF91

@@ -46,7 +46,7 @@ InterruptLCDStatus::
 
 .setScrollY
     ld   [rSCY], a ; scrollY
-    jp   .done
+    jp   .clearBGTilesFlag
 
 .skipScrollY
     cp   GAMEPLAY_INTRO    ; if not during the introduction sequence
@@ -76,7 +76,7 @@ InterruptLCDStatus::
     inc  a             ;
     and  $03           ; a = a % 4
     ld   [wLCDSectionIndex], a ; save SectionIndex
-    jr   .done
+    jr   .clearBGTilesFlag
 
 .setupNextInterruptForIntroSea
     ld   hl, IntroSeaScreenSections
@@ -94,7 +94,7 @@ InterruptLCDStatus::
     ld   [wLCDSectionIndex], a ; save SectionIndex
     nop
     cp   $04           ; if SectionIndex != 4
-    jr   nz, .done ; skip
+    jr   nz, .clearBGTilesFlag ; skip
     ; If we are drawing the last section (4)
     ld   a, [wIntroBGYOffset] ; Apply the Y offset to compensate for sea vertical movement
     ld   [rSCY], a               ; (so that the horizon position stays constant).
@@ -102,13 +102,13 @@ InterruptLCDStatus::
     inc  a             ;
     add  a, $60        ;
     ld   [rLYC], a     ; Fire LCD Y-compare interrupt when reaching the row for the next transition step
-    jr   .done
+    jr   .clearBGTilesFlag
 
 .clearScrollX
     xor  a
     ld   [rSCX], a ; scrollX
 
-.done
+.clearBGTilesFlag
     ; Restore banks and register
     ld   a, c
     ld   [rSVBK], a
@@ -307,14 +307,14 @@ vBlankContinue::
     ; If $FFE8 >= 8, skip drawing of Link sprite
     ldh  a, [$FFE8]
     cp   $08
-    jr   nc, .linkSpriteDone
+    jr   nc, .linkSpriteclearBGTilesFlag
 .drawLinkSprite
     call DrawLinkSprite
-.linkSpriteDone
+.linkSpriteclearBGTilesFlag
 
     ; Copy the content of wOAMBuffer to the OAM memory
     call hDMARoutine
-    ; And we're done.
+    ; And we're clearBGTilesFlag.
     jr   WaitForVBlankAndReturn
 
 .noTilesToUpdate
@@ -404,7 +404,7 @@ PhotoAlbumVBlankHandler::
     push af
     ldh  a, [hDidRenderFrame]
     and  a
-    jr   nz, .done
+    jr   nz, .clearBGTilesFlag
 
     call hDMARoutine
 
@@ -423,7 +423,7 @@ PhotoAlbumVBlankHandler::
     ld   [$DC90], a
     ld   [$DC91], a
 
-.done
+.clearBGTilesFlag
     callsw PrinterInterruptVBlank
     pop  af
     ld   [wCurrentBank], a
@@ -452,7 +452,7 @@ LoadTiles::
     cp   $06
     jp   z, Copy49A0ToTileMemory89A0
     cp   $08
-    jp   nc, label_7D3
+    jp   nc, LoadTilesCommands8ToD
 
     ld   a, [wIsIndoor]
     and  a
@@ -529,6 +529,7 @@ LoadOverworldBGTiles::
     ld   a, $0F
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
+    ; de = vTiles2 + [hBGTilesLoadingStage] * 6
     ldh  a, [hBGTilesLoadingStage]
     ld   c, a
     ld   b, $00
@@ -544,10 +545,11 @@ LoadOverworldBGTiles::
     rl   b
     sla  c
     rl   b
-    ld   hl, $9000
+    ld   hl, vTiles2
     add  hl, bc
     ld   e, l
     ld   d, h
+
     ldh  a, [$FF94]
     add  a, $40
     ld   h, a
@@ -560,7 +562,7 @@ LoadOverworldBGTiles::
     ldh  a, [hBGTilesLoadingStage]
     inc  a
     ldh  [hBGTilesLoadingStage], a
-    ; If the loading stage >= $08, we're done
+    ; If the loading stage >= $08, we're clearBGTilesFlag
     cp   $08
     jr   nz, .return
     xor  a
@@ -659,7 +661,7 @@ LoadOAMTiles::
     ldh  a, [hEnemiesTilesLoadingStage]
     inc  a
     ldh  [hEnemiesTilesLoadingStage], a
-    ; If the loading stage is >= $04, we're done
+    ; If the loading stage is >= $04, we're clearBGTilesFlag
     cp   $04
     jr   nz, .return
 
@@ -742,25 +744,46 @@ label_7B0::
     callsb func_001_6BB5
     jp   Copy48BytesAndClearFlags.restoreBank0C
 
-data_07BB::
-    db   $60, $69, $A0, $69, $C0, $69, 0, $42, $40, $42, $60, $42
+; Data origin table (in bank $0C)
+TilesGfxSource::
+; Inventory icons for ocarina songs
+._08 dw $6960
+._09 dw $69A0
+._0A dw $69C0
+; Shared GFX: shadows, explosions, etc.
+._0B dw $4200
+._0C dw $4240
+._0D dw $4260
 
-data_07C7::
-    db   0, $82, $40, $82, $60, $82, 0, $82, $40, $82, $60, $82
+; Data destination table
+TilesDestination::
+._08 dw vTiles0 + $200
+._09 dw vTiles0 + $240
+._0A dw vTiles0 + $260
+._0B dw vTiles0 + $200
+._0C dw vTiles0 + $240
+._0D dw vTiles0 + $260
 
-label_7D3::
+; Execute tile loading commands 08 to OD.
+;   08-0A: copy part of the ocarina inventory icon
+;   0B-0D: copy part of the shared gfx
+; The command is incremented at the end.
+LoadTilesCommands8ToD::
+    ; de = (a - 8) * 2
     sub  a, $08
     sla  a
     ld   e, a
     ld   d, $00
-    ld   hl, data_07BB
+    ; Data destination
+    ld   hl, TilesGfxSource
     add  hl, de
     push hl
-    ld   hl, data_07C7
+    ld   hl, TilesDestination
     add  hl, de
     ld   e, [hl]
     inc  hl
     ld   d, [hl]
+    ; Data origin
     pop  hl
     ld   a, [hli]
     ld   h, [hl]
@@ -768,6 +791,7 @@ label_7D3::
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
+    ; Data length
     ld   bc, $0040
     call CopyData
 

@@ -74,6 +74,7 @@ LinkCharacter2Tiles::
 incbin "gfx/characters/link_2.dmg.2bpp"
 AnimatedTiles::
 incbin "gfx/world/animated_tiles.w32.dmg.2bpp"
+MinimapTiles::
 incbin "gfx/world/minimap.dmg.2bpp"
 
 section "bankOD",romx[$4000],bank[$0D]

@@ -228,7 +228,7 @@ label_6F93::
     nop
 
 label_6F9C::
-    ld   [label_808], sp
+    ld   [$808], sp
     inc  b
     nop
     nop

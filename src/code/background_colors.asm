@@ -24,6 +24,7 @@ ClearBGMap0Attributes::
     ldh  [rVBK], a                                ; $5C17: $E0 $4F
     ret                                           ; $5C19: $C9
 
+; Change BG column palette during v-blank
 Func_024_5C1A::
     ldh  a, [hIsGBC]                              ; $5C1A: $F0 $FE
     and  a                                        ; $5C1C: $A7

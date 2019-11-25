@@ -180,26 +180,30 @@ LoadMinimap::
 .return
     ret                                           ; $67E4: $C9
 
+; Configure palette copy, then jump to do the copy
 label_002_67E5::
     ld   a, [wMinimapLayout]                               ; $67E5: $FA $B0 $DB
     and  $30                                      ; $67E8: $E6 $30
     swap a                                        ; $67EA: $CB $37
     JP_TABLE                                      ; $67EC: $C7
-    push af                                       ; $67ED: $F5
-    ld   h, a                                     ; $67EE: $67
-    ld_long a, $FF67                              ; $67EF: $FA $67 $FF
-    ld   h, a                                     ; $67F2: $67
-    inc  b                                        ; $67F3: $04
-    ld   l, b                                     ; $67F4: $68
+._00 dw Func_002_67F5
+._01 dw Func_002_67FA
+._02 dw Func_002_67FF
+._03 dw Func_002_6804
+
+Func_002_67F5::
     ld   hl, $9D0F                                ; $67F5: $21 $0F $9D
     jr   jr_002_6807                              ; $67F8: $18 $0D
 
+Func_002_67FA::
     ld   hl, $9D10                                ; $67FA: $21 $10 $9D
     jr   jr_002_6807                              ; $67FD: $18 $08
 
+Func_002_67FF::
     ld   hl, $9CEF                                ; $67FF: $21 $EF $9C
     jr   jr_002_6807                              ; $6802: $18 $03
 
+Func_002_6804::
     ld   hl, $9CF0                                ; $6804: $21 $F0 $9C
 
 jr_002_6807:

@@ -4786,8 +4786,8 @@ jr_004_616C:
     ld   a, $09                                   ; $616C: $3E $09
     jp   label_004_61BA                           ; $616E: $C3 $BA $61
 
-    ld   bc, label_808                            ; $6171: $01 $08 $08
-    ld   [label_808], sp                          ; $6174: $08 $08 $08
+    ld   bc, $808                            ; $6171: $01 $08 $08
+    ld   [$808], sp                          ; $6174: $08 $08 $08
     ld   bc, $0302                                ; $6177: $01 $02 $03
     nop                                           ; $617A: $00
     call GetEntityTransitionCountdown                 ; $617B: $CD $05 $0C

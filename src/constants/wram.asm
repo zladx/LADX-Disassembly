@@ -463,10 +463,11 @@ wEntitiesTransitionCountdownTable:: ; C2E0
   ; Frames before the next state transition of the entity
   ds $10
 
+; Auxiliary countdown 1?
 wEntitiesUnknowTableF:: ; C2F0
   ds $10
 
-; Unlabeled
+; Auxiliary countdown 2?
 wEntitiesUnknowTableG:: ; C300
   ds $10
 

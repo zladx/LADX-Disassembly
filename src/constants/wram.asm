@@ -437,19 +437,23 @@ wEntitiesCollisionsTable:: ; C2A0
   ; 4: collision on the top
   ds $10
 
-; Unknown. Maybe entity-specific IA state? Often incremented
+; Entity-specific state.
 ;
-; Octorock: enumerates 1-2-3-0
-; Moblin: enumerates 1-2-3-0
-; Cucoo: stays to 0
-; Butterfly: stores a delta X to move closer to Link
-; Genie: store the substate
-; LikeLike: swallowed item
-wEntitiesUnknownTableB:: ; C2B0
+; Examples:
+;  - Octorock: enumerates 1-2-3-0
+;  - Moblin: enumerates 1-2-3-0
+;  - Cucoo: stays to 0
+;  - Butterfly: stores a delta X to move closer to Link
+;  - Genie: store the substate
+;  - LikeLike: swallowed item
+wEntitiesSubstate1Table:: ; C2B0
   ds $10
 
-; Butterfly: stores a delta Y to move closer to Link
-wEntitiesUnknownTableC:: ; C2C0
+; Entity-specific state.
+;
+; Examples:
+;  - Butterfly: stores a delta Y to move closer to Link
+wEntitiesSubstate2Table:: ; C2C0
   ds $10
 
 wEntitiesUnknownTableD:: ; C2D0
@@ -459,10 +463,11 @@ wEntitiesTransitionCountdownTable:: ; C2E0
   ; Frames before the next state transition of the entity
   ds $10
 
+; Auxiliary countdown 1?
 wEntitiesUnknowTableF:: ; C2F0
   ds $10
 
-; Unlabeled
+; Auxiliary countdown 2?
 wEntitiesUnknowTableG:: ; C300
   ds $10
 
@@ -478,20 +483,14 @@ wEntitiesSpeedZTable:: ; C320
 wEntitiesUnknowTableK:: ; C330
   ds $10
 
-wEntitiesUnknowTableL:: ; C340
+wEntitiesPhysicsFlagsTable:: ; C340
   ; Physics attribute flags?
   ;
-  ; 0000 0000: hurts links; flickers
-  ; 0000 0010: left half semi-transparent?
-  ;
-  ;
-  ;
-  ;
-  ;
-  ; 1000 0000: doesn't hurt Link if set (Link's go through)
-
-  ; Hen, Dog: $92
-  ;
+  ; bits 0-3: of number allocated sprites in OAM memory
+  ; bit 4: display shadow on posZ > 0 if set
+  ; bit 5: ???
+  ; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.)
+  ; bit 7: doesn't hurt Link if set (Link's go through)
   ds $10
 
 wEntitiesHitboxFlagsTable:: ; C350
@@ -565,7 +564,14 @@ wEntitiesUnknowTableS:: ; C400
 wEntitiesUnknowTableT:: ; C410
   ds $10
 
-wEntitiesUnknowTableU:: ; C420
+wEntitiesFlashCountdownTable:: ; C420
+  ; Countdown during which an entity flashes when taking a hit.
+  ; (or when a bomb is nearing to explode.)
+  ;
+  ; A flashing entity (countdown > 0) doesn't take any damages from
+  ; sword or projectiles.
+  ;
+  ; When the countdown reaches 0, the flashing stops.
   ds $10
 
 wEntitiesUnknowTableH::  ; C430

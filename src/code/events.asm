@@ -36,7 +36,7 @@ KillAllEnemiesEffectHandler::
 
     ; Enumerate all entities
 .forEachEntity
-    ld   hl, wEntitiesUnknowTableL                ; $5D80: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $5D80: $21 $40 $C3
     add  hl, bc                                   ; $5D83: $09
     ld   a, [hl]                                  ; $5D84: $7E
     and  $80                                      ; $5D85: $E6 $80
@@ -54,7 +54,7 @@ KillAllEnemiesEffectHandler::
     ld   hl, wEntitiesUnknowTableV                ; $5D94: $21 $80 $C4
     add  hl, bc                                   ; $5D97: $09
     ld   [hl], $1F                                ; $5D98: $36 $1F
-    ld   hl, wEntitiesUnknowTableL                ; $5D9A: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $5D9A: $21 $40 $C3
     add  hl, bc                                   ; $5D9D: $09
     ld   a, [hl]                                  ; $5D9E: $7E
     and  $F0                                      ; $5D9F: $E6 $F0

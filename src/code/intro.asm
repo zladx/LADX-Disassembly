@@ -210,7 +210,7 @@ label_6F5F::
     ld   [wEntitiesPosYTable + $02], a
 
     xor  a
-    ld   [wEntitiesUnknowTableL], a
+    ld   [wEntitiesPhysicsFlagsTable], a
     ld   [$C341], a
     ld   [$C342], a
     ld   [$C343], a
@@ -1272,7 +1272,7 @@ data_764F::
 RenderIntroMarin::
     call label_71C7
     xor  a
-    ld   [wEntitiesUnknowTableL], a
+    ld   [wEntitiesPhysicsFlagsTable], a
     ld   de, data_764F
     call RenderAnimatedActiveEntity
 
@@ -1512,7 +1512,7 @@ label_77ED::
     and  $07
     ldh  [hActiveEntitySpriteVariant], a
     xor  a
-    ld   [wEntitiesUnknowTableL], a
+    ld   [wEntitiesPhysicsFlagsTable], a
     ld   de, label_77BD
     call RenderAnimatedActiveEntity
     ld   a, [$C3C0]
@@ -1810,7 +1810,7 @@ RenderIntroInertLink::
     xor  a
 
 label_7A36::
-    ld   [wEntitiesUnknowTableL], a
+    ld   [wEntitiesPhysicsFlagsTable], a
     ld   de, data_7A27
     call RenderAnimatedActiveEntity
     ld   a, [$C3C0]

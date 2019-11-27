@@ -2279,7 +2279,7 @@ jr_002_503B:
     ld   hl, wEntitiesPosZTable                                ; $506D: $21 $10 $C3
     add  hl, de                                   ; $5070: $19
     ld   [hl], $03                                ; $5071: $36 $03
-    ld   hl, wEntitiesUnknowTableL                ; $5073: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $5073: $21 $40 $C3
     add  hl, de                                   ; $5076: $19
     res  4, [hl]                                  ; $5077: $CB $A6
 
@@ -6447,7 +6447,7 @@ jr_002_6FD7:
     ld   a, ENTITY_MIMIC                          ; $6FD7: $3E $28
     call SpawnNewEntity_trampoline                ; $6FD9: $CD $86 $3B
 
-    ld   hl, wEntitiesUnknownTableC               ; $6FDC: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $6FDC: $21 $C0 $C2
     add  hl, de                                   ; $6FDF: $19
     inc  [hl]                                     ; $6FE0: $34
     jr   jr_002_702C                              ; $6FE1: $18 $49
@@ -7067,7 +7067,7 @@ jr_002_734F:
     ld   hl, wEntitiesUnknowTableF                ; $7394: $21 $F0 $C2
     add  hl, de                                   ; $7397: $19
     ld   [hl], $0F                                ; $7398: $36 $0F
-    ld   hl, wEntitiesUnknowTableL                ; $739A: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $739A: $21 $40 $C3
     add  hl, de                                   ; $739D: $19
     ld   [hl], $C4                                ; $739E: $36 $C4
     jp   label_002_7461                           ; $73A0: $C3 $61 $74

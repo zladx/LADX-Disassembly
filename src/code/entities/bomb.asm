@@ -23,7 +23,7 @@ jr_003_66AD:
     cp   $48                                      ; $66B5: $FE $48
     jr   nz, jr_003_66BF                          ; $66B7: $20 $06
 
-    ld   hl, wEntitiesUnknowTableU                ; $66B9: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $66B9: $21 $20 $C4
     add  hl, bc                                   ; $66BC: $09
     ld   [hl], $30                                ; $66BD: $36 $30
 

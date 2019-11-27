@@ -2014,7 +2014,7 @@ jr_017_55A3:
     ld   hl, $C2B0                                ; $55C3: $21 $B0 $C2
     add  hl, de                                   ; $55C6: $19
     ld   [hl], $03                                ; $55C7: $36 $03
-    ld   hl, wEntitiesUnknowTableL                ; $55C9: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $55C9: $21 $40 $C3
     add  hl, de                                   ; $55CC: $19
     ld   [hl], $C2                                ; $55CD: $36 $C2
     ld   hl, wEntitiesDropTimerTable                                ; $55CF: $21 $50 $C4
@@ -5744,7 +5744,7 @@ jr_017_750F:
     rlca                                          ; $7540: $07
     ld   [$6010], sp                              ; $7541: $08 $10 $60
     rlca                                          ; $7544: $07
-    ld   hl, wEntitiesUnknowTableL                ; $7545: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $7545: $21 $40 $C3
     add  hl, bc                                   ; $7548: $09
     ld   [hl], $C3                                ; $7549: $36 $C3
     ldh  a, [$FFF1]                               ; $754B: $F0 $F1
@@ -6214,7 +6214,7 @@ jr_017_7739:
     rlca                                          ; $7752: $07
     ld   [$6010], sp                              ; $7753: $08 $10 $60
     rlca                                          ; $7756: $07
-    ld   hl, wEntitiesUnknowTableL                ; $7757: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $7757: $21 $40 $C3
     add  hl, bc                                   ; $775A: $09
     ld   [hl], $C3                                ; $775B: $36 $C3
     ld   hl, $774B                                ; $775D: $21 $4B $77
@@ -6251,7 +6251,7 @@ jr_017_7783:
     ld   [hl], a                                  ; $7783: $77
 
 jr_017_7784:
-    ld   hl, wEntitiesUnknowTableL                ; $7784: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $7784: $21 $40 $C3
     add  hl, bc                                   ; $7787: $09
     ld   [hl], $C1                                ; $7788: $36 $C1
     ld   hl, wEntitiesSpeedXTable                                ; $778A: $21 $40 $C2
@@ -6381,7 +6381,7 @@ jr_017_7826:
     inc  bc                                       ; $7839: $03
     ld   l, d                                     ; $783A: $6A
     inc  bc                                       ; $783B: $03
-    ld   hl, wEntitiesUnknowTableL                ; $783C: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $783C: $21 $40 $C3
     add  hl, bc                                   ; $783F: $09
     ld   [hl], $C1                                ; $7840: $36 $C1
     ld   a, c                                     ; $7842: $79
@@ -6434,7 +6434,7 @@ jr_017_7867:
     inc  b                                        ; $7882: $04
     ld   a, [hl]                                  ; $7883: $7E
     inc  b                                        ; $7884: $04
-    ld   hl, wEntitiesUnknowTableL                ; $7885: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $7885: $21 $40 $C3
     add  hl, bc                                   ; $7888: $09
     ld   [hl], $C2                                ; $7889: $36 $C2
     ldh  a, [$FFF1]                               ; $788B: $F0 $F1

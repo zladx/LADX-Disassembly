@@ -1689,8 +1689,8 @@ func_014_50C3::
     cp   ENTITY_STATUS_ACTIVE                     ; $50CC: $FE $05
     jr   nz, .continue                            ; $50CE: $20 $41
 
-    ; and the wEntitiesUnknowTableL flag 00100000 is set
-    ld   hl, wEntitiesUnknowTableL                ; $50D0: $21 $40 $C3
+    ; and the wEntitiesPhysicsFlagsTable flag 00100000 is set
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $50D0: $21 $40 $C3
     add  hl, de                                   ; $50D3: $19
     ld   a, [hl]                                  ; $50D4: $7E
     and  %00100000                                ; $50D5: $E6 $20

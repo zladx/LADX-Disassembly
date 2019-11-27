@@ -5,7 +5,7 @@
 SECTION "ROM Bank $003", ROMX[$4000], BANK[$3]
 
 ; Array indexed by entity type
-; See wEntitiesUnknowTableL
+; See wEntitiesPhysicsFlagsTable
 Data_003_4000::
     db   $42
     db   $C2
@@ -453,11 +453,11 @@ label_003_486B:
     ld   e, [hl]                                  ; $486F: $5E
     ld   d, b                                     ; $4870: $50
 
-    ; wEntitiesUnknowTableL = Data_003_4000[EntityType]
+    ; wEntitiesPhysicsFlagsTable = Data_003_4000[EntityType]
     ld   hl, Data_003_4000                        ; $4871: $21 $00 $40
     add  hl, de                                   ; $4874: $19
     ld   a, [hl]                                  ; $4875: $7E
-    ld   hl, wEntitiesUnknowTableL                ; $4876: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $4876: $21 $40 $C3
     add  hl, bc                                   ; $4879: $09
     ld   [hl], a                                  ; $487A: $77
 
@@ -1170,7 +1170,7 @@ jr_003_4C8C:
     ld   hl, wEntitiesStatusTable                         ; $4C92: $21 $80 $C2
     add  hl, bc                                   ; $4C95: $09
     ld   [hl], $01                                ; $4C96: $36 $01
-    ld   hl, wEntitiesUnknowTableL                ; $4C98: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $4C98: $21 $40 $C3
     add  hl, bc                                   ; $4C9B: $09
     ld   [hl], $04                                ; $4C9C: $36 $04
     ld   hl, hNoiseSfx                            ; $4C9E: $21 $F4 $FF
@@ -1442,7 +1442,7 @@ jr_003_4E35:
     and  a                                        ; $4E38: $A7
     jr   nz, jr_003_4E72                          ; $4E39: $20 $37
 
-    ld   hl, wEntitiesUnknowTableL                ; $4E3B: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $4E3B: $21 $40 $C3
     add  hl, bc                                   ; $4E3E: $09
     ld   a, [hl]                                  ; $4E3F: $7E
     push hl                                       ; $4E40: $E5
@@ -2169,7 +2169,7 @@ label_003_52D7:
     cp   $05                                      ; $52DC: $FE $05
     jr   c, jr_003_531E                           ; $52DE: $38 $3E
 
-    ld   hl, wEntitiesUnknowTableL                ; $52E0: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $52E0: $21 $40 $C3
     add  hl, de                                   ; $52E3: $19
     ld   a, [hl]                                  ; $52E4: $7E
     and  $40                                      ; $52E5: $E6 $40
@@ -2195,7 +2195,7 @@ label_003_52D7:
     cp   $18                                      ; $5306: $FE $18
     jr   nc, jr_003_531E                          ; $5308: $30 $14
 
-    ld   hl, wEntitiesUnknowTableL                ; $530A: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $530A: $21 $40 $C3
     add  hl, de                                   ; $530D: $19
     ld   a, [hl]                                  ; $530E: $7E
     and  $20                                      ; $530F: $E6 $20
@@ -2290,7 +2290,7 @@ jr_003_53F9:
     ld   hl, wEntitiesUnknowTableF                ; $53F9: $21 $F0 $C2
     add  hl, bc                                   ; $53FC: $09
     ld   [hl], e                                  ; $53FD: $73
-    ld   hl, wEntitiesUnknowTableL                ; $53FE: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $53FE: $21 $40 $C3
     add  hl, bc                                   ; $5401: $09
     ld   a, [hl]                                  ; $5402: $7E
     add  $02                                      ; $5403: $C6 $02
@@ -2325,7 +2325,7 @@ SmashRock::
     ld   hl, wEntitiesUnknowTableF                ; $5425: $21 $F0 $C2
     add  hl, de                                   ; $5428: $19
     ld   [hl], $0F                                ; $5429: $36 $0F
-    ld   hl, wEntitiesUnknowTableL                ; $542B: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $542B: $21 $40 $C3
     add  hl, de                                   ; $542E: $19
     ld   [hl], $C4                                ; $542F: $36 $C4
     ld   a, NOISE_SFX_POT_SMASHED                 ; $5431: $3E $09
@@ -5600,7 +5600,7 @@ func_003_6650::
     add  hl, de                                   ; $6658: $19
     ld   a, [hl]                                  ; $6659: $7E
     call SetEntitySpriteVariant                   ; $665A: $CD $0C $3B
-    ld   hl, wEntitiesUnknowTableL                ; $665D: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $665D: $21 $40 $C3
     add  hl, bc                                   ; $6660: $09
     ld   a, [hl]                                  ; $6661: $7E
     and  $F0                                      ; $6662: $E6 $F0
@@ -6598,7 +6598,7 @@ jr_003_6CB5:
     jr   nc, jr_003_6CCB                          ; $6CBE: $30 $0B
 
 func_003_6CC0::
-    ld   hl, wEntitiesUnknowTableL                ; $6CC0: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $6CC0: $21 $40 $C3
     add  hl, bc                                   ; $6CC3: $09
     ld   a, [hl]                                  ; $6CC4: $7E
     and  $80                                      ; $6CC5: $E6 $80
@@ -6944,7 +6944,7 @@ jr_003_6E8E:
     cp   e                                        ; $6E97: $BB
     jp   nc, label_003_73E6                       ; $6E98: $D2 $E6 $73
 
-    ld   hl, wEntitiesUnknowTableL                ; $6E9B: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $6E9B: $21 $40 $C3
     add  hl, bc                                   ; $6E9E: $09
     ld   a, [hl]                                  ; $6E9F: $7E
     and  $20                                      ; $6EA0: $E6 $20
@@ -7579,7 +7579,7 @@ jr_003_7235:
     ld   [hl], $03                                ; $724A: $36 $03
     call GetEntityTransitionCountdown                 ; $724C: $CD $05 $0C
     ld   [hl], $60                                ; $724F: $36 $60
-    ld   hl, wEntitiesUnknowTableL                ; $7251: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $7251: $21 $40 $C3
     add  hl, bc                                   ; $7254: $09
     inc  [hl]                                     ; $7255: $34
     inc  [hl]                                     ; $7256: $34
@@ -7764,7 +7764,7 @@ jr_003_733E:
     and  $80                                      ; $7353: $E6 $80
     jr   nz, jr_003_7361                          ; $7355: $20 $0A
 
-    ld   hl, wEntitiesUnknowTableL                ; $7357: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $7357: $21 $40 $C3
     add  hl, bc                                   ; $735A: $09
     ld   a, [hl]                                  ; $735B: $7E
     and  $F0                                      ; $735C: $E6 $F0
@@ -8208,8 +8208,8 @@ entitiesLoop:
     cp   ENTITY_STATUS_ACTIVE                      ; $75B8: $FE $05
     jp   c, checkNextEntity                    ; $75BA: $DA $9F $77
 
-    ; If wEntitiesUnknowTableL[de] is not 0, move to next
-    ld   hl, wEntitiesUnknowTableL                ; $75BD: $21 $40 $C3
+    ; If wEntitiesPhysicsFlagsTable[de] is not 0, move to next
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $75BD: $21 $40 $C3
     add  hl, de                                   ; $75C0: $19
     ld   a, [hl]                                  ; $75C1: $7E
     and  $40                                      ; $75C2: $E6 $40
@@ -8285,7 +8285,7 @@ entitiesLoop:
     jp   checkNextEntity                           ; $762D: $C3 $9F $77
 .bombiteEnd
 
-    ld   hl, wEntitiesUnknowTableL                ; $7630: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $7630: $21 $40 $C3
     add  hl, de                                   ; $7633: $19
     ld   a, [hl]                                  ; $7634: $7E
     and  $20                                      ; $7635: $E6 $20
@@ -8454,7 +8454,7 @@ jr_003_771F:
     call GetEntityTransitionCountdown                 ; $771F: $CD $05 $0C
     xor  a                                        ; $7722: $AF
     ld   [hl], a                                  ; $7723: $77
-    ld   hl, wEntitiesUnknowTableL                ; $7724: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $7724: $21 $40 $C3
     add  hl, de                                   ; $7727: $19
     ld   a, [hl]                                  ; $7728: $7E
     and  $20                                      ; $7729: $E6 $20
@@ -8606,7 +8606,7 @@ jr_003_77DD:
     cp   $05                                      ; $77E2: $FE $05
     jr   c, jr_003_7834                           ; $77E4: $38 $4E
 
-    ld   hl, wEntitiesUnknowTableL                ; $77E6: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $77E6: $21 $40 $C3
     add  hl, de                                   ; $77E9: $19
     ld   a, [hl]                                  ; $77EA: $7E
     and  $60                                      ; $77EB: $E6 $60

@@ -478,20 +478,14 @@ wEntitiesSpeedZTable:: ; C320
 wEntitiesUnknowTableK:: ; C330
   ds $10
 
-wEntitiesUnknowTableL:: ; C340
+wEntitiesPhysicsFlagsTable:: ; C340
   ; Physics attribute flags?
   ;
-  ; 0000 0000: hurts links; flickers
-  ; 0000 0010: left half semi-transparent?
-  ;
-  ;
-  ;
-  ;
-  ;
-  ; 1000 0000: doesn't hurt Link if set (Link's go through)
-
-  ; Hen, Dog: $92
-  ;
+  ; bits 0-3: of number allocated sprites in OAM memory
+  ; bit 4: display shadow on posZ > 0 if set
+  ; bit 5: ???
+  ; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.)
+  ; bit 7: doesn't hurt Link if set (Link's go through)
   ds $10
 
 wEntitiesHitboxFlagsTable:: ; C350

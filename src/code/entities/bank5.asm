@@ -1328,7 +1328,7 @@ jr_005_46E9:
     add  hl, de                                   ; $4715: $19
     ld   [hl], $10                                ; $4716: $36 $10
 
-    ld   hl, wEntitiesUnknowTableL                ; $4718: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $4718: $21 $40 $C3
     add  hl, de                                   ; $471B: $19
     ld   [hl], $12                                ; $471C: $36 $12
 
@@ -1741,7 +1741,7 @@ RacoonEntityHandler::
     cp   $01                                      ; $496D: $FE $01
     jr   nz, jr_005_4995                          ; $496F: $20 $24
 
-    ld   hl, wEntitiesUnknowTableL                ; $4971: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $4971: $21 $40 $C3
     add  hl, bc                                   ; $4974: $09
     ld   [hl], $C4                                ; $4975: $36 $C4
     ld   hl, wEntitiesUnknowTableY                ; $4977: $21 $D0 $C3
@@ -2460,7 +2460,7 @@ jr_005_4D5D:
     ld   hl, wEntitiesTransitionCountdownTable           ; $4D90: $21 $E0 $C2
     add  hl, de                                   ; $4D93: $19
     ld   [hl], $30                                ; $4D94: $36 $30
-    ld   hl, wEntitiesUnknowTableL                ; $4D96: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $4D96: $21 $40 $C3
     add  hl, de                                   ; $4D99: $19
     ld   [hl], $C1                                ; $4D9A: $36 $C1
     ld   hl, wEntitiesHitboxFlagsTable                ; $4D9C: $21 $50 $C3
@@ -3886,7 +3886,7 @@ label_005_55BC:
     call SpawnNewEntityInRange_trampoline         ; $55DD: $CD $98 $3B
     jr   c, jr_005_5650                           ; $55E0: $38 $6E
 
-    ld   hl, wEntitiesUnknowTableL                ; $55E2: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $55E2: $21 $40 $C3
     add  hl, de                                   ; $55E5: $19
     ld   [hl], $02                                ; $55E6: $36 $02
     ld   hl, wEntitiesHitboxFlagsTable                ; $55E8: $21 $50 $C3
@@ -3931,7 +3931,7 @@ jr_005_561E:
     call SpawnNewEntityInRange_trampoline         ; $562D: $CD $98 $3B
     jr   c, jr_005_5650                           ; $5630: $38 $1E
 
-    ld   hl, wEntitiesUnknowTableL                ; $5632: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $5632: $21 $40 $C3
     add  hl, de                                   ; $5635: $19
     ld   [hl], $41                                ; $5636: $36 $41
     ld   hl, wEntitiesUnknownTableD               ; $5638: $21 $D0 $C2
@@ -3968,7 +3968,7 @@ jr_005_5650:
     ld   hl, $C4D0                                ; $566B: $21 $D0 $C4
     add  hl, de                                   ; $566E: $19
     ld   [hl], d                                  ; $566F: $72
-    ld   hl, wEntitiesUnknowTableL                ; $5670: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $5670: $21 $40 $C3
     add  hl, de                                   ; $5673: $19
     ld   [hl], $02                                ; $5674: $36 $02
     ld   hl, wEntitiesUnknowTableH                ; $5676: $21 $30 $C4
@@ -4836,7 +4836,7 @@ func_005_5B03:
     inc  [hl]                                     ; $5B49: $34
     ret                                           ; $5B4A: $C9
 
-    ld   hl, wEntitiesUnknowTableL                ; $5B4B: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $5B4B: $21 $40 $C3
     add  hl, bc                                   ; $5B4E: $09
     ld   [hl], $C2                                ; $5B4F: $36 $C2
     ret                                           ; $5B51: $C9
@@ -4889,7 +4889,7 @@ label_005_5B5A:
     ld   [hl], $0E                                ; $5B95: $36 $0E
     ld   a, $31                                   ; $5B97: $3E $31
     ldh  [hNoiseSfx], a                            ; $5B99: $E0 $F4
-    ld   hl, wEntitiesUnknowTableL                ; $5B9B: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $5B9B: $21 $40 $C3
     add  hl, bc                                   ; $5B9E: $09
     ld   [hl], $42                                ; $5B9F: $36 $42
     ld   hl, wEntitiesUnknownTableD               ; $5BA1: $21 $D0 $C2
@@ -5524,7 +5524,7 @@ jr_005_5EB0:
     add  hl, de                                   ; $5F1A: $19
     ld   [hl], a                                  ; $5F1B: $77
     pop  bc                                       ; $5F1C: $C1
-    ld   hl, wEntitiesUnknowTableL                ; $5F1D: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $5F1D: $21 $40 $C3
     add  hl, de                                   ; $5F20: $19
     ld   [hl], $02                                ; $5F21: $36 $02
     ld   hl, wEntitiesUnknowTableH                ; $5F23: $21 $30 $C4
@@ -5592,7 +5592,7 @@ jr_005_5F77:
 
 label_005_5F78:
 jr_005_5F78:
-    ld   hl, wEntitiesUnknowTableL                ; $5F78: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $5F78: $21 $40 $C3
     add  hl, bc                                   ; $5F7B: $09
     ld   [hl], $02                                ; $5F7C: $36 $02
     call IncrementEntityState                     ; $5F7E: $CD $12 $3B
@@ -6770,7 +6770,7 @@ jr_005_6581:
     ld   hl, wEntitiesSpeedZTable                                ; $65C7: $21 $20 $C3
     add  hl, de                                   ; $65CA: $19
     ld   [hl], $08                                ; $65CB: $36 $08
-    ld   hl, wEntitiesUnknowTableL                ; $65CD: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $65CD: $21 $40 $C3
     add  hl, de                                   ; $65D0: $19
     ld   [hl], $42                                ; $65D1: $36 $42
 
@@ -6800,7 +6800,7 @@ func_005_65D9:
     ld   hl, wEntitiesTransitionCountdownTable           ; $65F4: $21 $E0 $C2
     add  hl, de                                   ; $65F7: $19
     ld   [hl], $14                                ; $65F8: $36 $14
-    ld   hl, wEntitiesUnknowTableL                ; $65FA: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $65FA: $21 $40 $C3
     add  hl, de                                   ; $65FD: $19
     ld   [hl], $C4                                ; $65FE: $36 $C4
 
@@ -6867,7 +6867,7 @@ jr_005_6613:
     ld   hl, wEntitiesSpeedZTable                                ; $6653: $21 $20 $C3
     add  hl, de                                   ; $6656: $19
     ld   [hl], $13                                ; $6657: $36 $13
-    ld   hl, wEntitiesUnknowTableL                ; $6659: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $6659: $21 $40 $C3
     add  hl, de                                   ; $665C: $19
     ld   [hl], $42                                ; $665D: $36 $42
 
@@ -7007,7 +7007,7 @@ func_005_6705:
     cp   $02                                      ; $6707: $FE $02
     jr   nc, jr_005_6754                          ; $6709: $30 $49
 
-    ld   hl, wEntitiesUnknowTableL                ; $670B: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $670B: $21 $40 $C3
     add  hl, bc                                   ; $670E: $09
     ld   a, [hl]                                  ; $670F: $7E
     and  $F0                                      ; $6710: $E6 $F0
@@ -7040,7 +7040,7 @@ label_005_672A:
     cp   $08                                      ; $6735: $FE $08
     ret  c                                        ; $6737: $D8
 
-    ld   hl, wEntitiesUnknowTableL                ; $6738: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $6738: $21 $40 $C3
     add  hl, bc                                   ; $673B: $09
     ld   a, [hl]                                  ; $673C: $7E
     and  $F0                                      ; $673D: $E6 $F0
@@ -7057,7 +7057,7 @@ label_005_672A:
 
 label_005_6754:
 jr_005_6754:
-    ld   hl, wEntitiesUnknowTableL                ; $6754: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable                ; $6754: $21 $40 $C3
     add  hl, bc                                   ; $6757: $09
     ld   a, [hl]                                  ; $6758: $7E
     and  $F0                                      ; $6759: $E6 $F0

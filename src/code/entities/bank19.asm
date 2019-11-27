@@ -249,7 +249,7 @@ jr_019_4185:
     inc  [hl]                                     ; $4192: $34
 
 jr_019_4193:
-    ld   hl, wEntitiesUnknowTableL                ; $4193: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $4193: $21 $40 $C3
     add  hl, de                                   ; $4196: $19
     ld   [hl], $C1                                ; $4197: $36 $C1
     push bc                                       ; $4199: $C5
@@ -582,7 +582,7 @@ jr_019_4383:
     ld   bc, $0124                                ; $43A6: $01 $24 $01
 
 func_019_43A9:
-    ld   hl, wEntitiesUnknowTableL                ; $43A9: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $43A9: $21 $40 $C3
     add  hl, bc                                   ; $43AC: $09
     ld   [hl], $C2                                ; $43AD: $36 $C2
     ldh  a, [hFrameCounter]                       ; $43AF: $F0 $E7
@@ -593,7 +593,7 @@ func_019_43A9:
     ldh  [hActiveEntitySpriteVariant], a               ; $43B6: $E0 $F1
     ld   de, $4393                                ; $43B8: $11 $93 $43
     call RenderAnimatedActiveEntity                               ; $43BB: $CD $C0 $3B
-    ld   hl, wEntitiesUnknowTableL                ; $43BE: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $43BE: $21 $40 $C3
     add  hl, bc                                   ; $43C1: $09
     ld   [hl], $C1                                ; $43C2: $36 $C1
     xor  a                                        ; $43C4: $AF
@@ -642,7 +642,7 @@ func_019_43D4:
     nop                                           ; $4405: $00
 
 label_019_4406:
-    ld   hl, wEntitiesUnknowTableL                ; $4406: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $4406: $21 $40 $C3
     add  hl, bc                                   ; $4409: $09
     ld   [hl], $C1                                ; $440A: $36 $C1
     ldh  a, [hFrameCounter]                       ; $440C: $F0 $E7
@@ -858,7 +858,7 @@ func_019_45B2:
     ld   hl, $216C                                ; $45E1: $21 $6C $21
 
 label_019_45E4:
-    ld   hl, wEntitiesUnknowTableL                ; $45E4: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $45E4: $21 $40 $C3
     add  hl, bc                                   ; $45E7: $09
     set  6, [hl]                                  ; $45E8: $CB $F6
     set  7, [hl]                                  ; $45EA: $CB $FE
@@ -1400,7 +1400,7 @@ jr_019_4914:
     and  a                                        ; $4917: $A7
     jr   z, jr_019_4947                           ; $4918: $28 $2D
 
-    ld   hl, wEntitiesUnknowTableL                ; $491A: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $491A: $21 $40 $C3
     add  hl, bc                                   ; $491D: $09
     set  6, [hl]                                  ; $491E: $CB $F6
     ld   a, [$C50F]                               ; $4920: $FA $0F $C5
@@ -1584,11 +1584,11 @@ jr_019_4A23:
 
     call func_019_7DB8                            ; $4A2C: $CD $B8 $7D
     call label_3B23                               ; $4A2F: $CD $23 $3B
-    ld   hl, wEntitiesUnknowTableL                ; $4A32: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $4A32: $21 $40 $C3
     add  hl, bc                                   ; $4A35: $09
     ld   [hl], $52                                ; $4A36: $36 $52
     call label_3B44                               ; $4A38: $CD $44 $3B
-    ld   hl, wEntitiesUnknowTableL                ; $4A3B: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $4A3B: $21 $40 $C3
     add  hl, bc                                   ; $4A3E: $09
     ld   [hl], $92                                ; $4A3F: $36 $92
     ldh  a, [hFFE8]                               ; $4A41: $F0 $E8
@@ -2223,7 +2223,7 @@ label_019_4D9B:
     ld   hl, wEntitiesUnknownTableB               ; $4DEC: $21 $B0 $C2
     add  hl, de                                   ; $4DEF: $19
     inc  [hl]                                     ; $4DF0: $34
-    ld   hl, wEntitiesUnknowTableL                ; $4DF1: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $4DF1: $21 $40 $C3
     add  hl, de                                   ; $4DF4: $19
     ld   [hl], $C1                                ; $4DF5: $36 $C1
     ld   a, $55                                   ; $4DF7: $3E $55
@@ -2783,7 +2783,7 @@ jr_019_5107:
     and  $01                                      ; $5119: $E6 $01
     add  [hl]                                     ; $511B: $86
     ldh  [hActiveEntitySpriteVariant], a               ; $511C: $E0 $F1
-    ld   hl, wEntitiesUnknowTableL                ; $511E: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $511E: $21 $40 $C3
     add  hl, bc                                   ; $5121: $09
     res  4, [hl]                                  ; $5122: $CB $A6
     ld   de, $4FFB                                ; $5124: $11 $FB $4F
@@ -7419,7 +7419,7 @@ jr_019_6A6D:
     add  hl, de                                   ; $6A77: $19
     ld   [hl], a                                  ; $6A78: $77
     pop  bc                                       ; $6A79: $C1
-    ld   hl, wEntitiesUnknowTableL                ; $6A7A: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $6A7A: $21 $40 $C3
     add  hl, de                                   ; $6A7D: $19
     ld   [hl], $C2                                ; $6A7E: $36 $C2
     ld   hl, wEntitiesTransitionCountdownTable    ; $6A80: $21 $E0 $C2
@@ -7794,7 +7794,7 @@ jr_019_6C99:
     res  0, [hl]                                  ; $6CA6: $CB $86
     ret                                           ; $6CA8: $C9
 
-    ld   hl, wEntitiesUnknowTableL                ; $6CA9: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $6CA9: $21 $40 $C3
     add  hl, bc                                   ; $6CAC: $09
     set  7, [hl]                                  ; $6CAD: $CB $FE
     set  6, [hl]                                  ; $6CAF: $CB $F6
@@ -7964,7 +7964,7 @@ jr_019_6D86:
     ld   hl, wEntitiesSpeedZTable                 ; $6DAB: $21 $20 $C3
     add  hl, de                                   ; $6DAE: $19
     ld   [hl], $20                                ; $6DAF: $36 $20
-    ld   hl, wEntitiesUnknowTableL                ; $6DB1: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $6DB1: $21 $40 $C3
     add  hl, de                                   ; $6DB4: $19
     ld   [hl], $C2                                ; $6DB5: $36 $C2
     ld   a, $24                                   ; $6DB7: $3E $24
@@ -8224,7 +8224,7 @@ BananasSchuleSaleEntityHandler::
     and  a                                        ; $6F14: $A7
     jr   nz, jr_019_6F25                          ; $6F15: $20 $0E
 
-    ld   hl, wEntitiesUnknowTableL                ; $6F17: $21 $40 $C3
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $6F17: $21 $40 $C3
     add  hl, bc                                   ; $6F1A: $09
     ld   [hl], $C3                                ; $6F1B: $36 $C3
     ld   hl, $6F05                                ; $6F1D: $21 $05 $6F

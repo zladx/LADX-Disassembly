@@ -772,7 +772,7 @@ SwordBeamEntityHandler::
     ld   hl, wEntitiesSpeedYTable                       ; $454F: $21 $50 $C2
     add  hl, bc                                   ; $4552: $09
     sla  [hl]                                     ; $4553: $CB $26
-    ld   hl, wEntitiesUnknowTableU                ; $4555: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4555: $21 $20 $C4
     add  hl, bc                                   ; $4558: $09
     ld   [hl], $FF                                ; $4559: $36 $FF
     ld   a, $3B                                   ; $455B: $3E $3B
@@ -1435,7 +1435,7 @@ jr_019_4947:
     call label_3B70                               ; $4947: $CD $70 $3B
 
 jr_019_494A:
-    ld   hl, wEntitiesUnknowTableU                ; $494A: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $494A: $21 $20 $C4
     add  hl, bc                                   ; $494D: $09
     ld   a, [hl]                                  ; $494E: $7E
     and  a                                        ; $494F: $A7
@@ -2483,7 +2483,7 @@ jr_019_4F5A:
     ld   hl, wEntitiesStateTable                  ; $4F7B: $21 $90 $C2
     add  hl, de                                   ; $4F7E: $19
     inc  [hl]                                     ; $4F7F: $34
-    ld   hl, wEntitiesUnknowTableU                ; $4F80: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4F80: $21 $20 $C4
     add  hl, de                                   ; $4F83: $19
     ld   [hl], $40                                ; $4F84: $36 $40
     ld   hl, wEntitiesTransitionCountdownTable    ; $4F86: $21 $E0 $C2
@@ -9343,7 +9343,7 @@ jr_019_7531:
 
 jr_019_7547:
     ldh  a, [hFrameCounter]                       ; $7547: $F0 $E7
-    ld   hl, wEntitiesUnknowTableU                ; $7549: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7549: $21 $20 $C4
     add  hl, bc                                   ; $754C: $09
     ld   [hl], a                                  ; $754D: $77
     ldh  a, [hActiveEntitySpriteVariant]               ; $754E: $F0 $F1
@@ -9532,7 +9532,7 @@ jr_019_7601:
     ldh  a, [hFrameCounter]                       ; $7647: $F0 $E7
     and  $0F                                      ; $7649: $E6 $0F
     or   $20                                      ; $764B: $F6 $20
-    ld   hl, wEntitiesUnknowTableU                ; $764D: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $764D: $21 $20 $C4
     add  hl, bc                                   ; $7650: $09
     ld   [hl], a                                  ; $7651: $77
     call label_BFB                                ; $7652: $CD $FB $0B
@@ -11178,7 +11178,7 @@ label_019_7E61:
     ld   a, [hl]                                  ; $7E72: $7E
     call GetEntityTransitionCountdown             ; $7E73: $CD $05 $0C
     ld   [hl], $A0                                ; $7E76: $36 $A0
-    ld   hl, wEntitiesUnknowTableU                ; $7E78: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7E78: $21 $20 $C4
     add  hl, bc                                   ; $7E7B: $09
     ld   [hl], $FF                                ; $7E7C: $36 $FF
 
@@ -11192,7 +11192,7 @@ label_019_7E7E:
     ret  nz                                       ; $7E87: $C0
 
     ld   [hl], $C0                                ; $7E88: $36 $C0
-    ld   hl, wEntitiesUnknowTableU                ; $7E8A: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7E8A: $21 $20 $C4
     add  hl, bc                                   ; $7E8D: $09
     ld   [hl], $FF                                ; $7E8E: $36 $FF
     jp   label_019_7E7E                           ; $7E90: $C3 $7E $7E

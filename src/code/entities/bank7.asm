@@ -103,7 +103,7 @@ jr_007_408A:
     ld   hl, wEntitiesHealthTable                                ; $408D: $21 $60 $C3
     add  hl, bc                                   ; $4090: $09
     ld   [hl], $04                                ; $4091: $36 $04
-    ld   hl, wEntitiesUnknowTableU                ; $4093: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4093: $21 $20 $C4
     add  hl, bc                                   ; $4096: $09
     ld   a, [hl]                                  ; $4097: $7E
     and  a                                        ; $4098: $A7
@@ -4207,7 +4207,7 @@ jr_007_5891:
     cp   $01                                      ; $58AB: $FE $01
     jr   nz, jr_007_58DE                          ; $58AD: $20 $2F
 
-    ld   hl, wEntitiesUnknowTableU                ; $58AF: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $58AF: $21 $20 $C4
     add  hl, bc                                   ; $58B2: $09
     ld   a, [hl]                                  ; $58B3: $7E
     and  a                                        ; $58B4: $A7
@@ -7387,7 +7387,7 @@ jr_007_6A52:
     call func_007_7D96                            ; $6A5C: $CD $96 $7D
     call label_394D                               ; $6A5F: $CD $4D $39
     call label_3EE8                               ; $6A62: $CD $E8 $3E
-    ld   hl, wEntitiesUnknowTableU                ; $6A65: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6A65: $21 $20 $C4
     add  hl, bc                                   ; $6A68: $09
     ld   a, [hl]                                  ; $6A69: $7E
     cp   $16                                      ; $6A6A: $FE $16
@@ -10752,7 +10752,7 @@ label_007_7EAA:
     sub  $7E                                      ; $7EB4: $D6 $7E
     call GetEntityTransitionCountdown                 ; $7EB6: $CD $05 $0C
     ld   [hl], $A0                                ; $7EB9: $36 $A0
-    ld   hl, wEntitiesUnknowTableU                ; $7EBB: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7EBB: $21 $20 $C4
     add  hl, bc                                   ; $7EBE: $09
     ld   [hl], $FF                                ; $7EBF: $36 $FF
 
@@ -10766,7 +10766,7 @@ label_007_7EC1:
     ret  nz                                       ; $7ECA: $C0
 
     ld   [hl], $C0                                ; $7ECB: $36 $C0
-    ld   hl, wEntitiesUnknowTableU                ; $7ECD: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7ECD: $21 $20 $C4
     add  hl, bc                                   ; $7ED0: $09
     ld   [hl], $FF                                ; $7ED1: $36 $FF
     jp   label_007_7EC1                           ; $7ED3: $C3 $C1 $7E

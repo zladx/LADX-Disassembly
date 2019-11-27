@@ -84,7 +84,7 @@ ResetEntity::
     ld   hl, wEntitiesUnknowTableW                ; $407F: $21 $90 $C4
     add  hl, bc                                   ; $4082: $09
     ld   [hl], b                                  ; $4083: $70
-    ld   hl, wEntitiesUnknowTableU                ; $4084: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4084: $21 $20 $C4
     add  hl, bc                                   ; $4087: $09
     ld   [hl], b                                  ; $4088: $70
     ld   hl, wEntitiesDroppedItemTable            ; $4089: $21 $E0 $C4
@@ -583,7 +583,7 @@ CrystalSwitchEntityHandler::
     call label_3B70                               ; $433E: $CD $70 $3B
     call func_015_7A6E                            ; $4341: $CD $6E $7A
     call label_3B23                               ; $4344: $CD $23 $3B
-    ld   hl, wEntitiesUnknowTableU                ; $4347: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4347: $21 $20 $C4
     add  hl, bc                                   ; $434A: $09
     ld   a, [hl]                                  ; $434B: $7E
     and  a                                        ; $434C: $A7
@@ -2152,7 +2152,7 @@ PokeyEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4BF9: $21 $60 $C3
     add  hl, bc                                   ; $4BFC: $09
     ld   [hl], $02                                ; $4BFD: $36 $02
-    ld   hl, wEntitiesUnknowTableU                ; $4BFF: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4BFF: $21 $20 $C4
     add  hl, bc                                   ; $4C02: $09
     ld   a, [hl]                                  ; $4C03: $7E
     cp   $14                                      ; $4C04: $FE $14
@@ -3604,7 +3604,7 @@ jr_015_5468:
     ld   [hl], $80                                ; $54A0: $36 $80
 
 label_015_54A2:
-    ld   hl, wEntitiesUnknowTableU                ; $54A2: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $54A2: $21 $20 $C4
     add  hl, bc                                   ; $54A5: $09
     ld   [hl], $14                                ; $54A6: $36 $14
     ld   a, $07                                   ; $54A8: $3E $07
@@ -5558,7 +5558,7 @@ jr_015_5F02:
     ldh  [hJingle], a                             ; $5F0D: $E0 $F2
 
 jr_015_5F0F:
-    ld   hl, wEntitiesUnknowTableU                ; $5F0F: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5F0F: $21 $20 $C4
     add  hl, de                                   ; $5F12: $19
     ld   [hl], $14                                ; $5F13: $36 $14
     ld   a, $07                                   ; $5F15: $3E $07
@@ -6262,7 +6262,7 @@ jr_015_62AC:
     cp   $02                                      ; $6303: $FE $02
     jr   nc, jr_015_6330                          ; $6305: $30 $29
 
-    ld   hl, wEntitiesUnknowTableU                ; $6307: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6307: $21 $20 $C4
     add  hl, bc                                   ; $630A: $09
     ld   a, [hl]                                  ; $630B: $7E
     and  a                                        ; $630C: $A7
@@ -6294,7 +6294,7 @@ func_015_6331:
     cp   $02                                      ; $6333: $FE $02
     jr   nc, jr_015_6342                          ; $6335: $30 $0B
 
-    ld   hl, wEntitiesUnknowTableU                ; $6337: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6337: $21 $20 $C4
     add  hl, bc                                   ; $633A: $09
     ld   a, [hl]                                  ; $633B: $7E
     and  a                                        ; $633C: $A7
@@ -6449,7 +6449,7 @@ jr_015_63F5:
     ldh  [hWaveSfx], a                            ; $6418: $E0 $F3
     call GetEntityTransitionCountdown             ; $641A: $CD $05 $0C
     ld   [hl], $80                                ; $641D: $36 $80
-    ld   hl, wEntitiesUnknowTableU                ; $641F: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $641F: $21 $20 $C4
     add  hl, bc                                   ; $6422: $09
     ld   [hl], $80                                ; $6423: $36 $80
 
@@ -7205,7 +7205,7 @@ jr_015_683E:
     inc  [hl]                                     ; $683E: $34
 
 jr_015_683F:
-    ld   hl, wEntitiesUnknowTableU                ; $683F: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $683F: $21 $20 $C4
     add  hl, bc                                   ; $6842: $09
     ld   a, [hl]                                  ; $6843: $7E
     and  a                                        ; $6844: $A7
@@ -8476,7 +8476,7 @@ jr_015_6E5A:
     ld   [wActiveMusicTrack], a                   ; $6E7B: $EA $68 $D3
     call GetEntityTransitionCountdown             ; $6E7E: $CD $05 $0C
     ld   [hl], $80                                ; $6E81: $36 $80
-    ld   hl, wEntitiesUnknowTableU                ; $6E83: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6E83: $21 $20 $C4
     add  hl, bc                                   ; $6E86: $09
     ld   [hl], $80                                ; $6E87: $36 $80
     ld   hl, wEntitiesHitboxFlagsTable                ; $6E89: $21 $50 $C3
@@ -10927,7 +10927,7 @@ label_015_7C37:
     ld   a, h                                     ; $7C42: $7C
     call GetEntityTransitionCountdown             ; $7C43: $CD $05 $0C
     ld   [hl], $A0                                ; $7C46: $36 $A0
-    ld   hl, wEntitiesUnknowTableU                ; $7C48: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7C48: $21 $20 $C4
     add  hl, bc                                   ; $7C4B: $09
     ld   [hl], $FF                                ; $7C4C: $36 $FF
 
@@ -10941,7 +10941,7 @@ label_015_7C4E:
     ret  nz                                       ; $7C57: $C0
 
     ld   [hl], $C0                                ; $7C58: $36 $C0
-    ld   hl, wEntitiesUnknowTableU                ; $7C5A: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7C5A: $21 $20 $C4
     add  hl, bc                                   ; $7C5D: $09
     ld   [hl], $FF                                ; $7C5E: $36 $FF
     jp   label_015_7C4E                           ; $7C60: $C3 $4E $7C

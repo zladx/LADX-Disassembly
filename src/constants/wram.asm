@@ -565,7 +565,14 @@ wEntitiesUnknowTableS:: ; C400
 wEntitiesUnknowTableT:: ; C410
   ds $10
 
-wEntitiesUnknowTableU:: ; C420
+wEntitiesFlashCountdownTable:: ; C420
+  ; Countdown during which an entity flashes when taking a hit.
+  ; (or when a bomb is nearing to explode.)
+  ;
+  ; A flashing entity (countdown > 0) doesn't take any damages from
+  ; sword or projectiles.
+  ;
+  ; When the countdown reaches 0, the flashing stops.
   ds $10
 
 wEntitiesUnknowTableH::  ; C430

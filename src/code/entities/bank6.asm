@@ -306,7 +306,7 @@ jr_006_41C7:
 
     ld   [hl], $10                                ; $41D2: $36 $10
     call IncrementEntityState                     ; $41D4: $CD $12 $3B
-    ld   hl, wEntitiesUnknowTableU                ; $41D7: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $41D7: $21 $20 $C4
     add  hl, bc                                   ; $41DA: $09
     ld   a, [hl]                                  ; $41DB: $7E
     and  a                                        ; $41DC: $A7
@@ -1389,7 +1389,7 @@ jr_006_4852:
     ld   hl, wEntitiesUnknowTableT                ; $4875: $21 $10 $C4
     add  hl, de                                   ; $4878: $19
     ld   [hl], $10                                ; $4879: $36 $10
-    ld   hl, wEntitiesUnknowTableU                ; $487B: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $487B: $21 $20 $C4
     add  hl, de                                   ; $487E: $19
     ld   [hl], $20                                ; $487F: $36 $20
     ld   hl, wEntitiesSpeedXTable                       ; $4881: $21 $40 $C2
@@ -2054,7 +2054,7 @@ jr_006_4BE1:
     ld   bc, $0301                                ; $4C1B: $01 $01 $03
     ld   [bc], a                                  ; $4C1E: $02
     inc  bc                                       ; $4C1F: $03
-    ld   hl, wEntitiesUnknowTableU                ; $4C20: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4C20: $21 $20 $C4
     add  hl, bc                                   ; $4C23: $09
     ld   a, [hl]                                  ; $4C24: $7E
     and  a                                        ; $4C25: $A7
@@ -2561,7 +2561,7 @@ jr_006_4FD7:
     cp   $04                                      ; $4FD9: $FE $04
     jr   nc, jr_006_4FF1                          ; $4FDB: $30 $14
 
-    ld   hl, wEntitiesUnknowTableU                ; $4FDD: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4FDD: $21 $20 $C4
     add  hl, bc                                   ; $4FE0: $09
     ld   a, [hl]                                  ; $4FE1: $7E
     cp   $03                                      ; $4FE2: $FE $03
@@ -3125,7 +3125,7 @@ label_006_5308:
     ld   d, e                                     ; $5315: $53
     call GetEntityTransitionCountdown             ; $5316: $CD $05 $0C
     ld   [hl], $A0                                ; $5319: $36 $A0
-    ld   hl, wEntitiesUnknowTableU                ; $531B: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $531B: $21 $20 $C4
     add  hl, bc                                   ; $531E: $09
     ld   [hl], $FF                                ; $531F: $36 $FF
     jp   label_006_5634                           ; $5321: $C3 $34 $56
@@ -3134,7 +3134,7 @@ label_006_5308:
     ret  nz                                       ; $5327: $C0
 
     ld   [hl], $C0                                ; $5328: $36 $C0
-    ld   hl, wEntitiesUnknowTableU                ; $532A: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $532A: $21 $20 $C4
     add  hl, bc                                   ; $532D: $09
     ld   [hl], $FF                                ; $532E: $36 $FF
     jp   label_006_5634                           ; $5330: $C3 $34 $56
@@ -3661,7 +3661,7 @@ jr_006_5611:
     ld   d, [hl]                                  ; $5626: $56
     rst  $00                                      ; $5627: $C7
     ld   d, [hl]                                  ; $5628: $56
-    ld   hl, wEntitiesUnknowTableU                ; $5629: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5629: $21 $20 $C4
     add  hl, bc                                   ; $562C: $09
     ld   [hl], $FF                                ; $562D: $36 $FF
     call GetEntityTransitionCountdown             ; $562F: $CD $05 $0C
@@ -4901,7 +4901,7 @@ jr_006_5D0F:
     cp   $02                                      ; $5D14: $FE $02
     jr   nz, jr_006_5D4F                          ; $5D16: $20 $37
 
-    ld   hl, wEntitiesUnknowTableU                ; $5D18: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5D18: $21 $20 $C4
     add  hl, de                                   ; $5D1B: $19
     ld   a, [hl]                                  ; $5D1C: $7E
     and  a                                        ; $5D1D: $A7
@@ -7645,7 +7645,7 @@ jr_006_6C7B:
     ld   l, h                                     ; $6C99: $6C
     call GetEntityTransitionCountdown             ; $6C9A: $CD $05 $0C
     ld   [hl], $FF                                ; $6C9D: $36 $FF
-    ld   hl, wEntitiesUnknowTableU                ; $6C9F: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6C9F: $21 $20 $C4
     add  hl, bc                                   ; $6CA2: $09
     ld   [hl], $FF                                ; $6CA3: $36 $FF
     ld   hl, wEntitiesUnknownTableB               ; $6CA5: $21 $B0 $C2
@@ -7656,7 +7656,7 @@ jr_006_6C7B:
     call GetEntityTransitionCountdown             ; $6CAB: $CD $05 $0C
     jp   z, label_006_6CBE                        ; $6CAE: $CA $BE $6C
 
-    ld   hl, wEntitiesUnknowTableU                ; $6CB1: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6CB1: $21 $20 $C4
     add  hl, bc                                   ; $6CB4: $09
     ld   [hl], a                                  ; $6CB5: $77
     cp   $80                                      ; $6CB6: $FE $80
@@ -9019,7 +9019,7 @@ jr_006_7472:
     call IncrementEntityState                     ; $7486: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $7489: $CD $05 $0C
     ld   [hl], $30                                ; $748C: $36 $30
-    ld   hl, wEntitiesUnknowTableU                ; $748E: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $748E: $21 $20 $C4
     add  hl, bc                                   ; $7491: $09
     ld   [hl], $18                                ; $7492: $36 $18
 
@@ -10512,7 +10512,7 @@ jr_006_7C50:
     cp   $1B                                      ; $7C52: $FE $1B
     jr   nz, jr_006_7CB7                          ; $7C54: $20 $61
 
-    ld   hl, wEntitiesUnknowTableU                ; $7C56: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7C56: $21 $20 $C4
     add  hl, bc                                   ; $7C59: $09
     ld   a, [hl]                                  ; $7C5A: $7E
     cp   $08                                      ; $7C5B: $FE $08

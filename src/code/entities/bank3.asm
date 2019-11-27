@@ -1362,7 +1362,7 @@ EntityThrownHandler::
     and  a                                        ; $4DB9: $A7
     jr   z, jr_003_4DD2                           ; $4DBA: $28 $16
 
-    ld   hl, wEntitiesUnknowTableU                ; $4DBC: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4DBC: $21 $20 $C4
     add  hl, bc                                   ; $4DBF: $09
     ld   [hl], $20                                ; $4DC0: $36 $20
     ld   hl, hWaveSfx                             ; $4DC2: $21 $F3 $FF
@@ -2892,7 +2892,7 @@ EntityLiftedHandler::
     cp   $02                                      ; $5737: $FE $02
     jr   nz, jr_003_5745                          ; $5739: $20 $0A
 
-    ld   hl, wEntitiesUnknowTableU                ; $573B: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $573B: $21 $20 $C4
     add  hl, bc                                   ; $573E: $09
     ld   [hl], b                                  ; $573F: $70
     call func_003_6711                            ; $5740: $CD $11 $67
@@ -6864,7 +6864,7 @@ func_003_6E2B::
     cp   $00                                      ; $6E2E: $FE $00
     jp   z, label_003_73E6                        ; $6E30: $CA $E6 $73
 
-    ld   hl, wEntitiesUnknowTableU                ; $6E33: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6E33: $21 $20 $C4
     add  hl, bc                                   ; $6E36: $09
     ld   a, [hl]                                  ; $6E37: $7E
     and  a                                        ; $6E38: $A7
@@ -7339,7 +7339,7 @@ jr_003_70DD:
 
 jr_003_70DF:
     call func_003_6FCC                            ; $70DF: $CD $CC $6F
-    ld   hl, wEntitiesUnknowTableU                ; $70E2: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $70E2: $21 $20 $C4
     add  hl, bc                                   ; $70E5: $09
     ld   [hl], b                                  ; $70E6: $70
 
@@ -7754,7 +7754,7 @@ jr_003_733E:
     ld   hl, wEntitiesUnknowTableV                ; $7342: $21 $80 $C4
     add  hl, bc                                   ; $7345: $09
     ld   [hl], $2F                                ; $7346: $36 $2F
-    ld   hl, wEntitiesUnknowTableU                ; $7348: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7348: $21 $20 $C4
     add  hl, bc                                   ; $734B: $09
     xor  a                                        ; $734C: $AF
     ld   [hl], a                                  ; $734D: $77
@@ -7840,7 +7840,7 @@ jr_003_73B6:
     ld   hl, wEntitiesTypeTable                   ; $73B6: $21 $A0 $C3
     add  hl, bc                                   ; $73B9: $09
     ld   a, [hl]                                  ; $73BA: $7E
-    ld   hl, wEntitiesUnknowTableU                ; $73BB: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $73BB: $21 $20 $C4
     add  hl, bc                                   ; $73BE: $09
     cp   $E6                                      ; $73BF: $FE $E6
     jr   nz, jr_003_73CC                          ; $73C1: $20 $09
@@ -8361,7 +8361,7 @@ jr_003_7680:
     ld   hl, wEntitiesDropTimerTable                                ; $7693: $21 $50 $C4
     add  hl, de                                   ; $7696: $19
     ld   [hl], $7F                                ; $7697: $36 $7F
-    ld   hl, wEntitiesUnknowTableU                ; $7699: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $7699: $21 $20 $C4
     add  hl, de                                   ; $769C: $19
     ld   [hl], $10                                ; $769D: $36 $10
     ld   a, $03                                   ; $769F: $3E $03
@@ -8944,7 +8944,7 @@ jr_003_79CB:
     jr   z, jr_003_7A18                           ; $79D1: $28 $45
 
     dec  [hl]                                     ; $79D3: $35
-    ld   hl, wEntitiesUnknowTableU                ; $79D4: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $79D4: $21 $20 $C4
     add  hl, bc                                   ; $79D7: $09
     ld   [hl], $00                                ; $79D8: $36 $00
     ld   hl, wEntitiesStatusTable                         ; $79DA: $21 $80 $C2

@@ -2265,7 +2265,7 @@ func_036_4D03:
     ret                                           ; $4D12: $C9
 
 jr_036_4D13:
-    ld   hl, wEntitiesUnknowTableU                ; $4D13: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4D13: $21 $20 $C4
     add  hl, bc                                   ; $4D16: $09
     ld   a, [hl]                                  ; $4D17: $7E
     and  a                                        ; $4D18: $A7
@@ -2315,7 +2315,7 @@ func_036_4D4B:
     and  a                                        ; $4D4F: $A7
     jr   nz, jr_036_4D5C                          ; $4D50: $20 $0A
 
-    ld   hl, wEntitiesUnknowTableU                ; $4D52: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4D52: $21 $20 $C4
     add  hl, bc                                   ; $4D55: $09
     ld   a, [hl]                                  ; $4D56: $7E
     and  a                                        ; $4D57: $A7
@@ -3868,7 +3868,7 @@ jr_036_5603:
     ld   hl, wEntitiesStatusTable                        ; $5627: $21 $80 $C2
     add  hl, bc                                   ; $562A: $09
     ld   [hl], $05                                ; $562B: $36 $05
-    ld   hl, wEntitiesUnknowTableU                ; $562D: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $562D: $21 $20 $C4
     add  hl, bc                                   ; $5630: $09
     ld   a, [hl]                                  ; $5631: $7E
     and  a                                        ; $5632: $A7
@@ -4085,7 +4085,7 @@ func_036_5756:
     ld   de, $55AF                                ; $5756: $11 $AF $55
     call func_036_6C90                            ; $5759: $CD $90 $6C
     call label_3B39                               ; $575C: $CD $39 $3B
-    ld   hl, wEntitiesUnknowTableU                ; $575F: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $575F: $21 $20 $C4
     add  hl, bc                                   ; $5762: $09
     ld   a, [hl]                                  ; $5763: $7E
     and  a                                        ; $5764: $A7
@@ -4103,7 +4103,7 @@ func_036_5756:
     ret  nz                                       ; $5772: $C0
 
     ld   [hl], a                                  ; $5773: $77
-    ld   hl, wEntitiesUnknowTableU                ; $5774: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5774: $21 $20 $C4
     add  hl, bc                                   ; $5777: $09
     ld   [hl], a                                  ; $5778: $77
 
@@ -4473,7 +4473,7 @@ ColorGuardianRedEntityHandler::
 
 jr_036_5964:
     xor  a                                        ; $5964: $AF
-    ld   hl, wEntitiesUnknowTableU                ; $5965: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5965: $21 $20 $C4
     add  hl, bc                                   ; $5968: $09
     ld   [hl], a                                  ; $5969: $77
     ld   hl, wEntitiesUnknowTableT                ; $596A: $21 $10 $C4
@@ -4933,7 +4933,7 @@ AvalaunchEntityHandler::
     and  a                                        ; $5C13: $A7
     ret  z                                        ; $5C14: $C8
 
-    ld   hl, wEntitiesUnknowTableU                ; $5C15: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5C15: $21 $20 $C4
     add  hl, bc                                   ; $5C18: $09
     ld   a, [hl]                                  ; $5C19: $7E
     and  a                                        ; $5C1A: $A7
@@ -4983,7 +4983,7 @@ jr_036_5C3C:
     ld   e, h                                     ; $5C47: $5C
     call GetEntityTransitionCountdown             ; $5C48: $CD $05 $0C
     ld   [hl], $A0                                ; $5C4B: $36 $A0
-    ld   hl, wEntitiesUnknowTableU                ; $5C4D: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5C4D: $21 $20 $C4
     add  hl, bc                                   ; $5C50: $09
     ld   [hl], $FF                                ; $5C51: $36 $FF
 
@@ -4997,7 +4997,7 @@ func_036_5C53:
     ret  nz                                       ; $5C5C: $C0
 
     ld   [hl], $C0                                ; $5C5D: $36 $C0
-    ld   hl, wEntitiesUnknowTableU                ; $5C5F: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5C5F: $21 $20 $C4
     add  hl, bc                                   ; $5C62: $09
     ld   [hl], $FF                                ; $5C63: $36 $FF
     call func_036_5C53                            ; $5C65: $CD $53 $5C
@@ -5057,7 +5057,7 @@ func_036_5CAB:
 
 func_036_5CBD:
     call label_3B39                               ; $5CBD: $CD $39 $3B
-    ld   hl, wEntitiesUnknowTableU                ; $5CC0: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5CC0: $21 $20 $C4
     add  hl, bc                                   ; $5CC3: $09
     ld   a, [hl]                                  ; $5CC4: $7E
     and  a                                        ; $5CC5: $A7
@@ -5341,7 +5341,7 @@ jr_036_5E81:
 
     xor  a                                        ; $5E8D: $AF
     ld   [hl], a                                  ; $5E8E: $77
-    ld   hl, wEntitiesUnknowTableU                ; $5E8F: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5E8F: $21 $20 $C4
     add  hl, bc                                   ; $5E92: $09
     ld   [hl], a                                  ; $5E93: $77
     ld   a, $30                                   ; $5E94: $3E $30
@@ -5548,7 +5548,7 @@ HopperEntityHandler::
     call label_3B70                               ; $5FA8: $CD $70 $3B
     call func_036_6A62                            ; $5FAB: $CD $62 $6A
     call label_3CD9                               ; $5FAE: $CD $D9 $3C
-    ld   hl, wEntitiesUnknowTableU                ; $5FB1: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $5FB1: $21 $20 $C4
     add  hl, bc                                   ; $5FB4: $09
     ld   a, [hl]                                  ; $5FB5: $7E
     and  a                                        ; $5FB6: $A7
@@ -5674,7 +5674,7 @@ jr_036_604E:
     ret                                           ; $6064: $C9
 
 func_036_6065:
-    ld   hl, wEntitiesUnknowTableU                ; $6065: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6065: $21 $20 $C4
     add  hl, bc                                   ; $6068: $09
     ld   a, [hl]                                  ; $6069: $7E
     and  a                                        ; $606A: $A7
@@ -6029,7 +6029,7 @@ RotoswitchBlueEntityHandler::
     jr   z, jr_036_625F                           ; $6251: $28 $0C
 
     xor  a                                        ; $6253: $AF
-    ld   hl, wEntitiesUnknowTableU                ; $6254: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6254: $21 $20 $C4
     add  hl, bc                                   ; $6257: $09
     ld   [hl], a                                  ; $6258: $77
     ld   hl, wEntitiesUnknowTableT                ; $6259: $21 $10 $C4
@@ -6069,7 +6069,7 @@ jr_036_6273:
     call func_036_6C02                            ; $628B: $CD $02 $6C
     inc  [hl]                                     ; $628E: $34
     xor  a                                        ; $628F: $AF
-    ld   hl, wEntitiesUnknowTableU                ; $6290: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $6290: $21 $20 $C4
     add  hl, bc                                   ; $6293: $09
     ld   [hl], a                                  ; $6294: $77
     call func_036_629F                            ; $6295: $CD $9F $62

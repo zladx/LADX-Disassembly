@@ -1092,7 +1092,7 @@ jr_014_4DCC:
     dec  [hl]                                     ; $4DDA: $35
 
 jr_014_4DDB:
-    ld   hl, wEntitiesUnknowTableU                ; $4DDB: $21 $20 $C4
+    ld   hl, wEntitiesFlashCountdownTable         ; $4DDB: $21 $20 $C4
     add  hl, bc                                   ; $4DDE: $09
     ld   a, [hl]                                  ; $4DDF: $7E
     and  a                                        ; $4DE0: $A7

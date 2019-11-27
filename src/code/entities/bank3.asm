@@ -707,7 +707,7 @@ jr_003_499C:
     ld   a, [hl]                                  ; $49D8: $7E
     add  $0A                                      ; $49D9: $C6 $0A
     ld   [hl], a                                  ; $49DB: $77
-    ld   hl, wEntitiesUnknownTableC               ; $49DC: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $49DC: $21 $C0 $C2
     add  hl, bc                                   ; $49DF: $09
     ld   [hl], a                                  ; $49E0: $77
     ret                                           ; $49E1: $C9
@@ -1531,7 +1531,7 @@ jr_003_4E85:
     ld   [hl], a                                  ; $4EC2: $77
     ret                                           ; $4EC3: $C9
 
-    ld   hl, wEntitiesUnknownTableC               ; $4EC4: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $4EC4: $21 $C0 $C2
     add  hl, bc                                   ; $4EC7: $09
     ld   [hl], $04                                ; $4EC8: $36 $04
     ld   a, $03                                   ; $4ECA: $3E $03
@@ -1770,7 +1770,7 @@ Data_003_4FF7::
     db   $00, $00, $F4, $0C
 
 IronMaskEntityHandler::
-    ld   hl, wEntitiesUnknownTableC               ; $4FFB: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $4FFB: $21 $C0 $C2
     add  hl, bc                                   ; $4FFE: $09
     ld   a, [hl]                                  ; $4FFF: $7E
     and  a                                        ; $5000: $A7
@@ -4127,7 +4127,7 @@ jr_003_5E29:
     cp   $50                                      ; $5E29: $FE $50
     jr   nc, jr_003_5E8A                          ; $5E2B: $30 $5D
 
-    ld   hl, wEntitiesUnknownTableC               ; $5E2D: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5E2D: $21 $C0 $C2
     add  hl, bc                                   ; $5E30: $09
     ld   a, [hl]                                  ; $5E31: $7E
     cp   $19                                      ; $5E32: $FE $19
@@ -4162,7 +4162,7 @@ jr_003_5E45:
 jr_003_5E5B:
     ldh  a, [hFrameCounter]                       ; $5E5B: $F0 $E7
     and  $03                                      ; $5E5D: $E6 $03
-    ld   hl, wEntitiesUnknownTableC               ; $5E5F: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5E5F: $21 $C0 $C2
     add  hl, bc                                   ; $5E62: $09
     add  [hl]                                     ; $5E63: $86
     ld   e, a                                     ; $5E64: $5F
@@ -7372,7 +7372,7 @@ jr_003_710D:
     cp   $24                                      ; $710D: $FE $24
     jr   nz, jr_003_7146                          ; $710F: $20 $35
 
-    ld   hl, wEntitiesUnknownTableC               ; $7111: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $7111: $21 $C0 $C2
     add  hl, bc                                   ; $7114: $09
     ld   a, [hl]                                  ; $7115: $7E
     and  a                                        ; $7116: $A7
@@ -7713,7 +7713,7 @@ jr_003_72EE:
 jr_003_7304:
     ld   a, $03                                   ; $7304: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $7306: $EA $A7 $C5
-    ld   hl, wEntitiesUnknownTableC               ; $7309: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $7309: $21 $C0 $C2
     add  hl, bc                                   ; $730C: $09
     ld   [hl], b                                  ; $730D: $70
     ld   hl, wEntitiesTypeTable                   ; $730E: $21 $A0 $C3
@@ -8398,7 +8398,7 @@ jr_003_76AC:
     cp   [hl]                                     ; $76D3: $BE
     jr   nz, jr_003_7710                          ; $76D4: $20 $3A
 
-    ld   hl, wEntitiesUnknownTableC               ; $76D6: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $76D6: $21 $C0 $C2
     add  hl, de                                   ; $76D9: $19
     ld   a, [hl]                                  ; $76DA: $7E
     and  a                                        ; $76DB: $A7
@@ -9556,7 +9556,7 @@ jr_003_7CFD:
     ld   hl, wEntitiesSubstate1Table              ; $7D21: $21 $B0 $C2
     add  hl, bc                                   ; $7D24: $09
     ld   [hl], d                                  ; $7D25: $72
-    ld   hl, wEntitiesUnknownTableC               ; $7D26: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $7D26: $21 $C0 $C2
     add  hl, bc                                   ; $7D29: $09
     ld   [hl], e                                  ; $7D2A: $73
     ldh  a, [hSwordIntersectedAreaX]              ; $7D2B: $F0 $CE

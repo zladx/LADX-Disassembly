@@ -6447,7 +6447,7 @@ jr_002_6FD7:
     ld   a, ENTITY_MIMIC                          ; $6FD7: $3E $28
     call SpawnNewEntity_trampoline                ; $6FD9: $CD $86 $3B
 
-    ld   hl, wEntitiesUnknownTableC               ; $6FDC: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $6FDC: $21 $C0 $C2
     add  hl, de                                   ; $6FDF: $19
     inc  [hl]                                     ; $6FE0: $34
     jr   jr_002_702C                              ; $6FE1: $18 $49

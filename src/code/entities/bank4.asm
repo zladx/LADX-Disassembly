@@ -595,7 +595,7 @@ jr_004_43B7:
     and  $01                                      ; $43B9: $E6 $01
     jr   nz, jr_004_43DD                          ; $43BB: $20 $20
 
-    ld   hl, wEntitiesUnknownTableC               ; $43BD: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $43BD: $21 $C0 $C2
     add  hl, bc                                   ; $43C0: $09
     ld   e, [hl]                                  ; $43C1: $5E
     ld   d, b                                     ; $43C2: $50
@@ -611,7 +611,7 @@ jr_004_43B7:
     cp   [hl]                                     ; $43D2: $BE
     jr   nz, jr_004_43DD                          ; $43D3: $20 $08
 
-    ld   hl, wEntitiesUnknownTableC               ; $43D5: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $43D5: $21 $C0 $C2
     add  hl, bc                                   ; $43D8: $09
     ld   a, [hl]                                  ; $43D9: $7E
     xor  $01                                      ; $43DA: $EE $01
@@ -2482,7 +2482,7 @@ jr_004_5202:
 jr_004_5237:
     call GetRandomByte                            ; $5237: $CD $0D $28
     and  $0F                                      ; $523A: $E6 $0F
-    ld   hl, wEntitiesUnknownTableC               ; $523C: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $523C: $21 $C0 $C2
     add  hl, bc                                   ; $523F: $09
     cp   [hl]                                     ; $5240: $BE
     jr   z, jr_004_5237                           ; $5241: $28 $F4
@@ -3767,7 +3767,7 @@ jr_004_5B10:
     rra                                           ; $5B18: $1F
     jr   c, jr_004_5B23                           ; $5B19: $38 $08
 
-    ld   hl, wEntitiesUnknownTableC               ; $5B1B: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5B1B: $21 $C0 $C2
     add  hl, bc                                   ; $5B1E: $09
     ld   a, [hl]                                  ; $5B1F: $7E
     cpl                                           ; $5B20: $2F
@@ -3790,7 +3790,7 @@ jr_004_5B28:
     ld   [hl], $06                                ; $5B35: $36 $06
 
 jr_004_5B37:
-    ld   hl, wEntitiesUnknownTableC               ; $5B37: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5B37: $21 $C0 $C2
     add  hl, bc                                   ; $5B3A: $09
     ld   a, [hl]                                  ; $5B3B: $7E
     ld   hl, wEntitiesSubstate1Table              ; $5B3C: $21 $B0 $C2
@@ -3830,7 +3830,7 @@ jr_004_5B66:
     call GetRandomByte                            ; $5B73: $CD $0D $28
     and  $02                                      ; $5B76: $E6 $02
     dec  a                                        ; $5B78: $3D
-    ld   hl, wEntitiesUnknownTableC               ; $5B79: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5B79: $21 $C0 $C2
     add  hl, bc                                   ; $5B7C: $09
     ld   [hl], a                                  ; $5B7D: $77
 
@@ -4016,7 +4016,7 @@ jr_004_5C8C:
     add  $18                                      ; $5C96: $C6 $18
     ld   [hl], a                                  ; $5C98: $77
     and  $01                                      ; $5C99: $E6 $01
-    ld   hl, wEntitiesUnknownTableC               ; $5C9B: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5C9B: $21 $C0 $C2
     add  hl, bc                                   ; $5C9E: $09
     ld   [hl], a                                  ; $5C9F: $77
 
@@ -4046,7 +4046,7 @@ jr_004_5CBB:
     ld   [hl], $20                                ; $5CBE: $36 $20
 
 jr_004_5CC0:
-    ld   hl, wEntitiesUnknownTableC               ; $5CC0: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5CC0: $21 $C0 $C2
     add  hl, bc                                   ; $5CC3: $09
     ldh  a, [wActiveEntityPosY]                               ; $5CC4: $F0 $EC
     cp   $28                                      ; $5CC6: $FE $28
@@ -4084,7 +4084,7 @@ jr_004_5CD9:
 
 jr_004_5CEF:
     dec  [hl]                                     ; $5CEF: $35
-    ld   hl, wEntitiesUnknownTableC               ; $5CF0: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5CF0: $21 $C0 $C2
     add  hl, bc                                   ; $5CF3: $09
     ld   e, [hl]                                  ; $5CF4: $5E
     ld   d, b                                     ; $5CF5: $50
@@ -4681,7 +4681,7 @@ Data_004_604C::
 
     ld   [bc], a                                  ; $60D1: $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $60D2: $E0 $A1
-    ld   hl, wEntitiesUnknownTableC               ; $60D4: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $60D4: $21 $C0 $C2
     add  hl, bc                                   ; $60D7: $09
     ld   a, [hl]                                  ; $60D8: $7E
     and  a                                        ; $60D9: $A7
@@ -6988,7 +6988,7 @@ func_004_6E1D:
     push af                                       ; $6E22: $F5
     swap a                                        ; $6E23: $CB $37
     and  $F0                                      ; $6E25: $E6 $F0
-    ld   hl, wEntitiesUnknownTableC               ; $6E27: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $6E27: $21 $C0 $C2
     add  hl, bc                                   ; $6E2A: $09
     add  [hl]                                     ; $6E2B: $86
     ld   [hl], a                                  ; $6E2C: $77
@@ -7839,7 +7839,7 @@ jr_004_7274:
 
     ld   hl, $D201                                ; $7300: $21 $01 $D2
     ld   [hl], $02                                ; $7303: $36 $02
-    ld   hl, wEntitiesUnknownTableC               ; $7305: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $7305: $21 $C0 $C2
     add  hl, bc                                   ; $7308: $09
     ld   a, [hl]                                  ; $7309: $7E
     and  a                                        ; $730A: $A7
@@ -7943,7 +7943,7 @@ jr_004_7362:
     ld   [hl], $01                                ; $739D: $36 $01
     ld   a, e                                     ; $739F: $7B
     inc  a                                        ; $73A0: $3C
-    ld   hl, wEntitiesUnknownTableC               ; $73A1: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $73A1: $21 $C0 $C2
     add  hl, bc                                   ; $73A4: $09
     ld   [hl], a                                  ; $73A5: $77
     call IsEntityUnknownFZero                                ; $73A6: $CD $00 $0C
@@ -7961,7 +7961,7 @@ jr_004_73B0:
     ret                                           ; $73B6: $C9
 
 func_004_73B7:
-    ld   hl, wEntitiesUnknownTableC               ; $73B7: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $73B7: $21 $C0 $C2
     add  hl, bc                                   ; $73BA: $09
     ld   a, [hl]                                  ; $73BB: $7E
     and  a                                        ; $73BC: $A7

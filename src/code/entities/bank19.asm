@@ -2470,7 +2470,7 @@ jr_019_4F5A:
     and  $07                                      ; $4F68: $E6 $07
     jr   nz, jr_019_4F8F                          ; $4F6A: $20 $23
 
-    ld   hl, wEntitiesUnknownTableC               ; $4F6C: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $4F6C: $21 $C0 $C2
     add  hl, bc                                   ; $4F6F: $09
     inc  [hl]                                     ; $4F70: $34
     ld   a, [hl]                                  ; $4F71: $7E
@@ -2492,7 +2492,7 @@ jr_019_4F5A:
     jp   label_019_7E61                           ; $4F8C: $C3 $61 $7E
 
 jr_019_4F8F:
-    ld   hl, wEntitiesUnknownTableC               ; $4F8F: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $4F8F: $21 $C0 $C2
     add  hl, bc                                   ; $4F92: $09
     ld   e, [hl]                                  ; $4F93: $5E
     ld   d, b                                     ; $4F94: $50
@@ -5183,7 +5183,7 @@ GhostEntityHandler::
     call RenderAnimatedActiveEntity                               ; $5E3B: $CD $C0 $3B
 
 jr_019_5E3E:
-    ld   hl, wEntitiesUnknownTableC               ; $5E3E: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5E3E: $21 $C0 $C2
     add  hl, bc                                   ; $5E41: $09
     ld   a, [hl]                                  ; $5E42: $7E
     and  a                                        ; $5E43: $A7
@@ -5334,7 +5334,7 @@ jr_019_5EAF:
     ld   a, $2D                                   ; $5F23: $3E $2D
     ldh  [hJingle], a                             ; $5F25: $E0 $F2
     call IncrementEntityState                     ; $5F27: $CD $12 $3B
-    ld   hl, wEntitiesUnknownTableC               ; $5F2A: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $5F2A: $21 $C0 $C2
     add  hl, bc                                   ; $5F2D: $09
     inc  [hl]                                     ; $5F2E: $34
     ret                                           ; $5F2F: $C9
@@ -7453,7 +7453,7 @@ jr_019_6AA1:
     ldh  a, [rNR10]                               ; $6AAD: $F0 $10
 
 MimicEntityHandler::
-    ld   hl, wEntitiesUnknownTableC               ; $6AAF: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $6AAF: $21 $C0 $C2
     add  hl, bc                                   ; $6AB2: $09
     ld   a, [hl]                                  ; $6AB3: $7E
     and  a                                        ; $6AB4: $A7
@@ -8867,7 +8867,7 @@ jr_019_72AC:
     ld   [hl], $40                                ; $72AC: $36 $40
     call IncrementEntityState                     ; $72AE: $CD $12 $3B
     call func_019_7921                            ; $72B1: $CD $21 $79
-    ld   hl, wEntitiesUnknownTableC               ; $72B4: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $72B4: $21 $C0 $C2
     add  hl, bc                                   ; $72B7: $09
     ld   [hl], $01                                ; $72B8: $36 $01
     ld   a, $56                                   ; $72BA: $3E $56
@@ -9030,7 +9030,7 @@ jr_019_7373:
     ld   e, $70                                   ; $73BB: $1E $70
 
 func_019_73BD:
-    ld   hl, wEntitiesUnknownTableC               ; $73BD: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $73BD: $21 $C0 $C2
     add  hl, bc                                   ; $73C0: $09
     ld   a, [hl]                                  ; $73C1: $7E
     and  a                                        ; $73C2: $A7
@@ -10317,7 +10317,7 @@ jr_019_7A64:
     ldh  a, [hScratch0]                           ; $7A68: $F0 $D7
     add  [hl]                                     ; $7A6A: $86
     ld   [hl], a                                  ; $7A6B: $77
-    ld   hl, wEntitiesUnknownTableC               ; $7A6C: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $7A6C: $21 $C0 $C2
     add  hl, bc                                   ; $7A6F: $09
     ldh  a, [hScratch2]                           ; $7A70: $F0 $D9
     add  [hl]                                     ; $7A72: $86
@@ -11166,7 +11166,7 @@ label_019_7E61:
     ld   [hl], b                                  ; $7E65: $70
     ret                                           ; $7E66: $C9
 
-    ld   hl, wEntitiesUnknownTableC               ; $7E67: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $7E67: $21 $C0 $C2
     add  hl, bc                                   ; $7E6A: $09
     ld   a, [hl]                                  ; $7E6B: $7E
     rst  $00                                      ; $7E6C: $C7
@@ -11183,7 +11183,7 @@ label_019_7E61:
     ld   [hl], $FF                                ; $7E7C: $36 $FF
 
 label_019_7E7E:
-    ld   hl, wEntitiesUnknownTableC               ; $7E7E: $21 $C0 $C2
+    ld   hl, wEntitiesSubstate2Table              ; $7E7E: $21 $C0 $C2
     add  hl, bc                                   ; $7E81: $09
     inc  [hl]                                     ; $7E82: $34
     ret                                           ; $7E83: $C9

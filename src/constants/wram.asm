@@ -449,8 +449,11 @@ wEntitiesCollisionsTable:: ; C2A0
 wEntitiesSubstate1Table:: ; C2B0
   ds $10
 
-; Butterfly: stores a delta Y to move closer to Link
-wEntitiesUnknownTableC:: ; C2C0
+; Entity-specific state.
+;
+; Examples:
+;  - Butterfly: stores a delta Y to move closer to Link
+wEntitiesSubstate2Table:: ; C2C0
   ds $10
 
 wEntitiesUnknownTableD:: ; C2D0

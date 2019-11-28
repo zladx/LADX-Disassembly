@@ -2,301 +2,7 @@
 ; This file was created with mgbdis v1.0.1 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-SECTION "ROM Bank $003", ROMX[$4000], BANK[$3]
-
-; Array indexed by entity type
-; See wEntitiesPhysicsFlagsTable
-Data_003_4000::
-    db   $42
-    db   $C2
-    db   $D2
-    db   $C2
-    db   $C2
-    db   $D2
-    db   $C2
-    db   $C2
-    db   $C3
-    db   $12
-    db   $42
-    db   $12
-    db   $42
-    db   $12
-    db   $12
-    db   $92
-    db   $12
-    db   $18
-    db   $12
-    db   $11
-    db   $12
-    db   $02
-    db   $02
-    db   $02
-    db   $12
-    db   $02
-    db   $12
-    db   $12
-    db   $11
-    db   $02
-    db   $12
-    db   $12
-    db   $12
-    db   $02
-    db   $42
-    db   $92
-    db   $12
-    db   $E2
-    db   $E2
-    db   $02
-    db   $12
-    db   $02
-    db   $02
-    db   $41
-    db   $12
-    db   $B1
-    db   $B1
-    db   $B1
-    db   $B1
-    db   $B1
-    db   $B2
-    db   $B2
-    db   $B1
-    db   $B2
-    db   $B2
-    db   $B2
-    db   $B1
-    db   $92
-    db   $B2
-    db   $B1
-    db   $B2
-    db   $B1
-    db   $82
-    db   $92
-    db   $84
-    db   $92
-    db   $82
-    db   $C0
-    db   $C0
-    db   $C2
-    db   $82
-    db   $82
-    db   $82
-    db   $82
-    db   $F2
-    db   $82
-    db   $41
-    db   $82
-    db   $82
-    db   $82
-    db   $12
-    db   $02
-    db   $42
-    db   $42
-    db   $C2
-    db   $02
-    db   $02
-    db   $02
-    db   $42
-    db   $08
-    db   $48
-    db   $00
-    db   $91
-    db   $02
-    db   $00
-    db   $00
-    db   $02
-    db   $C2
-    db   $08
-    db   $02
-    db   $C0
-    db   $00
-    db   $82
-    db   $02
-    db   $C0
-    db   $C2
-    db   $92
-    db   $82
-    db   $92
-    db   $12
-    db   $C1
-    db   $92
-    db   $92
-    db   $92
-    db   $92
-    db   $92
-    db   $93
-    db   $92
-    db   $92
-    db   $92
-    db   $92
-    db   $92
-    db   $52
-    db   $92
-    db   $00
-    db   $42
-    db   $02
-    db   $82
-    db   $92
-    db   $00
-    db   $42
-    db   $C2
-    db   $D1
-    db   $D2
-    db   $D1
-    db   $12
-    db   $84
-    db   $0C
-    db   $C2
-    db   $C2
-    db   $92
-    db   $92
-    db   $08
-    db   $12
-    db   $12
-    db   $13
-    db   $14
-    db   $12
-    db   $80
-    db   $92
-    db   $92
-    db   $C0
-    db   $D2
-    db   $12
-    db   $C0
-    db   $D2
-    db   $12
-    db   $94
-    db   $C0
-    db   $12
-    db   $12
-    db   $12
-    db   $14
-    db   $C4
-    db   $C4
-    db   $C4
-    db   $C2
-    db   $8A
-    db   $D2
-    db   $02
-    db   $12
-    db   $12
-    db   $12
-    db   $92
-    db   $12
-    db   $B2
-    db   $02
-    db   $82
-    db   $C0
-    db   $82
-    db   $92
-    db   $82
-    db   $92
-    db   $94
-    db   $95
-    db   $12
-    db   $13
-    db   $12
-    db   $12
-    db   $13
-    db   $16
-    db   $52
-    db   $C0
-    db   $D2
-    db   $D2
-    db   $94
-    db   $98
-    db   $12
-    db   $12
-    db   $D0
-    db   $D2
-    db   $C1
-    db   $88
-    db   $02
-    db   $52
-    db   $85
-    db   $84
-    db   $C2
-    db   $82
-    db   $82
-    db   $82
-    db   $D2
-    db   $D2
-    db   $D2
-    db   $82
-    db   $02
-    db   $C2
-    db   $C8
-    db   $42
-    db   $48
-    db   $C4
-    db   $C2
-    db   $C2
-    db   $C2
-    db   $D3
-    db   $D2
-    db   $42
-    db   $12
-    db   $13
-    db   $D2
-    db   $50
-    db   $C0
-    db   $00
-    db   $13
-    db   $13
-    db   $13
-    db   $74
-    db   $74
-    db   $74
-    db   $82
-    db   $82
-    db   $82
-    db   $94
-    db   $94
-    db   $0C
-    db   $C2
-    db   $82
-    db   $82
-    db   $06
-    db   $0C
-    db   $83
-
-; Table of hitbox flags, indexed by entity type
-HitboxFlagsForEntity::
-    db   $00, $00, $01, $01, $01, $00, $06, $00, $00, $00, $00, $00, $00, $00, $00, $80
-    db   $00, $08, $00, $01, $00, $00, $03, $03, $00, $00, $00, $00, $10, $02, $00, $00
-    db   $00, $00, $00, $00, $00, $80, $80, $82, $00, $00, $80, $00, $80, $1D, $1D, $1D
-    db   $1D, $1D, $01, $1D, $1D, $1D, $1D, $1D, $1D, $9D, $1D, $1D, $1D, $1D, $98, $98
-    db   $98, $98, $98, $98, $98, $00, $84, $84, $84, $84, $80, $98, $00, $98, $98, $98
-    db   $00, $00, $00, $00, $80, $00, $00, $00, $00, $88, $08, $00, $80, $80, $80, $A8
-    db   $80, $00, $00, $00, $00, $00, $00, $80, $00, $00, $80, $98, $00, $80, $00, $00
-    db   $98, $98, $98, $98, $98, $98, $98, $98, $80, $98, $00, $98, $08, $10, $00, $80
-    db   $98, $00, $20, $00, $00, $00, $38, $00, $88, $08, $04, $04, $84, $84, $88, $00
-    db   $00, $00, $80, $00, $00, $80, $80, $00, $00, $00, $00, $00, $00, $A4, $00, $00
-    db   $00, $00, $00, $2C, $2C, $2C, $30, $A4, $80, $00, $00, $00, $00, $80, $00, $1D
-    db   $00, $98, $00, $98, $98, $B4, $98, $98, $98, $00, $00, $00, $00, $00, $80, $00
-    db   $00, $18, $18, $B4, $B4, $06, $00, $34, $98, $00, $80, $00, $00, $98, $98, $00
-    db   $98, $98, $98, $98, $00, $18, $BD, $80, $2D, $2D, $00, $0A, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $84, $38, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $08, $00, $00, $00, $08, $08, $98
-
-; Entity health groups
-Data_003_41F6::
-    db   $00, $00, $02, $00, $00, $00, $00, $00, $00, $00, $0D, $01, $0D, $01, $01, $08
-    db   $13, $13, $13, $00, $01, $06, $2C, $2C, $0C, $00, $2A, $00, $00, $00, $2A, $2F
-    db   $0B, $0C, $0E, $01, $01, $06, $06, $09, $04, $01, $00, $0E, $01, $00, $00, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $0E, $00, $00, $00
-    db   $20, $13, $00, $00, $00, $0B, $0B, $30, $0E, $18, $1D, $1A, $19, $1C, $10, $11
-    db   $12, $00, $1F, $1E, $00, $1B, $22, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $21, $00, $29, $00, $29, $00
-    db   $00, $13, $00, $00, $00, $00, $00, $13, $15, $14, $01, $01, $01, $01, $13, $24
-    db   $2D, $2E, $13, $25, $23, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $02, $00, $00, $00, $00, $00, $00, $00, $00, $0F, $2B, $00, $00, $00, $13, $00
-    db   $00, $00, $00, $00, $00, $00, $01, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $00, $28, $00, $13, $00, $26, $00, $00, $31, $31, $31, $00, $00, $00, $22
-    db   $22, $22, $2B, $00, $14, $00, $22, $22, $33, $14, $00
-
+; Array of wEntitiesUnknowTableH, indexed by entity index
 Data_003_42F1::
     db   $12, $12, $0A, $12, $12, $0A, $02, $02, $02, $08, $12, $08, $12, $08, $00, $40
     db   $11, $11, $11, $00, $08, $12, $12, $12, $08, $11, $08, $08, $08, $10, $08, $08
@@ -410,12 +116,7 @@ Data_003_473C::
     db   $00, $01, $02, $40, $00, $00, $FF, $00, $00, $01, $02, $40, $00, $00, $FF, $00
     db   $00, $01, $02, $40, $00, $00, $FF, $00, $00, $01, $02, $40, $00, $00, $FF, $00
 
-; Entities initial health table
-Data_003_47BC::
-    db   $01, $02, $02, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
-    db   $0C, $3F, $08, $08, $08, $0C, $00, $00, $04, $06, $08, $0A, $04, $14, $0A, $18
-    db   $04, $02, $08, $08, $02, $04, $FF, $00, $02, $04, $02, $03, $01, $01, $08, $06
-    db   $02, $0A, $01, $08, $08
+include "data/entities/health.asm"
 
 Data_003_47F1::
     db   $04, $04, $08, $08, $18, $08, $04, $08, $10, $08, $10, $08, $08, $04, $08, $08
@@ -446,15 +147,15 @@ ConfigureNewEntity::
     add  hl, bc                                   ; $4868: $09
     ld   [hl], $FF                                ; $4869: $36 $FF
 
-label_003_486B:
+.attributes
     ; de = entity type
     ld   hl, wEntitiesTypeTable                   ; $486B: $21 $A0 $C3
     add  hl, bc                                   ; $486E: $09
     ld   e, [hl]                                  ; $486F: $5E
     ld   d, b                                     ; $4870: $50
 
-    ; wEntitiesPhysicsFlagsTable = Data_003_4000[EntityType]
-    ld   hl, Data_003_4000                        ; $4871: $21 $00 $40
+    ; wEntitiesPhysicsFlagsTable = PhysicsFlagsForEntity[EntityType]
+    ld   hl, PhysicsFlagsForEntity                        ; $4871: $21 $00 $40
     add  hl, de                                   ; $4874: $19
     ld   a, [hl]                                  ; $4875: $7E
     ld   hl, wEntitiesPhysicsFlagsTable                ; $4876: $21 $40 $C3
@@ -462,34 +163,40 @@ label_003_486B:
     ld   [hl], a                                  ; $487A: $77
 
     ; wEntitiesHitboxFlagsTable = HitboxFlagsForEntity[EntityType]
-    ld   hl, HitboxFlagsForEntity                        ; $487B: $21 $FB $40
+    ld   hl, HitboxFlagsForEntity                 ; $487B: $21 $FB $40
     add  hl, de                                   ; $487E: $19
     ld   a, [hl]                                  ; $487F: $7E
     ld   hl, wEntitiesHitboxFlagsTable                ; $4880: $21 $50 $C3
     add  hl, bc                                   ; $4883: $09
     ld   [hl], a                                  ; $4884: $77
 
-    call func_003_4895                            ; $4885: $CD $95 $48
+    call ConfigureEntityHealth                    ; $4885: $CD $95 $48
+
     ld   hl, Data_003_42F1                        ; $4888: $21 $F1 $42
     add  hl, de                                   ; $488B: $19
     ld   a, [hl]                                  ; $488C: $7E
     ld   hl, wEntitiesUnknowTableH                ; $488D: $21 $30 $C4
     add  hl, bc                                   ; $4890: $09
     ld   [hl], a                                  ; $4891: $77
+
     jp   ConfigureEntityHitbox                               ; $4892: $C3 $EA $3A
 
-func_003_4895::
+ConfigureEntityHealth::
     push de                                       ; $4895: $D5
-    ld   hl, Data_003_41F6                        ; $4896: $21 $F6 $41
+    ; e = HealthGroupForEntity[entity index]
+    ld   hl, HealthGroupForEntity                 ; $4896: $21 $F6 $41
     add  hl, de                                   ; $4899: $19
     ld   e, [hl]                                  ; $489A: $5E
-    ld   hl, $C4D0                                ; $489B: $21 $D0 $C4
+    ; wEntitiesHealthGroup[entity index] = e
+    ld   hl, wEntitiesHealthGroup                 ; $489B: $21 $D0 $C4
     add  hl, bc                                   ; $489E: $09
     ld   [hl], e                                  ; $489F: $73
+    ; a = InitialHealthForGroup[health group]
     ld   d, b                                     ; $48A0: $50
-    ld   hl, Data_003_47BC                        ; $48A1: $21 $BC $47
+    ld   hl, InitialHealthForGroup                ; $48A1: $21 $BC $47
     add  hl, de                                   ; $48A4: $19
     ld   a, [hl]                                  ; $48A5: $7E
+    ; wEntitiesHealthTable[entity index] = a
     ld   hl, wEntitiesHealthTable                                ; $48A6: $21 $60 $C3
     add  hl, bc                                   ; $48A9: $09
     ld   [hl], a                                  ; $48AA: $77
@@ -1128,9 +835,10 @@ EntityDestructionData::
     db   $34, $02, $34, $22, $34, $14, $34, $34
 
 EntityDestructionHandler::
-    call GetEntityTransitionCountdown                 ; $4C4C: $CD $05 $0C
-    jr   z, jr_003_4C77                           ; $4C4F: $28 $26
+    call GetEntityTransitionCountdown             ; $4C4C: $CD $05 $0C
+    jr   z, .destructionEnd                       ; $4C4F: $28 $26
 
+    ; Animate the entity destruction with explosions
     ldh  a, [hFrameCounter]                       ; $4C51: $F0 $E7
     rra                                           ; $4C53: $1F
     rra                                           ; $4C54: $1F
@@ -1150,27 +858,28 @@ EntityDestructionHandler::
     call ClearEntitySpeed                         ; $4C73: $CD $7F $3D
     ret                                           ; $4C76: $C9
 
-jr_003_4C77:
-    ldh  a, [hActiveEntityType]                     ; $4C77: $F0 $EB
-    cp   $1F                                      ; $4C79: $FE $1F
-    jr   nz, jr_003_4C8C                          ; $4C7B: $20 $0F
-
+.destructionEnd
+    ; If destroying a Gibdo…
+    ldh  a, [hActiveEntityType]                   ; $4C77: $F0 $EB
+    cp   ENTITY_GIBDO                             ; $4C79: $FE $1F
+    jr   nz, .gibdoEnd                            ; $4C7B: $20 $0F
+    ; … replace it by a Stalfos.
     ld   hl, wEntitiesTypeTable                   ; $4C7D: $21 $A0 $C3
     add  hl, bc                                   ; $4C80: $09
-    ld   [hl], $1E                                ; $4C81: $36 $1E
-    ld   hl, wEntitiesStatusTable                         ; $4C83: $21 $80 $C2
+    ld   [hl], ENTITY_STALFOS_EVASIVE             ; $4C81: $36 $1E
+    ld   hl, wEntitiesStatusTable                 ; $4C83: $21 $80 $C2
     add  hl, bc                                   ; $4C86: $09
-    ld   [hl], $05                                ; $4C87: $36 $05
-    jp   label_003_486B                           ; $4C89: $C3 $6B $48
+    ld   [hl], ENTITY_STATUS_ACTIVE               ; $4C87: $36 $05
+    jp   ConfigureNewEntity.attributes            ; $4C89: $C3 $6B $48
+.gibdoEnd
 
-jr_003_4C8C:
     ld   hl, wEntitiesUnknowTableV                ; $4C8C: $21 $80 $C4
     add  hl, bc                                   ; $4C8F: $09
     ld   [hl], $1F                                ; $4C90: $36 $1F
     ld   hl, wEntitiesStatusTable                         ; $4C92: $21 $80 $C2
     add  hl, bc                                   ; $4C95: $09
-    ld   [hl], $01                                ; $4C96: $36 $01
-    ld   hl, wEntitiesPhysicsFlagsTable                ; $4C98: $21 $40 $C3
+    ld   [hl], ENTITY_STATUS_DYING                ; $4C96: $36 $01
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $4C98: $21 $40 $C3
     add  hl, bc                                   ; $4C9B: $09
     ld   [hl], $04                                ; $4C9C: $36 $04
     ld   hl, hNoiseSfx                            ; $4C9E: $21 $F4 $FF
@@ -1191,33 +900,33 @@ Data_003_4CB2::
 
 EntityFallHandler::
     ldh  a, [hMapId]                              ; $4CB6: $F0 $F7
-    cp   $FF                                      ; $4CB8: $FE $FF
-    jr   nz, jr_003_4CDC                          ; $4CBA: $20 $20
+    cp   MAP_COLOR_DUNGEON                        ; $4CB8: $FE $FF
+    jr   nz, .colorShellEnd                       ; $4CBA: $20 $20
 
     ld   hl, wEntitiesTypeTable                   ; $4CBC: $21 $A0 $C3
     add  hl, bc                                   ; $4CBF: $09
     ld   a, [hl]                                  ; $4CC0: $7E
-    cp   $E9                                      ; $4CC1: $FE $E9
-    jr   z, jr_003_4CCD                           ; $4CC3: $28 $08
+    cp   ENTITY_COLOR_SHELL_RED                   ; $4CC1: $FE $E9
+    jr   z, .animateColorShell                    ; $4CC3: $28 $08
 
-    cp   $EA                                      ; $4CC5: $FE $EA
-    jr   z, jr_003_4CCD                           ; $4CC7: $28 $04
+    cp   ENTITY_COLOR_SHELL_GREEN                 ; $4CC5: $FE $EA
+    jr   z, .animateColorShell                    ; $4CC7: $28 $04
 
-    cp   $EB                                      ; $4CC9: $FE $EB
-    jr   nz, jr_003_4CDC                          ; $4CCB: $20 $0F
+    cp   ENTITY_COLOR_SHELL_BLUE                  ; $4CC9: $FE $EB
+    jr   nz, .colorShellEnd                       ; $4CCB: $20 $0F
 
-jr_003_4CCD:
-    ld   hl, wEntitiesStatusTable                         ; $4CCD: $21 $80 $C2
+.animateColorShell
+    ld   hl, wEntitiesStatusTable                 ; $4CCD: $21 $80 $C2
     add  hl, bc                                   ; $4CD0: $09
-    ld   a, $05                                   ; $4CD1: $3E $05
+    ld   a, ENTITY_STATUS_ACTIVE                  ; $4CD1: $3E $05
     ld   [hl], a                                  ; $4CD3: $77
     ld   hl, wEntitiesStateTable                  ; $4CD4: $21 $90 $C2
     add  hl, bc                                   ; $4CD7: $09
     ld   a, $06                                   ; $4CD8: $3E $06
     ld   [hl], a                                  ; $4CDA: $77
     ret                                           ; $4CDB: $C9
+.colorShellEnd
 
-jr_003_4CDC:
     call GetEntityTransitionCountdown                 ; $4CDC: $CD $05 $0C
     jr   nz, jr_003_4D07                          ; $4CDF: $20 $26
 
@@ -2493,11 +2202,11 @@ EntityDeathHandler::
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E
     and  $80                                      ; $551D: $E6 $80
-    jr   z, jr_003_5524                           ; $551F: $28 $03
+    jr   z, .dying                                ; $551F: $28 $03
 
-    jp   ExecuteActiveEntityHandler                               ; $5521: $C3 $8D $3A
+    jp   ExecuteActiveEntityHandler               ; $5521: $C3 $8D $3A
 
-jr_003_5524:
+.dying
     ld   hl, wEntitiesUnknowTableV                ; $5524: $21 $80 $C4
     add  hl, bc                                   ; $5527: $09
     ld   a, [hl]                                  ; $5528: $7E

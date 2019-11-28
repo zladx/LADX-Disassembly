@@ -18,6 +18,9 @@ section "bank2",romx[$4000],bank[$02]
 include "code/bank2.asm"
 
 section "bank3",romx[$4000],bank[$03]
+include "data/entities/physics_flags.asm"
+include "data/entities/hitbox_flags.asm"
+include "data/entities/health_groups.asm"
 include "code/entities/bank3.asm"
 
 section "bank4",romx[$4000],bank[$04]

@@ -2,6 +2,7 @@
 ; This file was created with mgbdis v1.0.1 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
+; Array of wEntitiesUnknowTableH, indexed by entity index
 Data_003_42F1::
     db   $12, $12, $0A, $12, $12, $0A, $02, $02, $02, $08, $12, $08, $12, $08, $00, $40
     db   $11, $11, $11, $00, $08, $12, $12, $12, $08, $11, $08, $08, $08, $10, $08, $08
@@ -146,7 +147,7 @@ ConfigureNewEntity::
     add  hl, bc                                   ; $4868: $09
     ld   [hl], $FF                                ; $4869: $36 $FF
 
-label_003_486B:
+.attributes
     ; de = entity type
     ld   hl, wEntitiesTypeTable                   ; $486B: $21 $A0 $C3
     add  hl, bc                                   ; $486E: $09
@@ -162,23 +163,25 @@ label_003_486B:
     ld   [hl], a                                  ; $487A: $77
 
     ; wEntitiesHitboxFlagsTable = HitboxFlagsForEntity[EntityType]
-    ld   hl, HitboxFlagsForEntity                        ; $487B: $21 $FB $40
+    ld   hl, HitboxFlagsForEntity                 ; $487B: $21 $FB $40
     add  hl, de                                   ; $487E: $19
     ld   a, [hl]                                  ; $487F: $7E
     ld   hl, wEntitiesHitboxFlagsTable                ; $4880: $21 $50 $C3
     add  hl, bc                                   ; $4883: $09
     ld   [hl], a                                  ; $4884: $77
 
-    call func_003_4895                            ; $4885: $CD $95 $48
+    call ConfigureEntityHealth                    ; $4885: $CD $95 $48
+
     ld   hl, Data_003_42F1                        ; $4888: $21 $F1 $42
     add  hl, de                                   ; $488B: $19
     ld   a, [hl]                                  ; $488C: $7E
     ld   hl, wEntitiesUnknowTableH                ; $488D: $21 $30 $C4
     add  hl, bc                                   ; $4890: $09
     ld   [hl], a                                  ; $4891: $77
+
     jp   ConfigureEntityHitbox                               ; $4892: $C3 $EA $3A
 
-func_003_4895::
+ConfigureEntityHealth::
     push de                                       ; $4895: $D5
     ; e = HealthGroupForEntity[entity index]
     ld   hl, HealthGroupForEntity                 ; $4896: $21 $F6 $41
@@ -832,9 +835,10 @@ EntityDestructionData::
     db   $34, $02, $34, $22, $34, $14, $34, $34
 
 EntityDestructionHandler::
-    call GetEntityTransitionCountdown                 ; $4C4C: $CD $05 $0C
-    jr   z, jr_003_4C77                           ; $4C4F: $28 $26
+    call GetEntityTransitionCountdown             ; $4C4C: $CD $05 $0C
+    jr   z, .destructionEnd                       ; $4C4F: $28 $26
 
+    ; Animate the entity destruction with explosions
     ldh  a, [hFrameCounter]                       ; $4C51: $F0 $E7
     rra                                           ; $4C53: $1F
     rra                                           ; $4C54: $1F
@@ -854,27 +858,28 @@ EntityDestructionHandler::
     call ClearEntitySpeed                         ; $4C73: $CD $7F $3D
     ret                                           ; $4C76: $C9
 
-jr_003_4C77:
-    ldh  a, [hActiveEntityType]                     ; $4C77: $F0 $EB
-    cp   $1F                                      ; $4C79: $FE $1F
-    jr   nz, jr_003_4C8C                          ; $4C7B: $20 $0F
-
+.destructionEnd
+    ; If destroying a Gibdo…
+    ldh  a, [hActiveEntityType]                   ; $4C77: $F0 $EB
+    cp   ENTITY_GIBDO                             ; $4C79: $FE $1F
+    jr   nz, .gibdoEnd                            ; $4C7B: $20 $0F
+    ; … replace it by a Stalfos.
     ld   hl, wEntitiesTypeTable                   ; $4C7D: $21 $A0 $C3
     add  hl, bc                                   ; $4C80: $09
-    ld   [hl], $1E                                ; $4C81: $36 $1E
-    ld   hl, wEntitiesStatusTable                         ; $4C83: $21 $80 $C2
+    ld   [hl], ENTITY_STALFOS_EVASIVE             ; $4C81: $36 $1E
+    ld   hl, wEntitiesStatusTable                 ; $4C83: $21 $80 $C2
     add  hl, bc                                   ; $4C86: $09
-    ld   [hl], $05                                ; $4C87: $36 $05
-    jp   label_003_486B                           ; $4C89: $C3 $6B $48
+    ld   [hl], ENTITY_STATUS_ACTIVE               ; $4C87: $36 $05
+    jp   ConfigureNewEntity.attributes            ; $4C89: $C3 $6B $48
+.gibdoEnd
 
-jr_003_4C8C:
     ld   hl, wEntitiesUnknowTableV                ; $4C8C: $21 $80 $C4
     add  hl, bc                                   ; $4C8F: $09
     ld   [hl], $1F                                ; $4C90: $36 $1F
     ld   hl, wEntitiesStatusTable                         ; $4C92: $21 $80 $C2
     add  hl, bc                                   ; $4C95: $09
-    ld   [hl], $01                                ; $4C96: $36 $01
-    ld   hl, wEntitiesPhysicsFlagsTable                ; $4C98: $21 $40 $C3
+    ld   [hl], ENTITY_STATUS_DYING                ; $4C96: $36 $01
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $4C98: $21 $40 $C3
     add  hl, bc                                   ; $4C9B: $09
     ld   [hl], $04                                ; $4C9C: $36 $04
     ld   hl, hNoiseSfx                            ; $4C9E: $21 $F4 $FF
@@ -895,33 +900,33 @@ Data_003_4CB2::
 
 EntityFallHandler::
     ldh  a, [hMapId]                              ; $4CB6: $F0 $F7
-    cp   $FF                                      ; $4CB8: $FE $FF
-    jr   nz, jr_003_4CDC                          ; $4CBA: $20 $20
+    cp   MAP_COLOR_DUNGEON                        ; $4CB8: $FE $FF
+    jr   nz, .colorShellEnd                       ; $4CBA: $20 $20
 
     ld   hl, wEntitiesTypeTable                   ; $4CBC: $21 $A0 $C3
     add  hl, bc                                   ; $4CBF: $09
     ld   a, [hl]                                  ; $4CC0: $7E
-    cp   $E9                                      ; $4CC1: $FE $E9
-    jr   z, jr_003_4CCD                           ; $4CC3: $28 $08
+    cp   ENTITY_COLOR_SHELL_RED                   ; $4CC1: $FE $E9
+    jr   z, .animateColorShell                    ; $4CC3: $28 $08
 
-    cp   $EA                                      ; $4CC5: $FE $EA
-    jr   z, jr_003_4CCD                           ; $4CC7: $28 $04
+    cp   ENTITY_COLOR_SHELL_GREEN                 ; $4CC5: $FE $EA
+    jr   z, .animateColorShell                    ; $4CC7: $28 $04
 
-    cp   $EB                                      ; $4CC9: $FE $EB
-    jr   nz, jr_003_4CDC                          ; $4CCB: $20 $0F
+    cp   ENTITY_COLOR_SHELL_BLUE                  ; $4CC9: $FE $EB
+    jr   nz, .colorShellEnd                       ; $4CCB: $20 $0F
 
-jr_003_4CCD:
-    ld   hl, wEntitiesStatusTable                         ; $4CCD: $21 $80 $C2
+.animateColorShell
+    ld   hl, wEntitiesStatusTable                 ; $4CCD: $21 $80 $C2
     add  hl, bc                                   ; $4CD0: $09
-    ld   a, $05                                   ; $4CD1: $3E $05
+    ld   a, ENTITY_STATUS_ACTIVE                  ; $4CD1: $3E $05
     ld   [hl], a                                  ; $4CD3: $77
     ld   hl, wEntitiesStateTable                  ; $4CD4: $21 $90 $C2
     add  hl, bc                                   ; $4CD7: $09
     ld   a, $06                                   ; $4CD8: $3E $06
     ld   [hl], a                                  ; $4CDA: $77
     ret                                           ; $4CDB: $C9
+.colorShellEnd
 
-jr_003_4CDC:
     call GetEntityTransitionCountdown                 ; $4CDC: $CD $05 $0C
     jr   nz, jr_003_4D07                          ; $4CDF: $20 $26
 
@@ -2197,11 +2202,11 @@ EntityDeathHandler::
     add  hl, bc                                   ; $551B: $09
     ld   a, [hl]                                  ; $551C: $7E
     and  $80                                      ; $551D: $E6 $80
-    jr   z, jr_003_5524                           ; $551F: $28 $03
+    jr   z, .dying                                ; $551F: $28 $03
 
-    jp   ExecuteActiveEntityHandler                               ; $5521: $C3 $8D $3A
+    jp   ExecuteActiveEntityHandler               ; $5521: $C3 $8D $3A
 
-jr_003_5524:
+.dying
     ld   hl, wEntitiesUnknowTableV                ; $5524: $21 $80 $C4
     add  hl, bc                                   ; $5527: $09
     ld   a, [hl]                                  ; $5528: $7E

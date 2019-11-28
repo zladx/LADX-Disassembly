@@ -590,6 +590,8 @@ wEntitiesLoadOrderTable:: ; C460
 wEntitiesUnknowTableI:: ; C470
   ds $10
 
+; Enemy flags?
+; Would be always 0 for NPCs and non-enemies?
 wEntitiesUnknowTableV:: ; C480
   ds $10
 

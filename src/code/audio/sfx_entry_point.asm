@@ -1,5 +1,5 @@
 ; Entry point for the Sfx sound system
-
+SoundSystemInit::
     jp   label_01F_4009                           ; $4000: $C3 $09 $40
 
 Func_01F_4003::

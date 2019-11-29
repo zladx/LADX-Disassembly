@@ -98,10 +98,7 @@ Init::
     call InitSaveFiles
 
     ; Initialize sound
-    ; (calls 001F:4000)
-    ld   a, $1F
-    ld   [MBC3SelectBank], a
-    call $4000
+    callsb SoundSystemInit
 
     ; Ignore joypad input during 24 frames
     ld   a, 24

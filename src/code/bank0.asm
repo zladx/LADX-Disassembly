@@ -681,6 +681,8 @@ label_BE7::
     ld   a, [$DE03]
     ld   l, a
     jp   hl
+
+label_BF0::
     ld   a, BANK(Data_002_4948)
     ld   [MBC3SelectBank], a
     call label_1A50

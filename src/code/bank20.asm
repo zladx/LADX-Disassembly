@@ -483,7 +483,7 @@ ClearWRAMBank5::
     ei                                            ; $486A: $FB
     ret                                           ; $486B: $C9
 
-Func_020_486C::
+Data_020_486C::
     add  hl, bc                                   ; $486C: $09
     dec  b                                        ; $486D: $05
     ld   [$0A08], sp                              ; $486E: $08 $08 $0A
@@ -492,7 +492,7 @@ Func_020_486C::
     inc  c                                        ; $4873: $0C
 
 Func_020_4874::
-    ld   hl, $486C                                ; $4874: $21 $6C $48
+    ld   hl, Data_020_486C                        ; $4874: $21 $6C $48
     add  hl, de                                   ; $4877: $19
     ldh  a, [hScratch0]                           ; $4878: $F0 $D7
     add  [hl]                                     ; $487A: $86
@@ -3781,7 +3781,7 @@ label_020_5D34:
     ret                                           ; $5D51: $C9
 
     call LCDOff                                   ; $5D52: $CD $CF $28
-    call $3FD1                                    ; $5D55: $CD $D1 $3F
+    call LoadColorDungeonTiles                    ; $5D55: $CD $D1 $3F
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
     ld   [rLCDC], a                               ; $5D5B: $E0 $40
     call Func_020_6683                            ; $5D5D: $CD $83 $66
@@ -5093,7 +5093,7 @@ jr_020_63F5:
     ld   [wGameplaySubtype], a                    ; $63FD: $EA $96 $DB
     ld   a, $90                                   ; $6400: $3E $90
     ld   [$DE0A], a                               ; $6402: $EA $0A $DE
-    ld   a, [$0005]                               ; $6405: $FA $05 $00
+    ld   a, [ROM_DebugTool3]                      ; $6405: $FA $05 $00
     and  a                                        ; $6408: $A7
     jr   z, jr_020_641C                           ; $6409: $28 $11
 

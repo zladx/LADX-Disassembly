@@ -135,7 +135,7 @@ label_4259::
     ld   [bc], a
     nop
     inc  b
-    ld   [$100C], sp
+    db   $08, $0C, $10
     inc  c
     ld   [$F004], sp
     or   a

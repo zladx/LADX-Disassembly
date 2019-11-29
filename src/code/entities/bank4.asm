@@ -5898,7 +5898,7 @@ jr_004_67FA:
     ret                                           ; $67FA: $C9
 
 label_004_67FB:
-    call $0C83                                    ; $67FB: $CD $83 $0C
+    call label_C83                                ; $67FB: $CD $83 $0C
     ldh  a, [hLinkPositionX]                      ; $67FE: $F0 $98
     swap a                                        ; $6800: $CB $37
     and  $0F                                      ; $6802: $E6 $0F
@@ -7724,7 +7724,7 @@ label_004_723B:
     ld   a, e                                     ; $7240: $7B
     ldh  [hLinkDirection], a                      ; $7241: $E0 $9E
     push bc                                       ; $7243: $C5
-    call $0BF0                                    ; $7244: $CD $F0 $0B
+    call label_BF0                                ; $7244: $CD $F0 $0B
     pop  bc                                       ; $7247: $C1
 
 jr_004_7248:

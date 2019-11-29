@@ -549,7 +549,7 @@ jr_003_4A7A:
     call label_27EA                               ; $4AA0: $CD $EA $27
 
 jr_003_4AA3:
-    ld   a, [$0003]                               ; $4AA3: $FA $03 $00
+    ld   a, [ROM_DebugTool1]                      ; $4AA3: $FA $03 $00
     and  a                                        ; $4AA6: $A7
     jp   z, label_003_4B2F                        ; $4AA7: $CA $2F $4B
 

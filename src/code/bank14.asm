@@ -1952,8 +1952,7 @@ func_014_50C3::
     db   $10                                      ; $51F6: $10
     db   $10                                      ; $51F7: $10
     db   $10                                      ; $51F8: $10
-    jp   $1010                                    ; $51F9: $C3 $10 $10
-
+    db   $C3, $10, $10                            ; $51F9: $C3 $10 $10
     db   $10                                      ; $51FC: $10
     db   $10                                      ; $51FD: $10
     db   $10                                      ; $51FE: $10
@@ -2611,7 +2610,7 @@ func_014_5526::
     sla  c                                        ; $5543: $CB $21
     rl   b                                        ; $5545: $CB $10
     ld   a, $14                                   ; $5547: $3E $14
-    call $092E                                    ; $5549: $CD $2E $09
+    call label_91D.jp_92E                         ; $5549: $CD $2E $09
     pop  bc                                       ; $554C: $C1
 
 jr_014_554D:
@@ -2677,7 +2676,7 @@ jr_014_5584:
     sla  c                                        ; $55A9: $CB $21
     rl   b                                        ; $55AB: $CB $10
     ld   a, $14                                   ; $55AD: $3E $14
-    call $092E                                    ; $55AF: $CD $2E $09
+    call label_91D.jp_92E                         ; $55AF: $CD $2E $09
     pop  bc                                       ; $55B2: $C1
 
 jr_014_55B3:
@@ -2725,7 +2724,7 @@ jr_014_55E3:
     sla  c                                        ; $55F6: $CB $21
     rl   b                                        ; $55F8: $CB $10
     ld   a, $14                                   ; $55FA: $3E $14
-    call $092E                                    ; $55FC: $CD $2E $09
+    call label_91D.jp_92E                         ; $55FC: $CD $2E $09
     pop  bc                                       ; $55FF: $C1
 
 jr_014_5600:
@@ -2874,7 +2873,7 @@ jr_014_56B9:
     sla  c                                        ; $56BF: $CB $21
     rl   b                                        ; $56C1: $CB $10
     ld   a, $14                                   ; $56C3: $3E $14
-    call $092E                                    ; $56C5: $CD $2E $09
+    call label_91D.jp_92E                         ; $56C5: $CD $2E $09
     pop  bc                                       ; $56C8: $C1
 
 jr_014_56C9:
@@ -3011,7 +3010,7 @@ label_014_5767:
     sla  c                                        ; $577F: $CB $21
     rl   b                                        ; $5781: $CB $10
     ld   a, $14                                   ; $5783: $3E $14
-    call $092E                                    ; $5785: $CD $2E $09
+    call label_91D.jp_92E                         ; $5785: $CD $2E $09
     pop  bc                                       ; $5788: $C1
 
 jr_014_5789:
@@ -3085,7 +3084,7 @@ label_014_57E1:
     sla  c                                        ; $57FD: $CB $21
     rl   b                                        ; $57FF: $CB $10
     ld   a, $14                                   ; $5801: $3E $14
-    call $092E                                    ; $5803: $CD $2E $09
+    call label_91D.jp_92E                         ; $5803: $CD $2E $09
     pop  bc                                       ; $5806: $C1
 
 jr_014_5807:

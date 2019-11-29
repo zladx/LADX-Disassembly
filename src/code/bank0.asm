@@ -191,6 +191,8 @@ label_91D::
     rl   b
     ld   c, a
     jr   .jp_92F
+
+.jp_92E
     push af
 
 .jp_92F
@@ -813,6 +815,8 @@ label_C83::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9E
+
+label_C89::
     ld   a, [wWarp0MapCategory]
     cp   $01
     jr   nz, ApplyMapFadeOutTransition
@@ -1607,6 +1611,8 @@ LinkMotionInteractiveHandler::
     ret  z
 
     jpsw label_002_4287
+
+Func_1177::
     ld   a, [$C50A]
     ld   hl, $C167
     or   [hl]
@@ -1871,6 +1877,9 @@ SetShieldVals::
     ld   [wIsUsingShield], a
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
+    ; fallthrough
+
+Func_020_4B4A_trampoline::
     callsb Func_020_4B4A
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
@@ -2553,6 +2562,7 @@ ClearLinkPositionIncrement::
 ; Animate Link motion?
 ApplyLinkMotionState::
     call label_753A
+.skipInitialCall
     ld   a, [wLinkMotionState]
     cp   $01
     ret  z

@@ -15,23 +15,36 @@ count_matches()
   grep -E --recursive "$regex" "$SOURCE_DIR" $options | wc -l
 
   if [[ "$VERBOSE" != "disabled" ]]; then
-    echo ""
     echo "Breakdown per file:"
     grep -E --recursive --count "$regex" "$SOURCE_DIR" $options | grep -v ':0'
+    echo ""
   fi
 }
 
 cd "$(dirname $0)/.."
 
 echo "Number of remaining raw addresses:"
-echo "   In ROM (0000-7FFF):"
+echo "   Referencing Home (0000-3FFF):"
 EXCLUDED_FILES="\
 --exclude */bank0.asm \
+--exclude */bank1.asm \
+--exclude */bank2.asm \
+--exclude */bank3.asm \
+--exclude */bank4.asm \
+--exclude */bank14.asm \
+--exclude */bank20.asm \
+--exclude */credits.asm \
+--exclude */super_gameboy.asm \
 --exclude */home/init.asm \
---exclude */home/clear_memory.asm"
-count_matches '(, | \[|call |jp   )\$[0-7][A-Z0-9]{3}' "$EXCLUDED_FILES"
+--exclude */home/clear_memory.asm \
+--exclude */audio/sfx.asm \
+--exclude */audio/music_1.asm"
+count_matches '(, | \[|call |jp   )\$[0-3][A-Z0-9]{3}' "$EXCLUDED_FILES"
 
-echo "   In RAM (8000-FFFF):"
+echo "   Referencing non-Home ROM banks (4000-7FFF):"
+count_matches '(, | \[|call |jp   )\$[4-7][A-Z0-9]{3}'
+
+echo "   Referencing RAM (8000-FFFF):"
 count_matches '(, | \[|call |jp   )\$[89A-Z][A-Z0-9]{3}'
 
 echo ""

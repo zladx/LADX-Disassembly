@@ -13,7 +13,7 @@ SuperGameBoyInit::
     ret  nz                                      ; $6A25: $C0
 
     ; Wait for 30 frames
-    ld   bc, $001E                               ; $6A26: $01 $1E $00
+    ld   bc, $1E                                 ; $6A26: $01 $1E $00
     call WaitForBCFrames                          ; $6A29: $CD $92 $6B
 
     ld   hl, $6A12                               ; $6A2C: $21 $12 $6A
@@ -61,62 +61,62 @@ SuperGameBoyInit::
 
     ld   hl, $6860                               ; $6A7F: $21 $60 $68
     call SendUploadCommand                       ; $6A82: $CD $51 $6B
-    ld   bc, $0006                               ; $6A85: $01 $06 $00
+    ld   bc, $06                                 ; $6A85: $01 $06 $00
     call WaitForBCFrames                         ; $6A88: $CD $92 $6B
 
     ld   hl, $6960                               ; $6A8B: $21 $60 $69
     call SendUploadCommand                       ; $6A8E: $CD $51 $6B
-    ld   bc, $0006                               ; $6A91: $01 $06 $00
+    ld   bc, $06                                 ; $6A91: $01 $06 $00
     call WaitForBCFrames                         ; $6A94: $CD $92 $6B
 
     ld   hl, $6880                               ; $6A97: $21 $80 $68
     call SendUploadCommand                       ; $6A9A: $CD $51 $6B
-    ld   bc, $0006                               ; $6A9D: $01 $06 $00
+    ld   bc, $06                                 ; $6A9D: $01 $06 $00
     call WaitForBCFrames                         ; $6AA0: $CD $92 $6B
 
     ld   hl, $6890                               ; $6AA3: $21 $90 $68
     call SendUploadCommand                       ; $6AA6: $CD $51 $6B
-    ld   bc, $0006                               ; $6AA9: $01 $06 $00
+    ld   bc, $06                                 ; $6AA9: $01 $06 $00
     call WaitForBCFrames                         ; $6AAC: $CD $92 $6B
 
     ld   hl, $68A0                               ; $6AAF: $21 $A0 $68
     call SendUploadCommand                       ; $6AB2: $CD $51 $6B
-    ld   bc, $0006                               ; $6AB5: $01 $06 $00
+    ld   bc, $06                                 ; $6AB5: $01 $06 $00
     call WaitForBCFrames                         ; $6AB8: $CD $92 $6B
 
     ld   hl, $68B0                               ; $6ABB: $21 $B0 $68
     call SendUploadCommand                       ; $6ABE: $CD $51 $6B
-    ld   bc, $0006                               ; $6AC1: $01 $06 $00
+    ld   bc, $06                                 ; $6AC1: $01 $06 $00
     call WaitForBCFrames                         ; $6AC4: $CD $92 $6B
 
     ld   hl, $68C0                               ; $6AC7: $21 $C0 $68
     call SendUploadCommand                       ; $6ACA: $CD $51 $6B
-    ld   bc, $0006                               ; $6ACD: $01 $06 $00
+    ld   bc, $06                                 ; $6ACD: $01 $06 $00
     call WaitForBCFrames                         ; $6AD0: $CD $92 $6B
 
     ld   hl, $68D0                               ; $6AD3: $21 $D0 $68
     call SendUploadCommand                       ; $6AD6: $CD $51 $6B
-    ld   bc, $0006                               ; $6AD9: $01 $06 $00
+    ld   bc, $06                                 ; $6AD9: $01 $06 $00
     call WaitForBCFrames                         ; $6ADC: $CD $92 $6B
 
     ld   hl, $68E0                               ; $6ADF: $21 $E0 $68
     call SendUploadCommand                       ; $6AE2: $CD $51 $6B
-    ld   bc, $0006                               ; $6AE5: $01 $06 $00
+    ld   bc, $06                                 ; $6AE5: $01 $06 $00
     call WaitForBCFrames                         ; $6AE8: $CD $92 $6B
 
     ld   hl, $68F0                               ; $6AEB: $21 $F0 $68
     call SendUploadCommand                       ; $6AEE: $CD $51 $6B
-    ld   bc, $0006                               ; $6AF1: $01 $06 $00
+    ld   bc, $06                                 ; $6AF1: $01 $06 $00
     call WaitForBCFrames                         ; $6AF4: $CD $92 $6B
 
     ld   hl, $6900                               ; $6AF7: $21 $00 $69
     call SendUploadCommand                       ; $6AFA: $CD $51 $6B
-    ld   bc, $0006                               ; $6AFD: $01 $06 $00
+    ld   bc, $06                                 ; $6AFD: $01 $06 $00
     call WaitForBCFrames                         ; $6B00: $CD $92 $6B
 
     ld   hl, $6910                               ; $6B03: $21 $10 $69
     call SendUploadCommand                       ; $6B06: $CD $51 $6B
-    ld   bc, $0006                               ; $6B09: $01 $06 $00
+    ld   bc, $06                                 ; $6B09: $01 $06 $00
     call WaitForBCFrames                         ; $6B0C: $CD $92 $6B
 
     ld   hl, $4000                               ; $6B0F: $21 $00 $40
@@ -143,11 +143,11 @@ SuperGameBoyInit::
 
     ld   a, $81                                  ; $6B37: $3E $81
     ld   [rLCDC], a                              ; $6B39: $E0 $40
-    ld   bc, $0006                               ; $6B3B: $01 $06 $00
+    ld   bc, $06                                 ; $6B3B: $01 $06 $00
     call WaitForBCFrames                         ; $6B3E: $CD $92 $6B
     ld   hl, $6870                               ; $6B41: $21 $70 $68
     call SendUploadCommand                       ; $6B44: $CD $51 $6B
-    ld   bc, $0006                               ; $6B47: $01 $06 $00
+    ld   bc, $06                                 ; $6B47: $01 $06 $00
     call WaitForBCFrames                         ; $6B4A: $CD $92 $6B
     xor  a                                       ; $6B4D: $AF
     ld   [rLCDC], a                              ; $6B4E: $E0 $40
@@ -218,7 +218,7 @@ WaitForBCFrames::
     ; Instead, as we know the number of cycles per frame is 69905,
     ; let's way for approximately this number of cycles.
 
-    ld   de, $06D6                               ; $6B92: $11 $D6 $06
+    ld   de, $6D6                                ; $6B92: $11 $D6 $06
     ; Loop while (de-- != 0)
 .whileDE
     ; (the instructions in this loop take 36 clock cycles)
@@ -245,7 +245,7 @@ Func_03C_6BA3::
     ld   bc, $1000                               ; $6BAB: $01 $00 $10
     call CopyData                                ; $6BAE: $CD $14 $29
     ld   hl, vBGMap0                             ; $6BB1: $21 $00 $98
-    ld   de, $000C                               ; $6BB4: $11 $0C $00
+    ld   de, $0C                                 ; $6BB4: $11 $0C $00
     ld   a, $80                                  ; $6BB7: $3E $80
     ld   c, $0D                                  ; $6BB9: $0E $0D
 .loop_6BBB_3C:
@@ -260,11 +260,11 @@ Func_03C_6BA3::
     jr   nz, .loop_6BBB_3C                       ; $6BC4: $20 $F5
     ld   a, $81                                  ; $6BC6: $3E $81
     ld   [rLCDC], a                              ; $6BC8: $E0 $40
-    ld   bc, $0005                               ; $6BCA: $01 $05 $00
+    ld   bc, $05                                 ; $6BCA: $01 $05 $00
     call WaitForBCFrames                         ; $6BCD: $CD $92 $6B
     pop  hl                                      ; $6BD0: $E1
     call SendUploadCommand                       ; $6BD1: $CD $51 $6B
-    ld   bc, $0006                               ; $6BD4: $01 $06 $00
+    ld   bc, $06                                 ; $6BD4: $01 $06 $00
     call WaitForBCFrames                         ; $6BD7: $CD $92 $6B
     xor  a                                       ; $6BDA: $AF
     ld   [rLCDC], a                              ; $6BDB: $E0 $40

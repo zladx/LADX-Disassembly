@@ -70,7 +70,7 @@ LoadPhotoBgMap::
 .copyBgAttributesEnd
 
     pop  hl                                     ; $4057: $E1
-    ld   de, $02D0                              ; $4058: $11 $D0 $02
+    ld   de, $2D0                               ; $4058: $11 $D0 $02
     add  hl, de                                 ; $405B: $19
     ld   a, [wGameplayType]                     ; $405C: $FA $95 $DB
     cp   GAMEPLAY_PHOTO_BOW_WOW                 ; $405F: $FE $14

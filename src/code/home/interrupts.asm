@@ -509,7 +509,7 @@ LoadTiles::
     jr   c, .incrementBGTileLoadingStage
 .copyData
 
-    ld   bc, $0040
+    ld   bc, $40
     call CopyData
 
 .incrementBGTileLoadingStage
@@ -555,7 +555,7 @@ LoadOverworldBGTiles::
     ld   h, a
     ld   l, $00
     add  hl, bc
-    ld   bc, $0040
+    ld   bc, $40
     call CopyData
 
     ; Increment the loading stage
@@ -585,7 +585,7 @@ LoadOAMTiles::
     ld   [wNeedsUpdatingNPCTiles], a
     ld   [$C10F], a
     ld   hl, vTiles2
-    ld   bc, $0000
+    ld   bc, $00
     call Func_020_4616
     ld   c, $90
     ld   b, h
@@ -654,7 +654,7 @@ LoadOAMTiles::
     ld   e, l
     ld   d, h
     pop  hl
-    ld   bc, $0040
+    ld   bc, $40
     call CopyData
 
     ; Increment the enemies tiles loading stage
@@ -727,7 +727,7 @@ label_73E::
     ld   e, l
     ld   d, h
     pop  hl
-    ld   bc, $0040
+    ld   bc, $40
     call CopyData
     ld   a, [$C10F]
     inc  a
@@ -792,7 +792,7 @@ LoadTilesCommands8ToD::
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ; Data length
-    ld   bc, $0040
+    ld   bc, $40
     call CopyData
 
     ldh  a, [hNeedsUpdatingBGTiles]

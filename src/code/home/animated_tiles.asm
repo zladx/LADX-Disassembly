@@ -7,11 +7,11 @@ AnimateMarinBeachTiles::
     ld   a, [wRequestDestinationHigh]
     and  a
     ret  nz
-    ld   a, $10
+    ld   a, BANK(MarinBeachWavesTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $6500
-    ld   de, $9500
+    ld   hl, MarinBeachWavesTiles
+    ld   de, vTiles2 + $500
     ldh  a, [hFrameCounter]
     and  $0F
     jr   z, .skip
@@ -32,7 +32,7 @@ AnimateMarinBeachTiles::
     sla  c
     rl   b
     add  hl, bc
-    ld   bc, $0040
+    ld   bc, $40
     jp   CopyData
     jr   nz, AnimateTiles.doWorldAnimations
     and  b
@@ -83,7 +83,7 @@ AnimateTiles::
     ld   e, a
     ld   a, [$D009]
     ld   d, a
-    ld   bc, $0020
+    ld   bc, $20
     jp   CopyData
 .return
     ; Return early
@@ -173,9 +173,7 @@ AnimateTiles::
     jp   DrawLinkSpriteAndReturn
 
 .animateCreditsIslandFadeTiles
-    ld   a, $17
-    ld   [MBC3SelectBank], a
-    jp   $4062
+    jpsb AnimateCreditsIslandFadeTiles
 
 .notFFA5
     ; Increment hAnimatedTilesFrameCount
@@ -274,9 +272,9 @@ AnimateDungeon1TilesGroup::
 ;  bc  frame size
 LoadAnimatedTilesFrame::
     ; Copy the tiles data
-    ld   de, vTiles2 + $06C0
+    ld   de, vTiles2 + $6C0
 .de
-    ld   bc, $0040
+    ld   bc, $40
     call CopyData
 
     ; Do special case for MAP_COLOR_DUNGEON
@@ -391,9 +389,7 @@ AnimateCrystalBlockTilesGroup::
     jr   AnimateTilesMediumSpeed
 
 AnimatePhotoTilesGroup::
-    ld   a, $38
-    ld   [MBC3SelectBank], a
-    call $7830
+    callsb Func_038_7830
     jp   DrawLinkSpriteAndReturn
 
 label_1D0A::

@@ -184,7 +184,7 @@ jr_002_42C7:
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
-    call $1177                                    ; $42D0: $CD $77 $11
+    call Func_1177                                ; $42D0: $CD $77 $11
     call $44ED                                    ; $42D3: $CD $ED $44
     call $434A                                    ; $42D6: $CD $4A $43
     call func_002_478C                            ; $42D9: $CD $8C $47
@@ -259,7 +259,7 @@ func_002_4338::
 jr_002_4345:
     ret                                           ; $4345: $C9
 
-    ld   de, $0F10                                ; $4346: $11 $10 $0F
+    db   $11, $10, $0F                            ; $4346: $11 $10 $0F
     ld   c, $FA                                   ; $4349: $0E $FA
     sbc  e                                        ; $434B: $9B
     pop  bc                                       ; $434C: $C1
@@ -1100,47 +1100,47 @@ jr_002_49AA:
 jr_002_49B6:
     ld   a, $01                                   ; $49B6: $3E $01
     ld   [$C146], a                               ; $49B8: $EA $46 $C1
-    call $1177                                    ; $49BB: $CD $77 $11
+    call Func_1177                                ; $49BB: $CD $77 $11
     call func_002_478C                            ; $49BE: $CD $8C $47
     ld   a, [wSwordAnimationState]                               ; $49C1: $FA $37 $C1
     ld   [wC16A], a                               ; $49C4: $EA $6A $C1
     jp   ApplyLinkMotionState                               ; $49C7: $C3 $94 $17
 
-    ld   bc, $0100                                ; $49CA: $01 $00 $01
+    ld   bc, $100                                 ; $49CA: $01 $00 $01
     nop                                           ; $49CD: $00
     nop                                           ; $49CE: $00
-    ld   bc, $0100                                ; $49CF: $01 $00 $01
-    ld   bc, $0001                                ; $49D2: $01 $01 $00
+    ld   bc, $100                                 ; $49CF: $01 $00 $01
+    ld   bc, $01                                  ; $49D2: $01 $01 $00
     nop                                           ; $49D5: $00
     nop                                           ; $49D6: $00
     nop                                           ; $49D7: $00
-    ld   bc, $0101                                ; $49D8: $01 $01 $01
+    ld   bc, $101                                 ; $49D8: $01 $01 $01
     nop                                           ; $49DB: $00
-    ld   bc, $0000                                ; $49DC: $01 $00 $00
-    ld   bc, $0100                                ; $49DF: $01 $00 $01
-    ld   bc, $0001                                ; $49E2: $01 $01 $00
+    ld   bc, $00                                  ; $49DC: $01 $00 $00
+    ld   bc, $100                                 ; $49DF: $01 $00 $01
+    ld   bc, $01                                  ; $49E2: $01 $01 $00
     nop                                           ; $49E5: $00
     nop                                           ; $49E6: $00
     nop                                           ; $49E7: $00
-    ld   bc, $0001                                ; $49E8: $01 $01 $00
-    ld   bc, $0101                                ; $49EB: $01 $01 $01
-    ld   bc, $0100                                ; $49EE: $01 $00 $01
-    ld   bc, $0101                                ; $49F1: $01 $01 $01
+    ld   bc, $01                                  ; $49E8: $01 $01 $00
+    ld   bc, $101                                 ; $49EB: $01 $01 $01
+    ld   bc, $100                                 ; $49EE: $01 $00 $01
+    ld   bc, $101                                 ; $49F1: $01 $01 $01
     nop                                           ; $49F4: $00
-    ld   bc, $0101                                ; $49F5: $01 $01 $01
-    ld   bc, $0100                                ; $49F8: $01 $00 $01
+    ld   bc, $101                                 ; $49F5: $01 $01 $01
+    ld   bc, $100                                 ; $49F8: $01 $00 $01
     nop                                           ; $49FB: $00
     nop                                           ; $49FC: $00
     nop                                           ; $49FD: $00
     nop                                           ; $49FE: $00
-    ld   bc, $0000                                ; $49FF: $01 $00 $00
+    ld   bc, $00                                  ; $49FF: $01 $00 $00
     nop                                           ; $4A02: $00
     nop                                           ; $4A03: $00
-    ld   bc, $0000                                ; $4A04: $01 $00 $00
+    ld   bc, $00                                  ; $4A04: $01 $00 $00
     nop                                           ; $4A07: $00
     nop                                           ; $4A08: $00
-    ld   bc, $0100                                ; $4A09: $01 $00 $01
-    ld   bc, $0100                                ; $4A0C: $01 $00 $01
+    ld   bc, $100                                 ; $4A09: $01 $00 $01
+    ld   bc, $100                                 ; $4A0C: $01 $00 $01
     nop                                           ; $4A0F: $00
     nop                                           ; $4A10: $00
     ld   bc, $F808                                ; $4A11: $01 $08 $F8
@@ -1350,7 +1350,7 @@ func_002_4B49::
     cp   $02                                      ; $4B58: $FE $02
     jr   nz, jr_002_4B64                          ; $4B5A: $20 $08
 
-    call $134B                                    ; $4B5C: $CD $4B $13
+    call Func_020_4B4A_trampoline                 ; $4B5C: $CD $4B $13
     ld   a, $01                                   ; $4B5F: $3E $01
     ld   [$C5B0], a                               ; $4B61: $EA $B0 $C5
 
@@ -1780,7 +1780,7 @@ label_002_4D97::
     sla  c                                        ; $4DC1: $CB $21
     rl   b                                        ; $4DC3: $CB $10
     ld   a, $02                                   ; $4DC5: $3E $02
-    call $092E                                    ; $4DC7: $CD $2E $09
+    call label_91D.jp_92E                         ; $4DC7: $CD $2E $09
     pop  bc                                       ; $4DCA: $C1
 
 jr_002_4DCB:
@@ -2326,7 +2326,7 @@ jr_002_50A2:
     ret  c                                        ; $50B9: $D8
 
 jr_002_50BA:
-    call $0C83                                    ; $50BA: $CD $83 $0C
+    call label_C83                                ; $50BA: $CD $83 $0C
     call ClearLinkPositionIncrement               ; $50BD: $CD $8E $17
     ldh  [hLinkPositionZ], a                      ; $50C0: $E0 $A2
     ldh  [$FFA3], a                               ; $50C2: $E0 $A3
@@ -2436,7 +2436,7 @@ jr_002_515C:
     call ClearLinkPositionIncrement               ; $515F: $CD $8E $17
     ldh  [$FFA3], a                               ; $5162: $E0 $A3
     ld   [$C146], a                               ; $5164: $EA $46 $C1
-    jp   $0C83                                    ; $5167: $C3 $83 $0C
+    jp   label_C83                                     ; $5167: $C3 $83 $0C
 
 jr_002_516A:
     ld   a, [wIsIndoor]                         ; $516A: $FA $A5 $DB
@@ -2481,7 +2481,7 @@ jr_002_518E:
     ld   [$DBC8], a                               ; $51A2: $EA $C8 $DB
     ld   a, $03                                   ; $51A5: $3E $03
     ldh  [hLinkDirection], a                               ; $51A7: $E0 $9E
-    jp   $0C83                                    ; $51A9: $C3 $83 $0C
+    jp   label_C83                                     ; $51A9: $C3 $83 $0C
 
 jr_002_51AC:
     call label_002_52B9                           ; $51AC: $CD $B9 $52
@@ -2991,9 +2991,9 @@ jr_002_546F:
     add  a                                        ; $5478: $87
     or   e                                        ; $5479: $B3
     and  $0A                                      ; $547A: $E6 $0A
-    ld   bc, $0401                                ; $547C: $01 $01 $04
+    ld   bc, $401                                 ; $547C: $01 $01 $04
     nop                                           ; $547F: $00
-    ld   bc, $0302                                ; $5480: $01 $02 $03
+    ld   bc, $302                                 ; $5480: $01 $02 $03
     inc  b                                        ; $5483: $04
     dec  b                                        ; $5484: $05
     ld   b, $07                                   ; $5485: $06 $07
@@ -3147,7 +3147,7 @@ jr_002_552A:
     jr   nz, jr_002_5566                          ; $555E: $20 $06
 
 jr_002_5560:
-    call $0C89                                    ; $5560: $CD $89 $0C
+    call label_C89                                ; $5560: $CD $89 $0C
     xor  a                                        ; $5563: $AF
     ldh  [$FFAC], a                               ; $5564: $E0 $AC
 
@@ -3467,9 +3467,9 @@ label_002_5707::
     nop                                           ; $5708: $00
     inc  b                                        ; $5709: $04
     inc  h                                        ; $570A: $24
-    ld   bc, $0400                                ; $570B: $01 $00 $04
+    ld   bc, $400                                 ; $570B: $01 $00 $04
     inc  h                                        ; $570E: $24
-    ld   bc, $0000                                ; $570F: $01 $00 $00
+    ld   bc, $00                                  ; $570F: $01 $00 $00
     ld   e, $01                                   ; $5712: $1E $01
     nop                                           ; $5714: $00
     ld   [$611E], sp                              ; $5715: $08 $1E $61
@@ -3509,7 +3509,7 @@ jr_002_5743:
     ld   hl, $5736                                ; $5750: $21 $36 $57
     jp   label_002_583A                           ; $5753: $C3 $3A $58
 
-    ld   bc, $01FF                                ; $5756: $01 $FF $01
+    ld   bc, $1FF                                 ; $5756: $01 $FF $01
     rst  $38                                      ; $5759: $FF
     ld   bc, $FF01                                ; $575A: $01 $01 $FF
     rst  $38                                      ; $575D: $FF
@@ -4653,7 +4653,7 @@ jr_002_61B9:
 
 func_002_61BA::
     call func_002_755B                            ; $61BA: $CD $5B $75
-    call $1797                                    ; $61BD: $CD $97 $17
+    call ApplyLinkMotionState.skipInitialCall     ; $61BD: $CD $97 $17
     call DrawLinkSpriteAndReturn                  ; $61C0: $CD $2E $1D
     jp   AnimateEntitiesAndRestoreBank02                                ; $61C3: $C3 $05 $0F
 
@@ -5633,7 +5633,7 @@ jr_002_6B55:
 func_002_6B56::
     ret                                           ; $6B56: $C9
 
-    ld   bc, $0402                                ; $6B57: $01 $02 $04
+    ld   bc, $402                                 ; $6B57: $01 $02 $04
     ld   [$0B10], sp                              ; $6B5A: $08 $10 $0B
     dec  b                                        ; $6B5D: $05
     ld   [$808], sp                          ; $6B5E: $08 $08 $08
@@ -5985,10 +5985,10 @@ CheckPositionForMapTransition::
     ;
     ldh  a, [hMapRoom]                            ; $6D1F: $F0 $F6
     cp   $F5                                      ; $6D21: $FE $F5
-    jp   z, $0C83                                 ; $6D23: $CA $83 $0C
+    jp   z, label_C83                             ; $6D23: $CA $83 $0C
 
     cp   $FD                                      ; $6D26: $FE $FD
-    jp   z, $0C83                                 ; $6D28: $CA $83 $0C
+    jp   z, label_C83                             ; $6D28: $CA $83 $0C
 
     cp   $E9                                      ; $6D2B: $FE $E9
     jp   z, ApplyMapFadeOutTransition             ; $6D2D: $CA $7D $0C
@@ -6334,7 +6334,7 @@ jr_002_6F1C:
 jr_002_6F25:
     jp   label_002_74AD                           ; $6F25: $C3 $AD $74
 
-    ld   bc, $0402                                ; $6F28: $01 $02 $04
+    ld   bc, $402                                 ; $6F28: $01 $02 $04
     ld   [$1521], sp                              ; $6F2B: $08 $21 $15
     ld   l, [hl]                                  ; $6F2E: $6E
     add  hl, bc                                   ; $6F2F: $09
@@ -6836,9 +6836,9 @@ jr_002_722C:
     and  a                                        ; $722F: $A7
     jp   nz, label_002_7454                       ; $7230: $C2 $54 $74
 
-    ld   a, [wIsIndoor]                         ; $7233: $FA $A5 $DB
+    ld   a, [wIsIndoor]                           ; $7233: $FA $A5 $DB
     and  a                                        ; $7236: $A7
-    jp   nz, $0C89                                ; $7237: $C2 $89 $0C
+    jp   nz, label_C89                            ; $7237: $C2 $89 $0C
 
     jp   ApplyMapFadeOutTransition                                ; $723A: $C3 $7D $0C
 
@@ -7078,7 +7078,7 @@ jr_002_734F:
     inc  d                                        ; $73A6: $14
     daa                                           ; $73A7: $27
     inc  bc                                       ; $73A8: $03
-    ld   bc, $0002                                ; $73A9: $01 $02 $00
+    ld   bc, $02                                  ; $73A9: $01 $02 $00
     ld   [bc], a                                  ; $73AC: $02
 
 label_002_73AD::
@@ -7306,7 +7306,7 @@ jr_002_74C9:
     ld   [$C158], a                               ; $74F4: $EA $58 $C1
     ld   a, JINGLE_HUGE_BUMP                   ; $74F7: $3E $0B
     ldh  [hJingle], a                             ; $74F9: $E0 $F2
-    jp   $1828                                    ; $74FB: $C3 $28 $18
+    jp   label_1828                                    ; $74FB: $C3 $28 $18
 
 func_002_74FE::
     call OpenDialog                               ; $74FE: $CD $85 $23

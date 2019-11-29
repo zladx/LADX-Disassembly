@@ -103,6 +103,8 @@ incbin "gfx/intro/waves.dmg.2bpp"
 incbin "gfx/intro/intro.dmg.2bpp"
 incbin "gfx/scenes/christine.dmg.2bpp"
 incbin "gfx/scenes/marin_beach.dmg.2bpp"
+MarinBeachWavesTiles::
+incbin "gfx/scenes/marin_beach_waves.dmg.2bpp"
 incbin "gfx/fonts/font_large.dmg.2bpp"
 incbin "gfx/scenes/relief.dmg.2bpp"
 incbin "gfx/scenes/painting.dmg.2bpp"
@@ -285,6 +287,7 @@ incbin "gfx/intro/marin.cgb.2bpp"
 incbin "gfx/intro/intro.cgb.2bpp"
 incbin "gfx/scenes/christine.cgb.2bpp"
 incbin "gfx/scenes/marin_beach.cgb.2bpp"
+incbin "gfx/scenes/marin_beach_waves.cgb.2bpp"
 incbin "gfx/fonts/font_large.cgb.2bpp"
 incbin "gfx/scenes/relief.cgb.2bpp"
 incbin "gfx/scenes/painting.cgb.2bpp"
@@ -317,6 +320,8 @@ include "code/photos.asm"
 
 section "bank38",romx[$4000],bank[$38]
 incbin "gfx/cgb_misc.2bpp"
+incbin "gfx/cgb_misc_2.2bpp"
+include "code/photos_animations.asm"
 
 section "bank39",romx[$4000],bank[$39]
 incbin "gfx/photos/photo_elements_1.2bpp"

@@ -99,7 +99,7 @@ LoadDungeonMinimapTiles::
     ; origin = DungeonMinimapTiles + tiles offset
     ld   hl, DungeonMinimapTiles
     add  hl, bc
-    ld   bc, $0040
+    ld   bc, $40
     ; Copy the tiles from ROM to tiles memory
     call CopyData
     ; Increment hBGTilesLoadingStage
@@ -191,6 +191,8 @@ label_91D::
     rl   b
     ld   c, a
     jr   .jp_92F
+
+.jp_92E
     push af
 
 .jp_92F
@@ -401,7 +403,7 @@ CopyColorDungeonSymbols::
     ld   [MBC3SelectBank], a
     ld   hl, $4F00
     ld   de, $DCC0
-    ld   bc, $0020
+    ld   bc, $20
     call CopyData
     jp   RestoreStackedBankAndReturn
 
@@ -591,7 +593,7 @@ CopyBGMapFromBank::
     and  a
     jr   z, .gbcEnd
     ; hl += $168
-    ld   de, $0168
+    ld   de, $168
     add  hl, de
     ; Switch to RAM bank 1
     ld   a, $01
@@ -642,7 +644,7 @@ CopyToBGMap0::
     ret
 
 label_BB5::
-    ld   bc, $0168
+    ld   bc, $168
     ld   de, $D000
     jp   CopyData
 
@@ -665,20 +667,27 @@ label_BC5::
     ld   [MBC3SelectBank], a
     ret
 
-label_BD7::
-    ld   a, [$DE01]
+; Generic trampoline, for calling a function into another bank.
+Farcall::
+    ; Switch to bank wFarcallBank
+    ld   a, [wFarcallBank]
     ld   [MBC3SelectBank], a
-    call label_BE7
-    ld   a, [$DE04]
+    ; Call the target function
+    call Farcall_trampoline
+    ; Switch back to bank wFarcallReturnBank
+    ld   a, [wFarcallReturnBank]
     ld   [MBC3SelectBank], a
     ret
 
-label_BE7::
-    ld   a, [$DE02]
+;Jump to address in wFarcallAdressHigh, wFarcallAdressLow
+Farcall_trampoline::
+    ld   a, [wFarcallAdressHigh]
     ld   h, a
-    ld   a, [$DE03]
+    ld   a, [wFarcallAdressLow]
     ld   l, a
     jp   hl
+
+label_BF0::
     ld   a, BANK(Data_002_4948)
     ld   [MBC3SelectBank], a
     call label_1A50
@@ -753,7 +762,7 @@ ReadValueInDialogsBank::
 label_C3A::
     ld   a, $0C
     ld   [MBC3SelectBank], a
-    ld   bc, $0040
+    ld   bc, $40
     call CopyData
     ld   a, $01
     ld   [MBC3SelectBank], a
@@ -813,6 +822,8 @@ label_C83::
     ld   a, $30
     ldh  [$FFA8], a
     jr   label_C9E
+
+label_C89::
     ld   a, [wWarp0MapCategory]
     cp   $01
     jr   nz, ApplyMapFadeOutTransition
@@ -1425,8 +1436,13 @@ returnFromGameplayHandler::
     call SwitchBank
     jp   LoadBGPalettes
 
-label_102E::
-    db $08, $0E, $99, $28, $EC
+; Dialog to open, indexed by wDialogGotItem value
+DialogForItem::
+.gotItem1 db $008 ; Piece of Power
+.gotItem2 db $00E ; Toadstool
+.gotItem3 db $099 ; Magic powder
+.gotItem4 db $028 ; Break pots (?)
+.gotItem5 db $0EC ; Guardian Acorn
 
 ApplyGotItem::
     ldh  a, [hLinkPositionY]
@@ -1451,7 +1467,7 @@ ApplyGotItem::
     ld   a, [wDialogGotItem]
     ld   e, a
     ld   d, $00
-    ld   hl, $102D
+    ld   hl, DialogForItem - $01
     add  hl, de
     ld   a, [hl]
     call OpenDialog
@@ -1602,6 +1618,8 @@ LinkMotionInteractiveHandler::
     ret  z
 
     jpsw label_002_4287
+
+Func_1177::
     ld   a, [$C50A]
     ld   hl, $C167
     or   [hl]
@@ -1866,6 +1884,9 @@ SetShieldVals::
     ld   [wIsUsingShield], a
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
+    ; fallthrough
+
+Func_020_4B4A_trampoline::
     callsb Func_020_4B4A
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
@@ -2548,6 +2569,7 @@ ClearLinkPositionIncrement::
 ; Animate Link motion?
 ApplyLinkMotionState::
     call label_753A
+.skipInitialCall
     ld   a, [wLinkMotionState]
     cp   $01
     ret  z
@@ -3049,7 +3071,7 @@ label_1DF0::
 label_1DF5::
     ld   [MBC3SelectBank], a
     ld   de, $8400
-    ld   bc, $0040
+    ld   bc, $40
     jp   label_1F3B
 
 label_1E01::
@@ -3066,7 +3088,7 @@ label_1E01::
     ld   hl, $4400
     add  hl, de
     ld   de, $89A0
-    ld   bc, $0040
+    ld   bc, $40
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -3098,7 +3120,7 @@ label_1E33::
 label_1E55::
     add  hl, de
     pop  de
-    ld   bc, $0040
+    ld   bc, $40
     call CopyData
     xor  a
     ldh  [$FFA5], a
@@ -3132,7 +3154,7 @@ label_1E8D::
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   bc, $0020
+    ld   bc, $20
     jp   label_1F3B
 
 label_1EA1::
@@ -3143,7 +3165,7 @@ label_1EA7::
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   bc, $0020
+    ld   bc, $20
     jp   label_1F3B
 
 label_1EB5::
@@ -3227,7 +3249,7 @@ label_1F28::
     ld   de, $9080
 
 label_1F2C::
-    ld   bc, $0040
+    ld   bc, $40
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
@@ -3237,7 +3259,7 @@ label_1F35::
     jp   DrawLinkSpriteAndReturn
 
 label_1F38::
-    ld   bc, $0040
+    ld   bc, $40
 
 label_1F3B::
     call CopyData
@@ -3971,7 +3993,7 @@ EnableExternalRAMWriting::
     push hl
     ld   hl, $4000
     ld   [hl], $00 ; Switch to RAM bank 0
-    ld   hl, $0000
+    ld   hl, $00
     ld   [hl], $0A ; Enable external RAM writing
     pop  hl
     ret
@@ -4094,7 +4116,7 @@ label_2887::
     srl  a
     srl  a
     srl  a
-    ld   de, $0000
+    ld   de, $00
     ld   e, a
     ld   hl, vBGMap0
     ld   b, $20
@@ -4113,7 +4135,7 @@ label_2887::
     srl  a
     srl  a
     srl  a
-    ld   de, $0000
+    ld   de, $00
     ld   e, a
     add  hl, de
     ld   a, h
@@ -4128,8 +4150,8 @@ label_2887::
 ; Usage:
 ;   ld   a, <routine_index>
 ;   rst  0
-;   dw   $0E00 ; jump address for index 0
-;   dw   $0F00 ; jump address for index 1
+;   dw   Func_0E00 ; jump address for index 0
+;   dw   Func_0F00 ; jump address for index 1
 ;   ...
 ;
 ; Input:
@@ -4171,13 +4193,13 @@ LoadTilemap0F_trampoline::
 ; Fill the Background Map with all 7Es
 LoadTilemap8::
     ld   a, $7E    ; value
-    ld   bc, $0400 ; count
+    ld   bc, $400 ; count
     jr   FillBGMap
 
 ; Fill the Background Map with all 7Fs
 ClearBGMap::
     ld   a, $7F    ; value
-    ld   bc, $0800 ; count
+    ld   bc, $800 ; count
 
 ; Fill the Background map with a value
 ; Inputs:
@@ -4292,7 +4314,7 @@ LoadTilemap15::
 
     ld   de, $8D00
     ld   hl, $7500
-    ld   bc, $0200
+    ld   bc, $200
     jp   CopyData
 
 LoadTilemap1D::
@@ -4309,14 +4331,14 @@ LoadTilemap1D::
     ld   [MBC3SelectBank], a
     ld   hl, $6000
     ld   de, $8000
-    ld   bc, $0800
+    ld   bc, $800
     call CopyData
     ld   a, $0F
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   hl, $6000
     ld   de, $8800
-    ld   bc, $0800
+    ld   bc, $800
     jp   CopyData
 
 LoadTilemap18::
@@ -4342,7 +4364,7 @@ label_2B01::
 label_2B06::
     ld   [MBC3SelectBank], a
     ld   de, $8000
-    ld   bc, $0800
+    ld   bc, $800
     call CopyData
     ld   a, $13
     call AdjustBankNumberForGBC
@@ -4363,7 +4385,7 @@ LoadTilemap1B::
     ld   [MBC3SelectBank], a
     ld   hl, $6600
     ld   de, $8000
-    ld   bc, $0080
+    ld   bc, $80
     call CopyData
     call PlayAudioStep
     ldh  a, [hIsGBC]
@@ -4373,7 +4395,7 @@ LoadTilemap1B::
     ld   [MBC3SelectBank], a
     ld   hl, $6900
     ld   de, $8100
-    ld   bc, $0700
+    ld   bc, $700
     jp   CopyData
 
 label_2B61::
@@ -4381,7 +4403,7 @@ label_2B61::
     ld   [MBC3SelectBank], a
     ld   hl, $5000
     ld   de, $8000
-    ld   bc, $0800
+    ld   bc, $800
     jp   CopyData
 
 LoadTilemap1A::
@@ -4411,18 +4433,18 @@ label_2B92::
 label_2B95::
     ld   [MBC3SelectBank], a
     ld   de, $8000
-    ld   bc, $0800
+    ld   bc, $800
     call CopyData
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   hl, $7000
     ld   de, $8800
-    ld   bc, $0800
+    ld   bc, $800
     call CopyData
     ld   hl, $6800
     ld   de, $9000
-    ld   bc, $0800
+    ld   bc, $800
     jp   CopyData
 
 label_2BC1::
@@ -4440,7 +4462,7 @@ LoadBaseTiles::
     ; Copy $400 bytes from the link's tile sheet to Tiles map 0
     ld   hl, LinkCharacterTiles
     ld   de, vTiles0
-    ld   bc, $0400
+    ld   bc, $400
     call CopyData
 
     ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
@@ -4455,7 +4477,7 @@ LoadBaseTiles::
     ; Copy two tiles from the times tile sheet to a portion of Tiles Map 1
     ld   hl, Items1Tiles + $3A0
     ld   de, vTiles1 + $600
-    ld   bc, $0020
+    ld   bc, $20
     call CopyData
 
     ; Swtich back to bank 1
@@ -4472,7 +4494,7 @@ LoadInventoryTiles::
     ; Copy $400 bytes from the menu tile sheet to Tiles Map 1
     ld   hl, MenuTiles
     ld   de, vTiles1
-    ld   bc, $0400
+    ld   bc, $400
     call CopyData
 
     ; Select the tiles sheet bank ($0F on DMG, $2F on GBC)
@@ -4481,7 +4503,7 @@ LoadInventoryTiles::
     ; Copy $800 bytes from the menu tile sheet to Tiles Map 2
     ld   hl, FontTiles
     ld   de, vTiles2
-    ld   bc, $0800
+    ld   bc, $800
     jp   CopyData ; tail-call
 
 LoadDungeonTiles::
@@ -4502,7 +4524,7 @@ LoadDungeonTiles::
     ; … and copy Color Dungeon tiles to Tiles Map 2
     ld   hl, $6200
     ld   de, vTiles2
-    ld   bc, $0100
+    ld   bc, $100
     call CopyData
 
     ld   e, $00
@@ -4521,13 +4543,13 @@ LoadDungeonTiles::
 .endIf
 
     ld   de, $9100
-    ld   bc, $0100
+    ld   bc, $100
     call CopyData
     ld   a, $0D
     call SwitchAdjustedBank
     ld   hl, $4000
     ld   de, $9200
-    ld   bc, $0600
+    ld   bc, $600
     call CopyData
 
     ld   a, $20
@@ -4546,7 +4568,7 @@ LoadDungeonTiles::
     ld   l, $00
     call ReloadSavedBank
     ld   de, $9200
-    ld   bc, $0200
+    ld   bc, $200
     call CopyData
 
     ld   a, $0C
@@ -4554,7 +4576,7 @@ LoadDungeonTiles::
     ld   [MBC3SelectBank], a
     ld   hl, $47C0
     ld   de, $DCC0
-    ld   bc, $0040
+    ld   bc, $40
     call CopyData
 
     call func_2D50
@@ -4578,7 +4600,7 @@ LoadDungeonTiles::
 .colorDungeonEnd2
 
     ld   de, $8F00
-    ld   bc, $0100
+    ld   bc, $100
     call CopyData
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
@@ -4594,7 +4616,7 @@ LoadDungeonTiles::
 
 .label_2CF5
     ld   de, $8C00
-    ld   bc, $0300
+    ld   bc, $300
     call CopyData
 
 label_2CFE::
@@ -4634,12 +4656,12 @@ LoadTilemap5::
     call SwitchAdjustedBank
     ld   hl, $5200
     ld   de, vTiles2 + $200
-    ld   bc, $0600
+    ld   bc, $600
     call CopyData
     ; Load keys tiles
     ld   hl, $4C00
     ld   de, $8C00
-    ld   bc, $0400
+    ld   bc, $400
     call CopyData
     call func_2D50
     jp   label_2CFE
@@ -4656,12 +4678,12 @@ func_2D50::
 
     ld   hl, Items2Tiles
     ld   de, vTiles1
-    ld   bc, $0800
+    ld   bc, $800
     call CopyData
 
     ld   hl, $4200
     ld   de, vTiles0 + $200
-    ld   bc, $0100
+    ld   bc, $100
     call CopyData
     ret
 
@@ -4673,7 +4695,7 @@ LoadIntroSequenceTiles::
     call SwitchBank
     ld   hl, $6D4A
     ld   de, vTiles0 + $700
-    ld   bc, $0080
+    ld   bc, $80
     call CopyData
 
     ; Copy $600 bytes of map tiles from 10:5400 to Tiles Memory
@@ -4682,7 +4704,7 @@ LoadIntroSequenceTiles::
     call SwitchAdjustedBank
     ld   hl, $5400
     ld   de, vTiles0
-    ld   bc, $0600
+    ld   bc, $600
     call CopyData
 
     ; Copy $1000 bytes of map tiles from 10:4000 to Tiles Memory
@@ -4697,7 +4719,7 @@ LoadTilemap11::
     call SwitchAdjustedBank
     ld   hl, $4900
     ld   de, $8800
-    ld   bc, $0700
+    ld   bc, $700
     call CopyData
     ld   a, $38
     call SwitchBank
@@ -4712,7 +4734,7 @@ LoadTilemap11::
 .endIf
 
     ld   de, $8400
-    ld   bc, $0400
+    ld   bc, $400
     call CopyData
     ldh  a, [hIsGBC]
     and  a
@@ -4724,7 +4746,7 @@ LoadTilemap11::
 .label_2DE0
 
     ld   de, $8200
-    ld   bc, $0100
+    ld   bc, $100
     jp   CopyData
 
 LoadTilemap0B::
@@ -4732,12 +4754,12 @@ LoadTilemap0B::
     call SwitchAdjustedBank
     ld   hl, $7800
     ld   de, $8F00
-    ld   bc, $0800
+    ld   bc, $800
     call CopyData
 
     ld   hl, $5000
     ld   de, $8200
-    ld   bc, $0100
+    ld   bc, $100
     jp   CopyData
 
 LoadTilemap14::
@@ -4764,12 +4786,12 @@ LoadTilemap21::
     ld   [MBC3SelectBank], a
     ld   hl, $7C00
     ld   de, $8C00
-    ld   bc, $0400
+    ld   bc, $400
     call CopyData
 
     ld   hl, $6800
     ld   de, $9000
-    ld   bc, $0400
+    ld   bc, $400
     jp   CopyData
 
 LoadTilemap13::
@@ -4777,12 +4799,12 @@ LoadTilemap13::
     call SwitchAdjustedBank
     ld   hl, $6700
     ld   de, $8400
-    ld   bc, $0400
+    ld   bc, $400
     call CopyData
 
     ld   hl, $6000
     ld   de, $9000
-    ld   bc, $0600
+    ld   bc, $600
     jp   CopyData
 
 LoadTilemap0D::
@@ -4790,14 +4812,11 @@ LoadTilemap0D::
     call SwitchBank
     ld   hl, $4400
     ld   de, $8800
-    ld   bc, $0500
+    ld   bc, $500
     jp   CopyData
 
 data_2E6F::
-    db 0
-
-label_2E70::
-    ld   de, $120E
+    db   $00, $11, $0E, $12
 
 ; Load lower section of OAM tiles (NPCs),
 ; and upper section of BG tiles
@@ -4964,7 +4983,7 @@ label_2F57::
     jr   z, label_2F69
     add  a, $50
     ld   h, a
-    ld   bc, $0100
+    ld   bc, $100
     call CopyData
 
 label_2F69::
@@ -4978,7 +4997,7 @@ label_2F69::
     ld   [MBC3SelectBank], a
     ld   hl, $6600
     ld   de, $8F00
-    ld   bc, $0200
+    ld   bc, $200
     call CopyData
     ret
 
@@ -4993,11 +5012,11 @@ label_2F87::
     ld   [MBC3SelectBank], a
     ld   hl, $6E00
     ld   de, $9690
-    ld   bc, $0010
+    ld   bc, $10
     call CopyData
     ld   hl, $6E10
     ld   de, $9790
-    ld   bc, $0010
+    ld   bc, $10
     call CopyData
     ret
 
@@ -5011,7 +5030,7 @@ label_2FAD::
     add  a, $40
     ld   h, a
     ld   l, $00
-    ld   bc, $0200
+    ld   bc, $200
     call CopyData
 .return
     ret
@@ -6637,7 +6656,7 @@ LoadObject_StairsDoor::
     call label_35EE                               ; $375F: $CD $EE $35
     ld   bc, data_37E4                            ; $3762: $01 $E4 $37
     ld   de, data_375C                            ; $3765: $11 $5C $37
-    jp   Func_354B                               ; $3768: $C3 $4B $35
+    jp   Func_354B                                ; $3768: $C3 $4B $35
 
 data_376B::
     db   $B1, $B2
@@ -6647,7 +6666,7 @@ LoadObject_FlipWall::
     call label_35EE                               ; $376E: $CD $EE $35
     ld   bc, data_37E1                            ; $3771: $01 $E1 $37
     ld   de, data_376B                            ; $3774: $11 $6B $37
-    jp   Func_354B                               ; $3777: $C3 $4B $35
+    jp   Func_354B                                ; $3777: $C3 $4B $35
 
 data_377A::
     db   $45, $46
@@ -8096,7 +8115,7 @@ label_3F93::
     ld   [MBC3SelectBank], a
     ld   hl, Data_005_59DE
     ld   de, vTiles0 + $460
-    ld   bc, $0010
+    ld   bc, $10
     call CopyData
     ld   hl, Data_005_59EE
     jr   label_3FBD
@@ -8106,13 +8125,13 @@ label_3FA9::
     ld   [MBC3SelectBank], a
     ld   hl, Data_005_59FE
     ld   de, vTiles0 + $460
-    ld   bc, $0010
+    ld   bc, $10
     call CopyData
     ld   hl, Data_005_5A0E
 
 label_3FBD::
     ld   de, vTiles0 + $480
-    ld   bc, $0010
+    ld   bc, $10
     call CopyData
     xor  a
     ldh  [$FFA5], a
@@ -8135,7 +8154,7 @@ LoadColorDungeonTiles::
     ld   [MBC3SelectBank], a
     ld   hl, ColorDungeonTiles
     ld   de, vTiles0 + $0400
-    ld   bc, $0400
+    ld   bc, $400
     call CopyData
     ld   a, $20
     ld   [MBC3SelectBank], a

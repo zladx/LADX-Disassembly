@@ -2,8 +2,6 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-SECTION "ROM Bank $017", ROMX[$4000], BANK[$17]
-
 Data_017_4000::
     db   $18, $05, $37, $20, $36, $0E, $1E, $2B, $25, $14, $1F, $12, $15, $2C, $31, $3F
     db   $0C, $30, $01, $33, $04, $27, $08, $1D, $38, $17, $3E, $28, $11, $00, $3A, $3D
@@ -19,7 +17,7 @@ Data_017_4048::
     db   $70, $91, $80, $91, $90, $91, $A0, $91
     db   $40, $94
 
-Func_017_4062::
+AnimateCreditsIslandFadeTiles::
     ld   a, [$D00B]                               ; $4062: $FA $0B $D0
     ld   e, a                                     ; $4065: $5F
     ld   d, $00                                   ; $4066: $16 $00
@@ -872,7 +870,7 @@ jr_017_4AC7:
     and  $03                                      ; $4AC9: $E6 $03
     jr   z, jr_017_4AD6                           ; $4ACB: $28 $09
 
-    ld   a, [$0004]                               ; $4ACD: $FA $04 $00
+    ld   a, [ROM_DebugTool2]                      ; $4ACD: $FA $04 $00
     and  a                                        ; $4AD0: $A7
     jr   z, jr_017_4AD6                           ; $4AD1: $28 $03
 
@@ -1706,7 +1704,7 @@ jr_017_53B8:
     ld   b, a                                     ; $53C3: $47
     ld   hl, Data_017_51A7                        ; $53C4: $21 $A7 $51
     add  hl, bc                                   ; $53C7: $09
-    ld   bc, $0040                                ; $53C8: $01 $40 $00
+    ld   bc, $40                                ; $53C8: $01 $40 $00
     ld   de, $DC10                                ; $53CB: $11 $10 $DC
     call CopyData                                 ; $53CE: $CD $14 $29
     xor  a                                        ; $53D1: $AF
@@ -3037,16 +3035,16 @@ jr_017_5BBB:
     ret                                           ; $5BCF: $C9
 
 label_017_5BD0:
-    ld   hl, $DE01                                ; $5BD0: $21 $01 $DE
-    ld   a, $20                                   ; $5BD3: $3E $20
+    ld   hl, wFarcallParams                       ; $5BD0: $21 $01 $DE
+    ld   a, BANK(Func_020_78ED)                   ; $5BD3: $3E $20
     ld   [hl+], a                                 ; $5BD5: $22
-    ld   a, $78                                   ; $5BD6: $3E $78
+    ld   a, HIGH(Func_020_78ED)                   ; $5BD6: $3E $78
     ld   [hl+], a                                 ; $5BD8: $22
-    ld   a, $ED                                   ; $5BD9: $3E $ED
+    ld   a, LOW(Func_020_78ED)                    ; $5BD9: $3E $ED
     ld   [hl+], a                                 ; $5BDB: $22
-    ld   a, $17                                   ; $5BDC: $3E $17
+    ld   a, BANK(label_017_5BD0)                  ; $5BDC: $3E $17
     ld   [hl], a                                  ; $5BDE: $77
-    jp   $0BD7                                    ; $5BDF: $C3 $D7 $0B
+    jp   Farcall                                  ; $5BDF: $C3 $D7 $0B
 
 func_017_5BE2:
     ldh  a, [hBaseScrollY]                               ; $5BE2: $F0 $97
@@ -4325,7 +4323,7 @@ label_017_6A80:
     ld   b, a                                     ; $6A8F: $47
     ld   hl, Data_017_6900                        ; $6A90: $21 $00 $69
     add  hl, bc                                   ; $6A93: $09
-    ld   bc, $0030                                ; $6A94: $01 $30 $00
+    ld   bc, $30                                  ; $6A94: $01 $30 $00
     ld   de, $DC50                                ; $6A97: $11 $50 $DC
     call CopyData                                 ; $6A9A: $CD $14 $29
     xor  a                                        ; $6A9D: $AF
@@ -4452,7 +4450,7 @@ jr_017_6C15:
     inc  a                                        ; $6C1B: $3C
     sla  a                                        ; $6C1C: $CB $27
     ld   [wEntitiesSpeedXTable], a                ; $6C1E: $EA $40 $C2
-    ld   bc, $0000                                ; $6C21: $01 $00 $00
+    ld   bc, $00                                  ; $6C21: $01 $00 $00
     ld   a, [wEntitiesPosXTable]                  ; $6C24: $FA $00 $C2
     push af                                       ; $6C27: $F5
     call func_017_7E3A                            ; $6C28: $CD $3A $7E
@@ -4500,7 +4498,7 @@ jr_017_6C4A:
     ld   [hl], $A8                                ; $6C71: $36 $A8
 
 jr_017_6C73:
-    ld   hl, $DE01                                ; $6C73: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $6C73: $21 $01 $DE
     ld   a, $23                                   ; $6C76: $3E $23
     ld   [hl+], a                                 ; $6C78: $22
     ld   a, $7E                                   ; $6C79: $3E $7E
@@ -4509,10 +4507,10 @@ jr_017_6C73:
     ld   [hl+], a                                 ; $6C7E: $22
     ld   a, $17                                   ; $6C7F: $3E $17
     ld   [hl], a                                  ; $6C81: $77
-    jp   $0BD7                                    ; $6C82: $C3 $D7 $0B
+    jp   Farcall                                  ; $6C82: $C3 $D7 $0B
 
 func_017_6C85:
-    ld   hl, $DE01                                ; $6C85: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $6C85: $21 $01 $DE
     ld   a, $20                                   ; $6C88: $3E $20
     ld   [hl+], a                                 ; $6C8A: $22
     ld   a, $7C                                   ; $6C8B: $3E $7C
@@ -4521,7 +4519,7 @@ func_017_6C85:
     ld   [hl+], a                                 ; $6C90: $22
     ld   a, $17                                   ; $6C91: $3E $17
     ld   [hl], a                                  ; $6C93: $77
-    jp   $0BD7                                    ; $6C94: $C3 $D7 $0B
+    jp   Farcall                                  ; $6C94: $C3 $D7 $0B
 
 LinkSeatedOnLog8Handler::
     ld   a, [$D009]                               ; $6C97: $FA $09 $D0
@@ -4594,7 +4592,7 @@ jr_017_6D0A:
     ret                                           ; $6D0A: $C9
 
 func_017_6D0B:
-    ld   hl, $DE01                                ; $6D0B: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $6D0B: $21 $01 $DE
     ld   a, $24                                   ; $6D0E: $3E $24
     ld   [hl+], a                                 ; $6D10: $22
     ld   a, $78                                   ; $6D11: $3E $78
@@ -4603,7 +4601,7 @@ func_017_6D0B:
     ld   [hl+], a                                 ; $6D16: $22
     ld   a, $17                                   ; $6D17: $3E $17
     ld   [hl], a                                  ; $6D19: $77
-    jp   $0BD7                                    ; $6D1A: $C3 $D7 $0B
+    jp   Farcall                                  ; $6D1A: $C3 $D7 $0B
 
 CreditsLinkFaceCloseUpHandler::
     call AnimateEntitiesAndRestoreBank17                                    ; $6D1D: $CD $ED $0E
@@ -4727,7 +4725,7 @@ jr_017_6DC1:
 
 func_017_6DDB:
 jr_017_6DDB:
-    ld   hl, $DE01                                ; $6DDB: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $6DDB: $21 $01 $DE
     ld   a, $24                                   ; $6DDE: $3E $24
     ld   [hl+], a                                 ; $6DE0: $22
     ld   a, $7A                                   ; $6DE1: $3E $7A
@@ -4736,7 +4734,7 @@ jr_017_6DDB:
     ld   [hl+], a                                 ; $6DE6: $22
     ld   a, $17                                   ; $6DE7: $3E $17
     ld   [hl], a                                  ; $6DE9: $77
-    jp   $0BD7                                    ; $6DEA: $C3 $D7 $0B
+    jp   Farcall                                  ; $6DEA: $C3 $D7 $0B
 
 CreditsLinkFaceCloseUp4Handler::
     call func_017_6D7C                            ; $6DED: $CD $7C $6D
@@ -5236,7 +5234,7 @@ jr_017_71CC:
     ret                                           ; $71CC: $C9
 
 func_017_71CD:
-    ld   hl, $DE01                                ; $71CD: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $71CD: $21 $01 $DE
     ld   a, $20                                   ; $71D0: $3E $20
     ld   [hl+], a                                 ; $71D2: $22
     ld   a, $7D                                   ; $71D3: $3E $7D
@@ -5245,7 +5243,7 @@ func_017_71CD:
     ld   [hl+], a                                 ; $71D8: $22
     ld   a, $17                                   ; $71D9: $3E $17
     ld   [hl], a                                  ; $71DB: $77
-    jp   $0BD7                                    ; $71DC: $C3 $D7 $0B
+    jp   Farcall                                  ; $71DC: $C3 $D7 $0B
 
 Data_017_71DF::
     db   $00, $00                                ; $71DF |>.w.....|
@@ -5336,7 +5334,7 @@ jr_017_72BC:
     ret                                           ; $72BC: $C9
 
 jr_017_72BD:
-    ld   hl, $DE01                                ; $72BD: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $72BD: $21 $01 $DE
     ld   a, $27                                   ; $72C0: $3E $27
     ld   [hl+], a                                 ; $72C2: $22
     ld   [$DBAF], a                               ; $72C3: $EA $AF $DB
@@ -5346,7 +5344,7 @@ jr_017_72BD:
     ld   [hl+], a                                 ; $72CB: $22
     ld   a, $17                                   ; $72CC: $3E $17
     ld   [hl], a                                  ; $72CE: $77
-    call label_BD7                                ; $72CF: $CD $D7 $0B
+    call Farcall                                  ; $72CF: $CD $D7 $0B
     ld   a, $17                                   ; $72D2: $3E $17
     ld   [$DBAF], a                               ; $72D4: $EA $AF $DB
     ret                                           ; $72D7: $C9
@@ -5441,7 +5439,7 @@ jr_017_73AF:
     ret                                           ; $73EC: $C9
 
 jr_017_73ED:
-    ld   hl, $DE01                                ; $73ED: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $73ED: $21 $01 $DE
     ld   a, $27                                   ; $73F0: $3E $27
     ld   [hl+], a                                 ; $73F2: $22
     ld   a, $78                                   ; $73F3: $3E $78
@@ -5450,7 +5448,7 @@ jr_017_73ED:
     ld   [hl+], a                                 ; $73F8: $22
     ld   a, $17                                   ; $73F9: $3E $17
     ld   [hl], a                                  ; $73FB: $77
-    jp   $0BD7                                    ; $73FC: $C3 $D7 $0B
+    jp   Farcall                                  ; $73FC: $C3 $D7 $0B
 
     nop                                           ; $73FF: $00
     nop                                           ; $7400: $00
@@ -5705,7 +5703,7 @@ jr_017_74E0:
     ret                                           ; $750E: $C9
 
 jr_017_750F:
-    ld   hl, $DE01                                ; $750F: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $750F: $21 $01 $DE
     ld   a, $27                                   ; $7512: $3E $27
     ld   [hl+], a                                 ; $7514: $22
     ld   a, $77                                   ; $7515: $3E $77
@@ -5714,7 +5712,7 @@ jr_017_750F:
     ld   [hl+], a                                 ; $751A: $22
     ld   a, $17                                   ; $751B: $3E $17
     ld   [hl], a                                  ; $751D: $77
-    jp   $0BD7                                    ; $751E: $C3 $D7 $0B
+    jp   Farcall                                  ; $751E: $C3 $D7 $0B
 
     nop                                           ; $7521: $00
     nop                                           ; $7522: $00
@@ -6104,8 +6102,8 @@ jr_017_76AB:
     nop                                           ; $76B2: $00
 
 jr_017_76B3:
-    ld   bc, $0101                                ; $76B3: $01 $01 $01
-    ld   bc, $0202                                ; $76B6: $01 $02 $02
+    ld   bc, $101                                 ; $76B3: $01 $01 $01
+    ld   bc, $202                                 ; $76B6: $01 $02 $02
     ld   [bc], a                                  ; $76B9: $02
     inc  bc                                       ; $76BA: $03
     inc  bc                                       ; $76BB: $03
@@ -6133,8 +6131,8 @@ jr_017_76BF:
     ld   [bc], a                                  ; $76D7: $02
     ld   [bc], a                                  ; $76D8: $02
     ld   [bc], a                                  ; $76D9: $02
-    ld   bc, $0101                                ; $76DA: $01 $01 $01
-    ld   bc, $003E                                ; $76DD: $01 $3E $00
+    ld   bc, $101                                 ; $76DA: $01 $01 $01
+    ld   bc, $3E                                  ; $76DD: $01 $3E $00
     ld   [$C3C0], a                               ; $76E0: $EA $C0 $C3
     ldh  a, [hBaseScrollY]                               ; $76E3: $F0 $97
     ld   d, a                                     ; $76E5: $57
@@ -6195,7 +6193,7 @@ jr_017_76FD:
     ret                                           ; $7738: $C9
 
 jr_017_7739:
-    ld   hl, $DE01                                ; $7739: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $7739: $21 $01 $DE
     ld   a, $27                                   ; $773C: $3E $27
     ld   [hl+], a                                 ; $773E: $22
     ld   a, $76                                   ; $773F: $3E $76
@@ -6204,7 +6202,7 @@ jr_017_7739:
     ld   [hl+], a                                 ; $7744: $22
     ld   a, $17                                   ; $7745: $3E $17
     ld   [hl], a                                  ; $7747: $77
-    jp   $0BD7                                    ; $7748: $C3 $D7 $0B
+    jp   Farcall                                  ; $7748: $C3 $D7 $0B
 
     nop                                           ; $774B: $00
     nop                                           ; $774C: $00
@@ -6322,12 +6320,12 @@ jr_017_7798:
 jr_017_77E2:
     nop                                           ; $77E2: $00
     nop                                           ; $77E3: $00
-    ld   bc, $0202                                ; $77E4: $01 $02 $02
+    ld   bc, $202                                 ; $77E4: $01 $02 $02
     ld   [bc], a                                  ; $77E7: $02
-    ld   bc, $0000                                ; $77E8: $01 $00 $00
+    ld   bc, $00                                  ; $77E8: $01 $00 $00
     nop                                           ; $77EB: $00
     nop                                           ; $77EC: $00
-    ld   bc, $0101                                ; $77ED: $01 $01 $01
+    ld   bc, $101                                 ; $77ED: $01 $01 $01
     ld   bc, $4021                                ; $77F0: $01 $21 $40
     jp   $3609                                    ; $77F3: $C3 $09 $36
 
@@ -6366,7 +6364,7 @@ jr_017_7820:
     ret                                           ; $7825: $C9
 
 jr_017_7826:
-    ld   hl, $DE01                                ; $7826: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $7826: $21 $01 $DE
     ld   a, $27                                   ; $7829: $3E $27
     ld   [hl+], a                                 ; $782B: $22
     ld   a, $72                                   ; $782C: $3E $72
@@ -6375,7 +6373,7 @@ jr_017_7826:
     ld   [hl+], a                                 ; $7831: $22
     ld   a, $17                                   ; $7832: $3E $17
     ld   [hl], a                                  ; $7834: $77
-    jp   $0BD7                                    ; $7835: $C3 $D7 $0B
+    jp   Farcall                                  ; $7835: $C3 $D7 $0B
 
     ld   e, d                                     ; $7838: $5A
     inc  bc                                       ; $7839: $03
@@ -6411,7 +6409,7 @@ jr_017_7826:
     ret                                           ; $7866: $C9
 
 jr_017_7867:
-    ld   hl, $DE01                                ; $7867: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $7867: $21 $01 $DE
     ld   a, $27                                   ; $786A: $3E $27
     ld   [hl+], a                                 ; $786C: $22
     ld   a, $73                                   ; $786D: $3E $73
@@ -6420,7 +6418,7 @@ jr_017_7867:
     ld   [hl+], a                                 ; $7872: $22
     ld   a, $17                                   ; $7873: $3E $17
     ld   [hl], a                                  ; $7875: $77
-    jp   $0BD7                                    ; $7876: $C3 $D7 $0B
+    jp   Farcall                                  ; $7876: $C3 $D7 $0B
 
     ld   d, h                                     ; $7879: $54
     inc  b                                        ; $787A: $04
@@ -6500,7 +6498,7 @@ jr_017_78CF:
     jr   jr_017_78A1                              ; $78DB: $18 $C4
 
 jr_017_78DD:
-    ld   hl, $DE01                                ; $78DD: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $78DD: $21 $01 $DE
     ld   a, $27                                   ; $78E0: $3E $27
     ld   [hl+], a                                 ; $78E2: $22
     ld   a, $73                                   ; $78E3: $3E $73
@@ -6509,7 +6507,7 @@ jr_017_78DD:
     ld   [hl+], a                                 ; $78E8: $22
     ld   a, $17                                   ; $78E9: $3E $17
     ld   [hl], a                                  ; $78EB: $77
-    jp   $0BD7                                    ; $78EC: $C3 $D7 $0B
+    jp   Farcall                                  ; $78EC: $C3 $D7 $0B
 
     ld   [hl], d                                  ; $78EF: $72
     nop                                           ; $78F0: $00
@@ -6603,7 +6601,7 @@ jr_017_7953:
     ret                                           ; $795D: $C9
 
 func_017_795E:
-    ld   hl, $DE01                                ; $795E: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $795E: $21 $01 $DE
     ld   a, $27                                   ; $7961: $3E $27
     ld   [hl+], a                                 ; $7963: $22
     ld   a, $73                                   ; $7964: $3E $73
@@ -6612,7 +6610,7 @@ func_017_795E:
     ld   [hl+], a                                 ; $7969: $22
     ld   a, $17                                   ; $796A: $3E $17
     ld   [hl], a                                  ; $796C: $77
-    jp   $0BD7                                    ; $796D: $C3 $D7 $0B
+    jp   Farcall                                  ; $796D: $C3 $D7 $0B
 
     ret                                           ; $7970: $C9
 
@@ -6623,7 +6621,7 @@ func_017_7971:
 jr_017_7974:
     ret  z                                        ; $7974: $C8
 
-    ld   hl, $DE01                                ; $7975: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $7975: $21 $01 $DE
     ld   a, $27                                   ; $7978: $3E $27
 
 jr_017_797A:
@@ -6636,7 +6634,7 @@ jr_017_7980:
     ld   [hl+], a                                 ; $7980: $22
     ld   a, $17                                   ; $7981: $3E $17
     ld   [hl], a                                  ; $7983: $77
-    jp   $0BD7                                    ; $7984: $C3 $D7 $0B
+    jp   Farcall                                  ; $7984: $C3 $D7 $0B
 
 Data_017_7987::
     db   $D0, $01, $D2, $01, $D4, $01, $D6, $01  ; $7987
@@ -6645,7 +6643,7 @@ Data_017_7987::
     db   $E8, $01, $EA, $01, $EC
 
 Func_017_79A4::
-    ld   bc, $01EE                                ; $79A4: $01 $EE $01
+    ld   bc, $1EE                                 ; $79A4: $01 $EE $01
     ld   hl, $C2C0                                ; $79A7: $21 $C0 $C2
     add  hl, bc                                   ; $79AA: $09
     ld   a, [hl]                                  ; $79AB: $7E
@@ -6856,9 +6854,9 @@ Func_017_7AB1::
 Func_017_7AC1::
     ldh  a, [$FFEC]                               ; $7AC1: $F0 $EC
     cp   $60                                      ; $7AC3: $FE $60
-    jp   z, $3B12                                 ; $7AC5: $CA $12 $3B
+    jp   z, IncrementEntityState                  ; $7AC5: $CA $12 $3B
 
-    ld   hl, wEntitiesSpeedYTable                                ; $7AC8: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                 ; $7AC8: $21 $50 $C2
     add  hl, bc                                   ; $7ACB: $09
     ld   [hl], $08                                ; $7ACC: $36 $08
     call func_017_7E30                            ; $7ACE: $CD $30 $7E
@@ -6961,7 +6959,7 @@ Func_017_7B5B::
     ret                                           ; $7B5E: $C9
 
 func_017_7B5F:
-    ld   hl, $DE01                                ; $7B5F: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $7B5F: $21 $01 $DE
     ld   a, $20                                   ; $7B62: $3E $20
     ld   [hl+], a                                 ; $7B64: $22
     ld   a, $7B                                   ; $7B65: $3E $7B
@@ -6970,7 +6968,7 @@ func_017_7B5F:
     ld   [hl+], a                                 ; $7B6A: $22
     ld   a, $17                                   ; $7B6B: $3E $17
     ld   [hl], a                                  ; $7B6D: $77
-    jp   $0BD7                                    ; $7B6E: $C3 $D7 $0B
+    jp   Farcall                                  ; $7B6E: $C3 $D7 $0B
 
     jr   nz, @+$42                                ; $7B71: $20 $40
 
@@ -7070,35 +7068,35 @@ jr_017_7BCB:
 
     nop                                           ; $7BDB: $00
     ld   hl, sp+$58                               ; $7BDC: $F8 $58
-    ld   bc, $0000                                ; $7BDE: $01 $00 $00
+    ld   bc, $00                                  ; $7BDE: $01 $00 $00
     ld   l, b                                     ; $7BE1: $68
-    ld   bc, $0800                                ; $7BE2: $01 $00 $08
+    ld   bc, $800                                 ; $7BE2: $01 $00 $08
     ld   l, b                                     ; $7BE5: $68
     ld   hl, $1000                                ; $7BE6: $21 $00 $10
     ld   e, b                                     ; $7BE9: $58
     ld   hl, $F800                                ; $7BEA: $21 $00 $F8
     ld   e, d                                     ; $7BED: $5A
-    ld   bc, $0000                                ; $7BEE: $01 $00 $00
+    ld   bc, $00                                  ; $7BEE: $01 $00 $00
     ld   l, d                                     ; $7BF1: $6A
 
 jr_017_7BF2:
-    ld   bc, $0800                                ; $7BF2: $01 $00 $08
+    ld   bc, $800                                 ; $7BF2: $01 $00 $08
     ld   l, d                                     ; $7BF5: $6A
     ld   hl, $1000                                ; $7BF6: $21 $00 $10
     ld   e, d                                     ; $7BF9: $5A
     ld   hl, $F800                                ; $7BFA: $21 $00 $F8
     ld   e, h                                     ; $7BFD: $5C
-    ld   bc, $0000                                ; $7BFE: $01 $00 $00
+    ld   bc, $00                                  ; $7BFE: $01 $00 $00
     ld   l, h                                     ; $7C01: $6C
-    ld   bc, $0800                                ; $7C02: $01 $00 $08
+    ld   bc, $800                                 ; $7C02: $01 $00 $08
     ld   l, h                                     ; $7C05: $6C
     ld   hl, $1000                                ; $7C06: $21 $00 $10
     ld   e, h                                     ; $7C09: $5C
     ld   hl, $F800                                ; $7C0A: $21 $00 $F8
     ld   e, [hl]                                  ; $7C0D: $5E
-    ld   bc, $0000                                ; $7C0E: $01 $00 $00
+    ld   bc, $00                                  ; $7C0E: $01 $00 $00
     ld   l, [hl]                                  ; $7C11: $6E
-    ld   bc, $0800                                ; $7C12: $01 $00 $08
+    ld   bc, $800                                 ; $7C12: $01 $00 $08
     ld   l, [hl]                                  ; $7C15: $6E
     ld   hl, $1000                                ; $7C16: $21 $00 $10
     ld   e, [hl]                                  ; $7C19: $5E
@@ -7157,7 +7155,7 @@ jr_017_7C6A:
     nop                                           ; $7C6B: $00
     nop                                           ; $7C6C: $00
     nop                                           ; $7C6D: $00
-    ld   bc, $0201                                ; $7C6E: $01 $01 $02
+    ld   bc, $201                                 ; $7C6E: $01 $01 $02
     inc  bc                                       ; $7C71: $03
     inc  bc                                       ; $7C72: $03
     inc  b                                        ; $7C73: $04
@@ -7795,7 +7793,7 @@ jr_017_7F8E:
     ret                                           ; $7FA8: $C9
 
 func_017_7FA9:
-    ld   hl, $DE01                                ; $7FA9: $21 $01 $DE
+    ld   hl, wFarcallParams                       ; $7FA9: $21 $01 $DE
     ld   a, $20                                   ; $7FAC: $3E $20
     ld   [hl+], a                                 ; $7FAE: $22
     ld   a, $7D                                   ; $7FAF: $3E $7D
@@ -7804,4 +7802,4 @@ func_017_7FA9:
     ld   [hl+], a                                 ; $7FB4: $22
     ld   a, $17                                   ; $7FB5: $3E $17
     ld   [hl], a                                  ; $7FB7: $77
-    jp   $0BD7                                    ; $7FB8: $C3 $D7 $0B
+    jp   Farcall                                  ; $7FB8: $C3 $D7 $0B

@@ -55,27 +55,27 @@ label_4A4D::
     and  a
     jr   nz, label_4A4D
     pop  hl
-    ld   bc, $004E
+    ld   bc, $4E
     ld   a, $01
     call label_4A3F
-    ld   bc, $0044
+    ld   bc, $44
     call label_4A3F
-    ld   bc, $0043
+    ld   bc, $43
     ld   a, $02
     call label_4A3F
-    ld   bc, $004D
+    ld   bc, $4D
     ld   a, $59
     call label_4A3F
-    ld   bc, $0077
+    ld   bc, $77
     call label_4A3F
-    ld   bc, $0078
+    ld   bc, $78
     call label_4A3F
-    ld   bc, $0045
+    ld   bc, $45
     call label_4A3F
-    ld   bc, $0076
+    ld   bc, $76
     ld   a, $39
     call label_4A3F
-    ld   bc, $004C
+    ld   bc, $4C
     call label_4A3F
     ret
 
@@ -109,7 +109,7 @@ label_4A98::
     ld   h, [hl]
     ld   l, a
     push hl
-    ld   de, $004F
+    ld   de, $4F
     add  hl, de
     push hl
     ld   a, [wSaveSlot]
@@ -154,18 +154,18 @@ label_4B05::
     jr   nz, label_4B05
     pop  hl
     push hl
-    ld   de, $005A
+    ld   de, $5A
     add  hl, de
     ld   [hl], $18
     pop  hl
     push hl
-    ld   de, $005B
+    ld   de, $5B
     add  hl, de
 
 label_4B1C::
     ld   [hl], $03
     pop  hl
-    ld   de, $0057
+    ld   de, $57
     add  hl, de
     xor  a
     ldi  [hl], a

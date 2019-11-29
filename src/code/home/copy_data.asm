@@ -161,7 +161,7 @@ CopyBackgroundData::
     inc  de
     ; Move the destination to the next background column
     ld   a, b
-    ld   bc, $0020
+    ld   bc, $20
     add  hl, bc
     ; Decrement the length to be copied
     ld   b, a
@@ -176,7 +176,7 @@ CopyBackgroundData::
     ld   [hl], a
     ; Move the destination to the next background column
     ld   a, b
-    ld   bc, $0020
+    ld   bc, $20
     add  hl, bc
     ; Decrement the length to be copied
     ld   b, a
@@ -222,7 +222,7 @@ UpdateNextBGColumnWithTiles::
 .continue
     inc  de
     ld   a, b
-    ld   bc, $0020
+    ld   bc, $20
     add  hl, bc
     ld   b, a
     dec  b

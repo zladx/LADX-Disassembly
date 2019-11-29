@@ -134,12 +134,14 @@ DialogClosingEndHandler::
     cp   a, $08
     ret  c
 
-    ld   a, $21
-    ld   [$2100], a
-    db   $C3
+    jpsb Func_021_53CF
 
-data_23D0::
-    db   $CF, $53, 0, $24, $48, 0
+; This array actually begins two bytes before,
+; in the middle of the `jp` instruction,
+; and so has two extra bytes at the begining ($CF, $53).
+data_23D2::
+    db   $00, $24
+    db   $48, $00
 
 data_23D6::
     db   $24, $48, $98, $98, $98, $99
@@ -159,7 +161,7 @@ label_23E4::
 label_23EF::
     ld   e, a
     ld   d, $00
-    ld   hl, data_23D0
+    ld   hl, data_23D2 - $02
     add  hl, de
     ld   a, [hl]
     add  a, $00

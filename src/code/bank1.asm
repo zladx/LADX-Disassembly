@@ -208,7 +208,7 @@ label_4667::
 ; Initialize save files, and load debug save file if needed
 InitSaveFiles::
     ; Initialize the battery-backed memory used for save files
-    ld   de, $0000
+    ld   de, $00
     call label_4794
     ld   de, $3AD
     call label_4794
@@ -841,7 +841,7 @@ label_52D9::
     or   d
     jr   nz, label_52D9
     ld   hl, $DDDA
-    ld   de, $0005
+    ld   de, $05
 
 label_52EA::
     call EnableExternalRAMWriting
@@ -853,7 +853,7 @@ label_52EA::
     or   d
     jr   nz, label_52EA
     ld   hl, $DDE0
-    ld   de, $0020
+    ld   de, $20
 
 label_52FB::
     call EnableExternalRAMWriting
@@ -2489,7 +2489,7 @@ label_5E12::
     or   d
     jr   nz, label_5E12
     ld   bc, $DDDA
-    ld   de, $0005
+    ld   de, $05
 
 label_5E26::
     call EnableExternalRAMWriting
@@ -2502,7 +2502,7 @@ label_5E26::
     or   d
     jr   nz, label_5E26
     ld   bc, $DDE0
-    ld   de, $0020
+    ld   de, $20
 
 label_5E3A::
     call EnableExternalRAMWriting
@@ -3216,7 +3216,7 @@ LoadCounterAnimatedTiles::
     ld   h, [hl]
     ld   l, a
     ld   de, $96D0  ; destination
-    ld   bc, $0010  ; count
+    ld   bc, $10    ; count
     ld   a, $0F     ; bank
     call CopyDataFromBank
     ld   a, [$C109]
@@ -3231,7 +3231,7 @@ LoadCounterAnimatedTiles::
     ld   h, [hl]
     ld   l, a
     ld   de, $96C0 ; destination
-    ld   bc, $0010 ; count
+    ld   bc, $10   ; count
     ld   a, $0F    ; bank
     call CopyDataFromBank
     ld   a, $6C

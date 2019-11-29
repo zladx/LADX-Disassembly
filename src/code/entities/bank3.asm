@@ -549,7 +549,7 @@ jr_003_4A7A:
     call label_27EA                               ; $4AA0: $CD $EA $27
 
 jr_003_4AA3:
-    ld   a, [$0003]                               ; $4AA3: $FA $03 $00
+    ld   a, [ROM_DebugTool1]                      ; $4AA3: $FA $03 $00
     and  a                                        ; $4AA6: $A7
     jp   z, label_003_4B2F                        ; $4AA7: $CA $2F $4B
 
@@ -2123,11 +2123,11 @@ jr_003_547D:
     rst  $38                                      ; $54A6: $FF
     rst  $38                                      ; $54A7: $FF
     ld   a, [$3AFA]                               ; $54A8: $FA $FA $3A
-    ld   bc, $02FA                                ; $54AB: $01 $FA $02
+    ld   bc, $2FA                                 ; $54AB: $01 $FA $02
     ld   a, [hl-]                                 ; $54AE: $3A
     ld   hl, $0606                                ; $54AF: $21 $06 $06
     ld   a, [hl-]                                 ; $54B2: $3A
-    ld   bc, $0E06                                ; $54B3: $01 $06 $0E
+    ld   bc, $E06                                 ; $54B3: $01 $06 $0E
     ld   a, [hl-]                                 ; $54B6: $3A
     ld   hl, $FC04                                ; $54B7: $21 $04 $FC
     jr   nc, jr_003_54BD                          ; $54BA: $30 $01
@@ -2162,7 +2162,7 @@ jr_003_54C5:
     rst  $38                                      ; $54D7: $FF
     ld   hl, sp-$08                               ; $54D8: $F8 $F8
     ld   a, [hl-]                                 ; $54DA: $3A
-    ld   bc, $00F8                                ; $54DB: $01 $F8 $00
+    ld   bc, $F8                                  ; $54DB: $01 $F8 $00
     ld   a, [hl-]                                 ; $54DE: $3A
     ld   hl, $808                            ; $54DF: $21 $08 $08
     ld   a, [hl-]                                 ; $54E2: $3A
@@ -2170,7 +2170,7 @@ jr_003_54C5:
     ld   a, [hl-]                                 ; $54E6: $3A
     ld   hl, $F808                                ; $54E7: $21 $08 $F8
     ld   a, [hl-]                                 ; $54EA: $3A
-    ld   bc, $0008                                ; $54EB: $01 $08 $00
+    ld   bc, $08                                  ; $54EB: $01 $08 $00
     ld   a, [hl-]                                 ; $54EE: $3A
     ld   hl, $08F8                                ; $54EF: $21 $F8 $08
     ld   a, [hl-]                                 ; $54F2: $3A
@@ -2307,19 +2307,19 @@ jr_003_5599:
     cpl                                           ; $55A9: $2F
     cpl                                           ; $55AA: $2F
     inc  bc                                       ; $55AB: $03
-    ld   bc, $0001                                ; $55AC: $01 $01 $00
+    ld   bc, $01                                  ; $55AC: $01 $01 $00
     inc  bc                                       ; $55AF: $03
     inc  bc                                       ; $55B0: $03
     inc  bc                                       ; $55B1: $03
     inc  bc                                       ; $55B2: $03
-    ld   bc, $0000                                ; $55B3: $01 $00 $00
+    ld   bc, $00                                  ; $55B3: $01 $00 $00
     nop                                           ; $55B6: $00
     inc  bc                                       ; $55B7: $03
     nop                                           ; $55B8: $00
-    ld   bc, $0101                                ; $55B9: $01 $01 $01
+    ld   bc, $101                                 ; $55B9: $01 $01 $01
     nop                                           ; $55BC: $00
-    ld   bc, $0101                                ; $55BD: $01 $01 $01
-    ld   bc, $0001                                ; $55C0: $01 $01 $00
+    ld   bc, $101                                 ; $55BD: $01 $01 $01
+    ld   bc, $01                                  ; $55C0: $01 $01 $00
     nop                                           ; $55C3: $00
     nop                                           ; $55C4: $00
     ld   bc, $2E00                                ; $55C5: $01 $00 $2E
@@ -2547,7 +2547,7 @@ SpawnEnemyDrop::
 
     ld   bc, $808                            ; $56EA: $01 $08 $08
     db   $10                                      ; $56ED: $10
-    ld   bc, $0404                                ; $56EE: $01 $04 $04
+    ld   bc, $404                                 ; $56EE: $01 $04 $04
     ld   a, [bc]                                  ; $56F1: $0A
     scf                                           ; $56F2: $37
     scf                                           ; $56F3: $37
@@ -3411,7 +3411,7 @@ jr_003_5BAC:
     ld   e, e                                     ; $5BB3: $5B
     db   $e4                                      ; $5BB4: $E4
     ld   e, e                                     ; $5BB5: $5B
-    ld   bc, $0F5C                                ; $5BB6: $01 $5C $0F
+    ld   bc, $F5C                                 ; $5BB6: $01 $5C $0F
     ld   e, h                                     ; $5BB9: $5C
     call GetEntityTransitionCountdown                 ; $5BBA: $CD $05 $0C
     jp   z, label_003_60AA                        ; $5BBD: $CA $AA $60
@@ -3704,13 +3704,13 @@ jr_003_5D80:
     jp   label_003_5A17                           ; $5D80: $C3 $17 $5A
 
     ld   [hl], b                                  ; $5D83: $70
-    ld   bc, $0172                                ; $5D84: $01 $72 $01
+    ld   bc, $172                                 ; $5D84: $01 $72 $01
     ld   [hl], h                                  ; $5D87: $74
-    ld   bc, $0176                                ; $5D88: $01 $76 $01
+    ld   bc, $176                                 ; $5D88: $01 $76 $01
     ld   a, b                                     ; $5D8B: $78
-    ld   bc, $017A                                ; $5D8C: $01 $7A $01
+    ld   bc, $17A                                 ; $5D8C: $01 $7A $01
     ld   a, h                                     ; $5D8F: $7C
-    ld   bc, $017E                                ; $5D90: $01 $7E $01
+    ld   bc, $17E                                 ; $5D90: $01 $7E $01
 
 SirensInstrumentEntityHandler::
     ld   hl, wEntitiesSubstate1Table              ; $5D93: $21 $B0 $C2
@@ -4557,13 +4557,13 @@ jr_003_629C:
 label_003_629D:
     ret                                           ; $629D: $C9
 
-    ld   bc, $0001                                ; $629E: $01 $01 $00
+    ld   bc, $01                                  ; $629E: $01 $01 $00
     nop                                           ; $62A1: $00
-    ld   bc, $0100                                ; $62A2: $01 $00 $01
-    ld   bc, $0000                                ; $62A5: $01 $00 $00
-    ld   bc, $0001                                ; $62A8: $01 $01 $00
+    ld   bc, $100                                 ; $62A2: $01 $00 $01
+    ld   bc, $00                                  ; $62A5: $01 $00 $00
+    ld   bc, $01                                  ; $62A8: $01 $01 $00
     nop                                           ; $62AB: $00
-    ld   bc, $0000                                ; $62AC: $01 $00 $00
+    ld   bc, $00                                  ; $62AC: $01 $00 $00
 
 func_003_62AF::
     ld   hl, wEntitiesUnknowTableR                ; $62AF: $21 $90 $C3
@@ -5072,7 +5072,7 @@ ConfigureNewEntity_helper::
     dec  d                                        ; $652F: $15
     ld   hl, sp-$08                               ; $6530: $F8 $F8
     ld   [hl-], a                                 ; $6532: $32
-    ld   bc, $00F8                                ; $6533: $01 $F8 $00
+    ld   bc, $F8                                  ; $6533: $01 $F8 $00
     ld   [hl-], a                                 ; $6536: $32
     ld   hl, $08F8                                ; $6537: $21 $F8 $08
     ld   [hl-], a                                 ; $653A: $32
@@ -5080,7 +5080,7 @@ ConfigureNewEntity_helper::
     ld   [hl-], a                                 ; $653E: $32
     ld   hl, $F808                                ; $653F: $21 $08 $F8
     ld   [hl-], a                                 ; $6542: $32
-    ld   bc, $0008                                ; $6543: $01 $08 $00
+    ld   bc, $08                                  ; $6543: $01 $08 $00
     ld   [hl-], a                                 ; $6546: $32
     ld   hl, $808                            ; $6547: $21 $08 $08
     ld   [hl-], a                                 ; $654A: $32
@@ -5214,9 +5214,9 @@ jr_003_65C1:
 
 jr_003_65D1:
     nop                                           ; $65D1: $00
-    ld   bc, $0101                                ; $65D2: $01 $01 $01
-    ld   bc, $0101                                ; $65D5: $01 $01 $01
-    ld   bc, $0201                                ; $65D8: $01 $01 $02
+    ld   bc, $101                                 ; $65D2: $01 $01 $01
+    ld   bc, $101                                 ; $65D5: $01 $01 $01
+    ld   bc, $201                                 ; $65D8: $01 $01 $02
     ld   [bc], a                                  ; $65DB: $02
     ld   [bc], a                                  ; $65DC: $02
     ld   [bc], a                                  ; $65DD: $02
@@ -5991,7 +5991,7 @@ label_003_6B43:
     nop                                           ; $6B48: $00
     inc  bc                                       ; $6B49: $03
     ld   bc, $FE02                                ; $6B4A: $01 $02 $FE
-    ld   bc, $0320                                ; $6B4D: $01 $20 $03
+    ld   bc, $320                                 ; $6B4D: $01 $20 $03
     jp   UnloadEntityAndReturn                    ; $6B50: $C3 $8D $3F
 
     ldh  a, [hActiveEntityType]                     ; $6B53: $F0 $EB
@@ -6015,7 +6015,7 @@ jr_003_6B6E:
     jr   jr_003_6B7B                              ; $6B71: $18 $08
 
     ld   [bc], a                                  ; $6B73: $02
-    ld   bc, $0202                                ; $6B74: $01 $02 $02
+    ld   bc, $202                                 ; $6B74: $01 $02 $02
     ld   b, b                                     ; $6B77: $40
     ld   [$4040], sp                              ; $6B78: $08 $40 $40
 
@@ -6884,7 +6884,7 @@ jr_003_6FCC:
     jp   label_003_73DB                           ; $6FE1: $C3 $DB $73
 
     nop                                           ; $6FE4: $00
-    ld   bc, $0302                                ; $6FE5: $01 $02 $03
+    ld   bc, $302                                 ; $6FE5: $01 $02 $03
 
 label_003_6FE8:
     ldh  a, [hActiveEntityType]                     ; $6FE8: $F0 $EB
@@ -6898,7 +6898,7 @@ label_003_6FE8:
     rst  $00                                      ; $6FF4: $C7
     ld   d, [hl]                                  ; $6FF5: $56
     ld   c, e                                     ; $6FF6: $4B
-    ld   bc, $0770                                ; $6FF7: $01 $70 $07
+    ld   bc, $770                                 ; $6FF7: $01 $70 $07
     ld   [hl], b                                  ; $6FFA: $70
     ld   d, $70                                   ; $6FFB: $16 $70
     ld   d, $70                                   ; $6FFD: $16 $70
@@ -8718,7 +8718,7 @@ jr_003_7A18:
     cp   $00                                      ; $7A3B: $FE $00
     jr   z, jr_003_7A5D                           ; $7A3D: $28 $1E
 
-    ld   de, $0000                                ; $7A3F: $11 $00 $00
+    ld   de, $00                                  ; $7A3F: $11 $00 $00
     and  $80                                      ; $7A42: $E6 $80
     jr   z, jr_003_7A47                           ; $7A44: $28 $01
 
@@ -8746,7 +8746,7 @@ jr_003_7A5D:
     cp   $00                                      ; $7A62: $FE $00
     jr   z, jr_003_7A84                           ; $7A64: $28 $1E
 
-    ld   de, $0002                                ; $7A66: $11 $02 $00
+    ld   de, $02                                  ; $7A66: $11 $02 $00
     and  $80                                      ; $7A69: $E6 $80
     jr   nz, jr_003_7A6E                          ; $7A6B: $20 $01
 
@@ -8771,41 +8771,41 @@ label_003_7A84:
 jr_003_7A84:
     ret                                           ; $7A84: $C9
 
-    ld   bc, $0100                                ; $7A85: $01 $00 $01
+    ld   bc, $100                                 ; $7A85: $01 $00 $01
     nop                                           ; $7A88: $00
     nop                                           ; $7A89: $00
-    ld   bc, $0100                                ; $7A8A: $01 $00 $01
-    ld   bc, $0001                                ; $7A8D: $01 $01 $00
+    ld   bc, $100                                 ; $7A8A: $01 $00 $01
+    ld   bc, $01                                  ; $7A8D: $01 $01 $00
     nop                                           ; $7A90: $00
     nop                                           ; $7A91: $00
     nop                                           ; $7A92: $00
-    ld   bc, $0101                                ; $7A93: $01 $01 $01
+    ld   bc, $101                                 ; $7A93: $01 $01 $01
     nop                                           ; $7A96: $00
-    ld   bc, $0000                                ; $7A97: $01 $00 $00
-    ld   bc, $0100                                ; $7A9A: $01 $00 $01
-    ld   bc, $0001                                ; $7A9D: $01 $01 $00
+    ld   bc, $00                                  ; $7A97: $01 $00 $00
+    ld   bc, $100                                 ; $7A9A: $01 $00 $01
+    ld   bc, $01                                  ; $7A9D: $01 $01 $00
     nop                                           ; $7AA0: $00
     nop                                           ; $7AA1: $00
     nop                                           ; $7AA2: $00
-    ld   bc, $0001                                ; $7AA3: $01 $01 $00
-    ld   bc, $0101                                ; $7AA6: $01 $01 $01
-    ld   bc, $0100                                ; $7AA9: $01 $00 $01
-    ld   bc, $0101                                ; $7AAC: $01 $01 $01
+    ld   bc, $01                                  ; $7AA3: $01 $01 $00
+    ld   bc, $101                                 ; $7AA6: $01 $01 $01
+    ld   bc, $100                                 ; $7AA9: $01 $00 $01
+    ld   bc, $101                                 ; $7AAC: $01 $01 $01
     nop                                           ; $7AAF: $00
-    ld   bc, $0101                                ; $7AB0: $01 $01 $01
-    ld   bc, $0100                                ; $7AB3: $01 $00 $01
+    ld   bc, $101                                 ; $7AB0: $01 $01 $01
+    ld   bc, $100                                 ; $7AB3: $01 $00 $01
     nop                                           ; $7AB6: $00
     nop                                           ; $7AB7: $00
     nop                                           ; $7AB8: $00
     nop                                           ; $7AB9: $00
-    ld   bc, $0000                                ; $7ABA: $01 $00 $00
+    ld   bc, $00                                  ; $7ABA: $01 $00 $00
     nop                                           ; $7ABD: $00
     nop                                           ; $7ABE: $00
-    ld   bc, $0000                                ; $7ABF: $01 $00 $00
+    ld   bc, $00                                  ; $7ABF: $01 $00 $00
     nop                                           ; $7AC2: $00
     nop                                           ; $7AC3: $00
-    ld   bc, $0100                                ; $7AC4: $01 $00 $01
-    ld   bc, $0100                                ; $7AC7: $01 $00 $01
+    ld   bc, $100                                 ; $7AC4: $01 $00 $01
+    ld   bc, $100                                 ; $7AC7: $01 $00 $01
     nop                                           ; $7ACA: $00
     nop                                           ; $7ACB: $00
     db   $01                                      ; $7ACC: $01
@@ -9186,7 +9186,7 @@ Data_003_7CA9::
     db $00, $02
 
 func_003_7CAB::
-    ld   de, $0000                                ; $7CAB: $11 $00 $00
+    ld   de, $00                                  ; $7CAB: $11 $00 $00
     push bc                                       ; $7CAE: $C5
     ld   hl, wEntitiesPosXTable                         ; $7CAF: $21 $00 $C2
     add  hl, bc                                   ; $7CB2: $09

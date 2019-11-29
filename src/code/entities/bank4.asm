@@ -1612,29 +1612,29 @@ func_004_4B52:
     add  hl, bc                                   ; $4B55: $09
     ld   a, [hl]                                  ; $4B56: $7E
     JP_TABLE                                      ; $4B57: $C7
-    ld   a, h                                     ; $4B58: $7C
-    ld   c, e                                     ; $4B59: $4B
-    JP_TABLE                                      ; $4B5A: $C7
-    ld   c, e                                     ; $4B5B: $4B
-    db   $10                                      ; $4B5C: $10
-    inc  c                                        ; $4B5D: $0C
-    ld   b, $02                                   ; $4B5E: $06 $02
-    ldh  a, [hNoiseSfx]                            ; $4B60: $F0 $F4
-    ld   a, [$10FE]                               ; $4B62: $FA $FE $10
-    inc  c                                        ; $4B65: $0C
-    ld   b, $02                                   ; $4B66: $06 $02
-    ldh  a, [hNoiseSfx]                            ; $4B68: $F0 $F4
-    ld   a, [$02FE]                               ; $4B6A: $FA $FE $02
-    ld   b, $0C                                   ; $4B6D: $06 $0C
-    db   $10                                      ; $4B6F: $10
-    ld   [bc], a                                  ; $4B70: $02
-    ld   b, $0C                                   ; $4B71: $06 $0C
-    db   $10                                      ; $4B73: $10
-    cp   $FA                                      ; $4B74: $FE $FA
-    db   $f4                                      ; $4B76: $F4
-    ldh  a, [hIsGBC]                              ; $4B77: $F0 $FE
-    ld   a, [$F0F4]                               ; $4B79: $FA $F4 $F0
-    call GetEntityTransitionCountdown                 ; $4B7C: $CD $05 $0C
+dw Func_004_4B7C
+dw Func_004_4BC7
+
+Data_004_4B5C::
+    db   $10, $0C
+    db   $06, $02
+    db   $F0, $F4
+    db   $FA, $FE
+    db   $10, $0C
+    db   $06, $02
+    db   $F0, $F4
+    db   $FA, $FE
+    db   $02, $06
+    db   $0C, $10
+    db   $02, $06
+    db   $0C, $10
+    db   $FE, $FA
+    db   $F4, $F0
+    db   $FE, $FA
+    db   $F4, $F0
+
+Func_004_4B7C::
+    call GetEntityTransitionCountdown             ; $4B7C: $CD $05 $0C
     and  a                                        ; $4B7F: $A7
     jr   nz, jr_004_4BC6                          ; $4B80: $20 $44
 
@@ -1689,6 +1689,7 @@ jr_004_4BA2:
 jr_004_4BC6:
     ret                                           ; $4BC6: $C9
 
+Func_004_4BC7::
     call GetEntityTransitionCountdown                 ; $4BC7: $CD $05 $0C
     jr   z, jr_004_4BD5                           ; $4BCA: $28 $09
 

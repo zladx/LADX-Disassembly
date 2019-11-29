@@ -144,7 +144,7 @@ GetBGAttributesAddressForObject::
     cp   $B5                                      ; $660D: $FE $B5
     jr   nz, .jr_01A_6616                         ; $660F: $20 $05
 
-    ld   bc, $01FE                                ; $6611: $01 $FE $01
+    ld   bc, $1FE                                 ; $6611: $01 $FE $01
     jr   .useSecondaryIndoorsPaletteBank          ; $6614: $18 $14
 
 .jr_01A_6616

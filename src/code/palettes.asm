@@ -105,7 +105,7 @@ LoadPaletteForTilemap::
     ld   h, b                                     ; $4088: $60
     ld   l, c                                     ; $4089: $69
     ld   de, $DC10                                ; $408A: $11 $10 $DC
-    ld   bc, $0080                                ; $408D: $01 $80 $00
+    ld   bc, $80                                  ; $408D: $01 $80 $00
     ld   a, [wPaletteUnknownE]                    ; $4090: $FA $D5 $DD
     and  a                                        ; $4093: $A7
     jr   nz, jr_021_409F                          ; $4094: $20 $09
@@ -326,10 +326,10 @@ jr_021_41B4:
     call CopyData                                 ; $41C1: $CD $14 $29
     push hl                                       ; $41C4: $E5
     ld   hl, Data_021_5518                        ; $41C5: $21 $18 $55
-    ld   bc, $0030                                ; $41C8: $01 $30 $00
+    ld   bc, $30                                  ; $41C8: $01 $30 $00
     call CopyData                                 ; $41CB: $CD $14 $29
     pop  hl                                       ; $41CE: $E1
-    ld   bc, $0010                                ; $41CF: $01 $10 $00
+    ld   bc, $10                                  ; $41CF: $01 $10 $00
     call CopyData                                 ; $41D2: $CD $14 $29
     pop  hl                                       ; $41D5: $E1
 
@@ -341,10 +341,10 @@ jr_021_41D6:
     call CopyData                                 ; $41E0: $CD $14 $29
     push hl                                       ; $41E3: $E5
     ld   hl, Data_021_5518                        ; $41E4: $21 $18 $55
-    ld   bc, $0030                                ; $41E7: $01 $30 $00
+    ld   bc, $30                                  ; $41E7: $01 $30 $00
     call CopyData                                 ; $41EA: $CD $14 $29
     pop  hl                                       ; $41ED: $E1
-    ld   bc, $0010                                ; $41EE: $01 $10 $00
+    ld   bc, $10                                  ; $41EE: $01 $10 $00
     call CopyData                                 ; $41F1: $CD $14 $29
     xor  a                                        ; $41F4: $AF
     ldh  [rSVBK], a                               ; $41F5: $E0 $70
@@ -451,7 +451,7 @@ label_021_425E:
     jr   z, jr_021_4295                           ; $4287: $28 $0C
 
     add  hl, bc                                   ; $4289: $09
-    ld   bc, $0010                                ; $428A: $01 $10 $00
+    ld   bc, $10                                  ; $428A: $01 $10 $00
     ld   de, $DC80                                ; $428D: $11 $80 $DC
     ld   a, $02                                   ; $4290: $3E $02
     ld   [wPaletteDataFlags], a                    ; $4292: $EA $D1 $DD

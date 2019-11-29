@@ -14,14 +14,14 @@ ClearLowerWRAM::
 
 ; Clear lower values of HRAM (from $FF90 to $FFBF) and all WRAM
 ClearWRAMAndLowerHRAM::
-    ld   bc, $002F
+    ld   bc, $2F
     jr   ClearHRAMBytesAndWRAM
 
 ; Clear all values from HRAM and WRAM
 ; (only `hIsGBC` is kept)
 ClearHRAMAndWRAM::
     ; Set all bytes of HRAM (from $FF90 to $FFFD) to zero
-    ld   bc, $006D
+    ld   bc, $6D
 
 ClearHRAMBytesAndWRAM
     ; Set BC bytes of HRAM (starting from $FF90) to zero

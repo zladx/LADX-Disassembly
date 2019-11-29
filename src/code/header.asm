@@ -44,7 +44,7 @@ Copy49A0ToTileMemory89A0::
     ld   de, $89A0
 
 Copy48BytesAndClearFlags::
-    ld   bc, $0030
+    ld   bc, $30
     call CopyData
     xor  a
     ldh  [$FF90], a

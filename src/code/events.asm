@@ -551,7 +551,7 @@ CheckAnswerTunicsTrigger::
 
     xor  a                                        ; $6032: $AF
     ldh  [hScratch0], a                               ; $6033: $E0 $D7
-    ld   de, $0000                                ; $6035: $11 $00 $00
+    ld   de, $00                                  ; $6035: $11 $00 $00
     ldh  a, [hMapRoom]                           ; $6038: $F0 $F6
     cp   $12                                      ; $603A: $FE $12
     jr   z, jr_002_609B                           ; $603C: $28 $5D

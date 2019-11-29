@@ -746,7 +746,7 @@ Data_002_7C04::
     nop                                           ; $7C05: $00
     rst  $38                                      ; $7C06: $FF
     ld   bc, $FF01                                ; $7C07: $01 $01 $FF
-    ld   bc, $01FF                                ; $7C0A: $01 $FF $01
+    ld   bc, $1FF                                 ; $7C0A: $01 $FF $01
     rst  $38                                      ; $7C0D: $FF
     nop                                           ; $7C0E: $00
     nop                                           ; $7C0F: $00

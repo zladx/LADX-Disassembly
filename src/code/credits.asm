@@ -4323,7 +4323,7 @@ label_017_6A80:
     ld   b, a                                     ; $6A8F: $47
     ld   hl, Data_017_6900                        ; $6A90: $21 $00 $69
     add  hl, bc                                   ; $6A93: $09
-    ld   bc, $0030                                ; $6A94: $01 $30 $00
+    ld   bc, $30                                  ; $6A94: $01 $30 $00
     ld   de, $DC50                                ; $6A97: $11 $50 $DC
     call CopyData                                 ; $6A9A: $CD $14 $29
     xor  a                                        ; $6A9D: $AF
@@ -4450,7 +4450,7 @@ jr_017_6C15:
     inc  a                                        ; $6C1B: $3C
     sla  a                                        ; $6C1C: $CB $27
     ld   [wEntitiesSpeedXTable], a                ; $6C1E: $EA $40 $C2
-    ld   bc, $0000                                ; $6C21: $01 $00 $00
+    ld   bc, $00                                  ; $6C21: $01 $00 $00
     ld   a, [wEntitiesPosXTable]                  ; $6C24: $FA $00 $C2
     push af                                       ; $6C27: $F5
     call func_017_7E3A                            ; $6C28: $CD $3A $7E
@@ -6102,8 +6102,8 @@ jr_017_76AB:
     nop                                           ; $76B2: $00
 
 jr_017_76B3:
-    ld   bc, $0101                                ; $76B3: $01 $01 $01
-    ld   bc, $0202                                ; $76B6: $01 $02 $02
+    ld   bc, $101                                 ; $76B3: $01 $01 $01
+    ld   bc, $202                                 ; $76B6: $01 $02 $02
     ld   [bc], a                                  ; $76B9: $02
     inc  bc                                       ; $76BA: $03
     inc  bc                                       ; $76BB: $03
@@ -6131,8 +6131,8 @@ jr_017_76BF:
     ld   [bc], a                                  ; $76D7: $02
     ld   [bc], a                                  ; $76D8: $02
     ld   [bc], a                                  ; $76D9: $02
-    ld   bc, $0101                                ; $76DA: $01 $01 $01
-    ld   bc, $003E                                ; $76DD: $01 $3E $00
+    ld   bc, $101                                 ; $76DA: $01 $01 $01
+    ld   bc, $3E                                  ; $76DD: $01 $3E $00
     ld   [$C3C0], a                               ; $76E0: $EA $C0 $C3
     ldh  a, [hBaseScrollY]                               ; $76E3: $F0 $97
     ld   d, a                                     ; $76E5: $57
@@ -6320,12 +6320,12 @@ jr_017_7798:
 jr_017_77E2:
     nop                                           ; $77E2: $00
     nop                                           ; $77E3: $00
-    ld   bc, $0202                                ; $77E4: $01 $02 $02
+    ld   bc, $202                                 ; $77E4: $01 $02 $02
     ld   [bc], a                                  ; $77E7: $02
-    ld   bc, $0000                                ; $77E8: $01 $00 $00
+    ld   bc, $00                                  ; $77E8: $01 $00 $00
     nop                                           ; $77EB: $00
     nop                                           ; $77EC: $00
-    ld   bc, $0101                                ; $77ED: $01 $01 $01
+    ld   bc, $101                                 ; $77ED: $01 $01 $01
     ld   bc, $4021                                ; $77F0: $01 $21 $40
     jp   $3609                                    ; $77F3: $C3 $09 $36
 
@@ -6643,7 +6643,7 @@ Data_017_7987::
     db   $E8, $01, $EA, $01, $EC
 
 Func_017_79A4::
-    ld   bc, $01EE                                ; $79A4: $01 $EE $01
+    ld   bc, $1EE                                 ; $79A4: $01 $EE $01
     ld   hl, $C2C0                                ; $79A7: $21 $C0 $C2
     add  hl, bc                                   ; $79AA: $09
     ld   a, [hl]                                  ; $79AB: $7E
@@ -7068,35 +7068,35 @@ jr_017_7BCB:
 
     nop                                           ; $7BDB: $00
     ld   hl, sp+$58                               ; $7BDC: $F8 $58
-    ld   bc, $0000                                ; $7BDE: $01 $00 $00
+    ld   bc, $00                                  ; $7BDE: $01 $00 $00
     ld   l, b                                     ; $7BE1: $68
-    ld   bc, $0800                                ; $7BE2: $01 $00 $08
+    ld   bc, $800                                 ; $7BE2: $01 $00 $08
     ld   l, b                                     ; $7BE5: $68
     ld   hl, $1000                                ; $7BE6: $21 $00 $10
     ld   e, b                                     ; $7BE9: $58
     ld   hl, $F800                                ; $7BEA: $21 $00 $F8
     ld   e, d                                     ; $7BED: $5A
-    ld   bc, $0000                                ; $7BEE: $01 $00 $00
+    ld   bc, $00                                  ; $7BEE: $01 $00 $00
     ld   l, d                                     ; $7BF1: $6A
 
 jr_017_7BF2:
-    ld   bc, $0800                                ; $7BF2: $01 $00 $08
+    ld   bc, $800                                 ; $7BF2: $01 $00 $08
     ld   l, d                                     ; $7BF5: $6A
     ld   hl, $1000                                ; $7BF6: $21 $00 $10
     ld   e, d                                     ; $7BF9: $5A
     ld   hl, $F800                                ; $7BFA: $21 $00 $F8
     ld   e, h                                     ; $7BFD: $5C
-    ld   bc, $0000                                ; $7BFE: $01 $00 $00
+    ld   bc, $00                                  ; $7BFE: $01 $00 $00
     ld   l, h                                     ; $7C01: $6C
-    ld   bc, $0800                                ; $7C02: $01 $00 $08
+    ld   bc, $800                                 ; $7C02: $01 $00 $08
     ld   l, h                                     ; $7C05: $6C
     ld   hl, $1000                                ; $7C06: $21 $00 $10
     ld   e, h                                     ; $7C09: $5C
     ld   hl, $F800                                ; $7C0A: $21 $00 $F8
     ld   e, [hl]                                  ; $7C0D: $5E
-    ld   bc, $0000                                ; $7C0E: $01 $00 $00
+    ld   bc, $00                                  ; $7C0E: $01 $00 $00
     ld   l, [hl]                                  ; $7C11: $6E
-    ld   bc, $0800                                ; $7C12: $01 $00 $08
+    ld   bc, $800                                 ; $7C12: $01 $00 $08
     ld   l, [hl]                                  ; $7C15: $6E
     ld   hl, $1000                                ; $7C16: $21 $00 $10
     ld   e, [hl]                                  ; $7C19: $5E
@@ -7155,7 +7155,7 @@ jr_017_7C6A:
     nop                                           ; $7C6B: $00
     nop                                           ; $7C6C: $00
     nop                                           ; $7C6D: $00
-    ld   bc, $0201                                ; $7C6E: $01 $01 $02
+    ld   bc, $201                                 ; $7C6E: $01 $01 $02
     inc  bc                                       ; $7C71: $03
     inc  bc                                       ; $7C72: $03
     inc  b                                        ; $7C73: $04

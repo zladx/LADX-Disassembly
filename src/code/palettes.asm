@@ -321,7 +321,7 @@ jr_021_41B4:
     jr   nz, jr_021_41D6                          ; $41B8: $20 $1C
 
     push hl                                       ; $41BA: $E5
-    ld   bc, $0040                                ; $41BB: $01 $40 $00
+    ld   bc, $40                                ; $41BB: $01 $40 $00
     ld   de, $DC10                                ; $41BE: $11 $10 $DC
     call CopyData                                 ; $41C1: $CD $14 $29
     push hl                                       ; $41C4: $E5
@@ -334,7 +334,7 @@ jr_021_41B4:
     pop  hl                                       ; $41D5: $E1
 
 jr_021_41D6:
-    ld   bc, $0040                                ; $41D6: $01 $40 $00
+    ld   bc, $40                                ; $41D6: $01 $40 $00
     ld   de, $DC10                                ; $41D9: $11 $10 $DC
     ld   a, $02                                   ; $41DC: $3E $02
     ldh  [rSVBK], a                               ; $41DE: $E0 $70
@@ -441,7 +441,7 @@ label_021_425E:
     ld   h, b                                     ; $4273: $60
     ld   l, a                                     ; $4274: $6F
     ld   de, $DC10                                ; $4275: $11 $10 $DC
-    ld   bc, $0040                                ; $4278: $01 $40 $00
+    ld   bc, $40                                ; $4278: $01 $40 $00
     ld   a, [wGameplayType]                       ; $427B: $FA $95 $DB
     cp   $01                                      ; $427E: $FE $01
     jr   z, jr_021_429D                           ; $4280: $28 $1B
@@ -1209,7 +1209,7 @@ jr_021_537B:
 
 jr_021_539C:
     ld   de, $DC10                                ; $539C: $11 $10 $DC
-    ld   bc, $0040                                ; $539F: $01 $40 $00
+    ld   bc, $40                                ; $539F: $01 $40 $00
     push bc                                       ; $53A2: $C5
     push de                                       ; $53A3: $D5
     push hl                                       ; $53A4: $E5
@@ -1238,6 +1238,7 @@ jr_021_53C0:
     ld   [wPaletteDataFlags], a                    ; $53CB: $EA $D1 $DD
     ret                                           ; $53CE: $C9
 
+Func_021_53CF::
     call func_021_5366                            ; $53CF: $CD $66 $53
     ld   a, $01                                   ; $53D2: $3E $01
     ldh  [hBGMapOffsetLow], a                     ; $53D4: $E0 $E1

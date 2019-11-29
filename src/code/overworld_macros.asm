@@ -395,7 +395,7 @@ Func_024_7A40::
     rl   b                                        ; $7A59: $CB $10
     ld   hl, Data_024_7840                        ; $7A5B: $21 $40 $78
     add  hl, bc                                   ; $7A5E: $09
-    ld   bc, $0040                                ; $7A5F: $01 $40 $00
+    ld   bc, $40                                ; $7A5F: $01 $40 $00
     ld   de, $DC50                                ; $7A62: $11 $50 $DC
     call CopyData                                 ; $7A65: $CD $14 $29
     xor  a                                        ; $7A68: $AF
@@ -460,7 +460,7 @@ Data_024_7B77::
     add  hl, bc                                   ; $7B8D: $09
 .jr_024_7B8E
 
-    ld   bc, $0040                                ; $7B8E: $01 $40 $00
+    ld   bc, $40                                ; $7B8E: $01 $40 $00
     ld   de, $DC10                                ; $7B91: $11 $10 $DC
     call CopyData                                 ; $7B94: $CD $14 $29
 

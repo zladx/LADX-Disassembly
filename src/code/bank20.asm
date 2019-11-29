@@ -416,7 +416,7 @@ ConfigureAnimatedTilesCopy::
     add  hl, bc                                   ; $4821: $09
     add  hl, de                                   ; $4822: $19
     ld   de, $8FC0                                ; $4823: $11 $C0 $8F
-    ld   bc, $0040                                ; $4826: $01 $40 $00
+    ld   bc, $40                                ; $4826: $01 $40 $00
     ld   a, $35                                   ; $4829: $3E $35
     and  a                                        ; $482B: $A7
     ret                                           ; $482C: $C9

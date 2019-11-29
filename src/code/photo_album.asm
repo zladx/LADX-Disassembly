@@ -158,7 +158,7 @@ JumpTable_028_40FB:
 
     ld   a, $0C                                 ; $410C: JumpTable_028_40FB $3E $0C
     call AdjustBankNumberForGBC                 ; $410E: JumpTable_028_40FB $CD $0B $0B
-    ld   bc, $0040                              ; $4111: JumpTable_028_40FB $01 $40 $00
+    ld   bc, $40                              ; $4111: JumpTable_028_40FB $01 $40 $00
     ld   hl, $57C0                              ; $4114: JumpTable_028_40FB $21 $C0 $57
     ld   de, $97C0                              ; $4117: JumpTable_028_40FB $11 $C0 $97
     call CopyData_trampoline                    ; $411A: JumpTable_028_40FB $CD $5D $0B

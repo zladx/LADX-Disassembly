@@ -1704,7 +1704,7 @@ jr_017_53B8:
     ld   b, a                                     ; $53C3: $47
     ld   hl, Data_017_51A7                        ; $53C4: $21 $A7 $51
     add  hl, bc                                   ; $53C7: $09
-    ld   bc, $0040                                ; $53C8: $01 $40 $00
+    ld   bc, $40                                ; $53C8: $01 $40 $00
     ld   de, $DC10                                ; $53CB: $11 $10 $DC
     call CopyData                                 ; $53CE: $CD $14 $29
     xor  a                                        ; $53D1: $AF

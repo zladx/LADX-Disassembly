@@ -337,6 +337,13 @@ ds 3
 
 wDialogGotItem:: ; C1A9
   ; The "Got item" dialog to display
+  ; Values:
+  ;  0  no item
+  ;  1  Piece of Power
+  ;  2  Toadstool
+  ;  3  Magic powder
+  ;  4  Break pots (?)
+  ;  5  Guardian Acorn
   ds 1
 
 wDialogGotItemCountdown:: ; C1AA

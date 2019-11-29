@@ -42,7 +42,7 @@ LoadMinimap::
 
     ; Load the minimap into WRAM
     ld   de, wDungeonMinimap                      ; $673A: $11 $80 $D4
-    ld   bc, $0040                                ; $673D: $01 $40 $00
+    ld   bc, $40                                ; $673D: $01 $40 $00
     call CopyData                                 ; $6740: $CD $14 $29
     ld   d, $00                                   ; $6743: $16 $00
     ld   e, $00                                   ; $6745: $1E $00

@@ -2,8 +2,6 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-SECTION "ROM Bank $017", ROMX[$4000], BANK[$17]
-
 Data_017_4000::
     db   $18, $05, $37, $20, $36, $0E, $1E, $2B, $25, $14, $1F, $12, $15, $2C, $31, $3F
     db   $0C, $30, $01, $33, $04, $27, $08, $1D, $38, $17, $3E, $28, $11, $00, $3A, $3D
@@ -19,7 +17,7 @@ Data_017_4048::
     db   $70, $91, $80, $91, $90, $91, $A0, $91
     db   $40, $94
 
-Func_017_4062::
+AnimateCreditsIslandFadeTiles::
     ld   a, [$D00B]                               ; $4062: $FA $0B $D0
     ld   e, a                                     ; $4065: $5F
     ld   d, $00                                   ; $4066: $16 $00

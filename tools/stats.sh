@@ -23,7 +23,11 @@ count_matches()
 cd "$(dirname $0)/.."
 
 echo "Number of remaining raw addresses:"
-count_matches '(, | \[|call |jp   )\$[A-Z0-9]{4}'
+echo "   In ROM (0000-7FFF):"
+count_matches '(, | \[|call |jp   )\$[0-7][A-Z0-9]{3}'
+
+echo "   In RAM (8000-FFFF):"
+count_matches '(, | \[|call |jp   )\$[89A-Z][A-Z0-9]{3}'
 
 echo ""
 echo "Number of unlabeled functions:"

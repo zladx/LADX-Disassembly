@@ -870,7 +870,7 @@ jr_017_4AC7:
     and  $03                                      ; $4AC9: $E6 $03
     jr   z, jr_017_4AD6                           ; $4ACB: $28 $09
 
-    ld   a, [$0004]                               ; $4ACD: $FA $04 $00
+    ld   a, [ROM_DebugTool2]                      ; $4ACD: $FA $04 $00
     and  a                                        ; $4AD0: $A7
     jr   z, jr_017_4AD6                           ; $4AD1: $28 $03
 
@@ -3044,7 +3044,7 @@ label_017_5BD0:
     ld   [hl+], a                                 ; $5BDB: $22
     ld   a, $17                                   ; $5BDC: $3E $17
     ld   [hl], a                                  ; $5BDE: $77
-    jp   $0BD7                                    ; $5BDF: $C3 $D7 $0B
+    jp   label_BD7                                ; $5BDF: $C3 $D7 $0B
 
 func_017_5BE2:
     ldh  a, [hBaseScrollY]                               ; $5BE2: $F0 $97
@@ -4507,7 +4507,7 @@ jr_017_6C73:
     ld   [hl+], a                                 ; $6C7E: $22
     ld   a, $17                                   ; $6C7F: $3E $17
     ld   [hl], a                                  ; $6C81: $77
-    jp   $0BD7                                    ; $6C82: $C3 $D7 $0B
+    jp   label_BD7                                ; $6C82: $C3 $D7 $0B
 
 func_017_6C85:
     ld   hl, $DE01                                ; $6C85: $21 $01 $DE
@@ -4519,7 +4519,7 @@ func_017_6C85:
     ld   [hl+], a                                 ; $6C90: $22
     ld   a, $17                                   ; $6C91: $3E $17
     ld   [hl], a                                  ; $6C93: $77
-    jp   $0BD7                                    ; $6C94: $C3 $D7 $0B
+    jp   label_BD7                                ; $6C94: $C3 $D7 $0B
 
 LinkSeatedOnLog8Handler::
     ld   a, [$D009]                               ; $6C97: $FA $09 $D0
@@ -4601,7 +4601,7 @@ func_017_6D0B:
     ld   [hl+], a                                 ; $6D16: $22
     ld   a, $17                                   ; $6D17: $3E $17
     ld   [hl], a                                  ; $6D19: $77
-    jp   $0BD7                                    ; $6D1A: $C3 $D7 $0B
+    jp   label_BD7                                ; $6D1A: $C3 $D7 $0B
 
 CreditsLinkFaceCloseUpHandler::
     call AnimateEntitiesAndRestoreBank17                                    ; $6D1D: $CD $ED $0E
@@ -4734,7 +4734,7 @@ jr_017_6DDB:
     ld   [hl+], a                                 ; $6DE6: $22
     ld   a, $17                                   ; $6DE7: $3E $17
     ld   [hl], a                                  ; $6DE9: $77
-    jp   $0BD7                                    ; $6DEA: $C3 $D7 $0B
+    jp   label_BD7                                ; $6DEA: $C3 $D7 $0B
 
 CreditsLinkFaceCloseUp4Handler::
     call func_017_6D7C                            ; $6DED: $CD $7C $6D
@@ -5243,7 +5243,7 @@ func_017_71CD:
     ld   [hl+], a                                 ; $71D8: $22
     ld   a, $17                                   ; $71D9: $3E $17
     ld   [hl], a                                  ; $71DB: $77
-    jp   $0BD7                                    ; $71DC: $C3 $D7 $0B
+    jp   label_BD7                                ; $71DC: $C3 $D7 $0B
 
 Data_017_71DF::
     db   $00, $00                                ; $71DF |>.w.....|
@@ -5448,7 +5448,7 @@ jr_017_73ED:
     ld   [hl+], a                                 ; $73F8: $22
     ld   a, $17                                   ; $73F9: $3E $17
     ld   [hl], a                                  ; $73FB: $77
-    jp   $0BD7                                    ; $73FC: $C3 $D7 $0B
+    jp   label_BD7                                ; $73FC: $C3 $D7 $0B
 
     nop                                           ; $73FF: $00
     nop                                           ; $7400: $00
@@ -5712,7 +5712,7 @@ jr_017_750F:
     ld   [hl+], a                                 ; $751A: $22
     ld   a, $17                                   ; $751B: $3E $17
     ld   [hl], a                                  ; $751D: $77
-    jp   $0BD7                                    ; $751E: $C3 $D7 $0B
+    jp   label_BD7                                ; $751E: $C3 $D7 $0B
 
     nop                                           ; $7521: $00
     nop                                           ; $7522: $00
@@ -6202,7 +6202,7 @@ jr_017_7739:
     ld   [hl+], a                                 ; $7744: $22
     ld   a, $17                                   ; $7745: $3E $17
     ld   [hl], a                                  ; $7747: $77
-    jp   $0BD7                                    ; $7748: $C3 $D7 $0B
+    jp   label_BD7                                ; $7748: $C3 $D7 $0B
 
     nop                                           ; $774B: $00
     nop                                           ; $774C: $00
@@ -6373,7 +6373,7 @@ jr_017_7826:
     ld   [hl+], a                                 ; $7831: $22
     ld   a, $17                                   ; $7832: $3E $17
     ld   [hl], a                                  ; $7834: $77
-    jp   $0BD7                                    ; $7835: $C3 $D7 $0B
+    jp   label_BD7                                ; $7835: $C3 $D7 $0B
 
     ld   e, d                                     ; $7838: $5A
     inc  bc                                       ; $7839: $03
@@ -6418,7 +6418,7 @@ jr_017_7867:
     ld   [hl+], a                                 ; $7872: $22
     ld   a, $17                                   ; $7873: $3E $17
     ld   [hl], a                                  ; $7875: $77
-    jp   $0BD7                                    ; $7876: $C3 $D7 $0B
+    jp   label_BD7                                ; $7876: $C3 $D7 $0B
 
     ld   d, h                                     ; $7879: $54
     inc  b                                        ; $787A: $04
@@ -6507,7 +6507,7 @@ jr_017_78DD:
     ld   [hl+], a                                 ; $78E8: $22
     ld   a, $17                                   ; $78E9: $3E $17
     ld   [hl], a                                  ; $78EB: $77
-    jp   $0BD7                                    ; $78EC: $C3 $D7 $0B
+    jp   label_BD7                                ; $78EC: $C3 $D7 $0B
 
     ld   [hl], d                                  ; $78EF: $72
     nop                                           ; $78F0: $00
@@ -6610,7 +6610,7 @@ func_017_795E:
     ld   [hl+], a                                 ; $7969: $22
     ld   a, $17                                   ; $796A: $3E $17
     ld   [hl], a                                  ; $796C: $77
-    jp   $0BD7                                    ; $796D: $C3 $D7 $0B
+    jp   label_BD7                                ; $796D: $C3 $D7 $0B
 
     ret                                           ; $7970: $C9
 
@@ -6634,7 +6634,7 @@ jr_017_7980:
     ld   [hl+], a                                 ; $7980: $22
     ld   a, $17                                   ; $7981: $3E $17
     ld   [hl], a                                  ; $7983: $77
-    jp   $0BD7                                    ; $7984: $C3 $D7 $0B
+    jp   label_BD7                                ; $7984: $C3 $D7 $0B
 
 Data_017_7987::
     db   $D0, $01, $D2, $01, $D4, $01, $D6, $01  ; $7987
@@ -6854,9 +6854,9 @@ Func_017_7AB1::
 Func_017_7AC1::
     ldh  a, [$FFEC]                               ; $7AC1: $F0 $EC
     cp   $60                                      ; $7AC3: $FE $60
-    jp   z, $3B12                                 ; $7AC5: $CA $12 $3B
+    jp   z, IncrementEntityState                  ; $7AC5: $CA $12 $3B
 
-    ld   hl, wEntitiesSpeedYTable                                ; $7AC8: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                 ; $7AC8: $21 $50 $C2
     add  hl, bc                                   ; $7ACB: $09
     ld   [hl], $08                                ; $7ACC: $36 $08
     call func_017_7E30                            ; $7ACE: $CD $30 $7E
@@ -6968,7 +6968,7 @@ func_017_7B5F:
     ld   [hl+], a                                 ; $7B6A: $22
     ld   a, $17                                   ; $7B6B: $3E $17
     ld   [hl], a                                  ; $7B6D: $77
-    jp   $0BD7                                    ; $7B6E: $C3 $D7 $0B
+    jp   label_BD7                                ; $7B6E: $C3 $D7 $0B
 
     jr   nz, @+$42                                ; $7B71: $20 $40
 
@@ -7802,4 +7802,4 @@ func_017_7FA9:
     ld   [hl+], a                                 ; $7FB4: $22
     ld   a, $17                                   ; $7FB5: $3E $17
     ld   [hl], a                                  ; $7FB7: $77
-    jp   $0BD7                                    ; $7FB8: $C3 $D7 $0B
+    jp   label_BD7                                ; $7FB8: $C3 $D7 $0B

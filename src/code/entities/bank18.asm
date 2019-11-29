@@ -2773,16 +2773,16 @@ jr_018_50FA:
     ret                                           ; $50FD: $C9
 
 jr_018_50FE:
-    ld   hl, $DE01                                ; $50FE: $21 $01 $DE
-    ld   a, $24                                   ; $5101: $3E $24
+    ld   hl, wFarcallParams                       ; $50FE: $21 $01 $DE
+    ld   a, BANK(Func_024_7B77)                   ; $5101: $3E $24
     ld   [hl+], a                                 ; $5103: $22
-    ld   a, $7B                                   ; $5104: $3E $7B
+    ld   a, HIGH(Func_024_7B77)                   ; $5104: $3E $7B
     ld   [hl+], a                                 ; $5106: $22
-    ld   a, $77                                   ; $5107: $3E $77
+    ld   a, LOW(Func_024_7B77)                    ; $5107: $3E $77
     ld   [hl+], a                                 ; $5109: $22
-    ld   a, $18                                   ; $510A: $3E $18
+    ld   a, BANK(jr_018_50FE)                     ; $510A: $3E $18
     ld   [hl], a                                  ; $510C: $77
-    jp   label_BD7                                ; $510D: $C3 $D7 $0B
+    jp   Farcall                                  ; $510D: $C3 $D7 $0B
 
     stop                                          ; $5110: $10 $00
     ld   a, h                                     ; $5112: $7C

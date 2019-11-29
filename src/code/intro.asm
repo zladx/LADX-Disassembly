@@ -433,7 +433,7 @@ IntroLinkFaceHandler::
 
 .continue3
     ld   [wBGMapToLoad], a
-    call label_7108
+    call LoadTileMapZero_trampoline
     ld   a, $03
     ld   [rIE], a ; Enable interrupts on VBlank and LCDStat
     xor  a
@@ -456,17 +456,17 @@ IntroLinkFaceHandler::
 .return
     ret
 
-label_7108::
-    ld   hl, $DE01
-    ld   a, $00
+LoadTileMapZero_trampoline::
+    ld   hl, wFarcallParams
+    ld   a, BANK(LoadMapData.LoadTileMapZero)
     ldi  [hl], a
-    ld   a, $04
+    ld   a, HIGH(LoadMapData.LoadTileMapZero)
     ldi  [hl], a
-    ld   a, $3A
+    ld   a, LOW(LoadMapData.LoadTileMapZero)
     ldi  [hl], a
-    ld   a, $01
+    ld   a, BANK(LoadTileMapZero_trampoline)
     ld   [hl], a
-    jp   label_BD7
+    jp   Farcall
 
 label_711A::
     ld   a, $10

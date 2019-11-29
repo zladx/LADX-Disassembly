@@ -667,18 +667,23 @@ label_BC5::
     ld   [MBC3SelectBank], a
     ret
 
-label_BD7::
-    ld   a, [$DE01]
+; Generic trampoline, for calling a function into another bank.
+Farcall::
+    ; Switch to bank wFarcallBank
+    ld   a, [wFarcallBank]
     ld   [MBC3SelectBank], a
-    call label_BE7
-    ld   a, [$DE04]
+    ; Call the target function
+    call Farcall_trampoline
+    ; Switch back to bank wFarcallReturnBank
+    ld   a, [wFarcallReturnBank]
     ld   [MBC3SelectBank], a
     ret
 
-label_BE7::
-    ld   a, [$DE02]
+;Jump to address in wFarcallAdressHigh, wFarcallAdressLow
+Farcall_trampoline::
+    ld   a, [wFarcallAdressHigh]
     ld   h, a
-    ld   a, [$DE03]
+    ld   a, [wFarcallAdressLow]
     ld   l, a
     jp   hl
 

@@ -1387,7 +1387,22 @@ ds $DDE0 - $DDD6
 ;
 ; See wOverworldRoomStatus
 wColorDungeonRoomStatus:: ; DDE0
-  ds $100
+  ds $20
 
-; E200 - E300: entities
-; See https://github.com/Xkeeper0/emu-lua/blob/master/legacy/gbx/link's awakening.lua
+; Unlabeled
+ds 1 ; DE00
+
+; Configuration struct for performing a farcall
+; See the Farcall function
+wFarcallParams::
+wFarcallBank:: ; DE01
+  ds 1
+
+wFarcallAdressHigh:: ; DE02
+  ds 1
+
+wFarcallAdressLow:: ; DE03
+  ds 1
+
+wFarcallReturnBank:: ; DE04
+  ds 1

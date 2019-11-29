@@ -7304,16 +7304,18 @@ label_007_69D0:
     pop  hl                                       ; $69E6: $E1
     ld   d, h                                     ; $69E7: $54
     ld   e, l                                     ; $69E8: $5D
-    ld   hl, $DE01                                ; $69E9: $21 $01 $DE
-    ld   a, $1A                                   ; $69EC: $3E $1A
+
+    ld   hl, wFarcallParams                       ; $69E9: $21 $01 $DE
+    ld   a, BANK(Func_01A_7111)                   ; $69EC: $3E $1A
     ld   [hl+], a                                 ; $69EE: $22
-    ld   a, $71                                   ; $69EF: $3E $71
+    ld   a, HIGH(Func_01A_7111)                   ; $69EF: $3E $71
     ld   [hl+], a                                 ; $69F1: $22
-    ld   a, $11                                   ; $69F2: $3E $11
+    ld   a, LOW(Func_01A_7111)                    ; $69F2: $3E $11
     ld   [hl+], a                                 ; $69F4: $22
-    ld   a, $07                                   ; $69F5: $3E $07
+    ld   a, BANK(label_007_69D0)                  ; $69F5: $3E $07
     ld   [hl], a                                  ; $69F7: $77
-    call label_BD7                                ; $69F8: $CD $D7 $0B
+    call Farcall                                  ; $69F8: $CD $D7 $0B
+
     push bc                                       ; $69FB: $C5
     ld   hl, wEntitiesUnknowTableY                ; $69FC: $21 $D0 $C3
     add  hl, bc                                   ; $69FF: $09

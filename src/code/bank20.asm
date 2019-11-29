@@ -9709,6 +9709,8 @@ jr_020_78CC:
     rrca                                          ; $78E9: $0F
     ld   h, [hl]                                  ; $78EA: $66
     sub  $6E                                      ; $78EB: $D6 $6E
+
+Func_020_78ED::
     ld   a, [wIsFileSelectionArrowShifted]        ; $78ED: $FA $00 $D0
     sla  a                                        ; $78F0: $CB $27
     ld   e, a                                     ; $78F2: $5F

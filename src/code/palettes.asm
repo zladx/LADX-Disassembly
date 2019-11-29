@@ -1156,6 +1156,8 @@ Data_021_5343::
 
     ld   [bc], a                                  ; $5353: $02
     ld   b, b                                     ; $5354: $40
+
+Func_021_5355::
     call func_021_5366                            ; $5355: $CD $66 $53
     ld   a, [wBGPaletteEffectAddress]             ; $5358: $FA $CC $C3
     and  $0E                                      ; $535B: $E6 $0E
@@ -1224,6 +1226,7 @@ jr_021_539C:
     ldh  [rSVBK], a                               ; $53B3: $E0 $70
     ret                                           ; $53B5: $C9
 
+Func_021_53B6::
     call func_021_5366                            ; $53B6: $CD $66 $53
     ld   a, $01                                   ; $53B9: $3E $01
     ldh  [hBGMapOffsetLow], a                     ; $53BB: $E0 $E1

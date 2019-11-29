@@ -971,16 +971,16 @@ jr_014_4D32:
     and  a                                        ; $4D35: $A7
     jr   z, jr_014_4D4A                           ; $4D36: $28 $12
 
-    ld   hl, $DE01                                ; $4D38: $21 $01 $DE
-    ld   a, $21                                   ; $4D3B: $3E $21
+    ld   hl, wFarcallParams                       ; $4D38: $21 $01 $DE
+    ld   a, BANK(Func_021_5355)                   ; $4D3B: $3E $21
     ld   [hl+], a                                 ; $4D3D: $22
-    ld   a, $53                                   ; $4D3E: $3E $53
+    ld   a, HIGH(Func_021_5355)                   ; $4D3E: $3E $53
     ld   [hl+], a                                 ; $4D40: $22
-    ld   a, $55                                   ; $4D41: $3E $55
+    ld   a, LOW(Func_021_5355)                    ; $4D41: $3E $55
     ld   [hl+], a                                 ; $4D43: $22
-    ld   a, $14                                   ; $4D44: $3E $14
+    ld   a, BANK(UpdatePaletteEffectForInteractiveObjects) ; $4D44: $3E $14
     ld   [hl], a                                  ; $4D46: $77
-    call label_BD7                                ; $4D47: $CD $D7 $0B
+    call Farcall                                  ; $4D47: $CD $D7 $0B
 
 jr_014_4D4A:
     ld   a, [$DDD7]                               ; $4D4A: $FA $D7 $DD
@@ -2485,16 +2485,16 @@ jr_014_547F:
     cp   $08                                      ; $5495: $FE $08
     ret  c                                        ; $5497: $D8
 
-    ld   hl, $DE01                                ; $5498: $21 $01 $DE
-    ld   a, $21                                   ; $549B: $3E $21
+    ld   hl, wFarcallParams                       ; $5498: $21 $01 $DE
+    ld   a, BANK(Func_021_53B6)                   ; $549B: $3E $21
     ld   [hl+], a                                 ; $549D: $22
-    ld   a, $53                                   ; $549E: $3E $53
+    ld   a, HIGH(Func_021_53B6)                   ; $549E: $3E $53
     ld   [hl+], a                                 ; $54A0: $22
-    ld   a, $B6                                   ; $54A1: $3E $B6
+    ld   a, LOW(Func_021_53B6)                    ; $54A1: $3E $B6
     ld   [hl+], a                                 ; $54A3: $22
-    ld   a, $14                                   ; $54A4: $3E $14
-    ld   [$DE04], a                               ; $54A6: $EA $04 $DE
-    jp   label_BD7                                ; $54A9: $C3 $D7 $0B
+    ld   a, BANK(func_014_5347)                   ; $54A4: $3E $14
+    ld   [wFarcallReturnBank], a                  ; $54A6: $EA $04 $DE
+    jp   Farcall                                  ; $54A9: $C3 $D7 $0B
 
 func_014_54AC::
     ld   hl, wFreeMovementMode                    ; $54AC: $21 $7B $C1

@@ -7420,7 +7420,7 @@ jr_036_6999:
     ldh  [hScratch1], a                           ; $69C2: $E0 $D8
     ld   a, $02                                   ; $69C4: $3E $02
     call label_CC7                                ; $69C6: $CD $C7 $0C
-    call $3F5E                                    ; $69C9: $CD $5E $3F
+    call DidKillEnemy.label_3F5E                  ; $69C9: $CD $5E $3F
 
 jr_036_69CC:
     ret                                           ; $69CC: $C9

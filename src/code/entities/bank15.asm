@@ -1173,7 +1173,7 @@ jr_015_469C:
     and  $08                                      ; $46A2: $E6 $08
     ld   [wC120], a                               ; $46A4: $EA $20 $C1
     push bc                                       ; $46A7: $C5
-    call $0BF0                                    ; $46A8: $CD $F0 $0B
+    call label_BF0                                ; $46A8: $CD $F0 $0B
     pop  bc                                       ; $46AB: $C1
     call ResetSpinAttack                                ; $46AC: $CD $AF $0C
     ld   [wSwordAnimationState], a                ; $46AF: $EA $37 $C1
@@ -2583,7 +2583,7 @@ label_015_4E62:
     ld   c, h                                     ; $4E81: $4C
     ld   hl, $214A                                ; $4E82: $21 $4A $21
     ld   c, [hl]                                  ; $4E85: $4E
-    ld   bc, clearC15FAndReturn                   ; $4E86: $01 $4E $21
+    db   $01, $4E, $21                            ; $4E86: $01 $4E $21
     nop                                           ; $4E89: $00
     ld   b, $FA                                   ; $4E8A: $06 $FA
     ld   a, [$4806]                               ; $4E8C: $FA $06 $48

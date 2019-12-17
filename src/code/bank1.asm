@@ -224,7 +224,7 @@ InitSaveFiles::
     ld   e, $00
     ld   d, $00
     ld   bc, $A405
-.roosterSearchLoop
+.loop
     ld   hl, label_4667
     add  hl, de
     ld   a, [hli]
@@ -233,7 +233,7 @@ InitSaveFiles::
     inc  e
     ld   a, e
     cp   $43
-    jr   nz, .roosterSearchLoop
+    jr   nz, .loop
 
     ld   a, $01
     ld   [$A453], a
@@ -245,10 +245,10 @@ InitSaveFiles::
     ld   hl, $A46A
     ld   e, $09
     ld   a, $02
-.roosterSearchLoop2
+.loop2
     ldi  [hl], a
     dec  e
-    jr   nz, .roosterSearchLoop2
+    jr   nz, .loop2
 
     ld   a, $60
     ld   [$A452], a
@@ -306,10 +306,10 @@ InitSaveFiles::
     ld   hl, $A105
     ld   a, $80
     ld   e, $00
-.roosterSearchLoop3
+.loop3
     ldi  [hl], a
     dec  e
-    jr   nz, .roosterSearchLoop3
+    jr   nz, .loop3
 
     ld   a, $01
     ld   [$DDDA], a
@@ -474,7 +474,7 @@ func_4852::
     push de
     ld   a, $05
 
-.roosterSearchLoop
+.loop
     ldh  [hScratch0], a
     ld   a, [de]
     and  a
@@ -495,7 +495,7 @@ func_4852::
     inc  de
     ldh  a, [hScratch0]
     dec  a
-    jr   nz, .roosterSearchLoop
+    jr   nz, .loop
     ld   a, b
     ldi  [hl], a
     ld   a, c
@@ -710,12 +710,12 @@ FileSelectionExecuteChoice::
     ld   hl, $DB80
     add  hl, de
 
-.roosterSearchLoop
+.loop
     ld   a, [hli]
     and  a
     jr   nz, LoadSelectedFile
     dec  c
-    jr   nz, .roosterSearchLoop
+    jr   nz, .loop
 
     ; Go to the file new dialog
     xor  a
@@ -2567,13 +2567,13 @@ SynchronizeDungeonsItemFlags::
     ; Copy 5 values from wCurrentDungeonItemFlags to wDungeonItemFlags
     ld   de, wCurrentDungeonItemFlags
     ld   c, $05
-.roosterSearchLoop
+.loop
     ld   a, [de]
     inc  de
     ldi  [hl], a
-    ; roosterSearchLoop while c > 0
+    ; loop while c > 0
     dec  c
-    jr   nz, .roosterSearchLoop
+    jr   nz, .loop
 
 .return
     pop  bc
@@ -2695,14 +2695,14 @@ UpdateRecentRoomsList::
     ld   hl, wRecentRooms
 
     ; For each slot…
-.roosterSearchLoop
+.findRoomInList
     ; if the slot already contains the current room,
     ; don't add it again and simply return.
     cp   [hl]
     jr   z, .return
     inc  hl
     dec  c
-    jr   nz, .roosterSearchLoop
+    jr   nz, .findRoomInList
 
     ;
     ; Append the current room to the recents rooms list
@@ -2757,7 +2757,7 @@ HideAllSprites::
     ld   [hl], $FF
 .endIf
 
-    ; roosterSearchLoop counter
+    ; loop counter
     ld   b, $28
     ; value to write
     ld   a, $F4
@@ -2766,13 +2766,13 @@ HideAllSprites::
 
     ; Write $F4 to every first byte (Y position) of the OAM buffer
     ; This ensures the sprite is hidden.
-.roosterSearchLoop
+.loop
     ldi  [hl], a
     inc  hl
     inc  hl
     inc  hl
     dec  b
-    jr   nz, .roosterSearchLoop
+    jr   nz, .loop
     ret
 
 UpdateWindowPosition::
@@ -3822,11 +3822,11 @@ RoomBorderCoordinates::
 ; Surround the objects area defining a room by ROOM_BORDER values
 PadRoomObjectsArea::
     ld   bc, RoomBorderCoordinates
-.roosterSearchLoop
+.loop
     ; a = next border coordinate
     ld   a, [bc]
 
-    ; if the border reached $FF, exit roosterSearchLoop
+    ; if the border reached $FF, exit loop
     cp   $FF
     jr   z, .end
 
@@ -3841,7 +3841,7 @@ PadRoomObjectsArea::
 
     ; increment and roosterContinue
     inc  bc
-    jr   .roosterSearchLoop
+    jr   .loop
 .end
     ret
 

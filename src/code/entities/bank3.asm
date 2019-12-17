@@ -4646,8 +4646,8 @@ jr_003_6311:
     ld   hl, wEntitiesLoadOrderTable              ; $6311: $21 $60 $C4
     add  hl, bc                                   ; $6314: $09
     ld   a, [hl]                                  ; $6315: $7E
-    call label_3F78                               ; $6316: $CD $78 $3F
-    ldh  a, [hActiveEntityType]                     ; $6319: $F0 $EB
+    call DidKillEnemy.label_3F78                  ; $6316: $CD $78 $3F
+    ldh  a, [hActiveEntityType]                   ; $6319: $F0 $EB
     sub  $2D                                      ; $631B: $D6 $2D
     cp   $02                                      ; $631D: $FE $02
     jr   nc, jr_003_6328                          ; $631F: $30 $07

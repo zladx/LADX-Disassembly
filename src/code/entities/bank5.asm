@@ -981,14 +981,9 @@ jr_005_4509:
     add  e                                        ; $4510: $83
     jp   SetEntitySpriteVariant                   ; $4511: $C3 $0C $3B
 
-    ld   d, b                                     ; $4514: $50
-    ld   bc, $152                                 ; $4515: $01 $52 $01
-    ld   d, h                                     ; $4518: $54
-    ld   bc, $156                                 ; $4519: $01 $56 $01
-    ld   d, d                                     ; $451C: $52
-    ld   hl, $2150                                ; $451D: $21 $50 $21
-    ld   d, [hl]                                  ; $4520: $56
-    ld   hl, $2154                                ; $4521: $21 $54 $21
+Data_005_4514::
+    db $50, $01, $52, $01, $54, $01, $56, $01
+    db $52, $21, $50, $21, $56, $21, $54, $21
 
 CucooEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4524: $21 $60 $C3
@@ -1000,14 +995,14 @@ CucooEntityHandler::
     and  a                                        ; $452F: $A7
     jr   nz, jr_005_4538                          ; $4530: $20 $06
 
-    ldh  a, [hActiveEntitySpriteVariant]               ; $4532: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]          ; $4532: $F0 $F1
     add  $02                                      ; $4534: $C6 $02
-    ldh  [hActiveEntitySpriteVariant], a               ; $4536: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a          ; $4536: $E0 $F1
 
 jr_005_4538:
-    ld   de, $4514                                ; $4538: $11 $14 $45
-    call RenderAnimatedActiveEntity                               ; $453B: $CD $C0 $3B
-    ldh  a, [hActiveEntityStatus]                   ; $453E: $F0 $EA
+    ld   de, Data_005_4514                        ; $4538: $11 $14 $45
+    call RenderAnimatedActiveEntity               ; $453B: $CD $C0 $3B
+    ldh  a, [hActiveEntityStatus]                 ; $453E: $F0 $EA
     cp   $07                                      ; $4540: $FE $07
     jr   nz, jr_005_4557                          ; $4542: $20 $13
 
@@ -1397,49 +1392,14 @@ jr_005_4777:
 
     ret                                           ; $477F: $C9
 
-    nop                                           ; $4780: $00
-    nop                                           ; $4781: $00
-    ld   h, b                                     ; $4782: $60
-    ld   bc, $800                            ; $4783: $01 $00 $08
-    ld   h, d                                     ; $4786: $62
-    ld   bc, $10                                  ; $4787: $01 $10 $00
-    ld   h, h                                     ; $478A: $64
-    ld   [bc], a                                  ; $478B: $02
-    db   $10                                      ; $478C: $10
-    ld   [$0266], sp                              ; $478D: $08 $66 $02
-    nop                                           ; $4790: $00
-    nop                                           ; $4791: $00
-    ld   l, b                                     ; $4792: $68
-    ld   bc, $800                            ; $4793: $01 $00 $08
-    ld   l, d                                     ; $4796: $6A
-    ld   bc, $10                                  ; $4797: $01 $10 $00
-    ld   l, h                                     ; $479A: $6C
-    ld   [bc], a                                  ; $479B: $02
-    db   $10                                      ; $479C: $10
-    ld   [RenderLoop.interactiveTransition], sp   ; $479D: $08 $6E $02
-    nop                                           ; $47A0: $00
-    nop                                           ; $47A1: $00
-    ld   h, d                                     ; $47A2: $62
-    ld   hl, $800                            ; $47A3: $21 $00 $08
-    ld   h, b                                     ; $47A6: $60
-    ld   hl, $0010                                ; $47A7: $21 $10 $00
-    ld   h, [hl]                                  ; $47AA: $66
-    ld   [hl+], a                                 ; $47AB: $22
-    db   $10                                      ; $47AC: $10
-    ld   [$2264], sp                              ; $47AD: $08 $64 $22
-    nop                                           ; $47B0: $00
-    nop                                           ; $47B1: $00
-    ld   l, b                                     ; $47B2: $68
-    ld   bc, $800                            ; $47B3: $01 $00 $08
-    ld   l, d                                     ; $47B6: $6A
-    ld   bc, $10                                  ; $47B7: $01 $10 $00
-    ld   l, h                                     ; $47BA: $6C
-    ld   [bc], a                                  ; $47BB: $02
-    db   $10                                      ; $47BC: $10
-    ld   [RenderLoop.interactiveTransition], sp   ; $47BD: $08 $6E $02
+Data_005_4780::
+    db $00, $00, $60, $01, $00, $08, $62, $01, $10, $00, $64, $02, $10, $08, $66, $02
+    db $00, $00, $68, $01, $00, $08, $6A, $01, $10, $00, $6C, $02, $10, $08, $6E, $02
+    db $00, $00, $62, $21, $00, $08, $60, $21, $10, $00, $66, $22, $10, $08, $64, $22
+    db $00, $00, $68, $01, $00, $08, $6A, $01, $10, $00, $6C, $02, $10, $08, $6E, $02
 
 func_005_47C0:
-    ldh  a, [hActiveEntitySpriteVariant]               ; $47C0: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]          ; $47C0: $F0 $F1
     rla                                           ; $47C2: $17
     rla                                           ; $47C3: $17
     rla                                           ; $47C4: $17
@@ -1447,7 +1407,7 @@ func_005_47C0:
     and  $F0                                      ; $47C6: $E6 $F0
     ld   e, a                                     ; $47C8: $5F
     ld   d, b                                     ; $47C9: $50
-    ld   hl, $4780                                ; $47CA: $21 $80 $47
+    ld   hl, Data_005_4780                        ; $47CA: $21 $80 $47
     add  hl, de                                   ; $47CD: $19
     ld   c, $04                                   ; $47CE: $0E $04
     jp   label_3CE6                               ; $47D0: $C3 $E6 $3C
@@ -1861,7 +1821,7 @@ jr_005_4A0C:
     xor  $01                                      ; $4A23: $EE $01
     ldh  [hLinkDirection], a                      ; $4A25: $E0 $9E
     push bc                                       ; $4A27: $C5
-    call $0BF0                                    ; $4A28: $CD $F0 $0B
+    call label_BF0                                ; $4A28: $CD $F0 $0B
     pop  bc                                       ; $4A2B: $C1
     ld   hl, wEntitiesUnknownTableD               ; $4A2C: $21 $D0 $C2
     add  hl, bc                                   ; $4A2F: $09
@@ -2937,7 +2897,7 @@ jr_005_5054:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $505B: $E0 $A1
     ld   [wC167], a                               ; $505D: $EA $67 $C1
     push bc                                       ; $5060: $C5
-    call $0BF0                                    ; $5061: $CD $F0 $0B
+    call label_BF0                                ; $5061: $CD $F0 $0B
     pop  bc                                       ; $5064: $C1
     ld   a, [$D211]                               ; $5065: $FA $11 $D2
     cp   $07                                      ; $5068: $FE $07
@@ -2949,7 +2909,7 @@ jr_005_5054:
 
     call_open_dialog $016                         ; $5073
     push bc                                       ; $5078: $C5
-    call $0BF0                                    ; $5079: $CD $F0 $0B
+    call label_BF0                                ; $5079: $CD $F0 $0B
     pop  bc                                       ; $507C: $C1
     xor  a                                        ; $507D: $AF
     ld   [$D210], a                               ; $507E: $EA $10 $D2

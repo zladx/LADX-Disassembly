@@ -10353,7 +10353,7 @@ jr_006_7B85:
     call label_3B5A                               ; $7B85: $CD $5A $3B
     ret  nc                                       ; $7B88: $D0
 
-    call $3F5E                                    ; $7B89: $CD $5E $3F
+    call DidKillEnemy.label_3F5E                  ; $7B89: $CD $5E $3F
     call func_006_65DB                            ; $7B8C: $CD $DB $65
     ld   a, $01                                   ; $7B8F: $3E $01
     ldh  [hWaveSfx], a                            ; $7B91: $E0 $F3

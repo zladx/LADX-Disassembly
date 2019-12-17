@@ -12,9 +12,10 @@ count_matches()
   local regex="$1"
   local options="$2"
 
-  grep -E --recursive "$regex" "$SOURCE_DIR" $options | wc -l
+  local matches_count=$(grep -E --recursive "$regex" "$SOURCE_DIR" $options | wc -l)
+  echo "$matches_count"
 
-  if [[ "$VERBOSE" != "disabled" ]]; then
+  if [[ "$matches_count" -gt 0 ]] && [[ "$VERBOSE" != "disabled" ]]; then
     echo "Breakdown per file:"
     grep -E --recursive --count "$regex" "$SOURCE_DIR" $options | grep -v ':0'
     echo ""
@@ -31,8 +32,15 @@ EXCLUDED_FILES="\
 --exclude */bank2.asm \
 --exclude */bank3.asm \
 --exclude */bank4.asm \
+--exclude */bank5.asm \
+--exclude */bank6.asm \
+--exclude */bank7.asm \
 --exclude */bank14.asm \
+--exclude */bank15.asm \
+--exclude */bank18.asm \
+--exclude */bank19.asm \
 --exclude */bank20.asm \
+--exclude */bank36.asm \
 --exclude */credits.asm \
 --exclude */super_gameboy.asm \
 --exclude */home/init.asm \

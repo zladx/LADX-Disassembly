@@ -31,8 +31,15 @@ EXCLUDED_FILES="\
 --exclude */bank2.asm \
 --exclude */bank3.asm \
 --exclude */bank4.asm \
+--exclude */bank5.asm \
+--exclude */bank6.asm \
+--exclude */bank7.asm \
 --exclude */bank14.asm \
+--exclude */bank15.asm \
+--exclude */bank18.asm \
+--exclude */bank19.asm \
 --exclude */bank20.asm \
+--exclude */bank36.asm \
 --exclude */credits.asm \
 --exclude */super_gameboy.asm \
 --exclude */home/init.asm \

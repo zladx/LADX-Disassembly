@@ -540,7 +540,7 @@ jr_019_4355:
     ld   a, [hl]                                  ; $4368: $7E
     ldh  [hLinkDirection], a                      ; $4369: $E0 $9E
     push bc                                       ; $436B: $C5
-    call $0BF0                                    ; $436C: $CD $F0 $0B
+    call label_BF0                                ; $436C: $CD $F0 $0B
     pop  bc                                       ; $436F: $C1
     ld   hl, wEntitiesUnknowTableP                ; $4370: $21 $40 $C4
     add  hl, bc                                   ; $4373: $09
@@ -5079,7 +5079,7 @@ jr_019_5D99:
     add  hl, de                                   ; $5DA5: $19
     ld   a, [hl]                                  ; $5DA6: $7E
     ldh  [hLinkDirection], a                      ; $5DA7: $E0 $9E
-    jp   $0BF0                                    ; $5DA9: $C3 $F0 $0B
+    jp   label_BF0                                ; $5DA9: $C3 $F0 $0B
 
     call func_019_5D99                            ; $5DAC: $CD $99 $5D
     ldh  a, [hLinkPositionZ]                      ; $5DAF: $F0 $A2
@@ -7445,7 +7445,7 @@ jr_019_6A8C:
 
 jr_019_6AA1:
     ld   l, h                                     ; $6AA1: $6C
-    ld   bc, Start.notGBC                         ; $6AA2: $01 $6E $01
+    db   $01, $6E, $01                            ; $6AA2: $01 $6E $01
     ld   l, d                                     ; $6AA5: $6A
     ld   hl, $2168                                ; $6AA6: $21 $68 $21
     ld   l, [hl]                                  ; $6AA9: $6E

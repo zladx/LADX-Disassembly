@@ -8066,6 +8066,7 @@ DidKillEnemy::
     call SpawnEnemyDrop
     call ReloadSavedBank
 
+.label_3F5E
     ld   hl, wEntitiesLoadOrderTable
     add  hl, bc
     ld   a, [hl]
@@ -8083,7 +8084,7 @@ DidKillEnemy::
     ld   [hl], a
     pop  af
 
-label_3F78::
+.label_3F78
     cp   $08
     jr   nc, UnloadEntity
     ld   e, a

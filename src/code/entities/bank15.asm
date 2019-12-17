@@ -2583,7 +2583,7 @@ label_015_4E62:
     ld   c, h                                     ; $4E81: $4C
     ld   hl, $214A                                ; $4E82: $21 $4A $21
     ld   c, [hl]                                  ; $4E85: $4E
-    ld   bc, clearC15FAndReturn                   ; $4E86: $01 $4E $21
+    db   $01, $4E, $21                            ; $4E86: $01 $4E $21
     nop                                           ; $4E89: $00
     ld   b, $FA                                   ; $4E8A: $06 $FA
     ld   a, [$4806]                               ; $4E8C: $FA $06 $48

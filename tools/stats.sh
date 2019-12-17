@@ -12,9 +12,10 @@ count_matches()
   local regex="$1"
   local options="$2"
 
-  grep -E --recursive "$regex" "$SOURCE_DIR" $options | wc -l
+  local matches_count=$(grep -E --recursive "$regex" "$SOURCE_DIR" $options | wc -l)
+  echo "$matches_count"
 
-  if [[ "$VERBOSE" != "disabled" ]]; then
+  if [[ "$matches_count" -gt 0 ]] && [[ "$VERBOSE" != "disabled" ]]; then
     echo "Breakdown per file:"
     grep -E --recursive --count "$regex" "$SOURCE_DIR" $options | grep -v ':0'
     echo ""

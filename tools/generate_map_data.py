@@ -6,10 +6,7 @@ import os
 import argparse
 from textwrap import dedent
 from map_parser import *
-
-def BANK(bank_index):
-    """Return the start address of a bank"""
-    return bank_index * 0x4000
+from lib.utils import BANK
 
 map_descriptors = [
     MapDescriptor(

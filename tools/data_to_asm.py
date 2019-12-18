@@ -1,17 +1,6 @@
 #!/usr/bin/env python3
 import argparse
-from collections import namedtuple
-
-LocalAddress = namedtuple('LocalAddress', ['bank', 'offset'])
-
-def parse_local_address(address):
-  '''Separate a local address into bank and offset components'''
-  bank, offset = (int(v, 16) for v in address.split(':'))
-  return LocalAddress(bank, offset)
-
-def local_to_global(local_address):
-  '''Convert a local bank:offset address to a global address'''
-  return (max(local_address.bank - 1, 0) * 0x4000) + local_address.offset
+from lib.utils import parse_local_address, local_to_global
 
 if __name__ == "__main__":
   # Parse arguments

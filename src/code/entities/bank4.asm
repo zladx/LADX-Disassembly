@@ -1559,22 +1559,11 @@ jr_004_4AEF:
 jr_004_4B11:
     ret                                           ; $4B11: $C9
 
-    ld   [$0014], sp                              ; $4B12: $08 $14 $00
-    inc  c                                        ; $4B15: $0C
-    ld   [$0015], sp                              ; $4B16: $08 $15 $00
-    dec  bc                                       ; $4B19: $0B
-    ld   [$0016], sp                              ; $4B1A: $08 $16 $00
-    ld   [$1708], sp                              ; $4B1D: $08 $08 $17
-    nop                                           ; $4B20: $00
-    ld   b, $08                                   ; $4B21: $06 $08
-    jr   jr_004_4B25                              ; $4B23: $18 $00
-
-jr_004_4B25:
-    inc  b                                        ; $4B25: $04
-    ld   [$0803], sp                              ; $4B26: $08 $03 $08
-    inc  bc                                       ; $4B29: $03
-    ld   [$020C], sp                              ; $4B2A: $08 $0C $02
-    inc  c                                        ; $4B2D: $0C
+Data_004_4B12::
+  db   $08, $14, $00, $0C, $08, $15, $00, $0B     ; $4B12
+  db   $08, $16, $00, $08, $08, $17, $00, $06     ; $4B1A
+  db   $08, $18, $00, $04, $08, $03, $08, $03     ; $4B22
+  db   $08, $0C, $02, $0C                         ; $4B2A
 
 func_004_4B2E:
     ld   hl, wEntitiesSubstate1Table              ; $4B2E: $21 $B0 $C2
@@ -1586,7 +1575,7 @@ func_004_4B2E:
 func_004_4B37:
     ld   e, a                                     ; $4B37: $5F
     ld   d, b                                     ; $4B38: $50
-    ld   hl, $4B12                                ; $4B39: $21 $12 $4B
+    ld   hl, Data_004_4B12                        ; $4B39: $21 $12 $4B
     add  hl, de                                   ; $4B3C: $19
     ld   e, l                                     ; $4B3D: $5D
     ld   d, h                                     ; $4B3E: $54
@@ -8504,38 +8493,11 @@ func_004_76B3:
 Disabled4EEntityHandler::
     ret                                           ; $76CA: $C9
 
-    ld   h, b                                     ; $76CB: $60
-    inc  bc                                       ; $76CC: $03
-    ld   h, d                                     ; $76CD: $62
-    inc  bc                                       ; $76CE: $03
-    ld   h, d                                     ; $76CF: $62
-    inc  hl                                       ; $76D0: $23
-    ld   h, b                                     ; $76D1: $60
-    inc  hl                                       ; $76D2: $23
-    ld   h, h                                     ; $76D3: $64
-    inc  bc                                       ; $76D4: $03
-    ld   h, [hl]                                  ; $76D5: $66
-    inc  bc                                       ; $76D6: $03
-    ld   h, [hl]                                  ; $76D7: $66
-    inc  hl                                       ; $76D8: $23
-    ld   h, h                                     ; $76D9: $64
-    inc  hl                                       ; $76DA: $23
-    ld   l, b                                     ; $76DB: $68
-    inc  bc                                       ; $76DC: $03
-    ld   l, d                                     ; $76DD: $6A
-    inc  bc                                       ; $76DE: $03
-    ld   l, h                                     ; $76DF: $6C
-    inc  bc                                       ; $76E0: $03
-    ld   l, [hl]                                  ; $76E1: $6E
-    inc  bc                                       ; $76E2: $03
-    ld   l, d                                     ; $76E3: $6A
-    inc  hl                                       ; $76E4: $23
-    ld   l, b                                     ; $76E5: $68
-    inc  hl                                       ; $76E6: $23
-    ld   l, [hl]                                  ; $76E7: $6E
-    inc  hl                                       ; $76E8: $23
-    ld   l, h                                     ; $76E9: $6C
-    inc  hl                                       ; $76EA: $23
+Data_004_76CB::
+  db   $60, $03, $62, $03, $62, $23, $60, $23     ; $76CB
+  db   $64, $03, $66, $03, $66, $23, $64, $23     ; $76D3
+  db   $68, $03, $6A, $03, $6C, $03, $6E, $03     ; $76DB
+  db   $6A, $23, $68, $23, $6E, $23, $6C, $23     ; $76E3
 
 ShopOwnerEntityHandler::
     ld   a, [$C50A]                               ; $76EB: $FA $0A $C5
@@ -8564,10 +8526,10 @@ jr_004_7705:
 
 jr_004_770E:
     call func_004_7C98                            ; $770E: $CD $98 $7C
-    ld   de, $76CB                                ; $7711: $11 $CB $76
-    call RenderAnimatedActiveEntity                               ; $7714: $CD $C0 $3B
+    ld   de, Data_004_76CB                        ; $7711: $11 $CB $76
+    call RenderAnimatedActiveEntity               ; $7714: $CD $C0 $3B
     call func_004_7B70                            ; $7717: $CD $70 $7B
-    ldh  a, [hActiveEntityState]                               ; $771A: $F0 $F0
+    ldh  a, [hActiveEntityState]                  ; $771A: $F0 $F0
     cp   $04                                      ; $771C: $FE $04
     jr   nc, jr_004_7723                          ; $771E: $30 $03
 

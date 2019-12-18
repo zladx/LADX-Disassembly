@@ -5,7 +5,7 @@
 import os
 import argparse
 from textwrap import dedent
-from entities_parser import *
+from lib.entities_parser import *
 from lib.utils import BANK
 
 entities_descriptors = [

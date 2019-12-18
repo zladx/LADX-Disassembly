@@ -5,7 +5,7 @@
 import os
 import argparse
 from textwrap import dedent
-from map_parser import *
+from lib.map_parser import *
 from lib.utils import BANK
 
 map_descriptors = [

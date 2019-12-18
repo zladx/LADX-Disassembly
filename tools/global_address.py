@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+#
+# Convert a local bank:offset address into a global ROM address.
+# Usage:
+#   tools/global_address.py 04:54AC
+
 import argparse
 from lib.utils import parse_local_address, local_to_global
 

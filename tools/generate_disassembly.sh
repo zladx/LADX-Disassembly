@@ -1,4 +1,5 @@
 #!/bin/sh -ex
+#
 # Generate an automatic disassembly of the whole ROM,
 # using mgbdis, and the debug symbols already documented.
 

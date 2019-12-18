@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+#
+# Parse the ROM, and output asm files with the dialog tables and content.
+
 import struct
 from pprint import pprint
 

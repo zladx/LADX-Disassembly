@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+#
+# Convert a range of data into hexadecimal assembly code.
+# Usage:
+#   tools/data_to_asm.py 04:4000 04:400F
+
 import argparse
 from lib.utils import parse_local_address, local_to_global
 

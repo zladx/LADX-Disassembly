@@ -160,24 +160,25 @@ jr_015_40F7:
     ld   [wScreenShakeHorizontal], a              ; $40F8: $EA $55 $C1
     ret                                           ; $40FB: $C9
 
-    ld   hl, sp+$17                               ; $40FC: $F8 $17
-    db   $FA, $17                                 ; $40FE: $FA $17
+Data_015_40FC::
+    db   $F8, $17, $FA, $17                       ; $40FC
 
 MovingBlockLeftTopEntityHandler::
     db   $11                                      ; $4100
     db   $FC                                      ; $4101: $FC
     ld   b, b                                     ; $4102: $40
-    call RenderAnimatedActiveEntity                               ; $4103: $CD $C0 $3B
+    call RenderAnimatedActiveEntity               ; $4103: $CD $C0 $3B
     call func_015_7B0D                            ; $4106: $CD $0D $7B
     xor  a                                        ; $4109: $AF
     ldh  [hFFE8], a                               ; $410A: $E0 $E8
+
     ldh  a, [hActiveEntityState]                  ; $410C: $F0 $F0
-    rst  $00                                      ; $410E: $C7
-    inc  de                                       ; $410F: $13
-    ld   b, c                                     ; $4110: $41
-    daa                                           ; $4111: $27
-    ld   b, c                                     ; $4112: $41
-    ld   hl, wEntitiesPosYTable                         ; $4113: $21 $10 $C2
+    JP_TABLE                                      ; $410E
+._00 dw MovingBlockLeftTopState0Handler           ; $410F
+._01 dw MovingBlockLeftTopState1Handler           ; $4111
+
+MovingBlockLeftTopState0Handler::
+    ld   hl, wEntitiesPosYTable                   ; $4113: $21 $10 $C2
     add  hl, bc                                   ; $4116: $09
     ld   a, [hl]                                  ; $4117: $7E
     ld   hl, wEntitiesSubstate2Table              ; $4118: $21 $C0 $C2
@@ -189,6 +190,7 @@ MovingBlockLeftTopEntityHandler::
     ld   [hl], a                                  ; $4123: $77
     jp   IncrementEntityState                     ; $4124: $C3 $12 $3B
 
+MovingBlockLeftTopState1Handler::
     ldh  a, [$FFBA]                               ; $4127: $F0 $BA
     cp   $02                                      ; $4129: $FE $02
     jr   z, jr_015_416F                           ; $412B: $28 $42
@@ -315,18 +317,19 @@ jr_015_41C9:
     ret                                           ; $41C9: $C9
 
 MovingBlockLeftBottomEntityHandler::
-    ld   de, $40FC                                ; $41CA: $11 $FC $40
-    call RenderAnimatedActiveEntity                               ; $41CD: $CD $C0 $3B
+    ld   de, Data_015_40FC                        ; $41CA: $11 $FC $40
+    call RenderAnimatedActiveEntity               ; $41CD: $CD $C0 $3B
     call func_015_7B0D                            ; $41D0: $CD $0D $7B
     xor  a                                        ; $41D3: $AF
     ldh  [hFFE8], a                               ; $41D4: $E0 $E8
+
     ldh  a, [hActiveEntityState]                  ; $41D6: $F0 $F0
-    rst  $00                                      ; $41D8: $C7
-    db   $DD                                      ; $41D9: $DD
-    ld   b, c                                     ; $41DA: $41
-    pop  af                                       ; $41DB: $F1
-    ld   b, c                                     ; $41DC: $41
-    ld   hl, wEntitiesPosYTable                         ; $41DD: $21 $10 $C2
+    JP_TABLE                                        ; $41D8
+._00 dw MovingBlockLeftBottomState0Handler        ; $41D9
+._01 dw MovingBlockLeftBottomState1Handler        ; $41DB
+
+MovingBlockLeftBottomState0Handler::
+    ld   hl, wEntitiesPosYTable                   ; $41DD: $21 $10 $C2
     add  hl, bc                                   ; $41E0: $09
     ld   a, [hl]                                  ; $41E1: $7E
     ld   hl, wEntitiesSubstate2Table              ; $41E2: $21 $C0 $C2
@@ -338,6 +341,7 @@ MovingBlockLeftBottomEntityHandler::
     ld   [hl], a                                  ; $41ED: $77
     jp   IncrementEntityState                     ; $41EE: $C3 $12 $3B
 
+MovingBlockLeftBottomState1Handler::
     ldh  a, [$FFBA]                               ; $41F1: $F0 $BA
     cp   $02                                      ; $41F3: $FE $02
     jr   z, jr_015_4239                           ; $41F5: $28 $42
@@ -398,18 +402,19 @@ jr_015_4239:
     jp   label_015_416F                           ; $4239: $C3 $6F $41
 
 MovingBlockBottomLeftEntityHandler::
-    ld   de, $40FC                                ; $423C: $11 $FC $40
+    ld   de, Data_015_40FC                        ; $423C: $11 $FC $40
     call RenderAnimatedActiveEntity                               ; $423F: $CD $C0 $3B
     call func_015_7B0D                            ; $4242: $CD $0D $7B
     xor  a                                        ; $4245: $AF
     ldh  [hFFE8], a                               ; $4246: $E0 $E8
+
     ldh  a, [hActiveEntityState]                  ; $4248: $F0 $F0
-    rst  $00                                      ; $424A: $C7
-    ld   c, a                                     ; $424B: $4F
-    ld   b, d                                     ; $424C: $42
-    ld   h, e                                     ; $424D: $63
-    ld   b, d                                     ; $424E: $42
-    ld   hl, wEntitiesPosXTable                         ; $424F: $21 $00 $C2
+    JP_TABLE                                      ; $424A
+._00 dw MovingBlockBottomLeftState0Handler        ; $424B
+._01 dw MovingBlockBottomLeftState1Handler        ; $424D
+
+MovingBlockBottomLeftState0Handler::
+    ld   hl, wEntitiesPosXTable                   ; $424F: $21 $00 $C2
     add  hl, bc                                   ; $4252: $09
     ld   a, [hl]                                  ; $4253: $7E
     ld   hl, wEntitiesSubstate2Table              ; $4254: $21 $C0 $C2
@@ -421,6 +426,7 @@ MovingBlockBottomLeftEntityHandler::
     ld   [hl], a                                  ; $425F: $77
     jp   IncrementEntityState                     ; $4260: $C3 $12 $3B
 
+MovingBlockBottomLeftState1Handler::
     ldh  a, [$FFBA]                               ; $4263: $F0 $BA
     cp   $02                                      ; $4265: $FE $02
     jr   z, jr_015_42AB                           ; $4267: $28 $42
@@ -481,18 +487,19 @@ jr_015_42AB:
     jp   label_015_416F                           ; $42AB: $C3 $6F $41
 
 MovingBlockBottomRightEntityHandler
-    ld   de, $40FC                                ; $42AE: $11 $FC $40
+    ld   de, Data_015_40FC                        ; $42AE: $11 $FC $40
     call RenderAnimatedActiveEntity                               ; $42B1: $CD $C0 $3B
     call func_015_7B0D                            ; $42B4: $CD $0D $7B
     xor  a                                        ; $42B7: $AF
     ldh  [hFFE8], a                               ; $42B8: $E0 $E8
+
     ldh  a, [hActiveEntityState]                  ; $42BA: $F0 $F0
-    rst  $00                                      ; $42BC: $C7
-    pop  bc                                       ; $42BD: $C1
-    ld   b, d                                     ; $42BE: $42
-    push de                                       ; $42BF: $D5
-    ld   b, d                                     ; $42C0: $42
-    ld   hl, wEntitiesPosXTable                         ; $42C1: $21 $00 $C2
+    JP_TABLE                                      ; $42BC
+._00 dw MovingBlockBottomRightState0Handler       ; $42BD
+._01 dw MovingBlockBottomRightState1Handler       ; $42BF
+
+MovingBlockBottomRightState0Handler::
+    ld   hl, wEntitiesPosXTable                   ; $42C1: $21 $00 $C2
     add  hl, bc                                   ; $42C4: $09
     ld   a, [hl]                                  ; $42C5: $7E
     ld   hl, wEntitiesSubstate2Table              ; $42C6: $21 $C0 $C2
@@ -504,6 +511,7 @@ MovingBlockBottomRightEntityHandler
     ld   [hl], a                                  ; $42D1: $77
     jp   IncrementEntityState                     ; $42D2: $C3 $12 $3B
 
+MovingBlockBottomRightState1Handler::
     ldh  a, [$FFBA]                               ; $42D5: $F0 $BA
     cp   $02                                      ; $42D7: $FE $02
     jr   z, jr_015_431D                           ; $42D9: $28 $42

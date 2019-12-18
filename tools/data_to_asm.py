@@ -31,12 +31,12 @@ if __name__ == "__main__":
 
   # Print bytes
   bytes_per_line = 8
-  gutter = max(50, 7 + bytes_per_line * 5)
+  gutter = max(50, 9 + bytes_per_line * 5)
   label = f'Data_{start_address.bank:03X}_{start_address.offset:04X}::'
 
   print(label)
   for i in range(0, len(bytes), bytes_per_line):
     line_bytes = bytes[i:i+bytes_per_line]
-    line = '  db   ' + ', '.join(f"${byte:02X}" for byte in line_bytes)
+    line = '    db   ' + ', '.join(f"${byte:02X}" for byte in line_bytes)
     line = line.ljust(gutter) + f'; ${(start_address.offset + i):04X}'
     print(line)

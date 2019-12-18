@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
   # Print the jump-table pointers
   gutter = 50
-  header = f'  JP_TABLE'
+  header = f'    JP_TABLE'
   header = header.ljust(gutter) + f'; ${(start_address.offset):04X}'
   print(header)
 

@@ -1,6 +1,6 @@
 #!/bin/bash -e
-# Output statistics about the project progression.
 #
+# Output statistics about the project progression.
 # Usage:
 #   tools/stats [--verbose]
 

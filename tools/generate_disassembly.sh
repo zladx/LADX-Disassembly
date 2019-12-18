@@ -1,6 +1,7 @@
 #!/bin/sh -ex
-# Generate a disassembly of the whole ROM,
-# using the debug symbols already documented in the partial disassembly.
+#
+# Generate an automatic disassembly of the whole ROM,
+# using mgbdis, and the debug symbols already documented.
 
 TOOLS_DIR=$(dirname "$0")
 ROOT_DIR="$TOOLS_DIR/.."

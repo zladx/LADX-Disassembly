@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
+#
+# Convert a global address in the ROM binary into a local bank:offset address.
+# Usage:
+#   tools/local_address.py 0x5438C2
+
 import argparse
+from lib.utils import global_to_local
 
 parser = argparse.ArgumentParser(description='Convert a global address in the ROM binary into a local bank:offset address')
 parser.add_argument('address', type=lambda x: int(x, 16), metavar='global_address', help='A global address in the ROM binary.')
 args = parser.parse_args()
 
-bank = args.address // 0x4000
-offset = (args.address % 0x4000) + (0x4000 if bank else 0)
-print('{:02X}:{:04X}'.format(bank, offset))
+local_address = global_to_local(args.address)
+print(f'{local_address.bank:02X}:{local_address.offset:04X}')

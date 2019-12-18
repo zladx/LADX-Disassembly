@@ -5,11 +5,8 @@
 import os
 import argparse
 from textwrap import dedent
-from entities_parser import *
-
-def BANK(bank_index):
-    """Return the start address of a bank"""
-    return bank_index * 0x4000
+from lib.entities_parser import *
+from lib.utils import BANK
 
 entities_descriptors = [
     EntitiesTableDescriptor(

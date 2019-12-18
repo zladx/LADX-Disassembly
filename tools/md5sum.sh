@@ -3,6 +3,9 @@
 # A wrapper of md5sum, for systems where the `md5sum` command may not be available (i.e. macOS)
 # In this case, this script provides the same functionnality, using the `md5` command
 # (if available).
+#
+# Usage:
+#   md5sum.sh -c ladx.md5
 
 OPTIONS="$1"
 SUMFILE="$2"

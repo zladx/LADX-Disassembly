@@ -1,24 +1,18 @@
 #!/usr/bin/env python3
+#
+# Convert a range of data into hexadecimal assembly code.
+# Usage:
+#   tools/data_to_asm.py 04:4000 04:4010
+
 import argparse
-from collections import namedtuple
-
-LocalAddress = namedtuple('LocalAddress', ['bank', 'offset'])
-
-def parse_local_address(address):
-  '''Separate a local address into bank and offset components'''
-  bank, offset = (int(v, 16) for v in address.split(':'))
-  return LocalAddress(bank, offset)
-
-def local_to_global(local_address):
-  '''Convert a local bank:offset address to a global address'''
-  return (max(local_address.bank - 1, 0) * 0x4000) + local_address.offset
+from lib.utils import parse_local_address, local_to_global
 
 if __name__ == "__main__":
   # Parse arguments
   parser = argparse.ArgumentParser(description='Convert a range of data into hexadecimal assembly code')
   parser.add_argument('rom_path', nargs="?", metavar="rom_path", type=str, help='The ROM file to extract data from (by default `Zelda.gbc`)')
   parser.add_argument('start_address', type=str, metavar='range start', help='The range start (included), as a local `bank:offset` address.')
-  parser.add_argument('end_address', type=str, metavar='range start', help='The range end (included), as a local `bank:offset address.')
+  parser.add_argument('end_address', type=str, metavar='range start', help='The range end (excluded), as a local `bank:offset address.')
 
   args = parser.parse_args()
 
@@ -27,7 +21,7 @@ if __name__ == "__main__":
   end_address = parse_local_address(args.end_address)
   start_offset = local_to_global(start_address)
   end_offset = local_to_global(end_address)
-  bytes_count = end_offset - start_offset + 1
+  bytes_count = end_offset - start_offset
 
   # Read bytes
   with open(rom_path, 'rb') as rom_file:

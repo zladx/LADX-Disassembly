@@ -133,16 +133,17 @@ jr_007_40C1:
     call label_C56                                ; $40C1: $CD $56 $0C
     call label_3B39                               ; $40C4: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $40C7: $F0 $F0
-    rst  $00                                      ; $40C9: $C7
-    sub  $40                                      ; $40CA: $D6 $40
-    cp   c                                        ; $40CC: $B9
-    ld   b, c                                     ; $40CD: $41
-    db   $10                                      ; $40CE: $10
-    ldh  a, [rP1]                                 ; $40CF: $F0 $00
-    nop                                           ; $40D1: $00
-    nop                                           ; $40D2: $00
-    nop                                           ; $40D3: $00
-    ldh  a, [rNR10]                               ; $40D4: $F0 $10
+  JP_TABLE                                        ; $40C9
+._00 dw BushCrawlerState0Handler                  ; $40CA
+._01 dw BushCrawlerState1Handler                  ; $40CC
+
+Data_007_40CE::
+    db   $10, $F0, $00, $00
+
+Data_007_40D2::
+    db   $00, $00, $F0, $10
+
+BushCrawlerState0Handler::
     ld   hl, wEntitiesSubstate2Table              ; $40D6: $21 $C0 $C2
     add  hl, bc                                   ; $40D9: $09
     ld   [hl], b                                  ; $40DA: $70
@@ -169,13 +170,13 @@ jr_007_40F9:
     call IncrementEntityState                     ; $40F9: $CD $12 $3B
     call func_007_7E7D                            ; $40FC: $CD $7D $7E
     ld   d, b                                     ; $40FF: $50
-    ld   hl, $40CE                                ; $4100: $21 $CE $40
+    ld   hl, Data_007_40CE                        ; $4100: $21 $CE $40
     add  hl, de                                   ; $4103: $19
     ld   a, [hl]                                  ; $4104: $7E
     ld   hl, wEntitiesSpeedXTable                       ; $4105: $21 $40 $C2
     add  hl, bc                                   ; $4108: $09
     ld   [hl], a                                  ; $4109: $77
-    ld   hl, $40D2                                ; $410A: $21 $D2 $40
+    ld   hl, Data_007_40D2                        ; $410A: $21 $D2 $40
     add  hl, de                                   ; $410D: $19
     ld   a, [hl]                                  ; $410E: $7E
     call GetEntitySpeedYAddress                            ; $410F: $CD $05 $40
@@ -281,6 +282,7 @@ label_007_4198:
 jr_007_41B8:
     ret                                           ; $41B8: $C9
 
+BushCrawlerState1Handler::
     call GetEntityTransitionCountdown                 ; $41B9: $CD $05 $0C
     jr   nz, jr_007_41C8                          ; $41BC: $20 $0A
 

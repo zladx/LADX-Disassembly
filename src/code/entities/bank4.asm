@@ -2457,7 +2457,7 @@ PairoddState0Handler::
     cp   $18                                      ; $5E42: $FE $18
     jr   nz, .jr_004_5E4A                         ; $5E44: $20 $04
 
-    call func_004_5EC6                            ; $5E46: $CD $C6 $5E
+    call SpawnPairoddProjectile                            ; $5E46: $CD $C6 $5E
     and  a                                        ; $5E49: $A7
 
 .jr_004_5E4A
@@ -2549,8 +2549,8 @@ PairoddState2Handler::
     ld   [hl], b                                  ; $5EC4: $70
     ret                                           ; $5EC5: $C9
 
-func_004_5EC6::
-    ld   a, ENTITY_58                             ; $5EC6: $3E $58
+SpawnPairoddProjectile::
+    ld   a, ENTITY_PAIRODD_PROJECTILE             ; $5EC6: $3E $58
     call SpawnNewEntity_trampoline                ; $5EC8: $CD $86 $3B
     jr   c, .return                               ; $5ECB: $38 $17
 
@@ -2584,21 +2584,12 @@ jr_004_5EE5:
     ld   a, [hl]                                  ; $5EF0: $7E
     jp   SetEntitySpriteVariant                   ; $5EF1: $C3 $0C $3B
 
-    ld   a, h                                     ; $5EF4: $7C
-    nop                                           ; $5EF5: $00
-    ld   a, h                                     ; $5EF6: $7C
-    jr   nz, @+$80                                ; $5EF7: $20 $7E
+Data_004_5EF4::
+    db   $7C, $00, $7C, $20, $7E, $00, $7E, $20   ; $5EF4
 
-    nop                                           ; $5EF9: $00
-    ld   a, [hl]                                  ; $5EFA: $7E
-    db   $20                                      ; $5EFB: $20
-
-; TODO: figure out which entity this is
-Entity58Handler::
-    db   $11
-    db   $f4                                      ; $5EFD: $F4
-    ld   e, [hl]                                  ; $5EFE: $5E
-    call RenderAnimatedActiveEntity                               ; $5EFF: $CD $C0 $3B
+PairoddProjectileEntityHandler::
+    ld   de, Data_004_5EF4                        ; $5EFC
+    call RenderAnimatedActiveEntity               ; $5EFF: $CD $C0 $3B
     call func_004_7FA3                            ; $5F02: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $5F05: $F0 $E7
     rra                                           ; $5F07: $1F

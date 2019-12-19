@@ -102,7 +102,7 @@ EntityPointersTable::
 ._55 entity_pointer BouncingBombiteEntityHandler
 ._56 entity_pointer TimerBombiteEntityHandler
 ._57 entity_pointer PairoddEntityHandler
-._58 entity_pointer Entity58Handler
+._58 entity_pointer PairoddProjectileEntityHandler
 ._59 entity_pointer MoldormEntityHandler
 ._5A entity_pointer FacadeEntityHandler
 ._5B entity_pointer SlimeEyeEntityHandler

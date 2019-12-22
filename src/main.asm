@@ -334,6 +334,15 @@ incbin "gfx/photos/photo_elements_3.2bpp"
 incbin "gfx/photos/photo_dizzy_link.2bpp"
 
 section "bank3C",romx[$4000],bank[$3C]
+SGBFrameTilesA:
+include "data/super_gameboy/frame_tiles_a.asm"
+SGBFrameTilesB:
+include "data/super_gameboy/frame_tiles_b.asm"
+SGBFrameTilemap:
+include "data/super_gameboy/frame_tilemap.asm"
+include "data/super_gameboy/frame_palette_1.asm"
+include "data/super_gameboy/frame_palette_2.asm"
+include "data/super_gameboy/frame_palette_3.asm"
 include "data/super_gameboy.asm"
 include "code/super_gameboy.asm"
 

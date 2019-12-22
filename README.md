@@ -37,3 +37,4 @@ Thanks to these people for contributing:
 * Drenn1 - https://github.com/Drenn1
 * Sanqui - https://github.com/Sanqui
 * Kyle McGuffin - https://github.com/kcmcg
+* Marijn van der Werf - https://github.com/marijnvdwerf

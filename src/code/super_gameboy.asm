@@ -16,7 +16,7 @@ SuperGameBoyInit::
     ld   bc, $1E                                 ; $6A26: $01 $1E $00
     call WaitForBCFrames                          ; $6A29: $CD $92 $6B
 
-    ld   hl, cmd_6A12                            ; $6A2C: $21 $12 $6A
+    ld   hl, MltReqTwoPlayers                    ; $6A2C: $21 $12 $6A
     call SendUploadCommand                       ; $6A2F: $CD $51 $6B
     call WaitFor3Frames                           ; $6A32: $CD $86 $6B
 
@@ -48,23 +48,23 @@ SuperGameBoyInit::
     and  J_RIGHT | J_LEFT                        ; $6A65: $E6 $03
     cp   J_RIGHT | J_LEFT                        ; $6A67: $FE $03
     jr   nz, .else_6A76_3C                       ; $6A69: $20 $0B
-    ld   hl, cmd_6A02                            ; $6A6B: $21 $02 $6A
+    ld   hl, MltReqOnePlayer                     ; $6A6B: $21 $02 $6A
     call SendUploadCommand                       ; $6A6E: $CD $51 $6B
     call WaitFor3Frames                          ; $6A71: $CD $86 $6B
     sub  a                                       ; $6A74: $97
     ret                                          ; $6A75: $C9
 
 .else_6A76_3C:
-    ld   hl, cmd_6A02                            ; $6A76: $21 $02 $6A
+    ld   hl, MltReqOnePlayer                     ; $6A76: $21 $02 $6A
     call SendUploadCommand                       ; $6A79: $CD $51 $6B
     call WaitFor3Frames                          ; $6A7C: $CD $86 $6B
 
-    ld   hl, cmd_6860                            ; $6A7F: $21 $60 $68
+    ld   hl, MaskEnBlack                         ; $6A7F: $21 $60 $68
     call SendUploadCommand                       ; $6A82: $CD $51 $6B
     ld   bc, $06                                 ; $6A85: $01 $06 $00
     call WaitForBCFrames                         ; $6A88: $CD $92 $6B
 
-    ld   hl, cmd_6960                            ; $6A8B: $21 $60 $69
+    ld   hl, ForceApplicationPalette             ; $6A8B: $21 $60 $69
     call SendUploadCommand                       ; $6A8E: $CD $51 $6B
     ld   bc, $06                                 ; $6A91: $01 $06 $00
     call WaitForBCFrames                         ; $6A94: $CD $92 $6B
@@ -109,26 +109,26 @@ SuperGameBoyInit::
     ld   bc, $06                                 ; $6AF1: $01 $06 $00
     call WaitForBCFrames                         ; $6AF4: $CD $92 $6B
 
-    ld   hl, cmd_6900                            ; $6AF7: $21 $00 $69
+    ld   hl, SetGamePalette                      ; $6AF7: $21 $00 $69
     call SendUploadCommand                       ; $6AFA: $CD $51 $6B
     ld   bc, $06                                 ; $6AFD: $01 $06 $00
     call WaitForBCFrames                         ; $6B00: $CD $92 $6B
 
-    ld   hl, cmd_6910                            ; $6B03: $21 $10 $69
+    ld   hl, SetLinePal                          ; $6B03: $21 $10 $69
     call SendUploadCommand                       ; $6B06: $CD $51 $6B
     ld   bc, $06                                 ; $6B09: $01 $06 $00
     call WaitForBCFrames                         ; $6B0C: $CD $92 $6B
 
-    ld   hl, _4000                               ; $6B0F: $21 $00 $40
-    ld   de, cmd_6930                            ; $6B12: $11 $30 $69
+    ld   hl, SGBFrameTilesA                      ; $6B0F: $21 $00 $40
+    ld   de, ChrTrn1                             ; $6B12: $11 $30 $69
     call Func_03C_6BA3                           ; $6B15: $CD $A3 $6B
 
-    ld   hl, _5000                               ; $6B18: $21 $00 $50
-    ld   de, cmd_6940                            ; $6B1B: $11 $40 $69
+    ld   hl, SGBFrameTilesB                      ; $6B18: $21 $00 $50
+    ld   de, ChrTrn2                             ; $6B1B: $11 $40 $69
     call Func_03C_6BA3                           ; $6B1E: $CD $A3 $6B
 
-    ld   hl, _6000                               ; $6B21: $21 $00 $60
-    ld   de, cmd_6950                            ; $6B24: $11 $50 $69
+    ld   hl, SGBFrameTilemap                     ; $6B21: $21 $00 $60
+    ld   de, PctTrn                              ; $6B24: $11 $50 $69
     call Func_03C_6BA3                           ; $6B27: $CD $A3 $6B
 
     ld   hl, vTiles0                             ; $6B2A: $21 $00 $80
@@ -145,7 +145,7 @@ SuperGameBoyInit::
     ld   [rLCDC], a                              ; $6B39: $E0 $40
     ld   bc, $06                                 ; $6B3B: $01 $06 $00
     call WaitForBCFrames                         ; $6B3E: $CD $92 $6B
-    ld   hl, cmd_6870                            ; $6B41: $21 $70 $68
+    ld   hl, MaskEnCancel                        ; $6B41: $21 $70 $68
     call SendUploadCommand                       ; $6B44: $CD $51 $6B
     ld   bc, $06                                 ; $6B47: $01 $06 $00
     call WaitForBCFrames                         ; $6B4A: $CD $92 $6B

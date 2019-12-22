@@ -1,6 +1,57 @@
 ; Super GameBoy background image: tilemap and palettes
 
-_4000:
+; 1: Command code
+; 2: Number of packets
+sgb_cmd: macro
+    db   (\2) + (\1) << 3
+endm
+
+PAL01    equ $00 ; Set SGB Palette 0,1 Data
+ATTR_LIN equ $05 ; "Line" Area Designation Mode
+ICON_EN  equ $0E ; SGB Function
+
+; Requests multiplayer mode.
+MLT_REQ: macro
+    sgb_cmd $11 , 1
+    db   \1
+    ds   14
+endm
+
+; Transfer Character Font Data
+; arg0: 0: Data for characters 0x00 – 0x7F
+;       1: Data for characters 0x80 – 0xFF
+CHR_TRN: macro
+    sgb_cmd $13, 1
+    db   \1
+    ds   14
+endm
+
+; Set Screen Data Color Data
+PCT_TRN: macro
+    sgb_cmd $14, 1
+    ds   15
+endm
+
+; Game Boy Window Mask
+; 0 ; Cancels masking
+; $02 ; Masks by setting all SGB color palette color codes to black.
+MASK_EN: macro
+    sgb_cmd $17, 1
+    db   \1
+    ds   14
+endm
+
+; Specifies the priority of the color palette for the application and the color palette selected by the player.
+; 0 -> Priority to Player-Selected Color Palette (default)
+; 1 -> Priority to Application Color Palette
+PAL_PRI: macro
+    sgb_cmd $19, 1
+    db   \1
+    ds   14
+endm
+
+; SNES 4bpp tiles
+SGBFrameTilesA:
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $4000 |........|
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $4008 |........|
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $4010 |........|
@@ -514,7 +565,8 @@ _4000:
     db   $FF, $00, $FF, $00, $FF, $00, $AF, $50  ; $4FF0 |.......P|
     db   $82, $7D, $00, $FF, $00, $FF, $00, $FF  ; $4FF8 |.}......|
 
-_5000:
+; SNES 4bpp tiles
+SGBFrameTilesB:
     db   $EC, $EC, $FF, $F7, $FF, $FF, $FF, $FF  ; $5000 |........|
     db   $FF, $17, $FF, $00, $FF, $00, $FF, $00  ; $5008 |........|
     db   $EC, $13, $F7, $08, $FF, $00, $FF, $00  ; $5010 |........|
@@ -1028,7 +1080,7 @@ _5000:
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $5FF0 |........|
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $5FF8 |........|
 
-_6000:
+SGBFrameTilemap:
     db   $01, $10, $01, $10, $01, $10, $01, $10  ; $6000 |........|
     db   $02, $10, $01, $14, $01, $14, $01, $14  ; $6008 |........|
     db   $01, $14, $03, $10, $01, $10, $01, $10  ; $6010 |........|
@@ -1285,26 +1337,66 @@ _6000:
     db   $01, $14, $01, $14, $01, $14, $01, $14  ; $67E8 |........|
     db   $01, $14, $01, $14, $01, $14, $01, $14  ; $67F0 |........|
     db   $01, $14, $01, $14, $01, $14, $01, $14  ; $67F8 |........|
-    db   $00, $7C, $2A, $1D, $8D, $29, $87, $1D  ; $6800 |.|*..)..|
-    db   $09, $26, $8F, $3A, $AB, $45, $F0, $35  ; $6808 |.&.:.E.5|
-    db   $0C, $4E, $4D, $52, $50, $56, $B3, $62  ; $6810 |.NMRPV.b|
-    db   $52, $46, $94, $4E, $56, $45, $F7, $5E  ; $6818 |RF.NVE.^|
-    db   $00, $7C, $2A, $1D, $8D, $29, $87, $1D  ; $6820 |.|*..)..|
-    db   $09, $26, $8F, $3A, $4D, $52, $CB, $4D  ; $6828 |.&.:MR.M|
-    db   $0C, $4E, $AB, $45, $F7, $5E, $B3, $62  ; $6830 |.N.E.^.b|
-    db   $52, $42, $52, $52, $94, $56, $50, $56  ; $6838 |RBRR.VPV|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6840 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6848 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6850 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6858 |........|
 
-cmd_6860:
-    db   $B9, $02, $00, $00, $00, $00, $00, $00  ; $6860 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6868 |........|
+; PAL_SGB1
+    db   $00, $7C
+    db   $2A, $1D
+    db   $8D, $29
+    db   $87, $1D
+    db   $09, $26
+    db   $8F, $3A
+    db   $AB, $45
+    db   $F0, $35
+    db   $0C, $4E
+    db   $4D, $52
+    db   $50, $56
+    db   $B3, $62
+    db   $52, $46
+    db   $94, $4E
+    db   $56, $45
+    db   $F7, $5E
 
-cmd_6870:
-    db   $B9, $00, $00, $00, $00, $00, $00, $00  ; $6870 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6878 |........|
+; PAL_SGB2
+    db   $00, $7C
+    db   $2A, $1D
+    db   $8D, $29
+    db   $87, $1D
+    db   $09, $26
+    db   $8F, $3A
+    db   $4D, $52
+    db   $CB, $4D
+    db   $0C, $4E
+    db   $AB, $45
+    db   $F7, $5E
+    db   $B3, $62
+    db   $52, $42
+    db   $52, $52
+    db   $94, $56
+    db   $50, $56
+
+; PAL_SGB3
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+    db   $00, $00
+
+MaskEnBlack:
+    MASK_EN 2
+
+MaskEnCancel:
+    MASK_EN 0
 
 INIT1:
     db   $79, $5D, $08, $00, $0B, $8C, $D0, $F4  ; $6880 |y]......|
@@ -1338,31 +1430,47 @@ INIT8:
     db   $79, $10, $08, $00, $0B, $4C, $20, $08  ; $68F0 |y....L .|
     db   $EA, $EA, $EA, $EA, $EA, $60, $EA, $EA  ; $68F8 |.....`..|
 
-cmd_6900:
-    db   $01, $FF, $5B, $0F, $3F, $2D, $22, $EB  ; $6900 |..[.?-".|
-    db   $10, $0F, $3F, $2D, $22, $EB, $10, $00  ; $6908 |..?-"...|
+SetGamePalette:
+    sgb_cmd PAL01, 1
+; Palette0
+    db   $FF, $5B
+    db   $0F, $3F
+    db   $2D, $22
+    db   $EB, $10
+; Palette1
+    db   $0F, $3F
+    db   $2D, $22
+    db   $EB, $10
+    db   $00
 
-cmd_6910:
-    db   $29, $02, $AF, $02, $00, $00, $00, $00  ; $6910 |).......|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6918 |........|
-    db   $71, $03, $00, $00, $00, $00, $00, $00  ; $6920 |q.......|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6928 |........|
+SetLinePal:
+    ; result of this command is invisble, due to the PAL0 and PAL1 being the same
+    ; parameters seem to come from the Game Boy Programming Manual
+    sgb_cmd ATTR_LIN, 1
+    db   $02 ; Number of data groups: 2
+    db   (1 << 7) + (1 << 5) + 15 ; horizontal line 15 uses palette 1
+    db   (0 << 7) + (0 << 5) + 2 ; vertical line 2 uses palette 0
+    ds   12
 
-cmd_6930:
-    db   $99, $00, $00, $00, $00, $00, $00, $00  ; $6930 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6938 |........|
+; unused cmd
+    sgb_cmd ICON_EN, 1
+    db   (0 << 2) + (1 << 1) + (1 << 0) ; Disable use of SGB-Built-in Color Palettes, Disable Controller Set-up Screen
+    ds   14
 
-cmd_6940:
-    db   $99, $01, $00, $00, $00, $00, $00, $00  ; $6940 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6948 |........|
+ChrTrn1:
+    CHR_TRN 0
 
-cmd_6950:
-    db   $A1, $00, $00, $00, $00, $00, $00, $00  ; $6950 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6958 |........|
+ChrTrn2:
+    CHR_TRN 1
 
-cmd_6960:
-    db   $C9, $01, $00, $00, $00, $00, $00, $00  ; $6960 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6968 |........|
+PctTrn:
+    PCT_TRN
+
+ForceApplicationPalette:
+    PAL_PRI 1
+
+
+; Unknown data
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6970 |........|
     db   $00, $00, $4F, $FF, $F0, $FF, $F0, $4F  ; $6978 |..O....O|
     db   $FF, $F0, $FF, $F0, $4F, $FF, $FF, $FF  ; $6980 |....O...|
@@ -1383,12 +1491,8 @@ cmd_6960:
     db   $EB, $10, $FF, $5B, $0F, $3F, $2D, $22  ; $69F8 |...[.?-"|
     db   $EB, $10
 
-cmd_6A02:
-    db             $89, $00, $00, $00, $00, $00  ; $6A00 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6A08 |........|
-    db   $00, $00
+MltReqOnePlayer:
+    MLT_REQ 0
 
-cmd_6A12:
-    db             $89, $01, $00, $00, $00, $00  ; $6A10 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6A18 |........|
-    db   $00, $00                                ; $6A20 |..|
+MltReqTwoPlayers:
+    MLT_REQ 1

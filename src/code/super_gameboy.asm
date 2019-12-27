@@ -119,15 +119,15 @@ SuperGameBoyInit::
 
     ld   hl, SGBFrameTilesA                      ; $6B0F: $21 $00 $40
     ld   de, SGBTransfertToTiles0Cmd             ; $6B12: $11 $30 $69
-    call Func_03C_6BA3                           ; $6B15: $CD $A3 $6B
+    call SendVRAMCommand                         ; $6B15: $CD $A3 $6B
 
     ld   hl, SGBFrameTilesB                      ; $6B18: $21 $00 $50
     ld   de, SGBTransfertToTiles1Cmd             ; $6B1B: $11 $40 $69
-    call Func_03C_6BA3                           ; $6B1E: $CD $A3 $6B
+    call SendVRAMCommand                         ; $6B1E: $CD $A3 $6B
 
     ld   hl, SGBFrameTilemap                     ; $6B21: $21 $00 $60
     ld   de, SGBTransfertBorderCmd               ; $6B24: $11 $50 $69
-    call Func_03C_6BA3                           ; $6B27: $CD $A3 $6B
+    call SendVRAMCommand                         ; $6B27: $CD $A3 $6B
 
     ld   hl, vTiles0                             ; $6B2A: $21 $00 $80
     ld   bc, $2000                               ; $6B2D: $01 $00 $20
@@ -235,7 +235,12 @@ WaitForBCFrames::
     jr   nz, WaitForBCFrames                     ; $6BA0: $20 $F0
     ret                                          ; $6BA2: $C9
 
-Func_03C_6BA3::
+; Copy some data to VRAM, then send an SGB command to transfert
+; the VRAM content to the SGB memory.
+; Inputs:
+;   hl   data origin address
+;   de   addess of the SGB command to send
+SendVRAMCommand::
     push de                                      ; $6BA3: $D5
     ld   a, $E4                                  ; $6BA4: $3E $E4
     ld   [rBGP], a                               ; $6BA6: $E0 $47

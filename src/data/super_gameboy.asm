@@ -9,6 +9,16 @@ sgb_cmd: macro
     db   (\1) << 3 + (\2)
 endm
 
+; Defines a Super Game Boy 'Data Send' command.
+; Usage:
+;   sgb_data_snd <SNES destination address>, <SNES destination bank>, <data length>
+sgb_data_send_cmd: macro
+    sgb_cmd SGB_DATA_SND, 1
+    dw  \1 ; SNES destination address
+    db  \2 ; SNES destination bank
+    db  \3 ; data length
+endm
+
 ; Displays a black screen, regardless of the VRAM content.
 SGBSetScreenMaskBlackCmd::
     sgb_cmd SGB_MASK_EN, 1
@@ -21,37 +31,45 @@ SGBCancelMaskCmd::
     db   0
     ds   14
 
-INIT1::
-    db   $79, $5D, $08, $00, $0B, $8C, $D0, $F4  ; $6880 |y]......|
-    db   $60, $00, $00, $00, $00, $00, $00, $00  ; $6888 |`.......|
+SGBInit1Cmd::
+    sgb_data_send_cmd $085D, $00, $0B
+.data
+    db   $8C, $D0, $F4, $60, $00, $00, $00, $00, $00, $00, $00
 
-INIT2::
-    db   $79, $52, $08, $00, $0B, $A9, $E7, $9F  ; $6890 |yR......|
-    db   $01, $C0, $7E, $E8, $E8, $E8, $E8, $E0  ; $6898 |..~.....|
+SGBInit2Cmd::
+    sgb_data_send_cmd $0852, $00, $0B
+.data
+    db   $A9, $E7, $9F, $01, $C0, $7E, $E8, $E8, $E8, $E8, $E0
 
-INIT3::
-    db   $79, $47, $08, $00, $0B, $C4, $D0, $16  ; $68A0 |yG......|
-    db   $A5, $CB, $C9, $05, $D0, $10, $A2, $28  ; $68A8 |.......(|
+SGBInit3Cmd::
+    sgb_data_send_cmd $0847, $00, $0B
+.data
+    db   $C4, $D0, $16, $A5, $CB, $C9, $05, $D0, $10, $A2, $28
 
-INIT4::
-    db   $79, $3C, $08, $00, $0B, $F0, $12, $A5  ; $68B0 |y<......|
-    db   $C9, $C9, $C8, $D0, $1C, $A5, $CA, $C9  ; $68B8 |........|
+SGBInit4Cmd::
+    sgb_data_send_cmd $083C, $00, $0B
+.data
+    db   $F0, $12, $A5, $C9, $C9, $C8, $D0, $1C, $A5, $CA, $C9
 
-INIT5::
-    db   $79, $31, $08, $00, $0B, $0C, $A5, $CA  ; $68C0 |y1......|
-    db   $C9, $7E, $D0, $06, $A5, $CB, $C9, $7E  ; $68C8 |.~.....~|
+SGBInit5Cmd::
+    sgb_data_send_cmd $0831, $00, $0B
+.data
+    db   $0C, $A5, $CA, $C9, $7E, $D0, $06, $A5, $CB, $C9, $7E
 
-INIT6::
-    db   $79, $26, $08, $00, $0B, $39, $CD, $48  ; $68D0 |y&...9.H|
-    db   $0C, $D0, $34, $A5, $C9, $C9, $80, $D0  ; $68D8 |..4.....|
+SGBInit6Cmd::
+    sgb_data_send_cmd $0826, $00, $0B
+.data
+    db   $39, $CD, $48, $0C, $D0, $34, $A5, $C9, $C9, $80, $D0
 
-INIT7::
-    db   $79, $1B, $08, $00, $0B, $EA, $EA, $EA  ; $68E0 |y.......|
-    db   $EA, $EA, $A9, $01, $CD, $4F, $0C, $D0  ; $68E8 |.....O..|
+SGBInit7Cmd::
+    sgb_data_send_cmd $081B, $00, $0B
+.data
+    db   $EA, $EA, $EA, $EA, $EA, $A9, $01, $CD, $4F, $0C, $D0
 
-INIT8::
-    db   $79, $10, $08, $00, $0B, $4C, $20, $08  ; $68F0 |y....L .|
-    db   $EA, $EA, $EA, $EA, $EA, $60, $EA, $EA  ; $68F8 |.....`..|
+SGBInit8Cmd::
+    sgb_data_send_cmd $0810, $00, $0B
+.data
+    db   $4C, $20, $08, $EA, $EA, $EA, $EA, $EA, $60, $EA, $EA
 
 SGBSetPal01Cmd::
     sgb_cmd SGB_PAL01, 1

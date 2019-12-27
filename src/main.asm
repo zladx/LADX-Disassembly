@@ -343,7 +343,7 @@ include "data/super_gameboy/frame_tilemap.asm"
 include "data/super_gameboy/frame_palette_1.asm"
 include "data/super_gameboy/frame_palette_2.asm"
 include "data/super_gameboy/frame_palette_3.asm"
-include "data/super_gameboy.asm"
+include "data/super_gameboy/commands.asm"
 include "code/super_gameboy.asm"
 
 section "bank3D",romx[$4000],bank[$3D]

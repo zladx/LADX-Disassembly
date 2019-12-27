@@ -1,8 +1,9 @@
 ;
-; Constant for Super Game Boy IO
+; Constant for Super GameBoy
 ;
 
-; SGB Commands types
+; Super GameBoy command types
+; (See SGB Programming Manual for documentation)
 SGB_PAL01    equ $00
 SGB_ATTR_LIN equ $05
 SGB_ICON_EN  equ $0E

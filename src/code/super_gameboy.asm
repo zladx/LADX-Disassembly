@@ -1,8 +1,6 @@
+;
 ; Super Game Boy code
 ;
-; TODO:
-; - Understand what are the commands sent to the SGB
-; - Split out the data in tiles, tilemap and palette
 
 ; During initialization, detect the Super Game Boy
 ; and upload the colored frame data if needed.

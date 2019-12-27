@@ -22,14 +22,14 @@ endm
 ; Displays a black screen, regardless of the VRAM content.
 SGBSetScreenMaskBlackCmd::
     sgb_cmd SGB_MASK_EN, 1
-    db   2
-    ds   14
+    db   2  ; black-screen mask
+    ds   14 ; padding
 
 ; Make the Super Game Boy display the GB screen again.
 SGBCancelMaskCmd::
     sgb_cmd SGB_MASK_EN, 1
-    db   0
-    ds   14
+    db   0  ; cancel mask
+    ds   14 ; padding
 
 SGBInit1Cmd::
     sgb_data_send_cmd $085D, $00, $0B
@@ -91,29 +91,29 @@ SGBSetLinesPalettesCmd::
     db   $02 ; Number of data groups: 2
     db   (1 << 7) + (1 << 5) + 15 ; horizontal line 15 uses palette 1
     db   (0 << 7) + (0 << 5) + 2 ; vertical line 2 uses palette 0
-    ds   12
+    ds   12 ; padding
 
 ; Unused command
     sgb_cmd SGB_ICON_EN, 1
     db   (0 << 2) + (1 << 1) + (1 << 0) ; Disable use of SGB-Built-in Color Palettes, Disable Controller Set-up Screen
-    ds   14
+    ds   14 ; padding
 
 ; Transfer tiles data from VRAM to Tiles area 0
 SGBTransfertToTiles0Cmd::
     sgb_cmd SGB_CHR_TRN, 1
-    db   0
+    db   0  ; tiles area 0
     ds   14 ; padding
 
 ; Transfer tiles data from VRAM to Tiles area 1
 SGBTransfertToTiles1Cmd::
     sgb_cmd SGB_CHR_TRN, 1
-    db   1
+    db   1  ; tiles area 1
     ds   14 ; padding
 
 ; Transfert border tilemap and palettes from VRAM to SGB
 SGBTransfertBorderCmd::
     sgb_cmd SGB_PCT_TRN, 1
-    ds   15
+    ds   15 ; padding
 
 ; Specifies the priority of the color palette for the application
 ; and the color palette selected by the player.
@@ -122,7 +122,7 @@ SGBTransfertBorderCmd::
 SGBForceApplicationPaletteCmd::
     sgb_cmd SGB_PAL_PRI, 1
     db   1
-    ds   14
+    ds   14 ; padding
 
 ; Unknown data
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $6970 |........|
@@ -147,14 +147,10 @@ SGBForceApplicationPaletteCmd::
 
 SGBRequestOnePlayerCmd::
     sgb_cmd SGB_MLT_REQ, 1
-.playersCount
-    db   $00
-.padding
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db   0  ; players count
+    ds   14 ; padding
 
 SGBRequestTwoPlayersCmd::
     sgb_cmd SGB_MLT_REQ, 1
-.playersCount
-    db   $01
-.padding
-    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db   1  ; players count
+    ds   14 ; padding

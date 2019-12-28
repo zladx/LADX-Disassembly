@@ -2,6 +2,10 @@
 ; Super GameBoy pre-defined commands
 ;
 
+; -------------------------------------------------
+; Macros
+; -------------------------------------------------
+
 ; Defines a Super Game Boy command.
 ; Usage:
 ;   sgb_cmd <command code>, <length>
@@ -19,6 +23,10 @@ sgb_data_send_cmd: macro
     db  \3 ; data length
 endm
 
+; -------------------------------------------------
+; Commands
+; -------------------------------------------------
+
 ; Displays a black screen, regardless of the VRAM content.
 SGBSetScreenMaskBlackCmd::
     sgb_cmd SGB_MASK_EN, 1
@@ -31,45 +39,86 @@ SGBCancelMaskCmd::
     db   0  ; cancel mask
     ds   14 ; padding
 
+; Commands for patching the SGB code itself,
+; by transferring SNES code to the RAM.
 SGBInit1Cmd::
-    sgb_data_send_cmd $085D, $00, $0B
-.data
-    db   $8C, $D0, $F4, $60, $00, $00, $00, $00, $00, $00, $00
+    sgb_data_send_cmd $085d, $0, 11
+    db  $8C                 ; cpx #$8c (2)
+    db  $D0, $F4            ; bne -$0c
+    db  $60                 ; rts
+    ds  7
 
 SGBInit2Cmd::
-    sgb_data_send_cmd $0852, $00, $0B
-.data
-    db   $A9, $E7, $9F, $01, $C0, $7E, $E8, $E8, $E8, $E8, $E0
+    sgb_data_send_cmd $0852, $0, 11
+    db  $A9, $E7            ; lda #$e7
+    db  $9F, $01, $C0, $7E  ; sta $7ec001, x
+    db  $E8                 ; inx
+    db  $E8                 ; inx
+    db  $E8                 ; inx
+    db  $E8                 ; inx
+    db  $E0                 ; cpx #$8c (1)
 
 SGBInit3Cmd::
-    sgb_data_send_cmd $0847, $00, $0B
-.data
-    db   $C4, $D0, $16, $A5, $CB, $C9, $05, $D0, $10, $A2, $28
+    sgb_data_send_cmd $0847, $0, 11
+    db  $C4                 ; cmp #$c4 (2)
+    db  $D0, $16            ; bne +$16
+    db  $A5                 ; lda dp
+    db  $CB                 ; wai
+    db  $C9, $05            ; cmp #$05
+    db  $D0, $10            ; bne +$10
+    db  $A2, $28            ; ldx #$28
 
 SGBInit4Cmd::
-    sgb_data_send_cmd $083C, $00, $0B
-.data
-    db   $F0, $12, $A5, $C9, $C9, $C8, $D0, $1C, $A5, $CA, $C9
+    sgb_data_send_cmd $083c, $0, 11
+    db  $F0, $12            ; beq +$12
+    db  $A5                 ; lda dp
+    db  $C9, $C9            ; cmp #$c9
+    db  $C8                 ; iny
+    db  $D0, $1C            ; bne +$1c
+    db  $A5                 ; lda dp
+    db  $CA                 ; dex
+    db  $C9                 ; cmp #$c4 (1)
 
 SGBInit5Cmd::
-    sgb_data_send_cmd $0831, $00, $0B
-.data
-    db   $0C, $A5, $CA, $C9, $7E, $D0, $06, $A5, $CB, $C9, $7E
+    sgb_data_send_cmd $0831, $0, 11
+    db  $0C, $A5, $CA       ; tsb $caa5
+    db  $C9, $7E            ; cmp #$7e
+    db  $D0, $06            ; bne +$06
+    db  $A5                 ; lda dp
+    db  $CB                 ; wai
+    db  $C9, $7E            ; cmp #$7e
 
 SGBInit6Cmd::
-    sgb_data_send_cmd $0826, $00, $0B
-.data
-    db   $39, $CD, $48, $0C, $D0, $34, $A5, $C9, $C9, $80, $D0
+    sgb_data_send_cmd $0826, $0, 11
+    db  $39                 ; bne +$39 (2)
+    db  $CD, $48, $0C       ; cmp $0c48
+    db  $D0, $34            ; bne +$34
+    db  $A5                 ; lda dp
+    db  $C9, $C9            ; cmp #$c9
+    db  $80, $D0            ; bra -$30
 
 SGBInit7Cmd::
-    sgb_data_send_cmd $081B, $00, $0B
-.data
-    db   $EA, $EA, $EA, $EA, $EA, $A9, $01, $CD, $4F, $0C, $D0
+    sgb_data_send_cmd $081b, $0, 11
+    db  $EA                 ; nop
+    db  $EA                 ; nop
+    db  $EA                 ; nop
+    db  $EA                 ; nop
+    db  $EA                 ; nop
+    db  $A9, $01            ; lda #01
+    db  $CD, $4F, $0C       ; cmp $c4f
+    db  $D0                 ; bne +$39 (1)
 
 SGBInit8Cmd::
-    sgb_data_send_cmd $0810, $00, $0B
-.data
-    db   $4C, $20, $08, $EA, $EA, $EA, $EA, $EA, $60, $EA, $EA
+    sgb_data_send_cmd $0810, $0, 11
+    db  $4C, $20, $08       ; jmp $0820
+    db  $EA                 ; nop
+    db  $EA                 ; nop
+    db  $EA                 ; nop
+    db  $EA                 ; nop
+    db  $EA                 ; nop
+    db  $60                 ; rts
+    db  $EA                 ; nop
+    db  $EA                 ; nop
 
 SGBSetPal01Cmd::
     sgb_cmd SGB_PAL01, 1

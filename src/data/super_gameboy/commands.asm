@@ -41,14 +41,17 @@ SGBCancelMaskCmd::
 
 ; Commands for patching the SGB code itself,
 ; by transferring SNES code to the RAM.
-SGBInit1Cmd::
+;
+; It appears to fix a bug in the SGB code
+; (see https://forums.nesdev.com/viewtopic.php?f=12&t=16610#p206526)
+SGBPatch1Cmd::
     sgb_data_send_cmd $085d, $0, 11
     db  $8C                 ; cpx #$8c (2)
     db  $D0, $F4            ; bne -$0c
     db  $60                 ; rts
     ds  7
 
-SGBInit2Cmd::
+SGBPatch2Cmd::
     sgb_data_send_cmd $0852, $0, 11
     db  $A9, $E7            ; lda #$e7
     db  $9F, $01, $C0, $7E  ; sta $7ec001, x
@@ -58,7 +61,7 @@ SGBInit2Cmd::
     db  $E8                 ; inx
     db  $E0                 ; cpx #$8c (1)
 
-SGBInit3Cmd::
+SGBPatch3Cmd::
     sgb_data_send_cmd $0847, $0, 11
     db  $C4                 ; cmp #$c4 (2)
     db  $D0, $16            ; bne +$16
@@ -68,7 +71,7 @@ SGBInit3Cmd::
     db  $D0, $10            ; bne +$10
     db  $A2, $28            ; ldx #$28
 
-SGBInit4Cmd::
+SGBPatch4Cmd::
     sgb_data_send_cmd $083c, $0, 11
     db  $F0, $12            ; beq +$12
     db  $A5                 ; lda dp
@@ -79,7 +82,7 @@ SGBInit4Cmd::
     db  $CA                 ; dex
     db  $C9                 ; cmp #$c4 (1)
 
-SGBInit5Cmd::
+SGBPatch5Cmd::
     sgb_data_send_cmd $0831, $0, 11
     db  $0C, $A5, $CA       ; tsb $caa5
     db  $C9, $7E            ; cmp #$7e
@@ -88,7 +91,7 @@ SGBInit5Cmd::
     db  $CB                 ; wai
     db  $C9, $7E            ; cmp #$7e
 
-SGBInit6Cmd::
+SGBPatch6Cmd::
     sgb_data_send_cmd $0826, $0, 11
     db  $39                 ; bne +$39 (2)
     db  $CD, $48, $0C       ; cmp $0c48
@@ -97,7 +100,7 @@ SGBInit6Cmd::
     db  $C9, $C9            ; cmp #$c9
     db  $80, $D0            ; bra -$30
 
-SGBInit7Cmd::
+SGBPatch7Cmd::
     sgb_data_send_cmd $081b, $0, 11
     db  $EA                 ; nop
     db  $EA                 ; nop
@@ -108,7 +111,7 @@ SGBInit7Cmd::
     db  $CD, $4F, $0C       ; cmp $c4f
     db  $D0                 ; bne +$39 (1)
 
-SGBInit8Cmd::
+SGBPatch8Cmd::
     sgb_data_send_cmd $0810, $0, 11
     db  $4C, $20, $08       ; jmp $0820
     db  $EA                 ; nop

@@ -59,10 +59,7 @@ ExecuteDialog::
 ._0E dw DialogClosingEndHandler
 
 DialogOpenAnimationStartHandler::
-    ld   a, $14
-    ld   [MBC3SelectBank], a
-    ; Call 14:5449
-    jp   $5449
+    jpsb DialogOpenAnimationStart
 
 ; Open a dialog in the $100-$1FF range
 ; Input:
@@ -269,9 +266,7 @@ label_2475::
     ret
 
 DialogOpenAnimationEndHandler::
-    ld   a, $1C
-    ld   [MBC3SelectBank], a
-    jp   $4A2C
+    jpsb DialogOpenAnimationEnd
 
 IncrementDialogState::
 IncrementDialogStateAndReturn::
@@ -340,16 +335,18 @@ DialogLetterAnimationEndHandler::
     ld   c, a
     ld   a, [wDialogNextCharPosition]
     bit  7, c
-    jr   z, label_24DF
+    jr   z, .jp_24DF
     add  a, $20
 
-label_24DF::
+.jp_24DF
+    ; bc = [wDialogNextCharPosition]
     ld   c, a
     ld   b, $00
+    ; de = $0001
     ld   e, $01
     ld   d, $00
     ld   a, [wBGOriginHigh]
-    ld   hl, $45C1
+    ld   hl, Data_01C_45C1
     add  hl, bc
     add  a, [hl]
     ld   hl, wRequests
@@ -357,7 +354,7 @@ label_24DF::
     ldi  [hl], a
     ld   [$C175], a
     push hl
-    ld   hl, $4601
+    ld   hl, Data_01C_4601
     add  hl, bc
     ld   a, [hl]
     and  $E0
@@ -367,12 +364,12 @@ label_24DF::
     add  a, [hl]
     ld   d, a
     cp   e
-    jr   c, label_250D
+    jr   c, .jp_250D
     ld   a, d
     sub  a, $20
     ld   d, a
 
-label_250D::
+.jp_250D
     ld   a, d
     ld   [$C176], a
     pop  hl
@@ -383,7 +380,7 @@ label_250D::
     ld   a, [wDialogCharacterIndex]
     and  $1F
     ld   c, a
-    ld   hl, $45A1
+    ld   hl, Data_01C_45A1
     add  hl, bc
     ld   a, [hl]
     pop  hl
@@ -400,14 +397,15 @@ DialogDrawNextCharacterHandler::
     ld   b, $00
     ld   e, $05
     ld   d, $00
-    ld   hl, $4581
+    ld   hl, DialogCharacterYTable
     add  hl, bc
     ld   a, [hl]
+
     ld   hl, wRequests
     add  hl, de
     ldi  [hl], a ; high byte of tile destination address
     push hl
-    ld   hl, $4561
+    ld   hl, DialogCharacterXTable
     add  hl, bc
     ld   a, [hl]
     pop  hl
@@ -641,7 +639,7 @@ DialogBreakHandler::
     call DialogDrawNextCharacterHandler.endDialog
 
 label_26B6::
-    call label_27BB
+    call func_27BB
     ldh  a, [$FFCC]
     bit  4, a
     jr   nz, label_26E1
@@ -797,9 +795,9 @@ label_278B::
 DialogChoiceHandler::
     ldh  a, [$FFCC]
     bit  4, a
-    jp   nz, label_27B7
+    jp   nz, .jp_27B7
     and  $03
-    jr   z, label_27AA
+    jr   z, .jp_27AA
     ld   hl, $C177
     ld   a, [hl]
     inc  a
@@ -808,19 +806,15 @@ DialogChoiceHandler::
     ld   a, JINGLE_MOVE_SELECTION
     ldh  [hJingle], a
 
-label_27AA::
+.jp_27AA
     ldh  a, [hFrameCounter]
     and  $10
     ret  z
-    ld   a, $17
-    ld   [MBC3SelectBank], a
-    jp   $7DCC
+    jpsb func_017_7DCC
 
-label_27B7::
+.jp_27B7
     call UpdateDialogState
     ret
 
-label_27BB::
-    ld   a, $17
-    ld   [MBC3SelectBank], a
-    jp   $7D7C
+func_27BB::
+    jpsb func_017_7D7C

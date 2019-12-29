@@ -526,24 +526,22 @@ func_004_4345::
 jr_004_436D:
     jp   OpenDialog                               ; $436D: $C3 $85 $23
 
-    db   $10                                      ; $4370: $10
-    inc  d                                        ; $4371: $14
-    jr   jr_004_4394                              ; $4372: $18 $20
+Data_004_4370::
+    db   $10, $14, $18, $20, $28, $30, $38, $40
+    db   $FF, $FF
 
-    jr   z, jr_004_43A6                           ; $4374: $28 $30
+Data_004_437A::
+    db   $60, $40
 
-    jr   c, @+$42                                 ; $4376: $38 $40
+Data_004_437C::
+    db   1, -1
 
-    rst  $38                                      ; $4378: $FF
-    rst  $38                                      ; $4379: $FF
-    ld   h, b                                     ; $437A: $60
-    ld   b, b                                     ; $437B: $40
-    ld   bc, $8FF                                 ; $437C: $01 $FF $08
-    db   $F8                                      ; $437F: $F8
+Data_004_437E::
+    db   8, -8
 
 func_004_4380::
     db   $CD
-    jp   z, $216D                                 ; $4381: $CA $6D $21
+    db   $CA, $6D, $21                            ; $4381: $CA $6D $21
 
     add  b                                        ; $4384: $80
     jp   label_004_5E09                           ; $4385: $C3 $09 $5E
@@ -558,12 +556,12 @@ func_004_4380::
     ld   a, [hl]                                  ; $4393: $7E
 
 jr_004_4394:
-    ld   hl, $437E                                ; $4394: $21 $7E $43
+    ld   hl, Data_004_437E                        ; $4394: $21 $7E $43
     add  hl, de                                   ; $4397: $19
     cp   [hl]                                     ; $4398: $BE
     jr   z, jr_004_43A6                           ; $4399: $28 $0B
 
-    ld   hl, $437C                                ; $439B: $21 $7C $43
+    ld   hl, Data_004_437C                        ; $439B: $21 $7C $43
     add  hl, de                                   ; $439E: $19
     ld   a, [hl]                                  ; $439F: $7E
     ld   hl, wEntitiesSpeedXTable                                ; $43A0: $21 $40 $C2
@@ -572,7 +570,7 @@ jr_004_4394:
     ld   [hl], a                                  ; $43A5: $77
 
 jr_004_43A6:
-    ld   hl, $437A                                ; $43A6: $21 $7A $43
+    ld   hl, Data_004_437A                        ; $43A6: $21 $7A $43
     add  hl, de                                   ; $43A9: $19
     ldh  a, [wActiveEntityPosX]                               ; $43AA: $F0 $EE
     cp   [hl]                                     ; $43AC: $BE
@@ -593,14 +591,14 @@ jr_004_43B7:
     add  hl, bc                                   ; $43C0: $09
     ld   e, [hl]                                  ; $43C1: $5E
     ld   d, b                                     ; $43C2: $50
-    ld   hl, $437C                                ; $43C3: $21 $7C $43
+    ld   hl, Data_004_437C                        ; $43C3: $21 $7C $43
     add  hl, de                                   ; $43C6: $19
     ld   a, [hl]                                  ; $43C7: $7E
     ld   hl, wEntitiesSpeedYTable                                ; $43C8: $21 $50 $C2
     add  hl, bc                                   ; $43CB: $09
     add  [hl]                                     ; $43CC: $86
     ld   [hl], a                                  ; $43CD: $77
-    ld   hl, $437E                                ; $43CE: $21 $7E $43
+    ld   hl, Data_004_437E                        ; $43CE: $21 $7E $43
     add  hl, de                                   ; $43D1: $19
     cp   [hl]                                     ; $43D2: $BE
     jr   nz, jr_004_43DD                          ; $43D3: $20 $08
@@ -637,7 +635,7 @@ jr_004_43DD:
 
 jr_004_43FF:
     ld   d, b                                     ; $43FF: $50
-    ld   hl, $4370                                ; $4400: $21 $70 $43
+    ld   hl, Data_004_4370                        ; $4400: $21 $70 $43
     add  hl, de                                   ; $4403: $19
     ld   a, [hl]                                  ; $4404: $7E
     pop  hl                                       ; $4405: $E1

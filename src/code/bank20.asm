@@ -6833,6 +6833,7 @@ jr_020_6CA3:
     ld   [wPaletteDataFlags], a                    ; $6CA3: $EA $D1 $DD
     ret                                           ; $6CA6: $C9
 
+ApplyFadeToWhite_GBC::
     ld   a, [$C3CA]                               ; $6CA7: $FA $CA $C3
     cp   $20                                      ; $6CAA: $FE $20
     jr   z, jr_020_6D0D                           ; $6CAC: $28 $5F

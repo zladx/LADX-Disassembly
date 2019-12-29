@@ -81,9 +81,14 @@ MinimapTiles::
 incbin "gfx/world/minimap.dmg.2bpp"
 
 section "bankOD",romx[$4000],bank[$0D]
-incbin "gfx/world/dungeons.dmg.2bpp"
+Dungeons1Tiles::
+incbin "gfx/world/dungeons_1.dmg.2bpp"
+Dungeons2Tiles::
+incbin "gfx/world/dungeons_2.dmg.2bpp"
 
 section "bankOE",romx[$4000],bank[$0E]
+NpcTilesDataStart::
+Npc1Tiles::
 incbin "gfx/characters/npc_1.dmg.2bpp"
 
 section "bankOF",romx[$4000],bank[$0F]
@@ -110,9 +115,11 @@ incbin "gfx/scenes/relief.dmg.2bpp"
 incbin "gfx/scenes/painting.dmg.2bpp"
 
 section "bank11",romx[$4000],bank[$11]
+Npc2Tiles::
 incbin "gfx/characters/npc_2.dmg.2bpp"
 
 section "bank12",romx[$4000],bank[$12]
+Npc3Tiles::
 incbin "gfx/characters/npc_3.dmg.2bpp"
 incbin "gfx/characters/nightmare.dmg.2bpp"
 incbin "gfx/characters/npc_4.dmg.2bpp"

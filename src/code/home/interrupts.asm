@@ -279,9 +279,7 @@ vBlankContinue::
     ld   a, [wGameplaySubtype]
     cp   $06
     jr   c, .animateTilesEnd
-    ld   a, $38
-    ld   [MBC3SelectBank], a
-    call $785A
+    callsb Func_038_785A
     jr   .animateTilesEnd
 .gameplayNotAPhoto
 
@@ -461,7 +459,7 @@ LoadTiles::
     cp   $02
     jp   z, LoadDungeonMinimapTiles
 
-    ld   a, $0D
+    ld   a, BANK(Dungeons2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ldh  a, [hBGTilesLoadingStage]
@@ -483,14 +481,12 @@ LoadTiles::
     add  hl, bc
     ld   e, l
     ld   d, h
-    ld   hl, $5000
+    ld   hl, Dungeons2Tiles
 
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $4616
+    callsb Func_020_4616
     ld   [MBC3SelectBank], a
     jr   .copyData
 .colorDungeonEnd
@@ -618,7 +614,7 @@ LoadOAMTiles::
     and  $03
     ld   c, a
     ld   b, $00
-    ld   hl, data_2E6F
+    ld   hl, NpcTilesBankTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -642,7 +638,7 @@ LoadOAMTiles::
     rl   b
     sla  c
     rl   b
-    ld   hl, $4000
+    ld   hl, NpcTilesDataStart
     add  hl, bc
     add  hl, de
     push hl
@@ -691,7 +687,7 @@ label_73E::
     and  $03
     ld   c, a
     ld   b, $00
-    ld   hl, data_2E6F
+    ld   hl, NpcTilesBankTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -715,7 +711,7 @@ label_73E::
     rl   b
     sla  c
     rl   b
-    ld   hl, $4000
+    ld   hl, NpcTilesDataStart
     add  hl, bc
     add  hl, de
     push hl

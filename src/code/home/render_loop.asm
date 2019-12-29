@@ -183,10 +183,7 @@ RenderLoop::
     and  a
     jr   z, .renderDMGFadeOut
     ; Render fade-to-white effect for GBC
-    ; (calls 20:6CA7)
-    ld   a, $20
-    ld   [MBC3SelectBank], a
-    call $6CA7
+    callsb ApplyFadeToWhite_GBC
     jr   .transitionDone
 .renderDMGFadeOut
     ; Render fade-to-white effect for DMG
@@ -311,10 +308,7 @@ RenderWindow::
 
 WaitForNextFrame::
     ; Animate inventory window
-    ; (calls 1F:7F80)
-    ld   a, $1F
-    call SwitchBank
-    call $7F80
+    callsw func_01F_7F80
 
     ; Switch to first graphics bank ($0C on DMG, $2C on GBC)
     ld   a, $0C

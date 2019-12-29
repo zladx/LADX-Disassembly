@@ -105,7 +105,7 @@ ENTITY_FISHERMAN_FISHING_GAME        equ $54
 ENTITY_BOUNCING_BOMBITE              equ $55
 ENTITY_TIMER_BOMBITE                 equ $56
 ENTITY_PAIRODD                       equ $57
-ENTITY_58                            equ $58 ; unknown
+ENTITY_PAIRODD_PROJECTILE            equ $58
 ENTITY_MOLDORM                       equ $59
 ENTITY_FACADE                        equ $5A
 ENTITY_SLIME_EYE                     equ $5B

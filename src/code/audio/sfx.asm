@@ -11873,6 +11873,8 @@ label_01F_7B5C:
     nop                                           ; $7F7D: $00
     nop                                           ; $7F7E: $00
     nop                                           ; $7F7F: $00
+
+func_01F_7F80::
     ldh  a, [hFFA8]                               ; $7F80: $F0 $A8
     and  a                                        ; $7F82: $A7
     jr   z, jr_01F_7F9E                           ; $7F83: $28 $19

@@ -29,7 +29,7 @@ Data_01C_4A18::
     db   $41, $C1, $98, $98, $98, $98, $98, $99 ; $4A20 |A.......|
     db   $99, $99, $99, $99                     ; $4A28 |....|
 
-Func_01C_4A2C::
+DialogOpenAnimationEnd::
     ld   a, [$C19F]                             ; $4A2C: $FA $9F $C1
     ld   c, a                                   ; $4A2F: $4F
     ld   a, [$C16F]                             ; $4A30: $FA $6F $C1

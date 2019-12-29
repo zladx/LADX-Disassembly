@@ -2434,6 +2434,7 @@ jr_014_5444:
     ld   [wDialogState], a                        ; $5445: $EA $9F $C1
     ret                                           ; $5448: $C9
 
+DialogOpenAnimationStart::
     ld   a, [$C3C9]                               ; $5449: $FA $C9 $C3
     and  a                                        ; $544C: $A7
     jr   nz, jr_014_545A                          ; $544D: $20 $0B

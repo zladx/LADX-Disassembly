@@ -7377,6 +7377,8 @@ jr_017_7D5F:
 
     scf                                           ; $7D7A: $37
     ld   a, a                                     ; $7D7B: $7F
+
+func_017_7D7C::
     ldh  a, [hFrameCounter]                               ; $7D7C: $F0 $E7
     and  $10                                      ; $7D7E: $E6 $10
     ret  nz                                       ; $7D80: $C0
@@ -7425,6 +7427,7 @@ jr_017_7DAC:
 
     jr   nc, jr_017_7E24                          ; $7DCA: $30 $58
 
+func_017_7DCC::
     ld   e, $00                                   ; $7DCC: $1E $00
     ld   a, [$C19F]                               ; $7DCE: $FA $9F $C1
     and  $80                                      ; $7DD1: $E6 $80

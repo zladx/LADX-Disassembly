@@ -4815,8 +4815,9 @@ LoadTilemap0D::
     ld   bc, $500
     jp   CopyData
 
-data_2E6F::
-    db   $00, $11, $0E, $12
+; NPC tiles banks
+NpcTilesBankTable::
+    db   $00, BANK(Npc2Tiles), BANK(Npc1Tiles), BANK(Npc3Tiles)
 
 ; Load lower section of OAM tiles (NPCs),
 ; and upper section of BG tiles
@@ -4897,7 +4898,7 @@ LoadTilemap9::
     and  $03
     ld   e, a
     ld   d, $00
-    ld   hl, data_2E6F
+    ld   hl, NpcTilesBankTable
     add  hl, de
     ld   a, [hl]
     and  a

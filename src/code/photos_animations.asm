@@ -1,11 +1,44 @@
+; Array of origin addresses
+Data_038_7800::
+    dw   CgbMiscTiles + $000
+    dw   CgbMiscTiles + $040
+    dw   CgbMiscTiles + $080
+    dw   CgbMiscTiles + $0C0
+    dw   CgbMiscTiles + $100
+    dw   CgbMiscTiles + $140
+    dw   CgbMiscTiles + $180
+    dw   CgbMiscTiles + $1C0
+
+; Array of destination addresses
+Data_038_7810::
+    dw   $8400
+    dw   $8440
+    dw   $8480
+    dw   $84C0
+    dw   $8700
+    dw   $8740
+    dw   $8780
+    dw   $87C0
+
+; Array of destination addresses
+Data_038_7820::
+    dw   $8400
+    dw   $8440
+    dw   $8480
+    dw   $84C0
+    dw   $8600
+    dw   $8640
+    dw   $8680
+    dw   $86C0
+
 ; Animate photo tiles group
 Func_038_7830::
-    ld   hl, $7810                               ; $7830: $21 $10 $78
+    ld   hl, Data_038_7810                       ; $7830: $21 $10 $78
     ldh  a, [hMapRoom]                           ; $7833: $F0 $F6
     cp   $0D                                     ; $7835: $FE $0D
     jr   nz, .else_783C_38                       ; $7837: $20 $03
 
-    ld   hl, $7820                               ; $7839: $21 $20 $78
+    ld   hl, Data_038_7820                       ; $7839: $21 $20 $78
 .else_783C_38:
     ldh  a, [hAnimatedTilesFrameCount]           ; $783C: $F0 $A6
     dec  a                                       ; $783E: $3D
@@ -17,7 +50,7 @@ Func_038_7830::
     ldi  a, [hl]                                 ; $7847: $2A
     ld   d, [hl]                                 ; $7848: $56
     ld   e, a                                    ; $7849: $5F
-    ld   hl, $7800                               ; $784A: $21 $00 $78
+    ld   hl, Data_038_7800                       ; $784A: $21 $00 $78
     add  hl, bc                                  ; $784D: $09
     ldi  a, [hl]                                 ; $784E: $2A
     ld   h, [hl]                                 ; $784F: $66

@@ -5802,18 +5802,8 @@ label_003_69A0:
     pop  bc                                       ; $69A0: $C1
     ret                                           ; $69A1: $C9
 
-    ld   l, h                                     ; $69A2: $6C
-    ld   [hl], h                                  ; $69A3: $74
-    ld   l, l                                     ; $69A4: $6D
-    ld   [hl], l                                  ; $69A5: $75
-    nop                                           ; $69A6: $00
-    nop                                           ; $69A7: $00
-    nop                                           ; $69A8: $00
-    nop                                           ; $69A9: $00
-    ld   [hl], $02                                ; $69AA: $36 $02
-    ld   [hl], $22                                ; $69AC: $36 $22
-    ld   [hl], $12                                ; $69AE: $36 $12
-    ld   [hl], $32                                ; $69B0: $36 $32
+Data_003_69A2::
+    db   $6C, $74, $6D, $75, $00, $00, $00, $00   ; $69A2
 
 include "code/entities/hookshot_hit.asm"
 
@@ -9300,7 +9290,7 @@ jr_003_7CFD:
     ld   [$DDD7], a                               ; $7D60: $EA $D7 $DD
 
 jr_003_7D63:
-    ld   de, $69A2                                ; $7D63: $11 $A2 $69
+    ld   de, Data_003_69A2                        ; $7D63: $11 $A2 $69
     push de                                       ; $7D66: $D5
     jp   label_003_51F5                           ; $7D67: $C3 $F5 $51
 

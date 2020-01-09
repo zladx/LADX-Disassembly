@@ -1932,18 +1932,12 @@ PotEntityHandler::
 
 include "code/entities/liftable_rock.asm"
 
-    ld   a, [rNR22]                               ; $5398: $F0 $17
-    ld   a, [$ff00+c]                             ; $539A: $F2
-    rla                                           ; $539B: $17
-    db   $f4                                      ; $539C: $F4
-    ld   d, $F6                                   ; $539D: $16 $F6
-    ld   d, $F0                                   ; $539F: $16 $F0
-    ld   d, $F2                                   ; $53A1: $16 $F2
-    ld   d, $F4                                   ; $53A3: $16 $F4
-    ld   d, $F6                                   ; $53A5: $16 $F6
-    ld   d, $FA                                   ; $53A7: $16 $FA
-    and  l                                        ; $53A9: $A5
-    db   $db                                      ; $53AA: $DB
+Data_003_5398::
+    db   $F0, $17, $F2, $17, $F4, $16, $F6, $16   ; $5398
+    db   $F0, $16, $F2, $16, $F4, $16, $F6, $16   ; $53A0
+
+jp_003_53A8:
+    ld   a, [wIsIndoor]                           ; $53A8
     and  a                                        ; $53AB: $A7
     jr   z, jr_003_53B3                           ; $53AC: $28 $05
 
@@ -1951,7 +1945,7 @@ include "code/entities/liftable_rock.asm"
     jr   jr_003_53B6                              ; $53B1: $18 $03
 
 jr_003_53B3:
-    ld   de, $5398                                ; $53B3: $11 $98 $53
+    ld   de, Data_003_5398                        ; $53B3: $11 $98 $53
 
 jr_003_53B6:
     call RenderAnimatedActiveEntity                               ; $53B6: $CD $C0 $3B

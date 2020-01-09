@@ -27,7 +27,7 @@ jr_01F_400C:
 label_01F_401E:
     call func_01F_4204                            ; $401E: $CD $04 $42
     call func_01F_53ED                            ; $4021: $CD $ED $53
-    call $64EC                                    ; $4024: $CD $EC $64
+    call func_01F_64EC                            ; $4024: $CD $EC $64
     xor  a                                        ; $4027: $AF
     ld   [wActiveJingle], a                       ; $4028: $EA $60 $D3
     ld   [wActiveWaveSfx], a                      ; $402B: $EA $70 $D3

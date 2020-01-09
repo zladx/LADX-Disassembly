@@ -75,6 +75,10 @@ Overworld1Tiles::
 incbin "gfx/world/overworld_1.dmg.2bpp"
 LinkCharacter2Tiles::
 incbin "gfx/characters/link_2.dmg.2bpp"
+PieceOfHeartMeterTiles::
+incbin "gfx/items/piece_of_heart_meter.dmg.2bpp"
+OcarinaSymbolsTiles::
+incbin "gfx/items/ocarina_symbols.dmg.2bpp"
 AnimatedTiles::
 incbin "gfx/world/animated_tiles.w32.dmg.2bpp"
 MinimapTiles::
@@ -254,6 +258,8 @@ incbin "gfx/items/items_2.cgb.2bpp"
 incbin "gfx/items/instruments.cgb.2bpp"
 incbin "gfx/world/overworld_1.cgb.2bpp"
 incbin "gfx/characters/link_2.cgb.2bpp"
+incbin "gfx/items/piece_of_heart_meter.cgb.2bpp"
+incbin "gfx/items/ocarina_symbols.cgb.2bpp"
 incbin "gfx/world/animated_tiles.w32.cgb.2bpp"
 incbin "gfx/world/minimap.cgb.2bpp"
 

@@ -8869,7 +8869,7 @@ jr_01F_725A:
 
     ld   [hl], d                                  ; $72C9: $72
     sub  $72                                      ; $72CA: $D6 $72
-    call c, Copy49D0ToTileMemory89D0              ; $72CC: $DC $72 $00
+    db   $DC, $72, $00                            ; $72CC: $DC $72 $00
     add  b                                        ; $72CF: $80
     ld   c, b                                     ; $72D0: $48
     add  b                                        ; $72D1: $80

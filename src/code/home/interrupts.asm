@@ -442,13 +442,13 @@ LoadTiles::
     cp   $07
     jp   z, label_7B0
     cp   $03
-    jp   z, Copy6900ToTileMemory89A0
+    jp   z, LoadPieceOfHeartMeterTiles1
     cp   $04
-    jp   z, Copy6930ToTileMemory89D0
+    jp   z, LoadPieceOfHeartMeterTiles2
     cp   $05
-    jp   z, Copy49D0ToTileMemory89D0
+    jp   z, ClearPieceOfHeartMeterTiles1
     cp   $06
-    jp   z, Copy49A0ToTileMemory89A0
+    jp   z, ClearPieceOfHeartMeterTiles2
     cp   $08
     jp   nc, LoadTilesCommands8ToD
 
@@ -738,7 +738,7 @@ label_73E::
 
 label_7B0::
     callsb func_001_6BB5
-    jp   Copy48BytesAndClearFlags.restoreBank0C
+    jp   CopyTilesToPieceOfHeartMeter.restoreBank0C
 
 ; Data origin table (in bank $0C)
 TilesGfxSource::

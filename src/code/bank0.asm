@@ -759,8 +759,11 @@ ReadValueInDialogsBank::
     ld   [hl], $01
     ret
 
-label_C3A::
-    ld   a, $0C
+; Copy 4 tiles from bank $0C, then return to bank 1.
+; Inputs:
+;   hl:  target address of the instrument tiles
+CopySirenInstrumentTiles::
+    ld   a, BANK(SirenInstrumentsTiles)
     ld   [MBC3SelectBank], a
     ld   bc, $40
     call CopyData
@@ -7365,10 +7368,8 @@ CheckLinkCollisionWithProjectile_trampoline::
     callsb CheckLinkCollisionWithProjectile
     jp   ReloadSavedBank
 
-label_3B5A::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call label_6C77
+HurtLinkIfCollisioningWithEnemy_trampoline::
+    callsb HurtLinkIfCollisioningWithEnemy.collisionEvenInTheAir
     jp   ReloadSavedBank
 
 label_3B65::

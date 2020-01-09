@@ -521,7 +521,7 @@ RoomTransitionPrepareHandler::
     jr   nc, jr_002_7B14                          ; $7B08: $30 $0A
 
     ld   b, $00                                   ; $7B0A: $06 $00
-    ld   hl, $4120                                ; $7B0C: $21 $20 $41
+    ld   hl, MusicOverridesPowerUpTrack           ; $7B0C: $21 $20 $41
     add  hl, bc                                   ; $7B0F: $09
     ld   a, [hl]                                  ; $7B10: $7E
     and  a                                        ; $7B11: $A7
@@ -742,16 +742,10 @@ RoomTransitionSecondHalfHandler::
     ret                                           ; $7C03: $C9
 
 Data_002_7C04::
-    nop                                           ; $7C04: $00
-    nop                                           ; $7C05: $00
-    rst  $38                                      ; $7C06: $FF
-    ld   bc, $FF01                                ; $7C07: $01 $01 $FF
-    ld   bc, $1FF                                 ; $7C0A: $01 $FF $01
-    rst  $38                                      ; $7C0D: $FF
-    nop                                           ; $7C0E: $00
-    nop                                           ; $7C0F: $00
-    ld   bc, $FF01                                ; $7C10: $01 $01 $FF
-    rst  $38                                      ; $7C13: $FF
+    db   $00, $00, $FF, $01, $01, $FF, $01, $FF   ; $7C04
+
+Data_002_7C0C::
+    db   $01, $FF, $00, $00, $01, $01, $FF, $FF   ; $7C0C
 
 label_002_7C14::
     ldh  a, [hFrameCounter]                       ; $7C14: $F0 $E7
@@ -768,12 +762,12 @@ label_002_7C14::
     sub  $F0                                      ; $7C28: $D6 $F0
     ld   e, a                                     ; $7C2A: $5F
     ld   d, $00                                   ; $7C2B: $16 $00
-    ld   hl, $7C04                                ; $7C2D: $21 $04 $7C
+    ld   hl, Data_002_7C04                        ; $7C2D: $21 $04 $7C
     add  hl, de                                   ; $7C30: $19
     ldh  a, [hLinkPositionX]                      ; $7C31: $F0 $98
     add  [hl]                                     ; $7C33: $86
     ldh  [hLinkPositionX], a                      ; $7C34: $E0 $98
-    ld   hl, $7C0C                                ; $7C36: $21 $0C $7C
+    ld   hl, Data_002_7C0C                        ; $7C36: $21 $0C $7C
     add  hl, de                                   ; $7C39: $19
     ldh  a, [hLinkPositionY]                      ; $7C3A: $F0 $99
     add  [hl]                                     ; $7C3C: $86
@@ -781,9 +775,10 @@ label_002_7C14::
     ret                                           ; $7C3F: $C9
 
 Data_002_7C40::
-    db   $FC, $FA, $F8, $F6, $0C, $00, $00, $F4, $00, $00, $00, $00, $00, $F4, $0C
+    db   $FC, $FA, $F8, $F6, $0C, $00, $00, $F4
 
-    nop                                           ; $7C4F: $00
+Data_002_7C48::
+    db   $00, $00, $00, $00, $00, $F4, $0C, $00
 
 label_002_7C50::
     ldh  a, [hFrameCounter]                       ; $7C50: $F0 $E7
@@ -833,7 +828,7 @@ jr_002_7C8B:
     add  hl, de                                   ; $7C90: $19
     ld   a, [hl]                                  ; $7C91: $7E
     ldh  [hLinkPositionXIncrement], a             ; $7C92: $E0 $9A
-    ld   hl, $7C48                                ; $7C94: $21 $48 $7C
+    ld   hl, Data_002_7C48                        ; $7C94: $21 $48 $7C
     add  hl, de                                   ; $7C97: $19
     ld   a, [hl]                                  ; $7C98: $7E
     ldh  [hLinkPositionYIncrement], a             ; $7C99: $E0 $9B

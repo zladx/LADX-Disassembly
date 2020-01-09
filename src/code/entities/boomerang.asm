@@ -1,9 +1,13 @@
+Data_019_4451::
+    db   $38, $14, $38, $34, $A4, $14, $FF, $FF   ; $4451
+    db   $38, $54, $38, $74, $FF, $FF, $A4, $34   ; $4459
+
 BoomerangEntityHandler::
     ; wActiveProjectileCount = 1
     ld   a, $01                                   ; $4461: $3E $01
     ld   [wActiveProjectileCount], a                    ; $4463: $EA $4D $C1
 
-    ld   de, $4451                                ; $4466: $11 $51 $44
+    ld   de, Data_019_4451                        ; $4466: $11 $51 $44
     call RenderAnimatedActiveEntity                               ; $4469: $CD $C0 $3B
     call func_019_7D3D                            ; $446C: $CD $3D $7D
     call PlayBoomerangSfx_trampoline               ; $446F: $CD $F8 $29

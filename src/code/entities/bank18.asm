@@ -1634,7 +1634,7 @@ jr_018_4A18:
     ld   a, [hl]                                  ; $4A1C: $7E
     or   $80                                      ; $4A1D: $F6 $80
     ld   [hl], a                                  ; $4A1F: $77
-    call label_3B5A                               ; $4A20: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $4A20: $CD $5A $3B
     ret  nc                                       ; $4A23: $D0
 
     call CopyLinkFinalPositionToPosition          ; $4A24: $CD $BE $0C
@@ -10310,7 +10310,7 @@ jr_018_7D09:
     jp   label_3DA0                               ; $7D33: $C3 $A0 $3D
 
 func_018_7D36:
-    call label_3B5A                               ; $7D36: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $7D36: $CD $5A $3B
     jr   nc, jr_018_7D5A                          ; $7D39: $30 $1F
 
 func_018_7D3B:

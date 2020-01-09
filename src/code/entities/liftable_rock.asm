@@ -3,7 +3,7 @@ LiftableRockEntityHandler::
     ld   [$C50C], a                               ; $5329: $EA $0C $C5
     call IsEntityUnknownFZero                                ; $532C: $CD $00 $0C
     ldh  [hScratch0], a                           ; $532F: $E0 $D7
-    jp   z, $53A8                                 ; $5331: $CA $A8 $53
+    jp   z, jp_003_53A8                           ; $5331: $CA $A8 $53
 
     cp   $01                                      ; $5334: $FE $01
     jr   nz, jr_003_5395                          ; $5336: $20 $5D

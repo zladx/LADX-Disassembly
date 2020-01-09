@@ -1,6 +1,9 @@
 ; Chest OAM data? (7B97 contains seashell tile info)
-data_007_7B53::
-    db $82, $17, $86, $14, $82, $15, $86, $15
+Data_007_7B53::
+    db $82, $17, $86, $14
+
+Data_007_7B57::
+    db $82, $15, $86, $15
     db $88, $10, $8A, $10, $8C, $14, $98, $16
     db $90, $17, $92, $16, $96, $10, $8E, $10
     db $80, $15, $84, $10, $94, $15, $9A, $10
@@ -19,6 +22,8 @@ SpitObjectDialog::
     db $9A, $9B, $9C, $9D, $9E, $9F, $A0, $A1
     db $A2, $A3, $A4, $A5, $A6, $A7, $A8, $A9
     db $AA, $AC, $AB, $AD, $AE, $AE, $EF, $06
+
+Data_007_7BBB::
     db $10, $10, $10, $10, $10, $10, $10, $10
     db $10, $01, $01, $10, $10, $10, $10, $10
     db $01, $10, $10, $10, $10, $10, $01, $01
@@ -101,11 +106,11 @@ jr_007_7C49:
     jr   nz, jr_007_7C58                          ; $7C51: $20 $05
 
 jr_007_7C53:
-    ld   de, $7B53                                ; $7C53: $11 $53 $7B
+    ld   de, Data_007_7B53                        ; $7C53: $11 $53 $7B
     jr   jr_007_7C5B                              ; $7C56: $18 $03
 
 jr_007_7C58:
-    ld   de, $7B57                                ; $7C58: $11 $57 $7B
+    ld   de, Data_007_7B57                        ; $7C58: $11 $57 $7B
 
 jr_007_7C5B:
     call RenderSimpleEntityWithSpriteVariantToOAM ; $7C5B: $CD $77 $3C
@@ -131,10 +136,10 @@ jr_007_7C76:
     cp   $08                                      ; $7C76: $FE $08
     jr   nz, jr_007_7C93                          ; $7C78: $20 $19
 
-    ldh  a, [hActiveEntitySpriteVariant]               ; $7C7A: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]          ; $7C7A: $F0 $F1
     ld   e, a                                     ; $7C7C: $5F
     ld   d, b                                     ; $7C7D: $50
-    ld   hl, $7BBB                                ; $7C7E: $21 $BB $7B
+    ld   hl, Data_007_7BBB                        ; $7C7E: $21 $BB $7B
     add  hl, de                                   ; $7C81: $19
     ld   a, [hl]                                  ; $7C82: $7E
     and  a                                        ; $7C83: $A7

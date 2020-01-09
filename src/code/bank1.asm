@@ -3664,7 +3664,7 @@ label_6BB4::
 func_001_6BB5::
     ldh  a, [hBGTilesLoadingStage]
     cp   $08
-    jp  c, label_6C77
+    jp  c, LoadSirenInstrumentTiles
     jr   nz, label_6BC6
     call label_6BF0
     ld   hl, hBGTilesLoadingStage
@@ -3786,7 +3786,12 @@ label_6C69::
     ld   h, a
     ret
 
-label_6C77::
+; Copy tiles for a siren instrument to VRAM,
+; then increment hBGTilesLoadingStage.
+;
+; Inputs:
+;   a    index of the instrument to load
+LoadSirenInstrumentTiles::
     ld   c, a
     ld   b, $00
     sla  c
@@ -3805,9 +3810,9 @@ label_6C77::
     add  hl, bc
     ld   e, l
     ld   d, h
-    ld   hl, $4D00
+    ld   hl, SirenInstrumentsTiles
     add  hl, bc
-    call label_C3A
+    call CopySirenInstrumentTiles
     ldh  a, [hBGTilesLoadingStage]
     inc  a
     ldh  [hBGTilesLoadingStage], a

@@ -161,53 +161,17 @@ label_5094::
     ld   [hl], a
     ret
 
-label_50AF::
-    sbc  a, b
-    and  h
-    ld   b, h
-    ld   a, [hl]
-    sbc  a, b
-    call nz, $7E44
-    sbc  a, c
-    inc  b
-    ld   b, h
-    ld   a, [hl]
-    sbc  a, c
-    inc  h
-    ld   b, h
-    ld   a, [hl]
-    sbc  a, c
-    ld   h, h
-    ld   b, h
-    ld   a, [hl]
-    sbc  a, c
-    add  a, h
-    ld   b, h
-    ld   a, [hl]
+Data_001_50AF::
+    db   $98, $A4, $44, $7E, $98, $C4, $44, $7E   ; $50AF
+    db   $99, $04, $44, $7E, $99, $24, $44, $7E   ; $50B7
+    db   $99, $64, $44, $7E, $99, $84, $44, $7E   ; $50BF
 
-label_50C7::
-    sbc  a, b
-    xor  l
-    ld   b, h
-    ld   a, [hl]
-    sbc  a, b
-    call $7E44
-    sbc  a, c
-    dec  c
-    ld   b, h
-    ld   a, [hl]
-    sbc  a, c
-    dec  l
-    ld   b, h
-    ld   a, [hl]
-    sbc  a, c
-    ld   l, l
-    ld   b, h
-    ld   a, [hl]
-    sbc  a, c
-    adc  a, l
-    ld   b, h
-    ld   a, [hl]
+Data_001_50C7::
+    db   $98, $AD, $44, $7E, $98, $CD, $44, $7E   ; $50C7
+    db   $99, $0D, $44, $7E, $99, $2D, $44, $7E   ; $50CF
+    db   $99, $6D, $44, $7E, $99, $8D, $44, $7E   ; $50D7
+
+func_001_50DF::
     call label_6BA8
     ldh  a, [$FFCC]
     and  $08
@@ -263,7 +227,7 @@ label_512C::
     and  $F8
     ld   e, a
     ld   d, $00
-    ld   hl, label_50AF
+    ld   hl, Data_001_50AF
     add  hl, de
     ld   de, $D601
     ld   c, $08
@@ -441,7 +405,7 @@ label_5249::
     and  $F8
     ld   e, a
     ld   d, $00
-    ld   hl, label_50C7
+    ld   hl, Data_001_50C7
     add  hl, de
     ld   de, $D609
     ld   c, $08

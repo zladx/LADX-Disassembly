@@ -24,26 +24,38 @@ section "Interrupt Joypad", rom0[$0060]
 
 ; Data-copy routines
 section "Hardcoded CopyData variants", rom0[$0062]
-Copy6900ToTileMemory89A0::
-    ld   hl, $6900
-    ld   de, $89A0
-    jr   Copy48BytesAndClearFlags
 
-Copy6930ToTileMemory89D0::
-    ld   hl, $6930
-    ld   de, $89D0
-    jr   Copy48BytesAndClearFlags
+; Load 3 tiles of the meter that appears in the dialog box corner
+; when a new Piece of Heart is found.
+;
+; The tiles are loaded at the place of the exchanged item and seashell tiles.
+LoadPieceOfHeartMeterTiles1::
+    ld   hl, PieceOfHeartMeterTiles
+    ld   de, vTiles1 + $1A0
+    jr   CopyTilesToPieceOfHeartMeter
 
-Copy49D0ToTileMemory89D0::
-    ld   hl, $49D0
-    ld   de, $89D0
-    jr   Copy48BytesAndClearFlags
+LoadPieceOfHeartMeterTiles2::
+    ld   hl, PieceOfHeartMeterTiles + $30
+    ld   de, vTiles1 + $1D0
+    jr   CopyTilesToPieceOfHeartMeter
 
-Copy49A0ToTileMemory89A0::
-    ld   hl, $49A0
-    ld   de, $89A0
+; Restore the tiles that were overwritten by the Piece-of-Hearts meter.
+ClearPieceOfHeartMeterTiles1::
+    ld   hl, Items2Tiles + $1D0
+    ld   de, vTiles1 + $1D0
+    jr   CopyTilesToPieceOfHeartMeter
 
-Copy48BytesAndClearFlags::
+ClearPieceOfHeartMeterTiles2::
+    ld   hl, Items2Tiles + $1A0
+    ld   de, vTiles1 + $1A0
+
+; Copy 3 tiles to VRAM,
+; then clear the hBGTilesLoadingStage flags.
+;
+; Inputs:
+;   hl   the source address of the tiles
+;   de   the tiles destination address in vram
+CopyTilesToPieceOfHeartMeter::
     ld   bc, $30
     call CopyData
     xor  a

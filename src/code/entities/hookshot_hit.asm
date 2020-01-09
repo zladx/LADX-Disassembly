@@ -1,5 +1,8 @@
+Data_003_69AA::
+    db   $36, $02, $36, $22, $36, $12, $36, $32   ; $69AA
+
 HookshotHitEntityHandler::
-    ld   hl, wActiveProjectileCount                     ; $69B2: $21 $4D $C1
+    ld   hl, wActiveProjectileCount               ; $69B2: $21 $4D $C1
     inc  [hl]                                     ; $69B5: $34
     ld   a, $0A                                   ; $69B6: $3E $0A
     ld   [$C19E], a                               ; $69B8: $EA $9E $C1
@@ -22,7 +25,7 @@ HookshotHitEntityHandler::
     jp   RenderAnimatedActiveEntity                               ; $69D6: $C3 $C0 $3B
 
 jr_003_69D9:
-    ld   de, $69AA                                ; $69D9: $11 $AA $69
+    ld   de, Data_003_69AA                        ; $69D9: $11 $AA $69
     call func_003_6AD7                            ; $69DC: $CD $D7 $6A
     call func_003_7F78                            ; $69DF: $CD $78 $7F
     ld   a, [wIsIndoor]                           ; $69E2: $FA $A5 $DB

@@ -66,7 +66,7 @@ GetBGAttributesAddressForObject::
     jr   nz, .colorDungeonEnd                     ; $65AA: $20 $06
 
     ; Set palette pointers base for color dungeon
-    ld   hl, $6000                                ; $65AC: $21 $00 $60
+    ld   hl, ColorDungeonBGAttributes             ; $65AC: $21 $00 $60
     jp   .loadPalettesAdress                      ; $65AF: $C3 $36 $66
 .colorDungeonEnd
 

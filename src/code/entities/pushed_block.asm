@@ -66,13 +66,13 @@ jr_003_5286:
     ret  z                                        ; $52A1: $C8
 
     call UnloadEntity                             ; $52A2: $CD $8D $3F
-    ld   de, $5162                                ; $52A5: $11 $62 $51
+    ld   de, Data_003_5162                        ; $52A5: $11 $62 $51
     ld   b, $C4                                   ; $52A8: $06 $C4
     ld   a, [wIsIndoor]                           ; $52AA: $FA $A5 $DB
     and  a                                        ; $52AD: $A7
     jr   z, jr_003_52B5                           ; $52AE: $28 $05
 
-    ld   de, $515E                                ; $52B0: $11 $5E $51
+    ld   de, Data_003_515E                        ; $52B0: $11 $5E $51
     ld   b, $A6                                   ; $52B3: $06 $A6
 
 jr_003_52B5:

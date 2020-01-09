@@ -691,23 +691,6 @@ func_019_442C:
     ld   de, $4404                                ; $444B: $11 $04 $44
     jp   RenderSimpleEntityWithSpriteVariantToOAM                               ; $444E: $C3 $77 $3C
 
-    jr   c, @+$16                                 ; $4451: $38 $14
-
-    jr   c, jr_019_4489                           ; $4453: $38 $34
-
-    and  h                                        ; $4455: $A4
-    inc  d                                        ; $4456: $14
-    rst  $38                                      ; $4457: $FF
-    rst  $38                                      ; $4458: $FF
-    jr   c, @+$56                                 ; $4459: $38 $54
-
-    jr   c, jr_019_44D1                           ; $445B: $38 $74
-
-    rst  $38                                      ; $445D: $FF
-    rst  $38                                      ; $445E: $FF
-    and  h                                        ; $445F: $A4
-    inc  [hl]                                     ; $4460: $34
-
 include "code/entities/boomerang.asm"
 
     nop                                           ; $44FC: $00

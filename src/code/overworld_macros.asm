@@ -190,18 +190,24 @@ PalaceDoorMacroHandler::
     jp   Func_358B                               ; $7691: $C3 $8B $35
 
 Data_024_7694::
-    db $00, $01, $10, $11, $FF, $BB, $BC, $BD, $BE, $09, $09, $09, $09
+    db   $00, $01, $10, $11, $FF
+
+Data_024_7699::
+    db   $BB, $BC, $BD, $BE
+
+Data_024_769D::
+    db   $09, $09, $09, $09
 
 StonePigHeadMacroHandler::
     push bc                                       ; $76A1: $C5
     call Func_024_7625                            ; $76A2: $CD $25 $76
-    ld   bc, $7694                                ; $76A5: $01 $94 $76
-    ld   de, $7699                                ; $76A8: $11 $99 $76
+    ld   bc, Data_024_7694                        ; $76A5: $01 $94 $76
+    ld   de, Data_024_7699                        ; $76A8: $11 $99 $76
     ldh  a, [hRoomStatus]                         ; $76AB: $F0 $F8
     and  $04                                      ; $76AD: $E6 $04
     jr   z, jr_024_76B4                           ; $76AF: $28 $03
 
-    ld   de, $769D                                ; $76B1: $11 $9D $76
+    ld   de, Data_024_769D                        ; $76B1: $11 $9D $76
 
 jr_024_76B4:
     jp   Func_358B                               ; $76B4: $C3 $8B $35
@@ -215,9 +221,9 @@ Data_024_76BC::
 PalmTreeMacroHandler::
     push bc                                       ; $76C0: $C5
     call Func_024_7625                            ; $76C1: $CD $25 $76
-    ld   bc, $76B7                                ; $76C4: $01 $B7 $76
-    ld   de, $76BC                                ; $76C7: $11 $BC $76
-    jp   Func_358B                               ; $76CA: $C3 $8B $35
+    ld   bc, Data_024_76B7                        ; $76C4: $01 $B7 $76
+    ld   de, Data_024_76BC                        ; $76C7: $11 $BC $76
+    jp   Func_358B                                ; $76CA: $C3 $8B $35
 
 Data_024_76CD::
     db $00, $01, $02, $10, $11, $12, $1F, $20

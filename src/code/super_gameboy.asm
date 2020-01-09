@@ -22,7 +22,7 @@ SuperGameBoyInit::
     ld   a, [rP1]                                ; $6A35: $F0 $00
     and  J_RIGHT | J_LEFT                        ; $6A37: $E6 $03
     cp   J_RIGHT | J_LEFT                        ; $6A39: $FE $03
-    jr   nz, .else_6A76_3C                       ; $6A3B: $20 $39
+    jr   nz, .superGameBoyDetected                       ; $6A3B: $20 $39
     ld   a, J_B                                  ; $6A3D: $3E $20
     ld   [rP1], a                                ; $6A3F: $E0 $00
     ld   a, [rP1]                                ; $6A41: $F0 $00
@@ -45,68 +45,87 @@ SuperGameBoyInit::
     ld   a, [rP1]                                ; $6A63: $F0 $00
     and  J_RIGHT | J_LEFT                        ; $6A65: $E6 $03
     cp   J_RIGHT | J_LEFT                        ; $6A67: $FE $03
-    jr   nz, .else_6A76_3C                       ; $6A69: $20 $0B
+    jr   nz, .superGameBoyDetected               ; $6A69: $20 $0B
+
+    ; No valid Super GameBoy detected.
+    ; Reset the multiplayer configuration (just in case) and return.
     ld   hl, SGBRequestOnePlayerCmd              ; $6A6B: $21 $02 $6A
     call SendUploadCommand                       ; $6A6E: $CD $51 $6B
     call WaitFor3Frames                          ; $6A71: $CD $86 $6B
     sub  a                                       ; $6A74: $97
     ret                                          ; $6A75: $C9
 
-.else_6A76_3C:
+.superGameBoyDetected
+    ; Now that the detection is over, return to single-player mode.
     ld   hl, SGBRequestOnePlayerCmd              ; $6A76: $21 $02 $6A
     call SendUploadCommand                       ; $6A79: $CD $51 $6B
     call WaitFor3Frames                          ; $6A7C: $CD $86 $6B
 
+    ; Make the displayed screen black,
+    ; while we are messing with VRAM for data transfers.
     ld   hl, SGBSetScreenMaskBlackCmd            ; $6A7F: $21 $60 $68
     call SendUploadCommand                       ; $6A82: $CD $51 $6B
     ld   bc, $06                                 ; $6A85: $01 $06 $00
     call WaitForBCFrames                         ; $6A88: $CD $92 $6B
 
+    ; Give priority to the ROM-defined Color Palette
+    ; (instead of the player-defined palette)
     ld   hl, SGBForceApplicationPaletteCmd       ; $6A8B: $21 $60 $69
     call SendUploadCommand                       ; $6A8E: $CD $51 $6B
     ld   bc, $06                                 ; $6A91: $01 $06 $00
     call WaitForBCFrames                         ; $6A94: $CD $92 $6B
 
-    ld   hl, SGBInit1Cmd                         ; $6A97: $21 $80 $68
+    ;
+    ; Most Super GameBoy enhanced games send the following sequence of DATA_SND commands at startup.
+    ; It appears to be part of the SGB devkit.
+    ;
+    ; These commands patch the SGB itself with SNES machine-code.
+    ; See:
+    ;  - https://tcrf.net/Notes:Super_Game_Boy#DATA_SND
+    ;  - https://forums.nesdev.com/viewtopic.php?f=12&t=16610#p206526
+    ;
+
+    ld   hl, SGBPatch1Cmd                         ; $6A97: $21 $80 $68
     call SendUploadCommand                       ; $6A9A: $CD $51 $6B
     ld   bc, $06                                 ; $6A9D: $01 $06 $00
     call WaitForBCFrames                         ; $6AA0: $CD $92 $6B
 
-    ld   hl, SGBInit2Cmd                         ; $6AA3: $21 $90 $68
+    ld   hl, SGBPatch2Cmd                         ; $6AA3: $21 $90 $68
     call SendUploadCommand                       ; $6AA6: $CD $51 $6B
     ld   bc, $06                                 ; $6AA9: $01 $06 $00
     call WaitForBCFrames                         ; $6AAC: $CD $92 $6B
 
-    ld   hl, SGBInit3Cmd                         ; $6AAF: $21 $A0 $68
+    ld   hl, SGBPatch3Cmd                         ; $6AAF: $21 $A0 $68
     call SendUploadCommand                       ; $6AB2: $CD $51 $6B
     ld   bc, $06                                 ; $6AB5: $01 $06 $00
     call WaitForBCFrames                         ; $6AB8: $CD $92 $6B
 
-    ld   hl, SGBInit4Cmd                         ; $6ABB: $21 $B0 $68
+    ld   hl, SGBPatch4Cmd                         ; $6ABB: $21 $B0 $68
     call SendUploadCommand                       ; $6ABE: $CD $51 $6B
     ld   bc, $06                                 ; $6AC1: $01 $06 $00
     call WaitForBCFrames                         ; $6AC4: $CD $92 $6B
 
-    ld   hl, SGBInit5Cmd                         ; $6AC7: $21 $C0 $68
+    ld   hl, SGBPatch5Cmd                         ; $6AC7: $21 $C0 $68
     call SendUploadCommand                       ; $6ACA: $CD $51 $6B
     ld   bc, $06                                 ; $6ACD: $01 $06 $00
     call WaitForBCFrames                         ; $6AD0: $CD $92 $6B
 
-    ld   hl, SGBInit6Cmd                         ; $6AD3: $21 $D0 $68
+    ld   hl, SGBPatch6Cmd                         ; $6AD3: $21 $D0 $68
     call SendUploadCommand                       ; $6AD6: $CD $51 $6B
     ld   bc, $06                                 ; $6AD9: $01 $06 $00
     call WaitForBCFrames                         ; $6ADC: $CD $92 $6B
 
-    ld   hl, SGBInit7Cmd                         ; $6ADF: $21 $E0 $68
+    ld   hl, SGBPatch7Cmd                         ; $6ADF: $21 $E0 $68
     call SendUploadCommand                       ; $6AE2: $CD $51 $6B
     ld   bc, $06                                 ; $6AE5: $01 $06 $00
     call WaitForBCFrames                         ; $6AE8: $CD $92 $6B
 
-    ld   hl, SGBInit8Cmd                         ; $6AEB: $21 $F0 $68
+    ld   hl, SGBPatch8Cmd                         ; $6AEB: $21 $F0 $68
     call SendUploadCommand                       ; $6AEE: $CD $51 $6B
     ld   bc, $06                                 ; $6AF1: $01 $06 $00
     call WaitForBCFrames                         ; $6AF4: $CD $92 $6B
 
+    ; Upload the standard palette used by the game
     ld   hl, SGBSetPal01Cmd                      ; $6AF7: $21 $00 $69
     call SendUploadCommand                       ; $6AFA: $CD $51 $6B
     ld   bc, $06                                 ; $6AFD: $01 $06 $00
@@ -117,14 +136,17 @@ SuperGameBoyInit::
     ld   bc, $06                                 ; $6B09: $01 $06 $00
     call WaitForBCFrames                         ; $6B0C: $CD $92 $6B
 
+    ; Upload the first part of the frame tiles data
     ld   hl, SGBFrameTilesA                      ; $6B0F: $21 $00 $40
     ld   de, SGBTransfertToTiles0Cmd             ; $6B12: $11 $30 $69
     call SendVRAMCommand                         ; $6B15: $CD $A3 $6B
 
+    ; Upload the second part of the frame tiles data
     ld   hl, SGBFrameTilesB                      ; $6B18: $21 $00 $50
     ld   de, SGBTransfertToTiles1Cmd             ; $6B1B: $11 $40 $69
     call SendVRAMCommand                         ; $6B1E: $CD $A3 $6B
 
+    ; Upload frame tilemap and palettes
     ld   hl, SGBFrameTilemap                     ; $6B21: $21 $00 $60
     ld   de, SGBTransfertBorderCmd               ; $6B24: $11 $50 $69
     call SendVRAMCommand                         ; $6B27: $CD $A3 $6B
@@ -143,10 +165,14 @@ SuperGameBoyInit::
     ld   [rLCDC], a                              ; $6B39: $E0 $40
     ld   bc, $06                                 ; $6B3B: $01 $06 $00
     call WaitForBCFrames                         ; $6B3E: $CD $92 $6B
+
+    ; Make the SGB display active again
     ld   hl, SGBCancelMaskCmd                    ; $6B41: $21 $70 $68
     call SendUploadCommand                       ; $6B44: $CD $51 $6B
     ld   bc, $06                                 ; $6B47: $01 $06 $00
     call WaitForBCFrames                         ; $6B4A: $CD $92 $6B
+
+    ; Disable the LCDC interrupt
     xor  a                                       ; $6B4D: $AF
     ld   [rLCDC], a                              ; $6B4E: $E0 $40
     ret                                          ; $6B50: $C9

@@ -4081,7 +4081,7 @@ jr_019_5899:
 
 func_019_58A2:
 label_019_58A2:
-    call label_3B5A                               ; $58A2: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $58A2: $CD $5A $3B
     ret  nc                                       ; $58A5: $D0
 
     call func_019_7E1B                            ; $58A6: $CD $1B $7E
@@ -4133,7 +4133,7 @@ SideViewPotEntityHandler::
     ld   e, c                                     ; $58EC: $59
     ld   a, c                                     ; $58ED: $79
     ld   e, c                                     ; $58EE: $59
-    call label_3B5A                               ; $58EF: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $58EF: $CD $5A $3B
     jr   nc, jr_019_5922                          ; $58F2: $30 $2E
 
     call func_019_7E1B                            ; $58F4: $CD $1B $7E
@@ -4441,7 +4441,7 @@ jr_019_5A9C:
 
 jr_019_5A9F:
     call ClearEntitySpeed                         ; $5A9F: $CD $7F $3D
-    call label_3B5A                               ; $5AA2: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $5AA2: $CD $5A $3B
     ret  nc                                       ; $5AA5: $D0
 
     ld   a, [$C19B]                               ; $5AA6: $FA $9B $C1
@@ -9603,7 +9603,7 @@ jr_019_76B0:
     xor  a                                        ; $76B1: $AF
     ld   [wC167], a                               ; $76B2: $EA $67 $C1
     call func_019_78F1                            ; $76B5: $CD $F1 $78
-    call label_3B5A                               ; $76B8: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $76B8: $CD $5A $3B
     jr   nc, jr_019_76CA                          ; $76BB: $30 $0D
 
     call IncrementEntityState                     ; $76BD: $CD $12 $3B
@@ -9974,7 +9974,7 @@ jr_019_7898:
     ld   hl, wEntitiesSpeedYTable                       ; $789F: $21 $50 $C2
     add  hl, bc                                   ; $78A2: $09
     ld   [hl], b                                  ; $78A3: $70
-    call label_3B5A                               ; $78A4: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $78A4: $CD $5A $3B
     jr   nc, jr_019_78CB                          ; $78A7: $30 $22
 
     ld   a, $01                                   ; $78A9: $3E $01
@@ -10804,7 +10804,7 @@ jr_019_7C90:
 
 func_019_7CA2:
 label_019_7CA2:
-    call label_3B5A                               ; $7CA2: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $7CA2: $CD $5A $3B
     jr   nc, jr_019_7CCE                          ; $7CA5: $30 $27
 
     call CopyLinkFinalPositionToPosition          ; $7CA7: $CD $BE $0C

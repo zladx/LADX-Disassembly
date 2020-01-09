@@ -7592,7 +7592,7 @@ jr_004_7BDD:
     jp   RenderSimpleEntityWithSpriteVariantToOAM                               ; $7BE0: $C3 $77 $3C
 
 func_004_7BE3:
-    call label_3B5A                               ; $7BE3: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $7BE3: $CD $5A $3B
     jr   nc, jr_004_7C05                          ; $7BE6: $30 $1D
 
     call CopyLinkFinalPositionToPosition          ; $7BE8: $CD $BE $0C

@@ -1090,7 +1090,7 @@ jr_005_45B7:
     ldh  [hActiveEntityState], a                  ; $45BD: $E0 $F0
 
 jr_005_45BF:
-    call label_3B5A                               ; $45BF: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $45BF: $CD $5A $3B
     jr   nc, jr_005_4611                          ; $45C2: $30 $4D
 
     ldh  a, [hActiveEntityState]                  ; $45C4: $F0 $F0
@@ -3649,7 +3649,7 @@ jr_005_54C1:
 
 func_005_54C3:
 label_005_54C3:
-    call label_3B5A                               ; $54C3: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $54C3: $CD $5A $3B
     jr   nc, jr_005_54E5                          ; $54C6: $30 $1D
 
     call CopyLinkFinalPositionToPosition          ; $54C8: $CD $BE $0C

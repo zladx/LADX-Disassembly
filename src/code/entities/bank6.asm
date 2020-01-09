@@ -1314,7 +1314,7 @@ jr_006_4805:
     dec  [hl]                                     ; $4805: $35
 
 jr_006_4806:
-    call label_3B5A                               ; $4806: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $4806: $CD $5A $3B
     jr   nc, jr_006_4852                          ; $4809: $30 $47
 
     ld   a, [$C19B]                               ; $480B: $FA $9B $C1
@@ -2411,7 +2411,7 @@ jr_006_4EF2:
     cp   $04                                      ; $4EF3: $FE $04
     jr   nc, jr_006_4F0D                          ; $4EF5: $30 $16
 
-    call label_3B5A                               ; $4EF7: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $4EF7: $CD $5A $3B
     ret  nc                                       ; $4EFA: $D0
 
     ld   a, $08                                   ; $4EFB: $3E $08
@@ -2427,7 +2427,7 @@ jr_006_4F0D:
     ret                                           ; $4F0D: $C9
 
 jr_006_4F0E:
-    call label_3B5A                               ; $4F0E: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $4F0E: $CD $5A $3B
     ret  nc                                       ; $4F11: $D0
 
     jp   label_006_641F                           ; $4F12: $C3 $1F $64
@@ -6124,7 +6124,7 @@ jr_006_6416:
     jp   SetEntitySpriteVariant                   ; $6417: $C3 $0C $3B
 
 func_006_641A:
-    call label_3B5A                               ; $641A: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $641A: $CD $5A $3B
     jr   nc, jr_006_643C                          ; $641D: $30 $1D
 
 label_006_641F:
@@ -8991,7 +8991,7 @@ ArmosStatueEntityHandler::
     xor  a                                        ; $745A: $AF
     ldh  [hFFE8], a                               ; $745B: $E0 $E8
     call label_3B70                               ; $745D: $CD $70 $3B
-    call label_3B5A                               ; $7460: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $7460: $CD $5A $3B
     jr   nc, jr_006_7472                          ; $7463: $30 $0D
 
     ld   a, $01                                   ; $7465: $3E $01
@@ -10350,7 +10350,7 @@ jr_006_7B61:
     ret  c                                        ; $7B84: $D8
 
 jr_006_7B85:
-    call label_3B5A                               ; $7B85: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $7B85: $CD $5A $3B
     ret  nc                                       ; $7B88: $D0
 
     call DidKillEnemy.label_3F5E                  ; $7B89: $CD $5E $3F

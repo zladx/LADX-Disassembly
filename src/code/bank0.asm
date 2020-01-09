@@ -7368,10 +7368,8 @@ CheckLinkCollisionWithProjectile_trampoline::
     callsb CheckLinkCollisionWithProjectile
     jp   ReloadSavedBank
 
-label_3B5A::
-    ld   a, $03
-    ld   [MBC3SelectBank], a
-    call label_6C77
+HurtLinkIfCollisioningWithEnemy_trampoline::
+    callsb HurtLinkIfCollisioningWithEnemy.collisionEvenInTheAir
     jp   ReloadSavedBank
 
 label_3B65::

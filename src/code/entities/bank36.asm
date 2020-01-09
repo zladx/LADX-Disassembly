@@ -483,7 +483,7 @@ label_036_429A:
     ld   a, $06                                   ; $42C8: $3E $06
     call label_3DA0                               ; $42CA: $CD $A0 $3D
     call func_036_6B5C                            ; $42CD: $CD $5C $6B
-    call label_3B5A                               ; $42D0: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $42D0: $CD $5A $3B
     ret                                           ; $42D3: $C9
 
 jr_036_42D4:
@@ -499,7 +499,7 @@ jr_036_42D4:
     ld   a, $03                                   ; $42E8: $3E $03
     call label_3DA0                               ; $42EA: $CD $A0 $3D
     call func_036_6B5C                            ; $42ED: $CD $5C $6B
-    call label_3B5A                               ; $42F0: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $42F0: $CD $5A $3B
     call func_036_6A46                            ; $42F3: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $42F6: $F0 $F0
     and  a                                        ; $42F8: $A7
@@ -2755,7 +2755,7 @@ jr_036_4FB1:
     and  a                                        ; $4FF0: $A7
     jr   z, jr_036_4FFB                           ; $4FF1: $28 $08
 
-    call label_3B5A                               ; $4FF3: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $4FF3: $CD $5A $3B
     jr   nc, jr_036_4FFB                          ; $4FF6: $30 $03
 
     call func_036_503C                            ; $4FF8: $CD $3C $50
@@ -4469,7 +4469,7 @@ ColorGuardianRedEntityHandler::
     jr   nz, jr_036_5964                          ; $595C: $20 $06
 
     call func_036_6B5C                            ; $595E: $CD $5C $6B
-    call label_3B5A                               ; $5961: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $5961: $CD $5A $3B
 
 jr_036_5964:
     xor  a                                        ; $5964: $AF
@@ -7712,7 +7712,7 @@ jr_036_6B5B:
     ret                                           ; $6B5B: $C9
 
 func_036_6B5C:
-    call label_3B5A                               ; $6B5C: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $6B5C: $CD $5A $3B
     jr   nc, jr_036_6B88                          ; $6B5F: $30 $27
 
     call CopyLinkFinalPositionToPosition          ; $6B61: $CD $BE $0C
@@ -8411,7 +8411,7 @@ jr_036_6E57:
     cp   $8D                                      ; $6E86: $FE $8D
     jr   nz, jr_036_6ECD                          ; $6E88: $20 $43
 
-    call label_3B5A                               ; $6E8A: $CD $5A $3B
+    call HurtLinkIfCollisioningWithEnemy_trampoline ; $6E8A: $CD $5A $3B
     jr   nc, jr_036_6EC8                          ; $6E8D: $30 $39
 
     ld   hl, wEntitiesUnknowTableY                ; $6E8F: $21 $D0 $C3

@@ -227,7 +227,7 @@ include "data/rooms_attributes/overworld_a.asm"
 section "bank27",romx[$4000],bank[$27]
 include "data/rooms_attributes/overworld_b.asm"
 include "data/bg_attributes/overworld_c.asm"
-include "code/tilemap_22_loader.asm"
+include "code/bank27.asm"
 
 section "bank28",romx[$4000],bank[$28]
 include "src/code/photo_album.asm"

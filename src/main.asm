@@ -335,6 +335,8 @@ include "code/photos.asm"
 section "bank38",romx[$4000],bank[$38]
 CgbMiscTiles::
 incbin "gfx/cgb_misc.2bpp"
+PhotoElementsTiles::
+incbin "gfx/photos/photo_elements_4.2bpp"
 include "code/photos_animations.asm"
 
 section "bank39",romx[$4000],bank[$39]

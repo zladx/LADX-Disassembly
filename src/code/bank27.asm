@@ -995,12 +995,12 @@ jr_027_7FAF:
 ; Pointers table
 ; Format: [address high-byte, bank]
 Data_027_SourceTable::
-._00 db HIGH($6000), $38
-._01 db HIGH($6100), $38
-._02 db HIGH($6200), $38
-._03 db HIGH($6300), $38
-._04 db HIGH($6400), $38
-._05 db HIGH($6F00), $35
+._00 db HIGH(PhotoElementsTiles + $000), BANK(PhotoElementsTiles)
+._01 db HIGH(PhotoElementsTiles + $100), BANK(PhotoElementsTiles)
+._02 db HIGH(PhotoElementsTiles + $200), BANK(PhotoElementsTiles)
+._03 db HIGH(PhotoElementsTiles + $300), BANK(PhotoElementsTiles)
+._04 db HIGH(PhotoElementsTiles + $400), BANK(PhotoElementsTiles)
+._05 db HIGH(ColorDungeonTiles + $2F00), BANK(ColorDungeonTiles)
 
 ; Copy data from a source specified in the table
 ; to a destination specified by $D01A

@@ -3042,7 +3042,7 @@ label_017_5BD0:
     ld   [hl+], a                                 ; $5BD8: $22
     ld   a, LOW(Func_020_78ED)                    ; $5BD9: $3E $ED
     ld   [hl+], a                                 ; $5BDB: $22
-    ld   a, BANK(label_017_5BD0)                  ; $5BDC: $3E $17
+    ld   a, BANK(@)                               ; $5BDC: $3E $17
     ld   [hl], a                                  ; $5BDE: $77
     jp   Farcall                                  ; $5BDF: $C3 $D7 $0B
 
@@ -4505,7 +4505,7 @@ jr_017_6C73:
     ld   [hl+], a                                 ; $6C7B: $22
     ld   a, $95                                   ; $6C7C: $3E $95
     ld   [hl+], a                                 ; $6C7E: $22
-    ld   a, $17                                   ; $6C7F: $3E $17
+    ld   a, BANK(@)                               ; $6C7F: $3E $17
     ld   [hl], a                                  ; $6C81: $77
     jp   Farcall                                  ; $6C82: $C3 $D7 $0B
 
@@ -4517,7 +4517,7 @@ func_017_6C85:
     ld   [hl+], a                                 ; $6C8D: $22
     ld   a, $26                                   ; $6C8E: $3E $26
     ld   [hl+], a                                 ; $6C90: $22
-    ld   a, $17                                   ; $6C91: $3E $17
+    ld   a, BANK(@)                               ; $6C91: $3E $17
     ld   [hl], a                                  ; $6C93: $77
     jp   Farcall                                  ; $6C94: $C3 $D7 $0B
 
@@ -4599,7 +4599,7 @@ func_017_6D0B:
     ld   [hl+], a                                 ; $6D13: $22
     ld   a, $01                                   ; $6D14: $3E $01
     ld   [hl+], a                                 ; $6D16: $22
-    ld   a, $17                                   ; $6D17: $3E $17
+    ld   a, BANK(@)                               ; $6D17: $3E $17
     ld   [hl], a                                  ; $6D19: $77
     jp   Farcall                                  ; $6D1A: $C3 $D7 $0B
 
@@ -4732,7 +4732,7 @@ jr_017_6DDB:
     ld   [hl+], a                                 ; $6DE3: $22
     ld   a, $40                                   ; $6DE4: $3E $40
     ld   [hl+], a                                 ; $6DE6: $22
-    ld   a, $17                                   ; $6DE7: $3E $17
+    ld   a, BANK(@)                               ; $6DE7: $3E $17
     ld   [hl], a                                  ; $6DE9: $77
     jp   Farcall                                  ; $6DEA: $C3 $D7 $0B
 
@@ -5241,7 +5241,7 @@ func_017_71CD:
     ld   [hl+], a                                 ; $71D5: $22
     ld   a, $1C                                   ; $71D6: $3E $1C
     ld   [hl+], a                                 ; $71D8: $22
-    ld   a, $17                                   ; $71D9: $3E $17
+    ld   a, BANK(@)                               ; $71D9: $3E $17
     ld   [hl], a                                  ; $71DB: $77
     jp   Farcall                                  ; $71DC: $C3 $D7 $0B
 
@@ -5342,7 +5342,7 @@ jr_017_72BD:
     ld   [hl+], a                                 ; $72C8: $22
     ld   a, $54                                   ; $72C9: $3E $54
     ld   [hl+], a                                 ; $72CB: $22
-    ld   a, $17                                   ; $72CC: $3E $17
+    ld   a, BANK(@)                               ; $72CC: $3E $17
     ld   [hl], a                                  ; $72CE: $77
     call Farcall                                  ; $72CF: $CD $D7 $0B
     ld   a, $17                                   ; $72D2: $3E $17
@@ -5446,7 +5446,7 @@ jr_017_73ED:
     ld   [hl+], a                                 ; $73F5: $22
     ld   a, $2E                                   ; $73F6: $3E $2E
     ld   [hl+], a                                 ; $73F8: $22
-    ld   a, $17                                   ; $73F9: $3E $17
+    ld   a, BANK(@)                               ; $73F9: $3E $17
     ld   [hl], a                                  ; $73FB: $77
     jp   Farcall                                  ; $73FC: $C3 $D7 $0B
 
@@ -5710,7 +5710,7 @@ jr_017_750F:
     ld   [hl+], a                                 ; $7517: $22
     ld   a, $4C                                   ; $7518: $3E $4C
     ld   [hl+], a                                 ; $751A: $22
-    ld   a, $17                                   ; $751B: $3E $17
+    ld   a, BANK(@)                               ; $751B: $3E $17
     ld   [hl], a                                  ; $751D: $77
     jp   Farcall                                  ; $751E: $C3 $D7 $0B
 
@@ -6200,7 +6200,7 @@ jr_017_7739:
     ld   [hl+], a                                 ; $7741: $22
     ld   a, $60                                   ; $7742: $3E $60
     ld   [hl+], a                                 ; $7744: $22
-    ld   a, $17                                   ; $7745: $3E $17
+    ld   a, BANK(@)                               ; $7745: $3E $17
     ld   [hl], a                                  ; $7747: $77
     jp   Farcall                                  ; $7748: $C3 $D7 $0B
 
@@ -6371,7 +6371,7 @@ jr_017_7826:
     ld   [hl+], a                                 ; $782E: $22
     ld   a, $E4                                   ; $782F: $3E $E4
     ld   [hl+], a                                 ; $7831: $22
-    ld   a, $17                                   ; $7832: $3E $17
+    ld   a, BANK(@)                               ; $7832: $3E $17
     ld   [hl], a                                  ; $7834: $77
     jp   Farcall                                  ; $7835: $C3 $D7 $0B
 
@@ -6416,7 +6416,7 @@ jr_017_7867:
     ld   [hl+], a                                 ; $786F: $22
     ld   a, $06                                   ; $7870: $3E $06
     ld   [hl+], a                                 ; $7872: $22
-    ld   a, $17                                   ; $7873: $3E $17
+    ld   a, BANK(@)                               ; $7873: $3E $17
     ld   [hl], a                                  ; $7875: $77
     jp   Farcall                                  ; $7876: $C3 $D7 $0B
 
@@ -6505,7 +6505,7 @@ jr_017_78DD:
     ld   [hl+], a                                 ; $78E5: $22
     ld   a, $4B                                   ; $78E6: $3E $4B
     ld   [hl+], a                                 ; $78E8: $22
-    ld   a, $17                                   ; $78E9: $3E $17
+    ld   a, BANK(@)                               ; $78E9: $3E $17
     ld   [hl], a                                  ; $78EB: $77
     jp   Farcall                                  ; $78EC: $C3 $D7 $0B
 
@@ -6608,7 +6608,7 @@ func_017_795E:
     ld   [hl+], a                                 ; $7966: $22
     ld   a, $C7                                   ; $7967: $3E $C7
     ld   [hl+], a                                 ; $7969: $22
-    ld   a, $17                                   ; $796A: $3E $17
+    ld   a, BANK(@)                               ; $796A: $3E $17
     ld   [hl], a                                  ; $796C: $77
     jp   Farcall                                  ; $796D: $C3 $D7 $0B
 
@@ -6632,7 +6632,7 @@ jr_017_797A:
 
 jr_017_7980:
     ld   [hl+], a                                 ; $7980: $22
-    ld   a, $17                                   ; $7981: $3E $17
+    ld   a, BANK(@)                               ; $7981: $3E $17
     ld   [hl], a                                  ; $7983: $77
     jp   Farcall                                  ; $7984: $C3 $D7 $0B
 
@@ -6966,7 +6966,7 @@ func_017_7B5F:
     ld   [hl+], a                                 ; $7B67: $22
     ld   a, $A5                                   ; $7B68: $3E $A5
     ld   [hl+], a                                 ; $7B6A: $22
-    ld   a, $17                                   ; $7B6B: $3E $17
+    ld   a, BANK(@)                               ; $7B6B: $3E $17
     ld   [hl], a                                  ; $7B6D: $77
     jp   Farcall                                  ; $7B6E: $C3 $D7 $0B
 
@@ -7803,6 +7803,6 @@ func_017_7FA9:
     ld   [hl+], a                                 ; $7FB1: $22
     ld   a, $7C                                   ; $7FB2: $3E $7C
     ld   [hl+], a                                 ; $7FB4: $22
-    ld   a, $17                                   ; $7FB5: $3E $17
+    ld   a, BANK(@)                               ; $7FB5: $3E $17
     ld   [hl], a                                  ; $7FB7: $77
     jp   Farcall                                  ; $7FB8: $C3 $D7 $0B

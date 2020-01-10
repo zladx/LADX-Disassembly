@@ -7314,7 +7314,7 @@ label_007_69D0:
     ld   [hl+], a                                 ; $69F1: $22
     ld   a, LOW(Func_01A_7111)                    ; $69F2: $3E $11
     ld   [hl+], a                                 ; $69F4: $22
-    ld   a, BANK(label_007_69D0)                  ; $69F5: $3E $07
+    ld   a, BANK(@)                               ; $69F5: $3E $07
     ld   [hl], a                                  ; $69F7: $77
     call Farcall                                  ; $69F8: $CD $D7 $0B
 

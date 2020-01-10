@@ -5,14 +5,14 @@ Func_01C_49F1::
     ld   d, $00                                 ; $49F7: $16 $00
     ld   c, $01                                 ; $49F9: $0E $01
     ld   b, $00                                 ; $49FB: $06 $00
-    ld   hl, $4581                              ; $49FD: $21 $81 $45
+    ld   hl, DialogCharacterYTable              ; $49FD: $21 $81 $45
     add  hl, de                                 ; $4A00: $19
     ld   a, [hl]                                ; $4A01: $7E
     ld   hl, $D600                              ; $4A02: $21 $00 $D6
     add  hl, bc                                 ; $4A05: $09
     ldi  [hl], a                                ; $4A06: $22
     push hl                                     ; $4A07: $E5
-    ld   hl, $4561                              ; $4A08: $21 $61 $45
+    ld   hl, DialogCharacterXTable              ; $4A08: $21 $61 $45
     add  hl, de                                 ; $4A0B: $19
     ld   a, [hl]                                ; $4A0C: $7E
     pop  hl                                     ; $4A0D: $E1
@@ -25,9 +25,10 @@ Func_01C_49F1::
     ret                                         ; $4A17: $C9
 
 Data_01C_4A18::
-    db   $61, $41, $81, $21, $A1, $81, $61, $A1 ; $4A18 |aA.!..a.|
-    db   $41, $C1, $98, $98, $98, $98, $98, $99 ; $4A20 |A.......|
-    db   $99, $99, $99, $99                     ; $4A28 |....|
+    db   $61, $41, $81, $21, $A1, $81, $61, $A1, $41, $C1
+
+Data_01C_4A22::
+    db   $98, $98, $98, $98, $98, $99, $99, $99, $99, $99
 
 DialogOpenAnimationEnd::
     ld   a, [$C19F]                             ; $4A2C: $FA $9F $C1
@@ -47,7 +48,7 @@ Func_01C_4A3D::
     ld   e, $01                                 ; $4A40: $1E $01
     ld   d, $00                                 ; $4A42: $16 $00
     ld   a, [wBGOriginHigh]                     ; $4A44: $FA $2E $C1
-    ld   hl, $4A22                              ; $4A47: $21 $22 $4A
+    ld   hl, Data_01C_4A22                      ; $4A47: $21 $22 $4A
     add  hl, bc                                 ; $4A4A: $09
     add  [hl]                                   ; $4A4B: $86
     ld   hl, $D600                              ; $4A4C: $21 $00 $D6
@@ -99,9 +100,13 @@ Func_01C_4A76::
     ret                                         ; $4A89: $C9
 
 Data_01C_4A8A::
-    db   $A1, $21, $81, $41, $61, $C1, $41, $A1 ; $4A8A |.!.Aa.A.|
-    db   $61, $81, $98, $98, $98, $98, $98, $99 ; $4A92 |a.......|
-    db   $99, $99, $99, $99, $48, $00, $36, $12 ; $4A9A |....H.6.|
+    db   $A1, $21, $81, $41, $61, $C1, $41, $A1, $61, $81
+
+Data_01C_4A94::
+    db   $98, $98, $98, $98, $98, $99, $99, $99, $99, $99
+
+Data_01C_4A9E::
+    db   $48, $00, $36, $12 ; $4A9A |....H.6.|
     db   $24, $48, $00, $36, $12, $24           ; $4AA2 |$H.6.$|
 
 Func_01C_4AA8::
@@ -122,7 +127,7 @@ Func_01C_4AB9::
     ld   e, $01                                 ; $4ABC: $1E $01
     ld   d, $00                                 ; $4ABE: $16 $00
     ld   a, [wBGOriginHigh]                     ; $4AC0: $FA $2E $C1
-    ld   hl, $4A94                              ; $4AC3: $21 $94 $4A
+    ld   hl, Data_01C_4A94                      ; $4AC3: $21 $94 $4A
     add  hl, bc                                 ; $4AC6: $09
     add  [hl]                                   ; $4AC7: $86
     ld   hl, $D600                              ; $4AC8: $21 $00 $D6
@@ -138,7 +143,7 @@ Func_01C_4AB9::
     ld   a, $11                                 ; $4AD8: $3E $11
     ldi  [hl], a                                ; $4ADA: $22
     push hl                                     ; $4ADB: $E5
-    ld   hl, $4A9E                              ; $4ADC: $21 $9E $4A
+    ld   hl, Data_01C_4A9E                      ; $4ADC: $21 $9E $4A
     add  hl, bc                                 ; $4ADF: $09
     ld   a, [hl]                                ; $4AE0: $7E
     ld   c, a                                   ; $4AE1: $4F

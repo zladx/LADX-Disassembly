@@ -5337,7 +5337,7 @@ jr_017_72BD:
     ld   hl, wFarcallParams                       ; $72BD: $21 $01 $DE
     ld   a, $27                                   ; $72C0: $3E $27
     ld   [hl+], a                                 ; $72C2: $22
-    ld   [$DBAF], a                               ; $72C3: $EA $AF $DB
+    ld   [wCurrentBank], a                        ; $72C3: $EA $AF $DB
     ld   a, $78                                   ; $72C6: $3E $78
     ld   [hl+], a                                 ; $72C8: $22
     ld   a, $54                                   ; $72C9: $3E $54
@@ -5345,8 +5345,8 @@ jr_017_72BD:
     ld   a, BANK(@)                               ; $72CC: $3E $17
     ld   [hl], a                                  ; $72CE: $77
     call Farcall                                  ; $72CF: $CD $D7 $0B
-    ld   a, $17                                   ; $72D2: $3E $17
-    ld   [$DBAF], a                               ; $72D4: $EA $AF $DB
+    ld   a, BANK(@)                               ; $72D2: $3E $17
+    ld   [wCurrentBank], a                        ; $72D4: $EA $AF $DB
     ret                                           ; $72D7: $C9
 
 Data_017_72D8::

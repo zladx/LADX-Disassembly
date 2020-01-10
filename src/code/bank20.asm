@@ -10462,6 +10462,8 @@ jr_020_7B8A:
     jr   nc, jr_020_7B24                          ; $7BA2: $30 $80
 
     ld   a, b                                     ; $7BA4: $78
+
+func_020_7BA5::
     push bc                                       ; $7BA5: $C5
     ldh  a, [wActiveEntityPosY]                   ; $7BA6: $F0 $EC
     swap a                                        ; $7BA8: $CB $37
@@ -10580,6 +10582,8 @@ jr_020_7BFC:
     ld   sp, $3129                                ; $7C21: $31 $29 $31
     rst  $28                                      ; $7C24: $EF
     dec  a                                        ; $7C25: $3D
+
+func_020_7C26::
     ld   a, [$D00D]                               ; $7C26: $FA $0D $D0
     cp   $50                                      ; $7C29: $FE $50
     ret  nc                                       ; $7C2B: $D0
@@ -10747,6 +10751,8 @@ jr_020_7CD9:
     ld   a, h                                     ; $7D17: $7C
     call nz, $EC7C                                ; $7D18: $C4 $7C $EC
     ld   a, h                                     ; $7D1B: $7C
+
+Func_020_7D1C::
     ld   a, $6C                                   ; $7D1C: $3E $6C
     ld   [$C3C0], a                               ; $7D1E: $EA $C0 $C3
     ldh  a, [hFrameCounter]                       ; $7D21: $F0 $E7
@@ -10817,6 +10823,7 @@ jr_020_7D74:
     ld   c, a                                     ; $7D7A: $4F
     ret                                           ; $7D7B: $C9
 
+func_020_7D7C::
     ld   a, $03                                   ; $7D7C: $3E $03
     ldh  [hScratchD], a                           ; $7D7E: $E0 $E4
     ld   a, $06                                   ; $7D80: $3E $06

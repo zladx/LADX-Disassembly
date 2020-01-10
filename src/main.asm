@@ -212,6 +212,7 @@ include "data/bg_attributes/overworld_a.asm"
 
 section "bank23",romx[$4000],bank[$23]
 include "data/bg_attributes/indoors_a.asm"
+include "code/bank23.asm"
 
 section "bank24",romx[$4000],bank[$24]
 include "data/bg_attributes/indoors_b.asm"

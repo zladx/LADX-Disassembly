@@ -4499,11 +4499,11 @@ jr_017_6C4A:
 
 jr_017_6C73:
     ld   hl, wFarcallParams                       ; $6C73: $21 $01 $DE
-    ld   a, $23                                   ; $6C76: $3E $23
+    ld   a, BANK(func_023_7E95)                   ; $6C76: $3E $23
     ld   [hl+], a                                 ; $6C78: $22
-    ld   a, $7E                                   ; $6C79: $3E $7E
+    ld   a, HIGH(func_023_7E95)                   ; $6C79: $3E $7E
     ld   [hl+], a                                 ; $6C7B: $22
-    ld   a, $95                                   ; $6C7C: $3E $95
+    ld   a, LOW(func_023_7E95)                    ; $6C7C: $3E $95
     ld   [hl+], a                                 ; $6C7E: $22
     ld   a, BANK(@)                               ; $6C7F: $3E $17
     ld   [hl], a                                  ; $6C81: $77
@@ -4511,11 +4511,11 @@ jr_017_6C73:
 
 func_017_6C85:
     ld   hl, wFarcallParams                       ; $6C85: $21 $01 $DE
-    ld   a, $20                                   ; $6C88: $3E $20
+    ld   a, BANK(func_020_7C26)                   ; $6C88: $3E $20
     ld   [hl+], a                                 ; $6C8A: $22
-    ld   a, $7C                                   ; $6C8B: $3E $7C
+    ld   a, HIGH(func_020_7C26)                   ; $6C8B: $3E $7C
     ld   [hl+], a                                 ; $6C8D: $22
-    ld   a, $26                                   ; $6C8E: $3E $26
+    ld   a, LOW(func_020_7C26)                    ; $6C8E: $3E $26
     ld   [hl+], a                                 ; $6C90: $22
     ld   a, BANK(@)                               ; $6C91: $3E $17
     ld   [hl], a                                  ; $6C93: $77
@@ -4593,11 +4593,11 @@ jr_017_6D0A:
 
 func_017_6D0B:
     ld   hl, wFarcallParams                       ; $6D0B: $21 $01 $DE
-    ld   a, $24                                   ; $6D0E: $3E $24
+    ld   a, BANK(func_024_7801)                   ; $6D0E: $3E $24
     ld   [hl+], a                                 ; $6D10: $22
-    ld   a, $78                                   ; $6D11: $3E $78
+    ld   a, HIGH(func_024_7801)                   ; $6D11: $3E $78
     ld   [hl+], a                                 ; $6D13: $22
-    ld   a, $01                                   ; $6D14: $3E $01
+    ld   a, LOW(func_024_7801)                    ; $6D14: $3E $01
     ld   [hl+], a                                 ; $6D16: $22
     ld   a, BANK(@)                               ; $6D17: $3E $17
     ld   [hl], a                                  ; $6D19: $77
@@ -4726,11 +4726,11 @@ jr_017_6DC1:
 func_017_6DDB:
 jr_017_6DDB:
     ld   hl, wFarcallParams                       ; $6DDB: $21 $01 $DE
-    ld   a, $24                                   ; $6DDE: $3E $24
+    ld   a, BANK(Func_024_7A40)                   ; $6DDE: $3E $24
     ld   [hl+], a                                 ; $6DE0: $22
-    ld   a, $7A                                   ; $6DE1: $3E $7A
+    ld   a, HIGH(Func_024_7A40)                   ; $6DE1: $3E $7A
     ld   [hl+], a                                 ; $6DE3: $22
-    ld   a, $40                                   ; $6DE4: $3E $40
+    ld   a, LOW(Func_024_7A40)                    ; $6DE4: $3E $40
     ld   [hl+], a                                 ; $6DE6: $22
     ld   a, BANK(@)                               ; $6DE7: $3E $17
     ld   [hl], a                                  ; $6DE9: $77
@@ -5235,11 +5235,11 @@ jr_017_71CC:
 
 func_017_71CD:
     ld   hl, wFarcallParams                       ; $71CD: $21 $01 $DE
-    ld   a, $20                                   ; $71D0: $3E $20
+    ld   a, BANK(Func_020_7D1C)                   ; $71D0: $3E $20
     ld   [hl+], a                                 ; $71D2: $22
-    ld   a, $7D                                   ; $71D3: $3E $7D
+    ld   a, HIGH(Func_020_7D1C)                   ; $71D3: $3E $7D
     ld   [hl+], a                                 ; $71D5: $22
-    ld   a, $1C                                   ; $71D6: $3E $1C
+    ld   a, LOW(Func_020_7D1C)                    ; $71D6: $3E $1C
     ld   [hl+], a                                 ; $71D8: $22
     ld   a, BANK(@)                               ; $71D9: $3E $17
     ld   [hl], a                                  ; $71DB: $77
@@ -5335,12 +5335,12 @@ jr_017_72BC:
 
 jr_017_72BD:
     ld   hl, wFarcallParams                       ; $72BD: $21 $01 $DE
-    ld   a, $27                                   ; $72C0: $3E $27
+    ld   a, BANK(func_027_7854)                   ; $72C0: $3E $27
     ld   [hl+], a                                 ; $72C2: $22
     ld   [wCurrentBank], a                        ; $72C3: $EA $AF $DB
-    ld   a, $78                                   ; $72C6: $3E $78
+    ld   a, HIGH(func_027_7854)                   ; $72C6: $3E $78
     ld   [hl+], a                                 ; $72C8: $22
-    ld   a, $54                                   ; $72C9: $3E $54
+    ld   a, LOW(func_027_7854)                    ; $72C9: $3E $54
     ld   [hl+], a                                 ; $72CB: $22
     ld   a, BANK(@)                               ; $72CC: $3E $17
     ld   [hl], a                                  ; $72CE: $77
@@ -5440,11 +5440,11 @@ jr_017_73AF:
 
 jr_017_73ED:
     ld   hl, wFarcallParams                       ; $73ED: $21 $01 $DE
-    ld   a, $27                                   ; $73F0: $3E $27
+    ld   a, BANK(func_027_782E)                   ; $73F0: $3E $27
     ld   [hl+], a                                 ; $73F2: $22
-    ld   a, $78                                   ; $73F3: $3E $78
+    ld   a, HIGH(func_027_782E)                   ; $73F3: $3E $78
     ld   [hl+], a                                 ; $73F5: $22
-    ld   a, $2E                                   ; $73F6: $3E $2E
+    ld   a, LOW(func_027_782E)                    ; $73F6: $3E $2E
     ld   [hl+], a                                 ; $73F8: $22
     ld   a, BANK(@)                               ; $73F9: $3E $17
     ld   [hl], a                                  ; $73FB: $77
@@ -5704,11 +5704,11 @@ jr_017_74E0:
 
 jr_017_750F:
     ld   hl, wFarcallParams                       ; $750F: $21 $01 $DE
-    ld   a, $27                                   ; $7512: $3E $27
+    ld   a, BANK(func_027_774C)                   ; $7512: $3E $27
     ld   [hl+], a                                 ; $7514: $22
-    ld   a, $77                                   ; $7515: $3E $77
+    ld   a, HIGH(func_027_774C)                   ; $7515: $3E $77
     ld   [hl+], a                                 ; $7517: $22
-    ld   a, $4C                                   ; $7518: $3E $4C
+    ld   a, LOW(func_027_774C)                    ; $7518: $3E $4C
     ld   [hl+], a                                 ; $751A: $22
     ld   a, BANK(@)                               ; $751B: $3E $17
     ld   [hl], a                                  ; $751D: $77
@@ -6194,11 +6194,11 @@ jr_017_76FD:
 
 jr_017_7739:
     ld   hl, wFarcallParams                       ; $7739: $21 $01 $DE
-    ld   a, $27                                   ; $773C: $3E $27
+    ld   a, BANK(func_027_7660)                   ; $773C: $3E $27
     ld   [hl+], a                                 ; $773E: $22
-    ld   a, $76                                   ; $773F: $3E $76
+    ld   a, HIGH(func_027_7660)                   ; $773F: $3E $76
     ld   [hl+], a                                 ; $7741: $22
-    ld   a, $60                                   ; $7742: $3E $60
+    ld   a, LOW(func_027_7660)                    ; $7742: $3E $60
     ld   [hl+], a                                 ; $7744: $22
     ld   a, BANK(@)                               ; $7745: $3E $17
     ld   [hl], a                                  ; $7747: $77
@@ -6365,11 +6365,11 @@ jr_017_7820:
 
 jr_017_7826:
     ld   hl, wFarcallParams                       ; $7826: $21 $01 $DE
-    ld   a, $27                                   ; $7829: $3E $27
+    ld   a, BANK(func_027_72E4)                   ; $7829: $3E $27
     ld   [hl+], a                                 ; $782B: $22
-    ld   a, $72                                   ; $782C: $3E $72
+    ld   a, HIGH(func_027_72E4)                   ; $782C: $3E $72
     ld   [hl+], a                                 ; $782E: $22
-    ld   a, $E4                                   ; $782F: $3E $E4
+    ld   a, LOW(func_027_72E4)                    ; $782F: $3E $E4
     ld   [hl+], a                                 ; $7831: $22
     ld   a, BANK(@)                               ; $7832: $3E $17
     ld   [hl], a                                  ; $7834: $77
@@ -6410,11 +6410,11 @@ jr_017_7826:
 
 jr_017_7867:
     ld   hl, wFarcallParams                       ; $7867: $21 $01 $DE
-    ld   a, $27                                   ; $786A: $3E $27
+    ld   a, BANK(func_027_7306)                   ; $786A: $3E $27
     ld   [hl+], a                                 ; $786C: $22
-    ld   a, $73                                   ; $786D: $3E $73
+    ld   a, HIGH(func_027_7306)                   ; $786D: $3E $73
     ld   [hl+], a                                 ; $786F: $22
-    ld   a, $06                                   ; $7870: $3E $06
+    ld   a, LOW(func_027_7306)                    ; $7870: $3E $06
     ld   [hl+], a                                 ; $7872: $22
     ld   a, BANK(@)                               ; $7873: $3E $17
     ld   [hl], a                                  ; $7875: $77
@@ -6499,48 +6499,28 @@ jr_017_78CF:
 
 jr_017_78DD:
     ld   hl, wFarcallParams                       ; $78DD: $21 $01 $DE
-    ld   a, $27                                   ; $78E0: $3E $27
+    ld   a, BANK(func_027_734B)                   ; $78E0: $3E $27
     ld   [hl+], a                                 ; $78E2: $22
-    ld   a, $73                                   ; $78E3: $3E $73
+    ld   a, HIGH(func_027_734B)                   ; $78E3: $3E $73
     ld   [hl+], a                                 ; $78E5: $22
-    ld   a, $4B                                   ; $78E6: $3E $4B
+    ld   a, LOW(func_027_734B)                    ; $78E6: $3E $4B
     ld   [hl+], a                                 ; $78E8: $22
     ld   a, BANK(@)                               ; $78E9: $3E $17
     ld   [hl], a                                  ; $78EB: $77
     jp   Farcall                                  ; $78EC: $C3 $D7 $0B
 
-    ld   [hl], d                                  ; $78EF: $72
-    nop                                           ; $78F0: $00
-    ld   [hl], d                                  ; $78F1: $72
-    jr   nz, @+$76                                ; $78F2: $20 $74
+Data_017_78EF::
+    db   $72, $00, $72, $20, $74, $00, $74, $20   ; $78EF
+    db   $76, $00, $76, $20, $78, $00, $78, $20   ; $78F7
+    db   $7A, $00, $7A, $20, $7C, $00, $7C, $20   ; $78FF
+    db   $08, $06, $06, $06, $06, $08             ; $7907
 
-    nop                                           ; $78F4: $00
-    ld   [hl], h                                  ; $78F5: $74
-    jr   nz, @+$78                                ; $78F6: $20 $76
+func_017_790D::
+    ld   hl, wEntitiesPhysicsFlagsTable           ; $790D
+    add  hl, bc                                   ; $7910
+    ld   [hl], $C2                                ; $7911
 
-    nop                                           ; $78F8: $00
-    db   $76                                      ; $78F9: $76
-    jr   nz, jr_017_7974                          ; $78FA: $20 $78
-
-    nop                                           ; $78FC: $00
-    ld   a, b                                     ; $78FD: $78
-    jr   nz, jr_017_797A                          ; $78FE: $20 $7A
-
-    nop                                           ; $7900: $00
-    ld   a, d                                     ; $7901: $7A
-    jr   nz, jr_017_7980                          ; $7902: $20 $7C
-
-    nop                                           ; $7904: $00
-    ld   a, h                                     ; $7905: $7C
-    jr   nz, @+$0A                                ; $7906: $20 $08
-
-    ld   b, $06                                   ; $7908: $06 $06
-    ld   b, $06                                   ; $790A: $06 $06
-    ld   [$4021], sp                              ; $790C: $08 $21 $40
-    jp   $3609                                    ; $790F: $C3 $09 $36
-
-    jp   nz, $FEF0                                ; $7912: $C2 $F0 $FE
-
+    ldh  a, [hIsGBC]                              ; 7913
     and  a                                        ; $7915: $A7
     jr   z, jr_017_791D                           ; $7916: $28 $05
 
@@ -6548,7 +6528,7 @@ jr_017_78DD:
     jr   jr_017_7923                              ; $791B: $18 $06
 
 jr_017_791D:
-    ld   de, $78EF                                ; $791D: $11 $EF $78
+    ld   de, Data_017_78EF                        ; $791D: $11 $EF $78
     call RenderAnimatedActiveEntity               ; $7920: $CD $C0 $3B
 
 jr_017_7923:
@@ -6602,11 +6582,11 @@ jr_017_7953:
 
 func_017_795E:
     ld   hl, wFarcallParams                       ; $795E: $21 $01 $DE
-    ld   a, $27                                   ; $7961: $3E $27
+    ld   a, BANK(func_027_73C7)                   ; $7961: $3E $27
     ld   [hl+], a                                 ; $7963: $22
-    ld   a, $73                                   ; $7964: $3E $73
+    ld   a, HIGH(func_027_73C7)                   ; $7964: $3E $73
     ld   [hl+], a                                 ; $7966: $22
-    ld   a, $C7                                   ; $7967: $3E $C7
+    ld   a, LOW(func_027_73C7)                    ; $7967: $3E $C7
     ld   [hl+], a                                 ; $7969: $22
     ld   a, BANK(@)                               ; $796A: $3E $17
     ld   [hl], a                                  ; $796C: $77
@@ -6622,13 +6602,13 @@ jr_017_7974:
     ret  z                                        ; $7974: $C8
 
     ld   hl, wFarcallParams                       ; $7975: $21 $01 $DE
-    ld   a, $27                                   ; $7978: $3E $27
+    ld   a, BANK(func_027_74E3)                   ; $7978: $3E $27
 
 jr_017_797A:
     ld   [hl+], a                                 ; $797A: $22
-    ld   a, $74                                   ; $797B: $3E $74
+    ld   a, HIGH(func_027_74E3)                   ; $797B: $3E $74
     ld   [hl+], a                                 ; $797D: $22
-    ld   a, $E3                                   ; $797E: $3E $E3
+    ld   a, LOW(func_027_74E3)                    ; $797E: $3E $E3
 
 jr_017_7980:
     ld   [hl+], a                                 ; $7980: $22
@@ -6960,11 +6940,11 @@ Func_017_7B5B::
 
 func_017_7B5F:
     ld   hl, wFarcallParams                       ; $7B5F: $21 $01 $DE
-    ld   a, $20                                   ; $7B62: $3E $20
+    ld   a, BANK(func_020_7BA5)                   ; $7B62: $3E $20
     ld   [hl+], a                                 ; $7B64: $22
-    ld   a, $7B                                   ; $7B65: $3E $7B
+    ld   a, HIGH(func_020_7BA5)                   ; $7B65: $3E $7B
     ld   [hl+], a                                 ; $7B67: $22
-    ld   a, $A5                                   ; $7B68: $3E $A5
+    ld   a, LOW(func_020_7BA5)                    ; $7B68: $3E $A5
     ld   [hl+], a                                 ; $7B6A: $22
     ld   a, BANK(@)                               ; $7B6B: $3E $17
     ld   [hl], a                                  ; $7B6D: $77
@@ -7797,11 +7777,11 @@ jr_017_7F8E:
 
 func_017_7FA9:
     ld   hl, wFarcallParams                       ; $7FA9: $21 $01 $DE
-    ld   a, $20                                   ; $7FAC: $3E $20
+    ld   a, BANK(func_020_7D7C)                   ; $7FAC: $3E $20
     ld   [hl+], a                                 ; $7FAE: $22
-    ld   a, $7D                                   ; $7FAF: $3E $7D
+    ld   a, HIGH(func_020_7D7C)                   ; $7FAF: $3E $7D
     ld   [hl+], a                                 ; $7FB1: $22
-    ld   a, $7C                                   ; $7FB2: $3E $7C
+    ld   a, LOW(func_020_7D7C)                    ; $7FB2: $3E $7C
     ld   [hl+], a                                 ; $7FB4: $22
     ld   a, BANK(@)                               ; $7FB5: $3E $17
     ld   [hl], a                                  ; $7FB7: $77

@@ -1,6 +1,8 @@
+Data_004_496B::
+    db   $EE, $12
 
-    xor  $12                                      ; $496B: $EE $12
-    ld   hl, sp+$08                               ; $496D: $F8 $08
+Data_004_496D::
+    db   $F8, $08
 
 label_004_496F:
     xor  a                                        ; $496F: $AF
@@ -15,14 +17,14 @@ label_004_496F:
     push bc                                       ; $497D: $C5
     ldh  a, [hFFE8]                               ; $497E: $F0 $E8
     ld   c, a                                     ; $4980: $4F
-    ld   hl, $496B                                ; $4981: $21 $6B $49
+    ld   hl, Data_004_496B                        ; $4981: $21 $6B $49
     add  hl, bc                                   ; $4984: $09
     ldh  a, [hScratch0]                               ; $4985: $F0 $D7
     add  [hl]                                     ; $4987: $86
     ld   hl, wEntitiesPosXTable                         ; $4988: $21 $00 $C2
     add  hl, de                                   ; $498B: $19
     ld   [hl], a                                  ; $498C: $77
-    ld   hl, $496D                                ; $498D: $21 $6D $49
+    ld   hl, Data_004_496D                        ; $498D: $21 $6D $49
     add  hl, bc                                   ; $4990: $09
     ld   a, [hl]                                  ; $4991: $7E
     ld   hl, wEntitiesSpeedXTable                                ; $4992: $21 $40 $C2
@@ -120,7 +122,7 @@ jr_004_4A2C:
     ret                                           ; $4A2C: $C9
 
 SlimeEyeState1Handler::
-    call $4DB5                                    ; $4A2D: $CD $B5 $4D
+    call func_004_4DB5                            ; $4A2D: $CD $B5 $4D
     call func_004_7FA3                            ; $4A30: $CD $A3 $7F
     call func_004_6E03                            ; $4A33: $CD $03 $6E
     ld   hl, wEntitiesSpeedZTable                                ; $4A36: $21 $20 $C3
@@ -158,7 +160,7 @@ jr_004_4A67:
     jp   IncrementEntityState                     ; $4A67: $C3 $12 $3B
 
 SlimeEyeState2Handler::
-    call $4DB5                                    ; $4A6A: $CD $B5 $4D
+    call func_004_4DB5                            ; $4A6A: $CD $B5 $4D
     call func_004_7FA3                            ; $4A6D: $CD $A3 $7F
     call GetEntityTransitionCountdown                 ; $4A70: $CD $05 $0C
     jr   nz, jr_004_4A78                          ; $4A73: $20 $03
@@ -170,7 +172,7 @@ jr_004_4A78:
     jp   label_3B44                               ; $4A7B: $C3 $44 $3B
 
 SlimeEyeState3Handler::
-    call $4DB5                                    ; $4A7E: $CD $B5 $4D
+    call func_004_4DB5                            ; $4A7E: $CD $B5 $4D
     call func_004_7FA3                            ; $4A81: $CD $A3 $7F
     call label_C56                                ; $4A84: $CD $56 $0C
     ld   hl, $C300                                ; $4A87: $21 $00 $C3

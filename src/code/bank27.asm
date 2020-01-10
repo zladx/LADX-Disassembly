@@ -576,7 +576,7 @@ func_027_7F8C:
     add  hl, de                                   ; $7FAE: $19
 
 jr_027_7FAF:
-    ld   bc, $0008                                ; $7FAF: $01 $08 $00
+    ld   bc, $08                                  ; $7FAF: $01 $08 $00
     ld   de, $DC88                                ; $7FB2: $11 $88 $DC
     call CopyData                                 ; $7FB5: $CD $14 $29
     ret                                           ; $7FB8: $C9
@@ -599,7 +599,7 @@ LoadTilemap22::
     ld   a, [$D01A]                              ; $7FC5: $FA $1A $D0
     cp   $05                                     ; $7FC8: $FE $05
     jr   nz, .else                               ; $7FCA: $20 $04
-    ld   c, HIGH($0700)                          ; $7FCC: $0E $07
+    ld   c, $07                                  ; $7FCC: $0E $07
     jr   .lengthEnd                              ; $7FCE: $18 $01
 .else
     ld   c, a                                    ; $7FD0: $4F

@@ -978,7 +978,7 @@ jr_014_4D32:
     ld   [hl+], a                                 ; $4D40: $22
     ld   a, LOW(Func_021_5355)                    ; $4D41: $3E $55
     ld   [hl+], a                                 ; $4D43: $22
-    ld   a, BANK(UpdatePaletteEffectForInteractiveObjects) ; $4D44: $3E $14
+    ld   a, BANK(@)                               ; $4D44: $3E $14
     ld   [hl], a                                  ; $4D46: $77
     call Farcall                                  ; $4D47: $CD $D7 $0B
 
@@ -2493,7 +2493,7 @@ jr_014_547F:
     ld   [hl+], a                                 ; $54A0: $22
     ld   a, LOW(Func_021_53B6)                    ; $54A1: $3E $B6
     ld   [hl+], a                                 ; $54A3: $22
-    ld   a, BANK(func_014_5347)                   ; $54A4: $3E $14
+    ld   a, BANK(@)                               ; $54A4: $3E $14
     ld   [wFarcallReturnBank], a                  ; $54A6: $EA $04 $DE
     jp   Farcall                                  ; $54A9: $C3 $D7 $0B
 

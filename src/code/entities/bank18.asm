@@ -2780,7 +2780,7 @@ jr_018_50FE:
     ld   [hl+], a                                 ; $5106: $22
     ld   a, LOW(Func_024_7B77)                    ; $5107: $3E $77
     ld   [hl+], a                                 ; $5109: $22
-    ld   a, BANK(jr_018_50FE)                     ; $510A: $3E $18
+    ld   a, BANK(@)                               ; $510A: $3E $18
     ld   [hl], a                                  ; $510C: $77
     jp   Farcall                                  ; $510D: $C3 $D7 $0B
 

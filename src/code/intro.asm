@@ -464,7 +464,7 @@ LoadTileMapZero_trampoline::
     ldi  [hl], a
     ld   a, LOW(LoadMapData.LoadTileMapZero)
     ldi  [hl], a
-    ld   a, BANK(LoadTileMapZero_trampoline)
+    ld   a, BANK(@)
     ld   [hl], a
     jp   Farcall
 

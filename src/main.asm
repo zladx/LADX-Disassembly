@@ -171,7 +171,7 @@ OverworldBaseMapDMG::
 incbin "data/base_maps/overworld.dmg.bin"
 OverworldBaseMapGBC::
 incbin "data/base_maps/overworld.cgb.bin"
-include "code/bank1A.asm"
+include "code/entities/anglers_tunnel_door.asm"
 
 section "bank1B",romx[$4000],bank[$1B]
 include "code/audio/music_1.asm"
@@ -180,9 +180,9 @@ include "data/music/music_tracks_data_1.asm"
 
 section "bank1C",romx[$4000],bank[$1C]
 db $01 ; Extra byte present in the original ROM
-include "text/dialog_pointers.asm"
+include "data/dialogs/dialog_pointers.asm"
 include "data/ascii_to_tile.asm"
-include "text/dialog_banks.asm"
+include "data/dialogs/dialog_banks.asm"
 include "code/dialog_letters.asm"
 include "text/dialog_3.asm"
 
@@ -212,6 +212,7 @@ include "data/bg_attributes/overworld_a.asm"
 
 section "bank23",romx[$4000],bank[$23]
 include "data/bg_attributes/indoors_a.asm"
+include "code/bank23.asm"
 
 section "bank24",romx[$4000],bank[$24]
 include "data/bg_attributes/indoors_b.asm"
@@ -227,7 +228,7 @@ include "data/rooms_attributes/overworld_a.asm"
 section "bank27",romx[$4000],bank[$27]
 include "data/rooms_attributes/overworld_b.asm"
 include "data/bg_attributes/overworld_c.asm"
-include "code/tilemap_22_loader.asm"
+include "code/bank27.asm"
 
 section "bank28",romx[$4000],bank[$28]
 include "src/code/photo_album.asm"
@@ -334,6 +335,8 @@ include "code/photos.asm"
 section "bank38",romx[$4000],bank[$38]
 CgbMiscTiles::
 incbin "gfx/cgb_misc.2bpp"
+PhotoElementsTiles::
+incbin "gfx/photos/photo_elements_4.2bpp"
 include "code/photos_animations.asm"
 
 section "bank39",romx[$4000],bank[$39]

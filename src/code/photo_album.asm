@@ -26,7 +26,11 @@ PhotoAlbumEntryPoint::
     dw JumpTable_028_408F                       ; $402B (jumpTable [18]) $8F $40
     dw JumpTable_028_44AA                       ; $402D (jumpTable [19]) $AA $44
 
-    db   $40, $00, $01, $FF                     ; $402F |@...|
+Data_028_402F::
+    db   $40, $00
+
+Data_028_4031::
+    db   $01, $FF
 
 Func_028_4033::
     ld   a, [wGameplaySubtype]                  ; $4033: $FA $96 $DB
@@ -43,12 +47,12 @@ Func_028_4033::
 
     ld   a, [$D1CA]                             ; $4047: $FA $CA $D1
     ld   c, a                                   ; $404A: $4F
-    ld   hl, $4031                              ; $404B: $21 $31 $40
+    ld   hl, Data_028_4031                      ; $404B: $21 $31 $40
     add  hl, bc                                 ; $404E: $09
     ld   a, [$D1C9]                             ; $404F: $FA $C9 $D1
     add  [hl]                                   ; $4052: $86
     ld   [$D1C9], a                             ; $4053: $EA $C9 $D1
-    ld   hl, $402F                              ; $4056: $21 $2F $40
+    ld   hl, Data_028_402F                      ; $4056: $21 $2F $40
     add  hl, bc                                 ; $4059: $09
     cp   [hl]                                   ; $405A: $BE
     jr   nz, .else_4064_28                      ; $405B: $20 $07
@@ -120,10 +124,10 @@ JumpTable_028_40A7:
     or   b                                      ; $40B1: JumpTable_028_40A7 $B0
     jr   nz, .loop_40AD_28                      ; $40B2: JumpTable_028_40A7 $20 $F9
 
-    ld   hl, $4241                              ; $40B4: JumpTable_028_40A7 $21 $41 $42
+    ld   hl, Data_028_4241                      ; $40B4: JumpTable_028_40A7 $21 $41 $42
     ld   a, [hl]                                ; $40B7: JumpTable_028_40A7 $7E
     ld   [$D1CD], a                             ; $40B8: JumpTable_028_40A7 $EA $CD $D1
-    ld   hl, $424D                              ; $40BB: JumpTable_028_40A7 $21 $4D $42
+    ld   hl, Data_028_424D                      ; $40BB: JumpTable_028_40A7 $21 $4D $42
     ld   a, [hl]                                ; $40BE: JumpTable_028_40A7 $7E
     ld   [$D1CE], a                             ; $40BF: JumpTable_028_40A7 $EA $CE $D1
     ld   a, $01                                 ; $40C2: JumpTable_028_40A7 $3E $01
@@ -143,6 +147,7 @@ JumpTable_028_40D9:
     call Func_028_45CD                          ; $40DD: JumpTable_028_40D9 $CD $CD $45
     jp   Func_028_44DB                          ; $40E0: JumpTable_028_40D9 $C3 $DB $44
 
+Data_028_40E3::
     db   $E1, $98, $E5, $98, $EC, $98, $F0, $98 ; $40E3 |........|
     db   $61, $99, $65, $99, $6C, $99, $70, $99 ; $40EB |a.e.l.p.|
     db   $E1, $99, $E5, $99, $EC, $99, $F0, $99 ; $40F3 |........|
@@ -150,42 +155,42 @@ JumpTable_028_40D9:
 JumpTable_028_40FB:
     call LCDOff                                 ; $40FB: JumpTable_028_40FB $CD $CF $28
 
-    ld   a, $35                                 ; $40FE: JumpTable_028_40FB $3E $35
+    ld   a, BANK(ColorDungeonTiles)             ; $40FE: JumpTable_028_40FB $3E $35
     ld   bc, $200                               ; $4100: JumpTable_028_40FB $01 $00 $02
-    ld   hl, $5700                              ; $4103: JumpTable_028_40FB $21 $00 $57
-    ld   de, $9000                              ; $4106: JumpTable_028_40FB $11 $00 $90
+    ld   hl, ColorDungeonTiles + $1700          ; $4103: JumpTable_028_40FB $21 $00 $57
+    ld   de, vTiles2                            ; $4106: JumpTable_028_40FB $11 $00 $90
     call CopyData_trampoline                    ; $4109: JumpTable_028_40FB $CD $5D $0B
 
-    ld   a, $0C                                 ; $410C: JumpTable_028_40FB $3E $0C
+    ld   a, BANK(Overworld1Tiles)               ; $410C: JumpTable_028_40FB $3E $0C
     call AdjustBankNumberForGBC                 ; $410E: JumpTable_028_40FB $CD $0B $0B
     ld   bc, $40                                ; $4111: JumpTable_028_40FB $01 $40 $00
-    ld   hl, $57C0                              ; $4114: JumpTable_028_40FB $21 $C0 $57
-    ld   de, $97C0                              ; $4117: JumpTable_028_40FB $11 $C0 $97
+    ld   hl, Overworld1Tiles + $08C0            ; $4114: JumpTable_028_40FB $21 $C0 $57
+    ld   de, vTiles2 + $7C0                     ; $4117: JumpTable_028_40FB $11 $C0 $97
     call CopyData_trampoline                    ; $411A: JumpTable_028_40FB $CD $5D $0B
 
-    ld   a, $0C                                 ; $411D: JumpTable_028_40FB $3E $0C
+    ld   a, BANK(Items2Tiles)                   ; $411D: JumpTable_028_40FB $3E $0C
     call AdjustBankNumberForGBC                 ; $411F: JumpTable_028_40FB $CD $0B $0B
     ld   bc, $300                               ; $4122: JumpTable_028_40FB $01 $00 $03
-    ld   hl, $4A00                              ; $4125: JumpTable_028_40FB $21 $00 $4A
-    ld   de, $8A00                              ; $4128: JumpTable_028_40FB $11 $00 $8A
+    ld   hl, Items2Tiles + $200                 ; $4125: JumpTable_028_40FB $21 $00 $4A
+    ld   de, vTiles1 + $200                     ; $4128: JumpTable_028_40FB $11 $00 $8A
     call CopyData_trampoline                    ; $412B: JumpTable_028_40FB $CD $5D $0B
 
-    ld   a, $35                                 ; $412E: JumpTable_028_40FB $3E $35
+    ld   a, BANK(ColorDungeonTiles)             ; $412E: JumpTable_028_40FB $3E $35
     ld   bc, $200                               ; $4130: JumpTable_028_40FB $01 $00 $02
-    ld   hl, $6B00                              ; $4133: JumpTable_028_40FB $21 $00 $6B
-    ld   de, $8D00                              ; $4136: JumpTable_028_40FB $11 $00 $8D
+    ld   hl, ColorDungeonTiles + $2B00          ; $4133: JumpTable_028_40FB $21 $00 $6B
+    ld   de, vTiles1 + $500                     ; $4136: JumpTable_028_40FB $11 $00 $8D
     call CopyData_trampoline                    ; $4139: JumpTable_028_40FB $CD $5D $0B
 
-    ld   a, $35                                 ; $413C: JumpTable_028_40FB $3E $35
+    ld   a, BANK(ColorDungeonTiles)             ; $413C: JumpTable_028_40FB $3E $35
     ld   bc, $500                               ; $413E: JumpTable_028_40FB $01 $00 $05
-    ld   hl, $5200                              ; $4141: JumpTable_028_40FB $21 $00 $52
-    ld   de, $8000                              ; $4144: JumpTable_028_40FB $11 $00 $80
+    ld   hl, ColorDungeonTiles + $1200          ; $4141: JumpTable_028_40FB $21 $00 $52
+    ld   de, vTiles0                            ; $4144: JumpTable_028_40FB $11 $00 $80
     call CopyData_trampoline                    ; $4147: JumpTable_028_40FB $CD $5D $0B
 
     ld   a, $28                                 ; $414A: JumpTable_028_40FB $3E $28
     ldh  [hFreeWarpDataAddress], a              ; $414C: JumpTable_028_40FB $E0 $E6
-    ld   a, $28                                 ; $414E: JumpTable_028_40FB $3E $28
-    ld   hl, PhotoAlbumBackgroundMap                      ; $4150: JumpTable_028_40FB $21 $E0 $79
+    ld   a, BANK(PhotoAlbumBackgroundMap)       ; $414E: JumpTable_028_40FB $3E $28
+    ld   hl, PhotoAlbumBackgroundMap            ; $4150: JumpTable_028_40FB $21 $E0 $79
     call CopyBGMapFromBank                      ; $4153: JumpTable_028_40FB $CD $69 $0B
 
     call Func_028_4185                          ; $4156: JumpTable_028_40FB $CD $85 $41
@@ -228,7 +233,7 @@ Func_028_4185::
 .else_4195_28:
     ld   bc, $01                                ; $4195: $01 $01 $00
 .loop_4198_28:
-    ld   hl, $4265                              ; $4198: $21 $65 $42
+    ld   hl, Data_028_4265                      ; $4198: $21 $65 $42
     add  hl, bc                                 ; $419B: $09
     ld   a, [hl]                                ; $419C: $7E
     ld   e, a                                   ; $419D: $5F
@@ -236,13 +241,13 @@ Func_028_4185::
     ld   hl, $DC0C                              ; $41A0: $21 $0C $DC
     add  hl, de                                 ; $41A3: $19
     ld   a, [hl]                                ; $41A4: $7E
-    ld   hl, $4259                              ; $41A5: $21 $59 $42
+    ld   hl, Data_028_4259                      ; $41A5: $21 $59 $42
     add  hl, bc                                 ; $41A8: $09
     and  [hl]                                   ; $41A9: $A6
     jr   z, .else_41F5_28                       ; $41AA: $28 $49
 
     ld   d, $00                                 ; $41AC: $16 $00
-    ld   hl, $40E3                              ; $41AE: $21 $E3 $40
+    ld   hl, Data_028_40E3                      ; $41AE: $21 $E3 $40
     ld   a, c                                   ; $41B1: $79
     sla  a                                      ; $41B2: $CB $27
     ld   e, a                                   ; $41B4: $5F
@@ -308,7 +313,7 @@ Func_028_41FC::
     and  a                                      ; $41FF: $A7
     ret  z                                      ; $4200: $C8
 
-    ld   hl, $9822                              ; $4201: $21 $22 $98
+    ld   hl, vBGMap0 + $22                      ; $4201: $21 $22 $98
     ld   d, $7E                                 ; $4204: $16 $7E
 .loop_4206_28:
     ld   a, d                                   ; $4206: $7A
@@ -351,15 +356,25 @@ JumpTable_028_4232:
     call Func_028_4385                          ; $423D: JumpTable_028_4232 $CD $85 $43
     ret                                         ; $4240: JumpTable_028_4232 $C9
 
-
+Data_028_4241::
     db   $20, $40, $78, $98, $20, $40, $78, $98 ; $4241 | @x. @x.|
-    db   $20, $40, $78, $98, $50, $50, $50, $50 ; $4249 | @x.PPPP|
-    db   $70, $70, $70, $70, $90, $90, $90, $90 ; $4251 |pppp....|
-    db   $01, $02, $40, $80, $04, $08, $01, $02 ; $4259 |..@.....|
-    db   $10, $20, $04, $08, $00, $00, $00, $00 ; $4261 |. ......|
-    db   $00, $00, $01, $01, $00, $00, $01, $01 ; $4269 |........|
-    db   $00, $01, $06, $07, $02, $03, $08, $09 ; $4271 |........|
-    db   $04, $05, $0A, $0B                     ; $4279 |....|
+    db   $20, $40, $78, $98
+
+Data_028_424D::
+    db   $50, $50, $50, $50, $70, $70, $70, $70   ; $424D
+    db   $90, $90, $90, $90
+
+Data_028_4259::
+    db   $01, $02, $40, $80
+    db   $04, $08, $01, $02, $10, $20, $04, $08   ; $425D
+
+Data_028_4265::
+    db   $00, $00, $00, $00, $00, $00, $01, $01   ; $4265
+    db   $00, $00, $01, $01
+
+Data_028_4271::
+    db   $00, $01, $06, $07   ; $426D
+    db   $02, $03, $08, $09, $04, $05, $0A, $0B   ; $4275
 
 Func_028_427D::
     ld   a, [$D1CF]                             ; $427D: $FA $CF $D1
@@ -446,11 +461,11 @@ Func_028_427D::
     ld   [$D1CC], a                             ; $42E0: $EA $CC $D1
     ld   d, $00                                 ; $42E3: $16 $00
     ld   e, a                                   ; $42E5: $5F
-    ld   hl, $4241                              ; $42E6: $21 $41 $42
+    ld   hl, Data_028_4241                      ; $42E6: $21 $41 $42
     add  hl, de                                 ; $42E9: $19
     ld   a, [hl]                                ; $42EA: $7E
     ld   [$D1CD], a                             ; $42EB: $EA $CD $D1
-    ld   hl, $424D                              ; $42EE: $21 $4D $42
+    ld   hl, Data_028_424D                      ; $42EE: $21 $4D $42
     add  hl, de                                 ; $42F1: $19
     ld   a, [hl]                                ; $42F2: $7E
     ld   [$D1CE], a                             ; $42F3: $EA $CE $D1
@@ -468,7 +483,7 @@ Func_028_427D::
     ld   a, [$D1CC]                             ; $4302: $FA $CC $D1
     ld   c, a                                   ; $4305: $4F
     ld   d, a                                   ; $4306: $57
-    ld   hl, $4265                              ; $4307: $21 $65 $42
+    ld   hl, Data_028_4265                      ; $4307: $21 $65 $42
     add  hl, bc                                 ; $430A: $09
     ld   a, [hl]                                ; $430B: $7E
     ld   c, a                                   ; $430C: $4F
@@ -476,7 +491,7 @@ Func_028_427D::
     add  hl, bc                                 ; $4310: $09
     ld   a, [hl]                                ; $4311: $7E
     ld   c, d                                   ; $4312: $4A
-    ld   hl, $4259                              ; $4313: $21 $59 $42
+    ld   hl, Data_028_4259                      ; $4313: $21 $59 $42
     add  hl, bc                                 ; $4316: $09
     and  [hl]                                   ; $4317: $A6
     jr   nz, .else_4322_28                      ; $4318: $20 $08
@@ -489,7 +504,7 @@ Func_028_427D::
 .else_4322_28:
     ld   a, JINGLE_VALIDATE                     ; $4322: $3E $13
     ldh  [hJingle], a                           ; $4324: $E0 $F2
-    ld   hl, $4271                              ; $4326: $21 $71 $42
+    ld   hl, Data_028_4271                      ; $4326: $21 $71 $42
     add  hl, bc                                 ; $4329: $09
     ld   a, [hl]                                ; $432A: $7E
 .Func_028_432B::
@@ -500,7 +515,7 @@ Func_028_427D::
     ld   [$D1D0], a                             ; $4333: $EA $D0 $D1
     ret                                         ; $4336: $C9
 
-
+Data_028_4337::
     db   $0A, $08, $08                          ; $4337 |...|
 
 Func_028_433A::
@@ -510,7 +525,7 @@ Func_028_433A::
 
     ld   d, $00                                 ; $433F: $16 $00
     ld   e, a                                   ; $4341: $5F
-    ld   hl, $4337                              ; $4342: $21 $37 $43
+    ld   hl, Data_028_4337                      ; $4342: $21 $37 $43
     add  hl, de                                 ; $4345: $19
     ld   a, [$D1D0]                             ; $4346: $FA $D0 $D1
     cp   [hl]                                   ; $4349: $BE
@@ -539,6 +554,7 @@ Func_028_433A::
 
     jp   Func_028_44DB                          ; $436A: $C3 $DB $44
 
+Data_028_436D::
     db   $00, $00, $40, $04, $00, $08, $42, $04 ; $436D |..@...B.|
     db   $01, $01, $40, $04, $01, $09, $42, $04 ; $4375 |..@...B.|
     db   $03, $02, $40, $04, $03, $0A, $42, $04 ; $437D |..@...B.|
@@ -550,7 +566,7 @@ Func_028_4385::
     sla  a                                      ; $438C: $CB $27
     ld   e, a                                   ; $438E: $5F
     ld   d, $00                                 ; $438F: $16 $00
-    ld   hl, $436D                              ; $4391: $21 $6D $43
+    ld   hl, Data_028_436D                      ; $4391: $21 $6D $43
     add  hl, de                                 ; $4394: $19
     ld   de, wOAMBuffer                         ; $4395: $11 $00 $C0
     ld   c, $02                                 ; $4398: $0E $02
@@ -606,7 +622,7 @@ Func_028_43CC::
     add  b                                      ; $43DE: $80
     ld   d, $00                                 ; $43DF: $16 $00
     ld   e, a                                   ; $43E1: $5F
-    ld   hl, $44E0                              ; $43E2: $21 $E0 $44
+    ld   hl, Data_028_44E0                      ; $43E2: $21 $E0 $44
     add  hl, de                                 ; $43E5: $19
     push de                                     ; $43E6: $D5
     ldi  a, [hl]                                ; $43E7: $2A
@@ -634,7 +650,7 @@ Func_028_43CC::
 
 
 Func_028_4411::
-    ld   hl, $4507                              ; $4411: $21 $07 $45
+    ld   hl, Data_028_4507                      ; $4411: $21 $07 $45
     add  hl, de                                 ; $4414: $19
     ldi  a, [hl]                                ; $4415: $2A
     ld   c, a                                   ; $4416: $4F
@@ -648,17 +664,17 @@ Func_028_4411::
     call CopyBGMapFromBank                      ; $4420: $CD $69 $0B
     ret                                         ; $4423: $C9
 
-
+Data_028_4424::
     db   $7F, $5B, $14, $2E, $4E, $19, $A9, $08 ; $4424 |.[..N...|
 
 Func_028_442C::
-    ld   hl, $4424                              ; $442C: $21 $24 $44
+    ld   hl, Data_028_4424                      ; $442C: $21 $24 $44
     ld   bc, $08                                ; $442F: $01 $08 $00
     ld   de, $DC10                              ; $4432: $11 $10 $DC
     call Func_028_4176                          ; $4435: $CD $76 $41
     ret                                         ; $4438: $C9
 
-
+Data_028_4439::
     db   $78, $70, $0E, $03, $78, $78, $0E, $23 ; $4439 |xp..xx.#|
     db   $78, $80, $14, $03, $78, $88, $16, $03 ; $4441 |x...x...|
     db   $78, $90, $18, $03, $78, $98, $1A, $03 ; $4449 |x...x...|
@@ -693,8 +709,8 @@ JumpTable_028_4469:
     ldh  [hFrameCounter], a                     ; $448D: JumpTable_028_4469 $E0 $E7
     call Func_028_44DB                          ; $448F: JumpTable_028_4469 $CD $DB $44
 .else_4492_28:
-    ld   hl, $4439                              ; $4492: JumpTable_028_4469 $21 $39 $44
-    ld   de, wOAMBuffer                              ; $4495: JumpTable_028_4469 $11 $00 $C0
+    ld   hl, Data_028_4439                      ; $4492: JumpTable_028_4469 $21 $39 $44
+    ld   de, wOAMBuffer                         ; $4495: JumpTable_028_4469 $11 $00 $C0
     ld   c, $0C                                 ; $4498: JumpTable_028_4469 $0E $0C
 .loop_449A_28:
     ldi  a, [hl]                                ; $449A: JumpTable_028_4469 $2A
@@ -738,33 +754,39 @@ JumpTable_028_44AA:
     ld   [rLCDC], a                             ; $44D8: JumpTable_028_44AA $E0 $40
     ret                                         ; $44DA: JumpTable_028_44AA $C9
 
-
 Func_028_44DB::
     ld   hl, wGameplaySubtype                   ; $44DB: $21 $96 $DB
     inc  [hl]                                   ; $44DE: $34
     ret                                         ; $44DF: $C9
 
-
+Data_028_44E0::
     db   $00, $40, $29, $00, $50, $29, $00, $60 ; $44E0 |.@).P).`|
     db   $29, $00, $70, $29, $00, $40, $2A, $00 ; $44E8 |).p).@*.|
     db   $50, $2A, $00, $60, $2A, $00, $70, $2A ; $44F0 |P*.`*.p*|
     db   $00, $40, $2B, $00, $50, $2B, $00, $60 ; $44F8 |.@+.P+.`|
-    db   $2B, $00, $70, $2B, $00, $70, $3B, $20 ; $4500 |+.p+.p                                                                                                                                   ; |
-    db   $58, $28, $F0, $5A, $28, $C0, $5D, $28 ; $4508 |X(.Z(.](|
-    db   $90, $60, $28, $60, $63, $28, $30, $66 ; $4510 |.`(`c(0f|
-    db   $28, $00, $69, $28, $D0, $6B, $28, $A0 ; $4518 |(.i(.k(.|
-    db   $6E, $28, $70, $71, $28, $40, $74, $28 ; $4520 |n(pq(@t(|
-    db   $10, $77, $28, $50, $55, $28, $50, $38 ; $4528 |.w(PU(P8|
-    db   $14, $00, $50, $40, $16, $00, $50, $48 ; $4530 |..P@..PH|
-    db   $18, $00, $50, $50, $1A, $00, $50, $58 ; $4538 |..PP..PX|
-    db   $08, $00, $50, $60, $0A, $00, $50, $68 ; $4540 |..P`..Ph|
-    db   $44, $00, $50, $70, $0C, $00, $78, $70 ; $4548 |D.Pp..xp|
-    db   $0E, $03, $78, $78, $0E, $23, $78, $80 ; $4550 |..xx.#x.|
-    db   $08, $03, $78, $88, $0A, $03, $78, $90 ; $4558 |..x...x.|
-    db   $44, $03, $78, $98, $2E, $03, $88, $70 ; $4560 |D.x....p|
-    db   $10, $04, $88, $78, $12, $04, $88, $80 ; $4568 |...x....|
-    db   $00, $04, $88, $88, $02, $04, $88, $90 ; $4570 |........|
-    db   $04, $04, $88, $98, $06, $04           ; $4578 |......|
+    db   $2B, $00, $70, $2B, $00, $70, $3B
+
+Data_028_4507::
+    db   $20, $58, $28, $F0, $5A, $28, $C0, $5D   ; $4507
+    db   $28, $90, $60, $28, $60, $63, $28, $30   ; $450F
+    db   $66, $28, $00, $69, $28, $D0, $6B, $28   ; $4517
+    db   $A0, $6E, $28, $70, $71, $28, $40, $74   ; $451F
+    db   $28, $10, $77, $28, $50, $55, $28
+
+Data_028_452E::
+    db   $50, $38, $14, $00, $50, $40, $16, $00   ; $452E
+    db   $50, $48, $18, $00, $50, $50, $1A, $00   ; $4536
+    db   $50, $58, $08, $00, $50, $60, $0A, $00   ; $453E
+    db   $50, $68, $44, $00, $50, $70, $0C, $00   ; $4546
+
+Data_028_454E::
+    db   $78, $70, $0E, $03, $78, $78, $0E, $23   ; $454E
+    db   $78, $80, $08, $03, $78, $88, $0A, $03   ; $4556
+    db   $78, $90, $44, $03, $78, $98, $2E, $03   ; $455E
+    db   $88, $70, $10, $04, $88, $78, $12, $04   ; $4566
+    db   $88, $80, $00, $04, $88, $88, $02, $04   ; $456E
+    db   $88, $90, $04, $04, $88, $98, $06, $04   ; $4576
+
 
 JumpTable_028_457E:
     ldh  a, [hJoypadState]                      ; $457E: JumpTable_028_457E $F0 $CC
@@ -791,8 +813,8 @@ JumpTable_028_457E:
     ld   a, JINGLE_VALIDATE                     ; $45A3: JumpTable_028_457E $3E $13
     ldh  [hJingle], a                           ; $45A5: JumpTable_028_457E $E0 $F2
 .else_45A7_28:
-    ld   de, wOAMBuffer                              ; $45A7: JumpTable_028_457E $11 $00 $C0
-    ld   hl, $452E                              ; $45AA: JumpTable_028_457E $21 $2E $45
+    ld   de, wOAMBuffer                         ; $45A7: JumpTable_028_457E $11 $00 $C0
+    ld   hl, Data_028_452E                      ; $45AA: JumpTable_028_457E $21 $2E $45
     ld   c, $14                                 ; $45AD: JumpTable_028_457E $0E $14
     ldh  a, [hFrameCounter]                     ; $45AF: JumpTable_028_457E $F0 $E7
     inc  a                                      ; $45B1: JumpTable_028_457E $3C
@@ -800,7 +822,7 @@ JumpTable_028_457E:
     and  %00110000                              ; $45B4: JumpTable_028_457E $E6 $30
     jr   nz, .else_45BD_28                      ; $45B6: JumpTable_028_457E $20 $05
 
-    ld   hl, $454E                              ; $45B8: JumpTable_028_457E $21 $4E $45
+    ld   hl, Data_028_454E                      ; $45B8: JumpTable_028_457E $21 $4E $45
     ld   c, $0C                                 ; $45BB: JumpTable_028_457E $0E $0C
 .else_45BD_28:
     ldi  a, [hl]                                ; $45BD: JumpTable_028_457E $2A
@@ -949,7 +971,7 @@ Func_028_4670::
     ld   c, [hl]                                ; $4673: $4E
     inc  [hl]                                   ; $4674: $34
     ld   b, $00                                 ; $4675: $06 $00
-    ld   hl, $4A7C                              ; $4677: $21 $7C $4A
+    ld   hl, Data_028_4A7C                      ; $4677: $21 $7C $4A
     add  hl, bc                                 ; $467A: $09
     ld   a, [hl]                                ; $467B: $7E
     ld   [rSB], a                               ; $467C: $E0 $01
@@ -1569,17 +1591,26 @@ Func_028_4A51::
     call Func_028_47E6.Func_028_47F0            ; $4A78: $CD $F0 $47
     ret                                         ; $4A7B: $C9
 
+Data_028_4A7C::
+    db   $88, $33
 
-    db   $88, $33, $01, $00, $00, $00, $01, $00 ; $4A7C |.3......|
-    db   $00, $00, $02, $00, $04, $00, $04, $00 ; $4A84 |........|
-    db   $00, $00, $04, $00, $00, $00, $08, $00 ; $4A8C |........|
-    db   $00, $00, $08, $00, $00, $00, $0F, $00 ; $4A94 |........|
-    db   $00, $00, $0F, $00, $00, $00           ; $4A9C |......|
+Data_028_4A7E::
+    db   $01, $00, $00, $00, $01, $00, $00, $00   ; $4A7E
+
+Data_028_4A86::
+    db   $02, $00, $04, $00
+
+Data_028_4A8A::
+    db   $04, $00, $00, $00, $04, $00, $00, $00
+    db   $08, $00, $00, $00, $08, $00, $00, $00
+
+Data_028_4A9A::
+    db   $0F, $00, $00, $00, $0F, $00, $00, $00
 
 Func_028_4AA2::
     ld   a, $01                                 ; $4AA2: $3E $01
     ld   d, $00                                 ; $4AA4: $16 $00
-    ld   hl, $4A7E                              ; $4AA6: $21 $7E $4A
+    ld   hl, Data_028_4A7E                      ; $4AA6: $21 $7E $4A
     ld   bc, $08                                ; $4AA9: $01 $08 $00
     jp   Func_028_4A51                          ; $4AAC: $C3 $51 $4A
 
@@ -1589,7 +1620,7 @@ Func_028_4AAF::
     ld   hl, $D1B7                              ; $4AB3: $21 $B7 $D1
     ld   bc, $0C                                ; $4AB6: $01 $0C $00
     call Func_028_4A51                          ; $4AB9: $CD $51 $4A
-    ld   hl, $4A86                              ; $4ABC: $21 $86 $4A
+    ld   hl, Data_028_4A86                      ; $4ABC: $21 $86 $4A
     ld   de, $D1B7                              ; $4ABF: $11 $B7 $D1
     ld   bc, $04                                ; $4AC2: $01 $04 $00
     call Func_028_4B06                          ; $4AC5: $CD $06 $4B
@@ -1652,7 +1683,7 @@ Func_028_4B0F::
     ld   hl, $D1B7                              ; $4B24: $21 $B7 $D1
     ld   bc, $04                                ; $4B27: $01 $04 $00
     call Func_028_4A51                          ; $4B2A: $CD $51 $4A
-    ld   a, [$4A8A]                             ; $4B2D: $FA $8A $4A
+    ld   a, [Data_028_4A8A]                     ; $4B2D: $FA $8A $4A
     ld   [$D1B7], a                             ; $4B30: $EA $B7 $D1
     ld   a, [$D1B5]                             ; $4B33: $FA $B5 $D1
     ld   [$D1B8], a                             ; $4B36: $EA $B8 $D1
@@ -1670,14 +1701,14 @@ Func_028_4B0F::
 Func_028_4B50::
     ld   a, $05                                 ; $4B50: $3E $05
     ld   d, $00                                 ; $4B52: $16 $00
-    ld   hl, $4A9A                              ; $4B54: $21 $9A $4A
+    ld   hl, Data_028_4A9A                      ; $4B54: $21 $9A $4A
     ld   bc, $08                                ; $4B57: $01 $08 $00
     jp   Func_028_4A51                          ; $4B5A: $C3 $51 $4A
 
 Func_028_4B5D::
     ld   a, $06                                 ; $4B5D: $3E $06
     ld   d, $01                                 ; $4B5F: $16 $01
-    ld   hl, $4A8A                              ; $4B61: $21 $8A $4A
+    ld   hl, Data_028_4A8A                      ; $4B61: $21 $8A $4A
     ld   bc, $08                                ; $4B64: $01 $08 $00
     jp   Func_028_4A51                          ; $4B67: $C3 $51 $4A
 
@@ -1713,7 +1744,7 @@ Func_028_4B88::
     ld   a, $01                                 ; $4B8F: $3E $01
     ld   [$D17A], a                             ; $4B91: $EA $7A $D1
     ld   [$D172], a                             ; $4B94: $EA $72 $D1
-    ld   a, [$4A7C]                             ; $4B97: $FA $7C $4A
+    ld   a, [Data_028_4A7C]                     ; $4B97: $FA $7C $4A
     ld   [rSB], a                               ; $4B9A: $E0 $01
     ld   a, $01                                 ; $4B9C: $3E $01
     ld   [rSC], a                               ; $4B9E: $E0 $02

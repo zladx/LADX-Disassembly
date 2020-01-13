@@ -1,5 +1,3 @@
-; Unknow map-loading related code in bank A1
-
 Data_01A_6F1D::
     db   $55, $56, $0A, $0B, $0C, $0D, $0E, $0F   ; $6F1D
     db   $55, $56, $55, $56, $1A, $1B, $1C, $1D   ; $6F25
@@ -75,7 +73,17 @@ Data_01A_70AD::
     db   $04, $04, $04, $04, $04, $04, $04, $04   ; $7105
     db   $04, $04, $04, $04                       ; $710D
 
-Func_01A_7111::
+; Reveal the Angler's Tunnel door under the cascade.
+;
+; Practically, that means overwriting the map BG tiles with
+; water tiles, until the animation is done.
+;
+; Inputs:
+;   de      wEntitiesUnknowTableY + entity index
+;   hFFE8   entity substate 1
+;   $FFCF   unknown
+;   $FFD0   unknown
+AnglersTunnelDoorEntityHandler::
     ; hl = de
     ld   h, d                                     ; $7111: $62
     ld   l, e                                     ; $7112: $6B
@@ -103,8 +111,8 @@ Func_01A_7111::
     jr   z, .jr_01A_7134                          ; $712F: $28 $03
 
     ld   hl, Data_01A_70AD                        ; $7131: $21 $AD $70
-
 .jr_01A_7134
+
     add  hl, de                                   ; $7134: $19
     ld   d, h                                     ; $7135: $54
     ld   e, l                                     ; $7136: $5D
@@ -131,6 +139,7 @@ Func_01A_7111::
     pop  bc                                       ; $7151: $C1
 .gbcEnd
 
+    ; de = (EntityUnknownY - 1) * 10
     ld   a, [hl]                                  ; $7152: $7E
     dec  a                                        ; $7153: $3D
     ld   e, a                                     ; $7154: $5F
@@ -141,19 +150,20 @@ Func_01A_7111::
     add  e                                        ; $715C: $83
     ld   e, a                                     ; $715D: $5F
     ld   d, b                                     ; $715E: $50
+
     ld   hl, Data_01A_6FE5                        ; $715F: $21 $E5 $6F
     ldh  a, [hFFE8]                               ; $7162: $F0 $E8
     and  $01                                      ; $7164: $E6 $01
-    jr   nz, .jr_01A_7173                         ; $7166: $20 $0B
+    jr   nz, .dataSourceEnd                       ; $7166: $20 $0B
 
     ld   hl, Data_01A_6F1D                        ; $7168: $21 $1D $6F
     ldh  a, [hIsGBC]                              ; $716B: $F0 $FE
     and  a                                        ; $716D: $A7
-    jr   z, .jr_01A_7173                          ; $716E: $28 $03
+    jr   z, .dataSourceEnd                        ; $716E: $28 $03
 
     ld   hl, Data_01A_6F81                        ; $7170: $21 $81 $6F
+.dataSourceEnd
 
-.jr_01A_7173
     add  hl, de                                   ; $7173: $19
     push hl                                       ; $7174: $E5
     ld   a, [wRequests]                           ; $7175: $FA $00 $D6

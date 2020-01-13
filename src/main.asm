@@ -171,7 +171,7 @@ OverworldBaseMapDMG::
 incbin "data/base_maps/overworld.dmg.bin"
 OverworldBaseMapGBC::
 incbin "data/base_maps/overworld.cgb.bin"
-include "code/bank1A.asm"
+include "code/entities/anglers_tunnel_door.asm"
 
 section "bank1B",romx[$4000],bank[$1B]
 include "code/audio/music_1.asm"

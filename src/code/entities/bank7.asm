@@ -7308,11 +7308,11 @@ label_007_69D0:
     ld   e, l                                     ; $69E8: $5D
 
     ld   hl, wFarcallParams                       ; $69E9: $21 $01 $DE
-    ld   a, BANK(Func_01A_7111)                   ; $69EC: $3E $1A
+    ld   a, BANK(AnglersTunnelDoorEntityHandler)                   ; $69EC: $3E $1A
     ld   [hl+], a                                 ; $69EE: $22
-    ld   a, HIGH(Func_01A_7111)                   ; $69EF: $3E $71
+    ld   a, HIGH(AnglersTunnelDoorEntityHandler)                   ; $69EF: $3E $71
     ld   [hl+], a                                 ; $69F1: $22
-    ld   a, LOW(Func_01A_7111)                    ; $69F2: $3E $11
+    ld   a, LOW(AnglersTunnelDoorEntityHandler)                    ; $69F2: $3E $11
     ld   [hl+], a                                 ; $69F4: $22
     ld   a, BANK(@)                               ; $69F5: $3E $07
     ld   [hl], a                                  ; $69F7: $77
@@ -7369,6 +7369,9 @@ label_007_6A34:
     call label_27DD                               ; $6A3B: $CD $DD $27
     jp   label_007_7EA4                           ; $6A3E: $C3 $A4 $7E
 
+; Entity handler for:
+;  - Master Stalfos
+;  - Angler's Tunnel cascade
 MasterStalfosEntityHandler::
     ld   hl, wEntitiesUnknowTableP                ; $6A41: $21 $40 $C4
     add  hl, bc                                   ; $6A44: $09

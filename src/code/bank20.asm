@@ -9477,7 +9477,7 @@ Func_020_7679:
     rst  $38                                      ; $77F5: $FF
     db   $f4                                      ; $77F6: $F4
     add  sp, -$17                                 ; $77F7: $E8 $E9
-    ld_long hActiveEntityType, a                              ; $77F9: $EA $EB $FF
+    db   $EA, $EB, $FF
     rst  $38                                      ; $77FC: $FF
     rst  $38                                      ; $77FD: $FF
     rst  $38                                      ; $77FE: $FF

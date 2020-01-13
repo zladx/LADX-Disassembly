@@ -9256,7 +9256,7 @@ jr_01F_7499:
     ldh  a, [$FF74]                               ; $74AB: $F0 $74
     push af                                       ; $74AD: $F5
     ld   [hl], h                                  ; $74AE: $74
-    ld_long a, $FF74                              ; $74AF: $FA $74 $FF
+    db   $FA, $74, $FF
     ld   [hl], h                                  ; $74B2: $74
     inc  b                                        ; $74B3: $04
     ld   [hl], l                                  ; $74B4: $75

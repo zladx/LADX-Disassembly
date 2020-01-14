@@ -27,7 +27,22 @@ section "bank4",romx[$4000],bank[$04]
 include "code/entities/bank4.asm"
 
 section "bank5",romx[$4000],bank[$05]
-include "code/entities/bank5.asm"
+include "code/entities/bow_wow.asm"
+include "code/entities/cucoo.asm"
+include "code/entities/witch.asm"
+include "code/entities/racoon.asm"
+include "code/entities/marin.asm"
+include "code/entities/raft_owner.asm"
+include "code/entities/entity_67.asm"
+include "code/entities/angler_fish.asm"
+include "code/entities/unused_05.asm"
+include "code/entities/evil_eagle.asm"
+include "code/entities/hot_head.asm"
+include "code/entities/dodongo_snake.asm"
+include "code/entities/slime_eel.asm"
+include "code/entities/ghoma.asm"
+include "code/entities/musical_note.asm"
+include "code/entities/animal_d0.asm"
 
 section "bank6",romx[$4000],bank[$06]
 include "code/entities/bank6.asm"

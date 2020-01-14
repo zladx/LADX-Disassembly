@@ -1,7 +1,7 @@
 GenieEntityHandler::
     call label_394D                               ; $4000: $CD $4D $39
     call label_3EE8                               ; $4003: $CD $E8 $3E
-    ld   hl, wEntitiesSubstate1Table              ; $4006: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4006: $21 $B0 $C2
     add  hl, bc                                   ; $4009: $09
     ld   a, [hl]                                  ; $400A: $7E
     JP_TABLE                                      ; $400B: $C7
@@ -30,7 +30,7 @@ GenieState0Handler::
     add  hl, de                                   ; $4030: $19
     sub  $18                                      ; $4031: $D6 $18
     ld   [hl], a                                  ; $4033: $77
-    ld   hl, wEntitiesSubstate1Table              ; $4034: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4034: $21 $B0 $C2
     add  hl, de                                   ; $4037: $19
     ld   [hl], $02                                ; $4038: $36 $02
     ld   hl, wEntitiesTransitionCountdownTable           ; $403A: $21 $E0 $C2
@@ -186,7 +186,7 @@ jr_004_4118:
     add  hl, de                                   ; $4130: $19
     sub  $26                                      ; $4131: $D6 $26
     ld   [hl], a                                  ; $4133: $77
-    ld   hl, wEntitiesSubstate1Table              ; $4134: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4134: $21 $B0 $C2
     add  hl, de                                   ; $4137: $19
     ld   [hl], $02                                ; $4138: $36 $02
     ld   hl, wEntitiesTransitionCountdownTable           ; $413A: $21 $E0 $C2
@@ -592,7 +592,7 @@ jr_004_43B7:
     and  $01                                      ; $43B9: $E6 $01
     jr   nz, jr_004_43DD                          ; $43BB: $20 $20
 
-    ld   hl, wEntitiesSubstate2Table              ; $43BD: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $43BD: $21 $C0 $C2
     add  hl, bc                                   ; $43C0: $09
     ld   e, [hl]                                  ; $43C1: $5E
     ld   d, b                                     ; $43C2: $50
@@ -608,7 +608,7 @@ jr_004_43B7:
     cp   [hl]                                     ; $43D2: $BE
     jr   nz, jr_004_43DD                          ; $43D3: $20 $08
 
-    ld   hl, wEntitiesSubstate2Table              ; $43D5: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $43D5: $21 $C0 $C2
     add  hl, bc                                   ; $43D8: $09
     ld   a, [hl]                                  ; $43D9: $7E
     xor  $01                                      ; $43DA: $EE $01
@@ -660,7 +660,7 @@ jr_004_43FF:
     ld   hl, wEntitiesPosYTable                   ; $441B: $21 $10 $C2
     add  hl, de                                   ; $441E: $19
     ld   [hl], a                                  ; $441F: $77
-    ld   hl, wEntitiesSubstate1Table              ; $4420: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4420: $21 $B0 $C2
     add  hl, de                                   ; $4423: $19
     ld   [hl], $03                                ; $4424: $36 $03
     ld   hl, wEntitiesSpeedZTable                                ; $4426: $21 $20 $C3
@@ -704,7 +704,7 @@ jr_004_4438:
     ld   hl, wEntitiesSpeedZTable                                ; $4463: $21 $20 $C3
     add  hl, de                                   ; $4466: $19
     ld   [hl], $24                                ; $4467: $36 $24
-    ld   hl, wEntitiesSubstate1Table              ; $4469: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4469: $21 $B0 $C2
     add  hl, de                                   ; $446C: $19
     ld   [hl], $04                                ; $446D: $36 $04
     ld   hl, wEntitiesPhysicsFlagsTable                ; $446F: $21 $40 $C3
@@ -805,7 +805,7 @@ func_004_44E9::
     ld   hl, wEntitiesPosYTable                   ; $4501: $21 $10 $C2
     add  hl, de                                   ; $4504: $19
     ld   [hl], a                                  ; $4505: $77
-    ld   hl, wEntitiesSubstate1Table              ; $4506: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4506: $21 $B0 $C2
     add  hl, de                                   ; $4509: $19
     ld   [hl], $02                                ; $450A: $36 $02
     ld   hl, wEntitiesTransitionCountdownTable           ; $450C: $21 $E0 $C2
@@ -941,7 +941,7 @@ jr_004_45A6:
     ld   hl, wEntitiesSpeedZTable                                ; $45D2: $21 $20 $C3
     add  hl, de                                   ; $45D5: $19
     ld   [hl], $24                                ; $45D6: $36 $24
-    ld   hl, wEntitiesSubstate1Table              ; $45D8: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $45D8: $21 $B0 $C2
     add  hl, de                                   ; $45DB: $19
     ld   [hl], $04                                ; $45DC: $36 $04
     ld   hl, wEntitiesPhysicsFlagsTable                ; $45DE: $21 $40 $C3
@@ -1187,7 +1187,7 @@ jr_004_4889:
     ld   hl, wEntitiesPosYTable                   ; $4889: $21 $10 $C2
     add  hl, de                                   ; $488C: $19
     ld   [hl], a                                  ; $488D: $77
-    ld   hl, wEntitiesSubstate1Table              ; $488E: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $488E: $21 $B0 $C2
     add  hl, de                                   ; $4891: $19
     ld   [hl], $01                                ; $4892: $36 $01
     ld   hl, wEntitiesTransitionCountdownTable           ; $4894: $21 $E0 $C2

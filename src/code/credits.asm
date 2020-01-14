@@ -1143,7 +1143,7 @@ CreditsStairsPrepare2Handler::
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $4CF4: $3E $E8
     call SpawnNewEntity_trampoline                ; $4CF6: $CD $86 $3B
 
-    ld   hl, wEntitiesSubstate1Table              ; $4CF9: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4CF9: $21 $B0 $C2
     add  hl, de                                   ; $4CFC: $19
     inc  [hl]                                     ; $4CFD: $34
     ld   a, $50                                   ; $4CFE: $3E $50

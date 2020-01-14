@@ -19,11 +19,11 @@ MovingBlockLeftTopState0Handler::
     ld   hl, wEntitiesPosYTable                   ; $4113: $21 $10 $C2
     add  hl, bc                                   ; $4116: $09
     ld   a, [hl]                                  ; $4117: $7E
-    ld   hl, wEntitiesSubstate2Table              ; $4118: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $4118: $21 $C0 $C2
     add  hl, bc                                   ; $411B: $09
     ld   [hl], a                                  ; $411C: $77
     add  $10                                      ; $411D: $C6 $10
-    ld   hl, wEntitiesSubstate1Table              ; $411F: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $411F: $21 $B0 $C2
     add  hl, bc                                   ; $4122: $09
     ld   [hl], a                                  ; $4123: $77
     jp   IncrementEntityState                     ; $4124: $C3 $12 $3B
@@ -46,7 +46,7 @@ MovingBlockLeftTopState1Handler::
     ld   [hl], b                                  ; $413A: $70
     ld   a, $11                                   ; $413B: $3E $11
     ldh  [hNoiseSfx], a                           ; $413D: $E0 $F4
-    ld   hl, wEntitiesSubstate2Table              ; $413F: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $413F: $21 $C0 $C2
     add  hl, bc                                   ; $4142: $09
     ld   a, [hl]                                  ; $4143: $7E
     ld   hl, wEntitiesPosYTable                         ; $4144: $21 $10 $C2
@@ -60,7 +60,7 @@ jr_015_414C:
     ret                                           ; $414C: $C9
 
 jr_015_414D:
-    ld   hl, wEntitiesSubstate1Table              ; $414D: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $414D: $21 $B0 $C2
     add  hl, bc                                   ; $4150: $09
     ld   a, [hl]                                  ; $4151: $7E
     ld   hl, wEntitiesPosYTable                         ; $4152: $21 $10 $C2
@@ -170,11 +170,11 @@ MovingBlockLeftBottomState0Handler::
     ld   hl, wEntitiesPosYTable                   ; $41DD: $21 $10 $C2
     add  hl, bc                                   ; $41E0: $09
     ld   a, [hl]                                  ; $41E1: $7E
-    ld   hl, wEntitiesSubstate2Table              ; $41E2: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $41E2: $21 $C0 $C2
     add  hl, bc                                   ; $41E5: $09
     ld   [hl], a                                  ; $41E6: $77
     sub  $10                                      ; $41E7: $D6 $10
-    ld   hl, wEntitiesSubstate1Table              ; $41E9: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $41E9: $21 $B0 $C2
     add  hl, bc                                   ; $41EC: $09
     ld   [hl], a                                  ; $41ED: $77
     jp   IncrementEntityState                     ; $41EE: $C3 $12 $3B
@@ -197,7 +197,7 @@ MovingBlockLeftBottomState1Handler::
     ld   [hl], b                                  ; $4204: $70
     ld   a, $11                                   ; $4205: $3E $11
     ldh  [hNoiseSfx], a                           ; $4207: $E0 $F4
-    ld   hl, wEntitiesSubstate2Table              ; $4209: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $4209: $21 $C0 $C2
     add  hl, bc                                   ; $420C: $09
     ld   a, [hl]                                  ; $420D: $7E
     ld   hl, wEntitiesPosYTable                         ; $420E: $21 $10 $C2
@@ -211,7 +211,7 @@ jr_015_4216:
     ret                                           ; $4216: $C9
 
 jr_015_4217:
-    ld   hl, wEntitiesSubstate1Table              ; $4217: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4217: $21 $B0 $C2
     add  hl, bc                                   ; $421A: $09
     ld   a, [hl]                                  ; $421B: $7E
     ld   hl, wEntitiesPosYTable                         ; $421C: $21 $10 $C2
@@ -255,11 +255,11 @@ MovingBlockBottomLeftState0Handler::
     ld   hl, wEntitiesPosXTable                   ; $424F: $21 $00 $C2
     add  hl, bc                                   ; $4252: $09
     ld   a, [hl]                                  ; $4253: $7E
-    ld   hl, wEntitiesSubstate2Table              ; $4254: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $4254: $21 $C0 $C2
     add  hl, bc                                   ; $4257: $09
     ld   [hl], a                                  ; $4258: $77
     add  $10                                      ; $4259: $C6 $10
-    ld   hl, wEntitiesSubstate1Table              ; $425B: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $425B: $21 $B0 $C2
     add  hl, bc                                   ; $425E: $09
     ld   [hl], a                                  ; $425F: $77
     jp   IncrementEntityState                     ; $4260: $C3 $12 $3B
@@ -282,7 +282,7 @@ MovingBlockBottomLeftState1Handler::
     ld   [hl], b                                  ; $4276: $70
     ld   a, $11                                   ; $4277: $3E $11
     ldh  [hNoiseSfx], a                           ; $4279: $E0 $F4
-    ld   hl, wEntitiesSubstate2Table              ; $427B: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $427B: $21 $C0 $C2
     add  hl, bc                                   ; $427E: $09
     ld   a, [hl]                                  ; $427F: $7E
     ld   hl, wEntitiesPosXTable                         ; $4280: $21 $00 $C2
@@ -296,7 +296,7 @@ jr_015_4288:
     ret                                           ; $4288: $C9
 
 jr_015_4289:
-    ld   hl, wEntitiesSubstate1Table              ; $4289: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4289: $21 $B0 $C2
     add  hl, bc                                   ; $428C: $09
     ld   a, [hl]                                  ; $428D: $7E
     ld   hl, wEntitiesPosXTable                         ; $428E: $21 $00 $C2
@@ -340,11 +340,11 @@ MovingBlockBottomRightState0Handler::
     ld   hl, wEntitiesPosXTable                   ; $42C1: $21 $00 $C2
     add  hl, bc                                   ; $42C4: $09
     ld   a, [hl]                                  ; $42C5: $7E
-    ld   hl, wEntitiesSubstate2Table              ; $42C6: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $42C6: $21 $C0 $C2
     add  hl, bc                                   ; $42C9: $09
     ld   [hl], a                                  ; $42CA: $77
     sub  $10                                      ; $42CB: $D6 $10
-    ld   hl, wEntitiesSubstate1Table              ; $42CD: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $42CD: $21 $B0 $C2
     add  hl, bc                                   ; $42D0: $09
     ld   [hl], a                                  ; $42D1: $77
     jp   IncrementEntityState                     ; $42D2: $C3 $12 $3B
@@ -367,7 +367,7 @@ MovingBlockBottomRightState1Handler::
     ld   [hl], b                                  ; $42E8: $70
     ld   a, $11                                   ; $42E9: $3E $11
     ldh  [hNoiseSfx], a                           ; $42EB: $E0 $F4
-    ld   hl, wEntitiesSubstate2Table              ; $42ED: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $42ED: $21 $C0 $C2
     add  hl, bc                                   ; $42F0: $09
     ld   a, [hl]                                  ; $42F1: $7E
     ld   hl, wEntitiesPosXTable                         ; $42F2: $21 $00 $C2
@@ -381,7 +381,7 @@ jr_015_42FA:
     ret                                           ; $42FA: $C9
 
 jr_015_42FB:
-    ld   hl, wEntitiesSubstate1Table              ; $42FB: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $42FB: $21 $B0 $C2
     add  hl, bc                                   ; $42FE: $09
     ld   a, [hl]                                  ; $42FF: $7E
     ld   hl, wEntitiesPosXTable                         ; $4300: $21 $00 $C2

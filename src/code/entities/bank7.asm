@@ -407,7 +407,7 @@ FishermanUnderBridgeEntityHandler::
     jp   nz, label_007_7E09                       ; $4286: $C2 $09 $7E
 
     cp   $02                                      ; $4289: $FE $02
-    jp   z, $45F7                                 ; $428B: $CA $F7 $45
+    jp   z, label_007_45F7                        ; $428B: $CA $F7 $45
 
     and  a                                        ; $428E: $A7
     jr   nz, jr_007_42C4                          ; $428F: $20 $33
@@ -976,7 +976,10 @@ func_007_4594:
     nop                                           ; $45F0: $00
     ld   bc, $202                                 ; $45F1: $01 $02 $02
     ld   [bc], a                                  ; $45F4: $02
-    ld   bc, $2100                                ; $45F5: $01 $00 $21
+    db   $01, $00                                 ; $45F5: $01 $00
+
+label_007_45F7:
+    db   $21
     ret  nc                                       ; $45F8: $D0
 
     jp   label_007_7E09                           ; $45F9: $C3 $09 $7E
@@ -1558,7 +1561,7 @@ label_007_490F:
     call func_007_48FD                            ; $4953: $CD $FD $48
     jp   IncrementEntityState                     ; $4956: $C3 $12 $3B
 
-    call $49DC                                    ; $4959: $CD $DC $49
+    call func_007_49DC                            ; $4959: $CD $DC $49
     call func_007_7D96                            ; $495C: $CD $96 $7D
     call func_007_7E0A                            ; $495F: $CD $0A $7E
     call func_007_7E43                            ; $4962: $CD $43 $7E
@@ -1588,7 +1591,7 @@ jr_007_4977:
     ld   a, e                                     ; $4988: $7B
     add  $02                                      ; $4989: $C6 $02
     ldh  [hActiveEntitySpriteVariant], a               ; $498B: $E0 $F1
-    call $49DC                                    ; $498D: $CD $DC $49
+    call func_007_49DC                            ; $498D: $CD $DC $49
     call func_007_7D96                            ; $4990: $CD $96 $7D
     call func_007_7D43                            ; $4993: $CD $43 $7D
     ret  nc                                       ; $4996: $D0
@@ -1627,7 +1630,10 @@ jr_007_4977:
     ld   a, b                                     ; $49D6: $78
     ld   bc, $800                            ; $49D7: $01 $00 $08
     ld   a, d                                     ; $49DA: $7A
-    ld   bc, $F1F0                                ; $49DB: $01 $F0 $F1
+    db   $01                                      ; $49DB: $01
+
+func_007_49DC:
+    db   $F0, $F1
     rla                                           ; $49DE: $17
     rla                                           ; $49DF: $17
     rla                                           ; $49E0: $17
@@ -3784,7 +3790,7 @@ jr_007_5622:
 WingedOctorockEntityHandler::
     ld   de, $562D                                ; $564D: $11 $2D $56
     call RenderAnimatedActiveEntity                               ; $5650: $CD $C0 $3B
-    call $5805                                    ; $5653: $CD $05 $58
+    call func_007_5805                            ; $5653: $CD $05 $58
     call func_007_7D96                            ; $5656: $CD $96 $7D
     ld   hl, wEntitiesUnknowTableT                ; $5659: $21 $10 $C4
     add  hl, bc                                   ; $565C: $09
@@ -4072,8 +4078,10 @@ jr_007_57F4:
     nop                                           ; $5801: $00
     inc  c                                        ; $5802: $0C
     ld   [hl+], a                                 ; $5803: $22
-    jr   nz, jr_007_5827                          ; $5804: $20 $21
+    db   $20                                      ; $5804: $20
 
+func_007_5805:
+    db   $21
     ret  nz                                       ; $5806: $C0
 
     jp   nz, label_007_7E09                       ; $5807: $C2 $09 $7E
@@ -6140,7 +6148,7 @@ SideViewPlatformVerticalEntityHandler::
 
     ldh  a, [hActiveEntityType]                     ; $6372: $F0 $EB
     cp   $A4                                      ; $6374: $FE $A4
-    jp   z, $63FB                                 ; $6376: $CA $FB $63
+    jp   z, label_007_63FB                        ; $6376: $CA $FB $63
 
     ld   hl, wEntitiesPrivateState1Table          ; $6379: $21 $B0 $C2
     add  hl, bc                                   ; $637C: $09
@@ -6224,7 +6232,10 @@ jr_007_63F6:
     ret                                           ; $63F6: $C9
 
     ld   bc, $6FF                                 ; $63F7: $01 $FF $06
-    ld   a, [$B021]                               ; $63FA: $FA $21 $B0
+    db   $FA                                      ; $63FA: $FA
+
+label_007_63FB:
+    db   $21, $B0
     jp   nz, label_007_5E09                       ; $63FD: $C2 $09 $5E
 
     ld   d, b                                     ; $6400: $50
@@ -6450,7 +6461,10 @@ jr_007_650D:
     ld   d, e                                     ; $651D: $53
     ld   bc, $209A                                ; $651E: $01 $9A $20
     ld   d, e                                     ; $6521: $53
-    ld   bc, $E0AF                                ; $6522: $01 $AF $E0
+    db   $01                                      ; $6522: $01
+
+label_007_6523:
+    db   $AF, $E0
     sub  [hl]                                     ; $6525: $96
     ldh  [hBaseScrollY], a                        ; $6526: $E0 $97
     ld   [wBGOriginLow], a                        ; $6528: $EA $2F $C1
@@ -6584,7 +6598,7 @@ GoombaEntityHandler::
     add  hl, bc                                   ; $65DD: $09
     ld   a, [hl]                                  ; $65DE: $7E
     and  a                                        ; $65DF: $A7
-    jp   nz, $6523                                ; $65E0: $C2 $23 $65
+    jp   nz, label_007_6523                       ; $65E0: $C2 $23 $65
 
     ld   de, $65CE                                ; $65E3: $11 $CE $65
     call RenderAnimatedActiveEntity                               ; $65E6: $CD $C0 $3B

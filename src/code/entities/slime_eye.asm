@@ -205,7 +205,7 @@ jr_004_4AA5:
     rra                                           ; $4AAD: $1F
     and  $01                                      ; $4AAE: $E6 $01
     call SetEntitySpriteVariant                   ; $4AB0: $CD $0C $3B
-    ld   hl, wEntitiesSubstate1Table              ; $4AB3: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4AB3: $21 $B0 $C2
     add  hl, bc                                   ; $4AB6: $09
     ld   a, [hl]                                  ; $4AB7: $7E
     and  a                                        ; $4AB8: $A7
@@ -217,7 +217,7 @@ jr_004_4AA5:
     jr   nz, jr_004_4ACB                          ; $4AC2: $20 $07
 
     ld   [hl], $28                                ; $4AC4: $36 $28
-    ld   hl, wEntitiesSubstate1Table              ; $4AC6: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4AC6: $21 $B0 $C2
     add  hl, bc                                   ; $4AC9: $09
     dec  [hl]                                     ; $4ACA: $35
 
@@ -256,7 +256,7 @@ jr_004_4AEF:
 
     call IsEntityUnknownFZero                                ; $4B02: $CD $00 $0C
     ld   [hl], $50                                ; $4B05: $36 $50
-    ld   hl, wEntitiesSubstate1Table              ; $4B07: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4B07: $21 $B0 $C2
     add  hl, bc                                   ; $4B0A: $09
     ld   a, [hl]                                  ; $4B0B: $7E
     cp   $04                                      ; $4B0C: $FE $04

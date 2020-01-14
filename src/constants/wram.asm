@@ -453,14 +453,14 @@ wEntitiesCollisionsTable:: ; C2A0
 ;  - Butterfly: stores a delta X to move closer to Link
 ;  - Genie: store the substate
 ;  - LikeLike: swallowed item
-wEntitiesSubstate1Table:: ; C2B0
+wEntitiesPrivateState1Table:: ; C2B0
   ds $10
 
 ; Entity-specific state.
 ;
 ; Examples:
 ;  - Butterfly: stores a delta Y to move closer to Link
-wEntitiesSubstate2Table:: ; C2C0
+wEntitiesPrivateState2Table:: ; C2C0
   ds $10
 
 wEntitiesUnknownTableD:: ; C2D0
@@ -584,6 +584,7 @@ wEntitiesFlashCountdownTable:: ; C420
 wEntitiesUnknowTableH::  ; C430
   ds $10
 
+; Entities-specific private state?
 wEntitiesUnknowTableP:: ; C440
   ds $10
 

@@ -94,7 +94,7 @@ func_005_40AF:
     ld   a, [hl]                                  ; $40B3: $7E
     add  $04                                      ; $40B4: $C6 $04
     ld   [hl], a                                  ; $40B6: $77
-    ld   hl, wEntitiesSubstate1Table              ; $40B7: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $40B7: $21 $B0 $C2
     add  hl, bc                                   ; $40BA: $09
     ld   [hl], a                                  ; $40BB: $77
     ld   e, $10                                   ; $40BC: $1E $10
@@ -110,7 +110,7 @@ jr_005_40C1:
     ld   a, [hl]                                  ; $40C9: $7E
     add  $08                                      ; $40CA: $C6 $08
     ld   [hl], a                                  ; $40CC: $77
-    ld   hl, wEntitiesSubstate2Table              ; $40CD: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $40CD: $21 $C0 $C2
     add  hl, bc                                   ; $40D0: $09
     ld   [hl], a                                  ; $40D1: $77
     ld   hl, wEntitiesPosZTable                   ; $40D2: $21 $10 $C3
@@ -173,20 +173,20 @@ jr_005_4127:
 
 jr_005_4129:
     ldh  a, [hScratch0]                           ; $4129: $F0 $D7
-    ld   hl, wEntitiesSubstate1Table              ; $412B: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $412B: $21 $B0 $C2
     add  hl, bc                                   ; $412E: $09
     ld   [hl], a                                  ; $412F: $77
     ldh  a, [hScratch1]                           ; $4130: $F0 $D8
-    ld   hl, wEntitiesSubstate2Table              ; $4132: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $4132: $21 $C0 $C2
     add  hl, bc                                   ; $4135: $09
     ld   [hl], a                                  ; $4136: $77
 
 jr_005_4137:
-    ld   hl, wEntitiesSubstate1Table              ; $4137: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4137: $21 $B0 $C2
     add  hl, bc                                   ; $413A: $09
     ld   a, [hl]                                  ; $413B: $7E
     ld   [$D150], a                               ; $413C: $EA $50 $D1
-    ld   hl, wEntitiesSubstate2Table              ; $413F: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $413F: $21 $C0 $C2
     add  hl, bc                                   ; $4142: $09
     ld   a, [hl]                                  ; $4143: $7E
     ld   [$D151], a                               ; $4144: $EA $51 $D1
@@ -341,7 +341,7 @@ jr_005_4227:
 
 func_005_4228:
     ld   e, $01                                   ; $4228: $1E $01
-    ld   hl, wEntitiesSubstate1Table              ; $422A: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $422A: $21 $B0 $C2
     add  hl, bc                                   ; $422D: $09
     ld   a, [hl]                                  ; $422E: $7E
     ld   hl, wEntitiesPosXTable                   ; $422F: $21 $00 $C2
@@ -356,7 +356,7 @@ func_005_4228:
     inc  e                                        ; $423D: $1C
 
 jr_005_423E:
-    ld   hl, wEntitiesSubstate2Table              ; $423E: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $423E: $21 $C0 $C2
     add  hl, bc                                   ; $4241: $09
     ld   a, [hl]                                  ; $4242: $7E
     ld   hl, wEntitiesPosYTable                   ; $4243: $21 $10 $C2
@@ -706,11 +706,11 @@ func_005_43FE:
     or   [hl]                                     ; $440F: $B6
     jp   z, jr_005_44CA                           ; $4410: $CA $CA $44
 
-    ld   hl, wEntitiesSubstate1Table              ; $4413: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4413: $21 $B0 $C2
     add  hl, bc                                   ; $4416: $09
     ld   a, [hl]                                  ; $4417: $7E
     ld   [$D106], a                               ; $4418: $EA $06 $D1
-    ld   hl, wEntitiesSubstate2Table              ; $441B: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $441B: $21 $C0 $C2
     add  hl, bc                                   ; $441E: $09
     ld   a, [hl]                                  ; $441F: $7E
     ld   [$D116], a                               ; $4420: $EA $16 $D1
@@ -1020,7 +1020,7 @@ jr_005_45A8:
     call_open_dialog $08F                         ; $45A8
 
 jr_005_45AD:
-    ld   hl, wEntitiesSubstate1Table              ; $45AD: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $45AD: $21 $B0 $C2
     add  hl, bc                                   ; $45B0: $09
     ld   a, [hl]                                  ; $45B1: $7E
     cp   $23                                      ; $45B2: $FE $23
@@ -1213,7 +1213,7 @@ jr_005_46D2:
 jr_005_46E9:
     xor  $01                                      ; $46E9: $EE $01
     ld   [hl], a                                  ; $46EB: $77
-    ld   hl, wEntitiesSubstate1Table              ; $46EC: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $46EC: $21 $B0 $C2
     add  hl, bc                                   ; $46EF: $09
     ld   a, [hl]                                  ; $46F0: $7E
     cp   $23                                      ; $46F1: $FE $23
@@ -1678,7 +1678,7 @@ func_005_4A17:
     ld   hl, wEntitiesUnknownTableD               ; $4A2C: $21 $D0 $C2
     add  hl, bc                                   ; $4A2F: $09
     ld   e, [hl]                                  ; $4A30: $5E
-    ld   hl, wEntitiesSubstate2Table              ; $4A31: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $4A31: $21 $C0 $C2
     add  hl, bc                                   ; $4A34: $09
     ld   a, [hl]                                  ; $4A35: $7E
     add  e                                        ; $4A36: $83
@@ -1914,7 +1914,7 @@ func_005_4B41:
     cp   $24                                      ; $4B7C: $FE $24
     jr   nc, jr_005_4B86                          ; $4B7E: $30 $06
 
-    ld   hl, wEntitiesSubstate1Table              ; $4B80: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4B80: $21 $B0 $C2
     add  hl, bc                                   ; $4B83: $09
     ld   [hl], $80                                ; $4B84: $36 $80
 
@@ -1946,7 +1946,7 @@ jr_005_4B9D:
     call SetEntitySpriteVariant                   ; $4BA8: $CD $0C $3B
 
 jr_005_4BAB:
-    ld   hl, wEntitiesSubstate1Table              ; $4BAB: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $4BAB: $21 $B0 $C2
     add  hl, bc                                   ; $4BAE: $09
     ld   a, [hl]                                  ; $4BAF: $7E
     and  a                                        ; $4BB0: $A7
@@ -1964,7 +1964,7 @@ Data_005_4BBF::
     db   $78, $00
 
 label_005_4BC1:
-    ld   hl, wEntitiesSubstate2Table              ; $4BC1: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $4BC1: $21 $C0 $C2
     add  hl, bc                                   ; $4BC4: $09
     ld   a, [hl]                                  ; $4BC5: $7E
     and  a                                        ; $4BC6: $A7
@@ -2262,7 +2262,7 @@ jr_005_4D5D:
     ld   hl, wEntitiesPosYTable                   ; $4D79: $21 $10 $C2
     add  hl, de                                   ; $4D7C: $19
     ld   [hl], a                                  ; $4D7D: $77
-    ld   hl, wEntitiesSubstate2Table              ; $4D7E: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $4D7E: $21 $C0 $C2
     add  hl, de                                   ; $4D81: $19
     ld   [hl], $01                                ; $4D82: $36 $01
     ld   hl, wEntitiesSpeedXTable                 ; $4D84: $21 $40 $C2
@@ -3558,7 +3558,7 @@ func_005_5584:
     jr   z, @+$3C                                 ; $558E: $28 $3A
 
     ld   [$C1C6], a                               ; $5590: $EA $C6 $C1
-    ld   hl, wEntitiesSubstate2Table              ; $5593: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $5593: $21 $C0 $C2
     add  hl, bc                                   ; $5596: $09
     ld   a, [hl]                                  ; $5597: $7E
     JP_TABLE                                      ; $5598
@@ -3789,7 +3789,7 @@ func_005_56F9::
     call GetRandomByte                            ; $5706: $CD $0D $28
     and  $1F                                      ; $5709: $E6 $1F
     add  $60                                      ; $570B: $C6 $60
-    ld   hl, wEntitiesSubstate1Table              ; $570D: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $570D: $21 $B0 $C2
     add  hl, bc                                   ; $5710: $09
     ld   [hl], a                                  ; $5711: $77
     ret                                           ; $5712: $C9
@@ -3867,7 +3867,7 @@ func_005_576E:
     add  hl, bc                                   ; $577D: $09
     ld   [hl], $20                                ; $577E: $36 $20
     call func_005_7ABE                            ; $5780: $CD $BE $7A
-    ld   hl, wEntitiesSubstate1Table              ; $5783: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $5783: $21 $B0 $C2
     add  hl, bc                                   ; $5786: $09
     ldh  a, [wActiveEntityPosX]                   ; $5787: $F0 $EE
     cp   [hl]                                     ; $5789: $BE
@@ -4166,7 +4166,7 @@ Data_005_5A7D::
     db   $C9, $10, $F0
 
 EvilEagleEntityHandler::
-    ld   hl, wEntitiesSubstate1Table              ; $5A80: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $5A80: $21 $B0 $C2
     add  hl, bc                                   ; $5A83: $09
     ld   a, [hl]                                  ; $5A84: $7E
     JP_TABLE                                      ; $5A85
@@ -4215,7 +4215,7 @@ jr_005_5AA7:
     add  hl, de                                   ; $5AC5: $19
     ld   [hl], a                                  ; $5AC6: $77
     pop  bc                                       ; $5AC7: $C1
-    ld   hl, wEntitiesSubstate1Table              ; $5AC8: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $5AC8: $21 $B0 $C2
     add  hl, de                                   ; $5ACB: $19
     ld   [hl], $02                                ; $5ACC: $36 $02
     ldh  a, [hFFE8]                               ; $5ACE: $F0 $E8
@@ -4263,7 +4263,7 @@ func_005_5B03:
     ld   hl, wEntitiesPosYTable                   ; $5B14: $21 $10 $C2
     add  hl, de                                   ; $5B17: $19
     ld   [hl], $18                                ; $5B18: $36 $18
-    ld   hl, wEntitiesSubstate1Table              ; $5B1A: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $5B1A: $21 $B0 $C2
     add  hl, de                                   ; $5B1D: $19
     ld   [hl], $01                                ; $5B1E: $36 $01
     ld   hl, wEntitiesSpeedXTable                 ; $5B20: $21 $40 $C2
@@ -4406,7 +4406,7 @@ func_005_5BEC:
     ld   a, [hl]                                  ; $5C09: $7E
     xor  $04                                      ; $5C0A: $EE $04
     ld   [hl], a                                  ; $5C0C: $77
-    ld   hl, wEntitiesSubstate2Table              ; $5C0D: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $5C0D: $21 $C0 $C2
     add  hl, bc                                   ; $5C10: $09
     inc  [hl]                                     ; $5C11: $34
     ld   a, [hl]                                  ; $5C12: $7E
@@ -4900,7 +4900,7 @@ jr_005_5EB0:
     call SpawnNewEntityInRange_trampoline         ; $5EC4: $CD $98 $3B
     jr   c, jr_005_5F2F                           ; $5EC7: $38 $66
 
-    ld   hl, wEntitiesSubstate1Table              ; $5EC9: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $5EC9: $21 $B0 $C2
     add  hl, de                                   ; $5ECC: $19
     ld   [hl], $03                                ; $5ECD: $36 $03
     push bc                                       ; $5ECF: $C5
@@ -5413,7 +5413,7 @@ func_005_6302:
 HotHeadEntityHandler::
     call label_394D                               ; $6314: $CD $4D $39
     call label_3EE8                               ; $6317: $CD $E8 $3E
-    ld   hl, wEntitiesSubstate1Table              ; $631A: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $631A: $21 $B0 $C2
     add  hl, bc                                   ; $631D: $09
     ld   a, [hl]                                  ; $631E: $7E
     and  a                                        ; $631F: $A7
@@ -5433,7 +5433,7 @@ jr_005_632F:
     cp   $01                                      ; $6334: $FE $01
     jr   nz, jr_005_6375                          ; $6336: $20 $3D
 
-    ld   hl, wEntitiesSubstate2Table              ; $6338: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $6338: $21 $C0 $C2
     add  hl, bc                                   ; $633B: $09
     ld   a, [hl]                                  ; $633C: $7E
     JP_TABLE                                      ; $633D
@@ -5445,7 +5445,7 @@ func_005_6342:
     ld   [hl], $FF                                ; $6345: $36 $FF
 
 label_005_6347:
-    ld   hl, wEntitiesSubstate2Table              ; $6347: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $6347: $21 $C0 $C2
     add  hl, bc                                   ; $634A: $09
     inc  [hl]                                     ; $634B: $34
     ret                                           ; $634C: $C9
@@ -5832,7 +5832,7 @@ jr_005_6581:
     call SpawnNewEntity_trampoline                ; $6585: $CD $86 $3B
     jr   c, jr_005_65D3                           ; $6588: $38 $49
 
-    ld   hl, wEntitiesSubstate1Table              ; $658A: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $658A: $21 $B0 $C2
     add  hl, de                                   ; $658D: $19
     ld   [hl], $03                                ; $658E: $36 $03
     push bc                                       ; $6590: $C5
@@ -5887,7 +5887,7 @@ func_005_65D9:
     call SpawnNewEntity_trampoline                ; $65DB: $CD $86 $3B
     jr   c, @+$22                                 ; $65DE: $38 $20
 
-    ld   hl, wEntitiesSubstate1Table              ; $65E0: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $65E0: $21 $B0 $C2
     add  hl, de                                   ; $65E3: $19
     ld   [hl], $01                                ; $65E4: $36 $01
     ldh  a, [hScratch0]                           ; $65E6: $F0 $D7
@@ -5926,7 +5926,7 @@ jr_005_6613:
     call SpawnNewEntity_trampoline                ; $6617: $CD $86 $3B
     jr   c, jr_005_665F                           ; $661A: $38 $43
 
-    ld   hl, wEntitiesSubstate1Table              ; $661C: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $661C: $21 $B0 $C2
     add  hl, de                                   ; $661F: $19
     ld   [hl], $02                                ; $6620: $36 $02
     push bc                                       ; $6622: $C5
@@ -6151,7 +6151,7 @@ label_005_67EA:
     ld   [hl], a                                  ; $6807: $77
     call GetEntityTransitionCountdown             ; $6808: $CD $05 $0C
     ld   [hl], $0F                                ; $680B: $36 $0F
-    ld   hl, wEntitiesSubstate1Table              ; $680D: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $680D: $21 $B0 $C2
     add  hl, bc                                   ; $6810: $09
     ld   [hl], $02                                ; $6811: $36 $02
     ld   a, $FF                                   ; $6813: $3E $FF
@@ -6264,13 +6264,13 @@ jr_005_689B:
     ld   hl, Data_005_6867                        ; $68AE: $21 $67 $68
     add  hl, de                                   ; $68B1: $19
     ld   a, [hl]                                  ; $68B2: $7E
-    ld   hl, wEntitiesSubstate1Table              ; $68B3: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $68B3: $21 $B0 $C2
     add  hl, bc                                   ; $68B6: $09
     ld   [hl], a                                  ; $68B7: $77
     ld   hl, Data_005_686B                        ; $68B8: $21 $6B $68
     add  hl, de                                   ; $68BB: $19
     ld   a, [hl]                                  ; $68BC: $7E
-    ld   hl, wEntitiesSubstate2Table              ; $68BD: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $68BD: $21 $C0 $C2
     add  hl, bc                                   ; $68C0: $09
     ld   [hl], a                                  ; $68C1: $77
     ld   hl, wEntitiesLoadOrderTable              ; $68C2: $21 $60 $C4
@@ -6546,7 +6546,7 @@ func_005_6A5F:
     ld   hl, wEntitiesLoadOrderTable              ; $6A67: $21 $60 $C4
     add  hl, bc                                   ; $6A6A: $09
     ld   e, [hl]                                  ; $6A6B: $5E
-    ld   hl, wEntitiesSubstate1Table              ; $6A6C: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $6A6C: $21 $B0 $C2
     add  hl, bc                                   ; $6A6F: $09
     ld   c, [hl]                                  ; $6A70: $4E
     sla  e                                        ; $6A71: $CB $23
@@ -6591,7 +6591,7 @@ func_005_6AA5:
     ld   hl, wEntitiesLoadOrderTable              ; $6AAD: $21 $60 $C4
     add  hl, bc                                   ; $6AB0: $09
     ld   e, [hl]                                  ; $6AB1: $5E
-    ld   hl, wEntitiesSubstate2Table              ; $6AB2: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $6AB2: $21 $C0 $C2
     add  hl, bc                                   ; $6AB5: $09
     ld   c, [hl]                                  ; $6AB6: $4E
     sla  e                                        ; $6AB7: $CB $23
@@ -6736,7 +6736,7 @@ SlimeEelEntityHandler::
     call label_394D                               ; $6CDC: $CD $4D $39
     call label_3EE8                               ; $6CDF: $CD $E8 $3E
     call label_C56                                ; $6CE2: $CD $56 $0C
-    ld   hl, wEntitiesSubstate1Table              ; $6CE5: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $6CE5: $21 $B0 $C2
     add  hl, bc                                   ; $6CE8: $09
     ld   a, [hl]                                  ; $6CE9: $7E
     JP_TABLE                                      ; $6CEA
@@ -7084,7 +7084,7 @@ jr_005_6EB0:
     ld   [$D788], a                               ; $6F31: $EA $88 $D7
     ld   a, $5D                                   ; $6F34: $3E $5D
     call SpawnNewEntity_trampoline                ; $6F36: $CD $86 $3B
-    ld   hl, wEntitiesSubstate1Table              ; $6F39: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $6F39: $21 $B0 $C2
     add  hl, de                                   ; $6F3C: $19
     ld   [hl], $01                                ; $6F3D: $36 $01
     ld   hl, wEntitiesPosXTable                   ; $6F3F: $21 $00 $C2
@@ -7341,7 +7341,7 @@ jr_005_70F6:
     ld   hl, wEntitiesSpriteVariantTable          ; $7109: $21 $B0 $C3
     add  hl, de                                   ; $710C: $19
     ld   [hl], $FF                                ; $710D: $36 $FF
-    ld   hl, wEntitiesSubstate1Table              ; $710F: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $710F: $21 $B0 $C2
     add  hl, de                                   ; $7112: $19
     ld   [hl], $01                                ; $7113: $36 $01
     ld   hl, wEntitiesStateTable                  ; $7115: $21 $90 $C2
@@ -7357,7 +7357,7 @@ jr_005_70F6:
     ld   hl, wEntitiesPosXTable                   ; $7127: $21 $00 $C2
     add  hl, de                                   ; $712A: $19
     ld   [hl], a                                  ; $712B: $77
-    ld   hl, wEntitiesSubstate2Table              ; $712C: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $712C: $21 $C0 $C2
     add  hl, de                                   ; $712F: $19
     ld   [hl], a                                  ; $7130: $77
     ld   hl, Data_005_70E3                        ; $7131: $21 $E3 $70
@@ -7413,7 +7413,7 @@ jr_005_7167:
     ld   hl, wEntitiesUnknowTableR                ; $717A: $21 $90 $C3
     add  hl, bc                                   ; $717D: $09
     ld   e, [hl]                                  ; $717E: $5E
-    ld   hl, wEntitiesSubstate2Table              ; $717F: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $717F: $21 $C0 $C2
     add  hl, bc                                   ; $7182: $09
     ld   a, [hl]                                  ; $7183: $7E
     add  e                                        ; $7184: $83
@@ -7448,7 +7448,7 @@ jr_005_719A:
     ld   hl, Data_005_7051                        ; $71AC: $21 $51 $70
     add  hl, de                                   ; $71AF: $19
     ld   a, [hl]                                  ; $71B0: $7E
-    ld   hl, wEntitiesSubstate2Table              ; $71B1: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $71B1: $21 $C0 $C2
     add  hl, bc                                   ; $71B4: $09
     add  [hl]                                     ; $71B5: $86
     and  $1F                                      ; $71B6: $E6 $1F
@@ -7474,7 +7474,7 @@ jr_005_719A:
     ld   hl, Data_005_7071                        ; $71D4: $21 $71 $70
     add  hl, de                                   ; $71D7: $19
     ld   a, [hl]                                  ; $71D8: $7E
-    ld   hl, wEntitiesSubstate2Table              ; $71D9: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $71D9: $21 $C0 $C2
     add  hl, bc                                   ; $71DC: $09
     add  [hl]                                     ; $71DD: $86
     and  $1F                                      ; $71DE: $E6 $1F
@@ -7505,7 +7505,7 @@ jr_005_719A:
     ld   hl, Data_005_7091                        ; $7203: $21 $91 $70
     add  hl, de                                   ; $7206: $19
     ld   a, [hl]                                  ; $7207: $7E
-    ld   hl, wEntitiesSubstate2Table              ; $7208: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $7208: $21 $C0 $C2
     add  hl, bc                                   ; $720B: $09
     add  [hl]                                     ; $720C: $86
     and  $1F                                      ; $720D: $E6 $1F
@@ -7537,7 +7537,7 @@ jr_005_719A:
     ld   hl, Data_005_70B1                        ; $7233: $21 $B1 $70
     add  hl, de                                   ; $7236: $19
     ld   a, [hl]                                  ; $7237: $7E
-    ld   hl, wEntitiesSubstate2Table              ; $7238: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $7238: $21 $C0 $C2
     add  hl, bc                                   ; $723B: $09
     add  [hl]                                     ; $723C: $86
     and  $1F                                      ; $723D: $E6 $1F
@@ -7564,7 +7564,7 @@ jr_005_719A:
     pop  de                                       ; $725A: $D1
     ld   a, $01                                   ; $725B: $3E $01
     call func_005_7283                            ; $725D: $CD $83 $72
-    ld   hl, wEntitiesSubstate2Table              ; $7260: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $7260: $21 $C0 $C2
     add  hl, bc                                   ; $7263: $09
     ld   e, [hl]                                  ; $7264: $5E
     ld   d, b                                     ; $7265: $50
@@ -7799,7 +7799,7 @@ jr_005_7395:
     and  $01                                      ; $73E2: $E6 $01
     jr   nz, jr_005_7414                          ; $73E4: $20 $2E
 
-    ld   hl, wEntitiesSubstate1Table              ; $73E6: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $73E6: $21 $B0 $C2
     add  hl, bc                                   ; $73E9: $09
     ld   [hl], $02                                ; $73EA: $36 $02
     call label_BFB                                ; $73EC: $CD $FB $0B
@@ -7930,7 +7930,7 @@ jr_005_74C5:
     call SetEntitySpriteVariant                   ; $74C5: $CD $0C $3B
     ldh  a, [hLinkPositionX]                      ; $74C8: $F0 $98
     push af                                       ; $74CA: $F5
-    ld   hl, wEntitiesSubstate2Table              ; $74CB: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $74CB: $21 $C0 $C2
     add  hl, bc                                   ; $74CE: $09
     ld   a, [hl]                                  ; $74CF: $7E
     ldh  [hLinkPositionX], a                      ; $74D0: $E0 $98
@@ -8290,7 +8290,7 @@ func_005_7702:
     rra                                           ; $7716: $1F
     jr   c, jr_005_7721                           ; $7717: $38 $08
 
-    ld   hl, wEntitiesSubstate2Table              ; $7719: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $7719: $21 $C0 $C2
     add  hl, bc                                   ; $771C: $09
     ld   a, [hl]                                  ; $771D: $7E
     cpl                                           ; $771E: $2F
@@ -8312,7 +8312,7 @@ jr_005_7730:
     jr   nz, jr_005_775E                          ; $7733: $20 $29
 
     ld   [hl], $04                                ; $7735: $36 $04
-    ld   hl, wEntitiesSubstate2Table              ; $7737: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $7737: $21 $C0 $C2
     add  hl, bc                                   ; $773A: $09
     ld   a, [hl]                                  ; $773B: $7E
     ld   hl, wEntitiesStateTable                  ; $773C: $21 $90 $C2
@@ -8348,7 +8348,7 @@ jr_005_775E:
     call GetRandomByte                            ; $776B: $CD $0D $28
     and  $02                                      ; $776E: $E6 $02
     dec  a                                        ; $7770: $3D
-    ld   hl, wEntitiesSubstate2Table              ; $7771: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $7771: $21 $C0 $C2
     add  hl, bc                                   ; $7774: $09
     ld   [hl], a                                  ; $7775: $77
 
@@ -8818,7 +8818,7 @@ jr_005_7C1C:
 func_005_7C36:
     call GetRandomByte                            ; $7C36: $CD $0D $28
     and  $01                                      ; $7C39: $E6 $01
-    ld   hl, wEntitiesSubstate1Table              ; $7C3B: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $7C3B: $21 $B0 $C2
     add  hl, bc                                   ; $7C3E: $09
     ld   [hl], a                                  ; $7C3F: $77
     ld   e, a                                     ; $7C40: $5F
@@ -8947,7 +8947,7 @@ label_005_7CE8:
     jp   label_005_7D40                           ; $7CFE: $C3 $40 $7D
 
 jr_005_7D01:
-    ld   hl, wEntitiesSubstate1Table              ; $7D01: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $7D01: $21 $B0 $C2
     add  hl, bc                                   ; $7D04: $09
     ld   a, [hl]                                  ; $7D05: $7E
     xor  $01                                      ; $7D06: $EE $01
@@ -8957,7 +8957,7 @@ jr_005_7D09:
     call IsEntityUnknownFZero                     ; $7D09: $CD $00 $0C
     jr   nz, label_005_7D40                       ; $7D0C: $20 $32
 
-    ld   hl, wEntitiesSubstate1Table              ; $7D0E: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $7D0E: $21 $B0 $C2
     add  hl, bc                                   ; $7D11: $09
     ld   a, [hl]                                  ; $7D12: $7E
     ld   e, a                                     ; $7D13: $5F
@@ -8977,7 +8977,7 @@ jr_005_7D21:
     ld   [hl], b                                  ; $7D29: $70
     call IncrementEntityState                     ; $7D2A: $CD $12 $3B
     ld   [hl], $02                                ; $7D2D: $36 $02
-    ld   hl, wEntitiesSubstate1Table              ; $7D2F: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $7D2F: $21 $B0 $C2
     add  hl, bc                                   ; $7D32: $09
     ld   [hl], b                                  ; $7D33: $70
     ld   hl, wEntitiesPosYTable                   ; $7D34: $21 $10 $C2
@@ -9019,7 +9019,7 @@ label_005_7D5F:
     jp   SetEntitySpriteVariant                   ; $7D5F: $C3 $0C $3B
 
 func_005_7D62:
-    ld   hl, wEntitiesSubstate1Table              ; $7D62: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $7D62: $21 $B0 $C2
     add  hl, bc                                   ; $7D65: $09
     ld   a, [hl]                                  ; $7D66: $7E
     and  a                                        ; $7D67: $A7
@@ -9072,7 +9072,7 @@ jr_005_7DA8:
     cp   [hl]                                     ; $7DB3: $BE
     jp   nc, label_005_7DF0                       ; $7DB4: $D2 $F0 $7D
 
-    ld   hl, wEntitiesSubstate1Table              ; $7DB7: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $7DB7: $21 $B0 $C2
     add  hl, bc                                   ; $7DBA: $09
     inc  [hl]                                     ; $7DBB: $34
     call ClearEntitySpeed                         ; $7DBC: $CD $7F $3D
@@ -9179,7 +9179,7 @@ jr_005_7E3A:
     ld   hl, wEntitiesPosYTable                   ; $7E4E: $21 $10 $C2
     add  hl, de                                   ; $7E51: $19
     ld   [hl], a                                  ; $7E52: $77
-    ld   hl, wEntitiesSubstate1Table              ; $7E53: $21 $B0 $C2
+    ld   hl, wEntitiesPrivateState1Table          ; $7E53: $21 $B0 $C2
     add  hl, de                                   ; $7E56: $19
     inc  [hl]                                     ; $7E57: $34
     push bc                                       ; $7E58: $C5
@@ -9197,7 +9197,7 @@ jr_005_7E61:
     jp   SetEntitySpriteVariant                   ; $7E69: $C3 $0C $3B
 
 label_005_7E6C:
-    ld   hl, wEntitiesSubstate2Table              ; $7E6C: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $7E6C: $21 $C0 $C2
     add  hl, bc                                   ; $7E6F: $09
     ld   a, [hl]                                  ; $7E70: $7E
     JP_TABLE                                      ; $7E71
@@ -9213,7 +9213,7 @@ func_005_7E78:
     ld   [hl], $FF                                ; $7E81: $36 $FF
 
 label_005_7E83:
-    ld   hl, wEntitiesSubstate2Table              ; $7E83: $21 $C0 $C2
+    ld   hl, wEntitiesPrivateState2Table          ; $7E83: $21 $C0 $C2
     add  hl, bc                                   ; $7E86: $09
     inc  [hl]                                     ; $7E87: $34
     ret                                           ; $7E88: $C9

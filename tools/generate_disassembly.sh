@@ -22,3 +22,9 @@ fi
 
 # Invoke the disassembler with the specific formatting options
 tools/mgbdis/mgbdis.py game.gbc --overwrite --print-hex --uppercase-hex --align-operands --ldh_a8 ldh_ffa8 --indent-spaces 4
+
+# Fix some of the formatting
+
+## Turn `jr_XXX_YYYY::` into `jr_XXX_YYYY:`
+echo 'Fixing jr_XXX_YYYY format…'
+sed -E -i '' 's/^(jr|func|label)_([0-9A-F]{3}_[0-9A-F]{4})::/\1_\2:/g' disassembly/*.asm

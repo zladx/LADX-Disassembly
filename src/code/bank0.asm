@@ -7871,8 +7871,8 @@ label_3E03::
     callhl func_005_5A1E
     jp   ReloadSavedBank
 
-label_3E0E::
-    callhl func_005_556B
+Entity67Handler_trampoline::
+    callhl Entity67Handler
     jp   ReloadSavedBank
 
 label_3E19::

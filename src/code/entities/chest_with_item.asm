@@ -43,7 +43,7 @@ ChestWithItemEntityHandler::
 
     ld   a, ENTITY_GEL                            ; $7BEE: $3E $1B
     call SpawnNewEntity_trampoline                ; $7BF0: $CD $86 $3B
-    jp   c, label_007_7EA4                        ; $7BF3: $DA $A4 $7E
+    jp   c, func_007_7EA4                         ; $7BF3: $DA $A4 $7E
 
     ldh  a, [hScratch0]                           ; $7BF6: $F0 $D7
     ld   hl, wEntitiesPosXTable                         ; $7BF8: $21 $00 $C2
@@ -70,7 +70,7 @@ ChestWithItemEntityHandler::
     ld   [hl], $03                                ; $7C20: $36 $03
     ld   a, $1D                                   ; $7C22: $3E $1D
     ldh  [hJingle], a                             ; $7C24: $E0 $F2
-    jp   label_007_7EA4                           ; $7C26: $C3 $A4 $7E
+    jp   func_007_7EA4                            ; $7C26: $C3 $A4 $7E
 
 jr_007_7C29:
     cp   $21                                      ; $7C29: $FE $21
@@ -226,4 +226,4 @@ jr_007_7CEA:
     cp   $28                                      ; $7CEA: $FE $28
     ret  nz                                       ; $7CEC: $C0
 
-    jp   label_007_7EA4                           ; $7CED: $C3 $A4 $7E
+    jp   func_007_7EA4                            ; $7CED: $C3 $A4 $7E

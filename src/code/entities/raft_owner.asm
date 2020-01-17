@@ -83,10 +83,7 @@ func_005_53CB:
     jp_open_dialog $0F1                           ; $53CF
 
 Data_005_53D4::
-    ld   e, h                                     ; $53D4: $5C
-    ld   bc, $215C                                ; $53D5: $01 $5C $21
-    ld   e, [hl]                                  ; $53D8: $5E
-    ld   bc, $215E                                ; $53D9: $01 $5E $21
+    db   $5C, $01, $5C, $21, $5E, $01, $5E, $21   ; $53D4
 
 raftOnOverworld:
     ld   hl, wEntitiesUnknowTableP                ; $53DC: $21 $40 $C4

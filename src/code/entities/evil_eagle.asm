@@ -707,7 +707,7 @@ jr_005_5E8A:
     ld   a, [hl]                                  ; $5E98: $7E
     ldh  [hLinkPositionXIncrement], a             ; $5E99: $E0 $9A
     push bc                                       ; $5E9B: $C5
-    call $21B2                                    ; $5E9C: $CD $B2 $21
+    call UpdateFinalLinkPosition.horizontal       ; $5E9C: $CD $B2 $21
     call label_3E19                               ; $5E9F: $CD $19 $3E
     pop  bc                                       ; $5EA2: $C1
 

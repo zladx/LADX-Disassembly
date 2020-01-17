@@ -3675,7 +3675,9 @@ UpdateFinalLinkPosition::
     ; Compute next Link vertical position
     ld   c, $01
     call ComputeLinkPosition
-    ; Compute next Link horizontal position
+
+.horizontal
+   ; Compute next Link horizontal position
     ld   c, $00
     ldh  [hScratch0], a
 

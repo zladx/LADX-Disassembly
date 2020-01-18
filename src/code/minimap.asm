@@ -186,24 +186,24 @@ label_002_67E5:
     and  $30                                      ; $67E8: $E6 $30
     swap a                                        ; $67EA: $CB $37
     JP_TABLE                                      ; $67EC: $C7
-._00 dw Func_002_67F5
-._01 dw Func_002_67FA
-._02 dw Func_002_67FF
-._03 dw Func_002_6804
+._00 dw func_002_67F5
+._01 dw func_002_67FA
+._02 dw func_002_67FF
+._03 dw func_002_6804
 
-Func_002_67F5::
+func_002_67F5::
     ld   hl, $9D0F                                ; $67F5: $21 $0F $9D
     jr   jr_002_6807                              ; $67F8: $18 $0D
 
-Func_002_67FA::
+func_002_67FA::
     ld   hl, $9D10                                ; $67FA: $21 $10 $9D
     jr   jr_002_6807                              ; $67FD: $18 $08
 
-Func_002_67FF::
+func_002_67FF::
     ld   hl, $9CEF                                ; $67FF: $21 $EF $9C
     jr   jr_002_6807                              ; $6802: $18 $03
 
-Func_002_6804::
+func_002_6804::
     ld   hl, $9CF0                                ; $6804: $21 $F0 $9C
 
 jr_002_6807:
@@ -216,16 +216,16 @@ label_002_680B:
     and  $30                                      ; $680E: $E6 $30
     swap a                                        ; $6810: $CB $37
     JP_TABLE                                      ; $6812: $C7
-._00 dw Func_002_681B
-._01 dw Func_002_6820
-._02 dw Func_002_681B
-._03 dw Func_002_6820
+._00 dw func_002_681B
+._01 dw func_002_6820
+._02 dw func_002_681B
+._03 dw func_002_6820
 
-Func_002_681B::
+func_002_681B::
     ld   hl, $9D8F                                ; $681B: $21 $8F $9D
     jr   jr_002_6823                              ; $681E: $18 $03
 
-Func_002_6820::
+func_002_6820::
     ld   hl, $9D90                                ; $6820: $21 $90 $9D
 
 jr_002_6823:
@@ -238,16 +238,16 @@ label_002_6827:
     and  $30                                      ; $682A: $E6 $30
     swap a                                        ; $682C: $CB $37
     JP_TABLE                                      ; $682E: $C7
-._00 dw Func_002_6837
-._01 dw Func_002_6837
-._02 dw Func_002_683C
-._03 dw Func_002_683C
+._00 dw func_002_6837
+._01 dw func_002_6837
+._02 dw func_002_683C
+._03 dw func_002_683C
 
-Func_002_6837::
+func_002_6837::
     ld   hl, $9D0B                                ; $6837: $21 $0B $9D
     jr   jr_002_683F                              ; $683A: $18 $03
 
-Func_002_683C::
+func_002_683C::
     ld   hl, $9CEB                                ; $683C: $21 $EB $9C
 
 jr_002_683F:

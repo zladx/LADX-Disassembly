@@ -282,7 +282,7 @@ jr_003_4918:
     add  hl, bc                                   ; $491B: $09
     ld   [hl], $05                                ; $491C: $36 $05
     ld   a, $03                                   ; $491E: $3E $03
-    call Func_020_4518_trampoline                                ; $4920: $CD $D3 $09
+    call func_020_4518_trampoline                                ; $4920: $CD $D3 $09
     jp   hl                                       ; $4923: $E9
 
 Data_003_4924::
@@ -3873,7 +3873,7 @@ jr_003_5E5B:
     push bc                                       ; $5E6B: $C5
     push de                                       ; $5E6C: $D5
     ld   a, $03                                   ; $5E6D: $3E $03
-    call Func_020_6D0E_trampoline                                ; $5E6F: $CD $78 $09
+    call func_020_6D0E_trampoline                                ; $5E6F: $CD $78 $09
     pop  de                                       ; $5E72: $D1
     pop  bc                                       ; $5E73: $C1
     jr   jr_003_5E8A                              ; $5E74: $18 $14
@@ -3914,7 +3914,7 @@ jr_003_5E8A:
     jr   nc, jr_003_5EAE                          ; $5EA7: $30 $05
 
     ld   a, $03                                   ; $5EA9: $3E $03
-    call Func_036_70D6_trampoline                                ; $5EAB: $CD $D2 $0A
+    call func_036_70D6_trampoline                                ; $5EAB: $CD $D2 $0A
 
 jr_003_5EAE:
     ld   a, c                                     ; $5EAE: $79
@@ -5473,7 +5473,7 @@ jr_003_6771:
     and  $E0                                      ; $67C6: $E6 $E0
     ldh  [hSwordIntersectedAreaX], a              ; $67C8: $E0 $CE
     ld   a, $03                                   ; $67CA: $3E $03
-    call Func_036_705A_trampoline                                ; $67CC: $CD $A7 $0A
+    call func_036_705A_trampoline                                ; $67CC: $CD $A7 $0A
     ld   a, c                                     ; $67CF: $79
     and  $EE                                      ; $67D0: $E6 $EE
     ld   c, a                                     ; $67D2: $4F
@@ -5817,7 +5817,7 @@ include "code/entities/arrow.asm"
 Data_003_6A66::
     db $80, $15, $04, $FC, $00, $00, $FE, $FE, $FA, $04
 
-Func_003_6A70::
+func_003_6A70::
     call GetEntityTransitionCountdown             ; $6A70:
     jr   z, jr_003_6A96                           ; $6A73: $28 $21
 

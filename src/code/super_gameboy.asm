@@ -183,7 +183,7 @@ SendUploadCommand::
     ret  z                                       ; $6B54: $C8
     ld   b, a                                    ; $6B55: $47
     ld   c, $00                                  ; $6B56: $0E $00
-.Func_03C_6B58::
+.func_03C_6B58::
     push bc                                      ; $6B58: $C5
     xor  a                                       ; $6B59: $AF
     ld   [$ff00+c], a                            ; $6B5A: $E2
@@ -216,7 +216,7 @@ SendUploadCommand::
     dec  b                                       ; $6B7F: $05
     ret  z                                       ; $6B80: $C8
     call WaitFor3Frames                          ; $6B81: $CD $86 $6B
-    jr   .Func_03C_6B58                          ; $6B84: $18 $D2
+    jr   .func_03C_6B58                          ; $6B84: $18 $D2
 
 WaitFor3Frames::
     ld   de, $1B58                               ; $6B86: $11 $58 $1B

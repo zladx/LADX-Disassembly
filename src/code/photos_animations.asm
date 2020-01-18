@@ -32,7 +32,7 @@ Data_038_7820::
     dw   $86C0
 
 ; Animate photo tiles group
-Func_038_7830::
+func_038_7830::
     ld   hl, Data_038_7810                       ; $7830: $21 $10 $78
     ldh  a, [hMapRoom]                           ; $7833: $F0 $F6
     cp   $0D                                     ; $7835: $FE $0D
@@ -61,7 +61,7 @@ Func_038_7830::
     ret                                          ; $7859: $C9
 
 
-Func_038_785A::
+func_038_785A::
     ld   a, [$C19F]                              ; $785A: $FA $9F $C1
     and  a                                       ; $785D: $A7
     ret  nz                                      ; $785E: $C0

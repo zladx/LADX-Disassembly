@@ -8389,7 +8389,7 @@ jr_019_6FD0:
     ld   [bc], a                                  ; $7028: $02
     ldh  a, [rP1]                                 ; $7029: $F0 $00
     db   $76                                      ; $702B: $76
-    ld   bc, Func_020_6BA4_trampoline                            ; $702C: $01 $F0 $08
+    ld   bc, func_020_6BA4_trampoline                            ; $702C: $01 $F0 $08
     db   $76                                      ; $702F: $76
     ld   hl, $0000                                ; $7030: $21 $00 $00
     ld   a, b                                     ; $7033: $78
@@ -10337,7 +10337,7 @@ jr_019_7A8F:
     ld   [hl], b                                  ; $7A98: $70
     ret                                           ; $7A99: $C9
 
-Func_019_7A9A::
+func_019_7A9A::
     ld   a, [wConveyorBeltsCount]                 ; $7A9A: $FA $A5 $C1
     and  a                                        ; $7A9D: $A7
     ret  z                                        ; $7A9E: $C8
@@ -10721,7 +10721,7 @@ jr_019_7C46:
 jr_019_7C4E:
     jr   z, jr_019_7C56                           ; $7C4E: $28 $06
 
-Func_019_7C50::
+func_019_7C50::
     ldh  a, [hActiveEntitySpriteVariant]               ; $7C50: $F0 $F1
 
 jr_019_7C52:

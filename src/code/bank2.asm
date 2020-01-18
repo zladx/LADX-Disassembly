@@ -1350,7 +1350,7 @@ func_002_4B49::
     cp   $02                                      ; $4B58: $FE $02
     jr   nz, jr_002_4B64                          ; $4B5A: $20 $08
 
-    call Func_020_4B4A_trampoline                 ; $4B5C: $CD $4B $13
+    call func_020_4B4A_trampoline                 ; $4B5C: $CD $4B $13
     ld   a, $01                                   ; $4B5F: $3E $01
     ld   [$C5B0], a                               ; $4B61: $EA $B0 $C5
 
@@ -7196,7 +7196,7 @@ jr_002_742F:
     jr   nz, label_002_7454                       ; $744D: $20 $05
 
     ld   a, $02                                   ; $744F: $3E $02
-    call Func_020_4985_trampoline                                ; $7451: $CD $C8 $09
+    call func_020_4985_trampoline                                ; $7451: $CD $C8 $09
 
 label_002_7454:
     ld   hl, $6E29                                ; $7454: $21 $29 $6E

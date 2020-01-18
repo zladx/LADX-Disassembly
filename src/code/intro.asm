@@ -113,7 +113,7 @@ label_6EC6::
     add  hl, de
     ld   a, [hl]
     ld   [wBGPalette], a
-    call Func_020_6BA4_trampoline ; Load BG palette
+    call func_020_6BA4_trampoline ; Load BG palette
 
 IntroSceneJumpTable::
     ld   a, [wGameplaySubtype]
@@ -262,7 +262,7 @@ IntroShipOnSeaHandler::
     add  hl, de
     ld   a, [hl]
     ld   [wOBJ0Palette], a
-    call Func_020_6A30_trampoline
+    call func_020_6A30_trampoline
     ld   a, e
     cp   $08
     jp   nz, label_7013
@@ -546,7 +546,7 @@ label_719B::
     add  hl, de
     ld   a, [hl]
     ld   [wOBJ1Palette], a
-    call Func_020_6AC1_trampoline
+    call func_020_6AC1_trampoline
 
 label_71C2::
     ret

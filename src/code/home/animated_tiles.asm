@@ -389,7 +389,7 @@ AnimateCrystalBlockTilesGroup::
     jr   AnimateTilesMediumSpeed
 
 AnimatePhotoTilesGroup::
-    callsb Func_038_7830
+    callsb func_038_7830
     jp   DrawLinkSpriteAndReturn
 
 label_1D0A::
@@ -408,7 +408,7 @@ label_1D12::
     ret
 
 SkipTilesGroupAnimation::
-    callsb Func_020_54F5
+    callsb func_020_54F5
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a

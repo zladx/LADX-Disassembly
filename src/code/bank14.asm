@@ -972,11 +972,11 @@ jr_014_4D32:
     jr   z, jr_014_4D4A                           ; $4D36: $28 $12
 
     ld   hl, wFarcallParams                       ; $4D38: $21 $01 $DE
-    ld   a, BANK(Func_021_5355)                   ; $4D3B: $3E $21
+    ld   a, BANK(func_021_5355)                   ; $4D3B: $3E $21
     ld   [hl+], a                                 ; $4D3D: $22
-    ld   a, HIGH(Func_021_5355)                   ; $4D3E: $3E $53
+    ld   a, HIGH(func_021_5355)                   ; $4D3E: $3E $53
     ld   [hl+], a                                 ; $4D40: $22
-    ld   a, LOW(Func_021_5355)                    ; $4D41: $3E $55
+    ld   a, LOW(func_021_5355)                    ; $4D41: $3E $55
     ld   [hl+], a                                 ; $4D43: $22
     ld   a, BANK(@)                               ; $4D44: $3E $14
     ld   [hl], a                                  ; $4D46: $77
@@ -1009,7 +1009,7 @@ jr_014_4D6F:
     ld   [$DDD7], a                               ; $4D6F: $EA $D7 $DD
     ret                                           ; $4D72: $C9
 
-Func_014_4D73::
+func_014_4D73::
     xor  a                                        ; $4D73: $AF
     ldh  [$FFBE], a                               ; $4D74: $E0 $BE
     ldh  [hFFF5], a                               ; $4D76: $E0 $F5
@@ -2487,11 +2487,11 @@ jr_014_547F:
     ret  c                                        ; $5497: $D8
 
     ld   hl, wFarcallParams                       ; $5498: $21 $01 $DE
-    ld   a, BANK(Func_021_53B6)                   ; $549B: $3E $21
+    ld   a, BANK(func_021_53B6)                   ; $549B: $3E $21
     ld   [hl+], a                                 ; $549D: $22
-    ld   a, HIGH(Func_021_53B6)                   ; $549E: $3E $53
+    ld   a, HIGH(func_021_53B6)                   ; $549E: $3E $53
     ld   [hl+], a                                 ; $54A0: $22
-    ld   a, LOW(Func_021_53B6)                    ; $54A1: $3E $B6
+    ld   a, LOW(func_021_53B6)                    ; $54A1: $3E $B6
     ld   [hl+], a                                 ; $54A3: $22
     ld   a, BANK(@)                               ; $54A4: $3E $14
     ld   [wFarcallReturnBank], a                  ; $54A6: $EA $04 $DE
@@ -2558,7 +2558,7 @@ jr_014_54E7:
     nop                                           ; $54F6: $00
     db   $FE                                      ; $54F7: $FE
 
-Func_014_54F8::
+func_014_54F8::
     ld   a, [wC178]
     and  a                                        ; $54FB: $A7
     jr   z, jr_014_5502                           ; $54FC: $28 $04

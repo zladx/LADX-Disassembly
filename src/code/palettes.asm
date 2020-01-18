@@ -1157,7 +1157,7 @@ Data_021_5343::
     ld   [bc], a                                  ; $5353: $02
     ld   b, b                                     ; $5354: $40
 
-Func_021_5355::
+func_021_5355::
     call func_021_5366                            ; $5355: $CD $66 $53
     ld   a, [wBGPaletteEffectAddress]             ; $5358: $FA $CC $C3
     and  $0E                                      ; $535B: $E6 $0E
@@ -1226,7 +1226,7 @@ jr_021_539C:
     ldh  [rSVBK], a                               ; $53B3: $E0 $70
     ret                                           ; $53B5: $C9
 
-Func_021_53B6::
+func_021_53B6::
     call func_021_5366                            ; $53B6: $CD $66 $53
     ld   a, $01                                   ; $53B9: $3E $01
     ldh  [hBGMapOffsetLow], a                     ; $53BB: $E0 $E1
@@ -1241,7 +1241,7 @@ jr_021_53C0:
     ld   [wPaletteDataFlags], a                    ; $53CB: $EA $D1 $DD
     ret                                           ; $53CE: $C9
 
-Func_021_53CF::
+func_021_53CF::
     call func_021_5366                            ; $53CF: $CD $66 $53
     ld   a, $01                                   ; $53D2: $3E $01
     ldh  [hBGMapOffsetLow], a                     ; $53D4: $E0 $E1
@@ -1259,7 +1259,7 @@ Data_021_53EB::
 
 ; Load palettes for room objects?
 ; Returns early when DBA5 is 0
-Func_021_53F3::
+func_021_53F3::
     xor  a                                        ; $53F3: $AF
     ldh  [hBGMapOffsetLow], a                     ; $53F4: $E0 $E1
     ldh  a, [hIsGBC]                              ; $53F6: $F0 $FE

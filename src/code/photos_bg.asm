@@ -2,14 +2,14 @@
 ; Loading photos Background maps
 ;
 
-Func_03D_4000::
+func_03D_4000::
     ldi  a, [hl]                                ; $4000: $2A
     ld   [de], a                                ; $4001: $12
     inc  e                                      ; $4002: $1C
     ld   a, e                                   ; $4003: $7B
     and  %00011111                              ; $4004: $E6 $1F
     cp   $14                                    ; $4006: $FE $14
-    jr   nz, Func_03D_4000                      ; $4008: $20 $F6
+    jr   nz, func_03D_4000                      ; $4008: $20 $F6
 
     ld   a, e                                   ; $400A: $7B
     add  $0C                                    ; $400B: $C6 $0C
@@ -18,11 +18,11 @@ Func_03D_4000::
     adc  $00                                    ; $400F: $CE $00
     ld   d, a                                   ; $4011: $57
     cp   $9E                                    ; $4012: $FE $9E
-    jr   nz, Func_03D_4000                      ; $4014: $20 $EA
+    jr   nz, func_03D_4000                      ; $4014: $20 $EA
 
     ld   a, e                                   ; $4016: $7B
     cp   $40                                    ; $4017: $FE $40
-    jr   nz, Func_03D_4000                      ; $4019: $20 $E5
+    jr   nz, func_03D_4000                      ; $4019: $20 $E5
 
     ret                                         ; $401B: $C9
 
@@ -83,7 +83,7 @@ LoadPhotoBgMap::
 
 .else_4069_3D:
     ld   de, vBGMap1                            ; $4069: $11 $00 $9C
-    call Func_03D_4000                          ; $406C: $CD $00 $40
+    call func_03D_4000                          ; $406C: $CD $00 $40
     ldh  a, [hIsGBC]                            ; $406F: $F0 $FE
     and  a                                      ; $4071: $A7
     jr   z, .else_4081_3D                       ; $4072: $28 $0D
@@ -91,7 +91,7 @@ LoadPhotoBgMap::
     ld   a, $01                                 ; $4074: $3E $01
     ld   [rVBK], a                              ; $4076: $E0 $4F
     ld   de, vBGMap1                            ; $4078: $11 $00 $9C
-    call Func_03D_4000                          ; $407B: $CD $00 $40
+    call func_03D_4000                          ; $407B: $CD $00 $40
     xor  a                                      ; $407E: $AF
     ld   [rVBK], a                              ; $407F: $E0 $4F
 .else_4081_3D:

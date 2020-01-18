@@ -82,12 +82,12 @@ jr_017_4493:
 jr_017_449C:
     ld   a, [$D012]                               ; $449C: $FA $12 $D0
     JP_TABLE                                      ; $449F: $C7
-._00 dw Func_017_44FC
-._01 dw Func_017_457D
-._02 dw Func_017_4594
-._03 dw Func_017_45BA
-._04 dw Func_017_4630
-._05 dw Func_017_4678
+._00 dw func_017_44FC
+._01 dw func_017_457D
+._02 dw func_017_4594
+._03 dw func_017_45BA
+._04 dw func_017_4630
+._05 dw func_017_4678
 
 Data_017_44AC::
     db   $00, $01, $02, $03, $04, $04, $04, $05, $05, $06, $07, $08, $09, $09, $09, $0A
@@ -99,7 +99,7 @@ Data_017_44D4::
     db   $10, $11, $00, $01, $12, $13, $14, $15, $16, $17, $18, $19, $1A, $1B, $1C, $1D
     db   $1E, $1F, $20, $21, $22, $23, $24, $25
 
-Func_017_44FC::
+func_017_44FC::
     ld   a, [$D008]                               ; $44FC: $FA $08 $D0
     and  a                                        ; $44FF: $A7
     ret  nz                                       ; $4500: $C0
@@ -156,7 +156,7 @@ Data_017_453D::
     db   $1E, $1E, $1E, $1E, $6F, $6F, $6F, $6F  ; $456D |....oooo|
     db   $BF, $BF, $BF, $BF, $FF, $FF, $FF, $FF  ; $4575 |........|
 
-Func_017_457D::
+func_017_457D::
     ld   a, $B0                                   ; $457D: $3E $B0
     ld   [$D008], a                               ; $457F: $EA $08 $D0
     call func_017_45B5                            ; $4582: $CD $B5 $45
@@ -171,7 +171,7 @@ jr_017_458E:
     ld   [wOBJ1Palette], a                               ; $4590: $EA $99 $DB
     ret                                           ; $4593: $C9
 
-Func_017_4594::
+func_017_4594::
     ld   a, [$D008]                               ; $4594: $FA $08 $D0
     and  a                                        ; $4597: $A7
     ret  nz                                       ; $4598: $C0
@@ -201,7 +201,7 @@ label_017_45B5:
     inc  [hl]                                     ; $45B8: $34
     ret                                           ; $45B9: $C9
 
-Func_017_45BA::
+func_017_45BA::
     ld   a, [$D00A]                               ; $45BA: $FA $0A $D0
     ldh  [hScratchD], a                           ; $45BD: $E0 $E4
     cp   $26                                      ; $45BF: $FE $26
@@ -280,7 +280,7 @@ jr_017_4612:
 jr_017_462F:
     ret                                           ; $462F: $C9
 
-Func_017_4630::
+func_017_4630::
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $4630: $3E $E8
     call SpawnNewEntity_trampoline                ; $4632: $CD $86 $3B
 
@@ -324,7 +324,7 @@ jr_017_466B:
     call ResetCreditsSceneVariables                            ; $4672: $CD $A5 $4D
     jp   IncrementCreditsGameplaySubtypeAndReturn                           ; $4675: $C3 $5B $4C
 
-Func_017_4678::
+func_017_4678::
     ret                                           ; $4678: $C9
 
 Data_017_4679::
@@ -2057,24 +2057,24 @@ jr_017_55FC:
 CreditsInstrumentsPlayingHandler::
     ld   a, [$D000]                              ; $55FD: $FA $00 $D0
     JP_TABLE                                     ; $5600
-._00 dw Func_017_5665                            ; $5601
+._00 dw func_017_5665                            ; $5601
 ._01 dw MrsMeowMeowsHouseSceneHandler            ; $5603
-._02 dw Func_017_5728                            ; $5605
+._02 dw func_017_5728                            ; $5605
 ._03 dw KidsSceneHandler                         ; $5607
-._04 dw Func_017_5794                            ; $5609
+._04 dw func_017_5794                            ; $5609
 ._05 dw BeachSceneHandler                        ; $560B
-._06 dw Func_017_57F9                            ; $560D
+._06 dw func_017_57F9                            ; $560D
 ._07 dw TarinSceneHandler                        ; $560F
-._08 dw Func_017_583C                            ; $5611
+._08 dw func_017_583C                            ; $5611
 ._09 dw MarinSingingSceneHandler                 ; $5613
-._0A dw Func_017_58C3                            ; $5615
-._0B dw Func_017_58D1                            ; $5617
-._0C dw Func_017_58F0                            ; $5619
-._0D dw Func_017_58F8                            ; $561B
-._0E dw Func_017_590B                            ; $561D
-._0F dw Func_017_5938                            ; $561F
-._10 dw Func_017_5A66                            ; $5621
-._11 dw Func_017_5ACD                            ; $5623
+._0A dw func_017_58C3                            ; $5615
+._0B dw func_017_58D1                            ; $5617
+._0C dw func_017_58F0                            ; $5619
+._0D dw func_017_58F8                            ; $561B
+._0E dw func_017_590B                            ; $561D
+._0F dw func_017_5938                            ; $561F
+._10 dw func_017_5A66                            ; $5621
+._11 dw func_017_5ACD                            ; $5623
 
 IncrementD000AndReturn::                         ; Sources: jp @ $5686, jp @ $5725, jp @ $5732, jp @ $5790, jp @ $579E, jp @ $57F5, jp @ $5803, jp @ $5838, jp @ $5846, jp @ $58BF, jp @ $58CD, jp @ $58EC, jp @ $58F5, jp @ $5907, jp @ $5935, jp @ $594C, jp @ $5ACA
     ld   hl, $D000                               ; $5625 (17): $21 $00 $D0
@@ -2104,7 +2104,7 @@ Data_017_5655
     db   $90, $90, $90, $90, $50, $50, $50, $50  ; $5655
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $565D
 
-Func_017_5665::
+func_017_5665::
     ldh  a, [hFrameCounter]                               ; $5665: $F0 $E7
     and  $07                                      ; $5667: $E6 $07
     jr   nz, jr_017_5695                          ; $5669: $20 $2A
@@ -2223,7 +2223,7 @@ jr_017_56DC:
     inc  [hl]                                     ; $5724: $34
     jp   IncrementD000AndReturn                                    ; $5725: $C3 $25 $56
 
-Func_017_5728::
+func_017_5728::
     call func_017_5970                            ; $5728: $CD $70 $59
     jr   nz, jr_017_5735                          ; $572B: $20 $08
 
@@ -2296,7 +2296,7 @@ jr_017_575A:
 jr_017_5793:
     ret                                           ; $5793: $C9
 
-Func_017_5794::
+func_017_5794::
     call func_017_5970                            ; $5794: $CD $70 $59
     jr   nz, jr_017_57A1                          ; $5797: $20 $08
 
@@ -2361,7 +2361,7 @@ jr_017_57BF:
 jr_017_57F8:
     ret                                           ; $57F8: $C9
 
-Func_017_57F9::
+func_017_57F9::
     call func_017_5970                            ; $57F9: $CD $70 $59
     jr   nz, jr_017_5806                          ; $57FC: $20 $08
 
@@ -2408,7 +2408,7 @@ jr_017_5824:
 jr_017_583B:
     ret                                           ; $583B: $C9
 
-Func_017_583C::
+func_017_583C::
     call func_017_5970                            ; $583C: $CD $70 $59
     jr   nz, jr_017_5849                          ; $583F: $20 $08
 
@@ -2491,7 +2491,7 @@ jr_017_5867:
 jr_017_58C2:
     ret                                           ; $58C2: $C9
 
-Func_017_58C3::
+func_017_58C3::
     call func_017_5970                            ; $58C3: $CD $70 $59
     jr   nz, jr_017_58D0                          ; $58C6: $20 $08
 
@@ -2502,7 +2502,7 @@ Func_017_58C3::
 jr_017_58D0:
     ret                                           ; $58D0: $C9
 
-Func_017_58D1::
+func_017_58D1::
     ld   a, [$D006]                               ; $58D1: $FA $06 $D0
     and  a                                        ; $58D4: $A7
     jr   nz, jr_017_58EF                          ; $58D5: $20 $18
@@ -2521,12 +2521,12 @@ Func_017_58D1::
 jr_017_58EF:
     ret                                           ; $58EF: $C9
 
-Func_017_58F0::
+func_017_58F0::
     ld   a, $01                                   ; $58F0: $3E $01
     ld   [wBGMapToLoad], a                               ; $58F2: $EA $FF $D6
     jp   IncrementD000AndReturn                                    ; $58F5: $C3 $25 $56
 
-Func_017_58F8::
+func_017_58F8::
     call func_017_59A9                            ; $58F8: $CD $A9 $59
     jr   nz, jr_017_590A                          ; $58FB: $20 $0D
 
@@ -2539,7 +2539,7 @@ Func_017_58F8::
 jr_017_590A:
     ret                                           ; $590A: $C9
 
-Func_017_590B::
+func_017_590B::
     ld   a, [$D006]                               ; $590B: $FA $06 $D0
     cp   $01                                      ; $590E: $FE $01
     jr   nz, jr_017_5917                          ; $5910: $20 $05
@@ -2570,7 +2570,7 @@ jr_017_5930:
     ld   [$D006], a                               ; $5932: $EA $06 $D0
     jp   IncrementD000AndReturn                   ; $5935: $C3 $25 $56
 
-Func_017_5938::
+func_017_5938::
     ld   a, [$D006]                               ; $5938: $FA $06 $D0
     and  a                                        ; $593B: $A7
     ret  nz                                       ; $593C: $C0
@@ -2579,7 +2579,7 @@ Func_017_5938::
     ld   [wBGPalette], a                          ; $593E: $EA $97 $DB
     ld   [wOBJ0Palette], a                        ; $5941: $EA $98 $DB
     ld   [wOBJ1Palette], a                        ; $5944: $EA $99 $DB
-    ld   a, BANK(Func_017_5938)                   ; $5947: $3E $17
+    ld   a, BANK(func_017_5938)                   ; $5947: $3E $17
     call ClearFileMenuBG_trampoline               ; $5949: $CD $FA $08
     jp   IncrementD000AndReturn                   ; $594C: $C3 $25 $56
 
@@ -2797,7 +2797,7 @@ jr_017_5A50:
     ld   [wBGPalette], a                               ; $5A61: $EA $97 $DB
     jr   jr_017_5A37                              ; $5A64: $18 $D1
 
-Func_017_5A66::
+func_017_5A66::
     ld   a, $C9                                   ; $5A66: $3E $C9
     ld   [wBGPalette], a                               ; $5A68: $EA $97 $DB
     ld   a, $1C                                   ; $5A6B: $3E $1C
@@ -2848,7 +2848,7 @@ Func_017_5A66::
 
     jp   IncrementD000AndReturn                                    ; $5ACA: $C3 $25 $56
 
-Func_017_5ACD::
+func_017_5ACD::
     ld   a, [$D006]                               ; $5ACD: $FA $06 $D0
     and  a                                        ; $5AD0: $A7
     jp   nz, label_017_56BA                       ; $5AD1: $C2 $BA $56
@@ -3036,11 +3036,11 @@ jr_017_5BBB:
 
 label_017_5BD0:
     ld   hl, wFarcallParams                       ; $5BD0: $21 $01 $DE
-    ld   a, BANK(Func_020_78ED)                   ; $5BD3: $3E $20
+    ld   a, BANK(func_020_78ED)                   ; $5BD3: $3E $20
     ld   [hl+], a                                 ; $5BD5: $22
-    ld   a, HIGH(Func_020_78ED)                   ; $5BD6: $3E $78
+    ld   a, HIGH(func_020_78ED)                   ; $5BD6: $3E $78
     ld   [hl+], a                                 ; $5BD8: $22
-    ld   a, LOW(Func_020_78ED)                    ; $5BD9: $3E $ED
+    ld   a, LOW(func_020_78ED)                    ; $5BD9: $3E $ED
     ld   [hl+], a                                 ; $5BDB: $22
     ld   a, BANK(@)                               ; $5BDC: $3E $17
     ld   [hl], a                                  ; $5BDE: $77
@@ -3808,11 +3808,11 @@ jr_017_63EE:
 jr_017_63F1:
     ld   a, [$D001]                               ; $63F1: $FA $01 $D0
     JP_TABLE                                      ; $63F4: $C7
-._00 dw Func_017_63FB                             ; $63F5
-._01 dw Func_017_641E                             ; $63F7
-._02 dw Func_017_6447                             ; $63F9
+._00 dw func_017_63FB                             ; $63F5
+._01 dw func_017_641E                             ; $63F7
+._02 dw func_017_6447                             ; $63F9
 
-Func_017_63FB::
+func_017_63FB::
     ld   a, [$D009]                               ; $63FB: $FA $09 $D0
     and  a                                        ; $63FE: $A7
     jr   nz, jr_017_6405                          ; $63FF: $20 $04
@@ -3829,7 +3829,7 @@ Data_017_6406::
     db   $05, $06, $07, $08, $20, $18, $20, $18  ; $640E
     db   $18, $18, $20, $40, $0C, $0C, $0C, $40  ; $6416
 
-Func_017_641E::
+func_017_641E::
     ld   a, [$D006]                               ; $641E: $FA $06 $D0
     and  a                                        ; $6421: $A7
     jr   nz, jr_017_6446                          ; $6422: $20 $22
@@ -3858,7 +3858,7 @@ jr_017_642E:
 jr_017_6446:
     ret                                           ; $6446: $C9
 
-Func_017_6447::
+func_017_6447::
     ld   a, [$D006]                               ; $6447: $FA $06 $D0
     and  a                                        ; $644A: $A7
     jr   nz, jr_017_6455                          ; $644B: $20 $08
@@ -4726,11 +4726,11 @@ jr_017_6DC1:
 func_017_6DDB::
 jr_017_6DDB:
     ld   hl, wFarcallParams                       ; $6DDB: $21 $01 $DE
-    ld   a, BANK(Func_024_7A40)                   ; $6DDE: $3E $24
+    ld   a, BANK(func_024_7A40)                   ; $6DDE: $3E $24
     ld   [hl+], a                                 ; $6DE0: $22
-    ld   a, HIGH(Func_024_7A40)                   ; $6DE1: $3E $7A
+    ld   a, HIGH(func_024_7A40)                   ; $6DE1: $3E $7A
     ld   [hl+], a                                 ; $6DE3: $22
-    ld   a, LOW(Func_024_7A40)                    ; $6DE4: $3E $40
+    ld   a, LOW(func_024_7A40)                    ; $6DE4: $3E $40
     ld   [hl+], a                                 ; $6DE6: $22
     ld   a, BANK(@)                               ; $6DE7: $3E $17
     ld   [hl], a                                  ; $6DE9: $77
@@ -5235,11 +5235,11 @@ jr_017_71CC:
 
 func_017_71CD::
     ld   hl, wFarcallParams                       ; $71CD: $21 $01 $DE
-    ld   a, BANK(Func_020_7D1C)                   ; $71D0: $3E $20
+    ld   a, BANK(func_020_7D1C)                   ; $71D0: $3E $20
     ld   [hl+], a                                 ; $71D2: $22
-    ld   a, HIGH(Func_020_7D1C)                   ; $71D3: $3E $7D
+    ld   a, HIGH(func_020_7D1C)                   ; $71D3: $3E $7D
     ld   [hl+], a                                 ; $71D5: $22
-    ld   a, LOW(Func_020_7D1C)                    ; $71D6: $3E $1C
+    ld   a, LOW(func_020_7D1C)                    ; $71D6: $3E $1C
     ld   [hl+], a                                 ; $71D8: $22
     ld   a, BANK(@)                               ; $71D9: $3E $17
     ld   [hl], a                                  ; $71DB: $77
@@ -5264,7 +5264,7 @@ Data_017_71DF::
     db   $10, $40, $00, $FA, $11, $40, $08, $0E  ; $7251 |.@...@..|
     db   $10, $60, $00
 
-Func_017_725C::
+func_017_725C::
     ld   c, $11                                   ; $725C: $0E $11
     ld   h, b                                     ; $725E: $60
     ld   hl, $DB57                                ; $725F: $21 $57 $DB
@@ -5376,7 +5376,7 @@ Data_017_72D8::
     db   $08, $7C, $00, $18, $08, $7D, $00, $10  ; $7389 |.|...}..|
     db   $10, $7E, $00, $18, $10, $7F, $00
 
-Func_017_7398::
+func_017_7398::
     ld   a, $3C                                   ; $7398: $3E $3C
     ld   [$C3C0], a                               ; $739A: $EA $C0 $C3
     ldh  a, [hFrameCounter]                               ; $739D: $F0 $E7
@@ -6622,7 +6622,7 @@ Data_017_7987::
     db   $E0, $01, $E2, $01, $E4, $01, $E6, $01  ; $7997
     db   $E8, $01, $EA, $01, $EC
 
-Func_017_79A4::
+func_017_79A4::
     ld   bc, $1EE                                 ; $79A4: $01 $EE $01
     ld   hl, $C2C0                                ; $79A7: $21 $C0 $C2
     add  hl, bc                                   ; $79AA: $09
@@ -6802,7 +6802,7 @@ EndingOwlStairClimbingEntityHandler::
     add  hl, bc                                   ; $7A8A: $09
     ld   a, [hl]                                  ; $7A8B: $7E
     JP_TABLE                                      ; $7A8C: $C7
-._00 dw Func_017_7AB1
+._00 dw func_017_7AB1
 ._01 dw $7B99
 ._02 dw $7C1B
 ._03 dw $79A7
@@ -6821,17 +6821,17 @@ EndingOwlStairClimbingEntityHandler::
 ._10 dw $725F
 ._11 dw $7970
 
-Func_017_7AB1::
+func_017_7AB1::
     call func_017_7B5F                            ; $7AB1: $CD $5F $7B
     ldh  a, [hActiveEntityState]                  ; $7AB4: $F0 $F0
     JP_TABLE                                      ; $7AB6: $C7
-._00 dw Func_017_7AC1
-._01 dw Func_017_7B06
-._02 dw Func_017_7B41
-._03 dw Func_017_7B43
-._04 dw Func_017_7B5B
+._00 dw func_017_7AC1
+._01 dw func_017_7B06
+._02 dw func_017_7B41
+._03 dw func_017_7B43
+._04 dw func_017_7B5B
 
-Func_017_7AC1::
+func_017_7AC1::
     ldh  a, [$FFEC]                               ; $7AC1: $F0 $EC
     cp   $60                                      ; $7AC3: $FE $60
     jp   z, IncrementEntityState                  ; $7AC5: $CA $12 $3B
@@ -6876,11 +6876,11 @@ func_017_7AFA::
     xor  a                                        ; $7AFB: $AF
     ldh  [$FF9A], a                               ; $7AFC: $E0 $9A
     call UpdateFinalLinkPosition                  ; $7AFE: $CD $A8 $21
-    call Func_017_7D34                            ; $7B01: $CD $34 $7D
+    call func_017_7D34                            ; $7B01: $CD $34 $7D
     pop  bc                                       ; $7B04: $C1
     ret                                           ; $7B05: $C9
 
-Func_017_7B06::
+func_017_7B06::
     ld   a, $F8                                   ; $7B06: $3E $F8
     ldh  [$FF9B], a                               ; $7B08: $E0 $9B
     call func_017_7AEF                            ; $7B0A: $CD $EF $7A
@@ -6915,13 +6915,13 @@ Func_017_7B06::
 jr_017_7B40:
     ret                                           ; $7B40: $C9
 
-Func_017_7B41::
-    jr   Func_017_7B5B                            ; $7B41: $18 $18
+func_017_7B41::
+    jr   func_017_7B5B                            ; $7B41: $18 $18
 
-Func_017_7B43::
+func_017_7B43::
     call func_017_7AFA                            ; $7B43: $CD $FA $7A
     call GetEntityTransitionCountdown             ; $7B46: $CD $05 $0C
-    jr   nz, Func_017_7B5B                        ; $7B49: $20 $10
+    jr   nz, func_017_7B5B                        ; $7B49: $20 $10
 
     ld   [hl], $08                                ; $7B4B: $36 $08
     ld   hl, $C3B0                                ; $7B4D: $21 $B0 $C3
@@ -6930,11 +6930,11 @@ Func_017_7B43::
     inc  a                                        ; $7B52: $3C
     ld   [hl], a                                  ; $7B53: $77
     cp   $05                                      ; $7B54: $FE $05
-    jr   nz, Func_017_7B5B                        ; $7B56: $20 $03
+    jr   nz, func_017_7B5B                        ; $7B56: $20 $03
 
     call IncrementEntityState                     ; $7B58: $CD $12 $3B
 
-Func_017_7B5B::
+func_017_7B5B::
     call func_017_7AFA                            ; $7B5B: $CD $FA $7A
     ret                                           ; $7B5E: $C9
 
@@ -7299,7 +7299,7 @@ jr_017_7D0D:
 
     db   $20                                      ; $7D33: $20
 
-Func_017_7D34::
+func_017_7D34::
     ldh  a, [hLinkAnimationState]                 ; $7D34: $F0 $9D
     rla                                           ; $7D36: $17
     rla                                           ; $7D37: $17

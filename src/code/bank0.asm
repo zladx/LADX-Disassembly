@@ -147,25 +147,25 @@ PlayAudioStep::
 ; Palette-related code in bank $20
 ;
 
-Func_020_6A30_trampoline::
-    callsb Func_020_6A30
+func_020_6A30_trampoline::
+    callsb func_020_6A30
 
 RestoreBankAndReturn::
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
-Func_020_6AC1_trampoline::
-    callsb Func_020_6AC1
+func_020_6AC1_trampoline::
+    callsb func_020_6AC1
     jr   RestoreBankAndReturn
 
-Func_020_6BA4_trampoline::
-    callsb Func_020_6BA4
+func_020_6BA4_trampoline::
+    callsb func_020_6BA4
     jr   RestoreBankAndReturn
 
 ClearFileMenuBG_trampoline::
     push af
-    callsb Func_020_6BDC
+    callsb func_020_6BDC
     jr   RestoreStackedBankAndReturn
 
 ; Load file menu background and palette, then switch back to bank 1
@@ -173,8 +173,8 @@ LoadFileMenuBG_trampoline::
     callsb LoadFileMenuBG
     jr   LoadBank1AndReturn
 
-Func_020_6C24_trampoline::
-    callsb Func_020_6C24
+func_020_6C24_trampoline::
+    callsb func_020_6C24
 
 LoadBank1AndReturn::
     ld   a, $01
@@ -245,9 +245,9 @@ RestoreStackedBankAndReturn::
     ld   [MBC3SelectBank], a
     ret
 
-Func_020_6D0E_trampoline::
+func_020_6D0E_trampoline::
     push af
-    callsb Func_020_6D0E
+    callsb func_020_6D0E
     jr   RestoreStackedBankAndReturn
 
 ; Load palette data
@@ -308,26 +308,26 @@ label_999::
     ldi  [hl], a
     jr   RestoreStackedBankAndReturn
 
-Func_020_4985_trampoline::
+func_020_4985_trampoline::
     push af
     ; Will do stuff, and play JINGLE_PUZZLE_SOLVED
-    callsb Func_020_4985
+    callsb func_020_4985
     jr   RestoreStackedBankAndReturn
 
-Func_020_4518_trampoline::
+func_020_4518_trampoline::
     push af
     ; Will lookup something in an entity id table
-    callsb Func_020_4518
+    callsb func_020_4518
     jr   RestoreStackedBankAndReturn
 
-Func_020_4874_trampoline::
+func_020_4874_trampoline::
     push af
-    callsb Func_020_4874
+    callsb func_020_4874
     jr   RestoreStackedBankAndReturn
 
-Func_020_4954_trampoline::
+func_020_4954_trampoline::
     push af
-    callsb Func_020_4954
+    callsb func_020_4954
     jp   RestoreStackedBankAndReturn
 
 ReplaceObjects56and57_trampoline::
@@ -411,14 +411,14 @@ CopyColorDungeonSymbols::
 ; Various trampolines
 ;
 
-Func_036_505F_trampoline::
+func_036_505F_trampoline::
     push af
-    callsb Func_036_505F
+    callsb func_036_505F
     jp   RestoreStackedBankAndReturn
 
-Func_036_4F9B_trampoline::
+func_036_4F9B_trampoline::
     push af
-    callsb Func_036_4F9B
+    callsb func_036_4F9B
     jp   RestoreStackedBankAndReturn
 
 label_A5F::
@@ -433,19 +433,19 @@ func_003_5A2E_trampoline::
     callsb func_003_5A2E
     jp   RestoreStackedBankAndReturn
 
-Func_036_4F68_trampoline::
+func_036_4F68_trampoline::
     push af
-    callsb Func_036_4F68
+    callsb func_036_4F68
     jp   RestoreStackedBankAndReturn
 
-Func_020_6D52_trampoline::
+func_020_6D52_trampoline::
     push af
-    callsb Func_020_6D52
+    callsb func_020_6D52
     jp   RestoreStackedBankAndReturn
 
-Func_036_4BE8_trampoline::
+func_036_4BE8_trampoline::
     push af
-    callsb Func_036_4BE8
+    callsb func_036_4BE8
     jp   RestoreStackedBankAndReturn
 
 label_A9B::
@@ -455,9 +455,9 @@ label_A9B::
     call ExecuteDialog
     jp   RestoreStackedBankAndReturn
 
-Func_036_705A_trampoline::
+func_036_705A_trampoline::
     push af
-    callsw Func_036_705A
+    callsw func_036_705A
 
 RestoreStackedBank::
     pop  af
@@ -466,34 +466,34 @@ RestoreStackedBank::
 
 label_AB5::
     push af
-    callsb Func_024_5C1A
+    callsb func_024_5C1A
     ld   de, wRequest
     call ExecuteBackgroundCopyRequest
     jr   RestoreStackedBank
 
-Func_036_703E_trampoline::
+func_036_703E_trampoline::
     push af
-    callsb Func_036_703E
+    callsb func_036_703E
     jp   RestoreStackedBankAndReturn
 
-Func_036_70D6_trampoline::
+func_036_70D6_trampoline::
     push af
-    callsb Func_036_70D6
+    callsb func_036_70D6
     jp   RestoreStackedBankAndReturn
 
-Func_036_4A77_trampoline::
+func_036_4A77_trampoline::
     push af
-    callsw Func_036_4A77
+    callsw func_036_4A77
     jp   RestoreStackedBankAndReturn
 
-Func_036_4A4C_trampoline::
+func_036_4A4C_trampoline::
     push af
-    callsb Func_036_4A4C
+    callsb func_036_4A4C
     jp   RestoreStackedBankAndReturn
 
-Func_036_7161_trampoline::
+func_036_7161_trampoline::
     push af
-    callsb Func_036_7161
+    callsb func_036_7161
     jp   RestoreStackedBankAndReturn
 
 ; Load Background map and attributes for photo
@@ -554,7 +554,7 @@ label_B2F::
     ldh  a, [hScratch2]
     and  $80
     jr   nz, .else
-    callsb Func_020_6E50
+    callsb func_020_6E50
     jr   c, .endIf
 .else
     ld   b, [hl]
@@ -1390,7 +1390,7 @@ WorldDefaultHandler::
 
     callsb func_20_4B1F
 
-    callsw Func_019_7A9A
+    callsw func_019_7A9A
 
     call AnimateEntities
     callsw label_002_5487
@@ -1417,10 +1417,10 @@ label_1006::
     dec  e
 
 label_100A::
-    callsb Func_020_5C9C
+    callsb func_020_5C9C
 
 label_1012::
-    callsw Func_014_54F8
+    callsw func_014_54F8
 
 returnFromGameplayHandler::
     ; Present dialog if needed
@@ -1616,7 +1616,7 @@ LinkMotionPassOutHandler::
     jpsw LinkPassOut
 
 LinkMotionInteractiveHandler::
-    callsb Func_036_725A
+    callsb func_036_725A
     and  a
     ret  z
 
@@ -1782,7 +1782,7 @@ label_1281::
 
 label_128D::
     ; Special code for the Color Dungeon
-    callsb Func_020_48CA
+    callsb func_020_48CA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1889,8 +1889,8 @@ SetShieldVals::
     ld   [wHasMirrorShield], a
     ; fallthrough
 
-Func_020_4B4A_trampoline::
-    callsb Func_020_4B4A
+func_020_4B4A_trampoline::
+    callsb func_020_4B4A
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1910,7 +1910,7 @@ PlaceBomb::
     ret  c
 
 func_1373::
-    callsb Func_020_4B81
+    callsb func_020_4B81
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -1927,7 +1927,7 @@ label_1387::
     ld   a, ENTITY_BOOMERANG
     call SpawnPlayerProjectile
     ret  c
-    callsb Func_020_4BFF
+    callsb func_020_4BFF
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -2107,7 +2107,7 @@ label_14A7::
     ld   a, ENTITY_MAGIC_POWDER_SPRINKLE
     call SpawnNewEntity_trampoline
     ret  c
-    callsb Func_020_4C47
+    callsb func_020_4C47
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -2637,13 +2637,13 @@ label_1814::
     ret
 
 label_1819::
-    callsb Func_020_4AB3
+    callsb func_020_4AB3
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
 label_1828::
-    callsb Func_020_49BA
+    callsb func_020_49BA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -2962,15 +2962,15 @@ label_1A21::
     ret
 
 label_1A22::
-    callsb Func_020_6C4F
-    callsb Func_020_55CA
+    callsb func_020_6C4F
+    callsb func_020_55CA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
 label_1A39::
-    callsb Func_020_6C7A
-    callsb Func_020_563B
+    callsb func_020_6C7A
+    callsb func_020_563B
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
@@ -3795,7 +3795,7 @@ IncrementBGMapSourceAndDestination_Horizontal::
 ; Update a region (row or column) of the BG map during room transition
 DoUpdateBGRegion::
     ; Configures an async data request to copy background tilemap
-    callsb Func_020_4A76
+    callsb func_020_4A76
 
     ; Switch back to Map Data bank
     ld   a, $08
@@ -3902,7 +3902,7 @@ DoUpdateBGRegion::
     jr   z, .verticalIncrementEnd
     push bc
     push de
-    callsb Func_020_49D9
+    callsb func_020_49D9
 
     ; Select BG attributes bank
     ldh  a, [hScratch8]
@@ -3934,7 +3934,7 @@ DoUpdateBGRegion::
     ; Load BG palette data
     push bc
     push de
-    callsb Func_020_49D9
+    callsb func_020_49D9
     ; Select BG attributes bank
     ldh  a, [hScratch8]
     ld   [MBC3SelectBank], a
@@ -3976,7 +3976,7 @@ DoUpdateBGRegion::
     jp   nz, .loop
 
     ; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
-    jpsb Func_020_5570
+    jpsb func_020_5570
 
 include "code/home/dialog.asm"
 
@@ -4023,7 +4023,7 @@ label_27F2::
     ldh  a, [hFFBC]
     and  a
     jr   nz, .skip
-    callsb Func_01F_4003
+    callsb func_01F_4003
 .skip
     jp   ReloadSavedBank
 
@@ -4830,7 +4830,7 @@ LoadTilemap9::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    callsb Func_020_475A
+    callsb func_020_475A
     jp   .oamTilesEnd
 .colorDungeonEnd
 
@@ -5640,10 +5640,10 @@ LoadRoom::
     callsb PadRoomObjectsArea
 
     ; Do stuff that returns early if end-of-room
-    callsb Func_036_6D4D
+    callsb func_036_6D4D
 
     ; Load palette for room objects?
-    callsb Func_021_53F3
+    callsb func_021_53F3
 
     ; Reload saved bank and return
     jp   ReloadSavedBank
@@ -7024,7 +7024,7 @@ label_3925::
     ret
 
 label_3935::
-    callsw Func_019_7C50
+    callsw func_019_7C50
     ld   a, $03
     jp   SwitchBank
 
@@ -7104,7 +7104,7 @@ AnimateEntities::
     add  hl, de
     ld   a, [hl]
     ld   [$C3C0], a
-    callsb Func_020_4303
+    callsb func_020_4303
     xor  a
     ld   [MBC3SelectBank], a
     ld   a, [wDialogState]
@@ -7113,10 +7113,10 @@ AnimateEntities::
     ld   [$C1AD], a
 
 .label_39E3
-    ld   a, BANK(Func_020_6352)
+    ld   a, BANK(func_020_6352)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    call Func_020_6352
+    call func_020_6352
 
     ; Initialize the entities counter
     ld   b, $00
@@ -7197,10 +7197,10 @@ AnimateEntity::
     call UpdateEntityPositionForRoomTransition
 .liftedEnd
 
-    ld   a, BANK(Func_014_4D73)
+    ld   a, BANK(func_014_4D73)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    call Func_014_4D73
+    call func_014_4D73
 
     ; Select bank 3
     ld   a, $03

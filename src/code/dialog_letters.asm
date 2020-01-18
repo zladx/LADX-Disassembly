@@ -1,4 +1,4 @@
-Func_01C_49F1::
+func_01C_49F1::
     ld   a, [$C170]                             ; $49F1: $FA $70 $C1
     and  %00011111                              ; $49F4: $E6 $1F
     ld   e, a                                   ; $49F6: $5F
@@ -35,14 +35,14 @@ DialogOpenAnimationEnd::
     ld   c, a                                   ; $4A2F: $4F
     ld   a, [$C16F]                             ; $4A30: $FA $6F $C1
     cp   $05                                    ; $4A33: $FE $05
-    jr   z, Func_01C_4A71                       ; $4A35: $28 $3A
+    jr   z, func_01C_4A71                       ; $4A35: $28 $3A
 
     bit  7, c                                   ; $4A37: $CB $79
-    jr   z, Func_01C_4A3D                       ; $4A39: $28 $02
+    jr   z, func_01C_4A3D                       ; $4A39: $28 $02
 
     add  $05                                    ; $4A3B: $C6 $05
 
-Func_01C_4A3D::
+func_01C_4A3D::
     ld   c, a                                   ; $4A3D: $4F
     ld   b, $00                                 ; $4A3E: $06 $00
     ld   e, $01                                 ; $4A40: $1E $01
@@ -68,21 +68,21 @@ Func_01C_4A3D::
     ld   [hl], $00                              ; $4A62: $36 $00
     ldh  a, [hIsGBC]                            ; $4A64: $F0 $FE
     and  a                                      ; $4A66: $A7
-    jr   z, Func_01C_4A6C                       ; $4A67: $28 $03
+    jr   z, func_01C_4A6C                       ; $4A67: $28 $03
 
-    call Func_01C_4A76                          ; $4A69: $CD $76 $4A
+    call func_01C_4A76                          ; $4A69: $CD $76 $4A
 
-Func_01C_4A6C::
+func_01C_4A6C::
     ld   hl, $C16F                              ; $4A6C: $21 $6F $C1
     inc  [hl]                                   ; $4A6F: $34
     ret                                         ; $4A70: $C9
 
-Func_01C_4A71::
+func_01C_4A71::
     ld   hl, $C19F                              ; $4A71: $21 $9F $C1
     inc  [hl]                                   ; $4A74: $34
     ret                                         ; $4A75: $C9
 
-Func_01C_4A76::
+func_01C_4A76::
     ld   hl, $DC90                              ; $4A76: $21 $90 $DC
     ld   de, $D600                              ; $4A79: $11 $00 $D6
     ld   b, $04                                 ; $4A7C: $06 $04
@@ -109,19 +109,19 @@ Data_01C_4A9E::
     db   $48, $00, $36, $12 ; $4A9A |....H.6.|
     db   $24, $48, $00, $36, $12, $24           ; $4AA2 |$H.6.$|
 
-Func_01C_4AA8::
+func_01C_4AA8::
     ld   a, [$C19F]                             ; $4AA8: $FA $9F $C1
     ld   c, a                                   ; $4AAB: $4F
     ld   a, [$C16F]                             ; $4AAC: $FA $6F $C1
     cp   $05                                    ; $4AAF: $FE $05
-    jr   z, Func_01C_4A71                       ; $4AB1: $28 $BE
+    jr   z, func_01C_4A71                       ; $4AB1: $28 $BE
 
     bit  7, c                                   ; $4AB3: $CB $79
-    jr   z, Func_01C_4AB9                       ; $4AB5: $28 $02
+    jr   z, func_01C_4AB9                       ; $4AB5: $28 $02
 
     add  $05                                    ; $4AB7: $C6 $05
 
-Func_01C_4AB9::
+func_01C_4AB9::
     ld   c, a                                   ; $4AB9: $4F
     ld   b, $00                                 ; $4ABA: $06 $00
     ld   e, $01                                 ; $4ABC: $1E $01
@@ -155,26 +155,26 @@ Func_01C_4AB9::
     pop  hl                                     ; $4AEA: $E1
     ld   e, $12                                 ; $4AEB: $1E $12
 
-Func_01C_4AED::
+func_01C_4AED::
     ld   a, [bc]                                ; $4AED: $0A
     inc  bc                                     ; $4AEE: $03
     ldi  [hl], a                                ; $4AEF: $22
     dec  e                                      ; $4AF0: $1D
-    jr   nz, Func_01C_4AED                      ; $4AF1: $20 $FA
+    jr   nz, func_01C_4AED                      ; $4AF1: $20 $FA
 
     ld   [hl], $00                              ; $4AF3: $36 $00
     ldh  a, [hIsGBC]                            ; $4AF5: $F0 $FE
     and  a                                      ; $4AF7: $A7
-    jr   z, Func_01C_4AFD                       ; $4AF8: $28 $03
+    jr   z, func_01C_4AFD                       ; $4AF8: $28 $03
 
-    call Func_01C_4B02                          ; $4AFA: $CD $02 $4B
+    call func_01C_4B02                          ; $4AFA: $CD $02 $4B
 
-Func_01C_4AFD::
+func_01C_4AFD::
     ld   hl, $C16F                              ; $4AFD: $21 $6F $C1
     inc  [hl]                                   ; $4B00: $34
     ret                                         ; $4B01: $C9
 
-Func_01C_4B02::
+func_01C_4B02::
     push bc                                     ; $4B02: $C5
     ld   hl, $DC90                              ; $4B03: $21 $90 $DC
     ld   de, $D600                              ; $4B06: $11 $00 $D6

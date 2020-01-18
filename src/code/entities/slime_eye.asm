@@ -153,7 +153,7 @@ jr_004_4A41:
     and  a                                        ; $4A5F: $A7
     jr   nz, jr_004_4A67                          ; $4A60: $20 $05
 
-    call label_BFB                                ; $4A62: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4A62: $CD $FB $0B
     ld   [hl], $14                                ; $4A65: $36 $14
 
 jr_004_4A67:
@@ -174,7 +174,7 @@ jr_004_4A78:
 SlimeEyeState3Handler::
     call func_004_4DB5                            ; $4A7E: $CD $B5 $4D
     call func_004_7FA3                            ; $4A81: $CD $A3 $7F
-    call label_C56                                ; $4A84: $CD $56 $0C
+    call func_C56                                ; $4A84: $CD $56 $0C
     ld   hl, $C300                                ; $4A87: $21 $00 $C3
     add  hl, bc                                   ; $4A8A: $09
     ld   a, [hl]                                  ; $4A8B: $7E

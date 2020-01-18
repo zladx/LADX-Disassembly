@@ -100,7 +100,7 @@ Data_004_409F::
     db   $00, $01, $00, $02
 
 func_004_40A3::
-    call label_C56                                ; $40A3: $CD $56 $0C
+    call func_C56                                ; $40A3: $CD $56 $0C
     call label_3B70                               ; $40A6: $CD $70 $3B
     call label_3B44                               ; $40A9: $CD $44 $3B
     jr   nc, jr_004_40C7                          ; $40AC: $30 $19
@@ -273,7 +273,7 @@ jr_004_41A9:
     call label_3B23                               ; $41A9: $CD $23 $3B
 
 jr_004_41AC:
-    call label_C56                                ; $41AC: $CD $56 $0C
+    call func_C56                                ; $41AC: $CD $56 $0C
     call label_3B70                               ; $41AF: $CD $70 $3B
     call func_004_7BE3                            ; $41B2: $CD $E3 $7B
     ldh  a, [wActiveEntityPosX]                               ; $41B5: $F0 $EE
@@ -408,7 +408,7 @@ Data_004_4281::
 Data_004_42B1::
     db   $26, $00                                 ; $42B1
 
-func_004_42B3:
+func_004_42B3::
     ld   hl, $C3B0                                ; $42B3: $21 $B0 $C3
     add  hl, bc                                   ; $42B6: $09
     ld   a, [hl]                                  ; $42B7: $7E
@@ -448,7 +448,7 @@ GenieState1Handler::
     jr   z, jr_004_431A                           ; $42EE: $28 $2A
 
 ; Level 2 Boss killed
-label_004_42F0::
+label_004_42F0:
     ld   hl, wEntitiesFlashCountdownTable         ; $42F0: $21 $20 $C4
     add  hl, bc                                   ; $42F3: $09
     ldh  a, [hFrameCounter]                       ; $42F4: $F0 $E7
@@ -997,7 +997,7 @@ jr_004_45F1:
     call func_004_4634                            ; $462E: $CD $34 $46
     jp   label_004_4568                           ; $4631: $C3 $68 $45
 
-func_004_4634:
+func_004_4634::
     ld   hl, wEntitiesPosYTable                   ; $4634: $21 $10 $C2
     add  hl, bc                                   ; $4637: $09
     ld   a, [hl]                                  ; $4638: $7E
@@ -1045,7 +1045,7 @@ Data_004_4655::
 Data_004_46F5::
     db   $74, $02, $74, $22                       ; $46F5
 
-func_004_46F9:
+func_004_46F9::
     ldh  a, [hActiveEntityState]                  ; $46F9: $F0 $F0
     cp   $05                                      ; $46FB: $FE $05
     jr   nz, jr_004_4713                          ; $46FD: $20 $14

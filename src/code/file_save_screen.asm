@@ -72,7 +72,7 @@ FileSaveInitial::
 FileSaveMapFadeOut::
     call DrawLinkSprite
     call AnimateEntitiesAndRestoreBank01
-    call label_1A22
+    call func_1A22
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_4072
@@ -115,7 +115,7 @@ FileSaveDelay2::
     jp   IncrementGameplaySubtypeAndReturn
 
 FileSaveVisible::
-    call label_1A39
+    call func_1A39
     ld   a, [$C16B]
     cp   $04
     jr   nz, .return

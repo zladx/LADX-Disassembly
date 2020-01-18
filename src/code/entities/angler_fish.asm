@@ -8,7 +8,7 @@ AnglerFishEntityHandler::
 ._02 dw func_005_5901                             ; $5580
 ._03 dw func_005_5984                             ; $5582
 
-func_005_5584:
+func_005_5584::
     call label_3EE8                               ; $5584: $CD $E8 $3E
     call func_005_58D4                            ; $5587: $CD $D4 $58
     ldh  a, [hActiveEntityStatus]                 ; $558A: $F0 $EA
@@ -23,7 +23,7 @@ func_005_5584:
 ._00 dw func_005_559D                             ; $5599
 ._01 dw func_005_55AB                             ; $559B
 
-func_005_559D:
+func_005_559D::
     call GetEntityTransitionCountdown             ; $559D: $CD $05 $0C
     ld   [hl], $FF                                ; $55A0: $36 $FF
     ld   hl, wEntitiesFlashCountdownTable         ; $55A2: $21 $20 $C4
@@ -31,7 +31,7 @@ func_005_559D:
     ld   [hl], $FF                                ; $55A6: $36 $FF
     jp   label_005_6347                           ; $55A8: $C3 $47 $63
 
-func_005_55AB:
+func_005_55AB::
     call GetEntityTransitionCountdown             ; $55AB: $CD $05 $0C
     jp   z, label_005_55BC                        ; $55AE: $CA $BC $55
 
@@ -193,7 +193,7 @@ jr_005_5650:
     pop  bc                                       ; $56B0: $C1
 
 jr_005_56B1:
-    call label_C56                                ; $56B1: $CD $56 $0C
+    call func_C56                                ; $56B1: $CD $56 $0C
     ld   hl, wEntitiesUnknowTableY                ; $56B4: $21 $D0 $C3
     add  hl, bc                                   ; $56B7: $09
     ld   a, [hl]                                  ; $56B8: $7E
@@ -238,7 +238,7 @@ Data_005_56F7::
     db   $60, $18
 
 func_005_56F9::
-    call label_BFB
+    call IsEntityDropTimerZero
     jr   nz, jr_005_5713                          ; $56FC: $20 $15
 
     call GetEntityTransitionCountdown             ; $56FE: $CD $05 $0C
@@ -278,7 +278,7 @@ jr_005_572A:
     ld   [hl], a                                  ; $5733: $77
     jp   func_005_7AB4                            ; $5734: $C3 $B4 $7A
 
-func_005_5737:
+func_005_5737::
     ld   hl, wEntitiesUnknowTableY                ; $5737: $21 $D0 $C3
     add  hl, bc                                   ; $573A: $09
     ld   a, [hl]                                  ; $573B: $7E
@@ -312,7 +312,7 @@ jr_005_574A:
     ld   [hl], $FF                                ; $5769: $36 $FF
     jp   IncrementEntityState                     ; $576B: $C3 $12 $3B
 
-func_005_576E:
+func_005_576E::
     ld   hl, wEntitiesUnknowTableY                ; $576E: $21 $D0 $C3
     add  hl, bc                                   ; $5771: $09
     ld   a, [hl]                                  ; $5772: $7E
@@ -331,7 +331,7 @@ func_005_576E:
     cp   [hl]                                     ; $5789: $BE
     jr   c, jr_005_579B                           ; $578A: $38 $0F
 
-    call label_BFB                                ; $578C: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $578C: $CD $FB $0B
     call GetRandomByte                            ; $578F: $CD $0D $28
     and  $1F                                      ; $5792: $E6 $1F
     add  $40                                      ; $5794: $C6 $40
@@ -443,11 +443,11 @@ jr_005_592A:
 Data_005_5932::
     db   $74, $05, $76, $05, $76, $25, $74, $25
 
-func_005_593A:
+func_005_593A::
     ld   de, Data_005_5932                        ; $593A: $11 $32 $59
     call RenderAnimatedActiveEntity               ; $593D: $CD $C0 $3B
     call func_005_7A3A                            ; $5940: $CD $3A $7A
-    call label_C56                                ; $5943: $CD $56 $0C
+    call func_C56                                ; $5943: $CD $56 $0C
     ld   hl, wEntitiesUnknowTableY                ; $5946: $21 $D0 $C3
     add  hl, bc                                   ; $5949: $09
     inc  [hl]                                     ; $594A: $34
@@ -490,7 +490,7 @@ Data_005_5980::
 Data_005_5982::
     db   $08, $F8
 
-func_005_5984:
+func_005_5984::
     ld   hl, wEntitiesSpeedXTable                 ; $5984: $21 $40 $C2
     add  hl, bc                                   ; $5987: $09
     ld   a, [hl]                                  ; $5988: $7E
@@ -502,7 +502,7 @@ func_005_5984:
     ld   de, Data_005_5978                        ; $5990: $11 $78 $59
     call RenderAnimatedActiveEntity               ; $5993: $CD $C0 $3B
     call func_005_7A3A                            ; $5996: $CD $3A $7A
-    call label_C56                                ; $5999: $CD $56 $0C
+    call func_C56                                ; $5999: $CD $56 $0C
     ldh  a, [hFrameCounter]                       ; $599C: $F0 $E7
     rra                                           ; $599E: $1F
     rra                                           ; $599F: $1F

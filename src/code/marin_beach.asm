@@ -67,7 +67,7 @@ label_624D::
 MarineBeachPrepare1::
     ld   a, $01
     ld   [$C167], a
-    call label_1A22
+    call func_1A22
     ld   a, [$C16B]
     cp   $04
     jr   nz, .return
@@ -217,7 +217,7 @@ MarineBeachScroll1::
     ldh  a, [hFrameCounter]
     and  $07
     jr   nz, MarineBeachScroll2
-    call label_1A39
+    call func_1A39
     ld   a, [$C16B]
     cp   $04
     jr   nz, MarineBeachScroll2

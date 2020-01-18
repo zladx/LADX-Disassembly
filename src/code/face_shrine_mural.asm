@@ -41,7 +41,7 @@ label_6B18::
 label_6B2B::
     ld   a, $01
     ld   [$C167], a
-    call label_1A22
+    call func_1A22
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_6B51
@@ -74,7 +74,7 @@ label_6B52::
     jp   IncrementGameplaySubtypeAndReturn
 
 label_6B6F::
-    call label_1A39
+    call func_1A39
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_6B80

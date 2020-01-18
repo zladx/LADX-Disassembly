@@ -29,7 +29,7 @@ jr_005_5372:
 ._01 dw func_005_539C                             ; $5386
 ._02 dw func_005_53CB                             ; $5388
 
-func_005_538A:
+func_005_538A::
     ld   a, [$D477]                               ; $538A: $FA $77 $D4
     and  a                                        ; $538D: $A7
     jr   nz, func_005_53CB                        ; $538E: $20 $3B
@@ -41,7 +41,7 @@ func_005_538A:
     call OpenDialog                               ; $5396: $CD $85 $23
     jp   IncrementEntityState                     ; $5399: $C3 $12 $3B
 
-func_005_539C:
+func_005_539C::
     ld   a, [wDialogState]                        ; $539C: $FA $9F $C1
     and  a                                        ; $539F: $A7
     ret  nz                                       ; $53A0: $C0
@@ -76,7 +76,7 @@ jr_005_53C5:
     ld   a, $4E                                   ; $53C6: $3E $4E
     jp   OpenDialog                               ; $53C8: $C3 $85 $23
 
-func_005_53CB:
+func_005_53CB::
     call func_005_5506                            ; $53CB: $CD $06 $55
     ret  nc                                       ; $53CE: $D0
 
@@ -184,7 +184,7 @@ func_005_5455::
 jr_005_546A:
     jr   jr_005_5487                              ; $546A: $18 $1B
 
-func_005_546C:
+func_005_546C::
     ldh  a, [wActiveEntityPosX]                   ; $546C: $F0 $EE
     ldh  [hLinkPositionX], a                      ; $546E: $E0 $98
     ldh  a, [wActiveEntityPosY]                   ; $5470: $F0 $EC
@@ -206,7 +206,7 @@ jr_005_5487:
     ld   de, Data_005_53D4                        ; $548A: $11 $D4 $53
     jp   RenderAnimatedActiveEntity               ; $548D: $C3 $C0 $3B
 
-func_005_5490:
+func_005_5490::
     ldh  a, [hFrameCounter]                       ; $5490: $F0 $E7
     rra                                           ; $5492: $1F
     rra                                           ; $5493: $1F
@@ -240,7 +240,7 @@ func_005_5490:
 jr_005_54C1:
     jr   jr_005_5483                              ; $54C1: $18 $C0
 
-func_005_54C3:
+func_005_54C3::
     call HurtLinkIfCollisioningWithEnemy_trampoline; $54C3: $CD $5A $3B
     jr   nc, jr_005_54E5                          ; $54C6: $30 $1D
 
@@ -268,7 +268,7 @@ jr_005_54E5:
 Data_005_54E6::
     db   $06, $04, $02, $00
 
-func_005_54EA:
+func_005_54EA::
     ld   hl, wEntitiesDirectionTable              ; $54EA: $21 $80 $C3
     add  hl, bc                                   ; $54ED: $09
     ld   e, [hl]                                  ; $54EE: $5E
@@ -289,7 +289,7 @@ func_005_54EA:
     or   [hl]                                     ; $5502: $B6
     jp   SetEntitySpriteVariant                   ; $5503: $C3 $0C $3B
 
-func_005_5506:
+func_005_5506::
     ld   e, b                                     ; $5506: $58
     ldh  a, [hActiveEntityType]                   ; $5507: $F0 $EB
     cp   $40                                      ; $5509: $FE $40

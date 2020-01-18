@@ -73,7 +73,7 @@ jr_019_44C5:
 
     jp   label_019_7E61                           ; $44C9: $C3 $61 $7E
 
-func_019_44CC:
+func_019_44CC::
     ld   a, [wIsIndoor]                           ; $44CC: $FA $A5 $DB
     and  a                                        ; $44CF: $A7
     ret  nz                                       ; $44D0: $C0

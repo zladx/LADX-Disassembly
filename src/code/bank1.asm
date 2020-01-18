@@ -1516,7 +1516,7 @@ label_5674::
 label_5678::
     call DrawLinkSprite
     call AnimateEntitiesAndRestoreBank01
-    call label_1A22
+    call func_1A22
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_56F3
@@ -1584,7 +1584,7 @@ label_56F3::
     ld   [$DDD5], a
     call IncrementGameplaySubtype
     ret
-    call label_1A39
+    call func_1A39
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_571B
@@ -1751,7 +1751,7 @@ label_5818::
     call label_6A7C
 
 FileSaveFadeOut::
-    call label_1A22
+    call func_1A22
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_58A7
@@ -3292,7 +3292,7 @@ label_6816::
 label_6829::
     ld   a, $01
     ld   [$C167], a
-    call label_1A22
+    call func_1A22
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_6855
@@ -3361,7 +3361,7 @@ label_689E::
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
     call label_6A7C
-    call label_1A39
+    call func_1A39
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_68BF

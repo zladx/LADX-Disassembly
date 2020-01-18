@@ -2,7 +2,7 @@
 ; This file was created with mgbdis v1.0.1 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-Func_020_4303::
+func_020_4303::
     ld   a, [$C5A0]                               ; $4303: $FA $A0 $C5
     ld   [$C5A1], a                               ; $4306: $EA $A1 $C5
     xor  a                                        ; $4309: $AF
@@ -82,7 +82,7 @@ data_020_4322::
     db   $DC, $4B, $56, $4B, $EB, $4B, $01, $4C  ; $450A |.KVK.K.L|
     db   $2D, $4C, $CB, $4B, $56, $4B            ; $4512 |-L.KVK|
 
-Func_020_4518::
+func_020_4518::
     ldh  a, [hActiveEntityType]                     ; $4518: $F0 $EB
     ld   e, a                                     ; $451A: $5F
     ld   d, $00                                   ; $451B: $16 $00
@@ -110,7 +110,7 @@ BGMapToLoadAdjustementTable::
     db   $D4, $4D, $37, $6C                      ; $4573 |.M7l|
 
 ; Manipulate wBGMapToLoad
-Func_020_4577::
+func_020_4577::
     ld   hl, BGMapToLoadAdjustementTable          ; $4577: $21 $2B $45
     ld   b, $00                                   ; $457A: $06 $00
     ld   a, [wBGMapToLoad]                        ; $457C: $FA $FF $D6
@@ -147,7 +147,7 @@ data_020_45EA::
     db   $35, $62, $35, $62, $35, $50, $2D, $62  ; $4609 |5b5b5P-b|
     db   $35, $62, $35, $62, $35                 ; $4611 |5b5b5|
 
-Func_020_4616::
+func_020_4616::
     push de                                       ; $4616: $D5
     ldh  a, [hMapRoom]                            ; $4617: $F0 $F6
     and  a                                        ; $4619: $A7
@@ -277,7 +277,7 @@ data_020_46AA::
     db   $00, $00, $47, $35, $00, $00            ; $4754 |..G5..|
 
 ; Color-dungeon related function
-Func_020_475A::
+func_020_475A::
     ld   hl, data_020_46AA                        ; $475A: $21 $AA $46
     ldh  a, [hMapRoom]                            ; $475D: $F0 $F6
     rla                                           ; $475F: $17
@@ -491,7 +491,7 @@ Data_020_486C::
     rlca                                          ; $4872: $07
     inc  c                                        ; $4873: $0C
 
-Func_020_4874::
+func_020_4874::
     ld   hl, Data_020_486C                        ; $4874: $21 $6C $48
     add  hl, de                                   ; $4877: $19
     ldh  a, [hScratch0]                           ; $4878: $F0 $D7
@@ -514,7 +514,7 @@ Func_020_4874::
     ld   e, a                                     ; $4896: $5F
     ret                                           ; $4897: $C9
 
-Func_020_4898::
+func_020_4898::
     push de                                       ; $4898: $D5
     ld   hl, wRequestDestinationHigh              ; $4899: $21 $01 $D6
     ld   a, [wRequests]                           ; $489C: $FA $00 $D6
@@ -552,7 +552,7 @@ Func_020_4898::
     ret                                           ; $48C9: $C9
 
 ; Special code for the Color Dungeon
-Func_020_48CA::
+func_020_48CA::
     ; If Free-movement mode is enabled, return
     ld   a, [wFreeMovementMode]                   ; $48CA: $FA $7B $C1
     and  a                                        ; $48CD: $A7
@@ -575,7 +575,7 @@ Func_020_48CA::
     ldh  [hScratch0], a                           ; $48E2: $E0 $D7
     ldh  a, [hLinkPositionY]                      ; $48E4: $F0 $99
     ldh  [hScratch1], a                           ; $48E6: $E0 $D8
-    call Func_020_4874                            ; $48E8: $CD $74 $48
+    call func_020_4874                            ; $48E8: $CD $74 $48
     ld   hl, wRoomObjects                         ; $48EB: $21 $11 $D7
     add  hl, de                                   ; $48EE: $19
     ld   a, [hl]                                  ; $48EF: $7E
@@ -593,7 +593,7 @@ jr_020_48FC:
     and  a                                        ; $48FF: $A7
     jr   nz, jr_020_4917                          ; $4900: $20 $15
 
-    call Func_020_4954                            ; $4902: $CD $54 $49
+    call func_020_4954                            ; $4902: $CD $54 $49
     call UseRocksFeather                          ; $4905: $CD $CB $14
     jr   jr_020_4917                              ; $4908: $18 $0D
 
@@ -637,10 +637,10 @@ jr_020_4917:
     call label_2887                               ; $493F: $CD $87 $28
     push bc                                       ; $4942: $C5
     ld   a, $20                                   ; $4943: $3E $20
-    call label_91D                                ; $4945: $CD $1D $09
+    call func_91D                                ; $4945: $CD $1D $09
     pop  bc                                       ; $4948: $C1
     ld   de, $491F                                ; $4949: $11 $1F $49
-    call Func_020_4898                            ; $494C: $CD $98 $48
+    call func_020_4898                            ; $494C: $CD $98 $48
     ret                                           ; $494F: $C9
 
     db   $76                                      ; $4950: $76
@@ -648,7 +648,7 @@ jr_020_4917:
     db   $76                                      ; $4952: $76
     ld   [hl], a                                  ; $4953: $77
 
-Func_020_4954::
+func_020_4954::
     ld   a, [hl]                                  ; $4954: $7E
     inc  a                                        ; $4955: $3C
     ldh  [hScratch0], a                           ; $4956: $E0 $D7
@@ -667,14 +667,14 @@ jr_020_4961:
     ldh  a, [hScratch0]                           ; $4968: $F0 $D7
     ld   [$DDD8], a                               ; $496A: $EA $D8 $DD
     ld   a, $20                                   ; $496D: $3E $20
-    call label_91D                                ; $496F: $CD $1D $09
+    call func_91D                                ; $496F: $CD $1D $09
     pop  bc                                       ; $4972: $C1
     ldh  a, [hScratch0]                           ; $4973: $F0 $D7
     cp   $AE                                      ; $4975: $FE $AE
     jr   nz, jr_020_497F                          ; $4977: $20 $06
 
     ld   de, $4950                                ; $4979: $11 $50 $49
-    call Func_020_4898                            ; $497C: $CD $98 $48
+    call func_020_4898                            ; $497C: $CD $98 $48
 
 jr_020_497F:
     ret                                           ; $497F: $C9
@@ -687,7 +687,7 @@ jr_020_497F:
 jr_020_4984:
     rla                                           ; $4984: $17
 
-Func_020_4985::
+func_020_4985::
     push bc                                       ; $4985: $C5
     push de                                       ; $4986: $D5
     ld   hl, $4980                                ; $4987: $21 $80 $49
@@ -722,7 +722,7 @@ jr_020_49AF:
     db   $08, $0C, $0C                            ; $49B5: $08 $0C $0C
     ld   a, [rNR10]                               ; $49B8: $F0 $10
 
-Func_020_49BA::
+func_020_49BA::
     ldh  a, [hLinkDirection]                      ; $49BA: $F0 $9E
     ld   e, a                                     ; $49BC: $5F
     ld   d, $00                                   ; $49BD: $16 $00
@@ -741,7 +741,7 @@ Func_020_49BA::
     ret                                           ; $49D8: $C9
 
 ; Load BG palette data
-Func_020_49D9::
+func_020_49D9::
     ldh  a, [hBGMapOffsetHigh]                    ; $49D9: $F0 $E0
     ld   h, a                                     ; $49DB: $67
     ldh  a, [hBGMapOffsetLow]                     ; $49DC: $F0 $E1
@@ -763,7 +763,7 @@ Func_020_49D9::
     inc  de                                       ; $49F2: $13
     inc  de                                       ; $49F3: $13
 
-Func_020_49F4:
+func_020_49F4:
     ld   a, [wBGUpdateRegionOriginLow]            ; $49F4: $FA $27 $C1
     ld   [wRequestDestinationLow], a              ; $49F7: $EA $02 $D6
     ld   a, [wBGUpdateRegionOriginHigh]           ; $49FA: $FA $26 $C1
@@ -784,7 +784,7 @@ Func_020_49F4:
     ld   c, $04                                   ; $4A1F: $0E $04
     ret                                           ; $4A21: $C9
 
-Func_020_4A22:
+func_020_4A22:
     ld   a, [wBGUpdateRegionOriginLow]            ; $4A22: $FA $27 $C1
     ld   [wRequestDestinationLow], a              ; $4A25: $EA $02 $D6
     ld   [$DC92], a                               ; $4A28: $EA $92 $DC
@@ -821,7 +821,7 @@ Func_020_4A22:
     ret                                           ; $4A75: $C9
 
 ; Configures an async data request to copy background tilemap
-Func_020_4A76::
+func_020_4A76::
     ld   a, [wRoomTransitionDirection]            ; $4A76: $FA $25 $C1
     ld   c, a                                     ; $4A79: $4F
     ld   b, $00                                   ; $4A7A: $06 $00
@@ -833,11 +833,11 @@ Func_020_4A76::
     and  a                                        ; $4A87: $A7
     jr   nz, jr_020_4A8F                          ; $4A88: $20 $05
 
-    call Func_020_49F4                            ; $4A8A: $CD $F4 $49
+    call func_020_49F4                            ; $4A8A: $CD $F4 $49
     jr   jr_020_4A92                              ; $4A8D: $18 $03
 
 jr_020_4A8F:
-    call Func_020_4A22                            ; $4A8F: $CD $22 $4A
+    call func_020_4A22                            ; $4A8F: $CD $22 $4A
 
 jr_020_4A92:
     ret                                           ; $4A92: $C9
@@ -872,7 +872,7 @@ jr_020_4A92:
     inc  hl                                       ; $4AB1: $23
     inc  hl                                       ; $4AB2: $23
 
-Func_020_4AB3::
+func_020_4AB3::
     push hl                                       ; $4AB3: $E5
     ldh  a, [hScratch0]                           ; $4AB4: $F0 $D7
     add  h                                        ; $4AB6: $84
@@ -989,7 +989,7 @@ data_020_4B46::
     db $08, $08, $03, $04
 
 ; Shield-related function
-Func_020_4B4A::
+func_020_4B4A::
     ldh  a, [hLinkDirection]                      ; $4B4A: $F0 $9E
     ld   e, a                                     ; $4B4C: $5F
     ld   d, $00                                   ; $4B4D: $16 $00
@@ -1022,7 +1022,7 @@ Func_020_4B4A::
     db   $fd                                      ; $4B7F: $FD
     inc  b                                        ; $4B80: $04
 
-Func_020_4B81::
+func_020_4B81::
     ld   hl, wEntitiesUnknowTableF                ; $4B81: $21 $F0 $C2
     add  hl, de                                   ; $4B84: $19
     ld   [hl], $10                                ; $4B85: $36 $10
@@ -1106,7 +1106,7 @@ jr_020_4BE3:
     add  sp, $18                                  ; $4BFC: $E8 $18
     nop                                           ; $4BFE: $00
 
-Func_020_4BFF::
+func_020_4BFF::
     ld   hl, wEntitiesTransitionCountdownTable           ; $4BFF: $21 $E0 $C2
     add  hl, de                                   ; $4C02: $19
     ld   [hl], $28                                ; $4C03: $36 $28
@@ -1162,7 +1162,7 @@ jr_020_4C3E:
     db   $f4                                      ; $4C45: $F4
     inc  c                                        ; $4C46: $0C
 
-Func_020_4C47::
+func_020_4C47::
     ld   a, $05                                   ; $4C47: $3E $05
     ldh  [hJingle], a                             ; $4C49: $E0 $F2
     ld   a, $0E                                   ; $4C4B: $3E $0E
@@ -2441,7 +2441,7 @@ Data_020_52F8::
     db   $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F  ; $52F8 |........|
     db   $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F  ; $5300 |........|
 
-Func_020_5308::
+func_020_5308::
     ld   a, $98                                   ; $5308: $3E $98
     ld   [rBCPS], a                               ; $530A: $E0 $68
     ld   hl, $FF69                                ; $530C: $21 $69 $FF
@@ -2521,7 +2521,7 @@ data_020_5407::
     db   $00, $00, $00, $20, $20                 ; $54F0 |...  |
 
 ; Called from SkipTilesGroupAnimation
-Func_020_54F5::
+func_020_54F5::
     ldh  a, [hLinkAnimationState]                 ; $54F5: $F0 $9D
     cp   $FF                                      ; $54F7: $FE $FF
     ret  z                                        ; $54F9: $C8
@@ -2596,7 +2596,7 @@ Data_020_556C::
     db   $01, $1F, $E0, $20
 
 ; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
-Func_020_5570::
+func_020_5570::
     ld   e, $FF                                   ; $5570: $FF
     ld   a, [wRoomTransitionDirection]            ; $5572: $FA $25 $C1
     ld   c, a                                     ; $5575: $4F
@@ -2652,7 +2652,7 @@ label_020_55C2:
     ld   [wRoomTransitionState], a                ; $55C6: $EA $24 $C1
     ret                                           ; $55C9: $C9
 
-Func_020_55CA::
+func_020_55CA::
     ldh  a, [hFFA8]                               ; $55CA: $F0 $A8
     and  a                                        ; $55CC: $A7
     jr   z, jr_020_55F0                           ; $55CD: $28 $21
@@ -2738,7 +2738,7 @@ jr_020_562E:
     ld   bc, $00                                  ; $5635: $01 $00 $00
     ld   bc, $302                                 ; $5638: $01 $02 $03
 
-Func_020_563B::
+func_020_563B::
     ld   hl, wC16C                                ; $563B: $21 $6C $C1
     inc  [hl]                                     ; $563E: $34
     ld   a, [wC16C]                               ; $563F: $FA $6C $C1
@@ -2751,7 +2751,7 @@ label_020_5649:
     ld   a, [hl]                                  ; $5649: $7E
     inc  [hl]                                     ; $564A: $34
 
-Func_020_564B:
+func_020_564B:
     cp   $04                                      ; $564B: $FE $04
     jr   z, jr_020_568A                           ; $564D: $28 $3B
 
@@ -2880,7 +2880,7 @@ LoadTilemap0E::
     ldh  [$FFE2], a                               ; $5891: $E0 $E2
     xor  a                                        ; $5893: $AF
     ldh  [$FFE3], a                               ; $5894: $E0 $E3
-    call Func_020_58AD                            ; $5896: $CD $AD $58
+    call func_020_58AD                            ; $5896: $CD $AD $58
     ldh  a, [hIsGBC]                              ; $5899: $F0 $FE
     and  a                                        ; $589B: $A7
     ret  z                                        ; $589C: $C8
@@ -2891,10 +2891,10 @@ LoadTilemap0E::
     ldh  [$FFE2], a                               ; $58A3: $E0 $E2
     ld   hl, $FFE3                                ; $58A5: $21 $E3 $FF
     inc  [hl]                                     ; $58A8: $34
-    call Func_020_58AD                            ; $58A9: $CD $AD $58
+    call func_020_58AD                            ; $58A9: $CD $AD $58
     ret                                           ; $58AC: $C9
 
-Func_020_58AD:
+func_020_58AD:
     ld   de, $9822                                ; $58AD: $11 $22 $98
     ld   bc, $00                                  ; $58B0: $01 $00 $00
 
@@ -3023,8 +3023,8 @@ jr_020_592D:
     ei                                            ; $593F: $FB
 
 jr_020_5940:
-    call Func_020_6683                            ; $5940: $CD $83 $66
-    call label_1A22                               ; $5943: $CD $22 $1A
+    call func_020_6683                            ; $5940: $CD $83 $66
+    call func_1A22                               ; $5943: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5946: $FA $6B $C1
     cp   $04                                      ; $5949: $FE $04
     ; Returns back to render palettes if transition isn't finished
@@ -3041,7 +3041,7 @@ jr_020_5940:
     ld   [$DE07], a                               ; $595D: $EA $07 $DE
     ld   [$DE08], a                               ; $5960: $EA $08 $DE
     ld   [$DE09], a                               ; $5963: $EA $09 $DE
-    call Func_020_6683                            ; $5966: $CD $83 $66
+    call func_020_6683                            ; $5966: $CD $83 $66
 
 .return
     ; Returns to 0346 (Render Palettes)
@@ -3361,10 +3361,10 @@ jr_020_5B3D:
     ldh  [hWindowYUnused], a                      ; $5B3F: $E0 $A9
     ld   a, $30                                   ; $5B41: $3E $30
     ldh  [hWindowXUnused], a                      ; $5B43: $E0 $AA
-    call Func_020_6683                            ; $5B45: $CD $83 $66
+    call func_020_6683                            ; $5B45: $CD $83 $66
     ret                                           ; $5B48: $C9
 
-Func_020_5B49:
+func_020_5B49:
     ldh  a, [hScratch1]                           ; $5B49: $F0 $D8
     cp   $09                                      ; $5B4B: $FE $09
     jr   z, jr_020_5B8B                           ; $5B4D: $28 $3C
@@ -3435,7 +3435,7 @@ jr_020_5B8B:
     ld   a, [$DB4A]                               ; $5B92: $FA $4A $DB
     inc  a                                        ; $5B95: $3C
     swap a                                        ; $5B96: $CB $37
-    call Func_020_5BA8                            ; $5B98: $CD $A8 $5B
+    call func_020_5BA8                            ; $5B98: $CD $A8 $5B
     dec  hl                                       ; $5B9B: $2B
     ld   [hl], $7F                                ; $5B9C: $36 $7F
     inc  hl                                       ; $5B9E: $23
@@ -3448,7 +3448,7 @@ jr_020_5BA0:
 jr_020_5BA5:
     ld   a, [wBombCount]                          ; $5BA5: $FA $4D $DB
 
-Func_020_5BA8:
+func_020_5BA8:
 jr_020_5BA8:
     push af                                       ; $5BA8: $F5
     and  $0F                                      ; $5BA9: $E6 $0F
@@ -3463,7 +3463,7 @@ jr_020_5BA8:
     ld   [hl+], a                                 ; $5BB7: $22
     ret                                           ; $5BB8: $C9
 
-Func_020_5BB9:
+func_020_5BB9:
     push bc                                       ; $5BB9: $C5
     ld   a, [$DC90]                               ; $5BBA: $FA $90 $DC
     ld   e, a                                     ; $5BBD: $5F
@@ -3653,7 +3653,7 @@ jr_020_5C10:
     sbc  l                                        ; $5C9A: $9D
     push hl                                       ; $5C9B: $E5
 
-Func_020_5C9C:
+func_020_5C9C:
     push de                                       ; $5C9C: $D5
     push bc                                       ; $5C9D: $C5
     ld   hl, wAButtonSlot                         ; $5C9E: $21 $00 $DB
@@ -3669,7 +3669,7 @@ Func_020_5C9C:
     and  a                                        ; $5CAF: $A7
     jr   z, jr_020_5CB5                           ; $5CB0: $28 $03
 
-    call Func_020_5BB9                            ; $5CB2: $CD $B9 $5B
+    call func_020_5BB9                            ; $5CB2: $CD $B9 $5B
 
 jr_020_5CB5:
     ld   a, [wRequests]                           ; $5CB5: $FA $00 $D6
@@ -3746,7 +3746,7 @@ jr_020_5CB5:
     ld   a, [de]                                  ; $5D14: $1A
     inc  de                                       ; $5D15: $13
     ld   [hl+], a                                 ; $5D16: $22
-    call Func_020_5B49                            ; $5D17: $CD $49 $5B
+    call func_020_5B49                            ; $5D17: $CD $49 $5B
     xor  a                                        ; $5D1A: $AF
     ld   [hl], a                                  ; $5D1B: $77
     pop  bc                                       ; $5D1C: $C1
@@ -3754,7 +3754,7 @@ jr_020_5CB5:
     dec  c                                        ; $5D1E: $0D
     ld   a, c                                     ; $5D1F: $79
     cp   e                                        ; $5D20: $BB
-    jp   nz, Func_020_5C9C                        ; $5D21: $C2 $9C $5C
+    jp   nz, func_020_5C9C                        ; $5D21: $C2 $9C $5C
 
     ret                                           ; $5D24: $C9
 
@@ -3762,15 +3762,15 @@ jr_020_5CB5:
     ld   c, a                                     ; $5D28: $4F
     ld   b, $00                                   ; $5D29: $06 $00
     ld   e, $FF                                   ; $5D2B: $1E $FF
-    call Func_020_5C9C                            ; $5D2D: $CD $9C $5C
+    call func_020_5C9C                            ; $5D2D: $CD $9C $5C
     xor  a                                        ; $5D30: $AF
     ld   [$C154], a                               ; $5D31: $EA $54 $C1
 
 label_020_5D34:
-    call Func_020_6683                            ; $5D34: $CD $83 $66
+    call func_020_6683                            ; $5D34: $CD $83 $66
     call LCDOff                                   ; $5D37: $CD $CF $28
     ld   a, $20                                   ; $5D3A: $3E $20
-    call label_AB5                                ; $5D3C: $CD $B5 $0A
+    call func_AB5                                ; $5D3C: $CD $B5 $0A
     xor  a                                        ; $5D3F: $AF
     ld   [wRequests], a                           ; $5D40: $EA $00 $D6
     ld   [wRequestDestinationHigh], a             ; $5D43: $EA $01 $D6
@@ -3784,7 +3784,7 @@ label_020_5D34:
     call LoadColorDungeonTiles                    ; $5D55: $CD $D1 $3F
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
     ld   [rLCDC], a                               ; $5D5B: $E0 $40
-    call Func_020_6683                            ; $5D5D: $CD $83 $66
+    call func_020_6683                            ; $5D5D: $CD $83 $66
     ret                                           ; $5D60: $C9
 
     rst  $38                                      ; $5D61: $FF
@@ -4018,7 +4018,7 @@ jr_020_5E61:
 jr_020_5E6D:
     xor  a                                        ; $5E6D: $AF
     ld   [wTransitionSequenceCounter], a          ; $5E6E: $EA $6B $C1
-    call Func_020_6683                            ; $5E71: $CD $83 $66
+    call func_020_6683                            ; $5E71: $CD $83 $66
     ret                                           ; $5E74: $C9
 
     add  b                                        ; $5E75: $80
@@ -4085,7 +4085,7 @@ jr_020_5EA0:
     ld   [bc], a                                  ; $5EB2: $02
     jr   nz, @+$03                                ; $5EB3: $20 $01
 
-Func_020_5EB5:
+func_020_5EB5:
     ldh  a, [hIsGBC]                              ; $5EB5: $F0 $FE
     and  a                                        ; $5EB7: $A7
     jr   z, jr_020_5EEE                           ; $5EB8: $28 $34
@@ -4128,13 +4128,13 @@ jr_020_5EE1:
 jr_020_5EEE:
     ret                                           ; $5EEE: $C9
 
-    call Func_020_635C                            ; $5EEF: $CD $5C $63
-    call label_1A39                               ; $5EF2: $CD $39 $1A
+    call func_020_635C                            ; $5EEF: $CD $5C $63
+    call func_1A39                               ; $5EF2: $CD $39 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5EF5: $FA $6B $C1
     cp   $04                                      ; $5EF8: $FE $04
     jr   nz, jr_020_5EFF                          ; $5EFA: $20 $03
 
-    call Func_020_6683                            ; $5EFC: $CD $83 $66
+    call func_020_6683                            ; $5EFC: $CD $83 $66
 
 jr_020_5EFF:
     ret                                           ; $5EFF: $C9
@@ -4143,7 +4143,7 @@ jr_020_5EFF:
     ld   bc, $FF                                  ; $5F01: $01 $FF $00
     cp   $02                                      ; $5F04: $FE $02
 
-Func_020_5F06:
+func_020_5F06:
     ld   a, [$DBA3]                               ; $5F06: $FA $A3 $DB
     ld   [$C1B6], a                               ; $5F09: $EA $B6 $C1
     ld   a, [$C1B8]                               ; $5F0C: $FA $B8 $C1
@@ -4342,9 +4342,9 @@ jr_020_6027:
     ld   [$C1B9], a                               ; $6033: $EA $B9 $C1
 
 jr_020_6036:
-    call Func_020_5C9C                            ; $6036: $CD $9C $5C
+    call func_020_5C9C                            ; $6036: $CD $9C $5C
 
-Func_020_6039:
+func_020_6039:
     ld   a, $13                                   ; $6039: $3E $13
     ldh  [hJingle], a                             ; $603B: $E0 $F2
     ld   a, [$DBA3]                               ; $603D: $FA $A3 $DB
@@ -4353,7 +4353,7 @@ Func_020_6039:
     ld   b, $00                                   ; $6043: $06 $00
     dec  a                                        ; $6045: $3D
     ld   e, a                                     ; $6046: $5F
-    call Func_020_5C9C                            ; $6047: $CD $9C $5C
+    call func_020_5C9C                            ; $6047: $CD $9C $5C
 
 label_020_604A:
 jr_020_604A:
@@ -4704,7 +4704,7 @@ jr_020_61E4:
     and  $03                                      ; $61E6: $E6 $03
     jr   z, jr_020_61ED                           ; $61E8: $28 $03
 
-    call Func_020_6039                            ; $61EA: $CD $39 $60
+    call func_020_6039                            ; $61EA: $CD $39 $60
 
 jr_020_61ED:
     ld   hl, $C010                                ; $61ED: $21 $10 $C0
@@ -4737,7 +4737,7 @@ label_020_6214:
 jr_020_6214:
     ret                                           ; $6214: $C9
 
-Func_020_6215:
+func_020_6215:
     ld   a, [wIsIndoor]                           ; $6215: $FA $A5 $DB
     and  a                                        ; $6218: $A7
     jr   z, jr_020_628D                           ; $6219: $28 $72
@@ -4843,7 +4843,7 @@ jr_020_629F:
     adc  b                                        ; $62A0: $88
     adc  b                                        ; $62A1: $88
 
-Func_020_62A2:
+func_020_62A2:
     ld   a, [wInventoryCursorFrameCounter]        ; $62A2: $FA $59 $C1
     inc  a                                        ; $62A5: $3C
     ld   [wInventoryCursorFrameCounter], a        ; $62A6: $EA $59 $C1
@@ -4877,7 +4877,7 @@ jr_020_62C1:
 jr_020_62DD:
     ret                                           ; $62DD: $C9
 
-Func_020_62DE:
+func_020_62DE:
     ld   a, [$DE09]                               ; $62DE: $FA $09 $DE
     ld   b, a                                     ; $62E1: $47
     ld   a, [$DE08]                               ; $62E2: $FA $08 $DE
@@ -4974,7 +4974,7 @@ jr_020_634F:
 jr_020_6351:
     add  [hl]                                     ; $6351: $86
 
-Func_020_6352::
+func_020_6352::
     ld   a, [wBGPalette]                          ; $6352: $FA $97 $DB
 
 jr_020_6355:
@@ -4984,7 +4984,7 @@ jr_020_6355:
     ld   d, $02                                   ; $6358: $16 $02
     jr   jr_020_635E                              ; $635A: $18 $02
 
-Func_020_635C:
+func_020_635C:
     ld   d, $0C                                   ; $635C: $16 $0C
 
 jr_020_635E:
@@ -5062,13 +5062,13 @@ jr_020_63BE:
     call label_3DA0                               ; $63C0: $CD $A0 $3D
     ret                                           ; $63C3: $C9
 
-    call Func_020_5EB5                            ; $63C4: $CD $B5 $5E
-    call Func_020_6215                            ; $63C7: $CD $15 $62
-    call Func_020_5F06                            ; $63CA: $CD $06 $5F
+    call func_020_5EB5                            ; $63C4: $CD $B5 $5E
+    call func_020_6215                            ; $63C7: $CD $15 $62
+    call func_020_5F06                            ; $63CA: $CD $06 $5F
     call $6111                                    ; $63CD: $CD $11 $61
-    call Func_020_62A2                            ; $63D0: $CD $A2 $62
-    call Func_020_635C                            ; $63D3: $CD $5C $63
-    call Func_020_62DE                            ; $63D6: $CD $DE $62
+    call func_020_62A2                            ; $63D0: $CD $A2 $62
+    call func_020_635C                            ; $63D3: $CD $5C $63
+    call func_020_62DE                            ; $63D6: $CD $DE $62
     ld   a, [$C1BA]                               ; $63D9: $FA $BA $C1
     and  a                                        ; $63DC: $A7
     jr   z, jr_020_63F5                           ; $63DD: $28 $16
@@ -5135,7 +5135,7 @@ jr_020_6436:
 jr_020_6445:
     ret                                           ; $6445: $C9
 
-Func_020_6446:
+func_020_6446:
 jr_020_6446:
     ldh  a, [$FFE2]                               ; $6446: $F0 $E2
     ld   [hl+], a                                 ; $6448: $22
@@ -5293,7 +5293,7 @@ jr_020_6446:
     ld   a, h                                     ; $64EC: $7C
     inc  bc                                       ; $64ED: $03
 
-Func_020_64EE:
+func_020_64EE:
     ld   hl, $C010                                ; $64EE: $21 $10 $C0
     ld   a, $53                                   ; $64F1: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $64F3: $E0 $E1
@@ -5311,7 +5311,7 @@ Func_020_64EE:
     inc  hl                                       ; $650A: $23
     ld   d, [hl]                                  ; $650B: $56
     pop  hl                                       ; $650C: $E1
-    call Func_020_6446                            ; $650D: $CD $46 $64
+    call func_020_6446                            ; $650D: $CD $46 $64
     ldh  a, [$FFE2]                               ; $6510: $F0 $E2
     ld   [hl+], a                                 ; $6512: $22
     ldh  a, [hBGMapOffsetLow]                     ; $6513: $F0 $E1
@@ -5334,7 +5334,7 @@ Func_020_64EE:
     inc  hl                                       ; $6530: $23
     ld   d, [hl]                                  ; $6531: $56
     pop  hl                                       ; $6532: $E1
-    call Func_020_6446                            ; $6533: $CD $46 $64
+    call func_020_6446                            ; $6533: $CD $46 $64
     ld   a, $53                                   ; $6536: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $6538: $E0 $E1
     ld   a, [$DE0A]                               ; $653A: $FA $0A $DE
@@ -5342,7 +5342,7 @@ Func_020_64EE:
     ldh  [$FFE2], a                               ; $653F: $E0 $E2
     ld   c, $03                                   ; $6541: $0E $03
     ld   de, $64AA                                ; $6543: $11 $AA $64
-    call Func_020_6446                            ; $6546: $CD $46 $64
+    call func_020_6446                            ; $6546: $CD $46 $64
     ld   e, $00                                   ; $6549: $1E $00
     ld   a, [wPhotos1]                            ; $654B: $FA $0C $DC
 
@@ -5381,14 +5381,14 @@ jr_020_6562:
     push hl                                       ; $6574: $E5
     pop  de                                       ; $6575: $D1
     pop  hl                                       ; $6576: $E1
-    call Func_020_6446                            ; $6577: $CD $46 $64
+    call func_020_6446                            ; $6577: $CD $46 $64
     ld   c, $05                                   ; $657A: $0E $05
     ld   de, $64E4                                ; $657C: $11 $E4 $64
-    call Func_020_6446                            ; $657F: $CD $46 $64
+    call func_020_6446                            ; $657F: $CD $46 $64
     ret                                           ; $6582: $C9
 
-    call Func_020_5EB5                            ; $6583: $CD $B5 $5E
-    call Func_020_64EE                            ; $6586: $CD $EE $64
+    call func_020_5EB5                            ; $6583: $CD $B5 $5E
+    call func_020_64EE                            ; $6586: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $6589: $F0 $CB
     and  $40                                      ; $658B: $E6 $40
     jr   nz, jr_020_6596                          ; $658D: $20 $07
@@ -5403,7 +5403,7 @@ jr_020_6596:
     cp   $78                                      ; $659B: $FE $78
     jr   nc, jr_020_65A4                          ; $659D: $30 $05
 
-    call Func_020_6683                            ; $659F: $CD $83 $66
+    call func_020_6683                            ; $659F: $CD $83 $66
     ld   a, $78                                   ; $65A2: $3E $78
 
 jr_020_65A4:
@@ -5412,19 +5412,19 @@ jr_020_65A4:
 jr_020_65A7:
     ret                                           ; $65A7: $C9
 
-    call Func_020_5EB5                            ; $65A8: $CD $B5 $5E
-    call Func_020_64EE                            ; $65AB: $CD $EE $64
+    call func_020_5EB5                            ; $65A8: $CD $B5 $5E
+    call func_020_64EE                            ; $65AB: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $65AE: $F0 $CB
     and  $40                                      ; $65B0: $E6 $40
     jr   nz, jr_020_65B7                          ; $65B2: $20 $03
 
-    call Func_020_6683                            ; $65B4: $CD $83 $66
+    call func_020_6683                            ; $65B4: $CD $83 $66
 
 jr_020_65B7:
     ret                                           ; $65B7: $C9
 
-    call Func_020_5EB5                            ; $65B8: $CD $B5 $5E
-    call Func_020_64EE                            ; $65BB: $CD $EE $64
+    call func_020_5EB5                            ; $65B8: $CD $B5 $5E
+    call func_020_64EE                            ; $65BB: $CD $EE $64
     ld   a, [$DE0A]                               ; $65BE: $FA $0A $DE
     add  $04                                      ; $65C1: $C6 $04
     cp   $90                                      ; $65C3: $FE $90
@@ -5438,8 +5438,8 @@ jr_020_65CE:
     ld   [$DE0A], a                               ; $65CE: $EA $0A $DE
     ret                                           ; $65D1: $C9
 
-    call Func_020_635C                            ; $65D2: $CD $5C $63
-    call label_1A22                               ; $65D5: $CD $22 $1A
+    call func_020_635C                            ; $65D2: $CD $5C $63
+    call func_1A22                               ; $65D5: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $65D8: $FA $6B $C1
     cp   $04                                      ; $65DB: $FE $04
     jp   nz, label_020_6682                       ; $65DD: $C2 $82 $66
@@ -5548,7 +5548,7 @@ label_020_6682:
 jr_020_6682:
     ret                                           ; $6682: $C9
 
-Func_020_6683:
+func_020_6683:
     ld   hl, wGameplaySubtype                     ; $6683: $21 $96 $DB
     inc  [hl]                                     ; $6686: $34
     ret                                           ; $6687: $C9
@@ -6352,7 +6352,7 @@ jr_020_6A1D:
     ld   [$2240], sp                              ; $6A2D: $08 $40 $22
 
 ; Palette-related
-Func_020_6A30::
+func_020_6A30::
     ldh  a, [hIsGBC]                              ; $6A30: $F0 $FE
     and  a                                        ; $6A32: $A7
     jp   z, label_020_6B81                        ; $6A33: $CA $81 $6B
@@ -6389,7 +6389,7 @@ jr_020_6A52:
     sla  a                                        ; $6A64: $CB $27
     ldh  [hFreeWarpDataAddress], a                ; $6A66: $E0 $E6
 
-Func_020_6A68:
+func_020_6A68:
 jr_020_6A68:
     push hl                                       ; $6A68: $E5
     ldh  a, [hScratchD]                           ; $6A69: $F0 $E4
@@ -6459,7 +6459,7 @@ jr_020_6A9F:
     ld   [wPaletteDataFlags], a                    ; $6ABD: $EA $D1 $DD
     ret                                           ; $6AC0: $C9
 
-Func_020_6AC1::
+func_020_6AC1::
     ldh  a, [hIsGBC]                              ; $6AC1: $F0 $FE
     and  a                                        ; $6AC3: $A7
     jp   z, label_020_6B81                        ; $6AC4: $CA $81 $6B
@@ -6491,7 +6491,7 @@ Func_020_6AC1::
     sla  a                                        ; $6AF1: $CB $27
     ldh  [hFreeWarpDataAddress], a                ; $6AF3: $E0 $E6
 
-Func_020_6AF5:
+func_020_6AF5:
 label_020_6AF5:
 jr_020_6AF5:
     push hl                                       ; $6AF5: $E5
@@ -6616,7 +6616,7 @@ label_020_6B81:
     ld   [wPaletteUnknownE], a                    ; $6B82: $EA $D5 $DD
     ret                                           ; $6B85: $C9
 
-Func_020_6B86:
+func_020_6B86:
     ld   a, $02                                   ; $6B86: $3E $02
     ld   [rSVBK], a                               ; $6B88: $E0 $70
     ld   a, [bc]                                  ; $6B8A: $0A
@@ -6644,7 +6644,7 @@ Func_020_6B86:
     adc  h                                        ; $6BA0: $8C
     ld   sp, $1084                                ; $6BA1: $31 $84 $10
 
-Func_020_6BA4::
+func_020_6BA4::
     ldh  a, [hIsGBC]                              ; $6BA4: $F0 $FE
     and  a                                        ; $6BA6: $A7
     jp   z, label_020_6B81                        ; $6BA7: $CA $81 $6B
@@ -6667,9 +6667,9 @@ jr_020_6BB4:
     ldh  [hScratch0], a                           ; $6BC1: $E0 $D7
 
 jr_020_6BC3:
-    call Func_020_6B86                            ; $6BC3: $CD $86 $6B
-    call Func_020_6B86                            ; $6BC6: $CD $86 $6B
-    call Func_020_6B86                            ; $6BC9: $CD $86 $6B
+    call func_020_6B86                            ; $6BC3: $CD $86 $6B
+    call func_020_6B86                            ; $6BC6: $CD $86 $6B
+    call func_020_6B86                            ; $6BC9: $CD $86 $6B
     inc  hl                                       ; $6BCC: $23
     inc  hl                                       ; $6BCD: $23
     ldh  a, [hScratch0]                           ; $6BCE: $F0 $D7
@@ -6684,7 +6684,7 @@ jr_020_6BC3:
 jr_020_6BDB:
     ret                                           ; $6BDB: $C9
 
-Func_020_6BDC::
+func_020_6BDC::
     ldh  a, [hIsGBC]                              ; $6BDC: $F0 $FE
     and  a                                        ; $6BDE: $A7
     ret  z                                        ; $6BDF: $C8
@@ -6739,7 +6739,7 @@ jr_020_6C0B:
     ld   [wPaletteUnknownE], a                    ; $6C20: $EA $D5 $DD
     ret                                           ; $6C23: $C9
 
-Func_020_6C24::
+func_020_6C24::
     ldh  a, [hIsGBC]                              ; $6C24: $F0 $FE
     and  a                                        ; $6C26: $A7
     jr   z, jr_020_6C4E                           ; $6C27: $28 $25
@@ -6776,7 +6776,7 @@ jr_020_6C3F:
 jr_020_6C4E:
     ret                                           ; $6C4E: $C9
 
-Func_020_6C4F::
+func_020_6C4F::
     ldh  a, [hIsGBC]                              ; $6C4F: $F0 $FE
     and  a                                        ; $6C51: $A7
     jp   z, label_020_6B81                        ; $6C52: $CA $81 $6B
@@ -6797,14 +6797,14 @@ jr_020_6C60:
     ldh  [hFreeWarpDataAddress], a                ; $6C6A: $E0 $E6
     ld   hl, $DC10                                ; $6C6C: $21 $10 $DC
     ld   d, $40                                   ; $6C6F: $16 $40
-    call Func_020_6A68                            ; $6C71: $CD $68 $6A
+    call func_020_6A68                            ; $6C71: $CD $68 $6A
     ld   a, $01                                   ; $6C74: $3E $01
 
 jr_020_6C76:
     ld   [wPaletteDataFlags], a                    ; $6C76: $EA $D1 $DD
     ret                                           ; $6C79: $C9
 
-Func_020_6C7A::
+func_020_6C7A::
     ldh  a, [hIsGBC]                              ; $6C7A: $F0 $FE
     and  a                                        ; $6C7C: $A7
     jp   z, label_020_6B81                        ; $6C7D: $CA $81 $6B
@@ -6826,7 +6826,7 @@ jr_020_6C8B:
     ld   hl, $DC10                                ; $6C97: $21 $10 $DC
     ld   a, $40                                   ; $6C9A: $3E $40
     ldh  [hScratch3], a                           ; $6C9C: $E0 $DA
-    call Func_020_6AF5                            ; $6C9E: $CD $F5 $6A
+    call func_020_6AF5                            ; $6C9E: $CD $F5 $6A
     ld   a, $01                                   ; $6CA1: $3E $01
 
 jr_020_6CA3:
@@ -6871,7 +6871,7 @@ jr_020_6CB5:
 
     ld   a, [wPaletteDataFlags]                    ; $6CE8: $FA $D1 $DD
     push af                                       ; $6CEB: $F5
-    call Func_020_6A30                            ; $6CEC: $CD $30 $6A
+    call func_020_6A30                            ; $6CEC: $CD $30 $6A
     pop  af                                       ; $6CEF: $F1
     ld   [wPaletteDataFlags], a                    ; $6CF0: $EA $D1 $DD
     ld   a, $01                                   ; $6CF3: $3E $01
@@ -6886,14 +6886,14 @@ jr_020_6CFA:
 
     ld   a, [wPaletteDataFlags]                    ; $6D02: $FA $D1 $DD
     push af                                       ; $6D05: $F5
-    call Func_020_6AF5                            ; $6D06: $CD $F5 $6A
+    call func_020_6AF5                            ; $6D06: $CD $F5 $6A
     pop  af                                       ; $6D09: $F1
     ld   [wPaletteDataFlags], a                    ; $6D0A: $EA $D1 $DD
 
 jr_020_6D0D:
     ret                                           ; $6D0D: $C9
 
-Func_020_6D0E::
+func_020_6D0E::
     ld   a, [hl]                                  ; $6D0E: $7E
     dec  a                                        ; $6D0F: $3D
     cp   $04                                      ; $6D10: $FE $04
@@ -6920,7 +6920,7 @@ jr_020_6D1E:
     ldh  [hFreeWarpDataAddress], a                ; $6D2E: $E0 $E6
     ld   hl, $DC30                                ; $6D30: $21 $30 $DC
     ld   d, $20                                   ; $6D33: $16 $20
-    call Func_020_6A68                            ; $6D35: $CD $68 $6A
+    call func_020_6A68                            ; $6D35: $CD $68 $6A
 
 jr_020_6D38:
     ld   a, $01                                   ; $6D38: $3E $01
@@ -6931,7 +6931,7 @@ jr_020_6D38:
     ldh  [hFreeWarpDataAddress], a                ; $6D42: $E0 $E6
     ld   hl, $DC10                                ; $6D44: $21 $10 $DC
     ld   d, $20                                   ; $6D47: $16 $20
-    call Func_020_6A68                            ; $6D49: $CD $68 $6A
+    call func_020_6A68                            ; $6D49: $CD $68 $6A
     ld   a, $01                                   ; $6D4C: $3E $01
 
 jr_020_6D4E:
@@ -6940,7 +6940,7 @@ jr_020_6D4E:
 jr_020_6D51:
     ret                                           ; $6D51: $C9
 
-Func_020_6D52::
+func_020_6D52::
     ld   e, $20                                   ; $6D52: $1E $20
     ld   a, [hl]                                  ; $6D54: $7E
     cp   $30                                      ; $6D55: $FE $30
@@ -7135,7 +7135,7 @@ LoadRoomObjectsAttributes::
 
     ret                                           ; $6E4F: $C9
 
-Func_020_6E50::
+func_020_6E50::
     push hl                                       ; $6E50: $E5
     ld   c, [hl]                                  ; $6E51: $4E
     ld   b, $0E                                   ; $6E52: $06 $0E
@@ -7959,7 +7959,7 @@ jr_020_7174:
 
     ld   c, h                                     ; $71D1: $4C
     ld   a, h                                     ; $71D2: $7C
-    ld   bc, label_E03                            ; $71D3: $01 $03 $0E
+    ld   bc, $0E03                                ; $71D3: $01 $03 $0E
     rlca                                          ; $71D6: $07
     rlca                                          ; $71D7: $07
     nop                                           ; $71D8: $00
@@ -8674,7 +8674,7 @@ jr_020_7334:
     add  e                                        ; $74BD: $83
     rst  $38                                      ; $74BE: $FF
     and  h                                        ; $74BF: $A4
-    call nz, Func_020_7679                        ; $74C0: $C4 $79 $76
+    call nz, func_020_7679                        ; $74C0: $C4 $79 $76
     and  h                                        ; $74C3: $A4
     call nz, $FFFF                                ; $74C4: $C4 $FF $FF
     and  h                                        ; $74C7: $A4
@@ -9099,7 +9099,7 @@ jr_020_7334:
     rst  $38                                      ; $7677: $FF
     rst  $38                                      ; $7678: $FF
 
-Func_020_7679:
+func_020_7679:
     ld   c, a                                     ; $7679: $4F
     ld   d, c                                     ; $767A: $51
     and  h                                        ; $767B: $A4
@@ -9711,7 +9711,7 @@ jr_020_78CC:
     ld   h, [hl]                                  ; $78EA: $66
     sub  $6E                                      ; $78EB: $D6 $6E
 
-Func_020_78ED::
+func_020_78ED::
     ld   a, [wIsFileSelectionArrowShifted]        ; $78ED: $FA $00 $D0
     sla  a                                        ; $78F0: $CB $27
     ld   e, a                                     ; $78F2: $5F
@@ -10752,7 +10752,7 @@ jr_020_7CD9:
     call nz, $EC7C                                ; $7D18: $C4 $7C $EC
     ld   a, h                                     ; $7D1B: $7C
 
-Func_020_7D1C::
+func_020_7D1C::
     ld   a, $6C                                   ; $7D1C: $3E $6C
     ld   [$C3C0], a                               ; $7D1E: $EA $C0 $C3
     ldh  a, [hFrameCounter]                       ; $7D21: $F0 $E7
@@ -10767,13 +10767,13 @@ Func_020_7D1C::
     ld   h, [hl]                                  ; $7D30: $66
     ld   l, d                                     ; $7D31: $6A
     ld   c, $28                                   ; $7D32: $0E $28
-    call Func_020_7D40                            ; $7D34: $CD $40 $7D
+    call func_020_7D40                            ; $7D34: $CD $40 $7D
     ld   hl, $7C68                                ; $7D37: $21 $68 $7C
     ld   c, $0C                                   ; $7D3A: $0E $0C
-    call Func_020_7D40                            ; $7D3C: $CD $40 $7D
+    call func_020_7D40                            ; $7D3C: $CD $40 $7D
     ret                                           ; $7D3F: $C9
 
-Func_020_7D40:
+func_020_7D40:
     push bc                                       ; $7D40: $C5
     push hl                                       ; $7D41: $E5
     ld   a, [$C3C0]                               ; $7D42: $FA $C0 $C3
@@ -10832,13 +10832,13 @@ func_020_7D7C::
     ldh  [hFreeWarpDataAddress], a                ; $7D86: $E0 $E6
     ld   hl, $DC10                                ; $7D88: $21 $10 $DC
     ld   d, $24                                   ; $7D8B: $16 $24
-    call Func_020_7D97                            ; $7D8D: $CD $97 $7D
+    call func_020_7D97                            ; $7D8D: $CD $97 $7D
     ld   a, $01                                   ; $7D90: $3E $01
     ld   [wPaletteDataFlags], a                    ; $7D92: $EA $D1 $DD
     xor  a                                        ; $7D95: $AF
     ret                                           ; $7D96: $C9
 
-Func_020_7D97:
+func_020_7D97:
 jr_020_7D97:
     push hl                                       ; $7D97: $E5
     ldh  a, [hScratchD]                           ; $7D98: $F0 $E4

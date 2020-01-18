@@ -6,8 +6,8 @@ ArrowEntityHandler::
     ; If hActiveEntityState == 1…
     ldh  a, [hActiveEntityState]                  ; $6A38: $F0 $F0
     and  a                                        ; $6A3A: $A7
-    ; call Func_003_6A70 and return
-    jr   nz, Func_003_6A70                        ; $6A3B: $20 $33
+    ; call func_003_6A70 and return
+    jr   nz, func_003_6A70                        ; $6A3B: $20 $33
 
     ; If GetEntityTransitionCountdown != 0…
     call GetEntityTransitionCountdown             ; $6A3D: $CD $05 $0C

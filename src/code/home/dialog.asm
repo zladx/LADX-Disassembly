@@ -131,7 +131,7 @@ DialogClosingEndHandler::
     cp   a, $08
     ret  c
 
-    jpsb Func_021_53CF
+    jpsb func_021_53CF
 
 ; This array actually begins two bytes before,
 ; in the middle of the `jp` instruction,
@@ -312,10 +312,10 @@ UpdateDialogState_return:
     ret
 
 DialogClosingBeginHandler::
-    jpsb Func_01C_4AA8
+    jpsb func_01C_4AA8
 
 DialogLetterAnimationStartHandler::
-    ld   a, BANK(Func_01C_49F1)
+    ld   a, BANK(func_01C_49F1)
     ld   [MBC3SelectBank], a
     ld   a, [wDialogScrollDelay]
     and  a
@@ -325,7 +325,7 @@ DialogLetterAnimationStartHandler::
     ret
 
 .delayOver
-    call Func_01C_49F1
+    call func_01C_49F1
     jp   IncrementDialogStateAndReturn
 
 DialogLetterAnimationEndHandler::

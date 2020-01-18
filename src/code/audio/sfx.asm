@@ -2,7 +2,7 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-func_01F_4204:
+func_01F_4204::
 label_01F_4204:
     ld   hl, wActiveJingle                        ; $4204: $21 $60 $D3
     ld   a, [hl]                                  ; $4207: $7E
@@ -432,7 +432,7 @@ jr_01F_4438:
     ld   hl, $4477                                ; $446B: $21 $77 $44
     jp   label_01F_7A79                           ; $446E: $C3 $79 $7A
 
-func_01F_4471:
+func_01F_4471::
     nop                                           ; $4471: $00
     dec  a                                        ; $4472: $3D
     ldh  a, [hScratch1]                           ; $4473: $F0 $D8
@@ -2029,7 +2029,7 @@ jr_01F_4D50:
 jr_01F_4D5E:
     jr   nc, jr_01F_4D60                          ; $4D5E: $30 $00
 
-func_01F_4D60:
+func_01F_4D60::
 jr_01F_4D60:
     jr   nc, jr_01F_4D62                          ; $4D60: $30 $00
 
@@ -3250,7 +3250,7 @@ label_01F_53E6:
     ld   [wActiveJingle], a                       ; $53E7: $EA $60 $D3
     jp   label_01F_4204                           ; $53EA: $C3 $04 $42
 
-func_01F_53ED:
+func_01F_53ED::
 label_01F_53ED:
     ld   hl, wActiveWaveSfx                       ; $53ED: $21 $70 $D3
     ld   a, [hl]                                  ; $53F0: $7E
@@ -3860,7 +3860,7 @@ jr_01F_570D:
     inc  h                                        ; $572A: $24
     ld   a, b                                     ; $572B: $78
 
-func_01F_572C:
+func_01F_572C::
     ld   hl, $571C                                ; $572C: $21 $1C $57
     jp   $635A                                    ; $572F: $C3 $5A $63
 
@@ -6138,7 +6138,7 @@ label_01F_632D:
     ld   [$D3E7], a                               ; $6343: $EA $E7 $D3
     ret                                           ; $6346: $C9
 
-func_01F_6347:
+func_01F_6347::
 label_01F_6347:
     push bc                                       ; $6347: $C5
     ld   c, $30                                   ; $6348: $0E $30
@@ -6163,27 +6163,27 @@ jr_01F_634A:
     ld   a, [de]                                  ; $635C: $1A
     jp   label_01F_6347                           ; $635D: $C3 $47 $63
 
-func_01F_6360:
+func_01F_6360::
     ld   hl, Data_01F_63AC                        ; $6360: $21 $AC $63
     jr   @-$09                                    ; $6363: $18 $F5
 
-func_01F_6365:
+func_01F_6365::
     ld   hl, Data_01F_63BC                        ; $6365: $21 $BC $63
     jr   @-$0E                                    ; $6368: $18 $F0
 
-func_01F_636A:
+func_01F_636A::
     ld   hl, Data_01F_639C                        ; $636A: $21 $9C $63
     jr   @-$13                                    ; $636D: $18 $EB
 
-func_01F_636F:
+func_01F_636F::
     ld   hl, Data_01F_63CC                        ; $636F: $21 $CC $63
     jr   @-$18                                    ; $6372: $18 $E6
 
-func_01F_6374:
+func_01F_6374::
     ld   hl, Data_01F_63DC                        ; $6374: $21 $DC $63
     jr   @-$1D                                    ; $6377: $18 $E1
 
-func_01F_6379:
+func_01F_6379::
     ld   hl, Data_01F_638C                        ; $6379: $21 $8C $63
     jr   @-$22                                    ; $637C: $18 $DC
 
@@ -10374,7 +10374,7 @@ jr_01F_79BE:
 
     inc  b                                        ; $79E3: $04
 
-func_01F_79E4:
+func_01F_79E4::
 label_01F_79E4:
     ld   a, $01                                   ; $79E4: $3E $01
     ld   [$D3C9], a                               ; $79E6: $EA $C9 $D3
@@ -10419,7 +10419,7 @@ label_01F_7A2C:
     ld   [wActiveNoiseSfx], a                     ; $7A2D: $EA $78 $D3
     jp   $64EC                                    ; $7A30: $C3 $EC $64
 
-func_01F_7A33:
+func_01F_7A33::
     ld   a, [wActiveNoiseSfx]                     ; $7A33: $FA $78 $D3
     ld   [$D379], a                               ; $7A36: $EA $79 $D3
     ld   hl, $D32F                                ; $7A39: $21 $2F $D3
@@ -10473,25 +10473,25 @@ IncrementValueAtBC::
     ld   [bc], a                                  ; $7A77: $02
     ret                                           ; $7A78: $C9
 
-func_01F_7A79:
+func_01F_7A79::
 label_01F_7A79:
     ld   b, $05                                   ; $7A79: $06 $05
     ld   c, $10                                   ; $7A7B: $0E $10
     jr   jr_01F_7A91                              ; $7A7D: $18 $12
 
-func_01F_7A7F:
+func_01F_7A7F::
 label_01F_7A7F:
     ld   b, $04                                   ; $7A7F: $06 $04
     ld   c, $16                                   ; $7A81: $0E $16
     jr   jr_01F_7A91                              ; $7A83: $18 $0C
 
-func_01F_7A85:
+func_01F_7A85::
 label_01F_7A85:
     ld   b, $05                                   ; $7A85: $06 $05
     ld   c, $1A                                   ; $7A87: $0E $1A
     jr   jr_01F_7A91                              ; $7A89: $18 $06
 
-func_01F_7A8B:
+func_01F_7A8B::
 label_01F_7A8B:
     ld   b, $04                                   ; $7A8B: $06 $04
     ld   c, $20                                   ; $7A8D: $0E $20
@@ -10509,7 +10509,7 @@ jr_01F_7A91:
     ld   [de], a                                  ; $7A98: $12
     ret                                           ; $7A99: $C9
 
-func_01F_7A9A:
+func_01F_7A9A::
     push de                                       ; $7A9A: $D5
     ld   de, $D3BC                                ; $7A9B: $11 $BC $D3
     jr   jr_01F_7AB2                              ; $7A9E: $18 $12
@@ -10518,12 +10518,12 @@ func_01F_7A9A:
     ld   de, $D3BD                                ; $7AA1: $11 $BD $D3
     jr   jr_01F_7AB2                              ; $7AA4: $18 $0C
 
-func_01F_7AA6:
+func_01F_7AA6::
     push de                                       ; $7AA6: $D5
     ld   de, $D3BE                                ; $7AA7: $11 $BE $D3
     jr   jr_01F_7AB2                              ; $7AAA: $18 $06
 
-func_01F_7AAC:
+func_01F_7AAC::
     push de                                       ; $7AAC: $D5
     ld   de, $D3BF                                ; $7AAD: $11 $BF $D3
     jr   jr_01F_7AB2                              ; $7AB0: $18 $00
@@ -10533,12 +10533,12 @@ jr_01F_7AB2:
     pop  de                                       ; $7AB5: $D1
     ret                                           ; $7AB6: $C9
 
-func_01F_7AB7:
+func_01F_7AB7::
     push de                                       ; $7AB7: $D5
     ld   de, $D3C0                                ; $7AB8: $11 $C0 $D3
     jr   jr_01F_7AC1                              ; $7ABB: $18 $04
 
-func_01F_7ABD:
+func_01F_7ABD::
     push de                                       ; $7ABD: $D5
     ld   de, $D3C4                                ; $7ABE: $11 $C4 $D3
 
@@ -10558,7 +10558,7 @@ jr_01F_7AC1:
     pop  de                                       ; $7ACE: $D1
     ret                                           ; $7ACF: $C9
 
-func_01F_7AD0:
+func_01F_7AD0::
     push de                                       ; $7AD0: $D5
     ld   de, $D3C2                                ; $7AD1: $11 $C2 $D3
     inc  hl                                       ; $7AD4: $23
@@ -10574,7 +10574,7 @@ func_01F_7AD0:
     pop  de                                       ; $7ADF: $D1
     ret                                           ; $7AE0: $C9
 
-func_01F_7AE1:
+func_01F_7AE1::
 label_01F_7AE1:
     push de                                       ; $7AE1: $D5
     ld   de, $D3C1                                ; $7AE2: $11 $C1 $D3
@@ -10619,7 +10619,7 @@ jr_01F_7AF5:
     pop  de                                       ; $7B0F: $D1
     ret                                           ; $7B10: $C9
 
-func_01F_7B11:
+func_01F_7B11::
 label_01F_7B11:
     push de                                       ; $7B11: $D5
     ld   de, $D3C3                                ; $7B12: $11 $C3 $D3
@@ -10666,7 +10666,7 @@ label_01F_7B11:
     ld   bc, $F500                                ; $7B56: $01 $00 $F5
     ld   de, $180                                 ; $7B59: $11 $80 $01
 
-func_01F_7B5C:
+func_01F_7B5C::
 label_01F_7B5C:
     ld   a, $FF                                   ; $7B5C: $3E $FF
     ldh  [rNR51], a                               ; $7B5E: $E0 $25

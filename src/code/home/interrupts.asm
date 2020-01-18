@@ -167,7 +167,7 @@ LoadMapData::
     callsb LoadBGMapAttributes
 
     ; Manipulate wBGMapToLoad
-    callsb Func_020_4577
+    callsb func_020_4577
 
     ld   a, $08
     ld   [MBC3SelectBank], a
@@ -279,7 +279,7 @@ vBlankContinue::
     ld   a, [wGameplaySubtype]
     cp   $06
     jr   c, .animateTilesEnd
-    callsb Func_038_785A
+    callsb func_038_785A
     jr   .animateTilesEnd
 .gameplayNotAPhoto
 
@@ -352,7 +352,7 @@ vBlankContinue::
     and  a
     jr   z, .gbcEnd
     ; Change BG column palette
-    callsb Func_024_5C1A
+    callsb func_024_5C1A
 .gbcEnd
 
     ld   de, wRequest
@@ -364,7 +364,7 @@ vBlankContinue::
     ld   [$DC91], a
 
     ; On Overworld, copy some palette data to OAM buffer
-    callsb Func_036_72BA
+    callsb func_036_72BA
 
     ; Copy the content of wOAMBuffer to the OAM memory
     call hDMARoutine
@@ -410,7 +410,7 @@ PhotoAlbumVBlankHandler::
     and  a
     jr   z, .gbcEnd
     callsw CopyPalettesToHardware
-    callsw Func_024_5C1A
+    callsw func_024_5C1A
 .gbcEnd
 
     ld   de, wRequest
@@ -486,7 +486,7 @@ LoadTiles::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    callsb Func_020_4616
+    callsb func_020_4616
     ld   [MBC3SelectBank], a
     jr   .copyData
 .colorDungeonEnd
@@ -576,13 +576,13 @@ LoadOAMTiles::
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
 
-    callsb Func_020_475A
+    callsb func_020_475A
     xor  a
     ld   [wNeedsUpdatingNPCTiles], a
     ld   [$C10F], a
     ld   hl, vTiles2
     ld   bc, $00
-    call Func_020_4616
+    call func_020_4616
     ld   c, $90
     ld   b, h
     ld   h, $00

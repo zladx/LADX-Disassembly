@@ -133,7 +133,7 @@ func_002_4254::
 jr_002_4286:
     ret                                           ; $4286: $C9
 
-label_002_4287::
+label_002_4287:
     ld   a, [wIsShootingArrow]                    ; $4287: $FA $4C $C1
     and  a                                        ; $428A: $A7
     jr   z, jr_002_4291                           ; $428B: $28 $04
@@ -180,7 +180,7 @@ jr_002_42B2:
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
 
 jr_002_42C7:
-    call label_1A50                               ; $42C7: $CD $50 $1A
+    call func_1A50                               ; $42C7: $CD $50 $1A
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
@@ -386,7 +386,7 @@ jr_002_43E6:
     ld   a, [wC120]                               ; $43E6: $FA $20 $C1
     add  $02                                      ; $43E9: $C6 $02
     ld   [wC120], a                               ; $43EB: $EA $20 $C1
-    call label_1756                               ; $43EE: $CD $56 $17
+    call func_1756                               ; $43EE: $CD $56 $17
     jp   label_002_4464                           ; $43F1: $C3 $64 $44
 
 jr_002_43F4:
@@ -467,7 +467,7 @@ jr_002_4459:
     ld   a, $07                                   ; $445F: $3E $07
     ld   [wC120], a                               ; $4461: $EA $20 $C1
 
-label_002_4464::
+label_002_4464:
     ld   e, $03                                   ; $4464: $1E $03
     ld   a, [wC117]                               ; $4466: $FA $17 $C1
     and  a                                        ; $4469: $A7
@@ -529,7 +529,7 @@ func_002_44AD::
 
     call UpdateFinalLinkPosition                  ; $44B2: $CD $A8 $21
 
-label_002_44B5::
+label_002_44B5:
     ld   a, [wLinkGroundStatus]                               ; $44B5: $FA $1F $C1
     ld   [$C130], a                               ; $44B8: $EA $30 $C1
     xor  a                                        ; $44BB: $AF
@@ -696,7 +696,7 @@ jr_002_456C:
     ld   a, NOISE_SFX_FOOTSTEP                          ; $45A8: $3E $07
     ldh  [hNoiseSfx], a                            ; $45AA: $E0 $F4
 
-label_002_45AC::
+label_002_45AC:
     ret                                           ; $45AC: $C9
 
 jr_002_45AD:
@@ -732,7 +732,7 @@ Data_002_45BE::
     db   $03, $03, $00, $01, $02, $02, $00, $00, $03, $03, $01, $02, $00, $00, $03, $03
     db   $01, $01, $02, $03, $01, $01, $02, $02, $00, $00, $03
 
-label_002_4709::
+label_002_4709:
     dec  a                                        ; $4709: $3D
     ld   [wIsUsingSpinAttack], a                  ; $470A: $EA $21 $C1
     ld   hl, hLinkInteractiveMotionBlocked                                ; $470D: $21 $A1 $FF
@@ -787,7 +787,7 @@ jr_002_4745:
     ld   [$C5B0], a                               ; $4767: $EA $B0 $C5
     ret                                           ; $476A: $C9
 
-label_002_476B::
+label_002_476B:
     dec  a                                        ; $476B: $3D
     ld   [wC16D], a                               ; $476C: $EA $6D $C1
     jp   z, label_002_48B0                        ; $476F: $CA $B0 $48
@@ -910,7 +910,7 @@ jr_002_4823:
     dec  a                                        ; $4823: $3D
     ld   [$C138], a                               ; $4824: $EA $38 $C1
 
-label_002_4827::
+label_002_4827:
     ld   hl, wSwordAnimationState                                ; $4827: $21 $37 $C1
     ldh  a, [hLinkDirection]                               ; $482A: $F0 $9E
     ld   e, a                                     ; $482C: $5F
@@ -991,7 +991,7 @@ jr_002_487E:
 jr_002_48AD:
     jp   CheckStaticSwordCollision_trampoline     ; $48AD: $C3 $A7 $15
 
-label_002_48B0::
+label_002_48B0:
     xor  a                                        ; $48B0: $AF
     ld   [$C1AC], a                               ; $48B1: $EA $AC $C1
     ld   a, [wIsRunningWithPegasusBoots]                               ; $48B4: $FA $4A $C1
@@ -1043,6 +1043,7 @@ Data_002_4950::
 Data_002_4958::
     db   $5B, $5C, $58, $59, $5B, $5C, $58, $59
 
+LinkMotionJumpingHandler::
     ld   a, $02                                   ; $4960: $3E $02
     ld   [$C1C4], a                               ; $4962: $EA $C4 $C1
     ldh  a, [$FF9C]                               ; $4965: $F0 $9C
@@ -1350,7 +1351,7 @@ func_002_4B49::
     cp   $02                                      ; $4B58: $FE $02
     jr   nz, jr_002_4B64                          ; $4B5A: $20 $08
 
-    call Func_020_4B4A_trampoline                 ; $4B5C: $CD $4B $13
+    call func_020_4B4A_trampoline                 ; $4B5C: $CD $4B $13
     ld   a, $01                                   ; $4B5F: $3E $01
     ld   [$C5B0], a                               ; $4B61: $EA $B0 $C5
 
@@ -1579,7 +1580,7 @@ jr_002_4C8B:
     pop  de                                       ; $4C90: $D1
     ret                                           ; $4C91: $C9
 
-label_002_4C92::
+label_002_4C92:
     ldh  a, [hScratch1]                               ; $4C92: $F0 $D8
     ld   e, a                                     ; $4C94: $5F
     ld   d, $00                                   ; $4C95: $16 $00
@@ -1587,7 +1588,7 @@ label_002_4C92::
     add  hl, de                                   ; $4C9A: $19
     ld   [hl], $CC                                ; $4C9B: $36 $CC
     ld   a, $82                                   ; $4C9D: $3E $82
-    call label_B2F                                ; $4C9F: $CD $2F $0B
+    call func_2BF                                ; $4C9F: $CD $2F $0B
     call label_2887                               ; $4CA2: $CD $87 $28
     ld   hl, wRequestDestinationHigh              ; $4CA5: $21 $01 $D6
     ld   a, [wRequests]                           ; $4CA8: $FA $00 $D6
@@ -1748,11 +1749,11 @@ jr_002_4D93:
     and  a                                        ; $4D93: $A7
     ret                                           ; $4D94: $C9
 
-label_002_4D95::
+label_002_4D95:
     scf                                           ; $4D95: $37
     ret                                           ; $4D96: $C9
 
-label_002_4D97::
+label_002_4D97:
     ldh  a, [hScratch0]                               ; $4D97: $F0 $D7
     ldh  [hSwordIntersectedAreaX], a                               ; $4D99: $E0 $CE
     swap a                                        ; $4D9B: $CB $37
@@ -1780,7 +1781,7 @@ label_002_4D97::
     sla  c                                        ; $4DC1: $CB $21
     rl   b                                        ; $4DC3: $CB $10
     ld   a, $02                                   ; $4DC5: $3E $02
-    call label_91D.jp_92E                         ; $4DC7: $CD $2E $09
+    call func_91D.jp_92E                         ; $4DC7: $CD $2E $09
     pop  bc                                       ; $4DCA: $C1
 
 jr_002_4DCB:
@@ -1915,6 +1916,8 @@ func_002_4E48::
     ld   d, e                                     ; $4E6A: $53
     ld   d, h                                     ; $4E6B: $54
     ld   d, d                                     ; $4E6C: $52
+
+LinkMotionRevolvingDoorHandler::
     ld   a, $10                                   ; $4E6D: $3E $10
     ldh  [hLinkPositionY], a                      ; $4E6F: $E0 $99
     ld   a, $50                                   ; $4E71: $3E $50
@@ -2057,6 +2060,8 @@ jr_002_4EEF:
     nop                                           ; $4F2D: $00
     nop                                           ; $4F2E: $00
     nop                                           ; $4F2F: $00
+
+LinkMotionFallingUpHandler::
     ld   a, [wFreeMovementMode]                   ; $4F30: $FA $7B $C1
     and  a                                        ; $4F33: $A7
     jr   z, jr_002_4F3C                           ; $4F34: $28 $06
@@ -2089,9 +2094,9 @@ jr_002_4F3C:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4F68: $E0 $A1
 
 jr_002_4F6A:
-    jp   label_1A50                               ; $4F6A: $C3 $50 $1A
+    jp   func_1A50                               ; $4F6A: $C3 $50 $1A
 
-label_002_4F6D::
+label_002_4F6D:
     ldh  a, [hJoypadState]                               ; $4F6D: $F0 $CC
     and  $20                                      ; $4F6F: $E6 $20
     jr   z, jr_002_4F86                           ; $4F71: $28 $13
@@ -2203,7 +2208,7 @@ jr_002_4FFA:
     ldh  [hLinkDirection], a                               ; $5003: $E0 $9E
 
 jr_002_5005:
-    call label_1A50                               ; $5005: $CD $50 $1A
+    call func_1A50                               ; $5005: $CD $50 $1A
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $5008: $F0 $A1
     and  a                                        ; $500A: $A7
     jr   z, jr_002_5012                           ; $500B: $28 $05
@@ -2312,6 +2317,7 @@ jr_002_507A:
 jr_002_50A2:
     ret                                           ; $50A2: $C9
 
+LinkMotionUnknownHandler::
     ld   a, $01                                   ; $50A3: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $50A5: $E0 $A1
     call UpdateFinalLinkPosition                  ; $50A7: $CD $A8 $21
@@ -2344,6 +2350,8 @@ jr_002_50BA:
     rst  $38                                      ; $50D1: $FF
     rst  $38                                      ; $50D2: $FF
     rst  $38                                      ; $50D3: $FF
+
+LinkMotionFallingDownHandler::
     ld   a, $01                                   ; $50D4: $3E $01
     ld   [wC167], a                               ; $50D6: $EA $67 $C1
     ld   a, [$C198]                               ; $50D9: $FA $98 $C1
@@ -2608,8 +2616,9 @@ jr_002_524F:
     ld   l, a                                     ; $525F: $6F
     ld   a, $06                                   ; $5260: $3E $06
     ldh  [hScratch2], a                               ; $5262: $E0 $D9
-    jp   label_1819                               ; $5264: $C3 $19 $18
+    jp   func_1819                               ; $5264: $C3 $19 $18
 
+LinkMotionRecoverHandler::
     call ResetSpinAttack                                ; $5267: $CD $AF $0C
     call ClearLinkPositionIncrement               ; $526A: $CD $8E $17
     ldh  a, [$FFB7]                               ; $526D: $F0 $B7
@@ -2667,7 +2676,7 @@ jr_002_52B5:
     ldh  [hLinkAnimationState], a                 ; $52B6: $E0 $9D
     ret                                           ; $52B8: $C9
 
-label_002_52B9::
+label_002_52B9:
     ld   a, $40                                   ; $52B9: $3E $40
     ld   [$DBC7], a                               ; $52BB: $EA $C7 $DB
     ld   a, [wLinkMapEntryPositionX]              ; $52BE: $FA $B1 $DB
@@ -2732,7 +2741,7 @@ jr_002_52DF:
     ld   [hl+], a                                 ; $530E: $22
     ld   [hl+], a                                 ; $530F: $22
 
-label_002_5310::
+label_002_5310:
     ld   a, [$C19B]                               ; $5310: $FA $9B $C1
     and  $7F                                      ; $5313: $E6 $7F
     cp   $08                                      ; $5315: $FE $08
@@ -2820,7 +2829,7 @@ jr_002_5366:
     db   $fc                                      ; $5389: $FC
     inc  b                                        ; $538A: $04
 
-label_002_538B::
+label_002_538B:
     ldh  a, [hLinkDirection]                               ; $538B: $F0 $9E
     ld   c, a                                     ; $538D: $4F
     ld   b, $00                                   ; $538E: $06 $00
@@ -2928,7 +2937,7 @@ EnqueueDoorUnlockedSfx::
     ldh  [hNoiseSfx], a                            ; $5422: $E0 $F4
     ret                                           ; $5424: $C9
 
-label_002_5425::
+label_002_5425:
     push bc                                       ; $5425: $C5
     ldh  a, [hMapId]                              ; $5426: $F0 $F7
     cp   MAP_COLOR_DUNGEON                        ; $5428: $FE $FF
@@ -2998,7 +3007,7 @@ jr_002_546F:
     dec  b                                        ; $5484: $05
     ld   b, $07                                   ; $5485: $06 $07
 
-label_002_5487::
+label_002_5487:
     xor  a                                        ; $5487: $AF
     ld   [$D900], a                               ; $5488: $EA $00 $D9
     ld   [$DA00], a                               ; $548B: $EA $00 $DA
@@ -3457,11 +3466,11 @@ jr_002_56B8:
 jr_002_56FC:
     ld   [hl], $E3                                ; $56FC: $36 $E3
     ld   a, $82                                   ; $56FE: $3E $82
-    call label_B2F                                ; $5700: $CD $2F $0B
+    call func_2BF                                ; $5700: $CD $2F $0B
     ld   a, JINGLE_DUNGEON_OPENED                 ; $5703: $3E $23
     ldh  [hJingle], a                             ; $5705: $E0 $F2
 
-label_002_5707::
+label_002_5707:
     ret                                           ; $5707: $C9
 
     nop                                           ; $5708: $00
@@ -3674,7 +3683,7 @@ jr_002_5833:
     ld   e, a                                     ; $5837: $5F
     ld   d, $00                                   ; $5838: $16 $00
 
-label_002_583A::
+label_002_583A:
     add  hl, de                                   ; $583A: $19
     push hl                                       ; $583B: $E5
     ld   a, [$C3C0]                               ; $583C: $FA $C0 $C3
@@ -3690,7 +3699,7 @@ label_002_583A::
     ld   a, $02                                   ; $584F: $3E $02
     jp   label_002_58F5                           ; $5851: $C3 $F5 $58
 
-label_002_5854::
+label_002_5854:
     ldh  a, [hScratch1]                               ; $5854: $F0 $D8
     add  [hl]                                     ; $5856: $86
     ld   [de], a                                  ; $5857: $12
@@ -3722,7 +3731,7 @@ label_002_5854::
     nop                                           ; $5873: $00
     ld   [$2078], sp                              ; $5874: $08 $78 $20
 
-label_002_5877::
+label_002_5877:
     ldh  a, [hScratch0]                               ; $5877: $F0 $D7
     and  $08                                      ; $5879: $E6 $08
     ld   d, $00                                   ; $587B: $16 $00
@@ -3813,7 +3822,7 @@ jr_002_58EC:
 
     jr   nc, @+$3A                                ; $58F3: $30 $38
 
-label_002_58F5::
+label_002_58F5:
     sla  a                                        ; $58F5: $CB $27
     sla  a                                        ; $58F7: $CB $27
     ld   e, a                                     ; $58F9: $5F
@@ -3865,7 +3874,7 @@ func_002_5928::
     rst  $30                                      ; $593A: $F7
 
 ; Execute active room events, and do some other stuff
-label_002_593B::
+label_002_593B:
     ; If not dialog, no inventory, no map transition, return
     ld   hl, wDialogState                         ; $593B: $21 $9F $C1
     ld   a, [wRoomTransitionState]                ; $593E: $FA $24 $C1
@@ -4022,7 +4031,7 @@ jr_002_5A95:
     add  [hl]                                     ; $5AA4: $86
     ldh  [hSwordIntersectedAreaX], a                               ; $5AA5: $E0 $CE
 
-label_002_5AA7::
+label_002_5AA7:
     ld   hl, $5A2E                                ; $5AA7: $21 $2E $5A
     ldh  a, [$FFE3]                               ; $5AAA: $F0 $E3
     ld   c, a                                     ; $5AAC: $4F
@@ -4053,7 +4062,7 @@ jr_002_5AC7:
     push de                                       ; $5ACC: $D5
     ld   a, $02                                   ; $5ACD: $3E $02
     ld   b, $00                                   ; $5ACF: $06 $00
-    call label_999                                ; $5AD1: $CD $99 $09
+    call func_999                                ; $5AD1: $CD $99 $09
     pop  de                                       ; $5AD4: $D1
 
 jr_002_5AD5:
@@ -4311,7 +4320,7 @@ jr_002_5C21:
     add  [hl]                                     ; $5C30: $86
     ldh  [hSwordIntersectedAreaX], a                               ; $5C31: $E0 $CE
 
-label_002_5C33::
+label_002_5C33:
     ld   hl, $5BE8                                ; $5C33: $21 $E8 $5B
     ldh  a, [$FFE3]                               ; $5C36: $F0 $E3
     ld   c, a                                     ; $5C38: $4F
@@ -4364,7 +4373,7 @@ jr_002_5C7B:
     push de                                       ; $5C80: $D5
     ld   a, $02                                   ; $5C81: $3E $02
     ld   b, $01                                   ; $5C83: $06 $01
-    call label_999                                ; $5C85: $CD $99 $09
+    call func_999                                ; $5C85: $CD $99 $09
     pop  de                                       ; $5C88: $D1
 
 jr_002_5C89:
@@ -4636,7 +4645,7 @@ jr_002_619F:
     pop  af                                       ; $61A7: $F1
     ret                                           ; $61A8: $C9
 
-label_002_61A9::
+label_002_61A9:
     ld   a, [$C151]                               ; $61A9: $FA $51 $C1
     and  a                                        ; $61AC: $A7
     jr   nz, jr_002_61C6                          ; $61AD: $20 $17
@@ -4681,7 +4690,7 @@ jr_002_61DE:
 jr_002_61E4:
     call func_002_61BA                            ; $61E4: $CD $BA $61
 
-label_002_61E7::
+label_002_61E7:
     ld   a, [wWindowY]                            ; $61E7: $FA $9A $DB
     cp   $80                                      ; $61EA: $FE $80
     jr   z, label_002_61F5                        ; $61EC: $28 $07
@@ -4693,7 +4702,7 @@ label_002_61E7::
 jr_002_61F4:
     pop  af                                       ; $61F4: $F1
 
-label_002_61F5::
+label_002_61F5:
     ld   a, [wDialogState]                        ; $61F5: $FA $9F $C1
     and  $7F                                      ; $61F8: $E6 $7F
     jr   z, jr_002_6203                           ; $61FA: $28 $07
@@ -4883,7 +4892,7 @@ LoadRupeesDigits::
     add  hl, de                                   ; $6315: $19
     add  hl, de                                   ; $6316: $19
 
-label_002_6317::
+label_002_6317:
     xor  a                                        ; $6317: $AF
     ld   [wC163], a                               ; $6318: $EA $63 $C1
     ld   a, [wMaxHealth]                               ; $631B: $FA $5B $DB
@@ -5422,7 +5431,7 @@ jr_002_6A24:
     ld   a, [wC120]                               ; $6A30: $FA $20 $C1
     add  $02                                      ; $6A33: $C6 $02
     ld   [wC120], a                               ; $6A35: $EA $20 $C1
-    call label_1756                               ; $6A38: $CD $56 $17
+    call func_1756                               ; $6A38: $CD $56 $17
     jp   label_002_6ADB                           ; $6A3B: $C3 $DB $6A
 
 jr_002_6A3E:
@@ -5534,7 +5543,7 @@ jr_002_6AD1:
     xor  a                                        ; $6AD7: $AF
     ld   [wC120], a                               ; $6AD8: $EA $20 $C1
 
-label_002_6ADB::
+label_002_6ADB:
     ld   a, [wSwordAnimationState]                               ; $6ADB: $FA $37 $C1
     and  a                                        ; $6ADE: $A7
     jr   nz, jr_002_6AE6                          ; $6ADF: $20 $05
@@ -5641,7 +5650,7 @@ func_002_6B56::
     db   $10                                      ; $6B64: $10
     dec  bc                                       ; $6B65: $0B
 
-label_002_6B66::
+label_002_6B66:
     ld   c, $04                                   ; $6B66: $0E $04
     ld   b, $00                                   ; $6B68: $06 $00
     call func_002_6C2F                            ; $6B6A: $CD $2F $6C
@@ -6511,7 +6520,7 @@ jr_002_702C:
     ld   [hl], a                                  ; $7038: $77
     ldh  [hRoomStatus], a                               ; $7039: $E0 $F8
 
-label_002_703B::
+label_002_703B:
     jp   label_002_7277                           ; $703B: $C3 $77 $72
 
 jr_002_703E:
@@ -6519,7 +6528,7 @@ jr_002_703E:
     call func_002_7504                            ; $703F: $CD $04 $75
     jp   label_002_7277                           ; $7042: $C3 $77 $72
 
-label_002_7045::
+label_002_7045:
     ldh  a, [hObjectUnderEntity]                               ; $7045: $F0 $AF
     cp   $DB                                      ; $7047: $FE $DB
     jr   nz, jr_002_7053                          ; $7049: $20 $08
@@ -6610,12 +6619,12 @@ jr_002_70B5:
     ld   a, JINGLE_JUMP_DOWN                      ; $70D4: $3E $08
     ldh  [hJingle], a                             ; $70D6: $E0 $F2
 
-label_002_70D8::
+label_002_70D8:
     xor  a                                        ; $70D8: $AF
     ld   [$C191], a                               ; $70D9: $EA $91 $C1
     jp   label_002_7277                           ; $70DC: $C3 $77 $72
 
-label_002_70DF::
+label_002_70DF:
     cp   $90                                      ; $70DF: $FE $90
     jp   c, label_002_715F                        ; $70E1: $DA $5F $71
 
@@ -6697,7 +6706,7 @@ jr_002_7147:
     call EnqueueDoorUnlockedSfx                   ; $7159: $CD $20 $54
     jp   label_002_7277                           ; $715C: $C3 $77 $72
 
-label_002_715F::
+label_002_715F:
     cp   $7C                                      ; $715F: $FE $7C
     jp   c, label_002_7461                        ; $7161: $DA $61 $74
 
@@ -6742,7 +6751,7 @@ jr_002_716E:
 
     jp   label_002_7461                           ; $7199: $C3 $61 $74
 
-label_002_719C::
+label_002_719C:
     ld   a, [wLinkMotionState]                    ; $719C: $FA $1C $C1
     cp   $02                                      ; $719F: $FE $02
     jp   z, label_002_7454                        ; $71A1: $CA $54 $74
@@ -6759,7 +6768,7 @@ label_002_719C::
     call func_002_6EA9                            ; $71B5: $CD $A9 $6E
     jp   label_002_7454                           ; $71B8: $C3 $54 $74
 
-label_002_71BB::
+label_002_71BB:
     ld   a, [wC15C]                               ; $71BB: $FA $5C $C1
     and  a                                        ; $71BE: $A7
     jp   nz, label_002_7454                       ; $71BF: $C2 $54 $74
@@ -6842,7 +6851,7 @@ jr_002_722C:
 
     jp   ApplyMapFadeOutTransition                                ; $723A: $C3 $7D $0C
 
-label_002_723D::
+label_002_723D:
     ld   a, [$D6F9]                               ; $723D: $FA $F9 $D6
     and  a                                        ; $7240: $A7
     jp   nz, label_002_7461                       ; $7241: $C2 $61 $74
@@ -6865,13 +6874,13 @@ label_002_723D::
 
     jp   label_002_7461                           ; $725D: $C3 $61 $74
 
-label_002_7260::
+label_002_7260:
     ld   hl, wLinkGroundStatus                                ; $7260: $21 $1F $C1
     ld   [hl], $01                                ; $7263: $36 $01
     cp   $0A                                      ; $7265: $FE $0A
     jp   z, label_002_7461                        ; $7267: $CA $61 $74
 
-label_002_726A::
+label_002_726A:
     ldh  a, [$FFDB]                               ; $726A: $F0 $DB
     and  $0F                                      ; $726C: $E6 $0F
     cp   $06                                      ; $726E: $FE $06
@@ -6880,7 +6889,7 @@ label_002_726A::
     cp   $0B                                      ; $7272: $FE $0B
     jp   c, label_002_7461                        ; $7274: $DA $61 $74
 
-label_002_7277::
+label_002_7277:
     ldh  a, [hObjectUnderEntity]                               ; $7277: $F0 $AF
     cp   $69                                      ; $7279: $FE $69
     jr   nz, jr_002_728E                          ; $727B: $20 $11
@@ -7081,7 +7090,7 @@ jr_002_734F:
     ld   bc, $02                                  ; $73A9: $01 $02 $00
     ld   [bc], a                                  ; $73AC: $02
 
-label_002_73AD::
+label_002_73AD:
     ld   e, $20                                   ; $73AD: $1E $20
     cp   $C5                                      ; $73AF: $FE $C5
     jr   nz, jr_002_741D                          ; $73B1: $20 $6A
@@ -7196,9 +7205,9 @@ jr_002_742F:
     jr   nz, label_002_7454                       ; $744D: $20 $05
 
     ld   a, $02                                   ; $744F: $3E $02
-    call Func_020_4985_trampoline                                ; $7451: $CD $C8 $09
+    call func_020_4985_trampoline                                ; $7451: $CD $C8 $09
 
-label_002_7454::
+label_002_7454:
     ld   hl, $6E29                                ; $7454: $21 $29 $6E
     add  hl, bc                                   ; $7457: $09
     ld   a, [wCollisionType]                               ; $7458: $FA $33 $C1
@@ -7207,7 +7216,7 @@ label_002_7454::
     scf                                           ; $745F: $37
     ret                                           ; $7460: $C9
 
-label_002_7461::
+label_002_7461:
     xor  a                                        ; $7461: $AF
     ld   [$C191], a                               ; $7462: $EA $91 $C1
     scf                                           ; $7465: $37
@@ -7261,7 +7270,7 @@ jr_002_74A3:
 jr_002_74AC:
     ret                                           ; $74AC: $C9
 
-label_002_74AD::
+label_002_74AD:
     ld   a, [wIsRunningWithPegasusBoots]                               ; $74AD: $FA $4A $C1
     and  a                                        ; $74B0: $A7
     ret  z                                        ; $74B1: $C8
@@ -7306,7 +7315,7 @@ jr_002_74C9:
     ld   [$C158], a                               ; $74F4: $EA $58 $C1
     ld   a, JINGLE_HUGE_BUMP                   ; $74F7: $3E $0B
     ldh  [hJingle], a                             ; $74F9: $E0 $F2
-    jp   label_1828                                    ; $74FB: $C3 $28 $18
+    jp   func_1828                                    ; $74FB: $C3 $28 $18
 
 func_002_74FE::
     call OpenDialog                               ; $74FE: $CD $85 $23
@@ -7595,7 +7604,7 @@ jr_002_7687:
     add  $03                                      ; $76A6: $C6 $03
     ldh  [hLinkPositionY], a                      ; $76A8: $E0 $99
 
-label_002_76AA::
+label_002_76AA:
     ld   a, LINK_MOTION_FALLING_DOWN              ; $76AA: $3E $06
     ld   [wLinkMotionState], a                    ; $76AC: $EA $1C $C1
     call ResetSpinAttack                                ; $76AF: $CD $AF $0C
@@ -7608,7 +7617,7 @@ label_002_76AA::
 jr_002_76BF:
     ret                                           ; $76BF: $C9
 
-label_002_76C0::
+label_002_76C0:
     ld   hl, wOAMBuffer                           ; $76C0: $21 $00 $C0
     ld   a, [$C181]                               ; $76C3: $FA $81 $C1
     cp   $08                                      ; $76C6: $FE $08
@@ -7665,7 +7674,7 @@ jr_002_76F4:
     and  a                                        ; $7716: $A7
     jr   nz, jr_002_7732                          ; $7717: $20 $19
 
-label_002_7719::
+label_002_7719:
     ld   a, $50                                   ; $7719: $3E $50
     ldh  [$FFB7], a                               ; $771B: $E0 $B7
     ld   a, $08                                   ; $771D: $3E $08
@@ -7754,7 +7763,7 @@ jr_002_779A:
     add  $02                                      ; $779D: $C6 $02
     ld   [$C13B], a                               ; $779F: $EA $3B $C1
 
-label_002_77A2::
+label_002_77A2:
     xor  a                                        ; $77A2: $AF
     ld   [$C1BB], a                               ; $77A3: $EA $BB $C1
     ld   a, [wLinkMotionState]                    ; $77A6: $FA $1C $C1
@@ -7883,13 +7892,13 @@ jr_002_783C:
 jr_002_786C:
     ld   [hl], $00                                ; $786C: $36 $00
 
-label_002_786E::
+label_002_786E:
     ret                                           ; $786E: $C9
 
 Data_002_786F::
     db   $FC, $FF, $FF, $FE, $FE, $FE, $FD, $FD, $FD, $FC, $FC, $FC, $00, $02
 
-label_002_787D::
+label_002_787D:
     ldh  a, [hLinkPositionY]                      ; $787D: $F0 $99
     add  $08                                      ; $787F: $C6 $08
     ld   [hl+], a                                 ; $7881: $22

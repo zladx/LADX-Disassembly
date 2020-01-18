@@ -49,7 +49,7 @@ jr_01B_4031:
     call func_01B_413B                            ; $4032: $CD $3B $41
     jr   jr_01B_4028                              ; $4035: $18 $F1
 
-func_01B_4037:
+func_01B_4037::
     ld   de, $D393                                ; $4037: $11 $93 $D3
     ld   hl, wActiveNoiseSfx                      ; $403A: $21 $78 $D3
     ld   a, [hl+]                                 ; $403D: $2A
@@ -116,7 +116,7 @@ Data_01B_4077::
     db   $00, $71, $00, $71, $00, $71, $00, $71, $00, $71, $00, $71, $00, $71, $00, $71
     db   $00, $71, $00, $71, $00, $71, $00, $71, $00, $71, $00, $71, $00, $71, $00, $71
 
-func_01B_40D7:
+func_01B_40D7::
     inc  e                                        ; $40D7: $1C
     dec  a                                        ; $40D8: $3D
     sla  a                                        ; $40D9: $CB $27
@@ -131,7 +131,7 @@ func_01B_40D7:
     ld   a, h                                     ; $40E4: $7C
     ret                                           ; $40E5: $C9
 
-func_01B_40E6:
+func_01B_40E6::
     push bc                                       ; $40E6: $C5
     ld   c, $30                                   ; $40E7: $0E $30
 
@@ -146,7 +146,7 @@ jr_01B_40E9:
     pop  bc                                       ; $40F1: $C1
     ret                                           ; $40F2: $C9
 
-func_01B_40F3:
+func_01B_40F3::
     xor  a                                        ; $40F3: $AF
     ld   [$D379], a                               ; $40F4: $EA $79 $D3
     ld   [$D34F], a                               ; $40F7: $EA $4F $D3
@@ -160,7 +160,7 @@ func_01B_40F3:
     ldh  [rNR44], a                               ; $410C: $E0 $23
     ret                                           ; $410E: $C9
 
-func_01B_410F:
+func_01B_410F::
 jr_01B_410F:
     ld   a, [$D379]                               ; $410F: $FA $79 $D3
     cp   $0C                                      ; $4112: $FE $0C
@@ -187,7 +187,7 @@ jr_01B_410F:
     call func_01B_40F3                            ; $4135: $CD $F3 $40
     jp   label_01B_4E4A                           ; $4138: $C3 $4A $4E
 
-func_01B_413B:
+func_01B_413B::
     cp   $FF                                      ; $413B: $FE $FF
     jr   z, jr_01B_410F                           ; $413D: $28 $D0
 
@@ -337,7 +337,7 @@ jr_01B_42E6:
     ld   [bc], a                                  ; $4301: $02
     ret                                           ; $4302: $C9
 
-func_01B_4303:
+func_01B_4303::
     ld   hl, $D355                                ; $4303: $21 $55 $D3
     ld   a, [hl+]                                 ; $4306: $2A
     cp   $01                                      ; $4307: $FE $01
@@ -375,7 +375,7 @@ jr_01B_4327:
     ldh  [rNR51], a                               ; $4328: $E0 $25
     ret                                           ; $432A: $C9
 
-func_01B_432B:
+func_01B_432B::
     ld   a, [hl+]                                 ; $432B: $2A
     ld   c, a                                     ; $432C: $4F
     ld   a, [hl]                                  ; $432D: $7E
@@ -388,7 +388,7 @@ func_01B_432B:
     ld   [de], a                                  ; $4334: $12
     ret                                           ; $4335: $C9
 
-func_01B_4336:
+func_01B_4336::
     ld   a, [hl+]                                 ; $4336: $2A
     ld   [de], a                                  ; $4337: $12
     inc  e                                        ; $4338: $1C
@@ -396,7 +396,7 @@ func_01B_4336:
     ld   [de], a                                  ; $433A: $12
     ret                                           ; $433B: $C9
 
-func_01B_433C:
+func_01B_433C::
     ld   a, [$D379]                               ; $433C: $FA $79 $D3
     cp   $05                                      ; $433F: $FE $05
     jr   z, jr_01B_435E                           ; $4341: $28 $1B
@@ -518,7 +518,7 @@ jr_01B_4405:
     call func_01B_440B                            ; $4405: $CD $0B $44
     jp   label_01B_4531                           ; $4408: $C3 $31 $45
 
-func_01B_440B:
+func_01B_440B::
     push de                                       ; $440B: $D5
     ld   a, [hl+]                                 ; $440C: $2A
     ld   e, a                                     ; $440D: $5F
@@ -534,7 +534,7 @@ jr_01B_4411:
     pop  de                                       ; $4415: $D1
     ret                                           ; $4416: $C9
 
-func_01B_4417:
+func_01B_4417::
     push de                                       ; $4417: $D5
     ld   a, [hl+]                                 ; $4418: $2A
     ld   e, a                                     ; $4419: $5F
@@ -544,7 +544,7 @@ func_01B_4417:
     inc  de                                       ; $441D: $13
     jr   jr_01B_4411                              ; $441E: $18 $F1
 
-func_01B_4420:
+func_01B_4420::
     ld   a, [hl+]                                 ; $4420: $2A
     ld   c, a                                     ; $4421: $4F
     ld   a, [hl-]                                 ; $4422: $3A
@@ -732,7 +732,7 @@ jr_01B_450C:
     pop  hl                                       ; $450C: $E1
     jr   jr_01B_44CA                              ; $450D: $18 $BB
 
-func_01B_450F:
+func_01B_450F::
     ld   hl, $D369                                ; $450F: $21 $69 $D3
     ld   a, [hl]                                  ; $4512: $7E
     and  a                                        ; $4513: $A7
@@ -1125,7 +1125,7 @@ label_01B_46FC:
     pop  hl                                       ; $46FC: $E1
     ret                                           ; $46FD: $C9
 
-func_01B_46FE:
+func_01B_46FE::
     push hl                                       ; $46FE: $E5
     ld   a, l                                     ; $46FF: $7D
     add  $06                                      ; $4700: $C6 $06
@@ -1212,7 +1212,7 @@ jr_01B_4762:
     call func_01B_4884                            ; $4781: $CD $84 $48
     jp   label_01B_4720                           ; $4784: $C3 $20 $47
 
-func_01B_4787:
+func_01B_4787::
     ld   a, [$D31B]                               ; $4787: $FA $1B $D3
     and  a                                        ; $478A: $A7
     jr   nz, jr_01B_47AE                          ; $478B: $20 $21
@@ -1261,7 +1261,7 @@ jr_01B_47AE:
     call func_01B_47D2                            ; $47CE: $CD $D2 $47
     ret                                           ; $47D1: $C9
 
-func_01B_47D2:
+func_01B_47D2::
     push bc                                       ; $47D2: $C5
     dec  b                                        ; $47D3: $05
     ld   c, b                                     ; $47D4: $48
@@ -1344,7 +1344,7 @@ jr_01B_483D:
     ld   [c], a                                   ; $483E: $E2
     jp   label_01B_46FC                           ; $483F: $C3 $FC $46
 
-func_01B_4842:
+func_01B_4842::
     ld   a, [bc]                                  ; $4842: $0A
     inc  a                                        ; $4843: $3C
     ld   [bc], a                                  ; $4844: $02
@@ -1388,7 +1388,7 @@ jr_01B_4874:
     call func_01B_489E                            ; $4874: $CD $9E $48
     jr   jr_01B_486A                              ; $4877: $18 $F1
 
-func_01B_4879:
+func_01B_4879::
     ld   a, $07                                   ; $4879: $3E $07
     add  l                                        ; $487B: $85
     ld   l, a                                     ; $487C: $6F
@@ -1399,7 +1399,7 @@ func_01B_4879:
     ld   d, a                                     ; $4882: $57
     ret                                           ; $4883: $C9
 
-func_01B_4884:
+func_01B_4884::
     ld   de, $D3A4                                ; $4884: $11 $A4 $D3
     call func_01B_4895                            ; $4887: $CD $95 $48
     ld   a, l                                     ; $488A: $7D
@@ -1413,7 +1413,7 @@ func_01B_4884:
     ld   [de], a                                  ; $4893: $12
     ret                                           ; $4894: $C9
 
-func_01B_4895:
+func_01B_4895::
     ld   a, [$D350]                               ; $4895: $FA $50 $D3
     dec  a                                        ; $4898: $3D
     sla  a                                        ; $4899: $CB $27
@@ -1421,7 +1421,7 @@ func_01B_4895:
     ld   e, a                                     ; $489C: $5F
     ret                                           ; $489D: $C9
 
-func_01B_489E:
+func_01B_489E::
     ld   de, $D3A4                                ; $489E: $11 $A4 $D3
     call func_01B_4895                            ; $48A1: $CD $95 $48
     ld   a, [de]                                  ; $48A4: $1A
@@ -2668,7 +2668,7 @@ label_01B_4E4A:
     xor  a                                        ; $4E53: $AF
     ld   [$D369], a                               ; $4E54: $EA $69 $D3
 
-func_01B_4E57:
+func_01B_4E57::
     xor  a                                        ; $4E57: $AF
     ld   [$D361], a                               ; $4E58: $EA $61 $D3
     ld   [$D371], a                               ; $4E5B: $EA $71 $D3

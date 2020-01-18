@@ -100,7 +100,7 @@ jr_005_49D1:
 ._02 dw func_005_4B41                             ; $49E1
 ._03 dw func_005_4B89                             ; $49E3
 
-func_005_49E5:
+func_005_49E5::
     call func_005_54C3                            ; $49E5: $CD $C3 $54
     ldh  a, [hLinkPositionY]                      ; $49E8: $F0 $99
     cp   $20                                      ; $49EA: $FE $20
@@ -133,7 +133,7 @@ jr_005_4A0C:
 Data_005_4A11::
     db   $00, $04, $05, $06, $07, $01
 
-func_005_4A17:
+func_005_4A17::
     ld   a, $02                                   ; $4A17: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4A19: $E0 $A1
     xor  a                                        ; $4A1B: $AF
@@ -143,7 +143,7 @@ func_005_4A17:
     xor  $01                                      ; $4A23: $EE $01
     ldh  [hLinkDirection], a                      ; $4A25: $E0 $9E
     push bc                                       ; $4A27: $C5
-    call label_BF0                                ; $4A28: $CD $F0 $0B
+    call func_BF0                                ; $4A28: $CD $F0 $0B
     pop  bc                                       ; $4A2B: $C1
     ld   hl, wEntitiesUnknownTableD               ; $4A2C: $21 $D0 $C2
     add  hl, bc                                   ; $4A2F: $09
@@ -176,7 +176,7 @@ jr_005_4A46:
     add  hl, de                                   ; $4A4F: $19
     ld   a, [hl]                                  ; $4A50: $7E
     call SetEntitySpriteVariant                   ; $4A51: $CD $0C $3B
-    call label_BFB                                ; $4A54: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4A54: $CD $FB $0B
     jr   nz, jr_005_4A9E                          ; $4A57: $20 $45
 
     ld   a, ENTITY_BOMB                           ; $4A59: $3E $02
@@ -234,7 +234,7 @@ jr_005_4A9E:
 jr_005_4AAE:
     call func_005_7AB1                            ; $4AAE: $CD $B1 $7A
     call label_3B23                               ; $4AB1: $CD $23 $3B
-    call label_BFB                                ; $4AB4: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4AB4: $CD $FB $0B
     cp   $06                                      ; $4AB7: $FE $06
     jr   nc, jr_005_4AEC                          ; $4AB9: $30 $31
 
@@ -317,7 +317,7 @@ jr_005_4B01:
     ldh  [hJingle], a                             ; $4B14: $E0 $F2
 
 jr_005_4B16:
-    call label_BFB                                ; $4B16: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4B16: $CD $FB $0B
     cp   $60                                      ; $4B19: $FE $60
     jr   nc, jr_005_4B40                          ; $4B1B: $30 $23
 
@@ -329,7 +329,7 @@ jr_005_4B16:
     call func_005_4B2C                            ; $4B26: $CD $2C $4B
     ld   hl, wEntitiesSpeedYTable                 ; $4B29: $21 $50 $C2
 
-func_005_4B2C:
+func_005_4B2C::
     add  hl, bc                                   ; $4B2C: $09
     ld   a, [hl]                                  ; $4B2D: $7E
     cp   $30                                      ; $4B2E: $FE $30
@@ -351,7 +351,7 @@ jr_005_4B3E:
 jr_005_4B40:
     ret                                           ; $4B40: $C9
 
-func_005_4B41:
+func_005_4B41::
     ld   a, $02                                   ; $4B41: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4B43: $E0 $A1
     call func_005_7AEA                            ; $4B45: $CD $EA $7A
@@ -392,7 +392,7 @@ func_005_4B41:
 jr_005_4B86:
     jp   IncrementEntityState                     ; $4B86: $C3 $12 $3B
 
-func_005_4B89:
+func_005_4B89::
     call GetEntityTransitionCountdown             ; $4B89: $CD $05 $0C
     cp   $01                                      ; $4B8C: $FE $01
     jr   nz, jr_005_4B95                          ; $4B8E: $20 $05
@@ -787,7 +787,7 @@ Data_005_4DC7::
 Data_005_4DCB::
     db   $70, $00, $72, $00
 
-func_005_4DCF:
+func_005_4DCF::
     ld   a, [$DB48]                               ; $4DCF: $FA $48 $DB
     cp   $02                                      ; $4DD2: $FE $02
     ret  nz                                       ; $4DD4: $C0

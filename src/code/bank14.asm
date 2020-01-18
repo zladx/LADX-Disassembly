@@ -291,7 +291,7 @@ jr_014_49C6:
 
 jr_014_49F5:
     ld   b, $07                                   ; $49F5: $06 $07
-    ld   [label_1909], sp                         ; $49F7: $08 $09 $19
+    ld   [$1909], sp                              ; $49F7: $08 $09 $19
     add  hl, hl                                   ; $49FA: $29
     add  hl, sp                                   ; $49FB: $39
     ld   c, c                                     ; $49FC: $49
@@ -408,7 +408,7 @@ jr_014_4A6B:
     inc  b                                        ; $4A6E: $04
     dec  b                                        ; $4A6F: $05
     ld   b, $07                                   ; $4A70: $06 $07
-    ld   [label_1909], sp                         ; $4A72: $08 $09 $19
+    ld   [$1909], sp                              ; $4A72: $08 $09 $19
     add  hl, hl                                   ; $4A75: $29
     add  hl, sp                                   ; $4A76: $39
     ld   c, c                                     ; $4A77: $49
@@ -659,7 +659,7 @@ jr_014_4B8E:
     nop                                           ; $4BA5: $00
     nop                                           ; $4BA6: $00
 
-func_014_4BA7:
+func_014_4BA7::
     ld   a, [$D464]                               ; $4BA7: $FA $64 $D4
     cp   $3E                                      ; $4BAA: $FE $3E
     ret  c                                        ; $4BAC: $D8
@@ -688,7 +688,7 @@ jr_014_4BD6:
     ld   [wPaletteDataFlags], a                    ; $4BD6: $EA $D1 $DD
     ret                                           ; $4BD9: $C9
 
-func_014_4BDA:
+func_014_4BDA::
 jr_014_4BDA:
     ld   a, [de]                                  ; $4BDA: $1A
     ld   [hl+], a                                 ; $4BDB: $22
@@ -709,7 +709,7 @@ jr_014_4BDA:
     ld   d, a                                     ; $4BEC: $57
     jr   jr_014_4BDA                              ; $4BED: $18 $EB
 
-func_014_4BEF:
+func_014_4BEF::
     ld   a, [$D464]                               ; $4BEF: $FA $64 $D4
     cp   $20                                      ; $4BF2: $FE $20
     ret  nc                                       ; $4BF4: $D0
@@ -731,7 +731,7 @@ jr_014_4C04:
     ld   [wPaletteDataFlags], a                    ; $4C0C: $EA $D1 $DD
     ret                                           ; $4C0F: $C9
 
-func_014_4C10:
+func_014_4C10::
     ld   b, $40                                   ; $4C10: $06 $40
 
 jr_014_4C12:
@@ -972,11 +972,11 @@ jr_014_4D32:
     jr   z, jr_014_4D4A                           ; $4D36: $28 $12
 
     ld   hl, wFarcallParams                       ; $4D38: $21 $01 $DE
-    ld   a, BANK(Func_021_5355)                   ; $4D3B: $3E $21
+    ld   a, BANK(func_021_5355)                   ; $4D3B: $3E $21
     ld   [hl+], a                                 ; $4D3D: $22
-    ld   a, HIGH(Func_021_5355)                   ; $4D3E: $3E $53
+    ld   a, HIGH(func_021_5355)                   ; $4D3E: $3E $53
     ld   [hl+], a                                 ; $4D40: $22
-    ld   a, LOW(Func_021_5355)                    ; $4D41: $3E $55
+    ld   a, LOW(func_021_5355)                    ; $4D41: $3E $55
     ld   [hl+], a                                 ; $4D43: $22
     ld   a, BANK(@)                               ; $4D44: $3E $14
     ld   [hl], a                                  ; $4D46: $77
@@ -1009,7 +1009,7 @@ jr_014_4D6F:
     ld   [$DDD7], a                               ; $4D6F: $EA $D7 $DD
     ret                                           ; $4D72: $C9
 
-Func_014_4D73::
+func_014_4D73::
     xor  a                                        ; $4D73: $AF
     ldh  [$FFBE], a                               ; $4D74: $E0 $BE
     ldh  [hFFF5], a                               ; $4D76: $E0 $F5
@@ -2312,7 +2312,7 @@ jr_014_5391:
     ld   hl, hJingle                              ; $539E: $21 $F2 $FF
     ld   [hl], $08                                ; $53A1: $36 $08
 
-func_014_53A3:
+func_014_53A3::
     ld   hl, wEntitiesStatusTable                         ; $53A3: $21 $80 $C2
     add  hl, bc                                   ; $53A6: $09
     ld   [hl], $05                                ; $53A7: $36 $05
@@ -2487,11 +2487,11 @@ jr_014_547F:
     ret  c                                        ; $5497: $D8
 
     ld   hl, wFarcallParams                       ; $5498: $21 $01 $DE
-    ld   a, BANK(Func_021_53B6)                   ; $549B: $3E $21
+    ld   a, BANK(func_021_53B6)                   ; $549B: $3E $21
     ld   [hl+], a                                 ; $549D: $22
-    ld   a, HIGH(Func_021_53B6)                   ; $549E: $3E $53
+    ld   a, HIGH(func_021_53B6)                   ; $549E: $3E $53
     ld   [hl+], a                                 ; $54A0: $22
-    ld   a, LOW(Func_021_53B6)                    ; $54A1: $3E $B6
+    ld   a, LOW(func_021_53B6)                    ; $54A1: $3E $B6
     ld   [hl+], a                                 ; $54A3: $22
     ld   a, BANK(@)                               ; $54A4: $3E $14
     ld   [wFarcallReturnBank], a                  ; $54A6: $EA $04 $DE
@@ -2558,7 +2558,7 @@ jr_014_54E7:
     nop                                           ; $54F6: $00
     db   $FE                                      ; $54F7: $FE
 
-Func_014_54F8::
+func_014_54F8::
     ld   a, [wC178]
     and  a                                        ; $54FB: $A7
     jr   z, jr_014_5502                           ; $54FC: $28 $04
@@ -2611,7 +2611,7 @@ func_014_5526::
     sla  c                                        ; $5543: $CB $21
     rl   b                                        ; $5545: $CB $10
     ld   a, $14                                   ; $5547: $3E $14
-    call label_91D.jp_92E                         ; $5549: $CD $2E $09
+    call func_91D.jp_92E                         ; $5549: $CD $2E $09
     pop  bc                                       ; $554C: $C1
 
 jr_014_554D:
@@ -2677,7 +2677,7 @@ jr_014_5584:
     sla  c                                        ; $55A9: $CB $21
     rl   b                                        ; $55AB: $CB $10
     ld   a, $14                                   ; $55AD: $3E $14
-    call label_91D.jp_92E                         ; $55AF: $CD $2E $09
+    call func_91D.jp_92E                         ; $55AF: $CD $2E $09
     pop  bc                                       ; $55B2: $C1
 
 jr_014_55B3:
@@ -2725,7 +2725,7 @@ jr_014_55E3:
     sla  c                                        ; $55F6: $CB $21
     rl   b                                        ; $55F8: $CB $10
     ld   a, $14                                   ; $55FA: $3E $14
-    call label_91D.jp_92E                         ; $55FC: $CD $2E $09
+    call func_91D.jp_92E                         ; $55FC: $CD $2E $09
     pop  bc                                       ; $55FF: $C1
 
 jr_014_5600:
@@ -2820,7 +2820,7 @@ jr_014_5677:
 
 jr_014_5679:
     ld   a, $94                                   ; $5679: $3E $94
-    call label_B2F                                ; $567B: $CD $2F $0B
+    call func_2BF                                ; $567B: $CD $2F $0B
     call label_2887                               ; $567E: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $5681: $F0 $FE
     and  a                                        ; $5683: $A7
@@ -2874,7 +2874,7 @@ jr_014_56B9:
     sla  c                                        ; $56BF: $CB $21
     rl   b                                        ; $56C1: $CB $10
     ld   a, $14                                   ; $56C3: $3E $14
-    call label_91D.jp_92E                         ; $56C5: $CD $2E $09
+    call func_91D.jp_92E                         ; $56C5: $CD $2E $09
     pop  bc                                       ; $56C8: $C1
 
 jr_014_56C9:
@@ -2997,7 +2997,7 @@ jr_014_5756:
 label_014_5767:
     ld   [hl], $C6                                ; $5767: $36 $C6
     ld   a, $94                                   ; $5769: $3E $94
-    call label_B2F                                ; $576B: $CD $2F $0B
+    call func_2BF                                ; $576B: $CD $2F $0B
     call label_2887                               ; $576E: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $5771: $F0 $FE
     and  a                                        ; $5773: $A7
@@ -3011,7 +3011,7 @@ label_014_5767:
     sla  c                                        ; $577F: $CB $21
     rl   b                                        ; $5781: $CB $10
     ld   a, $14                                   ; $5783: $3E $14
-    call label_91D.jp_92E                         ; $5785: $CD $2E $09
+    call func_91D.jp_92E                         ; $5785: $CD $2E $09
     pop  bc                                       ; $5788: $C1
 
 jr_014_5789:
@@ -3071,7 +3071,7 @@ label_014_57E1:
     add  hl, de                                   ; $57E4: $19
     ld   [hl], $E8                                ; $57E5: $36 $E8
     ld   a, $94                                   ; $57E7: $3E $94
-    call label_B2F                                ; $57E9: $CD $2F $0B
+    call func_2BF                                ; $57E9: $CD $2F $0B
     call label_2887                               ; $57EC: $CD $87 $28
     ldh  a, [hIsGBC]                              ; $57EF: $F0 $FE
     and  a                                        ; $57F1: $A7
@@ -3085,7 +3085,7 @@ label_014_57E1:
     sla  c                                        ; $57FD: $CB $21
     rl   b                                        ; $57FF: $CB $10
     ld   a, $14                                   ; $5801: $3E $14
-    call label_91D.jp_92E                         ; $5803: $CD $2E $09
+    call func_91D.jp_92E                         ; $5803: $CD $2E $09
     pop  bc                                       ; $5806: $C1
 
 jr_014_5807:

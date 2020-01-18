@@ -346,7 +346,7 @@ jr_002_5EED:
 
     ld   de, Data_002_5EA7                        ; $5F24: $11 $A7 $5E
 
-label_002_5F27::
+label_002_5F27:
     ldh  a, [$FFCF]                               ; $5F27: $F0 $CF
     ld   [hl+], a                                 ; $5F29: $22
     ldh  a, [$FFD0]                               ; $5F2A: $F0 $D0
@@ -379,7 +379,7 @@ label_002_5F27::
 
     push bc                                       ; $5F4C: $C5
     ld   a, $02                                   ; $5F4D: $3E $02
-    call label_91D                                ; $5F4F: $CD $1D $09
+    call func_91D                                ; $5F4F: $CD $1D $09
     pop  bc                                       ; $5F52: $C1
 
 jr_002_5F53:

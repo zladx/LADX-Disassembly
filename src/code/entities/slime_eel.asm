@@ -1,7 +1,7 @@
 SlimeEelEntityHandler::
     call label_394D                               ; $6CDC: $CD $4D $39
     call label_3EE8                               ; $6CDF: $CD $E8 $3E
-    call label_C56                                ; $6CE2: $CD $56 $0C
+    call func_C56                                ; $6CE2: $CD $56 $0C
     ld   hl, wEntitiesPrivateState1Table          ; $6CE5: $21 $B0 $C2
     add  hl, bc                                   ; $6CE8: $09
     ld   a, [hl]                                  ; $6CE9: $7E
@@ -10,7 +10,7 @@ SlimeEelEntityHandler::
 ._01 dw func_005_72E6                             ; $6CED
 ._02 dw func_005_75D1                             ; $6CEF
 
-func_005_6CF1:
+func_005_6CF1::
     ld   a, c                                     ; $6CF1: $79
     ld   [$D201], a                               ; $6CF2: $EA $01 $D2
     ldh  a, [hActiveEntityState]                  ; $6CF5: $F0 $F0
@@ -20,7 +20,7 @@ func_005_6CF1:
 ._02 dw func_005_6E7D                             ; $6CFC
 ._03 dw func_005_70EB                             ; $6CFE
 
-func_005_6D00:
+func_005_6D00::
     call GetEntityTransitionCountdown             ; $6D00: $CD $05 $0C
     ret  nz                                       ; $6D03: $C0
 
@@ -44,7 +44,7 @@ Data_005_6D22::
     db   $08, $08, $08, $08, $09, $0B, $0B, $0A, $08, $08, $08, $08, $09, $0B, $0B, $0A
     db   $05, $07, $07, $06, $04, $04, $04, $04, $05, $07, $07, $06, $04, $04, $04, $04
 
-func_005_6D42:
+func_005_6D42::
     ld   a, $38                                   ; $6D42: $3E $38
     ldh  [hSwordIntersectedAreaX], a              ; $6D44: $E0 $CE
     add  $10                                      ; $6D46: $C6 $10
@@ -76,7 +76,7 @@ func_005_6D42:
 
 jr_005_6D7E:
     ld   [hl], $1F                                ; $6D7E: $36 $1F
-    call label_BFB                                ; $6D80: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $6D80: $CD $FB $0B
     ld   [hl], $B0                                ; $6D83: $36 $B0
     call label_3E34                               ; $6D85: $CD $34 $3E
     ld   hl, wEntitiesStatusTable                 ; $6D88: $21 $80 $C2
@@ -114,13 +114,13 @@ jr_005_6D7E:
     ld   a, $AF                                   ; $6DC0: $3E $AF
     ld   [$DDD8], a                               ; $6DC2: $EA $D8 $DD
     ld   a, $05                                   ; $6DC5: $3E $05
-    call label_91D                                ; $6DC7: $CD $1D $09
+    call func_91D                                ; $6DC7: $CD $1D $09
     ldh  a, [$FFD0]                               ; $6DCA: $F0 $D0
     inc  a                                        ; $6DCC: $3C
     inc  a                                        ; $6DCD: $3C
     ldh  [$FFD0], a                               ; $6DCE: $E0 $D0
     ld   a, $05                                   ; $6DD0: $3E $05
-    call label_91D                                ; $6DD2: $CD $1D $09
+    call func_91D                                ; $6DD2: $CD $1D $09
     pop  hl                                       ; $6DD5: $E1
     ld   de, $40                                  ; $6DD6: $11 $40 $00
     add  hl, de                                   ; $6DD9: $19
@@ -131,13 +131,13 @@ jr_005_6D7E:
     ld   a, $B0                                   ; $6DE0: $3E $B0
     ld   [$DDD8], a                               ; $6DE2: $EA $D8 $DD
     ld   a, $05                                   ; $6DE5: $3E $05
-    call label_91D                                ; $6DE7: $CD $1D $09
+    call func_91D                                ; $6DE7: $CD $1D $09
     ldh  a, [$FFD0]                               ; $6DEA: $F0 $D0
     inc  a                                        ; $6DEC: $3C
     inc  a                                        ; $6DED: $3C
     ldh  [$FFD0], a                               ; $6DEE: $E0 $D0
     ld   a, $05                                   ; $6DF0: $3E $05
-    call label_91D                                ; $6DF2: $CD $1D $09
+    call func_91D                                ; $6DF2: $CD $1D $09
     pop  hl                                       ; $6DF5: $E1
     ld   a, h                                     ; $6DF6: $7C
     ldh  [$FFCF], a                               ; $6DF7: $E0 $CF
@@ -157,7 +157,7 @@ jr_005_6DFD:
     call func_005_6E15                            ; $6E0F: $CD $15 $6E
     call func_005_6E15                            ; $6E12: $CD $15 $6E
 
-func_005_6E15:
+func_005_6E15::
     ldh  a, [$FFCF]                               ; $6E15: $F0 $CF
     ld   [hl+], a                                 ; $6E17: $22
     ldh  a, [$FFD0]                               ; $6E18: $F0 $D0
@@ -192,7 +192,7 @@ label_005_6E30:
     ld   [wRequests], a                           ; $6E44: $EA $00 $D6
     call func_005_6E4A                            ; $6E47: $CD $4A $6E
 
-func_005_6E4A:
+func_005_6E4A::
     ldh  a, [$FFCF]                               ; $6E4A: $F0 $CF
     ld   [hl+], a                                 ; $6E4C: $22
     ldh  a, [$FFD0]                               ; $6E4D: $F0 $D0
@@ -231,7 +231,7 @@ func_005_6E4A:
 label_005_6E7C:
     ret                                           ; $6E7C: $C9
 
-func_005_6E7D:
+func_005_6E7D::
     ld   hl, wEntitiesPosXTable                   ; $6E7D: $21 $00 $C2
     add  hl, bc                                   ; $6E80: $09
     ld   a, [hl]                                  ; $6E81: $7E
@@ -455,8 +455,8 @@ Data_005_70E3::
 Data_005_70E7::
     db   $00, $00, $01, $01
 
-func_005_70EB:
-    call label_BFB                                ; $70EB: $CD $FB $0B
+func_005_70EB::
+    call IsEntityDropTimerZero                                ; $70EB: $CD $FB $0B
     ld   a, [$D200]                               ; $70EE: $FA $00 $D2
     and  a                                        ; $70F1: $A7
     jr   z, jr_005_70F6                           ; $70F2: $28 $02
@@ -728,7 +728,7 @@ jr_005_719A:
     pop  de                                       ; $7280: $D1
     ld   a, $00                                   ; $7281: $3E $00
 
-func_005_7283:
+func_005_7283::
     ldh  [hActiveEntitySpriteVariant], a          ; $7283: $E0 $F1
     add  hl, de                                   ; $7285: $19
     ld   a, $48                                   ; $7286: $3E $48
@@ -781,11 +781,11 @@ Data_005_72CC::
     db   $70, $07, $70, $27, $72, $07, $72, $27, $74, $07, $74, $27, $7C, $06, $7C, $26
     db   $7E, $06, $7E, $26
 
-func_005_72E0:
+func_005_72E0::
     ld   de, Data_005_72CC                        ; $72E0: $11 $CC $72
     jp   RenderAnimatedActiveEntity               ; $72E3: $C3 $C0 $3B
 
-func_005_72E6:
+func_005_72E6::
     call func_005_7982                            ; $72E6: $CD $82 $79
     call func_005_7A3A                            ; $72E9: $CD $3A $7A
     ldh  a, [hActiveEntityState]                  ; $72EC: $F0 $F0
@@ -802,7 +802,7 @@ Data_005_72F9::
 Data_005_72FF::
     db   $0C, $0D, $0E, $0E, $0E, $0E
 
-func_005_7305:
+func_005_7305::
     call GetEntityTransitionCountdown             ; $7305: $CD $05 $0C
     jp   z, func_005_7535                         ; $7308: $CA $35 $75
 
@@ -849,7 +849,7 @@ Data_005_735F::
 Data_005_7361::
     db   $04, $0C
 
-func_005_7363:
+func_005_7363::
     call GetEntityTransitionCountdown             ; $7363: $CD $05 $0C
     jp   z, func_005_7535                         ; $7366: $CA $35 $75
 
@@ -940,7 +940,7 @@ jr_005_7395:
     ld   hl, wEntitiesPrivateState1Table          ; $73E6: $21 $B0 $C2
     add  hl, bc                                   ; $73E9: $09
     ld   [hl], $02                                ; $73EA: $36 $02
-    call label_BFB                                ; $73EC: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $73EC: $CD $FB $0B
     ld   [hl], $30                                ; $73EF: $36 $30
     ld   hl, wEntitiesUnknowTableG                ; $73F1: $21 $00 $C3
     add  hl, bc                                   ; $73F4: $09
@@ -978,7 +978,7 @@ jr_005_7414:
 jr_005_7424:
     ret                                           ; $7424: $C9
 
-func_005_7425:
+func_005_7425::
     call func_005_79A7                            ; $7425: $CD $A7 $79
     ld   a, $01                                   ; $7428: $3E $01
     ld   [$D200], a                               ; $742A: $EA $00 $D2
@@ -1051,7 +1051,7 @@ Data_005_7499::
     db   $03, $1F, $1F, $3F, $3F, $3F, $3F, $3F, $3F, $3F, $3F, $3F, $3F, $3F, $3F, $3F
     db   $3F, $3F, $3F, $3F, $3F, $3F, $3F, $3F
 
-func_005_74B1:
+func_005_74B1::
     call func_005_79A7                            ; $74B1: $CD $A7 $79
     ld   a, $01                                   ; $74B4: $3E $01
     ld   [$D200], a                               ; $74B6: $EA $00 $D2
@@ -1137,12 +1137,12 @@ jr_005_750D:
 jr_005_7534:
     ret                                           ; $7534: $C9
 
-func_005_7535:
+func_005_7535::
     xor  a                                        ; $7535: $AF
     ld   [$D200], a                               ; $7536: $EA $00 $D2
     jp   func_005_7B4B                            ; $7539: $C3 $4B $7B
 
-func_005_753C:
+func_005_753C::
     call func_005_79A7                            ; $753C: $CD $A7 $79
     call GetEntityTransitionCountdown             ; $753F: $CD $05 $0C
     jp   z, func_005_7585                         ; $7542: $CA $85 $75
@@ -1187,7 +1187,7 @@ label_005_7570:
     ldh  [hNoiseSfx], a                           ; $7582: $E0 $F4
     ret                                           ; $7584: $C9
 
-func_005_7585:
+func_005_7585::
     ld   a, ENTITY_HEART_CONTAINER                ; $7585: $3E $36
     call SpawnNewEntity_trampoline                ; $7587: $CD $86 $3B
     jr   jr_005_7599                              ; $758A: $18 $0D
@@ -1235,13 +1235,13 @@ jr_005_75C0:
 Data_005_75C9::
     db   $03, $05, $00, $04, $02, $06, $01, $07
 
-func_005_75D1:
+func_005_75D1::
     call func_005_766E                            ; $75D1: $CD $6E $76
     call label_3D8A                               ; $75D4: $CD $8A $3D
     call func_005_7A3A                            ; $75D7: $CD $3A $7A
     ld   a, $01                                   ; $75DA: $3E $01
     ld   [$D200], a                               ; $75DC: $EA $00 $D2
-    call label_BFB                                ; $75DF: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $75DF: $CD $FB $0B
     cp   $10                                      ; $75E2: $FE $10
     jr   nc, jr_005_7621                          ; $75E4: $30 $3B
 
@@ -1336,7 +1336,7 @@ jr_005_765E:
     ld   a, [hl]                                  ; $766A: $7E
     jp   SetEntitySpriteVariant                   ; $766B: $C3 $0C $3B
 
-func_005_766E:
+func_005_766E::
     ldh  a, [hActiveEntitySpriteVariant]          ; $766E: $F0 $F1
     rla                                           ; $7670: $17
     rla                                           ; $7671: $17
@@ -1414,7 +1414,7 @@ Data_005_76EE::
 Data_005_76F2::
     db   $10, $0E, $0C, $06, $00, $FA, $F4, $F2, $F0, $F2, $F4, $FA, $00, $06, $0C, $0E
 
-func_005_7702:
+func_005_7702::
     call func_005_7AB1                            ; $7702: $CD $B1 $7A
     call label_3B44                               ; $7705: $CD $44 $3B
     call label_3B23                               ; $7708: $CD $23 $3B
@@ -1539,7 +1539,7 @@ Data_005_7782::
     db   $08, $F8, $60, $47, $08, $00, $62, $47, $08, $08, $62, $67, $08, $10, $60, $67
     db   $F8, $F8, $78, $47, $F8, $00, $7A, $47, $F8, $08, $7A, $67, $F8, $10, $78, $67
 
-func_005_7982:
+func_005_7982::
     ldh  a, [hActiveEntitySpriteVariant]          ; $7982: $F0 $F1
     ld   d, b                                     ; $7984: $50
     rla                                           ; $7985: $17
@@ -1564,7 +1564,7 @@ func_005_7982:
 Data_005_79A5::
     db   $F2, $0E
 
-func_005_79A7:
+func_005_79A7::
     ldh  a, [hFrameCounter]                       ; $79A7: $F0 $E7
     and  $10                                      ; $79A9: $E6 $10
     ld   a, $03                                   ; $79AB: $3E $03
@@ -1661,12 +1661,12 @@ jr_005_7A1F:
 jr_005_7A39:
     ret                                           ; $7A39: $C9
 
-func_005_7A3A:
+func_005_7A3A::
     ldh  a, [hActiveEntityStatus]                 ; $7A3A: $F0 $EA
     cp   $05                                      ; $7A3C: $FE $05
     jr   nz, jr_005_7A65                          ; $7A3E: $20 $25
 
-func_005_7A40:
+func_005_7A40::
     ld   a, [wGameplayType]                       ; $7A40: $FA $95 $DB
     cp   $07                                      ; $7A43: $FE $07
     jr   z, jr_005_7A65                           ; $7A45: $28 $1E
@@ -1747,10 +1747,10 @@ jr_005_7AA3:
 jr_005_7AB0:
     ret                                           ; $7AB0: $C9
 
-func_005_7AB1:
+func_005_7AB1::
     call func_005_7ABE                            ; $7AB1: $CD $BE $7A
 
-func_005_7AB4:
+func_005_7AB4::
     push bc                                       ; $7AB4: $C5
     ld   a, c                                     ; $7AB5: $79
     add  $10                                      ; $7AB6: $C6 $10
@@ -1759,7 +1759,7 @@ func_005_7AB4:
     pop  bc                                       ; $7ABC: $C1
     ret                                           ; $7ABD: $C9
 
-func_005_7ABE:
+func_005_7ABE::
     ld   hl, wEntitiesSpeedXTable                 ; $7ABE: $21 $40 $C2
     add  hl, bc                                   ; $7AC1: $09
     ld   a, [hl]                                  ; $7AC2: $7E
@@ -1796,7 +1796,7 @@ jr_005_7AE0:
 jr_005_7AE9:
     ret                                           ; $7AE9: $C9
 
-func_005_7AEA:
+func_005_7AEA::
     ld   hl, wEntitiesSpeedZTable                 ; $7AEA: $21 $20 $C3
     add  hl, bc                                   ; $7AED: $09
     ld   a, [hl]                                  ; $7AEE: $7E
@@ -1814,7 +1814,7 @@ func_005_7AEA:
     ld   hl, wEntitiesPosZTable                   ; $7AFF: $21 $10 $C3
     jr   jr_005_7AD6                              ; $7B02: $18 $D2
 
-func_005_7B04:
+func_005_7B04::
     ld   e, $00                                   ; $7B04: $1E $00
     ldh  a, [hLinkPositionX]                      ; $7B06: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $7B08: $21 $00 $C2
@@ -1829,7 +1829,7 @@ jr_005_7B12:
     ld   d, a                                     ; $7B12: $57
     ret                                           ; $7B13: $C9
 
-func_005_7B14:
+func_005_7B14::
     ld   e, $02                                   ; $7B14: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7B16: $F0 $99
     ld   hl, wEntitiesPosYTable                   ; $7B18: $21 $10 $C2
@@ -1844,7 +1844,7 @@ jr_005_7B22:
     ld   d, a                                     ; $7B22: $57
     ret                                           ; $7B23: $C9
 
-func_005_7B24:
+func_005_7B24::
     call func_005_7B04                            ; $7B24: $CD $04 $7B
     ld   a, e                                     ; $7B27: $7B
     ldh  [hScratch0], a                           ; $7B28: $E0 $D7
@@ -1882,7 +1882,7 @@ jr_005_7B49:
     ld   e, a                                     ; $7B49: $5F
     ret                                           ; $7B4A: $C9
 
-func_005_7B4B:
+func_005_7B4B::
     ld   hl, wEntitiesStatusTable                 ; $7B4B: $21 $80 $C2
     add  hl, bc                                   ; $7B4E: $09
     ld   [hl], b                                  ; $7B4F: $70

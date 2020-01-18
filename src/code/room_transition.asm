@@ -747,7 +747,7 @@ Data_002_7C04::
 Data_002_7C0C::
     db   $01, $FF, $00, $00, $01, $01, $FF, $FF   ; $7C0C
 
-label_002_7C14::
+label_002_7C14:
     ldh  a, [hFrameCounter]                       ; $7C14: $F0 $E7
     and  $03                                      ; $7C16: $E6 $03
     ld   hl, wC167                                ; $7C18: $21 $67 $C1
@@ -780,7 +780,7 @@ Data_002_7C40::
 Data_002_7C48::
     db   $00, $00, $00, $00, $00, $F4, $0C, $00
 
-label_002_7C50::
+label_002_7C50:
     ldh  a, [hFrameCounter]                       ; $7C50: $F0 $E7
     and  $00                                      ; $7C52: $E6 $00
     ld   hl, wRoomTransitionState                 ; $7C54: $21 $24 $C1

@@ -230,7 +230,7 @@ MadBomberEntityHandler::
     ld   de, $4126                                ; $415D: $11 $26 $41
     call RenderAnimatedActiveEntity                               ; $4160: $CD $C0 $3B
     call func_006_64C6                            ; $4163: $CD $C6 $64
-    call label_C56                                ; $4166: $CD $56 $0C
+    call func_C56                                ; $4166: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4169: $F0 $F0
     rst  $00                                      ; $416B: $C7
     db   $76                                      ; $416C: $76
@@ -416,7 +416,7 @@ jr_006_425E:
     jr   nz, jr_006_42A2                          ; $426E: $20 $32
 
     call ClearEntitySpeed                         ; $4270: $CD $7F $3D
-    call label_BFB                                ; $4273: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4273: $CD $FB $0B
     jr   nz, jr_006_4294                          ; $4276: $20 $1C
 
     call func_006_6594                            ; $4278: $CD $94 $65
@@ -525,7 +525,7 @@ jr_006_4310:
 label_006_431B:
     call IncrementEntityState                     ; $431B: $CD $12 $3B
     ld   [hl], b                                  ; $431E: $70
-    call label_BFB                                ; $431F: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $431F: $CD $FB $0B
     call GetRandomByte                            ; $4322: $CD $0D $28
     and  $1F                                      ; $4325: $E6 $1F
     add  $08                                      ; $4327: $C6 $08
@@ -1234,7 +1234,7 @@ label_006_4781:
     ld   de, $477D                                ; $478D: $11 $7D $47
     call RenderAnimatedActiveEntity                               ; $4790: $CD $C0 $3B
     call func_006_64C6                            ; $4793: $CD $C6 $64
-    call label_C56                                ; $4796: $CD $56 $0C
+    call func_C56                                ; $4796: $CD $56 $0C
     call label_3B70                               ; $4799: $CD $70 $3B
     call func_006_6541                            ; $479C: $CD $41 $65
     call func_006_657A                            ; $479F: $CD $7A $65
@@ -1533,7 +1533,7 @@ ThreeOfAKindEntityHandler::
     ld   de, $4911                                ; $4937: $11 $11 $49
     call RenderAnimatedActiveEntity                               ; $493A: $CD $C0 $3B
     call func_006_64C6                            ; $493D: $CD $C6 $64
-    call label_C56                                ; $4940: $CD $56 $0C
+    call func_C56                                ; $4940: $CD $56 $0C
     call func_006_6541                            ; $4943: $CD $41 $65
     call label_3B23                               ; $4946: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $4949: $F0 $F0
@@ -1964,7 +1964,7 @@ jr_006_4B98:
 
     call func_006_64C6                            ; $4BA5: $CD $C6 $64
     call label_3EE8                               ; $4BA8: $CD $E8 $3E
-    call label_C56                                ; $4BAB: $CD $56 $0C
+    call func_C56                                ; $4BAB: $CD $56 $0C
     call label_3B44                               ; $4BAE: $CD $44 $3B
     call func_006_6541                            ; $4BB1: $CD $41 $65
     ld   a, [$C146]                               ; $4BB4: $FA $46 $C1
@@ -3304,7 +3304,7 @@ jr_006_5411:
     ld   d, h                                     ; $5421: $54
     dec  d                                        ; $5422: $15
     ld   d, l                                     ; $5423: $55
-    call label_C56                                ; $5424: $CD $56 $0C
+    call func_C56                                ; $5424: $CD $56 $0C
     call func_006_6594                            ; $5427: $CD $94 $65
     add  $20                                      ; $542A: $C6 $20
     cp   $40                                      ; $542C: $FE $40
@@ -3322,7 +3322,7 @@ jr_006_5411:
 jr_006_5441:
     ret                                           ; $5441: $C9
 
-    call label_C56                                ; $5442: $CD $56 $0C
+    call func_C56                                ; $5442: $CD $56 $0C
     call GetEntityTransitionCountdown             ; $5445: $CD $05 $0C
     jr   nz, jr_006_544F                          ; $5448: $20 $05
 
@@ -3335,7 +3335,7 @@ jr_006_544F:
     and  $01                                      ; $5451: $E6 $01
     jp   SetEntitySpriteVariant                   ; $5453: $C3 $0C $3B
 
-    call label_C56                                ; $5456: $CD $56 $0C
+    call func_C56                                ; $5456: $CD $56 $0C
     call GetEntityTransitionCountdown             ; $5459: $CD $05 $0C
     jr   nz, jr_006_5476                          ; $545C: $20 $18
 
@@ -3824,7 +3824,7 @@ jr_006_56D9:
 
 jr_006_5726:
     call func_006_594C                            ; $5726: $CD $4C $59
-    call label_C56                                ; $5729: $CD $56 $0C
+    call func_C56                                ; $5729: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $572C: $F0 $F0
     cp   $02                                      ; $572E: $FE $02
     jr   c, jr_006_5754                           ; $5730: $38 $22
@@ -4420,7 +4420,7 @@ jr_006_5A36:
 jr_006_5A43:
     call RenderAnimatedActiveEntity                               ; $5A43: $CD $C0 $3B
     call func_006_64C6                            ; $5A46: $CD $C6 $64
-    call label_C56                                ; $5A49: $CD $56 $0C
+    call func_C56                                ; $5A49: $CD $56 $0C
     call func_006_657A                            ; $5A4C: $CD $7A $65
     ld   hl, wEntitiesSpeedZTable                 ; $5A4F: $21 $20 $C3
     add  hl, bc                                   ; $5A52: $09
@@ -5882,7 +5882,7 @@ jr_006_62A9:
 GiantGopongaFlowerEntityHandler::
     call func_006_6376                            ; $62B3: $CD $76 $63
     call func_006_64C6                            ; $62B6: $CD $C6 $64
-    call label_C56                                ; $62B9: $CD $56 $0C
+    call func_C56                                ; $62B9: $CD $56 $0C
     call label_3B70                               ; $62BC: $CD $70 $3B
     call func_006_641A                            ; $62BF: $CD $1A $64
     ldh  a, [hActiveEntityState]                  ; $62C2: $F0 $F0
@@ -6109,7 +6109,7 @@ GopongaFlowerEntityHandler::
     ld   de, $63F4                                ; $63FC: $11 $F4 $63
     call RenderAnimatedActiveEntity                               ; $63FF: $CD $C0 $3B
     call func_006_64C6                            ; $6402: $CD $C6 $64
-    call label_C56                                ; $6405: $CD $56 $0C
+    call func_C56                                ; $6405: $CD $56 $0C
     call label_3B70                               ; $6408: $CD $70 $3B
     call func_006_641A                            ; $640B: $CD $1A $64
     ldh  a, [hFrameCounter]                       ; $640E: $F0 $E7
@@ -8122,7 +8122,7 @@ jr_006_6F47:
     ret                                           ; $6F47: $C9
 
 jr_006_6F48:
-    call label_C56                                ; $6F48: $CD $56 $0C
+    call func_C56                                ; $6F48: $CD $56 $0C
     ldh  a, [hLinkPositionZ]                      ; $6F4B: $F0 $A2
     and  a                                        ; $6F4D: $A7
     jr   nz, jr_006_6F53                          ; $6F4E: $20 $03
@@ -8512,11 +8512,11 @@ jr_006_714A:
     ret  nc                                       ; $7177: $D0
 
     call IncrementEntityState                     ; $7178: $CD $12 $3B
-    call label_BFB                                ; $717B: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $717B: $CD $FB $0B
     ld   [hl], $48                                ; $717E: $36 $48
     jp_open_dialog $024                           ; $7180
 
-    call label_BFB                                ; $7185: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7185: $CD $FB $0B
     jr   nz, jr_006_7197                          ; $7188: $20 $0D
 
     call GetEntityTransitionCountdown             ; $718A: $CD $05 $0C
@@ -9118,7 +9118,7 @@ SpikeTrapEntityHandler::
     ld   de, $74FA                                ; $7514: $11 $FA $74
     call RenderAnimatedActiveEntity                               ; $7517: $CD $C0 $3B
     call func_006_64C6                            ; $751A: $CD $C6 $64
-    call label_C56                                ; $751D: $CD $56 $0C
+    call func_C56                                ; $751D: $CD $56 $0C
     call label_3B39                               ; $7520: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $7523: $F0 $F0
     rst  $00                                      ; $7525: $C7
@@ -10780,7 +10780,7 @@ LikeLikeEntityHandler::
     ld   a, l                                     ; $7DEF: $7D
     inc  c                                        ; $7DF0: $0C
     ld   a, [hl]                                  ; $7DF1: $7E
-    call label_BFB                                ; $7DF2: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7DF2: $CD $FB $0B
     jr   nz, jr_006_7E06                          ; $7DF5: $20 $0F
 
     call label_3B44                               ; $7DF7: $CD $44 $3B
@@ -10810,7 +10810,7 @@ label_006_7E09:
     cp   $08                                      ; $7E18: $FE $08
     jr   c, jr_006_7E27                           ; $7E1A: $38 $0B
 
-    call label_BFB                                ; $7E1C: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7E1C: $CD $FB $0B
     ld   [hl], $15                                ; $7E1F: $36 $15
     ld   hl, wEntitiesUnknownTableD               ; $7E21: $21 $D0 $C2
     add  hl, bc                                   ; $7E24: $09
@@ -10898,7 +10898,7 @@ GibdoEntityHandler::
 jr_006_7E91:
     call RenderAnimatedActiveEntity                               ; $7E91: $CD $C0 $3B
     call func_006_64C6                            ; $7E94: $CD $C6 $64
-    call label_C56                                ; $7E97: $CD $56 $0C
+    call func_C56                                ; $7E97: $CD $56 $0C
     call label_3B39                               ; $7E9A: $CD $39 $3B
 
 label_006_7E9D:

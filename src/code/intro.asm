@@ -957,7 +957,7 @@ label_7418::
 
 label_7439::
     ret
-    call label_1A22
+    call func_1A22
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_7447

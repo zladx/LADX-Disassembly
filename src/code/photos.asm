@@ -164,7 +164,7 @@ JumpTable_037_40EC::
 .else_4106_37:
     ldh  [hWindowXUnused], a                    ; $4106: $E0 $AA
 .else_4108_37:
-    call label_1A22                             ; $4108: $CD $22 $1A
+    call func_1A22                             ; $4108: $CD $22 $1A
     ld   a, [$C16B]                             ; $410B: $FA $6B $C1
     cp   $04                                    ; $410E: $FE $04
     ret  nz                                     ; $4110: $C0
@@ -463,7 +463,7 @@ JumpTable_037_42FE::
     ld   [$C200], a                             ; $431C: $EA $00 $C2
     call func_037_4351                          ; $431F: $CD $51 $43
     call func_037_4331                          ; $4322: $CD $31 $43
-    call label_1A39                             ; $4325: $CD $39 $1A
+    call func_1A39                             ; $4325: $CD $39 $1A
     ld   a, [$C16B]                             ; $4328: $FA $6B $C1
     cp   $04                                    ; $432B: $FE $04
     ret  nz                                     ; $432D: $C0
@@ -992,7 +992,7 @@ JumpTable_037_4659::
     dec  a                                      ; $4695: $3D
     ld   [$D466], a                             ; $4696: $EA $66 $D4
     ld   a, $37                                 ; $4699: $3E $37
-    call label_A9B                              ; $469B: $CD $9B $0A
+    call func_A9B                              ; $469B: $CD $9B $0A
     ld   a, $37                                 ; $469E: $3E $37
     call SwitchBank                             ; $46A0: $CD $0C $08
     ret                                         ; $46A3: $C9
@@ -1179,7 +1179,7 @@ JumpTable_037_4781::
     ld   a, [$C200]                             ; $47B2: $FA $00 $C2
     call label_3DA0                             ; $47B5: $CD $A0 $3D
     ld   a, $37                                 ; $47B8: $3E $37
-    call label_A9B                              ; $47BA: $CD $9B $0A
+    call func_A9B                              ; $47BA: $CD $9B $0A
     ld   a, $37                                 ; $47BD: $3E $37
     call SwitchBank                             ; $47BF: $CD $0C $08
     ret                                         ; $47C2: $C9
@@ -1372,7 +1372,7 @@ JumpTable_037_48CB::
     cp   $28                                    ; $48CE: $FE $28
     jr   nc, .else_48E7_37                      ; $48D0: $30 $15
 
-    call label_1A22                             ; $48D2: $CD $22 $1A
+    call func_1A22                             ; $48D2: $CD $22 $1A
     ld   a, [$C16B]                             ; $48D5: $FA $6B $C1
     cp   $04                                    ; $48D8: $FE $04
     jr   nz, .else_48E7_37                      ; $48DA: $20 $0B
@@ -1689,7 +1689,7 @@ JumpTable_037_4B05::
     call func_037_4B55                          ; $4B0D: $CD $55 $4B
     call func_037_4552                          ; $4B10: $CD $52 $45
     ld   a, $37                                 ; $4B13: $3E $37
-    call label_A9B                              ; $4B15: $CD $9B $0A
+    call func_A9B                              ; $4B15: $CD $9B $0A
     ld   a, $37                                 ; $4B18: $3E $37
     call SwitchBank                             ; $4B1A: $CD $0C $08
     ret                                         ; $4B1D: $C9
@@ -2440,7 +2440,7 @@ JumpTable_037_4FB7::
     call func_037_500B                          ; $4FBF: $CD $0B $50
     call func_037_4552                          ; $4FC2: $CD $52 $45
     ld   a, $37                                 ; $4FC5: $3E $37
-    call label_A9B                              ; $4FC7: $CD $9B $0A
+    call func_A9B                              ; $4FC7: $CD $9B $0A
     ld   a, $37                                 ; $4FCA: $3E $37
     call SwitchBank                             ; $4FCC: $CD $0C $08
     ret                                         ; $4FCF: $C9
@@ -2746,7 +2746,7 @@ JumpTable_037_51AB::
     cp   $28                                    ; $51B3: $FE $28
     jr   nc, .else_51CE_37                      ; $51B5: $30 $17
 
-    call label_1A22                             ; $51B7: $CD $22 $1A
+    call func_1A22                             ; $51B7: $CD $22 $1A
     ld   a, [$C16B]                             ; $51BA: $FA $6B $C1
     cp   $04                                    ; $51BD: $FE $04
     jr   nz, .else_51D5_37                      ; $51BF: $20 $14
@@ -2794,7 +2794,7 @@ JumpTable_037_51F4::
     call func_037_5216                          ; $5205: $CD $16 $52
     call func_037_4552                          ; $5208: $CD $52 $45
     ld   a, $37                                 ; $520B: $3E $37
-    call label_A9B                              ; $520D: $CD $9B $0A
+    call func_A9B                              ; $520D: $CD $9B $0A
     ld   a, $37                                 ; $5210: $3E $37
     call SwitchBank                             ; $5212: $CD $0C $08
     ret                                         ; $5215: $C9
@@ -3043,7 +3043,7 @@ JumpTable_037_5393::
 
     call func_037_4331                          ; $539A: $CD $31 $43
 .else_539D_37:
-    call label_1A22                             ; $539D: $CD $22 $1A
+    call func_1A22                             ; $539D: $CD $22 $1A
     ld   a, [$C16B]                             ; $53A0: $FA $6B $C1
     cp   $04                                    ; $53A3: $FE $04
     ret  nz                                     ; $53A5: $C0

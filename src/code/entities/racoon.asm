@@ -143,7 +143,7 @@ func_005_4A17::
     xor  $01                                      ; $4A23: $EE $01
     ldh  [hLinkDirection], a                      ; $4A25: $E0 $9E
     push bc                                       ; $4A27: $C5
-    call label_BF0                                ; $4A28: $CD $F0 $0B
+    call func_BF0                                ; $4A28: $CD $F0 $0B
     pop  bc                                       ; $4A2B: $C1
     ld   hl, wEntitiesUnknownTableD               ; $4A2C: $21 $D0 $C2
     add  hl, bc                                   ; $4A2F: $09
@@ -176,7 +176,7 @@ jr_005_4A46:
     add  hl, de                                   ; $4A4F: $19
     ld   a, [hl]                                  ; $4A50: $7E
     call SetEntitySpriteVariant                   ; $4A51: $CD $0C $3B
-    call label_BFB                                ; $4A54: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4A54: $CD $FB $0B
     jr   nz, jr_005_4A9E                          ; $4A57: $20 $45
 
     ld   a, ENTITY_BOMB                           ; $4A59: $3E $02
@@ -234,7 +234,7 @@ jr_005_4A9E:
 jr_005_4AAE:
     call func_005_7AB1                            ; $4AAE: $CD $B1 $7A
     call label_3B23                               ; $4AB1: $CD $23 $3B
-    call label_BFB                                ; $4AB4: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4AB4: $CD $FB $0B
     cp   $06                                      ; $4AB7: $FE $06
     jr   nc, jr_005_4AEC                          ; $4AB9: $30 $31
 
@@ -317,7 +317,7 @@ jr_005_4B01:
     ldh  [hJingle], a                             ; $4B14: $E0 $F2
 
 jr_005_4B16:
-    call label_BFB                                ; $4B16: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4B16: $CD $FB $0B
     cp   $60                                      ; $4B19: $FE $60
     jr   nc, jr_005_4B40                          ; $4B1B: $30 $23
 

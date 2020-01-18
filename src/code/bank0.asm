@@ -181,7 +181,7 @@ LoadBank1AndReturn::
     ld   [MBC3SelectBank], a
     ret
 
-label_91D::
+func_91D::
     push af
     ld   b, $00
     ld   a, [$DDD8]
@@ -256,7 +256,7 @@ func_020_6D0E_trampoline::
 ;   de  ???
 ; Returns:
 ;   a   palette data
-label_983::
+func_983::
     ; Retrieve and store palette data into hScratch9 and hScratchA
     callsb func_01A_6710
 
@@ -278,14 +278,14 @@ label_983::
 ;   a   ???
 ;   b   ???
 ;   de  ???
-label_999::
+func_999::
     push af
     push bc
-    call label_983
+    call func_983
 
     ldh  [hScratch0], a
     pop  bc
-    call label_983
+    call func_983
     ldh  [hScratch1], a
     ld   a, [$DC90]
     ld   c, a
@@ -421,7 +421,7 @@ func_036_4F9B_trampoline::
     callsb func_036_4F9B
     jp   RestoreStackedBankAndReturn
 
-label_A5F::
+func_A5F::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
@@ -448,7 +448,7 @@ func_036_4BE8_trampoline::
     callsb func_036_4BE8
     jp   RestoreStackedBankAndReturn
 
-label_A9B::
+func_A9B::
     push af
     ld   a, BANK(FontTiles)
     call SwitchBank
@@ -464,7 +464,7 @@ RestoreStackedBank::
     call SwitchBank
     ret
 
-label_AB5::
+func_AB5::
     push af
     callsb func_024_5C1A
     ld   de, wRequest
@@ -540,7 +540,7 @@ CopyObjectsAttributesToWRAM2::
     ret
 
 ; On GBC, copy some overworld objects to ram bank 2
-label_B2F::
+func_2BF::
     ldh  [hScratch2], a
     ldh  a, [hIsGBC]
     and  a
@@ -612,7 +612,7 @@ CopyBGMapFromBank::
     ld   a, [wGameplayType]
     cp   GAMEPLAY_PHOTO_ALBUM
     jr   nz, .photoAlbumEnd
-    call label_BB5
+    call func_BB5
 .photoAlbumEnd
 
     ldh  a, [hScratchF]
@@ -643,7 +643,7 @@ CopyToBGMap0::
     jr   nz, .loop
     ret
 
-label_BB5::
+func_BB5::
     ld   bc, $168
     ld   de, $D000
     jp   CopyData
@@ -653,7 +653,7 @@ LoadBaseTiles_trampoline::
     call LoadBaseTiles
     jp   RestoreStackedBankAndReturn
 
-label_BC5::
+func_BC5::
     ld   a, [$D16A]
     ld   [MBC3SelectBank], a
 .loop
@@ -687,13 +687,13 @@ Farcall_trampoline::
     ld   l, a
     jp   hl
 
-label_BF0::
+func_BF0::
     ld   a, BANK(Data_002_4948)
     ld   [MBC3SelectBank], a
-    call label_1A50
+    call func_1A50
     jp   ReloadSavedBank
 
-label_BFB::
+IsEntityDropTimerZero::
     ld   hl, wEntitiesDropTimerTable
     jr   IsZero
 
@@ -775,12 +775,12 @@ PlayBombExplosionSfx::
     ld   hl, hNoiseSfx
     ld   [hl], NOISE_SFX_BOMB_EXPLOSION
 
-label_C50::
+func_C50::
     ld   hl, $C502
     ld   [hl], $04
     ret
 
-label_C56::
+func_C56::
     ld   hl, wEntitiesUnknowTableT
     add  hl, bc
     ld   a, [hl]
@@ -1033,45 +1033,45 @@ LoadRoomSprites::
     ld   d, a
     ldh  a, [hMapId]
     cp   $1A
-    jr   nc, label_DAB
+    jr   nc, .label_DAB
     cp   MAP_EAGLES_TOWER
-    jr   c, label_DAB
+    jr   c, .label_DAB
     inc  d
 
-label_DAB::
+.label_DAB
     add  hl, de
     ld   e, [hl]
     ld   a, d
     and  a
-    jr   z, label_DC1
+    jr   z, .label_DC1
     ldh  a, [hMapId]
     cp   MAP_HOUSE
-    jr   nz, label_DDB
+    jr   nz, .label_DDB
     ldh  a, [hMapRoom]
     cp   $B5
-    jr   nz, label_DDB
+    jr   nz, .label_DDB
     ld   e, $3D
-    jr   label_DDB
+    jr   .label_DDB
 
-label_DC1::
+.label_DC1
     ld   a, e
     cp   $23
-    jr   nz, label_DCE
+    jr   nz, .label_DCE
     ld   a, [$D8C9]
     and  $20
-    jr   z, label_DCE
+    jr   z, .label_DCE
     inc  e
 
-label_DCE::
+.label_DCE
     ld   a, e
     cp   $21
-    jr   nz, label_DDB
+    jr   nz, .label_DDB
     ld   a, [$D8FD]
     and  $20
-    jr   z, label_DDB
+    jr   z, .label_DDB
     inc  e
 
-label_DDB::
+.label_DDB
     ld   d, $00
     sla  e
     rl   d
@@ -1079,42 +1079,42 @@ label_DDB::
     rl   d
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_DF1
+    jr   nz, .label_DF1
     ld   a, $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a
-    jr   label_E31
+    jr   .return
 
-label_DF1::
+.label_DF1
     ld   hl, $73F3
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_DFD
+    jr   z, .label_DFD
     ld   hl, $763B
 
-label_DFD::
+.label_DFD
     add  hl, de
     ld   d, $00
     ld   bc, $C193
 
-label_E03::
+.loop
     ld   e, [hl]
     ld   a, [bc]
     cp   e
-    jr   z, label_E29
+    jr   z, .label_E29
     ld   a, e
     cp   $FF
-    jr   z, label_E29
+    jr   z, .label_E29
     ld   [bc], a
     ldh  a, [hScratch0]
     and  a
-    jr   z, label_E1E
+    jr   z, .label_E1E
     ld   a, d
     ld   [$C10D], a
     ld   a, $01
     ld   [wNeedsUpdatingNPCTiles], a
-    jr   label_E29
+    jr   .label_E29
 
-label_E1E::
+.label_E1E
     inc  a
     ldh  [hScratch0], a
     ld   a, d
@@ -1122,15 +1122,15 @@ label_E1E::
     ld   a, $01
     ldh  [hNeedsUpdatingEnnemiesTiles], a
 
-label_E29::
+.label_E29
     inc  hl
     inc  bc
     inc  d
     ld   a, d
     cp   $04
-    jr   nz, label_E03
+    jr   nz, .loop
 
-label_E31::
+.return
     jp   ReloadSavedBank
 
 ExecuteGameplayHandler::
@@ -1410,13 +1410,11 @@ label_1000::
     ld   e, $00
     ldh  a, [hFrameCounter]
     and  $04
-
-label_1006::
-    jr   z, label_100A
+    jr   z, .label_100A
     dec  c
     dec  e
 
-label_100A::
+.label_100A
     callsb func_020_5C9C
 
 label_1012::
@@ -1498,33 +1496,33 @@ ApplyGotItem::
 InitGotItemSequence::
     ldh  a, [hPressedButtonsMask]
     and  $B0
-    jr   nz, label_10DB
+    jr   nz, .jp_10DB
     ldh  a, [hPressedButtonsMask]
     and  $40
-    jr   z, label_10DB
+    jr   z, .jp_10DB
     ld   a, [$D45F]
     inc  a
     ld   [$D45F], a
     cp   $04
-    jr   c, label_10DF
+    jr   c, .jp_10DF
     ldh  a, [hLinkInteractiveMotionBlocked]
     cp   $02
-    jr   z, label_10DB
+    jr   z, .jp_10DB
     ldh  a, [hLinkAnimationState]
     cp   $FF
-    jr   z, label_10DB
+    jr   z, .jp_10DB
     ld   a, [wLinkMotionState]
     cp   $02
-    jr   nc, label_10DB
+    jr   nc, .jp_10DB
     ld   a, [wDialogState]
     ld   hl, $C167
     or   [hl]
     ld   hl, wRoomTransitionState
     or   [hl]
-    jr   nz, label_10DB
+    jr   nz, .jp_10DB
     ld   a, [$D464]
     and  a
-    jr   nz, label_10DB
+    jr   nz, .jp_10DB
 
     ; Show a location on the mini-map
     xor  a
@@ -1539,11 +1537,11 @@ InitGotItemSequence::
     pop  af
     ret
 
-label_10DB::
+.jp_10DB
     xor  a
     ld   [$D45F], a
 
-label_10DF::
+.jp_10DF
     ldh  a, [$FFB7]
     and  a
     jr   z, .jp_10E7
@@ -2457,8 +2455,6 @@ CheckItemsSwordCollision::
     ldh  a, [hLinkPositionY]
     add  a, [hl]
     ldh  [hScratch1], a
-
-label_16DF::
     ld   a, $04
     ld   [$C502], a
     call label_D15
@@ -2467,15 +2463,13 @@ label_16DF::
     ld   a, c
     and  $F0
     cp   $90
-    jr   z, label_16F8
+    jr   z, .label_16F8
     ld   a, JINGLE_SWORD_POKING
     ldh  [hJingle], a
     ret
 
-label_16F8::
+.label_16F8
     ld   a, $17
-
-label_16FA::
     ldh  [hNoiseSfx], a
     ret
 
@@ -2488,7 +2482,7 @@ data_1701::
 UsePegasusBoots::
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   z, label_1713
+    jr   z, .label_1713
     ldh  a, [$FF9C]
     and  a
     ret  nz
@@ -2496,7 +2490,7 @@ UsePegasusBoots::
     and  $02
     ret  nz
 
-label_1713::
+.label_1713
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
     ret  nz
@@ -2507,7 +2501,7 @@ label_1713::
     ld   a, [$C120]
     add  a, $02
     ld   [$C120], a
-    call label_1756
+    call func_1756
     ld   a, [wPegasusBootsChargeMeter]
     inc  a
     ld   [wPegasusBootsChargeMeter], a
@@ -2532,7 +2526,7 @@ label_1713::
     ld   [$C1AC], a
     ret
 
-label_1756::
+func_1756::
     ldh  a, [hFrameCounter]
     and  $07
     ld   hl, hLinkPositionZ
@@ -2546,7 +2540,7 @@ label_1756::
     ldh  [hScratch0], a
     ld   a, [$C181]
     cp   $05
-    jr   z, label_1781
+    jr   z, .label_1781
     ld   a, NOISE_SFX_FOOTSTEP
     ldh  [hNoiseSfx], a
     ldh  a, [hLinkPositionY]
@@ -2555,7 +2549,7 @@ label_1756::
     ld   a, $0B
     jp   label_CC7
 
-label_1781::
+.label_1781
     ldh  a, [hLinkPositionY]
     ldh  [hScratch1], a
     ld   a, JINGLE_WATER_DIVE
@@ -2578,7 +2572,7 @@ ApplyLinkMotionState::
     ret  z
     ld   a, [$C16A]
     and  a
-    jr   z, label_17DB
+    jr   z, .label_17DB
     ld   bc, $C010
     ld   a, [$C145]
     ld   hl, $C13B
@@ -2590,14 +2584,14 @@ ApplyLinkMotionState::
     ld   [hl], $00
     ld   a, [wSwordCharge]
     cp   $28
-    jr   c, label_17C6
+    jr   c, .label_17C6
     ldh  a, [hFrameCounter]
     rla
     rla
     and  $10
     ld   [hl], a
 
-label_17C6::
+.label_17C6
     ld   a, [$C139]
     ld   h, a
     ld   a, [$C13A]
@@ -2607,42 +2601,42 @@ label_17C6::
     ldh  a, [hLinkPositionY]
     cp   $88
     ret  nc
-    jp   label_1819
+    jp   func_1819
 
-label_17DB::
+.label_17DB
     ld   a, [$C19B]
     push af
     bit  7, a
-    jp   z, label_1814
+    jp   z, .magicRodEnd
     callsw label_002_5310
     ld   a, [$C19B]
     and  $7F
     cp   $0C
-    jr   nz, label_1814
+    jr   nz, .magicRodEnd
     ld   hl, wDialogState
     ld   a, [wRoomTransitionState]
     or   [hl]
-    jr   nz, label_1814
+    jr   nz, .magicRodEnd
     call label_157C
     ld   a, ENTITY_HOOKSHOT_HIT
     call SpawnPlayerProjectile
-    jr   c, label_1814
+    jr   c, .magicRodEnd
     ld   a, NOISE_SFX_MAGIC_ROD
     ldh  [hNoiseSfx], a
     callsw label_002_538B
+.magicRodEnd
 
-label_1814::
     pop  af
     ld   [$C19B], a
     ret
 
-label_1819::
+func_1819::
     callsb func_020_4AB3
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
-label_1828::
+func_1828::
     callsb func_020_49BA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
@@ -2652,36 +2646,37 @@ LinkMotionMapFadeOutHandler::
     call func_002_754F
     ld   a, [$C3C9]
     and  a
-    jr   z, label_1847
+    jr   z, .label_1847
     xor  a
     ld   [$C3C9], a
     jp   ApplyMapFadeOutTransition
 
-label_1847::
-    call label_1A22
+.label_1847
+    call func_1A22
     xor  a
     ld   [$C157], a
     inc  a
     ld   [$C1A8], a
     ld   a, [wTransitionSequenceCounter]
     cp   $04
-    jp   nz, label_19D9
+    jp   nz, SetSpawnLocation.return
     xor  a
     ldh  [hBaseScrollX], a
     ldh  [hBaseScrollY], a
     ldh  [$FFB4], a
     ld   [$DDD6], a
     ld   [$DDD7], a
+
     ld   e, $10
     ld   hl, wEntitiesStatusTable
-
-label_186C::
+.clearEntitiesStatusLoop
     ldi  [hl], a
     dec  e
-    jr   nz, label_186C
+    jr   nz, .clearEntitiesStatusLoop
+
     ld   a, [$C509]
     and  a
-    jr   z, label_1898
+    jr   z, .label_1898
     push af
     ld   a, BANK(label_004_7A5F)
     call SwitchBank
@@ -2699,7 +2694,7 @@ label_186C::
     xor  a
     ldh  [hLinkAnimationState], a
 
-label_1898::
+.label_1898
     ldh  a, [hIsSideScrolling]
     ldh  [hScratchD], a
     ld   a, GAMEPLAY_WORLD
@@ -2712,11 +2707,11 @@ label_1898::
     ld   a, [wIsIndoor]
     ldh  [hFreeWarpDataAddress], a
     and  a
-    jr   nz, label_18DF
+    jr   nz, .label_18DF
     ld   hl, wWarpPositions
     ld   c, $00
 
-label_18BA::
+.loop
     ldh  a, [hLinkPositionX]
     swap a
     and  $0F
@@ -2726,14 +2721,14 @@ label_18BA::
     and  $F0
     or   e
     cp   [hl]
-    jr   z, label_18D2
+    jr   z, .break
     inc  hl
     inc  c
     ld   a, c
     cp   $04
-    jr   nz, label_18BA
+    jr   nz, .loop
 
-label_18D2::
+.break
     ld   a, c
     sla  a
     sla  a
@@ -2743,36 +2738,36 @@ label_18D2::
     ld   hl, wWarp0MapCategory
     add  hl, de
 
-label_18DF::
+.label_18DF
     push hl
     ld   a, [hli]
     ld   [wIsIndoor], a
     cp   $02
-    jr   nz, label_18F2
+    jr   nz, .label_18F2
     ldh  [hIsSideScrolling], a
     dec  a
     ld   [wIsIndoor], a
     ld   a, $01
     ldh  [$FF9C], a
 
-label_18F2::
+.label_18F2
     ld   a, [hli]
     ldh  [hMapId], a
     ld   a, [wIsIndoor]
     and  a
     ld   a, [hli]
     ldh  [hMapRoom], a
-    jr   nz, label_1909
+    jr   nz, .label_1909
     ldh  a, [hFreeWarpDataAddress]
     and  a
-    jr   z, label_1907
+    jr   z, .label_1907
     xor  a
     ld   [wActivePowerUp], a
 
-label_1907::
-    jr   label_196F
+.label_1907
+    jr   .label_196F
 
-label_1909::
+.label_1909
     ld   c, a
     ld   a, $14
     call SwitchBank
@@ -2789,41 +2784,41 @@ label_1909::
     add  hl, de
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_192E
+    jr   nz, .colorDungeonEnd
     ld   hl, $44E0
-    jr   label_193C
+    jr   .label_193C
+.colorDungeonEnd
 
-label_192E::
     cp   $06
-    jr   nz, label_193C
+    jr   nz, .label_193C
     ld   a, [$DB6B]
     and  $04
-    jr   z, label_193C
+    jr   z, .label_193C
     ld   hl, $4520
 
-label_193C::
+.label_193C
     ld   e, $00
 
-label_193E::
+.loop_193E
     ld   a, [hli]
     cp   c
-    jr   z, label_1948
+    jr   z, .break_1948
     inc  e
     ld   a, e
     cp   $40
-    jr   nz, label_193E
+    jr   nz, .loop_193E
+.break_1948
 
-label_1948::
     ld   a, e
     ld   [wIndoorRoom], a
     ldh  a, [hFreeWarpDataAddress]
     and  a
-    jr   nz, label_196E
+    jr   nz, .label_196E
     xor  a
     ld   [wActivePowerUp], a
     ldh  a, [hMapId]
     cp   MAP_CAVE_B
-    jr   nc, label_196E
+    jr   nc, .label_196E
     callsw IsMapRoomE8
     ld   a, $30
     ldh  [$FFB4], a
@@ -2831,10 +2826,10 @@ label_1948::
     ld   [$D6FB], a
     ld   [$D6F8], a
 
-label_196E::
+.label_196E
     pop  hl
 
-label_196F::
+.label_196F
     ld   a, [hli]
     ld   [wMapEntrancePositionX], a
     ld   a, [hl]
@@ -2845,17 +2840,17 @@ label_196F::
     jr   nz, label_19DA
     ldh  a, [hScratchD]
     and  a
-    jr   nz, label_19D9
+    jr   nz, SetSpawnLocation.return
     ld   a, [wIsIndoor]
     and  a
     jr   z, SetSpawnLocation
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_1993
+    jr   nz, .label_1993
     ld   hl, $4E3C
-    jr   label_19A4
+    jr   .label_19A4
 
-label_1993::
+.label_1993
     cp   $0A
     jr   nc, SetSpawnLocation
     ld   e, a
@@ -2867,31 +2862,31 @@ label_1993::
     ld   hl, $4DF1
     add  hl, de
 
-label_19A4::
+.label_19A4
     ld   a, $14
     ld   [MBC3SelectBank], a
     call SetSpawnLocation
     push de
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_19B7
+    jr   nz, .label_19B7
     ld   a, $3A
-    jr   label_19BF
+    jr   .label_19BF
 
-label_19B7::
+.label_19B7
     ld   e, a
     ld   d, $00
     ld   hl, $4E41
     add  hl, de
     ld   a, [hl]
 
-label_19BF::
+.label_19BF
     pop  de
     ld   [de], a
     ret
 
-; Record Link's spawn point, that will be used
-; when loading the save file or starting after a game over.
+; Record Link's spawn point, that will be used when loading the save file
+; or starting after a game over.
 SetSpawnLocation::
     ; Initialize counter
     ld   a, $00
@@ -2913,7 +2908,7 @@ SetSpawnLocation::
     ld   a, [wIndoorRoom]
     ld   [de], a
 
-label_19D9::
+.return
     ret
 
 label_19DA::
@@ -2925,7 +2920,7 @@ LinkMotionMapFadeInHandler::
     call func_002_754F
     ld   a, [$D474]
     and  a
-    jr   z, label_19FC
+    jr   z, .label_19FC
     xor  a
     ld   [$D474], a
     ld   a, $30
@@ -2934,48 +2929,48 @@ LinkMotionMapFadeInHandler::
     ld   [wTransitionGfx], a
     ld   a, $04
     ld   [wTransitionSequenceCounter], a
-    jr   label_1A06
+    jr   .label_1A06
 
-label_19FC::
-    call label_1A39
+.label_19FC
+    call func_1A39
     ld   a, [wTransitionSequenceCounter]
     cp   $04
-    jr   nz, label_1A21
+    jr   nz, .return
 
-label_1A06::
+.label_1A06
     ld   a, [$D463]
     cp   $01
-    jr   z, label_1A0F
+    jr   z, .label_1A0F
     ld   a, $00
 
-label_1A0F::
+.label_1A0F
     ld   [wLinkMotionState], a
     ld   a, [wDidStealItem]
     and  a
-    jr   z, label_1A21
+    jr   z, .return
     xor  a
     ld   [wDidStealItem], a
     ld   a, $36
     jp   OpenDialog
 
-label_1A21::
+.return
     ret
 
-label_1A22::
+func_1A22::
     callsb func_020_6C4F
     callsb func_020_55CA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
-label_1A39::
+func_1A39::
     callsb func_020_6C7A
     callsb func_020_563B
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
-label_1A50::
+func_1A50::
     ld   a, [$C120]
     sra  a
     sra  a
@@ -2990,53 +2985,53 @@ label_1A50::
     ld   hl, Data_002_4948
     ld   a, [wLinkMotionState]
     cp   $01
-    jr   nz, label_1A78
+    jr   nz, .label_1A78
     ldh  a, [$FF9C]
     and  a
-    jr   z, label_1A76
+    jr   z, .label_1A76
     ld   hl, Data_002_4950
 
-label_1A76::
-    jr   label_1AC7
+.label_1A76
+    jr   .label_1AC7
 
-label_1A78::
+.label_1A78
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   z, label_1A88
+    jr   z, .label_1A88
     ldh  a, [$FF9C]
     cp   $02
-    jr   nz, label_1A88
+    jr   nz, .label_1A88
     ld   hl, Data_002_4958
-    jr   label_1AC7
+    jr   .label_1AC7
 
-label_1A88::
+.label_1A88
     ld   a, [$C15C]
     cp   $01
-    jr   z, label_1AC4
+    jr   z, .label_1AC4
     ldh  a, [$FFB2]
     and  a
-    jr   nz, label_1A9A
+    jr   nz, .label_1A9A
     ld   a, [$C144]
     and  a
-    jr   nz, label_1ABF
+    jr   nz, .label_1ABF
 
-label_1A9A::
+.label_1A9A
     ld   a, [wHasMirrorShield]
     and  a
-    jr   nz, label_1AA5
+    jr   nz, .label_1AA5
     ld   hl, $4910
-    jr   label_1AC7
+    jr   .label_1AC7
 
-label_1AA5::
+.label_1AA5
     ld   hl, $4918
     cp   $02
-    jr   nz, label_1AAF
+    jr   nz, .label_1AAF
     ld   hl, $4928
 
-label_1AAF::
+.label_1AAF
     ld   a, [wIsUsingShield]
     and  a
-    jr   z, label_1ABD
+    jr   z, .label_1ABD
     ld   a, l
     add  a, $08
     ld   l, a
@@ -3044,17 +3039,18 @@ label_1AAF::
     adc  a, $00
     ld   h, a
 
-label_1ABD::
-    jr   label_1AC7
+.label_1ABD
+    jr   .label_1AC7
 
-label_1ABF::
+.label_1ABF
     ld   hl, $4938
-    jr   label_1AC7
+    jr   .label_1AC7
 
-label_1AC4::
+.label_1AC4
     ld   hl, $4940
 
-label_1AC7::
+.label_1AC7
+
     add  hl, bc
     ld   a, [hl]
     ldh  [hLinkAnimationState], a
@@ -6266,7 +6262,7 @@ label_3527::
     ld   a, $1A
 
 label_3529::
-    call label_B2F
+    call func_2BF
     ret
 
 ; Copy an object from the room data to the active room
@@ -6431,7 +6427,7 @@ label_35CB::
 
 label_35E8::
     ld   a, $24
-    call label_B2F
+    call func_2BF
     ret
 
 label_35EE::

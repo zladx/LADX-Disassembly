@@ -6632,7 +6632,7 @@ func_017_79A4::
     call func_017_7A01                            ; $79B0: $CD $01 $7A
     ld   de, Data_017_7987                        ; $79B3: $11 $87 $79
     call func_017_7A29                            ; $79B6: $CD $29 $7A
-    call label_BFB                                ; $79B9: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $79B9: $CD $FB $0B
     ret  z                                        ; $79BC: $C8
 
     call func_017_7E2D                            ; $79BD: $CD $2D $7E

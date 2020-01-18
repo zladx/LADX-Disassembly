@@ -1,7 +1,7 @@
 SlimeEelEntityHandler::
     call label_394D                               ; $6CDC: $CD $4D $39
     call label_3EE8                               ; $6CDF: $CD $E8 $3E
-    call label_C56                                ; $6CE2: $CD $56 $0C
+    call func_C56                                ; $6CE2: $CD $56 $0C
     ld   hl, wEntitiesPrivateState1Table          ; $6CE5: $21 $B0 $C2
     add  hl, bc                                   ; $6CE8: $09
     ld   a, [hl]                                  ; $6CE9: $7E
@@ -76,7 +76,7 @@ func_005_6D42::
 
 jr_005_6D7E:
     ld   [hl], $1F                                ; $6D7E: $36 $1F
-    call label_BFB                                ; $6D80: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $6D80: $CD $FB $0B
     ld   [hl], $B0                                ; $6D83: $36 $B0
     call label_3E34                               ; $6D85: $CD $34 $3E
     ld   hl, wEntitiesStatusTable                 ; $6D88: $21 $80 $C2
@@ -114,13 +114,13 @@ jr_005_6D7E:
     ld   a, $AF                                   ; $6DC0: $3E $AF
     ld   [$DDD8], a                               ; $6DC2: $EA $D8 $DD
     ld   a, $05                                   ; $6DC5: $3E $05
-    call label_91D                                ; $6DC7: $CD $1D $09
+    call func_91D                                ; $6DC7: $CD $1D $09
     ldh  a, [$FFD0]                               ; $6DCA: $F0 $D0
     inc  a                                        ; $6DCC: $3C
     inc  a                                        ; $6DCD: $3C
     ldh  [$FFD0], a                               ; $6DCE: $E0 $D0
     ld   a, $05                                   ; $6DD0: $3E $05
-    call label_91D                                ; $6DD2: $CD $1D $09
+    call func_91D                                ; $6DD2: $CD $1D $09
     pop  hl                                       ; $6DD5: $E1
     ld   de, $40                                  ; $6DD6: $11 $40 $00
     add  hl, de                                   ; $6DD9: $19
@@ -131,13 +131,13 @@ jr_005_6D7E:
     ld   a, $B0                                   ; $6DE0: $3E $B0
     ld   [$DDD8], a                               ; $6DE2: $EA $D8 $DD
     ld   a, $05                                   ; $6DE5: $3E $05
-    call label_91D                                ; $6DE7: $CD $1D $09
+    call func_91D                                ; $6DE7: $CD $1D $09
     ldh  a, [$FFD0]                               ; $6DEA: $F0 $D0
     inc  a                                        ; $6DEC: $3C
     inc  a                                        ; $6DED: $3C
     ldh  [$FFD0], a                               ; $6DEE: $E0 $D0
     ld   a, $05                                   ; $6DF0: $3E $05
-    call label_91D                                ; $6DF2: $CD $1D $09
+    call func_91D                                ; $6DF2: $CD $1D $09
     pop  hl                                       ; $6DF5: $E1
     ld   a, h                                     ; $6DF6: $7C
     ldh  [$FFCF], a                               ; $6DF7: $E0 $CF
@@ -456,7 +456,7 @@ Data_005_70E7::
     db   $00, $00, $01, $01
 
 func_005_70EB::
-    call label_BFB                                ; $70EB: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $70EB: $CD $FB $0B
     ld   a, [$D200]                               ; $70EE: $FA $00 $D2
     and  a                                        ; $70F1: $A7
     jr   z, jr_005_70F6                           ; $70F2: $28 $02
@@ -940,7 +940,7 @@ jr_005_7395:
     ld   hl, wEntitiesPrivateState1Table          ; $73E6: $21 $B0 $C2
     add  hl, bc                                   ; $73E9: $09
     ld   [hl], $02                                ; $73EA: $36 $02
-    call label_BFB                                ; $73EC: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $73EC: $CD $FB $0B
     ld   [hl], $30                                ; $73EF: $36 $30
     ld   hl, wEntitiesUnknowTableG                ; $73F1: $21 $00 $C3
     add  hl, bc                                   ; $73F4: $09
@@ -1241,7 +1241,7 @@ func_005_75D1::
     call func_005_7A3A                            ; $75D7: $CD $3A $7A
     ld   a, $01                                   ; $75DA: $3E $01
     ld   [$D200], a                               ; $75DC: $EA $00 $D2
-    call label_BFB                                ; $75DF: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $75DF: $CD $FB $0B
     cp   $10                                      ; $75E2: $FE $10
     jr   nc, jr_005_7621                          ; $75E4: $30 $3B
 

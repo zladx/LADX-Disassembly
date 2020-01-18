@@ -402,7 +402,7 @@ jr_003_499C:
     call GetRandomByte                            ; $49C2: $CD $0D $28
     jp   SetEntitySpriteVariant                   ; $49C5: $C3 $0C $3B
 
-    call label_BFB                                ; $49C8: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $49C8: $CD $FB $0B
     call GetRandomByte                            ; $49CB: $CD $0D $28
     and  $3F                                      ; $49CE: $E6 $3F
     add  $10                                      ; $49D0: $C6 $10
@@ -1407,7 +1407,7 @@ jr_003_4F92:
     jr   jr_003_4F92                              ; $4FA7: $18 $E9
 
 jr_003_4FA9:
-    call label_BFB                                ; $4FA9: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4FA9: $CD $FB $0B
     ld   [hl], $80                                ; $4FAC: $36 $80
     ret                                           ; $4FAE: $C9
 
@@ -1811,7 +1811,7 @@ jr_003_51C9:
     ld   [hl], a                                  ; $51EC: $77
     ld   [$DDD8], a                               ; $51ED: $EA $D8 $DD
     ld   a, $03                                   ; $51F0: $3E $03
-    call label_B2F                                ; $51F2: $CD $2F $0B
+    call func_2BF                                ; $51F2: $CD $2F $0B
 
 label_003_51F5:
     call label_2887                               ; $51F5: $CD $87 $28
@@ -1855,7 +1855,7 @@ label_003_51F5:
 
     push bc                                       ; $522D: $C5
     ld   a, $03                                   ; $522E: $3E $03
-    call label_91D                                ; $5230: $CD $1D $09
+    call func_91D                                ; $5230: $CD $1D $09
     pop  bc                                       ; $5233: $C1
 
 jr_003_5234:
@@ -3422,7 +3422,7 @@ jr_003_5BCB:
     ld   a, $05                                   ; $5BD3: $3E $05
     ldh  [hMusicTrack], a                         ; $5BD5: $E0 $B0
     ldh  [hNextWorldMusicTrack], a                               ; $5BD7: $E0 $BF
-    call label_BFB                                ; $5BD9: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $5BD9: $CD $FB $0B
     ld   [hl], $52                                ; $5BDC: $36 $52
     call IncrementEntityState                     ; $5BDE: $CD $12 $3B
 
@@ -3430,7 +3430,7 @@ jr_003_5BE1:
     jp   label_003_5A17                           ; $5BE1: $C3 $17 $5A
 
     call func_003_5A17                            ; $5BE4: $CD $17 $5A
-    call label_BFB                                ; $5BE7: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $5BE7: $CD $FB $0B
     ret  nz                                       ; $5BEA: $C0
 
     ld   a, $FF                                   ; $5BEB: $3E $FF
@@ -3771,7 +3771,7 @@ SirensInstrumentEntityHandler::
     call label_3E76                               ; $5DD9: $CD $76 $3E
     ld   a, $01                                   ; $5DDC: $3E $01
     ld   [wC167], a                               ; $5DDE: $EA $67 $C1
-    call label_BFB                                ; $5DE1: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $5DE1: $CD $FB $0B
     jr   nz, jr_003_5E29                          ; $5DE4: $20 $43
 
     call UnloadEntity                             ; $5DE6: $CD $8D $3F
@@ -4225,7 +4225,7 @@ DroppableArrowsEntityHandler::
     jp   label_003_60AA                           ; $6089: $C3 $AA $60
 
 func_003_608C::
-    call label_BFB                                ; $608C: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $608C: $CD $FB $0B
     cp   $1C                                      ; $608F: $FE $1C
     ret  nc                                       ; $6091: $D0
 
@@ -4537,7 +4537,7 @@ jr_003_626B:
     ld   hl, wEntitiesSpeedZTable                                ; $6291: $21 $20 $C3
     add  hl, bc                                   ; $6294: $09
     ld   [hl], $20                                ; $6295: $36 $20
-    call label_BFB                                ; $6297: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $6297: $CD $FB $0B
     ld   [hl], $80                                ; $629A: $36 $80
 
 label_003_629C:
@@ -5483,10 +5483,10 @@ jr_003_6771:
     ld   [hl+], a                                 ; $67D9: $22
     ld   [hl-], a                                 ; $67DA: $32
     ld   a, $83                                   ; $67DB: $3E $83
-    call label_B2F                                ; $67DD: $CD $2F $0B
+    call func_2BF                                ; $67DD: $CD $2F $0B
     inc  hl                                       ; $67E0: $23
     ld   a, $83                                   ; $67E1: $3E $83
-    call label_B2F                                ; $67E3: $CD $2F $0B
+    call func_2BF                                ; $67E3: $CD $2F $0B
     dec  hl                                       ; $67E6: $2B
     ld   a, l                                     ; $67E7: $7D
     add  $10                                      ; $67E8: $C6 $10
@@ -5496,10 +5496,10 @@ jr_003_6771:
     ld   [hl], a                                  ; $67EE: $77
     ld   [$DDD8], a                               ; $67EF: $EA $D8 $DD
     ld   a, $83                                   ; $67F2: $3E $83
-    call label_B2F                                ; $67F4: $CD $2F $0B
+    call func_2BF                                ; $67F4: $CD $2F $0B
     dec  hl                                       ; $67F7: $2B
     ld   a, $83                                   ; $67F8: $3E $83
-    call label_B2F                                ; $67FA: $CD $2F $0B
+    call func_2BF                                ; $67FA: $CD $2F $0B
     inc  hl                                       ; $67FD: $23
     ld   c, $03                                   ; $67FE: $0E $03
     ld   b, $00                                   ; $6800: $06 $00
@@ -5556,7 +5556,7 @@ jr_003_6828:
     ld   [hl], a                                  ; $684F: $77
     ld   [$DDD8], a                               ; $6850: $EA $D8 $DD
     ld   a, $83                                   ; $6853: $3E $83
-    call label_B2F                                ; $6855: $CD $2F $0B
+    call func_2BF                                ; $6855: $CD $2F $0B
     ldh  a, [hIsGBC]                              ; $6858: $F0 $FE
     and  a                                        ; $685A: $A7
     jr   z, jr_003_6862                           ; $685B: $28 $05
@@ -5922,7 +5922,7 @@ jr_003_6AFF:
     ldh  [hJingle], a                             ; $6B11: $E0 $F2
 
 jr_003_6B13:
-    call label_C50                                ; $6B13: $CD $50 $0C
+    call func_C50                                ; $6B13: $CD $50 $0C
     ldh  a, [hActiveEntityType]                     ; $6B16: $F0 $EB
     cp   $00                                      ; $6B18: $FE $00
     jr   nz, jr_003_6B31                          ; $6B1A: $20 $15
@@ -7323,7 +7323,7 @@ jr_003_7289:
 jr_003_7293:
     ld   [hl], $2F                                ; $7293: $36 $2F
     call ConfigureNewEntity                            ; $7295: $CD $5B $48
-    call label_BFB                                ; $7298: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7298: $CD $FB $0B
     ld   [hl], $80                                ; $729B: $36 $80
 
 jr_003_729D:
@@ -7661,7 +7661,7 @@ jr_003_7440:
     ld   [hl], $08                                ; $7474: $36 $08
     xor  a                                        ; $7476: $AF
     ld   [wSwordCharge], a                        ; $7477: $EA $22 $C1
-    call label_C50                                ; $747A: $CD $50 $0C
+    call func_C50                                ; $747A: $CD $50 $0C
     ld   hl, wIsUsingSpinAttack                   ; $747D: $21 $21 $C1
     ld   a, [wC16A]                               ; $7480: $FA $6A $C1
     or   [hl]                                     ; $7483: $B6
@@ -9259,7 +9259,7 @@ jr_003_7CFD:
     ld   hl, wEntitiesStateTable                  ; $7D39: $21 $90 $C2
     add  hl, bc                                   ; $7D3C: $09
     ld   [hl], $01                                ; $7D3D: $36 $01
-    call label_BFB                                ; $7D3F: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7D3F: $CD $FB $0B
     ld   [hl], $80                                ; $7D42: $36 $80
     pop  bc                                       ; $7D44: $C1
     ld   hl, $C1A2                                ; $7D45: $21 $A2 $C1

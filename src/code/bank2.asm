@@ -180,7 +180,7 @@ jr_002_42B2:
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
 
 jr_002_42C7:
-    call label_1A50                               ; $42C7: $CD $50 $1A
+    call func_1A50                               ; $42C7: $CD $50 $1A
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
@@ -386,7 +386,7 @@ jr_002_43E6:
     ld   a, [wC120]                               ; $43E6: $FA $20 $C1
     add  $02                                      ; $43E9: $C6 $02
     ld   [wC120], a                               ; $43EB: $EA $20 $C1
-    call label_1756                               ; $43EE: $CD $56 $17
+    call func_1756                               ; $43EE: $CD $56 $17
     jp   label_002_4464                           ; $43F1: $C3 $64 $44
 
 jr_002_43F4:
@@ -1587,7 +1587,7 @@ label_002_4C92:
     add  hl, de                                   ; $4C9A: $19
     ld   [hl], $CC                                ; $4C9B: $36 $CC
     ld   a, $82                                   ; $4C9D: $3E $82
-    call label_B2F                                ; $4C9F: $CD $2F $0B
+    call func_2BF                                ; $4C9F: $CD $2F $0B
     call label_2887                               ; $4CA2: $CD $87 $28
     ld   hl, wRequestDestinationHigh              ; $4CA5: $21 $01 $D6
     ld   a, [wRequests]                           ; $4CA8: $FA $00 $D6
@@ -1780,7 +1780,7 @@ label_002_4D97:
     sla  c                                        ; $4DC1: $CB $21
     rl   b                                        ; $4DC3: $CB $10
     ld   a, $02                                   ; $4DC5: $3E $02
-    call label_91D.jp_92E                         ; $4DC7: $CD $2E $09
+    call func_91D.jp_92E                         ; $4DC7: $CD $2E $09
     pop  bc                                       ; $4DCA: $C1
 
 jr_002_4DCB:
@@ -2089,7 +2089,7 @@ jr_002_4F3C:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4F68: $E0 $A1
 
 jr_002_4F6A:
-    jp   label_1A50                               ; $4F6A: $C3 $50 $1A
+    jp   func_1A50                               ; $4F6A: $C3 $50 $1A
 
 label_002_4F6D:
     ldh  a, [hJoypadState]                               ; $4F6D: $F0 $CC
@@ -2203,7 +2203,7 @@ jr_002_4FFA:
     ldh  [hLinkDirection], a                               ; $5003: $E0 $9E
 
 jr_002_5005:
-    call label_1A50                               ; $5005: $CD $50 $1A
+    call func_1A50                               ; $5005: $CD $50 $1A
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $5008: $F0 $A1
     and  a                                        ; $500A: $A7
     jr   z, jr_002_5012                           ; $500B: $28 $05
@@ -2608,7 +2608,7 @@ jr_002_524F:
     ld   l, a                                     ; $525F: $6F
     ld   a, $06                                   ; $5260: $3E $06
     ldh  [hScratch2], a                               ; $5262: $E0 $D9
-    jp   label_1819                               ; $5264: $C3 $19 $18
+    jp   func_1819                               ; $5264: $C3 $19 $18
 
     call ResetSpinAttack                                ; $5267: $CD $AF $0C
     call ClearLinkPositionIncrement               ; $526A: $CD $8E $17
@@ -3457,7 +3457,7 @@ jr_002_56B8:
 jr_002_56FC:
     ld   [hl], $E3                                ; $56FC: $36 $E3
     ld   a, $82                                   ; $56FE: $3E $82
-    call label_B2F                                ; $5700: $CD $2F $0B
+    call func_2BF                                ; $5700: $CD $2F $0B
     ld   a, JINGLE_DUNGEON_OPENED                 ; $5703: $3E $23
     ldh  [hJingle], a                             ; $5705: $E0 $F2
 
@@ -4053,7 +4053,7 @@ jr_002_5AC7:
     push de                                       ; $5ACC: $D5
     ld   a, $02                                   ; $5ACD: $3E $02
     ld   b, $00                                   ; $5ACF: $06 $00
-    call label_999                                ; $5AD1: $CD $99 $09
+    call func_999                                ; $5AD1: $CD $99 $09
     pop  de                                       ; $5AD4: $D1
 
 jr_002_5AD5:
@@ -4364,7 +4364,7 @@ jr_002_5C7B:
     push de                                       ; $5C80: $D5
     ld   a, $02                                   ; $5C81: $3E $02
     ld   b, $01                                   ; $5C83: $06 $01
-    call label_999                                ; $5C85: $CD $99 $09
+    call func_999                                ; $5C85: $CD $99 $09
     pop  de                                       ; $5C88: $D1
 
 jr_002_5C89:
@@ -5422,7 +5422,7 @@ jr_002_6A24:
     ld   a, [wC120]                               ; $6A30: $FA $20 $C1
     add  $02                                      ; $6A33: $C6 $02
     ld   [wC120], a                               ; $6A35: $EA $20 $C1
-    call label_1756                               ; $6A38: $CD $56 $17
+    call func_1756                               ; $6A38: $CD $56 $17
     jp   label_002_6ADB                           ; $6A3B: $C3 $DB $6A
 
 jr_002_6A3E:
@@ -7306,7 +7306,7 @@ jr_002_74C9:
     ld   [$C158], a                               ; $74F4: $EA $58 $C1
     ld   a, JINGLE_HUGE_BUMP                   ; $74F7: $3E $0B
     ldh  [hJingle], a                             ; $74F9: $E0 $F2
-    jp   label_1828                                    ; $74FB: $C3 $28 $18
+    jp   func_1828                                    ; $74FB: $C3 $28 $18
 
 func_002_74FE::
     call OpenDialog                               ; $74FE: $CD $85 $23

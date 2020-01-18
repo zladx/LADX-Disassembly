@@ -364,7 +364,7 @@ func_005_5059::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $505B: $E0 $A1
     ld   [wC167], a                               ; $505D: $EA $67 $C1
     push bc                                       ; $5060: $C5
-    call label_BF0                                ; $5061: $CD $F0 $0B
+    call func_BF0                                ; $5061: $CD $F0 $0B
     pop  bc                                       ; $5064: $C1
     ld   a, [$D211]                               ; $5065: $FA $11 $D2
     cp   $07                                      ; $5068: $FE $07
@@ -377,7 +377,7 @@ func_005_5059::
     ld   a, $16                                   ; $5073: $3E $16
     call OpenDialog                               ; $5075: $CD $85 $23
     push bc                                       ; $5078: $C5
-    call label_BF0                                ; $5079: $CD $F0 $0B
+    call func_BF0                                ; $5079: $CD $F0 $0B
     pop  bc                                       ; $507C: $C1
     xor  a                                        ; $507D: $AF
     ld   [$D210], a                               ; $507E: $EA $10 $D2
@@ -644,7 +644,7 @@ jr_005_5211:
     and  a                                        ; $5213: $A7
     jr   nz, jr_005_5237                          ; $5214: $20 $21
 
-    call label_BFB                                ; $5216: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $5216: $CD $FB $0B
     ld   [hl], $7F                                ; $5219: $36 $7F
     ld   hl, wEntitiesDirectionTable              ; $521B: $21 $80 $C3
     add  hl, bc                                   ; $521E: $09
@@ -695,7 +695,7 @@ Data_005_5274::
     db   $00, $00, $01, $01, $00, $00, $01, $01, $00, $00, $01, $01, $00, $00, $01, $01
 
 func_005_5294::
-    call label_BFB                                ; $5294: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $5294: $CD $FB $0B
     jr   nz, jr_005_52A4                          ; $5297: $20 $0B
 
     ld   a, $01                                   ; $5299: $3E $01

@@ -637,7 +637,7 @@ jr_020_4917:
     call label_2887                               ; $493F: $CD $87 $28
     push bc                                       ; $4942: $C5
     ld   a, $20                                   ; $4943: $3E $20
-    call label_91D                                ; $4945: $CD $1D $09
+    call func_91D                                ; $4945: $CD $1D $09
     pop  bc                                       ; $4948: $C1
     ld   de, $491F                                ; $4949: $11 $1F $49
     call func_020_4898                            ; $494C: $CD $98 $48
@@ -667,7 +667,7 @@ jr_020_4961:
     ldh  a, [hScratch0]                           ; $4968: $F0 $D7
     ld   [$DDD8], a                               ; $496A: $EA $D8 $DD
     ld   a, $20                                   ; $496D: $3E $20
-    call label_91D                                ; $496F: $CD $1D $09
+    call func_91D                                ; $496F: $CD $1D $09
     pop  bc                                       ; $4972: $C1
     ldh  a, [hScratch0]                           ; $4973: $F0 $D7
     cp   $AE                                      ; $4975: $FE $AE
@@ -3024,7 +3024,7 @@ jr_020_592D:
 
 jr_020_5940:
     call func_020_6683                            ; $5940: $CD $83 $66
-    call label_1A22                               ; $5943: $CD $22 $1A
+    call func_1A22                               ; $5943: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5946: $FA $6B $C1
     cp   $04                                      ; $5949: $FE $04
     ; Returns back to render palettes if transition isn't finished
@@ -3770,7 +3770,7 @@ label_020_5D34:
     call func_020_6683                            ; $5D34: $CD $83 $66
     call LCDOff                                   ; $5D37: $CD $CF $28
     ld   a, $20                                   ; $5D3A: $3E $20
-    call label_AB5                                ; $5D3C: $CD $B5 $0A
+    call func_AB5                                ; $5D3C: $CD $B5 $0A
     xor  a                                        ; $5D3F: $AF
     ld   [wRequests], a                           ; $5D40: $EA $00 $D6
     ld   [wRequestDestinationHigh], a             ; $5D43: $EA $01 $D6
@@ -4129,7 +4129,7 @@ jr_020_5EEE:
     ret                                           ; $5EEE: $C9
 
     call func_020_635C                            ; $5EEF: $CD $5C $63
-    call label_1A39                               ; $5EF2: $CD $39 $1A
+    call func_1A39                               ; $5EF2: $CD $39 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5EF5: $FA $6B $C1
     cp   $04                                      ; $5EF8: $FE $04
     jr   nz, jr_020_5EFF                          ; $5EFA: $20 $03
@@ -5439,7 +5439,7 @@ jr_020_65CE:
     ret                                           ; $65D1: $C9
 
     call func_020_635C                            ; $65D2: $CD $5C $63
-    call label_1A22                               ; $65D5: $CD $22 $1A
+    call func_1A22                               ; $65D5: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $65D8: $FA $6B $C1
     cp   $04                                      ; $65DB: $FE $04
     jp   nz, label_020_6682                       ; $65DD: $C2 $82 $66
@@ -7959,7 +7959,7 @@ jr_020_7174:
 
     ld   c, h                                     ; $71D1: $4C
     ld   a, h                                     ; $71D2: $7C
-    ld   bc, label_E03                            ; $71D3: $01 $03 $0E
+    ld   bc, $0E03                                ; $71D3: $01 $03 $0E
     rlca                                          ; $71D6: $07
     rlca                                          ; $71D7: $07
     nop                                           ; $71D8: $00

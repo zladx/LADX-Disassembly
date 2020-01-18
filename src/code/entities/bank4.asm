@@ -291,7 +291,7 @@ jr_004_4E4F:
     jp   label_004_50EF                           ; $4E4F: $C3 $EF $50
 
 func_004_4E52::
-    call label_BFB                                ; $4E52: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4E52: $CD $FB $0B
     jr   z, jr_004_4E5F                           ; $4E55: $28 $08
 
     ld   a, $02                                   ; $4E57: $3E $02
@@ -436,7 +436,7 @@ jr_004_4F14:
     and  a                                        ; $4F3A: $A7
     jr   nz, jr_004_4F49                          ; $4F3B: $20 $0C
 
-    call label_BFB                                ; $4F3D: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4F3D: $CD $FB $0B
     ld   [hl], $0E                                ; $4F40: $36 $0E
     ld   hl, wEntitiesSpeedZTable                 ; $4F42: $21 $20 $C3
     add  hl, bc                                   ; $4F45: $09
@@ -750,7 +750,7 @@ func_004_5158::
     call IncrementEntityState                     ; $516C: $CD $12 $3B
     call IsEntityUnknownFZero                     ; $516F: $CD $00 $0C
     ld   [hl], $A0                                ; $5172: $36 $A0
-    call label_BFB                                ; $5174: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $5174: $CD $FB $0B
     ld   [hl], $FF                                ; $5177: $36 $FF
     jp_open_dialog $0B6                           ; $5179
 
@@ -813,7 +813,7 @@ jr_004_5202:
     add  hl, de                                   ; $5206: $19
     ld   a, [hl]                                  ; $5207: $7E
     ld   [wScreenShakeHorizontal], a              ; $5208: $EA $55 $C1
-    call label_BFB                                ; $520B: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $520B: $CD $FB $0B
     jr   nz, jr_004_5273                          ; $520E: $20 $63
 
     call GetRandomByte                            ; $5210: $CD $0D $28
@@ -1196,7 +1196,7 @@ FacadeState2Handler:
 
 jr_004_551C:
     call RenderAnimatedActiveEntity               ; $551C: $CD $C0 $3B
-    call label_C56                                ; $551F: $CD $56 $0C
+    call func_C56                                ; $551F: $CD $56 $0C
     ld   hl, wEntitiesFlashCountdownTable         ; $5522: $21 $20 $C4
     add  hl, bc                                   ; $5525: $09
     ld   a, [hl]                                  ; $5526: $7E
@@ -1408,7 +1408,7 @@ jr_004_5628:
     ldh  a, [hScratch0]                           ; $5654: $F0 $D7
     ld   [$DDD8], a                               ; $5656: $EA $D8 $DD
     ld   a, $04                                   ; $5659: $3E $04
-    call label_91D                                ; $565B: $CD $1D $09
+    call func_91D                                ; $565B: $CD $1D $09
     pop  bc                                       ; $565E: $C1
 
 jr_004_565F:
@@ -1473,7 +1473,7 @@ MoldormEntityHandler::
     call label_394D                               ; $56AD: $CD $4D $39
     call func_004_56A7                            ; $56B0: $CD $A7 $56
     call func_004_5902                            ; $56B3: $CD $02 $59
-    call label_C56                                ; $56B6: $CD $56 $0C
+    call func_C56                                ; $56B6: $CD $56 $0C
     ld   a, [wRoomTransitionState]                ; $56B9: $FA $24 $C1
     and  a                                        ; $56BC: $A7
     jp   nz, func_004_5690                        ; $56BD: $C2 $90 $56
@@ -4119,7 +4119,7 @@ Data_004_6844::
     db   $00, $03, $01, $02
 
 func_004_6848::
-    call label_BFB                                ; $6848: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $6848: $CD $FB $0B
     jr   nz, jr_004_6852                          ; $684B: $20 $05
 
     ld   [hl], $10                                ; $684D: $36 $10
@@ -4240,7 +4240,7 @@ jr_004_68FC:
     ret                                           ; $68FC: $C9
 
 func_004_68FD::
-    call label_BFB                                ; $68FD: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $68FD: $CD $FB $0B
     jr   nz, jr_004_6908                          ; $6900: $20 $06
 
     ld   [hl], $40                                ; $6902: $36 $40
@@ -5547,7 +5547,7 @@ jr_004_70A6:
     and  a                                        ; $70AC: $A7
     jr   z, jr_004_70F4                           ; $70AD: $28 $45
 
-    call label_BFB                                ; $70AF: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $70AF: $CD $FB $0B
     jr   z, jr_004_70B9                           ; $70B2: $28 $05
 
     dec  a                                        ; $70B4: $3D
@@ -5580,7 +5580,7 @@ jr_004_70CA:
     cp   $28                                      ; $70DC: $FE $28
     ret  nz                                       ; $70DE: $C0
 
-    call label_BFB                                ; $70DF: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $70DF: $CD $FB $0B
     ld   [hl], $18                                ; $70E2: $36 $18
     ld   a, [$C50F]                               ; $70E4: $FA $0F $C5
     ld   e, a                                     ; $70E7: $5F
@@ -5665,7 +5665,7 @@ jr_004_7152:
     and  a                                        ; $7158: $A7
     jr   z, func_004_7160                         ; $7159: $28 $05
 
-    call label_BFB                                ; $715B: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $715B: $CD $FB $0B
     ld   [hl], $10                                ; $715E: $36 $10
 
 func_004_7160::
@@ -5711,7 +5711,7 @@ jr_004_7194:
 
 jr_004_7198:
     ld   [$D203], a                               ; $7198: $EA $03 $D2
-    call label_BFB                                ; $719B: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $719B: $CD $FB $0B
     ret  nz                                       ; $719E: $C0
 
     ld   a, [wIsMarinFollowingLink]               ; $719F: $FA $73 $DB
@@ -5822,7 +5822,7 @@ func_004_723B::
     ld   a, e                                     ; $7240: $7B
     ldh  [hLinkDirection], a                      ; $7241: $E0 $9E
     push bc                                       ; $7243: $C5
-    call label_BF0                                ; $7244: $CD $F0 $0B
+    call func_BF0                                ; $7244: $CD $F0 $0B
     pop  bc                                       ; $7247: $C1
 
 jr_004_7248:
@@ -7585,7 +7585,7 @@ jr_004_7D2B:
     jr   nz, jr_004_7D51                          ; $7D47: $20 $08
 
     call IncrementEntityState                     ; $7D49: $CD $12 $3B
-    call label_BFB                                ; $7D4C: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7D4C: $CD $FB $0B
     ld   [hl], $6F                                ; $7D4F: $36 $6F
 
 jr_004_7D51:
@@ -7677,7 +7677,7 @@ jr_004_7DD1:
     call ClearEntitySpeed                         ; $7DD1: $CD $7F $3D
 
 jr_004_7DD4:
-    call label_BFB                                ; $7DD4: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7DD4: $CD $FB $0B
     jp   z, jr_004_7EBA                           ; $7DD7: $CA $BA $7E
 
     cp   $18                                      ; $7DDA: $FE $18

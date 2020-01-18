@@ -66,7 +66,7 @@ label_005_635E:
 
 jr_005_6375:
     call func_005_7A3A                            ; $6375: $CD $3A $7A
-    call label_C56                                ; $6378: $CD $56 $0C
+    call func_C56                                ; $6378: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $637B: $F0 $F0
     JP_TABLE                                      ; $637D
 ._00 dw func_005_63A8                             ; $637E
@@ -164,7 +164,7 @@ func_005_63EB::
     ld   hl, wEntitiesSpeedZTable                 ; $6419: $21 $20 $C3
     add  hl, bc                                   ; $641C: $09
     ld   [hl], b                                  ; $641D: $70
-    call label_BFB                                ; $641E: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $641E: $CD $FB $0B
     ld   [hl], $40                                ; $6421: $36 $40
     ldh  a, [wActiveEntityPosX]                   ; $6423: $F0 $EE
     add  $F8                                      ; $6425: $C6 $F8
@@ -261,7 +261,7 @@ jr_005_64A0:
 
 jr_005_64AF:
     call label_3B39                               ; $64AF: $CD $39 $3B
-    call label_BFB                                ; $64B2: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $64B2: $CD $FB $0B
     jr   nz, jr_005_64CC                          ; $64B5: $20 $15
 
     ldh  a, [wActiveEntityPosX]                   ; $64B7: $F0 $EE

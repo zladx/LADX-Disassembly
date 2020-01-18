@@ -50,7 +50,7 @@ jr_019_4056:
     call label_3CE6                               ; $4058: $CD $E6 $3C
     call label_3CD9                               ; $405B: $CD $D9 $3C
     call func_019_7D3D                            ; $405E: $CD $3D $7D
-    call label_C56                                ; $4061: $CD $56 $0C
+    call func_C56                                ; $4061: $CD $56 $0C
     call label_3B70                               ; $4064: $CD $70 $3B
     ldh  a, [hActiveEntityState]                  ; $4067: $F0 $F0
     rst  $00                                      ; $4069: $C7
@@ -540,7 +540,7 @@ jr_019_4355:
     ld   a, [hl]                                  ; $4368: $7E
     ldh  [hLinkDirection], a                      ; $4369: $E0 $9E
     push bc                                       ; $436B: $C5
-    call label_BF0                                ; $436C: $CD $F0 $0B
+    call func_BF0                                ; $436C: $CD $F0 $0B
     pop  bc                                       ; $436F: $C1
     ld   hl, wEntitiesUnknowTableP                ; $4370: $21 $40 $C4
     add  hl, bc                                   ; $4373: $09
@@ -1360,7 +1360,7 @@ jr_019_48EE:
     ld   de, $48CA                                ; $48EE: $11 $CA $48
     call RenderAnimatedActiveEntity                               ; $48F1: $CD $C0 $3B
     call func_019_7D3D                            ; $48F4: $CD $3D $7D
-    call label_C56                                ; $48F7: $CD $56 $0C
+    call func_C56                                ; $48F7: $CD $56 $0C
     call func_019_7DF1                            ; $48FA: $CD $F1 $7D
     ld   hl, wEntitiesSpeedZTable                 ; $48FD: $21 $20 $C3
     add  hl, bc                                   ; $4900: $09
@@ -1936,12 +1936,12 @@ jr_019_4C21:
     ld   a, $C1                                   ; $4C37: $3E $C1
     ld   [hl], a                                  ; $4C39: $77
     ld   a, $99                                   ; $4C3A: $3E $99
-    call label_B2F                                ; $4C3C: $CD $2F $0B
+    call func_2BF                                ; $4C3C: $CD $2F $0B
     ld   hl, $D746                                ; $4C3F: $21 $46 $D7
     ld   a, $CB                                   ; $4C42: $3E $CB
     ld   [hl], a                                  ; $4C44: $77
     ld   a, $99                                   ; $4C45: $3E $99
-    call label_B2F                                ; $4C47: $CD $2F $0B
+    call func_2BF                                ; $4C47: $CD $2F $0B
     ld   a, $50                                   ; $4C4A: $3E $50
     ldh  [hSwordIntersectedAreaX], a              ; $4C4C: $E0 $CE
     ld   a, $20                                   ; $4C4E: $3E $20
@@ -1955,7 +1955,7 @@ jr_019_4C21:
     ld   a, $C1                                   ; $4C5B: $3E $C1
     ld   [$DDD8], a                               ; $4C5D: $EA $D8 $DD
     ld   a, $19                                   ; $4C60: $3E $19
-    call label_91D                                ; $4C62: $CD $1D $09
+    call func_91D                                ; $4C62: $CD $1D $09
     ldh  a, [$FFCF]                               ; $4C65: $F0 $CF
     ld   h, a                                     ; $4C67: $67
     ldh  a, [$FFD0]                               ; $4C68: $F0 $D0
@@ -1970,7 +1970,7 @@ jr_019_4C21:
     ld   a, $CB                                   ; $4C76: $3E $CB
     ld   [$DDD8], a                               ; $4C78: $EA $D8 $DD
     ld   a, $19                                   ; $4C7B: $3E $19
-    call label_91D                                ; $4C7D: $CD $1D $09
+    call func_91D                                ; $4C7D: $CD $1D $09
     pop  hl                                       ; $4C80: $E1
     ld   a, h                                     ; $4C81: $7C
     ldh  [$FFCF], a                               ; $4C82: $E0 $CF
@@ -2933,7 +2933,7 @@ jr_019_51D2:
     ld   hl, $D756                                ; $521F: $21 $56 $D7
     ld   [hl], $C6                                ; $5222: $36 $C6
     ld   a, $99                                   ; $5224: $3E $99
-    call label_B2F                                ; $5226: $CD $2F $0B
+    call func_2BF                                ; $5226: $CD $2F $0B
     ld   a, $50                                   ; $5229: $3E $50
     ldh  [hSwordIntersectedAreaX], a              ; $522B: $E0 $CE
     ld   a, $30                                   ; $522D: $3E $30
@@ -2947,7 +2947,7 @@ jr_019_51D2:
     ld   a, $0C                                   ; $523A: $3E $0C
     ld   [$DDD8], a                               ; $523C: $EA $D8 $DD
     ld   a, $19                                   ; $523F: $3E $19
-    call label_91D                                ; $5241: $CD $1D $09
+    call func_91D                                ; $5241: $CD $1D $09
     ldh  a, [$FFCF]                               ; $5244: $F0 $CF
     ld   h, a                                     ; $5246: $67
     ldh  a, [$FFD0]                               ; $5247: $F0 $D0
@@ -2962,7 +2962,7 @@ jr_019_51D2:
     ld   a, $C6                                   ; $5255: $3E $C6
     ld   [$DDD8], a                               ; $5257: $EA $D8 $DD
     ld   a, $19                                   ; $525A: $3E $19
-    call label_91D                                ; $525C: $CD $1D $09
+    call func_91D                                ; $525C: $CD $1D $09
     pop  hl                                       ; $525F: $E1
     ld   a, h                                     ; $5260: $7C
     ldh  [$FFCF], a                               ; $5261: $E0 $CF
@@ -3034,11 +3034,11 @@ jr_019_52B1:
     ld   hl, $D736                                ; $52CC: $21 $36 $D7
     ld   [hl], $91                                ; $52CF: $36 $91
     ld   a, $99                                   ; $52D1: $3E $99
-    call label_B2F                                ; $52D3: $CD $2F $0B
+    call func_2BF                                ; $52D3: $CD $2F $0B
     ld   hl, $D746                                ; $52D6: $21 $46 $D7
     ld   [hl], $5E                                ; $52D9: $36 $5E
     ld   a, $99                                   ; $52DB: $3E $99
-    call label_B2F                                ; $52DD: $CD $2F $0B
+    call func_2BF                                ; $52DD: $CD $2F $0B
     ld   a, $50                                   ; $52E0: $3E $50
     ldh  [hSwordIntersectedAreaX], a              ; $52E2: $E0 $CE
     ld   a, $20                                   ; $52E4: $3E $20
@@ -3052,7 +3052,7 @@ jr_019_52B1:
     ld   a, $91                                   ; $52F1: $3E $91
     ld   [$DDD8], a                               ; $52F3: $EA $D8 $DD
     ld   a, $19                                   ; $52F6: $3E $19
-    call label_91D                                ; $52F8: $CD $1D $09
+    call func_91D                                ; $52F8: $CD $1D $09
     ldh  a, [$FFCF]                               ; $52FB: $F0 $CF
     ld   h, a                                     ; $52FD: $67
     ldh  a, [$FFD0]                               ; $52FE: $F0 $D0
@@ -3067,7 +3067,7 @@ jr_019_52B1:
     ld   a, $5E                                   ; $530C: $3E $5E
     ld   [$DDD8], a                               ; $530E: $EA $D8 $DD
     ld   a, $19                                   ; $5311: $3E $19
-    call label_91D                                ; $5313: $CD $1D $09
+    call func_91D                                ; $5313: $CD $1D $09
     pop  hl                                       ; $5316: $E1
     ld   a, h                                     ; $5317: $7C
     ldh  [$FFCF], a                               ; $5318: $E0 $CF
@@ -3539,7 +3539,7 @@ jr_019_55A1:
     ld   c, $08                                   ; $55A1: $0E $08
     call label_3CE6                               ; $55A3: $CD $E6 $3C
     call func_019_7D3D                            ; $55A6: $CD $3D $7D
-    call label_C56                                ; $55A9: $CD $56 $0C
+    call func_C56                                ; $55A9: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $55AC: $F0 $F0
     rst  $00                                      ; $55AE: $C7
     or   l                                        ; $55AF: $B5
@@ -3755,7 +3755,7 @@ ThwimpEntityHandler::
     ld   de, $56BD                                ; $56C5: $11 $BD $56
     call RenderAnimatedActiveEntity                               ; $56C8: $CD $C0 $3B
     call func_019_7D3D                            ; $56CB: $CD $3D $7D
-    call label_C56                                ; $56CE: $CD $56 $0C
+    call func_C56                                ; $56CE: $CD $56 $0C
     call label_3B39                               ; $56D1: $CD $39 $3B
     xor  a                                        ; $56D4: $AF
     call SetEntitySpriteVariant                   ; $56D5: $CD $0C $3B
@@ -3938,7 +3938,7 @@ ThwompEntityHandler::
     ld   a, $06                                   ; $57D1: $3E $06
     call label_3DA0                               ; $57D3: $CD $A0 $3D
     call func_019_7D3D                            ; $57D6: $CD $3D $7D
-    call label_C56                                ; $57D9: $CD $56 $0C
+    call func_C56                                ; $57D9: $CD $56 $0C
     call label_3B70                               ; $57DC: $CD $70 $3B
     call func_019_58A2                            ; $57DF: $CD $A2 $58
     ldh  a, [hActiveEntityState]                  ; $57E2: $F0 $F0
@@ -5062,7 +5062,7 @@ jr_019_5D99:
     add  hl, de                                   ; $5DA5: $19
     ld   a, [hl]                                  ; $5DA6: $7E
     ldh  [hLinkDirection], a                      ; $5DA7: $E0 $9E
-    jp   label_BF0                                ; $5DA9: $C3 $F0 $0B
+    jp   func_BF0                                ; $5DA9: $C3 $F0 $0B
 
     call func_019_5D99                            ; $5DAC: $CD $99 $5D
     ldh  a, [hLinkPositionZ]                      ; $5DAF: $F0 $A2
@@ -5949,17 +5949,17 @@ jr_019_62B4:
     ld   a, $E1                                   ; $62CD: $3E $E1
     ld   [hl], a                                  ; $62CF: $77
     ld   a, $99                                   ; $62D0: $3E $99
-    call label_B2F                                ; $62D2: $CD $2F $0B
+    call func_2BF                                ; $62D2: $CD $2F $0B
     ld   hl, $D746                                ; $62D5: $21 $46 $D7
     ld   a, $77                                   ; $62D8: $3E $77
     ld   [hl], a                                  ; $62DA: $77
     ld   a, $99                                   ; $62DB: $3E $99
-    call label_B2F                                ; $62DD: $CD $2F $0B
+    call func_2BF                                ; $62DD: $CD $2F $0B
     ld   hl, $D756                                ; $62E0: $21 $56 $D7
     ld   a, $77                                   ; $62E3: $3E $77
     ld   [hl], a                                  ; $62E5: $77
     ld   a, $99                                   ; $62E6: $3E $99
-    call label_B2F                                ; $62E8: $CD $2F $0B
+    call func_2BF                                ; $62E8: $CD $2F $0B
     call func_019_6374                            ; $62EB: $CD $74 $63
     call $63B5                                    ; $62EE: $CD $B5 $63
     jp   label_019_7E61                           ; $62F1: $C3 $61 $7E
@@ -7258,19 +7258,19 @@ jr_019_6961:
     ld   [hl+], a                                 ; $6972: $22
     ld   hl, $D712                                ; $6973: $21 $12 $D7
     ld   a, $99                                   ; $6976: $3E $99
-    call label_B2F                                ; $6978: $CD $2F $0B
+    call func_2BF                                ; $6978: $CD $2F $0B
     inc  hl                                       ; $697B: $23
     ld   a, $99                                   ; $697C: $3E $99
-    call label_B2F                                ; $697E: $CD $2F $0B
+    call func_2BF                                ; $697E: $CD $2F $0B
     inc  hl                                       ; $6981: $23
     ld   a, $99                                   ; $6982: $3E $99
-    call label_B2F                                ; $6984: $CD $2F $0B
+    call func_2BF                                ; $6984: $CD $2F $0B
     inc  hl                                       ; $6987: $23
     ld   a, $99                                   ; $6988: $3E $99
-    call label_B2F                                ; $698A: $CD $2F $0B
+    call func_2BF                                ; $698A: $CD $2F $0B
     inc  hl                                       ; $698D: $23
     ld   a, $99                                   ; $698E: $3E $99
-    call label_B2F                                ; $6990: $CD $2F $0B
+    call func_2BF                                ; $6990: $CD $2F $0B
     ld   hl, $D722                                ; $6993: $21 $22 $D7
     ld   a, $B3                                   ; $6996: $3E $B3
     ld   [hl+], a                                 ; $6998: $22
@@ -7284,19 +7284,19 @@ jr_019_6961:
     ld   [hl+], a                                 ; $69A4: $22
     ld   hl, $D722                                ; $69A5: $21 $22 $D7
     ld   a, $99                                   ; $69A8: $3E $99
-    call label_B2F                                ; $69AA: $CD $2F $0B
+    call func_2BF                                ; $69AA: $CD $2F $0B
     inc  hl                                       ; $69AD: $23
     ld   a, $99                                   ; $69AE: $3E $99
-    call label_B2F                                ; $69B0: $CD $2F $0B
+    call func_2BF                                ; $69B0: $CD $2F $0B
     inc  hl                                       ; $69B3: $23
     ld   a, $99                                   ; $69B4: $3E $99
-    call label_B2F                                ; $69B6: $CD $2F $0B
+    call func_2BF                                ; $69B6: $CD $2F $0B
     inc  hl                                       ; $69B9: $23
     ld   a, $99                                   ; $69BA: $3E $99
-    call label_B2F                                ; $69BC: $CD $2F $0B
+    call func_2BF                                ; $69BC: $CD $2F $0B
     inc  hl                                       ; $69BF: $23
     ld   a, $99                                   ; $69C0: $3E $99
-    call label_B2F                                ; $69C2: $CD $2F $0B
+    call func_2BF                                ; $69C2: $CD $2F $0B
     ld   hl, $D732                                ; $69C5: $21 $32 $D7
     ld   a, $AD                                   ; $69C8: $3E $AD
     ld   [hl+], a                                 ; $69CA: $22
@@ -7310,19 +7310,19 @@ jr_019_6961:
     ld   [hl+], a                                 ; $69D6: $22
     ld   hl, $D732                                ; $69D7: $21 $32 $D7
     ld   a, $99                                   ; $69DA: $3E $99
-    call label_B2F                                ; $69DC: $CD $2F $0B
+    call func_2BF                                ; $69DC: $CD $2F $0B
     inc  hl                                       ; $69DF: $23
     ld   a, $99                                   ; $69E0: $3E $99
-    call label_B2F                                ; $69E2: $CD $2F $0B
+    call func_2BF                                ; $69E2: $CD $2F $0B
     inc  hl                                       ; $69E5: $23
     ld   a, $99                                   ; $69E6: $3E $99
-    call label_B2F                                ; $69E8: $CD $2F $0B
+    call func_2BF                                ; $69E8: $CD $2F $0B
     inc  hl                                       ; $69EB: $23
     ld   a, $99                                   ; $69EC: $3E $99
-    call label_B2F                                ; $69EE: $CD $2F $0B
+    call func_2BF                                ; $69EE: $CD $2F $0B
     inc  hl                                       ; $69F1: $23
     ld   a, $99                                   ; $69F2: $3E $99
-    call label_B2F                                ; $69F4: $CD $2F $0B
+    call func_2BF                                ; $69F4: $CD $2F $0B
     ld   hl, $D742                                ; $69F7: $21 $42 $D7
     ld   a, $AE                                   ; $69FA: $3E $AE
     ld   [hl+], a                                 ; $69FC: $22
@@ -7336,19 +7336,19 @@ jr_019_6961:
     ld   [hl+], a                                 ; $6A08: $22
     ld   hl, $D742                                ; $6A09: $21 $42 $D7
     ld   a, $99                                   ; $6A0C: $3E $99
-    call label_B2F                                ; $6A0E: $CD $2F $0B
+    call func_2BF                                ; $6A0E: $CD $2F $0B
     inc  hl                                       ; $6A11: $23
     ld   a, $99                                   ; $6A12: $3E $99
-    call label_B2F                                ; $6A14: $CD $2F $0B
+    call func_2BF                                ; $6A14: $CD $2F $0B
     inc  hl                                       ; $6A17: $23
     ld   a, $99                                   ; $6A18: $3E $99
-    call label_B2F                                ; $6A1A: $CD $2F $0B
+    call func_2BF                                ; $6A1A: $CD $2F $0B
     inc  hl                                       ; $6A1D: $23
     ld   a, $99                                   ; $6A1E: $3E $99
-    call label_B2F                                ; $6A20: $CD $2F $0B
+    call func_2BF                                ; $6A20: $CD $2F $0B
     inc  hl                                       ; $6A23: $23
     ld   a, $99                                   ; $6A24: $3E $99
-    call label_B2F                                ; $6A26: $CD $2F $0B
+    call func_2BF                                ; $6A26: $CD $2F $0B
     call func_019_7F0E                            ; $6A29: $CD $0E $7F
     set  4, [hl]                                  ; $6A2C: $CB $E6
     xor  a                                        ; $6A2E: $AF
@@ -8278,7 +8278,7 @@ jr_019_6F66:
     ld   l, a                                     ; $6F8A: $6F
     ret                                           ; $6F8B: $C9
 
-    call label_BFB                                ; $6F8C: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $6F8C: $CD $FB $0B
     ret  nz                                       ; $6F8F: $C0
 
     call func_019_7CF0                            ; $6F90: $CD $F0 $7C
@@ -8439,7 +8439,7 @@ jr_019_6FD0:
     call func_019_7D16                            ; $7081: $CD $16 $7D
     jr   nc, jr_019_70A6                          ; $7084: $30 $20
 
-    call label_BFB                                ; $7086: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7086: $CD $FB $0B
     jr   nz, jr_019_70A6                          ; $7089: $20 $1B
 
     ld   a, [wTransitionSequenceCounter]          ; $708B: $FA $6B $C1
@@ -8452,7 +8452,7 @@ jr_019_6FD0:
     ld   [wTransitionSequenceCounter], a          ; $7098: $EA $6B $C1
     ld   [wC16C], a                               ; $709B: $EA $6C $C1
     ld   [wGameplaySubtype], a                    ; $709E: $EA $96 $DB
-    call label_BFB                                ; $70A1: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $70A1: $CD $FB $0B
     ld   [hl], $08                                ; $70A4: $36 $08
 
 jr_019_70A6:
@@ -9360,7 +9360,7 @@ jr_019_7547:
     call GetEntityTransitionCountdown             ; $7579: $CD $05 $0C
     jr   nz, jr_019_7586                          ; $757C: $20 $08
 
-    call label_BFB                                ; $757E: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $757E: $CD $FB $0B
     ld   [hl], $28                                ; $7581: $36 $28
     jp   IncrementEntityState                     ; $7583: $C3 $12 $3B
 
@@ -9518,7 +9518,7 @@ jr_019_7601:
     ld   hl, wEntitiesFlashCountdownTable         ; $764D: $21 $20 $C4
     add  hl, bc                                   ; $7650: $09
     ld   [hl], a                                  ; $7651: $77
-    call label_BFB                                ; $7652: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7652: $CD $FB $0B
     jr   nz, jr_019_765A                          ; $7655: $20 $03
 
     jp   IncrementEntityState                     ; $7657: $C3 $12 $3B

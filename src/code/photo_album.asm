@@ -98,7 +98,7 @@ func_028_4033::
 
 
 JumpTable_028_408F:
-    call label_1A22                             ; $408F: JumpTable_028_408F $CD $22 $1A
+    call func_1A22                             ; $408F: JumpTable_028_408F $CD $22 $1A
     ld   a, [$C16B]                             ; $4092: JumpTable_028_408F $FA $6B $C1
     cp   $04                                    ; $4095: JumpTable_028_408F $FE $04
     ret  nz                                     ; $4097: JumpTable_028_408F $C0
@@ -106,7 +106,7 @@ JumpTable_028_408F:
     jp   func_028_44DB                          ; $4098: JumpTable_028_408F $C3 $DB $44
 
 JumpTable_028_409B:
-    call label_1A39                             ; $409B: JumpTable_028_409B $CD $39 $1A
+    call func_1A39                             ; $409B: JumpTable_028_409B $CD $39 $1A
     ld   a, [$C16B]                             ; $409E: JumpTable_028_409B $FA $6B $C1
     cp   $04                                    ; $40A1: JumpTable_028_409B $FE $04
     ret  nz                                     ; $40A3: JumpTable_028_409B $C0
@@ -1822,7 +1822,7 @@ func_028_4BD9::
     adc  h                                      ; $4C00: $8C
     ld   h, a                                   ; $4C01: $67
     ld   b, $10                                 ; $4C02: $06 $10
-    call label_BC5                              ; $4C04: $CD $C5 $0B
+    call func_BC5                              ; $4C04: $CD $C5 $0B
     pop  hl                                     ; $4C07: $E1
     dec  c                                      ; $4C08: $0D
     jr   nz, .loop_4BE8_28                      ; $4C09: $20 $DD

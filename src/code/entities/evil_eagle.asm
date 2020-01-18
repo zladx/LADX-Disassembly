@@ -150,7 +150,7 @@ func_005_5B6B::
     jp   nz, label_005_7E6C                       ; $5B72: $C2 $6C $7E
 
     call func_005_7A3A                            ; $5B75: $CD $3A $7A
-    call label_C56                                ; $5B78: $CD $56 $0C
+    call func_C56                                ; $5B78: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $5B7B: $F0 $F0
     cp   $0E                                      ; $5B7D: $FE $0E
     jr   z, jr_005_5BB7                           ; $5B7F: $28 $36

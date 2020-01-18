@@ -2310,7 +2310,7 @@ jr_036_4D28:
     ld   a, h                                     ; $4D4A: $7C
 
 func_036_4D4B::
-    call label_C56                                ; $4D4B: $CD $56 $0C
+    call func_C56                                ; $4D4B: $CD $56 $0C
     ld   a, [hl]                                  ; $4D4E: $7E
     and  a                                        ; $4D4F: $A7
     jr   nz, jr_036_4D5C                          ; $4D50: $20 $0A
@@ -2694,7 +2694,7 @@ func_036_4F68::
 jr_036_4F7F:
     ld   c, $02                                   ; $4F7F: $0E $02
     ld   a, $36                                   ; $4F81: $3E $36
-    call label_A5F                                ; $4F83: $CD $5F $0A
+    call func_A5F                                ; $4F83: $CD $5F $0A
     ld   a, $02                                   ; $4F86: $3E $02
     call label_3DA0                               ; $4F88: $CD $A0 $3D
     ld   hl, wEntitiesPrivateState1Table          ; $4F8B: $21 $B0 $C2
@@ -2732,7 +2732,7 @@ jr_036_4FB1:
     ld   hl, $6A10                                ; $4FBA: $21 $10 $6A
     ld   c, $02                                   ; $4FBD: $0E $02
     ld   a, $36                                   ; $4FBF: $3E $36
-    call label_A5F                                ; $4FC1: $CD $5F $0A
+    call func_A5F                                ; $4FC1: $CD $5F $0A
     ld   a, $02                                   ; $4FC4: $3E $02
     call label_3DA0                               ; $4FC6: $CD $A0 $3D
     pop  af                                       ; $4FC9: $F1
@@ -2842,7 +2842,7 @@ func_036_505F::
 jr_036_506B:
     ld   c, $06                                   ; $506B: $0E $06
     ld   a, $36                                   ; $506D: $3E $36
-    call label_A5F                                ; $506F: $CD $5F $0A
+    call func_A5F                                ; $506F: $CD $5F $0A
     ld   a, [wCurrentBank]                        ; $5072: $FA $AF $DB
     push af                                       ; $5075: $F5
     ld   a, $36                                   ; $5076: $3E $36
@@ -3677,7 +3677,7 @@ GiantBuzzBlobEntityHandler::
 
 jr_036_54FE:
     call label_3EE8                               ; $54FE: $CD $E8 $3E
-    call label_C56                                ; $5501: $CD $56 $0C
+    call func_C56                                ; $5501: $CD $56 $0C
     call func_036_6A40                            ; $5504: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $5507: $F0 $F0
     cp   $03                                      ; $5509: $FE $03
@@ -4280,7 +4280,7 @@ jr_036_5855:
     call func_036_6C7E                            ; $5859: $CD $7E $6C
     ld   c, $06                                   ; $585C: $0E $06
     ld   a, $36                                   ; $585E: $3E $36
-    call label_A5F                                ; $5860: $CD $5F $0A
+    call func_A5F                                ; $5860: $CD $5F $0A
     ld   a, $06                                   ; $5863: $3E $06
 
 jr_036_5865:
@@ -4747,7 +4747,7 @@ label_036_5AE4:
     ld   de, $5ADC                                ; $5AE4: $11 $DC $5A
     call RenderAnimatedActiveEntity                               ; $5AE7: $CD $C0 $3B
     call func_036_6A40                            ; $5AEA: $CD $40 $6A
-    call label_C56                                ; $5AED: $CD $56 $0C
+    call func_C56                                ; $5AED: $CD $56 $0C
     call label_3B39                               ; $5AF0: $CD $39 $3B
     call func_036_6A62                            ; $5AF3: $CD $62 $6A
     call func_036_6C15                            ; $5AF6: $CD $15 $6C
@@ -4782,7 +4782,7 @@ jr_036_5B1C:
     ld   de, $5AFC                                ; $5B1C: $11 $FC $5A
     call RenderAnimatedActiveEntity                               ; $5B1F: $CD $C0 $3B
     call func_036_6A40                            ; $5B22: $CD $40 $6A
-    call label_C56                                ; $5B25: $CD $56 $0C
+    call func_C56                                ; $5B25: $CD $56 $0C
     call label_3B39                               ; $5B28: $CD $39 $3B
     call func_036_6A62                            ; $5B2B: $CD $62 $6A
     ld   hl, wEntitiesPrivateState1Table          ; $5B2E: $21 $B0 $C2
@@ -4851,7 +4851,7 @@ jr_036_5B73:
     ld   de, $5B42                                ; $5B7E: $11 $42 $5B
     call RenderAnimatedActiveEntity                               ; $5B81: $CD $C0 $3B
     call func_036_6A40                            ; $5B84: $CD $40 $6A
-    call label_C56                                ; $5B87: $CD $56 $0C
+    call func_C56                                ; $5B87: $CD $56 $0C
     call label_3B39                               ; $5B8A: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $5B8D: $F0 $E7
     rra                                           ; $5B8F: $1F
@@ -5536,7 +5536,7 @@ jr_036_5F92:
     call func_036_6C7E                            ; $5F92: $CD $7E $6C
     ld   c, $08                                   ; $5F95: $0E $08
     ld   a, $36                                   ; $5F97: $3E $36
-    call label_A5F                                ; $5F99: $CD $5F $0A
+    call func_A5F                                ; $5F99: $CD $5F $0A
     ld   a, $08                                   ; $5F9C: $3E $08
     call label_3DA0                               ; $5F9E: $CD $A0 $3D
     ret                                           ; $5FA1: $C9
@@ -6011,7 +6011,7 @@ func_036_6219::
     call func_036_6C7E                            ; $6231: $CD $7E $6C
     ld   c, $04                                   ; $6234: $0E $04
     ld   a, $36                                   ; $6236: $3E $36
-    call label_A5F                                ; $6238: $CD $5F $0A
+    call func_A5F                                ; $6238: $CD $5F $0A
     ld   a, $04                                   ; $623B: $3E $04
     call label_3DA0                               ; $623D: $CD $A0 $3D
     ret                                           ; $6240: $C9
@@ -7503,7 +7503,7 @@ jr_036_6A32:
     add  hl, de                                   ; $6A32: $19
     ld   c, $03                                   ; $6A33: $0E $03
     ld   a, $36                                   ; $6A35: $3E $36
-    call label_A5F                                ; $6A37: $CD $5F $0A
+    call func_A5F                                ; $6A37: $CD $5F $0A
     ld   a, $03                                   ; $6A3A: $3E $03
     call label_3DA0                               ; $6A3C: $CD $A0 $3D
     ret                                           ; $6A3F: $C9

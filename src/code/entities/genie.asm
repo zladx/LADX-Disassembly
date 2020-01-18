@@ -100,7 +100,7 @@ Data_004_409F::
     db   $00, $01, $00, $02
 
 func_004_40A3::
-    call label_C56                                ; $40A3: $CD $56 $0C
+    call func_C56                                ; $40A3: $CD $56 $0C
     call label_3B70                               ; $40A6: $CD $70 $3B
     call label_3B44                               ; $40A9: $CD $44 $3B
     jr   nc, jr_004_40C7                          ; $40AC: $30 $19
@@ -273,7 +273,7 @@ jr_004_41A9:
     call label_3B23                               ; $41A9: $CD $23 $3B
 
 jr_004_41AC:
-    call label_C56                                ; $41AC: $CD $56 $0C
+    call func_C56                                ; $41AC: $CD $56 $0C
     call label_3B70                               ; $41AF: $CD $70 $3B
     call func_004_7BE3                            ; $41B2: $CD $E3 $7B
     ldh  a, [wActiveEntityPosX]                               ; $41B5: $F0 $EE

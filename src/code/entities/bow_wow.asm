@@ -63,7 +63,7 @@ jr_005_407C:
     ret  nz                                       ; $408F: $C0
 
     call func_005_44CB                            ; $4090: $CD $CB $44
-    call label_C56                                ; $4093: $CD $56 $0C
+    call func_C56                                ; $4093: $CD $56 $0C
     ld   a, [wIsBowWowFollowingLink]              ; $4096: $FA $56 $DB
     and  a                                        ; $4099: $A7
     jr   nz, jr_005_409F                          ; $409A: $20 $03

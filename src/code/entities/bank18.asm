@@ -2413,7 +2413,7 @@ MadBatterEntityHandler::
     and  $20                                      ; $4EE8: $E6 $20
     jp   nz, label_018_7F08                       ; $4EEA: $C2 $08 $7F
 
-    call label_C56                                ; $4EED: $CD $56 $0C
+    call func_C56                                ; $4EED: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4EF0: $F0 $F0
     rst  $00                                      ; $4EF2: $C7
     dec  b                                        ; $4EF3: $05
@@ -3135,7 +3135,7 @@ jr_018_52D7:
     ld   a, $01                                   ; $52FA: $3E $01
     ldh  [hLinkDirection], a                      ; $52FC: $E0 $9E
     push bc                                       ; $52FE: $C5
-    call label_BF0                                ; $52FF: $CD $F0 $0B
+    call func_BF0                                ; $52FF: $CD $F0 $0B
     pop  bc                                       ; $5302: $C1
     ret                                           ; $5303: $C9
 
@@ -3605,7 +3605,7 @@ jr_018_558A:
     ld   a, $2F                                   ; $55CA: $3E $2F
     ld   [wActiveMusicTrack], a                   ; $55CC: $EA $68 $D3
     ld   [$C3C8], a                               ; $55CF: $EA $C8 $C3
-    call label_BFB                                ; $55D2: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $55D2: $CD $FB $0B
     ld   [hl], $50                                ; $55D5: $36 $50
     ret                                           ; $55D7: $C9
 
@@ -3617,7 +3617,7 @@ jr_018_55D8:
     ld   [wC167], a                               ; $55E1: $EA $67 $C1
     ld   a, $02                                   ; $55E4: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $55E6: $E0 $A1
-    call label_BFB                                ; $55E8: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $55E8: $CD $FB $0B
     jr   nz, jr_018_55F2                          ; $55EB: $20 $05
 
     ld   [hl], $C0                                ; $55ED: $36 $C0
@@ -3704,7 +3704,7 @@ jr_018_5612:
     ld   [wC167], a                               ; $5678: $EA $67 $C1
     ld   a, $02                                   ; $567B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $567D: $E0 $A1
-    call label_BFB                                ; $567F: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $567F: $CD $FB $0B
     jr   nz, jr_018_5698                          ; $5682: $20 $14
 
     ld   [$C3C8], a                               ; $5684: $EA $C8 $C3
@@ -3855,7 +3855,7 @@ label_018_572E:
     ld   a, $03                                   ; $576E: $3E $03
     ldh  [hLinkDirection], a                      ; $5770: $E0 $9E
     push bc                                       ; $5772: $C5
-    call label_BF0                                ; $5773: $CD $F0 $0B
+    call func_BF0                                ; $5773: $CD $F0 $0B
     pop  bc                                       ; $5776: $C1
     ret                                           ; $5777: $C9
 
@@ -5268,7 +5268,7 @@ jr_018_5FBF:
     ld   a, $00                                   ; $5FD8: $3E $00
     ldh  [hLinkDirection], a                      ; $5FDA: $E0 $9E
     push bc                                       ; $5FDC: $C5
-    call label_BF0                                ; $5FDD: $CD $F0 $0B
+    call func_BF0                                ; $5FDD: $CD $F0 $0B
     pop  bc                                       ; $5FE0: $C1
     call GetEntityTransitionCountdown             ; $5FE1: $CD $05 $0C
     ret  nz                                       ; $5FE4: $C0
@@ -5398,7 +5398,7 @@ jr_018_60C7:
     xor  $01                                      ; $60CB: $EE $01
     ldh  [hLinkDirection], a                      ; $60CD: $E0 $9E
     push bc                                       ; $60CF: $C5
-    call label_BF0                                ; $60D0: $CD $F0 $0B
+    call func_BF0                                ; $60D0: $CD $F0 $0B
     pop  bc                                       ; $60D3: $C1
     ret                                           ; $60D4: $C9
 
@@ -5470,7 +5470,7 @@ label_018_60F5:
     add  hl, de                                   ; $612E: $19
     ld   [hl], $03                                ; $612F: $36 $03
     push bc                                       ; $6131: $C5
-    call label_BF0                                ; $6132: $CD $F0 $0B
+    call func_BF0                                ; $6132: $CD $F0 $0B
     pop  bc                                       ; $6135: $C1
     jp   IncrementEntityState                     ; $6136: $C3 $12 $3B
 
@@ -5762,7 +5762,7 @@ func_018_62F5::
     ld   hl, $D739                                ; $62F5: $21 $39 $D7
     ld   [hl], $C6                                ; $62F8: $36 $C6
     ld   a, $98                                   ; $62FA: $3E $98
-    call label_B2F                                ; $62FC: $CD $2F $0B
+    call func_2BF                                ; $62FC: $CD $2F $0B
     ld   a, $28                                   ; $62FF: $3E $28
     ld   [wWarp0PositionTileIndex], a             ; $6301: $EA $16 $D4
     ld   a, $20                                   ; $6304: $3E $20
@@ -5784,7 +5784,7 @@ func_018_62F5::
     ld   a, $C6                                   ; $6322: $3E $C6
     ld   [$DDD8], a                               ; $6324: $EA $D8 $DD
     ld   a, $18                                   ; $6327: $3E $18
-    call label_91D                                ; $6329: $CD $1D $09
+    call func_91D                                ; $6329: $CD $1D $09
     pop  bc                                       ; $632C: $C1
 
 jr_018_632D:
@@ -6083,7 +6083,7 @@ BlainoEntityHandler::
     jr   nz, jr_018_64EA                          ; $64E2: $20 $06
 
     inc  [hl]                                     ; $64E4: $34
-    call label_BFB                                ; $64E5: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $64E5: $CD $FB $0B
     ld   [hl], $20                                ; $64E8: $36 $20
 
 jr_018_64EA:
@@ -6203,7 +6203,7 @@ func_018_6596::
     jr   jr_018_65B8                              ; $659D: $18 $19
 
 jr_018_659F:
-    call label_BFB                                ; $659F: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $659F: $CD $FB $0B
     jr   nz, jr_018_65CE                          ; $65A2: $20 $2A
 
     ld   hl, wEntitiesPrivateState1Table          ; $65A4: $21 $B0 $C2
@@ -6510,7 +6510,7 @@ jr_018_6729:
 label_018_672A:
     xor  a                                        ; $672A: $AF
     ld   [$D205], a                               ; $672B: $EA $05 $D2
-    call label_BFB                                ; $672E: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $672E: $CD $FB $0B
     call GetRandomByte                            ; $6731: $CD $0D $28
     and  $0F                                      ; $6734: $E6 $0F
     add  $0C                                      ; $6736: $C6 $0C
@@ -7949,7 +7949,7 @@ label_018_6F1F:
     ld   de, $6F17                                ; $6F1F: $11 $17 $6F
     call RenderAnimatedActiveEntity                               ; $6F22: $CD $C0 $3B
     call func_018_7DE8                            ; $6F25: $CD $E8 $7D
-    call label_C56                                ; $6F28: $CD $56 $0C
+    call func_C56                                ; $6F28: $CD $56 $0C
     ldh  a, [hFrameCounter]                       ; $6F2B: $F0 $E7
     rra                                           ; $6F2D: $1F
     rra                                           ; $6F2E: $1F
@@ -8388,7 +8388,7 @@ label_018_71A3:
     ld   de, $719B                                ; $71A3: $11 $9B $71
     call RenderAnimatedActiveEntity                               ; $71A6: $CD $C0 $3B
     call func_018_7DE8                            ; $71A9: $CD $E8 $7D
-    call label_C56                                ; $71AC: $CD $56 $0C
+    call func_C56                                ; $71AC: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $71AF: $F0 $F0
     rst  $00                                      ; $71B1: $C7
     inc  e                                        ; $71B2: $1C
@@ -8761,7 +8761,7 @@ jr_018_737D:
 
 jr_018_737E:
     call func_018_7DE8                            ; $737E: $CD $E8 $7D
-    call label_C56                                ; $7381: $CD $56 $0C
+    call func_C56                                ; $7381: $CD $56 $0C
     call label_3B70                               ; $7384: $CD $70 $3B
     ldh  a, [hActiveEntityState]                  ; $7387: $F0 $F0
     cp   $05                                      ; $7389: $FE $05
@@ -9889,7 +9889,7 @@ jr_018_79F0:
     ld   hl, wEntitiesStateTable                  ; $7A02: $21 $90 $C2
     add  hl, bc                                   ; $7A05: $09
     ld   [hl], $01                                ; $7A06: $36 $01
-    call label_BFB                                ; $7A08: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7A08: $CD $FB $0B
     ld   [hl], $80                                ; $7A0B: $36 $80
     ld   hl, wEntitiesPosXTable                         ; $7A0D: $21 $00 $C2
     add  hl, bc                                   ; $7A10: $09
@@ -9944,7 +9944,7 @@ label_018_7A4B:
     jp   label_3B7B                               ; $7A5A: $C3 $7B $3B
 
 label_018_7A5D:
-    call label_BFB                                ; $7A5D: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $7A5D: $CD $FB $0B
     jr   nz, jr_018_7AB9                          ; $7A60: $20 $57
 
     ld   hl, wEntitiesPosXTable                         ; $7A62: $21 $00 $C2
@@ -10089,7 +10089,7 @@ label_018_7B1D:
 
     push bc                                       ; $7B25: $C5
     ld   a, $18                                   ; $7B26: $3E $18
-    call label_91D                                ; $7B28: $CD $1D $09
+    call func_91D                                ; $7B28: $CD $1D $09
     pop  bc                                       ; $7B2B: $C1
 
 jr_018_7B2C:

@@ -118,7 +118,7 @@ CrystalSwitchEntityHandler::
     ld   de, Data_015_4320                        ; $4332: $11 $20 $43
     call RenderAnimatedActiveEntity               ; $4335: $CD $C0 $3B
     call func_015_7B0D                            ; $4338: $CD $0D $7B
-    call label_C56                                ; $433B: $CD $56 $0C
+    call func_C56                                ; $433B: $CD $56 $0C
     call label_3B70                               ; $433E: $CD $70 $3B
     call func_015_7A6E                            ; $4341: $CD $6E $7A
     call label_3B23                               ; $4344: $CD $23 $3B
@@ -207,7 +207,7 @@ label_015_43CA:
     ld   de, Data_015_43AE                        ; $43CA: $11 $AE $43
     call RenderAnimatedActiveEntity               ; $43CD: $CD $C0 $3B
     call func_015_7B0D                            ; $43D0: $CD $0D $7B
-    call label_C56                                ; $43D3: $CD $56 $0C
+    call func_C56                                ; $43D3: $CD $56 $0C
     call label_3B39                               ; $43D6: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $43D9: $F0 $E7
     rra                                           ; $43DB: $1F
@@ -650,7 +650,7 @@ jr_015_469C:
     and  $08                                      ; $46A2: $E6 $08
     ld   [wC120], a                               ; $46A4: $EA $20 $C1
     push bc                                       ; $46A7: $C5
-    call label_BF0                                ; $46A8: $CD $F0 $0B
+    call func_BF0                                ; $46A8: $CD $F0 $0B
     pop  bc                                       ; $46AB: $C1
     call ResetSpinAttack                          ; $46AC: $CD $AF $0C
     ld   [wSwordAnimationState], a                ; $46AF: $EA $37 $C1
@@ -761,7 +761,7 @@ func_015_4750::
 jr_015_475C:
     res  7, [hl]                                  ; $475C: $CB $BE
     call IncrementEntityState                     ; $475E: $CD $12 $3B
-    call label_BFB                                ; $4761: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $4761: $CD $FB $0B
     ld   [hl], $30                                ; $4764: $36 $30
     ld   hl, wEntitiesUnknowTableH                ; $4766: $21 $30 $C4
     add  hl, bc                                   ; $4769: $09
@@ -851,7 +851,7 @@ jr_015_47DC:
     jp   ClearEntitySpeed                         ; $47E0: $C3 $7F $3D
 
 jr_015_47E3:
-    call label_BFB                                ; $47E3: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $47E3: $CD $FB $0B
     jr   nz, jr_015_47F3                          ; $47E6: $20 $0B
 
     call GetEntityTransitionCountdown             ; $47E8: $CD $05 $0C
@@ -1118,7 +1118,7 @@ func_015_4977::
     jr   nz, jr_015_4990                          ; $497D: $20 $11
 
 label_015_497F:
-    call label_BFB                                ; $497F: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $497F: $CD $FB $0B
     call GetRandomByte                            ; $4982: $CD $0D $28
     and  $1F                                      ; $4985: $E6 $1F
     add  $20                                      ; $4987: $C6 $20
@@ -1346,7 +1346,7 @@ PokeyEntityHandler::
     pop  bc                                       ; $4C48: $C1
 
 jr_015_4C49:
-    call label_C56                                ; $4C49: $CD $56 $0C
+    call func_C56                                ; $4C49: $CD $56 $0C
     call label_3B39                               ; $4C4C: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $4C4F: $F0 $E7
     rra                                           ; $4C51: $1F
@@ -1591,7 +1591,7 @@ label_015_4DB5:
     ld   de, Data_015_4D9D                        ; $4DC2: $11 $9D $4D
     call RenderAnimatedActiveEntity               ; $4DC5: $CD $C0 $3B
     call func_015_7B0D                            ; $4DC8: $CD $0D $7B
-    call label_C56                                ; $4DCB: $CD $56 $0C
+    call func_C56                                ; $4DCB: $CD $56 $0C
     call label_3B70                               ; $4DCE: $CD $70 $3B
     ld   a, [$DBC7]                               ; $4DD1: $FA $C7 $DB
     push af                                       ; $4DD4: $F5
@@ -2249,7 +2249,7 @@ jr_015_51D0:
 FinalNightmareForm2Handler::
     call func_015_572B                            ; $51DF: $CD $2B $57
     call func_015_7B0D                            ; $51E2: $CD $0D $7B
-    call label_C56                                ; $51E5: $CD $56 $0C
+    call func_C56                                ; $51E5: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $51E8: $F0 $F0
     JP_TABLE                                      ; $51EA
 ._00 dw func_015_51FF                             ; $51EB
@@ -3626,7 +3626,7 @@ label_015_5DED:
     ld   de, Data_015_5DD9                        ; $5DF6: $11 $D9 $5D
     call RenderAnimatedActiveEntity               ; $5DF9: $CD $C0 $3B
     call func_015_7B0D                            ; $5DFC: $CD $0D $7B
-    call label_C56                                ; $5DFF: $CD $56 $0C
+    call func_C56                                ; $5DFF: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $5E02: $F0 $F0
     cp   $04                                      ; $5E04: $FE $04
     jr   nz, jr_015_5E24                          ; $5E06: $20 $1C
@@ -4038,7 +4038,7 @@ func_015_60C1::
 func_015_60D4::
     call func_015_5FD1                            ; $60D4: $CD $D1 $5F
     call func_015_6245                            ; $60D7: $CD $45 $62
-    call label_C56                                ; $60DA: $CD $56 $0C
+    call func_C56                                ; $60DA: $CD $56 $0C
     call label_3D8A                               ; $60DD: $CD $8A $3D
     call func_015_7B0D                            ; $60E0: $CD $0D $7B
     xor  a                                        ; $60E3: $AF
@@ -4395,7 +4395,7 @@ jr_015_63F2:
 
 jr_015_63F5:
     call func_015_7B0D                            ; $63F5: $CD $0D $7B
-    call label_C56                                ; $63F8: $CD $56 $0C
+    call func_C56                                ; $63F8: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $63FB: $F0 $F0
     cp   $09                                      ; $63FD: $FE $09
     jr   nc, jr_015_6425                          ; $63FF: $30 $24
@@ -4563,7 +4563,7 @@ func_015_65A6::
     call GetEntityTransitionCountdown             ; $65AB: $CD $05 $0C
     jr   nz, jr_015_65BB                          ; $65AE: $20 $0B
 
-    call label_BFB                                ; $65B0: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $65B0: $CD $FB $0B
     ld   [hl], $4C                                ; $65B3: $36 $4C
     call func_015_655D                            ; $65B5: $CD $5D $65
     jp   IncrementEntityState                     ; $65B8: $C3 $12 $3B
@@ -4628,7 +4628,7 @@ Data_015_6610::
     db   $10, $18, $10, $F0, $E8, $F0, $10, $18
 
 func_015_6618::
-    call label_BFB                                ; $6618: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $6618: $CD $FB $0B
     jr   nz, jr_015_6628                          ; $661B: $20 $0B
 
     ld   [$D221], a                               ; $661D: $EA $21 $D2
@@ -5097,7 +5097,7 @@ func_015_68E7::
     ld   hl, wEntitiesUnknowTableH                ; $68FE: $21 $30 $C4
     add  hl, bc                                   ; $6901: $09
     ld   [hl], $C0                                ; $6902: $36 $C0
-    call label_BFB                                ; $6904: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $6904: $CD $FB $0B
     ld   [hl], $90                                ; $6907: $36 $90
     xor  a                                        ; $6909: $AF
     ld   [$D223], a                               ; $690A: $EA $23 $D2
@@ -5637,7 +5637,7 @@ jr_015_6E9B:
     ld   [hl], $50                                ; $6EB3: $36 $50
 
 jr_015_6EB5:
-    call label_C56                                ; $6EB5: $CD $56 $0C
+    call func_C56                                ; $6EB5: $CD $56 $0C
     ld   hl, wEntitiesHealthTable                 ; $6EB8: $21 $60 $C3
     add  hl, bc                                   ; $6EBB: $09
     ld   a, [hl]                                  ; $6EBC: $7E
@@ -5677,7 +5677,7 @@ jr_015_6EEA:
     ld   [$D210], a                               ; $6EEA: $EA $10 $D2
     ld   a, $00                                   ; $6EED: $3E $00
     call SetEntitySpriteVariant                   ; $6EEF: $CD $0C $3B
-    call label_BFB                                ; $6EF2: $CD $FB $0B
+    call IsEntityDropTimerZero                                ; $6EF2: $CD $FB $0B
     jr   nz, jr_015_6F0B                          ; $6EF5: $20 $14
 
     call GetRandomByte                            ; $6EF7: $CD $0D $28
@@ -6425,7 +6425,7 @@ jr_015_746A:
     ld   a, $9D                                   ; $7492: $3E $9D
     ld   [$DDD8], a                               ; $7494: $EA $D8 $DD
     ld   a, $15                                   ; $7497: $3E $15
-    call label_91D                                ; $7499: $CD $1D $09
+    call func_91D                                ; $7499: $CD $1D $09
     pop  bc                                       ; $749C: $C1
 
 jr_015_749D:
@@ -7967,7 +7967,7 @@ jr_015_7D94:
     ld   a, $03                                   ; $7DA5: $3E $03
     ld   [wC16C], a                               ; $7DA7: $EA $6C $C1
     push bc                                       ; $7DAA: $C5
-    call label_1A22                               ; $7DAB: $CD $22 $1A
+    call func_1A22                               ; $7DAB: $CD $22 $1A
     pop  bc                                       ; $7DAE: $C1
 
 jr_015_7DAF:

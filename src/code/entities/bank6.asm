@@ -2760,8 +2760,8 @@ jr_006_5102:
     ldh  a, [wActiveEntityPosY]                   ; $510C: $F0 $EC
     add  $0A                                      ; $510E: $C6 $0A
     ldh  [hScratch1], a                           ; $5110: $E0 $D8
-    ld   a, $0B                                   ; $5112: $3E $0B
-    call label_CC7                                ; $5114: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_PEGASUS_DUST           ; $5112: $3E $0B
+    call AddTranscientVfx                         ; $5114: $CD $C7 $0C
 
 jr_006_5117:
     jr   jr_006_50BA                              ; $5117: $18 $A1
@@ -3278,8 +3278,8 @@ jr_006_53F9:
     ld   hl, wEntitiesPhysicsFlagsTable                ; $5402: $21 $40 $C3
     add  hl, de                                   ; $5405: $19
     ld   [hl], $C4                                ; $5406: $36 $C4
-    ld   a, $02                                   ; $5408: $3E $02
-    call label_CC7                                ; $540A: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $5408: $3E $02
+    call AddTranscientVfx                         ; $540A: $CD $C7 $0C
     ld   a, $29                                   ; $540D: $3E $29
     ldh  [hNoiseSfx], a                           ; $540F: $E0 $F4
 
@@ -3756,8 +3756,8 @@ jr_006_568A:
 
 jr_006_56BB:
     ldh  [hScratch1], a                           ; $56BB: $E0 $D8
-    ld   a, $02                                   ; $56BD: $3E $02
-    call label_CC7                                ; $56BF: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $56BD: $3E $02
+    call AddTranscientVfx                         ; $56BF: $CD $C7 $0C
     ld   a, $13                                   ; $56C2: $3E $13
     ldh  [hNoiseSfx], a                           ; $56C4: $E0 $F4
 
@@ -8306,8 +8306,8 @@ label_006_702A:
     ldh  [hScratch1], a                           ; $7033: $E0 $D8
 
 label_006_7035:
-    ld   a, $02                                   ; $7035: $3E $02
-    call label_CC7                                ; $7037: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $7035: $3E $02
+    call AddTranscientVfx                         ; $7037: $CD $C7 $0C
     ld   a, $13                                   ; $703A: $3E $13
     ldh  [hNoiseSfx], a                           ; $703C: $E0 $F4
     ret                                           ; $703E: $C9

@@ -178,9 +178,9 @@ func_005_6432::
     ldh  a, [wActiveEntityPosY]                   ; $6432: $F0 $EC
     sub  $10                                      ; $6434: $D6 $10
     ldh  [hScratch1], a                           ; $6436: $E0 $D8
-    ld   a, $02                                   ; $6438: $3E $02
-    call label_CC7                                ; $643A: $CD $C7 $0C
-    ld   hl, $C520                                ; $643D: $21 $20 $C5
+    ld   a, TRANSCIENT_VFX_POOF                   ; $6438: $3E $02
+    call AddTranscientVfx                         ; $643A: $CD $C7 $0C
+    ld   hl, wTranscientVfxCountdownTable                                ; $643D: $21 $20 $C5
     add  hl, de                                   ; $6440: $19
     ld   [hl], $0F                                ; $6441: $36 $0F
 
@@ -347,8 +347,8 @@ jr_005_6522:
     ldh  [hScratch0], a                           ; $6529: $E0 $D7
     ldh  a, [wActiveEntityPosY]                   ; $652B: $F0 $EC
     ldh  [hScratch1], a                           ; $652D: $E0 $D8
-    ld   a, $0A                                   ; $652F: $3E $0A
-    jp   label_CC7                                ; $6531: $C3 $C7 $0C
+    ld   a, TRANSCIENT_VFX_LAVA_SPLASH            ; $652F: $3E $0A
+    jp   AddTranscientVfx                         ; $6531: $C3 $C7 $0C
 
 func_005_6534::
     call GetEntityTransitionCountdown             ; $6534: $CD $05 $0C

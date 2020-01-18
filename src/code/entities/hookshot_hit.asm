@@ -62,7 +62,7 @@ jr_003_69F8:
     add  $10                                      ; $6A10: $C6 $10
     ldh  [hScratch1], a                           ; $6A12: $E0 $D8
     ld   a, $08                                   ; $6A14: $3E $08
-    call label_CC7                                ; $6A16: $CD $C7 $0C
+    call AddTranscientVfx                         ; $6A16: $CD $C7 $0C
     ld   a, $13                                   ; $6A19: $3E $13
     ldh  [hNoiseSfx], a                            ; $6A1B: $E0 $F4
 

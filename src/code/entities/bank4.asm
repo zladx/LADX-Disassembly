@@ -1885,8 +1885,8 @@ func_004_5A05::
     ldh  [hScratch0], a                           ; $5A0A: $E0 $D7
     ldh  a, [wActiveEntityPosY]                   ; $5A0C: $F0 $EC
     ldh  [hScratch1], a                           ; $5A0E: $E0 $D8
-    ld   a, $02                                   ; $5A10: $3E $02
-    call label_CC7                                ; $5A12: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $5A10: $3E $02
+    call AddTranscientVfx                         ; $5A12: $CD $C7 $0C
     ld   a, $13                                   ; $5A15: $3E $13
     ldh  [hNoiseSfx], a                           ; $5A17: $E0 $F4
     ret                                           ; $5A19: $C9
@@ -3214,8 +3214,8 @@ label_004_62F6:
     ldh  [hScratch1], a                           ; $62F8: $E0 $D8
     ldh  a, [wActiveEntityPosX]                   ; $62FA: $F0 $EE
     ldh  [hScratch0], a                           ; $62FC: $E0 $D7
-    ld   a, $01                                   ; $62FE: $3E $01
-    call label_CC7                                ; $6300: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $62FE: $3E $01
+    call AddTranscientVfx                         ; $6300: $CD $C7 $0C
     ld   a, JINGLE_WATER_DIVE                     ; $6303: $3E $0E
     ldh  [hJingle], a                             ; $6305: $E0 $F2
 
@@ -4777,8 +4777,8 @@ label_004_6C20:
     ldh  [hScratch0], a                           ; $6C22: $E0 $D7
     ldh  a, [wActiveEntityPosY]                   ; $6C24: $F0 $EC
     ldh  [hScratch1], a                           ; $6C26: $E0 $D8
-    ld   a, $05                                   ; $6C28: $3E $05
-    jp   label_CC7                                ; $6C2A: $C3 $C7 $0C
+    ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $6C28: $3E $05
+    jp   AddTranscientVfx                         ; $6C2A: $C3 $C7 $0C
 
 Data_004_6C2D::
     db   $70, $03, $70, $23, $78, $03, $7A, $03, $74, $03, $76, $03, $7C, $03, $7E, $03

@@ -701,13 +701,13 @@ label_002_45AC:
 
 jr_002_45AD:
     ldh  a, [hLinkPositionY]                      ; $45AD: $F0 $99
-    ldh  [hScratch1], a                               ; $45AF: $E0 $D8
+    ldh  [hScratch1], a                           ; $45AF: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $45B1: $F0 $98
-    ldh  [hScratch0], a                               ; $45B3: $E0 $D7
+    ldh  [hScratch0], a                           ; $45B3: $E0 $D7
     ld   a, JINGLE_WATER_DIVE                     ; $45B5: $3E $0E
     ldh  [hJingle], a                             ; $45B7: $E0 $F2
-    ld   a, $0C                                   ; $45B9: $3E $0C
-    jp   label_CC7                                ; $45BB: $C3 $C7 $0C
+    ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $45B9: $3E $0C
+    jp   AddTranscientVfx                         ; $45BB: $C3 $C7 $0C
 
 Data_002_45BE::
     db   $00, $00, $08, $06, $00, $06, $00, $00, $08, $0A, $00, $0A, $00, $00, $08, $10
@@ -2901,9 +2901,9 @@ TryOpenLockedDoor::
     ldh  [hScratch0], a                               ; $53EB: $E0 $D7
     ldh  a, [hSwordIntersectedAreaY]                               ; $53ED: $F0 $CD
     add  $10                                      ; $53EF: $C6 $10
-    ldh  [hScratch1], a                               ; $53F1: $E0 $D8
-    ld   a, $02                                   ; $53F3: $3E $02
-    call label_CC7                                ; $53F5: $CD $C7 $0C
+    ldh  [hScratch1], a                           ; $53F1: $E0 $D8
+    ld   a, TRANSCIENT_VFX_POOF                   ; $53F3: $3E $02
+    call AddTranscientVfx                         ; $53F5: $CD $C7 $0C
     jp   .return                                  ; $53F8: $C3 $1D $54
 
 .spawnPushedBlock
@@ -3073,7 +3073,7 @@ jr_002_54E4:
 jr_002_54E8:
     ld   a, c                                     ; $54E8: $79
     ld   [wLinkWalkingFrameCount], a                               ; $54E9: $EA $23 $C1
-    ld   hl, $C510                                ; $54EC: $21 $10 $C5
+    ld   hl, wTranscientVfxTypeTable              ; $54EC: $21 $10 $C5
     add  hl, bc                                   ; $54EF: $09
     ld   a, [hl]                                  ; $54F0: $7E
     and  a                                        ; $54F1: $A7
@@ -3169,7 +3169,7 @@ func_002_5567::
     and  a                                        ; $556B: $A7
     jr   nz, jr_002_557C                          ; $556C: $20 $0E
 
-    ld   hl, $C520                                ; $556E: $21 $20 $C5
+    ld   hl, wTranscientVfxCountdownTable                                ; $556E: $21 $20 $C5
     add  hl, bc                                   ; $5571: $09
     ld   a, [hl]                                  ; $5572: $7E
     and  a                                        ; $5573: $A7
@@ -3450,7 +3450,7 @@ jr_002_56B8:
     ld   a, e                                     ; $56E1: $7B
     add  $08                                      ; $56E2: $C6 $08
     ld   [wRequests], a                           ; $56E4: $EA $00 $D6
-    ld   hl, $C520                                ; $56E7: $21 $20 $C5
+    ld   hl, wTranscientVfxCountdownTable                                ; $56E7: $21 $20 $C5
     add  hl, bc                                   ; $56EA: $09
     ld   a, [hl]                                  ; $56EB: $7E
     cp   $08                                      ; $56EC: $FE $08
@@ -3533,14 +3533,14 @@ jr_002_5743:
     ld   hl, $5756                                ; $576A: $21 $56 $57
     add  hl, de                                   ; $576D: $19
     ld   a, [hl]                                  ; $576E: $7E
-    ld   hl, $C530                                ; $576F: $21 $30 $C5
+    ld   hl, wTranscientVfxPosXTable                                ; $576F: $21 $30 $C5
     add  hl, bc                                   ; $5772: $09
     add  [hl]                                     ; $5773: $86
     ld   [hl], a                                  ; $5774: $77
     ld   hl, $575A                                ; $5775: $21 $5A $57
     add  hl, de                                   ; $5778: $19
     ld   a, [hl]                                  ; $5779: $7E
-    ld   hl, $C540                                ; $577A: $21 $40 $C5
+    ld   hl, wTranscientVfxPosYTable                                ; $577A: $21 $40 $C5
     add  hl, bc                                   ; $577D: $09
     add  [hl]                                     ; $577E: $86
     ld   [hl], a                                  ; $577F: $77
@@ -3768,7 +3768,7 @@ jr_002_58A1:
     cp   $04                                      ; $58A9: $FE $04
     jr   nz, jr_002_58BB                          ; $58AB: $20 $0E
 
-    ld   hl, $C510                                ; $58AD: $21 $10 $C5
+    ld   hl, wTranscientVfxTypeTable              ; $58AD: $21 $10 $C5
     add  hl, bc                                   ; $58B0: $09
     ld   a, [hl]                                  ; $58B1: $7E
     cp   $03                                      ; $58B2: $FE $03
@@ -3793,14 +3793,14 @@ jr_002_58C2:
     jp   label_002_583A                           ; $58CD: $C3 $3A $58
 
 func_002_58D0::
-    ld   hl, $C540                                ; $58D0: $21 $40 $C5
+    ld   hl, wTranscientVfxPosYTable                                ; $58D0: $21 $40 $C5
     add  hl, bc                                   ; $58D3: $09
     ld   a, [hl]                                  ; $58D4: $7E
     ldh  [hScratch1], a                               ; $58D5: $E0 $D8
     cp   $88                                      ; $58D7: $FE $88
     jr   nc, func_002_58E6                        ; $58D9: $30 $0B
 
-    ld   hl, $C530                                ; $58DB: $21 $30 $C5
+    ld   hl, wTranscientVfxPosXTable                                ; $58DB: $21 $30 $C5
     add  hl, bc                                   ; $58DE: $09
     ld   a, [hl]                                  ; $58DF: $7E
     ldh  [hScratch2], a                               ; $58E0: $E0 $D9
@@ -3808,7 +3808,7 @@ func_002_58D0::
     jr   c, jr_002_58EC                           ; $58E4: $38 $06
 
 func_002_58E6::
-    ld   hl, $C510                                ; $58E6: $21 $10 $C5
+    ld   hl, wTranscientVfxTypeTable              ; $58E6: $21 $10 $C5
     add  hl, bc                                   ; $58E9: $09
     xor  a                                        ; $58EA: $AF
     ld   [hl], a                                  ; $58EB: $77
@@ -3861,13 +3861,13 @@ func_002_5926::
     ldh  a, [hLinkPositionY]                      ; $5926: $F0 $99
 
 func_002_5928::
-    ldh  [hScratch1], a                               ; $5928: $E0 $D8
+    ldh  [hScratch1], a                           ; $5928: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $592A: $F0 $98
-    ldh  [hScratch0], a                               ; $592C: $E0 $D7
+    ldh  [hScratch0], a                           ; $592C: $E0 $D7
     ld   a, JINGLE_WATER_DIVE                     ; $592E: $3E $0E
     ldh  [hJingle], a                             ; $5930: $E0 $F2
-    ld   a, $01                                   ; $5932: $3E $01
-    jp   label_CC7                                ; $5934: $C3 $C7 $0C
+    ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $5932: $3E $01
+    jp   AddTranscientVfx                         ; $5934: $C3 $C7 $0C
 
     cp   $FD                                      ; $5937: $FE $FD
     ei                                            ; $5939: $FB
@@ -6498,12 +6498,13 @@ jr_002_700D:
     jr   z, jr_002_703E                           ; $7013: $28 $29
 
 jr_002_7015:
+    ; Schedule deep rumble animation
     ldh  a, [hLinkPositionY]                      ; $7015: $F0 $99
     ldh  [hScratch1], a                               ; $7017: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $7019: $F0 $98
     ldh  [hScratch0], a                               ; $701B: $E0 $D7
-    ld   a, $09                                   ; $701D: $3E $09
-    call label_CC7                                ; $701F: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_RUMBLE                 ; $701D: $3E $09
+    call AddTranscientVfx                         ; $701F: $CD $C7 $0C
     ld   [hl], $DF                                ; $7022: $36 $DF
     ld   a, $DF                                   ; $7024: $3E $DF
     ld   [wC111], a                               ; $7026: $EA $11 $C1

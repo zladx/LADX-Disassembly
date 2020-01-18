@@ -259,8 +259,8 @@ jr_005_69CB:
     ldh  a, [wActiveEntityPosY]                   ; $69E0: $F0 $EC
     add  [hl]                                     ; $69E2: $86
     ldh  [hScratch1], a                           ; $69E3: $E0 $D8
-    ld   a, $02                                   ; $69E5: $3E $02
-    call label_CC7                                ; $69E7: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $69E5: $3E $02
+    call AddTranscientVfx                         ; $69E7: $CD $C7 $0C
     xor  a                                        ; $69EA: $AF
 
 jr_005_69EB:

@@ -4828,9 +4828,9 @@ jr_003_6422:
     ldh  a, [hLinkPositionY]                      ; $6430: $F0 $99
     add  [hl]                                     ; $6432: $86
     ldh  [hScratch1], a                           ; $6433: $E0 $D8
-    ld   a, $07                                   ; $6435: $3E $07
-    call label_CC7                                ; $6437: $CD $C7 $0C
-    ld   hl, $C520                                ; $643A: $21 $20 $C5
+    ld   a, TRANSCIENT_VFX_MOVING_SPARKLE         ; $6435: $3E $07
+    call AddTranscientVfx                         ; $6437: $CD $C7 $0C
+    ld   hl, wTranscientVfxCountdownTable                                ; $643A: $21 $20 $C5
     add  hl, de                                   ; $643D: $19
     ld   [hl], $22                                ; $643E: $36 $22
     ld   hl, $C590                                ; $6440: $21 $90 $C5
@@ -6167,8 +6167,8 @@ CheckLinkCollisionWithProjectile::
     ldh  [hScratch1], a                           ; $6C36: $E0 $D8
     ldh  a, [wActiveEntityPosX]                   ; $6C38: $F0 $EE
     ldh  [hScratch0], a                           ; $6C3A: $E0 $D7
-    ld   a, $05                                   ; $6C3C: $3E $05
-    jp   label_CC7                                ; $6C3E: $C3 $C7 $0C
+    ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $6C3C: $3E $05
+    jp   AddTranscientVfx                         ; $6C3E: $C3 $C7 $0C
 
 .laserBeamEnd
 
@@ -7338,8 +7338,8 @@ jr_003_729D:
     add  hl, bc                                   ; $72AC: $09
     sub  [hl]                                     ; $72AD: $96
     ldh  [hScratch1], a                           ; $72AE: $E0 $D8
-    ld   a, $02                                   ; $72B0: $3E $02
-    jp   label_CC7                                ; $72B2: $C3 $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $72B0: $3E $02
+    jp   AddTranscientVfx                         ; $72B2: $C3 $C7 $0C
 
 jr_003_72B5:
     ld   e, a                                     ; $72B5: $5F
@@ -8557,8 +8557,8 @@ label_003_795C:
     ldh  [hScratch1], a                           ; $7968: $E0 $D8
     ld   a, $0E                                   ; $796A: $3E $0E
     ldh  [hJingle], a                             ; $796C: $E0 $F2
-    ld   a, $01                                   ; $796E: $3E $01
-    call label_CC7                                ; $7970: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $796E: $3E $01
+    call AddTranscientVfx                         ; $7970: $CD $C7 $0C
 
 jr_003_7973:
     ldh  a, [hScratch3]                           ; $7973: $F0 $DA

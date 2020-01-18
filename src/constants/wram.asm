@@ -633,7 +633,29 @@ wAlternateBackgroundEnabled:: ; C500
   ds 1
 
 ; Unlabeled
-ds $A6
+ds $C510 - $C501
+
+wTranscientVfxTypeTable:: ; C510
+  ; Temporary visual effects displayed as non-interactive sprites.
+  ; Values are filled starting from the end of the array.
+  ; See TRANSCIENT_VFX_* constants for possible values.
+  ds $10
+
+wTranscientVfxCountdownTable:: ; C520
+  ; Countdown for the transcient visual effects.
+  ; When reaching 0, the visual effect gets removed.
+  ds $10
+
+wTranscientVfxPosXTable:: ; C530
+  ; Transcient visual effects X position
+  ds $10
+
+wTranscientVfxPosYTable:: ; C540
+  ; Transcient visual effects Y position
+  ds $10
+
+; Unlabeled
+ds $C5A7 - $C550
 
 wBossAgonySFXCountdown:: ; C5A7
   ; When reaching zero, play the WAVE_SFX_BOSS_AGONY sound effect

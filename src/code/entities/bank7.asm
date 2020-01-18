@@ -1232,8 +1232,8 @@ jr_007_4820:
     ldh  [hScratch0], a                           ; $482C: $E0 $D7
     ld   a, $0E                                   ; $482E: $3E $0E
     ldh  [hJingle], a                             ; $4830: $E0 $F2
-    ld   a, $01                                   ; $4832: $3E $01
-    call label_CC7                                ; $4834: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $4832: $3E $01
+    call AddTranscientVfx                         ; $4834: $CD $C7 $0C
     call GetEntityTransitionCountdown             ; $4837: $CD $05 $0C
 
 jr_007_483A:
@@ -1372,8 +1372,8 @@ func_007_48FD::
     ldh  [hScratch1], a                           ; $48FF: $E0 $D8
     ldh  a, [wActiveEntityPosX]                   ; $4901: $F0 $EE
     ldh  [hScratch0], a                           ; $4903: $E0 $D7
-    ld   a, $01                                   ; $4905: $3E $01
-    call label_CC7                                ; $4907: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $4905: $3E $01
+    call AddTranscientVfx                         ; $4907: $CD $C7 $0C
     ld   a, $0E                                   ; $490A: $3E $0E
     ldh  [hJingle], a                             ; $490C: $E0 $F2
     ret                                           ; $490E: $C9
@@ -2788,9 +2788,9 @@ jr_007_51F2:
     ldh  [hScratch1], a                           ; $5265: $E0 $D8
     ld   a, $2F                                   ; $5267: $3E $2F
     ldh  [hJingle], a                             ; $5269: $E0 $F2
-    ld   a, $02                                   ; $526B: $3E $02
-    call label_CC7                                ; $526D: $CD $C7 $0C
-    ld   hl, $C520                                ; $5270: $21 $20 $C5
+    ld   a, TRANSCIENT_VFX_POOF                   ; $526B: $3E $02
+    call AddTranscientVfx                         ; $526D: $CD $C7 $0C
+    ld   hl, wTranscientVfxCountdownTable                                ; $5270: $21 $20 $C5
     add  hl, de                                   ; $5273: $19
     ld   [hl], $0F                                ; $5274: $36 $0F
     call func_007_7EA4                            ; $5276: $CD $A4 $7E
@@ -9623,8 +9623,8 @@ label_007_7F36:
     ldh  [hScratch0], a                           ; $7F3B: $E0 $D7
     ldh  a, [wActiveEntityPosY]                   ; $7F3D: $F0 $EC
     ldh  [hScratch1], a                           ; $7F3F: $E0 $D8
-    ld   a, $02                                   ; $7F41: $3E $02
-    call label_CC7                                ; $7F43: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $7F41: $3E $02
+    call AddTranscientVfx                         ; $7F43: $CD $C7 $0C
     ld   a, $13                                   ; $7F46: $3E $13
     ldh  [hNoiseSfx], a                           ; $7F48: $E0 $F4
     ret                                           ; $7F4A: $C9

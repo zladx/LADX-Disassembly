@@ -1181,8 +1181,8 @@ label_005_7570:
     ldh  [hScratch0], a                           ; $7575: $E0 $D7
     ldh  a, [wActiveEntityPosY]                   ; $7577: $F0 $EC
     ldh  [hScratch1], a                           ; $7579: $E0 $D8
-    ld   a, $02                                   ; $757B: $3E $02
-    call label_CC7                                ; $757D: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $757B: $3E $02
+    call AddTranscientVfx                         ; $757D: $CD $C7 $0C
     ld   a, $13                                   ; $7580: $3E $13
     ldh  [hNoiseSfx], a                           ; $7582: $E0 $F4
     ret                                           ; $7584: $C9

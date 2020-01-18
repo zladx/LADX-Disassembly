@@ -871,48 +871,59 @@ CopyLinkFinalPositionToPosition::
     ldh  [hLinkPositionY], a
     ret
 
-label_CC7::
+; Display a temporary visual effect as a non-interacting sprite.
+; The effect is automatically removed after a while.
+;
+; Inputs:
+;   a           visual effect type
+;   hScratch0   effect X position
+;   hScratch1   effect Y position
+AddTranscientVfx::
     push af
     ld   e, $0F
     ld   d, $00
 
+    ; Find index of the last zero in the transcient VFXs table
 .loop
-    ld   hl, $C510
+    ld   hl, wTranscientVfxTypeTable
     add  hl, de
     ld   a, [hl]
     and  a
     jr   z, .jp_CEC
     dec  e
     ld   a, e
-    cp   $FF
+    cp   -1
     jr   nz, .loop
 
+    ; If a zero value is not found, decrement $C5C0
     ld   hl, $C5C0
     dec  [hl]
+    ; (wrap $C5C0 to $0F if it reached 0)
     ld   a, [hl]
-    cp   $FF
-    jr   nz, .endIf
+    cp   -1
+    jr   nz, .wrapEnd
     ld   a, $0F
     ld   [$C5C0], a
-.endIf
+.wrapEnd
 
+    ; e = $C5C0
     ld   a, [$C5C0]
     ld   e, a
 
 .jp_CEC
     pop  af
-    ld   hl, $C510
+    ld   hl, wTranscientVfxTypeTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratch1]
-    ld   hl, $C540
+    ld   hl, wTranscientVfxPosYTable
     add  hl, de
     ld   [hl], a
     ldh  a, [hScratch0]
-    ld   hl, $C530
+    ld   hl, wTranscientVfxPosXTable
     add  hl, de
     ld   [hl], a
-    ld   hl, $C520
+    ld   hl, wTranscientVfxCountdownTable
     add  hl, de
     ld   [hl], $0F
     ret
@@ -928,8 +939,8 @@ label_D07::
 label_D15::
     ld   a, JINGLE_SWORD_POKING
     ldh  [hJingle], a
-    ld   a, $05
-    jp   label_CC7
+    ld   a, TRANSCIENT_VFX_SWORD_POKE
+    jp   AddTranscientVfx
 
 ; Load sprites for the next room,
 ; either during a map transition or a room transition.
@@ -2546,16 +2557,16 @@ func_1756::
     ldh  a, [hLinkPositionY]
     add  a, $06
     ldh  [hScratch1], a
-    ld   a, $0B
-    jp   label_CC7
+    ld   a, TRANSCIENT_VFX_PEGASUS_DUST
+    jp   AddTranscientVfx
 
 .label_1781
     ldh  a, [hLinkPositionY]
     ldh  [hScratch1], a
     ld   a, JINGLE_WATER_DIVE
     ldh  [hJingle], a
-    ld   a, $0C
-    jp   label_CC7
+    ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH
+    jp   AddTranscientVfx
 
 ClearLinkPositionIncrement::
     xor  a
@@ -7943,9 +7954,9 @@ label_3E8E::
     ldh  [hScratch0], a
     ldh  a, [wActiveEntityPosY]
     ldh  [hScratch1], a
-    ld   a, $08
-    call label_CC7
-    ld   hl, $C520
+    ld   a, TRANSCIENT_VFX_SMOKE
+    call AddTranscientVfx
+    ld   hl, wTranscientVfxCountdownTable
     add  hl, de
     ld   [hl], $0F
     ret

@@ -5049,8 +5049,8 @@ func_036_5CAB::
     ldh  [hScratch0], a                           ; $5CAD: $E0 $D7
     ldh  a, [wActiveEntityPosY]                   ; $5CAF: $F0 $EC
     ldh  [hScratch1], a                           ; $5CB1: $E0 $D8
-    ld   a, $02                                   ; $5CB3: $3E $02
-    call label_CC7                                ; $5CB5: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $5CB3: $3E $02
+    call AddTranscientVfx                         ; $5CB5: $CD $C7 $0C
     ld   a, $13                                   ; $5CB8: $3E $13
     ldh  [hNoiseSfx], a                           ; $5CBA: $E0 $F4
     ret                                           ; $5CBC: $C9
@@ -7418,8 +7418,8 @@ jr_036_6999:
     call func_036_6C2D                            ; $69BE: $CD $2D $6C
     sub  [hl]                                     ; $69C1: $96
     ldh  [hScratch1], a                           ; $69C2: $E0 $D8
-    ld   a, $02                                   ; $69C4: $3E $02
-    call label_CC7                                ; $69C6: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_POOF                   ; $69C4: $3E $02
+    call AddTranscientVfx                         ; $69C6: $CD $C7 $0C
     call DidKillEnemy.label_3F5E                  ; $69C9: $CD $5E $3F
 
 jr_036_69CC:

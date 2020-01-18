@@ -122,7 +122,7 @@ DropFairyEffectHandler::
     ldh  [hScratch0], a                           ; $5DDE: $E0 $D7
     ld   a, $30                                   ; $5DE0: $3E $30
     ldh  [hScratch1], a                           ; $5DE2: $E0 $D8
-    ld   a, $02                                   ; $5DE4: $3E $02
+    ld   a, TRANSCIENT_VFX_POOF                   ; $5DE4: $3E $02
     jp   MakeEffectObjectAppear                   ; $5DE6: $C3 $F6 $5D
 
 RevealStairwayEffectHandler::
@@ -132,10 +132,10 @@ RevealStairwayEffectHandler::
     ldh  [hScratch0], a                           ; $5DEE: $E0 $D7
     ld   a, $20                                   ; $5DF0: $3E $20
     ldh  [hScratch1], a                           ; $5DF2: $E0 $D8
-    ld   a, $04                                   ; $5DF4: $3E $04
+    ld   a, TRANSCIENT_VFX_STAIRS_APPEARS         ; $5DF4: $3E $04
 
 MakeEffectObjectAppear::
-    call label_CC7                                ; $5DF6: $CD $C7 $0C
+    call AddTranscientVfx                         ; $5DF6: $CD $C7 $0C
 
     ; Mark the room as cleared
     call GetRoomStatusAddress                     ; $5DF9: $CD $9F $5B
@@ -291,9 +291,9 @@ jr_002_5ECA:
     ld   a, $30                                   ; $5ECA: $3E $30
 
 jr_002_5ECC:
-    ldh  [hScratch1], a                               ; $5ECC: $E0 $D8
-    ld   a, $03                                   ; $5ECE: $3E $03
-    jp   label_CC7                                ; $5ED0: $C3 $C7 $0C
+    ldh  [hScratch1], a                           ; $5ECC: $E0 $D8
+    ld   a, TRANSCIENT_VFX_CHEST_APPEARS          ; $5ECE: $3E $03
+    jp   AddTranscientVfx                         ; $5ED0: $C3 $C7 $0C
 
 func_002_5ED3::
     ldh  a, [hLinkPositionY]                      ; $5ED3: $F0 $99

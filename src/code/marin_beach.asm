@@ -106,17 +106,17 @@ MarineBeachPrepare3::
     ld   a, $01
     ld   [$DDD5], a
     ld   a, $E0
-    ld   [$C540], a
+    ld   [wTranscientVfxPosYTable], a
     ld   a, $00
-    ld   [$C530], a
-    ld   a, $01
-    ld   [$C510], a
+    ld   [wTranscientVfxPosXTable], a
+    ld   a, TRANSCIENT_VFX_WATER_SPLASH
+    ld   [wTranscientVfxTypeTable], a
     ld   a, $0C
     ld   [$C560], a
     ld   a, $08
     ld   [$C550], a
     ld   a, $00
-    ld   [$C520], a
+    ld   [wTranscientVfxCountdownTable], a
     ld   [$D200], a
     ld   a, $20
     ld   [$C541], a
@@ -397,7 +397,7 @@ MarineBeachDialog4::
 
 label_64FF::
     ld   e, $10
-    ld   hl, $C510
+    ld   hl, wTranscientVfxTypeTable
     xor  a
 
 label_6505::
@@ -520,21 +520,21 @@ label_65AE::
     ld   b, $00
 
 label_65B2::
-    ld   hl, $C510
+    ld   hl, wTranscientVfxTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
     jr   z, label_65D6
     push af
-    ld   hl, $C530
+    ld   hl, wTranscientVfxPosXTable
     add  hl, bc
     ld   a, [hl]
     ldh  [wActiveEntityPosX], a
-    ld   hl, $C540
+    ld   hl, wTranscientVfxPosYTable
     add  hl, bc
     ld   a, [hl]
     ldh  [wActiveEntityPosY], a
-    ld   hl, $C520
+    ld   hl, wTranscientVfxCountdownTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -575,7 +575,7 @@ label_6646::
     db 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5
 
 label_6673::
-    ld   hl, $C520
+    ld   hl, wTranscientVfxCountdownTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -639,7 +639,7 @@ label_66C4::
     ld   a, [hl]
     and  $80
     ret  z
-    ld   hl, $C510
+    ld   hl, wTranscientVfxTypeTable
     add  hl, bc
     ld   [hl], b
 
@@ -754,7 +754,7 @@ label_6773::
     ld   hl, label_66F6
     add  hl, bc
     ld   d, [hl]
-    ld   hl, $C530
+    ld   hl, wTranscientVfxPosXTable
     add  hl, bc
     ld   a, [hl]
     sub  a, d
@@ -767,7 +767,7 @@ label_6792::
     ld   a, [hl]
     add  a, e
     ld   [hl], a
-    ld   hl, $C540
+    ld   hl, wTranscientVfxPosYTable
     add  hl, bc
     ld   a, [hl]
     sub  a, $48
@@ -806,7 +806,7 @@ label_67B5::
     add  a, [hl]
     ld   [hl], a
     rl   d
-    ld   hl, $C530
+    ld   hl, wTranscientVfxPosXTable
     add  hl, bc
     pop  af
     ld   e, $00

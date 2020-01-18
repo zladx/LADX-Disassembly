@@ -100,8 +100,8 @@ jr_019_44DA:
     ldh  a, [hSwordIntersectedAreaY]              ; $44EC: $F0 $CD
     add  $10                                      ; $44EE: $C6 $10
     ldh  [hScratch1], a                           ; $44F0: $E0 $D8
-    ld   a, $08                                   ; $44F2: $3E $08
-    call label_CC7                                ; $44F4: $CD $C7 $0C
+    ld   a, TRANSCIENT_VFX_SMOKE                  ; $44F2: $3E $08
+    call AddTranscientVfx                         ; $44F4: $CD $C7 $0C
     ld   a, $13                                   ; $44F7: $3E $13
     ldh  [hNoiseSfx], a                           ; $44F9: $E0 $F4
     ret                                           ; $44FB: $C9

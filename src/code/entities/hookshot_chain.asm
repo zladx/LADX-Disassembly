@@ -140,5 +140,5 @@ jr_018_7CAF:
     ldh  [hScratch0], a                           ; $7CB9: $E0 $D7
     ldh  a, [wActiveEntityPosY]                   ; $7CBB: $F0 $EC
     ldh  [hScratch1], a                           ; $7CBD: $E0 $D8
-    ld   a, $05                                   ; $7CBF: $3E $05
-    jp   label_CC7                                ; $7CC1: $C3 $C7 $0C
+    ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $7CBF: $3E $05
+    jp   AddTranscientVfx                         ; $7CC1: $C3 $C7 $0C

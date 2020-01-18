@@ -3031,11 +3031,11 @@ jr_002_54A2:
     and  $20                                      ; $54A4: $E6 $20
 
 jr_002_54A6:
-    jr   z, jr_002_54E4                           ; $54A6: $28 $3C
+    jr   z, renderTranscientVFXs                  ; $54A6: $28 $3C
 
     ldh  a, [hJoypadState]                               ; $54A8: $F0 $CC
     and  $40                                      ; $54AA: $E6 $40
-    jr   jr_002_54E4                              ; $54AC: $18 $36
+    jr   renderTranscientVFXs                     ; $54AC: $18 $36
 
     ld   a, $01                                   ; $54AE: $3E $01
     ld   [wWarp0MapCategory], a                               ; $54B0: $EA $01 $D4
@@ -3066,26 +3066,28 @@ jr_002_54BD:
     ld   [hl], JINGLE_PUZZLE_SOLVED               ; $54DF: $36 $02
     jp   ApplyMapFadeOutTransition                                ; $54E1: $C3 $7D $0C
 
-jr_002_54E4:
+renderTranscientVFXs:
     ld   b, $00                                   ; $54E4: $06 $00
     ld   c, $0F                                   ; $54E6: $0E $0F
 
-jr_002_54E8:
+    ; For each transcient vfx…
+.transcientVFXsLoop
     ld   a, c                                     ; $54E8: $79
-    ld   [wLinkWalkingFrameCount], a                               ; $54E9: $EA $23 $C1
+    ld   [wLinkWalkingFrameCount], a              ; $54E9: $EA $23 $C1
+
+    ; If the VFX type is not zero, render it.
     ld   hl, wTranscientVfxTypeTable              ; $54EC: $21 $10 $C5
     add  hl, bc                                   ; $54EF: $09
     ld   a, [hl]                                  ; $54F0: $7E
     and  a                                        ; $54F1: $A7
-    jr   z, jr_002_54F7                           ; $54F2: $28 $03
+    jr   z, .renderEnd                            ; $54F2: $28 $03
+    call RenderTranscientVfx                      ; $54F4: $CD $67 $55
+.renderEnd
 
-    call func_002_5567                            ; $54F4: $CD $67 $55
-
-jr_002_54F7:
     dec  c                                        ; $54F7: $0D
     ld   a, c                                     ; $54F8: $79
-    cp   $FF                                      ; $54F9: $FE $FF
-    jr   nz, jr_002_54E8                          ; $54FB: $20 $EB
+    cp   -1                                       ; $54F9: $FE $FF
+    jr   nz, .transcientVFXsLoop                  ; $54FB: $20 $EB
 
     ld   a, [wRoomTransitionState]                ; $54FD: $FA $24 $C1
     and  a                                        ; $5500: $A7
@@ -3163,55 +3165,50 @@ jr_002_5560:
 jr_002_5566:
     ret                                           ; $5566: $C9
 
-func_002_5567::
+; Render a transcient visual effet.
+; Inputs:
+;   bc   effect index
+RenderTranscientVfx::
     push af                                       ; $5567: $F5
     ld   a, [wRoomTransitionState]                ; $5568: $FA $24 $C1
     and  a                                        ; $556B: $A7
-    jr   nz, jr_002_557C                          ; $556C: $20 $0E
+    jr   nz, .removeVfx                           ; $556C: $20 $0E
 
-    ld   hl, wTranscientVfxCountdownTable                                ; $556E: $21 $20 $C5
+    ld   hl, wTranscientVfxCountdownTable         ; $556E: $21 $20 $C5
     add  hl, bc                                   ; $5571: $09
     ld   a, [hl]                                  ; $5572: $7E
     and  a                                        ; $5573: $A7
-    jr   z, jr_002_557F                           ; $5574: $28 $09
+    jr   z, .render                               ; $5574: $28 $09
 
+    ; Decrement the vfx countdown
     dec  a                                        ; $5576: $3D
     ld   [hl], a                                  ; $5577: $77
-    ldh  [hScratch0], a                               ; $5578: $E0 $D7
-    jr   nz, jr_002_557F                          ; $557A: $20 $03
+    ldh  [hScratch0], a                           ; $5578: $E0 $D7
+    ; if the VFX countdown reached zero, remove the effect
+    jr   nz, .render                              ; $557A: $20 $03
 
-jr_002_557C:
-    call func_002_58E6                            ; $557C: $CD $E6 $58
+.removeVfx
+    call ClearTranscientVfx                            ; $557C: $CD $E6 $58
 
-jr_002_557F:
+.render
     pop  af                                       ; $557F: $F1
     dec  a                                        ; $5580: $3D
-    JP_TABLE                                      ; $5581: $C7
-    dec  h                                        ; $5582: $25
-    ld   e, b                                     ; $5583: $58
-    and  h                                        ; $5584: $A4
-    ld   e, b                                     ; $5585: $58
-    and  h                                        ; $5586: $A4
-    ld   e, b                                     ; $5587: $58
-    and  h                                        ; $5588: $A4
-    ld   e, b                                     ; $5589: $58
-    db   $ed                                      ; $558A: $ED
-    ld   d, a                                     ; $558B: $57
-    or   h                                        ; $558C: $B4
-    ld   d, a                                     ; $558D: $57
-    ld   e, [hl]                                  ; $558E: $5E
-    ld   d, a                                     ; $558F: $57
-    ld   b, [hl]                                  ; $5590: $46
-    ld   d, a                                     ; $5591: $57
-    ld   b, [hl]                                  ; $5592: $46
-    ld   d, [hl]                                  ; $5593: $56
-    inc  c                                        ; $5594: $0C
-    ld   d, [hl]                                  ; $5595: $56
-    jr   jr_002_55EF                              ; $5596: $18 $57
+    JP_TABLE
+._01 dw RenderTranscientWaterSplash               ; $5582
+._02 dw RenderTranscientPoof                      ; $5584
+._03 dw RenderTranscientPoof                      ; $5586
+._04 dw RenderTranscientPoof                      ; $5588
+._05 dw RenderTranscientSwordPoke                 ; $558A
+._06 dw RenderTranscientLaserBeam                 ; $558C
+._07 dw RenderTranscientMovingSparkle             ; $558E
+._08 dw RenderTranscientSmoke                     ; $5590
+._09 dw RenderTranscientRumble                    ; $5592
+._0A dw RenderTranscientLavaSplash                ; $5594
+._0B dw RenderTranscientPegasusDust               ; $5596
+._0C dw RenderTranscientPegasusSplash             ; $5598
+._0D dw RenderTranscientSwordBeam                 ; $559A
 
-    dec  e                                        ; $5598: $1D
-    ld   e, b                                     ; $5599: $58
-    call c, $0055                                 ; $559A: $DC $55 $00
+    db   $00                                      ; $559C
     nop                                           ; $559D: $00
     ld   [$0020], sp                              ; $559E: $08 $20 $00
     ld   [$2006], sp                              ; $55A1: $08 $06 $20
@@ -3261,7 +3258,7 @@ jr_002_557F:
     inc  b                                        ; $55DA: $04
     db   $10                                      ; $55DB: $10
 
-
+RenderTranscientSwordBeam::
     ldh  a, [hFrameCounter]                       ; $55DC: $F0 $E7
     xor  c                                        ; $55DE: $A9
     and  $01                                      ; $55DF: $E6 $01
@@ -3298,6 +3295,7 @@ jr_002_55FD:
     nop                                           ; $5609: $00
     jr   nz, @+$22                                ; $560A: $20 $20
 
+RenderTranscientLavaSplash::
     call func_002_58D0                            ; $560C: $CD $D0 $58
     ld   a, [$C3C0]                               ; $560F: $FA $C0 $C3
     ld   e, a                                     ; $5612: $5F
@@ -3340,6 +3338,8 @@ jr_002_561E:
     rra                                           ; $5643: $1F
     inc  c                                        ; $5644: $0C
     rra                                           ; $5645: $1F
+
+RenderTranscientRumble::
     ld   a, $02                                   ; $5646: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5648: $E0 $A1
     ld   [wC167], a                               ; $564A: $EA $67 $C1
@@ -3482,6 +3482,8 @@ label_002_5707:
     ld   e, $01                                   ; $5712: $1E $01
     nop                                           ; $5714: $00
     ld   [$611E], sp                              ; $5715: $08 $1E $61
+
+RenderTranscientPegasusDust::
     call func_002_58D0                            ; $5718: $CD $D0 $58
     ldh  a, [hScratch0]                               ; $571B: $F0 $D7
     and  $08                                      ; $571D: $E6 $08
@@ -3509,7 +3511,9 @@ label_002_5707:
     nop                                           ; $5742: $00
 
 jr_002_5743:
-    ld   [$6130], sp                              ; $5743: $08 $30 $61
+    ld   [$6130], sp                              ; $5743: $0Transcient8 $30 $61
+
+RenderTranscientSmoke::
     call func_002_58D0                            ; $5746: $CD $D0 $58
     ldh  a, [hScratch0]                               ; $5749: $F0 $D7
     and  $08                                      ; $574B: $E6 $08
@@ -3522,6 +3526,8 @@ jr_002_5743:
     rst  $38                                      ; $5759: $FF
     ld   bc, $FF01                                ; $575A: $01 $01 $FF
     rst  $38                                      ; $575D: $FF
+
+RenderTranscientMovingSparkle::
     ldh  a, [hScratch0]                               ; $575E: $F0 $D7
     cp   $0A                                      ; $5760: $FE $0A
     jr   c, jr_002_5780                           ; $5762: $38 $1C
@@ -3581,6 +3587,7 @@ jr_002_578E:
     ld   a, $02                                   ; $57AF: $3E $02
     jp   label_002_58F5                           ; $57B1: $C3 $F5 $58
 
+RenderTranscientLaserBeam::
     call func_002_58D0                            ; $57B4: $CD $D0 $58
     ld   a, [$C3C0]                               ; $57B7: $FA $C0 $C3
     ld   e, a                                     ; $57BA: $5F
@@ -3622,8 +3629,10 @@ jr_002_57E6:
     nop                                           ; $57E9: $00
     rlca                                          ; $57EA: $07
     ld   a, [hl-]                                 ; $57EB: $3A
-    jr   nz, jr_002_57BB                          ; $57EC: $20 $CD
+    db   $20                                      ; $57EC: $20
 
+RenderTranscientSwordPoke::
+    db   $CD
     ret  nc                                       ; $57EE: $D0
 
     ld   e, b                                     ; $57EF: $58
@@ -3663,10 +3672,12 @@ jr_002_5819:
     inc  c                                        ; $581A: $0C
     jr   @+$22                                    ; $581B: $18 $20
 
+RenderTranscientPegasusSplash::
     call func_002_58D0                            ; $581D: $CD $D0 $58
     ld   hl, $580D                                ; $5820: $21 $0D $58
     jr   jr_002_5833                              ; $5823: $18 $0E
 
+RenderTranscientWaterSplash::
 jr_002_5825:
     call func_002_58D0                            ; $5825: $CD $D0 $58
     ld   a, [$C1A7]                               ; $5828: $FA $A7 $C1
@@ -3763,6 +3774,8 @@ jr_002_5899:
 
 jr_002_58A1:
     ld   [$2130], sp                              ; $58A1: $08 $30 $21
+
+RenderTranscientPoof::
     call func_002_58D0                            ; $58A4: $CD $D0 $58
     ldh  a, [hScratch0]                               ; $58A7: $F0 $D7
     cp   $04                                      ; $58A9: $FE $04
@@ -3796,18 +3809,19 @@ func_002_58D0::
     ld   hl, wTranscientVfxPosYTable                                ; $58D0: $21 $40 $C5
     add  hl, bc                                   ; $58D3: $09
     ld   a, [hl]                                  ; $58D4: $7E
-    ldh  [hScratch1], a                               ; $58D5: $E0 $D8
+    ldh  [hScratch1], a                           ; $58D5: $E0 $D8
     cp   $88                                      ; $58D7: $FE $88
-    jr   nc, func_002_58E6                        ; $58D9: $30 $0B
+    jr   nc, ClearTranscientVfx                   ; $58D9: $30 $0B
 
-    ld   hl, wTranscientVfxPosXTable                                ; $58DB: $21 $30 $C5
+    ld   hl, wTranscientVfxPosXTable              ; $58DB: $21 $30 $C5
     add  hl, bc                                   ; $58DE: $09
     ld   a, [hl]                                  ; $58DF: $7E
     ldh  [hScratch2], a                               ; $58E0: $E0 $D9
     cp   $A8                                      ; $58E2: $FE $A8
     jr   c, jr_002_58EC                           ; $58E4: $38 $06
 
-func_002_58E6::
+; Remove a transcient vfx from the effects table.
+ClearTranscientVfx::
     ld   hl, wTranscientVfxTypeTable              ; $58E6: $21 $10 $C5
     add  hl, bc                                   ; $58E9: $09
     xor  a                                        ; $58EA: $AF

@@ -50,7 +50,7 @@ label_004_496F:
     cp   $02                                      ; $49B6: $FE $02
     jr   nz, .loop                                ; $49B8: $20 $B8
 
-    jp   label_004_6D7A                           ; $49BA: $C3 $7A $6D
+    jp   func_004_6D7A                            ; $49BA: $C3 $7A $6D
 
 func_014_49BD::
     ld   hl, wEntitiesPosZTable                                ; $49BD: $21 $10 $C3

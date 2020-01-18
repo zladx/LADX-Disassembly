@@ -790,7 +790,7 @@ jr_004_44E2:
 
 func_004_44E9::
     call GetEntityTransitionCountdown             ; $44E9: $CD $05 $0C
-    jp   z, label_004_6D7A                        ; $44EC: $CA $7A $6D
+    jp   z, func_004_6D7A                         ; $44EC: $CA $7A $6D
 
     cp   $04                                      ; $44EF: $FE $04
     jr   nz, jr_004_4516                          ; $44F1: $20 $23
@@ -1150,7 +1150,7 @@ GenieState2Handler::
     ld   hl, wEntitiesStateTable                  ; $4855: $21 $90 $C2
     add  hl, de                                   ; $4858: $19
     ld   [hl], $03                                ; $4859: $36 $03
-    jp   label_004_6D7A                           ; $485B: $C3 $7A $6D
+    jp   func_004_6D7A                            ; $485B: $C3 $7A $6D
 
 jr_004_485E:
     rra                                           ; $485E: $1F
@@ -1166,7 +1166,7 @@ jr_004_485E:
 
 jr_004_486D:
     and  a                                        ; $486D: $A7
-    jp   z, label_004_6D7A                        ; $486E: $CA $7A $6D
+    jp   z, func_004_6D7A                         ; $486E: $CA $7A $6D
 
     cp   $06                                      ; $4871: $FE $06
     jr   nz, jr_004_48A6                          ; $4873: $20 $31
@@ -1293,7 +1293,7 @@ jr_004_4937:
 
 jr_004_4938:
     call GetEntityTransitionCountdown                 ; $4938: $CD $05 $0C
-    jp   z, label_004_6D7A                        ; $493B: $CA $7A $6D
+    jp   z, func_004_6D7A                         ; $493B: $CA $7A $6D
 
 GenieState4Handler::
     ld   de, Data_004_48D1                        ; $493E: $11 $D1 $48
@@ -1316,6 +1316,6 @@ GenieState4Handler::
     add  hl, bc                                   ; $4963: $09
     ld   a, [hl]                                  ; $4964: $7E
     and  $80                                      ; $4965: $E6 $80
-    jp   nz, label_004_6D7A                       ; $4967: $C2 $7A $6D
+    jp   nz, func_004_6D7A                        ; $4967: $C2 $7A $6D
 
     ret                                           ; $496A: $C9

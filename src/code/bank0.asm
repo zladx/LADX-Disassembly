@@ -1592,16 +1592,16 @@ InitGotItemSequence::
 .linkMotionJumpTable
     JP_TABLE
 ._00 dw LinkMotionInteractiveHandler
-._01 dw $4F30       ; LINK_MOTION_FALLING_UP
-._02 dw $4960       ; LINK_MOTION_JUMPING
+._01 dw LinkMotionFallingUpHandler
+._02 dw LinkMotionJumpingHandler
 ._03 dw LinkMotionMapFadeOutHandler
 ._04 dw LinkMotionMapFadeInHandler
-._05 dw $4E6D       ; LINK_MOTION_REVOLVING_DOOR
-._06 dw $50D4       ; LINK_MOTION_FALLING_DOWN
+._05 dw LinkMotionRevolvingDoorHandler
+._06 dw LinkMotionFallingDownHandler
 ._07 dw LinkMotionPassOutHandler
-._08 dw $5267       ; LINK_MOTION_RECOVER
+._08 dw LinkMotionRecoverHandler
 ._09 dw LinkMotionTeleportUpHandler
-._0F dw $50A3       ; LINK_MOTION_UNKNOWN
+._0F dw LinkMotionUnknownHandler
 
 label_114F::
     call ApplyLinkMotionState

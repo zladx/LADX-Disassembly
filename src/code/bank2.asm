@@ -1043,6 +1043,7 @@ Data_002_4950::
 Data_002_4958::
     db   $5B, $5C, $58, $59, $5B, $5C, $58, $59
 
+LinkMotionJumpingHandler::
     ld   a, $02                                   ; $4960: $3E $02
     ld   [$C1C4], a                               ; $4962: $EA $C4 $C1
     ldh  a, [$FF9C]                               ; $4965: $F0 $9C
@@ -1915,6 +1916,8 @@ func_002_4E48::
     ld   d, e                                     ; $4E6A: $53
     ld   d, h                                     ; $4E6B: $54
     ld   d, d                                     ; $4E6C: $52
+
+LinkMotionRevolvingDoorHandler::
     ld   a, $10                                   ; $4E6D: $3E $10
     ldh  [hLinkPositionY], a                      ; $4E6F: $E0 $99
     ld   a, $50                                   ; $4E71: $3E $50
@@ -2057,6 +2060,8 @@ jr_002_4EEF:
     nop                                           ; $4F2D: $00
     nop                                           ; $4F2E: $00
     nop                                           ; $4F2F: $00
+
+LinkMotionFallingUpHandler::
     ld   a, [wFreeMovementMode]                   ; $4F30: $FA $7B $C1
     and  a                                        ; $4F33: $A7
     jr   z, jr_002_4F3C                           ; $4F34: $28 $06
@@ -2312,6 +2317,7 @@ jr_002_507A:
 jr_002_50A2:
     ret                                           ; $50A2: $C9
 
+LinkMotionUnknownHandler::
     ld   a, $01                                   ; $50A3: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $50A5: $E0 $A1
     call UpdateFinalLinkPosition                  ; $50A7: $CD $A8 $21
@@ -2344,6 +2350,8 @@ jr_002_50BA:
     rst  $38                                      ; $50D1: $FF
     rst  $38                                      ; $50D2: $FF
     rst  $38                                      ; $50D3: $FF
+
+LinkMotionFallingDownHandler::
     ld   a, $01                                   ; $50D4: $3E $01
     ld   [wC167], a                               ; $50D6: $EA $67 $C1
     ld   a, [$C198]                               ; $50D9: $FA $98 $C1
@@ -2610,6 +2618,7 @@ jr_002_524F:
     ldh  [hScratch2], a                               ; $5262: $E0 $D9
     jp   func_1819                               ; $5264: $C3 $19 $18
 
+LinkMotionRecoverHandler::
     call ResetSpinAttack                                ; $5267: $CD $AF $0C
     call ClearLinkPositionIncrement               ; $526A: $CD $8E $17
     ldh  a, [$FFB7]                               ; $526D: $F0 $B7

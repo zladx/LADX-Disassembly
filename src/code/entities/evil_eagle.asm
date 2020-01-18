@@ -11,7 +11,7 @@ EvilEagleEntityHandler::
 ._02 dw func_005_6256                             ; $5A8A
 ._03 dw func_005_62C8                             ; $5A8C
 
-func_005_5A8E:
+func_005_5A8E::
     ldh  a, [hActiveEntityState]                  ; $5A8E: $F0 $F0
     JP_TABLE                                      ; $5A90
 ._00 dw func_005_5A9C                             ; $5A91
@@ -23,7 +23,7 @@ func_005_5A8E:
 jr_005_5A9B:
     ret                                           ; $5A9B: $C9
 
-func_005_5A9C:
+func_005_5A9C::
     call func_005_5B5A                            ; $5A9C: $CD $5A $5B
     ldh  a, [hActiveEntityStatus]                 ; $5A9F: $F0 $EA
     cp   $05                                      ; $5AA1: $FE $05
@@ -62,7 +62,7 @@ jr_005_5AA7:
     ld   [hl], $43                                ; $5AD6: $36 $43
     jp   IncrementEntityState                     ; $5AD8: $C3 $12 $3B
 
-func_005_5ADB:
+func_005_5ADB::
     call func_005_5B5A                            ; $5ADB: $CD $5A $5B
     call func_005_7A3A                            ; $5ADE: $CD $3A $7A
     ld   a, $02                                   ; $5AE1: $3E $02
@@ -87,7 +87,7 @@ jr_005_5AFE:
     ld   a, $54                                   ; $5AFE: $3E $54
     ld   [wActiveMusicTrack], a                   ; $5B00: $EA $68 $D3
 
-func_005_5B03:
+func_005_5B03::
     ld   a, ENTITY_EVIL_EAGLE                     ; $5B03: $3E $63
     call SpawnNewEntity_trampoline                ; $5B05: $CD $86 $3B
     ld   hl, wEntitiesHealthTable                 ; $5B08: $21 $60 $C3
@@ -114,10 +114,10 @@ func_005_5B03:
     call func_005_5C20                            ; $5B32: $CD $20 $5C
     jp   IncrementEntityState                     ; $5B35: $C3 $12 $3B
 
-func_005_5B38:
+func_005_5B38::
     jp   func_005_5B5A                            ; $5B38: $C3 $5A $5B
 
-func_005_5B3B:
+func_005_5B3B::
     call func_005_5B5A                            ; $5B3B: $CD $5A $5B
     call func_005_7A3A                            ; $5B3E: $CD $3A $7A
     call func_005_7AB1                            ; $5B41: $CD $B1 $7A
@@ -127,7 +127,7 @@ func_005_5B3B:
     inc  [hl]                                     ; $5B49: $34
     ret                                           ; $5B4A: $C9
 
-func_005_5B4B:
+func_005_5B4B::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5B4B: $21 $40 $C3
     add  hl, bc                                   ; $5B4E: $09
     ld   [hl], $C2                                ; $5B4F: $36 $C2
@@ -136,14 +136,14 @@ func_005_5B4B:
 Data_005_5B52::
     db   $7E, $02, $7E, $22, $7E, $42, $7E, $62
 
-func_005_5B5A:
+func_005_5B5A::
     ld   de, Data_005_5B52                        ; $5B5A: $11 $52 $5B
     jp   RenderAnimatedActiveEntity               ; $5B5D: $C3 $C0 $3B
 
 Data_005_5B60::
     db   $02, $02, $02, $00, $01, $00, $01, $04, $04, $04, $04
 
-func_005_5B6B:
+func_005_5B6B::
     call func_005_61F2                            ; $5B6B: $CD $F2 $61
     ldh  a, [hActiveEntityStatus]                 ; $5B6E: $F0 $EA
     cp   $05                                      ; $5B70: $FE $05
@@ -209,7 +209,7 @@ jr_005_5BB7:
 ._0D dw func_005_6017                             ; $5BD4
 ._0E dw func_005_6028                             ; $5BD6
 
-func_005_5BD8:
+func_005_5BD8::
     call func_005_7AB1                            ; $5BD8: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $5BDB: $CD $05 $0C
     ret  nz                                       ; $5BDE: $C0
@@ -220,7 +220,7 @@ func_005_5BD8:
     ld   a, $FF                                   ; $5BE7: $3E $FF
     jp   SetEntitySpriteVariant                   ; $5BE9: $C3 $0C $3B
 
-func_005_5BEC:
+func_005_5BEC::
     call GetEntityTransitionCountdown             ; $5BEC: $CD $05 $0C
     jr   nz, jr_005_5C24                          ; $5BEF: $20 $33
 
@@ -254,7 +254,7 @@ func_005_5BEC:
     call GetEntityTransitionCountdown             ; $5C1B: $CD $05 $0C
     ld   [hl], $80                                ; $5C1E: $36 $80
 
-func_005_5C20:
+func_005_5C20::
     ld   a, $22                                   ; $5C20: $3E $22
     ldh  [hNoiseSfx], a                           ; $5C22: $E0 $F4
 
@@ -269,7 +269,7 @@ jr_005_5C25:
     ldh  [hNoiseSfx], a                           ; $5C2F: $E0 $F4
     ret                                           ; $5C31: $C9
 
-func_005_5C32:
+func_005_5C32::
     call func_005_7AB1                            ; $5C32: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $5C35: $CD $05 $0C
 
@@ -300,7 +300,7 @@ jr_005_5C41:
 jr_005_5C58:
     jp   jr_005_5C7B                              ; $5C58: $C3 $7B $5C
 
-func_005_5C5B:
+func_005_5C5B::
     ld   a, $02                                   ; $5C5B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5C5D: $E0 $A1
     call GetEntityTransitionCountdown             ; $5C5F: $CD $05 $0C
@@ -331,7 +331,7 @@ jr_005_5C7B:
 jr_005_5C88:
     jp   SetEntitySpriteVariant                   ; $5C88: $C3 $0C $3B
 
-func_005_5C8B:
+func_005_5C8B::
     ld   a, $02                                   ; $5C8B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5C8D: $E0 $A1
     call GetEntityTransitionCountdown             ; $5C8F: $CD $05 $0C
@@ -352,7 +352,7 @@ jr_005_5CA6:
 Data_005_5CA9::
     db   $01, $02, $03, $02
 
-func_005_5CAD:
+func_005_5CAD::
     ld   a, $02                                   ; $5CAD: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $5CAF: $E0 $A1
     call GetEntityTransitionCountdown             ; $5CB1: $CD $05 $0C
@@ -360,7 +360,7 @@ func_005_5CAD:
 
     call IncrementEntityState                     ; $5CB6: $CD $12 $3B
 
-func_005_5CB9:
+func_005_5CB9::
     ld   hl, wEntitiesUnknowTableY                ; $5CB9: $21 $D0 $C3
     add  hl, bc                                   ; $5CBC: $09
     inc  [hl]                                     ; $5CBD: $34
@@ -377,7 +377,7 @@ func_005_5CB9:
     ld   a, [hl]                                  ; $5CCB: $7E
     jp   SetEntitySpriteVariant                   ; $5CCC: $C3 $0C $3B
 
-func_005_5CCF:
+func_005_5CCF::
     call func_005_7AB1                            ; $5CCF: $CD $B1 $7A
     ld   hl, wEntitiesSpeedXTable                 ; $5CD2: $21 $40 $C2
     add  hl, bc                                   ; $5CD5: $09
@@ -437,7 +437,7 @@ Data_005_5D10::
 Data_005_5D12::
     db   $04, $00
 
-func_005_5D14:
+func_005_5D14::
     call GetEntityTransitionCountdown             ; $5D14: $CD $05 $0C
     jr   nz, jr_005_5D68                          ; $5D17: $20 $4F
 
@@ -449,7 +449,7 @@ func_005_5D14:
 ._03 dw func_005_5DA3                             ; $5D23
 ._04 dw func_005_5D69                             ; $5D25
 
-func_005_5D27:
+func_005_5D27::
     call GetRandomByte                            ; $5D27: $CD $0D $28
     and  $03                                      ; $5D2A: $E6 $03
     ld   [$D205], a                               ; $5D2C: $EA $05 $D2
@@ -492,7 +492,7 @@ jr_005_5D38:
 jr_005_5D68:
     ret                                           ; $5D68: $C9
 
-func_005_5D69:
+func_005_5D69::
     ld   e, $00                                   ; $5D69: $1E $00
     ldh  a, [hLinkPositionX]                      ; $5D6B: $F0 $98
     cp   $50                                      ; $5D6D: $FE $50
@@ -531,7 +531,7 @@ jr_005_5D7C:
     ld   [hl], $30                                ; $5DA0: $36 $30
     ret                                           ; $5DA2: $C9
 
-func_005_5DA3:
+func_005_5DA3::
     call GetRandomByte                            ; $5DA3: $CD $0D $28
     and  $01                                      ; $5DA6: $E6 $01
     ld   e, a                                     ; $5DA8: $5F
@@ -577,7 +577,7 @@ jr_005_5DE1:
     ld   [hl], $70                                ; $5DE9: $36 $70
     ret                                           ; $5DEB: $C9
 
-func_005_5DEC:
+func_005_5DEC::
     ld   a, $01                                   ; $5DEC: $3E $01
     call SetEntitySpriteVariant                   ; $5DEE: $CD $0C $3B
     call func_005_7AB1                            ; $5DF1: $CD $B1 $7A
@@ -589,7 +589,7 @@ func_005_5DEC:
 
     ld   hl, wEntitiesSpeedXTable                 ; $5DFE: $21 $40 $C2
 
-func_005_5E01:
+func_005_5E01::
     add  hl, bc                                   ; $5E01: $09
     ld   a, [hl]                                  ; $5E02: $7E
     and  a                                        ; $5E03: $A7
@@ -628,7 +628,7 @@ Data_005_5E1D::
 Data_005_5E2D::
     db   $30, $2E, $2C, $2A, $28, $26, $24, $22, $30, $2E, $2C, $2A, $28, $26, $24, $22
 
-func_005_5E3D:
+func_005_5E3D::
     call GetEntityTransitionCountdown             ; $5E3D: $CD $05 $0C
     jp   z, label_005_5F30                        ; $5E40: $CA $30 $5F
 
@@ -807,7 +807,7 @@ label_005_5F30:
 Data_005_5F39::
     db   $E0, $20
 
-func_005_5F3B:
+func_005_5F3B::
     call func_005_7AB1                            ; $5F3B: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $5F3E: $CD $05 $0C
     jr   z, label_005_5F78                        ; $5F41: $28 $35
@@ -872,7 +872,7 @@ jr_005_5F90:
     ld   [hl], $80                                ; $5F90: $36 $80
     ret                                           ; $5F92: $C9
 
-func_005_5F93:
+func_005_5F93::
     call func_005_7AB1                            ; $5F93: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $5F96: $CD $05 $0C
     jr   nz, jr_005_5FA3                          ; $5F99: $20 $08
@@ -887,7 +887,7 @@ jr_005_5FA3:
 Data_005_5FA6::
     db   $E0, $20
 
-func_005_5FA8:
+func_005_5FA8::
     call func_005_7AB1                            ; $5FA8: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $5FAB: $CD $05 $0C
     jr   nz, jr_005_5FEA                          ; $5FAE: $20 $3A
@@ -956,7 +956,7 @@ jr_005_6008:
     call func_005_5CB9                            ; $6011: $CD $B9 $5C
     jp   func_005_5CB9                            ; $6014: $C3 $B9 $5C
 
-func_005_6017:
+func_005_6017::
     xor  a                                        ; $6017: $AF
     call SetEntitySpriteVariant                   ; $6018: $CD $0C $3B
     call func_005_7AB1                            ; $601B: $CD $B1 $7A
@@ -966,7 +966,7 @@ func_005_6017:
 
     ret                                           ; $6027: $C9
 
-func_005_6028:
+func_005_6028::
     ld   hl, wEntitiesFlashCountdownTable         ; $6028: $21 $20 $C4
     add  hl, bc                                   ; $602B: $09
     ld   a, [hl]                                  ; $602C: $7E
@@ -1044,7 +1044,7 @@ Data_005_6122::
 Data_005_61E2::
     db   $1C, $1C, $08, $0C, $14, $10, $10, $10, $F4, $1C, $08, $0C, $FC, $10, $10, $10
 
-func_005_61F2:
+func_005_61F2::
     ld   hl, wEntitiesDirectionTable              ; $61F2: $21 $80 $C3
     add  hl, bc                                   ; $61F5: $09
     ldh  a, [hActiveEntitySpriteVariant]          ; $61F6: $F0 $F1
@@ -1116,7 +1116,7 @@ jr_005_6246:
 Data_005_624E::
     db   $7C, $00, $7C, $20, $7C, $40, $7C, $60
 
-func_005_6256:
+func_005_6256::
     ld   a, $02                                   ; $6256: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6258: $E0 $A1
     ld   de, Data_005_624E                        ; $625A: $11 $4E $62
@@ -1133,7 +1133,7 @@ func_005_6256:
 ._00 dw func_005_6274                             ; $6270
 ._01 dw func_005_6299                             ; $6272
 
-func_005_6274:
+func_005_6274::
     ld   hl, wEntitiesPosYTable                   ; $6274: $21 $10 $C2
     add  hl, bc                                   ; $6277: $09
     ld   e, $07                                   ; $6278: $1E $07
@@ -1142,7 +1142,7 @@ func_005_6274:
     add  hl, bc                                   ; $6280: $09
     ld   e, $00                                   ; $6281: $1E $00
 
-func_005_6283:
+func_005_6283::
     ldh  a, [hFrameCounter]                       ; $6283: $F0 $E7
     add  e                                        ; $6285: $83
     ld   d, a                                     ; $6286: $57
@@ -1167,7 +1167,7 @@ jr_005_6297:
 jr_005_6298:
     ret                                           ; $6298: $C9
 
-func_005_6299:
+func_005_6299::
     call func_005_7AB1                            ; $6299: $CD $B1 $7A
     ld   hl, wEntitiesSpeedXTable                 ; $629C: $21 $40 $C2
     add  hl, bc                                   ; $629F: $09
@@ -1196,7 +1196,7 @@ jr_005_62B0:
 Data_005_62B8::
     db   $7A, $22, $78, $22, $78, $02, $7A, $02, $7A, $62, $78, $62, $78, $42, $7A, $42
 
-func_005_62C8:
+func_005_62C8::
     ld   de, Data_005_62B8                        ; $62C8: $11 $B8 $62
     call RenderAnimatedActiveEntity               ; $62CB: $CD $C0 $3B
     call func_005_7A3A                            ; $62CE: $CD $3A $7A
@@ -1228,14 +1228,14 @@ jr_005_62F5:
     add  hl, bc                                   ; $62F8: $09
     dec  [hl]                                     ; $62F9: $35
 
-func_005_62FA:
+func_005_62FA::
     ldh  a, [wActiveEntityPosX]                   ; $62FA: $F0 $EE
     cp   $A8                                      ; $62FC: $FE $A8
     jp   nc, func_005_7B4B                        ; $62FE: $D2 $4B $7B
 
     ret                                           ; $6301: $C9
 
-func_005_6302:
+func_005_6302::
     call GetEntityTransitionCountdown             ; $6302: $CD $05 $0C
     ld   [hl], $40                                ; $6305: $36 $40
     ld   hl, wEntitiesSpriteVariantTable          ; $6307: $21 $B0 $C3

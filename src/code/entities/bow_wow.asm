@@ -76,7 +76,7 @@ jr_005_409F:
 label_005_40A2:
     jp   label_005_4253                           ; $40A2: $C3 $53 $42
 
-func_005_40A5:
+func_005_40A5::
     ld   hl, wEntitiesUnknowTableP                ; $40A5: $21 $40 $C4
     add  hl, bc                                   ; $40A8: $09
     ld   a, [hl]                                  ; $40A9: $7E
@@ -84,7 +84,7 @@ func_005_40A5:
 ._00 dw func_005_40AF                             ; $40AB
 ._01 dw func_005_40E6                             ; $40AD
 
-func_005_40AF:
+func_005_40AF::
     ld   hl, wEntitiesPosXTable                   ; $40AF: $21 $00 $C2
     add  hl, bc                                   ; $40B2: $09
     ld   a, [hl]                                  ; $40B3: $7E
@@ -125,7 +125,7 @@ jr_005_40DC:
     inc  [hl]                                     ; $40E4: $34
     ret                                           ; $40E5: $C9
 
-func_005_40E6:
+func_005_40E6::
     ld   a, [wIsBowWowFollowingLink]              ; $40E6: $FA $56 $DB
     and  a                                        ; $40E9: $A7
     jr   z, jr_005_4137                           ; $40EA: $28 $4B
@@ -221,7 +221,7 @@ Data_005_4170::
 Data_005_4178::
     db   $F4, $F8, $04, $08, $0C, $08, $FC, $F8
 
-func_005_4180:
+func_005_4180::
     call GetEntityTransitionCountdown             ; $4180: $CD $05 $0C
     jr   z, jr_005_41B1                           ; $4183: $28 $2C
 
@@ -271,7 +271,7 @@ jr_005_41BF:
     ld   a, $20                                   ; $41CA: $3E $20
     jp   ApplyVectorTowardsLink_trampoline        ; $41CC: $C3 $AA $3B
 
-func_005_41CF:
+func_005_41CF::
     call IsEntityUnknownFZero                     ; $41CF: $CD $00 $0C
     jr   nz, jr_005_41DA                          ; $41D2: $20 $06
 
@@ -292,7 +292,7 @@ jr_005_41E5:
     call func_005_7AB1                            ; $41E5: $CD $B1 $7A
     jp   func_005_4228                            ; $41E8: $C3 $28 $42
 
-func_005_41EB:
+func_005_41EB::
     call GetEntityTransitionCountdown             ; $41EB: $CD $05 $0C
     jr   z, jr_005_41F9                           ; $41EE: $28 $09
 
@@ -315,7 +315,7 @@ jr_005_4206:
 
     jp   label_005_4335                           ; $420B: $C3 $35 $43
 
-func_005_420E:
+func_005_420E::
     call GetEntityTransitionCountdown             ; $420E: $CD $05 $0C
     jr   nz, jr_005_4227                          ; $4211: $20 $14
 
@@ -336,7 +336,7 @@ jr_005_4223:
 jr_005_4227:
     ret                                           ; $4227: $C9
 
-func_005_4228:
+func_005_4228::
     ld   e, $01                                   ; $4228: $1E $01
     ld   hl, wEntitiesPrivateState1Table          ; $422A: $21 $B0 $C2
     add  hl, bc                                   ; $422D: $09
@@ -614,7 +614,7 @@ jr_005_43A0:
     pop  bc                                       ; $43A6: $C1
     ret                                           ; $43A7: $C9
 
-func_005_43A8:
+func_005_43A8::
     ld   hl, wEntitiesPosXTable                   ; $43A8: $21 $00 $C2
     add  hl, bc                                   ; $43AB: $09
     ld   a, [hl]                                  ; $43AC: $7E
@@ -688,7 +688,7 @@ jr_005_43F7:
     pop  bc                                       ; $43FC: $C1
     ret                                           ; $43FD: $C9
 
-func_005_43FE:
+func_005_43FE::
     ld   a, [wIsBowWowFollowingLink]              ; $43FE: $FA $56 $DB
     and  a                                        ; $4401: $A7
     ret  z                                        ; $4402: $C8
@@ -845,7 +845,7 @@ jr_005_44B1:
     dec  e                                        ; $44B2: $1D
     jr   nz, jr_005_44A4                          ; $44B3: $20 $EF
 
-func_005_44B5:
+func_005_44B5::
     ld   a, [$D110]                               ; $44B5: $FA $10 $D1
     ld   hl, wEntitiesPosZTable                   ; $44B8: $21 $10 $C3
     add  hl, bc                                   ; $44BB: $09
@@ -861,7 +861,7 @@ func_005_44B5:
 jr_005_44CA:
     ret                                           ; $44CA: $C9
 
-func_005_44CB:
+func_005_44CB::
     ld   hl, wEntitiesSpeedXTable                 ; $44CB: $21 $40 $C2
     add  hl, bc                                   ; $44CE: $09
     ld   a, [hl]                                  ; $44CF: $7E

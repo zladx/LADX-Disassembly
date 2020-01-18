@@ -67,7 +67,7 @@ jr_024_75C5:
     inc  bc                                       ; $75CB: $03
     ret                                           ; $75CC: $C9
 
-func_024_75CD:
+func_024_75CD::
 jr_024_75CD:
     ld   a, [hl]                                  ; $75CD: $7E
     cp   $10                                      ; $75CE: $FE $10

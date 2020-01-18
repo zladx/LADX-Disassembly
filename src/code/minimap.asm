@@ -181,7 +181,7 @@ LoadMinimap::
     ret                                           ; $67E4: $C9
 
 ; Configure palette copy, then jump to do the copy
-label_002_67E5::
+label_002_67E5:
     ld   a, [wMinimapLayout]                               ; $67E5: $FA $B0 $DB
     and  $30                                      ; $67E8: $E6 $30
     swap a                                        ; $67EA: $CB $37
@@ -211,7 +211,7 @@ jr_002_6807:
     jr   jr_002_6848                              ; $6809: $18 $3D
 
 ; Configure palette copy, then jump to do the copy
-label_002_680B::
+label_002_680B:
     ld   a, [wMinimapLayout]                               ; $680B: $FA $B0 $DB
     and  $30                                      ; $680E: $E6 $30
     swap a                                        ; $6810: $CB $37
@@ -233,7 +233,7 @@ jr_002_6823:
     jr   jr_002_6848                              ; $6825: $18 $21
 
 ; Configure palette copy, then jump to do the copy
-label_002_6827::
+label_002_6827:
     ld   a, [wMinimapLayout]                               ; $6827: $FA $B0 $DB
     and  $30                                      ; $682A: $E6 $30
     swap a                                        ; $682C: $CB $37

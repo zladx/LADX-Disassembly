@@ -4,7 +4,7 @@ Data_005_4780::
     db   $00, $00, $62, $21, $00, $08, $60, $21, $10, $00, $66, $22, $10, $08, $64, $22
     db   $00, $00, $68, $01, $00, $08, $6A, $01, $10, $00, $6C, $02, $10, $08, $6E, $02
 
-func_005_47C0:
+func_005_47C0::
     ldh  a, [hActiveEntitySpriteVariant]          ; $47C0: $F0 $F1
     rla                                           ; $47C2: $17
     rla                                           ; $47C3: $17
@@ -114,7 +114,7 @@ jr_005_4853:
     ld   [hl], $08                                ; $485A: $36 $08
     jp   IncrementEntityState                     ; $485C: $C3 $12 $3B
 
-func_005_485F:
+func_005_485F::
     ld   a, [wGameplayType]                       ; $485F: $FA $95 $DB
     cp   $0B                                      ; $4862: $FE $0B
     ret  nz                                       ; $4864: $C0
@@ -133,7 +133,7 @@ func_005_485F:
     ld   [wC167], a                               ; $4877: $EA $67 $C1
     jp   IncrementEntityState                     ; $487A: $C3 $12 $3B
 
-func_005_487D:
+func_005_487D::
     ld   a, [wGameplayType]                       ; $487D: $FA $95 $DB
     cp   $0B                                      ; $4880: $FE $0B
     ret  nz                                       ; $4882: $C0
@@ -147,7 +147,7 @@ func_005_487D:
     ld   [hl], $C0                                ; $4891: $36 $C0
     jp   IncrementEntityState                     ; $4893: $C3 $12 $3B
 
-func_005_4896:
+func_005_4896::
     ld   a, [wDialogState]                        ; $4896: $FA $9F $C1
     and  a                                        ; $4899: $A7
     ret  nz                                       ; $489A: $C0
@@ -180,7 +180,7 @@ jr_005_48AE:
     call_open_dialog $0FE                         ; $48C7
     jp   IncrementEntityState                     ; $48CC: $C3 $12 $3B
 
-func_005_48CF:
+func_005_48CF::
     ld   a, [wDialogState]                        ; $48CF: $FA $9F $C1
     and  a                                        ; $48D2: $A7
     ret  nz                                       ; $48D3: $C0
@@ -201,7 +201,7 @@ func_005_48CF:
     ldh  [hJingle], a                             ; $48F2: $E0 $F2
     call IncrementEntityState                     ; $48F4: $CD $12 $3B
 
-func_005_48F7:
+func_005_48F7::
     ld   a, [$C1A2]                               ; $48F7: $FA $A2 $C1
     and  a                                        ; $48FA: $A7
     ret  z                                        ; $48FB: $C8
@@ -216,10 +216,10 @@ func_005_48F7:
 
     jp   IncrementEntityState                     ; $4906: $C3 $12 $3B
 
-func_005_4909:
+func_005_4909::
     ld   a, $7E                                   ; $4909: $3E $7E
     call OpenDialogInTable1                       ; $490B: $CD $73 $23
     jp   IncrementEntityState                     ; $490E: $C3 $12 $3B
 
-func_005_4911:
+func_005_4911::
     ret                                           ; $4911: $C9

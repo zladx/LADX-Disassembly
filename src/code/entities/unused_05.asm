@@ -16,7 +16,7 @@ Data_005_59FE::
 Data_005_5A0E::
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $3F, $00, $FF, $3E, $EF, $F1
 
-func_005_5A1E:
+func_005_5A1E::
     ld   hl, wEntitiesUnknowTableH                ; $5A1E: $21 $30 $C4
     add  hl, bc                                   ; $5A21: $09
     ld   a, [hl]                                  ; $5A22: $7E

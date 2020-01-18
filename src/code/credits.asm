@@ -64,7 +64,7 @@ jr_017_407D:
 
 include "text/credits.asm"
 
-func_017_448B:
+func_017_448B::
 jr_017_448B:
     ld   a, [$D009]                               ; $448B: $FA $09 $D0
     and  a                                        ; $448E: $A7
@@ -195,7 +195,7 @@ jr_017_45AD:
     xor  a                                        ; $45B1: $AF
     ld   [$D000], a                               ; $45B2: $EA $00 $D0
 
-func_017_45B5:
+func_017_45B5::
 label_017_45B5:
     ld   hl, $D012                                ; $45B5: $21 $12 $D0
     inc  [hl]                                     ; $45B8: $34
@@ -334,7 +334,7 @@ Data_017_4679::
     db   $00, $00, $00, $1A, $00, $1C, $00, $00  ; $4691 |........|
     db   $00, $00, $1D, $1B                      ; $4699 |....|
 
-func_017_469D:
+func_017_469D::
     ld   a, [$D010]                               ; $469D: $FA $10 $D0
     cp   $FF                                      ; $46A0: $FE $FF
     ret  z                                        ; $46A2: $C8
@@ -448,7 +448,7 @@ Data_017_4714::
     db   $50, $50, $10, $10, $10, $10, $10, $10  ; $4774 |PP......|
     db   $50, $10, $10, $70, $10, $10, $10, $10  ; $477C |P..p....|
 
-func_017_4784:
+func_017_4784::
     ld   a, [$D011]                               ; $4784: $FA $11 $D0
     rla                                           ; $4787: $17
     and  $FE                                      ; $4788: $E6 $FE
@@ -494,7 +494,7 @@ jr_017_47B1:
 jr_017_47C6:
     ld   a, $5D                                   ; $47C6: $3E $5D
 
-func_017_47C8:
+func_017_47C8::
     ldh  [$FFE9], a                               ; $47C8: $E0 $E9
     ld   c, $12                                   ; $47CA: $0E $12
     ld   b, $08                                   ; $47CC: $06 $08
@@ -585,7 +585,7 @@ jr_017_482D:
 
     ret                                           ; $4838: $C9
 
-func_017_4839:
+func_017_4839::
     ld   a, [$C114]                               ; $4839: $FA $14 $C1
     inc  a                                        ; $483C: $3C
     cp   $C0                                      ; $483D: $FE $C0
@@ -621,7 +621,7 @@ Data_017_4862::
     db   $83, $82, $83, $82, $83, $82, $83, $82  ; $4882 |........|
     db   $83, $82                                ; $488A |..|
 
-func_017_488C:
+func_017_488C::
     ldh  a, [hFrameCounter]                               ; $488C: $F0 $E7
     and  $0F                                      ; $488E: $E6 $0F
     cp   $02                                      ; $4890: $FE $02
@@ -1353,7 +1353,7 @@ CreditsWindFishPrepare1Handler::
     call func_017_4E93                            ; $4E8D: $CD $93 $4E
     jp   IncrementCreditsSubsceneAndReturn                           ; $4E90: $C3 $D9 $4C
 
-func_017_4E93:
+func_017_4E93::
     ldh  a, [hIsGBC]                               ; $4E93: $F0 $FE
     and  a                                        ; $4E95: $A7
     ret  z                                        ; $4E96: $C8
@@ -1679,7 +1679,7 @@ Data_017_51A7::
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $5397
     db   $00, $00, $00, $00, $00, $00, $00, $00  ; $539F
 
-func_017_53A7:
+func_017_53A7::
     and  a                                        ; $53A7: $A7
     jr   z, jr_017_53B3                           ; $53A8: $28 $09
 
@@ -2234,7 +2234,7 @@ Func_017_5728::
 jr_017_5735:
     ret                                           ; $5735: $C9
 
-func_017_5736:
+func_017_5736::
     ldh  a, [$FFCB]                               ; $5736: $F0 $CB
     and  $30                                      ; $5738: $E6 $30
     ret  nz                                       ; $573A: $C0
@@ -2619,7 +2619,7 @@ jr_017_594F:
     inc  e                                        ; $596E: $1C
     inc  e                                        ; $596F: $1C
 
-func_017_5970:
+func_017_5970::
     ldh  a, [hFrameCounter]                               ; $5970: $F0 $E7
     and  $01                                      ; $5972: $E6 $01
     jr   nz, jr_017_598F                          ; $5974: $20 $19
@@ -2655,7 +2655,7 @@ jr_017_598F:
     ld   hl, $5960                                ; $59A3: $21 $60 $59
     jp   label_017_5A32                           ; $59A6: $C3 $32 $5A
 
-func_017_59A9:
+func_017_59A9::
     ldh  a, [hFrameCounter]                               ; $59A9: $F0 $E7
     and  $03                                      ; $59AB: $E6 $03
     jr   nz, jr_017_59C7                          ; $59AD: $20 $18
@@ -2722,7 +2722,7 @@ jr_017_59C7:
     nop                                           ; $59FB: $00
     nop                                           ; $59FC: $00
 
-func_017_59FD:
+func_017_59FD::
     ldh  a, [hFrameCounter]                               ; $59FD: $F0 $E7
     and  $0F                                      ; $59FF: $E6 $0F
     jr   nz, jr_017_5A1B                          ; $5A01: $20 $18
@@ -2878,7 +2878,7 @@ jr_017_5AFC:
     call func_017_5B96                            ; $5AFC: $CD $96 $5B
     ret                                           ; $5AFF: $C9
 
-func_017_5B00:
+func_017_5B00::
     call LCDOff                                   ; $5B00: $CD $CF $28
     call CreditsLoadBGMap                         ; $5B03: $CD $19 $5B
     call func_017_5B37                            ; $5B06: $CD $37 $5B
@@ -2924,7 +2924,7 @@ CreditsLoadBGMap:
     and  b                                        ; $5B35: $A0
     and  c                                        ; $5B36: $A1
 
-func_017_5B37:
+func_017_5B37::
     ld   hl, $5B32                                ; $5B37: $21 $32 $5B
     ld   a, [$D000]                               ; $5B3A: $FA $00 $D0
     dec  a                                        ; $5B3D: $3D
@@ -2997,7 +2997,7 @@ jr_017_5B73:
     call func_017_5BE2                            ; $5B92: $CD $E2 $5B
     ret                                           ; $5B95: $C9
 
-func_017_5B96:
+func_017_5B96::
     ldh  a, [hFrameCounter]                               ; $5B96: $F0 $E7
     rra                                           ; $5B98: $1F
     rra                                           ; $5B99: $1F
@@ -3046,7 +3046,7 @@ label_017_5BD0:
     ld   [hl], a                                  ; $5BDE: $77
     jp   Farcall                                  ; $5BDF: $C3 $D7 $0B
 
-func_017_5BE2:
+func_017_5BE2::
     ldh  a, [hBaseScrollY]                               ; $5BE2: $F0 $97
     cpl                                           ; $5BE4: $2F
     inc  a                                        ; $5BE5: $3C
@@ -3943,7 +3943,7 @@ jr_017_64B3:
     and  a                                        ; $64DB: $A7
     jr   nz, jr_017_651D                          ; $64DC: $20 $3F
 
-func_017_64DE:
+func_017_64DE::
 label_017_64DE:
     xor  a                                        ; $64DE: $AF
     ld   [wCreditsSubscene], a                               ; $64DF: $EA $0E $D0
@@ -4063,7 +4063,7 @@ Data_017_651E::
     db   $16, $67, $16, $67, $16, $67, $16, $67  ; $67BE |.g.g.g.g|
     db   $4C, $67, $82, $67                      ; $67C6 |Lg.g|
 
-func_017_67CA:
+func_017_67CA::
     ldh  a, [hFrameCounter]                               ; $67CA: $F0 $E7
     and  $01                                      ; $67CC: $E6 $01
     cp   $01                                      ; $67CE: $FE $01
@@ -4509,7 +4509,7 @@ jr_017_6C73:
     ld   [hl], a                                  ; $6C81: $77
     jp   Farcall                                  ; $6C82: $C3 $D7 $0B
 
-func_017_6C85:
+func_017_6C85::
     ld   hl, wFarcallParams                       ; $6C85: $21 $01 $DE
     ld   a, BANK(func_020_7C26)                   ; $6C88: $3E $20
     ld   [hl+], a                                 ; $6C8A: $22
@@ -4591,7 +4591,7 @@ jr_017_6CDD:
 jr_017_6D0A:
     ret                                           ; $6D0A: $C9
 
-func_017_6D0B:
+func_017_6D0B::
     ld   hl, wFarcallParams                       ; $6D0B: $21 $01 $DE
     ld   a, BANK(func_024_7801)                   ; $6D0E: $3E $24
     ld   [hl+], a                                 ; $6D10: $22
@@ -4655,7 +4655,7 @@ CreditsLinkFaceCloseUp2Handler::
 
     call IncrementCreditsSubscene                            ; $6D79: $CD $D9 $4C
 
-func_017_6D7C:
+func_017_6D7C::
 jr_017_6D7C:
     ldh  a, [hFrameCounter]                               ; $6D7C: $F0 $E7
     and  $03                                      ; $6D7E: $E6 $03
@@ -4723,7 +4723,7 @@ jr_017_6DC1:
     ld   [wOBJ0Palette], a                               ; $6DD7: $EA $98 $DB
     ret                                           ; $6DDA: $C9
 
-func_017_6DDB:
+func_017_6DDB::
 jr_017_6DDB:
     ld   hl, wFarcallParams                       ; $6DDB: $21 $01 $DE
     ld   a, BANK(Func_024_7A40)                   ; $6DDE: $3E $24
@@ -5233,7 +5233,7 @@ jr_017_71AC:
 jr_017_71CC:
     ret                                           ; $71CC: $C9
 
-func_017_71CD:
+func_017_71CD::
     ld   hl, wFarcallParams                       ; $71CD: $21 $01 $DE
     ld   a, BANK(Func_020_7D1C)                   ; $71D0: $3E $20
     ld   [hl+], a                                 ; $71D2: $22
@@ -6580,7 +6580,7 @@ jr_017_7953:
 
     ret                                           ; $795D: $C9
 
-func_017_795E:
+func_017_795E::
     ld   hl, wFarcallParams                       ; $795E: $21 $01 $DE
     ld   a, BANK(func_027_73C7)                   ; $7961: $3E $27
     ld   [hl+], a                                 ; $7963: $22
@@ -6594,7 +6594,7 @@ func_017_795E:
 
     ret                                           ; $7970: $C9
 
-func_017_7971:
+func_017_7971::
     ldh  a, [hIsGBC]                               ; $7971: $F0 $FE
     and  a                                        ; $7973: $A7
 
@@ -6698,7 +6698,7 @@ Func_017_79A4::
     sub  l                                        ; $79FF: $95
     ld   d, a                                     ; $7A00: $57
 
-func_017_7A01:
+func_017_7A01::
 jr_017_7A01:
     ldh  a, [hIsGBC]                               ; $7A01: $F0 $FE
     and  a                                        ; $7A03: $A7
@@ -6729,7 +6729,7 @@ jr_017_7A1B:
     ld   [$DDD1], a                               ; $7A25: $EA $D1 $DD
     ret                                           ; $7A28: $C9
 
-func_017_7A29:
+func_017_7A29::
     push bc                                       ; $7A29: $C5
     push de                                       ; $7A2A: $D5
     ldh  a, [hScratch0]                               ; $7A2B: $F0 $D7
@@ -6862,7 +6862,7 @@ jr_017_7AEB:
     ld   a, $FF                                   ; $7AEB: $3E $FF
     ldh  [$FF9B], a                               ; $7AED: $E0 $9B
 
-func_017_7AEF:
+func_017_7AEF::
     ldh  a, [hFrameCounter]                               ; $7AEF: $F0 $E7
     rra                                           ; $7AF1: $1F
     rra                                           ; $7AF2: $1F
@@ -6871,7 +6871,7 @@ func_017_7AEF:
     add  $00                                      ; $7AF6: $C6 $00
     ldh  [$FF9D], a                               ; $7AF8: $E0 $9D
 
-func_017_7AFA:
+func_017_7AFA::
     push bc                                       ; $7AFA: $C5
     xor  a                                        ; $7AFB: $AF
     ldh  [$FF9A], a                               ; $7AFC: $E0 $9A
@@ -6938,7 +6938,7 @@ Func_017_7B5B::
     call func_017_7AFA                            ; $7B5B: $CD $FA $7A
     ret                                           ; $7B5E: $C9
 
-func_017_7B5F:
+func_017_7B5F::
     ld   hl, wFarcallParams                       ; $7B5F: $21 $01 $DE
     ld   a, BANK(func_020_7BA5)                   ; $7B62: $3E $20
     ld   [hl+], a                                 ; $7B64: $22
@@ -7157,7 +7157,7 @@ jr_017_7C6A:
     ld   [$C5AB], a                               ; $7C87: $EA $AB $C5
     call IncrementEntityState                     ; $7C8A: $CD $12 $3B
 
-func_017_7C8D:
+func_017_7C8D::
 jr_017_7C8D:
     ld   hl, wEntitiesUnknowTableY                ; $7C8D: $21 $D0 $C3
     add  hl, bc                                   ; $7C90: $09
@@ -7470,10 +7470,10 @@ jr_017_7E24:
     ld   [$C003], a                               ; $7E29: $EA $03 $C0
     ret                                           ; $7E2C: $C9
 
-func_017_7E2D:
+func_017_7E2D::
     call func_017_7E3A                            ; $7E2D: $CD $3A $7E
 
-func_017_7E30:
+func_017_7E30::
     push bc                                       ; $7E30: $C5
     ld   a, c                                     ; $7E31: $79
     add  $10                                      ; $7E32: $C6 $10
@@ -7482,7 +7482,7 @@ func_017_7E30:
     pop  bc                                       ; $7E38: $C1
     ret                                           ; $7E39: $C9
 
-func_017_7E3A:
+func_017_7E3A::
     ld   hl, wEntitiesSpeedXTable                                ; $7E3A: $21 $40 $C2
     add  hl, bc                                   ; $7E3D: $09
     ld   a, [hl]                                  ; $7E3E: $7E
@@ -7537,7 +7537,7 @@ jr_017_7E65:
     ld   hl, $C310                                ; $7E7B: $21 $10 $C3
     jr   jr_017_7E52                              ; $7E7E: $18 $D2
 
-func_017_7E80:
+func_017_7E80::
 label_017_7E80:
     and  $01                                      ; $7E80: $E6 $01
     jr   z, jr_017_7E88                           ; $7E82: $28 $04
@@ -7562,7 +7562,7 @@ jr_017_7EA0:
     ld   [$DDD1], a                               ; $7EA0: $EA $D1 $DD
     ret                                           ; $7EA3: $C9
 
-func_017_7EA4:
+func_017_7EA4::
 label_017_7EA4:
     push hl                                       ; $7EA4: $E5
     ld   a, $02                                   ; $7EA5: $3E $02
@@ -7682,7 +7682,7 @@ jr_017_7F0B:
     ld   [$DDD5], a                               ; $7F2C: $EA $D5 $DD
     ret                                           ; $7F2F: $C9
 
-func_017_7F30:
+func_017_7F30::
 label_017_7F30:
     and  $01                                      ; $7F30: $E6 $01
     jr   z, jr_017_7F3C                           ; $7F32: $28 $08
@@ -7709,7 +7709,7 @@ jr_017_7F52:
     xor  a                                        ; $7F55: $AF
     ret                                           ; $7F56: $C9
 
-func_017_7F57:
+func_017_7F57::
 jr_017_7F57:
     push hl                                       ; $7F57: $E5
     ldh  a, [hScratchD]                           ; $7F58: $F0 $E4
@@ -7775,7 +7775,7 @@ jr_017_7F8E:
 
     ret                                           ; $7FA8: $C9
 
-func_017_7FA9:
+func_017_7FA9::
     ld   hl, wFarcallParams                       ; $7FA9: $21 $01 $DE
     ld   a, BANK(func_020_7D7C)                   ; $7FAC: $3E $20
     ld   [hl+], a                                 ; $7FAE: $22

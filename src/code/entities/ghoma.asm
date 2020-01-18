@@ -63,7 +63,7 @@ jr_005_7C1C:
 ._02 dw func_005_7D62                             ; $7C32
 ._03 dw func_005_7E0A                             ; $7C34
 
-func_005_7C36:
+func_005_7C36::
     call GetRandomByte                            ; $7C36: $CD $0D $28
     and  $01                                      ; $7C39: $E6 $01
     ld   hl, wEntitiesPrivateState1Table          ; $7C3B: $21 $B0 $C2
@@ -81,7 +81,7 @@ func_005_7C36:
     ld   [hl], $01                                ; $7C4F: $36 $01
     ret                                           ; $7C51: $C9
 
-func_005_7C52:
+func_005_7C52::
     ld   hl, wEntitiesUnknowTableG                ; $7C52: $21 $00 $C3
     add  hl, bc                                   ; $7C55: $09
     ld   a, [hl]                                  ; $7C56: $7E
@@ -167,7 +167,7 @@ label_005_7CB3:
     dec  a                                        ; $7CD2: $3D
     jr   nz, label_005_7CE8                       ; $7CD3: $20 $13
 
-func_005_7CD5:
+func_005_7CD5::
     call IncrementEntityState                     ; $7CD5: $CD $12 $3B
     ld   [hl], $03                                ; $7CD8: $36 $03
     call ClearEntitySpeed                         ; $7CDA: $CD $7F $3D
@@ -266,7 +266,7 @@ jr_005_7D5A:
 label_005_7D5F:
     jp   SetEntitySpriteVariant                   ; $7D5F: $C3 $0C $3B
 
-func_005_7D62:
+func_005_7D62::
     ld   hl, wEntitiesPrivateState1Table          ; $7D62: $21 $B0 $C2
     add  hl, bc                                   ; $7D65: $09
     ld   a, [hl]                                  ; $7D66: $7E
@@ -378,7 +378,7 @@ jr_005_7E02:
     ld   a, [hl]                                  ; $7E06: $7E
     jp   SetEntitySpriteVariant                   ; $7E07: $C3 $0C $3B
 
-func_005_7E0A:
+func_005_7E0A::
     ld   hl, wEntitiesUnknowTableG                ; $7E0A: $21 $00 $C3
     add  hl, bc                                   ; $7E0D: $09
     ld   a, [hl]                                  ; $7E0E: $7E
@@ -453,7 +453,7 @@ label_005_7E6C:
 ._01 dw func_005_7E89                             ; $7E74
 ._02 dw func_005_7E98                             ; $7E76
 
-func_005_7E78:
+func_005_7E78::
     call GetEntityTransitionCountdown             ; $7E78: $CD $05 $0C
     ld   [hl], $A0                                ; $7E7B: $36 $A0
     ld   hl, wEntitiesFlashCountdownTable         ; $7E7D: $21 $20 $C4
@@ -466,7 +466,7 @@ label_005_7E83:
     inc  [hl]                                     ; $7E87: $34
     ret                                           ; $7E88: $C9
 
-func_005_7E89:
+func_005_7E89::
     call GetEntityTransitionCountdown             ; $7E89: $CD $05 $0C
     ret  nz                                       ; $7E8C: $C0
 
@@ -476,7 +476,7 @@ func_005_7E89:
     ld   [hl], $FF                                ; $7E93: $36 $FF
     jp   label_005_7E83                           ; $7E95: $C3 $83 $7E
 
-func_005_7E98:
+func_005_7E98::
     call GetEntityTransitionCountdown             ; $7E98: $CD $05 $0C
     jr   nz, jr_005_7ED4                          ; $7E9B: $20 $37
 

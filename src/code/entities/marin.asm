@@ -177,7 +177,7 @@ jr_005_4F39:
 ._04 dw func_005_5161                             ; $4F60
 ._05 dw func_005_51BC                             ; $4F62
 
-func_005_4F64:
+func_005_4F64::
     ldh  a, [hMapRoom]                            ; $4F64: $F0 $F6
     cp   $C0                                      ; $4F66: $FE $C0
     jr   nc, jr_005_4F6F                          ; $4F68: $30 $05
@@ -319,7 +319,7 @@ jr_005_5018:
     ld   [hl], d                                  ; $501C: $72
     jp   IncrementEntityState                     ; $501D: $C3 $12 $3B
 
-func_005_5020:
+func_005_5020::
     call func_005_7A3A                            ; $5020: $CD $3A $7A
     ld   hl, wEntitiesUnknowTableP                ; $5023: $21 $40 $C4
     add  hl, bc                                   ; $5026: $09
@@ -356,10 +356,10 @@ jr_005_5054:
     call IncrementEntityState                     ; $5054: $CD $12 $3B
     ld   [hl], b                                  ; $5057: $70
 
-func_005_5058:
+func_005_5058::
     ret                                           ; $5058: $C9
 
-func_005_5059:
+func_005_5059::
     ld   a, $02                                   ; $5059: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $505B: $E0 $A1
     ld   [wC167], a                               ; $505D: $EA $67 $C1
@@ -493,7 +493,7 @@ jr_005_50E2:
 jr_005_512A:
     ret                                           ; $512A: $C9
 
-func_005_512B:
+func_005_512B::
     ld   a, [wDialogState]                        ; $512B: $FA $9F $C1
     and  a                                        ; $512E: $A7
     jr   nz, jr_005_515E                          ; $512F: $20 $2D
@@ -528,7 +528,7 @@ jr_005_515E:
 Data_005_515F::
     db   $90, $17
 
-func_005_5161:
+func_005_5161::
     ld   a, $01                                   ; $5161: $3E $01
     ld   [$DE00], a                               ; $5163: $EA $00 $DE
     call GetEntityTransitionCountdown             ; $5166: $CD $05 $0C
@@ -586,7 +586,7 @@ jr_005_51A1:
     ldh  [hActiveEntitySpriteVariant], a          ; $51B7: $E0 $F1
     jp   RenderSimpleEntityWithSpriteVariantToOAM ; $51B9: $C3 $77 $3C
 
-func_005_51BC:
+func_005_51BC::
     ld   a, [wDialogState]                        ; $51BC: $FA $9F $C1
     and  a                                        ; $51BF: $A7
     ret  nz                                       ; $51C0: $C0
@@ -600,7 +600,7 @@ func_005_51BC:
 Data_005_51CA::
     db   $5C, $00, $5C, $20
 
-func_005_51CE:
+func_005_51CE::
     ld   a, [wTradeSequenceItem]                  ; $51CE: $FA $0E $DB
     cp   $07                                      ; $51D1: $FE $07
     jr   c, jr_005_51FB                           ; $51D3: $38 $26
@@ -694,7 +694,7 @@ Data_005_5274::
     db   $03, $03, $03, $03, $03, $04, $03, $04, $03, $03, $03, $02, $02, $02, $02, $02
     db   $00, $00, $01, $01, $00, $00, $01, $01, $00, $00, $01, $01, $00, $00, $01, $01
 
-func_005_5294:
+func_005_5294::
     call label_BFB                                ; $5294: $CD $FB $0B
     jr   nz, jr_005_52A4                          ; $5297: $20 $0B
 
@@ -714,7 +714,7 @@ jr_005_52A4:
     add  hl, de                                   ; $52AD: $19
     ld   a, [hl]                                  ; $52AE: $7E
 
-func_005_52AF:
+func_005_52AF::
     ldh  [hActiveEntitySpriteVariant], a          ; $52AF: $E0 $F1
     ld   a, $38                                   ; $52B1: $3E $38
     ldh  [wActiveEntityPosX], a                   ; $52B3: $E0 $EE
@@ -739,7 +739,7 @@ func_005_52AF:
 jr_005_52D8:
     jp   label_3D8A                               ; $52D8: $C3 $8A $3D
 
-func_005_52DB:
+func_005_52DB::
     ld   a, $03                                   ; $52DB: $3E $03
     call func_005_52AF                            ; $52DD: $CD $AF $52
     call GetEntityTransitionCountdown             ; $52E0: $CD $05 $0C
@@ -771,7 +771,7 @@ func_005_52DB:
 jr_005_5311:
     ret                                           ; $5311: $C9
 
-func_005_5312:
+func_005_5312::
     call func_005_7A3A                            ; $5312: $CD $3A $7A
     call func_005_54C3                            ; $5315: $CD $C3 $54
     call func_005_5506                            ; $5318: $CD $06 $55

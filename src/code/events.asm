@@ -346,7 +346,7 @@ jr_002_5EED:
 
     ld   de, Data_002_5EA7                        ; $5F24: $11 $A7 $5E
 
-label_002_5F27::
+label_002_5F27:
     ldh  a, [$FFCF]                               ; $5F27: $F0 $CF
     ld   [hl+], a                                 ; $5F29: $22
     ldh  a, [$FFD0]                               ; $5F2A: $F0 $D0

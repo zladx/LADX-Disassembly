@@ -536,7 +536,7 @@ jr_027_7910:
     ld   [$D020], a                               ; $791F: $EA $20 $D0
     jp   label_027_7BAB                           ; $7922: $C3 $AB $7B
 
-func_027_7925:
+func_027_7925::
     ld   hl, $D021                                ; $7925: $21 $21 $D0
     ld   a, [hl]                                  ; $7928: $7E
     and  a                                        ; $7929: $A7
@@ -589,14 +589,14 @@ Data_027_794E::
     db   $E8, $06, $06, $00, $E8, $FE, $04, $00   ; $79D6
     db   $E8, $F6, $02, $00, $E8, $EE, $00, $00   ; $79DE
 
-func_027_79E6:
+func_027_79E6::
     xor  a                                        ; $79E6: $AF
     ld   [$C3C0], a                               ; $79E7: $EA $C0 $C3
     ld   hl, Data_027_794E                        ; $79EA: $21 $4E $79
     ld   c, $26                                   ; $79ED: $0E $26
     jp   label_3CE0                               ; $79EF: $C3 $E0 $3C
 
-func_027_79F2:
+func_027_79F2::
     ld   a, [$D466]                               ; $79F2: $FA $66 $D4
     and  a                                        ; $79F5: $A7
     jr   nz, jr_027_7A06                          ; $79F6: $20 $0E
@@ -639,7 +639,7 @@ Data_027_7A0B::
     db   $02, $02, $02, $02, $03, $03, $03, $03   ; $7ABB
     db   $04, $04, $04, $04, $05, $05, $05, $05   ; $7AC3
 
-func_027_7ACB:
+func_027_7ACB::
     ld   a, [$D016]                               ; $7ACB: $FA $16 $D0
     cp   $C0                                      ; $7ACE: $FE $C0
     jr   nc, jr_027_7ADE                          ; $7AD0: $30 $0C
@@ -701,7 +701,7 @@ jr_027_7B16:
     ld   [hl], a                                  ; $7B16: $77
     ret                                           ; $7B17: $C9
 
-func_027_7B18:
+func_027_7B18::
     call func_027_7B25                            ; $7B18: $CD $25 $7B
     push bc                                       ; $7B1B: $C5
     ld   a, c                                     ; $7B1C: $79
@@ -711,7 +711,7 @@ func_027_7B18:
     pop  bc                                       ; $7B23: $C1
     ret                                           ; $7B24: $C9
 
-func_027_7B25:
+func_027_7B25::
     ld   hl, wEntitiesSpeedXTable                 ; $7B25: $21 $40 $C2
     add  hl, bc                                   ; $7B28: $09
     ld   a, [hl]                                  ; $7B29: $7E
@@ -764,7 +764,7 @@ Data_027_7B5F::
     db   $00, $00, $7A, $07, $00, $08, $7A, $27   ; $7B7F
     db   $00, $00, $7C, $07, $00, $08, $7C, $27   ; $7B87
 
-func_027_7B8F:
+func_027_7B8F::
     xor  a                                        ; $7B8F: $AF
     ld   [$C3C0], a                               ; $7B90: $EA $C0 $C3
     ld   a, [$D01B]                               ; $7B93: $FA $1B $D0
@@ -786,11 +786,11 @@ label_027_7BAB:
     inc  [hl]                                     ; $7BAE: $34
     ret                                           ; $7BAF: $C9
 
-func_027_7BB0:
+func_027_7BB0::
     call func_027_7E5A                            ; $7BB0: $CD $5A $7E
     call func_027_7F8C                            ; $7BB3: $CD $8C $7F
 
-func_027_7BB6:
+func_027_7BB6::
     xor  a                                        ; $7BB6: $AF
     ld   [wPaletteUnknownC], a                    ; $7BB7: $EA $D3 $DD
     ld   a, $20                                   ; $7BBA: $3E $20
@@ -887,11 +887,11 @@ Data_027_7E45::
     db   $85, $7C, $BD, $7C, $F5, $7C, $2D, $7D   ; $7E45
     db   $65, $7D, $9D, $7D, $D5, $7D, $0D, $7E   ; $7E4D
 
-func_027_7E55:
+func_027_7E55::
     ld   hl, Data_027_7C85                        ; $7E55: $21 $85 $7C
     jr   jr_027_7E7D                              ; $7E58: $18 $23
 
-func_027_7E5A:
+func_027_7E5A::
     ld   a, [$D016]                               ; $7E5A: $FA $16 $D0
     ld   e, a                                     ; $7E5D: $5F
     ld   d, $00                                   ; $7E5E: $16 $00
@@ -958,11 +958,11 @@ Data_027_7F47::
     db   $FF, $7F, $20, $10, $0D, $7E, $FF, $7F   ; $7F77
     db   $FF, $7F, $00, $00, $68, $7D, $FF, $7F   ; $7F7F
 
-func_027_7F87:
+func_027_7F87::
     ld   hl, Data_027_7F47                        ; $7F87: $21 $47 $7F
     jr   jr_027_7FAF                              ; $7F8A: $18 $23
 
-func_027_7F8C:
+func_027_7F8C::
     ld   a, [$D016]                               ; $7F8C: $FA $16 $D0
     ld   e, a                                     ; $7F8F: $5F
     ld   d, $00                                   ; $7F90: $16 $00

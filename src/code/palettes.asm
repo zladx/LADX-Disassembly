@@ -67,13 +67,13 @@ jr_021_404F:
     ld   [wPaletteDataFlags], a                    ; $405E: $EA $D1 $DD
     ret                                           ; $4061: $C9
 
-func_021_4062:
+func_021_4062::
     ld   b, $40                                   ; $4062: $06 $40
     ld   a, $80                                   ; $4064: $3E $80
     ld   [de], a                                  ; $4066: $12
     inc  de                                       ; $4067: $13
 
-func_021_4068:
+func_021_4068::
 jr_021_4068:
     ld   a, [hl+]                                 ; $4068: $2A
     ld   [de], a                                  ; $4069: $12
@@ -158,7 +158,7 @@ jr_021_40D3:
     ld   [wPaletteUnknownE], a                    ; $40D7: $EA $D5 $DD
     ret                                           ; $40DA: $C9
 
-func_021_40DB:
+func_021_40DB::
     ld   a, [wIsIndoor]                           ; $40DB: $FA $A5 $DB
     and  a                                        ; $40DE: $A7
     jr   nz, jr_021_411A                          ; $40DF: $20 $39
@@ -313,7 +313,7 @@ jr_021_4191:
     ld   h, b                                     ; $41B2: $60
     ld   l, a                                     ; $41B3: $6F
 
-func_021_41B4:
+func_021_41B4::
 label_021_41B4:
 jr_021_41B4:
     ld   a, [wPaletteUnknownE]                    ; $41B4: $FA $D5 $DD
@@ -969,7 +969,7 @@ Data_021_443F::
     db   $1D, $01, $01, $01, $01, $01, $00, $04  ; $5179 |........|
     db   $01, $01, $01, $00                      ; $5181 |....|
 
-func_021_5185:
+func_021_5185::
     ld   a, [wIsIndoor]                           ; $5185: $FA $A5 $DB
     and  a                                        ; $5188: $A7
     jr   z, jr_021_51D6                           ; $5189: $28 $4B
@@ -1111,7 +1111,7 @@ Data_021_52EE::
     db   $DA, $2C, $00, $98, $12, $00, $99, $65  ; $530E |.,.....e|
     db   $02, $98
 
-func_021_5318:
+func_021_5318::
     ld   a, [wIsIndoor]                           ; $5318: $FA $A5 $DB
     and  a                                        ; $531B: $A7
     jr   nz, jr_021_5342                          ; $531C: $20 $24
@@ -1168,7 +1168,7 @@ Func_021_5355::
     call func_021_5432                            ; $5362: $CD $32 $54
     ret                                           ; $5365: $C9
 
-func_021_5366:
+func_021_5366::
     ldh  a, [hMapId]                              ; $5366: $F0 $F7
     cp   $0A                                      ; $5368: $FE $0A
     jr   nc, jr_021_537B                          ; $536A: $30 $0F
@@ -1307,7 +1307,7 @@ jr_021_542E:
     ld   [$DDD7], a                               ; $542E: $EA $D7 $DD
     ret                                           ; $5431: $C9
 
-func_021_5432:
+func_021_5432::
     ld   a, [wBGPaletteEffectAddress]             ; $5432: $FA $CC $C3
 
 jr_021_5435:
@@ -1318,7 +1318,7 @@ jr_021_5435:
     cp   $02                                      ; $543C: $FE $02
     jr   z, jr_021_5445                           ; $543E: $28 $05
 
-func_021_5440:
+func_021_5440::
     ld   hl, Data_021_53E3                        ; $5440: $21 $E3 $53
     jr   jr_021_5448                              ; $5443: $18 $03
 
@@ -1352,7 +1352,7 @@ jr_021_5460:
 jr_021_5465:
     ret                                           ; $5465: $C9
 
-func_021_5466:
+func_021_5466::
     push bc                                       ; $5466: $C5
     push hl                                       ; $5467: $E5
     ld   hl, $DC10                                ; $5468: $21 $10 $DC
@@ -1461,7 +1461,7 @@ jr_021_54F1:
     pop  bc                                       ; $54F7: $C1
     ret                                           ; $54F8: $C9
 
-func_021_54F9:
+func_021_54F9::
     push de                                       ; $54F9: $D5
     ld   b, a                                     ; $54FA: $47
     and  $0F                                      ; $54FB: $E6 $0F

@@ -168,7 +168,7 @@ jr_005_4611:
 Data_005_461C::
     db   $00, $04, $06, $04, $00, $FC, $FA, $FC
 
-func_005_4624:
+func_005_4624::
     xor  a                                        ; $4624: $AF
     call SetEntitySpriteVariant                   ; $4625: $CD $0C $3B
     call GetEntityTransitionCountdown             ; $4628: $CD $05 $0C
@@ -205,7 +205,7 @@ func_005_4624:
     ld   [hl], a                                  ; $465F: $77
     jp   IncrementEntityState                     ; $4660: $C3 $12 $3B
 
-func_005_4663:
+func_005_4663::
     call func_005_7AB1                            ; $4663: $CD $B1 $7A
     call label_3B23                               ; $4666: $CD $23 $3B
     ldh  a, [hFFE8]                               ; $4669: $F0 $E8
@@ -242,7 +242,7 @@ Data_005_468F::
 Data_005_469F::
     db   $00, $00, $00, $00, $90, $90, $90, $90, $20, $40, $60, $80, $20, $40, $60, $80
 
-func_005_46AF:
+func_005_46AF::
     ld   hl, wEntitiesPosZTable                   ; $46AF: $21 $10 $C3
     add  hl, bc                                   ; $46B2: $09
     ldh  a, [hFrameCounter]                       ; $46B3: $F0 $E7
@@ -343,7 +343,7 @@ jr_005_46E9:
 jr_005_474D:
     ret                                           ; $474D: $C9
 
-func_005_474E:
+func_005_474E::
     call label_3B44                               ; $474E: $CD $44 $3B
     call func_005_7AB1                            ; $4751: $CD $B1 $7A
     ldh  a, [wActiveEntityPosX]                   ; $4754: $F0 $EE

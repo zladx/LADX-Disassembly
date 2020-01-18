@@ -30,7 +30,7 @@ jr_005_6879:
 ._01 dw func_005_6957                             ; $688D
 ._02 dw func_005_69B1                             ; $688F
 
-func_005_6891:
+func_005_6891::
     call GetEntityTransitionCountdown             ; $6891: $CD $05 $0C
     jr   nz, jr_005_689B                          ; $6894: $20 $05
 
@@ -159,7 +159,7 @@ jr_005_6953:
 
     ret                                           ; $6956: $C9
 
-func_005_6957:
+func_005_6957::
     call GetEntityTransitionCountdown             ; $6957: $CD $05 $0C
     jr   nz, jr_005_69A0                          ; $695A: $20 $44
 
@@ -223,7 +223,7 @@ Data_005_69A9::
 Data_005_69AD::
     db   $00, $00, $F4, $0C
 
-func_005_69B1:
+func_005_69B1::
     ld   hl, wEntitiesUnknowTableG                ; $69B1: $21 $00 $C3
     add  hl, bc                                   ; $69B4: $09
     ld   a, [hl]                                  ; $69B5: $7E
@@ -305,7 +305,7 @@ Data_005_6A24::
     db   $66, $23, $64, $23, $64, $03, $66, $03, $62, $03, $62, $23, $60, $03, $60, $23
     db   $68, $03, $68, $23
 
-func_005_6A38:
+func_005_6A38::
     call IsEntityUnknownFZero                     ; $6A38: $CD $00 $0C
     ld   hl, wRoomTransitionState                 ; $6A3B: $21 $24 $C1
     or   [hl]                                     ; $6A3E: $B6
@@ -327,7 +327,7 @@ jr_005_6A56:
     call func_005_6AA5                            ; $6A59: $CD $A5 $6A
     jp   label_3D8A                               ; $6A5C: $C3 $8A $3D
 
-func_005_6A5F:
+func_005_6A5F::
     ld   hl, wEntitiesUnknowTableY                ; $6A5F: $21 $D0 $C3
     add  hl, bc                                   ; $6A62: $09
     ld   a, [hl]                                  ; $6A63: $7E
@@ -372,7 +372,7 @@ func_005_6A5F:
     ld   de, Data_005_6A24                        ; $6A9F: $11 $24 $6A
     jp   RenderAnimatedActiveEntity               ; $6AA2: $C3 $C0 $3B
 
-func_005_6AA5:
+func_005_6AA5::
     ld   hl, wEntitiesUnknowTableY                ; $6AA5: $21 $D0 $C3
     add  hl, bc                                   ; $6AA8: $09
     ld   a, [hl]                                  ; $6AA9: $7E
@@ -510,7 +510,7 @@ jr_005_6CAE:
     ld   a, $02                                   ; $6CC1: $3E $02
     jp   label_3DA0                               ; $6CC3: $C3 $A0 $3D
 
-func_005_6CC6:
+func_005_6CC6::
     call GetEntityTransitionCountdown             ; $6CC6: $CD $05 $0C
     ld   [hl], $80                                ; $6CC9: $36 $80
     xor  a                                        ; $6CCB: $AF

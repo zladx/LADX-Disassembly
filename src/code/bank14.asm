@@ -659,7 +659,7 @@ jr_014_4B8E:
     nop                                           ; $4BA5: $00
     nop                                           ; $4BA6: $00
 
-func_014_4BA7:
+func_014_4BA7::
     ld   a, [$D464]                               ; $4BA7: $FA $64 $D4
     cp   $3E                                      ; $4BAA: $FE $3E
     ret  c                                        ; $4BAC: $D8
@@ -688,7 +688,7 @@ jr_014_4BD6:
     ld   [wPaletteDataFlags], a                    ; $4BD6: $EA $D1 $DD
     ret                                           ; $4BD9: $C9
 
-func_014_4BDA:
+func_014_4BDA::
 jr_014_4BDA:
     ld   a, [de]                                  ; $4BDA: $1A
     ld   [hl+], a                                 ; $4BDB: $22
@@ -709,7 +709,7 @@ jr_014_4BDA:
     ld   d, a                                     ; $4BEC: $57
     jr   jr_014_4BDA                              ; $4BED: $18 $EB
 
-func_014_4BEF:
+func_014_4BEF::
     ld   a, [$D464]                               ; $4BEF: $FA $64 $D4
     cp   $20                                      ; $4BF2: $FE $20
     ret  nc                                       ; $4BF4: $D0
@@ -731,7 +731,7 @@ jr_014_4C04:
     ld   [wPaletteDataFlags], a                    ; $4C0C: $EA $D1 $DD
     ret                                           ; $4C0F: $C9
 
-func_014_4C10:
+func_014_4C10::
     ld   b, $40                                   ; $4C10: $06 $40
 
 jr_014_4C12:
@@ -2312,7 +2312,7 @@ jr_014_5391:
     ld   hl, hJingle                              ; $539E: $21 $F2 $FF
     ld   [hl], $08                                ; $53A1: $36 $08
 
-func_014_53A3:
+func_014_53A3::
     ld   hl, wEntitiesStatusTable                         ; $53A3: $21 $80 $C2
     add  hl, bc                                   ; $53A6: $09
     ld   [hl], $05                                ; $53A7: $36 $05

@@ -146,7 +146,7 @@ jr_015_4364:
 BouldersEntityHandler::
     ldh  a, [hActiveEntityState]                  ; $4365: $F0 $F0
     and  a                                        ; $4367: $A7
-    jp   nz, $43CA                                ; $4368: $C2 $CA $43
+    jp   nz, label_015_43CA                                ; $4368: $C2 $CA $43
 
     call func_015_7B0D                            ; $436B: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $436E: $CD $05 $0C
@@ -215,7 +215,10 @@ jr_015_43AD:
     jr   @+$22                                    ; $43C6: $18 $20
 
     inc  e                                        ; $43C8: $1C
-    jr   z, jr_015_43DC                           ; $43C9: $28 $11
+    db   $28                           ; $43C9: $28
+
+label_015_43CA:
+    db   $11
 
     xor  [hl]                                     ; $43CB: $AE
     ld   b, e                                     ; $43CC: $43
@@ -1677,7 +1680,7 @@ PokeyEntityHandler::
     jp   nz, label_015_7E09                       ; $4BE3: $C2 $09 $7E
 
     and  a                                        ; $4BE6: $A7
-    jp   nz, $4CD9                                ; $4BE7: $C2 $D9 $4C
+    jp   nz, label_015_4CD9                                ; $4BE7: $C2 $D9 $4C
 
     call func_015_4C85                            ; $4BEA: $CD $85 $4C
     call func_015_7B0D                            ; $4BED: $CD $0D $7B
@@ -1832,7 +1835,10 @@ jr_015_4CC4:
 
     halt                                          ; $4CD5: $76 $00
     db   $76                                      ; $4CD7: $76
-    jr   nz, @+$13                                ; $4CD8: $20 $11
+    db   $20                                ; $4CD8: $20
+
+label_015_4CD9:
+    db   $11
 
     push de                                       ; $4CDA: $D5
     ld   c, h                                     ; $4CDB: $4C
@@ -1840,7 +1846,8 @@ jr_015_4CC4:
     call func_015_7B0D                            ; $4CDF: $CD $0D $7B
     call func_015_7B3E                            ; $4CE2: $CD $3E $7B
     call GetEntityTransitionCountdown             ; $4CE5: $CD $05 $0C
-    jr   nz, jr_015_4CED                          ; $4CE8: $20 $03
+    db   $20                           ; $4CE8: $20
+    db   $03
 
     call label_3B39                               ; $4CEA: $CD $39 $3B
 
@@ -2668,7 +2675,7 @@ jr_015_51D0:
     jp   SetEntitySpriteVariant                   ; $51DC: $C3 $0C $3B
 
 FinalNightmareForm2Handler::
-    call $572B                                    ; $51DF: $CD $2B $57
+    call func_015_572B                                    ; $51DF: $CD $2B $57
     call func_015_7B0D                            ; $51E2: $CD $0D $7B
     call label_C56                                ; $51E5: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $51E8: $F0 $F0
@@ -3642,7 +3649,10 @@ jr_015_571C:
     nop                                           ; $5727: $00
     nop                                           ; $5728: $00
     rst  $38                                      ; $5729: $FF
-    jr   nz, jr_015_571C                          ; $572A: $20 $F0
+    db   $20                          ; $572A: $20
+
+func_015_572B::
+    db   $F0
 
     pop  af                                       ; $572C: $F1
     rla                                           ; $572D: $17
@@ -3667,7 +3677,7 @@ FinalNightmareForm3Handler::
     jp   z, label_015_5DD5                        ; $574A: $CA $D5 $5D
 
     and  a                                        ; $574D: $A7
-    jp   nz, $5DED                                ; $574E: $C2 $ED $5D
+    jp   nz, label_015_5DED                                ; $574E: $C2 $ED $5D
 
     ld   a, c                                     ; $5751: $79
     ld   [$D201], a                               ; $5752: $EA $01 $D2
@@ -3703,7 +3713,7 @@ jr_015_575E:
     ld   e, d                                     ; $577A: $5A
     xor  a                                        ; $577B: $AF
     call SetEntitySpriteVariant                   ; $577C: $CD $0C $3B
-    call $572B                                    ; $577F: $CD $2B $57
+    call func_015_572B                                    ; $577F: $CD $2B $57
     ldh  a, [hLinkPositionX]                      ; $5782: $F0 $98
     push af                                       ; $5784: $F5
     ldh  a, [hLinkPositionY]                      ; $5785: $F0 $99
@@ -3766,7 +3776,7 @@ jr_015_57B7:
     add  hl, de                                   ; $57DE: $19
     ld   a, [hl]                                  ; $57DF: $7E
     ldh  [hActiveEntitySpriteVariant], a               ; $57E0: $E0 $F1
-    jp   $572B                                    ; $57E2: $C3 $2B $57
+    jp   func_015_572B                                    ; $57E2: $C3 $2B $57
 
 jr_015_57E5:
     xor  a                                        ; $57E5: $AF
@@ -4006,7 +4016,7 @@ jr_015_594B:
     add  hl, de                                   ; $5954: $19
     ld   a, [hl]                                  ; $5955: $7E
     ldh  [hActiveEntitySpriteVariant], a               ; $5956: $E0 $F1
-    jp   $572B                                    ; $5958: $C3 $2B $57
+    jp   func_015_572B                                    ; $5958: $C3 $2B $57
 
     jr   @+$16                                    ; $595B: $18 $14
 
@@ -4015,7 +4025,7 @@ jr_015_594B:
     ld   [$0205], sp                              ; $595F: $08 $05 $02
     ld   bc, $E0AF                                ; $5962: $01 $AF $E0
     pop  af                                       ; $5965: $F1
-    call $572B                                    ; $5966: $CD $2B $57
+    call func_015_572B                                    ; $5966: $CD $2B $57
     ldh  a, [hLinkPositionY]                      ; $5969: $F0 $99
     push af                                       ; $596B: $F5
     ldh  a, [hLinkPositionX]                      ; $596C: $F0 $98
@@ -4129,9 +4139,9 @@ jr_015_5A10:
     call SetEntitySpriteVariant                   ; $5A19: $CD $0C $3B
 
 jr_015_5A1C:
-    jp   $572B                                    ; $5A1C: $C3 $2B $57
+    jp   func_015_572B                                    ; $5A1C: $C3 $2B $57
 
-    call $572B                                    ; $5A1F: $CD $2B $57
+    call func_015_572B                                    ; $5A1F: $CD $2B $57
     ldh  a, [hLinkPositionX]                      ; $5A22: $F0 $98
     push af                                       ; $5A24: $F5
     ldh  a, [hLinkPositionY]                      ; $5A25: $F0 $99
@@ -4907,8 +4917,10 @@ jr_015_5DDE:
 
     nop                                           ; $5DEA: $00
     ld   e, d                                     ; $5DEB: $5A
-    jr   nz, jr_015_5DDE                          ; $5DEC: $20 $F0
+    db   $20                           ; $5DEC: $20
 
+label_015_5DED:
+    db   $F0
     rst  $20                                      ; $5DEE: $E7
     rla                                           ; $5DEF: $17
     rla                                           ; $5DF0: $17
@@ -5430,7 +5442,7 @@ jr_015_60B5:
 
 jr_015_60D4:
     call func_015_5FD1                            ; $60D4: $CD $D1 $5F
-    call $6245                                    ; $60D7: $CD $45 $62
+    call func_015_6245                                  ; $60D7: $CD $45 $62
     call label_C56                                ; $60DA: $CD $56 $0C
     call label_3D8A                               ; $60DD: $CD $8A $3D
     call func_015_7B0D                            ; $60E0: $CD $0D $7B
@@ -5681,8 +5693,10 @@ jr_015_623A:
 
     nop                                           ; $6242: $00
     db   $76                                      ; $6243: $76
-    jr   nz, @+$23                                ; $6244: $20 $21
+    db   $20                               ; $6244: $20
 
+func_015_6245:
+    db   $21
     ld   b, b                                     ; $6246: $40
     jp   $3609                                    ; $6247: $C3 $09 $36
 
@@ -5933,10 +5947,10 @@ FinalNightmareForm5Handler::
     add  hl, bc                                   ; $63CB: $09
     ld   a, [hl]                                  ; $63CC: $7E
     cp   $03                                      ; $63CD: $FE $03
-    jp   z, $6D40                                 ; $63CF: $CA $40 $6D
+    jp   z, label_015_6D40                                 ; $63CF: $CA $40 $6D
 
     cp   $02                                      ; $63D2: $FE $02
-    jp   z, $6D6E                                 ; $63D4: $CA $6E $6D
+    jp   z, label_015_6D6E                                 ; $63D4: $CA $6E $6D
 
     and  a                                        ; $63D7: $A7
     jp   nz, label_015_6C61                       ; $63D8: $C2 $61 $6C
@@ -5954,7 +5968,7 @@ FinalNightmareForm5Handler::
 jr_015_63E9:
     ld   a, $06                                   ; $63E9: $3E $06
     ldh  [hActiveEntitySpriteVariant], a               ; $63EB: $E0 $F1
-    call $572B                                    ; $63ED: $CD $2B $57
+    call func_015_572B                                    ; $63ED: $CD $2B $57
     jr   jr_015_63F5                              ; $63F0: $18 $03
 
 jr_015_63F2:
@@ -6131,7 +6145,7 @@ jr_015_64AD:
     xor  a                                        ; $64BC: $AF
     ldh  [hActiveEntitySpriteVariant], a               ; $64BD: $E0 $F1
     call SetEntitySpriteVariant                   ; $64BF: $CD $0C $3B
-    call $572B                                    ; $64C2: $CD $2B $57
+    call func_015_572B                                    ; $64C2: $CD $2B $57
     ldh  a, [hLinkPositionX]                      ; $64C5: $F0 $98
     push af                                       ; $64C7: $F5
     ldh  a, [hLinkPositionY]                      ; $64C8: $F0 $99
@@ -6695,7 +6709,7 @@ jr_015_67F9:
 
     ld   a, $06                                   ; $67FA: $3E $06
     ldh  [hActiveEntitySpriteVariant], a               ; $67FC: $E0 $F1
-    call $572B                                    ; $67FE: $CD $2B $57
+    call func_015_572B                                    ; $67FE: $CD $2B $57
     call GetEntityTransitionCountdown             ; $6801: $CD $05 $0C
     ret  nz                                       ; $6804: $C0
 
@@ -6881,7 +6895,7 @@ jr_015_691A:
     add  hl, de                                   ; $6923: $19
     ld   a, [hl]                                  ; $6924: $7E
     ldh  [hActiveEntitySpriteVariant], a               ; $6925: $E0 $F1
-    jp   $572B                                    ; $6927: $C3 $2B $57
+    jp   func_015_572B                                    ; $6927: $C3 $2B $57
 
 func_015_692A:
     ldh  a, [hActiveEntityState]                  ; $692A: $F0 $F0
@@ -7750,7 +7764,10 @@ jr_015_6D29:
 
 jr_015_6D3D:
     nop                                           ; $6D3D: $00
-    ld   bc, $1101                                ; $6D3E: $01 $01 $11
+    db   $01, $01                                ; $6D3E: $01 $01
+
+label_015_6D40::
+    db   $11
     jr   nc, @+$6F                                ; $6D41: $30 $6D
 
     call RenderAnimatedActiveEntity                               ; $6D43: $CD $C0 $3B
@@ -7782,7 +7799,10 @@ jr_015_6D3D:
 
     nop                                           ; $6D6B: $00
     ld   d, [hl]                                  ; $6D6C: $56
-    jr   nz, @-$0E                                ; $6D6D: $20 $F0
+    db   $20                                ; $6D6D: $20
+
+label_015_6D6E:
+    db   $F0
 
     rst  $20                                      ; $6D6F: $E7
     rla                                           ; $6D70: $17
@@ -7974,10 +7994,10 @@ jr_015_6E3D:
     add  hl, de                                   ; $6E47: $19
     ld   a, [hl]                                  ; $6E48: $7E
     ldh  [hActiveEntitySpriteVariant], a               ; $6E49: $E0 $F1
-    jp   $572B                                    ; $6E4B: $C3 $2B $57
+    jp   func_015_572B                                    ; $6E4B: $C3 $2B $57
 
 jr_015_6E4E:
-    call $7056                                    ; $6E4E: $CD $56 $70
+    call func_015_7056                                    ; $6E4E: $CD $56 $70
     ldh  a, [hActiveEntityState]                  ; $6E51: $F0 $F0
     and  a                                        ; $6E53: $A7
     jr   z, jr_015_6E5A                           ; $6E54: $28 $04
@@ -8344,7 +8364,11 @@ jr_015_704B:
     nop                                           ; $7052: $00
     inc  c                                        ; $7053: $0C
     ld   a, b                                     ; $7054: $78
-    jr   nz, jr_015_7047                          ; $7055: $20 $F0
+    db   $20                          ; $7055: $20
+
+
+func_015_7056:
+    db   $F0
 
     rst  $20                                      ; $7057: $E7
     rra                                           ; $7058: $1F
@@ -9165,7 +9189,7 @@ BeetleSpawnerEntityHandler::
     add  hl, bc                                   ; $7510: $09
     ld   a, [hl]                                  ; $7511: $7E
     and  a                                        ; $7512: $A7
-    jp   nz, $757F                                ; $7513: $C2 $7F $75
+    jp   nz, label_015_757F                                ; $7513: $C2 $7F $75
 
     call func_015_7B0D                            ; $7516: $CD $0D $7B
     call func_015_7BDB                            ; $7519: $CD $DB $7B
@@ -9233,8 +9257,10 @@ jr_015_756E:
     ld   [hl], d                                  ; $757B: $72
     jr   nz, @+$72                                ; $757C: $20 $70
 
-    jr   nz, @+$13                                ; $757E: $20 $11
+    db $20                                ; $757E: $20
 
+label_015_757F:
+    db   $11
     ld   [hl], a                                  ; $7580: $77
     ld   [hl], l                                  ; $7581: $75
     call RenderAnimatedActiveEntity                               ; $7582: $CD $C0 $3B

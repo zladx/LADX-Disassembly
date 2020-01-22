@@ -173,8 +173,8 @@ LoadFileMenuBG_trampoline::
     callsb LoadFileMenuBG
     jr   LoadBank1AndReturn
 
-func_020_6C24_trampoline::
-    callsb func_020_6C24
+CopyLinkTunicPalette_trampoline::
+    callsb CopyLinkTunicPalette
 
 LoadBank1AndReturn::
     ld   a, $01
@@ -308,10 +308,10 @@ func_999::
     ldi  [hl], a
     jr   RestoreStackedBankAndReturn
 
-func_020_4985_trampoline::
+CheckPushedTombStone_trampoline::
     push af
     ; Will do stuff, and play JINGLE_PUZZLE_SOLVED
-    callsb func_020_4985
+    callsb CheckPushedTombStone
     jr   RestoreStackedBankAndReturn
 
 func_020_4518_trampoline::
@@ -6156,11 +6156,11 @@ LoadRoomObject::
     jr   z, .configureBreakableObject
 .bombableBlockEnd
 
-    cp   OBJECT_BREAKABLE_CRYSTAL
+    cp   OBJECT_KEYHOLE_BLOCK
     jr   nz, .breakableObjectEnd
 
 .configureBreakableObject
-    ; If the object has been broken…
+    ; If the object has been broken or activated…
     bit  6, e
     jr   z, .breakableObjectEnd
     ; … replace it by an empty floor tile

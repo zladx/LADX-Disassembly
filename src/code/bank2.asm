@@ -1816,6 +1816,7 @@ jr_002_4DCB:
     ld   [hl], $00                                ; $4DF9: $36 $00
     ret                                           ; $4DFB: $C9
 
+; Tunic-related code (see $DC50)
 func_002_4DFC::
     push bc                                       ; $4DFC: $C5
     push de                                       ; $4DFD: $D5
@@ -1823,7 +1824,8 @@ func_002_4DFC::
     ld   c, $00                                   ; $4E01: $0E $00
     di                                            ; $4E03: $F3
 
-jr_002_4E04:
+    ; Copy 8 bytes from 01:DC50 to 02:DC50
+.loop
     xor  a                                        ; $4E04: $AF
     ld   [rSVBK], a                               ; $4E05: $E0 $70
     ld   b, [hl]                                  ; $4E07: $46
@@ -1835,7 +1837,7 @@ jr_002_4E04:
     inc  c                                        ; $4E0F: $0C
     ld   a, c                                     ; $4E10: $79
     cp   $08                                      ; $4E11: $FE $08
-    jr   c, jr_002_4E04                           ; $4E13: $38 $EF
+    jr   c, .loop                                 ; $4E13: $38 $EF
 
     xor  a                                        ; $4E15: $AF
     ld   [rSVBK], a                               ; $4E16: $E0 $70
@@ -3153,7 +3155,8 @@ jr_002_552A:
     and  a                                        ; $5556: $A7
     jr   nz, jr_002_5560                          ; $5557: $20 $07
 
-    ld   a, [$DDD9]                               ; $5559: $FA $D9 $DD
+    ; If the color dungeon is open…
+    ld   a, [wColorDungonCorrectTombStones]       ; $5559: $FA $D9 $DD
     cp   $80                                      ; $555C: $FE $80
     jr   nz, jr_002_5566                          ; $555E: $20 $06
 
@@ -6769,11 +6772,11 @@ jr_002_716E:
 label_002_719C:
     ld   a, [wLinkMotionState]                    ; $719C: $FA $1C $C1
     cp   $02                                      ; $719F: $FE $02
-    jp   z, label_002_7454                        ; $71A1: $CA $54 $74
+    jp   z, collisionEnd                          ; $71A1: $CA $54 $74
 
     ld   a, [$C5A8]                               ; $71A4: $FA $A8 $C5
     cp   $D5                                      ; $71A7: $FE $D5
-    jp   z, label_002_7454                        ; $71A9: $CA $54 $74
+    jp   z, collisionEnd                          ; $71A9: $CA $54 $74
 
     ldh  a, [hScratch5]                               ; $71AC: $F0 $DC
     and  $0F                                      ; $71AE: $E6 $0F
@@ -6781,12 +6784,12 @@ label_002_719C:
     jp   c, label_002_7461                        ; $71B2: $DA $61 $74
 
     call func_002_6EA9                            ; $71B5: $CD $A9 $6E
-    jp   label_002_7454                           ; $71B8: $C3 $54 $74
+    jp   collisionEnd                             ; $71B8: $C3 $54 $74
 
 label_002_71BB:
     ld   a, [wC15C]                               ; $71BB: $FA $5C $C1
     and  a                                        ; $71BE: $A7
-    jp   nz, label_002_7454                       ; $71BF: $C2 $54 $74
+    jp   nz, collisionEnd                         ; $71BF: $C2 $54 $74
 
     ldh  a, [hScratch5]                               ; $71C2: $F0 $DC
     and  $0F                                      ; $71C4: $E6 $0F
@@ -6841,7 +6844,7 @@ jr_002_7204:
 
     ld   a, $12                                   ; $720B: $3E $12
     call func_002_7504                            ; $720D: $CD $04 $75
-    jp   label_002_7454                           ; $7210: $C3 $54 $74
+    jp   collisionEnd                             ; $7210: $C3 $54 $74
 
 jr_002_7213:
     xor  a                                        ; $7213: $AF
@@ -6853,12 +6856,12 @@ jr_002_7213:
     inc  a                                        ; $7222: $3C
     ld   [$DB10], a                               ; $7223: $EA $10 $DB
     call label_C9E                                ; $7226: $CD $9E $0C
-    jp   label_002_7454                           ; $7229: $C3 $54 $74
+    jp   collisionEnd                             ; $7229: $C3 $54 $74
 
 jr_002_722C:
     ld   a, [$C13E]                               ; $722C: $FA $3E $C1
     and  a                                        ; $722F: $A7
-    jp   nz, label_002_7454                       ; $7230: $C2 $54 $74
+    jp   nz, collisionEnd                         ; $7230: $C2 $54 $74
 
     ld   a, [wIsIndoor]                           ; $7233: $FA $A5 $DB
     and  a                                        ; $7236: $A7
@@ -7010,13 +7013,13 @@ jr_002_72FA:
     add  hl, bc                                   ; $730A: $09
     ldh  a, [hLinkDirection]                               ; $730B: $F0 $9E
     cp   [hl]                                     ; $730D: $BE
-    jp   nz, label_002_7454                       ; $730E: $C2 $54 $74
+    jp   nz, collisionEnd                         ; $730E: $C2 $54 $74
 
     ld   a, [$C1C3]                               ; $7311: $FA $C3 $C1
     inc  a                                        ; $7314: $3C
     ld   [$C1C3], a                               ; $7315: $EA $C3 $C1
     cp   $0C                                      ; $7318: $FE $0C
-    jp   c, label_002_7454                        ; $731A: $DA $54 $74
+    jp   c, collisionEnd                          ; $731A: $DA $54 $74
 
     xor  a                                        ; $731D: $AF
     ld   [$C1C3], a                               ; $731E: $EA $C3 $C1
@@ -7025,7 +7028,7 @@ jr_002_72FA:
     ld   [wSwordCharge], a                               ; $7325: $EA $22 $C1
     ld   a, $0C                                   ; $7328: $3E $0C
     ld   [wC16D], a                               ; $732A: $EA $6D $C1
-    jp   label_002_7454                           ; $732D: $C3 $54 $74
+    jp   collisionEnd                             ; $732D: $C3 $54 $74
 
 jr_002_7330:
     ld   a, [wIsUsingShield]                      ; $7330: $FA $5B $C1
@@ -7053,7 +7056,7 @@ jr_002_733B:
 jr_002_734F:
     ld   a, [wIsRunningWithPegasusBoots]                               ; $734F: $FA $4A $C1
     and  a                                        ; $7352: $A7
-    jp   z, label_002_7454                        ; $7353: $CA $54 $74
+    jp   z, collisionEnd                          ; $7353: $CA $54 $74
 
     ldh  a, [$FFDB]                               ; $7356: $F0 $DB
     and  $F0                                      ; $7358: $E6 $F0
@@ -7068,7 +7071,7 @@ jr_002_734F:
 
     ld   a, ENTITY_ENTITY_LIFTABLE_ROCK           ; $736A: $3E $05
     call SpawnNewEntity_trampoline                ; $736C: $CD $86 $3B
-    jp   c, label_002_7454                        ; $736F: $DA $54 $74
+    jp   c, collisionEnd                          ; $736F: $DA $54 $74
 
     ld   hl, wEntitiesPosXTable                         ; $7372: $21 $00 $C2
     add  hl, de                                   ; $7375: $19
@@ -7112,13 +7115,13 @@ label_002_73AD:
 
     ld   a, [wIsIndoor]                         ; $73B3: $FA $A5 $DB
     and  a                                        ; $73B6: $A7
-    jp   nz, label_002_7454                       ; $73B7: $C2 $54 $74
+    jp   nz, collisionEnd                         ; $73B7: $C2 $54 $74
 
     ldh  a, [hMapRoom]                           ; $73BA: $F0 $F6
     cp   $77                                      ; $73BC: $FE $77
     jr   nz, jr_002_742D                          ; $73BE: $20 $6D
 
-    ld   a, [$DDD9]                               ; $73C0: $FA $D9 $DD
+    ld   a, [wColorDungonCorrectTombStones]       ; $73C0: $FA $D9 $DD
     ldh  a, [hLinkPositionX]                      ; $73C3: $F0 $98
     swap a                                        ; $73C5: $CB $37
     and  $0F                                      ; $73C7: $E6 $0F
@@ -7149,7 +7152,7 @@ jr_002_73E6:
     cp   $05                                      ; $73E8: $FE $05
     jr   nz, jr_002_73D4                          ; $73EA: $20 $E8
 
-    jr   label_002_7454                           ; $73EC: $18 $66
+    jr   collisionEnd                             ; $73EC: $18 $66
 
 jr_002_73EE:
     ld   a, e                                     ; $73EE: $7B
@@ -7182,47 +7185,51 @@ jr_002_7402:
 
 jr_002_7415:
     call_open_dialog $253            ; $7415
-    jp   label_002_7454                           ; $741A: $C3 $54 $74
+    jp   collisionEnd                             ; $741A: $C3 $54 $74
 
 jr_002_741D:
     ld   a, [wIsIndoor]                         ; $741D: $FA $A5 $DB
     and  a                                        ; $7420: $A7
-    jr   z, label_002_7454                        ; $7421: $28 $31
+    jr   z, collisionEnd                          ; $7421: $28 $31
 
-    ldh  a, [hObjectUnderEntity]                               ; $7423: $F0 $AF
-    cp   $DE                                      ; $7425: $FE $DE
-    jr   z, jr_002_742F                           ; $7427: $28 $06
+    ldh  a, [hObjectUnderEntity]                  ; $7423: $F0 $AF
+    cp   OBJECT_KEYHOLE_BLOCK                     ; $7425: $FE $DE
+    jr   z, interactiveBlock                      ; $7427: $28 $06
 
-    cp   $A7                                      ; $7429: $FE $A7
-    jr   nz, label_002_7454                       ; $742B: $20 $27
+    cp   OBJECT_PUSHABLE_BLOCK                    ; $7429: $FE $A7
+    jr   nz, collisionEnd                         ; $742B: $20 $27
 
 jr_002_742D:
     ld   e, $40                                   ; $742D: $1E $40
 
-jr_002_742F:
+interactiveBlock:
+    ; Increment $C191
     ld   a, [$C191]                               ; $742F: $FA $91 $C1
     inc  a                                        ; $7432: $3C
     ld   [$C191], a                               ; $7433: $EA $91 $C1
     cp   e                                        ; $7436: $BB
-    jr   c, label_002_7454                        ; $7437: $38 $1B
+    jr   c, collisionEnd                          ; $7437: $38 $1B
 
     ld   a, e                                     ; $7439: $7B
     ldh  [hFFE8], a                               ; $743A: $E0 $E8
     xor  a                                        ; $743C: $AF
     ld   [$C191], a                               ; $743D: $EA $91 $C1
     call TryOpenLockedDoor                            ; $7440: $CD $B0 $53
+
+    ; If on overworld…
     ld   a, [wIsIndoor]                         ; $7443: $FA $A5 $DB
     and  a                                        ; $7446: $A7
-    jr   nz, label_002_7454                       ; $7447: $20 $0B
+    jr   nz, collisionEnd                         ; $7447: $20 $0B
 
+    ; … and on room 77 (graveyard with entry to color dungeon)…
     ldh  a, [hMapRoom]                           ; $7449: $F0 $F6
     cp   $77                                      ; $744B: $FE $77
-    jr   nz, label_002_7454                       ; $744D: $20 $05
+    jr   nz, collisionEnd                         ; $744D: $20 $05
 
-    ld   a, $02                                   ; $744F: $3E $02
-    call func_020_4985_trampoline                                ; $7451: $CD $C8 $09
+    ld   a, BANK(@)                               ; $744F: $3E $02
+    call CheckPushedTombStone_trampoline          ; $7451: $CD $C8 $09
 
-label_002_7454:
+collisionEnd:
     ld   hl, $6E29                                ; $7454: $21 $29 $6E
     add  hl, bc                                   ; $7457: $09
     ld   a, [wCollisionType]                               ; $7458: $FA $33 $C1

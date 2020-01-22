@@ -1764,7 +1764,8 @@ jr_003_5198:
     cp   $77                                      ; $51A3: $FE $77
     jr   nz, jr_003_51B3                          ; $51A5: $20 $0C
 
-    ld   a, [$DDD9]                               ; $51A7: $FA $D9 $DD
+    ; If the color dungeon is open…
+    ld   a, [wColorDungonCorrectTombStones]       ; $51A7: $FA $D9 $DD
     cp   $80                                      ; $51AA: $FE $80
     jr   z, jr_003_51B3                           ; $51AC: $28 $05
 

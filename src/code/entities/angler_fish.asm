@@ -398,7 +398,7 @@ func_005_58D4::
 jr_005_58F2:
     add  hl, de                                   ; $58F2: $19
     ld   c, $13                                   ; $58F3: $0E $13
-    call label_3CE6                               ; $58F5: $CD $E6 $3C
+    call func_3CE6                               ; $58F5: $CD $E6 $3C
     ld   a, $13                                   ; $58F8: $3E $13
     jp   label_3DA0                               ; $58FA: $C3 $A0 $3D
 

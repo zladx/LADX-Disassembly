@@ -516,7 +516,7 @@ label_015_45CB:
     sla  a                                        ; $45D2: $CB $27
     ld   c, a                                     ; $45D4: $4F
     ld   hl, Data_015_45A3                        ; $45D5: $21 $A3 $45
-    call label_3CE6                               ; $45D8: $CD $E6 $3C
+    call func_3CE6                               ; $45D8: $CD $E6 $3C
     ld   a, $0A                                   ; $45DB: $3E $0A
     call label_3DA0                               ; $45DD: $CD $A0 $3D
     call func_015_7B0D                            ; $45E0: $CD $0D $7B
@@ -1223,7 +1223,7 @@ func_015_4AC9::
     ld   hl, Data_015_49E5                        ; $4AE2: $21 $E5 $49
     add  hl, de                                   ; $4AE5: $19
     ld   c, $03                                   ; $4AE6: $0E $03
-    call label_3CE6                               ; $4AE8: $CD $E6 $3C
+    call func_3CE6                               ; $4AE8: $CD $E6 $3C
 
 jr_015_4AEB:
     ldh  a, [hActiveEntitySpriteVariant]          ; $4AEB: $F0 $F1
@@ -1239,7 +1239,7 @@ jr_015_4AEB:
     ld   hl, Data_015_4A15                        ; $4AF8: $21 $15 $4A
     add  hl, de                                   ; $4AFB: $19
     ld   c, $03                                   ; $4AFC: $0E $03
-    call label_3CE6                               ; $4AFE: $CD $E6 $3C
+    call func_3CE6                               ; $4AFE: $CD $E6 $3C
     ld   hl, wEntitiesPosZTable                   ; $4B01: $21 $10 $C3
     add  hl, bc                                   ; $4B04: $09
     ld   a, [hl]                                  ; $4B05: $7E
@@ -1250,7 +1250,7 @@ jr_015_4AEB:
     ldh  [wActiveEntityPosY], a                   ; $4B0A: $E0 $EC
     ld   hl, Data_015_4ABD                        ; $4B0C: $21 $BD $4A
     ld   c, $03                                   ; $4B0F: $0E $03
-    call label_3CE6                               ; $4B11: $CD $E6 $3C
+    call func_3CE6                               ; $4B11: $CD $E6 $3C
 
 jr_015_4B14:
     jp   label_3D8A                               ; $4B14: $C3 $8A $3D
@@ -1403,7 +1403,7 @@ func_015_4C85::
     ld   hl, Data_015_4B17                        ; $4C9B: $21 $17 $4B
     add  hl, de                                   ; $4C9E: $19
     ld   c, $06                                   ; $4C9F: $0E $06
-    call label_3CE6                               ; $4CA1: $CD $E6 $3C
+    call func_3CE6                               ; $4CA1: $CD $E6 $3C
     ld   a, $04                                   ; $4CA4: $3E $04
     jp   label_3DA0                               ; $4CA6: $C3 $A0 $3D
 
@@ -1421,7 +1421,7 @@ jr_015_4CA9:
     ld   hl, Data_015_4B77                        ; $4CB6: $21 $77 $4B
     add  hl, de                                   ; $4CB9: $19
     ld   c, $04                                   ; $4CBA: $0E $04
-    call label_3CE6                               ; $4CBC: $CD $E6 $3C
+    call func_3CE6                               ; $4CBC: $CD $E6 $3C
     ld   a, $02                                   ; $4CBF: $3E $02
     jp   label_3DA0                               ; $4CC1: $C3 $A0 $3D
 
@@ -1435,7 +1435,7 @@ jr_015_4CC4:
     ld   hl, Data_015_4BB7                        ; $4CCC: $21 $B7 $4B
     add  hl, de                                   ; $4CCF: $19
     ld   c, $02                                   ; $4CD0: $0E $02
-    jp   label_3CE6                               ; $4CD2: $C3 $E6 $3C
+    jp   func_3CE6                               ; $4CD2: $C3 $E6 $3C
 
 Data_015_4CD5::
     db   $76, $00, $76, $20
@@ -2877,7 +2877,7 @@ func_015_569F::
     ld   hl, Data_015_5501                        ; $56AD: $21 $01 $55
     add  hl, de                                   ; $56B0: $19
     ld   c, $08                                   ; $56B1: $0E $08
-    call label_3CE6                               ; $56B3: $CD $E6 $3C
+    call func_3CE6                               ; $56B3: $CD $E6 $3C
     ld   a, $08                                   ; $56B6: $3E $08
     jp   label_3DA0                               ; $56B8: $C3 $A0 $3D
 
@@ -2902,7 +2902,7 @@ func_015_572B::
     ld   hl, Data_015_56BB                        ; $5735: $21 $BB $56
     add  hl, de                                   ; $5738: $19
     ld   c, $04                                   ; $5739: $0E $04
-    call label_3CE6                               ; $573B: $CD $E6 $3C
+    call func_3CE6                               ; $573B: $CD $E6 $3C
     ld   a, $04                                   ; $573E: $3E $04
     jp   label_3DA0                               ; $5740: $C3 $A0 $3D
 
@@ -3485,7 +3485,7 @@ jr_015_5B5A:
     ld   hl, Data_015_5A83                        ; $5B63: $21 $83 $5A
     add  hl, de                                   ; $5B66: $19
     ld   c, $02                                   ; $5B67: $0E $02
-    call label_3CE6                               ; $5B69: $CD $E6 $3C
+    call func_3CE6                               ; $5B69: $CD $E6 $3C
 
 jr_015_5B6C:
     ld   a, $02                                   ; $5B6C: $3E $02
@@ -3550,7 +3550,7 @@ label_015_5D48:
     ld   hl, Data_015_5B74                        ; $5D6B: $21 $74 $5B
     add  hl, de                                   ; $5D6E: $19
     ld   c, $08                                   ; $5D6F: $0E $08
-    call label_3CE6                               ; $5D71: $CD $E6 $3C
+    call func_3CE6                               ; $5D71: $CD $E6 $3C
     ld   a, $08                                   ; $5D74: $3E $08
     jp   label_3DA0                               ; $5D76: $C3 $A0 $3D
 
@@ -3984,7 +3984,7 @@ jr_015_6069:
     ld   hl, Data_015_5FE2                        ; $6076: $21 $E2 $5F
     add  hl, de                                   ; $6079: $19
     ld   c, $06                                   ; $607A: $0E $06
-    call label_3CE6                               ; $607C: $CD $E6 $3C
+    call func_3CE6                               ; $607C: $CD $E6 $3C
     ld   a, $06                                   ; $607F: $3E $06
     jp   label_3DA0                               ; $6081: $C3 $A0 $3D
 
@@ -4134,7 +4134,7 @@ func_015_6245::
     ld   hl, Data_015_6135                        ; $6259: $21 $35 $61
     add  hl, de                                   ; $625C: $19
     ld   c, $08                                   ; $625D: $0E $08
-    call label_3CE6                               ; $625F: $CD $E6 $3C
+    call func_3CE6                               ; $625F: $CD $E6 $3C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6262: $21 $40 $C3
     add  hl, bc                                   ; $6265: $09
     ld   [hl], $42                                ; $6266: $36 $42
@@ -4529,7 +4529,7 @@ jr_015_652E:
     ld   hl, Data_015_6444                        ; $6545: $21 $44 $64
     add  hl, de                                   ; $6548: $19
     ld   c, $06                                   ; $6549: $0E $06
-    call label_3CE6                               ; $654B: $CD $E6 $3C
+    call func_3CE6                               ; $654B: $CD $E6 $3C
     ld   a, $06                                   ; $654E: $3E $06
     jp   label_3DA0                               ; $6550: $C3 $A0 $3D
 
@@ -5176,7 +5176,7 @@ func_015_69D2::
     ld   hl, Data_015_6948                        ; $69E3: $21 $48 $69
     add  hl, de                                   ; $69E6: $19
     ld   c, $07                                   ; $69E7: $0E $07
-    call label_3CE6                               ; $69E9: $CD $E6 $3C
+    call func_3CE6                               ; $69E9: $CD $E6 $3C
     ld   a, $07                                   ; $69EC: $3E $07
     jp   label_3DA0                               ; $69EE: $C3 $A0 $3D
 
@@ -5204,7 +5204,7 @@ func_015_6A69::
     ld   hl, Data_015_69F1                        ; $6A76: $21 $F1 $69
     add  hl, de                                   ; $6A79: $19
     ld   c, $03                                   ; $6A7A: $0E $03
-    call label_3CE6                               ; $6A7C: $CD $E6 $3C
+    call func_3CE6                               ; $6A7C: $CD $E6 $3C
     ld   a, $03                                   ; $6A7F: $3E $03
     jp   label_3DA0                               ; $6A81: $C3 $A0 $3D
 
@@ -5274,7 +5274,7 @@ func_015_6C10::
     ld   hl, Data_015_6A84                        ; $6C49: $21 $84 $6A
     add  hl, de                                   ; $6C4C: $19
     push bc                                       ; $6C4D: $C5
-    call label_3CE6                               ; $6C4E: $CD $E6 $3C
+    call func_3CE6                               ; $6C4E: $CD $E6 $3C
     pop  de                                       ; $6C51: $D1
     ld   a, e                                     ; $6C52: $7B
     call label_3DA0                               ; $6C53: $CD $A0 $3D
@@ -5882,7 +5882,7 @@ func_015_7056::
     ld   hl, Data_015_6FF6                        ; $7068: $21 $F6 $6F
     add  hl, de                                   ; $706B: $19
     ld   c, $03                                   ; $706C: $0E $03
-    call label_3CE6                               ; $706E: $CD $E6 $3C
+    call func_3CE6                               ; $706E: $CD $E6 $3C
     ld   a, $03                                   ; $7071: $3E $03
     call label_3DA0                               ; $7073: $CD $A0 $3D
     ldh  a, [hActiveEntitySpriteVariant]          ; $7076: $F0 $F1
@@ -5898,7 +5898,7 @@ func_015_7056::
     ld   hl, Data_015_7026                        ; $7083: $21 $26 $70
     add  hl, de                                   ; $7086: $19
     ld   c, $03                                   ; $7087: $0E $03
-    call label_3CE6                               ; $7089: $CD $E6 $3C
+    call func_3CE6                               ; $7089: $CD $E6 $3C
     ld   a, $03                                   ; $708C: $3E $03
     call label_3DA0                               ; $708E: $CD $A0 $3D
     ld   hl, wEntitiesPosYTable                   ; $7091: $21 $10 $C2
@@ -6739,7 +6739,7 @@ MonkeyEntityHandler::
     ld   d, b                                     ; $7691: $50
     add  hl, de                                   ; $7692: $19
     ld   c, $03                                   ; $7693: $0E $03
-    call label_3CE6                               ; $7695: $CD $E6 $3C
+    call func_3CE6                               ; $7695: $CD $E6 $3C
     call label_3CD9                               ; $7698: $CD $D9 $3C
     ldh  a, [hActiveEntityState]                  ; $769B: $F0 $F0
     cp   $02                                      ; $769D: $FE $02
@@ -8058,7 +8058,7 @@ jr_015_7E1E:
 
     ld   hl, Data_015_7D68                        ; $7E26: $21 $68 $7D
     ld   c, $02                                   ; $7E29: $0E $02
-    call label_3CE6                               ; $7E2B: $CD $E6 $3C
+    call func_3CE6                               ; $7E2B: $CD $E6 $3C
 
 jr_015_7E2E:
     jp   label_3D8A                               ; $7E2E: $C3 $8A $3D

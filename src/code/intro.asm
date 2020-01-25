@@ -1260,7 +1260,7 @@ label_762B::
 label_7640::
     add  hl, de
     ld   c, $06
-    call label_3CE6
+    call func_3CE6
     ld   a, [$C3C0]
     add  a, $18
     ld   [$C3C0], a
@@ -1692,7 +1692,7 @@ label_79A5::
     ld   c, $0A
 
 label_79AA::
-    call label_3CE6
+    call func_3CE6
     ret
 
 label_79AE::

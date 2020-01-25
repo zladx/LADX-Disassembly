@@ -5231,11 +5231,12 @@ jr_002_68E3:
 
 jr_002_68E4:
     ldh  a, [$FF9C]                               ; $68E4: $F0 $9C
-    rst  $00                                      ; $68E6: $C7
-    ld   bc, $A16A                                ; $68E7: $01 $6A $A1
-    ld   l, c                                     ; $68EA: $69
-    db   $10                                      ; $68EB: $10
-    ld   l, c                                     ; $68EC: $69
+    JP_TABLE                                      ; $68E6
+._00 dw func_002_6A01                             ; $68E7
+._01 dw func_002_69A1                             ; $68E9
+._02 dw func_002_6910                             ; $68EB
+
+Data_002_68ED::
     nop                                           ; $68ED: $00
     ld   [$00F8], sp                              ; $68EE: $08 $F8 $00
     nop                                           ; $68F1: $00
@@ -5262,7 +5263,10 @@ jr_002_68E4:
     nop                                           ; $690C: $00
     nop                                           ; $690D: $00
     nop                                           ; $690E: $00
-    ld   bc, $F7F0                                ; $690F: $01 $F0 $F7
+    db   $01                                      ; $690F: $01
+
+func_002_6910::
+    db   $F0, $F7
     cp   $07                                      ; $6912: $FE $07
     jr   nz, jr_002_692B                          ; $6914: $20 $15
 
@@ -5362,6 +5366,7 @@ jr_002_699C:
 jr_002_699E:
     jp   func_002_6B56                            ; $699E: $C3 $56 $6B
 
+func_002_69A1::
     call ResetPegasusBoots                                ; $69A1: $CD $B6 $0C
     ld   [$C146], a                               ; $69A4: $EA $46 $C1
     ld   [$C153], a                               ; $69A7: $EA $53 $C1
@@ -5427,6 +5432,7 @@ jr_002_69F3:
 jr_002_6A00:
     ret                                           ; $6A00: $C9
 
+func_002_6A01::
     ldh  a, [hMapId]                              ; $6A01: $F0 $F7
     cp   MAP_EAGLES_TOWER                         ; $6A03: $FE $06
     jr   nz, jr_002_6A24                          ; $6A05: $20 $1D

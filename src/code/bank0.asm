@@ -1870,7 +1870,7 @@ UseHookshot::
     ld   a, [$C1A4]
     and  a
     ret  nz
-    jp   func_002_4254
+    jp   FireHookshot
 
 label_1321::
     cp   $01

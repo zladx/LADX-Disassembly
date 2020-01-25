@@ -86,45 +86,48 @@ jr_002_4241:
 
     ret                                           ; $424B: $C9
 
-Data_002_424C::
+HookshotChainSpeedX::
     db   $30, $D0, $00, $00
 
-Data_002_4250::
+HookshotChainSpeedY::
     db   $00, $00, $D0, $30
 
-func_002_4254::
+FireHookshot::
     ld   a, [$C146]                               ; $4254: $FA $46 $C1
     and  a                                        ; $4257: $A7
-    jr   nz, jr_002_4286                          ; $4258: $20 $2C
+    jr   nz, .return                              ; $4258: $20 $2C
 
     ld   a, ENTITY_HOOKSHOT_CHAIN                 ; $425A: $3E $03
     call SpawnPlayerProjectile                    ; $425C: $CD $2F $14
-    jr   c, jr_002_4286                           ; $425F: $38 $25
+    jr   c, .return                               ; $425F: $38 $25
 
-    ld   hl, wEntitiesTransitionCountdownTable           ; $4261: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable    ; $4261: $21 $E0 $C2
     add  hl, de                                   ; $4264: $19
     ld   [hl], $2A                                ; $4265: $36 $2A
     ld   hl, $C3B0                                ; $4267: $21 $B0 $C3
     add  hl, de                                   ; $426A: $19
     xor  a                                        ; $426B: $AF
     ld   [hl], a                                  ; $426C: $77
-    ldh  a, [hLinkDirection]                               ; $426D: $F0 $9E
+
+    ldh  a, [hLinkDirection]                      ; $426D: $F0 $9E
     ld   c, a                                     ; $426F: $4F
     ld   b, $00                                   ; $4270: $06 $00
-    ld   hl, $424C                                ; $4272: $21 $4C $42
+
+    ld   hl, HookshotChainSpeedX                  ; $4272: $21 $4C $42
     add  hl, bc                                   ; $4275: $09
     ld   a, [hl]                                  ; $4276: $7E
-    ld   hl, wEntitiesSpeedXTable                                ; $4277: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $4277: $21 $40 $C2
     add  hl, de                                   ; $427A: $19
     ld   [hl], a                                  ; $427B: $77
-    ld   hl, $4250                                ; $427C: $21 $50 $42
+
+    ld   hl, HookshotChainSpeedY                  ; $427C: $21 $50 $42
     add  hl, bc                                   ; $427F: $09
     ld   a, [hl]                                  ; $4280: $7E
     ld   hl, wEntitiesSpeedYTable                 ; $4281: $21 $50 $C2
     add  hl, de                                   ; $4284: $19
     ld   [hl], a                                  ; $4285: $77
 
-jr_002_4286:
+.return
     ret                                           ; $4286: $C9
 
 label_002_4287:

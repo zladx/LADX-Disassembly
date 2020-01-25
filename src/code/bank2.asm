@@ -185,8 +185,8 @@ jr_002_42C7:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
     call Func_1177                                ; $42D0: $CD $77 $11
-    call $44ED                                    ; $42D3: $CD $ED $44
-    call $434A                                    ; $42D6: $CD $4A $43
+    call func_002_44ED                            ; $42D3: $CD $ED $44
+    call func_002_434A                            ; $42D6: $CD $4A $43
     call func_002_478C                            ; $42D9: $CD $8C $47
     call func_002_4B49                            ; $42DC: $CD $49 $4B
     call ApplyLinkMotionState                               ; $42DF: $CD $94 $17
@@ -260,7 +260,11 @@ jr_002_4345:
     ret                                           ; $4345: $C9
 
     db   $11, $10, $0F                            ; $4346: $11 $10 $0F
-    ld   c, $FA                                   ; $4349: $0E $FA
+    db   $0E                                      ; $4349: $0E
+
+
+func_002_434A::
+    db   $FA
     sbc  e                                        ; $434B: $9B
     pop  bc                                       ; $434C: $C1
     and  $7F                                      ; $434D: $E6 $7F
@@ -294,7 +298,7 @@ func_002_436C::
     jr   nz, jr_002_43BA                          ; $4375: $20 $43
 
     ; Side-scrolling code
-    jp   $68B7                                    ; $4377: $C3 $B7 $68
+    jp   jp_002_68B7                              ; $4377: $C3 $B7 $68
 
 ; Inputs:
 ;   e : sequence count
@@ -568,7 +572,10 @@ jr_002_44E3:
     ld   a, [rNR10]                               ; $44E8: $F0 $10
     nop                                           ; $44EA: $00
     rst  $38                                      ; $44EB: $FF
-    ld   bc, $46FA                                ; $44EC: $01 $FA $46
+    db   $01                                      ; $44EC: $01
+
+func_002_44ED::
+    db   $FA, $46
     pop  bc                                       ; $44EF: $C1
     and  a                                        ; $44F0: $A7
     jp   z, label_002_45AC                        ; $44F1: $CA $AC $45
@@ -3915,7 +3922,7 @@ label_002_593B:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $595B: $E0 $A1
     jr   z, .jr_002_5964                          ; $595D: $28 $05
 
-    call $5A7B                                    ; $595F: $CD $7B $5A
+    call func_002_5A7B                            ; $595F: $CD $7B $5A
     jr   .return                                  ; $5962: $18 $03
 
 .jr_002_5964
@@ -4015,7 +4022,10 @@ Data_002_59D4::
     db   $01, $02, $08, $04, $01
 
     ld   [bc], a                                  ; $5A79: $02
-    ld   [$001E], sp                              ; $5A7A: $08 $1E $00
+    db   $08                                      ; $5A7A: $08
+
+func_002_5A7B::
+    db   $1E, $00
     ld   d, e                                     ; $5A7D: $53
     ld   c, e                                     ; $5A7E: $4B
     ld   b, e                                     ; $5A7F: $43
@@ -5184,7 +5194,10 @@ Data_002_68AB::
     db   $10                                      ; $68B2: $10
     ld   a, [rIE]                                 ; $68B3: $F0 $FF
     nop                                           ; $68B5: $00
-    ld   bc, $46FA                                ; $68B6: $01 $FA $46
+    db   $01                                      ; $68B6: $01
+
+jp_002_68B7::
+    db   $FA, $46
     pop  bc                                       ; $68B9: $C1
     and  a                                        ; $68BA: $A7
     jr   nz, jr_002_68C7                          ; $68BB: $20 $0A
@@ -5218,7 +5231,7 @@ jr_002_68E3:
 
 jr_002_68E4:
     ldh  a, [$FF9C]                               ; $68E4: $F0 $9C
-    JP_TABLE                                      ; $68E6: $C7
+    rst  $00                                      ; $68E6: $C7
     ld   bc, $A16A                                ; $68E7: $01 $6A $A1
     ld   l, c                                     ; $68EA: $69
     db   $10                                      ; $68EB: $10
@@ -6233,7 +6246,7 @@ jr_002_6E69:
 jr_002_6E72:
     push de                                       ; $6E72: $D5
     push bc                                       ; $6E73: $C5
-    call $6F2C                                    ; $6E74: $CD $2C $6F
+    call func_002_6F2C                            ; $6E74: $CD $2C $6F
     pop  bc                                       ; $6E77: $C1
     pop  de                                       ; $6E78: $D1
     inc  bc                                       ; $6E79: $03
@@ -6327,7 +6340,7 @@ jr_002_6EED:
 jr_002_6EF6:
     push de                                       ; $6EF6: $D5
     push bc                                       ; $6EF7: $C5
-    call $6F2C                                    ; $6EF8: $CD $2C $6F
+    call func_002_6F2C                            ; $6EF8: $CD $2C $6F
     pop  bc                                       ; $6EFB: $C1
     pop  de                                       ; $6EFC: $D1
     inc  bc                                       ; $6EFD: $03
@@ -6361,7 +6374,10 @@ jr_002_6F25:
     jp   label_002_74AD                           ; $6F25: $C3 $AD $74
 
     ld   bc, $402                                 ; $6F28: $01 $02 $04
-    ld   [$1521], sp                              ; $6F2B: $08 $21 $15
+    db   $08                                      ; $6F2B: $08
+
+func_002_6F2C::
+    db   $21, $15
     ld   l, [hl]                                  ; $6F2E: $6E
     add  hl, bc                                   ; $6F2F: $09
     ldh  a, [hLinkPositionX]                      ; $6F30: $F0 $98

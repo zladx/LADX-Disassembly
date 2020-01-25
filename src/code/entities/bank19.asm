@@ -3168,7 +3168,7 @@ GiantBubbleEntityHandler::
     ld   hl, $538C                                ; $53A2: $21 $8C $53
     add  hl, de                                   ; $53A5: $19
     ld   a, [hl]                                  ; $53A6: $7E
-    ldh  [hFFF5], a                               ; $53A7: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $53A7: $E0 $F5
     ld   hl, $536C                                ; $53A9: $21 $6C $53
     ld   c, $08                                   ; $53AC: $0E $08
     call func_3CE6                               ; $53AE: $CD $E6 $3C
@@ -3527,7 +3527,7 @@ ThwompRammableEntityHandler::
     ld   a, $08                                   ; $5592: $3E $08
 
 jr_019_5594:
-    ldh  [hFFF5], a                               ; $5594: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $5594: $E0 $F5
     ld   hl, $554B                                ; $5596: $21 $4B $55
     ldh  a, [hActiveEntityState]                  ; $5599: $F0 $F0
     and  a                                        ; $559B: $A7

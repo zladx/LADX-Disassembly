@@ -4420,7 +4420,7 @@ jr_007_5CC0:
     ld   [de], a                                  ; $5CCC: $12
     inc  hl                                       ; $5CCD: $23
     inc  de                                       ; $5CCE: $13
-    ldh  a, [hFFF5]                               ; $5CCF: $F0 $F5
+    ldh  a, [hActiveEntityTilesOffset]            ; $5CCF: $F0 $F5
     ld   c, a                                     ; $5CD1: $4F
     ld   a, [hl+]                                 ; $5CD2: $2A
     push af                                       ; $5CD3: $F5
@@ -5573,7 +5573,7 @@ SideViewPlatformEntityHandler::
     jr   z, jr_007_643B                           ; $6435: $28 $04
 
     ld   a, $04                                   ; $6437: $3E $04
-    ldh  [hFFF5], a                               ; $6439: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $6439: $E0 $F5
 
 jr_007_643B:
     ld   hl, Data_007_6422                        ; $643B: $21 $22 $64

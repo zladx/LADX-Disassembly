@@ -1012,7 +1012,7 @@ jr_014_4D6F:
 func_014_4D73::
     xor  a                                        ; $4D73: $AF
     ldh  [$FFBE], a                               ; $4D74: $E0 $BE
-    ldh  [hFFF5], a                               ; $4D76: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $4D76: $E0 $F5
     ld   a, [wGameplayType]                       ; $4D78: $FA $95 $DB
     cp   $07                                      ; $4D7B: $FE $07
     jr   z, jr_014_4DED                           ; $4D7D: $28 $6E

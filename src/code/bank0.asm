@@ -7480,8 +7480,8 @@ RenderAnimatedActiveEntity::
     pop  hl
     add  hl, bc
 
-    ; [de] = [hl++] + [$FFF5]
-    ldh  a, [$FFF5]
+    ; [de] = [hl++] + [hActiveEntityTilesOffset]
+    ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
     ld   a, [hli]
     add  a, c
@@ -7530,7 +7530,7 @@ label_3C21::
     ld   [de], a
     inc  de
     pop  hl
-    ldh  a, [$FFF5]
+    ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
     ld   a, [hli]
     add  a, c
@@ -7728,7 +7728,7 @@ func_3CE6::
     ld   [de], a
     inc  hl
     inc  de
-    ldh  a, [$FFF5]
+    ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
     ld   a, [hli]
     push af

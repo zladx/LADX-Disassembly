@@ -7622,7 +7622,7 @@ RollingBonesEntityHandler::
     jr   nz, jr_006_6C7B                          ; $6C75: $20 $04
 
     ld   a, $10                                   ; $6C77: $3E $10
-    ldh  [hFFF5], a                               ; $6C79: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $6C79: $E0 $F5
 
 jr_006_6C7B:
     call $6E7E                                    ; $6C7B: $CD $7E $6E
@@ -8055,7 +8055,7 @@ RollingBonesBarEntityHandler::
     jr   nz, jr_006_6EED                          ; $6EE7: $20 $04
 
     ld   a, $10                                   ; $6EE9: $3E $10
-    ldh  [hFFF5], a                               ; $6EEB: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $6EEB: $E0 $F5
 
 jr_006_6EED:
     ldh  a, [hRoomStatus]                         ; $6EED: $F0 $F8

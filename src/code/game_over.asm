@@ -194,7 +194,7 @@ label_42FB::
 label_432C::
     call label_5DE6
     xor  a
-    ldh  [$FFF5], a
+    ldh  [hActiveEntityTilesOffset], a
     call label_6162
 
 label_4335::

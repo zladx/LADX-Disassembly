@@ -16,7 +16,7 @@ DodongoSnakeEntityHandler::
     jr   nz, jr_005_6879                          ; $6873: $20 $04
 
     ld   a, $10                                   ; $6875: $3E $10
-    ldh  [hFFF5], a                               ; $6877: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $6877: $E0 $F5
 
 jr_005_6879:
     call func_005_6A38                            ; $6879: $CD $38 $6A

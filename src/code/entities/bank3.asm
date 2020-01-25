@@ -1764,7 +1764,8 @@ jr_003_5198:
     cp   $77                                      ; $51A3: $FE $77
     jr   nz, jr_003_51B3                          ; $51A5: $20 $0C
 
-    ld   a, [$DDD9]                               ; $51A7: $FA $D9 $DD
+    ; If the color dungeon is open…
+    ld   a, [wColorDungonCorrectTombStones]       ; $51A7: $FA $D9 $DD
     cp   $80                                      ; $51AA: $FE $80
     jr   z, jr_003_51B3                           ; $51AC: $28 $05
 
@@ -2236,12 +2237,12 @@ jr_003_553C:
 
 jr_003_5555:
     ld   c, $04                                   ; $5555: $0E $04
-    call label_3CE6                               ; $5557: $CD $E6 $3C
+    call func_3CE6                               ; $5557: $CD $E6 $3C
     jr   jr_003_5568                              ; $555A: $18 $0C
 
 jr_003_555C:
     ld   c, $08                                   ; $555C: $0E $08
-    call label_3CE6                               ; $555E: $CD $E6 $3C
+    call func_3CE6                               ; $555E: $CD $E6 $3C
     ld   a, $04                                   ; $5561: $3E $04
     call label_3DA0                               ; $5563: $CD $A0 $3D
     jr   jr_003_5568                              ; $5566: $18 $00
@@ -2720,7 +2721,7 @@ OctorockEntityHandler::
     jr   z, jr_003_57F7                           ; $57F1: $28 $04
 
     ld   a, $30                                   ; $57F3: $3E $30
-    ldh  [hFFF5], a                               ; $57F5: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $57F5: $E0 $F5
 
 jr_003_57F7:
     call func_003_583C                            ; $57F7: $CD $3C $58
@@ -5192,7 +5193,7 @@ jr_003_65C1:
     ld   hl, $6530                                ; $65C1: $21 $30 $65
     add  hl, de                                   ; $65C4: $19
     ld   c, $08                                   ; $65C5: $0E $08
-    jp   label_3CE6                               ; $65C7: $C3 $E6 $3C
+    jp   func_3CE6                               ; $65C7: $C3 $E6 $3C
 
     nop                                           ; $65CA: $00
     nop                                           ; $65CB: $00

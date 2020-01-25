@@ -107,6 +107,7 @@ OBJECT_HIDDEN_BOMBABLE_WALL_RIGHT  equ $4A
 OBJECT_POT_WITH_SWITCH             equ $8E
 OBJECT_CHEST_CLOSED                equ $A0
 OBJECT_CHEST_OPEN                  equ $A1
+OBJECT_PUSHABLE_BLOCK              equ $A7
 OBJECT_BOMBABLE_BLOCK              equ $A9
 OBJECT_SWITCH_BUTTON               equ $AA
 OBJECT_TORCH_UNLIT                 equ $AB
@@ -126,7 +127,7 @@ OBJECT_RAISED_FENCE_LEFT           equ $D7
 OBJECT_RAISED_FENCE_RIGHT          equ $D8
 OBJECT_LOWERED_BLOCK               equ $DB
 OBJECT_RAISED_BLOCK                equ $DC
-OBJECT_BREAKABLE_CRYSTAL           equ $DE
+OBJECT_KEYHOLE_BLOCK               equ $DE
 OBJECT_KEY_DOOR_TOP                equ $EC
 OBJECT_KEY_DOOR_BOTTOM             equ $ED
 OBJECT_KEY_DOOR_LEFT               equ $EE

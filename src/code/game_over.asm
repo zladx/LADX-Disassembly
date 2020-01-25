@@ -106,7 +106,7 @@ label_4259::
     ld   [wOBJ1Palette], a
     ld   e, $08
     call func_020_6A30_trampoline
-    call func_020_6C24_trampoline
+    call CopyLinkTunicPalette_trampoline
     ret
     ld   a, $0D
     ld   [wTileMapToLoad], a
@@ -194,7 +194,7 @@ label_42FB::
 label_432C::
     call label_5DE6
     xor  a
-    ldh  [$FFF5], a
+    ldh  [hActiveEntityTilesOffset], a
     call label_6162
 
 label_4335::

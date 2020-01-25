@@ -422,7 +422,7 @@ func_004_42B3::
     ld   hl, Data_004_4281                        ; $42C0: $21 $81 $42
     add  hl, de                                   ; $42C3: $19
     ld   c, $04                                   ; $42C4: $0E $04
-    call label_3CE6                               ; $42C6: $CD $E6 $3C
+    call func_3CE6                               ; $42C6: $CD $E6 $3C
     ld   a, $04                                   ; $42C9: $3E $04
     call label_3DA0                               ; $42CB: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                                ; $42CE: $21 $10 $C3
@@ -1080,7 +1080,7 @@ jr_004_4713:
     ld   hl, Data_004_4655                        ; $4727: $21 $55 $46
     add  hl, de                                   ; $472A: $19
     ld   c, $0A                                   ; $472B: $0E $0A
-    call label_3CE6                               ; $472D: $CD $E6 $3C
+    call func_3CE6                               ; $472D: $CD $E6 $3C
     ld   a, $0A                                   ; $4730: $3E $0A
     call label_3DA0                               ; $4732: $CD $A0 $3D
     ldh  a, [wActiveEntityPosY]                               ; $4735: $F0 $EC
@@ -1225,7 +1225,7 @@ jr_004_48A6:
     ld   hl, Data_004_474D                        ; $48C3: $21 $4D $47
     add  hl, de                                   ; $48C6: $19
     ld   c, $08                                   ; $48C7: $0E $08
-    call label_3CE6                               ; $48C9: $CD $E6 $3C
+    call func_3CE6                               ; $48C9: $CD $E6 $3C
     ld   a, $08                                   ; $48CC: $3E $08
     jp   label_3DA0                               ; $48CE: $C3 $A0 $3D
 

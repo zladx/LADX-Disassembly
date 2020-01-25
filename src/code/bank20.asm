@@ -679,40 +679,47 @@ jr_020_4961:
 jr_020_497F:
     ret                                           ; $497F: $C9
 
-    dec  [hl]                                     ; $4980: $35
-    inc  sp                                       ; $4981: $33
-    inc  de                                       ; $4982: $13
-    dec  d                                        ; $4983: $15
+; Order in which the tomb stones should be pushed
+TombStonesSequence::
+    db   $35, $33, $13, $15, $17
 
-jr_020_4984:
-    rla                                           ; $4984: $17
-
-func_020_4985::
+; When pushing a tomb stone in the Color dungeon graveyard,
+; check if the order matches the secret sequence.
+CheckPushedTombStone::
     push bc                                       ; $4985: $C5
     push de                                       ; $4986: $D5
-    ld   hl, $4980                                ; $4987: $21 $80 $49
-    ld   a, [$DDD9]                               ; $498A: $FA $D9 $DD
+    ; a = TombStonesSequence[wColorDungonCorrectTombStones]
+    ld   hl, TombStonesSequence                   ; $4987: $21 $80 $49
+    ld   a, [wColorDungonCorrectTombStones]       ; $498A: $FA $D9 $DD
     ld   e, a                                     ; $498D: $5F
     ld   d, $00                                   ; $498E: $16 $00
     add  hl, de                                   ; $4990: $19
     ld   a, [hl]                                  ; $4991: $7E
+
+    ; If [hFFE9] != 0, return.
     ld   hl, hFFE9                                ; $4992: $21 $E9 $FF
     cp   [hl]                                     ; $4995: $BE
-    jr   nz, jr_020_49AF                          ; $4996: $20 $17
+    jr   nz, .return                              ; $4996: $20 $17
 
-    ld   a, [$DDD9]                               ; $4998: $FA $D9 $DD
+    ; Increment the correct number of tomb stones pushed
+    ld   a, [wColorDungonCorrectTombStones]       ; $4998: $FA $D9 $DD
     inc  a                                        ; $499B: $3C
-    ld   [$DDD9], a                               ; $499C: $EA $D9 $DD
-    cp   $05                                      ; $499F: $FE $05
-    jr   nz, jr_020_49AF                          ; $49A1: $20 $0C
+    ld   [wColorDungonCorrectTombStones], a       ; $499C: $EA $D9 $DD
 
+    ; If all 5 tomb stones were correctly pushed…
+    cp   $05                                      ; $499F: $FE $05
+    jr   nz, .return                              ; $49A1: $20 $0C
+
+    ; Mark the color dungon as opened
     ld   a, $80                                   ; $49A3: $3E $80
-    ld   [$DDD9], a                               ; $49A5: $EA $D9 $DD
+    ld   [wColorDungonCorrectTombStones], a       ; $49A5: $EA $D9 $DD
+
+    ; Play the puzzle solved jingle
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $49A8: $3E $02
     ldh  [hJingle], a                             ; $49AA: $E0 $F2
     call ClearWRAMBank5                           ; $49AC: $CD $54 $48
 
-jr_020_49AF:
+.return
     pop  de                                       ; $49AF: $D1
     pop  bc                                       ; $49B0: $C1
     ret                                           ; $49B1: $C9
@@ -757,7 +764,7 @@ func_020_49D9::
     ret                                           ; $49EB: $C9
 
     ld   bc, $2001                                ; $49EC: $01 $01 $20
-    jr   nz, jr_020_4984                          ; $49EF: $20 $93
+    db   $20, $93                                 ; $49EF: $20 $93
 
     sub  e                                        ; $49F1: $93
     inc  de                                       ; $49F2: $13
@@ -1246,7 +1253,7 @@ ResetRoomVariables::
     ld   [$C5A6], a                               ; $4CCF: $EA $A6 $C5
     ld   [wCompassSfxCountdown], a                ; $4CD2: $EA $62 $D4
     ld   [wC3CD], a                               ; $4CD5: $EA $CD $C3
-    ld   [$DDD9], a                               ; $4CD8: $EA $D9 $DD
+    ld   [wColorDungonCorrectTombStones], a       ; $4CD8: $EA $D9 $DD
     ld   a, $FF                                   ; $4CDB: $3E $FF
     ld   [wWarpStructs], a                        ; $4CDD: $EA $01 $D4
     ld   [$C50F], a                               ; $4CE0: $EA $0F $C5
@@ -6739,16 +6746,18 @@ jr_020_6C0B:
     ld   [wPaletteUnknownE], a                    ; $6C20: $EA $D5 $DD
     ret                                           ; $6C23: $C9
 
-func_020_6C24::
+; Copy some tunic-related data to 01:DC50
+; (GBC only)
+CopyLinkTunicPalette::
     ldh  a, [hIsGBC]                              ; $6C24: $F0 $FE
     and  a                                        ; $6C26: $A7
-    jr   z, jr_020_6C4E                           ; $6C27: $28 $25
+    jr   z, .return                               ; $6C27: $28 $25
 
     ld   hl, $DC50                                ; $6C29: $21 $50 $DC
     ld   a, [wTunicType]                          ; $6C2C: $FA $0F $DC
     and  a                                        ; $6C2F: $A7
-    jr   z, jr_020_6C3D                           ; $6C30: $28 $0B
-
+    jr   z, .specialTunicEnd                      ; $6C30: $28 $0B
+    ; Change the base pointer for the color tunics
     inc  a                                        ; $6C32: $3C
     sla  a                                        ; $6C33: $CB $27
     sla  a                                        ; $6C35: $CB $27
@@ -6757,10 +6766,12 @@ func_020_6C24::
     ld   b, $00                                   ; $6C3A: $06 $00
     add  hl, bc                                   ; $6C3C: $09
 
-jr_020_6C3D:
+.specialTunicEnd
+    ; Data length
     ld   b, $08                                   ; $6C3D: $06 $08
 
-jr_020_6C3F:
+    ; Copy 8 bytes from 02:DC50 to 01:DC50
+.loop
     ld   a, $02                                   ; $6C3F: $3E $02
     ld   [rSVBK], a                               ; $6C41: $E0 $70
     ld   c, [hl]                                  ; $6C43: $4E
@@ -6771,9 +6782,9 @@ jr_020_6C3F:
     dec  b                                        ; $6C49: $05
     ld   a, b                                     ; $6C4A: $78
     and  a                                        ; $6C4B: $A7
-    jr   nz, jr_020_6C3F                          ; $6C4C: $20 $F1
+    jr   nz, .loop                                ; $6C4C: $20 $F1
 
-jr_020_6C4E:
+.return
     ret                                           ; $6C4E: $C9
 
 func_020_6C4F::

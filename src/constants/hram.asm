@@ -316,7 +316,15 @@ hNoiseSfx:: ; FFF4
   ; See NOISE_SFX_* constants for possible values
   ds 1
 
-hFFF5: ds 1
+hActiveEntityTilesOffset:: ; FFF5
+  ; hActiveEntityTilesOffset?
+  ; Control the base location of the active entity tiles
+  ; in the tilemap.
+  ;
+  ; Dodongo snake: $10 for a specific instance
+  ; Octorock: $30
+  ; etc.
+  ds 1
 
 hMapRoom:: ; FFF6
   ; Room id on the active map

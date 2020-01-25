@@ -16,7 +16,7 @@ DodongoSnakeEntityHandler::
     jr   nz, jr_005_6879                          ; $6873: $20 $04
 
     ld   a, $10                                   ; $6875: $3E $10
-    ldh  [hFFF5], a                               ; $6877: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $6877: $E0 $F5
 
 jr_005_6879:
     call func_005_6A38                            ; $6879: $CD $38 $6A
@@ -490,7 +490,7 @@ jr_005_6C92:
     ld   e, a                                     ; $6CA2: $5F
     add  hl, de                                   ; $6CA3: $19
     ld   c, $0A                                   ; $6CA4: $0E $0A
-    call label_3CE6                               ; $6CA6: $CD $E6 $3C
+    call func_3CE6                               ; $6CA6: $CD $E6 $3C
     ld   a, $08                                   ; $6CA9: $3E $08
     jp   label_3DA0                               ; $6CAB: $C3 $A0 $3D
 
@@ -506,7 +506,7 @@ jr_005_6CAE:
     ld   hl, Data_005_6AF7                        ; $6CB8: $21 $F7 $6A
     add  hl, de                                   ; $6CBB: $19
     ld   c, $04                                   ; $6CBC: $0E $04
-    call label_3CE6                               ; $6CBE: $CD $E6 $3C
+    call func_3CE6                               ; $6CBE: $CD $E6 $3C
     ld   a, $02                                   ; $6CC1: $3E $02
     jp   label_3DA0                               ; $6CC3: $C3 $A0 $3D
 

@@ -173,8 +173,8 @@ LoadFileMenuBG_trampoline::
     callsb LoadFileMenuBG
     jr   LoadBank1AndReturn
 
-func_020_6C24_trampoline::
-    callsb func_020_6C24
+CopyLinkTunicPalette_trampoline::
+    callsb CopyLinkTunicPalette
 
 LoadBank1AndReturn::
     ld   a, $01
@@ -308,10 +308,9 @@ func_999::
     ldi  [hl], a
     jr   RestoreStackedBankAndReturn
 
-func_020_4985_trampoline::
+CheckPushedTombStone_trampoline::
     push af
-    ; Will do stuff, and play JINGLE_PUZZLE_SOLVED
-    callsb func_020_4985
+    callsb CheckPushedTombStone
     jr   RestoreStackedBankAndReturn
 
 func_020_4518_trampoline::
@@ -425,7 +424,7 @@ func_A5F::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call label_3CE6
+    call func_3CE6
     jp   RestoreStackedBankAndReturn
 
 func_003_5A2E_trampoline::
@@ -6156,11 +6155,11 @@ LoadRoomObject::
     jr   z, .configureBreakableObject
 .bombableBlockEnd
 
-    cp   OBJECT_BREAKABLE_CRYSTAL
+    cp   OBJECT_KEYHOLE_BLOCK
     jr   nz, .breakableObjectEnd
 
 .configureBreakableObject
-    ; If the object has been broken…
+    ; If the object has been broken or activated…
     bit  6, e
     jr   z, .breakableObjectEnd
     ; … replace it by an empty floor tile
@@ -7481,8 +7480,8 @@ RenderAnimatedActiveEntity::
     pop  hl
     add  hl, bc
 
-    ; [de] = [hl++] + [$FFF5]
-    ldh  a, [$FFF5]
+    ; [de] = [hl++] + [hActiveEntityTilesOffset]
+    ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
     ld   a, [hli]
     add  a, c
@@ -7531,7 +7530,7 @@ label_3C21::
     ld   [de], a
     inc  de
     pop  hl
-    ldh  a, [$FFF5]
+    ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
     ld   a, [hli]
     add  a, c
@@ -7675,12 +7674,21 @@ label_3CD9::
 label_3CE0::
     push hl
     ld   hl, wOAMBuffer
-    jr   label_3CF6
+    jr   func_3CE6.label_3CF6
 
-label_3CE6::
+; ???
+; Inputs:
+;   c   number of items
+;
+; Return value:
+;   c   [wLinkWalkingFrameCount]
+func_3CE6::
+    ; If hActiveEntitySpriteVariant + 1 = 0, return.
     ldh  a, [hActiveEntitySpriteVariant]
     inc  a
-    jr   z, label_3D52
+    jr   z, .return
+
+    ; hl = wDynamicOAMBuffer + [$C3C0]
     push hl
     ld   a, [$C3C0]
     ld   e, a
@@ -7688,19 +7696,24 @@ label_3CE6::
     ld   hl, wDynamicOAMBuffer
     add  hl, de
 
-label_3CF6::
+.label_3CF6
     ld   e, l
     ld   d, h
     pop  hl
+
+    ; Save counter to hScratch0
     ld   a, c
     ldh  [hScratch0], a
+
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     call SkipDisabledEntityDuringRoomTransition
+
+    ; Restore counter from hScratch0
     ldh  a, [hScratch0]
     ld   c, a
 
-label_3D06::
+.loop
     ldh  a, [wActiveEntityPosY]
     add  a, [hl]
     ld   [de], a
@@ -7715,7 +7728,7 @@ label_3D06::
     ld   [de], a
     inc  hl
     inc  de
-    ldh  a, [$FFF5]
+    ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
     ld   a, [hli]
     push af
@@ -7723,42 +7736,42 @@ label_3D06::
     ld   [de], a
     pop  af
     cp   $FF
-    jr   nz, label_3D28
+    jr   nz, .jp_3D28
     dec  de
     xor  a
     ld   [de], a
     inc  de
-
-label_3D28::
+.jp_3D28
     pop  bc
+
     inc  de
     ldh  a, [$FFED]
     xor  [hl]
     ld   [de], a
     inc  hl
+
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_3D3F
+    jr   z, .gbcEnd
     ldh  a, [$FFED]
     and  a
-    jr   z, label_3D3F
+    jr   z, .gbcEnd
     ld   a, [de]
     and  $F8
     or   $04
     ld   [de], a
+.gbcEnd
 
-label_3D3F::
     inc  de
     dec  c
-    jr   nz, label_3D06
+    jr   nz, .loop
+
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
-    ld   a, $15
-    ld   [MBC3SelectBank], a
-    call label_795D
+    callsb func_015_795D
     jp   ReloadSavedBank
 
-label_3D52::
+.return
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ret

@@ -1404,7 +1404,17 @@ wPaletteUnknownE:: ; DDD5
   ds 1
 
 ; Unlabeled
-ds $DDE0 - $DDD6
+ds $DDD9 - $DDD6
+
+wColorDungonCorrectTombStones:: ; DDD9
+  ; Number of tomb stones correctly pushed so far.
+  ; Values:
+  ; 0 - 4   number of correct tomb stones
+  ; 80      color dungon has been opened
+  ds 1
+
+; Unlabeled
+ds $DDE0 - $DDDA
 
 ; Color dungeon rooms status
 ;

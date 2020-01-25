@@ -865,7 +865,7 @@ func_007_4594::
     ld   hl, Data_007_4234                        ; $459E: $21 $34 $42
     add  hl, de                                   ; $45A1: $19
     ld   c, $04                                   ; $45A2: $0E $04
-    jp   label_3CE6                               ; $45A4: $C3 $E6 $3C
+    jp   func_3CE6                               ; $45A4: $C3 $E6 $3C
 
 Data_007_45A7::
     db   $FE, $FE, $FE, $FE, $FF, $FF, $FF, $FF   ; $45A7
@@ -968,7 +968,7 @@ Data_007_4667::
 func_007_467B::
     ld   hl, Data_007_4667                        ; $467B: $21 $67 $46
     ld   c, $05                                   ; $467E: $0E $05
-    jp   label_3CE6                               ; $4680: $C3 $E6 $3C
+    jp   func_3CE6                               ; $4680: $C3 $E6 $3C
 
 Data_007_4683::
     db   $72, $21, $70, $21, $70, $01, $72, $01, $76, $01, $78, $01, $78, $21, $76, $21
@@ -1035,7 +1035,7 @@ jr_007_46E6:
     ld   hl, Data_007_469B                        ; $46F7: $21 $9B $46
     add  hl, de                                   ; $46FA: $19
     ld   c, $03                                   ; $46FB: $0E $03
-    call label_3CE6                               ; $46FD: $CD $E6 $3C
+    call func_3CE6                               ; $46FD: $CD $E6 $3C
     jr   jr_007_470B                              ; $4700: $18 $09
 
 jr_007_4702:
@@ -1480,7 +1480,7 @@ func_007_49DC::
     ld   hl, Data_007_499C                        ; $49E6: $21 $9C $49
     add  hl, de                                   ; $49E9: $19
     ld   c, $04                                   ; $49EA: $0E $04
-    jp   label_3CE6                               ; $49EC: $C3 $E6 $3C
+    jp   func_3CE6                               ; $49EC: $C3 $E6 $3C
 
 Data_007_49EF::
     db   $6E, $20, $6C, $20, $6C, $00, $6E, $00
@@ -1748,7 +1748,7 @@ jr_007_4BE1:
 
 jr_007_4BF2:
     ld   c, $08                                   ; $4BF2: $0E $08
-    call label_3CE6                               ; $4BF4: $CD $E6 $3C
+    call func_3CE6                               ; $4BF4: $CD $E6 $3C
     ld   a, $06                                   ; $4BF7: $3E $06
     call label_3DA0                               ; $4BF9: $CD $A0 $3D
     xor  a                                        ; $4BFC: $AF
@@ -3635,7 +3635,7 @@ func_007_5805::
     ld   hl, Data_007_57F5                        ; $5811: $21 $F5 $57
     add  hl, de                                   ; $5814: $19
     ld   c, $02                                   ; $5815: $0E $02
-    jp   label_3CE6                               ; $5817: $C3 $E6 $3C
+    jp   func_3CE6                               ; $5817: $C3 $E6 $3C
 
 Data_007_581A::
     db   $78, $02, $72, $02, $7A, $02, $72, $02, $70, $02, $72, $02, $7C, $02, $7E, $02
@@ -4420,7 +4420,7 @@ jr_007_5CC0:
     ld   [de], a                                  ; $5CCC: $12
     inc  hl                                       ; $5CCD: $23
     inc  de                                       ; $5CCE: $13
-    ldh  a, [hFFF5]                               ; $5CCF: $F0 $F5
+    ldh  a, [hActiveEntityTilesOffset]            ; $5CCF: $F0 $F5
     ld   c, a                                     ; $5CD1: $4F
     ld   a, [hl+]                                 ; $5CD2: $2A
     push af                                       ; $5CD3: $F5
@@ -5437,7 +5437,7 @@ SideViewPlatformHorizontalEntityHandler::
 SideViewPlatformVerticalEntityHandler::
     ld   hl, Data_007_6348                        ; $6358: $21 $48 $63
     ld   c, $04                                   ; $635B: $0E $04
-    call label_3CE6                               ; $635D: $CD $E6 $3C
+    call func_3CE6                               ; $635D: $CD $E6 $3C
     call func_007_7D96                            ; $6360: $CD $96 $7D
     call GetEntityTransitionCountdown             ; $6363: $CD $05 $0C
     ld   e, a                                     ; $6366: $5F
@@ -5573,12 +5573,12 @@ SideViewPlatformEntityHandler::
     jr   z, jr_007_643B                           ; $6435: $28 $04
 
     ld   a, $04                                   ; $6437: $3E $04
-    ldh  [hFFF5], a                               ; $6439: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $6439: $E0 $F5
 
 jr_007_643B:
     ld   hl, Data_007_6422                        ; $643B: $21 $22 $64
     ld   c, $04                                   ; $643E: $0E $04
-    call label_3CE6                               ; $6440: $CD $E6 $3C
+    call func_3CE6                               ; $6440: $CD $E6 $3C
     call func_007_7D96                            ; $6443: $CD $96 $7D
     call func_007_639E                            ; $6446: $CD $9E $63
     ld   hl, wEntitiesPrivateState2Table          ; $6449: $21 $C0 $C2
@@ -7370,7 +7370,7 @@ func_007_6FB1::
     ldh  [wActiveEntityPosY], a                   ; $6FD4: $E0 $EC
     ld   hl, Data_007_6FA1                        ; $6FD6: $21 $A1 $6F
     ld   c, $04                                   ; $6FD9: $0E $04
-    call label_3CE6                               ; $6FDB: $CD $E6 $3C
+    call func_3CE6                               ; $6FDB: $CD $E6 $3C
     ld   a, $04                                   ; $6FDE: $3E $04
     call label_3DA0                               ; $6FE0: $CD $A0 $3D
 
@@ -7399,7 +7399,7 @@ func_007_6FE6::
     ld   hl, Data_007_6F59                        ; $7004: $21 $59 $6F
     add  hl, de                                   ; $7007: $19
     ld   c, $02                                   ; $7008: $0E $02
-    call label_3CE6                               ; $700A: $CD $E6 $3C
+    call func_3CE6                               ; $700A: $CD $E6 $3C
     ld   a, $02                                   ; $700D: $3E $02
     jp   label_007_7034                           ; $700F: $C3 $34 $70
 
@@ -7425,7 +7425,7 @@ func_007_7015::
 
 jr_007_702D:
     ld   c, $05                                   ; $702D: $0E $05
-    call label_3CE6                               ; $702F: $CD $E6 $3C
+    call func_3CE6                               ; $702F: $CD $E6 $3C
     ld   a, $05                                   ; $7032: $3E $05
 
 label_007_7034:
@@ -7472,7 +7472,7 @@ func_007_706F::
     ld   hl, Data_007_6F19                        ; $7082: $21 $19 $6F
     add  hl, de                                   ; $7085: $19
     ld   c, $04                                   ; $7086: $0E $04
-    call label_3CE6                               ; $7088: $CD $E6 $3C
+    call func_3CE6                               ; $7088: $CD $E6 $3C
     ld   a, $04                                   ; $708B: $3E $04
     jp   label_007_7034                           ; $708D: $C3 $34 $70
 
@@ -7496,7 +7496,7 @@ func_007_7090::
     ld   hl, Data_007_6F39                        ; $70A9: $21 $39 $6F
     add  hl, de                                   ; $70AC: $19
     ld   c, $04                                   ; $70AD: $0E $04
-    call label_3CE6                               ; $70AF: $CD $E6 $3C
+    call func_3CE6                               ; $70AF: $CD $E6 $3C
     ld   a, $04                                   ; $70B2: $3E $04
     jp   label_007_7034                           ; $70B4: $C3 $34 $70
 

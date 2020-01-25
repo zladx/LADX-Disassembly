@@ -28,7 +28,7 @@ label_40F9::
     call label_5DE6
     call ClearWRAMAndLowerHRAM
     xor  a
-    ldh  [$FFF5], a
+    ldh  [hActiveEntityTilesOffset], a
     ld   a, $01
     ld   [$DBAF], a
     call label_6162
@@ -2224,9 +2224,9 @@ label_5CBD::
     ld   a, $08
     ld   [$C3C0], a
     xor  a
-    ldh  [$FFF5], a
+    ldh  [hActiveEntityTilesOffset], a
     ld   c, $08
-    call label_3CE6
+    call func_3CE6
     ld   a, [$C1B0]
     cp   $00
     jr   nz, label_5D13
@@ -3576,7 +3576,7 @@ label_6A7C::
     xor  a
     ldh  [hActiveEntitySpriteVariant], a
     ldh  [$FFED], a
-    ldh  [$FFF5], a
+    ldh  [hActiveEntityTilesOffset], a
     ld   a, $38
     ldh  [wActiveEntityPosX], a
     ld   a, [wScreenShakeVertical]
@@ -3642,7 +3642,7 @@ label_6AE3::
     ld   hl, label_69D2
 
 label_6AF4::
-    call label_3CE6
+    call func_3CE6
     ret
 
 include "code/face_shrine_mural.asm"

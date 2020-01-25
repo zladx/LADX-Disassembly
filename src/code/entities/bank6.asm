@@ -803,7 +803,7 @@ jr_006_440C:
     ld   hl, $4486                                ; $44E3: $21 $86 $44
     add  hl, de                                   ; $44E6: $19
     ld   c, $03                                   ; $44E7: $0E $03
-    call label_3CE6                               ; $44E9: $CD $E6 $3C
+    call func_3CE6                               ; $44E9: $CD $E6 $3C
     ld   a, $03                                   ; $44EC: $3E $03
     jp   label_3DA0                               ; $44EE: $C3 $A0 $3D
 
@@ -820,7 +820,7 @@ jr_006_44F1:
     ld   hl, $4456                                ; $44FD: $21 $56 $44
     add  hl, de                                   ; $4500: $19
     ld   c, $03                                   ; $4501: $0E $03
-    call label_3CE6                               ; $4503: $CD $E6 $3C
+    call func_3CE6                               ; $4503: $CD $E6 $3C
     jp   label_3CD9                               ; $4506: $C3 $D9 $3C
 
 SmasherEntityHandler::
@@ -1218,7 +1218,7 @@ jr_006_471D:
     ld   hl, $4727                                ; $4771: $21 $27 $47
     add  hl, de                                   ; $4774: $19
     ld   c, $04                                   ; $4775: $0E $04
-    call label_3CE6                               ; $4777: $CD $E6 $3C
+    call func_3CE6                               ; $4777: $CD $E6 $3C
     jp   label_3CD9                               ; $477A: $C3 $D9 $3C
 
     ld   l, [hl]                                  ; $477D: $6E
@@ -2308,7 +2308,7 @@ func_006_4E64::
     ld   hl, Data_006_4D64                        ; $4E6F: $21 $64 $4D
     add  hl, de                                   ; $4E72: $19
     ld   c, $08                                   ; $4E73: $0E $08
-    jp   label_3CE6                               ; $4E75: $C3 $E6 $3C
+    jp   func_3CE6                               ; $4E75: $C3 $E6 $3C
 
     ld   l, h                                     ; $4E78: $6C
     nop                                           ; $4E79: $00
@@ -3080,7 +3080,7 @@ func_006_52BA::
 jr_006_52D8:
     add  hl, de                                   ; $52D8: $19
     ld   c, $08                                   ; $52D9: $0E $08
-    jp   label_3CE6                               ; $52DB: $C3 $E6 $3C
+    jp   func_3CE6                               ; $52DB: $C3 $E6 $3C
 
 ArmosKnightEntityHandler::
     ld   hl, wEntitiesLoadOrderTable              ; $52DE: $21 $60 $C4
@@ -3593,7 +3593,7 @@ func_006_55B3::
     ld   hl, $5523                                ; $55BE: $21 $23 $55
     add  hl, de                                   ; $55C1: $19
     ld   c, $08                                   ; $55C2: $0E $08
-    call label_3CE6                               ; $55C4: $CD $E6 $3C
+    call func_3CE6                               ; $55C4: $CD $E6 $3C
     ld   a, $04                                   ; $55C7: $3E $04
     call label_3DA0                               ; $55C9: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                   ; $55CC: $21 $10 $C3
@@ -3606,7 +3606,7 @@ func_006_55B3::
     ldh  [wActiveEntityPosY], a                   ; $55D6: $E0 $EC
     ld   hl, $55A3                                ; $55D8: $21 $A3 $55
     ld   c, $04                                   ; $55DB: $0E $04
-    call label_3CE6                               ; $55DD: $CD $E6 $3C
+    call func_3CE6                               ; $55DD: $CD $E6 $3C
 
 jr_006_55E0:
     jp   label_3D8A                               ; $55E0: $C3 $8A $3D
@@ -4791,7 +4791,7 @@ func_006_5C71::
     ld   hl, $5C51                                ; $5C7B: $21 $51 $5C
     add  hl, de                                   ; $5C7E: $19
     ld   c, $04                                   ; $5C7F: $0E $04
-    call label_3CE6                               ; $5C81: $CD $E6 $3C
+    call func_3CE6                               ; $5C81: $CD $E6 $3C
     ld   a, $04                                   ; $5C84: $3E $04
     jp   label_3DA0                               ; $5C86: $C3 $A0 $3D
 
@@ -5246,7 +5246,7 @@ jr_006_5EEE:
     sub  $04                                      ; $5EFF: $D6 $04
     ldh  [wActiveEntityPosY], a                   ; $5F01: $E0 $EC
     ld   c, $04                                   ; $5F03: $0E $04
-    call label_3CE6                               ; $5F05: $CD $E6 $3C
+    call func_3CE6                               ; $5F05: $CD $E6 $3C
     ld   a, $04                                   ; $5F08: $3E $04
     call label_3DA0                               ; $5F0A: $CD $A0 $3D
     call label_3D8A                               ; $5F0D: $CD $8A $3D
@@ -6024,7 +6024,7 @@ func_006_6376::
     ld   hl, $6316                                ; $6381: $21 $16 $63
     add  hl, de                                   ; $6384: $19
     ld   c, $08                                   ; $6385: $0E $08
-    call label_3CE6                               ; $6387: $CD $E6 $3C
+    call func_3CE6                               ; $6387: $CD $E6 $3C
     ld   a, $08                                   ; $638A: $3E $08
     jp   label_3DA0                               ; $638C: $C3 $A0 $3D
 
@@ -7263,7 +7263,7 @@ jr_006_6A36:
 jr_006_6A5B:
     ld   hl, $6A3F                                ; $6A5B: $21 $3F $6A
     ld   c, $04                                   ; $6A5E: $0E $04
-    call label_3CE6                               ; $6A60: $CD $E6 $3C
+    call func_3CE6                               ; $6A60: $CD $E6 $3C
     ld   a, $04                                   ; $6A63: $3E $04
     call label_3DA0                               ; $6A65: $CD $A0 $3D
     ldh  a, [hMapRoom]                            ; $6A68: $F0 $F6
@@ -7622,7 +7622,7 @@ RollingBonesEntityHandler::
     jr   nz, jr_006_6C7B                          ; $6C75: $20 $04
 
     ld   a, $10                                   ; $6C77: $3E $10
-    ldh  [hFFF5], a                               ; $6C79: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $6C79: $E0 $F5
 
 jr_006_6C7B:
     call $6E7E                                    ; $6C7B: $CD $7E $6E
@@ -7994,7 +7994,7 @@ jr_006_6E04:
     ld   hl, $6E1E                                ; $6E8D: $21 $1E $6E
     add  hl, de                                   ; $6E90: $19
     ld   c, $04                                   ; $6E91: $0E $04
-    call label_3CE6                               ; $6E93: $CD $E6 $3C
+    call func_3CE6                               ; $6E93: $CD $E6 $3C
     ld   a, $04                                   ; $6E96: $3E $04
     call label_3DA0                               ; $6E98: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                   ; $6E9B: $21 $10 $C3
@@ -8055,7 +8055,7 @@ RollingBonesBarEntityHandler::
     jr   nz, jr_006_6EED                          ; $6EE7: $20 $04
 
     ld   a, $10                                   ; $6EE9: $3E $10
-    ldh  [hFFF5], a                               ; $6EEB: $E0 $F5
+    ldh  [hActiveEntityTilesOffset], a            ; $6EEB: $E0 $F5
 
 jr_006_6EED:
     ldh  a, [hRoomStatus]                         ; $6EED: $F0 $F8
@@ -8467,7 +8467,7 @@ label_006_7123:
 
 jr_006_712F:
     ld   c, $06                                   ; $712F: $0E $06
-    call label_3CE6                               ; $7131: $CD $E6 $3C
+    call func_3CE6                               ; $7131: $CD $E6 $3C
     ld   a, $06                                   ; $7134: $3E $06
     call label_3DA0                               ; $7136: $CD $A0 $3D
     call label_3CD9                               ; $7139: $CD $D9 $3C
@@ -9775,7 +9775,7 @@ jr_006_783F:
     ld   hl, $773C                                ; $7860: $21 $3C $77
     add  hl, de                                   ; $7863: $19
     ld   c, $10                                   ; $7864: $0E $10
-    call label_3CE6                               ; $7866: $CD $E6 $3C
+    call func_3CE6                               ; $7866: $CD $E6 $3C
     ld   a, $10                                   ; $7869: $3E $10
     jp   label_3DA0                               ; $786B: $C3 $A0 $3D
 
@@ -10336,7 +10336,7 @@ jr_006_7B61:
     ld   hl, $7AEB                                ; $7B67: $21 $EB $7A
     add  hl, de                                   ; $7B6A: $19
     ld   c, $02                                   ; $7B6B: $0E $02
-    call label_3CE6                               ; $7B6D: $CD $E6 $3C
+    call func_3CE6                               ; $7B6D: $CD $E6 $3C
     ld   a, $01                                   ; $7B70: $3E $01
     call label_3DA0                               ; $7B72: $CD $A0 $3D
     call label_3D8A                               ; $7B75: $CD $8A $3D

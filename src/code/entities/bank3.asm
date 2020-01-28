@@ -674,7 +674,7 @@ jr_003_4B51:
     add  hl, bc                                   ; $4B54: $09
     ld   [hl], a                                  ; $4B55: $77
 
-func_003_4B56::
+FinalNightmareForm1Collisions::
     ret                                           ; $4B56: $C9
 
     ld   a, $03                                   ; $4B57: $3E $03
@@ -686,11 +686,11 @@ func_003_4B56::
 
     ld   a, [wIsIndoor]                           ; $4B61: $FA $A5 $DB
     and  a                                        ; $4B64: $A7
-    jr   z, func_003_4B56                         ; $4B65: $28 $EF
+    jr   z, FinalNightmareForm1Collisions                         ; $4B65: $28 $EF
 
     ldh  a, [hMapRoom]                            ; $4B67: $F0 $F6
     cp   $DA                                      ; $4B69: $FE $DA
-    jr   nz, func_003_4B56                        ; $4B6B: $20 $E9
+    jr   nz, FinalNightmareForm1Collisions                        ; $4B6B: $20 $E9
 
     ld   a, [wTradeSequenceItem]                  ; $4B6D: $FA $0E $DB
     cp   $0E                                      ; $4B70: $FE $0E
@@ -698,7 +698,7 @@ func_003_4B56::
 
     ld   a, [wPhotos2]                            ; $4B75: $FA $0D $DC
     and  $01                                      ; $4B78: $E6 $01
-    jr   z, func_003_4B56                         ; $4B7A: $28 $DA
+    jr   z, FinalNightmareForm1Collisions                         ; $4B7A: $28 $DA
 
     ld   a, $03                                   ; $4B7C: $3E $03
     jp   SetEntitySpriteVariant                   ; $4B7E: $C3 $0C $3B
@@ -763,7 +763,7 @@ jr_003_4BC2:
     ld   a, [hl]                                  ; $4BD5: $7E
     sub  $08                                      ; $4BD6: $D6 $08
     ld   [hl], a                                  ; $4BD8: $77
-    jp   func_003_4B56                            ; $4BD9: $C3 $56 $4B
+    jp   FinalNightmareForm1Collisions                            ; $4BD9: $C3 $56 $4B
 
     ld   hl, wEntitiesPosXTable                   ; $4BDC: $21 $00 $C2
     add  hl, bc                                   ; $4BDF: $09
@@ -771,15 +771,15 @@ jr_003_4BC2:
     ld   hl, wEntitiesUnknownTableD               ; $4BE2: $21 $D0 $C2
     add  hl, bc                                   ; $4BE5: $09
     ld   [hl], $00                                ; $4BE6: $36 $00
-    jp   func_003_4B56                            ; $4BE8: $C3 $56 $4B
+    jp   FinalNightmareForm1Collisions                            ; $4BE8: $C3 $56 $4B
 
     ldh  a, [hIsGBC]                              ; $4BEB: $F0 $FE
     and  a                                        ; $4BED: $A7
-    jp   z, func_003_4B56                         ; $4BEE: $CA $56 $4B
+    jp   z, FinalNightmareForm1Collisions                         ; $4BEE: $CA $56 $4B
 
     call func_003_4B84                            ; $4BF1: $CD $84 $4B
     and  $10                                      ; $4BF4: $E6 $10
-    jp   z, func_003_4B56                         ; $4BF6: $CA $56 $4B
+    jp   z, FinalNightmareForm1Collisions                         ; $4BF6: $CA $56 $4B
 
     ld   hl, wEntitiesPosXTable                   ; $4BF9: $21 $00 $C2
     add  hl, bc                                   ; $4BFC: $09
@@ -788,11 +788,11 @@ jr_003_4BC2:
 
     ldh  a, [hIsGBC]                              ; $4C01: $F0 $FE
     and  a                                        ; $4C03: $A7
-    jp   z, func_003_4B56                         ; $4C04: $CA $56 $4B
+    jp   z, FinalNightmareForm1Collisions                         ; $4C04: $CA $56 $4B
 
     call func_003_4B84                            ; $4C07: $CD $84 $4B
     and  $10                                      ; $4C0A: $E6 $10
-    jp   z, func_003_4B56                         ; $4C0C: $CA $56 $4B
+    jp   z, FinalNightmareForm1Collisions                         ; $4C0C: $CA $56 $4B
 
     ld   hl, wEntitiesPosXTable                   ; $4C0F: $21 $00 $C2
     add  hl, bc                                   ; $4C12: $09
@@ -803,7 +803,7 @@ jr_003_4C15:
     ld   hl, wEntitiesStateTable                  ; $4C16: $21 $90 $C2
     add  hl, bc                                   ; $4C19: $09
     ld   [hl], $04                                ; $4C1A: $36 $04
-    jp   func_003_4B56                            ; $4C1C: $C3 $56 $4B
+    jp   FinalNightmareForm1Collisions                            ; $4C1C: $C3 $56 $4B
 
     ld   hl, wEntitiesPosYTable                   ; $4C1F: $21 $10 $C2
     add  hl, bc                                   ; $4C22: $09
@@ -825,7 +825,7 @@ jr_003_4C15:
     ld   a, [hl]                                  ; $4C3D: $7E
     add  $08                                      ; $4C3E: $C6 $08
     ld   [hl], a                                  ; $4C40: $77
-    jp   func_003_4B56                            ; $4C41: $C3 $56 $4B
+    jp   FinalNightmareForm1Collisions                            ; $4C41: $C3 $56 $4B
 
 ; Not sure if code or data
 EntityDestructionData::
@@ -2925,26 +2925,18 @@ HeartPieceEntityHandler::
     jp   nz, UnloadEntityAndReturn                ; $5A55: $C2 $8D $3F
 
     ldh  a, [hActiveEntityState]                  ; $5A58: $F0 $F0
-    rst  $00                                      ; $5A5A: $C7
-    ld   d, d                                     ; $5A5B: $52
-    ld   e, e                                     ; $5A5C: $5B
-    ld   l, l                                     ; $5A5D: $6D
-    ld   e, d                                     ; $5A5E: $5A
-    ld   a, h                                     ; $5A5F: $7C
-    ld   e, d                                     ; $5A60: $5A
-    add  e                                        ; $5A61: $83
-    ld   e, d                                     ; $5A62: $5A
-    adc  d                                        ; $5A63: $8A
-    ld   e, d                                     ; $5A64: $5A
-    sbc  b                                        ; $5A65: $98
-    ld   e, d                                     ; $5A66: $5A
-    cp   e                                        ; $5A67: $BB
-    ld   e, d                                     ; $5A68: $5A
-    ldh  a, [$FF5A]                               ; $5A69: $F0 $5A
-    dec  b                                        ; $5A6B: $05
-    ld   e, e                                     ; $5A6C: $5B
+    JP_TABLE                                      ; $5A5A
+._00 dw HeartPieceState0Handler                   ; $5A5B
+._01 dw HeartPieceState1Handler                   ; $5A5D
+._02 dw HeartPieceState2Handler                   ; $5A5F
+._03 dw HeartPieceState3Handler                   ; $5A61
+._04 dw HeartPieceState4Handler                   ; $5A63
+._05 dw HeartPieceState5Handler                   ; $5A65
+._06 dw HeartPieceState6Handler                   ; $5A67
+._07 dw HeartPieceState7Handler                   ; $5A69
+._08 dw HeartPieceState8Handler                   ; $5A6B
 
-func_003_5A6D::
+HeartPieceState1Handler::
     call func_003_5A17                            ; $5A6D: $CD $17 $5A
     call GetEntityTransitionCountdown             ; $5A70: $CD $05 $0C
     ret  nz                                       ; $5A73: $C0
@@ -2953,24 +2945,24 @@ func_003_5A6D::
     ld   [wC167], a                               ; $5A76: $EA $67 $C1
     jp   IncrementEntityState                     ; $5A79: $C3 $12 $3B
 
-func_003_5A7C::
+HeartPieceState2Handler::
     ld   a, $03                                   ; $5A7C: $3E $03
     ldh  [hNeedsUpdatingBGTiles], a               ; $5A7E: $E0 $90
     jp   IncrementEntityState                     ; $5A80: $C3 $12 $3B
 
-func_003_5A83::
+HeartPieceState3Handler::
     ld   a, $04                                   ; $5A83: $3E $04
     ldh  [hNeedsUpdatingBGTiles], a               ; $5A85: $E0 $90
     jp   IncrementEntityState                     ; $5A87: $C3 $12 $3B
 
-func_003_5A8A::
+HeartPieceState4Handler::
     call_open_dialog $04F                          ; $5A8A: $3E $4F
     call IncrementEntityState                     ; $5A8F: $CD $12 $3B
     ld   a, $01                                   ; $5A92: $3E $01
     ld   [$C1AB], a                               ; $5A94: $EA $AB $C1
     ret                                           ; $5A97: $C9
 
-func_003_5A98::
+HeartPieceState5Handler::
     call func_003_5A17                            ; $5A98: $CD $17 $5A
     ld   de, Data_003_5A4D                        ; $5A9B: $11 $4D $5A
     call RenderAnimatedActiveEntity               ; $5A9E: $CD $C0 $3B
@@ -2992,7 +2984,7 @@ func_003_5A98::
 jr_003_5ABA:
     ret                                           ; $5ABA: $C9
 
-func_003_5ABB::
+HeartPieceState6Handler::
     call func_003_5A17                            ; $5ABB: $CD $17 $5A
     ld   de, Data_003_5A4D                        ; $5ABE: $11 $4D $5A
     call RenderAnimatedActiveEntity               ; $5AC1: $CD $C0 $3B
@@ -3025,7 +3017,7 @@ func_003_5ABB::
 jr_003_5AED:
     jp   IncrementEntityState                     ; $5AED: $C3 $12 $3B
 
-func_003_5AF0::
+HeartPieceState7Handler::
     call func_003_5A17                            ; $5AF0: $CD $17 $5A
     ld   de, Data_003_5A4D                        ; $5AF3: $11 $4D $5A
     call RenderAnimatedActiveEntity               ; $5AF6: $CD $C0 $3B
@@ -3037,7 +3029,7 @@ func_003_5AF0::
     ldh  [hNeedsUpdatingBGTiles], a               ; $5B00: $E0 $90
     jp   IncrementEntityState                     ; $5B02: $C3 $12 $3B
 
-func_003_5B05::
+HeartPieceState8Handler::
     ld   a, $06                                   ; $5B05: $3E $06
     ldh  [hNeedsUpdatingBGTiles], a               ; $5B07: $E0 $90
     call UnloadEntity                             ; $5B09: $CD $8D $3F
@@ -3076,7 +3068,7 @@ jr_003_5B41:
     ld   de, Data_003_5B17                        ; $5B4C: $11 $17 $5B
     jp   RenderAnimatedActiveEntity               ; $5B4F: $C3 $C0 $3B
 
-func_003_5B52::
+HeartPieceState0Handler::
     ld   de, Data_003_5A4D                        ; $5B52: $11 $4D $5A
     call RenderAnimatedActiveEntity               ; $5B55: $CD $C0 $3B
     jp   label_003_60AA                           ; $5B58: $C3 $AA $60
@@ -3136,15 +3128,13 @@ SwordEntityHandler::
 jr_003_5BAC:
     call RenderSimpleEntityWithSpriteVariantToOAM ; $5BAC: $CD $77 $3C
     ldh  a, [hActiveEntityState]                  ; $5BAF: $F0 $F0
-    rst  $00                                      ; $5BB1: $C7
-    cp   d                                        ; $5BB2: $BA
-    ld   e, e                                     ; $5BB3: $5B
-    db   $E4                                      ; $5BB4: $E4
-    ld   e, e                                     ; $5BB5: $5B
-    ld   bc, $F5C                                 ; $5BB6: $01 $5C $0F
-    ld   e, h                                     ; $5BB9: $5C
+    JP_TABLE                                      ; $5BB1
+._00 dw SwordState0Handler                        ; $5BB2
+._01 dw SwordState1Handler                        ; $5BB4
+._02 dw SwordState2Handler                        ; $5BB6
+._03 dw SwordState3Handler                        ; $5BB8
 
-func_003_5BBA::
+SwordState0Handler::
     call GetEntityTransitionCountdown             ; $5BBA: $CD $05 $0C
     jp   z, label_003_60AA                        ; $5BBD: $CA $AA $60
 
@@ -3171,7 +3161,7 @@ jr_003_5BCB:
 jr_003_5BE1:
     jp   func_003_5A17                            ; $5BE1: $C3 $17 $5A
 
-func_003_5BE4::
+SwordState1Handler::
     call func_003_5A17                            ; $5BE4: $CD $17 $5A
     call IsEntityDropTimerZero                    ; $5BE7: $CD $FB $0B
     ret  nz                                       ; $5BEA: $C0
@@ -3186,7 +3176,7 @@ func_003_5BE4::
     ldh  [hNoiseSfx], a                           ; $5BFC: $E0 $F4
     jp   IncrementEntityState                     ; $5BFE: $C3 $12 $3B
 
-func_003_5C01::
+SwordState2Handler::
     call GetEntityTransitionCountdown             ; $5C01: $CD $05 $0C
     ret  nz                                       ; $5C04: $C0
 
@@ -3195,7 +3185,7 @@ func_003_5C01::
     call SetEntitySpriteVariant                   ; $5C09: $CD $0C $3B
     jp   IncrementEntityState                     ; $5C0C: $C3 $12 $3B
 
-func_003_5C0F::
+SwordState3Handler::
     call func_003_5A17                            ; $5C0F: $CD $17 $5A
     ld   a, $6B                                   ; $5C12: $3E $6B
     ldh  [hLinkAnimationState], a                 ; $5C14: $E0 $9D
@@ -3435,14 +3425,10 @@ SirensInstrumentEntityHandler::
     ld   hl, wEntitiesPrivateState1Table          ; $5D93: $21 $B0 $C2
     add  hl, bc                                   ; $5D96: $09
     ld   a, [hl]                                  ; $5D97: $7E
-    rst  $00                                      ; $5D98: $C7
-    and  e                                        ; $5D99: $A3
-    ld   e, [hl]                                  ; $5D9A: $5E
-    sub  e                                        ; $5D9B: $93
-    ld   e, [hl]                                  ; $5D9C: $5E
-    reti                                          ; $5D9D: $D9
-
-    ld   e, l                                     ; $5D9E: $5D
+    JP_TABLE                                      ; $5D98
+._00 dw SirensInstrumentState0Handler             ; $5D99
+._01 dw SirensInstrumentState1Handler             ; $5D9B
+._02 dw SirensInstrumentState2Handler             ; $5D9D
 
 Data_003_5D9F::
     db   $E4, $E4, $E4, $E4, $90, $90, $90, $90, $40, $40, $40, $40, $00, $00, $00, $00
@@ -3452,12 +3438,12 @@ Data_003_5DBC::
     db   $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C
     db   $08, $08, $08, $08, $04, $04, $04, $04, $00, $00, $00, $00, $00
 
-func_003_5DD9::
+SirensInstrumentState2Handler::
     call label_3E76                               ; $5DD9: $CD $76 $3E
     ld   a, $01                                   ; $5DDC: $3E $01
     ld   [wC167], a                               ; $5DDE: $EA $67 $C1
     call IsEntityDropTimerZero                    ; $5DE1: $CD $FB $0B
-    jr   nz, jr_003_5E29                          ; $5DE4: $20 $43
+    jr   nz, animateSirensInstrumentPickup        ; $5DE4: $20 $43
 
     call UnloadEntity                             ; $5DE6: $CD $8D $3F
     xor  a                                        ; $5DE9: $AF
@@ -3469,54 +3455,53 @@ func_003_5DD9::
     add  hl, de                                   ; $5DF4: $19
     inc  [hl]                                     ; $5DF5: $34
     call label_C9E                                ; $5DF6: $CD $9E $0C
+
+    ; Execute some code specific to each dungeon
     ldh  a, [hMapId]                              ; $5DF9: $F0 $F7
-    rst  $00                                      ; $5DFB: $C7
-    inc  c                                        ; $5DFC: $0C
-    ld   e, [hl]                                  ; $5DFD: $5E
-    ld   [de], a                                  ; $5DFE: $12
-    ld   e, [hl]                                  ; $5DFF: $5E
-    jr   @+$60                                    ; $5E00: $18 $5E
+    JP_TABLE                                      ; $5DFB
+._00 dw AfterSirensInstrumentD1
+._01 dw AfterSirensInstrumentD2
+._02 dw AfterSirensInstrumentD3
+._03 dw AfterSirensInstrumentD4
+._04 dw AfterSirensInstrumentNone
+._05 dw AfterSirensInstrumentD6
+._06 dw AfterSirensInstrumentD7
+._07 dw AfterSirensInstrumentNone
 
-    add  hl, de                                   ; $5E02: $19
-    ld   e, [hl]                                  ; $5E03: $5E
-    ld   e, $5E                                   ; $5E04: $1E $5E
-    rra                                           ; $5E06: $1F
-    ld   e, [hl]                                  ; $5E07: $5E
-    inc  h                                        ; $5E08: $24
-    ld   e, [hl]                                  ; $5E09: $5E
-    ld   e, $5E                                   ; $5E0A: $1E $5E
-
-func_003_5E0C::
+AfterSirensInstrumentD1::
+    ; Mark Bow-Wow as kidnapped
     ld   a, $80                                   ; $5E0C: $3E $80
     ld   [wIsBowWowFollowingLink], a              ; $5E0E: $EA $56 $DB
     ret                                           ; $5E11: $C9
 
-func_003_5E12::
+AfterSirensInstrumentD2::
     ld   a, $02                                   ; $5E12: $3E $02
     ld   [$DB48], a                               ; $5E14: $EA $48 $DB
     ret                                           ; $5E17: $C9
 
-func_003_5E18::
+AfterSirensInstrumentD3::
     ret                                           ; $5E18: $C9
 
-func_003_5E19::
+AfterSirensInstrumentD4::
+    ; Mark Ghost as following Link
     ld   a, $02                                   ; $5E19: $3E $02
     ld   [wIsGhostFollowingLink], a               ; $5E1B: $EA $79 $DB
 
-func_003_5E1E::
+AfterSirensInstrumentNone::
     ret                                           ; $5E1E: $C9
 
-func_003_5E1F::
+AfterSirensInstrumentD6::
     xor  a                                        ; $5E1F: $AF
     ld   [$DB74], a                               ; $5E20: $EA $74 $DB
     ret                                           ; $5E23: $C9
 
-func_003_5E24::
+AfterSirensInstrumentD7::
+    ; Make the rooster not following Link anymore
     xor  a                                        ; $5E24: $AF
     ld   [wIsRoosterFollowingLink], a             ; $5E25: $EA $7B $DB
     ret                                           ; $5E28: $C9
 
-jr_003_5E29:
+animateSirensInstrumentPickup:
     cp   $50                                      ; $5E29: $FE $50
     jr   nc, jr_003_5E8A                          ; $5E2B: $30 $5D
 
@@ -3590,7 +3575,7 @@ jr_003_5E8A:
 Data_003_5E8B::
     db   $6C, $00, $FF, $FF, $6C, $00, $6E, $00
 
-func_003_5E93::
+SirensInstrumentState1Handler::
     ld   de, Data_003_5E8B                        ; $5E93: $11 $8B $5E
     call RenderAnimatedActiveEntity               ; $5E96: $CD $C0 $3B
     call func_003_7F25                            ; $5E99: $CD $25 $7F
@@ -3599,7 +3584,7 @@ func_003_5E93::
 
     ret                                           ; $5EA2: $C9
 
-func_003_5EA3::
+SirensInstrumentState0Handler::
     ldh  a, [hActiveEntityState]                  ; $5EA3: $F0 $F0
     cp   $03                                      ; $5EA5: $FE $03
     jr   nc, jr_003_5EAE                          ; $5EA7: $30 $05
@@ -3621,17 +3606,12 @@ jr_003_5EAE:
     ld   de, Data_003_5D83                        ; $5EC2: $11 $83 $5D
     call RenderAnimatedActiveEntity               ; $5EC5: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $5EC8: $F0 $F0
-    rst  $00                                      ; $5ECA: $C7
-    push de                                       ; $5ECB: $D5
-    ld   e, [hl]                                  ; $5ECC: $5E
-    inc  c                                        ; $5ECD: $0C
-    ld   e, a                                     ; $5ECE: $5F
-    inc  sp                                       ; $5ECF: $33
-    ld   e, a                                     ; $5ED0: $5F
-    cp   h                                        ; $5ED1: $BC
-    ld   e, a                                     ; $5ED2: $5F
-    cp   a                                        ; $5ED3: $BF
-    ld   e, a                                     ; $5ED4: $5F
+    JP_TABLE                                      ; $5ECA
+._00 dw func_003_5ED5                             ; $5ECB
+._01 dw func_003_5F0C                             ; $5ECD
+._02 dw func_003_5F33                             ; $5ECF
+._03 dw func_003_5FBC                             ; $5ED1
+._04 dw func_003_5FBF                             ; $5ED3
 
 func_003_5ED5::
     call GetEntityTransitionCountdown             ; $5ED5: $CD $05 $0C
@@ -4257,7 +4237,7 @@ func_003_62AF::
     add  hl, de                                   ; $62BE: $19
     ld   a, [hl]                                  ; $62BF: $7E
     and  a                                        ; $62C0: $A7
-    jr   z, label_003_6311                        ; $62C1: $28 $4E
+    jr   z, collectPickableItem                       ; $62C1: $28 $4E
 
     ld   hl, wEntitiesTypeTable                   ; $62C3: $21 $A0 $C3
     add  hl, de                                   ; $62C6: $19
@@ -4266,7 +4246,7 @@ func_003_62AF::
     jr   z, jr_003_62D0                           ; $62CA: $28 $04
 
     cp   $03                                      ; $62CC: $FE $03
-    jr   nz, label_003_6311                       ; $62CE: $20 $41
+    jr   nz, collectPickableItem                      ; $62CE: $20 $41
 
 jr_003_62D0:
     ld   hl, wEntitiesPosXTable                   ; $62D0: $21 $00 $C2
@@ -4318,60 +4298,47 @@ jr_003_630C:
     call func_003_6C6B                            ; $630C: $CD $6B $6C
     jr   nc, jr_003_62EA                          ; $630F: $30 $D9
 
-label_003_6311:
+collectPickableItem:
     ld   hl, wEntitiesLoadOrderTable              ; $6311: $21 $60 $C4
     add  hl, bc                                   ; $6314: $09
     ld   a, [hl]                                  ; $6315: $7E
     call DidKillEnemy.label_3F78                  ; $6316: $CD $78 $3F
+
     ldh  a, [hActiveEntityType]                   ; $6319: $F0 $EB
     sub  $2D                                      ; $631B: $D6 $2D
-    cp   $02                                      ; $631D: $FE $02
-    jr   nc, jr_003_6328                          ; $631F: $30 $07
 
+    ; Play a sound when picking the item
+    cp   ENTITY_DROPPABLE_FAIRY - $2D             ; $631D: $FE $02
+    jr   nc, .notFairy                            ; $631F: $30 $07
     ld   hl, hJingle                              ; $6321: $21 $F2 $FF
     ld   [hl], JINGLE_GOT_HEART                   ; $6324: $36 $14
-    jr   jr_003_632D                              ; $6326: $18 $05
-
-jr_003_6328:
+    jr   .sfxEnd                                  ; $6326: $18 $05
+.notFairy
     ld   hl, hWaveSfx                             ; $6328: $21 $F3 $FF
     ld   [hl], WAVE_SFX_SEASHELL                  ; $632B: $36 $01
+.sfxEnd
 
-jr_003_632D:
-    rst  $00                                      ; $632D: $C7
-    or   a                                        ; $632E: $B7
-    ld   h, h                                     ; $632F: $64
-    cp   a                                        ; $6330: $BF
-    ld   h, h                                     ; $6331: $64
-    add  $64                                      ; $6332: $C6 $64
-    adc  a                                        ; $6334: $8F
-    ld   h, h                                     ; $6335: $64
-    ld   c, l                                     ; $6336: $4D
-    ld   h, h                                     ; $6337: $64
-    ld   c, h                                     ; $6338: $4C
-    ld   h, h                                     ; $6339: $64
-    db   $FC                                      ; $633A: $FC
-    ld   h, e                                     ; $633B: $63
-    or   $63                                      ; $633C: $F6 $63
-    db   $E4                                      ; $633E: $E4
-    ld   h, e                                     ; $633F: $63
-    or   b                                        ; $6340: $B0
-    ld   h, e                                     ; $6341: $63
-    ld   a, l                                     ; $6342: $7D
-    ld   h, e                                     ; $6343: $63
-    add  l                                        ; $6344: $85
-    ld   h, e                                     ; $6345: $63
-    sub  d                                        ; $6346: $92
-    ld   h, e                                     ; $6347: $63
-    db   $C7                                      ; $6348: $C7
-    ld   h, e                                     ; $6349: $63
-    ld   d, b                                     ; $634A: $50
-    ld   h, e                                     ; $634B: $63
-    db   $C7                                      ; $634C: $C7
-    ld   h, e                                     ; $634D: $63
-    ld   l, b                                     ; $634E: $68
-    ld   h, e                                     ; $634F: $63
+    ; Jump to the handler for this pickable entity
+    JP_TABLE
+._2D dw PickDroppableHeart
+._2E dw PickDroppableRupee
+._2F dw PickDroppableFairy
+._30 dw PickDroppableKey
+._31 dw PickSword
+._32 dw PickEntity32
+._33 dw PickPieceOfPower
+._34 dw PickGuardianAcorn
+._35 dw PickHeartPiece
+._36 dw PickHeartContainer
+._37 dw PickDroppableArrows
+._38 dw PickDroppableBombs
+._39 dw PickSirensInstrument
+._3A dw PickToadstoolOrDungeonKey
+._3B dw PickDroppableMagicPowder
+._3C dw PickToadstoolOrDungeonKey
+._3D dw PickSecretSeashell
 
-func_003_6350::
+PickDroppableMagicPowder::
     ld   a, $0B                                   ; $6350: $3E $0B
     ldh  [hFFA5], a                               ; $6352: $E0 $A5
     ld   d, $0C                                   ; $6354: $16 $0C
@@ -4382,16 +4349,16 @@ func_003_6350::
 jr_003_635F:
     ld   a, [de]                                  ; $635F: $1A
     cp   [hl]                                     ; $6360: $BE
-    jr   nc, jr_003_6367                          ; $6361: $30 $04
+    jr   nc, .return                              ; $6361: $30 $04
 
     add  $01                                      ; $6363: $C6 $01
     daa                                           ; $6365: $27
     ld   [de], a                                  ; $6366: $12
 
-jr_003_6367:
+.return:
     ret                                           ; $6367: $C9
 
-func_003_6368::
+PickSecretSeashell::
     call_open_dialog $0EF                         ; $6368
 
 label_003_636D:
@@ -4410,19 +4377,19 @@ func_003_6373::
 jr_003_637C:
     ret                                           ; $637C: $C9
 
-func_003_637D::
+PickDroppableArrows::
     ld   hl, wMaxArrows                           ; $637D: $21 $78 $DB
     ld   de, wArrowCount                          ; $6380: $11 $45 $DB
     jr   jr_003_635F                              ; $6383: $18 $DA
 
-func_003_6385::
+PickDroppableBombs::
     ld   d, $02                                   ; $6385: $16 $02
     call func_003_6472                            ; $6387: $CD $72 $64
     ld   hl, wMaxBombs                            ; $638A: $21 $77 $DB
     ld   de, wBombCount                           ; $638D: $11 $4D $DB
     jr   jr_003_635F                              ; $6390: $18 $CD
 
-func_003_6392::
+PickSirensInstrument::
     xor  a                                        ; $6392: $AF
     ld   [wBossDefeated], a                       ; $6393: $EA $6C $D4
     ld   [wObjectAffectingBGPalette], a           ; $6396: $EA $CB $C3
@@ -4440,7 +4407,7 @@ func_003_63A1::
     ldh  [hLinkPositionX], a                      ; $63AC: $E0 $98
     jr   label_003_63D2                           ; $63AE: $18 $22
 
-func_003_63B0::
+PickHeartContainer::
     xor  a                                        ; $63B0: $AF
     ld   [wActivePowerUp], a                      ; $63B1: $EA $7C $D4
     ld   a, $25                                   ; $63B4: $3E $25
@@ -4452,7 +4419,7 @@ func_003_63B0::
     ld   [wC111], a                               ; $63C2: $EA $11 $C1
     jr   jr_003_63DB                              ; $63C5: $18 $14
 
-func_003_63C7::
+PickToadstoolOrDungeonKey::
     ld   a, $10                                   ; $63C7: $3E $10
     ld   [wActiveMusicTrack], a                   ; $63C9: $EA $68 $D3
     jr   label_003_63D2                           ; $63CC: $18 $04
@@ -4472,7 +4439,7 @@ jr_003_63DB:
     ld   [hl], $05                                ; $63DF: $36 $05
     jp   ResetSpinAttack                          ; $63E1: $C3 $AF $0C
 
-func_003_63E4::
+PickHeartPiece::
     ld   a, $10                                   ; $63E4: $3E $10
     ld   [wActiveMusicTrack], a                   ; $63E6: $EA $68 $D3
     call IncrementEntityState                     ; $63E9: $CD $12 $3B
@@ -4484,12 +4451,12 @@ Data_003_63EE::
 Data_003_63F2::
     db   $D4, $D4, $04, $04
 
-func_003_63F6::
+PickGuardianAcorn::
     ld   a, $02                                   ; $63F6: $3E $02
     ld   e, $05                                   ; $63F8: $1E $05
     jr   jr_003_6400                              ; $63FA: $18 $04
 
-func_003_63FC::
+PickPieceOfPower::
     ld   a, $01                                   ; $63FC: $3E $01
     ld   e, $01                                   ; $63FE: $1E $01
 
@@ -4538,10 +4505,10 @@ jr_003_6422:
     cp   $FF                                      ; $6448: $FE $FF
     jr   nz, jr_003_6422                          ; $644A: $20 $D6
 
-func_003_644C::
+PickEntity32::
     ret                                           ; $644C: $C9
 
-func_003_644D::
+PickSword::
     ld   a, [wSwordLevel]                         ; $644D: $FA $4E $DB
     and  a                                        ; $6450: $A7
     jr   nz, jr_003_6468                          ; $6451: $20 $15
@@ -4595,7 +4562,7 @@ jr_003_6487:
 jr_003_648E:
     ret                                           ; $648E: $C9
 
-func_003_648F::
+PickDroppableKey::
     ldh  a, [hMapRoom]                            ; $648F: $F0 $F6
     cp   $80                                      ; $6491: $FE $80
     jr   z, jr_003_64A5                           ; $6493: $28 $10
@@ -4623,7 +4590,7 @@ jr_003_64AD:
     inc  [hl]                                     ; $64B3: $34
     jp   SynchronizeDungeonsItemFlags_trampoline  ; $64B4: $C3 $02 $28
 
-func_003_64B7::
+PickDroppableHeart::
     ld   a, $08                                   ; $64B7: $3E $08
 
 jr_003_64B9:
@@ -4634,12 +4601,12 @@ jr_003_64BC:
     ld   [hl], a                                  ; $64BD: $77
     ret                                           ; $64BE: $C9
 
-func_003_64BF::
+PickDroppableRupee::
     ld   a, $01                                   ; $64BF: $3E $01
     ld   hl, wAddRupeeBufferHigh                  ; $64C1: $21 $90 $DB
     jr   jr_003_64BC                              ; $64C4: $18 $F6
 
-func_003_64C6::
+PickDroppableFairy::
     ld   a, $30                                   ; $64C6: $3E $30
     jr   jr_003_64B9                              ; $64C8: $18 $EF
 
@@ -6165,8 +6132,8 @@ jr_003_6E8E:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6E9B: $21 $40 $C3
     add  hl, bc                                   ; $6E9E: $09
     ld   a, [hl]                                  ; $6E9F: $7E
-    and  $20                                      ; $6EA0: $E6 $20
-    jp   nz, label_003_6311                       ; $6EA2: $C2 $11 $63
+    and  %00100000                                ; $6EA0: $E6 $20
+    jp   nz, collectPickableItem                  ; $6EA2: $C2 $11 $63
 
     ld   a, [$C5B0]                               ; $6EA5: $FA $B0 $C5
     and  a                                        ; $6EA8: $A7
@@ -6393,29 +6360,27 @@ Data_003_6FE4::
 
 label_003_6FE8:
     ldh  a, [hActiveEntityType]                   ; $6FE8: $F0 $EB
-    cp   $E2                                      ; $6FEA: $FE $E2
+    cp   ENTITY_FLAME_SHOOTER                     ; $6FEA: $FE $E2
     ret  z                                        ; $6FEC: $C8
 
-    cp   $E6                                      ; $6FED: $FE $E6
+    cp   ENTITY_FINAL_NIGHTMARE                   ; $6FED: $FE $E6
     jr   nz, jr_003_7018                          ; $6FEF: $20 $27
 
     ld   a, [wFinalNightmareForm]                 ; $6FF1: $FA $19 $D2
-    rst  $00                                      ; $6FF4: $C7
-    ld   d, [hl]                                  ; $6FF5: $56
-    ld   c, e                                     ; $6FF6: $4B
-    ld   bc, $770                                 ; $6FF7: $01 $70 $07
-    ld   [hl], b                                  ; $6FFA: $70
-    ld   d, $70                                   ; $6FFB: $16 $70
-    ld   d, $70                                   ; $6FFD: $16 $70
-    ld   b, d                                     ; $6FFF: $42
-    ld   [hl], b                                  ; $7000: $70
+    JP_TABLE                                      ; $6FF4
+._00 dw FinalNightmareForm1Collisions
+._01 dw FinalNightmareForm2Collisions
+._02 dw FinalNightmareForm3Collisions
+._03 dw FinalNightmareForm4And5Collisions
+._04 dw FinalNightmareForm4And5Collisions
+._05 dw FinalNightmareForm6Collisions
 
-func_003_7001::
+FinalNightmareForm2Collisions::
     call IncrementEntityState                     ; $7001: $CD $12 $3B
     ld   [hl], $06                                ; $7004: $36 $06
     ret                                           ; $7006: $C9
 
-func_003_7007::
+FinalNightmareForm3Collisions::
     ld   a, [wIsUsingSpinAttack]                  ; $7007: $FA $21 $C1
     and  a                                        ; $700A: $A7
     jr   nz, jr_003_7013                          ; $700B: $20 $06
@@ -6427,16 +6392,16 @@ func_003_7007::
 jr_003_7013:
     jp   IncrementEntityState                     ; $7013: $C3 $12 $3B
 
-func_003_7016::
+FinalNightmareForm4And5Collisions::
     ldh  a, [hActiveEntityType]                   ; $7016: $F0 $EB
 
 jr_003_7018:
     cp   $B9                                      ; $7018: $FE $B9
-    jr   nz, func_003_7042                        ; $701A: $20 $26
+    jr   nz, FinalNightmareForm6Collisions                        ; $701A: $20 $26
 
     ldh  a, [hActiveEntityStatus]                 ; $701C: $F0 $EA
     cp   $05                                      ; $701E: $FE $05
-    jr   nz, func_003_7042                        ; $7020: $20 $20
+    jr   nz, FinalNightmareForm6Collisions                        ; $7020: $20 $20
 
     call IncrementEntityState                     ; $7022: $CD $12 $3B
     ld   [hl], $01                                ; $7025: $36 $01
@@ -6452,7 +6417,7 @@ jr_003_7018:
     ldh  [hNoiseSfx], a                           ; $703D: $E0 $F4
     jp   func_003_6CD5                            ; $703F: $C3 $D5 $6C
 
-func_003_7042::
+FinalNightmareForm6Collisions::
     ldh  a, [hActiveEntityType]                   ; $7042: $F0 $EB
     cp   $55                                      ; $7044: $FE $55
     jr   nz, jr_003_706F                          ; $7046: $20 $27

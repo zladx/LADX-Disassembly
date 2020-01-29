@@ -241,7 +241,7 @@ jr_005_54C1:
     jr   jr_005_5483                              ; $54C1: $18 $C0
 
 func_005_54C3::
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $54C3: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $54C3: $CD $5A $3B
     jr   nc, jr_005_54E5                          ; $54C6: $30 $1D
 
     call CopyLinkFinalPositionToPosition          ; $54C8: $CD $BE $0C

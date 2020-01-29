@@ -7376,8 +7376,8 @@ CheckLinkCollisionWithProjectile_trampoline::
     callsb CheckLinkCollisionWithProjectile
     jp   ReloadSavedBank
 
-HurtLinkIfCollisioningWithEnemy_trampoline::
-    callsb HurtLinkIfCollisioningWithEnemy.collisionEvenInTheAir
+CheckLinkCollisionWithEnemy_trampoline::
+    callsb CheckLinkCollisionWithEnemy.collisionEvenInTheAir
     jp   ReloadSavedBank
 
 label_3B65::

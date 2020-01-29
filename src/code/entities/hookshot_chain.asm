@@ -61,7 +61,7 @@ jr_018_7C39:
     call ApplyVectorTowardsLink_trampoline        ; $7C43: $CD $AA $3B
 
 jr_018_7C46:
-    call HurtLinkIfCollisioningWithEnemy_trampoline ; $7C46: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $7C46: $CD $5A $3B
     jr   nc, jr_018_7CAE                          ; $7C49: $30 $63
 
     xor  a                                        ; $7C4B: $AF

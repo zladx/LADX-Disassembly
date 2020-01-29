@@ -1595,7 +1595,7 @@ label_015_4DB5:
     call label_3B70                               ; $4DCE: $CD $70 $3B
     ld   a, [$DBC7]                               ; $4DD1: $FA $C7 $DB
     push af                                       ; $4DD4: $F5
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $4DD5: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $4DD5: $CD $5A $3B
     pop  af                                       ; $4DD8: $F1
     ld   e, a                                     ; $4DD9: $5F
     ld   a, [$DBC7]                               ; $4DDA: $FA $C7 $DB
@@ -6314,7 +6314,7 @@ jr_015_73B8:
     set  7, [hl]                                  ; $73E7: $CB $FE
 
 jr_015_73E9:
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $73E9: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $73E9: $CD $5A $3B
     jr   nc, jr_015_7428                          ; $73EC: $30 $3A
 
     call CopyLinkFinalPositionToPosition          ; $73EE: $CD $BE $0C
@@ -7371,7 +7371,7 @@ jr_015_7A40:
     ret                                           ; $7A6D: $C9
 
 func_015_7A6E::
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $7A6E: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $7A6E: $CD $5A $3B
     jr   nc, jr_015_7A9A                          ; $7A71: $30 $27
 
     call CopyLinkFinalPositionToPosition          ; $7A73: $CD $BE $0C

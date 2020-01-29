@@ -495,7 +495,7 @@ wEntitiesPhysicsFlagsTable:: ; C340
   ;
   ; bits 0-3: of number allocated sprites in OAM memory
   ; bit 4: display shadow on posZ > 0 if set
-  ; bit 5: ???
+  ; bit 5: item is pickable
   ; bit 6: doesn't react to projectiles if set (arrow, hookshot, etc.)
   ; bit 7: doesn't hurt Link if set (Link's go through)
   ds $10
@@ -1103,6 +1103,11 @@ wDB54:: ds 1
 wDB55:: ds 1
 
 wIsBowWowFollowingLink:: ; DB56
+  ; Bow-Wow status.
+  ; Values:
+  ;   0   not following Link
+  ;   1   Bow-Wow is following Link
+  ;   80  Bow-Wow has been kidnapped
   ds 1
 
 ; Death count (one per save slot)

@@ -106,7 +106,7 @@ jr_005_45B7:
     ldh  [hActiveEntityState], a                  ; $45BD: $E0 $F0
 
 jr_005_45BF:
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $45BF: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $45BF: $CD $5A $3B
     jr   nc, jr_005_4611                          ; $45C2: $30 $4D
 
     ldh  a, [hActiveEntityState]                  ; $45C4: $F0 $F0

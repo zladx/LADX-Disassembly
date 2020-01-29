@@ -117,12 +117,7 @@ Data_003_473C::
     db   $00, $01, $02, $40, $00, $00, $FF, $00, $00, $01, $02, $40, $00, $00, $FF, $00
 
 include "data/entities/health.asm"
-
-Data_003_47F1::
-    db   $04, $04, $08, $08, $18, $08, $04, $08, $10, $08, $10, $08, $08, $04, $08, $08
-    db   $08, $08, $08, $08, $08, $0C, $00, $00, $08, $08, $08, $0C, $0C, $14, $10, $20
-    db   $08, $08, $04, $04, $04, $04, $04, $00, $14, $08, $04, $08, $04, $04, $08, $08
-    db   $04, $04, $04, $08, $08
+include "data/entities/damages.asm"
 
 Data_003_4826::
     db   $02, $06, $01, $03, $03, $03, $0D, $08, $0A, $02, $07, $0B, $00, $04, $00, $08
@@ -1154,7 +1149,7 @@ func_003_4E35::
     push af                                       ; $4E41: $F5
     or   $80                                      ; $4E42: $F6 $80
     ld   [hl], a                                  ; $4E44: $77
-    call HurtLinkIfCollisioningWithEnemy          ; $4E45: $CD $72 $6C
+    call CheckLinkCollisionWithEnemy              ; $4E45: $CD $72 $6C
     rl   e                                        ; $4E48: $CB $13
     pop  af                                       ; $4E4A: $F1
     pop  hl                                       ; $4E4B: $E1
@@ -4826,7 +4821,7 @@ jr_003_6625:
     cp   $30                                      ; $6639: $FE $30
     jr   nc, jr_003_664A                          ; $663B: $30 $0D
 
-    call func_003_6CD5                            ; $663D: $CD $D5 $6C
+    call ApplyLinkCollisionWithEnemy              ; $663D: $CD $D5 $6C
     ld   hl, hLinkPositionXIncrement              ; $6640: $21 $9A $FF
     sla  [hl]                                     ; $6643: $CB $26
     ld   hl, hLinkPositionYIncrement              ; $6645: $21 $9B $FF
@@ -5716,10 +5711,12 @@ func_003_6C6B::
     rra                                           ; $6C6E: $1F
     jp   nc, jr_003_6CCB                          ; $6C6F: $D2 $CB $6C
 
-; If Link is collisioning with an enemy entity, make it hurt and bumped back.
+; Check if Link is collisioning with an enemy entity.
+; If so, apply eventual damages.
+;
 ; Inputs:
 ;   bc  entity index
-HurtLinkIfCollisioningWithEnemy::
+CheckLinkCollisionWithEnemy::
     ; If Link is in the air, skip the collision check
     ldh  a, [hLinkPositionZ]                      ; $6C72: $F0 $A2
     and  a                                        ; $6C74: $A7
@@ -5808,19 +5805,24 @@ jr_003_6CCD:
     cp   $02                                      ; $6CD1: $FE $02
     jr   c, jr_003_6CC9                           ; $6CD3: $38 $F4
 
-; Handle collision between Link and an entity?
-func_003_6CD5::
+; Handle collision between Link and the active entity.
+; This will most of the case results in damages being applied to Link.
+ApplyLinkCollisionWithEnemy::
+    ;
+    ; Special case when a cheep-cheep hurts Link
+    ;
+
     ldh  a, [hActiveEntityType]                   ; $6CD5: $F0 $EB
-    cp   $AC                                      ; $6CD7: $FE $AC
-    jr   nz, jr_003_6CF9                          ; $6CD9: $20 $1E
+    cp   ENTITY_CHEEP_CHEEP_JUMPING               ; $6CD7: $FE $AC
+    jr   nz, .cheepCheepEnd                       ; $6CD9: $20 $1E
 
     call func_003_7EE9                            ; $6CDB: $CD $E9 $7E
     ld   a, e                                     ; $6CDE: $7B
     cp   $02                                      ; $6CDF: $FE $02
-    jr   nz, jr_003_6D3D                          ; $6CE1: $20 $5A
+    jr   nz, .goombaEnd                          ; $6CE1: $20 $5A
 
     call IncrementEntityState                     ; $6CE3: $CD $12 $3B
-    ld   [hl], $05                                ; $6CE6: $36 $05
+    ld   [hl], ENTITY_STATUS_ACTIVE               ; $6CE6: $36 $05
     ld   a, $02                                   ; $6CE8: $3E $02
     ld   [$C146], a                               ; $6CEA: $EA $46 $C1
     ld   a, $F0                                   ; $6CED: $3E $F0
@@ -5829,36 +5831,40 @@ func_003_6CD5::
     ld   a, $0E                                   ; $6CF4: $3E $0E
     ldh  [hWaveSfx], a                            ; $6CF6: $E0 $F3
     ret                                           ; $6CF8: $C9
+.cheepCheepEnd
 
-jr_003_6CF9:
+    ;
+    ; Special case when a Goomba hurts Link
+    ;
+
     ldh  a, [hActiveEntityType]                   ; $6CF9: $F0 $EB
-    cp   $9F                                      ; $6CFB: $FE $9F
-    jr   nz, jr_003_6D3D                          ; $6CFD: $20 $3E
+    cp   ENTITY_GOOMBA                            ; $6CFB: $FE $9F
+    jr   nz, .goombaEnd                           ; $6CFD: $20 $3E
 
     ld   a, [$C146]                               ; $6CFF: $FA $46 $C1
     and  a                                        ; $6D02: $A7
-    jr   z, jr_003_6D3D                           ; $6D03: $28 $38
+    jr   z, .goombaEnd                            ; $6D03: $28 $38
 
     ldh  a, [$FFB7]                               ; $6D05: $F0 $B7
     and  a                                        ; $6D07: $A7
-    jr   nz, jr_003_6D1B                          ; $6D08: $20 $11
+    jr   nz, .jr_003_6D1B                         ; $6D08: $20 $11
 
     ldh  a, [hIsSideScrolling]                    ; $6D0A: $F0 $F9
     and  a                                        ; $6D0C: $A7
-    jr   nz, jr_003_6D15                          ; $6D0D: $20 $06
+    jr   nz, .jr_003_6D15                         ; $6D0D: $20 $06
 
     ldh  a, [$FFA3]                               ; $6D0F: $F0 $A3
     xor  $80                                      ; $6D11: $EE $80
-    jr   jr_003_6D17                              ; $6D13: $18 $02
+    jr   .jr_003_6D17                             ; $6D13: $18 $02
 
-jr_003_6D15:
+.jr_003_6D15
     ldh  a, [hLinkPositionYIncrement]             ; $6D15: $F0 $9B
 
-jr_003_6D17:
+.jr_003_6D17
     and  $80                                      ; $6D17: $E6 $80
-    jr   nz, jr_003_6D3D                          ; $6D19: $20 $22
+    jr   nz, .goombaEnd                           ; $6D19: $20 $22
 
-jr_003_6D1B:
+.jr_003_6D1B
     ld   a, $02                                   ; $6D1B: $3E $02
     ldh  [$FFB7], a                               ; $6D1D: $E0 $B7
     ld   hl, wEntitiesStateTable                  ; $6D1F: $21 $90 $C2
@@ -5870,42 +5876,45 @@ jr_003_6D1B:
     ldh  [hWaveSfx], a                            ; $6D2C: $E0 $F3
     ldh  a, [hIsSideScrolling]                    ; $6D2E: $F0 $F9
     and  a                                        ; $6D30: $A7
-    jr   nz, jr_003_6D38                          ; $6D31: $20 $05
+    jr   nz, .jr_003_6D38                         ; $6D31: $20 $05
 
     ld   a, $10                                   ; $6D33: $3E $10
     ldh  [$FFA3], a                               ; $6D35: $E0 $A3
     ret                                           ; $6D37: $C9
 
-jr_003_6D38:
+.jr_003_6D38
     ld   a, $F0                                   ; $6D38: $3E $F0
     ldh  [hLinkPositionYIncrement], a             ; $6D3A: $E0 $9B
     ret                                           ; $6D3C: $C9
+.goombaEnd
 
-jr_003_6D3D:
+    ;
+    ; Special case when Link collisions with a Mini-Gel
+
     ldh  a, [hActiveEntityType]                   ; $6D3D: $F0 $EB
-    cp   $1C                                      ; $6D3F: $FE $1C
-    jr   nz, jr_003_6D4E                          ; $6D41: $20 $0B
+    cp   ENTITY_MINI_GEL                          ; $6D3F: $FE $1C
+    jr   nz, .miniGelEnd                          ; $6D41: $20 $0B
 
     call GetEntityTransitionCountdown             ; $6D43: $CD $05 $0C
     ld   [hl], $80                                ; $6D46: $36 $80
     call IncrementEntityState                     ; $6D48: $CD $12 $3B
     ld   [hl], $04                                ; $6D4B: $36 $04
     ret                                           ; $6D4D: $C9
+.miniGelEnd
 
-jr_003_6D4E:
-    cp   $8E                                      ; $6D4E: $FE $8E
+    cp   ENTITY_CUE_BALL                          ; $6D4E: $FE $8E
     jr   z, jr_003_6D5D                           ; $6D50: $28 $0B
 
-    cp   $82                                      ; $6D52: $FE $82
+    cp   ENTITY_ROLLING_BONES_BAR                 ; $6D52: $FE $82
     jr   z, jr_003_6D5D                           ; $6D54: $28 $07
 
     ld   a, [$C13E]                               ; $6D56: $FA $3E $C1
     and  a                                        ; $6D59: $A7
-    jp   nz, jr_003_6E0A                          ; $6D5A: $C2 $0A $6E
+    jp   nz, setCarryAndReturn                    ; $6D5A: $C2 $0A $6E
 
 jr_003_6D5D:
     ldh  a, [hActiveEntityType]                   ; $6D5D: $F0 $EB
-    cp   $E4                                      ; $6D5F: $FE $E4
+    cp   ENTITY_MOBLIN_KING                       ; $6D5F: $FE $E4
     jr   nz, jr_003_6D73                          ; $6D61: $20 $10
 
     ldh  a, [hActiveEntityState]                  ; $6D63: $F0 $F0
@@ -5926,35 +5935,43 @@ jr_003_6D73:
     or   [hl]                                     ; $6D7D: $B6
     ld   hl, wDialogGotItem                       ; $6D7E: $21 $A9 $C1
     or   [hl]                                     ; $6D81: $B6
-    jp   nz, jr_003_6E0A                          ; $6D82: $C2 $0A $6E
+    jp   nz, setCarryAndReturn                    ; $6D82: $C2 $0A $6E
 
     ld   a, WAVE_SFX_LINK_HURT                    ; $6D85: $3E $03
     ldh  [hWaveSfx], a                            ; $6D87: $E0 $F3
+
+    ; Get the nominal amount of damages this entity deals
     ld   hl, wEntitiesHealthGroup                 ; $6D89: $21 $D0 $C4
     add  hl, bc                                   ; $6D8C: $09
     ld   d, b                                     ; $6D8D: $50
     ld   e, [hl]                                  ; $6D8E: $5E
-    ld   hl, Data_003_47F1                        ; $6D8F: $21 $F1 $47
+
+    ld   hl, EntityDamagesForGroup                ; $6D8F: $21 $F1 $47
     add  hl, de                                   ; $6D92: $19
     ld   e, [hl]                                  ; $6D93: $5E
+
+    ; If using the Blue Tunic, take half damages
     ld   a, [wTunicType]                          ; $6D94: $FA $0F $DC
     cp   $02                                      ; $6D97: $FE $02
-    jr   z, jr_003_6DA9                           ; $6D99: $28 $0E
+    jr   z, .takeHalfDamages                      ; $6D99: $28 $0E
 
+    ; If having an active Guardian Acorn, take no damages
     ld   a, [wActivePowerUp]                      ; $6D9B: $FA $7C $D4
     cp   $02                                      ; $6D9E: $FE $02
-    jr   nz, jr_003_6DAB                          ; $6DA0: $20 $09
+    jr   nz, .damageModifiersEnd                  ; $6DA0: $20 $09
 
     ld   a, e                                     ; $6DA2: $7B
     cp   $04                                      ; $6DA3: $FE $04
-    jr   nz, jr_003_6DA9                          ; $6DA5: $20 $02
+    jr   nz, .takeHalfDamages                    ; $6DA5: $20 $02
 
+    ; Take no damages
     ld   e, $00                                   ; $6DA7: $1E $00
 
-jr_003_6DA9:
+.takeHalfDamages
+    ; Divide
     srl  e                                        ; $6DA9: $CB $3B
+.damageModifiersEnd
 
-jr_003_6DAB:
     ld   a, [wDB94]                               ; $6DAB: $FA $94 $DB
     add  e                                        ; $6DAE: $83
     ld   [wDB94], a                               ; $6DAF: $EA $94 $DB
@@ -6016,7 +6033,7 @@ jr_003_6E02:
     and  a                                        ; $6E07: $A7
     jr   nz, jr_003_6E0E                          ; $6E08: $20 $04
 
-jr_003_6E0A:
+setCarryAndReturn:
     scf                                           ; $6E0A: $37
     ret                                           ; $6E0B: $C9
 
@@ -6026,7 +6043,7 @@ Data_003_6E0C::
 jr_003_6E0E:
     ldh  a, [hFF9C]                               ; $6E0E: $F0 $9C
     cp   $02                                      ; $6E10: $FE $02
-    jr   z, jr_003_6E0A                           ; $6E12: $28 $F6
+    jr   z, setCarryAndReturn                           ; $6E12: $28 $F6
 
     call func_003_7ED9                            ; $6E14: $CD $D9 $7E
     ld   d, b                                     ; $6E17: $50
@@ -6415,7 +6432,7 @@ jr_003_7018:
     ld   [wIsUsingSpinAttack], a                  ; $7038: $EA $21 $C1
     ld   a, $1C                                   ; $703B: $3E $1C
     ldh  [hNoiseSfx], a                           ; $703D: $E0 $F4
-    jp   func_003_6CD5                            ; $703F: $C3 $D5 $6C
+    jp   ApplyLinkCollisionWithEnemy              ; $703F: $C3 $D5 $6C
 
 FinalNightmareForm6Collisions::
     ldh  a, [hActiveEntityType]                   ; $7042: $F0 $EB
@@ -7288,7 +7305,7 @@ jr_003_752D:
     and  a                                        ; $753B: $A7
     jr   nz, jr_003_7570                          ; $753C: $20 $32
 
-    call func_003_6CD5                            ; $753E: $CD $D5 $6C
+    call ApplyLinkCollisionWithEnemy              ; $753E: $CD $D5 $6C
     ldh  a, [hActiveEntityType]                   ; $7541: $F0 $EB
     cp   $BE                                      ; $7543: $FE $BE
     jr   nz, jr_003_7570                          ; $7545: $20 $29

@@ -192,7 +192,7 @@ jr_007_4128:
     add  hl, bc                                   ; $4131: $09
     set  2, [hl]                                  ; $4132: $CB $D6
     call ConfigureEntityHitbox                    ; $4134: $CD $EA $3A
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $4137: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $4137: $CD $5A $3B
     ret  nc                                       ; $413A: $D0
 
     ld   a, [$C19B]                               ; $413B: $FA $9B $C1
@@ -906,7 +906,7 @@ label_007_45F7:
 
 jr_007_461A:
     call func_007_467B                            ; $461A: $CD $7B $46
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $461D: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $461D: $CD $5A $3B
     jr   nc, jr_007_4640                          ; $4620: $30 $1E
 
     ldh  a, [hLinkPositionYIncrement]             ; $4622: $F0 $9B
@@ -2000,7 +2000,7 @@ func_007_4D4E::
     ld   hl, wEntitiesSpeedZTable                 ; $4D64: $21 $20 $C3
     add  hl, bc                                   ; $4D67: $09
     ld   [hl], b                                  ; $4D68: $70
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $4D69: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $4D69: $CD $5A $3B
     ret  nc                                       ; $4D6C: $D0
 
     xor  a                                        ; $4D6D: $AF
@@ -3220,7 +3220,7 @@ jr_007_5572:
     call GetEntityTransitionCountdown             ; $5575: $CD $05 $0C
     jr   nz, jr_007_559A                          ; $5578: $20 $20
 
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $557A: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $557A: $CD $5A $3B
     jr   nc, jr_007_5599                          ; $557D: $30 $1A
 
     ld   a, MUSIC_FOUND_NEW_WEAPON                ; $557F: $3E $10
@@ -4994,7 +4994,7 @@ jr_007_60DC:
     dec  [hl]                                     ; $60DC: $35
 
 jr_007_60DD:
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $60DD: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $60DD: $CD $5A $3B
     jr   nc, jr_007_6133                          ; $60E0: $30 $51
 
     ld   a, [$C19B]                               ; $60E2: $FA $9B $C1
@@ -5492,7 +5492,7 @@ func_007_639E::
     sub  e                                        ; $63B0: $93
     ldh  [hFFE8], a                               ; $63B1: $E0 $E8
     call label_3B23                               ; $63B3: $CD $23 $3B
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $63B6: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $63B6: $CD $5A $3B
     jr   nc, jr_007_63F6                          ; $63B9: $30 $3B
 
     ldh  a, [hLinkPositionYIncrement]             ; $63BB: $F0 $9B
@@ -5959,15 +5959,15 @@ jr_007_66EE:
 func_007_66F2::
     ldh  a, [hLinkPositionZ]                      ; $66F2: $F0 $A2
     and  a                                        ; $66F4: $A7
-    jp   z, HurtLinkIfCollisioningWithEnemy_trampoline; $66F5: $CA $5A $3B
+    jp   z, CheckLinkCollisionWithEnemy_trampoline; $66F5: $CA $5A $3B
 
     cp   $08                                      ; $66F8: $FE $08
-    jp   c, HurtLinkIfCollisioningWithEnemy_trampoline; $66FA: $DA $5A $3B
+    jp   c, CheckLinkCollisionWithEnemy_trampoline; $66FA: $DA $5A $3B
 
     ret                                           ; $66FD: $C9
 
 func_007_66FE::
-    jp   HurtLinkIfCollisioningWithEnemy_trampoline; $66FE: $C3 $5A $3B
+    jp   CheckLinkCollisionWithEnemy_trampoline   ; $66FE: $C3 $5A $3B
 
 Data_007_6701::
     db   $40, $02, $40, $22, $42, $02, $42, $22
@@ -6591,7 +6591,7 @@ jr_007_6AA6:
     and  a                                        ; $6AB7: $A7
     jr   nz, jr_007_6AC0                          ; $6AB8: $20 $06
 
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $6ABA: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $6ABA: $CD $5A $3B
     call label_3B70                               ; $6ABD: $CD $70 $3B
 
 jr_007_6AC0:
@@ -8504,7 +8504,7 @@ jr_007_7730:
     jp   label_007_7733                           ; $7730: $C3 $33 $77
 
 label_007_7733:
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $7733: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $7733: $CD $5A $3B
     jr   nc, jr_007_7783                          ; $7736: $30 $4B
 
     ld   a, [$C19B]                               ; $7738: $FA $9B $C1
@@ -9184,7 +9184,7 @@ func_007_7B30::
 include "code/entities/chest_with_item.asm"
 
 func_007_7CF0::
-    call HurtLinkIfCollisioningWithEnemy_trampoline; $7CF0: $CD $5A $3B
+    call CheckLinkCollisionWithEnemy_trampoline   ; $7CF0: $CD $5A $3B
     jr   nc, jr_007_7D14                          ; $7CF3: $30 $1F
 
     call CopyLinkFinalPositionToPosition          ; $7CF5: $CD $BE $0C

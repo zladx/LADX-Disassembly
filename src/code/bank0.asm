@@ -7451,19 +7451,19 @@ RenderAnimatedActiveEntity::
     ld   e, l
     ld   d, h
 
-    ; [de++] = [wActiveEntityPosY]
-    ldh  a, [wActiveEntityPosY]
+    ; [de++] = [$FFEC]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
 
-    ; [de++] = [$FFED] + [wActiveEntityPosX] - [wScreenShakeHorizontal]
+    ; [de++] = [$FFED] + [hActiveEntityPosX] - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
     ldh  a, [$FFED]
     and  $20
     rra
     rra
-    ld   hl, wActiveEntityPosX
+    ld   hl, hActiveEntityPosX
     add  a, [hl]
     sub  a, c
     ld   [de], a
@@ -7514,7 +7514,7 @@ label_3C08::
 
 label_3C21::
     inc  de
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
@@ -7524,7 +7524,7 @@ label_3C21::
     xor  $20
     rra
     rra
-    ld   hl, wActiveEntityPosX
+    ld   hl, hActiveEntityPosX
     sub  a, c
     add  a, [hl]
     ld   [de], a
@@ -7606,20 +7606,20 @@ RenderSimpleEntityWithSpriteVariantToOAM::
     ; If in a side-scrolling room…
     ldh  a, [hIsSideScrolling]
     and  a
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     jr   z, .sideScrollingEnd
-    ; … wActiveEntityPosY -= 4
+    ; … $FFEC -= 4
     sub  a, $04
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
 .sideScrollingEnd
 
-    ; (wDynamicOAMBuffer + [$C3C0] + 0) = [wActiveEntityPosY]
+    ; (wDynamicOAMBuffer + [$C3C0] + 0) = [$FFEC]
     ld   [de], a
     inc  de
-    ; (wDynamicOAMBuffer + [$C3C0] + 1) = [wActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
+    ; (wDynamicOAMBuffer + [$C3C0] + 1) = [hActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   h, a
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     add  a, $04
     sub  a, h
     ld   [de], a
@@ -7714,7 +7714,7 @@ func_3CE6::
     ld   c, a
 
 .loop
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     add  a, [hl]
     ld   [de], a
     inc  hl
@@ -7722,7 +7722,7 @@ func_3CE6::
     push bc
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     add  a, [hl]
     sub  a, c
     ld   [de], a
@@ -7789,14 +7789,14 @@ SkipDisabledEntityDuringRoomTransition::
     and  a
     jr   z, .return
 
-    ; If wActiveEntityPosX - 1 is outside of screen, skip
-    ldh  a, [wActiveEntityPosX]
+    ; If hActiveEntityPosX - 1 is outside of screen, skip
+    ldh  a, [hActiveEntityPosX]
     dec  a
     cp   $C0
     jr   nc, .skip
 
-    ; If wActiveEntityPosY - 1 is outside of the screen, skip
-    ldh  a, [wActiveEntityPosY]
+    ; If $FFEC - 1 is outside of the screen, skip
+    ldh  a, [$FFEC]
     dec  a
     cp   $88
     jr   nc, .skip
@@ -7842,15 +7842,15 @@ CopyEntityPositionToActivePosition::
     ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
     ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEF], a
+    ldh  [hActiveEntityPosY], a
     ld   hl, wEntitiesPosZTable
     add  hl, bc
     sub  a, [hl]
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
     ret
 
 label_3DA0::
@@ -7963,9 +7963,9 @@ label_3E8E::
     xor  c
     and  $03
     ret  nz
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     ldh  [hScratch0], a
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     ldh  [hScratch1], a
     ld   a, TRANSCIENT_VFX_SMOKE
     call AddTranscientVfx

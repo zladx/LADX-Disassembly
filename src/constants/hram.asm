@@ -280,17 +280,17 @@ hActiveEntityStatus:: ; FFEA
 hActiveEntityType:: ; FFEB
   ds 1
 
-wActiveEntityPosY:: ; FFEC
-  ds 1
+; Unlabeled
+ds 1 ; FFEC
 
 ; Unlabeled
 ds 1 ; FFED
 
-wActiveEntityPosX:: ; FFEE
+hActiveEntityPosX:: ; FFEE
   ds 1
 
-; Unlabeled
-ds 1 ; FFEF
+hActiveEntityPosY:: ; FFEF
+  ds 1
 
 hActiveEntityState:: ; FFF0
   ; The entity-specific state of the active entity

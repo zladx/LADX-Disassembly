@@ -346,11 +346,11 @@ jr_005_474D:
 func_005_474E::
     call label_3B44                               ; $474E: $CD $44 $3B
     call func_005_7AB1                            ; $4751: $CD $B1 $7A
-    ldh  a, [wActiveEntityPosX]                   ; $4754: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $4754: $F0 $EE
     cp   $A9                                      ; $4756: $FE $A9
     jp   nc, func_005_7B4B                        ; $4758: $D2 $4B $7B
 
-    ldh  a, [wActiveEntityPosY]                   ; $475B: $F0 $EC
+    ldh  a, [$FFEC]                               ; $475B: $F0 $EC
     cp   $91                                      ; $475D: $FE $91
     jp   nc, func_005_7B4B                        ; $475F: $D2 $4B $7B
 

@@ -15,12 +15,12 @@ func_027_7240::
     ld   c, a                                     ; $7254: $4F
 
 jr_027_7255:
-    ldh  a, [wActiveEntityPosY]                   ; $7255: $F0 $EC
+    ldh  a, [$FFEC]                               ; $7255: $F0 $EC
     add  [hl]                                     ; $7257: $86
     ld   [de], a                                  ; $7258: $12
     inc  de                                       ; $7259: $13
     inc  hl                                       ; $725A: $23
-    ldh  a, [wActiveEntityPosX]                   ; $725B: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $725B: $F0 $EE
     add  [hl]                                     ; $725D: $86
     ld   [de], a                                  ; $725E: $12
     inc  de                                       ; $725F: $13
@@ -213,7 +213,7 @@ func_027_74E3::
 jr_027_74EF:
     ld   a, [hl]                                  ; $74EF: $7E
     sub  d                                        ; $74F0: $92
-    ldh  [wActiveEntityPosY], a                   ; $74F1: $E0 $EC
+    ldh  [$FFEC], a                               ; $74F1: $E0 $EC
     ld   a, [wIntroSubTimer]                      ; $74F3: $FA $02 $D0
     sla  a                                        ; $74F6: $CB $27
     ld   e, a                                     ; $74F8: $5F
@@ -680,7 +680,7 @@ jr_027_7AE8:
 
 jr_027_7AFD:
     call func_027_7B18                            ; $7AFD: $CD $18 $7B
-    ldh  a, [wActiveEntityPosX]                   ; $7B00: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $7B00: $F0 $EE
     cp   $B0                                      ; $7B02: $FE $B0
     jp   nc, label_027_7B51                       ; $7B04: $D2 $51 $7B
 

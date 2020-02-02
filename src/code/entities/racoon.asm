@@ -238,7 +238,7 @@ jr_005_4AAE:
     cp   $06                                      ; $4AB7: $FE $06
     jr   nc, jr_005_4AEC                          ; $4AB9: $30 $31
 
-    ldh  a, [$FFEF]                               ; $4ABB: $F0 $EF
+    ldh  a, [hActiveEntityPosY]                   ; $4ABB: $F0 $EF
     cp   $30                                      ; $4ABD: $FE $30
     jr   nc, jr_005_4AC5                          ; $4ABF: $30 $04
 
@@ -633,10 +633,10 @@ TarinShield2Handler::
 
 jr_005_4CE6:
     ldh  a, [hLinkPositionX]                      ; $4CE6: $F0 $98
-    ldh  [wActiveEntityPosX], a                   ; $4CE8: $E0 $EE
+    ldh  [hActiveEntityPosX], a                   ; $4CE8: $E0 $EE
     ldh  a, [hLinkPositionY]                      ; $4CEA: $F0 $99
     sub  $0C                                      ; $4CEC: $D6 $0C
-    ldh  [wActiveEntityPosY], a                   ; $4CEE: $E0 $EC
+    ldh  [$FFEC], a                               ; $4CEE: $E0 $EC
     xor  a                                        ; $4CF0: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4CF1: $E0 $F1
     ld   de, data_005_4cc6                        ; $4CF3: $11 $C6 $4C
@@ -812,9 +812,9 @@ jr_005_4DE3:
     ld   a, $7C                                   ; $4DF1: $3E $7C
 
 jr_005_4DF3:
-    ldh  [wActiveEntityPosX], a                   ; $4DF3: $E0 $EE
+    ldh  [hActiveEntityPosX], a                   ; $4DF3: $E0 $EE
     ld   a, $5C                                   ; $4DF5: $3E $5C
-    ldh  [wActiveEntityPosY], a                   ; $4DF7: $E0 $EC
+    ldh  [$FFEC], a                               ; $4DF7: $E0 $EC
     xor  a                                        ; $4DF9: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4DFA: $E0 $F1
     call RenderAnimatedActiveEntity               ; $4DFC: $CD $C0 $3B

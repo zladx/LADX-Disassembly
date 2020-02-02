@@ -166,16 +166,16 @@ func_005_63EB::
     ld   [hl], b                                  ; $641D: $70
     call IsEntityDropTimerZero                                ; $641E: $CD $FB $0B
     ld   [hl], $40                                ; $6421: $36 $40
-    ldh  a, [wActiveEntityPosX]                   ; $6423: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $6423: $F0 $EE
     add  $F8                                      ; $6425: $C6 $F8
     ldh  [hScratch0], a                           ; $6427: $E0 $D7
     call func_005_6432                            ; $6429: $CD $32 $64
-    ldh  a, [wActiveEntityPosX]                   ; $642C: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $642C: $F0 $EE
     add  $08                                      ; $642E: $C6 $08
     ldh  [hScratch0], a                           ; $6430: $E0 $D7
 
 func_005_6432::
-    ldh  a, [wActiveEntityPosY]                   ; $6432: $F0 $EC
+    ldh  a, [$FFEC]                               ; $6432: $F0 $EC
     sub  $10                                      ; $6434: $D6 $10
     ldh  [hScratch1], a                           ; $6436: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $6438: $3E $02
@@ -264,11 +264,11 @@ jr_005_64AF:
     call IsEntityDropTimerZero                                ; $64B2: $CD $FB $0B
     jr   nz, jr_005_64CC                          ; $64B5: $20 $15
 
-    ldh  a, [wActiveEntityPosX]                   ; $64B7: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $64B7: $F0 $EE
     cp   $70                                      ; $64B9: $FE $70
     jr   nc, jr_005_64CC                          ; $64BB: $30 $0F
 
-    ldh  a, [wActiveEntityPosY]                   ; $64BD: $F0 $EC
+    ldh  a, [$FFEC]                               ; $64BD: $F0 $EC
     cp   $50                                      ; $64BF: $FE $50
     jr   nc, jr_005_64CC                          ; $64C1: $30 $09
 
@@ -284,11 +284,11 @@ jr_005_64CC:
     cp   $08                                      ; $64D1: $FE $08
     jr   nz, jr_005_64F7                          ; $64D3: $20 $22
 
-    ldh  a, [wActiveEntityPosX]                   ; $64D5: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $64D5: $F0 $EE
     cp   $70                                      ; $64D7: $FE $70
     jr   nc, jr_005_64F7                          ; $64D9: $30 $1C
 
-    ldh  a, [wActiveEntityPosY]                   ; $64DB: $F0 $EC
+    ldh  a, [$FFEC]                               ; $64DB: $F0 $EC
     cp   $50                                      ; $64DD: $FE $50
     jr   nc, jr_005_64F7                          ; $64DF: $30 $16
 
@@ -343,9 +343,9 @@ jr_005_6522:
     and  $07                                      ; $6524: $E6 $07
     ret  nz                                       ; $6526: $C0
 
-    ldh  a, [wActiveEntityPosX]                   ; $6527: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $6527: $F0 $EE
     ldh  [hScratch0], a                           ; $6529: $E0 $D7
-    ldh  a, [wActiveEntityPosY]                   ; $652B: $F0 $EC
+    ldh  a, [$FFEC]                               ; $652B: $F0 $EC
     ldh  [hScratch1], a                           ; $652D: $E0 $D8
     ld   a, TRANSCIENT_VFX_LAVA_SPLASH            ; $652F: $3E $0A
     jp   AddTranscientVfx                         ; $6531: $C3 $C7 $0C
@@ -621,8 +621,8 @@ label_005_672A:
     and  $F0                                      ; $673D: $E6 $F0
     or   $04                                      ; $673F: $F6 $04
     ld   [hl], a                                  ; $6741: $77
-    ldh  a, [$FFEF]                               ; $6742: $F0 $EF
-    ldh  [wActiveEntityPosY], a                   ; $6744: $E0 $EC
+    ldh  a, [hActiveEntityPosY]                   ; $6742: $F0 $EF
+    ldh  [$FFEC], a                               ; $6744: $E0 $EC
     xor  a                                        ; $6746: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $6747: $E0 $F1
     ld   hl, Data_005_66F5                        ; $6749: $21 $F5 $66

@@ -29,12 +29,6 @@ echo "   Referencing Home (0000-3FFF):"
 EXCLUDED_FILES="\
 --exclude */bank0.asm \
 --exclude */bank1.asm \
---exclude */bank2.asm \
---exclude */bank3.asm \
---exclude */bank4.asm \
---exclude */bank5.asm \
---exclude */bank6.asm \
---exclude */bank7.asm \
 --exclude */bank14.asm \
 --exclude */bank15.asm \
 --exclude */bank18.asm \

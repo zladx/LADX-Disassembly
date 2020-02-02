@@ -1199,7 +1199,11 @@ wIsMarinFollowingLink:: ; DB73
 
 ; Unlabeled
 wDB74 equ $DB74
-  ds 2
+  ds 1
+
+wPurchasedMedecineCount:: ; DB75
+  ; Total number of medecine ever purchased from Crazy Tracy
+  ds 1
 
 wMaxMagicPowder:: ; DB76
   ds 1

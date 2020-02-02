@@ -77,7 +77,9 @@ hFF9C:: ; hFF9C
  ds 1
 
 hLinkAnimationState:: ; FF9D
- ds 1
+  ; Values:
+  ; 6C   Got item
+  ds 1
 
 hLinkDirection:: ; FF9E
   ; Direction Link is facing

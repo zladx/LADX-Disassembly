@@ -1309,7 +1309,7 @@ jr_018_4834:
     call RenderAnimatedActiveEntity                               ; $4843: $CD $C0 $3B
     ld   a, $02                                   ; $4846: $3E $02
     call label_3DA0                               ; $4848: $CD $A0 $3D
-    call label_3D8A                               ; $484B: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $484B: $CD $8A $3D
     call IsEntityUnknownFZero                     ; $484E: $CD $00 $0C
     jr   z, jr_018_4857                           ; $4851: $28 $04
 
@@ -1439,7 +1439,7 @@ jr_018_4896:
     call func_3CE6                               ; $48F5: $CD $E6 $3C
     ld   a, $03                                   ; $48F8: $3E $03
     call label_3DA0                               ; $48FA: $CD $A0 $3D
-    call label_3D8A                               ; $48FD: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $48FD: $CD $8A $3D
     ld   a, $07                                   ; $4900: $3E $07
     ldh  [hActiveEntitySpriteVariant], a               ; $4902: $E0 $F1
 
@@ -1949,7 +1949,7 @@ jr_018_4BFB:
     add  $08                                      ; $4C06: $C6 $08
     ldh  [wActiveEntityPosY], a                   ; $4C08: $E0 $EC
     call RenderAnimatedActiveEntity                               ; $4C0A: $CD $C0 $3B
-    call label_3D8A                               ; $4C0D: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4C0D: $CD $8A $3D
     call func_018_7DE8                            ; $4C10: $CD $E8 $7D
     ldh  a, [hActiveEntityState]                  ; $4C13: $F0 $F0
     rst  $00                                      ; $4C15: $C7
@@ -2270,7 +2270,7 @@ jr_018_4DF3:
     ldh  [wActiveEntityPosX], a                   ; $4E07: $E0 $EE
     ld   de, $4D13                                ; $4E09: $11 $13 $4D
     call RenderAnimatedActiveEntity                               ; $4E0C: $CD $C0 $3B
-    call label_3D8A                               ; $4E0F: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4E0F: $CD $8A $3D
     ld   a, $02                                   ; $4E12: $3E $02
     jp   SetEntitySpriteVariant                   ; $4E14: $C3 $0C $3B
 
@@ -2992,7 +2992,7 @@ jr_018_521C:
     ldh  a, [$FFEF]                               ; $521C: $F0 $EF
     ldh  [wActiveEntityPosY], a                   ; $521E: $E0 $EC
     call func_018_7D36                            ; $5220: $CD $36 $7D
-    call label_3D8A                               ; $5223: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5223: $CD $8A $3D
     call func_018_7D95                            ; $5226: $CD $95 $7D
     ret  nc                                       ; $5229: $D0
 
@@ -3422,7 +3422,7 @@ jr_018_54A4:
     cp   [hl]                                     ; $54B3: $BE
     jr   c, jr_018_54A4                           ; $54B4: $38 $EE
 
-    jp   label_3D8A                               ; $54B6: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $54B6: $C3 $8A $3D
 
     inc  h                                        ; $54B9: $24
     nop                                           ; $54BA: $00
@@ -4041,7 +4041,7 @@ func_018_586B::
     call func_3CE6                               ; $588F: $CD $E6 $3C
     ld   a, $04                                   ; $5892: $3E $04
     call label_3DA0                               ; $5894: $CD $A0 $3D
-    jp   label_3D8A                               ; $5897: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $5897: $C3 $8A $3D
 
 label_018_589A:
     call $596B                                    ; $589A: $CD $6B $59
@@ -7787,7 +7787,7 @@ label_018_6E36:
     ld   a, [hl]                                  ; $6E50: $7E
     add  $28                                      ; $6E51: $C6 $28
     ld   [hl], a                                  ; $6E53: $77
-    jp   label_3D8A                               ; $6E54: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $6E54: $C3 $8A $3D
 
 func_018_6E57::
     ld   e, $0F                                   ; $6E57: $1E $0F
@@ -9376,7 +9376,7 @@ jr_018_7717:
 
 label_018_7726:
 jr_018_7726:
-    jp   label_3D8A                               ; $7726: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $7726: $C3 $8A $3D
 
     ld   h, d                                     ; $7729: $62
     nop                                           ; $772A: $00

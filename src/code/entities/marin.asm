@@ -737,7 +737,7 @@ func_005_52AF::
     call func_3CE6                               ; $52D5: $CD $E6 $3C
 
 jr_005_52D8:
-    jp   label_3D8A                               ; $52D8: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $52D8: $C3 $8A $3D
 
 func_005_52DB::
     ld   a, $03                                   ; $52DB: $3E $03

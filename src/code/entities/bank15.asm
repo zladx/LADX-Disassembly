@@ -1253,7 +1253,7 @@ jr_015_4AEB:
     call func_3CE6                               ; $4B11: $CD $E6 $3C
 
 jr_015_4B14:
-    jp   label_3D8A                               ; $4B14: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $4B14: $C3 $8A $3D
 
 Data_015_4B17::
     db   $E8, $FE, $74, $00, $E8, $06, $74, $20, $F4, $01, $76, $00, $F4, $09, $76, $20
@@ -2842,7 +2842,7 @@ jr_015_5676:
     cp   $08                                      ; $5679: $FE $08
     jr   nz, jr_015_5639                          ; $567B: $20 $BC
 
-    call label_3D8A                               ; $567D: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $567D: $CD $8A $3D
     call func_015_569F                            ; $5680: $CD $9F $56
     call func_015_7B0D                            ; $5683: $CD $0D $7B
     ld   hl, wEntitiesUnknowTableY                ; $5686: $21 $D0 $C3
@@ -3490,7 +3490,7 @@ jr_015_5B5A:
 jr_015_5B6C:
     ld   a, $02                                   ; $5B6C: $3E $02
     call label_3DA0                               ; $5B6E: $CD $A0 $3D
-    jp   label_3D8A                               ; $5B71: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $5B71: $C3 $8A $3D
 
 Data_015_5B74::
     db   $F8, $F8, $60, $00, $F8, $00, $62, $00, $F8, $08, $62, $20, $F8, $10, $60, $20
@@ -3603,7 +3603,7 @@ jr_015_5D9A:
     call RenderAnimatedActiveEntity               ; $5DC2: $CD $C0 $3B
     ld   a, $02                                   ; $5DC5: $3E $02
     call label_3DA0                               ; $5DC7: $CD $A0 $3D
-    jp   label_3D8A                               ; $5DCA: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $5DCA: $C3 $8A $3D
 
 Data_015_5DCD::
     db   $46, $00, $46, $60, $70, $00, $FF, $FF
@@ -4039,7 +4039,7 @@ func_015_60D4::
     call func_015_5FD1                            ; $60D4: $CD $D1 $5F
     call func_015_6245                            ; $60D7: $CD $45 $62
     call func_C56                                ; $60DA: $CD $56 $0C
-    call label_3D8A                               ; $60DD: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $60DD: $CD $8A $3D
     call func_015_7B0D                            ; $60E0: $CD $0D $7B
     xor  a                                        ; $60E3: $AF
     ld   [$D3D6], a                               ; $60E4: $EA $D6 $D3
@@ -5278,7 +5278,7 @@ func_015_6C10::
     pop  de                                       ; $6C51: $D1
     ld   a, e                                     ; $6C52: $7B
     call label_3DA0                               ; $6C53: $CD $A0 $3D
-    jp   label_3D8A                               ; $6C56: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $6C56: $C3 $8A $3D
 
 Data_015_6C59::
     db   $03, $02, $01, $00
@@ -5908,12 +5908,12 @@ func_015_7056::
     push hl                                       ; $7097: $E5
     sub  $08                                      ; $7098: $D6 $08
     ld   [hl], a                                  ; $709A: $77
-    call label_3D8A                               ; $709B: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $709B: $CD $8A $3D
     call func_015_717B                            ; $709E: $CD $7B $71
     pop  hl                                       ; $70A1: $E1
     pop  af                                       ; $70A2: $F1
     ld   [hl], a                                  ; $70A3: $77
-    jp   label_3D8A                               ; $70A4: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $70A4: $C3 $8A $3D
 
 Data_015_70A7::
     db   $D0, $D1, $D4, $D9, $DF, $E6, $EE, $F7
@@ -6204,7 +6204,7 @@ func_015_72CF::
     ldh  [hWaveSfx], a                            ; $731B: $E0 $F3
 
 jr_015_731D:
-    jp   label_3D8A                               ; $731D: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $731D: $C3 $8A $3D
 
 Data_015_7320::
     db   $58, $02, $58, $22, $5A, $02, $5A, $22
@@ -7279,7 +7279,7 @@ label_015_79DF:
     dec  [hl]                                     ; $79E8: $35
     dec  [hl]                                     ; $79E9: $35
     call func_015_79F0                            ; $79EA: $CD $F0 $79
-    jp   label_3D8A                               ; $79ED: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $79ED: $C3 $8A $3D
 
 func_015_79F0::
     ld   a, [$C3C0]                               ; $79F0: $FA $C0 $C3
@@ -8061,7 +8061,7 @@ jr_015_7E1E:
     call func_3CE6                               ; $7E2B: $CD $E6 $3C
 
 jr_015_7E2E:
-    jp   label_3D8A                               ; $7E2E: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $7E2E: $C3 $8A $3D
 
 func_015_7E31::
     xor  a                                        ; $7E31: $AF

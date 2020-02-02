@@ -3181,7 +3181,7 @@ func_006_55B3::
     call func_3CE6                                ; $55DD: $CD $E6 $3C
 
 jr_006_55E0:
-    jp   label_3D8A                               ; $55E0: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $55E0: $C3 $8A $3D
 
 Data_006_55E3::
     db   $00, $04
@@ -3472,7 +3472,7 @@ jr_006_579D:
     ld   hl, wEntitiesPosZTable                   ; $579D: $21 $10 $C3
     add  hl, bc                                   ; $57A0: $09
     ld   [hl], b                                  ; $57A1: $70
-    call label_3D8A                               ; $57A2: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $57A2: $CD $8A $3D
     jp   IncrementEntityState                     ; $57A5: $C3 $12 $3B
 
 func_006_57A8::
@@ -3746,7 +3746,7 @@ jr_006_5940:
     cp   [hl]                                     ; $5946: $BE
     jr   nz, jr_006_58F3                          ; $5947: $20 $AA
 
-    jp   label_3D8A                               ; $5949: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $5949: $C3 $8A $3D
 
 func_006_594C::
     ld   hl, wEntitiesSpeedXTable                 ; $594C: $21 $40 $C2
@@ -4132,7 +4132,7 @@ jr_006_5BC4:
     ldh  a, [$FFEF]                               ; $5BC7: $F0 $EF
     ldh  [wActiveEntityPosY], a                   ; $5BC9: $E0 $EC
     call func_006_641A                            ; $5BCB: $CD $1A $64
-    call label_3D8A                               ; $5BCE: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5BCE: $CD $8A $3D
     call func_006_645D                            ; $5BD1: $CD $5D $64
     ret  nc                                       ; $5BD4: $D0
 
@@ -4592,8 +4592,9 @@ CrazyTracyEntityHandler::
     add  hl, bc                                   ; $5EA8: $09
     ld   a, $28                                   ; $5EA9: $3E $28
     ld   [hl], a                                  ; $5EAB: $77
+
     call GetEntityTransitionCountdown             ; $5EAC: $CD $05 $0C
-    jr   z, jr_006_5EDE                           ; $5EAF: $28 $2D
+    jr   z, .countdownEnd                         ; $5EAF: $28 $2D
 
     ldh  a, [hLinkPositionX]                      ; $5EB1: $F0 $98
     ldh  [wActiveEntityPosX], a                   ; $5EB3: $E0 $EE
@@ -4613,9 +4614,9 @@ CrazyTracyEntityHandler::
     ld   [wIsUsingSpinAttack], a                  ; $5ED2: $EA $21 $C1
     ld   de, Data_006_5E93                        ; $5ED5: $11 $93 $5E
     call RenderSimpleEntityWithSpriteVariantToOAM ; $5ED8: $CD $77 $3C
-    call label_3D8A                               ; $5EDB: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5EDB: $CD $8A $3D
+.countdownEnd
 
-jr_006_5EDE:
     ld   e, $00                                   ; $5EDE: $1E $00
     ldh  a, [hLinkPositionX]                      ; $5EE0: $F0 $98
     cp   $30                                      ; $5EE2: $FE $30
@@ -4646,7 +4647,7 @@ jr_006_5EEE:
     call func_3CE6                                ; $5F05: $CD $E6 $3C
     ld   a, $04                                   ; $5F08: $3E $04
     call label_3DA0                               ; $5F0A: $CD $A0 $3D
-    call label_3D8A                               ; $5F0D: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5F0D: $CD $8A $3D
     call func_006_64C6                            ; $5F10: $CD $C6 $64
     call func_006_641A                            ; $5F13: $CD $1A $64
 
@@ -5004,7 +5005,7 @@ func_006_6134::
     ldh  a, [$FFEF]                               ; $6138: $F0 $EF
     ldh  [wActiveEntityPosY], a                   ; $613A: $E0 $EC
     call func_006_641A                            ; $613C: $CD $1A $64
-    call label_3D8A                               ; $613F: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $613F: $CD $8A $3D
     call func_006_645D                            ; $6142: $CD $5D $64
     jr   nc, jr_006_614C                          ; $6145: $30 $05
 
@@ -5170,7 +5171,7 @@ func_006_6230::
     ldh  a, [$FFEF]                               ; $6230: $F0 $EF
     ldh  [wActiveEntityPosY], a                   ; $6232: $E0 $EC
     call func_006_641A                            ; $6234: $CD $1A $64
-    call label_3D8A                               ; $6237: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $6237: $CD $8A $3D
     call func_006_645D                            ; $623A: $CD $5D $64
     ret  nc                                       ; $623D: $D0
 
@@ -7459,7 +7460,7 @@ func_006_6FEA::
     cp   [hl]                                     ; $7004: $BE
     jr   nz, .loop                                ; $7005: $20 $E7
 
-    jp   label_3D8A                               ; $7007: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $7007: $C3 $8A $3D
 
 func_006_700A::
     and  $07                                      ; $700A: $E6 $07
@@ -9140,7 +9141,7 @@ jr_006_7B61:
     call func_3CE6                                ; $7B6D: $CD $E6 $3C
     ld   a, $01                                   ; $7B70: $3E $01
     call label_3DA0                               ; $7B72: $CD $A0 $3D
-    call label_3D8A                               ; $7B75: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $7B75: $CD $8A $3D
     call func_006_64C6                            ; $7B78: $CD $C6 $64
     ldh  a, [hIsSideScrolling]                    ; $7B7B: $F0 $F9
     and  a                                        ; $7B7D: $A7

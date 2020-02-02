@@ -222,7 +222,7 @@ jr_004_4DBE:
     call func_3CE6                               ; $4DF0: $CD $E6 $3C
     ld   a, $06                                   ; $4DF3: $3E $06
     call label_3DA0                               ; $4DF5: $CD $A0 $3D
-    jp   label_3D8A                               ; $4DF8: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $4DF8: $C3 $8A $3D
 
 func_004_4DFB::
     call func_004_4FFE                            ; $4DFB: $CD $FE $4F
@@ -562,7 +562,7 @@ func_004_4FFE::
     call label_3DA0                               ; $5045: $CD $A0 $3D
 
 jr_004_5048:
-    jp   label_3D8A                               ; $5048: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $5048: $C3 $8A $3D
 
 func_004_504B::
     call GetEntityTransitionCountdown             ; $504B: $CD $05 $0C
@@ -1621,7 +1621,7 @@ jr_004_5777:
     jp   func_004_6D7A                            ; $578E: $C3 $7A $6D
 
 MoldormEntityActiveHandler::
-    call label_3D8A                               ; $5791: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5791: $CD $8A $3D
     call func_004_7FA3                            ; $5794: $CD $A3 $7F
     xor  a                                        ; $5797: $AF
     ld   [$D3D6], a                               ; $5798: $EA $D6 $D3
@@ -2175,7 +2175,7 @@ func_004_5B7F::
     ldh  [hActiveEntitySpriteVariant], a          ; $5BF1: $E0 $F1
     ld   de, Data_004_5A49                        ; $5BF3: $11 $49 $5A
     call RenderAnimatedActiveEntity               ; $5BF6: $CD $C0 $3B
-    jp   label_3D8A                               ; $5BF9: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $5BF9: $C3 $8A $3D
 
 Data_004_5BFC::
     db   $58, $02, $5A, $02, $5C, $02, $5E, $02
@@ -2462,7 +2462,7 @@ label_004_5E09:
     ldh  [hActiveEntitySpriteVariant], a          ; $5E0F: $E0 $F1
     ld   de, Data_004_5DD1                        ; $5E11: $11 $D1 $5D
     call RenderAnimatedActiveEntity               ; $5E14: $CD $C0 $3B
-    call label_3D8A                               ; $5E17: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5E17: $CD $8A $3D
     jr   jr_004_5E22                              ; $5E1A: $18 $06
 
 jr_004_5E1C:
@@ -3027,7 +3027,7 @@ label_004_61BA:
     ldh  [hActiveEntitySpriteVariant], a          ; $61D9: $E0 $F1
     ld   de, Data_004_626D                        ; $61DB: $11 $6D $62
     call RenderAnimatedActiveEntity               ; $61DE: $CD $C0 $3B
-    jp   label_3D8A                               ; $61E1: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $61E1: $C3 $8A $3D
 
 func_004_61E4::
     ret                                           ; $61E4: $C9
@@ -3665,7 +3665,7 @@ func_004_657A::
     ld   [hl], b                                  ; $658C: $70
     ld   de, Data_004_6576                        ; $658D: $11 $76 $65
     call RenderSimpleEntityWithSpriteVariantToOAM ; $6590: $CD $77 $3C
-    call label_3D8A                               ; $6593: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $6593: $CD $8A $3D
     ldh  a, [hFrameCounter]                       ; $6596: $F0 $E7
     rra                                           ; $6598: $1F
     rra                                           ; $6599: $1F
@@ -4267,7 +4267,7 @@ label_004_6910:
     and  a                                        ; $691B: $A7
     jp   z, label_004_69A5                        ; $691C: $CA $A5 $69
 
-    call label_3D8A                               ; $691F: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $691F: $CD $8A $3D
     push bc                                       ; $6922: $C5
     ld   c, e                                     ; $6923: $4B
     ld   b, d                                     ; $6924: $42
@@ -4324,7 +4324,7 @@ jr_004_6969:
     ld   hl, wEntitiesSpeedXTable                 ; $6969: $21 $40 $C2
     add  hl, bc                                   ; $696C: $09
     ld   [hl], a                                  ; $696D: $77
-    call label_3D8A                               ; $696E: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $696E: $CD $8A $3D
     call func_004_6DCA                            ; $6971: $CD $CA $6D
     call label_3B23                               ; $6974: $CD $23 $3B
     ldh  a, [wActiveEntityPosX]                   ; $6977: $F0 $EE
@@ -4397,7 +4397,7 @@ jr_004_69C9:
 
 jr_004_69D5:
     call func_004_6AC7                            ; $69D5: $CD $C7 $6A
-    call label_3D8A                               ; $69D8: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $69D8: $CD $8A $3D
     call func_004_7FA3                            ; $69DB: $CD $A3 $7F
     call func_004_6D80                            ; $69DE: $CD $80 $6D
     ld   hl, wEntitiesUnknowTableH                ; $69E1: $21 $30 $C4
@@ -4695,7 +4695,7 @@ jr_004_6B7C:
     add  hl, de                                   ; $6BA5: $19
     ld   e, l                                     ; $6BA6: $5D
     ld   d, h                                     ; $6BA7: $54
-    call label_3D8A                               ; $6BA8: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $6BA8: $CD $8A $3D
     ld   a, $03                                   ; $6BAB: $3E $03
 
 jr_004_6BAD:
@@ -5234,7 +5234,7 @@ jr_004_6EC1:
 
 jr_004_6ECA:
     call func_004_73FE                            ; $6ECA: $CD $FE $73
-    call label_3D8A                               ; $6ECD: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $6ECD: $CD $8A $3D
     call func_004_7BE3                            ; $6ED0: $CD $E3 $7B
     call func_004_73B7                            ; $6ED3: $CD $B7 $73
     ldh  a, [hActiveEntityState]                  ; $6ED6: $F0 $F0
@@ -7344,7 +7344,7 @@ jr_004_7BAC:
     jr   nz, jr_004_7B72                          ; $7BAF: $20 $C1
 
     call func_004_7BB7                            ; $7BB1: $CD $B7 $7B
-    jp   label_3D8A                               ; $7BB4: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $7BB4: $C3 $8A $3D
 
 func_004_7BB7::
     ld   a, [$C509]                               ; $7BB7: $FA $09 $C5

@@ -438,7 +438,7 @@ func_004_42B3::
     ldh  [hActiveEntitySpriteVariant], a                               ; $42DC: $E0 $F1
     ld   de, Data_004_42B1                        ; $42DE: $11 $B1 $42
     call RenderSimpleEntityWithSpriteVariantToOAM ; $42E1: $CD $77 $3C
-    jp   label_3D8A                               ; $42E4: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $42E4: $C3 $8A $3D
 
 ; Called by TableJump above for Level 2 Boss
 GenieState1Handler::
@@ -1094,7 +1094,7 @@ jr_004_4713:
     ldh  [hActiveEntitySpriteVariant], a                               ; $4742: $E0 $F1
     ld   de, Data_004_46F5                        ; $4744: $11 $F5 $46
     call RenderSimpleEntityWithSpriteVariantToOAM ; $4747: $CD $77 $3C
-    jp   label_3D8A                               ; $474A: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $474A: $C3 $8A $3D
 
 Data_004_474D::
     db   $10, $00, $1E, $01, $10, $08, $1E, $61   ; $474D

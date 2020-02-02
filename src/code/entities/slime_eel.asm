@@ -249,7 +249,7 @@ func_005_6E7D::
     ld   hl, wEntitiesPosXTable                   ; $6E93: $21 $00 $C2
     add  hl, bc                                   ; $6E96: $09
     ld   [hl], a                                  ; $6E97: $77
-    call label_3D8A                               ; $6E98: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $6E98: $CD $8A $3D
     call GetEntityTransitionCountdown             ; $6E9B: $CD $05 $0C
     jp   z, IncrementEntityState                  ; $6E9E: $CA $12 $3B
 
@@ -1237,7 +1237,7 @@ Data_005_75C9::
 
 func_005_75D1::
     call func_005_766E                            ; $75D1: $CD $6E $76
-    call label_3D8A                               ; $75D4: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $75D4: $CD $8A $3D
     call func_005_7A3A                            ; $75D7: $CD $3A $7A
     ld   a, $01                                   ; $75DA: $3E $01
     ld   [$D200], a                               ; $75DC: $EA $00 $D2
@@ -1643,7 +1643,7 @@ jr_005_7A1D:
     jr   jr_005_79B3                              ; $7A1D: $18 $94
 
 jr_005_7A1F:
-    call label_3D8A                               ; $7A1F: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $7A1F: $CD $8A $3D
     ld   hl, wEntitiesFlashCountdownTable         ; $7A22: $21 $20 $C4
     add  hl, bc                                   ; $7A25: $09
     ld   a, [hl]                                  ; $7A26: $7E

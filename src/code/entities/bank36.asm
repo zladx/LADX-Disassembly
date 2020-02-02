@@ -8401,7 +8401,7 @@ jr_036_6E57:
     ld   hl, wEntitiesPosYTable                         ; $6E75: $21 $10 $C2
     add  hl, bc                                   ; $6E78: $09
     ld   [hl], a                                  ; $6E79: $77
-    call label_3D8A                               ; $6E7A: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $6E7A: $CD $8A $3D
     ld   hl, wEntitiesPrivateState1Table          ; $6E7D: $21 $B0 $C2
     add  hl, bc                                   ; $6E80: $09
     ldh  a, [$FFB8]                               ; $6E81: $F0 $B8

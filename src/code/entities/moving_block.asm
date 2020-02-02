@@ -87,7 +87,7 @@ jr_015_416B:
 
 label_015_416F:
 jr_015_416F:
-    call label_3D8A                               ; $416F: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $416F: $CD $8A $3D
     call func_015_7BDB                            ; $4172: $CD $DB $7B
     add  $0C                                      ; $4175: $C6 $0C
     cp   $18                                      ; $4177: $FE $18

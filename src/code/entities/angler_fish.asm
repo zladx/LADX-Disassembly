@@ -219,7 +219,7 @@ jr_005_56C7:
     ld   [hl], $00                                ; $56D5: $36 $00
     call ConfigureEntityHitbox                               ; $56D7: $CD $EA $3A
     call label_3B70                               ; $56DA: $CD $70 $3B
-    call label_3D8A                               ; $56DD: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $56DD: $CD $8A $3D
     ld   hl, wEntitiesHitboxFlagsTable                ; $56E0: $21 $50 $C3
     add  hl, bc                                   ; $56E3: $09
     ld   [hl], $14                                ; $56E4: $36 $14

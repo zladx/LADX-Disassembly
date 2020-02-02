@@ -76,7 +76,7 @@ jr_007_4053:
 
 jr_007_406F:
     call RenderAnimatedActiveEntity               ; $406F: $CD $C0 $3B
-    call label_3D8A                               ; $4072: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4072: $CD $8A $3D
     ld   hl, wEntitiesPrivateState2Table          ; $4075: $21 $C0 $C2
     add  hl, bc                                   ; $4078: $09
     ld   a, [hl]                                  ; $4079: $7E
@@ -1041,7 +1041,7 @@ jr_007_46E6:
 jr_007_4702:
     ld   de, Data_007_4683                        ; $4702: $11 $83 $46
     call RenderAnimatedActiveEntity               ; $4705: $CD $C0 $3B
-    call label_3D8A                               ; $4708: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4708: $CD $8A $3D
 
 jr_007_470B:
     ldh  a, [hActiveEntityState]                  ; $470B: $F0 $F0
@@ -1059,7 +1059,7 @@ jr_007_4715:
     ldh  [hActiveEntitySpriteVariant], a          ; $471C: $E0 $F1
     ld   de, Data_007_4693                        ; $471E: $11 $93 $46
     call RenderAnimatedActiveEntity               ; $4721: $CD $C0 $3B
-    call label_3D8A                               ; $4724: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4724: $CD $8A $3D
 
 jr_007_4727:
     ldh  a, [hActiveEntityState]                  ; $4727: $F0 $F0
@@ -1570,7 +1570,7 @@ jr_007_4A7E:
     ldh  [hActiveEntitySpriteVariant], a          ; $4A95: $E0 $F1
     ld   de, Data_007_4A17                        ; $4A97: $11 $17 $4A
     call RenderAnimatedActiveEntity               ; $4A9A: $CD $C0 $3B
-    call label_3D8A                               ; $4A9D: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4A9D: $CD $8A $3D
 
 jr_007_4AA0:
     call func_007_7D96                            ; $4AA0: $CD $96 $7D
@@ -1736,7 +1736,7 @@ BearEntityHandler::
     call RenderSimpleEntityWithSpriteVariantToOAM ; $4BDE: $CD $77 $3C
 
 jr_007_4BE1:
-    call label_3D8A                               ; $4BE1: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4BE1: $CD $8A $3D
     ld   hl, wEntitiesSpriteVariantTable          ; $4BE4: $21 $B0 $C3
     add  hl, bc                                   ; $4BE7: $09
     ld   a, [hl]                                  ; $4BE8: $7E
@@ -2296,7 +2296,7 @@ func_007_4F56::
     ldh  [wActiveEntityPosY], a                   ; $4F6B: $E0 $EC
     ld   de, Data_007_4F4E                        ; $4F6D: $11 $4E $4F
     call RenderAnimatedActiveEntity               ; $4F70: $CD $C0 $3B
-    call label_3D8A                               ; $4F73: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4F73: $CD $8A $3D
     ld   a, $08                                   ; $4F76: $3E $08
     jp   SetEntitySpriteVariant                   ; $4F78: $C3 $0C $3B
 
@@ -2330,7 +2330,7 @@ jr_007_4FA5:
     ldh  [wActiveEntityPosX], a                   ; $4FAD: $E0 $EE
     ld   de, Data_007_4F4E                        ; $4FAF: $11 $4E $4F
     call RenderAnimatedActiveEntity               ; $4FB2: $CD $C0 $3B
-    call label_3D8A                               ; $4FB5: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4FB5: $CD $8A $3D
     call GetEntityTransitionCountdown             ; $4FB8: $CD $05 $0C
     rra                                           ; $4FBB: $1F
     rra                                           ; $4FBC: $1F
@@ -2402,7 +2402,7 @@ jr_007_5012:
 jr_007_501B:
     ld   de, Data_007_4F4E                        ; $501B: $11 $4E $4F
     call RenderAnimatedActiveEntity               ; $501E: $CD $C0 $3B
-    call label_3D8A                               ; $5021: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5021: $CD $8A $3D
     call GetEntityTransitionCountdown             ; $5024: $CD $05 $0C
     ld   e, $02                                   ; $5027: $1E $02
     and  $20                                      ; $5029: $E6 $20
@@ -3674,7 +3674,7 @@ jr_007_5857:
     ldh  [wActiveEntityPosY], a                   ; $5869: $E0 $EC
     ld   de, Data_007_594D                        ; $586B: $11 $4D $59
     call RenderAnimatedActiveEntity               ; $586E: $CD $C0 $3B
-    call label_3D8A                               ; $5871: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5871: $CD $8A $3D
 
 jr_007_5874:
     call func_007_7D96                            ; $5874: $CD $96 $7D
@@ -7375,7 +7375,7 @@ func_007_6FB1::
     call label_3DA0                               ; $6FE0: $CD $A0 $3D
 
 jr_007_6FE3:
-    jp   label_3D8A                               ; $6FE3: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $6FE3: $C3 $8A $3D
 
 func_007_6FE6::
     ld   a, [$D20C]                               ; $6FE6: $FA $0C $D2
@@ -7404,7 +7404,7 @@ func_007_6FE6::
     jp   label_007_7034                           ; $700F: $C3 $34 $70
 
 jr_007_7012:
-    jp   label_3D8A                               ; $7012: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $7012: $C3 $8A $3D
 
 func_007_7015::
     ld   hl, wEntitiesUnknowTableG                ; $7015: $21 $00 $C3
@@ -7430,7 +7430,7 @@ jr_007_702D:
 
 label_007_7034:
     call label_3DA0                               ; $7034: $CD $A0 $3D
-    jp   label_3D8A                               ; $7037: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $7037: $C3 $8A $3D
 
 func_007_703A::
     ld   a, [$D20A]                               ; $703A: $FA $0A $D2

@@ -202,7 +202,7 @@ jr_005_5483:
     ldh  [hFFB2], a                               ; $5485: $E0 $B2
 
 jr_005_5487:
-    call label_3D8A                               ; $5487: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5487: $CD $8A $3D
     ld   de, Data_005_53D4                        ; $548A: $11 $D4 $53
     jp   RenderAnimatedActiveEntity               ; $548D: $C3 $C0 $3B
 

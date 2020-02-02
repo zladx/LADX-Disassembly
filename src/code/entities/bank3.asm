@@ -4889,7 +4889,7 @@ func_003_6711::
     inc  [hl]                                     ; $6715: $34
     ld   de, Data_003_652E                        ; $6716: $11 $2E $65
     call RenderSimpleEntityWithSpriteVariantToOAM ; $6719: $CD $77 $3C
-    jp   label_3D8A                               ; $671C: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $671C: $C3 $8A $3D
 
 Data_003_671F::
     db   $F8, $08, $18, $F8, $08, $18, $F8, $08, $18
@@ -5373,7 +5373,7 @@ jr_003_6A96:
     ldh  [wActiveEntityPosY], a                   ; $6AAE: $E0 $EC
     ld   de, Data_003_6A66                        ; $6AB0: $11 $66 $6A
     call RenderSimpleEntityWithSpriteVariantToOAM ; $6AB3: $CD $77 $3C
-    call label_3D8A                               ; $6AB6: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $6AB6: $CD $8A $3D
     pop  af                                       ; $6AB9: $F1
     ldh  [hActiveEntitySpriteVariant], a          ; $6ABA: $E0 $F1
     ld   de, Data_003_6BC6                        ; $6ABC: $11 $C6 $6B

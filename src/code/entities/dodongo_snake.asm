@@ -320,12 +320,12 @@ func_005_6A38::
 
     call func_005_6AA5                            ; $6A4D: $CD $A5 $6A
     call func_005_6A5F                            ; $6A50: $CD $5F $6A
-    jp   label_3D8A                               ; $6A53: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $6A53: $C3 $8A $3D
 
 jr_005_6A56:
     call func_005_6A5F                            ; $6A56: $CD $5F $6A
     call func_005_6AA5                            ; $6A59: $CD $A5 $6A
-    jp   label_3D8A                               ; $6A5C: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $6A5C: $C3 $8A $3D
 
 func_005_6A5F::
     ld   hl, wEntitiesUnknowTableY                ; $6A5F: $21 $D0 $C3

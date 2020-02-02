@@ -7196,10 +7196,10 @@ AnimateEntity::
     jr   nz, .notLifted
 .entityLifted
     call UpdateEntityPositionForRoomTransition
-    call label_3D8A
+    call CopyEntityPositionToActivePosition
     jr   .liftedEnd
 .notLifted
-    call label_3D8A
+    call CopyEntityPositionToActivePosition
     call UpdateEntityPositionForRoomTransition
 .liftedEnd
 
@@ -7838,7 +7838,7 @@ ClearEntitySpeed::
     ld   [hl], b
     ret
 
-label_3D8A::
+CopyEntityPositionToActivePosition::
     ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]

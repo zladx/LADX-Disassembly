@@ -628,7 +628,7 @@ label_005_672A:
     ld   hl, Data_005_66F5                        ; $6749: $21 $F5 $66
     ld   c, $04                                   ; $674C: $0E $04
     call func_3CE6                               ; $674E: $CD $E6 $3C
-    jp   label_3D8A                               ; $6751: $C3 $8A $3D
+    jp   CopyEntityPositionToActivePosition       ; $6751: $C3 $8A $3D
 
 label_005_6754:
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6754: $21 $40 $C3

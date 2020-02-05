@@ -118,7 +118,7 @@ ShouldLinkTalkToTracy::
     sub  [hl]                                     ; $5F28: $96
     add  $28                                      ; $5F29: $C6 $28
     cp   $50                                      ; $5F2B: $FE $50
-    jp   label_006_647E                           ; $5F2D: $C3 $7E $64
+    jp   func_006_645D.label_006_647E             ; $5F2D: $C3 $7E $64
 
 CrazyTracyGreetingHandler::
     call ShouldLinkTalkToTracy                    ; $5F30: $CD $23 $5F

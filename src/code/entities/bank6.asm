@@ -25,6 +25,10 @@ include "code/entities/giant_goponga_flower.asm"
 include "code/entities/goponga_projectile.asm"
 include "code/entities/goponga_flower.asm"
 
+;
+; Entity helpers
+;
+
 func_006_641A::
     call CheckLinkCollisionWithEnemy_trampoline   ; $641A: $CD $5A $3B
     jr   nc, jr_006_643C                          ; $641D: $30 $1D
@@ -51,10 +55,15 @@ label_006_641F:
 jr_006_643C:
     ret                                           ; $643C: $C9
 
+; Array indexed by direction
 Data_006_643D::
     db   $06, $04, $02, $00
 
-func_006_6441::
+; Set sprite variant for entity direction.
+;
+; Inputs:
+;   bc   entity index
+SetEntitySpriteVariantForDirection::
     ld   hl, wEntitiesDirectionTable              ; $6441: $21 $80 $C3
     add  hl, bc                                   ; $6444: $09
     ld   e, [hl]                                  ; $6445: $5E
@@ -75,44 +84,45 @@ func_006_6441::
     or   [hl]                                     ; $6459: $B6
     jp   SetEntitySpriteVariant                   ; $645A: $C3 $0C $3B
 
+; Should Link talk to Entity
 func_006_645D::
     ld   e, b                                     ; $645D: $58
     ldh  a, [hActiveEntityType]                   ; $645E: $F0 $EB
-    cp   $77                                      ; $6460: $FE $77
-    jr   z, jr_006_6468                           ; $6462: $28 $04
+    cp   ENTITY_GRANDPA_ULRIRA                    ; $6460: $FE $77
+    jr   z, .jr_006_6468                          ; $6462: $28 $04
 
-    cp   $7B                                      ; $6464: $FE $7B
-    jr   nz, jr_006_6474                          ; $6466: $20 $0C
+    cp   ENTITY_CRAZY_TRACY                       ; $6464: $FE $7B
+    jr   nz, .jr_006_6474                          ; $6466: $20 $0C
 
-jr_006_6468:
+.jr_006_6468
     ldh  a, [hLinkPositionY]                      ; $6468: $F0 $99
     ld   hl, hActiveEntityPosY                                ; $646A: $21 $EF $FF
     sub  [hl]                                     ; $646D: $96
     add  $14                                      ; $646E: $C6 $14
     cp   $2C                                      ; $6470: $FE $2C
-    jr   label_006_647E                           ; $6472: $18 $0A
+    jr   .label_006_647E                          ; $6472: $18 $0A
 
-jr_006_6474:
+.jr_006_6474
     ldh  a, [hLinkPositionY]                      ; $6474: $F0 $99
     ld   hl, hActiveEntityPosY                                ; $6476: $21 $EF $FF
     sub  [hl]                                     ; $6479: $96
     add  $14                                      ; $647A: $C6 $14
     cp   $28                                      ; $647C: $FE $28
 
-label_006_647E:
-    jr   nc, jr_006_64C4                          ; $647E: $30 $44
+.label_006_647E
+    jr   nc, .return                              ; $647E: $30 $44
 
     ldh  a, [hLinkPositionX]                      ; $6480: $F0 $98
     ld   hl, hActiveEntityPosX                    ; $6482: $21 $EE $FF
     sub  [hl]                                     ; $6485: $96
     add  $10                                      ; $6486: $C6 $10
     cp   $20                                      ; $6488: $FE $20
-    jr   nc, jr_006_64C4                          ; $648A: $30 $38
+    jr   nc, .return                              ; $648A: $30 $38
 
     inc  e                                        ; $648C: $1C
     ldh  a, [hActiveEntityType]                   ; $648D: $F0 $EB
-    cp   $78                                      ; $648F: $FE $78
-    jr   z, jr_006_649F                           ; $6491: $28 $0C
+    cp   ENTITY_YIP_YIP                           ; $648F: $FE $78
+    jr   z, .jr_006_649F                          ; $6491: $28 $0C
 
     push de                                       ; $6493: $D5
     call func_006_65B4                            ; $6494: $CD $B4 $65
@@ -120,9 +130,9 @@ label_006_647E:
     xor  $01                                      ; $6499: $EE $01
     cp   e                                        ; $649B: $BB
     pop  de                                       ; $649C: $D1
-    jr   nz, jr_006_64C4                          ; $649D: $20 $25
+    jr   nz, .return                              ; $649D: $20 $25
 
-jr_006_649F:
+.jr_006_649F
     ld   hl, $C1AD                                ; $649F: $21 $AD $C1
     ld   [hl], $01                                ; $64A2: $36 $01
     ld   a, [wDialogState]                        ; $64A4: $FA $9F $C1
@@ -132,20 +142,20 @@ jr_006_649F:
     or   [hl]                                     ; $64AE: $B6
     ld   hl, $C134                                ; $64AF: $21 $34 $C1
     or   [hl]                                     ; $64B2: $B6
-    jr   nz, jr_006_64C4                          ; $64B3: $20 $0F
+    jr   nz, .return                              ; $64B3: $20 $0F
 
     ld   a, [wWindowY]                            ; $64B5: $FA $9A $DB
     cp   $80                                      ; $64B8: $FE $80
-    jr   nz, jr_006_64C4                          ; $64BA: $20 $08
+    jr   nz, .return                              ; $64BA: $20 $08
 
     ldh  a, [hJoypadState]                        ; $64BC: $F0 $CC
     and  $10                                      ; $64BE: $E6 $10
-    jr   z, jr_006_64C4                           ; $64C0: $28 $02
+    jr   z, .return                               ; $64C0: $28 $02
 
     scf                                           ; $64C2: $37
     ret                                           ; $64C3: $C9
 
-jr_006_64C4:
+.return
     and  a                                        ; $64C4: $A7
     ret                                           ; $64C5: $C9
 

@@ -3434,7 +3434,7 @@ Data_003_5DBC::
     db   $08, $08, $08, $08, $04, $04, $04, $04, $00, $00, $00, $00, $00
 
 SirensInstrumentState2Handler::
-    call label_3E76                               ; $5DD9: $CD $76 $3E
+    call func_006_783C_trampoline                 ; $5DD9: $CD $76 $3E
     ld   a, $01                                   ; $5DDC: $3E $01
     ld   [wC167], a                               ; $5DDE: $EA $67 $C1
     call IsEntityDropTimerZero                    ; $5DE1: $CD $FB $0B

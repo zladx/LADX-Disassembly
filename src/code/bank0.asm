@@ -7942,7 +7942,7 @@ label_3E6B::
     callhl func_003_6472
     jp   ReloadSavedBank
 
-label_3E76::
+func_006_783C_trampoline::
     callsw func_006_783C
     ld   a, $03
     jp   SwitchBank

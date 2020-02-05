@@ -270,11 +270,11 @@ jr_015_4415:
 jr_015_4430:
     ldh  a, [hActiveEntityPosX]                   ; $4430: $F0 $EE
     cp   $A8                                      ; $4432: $FE $A8
-    jp   nc, ClearEntityStatusAndReturn                       ; $4434: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                       ; $4434: $D2 $31 $7C
 
     ldh  a, [$FFEC]                               ; $4437: $F0 $EC
     cp   $84                                      ; $4439: $FE $84
-    jp   nc, ClearEntityStatusAndReturn                       ; $443B: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                       ; $443B: $D2 $31 $7C
 
     ret                                           ; $443E: $C9
 
@@ -660,7 +660,7 @@ jr_015_469C:
 MoblinKingEntityHandler::
     ld   a, [wIsBowWowFollowingLink]              ; $46B6: $FA $56 $DB
     cp   $80                                      ; $46B9: $FE $80
-    jp   nz, ClearEntityStatusAndReturn           ; $46BB: $C2 $31 $7C
+    jp   nz, ClearEntityStatus_15           ; $46BB: $C2 $31 $7C
 
     ld   hl, wEntitiesDirectionTable              ; $46BE: $21 $80 $C3
     add  hl, bc                                   ; $46C1: $09
@@ -1498,7 +1498,7 @@ func_015_4D0F::
     call AddTranscientVfx                         ; $4D2D: $CD $C7 $0C
     ld   a, $2F                                   ; $4D30: $3E $2F
     ldh  [hJingle], a                             ; $4D32: $E0 $F2
-    call ClearEntityStatus                        ; $4D34: $CD $31 $7C
+    call ClearEntityStatus_15                        ; $4D34: $CD $31 $7C
     scf                                           ; $4D37: $37
     ret                                           ; $4D38: $C9
 
@@ -1666,11 +1666,11 @@ jr_015_4DFB:
     jr   c, jr_015_4DFB                           ; $4E44: $38 $B5
 
 jr_015_4E46:
-    jp   ClearEntityStatusAndReturn               ; $4E46: $C3 $31 $7C
+    jp   ClearEntityStatus_15               ; $4E46: $C3 $31 $7C
 
 jr_015_4E49:
     call GetEntityTransitionCountdown             ; $4E49: $CD $05 $0C
-    jp   z, ClearEntityStatusAndReturn            ; $4E4C: $CA $31 $7C
+    jp   z, ClearEntityStatus_15            ; $4E4C: $CA $31 $7C
 
     ld   hl, wEntitiesSpriteVariantTable          ; $4E4F: $21 $B0 $C3
     add  hl, bc                                   ; $4E52: $09
@@ -1701,7 +1701,7 @@ label_015_4E62:
     call func_015_7B0D                            ; $4E70: $CD $0D $7B
     call func_015_7B88                            ; $4E73: $CD $88 $7B
     call GetEntityTransitionCountdown             ; $4E76: $CD $05 $0C
-    jp   z, ClearEntityStatusAndReturn            ; $4E79: $CA $31 $7C
+    jp   z, ClearEntityStatus_15            ; $4E79: $CA $31 $7C
 
     ret                                           ; $4E7C: $C9
 
@@ -1754,16 +1754,16 @@ label_015_4ECB:
     ldh  [hJingle], a                             ; $4ED5: $E0 $F2
     ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $4ED7: $3E $05
     call AddTranscientVfx                         ; $4ED9: $CD $C7 $0C
-    jp   ClearEntityStatusAndReturn               ; $4EDC: $C3 $31 $7C
+    jp   ClearEntityStatus_15               ; $4EDC: $C3 $31 $7C
 
 jr_015_4EDF:
     ldh  a, [hActiveEntityPosX]                   ; $4EDF: $F0 $EE
     cp   $A8                                      ; $4EE1: $FE $A8
-    jp   nc, ClearEntityStatusAndReturn                       ; $4EE3: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                       ; $4EE3: $D2 $31 $7C
 
     ldh  a, [$FFEC]                               ; $4EE6: $F0 $EC
     cp   $84                                      ; $4EE8: $FE $84
-    jp   nc, ClearEntityStatusAndReturn                       ; $4EEA: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                       ; $4EEA: $D2 $31 $7C
 
     ret                                           ; $4EED: $C9
 
@@ -2735,7 +2735,7 @@ label_015_54D6:
     call RenderAnimatedActiveEntity               ; $54D9: $CD $C0 $3B
     call func_015_7B0D                            ; $54DC: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $54DF: $CD $05 $0C
-    jp   z, ClearEntityStatusAndReturn            ; $54E2: $CA $31 $7C
+    jp   z, ClearEntityStatus_15            ; $54E2: $CA $31 $7C
 
     rra                                           ; $54E5: $1F
     rra                                           ; $54E6: $1F
@@ -3632,7 +3632,7 @@ label_015_5DED:
     jr   nz, jr_015_5E24                          ; $5E06: $20 $1C
 
     call IsEntityUnknownFZero                     ; $5E08: $CD $00 $0C
-    jp   z, ClearEntityStatusAndReturn            ; $5E0B: $CA $31 $7C
+    jp   z, ClearEntityStatus_15            ; $5E0B: $CA $31 $7C
 
     xor  c                                        ; $5E0E: $A9
     bit  0, a                                     ; $5E0F: $CB $47
@@ -3710,7 +3710,7 @@ jr_015_5E79:
     and  a                                        ; $5E7E: $A7
     jr   z, jr_015_5E84                           ; $5E7F: $28 $03
 
-    jp   ClearEntityStatusAndReturn               ; $5E81: $C3 $31 $7C
+    jp   ClearEntityStatus_15               ; $5E81: $C3 $31 $7C
 
 jr_015_5E84:
     ret                                           ; $5E84: $C9
@@ -3780,7 +3780,7 @@ func_015_5EAC::
     ld   hl, wEntitiesUnknowTableT                ; $5EEB: $21 $10 $C4
     add  hl, de                                   ; $5EEE: $19
     ld   [hl], $12                                ; $5EEF: $36 $12
-    call ClearEntityStatus                        ; $5EF1: $CD $31 $7C
+    call ClearEntityStatus_15                        ; $5EF1: $CD $31 $7C
     ld   a, [$D220]                               ; $5EF4: $FA $20 $D2
     inc  a                                        ; $5EF7: $3C
     ld   [$D220], a                               ; $5EF8: $EA $20 $D2
@@ -3892,7 +3892,7 @@ jr_015_5F4C:
     jr   nz, jr_015_5F4C                          ; $5F94: $20 $B6
 
 jr_015_5F96:
-    jp   ClearEntityStatusAndReturn               ; $5F96: $C3 $31 $7C
+    jp   ClearEntityStatus_15               ; $5F96: $C3 $31 $7C
 
 jr_015_5F99:
     ret                                           ; $5F99: $C9
@@ -5294,7 +5294,7 @@ label_015_6C61:
     add  hl, de                                   ; $6C69: $19
     ld   a, [hl]                                  ; $6C6A: $7E
     cp   $09                                      ; $6C6B: $FE $09
-    jp   nc, ClearEntityStatusAndReturn                       ; $6C6D: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                       ; $6C6D: $D2 $31 $7C
 
     ld   hl, wEntitiesUnknowTableY                ; $6C70: $21 $D0 $C3
     add  hl, bc                                   ; $6C73: $09
@@ -5414,7 +5414,7 @@ jr_015_6CF7:
     ld   hl, wEntitiesTransitionCountdownTable    ; $6D20: $21 $E0 $C2
     add  hl, de                                   ; $6D23: $19
     ld   [hl], $4C                                ; $6D24: $36 $4C
-    call ClearEntityStatus                        ; $6D26: $CD $31 $7C
+    call ClearEntityStatus_15                        ; $6D26: $CD $31 $7C
 
 jr_015_6D29:
     pop  af                                       ; $6D29: $F1
@@ -5435,7 +5435,7 @@ label_015_6D40:
     call RenderAnimatedActiveEntity               ; $6D43: $CD $C0 $3B
     call func_015_7B0D                            ; $6D46: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $6D49: $CD $05 $0C
-    jp   z, ClearEntityStatusAndReturn            ; $6D4C: $CA $31 $7C
+    jp   z, ClearEntityStatus_15            ; $6D4C: $CA $31 $7C
 
     rra                                           ; $6D4F: $1F
     rra                                           ; $6D50: $1F
@@ -5518,11 +5518,11 @@ jr_015_6DC1:
 jr_015_6DC4:
     ldh  a, [hActiveEntityPosX]                   ; $6DC4: $F0 $EE
     cp   $A8                                      ; $6DC6: $FE $A8
-    jp   nc, ClearEntityStatusAndReturn                       ; $6DC8: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                       ; $6DC8: $D2 $31 $7C
 
     ldh  a, [$FFEC]                               ; $6DCB: $F0 $EC
     cp   $88                                      ; $6DCD: $FE $88
-    jp   nc, ClearEntityStatusAndReturn                       ; $6DCF: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                       ; $6DCF: $D2 $31 $7C
 
     ret                                           ; $6DD2: $C9
 
@@ -5830,7 +5830,7 @@ func_015_6FBC::
 
     call PlayBombExplosionSfx                     ; $6FCA: $CD $4B $0C
     call func_015_5383                            ; $6FCD: $CD $83 $53
-    call ClearEntityStatus                        ; $6FD0: $CD $31 $7C
+    call ClearEntityStatus_15                        ; $6FD0: $CD $31 $7C
     ld   a, $E6                                   ; $6FD3: $3E $E6
     call SpawnNewEntity_trampoline                ; $6FD5: $CD $86 $3B
     ld   hl, wEntitiesUnknowTableR                ; $6FD8: $21 $90 $C3
@@ -6392,7 +6392,7 @@ Entity68Handler::
     and  a                                        ; $745D: $A7
     jr   nz, jr_015_746A                          ; $745E: $20 $0A
 
-    call ClearEntityStatus                        ; $7460: $CD $31 $7C
+    call ClearEntityStatus_15                        ; $7460: $CD $31 $7C
     ld   hl, wEntitiesStatusTable                 ; $7463: $21 $80 $C2
     add  hl, bc                                   ; $7466: $09
     ld   a, [hl]                                  ; $7467: $7E
@@ -6666,7 +6666,7 @@ jr_015_75E1:
     pop  hl                                       ; $75FD: $E1
     ld   a, [hl]                                  ; $75FE: $7E
     cp   $02                                      ; $75FF: $FE $02
-    jp   nz, ClearEntityStatusAndReturn           ; $7601: $C2 $31 $7C
+    jp   nz, ClearEntityStatus_15           ; $7601: $C2 $31 $7C
 
     ld   [hl], $00                                ; $7604: $36 $00
     ld   hl, wEntitiesStateTable                  ; $7606: $21 $90 $C2
@@ -6968,11 +6968,11 @@ func_015_77BF::
 jr_015_77FE:
     ldh  a, [hActiveEntityPosX]                   ; $77FE: $F0 $EE
     cp   $A8                                      ; $7800: $FE $A8
-    jp   nc, ClearEntityStatusAndReturn                       ; $7802: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                       ; $7802: $D2 $31 $7C
 
     ldh  a, [$FFEC]                               ; $7805: $F0 $EC
     cp   $80                                      ; $7807: $FE $80
-    jp   nc, ClearEntityStatusAndReturn                       ; $7809: $D2 $31 $7C
+    jp   nc, ClearEntityStatus_15                       ; $7809: $D2 $31 $7C
 
     ldh  a, [hFrameCounter]                       ; $780C: $F0 $E7
     and  $0F                                      ; $780E: $E6 $0F
@@ -7043,7 +7043,7 @@ label_015_7825:
     inc  [hl]                                     ; $7881: $34
     ld   a, [hl]                                  ; $7882: $7E
     cp   $04                                      ; $7883: $FE $04
-    jp   z, ClearEntityStatusAndReturn            ; $7885: $CA $31 $7C
+    jp   z, ClearEntityStatus_15            ; $7885: $CA $31 $7C
 
     ld   a, $09                                   ; $7888: $3E $09
     ldh  [hJingle], a                             ; $788A: $E0 $F2
@@ -7730,8 +7730,7 @@ jr_015_7C2F:
     ld   e, a                                     ; $7C2F: $5F
     ret                                           ; $7C30: $C9
 
-ClearEntityStatus::
-ClearEntityStatusAndReturn::
+ClearEntityStatus_15::
     ld   hl, wEntitiesStatusTable                 ; $7C31: $21 $80 $C2
     add  hl, bc                                   ; $7C34: $09
     ld   [hl], b                                  ; $7C35: $70
@@ -7839,7 +7838,7 @@ jr_015_7CC6:
     ld   [hl], $08                                ; $7CD0: $36 $08
 
 jr_015_7CD2:
-    call ClearEntityStatus                        ; $7CD2: $CD $31 $7C
+    call ClearEntityStatus_15                        ; $7CD2: $CD $31 $7C
     ld   hl, hNoiseSfx                            ; $7CD5: $21 $F4 $FF
     ld   [hl], $1A                                ; $7CD8: $36 $1A
     ret                                           ; $7CDA: $C9
@@ -8083,7 +8082,7 @@ func_015_7E31::
     ld   [hl+], a                                 ; $7E4B: $22
     ld   a, $7C                                   ; $7E4C: $3E $7C
     ld   [hl], a                                  ; $7E4E: $77
-    call ClearEntityStatus                        ; $7E4F: $CD $31 $7C
+    call ClearEntityStatus_15                        ; $7E4F: $CD $31 $7C
     jp   label_C9E                                ; $7E52: $C3 $9E $0C
 
     ld   e, b                                     ; $7E55: $58
@@ -8299,7 +8298,7 @@ Data_015_7F86::
 AnimalD1EntityHandler::
     ld   a, [$DB74]                               ; $7F96: $FA $74 $DB
     and  a                                        ; $7F99: $A7
-    jp   z, ClearEntityStatusAndReturn            ; $7F9A: $CA $31 $7C
+    jp   z, ClearEntityStatus_15            ; $7F9A: $CA $31 $7C
 
     ld   de, Data_015_7F86                        ; $7F9D: $11 $86 $7F
     call RenderAnimatedActiveEntity               ; $7FA0: $CD $C0 $3B

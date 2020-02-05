@@ -25,7 +25,7 @@ jr_006_63B5:
     jr   z, jr_006_63CE                           ; $63BE: $28 $0E
 
     dec  a                                        ; $63C0: $3D
-    jp   z, func_006_65DB                         ; $63C1: $CA $DB $65
+    jp   z, ClearEntityStatus_06                  ; $63C1: $CA $DB $65
 
     rra                                           ; $63C4: $1F
     rra                                           ; $63C5: $1F

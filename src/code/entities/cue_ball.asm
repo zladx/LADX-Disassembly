@@ -359,7 +359,7 @@ label_006_4E88:
     call RenderAnimatedActiveEntity               ; $4E8B: $CD $C0 $3B
     call func_006_64C6                            ; $4E8E: $CD $C6 $64
     call GetEntityTransitionCountdown             ; $4E91: $CD $05 $0C
-    jp   z, func_006_65DB                         ; $4E94: $CA $DB $65
+    jp   z, ClearEntityStatus_06                  ; $4E94: $CA $DB $65
 
     cp   $06                                      ; $4E97: $FE $06
     ret  nz                                       ; $4E99: $C0

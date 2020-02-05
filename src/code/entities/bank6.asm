@@ -383,7 +383,8 @@ jr_006_65D9:
     ld   e, a                                     ; $65D9: $5F
     ret                                           ; $65DA: $C9
 
-func_006_65DB::
+; Reset the entity status to 0
+ClearEntityStatus_06::
     ld   hl, wEntitiesStatusTable                 ; $65DB: $21 $80 $C2
     add  hl, bc                                   ; $65DE: $09
     ld   [hl], b                                  ; $65DF: $70
@@ -410,7 +411,7 @@ WizrobeProjectileEntityHandler::
     and  a                                        ; $6610: $A7
     ret  z                                        ; $6611: $C8
 
-    jp   func_006_65DB                            ; $6612: $C3 $DB $65
+    jp   ClearEntityStatus_06                     ; $6612: $C3 $DB $65
 
 Data_006_6615::
     db   $5C, $00, $5C, $20, $5C, $14, $5C, $34
@@ -712,7 +713,7 @@ OwlEventEntityHandler::
 
     ld   a, [wHasInstrument5]                     ; $6805: $FA $69 $DB
     and  $02                                      ; $6808: $E6 $02
-    jp   nz, func_006_65DB                        ; $680A: $C2 $DB $65
+    jp   nz, ClearEntityStatus_06                 ; $680A: $C2 $DB $65
 
 jr_006_680D:
     ldh  a, [hMapRoom]                            ; $680D: $F0 $F6
@@ -721,7 +722,7 @@ jr_006_680D:
 
     ldh  a, [hRoomStatus]                         ; $6813: $F0 $F8
     and  $10                                      ; $6815: $E6 $10
-    jp   z, func_006_65DB                         ; $6817: $CA $DB $65
+    jp   z, ClearEntityStatus_06                  ; $6817: $CA $DB $65
 
 jr_006_681A:
     ldh  a, [hMapRoom]                            ; $681A: $F0 $F6
@@ -754,11 +755,11 @@ jr_006_6835:
 
     ld   a, [wHasInstrument2]                     ; $683F: $FA $66 $DB
     and  a                                        ; $6842: $A7
-    jp   nz, func_006_65DB                        ; $6843: $C2 $DB $65
+    jp   nz, ClearEntityStatus_06                 ; $6843: $C2 $DB $65
 
     ld   a, [wIsBowWowFollowingLink]              ; $6846: $FA $56 $DB
     cp   $01                                      ; $6849: $FE $01
-    jp   nz, func_006_65DB                        ; $684B: $C2 $DB $65
+    jp   nz, ClearEntityStatus_06                 ; $684B: $C2 $DB $65
 
 jr_006_684E:
     ld   a, [wHasInstrument1]                     ; $684E: $FA $65 $DB
@@ -771,7 +772,7 @@ jr_006_6853:
 
     ld   a, [wHasInstrument8]                     ; $6859: $FA $6C $DB
     and  $02                                      ; $685C: $E6 $02
-    jp   nz, func_006_65DB                        ; $685E: $C2 $DB $65
+    jp   nz, ClearEntityStatus_06                 ; $685E: $C2 $DB $65
 
     ld   a, [$D808]                               ; $6861: $FA $08 $D8
     and  $10                                      ; $6864: $E6 $10
@@ -824,7 +825,7 @@ jr_006_689B:
     and  $02                                      ; $689B: $E6 $02
 
 jr_006_689D:
-    jp   z, func_006_65DB                         ; $689D: $CA $DB $65
+    jp   z, ClearEntityStatus_06                  ; $689D: $CA $DB $65
 
 jr_006_68A0:
     ldh  a, [hMapRoom]                            ; $68A0: $F0 $F6
@@ -888,7 +889,7 @@ OwlState0Handler::
 jr_006_68EF:
     ld   a, [wSwordLevel]                         ; $68EF: $FA $4E $DB
     and  a                                        ; $68F2: $A7
-    jp   z, func_006_65DB                         ; $68F3: $CA $DB $65
+    jp   z, ClearEntityStatus_06                  ; $68F3: $CA $DB $65
 
 jr_006_68F6:
     ldh  a, [hMusicTrack]                         ; $68F6: $F0 $B0
@@ -1858,7 +1859,7 @@ RollingBonesBarEntityHandler::
 jr_006_6EED:
     ldh  a, [hRoomStatus]                         ; $6EED: $F0 $F8
     and  $20                                      ; $6EEF: $E6 $20
-    jp   nz, func_006_65DB                        ; $6EF1: $C2 $DB $65
+    jp   nz, ClearEntityStatus_06                 ; $6EF1: $C2 $DB $65
 
     ld   a, c                                     ; $6EF4: $79
     ld   [$D201], a                               ; $6EF5: $EA $01 $D2
@@ -1892,7 +1893,7 @@ jr_006_6F03:
     cp   $06                                      ; $6F20: $FE $06
     jr   nz, jr_006_6F3C                          ; $6F22: $20 $18
 
-    call func_006_65DB                            ; $6F24: $CD $DB $65
+    call ClearEntityStatus_06                     ; $6F24: $CD $DB $65
     ld   hl, wEntitiesLoadOrderTable              ; $6F27: $21 $60 $C4
     add  hl, bc                                   ; $6F2A: $09
     ld   e, [hl]                                  ; $6F2B: $5E
@@ -2137,7 +2138,7 @@ jr_006_705F:
     ld   [hl], $08                                ; $7069: $36 $08
 
 jr_006_706B:
-    call func_006_65DB                            ; $706B: $CD $DB $65
+    call ClearEntityStatus_06                     ; $706B: $CD $DB $65
     jp   PlayBombExplosionSfx                     ; $706E: $C3 $4B $0C
 
 Data_006_7071::
@@ -2183,7 +2184,7 @@ jr_006_70B8:
     add  hl, de                                   ; $70C9: $19
     ld   a, [hl]                                  ; $70CA: $7E
     and  a                                        ; $70CB: $A7
-    jp   z, func_006_65DB                         ; $70CC: $CA $DB $65
+    jp   z, ClearEntityStatus_06                  ; $70CC: $CA $DB $65
 
     ld   a, [$D202]                               ; $70CF: $FA $02 $D2
     ldh  [hActiveEntitySpriteVariant], a          ; $70D2: $E0 $F1
@@ -2370,7 +2371,7 @@ jr_006_71F0:
 
 BigFairyDisappearingHandler::
     call GetEntityTransitionCountdown             ; $71F1: $CD $05 $0C
-    jp   z, func_006_65DB                         ; $71F4: $CA $DB $65
+    jp   z, ClearEntityStatus_06                  ; $71F4: $CA $DB $65
 
     ldh  a, [hFrameCounter]                       ; $71F7: $F0 $E7
     and  $02                                      ; $71F9: $E6 $02
@@ -3769,7 +3770,7 @@ jr_006_7B85:
     ret  nc                                       ; $7B88: $D0
 
     call DidKillEnemy.label_3F5E                  ; $7B89: $CD $5E $3F
-    call func_006_65DB                            ; $7B8C: $CD $DB $65
+    call ClearEntityStatus_06                     ; $7B8C: $CD $DB $65
     ld   a, $01                                   ; $7B8F: $3E $01
     ldh  [hWaveSfx], a                            ; $7B91: $E0 $F3
     ldh  a, [hActiveEntitySpriteVariant]          ; $7B93: $F0 $F1

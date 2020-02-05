@@ -18,7 +18,7 @@ CrowEntityHandler::
 jr_006_5CAB:
     ldh  a, [hRoomStatus]                         ; $5CAB: $F0 $F8
     and  $10                                      ; $5CAD: $E6 $10
-    jp   nz, func_006_65DB                        ; $5CAF: $C2 $DB $65
+    jp   nz, ClearEntityStatus_06                 ; $5CAF: $C2 $DB $65
 
     ld   hl, wEntitiesLoadOrderTable              ; $5CB2: $21 $60 $C4
     add  hl, bc                                   ; $5CB5: $09
@@ -322,10 +322,10 @@ jr_006_5E51:
 func_006_5E54::
     ldh  a, [$FFEC]                               ; $5E54: $F0 $EC
     cp   $88                                      ; $5E56: $FE $88
-    jp   nc, func_006_65DB                        ; $5E58: $D2 $DB $65
+    jp   nc, ClearEntityStatus_06                        ; $5E58: $D2 $DB $65
 
     ldh  a, [hActiveEntityPosX]                   ; $5E5B: $F0 $EE
     cp   $A8                                      ; $5E5D: $FE $A8
-    jp   nc, func_006_65DB                        ; $5E5F: $D2 $DB $65
+    jp   nc, ClearEntityStatus_06                        ; $5E5F: $D2 $DB $65
 
     ret                                           ; $5E62: $C9

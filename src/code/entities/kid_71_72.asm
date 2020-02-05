@@ -27,7 +27,7 @@ Kid72EntityHandler::
     add  hl, bc                                   ; $6099: $09
     dec  [hl]                                     ; $609A: $35
     call GetEntityTransitionCountdown             ; $609B: $CD $05 $0C
-    jp   z, func_006_65DB                         ; $609E: $CA $DB $65
+    jp   z, ClearEntityStatus_06                  ; $609E: $CA $DB $65
 
     ret                                           ; $60A1: $C9
 

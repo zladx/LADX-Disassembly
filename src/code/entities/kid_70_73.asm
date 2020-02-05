@@ -6,7 +6,7 @@ Kid73EntityHandler::
 
     ld   a, [wTradeSequenceItem]                  ; $6214: $FA $0E $DB
     cp   $07                                      ; $6217: $FE $07
-    jp   c, func_006_65DB                         ; $6219: $DA $DB $65
+    jp   c, ClearEntityStatus_06                         ; $6219: $DA $DB $65
 
 jr_006_621C:
     ld   de, Data_006_604D                        ; $621C: $11 $4D $60

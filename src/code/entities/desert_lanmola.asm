@@ -100,7 +100,7 @@ func_006_564B::
     ld   hl, wEntitiesUnknowTableF                ; $5679: $21 $F0 $C2
     add  hl, de                                   ; $567C: $19
     ld   [hl], $10                                ; $567D: $36 $10
-    call func_006_65DB                            ; $567F: $CD $DB $65
+    call ClearEntityStatus_06                     ; $567F: $CD $DB $65
     ldh  a, [hActiveEntityPosX]                   ; $5682: $F0 $EE
     ldh  [hScratch0], a                           ; $5684: $E0 $D7
     ldh  a, [$FFEC]                               ; $5686: $F0 $EC
@@ -635,4 +635,4 @@ jr_006_59A2:
     cp   $10                                      ; $59A2: $FE $10
     ret  nz                                       ; $59A4: $C0
 
-    jp   func_006_65DB                            ; $59A5: $C3 $DB $65
+    jp   ClearEntityStatus_06                     ; $59A5: $C3 $DB $65

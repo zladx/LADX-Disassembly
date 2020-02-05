@@ -7431,11 +7431,18 @@ GetVectorTowardsLink_trampoline::
 ;
 ; This is not called for unanimated entities (like butterflies,
 ; which are animated only by the actual tile changing.)
+;
+; Animation is done using a display list, containing sprites attributes.
+; The display list must be `sprite attributes * number of sprites * number of variants`
+; long.
+;
+; Inputs:
+;   de   address of the display list
+;
 RenderAnimatedActiveEntity::
-    ; Increment hActiveEntitySpriteVariant
+    ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
     inc  a
-    ; If hActiveEntitySpriteVariant = 0, return
     ret  z
 
     call SkipDisabledEntityDuringRoomTransition
@@ -7488,13 +7495,13 @@ RenderAnimatedActiveEntity::
     ld   [de], a
     and  $0F
     cp   $0F
-    jr   nz, label_3C08
+    jr   nz, .jr_3C08
     dec  de
     ld   a, $F0
     ld   [de], a
     inc  de
+.jr_3C08
 
-label_3C08::
     inc  de
     ld   a, [hli]
     push hl
@@ -7503,16 +7510,16 @@ label_3C08::
     ld   [de], a
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_3C21
+    jr   z, .jr_3C21
     ldh  a, [$FFED]
     and  $10
-    jr   z, label_3C21
+    jr   z, .jr_3C21
     ld   a, [de]
     and  $F8
     or   $04
     ld   [de], a
+.jr_3C21
 
-label_3C21::
     inc  de
     ldh  a, [$FFEC]
     ld   [de], a
@@ -7537,13 +7544,13 @@ label_3C21::
     ld   [de], a
     and  $0F
     cp   $0F
-    jr   nz, label_3C4B
+    jr   nz, .jr_3C4B
     dec  de
     ld   a, $F0
     ld   [de], a
     inc  de
+.jr_3C4B
 
-label_3C4B::
     inc  de
     ld   a, [hl]
     ld   hl, $FFED
@@ -7551,22 +7558,20 @@ label_3C4B::
     ld   [de], a
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_3C63
+    jr   z, .jr_3C63
     ldh  a, [$FFED]
     and  $10
-    jr   z, label_3C63
+    jr   z, .jr_3C63
     ld   a, [de]
     and  $F8
     or   $04
     ld   [de], a
+.jr_3C63
 
-label_3C63::
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   b, $00
-    ld   a, BANK(func_015_795D)
-    ld   [MBC3SelectBank], a
-    call func_015_795D
+    callsb func_015_795D
 
 label_3C71::
     call func_015_7995
@@ -7664,7 +7669,7 @@ RenderSimpleEntityWithSpriteVariantToOAM::
 
 .functionEnd
     inc  de
-    jr   label_3C63
+    jr   RenderAnimatedActiveEntity.jr_3C63
 
 label_3CD9::
     ld   a, $15

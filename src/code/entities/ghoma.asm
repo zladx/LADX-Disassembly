@@ -41,7 +41,7 @@ jr_005_7BF6:
     ld   hl, Data_005_7B55                        ; $7C04: $21 $55 $7B
     add  hl, de                                   ; $7C07: $19
     ld   c, $06                                   ; $7C08: $0E $06
-    call func_3CE6                               ; $7C0A: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7C0A: $CD $E6 $3C
     ld   a, $06                                   ; $7C0D: $3E $06
     call label_3DA0                               ; $7C0F: $CD $A0 $3D
     ldh  a, [hActiveEntityStatus]                 ; $7C12: $F0 $EA

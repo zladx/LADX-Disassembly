@@ -39,7 +39,7 @@ RacoonEntityHandler::
 
 jr_005_4986:
     ld   c, $04                                   ; $4986: $0E $04
-    call func_3CE6                               ; $4988: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4988: $CD $E6 $3C
     ld   hl, wEntitiesUnknowTableY                ; $498B: $21 $D0 $C3
     add  hl, bc                                   ; $498E: $09
     ld   a, [hl]                                  ; $498F: $7E
@@ -91,7 +91,7 @@ jr_005_49CC:
 
 jr_005_49D1:
     ld   de, Data_005_4912                        ; $49D1: $11 $12 $49
-    call RenderAnimatedActiveEntity               ; $49D4: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $49D4: $CD $C0 $3B
     call func_005_7A3A                            ; $49D7: $CD $3A $7A
     ldh  a, [hActiveEntityState]                  ; $49DA: $F0 $F0
     JP_TABLE                                      ; $49DC
@@ -442,7 +442,7 @@ label_005_4BC1:
     jr   z, jr_005_4BF1                           ; $4BC7: $28 $28
 
     ld   de, Data_005_4BBF                        ; $4BC9: $11 $BF $4B
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $4BCC: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $4BCC: $CD $77 $3C
     call func_005_7A3A                            ; $4BCF: $CD $3A $7A
     call func_005_7AB1                            ; $4BD2: $CD $B1 $7A
     call GetEntityTransitionCountdown             ; $4BD5: $CD $05 $0C
@@ -515,7 +515,7 @@ jr_005_4C24:
     jr   z, jr_005_4C3E                           ; $4C36: $28 $06
 
     ld   de, Data_005_4946                        ; $4C38: $11 $46 $49
-    call RenderAnimatedActiveEntity               ; $4C3B: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4C3B: $CD $C0 $3B
 
 jr_005_4C3E:
     ld   de, Data_005_4942                        ; $4C3E: $11 $42 $49
@@ -536,7 +536,7 @@ jr_005_4C54:
     ld   de, Data_005_4932                        ; $4C54: $11 $32 $49
 
 jr_005_4C57:
-    call RenderAnimatedActiveEntity               ; $4C57: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4C57: $CD $C0 $3B
     call func_005_7A3A                            ; $4C5A: $CD $3A $7A
     call func_005_54C3                            ; $4C5D: $CD $C3 $54
 
@@ -640,7 +640,7 @@ jr_005_4CE6:
     xor  a                                        ; $4CF0: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4CF1: $E0 $F1
     ld   de, data_005_4cc6                        ; $4CF3: $11 $C6 $4C
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $4CF6: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $4CF6: $CD $77 $3C
     call CopyEntityPositionToActivePosition       ; $4CF9: $CD $8A $3D
     ld   a, $6C                                   ; $4CFC: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4CFE: $E0 $9D
@@ -817,7 +817,7 @@ jr_005_4DF3:
     ldh  [$FFEC], a                               ; $4DF7: $E0 $EC
     xor  a                                        ; $4DF9: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4DFA: $E0 $F1
-    call RenderAnimatedActiveEntity               ; $4DFC: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4DFC: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4DFF: $CD $8A $3D
     ld   hl, wEntitiesSpriteVariantTable          ; $4E02: $21 $B0 $C3
     add  hl, bc                                   ; $4E05: $09

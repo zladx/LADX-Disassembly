@@ -519,7 +519,7 @@ jr_006_783F:
     ld   hl, Data_006_773C                        ; $7860: $21 $3C $77
     add  hl, de                                   ; $7863: $19
     ld   c, $10                                   ; $7864: $0E $10
-    call func_3CE6                                ; $7866: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7866: $CD $E6 $3C
     ld   a, $10                                   ; $7869: $3E $10
     jp   label_3DA0                               ; $786B: $C3 $A0 $3D
 

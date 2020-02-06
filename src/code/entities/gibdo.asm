@@ -16,7 +16,7 @@ GibdoEntityHandler::
     ld   de, Data_006_7E77                        ; $7E8E: $11 $77 $7E
 
 jr_006_7E91:
-    call RenderAnimatedActiveEntity               ; $7E91: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $7E91: $CD $C0 $3B
     call func_006_64C6                            ; $7E94: $CD $C6 $64
     call func_C56                                 ; $7E97: $CD $56 $0C
     call label_3B39                               ; $7E9A: $CD $39 $3B

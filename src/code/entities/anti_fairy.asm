@@ -1,9 +1,17 @@
-Data_006_786E::
-    db   $5A, $00, $5A, $20, $5A, $14, $5A, $34
+; Array indexed by hActiveEntitySpriteVariant
+;  byte 0: tile n°
+;  byte 1: OAM attribute (palette index and flags)
+AntiFairyOAMAttributes::
+.variant1
+    db   $5A, %000
+    db   $5A, %000 | OAMF_XFLIP
+.variant2
+    db   $5A, %100 | OAMF_PAL1
+    db   $5A, %100 | OAMF_PAL1 | OAMF_XFLIP
 
 AntiFairyEntityHandler::
-    ld   de, Data_006_786E                        ; $7876: $11 $6E $78
-    call RenderAnimatedActiveEntity               ; $7879: $CD $C0 $3B
+    ld   de, AntiFairyOAMAttributes               ; $7876: $11 $6E $78
+    call RenderActiveEntitySpritesBlock           ; $7879: $CD $C0 $3B
     call func_006_64C6                            ; $787C: $CD $C6 $64
 
 jr_006_787F:

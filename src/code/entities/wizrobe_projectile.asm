@@ -8,7 +8,7 @@ WizrobeProjectileEntityHandler::
     and  $10                                      ; $65F5: $E6 $10
     ldh  [$FFED], a                               ; $65F7: $E0 $ED
     ld   de, Data_006_65E1                        ; $65F9: $11 $E1 $65
-    call RenderAnimatedActiveEntity               ; $65FC: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $65FC: $CD $C0 $3B
     call func_006_64C6                            ; $65FF: $CD $C6 $64
     call CheckLinkCollisionWithProjectile_trampoline; $6602: $CD $4F $3B
     call func_006_6541                            ; $6605: $CD $41 $65

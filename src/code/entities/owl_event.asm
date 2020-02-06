@@ -410,12 +410,12 @@ func_006_6A4F::
 
 func_006_6A55::
     ld   de, Data_006_6A37                        ; $6A55: $11 $37 $6A
-    jp   RenderAnimatedActiveEntity               ; $6A58: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesBlock               ; $6A58: $C3 $C0 $3B
 
 jr_006_6A5B:
     ld   hl, Data_006_6A3F                        ; $6A5B: $21 $3F $6A
     ld   c, $04                                   ; $6A5E: $0E $04
-    call func_3CE6                                ; $6A60: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6A60: $CD $E6 $3C
     ld   a, $04                                   ; $6A63: $3E $04
     call label_3DA0                               ; $6A65: $CD $A0 $3D
     ldh  a, [hMapRoom]                            ; $6A68: $F0 $F6

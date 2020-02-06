@@ -351,7 +351,7 @@ func_006_4771::
     ld   hl, Data_006_4727                        ; $4771: $21 $27 $47
     add  hl, de                                   ; $4774: $19
     ld   c, $04                                   ; $4775: $0E $04
-    call func_3CE6                                ; $4777: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4777: $CD $E6 $3C
     jp   label_3CD9                               ; $477A: $C3 $D9 $3C
 
 Data_006_477D::
@@ -365,7 +365,7 @@ label_006_4781:
     add  hl, bc                                   ; $478A: $09
     ld   [hl], $FF                                ; $478B: $36 $FF
     ld   de, Data_006_477D                        ; $478D: $11 $7D $47
-    call RenderAnimatedActiveEntity               ; $4790: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4790: $CD $C0 $3B
     call func_006_64C6                            ; $4793: $CD $C6 $64
     call func_C56                                 ; $4796: $CD $56 $0C
     call label_3B70                               ; $4799: $CD $70 $3B

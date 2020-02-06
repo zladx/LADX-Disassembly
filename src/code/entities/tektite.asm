@@ -9,7 +9,7 @@ Data_006_78C3::
 
 TektiteEntityHandler::
     ld   de, Data_006_78B7                        ; $78C7: $11 $B7 $78
-    call RenderAnimatedActiveEntity               ; $78CA: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $78CA: $CD $C0 $3B
 
 jr_006_78CD:
     call func_006_64C6                            ; $78CD: $CD $C6 $64

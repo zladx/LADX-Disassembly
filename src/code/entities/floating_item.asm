@@ -64,12 +64,12 @@ jr_006_7B3D:
     jr   nz, jr_006_7B5B                          ; $7B51: $20 $08
 
     ld   de, Data_006_7AD1 + 2                    ; $7B53: $11 $D3 $7A
-    call RenderAnimatedActiveEntity               ; $7B56: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $7B56: $CD $C0 $3B
     jr   jr_006_7B61                              ; $7B59: $18 $06
 
 jr_006_7B5B:
     ld   de, Data_006_7ADD                        ; $7B5B: $11 $DD $7A
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $7B5E: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $7B5E: $CD $77 $3C
 
 jr_006_7B61:
     ldh  a, [hFrameCounter]                       ; $7B61: $F0 $E7
@@ -79,7 +79,7 @@ jr_006_7B61:
     ld   hl, Data_006_7AEB                        ; $7B67: $21 $EB $7A
     add  hl, de                                   ; $7B6A: $19
     ld   c, $02                                   ; $7B6B: $0E $02
-    call func_3CE6                                ; $7B6D: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7B6D: $CD $E6 $3C
     ld   a, $01                                   ; $7B70: $3E $01
     call label_3DA0                               ; $7B72: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $7B75: $CD $8A $3D

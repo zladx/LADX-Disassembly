@@ -56,6 +56,6 @@ func_006_5C71::
     ld   hl, Data_006_5C51                        ; $5C7B: $21 $51 $5C
     add  hl, de                                   ; $5C7E: $19
     ld   c, $04                                   ; $5C7F: $0E $04
-    call func_3CE6                                ; $5C81: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $5C81: $CD $E6 $3C
     ld   a, $04                                   ; $5C84: $3E $04
     jp   label_3DA0                               ; $5C86: $C3 $A0 $3D

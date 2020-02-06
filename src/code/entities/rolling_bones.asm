@@ -329,7 +329,7 @@ func_006_6E7E::
     ld   hl, Data_006_6E1E                        ; $6E8D: $21 $1E $6E
     add  hl, de                                   ; $6E90: $19
     ld   c, $04                                   ; $6E91: $0E $04
-    call func_3CE6                                ; $6E93: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6E93: $CD $E6 $3C
     ld   a, $04                                   ; $6E96: $3E $04
     call label_3DA0                               ; $6E98: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                   ; $6E9B: $21 $10 $C3

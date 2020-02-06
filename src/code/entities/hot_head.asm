@@ -600,7 +600,7 @@ func_005_6705::
     ld   hl, Data_005_6665                        ; $6720: $21 $65 $66
     add  hl, de                                   ; $6723: $19
     ld   c, $08                                   ; $6724: $0E $08
-    call func_3CE6                               ; $6726: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6726: $CD $E6 $3C
     nop                                           ; $6729: $00
 
 label_005_672A:
@@ -627,7 +627,7 @@ label_005_672A:
     ldh  [hActiveEntitySpriteVariant], a          ; $6747: $E0 $F1
     ld   hl, Data_005_66F5                        ; $6749: $21 $F5 $66
     ld   c, $04                                   ; $674C: $0E $04
-    call func_3CE6                               ; $674E: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $674E: $CD $E6 $3C
     jp   CopyEntityPositionToActivePosition       ; $6751: $C3 $8A $3D
 
 label_005_6754:
@@ -650,7 +650,7 @@ label_005_6754:
     ld   hl, Data_005_66A5                        ; $676A: $21 $A5 $66
     add  hl, de                                   ; $676D: $19
     ld   c, $04                                   ; $676E: $0E $04
-    call func_3CE6                               ; $6770: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6770: $CD $E6 $3C
     jp   label_005_672A                           ; $6773: $C3 $2A $67
 
 label_005_6776:
@@ -672,7 +672,7 @@ Data_005_6788::
 
 label_005_6798:
     ld   de, Data_005_6788                        ; $6798: $11 $88 $67
-    call RenderAnimatedActiveEntity               ; $679B: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $679B: $CD $C0 $3B
     call func_005_7A3A                            ; $679E: $CD $3A $7A
     call label_3B44                               ; $67A1: $CD $44 $3B
     ldh  a, [hActiveEntityState]                  ; $67A4: $F0 $F0
@@ -722,7 +722,7 @@ Data_005_67E2::
 
 label_005_67EA:
     ld   de, Data_005_67E2                        ; $67EA: $11 $E2 $67
-    call RenderAnimatedActiveEntity               ; $67ED: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $67ED: $CD $C0 $3B
     call func_005_7A3A                            ; $67F0: $CD $3A $7A
     call func_005_7AB1                            ; $67F3: $CD $B1 $7A
     call func_005_7AEA                            ; $67F6: $CD $EA $7A

@@ -46,7 +46,7 @@ jr_006_70B8:
     ld   a, [$D202]                               ; $70CF: $FA $02 $D2
     ldh  [hActiveEntitySpriteVariant], a          ; $70D2: $E0 $F1
     ld   de, Data_006_70A1                        ; $70D4: $11 $A1 $70
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $70D7: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $70D7: $CD $77 $3C
     ldh  a, [hFrameCounter]                       ; $70DA: $F0 $E7
     and  $01                                      ; $70DC: $E6 $01
     jr   nz, jr_006_7120                          ; $70DE: $20 $40
@@ -109,7 +109,7 @@ label_006_7123:
 
 jr_006_712F:
     ld   c, $06                                   ; $712F: $0E $06
-    call func_3CE6                                ; $7131: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7131: $CD $E6 $3C
     ld   a, $06                                   ; $7134: $3E $06
     call label_3DA0                               ; $7136: $CD $A0 $3D
     call label_3CD9                               ; $7139: $CD $D9 $3C

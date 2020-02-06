@@ -60,7 +60,7 @@ CrazyTracyEntityHandler::
     ld   [wIsUsingSpinAttack], a                  ; $5ED2: $EA $21 $C1
 
     ld   de, MedecineSpriteAttributes             ; $5ED5: $11 $93 $5E
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $5ED8: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $5ED8: $CD $77 $3C
     call CopyEntityPositionToActivePosition       ; $5EDB: $CD $8A $3D
 .gotMedecineEnd
 
@@ -96,7 +96,7 @@ CrazyTracyEntityHandler::
     sub  $04                                      ; $5EFF: $D6 $04
     ldh  [$FFEC], a                               ; $5F01: $E0 $EC
     ld   c, $04                                   ; $5F03: $0E $04
-    call func_3CE6                                ; $5F05: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $5F05: $CD $E6 $3C
     ld   a, $04                                   ; $5F08: $3E $04
     call label_3DA0                               ; $5F0A: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $5F0D: $CD $8A $3D

@@ -75,7 +75,7 @@ jr_007_4053:
     ld   de, Data_007_401A                        ; $406C: $11 $1A $40
 
 jr_007_406F:
-    call RenderAnimatedActiveEntity               ; $406F: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $406F: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4072: $CD $8A $3D
     ld   hl, wEntitiesPrivateState2Table          ; $4075: $21 $C0 $C2
     add  hl, bc                                   ; $4078: $09
@@ -88,7 +88,7 @@ jr_007_406F:
     ld   a, [hl]                                  ; $4081: $7E
     ldh  [hActiveEntitySpriteVariant], a          ; $4082: $E0 $F1
     ld   de, Data_007_400A                        ; $4084: $11 $0A $40
-    call RenderAnimatedActiveEntity               ; $4087: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4087: $CD $C0 $3B
 
 jr_007_408A:
     call func_007_7D96                            ; $408A: $CD $96 $7D
@@ -312,7 +312,7 @@ Data_007_41E8::
 
 label_007_41F0:
     ld   de, Data_007_400A                        ; $41F0: $11 $0A $40
-    call RenderAnimatedActiveEntity               ; $41F3: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $41F3: $CD $C0 $3B
     call func_007_7D96                            ; $41F6: $CD $96 $7D
     call func_007_7DC3                            ; $41F9: $CD $C3 $7D
     ldh  a, [hFrameCounter]                       ; $41FC: $F0 $E7
@@ -865,7 +865,7 @@ func_007_4594::
     ld   hl, Data_007_4234                        ; $459E: $21 $34 $42
     add  hl, de                                   ; $45A1: $19
     ld   c, $04                                   ; $45A2: $0E $04
-    jp   func_3CE6                               ; $45A4: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $45A4: $C3 $E6 $3C
 
 Data_007_45A7::
     db   $FE, $FE, $FE, $FE, $FF, $FF, $FF, $FF   ; $45A7
@@ -968,7 +968,7 @@ Data_007_4667::
 func_007_467B::
     ld   hl, Data_007_4667                        ; $467B: $21 $67 $46
     ld   c, $05                                   ; $467E: $0E $05
-    jp   func_3CE6                               ; $4680: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $4680: $C3 $E6 $3C
 
 Data_007_4683::
     db   $72, $21, $70, $21, $70, $01, $72, $01, $76, $01, $78, $01, $78, $21, $76, $21
@@ -1035,12 +1035,12 @@ jr_007_46E6:
     ld   hl, Data_007_469B                        ; $46F7: $21 $9B $46
     add  hl, de                                   ; $46FA: $19
     ld   c, $03                                   ; $46FB: $0E $03
-    call func_3CE6                               ; $46FD: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $46FD: $CD $E6 $3C
     jr   jr_007_470B                              ; $4700: $18 $09
 
 jr_007_4702:
     ld   de, Data_007_4683                        ; $4702: $11 $83 $46
-    call RenderAnimatedActiveEntity               ; $4705: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4705: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4708: $CD $8A $3D
 
 jr_007_470B:
@@ -1058,7 +1058,7 @@ jr_007_4715:
     xor  a                                        ; $471B: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $471C: $E0 $F1
     ld   de, Data_007_4693                        ; $471E: $11 $93 $46
-    call RenderAnimatedActiveEntity               ; $4721: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4721: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4724: $CD $8A $3D
 
 jr_007_4727:
@@ -1480,7 +1480,7 @@ func_007_49DC::
     ld   hl, Data_007_499C                        ; $49E6: $21 $9C $49
     add  hl, de                                   ; $49E9: $19
     ld   c, $04                                   ; $49EA: $0E $04
-    jp   func_3CE6                               ; $49EC: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $49EC: $C3 $E6 $3C
 
 Data_007_49EF::
     db   $6E, $20, $6C, $20, $6C, $00, $6E, $00
@@ -1519,7 +1519,7 @@ jr_007_4A30:
     ld   de, Data_007_49EF                        ; $4A40: $11 $EF $49
 
 jr_007_4A43:
-    call RenderAnimatedActiveEntity               ; $4A43: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4A43: $CD $C0 $3B
     ldh  a, [hFrameCounter]                       ; $4A46: $F0 $E7
     rra                                           ; $4A48: $1F
     rra                                           ; $4A49: $1F
@@ -1555,7 +1555,7 @@ jr_007_4A69:
     ld   de, Data_007_4A07                        ; $4A7B: $11 $07 $4A
 
 jr_007_4A7E:
-    call RenderAnimatedActiveEntity               ; $4A7E: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4A7E: $CD $C0 $3B
     ld   a, [wTradeSequenceItem]                  ; $4A81: $FA $0E $DB
     cp   $08                                      ; $4A84: $FE $08
     jr   nc, jr_007_4AA0                          ; $4A86: $30 $18
@@ -1569,7 +1569,7 @@ jr_007_4A7E:
     xor  a                                        ; $4A94: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4A95: $E0 $F1
     ld   de, Data_007_4A17                        ; $4A97: $11 $17 $4A
-    call RenderAnimatedActiveEntity               ; $4A9A: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4A9A: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4A9D: $CD $8A $3D
 
 jr_007_4AA0:
@@ -1719,11 +1719,11 @@ BearEntityHandler::
     ld   a, $4A                                   ; $4BB8: $3E $4A
     ldh  [$FFEC], a                               ; $4BBA: $E0 $EC
     ld   de, Data_007_4BAD                        ; $4BBC: $11 $AD $4B
-    call RenderAnimatedActiveEntity               ; $4BBF: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4BBF: $CD $C0 $3B
     ld   a, $68                                   ; $4BC2: $3E $68
     ldh  [hActiveEntityPosX], a                   ; $4BC4: $E0 $EE
     ld   de, Data_007_4BB1                        ; $4BC6: $11 $B1 $4B
-    call RenderAnimatedActiveEntity               ; $4BC9: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4BC9: $CD $C0 $3B
     ld   a, [wTradeSequenceItem]                  ; $4BCC: $FA $0E $DB
     cp   $06                                      ; $4BCF: $FE $06
     jr   nz, jr_007_4BE1                          ; $4BD1: $20 $0E
@@ -1733,7 +1733,7 @@ BearEntityHandler::
     ld   a, $38                                   ; $4BD7: $3E $38
     ldh  [$FFEC], a                               ; $4BD9: $E0 $EC
     ld   de, Data_007_4BAB                        ; $4BDB: $11 $AB $4B
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $4BDE: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $4BDE: $CD $77 $3C
 
 jr_007_4BE1:
     call CopyEntityPositionToActivePosition       ; $4BE1: $CD $8A $3D
@@ -1748,7 +1748,7 @@ jr_007_4BE1:
 
 jr_007_4BF2:
     ld   c, $08                                   ; $4BF2: $0E $08
-    call func_3CE6                               ; $4BF4: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4BF4: $CD $E6 $3C
     ld   a, $06                                   ; $4BF7: $3E $06
     call label_3DA0                               ; $4BF9: $CD $A0 $3D
     xor  a                                        ; $4BFC: $AF
@@ -1879,7 +1879,7 @@ HoneycombEntityHandler::
 
 jr_007_4CB6:
     ld   de, Data_007_4C93                        ; $4CB6: $11 $93 $4C
-    call RenderAnimatedActiveEntity               ; $4CB9: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4CB9: $CD $C0 $3B
     call func_007_7D96                            ; $4CBC: $CD $96 $7D
     ldh  a, [hActiveEntityState]                  ; $4CBF: $F0 $F0
     JP_TABLE                                      ; $4CC1
@@ -2017,7 +2017,7 @@ Data_007_4D80::
 
 label_007_4D84:
     ld   de, Data_007_4D80                        ; $4D84: $11 $80 $4D
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $4D87: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $4D87: $CD $77 $3C
     ldh  a, [hFrameCounter]                       ; $4D8A: $F0 $E7
     rra                                           ; $4D8C: $1F
     rra                                           ; $4D8D: $1F
@@ -2205,7 +2205,7 @@ jr_007_4EC5:
     jp   z, func_007_7EA4                         ; $4ECA: $CA $A4 $7E
 
     ld   de, Data_007_4E8D                        ; $4ECD: $11 $8D $4E
-    call RenderAnimatedActiveEntity               ; $4ED0: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4ED0: $CD $C0 $3B
     call func_007_7D96                            ; $4ED3: $CD $96 $7D
     call func_007_7E43                            ; $4ED6: $CD $43 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $4ED9: $21 $20 $C3
@@ -2295,7 +2295,7 @@ func_007_4F56::
     sub  $10                                      ; $4F69: $D6 $10
     ldh  [$FFEC], a                               ; $4F6B: $E0 $EC
     ld   de, Data_007_4F4E                        ; $4F6D: $11 $4E $4F
-    call RenderAnimatedActiveEntity               ; $4F70: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4F70: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4F73: $CD $8A $3D
     ld   a, $08                                   ; $4F76: $3E $08
     jp   SetEntitySpriteVariant                   ; $4F78: $C3 $0C $3B
@@ -2329,7 +2329,7 @@ jr_007_4FA5:
     sub  $0C                                      ; $4FAB: $D6 $0C
     ldh  [hActiveEntityPosX], a                   ; $4FAD: $E0 $EE
     ld   de, Data_007_4F4E                        ; $4FAF: $11 $4E $4F
-    call RenderAnimatedActiveEntity               ; $4FB2: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4FB2: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4FB5: $CD $8A $3D
     call GetEntityTransitionCountdown             ; $4FB8: $CD $05 $0C
     rra                                           ; $4FBB: $1F
@@ -2401,7 +2401,7 @@ jr_007_5012:
 
 jr_007_501B:
     ld   de, Data_007_4F4E                        ; $501B: $11 $4E $4F
-    call RenderAnimatedActiveEntity               ; $501E: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $501E: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $5021: $CD $8A $3D
     call GetEntityTransitionCountdown             ; $5024: $CD $05 $0C
     ld   e, $02                                   ; $5027: $1E $02
@@ -2555,7 +2555,7 @@ Data_007_5104::
 
 HoleFillerEntityHandler::
     ld   de, Data_007_5104                        ; $510C: $11 $04 $51
-    call RenderAnimatedActiveEntity               ; $510F: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $510F: $CD $C0 $3B
     call func_007_7D96                            ; $5112: $CD $96 $7D
     ldh  a, [hFrameCounter]                       ; $5115: $F0 $E7
     rra                                           ; $5117: $1F
@@ -3059,7 +3059,7 @@ Data_007_542B::
 
 func_007_5453::
     ld   de, Data_007_542B                        ; $5453: $11 $2B $54
-    call RenderAnimatedActiveEntity               ; $5456: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5456: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $5459: $F0 $F0
     cp   $03                                      ; $545B: $FE $03
     ret  c                                        ; $545D: $D8
@@ -3216,7 +3216,7 @@ jr_007_556F:
     ld   de, Data_007_54D0                        ; $556F: $11 $D0 $54
 
 jr_007_5572:
-    call RenderAnimatedActiveEntity               ; $5572: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5572: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $5575: $CD $05 $0C
     jr   nz, jr_007_559A                          ; $5578: $20 $20
 
@@ -3346,7 +3346,7 @@ Data_007_562D::
 
 WingedOctorockEntityHandler::
     ld   de, Data_007_562D                        ; $564D: $11 $2D $56
-    call RenderAnimatedActiveEntity               ; $5650: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5650: $CD $C0 $3B
     call func_007_5805                            ; $5653: $CD $05 $58
     call func_007_7D96                            ; $5656: $CD $96 $7D
     ld   hl, wEntitiesUnknowTableT                ; $5659: $21 $10 $C4
@@ -3635,7 +3635,7 @@ func_007_5805::
     ld   hl, Data_007_57F5                        ; $5811: $21 $F5 $57
     add  hl, de                                   ; $5814: $19
     ld   c, $02                                   ; $5815: $0E $02
-    jp   func_3CE6                               ; $5817: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $5817: $C3 $E6 $3C
 
 Data_007_581A::
     db   $78, $02, $72, $02, $7A, $02, $72, $02, $70, $02, $72, $02, $7C, $02, $7E, $02
@@ -3660,7 +3660,7 @@ KikiTheMonkeyEntityHandler::
     ld   de, Data_007_582E                        ; $5854: $11 $2E $58
 
 jr_007_5857:
-    call RenderAnimatedActiveEntity               ; $5857: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5857: $CD $C0 $3B
     ld   hl, wEntitiesUnknowTableV                ; $585A: $21 $80 $C4
     add  hl, bc                                   ; $585D: $09
     ld   a, [hl]                                  ; $585E: $7E
@@ -3673,7 +3673,7 @@ jr_007_5857:
     sub  $0E                                      ; $5867: $D6 $0E
     ldh  [$FFEC], a                               ; $5869: $E0 $EC
     ld   de, Data_007_594D                        ; $586B: $11 $4D $59
-    call RenderAnimatedActiveEntity               ; $586E: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $586E: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $5871: $CD $8A $3D
 
 jr_007_5874:
@@ -4259,7 +4259,7 @@ Data_007_5BF1::
 
 BlooperEntityHandler::
     ld   de, Data_007_5BF1                        ; $5BF9: $11 $F1 $5B
-    call RenderAnimatedActiveEntity               ; $5BFC: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5BFC: $CD $C0 $3B
     call func_007_7D96                            ; $5BFF: $CD $96 $7D
     call func_007_7DC3                            ; $5C02: $CD $C3 $7D
     call label_3B39                               ; $5C05: $CD $39 $3B
@@ -4733,7 +4733,7 @@ Data_007_5F45::
 
 label_007_5F4D:
     ld   de, Data_007_5F45                        ; $5F4D: $11 $45 $5F
-    call RenderAnimatedActiveEntity               ; $5F50: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5F50: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $5F53: $CD $05 $0C
     jp   z, func_007_7EA4                         ; $5F56: $CA $A4 $7E
 
@@ -4796,7 +4796,7 @@ label_007_5FAB:
 
 jr_007_5FB1:
     ld   de, Data_007_5F9B                        ; $5FB1: $11 $9B $5F
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $5FB4: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $5FB4: $CD $77 $3C
     call func_007_7E0A                            ; $5FB7: $CD $0A $7E
     call func_007_7E43                            ; $5FBA: $CD $43 $7E
     ld   hl, wEntitiesSpeedZTable                 ; $5FBD: $21 $20 $C3
@@ -4875,7 +4875,7 @@ jr_007_6019:
 
 jr_007_602A:
     ld   de, Data_007_6003                        ; $602A: $11 $03 $60
-    call RenderAnimatedActiveEntity               ; $602D: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $602D: $CD $C0 $3B
     ld   a, [wRoomTransitionState]                ; $6030: $FA $24 $C1
     and  a                                        ; $6033: $A7
     ret  nz                                       ; $6034: $C0
@@ -5167,7 +5167,7 @@ Data_007_61CE::
 
 SideViewWeightsEntityHandler::
     ld   de, Data_007_61CE                        ; $61D2: $11 $CE $61
-    call RenderAnimatedActiveEntity               ; $61D5: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $61D5: $CD $C0 $3B
     call func_007_7D96                            ; $61D8: $CD $96 $7D
     call func_007_639E                            ; $61DB: $CD $9E $63
     ld   hl, wEntitiesUnknownTableD               ; $61DE: $21 $D0 $C2
@@ -5437,7 +5437,7 @@ SideViewPlatformHorizontalEntityHandler::
 SideViewPlatformVerticalEntityHandler::
     ld   hl, Data_007_6348                        ; $6358: $21 $48 $63
     ld   c, $04                                   ; $635B: $0E $04
-    call func_3CE6                               ; $635D: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $635D: $CD $E6 $3C
     call func_007_7D96                            ; $6360: $CD $96 $7D
     call GetEntityTransitionCountdown             ; $6363: $CD $05 $0C
     ld   e, a                                     ; $6366: $5F
@@ -5578,7 +5578,7 @@ SideViewPlatformEntityHandler::
 jr_007_643B:
     ld   hl, Data_007_6422                        ; $643B: $21 $22 $64
     ld   c, $04                                   ; $643E: $0E $04
-    call func_3CE6                               ; $6440: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6440: $CD $E6 $3C
     call func_007_7D96                            ; $6443: $CD $96 $7D
     call func_007_639E                            ; $6446: $CD $9E $63
     ld   hl, wEntitiesPrivateState2Table          ; $6449: $21 $C0 $C2
@@ -5779,7 +5779,7 @@ GoombaEntityHandler::
     jp   nz, label_007_6523                       ; $65E0: $C2 $23 $65
 
     ld   de, Data_007_65CE                        ; $65E3: $11 $CE $65
-    call RenderAnimatedActiveEntity               ; $65E6: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $65E6: $CD $C0 $3B
     call func_007_7D96                            ; $65E9: $CD $96 $7D
     call func_007_7DC3                            ; $65EC: $CD $C3 $7D
     ldh  a, [hIsSideScrolling]                    ; $65EF: $F0 $F9
@@ -5974,7 +5974,7 @@ Data_007_6701::
 
 PeaHatEntityHandler::
     ld   de, Data_007_6701                        ; $6709: $11 $01 $67
-    call RenderAnimatedActiveEntity               ; $670C: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $670C: $CD $C0 $3B
     call func_007_7D96                            ; $670F: $CD $96 $7D
     call func_007_7DC3                            ; $6712: $CD $C3 $7D
     call label_3B39                               ; $6715: $CD $39 $3B
@@ -6198,7 +6198,7 @@ SnakeEntityHandler::
     add  [hl]                                     ; $6854: $86
     ldh  [hActiveEntitySpriteVariant], a          ; $6855: $E0 $F1
     ld   de, Data_007_683E                        ; $6857: $11 $3E $68
-    call RenderAnimatedActiveEntity               ; $685A: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $685A: $CD $C0 $3B
     call func_007_7D96                            ; $685D: $CD $96 $7D
     call func_007_7DC3                            ; $6860: $CD $C3 $7D
     call label_3B39                               ; $6863: $CD $39 $3B
@@ -7370,7 +7370,7 @@ func_007_6FB1::
     ldh  [$FFEC], a                               ; $6FD4: $E0 $EC
     ld   hl, Data_007_6FA1                        ; $6FD6: $21 $A1 $6F
     ld   c, $04                                   ; $6FD9: $0E $04
-    call func_3CE6                               ; $6FDB: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6FDB: $CD $E6 $3C
     ld   a, $04                                   ; $6FDE: $3E $04
     call label_3DA0                               ; $6FE0: $CD $A0 $3D
 
@@ -7399,7 +7399,7 @@ func_007_6FE6::
     ld   hl, Data_007_6F59                        ; $7004: $21 $59 $6F
     add  hl, de                                   ; $7007: $19
     ld   c, $02                                   ; $7008: $0E $02
-    call func_3CE6                               ; $700A: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $700A: $CD $E6 $3C
     ld   a, $02                                   ; $700D: $3E $02
     jp   label_007_7034                           ; $700F: $C3 $34 $70
 
@@ -7425,7 +7425,7 @@ func_007_7015::
 
 jr_007_702D:
     ld   c, $05                                   ; $702D: $0E $05
-    call func_3CE6                               ; $702F: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $702F: $CD $E6 $3C
     ld   a, $05                                   ; $7032: $3E $05
 
 label_007_7034:
@@ -7452,7 +7452,7 @@ func_007_703A::
     ld   a, $06                                   ; $705F: $3E $06
     ld   [$D5C3], a                               ; $7061: $EA $C3 $D5
     ld   de, Data_007_6F15                        ; $7064: $11 $15 $6F
-    call RenderAnimatedActiveEntity               ; $7067: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $7067: $CD $C0 $3B
     ld   a, $02                                   ; $706A: $3E $02
     jp   label_007_7034                           ; $706C: $C3 $34 $70
 
@@ -7472,7 +7472,7 @@ func_007_706F::
     ld   hl, Data_007_6F19                        ; $7082: $21 $19 $6F
     add  hl, de                                   ; $7085: $19
     ld   c, $04                                   ; $7086: $0E $04
-    call func_3CE6                               ; $7088: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7088: $CD $E6 $3C
     ld   a, $04                                   ; $708B: $3E $04
     jp   label_007_7034                           ; $708D: $C3 $34 $70
 
@@ -7496,7 +7496,7 @@ func_007_7090::
     ld   hl, Data_007_6F39                        ; $70A9: $21 $39 $6F
     add  hl, de                                   ; $70AC: $19
     ld   c, $04                                   ; $70AD: $0E $04
-    call func_3CE6                               ; $70AF: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $70AF: $CD $E6 $3C
     ld   a, $04                                   ; $70B2: $3E $04
     jp   label_007_7034                           ; $70B4: $C3 $34 $70
 
@@ -7770,7 +7770,7 @@ Data_007_7247::
 
 StarEntityHandler::
     ld   de, Data_007_7247                        ; $725B: $11 $47 $72
-    call RenderAnimatedActiveEntity               ; $725E: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $725E: $CD $C0 $3B
     call func_007_7D96                            ; $7261: $CD $96 $7D
     call func_007_7DC3                            ; $7264: $CD $C3 $7D
     call label_3B39                               ; $7267: $CD $39 $3B
@@ -7824,12 +7824,12 @@ HidingGelEntityHandler::
     jr   nz, jr_007_72BD                          ; $72B3: $20 $08
 
     ld   de, Data_007_72AB                        ; $72B5: $11 $AB $72
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $72B8: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $72B8: $CD $77 $3C
     jr   jr_007_72C3                              ; $72BB: $18 $06
 
 jr_007_72BD:
     ld   de, Data_007_729B                        ; $72BD: $11 $9B $72
-    call RenderAnimatedActiveEntity               ; $72C0: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $72C0: $CD $C0 $3B
 
 jr_007_72C3:
     call func_007_7D96                            ; $72C3: $CD $96 $7D
@@ -8162,7 +8162,7 @@ Data_007_752D::
 
 WaterTektiteEntityHandler::
     ld   de, Data_007_752D                        ; $7535: $11 $2D $75
-    call RenderAnimatedActiveEntity               ; $7538: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $7538: $CD $C0 $3B
     call func_007_7D96                            ; $753B: $CD $96 $7D
     call func_007_7DC3                            ; $753E: $CD $C3 $7D
     ldh  a, [hFrameCounter]                       ; $7541: $F0 $E7
@@ -8297,7 +8297,7 @@ HorsePieceEntityHandler::
 
 jr_007_75FE:
     ld   de, Data_007_75DE                        ; $75FE: $11 $DE $75
-    call RenderAnimatedActiveEntity               ; $7601: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $7601: $CD $C0 $3B
     call func_007_7D96                            ; $7604: $CD $96 $7D
     call func_007_7E0A                            ; $7607: $CD $0A $7E
     call func_007_7E43                            ; $760A: $CD $43 $7E
@@ -8572,7 +8572,7 @@ SpikedBeetleEntityHandler::
     ld   de, Data_007_7794                        ; $77AD: $11 $94 $77
 
 jr_007_77B0:
-    call RenderAnimatedActiveEntity               ; $77B0: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $77B0: $CD $C0 $3B
     call func_007_7D96                            ; $77B3: $CD $96 $7D
 
 jr_007_77B6:
@@ -9101,7 +9101,7 @@ jr_007_7AC1:
 
 jr_007_7ACB:
     ld   de, Data_007_7A95                        ; $7ACB: $11 $95 $7A
-    call RenderAnimatedActiveEntity               ; $7ACE: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $7ACE: $CD $C0 $3B
 
 jr_007_7AD1:
     push bc                                       ; $7AD1: $C5
@@ -9157,7 +9157,7 @@ jr_007_7AD1:
     ret  z                                        ; $7B29: $C8
 
     ld   de, Data_007_7A95                        ; $7B2A: $11 $95 $7A
-    jp   RenderAnimatedActiveEntity               ; $7B2D: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesBlock               ; $7B2D: $C3 $C0 $3B
 
 func_007_7B30::
     xor  $01                                      ; $7B30: $EE $01

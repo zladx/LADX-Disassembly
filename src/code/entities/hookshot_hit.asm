@@ -22,7 +22,7 @@ HookshotHitEntityHandler::
     jp   z, UnloadEntity                          ; $69D0: $CA $8D $3F
 
     ld   de, EntityDestructionData                ; $69D3: $11 $44 $4C
-    jp   RenderAnimatedActiveEntity                               ; $69D6: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesBlock           ; $69D6: $C3 $C0 $3B
 
 jr_003_69D9:
     ld   de, Data_003_69AA                        ; $69D9: $11 $AA $69

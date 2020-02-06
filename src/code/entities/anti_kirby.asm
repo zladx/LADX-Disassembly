@@ -346,7 +346,7 @@ func_006_44B6::
     jr   nc, jr_006_44F1                          ; $44BA: $30 $35
 
     ld   de, Data_006_4436                        ; $44BC: $11 $36 $44
-    call RenderAnimatedActiveEntity                               ; $44BF: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $44BF: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $44C2: $F0 $F0
     cp   $02                                      ; $44C4: $FE $02
     ret  nz                                       ; $44C6: $C0
@@ -375,7 +375,7 @@ func_006_44B6::
     ld   hl, Data_006_4486                        ; $44E3: $21 $86 $44
     add  hl, de                                   ; $44E6: $19
     ld   c, $03                                   ; $44E7: $0E $03
-    call func_3CE6                                ; $44E9: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $44E9: $CD $E6 $3C
     ld   a, $03                                   ; $44EC: $3E $03
     jp   label_3DA0                               ; $44EE: $C3 $A0 $3D
 
@@ -392,6 +392,6 @@ jr_006_44F1:
     ld   hl, Data_006_4456                        ; $44FD: $21 $56 $44
     add  hl, de                                   ; $4500: $19
     ld   c, $03                                   ; $4501: $0E $03
-    call func_3CE6                                ; $4503: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4503: $CD $E6 $3C
     jp   label_3CD9                               ; $4506: $C3 $D9 $3C
 

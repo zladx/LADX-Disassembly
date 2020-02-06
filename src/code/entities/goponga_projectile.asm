@@ -20,7 +20,7 @@ GopongaProjectileEntityHandler::
 
 jr_006_63B5:
     ld   de, Data_006_638F                        ; $63B5: $11 $8F $63
-    call RenderAnimatedActiveEntity               ; $63B8: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $63B8: $CD $C0 $3B
     call GetEntityTransitionCountdown             ; $63BB: $CD $05 $0C
     jr   z, jr_006_63CE                           ; $63BE: $28 $0E
 

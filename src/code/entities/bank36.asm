@@ -18,7 +18,7 @@ label_036_4000:
     jr   c, jr_036_4011                           ; $4009: $38 $06
 
     ld   de, $490A                                ; $400B: $11 $0A $49
-    call RenderAnimatedActiveEntity                               ; $400E: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $400E: $CD $C0 $3B
 
 jr_036_4011:
     call func_036_6A40                            ; $4011: $CD $40 $6A
@@ -266,7 +266,7 @@ jr_036_4144:
 
 label_036_4178:
     ld   de, $48F2                                ; $4178: $11 $F2 $48
-    call RenderAnimatedActiveEntity                               ; $417B: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $417B: $CD $C0 $3B
     call func_036_6B5C                            ; $417E: $CD $5C $6B
     call func_036_6A46                            ; $4181: $CD $46 $6A
     ldh  a, [hActiveEntityState]                  ; $4184: $F0 $F0
@@ -479,7 +479,7 @@ label_036_429A:
     pop  bc                                       ; $42BF: $C1
     ld   hl, $4282                                ; $42C0: $21 $82 $42
     ld   c, $06                                   ; $42C3: $0E $06
-    call func_3CE6                               ; $42C5: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $42C5: $CD $E6 $3C
     ld   a, $06                                   ; $42C8: $3E $06
     call label_3DA0                               ; $42CA: $CD $A0 $3D
     call func_036_6B5C                            ; $42CD: $CD $5C $6B
@@ -495,7 +495,7 @@ jr_036_42D4:
     ld   hl, $48C2                                ; $42DD: $21 $C2 $48
     call func_036_6C7E                            ; $42E0: $CD $7E $6C
     ld   c, $03                                   ; $42E3: $0E $03
-    call func_3CE6                               ; $42E5: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $42E5: $CD $E6 $3C
     ld   a, $03                                   ; $42E8: $3E $03
     call label_3DA0                               ; $42EA: $CD $A0 $3D
     call func_036_6B5C                            ; $42ED: $CD $5C $6B
@@ -1295,7 +1295,7 @@ label_036_4791:
     ret  nz                                       ; $4795: $C0
 
     ld   de, $48FA                                ; $4796: $11 $FA $48
-    call RenderAnimatedActiveEntity                               ; $4799: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4799: $CD $C0 $3B
     call func_036_6A40                            ; $479C: $CD $40 $6A
     ld   a, [wGameplayType]                       ; $479F: $FA $95 $DB
     cp   $0B                                      ; $47A2: $FE $0B
@@ -1569,7 +1569,7 @@ PhotographerEntityHandler::
     jr   nz, .jr_036_4925                         ; $491C: $20 $07
 
     ld   de, $48E2                                ; $491E: $11 $E2 $48
-    call RenderAnimatedActiveEntity                               ; $4921: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4921: $CD $C0 $3B
     ret                                           ; $4924: $C9
 
 .jr_036_4925
@@ -1599,7 +1599,7 @@ PhotographerEntityHandler::
     jp   c, UnloadEntityAndReturn                 ; $494D: $DA $8D $3F
 
     ld   de, $48CE                                ; $4950: $11 $CE $48
-    call RenderAnimatedActiveEntity                               ; $4953: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4953: $CD $C0 $3B
     call func_036_6A40                            ; $4956: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $4959: $F0 $F0
     JP_TABLE                                      ; $495B: $C7
@@ -2672,7 +2672,7 @@ func_036_4F4E::
     ld   hl, $4F4A                                ; $4F57: $21 $4A $4F
     call func_036_6C7E                            ; $4F5A: $CD $7E $6C
     ld   c, $0C                                   ; $4F5D: $0E $0C
-    call func_3CE6                               ; $4F5F: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4F5F: $CD $E6 $3C
     ld   a, $0C                                   ; $4F62: $3E $0C
     call label_3DA0                               ; $4F64: $CD $A0 $3D
     ret                                           ; $4F67: $C9
@@ -4316,14 +4316,14 @@ ColorDungeonBookEntityHandler::
     jr   z, jr_036_588C                           ; $5882: $28 $08
 
     ld   de, $5877                                ; $5884: $11 $77 $58
-    call RenderAnimatedActiveEntity                               ; $5887: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5887: $CD $C0 $3B
     jr   jr_036_5892                              ; $588A: $18 $06
 
 jr_036_588C:
     ld   de, $5879                                ; $588C: $11 $79 $58
 
 jr_036_588F:
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $588F: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $588F: $CD $77 $3C
 
 jr_036_5892:
     ldh  a, [hActiveEntityState]                  ; $5892: $F0 $F0
@@ -4735,7 +4735,7 @@ func_036_5AC8::
     ld   e, [hl]                                  ; $5AD5: $5E
     inc  hl                                       ; $5AD6: $23
     ld   d, [hl]                                  ; $5AD7: $56
-    call RenderAnimatedActiveEntity                               ; $5AD8: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5AD8: $CD $C0 $3B
     ret                                           ; $5ADB: $C9
 
     ld   b, b                                     ; $5ADC: $40
@@ -4745,7 +4745,7 @@ func_036_5AC8::
 
 label_036_5AE4:
     ld   de, $5ADC                                ; $5AE4: $11 $DC $5A
-    call RenderAnimatedActiveEntity                               ; $5AE7: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5AE7: $CD $C0 $3B
     call func_036_6A40                            ; $5AEA: $CD $40 $6A
     call func_C56                                ; $5AED: $CD $56 $0C
     call label_3B39                               ; $5AF0: $CD $39 $3B
@@ -4780,7 +4780,7 @@ label_036_5AE4:
 
 jr_036_5B1C:
     ld   de, $5AFC                                ; $5B1C: $11 $FC $5A
-    call RenderAnimatedActiveEntity                               ; $5B1F: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5B1F: $CD $C0 $3B
     call func_036_6A40                            ; $5B22: $CD $40 $6A
     call func_C56                                ; $5B25: $CD $56 $0C
     call label_3B39                               ; $5B28: $CD $39 $3B
@@ -4849,7 +4849,7 @@ jr_036_5B73:
     jp   nz, label_036_5AE4                       ; $5B7B: $C2 $E4 $5A
 
     ld   de, $5B42                                ; $5B7E: $11 $42 $5B
-    call RenderAnimatedActiveEntity                               ; $5B81: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5B81: $CD $C0 $3B
     call func_036_6A40                            ; $5B84: $CD $40 $6A
     call func_C56                                ; $5B87: $CD $56 $0C
     call label_3B39                               ; $5B8A: $CD $39 $3B
@@ -6318,7 +6318,7 @@ func_036_6382::
 
 func_036_63C2::
     ld   de, $6392                                ; $63C2: $11 $92 $63
-    call RenderAnimatedActiveEntity                               ; $63C5: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $63C5: $CD $C0 $3B
     ret                                           ; $63C8: $C9
 
 ColorGhoulRedEntityHandler::
@@ -6806,7 +6806,7 @@ func_036_6629::
 jr_036_665C:
     pop  hl                                       ; $665C: $E1
     push bc                                       ; $665D: $C5
-    call func_3CE6                               ; $665E: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $665E: $CD $E6 $3C
     pop  bc                                       ; $6661: $C1
     ld   a, c                                     ; $6662: $79
     call label_3DA0                               ; $6663: $CD $A0 $3D
@@ -8355,7 +8355,7 @@ TileGlintHiddenEntityHandler::
     ld   c, $04                                   ; $6E34: $0E $04
 
 jr_036_6E36:
-    call func_3CE6                               ; $6E36: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6E36: $CD $E6 $3C
 
 jr_036_6E39:
     ld   a, $02                                   ; $6E39: $3E $02
@@ -8376,7 +8376,7 @@ jr_036_6E3F:
     and  $03                                      ; $6E4C: $E6 $03
     call SetEntitySpriteVariant                   ; $6E4E: $CD $0C $3B
     ld   de, $6DA7                                ; $6E51: $11 $A7 $6D
-    call RenderAnimatedActiveEntity                               ; $6E54: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $6E54: $CD $C0 $3B
 
 jr_036_6E57:
     ld   hl, wEntitiesUnknowTableY                ; $6E57: $21 $D0 $C3
@@ -8723,7 +8723,7 @@ func_036_7022::
     ld   hl, $6FC2                                ; $702C: $21 $C2 $6F
     add  hl, de                                   ; $702F: $19
     ld   c, $04                                   ; $7030: $0E $04
-    call func_3CE6                               ; $7032: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7032: $CD $E6 $3C
     ret                                           ; $7035: $C9
 
     rst  $38                                      ; $7036: $FF

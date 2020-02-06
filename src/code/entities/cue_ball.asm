@@ -349,14 +349,14 @@ func_006_4E64::
     ld   hl, Data_006_4D64                        ; $4E6F: $21 $64 $4D
     add  hl, de                                   ; $4E72: $19
     ld   c, $08                                   ; $4E73: $0E $08
-    jp   func_3CE6                                ; $4E75: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $4E75: $C3 $E6 $3C
 
 Data_006_4E78::
     db   $6C, $00, $6E, $00, $6E, $20, $6C, $20, $6C, $40, $6E, $40, $6E, $60, $6C, $60
 
 label_006_4E88:
     ld   de, Data_006_4E78                        ; $4E88: $11 $78 $4E
-    call RenderAnimatedActiveEntity               ; $4E8B: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4E8B: $CD $C0 $3B
     call func_006_64C6                            ; $4E8E: $CD $C6 $64
     call GetEntityTransitionCountdown             ; $4E91: $CD $05 $0C
     jp   z, ClearEntityStatus_06                  ; $4E94: $CA $DB $65

@@ -4,7 +4,7 @@ Data_006_7989::
 
 BooBuddyEntityHandler::
     ld   de, Data_006_7989                        ; $79A9: $11 $89 $79
-    call RenderAnimatedActiveEntity               ; $79AC: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $79AC: $CD $C0 $3B
     call func_006_64C6                            ; $79AF: $CD $C6 $64
     call func_006_64F7                            ; $79B2: $CD $F7 $64
     call func_006_6541                            ; $79B5: $CD $41 $65

@@ -422,7 +422,7 @@ func_004_42B3::
     ld   hl, Data_004_4281                        ; $42C0: $21 $81 $42
     add  hl, de                                   ; $42C3: $19
     ld   c, $04                                   ; $42C4: $0E $04
-    call func_3CE6                               ; $42C6: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $42C6: $CD $E6 $3C
     ld   a, $04                                   ; $42C9: $3E $04
     call label_3DA0                               ; $42CB: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                                ; $42CE: $21 $10 $C3
@@ -437,7 +437,7 @@ func_004_42B3::
     xor  a                                        ; $42DB: $AF
     ldh  [hActiveEntitySpriteVariant], a                               ; $42DC: $E0 $F1
     ld   de, Data_004_42B1                        ; $42DE: $11 $B1 $42
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $42E1: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $42E1: $CD $77 $3C
     jp   CopyEntityPositionToActivePosition       ; $42E4: $C3 $8A $3D
 
 ; Called by TableJump above for Level 2 Boss
@@ -1080,7 +1080,7 @@ jr_004_4713:
     ld   hl, Data_004_4655                        ; $4727: $21 $55 $46
     add  hl, de                                   ; $472A: $19
     ld   c, $0A                                   ; $472B: $0E $0A
-    call func_3CE6                               ; $472D: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $472D: $CD $E6 $3C
     ld   a, $0A                                   ; $4730: $3E $0A
     call label_3DA0                               ; $4732: $CD $A0 $3D
     ldh  a, [$FFEC]                               ; $4735: $F0 $EC
@@ -1093,7 +1093,7 @@ jr_004_4713:
     and  $01                                      ; $4740: $E6 $01
     ldh  [hActiveEntitySpriteVariant], a                               ; $4742: $E0 $F1
     ld   de, Data_004_46F5                        ; $4744: $11 $F5 $46
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $4747: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $4747: $CD $77 $3C
     jp   CopyEntityPositionToActivePosition       ; $474A: $C3 $8A $3D
 
 Data_004_474D::
@@ -1225,7 +1225,7 @@ jr_004_48A6:
     ld   hl, Data_004_474D                        ; $48C3: $21 $4D $47
     add  hl, de                                   ; $48C6: $19
     ld   c, $08                                   ; $48C7: $0E $08
-    call func_3CE6                               ; $48C9: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $48C9: $CD $E6 $3C
     ld   a, $08                                   ; $48CC: $3E $08
     jp   label_3DA0                               ; $48CE: $C3 $A0 $3D
 
@@ -1234,7 +1234,7 @@ Data_004_48D1::
 
 GenieState3Handler::
     ld   de, Data_004_48D1                        ; $48D9: $11 $D1 $48
-    call RenderAnimatedActiveEntity               ; $48DC: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $48DC: $CD $C0 $3B
     call func_004_7FA3                            ; $48DF: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $48E2: $F0 $E7
     rra                                           ; $48E4: $1F
@@ -1297,7 +1297,7 @@ jr_004_4938:
 
 GenieState4Handler::
     ld   de, Data_004_48D1                        ; $493E: $11 $D1 $48
-    call RenderAnimatedActiveEntity               ; $4941: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4941: $CD $C0 $3B
     call func_004_7FA3                            ; $4944: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $4947: $F0 $E7
     rra                                           ; $4949: $1F

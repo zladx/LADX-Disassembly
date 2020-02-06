@@ -2226,7 +2226,7 @@ label_5CBD::
     xor  a
     ldh  [hActiveEntityTilesOffset], a
     ld   c, $08
-    call func_3CE6
+    call RenderActiveEntitySpritesRect
     ld   a, [$C1B0]
     cp   $00
     jr   nz, label_5D13
@@ -3642,7 +3642,7 @@ label_6AE3::
     ld   hl, label_69D2
 
 label_6AF4::
-    call func_3CE6
+    call RenderActiveEntitySpritesRect
     ret
 
 include "code/face_shrine_mural.asm"

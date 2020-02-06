@@ -370,7 +370,7 @@ func_005_6A5F::
     ldh  [$FFEC], a                               ; $6A9C: $E0 $EC
     pop  bc                                       ; $6A9E: $C1
     ld   de, Data_005_6A24                        ; $6A9F: $11 $24 $6A
-    jp   RenderAnimatedActiveEntity               ; $6AA2: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesBlock               ; $6AA2: $C3 $C0 $3B
 
 func_005_6AA5::
     ld   hl, wEntitiesUnknowTableY                ; $6AA5: $21 $D0 $C3
@@ -417,7 +417,7 @@ func_005_6AA5::
     ld   a, $04                                   ; $6AE5: $3E $04
     ldh  [hActiveEntitySpriteVariant], a          ; $6AE7: $E0 $F1
     ld   de, Data_005_6A24                        ; $6AE9: $11 $24 $6A
-    call RenderAnimatedActiveEntity               ; $6AEC: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $6AEC: $CD $C0 $3B
     ld   hl, wEntitiesSpriteVariantTable          ; $6AEF: $21 $B0 $C3
     add  hl, bc                                   ; $6AF2: $09
     ld   a, [hl]                                  ; $6AF3: $7E
@@ -490,7 +490,7 @@ jr_005_6C92:
     ld   e, a                                     ; $6CA2: $5F
     add  hl, de                                   ; $6CA3: $19
     ld   c, $0A                                   ; $6CA4: $0E $0A
-    call func_3CE6                               ; $6CA6: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6CA6: $CD $E6 $3C
     ld   a, $08                                   ; $6CA9: $3E $08
     jp   label_3DA0                               ; $6CAB: $C3 $A0 $3D
 
@@ -506,7 +506,7 @@ jr_005_6CAE:
     ld   hl, Data_005_6AF7                        ; $6CB8: $21 $F7 $6A
     add  hl, de                                   ; $6CBB: $19
     ld   c, $04                                   ; $6CBC: $0E $04
-    call func_3CE6                               ; $6CBE: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6CBE: $CD $E6 $3C
     ld   a, $02                                   ; $6CC1: $3E $02
     jp   label_3DA0                               ; $6CC3: $C3 $A0 $3D
 

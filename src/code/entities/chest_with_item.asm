@@ -113,7 +113,7 @@ jr_007_7C58:
     ld   de, Data_007_7B57                        ; $7C58: $11 $57 $7B
 
 jr_007_7C5B:
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $7C5B: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $7C5B: $CD $77 $3C
 
 jr_007_7C5E:
     ld   a, [wDialogState]                        ; $7C5E: $FA $9F $C1

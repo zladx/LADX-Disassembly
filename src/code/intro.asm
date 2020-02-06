@@ -1260,7 +1260,7 @@ label_762B::
 label_7640::
     add  hl, de
     ld   c, $06
-    call func_3CE6
+    call RenderActiveEntitySpritesRect
     ld   a, [$C3C0]
     add  a, $18
     ld   [$C3C0], a
@@ -1274,7 +1274,7 @@ RenderIntroMarin::
     xor  a
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   de, data_764F
-    call RenderAnimatedActiveEntity
+    call RenderActiveEntitySpritesBlock
 
     ld   a, [$C3C0]
     add  a, $08
@@ -1514,7 +1514,7 @@ label_77ED::
     xor  a
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   de, label_77BD
-    call RenderAnimatedActiveEntity
+    call RenderActiveEntitySpritesBlock
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a
@@ -1692,7 +1692,7 @@ label_79A5::
     ld   c, $0A
 
 label_79AA::
-    call func_3CE6
+    call RenderActiveEntitySpritesRect
     ret
 
 label_79AE::
@@ -1812,7 +1812,7 @@ RenderIntroInertLink::
 label_7A36::
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   de, data_7A27
-    call RenderAnimatedActiveEntity
+    call RenderActiveEntitySpritesBlock
     ld   a, [$C3C0]
     add  a, $08
     ld   [$C3C0], a

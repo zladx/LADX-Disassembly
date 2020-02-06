@@ -3,7 +3,7 @@ Data_006_7446::
 
 ArmosStatueEntityHandler::
     ld   de, Data_006_7446                        ; $744E: $11 $46 $74
-    call RenderAnimatedActiveEntity               ; $7451: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $7451: $CD $C0 $3B
     call func_006_64C6                            ; $7454: $CD $C6 $64
     call func_006_64F7                            ; $7457: $CD $F7 $64
     xor  a                                        ; $745A: $AF

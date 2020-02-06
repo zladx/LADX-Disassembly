@@ -7205,7 +7205,7 @@ jr_015_7973:
     ldh  a, [hFrameCounter]                       ; $7981: $F0 $E7
 
 jr_015_7983:
-    ld   hl, wLinkWalkingFrameCount               ; $7983: $21 $23 $C1
+    ld   hl, wActiveEntityIndex                   ; $7983: $21 $23 $C1
     add  [hl]                                     ; $7986: $86
     and  $07                                      ; $7987: $E6 $07
     ld   e, a                                     ; $7989: $5F

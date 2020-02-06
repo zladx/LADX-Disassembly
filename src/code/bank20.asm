@@ -10830,7 +10830,7 @@ jr_020_7D55:
 
 jr_020_7D74:
     ld   [$C3C0], a                               ; $7D74: $EA $C0 $C3
-    ld   a, [wLinkWalkingFrameCount]              ; $7D77: $FA $23 $C1
+    ld   a, [wActiveEntityIndex]                  ; $7D77: $FA $23 $C1
     ld   c, a                                     ; $7D7A: $4F
     ret                                           ; $7D7B: $C9
 

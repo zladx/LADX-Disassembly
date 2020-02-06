@@ -7130,9 +7130,9 @@ AnimateEntities::
 
     ; For each entity slot…
 .loop
-    ; Save the active entity index to wLinkWalkingFrameCount
+    ; Save the active entity index
     ld   a, c
-    ld   [wLinkWalkingFrameCount], a
+    ld   [wActiveEntityIndex], a
 
     ; Read the entity state
     ld   hl, wEntitiesStatusTable
@@ -7566,11 +7566,12 @@ RenderActiveEntitySpritesPair::
     ld   [de], a
 .jr_3C63
 
-    ld   a, [wLinkWalkingFrameCount]
+    ; Restore the entity index to bc
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     ld   b, $00
-    callsb func_015_795D
 
+    callsb func_015_795D
 label_3C71::
     call func_015_7995
 
@@ -7586,9 +7587,10 @@ label_3C71::
 ; among the different attributes in the display list.
 ;
 ; Inputs:
-;   de   address of the display list
-;   hActiveEntitySpriteVariant     the sprite variant to use
-;   $C3C0 index of the dynamically allocated OAM slot
+;   de                          address of the display list
+;   wActiveEntityIndex          index
+;   hActiveEntitySpriteVariant  the sprite variant to use
+;   $C3C0                       index of the dynamically allocated OAM slot
 RenderActiveEntitySprite::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
@@ -7607,8 +7609,8 @@ RenderActiveEntitySprite::
     add  hl, bc
     ld   e, l
     ld   d, h
-    ; bc = [wLinkWalkingFrameCount]
-    ld   a, [wLinkWalkingFrameCount]
+    ; bc = [wActiveEntityIndex]
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     ld   b, $00
 
@@ -7698,7 +7700,7 @@ label_3CE0::
 ;   c   the number of sprites
 ;
 ; Return value:
-;   c   [wLinkWalkingFrameCount]
+;   c   [wActiveEntityIndex]
 RenderActiveEntitySpritesRect::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
@@ -7722,7 +7724,7 @@ RenderActiveEntitySpritesRect::
     ld   a, c
     ldh  [hScratch0], a
 
-    ld   a, [wLinkWalkingFrameCount]
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     call SkipDisabledEntityDuringRoomTransition
 
@@ -7783,13 +7785,13 @@ RenderActiveEntitySpritesRect::
     dec  c
     jr   nz, .loop
 
-    ld   a, [wLinkWalkingFrameCount]
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     callsb func_015_795D
     jp   ReloadSavedBank
 
 .return
-    ld   a, [wLinkWalkingFrameCount]
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     ret
 

@@ -2964,7 +2964,7 @@ renderTranscientVFXs:
     ; For each transcient vfx…
 .transcientVFXsLoop
     ld   a, c                                     ; $54E8: $79
-    ld   [wLinkWalkingFrameCount], a              ; $54E9: $EA $23 $C1
+    ld   [wActiveEntityIndex], a                  ; $54E9: $EA $23 $C1
 
     ; If the VFX type is not zero, render it.
     ld   hl, wTranscientVfxTypeTable              ; $54EC: $21 $10 $C5
@@ -3613,7 +3613,7 @@ jr_002_5904:
     jr   c, jr_002_5925                           ; $5910: $38 $13
 
     ldh  a, [hFrameCounter]                       ; $5912: $F0 $E7
-    ld   hl, wLinkWalkingFrameCount               ; $5914: $21 $23 $C1
+    ld   hl, wActiveEntityIndex                   ; $5914: $21 $23 $C1
     add  [hl]                                     ; $5917: $86
     and  $07                                      ; $5918: $E6 $07
     ld   e, a                                     ; $591A: $5F

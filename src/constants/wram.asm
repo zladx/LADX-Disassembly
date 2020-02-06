@@ -99,8 +99,9 @@ wSwordCharge:: ; C122
   ; 0x28:  fully charged
   ds 1
 
-wLinkWalkingFrameCount:: ; C123
-  ; Number of frames during which Link has been walking continuously
+wActiveEntityIndex:: ; C123
+  ; Index of the entity being currently animated.
+  ; (Also used for the current transcient VFX being drawn.)
   ds 1
 
 ; See ROOM_TRANSITION_* constants for possible values.

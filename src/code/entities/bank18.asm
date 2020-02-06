@@ -6891,9 +6891,9 @@ jr_018_691B:
     pop  hl                                       ; $692E: $E1
     ld   a, c                                     ; $692F: $79
     ldh  [hScratch0], a                           ; $6930: $E0 $D7
-    ld   a, [wLinkWalkingFrameCount]              ; $6932: $FA $23 $C1
+    ld   a, [wActiveEntityIndex]                  ; $6932: $FA $23 $C1
     ld   c, a                                     ; $6935: $4F
-    call SkipDisabledEntityDuringRoomTransition ; $6936: $CD $57 $3D
+    call SkipDisabledEntityDuringRoomTransition   ; $6936: $CD $57 $3D
     ldh  a, [hScratch0]                           ; $6939: $F0 $D7
     ld   c, a                                     ; $693B: $4F
 
@@ -6987,7 +6987,7 @@ jr_018_699A:
     ld   [$D5C1], a                               ; $69A1: $EA $C1 $D5
     ld   a, $04                                   ; $69A4: $3E $04
     ld   [$D5C3], a                               ; $69A6: $EA $C3 $D5
-    ld   a, [wLinkWalkingFrameCount]              ; $69A9: $FA $23 $C1
+    ld   a, [wActiveEntityIndex]                  ; $69A9: $FA $23 $C1
     ld   c, a                                     ; $69AC: $4F
     ld   a, $06                                   ; $69AD: $3E $06
     call label_3DA0                               ; $69AF: $CD $A0 $3D

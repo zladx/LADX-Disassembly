@@ -4446,13 +4446,13 @@ jr_007_5CDF:
     dec  c                                        ; $5CE7: $0D
     jr   nz, jr_007_5CB8                          ; $5CE8: $20 $CE
 
-    ld   a, [wLinkWalkingFrameCount]              ; $5CEA: $FA $23 $C1
+    ld   a, [wActiveEntityIndex]                  ; $5CEA: $FA $23 $C1
     ld   c, a                                     ; $5CED: $4F
     ld   a, $0A                                   ; $5CEE: $3E $0A
     jp   label_3DA0                               ; $5CF0: $C3 $A0 $3D
 
 jr_007_5CF3:
-    ld   a, [wLinkWalkingFrameCount]              ; $5CF3: $FA $23 $C1
+    ld   a, [wActiveEntityIndex]                  ; $5CF3: $FA $23 $C1
     ld   c, a                                     ; $5CF6: $4F
     ret                                           ; $5CF7: $C9
 

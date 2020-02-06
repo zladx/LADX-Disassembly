@@ -2182,7 +2182,7 @@ label_5C7B::
     ld   a, $08
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   a, $00
-    ld   [wLinkWalkingFrameCount], a
+    ld   [wActiveEntityIndex], a
     ldh  [$FFED], a
     ld   e, $00
     ld   a, [$C1B4]

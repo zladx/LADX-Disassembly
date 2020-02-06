@@ -5,7 +5,7 @@ MovingBlockLeftTopEntityHandler::
     db   $11                                      ; $4100
     db   $FC                                      ; $4101: $FC
     ld   b, b                                     ; $4102: $40
-    call RenderAnimatedActiveEntity               ; $4103: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4103: $CD $C0 $3B
     call func_015_7B0D                            ; $4106: $CD $0D $7B
     xor  a                                        ; $4109: $AF
     ldh  [hFFE8], a                               ; $410A: $E0 $E8
@@ -156,7 +156,7 @@ jr_015_41C9:
 
 MovingBlockLeftBottomEntityHandler::
     ld   de, Data_015_40FC                        ; $41CA: $11 $FC $40
-    call RenderAnimatedActiveEntity               ; $41CD: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $41CD: $CD $C0 $3B
     call func_015_7B0D                            ; $41D0: $CD $0D $7B
     xor  a                                        ; $41D3: $AF
     ldh  [hFFE8], a                               ; $41D4: $E0 $E8
@@ -241,7 +241,7 @@ jr_015_4239:
 
 MovingBlockBottomLeftEntityHandler::
     ld   de, Data_015_40FC                        ; $423C: $11 $FC $40
-    call RenderAnimatedActiveEntity                               ; $423F: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $423F: $CD $C0 $3B
     call func_015_7B0D                            ; $4242: $CD $0D $7B
     xor  a                                        ; $4245: $AF
     ldh  [hFFE8], a                               ; $4246: $E0 $E8
@@ -326,7 +326,7 @@ jr_015_42AB:
 
 MovingBlockBottomRightEntityHandler
     ld   de, Data_015_40FC                        ; $42AE: $11 $FC $40
-    call RenderAnimatedActiveEntity                               ; $42B1: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $42B1: $CD $C0 $3B
     call func_015_7B0D                            ; $42B4: $CD $0D $7B
     xor  a                                        ; $42B7: $AF
     ldh  [hFFE8], a                               ; $42B8: $E0 $E8

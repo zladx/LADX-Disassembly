@@ -481,7 +481,7 @@ func_006_58C9::
     jr   nz, jr_006_58D8                          ; $58D0: $20 $06
 
     ld   de, Data_006_589F                        ; $58D2: $11 $9F $58
-    call RenderAnimatedActiveEntity               ; $58D5: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $58D5: $CD $C0 $3B
 
 jr_006_58D8:
     ld   hl, wEntitiesUnknowTableY                ; $58D8: $21 $D0 $C3
@@ -544,7 +544,7 @@ jr_006_58F3:
 jr_006_592E:
     ldh  [hActiveEntitySpriteVariant], a          ; $592E: $E0 $F1
     ld   de, Data_006_589F                        ; $5930: $11 $9F $58
-    call RenderAnimatedActiveEntity               ; $5933: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5933: $CD $C0 $3B
 
 jr_006_5936:
     ld   e, $FF                                   ; $5936: $1E $FF
@@ -617,7 +617,7 @@ Data_006_5980::
 
 label_006_5988:
     ld   de, Data_006_5980                        ; $5988: $11 $80 $59
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $598B: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $598B: $CD $77 $3C
     call func_006_64C6                            ; $598E: $CD $C6 $64
     call func_006_6541                            ; $5991: $CD $41 $65
     ld   hl, wEntitiesSpeedYTable                 ; $5994: $21 $50 $C2

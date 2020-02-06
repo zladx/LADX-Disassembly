@@ -1,7 +1,7 @@
-; Array, indexed by hActiveEntitySpriteVariant
+; Array indexed by hActiveEntitySpriteVariant
 ;  byte 0: tile n°
 ;  byte 1: OAM attribute (palette index and flags)
-ButterflyOAMData::
+ButterflyOAMAttributes::
 ._00 db $5E, %001
 ._01 db $5E, %001 | OAMF_YFLIP
 
@@ -20,8 +20,8 @@ ButterflyEntityHandler::
     ldh  [$FFEC], a                               ; $6BD3: $E0 $EC
 .downwardsEnd
 
-    ld   de, ButterflyOAMData                     ; $6BD5: $11 $BD $6B
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $6BD8: $CD $77 $3C
+    ld   de, ButterflyOAMAttributes                     ; $6BD5: $11 $BD $6B
+    call RenderActiveEntitySprite                 ; $6BD8: $CD $77 $3C
     call func_006_64C6                            ; $6BDB: $CD $C6 $64
 
     ;

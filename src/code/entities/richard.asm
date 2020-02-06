@@ -6,7 +6,7 @@ RichardEntityHandler::
     ld   a, $21                                   ; $4020: $3E $21
     ldh  [$FFEC], a                               ; $4022: $E0 $EC
     ld   de, Data_006_4000                        ; $4024: $11 $00 $40
-    call RenderAnimatedActiveEntity               ; $4027: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4027: $CD $C0 $3B
     call func_006_64C6                            ; $402A: $CD $C6 $64
     ldh  a, [hFrameCounter]                       ; $402D: $F0 $E7
     and  $1F                                      ; $402F: $E6 $1F

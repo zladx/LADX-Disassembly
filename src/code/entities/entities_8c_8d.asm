@@ -18,7 +18,7 @@ Entity8CHandler::
 
 label_006_4EB7:
     ld   de, Data_006_4E9D                        ; $4EB7: $11 $9D $4E
-    call RenderAnimatedActiveEntity               ; $4EBA: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4EBA: $CD $C0 $3B
     call func_006_64C6                            ; $4EBD: $CD $C6 $64
     ldh  a, [$FFBA]                               ; $4EC0: $F0 $BA
     cp   $02                                      ; $4EC2: $FE $02

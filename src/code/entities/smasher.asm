@@ -365,7 +365,7 @@ label_006_4781:
     add  hl, bc                                   ; $478A: $09
     ld   [hl], $FF                                ; $478B: $36 $FF
     ld   de, Data_006_477D                        ; $478D: $11 $7D $47
-    call RenderAnimatedActiveEntity               ; $4790: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4790: $CD $C0 $3B
     call func_006_64C6                            ; $4793: $CD $C6 $64
     call func_C56                                 ; $4796: $CD $56 $0C
     call label_3B70                               ; $4799: $CD $70 $3B

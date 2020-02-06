@@ -20,7 +20,7 @@ MadBomberEntityHandler::
     add  hl, bc                                   ; $415A: $09
     ld   [hl], $FF                                ; $415B: $36 $FF
     ld   de, Data_006_4126                        ; $415D: $11 $26 $41
-    call RenderAnimatedActiveEntity               ; $4160: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4160: $CD $C0 $3B
     call func_006_64C6                            ; $4163: $CD $C6 $64
     call func_C56                                 ; $4166: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4169: $F0 $F0

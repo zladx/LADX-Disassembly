@@ -6263,7 +6263,7 @@ jr_017_7784:
 
 jr_017_7798:
     ld   de, $7766                                ; $7798: $11 $66 $77
-    call RenderSimpleEntityWithSpriteVariantToOAM                                    ; $779B: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $779B: $CD $77 $3C
     call func_017_7E3A                            ; $779E: $CD $3A $7E
     ldh  a, [$FFEE]                               ; $77A1: $F0 $EE
     cp   $B0                                      ; $77A3: $FE $B0
@@ -6405,7 +6405,7 @@ jr_017_7826:
     jr   nz, jr_017_7867                          ; $785E: $20 $07
 
     ld   de, $7838                                ; $7860: $11 $38 $78
-    call RenderSimpleEntityWithSpriteVariantToOAM                                    ; $7863: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $7863: $CD $77 $3C
     ret                                           ; $7866: $C9
 
 jr_017_7867:
@@ -6465,7 +6465,7 @@ jr_017_78A1:
     jr   nz, jr_017_78DD                          ; $78AE: $20 $2D
 
     ld   de, $7879                                ; $78B0: $11 $79 $78
-    call RenderAnimatedActiveEntity               ; $78B3: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $78B3: $CD $C0 $3B
     ret                                           ; $78B6: $C9
 
 jr_017_78B7:
@@ -6529,7 +6529,7 @@ func_017_790D::
 
 jr_017_791D:
     ld   de, Data_017_78EF                        ; $791D: $11 $EF $78
-    call RenderAnimatedActiveEntity               ; $7920: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $7920: $CD $C0 $3B
 
 jr_017_7923:
     call GetEntityTransitionCountdown             ; $7923: $CD $05 $0C

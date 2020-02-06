@@ -4,7 +4,7 @@ Data_006_7BFA::
 MiniGelEntityHandler::
     call func_006_7BE2                            ; $7BFE: $CD $E2 $7B
     ld   de, Data_006_7BFA                        ; $7C01: $11 $FA $7B
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $7C04: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $7C04: $CD $77 $3C
     jr   jr_006_7C2E                              ; $7C07: $18 $25
 
 Data_006_7C09::
@@ -25,7 +25,7 @@ GelEntityHandler::
     ld   de, Data_006_7C11                        ; $7C28: $11 $11 $7C
 
 jr_006_7C2B:
-    call RenderAnimatedActiveEntity               ; $7C2B: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $7C2B: $CD $C0 $3B
 
 jr_006_7C2E:
     ld   hl, $C1AE                                ; $7C2E: $21 $AE $C1

@@ -437,7 +437,7 @@ func_004_42B3::
     xor  a                                        ; $42DB: $AF
     ldh  [hActiveEntitySpriteVariant], a                               ; $42DC: $E0 $F1
     ld   de, Data_004_42B1                        ; $42DE: $11 $B1 $42
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $42E1: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $42E1: $CD $77 $3C
     jp   CopyEntityPositionToActivePosition       ; $42E4: $C3 $8A $3D
 
 ; Called by TableJump above for Level 2 Boss
@@ -1093,7 +1093,7 @@ jr_004_4713:
     and  $01                                      ; $4740: $E6 $01
     ldh  [hActiveEntitySpriteVariant], a                               ; $4742: $E0 $F1
     ld   de, Data_004_46F5                        ; $4744: $11 $F5 $46
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $4747: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $4747: $CD $77 $3C
     jp   CopyEntityPositionToActivePosition       ; $474A: $C3 $8A $3D
 
 Data_004_474D::
@@ -1234,7 +1234,7 @@ Data_004_48D1::
 
 GenieState3Handler::
     ld   de, Data_004_48D1                        ; $48D9: $11 $D1 $48
-    call RenderAnimatedActiveEntity               ; $48DC: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $48DC: $CD $C0 $3B
     call func_004_7FA3                            ; $48DF: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $48E2: $F0 $E7
     rra                                           ; $48E4: $1F
@@ -1297,7 +1297,7 @@ jr_004_4938:
 
 GenieState4Handler::
     ld   de, Data_004_48D1                        ; $493E: $11 $D1 $48
-    call RenderAnimatedActiveEntity               ; $4941: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $4941: $CD $C0 $3B
     call func_004_7FA3                            ; $4944: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $4947: $F0 $E7
     rra                                           ; $4949: $1F

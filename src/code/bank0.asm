@@ -7426,20 +7426,19 @@ GetVectorTowardsLink_trampoline::
     call GetVectorTowardsLink
     jp   ReloadSavedBank
 
-; Render an animated active entity to wOAMBuffer
-; The wOAMBuffer attributes are updated.
+; Render a block of 2 sprites for the active entity to the OAM buffer.
 ;
-; This is not called for unanimated entities (like butterflies,
-; which are animated only by the actual tile changing.)
+; The main input is a display list containing OAM attributes (2 bytes each).
+; Each display list item is a pair of OAM attributes.
 ;
-; Animation is done using a display list, containing sprites attributes.
-; The display list must be `sprite attributes * number of sprites * number of variants`
-; long.
+; There is one pair of attributes per variant.
+; The entity variant is used to animate the entity, by selecting a block of sprites
+; among the different pairs in the display list.
 ;
 ; Inputs:
-;   de   address of the display list
-;
-RenderAnimatedActiveEntity::
+;   de                          address of the display list
+;   hActiveEntitySpriteVariant  the sprite variant to use
+RenderActiveEntitySpritesBlock::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
     inc  a
@@ -7579,13 +7578,19 @@ label_3C71::
     ; Reload saved bank and return
     jp   ReloadSavedBank
 
-; Take a sprite variants table, and copy the correct value to the OAM buffer.
+; Render a single sprite for the active entity to the OAM buffer.
+;
+; The main input is a display list, containing OAM attributes (2 bytes each).
+; There is one OAM attribute per variant.
+;
+; The entity variant is used to animate the entity, by selecting a sprite
+; among the different attributes in the display list.
 ;
 ; Inputs:
-;   de    address of a OAM data table
-;         (2 bytes per entry: first is the tile n°, second the tile attributes)
+;   de   address of the display list
+;   hActiveEntitySpriteVariant     the sprite variant to use
 ;   $C3C0 index of the dynamically allocated OAM slot
-RenderSimpleEntityWithSpriteVariantToOAM::
+RenderActiveEntitySprite::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
     inc  a
@@ -7669,7 +7674,7 @@ RenderSimpleEntityWithSpriteVariantToOAM::
 
 .functionEnd
     inc  de
-    jr   RenderAnimatedActiveEntity.jr_3C63
+    jr   RenderActiveEntitySpritesBlock.jr_3C63
 
 label_3CD9::
     ld   a, $15

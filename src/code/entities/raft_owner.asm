@@ -20,7 +20,7 @@ EntityRaftOwnerHandler::
 jr_005_5372:
     call func_005_54EA                            ; $5372: $CD $EA $54
     ld   de, Data_005_533E                        ; $5375: $11 $3E $53
-    call RenderAnimatedActiveEntity               ; $5378: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5378: $CD $C0 $3B
     call func_005_7A3A                            ; $537B: $CD $3A $7A
     call func_005_54C3                            ; $537E: $CD $C3 $54
     ldh  a, [hActiveEntityState]                  ; $5381: $F0 $F0
@@ -119,7 +119,7 @@ jr_005_53FF:
     jr   nz, jr_005_53E9                          ; $5403: $20 $E4
 
     ld   de, Data_005_53D4                        ; $5405: $11 $D4 $53
-    call RenderAnimatedActiveEntity                               ; $5408: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5408: $CD $C0 $3B
     call func_005_7A3A                            ; $540B: $CD $3A $7A
     jp   func_005_54C3                            ; $540E: $C3 $C3 $54
 
@@ -204,7 +204,7 @@ jr_005_5483:
 jr_005_5487:
     call CopyEntityPositionToActivePosition       ; $5487: $CD $8A $3D
     ld   de, Data_005_53D4                        ; $548A: $11 $D4 $53
-    jp   RenderAnimatedActiveEntity               ; $548D: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesBlock               ; $548D: $C3 $C0 $3B
 
 func_005_5490::
     ldh  a, [hFrameCounter]                       ; $5490: $F0 $E7

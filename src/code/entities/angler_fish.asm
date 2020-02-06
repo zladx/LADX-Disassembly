@@ -407,7 +407,7 @@ Data_005_58FD::
 
 func_005_5901::
     ld   de, Data_005_58FD
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $5904: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $5904: $CD $77 $3C
     call func_005_7A3A                            ; $5907: $CD $3A $7A
     ld   hl, wEntitiesUnknowTableY                ; $590A: $21 $D0 $C3
 
@@ -445,7 +445,7 @@ Data_005_5932::
 
 func_005_593A::
     ld   de, Data_005_5932                        ; $593A: $11 $32 $59
-    call RenderAnimatedActiveEntity               ; $593D: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $593D: $CD $C0 $3B
     call func_005_7A3A                            ; $5940: $CD $3A $7A
     call func_C56                                ; $5943: $CD $56 $0C
     ld   hl, wEntitiesUnknowTableY                ; $5946: $21 $D0 $C3
@@ -500,7 +500,7 @@ func_005_5984::
     and  $20                                      ; $598C: $E6 $20
     ldh  [$FFED], a                               ; $598E: $E0 $ED
     ld   de, Data_005_5978                        ; $5990: $11 $78 $59
-    call RenderAnimatedActiveEntity               ; $5993: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $5993: $CD $C0 $3B
     call func_005_7A3A                            ; $5996: $CD $3A $7A
     call func_C56                                ; $5999: $CD $56 $0C
     ldh  a, [hFrameCounter]                       ; $599C: $F0 $E7

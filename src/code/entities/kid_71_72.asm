@@ -19,7 +19,7 @@ Kid72EntityHandler::
     jr   z, jr_006_60A2                           ; $6085: $28 $1B
 
     ld   de, Data_006_607D                        ; $6087: $11 $7D $60
-    call RenderSimpleEntityWithSpriteVariantToOAM ; $608A: $CD $77 $3C
+    call RenderActiveEntitySprite                 ; $608A: $CD $77 $3C
     call func_006_64C6                            ; $608D: $CD $C6 $64
     call func_006_6541                            ; $6090: $CD $41 $65
     call func_006_657A                            ; $6093: $CD $7A $65
@@ -52,7 +52,7 @@ jr_006_60BC:
     ld   de, Data_006_605D                        ; $60BE: $11 $5D $60
 
 jr_006_60C1:
-    call RenderAnimatedActiveEntity               ; $60C1: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $60C1: $CD $C0 $3B
 
 jr_006_60C4:
     call func_006_65A4                            ; $60C4: $CD $A4 $65
@@ -181,7 +181,7 @@ label_006_6170:
     or   [hl]                                     ; $6176: $B6
     ldh  [hActiveEntitySpriteVariant], a          ; $6177: $E0 $F1
     ld   de, Data_006_606D                        ; $6179: $11 $6D $60
-    call RenderAnimatedActiveEntity               ; $617C: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $617C: $CD $C0 $3B
     call func_006_64C6                            ; $617F: $CD $C6 $64
     call func_006_6230                            ; $6182: $CD $30 $62
     call func_006_657A                            ; $6185: $CD $7A $65

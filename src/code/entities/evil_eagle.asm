@@ -138,7 +138,7 @@ Data_005_5B52::
 
 func_005_5B5A::
     ld   de, Data_005_5B52                        ; $5B5A: $11 $52 $5B
-    jp   RenderAnimatedActiveEntity               ; $5B5D: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesBlock               ; $5B5D: $C3 $C0 $3B
 
 Data_005_5B60::
     db   $02, $02, $02, $00, $01, $00, $01, $04, $04, $04, $04
@@ -1120,7 +1120,7 @@ func_005_6256::
     ld   a, $02                                   ; $6256: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6258: $E0 $A1
     ld   de, Data_005_624E                        ; $625A: $11 $4E $62
-    call RenderAnimatedActiveEntity               ; $625D: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $625D: $CD $C0 $3B
     call func_005_7A3A                            ; $6260: $CD $3A $7A
     ldh  a, [hFrameCounter]                       ; $6263: $F0 $E7
     rra                                           ; $6265: $1F
@@ -1198,7 +1198,7 @@ Data_005_62B8::
 
 func_005_62C8::
     ld   de, Data_005_62B8                        ; $62C8: $11 $B8 $62
-    call RenderAnimatedActiveEntity               ; $62CB: $CD $C0 $3B
+    call RenderActiveEntitySpritesBlock           ; $62CB: $CD $C0 $3B
     call func_005_7A3A                            ; $62CE: $CD $3A $7A
     call func_005_7AB1                            ; $62D1: $CD $B1 $7A
     ldh  a, [hActiveEntityState]                  ; $62D4: $F0 $F0

@@ -24,7 +24,7 @@ jr_006_5B83:
 jr_006_5B91:
     call SetEntitySpriteVariantForDirection                            ; $5B91: $CD $41 $64
     ld   de, Data_006_5B56                        ; $5B94: $11 $56 $5B
-    call RenderActiveEntitySpritesBlock           ; $5B97: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $5B97: $CD $C0 $3B
     ld   a, [wIsBowWowFollowingLink]              ; $5B9A: $FA $56 $DB
     cp   $80                                      ; $5B9D: $FE $80
     jr   nz, jr_006_5BC4                          ; $5B9F: $20 $23

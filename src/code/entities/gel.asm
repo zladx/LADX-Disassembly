@@ -25,7 +25,7 @@ GelEntityHandler::
     ld   de, Data_006_7C11                        ; $7C28: $11 $11 $7C
 
 jr_006_7C2B:
-    call RenderActiveEntitySpritesBlock           ; $7C2B: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7C2B: $CD $C0 $3B
 
 jr_006_7C2E:
     ld   hl, $C1AE                                ; $7C2E: $21 $AE $C1

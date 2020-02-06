@@ -22,7 +22,7 @@ KeeseEntityHandler::
     ld   de, Data_006_6710                        ; $6739: $11 $10 $67
 
 jr_006_673C:
-    call RenderActiveEntitySpritesBlock           ; $673C: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $673C: $CD $C0 $3B
     call func_006_64C6                            ; $673F: $CD $C6 $64
     call func_006_64F7                            ; $6742: $CD $F7 $64
     call label_3B39                               ; $6745: $CD $39 $3B

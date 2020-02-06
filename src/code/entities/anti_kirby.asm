@@ -346,7 +346,7 @@ func_006_44B6::
     jr   nc, jr_006_44F1                          ; $44BA: $30 $35
 
     ld   de, Data_006_4436                        ; $44BC: $11 $36 $44
-    call RenderActiveEntitySpritesBlock           ; $44BF: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $44BF: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $44C2: $F0 $F0
     cp   $02                                      ; $44C4: $FE $02
     ret  nz                                       ; $44C6: $C0

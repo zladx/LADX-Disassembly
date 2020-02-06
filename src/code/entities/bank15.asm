@@ -116,7 +116,7 @@ CrystalSwitchEntityHandler::
     and  $10                                      ; $432E: $E6 $10
     ldh  [$FFED], a                               ; $4330: $E0 $ED
     ld   de, Data_015_4320                        ; $4332: $11 $20 $43
-    call RenderActiveEntitySpritesBlock           ; $4335: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4335: $CD $C0 $3B
     call func_015_7B0D                            ; $4338: $CD $0D $7B
     call func_C56                                ; $433B: $CD $56 $0C
     call label_3B70                               ; $433E: $CD $70 $3B
@@ -205,7 +205,7 @@ Data_015_43C6::
 
 label_015_43CA:
     ld   de, Data_015_43AE                        ; $43CA: $11 $AE $43
-    call RenderActiveEntitySpritesBlock           ; $43CD: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $43CD: $CD $C0 $3B
     call func_015_7B0D                            ; $43D0: $CD $0D $7B
     call func_C56                                ; $43D3: $CD $56 $0C
     call label_3B39                               ; $43D6: $CD $39 $3B
@@ -370,7 +370,7 @@ FishEntityHandler::
 
 jr_015_44D1:
     ld   de, Data_015_449F                        ; $44D1: $11 $9F $44
-    call RenderActiveEntitySpritesBlock           ; $44D4: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $44D4: $CD $C0 $3B
 
 jr_015_44D7:
     call func_015_7B0D                            ; $44D7: $CD $0D $7B
@@ -1444,7 +1444,7 @@ label_015_4CD9:
     db   $11
     push de                                       ; $4CDA: $D5
     ld   c, h                                     ; $4CDB: $4C
-    call RenderActiveEntitySpritesBlock           ; $4CDC: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4CDC: $CD $C0 $3B
     call func_015_7B0D                            ; $4CDF: $CD $0D $7B
     call func_015_7B3E                            ; $4CE2: $CD $3E $7B
     call GetEntityTransitionCountdown             ; $4CE5: $CD $05 $0C
@@ -1517,7 +1517,7 @@ FlameShooterEntityHandler::
     jp   nz, label_015_4DB5                       ; $4D49: $C2 $B5 $4D
 
     ld   de, Data_015_4D3B                        ; $4D4C: $11 $3B $4D
-    call RenderActiveEntitySpritesBlock           ; $4D4F: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4D4F: $CD $C0 $3B
     call IsEntityUnknownFZero                     ; $4D52: $CD $00 $0C
     ld   e, $00                                   ; $4D55: $1E $00
     and  a                                        ; $4D57: $A7
@@ -1589,7 +1589,7 @@ label_015_4DB5:
     and  $10                                      ; $4DBE: $E6 $10
     ldh  [$FFED], a                               ; $4DC0: $E0 $ED
     ld   de, Data_015_4D9D                        ; $4DC2: $11 $9D $4D
-    call RenderActiveEntitySpritesBlock           ; $4DC5: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4DC5: $CD $C0 $3B
     call func_015_7B0D                            ; $4DC8: $CD $0D $7B
     call func_C56                                ; $4DCB: $CD $56 $0C
     call label_3B70                               ; $4DCE: $CD $70 $3B
@@ -1697,7 +1697,7 @@ label_015_4E62:
     and  $10                                      ; $4E66: $E6 $10
     ldh  [$FFED], a                               ; $4E68: $E0 $ED
     ld   de, Data_015_4DA9                        ; $4E6A: $11 $A9 $4D
-    call RenderActiveEntitySpritesBlock           ; $4E6D: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4E6D: $CD $C0 $3B
     call func_015_7B0D                            ; $4E70: $CD $0D $7B
     call func_015_7B88                            ; $4E73: $CD $88 $7B
     call GetEntityTransitionCountdown             ; $4E76: $CD $05 $0C
@@ -1722,7 +1722,7 @@ StalfosEvasiveEntityHandler::
     jr   z, jr_015_4EEE                           ; $4E9C: $28 $50
 
     ld   de, Data_015_4E8E                        ; $4E9E: $11 $8E $4E
-    call RenderActiveEntitySpritesBlock           ; $4EA1: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4EA1: $CD $C0 $3B
     call func_015_7B0D                            ; $4EA4: $CD $0D $7B
     ldh  a, [hFrameCounter]                       ; $4EA7: $F0 $E7
     rra                                           ; $4EA9: $1F
@@ -1769,7 +1769,7 @@ jr_015_4EDF:
 
 jr_015_4EEE:
     ld   de, Data_015_4E7D                        ; $4EEE: $11 $7D $4E
-    call RenderActiveEntitySpritesBlock           ; $4EF1: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4EF1: $CD $C0 $3B
     call func_015_7B0D                            ; $4EF4: $CD $0D $7B
     call func_015_7B3E                            ; $4EF7: $CD $3E $7B
     call GetEntityTransitionCountdown             ; $4EFA: $CD $05 $0C
@@ -2732,7 +2732,7 @@ Data_015_54D0::
 
 label_015_54D6:
     ld   de, Data_015_54BE                        ; $54D6: $11 $BE $54
-    call RenderActiveEntitySpritesBlock           ; $54D9: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $54D9: $CD $C0 $3B
     call func_015_7B0D                            ; $54DC: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $54DF: $CD $05 $0C
     jp   z, ClearEntityStatus_15            ; $54E2: $CA $31 $7C
@@ -2832,7 +2832,7 @@ jr_015_566B:
     ldh  [hActiveEntitySpriteVariant], a          ; $566C: $E0 $F1
 
 jr_015_566E:
-    call RenderActiveEntitySpritesBlock           ; $566E: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $566E: $CD $C0 $3B
     ld   a, $02                                   ; $5671: $3E $02
     call label_3DA0                               ; $5673: $CD $A0 $3D
 
@@ -3471,7 +3471,7 @@ jr_015_5B4B:
 
     ldh  [hActiveEntitySpriteVariant], a          ; $5B50: $E0 $F1
     ld   de, Data_015_5A73                        ; $5B52: $11 $73 $5A
-    call RenderActiveEntitySpritesBlock           ; $5B55: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $5B55: $CD $C0 $3B
     jr   jr_015_5B6C                              ; $5B58: $18 $12
 
 jr_015_5B5A:
@@ -3600,7 +3600,7 @@ jr_015_5D9A:
     add  [hl]                                     ; $5DBC: $86
     ldh  [$FFEC], a                               ; $5DBD: $E0 $EC
     ld   de, Data_015_5D79                        ; $5DBF: $11 $79 $5D
-    call RenderActiveEntitySpritesBlock           ; $5DC2: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $5DC2: $CD $C0 $3B
     ld   a, $02                                   ; $5DC5: $3E $02
     call label_3DA0                               ; $5DC7: $CD $A0 $3D
     jp   CopyEntityPositionToActivePosition       ; $5DCA: $C3 $8A $3D
@@ -3624,7 +3624,7 @@ label_015_5DED:
     and  $50                                      ; $5DF2: $E6 $50
     ldh  [$FFED], a                               ; $5DF4: $E0 $ED
     ld   de, Data_015_5DD9                        ; $5DF6: $11 $D9 $5D
-    call RenderActiveEntitySpritesBlock           ; $5DF9: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $5DF9: $CD $C0 $3B
     call func_015_7B0D                            ; $5DFC: $CD $0D $7B
     call func_C56                                ; $5DFF: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $5E02: $F0 $F0
@@ -4158,7 +4158,7 @@ func_015_6245::
     ld   a, $00                                   ; $6285: $3E $00
     ldh  [hActiveEntitySpriteVariant], a          ; $6287: $E0 $F1
     ld   de, Data_015_6235                        ; $6289: $11 $35 $62
-    call RenderActiveEntitySpritesBlock           ; $628C: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $628C: $CD $C0 $3B
     ldh  a, [hScratch0]                           ; $628F: $F0 $D7
     sub  $18                                      ; $6291: $D6 $18
     and  $7F                                      ; $6293: $E6 $7F
@@ -4177,7 +4177,7 @@ func_015_6245::
     ld   de, Data_015_6235                        ; $62A9: $11 $35 $62
 
 jr_015_62AC:
-    call RenderActiveEntitySpritesBlock           ; $62AC: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $62AC: $CD $C0 $3B
     ldh  a, [hScratch0]                           ; $62AF: $F0 $D7
     sub  $24                                      ; $62B1: $D6 $24
     and  $7F                                      ; $62B3: $E6 $7F
@@ -4194,7 +4194,7 @@ jr_015_62AC:
     ld   a, $01                                   ; $62C5: $3E $01
     ldh  [hActiveEntitySpriteVariant], a          ; $62C7: $E0 $F1
     ld   de, Data_015_6235                        ; $62C9: $11 $35 $62
-    call RenderActiveEntitySpritesBlock           ; $62CC: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $62CC: $CD $C0 $3B
     ldh  a, [hScratch0]                           ; $62CF: $F0 $D7
     sub  $2E                                      ; $62D1: $D6 $2E
     and  $7F                                      ; $62D3: $E6 $7F
@@ -4223,7 +4223,7 @@ jr_015_62AC:
     xor  [hl]                                     ; $62F9: $AE
     ld   [hl], a                                  ; $62FA: $77
     ld   de, Data_015_6235                        ; $62FB: $11 $35 $62
-    call RenderActiveEntitySpritesBlock           ; $62FE: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $62FE: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $6301: $F0 $F0
     cp   $02                                      ; $6303: $FE $02
     jr   nc, jr_015_6330                          ; $6305: $30 $29
@@ -5432,7 +5432,7 @@ Data_015_6D3C::
 
 label_015_6D40:
     ld   de, Data_015_6D30                        ; $6D40: $11 $30 $6D
-    call RenderActiveEntitySpritesBlock           ; $6D43: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $6D43: $CD $C0 $3B
     call func_015_7B0D                            ; $6D46: $CD $0D $7B
     call GetEntityTransitionCountdown             ; $6D49: $CD $05 $0C
     jp   z, ClearEntityStatus_15            ; $6D4C: $CA $31 $7C
@@ -5458,7 +5458,7 @@ label_015_6D6E:
     and  $10                                      ; $6D72: $E6 $10
     ldh  [$FFED], a                               ; $6D74: $E0 $ED
     ld   de, Data_015_6D5E                        ; $6D76: $11 $5E $6D
-    call RenderActiveEntitySpritesBlock           ; $6D79: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $6D79: $CD $C0 $3B
     call func_015_7B0D                            ; $6D7C: $CD $0D $7B
     ldh  a, [hActiveEntityState]                  ; $6D7F: $F0 $F0
 
@@ -6166,7 +6166,7 @@ jr_015_72B1:
 func_015_72CF::
     ldh  [hActiveEntitySpriteVariant], a          ; $72CF: $E0 $F1
     ld   de, Data_015_716F                        ; $72D1: $11 $6F $71
-    call RenderActiveEntitySpritesBlock           ; $72D4: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $72D4: $CD $C0 $3B
     ld   a, $02                                   ; $72D7: $3E $02
     call label_3DA0                               ; $72D9: $CD $A0 $3D
     ld   hl, hLinkPositionX                       ; $72DC: $21 $98 $FF
@@ -6217,7 +6217,7 @@ Data_015_732C::
 
 SandCrabEntityHandler::
     ld   de, Data_015_7320                        ; $7330: $11 $20 $73
-    call RenderActiveEntitySpritesBlock           ; $7333: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7333: $CD $C0 $3B
     call func_015_7B0D                            ; $7336: $CD $0D $7B
     call func_015_7B3E                            ; $7339: $CD $3E $7B
     call func_015_7B88                            ; $733C: $CD $88 $7B
@@ -6285,7 +6285,7 @@ UrchinEntityHandler::
     ld   de, Data_015_7393                        ; $73B5: $11 $93 $73
 
 jr_015_73B8:
-    call RenderActiveEntitySpritesBlock           ; $73B8: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $73B8: $CD $C0 $3B
     call func_015_7B0D                            ; $73BB: $CD $0D $7B
     call func_015_7B3E                            ; $73BE: $CD $3E $7B
     ldh  a, [hFrameCounter]                       ; $73C1: $F0 $E7
@@ -6587,7 +6587,7 @@ Data_015_7577::
 
 label_015_757F:
     ld   de, Data_015_7577                        ; $757F: $11 $77 $75
-    call RenderActiveEntitySpritesBlock           ; $7582: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7582: $CD $C0 $3B
     call func_015_7B0D                            ; $7585: $CD $0D $7B
     call func_015_7B3E                            ; $7588: $CD $3E $7B
     ldh  a, [hFrameCounter]                       ; $758B: $F0 $E7
@@ -6991,7 +6991,7 @@ Data_015_781D::
 
 label_015_7825:
     ld   de, Data_015_7813                        ; $7825: $11 $13 $78
-    call RenderActiveEntitySpritesBlock           ; $7828: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7828: $CD $C0 $3B
     call func_015_7B0D                            ; $782B: $CD $0D $7B
     call func_015_7B3E                            ; $782E: $CD $3E $7B
     ldh  a, [hFrameCounter]                       ; $7831: $F0 $E7
@@ -7067,7 +7067,7 @@ WitchRatEntityHandler::
 
 jr_015_78AB:
     ld   de, Data_015_788D                        ; $78AB: $11 $8D $78
-    call RenderActiveEntitySpritesBlock           ; $78AE: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $78AE: $CD $C0 $3B
     call func_015_7B0D                            ; $78B1: $CD $0D $7B
     call func_015_7BC1                            ; $78B4: $CD $C1 $7B
     ld   hl, wEntitiesSpeedZTable                 ; $78B7: $21 $20 $C3
@@ -8050,7 +8050,7 @@ label_015_7E09:
     ld   de, Data_015_7D60                        ; $7E1B: $11 $60 $7D
 
 jr_015_7E1E:
-    call RenderActiveEntitySpritesBlock           ; $7E1E: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7E1E: $CD $C0 $3B
     ldh  a, [hIsGBC]                              ; $7E21: $F0 $FE
     and  a                                        ; $7E23: $A7
     jr   z, jr_015_7E2E                           ; $7E24: $28 $08
@@ -8109,7 +8109,7 @@ BookEntityHandler::
     jr   z, jr_015_7E82                           ; $7E78: $28 $08
 
     ld   de, Data_015_7E6D                        ; $7E7A: $11 $6D $7E
-    call RenderActiveEntitySpritesBlock           ; $7E7D: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7E7D: $CD $C0 $3B
     jr   jr_015_7EA6                              ; $7E80: $18 $24
 
 jr_015_7E82:
@@ -8301,7 +8301,7 @@ AnimalD1EntityHandler::
     jp   z, ClearEntityStatus_15            ; $7F9A: $CA $31 $7C
 
     ld   de, Data_015_7F86                        ; $7F9D: $11 $86 $7F
-    call RenderActiveEntitySpritesBlock           ; $7FA0: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7FA0: $CD $C0 $3B
     ld   a, [$C50F]                               ; $7FA3: $FA $0F $C5
     ld   e, a                                     ; $7FA6: $5F
     ld   d, b                                     ; $7FA7: $50

@@ -7,7 +7,7 @@ AnimalD0EntityHandler::
     jp   z, func_005_7B4B                         ; $7F32: $CA $4B $7B
 
     ld   de, Data_005_7F1E                        ; $7F35: $11 $1E $7F
-    call RenderActiveEntitySpritesBlock           ; $7F38: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7F38: $CD $C0 $3B
     ld   a, [$C50F]                               ; $7F3B: $FA $0F $C5
     ld   e, a                                     ; $7F3E: $5F
     ld   d, b                                     ; $7F3F: $50

@@ -33,7 +33,7 @@ jr_005_4054:
     ld   de, Data_005_4000                        ; $405D: $11 $00 $40
 
 jr_005_4060:
-    call RenderActiveEntitySpritesBlock           ; $4060: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4060: $CD $C0 $3B
     ld   a, [wRoomTransitionState]                ; $4063: $FA $24 $C1
     and  a                                        ; $4066: $A7
     jr   z, jr_005_407C                           ; $4067: $28 $13

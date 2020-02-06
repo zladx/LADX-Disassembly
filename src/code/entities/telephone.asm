@@ -6,7 +6,7 @@ TelephoneEntityHandler::
     sub  $05                                      ; $6A7E: $D6 $05
     ldh  [$FFEC], a                               ; $6A80: $E0 $EC
     ld   de, Data_006_6A78                        ; $6A82: $11 $78 $6A
-    call RenderActiveEntitySpritesBlock           ; $6A85: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $6A85: $CD $C0 $3B
     call func_006_64C6                            ; $6A88: $CD $C6 $64
     call func_006_645D                            ; $6A8B: $CD $5D $64
     ret  nc                                       ; $6A8E: $D0

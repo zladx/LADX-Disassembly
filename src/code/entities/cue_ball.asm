@@ -356,7 +356,7 @@ Data_006_4E78::
 
 label_006_4E88:
     ld   de, Data_006_4E78                        ; $4E88: $11 $78 $4E
-    call RenderActiveEntitySpritesBlock           ; $4E8B: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4E8B: $CD $C0 $3B
     call func_006_64C6                            ; $4E8E: $CD $C6 $64
     call GetEntityTransitionCountdown             ; $4E91: $CD $05 $0C
     jp   z, ClearEntityStatus_06                  ; $4E94: $CA $DB $65

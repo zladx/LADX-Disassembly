@@ -7426,19 +7426,18 @@ GetVectorTowardsLink_trampoline::
     call GetVectorTowardsLink
     jp   ReloadSavedBank
 
-; Render a block of 2 sprites for the active entity to the OAM buffer.
+; Render a pair of sprites for the active entity to the OAM buffer.
 ;
 ; The main input is a display list containing OAM attributes (2 bytes each).
-; Each display list item is a pair of OAM attributes.
+; Each display list item is a pair of OAM attributes (one for each sprite).
 ;
-; There is one pair of attributes per variant.
-; The entity variant is used to animate the entity, by selecting a block of sprites
-; among the different pairs in the display list.
+; The entity variant is used to animate the entity, by selecting one of
+; the different pairs in the display list.
 ;
 ; Inputs:
 ;   de                          address of the display list
 ;   hActiveEntitySpriteVariant  the sprite variant to use
-RenderActiveEntitySpritesBlock::
+RenderActiveEntitySpritesPair::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
     inc  a
@@ -7674,7 +7673,7 @@ RenderActiveEntitySprite::
 
 .functionEnd
     inc  de
-    jr   RenderActiveEntitySpritesBlock.jr_3C63
+    jr   RenderActiveEntitySpritesPair.jr_3C63
 
 label_3CD9::
     ld   a, $15

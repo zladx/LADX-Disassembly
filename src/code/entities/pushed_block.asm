@@ -24,7 +24,7 @@ PushedBlockEntityHandler::
     ld   de, data_003_5245                        ; $525A: $11 $45 $52
 
 jr_003_525D:
-    call RenderActiveEntitySpritesBlock           ; $525D: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $525D: $CD $C0 $3B
     call func_003_7F78                            ; $5260: $CD $78 $7F
     call func_003_7F25                            ; $5263: $CD $25 $7F
     call func_003_52D4                            ; $5266: $CD $D4 $52

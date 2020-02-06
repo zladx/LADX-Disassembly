@@ -155,7 +155,7 @@ jr_005_4F39:
     ld   a, c                                     ; $4F39: $79
     ld   [$C50F], a                               ; $4F3A: $EA $0F $C5
     ld   de, Data_005_4E2A                        ; $4F3D: $11 $2A $4E
-    call RenderActiveEntitySpritesBlock           ; $4F40: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4F40: $CD $C0 $3B
     call func_005_54C3                            ; $4F43: $CD $C3 $54
     ld   a, [wGameplayType]                       ; $4F46: $FA $95 $DB
     cp   $07                                      ; $4F49: $FE $07
@@ -616,7 +616,7 @@ func_005_51CE::
     add  hl, bc                                   ; $51E6: $09
     ld   [hl], $7A                                ; $51E7: $36 $7A
     ld   de, Data_005_51CA                        ; $51E9: $11 $CA $51
-    call RenderActiveEntitySpritesBlock           ; $51EC: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $51EC: $CD $C0 $3B
     call func_005_7A3A                            ; $51EF: $CD $3A $7A
     call func_005_5506                            ; $51F2: $CD $06 $55
     ret  nc                                       ; $51F5: $D0
@@ -675,7 +675,7 @@ jr_005_5237:
 jr_005_5245:
     call func_005_54EA                            ; $5245: $CD $EA $54
     ld   de, Data_005_4E0A                        ; $5248: $11 $0A $4E
-    call RenderActiveEntitySpritesBlock           ; $524B: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $524B: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $524E: $F0 $F0
     dec  a                                        ; $5250: $3D
     JP_TABLE                                      ; $5251
@@ -727,7 +727,7 @@ func_005_52AF::
     ld   a, $FF                                   ; $52C1: $3E $FF
     ldh  [hLinkAnimationState], a                 ; $52C3: $E0 $9D
     ld   de, Data_005_5258                        ; $52C5: $11 $58 $52
-    call RenderActiveEntitySpritesBlock           ; $52C8: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $52C8: $CD $C0 $3B
     ldh  a, [hIsGBC]                              ; $52CB: $F0 $FE
     and  a                                        ; $52CD: $A7
     jr   z, jr_005_52D8                           ; $52CE: $28 $08

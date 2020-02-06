@@ -16,7 +16,7 @@ Data_006_7624::
 
 WizrobeEntityHandler::
     ld   de, Data_006_7604                        ; $7628: $11 $04 $76
-    call RenderActiveEntitySpritesBlock           ; $762B: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $762B: $CD $C0 $3B
     call func_006_64C6                            ; $762E: $CD $C6 $64
     call func_006_64F7                            ; $7631: $CD $F7 $64
     call func_006_6541                            ; $7634: $CD $41 $65

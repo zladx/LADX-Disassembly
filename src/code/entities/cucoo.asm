@@ -17,7 +17,7 @@ CucooEntityHandler::
 
 jr_005_4538:
     ld   de, Data_005_4514                        ; $4538: $11 $14 $45
-    call RenderActiveEntitySpritesBlock           ; $453B: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $453B: $CD $C0 $3B
     ldh  a, [hActiveEntityStatus]                 ; $453E: $F0 $EA
     cp   $07                                      ; $4540: $FE $07
     jr   nz, jr_005_4557                          ; $4542: $20 $13

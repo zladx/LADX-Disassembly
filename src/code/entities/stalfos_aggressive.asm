@@ -4,7 +4,7 @@ Data_006_4AA8::
 
 StalfosAggressiveEntityHandler::
     ld   de, Data_006_4AA8
-    call RenderActiveEntitySpritesBlock           ; $4AB7: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4AB7: $CD $C0 $3B
     call func_006_64C6                            ; $4ABA: $CD $C6 $64
     call func_006_64F7                            ; $4ABD: $CD $F7 $64
     call label_3B39                               ; $4AC0: $CD $39 $3B

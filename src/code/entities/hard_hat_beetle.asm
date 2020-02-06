@@ -13,7 +13,7 @@ HardHatBeetleEntityHandler::
     ld   de, Data_006_4F34                        ; $4F45: $11 $34 $4F
 
 jr_006_4F48:
-    call RenderActiveEntitySpritesBlock           ; $4F48: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4F48: $CD $C0 $3B
     call func_006_64C6                            ; $4F4B: $CD $C6 $64
     call func_006_64F7                            ; $4F4E: $CD $F7 $64
     call label_3B39                               ; $4F51: $CD $39 $3B

@@ -91,7 +91,7 @@ jr_005_49CC:
 
 jr_005_49D1:
     ld   de, Data_005_4912                        ; $49D1: $11 $12 $49
-    call RenderActiveEntitySpritesBlock           ; $49D4: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $49D4: $CD $C0 $3B
     call func_005_7A3A                            ; $49D7: $CD $3A $7A
     ldh  a, [hActiveEntityState]                  ; $49DA: $F0 $F0
     JP_TABLE                                      ; $49DC
@@ -515,7 +515,7 @@ jr_005_4C24:
     jr   z, jr_005_4C3E                           ; $4C36: $28 $06
 
     ld   de, Data_005_4946                        ; $4C38: $11 $46 $49
-    call RenderActiveEntitySpritesBlock           ; $4C3B: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4C3B: $CD $C0 $3B
 
 jr_005_4C3E:
     ld   de, Data_005_4942                        ; $4C3E: $11 $42 $49
@@ -536,7 +536,7 @@ jr_005_4C54:
     ld   de, Data_005_4932                        ; $4C54: $11 $32 $49
 
 jr_005_4C57:
-    call RenderActiveEntitySpritesBlock           ; $4C57: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4C57: $CD $C0 $3B
     call func_005_7A3A                            ; $4C5A: $CD $3A $7A
     call func_005_54C3                            ; $4C5D: $CD $C3 $54
 
@@ -817,7 +817,7 @@ jr_005_4DF3:
     ldh  [$FFEC], a                               ; $4DF7: $E0 $EC
     xor  a                                        ; $4DF9: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4DFA: $E0 $F1
-    call RenderActiveEntitySpritesBlock           ; $4DFC: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4DFC: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4DFF: $CD $8A $3D
     ld   hl, wEntitiesSpriteVariantTable          ; $4E02: $21 $B0 $C3
     add  hl, bc                                   ; $4E05: $09

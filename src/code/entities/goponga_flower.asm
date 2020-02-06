@@ -6,7 +6,7 @@ Data_006_63F4::
 
 GopongaFlowerEntityHandler::
     ld   de, Data_006_63F4                        ; $63FC: $11 $F4 $63
-    call RenderActiveEntitySpritesBlock           ; $63FF: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $63FF: $CD $C0 $3B
 
     call func_006_64C6                            ; $6402: $CD $C6 $64
     call func_C56                                 ; $6405: $CD $56 $0C

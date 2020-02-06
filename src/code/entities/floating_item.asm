@@ -64,7 +64,7 @@ jr_006_7B3D:
     jr   nz, jr_006_7B5B                          ; $7B51: $20 $08
 
     ld   de, Data_006_7AD1 + 2                    ; $7B53: $11 $D3 $7A
-    call RenderActiveEntitySpritesBlock           ; $7B56: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7B56: $CD $C0 $3B
     jr   jr_006_7B61                              ; $7B59: $18 $06
 
 jr_006_7B5B:

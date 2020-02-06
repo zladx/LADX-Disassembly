@@ -370,7 +370,7 @@ func_005_6A5F::
     ldh  [$FFEC], a                               ; $6A9C: $E0 $EC
     pop  bc                                       ; $6A9E: $C1
     ld   de, Data_005_6A24                        ; $6A9F: $11 $24 $6A
-    jp   RenderActiveEntitySpritesBlock               ; $6AA2: $C3 $C0 $3B
+    jp   RenderActiveEntitySpritesPair                ; $6AA2: $C3 $C0 $3B
 
 func_005_6AA5::
     ld   hl, wEntitiesUnknowTableY                ; $6AA5: $21 $D0 $C3
@@ -417,7 +417,7 @@ func_005_6AA5::
     ld   a, $04                                   ; $6AE5: $3E $04
     ldh  [hActiveEntitySpriteVariant], a          ; $6AE7: $E0 $F1
     ld   de, Data_005_6A24                        ; $6AE9: $11 $24 $6A
-    call RenderActiveEntitySpritesBlock           ; $6AEC: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $6AEC: $CD $C0 $3B
     ld   hl, wEntitiesSpriteVariantTable          ; $6AEF: $21 $B0 $C3
     add  hl, bc                                   ; $6AF2: $09
     ld   a, [hl]                                  ; $6AF3: $7E

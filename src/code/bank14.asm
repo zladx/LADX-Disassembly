@@ -2273,7 +2273,7 @@ jr_014_5360:
     ret                                           ; $536A: $C9
 
 jr_014_536B:
-    ld   a, [wC15C]                               ; $536B: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]                               ; $536B: $FA $5C $C1
     cp   $01                                      ; $536E: $FE $01
     jp   nz, label_014_5443                       ; $5370: $C2 $43 $54
 

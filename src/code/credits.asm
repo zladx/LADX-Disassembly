@@ -6465,7 +6465,7 @@ jr_017_78A1:
     jr   nz, jr_017_78DD                          ; $78AE: $20 $2D
 
     ld   de, $7879                                ; $78B0: $11 $79 $78
-    call RenderActiveEntitySpritesBlock           ; $78B3: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $78B3: $CD $C0 $3B
     ret                                           ; $78B6: $C9
 
 jr_017_78B7:
@@ -6529,7 +6529,7 @@ func_017_790D::
 
 jr_017_791D:
     ld   de, Data_017_78EF                        ; $791D: $11 $EF $78
-    call RenderActiveEntitySpritesBlock           ; $7920: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7920: $CD $C0 $3B
 
 jr_017_7923:
     call GetEntityTransitionCountdown             ; $7923: $CD $05 $0C

@@ -970,14 +970,14 @@ func_20_4B1F::
     ld   [wHasPlacedBomb], a                      ; $4B20: $EA $4E $C1
     ld   [wActiveProjectileCount], a                    ; $4B23: $EA $4D $C1
     ld   [$C1A4], a                               ; $4B26: $EA $A4 $C1
-    ld   [wC15C], a                               ; $4B29: $EA $5C $C1
+    ld   [wIsCarryingLiftedObject], a                               ; $4B29: $EA $5C $C1
     ld   [$C1AE], a                               ; $4B2C: $EA $AE $C1
-    ld   a, [$C144]                               ; $4B2F: $FA $44 $C1
+    ld   a, [wIsLinkPushing]                               ; $4B2F: $FA $44 $C1
     and  a                                        ; $4B32: $A7
     jr   z, jr_020_4B39                           ; $4B33: $28 $04
 
     dec  a                                        ; $4B35: $3D
-    ld   [$C144], a                               ; $4B36: $EA $44 $C1
+    ld   [wIsLinkPushing], a                               ; $4B36: $EA $44 $C1
 
 jr_020_4B39:
     ret                                           ; $4B39: $C9
@@ -10830,7 +10830,7 @@ jr_020_7D55:
 
 jr_020_7D74:
     ld   [$C3C0], a                               ; $7D74: $EA $C0 $C3
-    ld   a, [wLinkWalkingFrameCount]              ; $7D77: $FA $23 $C1
+    ld   a, [wActiveEntityIndex]                  ; $7D77: $FA $23 $C1
     ld   c, a                                     ; $7D7A: $4F
     ret                                           ; $7D7B: $C9
 

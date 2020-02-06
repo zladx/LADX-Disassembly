@@ -38,7 +38,7 @@ jr_006_725A:
     ld   de, Data_006_7224                        ; $7263: $11 $24 $72
 
 jr_006_7266:
-    call RenderActiveEntitySpritesBlock           ; $7266: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7266: $CD $C0 $3B
     call func_006_64C6                            ; $7269: $CD $C6 $64
     ld   a, [wIsIndoor]                           ; $726C: $FA $A5 $DB
     and  a                                        ; $726F: $A7

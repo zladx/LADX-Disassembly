@@ -8,7 +8,7 @@ BoomerangEntityHandler::
     ld   [wActiveProjectileCount], a                    ; $4463: $EA $4D $C1
 
     ld   de, Data_019_4451                        ; $4466: $11 $51 $44
-    call RenderActiveEntitySpritesBlock           ; $4469: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4469: $CD $C0 $3B
     call func_019_7D3D                            ; $446C: $CD $3D $7D
     call PlayBoomerangSfx_trampoline               ; $446F: $CD $F8 $29
     ldh  a, [hFrameCounter]                       ; $4472: $F0 $E7

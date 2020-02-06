@@ -672,7 +672,7 @@ Data_005_6788::
 
 label_005_6798:
     ld   de, Data_005_6788                        ; $6798: $11 $88 $67
-    call RenderActiveEntitySpritesBlock           ; $679B: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $679B: $CD $C0 $3B
     call func_005_7A3A                            ; $679E: $CD $3A $7A
     call label_3B44                               ; $67A1: $CD $44 $3B
     ldh  a, [hActiveEntityState]                  ; $67A4: $F0 $F0
@@ -722,7 +722,7 @@ Data_005_67E2::
 
 label_005_67EA:
     ld   de, Data_005_67E2                        ; $67EA: $11 $E2 $67
-    call RenderActiveEntitySpritesBlock           ; $67ED: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $67ED: $CD $C0 $3B
     call func_005_7A3A                            ; $67F0: $CD $3A $7A
     call func_005_7AB1                            ; $67F3: $CD $B1 $7A
     call func_005_7AEA                            ; $67F6: $CD $EA $7A

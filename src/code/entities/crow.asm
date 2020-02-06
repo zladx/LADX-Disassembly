@@ -40,7 +40,7 @@ jr_006_5CBE:
 
 jr_006_5CCC:
     ld   de, Data_006_5C89                        ; $5CCC: $11 $89 $5C
-    call RenderActiveEntitySpritesBlock           ; $5CCF: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $5CCF: $CD $C0 $3B
     ldh  a, [hActiveEntityState]                  ; $5CD2: $F0 $F0
     and  a                                        ; $5CD4: $A7
     jr   nz, jr_006_5CE5                          ; $5CD5: $20 $0E

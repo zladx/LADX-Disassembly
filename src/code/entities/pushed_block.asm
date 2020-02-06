@@ -24,7 +24,7 @@ PushedBlockEntityHandler::
     ld   de, data_003_5245                        ; $525A: $11 $45 $52
 
 jr_003_525D:
-    call RenderActiveEntitySpritesBlock           ; $525D: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $525D: $CD $C0 $3B
     call func_003_7F78                            ; $5260: $CD $78 $7F
     call func_003_7F25                            ; $5263: $CD $25 $7F
     call func_003_52D4                            ; $5266: $CD $D4 $52
@@ -33,7 +33,7 @@ jr_003_525D:
 
     call CopyLinkFinalPositionToPosition          ; $526E: $CD $BE $0C
     ld   a, $03                                   ; $5271: $3E $03
-    ld   [$C144], a                               ; $5273: $EA $44 $C1
+    ld   [wIsLinkPushing], a                               ; $5273: $EA $44 $C1
 
 jr_003_5276:
     ldh  a, [hMapRoom]                            ; $5276: $F0 $F6

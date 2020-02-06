@@ -44,7 +44,7 @@ jr_027_7255:
 
 jr_027_7274:
     ld   [$C3C0], a                               ; $7274: $EA $C0 $C3
-    ld   a, [wLinkWalkingFrameCount]              ; $7277: $FA $23 $C1
+    ld   a, [wActiveEntityIndex]                  ; $7277: $FA $23 $C1
     ld   c, a                                     ; $727A: $4F
     ret                                           ; $727B: $C9
 

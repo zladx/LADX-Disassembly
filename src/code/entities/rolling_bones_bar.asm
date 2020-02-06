@@ -217,7 +217,7 @@ func_006_6FEA::
 
 .loop
     ld   de, Data_006_6ED5                        ; $6FEE: $11 $D5 $6E
-    call RenderActiveEntitySpritesBlock           ; $6FF1: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $6FF1: $CD $C0 $3B
     ldh  a, [$FFEC]                               ; $6FF4: $F0 $EC
     add  $10                                      ; $6FF6: $C6 $10
     ldh  [$FFEC], a                               ; $6FF8: $E0 $EC

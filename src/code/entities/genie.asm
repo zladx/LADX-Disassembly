@@ -1234,7 +1234,7 @@ Data_004_48D1::
 
 GenieState3Handler::
     ld   de, Data_004_48D1                        ; $48D9: $11 $D1 $48
-    call RenderActiveEntitySpritesBlock           ; $48DC: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $48DC: $CD $C0 $3B
     call func_004_7FA3                            ; $48DF: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $48E2: $F0 $E7
     rra                                           ; $48E4: $1F
@@ -1297,7 +1297,7 @@ jr_004_4938:
 
 GenieState4Handler::
     ld   de, Data_004_48D1                        ; $493E: $11 $D1 $48
-    call RenderActiveEntitySpritesBlock           ; $4941: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $4941: $CD $C0 $3B
     call func_004_7FA3                            ; $4944: $CD $A3 $7F
     ldh  a, [hFrameCounter]                       ; $4947: $F0 $E7
     rra                                           ; $4949: $1F

@@ -33,7 +33,7 @@ PolsVoiceEntityHandler::
 
 jr_006_73AD:
     ld   de, Data_006_7373                        ; $73AD: $11 $73 $73
-    call RenderActiveEntitySpritesBlock           ; $73B0: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $73B0: $CD $C0 $3B
     call func_006_64C6                            ; $73B3: $CD $C6 $64
     call func_006_64F7                            ; $73B6: $CD $F7 $64
     call func_006_6541                            ; $73B9: $CD $41 $65

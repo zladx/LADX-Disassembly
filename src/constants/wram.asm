@@ -86,9 +86,17 @@ wLinkGroundStatus:: ; C11F
   ; 1:  steps (only when moving)
   ; 3:  wet or grassy
   ; 7:  pit
+  ;
+  ; Also see: wLinkGroundVfx
   ds 1
 
-wC120: ds 1
+wConsecutiveStepsCount: ; C120
+  ; Number of consecutive steps taken by Link.
+  ; Doubled when running with pegasus boots.
+  ; Special values:
+  ;  -1   bumping using Pegasus Boots
+  ;   7   initial value at rest
+  ds 1
 
 wIsUsingSpinAttack:: ; C121
   ds 1
@@ -99,8 +107,9 @@ wSwordCharge:: ; C122
   ; 0x28:  fully charged
   ds 1
 
-wLinkWalkingFrameCount:: ; C123
-  ; Number of frames during which Link has been walking continuously
+wActiveEntityIndex:: ; C123
+  ; Index of the entity being currently animated.
+  ; (Also used for the current transcient VFX being drawn.)
   ds 1
 
 ; See ROOM_TRANSITION_* constants for possible values.
@@ -190,8 +199,11 @@ wIsLinkInTheAir:: ; C143
   ; Is Link in the air (jumping with the feather, flying with roaster, etc)?
   ds 1
 
+wIsLinkPushing:: ; C144
+  ds 1
+
 ; Unlabeled
-ds $6
+ds $5
 
 wIsRunningWithPegasusBoots:: ; C14A
   ds 1
@@ -242,7 +254,9 @@ wHasMirrorShield:: ; C15A
 wIsUsingShield:: ; C15B
   ds 1
 
-wC15C: ds 1
+wIsCarryingLiftedObject: ; C15C
+  ; Is Link carrying an object above his head
+  ds 1
 
 ; Contains a DIRECTION_* value taken from Link's irection
 wC15D: ds 1
@@ -304,8 +318,14 @@ wTransitionGfxFrameCount:: ; C180
   ; Number of frames rendered during a warp transition.
   ds 1
 
+wLinkGroundVfx:: ; wLinkGroundVfx
+  ; Environmental visual effect displayed depending on which ground Link is standing.
+  ; This may also affect the sound effects, or Link's position.
+  ; See GROUND_VFX_* constants for possible values.
+  ds 1
+
 ; Unlabeled
-ds $C18E - $C181
+ds $C18E - $C182
 
 wRoomEvent:: ; C18E
   ; Event for the current room

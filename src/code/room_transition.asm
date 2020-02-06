@@ -758,7 +758,7 @@ label_002_7C14:
     or   [hl]                                     ; $7C23: $B6
     ret  nz                                       ; $7C24: $C0
 
-    ld   a, [$C181]                               ; $7C25: $FA $81 $C1
+    ld   a, [wLinkGroundVfx]                               ; $7C25: $FA $81 $C1
     sub  $F0                                      ; $7C28: $D6 $F0
     ld   e, a                                     ; $7C2A: $5F
     ld   d, $00                                   ; $7C2B: $16 $00

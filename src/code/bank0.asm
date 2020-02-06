@@ -687,9 +687,9 @@ Farcall_trampoline::
     jp   hl
 
 func_BF0::
-    ld   a, BANK(Data_002_4948)
+    ld   a, BANK(LinkAnimationsLists)
     ld   [MBC3SelectBank], a
-    call func_1A50
+    call UpdateLinkWalkingAnimation
     jp   ReloadSavedBank
 
 IsEntityDropTimerZero::
@@ -1395,7 +1395,7 @@ WorldDefaultHandler::
 
     call ApplyGotItem
 
-    ld   a, [$C15C]
+    ld   a, [wIsCarryingLiftedObject]
     ld   [$C3CF], a
 
     callsb func_20_4B1F
@@ -1678,7 +1678,7 @@ label_11C3::
     ld   a, [$C117]
     and  a
     jp   nz, label_12ED
-    ld   a, [$C15C]
+    ld   a, [wIsCarryingLiftedObject]
     and  a
     jp   nz, label_12ED
     ld   a, [wSwordAnimationState]
@@ -1835,7 +1835,7 @@ label_12ED::
     ret
 
 UseShield::
-    ld   a, [$C144]
+    ld   a, [wIsLinkPushing]
     and  a
     ret  nz
     ld   a, NOISE_SFX_DRAW_SHIELD
@@ -2508,9 +2508,9 @@ UsePegasusBoots::
     ld   hl, $C146
     or   [hl]
     ret  nz
-    ld   a, [$C120]
+    ld   a, [wConsecutiveStepsCount]
     add  a, $02
-    ld   [$C120], a
+    ld   [wConsecutiveStepsCount], a
     call func_1756
     ld   a, [wPegasusBootsChargeMeter]
     inc  a
@@ -2546,11 +2546,14 @@ func_1756::
     ld   hl, $C146
     or   [hl]
     ret  nz
+
     ldh  a, [hLinkPositionX]
     ldh  [hScratch0], a
-    ld   a, [$C181]
-    cp   $05
-    jr   z, .label_1781
+
+    ld   a, [wLinkGroundVfx]
+    cp   GROUND_VFX_SHALLOW_WATER
+    jr   z, .shallowWater
+
     ld   a, NOISE_SFX_FOOTSTEP
     ldh  [hNoiseSfx], a
     ldh  a, [hLinkPositionY]
@@ -2559,7 +2562,7 @@ func_1756::
     ld   a, TRANSCIENT_VFX_PEGASUS_DUST
     jp   AddTranscientVfx
 
-.label_1781
+.shallowWater
     ldh  a, [hLinkPositionY]
     ldh  [hScratch1], a
     ld   a, JINGLE_WATER_DIVE
@@ -2980,89 +2983,96 @@ func_1A39::
     ld   [MBC3SelectBank], a
     ret
 
-func_1A50::
-    ld   a, [$C120]
+; Update hLinkAnimationState with the correct walking animation id.
+;
+; It uses Link's state to tell if Link has its shield, is side-scrolling, etc,
+; and uses the number of steps walked to alternate between different variants.
+UpdateLinkWalkingAnimation::
+    ; d = (wConsecutiveStepsCount / 8) % 2
+    ld   a, [wConsecutiveStepsCount]
     sra  a
     sra  a
     sra  a
     and  $01
     ld   d, a
+
+    ; bc = d + ([hLinkDirection] * 2
     ldh  a, [hLinkDirection]
     sla  a
     or   d
     ld   c, a
     ld   b, $00
+
     ld   hl, Data_002_4948
     ld   a, [wLinkMotionState]
-    cp   $01
-    jr   nz, .label_1A78
+    cp   LINK_MOTION_FALLING_UP
+    jr   nz, .notFallingUp
     ldh  a, [$FF9C]
     and  a
-    jr   z, .label_1A76
+    jr   z, .fallingUpEnd
     ld   hl, Data_002_4950
+.fallingUpEnd
+    jr   .done
 
-.label_1A76
-    jr   .label_1AC7
-
-.label_1A78
+.notFallingUp
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   z, .label_1A88
+    jr   z, .notSideScrolling
     ldh  a, [$FF9C]
     cp   $02
-    jr   nz, .label_1A88
-    ld   hl, Data_002_4958
-    jr   .label_1AC7
+    jr   nz, .notSideScrolling
+    ld   hl, LinkAnimationsList_WalkSideScrolling
+    jr   .done
 
-.label_1A88
-    ld   a, [$C15C]
+.notSideScrolling
+    ld   a, [wIsCarryingLiftedObject]
     cp   $01
-    jr   z, .label_1AC4
+    jr   z, .liftingObject
     ldh  a, [$FFB2]
     and  a
     jr   nz, .label_1A9A
-    ld   a, [$C144]
+    ld   a, [wIsLinkPushing]
     and  a
-    jr   nz, .label_1ABF
+    jr   nz, .pushingObject
 
 .label_1A9A
     ld   a, [wHasMirrorShield]
     and  a
-    jr   nz, .label_1AA5
-    ld   hl, $4910
-    jr   .label_1AC7
-
-.label_1AA5
-    ld   hl, $4918
+    jr   nz, .hasShield
+    ld   hl, LinkAnimationsList_WalkingNoShield
+    jr   .done
+.hasShield
+    ld   hl, LinkAnimationsList_WalkCarryingDefaultShield
     cp   $02
-    jr   nz, .label_1AAF
-    ld   hl, $4928
+    jr   nz, .shieldDone
+    ld   hl, LinkAnimationsList_WalkCarryingMirrorShield
+.shieldDone
 
-.label_1AAF
+    ; If the carried shield is actually being used, add 8 to the animation list address
     ld   a, [wIsUsingShield]
     and  a
-    jr   z, .label_1ABD
+    jr   z, .shieldNotUsed
     ld   a, l
     add  a, $08
     ld   l, a
     ld   a, h
     adc  a, $00
     ld   h, a
+.shieldNotUsed
+    jr   .done
 
-.label_1ABD
-    jr   .label_1AC7
+.pushingObject
+    ld   hl, LinkAnimationsList_PushingObject
+    jr   .done
 
-.label_1ABF
-    ld   hl, $4938
-    jr   .label_1AC7
+.liftingObject
+    ld   hl, LinkAnimationsList_LiftingObject
+.done
 
-.label_1AC4
-    ld   hl, $4940
-
-.label_1AC7
-
+    ; Read the value in the animation list…
     add  hl, bc
     ld   a, [hl]
+    ; … and set Link's animation state.
     ldh  [hLinkAnimationState], a
     ret
 
@@ -3319,7 +3329,7 @@ label_1F69_trampoline::
 label_1F69::
     ; If running with pegagus boots, or hLinkPositionZ != 0, or Link's motion != LINK_MOTION_INTERACTIVE, return
     ld   hl, wIsRunningWithPegasusBoots
-    ld   a, [$C15C]
+    ld   a, [wIsCarryingLiftedObject]
     or   [hl]
     ld   hl, hLinkPositionZ
     or   [hl]
@@ -7130,9 +7140,9 @@ AnimateEntities::
 
     ; For each entity slot…
 .loop
-    ; Save the active entity index to wLinkWalkingFrameCount
+    ; Save the active entity index
     ld   a, c
-    ld   [wLinkWalkingFrameCount], a
+    ld   [wActiveEntityIndex], a
 
     ; Read the entity state
     ld   hl, wEntitiesStatusTable
@@ -7426,19 +7436,18 @@ GetVectorTowardsLink_trampoline::
     call GetVectorTowardsLink
     jp   ReloadSavedBank
 
-; Render a block of 2 sprites for the active entity to the OAM buffer.
+; Render a pair of sprites for the active entity to the OAM buffer.
 ;
 ; The main input is a display list containing OAM attributes (2 bytes each).
-; Each display list item is a pair of OAM attributes.
+; Each display list item is a pair of OAM attributes (one for each sprite).
 ;
-; There is one pair of attributes per variant.
-; The entity variant is used to animate the entity, by selecting a block of sprites
-; among the different pairs in the display list.
+; The entity variant is used to animate the entity, by selecting one of
+; the different pairs in the display list.
 ;
 ; Inputs:
 ;   de                          address of the display list
 ;   hActiveEntitySpriteVariant  the sprite variant to use
-RenderActiveEntitySpritesBlock::
+RenderActiveEntitySpritesPair::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
     inc  a
@@ -7567,11 +7576,12 @@ RenderActiveEntitySpritesBlock::
     ld   [de], a
 .jr_3C63
 
-    ld   a, [wLinkWalkingFrameCount]
+    ; Restore the entity index to bc
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     ld   b, $00
-    callsb func_015_795D
 
+    callsb func_015_795D
 label_3C71::
     call func_015_7995
 
@@ -7587,9 +7597,10 @@ label_3C71::
 ; among the different attributes in the display list.
 ;
 ; Inputs:
-;   de   address of the display list
-;   hActiveEntitySpriteVariant     the sprite variant to use
-;   $C3C0 index of the dynamically allocated OAM slot
+;   de                          address of the display list
+;   wActiveEntityIndex          index
+;   hActiveEntitySpriteVariant  the sprite variant to use
+;   $C3C0                       index of the dynamically allocated OAM slot
 RenderActiveEntitySprite::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
@@ -7608,8 +7619,8 @@ RenderActiveEntitySprite::
     add  hl, bc
     ld   e, l
     ld   d, h
-    ; bc = [wLinkWalkingFrameCount]
-    ld   a, [wLinkWalkingFrameCount]
+    ; bc = [wActiveEntityIndex]
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     ld   b, $00
 
@@ -7674,7 +7685,7 @@ RenderActiveEntitySprite::
 
 .functionEnd
     inc  de
-    jr   RenderActiveEntitySpritesBlock.jr_3C63
+    jr   RenderActiveEntitySpritesPair.jr_3C63
 
 label_3CD9::
     ld   a, $15
@@ -7699,7 +7710,7 @@ label_3CE0::
 ;   c   the number of sprites
 ;
 ; Return value:
-;   c   [wLinkWalkingFrameCount]
+;   c   [wActiveEntityIndex]
 RenderActiveEntitySpritesRect::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
@@ -7723,7 +7734,7 @@ RenderActiveEntitySpritesRect::
     ld   a, c
     ldh  [hScratch0], a
 
-    ld   a, [wLinkWalkingFrameCount]
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     call SkipDisabledEntityDuringRoomTransition
 
@@ -7784,13 +7795,13 @@ RenderActiveEntitySpritesRect::
     dec  c
     jr   nz, .loop
 
-    ld   a, [wLinkWalkingFrameCount]
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     callsb func_015_795D
     jp   ReloadSavedBank
 
 .return
-    ld   a, [wLinkWalkingFrameCount]
+    ld   a, [wActiveEntityIndex]
     ld   c, a
     ret
 

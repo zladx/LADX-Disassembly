@@ -11,7 +11,7 @@ AntiFairyOAMAttributes::
 
 AntiFairyEntityHandler::
     ld   de, AntiFairyOAMAttributes               ; $7876: $11 $6E $78
-    call RenderActiveEntitySpritesBlock           ; $7879: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $7879: $CD $C0 $3B
     call func_006_64C6                            ; $787C: $CD $C6 $64
 
 jr_006_787F:

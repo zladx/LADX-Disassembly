@@ -71,7 +71,7 @@ jr_006_5A36:
     ldh  [hActiveEntitySpriteVariant], a          ; $5A41: $E0 $F1
 
 jr_006_5A43:
-    call RenderActiveEntitySpritesBlock           ; $5A43: $CD $C0 $3B
+    call RenderActiveEntitySpritesPair            ; $5A43: $CD $C0 $3B
     call func_006_64C6                            ; $5A46: $CD $C6 $64
     call func_C56                                 ; $5A49: $CD $56 $0C
     call func_006_657A                            ; $5A4C: $CD $7A $65

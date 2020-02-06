@@ -7196,10 +7196,10 @@ AnimateEntity::
     jr   nz, .notLifted
 .entityLifted
     call UpdateEntityPositionForRoomTransition
-    call label_3D8A
+    call CopyEntityPositionToActivePosition
     jr   .liftedEnd
 .notLifted
-    call label_3D8A
+    call CopyEntityPositionToActivePosition
     call UpdateEntityPositionForRoomTransition
 .liftedEnd
 
@@ -7431,11 +7431,18 @@ GetVectorTowardsLink_trampoline::
 ;
 ; This is not called for unanimated entities (like butterflies,
 ; which are animated only by the actual tile changing.)
+;
+; Animation is done using a display list, containing sprites attributes.
+; The display list must be `sprite attributes * number of sprites * number of variants`
+; long.
+;
+; Inputs:
+;   de   address of the display list
+;
 RenderAnimatedActiveEntity::
-    ; Increment hActiveEntitySpriteVariant
+    ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
     inc  a
-    ; If hActiveEntitySpriteVariant = 0, return
     ret  z
 
     call SkipDisabledEntityDuringRoomTransition
@@ -7451,19 +7458,19 @@ RenderAnimatedActiveEntity::
     ld   e, l
     ld   d, h
 
-    ; [de++] = [wActiveEntityPosY]
-    ldh  a, [wActiveEntityPosY]
+    ; [de++] = [$FFEC]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
 
-    ; [de++] = [$FFED] + [wActiveEntityPosX] - [wScreenShakeHorizontal]
+    ; [de++] = [$FFED] + [hActiveEntityPosX] - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
     ldh  a, [$FFED]
     and  $20
     rra
     rra
-    ld   hl, wActiveEntityPosX
+    ld   hl, hActiveEntityPosX
     add  a, [hl]
     sub  a, c
     ld   [de], a
@@ -7488,13 +7495,13 @@ RenderAnimatedActiveEntity::
     ld   [de], a
     and  $0F
     cp   $0F
-    jr   nz, label_3C08
+    jr   nz, .jr_3C08
     dec  de
     ld   a, $F0
     ld   [de], a
     inc  de
+.jr_3C08
 
-label_3C08::
     inc  de
     ld   a, [hli]
     push hl
@@ -7503,18 +7510,18 @@ label_3C08::
     ld   [de], a
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_3C21
+    jr   z, .jr_3C21
     ldh  a, [$FFED]
     and  $10
-    jr   z, label_3C21
+    jr   z, .jr_3C21
     ld   a, [de]
     and  $F8
     or   $04
     ld   [de], a
+.jr_3C21
 
-label_3C21::
     inc  de
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
     ld   a, [wScreenShakeHorizontal]
@@ -7524,7 +7531,7 @@ label_3C21::
     xor  $20
     rra
     rra
-    ld   hl, wActiveEntityPosX
+    ld   hl, hActiveEntityPosX
     sub  a, c
     add  a, [hl]
     ld   [de], a
@@ -7537,13 +7544,13 @@ label_3C21::
     ld   [de], a
     and  $0F
     cp   $0F
-    jr   nz, label_3C4B
+    jr   nz, .jr_3C4B
     dec  de
     ld   a, $F0
     ld   [de], a
     inc  de
+.jr_3C4B
 
-label_3C4B::
     inc  de
     ld   a, [hl]
     ld   hl, $FFED
@@ -7551,22 +7558,20 @@ label_3C4B::
     ld   [de], a
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_3C63
+    jr   z, .jr_3C63
     ldh  a, [$FFED]
     and  $10
-    jr   z, label_3C63
+    jr   z, .jr_3C63
     ld   a, [de]
     and  $F8
     or   $04
     ld   [de], a
+.jr_3C63
 
-label_3C63::
     ld   a, [wLinkWalkingFrameCount]
     ld   c, a
     ld   b, $00
-    ld   a, BANK(func_015_795D)
-    ld   [MBC3SelectBank], a
-    call func_015_795D
+    callsb func_015_795D
 
 label_3C71::
     call func_015_7995
@@ -7606,20 +7611,20 @@ RenderSimpleEntityWithSpriteVariantToOAM::
     ; If in a side-scrolling room…
     ldh  a, [hIsSideScrolling]
     and  a
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     jr   z, .sideScrollingEnd
-    ; … wActiveEntityPosY -= 4
+    ; … $FFEC -= 4
     sub  a, $04
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
 .sideScrollingEnd
 
-    ; (wDynamicOAMBuffer + [$C3C0] + 0) = [wActiveEntityPosY]
+    ; (wDynamicOAMBuffer + [$C3C0] + 0) = [$FFEC]
     ld   [de], a
     inc  de
-    ; (wDynamicOAMBuffer + [$C3C0] + 1) = [wActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
+    ; (wDynamicOAMBuffer + [$C3C0] + 1) = [hActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   h, a
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     add  a, $04
     sub  a, h
     ld   [de], a
@@ -7664,7 +7669,7 @@ RenderSimpleEntityWithSpriteVariantToOAM::
 
 .functionEnd
     inc  de
-    jr   label_3C63
+    jr   RenderAnimatedActiveEntity.jr_3C63
 
 label_3CD9::
     ld   a, $15
@@ -7714,7 +7719,7 @@ func_3CE6::
     ld   c, a
 
 .loop
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     add  a, [hl]
     ld   [de], a
     inc  hl
@@ -7722,7 +7727,7 @@ func_3CE6::
     push bc
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     add  a, [hl]
     sub  a, c
     ld   [de], a
@@ -7789,14 +7794,14 @@ SkipDisabledEntityDuringRoomTransition::
     and  a
     jr   z, .return
 
-    ; If wActiveEntityPosX - 1 is outside of screen, skip
-    ldh  a, [wActiveEntityPosX]
+    ; If hActiveEntityPosX - 1 is outside of screen, skip
+    ldh  a, [hActiveEntityPosX]
     dec  a
     cp   $C0
     jr   nc, .skip
 
-    ; If wActiveEntityPosY - 1 is outside of the screen, skip
-    ldh  a, [wActiveEntityPosY]
+    ; If $FFEC - 1 is outside of the screen, skip
+    ldh  a, [$FFEC]
     dec  a
     cp   $88
     jr   nc, .skip
@@ -7838,19 +7843,19 @@ ClearEntitySpeed::
     ld   [hl], b
     ret
 
-label_3D8A::
+CopyEntityPositionToActivePosition::
     ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
     ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEF], a
+    ldh  [hActiveEntityPosY], a
     ld   hl, wEntitiesPosZTable
     add  hl, bc
     sub  a, [hl]
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
     ret
 
 label_3DA0::
@@ -7937,7 +7942,7 @@ label_3E6B::
     callhl func_003_6472
     jp   ReloadSavedBank
 
-label_3E76::
+func_006_783C_trampoline::
     callsw func_006_783C
     ld   a, $03
     jp   SwitchBank
@@ -7963,9 +7968,9 @@ label_3E8E::
     xor  c
     and  $03
     ret  nz
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     ldh  [hScratch0], a
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     ldh  [hScratch1], a
     ld   a, TRANSCIENT_VFX_SMOKE
     call AddTranscientVfx

@@ -1,7 +1,7 @@
 KanaletCastleGateSwitchEntityHandler::
     ldh  a, [hRoomStatus]                         ; $409F: $F0 $F8
     and  $20                                      ; $40A1: $E6 $20
-    jp   nz, ClearEntityStatusAndReturn           ; $40A3: $C2 $31 $7C
+    jp   nz, ClearEntityStatus_15           ; $40A3: $C2 $31 $7C
 
     call func_015_7B0D                            ; $40A6: $CD $0D $7B
     ldh  a, [hActiveEntityState]                  ; $40A9: $F0 $F0
@@ -43,7 +43,7 @@ jr_015_40C0:
     ld   [wScreenShakeHorizontal], a              ; $40E1: $EA $55 $C1
     call_open_dialog $039                         ; $40E4
     call func_015_7CDB                            ; $40E9: $CD $DB $7C
-    jp   ClearEntityStatusAndReturn               ; $40EC: $C3 $31 $7C
+    jp   ClearEntityStatus_15               ; $40EC: $C3 $31 $7C
 
 jr_015_40EF:
     ld   e, $01                                   ; $40EF: $1E $01

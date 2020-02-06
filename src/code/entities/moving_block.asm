@@ -87,7 +87,7 @@ jr_015_416B:
 
 label_015_416F:
 jr_015_416F:
-    call label_3D8A                               ; $416F: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $416F: $CD $8A $3D
     call func_015_7BDB                            ; $4172: $CD $DB $7B
     add  $0C                                      ; $4175: $C6 $0C
     cp   $18                                      ; $4177: $FE $18
@@ -105,7 +105,7 @@ jr_015_416F:
     cp   $00                                      ; $418E: $FE $00
     jr   nz, jr_015_4199                          ; $4190: $20 $07
 
-    ldh  a, [wActiveEntityPosX]                   ; $4192: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $4192: $F0 $EE
     add  $0C                                      ; $4194: $C6 $0C
     ldh  [hLinkPositionX], a                      ; $4196: $E0 $98
     ret                                           ; $4198: $C9
@@ -114,7 +114,7 @@ jr_015_4199:
     cp   $01                                      ; $4199: $FE $01
     jr   nz, jr_015_41A4                          ; $419B: $20 $07
 
-    ldh  a, [wActiveEntityPosX]                   ; $419D: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $419D: $F0 $EE
     add  $F4                                      ; $419F: $C6 $F4
     ldh  [hLinkPositionX], a                      ; $41A1: $E0 $98
     ret                                           ; $41A3: $C9
@@ -132,7 +132,7 @@ jr_015_41A4:
     ret  nz                                       ; $41B1: $C0
 
 jr_015_41B2:
-    ldh  a, [wActiveEntityPosY]                   ; $41B2: $F0 $EC
+    ldh  a, [$FFEC]                               ; $41B2: $F0 $EC
     add  $F0                                      ; $41B4: $C6 $F0
     ldh  [hLinkPositionY], a                      ; $41B6: $E0 $99
     ret                                           ; $41B8: $C9
@@ -147,7 +147,7 @@ jr_015_41B9:
     ret  nz                                       ; $41C2: $C0
 
 jr_015_41C3:
-    ldh  a, [wActiveEntityPosY]                   ; $41C3: $F0 $EC
+    ldh  a, [$FFEC]                               ; $41C3: $F0 $EC
     add  $0C                                      ; $41C5: $C6 $0C
     ldh  [hLinkPositionY], a                      ; $41C7: $E0 $99
 

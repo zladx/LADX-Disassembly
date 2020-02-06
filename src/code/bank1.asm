@@ -2201,11 +2201,11 @@ label_5CA3::
     ld   hl, label_5C41
     add  hl, de
     ld   a, [hl]
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
     ld   hl, label_5C45
     add  hl, de
     ld   a, [hl]
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
     ld   a, [$C1B0]
     rla
     rla
@@ -2236,10 +2236,10 @@ label_5CBD::
     jr   nc, label_5D13
     ldh  [hActiveEntitySpriteVariant], a
     ld   de, wDynamicOAMBuffer
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     ld   [de], a
     inc  de
     ldh  a, [hActiveEntitySpriteVariant]
@@ -2257,10 +2257,10 @@ label_5CBD::
     ld   a, [hli]
     ld   [de], a
     inc  de
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     ld   [de], a
     inc  de
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     add  a, $08
     ld   [de], a
     inc  de
@@ -3578,12 +3578,12 @@ label_6A7C::
     ldh  [$FFED], a
     ldh  [hActiveEntityTilesOffset], a
     ld   a, $38
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
     ld   a, [wScreenShakeVertical]
     ld   e, a
     ld   a, $20
     sub  a, e
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
     ld   a, [$D214]
     and  a
     jr   z, label_6AC2
@@ -3614,13 +3614,13 @@ label_6AAE::
 
 label_6AC2::
     ld   a, $48
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
     ld   a, [wScreenShakeVertical]
     ld   e, a
     ld   a, [$D211]
     add  a, $20
     sub  a, e
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
     ld   a, [$D213]
     ld   e, a
     ld   d, $00

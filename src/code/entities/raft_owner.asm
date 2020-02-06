@@ -132,14 +132,14 @@ jr_005_5411:
     and  $01                                      ; $5417: $E6 $01
     call SetEntitySpriteVariant                   ; $5419: $CD $0C $3B
     ldh  a, [hLinkPositionX]                      ; $541C: $F0 $98
-    ld   hl, wActiveEntityPosX                    ; $541E: $21 $EE $FF
+    ld   hl, hActiveEntityPosX                    ; $541E: $21 $EE $FF
     sub  [hl]                                     ; $5421: $96
     add  $10                                      ; $5422: $C6 $10
     cp   $20                                      ; $5424: $FE $20
     jr   nc, jr_005_5440                          ; $5426: $30 $18
 
     ldh  a, [hLinkPositionY]                      ; $5428: $F0 $99
-    ld   hl, $FFEF                                ; $542A: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                                ; $542A: $21 $EF $FF
     sub  [hl]                                     ; $542D: $96
     add  $14                                      ; $542E: $C6 $14
     cp   $1C                                      ; $5430: $FE $1C
@@ -185,9 +185,9 @@ jr_005_546A:
     jr   jr_005_5487                              ; $546A: $18 $1B
 
 func_005_546C::
-    ldh  a, [wActiveEntityPosX]                   ; $546C: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $546C: $F0 $EE
     ldh  [hLinkPositionX], a                      ; $546E: $E0 $98
-    ldh  a, [wActiveEntityPosY]                   ; $5470: $F0 $EC
+    ldh  a, [$FFEC]                               ; $5470: $F0 $EC
     sub  $05                                      ; $5472: $D6 $05
     ldh  [hLinkPositionY], a                      ; $5474: $E0 $99
     call IncrementEntityState                     ; $5476: $CD $12 $3B
@@ -202,7 +202,7 @@ jr_005_5483:
     ldh  [hFFB2], a                               ; $5485: $E0 $B2
 
 jr_005_5487:
-    call label_3D8A                               ; $5487: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $5487: $CD $8A $3D
     ld   de, Data_005_53D4                        ; $548A: $11 $D4 $53
     jp   RenderAnimatedActiveEntity               ; $548D: $C3 $C0 $3B
 
@@ -296,7 +296,7 @@ func_005_5506::
     jr   nz, jr_005_5519                          ; $550B: $20 $0C
 
     ldh  a, [hLinkPositionY]                      ; $550D: $F0 $99
-    ld   hl, $FFEF                                ; $550F: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                                ; $550F: $21 $EF $FF
     sub  [hl]                                     ; $5512: $96
     add  $14                                      ; $5513: $C6 $14
     cp   $2B                                      ; $5515: $FE $2B
@@ -304,7 +304,7 @@ func_005_5506::
 
 jr_005_5519:
     ldh  a, [hLinkPositionY]                      ; $5519: $F0 $99
-    ld   hl, $FFEF                                ; $551B: $21 $EF $FF
+    ld   hl, hActiveEntityPosY                                ; $551B: $21 $EF $FF
     sub  [hl]                                     ; $551E: $96
     add  $14                                      ; $551F: $C6 $14
     cp   $28                                      ; $5521: $FE $28
@@ -313,7 +313,7 @@ jr_005_5523:
     jr   nc, jr_005_5569                          ; $5523: $30 $44
 
     ldh  a, [hLinkPositionX]                      ; $5525: $F0 $98
-    ld   hl, wActiveEntityPosX                    ; $5527: $21 $EE $FF
+    ld   hl, hActiveEntityPosX                    ; $5527: $21 $EE $FF
     sub  [hl]                                     ; $552A: $96
     add  $10                                      ; $552B: $C6 $10
     cp   $20                                      ; $552D: $FE $20

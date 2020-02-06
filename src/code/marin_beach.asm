@@ -464,13 +464,13 @@ label_6545::
 
 label_655F::
     ld   a, $7C
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
     ld   a, $58
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
     ld   hl, wDynamicOAMBuffer
     call label_658B
     ld   a, $48
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
     ld   de, label_6512
     ld   a, [$DC0F]
     and  a
@@ -489,11 +489,11 @@ label_658B::
     push bc
     ldh  a, [$FF97]
     ld   c, a
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     sub  a, c
     ldh  [$FFE8], a
     ldi  [hl], a
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     ldi  [hl], a
     ld   a, [de]
     inc  de
@@ -501,10 +501,10 @@ label_658B::
     ld   a, [de]
     inc  de
     ldi  [hl], a
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     sub  a, c
     ldi  [hl], a
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     add  a, $08
     ldi  [hl], a
     ld   a, [de]
@@ -529,11 +529,11 @@ label_65B2::
     ld   hl, wTranscientVfxPosXTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
     ld   hl, wTranscientVfxPosYTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
     ld   hl, wTranscientVfxCountdownTable
     add  hl, bc
     ld   a, [hl]

@@ -348,7 +348,7 @@ func_005_4228::
     cp   $40                                      ; $4236: $FE $40
     jr   c, jr_005_423E                           ; $4238: $38 $04
 
-    ldh  a, [wActiveEntityPosX]                   ; $423A: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $423A: $F0 $EE
     ld   [hl], a                                  ; $423C: $77
     inc  e                                        ; $423D: $1C
 
@@ -363,7 +363,7 @@ jr_005_423E:
     cp   $40                                      ; $424A: $FE $40
     jr   c, jr_005_4252                           ; $424C: $38 $04
 
-    ldh  a, [$FFEF]                               ; $424E: $F0 $EF
+    ldh  a, [hActiveEntityPosY]                   ; $424E: $F0 $EF
     ld   [hl], a                                  ; $4250: $77
     inc  e                                        ; $4251: $1C
 
@@ -542,7 +542,7 @@ label_005_4335:
 
     ld   hl, wEntitiesPosXTable                   ; $4341: $21 $00 $C2
     add  hl, de                                   ; $4344: $19
-    ldh  a, [wActiveEntityPosX]                   ; $4345: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $4345: $F0 $EE
     sub  [hl]                                     ; $4347: $96
     add  $0E                                      ; $4348: $C6 $0E
     cp   $1A                                      ; $434A: $FE $1A
@@ -550,7 +550,7 @@ label_005_4335:
 
     ld   hl, wEntitiesPosYTable                   ; $434D: $21 $10 $C2
     add  hl, de                                   ; $4350: $19
-    ldh  a, [wActiveEntityPosY]                   ; $4351: $F0 $EC
+    ldh  a, [$FFEC]                               ; $4351: $F0 $EC
     sub  [hl]                                     ; $4353: $96
     add  $10                                      ; $4354: $C6 $10
     cp   $20                                      ; $4356: $FE $20

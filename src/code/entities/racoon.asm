@@ -238,7 +238,7 @@ jr_005_4AAE:
     cp   $06                                      ; $4AB7: $FE $06
     jr   nc, jr_005_4AEC                          ; $4AB9: $30 $31
 
-    ldh  a, [$FFEF]                               ; $4ABB: $F0 $EF
+    ldh  a, [hActiveEntityPosY]                   ; $4ABB: $F0 $EF
     cp   $30                                      ; $4ABD: $FE $30
     jr   nc, jr_005_4AC5                          ; $4ABF: $30 $04
 
@@ -509,7 +509,7 @@ jr_005_4C24:
     ld   hl, wEntitiesPosYTable                   ; $4C2A: $21 $10 $C2
     add  hl, bc                                   ; $4C2D: $09
     ld   [hl], $34                                ; $4C2E: $36 $34
-    call label_3D8A                               ; $4C30: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4C30: $CD $8A $3D
     ldh  a, [hIsGBC]                              ; $4C33: $F0 $FE
     and  a                                        ; $4C35: $A7
     jr   z, jr_005_4C3E                           ; $4C36: $28 $06
@@ -633,15 +633,15 @@ TarinShield2Handler::
 
 jr_005_4CE6:
     ldh  a, [hLinkPositionX]                      ; $4CE6: $F0 $98
-    ldh  [wActiveEntityPosX], a                   ; $4CE8: $E0 $EE
+    ldh  [hActiveEntityPosX], a                   ; $4CE8: $E0 $EE
     ldh  a, [hLinkPositionY]                      ; $4CEA: $F0 $99
     sub  $0C                                      ; $4CEC: $D6 $0C
-    ldh  [wActiveEntityPosY], a                   ; $4CEE: $E0 $EC
+    ldh  [$FFEC], a                               ; $4CEE: $E0 $EC
     xor  a                                        ; $4CF0: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4CF1: $E0 $F1
     ld   de, data_005_4cc6                        ; $4CF3: $11 $C6 $4C
     call RenderSimpleEntityWithSpriteVariantToOAM ; $4CF6: $CD $77 $3C
-    call label_3D8A                               ; $4CF9: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4CF9: $CD $8A $3D
     ld   a, $6C                                   ; $4CFC: $3E $6C
     ldh  [hLinkAnimationState], a                 ; $4CFE: $E0 $9D
     ld   a, $02                                   ; $4D00: $3E $02
@@ -812,13 +812,13 @@ jr_005_4DE3:
     ld   a, $7C                                   ; $4DF1: $3E $7C
 
 jr_005_4DF3:
-    ldh  [wActiveEntityPosX], a                   ; $4DF3: $E0 $EE
+    ldh  [hActiveEntityPosX], a                   ; $4DF3: $E0 $EE
     ld   a, $5C                                   ; $4DF5: $3E $5C
-    ldh  [wActiveEntityPosY], a                   ; $4DF7: $E0 $EC
+    ldh  [$FFEC], a                               ; $4DF7: $E0 $EC
     xor  a                                        ; $4DF9: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4DFA: $E0 $F1
     call RenderAnimatedActiveEntity               ; $4DFC: $CD $C0 $3B
-    call label_3D8A                               ; $4DFF: $CD $8A $3D
+    call CopyEntityPositionToActivePosition       ; $4DFF: $CD $8A $3D
     ld   hl, wEntitiesSpriteVariantTable          ; $4E02: $21 $B0 $C3
     add  hl, bc                                   ; $4E05: $09
     ld   a, [hl]                                  ; $4E06: $7E

@@ -1066,17 +1066,17 @@ RenderIntroEntities::
     and  a
     jr   z, .continue ; If no entity at this table index, continue
 
-    ; wActiveEntityPosX = wEntitiesPosXTable[c]
+    ; hActiveEntityPosX = wEntitiesPosXTable[c]
     ld   hl, wEntitiesPosXTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
 
-    ; wActiveEntityPosY = wEntitiesPosYTable[c]
+    ; $FFEC = wEntitiesPosYTable[c]
     ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
 
     ; hActiveEntitySpriteVariant = wEntitiesSpriteVariantTable[c]
     ld   hl, wEntitiesSpriteVariantTable
@@ -1159,7 +1159,7 @@ RenderIntroShip::
     ld   hl, ShipHeaveTable
     add  hl, de
     ld   a, [hl]
-    ld   hl, wActiveEntityPosY
+    ld   hl, $FFEC
     add  a, [hl]
     ld   [hl], a
     ld   hl, data_7538
@@ -1168,12 +1168,12 @@ RenderIntroShip::
     ld   c, $06
 
 .loop
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     add  a, [hl]
     inc  hl
     ld   [de], a
     inc  de
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -1194,12 +1194,12 @@ RenderIntroShip::
     ld   de, $C018
     ld   c, $04
 .loop2
-    ldh  a, [wActiveEntityPosY]
+    ldh  a, [$FFEC]
     add  a, [hl]
     inc  hl
     ld   [de], a
     inc  de
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -1296,7 +1296,7 @@ label_7681::
     rra
     and  $01
     call SetEntitySpriteVariant
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     cp   $48
     jr   nc, label_769C
     call GetEntityTransitionCountdown
@@ -1618,11 +1618,11 @@ label_7920::
 
 label_7929::
     ld   a, $78
-    ldh  [wActiveEntityPosX], a
+    ldh  [hActiveEntityPosX], a
     ld   hl, $D018
     ld   a, $59
     add  a, [hl]
-    ldh  [wActiveEntityPosY], a
+    ldh  [$FFEC], a
     ldh  a, [hIsGBC]
     and  a
     jr   nz, label_795D
@@ -1804,7 +1804,7 @@ data_7A27::
     ld   d, $00
 
 RenderIntroInertLink::
-    ldh  a, [wActiveEntityPosX]
+    ldh  a, [hActiveEntityPosX]
     cp   $F0
     jr   nc, label_7A47
     xor  a

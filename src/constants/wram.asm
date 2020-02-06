@@ -886,6 +886,8 @@ wDungeonMinimap:: ; D480
 ds $D580 - $D4C0
 
 wEntitiesHitboxPositionTable:: ; D580
+  ; Entities hitboxes.
+  ; Each hitbox is a tuple of 4 bytes: x, y, width and height.
   ds MAX_ENTITIES * 4
 
 ; Unlabeled
@@ -1197,7 +1199,11 @@ wIsMarinFollowingLink:: ; DB73
 
 ; Unlabeled
 wDB74 equ $DB74
-  ds 2
+  ds 1
+
+wPurchasedMedecineCount:: ; DB75
+  ; Total number of medecine ever purchased from Crazy Tracy
+  ds 1
 
 wMaxMagicPowder:: ; DB76
   ds 1

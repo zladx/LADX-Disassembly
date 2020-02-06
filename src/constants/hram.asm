@@ -77,7 +77,9 @@ hFF9C:: ; hFF9C
  ds 1
 
 hLinkAnimationState:: ; FF9D
- ds 1
+  ; Values:
+  ; 6C   Got item
+  ds 1
 
 hLinkDirection:: ; FF9E
   ; Direction Link is facing
@@ -280,17 +282,17 @@ hActiveEntityStatus:: ; FFEA
 hActiveEntityType:: ; FFEB
   ds 1
 
-wActiveEntityPosY:: ; FFEC
-  ds 1
+; Unlabeled
+ds 1 ; FFEC
 
 ; Unlabeled
 ds 1 ; FFED
 
-wActiveEntityPosX:: ; FFEE
+hActiveEntityPosX:: ; FFEE
   ds 1
 
-; Unlabeled
-ds 1 ; FFEF
+hActiveEntityPosY:: ; FFEF
+  ds 1
 
 hActiveEntityState:: ; FFF0
   ; The entity-specific state of the active entity

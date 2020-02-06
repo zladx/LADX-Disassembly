@@ -385,7 +385,7 @@ func_005_5CCF::
     cp   $D4                                      ; $5CD7: $FE $D4
     jr   nz, jr_005_5CFB                          ; $5CD9: $20 $20
 
-    ldh  a, [wActiveEntityPosX]                   ; $5CDB: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $5CDB: $F0 $EE
     and  $F8                                      ; $5CDD: $E6 $F8
     cp   $C0                                      ; $5CDF: $FE $C0
     jr   nz, jr_005_5CEC                          ; $5CE1: $20 $09
@@ -892,7 +892,7 @@ func_005_5FA8::
     call GetEntityTransitionCountdown             ; $5FAB: $CD $05 $0C
     jr   nz, jr_005_5FEA                          ; $5FAE: $20 $3A
 
-    ldh  a, [wActiveEntityPosY]                   ; $5FB0: $F0 $EC
+    ldh  a, [$FFEC]                               ; $5FB0: $F0 $EC
     cp   $B0                                      ; $5FB2: $FE $B0
     jp   nc, label_005_5F78                       ; $5FB4: $D2 $78 $5F
 
@@ -1000,7 +1000,7 @@ jr_005_6040:
 
 jr_005_6053:
     call func_005_7AB1                            ; $6053: $CD $B1 $7A
-    ldh  a, [wActiveEntityPosY]                   ; $6056: $F0 $EC
+    ldh  a, [$FFEC]                               ; $6056: $F0 $EC
     and  $F0                                      ; $6058: $E6 $F0
     cp   $C0                                      ; $605A: $FE $C0
     jr   nz, jr_005_6061                          ; $605C: $20 $03
@@ -1187,7 +1187,7 @@ jr_005_62A6:
     dec  [hl]                                     ; $62AF: $35
 
 jr_005_62B0:
-    ldh  a, [wActiveEntityPosX]                   ; $62B0: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $62B0: $F0 $EE
     cp   $E0                                      ; $62B2: $FE $E0
     jp   nc, func_005_7B4B                        ; $62B4: $D2 $4B $7B
 
@@ -1229,7 +1229,7 @@ jr_005_62F5:
     dec  [hl]                                     ; $62F9: $35
 
 func_005_62FA::
-    ldh  a, [wActiveEntityPosX]                   ; $62FA: $F0 $EE
+    ldh  a, [hActiveEntityPosX]                   ; $62FA: $F0 $EE
     cp   $A8                                      ; $62FC: $FE $A8
     jp   nc, func_005_7B4B                        ; $62FE: $D2 $4B $7B
 

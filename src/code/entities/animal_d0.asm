@@ -13,7 +13,7 @@ AnimalD0EntityHandler::
     ld   d, b                                     ; $7F3F: $50
     ld   hl, wEntitiesPosYTable                   ; $7F40: $21 $10 $C2
     add  hl, de                                   ; $7F43: $19
-    ldh  a, [$FFEF]                               ; $7F44: $F0 $EF
+    ldh  a, [hActiveEntityPosY]                   ; $7F44: $F0 $EF
     ld   e, $00                                   ; $7F46: $1E $00
     cp   [hl]                                     ; $7F48: $BE
     jr   c, jr_005_7F4D                           ; $7F49: $38 $02

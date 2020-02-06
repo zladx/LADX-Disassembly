@@ -596,6 +596,10 @@ wEntitiesLoadOrderTable:: ; C460
   ds $10
 
 wEntitiesUnknowTableI:: ; C470
+  ; Some physics flags?
+  ; Used by func_015_7995
+  ;
+  ; Possible values: 02, 03
   ds $10
 
 ; Enemy flags?

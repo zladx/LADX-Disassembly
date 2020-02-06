@@ -7220,7 +7220,7 @@ jr_015_7994:
 
 func_015_7995::
     ldh  a, [hActiveEntityStatus]                 ; $7995: $F0 $EA
-    cp   $07                                      ; $7997: $FE $07
+    cp   ENTITY_STATUS_LIFTED                     ; $7997: $FE $07
     ret  z                                        ; $7999: $C8
 
     ld   hl, wEntitiesUnknowTableI                ; $799A: $21 $70 $C4

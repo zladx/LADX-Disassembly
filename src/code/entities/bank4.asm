@@ -4174,7 +4174,7 @@ jr_004_6884:
     pop  af                                       ; $6891: $F1
     ldh  [hLinkPositionXIncrement], a             ; $6892: $E0 $9A
     xor  a                                        ; $6894: $AF
-    ld   [$C144], a                               ; $6895: $EA $44 $C1
+    ld   [wIsLinkPushing], a                               ; $6895: $EA $44 $C1
     ldh  a, [hActiveEntityType]                   ; $6898: $F0 $EB
     cp   $52                                      ; $689A: $FE $52
     jp   nz, label_004_68E4                       ; $689C: $C2 $E4 $68
@@ -5407,7 +5407,7 @@ jr_004_6FE2:
 
 jr_004_6FE6:
     xor  a                                        ; $6FE6: $AF
-    ld   [wC120], a                               ; $6FE7: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a                               ; $6FE7: $EA $20 $C1
     ldh  [hLinkPositionXIncrement], a             ; $6FEA: $E0 $9A
     ld   e, $06                                   ; $6FEC: $1E $06
     ld   hl, wEntitiesUnknowTableR                ; $6FEE: $21 $90 $C3
@@ -7354,7 +7354,7 @@ func_004_7BB7::
     dec  a                                        ; $7BBC: $3D
     ldh  [hActiveEntitySpriteVariant], a          ; $7BBD: $E0 $F1
     ld   a, $01                                   ; $7BBF: $3E $01
-    ld   [wC15C], a                               ; $7BC1: $EA $5C $C1
+    ld   [wIsCarryingLiftedObject], a                               ; $7BC1: $EA $5C $C1
     call ResetSpinAttack                          ; $7BC4: $CD $AF $0C
     ldh  a, [hLinkPositionX]                      ; $7BC7: $F0 $98
     ldh  [hActiveEntityPosX], a                   ; $7BC9: $E0 $EE

@@ -4717,7 +4717,7 @@ label_018_5C6A:
     ld   hl, $59E4                                ; $5C87: $21 $E4 $59
     add  hl, de                                   ; $5C8A: $19
     push hl                                       ; $5C8B: $E5
-    ld   a, [wC120]                               ; $5C8C: $FA $20 $C1
+    ld   a, [wConsecutiveStepsCount]                               ; $5C8C: $FA $20 $C1
     rra                                           ; $5C8F: $1F
     rra                                           ; $5C90: $1F
     rra                                           ; $5C91: $1F

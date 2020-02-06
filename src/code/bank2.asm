@@ -177,7 +177,7 @@ jr_002_42B2:
     jp   func_002_753A                            ; $42C4: $C3 $3A $75
 
 jr_002_42C7:
-    call func_1A50                                ; $42C7: $CD $50 $1A
+    call UpdateLinkWalkingAnimation                                ; $42C7: $CD $50 $1A
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
@@ -245,7 +245,7 @@ jr_002_4337:
     ret                                           ; $4337: $C9
 
 func_002_4338::
-    ld   a, [wC15C]                               ; $4338: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]                               ; $4338: $FA $5C $C1
     cp   $02                                      ; $433B: $FE $02
     jr   c, jr_002_4345                           ; $433D: $38 $06
 
@@ -381,9 +381,9 @@ jr_002_43CE:
     jr   nz, jr_002_43F4                          ; $43E4: $20 $0E
 
 jr_002_43E6:
-    ld   a, [wC120]                               ; $43E6: $FA $20 $C1
+    ld   a, [wConsecutiveStepsCount]                               ; $43E6: $FA $20 $C1
     add  $02                                      ; $43E9: $C6 $02
-    ld   [wC120], a                               ; $43EB: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a                               ; $43EB: $EA $20 $C1
     call func_1756                                ; $43EE: $CD $56 $17
     jp   label_002_4464                           ; $43F1: $C3 $64 $44
 
@@ -438,8 +438,8 @@ jr_002_443A:
     ld   e, a                                     ; $443D: $5F
     jr   z, jr_002_4459                           ; $443E: $28 $19
 
-    ; Increment wC120
-    ld   hl, wC120                                ; $4440: $21 $20 $C1
+    ; Increment wConsecutiveStepsCount
+    ld   hl, wConsecutiveStepsCount                                ; $4440: $21 $20 $C1
     inc  [hl]                                     ; $4443: $34
 
     ld   hl, Data_002_4905                        ; $4444: $21 $05 $49
@@ -464,9 +464,9 @@ jr_002_4459:
     and  a                                        ; $445C: $A7
     jr   nz, label_002_4464                       ; $445D: $20 $05
 
-    ; Reset wC120 to its default value
+    ; Reset wConsecutiveStepsCount to its default value
     ld   a, $07                                   ; $445F: $3E $07
-    ld   [wC120], a                               ; $4461: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a                               ; $4461: $EA $20 $C1
 
 label_002_4464:
     ld   e, $03                                   ; $4464: $1E $03
@@ -475,7 +475,7 @@ label_002_4464:
     jr   nz, jr_002_44A2                          ; $446A: $20 $36
 
     ld   e, $01                                   ; $446C: $1E $01
-    ld   a, [wC15C]                               ; $446E: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]                               ; $446E: $FA $5C $C1
     and  a                                        ; $4471: $A7
     jr   z, jr_002_4481                           ; $4472: $28 $0D
 
@@ -582,8 +582,8 @@ func_002_44FA::
     ldh  a, [$FFA3]                               ; $44FD: $F0 $A3
     sub  $02                                      ; $44FF: $D6 $02
     ldh  [$FFA3], a                               ; $4501: $E0 $A3
-    ld   a, $FF                                   ; $4503: $3E $FF
-    ld   [wC120], a                               ; $4505: $EA $20 $C1
+    ld   a, -1                                    ; $4503: $3E $FF
+    ld   [wConsecutiveStepsCount], a                               ; $4505: $EA $20 $C1
     ld   a, [wC10A]                               ; $4508: $FA $0A $C1
     ld   hl, wIsRunningWithPegasusBoots           ; $450B: $21 $4A $C1
     or   [hl]                                     ; $450E: $B6
@@ -1063,19 +1063,49 @@ VerticalIncrementForLinkPosition::
     db   $00, $00, $00, $00
 
 Data_002_4905::
-    db   $0F, $00, $01, $0F, $02, $0F, $0F, $0F, $03, $0F, $0F, $0A, $0B, $06, $07, $04
-    db   $05, $00, $01, $2C, $2D, $06, $07, $34, $35, $22, $23, $2A, $2B, $28, $29, $30
-    db   $31, $24, $25, $2E, $2F, $06, $07, $34, $35, $22, $23, $2A, $2B, $28, $29, $32
-    db   $33, $26, $27, $20, $21, $1E, $1F, $1C, $1D, $1A, $1B, $3E, $3F, $40, $41, $42
-    db   $43, $44, $45
+    db   $0F, $00, $01, $0F, $02, $0F, $0F, $0F, $03, $0F, $0F
 
+;
+; hLinkAnimationState values for Link walking animation.
+;
+; Animation lists are indexed by direction.
+; Each list ordered as:
+;   Right, Right-alt, Left, Left-alt, Top, Top-alt, Bottom, Bottom-alt
+;
+LinkAnimationsLists::
+
+; Normal walking animation
+LinkAnimationsList_WalkingNoShield::
+    db   $0A, $0B, $06, $07, $04, $05, $00, $01
+
+; Walking animation with shield
+LinkAnimationsList_WalkCarryingDefaultShield::
+    db   $2C, $2D, $06, $07, $34, $35, $22, $23
+
+LinkAnimationsList_WalkUsingDefaultShield::
+    db   $2A, $2B, $28, $29, $30, $31, $24, $25
+
+LinkAnimationsList_WalkCarryingMirrorShield::
+    db   $2E, $2F, $06, $07, $34, $35, $22, $23
+
+LinkAnimationsList_WalkUsingMirrorShield::
+    db   $2A, $2B, $28, $29, $32, $33, $26, $27
+
+LinkAnimationsList_PushingObject::
+    db   $20, $21, $1E, $1F, $1C, $1D, $1A, $1B
+
+LinkAnimationsList_LiftingObject::
+    db   $3E, $3F, $40, $41, $42, $43, $44, $45
+
+; Falling up 1
 Data_002_4948::
     db   $46, $47, $48, $49, $4A, $4B, $4C, $4D
 
+; Falling up 2
 Data_002_4950::
     db   $4E, $4F, $4E, $4F, $4E, $4F, $4E, $4F
 
-Data_002_4958::
+LinkAnimationsList_WalkSideScrolling::
     db   $5B, $5C, $58, $59, $5B, $5C, $58, $59
 
 LinkMotionJumpingHandler::
@@ -1675,7 +1705,7 @@ jr_002_4D1F:
     ret                                           ; $4D1F: $C9
 
 func_002_4D20::
-    ld   a, [wC15C]                               ; $4D20: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]                               ; $4D20: $FA $5C $C1
     ld   hl, hLinkPositionZ                       ; $4D23: $21 $A2 $FF
     or   [hl]                                     ; $4D26: $B6
     ld   hl, wLinkMotionState                     ; $4D27: $21 $1C $C1
@@ -2037,7 +2067,7 @@ jr_002_4F3C:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $4F68: $E0 $A1
 
 jr_002_4F6A:
-    jp   func_1A50                                ; $4F6A: $C3 $50 $1A
+    jp   UpdateLinkWalkingAnimation                                ; $4F6A: $C3 $50 $1A
 
 label_002_4F6D:
     ldh  a, [hJoypadState]                        ; $4F6D: $F0 $CC
@@ -2133,13 +2163,13 @@ jr_002_4FE6:
     or   [hl]                                     ; $4FEC: $B6
     jr   z, jr_002_4FF5                           ; $4FED: $28 $06
 
-    ld   hl, wC120                                ; $4FEF: $21 $20 $C1
+    ld   hl, wConsecutiveStepsCount                                ; $4FEF: $21 $20 $C1
     inc  [hl]                                     ; $4FF2: $34
     jr   jr_002_4FFA                              ; $4FF3: $18 $05
 
 jr_002_4FF5:
     ld   a, $03                                   ; $4FF5: $3E $03
-    ld   [wC120], a                               ; $4FF7: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a                               ; $4FF7: $EA $20 $C1
 
 jr_002_4FFA:
     ld   hl, Data_002_4905                        ; $4FFA: $21 $05 $49
@@ -2151,7 +2181,7 @@ jr_002_4FFA:
     ldh  [hLinkDirection], a                      ; $5003: $E0 $9E
 
 jr_002_5005:
-    call func_1A50                                ; $5005: $CD $50 $1A
+    call UpdateLinkWalkingAnimation                                ; $5005: $CD $50 $1A
     ldh  a, [hLinkInteractiveMotionBlocked]       ; $5008: $F0 $A1
     and  a                                        ; $500A: $A7
     jr   z, jr_002_5012                           ; $500B: $28 $05
@@ -3035,7 +3065,7 @@ jr_002_552A:
     cp   $0A                                      ; $5543: $FE $0A
     jr   nc, jr_002_5566                          ; $5545: $30 $1F
 
-    ld   a, [wC15C]                               ; $5547: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]                               ; $5547: $FA $5C $C1
     and  a                                        ; $554A: $A7
     jr   nz, jr_002_5566                          ; $554B: $20 $19
 
@@ -5015,7 +5045,7 @@ jr_002_695C:
     dec  [hl]                                     ; $696D: $35
 
 jr_002_696E:
-    ld   hl, wC120                                ; $696E: $21 $20 $C1
+    ld   hl, wConsecutiveStepsCount                                ; $696E: $21 $20 $C1
     inc  [hl]                                     ; $6971: $34
     ldh  a, [hPressedButtonsMask]                 ; $6972: $F0 $CB
     and  $03                                      ; $6974: $E6 $03
@@ -5082,7 +5112,7 @@ func_002_69A1::
     and  $0F                                      ; $69CF: $E6 $0F
     jr   z, jr_002_69D7                           ; $69D1: $28 $04
 
-    ld   hl, wC120                                ; $69D3: $21 $20 $C1
+    ld   hl, wConsecutiveStepsCount                                ; $69D3: $21 $20 $C1
     inc  [hl]                                     ; $69D6: $34
 
 jr_002_69D7:
@@ -5152,9 +5182,9 @@ jr_002_6A24:
     and  $0F                                      ; $6A2C: $E6 $0F
     jr   nz, jr_002_6A3E                          ; $6A2E: $20 $0E
 
-    ld   a, [wC120]                               ; $6A30: $FA $20 $C1
+    ld   a, [wConsecutiveStepsCount]                               ; $6A30: $FA $20 $C1
     add  $02                                      ; $6A33: $C6 $02
-    ld   [wC120], a                               ; $6A35: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a                               ; $6A35: $EA $20 $C1
     call func_1756                                ; $6A38: $CD $56 $17
     jp   label_002_6ADB                           ; $6A3B: $C3 $DB $6A
 
@@ -5183,7 +5213,7 @@ jr_002_6A4C:
 
 jr_002_6A64:
     ld   a, $0A                                   ; $6A64: $3E $0A
-    ld   [wC120], a                               ; $6A66: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a                               ; $6A66: $EA $20 $C1
     ldh  a, [hLinkPositionXIncrement]             ; $6A69: $F0 $9A
     and  a                                        ; $6A6B: $A7
     jr   z, jr_002_6A73                           ; $6A6C: $28 $05
@@ -5255,7 +5285,7 @@ jr_002_6AAA:
     ldh  [hLinkDirection], a                      ; $6AC9: $E0 $9E
 
 jr_002_6ACB:
-    ld   hl, wC120                                ; $6ACB: $21 $20 $C1
+    ld   hl, wConsecutiveStepsCount                                ; $6ACB: $21 $20 $C1
     inc  [hl]                                     ; $6ACE: $34
     jr   label_002_6ADB                           ; $6ACF: $18 $0A
 
@@ -5265,7 +5295,7 @@ jr_002_6AD1:
     jr   nz, label_002_6ADB                       ; $6AD5: $20 $04
 
     xor  a                                        ; $6AD7: $AF
-    ld   [wC120], a                               ; $6AD8: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a                               ; $6AD8: $EA $20 $C1
 
 label_002_6ADB:
     ld   a, [wSwordAnimationState]                ; $6ADB: $FA $37 $C1
@@ -6519,7 +6549,7 @@ label_002_719C:
     jp   collisionEnd                             ; $71B8: $C3 $54 $74
 
 label_002_71BB:
-    ld   a, [wC15C]                               ; $71BB: $FA $5C $C1
+    ld   a, [wIsCarryingLiftedObject]                               ; $71BB: $FA $5C $C1
     and  a                                        ; $71BE: $A7
     jp   nz, collisionEnd                         ; $71BF: $C2 $54 $74
 
@@ -6768,7 +6798,7 @@ jr_002_7330:
     jr   nz, jr_002_733B                          ; $7334: $20 $05
 
     ld   a, $03                                   ; $7336: $3E $03
-    ld   [$C144], a                               ; $7338: $EA $44 $C1
+    ld   [wIsLinkPushing], a                               ; $7338: $EA $44 $C1
 
 jr_002_733B:
     ldh  a, [hMapId]                              ; $733B: $F0 $F7
@@ -7656,14 +7686,15 @@ label_002_787D:
     ldh  a, [hLinkPositionY]                      ; $787D: $F0 $99
     add  $08                                      ; $787F: $C6 $08
     ld   [hl+], a                                 ; $7881: $22
+
     ldh  a, [hLinkPositionX]                      ; $7882: $F0 $98
-    add  $FF                                      ; $7884: $C6 $FF
+    add  -1                                       ; $7884: $C6 $FF
     ld   [hl+], a                                 ; $7886: $22
+
     ld   a, $1A                                   ; $7887: $3E $1A
     ld   [hl+], a                                 ; $7889: $22
 
-    ; If wC120 / 8 > $20…
-    ld   a, [wC120]                               ; $788A: $FA $20 $C1
+    ld   a, [wConsecutiveStepsCount]                               ; $788A: $FA $20 $C1
     rla                                           ; $788D: $17
     rla                                           ; $788E: $17
     and  $20                                      ; $788F: $E6 $20

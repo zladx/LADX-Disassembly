@@ -77,7 +77,26 @@ hFF9C:: ; hFF9C
  ds 1
 
 hLinkAnimationState:: ; FF9D
+  ; How the Link sprite should be drawn.
+  ;
   ; Values:
+  ; 00   Standing bottom
+  ; 01   Walking bottom
+  ; 02
+  ; 03
+  ; 04   Standing top
+  ; 05   Walking top
+  ; 06   Standing left
+  ; 07   Walking left
+  ; 08
+  ; 09
+  ; 0A   Standing right
+  ; 0B   Walking right
+  ;
+  ; 5E   jumping 1
+  ; 5F   jumping 2
+  ; 60   jumping 3
+  ;
   ; 6C   Got item
   ds 1
 
@@ -160,8 +179,9 @@ hMusicTrack:: ; FFB0
 hNextMusicTrack:: ; hFFB1
   ds 1
 
-; Unlabeled
 hFFB2:: ; hFFB2
+  ; When 1, Link is moving much slower, like when being
+  ; incapacited by a mini-gel.
   ds 3
 
 hButtonsInactiveDelay:: ; FFB5

@@ -648,7 +648,7 @@ jr_015_469C:
     ldh  [hLinkDirection], a                      ; $469E: $E0 $9E
     ldh  a, [hFrameCounter]                       ; $46A0: $F0 $E7
     and  $08                                      ; $46A2: $E6 $08
-    ld   [wC120], a                               ; $46A4: $EA $20 $C1
+    ld   [wConsecutiveStepsCount], a                               ; $46A4: $EA $20 $C1
     push bc                                       ; $46A7: $C5
     call func_BF0                                ; $46A8: $CD $F0 $0B
     pop  bc                                       ; $46AB: $C1

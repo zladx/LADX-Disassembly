@@ -2478,7 +2478,7 @@ func_003_5795::
     ld   hl, Data_003_56F1                        ; $579F: $21 $F1 $56
     add  hl, de                                   ; $57A2: $19
     ld   a, [hl]                                  ; $57A3: $7E
-    ld   [wC15C], a                               ; $57A4: $EA $5C $C1
+    ld   [wIsCarryingLiftedObject], a                               ; $57A4: $EA $5C $C1
     ld   hl, Data_003_5701                        ; $57A7: $21 $01 $57
     add  hl, de                                   ; $57AA: $19
     ld   a, [hl]                                  ; $57AB: $7E

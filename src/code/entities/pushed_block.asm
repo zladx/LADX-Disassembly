@@ -33,7 +33,7 @@ jr_003_525D:
 
     call CopyLinkFinalPositionToPosition          ; $526E: $CD $BE $0C
     ld   a, $03                                   ; $5271: $3E $03
-    ld   [$C144], a                               ; $5273: $EA $44 $C1
+    ld   [wIsLinkPushing], a                               ; $5273: $EA $44 $C1
 
 jr_003_5276:
     ldh  a, [hMapRoom]                            ; $5276: $F0 $F6

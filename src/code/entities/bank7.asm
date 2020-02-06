@@ -2584,7 +2584,7 @@ func_007_512F::
     jr   z, jr_007_516E                           ; $5138: $28 $34
 
     ld   a, $01                                   ; $513A: $3E $01
-    ld   [$C144], a                               ; $513C: $EA $44 $C1
+    ld   [wIsLinkPushing], a                               ; $513C: $EA $44 $C1
     ld   hl, wEntitiesUnknowTableY                ; $513F: $21 $D0 $C3
     add  hl, bc                                   ; $5142: $09
     ld   a, [hl]                                  ; $5143: $7E

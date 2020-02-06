@@ -2102,12 +2102,12 @@ jr_003_553C:
 
 jr_003_5555:
     ld   c, $04                                   ; $5555: $0E $04
-    call func_3CE6                                ; $5557: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $5557: $CD $E6 $3C
     jr   jr_003_5568                              ; $555A: $18 $0C
 
 jr_003_555C:
     ld   c, $08                                   ; $555C: $0E $08
-    call func_3CE6                                ; $555E: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $555E: $CD $E6 $3C
     ld   a, $04                                   ; $5561: $3E $04
     call label_3DA0                               ; $5563: $CD $A0 $3D
     jr   jr_003_5568                              ; $5566: $18 $00
@@ -4753,7 +4753,7 @@ jr_003_65C1:
     ld   hl, Data_003_6530                        ; $65C1: $21 $30 $65
     add  hl, de                                   ; $65C4: $19
     ld   c, $08                                   ; $65C5: $0E $08
-    jp   func_3CE6                                ; $65C7: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $65C7: $C3 $E6 $3C
 
 Data_003_65CA::
     db   $00, $00, $00, $00, $00, $00, $00, $00, $01, $01, $01, $01, $01, $01, $01, $01

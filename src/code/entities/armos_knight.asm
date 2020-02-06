@@ -407,7 +407,7 @@ func_006_55B3::
     ld   hl, Data_006_5523                        ; $55BE: $21 $23 $55
     add  hl, de                                   ; $55C1: $19
     ld   c, $08                                   ; $55C2: $0E $08
-    call func_3CE6                                ; $55C4: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $55C4: $CD $E6 $3C
     ld   a, $04                                   ; $55C7: $3E $04
     call label_3DA0                               ; $55C9: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                   ; $55CC: $21 $10 $C3
@@ -420,7 +420,7 @@ func_006_55B3::
     ldh  [$FFEC], a                               ; $55D6: $E0 $EC
     ld   hl, Data_006_55A3                        ; $55D8: $21 $A3 $55
     ld   c, $04                                   ; $55DB: $0E $04
-    call func_3CE6                                ; $55DD: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $55DD: $CD $E6 $3C
 
 jr_006_55E0:
     jp   CopyEntityPositionToActivePosition       ; $55E0: $C3 $8A $3D

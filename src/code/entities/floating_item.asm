@@ -79,7 +79,7 @@ jr_006_7B61:
     ld   hl, Data_006_7AEB                        ; $7B67: $21 $EB $7A
     add  hl, de                                   ; $7B6A: $19
     ld   c, $02                                   ; $7B6B: $0E $02
-    call func_3CE6                                ; $7B6D: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7B6D: $CD $E6 $3C
     ld   a, $01                                   ; $7B70: $3E $01
     call label_3DA0                               ; $7B72: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $7B75: $CD $8A $3D

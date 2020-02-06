@@ -39,7 +39,7 @@ RacoonEntityHandler::
 
 jr_005_4986:
     ld   c, $04                                   ; $4986: $0E $04
-    call func_3CE6                               ; $4988: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4988: $CD $E6 $3C
     ld   hl, wEntitiesUnknowTableY                ; $498B: $21 $D0 $C3
     add  hl, bc                                   ; $498E: $09
     ld   a, [hl]                                  ; $498F: $7E

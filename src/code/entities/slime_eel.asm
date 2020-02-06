@@ -1349,7 +1349,7 @@ func_005_766E::
     ld   hl, Data_005_7782                        ; $7679: $21 $82 $77
     add  hl, de                                   ; $767C: $19
     ld   c, $08                                   ; $767D: $0E $08
-    call func_3CE6                               ; $767F: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $767F: $CD $E6 $3C
     ld   a, $08                                   ; $7682: $3E $08
     call label_3DA0                               ; $7684: $CD $A0 $3D
     ld   hl, wEntitiesUnknowTableY                ; $7687: $21 $D0 $C3
@@ -1557,7 +1557,7 @@ func_005_7982::
     ld   hl, Data_005_7782                        ; $7997: $21 $82 $77
     add  hl, de                                   ; $799A: $19
     ld   c, $08                                   ; $799B: $0E $08
-    call func_3CE6                               ; $799D: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $799D: $CD $E6 $3C
     ld   a, $08                                   ; $79A0: $3E $08
     jp   label_3DA0                               ; $79A2: $C3 $A0 $3D
 

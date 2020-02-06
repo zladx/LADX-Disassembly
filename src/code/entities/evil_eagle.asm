@@ -1069,7 +1069,7 @@ jr_005_6205:
     ld   e, a                                     ; $6213: $5F
     add  hl, de                                   ; $6214: $19
     ld   c, $0C                                   ; $6215: $0E $0C
-    call func_3CE6                               ; $6217: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6217: $CD $E6 $3C
     ld   a, $0A                                   ; $621A: $3E $0A
     call label_3DA0                               ; $621C: $CD $A0 $3D
     ld   e, $00                                   ; $621F: $1E $00

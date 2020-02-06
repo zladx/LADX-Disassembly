@@ -109,7 +109,7 @@ label_006_7123:
 
 jr_006_712F:
     ld   c, $06                                   ; $712F: $0E $06
-    call func_3CE6                                ; $7131: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7131: $CD $E6 $3C
     ld   a, $06                                   ; $7134: $3E $06
     call label_3DA0                               ; $7136: $CD $A0 $3D
     call label_3CD9                               ; $7139: $CD $D9 $3C

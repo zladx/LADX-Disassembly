@@ -734,7 +734,7 @@ func_005_52AF::
 
     ld   hl, Data_005_526C                        ; $52D0: $21 $6C $52
     ld   c, $02                                   ; $52D3: $0E $02
-    call func_3CE6                               ; $52D5: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $52D5: $CD $E6 $3C
 
 jr_005_52D8:
     jp   CopyEntityPositionToActivePosition       ; $52D8: $C3 $8A $3D

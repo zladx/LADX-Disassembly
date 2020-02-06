@@ -205,7 +205,7 @@ jr_004_4DBE:
     ld   hl, Data_004_4BDD                        ; $4DD0: $21 $DD $4B
     add  hl, de                                   ; $4DD3: $19
     ld   c, $10                                   ; $4DD4: $0E $10
-    call func_3CE6                               ; $4DD6: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4DD6: $CD $E6 $3C
     ld   a, $10                                   ; $4DD9: $3E $10
     call label_3DA0                               ; $4DDB: $CD $A0 $3D
     ld   hl, wEntitiesPosZTable                   ; $4DDE: $21 $10 $C3
@@ -219,7 +219,7 @@ jr_004_4DBE:
     ldh  [$FFEC], a                               ; $4DE9: $E0 $EC
     ld   hl, Data_004_4D9D                        ; $4DEB: $21 $9D $4D
     ld   c, $06                                   ; $4DEE: $0E $06
-    call func_3CE6                               ; $4DF0: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4DF0: $CD $E6 $3C
     ld   a, $06                                   ; $4DF3: $3E $06
     call label_3DA0                               ; $4DF5: $CD $A0 $3D
     jp   CopyEntityPositionToActivePosition       ; $4DF8: $C3 $8A $3D
@@ -537,7 +537,7 @@ func_004_4FFE::
     ld   hl, Data_004_4FAE                        ; $5016: $21 $AE $4F
     add  hl, de                                   ; $5019: $19
     ld   c, $08                                   ; $501A: $0E $08
-    call func_3CE6                               ; $501C: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $501C: $CD $E6 $3C
     ld   a, $08                                   ; $501F: $3E $08
     call label_3DA0                               ; $5021: $CD $A0 $3D
     ld   hl, wEntitiesSpriteVariantTable          ; $5024: $21 $B0 $C3
@@ -557,7 +557,7 @@ func_004_4FFE::
     ldh  [$FFEC], a                               ; $5039: $E0 $EC
     ld   hl, Data_004_4FEE                        ; $503B: $21 $EE $4F
     ld   c, $04                                   ; $503E: $0E $04
-    call func_3CE6                               ; $5040: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $5040: $CD $E6 $3C
     ld   a, $04                                   ; $5043: $3E $04
     call label_3DA0                               ; $5045: $CD $A0 $3D
 
@@ -1083,7 +1083,7 @@ func_004_542F::
     ld   hl, Data_004_538F                        ; $543D: $21 $8F $53
     add  hl, de                                   ; $5440: $19
     ld   c, $08                                   ; $5441: $0E $08
-    jp   func_3CE6                               ; $5443: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $5443: $C3 $E6 $3C
 
 Data_004_5446::
     db   $68, $06, $68, $26, $6A, $06, $6A, $26, $6C, $06, $6C, $26, $6E, $06, $6E, $26
@@ -1748,7 +1748,7 @@ func_004_5902::
 
 jr_004_5924:
     ld   c, $08                                   ; $5924: $0E $08
-    call func_3CE6                               ; $5926: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $5926: $CD $E6 $3C
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5929: $21 $40 $C3
     add  hl, bc                                   ; $592C: $09
     ld   [hl], $02                                ; $592D: $36 $02
@@ -2435,7 +2435,7 @@ func_004_5DA6::
     ld   hl, Data_004_5D26                        ; $5DC8: $21 $26 $5D
     add  hl, de                                   ; $5DCB: $19
     ld   c, $08                                   ; $5DCC: $0E $08
-    jp   func_3CE6                               ; $5DCE: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $5DCE: $C3 $E6 $3C
 
 Data_004_5DD1::
     db   $70, $01, $72, $01, $72, $21, $70, $21, $74, $01, $74, $21, $00, $00, $00, $00
@@ -2720,7 +2720,7 @@ jr_004_5F96:
 
 jr_004_5FC2:
     ld   c, $04                                   ; $5FC2: $0E $04
-    call func_3CE6                               ; $5FC4: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $5FC4: $CD $E6 $3C
     ld   a, $04                                   ; $5FC7: $3E $04
     call label_3DA0                               ; $5FC9: $CD $A0 $3D
     call func_004_7BE3                            ; $5FCC: $CD $E3 $7B

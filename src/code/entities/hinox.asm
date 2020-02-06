@@ -408,4 +408,4 @@ func_006_52BA::
 jr_006_52D8:
     add  hl, de                                   ; $52D8: $19
     ld   c, $08                                   ; $52D9: $0E $08
-    jp   func_3CE6                                ; $52DB: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $52DB: $C3 $E6 $3C

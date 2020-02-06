@@ -424,7 +424,7 @@ func_A5F::
     push af
     ld   a, $20
     ld   [MBC3SelectBank], a
-    call func_3CE6
+    call RenderActiveEntitySpritesRect
     jp   RestoreStackedBankAndReturn
 
 func_003_5A2E_trampoline::
@@ -7684,16 +7684,24 @@ label_3CD9::
 label_3CE0::
     push hl
     ld   hl, wOAMBuffer
-    jr   func_3CE6.label_3CF6
+    jr   RenderActiveEntitySpritesRect.label_3CF6
 
-; ???
+; Render a large rectangle of sprites for the active entity to the OAM buffer.
+;
+; This function takes a display list of OAM attributes.
+; Each item of the display list is a tupple of [x (?), y(?), tile n°, tile attributes] values.
+;
+; The display list is processed regardless of the active sprite variant.
+; Variants must be managed by the caller itself.
+;
 ; Inputs:
-;   c   number of items
+;   de  the oam attributes display list
+;   c   the number of sprites
 ;
 ; Return value:
 ;   c   [wLinkWalkingFrameCount]
-func_3CE6::
-    ; If hActiveEntitySpriteVariant + 1 = 0, return.
+RenderActiveEntitySpritesRect::
+    ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
     inc  a
     jr   z, .return

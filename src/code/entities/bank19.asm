@@ -47,7 +47,7 @@ jr_019_404A:
 
 jr_019_4056:
     ld   c, $04                                   ; $4056: $0E $04
-    call func_3CE6                               ; $4058: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4058: $CD $E6 $3C
     call label_3CD9                               ; $405B: $CD $D9 $3C
     call func_019_7D3D                            ; $405E: $CD $3D $7D
     call func_C56                                ; $4061: $CD $56 $0C
@@ -821,7 +821,7 @@ func_019_45B2::
     ld   hl, $44FC                                ; $45BB: $21 $FC $44
     add  hl, de                                   ; $45BE: $19
     ld   c, $02                                   ; $45BF: $0E $02
-    jp   func_3CE6                               ; $45C1: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $45C1: $C3 $E6 $3C
 
     ld   h, b                                     ; $45C4: $60
     ld   bc, $162                                 ; $45C5: $01 $62 $01
@@ -2260,7 +2260,7 @@ jr_019_4E36:
     ld   [wC167], a                               ; $4E47: $EA $67 $C1
     ld   hl, $4E37                                ; $4E4A: $21 $37 $4E
     ld   c, $03                                   ; $4E4D: $0E $03
-    call func_3CE6                               ; $4E4F: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4E4F: $CD $E6 $3C
     call GetEntityTransitionCountdown             ; $4E52: $CD $05 $0C
     jp   z, label_019_4E62                        ; $4E55: $CA $62 $4E
 
@@ -2288,7 +2288,7 @@ label_019_4E62:
     ld   [wC167], a                               ; $4E78: $EA $67 $C1
     ld   hl, $4E37                                ; $4E7B: $21 $37 $4E
     ld   c, $03                                   ; $4E7E: $0E $03
-    call func_3CE6                               ; $4E80: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $4E80: $CD $E6 $3C
     ld   a, [wDialogState]                        ; $4E83: $FA $9F $C1
     and  a                                        ; $4E86: $A7
     ret  nz                                       ; $4E87: $C0
@@ -3026,7 +3026,7 @@ jr_019_52B1:
     ld   [wC167], a                               ; $52B8: $EA $67 $C1
     ld   hl, $51AD                                ; $52BB: $21 $AD $51
     ld   c, $04                                   ; $52BE: $0E $04
-    call func_3CE6                               ; $52C0: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $52C0: $CD $E6 $3C
     call GetEntityTransitionCountdown             ; $52C3: $CD $05 $0C
     jp   nz, label_019_5363                       ; $52C6: $C2 $63 $53
 
@@ -3171,7 +3171,7 @@ GiantBubbleEntityHandler::
     ldh  [hActiveEntityTilesOffset], a            ; $53A7: $E0 $F5
     ld   hl, $536C                                ; $53A9: $21 $6C $53
     ld   c, $08                                   ; $53AC: $0E $08
-    call func_3CE6                               ; $53AE: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $53AE: $CD $E6 $3C
     call func_019_7D3D                            ; $53B1: $CD $3D $7D
     call label_3B44                               ; $53B4: $CD $44 $3B
     call func_019_7DB8                            ; $53B7: $CD $B8 $7D
@@ -3537,7 +3537,7 @@ jr_019_5594:
 
 jr_019_55A1:
     ld   c, $08                                   ; $55A1: $0E $08
-    call func_3CE6                               ; $55A3: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $55A3: $CD $E6 $3C
     call func_019_7D3D                            ; $55A6: $CD $3D $7D
     call func_C56                                ; $55A9: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $55AC: $F0 $F0
@@ -3934,7 +3934,7 @@ ThwompEntityHandler::
     call CopyEntityPositionToActivePosition       ; $57C6: $CD $8A $3D
     ld   hl, $5768                                ; $57C9: $21 $68 $57
     ld   c, $08                                   ; $57CC: $0E $08
-    call func_3CE6                               ; $57CE: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $57CE: $CD $E6 $3C
     ld   a, $06                                   ; $57D1: $3E $06
     call label_3DA0                               ; $57D3: $CD $A0 $3D
     call func_019_7D3D                            ; $57D6: $CD $3D $7D
@@ -6467,7 +6467,7 @@ jr_019_6515:
     ld   hl, $6427                                ; $6530: $21 $27 $64
     add  hl, de                                   ; $6533: $19
     ld   c, $04                                   ; $6534: $0E $04
-    call func_3CE6                               ; $6536: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6536: $CD $E6 $3C
     ld   a, $02                                   ; $6539: $3E $02
     call label_3DA0                               ; $653B: $CD $A0 $3D
     ld   hl, wEntitiesUnknowTableY                ; $653E: $21 $D0 $C3
@@ -6498,7 +6498,7 @@ jr_019_6515:
     ld   hl, $6497                                ; $6563: $21 $97 $64
     add  hl, de                                   ; $6566: $19
     ld   c, $06                                   ; $6567: $0E $06
-    call func_3CE6                               ; $6569: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6569: $CD $E6 $3C
     ld   a, $04                                   ; $656C: $3E $04
     jp   label_3DA0                               ; $656E: $C3 $A0 $3D
 
@@ -8173,7 +8173,7 @@ func_019_6EC5::
     add  $03                                      ; $6ED6: $C6 $03
     ldh  [hActiveEntityPosX], a                   ; $6ED8: $E0 $EE
     ld   c, $07                                   ; $6EDA: $0E $07
-    call func_3CE6                               ; $6EDC: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6EDC: $CD $E6 $3C
     ld   a, $02                                   ; $6EDF: $3E $02
     call label_3DA0                               ; $6EE1: $CD $A0 $3D
     ld   a, $78                                   ; $6EE4: $3E $78
@@ -8190,7 +8190,7 @@ func_019_6EC5::
     dec  c                                        ; $6EF9: $0D
 
 jr_019_6EFA:
-    call func_3CE6                               ; $6EFA: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6EFA: $CD $E6 $3C
     ld   a, $03                                   ; $6EFD: $3E $03
     call label_3DA0                               ; $6EFF: $CD $A0 $3D
     jp   CopyEntityPositionToActivePosition       ; $6F02: $C3 $8A $3D
@@ -8212,7 +8212,7 @@ BananasSchuleSaleEntityHandler::
     ld   [hl], $C3                                ; $6F1B: $36 $C3
     ld   hl, $6F05                                ; $6F1D: $21 $05 $6F
     ld   c, $03                                   ; $6F20: $0E $03
-    jp   func_3CE6                               ; $6F22: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $6F22: $C3 $E6 $3C
 
 jr_019_6F25:
     ldh  a, [hMapRoom]                            ; $6F25: $F0 $F6
@@ -8412,13 +8412,13 @@ jr_019_6FD0:
     add  $04                                      ; $704D: $C6 $04
     ldh  [hActiveEntityPosX], a                   ; $704F: $E0 $EE
     ld   c, $05                                   ; $7051: $0E $05
-    call func_3CE6                               ; $7053: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7053: $CD $E6 $3C
     ldh  a, [hActiveEntityPosX]                   ; $7056: $F0 $EE
     add  $10                                      ; $7058: $C6 $10
     ldh  [hActiveEntityPosX], a                   ; $705A: $E0 $EE
     ld   hl, $7029                                ; $705C: $21 $29 $70
     ld   c, $04                                   ; $705F: $0E $04
-    call func_3CE6                               ; $7061: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7061: $CD $E6 $3C
     call func_019_7CA2                            ; $7064: $CD $A2 $7C
     ldh  a, [hLinkPositionX]                      ; $7067: $F0 $98
     sub  $68                                      ; $7069: $D6 $68
@@ -8627,7 +8627,7 @@ func_019_717C::
     ld   hl, $7118                                ; $718A: $21 $18 $71
     add  hl, de                                   ; $718D: $19
     ld   c, $05                                   ; $718E: $0E $05
-    jp   func_3CE6                               ; $7190: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $7190: $C3 $E6 $3C
 
     nop                                           ; $7193: $00
     ld   b, $0C                                   ; $7194: $06 $0C
@@ -9344,7 +9344,7 @@ jr_019_7547:
     ld   hl, $7418                                ; $755D: $21 $18 $74
     add  hl, de                                   ; $7560: $19
     ld   c, $0C                                   ; $7561: $0E $0C
-    call func_3CE6                               ; $7563: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7563: $CD $E6 $3C
     ld   a, $0A                                   ; $7566: $3E $0A
     jp   label_3DA0                               ; $7568: $C3 $A0 $3D
 
@@ -9370,7 +9370,7 @@ jr_019_7586:
 
     ld   hl, $7620                                ; $758A: $21 $20 $76
     ld   c, $08                                   ; $758D: $0E $08
-    call func_3CE6                               ; $758F: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $758F: $CD $E6 $3C
     ld   a, $06                                   ; $7592: $3E $06
     jp   label_3DA0                               ; $7594: $C3 $A0 $3D
 
@@ -9544,7 +9544,7 @@ jr_019_7664:
     ld   hl, $75A0                                ; $766D: $21 $A0 $75
     add  hl, de                                   ; $7670: $19
     ld   c, $08                                   ; $7671: $0E $08
-    call func_3CE6                               ; $7673: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7673: $CD $E6 $3C
     ld   a, $06                                   ; $7676: $3E $06
     jp   label_3DA0                               ; $7678: $C3 $A0 $3D
 
@@ -9922,7 +9922,7 @@ jr_019_784B:
     ld   a, [hl+]                                 ; $786E: $2A
     ld   h, [hl]                                  ; $786F: $66
     ld   l, a                                     ; $7870: $6F
-    call func_3CE6                               ; $7871: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $7871: $CD $E6 $3C
     ld   a, $10                                   ; $7874: $3E $10
     jp   label_3DA0                               ; $7876: $C3 $A0 $3D
 
@@ -10021,7 +10021,7 @@ func_019_78F1::
 
 jr_019_78F4:
     ld   c, $04                                   ; $78F4: $0E $04
-    call func_3CE6                               ; $78F6: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $78F6: $CD $E6 $3C
     ld   a, $02                                   ; $78F9: $3E $02
     jp   label_3DA0                               ; $78FB: $C3 $A0 $3D
 
@@ -10743,7 +10743,7 @@ jr_019_7C5E:
     ld   hl, $7B10                                ; $7C64: $21 $10 $7B
     add  hl, de                                   ; $7C67: $19
     ld   c, $04                                   ; $7C68: $0E $04
-    jp   func_3CE6                               ; $7C6A: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $7C6A: $C3 $E6 $3C
 
 jr_019_7C6D:
     inc  a                                        ; $7C6D: $3C
@@ -10783,7 +10783,7 @@ jr_019_7C90:
     ld   d, b                                     ; $7C9B: $50
     add  hl, de                                   ; $7C9C: $19
     ld   c, $04                                   ; $7C9D: $0E $04
-    jp   func_3CE6                               ; $7C9F: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect           ; $7C9F: $C3 $E6 $3C
 
 func_019_7CA2::
 label_019_7CA2:

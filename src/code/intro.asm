@@ -1260,7 +1260,7 @@ label_762B::
 label_7640::
     add  hl, de
     ld   c, $06
-    call func_3CE6
+    call RenderActiveEntitySpritesRect
     ld   a, [$C3C0]
     add  a, $18
     ld   [$C3C0], a
@@ -1692,7 +1692,7 @@ label_79A5::
     ld   c, $0A
 
 label_79AA::
-    call func_3CE6
+    call RenderActiveEntitySpritesRect
     ret
 
 label_79AE::

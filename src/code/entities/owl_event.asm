@@ -415,7 +415,7 @@ func_006_6A55::
 jr_006_6A5B:
     ld   hl, Data_006_6A3F                        ; $6A5B: $21 $3F $6A
     ld   c, $04                                   ; $6A5E: $0E $04
-    call func_3CE6                                ; $6A60: $CD $E6 $3C
+    call RenderActiveEntitySpritesRect            ; $6A60: $CD $E6 $3C
     ld   a, $04                                   ; $6A63: $3E $04
     call label_3DA0                               ; $6A65: $CD $A0 $3D
     ldh  a, [hMapRoom]                            ; $6A68: $F0 $F6

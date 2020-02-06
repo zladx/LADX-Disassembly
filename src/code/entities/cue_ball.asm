@@ -349,7 +349,7 @@ func_006_4E64::
     ld   hl, Data_006_4D64                        ; $4E6F: $21 $64 $4D
     add  hl, de                                   ; $4E72: $19
     ld   c, $08                                   ; $4E73: $0E $08
-    jp   func_3CE6                                ; $4E75: $C3 $E6 $3C
+    jp   RenderActiveEntitySpritesRect            ; $4E75: $C3 $E6 $3C
 
 Data_006_4E78::
     db   $6C, $00, $6E, $00, $6E, $20, $6C, $20, $6C, $40, $6E, $40, $6E, $60, $6C, $60

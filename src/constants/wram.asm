@@ -86,6 +86,8 @@ wLinkGroundStatus:: ; C11F
   ; 1:  steps (only when moving)
   ; 3:  wet or grassy
   ; 7:  pit
+  ;
+  ; Also see: wLinkGroundVfx
   ds 1
 
 wC120: ds 1
@@ -305,8 +307,13 @@ wTransitionGfxFrameCount:: ; C180
   ; Number of frames rendered during a warp transition.
   ds 1
 
+wLinkGroundVfx:: ; wLinkGroundVfx
+  ; Environmental visual effect displayed depending on which ground Link is standing
+  ; See GROUND_VFX_* constants for possible values.
+  ds 1
+
 ; Unlabeled
-ds $C18E - $C181
+ds $C18E - $C182
 
 wRoomEvent:: ; C18E
   ; Event for the current room

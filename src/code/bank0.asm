@@ -2546,11 +2546,14 @@ func_1756::
     ld   hl, $C146
     or   [hl]
     ret  nz
+
     ldh  a, [hLinkPositionX]
     ldh  [hScratch0], a
-    ld   a, [$C181]
-    cp   $05
-    jr   z, .label_1781
+
+    ld   a, [wLinkGroundVfx]
+    cp   GROUND_VFX_SHALLOW_WATER
+    jr   z, .shallowWater
+
     ld   a, NOISE_SFX_FOOTSTEP
     ldh  [hNoiseSfx], a
     ldh  a, [hLinkPositionY]
@@ -2559,7 +2562,7 @@ func_1756::
     ld   a, TRANSCIENT_VFX_PEGASUS_DUST
     jp   AddTranscientVfx
 
-.label_1781
+.shallowWater
     ldh  a, [hLinkPositionY]
     ldh  [hScratch1], a
     ld   a, JINGLE_WATER_DIVE

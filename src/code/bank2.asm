@@ -438,8 +438,10 @@ jr_002_443A:
     ld   e, a                                     ; $443D: $5F
     jr   z, jr_002_4459                           ; $443E: $28 $19
 
+    ; Increment wC120
     ld   hl, wC120                                ; $4440: $21 $20 $C1
     inc  [hl]                                     ; $4443: $34
+
     ld   hl, Data_002_4905                        ; $4444: $21 $05 $49
     add  hl, de                                   ; $4447: $19
     ld   a, [hl]                                  ; $4448: $7E
@@ -462,6 +464,7 @@ jr_002_4459:
     and  a                                        ; $445C: $A7
     jr   nz, label_002_4464                       ; $445D: $20 $05
 
+    ; Reset wC120 to its default value
     ld   a, $07                                   ; $445F: $3E $07
     ld   [wC120], a                               ; $4461: $EA $20 $C1
 
@@ -568,11 +571,11 @@ Data_002_44E7::
 func_002_44ED::
     ld   a, [$C146]                               ; $44ED: $FA $46 $C1
     and  a                                        ; $44F0: $A7
-    jp   z, label_002_45AC                        ; $44F1: $CA $AC $45
+    jp   z, groundVfxEnd                        ; $44F1: $CA $AC $45
 
     ldh  a, [hIsSideScrolling]                    ; $44F4: $F0 $F9
     and  a                                        ; $44F6: $A7
-    jp   nz, label_002_45AC                       ; $44F7: $C2 $AC $45
+    jp   nz, groundVfxEnd                       ; $44F7: $C2 $AC $45
 
 func_002_44FA::
     call func_21E1                                ; $44FA: $CD $E1 $21
@@ -654,7 +657,7 @@ jr_002_4563:
     jr   z, jr_002_456C                           ; $4566: $28 $04
 
     and  $80                                      ; $4568: $E6 $80
-    jr   z, label_002_45AC                        ; $456A: $28 $40
+    jr   z, groundVfxEnd                        ; $456A: $28 $40
 
 jr_002_456C:
     call ResetPegasusBoots                        ; $456C: $CD $B6 $0C
@@ -667,36 +670,36 @@ jr_002_456C:
     ld   [wC10A], a                               ; $457F: $EA $0A $C1
     ldh  a, [hLinkPositionY]                      ; $4582: $F0 $99
     cp   $88                                      ; $4584: $FE $88
-    jr   nc, label_002_45AC                       ; $4586: $30 $24
+    jr   nc, groundVfxEnd                         ; $4586: $30 $24
 
     call func_002_75BD                            ; $4588: $CD $BD $75
     ldh  a, [$FFB8]                               ; $458B: $F0 $B8
     cp   $61                                      ; $458D: $FE $61
-    jr   z, label_002_45AC                        ; $458F: $28 $1B
+    jr   z, groundVfxEnd                          ; $458F: $28 $1B
 
-    ld   a, [$C181]                               ; $4591: $FA $81 $C1
-    cp   $05                                      ; $4594: $FE $05
-    jr   z, jr_002_45AD                           ; $4596: $28 $15
+    ld   a, [wLinkGroundVfx]                      ; $4591: $FA $81 $C1
+    cp   GROUND_VFX_SHALLOW_WATER                 ; $4594: $FE $05
+    jr   z, shallowWaterVfx                       ; $4596: $28 $15
 
     cp   $07                                      ; $4598: $FE $07
-    jr   z, label_002_45AC                        ; $459A: $28 $10
+    jr   z, groundVfxEnd                          ; $459A: $28 $10
 
     cp   $0B                                      ; $459C: $FE $0B
-    jr   z, label_002_45AC                        ; $459E: $28 $0C
+    jr   z, groundVfxEnd                          ; $459E: $28 $0C
 
     cp   $50                                      ; $45A0: $FE $50
-    jr   z, label_002_45AC                        ; $45A2: $28 $08
+    jr   z, groundVfxEnd                          ; $45A2: $28 $08
 
     cp   $51                                      ; $45A4: $FE $51
-    jr   z, label_002_45AC                        ; $45A6: $28 $04
+    jr   z, groundVfxEnd                          ; $45A6: $28 $04
 
-    ld   a, NOISE_SFX_FOOTSTEP                          ; $45A8: $3E $07
+    ld   a, NOISE_SFX_FOOTSTEP                     ; $45A8: $3E $07
     ldh  [hNoiseSfx], a                            ; $45AA: $E0 $F4
 
-label_002_45AC:
+groundVfxEnd:
     ret                                           ; $45AC: $C9
 
-jr_002_45AD:
+shallowWaterVfx:
     ldh  a, [hLinkPositionY]                      ; $45AD: $F0 $99
     ldh  [hScratch1], a                           ; $45AF: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $45B1: $F0 $98
@@ -5757,7 +5760,7 @@ CheckPositionForMapTransition::
 
     call CopyLinkFinalPositionToPosition                                ; $6D5C: $CD $BE $0C
 
-    ld   a, [$C181]                               ; $6D5F: $FA $81 $C1
+    ld   a, [wLinkGroundVfx]                      ; $6D5F: $FA $81 $C1
     cp   $50                                      ; $6D62: $FE $50
     jp   z, clearIncrementAndReturn               ; $6D64: $CA $0C $6E
 
@@ -7230,7 +7233,7 @@ jr_002_75D9:
 
 jr_002_75E7:
     call ReadValueFromBaseMap_trampoline          ; $75E7: $CD $26 $2A
-    ld   [$C181], a                               ; $75EA: $EA $81 $C1
+    ld   [wLinkGroundVfx], a                      ; $75EA: $EA $81 $C1
     and  a                                        ; $75ED: $A7
     jp   z, label_002_77A2                        ; $75EE: $CA $A2 $77
 
@@ -7278,7 +7281,7 @@ jr_002_7634:
     ret                                           ; $7634: $C9
 
 jr_002_7635:
-    ld   a, [$C181]                               ; $7635: $FA $81 $C1
+    ld   a, [wLinkGroundVfx]                      ; $7635: $FA $81 $C1
     cp   $FF                                      ; $7638: $FE $FF
     jp   z, label_002_77A2                        ; $763A: $CA $A2 $77
 
@@ -7355,9 +7358,9 @@ jr_002_7687:
 label_002_76AA:
     ld   a, LINK_MOTION_FALLING_DOWN              ; $76AA: $3E $06
     ld   [wLinkMotionState], a                    ; $76AC: $EA $1C $C1
-    call ResetSpinAttack                                ; $76AF: $CD $AF $0C
+    call ResetSpinAttack                          ; $76AF: $CD $AF $0C
     ld   [$C198], a                               ; $76B2: $EA $98 $C1
-    ld   a, [$C181]                               ; $76B5: $FA $81 $C1
+    ld   a, [wLinkGroundVfx]                      ; $76B5: $FA $81 $C1
     ld   [$DBCB], a                               ; $76B8: $EA $CB $DB
     ld   a, WAVE_SFX_LINK_FALLS                   ; $76BB: $3E $0C
     ldh  [hWaveSfx], a                            ; $76BD: $E0 $F3
@@ -7367,7 +7370,7 @@ jr_002_76BF:
 
 label_002_76C0:
     ld   hl, wOAMBuffer                           ; $76C0: $21 $00 $C0
-    ld   a, [$C181]                               ; $76C3: $FA $81 $C1
+    ld   a, [wLinkGroundVfx]                      ; $76C3: $FA $81 $C1
     cp   $08                                      ; $76C6: $FE $08
     jr   nz, jr_002_76D5                          ; $76C8: $20 $0B
 
@@ -7522,16 +7525,16 @@ label_002_77A2:
     ld   [wLinkMotionState], a                    ; $77AF: $EA $1C $C1
 
 jr_002_77B2:
-    ld   a, [$C181]                               ; $77B2: $FA $81 $C1
+    ld   a, [wLinkGroundVfx]                      ; $77B2: $FA $81 $C1
     cp   $04                                      ; $77B5: $FE $04
-    jr   nz, jr_002_77E9                          ; $77B7: $20 $30
+    jr   nz, .grassVfxEnd                         ; $77B7: $20 $30
 
     ldh  a, [hObjectUnderEntity]                  ; $77B9: $F0 $AF
     cp   $DB                                      ; $77BB: $FE $DB
-    jr   c, jr_002_77E9                           ; $77BD: $38 $2A
+    jr   c, .grassVfxEnd                          ; $77BD: $38 $2A
 
     cp   $DD                                      ; $77BF: $FE $DD
-    jr   nc, jr_002_77E9                          ; $77C1: $30 $26
+    jr   nc, .grassVfxEnd                         ; $77C1: $30 $26
 
     sub  $DB                                      ; $77C3: $D6 $DB
     ld   e, a                                     ; $77C5: $5F
@@ -7540,7 +7543,7 @@ jr_002_77B2:
     add  hl, de                                   ; $77CB: $19
     ld   a, [$D6FB]                               ; $77CC: $FA $FB $D6
     xor  [hl]                                     ; $77CF: $AE
-    jr   z, jr_002_77E9                           ; $77D0: $28 $17
+    jr   z, .grassVfxEnd                          ; $77D0: $28 $17
 
     ld   a, [$D6F8]                               ; $77D2: $FA $F8 $D6
     ld   e, a                                     ; $77D5: $5F
@@ -7554,7 +7557,7 @@ jr_002_77B2:
     ld   [$D6F9], a                               ; $77E5: $EA $F9 $D6
     ret                                           ; $77E8: $C9
 
-jr_002_77E9:
+.grassVfxEnd
     ld   a, [$D6F9]                               ; $77E9: $FA $F9 $D6
     and  a                                        ; $77EC: $A7
     jr   z, jr_002_77F7                           ; $77ED: $28 $08
@@ -7658,6 +7661,8 @@ label_002_787D:
     ld   [hl+], a                                 ; $7886: $22
     ld   a, $1A                                   ; $7887: $3E $1A
     ld   [hl+], a                                 ; $7889: $22
+
+    ; If wC120 / 8 > $20…
     ld   a, [wC120]                               ; $788A: $FA $20 $C1
     rla                                           ; $788D: $17
     rla                                           ; $788E: $17

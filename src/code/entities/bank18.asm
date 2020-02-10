@@ -17,7 +17,7 @@ jr_018_400F:
     cp   $48                                      ; $4011: $FE $48
     jp   nz, label_018_4373                       ; $4013: $C2 $73 $43
 
-    call $435A                                    ; $4016: $CD $5A $43
+    call func_018_435A                                ; $4016: $CD $5A $43
     call func_018_7D36                            ; $4019: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $401C: $F0 $F0
     rst  $00                                      ; $401E: $C7
@@ -404,7 +404,10 @@ jr_018_434B:
 
     jr   @+$6A                                    ; $4357: $18 $68
 
-    jr   nz, jr_018_434B                          ; $4359: $20 $F0
+    db   $20                          ; $4359: $20
+
+func_018_435A::
+    db   $F0
 
 jr_018_435B:
     pop  af                                       ; $435B: $F1
@@ -738,7 +741,7 @@ jr_018_4517:
     ld   [$D218], a                               ; $451E: $EA $18 $D2
 
 jr_018_4521:
-    call $4833                                    ; $4521: $CD $33 $48
+    call func_018_4833                                    ; $4521: $CD $33 $48
     call func_018_7D36                            ; $4524: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $4527: $F0 $F0
     rst  $00                                      ; $4529: $C7
@@ -1295,7 +1298,10 @@ jr_018_4825:
 jr_018_4830:
     jr   nz, jr_018_4896                          ; $4830: $20 $64
 
-    jr   nz, jr_018_4855                          ; $4832: $20 $21
+    db  $20                          ; $4832: $20
+
+func_018_4833::
+    db  $21
 
 jr_018_4834:
     or   b                                        ; $4834: $B0
@@ -4044,7 +4050,7 @@ func_018_586B::
     jp   CopyEntityPositionToActivePosition       ; $5897: $C3 $8A $3D
 
 label_018_589A:
-    call $596B                                    ; $589A: $CD $6B $59
+    call func_018_596B                                    ; $589A: $CD $6B $59
     ld   a, [wRoomTransitionState]                ; $589D: $FA $24 $C1
 
 jr_018_58A0:
@@ -4191,7 +4197,10 @@ jr_018_591E:
     ld   bc, $302                                 ; $5965: $01 $02 $03
     inc  bc                                       ; $5968: $03
     ld   [bc], a                                  ; $5969: $02
-    ld   bc, $E7F0                                ; $596A: $01 $F0 $E7
+    db   $01                                ; $596A: $01
+
+func_018_596B::
+    db  $F0, $E7
     rra                                           ; $596D: $1F
     rra                                           ; $596E: $1F
     rra                                           ; $596F: $1F
@@ -6106,7 +6115,7 @@ jr_018_64FC:
     ldh  [hLinkInteractiveMotionBlocked], a       ; $6501: $E0 $A1
     ld   a, $6A                                   ; $6503: $3E $6A
     ldh  [hLinkAnimationState], a                 ; $6505: $E0 $9D
-    call $69C5                                    ; $6507: $CD $C5 $69
+    call func_018_69C5                                    ; $6507: $CD $C5 $69
 
 jr_018_650A:
     call func_018_7E15                            ; $650A: $CD $15 $7E
@@ -7003,7 +7012,10 @@ jr_018_699A:
     inc  b                                        ; $69BE: $04
     ld   [$100C], sp                              ; $69BF: $08 $0C $10
     inc  c                                        ; $69C2: $0C
-    ld   [$2104], sp                              ; $69C3: $08 $04 $21
+    db   $08, $04                              ; $69C3: $08 $04
+
+func_018_69C5::
+    db   $21
     db   $10                                      ; $69C6: $10
     ret  nz                                       ; $69C7: $C0
 

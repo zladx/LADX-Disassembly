@@ -1250,26 +1250,30 @@ wIsRoosterFollowingLink:: ; DB7B
 
 ; Unlabeled
 wDB7C equ $DB7C
-  ds $14
+  ds $13
 
-wAddRupeeBufferHigh:: ; DB90
+wAddRupeeBufferHigh:: ; DB8F
   ; Higher digits of the amount of rupees to be added to your wallet (high digits)
   ds 1
 
-wAddRupeeBufferLow:: ; DB91
+wAddRupeeBufferLow:: ; DB90
   ; Amount of rupees to be added to your wallet (low digits)
   ds 1
 
-wSubstractRupeeBufferHigh:: ; DB92
+wSubstractRupeeBufferHigh:: ; DB91
   ; Amount of rupees to be removed from your wallet (high digits)
   ds 1
 
-wSubstractRupeeBufferLow:: ; DB93
+wSubstractRupeeBufferLow:: ; DB92
   ; Amount of rupees to be removed from your wallet (low digits)
   ds 1
 
-; Unlabeled
-wDB94:: ; DB94
+wAddHealthBuffer:: ; DB93
+  ; Amount of health to be added to your health total (wHealth)
+  ds 1
+
+wSubtractHealthBuffer:: ; DB94
+  ; Amount of health to be removed from your health total (wHealth)
   ds 1
 
 wGameplayType:: ; DB95

@@ -7,7 +7,7 @@ MD5 - 07C211479386825042EFB4AD31BB525F
 
 ## Usage
 
-1. Install [rgbds](https://github.com/rednex/rgbds#1-installing-rgbds) (version >= 0.2.5 required).
+1. Install [rgbds](https://github.com/rednex/rgbds#1-installing-rgbds) (version >= 0.3.8 required).
 2. `make all`
 
 ## How to contribute

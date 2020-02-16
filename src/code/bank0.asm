@@ -1630,6 +1630,7 @@ LinkMotionInteractiveHandler::
 
     jpsw label_002_4287
 
+; Related to using the sword or shield at the same time than another item
 Func_1177::
     ld   a, [$C50A]
     ld   hl, $C167
@@ -1637,44 +1638,51 @@ Func_1177::
     ld   hl, $C1A4
     or   [hl]
     ret  nz
+
+    ;
+    ; Configure the sword and shield
+    ;
+
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
-    jr   z, .jr_11BC
-    ld   a, [wBButtonSlot]
-    cp   $01
-    jr   z, .jr_11AA
-    ld   a, [wAButtonSlot]
-    cp   $01
-    jr   z, .jr_11AA
-    ld   a, [wBButtonSlot]
-    cp   $04
-    jr   z, .jr_11A5
-    ld   a, [wAButtonSlot]
-    cp   $04
-    jr   nz, .jr_11BA
+    jr   z, .notRunning
 
-.jr_11A5
+    ld   a, [wBButtonSlot]
+    cp   INVENTORY_SWORD
+    jr   z, .swordEquiped
+    ld   a, [wAButtonSlot]
+    cp   INVENTORY_SWORD
+    jr   z, .swordEquiped
+    ld   a, [wBButtonSlot]
+    cp   INVENTORY_SHIELD
+    jr   z, .shieldEquiped
+    ld   a, [wAButtonSlot]
+    cp   INVENTORY_SHIELD
+    jr   nz, .shieldEnd
+
+.shieldEquiped
     call SetShieldVals
-    jr   .jr_11BA
+    jr   .shieldEnd
 
-.jr_11AA
+.swordEquiped
     ld   a, [wSwordAnimationState]
     dec  a
     cp   $04
-    jr   c, .jr_11BA
+    jr   c, .shieldEnd
     ld   a, $05
     ld   [wSwordAnimationState], a
     ld   [$C16A], a
 
-.jr_11BA
-    jr   .jr_11C3
+.shieldEnd
+    jr   .swordShieldEnd
 
-.jr_11BC
+.notRunning
     xor  a
     ld   [wIsUsingShield], a
     ld   [wHasMirrorShield], a
 
-.jr_11C3
+.swordShieldEnd
+
     ld   a, [$C117]
     and  a
     jp   nz, label_12ED
@@ -1697,10 +1705,10 @@ Func_1177::
 
 .jr_11E8
     ld   a, [wAButtonSlot]
-    cp   $08
+    cp   INVENTORY_PEGASUS_BOOTS
     jr   nz, .jr_11FE
     ldh  a, [hPressedButtonsMask]
-    and  $20
+    and  J_B
     jr   z, .jr_11FA
     call UsePegasusBoots
     jr   .jr_11FE
@@ -1711,10 +1719,10 @@ Func_1177::
 
 .jr_11FE
     ld   a, [wBButtonSlot]
-    cp   $08
+    cp   INVENTORY_PEGASUS_BOOTS
     jr   nz, .jr_1214
     ldh  a, [hPressedButtonsMask]
-    and  $10
+    and  J_A
     jr   z, .jr_1210
     call UsePegasusBoots
     jr   .jr_1214
@@ -1724,33 +1732,34 @@ Func_1177::
     ld   [wPegasusBootsChargeMeter], a
 
 .jr_1214
+
     ld   a, [wBButtonSlot]
-    cp   $04
-    jr   nz, .jr_1235
+    cp   INVENTORY_SHIELD
+    jr   nz, .shieldBEnd
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
     ldh  a, [hPressedButtonsMask]
-    and  $10
-    jr   z, .jr_1235
+    and  J_A
+    jr   z, .shieldBEnd
     ld   a, [$C1AD]
     cp   $01
-    jr   z, .jr_1235
+    jr   z, .shieldBEnd
     cp   $02
-    jr   z, .jr_1235
+    jr   z, .shieldBEnd
     call SetShieldVals
+.shieldBEnd
 
-.jr_1235
     ld   a, [wAButtonSlot]
-    cp   $04
-    jr   nz, .jr_124B
+    cp   INVENTORY_SHIELD
+    jr   nz, .shieldAEnd
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
     ldh  a, [hPressedButtonsMask]
-    and  $20
-    jr   z, .jr_124B
+    and  J_B
+    jr   z, .shieldAEnd
     call SetShieldVals
+.shieldAEnd
 
-.jr_124B
     ldh  a, [$FFCC]
     and  $20
     jr   z, .jr_125E
@@ -1870,17 +1879,22 @@ UseHookshot::
     ret  nz
     jp   FireHookshot
 
+; Inputs:
+;   a    inventory item
 label_1321::
-    cp   $01
+    cp   INVENTORY_SWORD
     ret  nz
+
     ld   hl, wSwordAnimationState
     ld   a, [$C1AD]
     and  $03
     or   [hl]
     ret  nz
+
     ld   a, [$C160]
     and  a
     ret  nz
+
     xor  a
     ld   [$C1AC], a
     ld   a, $05

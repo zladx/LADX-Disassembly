@@ -114,7 +114,7 @@ EntityPointersTable::
 ._61 entity_pointer WarpEntityHandler
 ._62 entity_pointer HotHeadEntityHandler
 ._63 entity_pointer EvilEagleEntityHandler
-._64 entity_pointer Entity64Handler ; $64
+._64 entity_pointer SouthFaceShrineDoorEntityHandler ; $64
 ._65 entity_pointer AnglerFishEntityHandler
 ._66 entity_pointer CrystalSwitchEntityHandler
 ._67 entity_pointer Entity67Handler

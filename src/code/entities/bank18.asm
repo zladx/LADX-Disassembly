@@ -2468,7 +2468,7 @@ BunnyCallingMarinState0Handler::
     ld   a, $01                                   ; $52FA: $3E $01
     ldh  [hLinkDirection], a                      ; $52FC: $E0 $9E
     push bc                                       ; $52FE: $C5
-    call func_BF0                                 ; $52FF: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $52FF: $CD $F0 $0B
     pop  bc                                       ; $5302: $C1
     ret                                           ; $5303: $C9
 
@@ -3146,7 +3146,7 @@ WalrusState6Handler::
     ld   a, $03                                   ; $576E: $3E $03
     ldh  [hLinkDirection], a                      ; $5770: $E0 $9E
     push bc                                       ; $5772: $C5
-    call func_BF0                                 ; $5773: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $5773: $CD $F0 $0B
     pop  bc                                       ; $5776: $C1
     ret                                           ; $5777: $C9
 
@@ -4364,7 +4364,7 @@ MarinAtTalTalHeightsState4Handler::
     ld   a, $00                                   ; $5FD8: $3E $00
     ldh  [hLinkDirection], a                      ; $5FDA: $E0 $9E
     push bc                                       ; $5FDC: $C5
-    call func_BF0                                 ; $5FDD: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $5FDD: $CD $F0 $0B
     pop  bc                                       ; $5FE0: $C1
     call GetEntityTransitionCountdown             ; $5FE1: $CD $05 $0C
     ret  nz                                       ; $5FE4: $C0
@@ -4502,7 +4502,7 @@ jr_018_60C7:
     xor  $01                                      ; $60CB: $EE $01
     ldh  [hLinkDirection], a                      ; $60CD: $E0 $9E
     push bc                                       ; $60CF: $C5
-    call func_BF0                                 ; $60D0: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $60D0: $CD $F0 $0B
     pop  bc                                       ; $60D3: $C1
     ret                                           ; $60D4: $C9
 
@@ -4543,7 +4543,7 @@ func_018_6109::
     add  hl, de                                   ; $612E: $19
     ld   [hl], $03                                ; $612F: $36 $03
     push bc                                       ; $6131: $C5
-    call func_BF0                                 ; $6132: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $6132: $CD $F0 $0B
     pop  bc                                       ; $6135: $C1
     jp   IncrementEntityState                     ; $6136: $C3 $12 $3B
 

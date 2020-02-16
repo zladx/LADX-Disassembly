@@ -678,7 +678,7 @@ Farcall::
     ld   [MBC3SelectBank], a
     ret
 
-;Jump to address in wFarcallAdressHigh, wFarcallAdressLow
+; Jump to address in wFarcallAdressHigh, wFarcallAdressLow
 Farcall_trampoline::
     ld   a, [wFarcallAdressHigh]
     ld   h, a
@@ -686,7 +686,7 @@ Farcall_trampoline::
     ld   l, a
     jp   hl
 
-func_BF0::
+UpdateLinkWalkingAnimation_trampoline::
     ld   a, BANK(LinkAnimationsLists)
     ld   [MBC3SelectBank], a
     call UpdateLinkWalkingAnimation

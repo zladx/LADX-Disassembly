@@ -143,7 +143,7 @@ func_005_4A17::
     xor  $01                                      ; $4A23: $EE $01
     ldh  [hLinkDirection], a                      ; $4A25: $E0 $9E
     push bc                                       ; $4A27: $C5
-    call func_BF0                                ; $4A28: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $4A28: $CD $F0 $0B
     pop  bc                                       ; $4A2B: $C1
     ld   hl, wEntitiesUnknownTableD               ; $4A2C: $21 $D0 $C2
     add  hl, bc                                   ; $4A2F: $09

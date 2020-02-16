@@ -5822,7 +5822,7 @@ func_004_723B::
     ld   a, e                                     ; $7240: $7B
     ldh  [hLinkDirection], a                      ; $7241: $E0 $9E
     push bc                                       ; $7243: $C5
-    call func_BF0                                ; $7244: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $7244: $CD $F0 $0B
     pop  bc                                       ; $7247: $C1
 
 jr_004_7248:

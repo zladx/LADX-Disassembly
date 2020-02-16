@@ -364,7 +364,7 @@ func_005_5059::
     ldh  [hLinkInteractiveMotionBlocked], a       ; $505B: $E0 $A1
     ld   [wC167], a                               ; $505D: $EA $67 $C1
     push bc                                       ; $5060: $C5
-    call func_BF0                                ; $5061: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $5061: $CD $F0 $0B
     pop  bc                                       ; $5064: $C1
     ld   a, [$D211]                               ; $5065: $FA $11 $D2
     cp   $07                                      ; $5068: $FE $07
@@ -377,7 +377,7 @@ func_005_5059::
     ld   a, $16                                   ; $5073: $3E $16
     call OpenDialog                               ; $5075: $CD $85 $23
     push bc                                       ; $5078: $C5
-    call func_BF0                                ; $5079: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $5079: $CD $F0 $0B
     pop  bc                                       ; $507C: $C1
     xor  a                                        ; $507D: $AF
     ld   [$D210], a                               ; $507E: $EA $10 $D2

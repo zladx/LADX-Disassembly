@@ -650,7 +650,7 @@ jr_015_469C:
     and  $08                                      ; $46A2: $E6 $08
     ld   [wConsecutiveStepsCount], a                               ; $46A4: $EA $20 $C1
     push bc                                       ; $46A7: $C5
-    call func_BF0                                ; $46A8: $CD $F0 $0B
+    call UpdateLinkWalkingAnimation_trampoline    ; $46A8: $CD $F0 $0B
     pop  bc                                       ; $46AB: $C1
     call ResetSpinAttack                          ; $46AC: $CD $AF $0C
     ld   [wSwordAnimationState], a                ; $46AF: $EA $37 $C1

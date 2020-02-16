@@ -884,12 +884,12 @@ label_531D::
     xor  a
     ld   [wLinkMotionState], a
     ldh  [$FF9C], a
-    ld   [wSubstractRupeeBufferLow], a
-    ld   [$DB94], a
-    ld   [wAddRupeeBufferHigh], a
-    ld   [$DB8F], a
-    ld   [wSubstractRupeeBufferHigh], a
+    ld   [wAddHealthBuffer], a
+    ld   [wSubtractHealthBuffer], a
     ld   [wAddRupeeBufferLow], a
+    ld   [wAddRupeeBufferHigh], a
+    ld   [wSubstractRupeeBufferLow], a
+    ld   [wSubstractRupeeBufferHigh], a
     ld   a, [$DB6F]
     and  a
     jr   nz, .setStartingPoint

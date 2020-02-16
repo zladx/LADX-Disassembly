@@ -2761,9 +2761,9 @@ func_004_5FEF::
 jr_004_6007:
     push hl                                       ; $6007: $E5
     push de                                       ; $6008: $D5
-    ld   a, [wAddRupeeBufferHigh]                 ; $6009: $FA $90 $DB
+    ld   a, [wAddRupeeBufferLow]                  ; $6009: $FA $90 $DB
     ld   e, a                                     ; $600C: $5F
-    ld   a, [$DB8F]                               ; $600D: $FA $8F $DB
+    ld   a, [wAddRupeeBufferHigh]                 ; $600D: $FA $8F $DB
     ld   d, a                                     ; $6010: $57
     ld   a, [wRupeeCountLow]                      ; $6011: $FA $5E $DB
     ld   l, a                                     ; $6014: $6F
@@ -2791,7 +2791,7 @@ jr_004_6023:
     jr   c, jr_004_6037                           ; $602B: $38 $0A
 
     ld   a, $0A                                   ; $602D: $3E $0A
-    ld   [wSubstractRupeeBufferHigh], a           ; $602F: $EA $92 $DB
+    ld   [wSubstractRupeeBufferLow], a            ; $602F: $EA $92 $DB
     jp_open_dialog $047                           ; $6032
 
 jr_004_6037:
@@ -3053,9 +3053,9 @@ func_004_61E5::
 jr_004_6202:
     push hl                                       ; $6202: $E5
     push de                                       ; $6203: $D5
-    ld   a, [wAddRupeeBufferHigh]                 ; $6204: $FA $90 $DB
+    ld   a, [wAddRupeeBufferLow]                  ; $6204: $FA $90 $DB
     ld   e, a                                     ; $6207: $5F
-    ld   a, [$DB8F]                               ; $6208: $FA $8F $DB
+    ld   a, [wAddRupeeBufferHigh]                 ; $6208: $FA $8F $DB
     ld   d, a                                     ; $620B: $57
     ld   a, [wRupeeCountLow]                      ; $620C: $FA $5E $DB
     ld   l, a                                     ; $620F: $6F
@@ -3083,7 +3083,7 @@ jr_004_621E:
     jr   c, jr_004_623F                           ; $6226: $38 $17
 
     ld   a, $0A                                   ; $6228: $3E $0A
-    ld   [wSubstractRupeeBufferHigh], a           ; $622A: $EA $92 $DB
+    ld   [wSubstractRupeeBufferLow], a            ; $622A: $EA $92 $DB
     call_open_dialog $047                         ; $622D
     call IncrementEntityState                     ; $6232: $CD $12 $3B
     ld   [hl], b                                  ; $6235: $70
@@ -3874,7 +3874,7 @@ func_004_6689::
 
     xor  a                                        ; $66C9: $AF
     ld   [wHeartPiecesCount], a                   ; $66CA: $EA $5C $DB
-    ld   hl, wSubstractRupeeBufferLow             ; $66CD: $21 $93 $DB
+    ld   hl, wAddHealthBuffer                     ; $66CD: $21 $93 $DB
     ld   [hl], $40                                ; $66D0: $36 $40
     ld   hl, wMaxHealth                           ; $66D2: $21 $5B $DB
     inc  [hl]                                     ; $66D5: $34
@@ -3886,7 +3886,7 @@ jr_004_66DA:
 
 jr_004_66DC:
     call OpenDialogInTable1                       ; $66DC: $CD $73 $23
-    ld   hl, wAddRupeeBufferHigh                  ; $66DF: $21 $90 $DB
+    ld   hl, wAddRupeeBufferLow                   ; $66DF: $21 $90 $DB
     ld   [hl], $14                                ; $66E2: $36 $14
     jr   jr_004_66FE                              ; $66E4: $18 $18
 
@@ -3903,7 +3903,7 @@ jr_004_66E6:
     ld   a, $4D                                   ; $66F5: $3E $4D
 
 jr_004_66F7:
-    ld   hl, wAddRupeeBufferHigh                  ; $66F7: $21 $90 $DB
+    ld   hl, wAddRupeeBufferLow                   ; $66F7: $21 $90 $DB
     ld   [hl], e                                  ; $66FA: $73
     call OpenDialog                               ; $66FB: $CD $85 $23
 
@@ -5512,7 +5512,7 @@ jr_004_7066:
 jr_004_7074:
     call OpenDialog                               ; $7074: $CD $85 $23
     ld   a, $0A                                   ; $7077: $3E $0A
-    ld   [wSubstractRupeeBufferHigh], a           ; $7079: $EA $92 $DB
+    ld   [wSubstractRupeeBufferLow], a            ; $7079: $EA $92 $DB
     jp   IncrementEntityState                     ; $707C: $C3 $12 $3B
 
 func_004_707F::
@@ -6493,9 +6493,9 @@ jr_004_7647:
     dec  a                                        ; $7647: $3D
     jr   nz, jr_004_7653                          ; $7648: $20 $09
 
-    ld   a, [wAddRupeeBufferHigh]                 ; $764A: $FA $90 $DB
+    ld   a, [wAddRupeeBufferLow]                  ; $764A: $FA $90 $DB
     add  $1E                                      ; $764D: $C6 $1E
-    ld   [wAddRupeeBufferHigh], a                 ; $764F: $EA $90 $DB
+    ld   [wAddRupeeBufferLow], a                  ; $764F: $EA $90 $DB
     ret                                           ; $7652: $C9
 
 jr_004_7653:
@@ -6531,7 +6531,7 @@ jr_004_7673:
 
 jr_004_767B:
     ld   a, $FF                                   ; $767B: $3E $FF
-    ld   [wSubstractRupeeBufferLow], a            ; $767D: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $767D: $EA $93 $DB
 
 label_004_7680:
     ret                                           ; $7680: $C9
@@ -7099,16 +7099,16 @@ jr_004_7A2E:
     ld   d, b                                     ; $7A36: $50
     ld   hl, Data_004_77EE                        ; $7A37: $21 $EE $77
     add  hl, de                                   ; $7A3A: $19
-    ld   a, [wSubstractRupeeBufferHigh]           ; $7A3B: $FA $92 $DB
+    ld   a, [wSubstractRupeeBufferLow]            ; $7A3B: $FA $92 $DB
     add  [hl]                                     ; $7A3E: $86
-    ld   [wSubstractRupeeBufferHigh], a           ; $7A3F: $EA $92 $DB
+    ld   [wSubstractRupeeBufferLow], a            ; $7A3F: $EA $92 $DB
     rl   a                                        ; $7A42: $CB $17
     ld   hl, Data_004_77E5                        ; $7A44: $21 $E5 $77
     add  hl, de                                   ; $7A47: $19
     rr   a                                        ; $7A48: $CB $1F
-    ld   a, [wAddRupeeBufferLow]                  ; $7A4A: $FA $91 $DB
+    ld   a, [wSubstractRupeeBufferHigh]           ; $7A4A: $FA $91 $DB
     adc  [hl]                                     ; $7A4D: $8E
-    ld   [wAddRupeeBufferLow], a                  ; $7A4E: $EA $91 $DB
+    ld   [wSubstractRupeeBufferHigh], a           ; $7A4E: $EA $91 $DB
     ld   hl, wEntitiesStateTable                  ; $7A51: $21 $90 $C2
     add  hl, bc                                   ; $7A54: $09
     ld   [hl], $01                                ; $7A55: $36 $01
@@ -7203,7 +7203,7 @@ jr_004_7ACA:
 
 func_004_7AD2::
     ld   a, $18                                   ; $7AD2: $3E $18
-    ld   [wSubstractRupeeBufferLow], a            ; $7AD4: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $7AD4: $EA $93 $DB
     ret                                           ; $7AD7: $C9
 
 func_004_7AD8::
@@ -7249,7 +7249,7 @@ func_004_7AED::
     xor  a                                        ; $7B1E: $AF
     ld   [wHasMedicine], a                        ; $7B1F: $EA $0D $DB
     ld   a, $FF                                   ; $7B22: $3E $FF
-    ld   [wDB94], a                               ; $7B24: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $7B24: $EA $94 $DB
     ldh  a, [hIsGBC]                              ; $7B27: $F0 $FE
     and  a                                        ; $7B29: $A7
     jr   z, jr_004_7B3F                           ; $7B2A: $28 $13

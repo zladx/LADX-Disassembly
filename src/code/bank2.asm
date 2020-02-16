@@ -2458,9 +2458,9 @@ jr_002_518E:
 
 jr_002_51AC:
     call label_002_52B9                           ; $51AC: $CD $B9 $52
-    ld   a, [wDB94]                               ; $51AF: $FA $94 $DB
+    ld   a, [wSubtractHealthBuffer]               ; $51AF: $FA $94 $DB
     add  $04                                      ; $51B2: $C6 $04
-    ld   [wDB94], a                               ; $51B4: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $51B4: $EA $94 $DB
     xor  a                                        ; $51B7: $AF
     ld   [wC167], a                               ; $51B8: $EA $67 $C1
     ret                                           ; $51BB: $C9
@@ -2595,9 +2595,9 @@ LinkMotionRecoverHandler::
     cp   $06                                      ; $5277: $FE $06
     jr   nz, jr_002_5283                          ; $5279: $20 $08
 
-    ld   a, [wDB94]                               ; $527B: $FA $94 $DB
+    ld   a, [wSubtractHealthBuffer]               ; $527B: $FA $94 $DB
     add  $04                                      ; $527E: $C6 $04
-    ld   [wDB94], a                               ; $5280: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $5280: $EA $94 $DB
 
 jr_002_5283:
     xor  a                                        ; $5283: $AF
@@ -4526,16 +4526,16 @@ UpdateRupeesCount::
     ret                                           ; $621A: $C9
 .C3CENotZero
 
-    ld   hl, $DB8F                                ; $621B: $21 $8F $DB
-    ld   a, [wAddRupeeBufferHigh]                 ; $621E: $FA $90 $DB
+    ld   hl, wAddRupeeBufferHigh                  ; $621B: $21 $8F $DB
+    ld   a, [wAddRupeeBufferLow]                  ; $621E: $FA $90 $DB
     or   [hl]                                     ; $6221: $B6
     jr   z, .jr_002_6274                          ; $6222: $28 $50
 
     ld   a, WAVE_SFX_RUPEE                        ; $6224: $3E $05
     ldh  [hWaveSfx], a                            ; $6226: $E0 $F3
-    ld   a, [wAddRupeeBufferHigh]                 ; $6228: $FA $90 $DB
+    ld   a, [wAddRupeeBufferLow]                  ; $6228: $FA $90 $DB
     ld   e, a                                     ; $622B: $5F
-    ld   a, [$DB8F]                               ; $622C: $FA $8F $DB
+    ld   a, [wAddRupeeBufferHigh]                 ; $622C: $FA $8F $DB
     sla  e                                        ; $622F: $CB $23
     rla                                           ; $6231: $17
     sla  e                                        ; $6232: $CB $23
@@ -4550,9 +4550,9 @@ UpdateRupeesCount::
 .noReinitTo9
 
     ld   e, a                                     ; $623F: $5F
-    ld   a, [wAddRupeeBufferHigh]                 ; $6240: $FA $90 $DB
+    ld   a, [wAddRupeeBufferLow]                  ; $6240: $FA $90 $DB
     sub  e                                        ; $6243: $93
-    ld   [wAddRupeeBufferHigh], a                 ; $6244: $EA $90 $DB
+    ld   [wAddRupeeBufferLow], a                  ; $6244: $EA $90 $DB
     ld   a, [hl]                                  ; $6247: $7E
     sbc  $00                                      ; $6248: $DE $00
     ld   [hl], a                                  ; $624A: $77
@@ -4572,23 +4572,23 @@ UpdateRupeesCount::
     ld   a, $99                                   ; $6265: $3E $99
     ld   [wRupeeCountLow], a                      ; $6267: $EA $5E $DB
     xor  a                                        ; $626A: $AF
-    ld   [$DB8F], a                               ; $626B: $EA $8F $DB
-    ld   [wAddRupeeBufferHigh], a                 ; $626E: $EA $90 $DB
+    ld   [wAddRupeeBufferHigh], a                 ; $626B: $EA $8F $DB
+    ld   [wAddRupeeBufferLow], a                  ; $626E: $EA $90 $DB
 .rupeesLessThan16
 
     call LoadRupeesDigits                           ; $6271: $CD $CE $62
 
 .jr_002_6274
-    ld   hl, wAddRupeeBufferLow                   ; $6274: $21 $91 $DB
-    ld   a, [wSubstractRupeeBufferHigh]           ; $6277: $FA $92 $DB
+    ld   hl, wSubstractRupeeBufferHigh            ; $6274: $21 $91 $DB
+    ld   a, [wSubstractRupeeBufferLow]            ; $6277: $FA $92 $DB
     or   [hl]                                     ; $627A: $B6
     ret  z                                        ; $627B: $C8
 
     ld   a, NOISE_SFX_RUPEE                             ; $627C: $3E $05
     ldh  [hWaveSfx], a                                ; $627E: $E0 $F3
-    ld   a, [wSubstractRupeeBufferHigh]           ; $6280: $FA $92 $DB
+    ld   a, [wSubstractRupeeBufferLow]            ; $6280: $FA $92 $DB
     ld   e, a                                     ; $6283: $5F
-    ld   a, [wAddRupeeBufferLow]                  ; $6284: $FA $91 $DB
+    ld   a, [wSubstractRupeeBufferHigh]           ; $6284: $FA $91 $DB
     sla  e                                        ; $6287: $CB $23
     rla                                           ; $6289: $17
     sla  e                                        ; $628A: $CB $23
@@ -4603,9 +4603,9 @@ UpdateRupeesCount::
 
     ; If wRupeeCountLow == 0 || wRupeeCountHigh == 0, return
     ld   e, a                                     ; $6297: $5F
-    ld   a, [wSubstractRupeeBufferHigh]           ; $6298: $FA $92 $DB
+    ld   a, [wSubstractRupeeBufferLow]            ; $6298: $FA $92 $DB
     sub  e                                        ; $629B: $93
-    ld   [wSubstractRupeeBufferHigh], a           ; $629C: $EA $92 $DB
+    ld   [wSubstractRupeeBufferLow], a            ; $629C: $EA $92 $DB
     ld   a, [hl]                                  ; $629F: $7E
     sbc  $00                                      ; $62A0: $DE $00
     ld   [hl], a                                  ; $62A2: $77
@@ -4628,8 +4628,8 @@ UpdateRupeesCount::
     xor  a                                        ; $62BE: $AF
     ld   [wRupeeCountHigh], a                     ; $62BF: $EA $5D $DB
     ld   [wRupeeCountLow], a                      ; $62C2: $EA $5E $DB
-    ld   [wAddRupeeBufferLow], a                  ; $62C5: $EA $91 $DB
-    ld   [wSubstractRupeeBufferHigh], a           ; $62C8: $EA $92 $DB
+    ld   [wSubstractRupeeBufferHigh], a           ; $62C5: $EA $91 $DB
+    ld   [wSubstractRupeeBufferLow], a            ; $62C8: $EA $92 $DB
 .resetEnd
 
     jp   LoadRupeesDigits                           ; $62CB: $C3 $CE $62
@@ -4709,12 +4709,12 @@ jr_002_6342:
     and  a                                        ; $634B: $A7
     jr   nz, jr_002_63A2                          ; $634C: $20 $54
 
-    ld   a, [wSubstractRupeeBufferLow]            ; $634E: $FA $93 $DB
+    ld   a, [wAddHealthBuffer]                    ; $634E: $FA $93 $DB
     and  a                                        ; $6351: $A7
     jr   z, jr_002_6385                           ; $6352: $28 $31
 
     dec  a                                        ; $6354: $3D
-    ld   [wSubstractRupeeBufferLow], a            ; $6355: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $6355: $EA $93 $DB
     ld   a, [wMaxHealth]                          ; $6358: $FA $5B $DB
     cp   $0F                                      ; $635B: $FE $0F
     jr   c, jr_002_6361                           ; $635D: $38 $02
@@ -4731,7 +4731,7 @@ jr_002_6361:
     jr   nz, jr_002_6374                          ; $636C: $20 $06
 
     xor  a                                        ; $636E: $AF
-    ld   [wSubstractRupeeBufferLow], a            ; $636F: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $636F: $EA $93 $DB
     jr   jr_002_6385                              ; $6372: $18 $11
 
 jr_002_6374:
@@ -4748,12 +4748,12 @@ jr_002_6382:
     jp   LoadHeartsCount                          ; $6382: $C3 $14 $64
 
 jr_002_6385:
-    ld   a, [wDB94]                               ; $6385: $FA $94 $DB
+    ld   a, [wSubtractHealthBuffer]               ; $6385: $FA $94 $DB
     and  a                                        ; $6388: $A7
     jr   z, jr_002_63A2                           ; $6389: $28 $17
 
     dec  a                                        ; $638B: $3D
-    ld   [wDB94], a                               ; $638C: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $638C: $EA $94 $DB
     ld   a, [wHealth]                             ; $638F: $FA $5A $DB
     and  a                                        ; $6392: $A7
     jr   z, jr_002_6399                           ; $6393: $28 $04
@@ -4779,9 +4779,9 @@ jr_002_63A3:
     ld   [wHasMedicine], a                        ; $63AA: $EA $0D $DB
     ld   a, $08                                   ; $63AD: $3E $08
     ld   [wHealth], a                             ; $63AF: $EA $5A $DB
-    ld   a, [wSubstractRupeeBufferLow]            ; $63B2: $FA $93 $DB
+    ld   a, [wAddHealthBuffer]                    ; $63B2: $FA $93 $DB
     add  $80                                      ; $63B5: $C6 $80
-    ld   [wSubstractRupeeBufferLow], a            ; $63B7: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $63B7: $EA $93 $DB
     ld   a, $A0                                   ; $63BA: $3E $A0
     ld   [$DBC7], a                               ; $63BC: $EA $C7 $DB
     ld   a, [wRequests]                           ; $63BF: $FA $00 $D6
@@ -4989,9 +4989,9 @@ func_002_6910::
     jr   nz, jr_002_692B                          ; $6914: $20 $15
 
     call label_002_7719                           ; $6916: $CD $19 $77
-    ld   a, [wDB94]                               ; $6919: $FA $94 $DB
+    ld   a, [wSubtractHealthBuffer]               ; $6919: $FA $94 $DB
     add  $04                                      ; $691C: $C6 $04
-    ld   [wDB94], a                               ; $691E: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $691E: $EA $94 $DB
     ld   a, WAVE_SFX_LINK_HURT                    ; $6921: $3E $03
     ldh  [hWaveSfx], a                            ; $6923: $E0 $F3
     ld   a, $80                                   ; $6925: $3E $80
@@ -7301,9 +7301,9 @@ jr_002_761E:
     ld   [$C13E], a                               ; $7620: $EA $3E $C1
     ld   a, $30                                   ; $7623: $3E $30
     ld   [$DBC7], a                               ; $7625: $EA $C7 $DB
-    ld   a, [wDB94]                               ; $7628: $FA $94 $DB
+    ld   a, [wSubtractHealthBuffer]               ; $7628: $FA $94 $DB
     add  $04                                      ; $762B: $C6 $04
-    ld   [wDB94], a                               ; $762D: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $762D: $EA $94 $DB
     ld   a, WAVE_SFX_LINK_HURT                    ; $7630: $3E $03
     ldh  [hWaveSfx], a                            ; $7632: $E0 $F3
 

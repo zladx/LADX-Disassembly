@@ -126,12 +126,12 @@ jr_018_40AF:
     cp   $03                                      ; $40B2: $FE $03
     jr   c, jr_018_40A9                           ; $40B4: $38 $F3
 
-    ld   a, [wSubstractRupeeBufferHigh]           ; $40B6: $FA $92 $DB
+    ld   a, [wSubstractRupeeBufferLow]            ; $40B6: $FA $92 $DB
     add  $2C                                      ; $40B9: $C6 $2C
-    ld   [wSubstractRupeeBufferHigh], a           ; $40BB: $EA $92 $DB
-    ld   a, [wAddRupeeBufferLow]                  ; $40BE: $FA $91 $DB
+    ld   [wSubstractRupeeBufferLow], a            ; $40BB: $EA $92 $DB
+    ld   a, [wSubstractRupeeBufferHigh]           ; $40BE: $FA $91 $DB
     adc  $01                                      ; $40C1: $CE $01
-    ld   [wAddRupeeBufferLow], a                  ; $40C3: $EA $91 $DB
+    ld   [wSubstractRupeeBufferHigh], a           ; $40C3: $EA $91 $DB
     call GetEntityTransitionCountdown             ; $40C6: $CD $05 $0C
     ld   [hl], $FF                                ; $40C9: $36 $FF
     call label_27F2                               ; $40CB: $CD $F2 $27
@@ -9359,7 +9359,7 @@ jr_018_76FE:
     ld   a, $10                                   ; $7709: $3E $10
     ld   [$DBC7], a                               ; $770B: $EA $C7 $DB
     ld   a, $08                                   ; $770E: $3E $08
-    ld   [wDB94], a                               ; $7710: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $7710: $EA $94 $DB
     ld   a, $03                                   ; $7713: $3E $03
     ldh  [hWaveSfx], a                            ; $7715: $E0 $F3
 

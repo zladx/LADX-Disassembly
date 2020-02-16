@@ -622,9 +622,9 @@ jr_020_4917:
     dec  c                                        ; $4924: $0D
     ld   [$DDD8], a                               ; $4925: $EA $D8 $DD
     ld   [hl], a                                  ; $4928: $77
-    ld   a, [wAddRupeeBufferHigh]                 ; $4929: $FA $90 $DB
+    ld   a, [wAddRupeeBufferLow]                  ; $4929: $FA $90 $DB
     add  $05                                      ; $492C: $C6 $05
-    ld   [wAddRupeeBufferHigh], a                 ; $492E: $EA $90 $DB
+    ld   [wAddRupeeBufferLow], a                  ; $492E: $EA $90 $DB
     di                                            ; $4931: $F3
     ld   a, $05                                   ; $4932: $3E $05
     ld   [rSVBK], a                               ; $4934: $E0 $70

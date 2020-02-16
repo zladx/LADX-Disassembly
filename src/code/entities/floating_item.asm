@@ -110,14 +110,14 @@ jr_006_7B85:
 ._05 dw FloatingArrowsHandler
 
 func_006_7BA2::
-    ld   a, [wSubstractRupeeBufferLow]            ; $7BA2: $FA $93 $DB
+    ld   a, [wAddHealthBuffer]                    ; $7BA2: $FA $93 $DB
     add  $18                                      ; $7BA5: $C6 $18
     jr   nc, jr_006_7BAB                          ; $7BA7: $30 $02
 
     ld   a, $FF                                   ; $7BA9: $3E $FF
 
 jr_006_7BAB:
-    ld   [wSubstractRupeeBufferLow], a            ; $7BAB: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $7BAB: $EA $93 $DB
     ret                                           ; $7BAE: $C9
 
 FloatingArrowsHandler::
@@ -129,7 +129,7 @@ FloatingArrowsHandler::
 
 Floating10RupeesHandler::
     ld   a, 10                                    ; $7BB9: $3E $0A
-    ld   [wAddRupeeBufferHigh], a                 ; $7BBB: $EA $90 $DB
+    ld   [wAddRupeeBufferLow], a                  ; $7BBB: $EA $90 $DB
     ret                                           ; $7BBE: $C9
 
 FloatingMagicPowderHandler::

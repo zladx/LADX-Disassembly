@@ -9,7 +9,7 @@ MadamMeowMeowEntityHandler::
 
     ld   [hl], b                                  ; $5B7D: $70
     ld   a, $FF                                   ; $5B7E: $3E $FF
-    ld   [wSubstractRupeeBufferLow], a            ; $5B80: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $5B80: $EA $93 $DB
 
 jr_006_5B83:
     ldh  a, [hFrameCounter]                       ; $5B83: $F0 $E7

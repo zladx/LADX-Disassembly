@@ -470,7 +470,7 @@ jr_019_42E0:
     ld   bc, $CD02                                ; $42F3: $01 $02 $CD
     xor  a                                        ; $42F6: $AF
     inc  c                                        ; $42F7: $0C
-    ld   [wDB94], a                               ; $42F8: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $42F8: $EA $94 $DB
     ld   [$DBC7], a                               ; $42FB: $EA $C7 $DB
     ld   [$C13E], a                               ; $42FE: $EA $3E $C1
     ld   [wSwordAnimationState], a                ; $4301: $EA $37 $C1
@@ -9622,7 +9622,7 @@ jr_019_76D6:
     ld   a, $02                                   ; $76F5: $3E $02
     ld   [wSwordLevel], a                         ; $76F7: $EA $4E $DB
     ld   a, $FF                                   ; $76FA: $3E $FF
-    ld   [wSubstractRupeeBufferLow], a            ; $76FC: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $76FC: $EA $93 $DB
     xor  a                                        ; $76FF: $AF
     ld   [wSeashellsCount], a                     ; $7700: $EA $0F $DB
     ld   [wC167], a                               ; $7703: $EA $67 $C1

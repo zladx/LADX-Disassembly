@@ -188,7 +188,7 @@ jr_006_7197:
     jr   c, jr_006_71BA                           ; $71B3: $38 $05
 
     ld   a, $04                                   ; $71B5: $3E $04
-    ld   [wSubstractRupeeBufferLow], a            ; $71B7: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $71B7: $EA $93 $DB
 
 jr_006_71BA:
     call IsEntityUnknownFZero                     ; $71BA: $CD $00 $0C

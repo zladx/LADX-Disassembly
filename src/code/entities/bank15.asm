@@ -1149,9 +1149,9 @@ func_015_499C::
     ld   [$C13E], a                               ; $49AD: $EA $3E $C1
     ld   a, $40                                   ; $49B0: $3E $40
     ld   [$DBC7], a                               ; $49B2: $EA $C7 $DB
-    ld   a, [wDB94]                               ; $49B5: $FA $94 $DB
+    ld   a, [wSubtractHealthBuffer]               ; $49B5: $FA $94 $DB
     add  $08                                      ; $49B8: $C6 $08
-    ld   [wDB94], a                               ; $49BA: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $49BA: $EA $94 $DB
     ld   a, $0B                                   ; $49BD: $3E $0B
     ldh  [hJingle], a                             ; $49BF: $E0 $F2
     ret                                           ; $49C1: $C9
@@ -5583,7 +5583,7 @@ jr_015_6E4E:
     jr   z, jr_015_6E5A                           ; $6E54: $28 $04
 
     xor  a                                        ; $6E56: $AF
-    ld   [wDB94], a                               ; $6E57: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $6E57: $EA $94 $DB
 
 jr_015_6E5A:
     call func_015_7B0D                            ; $6E5A: $CD $0D $7B
@@ -6189,7 +6189,7 @@ func_015_72CF::
     jr   nz, jr_015_731D                          ; $72FB: $20 $20
 
     ld   a, $08                                   ; $72FD: $3E $08
-    ld   [wDB94], a                               ; $72FF: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $72FF: $EA $94 $DB
     ld   a, $20                                   ; $7302: $3E $20
     call GetVectorTowardsLink_trampoline          ; $7304: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $7307: $F0 $D7

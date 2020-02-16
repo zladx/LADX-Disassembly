@@ -249,16 +249,16 @@ CrazyTracySellingHandler::
     ld   d, b                                     ; $5FDA: $50
     ld   hl, MedecinePriceDecimal                 ; $5FDB: $21 $89 $5F
     add  hl, de                                   ; $5FDE: $19
-    ld   a, [wSubstractRupeeBufferHigh]           ; $5FDF: $FA $92 $DB
+    ld   a, [wSubstractRupeeBufferLow]            ; $5FDF: $FA $92 $DB
     add  [hl]                                     ; $5FE2: $86
-    ld   [wSubstractRupeeBufferHigh], a           ; $5FE3: $EA $92 $DB
+    ld   [wSubstractRupeeBufferLow], a            ; $5FE3: $EA $92 $DB
     rl   a                                        ; $5FE6: $CB $17
     ld   hl, Data_006_5F8D                        ; $5FE8: $21 $8D $5F
     add  hl, de                                   ; $5FEB: $19
     rr   a                                        ; $5FEC: $CB $1F
-    ld   a, [wAddRupeeBufferLow]                  ; $5FEE: $FA $91 $DB
+    ld   a, [wSubstractRupeeBufferHigh]           ; $5FEE: $FA $91 $DB
     adc  [hl]                                     ; $5FF1: $8E
-    ld   [wAddRupeeBufferLow], a                  ; $5FF2: $EA $91 $DB
+    ld   [wSubstractRupeeBufferHigh], a           ; $5FF2: $EA $91 $DB
     ld   hl, wHasMedicine                         ; $5FF5: $21 $0D $DB
     inc  [hl]                                     ; $5FF8: $34
 
@@ -309,7 +309,7 @@ CrazyTracyBonusHandler::
     jr   nz, .fillHeartsEnd                       ; $6033: $20 $0F
     ; Also fill hearts
     ld   a, $FF                                   ; $6035: $3E $FF
-    ld   [wSubstractRupeeBufferLow], a            ; $6037: $EA $93 $DB
+    ld   [wAddHealthBuffer], a                    ; $6037: $EA $93 $DB
     call_open_dialog $19A                         ; $603A
     ld   hl, wDialogState                         ; $603F: $21 $9F $C1
     set  7, [hl]                                  ; $6042: $CB $FE

@@ -66,7 +66,7 @@ jr_005_53B1:
     jr   c, jr_005_53C5                           ; $53B6: $38 $0D
 
     ld   a, $64                                   ; $53B8: $3E $64
-    ld   [wSubstractRupeeBufferHigh], a           ; $53BA: $EA $92 $DB
+    ld   [wSubstractRupeeBufferLow], a            ; $53BA: $EA $92 $DB
     ld   a, $F1                                   ; $53BD: $3E $F1
     ld   [$D477], a                               ; $53BF: $EA $77 $D4
     jp   OpenDialog                               ; $53C2: $C3 $85 $23

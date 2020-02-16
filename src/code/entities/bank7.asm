@@ -7547,7 +7547,7 @@ jr_007_70E0:
     ld   a, $13                                   ; $70FF: $3E $13
     ldh  [$FFA3], a                               ; $7101: $E0 $A3
     ld   a, $08                                   ; $7103: $3E $08
-    ld   [wDB94], a                               ; $7105: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $7105: $EA $94 $DB
     ld   a, $20                                   ; $7108: $3E $20
     ld   [$DBC7], a                               ; $710A: $EA $C7 $DB
     ld   a, $03                                   ; $710D: $3E $03

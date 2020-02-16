@@ -269,7 +269,7 @@ jr_006_5157:
     ld   a, $08                                   ; $5162: $3E $08
     ldh  [hJingle], a                             ; $5164: $E0 $F2
     ld   a, $08                                   ; $5166: $3E $08
-    ld   [wDB94], a                               ; $5168: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $5168: $EA $94 $DB
     ldh  a, [hActiveEntityPosX]                   ; $516B: $F0 $EE
     ldh  [hLinkPositionX], a                      ; $516D: $E0 $98
     ldh  a, [hActiveEntityPosY]                   ; $516F: $F0 $EF

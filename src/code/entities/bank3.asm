@@ -1555,11 +1555,11 @@ jr_003_50B9:
     ld   hl, (Data_003_504F - 2)                  ; $50C1: $21 $4D $50
     add  hl, de                                   ; $50C4: $19
     ld   a, [hl]                                  ; $50C5: $7E
-    ld   [wAddRupeeBufferHigh], a                 ; $50C6: $EA $90 $DB
+    ld   [wAddRupeeBufferLow], a                  ; $50C6: $EA $90 $DB
     ld   hl, Data_003_5048                        ; $50C9: $21 $48 $50
     add  hl, de                                   ; $50CC: $19
     ld   a, [hl]                                  ; $50CD: $7E
-    ld   [$DB8F], a                               ; $50CE: $EA $8F $DB
+    ld   [wAddRupeeBufferHigh], a                 ; $50CE: $EA $8F $DB
     ld   a, $18                                   ; $50D1: $3E $18
     ld   [$C3CE], a                               ; $50D3: $EA $CE $C3
     jr   func_003_512A                              ; $50D6: $18 $52
@@ -2855,7 +2855,7 @@ HeartContainerEntityHandler::
     ; Increase max health
     ld   hl, wMaxHealth                           ; $59F0: $21 $5B $DB
     inc  [hl]                                     ; $59F3: $34
-    ld   hl, wSubstractRupeeBufferLow             ; $59F4: $21 $93 $DB
+    ld   hl, wAddHealthBuffer                     ; $59F4: $21 $93 $DB
     ld   [hl], $FF                                ; $59F7: $36 $FF
     call func_003_5134                            ; $59F9: $CD $34 $51
     ld   a, [hl]                                  ; $59FC: $7E
@@ -3001,7 +3001,7 @@ HeartPieceState6Handler::
     xor  a                                        ; $5ADB: $AF
     ld   [wHeartPiecesCount], a                   ; $5ADC: $EA $5C $DB
     ; Configure the heart increase animation
-    ld   hl, wSubstractRupeeBufferLow             ; $5ADF: $21 $93 $DB
+    ld   hl, wAddHealthBuffer                     ; $5ADF: $21 $93 $DB
     ld   [hl], $40                                ; $5AE2: $36 $40
     ; Increase the maximum number of hearts
     ld   hl, wMaxHealth                           ; $5AE4: $21 $5B $DB
@@ -4589,7 +4589,7 @@ PickDroppableHeart::
     ld   a, $08                                   ; $64B7: $3E $08
 
 jr_003_64B9:
-    ld   hl, wSubstractRupeeBufferLow             ; $64B9: $21 $93 $DB
+    ld   hl, wAddHealthBuffer                     ; $64B9: $21 $93 $DB
 
 jr_003_64BC:
     add  [hl]                                     ; $64BC: $86
@@ -4598,7 +4598,7 @@ jr_003_64BC:
 
 PickDroppableRupee::
     ld   a, $01                                   ; $64BF: $3E $01
-    ld   hl, wAddRupeeBufferHigh                  ; $64C1: $21 $90 $DB
+    ld   hl, wAddRupeeBufferLow                   ; $64C1: $21 $90 $DB
     jr   jr_003_64BC                              ; $64C4: $18 $F6
 
 PickDroppableFairy::
@@ -5972,9 +5972,9 @@ jr_003_6D73:
     srl  e                                        ; $6DA9: $CB $3B
 .damageModifiersEnd
 
-    ld   a, [wDB94]                               ; $6DAB: $FA $94 $DB
+    ld   a, [wSubtractHealthBuffer]               ; $6DAB: $FA $94 $DB
     add  e                                        ; $6DAE: $83
-    ld   [wDB94], a                               ; $6DAF: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $6DAF: $EA $94 $DB
     ld   a, $50                                   ; $6DB2: $3E $50
     ld   [$DBC7], a                               ; $6DB4: $EA $C7 $DB
     xor  a                                        ; $6DB7: $AF

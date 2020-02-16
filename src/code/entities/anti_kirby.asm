@@ -312,7 +312,7 @@ jr_006_440C:
     ld   a, $02                                   ; $4417: $3E $02
     ld   [$C146], a                               ; $4419: $EA $46 $C1
     ld   a, $02                                   ; $441C: $3E $02
-    ld   [wDB94], a                               ; $441E: $EA $94 $DB
+    ld   [wSubtractHealthBuffer], a               ; $441E: $EA $94 $DB
     ld   a, $08                                   ; $4421: $3E $08
     ldh  [hJingle], a                             ; $4423: $E0 $F2
     jp   IncrementEntityState                     ; $4425: $C3 $12 $3B

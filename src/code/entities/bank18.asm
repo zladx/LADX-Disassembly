@@ -627,7 +627,7 @@ label_018_449D:
 ManboAndFishesEntityHandler::
     ldh  a, [$FFEC]                               ; $4500: $F0 $EC
     cp   $50                                      ; $4502: $FE $50
-    jp   nc, $48C8                                ; $4504: $D2 $C8 $48
+    jp   nc, label_018_48C8                       ; $4504: $D2 $C8 $48
 
     ld   hl, wEntitiesPosYTable                   ; $4507: $21 $10 $C2
     add  hl, bc                                   ; $450A: $09
@@ -988,8 +988,10 @@ Data_018_48A0::
 Data_018_48A4::
     db   $00, $04, $78, $00, $00, $0C, $7E, $00, $68, $00, $6A, $00, $6C, $00, $6E, $00
     db   $70, $00, $70, $20, $6A, $20, $68, $20, $6E, $20, $6C, $20, $72, $00, $74, $00
-    db   $74, $20, $72, $20, $CD, $DE, $48
+    db   $74, $20, $72, $20
 
+label_018_48C8::
+    call func_018_48DE
     ldh  a, [hFrameCounter]                       ; $48CB: $F0 $E7
     rra                                           ; $48CD: $1F
     rra                                           ; $48CE: $1F
@@ -1003,6 +1005,7 @@ Data_018_48A4::
 
     jp   SetEntitySpriteVariant                   ; $48DB: $C3 $0C $3B
 
+func_018_48DE::
     ld   a, [$D214]                               ; $48DE: $FA $14 $D2
     and  a                                        ; $48E1: $A7
     jr   z, jr_018_4904                           ; $48E2: $28 $20
@@ -6592,17 +6595,16 @@ jr_018_6F54:
 
     ret                                           ; $6F67: $C9
 
-    ld   l, h                                     ; $6F68: $6C
-    nop                                           ; $6F69: $00
-    ld   l, h                                     ; $6F6A: $6C
-    jr   nz, jr_018_6FDB                          ; $6F6B: $20 $6E
+Data_018_6F68::
+.variant0
+    db   $6C, $00
+    db   $6C, $20
+.variant1
+    db   $6E, $00
+    db   $6E, $20
 
-    nop                                           ; $6F6D: $00
-    ld   l, [hl]                                  ; $6F6E: $6E
-    jr   nz, @+$13                                ; $6F6F: $20 $11
-
-    ld   l, b                                     ; $6F71: $68
-    ld   l, a                                     ; $6F72: $6F
+label_018_6F70:
+    ld   de, Data_018_6F68
     call RenderActiveEntitySpritesPair            ; $6F73: $CD $C0 $3B
     call func_018_7DE8                            ; $6F76: $CD $E8 $7D
     call func_018_7E15                            ; $6F79: $CD $15 $7E

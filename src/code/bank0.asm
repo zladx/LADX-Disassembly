@@ -1639,42 +1639,42 @@ Func_1177::
     ret  nz
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
-    jr   z, label_11BC
+    jr   z, .jr_11BC
     ld   a, [wBButtonSlot]
     cp   $01
-    jr   z, label_11AA
+    jr   z, .jr_11AA
     ld   a, [wAButtonSlot]
     cp   $01
-    jr   z, label_11AA
+    jr   z, .jr_11AA
     ld   a, [wBButtonSlot]
     cp   $04
-    jr   z, label_11A5
+    jr   z, .jr_11A5
     ld   a, [wAButtonSlot]
     cp   $04
-    jr   nz, label_11BA
+    jr   nz, .jr_11BA
 
-label_11A5::
+.jr_11A5
     call SetShieldVals
-    jr   label_11BA
+    jr   .jr_11BA
 
-label_11AA::
+.jr_11AA
     ld   a, [wSwordAnimationState]
     dec  a
     cp   $04
-    jr   c, label_11BA
+    jr   c, .jr_11BA
     ld   a, $05
     ld   [wSwordAnimationState], a
     ld   [$C16A], a
 
-label_11BA::
-    jr   label_11C3
+.jr_11BA
+    jr   .jr_11C3
 
-label_11BC::
+.jr_11BC
     xor  a
     ld   [wIsUsingShield], a
     ld   [wHasMirrorShield], a
 
-label_11C3::
+.jr_11C3
     ld   a, [$C117]
     and  a
     jp   nz, label_12ED
@@ -1683,112 +1683,110 @@ label_11C3::
     jp   nz, label_12ED
     ld   a, [wSwordAnimationState]
     and  a
-    jr   z, label_11E2
+    jr   z, .jr_11E2
     cp   $03
-    jr   nz, label_11E2
+    jr   nz, .jr_11E2
     ld   a, [$C138]
     cp   $03
-    jr   nc, label_11E8
+    jr   nc, .jr_11E8
 
-label_11E2::
+.jr_11E2
     ldh  a, [hLinkInteractiveMotionBlocked]
     and  a
     jp   nz, label_12ED
 
-label_11E8::
+.jr_11E8
     ld   a, [wAButtonSlot]
     cp   $08
-    jr   nz, label_11FE
+    jr   nz, .jr_11FE
     ldh  a, [hPressedButtonsMask]
     and  $20
-    jr   z, label_11FA
+    jr   z, .jr_11FA
     call UsePegasusBoots
-    jr   label_11FE
+    jr   .jr_11FE
 
-label_11FA::
+.jr_11FA
     xor  a
     ld   [wPegasusBootsChargeMeter], a
 
-label_11FE::
+.jr_11FE
     ld   a, [wBButtonSlot]
     cp   $08
-    jr   nz, label_1214
+    jr   nz, .jr_1214
     ldh  a, [hPressedButtonsMask]
     and  $10
-    jr   z, label_1210
+    jr   z, .jr_1210
     call UsePegasusBoots
+    jr   .jr_1214
 
-label_120E::
-    jr   label_1214
-
-label_1210::
+.jr_1210
     xor  a
     ld   [wPegasusBootsChargeMeter], a
 
-label_1214::
+.jr_1214
     ld   a, [wBButtonSlot]
     cp   $04
-    jr   nz, label_1235
+    jr   nz, .jr_1235
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
     ldh  a, [hPressedButtonsMask]
     and  $10
-    jr   z, label_1235
+    jr   z, .jr_1235
     ld   a, [$C1AD]
     cp   $01
-    jr   z, label_1235
+    jr   z, .jr_1235
     cp   $02
-    jr   z, label_1235
+    jr   z, .jr_1235
     call SetShieldVals
 
-label_1235::
+.jr_1235
     ld   a, [wAButtonSlot]
     cp   $04
-    jr   nz, label_124B
+    jr   nz, .jr_124B
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
     ldh  a, [hPressedButtonsMask]
     and  $20
-    jr   z, label_124B
+    jr   z, .jr_124B
     call SetShieldVals
 
-label_124B::
+.jr_124B
     ldh  a, [$FFCC]
     and  $20
-    jr   z, label_125E
+    jr   z, .jr_125E
     ld   a, [$C1AD]
     cp   $02
-    jr   z, label_125E
+    jr   z, .jr_125E
     ld   a, [wAButtonSlot]
     call ItemFunction
 
-label_125E::
+.jr_125E
     ldh  a, [$FFCC]
     and  $10
-    jr   z, label_1275
+    jr   z, .jr_1275
     ld   a, [$C1AD]
     cp   $01
-    jr   z, label_1275
+    jr   z, .jr_1275
     cp   $02
-    jr   z, label_1275
+    jr   z, .jr_1275
     ld   a, [wBButtonSlot]
     call ItemFunction
 
-label_1275::
+.jr_1275
     ldh  a, [hPressedButtonsMask]
     and  $20
-    jr   z, label_1281
+    jr   z, .jr_1281
     ld   a, [wAButtonSlot]
     call label_1321
 
-label_1281::
+.jr_1281
     ldh  a, [hPressedButtonsMask]
     and  $10
-    jr   z, label_128D
+    jr   z, .jr_128D
     ld   a, [wBButtonSlot]
     call label_1321
 
-label_128D::
+.jr_128D
     ; Special code for the Color Dungeon
     callsb func_020_48CA
     ld   a, [wCurrentBank]

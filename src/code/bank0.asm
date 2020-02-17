@@ -1685,10 +1685,10 @@ Func_1177::
 
     ld   a, [$C117]
     and  a
-    jp   nz, label_12ED
+    jp   nz, ItemFunction.return
     ld   a, [wIsCarryingLiftedObject]
     and  a
-    jp   nz, label_12ED
+    jp   nz, ItemFunction.return
     ld   a, [wSwordAnimationState]
     and  a
     jr   z, .jr_11E2
@@ -1701,7 +1701,7 @@ Func_1177::
 .jr_11E2
     ldh  a, [hLinkInteractiveMotionBlocked]
     and  a
-    jp   nz, label_12ED
+    jp   nz, ItemFunction.return
 
 .jr_11E8
     ld   a, [wAButtonSlot]
@@ -1802,43 +1802,49 @@ Func_1177::
     ld   [MBC3SelectBank], a
     ret
 
+; Use an inventory item.
+;
+; Input:
+;   a    inventory item to use
 ItemFunction::
     ld   c, a
-    cp   $01
+    cp   INVENTORY_SWORD
     jp   z, UseSword
-    cp   $04
+    cp   INVENTORY_SHIELD
     jp   z, UseShield
-    cp   $02
+    cp   INVENTORY_BOMBS
     jp   z, PlaceBomb
-    cp   $03
+    cp   INVENTORY_POWER_BRACELET
     jp   z, UsePowerBracelet
-    cp   $05
+    cp   INVENTORY_BOW
     jp   z, ShootArrow
-    cp   $0D
+    cp   INVENTORY_BOOMERANG
     jp   z, UseBoomerang
-    cp   $06
+    cp   INVENTORY_HOOKSHOT
     jp   z, UseHookshot
-    cp   $0A
+    cp   INVENTORY_ROCS_FEATHER
     jp   z, UseRocksFeather
-    cp   $09
+    cp   INVENTORY_OCARINA
     jp   z, UseOcarina
-    cp   $0C
+    cp   INVENTORY_MAGIC_POWDER
     jp   z, UseMagicPowder
-    cp   $0B
+    cp   INVENTORY_SHOVEL
     jp   z, UseShovel
-    cp   $07 ; Magic wand
-    jr   nz, label_12ED ; Jump to use boots?
+    cp   INVENTORY_MAGIC_ROD
+    jr   nz, .return
+
+    ; Use Magic Rod
     ld   hl, wSwordAnimationState
     ld   a, [$C19B]
     or   [hl]
-    jr   nz, label_12ED
+    jr   nz, .return
     ld   a, [wActiveProjectileCount]
     cp   $02
-    jr   nc, label_12ED
+    jr   nc, .return
     ld   a, $8E
     ld   [$C19B], a
 
-label_12ED::
+.return
     ret
 
 UseShield::
@@ -1919,15 +1925,18 @@ PlaceBomb::
     ld   a, [wHasPlacedBomb]
     cp   $01
     ret  nc
+
     ld   a, [wBombCount]
     and  a
     jp   z, PlayWrongAnswerJingle
+
     sub  a, $01
     daa
     ld   [wBombCount], a
     ld   a, ENTITY_BOMB
     call SpawnPlayerProjectile
     ret  c
+    ; fallthrough
 
 func_1373::
     callsb func_020_4B81
@@ -1941,12 +1950,12 @@ UsePowerBracelet::
 UseBoomerang::
     ld   a, [wActiveProjectileCount]
     and  a
-
-label_1387::
     ret  nz
+
     ld   a, ENTITY_BOOMERANG
     call SpawnPlayerProjectile
     ret  c
+
     callsb func_020_4BFF
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
@@ -2109,7 +2118,7 @@ UseMagicPowder::
     ret  nz
     ld   a, [wHasToadstool]
     and  a
-    jr   z, label_14A7
+    jr   z, .jr_14A7
     ldh  a, [hLinkPositionZ]
     and  a
     ret  nz
@@ -2119,7 +2128,7 @@ UseMagicPowder::
     ld   [wDialogGotItemCountdown], a
     ret
 
-label_14A7::
+.jr_14A7
     ld   a, [wMagicPowderCount]
     and  a
     jp   z, PlayWrongAnswerJingle

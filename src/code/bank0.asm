@@ -7491,12 +7491,14 @@ RenderActiveEntitySpritesPair::
     ld   e, l
     ld   d, h
 
-    ; [de++] = [$FFEC]
+    ; Set OAM byte 0 (Y position)
+    ; [de] = [$FFEC]
     ldh  a, [$FFEC]
     ld   [de], a
     inc  de
 
-    ; [de++] = [$FFED] + [hActiveEntityPosX] - [wScreenShakeHorizontal]
+    ; Set OAM byte 1 (X position)
+    ; [de] = [$FFED / 4] + [hActiveEntityPosX] - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
     ldh  a, [$FFED]
@@ -7520,6 +7522,7 @@ RenderActiveEntitySpritesPair::
     pop  hl
     add  hl, bc
 
+    ; Set OAM byte 2 (tile n°)
     ; [de] = [hl++] + [hActiveEntityTilesOffset]
     ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
@@ -7536,6 +7539,8 @@ RenderActiveEntitySpritesPair::
 .jr_3C08
 
     inc  de
+
+
     ld   a, [hli]
     push hl
     ld   hl, $FFED
@@ -7543,15 +7548,15 @@ RenderActiveEntitySpritesPair::
     ld   [de], a
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .jr_3C21
+    jr   z, .gbcEnd
     ldh  a, [$FFED]
     and  $10
-    jr   z, .jr_3C21
+    jr   z, .gbcEnd
     ld   a, [de]
     and  $F8
     or   $04
     ld   [de], a
-.jr_3C21
+.gbcEnd
 
     inc  de
     ldh  a, [$FFEC]

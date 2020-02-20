@@ -310,10 +310,11 @@ hActiveEntityStatus:: ; FFEA
 hActiveEntityType:: ; FFEB
   ds 1
 
-; Unlabeled
+; Active entity pos Z ?
 ds 1 ; FFEC
 
 ; Unlabeled
+; Active entity X offset?
 ds 1 ; FFED
 
 hActiveEntityPosX:: ; FFEE

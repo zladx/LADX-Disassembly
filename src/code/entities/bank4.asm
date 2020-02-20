@@ -784,6 +784,7 @@ Data_004_51E2::
 Data_004_51E6::
     db   $00, $FF
 
+; Facade-entity related code
 func_004_51E8::
     ldh  a, [hFrameCounter]                       ; $51E8: $F0 $E7
 
@@ -860,7 +861,6 @@ jr_004_5237:
     ld   hl, Data_004_5192                        ; $5250: $21 $92 $51
     add  hl, bc                                   ; $5253: $09
 
-jr_004_5254:
     ld   a, [hl]                                  ; $5254: $7E
     ld   hl, wEntitiesPosYTable                   ; $5255: $21 $10 $C2
     add  hl, de                                   ; $5258: $19

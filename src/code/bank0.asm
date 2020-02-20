@@ -4121,21 +4121,21 @@ ReadJoypadState::
 .readState
     ld   a, $20
     ld   [rP1], a
-    ld   a, [$FF00]
-    ld   a, [$FF00]
+    ld   a, [rP1]
+    ld   a, [rP1]
     cpl
     and  $0F
     ld   b, a
     ld   a, $10
     ld   [rP1], a
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
     swap a
     cpl
     and  $F0

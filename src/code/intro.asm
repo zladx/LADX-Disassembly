@@ -15,15 +15,23 @@ IntroHandlerEntryPoint::
     jp   RenderIntroFrame
 
 .checkJoypad
-    ldh  a, [hJoypadState]  ; unknow joypad-related value
-    and  $80  ; If not pressing Start
+    ; If pressing Start, render the next intro frame
+    ldh  a, [hJoypadState]
+    and  J_START
     jp   z, RenderIntroFrame
+
+    ;
     ; Start button pressed
+    ;
+
     call label_27F2
+
+    ; If on Title Screen, transition to file menu
     ld   a, [wGameplaySubtype]
-    cp   GAMEPLAY_INTRO_TITLE  ; if on Title Screen
+    cp   GAMEPLAY_INTRO_TITLE
     jr   z, .transitionToFileMenu
-    ; Transition to Title screen
+
+    ; else transition to Title screen
     ld   a, 40  ; Ignore joypad for the next 40 frames
     ldh  [hButtonsInactiveDelay], a
     ld   a, $11
@@ -37,16 +45,15 @@ IntroHandlerEntryPoint::
     ld   a, [label_789F]
     ld   [wOBJ1Palette], a
     ld   a, $04
-    jr   .transitionToTitleScreen
-
+    jr   .paletteEnd
 .isGBC
     ld   a, $01
     call ClearFileMenuBG_trampoline
     xor  a
     ld   [$DDD5], a
     ld   a, $08
+.paletteEnd
 
-.transitionToTitleScreen
     ld   [$D013], a
     ld   a, $0D
     ld   [wGameplaySubtype], a
@@ -73,6 +80,7 @@ IntroHandlerEntryPoint::
 
 .transitionToFileMenu
     jp   TransitionToFileMenu
+
     ; Jump to End Sequence (dead code, never reached)
     xor  a
     ld   [wGameplaySubtype], a

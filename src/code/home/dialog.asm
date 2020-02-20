@@ -279,9 +279,9 @@ DialogFinishedHandler::
     ld   a, [$C1AB]
     and  a
     jr   nz, UpdateDialogState_return
-    ; ... and (hJoypadState & 0x30) != 0...
+    ; ... and A or B is pressed...
     ldh  a, [hJoypadState]
-    and  $30
+    and  J_A | J_B
     jr   z, UpdateDialogState_return
     ; ... update dialog state
 
@@ -625,7 +625,7 @@ data_2693::
 DialogBreakHandler::
     ld   a, [wDialogCharacterIndex]
     and  $1F
-    jr   nz, label_26E1
+    jr   nz, .jp_26E1
     ld   a, [$C3C3]
     cp   $FF
     jp   z, DialogDrawNextCharacterHandler.label_25AD
@@ -633,16 +633,17 @@ DialogBreakHandler::
     jp   z, DialogDrawNextCharacterHandler.choice
     ld   a, [$C1CC]
     and  a
-    jr   nz, label_26B6
+    jr   nz, .jp_26B6
     inc  a
     ld   [$C1CC], a
     call DialogDrawNextCharacterHandler.endDialog
 
-label_26B6::
+.jp_26B6
     call func_27BB
+    ; If
     ldh  a, [hJoypadState]
     bit  4, a
-    jr   nz, label_26E1
+    jr   nz, .jp_26E1
     bit  5, a
     jr   z, DialogScrollingStartHandler
     ld   a, BANK(DialogBankTable)
@@ -660,7 +661,7 @@ label_26B6::
     and  a
     jp   z, label_278B
 
-label_26E1::
+.jp_26E1
     ; Build a BG Data transfert request for the dialog background
 
     ; e = (wDialogState == DIALOG_CLOSED ? 0 : 1)

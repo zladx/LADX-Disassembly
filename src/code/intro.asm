@@ -15,7 +15,7 @@ IntroHandlerEntryPoint::
     jp   RenderIntroFrame
 
 .checkJoypad
-    ldh  a, [$FFCC]  ; unknow joypad-related value
+    ldh  a, [hJoypadState]  ; unknow joypad-related value
     and  $80  ; If not pressing Start
     jp   z, RenderIntroFrame
     ; Start button pressed

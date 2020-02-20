@@ -102,7 +102,7 @@ label_6B99::
     ret
 
 label_6B9A::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $B0
     jr   z, label_6BA7
     ld   a, JINGLE_VALIDATE

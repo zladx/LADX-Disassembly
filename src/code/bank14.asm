@@ -2301,7 +2301,7 @@ jr_014_5389:
     ld   e, $30                                   ; $538F: $1E $30
 
 jr_014_5391:
-    ldh  a, [hJoypadState]                               ; $5391: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $5391: $F0 $CC
     and  e                                        ; $5393: $A3
     jp   z, label_014_5443                        ; $5394: $CA $43 $54
 

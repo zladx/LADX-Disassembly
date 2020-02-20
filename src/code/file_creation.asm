@@ -95,7 +95,7 @@ label_4A98::
     ld   d, h
     ld   bc, $984A
     call func_4852
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $80
     jr   z, label_4B29
     call PlayValidationJingle
@@ -334,7 +334,7 @@ label_4BB5::
 
 
 label_4BF5::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
 
 label_4BF7::
     ldh  [hScratch0], a
@@ -432,7 +432,7 @@ label_4C63::
     ret
 
 label_4C8A::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $30
     jr   z, label_4CB7
     bit  5, a

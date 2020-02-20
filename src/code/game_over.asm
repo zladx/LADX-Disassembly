@@ -149,7 +149,7 @@ label_4259::
 label_42D8::
     ret
     call label_4339
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $B0
     jr   z, label_4335
     ld   a, [$C13F]
@@ -208,7 +208,7 @@ label_4336::
 label_4339::
     ld   hl, $C13F
     call label_6BA8
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $08
     jr   z, label_434D
     ld   a, [hl]
@@ -221,7 +221,7 @@ label_434C::
     ld   [hl], a
 
 label_434D::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $04
     jr   z, label_435C
     ld   a, [hl]

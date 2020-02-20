@@ -1760,7 +1760,7 @@ CheckItemsToUse::
     call SetShieldVals
 .shieldAEnd
 
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $20
     jr   z, .jr_125E
     ld   a, [$C1AD]
@@ -1772,7 +1772,7 @@ CheckItemsToUse::
     call UseItem
 
 .jr_125E
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $10
     jr   z, .jr_1275
     ld   a, [$C1AD]
@@ -4115,7 +4115,7 @@ ReadJoypadState::
 .notWorld
     xor  a
     ldh  [hPressedButtonsMask], a
-    ldh  [$FFCC], a
+    ldh  [hJoypadState], a
     ret
 
 .readState
@@ -4144,7 +4144,7 @@ ReadJoypadState::
     ldh  a, [hPressedButtonsMask]
     xor  c
     and  c
-    ldh  [$FFCC], a
+    ldh  [hJoypadState], a
     ld   a, c
     ldh  [hPressedButtonsMask], a
     ld   a, $30

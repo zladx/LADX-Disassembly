@@ -125,7 +125,7 @@ FileSaveVisible::
 
 FileSaveInteractive::
     call label_412A
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $B0
     jr   z, LCDOn_return
     ld   a, JINGLE_VALIDATE

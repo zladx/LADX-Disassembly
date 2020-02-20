@@ -854,7 +854,7 @@ Data_017_49B7::
     db   $FF, $FF, $FF, $FF, $FF, $00, $00, $00  ; $4AAF
 
 EndCreditsEntryPoint::
-    ldh  a, [$FFCC]                               ; $4AB7: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $4AB7: $F0 $CC
     and  $0C                                      ; $4AB9: $E6 $0C
     jr   z, jr_017_4AC7                           ; $4ABB: $28 $0A
 
@@ -866,7 +866,7 @@ EndCreditsEntryPoint::
     ld   [wGameplaySubtype], a                               ; $4AC4: $EA $96 $DB
 
 jr_017_4AC7:
-    ldh  a, [$FFCC]                               ; $4AC7: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $4AC7: $F0 $CC
     and  $03                                      ; $4AC9: $E6 $03
     jr   z, jr_017_4AD6                           ; $4ACB: $28 $09
 

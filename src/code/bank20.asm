@@ -4162,7 +4162,7 @@ func_020_5F06:
     and  a                                        ; $5F18: $A7
     jr   nz, jr_020_5F38                          ; $5F19: $20 $1D
 
-    ldh  a, [hJoypadState]                               ; $5F1B: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $5F1B: $F0 $CC
     and  $03                                      ; $5F1D: $E6 $03
     ld   e, a                                     ; $5F1F: $5F
     ld   d, $00                                   ; $5F20: $16 $00
@@ -4183,7 +4183,7 @@ jr_020_5F35:
     ld   [$DBA3], a                               ; $5F35: $EA $A3 $DB
 
 jr_020_5F38:
-    ldh  a, [hJoypadState]                               ; $5F38: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $5F38: $F0 $CC
     srl  a                                        ; $5F3A: $CB $3F
     srl  a                                        ; $5F3C: $CB $3F
     and  $03                                      ; $5F3E: $E6 $03
@@ -4227,7 +4227,7 @@ jr_020_5F69:
     or   [hl]                                     ; $5F75: $B6
     jr   nz, jr_020_5F85                          ; $5F76: $20 $0D
 
-    ldh  a, [hJoypadState]                               ; $5F78: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $5F78: $F0 $CC
     and  $80                                      ; $5F7A: $E6 $80
     jr   z, jr_020_5F85                           ; $5F7C: $28 $07
 
@@ -4280,7 +4280,7 @@ jr_020_5FC1:
     or   [hl]                                     ; $5FC7: $B6
     jp   nz, label_020_604A                       ; $5FC8: $C2 $4A $60
 
-    ldh  a, [hJoypadState]                               ; $5FCB: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $5FCB: $F0 $CC
     and  $10                                      ; $5FCD: $E6 $10
     jr   z, jr_020_5FED                           ; $5FCF: $28 $1C
 
@@ -4303,7 +4303,7 @@ label_020_5FDB:
     jr   jr_020_600D                              ; $5FEB: $18 $20
 
 jr_020_5FED:
-    ldh  a, [hJoypadState]                               ; $5FED: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $5FED: $F0 $CC
     and  $20                                      ; $5FEF: $E6 $20
     jr   z, jr_020_604A                           ; $5FF1: $28 $57
 
@@ -4659,7 +4659,7 @@ jr_020_619A:
     cp   $00                                      ; $61A3: $FE $00
     jr   nz, jr_020_6214                          ; $61A5: $20 $6D
 
-    ldh  a, [hJoypadState]                               ; $61A7: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $61A7: $F0 $CC
     and  $01                                      ; $61A9: $E6 $01
     jr   z, jr_020_61C5                           ; $61AB: $28 $18
 
@@ -4683,7 +4683,7 @@ jr_020_61B7:
     jr   z, jr_020_61AD                           ; $61C3: $28 $E8
 
 jr_020_61C5:
-    ldh  a, [hJoypadState]                               ; $61C5: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $61C5: $F0 $CC
     and  $02                                      ; $61C7: $E6 $02
     jr   z, jr_020_61E4                           ; $61C9: $28 $19
 
@@ -4707,7 +4707,7 @@ jr_020_61D6:
     jr   z, jr_020_61CB                           ; $61E2: $28 $E7
 
 jr_020_61E4:
-    ldh  a, [hJoypadState]                               ; $61E4: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $61E4: $F0 $CC
     and  $03                                      ; $61E6: $E6 $03
     jr   z, jr_020_61ED                           ; $61E8: $28 $03
 
@@ -5092,7 +5092,7 @@ jr_020_63BE:
     jr   jr_020_6436                              ; $63F3: $18 $41
 
 jr_020_63F5:
-    ldh  a, [hJoypadState]                               ; $63F5: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $63F5: $F0 $CC
     and  $40                                      ; $63F7: $E6 $40
     jr   z, jr_020_641E                           ; $63F9: $28 $23
 
@@ -5123,7 +5123,7 @@ jr_020_641E:
     or   [hl]                                     ; $6428: $B6
     jr   nz, jr_020_6445                          ; $6429: $20 $1A
 
-    ldh  a, [hJoypadState]                               ; $642B: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $642B: $F0 $CC
     and  $80                                      ; $642D: $E6 $80
     jr   z, jr_020_6445                           ; $642F: $28 $14
 

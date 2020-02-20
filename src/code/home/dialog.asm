@@ -279,8 +279,8 @@ DialogFinishedHandler::
     ld   a, [$C1AB]
     and  a
     jr   nz, UpdateDialogState_return
-    ; ... and ($FFCC & 0x30) != 0...
-    ldh  a, [$FFCC]
+    ; ... and (hJoypadState & 0x30) != 0...
+    ldh  a, [hJoypadState]
     and  $30
     jr   z, UpdateDialogState_return
     ; ... update dialog state
@@ -640,7 +640,7 @@ DialogBreakHandler::
 
 label_26B6::
     call func_27BB
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     bit  4, a
     jr   nz, label_26E1
     bit  5, a
@@ -793,7 +793,7 @@ label_278B::
     jp   UpdateDialogState
 
 DialogChoiceHandler::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     bit  4, a
     jp   nz, .jp_27B7
     and  $03

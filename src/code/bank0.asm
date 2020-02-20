@@ -1685,10 +1685,10 @@ Func_1177::
 
     ld   a, [$C117]
     and  a
-    jp   nz, ItemFunction.return
+    jp   nz, UseItem.return
     ld   a, [wIsCarryingLiftedObject]
     and  a
-    jp   nz, ItemFunction.return
+    jp   nz, UseItem.return
     ld   a, [wSwordAnimationState]
     and  a
     jr   z, .jr_11E2
@@ -1701,7 +1701,7 @@ Func_1177::
 .jr_11E2
     ldh  a, [hLinkInteractiveMotionBlocked]
     and  a
-    jp   nz, ItemFunction.return
+    jp   nz, UseItem.return
 
 .jr_11E8
     ld   a, [wAButtonSlot]
@@ -1766,8 +1766,10 @@ Func_1177::
     ld   a, [$C1AD]
     cp   $02
     jr   z, .jr_125E
+
+    ; Use item in A slot
     ld   a, [wAButtonSlot]
-    call ItemFunction
+    call UseItem
 
 .jr_125E
     ldh  a, [$FFCC]
@@ -1778,8 +1780,10 @@ Func_1177::
     jr   z, .jr_1275
     cp   $02
     jr   z, .jr_1275
+
+    ; Use item in B slot
     ld   a, [wBButtonSlot]
-    call ItemFunction
+    call UseItem
 
 .jr_1275
     ldh  a, [hPressedButtonsMask]
@@ -1806,7 +1810,7 @@ Func_1177::
 ;
 ; Input:
 ;   a    inventory item to use
-ItemFunction::
+UseItem::
     ld   c, a
     cp   INVENTORY_SWORD
     jp   z, UseSword

@@ -101,17 +101,17 @@ IntroHandlerEntryPoint::
 RenderIntroFrame::
     ld   a, [wGameplaySubtype]
     cp   GAMEPLAY_INTRO_SEA
-    jr   c, IntroSceneJumpTable
+    jr   c, .dispatchScene
     cp   GAMEPLAY_INTRO_LIGHTNING
-    jr   nc, IntroSceneJumpTable
+    jr   nc, .dispatchScene
+
     ; Check $D000 counter value
     ld   a, [$D000]
     and  a
-    jr   z, label_6EC6
+    jr   z, .jp_6EC6
     dec  a
     ld   [$D000], a
-
-label_6EC6::
+.jp_6EC6
     rra
     nop
     and  $03
@@ -123,7 +123,7 @@ label_6EC6::
     ld   [wBGPalette], a
     call func_020_6BA4_trampoline ; Load BG palette
 
-IntroSceneJumpTable::
+.dispatchScene
     ld   a, [wGameplaySubtype]
     JP_TABLE
 ._0 dw IntroSceneStage0Handler
@@ -131,15 +131,15 @@ IntroSceneJumpTable::
 ._2 dw IntroSceneStage2Handler
 ._3 dw IntroShipOnSeaHandler
 ._4 dw IntroLinkFaceHandler
-._5 dw label_711A ; transition?
-._6 dw label_7158 ; transition?
+._5 dw IntroStage5Handler ; transition?
+._6 dw IntroStage6Handler ; transition?
 ._7 dw IntroBeachHandler
-._8 dw label_7272 ; title screen animation?
+._8 dw IntroStage8Handler ; title screen animation?
 ._9 dw TitleScreenSfxHandler
-._A dw $7376 ; title screen animation?
+._A dw IntroStageAHandler ; title screen animation?
 ._B dw TitleScreenHandler
-._C dw $743A
-._D dw label_7448
+._C dw IntroStageCHandler
+._D dw IntroStageDHandler
 
 IntroSceneStage0Handler::
     call ClearLowerAndMiddleWRAM
@@ -176,14 +176,13 @@ IntroSceneStage2Handler::
 
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_6F42
+    jr   z, .notGBC
     ld   a, $25
-    jr   label_6F44
-
-label_6F42::
+    jr   .gbcEnd
+.notGBC
     ld   a, $0E
+.gbcEnd
 
-label_6F44::
     ld   [wBGMapToLoad], a
     ld   a, $1C
     ld   [wOBJ0Palette], a
@@ -197,10 +196,10 @@ label_6F44::
     ld   hl, $D000
     xor  a
 
-label_6F5F::
+.loop
     ldi  [hl], a
     dec  e
-    jr   nz, label_6F5F
+    jr   nz, .loop
 
     ld   [wEntitiesStatusTable + $00], a
     ld   [wEntitiesStatusTable + $01], a
@@ -224,7 +223,7 @@ label_6F5F::
     ld   [$C343], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_6F93::
+Data_6F93::
     add  a, c
     ld   b, b
     nop
@@ -235,7 +234,7 @@ label_6F93::
     nop
     nop
 
-label_6F9C::
+Data_6F9C::
     ld   [$808], sp
     inc  b
     nop
@@ -254,7 +253,7 @@ IntroShipOnSeaHandler::
     inc  a
     ld   [wIntroSubTimer], a ; Increment subtimer
     cp   $18
-    jr   c, label_7013
+    jr   c, .jp_7013
     sub  a, $18
     rra
     rra
@@ -262,18 +261,18 @@ IntroShipOnSeaHandler::
     and  $0F
     ld   e, a
     ld   d, $00
-    ld   hl, label_6F93
+    ld   hl, Data_6F93
     add  hl, de
     ld   a, [hl]
     ld   [wBGPalette], a
-    ld   hl, label_6F9C
+    ld   hl, Data_6F9C
     add  hl, de
     ld   a, [hl]
     ld   [wOBJ0Palette], a
     call func_020_6A30_trampoline
     ld   a, e
     cp   $08
-    jp   nz, label_7013
+    jp   nz, .jp_7013
     xor  a
     ld   [wEntitiesStatusTable], a
     ld   [$C281], a
@@ -297,7 +296,7 @@ IntroShipOnSeaHandler::
     ld   a, $03
     ld   [rIE], a
 
-label_7013::
+.jp_7013
     ret
 
 label_7014::
@@ -476,7 +475,7 @@ LoadTileMapZero_trampoline::
     ld   [hl], a
     jp   Farcall
 
-label_711A::
+IntroStage5Handler::
     ld   a, $10
     ld   [wBGMapToLoad], a
     ld   a, $01
@@ -497,7 +496,7 @@ label_7154::
     ldh  [hScratch9], a
     ldh  [hScratch9], a
 
-label_7158::
+IntroStage6Handler::
     call label_71C7
     ld   a, [$D001]
     cp   $A0
@@ -601,7 +600,7 @@ label_7266::
 label_7271::
     ld   [hl], d
 
-label_7272::
+IntroStage8Handler::
     ld   a, [$D002]
     sla  a
     ld   e, a
@@ -835,6 +834,8 @@ label_7364::
     ld   [hl], c
     ld   [hl], d
     nop
+
+IntroStageAHandler::
     ld   de, label_7364
     ld   hl, $D601
     ld   c, $12
@@ -965,6 +966,8 @@ label_7418::
 
 label_7439::
     ret
+
+IntroStageCHandler::
     call func_1A22
     ld   a, [$C16B]
     cp   $04
@@ -974,7 +977,7 @@ label_7439::
 label_7447::
     ret
 
-label_7448::
+IntroStageDHandler::
     ld   a, $11
     ld   [wTileMapToLoad], a
     ld   a, $0B
@@ -1067,7 +1070,7 @@ RenderIntroEntities::
     ld   a, c
     ld   [wActiveEntityIndex], a
 
-    ; a = EntityType[c]
+    ; a = EntityStatus[c]
     ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   a, [hl]
@@ -1102,7 +1105,7 @@ RenderIntroEntities::
 .continue
     dec  c
     ld   a, c
-    cp   $FF
+    cp   -1
     jr   nz, .loop
     ret
 
@@ -1123,13 +1126,13 @@ RenderIntroEntity::
     cp   ENTITY_INTRO_SPARKLE
     jp   z, RenderIntroSparkle
     call GetEntityTransitionCountdown
-    jr   nz, label_7533
+    jr   nz, .jp_7533
     ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   [hl], b
     ret
 
-label_7533::
+.jp_7533
     dec  [hl]
     call label_762B
     ret
@@ -1274,14 +1277,25 @@ label_7640::
     ld   [$C3C0], a
     ret
 
-data_764F::
-    db 0, 3, 2, 3, 4, 3, 6, 3, 8, 3, $A, 3, $C, 3, $E, 3
+IntroMarinSpriteVariants::
+.variant0
+    db $00, $03
+    db $02, $03
+.variant1
+    db $04, $03
+    db $06, $03
+.variant2
+    db $08, $03
+    db $0A, $03
+.variant3
+    db $0C, $03
+    db $0E, $03
 
 RenderIntroMarin::
     call label_71C7
     xor  a
     ld   [wEntitiesPhysicsFlagsTable], a
-    ld   de, data_764F
+    ld   de, IntroMarinSpriteVariants
     call RenderActiveEntitySpritesPair
 
     ld   a, [$C3C0]
@@ -1290,13 +1304,13 @@ RenderIntroMarin::
     ldh  a, [hActiveEntityState]
 
     JP_TABLE
-._0 dw label_7681
-._1 dw label_76AB
-._3 dw label_76D6
-._4 dw label_7711
-._5 dw label_7781
+._0 dw IntroMarinState0
+._1 dw IntroMarinState1
+._2 dw IntroMarinState2
+._3 dw IntroMarinState3
+._4 dw IntroMarinState4
 
-label_7681::
+IntroMarinState0::
     call label_7D9C
     ldh  a, [hFrameCounter]
     rra
@@ -1306,30 +1320,30 @@ label_7681::
     call SetEntitySpriteVariant
     ldh  a, [hActiveEntityPosX]
     cp   $48
-    jr   nc, label_769C
+    jr   nc, .jr_769C
     call GetEntityTransitionCountdown
     ld   [hl], $40
     call IncrementEntityState
 
-label_769C::
+.jr_769C
     ld   hl, wEntitiesUnknowTableY
     add  hl, bc
     dec  [hl]
-    jr   nz, label_76AA
+    jr   nz, .jr_76AA
     ld   [hl], $04
     ld   hl, wEntitiesPosXTable
     add  hl, bc
     dec  [hl]
 
-label_76AA::
+.jr_76AA
     ret
 
-label_76AB::
+IntroMarinState1::
     call label_7D46
     ld   a, $01
     call SetEntitySpriteVariant
     call GetEntityTransitionCountdown
-    jr   nz, label_76D4
+    jr   nz, .jr_76D4
     call IncrementEntityState
     ld   a, $07
     ld   [$C281], a
@@ -1343,40 +1357,40 @@ label_76AB::
     ldh  [hFrameCounter], a
     ret
 
-label_76D4::
+.jr_76D4
     dec  [hl]
     ret
 
-label_76D6::
+IntroMarinState2::
     call label_7D9C
     ld   a, [$C201]
     dec  a
     ld   [$C201], a
     ldh  a, [hFrameCounter]
     and  $01
-    jr   nz, label_7707
+    jr   nz, .jr_7707
     ld   hl, hBaseScrollX
     inc  [hl]
     ld   a, [hl]
     cp   $30
-    jr   nz, label_76F7
+    jr   nz, .jr_76F7
     call GetEntityTransitionCountdown
     ld   [hl], $40
     jp   IncrementEntityState
 
-label_76F7::
+.jr_76F7
     cp   $20
-    jr   nz, label_76FF
+    jr   nz, .jr_76FF
     call label_7A16
     xor  a
 
-label_76FF::
+.jr_76FF
     cp   $22
-    jr   nz, label_7707
+    jr   nz, .jr_7707
     call label_7A11
     xor  a
 
-label_7707::
+.jr_7707
     ldh  a, [hFrameCounter]
     rra
     rra
@@ -1384,38 +1398,38 @@ label_7707::
     call SetEntitySpriteVariant
     ret
 
-label_7711::
+IntroMarinState3::
     call GetEntityTransitionCountdown
-    jr   nz, label_7778
+    jr   nz, .jr_7778
     call label_7DCF
     ldh  a, [hFrameCounter]
     and  $01
-    jr   nz, label_776C
+    jr   nz, .jr_776C
     ld   a, [$C201]
     dec  a
     ld   [$C201], a
     ldh  a, [hFrameCounter]
     and  $03
-    jr   nz, label_776C
+    jr   nz, .jr_776C
     ld   hl, hBaseScrollX
     inc  [hl]
     ld   a, [hl]
     cp   $40
-    jr   z, label_7740
+    jr   z, .jr_7740
     cp   $3A
-    jr   nz, label_7745
+    jr   nz, .jr_7745
     call GetEntityTransitionCountdown
     ld   [hl], $30
-    jr   label_7745
+    jr   .jr_7745
 
-label_7740::
+.jr_7740
     call GetEntityTransitionCountdown
     ld   [hl], $50
 
-label_7745::
+.jr_7745
     ldh  a, [hBaseScrollX]
     cp   $56
-    jr   nz, label_775C
+    jr   nz, .jr_775C
     ld   a, $A0
     ld   [hl], a
     ld   [rSCX], a
@@ -1425,19 +1439,19 @@ label_7745::
     ld   [hl], $E0
     jp   IncrementEntityState
 
-label_775C::
+.jr_775C
     cp   $20
-    jr   nz, label_7764
+    jr   nz, .jr_7764
     call label_7A16
     xor  a
 
-label_7764::
+.jr_7764
     cp   $22
-    jr   nz, label_776C
+    jr   nz, .jr_776C
     call label_7A11
     xor  a
 
-label_776C::
+.jr_776C
     ldh  a, [hFrameCounter]
     rra
     rra
@@ -1447,46 +1461,46 @@ label_776C::
     call SetEntitySpriteVariant
     ret
 
-label_7778::
+.jr_7778
     dec  [hl]
     call label_7D46
     ld   a, $01
     jp   SetEntitySpriteVariant
 
-label_7781::
+IntroMarinState4::
     call label_7D46
     ldh  a, [hFrameCounter]
     and  $01
-    jr   nz, label_77BC
+    jr   nz, .return
     ld   a, $02
     call SetEntitySpriteVariant
     ld   a, $00
     ld   [$C3B1], a
     call GetEntityTransitionCountdown
-    jr   z, label_779A
+    jr   z, .jr_779A
     dec  [hl]
 
-label_779A::
+.jr_779A
     cp   $A0
-    jr   nc, label_77BC
+    jr   nc, .return
     cp   $90
-    jr   nc, label_77B2
+    jr   nc, .jr_77B2
     cp   $50
-    jr   nc, label_77BC
+    jr   nc, .return
     cp   $4A
-    jr   nc, label_77B2
+    jr   nc, .jr_77B2
     cp   $3C
-    jr   nc, label_77BC
+    jr   nc, .return
     cp   $36
-    jr   c, label_77BC
+    jr   c, .return
 
-label_77B2::
+.jr_77B2
     ld   a, $03
     call SetEntitySpriteVariant
     ld   a, $01
     ld   [$C3B1], a
 
-label_77BC::
+.return
     ret
 
 label_77BD::
@@ -1497,7 +1511,6 @@ label_77BF::
     db $3a, $20, $3c, $00, $3e, $00, $3c, $00
     db $3e, $00, $3a, $00, $3a, $20, $3a, $00
     db $3a, $20, $38, $00, $38, $20
-
 
 RenderIntroSparkle::
     xor  a
@@ -1828,73 +1841,78 @@ label_7A36::
 label_7A47::
     ldh  a, [hActiveEntityState]
     JP_TABLE
-    dw $7a52
-    dw $7a5e
-    dw $7a6e
-    dw $7ac4
+._00 dw InertLinkState0Handler
+._01 dw InertLinkState1Handler
+._02 dw InertLinkState2Handler
+._03 dw InertLinkState3Handler
 
+InertLinkState0Handler::
     call GetEntityTransitionCountdown
     dec  [hl]
-    jr   nz, label_7A5D
+    jr   nz, .return
     ld   [hl], $90
     call IncrementEntityState
 
-label_7A5D::
+.return
     ret
+
+InertLinkState1Handler::
     ldh  a, [hFrameCounter]
     and  $03
-    jr   nz, label_7A6A
+    jr   nz, .return
     call GetEntityTransitionCountdown
     dec  [hl]
-    jr   z, label_7A6B
+    jr   z, .nextState
 
-label_7A6A::
+.return
     ret
 
-label_7A6B::
+.nextState
     jp   IncrementEntityState
+
+InertLinkState2Handler::
     ld   a, [$D00A]
     cp   $13
-    jr   z, label_7AB3
+    jr   z, .jr_7AB3
     ld   a, [$D00E]
     inc  a
     ld   [$D00E], a
     and  $03
-    jr   nz, label_7AB2
+    jr   nz, .return
     ld   a, [wEntitiesPosYTable]
     cp   $A0
-    jr   nc, label_7A8B
+    jr   nc, .jr_7A8B
     inc  a
     ld   [wEntitiesPosYTable], a
 
-label_7A8B::
+.jr_7A8B
     ld   a, [$C211]
     cp   $A0
-    jr   nc, label_7A96
+    jr   nc, .jr_7A96
     inc  a
     ld   [$C211], a
 
-label_7A96::
+.jr_7A96
     ldh  a, [$FF97]
     push af
     dec  a
     ldh  [$FF97], a
     pop  af
     and  $07
-    jr   nz, label_7AB2
+    jr   nz, .return
     push bc
-    call label_7C60
+    call func_7C60
     pop  bc
     ld   a, [$D00A]
     cp   $0B
-    jr   nz, label_7AB2
+    jr   nz, .return
     ld   a, $01
     ld   [wActiveMusicTrack], a
 
-label_7AB2::
+.return
     ret
 
-label_7AB3::
+.jr_7AB3
     call IncrementEntityState
     call GetEntityTransitionCountdown
     ld   [hl], $17
@@ -1903,12 +1921,14 @@ label_7AB3::
     ld   a, $70
     ldh  [hWindowXUnused], a
     ret
+
+InertLinkState3Handler::
     ldh  a, [hFrameCounter]
     and  $03
-    jr   nz, label_7AE3
+    jr   nz, .return
     call GetEntityTransitionCountdown
     dec  [hl]
-    jr   nz, label_7AE3
+    jr   nz, .return
     call IncrementGameplaySubtype
     xor  a
     ld   [$D002], a
@@ -1917,7 +1937,7 @@ label_7AB3::
     ld   [wEntitiesStatusTable], a
     ld   [$C281], a
 
-label_7AE3::
+.return
     ret
 
 label_7AE4::
@@ -1970,17 +1990,16 @@ label_7AE4::
     db $7e, $7e, $7e, $7e, $7e, $7e, $7e, $7e
     db $7e, $7e, $7e, $7e
 
-
-label_7C60::
+func_7C60::
     ld   a, [$D00A]
     and  a
-    jr   nz, label_7C70
+    jr   nz, .jr_7C70
     ld   a, $F4
     ld   [$D00B], a
     ld   a, $9B
     ld   [$D00C], a
 
-label_7C70::
+.jr_7C70::
     ld   a, [$D00A]
     ld   e, a
     ld   d, $00
@@ -2007,7 +2026,7 @@ label_7C70::
     ld   a, $13
     ldi  [hl], a
 
-label_7C9D::
+.loop
     push hl
     ld   hl, label_7AE4
     add  hl, de
@@ -2018,14 +2037,15 @@ label_7C9D::
     inc  c
     ld   a, c
     cp   $14
-    jr   nz, label_7C9D
+    jr   nz, .loop
+
     ld   [hl], $00
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_7CB6
-    call label_7CCB
+    jr   z, .jr_7CB6
+    call func_7CCB
 
-label_7CB6::
+.jr_7CB6
     ld   hl, $D00A
     inc  [hl]
     ld   a, [$D00B]
@@ -2036,7 +2056,7 @@ label_7CB6::
     ld   [$D00C], a
     ret
 
-label_7CCB::
+func_7CCB::
     ld   hl, $DC91
     ld   a, [$D00C]
     ldi  [hl], a

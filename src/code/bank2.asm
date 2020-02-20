@@ -181,7 +181,7 @@ jr_002_42C7:
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
-    call Func_1177                                ; $42D0: $CD $77 $11
+    call CheckItemsToUse                          ; $42D0: $CD $77 $11
     call func_002_44ED                            ; $42D3: $CD $ED $44
     call func_002_434A                            ; $42D6: $CD $4A $43
     call func_002_478C                            ; $42D9: $CD $8C $47
@@ -1166,7 +1166,7 @@ jr_002_49AA:
 jr_002_49B6:
     ld   a, $01                                   ; $49B6: $3E $01
     ld   [$C146], a                               ; $49B8: $EA $46 $C1
-    call Func_1177                                ; $49BB: $CD $77 $11
+    call CheckItemsToUse                          ; $49BB: $CD $77 $11
     call func_002_478C                            ; $49BE: $CD $8C $47
     ld   a, [wSwordAnimationState]                ; $49C1: $FA $37 $C1
     ld   [wC16A], a                               ; $49C4: $EA $6A $C1

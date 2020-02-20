@@ -1630,8 +1630,8 @@ LinkMotionInteractiveHandler::
 
     jpsw label_002_4287
 
-; Related to using the sword or shield at the same time than another item
-Func_1177::
+; Check if one of the inventory item should be used
+CheckItemsToUse::
     ld   a, [$C50A]
     ld   hl, $C167
     or   [hl]

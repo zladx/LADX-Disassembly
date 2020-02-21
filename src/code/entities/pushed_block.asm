@@ -57,7 +57,7 @@ jr_003_5286:
     cp   $21                                      ; $528D: $FE $21
     ret  nz                                       ; $528F: $C0
 
-    ld   hl, wEntitiesUnknowTableT                ; $5290: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5290: $21 $10 $C4
     add  hl, bc                                   ; $5293: $09
     ld   [hl], a                                  ; $5294: $77
     call func_003_7893                            ; $5295: $CD $93 $78

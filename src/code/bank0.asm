@@ -779,12 +779,12 @@ func_C50::
     ld   [hl], $04
     ret
 
-; Decrement the wEntitiesUnknowTableT value for the given entity.
+; Decrement the wEntitiesIgnoreHitsCountdownTable value for the given entity.
 ;
 ; Inputs:
 ;   bc   entity index
 DecrementEntityIgnoreHitsCountdown::
-    ld   hl, wEntitiesUnknowTableT
+    ld   hl, wEntitiesIgnoreHitsCountdownTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -8070,8 +8070,8 @@ label_3ED1::
     ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     and  [hl]
-    jr   z, label_3EDE
-    ld   hl, wEntitiesUnknowTableT
+    jr   z, .jr_3EDE
+    ld   hl, wEntitiesIgnoreHitsCountdownTable
     add  hl, bc
     ld   [hl], b
 

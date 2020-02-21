@@ -37,7 +37,7 @@ jr_006_73AD:
     call func_006_64C6                            ; $73B3: $CD $C6 $64
     call func_006_64F7                            ; $73B6: $CD $F7 $64
     call func_006_6541                            ; $73B9: $CD $41 $65
-    ld   hl, wEntitiesUnknowTableT                ; $73BC: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $73BC: $21 $10 $C4
     add  hl, bc                                   ; $73BF: $09
     ld   [hl], $01                                ; $73C0: $36 $01
     push hl                                       ; $73C2: $E5

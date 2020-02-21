@@ -81,7 +81,7 @@ jr_006_7C6A:
     sub  $04                                      ; $7C78: $D6 $04
     ld   [hl], a                                  ; $7C7A: $77
     call ClearEntitySpeed                         ; $7C7B: $CD $7F $3D
-    ld   hl, wEntitiesUnknowTableT                ; $7C7E: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7C7E: $21 $10 $C4
     add  hl, bc                                   ; $7C81: $09
     ld   [hl], b                                  ; $7C82: $70
     ld   hl, wEntitiesSpeedZTable                 ; $7C83: $21 $20 $C3
@@ -179,11 +179,11 @@ func_006_7D0F::
     call IsEntityUnknownFZero                     ; $7D12: $CD $00 $0C
     ret  nz                                       ; $7D15: $C0
 
-    ld   hl, wEntitiesUnknowTableT                ; $7D16: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D16: $21 $10 $C4
     add  hl, bc                                   ; $7D19: $09
     ld   [hl], $02                                ; $7D1A: $36 $02
     call label_3B23                               ; $7D1C: $CD $23 $3B
-    ld   hl, wEntitiesUnknowTableT                ; $7D1F: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D1F: $21 $10 $C4
     add  hl, bc                                   ; $7D22: $09
     ld   [hl], b                                  ; $7D23: $70
     ret                                           ; $7D24: $C9

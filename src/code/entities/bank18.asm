@@ -6565,7 +6565,7 @@ label_018_6F1F:
     call label_3B44                               ; $6F37: $CD $44 $3B
     jr   c, jr_018_6F51                           ; $6F3A: $38 $15
 
-    ld   hl, wEntitiesUnknowTableT                ; $6F3C: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6F3C: $21 $10 $C4
     add  hl, bc                                   ; $6F3F: $09
     ld   a, [hl]                                  ; $6F40: $7E
     and  a                                        ; $6F41: $A7
@@ -8642,7 +8642,7 @@ jr_018_7E14:
     ret                                           ; $7E14: $C9
 
 func_018_7E15::
-    ld   hl, wEntitiesUnknowTableT                ; $7E15: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7E15: $21 $10 $C4
     add  hl, bc                                   ; $7E18: $09
     ld   a, [hl]                                  ; $7E19: $7E
     and  a                                        ; $7E1A: $A7

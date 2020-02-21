@@ -1695,7 +1695,7 @@ jr_005_7A65:
 jr_005_7A66:
     ret                                           ; $7A66: $C9
 
-    ld   hl, wEntitiesUnknowTableT                ; $7A67: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7A67: $21 $10 $C4
     add  hl, bc                                   ; $7A6A: $09
     ld   a, [hl]                                  ; $7A6B: $7E
     and  a                                        ; $7A6C: $A7

@@ -35,7 +35,7 @@ jr_006_63B5:
     jp   SetEntitySpriteVariant                   ; $63CB: $C3 $0C $3B
 
 jr_006_63CE:
-    ld   hl, wEntitiesUnknowTableT                ; $63CE: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $63CE: $21 $10 $C4
     add  hl, bc                                   ; $63D1: $09
     ld   a, [hl]                                  ; $63D2: $7E
     cp   $02                                      ; $63D3: $FE $02

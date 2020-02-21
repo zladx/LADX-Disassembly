@@ -198,7 +198,7 @@ jr_006_64F6:
     ret                                           ; $64F6: $C9
 
 func_006_64F7::
-    ld   hl, wEntitiesUnknowTableT                ; $64F7: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $64F7: $21 $10 $C4
     add  hl, bc                                   ; $64FA: $09
     ld   a, [hl]                                  ; $64FB: $7E
     and  a                                        ; $64FC: $A7

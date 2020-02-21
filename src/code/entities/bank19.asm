@@ -10938,7 +10938,7 @@ jr_019_7D6D:
     ret                                           ; $7D6D: $C9
 
 func_019_7D6E::
-    ld   hl, wEntitiesUnknowTableT                ; $7D6E: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D6E: $21 $10 $C4
     add  hl, bc                                   ; $7D71: $09
     ld   a, [hl]                                  ; $7D72: $7E
     and  a                                        ; $7D73: $A7

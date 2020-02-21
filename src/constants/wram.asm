@@ -589,8 +589,9 @@ wEntitiesUnknowTableS:: ; C400
   ds $10
 
 ; Invulnerability countdown?
-; Invulnerability of an entity after taking a hit
-wEntitiesUnknowTableT:: ; C410
+; While this countdown is active, the entity does not
+; participate to collision
+wEntitiesIgnoreHitsCountdownTable  :: ; C410
   ds $10
 
 wEntitiesFlashCountdownTable:: ; C420

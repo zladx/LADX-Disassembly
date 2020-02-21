@@ -913,7 +913,7 @@ func_004_4575::
 
 jr_004_45A6:
     call ClearEntitySpeed                         ; $45A6: $CD $7F $3D
-    ld   hl, wEntitiesUnknowTableT                ; $45A9: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $45A9: $21 $10 $C4
     add  hl, bc                                   ; $45AC: $09
     ld   [hl], b                                  ; $45AD: $70
     ld   a, $5C                                   ; $45AE: $3E $5C

@@ -521,7 +521,7 @@ func_006_4855::
     cp   $18                                      ; $4871: $FE $18
     jr   nc, label_006_48DB                       ; $4873: $30 $66
 
-    ld   hl, wEntitiesUnknowTableT                ; $4875: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4875: $21 $10 $C4
     add  hl, de                                   ; $4878: $19
     ld   [hl], $10                                ; $4879: $36 $10
     ld   hl, wEntitiesFlashCountdownTable         ; $487B: $21 $20 $C4

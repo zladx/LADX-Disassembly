@@ -3349,7 +3349,7 @@ WingedOctorockEntityHandler::
     call RenderActiveEntitySpritesPair            ; $5650: $CD $C0 $3B
     call func_007_5805                            ; $5653: $CD $05 $58
     call func_007_7D96                            ; $5656: $CD $96 $7D
-    ld   hl, wEntitiesUnknowTableT                ; $5659: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5659: $21 $10 $C4
     add  hl, bc                                   ; $565C: $09
     ld   a, [hl]                                  ; $565D: $7E
     and  a                                        ; $565E: $A7
@@ -4937,7 +4937,7 @@ jr_007_6083:
     sra  [hl]                                     ; $608D: $CB $2E
 
 jr_007_608F:
-    ld   hl, wEntitiesUnknowTableT                ; $608F: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $608F: $21 $10 $C4
     add  hl, bc                                   ; $6092: $09
     ld   [hl], $03                                ; $6093: $36 $03
     ld   e, $03                                   ; $6095: $1E $03
@@ -6584,7 +6584,7 @@ jr_007_6AA6:
     jr   nc, jr_007_6AC0                          ; $6AAA: $30 $14
 
     call label_3B65                               ; $6AAC: $CD $65 $3B
-    ld   hl, wEntitiesUnknowTableT                ; $6AAF: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6AAF: $21 $10 $C4
     add  hl, bc                                   ; $6AB2: $09
     ld   a, [$C13E]                               ; $6AB3: $FA $3E $C1
     or   [hl]                                     ; $6AB6: $B6
@@ -7676,7 +7676,7 @@ jr_007_71B4:
     ld   hl, wEntitiesSpriteVariantTable          ; $71B7: $21 $B0 $C3
     add  hl, bc                                   ; $71BA: $09
     ld   [hl], b                                  ; $71BB: $70
-    ld   hl, wEntitiesUnknowTableT                ; $71BC: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $71BC: $21 $10 $C4
     add  hl, bc                                   ; $71BF: $09
     ld   a, [hl]                                  ; $71C0: $7E
     and  a                                        ; $71C1: $A7
@@ -8029,11 +8029,11 @@ jr_007_73F3:
     jp   SetEntitySpriteVariant                   ; $73F4: $C3 $0C $3B
 
 func_007_73F7::
-    ld   hl, wEntitiesUnknowTableT                ; $73F7: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $73F7: $21 $10 $C4
     add  hl, bc                                   ; $73FA: $09
     ld   [hl], $03                                ; $73FB: $36 $03
     call label_3B23                               ; $73FD: $CD $23 $3B
-    ld   hl, wEntitiesUnknowTableT                ; $7400: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7400: $21 $10 $C4
     add  hl, bc                                   ; $7403: $09
     ld   [hl], b                                  ; $7404: $70
     ret                                           ; $7405: $C9
@@ -8576,7 +8576,7 @@ jr_007_77B0:
     call func_007_7D96                            ; $77B3: $CD $96 $7D
 
 jr_007_77B6:
-    ld   hl, wEntitiesUnknowTableT                ; $77B6: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $77B6: $21 $10 $C4
     add  hl, bc                                   ; $77B9: $09
     ld   a, [hl]                                  ; $77BA: $7E
     and  a                                        ; $77BB: $A7
@@ -8846,14 +8846,14 @@ jr_007_7926:
     ld   [hl], a                                  ; $792A: $77
 
 jr_007_792B:
-    ld   hl, wEntitiesUnknowTableT                ; $792B: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $792B: $21 $10 $C4
     add  hl, bc                                   ; $792E: $09
     ld   a, [hl]                                  ; $792F: $7E
     push af                                       ; $7930: $F5
     ld   [hl], $01                                ; $7931: $36 $01
     call label_3B23                               ; $7933: $CD $23 $3B
     pop  af                                       ; $7936: $F1
-    ld   hl, wEntitiesUnknowTableT                ; $7937: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7937: $21 $10 $C4
     add  hl, bc                                   ; $793A: $09
     ld   [hl], a                                  ; $793B: $77
     ret                                           ; $793C: $C9
@@ -8877,7 +8877,7 @@ jr_007_794F:
     cp   $15                                      ; $7957: $FE $15
     jr   z, jr_007_7963                           ; $7959: $28 $08
 
-    ld   hl, wEntitiesUnknowTableT                ; $795B: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $795B: $21 $10 $C4
     add  hl, bc                                   ; $795E: $09
     ld   a, [hl]                                  ; $795F: $7E
     and  a                                        ; $7960: $A7
@@ -9339,7 +9339,7 @@ jr_007_7DC2:
     ret                                           ; $7DC2: $C9
 
 func_007_7DC3::
-    ld   hl, wEntitiesUnknowTableT                ; $7DC3: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7DC3: $21 $10 $C4
     add  hl, bc                                   ; $7DC6: $09
     ld   a, [hl]                                  ; $7DC7: $7E
     and  a                                        ; $7DC8: $A7

@@ -63,7 +63,7 @@ ResetEntity::
     ld   hl, wEntitiesHealthTable                 ; $405C: $21 $60 $C3
     add  hl, bc                                   ; $405F: $09
     ld   [hl], b                                  ; $4060: $70
-    ld   hl, wEntitiesUnknowTableT                ; $4061: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4061: $21 $10 $C4
     add  hl, bc                                   ; $4064: $09
     ld   [hl], b                                  ; $4065: $70
     ld   hl, wEntitiesPosXSignTable               ; $4066: $21 $20 $C2
@@ -1739,7 +1739,7 @@ StalfosEvasiveEntityHandler::
     jp   nz, label_015_4ECB                       ; $4EBD: $C2 $CB $4E
 
     call label_3B39                               ; $4EC0: $CD $39 $3B
-    ld   hl, wEntitiesUnknowTableT                ; $4EC3: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4EC3: $21 $10 $C4
     add  hl, bc                                   ; $4EC6: $09
     ld   a, [hl]                                  ; $4EC7: $7E
     and  a                                        ; $4EC8: $A7
@@ -1792,7 +1792,7 @@ jr_015_4F02:
 
     ld   a, $0A                                   ; $4F14: $3E $0A
     ldh  [hNoiseSfx], a                           ; $4F16: $E0 $F4
-    ld   hl, wEntitiesUnknowTableT                ; $4F18: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4F18: $21 $10 $C4
     add  hl, de                                   ; $4F1B: $19
     ld   [hl], b                                  ; $4F1C: $70
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4F1D: $21 $40 $C3
@@ -1961,7 +1961,7 @@ jr_015_500A:
 
 func_015_501A::
     call func_015_7B88                            ; $501A: $CD $88 $7B
-    ld   hl, wEntitiesUnknowTableT                ; $501D: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $501D: $21 $10 $C4
     add  hl, bc                                   ; $5020: $09
     ld   a, [hl]                                  ; $5021: $7E
     push hl                                       ; $5022: $E5
@@ -3777,7 +3777,7 @@ func_015_5EAC::
     ld   hl, wEntitiesUnknowTableS                ; $5EE6: $21 $00 $C4
     add  hl, de                                   ; $5EE9: $19
     ld   [hl], a                                  ; $5EEA: $77
-    ld   hl, wEntitiesUnknowTableT                ; $5EEB: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5EEB: $21 $10 $C4
     add  hl, de                                   ; $5EEE: $19
     ld   [hl], $12                                ; $5EEF: $36 $12
     call ClearEntityStatus_15                        ; $5EF1: $CD $31 $7C
@@ -6345,11 +6345,11 @@ jr_015_7408:
     ld   a, $3E                                   ; $7413: $3E $3E
     ldh  [hJingle], a                             ; $7415: $E0 $F2
     call func_015_7B88                            ; $7417: $CD $88 $7B
-    ld   hl, wEntitiesUnknowTableT                ; $741A: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $741A: $21 $10 $C4
     add  hl, bc                                   ; $741D: $09
     ld   [hl], $03                                ; $741E: $36 $03
     call label_3B23                               ; $7420: $CD $23 $3B
-    ld   hl, wEntitiesUnknowTableT                ; $7423: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7423: $21 $10 $C4
     add  hl, bc                                   ; $7426: $09
     ld   [hl], b                                  ; $7427: $70
 
@@ -7530,7 +7530,7 @@ jr_015_7B3D:
     ret                                           ; $7B3D: $C9
 
 func_015_7B3E::
-    ld   hl, wEntitiesUnknowTableT                ; $7B3E: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7B3E: $21 $10 $C4
     add  hl, bc                                   ; $7B41: $09
     ld   a, [hl]                                  ; $7B42: $7E
     and  a                                        ; $7B43: $A7

@@ -304,7 +304,7 @@ jr_004_4E5F:
 
 label_004_4E60:
     call func_004_7FA3                            ; $4E60: $CD $A3 $7F
-    ld   hl, wEntitiesUnknowTableT                ; $4E63: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4E63: $21 $10 $C4
     add  hl, bc                                   ; $4E66: $09
     ld   a, [hl]                                  ; $4E67: $7E
     cp   $02                                      ; $4E68: $FE $02
@@ -567,7 +567,7 @@ jr_004_5048:
 func_004_504B::
     call GetEntityTransitionCountdown             ; $504B: $CD $05 $0C
     ld   [hl], $FF                                ; $504E: $36 $FF
-    ld   hl, wEntitiesUnknowTableT                ; $5050: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5050: $21 $10 $C4
     add  hl, bc                                   ; $5053: $09
     ld   [hl], $08                                ; $5054: $36 $08
     ld   hl, wEntitiesHealthTable                 ; $5056: $21 $60 $C3
@@ -1949,7 +1949,7 @@ MiniMoldromEntityHandler::
     and  a                                        ; $5A9B: $A7
     jr   nz, jr_004_5AA6                          ; $5A9C: $20 $08
 
-    ld   hl, wEntitiesUnknowTableT                ; $5A9E: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5A9E: $21 $10 $C4
     add  hl, bc                                   ; $5AA1: $09
     ld   a, [hl]                                  ; $5AA2: $7E
     and  a                                        ; $5AA3: $A7
@@ -4977,7 +4977,7 @@ func_004_6D7A::
     ret                                           ; $6D7F: $C9
 
 func_004_6D80::
-    ld   hl, wEntitiesUnknowTableT                ; $6D80: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $6D80: $21 $10 $C4
     add  hl, bc                                   ; $6D83: $09
     ld   a, [hl]                                  ; $6D84: $7E
     and  a                                        ; $6D85: $A7
@@ -7574,7 +7574,7 @@ jr_004_7D2B:
     ldh  [$FFED], a                               ; $7D33: $E0 $ED
     call RenderActiveEntitySpritesPair            ; $7D35: $CD $C0 $3B
     call func_004_7FA3                            ; $7D38: $CD $A3 $7F
-    ld   hl, wEntitiesUnknowTableT                ; $7D3B: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D3B: $21 $10 $C4
     add  hl, bc                                   ; $7D3E: $09
     ld   a, [hl]                                  ; $7D3F: $7E
     cp   $08                                      ; $7D40: $FE $08

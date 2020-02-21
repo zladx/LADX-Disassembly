@@ -56,7 +56,7 @@ jr_006_4976:
     and  $01                                      ; $4981: $E6 $01
     or   e                                        ; $4983: $B3
     call SetEntitySpriteVariant                   ; $4984: $CD $0C $3B
-    ld   hl, wEntitiesUnknowTableT                ; $4987: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $4987: $21 $10 $C4
     add  hl, bc                                   ; $498A: $09
     ld   a, [hl]                                  ; $498B: $7E
     and  a                                        ; $498C: $A7

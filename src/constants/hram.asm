@@ -311,10 +311,11 @@ hActiveEntityType:: ; FFEB
   ds 1
 
 ; Active entity pos Z ?
+; Active entity Y of the second sprite of a pair?
 ds 1 ; FFEC
 
-; Unlabeled
-; Active entity X offset?
+; Active entity render flags?
+; Maybe a bitfield
 ds 1 ; FFED
 
 hActiveEntityPosX:: ; FFEE

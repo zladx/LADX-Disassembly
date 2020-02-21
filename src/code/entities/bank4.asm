@@ -2807,7 +2807,7 @@ jr_004_6044:
     and  a                                        ; $6044: $A7
     ret  nz                                       ; $6045: $C0
 
-    call label_3E83                               ; $6046: $CD $83 $3E
+    call RemoveAllEntities                        ; $6046: $CD $83 $3E
     jp   label_004_67FB                           ; $6049: $C3 $FB $67
 
 Data_004_604C::
@@ -3102,7 +3102,7 @@ func_004_6247::
     and  a                                        ; $624A: $A7
     ret  nz                                       ; $624B: $C0
 
-    call label_3E83                               ; $624C: $CD $83 $3E
+    call RemoveAllEntities                        ; $624C: $CD $83 $3E
     jp   label_004_67FB                           ; $624F: $C3 $FB $67
 
 func_004_6252::

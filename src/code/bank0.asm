@@ -8001,15 +8001,16 @@ func_006_783C_trampoline::
     ld   a, $03
     jp   SwitchBank
 
-label_3E83::
-    ld   e, $10
+RemoveAllEntities::
+    ld   e, MAX_ENTITIES
     ld   hl, wEntitiesStatusTable
 
-label_3E88::
+.loop
     xor  a
     ldi  [hl], a
     dec  e
-    jr   nz, label_3E88
+    jr   nz, .loop
+
     ret
 
 label_3E8E::

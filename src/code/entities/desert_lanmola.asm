@@ -157,7 +157,7 @@ func_006_56C7::
 label_006_56C8:
     call func_006_64C6                            ; $56C8: $CD $C6 $64
     call label_3EE8                               ; $56CB: $CD $E8 $3E
-    call IsEntityUnknownFZero                     ; $56CE: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $56CE: $CD $00 $0C
     jr   z, jr_006_5726                           ; $56D1: $28 $53
 
     and  $0F                                      ; $56D3: $E6 $0F
@@ -318,7 +318,7 @@ jr_006_57B2:
     ld   [$C1CD], a                               ; $57D0: $EA $CD $C1
     ldh  a, [hActiveEntityPosY]                   ; $57D3: $F0 $EF
     ld   [$C1CE], a                               ; $57D5: $EA $CE $C1
-    call IsEntityUnknownFZero                     ; $57D8: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $57D8: $CD $00 $0C
     ld   [hl], $61                                ; $57DB: $36 $61
     call IncrementEntityState                     ; $57DD: $CD $12 $3B
 
@@ -399,7 +399,7 @@ jr_006_5841:
     ld   [$C1CD], a                               ; $5847: $EA $CD $C1
     ldh  a, [hActiveEntityPosY]                   ; $584A: $F0 $EF
     ld   [$C1CE], a                               ; $584C: $EA $CE $C1
-    call IsEntityUnknownFZero                     ; $584F: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $584F: $CD $00 $0C
     ld   [hl], $60                                ; $5852: $36 $60
     ld   a, $23                                   ; $5854: $3E $23
     ldh  [hNoiseSfx], a                           ; $5856: $E0 $F4

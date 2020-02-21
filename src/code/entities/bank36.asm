@@ -2271,7 +2271,7 @@ jr_036_4D13:
     and  a                                        ; $4D18: $A7
     ret  nz                                       ; $4D19: $C0
 
-    call IsEntityUnknownFZero                     ; $4D1A: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $4D1A: $CD $00 $0C
     ret  nz                                       ; $4D1D: $C0
 
     ld   hl, wEntitiesPrivateState2Table          ; $4D1E: $21 $C0 $C2

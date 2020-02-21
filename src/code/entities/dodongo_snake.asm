@@ -306,7 +306,7 @@ Data_005_6A24::
     db   $68, $03, $68, $23
 
 func_005_6A38::
-    call IsEntityUnknownFZero                     ; $6A38: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6A38: $CD $00 $0C
     ld   hl, wRoomTransitionState                 ; $6A3B: $21 $24 $C1
     or   [hl]                                     ; $6A3E: $B6
     ld   hl, wEntitiesPrivateCountdown2Table      ; $6A3F: $21 $00 $C3

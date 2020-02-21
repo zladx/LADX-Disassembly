@@ -22,7 +22,7 @@ BooBuddyState0Handler::
     call GetEntityTransitionCountdown             ; $79C9: $CD $05 $0C
     jr   nz, jr_006_7A11                          ; $79CC: $20 $43
 
-    call IsEntityUnknownFZero                     ; $79CE: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $79CE: $CD $00 $0C
     jr   nz, jr_006_7A21                          ; $79D1: $20 $4E
 
     ld   a, [wSwordAnimationState]                ; $79D3: $FA $37 $C1
@@ -157,7 +157,7 @@ jr_006_7A8B:
     ret                                           ; $7A8B: $C9
 
 func_006_7A8C::
-    call IsEntityUnknownFZero                     ; $7A8C: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7A8C: $CD $00 $0C
     ld   [hl], $20                                ; $7A8F: $36 $20
     ld   hl, wEntitiesPrivateState1Table          ; $7A91: $21 $B0 $C2
     add  hl, bc                                   ; $7A94: $09

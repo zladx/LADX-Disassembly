@@ -88,7 +88,7 @@ func_005_7C52::
     and  a                                        ; $7C57: $A7
     ret  nz                                       ; $7C58: $C0
 
-    call IsEntityUnknownFZero                     ; $7C59: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7C59: $CD $00 $0C
     jp   nz, label_005_7CE8                       ; $7C5C: $C2 $E8 $7C
 
     call GetEntityTransitionCountdown             ; $7C5F: $CD $05 $0C
@@ -108,7 +108,7 @@ func_005_7C52::
     ld   hl, wEntitiesSpeedYTable                 ; $7C76: $21 $50 $C2
     add  hl, bc                                   ; $7C79: $09
     ld   [hl], b                                  ; $7C7A: $70
-    call IsEntityUnknownFZero                     ; $7C7B: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7C7B: $CD $00 $0C
     call GetRandomByte                            ; $7C7E: $CD $0D $28
     and  $3F                                      ; $7C81: $E6 $3F
     add  $60                                      ; $7C83: $C6 $60
@@ -184,7 +184,7 @@ label_005_7CE8:
     and  $03                                      ; $7CED: $E6 $03
     jr   z, jr_005_7D09                           ; $7CEF: $28 $18
 
-    call IsEntityUnknownFZero                     ; $7CF1: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7CF1: $CD $00 $0C
     jr   z, jr_005_7D01                           ; $7CF4: $28 $0B
 
     ld   hl, wEntitiesSpeedXTable                 ; $7CF6: $21 $40 $C2
@@ -202,7 +202,7 @@ jr_005_7D01:
     ld   [hl], a                                  ; $7D08: $77
 
 jr_005_7D09:
-    call IsEntityUnknownFZero                     ; $7D09: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7D09: $CD $00 $0C
     jr   nz, label_005_7D40                       ; $7D0C: $20 $32
 
     ld   hl, wEntitiesPrivateState1Table          ; $7D0E: $21 $B0 $C2
@@ -221,7 +221,7 @@ jr_005_7D09:
 jr_005_7D21:
     call GetEntityTransitionCountdown             ; $7D21: $CD $05 $0C
     ld   [hl], $60                                ; $7D24: $36 $60
-    call IsEntityUnknownFZero                     ; $7D26: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7D26: $CD $00 $0C
     ld   [hl], b                                  ; $7D29: $70
     call IncrementEntityState                     ; $7D2A: $CD $12 $3B
     ld   [hl], $02                                ; $7D2D: $36 $02
@@ -388,7 +388,7 @@ func_005_7E0A::
     ret                                           ; $7E12: $C9
 
 jr_005_7E13:
-    call IsEntityUnknownFZero                     ; $7E13: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7E13: $CD $00 $0C
     cp   $02                                      ; $7E16: $FE $02
     jr   nc, jr_005_7E3A                          ; $7E18: $30 $20
 
@@ -408,7 +408,7 @@ jr_005_7E13:
     ret                                           ; $7E34: $C9
 
 jr_005_7E35:
-    call IsEntityUnknownFZero                     ; $7E35: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7E35: $CD $00 $0C
     ld   [hl], $30                                ; $7E38: $36 $30
 
 jr_005_7E3A:

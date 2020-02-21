@@ -696,7 +696,8 @@ IsEntityDropTimerZero::
     ld   hl, wEntitiesDropTimerTable
     jr   IsZero
 
-IsEntityUnknownFZero::
+; TODO: rename
+IsEntityPrivateCountdown1Zero::
     ld   hl, wEntitiesPrivateCountdown1Table
     jr   IsZero
 

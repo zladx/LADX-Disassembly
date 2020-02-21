@@ -72,7 +72,7 @@ func_005_6D42::
     ld   [$D755], a                               ; $6D73: $EA $55 $D7
     ld   a, $B0                                   ; $6D76: $3E $B0
     ld   [$D756], a                               ; $6D78: $EA $56 $D7
-    call IsEntityUnknownFZero                     ; $6D7B: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6D7B: $CD $00 $0C
 
 jr_005_6D7E:
     ld   [hl], $1F                                ; $6D7E: $36 $1F
@@ -519,7 +519,7 @@ jr_005_70F6:
     pop  bc                                       ; $7150: $C1
 
 jr_005_7151:
-    call IsEntityUnknownFZero                     ; $7151: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7151: $CD $00 $0C
     jr   z, jr_005_7167                           ; $7154: $28 $11
 
     rra                                           ; $7156: $1F
@@ -1448,7 +1448,7 @@ jr_005_7721:
     ld   [hl], $10                                ; $772E: $36 $10
 
 jr_005_7730:
-    call IsEntityUnknownFZero                     ; $7730: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7730: $CD $00 $0C
     jr   nz, jr_005_775E                          ; $7733: $20 $29
 
     ld   [hl], $04                                ; $7735: $36 $04

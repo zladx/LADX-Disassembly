@@ -191,7 +191,7 @@ jr_006_7197:
     ld   [wAddHealthBuffer], a                    ; $71B7: $EA $93 $DB
 
 jr_006_71BA:
-    call IsEntityUnknownFZero                     ; $71BA: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $71BA: $CD $00 $0C
     jr   nz, jr_006_71F0                          ; $71BD: $20 $31
 
     ld   [hl], $13                                ; $71BF: $36 $13

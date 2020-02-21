@@ -843,7 +843,7 @@ jr_018_471D:
     ld   [$D214], a                               ; $471F: $EA $14 $D2
 
 jr_018_4722:
-    call IsEntityUnknownFZero                     ; $4722: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $4722: $CD $00 $0C
     ld   [hl], $28                                ; $4725: $36 $28
     ret                                           ; $4727: $C9
 
@@ -933,7 +933,7 @@ func_018_4833::
     ld   a, $02                                   ; $4846: $3E $02
     call label_3DA0                               ; $4848: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $484B: $CD $8A $3D
-    call IsEntityUnknownFZero                     ; $484E: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $484E: $CD $00 $0C
     jr   z, jr_018_4857                           ; $4851: $28 $04
 
     ld   a, $03                                   ; $4853: $3E $03
@@ -964,7 +964,7 @@ jr_018_485C:
     call RenderActiveEntitySpritesRect            ; $486F: $CD $E6 $3C
     ld   a, $09                                   ; $4872: $3E $09
     call label_3DA0                               ; $4874: $CD $A0 $3D
-    call IsEntityUnknownFZero                     ; $4877: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $4877: $CD $00 $0C
     ret  z                                        ; $487A: $C8
 
     ldh  a, [hActiveEntityPosX]                   ; $487B: $F0 $EE
@@ -3952,7 +3952,7 @@ jr_018_5CEF:
     ld   hl, wEntitiesPosZTable                   ; $5D2B: $21 $10 $C3
     add  hl, bc                                   ; $5D2E: $09
     ld   [hl], e                                  ; $5D2F: $73
-    call IsEntityUnknownFZero                     ; $5D30: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $5D30: $CD $00 $0C
     ld   hl, wRoomTransitionState                 ; $5D33: $21 $24 $C1
     or   [hl]                                     ; $5D36: $B6
     jr   nz, jr_018_5D7D                          ; $5D37: $20 $44
@@ -5111,7 +5111,7 @@ BlainoEntityHandler::
     ld   [hl], $20                                ; $64E8: $36 $20
 
 jr_018_64EA:
-    call IsEntityUnknownFZero                     ; $64EA: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $64EA: $CD $00 $0C
     jr   z, jr_018_650A                           ; $64ED: $28 $1B
 
     ld   a, [$C13E]                               ; $64EF: $FA $3E $C1
@@ -5220,7 +5220,7 @@ jr_018_6588:
     jp   SetEntitySpriteVariant                   ; $6593: $C3 $0C $3B
 
 func_018_6596::
-    call IsEntityUnknownFZero                     ; $6596: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6596: $CD $00 $0C
     jr   z, jr_018_659F                           ; $6599: $28 $04
 
     ld   a, $03                                   ; $659B: $3E $03
@@ -5414,7 +5414,7 @@ jr_018_6703:
     ld   hl, wEntitiesSpeedXTable                 ; $6703: $21 $40 $C2
     add  hl, bc                                   ; $6706: $09
     ld   [hl], e                                  ; $6707: $73
-    call IsEntityUnknownFZero                     ; $6708: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6708: $CD $00 $0C
     jr   z, jr_018_6724                           ; $670B: $28 $17
 
     call func_018_7EB2                            ; $670D: $CD $B2 $7E

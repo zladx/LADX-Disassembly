@@ -748,7 +748,7 @@ func_004_5158::
 
 .countdownReachedZero
     call IncrementEntityState                     ; $516C: $CD $12 $3B
-    call IsEntityUnknownFZero                     ; $516F: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $516F: $CD $00 $0C
     ld   [hl], $A0                                ; $5172: $36 $A0
     call IsEntityDropTimerZero                                ; $5174: $CD $FB $0B
     ld   [hl], $FF                                ; $5177: $36 $FF
@@ -880,7 +880,7 @@ jr_004_5237:
     pop  bc                                       ; $5272: $C1
 
 jr_004_5273:
-    call IsEntityUnknownFZero                     ; $5273: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $5273: $CD $00 $0C
     jr   nz, jr_004_52C9                          ; $5276: $20 $51
 
     ld   [hl], $40                                ; $5278: $36 $40
@@ -2046,7 +2046,7 @@ jr_004_5B23:
     ld   [hl], $10                                ; $5B26: $36 $10
 
 jr_004_5B28:
-    call IsEntityUnknownFZero                     ; $5B28: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $5B28: $CD $00 $0C
     jr   nz, jr_004_5B66                          ; $5B2B: $20 $39
 
     ld   [hl], $04                                ; $5B2D: $36 $04
@@ -2271,7 +2271,7 @@ func_004_5C63::
     ld   [hl], a                                  ; $5C8B: $77
 
 jr_004_5C8C:
-    call IsEntityUnknownFZero                     ; $5C8C: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $5C8C: $CD $00 $0C
     jr   nz, jr_004_5CA0                          ; $5C8F: $20 $0F
 
     call GetRandomByte                            ; $5C91: $CD $0D $28
@@ -2325,7 +2325,7 @@ jr_004_5CCE:
     ld   [hl], $01                                ; $5CD2: $36 $01
 
 jr_004_5CD4:
-    call IsEntityUnknownFZero                     ; $5CD4: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $5CD4: $CD $00 $0C
     ld   [hl], $20                                ; $5CD7: $36 $20
 
 jr_004_5CD9:
@@ -3232,7 +3232,7 @@ func_004_6308::
     ld   [hl], $04                                ; $6315: $36 $04
 
 jr_004_6317:
-    call IsEntityUnknownFZero                     ; $6317: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6317: $CD $00 $0C
     jr   z, jr_004_6321                           ; $631A: $28 $05
 
     ld   hl, wEntitiesSpriteVariantTable          ; $631C: $21 $B0 $C3
@@ -3370,7 +3370,7 @@ jr_004_63B9:
     ld   hl, wEntitiesPrivateCountdown2Table      ; $63D3: $21 $00 $C3
     add  hl, bc                                   ; $63D6: $09
     ld   [hl], $50                                ; $63D7: $36 $50
-    call IsEntityUnknownFZero                     ; $63D9: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $63D9: $CD $00 $0C
     ld   [hl], $10                                ; $63DC: $36 $10
 
 jr_004_63DE:
@@ -4661,7 +4661,7 @@ jr_004_6B51:
     and  $80                                      ; $6B67: $E6 $80
     jr   nz, jr_004_6B7C                          ; $6B69: $20 $11
 
-    call IsEntityUnknownFZero                     ; $6B6B: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6B6B: $CD $00 $0C
     jr   nz, jr_004_6B7C                          ; $6B6E: $20 $0C
 
     ld   hl, wEntitiesUnknowTableH                ; $6B70: $21 $30 $C4
@@ -4767,7 +4767,7 @@ func_004_6BE1::
     cpl                                           ; $6C14: $2F
     inc  a                                        ; $6C15: $3C
     ld   [hl], a                                  ; $6C16: $77
-    call IsEntityUnknownFZero                     ; $6C17: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6C17: $CD $00 $0C
     ld   [hl], $08                                ; $6C1A: $36 $08
     ld   a, JINGLE_SWORD_POKING                   ; $6C1C: $3E $07
     ldh  [hJingle], a                             ; $6C1E: $E0 $F2
@@ -5206,7 +5206,7 @@ func_004_6E92::
     ld   [$D210], a                               ; $6E9C: $EA $10 $D2
     ld   a, $02                                   ; $6E9F: $3E $02
     ld   [$C50A], a                               ; $6EA1: $EA $0A $C5
-    call IsEntityUnknownFZero                     ; $6EA4: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6EA4: $CD $00 $0C
     dec  a                                        ; $6EA7: $3D
     jr   nz, jr_004_6EAE                          ; $6EA8: $20 $04
 
@@ -6049,7 +6049,7 @@ jr_004_7362:
     ld   hl, wEntitiesPrivateState2Table          ; $73A1: $21 $C0 $C2
     add  hl, bc                                   ; $73A4: $09
     ld   [hl], a                                  ; $73A5: $77
-    call IsEntityUnknownFZero                     ; $73A6: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $73A6: $CD $00 $0C
     ld   [hl], $10                                ; $73A9: $36 $10
     ld   hl, wEntitiesUnknowTableP                ; $73AB: $21 $40 $C4
     inc  [hl]                                     ; $73AE: $34
@@ -7566,7 +7566,7 @@ TimerBombiteEntityHandler::
     ld   de, Data_004_7D07                        ; $7D28: $11 $07 $7D
 
 jr_004_7D2B:
-    call IsEntityUnknownFZero                     ; $7D2B: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7D2B: $CD $00 $0C
     rla                                           ; $7D2E: $17
     rla                                           ; $7D2F: $17
     rla                                           ; $7D30: $17
@@ -7684,7 +7684,7 @@ jr_004_7DD4:
     jr   nz, jr_004_7DE5                          ; $7DDC: $20 $07
 
     ld   [hl], $0A                                ; $7DDE: $36 $0A
-    call IsEntityUnknownFZero                     ; $7DE0: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7DE0: $CD $00 $0C
     ld   [hl], $30                                ; $7DE3: $36 $30
 
 jr_004_7DE5:
@@ -7724,7 +7724,7 @@ jr_004_7E19:
     call RenderActiveEntitySpritesPair            ; $7E19: $CD $C0 $3B
     call func_004_7FA3                            ; $7E1C: $CD $A3 $7F
     call func_004_6D80                            ; $7E1F: $CD $80 $6D
-    call IsEntityUnknownFZero                     ; $7E22: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7E22: $CD $00 $0C
     jr   nz, jr_004_7E2A                          ; $7E25: $20 $03
 
     call label_3B39                               ; $7E27: $CD $39 $3B

@@ -112,7 +112,7 @@ jr_007_408A:
     ld   [hl], $05                                ; $40AA: $36 $05
     ld   hl, hNoiseSfx                            ; $40AC: $21 $F4 $FF
     ld   [hl], $05                                ; $40AF: $36 $05
-    call IsEntityUnknownFZero                     ; $40B1: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $40B1: $CD $00 $0C
     ld   [hl], $1F                                ; $40B4: $36 $1F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $40B6: $21 $40 $C3
     add  hl, bc                                   ; $40B9: $09
@@ -4110,7 +4110,7 @@ jr_007_5B14:
 
 jr_007_5B19:
     call func_007_58FA                            ; $5B19: $CD $FA $58
-    call IsEntityUnknownFZero                     ; $5B1C: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $5B1C: $CD $00 $0C
     ret  z                                        ; $5B1F: $C8
 
     ld   a, $04                                   ; $5B20: $3E $04
@@ -4145,7 +4145,7 @@ jr_007_5B3B:
 
     call GetEntityTransitionCountdown             ; $5B4E: $CD $05 $0C
     ld   [hl], $10                                ; $5B51: $36 $10
-    call IsEntityUnknownFZero                     ; $5B53: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $5B53: $CD $00 $0C
     ld   [hl], $10                                ; $5B56: $36 $10
     ret                                           ; $5B58: $C9
 
@@ -5569,7 +5569,7 @@ Data_007_6422::
     db   $00, $00, $50, $07, $00, $08, $52, $07, $00, $10, $52, $27, $00, $18, $50, $27
 
 SideViewPlatformEntityHandler::
-    call IsEntityUnknownFZero                     ; $6432: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6432: $CD $00 $0C
     jr   z, jr_007_643B                           ; $6435: $28 $04
 
     ld   a, $04                                   ; $6437: $3E $04
@@ -5592,7 +5592,7 @@ jr_007_643B:
     cp   $3B                                      ; $6455: $FE $3B
     jr   z, jr_007_6466                           ; $6457: $28 $0D
 
-    call IsEntityUnknownFZero                     ; $6459: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6459: $CD $00 $0C
     ld   [hl], $08                                ; $645C: $36 $08
     ld   a, [$C3CF]                               ; $645E: $FA $CF $C3
     and  a                                        ; $6461: $A7
@@ -6214,7 +6214,7 @@ SnakeEntityHandler::
     ld   [hl], b                                  ; $6877: $70
     call GetEntityTransitionCountdown             ; $6878: $CD $05 $0C
     ld   [hl], $08                                ; $687B: $36 $08
-    call IsEntityUnknownFZero                     ; $687D: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $687D: $CD $00 $0C
     ld   [hl], $20                                ; $6880: $36 $20
 
 jr_007_6882:
@@ -6297,7 +6297,7 @@ jr_007_68E6:
     jp   SetEntitySpriteVariant                   ; $68ED: $C3 $0C $3B
 
 func_007_68F0::
-    call IsEntityUnknownFZero                     ; $68F0: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $68F0: $CD $00 $0C
     jr   nz, jr_007_6919                          ; $68F3: $20 $24
 
     call func_007_7E5D                            ; $68F5: $CD $5D $7E
@@ -6341,7 +6341,7 @@ func_007_6929::
     ld   [hl], $20                                ; $692E: $36 $20
     call IncrementEntityState                     ; $6930: $CD $12 $3B
     ld   [hl], b                                  ; $6933: $70
-    call IsEntityUnknownFZero                     ; $6934: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6934: $CD $00 $0C
     ld   [hl], $40                                ; $6937: $36 $40
 
 jr_007_6939:
@@ -8964,7 +8964,7 @@ jr_007_79D6:
     ret                                           ; $79D6: $C9
 
 func_007_79D7::
-    call IsEntityUnknownFZero                     ; $79D7: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $79D7: $CD $00 $0C
     jr   z, jr_007_79F9                           ; $79DA: $28 $1D
 
     ld   a, [wTransitionSequenceCounter]          ; $79DC: $FA $6B $C1
@@ -9052,7 +9052,7 @@ func_007_7A55::
     jr   z, jr_007_7A65                           ; $7A5C: $28 $07
 
     push hl                                       ; $7A5E: $E5
-    call IsEntityUnknownFZero                     ; $7A5F: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7A5F: $CD $00 $0C
     ld   [hl], $10                                ; $7A62: $36 $10
     pop  hl                                       ; $7A64: $E1
 

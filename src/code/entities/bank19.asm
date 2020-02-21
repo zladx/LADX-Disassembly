@@ -7047,7 +7047,7 @@ label_019_6841:
     ldh  [hNoiseSfx], a                           ; $685C: $E0 $F4
     call GetEntityTransitionCountdown             ; $685E: $CD $05 $0C
     ld   [hl], $AC                                ; $6861: $36 $AC
-    call IsEntityUnknownFZero                     ; $6863: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6863: $CD $00 $0C
     ld   [hl], $AC                                ; $6866: $36 $AC
     call IncrementEntityState                     ; $6868: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $686B: $CD $05 $0C
@@ -7075,7 +7075,7 @@ jr_019_6881:
 jr_019_6889:
     ld   a, e                                     ; $6889: $7B
     ld   [wScreenShakeHorizontal], a              ; $688A: $EA $55 $C1
-    call IsEntityUnknownFZero                     ; $688D: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $688D: $CD $00 $0C
     ret  nz                                       ; $6890: $C0
 
     jp   label_019_6A4F                           ; $6891: $C3 $4F $6A
@@ -7719,7 +7719,7 @@ jr_019_6C32:
     jp   IncrementEntityState                     ; $6C50: $C3 $12 $3B
 
 jr_019_6C53:
-    call IsEntityUnknownFZero                     ; $6C53: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6C53: $CD $00 $0C
     jr   nz, jr_019_6C68                          ; $6C56: $20 $10
 
     call GetRandomByte                            ; $6C58: $CD $0D $28
@@ -8859,7 +8859,7 @@ jr_019_72AC:
 label_019_72BF:
     xor  a                                        ; $72BF: $AF
     ld   [wC167], a                               ; $72C0: $EA $67 $C1
-    call IsEntityUnknownFZero                     ; $72C3: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $72C3: $CD $00 $0C
     ld   [hl], $3F                                ; $72C6: $36 $3F
     ret                                           ; $72C8: $C9
 
@@ -8895,7 +8895,7 @@ jr_019_72F4:
     ldh  [hJingle], a                             ; $72F6: $E0 $F2
     call IncrementEntityState                     ; $72F8: $CD $12 $3B
     ld   [hl], $05                                ; $72FB: $36 $05
-    call IsEntityUnknownFZero                     ; $72FD: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $72FD: $CD $00 $0C
     ld   [hl], $3F                                ; $7300: $36 $3F
     xor  a                                        ; $7302: $AF
     ld   [wC167], a                               ; $7303: $EA $67 $C1
@@ -8922,7 +8922,7 @@ jr_019_731A:
 jr_019_7327:
     ret                                           ; $7327: $C9
 
-    call IsEntityUnknownFZero                     ; $7328: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7328: $CD $00 $0C
     ret  nz                                       ; $732B: $C0
 
     call_open_dialog $17A                         ; $732C
@@ -8930,7 +8930,7 @@ jr_019_7327:
     ld   [hl], $07                                ; $7334: $36 $07
     ret                                           ; $7336: $C9
 
-    call IsEntityUnknownFZero                     ; $7337: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7337: $CD $00 $0C
     jr   nz, jr_019_7373                          ; $733A: $20 $37
 
     call IncrementEntityState                     ; $733C: $CD $12 $3B
@@ -8969,11 +8969,11 @@ jr_019_7373:
     and  a                                        ; $7378: $A7
     ret  nz                                       ; $7379: $C0
 
-    call IsEntityUnknownFZero                     ; $737A: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $737A: $CD $00 $0C
     ld   [hl], $20                                ; $737D: $36 $20
     jp   IncrementEntityState                     ; $737F: $C3 $12 $3B
 
-    call IsEntityUnknownFZero                     ; $7382: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7382: $CD $00 $0C
     ret  nz                                       ; $7385: $C0
 
     ld   a, $CF                                   ; $7386: $3E $CF
@@ -9047,7 +9047,7 @@ jr_019_73EC:
     jr   c, jr_019_73DE                           ; $73EC: $38 $F0
 
 jr_019_73EE:
-    call IsEntityUnknownFZero                     ; $73EE: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $73EE: $CD $00 $0C
     ret  z                                        ; $73F1: $C8
 
     rra                                           ; $73F2: $1F

@@ -787,7 +787,7 @@ jr_005_6840:
     ld   [hl], $06                                ; $684C: $36 $06
     call GetEntityTransitionCountdown             ; $684E: $CD $05 $0C
     ld   [hl], $40                                ; $6851: $36 $40
-    call IsEntityUnknownFZero                     ; $6853: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6853: $CD $00 $0C
     ld   [hl], $40                                ; $6856: $36 $40
 
 func_005_6858::

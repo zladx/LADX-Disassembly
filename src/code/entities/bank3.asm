@@ -300,7 +300,7 @@ func_003_4926::
     ld   [hl], a                                  ; $493B: $77
     ret                                           ; $493C: $C9
 
-    call IsEntityUnknownFZero                                ; $493D: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero                                ; $493D: $CD $00 $0C
     ld   [hl], $30                                ; $4940: $36 $30
     ret                                           ; $4942: $C9
 
@@ -1397,7 +1397,7 @@ jr_003_4FA9:
     ld   [hl], $80                                ; $4FAC: $36 $80
     ret                                           ; $4FAE: $C9
 
-    call IsEntityUnknownFZero                     ; $4FAF: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $4FAF: $CD $00 $0C
     ld   [hl], $A0                                ; $4FB2: $36 $A0
     ret                                           ; $4FB4: $C9
 
@@ -2597,7 +2597,7 @@ jr_003_5858:
     cp   $0A                                      ; $5868: $FE $0A
     jr   nz, jr_003_5889                          ; $586A: $20 $1D
 
-    call IsEntityUnknownFZero                     ; $586C: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $586C: $CD $00 $0C
     jr   nz, jr_003_5889                          ; $586F: $20 $18
 
     call func_003_7EFE                            ; $5871: $CD $FE $7E
@@ -4185,7 +4185,7 @@ jr_003_626B:
     ld   hl, wEntitiesUnknowTableP                ; $6270: $21 $40 $C4
     add  hl, bc                                   ; $6273: $09
     ld   [hl], b                                  ; $6274: $70
-    call IsEntityUnknownFZero                     ; $6275: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6275: $CD $00 $0C
     ld   [hl], $18                                ; $6278: $36 $18
     ld   a, $0C                                   ; $627A: $3E $0C
     call GetVectorTowardsLink                     ; $627C: $CD $45 $7E
@@ -4265,7 +4265,7 @@ jr_003_62EA:
     ret                                           ; $62EA: $C9
 
 func_003_62EB::
-    call IsEntityUnknownFZero                     ; $62EB: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $62EB: $CD $00 $0C
     jr   nz, jr_003_62EA                          ; $62EE: $20 $FA
 
     ldh  a, [hActiveEntityType]                   ; $62F0: $F0 $EB
@@ -5413,7 +5413,7 @@ jr_003_6ADA:
     cp   $04                                      ; $6AF5: $FE $04
     jr   nz, jr_003_6AFF                          ; $6AF7: $20 $06
 
-    call IsEntityUnknownFZero                     ; $6AF9: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6AF9: $CD $00 $0C
     ld   [hl], $30                                ; $6AFC: $36 $30
     ret                                           ; $6AFE: $C9
 
@@ -6199,7 +6199,7 @@ jr_003_6ED1:
     ld   [hl], a                                  ; $6EEB: $77
     call GetEntityTransitionCountdown             ; $6EEC: $CD $05 $0C
     ld   [hl], $40                                ; $6EEF: $36 $40
-    call IsEntityUnknownFZero                     ; $6EF1: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6EF1: $CD $00 $0C
     ld   [hl], $08                                ; $6EF4: $36 $08
     ret                                           ; $6EF6: $C9
 
@@ -6220,7 +6220,7 @@ label_003_6F04:
     inc  a                                        ; $6F0A: $3C
     ld   [hl], a                                  ; $6F0B: $77
     call func_003_6F5C                            ; $6F0C: $CD $5C $6F
-    call IsEntityUnknownFZero                     ; $6F0F: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $6F0F: $CD $00 $0C
     ld   [hl], $0C                                ; $6F12: $36 $0C
     ld   a, $01                                   ; $6F14: $3E $01
     ld   [wC160], a                               ; $6F16: $EA $60 $C1
@@ -6457,7 +6457,7 @@ FinalNightmareForm6Collisions::
     ld   [hl], $02                                ; $7062: $36 $02
     call GetEntityTransitionCountdown             ; $7064: $CD $05 $0C
     ld   [hl], $40                                ; $7067: $36 $40
-    call IsEntityUnknownFZero                     ; $7069: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7069: $CD $00 $0C
     ld   [hl], $08                                ; $706C: $36 $08
     ret                                           ; $706E: $C9
 
@@ -7323,7 +7323,7 @@ jr_003_752D:
     cp   $02                                      ; $7555: $FE $02
     jr   nz, jr_003_7571                          ; $7557: $20 $18
 
-    call IsEntityUnknownFZero                     ; $7559: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7559: $CD $00 $0C
     ld   [hl], $A0                                ; $755C: $36 $A0
     ld   a, $20                                   ; $755E: $3E $20
     ld   [$C13E], a                               ; $7560: $EA $3E $C1

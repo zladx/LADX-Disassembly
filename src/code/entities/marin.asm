@@ -90,7 +90,7 @@ jr_005_4ED1:
     cp   $01                                      ; $4ED7: $FE $01
     jr   nz, jr_005_4F39                          ; $4ED9: $20 $5E
 
-    call IsEntityUnknownFZero                     ; $4EDB: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $4EDB: $CD $00 $0C
     jr   nz, jr_005_4F39                          ; $4EDE: $20 $59
 
 MarinCreditsHandler:
@@ -229,7 +229,7 @@ jr_005_4F9A:
     jr   jr_005_4F90                              ; $4FA5: $18 $E9
 
 jr_005_4FA7:
-    call IsEntityUnknownFZero                     ; $4FA7: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $4FA7: $CD $00 $0C
     ld   [hl], $10                                ; $4FAA: $36 $10
 
 jr_005_4FAC:

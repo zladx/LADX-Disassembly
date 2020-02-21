@@ -41,14 +41,14 @@ WizrobeState0Handler::
     ld   hl, wEntitiesPrivateState1Table          ; $7653: $21 $B0 $C2
     add  hl, bc                                   ; $7656: $09
     ld   [hl], $01                                ; $7657: $36 $01
-    call IsEntityUnknownFZero                     ; $7659: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7659: $CD $00 $0C
     ld   [hl], $20                                ; $765C: $36 $20
 
 jr_006_765E:
     jr   jr_006_767E                              ; $765E: $18 $1E
 
 WizrobeState1Handler::
-    call IsEntityUnknownFZero                     ; $7660: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7660: $CD $00 $0C
     jr   nz, jr_006_7679                          ; $7663: $20 $14
 
     ld   hl, wEntitiesPrivateState1Table          ; $7665: $21 $B0 $C2
@@ -83,7 +83,7 @@ jr_006_7686:
 WizrobeState2Handler::
     xor  a                                        ; $768D: $AF
     call SetEntitySpriteVariant                   ; $768E: $CD $0C $3B
-    call IsEntityUnknownFZero                     ; $7691: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $7691: $CD $00 $0C
     cp   $02                                      ; $7694: $FE $02
     jr   nc, jr_006_76B6                          ; $7696: $30 $1E
 
@@ -105,7 +105,7 @@ jr_006_76A2:
     cp   $01                                      ; $76AD: $FE $01
     jr   nz, jr_006_76B6                          ; $76AF: $20 $05
 
-    call IsEntityUnknownFZero                     ; $76B1: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $76B1: $CD $00 $0C
     ld   [hl], $20                                ; $76B4: $36 $20
 
 jr_006_76B6:
@@ -113,7 +113,7 @@ jr_006_76B6:
 
 WizrobeState3Handler::
     call label_3B39                               ; $76B9: $CD $39 $3B
-    call IsEntityUnknownFZero                     ; $76BC: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $76BC: $CD $00 $0C
     cp   $28                                      ; $76BF: $FE $28
     jr   z, jr_006_76E9                           ; $76C1: $28 $26
 

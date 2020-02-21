@@ -213,7 +213,7 @@ jr_004_4AA5:
 
     inc  a                                        ; $4ABB: $3C
     call SetEntitySpriteVariant                   ; $4ABC: $CD $0C $3B
-    call IsEntityUnknownFZero                                ; $4ABF: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero                                ; $4ABF: $CD $00 $0C
     jr   nz, jr_004_4ACB                          ; $4AC2: $20 $07
 
     ld   [hl], $28                                ; $4AC4: $36 $28
@@ -254,7 +254,7 @@ jr_004_4AEF:
     and  $1F                                      ; $4AFE: $E6 $1F
     jr   nz, jr_004_4B11                          ; $4B00: $20 $0F
 
-    call IsEntityUnknownFZero                                ; $4B02: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero                                ; $4B02: $CD $00 $0C
     ld   [hl], $50                                ; $4B05: $36 $50
     ld   hl, wEntitiesPrivateState1Table          ; $4B07: $21 $B0 $C2
     add  hl, bc                                   ; $4B0A: $09

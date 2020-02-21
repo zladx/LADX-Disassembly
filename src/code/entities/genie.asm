@@ -509,7 +509,7 @@ func_004_4345::
     ret  nz                                       ; $4348: $C0
 
     call IncrementEntityState                     ; $4349: $CD $12 $3B
-    call IsEntityUnknownFZero                                ; $434C: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero                                ; $434C: $CD $00 $0C
     ld   [hl], $FF                                ; $434F: $36 $FF
     ld   a, [wIntroSubTimer]                      ; $4351: $FA $02 $D0
     ld   e, a                                     ; $4354: $5F
@@ -674,7 +674,7 @@ jr_004_43FF:
     ld   [hl], $42                                ; $4436: $36 $42
 
 jr_004_4438:
-    call IsEntityUnknownFZero                                ; $4438: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero                                ; $4438: $CD $00 $0C
     jr   nz, jr_004_4487                          ; $443B: $20 $4A
 
     ld   [hl], $30                                ; $443D: $36 $30

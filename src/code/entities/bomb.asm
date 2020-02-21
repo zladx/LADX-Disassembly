@@ -35,7 +35,7 @@ jr_003_66BF:
     ld   hl, $C300                                ; $66CB: $21 $00 $C3
     add  hl, bc                                   ; $66CE: $09
     ld   [hl], $FF                                ; $66CF: $36 $FF
-    call IsEntityUnknownFZero                                ; $66D1: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero                                ; $66D1: $CD $00 $0C
     ld   hl, wEntitiesUnknowTableP                ; $66D4: $21 $40 $C4
     add  hl, bc                                   ; $66D7: $09
     or   [hl]                                     ; $66D8: $B6

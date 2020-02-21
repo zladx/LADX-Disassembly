@@ -15,7 +15,7 @@ HinoxEntityHandler::
     call func_006_64C6                            ; $4FC6: $CD $C6 $64
     call label_3EE8                               ; $4FC9: $CD $E8 $3E
     call func_006_64F7                            ; $4FCC: $CD $F7 $64
-    call IsEntityUnknownFZero                     ; $4FCF: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $4FCF: $CD $00 $0C
     jr   z, jr_006_4FD7                           ; $4FD2: $28 $03
 
     call func_006_51B0                            ; $4FD4: $CD $B0 $51
@@ -274,7 +274,7 @@ jr_006_5157:
     ldh  [hLinkPositionX], a                      ; $516D: $E0 $98
     ldh  a, [hActiveEntityPosY]                   ; $516F: $F0 $EF
     ldh  [hLinkPositionY], a                      ; $5171: $E0 $99
-    call IsEntityUnknownFZero                     ; $5173: $CD $00 $0C
+    call IsEntityPrivateCountdown1Zero            ; $5173: $CD $00 $0C
     ld   [hl], $50                                ; $5176: $36 $50
     ret                                           ; $5178: $C9
 

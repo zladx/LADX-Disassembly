@@ -632,6 +632,8 @@ wEntitiesUnknowTableV:: ; C480
 wEntitiesUnknowTableW:: ; C490
   ds $10
 
+; See label_3E8E
+; (whether smoke vfx should spawn?)
 wEntitiesUnknowTableZ:: ; C4A0
   ds $10
 

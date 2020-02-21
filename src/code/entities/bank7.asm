@@ -3480,7 +3480,7 @@ jr_007_571E:
     call func_007_7D1A                            ; $571E: $CD $1A $7D
 
 label_007_5721:
-    ld   hl, wEntitiesUnknowTableG                ; $5721: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $5721: $21 $00 $C3
     add  hl, bc                                   ; $5724: $09
     ld   a, [hl]                                  ; $5725: $7E
     and  a                                        ; $5726: $A7
@@ -3952,7 +3952,7 @@ jr_007_59E2:
     ld   hl, wEntitiesStateTable                  ; $5A1D: $21 $90 $C2
     add  hl, de                                   ; $5A20: $19
     ld   [hl], $07                                ; $5A21: $36 $07
-    ld   hl, wEntitiesUnknowTableG                ; $5A23: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $5A23: $21 $00 $C3
     add  hl, de                                   ; $5A26: $19
     ld   [hl], $80                                ; $5A27: $36 $80
     pop  bc                                       ; $5A29: $C1
@@ -4176,7 +4176,7 @@ func_007_5B69::
     add  hl, bc                                   ; $5B7E: $09
     ld   a, [hl]                                  ; $5B7F: $7E
     ldh  [hLinkPositionY], a                      ; $5B80: $E0 $99
-    ld   hl, wEntitiesUnknowTableG                ; $5B82: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $5B82: $21 $00 $C3
     add  hl, bc                                   ; $5B85: $09
     ld   a, [wC168]                               ; $5B86: $FA $68 $C1
     or   [hl]                                     ; $5B89: $B6
@@ -6882,7 +6882,7 @@ jr_007_6C77:
 
     ld   a, $27                                   ; $6C7F: $3E $27
     ldh  [hNoiseSfx], a                           ; $6C81: $E0 $F4
-    ld   hl, wEntitiesUnknowTableG                ; $6C83: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $6C83: $21 $00 $C3
     add  hl, bc                                   ; $6C86: $09
     ld   [hl], $10                                ; $6C87: $36 $10
 
@@ -6935,7 +6935,7 @@ jr_007_6CD7:
 
     ld   a, $27                                   ; $6CDF: $3E $27
     ldh  [hNoiseSfx], a                           ; $6CE1: $E0 $F4
-    ld   hl, wEntitiesUnknowTableG                ; $6CE3: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $6CE3: $21 $00 $C3
     add  hl, bc                                   ; $6CE6: $09
     ld   [hl], $10                                ; $6CE7: $36 $10
 
@@ -7407,7 +7407,7 @@ jr_007_7012:
     jp   CopyEntityPositionToActivePosition       ; $7012: $C3 $8A $3D
 
 func_007_7015::
-    ld   hl, wEntitiesUnknowTableG                ; $7015: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7015: $21 $00 $C3
     add  hl, bc                                   ; $7018: $09
     ld   a, [hl]                                  ; $7019: $7E
     and  a                                        ; $701A: $A7

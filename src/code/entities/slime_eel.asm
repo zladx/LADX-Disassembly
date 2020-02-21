@@ -942,7 +942,7 @@ jr_005_7395:
     ld   [hl], $02                                ; $73EA: $36 $02
     call IsEntityDropTimerZero                                ; $73EC: $CD $FB $0B
     ld   [hl], $30                                ; $73EF: $36 $30
-    ld   hl, wEntitiesUnknowTableG                ; $73F1: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $73F1: $21 $00 $C3
     add  hl, bc                                   ; $73F4: $09
     ld   [hl], $20                                ; $73F5: $36 $20
     ld   hl, wEntitiesDirectionTable              ; $73F7: $21 $80 $C3
@@ -1315,7 +1315,7 @@ jr_005_7635:
     add  hl, de                                   ; $764A: $19
     ldh  a, [$FFEC]                               ; $764B: $F0 $EC
     ld   [hl], a                                  ; $764D: $77
-    ld   hl, wEntitiesUnknowTableG                ; $764E: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $764E: $21 $00 $C3
     add  hl, bc                                   ; $7651: $09
     ld   a, [hl]                                  ; $7652: $7E
     and  a                                        ; $7653: $A7

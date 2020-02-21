@@ -1174,7 +1174,7 @@ func_003_4E35::
     jp   EntityLiftedHandler                      ; $4E6F: $C3 $32 $57
 
 jr_003_4E72:
-    ld   hl, wEntitiesUnknowTableG                ; $4E72: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $4E72: $21 $00 $C3
     add  hl, bc                                   ; $4E75: $09
     ld   a, [hl]                                  ; $4E76: $7E
     and  a                                        ; $4E77: $A7
@@ -6488,7 +6488,7 @@ jr_003_707D:
     and  a                                        ; $7093: $A7
     jr   z, label_003_7102                        ; $7094: $28 $6C
 
-    ld   hl, wEntitiesUnknowTableG                ; $7096: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7096: $21 $00 $C3
     add  hl, bc                                   ; $7099: $09
     ld   [hl], $0C                                ; $709A: $36 $0C
     ret                                           ; $709C: $C9
@@ -6798,7 +6798,7 @@ func_003_7267::
     ld   hl, wEntitiesStatusTable                 ; $7267: $21 $80 $C2
     add  hl, bc                                   ; $726A: $09
     ld   [hl], $06                                ; $726B: $36 $06
-    ld   hl, wEntitiesUnknowTableG                ; $726D: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $726D: $21 $00 $C3
     add  hl, bc                                   ; $7270: $09
     ld   [hl], $FF                                ; $7271: $36 $FF
     ld   hl, wEntitiesSpeedZTable                 ; $7273: $21 $20 $C3
@@ -7054,7 +7054,7 @@ jr_003_73CC:
 
 jr_003_73D0:
     ld   [hl], $28                                ; $73D0: $36 $28
-    ld   hl, wEntitiesUnknowTableG                ; $73D2: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $73D2: $21 $00 $C3
     add  hl, bc                                   ; $73D5: $09
     ld   [hl], $C8                                ; $73D6: $36 $C8
     ret                                           ; $73D8: $C9

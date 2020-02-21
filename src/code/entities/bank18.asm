@@ -3591,7 +3591,7 @@ jr_018_5AE7:
     call_open_dialog $27A                         ; $5AFE
 
 jr_018_5B03:
-    ld   hl, wEntitiesUnknowTableG                ; $5B03: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $5B03: $21 $00 $C3
     add  hl, bc                                   ; $5B06: $09
     ld   a, [wTransitionSequenceCounter]          ; $5B07: $FA $6B $C1
     cp   $04                                      ; $5B0A: $FE $04

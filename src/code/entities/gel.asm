@@ -116,7 +116,7 @@ jr_006_7C6A:
 
 jr_006_7CB7:
     call func_006_64F7                            ; $7CB7: $CD $F7 $64
-    ld   hl, wEntitiesUnknowTableG                ; $7CBA: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7CBA: $21 $00 $C3
     add  hl, bc                                   ; $7CBD: $09
     ld   a, [hl]                                  ; $7CBE: $7E
     and  a                                        ; $7CBF: $A7
@@ -130,7 +130,7 @@ jr_006_7CB7:
     dec  a                                        ; $7CCB: $3D
     jr   nz, jr_006_7CD4                          ; $7CCC: $20 $06
 
-    ld   hl, wEntitiesUnknowTableG                ; $7CCE: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7CCE: $21 $00 $C3
     add  hl, bc                                   ; $7CD1: $09
     ld   [hl], $08                                ; $7CD2: $36 $08
 

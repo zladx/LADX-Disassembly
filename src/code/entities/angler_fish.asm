@@ -58,7 +58,7 @@ Data_005_55C8::
 
 func_005_55CA::
     call func_005_7A3A
-    ld   hl, wEntitiesUnknowTableG
+    ld   hl, wEntitiesPrivateCountdown2Table
     add  hl, bc                                   ; $55D0: $09
     ld   a, [hl]                                  ; $55D1: $7E
     and  a                                        ; $55D2: $A7
@@ -307,7 +307,7 @@ jr_005_574A:
     xor  a                                        ; $575E: $AF
     ld   [$C158], a                               ; $575F: $EA $58 $C1
     call PlayBombExplosionSfx                     ; $5762: $CD $4B $0C
-    ld   hl, wEntitiesUnknowTableG                ; $5765: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $5765: $21 $00 $C3
     add  hl, bc                                   ; $5768: $09
     ld   [hl], $FF                                ; $5769: $36 $FF
     jp   IncrementEntityState                     ; $576B: $C3 $12 $3B

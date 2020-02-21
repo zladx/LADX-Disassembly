@@ -574,7 +574,7 @@ label_005_4335:
 
     call GetEntityTransitionCountdown             ; $436E: $CD $05 $0C
     ld   [hl], b                                  ; $4371: $70
-    ld   hl, wEntitiesUnknowTableG                ; $4372: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $4372: $21 $00 $C3
     add  hl, bc                                   ; $4375: $09
     ld   a, [hl]                                  ; $4376: $7E
     and  a                                        ; $4377: $A7

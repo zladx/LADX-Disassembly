@@ -174,7 +174,7 @@ jr_006_7197:
     ld   a, $1A                                   ; $719B: $3E $1A
     ldh  [hJingle], a                             ; $719D: $E0 $F2
     call func_006_64C6                            ; $719F: $CD $C6 $64
-    ld   hl, wEntitiesUnknowTableG                ; $71A2: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $71A2: $21 $00 $C3
     add  hl, bc                                   ; $71A5: $09
     ld   a, [hl]                                  ; $71A6: $7E
     and  a                                        ; $71A7: $A7

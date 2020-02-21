@@ -46,7 +46,7 @@ ResetEntity::
     ld   hl, wEntitiesPrivateCountdown1Table      ; $403F: $21 $F0 $C2
     add  hl, bc                                   ; $4042: $09
     ld   [hl], b                                  ; $4043: $70
-    ld   hl, wEntitiesUnknowTableG                ; $4044: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $4044: $21 $00 $C3
     add  hl, bc                                   ; $4047: $09
     ld   [hl], b                                  ; $4048: $70
     ld   hl, wEntitiesPosZTable                   ; $4049: $21 $10 $C3
@@ -891,7 +891,7 @@ jr_015_4816:
     call SetEntitySpriteVariant                   ; $481E: $CD $0C $3B
     ld   [$D228], a                               ; $4821: $EA $28 $D2
     call func_015_4743                            ; $4824: $CD $43 $47
-    ld   hl, wEntitiesUnknowTableG                ; $4827: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $4827: $21 $00 $C3
     add  hl, bc                                   ; $482A: $09
     ld   a, [hl]                                  ; $482B: $7E
     and  a                                        ; $482C: $A7
@@ -4044,7 +4044,7 @@ func_015_60D4::
     xor  a                                        ; $60E3: $AF
     ld   [$D3D6], a                               ; $60E4: $EA $D6 $D3
     ld   e, $0C                                   ; $60E7: $1E $0C
-    ld   hl, wEntitiesUnknowTableG                ; $60E9: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $60E9: $21 $00 $C3
     add  hl, bc                                   ; $60EC: $09
     ld   a, [hl]                                  ; $60ED: $7E
     and  a                                        ; $60EE: $A7
@@ -5101,7 +5101,7 @@ func_015_68E7::
     ld   [hl], $90                                ; $6907: $36 $90
     xor  a                                        ; $6909: $AF
     ld   [$D223], a                               ; $690A: $EA $23 $D2
-    ld   hl, wEntitiesUnknowTableG                ; $690D: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $690D: $21 $00 $C3
     add  hl, bc                                   ; $6910: $09
     ld   [hl], $3F                                ; $6911: $36 $3F
     ret                                           ; $6913: $C9
@@ -5545,7 +5545,7 @@ Data_015_6E23::
     db   $03, $02, $01, $00, $00, $00, $00, $00
 
 FinalNightmareForm6Handler::
-    ld   hl, wEntitiesUnknowTableG                ; $6E2B: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $6E2B: $21 $00 $C3
     add  hl, bc                                   ; $6E2E: $09
     ld   a, [hl]                                  ; $6E2F: $7E
     and  a                                        ; $6E30: $A7

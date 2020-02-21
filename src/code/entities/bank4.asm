@@ -932,7 +932,7 @@ jr_004_5273:
     pop  bc                                       ; $52C8: $C1
 
 jr_004_52C9:
-    ld   hl, wEntitiesUnknowTableG                ; $52C9: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $52C9: $21 $00 $C3
     add  hl, bc                                   ; $52CC: $09
     ld   a, [hl]                                  ; $52CD: $7E
     and  a                                        ; $52CE: $A7
@@ -1632,7 +1632,7 @@ MoldormEntityActiveHandler::
     cp   $02                                      ; $57A2: $FE $02
     jr   c, jr_004_57AE                           ; $57A4: $38 $08
 
-    ld   hl, wEntitiesUnknowTableG                ; $57A6: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $57A6: $21 $00 $C3
     add  hl, bc                                   ; $57A9: $09
     ld   a, [hl]                                  ; $57AA: $7E
     and  a                                        ; $57AB: $A7
@@ -2219,7 +2219,7 @@ jr_004_5C16:
 
     call IncrementEntityState                     ; $5C38: $CD $12 $3B
     ld   [hl], b                                  ; $5C3B: $70
-    ld   hl, wEntitiesUnknowTableG                ; $5C3C: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $5C3C: $21 $00 $C3
     add  hl, bc                                   ; $5C3F: $09
     ld   [hl], $30                                ; $5C40: $36 $30
 
@@ -2251,7 +2251,7 @@ func_004_5C63::
     call func_004_6DCA                            ; $5C63: $CD $CA $6D
     call func_004_6E03                            ; $5C66: $CD $03 $6E
     call func_004_5D08                            ; $5C69: $CD $08 $5D
-    ld   hl, wEntitiesUnknowTableG                ; $5C6C: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $5C6C: $21 $00 $C3
     add  hl, bc                                   ; $5C6F: $09
     ld   a, [hl]                                  ; $5C70: $7E
     and  a                                        ; $5C71: $A7
@@ -3358,7 +3358,7 @@ jr_004_63B9:
     cp   $30                                      ; $63C1: $FE $30
     jr   c, jr_004_63DE                           ; $63C3: $38 $19
 
-    ld   hl, wEntitiesUnknowTableG                ; $63C5: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $63C5: $21 $00 $C3
     add  hl, bc                                   ; $63C8: $09
     ld   a, [hl]                                  ; $63C9: $7E
     and  a                                        ; $63CA: $A7
@@ -3367,7 +3367,7 @@ jr_004_63B9:
     ld   hl, wEntitiesSpeedYTable                 ; $63CD: $21 $50 $C2
     add  hl, bc                                   ; $63D0: $09
     ld   [hl], $FA                                ; $63D1: $36 $FA
-    ld   hl, wEntitiesUnknowTableG                ; $63D3: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $63D3: $21 $00 $C3
     add  hl, bc                                   ; $63D6: $09
     ld   [hl], $50                                ; $63D7: $36 $50
     call IsEntityUnknownFZero                     ; $63D9: $CD $00 $0C

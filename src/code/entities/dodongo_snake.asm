@@ -140,7 +140,7 @@ jr_005_68F6:
     ld   [hl], b                                  ; $6937: $70
     call IncrementEntityState                     ; $6938: $CD $12 $3B
     ld   [hl], $02                                ; $693B: $36 $02
-    ld   hl, wEntitiesUnknowTableG                ; $693D: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $693D: $21 $00 $C3
     add  hl, bc                                   ; $6940: $09
     ld   [hl], $60                                ; $6941: $36 $60
     ld   hl, wEntitiesFlashCountdownTable         ; $6943: $21 $20 $C4
@@ -224,7 +224,7 @@ Data_005_69AD::
     db   $00, $00, $F4, $0C
 
 func_005_69B1::
-    ld   hl, wEntitiesUnknowTableG                ; $69B1: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $69B1: $21 $00 $C3
     add  hl, bc                                   ; $69B4: $09
     ld   a, [hl]                                  ; $69B5: $7E
     and  a                                        ; $69B6: $A7
@@ -309,7 +309,7 @@ func_005_6A38::
     call IsEntityUnknownFZero                     ; $6A38: $CD $00 $0C
     ld   hl, wRoomTransitionState                 ; $6A3B: $21 $24 $C1
     or   [hl]                                     ; $6A3E: $B6
-    ld   hl, wEntitiesUnknowTableG                ; $6A3F: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $6A3F: $21 $00 $C3
     add  hl, bc                                   ; $6A42: $09
     or   [hl]                                     ; $6A43: $B6
     jp   nz, label_005_6C77                       ; $6A44: $C2 $77 $6C
@@ -458,7 +458,7 @@ Data_005_6C0D::
     db   $6E, $40, $F9, $05, $6E, $60, $F9, $0D, $6C, $60
 
 label_005_6C77:
-    ld   hl, wEntitiesUnknowTableG                ; $6C77: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $6C77: $21 $00 $C3
     add  hl, bc                                   ; $6C7A: $09
     ld   a, [hl]                                  ; $6C7B: $7E
     cp   $08                                      ; $6C7C: $FE $08

@@ -1072,7 +1072,7 @@ UpdateEntityTimers::
 .privateCountdown1End
 
     ; If private countdown 2 > 0, decrement it
-    ld   hl, wEntitiesUnknowTableG                ; $4DBA: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $4DBA: $21 $00 $C3
     add  hl, bc                                   ; $4DBD: $09
     ld   a, [hl]                                  ; $4DBE: $7E
     and  a                                        ; $4DBF: $A7

@@ -82,7 +82,7 @@ func_005_7C36::
     ret                                           ; $7C51: $C9
 
 func_005_7C52::
-    ld   hl, wEntitiesUnknowTableG                ; $7C52: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7C52: $21 $00 $C3
     add  hl, bc                                   ; $7C55: $09
     ld   a, [hl]                                  ; $7C56: $7E
     and  a                                        ; $7C57: $A7
@@ -171,7 +171,7 @@ func_005_7CD5::
     call IncrementEntityState                     ; $7CD5: $CD $12 $3B
     ld   [hl], $03                                ; $7CD8: $36 $03
     call ClearEntitySpeed                         ; $7CDA: $CD $7F $3D
-    ld   hl, wEntitiesUnknowTableG                ; $7CDD: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7CDD: $21 $00 $C3
     add  hl, bc                                   ; $7CE0: $09
     ld   [hl], $40                                ; $7CE1: $36 $40
     ld   a, $01                                   ; $7CE3: $3E $01
@@ -379,7 +379,7 @@ jr_005_7E02:
     jp   SetEntitySpriteVariant                   ; $7E07: $C3 $0C $3B
 
 func_005_7E0A::
-    ld   hl, wEntitiesUnknowTableG                ; $7E0A: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7E0A: $21 $00 $C3
     add  hl, bc                                   ; $7E0D: $09
     ld   a, [hl]                                  ; $7E0E: $7E
     and  a                                        ; $7E0F: $A7
@@ -402,7 +402,7 @@ jr_005_7E13:
     call SetEntitySpriteVariant                   ; $7E26: $CD $0C $3B
     call IncrementEntityState                     ; $7E29: $CD $12 $3B
     ld   [hl], $01                                ; $7E2C: $36 $01
-    ld   hl, wEntitiesUnknowTableG                ; $7E2E: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7E2E: $21 $00 $C3
     add  hl, bc                                   ; $7E31: $09
     ld   [hl], $40                                ; $7E32: $36 $40
     ret                                           ; $7E34: $C9

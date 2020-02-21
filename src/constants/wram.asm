@@ -494,8 +494,8 @@ wEntitiesTransitionCountdownTable:: ; C2E0
 wEntitiesPrivateCountdown1Table:: ; C2F0
   ds $10
 
-; Auxiliary countdown 2?
-wEntitiesUnknowTableG:: ; C300
+; Entity-specific countdown 2
+wEntitiesPrivateCountdown2Table:: ; C300
   ds $10
 
 wEntitiesPosZTable:: ; C310

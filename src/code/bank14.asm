@@ -1009,31 +1009,41 @@ jr_014_4D6F:
     ld   [$DDD7], a                               ; $4D6F: $EA $D7 $DD
     ret                                           ; $4D72: $C9
 
-func_014_4D73::
+; Decrement various countdowns for this entity
+; (if in a gameplay state that requires it)
+;
+; Input:
+;   bc   entity index
+UpdateEntityTimers::
     xor  a                                        ; $4D73: $AF
     ldh  [$FFBE], a                               ; $4D74: $E0 $BE
     ldh  [hActiveEntityTilesOffset], a            ; $4D76: $E0 $F5
+
     ld   a, [wGameplayType]                       ; $4D78: $FA $95 $DB
-    cp   $07                                      ; $4D7B: $FE $07
-    jr   z, jr_014_4DED                           ; $4D7D: $28 $6E
+    cp   GAMEPLAY_MINI_MAP                        ; $4D7B: $FE $07
+    jr   z, .done                                 ; $4D7D: $28 $6E
 
-    cp   $01                                      ; $4D7F: $FE $01
-    jr   z, jr_014_4D97                           ; $4D81: $28 $14
+    cp   GAMEPLAY_CREDITS                         ; $4D7F: $FE $01
+    jr   z, .jr_014_4D97                          ; $4D81: $28 $14
 
-    cp   $0B                                      ; $4D83: $FE $0B
-    jr   nz, jr_014_4DED                          ; $4D85: $20 $66
+    cp   GAMEPLAY_WORLD                           ; $4D83: $FE $0B
+    jr   nz, .done                                ; $4D85: $20 $66
 
     ld   a, [wTransitionSequenceCounter]          ; $4D87: $FA $6B $C1
     cp   $04                                      ; $4D8A: $FE $04
-    jr   z, jr_014_4D97                           ; $4D8C: $28 $09
-
+    jr   z, .jr_014_4D97                          ; $4D8C: $28 $09
     ld   hl, wEntitiesTypeTable                   ; $4D8E: $21 $A0 $C3
     add  hl, bc                                   ; $4D91: $09
     ld   a, [hl]                                  ; $4D92: $7E
-    cp   $83                                      ; $4D93: $FE $83
-    jr   nz, jr_014_4DED                          ; $4D95: $20 $56
+    cp   ENTITY_DREAM_SHRINE_BED                  ; $4D93: $FE $83
+    jr   nz, .done                                ; $4D95: $20 $56
+.jr_014_4D97
 
-jr_014_4D97:
+    ; If transitioning between rooms,
+    ; or the inventory is appearing,
+    ; or a dialog is appearing,
+    ; or Link is playing the ocarina,
+    ; return.
     ld   a, [wRoomTransitionState]                ; $4D97: $FA $24 $C1
     ld   hl, wInventoryAppearing                  ; $4D9A: $21 $4F $C1
     or   [hl]                                     ; $4D9D: $B6
@@ -1041,73 +1051,74 @@ jr_014_4D97:
     or   [hl]                                     ; $4DA1: $B6
     ld   hl, wLinkPlayingOcarinaCountdown                                ; $4DA2: $21 $66 $C1
     or   [hl]                                     ; $4DA5: $B6
-    jr   nz, jr_014_4DED                          ; $4DA6: $20 $45
+    jr   nz, .done                                ; $4DA6: $20 $45
 
-    ld   hl, wEntitiesTransitionCountdownTable           ; $4DA8: $21 $E0 $C2
+    ; If transition countdown > 0, decrement it
+    ld   hl, wEntitiesTransitionCountdownTable    ; $4DA8: $21 $E0 $C2
     add  hl, bc                                   ; $4DAB: $09
     ld   a, [hl]                                  ; $4DAC: $7E
     and  a                                        ; $4DAD: $A7
-    jr   z, jr_014_4DB1                           ; $4DAE: $28 $01
-
+    jr   z, .transitionCountdownEnd               ; $4DAE: $28 $01
     dec  [hl]                                     ; $4DB0: $35
+.transitionCountdownEnd
 
-jr_014_4DB1:
+    ; If private countdown 1 > 0, decrement it
     ld   hl, wEntitiesUnknowTableF                ; $4DB1: $21 $F0 $C2
     add  hl, bc                                   ; $4DB4: $09
     ld   a, [hl]                                  ; $4DB5: $7E
     and  a                                        ; $4DB6: $A7
-    jr   z, jr_014_4DBA                           ; $4DB7: $28 $01
-
+    jr   z, .privateCountdown1End                 ; $4DB7: $28 $01
     dec  [hl]                                     ; $4DB9: $35
+.privateCountdown1End
 
-jr_014_4DBA:
-    ld   hl, $C300                                ; $4DBA: $21 $00 $C3
+    ; If private countdown 2 > 0, decrement it
+    ld   hl, wEntitiesUnknowTableG                ; $4DBA: $21 $00 $C3
     add  hl, bc                                   ; $4DBD: $09
     ld   a, [hl]                                  ; $4DBE: $7E
     and  a                                        ; $4DBF: $A7
-    jr   z, jr_014_4DC3                           ; $4DC0: $28 $01
-
+    jr   z, .privateCountdown2End                 ; $4DC0: $28 $01
     dec  [hl]                                     ; $4DC2: $35
+.privateCountdown2End
 
-jr_014_4DC3:
+    ; If wEntitiesUnknowTableV > 0, decrement it
     ld   hl, wEntitiesUnknowTableV                ; $4DC3: $21 $80 $C4
     add  hl, bc                                   ; $4DC6: $09
     ld   a, [hl]                                  ; $4DC7: $7E
     and  a                                        ; $4DC8: $A7
-    jr   z, jr_014_4DCC                           ; $4DC9: $28 $01
-
+    jr   z, .unknownCountdownEnd                  ; $4DC9: $28 $01
     dec  [hl]                                     ; $4DCB: $35
+.unknownCountdownEnd
 
-jr_014_4DCC:
+    ; Every 4 frames, if entity drop timer > 0, decrement it
     ldh  a, [hFrameCounter]                       ; $4DCC: $F0 $E7
     and  $03                                      ; $4DCE: $E6 $03
-    jr   nz, jr_014_4DDB                          ; $4DD0: $20 $09
+    jr   nz, .dropTimerEnd                        ; $4DD0: $20 $0
 
     ld   hl, wEntitiesDropTimerTable                                ; $4DD2: $21 $50 $C4
     add  hl, bc                                   ; $4DD5: $09
     ld   a, [hl]                                  ; $4DD6: $7E
     and  a                                        ; $4DD7: $A7
-    jr   z, jr_014_4DDB                           ; $4DD8: $28 $01
-
+    jr   z, .dropTimerEnd                         ; $4DD8: $28 $0
     dec  [hl]                                     ; $4DDA: $35
+.dropTimerEnd
 
-jr_014_4DDB:
+    ; If flash countdown > 0, decrement it
     ld   hl, wEntitiesFlashCountdownTable         ; $4DDB: $21 $20 $C4
     add  hl, bc                                   ; $4DDE: $09
     ld   a, [hl]                                  ; $4DDF: $7E
     and  a                                        ; $4DE0: $A7
-    jr   z, jr_014_4DE4                           ; $4DE1: $28 $01
-
+    jr   z, .flashCountdownEnd                    ; $4DE1: $28 $01
     dec  [hl]                                     ; $4DE3: $35
+.flashCountdownEnd
 
-jr_014_4DE4:
+    ; $FFED = entity flash countdown
     sla  a                                        ; $4DE4: $CB $27
     sla  a                                        ; $4DE6: $CB $27
     and  $10                                      ; $4DE8: $E6 $10
     ldh  [$FFED], a                               ; $4DEA: $E0 $ED
     ret                                           ; $4DEC: $C9
 
-jr_014_4DED:
+.done
     xor  a                                        ; $4DED: $AF
     ldh  [$FFED], a                               ; $4DEE: $E0 $ED
     ret                                           ; $4DF0: $C9

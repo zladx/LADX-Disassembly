@@ -588,6 +588,8 @@ ds $10
 wEntitiesUnknowTableS:: ; C400
   ds $10
 
+; Invulnerability countdown?
+; Invulnerability of an entity after taking a hit
 wEntitiesUnknowTableT:: ; C410
   ds $10
 
@@ -622,8 +624,7 @@ wEntitiesUnknowTableI:: ; C470
   ; Possible values: 02, 03
   ds $10
 
-; Enemy flags?
-; Would be always 0 for NPCs and non-enemies?
+; Some kind of countdown
 wEntitiesUnknowTableV:: ; C480
   ds $10
 

@@ -72,11 +72,11 @@ func_005_6D42::
     ld   [$D755], a                               ; $6D73: $EA $55 $D7
     ld   a, $B0                                   ; $6D76: $3E $B0
     ld   [$D756], a                               ; $6D78: $EA $56 $D7
-    call IsEntityPrivateCountdown1Zero            ; $6D7B: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $6D7B: $CD $00 $0C
 
 jr_005_6D7E:
     ld   [hl], $1F                                ; $6D7E: $36 $1F
-    call IsEntityDropTimerZero                                ; $6D80: $CD $FB $0B
+    call GetEntityDropTimer                       ; $6D80: $CD $FB $0B
     ld   [hl], $B0                                ; $6D83: $36 $B0
     call label_3E34                               ; $6D85: $CD $34 $3E
     ld   hl, wEntitiesStatusTable                 ; $6D88: $21 $80 $C2
@@ -456,7 +456,7 @@ Data_005_70E7::
     db   $00, $00, $01, $01
 
 func_005_70EB::
-    call IsEntityDropTimerZero                                ; $70EB: $CD $FB $0B
+    call GetEntityDropTimer                       ; $70EB: $CD $FB $0B
     ld   a, [$D200]                               ; $70EE: $FA $00 $D2
     and  a                                        ; $70F1: $A7
     jr   z, jr_005_70F6                           ; $70F2: $28 $02
@@ -519,7 +519,7 @@ jr_005_70F6:
     pop  bc                                       ; $7150: $C1
 
 jr_005_7151:
-    call IsEntityPrivateCountdown1Zero            ; $7151: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $7151: $CD $00 $0C
     jr   z, jr_005_7167                           ; $7154: $28 $11
 
     rra                                           ; $7156: $1F
@@ -940,7 +940,7 @@ jr_005_7395:
     ld   hl, wEntitiesPrivateState1Table          ; $73E6: $21 $B0 $C2
     add  hl, bc                                   ; $73E9: $09
     ld   [hl], $02                                ; $73EA: $36 $02
-    call IsEntityDropTimerZero                                ; $73EC: $CD $FB $0B
+    call GetEntityDropTimer                       ; $73EC: $CD $FB $0B
     ld   [hl], $30                                ; $73EF: $36 $30
     ld   hl, wEntitiesPrivateCountdown2Table      ; $73F1: $21 $00 $C3
     add  hl, bc                                   ; $73F4: $09
@@ -1241,7 +1241,7 @@ func_005_75D1::
     call func_005_7A3A                            ; $75D7: $CD $3A $7A
     ld   a, $01                                   ; $75DA: $3E $01
     ld   [$D200], a                               ; $75DC: $EA $00 $D2
-    call IsEntityDropTimerZero                                ; $75DF: $CD $FB $0B
+    call GetEntityDropTimer                       ; $75DF: $CD $FB $0B
     cp   $10                                      ; $75E2: $FE $10
     jr   nc, jr_005_7621                          ; $75E4: $30 $3B
 
@@ -1448,7 +1448,7 @@ jr_005_7721:
     ld   [hl], $10                                ; $772E: $36 $10
 
 jr_005_7730:
-    call IsEntityPrivateCountdown1Zero            ; $7730: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $7730: $CD $00 $0C
     jr   nz, jr_005_775E                          ; $7733: $20 $29
 
     ld   [hl], $04                                ; $7735: $36 $04

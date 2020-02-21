@@ -31,7 +31,7 @@ jr_006_681A:
     and  a                                        ; $6823: $A7
     ret  z                                        ; $6824: $C8
 
-    call IsEntityPrivateCountdown1Zero            ; $6825: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $6825: $CD $00 $0C
     ret  nz                                       ; $6828: $C0
 
 jr_006_6829:

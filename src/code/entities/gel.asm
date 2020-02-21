@@ -176,7 +176,7 @@ jr_006_7D0B:
 
 func_006_7D0F::
     call func_006_6541                            ; $7D0F: $CD $41 $65
-    call IsEntityPrivateCountdown1Zero            ; $7D12: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $7D12: $CD $00 $0C
     ret  nz                                       ; $7D15: $C0
 
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D16: $21 $10 $C4

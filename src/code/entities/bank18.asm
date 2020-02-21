@@ -843,7 +843,7 @@ jr_018_471D:
     ld   [$D214], a                               ; $471F: $EA $14 $D2
 
 jr_018_4722:
-    call IsEntityPrivateCountdown1Zero            ; $4722: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $4722: $CD $00 $0C
     ld   [hl], $28                                ; $4725: $36 $28
     ret                                           ; $4727: $C9
 
@@ -933,7 +933,7 @@ func_018_4833::
     ld   a, $02                                   ; $4846: $3E $02
     call label_3DA0                               ; $4848: $CD $A0 $3D
     call CopyEntityPositionToActivePosition       ; $484B: $CD $8A $3D
-    call IsEntityPrivateCountdown1Zero            ; $484E: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $484E: $CD $00 $0C
     jr   z, jr_018_4857                           ; $4851: $28 $04
 
     ld   a, $03                                   ; $4853: $3E $03
@@ -964,7 +964,7 @@ jr_018_485C:
     call RenderActiveEntitySpritesRect            ; $486F: $CD $E6 $3C
     ld   a, $09                                   ; $4872: $3E $09
     call label_3DA0                               ; $4874: $CD $A0 $3D
-    call IsEntityPrivateCountdown1Zero            ; $4877: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $4877: $CD $00 $0C
     ret  z                                        ; $487A: $C8
 
     ldh  a, [hActiveEntityPosX]                   ; $487B: $F0 $EE
@@ -2932,7 +2932,7 @@ WalrusState1Handler::
     ld   a, $2F                                   ; $55CA: $3E $2F
     ld   [wActiveMusicTrack], a                   ; $55CC: $EA $68 $D3
     ld   [$C3C8], a                               ; $55CF: $EA $C8 $C3
-    call IsEntityDropTimerZero                    ; $55D2: $CD $FB $0B
+    call GetEntityDropTimer                       ; $55D2: $CD $FB $0B
     ld   [hl], $50                                ; $55D5: $36 $50
     ret                                           ; $55D7: $C9
 
@@ -2945,7 +2945,7 @@ WalrusState2Handler::
     ld   [wC167], a                               ; $55E1: $EA $67 $C1
     ld   a, $02                                   ; $55E4: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $55E6: $E0 $A1
-    call IsEntityDropTimerZero                    ; $55E8: $CD $FB $0B
+    call GetEntityDropTimer                       ; $55E8: $CD $FB $0B
     jr   nz, jr_018_55F2                          ; $55EB: $20 $05
 
     ld   [hl], $C0                                ; $55ED: $36 $C0
@@ -2993,7 +2993,7 @@ WalrusState3Handler::
     ld   [wC167], a                               ; $5678: $EA $67 $C1
     ld   a, $02                                   ; $567B: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $567D: $E0 $A1
-    call IsEntityDropTimerZero                    ; $567F: $CD $FB $0B
+    call GetEntityDropTimer                       ; $567F: $CD $FB $0B
     jr   nz, jr_018_5698                          ; $5682: $20 $14
 
     ld   [$C3C8], a                               ; $5684: $EA $C8 $C3
@@ -3952,7 +3952,7 @@ jr_018_5CEF:
     ld   hl, wEntitiesPosZTable                   ; $5D2B: $21 $10 $C3
     add  hl, bc                                   ; $5D2E: $09
     ld   [hl], e                                  ; $5D2F: $73
-    call IsEntityPrivateCountdown1Zero            ; $5D30: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $5D30: $CD $00 $0C
     ld   hl, wRoomTransitionState                 ; $5D33: $21 $24 $C1
     or   [hl]                                     ; $5D36: $B6
     jr   nz, jr_018_5D7D                          ; $5D37: $20 $44
@@ -5107,11 +5107,11 @@ BlainoEntityHandler::
     jr   nz, jr_018_64EA                          ; $64E2: $20 $06
 
     inc  [hl]                                     ; $64E4: $34
-    call IsEntityDropTimerZero                    ; $64E5: $CD $FB $0B
+    call GetEntityDropTimer                       ; $64E5: $CD $FB $0B
     ld   [hl], $20                                ; $64E8: $36 $20
 
 jr_018_64EA:
-    call IsEntityPrivateCountdown1Zero            ; $64EA: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $64EA: $CD $00 $0C
     jr   z, jr_018_650A                           ; $64ED: $28 $1B
 
     ld   a, [$C13E]                               ; $64EF: $FA $3E $C1
@@ -5220,14 +5220,14 @@ jr_018_6588:
     jp   SetEntitySpriteVariant                   ; $6593: $C3 $0C $3B
 
 func_018_6596::
-    call IsEntityPrivateCountdown1Zero            ; $6596: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $6596: $CD $00 $0C
     jr   z, jr_018_659F                           ; $6599: $28 $04
 
     ld   a, $03                                   ; $659B: $3E $03
     jr   label_018_65B8                           ; $659D: $18 $19
 
 jr_018_659F:
-    call IsEntityDropTimerZero                    ; $659F: $CD $FB $0B
+    call GetEntityDropTimer                       ; $659F: $CD $FB $0B
     jr   nz, jr_018_65CE                          ; $65A2: $20 $2A
 
     ld   hl, wEntitiesPrivateState1Table          ; $65A4: $21 $B0 $C2
@@ -5414,7 +5414,7 @@ jr_018_6703:
     ld   hl, wEntitiesSpeedXTable                 ; $6703: $21 $40 $C2
     add  hl, bc                                   ; $6706: $09
     ld   [hl], e                                  ; $6707: $73
-    call IsEntityPrivateCountdown1Zero            ; $6708: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $6708: $CD $00 $0C
     jr   z, jr_018_6724                           ; $670B: $28 $17
 
     call func_018_7EB2                            ; $670D: $CD $B2 $7E
@@ -5441,7 +5441,7 @@ jr_018_6729:
 label_018_672A:
     xor  a                                        ; $672A: $AF
     ld   [$D205], a                               ; $672B: $EA $05 $D2
-    call IsEntityDropTimerZero                    ; $672E: $CD $FB $0B
+    call GetEntityDropTimer                       ; $672E: $CD $FB $0B
     call GetRandomByte                            ; $6731: $CD $0D $28
     and  $0F                                      ; $6734: $E6 $0F
     add  $0C                                      ; $6736: $C6 $0C
@@ -8153,7 +8153,7 @@ jr_018_79F0:
     ld   hl, wEntitiesStateTable                  ; $7A02: $21 $90 $C2
     add  hl, bc                                   ; $7A05: $09
     ld   [hl], $01                                ; $7A06: $36 $01
-    call IsEntityDropTimerZero                    ; $7A08: $CD $FB $0B
+    call GetEntityDropTimer                       ; $7A08: $CD $FB $0B
     ld   [hl], $80                                ; $7A0B: $36 $80
     ld   hl, wEntitiesPosXTable                   ; $7A0D: $21 $00 $C2
     add  hl, bc                                   ; $7A10: $09
@@ -8207,7 +8207,7 @@ label_018_7A4B:
     jp   label_3B7B                               ; $7A5A: $C3 $7B $3B
 
 label_018_7A5D:
-    call IsEntityDropTimerZero                    ; $7A5D: $CD $FB $0B
+    call GetEntityDropTimer                       ; $7A5D: $CD $FB $0B
     jr   nz, jr_018_7AB9                          ; $7A60: $20 $57
 
     ld   hl, wEntitiesPosXTable                   ; $7A62: $21 $00 $C2

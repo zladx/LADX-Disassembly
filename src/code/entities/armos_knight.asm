@@ -114,7 +114,7 @@ jr_006_5361:
     ld   [hl], b                                  ; $5386: $70
 
 jr_006_5387:
-    call IsEntityPrivateCountdown1Zero            ; $5387: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $5387: $CD $00 $0C
     jr   z, jr_006_5394                           ; $538A: $28 $08
 
     ld   a, $02                                   ; $538C: $3E $02
@@ -364,7 +364,7 @@ ArmosKnightState6Handler::
     and  a                                        ; $550A: $A7
     jr   nz, jr_006_5512                          ; $550B: $20 $05
 
-    call IsEntityPrivateCountdown1Zero            ; $550D: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $550D: $CD $00 $0C
     ld   [hl], $40                                ; $5510: $36 $40
 
 jr_006_5512:

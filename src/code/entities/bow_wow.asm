@@ -225,7 +225,7 @@ func_005_4180::
     call GetEntityTransitionCountdown             ; $4180: $CD $05 $0C
     jr   z, jr_005_41B1                           ; $4183: $28 $2C
 
-    call IsEntityPrivateCountdown1Zero            ; $4185: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $4185: $CD $00 $0C
     jr   nz, jr_005_41B0                          ; $4188: $20 $26
 
     call GetRandomByte                            ; $418A: $CD $0D $28
@@ -272,7 +272,7 @@ jr_005_41BF:
     jp   ApplyVectorTowardsLink_trampoline        ; $41CC: $C3 $AA $3B
 
 func_005_41CF::
-    call IsEntityPrivateCountdown1Zero            ; $41CF: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $41CF: $CD $00 $0C
     jr   nz, jr_005_41DA                          ; $41D2: $20 $06
 
     ld   [hl], $20                                ; $41D4: $36 $20

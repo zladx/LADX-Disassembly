@@ -692,21 +692,35 @@ UpdateLinkWalkingAnimation_trampoline::
     call UpdateLinkWalkingAnimation
     jp   ReloadSavedBank
 
-IsEntityDropTimerZero::
+; Retrieve the drop timer for the given entity.
+; Input:
+;   bc   entity index
+; Output:
+;   hl   address of the drop timer for this entity
+;   a    value of the drop timer for this entity
+;   z    whether the drop timer is zero
+GetEntityDropTimer::
     ld   hl, wEntitiesDropTimerTable
     jr   IsZero
 
-; TODO: rename
-IsEntityPrivateCountdown1Zero::
+; Retrieve the private counter 1 for the given entity.
+; Input:
+;   bc   entity index
+; Output:
+;   hl   address of the private counter for this entity
+;   a    value of the private counter for this entity
+;   z    whether the private counter is zero
+GetEntityPrivateCountdown1::
     ld   hl, wEntitiesPrivateCountdown1Table
     jr   IsZero
 
-; Test if the frame counter for the given entity is 0
+; Retrieve the transition counter for the given entity.
 ; Input:
-;  - bc: entity number
+;   bc   entity index
 ; Output:
-;  - a: the value read
-;  - z: whether the value equal to zero
+;   hl   address of the transition counter for this entity
+;   a    value of the transition counter for this entity
+;   z    whether the transition counter is zero
 GetEntityTransitionCountdown::
     ld   hl, wEntitiesTransitionCountdownTable
 

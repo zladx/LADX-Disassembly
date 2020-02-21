@@ -14,7 +14,7 @@ LikeLikeEntityHandler::
 ._01 dw LikeLikeState1Handler
 
 LikeLikeState0Handler::
-    call IsEntityDropTimerZero                    ; $7DF2: $CD $FB $0B
+    call GetEntityDropTimer                       ; $7DF2: $CD $FB $0B
     jr   nz, jr_006_7E06                          ; $7DF5: $20 $0F
 
     call label_3B44                               ; $7DF7: $CD $44 $3B
@@ -45,7 +45,7 @@ LikeLikeState1Handler::
     cp   $08                                      ; $7E18: $FE $08
     jr   c, jr_006_7E27                           ; $7E1A: $38 $0B
 
-    call IsEntityDropTimerZero                    ; $7E1C: $CD $FB $0B
+    call GetEntityDropTimer                       ; $7E1C: $CD $FB $0B
     ld   [hl], $15                                ; $7E1F: $36 $15
     ld   hl, wEntitiesUnknownTableD               ; $7E21: $21 $D0 $C2
     add  hl, bc                                   ; $7E24: $09

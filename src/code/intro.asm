@@ -1062,7 +1062,7 @@ label_74CF::
 
 RenderIntroEntities::
     xor  a
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ld   c, $02  ; Entities count
     ld   b, $00
 
@@ -1272,9 +1272,9 @@ label_7640::
     add  hl, de
     ld   c, $06
     call RenderActiveEntitySpritesRect
-    ld   a, [$C3C0]
+    ld   a, [wOAMNextAvailableSlot]
     add  a, $18
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ret
 
 IntroMarinSpriteVariants::
@@ -1298,9 +1298,9 @@ RenderIntroMarin::
     ld   de, IntroMarinSpriteVariants
     call RenderActiveEntitySpritesPair
 
-    ld   a, [$C3C0]
+    ld   a, [wOAMNextAvailableSlot]
     add  a, $08
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ldh  a, [hActiveEntityState]
 
     JP_TABLE
@@ -1536,9 +1536,9 @@ label_77ED::
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   de, label_77BD
     call RenderActiveEntitySpritesPair
-    ld   a, [$C3C0]
+    ld   a, [wOAMNextAvailableSlot]
     add  a, $08
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ret
 
 label_7808::
@@ -1834,9 +1834,9 @@ label_7A36::
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   de, data_7A27
     call RenderActiveEntitySpritesPair
-    ld   a, [$C3C0]
+    ld   a, [wOAMNextAvailableSlot]
     add  a, $08
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
 
 label_7A47::
     ldh  a, [hActiveEntityState]

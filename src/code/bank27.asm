@@ -1,7 +1,7 @@
 func_027_7240::
     push bc                                       ; $7240: $C5
     push hl                                       ; $7241: $E5
-    ld   a, [$C3C0]                               ; $7242: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $7242: $FA $C0 $C3
     ld   e, a                                     ; $7245: $5F
     ld   d, $00                                   ; $7246: $16 $00
     ld   hl, wLinkOAMBuffer                       ; $7248: $21 $00 $C0
@@ -35,7 +35,7 @@ jr_027_7255:
     jr   nz, jr_027_7255                          ; $7268: $20 $EB
 
     pop  bc                                       ; $726A: $C1
-    ld   a, [$C3C0]                               ; $726B: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $726B: $FA $C0 $C3
     add  c                                        ; $726E: $81
     cp   $A0                                      ; $726F: $FE $A0
     jr   c, jr_027_7274                           ; $7271: $38 $01
@@ -43,7 +43,7 @@ jr_027_7255:
     xor  a                                        ; $7273: $AF
 
 jr_027_7274:
-    ld   [$C3C0], a                               ; $7274: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7274: $EA $C0 $C3
     ld   a, [wActiveEntityIndex]                  ; $7277: $FA $23 $C1
     ld   c, a                                     ; $727A: $4F
     ret                                           ; $727B: $C9
@@ -340,7 +340,7 @@ Data_027_7746::
 
 func_027_774C::
     xor  a                                        ; $774C: $AF
-    ld   [$C3C0], a                               ; $774D: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $774D: $EA $C0 $C3
     ld   a, [$D003]                               ; $7750: $FA $03 $D0
     sla  a                                        ; $7753: $CB $27
     ld   e, a                                     ; $7755: $5F
@@ -388,7 +388,7 @@ Data_027_7826::
 
 func_027_782E::
     ld   a, $6C
-    ld   [$C3C0], a                               ; $7830: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7830: $EA $C0 $C3
     ldh  a, [hFrameCounter]                       ; $7833: $F0 $E7
     and  $18                                      ; $7835: $E6 $18
     sra  a                                        ; $7837: $CB $2F
@@ -591,7 +591,7 @@ Data_027_794E::
 
 func_027_79E6::
     xor  a                                        ; $79E6: $AF
-    ld   [$C3C0], a                               ; $79E7: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $79E7: $EA $C0 $C3
     ld   hl, Data_027_794E                        ; $79EA: $21 $4E $79
     ld   c, $26                                   ; $79ED: $0E $26
     jp   label_3CE0                               ; $79EF: $C3 $E0 $3C
@@ -766,7 +766,7 @@ Data_027_7B5F::
 
 func_027_7B8F::
     xor  a                                        ; $7B8F: $AF
-    ld   [$C3C0], a                               ; $7B90: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7B90: $EA $C0 $C3
     ld   a, [$D01B]                               ; $7B93: $FA $1B $D0
     cp   $FF                                      ; $7B96: $FE $FF
     ret  z                                        ; $7B98: $C8

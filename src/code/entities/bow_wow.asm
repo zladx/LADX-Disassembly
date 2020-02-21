@@ -373,7 +373,7 @@ jr_005_4252:
 label_005_4253:
     call func_005_43A8                            ; $4253: $CD $A8 $43
     call func_005_43FE                            ; $4256: $CD $FE $43
-    ld   a, [$C3C0]                               ; $4259: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $4259: $FA $C0 $C3
     ld   e, a                                     ; $425C: $5F
     ld   d, $00                                   ; $425D: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $425F: $21 $30 $C0

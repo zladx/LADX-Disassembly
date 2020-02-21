@@ -557,8 +557,15 @@ wEntitiesSpriteVariantTable:: ; C3B0
   ; A sprite variant may use entirerly different tiles, or change only some of them.
   ds $10
 
+wOAMNextAvailableSlot::
+  ; Index of the next available OAM slot
+  ds 1 ; C3C0
+
+; OAM-related
+ds 1 ; C3C1
+
 ; Unlabeled
-ds $C3CB - $C3C0
+ds $C3CB - $C3C2
 
 wObjectAffectingBGPalette:: ; C3CB
   ; Type of the object affecting the background palette

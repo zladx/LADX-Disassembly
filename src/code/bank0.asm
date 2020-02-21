@@ -7163,7 +7163,7 @@ AnimateEntities::
     ld   hl, data_3989
     add  hl, de
     ld   a, [hl]
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     callsb func_020_4303
     xor  a
     ld   [MBC3SelectBank], a
@@ -7501,8 +7501,8 @@ RenderActiveEntitySpritesPair::
 
     push de
 
-    ; de = wDynamicOAMBuffer + [$C3C0]
-    ld   a, [$C3C0]
+    ; de = wDynamicOAMBuffer + [wOAMNextAvailableSlot]
+    ld   a, [wOAMNextAvailableSlot]
     ld   e, a
     ld   d, b
     ld   hl, wDynamicOAMBuffer
@@ -7510,13 +7510,13 @@ RenderActiveEntitySpritesPair::
     ld   e, l
     ld   d, h
 
-    ; Set OAM byte 0 (Y position)
+    ; Sprite 0: set OAM byte 0 (Y position)
     ; [de] = [$FFEC]
     ldh  a, [$FFEC]
     ld   [de], a
     inc  de
 
-    ; Set OAM byte 1 (X position)
+    ; Sprite 0: set OAM byte 1 (X position)
     ; [de] = [$FFED / 4] + [hActiveEntityPosX] - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
@@ -7541,7 +7541,7 @@ RenderActiveEntitySpritesPair::
     pop  hl
     add  hl, bc
 
-    ; Set OAM byte 2 (tile n°)
+    ; Sprite 0: set OAM byte 2 (tile n°)
     ; [de] = [hl++] + [hActiveEntityTilesOffset]
     ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
@@ -7559,7 +7559,7 @@ RenderActiveEntitySpritesPair::
 
     inc  de
 
-
+    ; Sprite 0: set OAM byte 3 (tile attribute)
     ld   a, [hli]
     push hl
     ld   hl, $FFED
@@ -7576,11 +7576,14 @@ RenderActiveEntitySpritesPair::
     or   $04
     ld   [de], a
 .gbcEnd
-
     inc  de
+
+    ; Sprite 1: set OAM byte 0 (Y position)
     ldh  a, [$FFEC]
     ld   [de], a
     inc  de
+
+    ; Sprite 1: set OAM byte 1 (X position)
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
     ldh  a, [$FFED]
@@ -7593,6 +7596,8 @@ RenderActiveEntitySpritesPair::
     add  a, [hl]
     ld   [de], a
     inc  de
+
+    ; Sprite 1: set OAM byte 2 (tile n°)
     pop  hl
     ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
@@ -7609,6 +7614,8 @@ RenderActiveEntitySpritesPair::
 .jr_3C4B
 
     inc  de
+
+    ; Sprite 1: set OAM byte 3 (tile attribute)
     ld   a, [hl]
     ld   hl, $FFED
     xor  [hl]
@@ -7631,6 +7638,8 @@ RenderActiveEntitySpritesPair::
     ld   b, $00
 
     callsb func_015_795D
+    ; fallthrough
+
 label_3C71::
     call func_015_7995
 
@@ -7649,7 +7658,7 @@ label_3C71::
 ;   de                          address of the display list
 ;   wActiveEntityIndex          index
 ;   hActiveEntitySpriteVariant  the sprite variant to use
-;   $C3C0                       index of the dynamically allocated OAM slot
+;   wOAMNextAvailableSlot       index of the dynamically allocated OAM slot
 RenderActiveEntitySprite::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
@@ -7660,8 +7669,8 @@ RenderActiveEntitySprite::
 
     push de
 
-    ; de = wDynamicOAMBuffer + [$C3C0]
-    ld   a, [$C3C0]
+    ; de = wDynamicOAMBuffer + [wOAMNextAvailableSlot]
+    ld   a, [wOAMNextAvailableSlot]
     ld   l, a
     ld   h, $00
     ld   bc, wDynamicOAMBuffer
@@ -7683,10 +7692,10 @@ RenderActiveEntitySprite::
     ldh  [$FFEC], a
 .sideScrollingEnd
 
-    ; (wDynamicOAMBuffer + [$C3C0] + 0) = [$FFEC]
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 0) = [$FFEC]
     ld   [de], a
     inc  de
-    ; (wDynamicOAMBuffer + [$C3C0] + 1) = [hActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 1) = [hActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   h, a
     ldh  a, [hActiveEntityPosX]
@@ -7694,7 +7703,7 @@ RenderActiveEntitySprite::
     sub  a, h
     ld   [de], a
     inc  de
-    ; (wDynamicOAMBuffer + [$C3C0] + 2) = DataTable[hActiveEntitySpriteVariant * 2]
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 2) = DataTable[hActiveEntitySpriteVariant * 2]
     ldh  a, [hActiveEntitySpriteVariant]
     ld   c, a
     ld   b, $00
@@ -7718,7 +7727,7 @@ RenderActiveEntitySprite::
     ldh  a, [$FFED]
     and  a
     jr   z, .gbcEnd
-    ; (wDynamicOAMBuffer + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) & 0xf8 | 4
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) & 0xf8 | 4
     ld   a, [hl]
     and  $F8
     or   $04
@@ -7726,7 +7735,7 @@ RenderActiveEntitySprite::
     jr   .functionEnd
 .gbcEnd
 
-    ; (wDynamicOAMBuffer + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) ^ [$FFED]
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) ^ [$FFED]
     ld   a, [hli]
     ld   hl, $FFED
     xor  [hl]
@@ -7766,9 +7775,9 @@ RenderActiveEntitySpritesRect::
     inc  a
     jr   z, .return
 
-    ; hl = wDynamicOAMBuffer + [$C3C0]
+    ; hl = wDynamicOAMBuffer + [wOAMNextAvailableSlot]
     push hl
-    ld   a, [$C3C0]
+    ld   a, [wOAMNextAvailableSlot]
     ld   e, a
     ld   d, $00
     ld   hl, wDynamicOAMBuffer

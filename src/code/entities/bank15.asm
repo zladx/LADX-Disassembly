@@ -1031,7 +1031,7 @@ jr_015_48F8:
     and  $01                                      ; $48FD: $E6 $01
     add  $0C                                      ; $48FF: $C6 $0C
     call SetEntitySpriteVariant                   ; $4901: $CD $0C $3B
-    ld   a, [$C3C0]                               ; $4904: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $4904: $FA $C0 $C3
     ld   e, a                                     ; $4907: $5F
     ld   d, b                                     ; $4908: $50
     ld   hl, wDynamicOAMBuffer                    ; $4909: $21 $30 $C0
@@ -7187,7 +7187,7 @@ func_015_7964::
     sla  a                                        ; $7964: $CB $27
     sla  a                                        ; $7966: $CB $27
     ld   e, a                                     ; $7968: $5F
-    ld   a, [$C3C0]                               ; $7969: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $7969: $FA $C0 $C3
     add  e                                        ; $796C: $83
     cp   $60                                      ; $796D: $FE $60
     jr   c, jr_015_7973                           ; $796F: $38 $02
@@ -7195,7 +7195,7 @@ func_015_7964::
     sub  $60                                      ; $7971: $D6 $60
 
 jr_015_7973:
-    ld   [$C3C0], a                               ; $7973: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7973: $EA $C0 $C3
     ld   a, [$C3C1]                               ; $7976: $FA $C1 $C3
     add  e                                        ; $7979: $83
     ld   [$C3C1], a                               ; $797A: $EA $C1 $C3
@@ -7213,7 +7213,7 @@ jr_015_7983:
     ld   hl, Data_015_7955                        ; $798C: $21 $55 $79
     add  hl, de                                   ; $798F: $19
     ld   a, [hl]                                  ; $7990: $7E
-    ld   [$C3C0], a                               ; $7991: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7991: $EA $C0 $C3
 
 jr_015_7994:
     ret                                           ; $7994: $C9
@@ -7253,7 +7253,7 @@ func_015_7995::
     and  $01                                      ; $79BF: $E6 $01
     ret  nz                                       ; $79C1: $C0
 
-    ld   a, [$C3C0]                               ; $79C2: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $79C2: $FA $C0 $C3
     ld   l, a                                     ; $79C5: $6F
     ld   h, $00                                   ; $79C6: $26 $00
     ld   de, wDynamicOAMBuffer                    ; $79C8: $11 $30 $C0
@@ -7282,7 +7282,7 @@ label_015_79DF:
     jp   CopyEntityPositionToActivePosition       ; $79ED: $C3 $8A $3D
 
 func_015_79F0::
-    ld   a, [$C3C0]                               ; $79F0: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $79F0: $FA $C0 $C3
     ld   l, a                                     ; $79F3: $6F
     ld   h, $00                                   ; $79F4: $26 $00
     ld   de, wDynamicOAMBuffer                    ; $79F6: $11 $30 $C0
@@ -7339,7 +7339,7 @@ label_015_7A27:
     ld   c, a                                     ; $7A3F: $4F
 
 jr_015_7A40:
-    ld   a, [$C3C0]                               ; $7A40: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $7A40: $FA $C0 $C3
     ld   l, a                                     ; $7A43: $6F
     ld   h, $00                                   ; $7A44: $26 $00
     ld   de, wDynamicOAMBuffer                    ; $7A46: $11 $30 $C0

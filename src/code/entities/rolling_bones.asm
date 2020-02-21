@@ -342,7 +342,7 @@ func_006_6E7E::
     and  $01                                      ; $6EA4: $E6 $01
     ret  nz                                       ; $6EA6: $C0
 
-    ld   a, [$C3C0]                               ; $6EA7: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $6EA7: $FA $C0 $C3
     ld   e, a                                     ; $6EAA: $5F
     ld   d, b                                     ; $6EAB: $50
     ld   hl, wDynamicOAMBuffer                    ; $6EAC: $21 $30 $C0

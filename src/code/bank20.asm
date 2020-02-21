@@ -5028,7 +5028,7 @@ jr_020_636E:
     and  $08                                      ; $6386: $E6 $08
     jr   nz, jr_020_63BE                          ; $6388: $20 $34
 
-    ld   a, [$C3C0]                               ; $638A: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $638A: $FA $C0 $C3
     ld   e, a                                     ; $638D: $5F
     ld   d, $00                                   ; $638E: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $6390: $21 $30 $C0
@@ -10765,7 +10765,7 @@ jr_020_7CD9:
 
 func_020_7D1C::
     ld   a, $6C                                   ; $7D1C: $3E $6C
-    ld   [$C3C0], a                               ; $7D1E: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7D1E: $EA $C0 $C3
     ldh  a, [hFrameCounter]                       ; $7D21: $F0 $E7
     and  $60                                      ; $7D23: $E6 $60
     swap a                                        ; $7D25: $CB $37
@@ -10787,7 +10787,7 @@ func_020_7D1C::
 func_020_7D40:
     push bc                                       ; $7D40: $C5
     push hl                                       ; $7D41: $E5
-    ld   a, [$C3C0]                               ; $7D42: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $7D42: $FA $C0 $C3
     ld   e, a                                     ; $7D45: $5F
     ld   d, $00                                   ; $7D46: $16 $00
     ld   hl, wOAMBuffer                           ; $7D48: $21 $00 $C0
@@ -10821,7 +10821,7 @@ jr_020_7D55:
     jr   nz, jr_020_7D55                          ; $7D68: $20 $EB
 
     pop  bc                                       ; $7D6A: $C1
-    ld   a, [$C3C0]                               ; $7D6B: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $7D6B: $FA $C0 $C3
     add  c                                        ; $7D6E: $81
     cp   $A0                                      ; $7D6F: $FE $A0
     jr   c, jr_020_7D74                           ; $7D71: $38 $01
@@ -10829,7 +10829,7 @@ jr_020_7D55:
     xor  a                                        ; $7D73: $AF
 
 jr_020_7D74:
-    ld   [$C3C0], a                               ; $7D74: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7D74: $EA $C0 $C3
     ld   a, [wActiveEntityIndex]                  ; $7D77: $FA $23 $C1
     ld   c, a                                     ; $7D7A: $4F
     ret                                           ; $7D7B: $C9

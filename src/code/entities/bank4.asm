@@ -4688,7 +4688,7 @@ jr_004_6B7C:
     sra  a                                        ; $6B96: $CB $2F
     ldh  [hScratch1], a                           ; $6B98: $E0 $D8
     ldh  [hScratch3], a                           ; $6B9A: $E0 $DA
-    ld   a, [$C3C0]                               ; $6B9C: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $6B9C: $FA $C0 $C3
     ld   e, a                                     ; $6B9F: $5F
     ld   d, $00                                   ; $6BA0: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $6BA2: $21 $30 $C0
@@ -6147,7 +6147,7 @@ jr_004_744B:
     xor  a                                        ; $745D: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $745E: $E0 $F1
     ld   de, Data_004_73FA                        ; $7460: $11 $FA $73
-    ld   a, [$C3C0]                               ; $7463: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $7463: $FA $C0 $C3
     push af                                       ; $7466: $F5
     call RenderActiveEntitySpritesPair            ; $7467: $CD $C0 $3B
     pop  af                                       ; $746A: $F1

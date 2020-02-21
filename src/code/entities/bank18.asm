@@ -5540,7 +5540,7 @@ jr_018_691B:
     add  hl, de                                   ; $691E: $19
     ld   c, $06                                   ; $691F: $0E $06
     push hl                                       ; $6921: $E5
-    ld   a, [$C3C0]                               ; $6922: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $6922: $FA $C0 $C3
     ld   e, a                                     ; $6925: $5F
     ld   d, $00                                   ; $6926: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $6928: $21 $30 $C0
@@ -8426,7 +8426,7 @@ func_018_7CC8::
     sra  a                                        ; $7CE4: $CB $2F
     ldh  [hScratch1], a                           ; $7CE6: $E0 $D8
     ldh  [hScratch3], a                           ; $7CE8: $E0 $DA
-    ld   a, [$C3C0]                               ; $7CEA: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $7CEA: $FA $C0 $C3
     ld   e, a                                     ; $7CED: $5F
     ld   d, $00                                   ; $7CEE: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $7CF0: $21 $30 $C0

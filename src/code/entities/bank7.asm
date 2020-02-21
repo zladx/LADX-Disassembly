@@ -3080,7 +3080,7 @@ func_007_5453::
     sra  a                                        ; $5476: $CB $2F
     ldh  [hScratch1], a                           ; $5478: $E0 $D8
     ldh  [hScratch3], a                           ; $547A: $E0 $DA
-    ld   a, [$C3C0]                               ; $547C: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $547C: $FA $C0 $C3
     ld   e, a                                     ; $547F: $5F
     ld   d, $00                                   ; $5480: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $5482: $21 $30 $C0
@@ -4390,7 +4390,7 @@ func_007_5CA5::
     jr   z, jr_007_5CF3                           ; $5CA8: $28 $49
 
     push hl                                       ; $5CAA: $E5
-    ld   a, [$C3C0]                               ; $5CAB: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $5CAB: $FA $C0 $C3
     ld   e, a                                     ; $5CAE: $5F
     ld   d, $00                                   ; $5CAF: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $5CB1: $21 $30 $C0
@@ -9135,7 +9135,7 @@ jr_007_7AD1:
     ld   l, [hl]                                  ; $7B06: $6E
     ld   h, a                                     ; $7B07: $67
     push hl                                       ; $7B08: $E5
-    ld   a, [$C3C0]                               ; $7B09: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $7B09: $FA $C0 $C3
     ld   e, a                                     ; $7B0C: $5F
     ld   d, $00                                   ; $7B0D: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $7B0F: $21 $30 $C0
@@ -9162,7 +9162,7 @@ jr_007_7AD1:
 func_007_7B30::
     xor  $01                                      ; $7B30: $EE $01
     push af                                       ; $7B32: $F5
-    ld   a, [$C3C0]                               ; $7B33: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $7B33: $FA $C0 $C3
     ld   l, a                                     ; $7B36: $6F
     ld   h, $00                                   ; $7B37: $26 $00
     ld   de, wDynamicOAMBuffer                    ; $7B39: $11 $30 $C0

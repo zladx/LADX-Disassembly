@@ -1454,7 +1454,7 @@ label_5619::
 
 MinimapEntryPoint::
     xor  a
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ld   a, [wGameplaySubtype]
     cp   $05
     jr   z, label_5639
@@ -2178,7 +2178,7 @@ label_5C7B::
     ld   [$C1B0], a
     ldh  [hActiveEntitySpriteVariant], a
     ld   a, $00
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ld   a, $08
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   a, $00
@@ -2222,7 +2222,7 @@ label_5CBD::
     ld   hl, label_5BAD
     add  hl, de
     ld   a, $08
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     xor  a
     ldh  [hActiveEntityTilesOffset], a
     ld   c, $08
@@ -3634,7 +3634,7 @@ label_6AE3::
     add  hl, de
     ld   c, [hl]
     xor  a
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ld   hl, label_6982
     ldh  a, [hIsGBC]
     and  a

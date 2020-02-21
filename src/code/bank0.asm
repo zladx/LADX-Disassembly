@@ -8029,6 +8029,7 @@ label_3E8E::
     xor  c
     and  $03
     ret  nz
+
     ldh  a, [hActiveEntityPosX]
     ldh  [hScratch0], a
     ldh  a, [$FFEC]
@@ -8045,28 +8046,28 @@ label_3EAF::
     add  hl, bc
     ld   a, [hl]
     bit  7, a
-    jr   z, label_3EBA
+    jr   z, .jr_3EBA
     cpl
     inc  a
 
-label_3EBA::
+.jr_3EBA
     ldh  [hScratch0], a
     ld   hl, wEntitiesUnknowTableS
     add  hl, bc
     ld   a, [hl]
     bit  7, a
-    jr   z, label_3EC7
+    jr   z, .jr_3EC7
     cpl
     inc  a
 
-label_3EC7::
+.jr_3EC7
     ld   e, $03
     ld   hl, hScratch0
     cp   [hl]
-    jr   c, label_3ED1
+    jr   c, .jr_3ED1
     ld   e, $0C
 
-label_3ED1::
+.jr_3ED1
     ld   a, e
     ld   hl, wEntitiesCollisionsTable
     add  hl, bc
@@ -8076,7 +8077,7 @@ label_3ED1::
     add  hl, bc
     ld   [hl], b
 
-label_3EDE::
+.jr_3EDE
     ret
 
 data_3EDF::

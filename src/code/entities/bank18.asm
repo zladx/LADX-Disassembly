@@ -1881,7 +1881,7 @@ MadBatterEntityHandler::
     and  $20                                      ; $4EE8: $E6 $20
     jp   nz, func_018_7F08                        ; $4EEA: $C2 $08 $7F
 
-    call func_C56                                 ; $4EED: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4EED: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4EF0: $F0 $F0
     JP_TABLE                                      ; $4EF2
 ._00 dw MadBatterState0Handler                             ; $4EF3
@@ -6555,7 +6555,7 @@ label_018_6F1F:
     ld   de, Data_018_6F17                        ; $6F1F: $11 $17 $6F
     call RenderActiveEntitySpritesPair            ; $6F22: $CD $C0 $3B
     call func_018_7DE8                            ; $6F25: $CD $E8 $7D
-    call func_C56                                 ; $6F28: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $6F28: $CD $56 $0C
     ldh  a, [hFrameCounter]                       ; $6F2B: $F0 $E7
     rra                                           ; $6F2D: $1F
     rra                                           ; $6F2E: $1F
@@ -6959,7 +6959,7 @@ label_018_71A3:
     ld   de, Data_018_719B                        ; $71A3: $11 $9B $71
     call RenderActiveEntitySpritesPair            ; $71A6: $CD $C0 $3B
     call func_018_7DE8                            ; $71A9: $CD $E8 $7D
-    call func_C56                                 ; $71AC: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $71AC: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $71AF: $F0 $F0
     JP_TABLE                                      ; $71B1
 ._00 dw func_018_721C                             ; $71B2
@@ -7230,7 +7230,7 @@ jr_018_737D:
 
 jr_018_737E:
     call func_018_7DE8                            ; $737E: $CD $E8 $7D
-    call func_C56                                 ; $7381: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $7381: $CD $56 $0C
     call label_3B70                               ; $7384: $CD $70 $3B
     ldh  a, [hActiveEntityState]                  ; $7387: $F0 $F0
     cp   $05                                      ; $7389: $FE $05

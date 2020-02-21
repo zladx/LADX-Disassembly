@@ -212,7 +212,7 @@ jr_006_56D9:
 
 jr_006_5726:
     call func_006_594C                            ; $5726: $CD $4C $59
-    call func_C56                                 ; $5729: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5729: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $572C: $F0 $F0
     cp   $02                                      ; $572E: $FE $02
     jr   c, jr_006_5754                           ; $5730: $38 $22

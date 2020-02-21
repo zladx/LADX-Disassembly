@@ -9209,16 +9209,22 @@ jr_003_7FA7:
 jr_003_7FA8:
     ret                                           ; $7FA8: $C9
 
+; Inputs:
+;   bc   entity index
 func_003_7FA9::
+    ; If entity's wEntitiesUnknowTableT != 0, return.
     ld   hl, wEntitiesUnknowTableT                ; $7FA9: $21 $10 $C4
     add  hl, bc                                   ; $7FAC: $09
     ld   a, [hl]                                  ; $7FAD: $7E
     and  a                                        ; $7FAE: $A7
     ret  z                                        ; $7FAF: $C8
 
+    ; Decrement wEntitiesUnknowTableT
     dec  a                                        ; $7FB0: $3D
     ld   [hl], a                                  ; $7FB1: $77
+
     call label_3E8E                               ; $7FB2: $CD $8E $3E
+
     ld   hl, wEntitiesSpeedXTable                 ; $7FB5: $21 $40 $C2
     add  hl, bc                                   ; $7FB8: $09
     ld   a, [hl]                                  ; $7FB9: $7E

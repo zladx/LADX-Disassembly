@@ -779,7 +779,11 @@ func_C50::
     ld   [hl], $04
     ret
 
-func_C56::
+; Decrement the wEntitiesUnknowTableT value for the given entity.
+;
+; Inputs:
+;   bc   entity index
+DecrementEntityIgnoreHitsCountdown::
     ld   hl, wEntitiesUnknowTableT
     add  hl, bc
     ld   a, [hl]
@@ -8019,6 +8023,7 @@ label_3E8E::
     ld   a, [hl]
     and  a
     ret  z
+
     ldh  a, [hFrameCounter]
     xor  c
     and  $03

@@ -1,7 +1,7 @@
 GiantGopongaFlowerEntityHandler::
     call func_006_6376                            ; $62B3: $CD $76 $63
     call func_006_64C6                            ; $62B6: $CD $C6 $64
-    call func_C56                                 ; $62B9: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $62B9: $CD $56 $0C
     call label_3B70                               ; $62BC: $CD $70 $3B
     call func_006_641A                            ; $62BF: $CD $1A $64
     ldh  a, [hActiveEntityState]                  ; $62C2: $F0 $F0

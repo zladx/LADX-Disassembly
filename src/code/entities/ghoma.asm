@@ -55,7 +55,7 @@ jr_005_7C1C:
     call label_3B39                               ; $7C1F: $CD $39 $3B
     call func_005_7AB1                            ; $7C22: $CD $B1 $7A
     call label_3B23                               ; $7C25: $CD $23 $3B
-    call func_C56                                ; $7C28: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $7C28: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $7C2B: $F0 $F0
     JP_TABLE                                      ; $7C2D
 ._00 dw func_005_7C36                             ; $7C2E

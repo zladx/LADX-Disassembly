@@ -1196,7 +1196,7 @@ FacadeState2Handler:
 
 jr_004_551C:
     call RenderActiveEntitySpritesPair            ; $551C: $CD $C0 $3B
-    call func_C56                                ; $551F: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $551F: $CD $56 $0C
     ld   hl, wEntitiesFlashCountdownTable         ; $5522: $21 $20 $C4
     add  hl, bc                                   ; $5525: $09
     ld   a, [hl]                                  ; $5526: $7E
@@ -1473,7 +1473,7 @@ MoldormEntityHandler::
     call label_394D                               ; $56AD: $CD $4D $39
     call func_004_56A7                            ; $56B0: $CD $A7 $56
     call func_004_5902                            ; $56B3: $CD $02 $59
-    call func_C56                                ; $56B6: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $56B6: $CD $56 $0C
     ld   a, [wRoomTransitionState]                ; $56B9: $FA $24 $C1
     and  a                                        ; $56BC: $A7
     jp   nz, func_004_5690                        ; $56BD: $C2 $90 $56

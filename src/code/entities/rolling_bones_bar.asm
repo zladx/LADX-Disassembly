@@ -77,7 +77,7 @@ jr_006_6F47:
     ret                                           ; $6F47: $C9
 
 jr_006_6F48:
-    call func_C56                                 ; $6F48: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $6F48: $CD $56 $0C
     ldh  a, [hLinkPositionZ]                      ; $6F4B: $F0 $A2
     and  a                                        ; $6F4D: $A7
     jr   nz, jr_006_6F53                          ; $6F4E: $20 $03

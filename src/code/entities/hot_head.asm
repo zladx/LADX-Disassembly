@@ -66,7 +66,7 @@ label_005_635E:
 
 jr_005_6375:
     call func_005_7A3A                            ; $6375: $CD $3A $7A
-    call func_C56                                ; $6378: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $6378: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $637B: $F0 $F0
     JP_TABLE                                      ; $637D
 ._00 dw func_005_63A8                             ; $637E

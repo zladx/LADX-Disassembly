@@ -214,7 +214,7 @@ label_006_5411:
 ._07 dw ArmosKnightState7Handler
 
 ArmosKnightState0Handler::
-    call func_C56                                 ; $5424: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5424: $CD $56 $0C
     call func_006_6594                            ; $5427: $CD $94 $65
     add  $20                                      ; $542A: $C6 $20
     cp   $40                                      ; $542C: $FE $40
@@ -233,7 +233,7 @@ jr_006_5441:
     ret                                           ; $5441: $C9
 
 ArmosKnightState1Handler::
-    call func_C56                                 ; $5442: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5442: $CD $56 $0C
     call GetEntityTransitionCountdown             ; $5445: $CD $05 $0C
     jr   nz, jr_006_544F                          ; $5448: $20 $05
 
@@ -247,7 +247,7 @@ jr_006_544F:
     jp   SetEntitySpriteVariant                   ; $5453: $C3 $0C $3B
 
 ArmosKnightState2Handler::
-    call func_C56                                 ; $5456: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5456: $CD $56 $0C
     call GetEntityTransitionCountdown             ; $5459: $CD $05 $0C
     jr   nz, jr_006_5476                          ; $545C: $20 $18
 

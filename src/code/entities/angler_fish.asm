@@ -193,7 +193,7 @@ jr_005_5650:
     pop  bc                                       ; $56B0: $C1
 
 jr_005_56B1:
-    call func_C56                                ; $56B1: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $56B1: $CD $56 $0C
     ld   hl, wEntitiesUnknowTableY                ; $56B4: $21 $D0 $C3
     add  hl, bc                                   ; $56B7: $09
     ld   a, [hl]                                  ; $56B8: $7E
@@ -447,7 +447,7 @@ func_005_593A::
     ld   de, Data_005_5932                        ; $593A: $11 $32 $59
     call RenderActiveEntitySpritesPair            ; $593D: $CD $C0 $3B
     call func_005_7A3A                            ; $5940: $CD $3A $7A
-    call func_C56                                ; $5943: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5943: $CD $56 $0C
     ld   hl, wEntitiesUnknowTableY                ; $5946: $21 $D0 $C3
     add  hl, bc                                   ; $5949: $09
     inc  [hl]                                     ; $594A: $34
@@ -502,7 +502,7 @@ func_005_5984::
     ld   de, Data_005_5978                        ; $5990: $11 $78 $59
     call RenderActiveEntitySpritesPair            ; $5993: $CD $C0 $3B
     call func_005_7A3A                            ; $5996: $CD $3A $7A
-    call func_C56                                ; $5999: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5999: $CD $56 $0C
     ldh  a, [hFrameCounter]                       ; $599C: $F0 $E7
     rra                                           ; $599E: $1F
     rra                                           ; $599F: $1F

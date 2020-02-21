@@ -2310,7 +2310,7 @@ jr_036_4D28:
     ld   a, h                                     ; $4D4A: $7C
 
 func_036_4D4B::
-    call func_C56                                ; $4D4B: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4D4B: $CD $56 $0C
     ld   a, [hl]                                  ; $4D4E: $7E
     and  a                                        ; $4D4F: $A7
     jr   nz, jr_036_4D5C                          ; $4D50: $20 $0A
@@ -3677,7 +3677,7 @@ GiantBuzzBlobEntityHandler::
 
 jr_036_54FE:
     call label_3EE8                               ; $54FE: $CD $E8 $3E
-    call func_C56                                ; $5501: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5501: $CD $56 $0C
     call func_036_6A40                            ; $5504: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $5507: $F0 $F0
     cp   $03                                      ; $5509: $FE $03
@@ -4747,7 +4747,7 @@ label_036_5AE4:
     ld   de, $5ADC                                ; $5AE4: $11 $DC $5A
     call RenderActiveEntitySpritesPair            ; $5AE7: $CD $C0 $3B
     call func_036_6A40                            ; $5AEA: $CD $40 $6A
-    call func_C56                                ; $5AED: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5AED: $CD $56 $0C
     call label_3B39                               ; $5AF0: $CD $39 $3B
     call func_036_6A62                            ; $5AF3: $CD $62 $6A
     call func_036_6C15                            ; $5AF6: $CD $15 $6C
@@ -4782,7 +4782,7 @@ jr_036_5B1C:
     ld   de, $5AFC                                ; $5B1C: $11 $FC $5A
     call RenderActiveEntitySpritesPair            ; $5B1F: $CD $C0 $3B
     call func_036_6A40                            ; $5B22: $CD $40 $6A
-    call func_C56                                ; $5B25: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5B25: $CD $56 $0C
     call label_3B39                               ; $5B28: $CD $39 $3B
     call func_036_6A62                            ; $5B2B: $CD $62 $6A
     ld   hl, wEntitiesPrivateState1Table          ; $5B2E: $21 $B0 $C2
@@ -4851,7 +4851,7 @@ jr_036_5B73:
     ld   de, $5B42                                ; $5B7E: $11 $42 $5B
     call RenderActiveEntitySpritesPair            ; $5B81: $CD $C0 $3B
     call func_036_6A40                            ; $5B84: $CD $40 $6A
-    call func_C56                                ; $5B87: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5B87: $CD $56 $0C
     call label_3B39                               ; $5B8A: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $5B8D: $F0 $E7
     rra                                           ; $5B8F: $1F

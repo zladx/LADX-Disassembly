@@ -367,7 +367,7 @@ label_006_4781:
     ld   de, Data_006_477D                        ; $478D: $11 $7D $47
     call RenderActiveEntitySpritesPair            ; $4790: $CD $C0 $3B
     call func_006_64C6                            ; $4793: $CD $C6 $64
-    call func_C56                                 ; $4796: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4796: $CD $56 $0C
     call label_3B70                               ; $4799: $CD $70 $3B
     call func_006_6541                            ; $479C: $CD $41 $65
     call func_006_657A                            ; $479F: $CD $7A $65

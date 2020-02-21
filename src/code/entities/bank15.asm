@@ -118,7 +118,7 @@ CrystalSwitchEntityHandler::
     ld   de, Data_015_4320                        ; $4332: $11 $20 $43
     call RenderActiveEntitySpritesPair            ; $4335: $CD $C0 $3B
     call func_015_7B0D                            ; $4338: $CD $0D $7B
-    call func_C56                                ; $433B: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $433B: $CD $56 $0C
     call label_3B70                               ; $433E: $CD $70 $3B
     call func_015_7A6E                            ; $4341: $CD $6E $7A
     call label_3B23                               ; $4344: $CD $23 $3B
@@ -207,7 +207,7 @@ label_015_43CA:
     ld   de, Data_015_43AE                        ; $43CA: $11 $AE $43
     call RenderActiveEntitySpritesPair            ; $43CD: $CD $C0 $3B
     call func_015_7B0D                            ; $43D0: $CD $0D $7B
-    call func_C56                                ; $43D3: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $43D3: $CD $56 $0C
     call label_3B39                               ; $43D6: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $43D9: $F0 $E7
     rra                                           ; $43DB: $1F
@@ -1346,7 +1346,7 @@ PokeyEntityHandler::
     pop  bc                                       ; $4C48: $C1
 
 jr_015_4C49:
-    call func_C56                                ; $4C49: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4C49: $CD $56 $0C
     call label_3B39                               ; $4C4C: $CD $39 $3B
     ldh  a, [hFrameCounter]                       ; $4C4F: $F0 $E7
     rra                                           ; $4C51: $1F
@@ -1591,7 +1591,7 @@ label_015_4DB5:
     ld   de, Data_015_4D9D                        ; $4DC2: $11 $9D $4D
     call RenderActiveEntitySpritesPair            ; $4DC5: $CD $C0 $3B
     call func_015_7B0D                            ; $4DC8: $CD $0D $7B
-    call func_C56                                ; $4DCB: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4DCB: $CD $56 $0C
     call label_3B70                               ; $4DCE: $CD $70 $3B
     ld   a, [$DBC7]                               ; $4DD1: $FA $C7 $DB
     push af                                       ; $4DD4: $F5
@@ -2249,7 +2249,7 @@ jr_015_51D0:
 FinalNightmareForm2Handler::
     call func_015_572B                            ; $51DF: $CD $2B $57
     call func_015_7B0D                            ; $51E2: $CD $0D $7B
-    call func_C56                                ; $51E5: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $51E5: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $51E8: $F0 $F0
     JP_TABLE                                      ; $51EA
 ._00 dw func_015_51FF                             ; $51EB
@@ -3626,7 +3626,7 @@ label_015_5DED:
     ld   de, Data_015_5DD9                        ; $5DF6: $11 $D9 $5D
     call RenderActiveEntitySpritesPair            ; $5DF9: $CD $C0 $3B
     call func_015_7B0D                            ; $5DFC: $CD $0D $7B
-    call func_C56                                ; $5DFF: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5DFF: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $5E02: $F0 $F0
     cp   $04                                      ; $5E04: $FE $04
     jr   nz, jr_015_5E24                          ; $5E06: $20 $1C
@@ -4038,7 +4038,7 @@ func_015_60C1::
 func_015_60D4::
     call func_015_5FD1                            ; $60D4: $CD $D1 $5F
     call func_015_6245                            ; $60D7: $CD $45 $62
-    call func_C56                                ; $60DA: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $60DA: $CD $56 $0C
     call CopyEntityPositionToActivePosition       ; $60DD: $CD $8A $3D
     call func_015_7B0D                            ; $60E0: $CD $0D $7B
     xor  a                                        ; $60E3: $AF
@@ -4395,7 +4395,7 @@ jr_015_63F2:
 
 jr_015_63F5:
     call func_015_7B0D                            ; $63F5: $CD $0D $7B
-    call func_C56                                ; $63F8: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $63F8: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $63FB: $F0 $F0
     cp   $09                                      ; $63FD: $FE $09
     jr   nc, jr_015_6425                          ; $63FF: $30 $24
@@ -5637,7 +5637,7 @@ jr_015_6E9B:
     ld   [hl], $50                                ; $6EB3: $36 $50
 
 jr_015_6EB5:
-    call func_C56                                ; $6EB5: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $6EB5: $CD $56 $0C
     ld   hl, wEntitiesHealthTable                 ; $6EB8: $21 $60 $C3
     add  hl, bc                                   ; $6EBB: $09
     ld   a, [hl]                                  ; $6EBC: $7E

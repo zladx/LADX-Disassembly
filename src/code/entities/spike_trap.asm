@@ -19,7 +19,7 @@ SpikeTrapEntityHandler::
     ld   de, Data_006_74FA                        ; $7514: $11 $FA $74
     call RenderActiveEntitySpritesPair            ; $7517: $CD $C0 $3B
     call func_006_64C6                            ; $751A: $CD $C6 $64
-    call func_C56                                 ; $751D: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $751D: $CD $56 $0C
     call label_3B39                               ; $7520: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $7523: $F0 $F0
     JP_TABLE                                      ; $7525

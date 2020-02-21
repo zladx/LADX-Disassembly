@@ -9,7 +9,7 @@ ThreeOfAKindEntityHandler::
     ld   de, Data_006_4911                        ; $4937: $11 $11 $49
     call RenderActiveEntitySpritesPair            ; $493A: $CD $C0 $3B
     call func_006_64C6                            ; $493D: $CD $C6 $64
-    call func_C56                                 ; $4940: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4940: $CD $56 $0C
     call func_006_6541                            ; $4943: $CD $41 $65
     call label_3B23                               ; $4946: $CD $23 $3B
     ldh  a, [hActiveEntityState]                  ; $4949: $F0 $F0

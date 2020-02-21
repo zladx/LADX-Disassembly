@@ -1,7 +1,7 @@
 SlimeEelEntityHandler::
     call label_394D                               ; $6CDC: $CD $4D $39
     call label_3EE8                               ; $6CDF: $CD $E8 $3E
-    call func_C56                                ; $6CE2: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $6CE2: $CD $56 $0C
     ld   hl, wEntitiesPrivateState1Table          ; $6CE5: $21 $B0 $C2
     add  hl, bc                                   ; $6CE8: $09
     ld   a, [hl]                                  ; $6CE9: $7E

@@ -122,7 +122,7 @@ jr_007_408A:
     jp   label_007_4198                           ; $40BE: $C3 $98 $41
 
 jr_007_40C1:
-    call func_C56                                ; $40C1: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $40C1: $CD $56 $0C
     call label_3B39                               ; $40C4: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $40C7: $F0 $F0
   JP_TABLE                                        ; $40C9
@@ -2904,7 +2904,7 @@ PincerEntityHandler::
     ld   [hl], b                                  ; $5330: $70
     call func_007_5453                            ; $5331: $CD $53 $54
     call func_007_7D96                            ; $5334: $CD $96 $7D
-    call func_C56                                ; $5337: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5337: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $533A: $F0 $F0
     JP_TABLE                                      ; $533C
 ._00 dw func_007_5349                             ; $533D
@@ -4530,7 +4530,7 @@ label_007_5E09:
     call func_007_5CA5                            ; $5E0F: $CD $A5 $5C
 
 jr_007_5E12:
-    call func_C56                                ; $5E12: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5E12: $CD $56 $0C
     call label_3B70                               ; $5E15: $CD $70 $3B
     call func_007_7CF0                            ; $5E18: $CD $F0 $7C
     ldh  a, [hActiveEntityState]                  ; $5E1B: $F0 $F0
@@ -4894,7 +4894,7 @@ jr_007_602A:
     cp   $02                                      ; $604B: $FE $02
     ret  z                                        ; $604D: $C8
 
-    call func_C56                                ; $604E: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $604E: $CD $56 $0C
     call label_3B70                               ; $6051: $CD $70 $3B
     call func_007_7E0A                            ; $6054: $CD $0A $7E
     call func_007_7E43                            ; $6057: $CD $43 $7E

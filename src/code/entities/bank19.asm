@@ -50,7 +50,7 @@ jr_019_4056:
     call RenderActiveEntitySpritesRect            ; $4058: $CD $E6 $3C
     call label_3CD9                               ; $405B: $CD $D9 $3C
     call func_019_7D3D                            ; $405E: $CD $3D $7D
-    call func_C56                                ; $4061: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4061: $CD $56 $0C
     call label_3B70                               ; $4064: $CD $70 $3B
     ldh  a, [hActiveEntityState]                  ; $4067: $F0 $F0
     rst  $00                                      ; $4069: $C7
@@ -1360,7 +1360,7 @@ jr_019_48EE:
     ld   de, $48CA                                ; $48EE: $11 $CA $48
     call RenderActiveEntitySpritesPair            ; $48F1: $CD $C0 $3B
     call func_019_7D3D                            ; $48F4: $CD $3D $7D
-    call func_C56                                ; $48F7: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $48F7: $CD $56 $0C
     call func_019_7DF1                            ; $48FA: $CD $F1 $7D
     ld   hl, wEntitiesSpeedZTable                 ; $48FD: $21 $20 $C3
     add  hl, bc                                   ; $4900: $09
@@ -3539,7 +3539,7 @@ jr_019_55A1:
     ld   c, $08                                   ; $55A1: $0E $08
     call RenderActiveEntitySpritesRect            ; $55A3: $CD $E6 $3C
     call func_019_7D3D                            ; $55A6: $CD $3D $7D
-    call func_C56                                ; $55A9: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $55A9: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $55AC: $F0 $F0
     rst  $00                                      ; $55AE: $C7
     or   l                                        ; $55AF: $B5
@@ -3755,7 +3755,7 @@ ThwimpEntityHandler::
     ld   de, $56BD                                ; $56C5: $11 $BD $56
     call RenderActiveEntitySpritesPair            ; $56C8: $CD $C0 $3B
     call func_019_7D3D                            ; $56CB: $CD $3D $7D
-    call func_C56                                ; $56CE: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $56CE: $CD $56 $0C
     call label_3B39                               ; $56D1: $CD $39 $3B
     xor  a                                        ; $56D4: $AF
     call SetEntitySpriteVariant                   ; $56D5: $CD $0C $3B
@@ -3938,7 +3938,7 @@ ThwompEntityHandler::
     ld   a, $06                                   ; $57D1: $3E $06
     call label_3DA0                               ; $57D3: $CD $A0 $3D
     call func_019_7D3D                            ; $57D6: $CD $3D $7D
-    call func_C56                                ; $57D9: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $57D9: $CD $56 $0C
     call label_3B70                               ; $57DC: $CD $70 $3B
     call func_019_58A2                            ; $57DF: $CD $A2 $58
     ldh  a, [hActiveEntityState]                  ; $57E2: $F0 $F0

@@ -1251,9 +1251,11 @@ func_005_75D1::
     ld   a, [$D201]                               ; $75E9: $FA $01 $D2
     ld   e, a                                     ; $75EC: $5F
     ld   d, b                                     ; $75ED: $50
-    ld   hl, wEntitiesUnknowTableF                ; $75EE: $21 $F0 $C2
+
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $75EE: $21 $F0 $C2
     add  hl, de                                   ; $75F1: $19
     ld   [hl], $1F                                ; $75F2: $36 $1F
+
     ld   a, ENTITY_BOMB                           ; $75F4: $3E $02
     call SpawnNewEntity_trampoline                ; $75F6: $CD $86 $3B
     call PlayBombExplosionSfx                     ; $75F9: $CD $4B $0C

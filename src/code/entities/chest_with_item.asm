@@ -59,7 +59,7 @@ ChestWithItemEntityHandler::
     ld   hl, wEntitiesPosZTable                                ; $7C0A: $21 $10 $C3
     add  hl, de                                   ; $7C0D: $19
     ld   [hl], $06                                ; $7C0E: $36 $06
-    ld   hl, wEntitiesUnknowTableF                ; $7C10: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $7C10: $21 $F0 $C2
     add  hl, de                                   ; $7C13: $19
     ld   [hl], $50                                ; $7C14: $36 $50
     ld   hl, wEntitiesSpeedXTable                       ; $7C16: $21 $40 $C2

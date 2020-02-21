@@ -1678,7 +1678,7 @@ jr_002_4CD3:
     ld   hl, wEntitiesDropTimerTable              ; $4CF4: $21 $50 $C4
     add  hl, de                                   ; $4CF7: $19
     ld   [hl], $80                                ; $4CF8: $36 $80
-    ld   hl, wEntitiesUnknowTableF                ; $4CFA: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $4CFA: $21 $F0 $C2
     add  hl, de                                   ; $4CFD: $19
     ld   [hl], $18                                ; $4CFE: $36 $18
     ld   hl, wEntitiesSpeedZTable                 ; $4D00: $21 $20 $C3
@@ -6853,7 +6853,7 @@ jr_002_734F:
     ld   [hl], d                                  ; $738E: $72
     ld   hl, hNoiseSfx                             ; $738F: $21 $F4 $FF
     ld   [hl], NOISE_SFX_POT_SMASHED                ; $7392: $36 $09
-    ld   hl, wEntitiesUnknowTableF                ; $7394: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $7394: $21 $F0 $C2
     add  hl, de                                   ; $7397: $19
     ld   [hl], $0F                                ; $7398: $36 $0F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $739A: $21 $40 $C3

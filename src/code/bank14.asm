@@ -1063,7 +1063,7 @@ UpdateEntityTimers::
 .transitionCountdownEnd
 
     ; If private countdown 1 > 0, decrement it
-    ld   hl, wEntitiesUnknowTableF                ; $4DB1: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $4DB1: $21 $F0 $C2
     add  hl, bc                                   ; $4DB4: $09
     ld   a, [hl]                                  ; $4DB5: $7E
     and  a                                        ; $4DB6: $A7
@@ -1742,8 +1742,8 @@ func_014_50C3::
     ld   hl, wEntitiesUnknownTableD               ; $5106: $21 $D0 $C2
     add  hl, de                                   ; $5109: $19
     ld   [hl], d                                  ; $510A: $72
-    ; Set the wEntitiesUnknowTableF value to $18
-    ld   hl, wEntitiesUnknowTableF                ; $510B: $21 $F0 $C2
+    ; Set the wEntitiesPrivateCountdown1Table value to $18
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $510B: $21 $F0 $C2
     add  hl, de                                   ; $510E: $19
     ld   [hl], $18                                ; $510F: $36 $18
 

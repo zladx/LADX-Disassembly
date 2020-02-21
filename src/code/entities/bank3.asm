@@ -1530,7 +1530,7 @@ jr_003_5081:
     push af                                       ; $50A0: $F5
     ld   a, [$C501]                               ; $50A1: $FA $01 $C5
     ld   e, a                                     ; $50A4: $5F
-    ld   hl, wEntitiesUnknowTableF                ; $50A5: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $50A5: $21 $F0 $C2
     add  hl, de                                   ; $50A8: $19
     ld   [hl], $38                                ; $50A9: $36 $38
     pop  af                                       ; $50AB: $F1
@@ -1939,7 +1939,7 @@ func_003_53E4::
     ld   e, $0F                                   ; $53F7: $1E $0F
 
 jr_003_53F9:
-    ld   hl, wEntitiesUnknowTableF                ; $53F9: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $53F9: $21 $F0 $C2
     add  hl, bc                                   ; $53FC: $09
     ld   [hl], e                                  ; $53FD: $73
     ld   hl, wEntitiesPhysicsFlagsTable           ; $53FE: $21 $40 $C3
@@ -1973,7 +1973,7 @@ SmashRock::
     ld   hl, wEntitiesSpriteVariantTable          ; $541F: $21 $B0 $C3
     add  hl, de                                   ; $5422: $19
     ld   [hl], $00                                ; $5423: $36 $00
-    ld   hl, wEntitiesUnknowTableF                ; $5425: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $5425: $21 $F0 $C2
     add  hl, de                                   ; $5428: $19
     ld   [hl], $0F                                ; $5429: $36 $0F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $542B: $21 $40 $C3
@@ -2309,7 +2309,7 @@ SpawnEnemyDrop::
     add  hl, de                                   ; $568F: $19
     ld   [hl], $80                                ; $5690: $36 $80
 
-    ld   hl, wEntitiesUnknowTableF                ; $5692: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $5692: $21 $F0 $C2
     add  hl, de                                   ; $5695: $19
     ld   [hl], $18                                ; $5696: $36 $18
 
@@ -7470,7 +7470,7 @@ entitiesLoop:
     ld   hl, wEntitiesStateTable                  ; $7621: $21 $90 $C2
     add  hl, de                                   ; $7624: $19
     ld   [hl], $02                                ; $7625: $36 $02
-    ld   hl, wEntitiesUnknowTableF                ; $7627: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $7627: $21 $F0 $C2
     add  hl, de                                   ; $762A: $19
     ld   [hl], $08                                ; $762B: $36 $08
 

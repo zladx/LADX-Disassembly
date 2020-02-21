@@ -9580,7 +9580,7 @@ func_007_7ED6::
     ld   hl, wEntitiesSpeedZTable                 ; $7EF4: $21 $20 $C3
     add  hl, de                                   ; $7EF7: $19
     ld   [hl], $18                                ; $7EF8: $36 $18
-    ld   hl, wEntitiesUnknowTableF                ; $7EFA: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $7EFA: $21 $F0 $C2
     add  hl, de                                   ; $7EFD: $19
     ld   [hl], $20                                ; $7EFE: $36 $20
     ld   hl, wEntitiesUnknowTableR                ; $7F00: $21 $90 $C3

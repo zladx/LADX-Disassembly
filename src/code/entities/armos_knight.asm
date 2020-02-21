@@ -190,7 +190,7 @@ jr_006_53D3:
 jr_006_53F9:
     ld   [hl], a                                  ; $53F9: $77
     ldh  [hScratch1], a                           ; $53FA: $E0 $D8
-    ld   hl, wEntitiesUnknowTableF                ; $53FC: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $53FC: $21 $F0 $C2
     add  hl, de                                   ; $53FF: $19
     ld   [hl], $0F                                ; $5400: $36 $0F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5402: $21 $40 $C3

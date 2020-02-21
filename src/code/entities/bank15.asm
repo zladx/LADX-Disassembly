@@ -43,7 +43,7 @@ ResetEntity::
     ld   hl, wEntitiesTransitionCountdownTable    ; $403A: $21 $E0 $C2
     add  hl, bc                                   ; $403D: $09
     ld   [hl], b                                  ; $403E: $70
-    ld   hl, wEntitiesUnknowTableF                ; $403F: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $403F: $21 $F0 $C2
     add  hl, bc                                   ; $4042: $09
     ld   [hl], b                                  ; $4043: $70
     ld   hl, wEntitiesUnknowTableG                ; $4044: $21 $00 $C3
@@ -3693,7 +3693,7 @@ func_015_5E38::
     ld   hl, wEntitiesPosYTable                   ; $5E62: $21 $10 $C2
     add  hl, de                                   ; $5E65: $19
     ld   [hl], a                                  ; $5E66: $77
-    ld   hl, wEntitiesUnknowTableF                ; $5E67: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $5E67: $21 $F0 $C2
     add  hl, de                                   ; $5E6A: $19
     ld   [hl], $0F                                ; $5E6B: $36 $0F
     ld   hl, wEntitiesSpriteVariantTable          ; $5E6D: $21 $B0 $C3
@@ -6563,7 +6563,7 @@ BeetleSpawnerEntityHandler::
     ld   hl, wEntitiesTransitionCountdownTable    ; $7559: $21 $E0 $C2
     add  hl, de                                   ; $755C: $19
     ld   [hl], $18                                ; $755D: $36 $18
-    ld   hl, wEntitiesUnknowTableF                ; $755F: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $755F: $21 $F0 $C2
     add  hl, de                                   ; $7562: $19
     ld   [hl], $20                                ; $7563: $36 $20
     push bc                                       ; $7565: $C5

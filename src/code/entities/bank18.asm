@@ -5934,12 +5934,12 @@ jr_018_6B68:
     and  $7F                                      ; $6B70: $E6 $7F
     add  $40                                      ; $6B72: $C6 $40
     ld   [hl], a                                  ; $6B74: $77
-    ld   hl, wEntitiesUnknowTableF                ; $6B75: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $6B75: $21 $F0 $C2
     add  hl, bc                                   ; $6B78: $09
     ld   [hl], $10                                ; $6B79: $36 $10
 
 jr_018_6B7B:
-    ld   hl, wEntitiesUnknowTableF                ; $6B7B: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $6B7B: $21 $F0 $C2
     add  hl, bc                                   ; $6B7E: $09
     ld   a, [hl]                                  ; $6B7F: $7E
     and  a                                        ; $6B80: $A7

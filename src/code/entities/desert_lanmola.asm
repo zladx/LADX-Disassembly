@@ -97,7 +97,7 @@ func_006_564B::
     ld   hl, wEntitiesSpeedZTable                 ; $5673: $21 $20 $C3
     add  hl, de                                   ; $5676: $19
     ld   [hl], $10                                ; $5677: $36 $10
-    ld   hl, wEntitiesUnknowTableF                ; $5679: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $5679: $21 $F0 $C2
     add  hl, de                                   ; $567C: $19
     ld   [hl], $10                                ; $567D: $36 $10
     call ClearEntityStatus_06                     ; $567F: $CD $DB $65

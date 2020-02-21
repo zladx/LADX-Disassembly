@@ -1030,7 +1030,7 @@ func_020_4B4A::
     inc  b                                        ; $4B80: $04
 
 func_020_4B81::
-    ld   hl, wEntitiesUnknowTableF                ; $4B81: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $4B81: $21 $F0 $C2
     add  hl, de                                   ; $4B84: $19
     ld   [hl], $10                                ; $4B85: $36 $10
     ld   a, [wBombArrowCooldown]                  ; $4B87: $FA $C0 $C1

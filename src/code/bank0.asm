@@ -697,7 +697,7 @@ IsEntityDropTimerZero::
     jr   IsZero
 
 IsEntityUnknownFZero::
-    ld   hl, wEntitiesUnknowTableF
+    ld   hl, wEntitiesPrivateCountdown1Table
     jr   IsZero
 
 ; Test if the frame counter for the given entity is 0

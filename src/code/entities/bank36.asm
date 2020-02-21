@@ -2371,7 +2371,7 @@ jr_036_4D89:
     ld   [hl], $00                                ; $4DA3: $36 $00
     ld   a, $02                                   ; $4DA5: $3E $02
     ld   [wPaletteDataFlags], a                    ; $4DA7: $EA $D1 $DD
-    ld   hl, wEntitiesUnknowTableF                ; $4DAA: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $4DAA: $21 $F0 $C2
     add  hl, bc                                   ; $4DAD: $09
     ld   [hl], $60                                ; $4DAE: $36 $60
     ld   hl, wEntitiesPrivateState2Table          ; $4DB0: $21 $C0 $C2
@@ -8766,7 +8766,7 @@ jr_036_705F:
     call SpawnNewEntity_trampoline                ; $7061: $CD $86 $3B
     jr   c, jr_036_708E                           ; $7064: $38 $28
 
-    ld   hl, wEntitiesUnknowTableF                ; $7066: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $7066: $21 $F0 $C2
     add  hl, de                                   ; $7069: $19
     ld   [hl], $0F                                ; $706A: $36 $0F
     ldh  a, [hSwordIntersectedAreaX]              ; $706C: $F0 $CE

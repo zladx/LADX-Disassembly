@@ -152,7 +152,7 @@ jr_006_5D4F:
     cp   $05                                      ; $5D66: $FE $05
     ret  nz                                       ; $5D68: $C0
 
-    ld   hl, wEntitiesUnknowTableF                ; $5D69: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $5D69: $21 $F0 $C2
     add  hl, de                                   ; $5D6C: $19
     ld   a, [hl]                                  ; $5D6D: $7E
     and  a                                        ; $5D6E: $A7

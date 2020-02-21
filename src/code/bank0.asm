@@ -8029,7 +8029,7 @@ func_006_783C_trampoline::
     ld   a, $03
     jp   SwitchBank
 
-RemoveAllEntities::
+UnloadAllEntities::
     ld   e, MAX_ENTITIES
     ld   hl, wEntitiesStatusTable
 

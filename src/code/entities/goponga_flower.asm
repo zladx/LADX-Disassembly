@@ -9,7 +9,7 @@ GopongaFlowerEntityHandler::
     call RenderActiveEntitySpritesPair            ; $63FF: $CD $C0 $3B
 
     call func_006_64C6                            ; $6402: $CD $C6 $64
-    call func_C56                                 ; $6405: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $6405: $CD $56 $0C
     call label_3B70                               ; $6408: $CD $70 $3B
     call func_006_641A                            ; $640B: $CD $1A $64
 

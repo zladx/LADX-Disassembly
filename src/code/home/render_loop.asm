@@ -247,7 +247,7 @@ RenderInteractiveFrame::
     jr   z, .saveEngineStatus
 
 .engineIsPaused
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  J_SELECT  ; Was Select button just pressed?
     jr   z, .saveEngineStatus
 

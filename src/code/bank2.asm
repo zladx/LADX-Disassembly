@@ -181,7 +181,7 @@ jr_002_42C7:
     xor  a                                        ; $42CA: $AF
     ldh  [hLinkInteractiveMotionBlocked], a       ; $42CB: $E0 $A1
     call label_1F69_trampoline                    ; $42CD: $CD $61 $1F
-    call Func_1177                                ; $42D0: $CD $77 $11
+    call CheckItemsToUse                          ; $42D0: $CD $77 $11
     call func_002_44ED                            ; $42D3: $CD $ED $44
     call func_002_434A                            ; $42D6: $CD $4A $43
     call func_002_478C                            ; $42D9: $CD $8C $47
@@ -1166,7 +1166,7 @@ jr_002_49AA:
 jr_002_49B6:
     ld   a, $01                                   ; $49B6: $3E $01
     ld   [$C146], a                               ; $49B8: $EA $46 $C1
-    call Func_1177                                ; $49BB: $CD $77 $11
+    call CheckItemsToUse                          ; $49BB: $CD $77 $11
     call func_002_478C                            ; $49BE: $CD $8C $47
     ld   a, [wSwordAnimationState]                ; $49C1: $FA $37 $C1
     ld   [wC16A], a                               ; $49C4: $EA $6A $C1
@@ -1678,7 +1678,7 @@ jr_002_4CD3:
     ld   hl, wEntitiesDropTimerTable              ; $4CF4: $21 $50 $C4
     add  hl, de                                   ; $4CF7: $19
     ld   [hl], $80                                ; $4CF8: $36 $80
-    ld   hl, wEntitiesUnknowTableF                ; $4CFA: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $4CFA: $21 $F0 $C2
     add  hl, de                                   ; $4CFD: $19
     ld   [hl], $18                                ; $4CFE: $36 $18
     ld   hl, wEntitiesSpeedZTable                 ; $4D00: $21 $20 $C3
@@ -3182,7 +3182,7 @@ Data_002_5607::
 
 RenderTranscientLavaSplash::
     call func_002_58D0                            ; $560C: $CD $D0 $58
-    ld   a, [$C3C0]                               ; $560F: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $560F: $FA $C0 $C3
     ld   e, a                                     ; $5612: $5F
     ld   d, $00                                   ; $5613: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $5615: $21 $30 $C0
@@ -3428,7 +3428,7 @@ jr_002_5780:
     ld   c, $3C                                   ; $578C: $0E $3C
 
 jr_002_578E:
-    ld   a, [$C3C0]                               ; $578E: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $578E: $FA $C0 $C3
     ld   e, a                                     ; $5791: $5F
     ld   d, $00                                   ; $5792: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $5794: $21 $30 $C0
@@ -3455,7 +3455,7 @@ jr_002_578E:
 
 RenderTranscientLaserBeam::
     call func_002_58D0                            ; $57B4: $CD $D0 $58
-    ld   a, [$C3C0]                               ; $57B7: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $57B7: $FA $C0 $C3
     ld   e, a                                     ; $57BA: $5F
 
 jr_002_57BB:
@@ -3521,7 +3521,7 @@ jr_002_5833:
 label_002_583A:
     add  hl, de                                   ; $583A: $19
     push hl                                       ; $583B: $E5
-    ld   a, [$C3C0]                               ; $583C: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $583C: $FA $C0 $C3
     ld   e, a                                     ; $583F: $5F
     ld   d, $00                                   ; $5840: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $5842: $21 $30 $C0
@@ -3630,7 +3630,7 @@ label_002_58F5:
     sla  a                                        ; $58F5: $CB $27
     sla  a                                        ; $58F7: $CB $27
     ld   e, a                                     ; $58F9: $5F
-    ld   a, [$C3C0]                               ; $58FA: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $58FA: $FA $C0 $C3
     add  e                                        ; $58FD: $83
     cp   $60                                      ; $58FE: $FE $60
     jr   c, jr_002_5904                           ; $5900: $38 $02
@@ -3638,7 +3638,7 @@ label_002_58F5:
     sub  $60                                      ; $5902: $D6 $60
 
 jr_002_5904:
-    ld   [$C3C0], a                               ; $5904: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $5904: $EA $C0 $C3
     ld   a, [$C3C1]                               ; $5907: $FA $C1 $C3
     add  e                                        ; $590A: $83
     ld   [$C3C1], a                               ; $590B: $EA $C1 $C3
@@ -3656,7 +3656,7 @@ jr_002_591B:
     ld   hl, Data_002_58ED                        ; $591D: $21 $ED $58
     add  hl, de                                   ; $5920: $19
     ld   a, [hl]                                  ; $5921: $7E
-    ld   [$C3C0], a                               ; $5922: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $5922: $EA $C0 $C3
 
 jr_002_5925:
     ret                                           ; $5925: $C9
@@ -6853,7 +6853,7 @@ jr_002_734F:
     ld   [hl], d                                  ; $738E: $72
     ld   hl, hNoiseSfx                             ; $738F: $21 $F4 $FF
     ld   [hl], NOISE_SFX_POT_SMASHED                ; $7392: $36 $09
-    ld   hl, wEntitiesUnknowTableF                ; $7394: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $7394: $21 $F0 $C2
     add  hl, de                                   ; $7397: $19
     ld   [hl], $0F                                ; $7398: $36 $0F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $739A: $21 $40 $C3

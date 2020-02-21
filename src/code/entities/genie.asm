@@ -100,7 +100,7 @@ Data_004_409F::
     db   $00, $01, $00, $02
 
 func_004_40A3::
-    call func_C56                                ; $40A3: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $40A3: $CD $56 $0C
     call label_3B70                               ; $40A6: $CD $70 $3B
     call label_3B44                               ; $40A9: $CD $44 $3B
     jr   nc, jr_004_40C7                          ; $40AC: $30 $19
@@ -273,7 +273,7 @@ jr_004_41A9:
     call label_3B23                               ; $41A9: $CD $23 $3B
 
 jr_004_41AC:
-    call func_C56                                ; $41AC: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $41AC: $CD $56 $0C
     call label_3B70                               ; $41AF: $CD $70 $3B
     call func_004_7BE3                            ; $41B2: $CD $E3 $7B
     ldh  a, [hActiveEntityPosX]                               ; $41B5: $F0 $EE
@@ -509,7 +509,7 @@ func_004_4345::
     ret  nz                                       ; $4348: $C0
 
     call IncrementEntityState                     ; $4349: $CD $12 $3B
-    call IsEntityUnknownFZero                                ; $434C: $CD $00 $0C
+    call GetEntityPrivateCountdown1                                      ; $434C: $CD $00 $0C
     ld   [hl], $FF                                ; $434F: $36 $FF
     ld   a, [wIntroSubTimer]                      ; $4351: $FA $02 $D0
     ld   e, a                                     ; $4354: $5F
@@ -674,7 +674,7 @@ jr_004_43FF:
     ld   [hl], $42                                ; $4436: $36 $42
 
 jr_004_4438:
-    call IsEntityUnknownFZero                                ; $4438: $CD $00 $0C
+    call GetEntityPrivateCountdown1                                      ; $4438: $CD $00 $0C
     jr   nz, jr_004_4487                          ; $443B: $20 $4A
 
     ld   [hl], $30                                ; $443D: $36 $30
@@ -913,7 +913,7 @@ func_004_4575::
 
 jr_004_45A6:
     call ClearEntitySpeed                         ; $45A6: $CD $7F $3D
-    ld   hl, wEntitiesUnknowTableT                ; $45A9: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $45A9: $21 $10 $C4
     add  hl, bc                                   ; $45AC: $09
     ld   [hl], b                                  ; $45AD: $70
     ld   a, $5C                                   ; $45AE: $3E $5C

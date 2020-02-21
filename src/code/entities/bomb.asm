@@ -35,7 +35,7 @@ jr_003_66BF:
     ld   hl, $C300                                ; $66CB: $21 $00 $C3
     add  hl, bc                                   ; $66CE: $09
     ld   [hl], $FF                                ; $66CF: $36 $FF
-    call IsEntityUnknownFZero                                ; $66D1: $CD $00 $0C
+    call GetEntityPrivateCountdown1                                      ; $66D1: $CD $00 $0C
     ld   hl, wEntitiesUnknowTableP                ; $66D4: $21 $40 $C4
     add  hl, bc                                   ; $66D7: $09
     or   [hl]                                     ; $66D8: $B6
@@ -45,7 +45,7 @@ jr_003_66BF:
     cp   $02                                      ; $66DE: $FE $02
     jr   nz, jr_003_66EA                          ; $66E0: $20 $08
 
-    ldh  a, [hJoypadState]                               ; $66E2: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $66E2: $F0 $CC
     and  $20                                      ; $66E4: $E6 $20
     jr   nz, jr_003_66F7                          ; $66E6: $20 $0F
 
@@ -56,7 +56,7 @@ jr_003_66EA:
     cp   $02                                      ; $66ED: $FE $02
     jr   nz, jr_003_66FA                          ; $66EF: $20 $09
 
-    ldh  a, [hJoypadState]                               ; $66F1: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $66F1: $F0 $CC
     and  $10                                      ; $66F3: $E6 $10
     jr   z, jr_003_66FA                           ; $66F5: $28 $03
 

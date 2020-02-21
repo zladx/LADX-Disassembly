@@ -22,7 +22,7 @@ MadBomberEntityHandler::
     ld   de, Data_006_4126                        ; $415D: $11 $26 $41
     call RenderActiveEntitySpritesPair            ; $4160: $CD $C0 $3B
     call func_006_64C6                            ; $4163: $CD $C6 $64
-    call func_C56                                 ; $4166: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4166: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4169: $F0 $F0
     JP_TABLE                                      ; $416B
 ._00 dw MadBomberState0Handler

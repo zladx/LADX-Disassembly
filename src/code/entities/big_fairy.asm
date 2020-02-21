@@ -153,12 +153,12 @@ BigFairyWaitingHandler::
     ret  nc                                       ; $7177: $D0
 
     call IncrementEntityState                     ; $7178: $CD $12 $3B
-    call IsEntityDropTimerZero                    ; $717B: $CD $FB $0B
+    call GetEntityDropTimer                       ; $717B: $CD $FB $0B
     ld   [hl], $48                                ; $717E: $36 $48
     jp_open_dialog $024                           ; $7180
 
 BigFairyHealingHandler::
-    call IsEntityDropTimerZero                    ; $7185: $CD $FB $0B
+    call GetEntityDropTimer                       ; $7185: $CD $FB $0B
     jr   nz, jr_006_7197                          ; $7188: $20 $0D
 
     call GetEntityTransitionCountdown             ; $718A: $CD $05 $0C
@@ -174,7 +174,7 @@ jr_006_7197:
     ld   a, $1A                                   ; $719B: $3E $1A
     ldh  [hJingle], a                             ; $719D: $E0 $F2
     call func_006_64C6                            ; $719F: $CD $C6 $64
-    ld   hl, wEntitiesUnknowTableG                ; $71A2: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $71A2: $21 $00 $C3
     add  hl, bc                                   ; $71A5: $09
     ld   a, [hl]                                  ; $71A6: $7E
     and  a                                        ; $71A7: $A7
@@ -191,7 +191,7 @@ jr_006_7197:
     ld   [wAddHealthBuffer], a                    ; $71B7: $EA $93 $DB
 
 jr_006_71BA:
-    call IsEntityUnknownFZero                     ; $71BA: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $71BA: $CD $00 $0C
     jr   nz, jr_006_71F0                          ; $71BD: $20 $31
 
     ld   [hl], $13                                ; $71BF: $36 $13

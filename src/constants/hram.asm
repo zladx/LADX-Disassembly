@@ -214,10 +214,18 @@ hFFCA:: ; FFCA
   ds 1
 
 hPressedButtonsMask:: ; FFCB
- ds 1
+  ; The pressed buttons on the joypad.
+  ; During all the time a button is pressed, the matching bit on this variable is set.
+  ;
+  ; See J_* constants for values.
+  ds 1
 
-; Unlabeled
 hJoypadState:: ; FFCC
+  ; The buttons newly pressed on the joypad.
+  ; The matching bit is set only during the first frame the button is pressed.
+  ; Afterwards, the bit is cleared.
+  ;
+  ; See J_* constants for values.
   ds 1
 
 hSwordIntersectedAreaY:: ; FFCD
@@ -302,10 +310,11 @@ hActiveEntityStatus:: ; FFEA
 hActiveEntityType:: ; FFEB
   ds 1
 
-; Unlabeled
+; Active entity pos Z ?
 ds 1 ; FFEC
 
 ; Unlabeled
+; Active entity X offset?
 ds 1 ; FFED
 
 hActiveEntityPosX:: ; FFEE

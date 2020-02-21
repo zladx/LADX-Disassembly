@@ -97,7 +97,7 @@ func_006_564B::
     ld   hl, wEntitiesSpeedZTable                 ; $5673: $21 $20 $C3
     add  hl, de                                   ; $5676: $19
     ld   [hl], $10                                ; $5677: $36 $10
-    ld   hl, wEntitiesUnknowTableF                ; $5679: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $5679: $21 $F0 $C2
     add  hl, de                                   ; $567C: $19
     ld   [hl], $10                                ; $567D: $36 $10
     call ClearEntityStatus_06                     ; $567F: $CD $DB $65
@@ -157,7 +157,7 @@ func_006_56C7::
 label_006_56C8:
     call func_006_64C6                            ; $56C8: $CD $C6 $64
     call label_3EE8                               ; $56CB: $CD $E8 $3E
-    call IsEntityUnknownFZero                     ; $56CE: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $56CE: $CD $00 $0C
     jr   z, jr_006_5726                           ; $56D1: $28 $53
 
     and  $0F                                      ; $56D3: $E6 $0F
@@ -212,7 +212,7 @@ jr_006_56D9:
 
 jr_006_5726:
     call func_006_594C                            ; $5726: $CD $4C $59
-    call func_C56                                 ; $5729: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5729: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $572C: $F0 $F0
     cp   $02                                      ; $572E: $FE $02
     jr   c, jr_006_5754                           ; $5730: $38 $22
@@ -318,7 +318,7 @@ jr_006_57B2:
     ld   [$C1CD], a                               ; $57D0: $EA $CD $C1
     ldh  a, [hActiveEntityPosY]                   ; $57D3: $F0 $EF
     ld   [$C1CE], a                               ; $57D5: $EA $CE $C1
-    call IsEntityUnknownFZero                     ; $57D8: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $57D8: $CD $00 $0C
     ld   [hl], $61                                ; $57DB: $36 $61
     call IncrementEntityState                     ; $57DD: $CD $12 $3B
 
@@ -399,7 +399,7 @@ jr_006_5841:
     ld   [$C1CD], a                               ; $5847: $EA $CD $C1
     ldh  a, [hActiveEntityPosY]                   ; $584A: $F0 $EF
     ld   [$C1CE], a                               ; $584C: $EA $CE $C1
-    call IsEntityUnknownFZero                     ; $584F: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $584F: $CD $00 $0C
     ld   [hl], $60                                ; $5852: $36 $60
     ld   a, $23                                   ; $5854: $3E $23
     ldh  [hNoiseSfx], a                           ; $5856: $E0 $F4

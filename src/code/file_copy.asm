@@ -40,7 +40,7 @@ FileCopyEntryPoint::
     call func_4852
     jp   IncrementGameplaySubtypeAndReturn
     call label_6BA8
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $08
     jr   z, label_500E
     ld   a, [$D001]
@@ -48,7 +48,7 @@ FileCopyEntryPoint::
     jr   label_5018
 
 label_500E::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $04
     jr   z, label_501D
     ld   a, [$D001]
@@ -59,7 +59,7 @@ label_5018::
     ld   [$D001], a
 
 label_501D::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $90
     jr   z, label_5055
     ld   a, [$D001]
@@ -173,7 +173,7 @@ Data_001_50C7::
 
 func_001_50DF::
     call label_6BA8
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $08
     jr   z, label_50F1
     ld   a, [$D002]
@@ -182,7 +182,7 @@ func_001_50DF::
     ld   [$D002], a
 
 label_50F1::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $04
     jr   z, label_5104
     ld   a, [$D002]
@@ -196,7 +196,7 @@ label_5101::
 
 label_5104::
     call label_5094
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     bit  5, a
     jr   z, label_5114
     ld   hl, wGameplaySubtype
@@ -342,7 +342,7 @@ label_51CE::
     call label_5094
     call label_51CE
     call label_4F0C
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $90
     jr   z, label_5235
     ld   a, [$D000]
@@ -383,7 +383,7 @@ label_5224::
     jp   label_4555
 
 label_5235::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     bit  5, a
     jr   z, label_5249
     ld   hl, wGameplaySubtype

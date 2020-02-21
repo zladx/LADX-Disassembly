@@ -39,7 +39,7 @@ jr_005_454E:
 jr_005_4557:
     call func_005_7A3A                            ; $4557: $CD $3A $7A
     call label_3B70                               ; $455A: $CD $70 $3B
-    call func_C56                                ; $455D: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $455D: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4560: $F0 $F0
     cp   $03                                      ; $4562: $FE $03
     jr   z, jr_005_4580                           ; $4564: $28 $1A

@@ -854,7 +854,7 @@ Data_017_49B7::
     db   $FF, $FF, $FF, $FF, $FF, $00, $00, $00  ; $4AAF
 
 EndCreditsEntryPoint::
-    ldh  a, [$FFCC]                               ; $4AB7: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $4AB7: $F0 $CC
     and  $0C                                      ; $4AB9: $E6 $0C
     jr   z, jr_017_4AC7                           ; $4ABB: $28 $0A
 
@@ -866,7 +866,7 @@ EndCreditsEntryPoint::
     ld   [wGameplaySubtype], a                               ; $4AC4: $EA $96 $DB
 
 jr_017_4AC7:
-    ldh  a, [$FFCC]                               ; $4AC7: $F0 $CC
+    ldh  a, [hJoypadState]                        ; $4AC7: $F0 $CC
     and  $03                                      ; $4AC9: $E6 $03
     jr   z, jr_017_4AD6                           ; $4ACB: $28 $09
 
@@ -5172,7 +5172,7 @@ Data_017_70D1::
     db   $00, $20, $EA, $00, $08, $20, $EB, $00  ; $7169 |. ... ..|
 
     ld   a, $3C                                   ; $7171: $3E $3C
-    ld   [$C3C0], a                               ; $7173: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7173: $EA $C0 $C3
     ldh  a, [hBaseScrollY]                        ; $7176: $F0 $97
     ld   e, a                                     ; $7178: $5F
     ldh  a, [$FFEC]                               ; $7179: $F0 $EC
@@ -5279,7 +5279,7 @@ func_017_725C::
     ld   a, $1C                                   ; $726B: $3E $1C
     ld   [wOBJ0Palette], a                               ; $726D: $EA $98 $DB
     ld   a, $3C                                   ; $7270: $3E $3C
-    ld   [$C3C0], a                               ; $7272: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7272: $EA $C0 $C3
     ldh  a, [hFrameCounter]                               ; $7275: $F0 $E7
     rra                                           ; $7277: $1F
     rra                                           ; $7278: $1F
@@ -5378,7 +5378,7 @@ Data_017_72D8::
 
 func_017_7398::
     ld   a, $3C                                   ; $7398: $3E $3C
-    ld   [$C3C0], a                               ; $739A: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $739A: $EA $C0 $C3
     ldh  a, [hFrameCounter]                               ; $739D: $F0 $E7
     and  $03                                      ; $739F: $E6 $03
     jr   nz, jr_017_73AF                          ; $73A1: $20 $0C
@@ -5696,7 +5696,7 @@ jr_017_74E0:
     add  hl, de                                   ; $74FE: $19
     ld   c, $07                                   ; $74FF: $0E $07
     ld   a, $40                                   ; $7501: $3E $40
-    ld   [$C3C0], a                               ; $7503: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7503: $EA $C0 $C3
     call RenderActiveEntitySpritesRect            ; $7506: $CD $E6 $3C
     ld   a, $07                                   ; $7509: $3E $07
     call label_3DA0                               ; $750B: $CD $A0 $3D
@@ -5829,7 +5829,7 @@ jr_017_75A8:
     ld   l, h                                     ; $75A8: $6C
     jr   nc, @-$4F                                ; $75A9: $30 $AF
 
-    ld   [$C3C0], a                               ; $75AB: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $75AB: $EA $C0 $C3
     ld   hl, hBaseScrollY                                ; $75AE: $21 $97 $FF
     ldh  a, [$FFEC]                               ; $75B1: $F0 $EC
 
@@ -6133,7 +6133,7 @@ jr_017_76BF:
     ld   [bc], a                                  ; $76D9: $02
     ld   bc, $101                                 ; $76DA: $01 $01 $01
     ld   bc, $3E                                  ; $76DD: $01 $3E $00
-    ld   [$C3C0], a                               ; $76E0: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $76E0: $EA $C0 $C3
     ldh  a, [hBaseScrollY]                               ; $76E3: $F0 $97
     ld   d, a                                     ; $76E5: $57
     sra  a                                        ; $76E6: $CB $2F
@@ -6331,7 +6331,7 @@ jr_017_77E2:
 
     rst  $00                                      ; $77F6: $C7
     ld   a, $00                                   ; $77F7: $3E $00
-    ld   [$C3C0], a                               ; $77F9: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $77F9: $EA $C0 $C3
     ldh  a, [hFrameCounter]                               ; $77FC: $F0 $E7
 
 jr_017_77FE:
@@ -6632,7 +6632,7 @@ func_017_79A4::
     call func_017_7A01                            ; $79B0: $CD $01 $7A
     ld   de, Data_017_7987                        ; $79B3: $11 $87 $79
     call func_017_7A29                            ; $79B6: $CD $29 $7A
-    call IsEntityDropTimerZero                                ; $79B9: $CD $FB $0B
+    call GetEntityDropTimer                       ; $79B9: $CD $FB $0B
     ret  z                                        ; $79BC: $C8
 
     call func_017_7E2D                            ; $79BD: $CD $2D $7E
@@ -7081,7 +7081,7 @@ jr_017_7BF2:
     ld   hl, $1000                                ; $7C16: $21 $00 $10
     ld   e, [hl]                                  ; $7C19: $5E
     ld   hl, $503E                                ; $7C1A: $21 $3E $50
-    ld   [$C3C0], a                               ; $7C1D: $EA $C0 $C3
+    ld   [wOAMNextAvailableSlot], a               ; $7C1D: $EA $C0 $C3
     ld   hl, $7BDB                                ; $7C20: $21 $DB $7B
     ldh  a, [$FFF1]                               ; $7C23: $F0 $F1
     rla                                           ; $7C25: $17

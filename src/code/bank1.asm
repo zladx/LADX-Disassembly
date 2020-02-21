@@ -73,7 +73,7 @@ label_4128::
 label_412A::
     ld   hl, $C13F
     call label_6BA8
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $0C
     jr   z, label_413B
     ld   a, [hl]
@@ -575,13 +575,13 @@ label_48E4::
 
 FileSelectionInteractiveHandler::
     call label_6BA8
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $90
     jr   z, label_48F4
     jp   IncrementGameplaySubtypeAndReturn
 
 label_48F4::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $0C
     jr   z, label_4920
     ld   c, $02
@@ -591,7 +591,7 @@ label_48F4::
     inc  c
 
 label_4903::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     bit  2, a
     jr   nz, label_4915
     ld   a, [wSaveSlot]
@@ -615,7 +615,7 @@ label_4920::
     ld   a, [wSaveSlot]
     cp   $03
     jr   nz, label_4954
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $03
     jr   z, label_4938
     call label_6BAE
@@ -1454,13 +1454,13 @@ label_5619::
 
 MinimapEntryPoint::
     xor  a
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ld   a, [wGameplaySubtype]
     cp   $05
     jr   z, label_5639
     xor  a
     ldh  [$FFCB], a
-    ldh  [$FFCC], a
+    ldh  [hJoypadState], a
     ld   a, [wGameplaySubtype]
 
 label_5639::
@@ -1596,7 +1596,7 @@ label_571B::
     ld   a, [ROM_DebugTool3]
     and  a
     jr   z, label_5731
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     bit  7, a
     jr   z, label_5731
     xor  a
@@ -1609,7 +1609,7 @@ label_5731::
     ld   a, [$C19F]
     and  a
     jp   nz, label_5818
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $10
     jr   z, label_57B7
     ld   a, [$DBB4]
@@ -1733,7 +1733,7 @@ label_57FA::
     ld   e, $60
 
 label_5804::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  e
     jr   z, label_5818
     xor  a
@@ -1939,7 +1939,7 @@ label_5A92::
     jr   label_5AA0
 
 label_5A9D::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     ld   c, a
 
 label_5AA0::
@@ -2178,7 +2178,7 @@ label_5C7B::
     ld   [$C1B0], a
     ldh  [hActiveEntitySpriteVariant], a
     ld   a, $00
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ld   a, $08
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   a, $00
@@ -2222,7 +2222,7 @@ label_5CBD::
     ld   hl, label_5BAD
     add  hl, de
     ld   a, $08
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     xor  a
     ldh  [hActiveEntityTilesOffset], a
     ld   c, $08
@@ -3380,7 +3380,7 @@ label_68BF::
     ret
 
 label_68CF::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $B0
     jr   z, label_68E3
     ld   a, JINGLE_VALIDATE
@@ -3634,7 +3634,7 @@ label_6AE3::
     add  hl, de
     ld   c, [hl]
     xor  a
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     ld   hl, label_6982
     ldh  a, [hIsGBC]
     and  a
@@ -3648,7 +3648,7 @@ label_6AF4::
 include "code/face_shrine_mural.asm"
 
 label_6BA8::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $0C
     jr   z, label_6BB4
 

@@ -63,7 +63,7 @@ jr_005_407C:
     ret  nz                                       ; $408F: $C0
 
     call func_005_44CB                            ; $4090: $CD $CB $44
-    call func_C56                                ; $4093: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4093: $CD $56 $0C
     ld   a, [wIsBowWowFollowingLink]              ; $4096: $FA $56 $DB
     and  a                                        ; $4099: $A7
     jr   nz, jr_005_409F                          ; $409A: $20 $03
@@ -225,7 +225,7 @@ func_005_4180::
     call GetEntityTransitionCountdown             ; $4180: $CD $05 $0C
     jr   z, jr_005_41B1                           ; $4183: $28 $2C
 
-    call IsEntityUnknownFZero                     ; $4185: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $4185: $CD $00 $0C
     jr   nz, jr_005_41B0                          ; $4188: $20 $26
 
     call GetRandomByte                            ; $418A: $CD $0D $28
@@ -272,7 +272,7 @@ jr_005_41BF:
     jp   ApplyVectorTowardsLink_trampoline        ; $41CC: $C3 $AA $3B
 
 func_005_41CF::
-    call IsEntityUnknownFZero                     ; $41CF: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $41CF: $CD $00 $0C
     jr   nz, jr_005_41DA                          ; $41D2: $20 $06
 
     ld   [hl], $20                                ; $41D4: $36 $20
@@ -373,7 +373,7 @@ jr_005_4252:
 label_005_4253:
     call func_005_43A8                            ; $4253: $CD $A8 $43
     call func_005_43FE                            ; $4256: $CD $FE $43
-    ld   a, [$C3C0]                               ; $4259: $FA $C0 $C3
+    ld   a, [wOAMNextAvailableSlot]               ; $4259: $FA $C0 $C3
     ld   e, a                                     ; $425C: $5F
     ld   d, $00                                   ; $425D: $16 $00
     ld   hl, wDynamicOAMBuffer                    ; $425F: $21 $30 $C0
@@ -574,7 +574,7 @@ label_005_4335:
 
     call GetEntityTransitionCountdown             ; $436E: $CD $05 $0C
     ld   [hl], b                                  ; $4371: $70
-    ld   hl, wEntitiesUnknowTableG                ; $4372: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $4372: $21 $00 $C3
     add  hl, bc                                   ; $4375: $09
     ld   a, [hl]                                  ; $4376: $7E
     and  a                                        ; $4377: $A7

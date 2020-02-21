@@ -114,7 +114,7 @@ jr_006_5361:
     ld   [hl], b                                  ; $5386: $70
 
 jr_006_5387:
-    call IsEntityUnknownFZero                     ; $5387: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $5387: $CD $00 $0C
     jr   z, jr_006_5394                           ; $538A: $28 $08
 
     ld   a, $02                                   ; $538C: $3E $02
@@ -190,7 +190,7 @@ jr_006_53D3:
 jr_006_53F9:
     ld   [hl], a                                  ; $53F9: $77
     ldh  [hScratch1], a                           ; $53FA: $E0 $D8
-    ld   hl, wEntitiesUnknowTableF                ; $53FC: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $53FC: $21 $F0 $C2
     add  hl, de                                   ; $53FF: $19
     ld   [hl], $0F                                ; $5400: $36 $0F
     ld   hl, wEntitiesPhysicsFlagsTable           ; $5402: $21 $40 $C3
@@ -214,7 +214,7 @@ label_006_5411:
 ._07 dw ArmosKnightState7Handler
 
 ArmosKnightState0Handler::
-    call func_C56                                 ; $5424: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5424: $CD $56 $0C
     call func_006_6594                            ; $5427: $CD $94 $65
     add  $20                                      ; $542A: $C6 $20
     cp   $40                                      ; $542C: $FE $40
@@ -233,7 +233,7 @@ jr_006_5441:
     ret                                           ; $5441: $C9
 
 ArmosKnightState1Handler::
-    call func_C56                                 ; $5442: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5442: $CD $56 $0C
     call GetEntityTransitionCountdown             ; $5445: $CD $05 $0C
     jr   nz, jr_006_544F                          ; $5448: $20 $05
 
@@ -247,7 +247,7 @@ jr_006_544F:
     jp   SetEntitySpriteVariant                   ; $5453: $C3 $0C $3B
 
 ArmosKnightState2Handler::
-    call func_C56                                 ; $5456: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5456: $CD $56 $0C
     call GetEntityTransitionCountdown             ; $5459: $CD $05 $0C
     jr   nz, jr_006_5476                          ; $545C: $20 $18
 
@@ -364,7 +364,7 @@ ArmosKnightState6Handler::
     and  a                                        ; $550A: $A7
     jr   nz, jr_006_5512                          ; $550B: $20 $05
 
-    call IsEntityUnknownFZero                     ; $550D: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $550D: $CD $00 $0C
     ld   [hl], $40                                ; $5510: $36 $40
 
 jr_006_5512:

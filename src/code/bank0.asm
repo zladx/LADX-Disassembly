@@ -678,7 +678,7 @@ Farcall::
     ld   [MBC3SelectBank], a
     ret
 
-;Jump to address in wFarcallAdressHigh, wFarcallAdressLow
+; Jump to address in wFarcallAdressHigh, wFarcallAdressLow
 Farcall_trampoline::
     ld   a, [wFarcallAdressHigh]
     ld   h, a
@@ -686,26 +686,41 @@ Farcall_trampoline::
     ld   l, a
     jp   hl
 
-func_BF0::
+UpdateLinkWalkingAnimation_trampoline::
     ld   a, BANK(LinkAnimationsLists)
     ld   [MBC3SelectBank], a
     call UpdateLinkWalkingAnimation
     jp   ReloadSavedBank
 
-IsEntityDropTimerZero::
+; Retrieve the drop timer for the given entity.
+; Input:
+;   bc   entity index
+; Output:
+;   hl   address of the drop timer for this entity
+;   a    value of the drop timer for this entity
+;   z    whether the drop timer is zero
+GetEntityDropTimer::
     ld   hl, wEntitiesDropTimerTable
     jr   IsZero
 
-IsEntityUnknownFZero::
-    ld   hl, wEntitiesUnknowTableF
+; Retrieve the private counter 1 for the given entity.
+; Input:
+;   bc   entity index
+; Output:
+;   hl   address of the private counter for this entity
+;   a    value of the private counter for this entity
+;   z    whether the private counter is zero
+GetEntityPrivateCountdown1::
+    ld   hl, wEntitiesPrivateCountdown1Table
     jr   IsZero
 
-; Test if the frame counter for the given entity is 0
+; Retrieve the transition counter for the given entity.
 ; Input:
-;  - bc: entity number
+;   bc   entity index
 ; Output:
-;  - a: the value read
-;  - z: whether the value equal to zero
+;   hl   address of the transition counter for this entity
+;   a    value of the transition counter for this entity
+;   z    whether the transition counter is zero
 GetEntityTransitionCountdown::
     ld   hl, wEntitiesTransitionCountdownTable
 
@@ -779,8 +794,12 @@ func_C50::
     ld   [hl], $04
     ret
 
-func_C56::
-    ld   hl, wEntitiesUnknowTableT
+; Decrement the wEntitiesIgnoreHitsCountdownTable value for the given entity.
+;
+; Inputs:
+;   bc   entity index
+DecrementEntityIgnoreHitsCountdown::
+    ld   hl, wEntitiesIgnoreHitsCountdownTable
     add  hl, bc
     ld   a, [hl]
     and  a
@@ -1630,208 +1649,225 @@ LinkMotionInteractiveHandler::
 
     jpsw label_002_4287
 
-Func_1177::
+; Check if one of the inventory item should be used
+CheckItemsToUse::
     ld   a, [$C50A]
     ld   hl, $C167
     or   [hl]
     ld   hl, $C1A4
     or   [hl]
     ret  nz
+
+    ;
+    ; Configure the sword and shield
+    ;
+
     ld   a, [wIsRunningWithPegasusBoots]
     and  a
-    jr   z, label_11BC
-    ld   a, [wBButtonSlot]
-    cp   $01
-    jr   z, label_11AA
-    ld   a, [wAButtonSlot]
-    cp   $01
-    jr   z, label_11AA
-    ld   a, [wBButtonSlot]
-    cp   $04
-    jr   z, label_11A5
-    ld   a, [wAButtonSlot]
-    cp   $04
-    jr   nz, label_11BA
+    jr   z, .notRunning
 
-label_11A5::
+    ld   a, [wBButtonSlot]
+    cp   INVENTORY_SWORD
+    jr   z, .swordEquiped
+    ld   a, [wAButtonSlot]
+    cp   INVENTORY_SWORD
+    jr   z, .swordEquiped
+    ld   a, [wBButtonSlot]
+    cp   INVENTORY_SHIELD
+    jr   z, .shieldEquiped
+    ld   a, [wAButtonSlot]
+    cp   INVENTORY_SHIELD
+    jr   nz, .shieldEnd
+
+.shieldEquiped
     call SetShieldVals
-    jr   label_11BA
+    jr   .shieldEnd
 
-label_11AA::
+.swordEquiped
     ld   a, [wSwordAnimationState]
     dec  a
     cp   $04
-    jr   c, label_11BA
+    jr   c, .shieldEnd
     ld   a, $05
     ld   [wSwordAnimationState], a
     ld   [$C16A], a
 
-label_11BA::
-    jr   label_11C3
+.shieldEnd
+    jr   .swordShieldEnd
 
-label_11BC::
+.notRunning
     xor  a
     ld   [wIsUsingShield], a
     ld   [wHasMirrorShield], a
 
-label_11C3::
+.swordShieldEnd
+
     ld   a, [$C117]
     and  a
-    jp   nz, label_12ED
+    jp   nz, UseItem.return
     ld   a, [wIsCarryingLiftedObject]
     and  a
-    jp   nz, label_12ED
+    jp   nz, UseItem.return
     ld   a, [wSwordAnimationState]
     and  a
-    jr   z, label_11E2
+    jr   z, .jr_11E2
     cp   $03
-    jr   nz, label_11E2
+    jr   nz, .jr_11E2
     ld   a, [$C138]
     cp   $03
-    jr   nc, label_11E8
+    jr   nc, .jr_11E8
 
-label_11E2::
+.jr_11E2
     ldh  a, [hLinkInteractiveMotionBlocked]
     and  a
-    jp   nz, label_12ED
+    jp   nz, UseItem.return
 
-label_11E8::
+.jr_11E8
     ld   a, [wAButtonSlot]
-    cp   $08
-    jr   nz, label_11FE
+    cp   INVENTORY_PEGASUS_BOOTS
+    jr   nz, .jr_11FE
     ldh  a, [hPressedButtonsMask]
-    and  $20
-    jr   z, label_11FA
+    and  J_B
+    jr   z, .jr_11FA
     call UsePegasusBoots
-    jr   label_11FE
+    jr   .jr_11FE
 
-label_11FA::
+.jr_11FA
     xor  a
     ld   [wPegasusBootsChargeMeter], a
 
-label_11FE::
+.jr_11FE
     ld   a, [wBButtonSlot]
-    cp   $08
-    jr   nz, label_1214
+    cp   INVENTORY_PEGASUS_BOOTS
+    jr   nz, .jr_1214
     ldh  a, [hPressedButtonsMask]
-    and  $10
-    jr   z, label_1210
+    and  J_A
+    jr   z, .jr_1210
     call UsePegasusBoots
+    jr   .jr_1214
 
-label_120E::
-    jr   label_1214
-
-label_1210::
+.jr_1210
     xor  a
     ld   [wPegasusBootsChargeMeter], a
 
-label_1214::
+.jr_1214
+
     ld   a, [wBButtonSlot]
-    cp   $04
-    jr   nz, label_1235
+    cp   INVENTORY_SHIELD
+    jr   nz, .shieldBEnd
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
     ldh  a, [hPressedButtonsMask]
-    and  $10
-    jr   z, label_1235
+    and  J_A
+    jr   z, .shieldBEnd
     ld   a, [$C1AD]
     cp   $01
-    jr   z, label_1235
+    jr   z, .shieldBEnd
     cp   $02
-    jr   z, label_1235
+    jr   z, .shieldBEnd
     call SetShieldVals
+.shieldBEnd
 
-label_1235::
     ld   a, [wAButtonSlot]
-    cp   $04
-    jr   nz, label_124B
+    cp   INVENTORY_SHIELD
+    jr   nz, .shieldAEnd
     ld   a, [wShieldLevel]
     ld   [wHasMirrorShield], a
     ldh  a, [hPressedButtonsMask]
-    and  $20
-    jr   z, label_124B
+    and  J_B
+    jr   z, .shieldAEnd
     call SetShieldVals
+.shieldAEnd
 
-label_124B::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $20
-    jr   z, label_125E
+    jr   z, .jr_125E
     ld   a, [$C1AD]
     cp   $02
-    jr   z, label_125E
-    ld   a, [wAButtonSlot]
-    call ItemFunction
+    jr   z, .jr_125E
 
-label_125E::
-    ldh  a, [$FFCC]
+    ; Use item in A slot
+    ld   a, [wAButtonSlot]
+    call UseItem
+
+.jr_125E
+    ldh  a, [hJoypadState]
     and  $10
-    jr   z, label_1275
+    jr   z, .jr_1275
     ld   a, [$C1AD]
     cp   $01
-    jr   z, label_1275
+    jr   z, .jr_1275
     cp   $02
-    jr   z, label_1275
-    ld   a, [wBButtonSlot]
-    call ItemFunction
+    jr   z, .jr_1275
 
-label_1275::
+    ; Use item in B slot
+    ld   a, [wBButtonSlot]
+    call UseItem
+
+.jr_1275
     ldh  a, [hPressedButtonsMask]
     and  $20
-    jr   z, label_1281
+    jr   z, .jr_1281
     ld   a, [wAButtonSlot]
     call label_1321
 
-label_1281::
+.jr_1281
     ldh  a, [hPressedButtonsMask]
     and  $10
-    jr   z, label_128D
+    jr   z, .jr_128D
     ld   a, [wBButtonSlot]
     call label_1321
 
-label_128D::
+.jr_128D
     ; Special code for the Color Dungeon
     callsb func_020_48CA
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
     ret
 
-ItemFunction::
+; Use an inventory item.
+;
+; Input:
+;   a    inventory item to use
+UseItem::
     ld   c, a
-    cp   $01
+    cp   INVENTORY_SWORD
     jp   z, UseSword
-    cp   $04
+    cp   INVENTORY_SHIELD
     jp   z, UseShield
-    cp   $02
+    cp   INVENTORY_BOMBS
     jp   z, PlaceBomb
-    cp   $03
+    cp   INVENTORY_POWER_BRACELET
     jp   z, UsePowerBracelet
-    cp   $05
+    cp   INVENTORY_BOW
     jp   z, ShootArrow
-    cp   $0D
+    cp   INVENTORY_BOOMERANG
     jp   z, UseBoomerang
-    cp   $06
+    cp   INVENTORY_HOOKSHOT
     jp   z, UseHookshot
-    cp   $0A
+    cp   INVENTORY_ROCS_FEATHER
     jp   z, UseRocksFeather
-    cp   $09
+    cp   INVENTORY_OCARINA
     jp   z, UseOcarina
-    cp   $0C
+    cp   INVENTORY_MAGIC_POWDER
     jp   z, UseMagicPowder
-    cp   $0B
+    cp   INVENTORY_SHOVEL
     jp   z, UseShovel
-    cp   $07 ; Magic wand
-    jr   nz, label_12ED ; Jump to use boots?
+    cp   INVENTORY_MAGIC_ROD
+    jr   nz, .return
+
+    ; Use Magic Rod
     ld   hl, wSwordAnimationState
     ld   a, [$C19B]
     or   [hl]
-    jr   nz, label_12ED
+    jr   nz, .return
     ld   a, [wActiveProjectileCount]
     cp   $02
-    jr   nc, label_12ED
+    jr   nc, .return
     ld   a, $8E
     ld   [$C19B], a
 
-label_12ED::
+.return
     ret
 
 UseShield::
@@ -1872,17 +1908,22 @@ UseHookshot::
     ret  nz
     jp   FireHookshot
 
+; Inputs:
+;   a    inventory item
 label_1321::
-    cp   $01
+    cp   INVENTORY_SWORD
     ret  nz
+
     ld   hl, wSwordAnimationState
     ld   a, [$C1AD]
     and  $03
     or   [hl]
     ret  nz
+
     ld   a, [$C160]
     and  a
     ret  nz
+
     xor  a
     ld   [$C1AC], a
     ld   a, $05
@@ -1907,15 +1948,18 @@ PlaceBomb::
     ld   a, [wHasPlacedBomb]
     cp   $01
     ret  nc
+
     ld   a, [wBombCount]
     and  a
     jp   z, PlayWrongAnswerJingle
+
     sub  a, $01
     daa
     ld   [wBombCount], a
     ld   a, ENTITY_BOMB
     call SpawnPlayerProjectile
     ret  c
+    ; fallthrough
 
 func_1373::
     callsb func_020_4B81
@@ -1929,12 +1973,12 @@ UsePowerBracelet::
 UseBoomerang::
     ld   a, [wActiveProjectileCount]
     and  a
-
-label_1387::
     ret  nz
+
     ld   a, ENTITY_BOOMERANG
     call SpawnPlayerProjectile
     ret  c
+
     callsb func_020_4BFF
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
@@ -2097,7 +2141,7 @@ UseMagicPowder::
     ret  nz
     ld   a, [wHasToadstool]
     and  a
-    jr   z, label_14A7
+    jr   z, .jr_14A7
     ldh  a, [hLinkPositionZ]
     and  a
     ret  nz
@@ -2107,7 +2151,7 @@ UseMagicPowder::
     ld   [wDialogGotItemCountdown], a
     ret
 
-label_14A7::
+.jr_14A7
     ld   a, [wMagicPowderCount]
     and  a
     jp   z, PlayWrongAnswerJingle
@@ -4090,27 +4134,27 @@ ReadJoypadState::
 .notWorld
     xor  a
     ldh  [hPressedButtonsMask], a
-    ldh  [$FFCC], a
+    ldh  [hJoypadState], a
     ret
 
 .readState
     ld   a, $20
     ld   [rP1], a
-    ld   a, [$FF00]
-    ld   a, [$FF00]
+    ld   a, [rP1]
+    ld   a, [rP1]
     cpl
     and  $0F
     ld   b, a
     ld   a, $10
     ld   [rP1], a
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
-    ld   a, [$FF00]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
+    ld   a, [rP1]
     swap a
     cpl
     and  $F0
@@ -4119,7 +4163,7 @@ ReadJoypadState::
     ldh  a, [hPressedButtonsMask]
     xor  c
     and  c
-    ldh  [$FFCC], a
+    ldh  [hJoypadState], a
     ld   a, c
     ldh  [hPressedButtonsMask], a
     ld   a, $30
@@ -7119,7 +7163,7 @@ AnimateEntities::
     ld   hl, data_3989
     add  hl, de
     ld   a, [hl]
-    ld   [$C3C0], a
+    ld   [wOAMNextAvailableSlot], a
     callsb func_020_4303
     xor  a
     ld   [MBC3SelectBank], a
@@ -7213,10 +7257,10 @@ AnimateEntity::
     call UpdateEntityPositionForRoomTransition
 .liftedEnd
 
-    ld   a, BANK(func_014_4D73)
+    ld   a, BANK(UpdateEntityTimers)
     ld   [wCurrentBank], a
     ld   [MBC3SelectBank], a
-    call func_014_4D73
+    call UpdateEntityTimers
 
     ; Select bank 3
     ld   a, $03
@@ -7457,8 +7501,8 @@ RenderActiveEntitySpritesPair::
 
     push de
 
-    ; de = wDynamicOAMBuffer + [$C3C0]
-    ld   a, [$C3C0]
+    ; de = wDynamicOAMBuffer + [wOAMNextAvailableSlot]
+    ld   a, [wOAMNextAvailableSlot]
     ld   e, a
     ld   d, b
     ld   hl, wDynamicOAMBuffer
@@ -7466,12 +7510,14 @@ RenderActiveEntitySpritesPair::
     ld   e, l
     ld   d, h
 
-    ; [de++] = [$FFEC]
+    ; Sprite 0: set OAM byte 0 (Y position)
+    ; [de] = [$FFEC]
     ldh  a, [$FFEC]
     ld   [de], a
     inc  de
 
-    ; [de++] = [$FFED] + [hActiveEntityPosX] - [wScreenShakeHorizontal]
+    ; Sprite 0: set OAM byte 1 (X position)
+    ; [de] = [$FFED / 4] + [hActiveEntityPosX] - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
     ldh  a, [$FFED]
@@ -7495,6 +7541,7 @@ RenderActiveEntitySpritesPair::
     pop  hl
     add  hl, bc
 
+    ; Sprite 0: set OAM byte 2 (tile n°)
     ; [de] = [hl++] + [hActiveEntityTilesOffset]
     ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
@@ -7511,6 +7558,8 @@ RenderActiveEntitySpritesPair::
 .jr_3C08
 
     inc  de
+
+    ; Sprite 0: set OAM byte 3 (tile attribute)
     ld   a, [hli]
     push hl
     ld   hl, $FFED
@@ -7518,20 +7567,23 @@ RenderActiveEntitySpritesPair::
     ld   [de], a
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .jr_3C21
+    jr   z, .gbcEnd
     ldh  a, [$FFED]
     and  $10
-    jr   z, .jr_3C21
+    jr   z, .gbcEnd
     ld   a, [de]
     and  $F8
     or   $04
     ld   [de], a
-.jr_3C21
-
+.gbcEnd
     inc  de
+
+    ; Sprite 1: set OAM byte 0 (Y position)
     ldh  a, [$FFEC]
     ld   [de], a
     inc  de
+
+    ; Sprite 1: set OAM byte 1 (X position)
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
     ldh  a, [$FFED]
@@ -7544,6 +7596,8 @@ RenderActiveEntitySpritesPair::
     add  a, [hl]
     ld   [de], a
     inc  de
+
+    ; Sprite 1: set OAM byte 2 (tile n°)
     pop  hl
     ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
@@ -7560,6 +7614,8 @@ RenderActiveEntitySpritesPair::
 .jr_3C4B
 
     inc  de
+
+    ; Sprite 1: set OAM byte 3 (tile attribute)
     ld   a, [hl]
     ld   hl, $FFED
     xor  [hl]
@@ -7582,6 +7638,8 @@ RenderActiveEntitySpritesPair::
     ld   b, $00
 
     callsb func_015_795D
+    ; fallthrough
+
 label_3C71::
     call func_015_7995
 
@@ -7600,7 +7658,7 @@ label_3C71::
 ;   de                          address of the display list
 ;   wActiveEntityIndex          index
 ;   hActiveEntitySpriteVariant  the sprite variant to use
-;   $C3C0                       index of the dynamically allocated OAM slot
+;   wOAMNextAvailableSlot       index of the dynamically allocated OAM slot
 RenderActiveEntitySprite::
     ; If hActiveEntitySpriteVariant == -1, return.
     ldh  a, [hActiveEntitySpriteVariant]
@@ -7611,8 +7669,8 @@ RenderActiveEntitySprite::
 
     push de
 
-    ; de = wDynamicOAMBuffer + [$C3C0]
-    ld   a, [$C3C0]
+    ; de = wDynamicOAMBuffer + [wOAMNextAvailableSlot]
+    ld   a, [wOAMNextAvailableSlot]
     ld   l, a
     ld   h, $00
     ld   bc, wDynamicOAMBuffer
@@ -7634,10 +7692,10 @@ RenderActiveEntitySprite::
     ldh  [$FFEC], a
 .sideScrollingEnd
 
-    ; (wDynamicOAMBuffer + [$C3C0] + 0) = [$FFEC]
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 0) = [$FFEC]
     ld   [de], a
     inc  de
-    ; (wDynamicOAMBuffer + [$C3C0] + 1) = [hActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 1) = [hActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   h, a
     ldh  a, [hActiveEntityPosX]
@@ -7645,7 +7703,7 @@ RenderActiveEntitySprite::
     sub  a, h
     ld   [de], a
     inc  de
-    ; (wDynamicOAMBuffer + [$C3C0] + 2) = DataTable[hActiveEntitySpriteVariant * 2]
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 2) = DataTable[hActiveEntitySpriteVariant * 2]
     ldh  a, [hActiveEntitySpriteVariant]
     ld   c, a
     ld   b, $00
@@ -7669,7 +7727,7 @@ RenderActiveEntitySprite::
     ldh  a, [$FFED]
     and  a
     jr   z, .gbcEnd
-    ; (wDynamicOAMBuffer + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) & 0xf8 | 4
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) & 0xf8 | 4
     ld   a, [hl]
     and  $F8
     or   $04
@@ -7677,7 +7735,7 @@ RenderActiveEntitySprite::
     jr   .functionEnd
 .gbcEnd
 
-    ; (wDynamicOAMBuffer + [$C3C0] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) ^ [$FFED]
+    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) ^ [$FFED]
     ld   a, [hli]
     ld   hl, $FFED
     xor  [hl]
@@ -7717,9 +7775,9 @@ RenderActiveEntitySpritesRect::
     inc  a
     jr   z, .return
 
-    ; hl = wDynamicOAMBuffer + [$C3C0]
+    ; hl = wDynamicOAMBuffer + [wOAMNextAvailableSlot]
     push hl
-    ld   a, [$C3C0]
+    ld   a, [wOAMNextAvailableSlot]
     ld   e, a
     ld   d, $00
     ld   hl, wDynamicOAMBuffer
@@ -7971,15 +8029,16 @@ func_006_783C_trampoline::
     ld   a, $03
     jp   SwitchBank
 
-label_3E83::
-    ld   e, $10
+RemoveAllEntities::
+    ld   e, MAX_ENTITIES
     ld   hl, wEntitiesStatusTable
 
-label_3E88::
+.loop
     xor  a
     ldi  [hl], a
     dec  e
-    jr   nz, label_3E88
+    jr   nz, .loop
+
     ret
 
 label_3E8E::
@@ -7988,10 +8047,12 @@ label_3E8E::
     ld   a, [hl]
     and  a
     ret  z
+
     ldh  a, [hFrameCounter]
     xor  c
     and  $03
     ret  nz
+
     ldh  a, [hActiveEntityPosX]
     ldh  [hScratch0], a
     ldh  a, [$FFEC]
@@ -8008,38 +8069,38 @@ label_3EAF::
     add  hl, bc
     ld   a, [hl]
     bit  7, a
-    jr   z, label_3EBA
+    jr   z, .jr_3EBA
     cpl
     inc  a
 
-label_3EBA::
+.jr_3EBA
     ldh  [hScratch0], a
     ld   hl, wEntitiesUnknowTableS
     add  hl, bc
     ld   a, [hl]
     bit  7, a
-    jr   z, label_3EC7
+    jr   z, .jr_3EC7
     cpl
     inc  a
 
-label_3EC7::
+.jr_3EC7
     ld   e, $03
     ld   hl, hScratch0
     cp   [hl]
-    jr   c, label_3ED1
+    jr   c, .jr_3ED1
     ld   e, $0C
 
-label_3ED1::
+.jr_3ED1
     ld   a, e
     ld   hl, wEntitiesCollisionsTable
     add  hl, bc
     and  [hl]
-    jr   z, label_3EDE
-    ld   hl, wEntitiesUnknowTableT
+    jr   z, .jr_3EDE
+    ld   hl, wEntitiesIgnoreHitsCountdownTable
     add  hl, bc
     ld   [hl], b
 
-label_3EDE::
+.jr_3EDE
     ret
 
 data_3EDF::

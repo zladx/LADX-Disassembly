@@ -58,7 +58,7 @@ Data_005_55C8::
 
 func_005_55CA::
     call func_005_7A3A
-    ld   hl, wEntitiesUnknowTableG
+    ld   hl, wEntitiesPrivateCountdown2Table
     add  hl, bc                                   ; $55D0: $09
     ld   a, [hl]                                  ; $55D1: $7E
     and  a                                        ; $55D2: $A7
@@ -193,7 +193,7 @@ jr_005_5650:
     pop  bc                                       ; $56B0: $C1
 
 jr_005_56B1:
-    call func_C56                                ; $56B1: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $56B1: $CD $56 $0C
     ld   hl, wEntitiesUnknowTableY                ; $56B4: $21 $D0 $C3
     add  hl, bc                                   ; $56B7: $09
     ld   a, [hl]                                  ; $56B8: $7E
@@ -238,7 +238,7 @@ Data_005_56F7::
     db   $60, $18
 
 func_005_56F9::
-    call IsEntityDropTimerZero
+    call GetEntityDropTimer
     jr   nz, jr_005_5713                          ; $56FC: $20 $15
 
     call GetEntityTransitionCountdown             ; $56FE: $CD $05 $0C
@@ -307,7 +307,7 @@ jr_005_574A:
     xor  a                                        ; $575E: $AF
     ld   [$C158], a                               ; $575F: $EA $58 $C1
     call PlayBombExplosionSfx                     ; $5762: $CD $4B $0C
-    ld   hl, wEntitiesUnknowTableG                ; $5765: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $5765: $21 $00 $C3
     add  hl, bc                                   ; $5768: $09
     ld   [hl], $FF                                ; $5769: $36 $FF
     jp   IncrementEntityState                     ; $576B: $C3 $12 $3B
@@ -331,7 +331,7 @@ func_005_576E::
     cp   [hl]                                     ; $5789: $BE
     jr   c, jr_005_579B                           ; $578A: $38 $0F
 
-    call IsEntityDropTimerZero                                ; $578C: $CD $FB $0B
+    call GetEntityDropTimer                       ; $578C: $CD $FB $0B
     call GetRandomByte                            ; $578F: $CD $0D $28
     and  $1F                                      ; $5792: $E6 $1F
     add  $40                                      ; $5794: $C6 $40
@@ -447,7 +447,7 @@ func_005_593A::
     ld   de, Data_005_5932                        ; $593A: $11 $32 $59
     call RenderActiveEntitySpritesPair            ; $593D: $CD $C0 $3B
     call func_005_7A3A                            ; $5940: $CD $3A $7A
-    call func_C56                                ; $5943: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5943: $CD $56 $0C
     ld   hl, wEntitiesUnknowTableY                ; $5946: $21 $D0 $C3
     add  hl, bc                                   ; $5949: $09
     inc  [hl]                                     ; $594A: $34
@@ -502,7 +502,7 @@ func_005_5984::
     ld   de, Data_005_5978                        ; $5990: $11 $78 $59
     call RenderActiveEntitySpritesPair            ; $5993: $CD $C0 $3B
     call func_005_7A3A                            ; $5996: $CD $3A $7A
-    call func_C56                                ; $5999: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $5999: $CD $56 $0C
     ldh  a, [hFrameCounter]                       ; $599C: $F0 $E7
     rra                                           ; $599E: $1F
     rra                                           ; $599F: $1F

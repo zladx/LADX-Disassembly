@@ -31,7 +31,7 @@ jr_006_4B98:
 
     call func_006_64C6                            ; $4BA5: $CD $C6 $64
     call label_3EE8                               ; $4BA8: $CD $E8 $3E
-    call func_C56                                 ; $4BAB: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4BAB: $CD $56 $0C
     call label_3B44                               ; $4BAE: $CD $44 $3B
     call func_006_6541                            ; $4BB1: $CD $41 $65
     ld   a, [$C146]                               ; $4BB4: $FA $46 $C1

@@ -153,7 +153,7 @@ jr_004_4A41:
     and  a                                        ; $4A5F: $A7
     jr   nz, jr_004_4A67                          ; $4A60: $20 $05
 
-    call IsEntityDropTimerZero                                ; $4A62: $CD $FB $0B
+    call GetEntityDropTimer                       ; $4A62: $CD $FB $0B
     ld   [hl], $14                                ; $4A65: $36 $14
 
 jr_004_4A67:
@@ -174,7 +174,7 @@ jr_004_4A78:
 SlimeEyeState3Handler::
     call func_004_4DB5                            ; $4A7E: $CD $B5 $4D
     call func_004_7FA3                            ; $4A81: $CD $A3 $7F
-    call func_C56                                ; $4A84: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $4A84: $CD $56 $0C
     ld   hl, $C300                                ; $4A87: $21 $00 $C3
     add  hl, bc                                   ; $4A8A: $09
     ld   a, [hl]                                  ; $4A8B: $7E
@@ -213,7 +213,7 @@ jr_004_4AA5:
 
     inc  a                                        ; $4ABB: $3C
     call SetEntitySpriteVariant                   ; $4ABC: $CD $0C $3B
-    call IsEntityUnknownFZero                                ; $4ABF: $CD $00 $0C
+    call GetEntityPrivateCountdown1                                      ; $4ABF: $CD $00 $0C
     jr   nz, jr_004_4ACB                          ; $4AC2: $20 $07
 
     ld   [hl], $28                                ; $4AC4: $36 $28
@@ -254,7 +254,7 @@ jr_004_4AEF:
     and  $1F                                      ; $4AFE: $E6 $1F
     jr   nz, jr_004_4B11                          ; $4B00: $20 $0F
 
-    call IsEntityUnknownFZero                                ; $4B02: $CD $00 $0C
+    call GetEntityPrivateCountdown1                                      ; $4B02: $CD $00 $0C
     ld   [hl], $50                                ; $4B05: $36 $50
     ld   hl, wEntitiesPrivateState1Table          ; $4B07: $21 $B0 $C2
     add  hl, bc                                   ; $4B0A: $09

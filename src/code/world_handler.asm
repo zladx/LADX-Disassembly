@@ -302,7 +302,7 @@ GameplayWorldSubtype6Handler::
 
 label_4548::
     jp   label_27DD
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $90
     jp   z, TransitionReturn
 

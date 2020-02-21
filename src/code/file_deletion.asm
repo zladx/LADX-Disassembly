@@ -163,7 +163,7 @@ label_4DEE::
     ld   b, h
     ld   a, [hl]
     call label_6BA8
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $08
     jr   z, label_4E18
     ld   a, [wSaveSlot]
@@ -172,7 +172,7 @@ label_4DEE::
     ld   [wSaveSlot], a
 
 label_4E18::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $04
     jr   z, label_4E2B
     ld   a, [wSaveSlot]
@@ -185,7 +185,7 @@ label_4E28::
     ld   [wSaveSlot], a
 
 label_4E2B::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $90
     jr   z, label_4E67
     ld   a, [wSaveSlot]
@@ -219,7 +219,7 @@ label_4E5D::
 label_4E67::
     call label_4954
     ret
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     bit  5, a
     jr   nz, label_4E9E
     and  $90
@@ -323,7 +323,7 @@ label_4F03::
     ret
 
 label_4F0C::
-    ldh  a, [$FFCC]
+    ldh  a, [hJoypadState]
     and  $03
     jr   z, label_4F1D
     call label_6BAE

@@ -490,12 +490,12 @@ wEntitiesTransitionCountdownTable:: ; C2E0
   ; Frames before the next state transition of the entity
   ds $10
 
-; Auxiliary countdown 1?
-wEntitiesUnknowTableF:: ; C2F0
+; Entity-specific countdown 1
+wEntitiesPrivateCountdown1Table:: ; C2F0
   ds $10
 
-; Auxiliary countdown 2?
-wEntitiesUnknowTableG:: ; C300
+; Entity-specific countdown 2
+wEntitiesPrivateCountdown2Table:: ; C300
   ds $10
 
 wEntitiesPosZTable:: ; C310
@@ -557,8 +557,15 @@ wEntitiesSpriteVariantTable:: ; C3B0
   ; A sprite variant may use entirerly different tiles, or change only some of them.
   ds $10
 
+wOAMNextAvailableSlot::
+  ; Index of the next available OAM slot
+  ds 1 ; C3C0
+
+; OAM-related
+ds 1 ; C3C1
+
 ; Unlabeled
-ds $C3CB - $C3C0
+ds $C3CB - $C3C2
 
 wObjectAffectingBGPalette:: ; C3CB
   ; Type of the object affecting the background palette
@@ -588,7 +595,10 @@ ds $10
 wEntitiesUnknowTableS:: ; C400
   ds $10
 
-wEntitiesUnknowTableT:: ; C410
+; Invulnerability countdown?
+; While this countdown is active, the entity does not
+; participate to collision
+wEntitiesIgnoreHitsCountdownTable  :: ; C410
   ds $10
 
 wEntitiesFlashCountdownTable:: ; C420
@@ -622,14 +632,15 @@ wEntitiesUnknowTableI:: ; C470
   ; Possible values: 02, 03
   ds $10
 
-; Enemy flags?
-; Would be always 0 for NPCs and non-enemies?
+; Some kind of countdown
 wEntitiesUnknowTableV:: ; C480
   ds $10
 
 wEntitiesUnknowTableW:: ; C490
   ds $10
 
+; See label_3E8E
+; (whether smoke vfx should spawn?)
 wEntitiesUnknowTableZ:: ; C4A0
   ds $10
 

@@ -81,7 +81,7 @@ jr_006_7C6A:
     sub  $04                                      ; $7C78: $D6 $04
     ld   [hl], a                                  ; $7C7A: $77
     call ClearEntitySpeed                         ; $7C7B: $CD $7F $3D
-    ld   hl, wEntitiesUnknowTableT                ; $7C7E: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7C7E: $21 $10 $C4
     add  hl, bc                                   ; $7C81: $09
     ld   [hl], b                                  ; $7C82: $70
     ld   hl, wEntitiesSpeedZTable                 ; $7C83: $21 $20 $C3
@@ -116,7 +116,7 @@ jr_006_7C6A:
 
 jr_006_7CB7:
     call func_006_64F7                            ; $7CB7: $CD $F7 $64
-    ld   hl, wEntitiesUnknowTableG                ; $7CBA: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7CBA: $21 $00 $C3
     add  hl, bc                                   ; $7CBD: $09
     ld   a, [hl]                                  ; $7CBE: $7E
     and  a                                        ; $7CBF: $A7
@@ -130,7 +130,7 @@ jr_006_7CB7:
     dec  a                                        ; $7CCB: $3D
     jr   nz, jr_006_7CD4                          ; $7CCC: $20 $06
 
-    ld   hl, wEntitiesUnknowTableG                ; $7CCE: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $7CCE: $21 $00 $C3
     add  hl, bc                                   ; $7CD1: $09
     ld   [hl], $08                                ; $7CD2: $36 $08
 
@@ -176,14 +176,14 @@ jr_006_7D0B:
 
 func_006_7D0F::
     call func_006_6541                            ; $7D0F: $CD $41 $65
-    call IsEntityUnknownFZero                     ; $7D12: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $7D12: $CD $00 $0C
     ret  nz                                       ; $7D15: $C0
 
-    ld   hl, wEntitiesUnknowTableT                ; $7D16: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D16: $21 $10 $C4
     add  hl, bc                                   ; $7D19: $09
     ld   [hl], $02                                ; $7D1A: $36 $02
     call label_3B23                               ; $7D1C: $CD $23 $3B
-    ld   hl, wEntitiesUnknowTableT                ; $7D1F: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D1F: $21 $10 $C4
     add  hl, bc                                   ; $7D22: $09
     ld   [hl], b                                  ; $7D23: $70
     ret                                           ; $7D24: $C9

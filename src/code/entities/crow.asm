@@ -6,7 +6,7 @@ CrowEntityHandler::
     cp   $58                                      ; $5C9B: $FE $58
     jr   nz, jr_006_5CBE                          ; $5C9D: $20 $1F
 
-    ld   hl, wEntitiesUnknowTableT                ; $5C9F: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5C9F: $21 $10 $C4
     add  hl, bc                                   ; $5CA2: $09
     ld   a, [hl]                                  ; $5CA3: $7E
     cp   $10                                      ; $5CA4: $FE $10
@@ -152,7 +152,7 @@ jr_006_5D4F:
     cp   $05                                      ; $5D66: $FE $05
     ret  nz                                       ; $5D68: $C0
 
-    ld   hl, wEntitiesUnknowTableF                ; $5D69: $21 $F0 $C2
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $5D69: $21 $F0 $C2
     add  hl, de                                   ; $5D6C: $19
     ld   a, [hl]                                  ; $5D6D: $7E
     and  a                                        ; $5D6E: $A7

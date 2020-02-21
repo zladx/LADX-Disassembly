@@ -1,7 +1,7 @@
 SlimeEelEntityHandler::
     call label_394D                               ; $6CDC: $CD $4D $39
     call label_3EE8                               ; $6CDF: $CD $E8 $3E
-    call func_C56                                ; $6CE2: $CD $56 $0C
+    call DecrementEntityIgnoreHitsCountdown       ; $6CE2: $CD $56 $0C
     ld   hl, wEntitiesPrivateState1Table          ; $6CE5: $21 $B0 $C2
     add  hl, bc                                   ; $6CE8: $09
     ld   a, [hl]                                  ; $6CE9: $7E
@@ -72,11 +72,11 @@ func_005_6D42::
     ld   [$D755], a                               ; $6D73: $EA $55 $D7
     ld   a, $B0                                   ; $6D76: $3E $B0
     ld   [$D756], a                               ; $6D78: $EA $56 $D7
-    call IsEntityUnknownFZero                     ; $6D7B: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $6D7B: $CD $00 $0C
 
 jr_005_6D7E:
     ld   [hl], $1F                                ; $6D7E: $36 $1F
-    call IsEntityDropTimerZero                                ; $6D80: $CD $FB $0B
+    call GetEntityDropTimer                       ; $6D80: $CD $FB $0B
     ld   [hl], $B0                                ; $6D83: $36 $B0
     call label_3E34                               ; $6D85: $CD $34 $3E
     ld   hl, wEntitiesStatusTable                 ; $6D88: $21 $80 $C2
@@ -456,7 +456,7 @@ Data_005_70E7::
     db   $00, $00, $01, $01
 
 func_005_70EB::
-    call IsEntityDropTimerZero                                ; $70EB: $CD $FB $0B
+    call GetEntityDropTimer                       ; $70EB: $CD $FB $0B
     ld   a, [$D200]                               ; $70EE: $FA $00 $D2
     and  a                                        ; $70F1: $A7
     jr   z, jr_005_70F6                           ; $70F2: $28 $02
@@ -519,7 +519,7 @@ jr_005_70F6:
     pop  bc                                       ; $7150: $C1
 
 jr_005_7151:
-    call IsEntityUnknownFZero                     ; $7151: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $7151: $CD $00 $0C
     jr   z, jr_005_7167                           ; $7154: $28 $11
 
     rra                                           ; $7156: $1F
@@ -940,9 +940,9 @@ jr_005_7395:
     ld   hl, wEntitiesPrivateState1Table          ; $73E6: $21 $B0 $C2
     add  hl, bc                                   ; $73E9: $09
     ld   [hl], $02                                ; $73EA: $36 $02
-    call IsEntityDropTimerZero                                ; $73EC: $CD $FB $0B
+    call GetEntityDropTimer                       ; $73EC: $CD $FB $0B
     ld   [hl], $30                                ; $73EF: $36 $30
-    ld   hl, wEntitiesUnknowTableG                ; $73F1: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $73F1: $21 $00 $C3
     add  hl, bc                                   ; $73F4: $09
     ld   [hl], $20                                ; $73F5: $36 $20
     ld   hl, wEntitiesDirectionTable              ; $73F7: $21 $80 $C3
@@ -1241,7 +1241,7 @@ func_005_75D1::
     call func_005_7A3A                            ; $75D7: $CD $3A $7A
     ld   a, $01                                   ; $75DA: $3E $01
     ld   [$D200], a                               ; $75DC: $EA $00 $D2
-    call IsEntityDropTimerZero                                ; $75DF: $CD $FB $0B
+    call GetEntityDropTimer                       ; $75DF: $CD $FB $0B
     cp   $10                                      ; $75E2: $FE $10
     jr   nc, jr_005_7621                          ; $75E4: $30 $3B
 
@@ -1251,9 +1251,11 @@ func_005_75D1::
     ld   a, [$D201]                               ; $75E9: $FA $01 $D2
     ld   e, a                                     ; $75EC: $5F
     ld   d, b                                     ; $75ED: $50
-    ld   hl, wEntitiesUnknowTableF                ; $75EE: $21 $F0 $C2
+
+    ld   hl, wEntitiesPrivateCountdown1Table      ; $75EE: $21 $F0 $C2
     add  hl, de                                   ; $75F1: $19
     ld   [hl], $1F                                ; $75F2: $36 $1F
+
     ld   a, ENTITY_BOMB                           ; $75F4: $3E $02
     call SpawnNewEntity_trampoline                ; $75F6: $CD $86 $3B
     call PlayBombExplosionSfx                     ; $75F9: $CD $4B $0C
@@ -1313,7 +1315,7 @@ jr_005_7635:
     add  hl, de                                   ; $764A: $19
     ldh  a, [$FFEC]                               ; $764B: $F0 $EC
     ld   [hl], a                                  ; $764D: $77
-    ld   hl, wEntitiesUnknowTableG                ; $764E: $21 $00 $C3
+    ld   hl, wEntitiesPrivateCountdown2Table      ; $764E: $21 $00 $C3
     add  hl, bc                                   ; $7651: $09
     ld   a, [hl]                                  ; $7652: $7E
     and  a                                        ; $7653: $A7
@@ -1446,7 +1448,7 @@ jr_005_7721:
     ld   [hl], $10                                ; $772E: $36 $10
 
 jr_005_7730:
-    call IsEntityUnknownFZero                     ; $7730: $CD $00 $0C
+    call GetEntityPrivateCountdown1               ; $7730: $CD $00 $0C
     jr   nz, jr_005_775E                          ; $7733: $20 $29
 
     ld   [hl], $04                                ; $7735: $36 $04
@@ -1695,7 +1697,7 @@ jr_005_7A65:
 jr_005_7A66:
     ret                                           ; $7A66: $C9
 
-    ld   hl, wEntitiesUnknowTableT                ; $7A67: $21 $10 $C4
+    ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7A67: $21 $10 $C4
     add  hl, bc                                   ; $7A6A: $09
     ld   a, [hl]                                  ; $7A6B: $7E
     and  a                                        ; $7A6C: $A7

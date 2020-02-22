@@ -206,7 +206,7 @@ IntroSceneStage2Handler::
     ld   [$C3B0], a
     ld   [$C3B1], a
     ld   [$C3B2], a
-    ldh  [$FFED], a
+    ldh  [hActiveEntityFlipAttribute], a
 
     ; Configure Link's ship entity
     ld   a, $05

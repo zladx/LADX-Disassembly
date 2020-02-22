@@ -1,26 +1,43 @@
-
-Data_006_638F::
-    db   $1E, $02, $1E, $62, $1E, $42, $1E, $22, $32, $00, $32, $20, $30, $00, $30, $20
+GopongaFlowerDisplayList::
+.variant0
+    db   $1E, $02
+    db   $1E, $62
+.variant1
+    db   $1E, $42
+    db   $1E, $22
+.variant2
+    db   $32, $00
+    db   $32, $20
+.variant3
+    db   $30, $00
+    db   $30, $20
 
 GopongaProjectileEntityHandler::
+    ; Make the projectile invicible, by setting its health
+    ; to a large number every frame.
     ld   hl, wEntitiesHealthTable                 ; $639F: $21 $60 $C3
     add  hl, bc                                   ; $63A2: $09
     ld   [hl], $30                                ; $63A3: $36 $30
+
+    ; If entity's private state 1 is != 0…
     ld   hl, wEntitiesPrivateState1Table          ; $63A5: $21 $B0 $C2
     add  hl, bc                                   ; $63A8: $09
     ld   a, [hl]                                  ; $63A9: $7E
     and  a                                        ; $63AA: $A7
-    jr   z, jr_006_63B5                           ; $63AB: $28 $08
-
+    jr   z, .flashEnd                             ; $63AB: $28 $08
+    ; Flip palette every 8 frames.
+    ; (used during the Final Nightmare battle)
     ldh  a, [hFrameCounter]                       ; $63AD: $F0 $E7
     rla                                           ; $63AF: $17
     rla                                           ; $63B0: $17
-    and  $10                                      ; $63B1: $E6 $10
-    ldh  [$FFED], a                               ; $63B3: $E0 $ED
+    and  OAMF_PAL1                                ; $63B1: $E6 $10
+    ldh  [hActiveEntityFlipAttribute], a          ; $63B3: $E0 $ED
+.flashEnd
 
-jr_006_63B5:
-    ld   de, Data_006_638F                        ; $63B5: $11 $8F $63
+    ; Render the projectile
+    ld   de, GopongaFlowerDisplayList                        ; $63B5: $11 $8F $63
     call RenderActiveEntitySpritesPair            ; $63B8: $CD $C0 $3B
+
     call GetEntityTransitionCountdown             ; $63BB: $CD $05 $0C
     jr   z, jr_006_63CE                           ; $63BE: $28 $0E
 
@@ -35,6 +52,7 @@ jr_006_63B5:
     jp   SetEntitySpriteVariant                   ; $63CB: $C3 $0C $3B
 
 jr_006_63CE:
+
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $63CE: $21 $10 $C4
     add  hl, bc                                   ; $63D1: $09
     ld   a, [hl]                                  ; $63D2: $7E

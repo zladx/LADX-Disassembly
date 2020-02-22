@@ -114,7 +114,7 @@ CrystalSwitchEntityHandler::
     call GetEntityTransitionCountdown             ; $432A: $CD $05 $0C
     rla                                           ; $432D: $17
     and  $10                                      ; $432E: $E6 $10
-    ldh  [$FFED], a                               ; $4330: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $4330: $E0 $ED
     ld   de, Data_015_4320                        ; $4332: $11 $20 $43
     call RenderActiveEntitySpritesPair            ; $4335: $CD $C0 $3B
     call func_015_7B0D                            ; $4338: $CD $0D $7B
@@ -1587,7 +1587,7 @@ label_015_4DB5:
     rla                                           ; $4DBC: $17
     rla                                           ; $4DBD: $17
     and  $10                                      ; $4DBE: $E6 $10
-    ldh  [$FFED], a                               ; $4DC0: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $4DC0: $E0 $ED
     ld   de, Data_015_4D9D                        ; $4DC2: $11 $9D $4D
     call RenderActiveEntitySpritesPair            ; $4DC5: $CD $C0 $3B
     call func_015_7B0D                            ; $4DC8: $CD $0D $7B
@@ -1695,7 +1695,7 @@ label_015_4E62:
     rla                                           ; $4E64: $17
     rla                                           ; $4E65: $17
     and  $10                                      ; $4E66: $E6 $10
-    ldh  [$FFED], a                               ; $4E68: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $4E68: $E0 $ED
     ld   de, Data_015_4DA9                        ; $4E6A: $11 $A9 $4D
     call RenderActiveEntitySpritesPair            ; $4E6D: $CD $C0 $3B
     call func_015_7B0D                            ; $4E70: $CD $0D $7B
@@ -3564,11 +3564,11 @@ Data_015_5D89::
     db   $00, $00, $F0, $04
 
 func_015_5D8D::
-    ldh  a, [$FFED]                               ; $5D8D: $F0 $ED
+    ldh  a, [hActiveEntityFlipAttribute]          ; $5D8D: $F0 $ED
     push af                                       ; $5D8F: $F5
     call func_015_5D97                            ; $5D90: $CD $97 $5D
     pop  af                                       ; $5D93: $F1
-    ldh  [$FFED], a                               ; $5D94: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $5D94: $E0 $ED
     ret                                           ; $5D96: $C9
 
 func_015_5D97::
@@ -3585,7 +3585,7 @@ jr_015_5D9A:
     rla                                           ; $5DA2: $17
     rla                                           ; $5DA3: $17
     and  $50                                      ; $5DA4: $E6 $50
-    ldh  [$FFED], a                               ; $5DA6: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $5DA6: $E0 $ED
     ld   a, [$D21E]                               ; $5DA8: $FA $1E $D2
     ld   e, a                                     ; $5DAB: $5F
     ld   d, b                                     ; $5DAC: $50
@@ -3622,7 +3622,7 @@ label_015_5DED:
     rla                                           ; $5DF0: $17
     rla                                           ; $5DF1: $17
     and  $50                                      ; $5DF2: $E6 $50
-    ldh  [$FFED], a                               ; $5DF4: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $5DF4: $E0 $ED
     ld   de, Data_015_5DD9                        ; $5DF6: $11 $D9 $5D
     call RenderActiveEntitySpritesPair            ; $5DF9: $CD $C0 $3B
     call func_015_7B0D                            ; $5DFC: $CD $0D $7B
@@ -4219,7 +4219,7 @@ jr_015_62AC:
     rla                                           ; $62F2: $17
     rla                                           ; $62F3: $17
     and  $10                                      ; $62F4: $E6 $10
-    ld   hl, $FFED                                ; $62F6: $21 $ED $FF
+    ld   hl, hActiveEntityFlipAttribute           ; $62F6: $21 $ED $FF
     xor  [hl]                                     ; $62F9: $AE
     ld   [hl], a                                  ; $62FA: $77
     ld   de, Data_015_6235                        ; $62FB: $11 $35 $62
@@ -5456,7 +5456,7 @@ label_015_6D6E:
     rla                                           ; $6D70: $17
     rla                                           ; $6D71: $17
     and  $10                                      ; $6D72: $E6 $10
-    ldh  [$FFED], a                               ; $6D74: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $6D74: $E0 $ED
     ld   de, Data_015_6D5E                        ; $6D76: $11 $5E $6D
     call RenderActiveEntitySpritesPair            ; $6D79: $CD $C0 $3B
     call func_015_7B0D                            ; $6D7C: $CD $0D $7B

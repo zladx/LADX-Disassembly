@@ -314,9 +314,17 @@ hActiveEntityType:: ; FFEB
 ; Active entity Y of the second sprite of a pair?
 ds 1 ; FFEC
 
-; Active entity render flags?
-; Maybe a bitfield
-ds 1 ; FFED
+; Invert OAM attribute bits of the active entity.
+;
+; Each bit set inverts the OAM attributes of the active sprite pair.
+;
+; bit 0-3: GBC palette
+; bit 4: use inverted color palette
+; bit 5: x-flip the entity
+; bit 6: y-flip the entity
+; bit 7: invert the background priority
+hActiveEntityFlipAttribute:: ; FFED
+  ds 1
 
 hActiveEntityPosX:: ; FFEE
   ds 1

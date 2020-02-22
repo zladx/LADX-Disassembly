@@ -6258,7 +6258,8 @@ jr_017_7784:
     and  $80                                      ; $778F: $E6 $80
     jr   z, jr_017_7798                           ; $7791: $28 $05
 
-    ld   hl, $FFED                                ; $7793: $21 $ED $FF
+    ; X-flip the entity
+    ld   hl, hActiveEntityFlipAttribute           ; $7793: $21 $ED $FF
     set  5, [hl]                                  ; $7796: $CB $EE
 
 jr_017_7798:
@@ -6744,7 +6745,7 @@ func_017_7A29::
     inc  de                                       ; $7A38: $13
     ld   a, [$C155]                               ; $7A39: $FA $55 $C1
     ld   c, a                                     ; $7A3C: $4F
-    ldh  a, [$FFED]                               ; $7A3D: $F0 $ED
+    ldh  a, [hActiveEntityFlipAttribute]          ; $7A3D: $F0 $ED
     and  $20                                      ; $7A3F: $E6 $20
     rra                                           ; $7A41: $1F
     rra                                           ; $7A42: $1F
@@ -6767,7 +6768,7 @@ func_017_7A29::
     inc  de                                       ; $7A5B: $13
     ld   a, [hl+]                                 ; $7A5C: $2A
     push hl                                       ; $7A5D: $E5
-    ld   hl, $FFED                                ; $7A5E: $21 $ED $FF
+    ld   hl, hActiveEntityFlipAttribute           ; $7A5E: $21 $ED $FF
     xor  [hl]                                     ; $7A61: $AE
     ld   [de], a                                  ; $7A62: $12
     inc  de                                       ; $7A63: $13
@@ -6776,7 +6777,7 @@ func_017_7A29::
     inc  de                                       ; $7A67: $13
     ld   a, [$C155]                               ; $7A68: $FA $55 $C1
     ld   c, a                                     ; $7A6B: $4F
-    ldh  a, [$FFED]                               ; $7A6C: $F0 $ED
+    ldh  a, [hActiveEntityFlipAttribute]          ; $7A6C: $F0 $ED
     and  $20                                      ; $7A6E: $E6 $20
     xor  $20                                      ; $7A70: $EE $20
     rra                                           ; $7A72: $1F
@@ -6791,7 +6792,7 @@ func_017_7A29::
     ld   [de], a                                  ; $7A7D: $12
     inc  de                                       ; $7A7E: $13
     ld   a, [hl]                                  ; $7A7F: $7E
-    ld   hl, $FFED                                ; $7A80: $21 $ED $FF
+    ld   hl, hActiveEntityFlipAttribute           ; $7A80: $21 $ED $FF
     xor  [hl]                                     ; $7A83: $AE
     ld   [de], a                                  ; $7A84: $12
     pop  bc                                       ; $7A85: $C1

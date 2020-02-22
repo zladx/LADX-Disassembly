@@ -5532,7 +5532,7 @@ func_018_68EA::
 
     inc  a                                        ; $6913: $3C
     ldh  [hFFE8], a                               ; $6914: $E0 $E8
-    ld   hl, $FFED                                ; $6916: $21 $ED $FF
+    ld   hl, hActiveEntityFlipAttribute           ; $6916: $21 $ED $FF
     set  5, [hl]                                  ; $6919: $CB $EE
 
 jr_018_691B:
@@ -5620,14 +5620,14 @@ jr_018_6972:
 
 jr_018_6984:
     inc  de                                       ; $6984: $13
-    ldh  a, [$FFED]                               ; $6985: $F0 $ED
+    ldh  a, [hActiveEntityFlipAttribute]          ; $6985: $F0 $ED
     xor  [hl]                                     ; $6987: $AE
     ld   [de], a                                  ; $6988: $12
     ldh  a, [hIsGBC]                              ; $6989: $F0 $FE
     and  a                                        ; $698B: $A7
     jr   z, jr_018_699A                           ; $698C: $28 $0C
 
-    ldh  a, [$FFED]                               ; $698E: $F0 $ED
+    ldh  a, [hActiveEntityFlipAttribute]          ; $698E: $F0 $ED
     bit  4, a                                     ; $6990: $CB $67
     jr   z, jr_018_699A                           ; $6992: $28 $06
 

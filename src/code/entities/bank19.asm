@@ -649,7 +649,7 @@ label_019_4406:
     rla                                           ; $440E: $17
     rla                                           ; $440F: $17
     and  $10                                      ; $4410: $E6 $10
-    ldh  [$FFED], a                               ; $4412: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $4412: $E0 $ED
     ldh  a, [hActiveEntityPosX]                   ; $4414: $F0 $EE
     ldh  [$FFE5], a                               ; $4416: $E0 $E5
     ldh  a, [$FFEC]                               ; $4418: $F0 $EC
@@ -2420,7 +2420,7 @@ label_019_4F30:
     rla                                           ; $4F32: $17
     rla                                           ; $4F33: $17
     and  $10                                      ; $4F34: $E6 $10
-    ldh  [$FFED], a                               ; $4F36: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $4F36: $E0 $ED
     ld   de, $4EAA                                ; $4F38: $11 $AA $4E
     call RenderActiveEntitySprite                 ; $4F3B: $CD $77 $3C
     call func_019_7D3D                            ; $4F3E: $CD $3D $7D
@@ -3156,7 +3156,7 @@ GiantBubbleEntityHandler::
     rla                                           ; $5392: $17
     rla                                           ; $5393: $17
     and  $10                                      ; $5394: $E6 $10
-    ldh  [$FFED], a                               ; $5396: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $5396: $E0 $ED
     ldh  a, [hFrameCounter]                       ; $5398: $F0 $E7
     rra                                           ; $539A: $1F
     rra                                           ; $539B: $1F
@@ -7634,9 +7634,9 @@ CheepCheepJumpingEntityHandler::
     cp   $05                                      ; $6BC9: $FE $05
     jr   nz, jr_019_6BD3                          ; $6BCB: $20 $06
 
-    ldh  a, [$FFED]                               ; $6BCD: $F0 $ED
+    ldh  a, [hActiveEntityFlipAttribute]          ; $6BCD: $F0 $ED
     or   $40                                      ; $6BCF: $F6 $40
-    ldh  [$FFED], a                               ; $6BD1: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $6BD1: $E0 $ED
 
 jr_019_6BD3:
     ld   de, $6B44                                ; $6BD3: $11 $44 $6B

@@ -7760,10 +7760,19 @@ label_3CD9::
     ld   [MBC3SelectBank], a
     jr   label_3C71
 
-label_3CE0::
+; Render a large rectangle of sprites using the entire OAM buffer.
+;
+; The sprites are allocated starting from the very start of the OAM buffer,
+; overwriting even the part dedicated to Link's sprites.
+;
+; This is mainly used when displaying a large sprite on a screen where Link
+; is not present.
+;
+; See RenderActiveEntitySpritesRect for details.
+RenderActiveEntitySpritesRectUsingAllOAM::
     push hl
     ld   hl, wOAMBuffer
-    jr   RenderActiveEntitySpritesRect.label_3CF6
+    jr   RenderActiveEntitySpritesRect.withDestination
 
 ; Render a large rectangle of sprites for the active entity to the OAM buffer.
 ;
@@ -7772,6 +7781,9 @@ label_3CE0::
 ;
 ; The display list is processed regardless of the active sprite variant.
 ; Variants must be managed by the caller itself.
+;
+; The sprites are allocated starting from the next available slot
+; in the dynamic part of the OAM buffer.
 ;
 ; Inputs:
 ;   hl  the oam attributes display list
@@ -7792,7 +7804,7 @@ RenderActiveEntitySpritesRect::
     ld   d, $00
     ld   hl, wDynamicOAMBuffer
     add  hl, de
-.label_3CF6
+.withDestination
     ld   e, l
     ld   d, h
     pop  hl

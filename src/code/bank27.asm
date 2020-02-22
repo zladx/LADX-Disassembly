@@ -408,6 +408,7 @@ func_027_782E::
     call func_027_7240                            ; $7850: $CD $40 $72
     ret                                           ; $7853: $C9
 
+; Render disappearing island during credits?
 func_027_7854::
     ld   a, [$D015]                               ; $7854: $FA $15 $D0
     JP_TABLE                                      ; $7857
@@ -594,7 +595,7 @@ func_027_79E6::
     ld   [wOAMNextAvailableSlot], a               ; $79E7: $EA $C0 $C3
     ld   hl, Data_027_794E                        ; $79EA: $21 $4E $79
     ld   c, $26                                   ; $79ED: $0E $26
-    jp   label_3CE0                               ; $79EF: $C3 $E0 $3C
+    jp   RenderActiveEntitySpritesRectUsingAllOAM ; $79EF: $C3 $E0 $3C
 
 func_027_79F2::
     ld   a, [$D466]                               ; $79F2: $FA $66 $D4
@@ -779,7 +780,7 @@ func_027_7B8F::
     ld   hl, Data_027_7B5F                        ; $7BA2: $21 $5F $7B
     add  hl, de                                   ; $7BA5: $19
     ld   c, $02                                   ; $7BA6: $0E $02
-    jp   label_3CE0                               ; $7BA8: $C3 $E0 $3C
+    jp   RenderActiveEntitySpritesRectUsingAllOAM ; $7BA8: $C3 $E0 $3C
 
 label_027_7BAB:
     ld   hl, $D015                                ; $7BAB: $21 $15 $D0

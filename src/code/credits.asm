@@ -5207,7 +5207,7 @@ jr_017_7188:
     ld   hl, Data_017_70D1                        ; $719E: $21 $D1 $70
     add  hl, de                                   ; $71A1: $19
     ld   c, $0A                                   ; $71A2: $0E $0A
-    call label_3CE0                               ; $71A4: $CD $E0 $3C
+    call RenderActiveEntitySpritesRectUsingAllOAM ; $71A4: $CD $E0 $3C
     ld   a, $0A                                   ; $71A7: $3E $0A
     call label_3DA0                               ; $71A9: $CD $A0 $3D
 
@@ -5296,7 +5296,7 @@ func_017_725C::
     ld   hl, Data_017_71DF                        ; $7285: $21 $DF $71
     add  hl, de                                   ; $7288: $19
     ld   c, $08                                   ; $7289: $0E $08
-    call label_3CE0                               ; $728B: $CD $E0 $3C
+    call RenderActiveEntitySpritesRectUsingAllOAM ; $728B: $CD $E0 $3C
     ld   a, $08                                   ; $728E: $3E $08
     call label_3DA0                               ; $7290: $CD $A0 $3D
 
@@ -5433,7 +5433,7 @@ jr_017_73AF:
     ld   hl, Data_017_72D8                        ; $73DE: $21 $D8 $72
     add  hl, de                                   ; $73E1: $19
     ld   c, $0C                                   ; $73E2: $0E $0C
-    call label_3CE0                                    ; $73E4: $CD $E0 $3C
+    call RenderActiveEntitySpritesRectUsingAllOAM                                    ; $73E4: $CD $E0 $3C
     ld   a, $0C                                   ; $73E7: $3E $0C
     call label_3DA0                                    ; $73E9: $CD $A0 $3D
     ret                                           ; $73EC: $C9
@@ -5680,7 +5680,7 @@ jr_017_74E0:
 
     ld   hl, $73FF                                ; $74E2: $21 $FF $73
     ld   c, $1B                                   ; $74E5: $0E $1B
-    call label_3CE0                               ; $74E7: $CD $E0 $3C
+    call RenderActiveEntitySpritesRectUsingAllOAM ; $74E7: $CD $E0 $3C
     ld   a, $1B                                   ; $74EA: $3E $1B
     call label_3DA0                               ; $74EC: $CD $A0 $3D
     ld   a, [$D003]                               ; $74EF: $FA $03 $D0

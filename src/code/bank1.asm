@@ -3599,7 +3599,7 @@ func_6A7C::
     ld   h, [hl]
     ld   l, a
     ld   c, $06
-    call label_3CE0
+    call RenderActiveEntitySpritesRectUsingAllOAM
 
 .jr_6AC2
     ld   a, $48

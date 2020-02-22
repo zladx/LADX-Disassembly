@@ -1111,16 +1111,16 @@ UpdateEntityTimers::
     dec  [hl]                                     ; $4DE3: $35
 .flashCountdownEnd
 
-    ; $FFED = entity flash countdown
+    ; When the flash countdown is active, invert the palette every 4 frames
     sla  a                                        ; $4DE4: $CB $27
     sla  a                                        ; $4DE6: $CB $27
-    and  $10                                      ; $4DE8: $E6 $10
-    ldh  [$FFED], a                               ; $4DEA: $E0 $ED
+    and  OAMF_PAL1                                ; $4DE8: $E6 $10
+    ldh  [hActiveEntityFlipAttribute], a          ; $4DEA: $E0 $ED
     ret                                           ; $4DEC: $C9
 
 .done
     xor  a                                        ; $4DED: $AF
-    ldh  [$FFED], a                               ; $4DEE: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $4DEE: $E0 $ED
     ret                                           ; $4DF0: $C9
 
     ld   bc, $1700                                ; $4DF1: $01 $00 $17

@@ -2183,7 +2183,7 @@ label_5C7B::
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   a, $00
     ld   [wActiveEntityIndex], a
-    ldh  [$FFED], a
+    ldh  [hActiveEntityFlipAttribute], a
     ld   e, $00
     ld   a, [$C1B4]
     cp   $70
@@ -3575,7 +3575,7 @@ label_6A7C::
     ret  nz
     xor  a
     ldh  [hActiveEntitySpriteVariant], a
-    ldh  [$FFED], a
+    ldh  [hActiveEntityFlipAttribute], a
     ldh  [hActiveEntityTilesOffset], a
     ld   a, $38
     ldh  [hActiveEntityPosX], a

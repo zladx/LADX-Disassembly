@@ -7517,11 +7517,12 @@ RenderActiveEntitySpritesPair::
     inc  de
 
     ; Sprite 0: set OAM byte 1 (X position)
-    ; [de] = [$FFED / 4] + [hActiveEntityPosX] - [wScreenShakeHorizontal]
+    ; [de] = [hActiveEntityPosX] + x-flip - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
-    ldh  a, [$FFED]
-    and  $20
+    ; (if the entity is X-flipped, adjust sprite 0 position)
+    ldh  a, [hActiveEntityFlipAttribute]
+    and  OAMF_XFLIP
     rra
     rra
     ld   hl, hActiveEntityPosX
@@ -7562,20 +7563,22 @@ RenderActiveEntitySpritesPair::
     ; Sprite 0: set OAM byte 3 (tile attribute)
     ld   a, [hli]
     push hl
-    ld   hl, $FFED
+    ld   hl, hActiveEntityFlipAttribute
     xor  [hl]
     ld   [de], a
+    ; On GBC, if the "invert palette" bit is set…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .gbcEnd
-    ldh  a, [$FFED]
-    and  $10
-    jr   z, .gbcEnd
+    jr   z, .paletteFlip0End
+    ldh  a, [hActiveEntityFlipAttribute]
+    and  OAMF_PAL1
+    jr   z, .paletteFlip0End
+    ; …invert the color palette data.
     ld   a, [de]
-    and  $F8
+    and  $FF ^ OAMF_PALMASK
     or   $04
     ld   [de], a
-.gbcEnd
+.paletteFlip0End
     inc  de
 
     ; Sprite 1: set OAM byte 0 (Y position)
@@ -7584,10 +7587,12 @@ RenderActiveEntitySpritesPair::
     inc  de
 
     ; Sprite 1: set OAM byte 1 (X position)
+    ; [de] = [hActiveEntityPosX] + x-flip - [wScreenShakeHorizontal]
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
-    ldh  a, [$FFED]
-    and  $20
+    ; (if the entity is X-flipped, adjust sprite 0 position)
+    ldh  a, [hActiveEntityFlipAttribute]
+    and  OAMF_XFLIP
     xor  $20
     rra
     rra
@@ -7617,20 +7622,22 @@ RenderActiveEntitySpritesPair::
 
     ; Sprite 1: set OAM byte 3 (tile attribute)
     ld   a, [hl]
-    ld   hl, $FFED
+    ld   hl, hActiveEntityFlipAttribute
     xor  [hl]
     ld   [de], a
+    ; On GBC, if the "invert palette" bit is set…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .jr_3C63
-    ldh  a, [$FFED]
-    and  $10
-    jr   z, .jr_3C63
+    jr   z, .paletteFlip1End
+    ldh  a, [hActiveEntityFlipAttribute]
+    and  OAMF_PAL1
+    jr   z, .paletteFlip1End
+    ; …invert the color palette data.
     ld   a, [de]
-    and  $F8
+    and  $FF ^ OAMF_PALMASK
     or   $04
     ld   [de], a
-.jr_3C63
+.paletteFlip1End
 
     ; Restore the entity index to bc
     ld   a, [wActiveEntityIndex]
@@ -7682,6 +7689,8 @@ RenderActiveEntitySprite::
     ld   c, a
     ld   b, $00
 
+    ; Set OAM byte 0 (Y position)
+
     ; If in a side-scrolling room…
     ldh  a, [hIsSideScrolling]
     and  a
@@ -7691,11 +7700,10 @@ RenderActiveEntitySprite::
     sub  a, $04
     ldh  [$FFEC], a
 .sideScrollingEnd
-
-    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 0) = [$FFEC]
     ld   [de], a
     inc  de
-    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 1) = [hActiveEntityPosX] + 4 - [wScreenShakeHorizontal]
+
+    ; Set OAM byte 1 (X position)
     ld   a, [wScreenShakeHorizontal]
     ld   h, a
     ldh  a, [hActiveEntityPosX]
@@ -7703,7 +7711,8 @@ RenderActiveEntitySprite::
     sub  a, h
     ld   [de], a
     inc  de
-    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 2) = DataTable[hActiveEntitySpriteVariant * 2]
+
+    ; Set OAM byte 2 (tile n°)
     ldh  a, [hActiveEntitySpriteVariant]
     ld   c, a
     ld   b, $00
@@ -7714,36 +7723,37 @@ RenderActiveEntitySprite::
     ld   a, [hli]
     ld   [de], a
 
+    ; Set OAM byte 3 (tile attribute)
+
     ; If on GBC…
     inc  de
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .gbcEnd
+    jr   z, .paletteFlipEnd
     ; and not during credits…
     ld   a, [wGameplayType]
     cp   GAMEPLAY_CREDITS
-    jr   z, .gbcEnd
-    ; and $FFED != 0…
-    ldh  a, [$FFED]
+    jr   z, .paletteFlipEnd
+    ; and hActiveEntityFlipAttribute != 0…
+    ldh  a, [hActiveEntityFlipAttribute]
     and  a
-    jr   z, .gbcEnd
-    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) & 0xf8 | 4
+    jr   z, .paletteFlipEnd
+    ; …invert the color palette data.
     ld   a, [hl]
-    and  $F8
+    and  $FF ^ OAMF_PALMASK
     or   $04
     ld   [de], a
     jr   .functionEnd
-.gbcEnd
+.paletteFlipEnd
 
-    ; (wDynamicOAMBuffer + [wOAMNextAvailableSlot] + 4) = (DataTable[hActiveEntitySpriteVariant * 2] + 1) ^ [$FFED]
     ld   a, [hli]
-    ld   hl, $FFED
+    ld   hl, hActiveEntityFlipAttribute
     xor  [hl]
     ld   [de], a
 
 .functionEnd
     inc  de
-    jr   RenderActiveEntitySpritesPair.jr_3C63
+    jr   RenderActiveEntitySpritesPair.paletteFlip1End
 
 label_3CD9::
     ld   a, $15
@@ -7801,11 +7811,14 @@ RenderActiveEntitySpritesRect::
     ld   c, a
 
 .loop
+    ; Set OAM byte 0 (Y position)
     ldh  a, [$FFEC]
     add  a, [hl]
     ld   [de], a
     inc  hl
     inc  de
+
+    ; Set OAM byte 1 (X position)
     push bc
     ld   a, [wScreenShakeHorizontal]
     ld   c, a
@@ -7815,6 +7828,8 @@ RenderActiveEntitySpritesRect::
     ld   [de], a
     inc  hl
     inc  de
+
+    ; Set OAM byte 2 (tile n°)
     ldh  a, [hActiveEntityTilesOffset]
     ld   c, a
     ld   a, [hli]
@@ -7830,24 +7845,26 @@ RenderActiveEntitySpritesRect::
     inc  de
 .jp_3D28
     pop  bc
-
     inc  de
-    ldh  a, [$FFED]
+
+    ; Set OAM byte 3 (tile attribute)
+    ldh  a, [hActiveEntityFlipAttribute]
     xor  [hl]
     ld   [de], a
     inc  hl
-
+    ; On GBC, if the "invert palette" bit is set…
     ldh  a, [hIsGBC]
     and  a
-    jr   z, .gbcEnd
-    ldh  a, [$FFED]
+    jr   z, .paletteFlipEnd
+    ldh  a, [hActiveEntityFlipAttribute]
     and  a
-    jr   z, .gbcEnd
+    jr   z, .paletteFlipEnd
+    ; …invert the color palette data.
     ld   a, [de]
-    and  $F8
+    and  $FF ^ OAMF_PALMASK
     or   $04
     ld   [de], a
-.gbcEnd
+.paletteFlipEnd
 
     inc  de
     dec  c

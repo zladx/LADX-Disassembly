@@ -498,7 +498,7 @@ func_005_5984::
     rra                                           ; $598A: $1F
     rra                                           ; $598B: $1F
     and  $20                                      ; $598C: $E6 $20
-    ldh  [$FFED], a                               ; $598E: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $598E: $E0 $ED
     ld   de, Data_005_5978                        ; $5990: $11 $78 $59
     call RenderActiveEntitySpritesPair            ; $5993: $CD $C0 $3B
     call func_005_7A3A                            ; $5996: $CD $3A $7A

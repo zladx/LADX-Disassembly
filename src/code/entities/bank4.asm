@@ -1857,7 +1857,7 @@ jr_004_5963:
     rla                                           ; $59DE: $17
     rla                                           ; $59DF: $17
     and  $10                                      ; $59E0: $E6 $10
-    ld   hl, $FFED                                ; $59E2: $21 $ED $FF
+    ld   hl, hActiveEntityFlipAttribute           ; $59E2: $21 $ED $FF
     xor  [hl]                                     ; $59E5: $AE
     ld   [hl], a                                  ; $59E6: $77
     ld   de, Data_004_58F2                        ; $59E7: $11 $F2 $58
@@ -2411,14 +2411,14 @@ Data_004_5D26::
 
 func_004_5DA6::
     call func_004_7F90                            ; $5DA6: $CD $90 $7F
-    ldh  a, [$FFED]                               ; $5DA9: $F0 $ED
+    ldh  a, [hActiveEntityFlipAttribute]          ; $5DA9: $F0 $ED
     push af                                       ; $5DAB: $F5
     rla                                           ; $5DAC: $17
     and  $40                                      ; $5DAD: $E6 $40
     ldh  [hScratch0], a                           ; $5DAF: $E0 $D7
     pop  af                                       ; $5DB1: $F1
     and  $0F                                      ; $5DB2: $E6 $0F
-    ldh  [$FFED], a                               ; $5DB4: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $5DB4: $E0 $ED
     ld   hl, wEntitiesSpriteVariantTable          ; $5DB6: $21 $B0 $C3
     add  hl, bc                                   ; $5DB9: $09
     ld   a, [hl]                                  ; $5DBA: $7E
@@ -7571,7 +7571,7 @@ jr_004_7D2B:
     rla                                           ; $7D2F: $17
     rla                                           ; $7D30: $17
     and  $10                                      ; $7D31: $E6 $10
-    ldh  [$FFED], a                               ; $7D33: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $7D33: $E0 $ED
     call RenderActiveEntitySpritesPair            ; $7D35: $CD $C0 $3B
     call func_004_7FA3                            ; $7D38: $CD $A3 $7F
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $7D3B: $21 $10 $C4
@@ -7976,7 +7976,7 @@ func_004_7F90::
     ld   a, $20                                   ; $7F9B: $3E $20
 
 jr_004_7F9D:
-    ld   hl, $FFED                                ; $7F9D: $21 $ED $FF
+    ld   hl, hActiveEntityFlipAttribute           ; $7F9D: $21 $ED $FF
     xor  [hl]                                     ; $7FA0: $AE
     ld   [hl], a                                  ; $7FA1: $77
     ret                                           ; $7FA2: $C9

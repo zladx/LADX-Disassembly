@@ -4438,7 +4438,7 @@ jr_007_5CC0:
 jr_007_5CDF:
     pop  bc                                       ; $5CDF: $C1
     inc  de                                       ; $5CE0: $13
-    ldh  a, [$FFED]                               ; $5CE1: $F0 $ED
+    ldh  a, [hActiveEntityFlipAttribute]          ; $5CE1: $F0 $ED
     xor  [hl]                                     ; $5CE3: $AE
     inc  hl                                       ; $5CE4: $23
     ld   [de], a                                  ; $5CE5: $12
@@ -4942,7 +4942,7 @@ jr_007_608F:
     ld   [hl], $03                                ; $6093: $36 $03
     ld   e, $03                                   ; $6095: $1E $03
     ld   a, e                                     ; $6097: $7B
-    ldh  [$FFED], a                               ; $6098: $E0 $ED
+    ldh  [hActiveEntityFlipAttribute], a          ; $6098: $E0 $ED
     ld   hl, wEntitiesPosYTable                   ; $609A: $21 $10 $C2
     add  hl, bc                                   ; $609D: $09
     ld   a, [hl]                                  ; $609E: $7E
@@ -4952,7 +4952,7 @@ jr_007_608F:
     add  e                                        ; $60A3: $83
     ldh  [hActiveEntityPosY], a                   ; $60A4: $E0 $EF
     call label_3B23                               ; $60A6: $CD $23 $3B
-    ldh  a, [$FFED]                               ; $60A9: $F0 $ED
+    ldh  a, [hActiveEntityFlipAttribute]          ; $60A9: $F0 $ED
     ld   e, a                                     ; $60AB: $5F
     ld   hl, wEntitiesPosYTable                   ; $60AC: $21 $10 $C2
     add  hl, bc                                   ; $60AF: $09

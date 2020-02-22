@@ -7275,7 +7275,7 @@ label_015_79DF:
     cp   $02                                      ; $79E1: $FE $02
     jr   nz, func_015_79F0                        ; $79E3: $20 $0B
 
-    ld   hl, $FFEC                    ; $79E5: $21 $EC $FF
+    ld   hl, $FFEC                                ; $79E5: $21 $EC $FF
     dec  [hl]                                     ; $79E8: $35
     dec  [hl]                                     ; $79E9: $35
     call func_015_79F0                            ; $79EA: $CD $F0 $79

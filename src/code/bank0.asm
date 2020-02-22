@@ -7774,7 +7774,7 @@ label_3CE0::
 ; Variants must be managed by the caller itself.
 ;
 ; Inputs:
-;   de  the oam attributes display list
+;   hl  the oam attributes display list
 ;   c   the number of sprites
 ;
 ; Return value:
@@ -7785,14 +7785,13 @@ RenderActiveEntitySpritesRect::
     inc  a
     jr   z, .return
 
-    ; hl = wDynamicOAMBuffer + [wOAMNextAvailableSlot]
+    ; de = wDynamicOAMBuffer + [wOAMNextAvailableSlot]
     push hl
     ld   a, [wOAMNextAvailableSlot]
     ld   e, a
     ld   d, $00
     ld   hl, wDynamicOAMBuffer
     add  hl, de
-
 .label_3CF6
     ld   e, l
     ld   d, h

@@ -211,9 +211,9 @@ jr_005_56B1:
 jr_005_56C7:
     sub  $10                                      ; $56C7: $D6 $10
     ldh  [hActiveEntityPosX], a                   ; $56C9: $E0 $EE
-    ldh  a, [$FFEC]                               ; $56CB: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $56CB: $F0 $EC
     sub  $10                                      ; $56CD: $D6 $10
-    ldh  [$FFEC], a                               ; $56CF: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $56CF: $E0 $EC
     ld   hl, wEntitiesHitboxFlagsTable                ; $56D1: $21 $50 $C3
     add  hl, bc                                   ; $56D4: $09
     ld   [hl], $00                                ; $56D5: $36 $00
@@ -259,7 +259,7 @@ jr_005_5713:
     ld   d, b                                     ; $5718: $50
     ld   hl, Data_005_56F7                        ; $5719: $21 $F7 $56
     add  hl, de                                   ; $571C: $19
-    ldh  a, [$FFEC]                               ; $571D: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $571D: $F0 $EC
     cp   [hl]                                     ; $571F: $BE
     jr   nz, jr_005_572A                          ; $5720: $20 $08
 
@@ -434,7 +434,7 @@ jr_005_5913:
     call func_005_7AB4                            ; $5927: $CD $B4 $7A
 
 jr_005_592A:
-    ldh  a, [$FFEC]                               ; $592A: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $592A: $F0 $EC
     cp   $10                                      ; $592C: $FE $10
     jp   c, func_005_7B4B                         ; $592E: $DA $4B $7B
 
@@ -475,7 +475,7 @@ jr_005_5962:
     add  hl, bc                                   ; $596A: $09
     ld   [hl], $0C                                ; $596B: $36 $0C
     call func_005_7AB1                            ; $596D: $CD $B1 $7A
-    ldh  a, [$FFEC]                               ; $5970: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5970: $F0 $EC
     cp   $8B                                      ; $5972: $FE $8B
     jp   nc, func_005_7B4B                        ; $5974: $D2 $4B $7B
 

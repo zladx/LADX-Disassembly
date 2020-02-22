@@ -1,6 +1,6 @@
 BombEntityHandler::
     ; If bomb is outside of the screen, clear it.
-    ldh  a, [$FFEC]                               ; $6696: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $6696: $F0 $EC
     add  $10                                      ; $6698: $C6 $10
     cp   $A0                                      ; $669A: $FE $A0
     jp   nc, UnloadEntity                         ; $669C: $D2 $8D $3F

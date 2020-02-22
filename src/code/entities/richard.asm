@@ -4,7 +4,7 @@ Data_006_4000::
 
 RichardEntityHandler::
     ld   a, $21                                   ; $4020: $3E $21
-    ldh  [$FFEC], a                               ; $4022: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $4022: $E0 $EC
     ld   de, Data_006_4000                        ; $4024: $11 $00 $40
     call RenderActiveEntitySpritesPair            ; $4027: $CD $C0 $3B
     call func_006_64C6                            ; $402A: $CD $C6 $64

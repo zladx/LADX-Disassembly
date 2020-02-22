@@ -168,7 +168,7 @@ jr_006_5D4F:
 
     ld   hl, wEntitiesPosYTable                   ; $5D7C: $21 $10 $C2
     add  hl, de                                   ; $5D7F: $19
-    ldh  a, [$FFEC]                               ; $5D80: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5D80: $F0 $EC
     sub  [hl]                                     ; $5D82: $96
     add  $28                                      ; $5D83: $C6 $28
     cp   $50                                      ; $5D85: $FE $50
@@ -320,7 +320,7 @@ jr_006_5E51:
     call func_006_5E02                            ; $5E51: $CD $02 $5E
 
 func_006_5E54::
-    ldh  a, [$FFEC]                               ; $5E54: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5E54: $F0 $EC
     cp   $88                                      ; $5E56: $FE $88
     jp   nc, ClearEntityStatus_06                        ; $5E58: $D2 $DB $65
 

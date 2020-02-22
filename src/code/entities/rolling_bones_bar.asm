@@ -213,14 +213,14 @@ Data_006_6FE4::
 
 func_006_6FEA::
     ld   a, $20
-    ldh  [$FFEC], a
+    ldh  [hActiveEntityVisualPosY], a
 
 .loop
     ld   de, Data_006_6ED5                        ; $6FEE: $11 $D5 $6E
     call RenderActiveEntitySpritesPair            ; $6FF1: $CD $C0 $3B
-    ldh  a, [$FFEC]                               ; $6FF4: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $6FF4: $F0 $EC
     add  $10                                      ; $6FF6: $C6 $10
-    ldh  [$FFEC], a                               ; $6FF8: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $6FF8: $E0 $EC
     ld   hl, wEntitiesPrivateState1Table          ; $6FFA: $21 $B0 $C2
     add  hl, bc                                   ; $6FFD: $09
     ld   e, [hl]                                  ; $6FFE: $5E

@@ -417,7 +417,7 @@ func_006_55B3::
     jr   z, jr_006_55E0                           ; $55D2: $28 $0C
 
     ldh  a, [hActiveEntityPosY]                   ; $55D4: $F0 $EF
-    ldh  [$FFEC], a                               ; $55D6: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $55D6: $E0 $EC
     ld   hl, Data_006_55A3                        ; $55D8: $21 $A3 $55
     ld   c, $04                                   ; $55DB: $0E $04
     call RenderActiveEntitySpritesRect            ; $55DD: $CD $E6 $3C

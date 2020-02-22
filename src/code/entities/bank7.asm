@@ -60,9 +60,9 @@ BushCrawlerEntityHandler::
 jr_007_4053:
     ld   hl, wEntitiesPrivateState2Table          ; $4053: $21 $C0 $C2
     add  hl, bc                                   ; $4056: $09
-    ldh  a, [$FFEC]                               ; $4057: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4057: $F0 $EC
     sub  [hl]                                     ; $4059: $96
-    ldh  [$FFEC], a                               ; $405A: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $405A: $E0 $EC
     ld   hl, wEntitiesUnknowTableP                ; $405C: $21 $40 $C4
     add  hl, bc                                   ; $405F: $09
     ld   a, [hl]                                  ; $4060: $7E
@@ -821,7 +821,7 @@ func_007_4537::
     ld   hl, wEntitiesPosYTable                   ; $455A: $21 $10 $C2
     add  hl, de                                   ; $455D: $19
     ld   [hl], a                                  ; $455E: $77
-    ldh  [$FFEC], a                               ; $455F: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $455F: $E0 $EC
     ld   hl, wEntitiesSpeedZTable                 ; $4561: $21 $20 $C3
     add  hl, de                                   ; $4564: $19
     ld   [hl], $20                                ; $4565: $36 $20
@@ -893,14 +893,14 @@ label_007_45F7:
     ld   d, b                                     ; $4602: $50
     ld   hl, Data_007_45EF                        ; $4603: $21 $EF $45
     add  hl, de                                   ; $4606: $19
-    ldh  a, [$FFEC]                               ; $4607: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4607: $F0 $EC
     add  [hl]                                     ; $4609: $86
-    ldh  [$FFEC], a                               ; $460A: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $460A: $E0 $EC
     ld   a, [wEntitiesStateTable]                 ; $460C: $FA $90 $C2
     cp   $0C                                      ; $460F: $FE $0C
     jr   nc, jr_007_461A                          ; $4611: $30 $07
 
-    ldh  a, [$FFEC]                               ; $4613: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4613: $F0 $EC
     sub  $10                                      ; $4615: $D6 $10
     ld   [wEntitiesPosYTable], a                  ; $4617: $EA $10 $C2
 
@@ -918,7 +918,7 @@ jr_007_461A:
     bit  7, a                                     ; $462D: $CB $7F
     jr   z, jr_007_4640                           ; $462F: $28 $0F
 
-    ldh  a, [$FFEC]                               ; $4631: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4631: $F0 $EC
     sub  $0F                                      ; $4633: $D6 $0F
     ldh  [hLinkPositionY], a                      ; $4635: $E0 $99
     ld   a, $02                                   ; $4637: $3E $02
@@ -1011,9 +1011,9 @@ jr_007_46D2:
     ld   d, b                                     ; $46DA: $50
     ld   hl, Data_007_46B3                        ; $46DB: $21 $B3 $46
     add  hl, de                                   ; $46DE: $19
-    ldh  a, [$FFEC]                               ; $46DF: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $46DF: $F0 $EC
     add  [hl]                                     ; $46E1: $86
-    ldh  [$FFEC], a                               ; $46E2: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $46E2: $E0 $EC
 
 jr_007_46E4:
     ldh  a, [hActiveEntitySpriteVariant]          ; $46E4: $F0 $F1
@@ -1052,9 +1052,9 @@ jr_007_470B:
     jr   nc, jr_007_4727                          ; $4713: $30 $12
 
 jr_007_4715:
-    ldh  a, [$FFEC]                               ; $4715: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4715: $F0 $EC
     add  $0B                                      ; $4717: $C6 $0B
-    ldh  [$FFEC], a                               ; $4719: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $4719: $E0 $EC
     xor  a                                        ; $471B: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $471C: $E0 $F1
     ld   de, Data_007_4693                        ; $471E: $11 $93 $46
@@ -1368,7 +1368,7 @@ jr_007_48F0:
     ret                                           ; $48FC: $C9
 
 func_007_48FD::
-    ldh  a, [$FFEC]                               ; $48FD: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $48FD: $F0 $EC
     ldh  [hScratch1], a                           ; $48FF: $E0 $D8
     ldh  a, [hActiveEntityPosX]                   ; $4901: $F0 $EE
     ldh  [hScratch0], a                           ; $4903: $E0 $D7
@@ -1563,9 +1563,9 @@ jr_007_4A7E:
     ldh  a, [hActiveEntityPosX]                   ; $4A88: $F0 $EE
     add  $10                                      ; $4A8A: $C6 $10
     ldh  [hActiveEntityPosX], a                   ; $4A8C: $E0 $EE
-    ldh  a, [$FFEC]                               ; $4A8E: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4A8E: $F0 $EC
     sub  $10                                      ; $4A90: $D6 $10
-    ldh  [$FFEC], a                               ; $4A92: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $4A92: $E0 $EC
     xor  a                                        ; $4A94: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4A95: $E0 $F1
     ld   de, Data_007_4A17                        ; $4A97: $11 $17 $4A
@@ -1717,7 +1717,7 @@ BearEntityHandler::
     xor  a                                        ; $4BB5: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4BB6: $E0 $F1
     ld   a, $4A                                   ; $4BB8: $3E $4A
-    ldh  [$FFEC], a                               ; $4BBA: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $4BBA: $E0 $EC
     ld   de, Data_007_4BAD                        ; $4BBC: $11 $AD $4B
     call RenderActiveEntitySpritesPair            ; $4BBF: $CD $C0 $3B
     ld   a, $68                                   ; $4BC2: $3E $68
@@ -1731,7 +1731,7 @@ BearEntityHandler::
     ld   a, $74                                   ; $4BD3: $3E $74
     ldh  [hActiveEntityPosX], a                   ; $4BD5: $E0 $EE
     ld   a, $38                                   ; $4BD7: $3E $38
-    ldh  [$FFEC], a                               ; $4BD9: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $4BD9: $E0 $EC
     ld   de, Data_007_4BAB                        ; $4BDB: $11 $AB $4B
     call RenderActiveEntitySprite                 ; $4BDE: $CD $77 $3C
 
@@ -2291,9 +2291,9 @@ func_007_4F56::
 
     xor  a                                        ; $4F64: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4F65: $E0 $F1
-    ldh  a, [$FFEC]                               ; $4F67: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4F67: $F0 $EC
     sub  $10                                      ; $4F69: $D6 $10
-    ldh  [$FFEC], a                               ; $4F6B: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $4F6B: $E0 $EC
     ld   de, Data_007_4F4E                        ; $4F6D: $11 $4E $4F
     call RenderActiveEntitySpritesPair            ; $4F70: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $4F73: $CD $8A $3D
@@ -2387,17 +2387,17 @@ jr_007_4FFC:
     ldh  a, [hActiveEntityPosX]                   ; $5004: $F0 $EE
     sub  $0E                                      ; $5006: $D6 $0E
     ldh  [hActiveEntityPosX], a                   ; $5008: $E0 $EE
-    ldh  a, [$FFEC]                               ; $500A: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $500A: $F0 $EC
     sub  $08                                      ; $500C: $D6 $08
-    ldh  [$FFEC], a                               ; $500E: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $500E: $E0 $EC
     jr   jr_007_501B                              ; $5010: $18 $09
 
 jr_007_5012:
     xor  a                                        ; $5012: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $5013: $E0 $F1
-    ldh  a, [$FFEC]                               ; $5015: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5015: $F0 $EC
     sub  $10                                      ; $5017: $D6 $10
-    ldh  [$FFEC], a                               ; $5019: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $5019: $E0 $EC
 
 jr_007_501B:
     ld   de, Data_007_4F4E                        ; $501B: $11 $4E $4F
@@ -2784,7 +2784,7 @@ jr_007_51F2:
 
     ldh  a, [hActiveEntityPosX]                   ; $525F: $F0 $EE
     ldh  [hScratch0], a                           ; $5261: $E0 $D7
-    ldh  a, [$FFEC]                               ; $5263: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5263: $F0 $EC
     ldh  [hScratch1], a                           ; $5265: $E0 $D8
     ld   a, $2F                                   ; $5267: $3E $2F
     ldh  [hJingle], a                             ; $5269: $E0 $F2
@@ -3072,7 +3072,7 @@ func_007_5453::
     sra  a                                        ; $5467: $CB $2F
     ldh  [hScratch0], a                           ; $5469: $E0 $D7
     ldh  [hScratch2], a                           ; $546B: $E0 $D9
-    ldh  a, [$FFEC]                               ; $546D: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $546D: $F0 $EC
     ld   hl, wEntitiesPrivateState2Table          ; $546F: $21 $C0 $C2
     add  hl, bc                                   ; $5472: $09
     sub  [hl]                                     ; $5473: $96
@@ -3179,9 +3179,9 @@ jr_007_552E:
     and  a                                        ; $553C: $A7
     jr   z, jr_007_5545                           ; $553D: $28 $06
 
-    ldh  a, [$FFEC]                               ; $553F: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $553F: $F0 $EC
     add  $02                                      ; $5541: $C6 $02
-    ldh  [$FFEC], a                               ; $5543: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $5543: $E0 $EC
 
 jr_007_5545:
     push hl                                       ; $5545: $E5
@@ -3208,9 +3208,9 @@ jr_007_555A:
     and  a                                        ; $5566: $A7
     jr   z, jr_007_556F                           ; $5567: $28 $06
 
-    ldh  a, [$FFEC]                               ; $5569: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5569: $F0 $EC
     add  $02                                      ; $556B: $C6 $02
-    ldh  [$FFEC], a                               ; $556D: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $556D: $E0 $EC
 
 jr_007_556F:
     ld   de, Data_007_54D0                        ; $556F: $11 $D0 $54
@@ -3669,9 +3669,9 @@ jr_007_5857:
 
     xor  a                                        ; $5862: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $5863: $E0 $F1
-    ldh  a, [$FFEC]                               ; $5865: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5865: $F0 $EC
     sub  $0E                                      ; $5867: $D6 $0E
-    ldh  [$FFEC], a                               ; $5869: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $5869: $E0 $EC
     ld   de, Data_007_594D                        ; $586B: $11 $4D $59
     call RenderActiveEntitySpritesPair            ; $586E: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $5871: $CD $8A $3D
@@ -4400,7 +4400,7 @@ func_007_5CA5::
     pop  hl                                       ; $5CB7: $E1
 
 jr_007_5CB8:
-    ldh  a, [$FFEC]                               ; $5CB8: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5CB8: $F0 $EC
     add  [hl]                                     ; $5CBA: $86
     cp   $7E                                      ; $5CBB: $FE $7E
     jr   c, jr_007_5CC0                           ; $5CBD: $38 $01
@@ -4790,9 +4790,9 @@ Data_007_5FA7::
     db   $F4, $F4, $0C, $0C
 
 label_007_5FAB:
-    ldh  a, [$FFEC]                               ; $5FAB: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5FAB: $F0 $EC
     add  $08                                      ; $5FAD: $C6 $08
-    ldh  [$FFEC], a                               ; $5FAF: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $5FAF: $E0 $EC
 
 jr_007_5FB1:
     ld   de, Data_007_5F9B                        ; $5FB1: $11 $9B $5F
@@ -5135,7 +5135,7 @@ func_007_618F::
 
     ld   hl, wEntitiesPosYTable                   ; $61A1: $21 $10 $C2
     add  hl, de                                   ; $61A4: $19
-    ldh  a, [$FFEC]                               ; $61A5: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $61A5: $F0 $EC
     sub  [hl]                                     ; $61A7: $96
     add  $18                                      ; $61A8: $C6 $18
     cp   $28                                      ; $61AA: $FE $28
@@ -7367,7 +7367,7 @@ func_007_6FB1::
 
     ldh  a, [hActiveEntityPosY]                   ; $6FD0: $F0 $EF
     sub  $02                                      ; $6FD2: $D6 $02
-    ldh  [$FFEC], a                               ; $6FD4: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $6FD4: $E0 $EC
     ld   hl, Data_007_6FA1                        ; $6FD6: $21 $A1 $6F
     ld   c, $04                                   ; $6FD9: $0E $04
     call RenderActiveEntitySpritesRect            ; $6FDB: $CD $E6 $3C
@@ -7383,7 +7383,7 @@ func_007_6FE6::
     add  [hl]                                     ; $6FEC: $86
     ld   [hl], a                                  ; $6FED: $77
     ld   a, [$D20D]                               ; $6FEE: $FA $0D $D2
-    ld   hl, $FFEC                    ; $6FF1: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $6FF1: $21 $EC $FF
     add  [hl]                                     ; $6FF4: $86
     ld   [hl], a                                  ; $6FF5: $77
     ld   a, [$D207]                               ; $6FF6: $FA $07 $D2
@@ -7441,7 +7441,7 @@ func_007_703A::
     add  $0C                                      ; $7045: $C6 $0C
     ld   [$D5C0], a                               ; $7047: $EA $C0 $D5
     ld   a, [$D20B]                               ; $704A: $FA $0B $D2
-    ld   hl, $FFEC                    ; $704D: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $704D: $21 $EC $FF
     add  [hl]                                     ; $7050: $86
     ld   [hl], a                                  ; $7051: $77
     ld   a, [$D20B]                               ; $7052: $FA $0B $D2
@@ -7458,7 +7458,7 @@ func_007_703A::
 
 func_007_706F::
     ld   a, [$D20E]                               ; $706F: $FA $0E $D2
-    ld   hl, $FFEC                    ; $7072: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7072: $21 $EC $FF
     add  [hl]                                     ; $7075: $86
     ld   [hl], a                                  ; $7076: $77
     ld   a, [$D208]                               ; $7077: $FA $08 $D2
@@ -7482,7 +7482,7 @@ func_007_7090::
     ret  z                                        ; $7095: $C8
 
     ld   a, [$D20F]                               ; $7096: $FA $0F $D2
-    ld   hl, $FFEC                    ; $7099: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7099: $21 $EC $FF
     add  [hl]                                     ; $709C: $86
     ld   [hl], a                                  ; $709D: $77
     ld   a, [$D209]                               ; $709E: $FA $09 $D2
@@ -7506,7 +7506,7 @@ func_007_70B7::
     or   [hl]                                     ; $70BD: $B6
     jr   nz, jr_007_7111                          ; $70BE: $20 $51
 
-    ldh  a, [$FFEC]                               ; $70C0: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $70C0: $F0 $EC
     add  $18                                      ; $70C2: $C6 $18
     ld   e, a                                     ; $70C4: $5F
     ldh  a, [hLinkPositionY]                      ; $70C5: $F0 $99
@@ -9105,7 +9105,7 @@ jr_007_7ACB:
 
 jr_007_7AD1:
     push bc                                       ; $7AD1: $C5
-    ldh  a, [$FFEC]                               ; $7AD2: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7AD2: $F0 $EC
     ldh  [hScratch0], a                           ; $7AD4: $E0 $D7
     ldh  a, [hActiveEntityPosX]                   ; $7AD6: $F0 $EE
     ldh  [hScratch1], a                           ; $7AD8: $E0 $D8
@@ -9168,7 +9168,7 @@ func_007_7B30::
     ld   de, wDynamicOAMBuffer                    ; $7B39: $11 $30 $C0
     add  hl, de                                   ; $7B3C: $19
     pop  de                                       ; $7B3D: $D1
-    ldh  a, [$FFEC]                               ; $7B3E: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7B3E: $F0 $EC
     add  d                                        ; $7B40: $82
     add  $04                                      ; $7B41: $C6 $04
     ld   [hl+], a                                 ; $7B43: $22
@@ -9612,7 +9612,7 @@ label_007_7F16:
     and  $1F                                      ; $7F29: $E6 $1F
     sub  $14                                      ; $7F2B: $D6 $14
     ld   e, a                                     ; $7F2D: $5F
-    ld   hl, $FFEC                    ; $7F2E: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7F2E: $21 $EC $FF
     add  [hl]                                     ; $7F31: $86
     ld   [hl], a                                  ; $7F32: $77
     jp   label_007_7F36                           ; $7F33: $C3 $36 $7F
@@ -9621,7 +9621,7 @@ label_007_7F36:
     call func_007_7D9C                            ; $7F36: $CD $9C $7D
     ldh  a, [hActiveEntityPosX]                   ; $7F39: $F0 $EE
     ldh  [hScratch0], a                           ; $7F3B: $E0 $D7
-    ldh  a, [$FFEC]                               ; $7F3D: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7F3D: $F0 $EC
     ldh  [hScratch1], a                           ; $7F3F: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $7F41: $3E $02
     call AddTranscientVfx                         ; $7F43: $CD $C7 $0C

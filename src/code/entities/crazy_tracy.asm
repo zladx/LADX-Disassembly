@@ -44,7 +44,7 @@ CrazyTracyEntityHandler::
     ldh  [hActiveEntityPosX], a                   ; $5EB3: $E0 $EE
     ld   a, [$C145]                               ; $5EB5: $FA $45 $C1
     sub  $10                                      ; $5EB8: $D6 $10
-    ldh  [$FFEC], a                               ; $5EBA: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $5EBA: $E0 $EC
 
     ; Configure Link appearance
     ld   a, $6C                                   ; $5EBC: $3E $6C
@@ -92,9 +92,9 @@ CrazyTracyEntityHandler::
     ld   d, b                                     ; $5EF8: $50
     ld   hl, CrazyTracySpriteAttributes                        ; $5EF9: $21 $63 $5E
     add  hl, de                                   ; $5EFC: $19
-    ldh  a, [$FFEC]                               ; $5EFD: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5EFD: $F0 $EC
     sub  $04                                      ; $5EFF: $D6 $04
-    ldh  [$FFEC], a                               ; $5F01: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $5F01: $E0 $EC
     ld   c, $04                                   ; $5F03: $0E $04
     call RenderActiveEntitySpritesRect            ; $5F05: $CD $E6 $3C
     ld   a, $04                                   ; $5F08: $3E $04

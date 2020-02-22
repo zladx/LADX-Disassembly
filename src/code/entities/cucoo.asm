@@ -350,7 +350,7 @@ func_005_474E::
     cp   $A9                                      ; $4756: $FE $A9
     jp   nc, func_005_7B4B                        ; $4758: $D2 $4B $7B
 
-    ldh  a, [$FFEC]                               ; $475B: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $475B: $F0 $EC
     cp   $91                                      ; $475D: $FE $91
     jp   nc, func_005_7B4B                        ; $475F: $D2 $4B $7B
 

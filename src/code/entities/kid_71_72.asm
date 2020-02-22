@@ -137,7 +137,7 @@ func_006_6134::
     xor  a                                        ; $6134: $AF
     ld   [wC167], a                               ; $6135: $EA $67 $C1
     ldh  a, [hActiveEntityPosY]                   ; $6138: $F0 $EF
-    ldh  [$FFEC], a                               ; $613A: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $613A: $E0 $EC
     call func_006_641A                            ; $613C: $CD $1A $64
     call CopyEntityPositionToActivePosition       ; $613F: $CD $8A $3D
     call func_006_645D                            ; $6142: $CD $5D $64

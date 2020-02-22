@@ -2191,7 +2191,7 @@ jr_036_4C7C:
 
     ldh  a, [hActiveEntityPosX]                   ; $4CA6: $F0 $EE
     ldh  [hScratch0], a                           ; $4CA8: $E0 $D7
-    ldh  a, [$FFEC]                               ; $4CAA: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4CAA: $F0 $EC
     add  $0C                                      ; $4CAC: $C6 $0C
     ldh  [hScratch1], a                           ; $4CAE: $E0 $D8
     call label_D15                                ; $4CB0: $CD $15 $0D
@@ -4911,7 +4911,7 @@ jr_036_5BE8:
     cp   $A8                                      ; $5BEA: $FE $A8
     jp   nc, label_036_6C89                       ; $5BEC: $D2 $89 $6C
 
-    ldh  a, [$FFEC]                               ; $5BEF: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5BEF: $F0 $EC
     cp   $84                                      ; $5BF1: $FE $84
     jp   nc, label_036_6C89                       ; $5BF3: $D2 $89 $6C
 
@@ -5039,7 +5039,7 @@ func_036_5C8B::
     and  $1F                                      ; $5C9E: $E6 $1F
     sub  $14                                      ; $5CA0: $D6 $14
     ld   e, a                                     ; $5CA2: $5F
-    ld   hl, $FFEC                    ; $5CA3: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $5CA3: $21 $EC $FF
     add  [hl]                                     ; $5CA6: $86
     ld   [hl], a                                  ; $5CA7: $77
     call func_036_6A46                            ; $5CA8: $CD $46 $6A
@@ -5047,7 +5047,7 @@ func_036_5C8B::
 func_036_5CAB::
     ldh  a, [hActiveEntityPosX]                   ; $5CAB: $F0 $EE
     ldh  [hScratch0], a                           ; $5CAD: $E0 $D7
-    ldh  a, [$FFEC]                               ; $5CAF: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5CAF: $F0 $EC
     ldh  [hScratch1], a                           ; $5CB1: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $5CB3: $3E $02
     call AddTranscientVfx                         ; $5CB5: $CD $C7 $0C

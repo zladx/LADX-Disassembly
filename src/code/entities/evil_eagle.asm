@@ -892,7 +892,7 @@ func_005_5FA8::
     call GetEntityTransitionCountdown             ; $5FAB: $CD $05 $0C
     jr   nz, jr_005_5FEA                          ; $5FAE: $20 $3A
 
-    ldh  a, [$FFEC]                               ; $5FB0: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5FB0: $F0 $EC
     cp   $B0                                      ; $5FB2: $FE $B0
     jp   nc, label_005_5F78                       ; $5FB4: $D2 $78 $5F
 
@@ -1000,7 +1000,7 @@ jr_005_6040:
 
 jr_005_6053:
     call func_005_7AB1                            ; $6053: $CD $B1 $7A
-    ldh  a, [$FFEC]                               ; $6056: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $6056: $F0 $EC
     and  $F0                                      ; $6058: $E6 $F0
     cp   $C0                                      ; $605A: $FE $C0
     jr   nz, jr_005_6061                          ; $605C: $20 $03

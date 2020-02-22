@@ -138,7 +138,7 @@ jr_018_7CAF:
     ldh  [hJingle], a                             ; $7CB5: $E0 $F2
     ldh  a, [hActiveEntityPosX]                   ; $7CB7: $F0 $EE
     ldh  [hScratch0], a                           ; $7CB9: $E0 $D7
-    ldh  a, [$FFEC]                               ; $7CBB: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7CBB: $F0 $EC
     ldh  [hScratch1], a                           ; $7CBD: $E0 $D8
     ld   a, TRANSCIENT_VFX_SWORD_POKE             ; $7CBF: $3E $05
     jp   AddTranscientVfx                         ; $7CC1: $C3 $C7 $0C

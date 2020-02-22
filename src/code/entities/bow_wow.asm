@@ -550,7 +550,7 @@ label_005_4335:
 
     ld   hl, wEntitiesPosYTable                   ; $434D: $21 $10 $C2
     add  hl, de                                   ; $4350: $19
-    ldh  a, [$FFEC]                               ; $4351: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4351: $F0 $EC
     sub  [hl]                                     ; $4353: $96
     add  $10                                      ; $4354: $C6 $10
     cp   $20                                      ; $4356: $FE $20

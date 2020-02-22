@@ -103,7 +103,7 @@ func_006_564B::
     call ClearEntityStatus_06                     ; $567F: $CD $DB $65
     ldh  a, [hActiveEntityPosX]                   ; $5682: $F0 $EE
     ldh  [hScratch0], a                           ; $5684: $E0 $D7
-    ldh  a, [$FFEC]                               ; $5686: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5686: $F0 $EC
     jr   jr_006_56BB                              ; $5688: $18 $31
 
 jr_006_568A:
@@ -524,7 +524,7 @@ jr_006_58F3:
     ld   hl, $D200                                ; $5911: $21 $00 $D2
     add  hl, de                                   ; $5914: $19
     sub  [hl]                                     ; $5915: $96
-    ldh  [$FFEC], a                               ; $5916: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $5916: $E0 $EC
     ld   a, [hl]                                  ; $5918: $7E
     and  $80                                      ; $5919: $E6 $80
     jr   nz, jr_006_5936                          ; $591B: $20 $19

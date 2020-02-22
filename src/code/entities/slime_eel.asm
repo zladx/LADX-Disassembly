@@ -733,7 +733,7 @@ func_005_7283::
     add  hl, de                                   ; $7285: $19
     ld   a, $48                                   ; $7286: $3E $48
     add  [hl]                                     ; $7288: $86
-    ldh  [$FFEC], a                               ; $7289: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $7289: $E0 $EC
     ld   a, l                                     ; $728B: $7D
     add  $08                                      ; $728C: $C6 $08
     ld   l, a                                     ; $728E: $6F
@@ -752,7 +752,7 @@ func_005_7283::
     jr   nc, jr_005_72C9                          ; $72A5: $30 $22
 
     ldh  a, [hLinkPositionY]                      ; $72A7: $F0 $99
-    ld   hl, $FFEC                    ; $72A9: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $72A9: $21 $EC $FF
     sub  [hl]                                     ; $72AC: $96
     add  $08                                      ; $72AD: $C6 $08
     cp   $10                                      ; $72AF: $FE $10
@@ -921,7 +921,7 @@ jr_005_7395:
 
     ld   hl, wEntitiesPosYTable                   ; $73C7: $21 $10 $C2
     add  hl, de                                   ; $73CA: $19
-    ldh  a, [$FFEC]                               ; $73CB: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $73CB: $F0 $EC
     sub  [hl]                                     ; $73CD: $96
     add  $0C                                      ; $73CE: $C6 $0C
     cp   $18                                      ; $73D0: $FE $18
@@ -1098,7 +1098,7 @@ jr_005_74C5:
     ld   [hl], a                                  ; $74FA: $77
     call func_005_7AB1                            ; $74FB: $CD $B1 $7A
     ldh  a, [hLinkPositionY]                      ; $74FE: $F0 $99
-    ld   hl, $FFEC                    ; $7500: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7500: $21 $EC $FF
     sub  [hl]                                     ; $7503: $96
     add  $03                                      ; $7504: $C6 $03
     cp   $06                                      ; $7506: $FE $06
@@ -1170,7 +1170,7 @@ label_005_7550:
     and  $1F                                      ; $7563: $E6 $1F
     sub  $10                                      ; $7565: $D6 $10
     ld   e, a                                     ; $7567: $5F
-    ld   hl, $FFEC                    ; $7568: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7568: $21 $EC $FF
     add  [hl]                                     ; $756B: $86
     ld   [hl], a                                  ; $756C: $77
     jp   label_005_7570                           ; $756D: $C3 $70 $75
@@ -1179,7 +1179,7 @@ label_005_7570:
     call func_005_7A40                            ; $7570: $CD $40 $7A
     ldh  a, [hActiveEntityPosX]                   ; $7573: $F0 $EE
     ldh  [hScratch0], a                           ; $7575: $E0 $D7
-    ldh  a, [$FFEC]                               ; $7577: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7577: $F0 $EC
     ldh  [hScratch1], a                           ; $7579: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $757B: $3E $02
     call AddTranscientVfx                         ; $757D: $CD $C7 $0C
@@ -1313,7 +1313,7 @@ jr_005_7635:
     ld   [hl], a                                  ; $7646: $77
     ld   hl, $D100                                ; $7647: $21 $00 $D1
     add  hl, de                                   ; $764A: $19
-    ldh  a, [$FFEC]                               ; $764B: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $764B: $F0 $EC
     ld   [hl], a                                  ; $764D: $77
     ld   hl, wEntitiesPrivateCountdown2Table      ; $764E: $21 $00 $C3
     add  hl, bc                                   ; $7651: $09
@@ -1370,7 +1370,7 @@ func_005_766E::
     ld   hl, $D100                                ; $769D: $21 $00 $D1
     add  hl, de                                   ; $76A0: $19
     ld   a, [hl]                                  ; $76A1: $7E
-    ldh  [$FFEC], a                               ; $76A2: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $76A2: $E0 $EC
     ld   a, $00                                   ; $76A4: $3E $00
     ldh  [hActiveEntitySpriteVariant], a          ; $76A6: $E0 $F1
     ld   de, Data_005_72CC                        ; $76A8: $11 $CC $72
@@ -1387,7 +1387,7 @@ func_005_766E::
     ld   hl, $D100                                ; $76BD: $21 $00 $D1
     add  hl, de                                   ; $76C0: $19
     ld   a, [hl]                                  ; $76C1: $7E
-    ldh  [$FFEC], a                               ; $76C2: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $76C2: $E0 $EC
     ld   a, $00                                   ; $76C4: $3E $00
     ldh  [hActiveEntitySpriteVariant], a          ; $76C6: $E0 $F1
     ld   de, Data_005_72CC                        ; $76C8: $11 $CC $72
@@ -1404,7 +1404,7 @@ func_005_766E::
     ld   hl, $D100                                ; $76DD: $21 $00 $D1
     add  hl, de                                   ; $76E0: $19
     ld   a, [hl]                                  ; $76E1: $7E
-    ldh  [$FFEC], a                               ; $76E2: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $76E2: $E0 $EC
     ld   a, $02                                   ; $76E4: $3E $02
     ldh  [hActiveEntitySpriteVariant], a          ; $76E6: $E0 $F1
     ld   de, Data_005_72CC                        ; $76E8: $11 $CC $72
@@ -1586,7 +1586,7 @@ jr_005_79B3:
     ld   hl, Data_005_79A5                        ; $79B9: $21 $A5 $79
     add  hl, de                                   ; $79BC: $19
     ld   a, [hl]                                  ; $79BD: $7E
-    ld   hl, $FFEC                    ; $79BE: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $79BE: $21 $EC $FF
     add  [hl]                                     ; $79C1: $86
     ld   [hl], a                                  ; $79C2: $77
     cp   $14                                      ; $79C3: $FE $14

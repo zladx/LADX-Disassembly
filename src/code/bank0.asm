@@ -7511,8 +7511,8 @@ RenderActiveEntitySpritesPair::
     ld   d, h
 
     ; Sprite 0: set OAM byte 0 (Y position)
-    ; [de] = [$FFEC]
-    ldh  a, [$FFEC]
+    ; [de] = [hActiveEntityVisualPosY]
+    ldh  a, [hActiveEntityVisualPosY]
     ld   [de], a
     inc  de
 
@@ -7582,7 +7582,7 @@ RenderActiveEntitySpritesPair::
     inc  de
 
     ; Sprite 1: set OAM byte 0 (Y position)
-    ldh  a, [$FFEC]
+    ldh  a, [hActiveEntityVisualPosY]
     ld   [de], a
     inc  de
 
@@ -7694,11 +7694,11 @@ RenderActiveEntitySprite::
     ; If in a side-scrolling room…
     ldh  a, [hIsSideScrolling]
     and  a
-    ldh  a, [$FFEC]
+    ldh  a, [hActiveEntityVisualPosY]
     jr   z, .sideScrollingEnd
-    ; … $FFEC -= 4
+    ; … hActiveEntityVisualPosY -= 4
     sub  a, $04
-    ldh  [$FFEC], a
+    ldh  [hActiveEntityVisualPosY], a
 .sideScrollingEnd
     ld   [de], a
     inc  de
@@ -7811,7 +7811,7 @@ RenderActiveEntitySpritesRect::
 
 .loop
     ; Set OAM byte 0 (Y position)
-    ldh  a, [$FFEC]
+    ldh  a, [hActiveEntityVisualPosY]
     add  a, [hl]
     ld   [de], a
     inc  hl
@@ -7898,8 +7898,8 @@ SkipDisabledEntityDuringRoomTransition::
     cp   $C0
     jr   nc, .skip
 
-    ; If $FFEC - 1 is outside of the screen, skip
-    ldh  a, [$FFEC]
+    ; If hActiveEntityVisualPosY - 1 is outside of the screen, skip
+    ldh  a, [hActiveEntityVisualPosY]
     dec  a
     cp   $88
     jr   nc, .skip
@@ -7953,7 +7953,7 @@ CopyEntityPositionToActivePosition::
     ld   hl, wEntitiesPosZTable
     add  hl, bc
     sub  a, [hl]
-    ldh  [$FFEC], a
+    ldh  [hActiveEntityVisualPosY], a
     ret
 
 label_3DA0::
@@ -8071,7 +8071,7 @@ label_3E8E::
 
     ldh  a, [hActiveEntityPosX]
     ldh  [hScratch0], a
-    ldh  a, [$FFEC]
+    ldh  a, [hActiveEntityVisualPosY]
     ldh  [hScratch1], a
     ld   a, TRANSCIENT_VFX_SMOKE
     call AddTranscientVfx

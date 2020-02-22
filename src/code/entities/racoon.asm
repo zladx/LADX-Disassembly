@@ -636,7 +636,7 @@ jr_005_4CE6:
     ldh  [hActiveEntityPosX], a                   ; $4CE8: $E0 $EE
     ldh  a, [hLinkPositionY]                      ; $4CEA: $F0 $99
     sub  $0C                                      ; $4CEC: $D6 $0C
-    ldh  [$FFEC], a                               ; $4CEE: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $4CEE: $E0 $EC
     xor  a                                        ; $4CF0: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4CF1: $E0 $F1
     ld   de, data_005_4cc6                        ; $4CF3: $11 $C6 $4C
@@ -814,7 +814,7 @@ jr_005_4DE3:
 jr_005_4DF3:
     ldh  [hActiveEntityPosX], a                   ; $4DF3: $E0 $EE
     ld   a, $5C                                   ; $4DF5: $3E $5C
-    ldh  [$FFEC], a                               ; $4DF7: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $4DF7: $E0 $EC
     xor  a                                        ; $4DF9: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $4DFA: $E0 $F1
     call RenderActiveEntitySpritesPair            ; $4DFC: $CD $C0 $3B

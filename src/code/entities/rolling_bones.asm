@@ -278,7 +278,7 @@ jr_006_6DF1:
     ld   hl, wEntitiesSpeedXTable                 ; $6DF1: $21 $40 $C2
     add  hl, bc                                   ; $6DF4: $09
     ld   [hl], a                                  ; $6DF5: $77
-    ldh  a, [$FFEC]                               ; $6DF6: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $6DF6: $F0 $EC
     cp   $50                                      ; $6DF8: $FE $50
     ld   a, e                                     ; $6DFA: $7B
     jr   c, jr_006_6DFF                           ; $6DFB: $38 $02

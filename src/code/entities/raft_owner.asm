@@ -187,7 +187,7 @@ jr_005_546A:
 func_005_546C::
     ldh  a, [hActiveEntityPosX]                   ; $546C: $F0 $EE
     ldh  [hLinkPositionX], a                      ; $546E: $E0 $98
-    ldh  a, [$FFEC]                               ; $5470: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $5470: $F0 $EC
     sub  $05                                      ; $5472: $D6 $05
     ldh  [hLinkPositionY], a                      ; $5474: $E0 $99
     call IncrementEntityState                     ; $5476: $CD $12 $3B

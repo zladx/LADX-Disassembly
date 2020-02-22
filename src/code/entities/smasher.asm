@@ -515,7 +515,7 @@ func_006_4855::
 
     ld   hl, wEntitiesPosYTable                   ; $4868: $21 $10 $C2
     add  hl, de                                   ; $486B: $19
-    ldh  a, [$FFEC]                               ; $486C: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $486C: $F0 $EC
     sub  [hl]                                     ; $486E: $96
     add  $0C                                      ; $486F: $C6 $0C
     cp   $18                                      ; $4871: $FE $18

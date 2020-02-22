@@ -15,7 +15,7 @@ func_027_7240::
     ld   c, a                                     ; $7254: $4F
 
 jr_027_7255:
-    ldh  a, [$FFEC]                               ; $7255: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7255: $F0 $EC
     add  [hl]                                     ; $7257: $86
     ld   [de], a                                  ; $7258: $12
     inc  de                                       ; $7259: $13
@@ -213,7 +213,7 @@ func_027_74E3::
 jr_027_74EF:
     ld   a, [hl]                                  ; $74EF: $7E
     sub  d                                        ; $74F0: $92
-    ldh  [$FFEC], a                               ; $74F1: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $74F1: $E0 $EC
     ld   a, [wIntroSubTimer]                      ; $74F3: $FA $02 $D0
     sla  a                                        ; $74F6: $CB $27
     ld   e, a                                     ; $74F8: $5F

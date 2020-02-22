@@ -2,9 +2,9 @@ Data_006_6A78::
     db   $50, $02, $52, $02
 
 TelephoneEntityHandler::
-    ldh  a, [$FFEC]                               ; $6A7C: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $6A7C: $F0 $EC
     sub  $05                                      ; $6A7E: $D6 $05
-    ldh  [$FFEC], a                               ; $6A80: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $6A80: $E0 $EC
     ld   de, Data_006_6A78                        ; $6A82: $11 $78 $6A
     call RenderActiveEntitySpritesPair            ; $6A85: $CD $C0 $3B
     call func_006_64C6                            ; $6A88: $CD $C6 $64

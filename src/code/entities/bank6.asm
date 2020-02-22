@@ -417,7 +417,7 @@ func_006_700A::
     and  $1F                                      ; $701D: $E6 $1F
     sub  $14                                      ; $701F: $D6 $14
     ld   e, a                                     ; $7021: $5F
-    ld   hl, $FFEC                    ; $7022: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7022: $21 $EC $FF
     add  [hl]                                     ; $7025: $86
     ld   [hl], a                                  ; $7026: $77
     jp   label_006_702A                           ; $7027: $C3 $2A $70
@@ -426,7 +426,7 @@ label_006_702A:
     call func_006_64CC                            ; $702A: $CD $CC $64
     ldh  a, [hActiveEntityPosX]                   ; $702D: $F0 $EE
     ldh  [hScratch0], a                           ; $702F: $E0 $D7
-    ldh  a, [$FFEC]                               ; $7031: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7031: $F0 $EC
     ldh  [hScratch1], a                           ; $7033: $E0 $D8
 
 label_006_7035:

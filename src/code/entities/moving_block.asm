@@ -132,7 +132,7 @@ jr_015_41A4:
     ret  nz                                       ; $41B1: $C0
 
 jr_015_41B2:
-    ldh  a, [$FFEC]                               ; $41B2: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $41B2: $F0 $EC
     add  $F0                                      ; $41B4: $C6 $F0
     ldh  [hLinkPositionY], a                      ; $41B6: $E0 $99
     ret                                           ; $41B8: $C9
@@ -147,7 +147,7 @@ jr_015_41B9:
     ret  nz                                       ; $41C2: $C0
 
 jr_015_41C3:
-    ldh  a, [$FFEC]                               ; $41C3: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $41C3: $F0 $EC
     add  $0C                                      ; $41C5: $C6 $0C
     ldh  [hLinkPositionY], a                      ; $41C7: $E0 $99
 

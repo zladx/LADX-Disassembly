@@ -580,7 +580,7 @@ jr_005_51A1:
     ldh  [hActiveEntityPosX], a                   ; $51AB: $E0 $EE
     ldh  a, [hLinkPositionY]                      ; $51AD: $F0 $99
     sub  $0C                                      ; $51AF: $D6 $0C
-    ldh  [$FFEC], a                               ; $51B1: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $51B1: $E0 $EC
     ld   de, Data_005_515F                        ; $51B3: $11 $5F $51
     xor  a                                        ; $51B6: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $51B7: $E0 $F1
@@ -720,7 +720,7 @@ func_005_52AF::
     ldh  [hActiveEntityPosX], a                   ; $52B3: $E0 $EE
     ldh  [hLinkPositionX], a                      ; $52B5: $E0 $98
     ld   a, $34                                   ; $52B7: $3E $34
-    ldh  [$FFEC], a                               ; $52B9: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $52B9: $E0 $EC
     ldh  [hLinkPositionY], a                      ; $52BB: $E0 $99
     ld   a, $02                                   ; $52BD: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $52BF: $E0 $A1

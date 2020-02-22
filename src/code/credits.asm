@@ -5175,9 +5175,9 @@ Data_017_70D1::
     ld   [wOAMNextAvailableSlot], a               ; $7173: $EA $C0 $C3
     ldh  a, [hBaseScrollY]                        ; $7176: $F0 $97
     ld   e, a                                     ; $7178: $5F
-    ldh  a, [$FFEC]                               ; $7179: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7179: $F0 $EC
     sub  e                                        ; $717B: $93
-    ldh  [$FFEC], a                               ; $717C: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $717C: $E0 $EC
     ldh  a, [hIsGBC]                               ; $717E: $F0 $FE
     and  a                                        ; $7180: $A7
     jr   z, jr_017_7188                           ; $7181: $28 $05
@@ -5406,10 +5406,10 @@ jr_017_73AF:
     ld   a, [hl]                                  ; $73BB: $7E
     sra  a                                        ; $73BC: $CB $2F
     ld   e, a                                     ; $73BE: $5F
-    ldh  a, [$FFEC]                               ; $73BF: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $73BF: $F0 $EC
     add  e                                        ; $73C1: $83
     sub  d                                        ; $73C2: $92
-    ldh  [$FFEC], a                               ; $73C3: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $73C3: $E0 $EC
     ldh  a, [hIsGBC]                               ; $73C5: $F0 $FE
     and  a                                        ; $73C7: $A7
     jr   nz, jr_017_73ED                          ; $73C8: $20 $23
@@ -5667,9 +5667,9 @@ jr_017_74C5:
     ld   a, [hl]                                  ; $74D4: $7E
     sra  a                                        ; $74D5: $CB $2F
     ld   e, a                                     ; $74D7: $5F
-    ldh  a, [$FFEC]                               ; $74D8: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $74D8: $F0 $EC
     add  e                                        ; $74DA: $83
-    ldh  [$FFEC], a                               ; $74DB: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $74DB: $E0 $EC
 
 jr_017_74DD:
     ldh  a, [hIsGBC]                               ; $74DD: $F0 $FE
@@ -5831,13 +5831,13 @@ jr_017_75A8:
 
     ld   [wOAMNextAvailableSlot], a               ; $75AB: $EA $C0 $C3
     ld   hl, hBaseScrollY                                ; $75AE: $21 $97 $FF
-    ldh  a, [$FFEC]                               ; $75B1: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $75B1: $F0 $EC
 
 jr_017_75B3:
     sub  [hl]                                     ; $75B3: $96
 
 jr_017_75B4:
-    ldh  [$FFEC], a                               ; $75B4: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $75B4: $E0 $EC
     ld   hl, $7572                                ; $75B6: $21 $72 $75
     ld   c, $0E                                   ; $75B9: $0E $0E
     call RenderActiveEntitySpritesRect            ; $75BB: $CD $E6 $3C
@@ -6159,11 +6159,11 @@ jr_017_76FD:
     ld   d, b                                     ; $7701: $50
     ld   hl, $76AD                                ; $7702: $21 $AD $76
     add  hl, de                                   ; $7705: $19
-    ldh  a, [$FFEC]                               ; $7706: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7706: $F0 $EC
     add  [hl]                                     ; $7708: $86
     ld   hl, hScratch0                                ; $7709: $21 $D7 $FF
     sub  [hl]                                     ; $770C: $96
-    ldh  [$FFEC], a                               ; $770D: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $770D: $E0 $EC
     cp   $A8                                      ; $770F: $FE $A8
     jp   nc, label_017_7CC2                       ; $7711: $D2 $C2 $7C
 
@@ -6345,9 +6345,9 @@ jr_017_77FE:
     ld   d, b                                     ; $7805: $50
     ld   hl, $77E1                                ; $7806: $21 $E1 $77
     add  hl, de                                   ; $7809: $19
-    ldh  a, [$FFEC]                               ; $780A: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $780A: $F0 $EC
     add  [hl]                                     ; $780C: $86
-    ldh  [$FFEC], a                               ; $780D: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $780D: $E0 $EC
     ldh  a, [hIsGBC]                               ; $780F: $F0 $FE
     and  a                                        ; $7811: $A7
     jr   nz, jr_017_7826                          ; $7812: $20 $12
@@ -6398,9 +6398,9 @@ jr_017_7826:
     ld   d, b                                     ; $7851: $50
     ld   hl, $77E9                                ; $7852: $21 $E9 $77
     add  hl, de                                   ; $7855: $19
-    ldh  a, [$FFEC]                               ; $7856: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7856: $F0 $EC
     add  [hl]                                     ; $7858: $86
-    ldh  [$FFEC], a                               ; $7859: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $7859: $E0 $EC
     ldh  a, [hIsGBC]                               ; $785B: $F0 $FE
     and  a                                        ; $785D: $A7
     jr   nz, jr_017_7867                          ; $785E: $20 $07
@@ -6458,9 +6458,9 @@ jr_017_78A1:
     inc  a                                        ; $78A2: $3C
     sra  a                                        ; $78A3: $CB $2F
     ld   e, a                                     ; $78A5: $5F
-    ldh  a, [$FFEC]                               ; $78A6: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $78A6: $F0 $EC
     add  e                                        ; $78A8: $83
-    ldh  [$FFEC], a                               ; $78A9: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $78A9: $E0 $EC
     ldh  a, [hIsGBC]                               ; $78AB: $F0 $FE
     and  a                                        ; $78AD: $A7
     jr   nz, jr_017_78DD                          ; $78AE: $20 $2D
@@ -6740,7 +6740,7 @@ func_017_7A29::
     add  hl, de                                   ; $7A32: $19
     push hl                                       ; $7A33: $E5
     pop  de                                       ; $7A34: $D1
-    ldh  a, [$FFEC]                               ; $7A35: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7A35: $F0 $EC
     ld   [de], a                                  ; $7A37: $12
     inc  de                                       ; $7A38: $13
     ld   a, [$C155]                               ; $7A39: $FA $55 $C1
@@ -6772,7 +6772,7 @@ func_017_7A29::
     xor  [hl]                                     ; $7A61: $AE
     ld   [de], a                                  ; $7A62: $12
     inc  de                                       ; $7A63: $13
-    ldh  a, [$FFEC]                               ; $7A64: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7A64: $F0 $EC
     ld   [de], a                                  ; $7A66: $12
     inc  de                                       ; $7A67: $13
     ld   a, [$C155]                               ; $7A68: $FA $55 $C1
@@ -6833,7 +6833,7 @@ func_017_7AB1::
 ._04 dw func_017_7B5B
 
 func_017_7AC1::
-    ldh  a, [$FFEC]                               ; $7AC1: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7AC1: $F0 $EC
     cp   $60                                      ; $7AC3: $FE $60
     jp   z, IncrementEntityState                  ; $7AC5: $CA $12 $3B
 
@@ -6999,7 +6999,7 @@ jr_017_7B8B:
 jr_017_7BA2:
     ld   hl, $7B81                                ; $7BA2: $21 $81 $7B
     add  hl, bc                                   ; $7BA5: $09
-    ldh  a, [$FFEC]                               ; $7BA6: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7BA6: $F0 $EC
     add  [hl]                                     ; $7BA8: $86
     cp   $98                                      ; $7BA9: $FE $98
     jr   c, jr_017_7BAF                           ; $7BAB: $38 $02

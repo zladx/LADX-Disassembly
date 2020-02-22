@@ -221,7 +221,7 @@ jr_006_5102:
 
     ldh  a, [hActiveEntityPosX]                   ; $5108: $F0 $EE
     ldh  [hScratch0], a                           ; $510A: $E0 $D7
-    ldh  a, [$FFEC]                               ; $510C: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $510C: $F0 $EC
     add  $0A                                      ; $510E: $C6 $0A
     ldh  [hScratch1], a                           ; $5110: $E0 $D8
     ld   a, TRANSCIENT_VFX_PEGASUS_DUST           ; $5112: $3E $0B

@@ -175,7 +175,7 @@ func_005_63EB::
     ldh  [hScratch0], a                           ; $6430: $E0 $D7
 
 func_005_6432::
-    ldh  a, [$FFEC]                               ; $6432: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $6432: $F0 $EC
     sub  $10                                      ; $6434: $D6 $10
     ldh  [hScratch1], a                           ; $6436: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $6438: $3E $02
@@ -268,7 +268,7 @@ jr_005_64AF:
     cp   $70                                      ; $64B9: $FE $70
     jr   nc, jr_005_64CC                          ; $64BB: $30 $0F
 
-    ldh  a, [$FFEC]                               ; $64BD: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $64BD: $F0 $EC
     cp   $50                                      ; $64BF: $FE $50
     jr   nc, jr_005_64CC                          ; $64C1: $30 $09
 
@@ -288,7 +288,7 @@ jr_005_64CC:
     cp   $70                                      ; $64D7: $FE $70
     jr   nc, jr_005_64F7                          ; $64D9: $30 $1C
 
-    ldh  a, [$FFEC]                               ; $64DB: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $64DB: $F0 $EC
     cp   $50                                      ; $64DD: $FE $50
     jr   nc, jr_005_64F7                          ; $64DF: $30 $16
 
@@ -345,7 +345,7 @@ jr_005_6522:
 
     ldh  a, [hActiveEntityPosX]                   ; $6527: $F0 $EE
     ldh  [hScratch0], a                           ; $6529: $E0 $D7
-    ldh  a, [$FFEC]                               ; $652B: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $652B: $F0 $EC
     ldh  [hScratch1], a                           ; $652D: $E0 $D8
     ld   a, TRANSCIENT_VFX_LAVA_SPLASH            ; $652F: $3E $0A
     jp   AddTranscientVfx                         ; $6531: $C3 $C7 $0C
@@ -622,7 +622,7 @@ label_005_672A:
     or   $04                                      ; $673F: $F6 $04
     ld   [hl], a                                  ; $6741: $77
     ldh  a, [hActiveEntityPosY]                   ; $6742: $F0 $EF
-    ldh  [$FFEC], a                               ; $6744: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $6744: $E0 $EC
     xor  a                                        ; $6746: $AF
     ldh  [hActiveEntitySpriteVariant], a          ; $6747: $E0 $F1
     ld   hl, Data_005_66F5                        ; $6749: $21 $F5 $66

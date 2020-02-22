@@ -10476,7 +10476,7 @@ jr_020_7B8A:
 
 func_020_7BA5::
     push bc                                       ; $7BA5: $C5
-    ldh  a, [$FFEC]                               ; $7BA6: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7BA6: $F0 $EC
     swap a                                        ; $7BA8: $CB $37
     and  $0F                                      ; $7BAA: $E6 $0F
     ld   e, a                                     ; $7BAC: $5F
@@ -10522,7 +10522,7 @@ jr_020_7BDA:
     cp   $00                                      ; $7BDC: $FE $00
     jr   nz, jr_020_7BE4                          ; $7BDE: $20 $04
 
-    ldh  a, [$FFEC]                               ; $7BE0: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7BE0: $F0 $EC
 
 jr_020_7BE2:
     jr   jr_020_7BF0                              ; $7BE2: $18 $0C
@@ -10801,7 +10801,7 @@ func_020_7D40:
     ld   c, a                                     ; $7D54: $4F
 
 jr_020_7D55:
-    ldh  a, [$FFEC]                               ; $7D55: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7D55: $F0 $EC
     add  [hl]                                     ; $7D57: $86
     ld   [de], a                                  ; $7D58: $12
     inc  de                                       ; $7D59: $13

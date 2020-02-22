@@ -2205,7 +2205,7 @@ label_5CA3::
     ld   hl, label_5C45
     add  hl, de
     ld   a, [hl]
-    ldh  [$FFEC], a
+    ldh  [hActiveEntityVisualPosY], a
     ld   a, [$C1B0]
     rla
     rla
@@ -2236,7 +2236,7 @@ label_5CBD::
     jr   nc, label_5D13
     ldh  [hActiveEntitySpriteVariant], a
     ld   de, wDynamicOAMBuffer
-    ldh  a, [$FFEC]
+    ldh  a, [hActiveEntityVisualPosY]
     ld   [de], a
     inc  de
     ldh  a, [hActiveEntityPosX]
@@ -2257,7 +2257,7 @@ label_5CBD::
     ld   a, [hli]
     ld   [de], a
     inc  de
-    ldh  a, [$FFEC]
+    ldh  a, [hActiveEntityVisualPosY]
     ld   [de], a
     inc  de
     ldh  a, [hActiveEntityPosX]
@@ -3583,7 +3583,7 @@ label_6A7C::
     ld   e, a
     ld   a, $20
     sub  a, e
-    ldh  [$FFEC], a
+    ldh  [hActiveEntityVisualPosY], a
     ld   a, [$D214]
     and  a
     jr   z, label_6AC2
@@ -3620,7 +3620,7 @@ label_6AC2::
     ld   a, [$D211]
     add  a, $20
     sub  a, e
-    ldh  [$FFEC], a
+    ldh  [hActiveEntityVisualPosY], a
     ld   a, [$D213]
     ld   e, a
     ld   d, $00

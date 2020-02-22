@@ -22,7 +22,7 @@ jr_006_621C:
 
 func_006_6230::
     ldh  a, [hActiveEntityPosY]                   ; $6230: $F0 $EF
-    ldh  [$FFEC], a                               ; $6232: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $6232: $E0 $EC
     call func_006_641A                            ; $6234: $CD $1A $64
     call CopyEntityPositionToActivePosition       ; $6237: $CD $8A $3D
     call func_006_645D                            ; $623A: $CD $5D $64

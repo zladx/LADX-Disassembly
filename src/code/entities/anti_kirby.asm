@@ -201,7 +201,7 @@ jr_006_434B:
     ld   a, [hl]                                  ; $436B: $7E
     push hl                                       ; $436C: $E5
     push af                                       ; $436D: $F5
-    ldh  a, [$FFEC]                               ; $436E: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $436E: $F0 $EC
     ld   [hl], a                                  ; $4370: $77
     call func_006_65A4                            ; $4371: $CD $A4 $65
     ld   e, a                                     ; $4374: $5F
@@ -234,7 +234,7 @@ jr_006_434B:
     cp   $08                                      ; $43A0: $FE $08
     jr   nc, label_006_43B8                       ; $43A2: $30 $14
 
-    ld   hl, $FFEC                    ; $43A4: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $43A4: $21 $EC $FF
     ldh  a, [hLinkPositionY]                      ; $43A7: $F0 $99
     sub  [hl]                                     ; $43A9: $96
     add  $04                                      ; $43AA: $C6 $04

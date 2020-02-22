@@ -1083,11 +1083,11 @@ RenderIntroEntities::
     ld   a, [hl]
     ldh  [hActiveEntityPosX], a
 
-    ; $FFEC = wEntitiesPosYTable[c]
+    ; hActiveEntityVisualPosY = wEntitiesPosYTable[c]
     ld   hl, wEntitiesPosYTable
     add  hl, bc
     ld   a, [hl]
-    ldh  [$FFEC], a
+    ldh  [hActiveEntityVisualPosY], a
 
     ; hActiveEntitySpriteVariant = wEntitiesSpriteVariantTable[c]
     ld   hl, wEntitiesSpriteVariantTable
@@ -1170,7 +1170,7 @@ RenderIntroShip::
     ld   hl, ShipHeaveTable
     add  hl, de
     ld   a, [hl]
-    ld   hl, $FFEC
+    ld   hl, hActiveEntityVisualPosY
     add  a, [hl]
     ld   [hl], a
     ld   hl, data_7538
@@ -1179,7 +1179,7 @@ RenderIntroShip::
     ld   c, $06
 
 .loop
-    ldh  a, [$FFEC]
+    ldh  a, [hActiveEntityVisualPosY]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -1205,7 +1205,7 @@ RenderIntroShip::
     ld   de, $C018
     ld   c, $04
 .loop2
-    ldh  a, [$FFEC]
+    ldh  a, [hActiveEntityVisualPosY]
     add  a, [hl]
     inc  hl
     ld   [de], a
@@ -1643,7 +1643,7 @@ label_7929::
     ld   hl, $D018
     ld   a, $59
     add  a, [hl]
-    ldh  [$FFEC], a
+    ldh  [hActiveEntityVisualPosY], a
     ldh  a, [hIsGBC]
     and  a
     jr   nz, label_795D

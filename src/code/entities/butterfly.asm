@@ -14,10 +14,10 @@ ButterflyEntityHandler::
     ldh  a, [hActiveEntitySpriteVariant]          ; $6BC9
     cp   $01                                      ; $6BCB: $FE $01
     jr   nz, .downwardsEnd                        ; $6BCD: $20 $06
-    ; … $FFEC = $FFEC - 0 (unused?)
-    ldh  a, [$FFEC]                               ; $6BCF: $F0 $EC
+    ; … hActiveEntityVisualPosY = hActiveEntityVisualPosY - 0 (unused?)
+    ldh  a, [hActiveEntityVisualPosY]             ; $6BCF: $F0 $EC
     sub  $00                                      ; $6BD1: $D6 $00
-    ldh  [$FFEC], a                               ; $6BD3: $E0 $EC
+    ldh  [hActiveEntityVisualPosY], a             ; $6BD3: $E0 $EC
 .downwardsEnd
 
     ld   de, ButterflyOAMAttributes                     ; $6BD5: $11 $BD $6B

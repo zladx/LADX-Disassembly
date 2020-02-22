@@ -34,7 +34,7 @@ SpikeTrapState0Handler::
     add  hl, bc
     ld   [hl], a
 
-    ldh  a, [$FFEC]                               ; $7535: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $7535: $F0 $EC
     ld   hl, wEntitiesPrivateState2Table          ; $7537: $21 $C0 $C2
     add  hl, bc                                   ; $753A: $09
     ld   [hl], a                                  ; $753B: $77

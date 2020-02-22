@@ -302,17 +302,20 @@ hDungeonFloorTile::       ; FFE9
 hIndexOfObjectBelowLink:: ; FFE9
   ds 1
 
-; Entity status
+; Active entity status
 ; See wEntitiesStatusTable
 hActiveEntityStatus:: ; FFEA
   ds 1
 
+; Active entity type
+; See wEntitiesTypeTable
 hActiveEntityType:: ; FFEB
   ds 1
 
-; Active entity pos Z ?
-; Active entity Y of the second sprite of a pair?
-ds 1 ; FFEC
+; Visual Y-position (including the Z position) of the active entity.
+; Usually equal to posY + posZ.
+hActiveEntityVisualPosY::
+  ds 1 ; FFEC
 
 ; Invert OAM attribute bits of the active entity.
 ;
@@ -326,9 +329,12 @@ ds 1 ; FFEC
 hActiveEntityFlipAttribute:: ; FFED
   ds 1
 
+; Logical X-position of the active entity.
 hActiveEntityPosX:: ; FFEE
   ds 1
 
+; Logical Y-position of the active entity.
+; (Also see hActiveEntityVisualPosY)
 hActiveEntityPosY:: ; FFEF
   ds 1
 

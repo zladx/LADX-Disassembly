@@ -119,7 +119,7 @@ jr_006_4B53:
 
     ldh  a, [hActiveEntityPosX]                   ; $4B69: $F0 $EE
     ldh  [hScratch0], a                           ; $4B6B: $E0 $D7
-    ldh  a, [$FFEC]                               ; $4B6D: $F0 $EC
+    ldh  a, [hActiveEntityVisualPosY]             ; $4B6D: $F0 $EC
     add  $0C                                      ; $4B6F: $C6 $0C
     ldh  [hScratch1], a                           ; $4B71: $E0 $D8
     jp   label_D15                                ; $4B73: $C3 $15 $0D

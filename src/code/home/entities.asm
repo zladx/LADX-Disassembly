@@ -5,7 +5,7 @@
 label_3925::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    ld   hl, $5218
+    ld   hl, Data_014_5218
     add  hl, de
     ld   a, [hl]
     ld   hl, MBC3SelectBank

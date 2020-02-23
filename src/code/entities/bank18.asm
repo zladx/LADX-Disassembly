@@ -5706,7 +5706,7 @@ VireEntityHandler::
     jp   z, label_018_6F1F                        ; $6A03: $CA $1F $6F
 
     and  a                                        ; $6A06: $A7
-    jp   nz, $6F70                                ; $6A07: $C2 $70 $6F
+    jp   nz, label_018_6F70                       ; $6A07: $C2 $70 $6F
 
     ldh  a, [hActiveEntityStatus]                 ; $6A0A: $F0 $EA
     cp   $01                                      ; $6A0C: $FE $01

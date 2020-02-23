@@ -1,5 +1,5 @@
 ; Code for bank 0 ("Home").
-; Unlike other banks, this code is always adressable at `0000:xxxx`, without
+; Unlike other banks, this code is always adressable at `00:xxxx`, without
 ; the need to switch banks.
 
 include "code/home/init.asm"

@@ -818,6 +818,7 @@ GoriyaState0Handler::
     sub  [hl]                                     ; $462F: $96
     add  $26                                      ; $4630: $C6 $26
     cp   $4C                                      ; $4632: $FE $4C
+Data_019_4634::
     call func_019_7CFB                            ; $4634: $CD $FB $7C
     ret  nc                                       ; $4637: $D0
 
@@ -858,7 +859,7 @@ jr_019_4643:
     sla  a                                        ; $466D: $CB $27
     ld   e, a                                     ; $466F: $5F
     ld   d, $00                                   ; $4670: $16 $00
-    ld   hl, $4633                                ; $4672: $21 $33 $46
+    ld   hl, Data_019_4634 - 1                    ; $4672: $21 $33 $46
     add  hl, de                                   ; $4675: $19
     ld   e, l                                     ; $4676: $5D
     ld   d, h                                     ; $4677: $54
@@ -1505,7 +1506,7 @@ EggSongEventEntityHandler::
     add  hl, bc                                   ; $4ACE: $09
     ld   a, [hl]                                  ; $4ACF: $7E
     and  a                                        ; $4AD0: $A7
-    jp   nz, $4BCC                                ; $4AD1: $C2 $CC $4B
+    jp   nz, label_019_4BCC                       ; $4AD1: $C2 $CC $4B
 
     ld   a, c                                     ; $4AD4: $79
     ld   [$D461], a                               ; $4AD5: $EA $61 $D4
@@ -1653,23 +1654,14 @@ func_019_4B6E::
 jr_019_4BAB:
     ret                                           ; $4BAB: $C9
 
-    ld   d, b                                     ; $4BAC: $50
-    ld   b, $52                                   ; $4BAD: $06 $52
-    ld   b, $54                                   ; $4BAF: $06 $54
-    ld   b, $56                                   ; $4BB1: $06 $56
-    ld   b, $58                                   ; $4BB3: $06 $58
-    ld   b, $5A                                   ; $4BB5: $06 $5A
-    ld   b, $5C                                   ; $4BB7: $06 $5C
-    ld   b, $5E                                   ; $4BB9: $06 $5E
-    ld   b, $60                                   ; $4BBB: $06 $60
-    ld   b, $62                                   ; $4BBD: $06 $62
-    ld   b, $64                                   ; $4BBF: $06 $64
-    ld   b, $66                                   ; $4BC1: $06 $66
-    ld   b, $68                                   ; $4BC3: $06 $68
-    ld   b, $6A                                   ; $4BC5: $06 $6A
-    ld   b, $6C                                   ; $4BC7: $06 $6C
-    ld   b, $6E                                   ; $4BC9: $06 $6E
-    ld   b, $21                                   ; $4BCB: $06 $21
+Data_019_4BAC::
+    db   $50, $06, $52, $06, $54, $06, $56, $06   ; $4BAC
+    db   $58, $06, $5A, $06, $5C, $06, $5E, $06   ; $4BB4
+    db   $60, $06, $62, $06, $64, $06, $66, $06   ; $4BBC
+    db   $68, $06, $6A, $06, $6C, $06, $6E, $06   ; $4BC4
+
+label_019_4BCC::
+    db   $21
     or   b                                        ; $4BCD: $B0
     jp   nz, label_019_7E09                       ; $4BCE: $C2 $09 $7E
 
@@ -1685,7 +1677,7 @@ jr_019_4BAB:
     cp   $03                                      ; $4BE1: $FE $03
     jr   z, jr_019_4BF7                           ; $4BE3: $28 $12
 
-    ld   hl, hActiveEntitySpriteVariant                ; $4BE5: $21 $F1 $FF
+    ld   hl, hActiveEntitySpriteVariant           ; $4BE5: $21 $F1 $FF
     ldh  a, [hFrameCounter]                       ; $4BE8: $F0 $E7
     rra                                           ; $4BEA: $1F
     rra                                           ; $4BEB: $1F
@@ -1694,13 +1686,13 @@ jr_019_4BAB:
     and  $03                                      ; $4BEE: $E6 $03
     ret  z                                        ; $4BF0: $C8
 
-    ld   de, $4BAC                                ; $4BF1: $11 $AC $4B
+    ld   de, Data_019_4BAC                        ; $4BF1: $11 $AC $4B
     jp   RenderActiveEntitySpritesPair            ; $4BF4: $C3 $C0 $3B
 
 jr_019_4BF7:
-    ldh  a, [hActiveEntitySpriteVariant]               ; $4BF7: $F0 $F1
+    ldh  a, [hActiveEntitySpriteVariant]          ; $4BF7: $F0 $F1
     cp   $07                                      ; $4BF9: $FE $07
-    jp   nz, func_019_7E61                       ; $4BFB: $C2 $61 $7E
+    jp   nz, func_019_7E61                        ; $4BFB: $C2 $61 $7E
 
     ld   e, $08                                   ; $4BFE: $1E $08
     ld   hl, wHasInstrument1                      ; $4C00: $21 $65 $DB
@@ -2261,7 +2253,7 @@ jr_019_5027:
 
     ld   a, [wHasInstrument7]                     ; $502D: $FA $6B $DB
     and  a                                        ; $5030: $A7
-    jp   nz, $50C4                                ; $5031: $C2 $C4 $50
+    jp   nz, label_019_50C4                       ; $5031: $C2 $C4 $50
 
 jr_019_5034:
     call func_019_7D3D                            ; $5034: $CD $3D $7D
@@ -2358,14 +2350,14 @@ Data_019_50B4::
     db   $0C, $09, $0A, $F7, $F4, $F7, $F6, $09
 
 Data_019_50BC::
-    db   $03, $01, $00, $00, $00
+    db   $03, $01, $00, $00, $00, $00, $01, $03
 
-    nop                                           ; $50C1: $00
-    ld   bc, $F003                                ; $50C2: $01 $03 $F0
-    ldh  a, [hAnimatedTilesDataOffset]            ; $50C5: $F0 $A7
+label_019_50C4::
+    ldh  a, [hActiveEntityState]
+    and  a                                        ; $50C6: $A7
     jr   nz, jr_019_50D2                          ; $50C7: $20 $09
 
-    ld   hl, wEntitiesPosYTable                         ; $50C9: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $50C9: $21 $10 $C2
     add  hl, bc                                   ; $50CC: $09
     ld   [hl], $50                                ; $50CD: $36 $50
     call IncrementEntityState                     ; $50CF: $CD $12 $3B
@@ -2391,7 +2383,7 @@ jr_019_50DF:
     and  $07                                      ; $50E9: $E6 $07
     ld   e, a                                     ; $50EB: $5F
     ld   d, b                                     ; $50EC: $50
-    ld   hl, $50A4                                ; $50ED: $21 $A4 $50
+    ld   hl, Data_019_50A4                        ; $50ED: $21 $A4 $50
     add  hl, de                                   ; $50F0: $19
     ld   a, [hl]                                  ; $50F1: $7E
     sub  $03                                      ; $50F2: $D6 $03
@@ -2420,11 +2412,11 @@ jr_019_5107:
     rra                                           ; $5118: $1F
     and  $01                                      ; $5119: $E6 $01
     add  [hl]                                     ; $511B: $86
-    ldh  [hActiveEntitySpriteVariant], a               ; $511C: $E0 $F1
+    ldh  [hActiveEntitySpriteVariant], a          ; $511C: $E0 $F1
     ld   hl, wEntitiesPhysicsFlagsTable           ; $511E: $21 $40 $C3
     add  hl, bc                                   ; $5121: $09
     res  4, [hl]                                  ; $5122: $CB $A6
-    ld   de, $4FFB                                ; $5124: $11 $FB $4F
+    ld   de, Data_019_4FFB                        ; $5124: $11 $FB $4F
     call RenderActiveEntitySpritesPair            ; $5127: $CD $C0 $3B
     call CopyEntityPositionToActivePosition       ; $512A: $CD $8A $3D
     call func_019_7D3D                            ; $512D: $CD $3D $7D
@@ -2440,16 +2432,16 @@ jr_019_5107:
     and  $07                                      ; $5140: $E6 $07
     ld   e, a                                     ; $5142: $5F
     ld   d, b                                     ; $5143: $50
-    ld   hl, $50B4                                ; $5144: $21 $B4 $50
+    ld   hl, Data_019_50B4                        ; $5144: $21 $B4 $50
     add  hl, de                                   ; $5147: $19
     ld   a, [hl]                                  ; $5148: $7E
-    ld   hl, wEntitiesSpeedXTable                       ; $5149: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $5149: $21 $40 $C2
     add  hl, bc                                   ; $514C: $09
     ld   [hl], a                                  ; $514D: $77
-    ld   hl, $50AC                                ; $514E: $21 $AC $50
+    ld   hl, Data_019_50AC                        ; $514E: $21 $AC $50
     add  hl, de                                   ; $5151: $19
     ld   a, [hl]                                  ; $5152: $7E
-    ld   hl, wEntitiesSpeedYTable                       ; $5153: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                 ; $5153: $21 $50 $C2
     add  hl, bc                                   ; $5156: $09
     ld   [hl], a                                  ; $5157: $77
 
@@ -2463,7 +2455,7 @@ jr_019_5158:
     and  $07                                      ; $515F: $E6 $07
     ld   e, a                                     ; $5161: $5F
     ld   d, b                                     ; $5162: $50
-    ld   hl, $50BC                                ; $5163: $21 $BC $50
+    ld   hl, Data_019_50BC                        ; $5163: $21 $BC $50
     add  hl, de                                   ; $5166: $19
     ldh  a, [hFrameCounter]                       ; $5167: $F0 $E7
     and  [hl]                                     ; $5169: $A6
@@ -4686,248 +4678,96 @@ func_019_60A5::
     call func_019_7E61                            ; $60AD: $CD $61 $7E
     jp   ApplyMapFadeOutTransition                ; $60B0: $C3 $7D $0C
 
-    nop                                           ; $60B3: $00
-    sbc  b                                        ; $60B4: $98
-    ld   b, $89                                   ; $60B5: $06 $89
-    nop                                           ; $60B7: $00
-    inc  b                                        ; $60B8: $04
-    nop                                           ; $60B9: $00
-    inc  b                                        ; $60BA: $04
-    nop                                           ; $60BB: $00
-    inc  b                                        ; $60BC: $04
-    nop                                           ; $60BD: $00
-    inc  b                                        ; $60BE: $04
-    nop                                           ; $60BF: $00
-    db   $10                                      ; $60C0: $10
-    sbc  b                                        ; $60C1: $98
-    rlca                                          ; $60C2: $07
-    adc  c                                        ; $60C3: $89
-    ld   bc, $111                                 ; $60C4: $01 $11 $01
-    ld   de, $1101                                ; $60C7: $11 $01 $11
-    ld   bc, $111                                 ; $60CA: $01 $11 $01
-    ld   de, $898                                 ; $60CD: $11 $98 $08
-    adc  c                                        ; $60D0: $89
-    rlca                                          ; $60D1: $07
-    ld   b, $07                                   ; $60D2: $06 $07
-    ld   b, $07                                   ; $60D4: $06 $07
-    ld   b, $07                                   ; $60D6: $06 $07
-    ld   b, $07                                   ; $60D8: $06 $07
-    ld   b, $98                                   ; $60DA: $06 $98
-    ld   [$0789], sp                              ; $60DC: $08 $89 $07
-    ld   b, $07                                   ; $60DF: $06 $07
-    ld   b, $07                                   ; $60E1: $06 $07
-    ld   b, $07                                   ; $60E3: $06 $07
-    ld   b, $07                                   ; $60E5: $06 $07
-    ld   b, $98                                   ; $60E7: $06 $98
-    add  hl, bc                                   ; $60E9: $09
-    adc  c                                        ; $60EA: $89
-    ld   b, $07                                   ; $60EB: $06 $07
-    ld   b, $07                                   ; $60ED: $06 $07
-    ld   b, $07                                   ; $60EF: $06 $07
-    ld   b, $07                                   ; $60F1: $06 $07
-    ld   b, $07                                   ; $60F3: $06 $07
-    sbc  b                                        ; $60F5: $98
-    ld   a, [bc]                                  ; $60F6: $0A
-    adc  c                                        ; $60F7: $89
-    rlca                                          ; $60F8: $07
-    ld   b, $07                                   ; $60F9: $06 $07
-    ld   b, $07                                   ; $60FB: $06 $07
-    ld   b, $07                                   ; $60FD: $06 $07
-    ld   b, $07                                   ; $60FF: $06 $07
-    ld   b, $98                                   ; $6101: $06 $98
-    dec  bc                                       ; $6103: $0B
-    adc  c                                        ; $6104: $89
-    ld   b, $07                                   ; $6105: $06 $07
-    ld   b, $07                                   ; $6107: $06 $07
-    ld   b, $07                                   ; $6109: $06 $07
-    ld   b, $07                                   ; $610B: $06 $07
-    ld   b, $07                                   ; $610D: $06 $07
-    sbc  b                                        ; $610F: $98
-    dec  bc                                       ; $6110: $0B
-    adc  c                                        ; $6111: $89
-    ld   b, $07                                   ; $6112: $06 $07
-    ld   b, $07                                   ; $6114: $06 $07
-    ld   b, $07                                   ; $6116: $06 $07
-    ld   b, $07                                   ; $6118: $06 $07
-    ld   b, $07                                   ; $611A: $06 $07
-    sbc  b                                        ; $611C: $98
-    inc  c                                        ; $611D: $0C
-    adc  c                                        ; $611E: $89
-    rlca                                          ; $611F: $07
-    ld   b, $07                                   ; $6120: $06 $07
-    ld   b, $07                                   ; $6122: $06 $07
-    ld   b, $07                                   ; $6124: $06 $07
-    ld   b, $07                                   ; $6126: $06 $07
-    ld   b, $98                                   ; $6128: $06 $98
-    dec  c                                        ; $612A: $0D
-    adc  c                                        ; $612B: $89
-    ld   b, $07                                   ; $612C: $06 $07
-    ld   b, $07                                   ; $612E: $06 $07
-    ld   b, $07                                   ; $6130: $06 $07
-    ld   b, $07                                   ; $6132: $06 $07
-    ld   b, $07                                   ; $6134: $06 $07
-    sbc  b                                        ; $6136: $98
-    ld   c, $89                                   ; $6137: $0E $89
-    ld   [bc], a                                  ; $6139: $02
-    ld   [de], a                                  ; $613A: $12
-    ld   [bc], a                                  ; $613B: $02
-    ld   [de], a                                  ; $613C: $12
-    ld   [bc], a                                  ; $613D: $02
-    ld   [de], a                                  ; $613E: $12
-    ld   [bc], a                                  ; $613F: $02
-    ld   [de], a                                  ; $6140: $12
-    ld   [bc], a                                  ; $6141: $02
-    ld   [de], a                                  ; $6142: $12
-    sbc  b                                        ; $6143: $98
-    rrca                                          ; $6144: $0F
-    adc  c                                        ; $6145: $89
-    inc  bc                                       ; $6146: $03
-    dec  b                                        ; $6147: $05
-    inc  bc                                       ; $6148: $03
-    dec  b                                        ; $6149: $05
-    inc  bc                                       ; $614A: $03
-    dec  b                                        ; $614B: $05
-    inc  bc                                       ; $614C: $03
-    dec  b                                        ; $614D: $05
-    inc  bc                                       ; $614E: $03
-    inc  de                                       ; $614F: $13
-    sbc  b                                        ; $6150: $98
-    ld   b, $89                                   ; $6151: $06 $89
-    inc  b                                        ; $6153: $04
-    nop                                           ; $6154: $00
-    inc  b                                        ; $6155: $04
-    nop                                           ; $6156: $00
-    inc  b                                        ; $6157: $04
-    nop                                           ; $6158: $00
-    inc  b                                        ; $6159: $04
-    nop                                           ; $615A: $00
-    inc  b                                        ; $615B: $04
-    inc  d                                        ; $615C: $14
-    sbc  b                                        ; $615D: $98
-    rlca                                          ; $615E: $07
-    adc  c                                        ; $615F: $89
-    ld   de, $1101                                ; $6160: $11 $01 $11
-    ld   bc, $111                                 ; $6163: $01 $11 $01
-    ld   de, $1101                                ; $6166: $11 $01 $11
-    ld   bc, $898                                 ; $6169: $01 $98 $08
-    adc  c                                        ; $616C: $89
-    ld   b, $07                                   ; $616D: $06 $07
-    ld   b, $07                                   ; $616F: $06 $07
-    ld   b, $07                                   ; $6171: $06 $07
-    ld   b, $07                                   ; $6173: $06 $07
-    ld   b, $07                                   ; $6175: $06 $07
-    sbc  b                                        ; $6177: $98
-    ld   [$0689], sp                              ; $6178: $08 $89 $06
-    rlca                                          ; $617B: $07
-    ld   b, $07                                   ; $617C: $06 $07
-    ld   b, $07                                   ; $617E: $06 $07
-    ld   b, $07                                   ; $6180: $06 $07
-    ld   b, $07                                   ; $6182: $06 $07
-    sbc  b                                        ; $6184: $98
-    add  hl, bc                                   ; $6185: $09
-    adc  c                                        ; $6186: $89
-    rlca                                          ; $6187: $07
-    ld   b, $07                                   ; $6188: $06 $07
-    ld   b, $07                                   ; $618A: $06 $07
-    ld   b, $07                                   ; $618C: $06 $07
-    ld   b, $07                                   ; $618E: $06 $07
-    ld   b, $98                                   ; $6190: $06 $98
-    ld   a, [bc]                                  ; $6192: $0A
-    adc  c                                        ; $6193: $89
-    ld   b, $07                                   ; $6194: $06 $07
-    ld   b, $07                                   ; $6196: $06 $07
-    ld   b, $07                                   ; $6198: $06 $07
-    ld   b, $07                                   ; $619A: $06 $07
-    ld   b, $07                                   ; $619C: $06 $07
-    sbc  b                                        ; $619E: $98
-    dec  bc                                       ; $619F: $0B
-    adc  c                                        ; $61A0: $89
-    rlca                                          ; $61A1: $07
-    ld   b, $07                                   ; $61A2: $06 $07
-    ld   b, $07                                   ; $61A4: $06 $07
-    ld   b, $07                                   ; $61A6: $06 $07
-    ld   b, $07                                   ; $61A8: $06 $07
-    ld   b, $98                                   ; $61AA: $06 $98
-    dec  bc                                       ; $61AC: $0B
-    adc  c                                        ; $61AD: $89
-    rlca                                          ; $61AE: $07
-    ld   b, $07                                   ; $61AF: $06 $07
-    ld   b, $07                                   ; $61B1: $06 $07
-    ld   b, $07                                   ; $61B3: $06 $07
-    ld   b, $07                                   ; $61B5: $06 $07
-    ld   b, $98                                   ; $61B7: $06 $98
-    inc  c                                        ; $61B9: $0C
-    adc  c                                        ; $61BA: $89
-    ld   b, $07                                   ; $61BB: $06 $07
-    ld   b, $07                                   ; $61BD: $06 $07
-    ld   b, $07                                   ; $61BF: $06 $07
-    ld   b, $07                                   ; $61C1: $06 $07
-    ld   b, $07                                   ; $61C3: $06 $07
-    sbc  b                                        ; $61C5: $98
-    dec  c                                        ; $61C6: $0D
-    adc  c                                        ; $61C7: $89
-    rlca                                          ; $61C8: $07
-    ld   b, $07                                   ; $61C9: $06 $07
-    ld   b, $07                                   ; $61CB: $06 $07
-    ld   b, $07                                   ; $61CD: $06 $07
-    ld   b, $07                                   ; $61CF: $06 $07
-    ld   b, $98                                   ; $61D1: $06 $98
-    ld   c, $89                                   ; $61D3: $0E $89
-    ld   [de], a                                  ; $61D5: $12
-    ld   [bc], a                                  ; $61D6: $02
-    ld   [de], a                                  ; $61D7: $12
-    ld   [bc], a                                  ; $61D8: $02
-    ld   [de], a                                  ; $61D9: $12
-    ld   [bc], a                                  ; $61DA: $02
-    ld   [de], a                                  ; $61DB: $12
-    ld   [bc], a                                  ; $61DC: $02
-    ld   [de], a                                  ; $61DD: $12
-    ld   [bc], a                                  ; $61DE: $02
-    sbc  b                                        ; $61DF: $98
-    rrca                                          ; $61E0: $0F
-    adc  c                                        ; $61E1: $89
-    dec  b                                        ; $61E2: $05
-    inc  bc                                       ; $61E3: $03
-    dec  b                                        ; $61E4: $05
-    inc  bc                                       ; $61E5: $03
-    dec  b                                        ; $61E6: $05
-    inc  bc                                       ; $61E7: $03
-    dec  b                                        ; $61E8: $05
-    inc  bc                                       ; $61E9: $03
-    dec  b                                        ; $61EA: $05
-    dec  d                                        ; $61EB: $15
+    nop
+
+Data_019_60B4::
+    db   $98, $06, $89, $00, $04, $00, $04, $00   ; $60B4
+    db   $04, $00, $04, $00, $10, $98, $07, $89   ; $60BC
+    db   $01, $11, $01, $11, $01, $11, $01, $11   ; $60C4
+    db   $01, $11, $98, $08, $89, $07, $06, $07   ; $60CC
+    db   $06, $07, $06, $07, $06, $07, $06, $98   ; $60D4
+    db   $08, $89, $07, $06, $07, $06, $07, $06   ; $60DC
+    db   $07, $06, $07, $06                       ; $60E4
+
+Data_019_60E8::
+    db   $98, $09, $89, $06, $07, $06, $07, $06   ; $60E8
+    db   $07, $06, $07, $06, $07, $98, $0A, $89   ; $60F0
+    db   $07, $06, $07, $06, $07, $06, $07, $06   ; $60F8
+    db   $07, $06, $98, $0B, $89, $06, $07, $06   ; $6100
+    db   $07, $06, $07, $06, $07, $06, $07, $98   ; $6108
+    db   $0B, $89, $06, $07, $06, $07, $06, $07   ; $6110
+    db   $06, $07, $06, $07                       ; $6118
+
+Data_019_611C::
+    db   $98, $0C, $89, $07, $06, $07, $06, $07   ; $611C
+    db   $06, $07, $06, $07, $06, $98, $0D, $89   ; $6124
+    db   $06, $07, $06, $07, $06, $07, $06, $07   ; $612C
+    db   $06, $07, $98, $0E, $89, $02, $12, $02   ; $6134
+    db   $12, $02, $12, $02, $12, $02, $12, $98   ; $613C
+    db   $0F, $89, $03, $05, $03, $05, $03, $05   ; $6144
+    db   $03, $05, $03, $13                       ; $614C
+
+Data_019_6150::
+    db   $98, $06, $89, $04, $00, $04, $00, $04   ; $6150
+    db   $00, $04, $00, $04, $14, $98, $07, $89   ; $6158
+    db   $11, $01, $11, $01, $11, $01, $11, $01   ; $6160
+    db   $11, $01, $98, $08, $89, $06, $07, $06   ; $6168
+    db   $07, $06, $07, $06, $07, $06, $07, $98   ; $6170
+    db   $08, $89, $06, $07, $06, $07, $06, $07   ; $6178
+    db   $06, $07, $06, $07                       ; $6180
+
+Data_019_6184::
+    db   $98, $09, $89, $07, $06, $07, $06, $07   ; $6184
+    db   $06, $07, $06, $07, $06, $98, $0A, $89   ; $618C
+    db   $06, $07, $06, $07, $06, $07, $06, $07   ; $6194
+    db   $06, $07, $98, $0B, $89, $07, $06, $07   ; $619C
+    db   $06, $07, $06, $07, $06, $07, $06, $98   ; $61A4
+    db   $0B, $89, $07, $06, $07, $06, $07, $06   ; $61AC
+    db   $07, $06, $07, $06                       ; $61B4
+
+Data_019_61B8::
+    db   $98, $0C, $89, $06, $07, $06, $07, $06   ; $61B8
+    db   $07, $06, $07, $06, $07, $98, $0D, $89   ; $61C0
+    db   $07, $06, $07, $06, $07, $06, $07, $06   ; $61C8
+    db   $07, $06, $98, $0E, $89, $12, $02, $12   ; $61D0
+    db   $02, $12, $02, $12, $02, $12, $02, $98   ; $61D8
+    db   $0F, $89, $05, $03, $05, $03, $05, $03   ; $61E0
+    db   $05, $03, $05, $15                       ; $61E8
 
 Data_019_61EC::
-    db   $50, $61, $B4, $60
+    dw   Data_019_6150
+    dw   Data_019_60B4
 
 Data_019_61F0::
-    db   $84, $61, $E8, $60
+    dw   Data_019_6184
+    dw   Data_019_60E8
 
 Data_019_61F4::
-    db   $B8, $61, $1C, $61
+    dw   Data_019_61B8
+    dw   Data_019_611C
 
-label_019_61F8:
+AnimateEaglesTowerOpening:
     ld   a, $02                                   ; $61F8: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $61FA: $E0 $A1
     ld   [wC167], a                               ; $61FC: $EA $67 $C1
     call func_019_650F                            ; $61FF: $CD $0F $65
     ldh  a, [hActiveEntityState]                  ; $6202: $F0 $F0
     JP_TABLE                                      ; $6204
-._00 dw func_019_6213                             ; $6205
-._01 dw func_019_621E                             ; $6207
-._02 dw func_019_6252                             ; $6209
-._03 dw func_019_625A                             ; $620B
-._04 dw func_019_625F                             ; $620D
-._05 dw func_019_6293                             ; $620F
-._06 dw func_019_62BA                             ; $6211
+._00 dw EaglesTowerOpeningState0Handler
+._01 dw EaglesTowerOpeningState1Handler
+._02 dw EaglesTowerOpeningState2Handler
+._03 dw EaglesTowerOpeningState3Handler
+._04 dw EaglesTowerOpeningState4Handler
+._05 dw EaglesTowerOpeningState5Handler
+._06 dw EaglesTowerOpeningState6Handler
 
-func_019_6213::
+EaglesTowerOpeningState0Handler::
     call label_27F2                               ; $6213: $CD $F2 $27
     call GetEntityTransitionCountdown             ; $6216: $CD $05 $0C
     ld   [hl], $FF                                ; $6219: $36 $FF
     call IncrementEntityState                     ; $621B: $CD $12 $3B
 
-func_019_621E::
+EaglesTowerOpeningState1Handler::
     call GetEntityTransitionCountdown             ; $621E: $CD $05 $0C
     jr   nz, jr_019_6230                          ; $6221: $20 $0D
 
@@ -4968,18 +4808,18 @@ jr_019_624D:
     ld   [wScreenShakeHorizontal], a              ; $624E: $EA $55 $C1
     ret                                           ; $6251: $C9
 
-func_019_6252::
+EaglesTowerOpeningState2Handler::
     call GetEntityTransitionCountdown             ; $6252: $CD $05 $0C
     and  a                                        ; $6255: $A7
     ret  nz                                       ; $6256: $C0
 
     jp   IncrementEntityState                     ; $6257: $C3 $12 $3B
 
-func_019_625A::
+EaglesTowerOpeningState3Handler::
     ld   hl, Data_019_61EC                        ; $625A: $21 $EC $61
     jr   func_019_6262                            ; $625D: $18 $03
 
-func_019_625F::
+EaglesTowerOpeningState4Handler::
     ld   hl, Data_019_61F0                        ; $625F: $21 $F0 $61
 
 func_019_6262::
@@ -5025,7 +4865,7 @@ jr_019_6288:
     pop  bc                                       ; $628F: $C1
     jp   IncrementEntityState                     ; $6290: $C3 $12 $3B
 
-func_019_6293::
+EaglesTowerOpeningState5Handler::
     ld   hl, Data_019_61F4                        ; $6293: $21 $F4 $61
     call func_019_6262                            ; $6296: $CD $62 $62
     call GetEntityTransitionCountdown             ; $6299: $CD $05 $0C
@@ -5050,7 +4890,7 @@ jr_019_62B4:
     ld   [hl], $02                                ; $62B7: $36 $02
     ret                                           ; $62B9: $C9
 
-func_019_62BA::
+EaglesTowerOpeningState6Handler::
     call func_019_7F0E                            ; $62BA: $CD $0E $7F
     set  4, [hl]                                  ; $62BD: $CB $E6
     xor  a                                        ; $62BF: $AF
@@ -5269,518 +5109,158 @@ jr_019_6515:
     ld   a, $04                                   ; $656C: $3E $04
     jp   label_3DA0                               ; $656E: $C3 $A0 $3D
 
-    sbc  b                                        ; $6571: $98
-    ld   [bc], a                                  ; $6572: $02
-    add  hl, bc                                   ; $6573: $09
-    ld   d, l                                     ; $6574: $55
-    ld   d, [hl]                                  ; $6575: $56
-    ld   d, l                                     ; $6576: $55
-    ld   d, [hl]                                  ; $6577: $56
-    ld   d, l                                     ; $6578: $55
-    ld   d, [hl]                                  ; $6579: $56
-    ld   d, l                                     ; $657A: $55
-    ld   d, [hl]                                  ; $657B: $56
-    ld   d, l                                     ; $657C: $55
-    ld   d, [hl]                                  ; $657D: $56
-    sbc  b                                        ; $657E: $98
-    ld   [hl+], a                                 ; $657F: $22
-    add  hl, bc                                   ; $6580: $09
-    ld   d, l                                     ; $6581: $55
-    ld   d, [hl]                                  ; $6582: $56
-    ld   d, l                                     ; $6583: $55
-    ld   d, [hl]                                  ; $6584: $56
-    ld   d, l                                     ; $6585: $55
-    ld   d, [hl]                                  ; $6586: $56
-    ld   d, l                                     ; $6587: $55
-    ld   d, [hl]                                  ; $6588: $56
-    ld   d, l                                     ; $6589: $55
-    ld   d, [hl]                                  ; $658A: $56
-    sbc  b                                        ; $658B: $98
-    ld   b, d                                     ; $658C: $42
-    add  hl, bc                                   ; $658D: $09
-    inc  c                                        ; $658E: $0C
-    dec  c                                        ; $658F: $0D
-    inc  c                                        ; $6590: $0C
-    dec  c                                        ; $6591: $0D
-    inc  c                                        ; $6592: $0C
-    dec  c                                        ; $6593: $0D
-    inc  c                                        ; $6594: $0C
-    dec  c                                        ; $6595: $0D
-    inc  c                                        ; $6596: $0C
-    dec  c                                        ; $6597: $0D
-    sbc  b                                        ; $6598: $98
-    ld   h, d                                     ; $6599: $62
-    add  hl, bc                                   ; $659A: $09
-    ld   c, $0F                                   ; $659B: $0E $0F
-    ld   c, $0F                                   ; $659D: $0E $0F
-    ld   c, $0F                                   ; $659F: $0E $0F
-    ld   c, $0F                                   ; $65A1: $0E $0F
-    ld   c, $0F                                   ; $65A3: $0E $0F
-    sbc  b                                        ; $65A5: $98
-    ld   [bc], a                                  ; $65A6: $02
-    add  hl, bc                                   ; $65A7: $09
-    ld   d, l                                     ; $65A8: $55
-    ld   d, [hl]                                  ; $65A9: $56
-    ld   d, l                                     ; $65AA: $55
-    ld   d, [hl]                                  ; $65AB: $56
-    ld   d, l                                     ; $65AC: $55
-    ld   d, [hl]                                  ; $65AD: $56
-    ld   d, l                                     ; $65AE: $55
-    ld   d, [hl]                                  ; $65AF: $56
-    ld   d, l                                     ; $65B0: $55
-    ld   d, [hl]                                  ; $65B1: $56
-    sbc  b                                        ; $65B2: $98
-    ld   [hl+], a                                 ; $65B3: $22
-    add  hl, bc                                   ; $65B4: $09
-    ld   d, l                                     ; $65B5: $55
-    ld   d, [hl]                                  ; $65B6: $56
-    ld   d, l                                     ; $65B7: $55
-    ld   d, [hl]                                  ; $65B8: $56
-    ld   d, l                                     ; $65B9: $55
-    ld   d, [hl]                                  ; $65BA: $56
-    ld   d, l                                     ; $65BB: $55
-    ld   d, [hl]                                  ; $65BC: $56
-    ld   d, l                                     ; $65BD: $55
-    ld   d, [hl]                                  ; $65BE: $56
-    sbc  b                                        ; $65BF: $98
-    ld   b, d                                     ; $65C0: $42
-    add  hl, bc                                   ; $65C1: $09
-    ld   c, $0F                                   ; $65C2: $0E $0F
-    ld   c, $0F                                   ; $65C4: $0E $0F
-    ld   c, $0F                                   ; $65C6: $0E $0F
-    ld   c, $0F                                   ; $65C8: $0E $0F
-    ld   c, $0F                                   ; $65CA: $0E $0F
-    sbc  b                                        ; $65CC: $98
-    ld   h, d                                     ; $65CD: $62
-    add  hl, bc                                   ; $65CE: $09
-    rrca                                          ; $65CF: $0F
-    ld   c, $0F                                   ; $65D0: $0E $0F
-    ld   c, $0F                                   ; $65D2: $0E $0F
-    ld   c, $0F                                   ; $65D4: $0E $0F
-    ld   c, $0F                                   ; $65D6: $0E $0F
-    ld   c, $98                                   ; $65D8: $0E $98
-    ld   [bc], a                                  ; $65DA: $02
-    add  hl, bc                                   ; $65DB: $09
-    ld   d, l                                     ; $65DC: $55
-    ld   d, [hl]                                  ; $65DD: $56
-    ld   d, l                                     ; $65DE: $55
-    ld   d, [hl]                                  ; $65DF: $56
-    ld   d, l                                     ; $65E0: $55
-    ld   d, [hl]                                  ; $65E1: $56
-    ld   d, l                                     ; $65E2: $55
-    ld   d, [hl]                                  ; $65E3: $56
-    ld   d, l                                     ; $65E4: $55
-    ld   d, [hl]                                  ; $65E5: $56
-    sbc  b                                        ; $65E6: $98
-    ld   [hl+], a                                 ; $65E7: $22
-    add  hl, bc                                   ; $65E8: $09
-    ld   c, $0F                                   ; $65E9: $0E $0F
-    ld   c, $0F                                   ; $65EB: $0E $0F
-    ld   c, $0F                                   ; $65ED: $0E $0F
-    ld   c, $0F                                   ; $65EF: $0E $0F
-    ld   c, $0F                                   ; $65F1: $0E $0F
-    sbc  b                                        ; $65F3: $98
-    ld   b, d                                     ; $65F4: $42
-    add  hl, bc                                   ; $65F5: $09
-    rrca                                          ; $65F6: $0F
-    ld   c, $0F                                   ; $65F7: $0E $0F
-    ld   c, $0F                                   ; $65F9: $0E $0F
-    ld   c, $0F                                   ; $65FB: $0E $0F
-    ld   c, $0F                                   ; $65FD: $0E $0F
-    ld   c, $98                                   ; $65FF: $0E $98
-    ld   h, d                                     ; $6601: $62
-    add  hl, bc                                   ; $6602: $09
-    ld   c, $0F                                   ; $6603: $0E $0F
-    ld   c, $0F                                   ; $6605: $0E $0F
-    ld   c, $0F                                   ; $6607: $0E $0F
-    ld   c, $0F                                   ; $6609: $0E $0F
-    ld   c, $0F                                   ; $660B: $0E $0F
-    sbc  b                                        ; $660D: $98
-    ld   [bc], a                                  ; $660E: $02
-    add  hl, bc                                   ; $660F: $09
-    ld   c, $0F                                   ; $6610: $0E $0F
-    ld   c, $0F                                   ; $6612: $0E $0F
-    ld   c, $0F                                   ; $6614: $0E $0F
-    ld   c, $0F                                   ; $6616: $0E $0F
-    ld   c, $0F                                   ; $6618: $0E $0F
-    sbc  b                                        ; $661A: $98
-    ld   [hl+], a                                 ; $661B: $22
-    add  hl, bc                                   ; $661C: $09
-    rrca                                          ; $661D: $0F
-    ld   c, $0F                                   ; $661E: $0E $0F
-    ld   c, $0F                                   ; $6620: $0E $0F
-    ld   c, $0F                                   ; $6622: $0E $0F
-    ld   c, $0F                                   ; $6624: $0E $0F
-    ld   c, $98                                   ; $6626: $0E $98
-    ld   b, d                                     ; $6628: $42
-    add  hl, bc                                   ; $6629: $09
-    ld   c, $0F                                   ; $662A: $0E $0F
-    ld   c, $0F                                   ; $662C: $0E $0F
-    ld   c, $0F                                   ; $662E: $0E $0F
-    ld   c, $0F                                   ; $6630: $0E $0F
-    ld   c, $0F                                   ; $6632: $0E $0F
-    sbc  b                                        ; $6634: $98
-    ld   h, d                                     ; $6635: $62
-    add  hl, bc                                   ; $6636: $09
-    rrca                                          ; $6637: $0F
-    ld   c, $0F                                   ; $6638: $0E $0F
-    ld   c, $0F                                   ; $663A: $0E $0F
-    ld   c, $0F                                   ; $663C: $0E $0F
-    ld   c, $0F                                   ; $663E: $0E $0F
-    ld   c, $98                                   ; $6640: $0E $98
-    add  d                                        ; $6642: $82
-    add  hl, bc                                   ; $6643: $09
-    rrca                                          ; $6644: $0F
-    ld   c, $0F                                   ; $6645: $0E $0F
-    rrca                                          ; $6647: $0F
-    rrca                                          ; $6648: $0F
-    ld   c, $0F                                   ; $6649: $0E $0F
-    ld   c, $0F                                   ; $664B: $0E $0F
-    ld   c, $98                                   ; $664D: $0E $98
-    and  d                                        ; $664F: $A2
-    add  hl, bc                                   ; $6650: $09
-    ld   c, $0F                                   ; $6651: $0E $0F
-    ld   c, $0F                                   ; $6653: $0E $0F
-    ld   c, $0F                                   ; $6655: $0E $0F
-    ld   c, $0F                                   ; $6657: $0E $0F
-    ld   c, $0F                                   ; $6659: $0E $0F
-    sbc  b                                        ; $665B: $98
-    jp   nz, $0F09                                ; $665C: $C2 $09 $0F
+Data_019_6571::
+    db   $98, $02, $09, $55, $56, $55, $56, $55   ; $6571
+    db   $56, $55, $56, $55, $56, $98, $22, $09   ; $6579
+    db   $55, $56, $55, $56, $55, $56, $55, $56   ; $6581
+    db   $55, $56, $98, $42, $09, $0C, $0D, $0C   ; $6589
+    db   $0D, $0C, $0D, $0C, $0D, $0C, $0D, $98   ; $6591
+    db   $62, $09, $0E, $0F, $0E, $0F, $0E, $0F   ; $6599
+    db   $0E, $0F, $0E, $0F                       ; $65A1
 
-    ld   c, $0F                                   ; $665F: $0E $0F
-    ld   c, $0F                                   ; $6661: $0E $0F
-    ld   c, $0F                                   ; $6663: $0E $0F
-    ld   c, $0F                                   ; $6665: $0E $0F
-    ld   c, $98                                   ; $6667: $0E $98
-    ld   [c], a                                   ; $6669: $E2
-    add  hl, bc                                   ; $666A: $09
-    ld   e, $1E                                   ; $666B: $1E $1E
-    ld   e, $1E                                   ; $666D: $1E $1E
-    ld   e, $1E                                   ; $666F: $1E $1E
-    ld   e, $1E                                   ; $6671: $1E $1E
-    ld   e, $1E                                   ; $6673: $1E $1E
-    sbc  b                                        ; $6675: $98
-    add  d                                        ; $6676: $82
-    add  hl, bc                                   ; $6677: $09
-    ld   c, $0F                                   ; $6678: $0E $0F
-    ld   c, $0F                                   ; $667A: $0E $0F
-    ld   c, $0F                                   ; $667C: $0E $0F
-    ld   c, $0F                                   ; $667E: $0E $0F
-    ld   c, $0F                                   ; $6680: $0E $0F
-    sbc  b                                        ; $6682: $98
-    and  d                                        ; $6683: $A2
-    add  hl, bc                                   ; $6684: $09
-    rrca                                          ; $6685: $0F
-    ld   c, $0F                                   ; $6686: $0E $0F
-    ld   c, $0F                                   ; $6688: $0E $0F
-    ld   c, $0F                                   ; $668A: $0E $0F
-    ld   c, $0F                                   ; $668C: $0E $0F
-    ld   c, $98                                   ; $668E: $0E $98
-    jp   nz, $1E09                                ; $6690: $C2 $09 $1E
+Data_019_65A5::
+    db   $98, $02, $09, $55, $56, $55, $56, $55   ; $65A5
+    db   $56, $55, $56, $55, $56, $98, $22, $09   ; $65AD
+    db   $55, $56, $55, $56, $55, $56, $55, $56   ; $65B5
+    db   $55, $56, $98, $42, $09, $0E, $0F, $0E   ; $65BD
+    db   $0F, $0E, $0F, $0E, $0F, $0E, $0F, $98   ; $65C5
+    db   $62, $09, $0F, $0E, $0F, $0E, $0F, $0E   ; $65CD
+    db   $0F, $0E, $0F, $0E                       ; $65D5
 
-    ld   e, $1E                                   ; $6693: $1E $1E
-    ld   e, $1E                                   ; $6695: $1E $1E
-    ld   e, $1E                                   ; $6697: $1E $1E
-    ld   e, $1E                                   ; $6699: $1E $1E
-    ld   e, $98                                   ; $669B: $1E $98
-    ld   [c], a                                   ; $669D: $E2
-    add  hl, bc                                   ; $669E: $09
-    add  hl, bc                                   ; $669F: $09
-    ld   [$0918], sp                              ; $66A0: $08 $18 $09
-    ld   a, [hl]                                  ; $66A3: $7E
-    ld   a, [hl]                                  ; $66A4: $7E
-    add  hl, bc                                   ; $66A5: $09
-    ld   [$0918], sp                              ; $66A6: $08 $18 $09
-    sbc  b                                        ; $66A9: $98
-    add  d                                        ; $66AA: $82
-    add  hl, bc                                   ; $66AB: $09
-    ld   c, $0F                                   ; $66AC: $0E $0F
-    ld   c, $0F                                   ; $66AE: $0E $0F
-    ld   c, $0F                                   ; $66B0: $0E $0F
-    ld   c, $0F                                   ; $66B2: $0E $0F
-    ld   c, $0F                                   ; $66B4: $0E $0F
-    sbc  b                                        ; $66B6: $98
-    and  d                                        ; $66B7: $A2
-    add  hl, bc                                   ; $66B8: $09
-    ld   e, $1E                                   ; $66B9: $1E $1E
-    ld   e, $1E                                   ; $66BB: $1E $1E
-    ld   e, $1E                                   ; $66BD: $1E $1E
-    ld   e, $1E                                   ; $66BF: $1E $1E
-    ld   e, $1E                                   ; $66C1: $1E $1E
-    sbc  b                                        ; $66C3: $98
-    jp   nz, $0909                                ; $66C4: $C2 $09 $09
+Data_019_65D9::
+    db   $98, $02, $09, $55, $56, $55, $56, $55   ; $65D9
+    db   $56, $55, $56, $55, $56, $98, $22, $09   ; $65E1
+    db   $0E, $0F, $0E, $0F, $0E, $0F, $0E, $0F   ; $65E9
+    db   $0E, $0F, $98, $42, $09, $0F, $0E, $0F   ; $65F1
+    db   $0E, $0F, $0E, $0F, $0E, $0F, $0E, $98   ; $65F9
+    db   $62, $09, $0E, $0F, $0E, $0F, $0E, $0F   ; $6601
+    db   $0E, $0F, $0E, $0F                       ; $6609
 
-    ld   [$0918], sp                              ; $66C7: $08 $18 $09
-    ld   a, [hl]                                  ; $66CA: $7E
-    ld   a, [hl]                                  ; $66CB: $7E
-    add  hl, bc                                   ; $66CC: $09
-    ld   [$0918], sp                              ; $66CD: $08 $18 $09
-    sbc  b                                        ; $66D0: $98
-    ld   [c], a                                   ; $66D1: $E2
-    add  hl, bc                                   ; $66D2: $09
-    add  hl, bc                                   ; $66D3: $09
-    inc  b                                        ; $66D4: $04
-    dec  b                                        ; $66D5: $05
-    add  hl, bc                                   ; $66D6: $09
-    ld   a, [hl]                                  ; $66D7: $7E
-    ld   a, [hl]                                  ; $66D8: $7E
-    add  hl, bc                                   ; $66D9: $09
-    inc  b                                        ; $66DA: $04
-    dec  b                                        ; $66DB: $05
-    add  hl, bc                                   ; $66DC: $09
-    sbc  b                                        ; $66DD: $98
-    add  d                                        ; $66DE: $82
-    add  hl, bc                                   ; $66DF: $09
-    ld   e, $1E                                   ; $66E0: $1E $1E
-    ld   e, $1E                                   ; $66E2: $1E $1E
-    ld   e, $1E                                   ; $66E4: $1E $1E
-    ld   e, $1E                                   ; $66E6: $1E $1E
-    ld   e, $1E                                   ; $66E8: $1E $1E
-    sbc  b                                        ; $66EA: $98
-    and  d                                        ; $66EB: $A2
-    add  hl, bc                                   ; $66EC: $09
-    add  hl, bc                                   ; $66ED: $09
-    ld   [$0918], sp                              ; $66EE: $08 $18 $09
-    ld   a, [hl]                                  ; $66F1: $7E
-    ld   a, [hl]                                  ; $66F2: $7E
-    add  hl, bc                                   ; $66F3: $09
-    ld   [$0918], sp                              ; $66F4: $08 $18 $09
-    sbc  b                                        ; $66F7: $98
-    jp   nz, $0909                                ; $66F8: $C2 $09 $09
+Data_019_660D::
+    db   $98, $02, $09, $0E, $0F, $0E, $0F, $0E   ; $660D
+    db   $0F, $0E, $0F, $0E, $0F, $98, $22, $09   ; $6615
+    db   $0F, $0E, $0F, $0E, $0F, $0E, $0F, $0E   ; $661D
+    db   $0F, $0E, $98, $42, $09, $0E, $0F, $0E   ; $6625
+    db   $0F, $0E, $0F, $0E, $0F, $0E, $0F, $98   ; $662D
+    db   $62, $09, $0F, $0E, $0F, $0E, $0F, $0E   ; $6635
+    db   $0F, $0E, $0F, $0E                       ; $663D
 
-    inc  b                                        ; $66FB: $04
-    dec  b                                        ; $66FC: $05
-    add  hl, bc                                   ; $66FD: $09
-    ld   a, [hl]                                  ; $66FE: $7E
-    ld   a, [hl]                                  ; $66FF: $7E
-    add  hl, bc                                   ; $6700: $09
-    inc  b                                        ; $6701: $04
-    dec  b                                        ; $6702: $05
-    add  hl, bc                                   ; $6703: $09
-    sbc  b                                        ; $6704: $98
-    ld   [c], a                                   ; $6705: $E2
-    add  hl, bc                                   ; $6706: $09
-    add  hl, de                                   ; $6707: $19
-    inc  d                                        ; $6708: $14
-    dec  d                                        ; $6709: $15
-    add  hl, de                                   ; $670A: $19
-    rra                                           ; $670B: $1F
-    rra                                           ; $670C: $1F
-    add  hl, de                                   ; $670D: $19
-    inc  d                                        ; $670E: $14
-    dec  d                                        ; $670F: $15
-    add  hl, de                                   ; $6710: $19
-    sbc  b                                        ; $6711: $98
-    ld   [bc], a                                  ; $6712: $02
-    ld   c, c                                     ; $6713: $49
-    inc  bc                                       ; $6714: $03
-    sbc  b                                        ; $6715: $98
-    ld   [hl+], a                                 ; $6716: $22
-    ld   c, c                                     ; $6717: $49
-    inc  bc                                       ; $6718: $03
-    sbc  b                                        ; $6719: $98
-    ld   b, d                                     ; $671A: $42
-    ld   c, c                                     ; $671B: $49
-    dec  b                                        ; $671C: $05
-    sbc  b                                        ; $671D: $98
-    ld   h, d                                     ; $671E: $62
-    ld   c, c                                     ; $671F: $49
-    ld   [bc], a                                  ; $6720: $02
-    sbc  b                                        ; $6721: $98
-    ld   [bc], a                                  ; $6722: $02
-    ld   c, c                                     ; $6723: $49
-    inc  bc                                       ; $6724: $03
-    sbc  b                                        ; $6725: $98
-    ld   [hl+], a                                 ; $6726: $22
-    ld   c, c                                     ; $6727: $49
-    inc  bc                                       ; $6728: $03
-    sbc  b                                        ; $6729: $98
-    ld   b, d                                     ; $672A: $42
-    ld   c, c                                     ; $672B: $49
-    ld   [bc], a                                  ; $672C: $02
-    sbc  b                                        ; $672D: $98
-    ld   h, d                                     ; $672E: $62
-    ld   c, c                                     ; $672F: $49
-    ld   [bc], a                                  ; $6730: $02
-    sbc  b                                        ; $6731: $98
-    ld   [bc], a                                  ; $6732: $02
-    ld   c, c                                     ; $6733: $49
-    inc  bc                                       ; $6734: $03
-    sbc  b                                        ; $6735: $98
-    ld   [hl+], a                                 ; $6736: $22
-    ld   c, c                                     ; $6737: $49
-    ld   [bc], a                                  ; $6738: $02
-    sbc  b                                        ; $6739: $98
-    ld   b, d                                     ; $673A: $42
-    ld   c, c                                     ; $673B: $49
-    ld   [bc], a                                  ; $673C: $02
-    sbc  b                                        ; $673D: $98
-    ld   h, d                                     ; $673E: $62
-    ld   c, c                                     ; $673F: $49
-    ld   [bc], a                                  ; $6740: $02
-    sbc  b                                        ; $6741: $98
-    ld   [bc], a                                  ; $6742: $02
-    ld   c, c                                     ; $6743: $49
-    ld   [bc], a                                  ; $6744: $02
-    sbc  b                                        ; $6745: $98
-    ld   [hl+], a                                 ; $6746: $22
-    ld   c, c                                     ; $6747: $49
-    ld   [bc], a                                  ; $6748: $02
-    sbc  b                                        ; $6749: $98
-    ld   b, d                                     ; $674A: $42
-    ld   c, c                                     ; $674B: $49
-    ld   [bc], a                                  ; $674C: $02
-    sbc  b                                        ; $674D: $98
-    ld   h, d                                     ; $674E: $62
-    ld   c, c                                     ; $674F: $49
-    ld   [bc], a                                  ; $6750: $02
-    sbc  b                                        ; $6751: $98
-    add  d                                        ; $6752: $82
-    add  hl, bc                                   ; $6753: $09
-    ld   [bc], a                                  ; $6754: $02
-    ld   [bc], a                                  ; $6755: $02
-    ld   [bc], a                                  ; $6756: $02
-    ld   [bc], a                                  ; $6757: $02
-    ld   [bc], a                                  ; $6758: $02
-    ld   [bc], a                                  ; $6759: $02
-    ld   [bc], a                                  ; $675A: $02
-    ld   [bc], a                                  ; $675B: $02
-    ld   [bc], a                                  ; $675C: $02
-    ld   [bc], a                                  ; $675D: $02
-    sbc  b                                        ; $675E: $98
-    and  d                                        ; $675F: $A2
-    add  hl, bc                                   ; $6760: $09
-    ld   [bc], a                                  ; $6761: $02
-    ld   [bc], a                                  ; $6762: $02
-    ld   [bc], a                                  ; $6763: $02
-    ld   [bc], a                                  ; $6764: $02
-    ld   [bc], a                                  ; $6765: $02
-    ld   [bc], a                                  ; $6766: $02
-    ld   [bc], a                                  ; $6767: $02
-    ld   [bc], a                                  ; $6768: $02
-    ld   [bc], a                                  ; $6769: $02
-    ld   [bc], a                                  ; $676A: $02
-    sbc  b                                        ; $676B: $98
-    jp   nz, $0209                                ; $676C: $C2 $09 $02
+Data_019_6641::
+    db   $98, $82, $09, $0F, $0E, $0F, $0F, $0F   ; $6641
+    db   $0E, $0F, $0E, $0F, $0E, $98, $A2, $09   ; $6649
+    db   $0E, $0F, $0E, $0F, $0E, $0F, $0E, $0F   ; $6651
+    db   $0E, $0F, $98, $C2, $09, $0F, $0E, $0F   ; $6659
+    db   $0E, $0F, $0E, $0F, $0E, $0F, $0E, $98   ; $6661
+    db   $E2, $09, $1E, $1E, $1E, $1E, $1E, $1E   ; $6669
+    db   $1E, $1E, $1E, $1E                       ; $6671
 
-    ld   [bc], a                                  ; $676F: $02
-    ld   [bc], a                                  ; $6770: $02
-    ld   [bc], a                                  ; $6771: $02
-    ld   [bc], a                                  ; $6772: $02
-    ld   [bc], a                                  ; $6773: $02
-    ld   [bc], a                                  ; $6774: $02
-    ld   [bc], a                                  ; $6775: $02
-    ld   [bc], a                                  ; $6776: $02
-    ld   [bc], a                                  ; $6777: $02
-    sbc  b                                        ; $6778: $98
-    ld   [c], a                                   ; $6779: $E2
-    add  hl, bc                                   ; $677A: $09
-    ld   bc, $101                                 ; $677B: $01 $01 $01
-    ld   bc, $101                                 ; $677E: $01 $01 $01
-    ld   bc, $101                                 ; $6781: $01 $01 $01
-    ld   bc, $8298                                ; $6784: $01 $98 $82
-    add  hl, bc                                   ; $6787: $09
-    ld   [bc], a                                  ; $6788: $02
-    ld   [bc], a                                  ; $6789: $02
-    ld   [bc], a                                  ; $678A: $02
-    ld   [bc], a                                  ; $678B: $02
-    ld   [bc], a                                  ; $678C: $02
-    ld   [bc], a                                  ; $678D: $02
-    ld   [bc], a                                  ; $678E: $02
-    ld   [bc], a                                  ; $678F: $02
-    ld   [bc], a                                  ; $6790: $02
-    ld   [bc], a                                  ; $6791: $02
-    sbc  b                                        ; $6792: $98
-    and  d                                        ; $6793: $A2
-    add  hl, bc                                   ; $6794: $09
-    ld   [bc], a                                  ; $6795: $02
-    ld   [bc], a                                  ; $6796: $02
-    ld   [bc], a                                  ; $6797: $02
-    ld   [bc], a                                  ; $6798: $02
-    ld   [bc], a                                  ; $6799: $02
-    ld   [bc], a                                  ; $679A: $02
-    ld   [bc], a                                  ; $679B: $02
-    ld   [bc], a                                  ; $679C: $02
-    ld   [bc], a                                  ; $679D: $02
-    ld   [bc], a                                  ; $679E: $02
-    sbc  b                                        ; $679F: $98
-    jp   nz, $0109                                ; $67A0: $C2 $09 $01
+Data_019_6675::
+    db   $98, $82, $09, $0E, $0F, $0E, $0F, $0E   ; $6675
+    db   $0F, $0E, $0F, $0E, $0F, $98, $A2, $09   ; $667D
+    db   $0F, $0E, $0F, $0E, $0F, $0E, $0F, $0E   ; $6685
+    db   $0F, $0E, $98, $C2, $09, $1E, $1E, $1E   ; $668D
+    db   $1E, $1E, $1E, $1E, $1E, $1E, $1E, $98   ; $6695
+    db   $E2, $09, $09, $08, $18, $09, $7E, $7E   ; $669D
+    db   $09, $08, $18, $09                       ; $66A5
 
-    ld   bc, $101                                 ; $67A3: $01 $01 $01
-    ld   bc, $101                                 ; $67A6: $01 $01 $01
-    ld   bc, $101                                 ; $67A9: $01 $01 $01
-    sbc  b                                        ; $67AC: $98
-    ld   [c], a                                   ; $67AD: $E2
-    add  hl, bc                                   ; $67AE: $09
-    ld   bc, $00                                  ; $67AF: $01 $00 $00
-    ld   bc, $101                                 ; $67B2: $01 $01 $01
-    ld   bc, $00                                  ; $67B5: $01 $00 $00
-    ld   bc, $8298                                ; $67B8: $01 $98 $82
-    add  hl, bc                                   ; $67BB: $09
-    ld   [bc], a                                  ; $67BC: $02
-    ld   [bc], a                                  ; $67BD: $02
-    ld   [bc], a                                  ; $67BE: $02
-    ld   [bc], a                                  ; $67BF: $02
-    ld   [bc], a                                  ; $67C0: $02
-    ld   [bc], a                                  ; $67C1: $02
-    ld   [bc], a                                  ; $67C2: $02
-    ld   [bc], a                                  ; $67C3: $02
-    ld   [bc], a                                  ; $67C4: $02
-    ld   [bc], a                                  ; $67C5: $02
-    sbc  b                                        ; $67C6: $98
-    and  d                                        ; $67C7: $A2
-    add  hl, bc                                   ; $67C8: $09
-    ld   bc, $101                                 ; $67C9: $01 $01 $01
-    ld   bc, $101                                 ; $67CC: $01 $01 $01
-    ld   bc, $101                                 ; $67CF: $01 $01 $01
-    ld   bc, $C298                                ; $67D2: $01 $98 $C2
-    add  hl, bc                                   ; $67D5: $09
-    ld   bc, $00                                  ; $67D6: $01 $00 $00
-    ld   bc, $101                                 ; $67D9: $01 $01 $01
-    ld   bc, $00                                  ; $67DC: $01 $00 $00
-    ld   bc, $E298                                ; $67DF: $01 $98 $E2
-    add  hl, bc                                   ; $67E2: $09
-    ld   bc, $00                                  ; $67E3: $01 $00 $00
-    ld   bc, $101                                 ; $67E6: $01 $01 $01
-    ld   bc, $00                                  ; $67E9: $01 $00 $00
-    ld   bc, $8298                                ; $67EC: $01 $98 $82
-    add  hl, bc                                   ; $67EF: $09
-    ld   bc, $101                                 ; $67F0: $01 $01 $01
-    ld   bc, $101                                 ; $67F3: $01 $01 $01
-    ld   bc, $101                                 ; $67F6: $01 $01 $01
-    ld   bc, $A298                                ; $67F9: $01 $98 $A2
-    add  hl, bc                                   ; $67FC: $09
-    ld   bc, $00                                  ; $67FD: $01 $00 $00
-    ld   bc, $101                                 ; $6800: $01 $01 $01
-    ld   bc, $00                                  ; $6803: $01 $00 $00
-    ld   bc, $C298                                ; $6806: $01 $98 $C2
-    add  hl, bc                                   ; $6809: $09
-    ld   bc, $00                                  ; $680A: $01 $00 $00
-    ld   bc, $101                                 ; $680D: $01 $01 $01
-    ld   bc, $00                                  ; $6810: $01 $00 $00
-    ld   bc, $E298                                ; $6813: $01 $98 $E2
-    add  hl, bc                                   ; $6816: $09
-    ld   bc, $0000                                ; $6817: $01 $00 $00
-    ld   bc, $0101                                ; $681A: $01 $01 $01
-    ld   bc, $0000                                ; $681D: $01 $00 $00
-    db   $01                                      ; $6820: $01
+Data_019_66A9::
+    db   $98, $82, $09, $0E, $0F, $0E, $0F, $0E   ; $66A9
+    db   $0F, $0E, $0F, $0E, $0F, $98, $A2, $09   ; $66B1
+    db   $1E, $1E, $1E, $1E, $1E, $1E, $1E, $1E   ; $66B9
+    db   $1E, $1E, $98, $C2, $09, $09, $08, $18   ; $66C1
+    db   $09, $7E, $7E, $09, $08, $18, $09, $98   ; $66C9
+    db   $E2, $09, $09, $04, $05, $09, $7E, $7E   ; $66D1
+    db   $09, $04, $05, $09                       ; $66D9
+
+Data_019_66DD::
+    db   $98, $82, $09, $1E, $1E, $1E, $1E, $1E   ; $66DD
+    db   $1E, $1E, $1E, $1E, $1E, $98, $A2, $09   ; $66E5
+    db   $09, $08, $18, $09, $7E, $7E, $09, $08   ; $66ED
+    db   $18, $09, $98, $C2, $09, $09, $04, $05   ; $66F5
+    db   $09, $7E, $7E, $09, $04, $05, $09, $98   ; $66FD
+    db   $E2, $09, $19, $14, $15, $19, $1F, $1F   ; $6705
+    db   $19, $14, $15, $19                       ; $670D
+
+Data_019_6711::
+    db   $98, $02, $49, $03, $98, $22, $49, $03   ; $6711
+    db   $98, $42, $49, $05, $98, $62, $49, $02   ; $6719
+
+Data_019_6721::
+    db   $98, $02, $49, $03, $98, $22, $49, $03   ; $6721
+    db   $98, $42, $49, $02, $98, $62, $49, $02   ; $6729
+
+Data_019_6731::
+    db   $98, $02, $49, $03, $98, $22, $49, $02   ; $6731
+    db   $98, $42, $49, $02, $98, $62, $49, $02   ; $6739
+
+Data_019_6741::
+    db   $98, $02, $49, $02, $98, $22, $49, $02   ; $6741
+    db   $98, $42, $49, $02, $98, $62, $49, $02   ; $6749
+
+Data_019_6751::
+    db   $98, $82, $09, $02, $02, $02, $02, $02   ; $6751
+    db   $02, $02, $02, $02, $02, $98, $A2, $09   ; $6759
+    db   $02, $02, $02, $02, $02, $02, $02, $02   ; $6761
+    db   $02, $02, $98, $C2, $09, $02, $02, $02   ; $6769
+    db   $02, $02, $02, $02, $02, $02, $02, $98   ; $6771
+    db   $E2, $09, $01, $01, $01, $01, $01, $01   ; $6779
+    db   $01, $01, $01, $01                       ; $6781
+
+Data_019_6785::
+    db   $98, $82, $09, $02, $02, $02, $02, $02   ; $6785
+    db   $02, $02, $02, $02, $02, $98, $A2, $09   ; $678D
+    db   $02, $02, $02, $02, $02, $02, $02, $02   ; $6795
+    db   $02, $02, $98, $C2, $09, $01, $01, $01   ; $679D
+    db   $01, $01, $01, $01, $01, $01, $01, $98   ; $67A5
+    db   $E2, $09, $01, $00, $00, $01, $01, $01   ; $67AD
+    db   $01, $00, $00, $01                       ; $67B5
+
+Data_019_67B9::
+    db   $98, $82, $09, $02, $02, $02, $02, $02   ; $67B9
+    db   $02, $02, $02, $02, $02, $98, $A2, $09   ; $67C1
+    db   $01, $01, $01, $01, $01, $01, $01, $01   ; $67C9
+    db   $01, $01, $98, $C2, $09, $01, $00, $00   ; $67D1
+    db   $01, $01, $01, $01, $00, $00, $01, $98   ; $67D9
+    db   $E2, $09, $01, $00, $00, $01, $01, $01   ; $67E1
+    db   $01, $00, $00, $01                       ; $67E9
+
+Data_019_67ED::
+    db   $98, $82, $09, $01, $01, $01, $01, $01   ; $67ED
+    db   $01, $01, $01, $01, $01, $98, $A2, $09   ; $67F5
+    db   $01, $00, $00, $01, $01, $01, $01, $00   ; $67FD
+    db   $00, $01, $98, $C2, $09, $01, $00, $00   ; $6805
+    db   $01, $01, $01, $01, $00, $00, $01, $98   ; $680D
+    db   $E2, $09, $01, $00, $00, $01, $01, $01   ; $6815
+    db   $01, $00, $00, $01                       ; $681D
 
 Data_019_6821::
-    db   $71, $65, $A5, $65, $D9, $65, $0D, $66
+    dw   Data_019_6571
+    dw   Data_019_65A5
+    dw   Data_019_65D9
+    dw   Data_019_660D
 
 Data_019_6829::
-    db   $41, $66, $75, $66, $A9, $66, $DD, $66
+    dw   Data_019_6641
+    dw   Data_019_6675
+    dw   Data_019_66A9
+    dw   Data_019_66DD
 
 Data_019_6831::
-    db   $11, $67, $21, $67, $31, $67, $41, $67
+    dw   Data_019_6711
+    dw   Data_019_6721
+    dw   Data_019_6731
+    dw   Data_019_6741
 
 Data_019_6839::
-    db   $51, $67, $85, $67, $B9, $67, $ED, $67
+    dw   Data_019_6751
+    dw   Data_019_6785
+    dw   Data_019_67B9
+    dw   Data_019_67ED
 
-label_019_6841:
+AnimateDungeonDoorOpening:
     ldh  a, [hMapRoom]                            ; $6841: $F0 $F6
     cp   $0E                                      ; $6843: $FE $0E
-    jp   z, label_019_61F8                        ; $6845: $CA $F8 $61
+    jp   z, AnimateEaglesTowerOpening             ; $6845: $CA $F8 $61
 
     ld   a, $02                                   ; $6848: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $684A: $E0 $A1
@@ -6170,12 +5650,17 @@ Data_019_6A8D::
 Data_019_6AAC::
     db   $21, $F0, $10
 
+; This entity is used for both:
+; - Arm-Mimic
+; - Eagle's Tower opening animation
 MimicEntityHandler::
+    ; If entity private state 2 != 0, this is actually
+    ; a door opening animation.
     ld   hl, wEntitiesPrivateState2Table          ; $6AAF: $21 $C0 $C2
     add  hl, bc                                   ; $6AB2: $09
     ld   a, [hl]                                  ; $6AB3: $7E
     and  a                                        ; $6AB4: $A7
-    jp   nz, label_019_6841                       ; $6AB5: $C2 $41 $68
+    jp   nz, AnimateDungeonDoorOpening            ; $6AB5: $C2 $41 $68
 
     ldh  a, [hMapId]                              ; $6AB8: $F0 $F7
     cp   $0A                                      ; $6ABA: $FE $0A
@@ -7825,230 +7310,50 @@ func_019_7744::
 
     jp   func_019_7E61                            ; $774C: $C3 $61 $7E
 
-    nop                                           ; $774F: $00
-    inc  b                                        ; $7750: $04
-    ld   [hl], d                                  ; $7751: $72
-    nop                                           ; $7752: $00
-    ldh  [rDIV], a                                ; $7753: $E0 $04
-    ld   [hl], d                                  ; $7755: $72
-    nop                                           ; $7756: $00
-    nop                                           ; $7757: $00
-    ldh  a, [$FF78]                               ; $7758: $F0 $78
-    jr   nz, jr_019_775C                          ; $775A: $20 $00
+Data_019_774F::
+    db   $00, $04, $72, $00, $E0, $04, $72, $00   ; $774F
+    db   $00, $F0, $78, $20, $00, $F8, $78, $40   ; $7757
+    db   $00, $10, $78, $60, $00, $18, $78, $00   ; $775F
+    db   $F0, $E8, $76, $20, $F0, $F0, $76, $40   ; $7767
+    db   $F0, $18, $76, $60, $F0, $20, $76, $00   ; $776F
+    db   $E8, $F4, $74, $20, $E8, $14, $74, $00   ; $7777
 
-jr_019_775C:
-    ld   hl, sp+$78                               ; $775C: $F8 $78
-    ld   b, b                                     ; $775E: $40
-    nop                                           ; $775F: $00
-    db   $10                                      ; $7760: $10
-    ld   a, b                                     ; $7761: $78
-    ld   h, b                                     ; $7762: $60
-    nop                                           ; $7763: $00
+Data_019_777F::
+    db   $F8, $04, $72, $00, $D8, $04, $72, $00   ; $777F
+    db   $FC, $E8, $78, $20, $FC, $F0, $78, $40   ; $7787
+    db   $FC, $18, $78, $60, $FC, $20, $78, $00   ; $778F
+    db   $E8, $E0, $76, $20, $E8, $E8, $76, $40   ; $7797
+    db   $E8, $20, $76, $60, $E8, $28, $76, $00   ; $779F
+    db   $E0, $F0, $74, $20, $E0, $18, $74, $00   ; $77A7
+    db   $00, $00, $74, $20, $00, $08, $74, $00   ; $77AF
 
-jr_019_7764:
-    jr   @+$7A                                    ; $7764: $18 $78
+Data_019_77B7::
+    db   $F0, $04, $72, $00, $D0, $04, $72, $00   ; $77B7
+    db   $F8, $E0, $78, $20, $F8, $E8, $78, $40   ; $77BF
+    db   $F8, $20, $78, $60, $F8, $28, $78, $00   ; $77C7
+    db   $E0, $D8, $76, $20, $E0, $E0, $76, $40   ; $77CF
+    db   $E0, $28, $76, $60, $E0, $30, $76, $00   ; $77D7
+    db   $D8, $EC, $74, $20, $D8, $1C, $74, $00   ; $77DF
+    db   $F8, $FC, $74, $20, $F8, $0C, $74, $00   ; $77E7
+    db   $00, $F8, $76, $20, $00, $00, $76, $40   ; $77EF
+    db   $00, $08, $76, $60, $00, $10, $76, $00   ; $77F7
 
-    nop                                           ; $7766: $00
-    ldh  a, [hFFE8]                               ; $7767: $F0 $E8
-    db   $76                                      ; $7769: $76
-    jr   nz, jr_019_775C                          ; $776A: $20 $F0
-
-    ldh  a, [rPCM12]                              ; $776C: $F0 $76
-    ld   b, b                                     ; $776E: $40
-    ldh  a, [rNR23]                               ; $776F: $F0 $18
-    db   $76                                      ; $7771: $76
-    ld   h, b                                     ; $7772: $60
-    ldh  a, [rNR41]                               ; $7773: $F0 $20
-    halt                                          ; $7775: $76 $00
-    add  sp, -$0C                                 ; $7777: $E8 $F4
-    ld   [hl], h                                  ; $7779: $74
-    jr   nz, jr_019_7764                          ; $777A: $20 $E8
-
-    inc  d                                        ; $777C: $14
-    ld   [hl], h                                  ; $777D: $74
-    nop                                           ; $777E: $00
-    ld   hl, sp+$04                               ; $777F: $F8 $04
-    ld   [hl], d                                  ; $7781: $72
-    nop                                           ; $7782: $00
-    ret  c                                        ; $7783: $D8
-
-jr_019_7784:
-    inc  b                                        ; $7784: $04
-    ld   [hl], d                                  ; $7785: $72
-    nop                                           ; $7786: $00
-    db   $FC                                      ; $7787: $FC
-
-jr_019_7788:
-    add  sp, $78                                  ; $7788: $E8 $78
-    jr   nz, jr_019_7788                          ; $778A: $20 $FC
-
-jr_019_778C:
-    ldh  a, [$FF78]                               ; $778C: $F0 $78
-    ld   b, b                                     ; $778E: $40
-    db   $FC                                      ; $778F: $FC
-    jr   jr_019_780A                              ; $7790: $18 $78
-
-    ld   h, b                                     ; $7792: $60
-    db   $FC                                      ; $7793: $FC
-    jr   nz, @+$7A                                ; $7794: $20 $78
-
-    nop                                           ; $7796: $00
-    add  sp, -$20                                 ; $7797: $E8 $E0
-    db   $76                                      ; $7799: $76
-    jr   nz, jr_019_7784                          ; $779A: $20 $E8
-
-    add  sp, $76                                  ; $779C: $E8 $76
-    ld   b, b                                     ; $779E: $40
-    add  sp, $20                                  ; $779F: $E8 $20
-    db   $76                                      ; $77A1: $76
-    ld   h, b                                     ; $77A2: $60
-    add  sp, $28                                  ; $77A3: $E8 $28
-    halt                                          ; $77A5: $76 $00
-    ldh  [hActiveEntityState], a                  ; $77A7: $E0 $F0
-    ld   [hl], h                                  ; $77A9: $74
-    jr   nz, jr_019_778C                          ; $77AA: $20 $E0
-
-    jr   jr_019_7822                              ; $77AC: $18 $74
-
-    nop                                           ; $77AE: $00
-    nop                                           ; $77AF: $00
-    nop                                           ; $77B0: $00
-    ld   [hl], h                                  ; $77B1: $74
-    jr   nz, jr_019_77B4                          ; $77B2: $20 $00
-
-jr_019_77B4:
-    ld   [$0074], sp                              ; $77B4: $08 $74 $00
-    ldh  a, [rDIV]                                ; $77B7: $F0 $04
-    ld   [hl], d                                  ; $77B9: $72
-    nop                                           ; $77BA: $00
-    ret  nc                                       ; $77BB: $D0
-
-jr_019_77BC:
-    inc  b                                        ; $77BC: $04
-    ld   [hl], d                                  ; $77BD: $72
-    nop                                           ; $77BE: $00
-    ld   hl, sp-$20                               ; $77BF: $F8 $E0
-    ld   a, b                                     ; $77C1: $78
-    jr   nz, jr_019_77BC                          ; $77C2: $20 $F8
-
-    add  sp, $78                                  ; $77C4: $E8 $78
-    ld   b, b                                     ; $77C6: $40
-    ld   hl, sp+$20                               ; $77C7: $F8 $20
-    ld   a, b                                     ; $77C9: $78
-    ld   h, b                                     ; $77CA: $60
-    ld   hl, sp+$28                               ; $77CB: $F8 $28
-    ld   a, b                                     ; $77CD: $78
-    nop                                           ; $77CE: $00
-    ldh  [hScratch1], a                           ; $77CF: $E0 $D8
-    db   $76                                      ; $77D1: $76
-    jr   nz, jr_019_77B4                          ; $77D2: $20 $E0
-
-    ldh  [rPCM12], a                              ; $77D4: $E0 $76
-    ld   b, b                                     ; $77D6: $40
-    ldh  [$FF28], a                               ; $77D7: $E0 $28
-    db   $76                                      ; $77D9: $76
-    ld   h, b                                     ; $77DA: $60
-    ldh  [$FF30], a                               ; $77DB: $E0 $30
-    halt                                          ; $77DD: $76 $00
-    ret  c                                        ; $77DF: $D8
-
-    db   $EC                                      ; $77E0: $EC
-    ld   [hl], h                                  ; $77E1: $74
-    jr   nz, jr_019_77BC                          ; $77E2: $20 $D8
-
-jr_019_77E4:
-    inc  e                                        ; $77E4: $1C
-    ld   [hl], h                                  ; $77E5: $74
-    nop                                           ; $77E6: $00
-    ld   hl, sp-$04                               ; $77E7: $F8 $FC
-    ld   [hl], h                                  ; $77E9: $74
-    jr   nz, jr_019_77E4                          ; $77EA: $20 $F8
-
-    inc  c                                        ; $77EC: $0C
-    ld   [hl], h                                  ; $77ED: $74
-    nop                                           ; $77EE: $00
-    nop                                           ; $77EF: $00
-    ld   hl, sp+$76                               ; $77F0: $F8 $76
-    jr   nz, jr_019_77F4                          ; $77F2: $20 $00
-
-jr_019_77F4:
-    nop                                           ; $77F4: $00
-    db   $76                                      ; $77F5: $76
-    ld   b, b                                     ; $77F6: $40
-    nop                                           ; $77F7: $00
-    ld   [$6076], sp                              ; $77F8: $08 $76 $60
-    nop                                           ; $77FB: $00
-    db   $10                                      ; $77FC: $10
-    halt                                          ; $77FD: $76 $00
-    db   $E4                                      ; $77FF: $E4
-    inc  b                                        ; $7800: $04
-    ld   [hl], d                                  ; $7801: $72
-    nop                                           ; $7802: $00
-    nop                                           ; $7803: $00
-    ld   hl, sp+$78                               ; $7804: $F8 $78
-    jr   nz, jr_019_7808                          ; $7806: $20 $00
-
-jr_019_7808:
-    nop                                           ; $7808: $00
-    ld   a, b                                     ; $7809: $78
-
-jr_019_780A:
-    ld   b, b                                     ; $780A: $40
-    nop                                           ; $780B: $00
-
-jr_019_780C:
-    ld   [$6078], sp                              ; $780C: $08 $78 $60
-    nop                                           ; $780F: $00
-    db   $10                                      ; $7810: $10
-    ld   a, b                                     ; $7811: $78
-    nop                                           ; $7812: $00
-    db   $F4                                      ; $7813: $F4
-
-jr_019_7814:
-    ldh  a, [rPCM12]                              ; $7814: $F0 $76
-    jr   nz, jr_019_780C                          ; $7816: $20 $F4
-
-    ld   hl, sp+$76                               ; $7818: $F8 $76
-    ld   b, b                                     ; $781A: $40
-    db   $F4                                      ; $781B: $F4
-    db   $10                                      ; $781C: $10
-    db   $76                                      ; $781D: $76
-    ld   h, b                                     ; $781E: $60
-    db   $F4                                      ; $781F: $F4
-
-jr_019_7820:
-    jr   @+$78                                    ; $7820: $18 $76
-
-jr_019_7822:
-    nop                                           ; $7822: $00
-    db   $EC                                      ; $7823: $EC
-    ld   hl, sp+$74                               ; $7824: $F8 $74
-    jr   nz, jr_019_7814                          ; $7826: $20 $EC
-
-    db   $10                                      ; $7828: $10
-    ld   [hl], h                                  ; $7829: $74
-    nop                                           ; $782A: $00
-    ldh  a, [hScratch1]                           ; $782B: $F0 $D8
-    ld   a, b                                     ; $782D: $78
-    jr   nz, jr_019_7820                          ; $782E: $20 $F0
-
-    ldh  [$FF78], a                               ; $7830: $E0 $78
-    ld   b, b                                     ; $7832: $40
-    ldh  a, [$FF28]                               ; $7833: $F0 $28
-    ld   a, b                                     ; $7835: $78
-    ld   h, b                                     ; $7836: $60
-    ldh  a, [$FF30]                               ; $7837: $F0 $30
-    ld   a, b                                     ; $7839: $78
-    nop                                           ; $783A: $00
-    call z, $74E8                                 ; $783B: $CC $E8 $74
-    jr   nz, jr_019_780C                          ; $783E: $20 $CC
-
-    jr   nz, @+$76                                ; $7840: $20 $74
-
-    nop                                           ; $7842: $00
+Data_019_77FF::
+    db   $E4, $04, $72, $00, $00, $F8, $78, $20   ; $77FF
+    db   $00, $00, $78, $40, $00, $08, $78, $60   ; $7807
+    db   $00, $10, $78, $00, $F4, $F0, $76, $20   ; $780F
+    db   $F4, $F8, $76, $40, $F4, $10, $76, $60   ; $7817
+    db   $F4, $18, $76, $00, $EC, $F8, $74, $20   ; $781F
+    db   $EC, $10, $74, $00, $F0, $D8, $78, $20   ; $7827
+    db   $F0, $E0, $78, $40, $F0, $28, $78, $60   ; $782F
+    db   $F0, $30, $78, $00, $CC, $E8, $74, $20   ; $7837
+    db   $CC, $20, $74, $00                       ; $783F
 
 Data_019_7843::
-    db   $4F, $77, $7F, $77, $B7, $77, $FF, $77
+    dw   Data_019_774F
+    dw   Data_019_777F
+    dw   Data_019_77B7
+    dw   Data_019_77FF
 
 Data_019_784B::
     db   $0C, $0E, $12, $11
@@ -8642,7 +7947,7 @@ func_019_7CA2::
     cp   $03                                      ; $7CB7: $FE $03
     jr   nz, jr_019_7CC1                          ; $7CB9: $20 $06
 
-    ld   hl, wEntitiesStatusTable + $0F                        ; $7CBB: $21 $8F $C2
+    ld   hl, wEntitiesStatusTable + $0F           ; $7CBB: $21 $8F $C2
     add  hl, de                                   ; $7CBE: $19
     ld   [hl], $00                                ; $7CBF: $36 $00
 

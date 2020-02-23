@@ -5,17 +5,17 @@ Data_019_4451::
 BoomerangEntityHandler::
     ; wActiveProjectileCount = 1
     ld   a, $01                                   ; $4461: $3E $01
-    ld   [wActiveProjectileCount], a                    ; $4463: $EA $4D $C1
+    ld   [wActiveProjectileCount], a              ; $4463: $EA $4D $C1
 
     ld   de, Data_019_4451                        ; $4466: $11 $51 $44
     call RenderActiveEntitySpritesPair            ; $4469: $CD $C0 $3B
     call func_019_7D3D                            ; $446C: $CD $3D $7D
-    call PlayBoomerangSfx_trampoline               ; $446F: $CD $F8 $29
+    call PlayBoomerangSfx_trampoline              ; $446F: $CD $F8 $29
     ldh  a, [hFrameCounter]                       ; $4472: $F0 $E7
     and  $03                                      ; $4474: $E6 $03
     jr   nz, jr_019_4481                          ; $4476: $20 $09
 
-    ld   hl, wEntitiesSpriteVariantTable               ; $4478: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $4478: $21 $B0 $C3
     add  hl, bc                                   ; $447B: $09
     ld   a, [hl]                                  ; $447C: $7E
     inc  a                                        ; $447D: $3C
@@ -71,7 +71,7 @@ jr_019_44C5:
     call label_3B44                               ; $44C5: $CD $44 $3B
     ret  nc                                       ; $44C8: $D0
 
-    jp   func_019_7E61                           ; $44C9: $C3 $61 $7E
+    jp   func_019_7E61                            ; $44C9: $C3 $61 $7E
 
 func_019_44CC::
     ld   a, [wIsIndoor]                           ; $44CC: $FA $A5 $DB

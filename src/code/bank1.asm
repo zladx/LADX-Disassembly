@@ -1748,7 +1748,7 @@ label_5818::
     call label_5A71
     call label_5C49
     ret
-    call label_6A7C
+    call func_6A7C
 
 FileSaveFadeOut::
     call func_1A22
@@ -3360,7 +3360,7 @@ label_689E::
     ld   a, $01
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
-    call label_6A7C
+    call func_6A7C
     call func_1A39
     ld   a, [$C16B]
     cp   $04
@@ -3374,7 +3374,8 @@ label_68BF::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   nz, label_68CF
-    call label_6A7C
+
+    call func_6A7C
     ld   a, $07
     ld   [wGameplaySubtype], a
     ret
@@ -3394,7 +3395,7 @@ label_68D9::
 
 label_68E3::
     ret
-    call label_6A7C
+    call func_6A7C
     ld   a, [$D210]
     dec  a
     ld   [$D210], a
@@ -3414,7 +3415,7 @@ label_6903::
     ld   a, e
     ld   [wScreenShakeVertical], a
     ret
-    call label_6A7C
+    call func_6A7C
     call label_695B
     ld   a, [$D210]
     dec  a
@@ -3441,7 +3442,7 @@ label_6903::
 
 label_6944::
     ret
-    call label_6A7C
+    call func_6A7C
     call label_695B
     ld   hl, $D210
     dec  [hl]
@@ -3477,102 +3478,89 @@ label_6976::
 
 label_697C::
     db $17, $17, $13
-
-label_697F::
     db $13, $0f, $0f
 
-label_6982::
-    db 0, 0, $CC, $10, 0, 8, $CE, $10, 0, $10, $DC, $10, 0, $18, $CC, $30
-    db $10, 0, $DE, $10, $10, 8, $E0, $10, $10, $10, $E2, $10, $10, $18, $DE, $30
-    db $20
+Data_6982::
+    db   $00, $00, $CC, $10
+    db   $00, $08, $CE, $10
+    db   $00, $10, $DC, $10
+    db   $00, $18, $CC, $30
+    db   $10, $00, $DE, $10
+    db   $10, $08, $E0, $10
+    db   $10, $10, $E2, $10
+    db   $10, $18, $DE, $30
+    db   $20, $00, $E4, $10
+    db   $20, $08, $E6, $10
+    db   $20, $10, $E8, $10
+    db   $20, $18, $E4, $30
+    db   $30, $00, $DE, $10
+    db   $30, $08, $E0, $10
+    db   $30, $10, $E0, $30
+    db   $30, $18, $DE, $30
+    db   $40, $00, $DE, $10
+    db   $40, $08, $E0, $10
+    db   $40, $10, $E0, $30
+    db   $40, $18, $DE, $30
 
-label_69A3::
-    db 0, $E4, $10, $20, 8, $E6, $10, $20, $10, $E8, $10, $20
+Data_69D2::
+    db   $00, $10, $DC, $16
+    db   $10, $10, $E2, $16
+    db   $20, $10, $E8, $16
+    db   $00, $00, $CC, $15
+    db   $00, $08, $CE, $15
+    db   $00, $10, $CE, $35
+    db   $00, $18, $CC, $35
+    db   $10, $00, $DE, $15
+    db   $10, $08, $E0, $15
+    db   $10, $10, $E0, $35
+    db   $10, $18, $DE, $35
+    db   $20, $00, $E4, $15
+    db   $20, $08, $E6, $15
+    db   $20, $10, $E6, $35
+    db   $20, $18, $E4, $35
+    db   $30, $00, $DE, $15
+    db   $30, $08, $E0, $15
+    db   $30, $10, $E0, $35
+    db   $30, $18, $DE, $35
+    db   $40, $00, $DE, $15
+    db   $40, $08, $E0, $15
+    db   $40, $10, $E0, $35
+    db   $40, $18, $DE, $35
 
-label_69AF::
-    db $18, $E4, $30, $30, 0, $DE, $10, $30, 8, $E0, $10, $30, $10
+Data_6A2E::
+    db   $48, $08, $F0, $07
+    db   $48, $10, $F2, $07
+    db   $48, $18, $F4, $07
+    db   $48, $20, $F4, $27
+    db   $48, $28, $F2, $27
+    db   $48, $30, $F0, $27
 
-label_69BC::
-    db $E0, $30, $30, $18
+Data_6A46::
+    db   $48, $08, $F6, $07
+    db   $48, $10, $F8, $07
+    db   $48, $18, $FA, $07
+    db   $48, $20, $FA, $27
+    db   $48, $28, $F8, $27
+    db   $48, $30, $F6, $27
 
-label_69C0::
-    db $DE, $30, $40
+Data_6A5E::
+    db   $48, $08, $FC, $07
+    db   $48, $10, $FE, $07
+    db   $48, $18, $EE, $07
+    db   $48, $20, $EE, $27
+    db   $48, $28, $FE, $27
+    db   $48, $30, $FC, $27
 
-label_69C3::
-    db 0, $DE, $10, $40, 8, $E0, $10, $40, $10, $E0, $30, $40, $18, $DE, $30
+Data_6A76::
+    dw Data_6A2E
+    dw Data_6A46
+    dw Data_6A5E
 
-label_69D2::
-    db 0
-
-label_69D3::
-    db $10, $DC, $16, $10, $10, $E2, $16, $20, $10, $E8, $16, 0, 0, $CC, $15, 0
-
-label_69E3::
-    db 8, $CE, $15, 0, $10, $CE, $35, 0, $18, $CC, $35, $10, 0, $DE, $15, $10
-    db 8, $E0, $15, $10, $10, $E0, $35, $10, $18, $DE, $35, $20, 0
-
-label_6A00::
-    db $E4, $15, $20, 8, $E6, $15, $20, $10, $E6, $35, $20, $18
-
-label_6A0C::
-    db $E4, $35, $30, 0
-
-label_6A10::
-    db $DE, $15, $30, 8, $E0, $15, $30, $10
-
-label_6A18::
-    db $E0, $35, $30, $18
-
-label_6A1C::
-    db $DE, $35, $40, 0, $DE, $15, $40, 8, $E0, $15, $40, $10, $E0, $35, $40, $18
-    db $DE
-
-label_6A2D::
-    db $35, $48, 8, $F0, 7, $48
-
-label_6A33::
-    db $10, $F2, 7, $48, $18, $F4, 7, $48, $20, $F4, $27, $48, $28, $F2, $27, $48
-    db $30, $F0, $27, $48, 8, $F6, 7, $48
-
-label_6A4B::
-    db $10, $F8, 7, $48
-
-label_6A4F::
-    db $18, $FA
-
-label_6A51::
-    db $07, $48
-
-label_6A53::
-    db $20, $FA, $27, $48
-
-label_6A57::
-    db $28, $F8, $27, $48
-
-label_6A5B::
-    db $30, $F6, $27, $48, 8, $FC, 7, $48, $10, $FE, 7, $48, $18, $EE, 7, $48
-    db $20, $EE, $27, $48
-
-label_6A6F::
-    db $28, $FE
-
-label_6A71::
-    daa
-    ld   c, b
-    jr   nc, label_6A71
-    daa
-
-label_6A76::
-    ld   l, $6A
-    ld   b, [hl]
-    ld   l, d
-    ld   e, [hl]
-    ld   l, d
-
-label_6A7C::
+func_6A7C::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     ret  nz
+
     xor  a
     ldh  [hActiveEntitySpriteVariant], a
     ldh  [hActiveEntityFlipAttribute], a
@@ -3586,33 +3574,34 @@ label_6A7C::
     ldh  [hActiveEntityVisualPosY], a
     ld   a, [$D214]
     and  a
-    jr   z, label_6AC2
+    jr   z, .jr_6AC2
     dec  a
     ld   [$D214], a
+
     ldh  a, [hFrameCounter]
     and  $07
     ld   a, [$D212]
-    jr   nz, label_6AAE
+    jr   nz, .jr_6AAE
     inc  a
     cp   $03
-    jr   nz, label_6AAE
+    jr   nz, .jr_6AAE
     xor  a
+.jr_6AAE
 
-label_6AAE::
     ld   [$D212], a
     rla
     and  $06
     ld   e, a
     ld   d, b
-    ld   hl, label_6A76
+    ld   hl, Data_6A76
     add  hl, de
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
     ld   c, $06
-    call label_3CE0
+    call RenderActiveEntitySpritesRectUsingAllOAM
 
-label_6AC2::
+.jr_6AC2
     ld   a, $48
     ldh  [hActiveEntityPosX], a
     ld   a, [wScreenShakeVertical]
@@ -3627,21 +3616,21 @@ label_6AC2::
     ld   hl, label_6976
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_6AE3
+    jr   z, .jr_6AE3
     ld   hl, label_697C
 
-label_6AE3::
+.jr_6AE3
     add  hl, de
     ld   c, [hl]
     xor  a
     ld   [wOAMNextAvailableSlot], a
-    ld   hl, label_6982
+    ld   hl, Data_6982
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_6AF4
-    ld   hl, label_69D2
+    jr   z, .jr_6AF4
+    ld   hl, Data_69D2
 
-label_6AF4::
+.jr_6AF4
     call RenderActiveEntitySpritesRect
     ret
 

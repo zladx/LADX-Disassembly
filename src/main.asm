@@ -7,6 +7,9 @@ include "constants/constants.asm"
 include "code/macros.asm"
 include "code/header.asm"
 
+; For audio
+include "code/audio_macros.asm"
+
 ; Sources
 section "Main", rom0[$0150]
 include "code/bank0.asm"
@@ -189,8 +192,10 @@ include "code/entities/anglers_tunnel_door.asm"
 
 section "bank1B",romx[$4000],bank[$1B]
 include "code/audio/music_1.asm"
-section "Music tracks section 1",romx[$5000],bank[$1B]
-include "data/music/music_tracks_data_1.asm"
+section "Music tracks section 1B/2",romx[$5000],bank[$1B] ; TODO: organize these better
+include "data/music/music_tracks_data_1b_2.asm"
+section "Music tracks section 1B/3",romx[$7100],bank[$1B]
+include "data/music/music_tracks_data_1b_3.asm"
 
 section "bank1C",romx[$4000],bank[$1C]
 db $01 ; Extra byte present in the original ROM
@@ -205,8 +210,10 @@ include "text/dialog_4.asm"
 
 section "bank1E", romx[$4000], bank[$1E]
 include "code/audio/music_2.asm"
-section "Music tracks section 2",romx[$5000],bank[$1E]
-include "data/music/music_tracks_data_2.asm"
+section "Music tracks section 1E/2",romx[$5000],bank[$1E]
+include "data/music/music_tracks_data_1e_2.asm"
+section "Music tracks section 1E/3",romx[$7000],bank[$1E]
+include "data/music/music_tracks_data_1e_3.asm"
 
 section "bank1F", romx[$4000], bank[$1F]
 include "code/audio/sfx_entry_point.asm"

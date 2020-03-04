@@ -3379,7 +3379,7 @@ label_1F69::
     or   [hl]
     ld   hl, wLinkMotionState
     or   [hl]
-    jp   nz, label_1F69_return
+    jp   nz, func_2165.return
 
     ; Update hSwordIntersectedAreaX according to Link's position and direction
     ldh  a, [hLinkDirection]
@@ -3415,7 +3415,7 @@ label_1F69::
     ; (Sanity check: if HIGH(hl) != $D7, then we're far out of bounds: return)
     ld   a, h
     cp   $D7
-    jp   nz, clearC15FAndReturn
+    jp   nz, .clearC15FAndReturn
 
     ; hScratch0 = id of room object under the sword
     ld   a, [hl]
@@ -3438,21 +3438,21 @@ label_1F69::
 
     ldh  a, [hScratch5]
     cp   $00
-    jp   z, clearC15FAndReturn
+    jp   z, .clearC15FAndReturn
     cp   $01
     jr   z, .jp_1FE6
     cp   $50
-    jp   z, clearC15FAndReturn
+    jp   z, .clearC15FAndReturn
     cp   $51
-    jp   z, clearC15FAndReturn
+    jp   z, .clearC15FAndReturn
     cp   $11
-    jp  c, clearC15FAndReturn
+    jp  c, .clearC15FAndReturn
     cp   $D4
-    jp   nc, clearC15FAndReturn
+    jp   nc, .clearC15FAndReturn
     cp   $D0
     jr   nc, .jp_1FE6
     cp   $7C
-    jp   nc, clearC15FAndReturn
+    jp   nc, .clearC15FAndReturn
 
 .jp_1FE6
     ldh  a, [hScratch0]
@@ -3462,14 +3462,14 @@ label_1F69::
     cp   $5E
     jr   z, .jp_1FF6
     cp   $D4
-    jp   nz, label_2098
+    jp   nz, .jp_2098
 
 .jp_1FF6
     ld   a, [wIsIndoor]
     and  a
 
     ld   a, e
-    jp   nz, label_2098
+    jp   nz, .jp_2098
 .notObject9AEnd
 
     ld   e, a
@@ -3477,7 +3477,7 @@ label_1F69::
     ; If Link is facing up, handle some special cases.
     ldh  a, [hLinkDirection]
     cp   DIRECTION_UP
-    jp   nz, specialCasesEnd
+    jp   nz, .specialCasesEnd
     ; Set [$C1AD] = 2
     ld   a, $02
     ld   [$C1AD], a
@@ -3485,24 +3485,24 @@ label_1F69::
     ; If A or B is pressed…
     ldh  a, [hJoypadState]
     and  J_A | J_B
-    jp   z, specialCasesEnd
+    jp   z, .specialCasesEnd
     ld   a, e
     cp   $5E
     ld   a, $8E
-    jr   z, label_2088
+    jr   z, .jr_2088
     ld   a, e
     cp   $6F
-    jr   z, label_2049
+    jr   z, .jr_2049
     cp   $D4
-    jr   z, label_2049
+    jr   z, .jr_2049
     ld   a, [wIsMarinFollowingLink]
     and  a
-    jr   z, label_2030
+    jr   z, .jr_2030
     ; Open Marin's "Do you look in people's drawers?" dialog
     call_open_dialog $278
-    jp   specialCasesEnd
+    jp   .specialCasesEnd
 
-label_2030::
+.jr_2030
     ; If no sword yet…
     ld   a, [wSwordLevel]
     and  a
@@ -3510,19 +3510,19 @@ label_2030::
     jr   nz, .noSwordEnd
     ld   e, $FF
     cp   $A3
-    jr   z, label_2046
+    jr   z, .jr_2046
 .noSwordEnd
 
     ld   e, $FC
     cp   $FA
-    jr   z, label_2046
+    jr   z, .jr_2046
     ld   e, $FD
 
-label_2046::
+.jr_2046
     ld   a, e
-    jr   label_208E
+    jr   .jr_208E
 
-label_2049::
+.jr_2049
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
@@ -3534,16 +3534,16 @@ label_2049::
     ld   e, a
     ld   a, [hl]
     cp   $A9
-    jr   nz, label_2066
+    jr   nz, .jr_2066
     bit  0, e
-    jr   z, label_2066
+    jr   z, .jr_2066
     ld   a, $AF
 
-label_2066::
+.jr_2066
     cp   $AF
-    jr   nz, label_2080
+    jr   nz, .jr_2080
     bit  0, e
-    jr   nz, label_2080
+    jr   nz, .jr_2080
     ldh  a, [hSwordIntersectedAreaX]
     swap a
     and  $0F
@@ -3552,71 +3552,72 @@ label_2066::
     and  $F0
     or   e
     ld   [$D473], a
-    jp   specialCasesEnd
+    jp   .specialCasesEnd
 
-label_2080::
+.jr_2080
     cp   $83
-    jr   z, label_208E
+    jr   z, .jr_208E
     cp   $2D
-    jr   z, label_2093
+    jr   z, .jr_2093
 
-label_2088::
+.jr_2088
     call OpenDialogInTable1
-    jp   specialCasesEnd
+    jp   .specialCasesEnd
 
-label_208E::
+.jr_208E
     call OpenDialog
-    jr   specialCasesEnd
+    jr   .specialCasesEnd
 
-label_2093::
+.jr_2093
     call OpenDialogInTable2
-    jr   specialCasesEnd
+    jr   .specialCasesEnd
 
-label_2098::
+.jp_2098
 
     ; When throwing a pot at a chest in the right room, open the chest
     cp   OBJECT_CHEST_CLOSED
-    jr   nz, specialCasesEnd
+    jr   nz, .specialCasesEnd
     ld   a, [wRoomEvent]
     and  EVENT_TRIGGER_MASK
     cp   TRIGGER_THROW_POT_AT_CHEST
-    jr   z, specialCasesEnd
+    jr   z, .specialCasesEnd
     ldh  a, [hLinkDirection]
     cp   $02
-    jr   nz, specialCasesEnd
+    jr   nz, .specialCasesEnd
     ld   [$C1AD], a
     ldh  a, [hJoypadState]
     and  $30
-    jr   z, specialCasesEnd
+    jr   z, .specialCasesEnd
     ldh  a, [hIsSideScrolling]
     and  a
     jr   nz, .label_20BF
     ldh  a, [hLinkDirection]
     cp   $02
-    jr   nz, specialCasesEnd
+    jr   nz, .specialCasesEnd
 
 .label_20BF
     callsb func_014_5900
     callsb SpawnChestWithItem
-specialCasesEnd:
+
+.specialCasesEnd
 
     ld   a, [wAButtonSlot]
     cp   INVENTORY_POWER_BRACELET
-    jr   nz, label_20DD
+    jr   nz, .jr_20DD
     ldh  a, [hPressedButtonsMask]
     and  $20
-    jr   nz, label_20EC
+    jr   nz, .jr_20EC
     ret
 
-label_20DD::
+.jr_20DD
     ld   a, [wBButtonSlot]
     cp   INVENTORY_POWER_BRACELET
-    jp   nz, label_1F69_return
+    jp   nz, func_2165.return
     ldh  a, [hPressedButtonsMask]
     and  $10
-    jp   z, label_1F69_return
+    jp   z, func_2165.return
 
-label_20EC::
+.jr_20EC
     callsb label_002_48B0
     ld   a, $01
     ldh  [hLinkInteractiveMotionBlocked], a
@@ -3632,7 +3633,7 @@ label_20EC::
     add  hl, de
     ldh  a, [hPressedButtonsMask]
     and  [hl]
-    jr   z, clearC15FAndReturn
+    jr   z, .clearC15FAndReturn
     ld   hl, data_1F59
     add  hl, de
     ld   a, [hl]
@@ -3659,34 +3660,34 @@ label_20EC::
     ldh  [$FFE5], a
     ldh  a, [hScratch0]
     cp   $8E
-    jr   z, label_2153
+    jr   z, .jr_2153
     cp   $20
-    jr   z, label_2153
+    jr   z, .jr_2153
     ld   a, [wIsIndoor]
     and  a
     jr   nz, .return
     ldh  a, [hScratch0]
     cp   $5C
-    jr   z, label_2161
+    jr   z, .jr_2161
 
 .return
     ret
 
-clearC15FAndReturn::
+.clearC15FAndReturn
     xor  a
     ld   [$C15F], a
     ret
 
-label_2153::
-    call label_2165
+.jr_2153
+    call func_2165
     callsb func_014_50C3
     jp   ReloadSavedBank
 
-label_2161::
+.jr_2161
     ld   a, $01
     ldh  [$FFE5], a
 
-label_2165::
+func_2165::
     ldh  a, [hScratch1]
     ld   e, a
     ldh  a, [hScratch0]
@@ -3696,7 +3697,7 @@ label_2165::
     ld   [$C15D], a
     jp   label_2183
 
-label_1F69_return::
+.return
     ret
 
 func_014_5526_trampoline::

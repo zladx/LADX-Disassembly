@@ -503,7 +503,7 @@ UpdatePaletteEffectForInteractiveObjects::
     and  $03                                      ; $4C88: $E6 $03
     add  e                                        ; $4C8A: $83
     ld   e, a                                     ; $4C8B: $5F
-    ld   hl, $4C20                                ; $4C8C: $21 $20 $4C
+    ld   hl, Data_014_4C20                        ; $4C8C: $21 $20 $4C
     add  hl, de                                   ; $4C8F: $19
     ld   a, [hl]                                  ; $4C90: $7E
     ld   [wBGPalette], a                          ; $4C91: $EA $97 $DB
@@ -783,6 +783,7 @@ UpdateEntityTimers::
     ldh  [hActiveEntityFlipAttribute], a          ; $4DEE: $E0 $ED
     ret                                           ; $4DF0: $C9
 
+; Array of 5-bytes warp data
 Data_014_4DF1::
     db   $01, $00, $17, $50, $7C, $01, $01, $36, $50, $7C, $01, $02, $52, $50, $7C, $01
     db   $03, $7A, $50, $7C, $01, $04, $A1, $50, $7C, $01, $05, $D4, $50, $7C, $01, $06
@@ -828,12 +829,12 @@ jr_014_4E6F:
     ld   e, $05                                   ; $4E7C: $1E $05
     ld   bc, wWarpStructs                         ; $4E7E: $01 $01 $D4
 
-jr_014_4E81:
+.loop
     ld   a, [hl+]                                 ; $4E81: $2A
     ld   [bc], a                                  ; $4E82: $02
     inc  bc                                       ; $4E83: $03
     dec  e                                        ; $4E84: $1D
-    jr   nz, jr_014_4E81                          ; $4E85: $20 $FA
+    jr   nz, .loop                                ; $4E85: $20 $FA
 
     ret                                           ; $4E87: $C9
 
@@ -2069,11 +2070,11 @@ GetChestsStatusForRoom::
     jr   nz, jr_014_5891                          ; $5888: $20 $07
 
     ld   d, $00                                   ; $588A: $16 $00
-    ld   hl, $4860                                ; $588C: $21 $60 $48
+    ld   hl, ColorDungeonChestsTable              ; $588C: $21 $60 $48
     jr   jr_014_5894                              ; $588F: $18 $03
 
 jr_014_5891:
-    ld   hl, DungeonChestsTable                        ; $5891: $21 $60 $45
+    ld   hl, DungeonChestsTable                   ; $5891: $21 $60 $45
 
 jr_014_5894:
     add  hl, de                                   ; $5894: $19
@@ -2176,7 +2177,7 @@ jr_014_5914:
     inc  d                                        ; $591C: $14
 
 jr_014_591D:
-    ld   hl, DungeonChestsTable                        ; $591D: $21 $60 $45
+    ld   hl, DungeonChestsTable                   ; $591D: $21 $60 $45
 
 jr_014_5920:
     add  hl, de                                   ; $5920: $19

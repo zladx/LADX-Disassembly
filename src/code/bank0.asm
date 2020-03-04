@@ -3523,6 +3523,7 @@ label_1F69::
     jr   .jr_208E
 
 .jr_2049
+    ; de = [hMapRoom]
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00

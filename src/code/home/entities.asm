@@ -2,10 +2,15 @@
 ; Code for the entities system.
 ;
 
-label_3925::
+; Tell if Bow-Wow can eat an entity of the given type.
+; Inputs:
+;   de   entity type
+; Return:
+;   a    value read from BowWowEatableEntitiesTable
+CanBowWowEatEntity::
     ld   a, $14
     ld   [MBC3SelectBank], a
-    ld   hl, Data_014_5218
+    ld   hl, BowWowEatableEntitiesTable
     add  hl, de
     ld   a, [hl]
     ld   hl, MBC3SelectBank

@@ -470,7 +470,7 @@ jr_005_42B9:
     ld   hl, wEntitiesTypeTable                   ; $42D2: $21 $A0 $C3
     add  hl, de                                   ; $42D5: $19
     ld   e, [hl]                                  ; $42D6: $5E
-    call label_3925                               ; $42D7: $CD $25 $39
+    call CanBowWowEatEntity                               ; $42D7: $CD $25 $39
     pop  de                                       ; $42DA: $D1
     and  a                                        ; $42DB: $A7
     jr   z, jr_005_4323                           ; $42DC: $28 $45

@@ -68,8 +68,8 @@ all_symbols = File.readlines(sym_file)
 
 # Augment the symbols with the raw addresses read from the source code
 missing_symbols = File.readlines(asm_file)
-  .select { |l| l =~ /ld   (hl|de), \$[4-7][0-9A-Z]{3}/ }
-  .map { |l| l.match(/(hl|de), \$([4-7][0-9A-Z]{3})/)[2].to_i(16) }
+  .select { |l| l =~ /ld   (hl|de|bc), \$[4-7][0-9A-Z]{3}/ }
+  .map { |l| l.match(/(hl|de|bc), \$([4-7][0-9A-Z]{3})/)[2].to_i(16) }
   .map { |offset| LocalAddress.new(bank_number, offset) }
   .map { |address| Mgbdis::Symbol.from_address(address) }
 

@@ -1123,6 +1123,7 @@ UpdateEntityTimers::
     ldh  [hActiveEntityFlipAttribute], a          ; $4DEE: $E0 $ED
     ret                                           ; $4DF0: $C9
 
+Data_014_4DF1::
     ld   bc, $1700                                ; $4DF1: $01 $00 $17
     ld   d, b                                     ; $4DF4: $50
     ld   a, h                                     ; $4DF5: $7C
@@ -1180,9 +1181,13 @@ UpdateEntityTimers::
     nop                                           ; $4E39: $00
     nop                                           ; $4E3A: $00
     nop                                           ; $4E3B: $00
+
+Data_014_4E3C::
     ld   bc, $12FF                                ; $4E3C: $01 $FF $12
     ld   d, b                                     ; $4E3F: $50
     ld   e, h                                     ; $4E40: $5C
+
+Data_014_4E41::
     dec  sp                                       ; $4E41: $3B
     ld   a, [hl-]                                 ; $4E42: $3A
     add  hl, sp                                   ; $4E43: $39
@@ -1756,6 +1761,7 @@ func_014_50C3::
 
     ret                                           ; $5117: $C9
 
+Data_014_5118::
     inc  c                                        ; $5118: $0C
     inc  c                                        ; $5119: $0C
     inc  c                                        ; $511A: $0C

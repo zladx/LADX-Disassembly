@@ -2837,12 +2837,12 @@ LinkMotionMapFadeOutHandler::
     rl   d
     sla  e
     rl   d
-    ld   hl, $4220
+    ld   hl, MapLayout0
     add  hl, de
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    ld   hl, $44E0
+    ld   hl, MapLayout11
     jr   .label_193C
 .colorDungeonEnd
 
@@ -2851,7 +2851,7 @@ LinkMotionMapFadeOutHandler::
     ld   a, [$DB6B]
     and  $04
     jr   z, .label_193C
-    ld   hl, $4520
+    ld   hl, MapLayout12
 
 .label_193C
     ld   e, $00
@@ -2904,7 +2904,7 @@ LinkMotionMapFadeOutHandler::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .label_1993
-    ld   hl, $4E3C
+    ld   hl, Data_014_4E3C
     jr   .label_19A4
 
 .label_1993
@@ -2916,7 +2916,7 @@ LinkMotionMapFadeOutHandler::
     add  a, e
     ld   e, a
     ld   d, $00
-    ld   hl, $4DF1
+    ld   hl, Data_014_4DF1
     add  hl, de
 
 .label_19A4
@@ -2933,7 +2933,7 @@ LinkMotionMapFadeOutHandler::
 .label_19B7
     ld   e, a
     ld   d, $00
-    ld   hl, $4E41
+    ld   hl, Data_014_4E41
     add  hl, de
     ld   a, [hl]
 
@@ -3528,7 +3528,7 @@ label_2049::
     ld   d, $00
     ld   a, $14
     ld   [MBC3SelectBank], a
-    ld   hl, $5118
+    ld   hl, Data_014_5118
     add  hl, de
     ld   a, [wOcarinaSongFlags]
     ld   e, a

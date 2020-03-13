@@ -3415,18 +3415,12 @@ jr_017_6271:
     ld   [wIsFileSelectionArrowShifted], a        ; $627E: $EA $00 $D0
     call func_017_7971                            ; $6281: $CD $71 $79
     ld   a, [wCreditsSubscene]                    ; $6284: $FA $0E $D0
-    rst  $00                                      ; $6287: $C7
-    sub  d                                        ; $6288: $92
-    ld   h, d                                     ; $6289: $62
-    sbc  [hl]                                     ; $628A: $9E
-    ld   h, d                                     ; $628B: $62
-    cp   h                                        ; $628C: $BC
-    ld   h, e                                     ; $628D: $63
-    db   $76                                      ; $628E: $76
-    ld   h, h                                     ; $628F: $64
-    ret  c                                        ; $6290: $D8
-
-    ld   h, h                                     ; $6291: $64
+    JP_TABLE                                      ; $6287
+._00 dw func_017_6292                             ; $6288
+._01 dw func_017_629E                             ; $628A
+._02 dw func_017_63BC                             ; $628C
+._03 dw func_017_6476                             ; $628E
+._04 dw func_017_64D8                             ; $6290
 
 func_017_6292::
     ld   a, $18                                   ; $6292: $3E $18
@@ -3851,7 +3845,7 @@ jr_017_6808:
 CreditsLinkSeatedOnLogHandler::
     call AnimateEntitiesAndRestoreBank17          ; $6809: $CD $ED $0E
     ld   a, [wCreditsSubscene]                    ; $680C: $FA $0E $D0
-    rst  $00                                      ; $680F: $C7
+    JP_TABLE                                      ; $680F: $C7
 ._00 dw LinkSeatedOnLog0Handler                   ; $6810
 ._01 dw LinkSeatedOnLog1Handler                   ; $6812
 ._02 dw LinkSeatedOnLog2Handler                   ; $6814
@@ -6112,15 +6106,11 @@ func_017_7C1B::
     and  $03                                      ; $7C3D: $E6 $03
     call SetEntitySpriteVariant                   ; $7C3F: $CD $0C $3B
     ldh  a, [hActiveEntityState]                  ; $7C42: $F0 $F0
-    rst  $00                                      ; $7C44: $C7
-    ld   c, l                                     ; $7C45: $4D
-    ld   a, h                                     ; $7C46: $7C
-    ld   a, e                                     ; $7C47: $7B
-    ld   a, h                                     ; $7C48: $7C
-    and  l                                        ; $7C49: $A5
-    ld   a, h                                     ; $7C4A: $7C
-    or   a                                        ; $7C4B: $B7
-    ld   a, h                                     ; $7C4C: $7C
+    JP_TABLE                                      ; $7C44
+._00 dw func_017_7C4D                             ; $7C45
+._01 dw func_017_7C7B                             ; $7C47
+._02 dw func_017_7CA5                             ; $7C49
+._03 dw func_017_7CB7                             ; $7C4B
 
 func_017_7C4D::
     call GetEntityTransitionCountdown             ; $7C4D: $CD $05 $0C

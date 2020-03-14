@@ -97,20 +97,54 @@ func_020_4518::
     pop  hl                                       ; $4529: $E1
     ret                                           ; $452A: $C9
 
+; Contains pointers to wRequests data.
+; (The requests themselves load data in bank 8.)
 BGMapToLoadAdjustementTable::
-    db   $00, $00, $CC, $56, $48, $67, $36, $63  ; $452B |...VHg6c|
-    db   $28, $63, $4D, $64, $89, $65, $51, $D6  ; $4533 |(cMd.eQ.|
-    db   $E9, $62, $C9, $67, $8F, $69, $F6, $68  ; $453B |.b.g.i.h|
-    db   $60, $66, $6D, $6A, $EE, $6A, $80, $6D  ; $4543 |`fmj.j.m|
-    db   $8B, $6F, $0A, $71, $22, $74, $E3, $75  ; $454B |.o.q"t.u|
-    db   $A8, $62, $83, $72, $8C, $57, $F5, $5A  ; $4553 |.b.r.W.Z|
-    db   $C8, $5B, $0C, $5D, $5B, $5E, $47, $5F  ; $455B |.[.][^G_|
-    db   $04, $60, $04, $60, $9A, $4E, $50, $50  ; $4563 |.`.`.NPP|
-    db   $EF, $51, $8E, $53, $2D, $55, $81, $77  ; $456B |.Q.S-U.w|
-    db   $D4, $4D, $37, $6C                      ; $4573 |.M7l|
+    dw   $0000  ; disabled
+    dw   $56CC  ; Data_BGCopyRequest01_56CC
+    dw   $6748  ; Data_BGCopyRequest02_6748
+    dw   $6336  ; Data_BGCopyRequest03_6336
+    dw   $6328  ; Data_BGCopyRequest04_6328
+    dw   $644D  ; Data_BGCopyRequest05_644D
+    dw   $6589  ; Data_BGCopyRequest06_6589
+    dw   $D651  ; Data_BGCopyRequest07_D651
+    dw   $62E9  ; Data_BGCopyRequest08_62E9
+    dw   $67C9  ; Data_BGCopyRequest09_67C9
+    dw   $698F  ; Data_BGCopyRequest0A_698F
+    dw   $68F6  ; Data_BGCopyRequest0B_68F6
+    dw   $6660  ; Data_BGCopyRequest0C_6660
+    dw   $6A6D  ; Data_BGCopyRequest0D_6A6D
+    dw   $6AEE  ; Data_BGCopyRequest0E_6AEE
+    dw   $6D80  ; Data_BGCopyRequest0F_6D80
+    dw   $6F8B  ; Data_BGCopyRequest10_6F8B
+    dw   $710A  ; Data_BGCopyRequest11_710A
+    dw   $7422  ; Data_BGCopyRequest12_7422
+    dw   $75E3  ; Data_BGCopyRequest13_75E3
+    dw   $62A8  ; Data_BGCopyRequest14_62A8
+    dw   $7283  ; Data_BGCopyRequest15_7283
+    dw   $578C  ; Data_BGCopyRequest16_578C
+    dw   $5AF5  ; Data_BGCopyRequest17_5AF5
+    dw   $5BC8  ; Data_BGCopyRequest18_5BC8
+    dw   $5D0C  ; Data_BGCopyRequest19_5D0C
+    dw   $5E5B  ; Data_BGCopyRequest1A_5E5B
+    dw   $5F47  ; Data_BGCopyRequest1B_5F47
+    dw   $6004  ; Data_BGCopyRequest1C_6004
+    dw   $6004  ; Data_BGCopyRequest1D_6004
+    dw   $4E9A  ; Data_BGCopyRequest1E_4E9A
+    dw   $5050  ; Data_BGCopyRequest1F_5050
+    dw   $51EF  ; Data_BGCopyRequest20_51EF
+    dw   $538E  ; Data_BGCopyRequest21_538E
+    dw   $552D  ; Data_BGCopyRequest22_552D
+    dw   $7781  ; Data_BGCopyRequest23_7781
+    dw   $4DD4  ; Data_BGCopyRequest24_4DD4
+    dw   $6C37  ; Data_BGCopyRequest25_6C37
 
-; Manipulate wBGMapToLoad
-func_020_4577::
+; Retrieve the address of a wRequest for loading a given background.
+; Input:
+;   wBGMapToLoad
+; Returns:
+;   de   an address to a wRequest for loading BG data
+GetBGCopyRequest::
     ld   hl, BGMapToLoadAdjustementTable          ; $4577: $21 $2B $45
     ld   b, $00                                   ; $457A: $06 $00
     ld   a, [wBGMapToLoad]                        ; $457C: $FA $FF $D6

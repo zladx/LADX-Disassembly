@@ -16,72 +16,265 @@ func_020_4303::
     ld   [$D45E], a                               ; $431E: $EA $5E $D4
     ret                                           ; $4321: $C9
 
-; Entity id table?
+; Table indexed by entity id
+; Contains pointers to functions in bank 3
 data_020_4322::
-    db   $4C, $4B, $4C, $4B, $4C, $4B, $4C, $4B  ; $4322 |LKLKLKLK|
-    db   $4C, $4B, $4C, $4B, $6E, $51, $6D, $50  ; $432A |LKLKnQmP|
-    db   $4C, $4B, $AF, $4F, $4C, $4B, $AF, $4F  ; $4332 |LK.OLK.O|
-    db   $4C, $4B, $4C, $4B, $5C, $4B, $4C, $4B  ; $433A |LKLK\KLK|
-    db   $B5, $4F, $B5, $4F, $B5, $4F, $D7, $59  ; $4342 |.O.O.O.Y|
-    db   $E2, $4E, $A8, $4E, $CE, $4E, $C4, $4E  ; $434A |.N.N.N.N|
-    db   $4C, $4B, $4C, $4B, $4C, $4B, $53, $49  ; $4352 |LKLKLKSI|
-    db   $4C, $4B, $D7, $4E, $12, $3B, $12, $3B  ; $435A |LK.N.;.;|
-    db   $4C, $4B, $D7, $4E, $4C, $4B, $12, $3B  ; $4362 |LK.NLK.;|
-    db   $4C, $4B, $44, $4C, $44, $4C, $4C, $4B  ; $436A |LKDLDLLK|
-    db   $4C, $4B, $AB, $3D, $4C, $4B, $4C, $4B  ; $4372 |LK.=LKLK|
-    db   $4C, $4B, $1E, $4F, $7A, $4F, $7A, $4F  ; $437A |LK.OzOzO|
-    db   $2D, $4F, $78, $4A, $7A, $4F, $7A, $4F  ; $4382 |-OxJzOzO|
-    db   $7A, $4F, $56, $4B, $7A, $4F, $7A, $4F  ; $438A |zOVKzOzO|
-    db   $7A, $4F, $A1, $4F, $56, $4B, $1E, $4F  ; $4392 |zO.OVK.O|
-    db   $1E, $4F, $FB, $4E, $80, $4A, $CE, $4A  ; $439A |.O.N.J.J|
-    db   $42, $4B, $73, $4A, $4C, $4B, $A1, $4F  ; $43A2 |BKsJLK.O|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $43AA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $1F, $4C, $4C, $4B  ; $43B2 |VKVK.LLK|
-    db   $4C, $4B, $43, $4B, $4C, $4B, $35, $4B  ; $43BA |LKCKLK5K|
-    db   $4C, $4B, $4C, $4B, $4C, $4B, $4C, $4B  ; $43C2 |LKLKLKLK|
-    db   $35, $4B, $4C, $4B, $4C, $4B, $4C, $4B  ; $43CA |5KLKLKLK|
-    db   $4C, $4B, $B6, $3D, $C1, $3D, $CC, $3D  ; $43D2 |LK.=.=.=|
-    db   $D7, $3D, $E2, $3D, $4C, $4B, $4C, $4B  ; $43DA |.=.=LKLK|
-    db   $ED, $3D, $70, $4F, $F8, $3D, $03, $3E  ; $43E2 |.=pO.=.>|
-    db   $57, $4B, $0E, $3E, $4C, $4B, $56, $4B  ; $43EA |WK.>LKVK|
-    db   $56, $4B, $D4, $49, $1B, $4B, $56, $4B  ; $43F2 |VK.I.KVK|
-    db   $56, $4B, $5B, $4A, $56, $4B, $56, $4B  ; $43FA |VK[JVKVK|
-    db   $2F, $4B, $19, $4A, $27, $4A, $2F, $4B  ; $4402 |/K.J'J/K|
-    db   $2F, $4B, $2F, $4B, $28, $4A, $2F, $4B  ; $440A |/K/K(J/K|
-    db   $56, $4B, $0E, $4B, $56, $4B, $2F, $4B  ; $4412 |VK.KVK/K|
-    db   $83, $4F, $56, $4B, $56, $4B, $56, $4B  ; $441A |.OVKVKVK|
-    db   $7C, $49, $56, $4B, $56, $4B, $AD, $49  ; $4422 ||IVKVK.I|
-    db   $34, $4A, $56, $4B, $F4, $49, $E2, $49  ; $442A |4JVK.I.I|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $4432 |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $83, $4F, $56, $4B  ; $443A |VKVK.OVK|
-    db   $56, $4B, $C8, $49, $56, $4B, $56, $4B  ; $4442 |VK.IVKVK|
-    db   $56, $4B, $80, $49, $56, $4B, $56, $4B  ; $444A |VK.IVKVK|
-    db   $26, $49, $56, $4B, $56, $4B, $56, $4B  ; $4452 |&IVKVKVK|
-    db   $A8, $4E, $56, $4B, $C2, $49, $56, $4B  ; $445A |.NVK.IVK|
-    db   $56, $4B, $3D, $49, $56, $4B, $56, $4B  ; $4462 |VK=IVKVK|
-    db   $43, $49, $56, $4B, $56, $4B, $56, $4B  ; $446A |CIVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $4472 |VKVKVKVK|
-    db   $56, $4B, $B5, $49, $4C, $4B, $68, $4F  ; $447A |VK.ILKhO|
-    db   $56, $4B, $56, $4B, $56, $4B, $83, $4F  ; $4482 |VKVKVK.O|
-    db   $74, $49, $56, $4B, $56, $4B, $56, $4B  ; $448A |tIVKVKVK|
-    db   $B1, $49, $56, $4B, $65, $49, $73, $49  ; $4492 |.IVKeIsI|
-    db   $83, $4F, $56, $4B, $56, $4B, $56, $4B  ; $449A |.OVKVKVK|
-    db   $56, $4B, $5A, $49, $34, $49, $56, $4B  ; $44A2 |VKZI4IVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44AA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $61, $4B  ; $44B2 |VKVKVKaK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44BA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44C2 |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44CA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $A8, $4E  ; $44D2 |VKVKVK.N|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44DA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44E2 |VKVKVKVK|
-    db   $56, $4B, $E6, $49, $A6, $49, $56, $4B  ; $44EA |VK.I.IVK|
-    db   $56, $4B, $4C, $4B, $4C, $4B, $4C, $4B  ; $44F2 |VKLKLKLK|
-    db   $81, $4B, $81, $4B, $81, $4B, $8F, $4B  ; $44FA |.K.K.K.K|
-    db   $9A, $4B, $A6, $4B, $C0, $4B, $B8, $4B  ; $4502 |.K.K.K.K|
-    db   $DC, $4B, $56, $4B, $EB, $4B, $01, $4C  ; $450A |.KVK.K.L|
-    db   $2D, $4C, $CB, $4B, $56, $4B            ; $4512 |-L.KVK|
+._00 dw   func_003_4B4C
+._01 dw   func_003_4B4C
+._02 dw   func_003_4B4C
+._03 dw   func_003_4B4C
+._04 dw   func_003_4B4C
+._05 dw   func_003_4B4C
+._06 dw   func_003_516E
+._07 dw   func_003_506D
+._08 dw   func_003_4B4C
+._09 dw   func_003_4FAF
+._0A dw   func_003_4B4C
+._0B dw   func_003_4FAF
+._0C dw   func_003_4B4C
+._0D dw   func_003_4B4C
+._0E dw   func_003_4B5C
+._0F dw   func_003_4B4C
+._10 dw   func_003_4FB5
+._11 dw   func_003_4FB5
+._12 dw   func_003_4FB5
+._13 dw   func_003_59D7
+._14 dw   func_003_4EE2
+._15 dw   func_003_4EA8
+._16 dw   func_003_4ECE
+._17 dw   func_003_4EC4
+._18 dw   func_003_4B4C
+._19 dw   func_003_4B4C
+._1A dw   func_003_4B4C
+._1B dw   func_003_4953
+._1C dw   func_003_4B4C
+._1D dw   func_003_4ED7
+._1E dw   IncrementEntityState
+._1F dw   IncrementEntityState
+._20 dw   func_003_4B4C
+._21 dw   func_003_4ED7
+._22 dw   func_003_4B4C
+._23 dw   IncrementEntityState
+._24 dw   func_003_4B4C
+._25 dw   func_003_4C44
+._26 dw   func_003_4C44
+._27 dw   func_003_4B4C
+._28 dw   func_003_4B4C
+._29 dw   label_3DAB
+._2A dw   func_003_4B4C
+._2B dw   func_003_4B4C
+._2C dw   func_003_4B4C
+._2D dw   func_003_4F1E
+._2E dw   func_003_4F7A
+._2F dw   func_003_4F7A
+._30 dw   func_003_4F2D
+._31 dw   func_003_4A78
+._32 dw   func_003_4F7A
+._33 dw   func_003_4F7A
+._34 dw   func_003_4F7A
+._35 dw   func_003_4B56
+._36 dw   func_003_4F7A
+._37 dw   func_003_4F7A
+._38 dw   func_003_4F7A
+._39 dw   func_003_4FA1
+._3A dw   func_003_4B56
+._3B dw   func_003_4F1E
+._3C dw   func_003_4F1E
+._3D dw   func_003_4EFB
+._3E dw   func_003_4A80
+._3F dw   func_003_4ACE
+._40 dw   func_003_4B42
+._41 dw   func_003_4A73
+._42 dw   func_003_4B4C
+._43 dw   func_003_4FA1
+._44 dw   func_003_4B56
+._45 dw   func_003_4B56
+._46 dw   func_003_4B56
+._47 dw   func_003_4B56
+._48 dw   func_003_4B56
+._49 dw   func_003_4B56
+._4A dw   func_003_4C1F
+._4B dw   func_003_4B4C
+._4C dw   func_003_4B4C
+._4D dw   func_003_4B43
+._4E dw   func_003_4B4C
+._4F dw   func_003_4B35
+._50 dw   func_003_4B4C
+._51 dw   func_003_4B4C
+._52 dw   func_003_4B4C
+._53 dw   func_003_4B4C
+._54 dw   func_003_4B35
+._55 dw   func_003_4B4C
+._56 dw   func_003_4B4C
+._57 dw   func_003_4B4C
+._58 dw   func_003_4B4C
+._59 dw   label_3DB6
+._5A dw   label_3DC1
+._5B dw   label_3DCC
+._5C dw   label_3DD7
+._5D dw   label_3DE2
+._5E dw   func_003_4B4C
+._5F dw   func_003_4B4C
+._60 dw   label_3DED
+._61 dw   func_003_4F70
+._62 dw   label_3DF8
+._63 dw   label_3E03
+._64 dw   func_003_4B57
+._65 dw   Entity67Handler_trampoline
+._66 dw   func_003_4B4C
+._67 dw   func_003_4B56
+._68 dw   func_003_4B56
+._69 dw   func_003_49D4
+._6A dw   func_003_4B1B
+._6B dw   func_003_4B56
+._6C dw   func_003_4B56
+._6D dw   func_003_4A5B
+._6E dw   func_003_4B56
+._6F dw   func_003_4B56
+._70 dw   func_003_4B2F
+._71 dw   func_003_4A19
+._72 dw   func_003_4A27
+._73 dw   func_003_4B2F
+._74 dw   func_003_4B2F
+._75 dw   func_003_4B2F
+._76 dw   func_003_4A28
+._77 dw   func_003_4B2F
+._78 dw   func_003_4B56
+._79 dw   func_003_4B0E
+._7A dw   func_003_4B56
+._7B dw   func_003_4B2F
+._7C dw   func_003_4F83
+._7D dw   func_003_4B56
+._7E dw   func_003_4B56
+._7F dw   func_003_4B56
+._80 dw   func_003_497C
+._81 dw   func_003_4B56
+._82 dw   func_003_4B56
+._83 dw   func_003_49AD
+._84 dw   func_003_4A34
+._85 dw   func_003_4B56
+._86 dw   func_003_49F4
+._87 dw   func_003_49E2
+._88 dw   func_003_4B56
+._89 dw   func_003_4B56
+._8A dw   func_003_4B56
+._8B dw   func_003_4B56
+._8C dw   func_003_4B56
+._8D dw   func_003_4B56
+._8E dw   func_003_4F83
+._8F dw   func_003_4B56
+._90 dw   func_003_4B56
+._91 dw   func_003_49C8
+._92 dw   func_003_4B56
+._93 dw   func_003_4B56
+._94 dw   func_003_4B56
+._95 dw   func_003_4980
+._96 dw   func_003_4B56
+._97 dw   func_003_4B56
+._98 dw   func_003_4926
+._99 dw   func_003_4B56
+._9A dw   func_003_4B56
+._9B dw   func_003_4B56
+._9C dw   func_003_4EA8
+._9D dw   func_003_4B56
+._9E dw   func_003_49C2
+._9F dw   func_003_4B56
+._A0 dw   func_003_4B56
+._A1 dw   func_003_493D
+._A2 dw   func_003_4B56
+._A3 dw   func_003_4B56
+._A4 dw   func_003_4943
+._A5 dw   func_003_4B56
+._A6 dw   func_003_4B56
+._A7 dw   func_003_4B56
+._A8 dw   func_003_4B56
+._A9 dw   func_003_4B56
+._AA dw   func_003_4B56
+._AB dw   func_003_4B56
+._AC dw   func_003_4B56
+._AD dw   func_003_49B5
+._AE dw   func_003_4B4C
+._AF dw   func_003_4F68
+._B0 dw   func_003_4B56
+._B1 dw   func_003_4B56
+._B2 dw   func_003_4B56
+._B3 dw   func_003_4F83
+._B4 dw   func_003_4974
+._B5 dw   func_003_4B56
+._B6 dw   func_003_4B56
+._B7 dw   func_003_4B56
+._B8 dw   func_003_49B1
+._B9 dw   func_003_4B56
+._BA dw   func_003_4965
+._BB dw   func_003_4973
+._BC dw   func_003_4F83
+._BD dw   func_003_4B56
+._BE dw   func_003_4B56
+._BF dw   func_003_4B56
+._C0 dw   func_003_4B56
+._C1 dw   func_003_495A
+._C2 dw   func_003_4934
+._C3 dw   func_003_4B56
+._C4 dw   func_003_4B56
+._C5 dw   func_003_4B56
+._C6 dw   func_003_4B56
+._C7 dw   func_003_4B56
+._C8 dw   func_003_4B56
+._C9 dw   func_003_4B56
+._CA dw   func_003_4B56
+._CB dw   func_003_4B61
+._CC dw   func_003_4B56
+._CD dw   func_003_4B56
+._CE dw   func_003_4B56
+._CF dw   func_003_4B56
+._D0 dw   func_003_4B56
+._D1 dw   func_003_4B56
+._D2 dw   func_003_4B56
+._D3 dw   func_003_4B56
+._D4 dw   func_003_4B56
+._D5 dw   func_003_4B56
+._D6 dw   func_003_4B56
+._D7 dw   func_003_4B56
+._D8 dw   func_003_4B56
+._D9 dw   func_003_4B56
+._DA dw   func_003_4B56
+._DB dw   func_003_4EA8
+._DC dw   func_003_4B56
+._DD dw   func_003_4B56
+._DE dw   func_003_4B56
+._DF dw   func_003_4B56
+._E0 dw   func_003_4B56
+._E1 dw   func_003_4B56
+._E2 dw   func_003_4B56
+._E3 dw   func_003_4B56
+._E4 dw   func_003_4B56
+._E5 dw   func_003_49E6
+._E6 dw   func_003_49A6
+._E7 dw   func_003_4B56
+._E8 dw   func_003_4B56
+._E9 dw   func_003_4B4C
+._EA dw   func_003_4B4C
+._EB dw   func_003_4B4C
+._EC dw   func_003_4B81
+._ED dw   func_003_4B81
+._EE dw   func_003_4B81
+._EF dw   func_003_4B8F
+._F0 dw   func_003_4B9A
+._F1 dw   func_003_4BA6
+._F2 dw   func_003_4BC0
+._F3 dw   func_003_4BB8
+._F4 dw   func_003_4BDC
+._F5 dw   func_003_4B56
+._F6 dw   func_003_4BEB
+._F7 dw   func_003_4C01
+._F8 dw   func_003_4C2D
+._F9 dw   func_003_4BCB
+._FA dw   func_003_4B56
 
+; Input:
+;   hActiveEntityType
+; Returns:
+;   de   an address
 func_020_4518::
     ldh  a, [hActiveEntityType]                     ; $4518: $F0 $EB
     ld   e, a                                     ; $451A: $5F
@@ -158,6 +351,7 @@ GetBGCopyRequest::
     ld   d, a                                     ; $4587: $57
     ret                                           ; $4588: $C9
 
+; Pointers table?
 data_020_4589::
     db   $4C, $62, $63, $66, $6B, $63, $65, $64  ; $4589 |Lbcfkced|
     db   $60, $4C, $4D, $4C, $4C, $4C, $4E, $4E  ; $4591 |`LMLLLNN|
@@ -173,6 +367,7 @@ data_020_4589::
     db   $00, $00, $00, $00, $00, $00, $7C, $7B  ; $45E1 |......|{|
     db   $7A                                     ; $45E9 |^-^-b5b|
 
+; Pointers table?
 data_020_45EA::
     db   $5E, $2D, $5E, $2D, $62, $35, $62       ; $45EA |^-^-b5b|
     db   $35, $5E, $2D, $5E, $2D, $62, $35, $62  ; $45F1 |5^-^-b5b|

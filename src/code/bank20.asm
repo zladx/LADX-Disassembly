@@ -271,11 +271,12 @@ data_020_4322::
 ._F9 dw   func_003_4BCB
 ._FA dw   func_003_4B56
 
+; Retrieve the address of the initialization handler of a given entity.
 ; Input:
 ;   hActiveEntityType
 ; Returns:
 ;   de   an address
-func_020_4518::
+GetEntityInitHandler::
     ldh  a, [hActiveEntityType]                     ; $4518: $F0 $EB
     ld   e, a                                     ; $451A: $5F
     ld   d, $00                                   ; $451B: $16 $00

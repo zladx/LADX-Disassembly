@@ -611,6 +611,7 @@ wEntitiesFlashCountdownTable:: ; C420
   ; When the countdown reaches 0, the flashing stops.
   ds $10
 
+; Is entity initialized?
 wEntitiesUnknowTableH::  ; C430
   ds $10
 

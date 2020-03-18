@@ -197,7 +197,7 @@ ConfigureEntityHealth::
     pop  de                                       ; $48AB: $D1
     ret                                           ; $48AC: $C9
 
-jr_003_48AD:
+MasterStalfosDefeated:
     ld   a, $01                                   ; $48AD: $3E $01
     ld   [wRoomEventEffectExecuted], a            ; $48AF: $EA $8F $C1
     jp   UnloadEntityAndReturn                    ; $48B2: $C3 $8D $3F
@@ -207,63 +207,68 @@ EntityInitHandler::
     add  hl, bc                                   ; $48B8: $09
     ld   a, [hl]                                  ; $48B9: $7E
     and  $80                                      ; $48BA: $E6 $80
-    jr   z, jr_003_4918                           ; $48BC: $28 $5A
+    jr   z, .callEntityInitHandler                           ; $48BC: $28 $5
 
+
+    ; If the room status is $30, don't load the entity.
     ldh  a, [hRoomStatus]                         ; $48BE: $F0 $F8
     and  $30                                      ; $48C0: $E6 $30
-    jr   z, jr_003_48C7                           ; $48C2: $28 $03
-
+    jr   z, .roomStatusEnd                        ; $48C2: $28 $03
     jp   UnloadEntityAndReturn                    ; $48C4: $C3 $8D $3F
+.roomStatusEnd
 
-jr_003_48C7:
+    ;
+    ; Special case for Master Stalfos
+    ;
+
     ldh  a, [hActiveEntityType]                   ; $48C7: $F0 $EB
-    cp   $5F                                      ; $48C9: $FE $5F
-    jr   nz, jr_003_48F0                          ; $48CB: $20 $23
+    cp   ENTITY_MASTER_STALFOS                    ; $48C9: $FE $5F
+    jr   nz, .masterStalfosEnd                    ; $48CB: $20 $23
 
     ldh  a, [hMapRoom]                            ; $48CD: $F0 $F6
     cp   $95                                      ; $48CF: $FE $95
-    jr   z, jr_003_48F0                           ; $48D1: $28 $1D
+    jr   z, .masterStalfosEnd                     ; $48D1: $28 $1D
 
     cp   $92                                      ; $48D3: $FE $92
-    jr   z, jr_003_48F0                           ; $48D5: $28 $19
+    jr   z, .masterStalfosEnd                     ; $48D5: $28 $19
 
     cp   $84                                      ; $48D7: $FE $84
-    jr   z, jr_003_48E2                           ; $48D9: $28 $07
+    jr   z, .jr_003_48E2                          ; $48D9: $28 $07
 
     ld   a, [$D984]                               ; $48DB: $FA $84 $D9
     and  $30                                      ; $48DE: $E6 $30
-    jr   z, jr_003_48AD                           ; $48E0: $28 $CB
+    jr   z, MasterStalfosDefeated                 ; $48E0: $28 $CB
 
-jr_003_48E2:
+.jr_003_48E2
     ld   a, [$D992]                               ; $48E2: $FA $92 $D9
     and  $30                                      ; $48E5: $E6 $30
-    jr   z, jr_003_48AD                           ; $48E7: $28 $C4
+    jr   z, MasterStalfosDefeated                 ; $48E7: $28 $C4
 
     ld   a, [$D995]                               ; $48E9: $FA $95 $D9
     and  $30                                      ; $48EC: $E6 $30
-    jr   z, jr_003_48AD                           ; $48EE: $28 $BD
+    jr   z, MasterStalfosDefeated                 ; $48EE: $28 $BD
+.masterStalfosEnd
 
-jr_003_48F0:
     ld   a, [wIsIndoor]                           ; $48F0: $FA $A5 $DB
     and  a                                        ; $48F3: $A7
-    jr   z, jr_003_4908                           ; $48F4: $28 $12
+    jr   z, .indoorEnd                            ; $48F4: $28 $12
 
     ld   a, [$D478]                               ; $48F6: $FA $78 $D4
     and  a                                        ; $48F9: $A7
-    jr   nz, jr_003_490B                          ; $48FA: $20 $0F
+    jr   nz, .jr_003_490B                         ; $48FA: $20 $0F
 
     ld   hl, wEntitiesUnknowTableH                ; $48FC: $21 $30 $C4
     add  hl, bc                                   ; $48FF: $09
     ld   a, [hl]                                  ; $4900: $7E
     and  $04                                      ; $4901: $E6 $04
-    jr   z, jr_003_4908                           ; $4903: $28 $03
+    jr   z, .indoorEnd                            ; $4903: $28 $03
 
     ld   [$C1CF], a                               ; $4905: $EA $CF $C1
+.indoorEnd
 
-jr_003_4908:
     call label_27F2                               ; $4908: $CD $F2 $27
 
-jr_003_490B:
+.jr_003_490B
     xor  a                                        ; $490B: $AF
     ld   [$C1BD], a                               ; $490C: $EA $BD $C1
     inc  a                                        ; $490F: $3C
@@ -271,12 +276,15 @@ jr_003_490B:
     ld   a, $20                                   ; $4913: $3E $20
     ld   [wC165], a                               ; $4915: $EA $65 $C1
 
-jr_003_4918:
+.callEntityInitHandler
+
+    ; Mark the entity as active
     ld   hl, wEntitiesStatusTable                 ; $4918: $21 $80 $C2
     add  hl, bc                                   ; $491B: $09
-    ld   [hl], $05                                ; $491C: $36 $05
-    ld   a, $03                                   ; $491E: $3E $03
-    call func_020_4518_trampoline                 ; $4920: $CD $D3 $09
+    ld   [hl], ENTITY_STATUS_ACTIVE               ; $491C: $36 $05
+
+    ld   a, BANK(@)                               ; $491E: $3E $03
+    call GetEntityInitHandler_trampoline          ; $4920: $CD $D3 $09
     jp   hl                                       ; $4923: $E9
 
 Data_003_4924::

@@ -918,36 +918,36 @@ label_3DAB::
     callhl func_004_5A1A
     jp   ReloadSavedBank
 
-label_3DB6::
-    callhl func_004_5690
+EntityInitMoldorm_trampoline::
+    callhl EntityInitMoldorm
     jp   ReloadSavedBank
 
-label_3DC1::
-    callhl func_004_504B
+EntityInitFacade_trampoline::
+    callhl EntityInitFacade
     jp   ReloadSavedBank
 
-label_3DCC::
-    callhl func_014_49BD
+EntityInitSlimeEye_trampoline::
+    callhl EntityInitSlimeEye
     jp   ReloadSavedBank
 
-label_3DD7::
-    callhl func_014_72AB
+EntityInitGenie_trampoline::
+    callhl EntityInitGenie
     jp   ReloadSavedBank
 
-label_3DE2::
-    callhl func_005_6CC6
+EntityInitSlimeEel_trampoline::
+    callhl EntityInitSlimeEel
     jp   ReloadSavedBank
 
-label_3DED::
-    callhl func_005_6818
+EntityInitDodongoSnake_trampoline::
+    callhl EntityInitDodongoSnake
     jp   ReloadSavedBank
 
-label_3DF8::
-    callhl func_005_6302
+EntityInitHotHead_trampoline::
+    callhl EntityInitHotHead
     jp   ReloadSavedBank
 
-label_3E03::
-    callhl func_005_5A1E
+EntityInitEvilEagle_trampoline::
+    callhl EntityInitEvilEagle
     jp   ReloadSavedBank
 
 Entity67Handler_trampoline::

@@ -202,3 +202,20 @@ CHEST_SEASHELL         equ $20
 ; Miscellaneous
 CHEST_MESSAGE          equ $21 ; used in Catfish's Maw
 CHEST_BLOB             equ $22 ; green slime enemy
+
+; Values for wTradeSequenceItem
+TRADING_ITEM_NONE              equ $00
+TRADING_ITEM_YOSHI_DOLL        equ $01
+TRADING_ITEM_RIBBON            equ $02
+TRADING_ITEM_DOG_FOOD          equ $03
+TRADING_ITEM_BANANAS           equ $04
+TRADING_ITEM_STICK             equ $05
+TRADING_ITEM_HONEYCOMB         equ $06
+TRADING_ITEM_PINEAPPLE         equ $07
+TRADING_ITEM_HIBISCUS          equ $08
+TRADING_ITEM_LETTER            equ $09
+TRADING_ITEM_BROOM             equ $0A
+TRADING_ITEM_FISHING_HOOK      equ $0B
+TRADING_ITEM_NECKLACE          equ $0C
+TRADING_ITEM_SCALE             equ $0D
+TRADING_ITEM_MAGNIFIYING_GLASS equ $0E

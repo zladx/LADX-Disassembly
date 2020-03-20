@@ -1,3 +1,14 @@
+EntityInitHotHead::
+    call GetEntityTransitionCountdown             ; $6302: $CD $05 $0C
+    ld   [hl], $40                                ; $6305: $36 $40
+    ld   hl, wEntitiesSpriteVariantTable          ; $6307: $21 $B0 $C3
+    add  hl, bc                                   ; $630A: $09
+    ld   [hl], $FF                                ; $630B: $36 $FF
+    ld   hl, wEntitiesHealthTable                 ; $630D: $21 $60 $C3
+    add  hl, bc                                   ; $6310: $09
+    ld   [hl], $FF                                ; $6311: $36 $FF
+    ret
+
 HotHeadEntityHandler::
     call label_394D                               ; $6314: $CD $4D $39
     call label_3EE8                               ; $6317: $CD $E8 $3E
@@ -744,54 +755,3 @@ label_005_67EA:
     ld   [hl], $02                                ; $6811: $36 $02
     ld   a, $FF                                   ; $6813: $3E $FF
     jp   SetEntitySpriteVariant                   ; $6815: $C3 $0C $3B
-
-func_005_6818::
-    ld   hl, wEntitiesLoadOrderTable              ; $6818: $21 $60 $C4
-    add  hl, bc                                   ; $681B: $09
-    ld   e, [hl]                                  ; $681C: $5E
-    sla  e                                        ; $681D: $CB $23
-    sla  e                                        ; $681F: $CB $23
-    sla  e                                        ; $6821: $CB $23
-    sla  e                                        ; $6823: $CB $23
-    sla  e                                        ; $6825: $CB $23
-    sla  e                                        ; $6827: $CB $23
-    ld   d, b                                     ; $6829: $50
-    ld   hl, wIsFileSelectionArrowShifted         ; $682A: $21 $00 $D0
-    add  hl, de                                   ; $682D: $19
-    push de                                       ; $682E: $D5
-    ld   e, $20                                   ; $682F: $1E $20
-
-jr_005_6831:
-    xor  a                                        ; $6831: $AF
-    ld   [hl+], a                                 ; $6832: $22
-    dec  e                                        ; $6833: $1D
-    ld   a, e                                     ; $6834: $7B
-    cp   $00                                      ; $6835: $FE $00
-    jr   nz, jr_005_6831                          ; $6837: $20 $F8
-
-    pop  de                                       ; $6839: $D1
-    ld   hl, $D100                                ; $683A: $21 $00 $D1
-    add  hl, de                                   ; $683D: $19
-    ld   e, $20                                   ; $683E: $1E $20
-
-jr_005_6840:
-    xor  a                                        ; $6840: $AF
-    ld   [hl+], a                                 ; $6841: $22
-    dec  e                                        ; $6842: $1D
-    ld   a, e                                     ; $6843: $7B
-    cp   $00                                      ; $6844: $FE $00
-    jr   nz, jr_005_6840                          ; $6846: $20 $F8
-
-    ld   hl, wEntitiesSpeedYTable                 ; $6848: $21 $50 $C2
-    add  hl, bc                                   ; $684B: $09
-    ld   [hl], $06                                ; $684C: $36 $06
-    call GetEntityTransitionCountdown             ; $684E: $CD $05 $0C
-    ld   [hl], $40                                ; $6851: $36 $40
-    call GetEntityPrivateCountdown1               ; $6853: $CD $00 $0C
-    ld   [hl], $40                                ; $6856: $36 $40
-
-func_005_6858::
-    ld   hl, wEntitiesSpriteVariantTable          ; $6858: $21 $B0 $C3
-    add  hl, bc                                   ; $685B: $09
-    ld   [hl], $03                                ; $685C: $36 $03
-    ret                                           ; $685E: $C9

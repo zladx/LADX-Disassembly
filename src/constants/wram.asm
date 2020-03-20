@@ -483,6 +483,7 @@ wEntitiesPrivateState1Table:: ; C2B0
 wEntitiesPrivateState2Table:: ; C2C0
   ds $10
 
+; Is the item a droppable? Or pickable?
 wEntitiesUnknownTableD:: ; C2D0
   ds $10
 
@@ -611,7 +612,8 @@ wEntitiesFlashCountdownTable:: ; C420
   ; When the countdown reaches 0, the flashing stops.
   ds $10
 
-; Is entity initialized?
+; Entity initialization flags?
+; Seems to be a bitfield
 wEntitiesUnknowTableH::  ; C430
   ds $10
 
@@ -1041,22 +1043,8 @@ wHasMedicine:: ; DB0D
   ds 1
 
 wTradeSequenceItem:: ; DB0E
-  ; Trade Sequence items:
-  ; $00 Nothing
-  ; $01 Yoshi Doll
-  ; $02 Ribbon
-  ; $03 Dog Food
-  ; $04 Bananas
-  ; $05 Stick
-  ; $06 Honeycomb
-  ; $07 Pineapple
-  ; $08 Hibiscus
-  ; $09 Letter
-  ; $0A Broom
-  ; $0B Fishing Hook
-  ; $0C Necklace
-  ; $0D Scale
-  ; $0E Magnifying glass
+  ; Trade Sequence items.
+  ; See TRADING_ITEM_* constants for possible values.
   ds 1
 
 wSeashellsCount:: ; DB0F
@@ -1233,7 +1221,7 @@ wDB72: ds 1
 wIsMarinFollowingLink:: ; DB73
   ds 1
 
-; Unlabeled
+; Unlabeled, Marin-related
 wDB74 equ $DB74
   ds 1
 

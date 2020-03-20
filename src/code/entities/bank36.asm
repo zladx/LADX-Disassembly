@@ -8271,7 +8271,7 @@ jr_036_729E:
 jr_036_72A9:
     jr   label_036_7288                           ; $72A9: $18 $DD
 
-func_014_72AB::
+EntityInitGenie::
     xor  a                                        ; $72AB: $AF
     ld   hl, wEntitiesUnknowTableR                ; $72AC: $21 $90 $C3
     add  hl, bc                                   ; $72AF: $09

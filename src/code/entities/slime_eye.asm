@@ -52,7 +52,7 @@ label_004_496F:
 
     jp   func_004_6D7A                            ; $49BA: $C3 $7A $6D
 
-func_014_49BD::
+EntityInitSlimeEye::
     ld   hl, wEntitiesPosZTable                                ; $49BD: $21 $10 $C3
     add  hl, bc                                   ; $49C0: $09
     ld   [hl], $7E                                ; $49C1: $36 $7E

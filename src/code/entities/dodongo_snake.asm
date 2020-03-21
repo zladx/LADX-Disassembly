@@ -1,3 +1,54 @@
+EntityInitDodongoSnake::
+    ld   hl, wEntitiesLoadOrderTable              ; $6818: $21 $60 $C4
+    add  hl, bc                                   ; $681B: $09
+    ld   e, [hl]                                  ; $681C: $5E
+    sla  e                                        ; $681D: $CB $23
+    sla  e                                        ; $681F: $CB $23
+    sla  e                                        ; $6821: $CB $23
+    sla  e                                        ; $6823: $CB $23
+    sla  e                                        ; $6825: $CB $23
+    sla  e                                        ; $6827: $CB $23
+    ld   d, b                                     ; $6829: $50
+    ld   hl, wIsFileSelectionArrowShifted         ; $682A: $21 $00 $D0
+    add  hl, de                                   ; $682D: $19
+    push de                                       ; $682E: $D5
+    ld   e, $20                                   ; $682F: $1E $20
+
+jr_005_6831:
+    xor  a                                        ; $6831: $AF
+    ld   [hl+], a                                 ; $6832: $22
+    dec  e                                        ; $6833: $1D
+    ld   a, e                                     ; $6834: $7B
+    cp   $00                                      ; $6835: $FE $00
+    jr   nz, jr_005_6831                          ; $6837: $20 $F8
+
+    pop  de                                       ; $6839: $D1
+    ld   hl, $D100                                ; $683A: $21 $00 $D1
+    add  hl, de                                   ; $683D: $19
+    ld   e, $20                                   ; $683E: $1E $20
+
+jr_005_6840:
+    xor  a                                        ; $6840: $AF
+    ld   [hl+], a                                 ; $6841: $22
+    dec  e                                        ; $6842: $1D
+    ld   a, e                                     ; $6843: $7B
+    cp   $00                                      ; $6844: $FE $00
+    jr   nz, jr_005_6840                          ; $6846: $20 $F8
+
+    ld   hl, wEntitiesSpeedYTable                 ; $6848: $21 $50 $C2
+    add  hl, bc                                   ; $684B: $09
+    ld   [hl], $06                                ; $684C: $36 $06
+    call GetEntityTransitionCountdown             ; $684E: $CD $05 $0C
+    ld   [hl], $40                                ; $6851: $36 $40
+    call GetEntityPrivateCountdown1               ; $6853: $CD $00 $0C
+    ld   [hl], $40                                ; $6856: $36 $40
+
+func_005_6858::
+    ld   hl, wEntitiesSpriteVariantTable          ; $6858: $21 $B0 $C3
+    add  hl, bc                                   ; $685B: $09
+    ld   [hl], $03                                ; $685C: $36 $03
+    ret
+
 Data_005_685F::
     db   $06, $FA, $00, $00
 
@@ -509,15 +560,3 @@ jr_005_6CAE:
     call RenderActiveEntitySpritesRect            ; $6CBE: $CD $E6 $3C
     ld   a, $02                                   ; $6CC1: $3E $02
     jp   label_3DA0                               ; $6CC3: $C3 $A0 $3D
-
-func_005_6CC6::
-    call GetEntityTransitionCountdown             ; $6CC6: $CD $05 $0C
-    ld   [hl], $80                                ; $6CC9: $36 $80
-    xor  a                                        ; $6CCB: $AF
-    ld   [$D200], a                               ; $6CCC: $EA $00 $D2
-    ld   [$D203], a                               ; $6CCF: $EA $03 $D2
-    ld   [$D204], a                               ; $6CD2: $EA $04 $D2
-    ld   hl, wEntitiesUnknowTableR                ; $6CD5: $21 $90 $C3
-    add  hl, bc                                   ; $6CD8: $09
-    ld   [hl], $01                                ; $6CD9: $36 $01
-    ret                                           ; $6CDB: $C9

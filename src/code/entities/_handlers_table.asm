@@ -51,8 +51,8 @@ EntityPointersTable::
 ._22 entity_pointer WizrobeProjectileEntityHandler
 ._23 entity_pointer LikeLikeEntityHandler
 ._24 entity_pointer IronMaskEntityHandler ; $24
-._25 entity_pointer EntityDestructionData ; small exploding ennemy
-._26 entity_pointer EntityDestructionData ; small exploding ennemy 2
+._25 entity_pointer EntityExplosionDisplayList ; small exploding ennemy
+._26 entity_pointer EntityExplosionDisplayList ; small exploding ennemy 2
 ._27 entity_pointer SpikeTrapEntityHandler
 ._28 entity_pointer MimicEntityHandler ; $28
 ._29 entity_pointer MiniMoldromEntityHandler

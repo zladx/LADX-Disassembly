@@ -313,10 +313,10 @@ CheckPushedTombStone_trampoline::
     callsb CheckPushedTombStone
     jr   RestoreStackedBankAndReturn
 
-func_020_4518_trampoline::
+GetEntityInitHandler_trampoline::
     push af
     ; Will lookup something in an entity id table
-    callsb func_020_4518
+    callsb GetEntityInitHandler
     jr   RestoreStackedBankAndReturn
 
 func_020_4874_trampoline::

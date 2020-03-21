@@ -1,3 +1,15 @@
+EntityInitSlimeEel::
+    call GetEntityTransitionCountdown             ; $6CC6: $CD $05 $0C
+    ld   [hl], $80                                ; $6CC9: $36 $80
+    xor  a                                        ; $6CCB: $AF
+    ld   [$D200], a                               ; $6CCC: $EA $00 $D2
+    ld   [$D203], a                               ; $6CCF: $EA $03 $D2
+    ld   [$D204], a                               ; $6CD2: $EA $04 $D2
+    ld   hl, wEntitiesUnknowTableR                ; $6CD5: $21 $90 $C3
+    add  hl, bc                                   ; $6CD8: $09
+    ld   [hl], $01                                ; $6CD9: $36 $01
+    ret
+
 SlimeEelEntityHandler::
     call label_394D                               ; $6CDC: $CD $4D $39
     call label_3EE8                               ; $6CDF: $CD $E8 $3E

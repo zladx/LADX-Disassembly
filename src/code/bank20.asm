@@ -16,73 +16,266 @@ func_020_4303::
     ld   [$D45E], a                               ; $431E: $EA $5E $D4
     ret                                           ; $4321: $C9
 
-; Entity id table?
+; Entity initialization handlers
 data_020_4322::
-    db   $4C, $4B, $4C, $4B, $4C, $4B, $4C, $4B  ; $4322 |LKLKLKLK|
-    db   $4C, $4B, $4C, $4B, $6E, $51, $6D, $50  ; $432A |LKLKnQmP|
-    db   $4C, $4B, $AF, $4F, $4C, $4B, $AF, $4F  ; $4332 |LK.OLK.O|
-    db   $4C, $4B, $4C, $4B, $5C, $4B, $4C, $4B  ; $433A |LKLK\KLK|
-    db   $B5, $4F, $B5, $4F, $B5, $4F, $D7, $59  ; $4342 |.O.O.O.Y|
-    db   $E2, $4E, $A8, $4E, $CE, $4E, $C4, $4E  ; $434A |.N.N.N.N|
-    db   $4C, $4B, $4C, $4B, $4C, $4B, $53, $49  ; $4352 |LKLKLKSI|
-    db   $4C, $4B, $D7, $4E, $12, $3B, $12, $3B  ; $435A |LK.N.;.;|
-    db   $4C, $4B, $D7, $4E, $4C, $4B, $12, $3B  ; $4362 |LK.NLK.;|
-    db   $4C, $4B, $44, $4C, $44, $4C, $4C, $4B  ; $436A |LKDLDLLK|
-    db   $4C, $4B, $AB, $3D, $4C, $4B, $4C, $4B  ; $4372 |LK.=LKLK|
-    db   $4C, $4B, $1E, $4F, $7A, $4F, $7A, $4F  ; $437A |LK.OzOzO|
-    db   $2D, $4F, $78, $4A, $7A, $4F, $7A, $4F  ; $4382 |-OxJzOzO|
-    db   $7A, $4F, $56, $4B, $7A, $4F, $7A, $4F  ; $438A |zOVKzOzO|
-    db   $7A, $4F, $A1, $4F, $56, $4B, $1E, $4F  ; $4392 |zO.OVK.O|
-    db   $1E, $4F, $FB, $4E, $80, $4A, $CE, $4A  ; $439A |.O.N.J.J|
-    db   $42, $4B, $73, $4A, $4C, $4B, $A1, $4F  ; $43A2 |BKsJLK.O|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $43AA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $1F, $4C, $4C, $4B  ; $43B2 |VKVK.LLK|
-    db   $4C, $4B, $43, $4B, $4C, $4B, $35, $4B  ; $43BA |LKCKLK5K|
-    db   $4C, $4B, $4C, $4B, $4C, $4B, $4C, $4B  ; $43C2 |LKLKLKLK|
-    db   $35, $4B, $4C, $4B, $4C, $4B, $4C, $4B  ; $43CA |5KLKLKLK|
-    db   $4C, $4B, $B6, $3D, $C1, $3D, $CC, $3D  ; $43D2 |LK.=.=.=|
-    db   $D7, $3D, $E2, $3D, $4C, $4B, $4C, $4B  ; $43DA |.=.=LKLK|
-    db   $ED, $3D, $70, $4F, $F8, $3D, $03, $3E  ; $43E2 |.=pO.=.>|
-    db   $57, $4B, $0E, $3E, $4C, $4B, $56, $4B  ; $43EA |WK.>LKVK|
-    db   $56, $4B, $D4, $49, $1B, $4B, $56, $4B  ; $43F2 |VK.I.KVK|
-    db   $56, $4B, $5B, $4A, $56, $4B, $56, $4B  ; $43FA |VK[JVKVK|
-    db   $2F, $4B, $19, $4A, $27, $4A, $2F, $4B  ; $4402 |/K.J'J/K|
-    db   $2F, $4B, $2F, $4B, $28, $4A, $2F, $4B  ; $440A |/K/K(J/K|
-    db   $56, $4B, $0E, $4B, $56, $4B, $2F, $4B  ; $4412 |VK.KVK/K|
-    db   $83, $4F, $56, $4B, $56, $4B, $56, $4B  ; $441A |.OVKVKVK|
-    db   $7C, $49, $56, $4B, $56, $4B, $AD, $49  ; $4422 ||IVKVK.I|
-    db   $34, $4A, $56, $4B, $F4, $49, $E2, $49  ; $442A |4JVK.I.I|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $4432 |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $83, $4F, $56, $4B  ; $443A |VKVK.OVK|
-    db   $56, $4B, $C8, $49, $56, $4B, $56, $4B  ; $4442 |VK.IVKVK|
-    db   $56, $4B, $80, $49, $56, $4B, $56, $4B  ; $444A |VK.IVKVK|
-    db   $26, $49, $56, $4B, $56, $4B, $56, $4B  ; $4452 |&IVKVKVK|
-    db   $A8, $4E, $56, $4B, $C2, $49, $56, $4B  ; $445A |.NVK.IVK|
-    db   $56, $4B, $3D, $49, $56, $4B, $56, $4B  ; $4462 |VK=IVKVK|
-    db   $43, $49, $56, $4B, $56, $4B, $56, $4B  ; $446A |CIVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $4472 |VKVKVKVK|
-    db   $56, $4B, $B5, $49, $4C, $4B, $68, $4F  ; $447A |VK.ILKhO|
-    db   $56, $4B, $56, $4B, $56, $4B, $83, $4F  ; $4482 |VKVKVK.O|
-    db   $74, $49, $56, $4B, $56, $4B, $56, $4B  ; $448A |tIVKVKVK|
-    db   $B1, $49, $56, $4B, $65, $49, $73, $49  ; $4492 |.IVKeIsI|
-    db   $83, $4F, $56, $4B, $56, $4B, $56, $4B  ; $449A |.OVKVKVK|
-    db   $56, $4B, $5A, $49, $34, $49, $56, $4B  ; $44A2 |VKZI4IVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44AA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $61, $4B  ; $44B2 |VKVKVKaK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44BA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44C2 |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44CA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $A8, $4E  ; $44D2 |VKVKVK.N|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44DA |VKVKVKVK|
-    db   $56, $4B, $56, $4B, $56, $4B, $56, $4B  ; $44E2 |VKVKVKVK|
-    db   $56, $4B, $E6, $49, $A6, $49, $56, $4B  ; $44EA |VK.I.IVK|
-    db   $56, $4B, $4C, $4B, $4C, $4B, $4C, $4B  ; $44F2 |VKLKLKLK|
-    db   $81, $4B, $81, $4B, $81, $4B, $8F, $4B  ; $44FA |.K.K.K.K|
-    db   $9A, $4B, $A6, $4B, $C0, $4B, $B8, $4B  ; $4502 |.K.K.K.K|
-    db   $DC, $4B, $56, $4B, $EB, $4B, $01, $4C  ; $450A |.KVK.K.L|
-    db   $2D, $4C, $CB, $4B, $56, $4B            ; $4512 |-L.KVK|
+._00 dw   EntityInitWithRandomDirection
+._01 dw   EntityInitWithRandomDirection
+._02 dw   EntityInitWithRandomDirection
+._03 dw   EntityInitWithRandomDirection
+._04 dw   EntityInitWithRandomDirection
+._05 dw   EntityInitWithRandomDirection
+._06 dw   EntityInitPushedBlock
+._07 dw   EntityInitChestWithItem
+._08 dw   EntityInitWithRandomDirection
+._09 dw   EntityInitWithCountdown
+._0A dw   EntityInitWithRandomDirection
+._0B dw   EntityInitWithCountdown
+._0C dw   EntityInitWithRandomDirection
+._0D dw   EntityInitWithRandomDirection
+._0E dw   EntityInitLeever
+._0F dw   EntityInitWithRandomDirection
+._10 dw   EntityInitGhini
+._11 dw   EntityInitGhini
+._12 dw   EntityInitGhini
+._13 dw   EntityInitBrokenHeartContainer
+._14 dw   EntityInitMoblinSword
+._15 dw   EntityInitWithRandomSpeed
+._16 dw   EntityInitSparkCounterClockwise
+._17 dw   EntityInitSparkClockwise
+._18 dw   EntityInitWithRandomDirection
+._19 dw   EntityInitWithRandomDirection
+._1A dw   EntityInitWithRandomDirection
+._1B dw   EntityInitGel
+._1C dw   EntityInitWithRandomDirection
+._1D dw   EntityInitWizrobe
+._1E dw   IncrementEntityState
+._1F dw   IncrementEntityState
+._20 dw   EntityInitWithRandomDirection
+._21 dw   EntityInitWizrobe
+._22 dw   EntityInitWithRandomDirection
+._23 dw   IncrementEntityState
+._24 dw   EntityInitWithRandomDirection
+._25 dw   EntityInitSmallExplosion
+._26 dw   EntityInitSmallExplosion
+._27 dw   EntityInitWithRandomDirection
+._28 dw   EntityInitWithRandomDirection
+._29 dw   label_3DAB
+._2A dw   EntityInitWithRandomDirection
+._2B dw   EntityInitWithRandomDirection
+._2C dw   EntityInitWithRandomDirection
+._2D dw   EntityInitPermanentDroppable
+._2E dw   EntityInitTemporaryDroppable
+._2F dw   EntityInitTemporaryDroppable
+._30 dw   EntityInitKeyDropPoint
+._31 dw   EntityInitSword
+._32 dw   EntityInitTemporaryDroppable
+._33 dw   EntityInitTemporaryDroppable
+._34 dw   EntityInitTemporaryDroppable
+._35 dw   EntityInitNoop
+._36 dw   EntityInitTemporaryDroppable
+._37 dw   EntityInitTemporaryDroppable
+._38 dw   EntityInitTemporaryDroppable
+._39 dw   EntityInitWithShiftedXPosition
+._3A dw   EntityInitNoop
+._3B dw   EntityInitPermanentDroppable
+._3C dw   EntityInitPermanentDroppable
+._3D dw   EntityInitSecretSeashell
+._3E dw   EntityInitMarin
+._3F dw   EntityInitRacoon
+._40 dw   EntityInitWitch
+._41 dw   EntityInitOwlEvent
+._42 dw   EntityInitWithRandomDirection
+._43 dw   EntityInitWithShiftedXPosition
+._44 dw   EntityInitNoop
+._45 dw   EntityInitNoop
+._46 dw   EntityInitNoop
+._47 dw   EntityInitNoop
+._48 dw   EntityInitNoop
+._49 dw   EntityInitNoop
+._4A dw   EntityInitColorDungeonBook
+._4B dw   EntityInitWithRandomDirection
+._4C dw   EntityInitWithRandomDirection
+._4D dw   EntityInitShopOwner
+._4E dw   EntityInitWithRandomDirection
+._4F dw   EntityInitStoreOwner
+._50 dw   EntityInitWithRandomDirection
+._51 dw   EntityInitWithRandomDirection
+._52 dw   EntityInitWithRandomDirection
+._53 dw   EntityInitWithRandomDirection
+._54 dw   EntityInitStoreOwner
+._55 dw   EntityInitWithRandomDirection
+._56 dw   EntityInitWithRandomDirection
+._57 dw   EntityInitWithRandomDirection
+._58 dw   EntityInitWithRandomDirection
+._59 dw   EntityInitMoldorm_trampoline
+._5A dw   EntityInitFacade_trampoline
+._5B dw   EntityInitSlimeEye_trampoline
+._5C dw   EntityInitGenie_trampoline
+._5D dw   EntityInitSlimeEel_trampoline
+._5E dw   EntityInitWithRandomDirection
+._5F dw   EntityInitWithRandomDirection
+._60 dw   EntityInitDodongoSnake_trampoline
+._61 dw   EntityInitWarp
+._62 dw   EntityInitHotHead_trampoline
+._63 dw   EntityInitEvilEagle_trampoline
+._64 dw   EntityInitSouthFaceShrineDoor
+._65 dw   Entity67Handler_trampoline
+._66 dw   EntityInitWithRandomDirection
+._67 dw   EntityInitNoop
+._68 dw   EntityInitNoop
+._69 dw   EntityInitMovingBlockMover
+._6A dw   EntityInitRaftRaftOwner
+._6B dw   EntityInitNoop
+._6C dw   EntityInitNoop
+._6D dw   EntityInitBowWow
+._6E dw   EntityInitNoop
+._6F dw   EntityInitNoop
+._70 dw   EntityInitNpcFacingDown
+._71 dw   EntityInitKid71
+._72 dw   EntityInitKid72
+._73 dw   EntityInitNpcFacingDown
+._74 dw   EntityInitNpcFacingDown
+._75 dw   EntityInitNpcFacingDown
+._76 dw   EntityInitMrWrite
+._77 dw   EntityInitNpcFacingDown
+._78 dw   EntityInitNoop
+._79 dw   EntityInitMadamMeowMeow
+._7A dw   EntityInitNoop
+._7B dw   EntityInitNpcFacingDown
+._7C dw   EntityInitWithShiftedPosition
+._7D dw   EntityInitNoop
+._7E dw   EntityInitNoop
+._7F dw   EntityInitNoop
+._80 dw   EntityInitTelephone
+._81 dw   EntityInitNoop
+._82 dw   EntityInitNoop
+._83 dw   EntityInitDreamShrineBed
+._84 dw   EntityInitBigFairy
+._85 dw   EntityInitNoop
+._86 dw   EntityInitFloatingItem
+._87 dw   EntityInitDesertLanmola
+._88 dw   EntityInitNoop
+._89 dw   EntityInitNoop
+._8A dw   EntityInitNoop
+._8B dw   EntityInitNoop
+._8C dw   EntityInitNoop
+._8D dw   EntityInitNoop
+._8E dw   EntityInitWithShiftedPosition
+._8F dw   EntityInitNoop
+._90 dw   EntityInitNoop
+._91 dw   EntityInitAntiKirby
+._92 dw   EntityInitNoop
+._93 dw   EntityInitNoop
+._94 dw   EntityInitNoop
+._95 dw   EntityInitRichard
+._96 dw   EntityInitNoop
+._97 dw   EntityInitNoop
+._98 dw   EntityInitHorsePiece
+._99 dw   EntityInitNoop
+._9A dw   EntityInitNoop
+._9B dw   EntityInitNoop
+._9C dw   EntityInitWithRandomSpeed
+._9D dw   EntityInitNoop
+._9E dw   EntityInitFireballShooter
+._9F dw   EntityInitNoop
+._A0 dw   EntityInitNoop
+._A1 dw   EntityInitSnake
+._A2 dw   EntityInitNoop
+._A3 dw   EntityInitNoop
+._A4 dw   EntityInitSideViewPlatformVertical
+._A5 dw   EntityInitNoop
+._A6 dw   EntityInitNoop
+._A7 dw   EntityInitNoop
+._A8 dw   EntityInitNoop
+._A9 dw   EntityInitNoop
+._AA dw   EntityInitNoop
+._AB dw   EntityInitNoop
+._AC dw   EntityInitNoop
+._AD dw   EntityInitKikiTheMonkey
+._AE dw   EntityInitWithRandomDirection
+._AF dw   EntityInitTradingItem
+._B0 dw   EntityInitNoop
+._B1 dw   EntityInitNoop
+._B2 dw   EntityInitNoop
+._B3 dw   EntityInitWithShiftedPosition
+._B4 dw   EntityInitTarin
+._B5 dw   EntityInitNoop
+._B6 dw   EntityInitNoop
+._B7 dw   EntityInitNoop
+._B8 dw   EntityInitFishermanUnderBridge
+._B9 dw   EntityInitNoop
+._BA dw   EntityInitBomber
+._BB dw   EntityInitBushCrawler
+._BC dw   EntityInitWithShiftedPosition
+._BD dw   EntityInitNoop
+._BE dw   EntityInitNoop
+._BF dw   EntityInitNoop
+._C0 dw   EntityInitNoop
+._C1 dw   EntityInitMarinAtTheShore
+._C2 dw   EntityInitMarinAtTalTalHeights
+._C3 dw   EntityInitNoop
+._C4 dw   EntityInitNoop
+._C5 dw   EntityInitNoop
+._C6 dw   EntityInitNoop
+._C7 dw   EntityInitNoop
+._C8 dw   EntityInitNoop
+._C9 dw   EntityInitNoop
+._CA dw   EntityInitNoop
+._CB dw   EntityInitZora
+._CC dw   EntityInitNoop
+._CD dw   EntityInitNoop
+._CE dw   EntityInitNoop
+._CF dw   EntityInitNoop
+._D0 dw   EntityInitNoop
+._D1 dw   EntityInitNoop
+._D2 dw   EntityInitNoop
+._D3 dw   EntityInitNoop
+._D4 dw   EntityInitNoop
+._D5 dw   EntityInitNoop
+._D6 dw   EntityInitNoop
+._D7 dw   EntityInitNoop
+._D8 dw   EntityInitNoop
+._D9 dw   EntityInitNoop
+._DA dw   EntityInitNoop
+._DB dw   EntityInitWithRandomSpeed
+._DC dw   EntityInitNoop
+._DD dw   EntityInitNoop
+._DE dw   EntityInitNoop
+._DF dw   EntityInitNoop
+._E0 dw   EntityInitNoop
+._E1 dw   EntityInitNoop
+._E2 dw   EntityInitNoop
+._E3 dw   EntityInitNoop
+._E4 dw   EntityInitNoop
+._E5 dw   EntityInitFloatingItem2
+._E6 dw   EntityInitFinalNightmare
+._E7 dw   EntityInitNoop
+._E8 dw   EntityInitNoop
+._E9 dw   EntityInitWithRandomDirection
+._EA dw   EntityInitWithRandomDirection
+._EB dw   EntityInitWithRandomDirection
+._EC dw   EntityInitWithRightDirection
+._ED dw   EntityInitWithRightDirection
+._EE dw   EntityInitWithRightDirection
+._EF dw   EntityInitRotoswitchRed
+._F0 dw   EntityInitRotoswitchYellow
+._F1 dw   EntityInitRotoswitchBlue
+._F2 dw   EntityInitFlyingHopperBombs
+._F3 dw   EntityInitHopper
+._F4 dw   EntityInitAvalaunch
+._F5 dw   EntityInitNoop
+._F6 dw   EntityInitColorGuardianBlue
+._F7 dw   EntityInitColorGuardianRed
+._F8 dw   EntityInitGiantBuzzBlob
+._F9 dw   EntityInitHardHitBeetle
+._FA dw   EntityInitNoop
 
-func_020_4518::
+; Retrieve the address of the initialization handler of a given entity.
+; Input:
+;   hActiveEntityType
+; Returns:
+;   de   an address
+GetEntityInitHandler::
     ldh  a, [hActiveEntityType]                     ; $4518: $F0 $EB
     ld   e, a                                     ; $451A: $5F
     ld   d, $00                                   ; $451B: $16 $00
@@ -97,20 +290,54 @@ func_020_4518::
     pop  hl                                       ; $4529: $E1
     ret                                           ; $452A: $C9
 
+; Contains pointers to wRequests data.
+; (The requests themselves load data in bank 8.)
 BGMapToLoadAdjustementTable::
-    db   $00, $00, $CC, $56, $48, $67, $36, $63  ; $452B |...VHg6c|
-    db   $28, $63, $4D, $64, $89, $65, $51, $D6  ; $4533 |(cMd.eQ.|
-    db   $E9, $62, $C9, $67, $8F, $69, $F6, $68  ; $453B |.b.g.i.h|
-    db   $60, $66, $6D, $6A, $EE, $6A, $80, $6D  ; $4543 |`fmj.j.m|
-    db   $8B, $6F, $0A, $71, $22, $74, $E3, $75  ; $454B |.o.q"t.u|
-    db   $A8, $62, $83, $72, $8C, $57, $F5, $5A  ; $4553 |.b.r.W.Z|
-    db   $C8, $5B, $0C, $5D, $5B, $5E, $47, $5F  ; $455B |.[.][^G_|
-    db   $04, $60, $04, $60, $9A, $4E, $50, $50  ; $4563 |.`.`.NPP|
-    db   $EF, $51, $8E, $53, $2D, $55, $81, $77  ; $456B |.Q.S-U.w|
-    db   $D4, $4D, $37, $6C                      ; $4573 |.M7l|
+    dw   $0000  ; disabled
+    dw   $56CC  ; Data_BGCopyRequest01_56CC
+    dw   $6748  ; Data_BGCopyRequest02_6748
+    dw   $6336  ; Data_BGCopyRequest03_6336
+    dw   $6328  ; Data_BGCopyRequest04_6328
+    dw   $644D  ; Data_BGCopyRequest05_644D
+    dw   $6589  ; Data_BGCopyRequest06_6589
+    dw   $D651  ; Data_BGCopyRequest07_D651
+    dw   $62E9  ; Data_BGCopyRequest08_62E9
+    dw   $67C9  ; Data_BGCopyRequest09_67C9
+    dw   $698F  ; Data_BGCopyRequest0A_698F
+    dw   $68F6  ; Data_BGCopyRequest0B_68F6
+    dw   $6660  ; Data_BGCopyRequest0C_6660
+    dw   $6A6D  ; Data_BGCopyRequest0D_6A6D
+    dw   $6AEE  ; Data_BGCopyRequest0E_6AEE
+    dw   $6D80  ; Data_BGCopyRequest0F_6D80
+    dw   $6F8B  ; Data_BGCopyRequest10_6F8B
+    dw   $710A  ; Data_BGCopyRequest11_710A
+    dw   $7422  ; Data_BGCopyRequest12_7422
+    dw   $75E3  ; Data_BGCopyRequest13_75E3
+    dw   $62A8  ; Data_BGCopyRequest14_62A8
+    dw   $7283  ; Data_BGCopyRequest15_7283
+    dw   $578C  ; Data_BGCopyRequest16_578C
+    dw   $5AF5  ; Data_BGCopyRequest17_5AF5
+    dw   $5BC8  ; Data_BGCopyRequest18_5BC8
+    dw   $5D0C  ; Data_BGCopyRequest19_5D0C
+    dw   $5E5B  ; Data_BGCopyRequest1A_5E5B
+    dw   $5F47  ; Data_BGCopyRequest1B_5F47
+    dw   $6004  ; Data_BGCopyRequest1C_6004
+    dw   $6004  ; Data_BGCopyRequest1D_6004
+    dw   $4E9A  ; Data_BGCopyRequest1E_4E9A
+    dw   $5050  ; Data_BGCopyRequest1F_5050
+    dw   $51EF  ; Data_BGCopyRequest20_51EF
+    dw   $538E  ; Data_BGCopyRequest21_538E
+    dw   $552D  ; Data_BGCopyRequest22_552D
+    dw   $7781  ; Data_BGCopyRequest23_7781
+    dw   $4DD4  ; Data_BGCopyRequest24_4DD4
+    dw   $6C37  ; Data_BGCopyRequest25_6C37
 
-; Manipulate wBGMapToLoad
-func_020_4577::
+; Retrieve the address of a wRequest for loading a given background.
+; Input:
+;   wBGMapToLoad
+; Returns:
+;   de   an address to a wRequest for loading BG data
+GetBGCopyRequest::
     ld   hl, BGMapToLoadAdjustementTable          ; $4577: $21 $2B $45
     ld   b, $00                                   ; $457A: $06 $00
     ld   a, [wBGMapToLoad]                        ; $457C: $FA $FF $D6
@@ -124,6 +351,7 @@ func_020_4577::
     ld   d, a                                     ; $4587: $57
     ret                                           ; $4588: $C9
 
+; Pointers table?
 data_020_4589::
     db   $4C, $62, $63, $66, $6B, $63, $65, $64  ; $4589 |Lbcfkced|
     db   $60, $4C, $4D, $4C, $4C, $4C, $4E, $4E  ; $4591 |`LMLLLNN|
@@ -139,6 +367,7 @@ data_020_4589::
     db   $00, $00, $00, $00, $00, $00, $7C, $7B  ; $45E1 |......|{|
     db   $7A                                     ; $45E9 |^-^-b5b|
 
+; Pointers table?
 data_020_45EA::
     db   $5E, $2D, $5E, $2D, $62, $35, $62       ; $45EA |^-^-b5b|
     db   $35, $5E, $2D, $5E, $2D, $62, $35, $62  ; $45F1 |5^-^-b5b|

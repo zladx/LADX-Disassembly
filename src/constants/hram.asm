@@ -385,6 +385,7 @@ hRoomStatus:: ; FFF8
   ; Status of the current room
   ; 00 : not visited
   ; 10 : special event occured
+  ; 30 : don't load room entities
   ; 80 : visited
   ds 1
 

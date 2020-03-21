@@ -39,7 +39,7 @@ MUSIC_MANBO_SONG                                equ $20
 ;MUSIC_RECEIVED ?? INSTRUMENT                   equ $21
 ;MUSIC_INSTRUMENTS_SONG ??                      equ $22
 ;MUSIC_INSTRUMENTS_SONG ??                      equ $23
-;MUSIC_INSTRUMENTS_SONG ??                      equ $24
+MUSIC_DREAM_SHRINE_BED                          equ $24
 MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25
 MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_2          equ $26
 ;MUSIC_INSTRUMENTS_SONG ??                      equ $27

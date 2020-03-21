@@ -564,7 +564,7 @@ func_004_4FFE::
 jr_004_5048:
     jp   CopyEntityPositionToActivePosition       ; $5048: $C3 $8A $3D
 
-func_004_504B::
+EntityInitFacade::
     call GetEntityTransitionCountdown             ; $504B: $CD $05 $0C
     ld   [hl], $FF                                ; $504E: $36 $FF
     ld   hl, wEntitiesIgnoreHitsCountdownTable    ; $5050: $21 $10 $C4
@@ -1448,7 +1448,7 @@ jr_004_565F:
     ld   [hl], a                                  ; $568E: $77
     ret                                           ; $568F: $C9
 
-func_004_5690::
+EntityInitMoldorm::
     xor  a                                        ; $5690: $AF
     ld   [$D201], a                               ; $5691: $EA $01 $D2
     ld   e, $80                                   ; $5694: $1E $80
@@ -1476,7 +1476,7 @@ MoldormEntityHandler::
     call DecrementEntityIgnoreHitsCountdown       ; $56B6: $CD $56 $0C
     ld   a, [wRoomTransitionState]                ; $56B9: $FA $24 $C1
     and  a                                        ; $56BC: $A7
-    jp   nz, func_004_5690                        ; $56BD: $C2 $90 $56
+    jp   nz, EntityInitMoldorm                        ; $56BD: $C2 $90 $56
 
     call label_3EE8                               ; $56C0: $CD $E8 $3E
     ldh  a, [hActiveEntityStatus]                 ; $56C3: $F0 $EA

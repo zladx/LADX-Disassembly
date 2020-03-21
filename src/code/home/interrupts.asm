@@ -166,9 +166,8 @@ LoadMapData::
     call LCDOff
     callsb LoadBGMapAttributes
 
-    ; Manipulate wBGMapToLoad
-    callsb func_020_4577
-
+    ; Read and execute a wRequest for loading wBGMapToLoad.
+    callsb GetBGCopyRequest
     ld   a, $08
     ld   [MBC3SelectBank], a
     call ExecuteBackgroundCopyRequest.noMapTransition

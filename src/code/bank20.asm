@@ -8946,7 +8946,7 @@ jr_020_7334:
     add  e                                        ; $74BD: $83
     rst  $38                                      ; $74BE: $FF
     and  h                                        ; $74BF: $A4
-    call nz, func_020_7679                        ; $74C0: $C4 $79 $76
+    db   $C4, $79, $76                            ; $74C0: $C4 $79 $76
     and  h                                        ; $74C3: $A4
     call nz, $FFFF                                ; $74C4: $C4 $FF $FF
     and  h                                        ; $74C7: $A4
@@ -9370,8 +9370,6 @@ jr_020_7334:
     ld   d, b                                     ; $7676: $50
     rst  $38                                      ; $7677: $FF
     rst  $38                                      ; $7678: $FF
-
-func_020_7679:
     ld   c, a                                     ; $7679: $4F
     ld   d, c                                     ; $767A: $51
     and  h                                        ; $767B: $A4

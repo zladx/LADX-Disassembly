@@ -55,9 +55,7 @@ Init::
     call ClearHRAMAndWRAM
 
     ; Copy DMA routine to HRAM
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call WriteDMACodeToHRAM
+    callsb WriteDMACodeToHRAM
 
     ; Initiate DMA transfer
     call hDMARoutine

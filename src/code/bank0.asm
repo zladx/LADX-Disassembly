@@ -1310,9 +1310,7 @@ FileCopyHandler::
     jp   FileCopyEntryPoint
 
 WorldHandler::
-    ld   a, BANK(UpdatePaletteEffectForInteractiveObjects)
-    ld   [MBC3SelectBank], a
-    call UpdatePaletteEffectForInteractiveObjects
+    callsb UpdatePaletteEffectForInteractiveObjects
     call PerformOverworldAudioTasks
     jpsw WorldHandlerEntryPoint
 

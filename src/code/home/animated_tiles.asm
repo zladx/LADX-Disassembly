@@ -207,9 +207,7 @@ AnimateCounterTilesGroup::
     ldh  a, [hAnimatedTilesFrameCount]
     and  $07
     jp   nz, SkipTilesGroupAnimation
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call LoadCounterAnimatedTiles
+    callsb LoadCounterAnimatedTiles
     ld   a, $0C
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a

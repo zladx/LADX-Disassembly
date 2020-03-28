@@ -351,7 +351,7 @@ GetBGCopyRequest::
     ld   d, a                                     ; $4587: $57
     ret                                           ; $4588: $C9
 
-; Pointers table?
+; Pointers to data in bank 0D
 data_020_4589::
     db   $4C, $62, $63, $66, $6B, $63, $65, $64  ; $4589 |Lbcfkced|
     db   $60, $4C, $4D, $4C, $4C, $4C, $4E, $4E  ; $4591 |`LMLLLNN|
@@ -367,16 +367,40 @@ data_020_4589::
     db   $00, $00, $00, $00, $00, $00, $7C, $7B  ; $45E1 |......|{|
     db   $7A                                     ; $45E9 |^-^-b5b|
 
-; Pointers table?
+; Tuples of (address higher byte, bank index)
 data_020_45EA::
-    db   $5E, $2D, $5E, $2D, $62, $35, $62       ; $45EA |^-^-b5b|
-    db   $35, $5E, $2D, $5E, $2D, $62, $35, $62  ; $45F1 |5^-^-b5b|
-    db   $35, $62, $35, $62, $35, $62, $35, $62  ; $45F9 |5b5b5b5b|
-    db   $35, $62, $35, $62, $35, $50, $2D, $62  ; $4601 |5b5b5P-b|
-    db   $35, $62, $35, $62, $35, $50, $2D, $62  ; $4609 |5b5b5P-b|
-    db   $35, $62, $35, $62, $35                 ; $4611 |5b5b5|
+    db   HIGH($5E00), BANK(DungeonsTilesCGB)
+    db   HIGH($5E00), BANK(DungeonsTilesCGB)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($5E00), BANK(DungeonsTilesCGB)
+    db   HIGH($5E00), BANK(DungeonsTilesCGB)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($5000), BANK(DungeonsTilesCGB)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($5000), BANK(DungeonsTilesCGB)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
+    db   HIGH($6200), BANK(ColorDungeonTiles)
 
-func_020_4616::
+; Get the address of color dungeon tiles to copy.
+; Tiles may be for background or sprites.
+;
+; Inputs:
+;   c    ???
+; Returns:
+;   hl   tiles target address (blocks of $40 bytes)
+;   a    tiles target bank
+GetColorDungeonTilesAddress::
     push de                                       ; $4616: $D5
     ldh  a, [hMapRoom]                            ; $4617: $F0 $F6
     and  a                                        ; $4619: $A7
@@ -410,20 +434,28 @@ jr_020_462F:
 
 jr_020_4640:
     ld   hl, data_020_45EA                        ; $4640: $21 $EA $45
+    ; de = ([hMapRoom] * 2) % $FF
     ldh  a, [hMapRoom]                            ; $4643: $F0 $F6
     sla  a                                        ; $4645: $CB $27
     ld   e, a                                     ; $4647: $5F
     ld   d, $00                                   ; $4648: $16 $00
+
+    ; e = data_020_45EA[de + 1]
     add  hl, de                                   ; $464A: $19
     inc  hl                                       ; $464B: $23
     ld   a, [hl]                                  ; $464C: $7E
     ld   e, a                                     ; $464D: $5F
+    ; hl = data_020_45EA[de] * $100
+    ; (i.e. higher byte is read from the tabel, lower byte is 0)
     dec  hl                                       ; $464E: $2B
     ld   a, [hl]                                  ; $464F: $7E
     ld   h, a                                     ; $4650: $67
     ld   l, $00                                   ; $4651: $2E $00
+
     add  hl, bc                                   ; $4653: $09
     ld   a, e                                     ; $4654: $7B
+
+    ; cleanup and return
     pop  de                                       ; $4655: $D1
     ret                                           ; $4656: $C9
 

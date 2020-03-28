@@ -279,6 +279,7 @@ incbin "gfx/world/animated_tiles.w32.cgb.2bpp"
 incbin "gfx/world/minimap.cgb.2bpp"
 
 section "bank2D",romx[$4000],bank[$2D]
+DungeonsTilesCGB::
 incbin "gfx/world/dungeons.cgb.2bpp"
 
 section "bank2E",romx[$4000],bank[$2E]

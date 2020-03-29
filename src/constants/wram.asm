@@ -739,9 +739,11 @@ wEntitiesClearedRooms:: ; CF00
 
 section "WRAM Bank1", wramx[$d000], bank[1]
 
+; This location has multiple uses
 wIsFileSelectionArrowShifted:: ; D000
   ; Is the arrow on the File Selection screen on the COPY item
-  ; (May have other usages in other parts of the gameplay code)
+wCreditsScratch0::
+  ; Scratch variable using during the Credits sequence
   ds 1
 
 wIntroTimer:: ; D001

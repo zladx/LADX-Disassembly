@@ -5374,7 +5374,7 @@ Data_020_783F::
 ; Copy semi-random data to $DC10
 ; (Called during the Credits water geyser sequence; to animate the water?)
 func_020_78ED::
-    ld   a, [wIsFileSelectionArrowShifted]        ; $78ED: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $78ED: $FA $00 $D0
     sla  a                                        ; $78F0: $CB $27
     ld   e, a                                     ; $78F2: $5F
     ld   d, $00                                   ; $78F3: $16 $00

@@ -21,7 +21,7 @@ endm
 
 ; Table of entities handlers
 ; See ENTITY_* constants for values
-EntityPointersTable::
+EntityHandlersTable::
 ._00 entity_pointer ArrowEntityHandler
 ._01 entity_pointer BoomerangEntityHandler
 ._02 entity_pointer BombEntityHandler

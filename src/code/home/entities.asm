@@ -233,7 +233,7 @@ ExecuteActiveEntityHandler_trampoline::
 ; Read the entity handler address in the handlers table,
 ; then jump to execution.
 ExecuteActiveEntityHandler::
-    ld   a, BANK(EntityPointersTable)
+    ld   a, BANK(EntityHandlersTable)
     ld   [MBC3SelectBank], a
 
     ; de = active entity id
@@ -242,7 +242,7 @@ ExecuteActiveEntityHandler::
     ld   d, b
 
     ; hl = de * 3
-    ld   hl, EntityPointersTable
+    ld   hl, EntityHandlersTable
     add  hl, de
     add  hl, de
     add  hl, de

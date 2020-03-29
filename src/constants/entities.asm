@@ -16,7 +16,7 @@ ENTITY_STATUS_LIFTED     equ 7
 ENTITY_STATUS_THROWN     equ 8
 
 ; Values for wEntitiesTypeTable
-; (See also EntityPointersTable)
+; (See also EntityHandlersTable)
 ENTITY_ARROW                         equ $00
 ENTITY_BOOMERANG                     equ $01
 ENTITY_BOMB                          equ $02

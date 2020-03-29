@@ -1,5 +1,5 @@
 ; Disassembly of "game.gbc"
-; This file was created with mgbdis v1.0.1 - Game Boy ROM disassembler by Matt Currie.
+; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
 func_020_4303::
@@ -513,29 +513,24 @@ TilemapLoadingHandlersTable::
 ._23 dw LoadTilemap23_trampoline
 
 data_020_46AA::
-    db   $51, $35
-    db   $4F, $35, $00, $00, $4B, $35, $00, $00  ; $46AC |O5..K5..|
-    db   $00, $00, $00, $00, $44, $35, $00, $00  ; $46B4 |....D5..|
-    db   $00, $00, $00, $00, $00, $00, $48, $35  ; $46BC |......H5|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $46C4 |........|
-    db   $44, $35, $4E, $35, $00, $00, $00, $00  ; $46CC |D5N5....|
-    db   $00, $00, $00, $00, $4D, $31, $00, $00  ; $46D4 |....M1..|
-    db   $4C, $35, $51, $2E, $45, $35, $45, $35  ; $46DC |L5Q.E5E5|
-    db   $00, $00, $45, $35, $00, $00, $45, $35  ; $46E4 |..E5..E5|
-    db   $00, $00, $49, $35, $00, $00, $00, $00  ; $46EC |..I5....|
-    db   $45, $35, $00, $00, $45, $35, $00, $00  ; $46F4 |E5..E5..|
-    db   $00, $00, $00, $00, $00, $00, $50, $35  ; $46FC |......P5|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $4704 |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $470C |........|
-    db   $46, $35, $00, $00, $00, $00, $4A, $35  ; $4714 |F5....J5|
-    db   $00, $00, $46, $35, $00, $00, $00, $00  ; $471C |..F5....|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $4724 |........|
-    db   $46, $35, $00, $00, $00, $00, $00, $00  ; $472C |F5......|
-    db   $4D, $35, $00, $00, $00, $00, $00, $00  ; $4734 |M5......|
-    db   $00, $00, $47, $35, $00, $00, $47, $35  ; $473C |..G5..G5|
-    db   $47, $35, $00, $00, $47, $35, $00, $00  ; $4744 |G5..G5..|
-    db   $47, $35, $47, $35, $00, $00, $00, $00  ; $474C |G5G5....|
-    db   $00, $00, $47, $35, $00, $00            ; $4754 |..G5..|
+    db   $51, $35, $4F, $35, $00, $00, $4B, $35, $00, $00, $00, $00, $00, $00, $44, $35
+    db   $00, $00, $00, $00, $00, $00, $00, $00, $48, $35, $00, $00, $00, $00, $00, $00
+    db   $00, $00, $44, $35, $4E, $35, $00, $00, $00, $00, $00, $00
+
+Data_020_46D6::
+    db   $00, $00, $4D, $31, $00, $00, $4C, $35, $51, $2E, $45, $35, $45, $35, $00, $00
+    db   $45, $35, $00, $00, $45, $35, $00, $00, $49, $35, $00, $00, $00, $00, $45, $35
+    db   $00, $00, $45, $35, $00, $00, $00, $00, $00, $00, $00, $00
+
+Data_020_4702::
+    db   $50, $35, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db   $00, $00, $46, $35, $00, $00, $00, $00, $4A, $35, $00, $00, $46, $35, $00, $00
+    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $46, $35
+
+Data_020_472E::
+    db   $00, $00, $00, $00, $00, $00, $4D, $35, $00, $00, $00, $00, $00, $00, $00, $00
+    db   $47, $35, $00, $00, $47, $35, $47, $35, $00, $00, $47, $35, $00, $00, $47, $35
+    db   $47, $35, $00, $00, $00, $00, $00, $00, $47, $35, $00, $00
 
 ; Color-dungeon related function
 func_020_475A::
@@ -563,7 +558,7 @@ func_020_475A::
 jr_020_4776:
     pop  de                                       ; $4776: $D1
     push de                                       ; $4777: $D5
-    ld   hl, $46D6                                ; $4778: $21 $D6 $46
+    ld   hl, Data_020_46D6                        ; $4778: $21 $D6 $46
     add  hl, de                                   ; $477B: $19
     ld   a, [hl]                                  ; $477C: $7E
     and  a                                        ; $477D: $A7
@@ -581,7 +576,7 @@ jr_020_4776:
 jr_020_478C:
     pop  de                                       ; $478C: $D1
     push de                                       ; $478D: $D5
-    ld   hl, $4702                                ; $478E: $21 $02 $47
+    ld   hl, Data_020_4702                        ; $478E: $21 $02 $47
     add  hl, de                                   ; $4791: $19
     ld   a, [hl]                                  ; $4792: $7E
     and  a                                        ; $4793: $A7
@@ -598,7 +593,7 @@ jr_020_478C:
 
 jr_020_47A2:
     pop  de                                       ; $47A2: $D1
-    ld   hl, $472E                                ; $47A3: $21 $2E $47
+    ld   hl, Data_020_472E                        ; $47A3: $21 $2E $47
     add  hl, de                                   ; $47A6: $19
     ld   a, [hl]                                  ; $47A7: $7E
     and  a                                        ; $47A8: $A7
@@ -619,24 +614,61 @@ jr_020_47B7:
     jr   nz, jr_020_47C2                          ; $47BB: $20 $05
 
     ld   a, $20                                   ; $47BD: $3E $20
-    call CopyColorDungeonSymbols                                ; $47BF: $CD $32 $0A
+    call CopyColorDungeonSymbols                  ; $47BF: $CD $32 $0A
 
 jr_020_47C2:
     ret                                           ; $47C2: $C9
 
 data_020_47C3::
-    db   $00, $40, $80, $C0, $00, $40, $80, $C0  ; $47C3 |.@...@..|
-
+    db   $00, $40, $80, $C0, $00, $40, $80, $C0
 
 MapRoomTable_b0::
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $47CB |........|
-    db   $00, $00, $00, $00, $00, $00, $00, $04  ; $47D3 |........|
-    db   $00, $00, $00, $04, $00, $00            ; $47DB |........|
+    nop                                           ; $47CB: $00
+    nop                                           ; $47CC: $00
+    nop                                           ; $47CD: $00
+    nop                                           ; $47CE: $00
+    nop                                           ; $47CF: $00
+    nop                                           ; $47D0: $00
+    nop                                           ; $47D1: $00
+    nop                                           ; $47D2: $00
+    nop                                           ; $47D3: $00
+    nop                                           ; $47D4: $00
+    nop                                           ; $47D5: $00
+    nop                                           ; $47D6: $00
+    nop                                           ; $47D7: $00
+    nop                                           ; $47D8: $00
+    nop                                           ; $47D9: $00
+    inc  b                                        ; $47DA: $04
+    nop                                           ; $47DB: $00
+    nop                                           ; $47DC: $00
+    nop                                           ; $47DD: $00
+    inc  b                                        ; $47DE: $04
+    nop                                           ; $47DF: $00
+    nop                                           ; $47E0: $00
 
 MapRoomTable_b1::
-    db   $00, $00, $00, $00, $00, $00, $00, $00
-    db   $00, $05, $00, $00, $00, $00, $05, $00
-    db   $00, $00, $00, $00, $00, $05
+    nop                                           ; $47E1: $00
+    nop                                           ; $47E2: $00
+    nop                                           ; $47E3: $00
+    nop                                           ; $47E4: $00
+    nop                                           ; $47E5: $00
+    nop                                           ; $47E6: $00
+    nop                                           ; $47E7: $00
+    nop                                           ; $47E8: $00
+    nop                                           ; $47E9: $00
+    dec  b                                        ; $47EA: $05
+    nop                                           ; $47EB: $00
+    nop                                           ; $47EC: $00
+    nop                                           ; $47ED: $00
+    nop                                           ; $47EE: $00
+    dec  b                                        ; $47EF: $05
+    nop                                           ; $47F0: $00
+    nop                                           ; $47F1: $00
+    nop                                           ; $47F2: $00
+    nop                                           ; $47F3: $00
+    nop                                           ; $47F4: $00
+    nop                                           ; $47F5: $00
+    dec  b                                        ; $47F6: $05
 
 ; Configure the parameters for copying the animated tiles.
 ; First called with b=1, then with b=0
@@ -669,7 +701,7 @@ ConfigureAnimatedTilesCopy::
     and  $07                                      ; $4812: $E6 $07
     ld   e, a                                     ; $4814: $5F
     ld   d, $00                                   ; $4815: $16 $00
-    ld   hl, data_020_47C3                       ; $4817: $21 $C3 $47
+    ld   hl, data_020_47C3                        ; $4817: $21 $C3 $47
     add  hl, de                                   ; $481A: $19
     ld   l, [hl]                                  ; $481B: $6E
     ld   h, $00                                   ; $481C: $26 $00
@@ -677,7 +709,7 @@ ConfigureAnimatedTilesCopy::
     add  hl, bc                                   ; $4821: $09
     add  hl, de                                   ; $4822: $19
     ld   de, $8FC0                                ; $4823: $11 $C0 $8F
-    ld   bc, $40                                ; $4826: $01 $40 $00
+    ld   bc, $40                                  ; $4826: $01 $40 $00
     ld   a, $35                                   ; $4829: $3E $35
     and  a                                        ; $482B: $A7
     ret                                           ; $482C: $C9
@@ -724,6 +756,8 @@ ReplaceObjects56and57::
 ClearWRAMBank5::
     ; If not on GBC, return
     ldh  a, [hIsGBC]                              ; $4854: $F0 $FE
+
+func_020_4856::
     and  a                                        ; $4856: $A7
     ret  z                                        ; $4857: $C8
 
@@ -740,17 +774,15 @@ ClearWRAMBank5::
     jr   nz, .loop                                ; $4865: $20 $F9
 
     xor  a                                        ; $4867: $AF
-    ld   [rSVBK], a                               ; $4868: $E0 $70
+    ldh  [rSVBK], a                               ; $4868: $E0 $70
     ei                                            ; $486A: $FB
     ret                                           ; $486B: $C9
 
 Data_020_486C::
-    add  hl, bc                                   ; $486C: $09
-    dec  b                                        ; $486D: $05
-    ld   [$0A08], sp                              ; $486E: $08 $08 $0A
-    ld   a, [bc]                                  ; $4871: $0A
-    rlca                                          ; $4872: $07
-    inc  c                                        ; $4873: $0C
+    db   $09, $05, $08, $08
+
+Data_020_4870::
+    db   $0A, $0A, $07, $0C
 
 func_020_4874::
     ld   hl, Data_020_486C                        ; $4874: $21 $6C $48
@@ -762,7 +794,7 @@ func_020_4874::
     ldh  [hSwordIntersectedAreaX], a              ; $487F: $E0 $CE
     swap a                                        ; $4881: $CB $37
     ldh  [hScratch0], a                           ; $4883: $E0 $D7
-    ld   hl, $4870                                ; $4885: $21 $70 $48
+    ld   hl, Data_020_4870                        ; $4885: $21 $70 $48
     add  hl, de                                   ; $4888: $19
     ldh  a, [hScratch1]                           ; $4889: $F0 $D8
     add  [hl]                                     ; $488B: $86
@@ -877,10 +909,11 @@ jr_020_4917:
     ldh  [hSwordIntersectedAreaX], a              ; $491C: $E0 $CE
     ret                                           ; $491E: $C9
 
-    db   $10                                      ; $491F: $10
-    ld   [de], a                                  ; $4920: $12
-    ld   de, $3E13                                ; $4921: $11 $13 $3E
-    dec  c                                        ; $4924: $0D
+Data_020_491F::
+    db   $10, $12, $11, $13
+
+func_020_4923::
+    ld   a, $0D                                   ; $4923: $3E $0D
     ld   [$DDD8], a                               ; $4925: $EA $D8 $DD
     ld   [hl], a                                  ; $4928: $77
     ld   a, [wAddRupeeBufferLow]                  ; $4929: $FA $90 $DB
@@ -904,10 +937,8 @@ jr_020_4917:
     call func_020_4898                            ; $494C: $CD $98 $48
     ret                                           ; $494F: $C9
 
-    db   $76                                      ; $4950: $76
-    ld   [hl], a                                  ; $4951: $77
-    db   $76                                      ; $4952: $76
-    ld   [hl], a                                  ; $4953: $77
+Data_020_4950::
+    db   $76, $77, $76, $77
 
 func_020_4954::
     ld   a, [hl]                                  ; $4954: $7E
@@ -928,13 +959,13 @@ jr_020_4961:
     ldh  a, [hScratch0]                           ; $4968: $F0 $D7
     ld   [$DDD8], a                               ; $496A: $EA $D8 $DD
     ld   a, $20                                   ; $496D: $3E $20
-    call func_91D                                ; $496F: $CD $1D $09
+    call func_91D                                 ; $496F: $CD $1D $09
     pop  bc                                       ; $4972: $C1
     ldh  a, [hScratch0]                           ; $4973: $F0 $D7
     cp   $AE                                      ; $4975: $FE $AE
     jr   nz, jr_020_497F                          ; $4977: $20 $06
 
-    ld   de, $4950                                ; $4979: $11 $50 $49
+    ld   de, Data_020_4950                        ; $4979: $11 $50 $49
     call func_020_4898                            ; $497C: $CD $98 $48
 
 jr_020_497F:
@@ -985,21 +1016,22 @@ CheckPushedTombStone::
     pop  bc                                       ; $49B0: $C1
     ret                                           ; $49B1: $C9
 
-    db   $10                                      ; $49B2: $10
-    ldh  a, [$FF08]                               ; $49B3: $F0 $08
-    db   $08, $0C, $0C                            ; $49B5: $08 $0C $0C
-    ld   a, [rNR10]                               ; $49B8: $F0 $10
+Data_020_49B2::
+    db   $10, $F0, $08, $08
+
+Data_020_49B6::
+    db   $0C, $0C, $F0, $10
 
 func_020_49BA::
     ldh  a, [hLinkDirection]                      ; $49BA: $F0 $9E
     ld   e, a                                     ; $49BC: $5F
     ld   d, $00                                   ; $49BD: $16 $00
-    ld   hl, $49B2                                ; $49BF: $21 $B2 $49
+    ld   hl, Data_020_49B2                        ; $49BF: $21 $B2 $49
     add  hl, de                                   ; $49C2: $19
     ldh  a, [hLinkPositionX]                      ; $49C3: $F0 $98
     add  [hl]                                     ; $49C5: $86
     ld   [wC179], a                               ; $49C6: $EA $79 $C1
-    ld   hl, $49B6                                ; $49C9: $21 $B6 $49
+    ld   hl, Data_020_49B6                        ; $49C9: $21 $B6 $49
     add  hl, de                                   ; $49CC: $19
     ldh  a, [hLinkPositionY]                      ; $49CD: $F0 $99
     add  [hl]                                     ; $49CF: $86
@@ -1014,30 +1046,29 @@ func_020_49D9::
     ld   h, a                                     ; $49DB: $67
     ldh  a, [hBGMapOffsetLow]                     ; $49DC: $F0 $E1
     ld   l, a                                     ; $49DE: $6F
-    ldh  a, [$FFE2]                               ; $49DF: $F0 $E2
+    ldh  a, [hScratchB]                           ; $49DF: $F0 $E2
     ld   b, a                                     ; $49E1: $47
-    ldh  a, [$FFE3]                               ; $49E2: $F0 $E3
+    ldh  a, [hScratchC]                           ; $49E2: $F0 $E3
     ld   c, a                                     ; $49E4: $4F
     ldh  a, [hScratchD]                           ; $49E5: $F0 $E4
     ld   d, a                                     ; $49E7: $57
-    ldh  a, [$FFE5]                               ; $49E8: $F0 $E5
+    ldh  a, [hScratchE]                           ; $49E8: $F0 $E5
     ld   e, a                                     ; $49EA: $5F
     ret                                           ; $49EB: $C9
 
-    ld   bc, $2001                                ; $49EC: $01 $01 $20
-    db   $20, $93                                 ; $49EF: $20 $93
+Data_020_49EC::
+    db   $01, $01, $20, $20
 
-    sub  e                                        ; $49F1: $93
-    inc  de                                       ; $49F2: $13
-    inc  de                                       ; $49F3: $13
+Data_020_49F0::
+    db   $93, $93, $13, $13
 
-func_020_49F4:
+func_020_49F4::
     ld   a, [wBGUpdateRegionOriginLow]            ; $49F4: $FA $27 $C1
     ld   [wRequestDestinationLow], a              ; $49F7: $EA $02 $D6
     ld   a, [wBGUpdateRegionOriginHigh]           ; $49FA: $FA $26 $C1
     or   $98                                      ; $49FD: $F6 $98
     ld   [wRequestDestinationHigh], a             ; $49FF: $EA $01 $D6
-    ld   hl, $49F0                                ; $4A02: $21 $F0 $49
+    ld   hl, Data_020_49F0                        ; $4A02: $21 $F0 $49
     add  hl, bc                                   ; $4A05: $09
     ld   a, [hl]                                  ; $4A06: $7E
     ld   [wRequestLength], a                      ; $4A07: $EA $03 $D6
@@ -1052,7 +1083,7 @@ func_020_49F4:
     ld   c, $04                                   ; $4A1F: $0E $04
     ret                                           ; $4A21: $C9
 
-func_020_4A22:
+func_020_4A22::
     ld   a, [wBGUpdateRegionOriginLow]            ; $4A22: $FA $27 $C1
     ld   [wRequestDestinationLow], a              ; $4A25: $EA $02 $D6
     ld   [$DC92], a                               ; $4A28: $EA $92 $DC
@@ -1060,7 +1091,7 @@ func_020_4A22:
     or   $98                                      ; $4A2E: $F6 $98
     ld   [wRequestDestinationHigh], a             ; $4A30: $EA $01 $D6
     ld   [$DC91], a                               ; $4A33: $EA $91 $DC
-    ld   hl, $49F0                                ; $4A36: $21 $F0 $49
+    ld   hl, Data_020_49F0                        ; $4A36: $21 $F0 $49
     add  hl, bc                                   ; $4A39: $09
     ld   a, [hl]                                  ; $4A3A: $7E
     ld   [wRequestLength], a                      ; $4A3B: $EA $03 $D6
@@ -1080,12 +1111,12 @@ func_020_4A22:
     ld   [$DCA6], a                               ; $4A61: $EA $A6 $DC
     ld   [$DCA7], a                               ; $4A64: $EA $A7 $DC
     ld   a, $DC                                   ; $4A67: $3E $DC
-    ldh  [$FFE2], a                               ; $4A69: $E0 $E2
+    ldh  [hScratchB], a                           ; $4A69: $E0 $E2
     ldh  [hScratchD], a                           ; $4A6B: $E0 $E4
     ld   a, $94                                   ; $4A6D: $3E $94
-    ldh  [$FFE3], a                               ; $4A6F: $E0 $E3
+    ldh  [hScratchC], a                           ; $4A6F: $E0 $E3
     ld   a, $AB                                   ; $4A71: $3E $AB
-    ldh  [$FFE5], a                               ; $4A73: $E0 $E5
+    ldh  [hScratchE], a                           ; $4A73: $E0 $E5
     ret                                           ; $4A75: $C9
 
 ; Configures an async data request to copy background tilemap
@@ -1095,7 +1126,7 @@ func_020_4A76::
     ld   b, $00                                   ; $4A7A: $06 $00
     ld   a, [$C12A]                               ; $4A7C: $FA $2A $C1
     ldh  [hScratch2], a                           ; $4A7F: $E0 $D9
-    ld   hl, $49EC                                ; $4A81: $21 $EC $49
+    ld   hl, Data_020_49EC                        ; $4A81: $21 $EC $49
     add  hl, bc                                   ; $4A84: $09
     ldh  a, [hIsGBC]                              ; $4A85: $F0 $FE
     and  a                                        ; $4A87: $A7
@@ -1110,35 +1141,17 @@ jr_020_4A8F:
 jr_020_4A92:
     ret                                           ; $4A92: $C9
 
-    ld   [$0C06], sp                              ; $4A93: $08 $06 $0C
-    ld   a, [bc]                                  ; $4A96: $0A
-    rst  $38                                      ; $4A97: $FF
-    inc  b                                        ; $4A98: $04
-    ld   a, [bc]                                  ; $4A99: $0A
-    inc  c                                        ; $4A9A: $0C
-    ld   b, $08                                   ; $4A9B: $06 $08
-    ld   a, [bc]                                  ; $4A9D: $0A
-    inc  c                                        ; $4A9E: $0C
-    rst  $38                                      ; $4A9F: $FF
-    inc  b                                        ; $4AA0: $04
-    inc  c                                        ; $4AA1: $0C
-    ld   a, [bc]                                  ; $4AA2: $0A
-    inc  hl                                       ; $4AA3: $23
-    inc  hl                                       ; $4AA4: $23
-    ld   h, e                                     ; $4AA5: $63
-    ld   h, e                                     ; $4AA6: $63
-    inc  bc                                       ; $4AA7: $03
-    inc  bc                                       ; $4AA8: $03
-    ld   b, e                                     ; $4AA9: $43
-    ld   b, e                                     ; $4AAA: $43
-    inc  bc                                       ; $4AAB: $03
-    inc  bc                                       ; $4AAC: $03
-    inc  bc                                       ; $4AAD: $03
-    inc  bc                                       ; $4AAE: $03
-    ld   b, e                                     ; $4AAF: $43
-    ld   b, e                                     ; $4AB0: $43
-    inc  hl                                       ; $4AB1: $23
-    inc  hl                                       ; $4AB2: $23
+Data_020_4A93::
+    db   $08
+
+Data_020_4A94::
+    db   $06, $0C, $0A, $FF, $04, $0A, $0C, $06, $08, $0A, $0C, $FF, $04, $0C, $0A
+
+Data_020_4AA3::
+    db   $23
+
+Data_020_4AA4::
+    db   $23, $63, $63, $03, $03, $43, $43, $03, $03, $03, $03, $43, $43, $23, $23
 
 func_020_4AB3::
     push hl                                       ; $4AB3: $E5
@@ -1150,7 +1163,7 @@ func_020_4AB3::
     add  l                                        ; $4ABB: $85
     ld   [bc], a                                  ; $4ABC: $02
     inc  bc                                       ; $4ABD: $03
-    ld   hl, $4A93                                ; $4ABE: $21 $93 $4A
+    ld   hl, Data_020_4A93                        ; $4ABE: $21 $93 $4A
     ldh  a, [hScratch2]                           ; $4AC1: $F0 $D9
     sla  a                                        ; $4AC3: $CB $27
     ld   e, a                                     ; $4AC5: $5F
@@ -1168,7 +1181,7 @@ func_020_4AB3::
 
 jr_020_4AD4:
     inc  bc                                       ; $4AD4: $03
-    ld   hl, $4AA3                                ; $4AD5: $21 $A3 $4A
+    ld   hl, Data_020_4AA3                        ; $4AD5: $21 $A3 $4A
     add  hl, de                                   ; $4AD8: $19
     ld   a, [hl]                                  ; $4AD9: $7E
     ld   hl, hScratch3                            ; $4ADA: $21 $DA $FF
@@ -1199,12 +1212,12 @@ jr_020_4AEF:
     add  $08                                      ; $4AF9: $C6 $08
     ld   [bc], a                                  ; $4AFB: $02
     inc  bc                                       ; $4AFC: $03
-    ld   hl, $4A94                                ; $4AFD: $21 $94 $4A
+    ld   hl, Data_020_4A94                        ; $4AFD: $21 $94 $4A
     add  hl, de                                   ; $4B00: $19
     ld   a, [hl]                                  ; $4B01: $7E
     ld   [bc], a                                  ; $4B02: $02
     inc  bc                                       ; $4B03: $03
-    ld   hl, $4AA4                                ; $4B04: $21 $A4 $4A
+    ld   hl, Data_020_4AA4                        ; $4B04: $21 $A4 $4A
     add  hl, de                                   ; $4B07: $19
     ld   a, [hl]                                  ; $4B08: $7E
     ld   hl, hScratch3                            ; $4B09: $21 $DA $FF
@@ -1229,32 +1242,32 @@ jr_020_4B1E:
 func_20_4B1F::
     xor  a                                        ; $4B1F: $AF
     ld   [wHasPlacedBomb], a                      ; $4B20: $EA $4E $C1
-    ld   [wActiveProjectileCount], a                    ; $4B23: $EA $4D $C1
+    ld   [wActiveProjectileCount], a              ; $4B23: $EA $4D $C1
     ld   [$C1A4], a                               ; $4B26: $EA $A4 $C1
-    ld   [wIsCarryingLiftedObject], a                               ; $4B29: $EA $5C $C1
+    ld   [wIsCarryingLiftedObject], a             ; $4B29: $EA $5C $C1
     ld   [$C1AE], a                               ; $4B2C: $EA $AE $C1
-    ld   a, [wIsLinkPushing]                               ; $4B2F: $FA $44 $C1
+    ld   a, [wIsLinkPushing]                      ; $4B2F: $FA $44 $C1
     and  a                                        ; $4B32: $A7
     jr   z, jr_020_4B39                           ; $4B33: $28 $04
 
     dec  a                                        ; $4B35: $3D
-    ld   [wIsLinkPushing], a                               ; $4B36: $EA $44 $C1
+    ld   [wIsLinkPushing], a                      ; $4B36: $EA $44 $C1
 
 jr_020_4B39:
     ret                                           ; $4B39: $C9
 
 ; Link's direction table
 data_020_4B3A::
-    db $10, $00, $08, $08
+    db   $10, $00, $08, $08
 
 data_020_4B3E::
-    db $03, $03, $08, $08
+    db   $03, $03, $08, $08
 
 data_020_4B42::
-    db $08, $08, $00, $0D
+    db   $08, $08, $00, $0D
 
 data_020_4B46::
-    db $08, $08, $03, $04
+    db   $08, $08, $03, $04
 
 ; Shield-related function
 func_020_4B4A::
@@ -1283,12 +1296,11 @@ func_020_4B4A::
     ld   [$C5B0], a                               ; $4B75: $EA $B0 $C5
     ret                                           ; $4B78: $C9
 
-    ld   [$00F8], sp                              ; $4B79: $08 $F8 $00
-    nop                                           ; $4B7C: $00
-    nop                                           ; $4B7D: $00
-    nop                                           ; $4B7E: $00
-    db   $fd                                      ; $4B7F: $FD
-    inc  b                                        ; $4B80: $04
+Data_020_4B79::
+    db   $08, $F8, $00, $00
+
+Data_020_4B7D::
+    db   $00, $00, $FD, $04
 
 func_020_4B81::
     ld   hl, wEntitiesPrivateCountdown1Table      ; $4B81: $21 $F0 $C2
@@ -1315,10 +1327,10 @@ label_020_4B9E:
     ld   [$C1C1], a                               ; $4BA4: $EA $C1 $C1
     ld   a, $0C                                   ; $4BA7: $3E $0C
     ld   [$C19B], a                               ; $4BA9: $EA $9B $C1
-    ld   hl, wEntitiesTransitionCountdownTable           ; $4BAC: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable    ; $4BAC: $21 $E0 $C2
     add  hl, de                                   ; $4BAF: $19
     ld   [hl], $A0                                ; $4BB0: $36 $A0
-    ld   hl, wEntitiesSpriteVariantTable               ; $4BB2: $21 $B0 $C3
+    ld   hl, wEntitiesSpriteVariantTable          ; $4BB2: $21 $B0 $C3
     add  hl, de                                   ; $4BB5: $19
     ld   [hl], d                                  ; $4BB6: $72
     ld   hl, wEntitiesUnknowTableV                ; $4BB7: $21 $80 $C4
@@ -1333,49 +1345,49 @@ label_020_4B9E:
     jr   jr_020_4BCD                              ; $4BC6: $18 $05
 
 jr_020_4BC8:
-    ld   hl, wEntitiesPosZTable                                ; $4BC8: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                   ; $4BC8: $21 $10 $C3
     add  hl, de                                   ; $4BCB: $19
     ld   [hl], d                                  ; $4BCC: $72
 
 jr_020_4BCD:
-    ld   hl, wEntitiesSpeedXTable                       ; $4BCD: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $4BCD: $21 $40 $C2
     add  hl, de                                   ; $4BD0: $19
     ld   [hl], d                                  ; $4BD1: $72
-    ld   hl, wEntitiesSpeedYTable                       ; $4BD2: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                 ; $4BD2: $21 $50 $C2
     add  hl, de                                   ; $4BD5: $19
     ld   [hl], d                                  ; $4BD6: $72
-    ld   hl, wEntitiesSpeedZTable                                ; $4BD7: $21 $20 $C3
+    ld   hl, wEntitiesSpeedZTable                 ; $4BD7: $21 $20 $C3
     add  hl, de                                   ; $4BDA: $19
     ld   [hl], d                                  ; $4BDB: $72
     ldh  a, [hLinkDirection]                      ; $4BDC: $F0 $9E
     ld   c, a                                     ; $4BDE: $4F
     ld   b, d                                     ; $4BDF: $42
-    ld   hl, $4B79                                ; $4BE0: $21 $79 $4B
+    ld   hl, Data_020_4B79                        ; $4BE0: $21 $79 $4B
 
 jr_020_4BE3:
     add  hl, bc                                   ; $4BE3: $09
     ldh  a, [hLinkPositionX]                      ; $4BE4: $F0 $98
     add  [hl]                                     ; $4BE6: $86
-    ld   hl, wEntitiesPosXTable                         ; $4BE7: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $4BE7: $21 $00 $C2
     add  hl, de                                   ; $4BEA: $19
     ld   [hl], a                                  ; $4BEB: $77
-    ld   hl, $4B7D                                ; $4BEC: $21 $7D $4B
+    ld   hl, Data_020_4B7D                        ; $4BEC: $21 $7D $4B
     add  hl, bc                                   ; $4BEF: $09
     ldh  a, [hLinkPositionY]                      ; $4BF0: $F0 $99
     add  [hl]                                     ; $4BF2: $86
-    ld   hl, wEntitiesPosYTable                         ; $4BF3: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $4BF3: $21 $10 $C2
     add  hl, de                                   ; $4BF6: $19
     ld   [hl], a                                  ; $4BF7: $77
-    ret                                           ; $4BF8: $C9
+    ret
 
-    jr   jr_020_4BE3                              ; $4BF9: $18 $E8
+Data_020_4BF9::
+    db   $18, -$18
 
-    nop                                           ; $4BFB: $00
-    add  sp, $18                                  ; $4BFC: $E8 $18
-    nop                                           ; $4BFE: $00
+Data_020_4BFB::
+    db   $00, -$18, $18, $00
 
 func_020_4BFF::
-    ld   hl, wEntitiesTransitionCountdownTable           ; $4BFF: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable    ; $4BFF: $21 $E0 $C2
     add  hl, de                                   ; $4C02: $19
     ld   [hl], $28                                ; $4C03: $36 $28
     ld   c, $04                                   ; $4C05: $0E $04
@@ -1400,10 +1412,10 @@ jr_020_4C10:
     and  $03                                      ; $4C1A: $E6 $03
     ld   c, a                                     ; $4C1C: $4F
     ld   b, $00                                   ; $4C1D: $06 $00
-    ld   hl, $4BF8                                ; $4C1F: $21 $F8 $4B
+    ld   hl, Data_020_4BF9 - 1                    ; $4C1F: $21 $F8 $4B
     add  hl, bc                                   ; $4C22: $09
     ld   a, [hl]                                  ; $4C23: $7E
-    ld   hl, wEntitiesSpeedXTable                       ; $4C24: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $4C24: $21 $40 $C2
     add  hl, de                                   ; $4C27: $19
     ld   [hl], a                                  ; $4C28: $77
     ldh  a, [hPressedButtonsMask]                 ; $4C29: $F0 $CB
@@ -1412,23 +1424,21 @@ jr_020_4C10:
     and  $03                                      ; $4C2F: $E6 $03
     ld   c, a                                     ; $4C31: $4F
     ld   b, $00                                   ; $4C32: $06 $00
-    ld   hl, $4BFB                                ; $4C34: $21 $FB $4B
+    ld   hl, Data_020_4BFB                        ; $4C34: $21 $FB $4B
     add  hl, bc                                   ; $4C37: $09
     ld   a, [hl]                                  ; $4C38: $7E
-    ld   hl, wEntitiesSpeedYTable                       ; $4C39: $21 $50 $C2
+    ld   hl, wEntitiesSpeedYTable                 ; $4C39: $21 $50 $C2
     add  hl, de                                   ; $4C3C: $19
     ld   [hl], a                                  ; $4C3D: $77
 
 jr_020_4C3E:
     ret                                           ; $4C3E: $C9
 
-    ld   c, $F2                                   ; $4C3F: $0E $F2
-    nop                                           ; $4C41: $00
-    nop                                           ; $4C42: $00
-    nop                                           ; $4C43: $00
-    nop                                           ; $4C44: $00
-    db   $f4                                      ; $4C45: $F4
-    inc  c                                        ; $4C46: $0C
+Data_020_4C3F::
+    db   $0E, $F2, $00, $00
+
+Data_020_4C43::
+    db   $00, $00, $F4, $0C
 
 func_020_4C47::
     ld   a, $05                                   ; $4C47: $3E $05
@@ -1460,25 +1470,25 @@ jr_020_4C6D:
     push bc                                       ; $4C6D: $C5
     ldh  a, [hLinkDirection]                      ; $4C6E: $F0 $9E
     ld   c, a                                     ; $4C70: $4F
-    ld   hl, $4C3F                                ; $4C71: $21 $3F $4C
+    ld   hl, Data_020_4C3F                        ; $4C71: $21 $3F $4C
     add  hl, bc                                   ; $4C74: $09
     ldh  a, [hLinkPositionX]                      ; $4C75: $F0 $98
     add  [hl]                                     ; $4C77: $86
-    ld   hl, wEntitiesPosXTable                         ; $4C78: $21 $00 $C2
+    ld   hl, wEntitiesPosXTable                   ; $4C78: $21 $00 $C2
     add  hl, de                                   ; $4C7B: $19
     ld   [hl], a                                  ; $4C7C: $77
-    ld   hl, $4C43                                ; $4C7D: $21 $43 $4C
+    ld   hl, Data_020_4C43                        ; $4C7D: $21 $43 $4C
     add  hl, bc                                   ; $4C80: $09
     ldh  a, [hLinkPositionY]                      ; $4C81: $F0 $99
     add  [hl]                                     ; $4C83: $86
-    ld   hl, wEntitiesPosYTable                         ; $4C84: $21 $10 $C2
+    ld   hl, wEntitiesPosYTable                   ; $4C84: $21 $10 $C2
     add  hl, de                                   ; $4C87: $19
     ld   [hl], a                                  ; $4C88: $77
     ldh  a, [hLinkPositionZ]                      ; $4C89: $F0 $A2
-    ld   hl, wEntitiesPosZTable                                ; $4C8B: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                   ; $4C8B: $21 $10 $C3
     add  hl, de                                   ; $4C8E: $19
     ld   [hl], a                                  ; $4C8F: $77
-    ld   hl, wEntitiesTransitionCountdownTable           ; $4C90: $21 $E0 $C2
+    ld   hl, wEntitiesTransitionCountdownTable    ; $4C90: $21 $E0 $C2
     add  hl, de                                   ; $4C93: $19
     ld   [hl], $17                                ; $4C94: $36 $17
     pop  bc                                       ; $4C96: $C1
@@ -1487,11 +1497,12 @@ jr_020_4C6D:
 PlayBoomerangSfx::
     ld   a, [$C5AC]                               ; $4C98: $FA $AC $C5
     and  a                                        ; $4C9B: $A7
-    jr   nz, .return                              ; $4C9C: $20 $04
+    jr   nz, PlayBoomerangSfx.return              ; $4C9C: $20 $04
 
-    ld   a, NOISE_SFX_BOOMERANG                   ; $4C9E: $3E $2D
+    ld   a, $2D                                   ; $4C9E: $3E $2D
     ldh  [hNoiseSfx], a                           ; $4CA0: $E0 $F4
-.return
+
+PlayBoomerangSfx.return::
     ret                                           ; $4CA2: $C9
 
 ResetRoomVariables::
@@ -1520,1074 +1531,228 @@ ResetRoomVariables::
     ld   [$C50F], a                               ; $4CE0: $EA $0F $C5
     ret                                           ; $4CE3: $C9
 
-    nop                                           ; $4CE4: $00
-    nop                                           ; $4CE5: $00
-    nop                                           ; $4CE6: $00
-    nop                                           ; $4CE7: $00
-    nop                                           ; $4CE8: $00
-    nop                                           ; $4CE9: $00
-    nop                                           ; $4CEA: $00
-    nop                                           ; $4CEB: $00
-    nop                                           ; $4CEC: $00
-    nop                                           ; $4CED: $00
-    nop                                           ; $4CEE: $00
-    nop                                           ; $4CEF: $00
-    nop                                           ; $4CF0: $00
-    nop                                           ; $4CF1: $00
-    nop                                           ; $4CF2: $00
-    nop                                           ; $4CF3: $00
-    nop                                           ; $4CF4: $00
-    nop                                           ; $4CF5: $00
-    nop                                           ; $4CF6: $00
-    nop                                           ; $4CF7: $00
-    nop                                           ; $4CF8: $00
-    nop                                           ; $4CF9: $00
-    nop                                           ; $4CFA: $00
-    nop                                           ; $4CFB: $00
-    nop                                           ; $4CFC: $00
-    nop                                           ; $4CFD: $00
-    nop                                           ; $4CFE: $00
-    nop                                           ; $4CFF: $00
-    nop                                           ; $4D00: $00
-    nop                                           ; $4D01: $00
-    nop                                           ; $4D02: $00
-    nop                                           ; $4D03: $00
-    nop                                           ; $4D04: $00
-    nop                                           ; $4D05: $00
-    nop                                           ; $4D06: $00
-    nop                                           ; $4D07: $00
-    nop                                           ; $4D08: $00
-    nop                                           ; $4D09: $00
-    nop                                           ; $4D0A: $00
-    nop                                           ; $4D0B: $00
-    nop                                           ; $4D0C: $00
-    nop                                           ; $4D0D: $00
-    nop                                           ; $4D0E: $00
-    nop                                           ; $4D0F: $00
-    nop                                           ; $4D10: $00
-    nop                                           ; $4D11: $00
-    nop                                           ; $4D12: $00
-    nop                                           ; $4D13: $00
-    nop                                           ; $4D14: $00
-    nop                                           ; $4D15: $00
-    nop                                           ; $4D16: $00
-    nop                                           ; $4D17: $00
-    nop                                           ; $4D18: $00
-    nop                                           ; $4D19: $00
-    nop                                           ; $4D1A: $00
-    nop                                           ; $4D1B: $00
-    nop                                           ; $4D1C: $00
-    nop                                           ; $4D1D: $00
-    nop                                           ; $4D1E: $00
-    nop                                           ; $4D1F: $00
-    nop                                           ; $4D20: $00
-    nop                                           ; $4D21: $00
-    nop                                           ; $4D22: $00
-    nop                                           ; $4D23: $00
-    ldh  a, [hActiveEntityState]                  ; $4D24: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D26: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D28: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D2A: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D2C: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D2E: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D30: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D32: $F0 $F0
-    ldh  [hBGMapOffsetHigh], a                    ; $4D34: $E0 $E0
-    ldh  [hBGMapOffsetHigh], a                    ; $4D36: $E0 $E0
-    ldh  [$FFE2], a                               ; $4D38: $E0 $E2
-    push hl                                       ; $4D3A: $E5
-    add  sp, -$15                                 ; $4D3B: $E8 $EB
-    xor  $F1                                      ; $4D3D: $EE $F1
-    db   $f4                                      ; $4D3F: $F4
-    rst  $30                                      ; $4D40: $F7
-    ld   a, [$00FD]                               ; $4D41: $FA $FD $00
-    inc  bc                                       ; $4D44: $03
-    ld   b, $09                                   ; $4D45: $06 $09
-    inc  c                                        ; $4D47: $0C
-    rrca                                          ; $4D48: $0F
-    ld   [de], a                                  ; $4D49: $12
-    dec  d                                        ; $4D4A: $15
-    jr   jr_020_4D68                              ; $4D4B: $18 $1B
+;
+; Title screen GFX coordinates
+;
 
-    ld   e, $21                                   ; $4D4D: $1E $21
-    inc  h                                        ; $4D4F: $24
-    daa                                           ; $4D50: $27
-    ld   a, [hl+]                                 ; $4D51: $2A
-    dec  l                                        ; $4D52: $2D
-    jr   nc, jr_020_4D88                          ; $4D53: $30 $33
+Data_020_4CE4::
+    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $4CE4
+    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $4CEC
+    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $4CF4
+    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $4CFC
+    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $4D04
+    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $4D0C
+    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $4D14
+    db   $00, $00, $00, $00, $00, $00, $00, $00   ; $4D1C
 
-    ld   [hl], $39                                ; $4D55: $36 $39
-    inc  a                                        ; $4D57: $3C
-    ccf                                           ; $4D58: $3F
-    ld   b, d                                     ; $4D59: $42
-    ld   b, l                                     ; $4D5A: $45
-    ld   c, b                                     ; $4D5B: $48
-    inc  sp                                       ; $4D5C: $33
-    ld   [hl], $39                                ; $4D5D: $36 $39
-    inc  a                                        ; $4D5F: $3C
-    ccf                                           ; $4D60: $3F
-    ld   b, d                                     ; $4D61: $42
-    ld   b, l                                     ; $4D62: $45
-    ld   c, b                                     ; $4D63: $48
-    ldh  a, [hActiveEntityState]                  ; $4D64: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D66: $F0 $F0
+Data_020_4D24::
+    db   $F0, $F0, $F0, $F0, $F0, $F0, $F0, $F0   ; $4D24
+    db   $F0, $F0, $F0, $F0, $F0, $F0, $F0, $F0   ; $4D2C
+    db   $E0, $E0, $E0, $E0, $E0, $E2, $E5, $E8   ; $4D34
+    db   $EB, $EE, $F1, $F4, $F7, $FA, $FD, $00   ; $4D3C
+    db   $03, $06, $09, $0C, $0F, $12, $15, $18   ; $4D44
+    db   $1B, $1E, $21, $24, $27, $2A, $2D, $30   ; $4D4C
+    db   $33, $36, $39, $3C, $3F, $42, $45, $48   ; $4D54
+    db   $33, $36, $39, $3C, $3F, $42, $45, $48   ; $4D5C
 
-jr_020_4D68:
-    ldh  a, [hActiveEntityState]                  ; $4D68: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D6A: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D6C: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D6E: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4D70: $F0 $F0
-    ldh  a, [hBGMapOffsetHigh]                    ; $4D72: $F0 $E0
-    ld   [$ff00+c], a                             ; $4D74: $E2
-    db   $e4                                      ; $4D75: $E4
-    and  $E8                                      ; $4D76: $E6 $E8
-    ld   [$EEEC], a                               ; $4D78: $EA $EC $EE
-    ldh  a, [hJingle]                             ; $4D7B: $F0 $F2
-    db   $f4                                      ; $4D7D: $F4
-    or   $F8                                      ; $4D7E: $F6 $F8
-    ld   a, [$FEFC]                               ; $4D80: $FA $FC $FE
-    nop                                           ; $4D83: $00
-    ld   [bc], a                                  ; $4D84: $02
-    inc  b                                        ; $4D85: $04
-    ld   b, $08                                   ; $4D86: $06 $08
+Data_020_4D64::
+    db   $F0, $F0, $F0, $F0, $F0, $F0, $F0, $F0   ; $4D64
+    db   $F0, $F0, $F0, $F0, $F0, $F0, $F0, $E0   ; $4D6C
+    db   $E2, $E4, $E6, $E8, $EA, $EC, $EE, $F0   ; $4D74
+    db   $F2, $F4, $F6, $F8, $FA, $FC, $FE, $00   ; $4D7C
+    db   $02, $04, $06, $08, $0A, $0C, $0E, $10   ; $4D84
+    db   $12, $14, $16, $18, $1A, $1C, $1D, $1E   ; $4D8C
+    db   $20, $22, $24, $26, $28, $2A, $2C, $2E   ; $4D94
+    db   $20, $22, $24, $26, $28, $2A, $2C, $2E   ; $4D9C
 
-jr_020_4D88:
-    ld   a, [bc]                                  ; $4D88: $0A
-    inc  c                                        ; $4D89: $0C
-    ld   c, $10                                   ; $4D8A: $0E $10
-    ld   [de], a                                  ; $4D8C: $12
-    inc  d                                        ; $4D8D: $14
-    ld   d, $18                                   ; $4D8E: $16 $18
-    ld   a, [de]                                  ; $4D90: $1A
-    inc  e                                        ; $4D91: $1C
-    dec  e                                        ; $4D92: $1D
-    ld   e, $20                                   ; $4D93: $1E $20
-    ld   [hl+], a                                 ; $4D95: $22
-    inc  h                                        ; $4D96: $24
-    ld   h, $28                                   ; $4D97: $26 $28
-    ld   a, [hl+]                                 ; $4D99: $2A
-    inc  l                                        ; $4D9A: $2C
-    ld   l, $20                                   ; $4D9B: $2E $20
-    ld   [hl+], a                                 ; $4D9D: $22
-    inc  h                                        ; $4D9E: $24
-    ld   h, $28                                   ; $4D9F: $26 $28
-    ld   a, [hl+]                                 ; $4DA1: $2A
-    inc  l                                        ; $4DA2: $2C
-    ld   l, $F0                                   ; $4DA3: $2E $F0
-    ldh  a, [hActiveEntityState]                  ; $4DA5: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4DA7: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4DA9: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4DAB: $F0 $F0
-    rst  $18                                      ; $4DAD: $DF
-    ldh  [$FFE2], a                               ; $4DAE: $E0 $E2
-    db   $e3                                      ; $4DB0: $E3
-    push hl                                       ; $4DB1: $E5
-    and  $E8                                      ; $4DB2: $E6 $E8
-    jp   hl                                       ; $4DB4: $E9
+Data_020_4DA4::
+    db   $F0, $F0, $F0, $F0, $F0, $F0, $F0, $F0   ; $4DA4
+    db   $F0, $DF, $E0, $E2, $E3, $E5, $E6, $E8   ; $4DAC
+    db   $E9, $EB, $EC, $EE, $EF, $F1, $F2, $F4   ; $4DB4
+    db   $F5, $F7, $F8, $FA, $FB, $FD, $FE, $00   ; $4DBC
+    db   $01, $03, $04, $06, $07, $09, $0A, $0C   ; $4DC4
+    db   $0D, $0F, $10, $12, $13, $15, $16, $18   ; $4DCC
+    db   $19, $1B, $1C, $1E, $1F, $21, $22, $24   ; $4DD4
+    db   $19, $1B, $1C, $1E, $1F, $21, $22, $24   ; $4DDC
+    db   $F0, $F0, $F0, $F0, $F0, $F0, $F0, $F0   ; $4DE4
+    db   $F0, $F0, $E2, $E3, $E5, $E6, $E8, $E9   ; $4DEC
+    db   $EB, $EC, $EE, $F0, $F2, $F3, $F6, $F7   ; $4DF4
+    db   $F8, $F9, $FA, $FC, $FD, $FE, $FF, $00   ; $4DFC
+    db   $01, $03, $04, $06, $07, $09, $0A, $0C   ; $4E04
+    db   $0D, $0F, $10, $12, $13, $15, $16, $18   ; $4E0C
+    db   $19, $1B, $1C, $1E, $1F, $21, $22, $22   ; $4E14
+    db   $24, $25, $27, $29, $2B, $2C, $2E, $2F   ; $4E1C
 
-    db   $eb                                      ; $4DB5: $EB
-    db   $ec                                      ; $4DB6: $EC
-    xor  $EF                                      ; $4DB7: $EE $EF
-    pop  af                                       ; $4DB9: $F1
-    ld   a, [$ff00+c]                             ; $4DBA: $F2
-    db   $f4                                      ; $4DBB: $F4
-    push af                                       ; $4DBC: $F5
-    rst  $30                                      ; $4DBD: $F7
-    ld   hl, sp-$06                               ; $4DBE: $F8 $FA
-    ei                                            ; $4DC0: $FB
-    db   $fd                                      ; $4DC1: $FD
-    cp   $00                                      ; $4DC2: $FE $00
-    ld   bc, $403                                 ; $4DC4: $01 $03 $04
-    ld   b, $07                                   ; $4DC7: $06 $07
-    add  hl, bc                                   ; $4DC9: $09
-    ld   a, [bc]                                  ; $4DCA: $0A
-    inc  c                                        ; $4DCB: $0C
-    dec  c                                        ; $4DCC: $0D
-    rrca                                          ; $4DCD: $0F
-    db   $10                                      ; $4DCE: $10
-    ld   [de], a                                  ; $4DCF: $12
-    inc  de                                       ; $4DD0: $13
-    dec  d                                        ; $4DD1: $15
-    ld   d, $18                                   ; $4DD2: $16 $18
-    add  hl, de                                   ; $4DD4: $19
-    dec  de                                       ; $4DD5: $1B
-    inc  e                                        ; $4DD6: $1C
-    ld   e, $1F                                   ; $4DD7: $1E $1F
-    ld   hl, $2422                                ; $4DD9: $21 $22 $24
-    add  hl, de                                   ; $4DDC: $19
-    dec  de                                       ; $4DDD: $1B
-    inc  e                                        ; $4DDE: $1C
-    ld   e, $1F                                   ; $4DDF: $1E $1F
-    ld   hl, $2422                                ; $4DE1: $21 $22 $24
-    ldh  a, [hActiveEntityState]                  ; $4DE4: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4DE6: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4DE8: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4DEA: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4DEC: $F0 $F0
-    ld   [$ff00+c], a                             ; $4DEE: $E2
-    db   $e3                                      ; $4DEF: $E3
-    push hl                                       ; $4DF0: $E5
-    and  $E8                                      ; $4DF1: $E6 $E8
-    jp   hl                                       ; $4DF3: $E9
+Data_020_4E24::
+    db   $F0, $F0, $F0, $F0, $F0, $F0, $F0, $F0   ; $4E24
+    db   $E1, $E2, $E4, $E5, $E6, $E8, $E9, $EA   ; $4E2C
+    db   $EC, $ED, $EE, $F0, $F1, $F2, $F4, $F5   ; $4E34
+    db   $F6, $F8, $F9, $FA, $FC, $FE, $FF, $00   ; $4E3C
+    db   $01, $02, $04, $05, $06, $08, $09, $0A   ; $4E44
+    db   $0C, $0D, $0E, $10, $11, $12, $14, $15   ; $4E4C
+    db   $16, $18, $19, $1A, $1C, $1D, $1E, $20   ; $4E54
+    db   $22, $23, $24, $25, $27, $28, $2A, $2B   ; $4E5C
+    db   $F0, $F0, $F0, $F0, $F0, $F0, $F0, $E2   ; $4E64
+    db   $E3, $E4, $E5, $E6, $E8, $E9, $EA, $EC   ; $4E6C
+    db   $ED, $EE, $EF, $F1, $F2, $F3, $F5, $F6   ; $4E74
+    db   $F8, $F9, $FA, $FB, $FD, $FE, $FF, $00   ; $4E7C
+    db   $01, $02, $03, $05, $06, $07, $08, $0A   ; $4E84
+    db   $0B, $0C, $0D, $0F, $10, $11, $12, $14   ; $4E8C
+    db   $15, $16, $17, $19, $1A, $1B, $1D, $1E   ; $4E94
+    db   $20, $21, $22, $23, $25, $26, $27, $28   ; $4E9C
 
-    db   $eb                                      ; $4DF4: $EB
-    db   $ec                                      ; $4DF5: $EC
-    xor  $F0                                      ; $4DF6: $EE $F0
-    ld   a, [$ff00+c]                             ; $4DF8: $F2
-    di                                            ; $4DF9: $F3
-    or   $F7                                      ; $4DFA: $F6 $F7
-    ld   hl, sp-$07                               ; $4DFC: $F8 $F9
-    ld   a, [$FDFC]                               ; $4DFE: $FA $FC $FD
-    cp   $FF                                      ; $4E01: $FE $FF
-    nop                                           ; $4E03: $00
-    ld   bc, $403                                 ; $4E04: $01 $03 $04
-    ld   b, $07                                   ; $4E07: $06 $07
-    add  hl, bc                                   ; $4E09: $09
-    ld   a, [bc]                                  ; $4E0A: $0A
-    inc  c                                        ; $4E0B: $0C
-    dec  c                                        ; $4E0C: $0D
-    rrca                                          ; $4E0D: $0F
-    db   $10                                      ; $4E0E: $10
-    ld   [de], a                                  ; $4E0F: $12
-    inc  de                                       ; $4E10: $13
-    dec  d                                        ; $4E11: $15
-    ld   d, $18                                   ; $4E12: $16 $18
-    add  hl, de                                   ; $4E14: $19
-    dec  de                                       ; $4E15: $1B
-    inc  e                                        ; $4E16: $1C
-    ld   e, $1F                                   ; $4E17: $1E $1F
-    ld   hl, $2222                                ; $4E19: $21 $22 $22
-    inc  h                                        ; $4E1C: $24
-    dec  h                                        ; $4E1D: $25
-    daa                                           ; $4E1E: $27
-    add  hl, hl                                   ; $4E1F: $29
-    dec  hl                                       ; $4E20: $2B
-    inc  l                                        ; $4E21: $2C
-    ld   l, $2F                                   ; $4E22: $2E $2F
-    ldh  a, [hActiveEntityState]                  ; $4E24: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4E26: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4E28: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4E2A: $F0 $F0
-    pop  hl                                       ; $4E2C: $E1
-    ld   [$ff00+c], a                             ; $4E2D: $E2
-    db   $e4                                      ; $4E2E: $E4
-    push hl                                       ; $4E2F: $E5
-    and  $E8                                      ; $4E30: $E6 $E8
-    jp   hl                                       ; $4E32: $E9
+Data_020_4EA4::
+    db   $F0, $F0, $F0, $F0, $F0, $F0, $E3, $E4   ; $4EA4
+    db   $E5, $E6, $E7, $E8, $E9, $EB, $EC, $ED   ; $4EAC
+    db   $EE, $F0, $F1, $F2, $F3, $F4, $F6, $F7   ; $4EB4
+    db   $F8, $F9, $FB, $FC, $FD, $FE, $FF, $00   ; $4EBC
+    db   $01, $02, $03, $04, $06, $07, $08, $09   ; $4EC4
+    db   $0A, $0B, $0C, $0E, $10, $11, $12, $13   ; $4ECC
+    db   $14, $15, $16, $18, $19, $1A, $1B, $1C   ; $4ED4
+    db   $1D, $1F, $20, $21, $22, $23, $24, $25   ; $4EDC
 
-    ld   [$EDEC], a                               ; $4E33: $EA $EC $ED
-    xor  $F0                                      ; $4E36: $EE $F0
-    pop  af                                       ; $4E38: $F1
-    ld   a, [$ff00+c]                             ; $4E39: $F2
-    db   $f4                                      ; $4E3A: $F4
-    push af                                       ; $4E3B: $F5
-    or   $F8                                      ; $4E3C: $F6 $F8
-    ld   sp, hl                                   ; $4E3E: $F9
-    ld   a, [$FEFC]                               ; $4E3F: $FA $FC $FE
-    rst  $38                                      ; $4E42: $FF
-    nop                                           ; $4E43: $00
-    ld   bc, $402                                 ; $4E44: $01 $02 $04
-    dec  b                                        ; $4E47: $05
-    ld   b, $08                                   ; $4E48: $06 $08
-    add  hl, bc                                   ; $4E4A: $09
-    ld   a, [bc]                                  ; $4E4B: $0A
-    inc  c                                        ; $4E4C: $0C
-    dec  c                                        ; $4E4D: $0D
-    ld   c, $10                                   ; $4E4E: $0E $10
-    ld   de, $1412                                ; $4E50: $11 $12 $14
-    dec  d                                        ; $4E53: $15
-    ld   d, $18                                   ; $4E54: $16 $18
-    add  hl, de                                   ; $4E56: $19
-    ld   a, [de]                                  ; $4E57: $1A
-    inc  e                                        ; $4E58: $1C
-    dec  e                                        ; $4E59: $1D
-    ld   e, $20                                   ; $4E5A: $1E $20
-    ld   [hl+], a                                 ; $4E5C: $22
-    inc  hl                                       ; $4E5D: $23
-    inc  h                                        ; $4E5E: $24
-    dec  h                                        ; $4E5F: $25
-    daa                                           ; $4E60: $27
-    jr   z, jr_020_4E8D                           ; $4E61: $28 $2A
+Data_020_4EE4::
+    db   $F0, $F0, $F0, $F0, $F0, $E4, $E5, $E6   ; $4EE4
+    db   $E7, $E8, $E9, $EA, $EB, $EC, $EE, $EF   ; $4EEC
+    db   $F0, $F1, $F2, $F3, $F4, $F5, $F6, $F8   ; $4EF4
+    db   $F9, $FA, $FB, $FC, $FD, $FE, $FF, $00   ; $4EFC
+    db   $01, $02, $03, $04, $05, $06, $07, $08   ; $4F04
+    db   $09, $0A, $0C, $0D, $0E, $0F, $10, $11   ; $4F0C
+    db   $12, $13, $15, $16, $17, $18, $19, $1A   ; $4F14
+    db   $1B, $1C, $1D, $1E, $1F, $21, $22, $23   ; $4F1C
+    db   $F0, $F0, $F0, $F0, $E5, $E6, $E7, $E8   ; $4F24
+    db   $E9, $EA, $EB, $EC, $ED, $EE, $EF, $F0   ; $4F2C
+    db   $F1, $F2, $F3, $F4, $F5, $F6, $F7, $F8   ; $4F34
+    db   $F9, $FA, $FB, $FC, $FD, $FE, $FF, $00   ; $4F3C
+    db   $01, $02, $03, $04, $05, $06, $07, $08   ; $4F44
+    db   $09, $0A, $0B, $0C, $0D, $0E, $0F, $10   ; $4F4C
+    db   $11, $12, $13, $14, $15, $16, $17, $18   ; $4F54
+    db   $19, $1A, $1B, $1C, $1D, $1E, $1F, $20   ; $4F5C
 
-    dec  hl                                       ; $4E63: $2B
-    ldh  a, [hActiveEntityState]                  ; $4E64: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4E66: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4E68: $F0 $F0
-    ldh  a, [$FFE2]                               ; $4E6A: $F0 $E2
-    db   $e3                                      ; $4E6C: $E3
-    db   $e4                                      ; $4E6D: $E4
-    push hl                                       ; $4E6E: $E5
-    and  $E8                                      ; $4E6F: $E6 $E8
-    jp   hl                                       ; $4E71: $E9
+Data_020_4F64::
+    db   $F0, $F0, $F0, $E6, $E7, $E8, $E8, $E9   ; $4F64
+    db   $EA, $EB, $EC, $ED, $EE, $EF, $F0, $F0   ; $4F6C
+    db   $F1, $F2, $F3, $F4, $F5, $F6, $F7, $F8   ; $4F74
+    db   $F8, $F9, $FA, $FB, $FC, $FD, $FE, $FF   ; $4F7C
+    db   $00, $01, $02, $03, $04, $05, $06, $07   ; $4F84
+    db   $07, $08, $09, $0A, $0B, $0C, $0D, $0E   ; $4F8C
+    db   $0F, $10, $11, $12, $13, $14, $15, $16   ; $4F94
+    db   $17, $18, $19, $1A, $1A, $1B, $1C, $1D   ; $4F9C
 
-    ld   [$EDEC], a                               ; $4E72: $EA $EC $ED
-    xor  $EF                                      ; $4E75: $EE $EF
-    pop  af                                       ; $4E77: $F1
-    ld   a, [$ff00+c]                             ; $4E78: $F2
-    di                                            ; $4E79: $F3
-    push af                                       ; $4E7A: $F5
-    or   $F8                                      ; $4E7B: $F6 $F8
-    ld   sp, hl                                   ; $4E7D: $F9
-    ld   a, [$FDFB]                               ; $4E7E: $FA $FB $FD
-    cp   $FF                                      ; $4E81: $FE $FF
-    nop                                           ; $4E83: $00
-    ld   bc, $302                                 ; $4E84: $01 $02 $03
-    dec  b                                        ; $4E87: $05
-    ld   b, $07                                   ; $4E88: $06 $07
-    ld   [$0B0A], sp                              ; $4E8A: $08 $0A $0B
+Data_020_4FA4::
+    db   $F0, $F0, $E7, $E8, $E9, $EA, $EB, $EC   ; $4FA4
+    db   $EC, $EC, $ED, $EE, $EF, $F0, $F1, $F2   ; $4FAC
+    db   $F2, $F3, $F4, $F5, $F6, $F7, $F7, $F8   ; $4FB4
+    db   $F9, $FA, $FB, $FC, $FC, $FD, $FE, $FF   ; $4FBC
+    db   $00, $01, $02, $03, $04, $04, $05, $06   ; $4FC4
+    db   $07, $08, $09, $09, $0A, $0B, $0C, $0D   ; $4FCC
+    db   $0E, $0E, $0F, $10, $11, $12, $13, $14   ; $4FD4
+    db   $15, $16, $16, $17, $18, $19, $1A, $1B   ; $4FDC
 
-jr_020_4E8D:
-    inc  c                                        ; $4E8D: $0C
-    dec  c                                        ; $4E8E: $0D
-    rrca                                          ; $4E8F: $0F
-    db   $10                                      ; $4E90: $10
-    ld   de, $1412                                ; $4E91: $11 $12 $14
-    dec  d                                        ; $4E94: $15
+Data_020_4FE4::
+    db   $F0, $E9, $E9, $EA, $EB, $EB, $EC, $ED   ; $4FE4
+    db   $EE, $EE, $EF, $F0, $F0, $F1, $F2, $F3   ; $4FEC
+    db   $F4, $F4, $F5, $F6, $F7, $F8, $F8, $F9   ; $4FF4
+    db   $FA, $FB, $FC, $FC, $FD, $FE, $FF, $00   ; $4FFC
+    db   $00, $01, $02, $03, $03, $04, $05, $06   ; $5004
+    db   $06, $07, $08, $09, $0A, $0A, $0B, $0C   ; $500C
+    db   $0C, $0D, $0E, $0E, $10, $11, $12, $12   ; $5014
+    db   $13, $14, $15, $15, $16, $17, $18, $18   ; $501C
+    db   $EB, $EC, $EC, $ED, $EE, $EE, $EF, $F0   ; $5024
+    db   $F0, $F1, $F2, $F2, $F3, $F4, $F4, $F5   ; $502C
+    db   $F6, $F6, $F7, $F8, $F8, $F9, $FA, $FA   ; $5034
+    db   $FB, $FC, $FC, $FD                       ; $503C
 
-jr_020_4E95:
-    ld   d, $17                                   ; $4E95: $16 $17
-    add  hl, de                                   ; $4E97: $19
-    ld   a, [de]                                  ; $4E98: $1A
-    dec  de                                       ; $4E99: $1B
-    dec  e                                        ; $4E9A: $1D
-    ld   e, $20                                   ; $4E9B: $1E $20
-    ld   hl, $2322                                ; $4E9D: $21 $22 $23
-    dec  h                                        ; $4EA0: $25
-    ld   h, $27                                   ; $4EA1: $26 $27
-    jr   z, jr_020_4E95                           ; $4EA3: $28 $F0
+Data_020_5040::
+    db   $FE, $FE, $FF, $00, $00, $01, $02, $02, $03, $04, $04, $05, $06, $06, $07, $08
+    db   $08, $09, $0A, $0A, $0B, $0C, $0C, $0D, $0E, $0E, $0F, $10, $10, $11, $12, $12
+    db   $13, $14, $14, $15
 
-    ldh  a, [hActiveEntityState]                  ; $4EA5: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4EA7: $F0 $F0
-    ldh  a, [$FFE3]                               ; $4EA9: $F0 $E3
-    db   $e4                                      ; $4EAB: $E4
-    push hl                                       ; $4EAC: $E5
-    and  $E7                                      ; $4EAD: $E6 $E7
-    add  sp, -$17                                 ; $4EAF: $E8 $E9
-    db   $eb                                      ; $4EB1: $EB
-    db   $ec                                      ; $4EB2: $EC
-    db   $ed                                      ; $4EB3: $ED
-    xor  $F0                                      ; $4EB4: $EE $F0
-    pop  af                                       ; $4EB6: $F1
-    ld   a, [$ff00+c]                             ; $4EB7: $F2
-    di                                            ; $4EB8: $F3
-    db   $f4                                      ; $4EB9: $F4
-    or   $F7                                      ; $4EBA: $F6 $F7
-    ld   hl, sp-$07                               ; $4EBC: $F8 $F9
-    ei                                            ; $4EBE: $FB
-    db   $fc                                      ; $4EBF: $FC
-    db   $fd                                      ; $4EC0: $FD
-    cp   $FF                                      ; $4EC1: $FE $FF
-    nop                                           ; $4EC3: $00
-    ld   bc, $302                                 ; $4EC4: $01 $02 $03
-    inc  b                                        ; $4EC7: $04
-    ld   b, $07                                   ; $4EC8: $06 $07
-    ld   [$0A09], sp                              ; $4ECA: $08 $09 $0A
-    dec  bc                                       ; $4ECD: $0B
-    inc  c                                        ; $4ECE: $0C
-    ld   c, $10                                   ; $4ECF: $0E $10
-    ld   de, $1312                                ; $4ED1: $11 $12 $13
-    inc  d                                        ; $4ED4: $14
-    dec  d                                        ; $4ED5: $15
-    ld   d, $18                                   ; $4ED6: $16 $18
-    add  hl, de                                   ; $4ED8: $19
-    ld   a, [de]                                  ; $4ED9: $1A
-    dec  de                                       ; $4EDA: $1B
-    inc  e                                        ; $4EDB: $1C
-    dec  e                                        ; $4EDC: $1D
-    rra                                           ; $4EDD: $1F
-    jr   nz, jr_020_4F01                          ; $4EDE: $20 $21
+Data_020_5064::
+    db   $ED, $EE, $EE, $EF, $F0, $F0, $F1, $F1, $F2, $F2, $F3, $F3
+    db   $F3, $F4, $F5, $F5, $F6, $F6, $F7, $F8, $F8, $F9, $F9, $FA, $FB, $FB, $FC, $FC
+    db   $FE, $FF, $FF, $00, $00, $01, $01, $02, $03, $03, $04, $04, $05, $06, $06, $07
 
-    ld   [hl+], a                                 ; $4EE0: $22
-    inc  hl                                       ; $4EE1: $23
-    inc  h                                        ; $4EE2: $24
-    dec  h                                        ; $4EE3: $25
-    ldh  a, [hActiveEntityState]                  ; $4EE4: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4EE6: $F0 $F0
-    ldh  a, [hScratchD]                           ; $4EE8: $F0 $E4
-    push hl                                       ; $4EEA: $E5
-    and  $E7                                      ; $4EEB: $E6 $E7
-    add  sp, -$17                                 ; $4EED: $E8 $E9
-    ld   [$ECEB], a                               ; $4EEF: $EA $EB $EC
-    xor  $EF                                      ; $4EF2: $EE $EF
-    ldh  a, [hActiveEntitySpriteVariant]               ; $4EF4: $F0 $F1
-    ld   a, [$ff00+c]                             ; $4EF6: $F2
-    di                                            ; $4EF7: $F3
-    db   $f4                                      ; $4EF8: $F4
-    push af                                       ; $4EF9: $F5
-    or   $F8                                      ; $4EFA: $F6 $F8
-    ld   sp, hl                                   ; $4EFC: $F9
-    ld   a, [$FCFB]                               ; $4EFD: $FA $FB $FC
-    db   $fd                                      ; $4F00: $FD
+Data_020_5090::
+    db   $07, $08, $09, $09, $0A, $0A, $0B, $0C, $0C, $0D, $0D, $0E, $0F, $0F, $10, $10
+    db   $11, $12, $12, $13
 
-jr_020_4F01:
-    cp   $FF                                      ; $4F01: $FE $FF
-    nop                                           ; $4F03: $00
-    ld   bc, $302                                 ; $4F04: $01 $02 $03
-    inc  b                                        ; $4F07: $04
-    dec  b                                        ; $4F08: $05
-    ld   b, $07                                   ; $4F09: $06 $07
-    ld   [$0A09], sp                              ; $4F0B: $08 $09 $0A
-    inc  c                                        ; $4F0E: $0C
-    dec  c                                        ; $4F0F: $0D
-    ld   c, $0F                                   ; $4F10: $0E $0F
-    db   $10                                      ; $4F12: $10
-    ld   de, $1312                                ; $4F13: $11 $12 $13
-    dec  d                                        ; $4F16: $15
-    ld   d, $17                                   ; $4F17: $16 $17
-    jr   @+$1B                                    ; $4F19: $18 $19
+Data_020_50A4::
+    db   $F0, $F1, $F1, $F2, $F2, $F3, $F3, $F4, $F4, $F5, $F5, $F6
+    db   $F6, $F7, $F7, $F8, $F8, $F9, $F9, $FA, $FA, $FB, $FB, $FC, $FC, $FD, $FD, $FE
+    db   $FE, $FF, $FF, $00, $00, $01, $01, $02, $02, $03, $03, $04, $04, $05, $05, $06
+    db   $06, $07, $07, $08, $08, $09, $09, $0A, $0A, $0B, $0B, $0C, $0C, $0D, $0D, $0E
 
-    ld   a, [de]                                  ; $4F1B: $1A
-    dec  de                                       ; $4F1C: $1B
-    inc  e                                        ; $4F1D: $1C
-    dec  e                                        ; $4F1E: $1D
-    ld   e, $1F                                   ; $4F1F: $1E $1F
-    ld   hl, $2322                                ; $4F21: $21 $22 $23
-    ldh  a, [hActiveEntityState]                  ; $4F24: $F0 $F0
-    ldh  a, [hActiveEntityState]                  ; $4F26: $F0 $F0
-    push hl                                       ; $4F28: $E5
-    and  $E7                                      ; $4F29: $E6 $E7
-    add  sp, -$17                                 ; $4F2B: $E8 $E9
-    ld   [$ECEB], a                               ; $4F2D: $EA $EB $EC
-    db   $ed                                      ; $4F30: $ED
-    xor  $EF                                      ; $4F31: $EE $EF
-    ldh  a, [hActiveEntitySpriteVariant]               ; $4F33: $F0 $F1
-    ld   a, [$ff00+c]                             ; $4F35: $F2
-    di                                            ; $4F36: $F3
-    db   $f4                                      ; $4F37: $F4
-    push af                                       ; $4F38: $F5
-    or   $F7                                      ; $4F39: $F6 $F7
-    ld   hl, sp-$07                               ; $4F3B: $F8 $F9
-    ld   a, [$FCFB]                               ; $4F3D: $FA $FB $FC
-    db   $fd                                      ; $4F40: $FD
-    cp   $FF                                      ; $4F41: $FE $FF
-    nop                                           ; $4F43: $00
-    ld   bc, $302                                 ; $4F44: $01 $02 $03
-    inc  b                                        ; $4F47: $04
-    dec  b                                        ; $4F48: $05
-    ld   b, $07                                   ; $4F49: $06 $07
-    ld   [$0A09], sp                              ; $4F4B: $08 $09 $0A
-    dec  bc                                       ; $4F4E: $0B
-    inc  c                                        ; $4F4F: $0C
-    dec  c                                        ; $4F50: $0D
-    ld   c, $0F                                   ; $4F51: $0E $0F
-    db   $10                                      ; $4F53: $10
-    ld   de, $1312                                ; $4F54: $11 $12 $13
-    inc  d                                        ; $4F57: $14
-    dec  d                                        ; $4F58: $15
-    ld   d, $17                                   ; $4F59: $16 $17
-    jr   jr_020_4F76                              ; $4F5B: $18 $19
+Data_020_50E0::
+    db   $0E, $0F, $0F, $10
 
-    ld   a, [de]                                  ; $4F5D: $1A
-    dec  de                                       ; $4F5E: $1B
-    inc  e                                        ; $4F5F: $1C
-    dec  e                                        ; $4F60: $1D
-    ld   e, $1F                                   ; $4F61: $1E $1F
-    jr   nz, @-$0E                                ; $4F63: $20 $F0
+Data_020_50E4::
+    db   $F3, $F4, $F4, $F4, $F5, $F5, $F6, $F6, $F6, $F7, $F7, $F8
+    db   $F8, $F8, $F9, $F9, $FA, $FA, $FA, $FB, $FB, $FC, $FC, $FC, $FD, $FD, $FE, $FE
+    db   $FF, $FF, $00, $00, $00, $01, $01, $02, $02, $03, $03, $03, $04, $04, $05, $05
+    db   $05, $06, $06, $07, $07, $07, $08, $08, $09, $09, $09, $0A, $0A, $0B, $0B, $0B
+    db   $0C, $0C, $0D, $0D
 
-    ldh  a, [hActiveEntityState]                  ; $4F65: $F0 $F0
-    and  $E7                                      ; $4F67: $E6 $E7
-    add  sp, -$18                                 ; $4F69: $E8 $E8
-    jp   hl                                       ; $4F6B: $E9
+Data_020_5124::
+    db   $F5, $F6, $F6, $F6, $F7, $F7, $F7, $F8, $F8, $F8, $F9, $F9
 
-    ld   [$ECEB], a                               ; $4F6C: $EA $EB $EC
-    db   $ed                                      ; $4F6F: $ED
-    xor  $EF                                      ; $4F70: $EE $EF
-    ldh  a, [hActiveEntityState]                  ; $4F72: $F0 $F0
-    pop  af                                       ; $4F74: $F1
-    ld   a, [$ff00+c]                             ; $4F75: $F2
+Data_020_5130::
+    db   $F9, $FA, $FA, $FA, $FB, $FB, $FB, $FC, $FC, $FC, $FD, $FD, $FD, $FE, $FE, $FE
+    db   $FF, $FF, $FF, $00, $00, $01, $01, $01, $02, $02, $02, $03, $03, $03, $04, $04
+    db   $04, $05, $05, $05, $06, $06, $06, $07, $07, $07, $08, $08, $08, $09, $09, $09
+    db   $0A, $0A, $0A, $0B
 
-jr_020_4F76:
-    di                                            ; $4F76: $F3
-    db   $f4                                      ; $4F77: $F4
-    push af                                       ; $4F78: $F5
-    or   $F7                                      ; $4F79: $F6 $F7
-    ld   hl, sp-$08                               ; $4F7B: $F8 $F8
-    ld   sp, hl                                   ; $4F7D: $F9
-    ld   a, [$FCFB]                               ; $4F7E: $FA $FB $FC
-    db   $fd                                      ; $4F81: $FD
-    cp   $FF                                      ; $4F82: $FE $FF
-    nop                                           ; $4F84: $00
-    ld   bc, $302                                 ; $4F85: $01 $02 $03
-    inc  b                                        ; $4F88: $04
-    dec  b                                        ; $4F89: $05
-    ld   b, $07                                   ; $4F8A: $06 $07
-    rlca                                          ; $4F8C: $07
-    ld   [$0A09], sp                              ; $4F8D: $08 $09 $0A
-    dec  bc                                       ; $4F90: $0B
-    inc  c                                        ; $4F91: $0C
-    dec  c                                        ; $4F92: $0D
-    ld   c, $0F                                   ; $4F93: $0E $0F
-    db   $10                                      ; $4F95: $10
-    ld   de, $1312                                ; $4F96: $11 $12 $13
-    inc  d                                        ; $4F99: $14
-    dec  d                                        ; $4F9A: $15
-    ld   d, $17                                   ; $4F9B: $16 $17
-    jr   jr_020_4FB8                              ; $4F9D: $18 $19
+Data_020_5164::
+    db   $FC, $FC, $FB, $FB, $FB, $FB, $FA, $FA, $FA, $FA, $FB, $FB
+    db   $FB, $FB, $FC, $FC, $FC, $FC, $FD, $FD, $FD, $FD, $FE, $FE, $FE, $FE, $FF, $FF
 
-    ld   a, [de]                                  ; $4F9F: $1A
-    ld   a, [de]                                  ; $4FA0: $1A
-    dec  de                                       ; $4FA1: $1B
-    inc  e                                        ; $4FA2: $1C
-    dec  e                                        ; $4FA3: $1D
-    ldh  a, [hActiveEntityState]                  ; $4FA4: $F0 $F0
-    rst  $20                                      ; $4FA6: $E7
-    add  sp, -$17                                 ; $4FA7: $E8 $E9
-    ld   [$ECEB], a                               ; $4FA9: $EA $EB $EC
-    db   $ec                                      ; $4FAC: $EC
-    db   $ec                                      ; $4FAD: $EC
-    db   $ed                                      ; $4FAE: $ED
-    xor  $EF                                      ; $4FAF: $EE $EF
-    ldh  a, [hActiveEntitySpriteVariant]               ; $4FB1: $F0 $F1
-    ld   a, [$ff00+c]                             ; $4FB3: $F2
-    ld   a, [$ff00+c]                             ; $4FB4: $F2
-    di                                            ; $4FB5: $F3
-    db   $f4                                      ; $4FB6: $F4
-    push af                                       ; $4FB7: $F5
+Data_020_5180::
+    db   $FF, $FF, $00, $00, $00, $00, $01, $01, $01, $01, $02, $02, $02, $02, $03, $03
+    db   $03, $03, $04, $04, $04, $04, $05, $05, $05, $05, $06, $06, $06, $06, $07, $07
+    db   $07, $07, $08, $08
 
-jr_020_4FB8:
-    or   $F7                                      ; $4FB8: $F6 $F7
-    rst  $30                                      ; $4FBA: $F7
-    ld   hl, sp-$07                               ; $4FBB: $F8 $F9
-    ld   a, [$FCFB]                               ; $4FBD: $FA $FB $FC
-    db   $fc                                      ; $4FC0: $FC
-    db   $fd                                      ; $4FC1: $FD
-    cp   $FF                                      ; $4FC2: $FE $FF
-    nop                                           ; $4FC4: $00
-    ld   bc, $302                                 ; $4FC5: $01 $02 $03
-    inc  b                                        ; $4FC8: $04
-    inc  b                                        ; $4FC9: $04
-    dec  b                                        ; $4FCA: $05
-    ld   b, $07                                   ; $4FCB: $06 $07
-    ld   [$0909], sp                              ; $4FCD: $08 $09 $09
-    ld   a, [bc]                                  ; $4FD0: $0A
-    dec  bc                                       ; $4FD1: $0B
-    inc  c                                        ; $4FD2: $0C
-    dec  c                                        ; $4FD3: $0D
-    ld   c, $0E                                   ; $4FD4: $0E $0E
-    rrca                                          ; $4FD6: $0F
-    db   $10                                      ; $4FD7: $10
-    ld   de, $1312                                ; $4FD8: $11 $12 $13
-    inc  d                                        ; $4FDB: $14
-    dec  d                                        ; $4FDC: $15
-    ld   d, $16                                   ; $4FDD: $16 $16
-    rla                                           ; $4FDF: $17
-    jr   jr_020_4FFB                              ; $4FE0: $18 $19
+Data_020_51A4::
+    db   $FB, $FB, $FB, $FB, $FB, $FC, $FC, $FC, $FC, $FC, $FC, $FD
+    db   $FD, $FD, $FD, $FD, $FE, $FE, $FE, $FE, $FE, $FE, $FF, $FF, $FF, $FF, $FF, $FF
+    db   $00, $00, $00, $00, $00, $00, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02
 
-    ld   a, [de]                                  ; $4FE2: $1A
-    dec  de                                       ; $4FE3: $1B
-    ldh  a, [hFFE9]                               ; $4FE4: $F0 $E9
-    jp   hl                                       ; $4FE6: $E9
+Data_020_51D0::
+    db   $02, $02, $03, $03, $03, $03, $03, $03, $04, $04, $04, $04, $04, $04, $05, $05
+    db   $05, $05, $05, $05
 
-    ld   [$EBEB], a                               ; $4FE7: $EA $EB $EB
-    db   $ec                                      ; $4FEA: $EC
-    db   $ed                                      ; $4FEB: $ED
-    xor  $EE                                      ; $4FEC: $EE $EE
-    rst  $28                                      ; $4FEE: $EF
-    ldh  a, [hActiveEntityState]                  ; $4FEF: $F0 $F0
-    pop  af                                       ; $4FF1: $F1
-    ld   a, [$ff00+c]                             ; $4FF2: $F2
-    di                                            ; $4FF3: $F3
-    db   $f4                                      ; $4FF4: $F4
-    db   $f4                                      ; $4FF5: $F4
-    push af                                       ; $4FF6: $F5
-    or   $F7                                      ; $4FF7: $F6 $F7
-    ld   hl, sp-$08                               ; $4FF9: $F8 $F8
-
-jr_020_4FFB:
-    ld   sp, hl                                   ; $4FFB: $F9
-    ld   a, [$FCFB]                               ; $4FFC: $FA $FB $FC
-    db   $fc                                      ; $4FFF: $FC
-    db   $fd                                      ; $5000: $FD
-    cp   $FF                                      ; $5001: $FE $FF
-    nop                                           ; $5003: $00
-    nop                                           ; $5004: $00
-    ld   bc, $302                                 ; $5005: $01 $02 $03
-    inc  bc                                       ; $5008: $03
-    inc  b                                        ; $5009: $04
-    dec  b                                        ; $500A: $05
-    ld   b, $06                                   ; $500B: $06 $06
-    rlca                                          ; $500D: $07
-    ld   [$0A09], sp                              ; $500E: $08 $09 $0A
-    ld   a, [bc]                                  ; $5011: $0A
-    dec  bc                                       ; $5012: $0B
-    inc  c                                        ; $5013: $0C
-    inc  c                                        ; $5014: $0C
-    dec  c                                        ; $5015: $0D
-    ld   c, $0E                                   ; $5016: $0E $0E
-    db   $10                                      ; $5018: $10
-    ld   de, $1212                                ; $5019: $11 $12 $12
-    inc  de                                       ; $501C: $13
-    inc  d                                        ; $501D: $14
-    dec  d                                        ; $501E: $15
-    dec  d                                        ; $501F: $15
-    ld   d, $17                                   ; $5020: $16 $17
-    jr   @+$1A                                    ; $5022: $18 $18
-
-    db   $eb                                      ; $5024: $EB
-    db   $ec                                      ; $5025: $EC
-    db   $ec                                      ; $5026: $EC
-    db   $ed                                      ; $5027: $ED
-    xor  $EE                                      ; $5028: $EE $EE
-    rst  $28                                      ; $502A: $EF
-    ldh  a, [hActiveEntityState]                  ; $502B: $F0 $F0
-    pop  af                                       ; $502D: $F1
-    ld   a, [$ff00+c]                             ; $502E: $F2
-    ld   a, [$ff00+c]                             ; $502F: $F2
-    di                                            ; $5030: $F3
-    db   $f4                                      ; $5031: $F4
-    db   $f4                                      ; $5032: $F4
-    push af                                       ; $5033: $F5
-    or   $F6                                      ; $5034: $F6 $F6
-    rst  $30                                      ; $5036: $F7
-    ld   hl, sp-$08                               ; $5037: $F8 $F8
-    ld   sp, hl                                   ; $5039: $F9
-    ld   a, [$FBFA]                               ; $503A: $FA $FA $FB
-    db   $fc                                      ; $503D: $FC
-    db   $fc                                      ; $503E: $FC
-    db   $fd                                      ; $503F: $FD
-    cp   $FE                                      ; $5040: $FE $FE
-    rst  $38                                      ; $5042: $FF
-    nop                                           ; $5043: $00
-    nop                                           ; $5044: $00
-    ld   bc, $202                                 ; $5045: $01 $02 $02
-    inc  bc                                       ; $5048: $03
-    inc  b                                        ; $5049: $04
-    inc  b                                        ; $504A: $04
-    dec  b                                        ; $504B: $05
-    ld   b, $06                                   ; $504C: $06 $06
-    rlca                                          ; $504E: $07
-    ld   [$0908], sp                              ; $504F: $08 $08 $09
-    ld   a, [bc]                                  ; $5052: $0A
-    ld   a, [bc]                                  ; $5053: $0A
-    dec  bc                                       ; $5054: $0B
-    inc  c                                        ; $5055: $0C
-    inc  c                                        ; $5056: $0C
-    dec  c                                        ; $5057: $0D
-    ld   c, $0E                                   ; $5058: $0E $0E
-    rrca                                          ; $505A: $0F
-    db   $10                                      ; $505B: $10
-    db   $10                                      ; $505C: $10
-    ld   de, $1212                                ; $505D: $11 $12 $12
-    inc  de                                       ; $5060: $13
-    inc  d                                        ; $5061: $14
-    inc  d                                        ; $5062: $14
-    dec  d                                        ; $5063: $15
-    db   $ed                                      ; $5064: $ED
-    xor  $EE                                      ; $5065: $EE $EE
-    rst  $28                                      ; $5067: $EF
-    ldh  a, [hActiveEntityState]                  ; $5068: $F0 $F0
-    pop  af                                       ; $506A: $F1
-    pop  af                                       ; $506B: $F1
-    ld   a, [$ff00+c]                             ; $506C: $F2
-    ld   a, [$ff00+c]                             ; $506D: $F2
-    di                                            ; $506E: $F3
-    di                                            ; $506F: $F3
-    di                                            ; $5070: $F3
-    db   $f4                                      ; $5071: $F4
-    push af                                       ; $5072: $F5
-    push af                                       ; $5073: $F5
-    or   $F6                                      ; $5074: $F6 $F6
-    rst  $30                                      ; $5076: $F7
-    ld   hl, sp-$08                               ; $5077: $F8 $F8
-    ld   sp, hl                                   ; $5079: $F9
-    ld   sp, hl                                   ; $507A: $F9
-    ld   a, [$FBFB]                               ; $507B: $FA $FB $FB
-    db   $fc                                      ; $507E: $FC
-    db   $fc                                      ; $507F: $FC
-    cp   $FF                                      ; $5080: $FE $FF
-    rst  $38                                      ; $5082: $FF
-    nop                                           ; $5083: $00
-    nop                                           ; $5084: $00
-    ld   bc, $201                                 ; $5085: $01 $01 $02
-    inc  bc                                       ; $5088: $03
-    inc  bc                                       ; $5089: $03
-    inc  b                                        ; $508A: $04
-    inc  b                                        ; $508B: $04
-    dec  b                                        ; $508C: $05
-    ld   b, $06                                   ; $508D: $06 $06
-    rlca                                          ; $508F: $07
-    rlca                                          ; $5090: $07
-    ld   [$0909], sp                              ; $5091: $08 $09 $09
-    ld   a, [bc]                                  ; $5094: $0A
-    ld   a, [bc]                                  ; $5095: $0A
-    dec  bc                                       ; $5096: $0B
-    inc  c                                        ; $5097: $0C
-    inc  c                                        ; $5098: $0C
-    dec  c                                        ; $5099: $0D
-    dec  c                                        ; $509A: $0D
-    ld   c, $0F                                   ; $509B: $0E $0F
-    rrca                                          ; $509D: $0F
-    db   $10                                      ; $509E: $10
-    db   $10                                      ; $509F: $10
-    ld   de, $1212                                ; $50A0: $11 $12 $12
-    inc  de                                       ; $50A3: $13
-    ldh  a, [hActiveEntitySpriteVariant]               ; $50A4: $F0 $F1
-    pop  af                                       ; $50A6: $F1
-    ld   a, [$ff00+c]                             ; $50A7: $F2
-    ld   a, [$ff00+c]                             ; $50A8: $F2
-    di                                            ; $50A9: $F3
-    di                                            ; $50AA: $F3
-    db   $f4                                      ; $50AB: $F4
-    db   $f4                                      ; $50AC: $F4
-    push af                                       ; $50AD: $F5
-    push af                                       ; $50AE: $F5
-    or   $F6                                      ; $50AF: $F6 $F6
-    rst  $30                                      ; $50B1: $F7
-    rst  $30                                      ; $50B2: $F7
-    ld   hl, sp-$08                               ; $50B3: $F8 $F8
-    ld   sp, hl                                   ; $50B5: $F9
-    ld   sp, hl                                   ; $50B6: $F9
-    ld   a, [$FBFA]                               ; $50B7: $FA $FA $FB
-    ei                                            ; $50BA: $FB
-    db   $fc                                      ; $50BB: $FC
-    db   $fc                                      ; $50BC: $FC
-    db   $fd                                      ; $50BD: $FD
-    db   $fd                                      ; $50BE: $FD
-    cp   $FE                                      ; $50BF: $FE $FE
-    rst  $38                                      ; $50C1: $FF
-    rst  $38                                      ; $50C2: $FF
-    nop                                           ; $50C3: $00
-    nop                                           ; $50C4: $00
-    ld   bc, $201                                 ; $50C5: $01 $01 $02
-    ld   [bc], a                                  ; $50C8: $02
-    inc  bc                                       ; $50C9: $03
-    inc  bc                                       ; $50CA: $03
-    inc  b                                        ; $50CB: $04
-    inc  b                                        ; $50CC: $04
-    dec  b                                        ; $50CD: $05
-    dec  b                                        ; $50CE: $05
-    ld   b, $06                                   ; $50CF: $06 $06
-    rlca                                          ; $50D1: $07
-    rlca                                          ; $50D2: $07
-    ld   [$0908], sp                              ; $50D3: $08 $08 $09
-    add  hl, bc                                   ; $50D6: $09
-    ld   a, [bc]                                  ; $50D7: $0A
-    ld   a, [bc]                                  ; $50D8: $0A
-    dec  bc                                       ; $50D9: $0B
-    dec  bc                                       ; $50DA: $0B
-    inc  c                                        ; $50DB: $0C
-    inc  c                                        ; $50DC: $0C
-    dec  c                                        ; $50DD: $0D
-    dec  c                                        ; $50DE: $0D
-    ld   c, $0E                                   ; $50DF: $0E $0E
-    rrca                                          ; $50E1: $0F
-    rrca                                          ; $50E2: $0F
-    db   $10                                      ; $50E3: $10
-    di                                            ; $50E4: $F3
-    db   $f4                                      ; $50E5: $F4
-    db   $f4                                      ; $50E6: $F4
-    db   $f4                                      ; $50E7: $F4
-    push af                                       ; $50E8: $F5
-    push af                                       ; $50E9: $F5
-    or   $F6                                      ; $50EA: $F6 $F6
-    or   $F7                                      ; $50EC: $F6 $F7
-    rst  $30                                      ; $50EE: $F7
-    ld   hl, sp-$08                               ; $50EF: $F8 $F8
-    ld   hl, sp-$07                               ; $50F1: $F8 $F9
-    ld   sp, hl                                   ; $50F3: $F9
-    ld   a, [$FAFA]                               ; $50F4: $FA $FA $FA
-    ei                                            ; $50F7: $FB
-    ei                                            ; $50F8: $FB
-    db   $fc                                      ; $50F9: $FC
-    db   $fc                                      ; $50FA: $FC
-    db   $fc                                      ; $50FB: $FC
-    db   $fd                                      ; $50FC: $FD
-    db   $fd                                      ; $50FD: $FD
-    cp   $FE                                      ; $50FE: $FE $FE
-    rst  $38                                      ; $5100: $FF
-    rst  $38                                      ; $5101: $FF
-    nop                                           ; $5102: $00
-    nop                                           ; $5103: $00
-    nop                                           ; $5104: $00
-    ld   bc, $201                                 ; $5105: $01 $01 $02
-    ld   [bc], a                                  ; $5108: $02
-    inc  bc                                       ; $5109: $03
-    inc  bc                                       ; $510A: $03
-    inc  bc                                       ; $510B: $03
-    inc  b                                        ; $510C: $04
-    inc  b                                        ; $510D: $04
-    dec  b                                        ; $510E: $05
-    dec  b                                        ; $510F: $05
-    dec  b                                        ; $5110: $05
-    ld   b, $06                                   ; $5111: $06 $06
-    rlca                                          ; $5113: $07
-    rlca                                          ; $5114: $07
-    rlca                                          ; $5115: $07
-    ld   [$0908], sp                              ; $5116: $08 $08 $09
-    add  hl, bc                                   ; $5119: $09
-    add  hl, bc                                   ; $511A: $09
-    ld   a, [bc]                                  ; $511B: $0A
-    ld   a, [bc]                                  ; $511C: $0A
-    dec  bc                                       ; $511D: $0B
-    dec  bc                                       ; $511E: $0B
-    dec  bc                                       ; $511F: $0B
-    inc  c                                        ; $5120: $0C
-    inc  c                                        ; $5121: $0C
-    dec  c                                        ; $5122: $0D
-    dec  c                                        ; $5123: $0D
-    push af                                       ; $5124: $F5
-    or   $F6                                      ; $5125: $F6 $F6
-    or   $F7                                      ; $5127: $F6 $F7
-    rst  $30                                      ; $5129: $F7
-    rst  $30                                      ; $512A: $F7
-    ld   hl, sp-$08                               ; $512B: $F8 $F8
-    ld   hl, sp-$07                               ; $512D: $F8 $F9
-    ld   sp, hl                                   ; $512F: $F9
-    ld   sp, hl                                   ; $5130: $F9
-    ld   a, [$FAFA]                               ; $5131: $FA $FA $FA
-    ei                                            ; $5134: $FB
-    ei                                            ; $5135: $FB
-    ei                                            ; $5136: $FB
-    db   $fc                                      ; $5137: $FC
-    db   $fc                                      ; $5138: $FC
-    db   $fc                                      ; $5139: $FC
-    db   $fd                                      ; $513A: $FD
-    db   $fd                                      ; $513B: $FD
-    db   $fd                                      ; $513C: $FD
-    cp   $FE                                      ; $513D: $FE $FE
-    cp   $FF                                      ; $513F: $FE $FF
-    rst  $38                                      ; $5141: $FF
-    rst  $38                                      ; $5142: $FF
-    nop                                           ; $5143: $00
-    nop                                           ; $5144: $00
-    ld   bc, $101                                 ; $5145: $01 $01 $01
-    ld   [bc], a                                  ; $5148: $02
-    ld   [bc], a                                  ; $5149: $02
-    ld   [bc], a                                  ; $514A: $02
-    inc  bc                                       ; $514B: $03
-    inc  bc                                       ; $514C: $03
-    inc  bc                                       ; $514D: $03
-    inc  b                                        ; $514E: $04
-    inc  b                                        ; $514F: $04
-    inc  b                                        ; $5150: $04
-    dec  b                                        ; $5151: $05
-    dec  b                                        ; $5152: $05
-    dec  b                                        ; $5153: $05
-    ld   b, $06                                   ; $5154: $06 $06
-    ld   b, $07                                   ; $5156: $06 $07
-    rlca                                          ; $5158: $07
-    rlca                                          ; $5159: $07
-    ld   [$808], sp                          ; $515A: $08 $08 $08
-    add  hl, bc                                   ; $515D: $09
-    add  hl, bc                                   ; $515E: $09
-    add  hl, bc                                   ; $515F: $09
-    ld   a, [bc]                                  ; $5160: $0A
-    ld   a, [bc]                                  ; $5161: $0A
-    ld   a, [bc]                                  ; $5162: $0A
-    dec  bc                                       ; $5163: $0B
-    db   $fc                                      ; $5164: $FC
-    db   $fc                                      ; $5165: $FC
-    ei                                            ; $5166: $FB
-    ei                                            ; $5167: $FB
-    ei                                            ; $5168: $FB
-    ei                                            ; $5169: $FB
-    ld   a, [$FAFA]                               ; $516A: $FA $FA $FA
-    ld   a, [$FBFB]                               ; $516D: $FA $FB $FB
-    ei                                            ; $5170: $FB
-    ei                                            ; $5171: $FB
-    db   $fc                                      ; $5172: $FC
-    db   $fc                                      ; $5173: $FC
-    db   $fc                                      ; $5174: $FC
-    db   $fc                                      ; $5175: $FC
-    db   $fd                                      ; $5176: $FD
-    db   $fd                                      ; $5177: $FD
-    db   $fd                                      ; $5178: $FD
-    db   $fd                                      ; $5179: $FD
-    cp   $FE                                      ; $517A: $FE $FE
-    cp   $FE                                      ; $517C: $FE $FE
-    rst  $38                                      ; $517E: $FF
-    rst  $38                                      ; $517F: $FF
-    rst  $38                                      ; $5180: $FF
-    rst  $38                                      ; $5181: $FF
-    nop                                           ; $5182: $00
-    nop                                           ; $5183: $00
-    nop                                           ; $5184: $00
-    nop                                           ; $5185: $00
-    ld   bc, $101                                 ; $5186: $01 $01 $01
-    ld   bc, $202                                 ; $5189: $01 $02 $02
-    ld   [bc], a                                  ; $518C: $02
-    ld   [bc], a                                  ; $518D: $02
-    inc  bc                                       ; $518E: $03
-    inc  bc                                       ; $518F: $03
-    inc  bc                                       ; $5190: $03
-    inc  bc                                       ; $5191: $03
-    inc  b                                        ; $5192: $04
-    inc  b                                        ; $5193: $04
-    inc  b                                        ; $5194: $04
-    inc  b                                        ; $5195: $04
-    dec  b                                        ; $5196: $05
-    dec  b                                        ; $5197: $05
-    dec  b                                        ; $5198: $05
-    dec  b                                        ; $5199: $05
-    ld   b, $06                                   ; $519A: $06 $06
-    ld   b, $06                                   ; $519C: $06 $06
-    rlca                                          ; $519E: $07
-    rlca                                          ; $519F: $07
-    rlca                                          ; $51A0: $07
-    rlca                                          ; $51A1: $07
-    ld   [$FB08], sp                              ; $51A2: $08 $08 $FB
-    ei                                            ; $51A5: $FB
-    ei                                            ; $51A6: $FB
-    ei                                            ; $51A7: $FB
-    ei                                            ; $51A8: $FB
-    db   $fc                                      ; $51A9: $FC
-    db   $fc                                      ; $51AA: $FC
-    db   $fc                                      ; $51AB: $FC
-    db   $fc                                      ; $51AC: $FC
-    db   $fc                                      ; $51AD: $FC
-    db   $fc                                      ; $51AE: $FC
-    db   $fd                                      ; $51AF: $FD
-    db   $fd                                      ; $51B0: $FD
-    db   $fd                                      ; $51B1: $FD
-    db   $fd                                      ; $51B2: $FD
-    db   $fd                                      ; $51B3: $FD
-    cp   $FE                                      ; $51B4: $FE $FE
-    cp   $FE                                      ; $51B6: $FE $FE
-    cp   $FE                                      ; $51B8: $FE $FE
-    rst  $38                                      ; $51BA: $FF
-    rst  $38                                      ; $51BB: $FF
-    rst  $38                                      ; $51BC: $FF
-    rst  $38                                      ; $51BD: $FF
-    rst  $38                                      ; $51BE: $FF
-    rst  $38                                      ; $51BF: $FF
-    nop                                           ; $51C0: $00
-    nop                                           ; $51C1: $00
-    nop                                           ; $51C2: $00
-    nop                                           ; $51C3: $00
-    nop                                           ; $51C4: $00
-    nop                                           ; $51C5: $00
-    ld   bc, $101                                 ; $51C6: $01 $01 $01
-    ld   bc, $101                                 ; $51C9: $01 $01 $01
-    ld   [bc], a                                  ; $51CC: $02
-    ld   [bc], a                                  ; $51CD: $02
-    ld   [bc], a                                  ; $51CE: $02
-    ld   [bc], a                                  ; $51CF: $02
-    ld   [bc], a                                  ; $51D0: $02
-    ld   [bc], a                                  ; $51D1: $02
-    inc  bc                                       ; $51D2: $03
-    inc  bc                                       ; $51D3: $03
-    inc  bc                                       ; $51D4: $03
-    inc  bc                                       ; $51D5: $03
-    inc  bc                                       ; $51D6: $03
-    inc  bc                                       ; $51D7: $03
-    inc  b                                        ; $51D8: $04
-    inc  b                                        ; $51D9: $04
-    inc  b                                        ; $51DA: $04
-    inc  b                                        ; $51DB: $04
-    inc  b                                        ; $51DC: $04
-    inc  b                                        ; $51DD: $04
-    dec  b                                        ; $51DE: $05
-    dec  b                                        ; $51DF: $05
-    dec  b                                        ; $51E0: $05
-    dec  b                                        ; $51E1: $05
-    dec  b                                        ; $51E2: $05
-    dec  b                                        ; $51E3: $05
-    db   $fd                                      ; $51E4: $FD
-    db   $fd                                      ; $51E5: $FD
-    db   $fd                                      ; $51E6: $FD
-    db   $fd                                      ; $51E7: $FD
-    db   $fd                                      ; $51E8: $FD
-    db   $fd                                      ; $51E9: $FD
-    db   $fd                                      ; $51EA: $FD
-    db   $fd                                      ; $51EB: $FD
-    cp   $FE                                      ; $51EC: $FE $FE
-    cp   $FE                                      ; $51EE: $FE $FE
-    cp   $FE                                      ; $51F0: $FE $FE
-    cp   $FE                                      ; $51F2: $FE $FE
-    cp   $FE                                      ; $51F4: $FE $FE
-    rst  $38                                      ; $51F6: $FF
-    cp   $FF                                      ; $51F7: $FE $FF
-    rst  $38                                      ; $51F9: $FF
-    rst  $38                                      ; $51FA: $FF
-    rst  $38                                      ; $51FB: $FF
-    rst  $38                                      ; $51FC: $FF
-    rst  $38                                      ; $51FD: $FF
-    rst  $38                                      ; $51FE: $FF
-    nop                                           ; $51FF: $00
-    nop                                           ; $5200: $00
-    nop                                           ; $5201: $00
-    nop                                           ; $5202: $00
-    nop                                           ; $5203: $00
-    nop                                           ; $5204: $00
-    nop                                           ; $5205: $00
-    nop                                           ; $5206: $00
-    nop                                           ; $5207: $00
-    nop                                           ; $5208: $00
-    ld   bc, $101                                 ; $5209: $01 $01 $01
-    ld   bc, $101                                 ; $520C: $01 $01 $01
-    ld   bc, $101                                 ; $520F: $01 $01 $01
-    ld   bc, $202                                 ; $5212: $01 $02 $02
-    ld   [bc], a                                  ; $5215: $02
-    ld   [bc], a                                  ; $5216: $02
-    ld   [bc], a                                  ; $5217: $02
-    ld   [bc], a                                  ; $5218: $02
-    ld   [bc], a                                  ; $5219: $02
-    ld   [bc], a                                  ; $521A: $02
-    ld   [bc], a                                  ; $521B: $02
-    ld   [bc], a                                  ; $521C: $02
-    inc  bc                                       ; $521D: $03
-    inc  bc                                       ; $521E: $03
-    inc  bc                                       ; $521F: $03
-    inc  bc                                       ; $5220: $03
-    inc  bc                                       ; $5221: $03
-    inc  bc                                       ; $5222: $03
-    inc  bc                                       ; $5223: $03
+Data_020_51E4::
+    db   $FD, $FD, $FD, $FD, $FD, $FD, $FD, $FD, $FE, $FE, $FE, $FE
+    db   $FE, $FE, $FE, $FE, $FE, $FE, $FF, $FE, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $00
+    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $01, $01, $01, $01, $01, $01, $01
+    db   $01, $01, $01, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $03, $03, $03
+    db   $03, $03, $03, $03
 
 data_020_5224::
-    inc  h                                        ; $5224: $24
-    ld   c, l                                     ; $5225: $4D
-    ld   h, h                                     ; $5226: $64
-    ld   c, l                                     ; $5227: $4D
-    and  h                                        ; $5228: $A4
-    ld   c, l                                     ; $5229: $4D
-    inc  h                                        ; $522A: $24
-    ld   c, [hl]                                  ; $522B: $4E
-    and  h                                        ; $522C: $A4
-    ld   c, [hl]                                  ; $522D: $4E
-    db   $e4                                      ; $522E: $E4
-    ld   c, [hl]                                  ; $522F: $4E
-    ld   h, h                                     ; $5230: $64
-    ld   c, a                                     ; $5231: $4F
-    and  h                                        ; $5232: $A4
-    ld   c, a                                     ; $5233: $4F
-    db   $e4                                      ; $5234: $E4
-    ld   c, a                                     ; $5235: $4F
-    ld   h, h                                     ; $5236: $64
-    ld   d, b                                     ; $5237: $50
-    and  h                                        ; $5238: $A4
-    ld   d, b                                     ; $5239: $50
-    db   $e4                                      ; $523A: $E4
-    ld   d, b                                     ; $523B: $50
-    inc  h                                        ; $523C: $24
-    ld   d, c                                     ; $523D: $51
-    ld   h, h                                     ; $523E: $64
-    ld   d, c                                     ; $523F: $51
-    and  h                                        ; $5240: $A4
-    ld   d, c                                     ; $5241: $51
-    db   $e4                                      ; $5242: $E4
-    ld   d, c                                     ; $5243: $51
-    db   $e4                                      ; $5244: $E4
-    ld   c, h                                     ; $5245: $4C
-
-data_020_5246::
-    jr   z, @+$2C                                 ; $5246: $28 $2A
-
-    inc  l                                        ; $5248: $2C
-    inc  l                                        ; $5249: $2C
-    ld   l, $2E                                   ; $524A: $2E $2E
-    jr   nc, @+$32                                ; $524C: $30 $30
-
-    ld   sp, $3333                                ; $524E: $31 $33 $33
-    inc  [hl]                                     ; $5251: $34
-    dec  [hl]                                     ; $5252: $35
-    ld   [hl], $38                                ; $5253: $36 $38
-    ld   a, [hl-]                                 ; $5255: $3A
-    ld   a, [hl-]                                 ; $5256: $3A
+    dw   Data_020_4D24
+    dw   Data_020_4D64
+    dw   Data_020_4DA4
+    dw   Data_020_4E24
+    dw   Data_020_4EA4
+    dw   Data_020_4EE4
+    dw   Data_020_4F64
+    dw   Data_020_4FA4
+    dw   Data_020_4FE4
+    dw   Data_020_5064
+    dw   Data_020_50A4
+    dw   Data_020_50E4
+    dw   Data_020_5124
+    dw   Data_020_5164
+    dw   Data_020_51A4
+    dw   Data_020_51E4
+    dw   Data_020_4CE4
 
 ; Position sprites for the title screen (?)
 ; Maybe also controls the apparition effect of
 ; the title.
+data_020_5246::
+    db   $28, $2A, $2C, $2C, $2E, $2E, $30, $30, $31, $33, $33, $34, $35, $36, $38, $3A
+    db   $3A
+
 PositionTitleScreenSprites::
     ; If not on the intro title, return
     ld   a, [wGameplaySubtype]                    ; $5257: $FA $96 $DB
@@ -2630,12 +1795,12 @@ jr_020_527C:
     ld   c, a                                     ; $528F: $4F
 
 jr_020_5290:
-    ld   a, [rLY]                                 ; $5290: $F0 $44
+    ldh  a, [rLY]                                 ; $5290: $F0 $44
     cp   $10                                      ; $5292: $FE $10
     jr   nz, jr_020_5290                          ; $5294: $20 $FA
 
 jr_020_5296:
-    ld   a, [rSTAT]                               ; $5296: $F0 $41
+    ldh  a, [rSTAT]                               ; $5296: $F0 $41
     and  $03                                      ; $5298: $E6 $03
     jr   nz, jr_020_5296                          ; $529A: $20 $FA
 
@@ -2671,7 +1836,7 @@ jr_020_52A8:
     jr   nz, jr_020_52DC                          ; $52C7: $20 $13
 
     xor  a                                        ; $52C9: $AF
-    ld   [rBGP], a                                ; $52CA: $E0 $47
+    ldh  [rBGP], a                                ; $52CA: $E0 $47
     jr   jr_020_5296                              ; $52CC: $18 $C8
 
 jr_020_52CE:
@@ -2681,37 +1846,36 @@ jr_020_52CE:
     ld   a, [hl]                                  ; $52D3: $7E
     ld   hl, hBaseScrollY                         ; $52D4: $21 $97 $FF
     add  [hl]                                     ; $52D7: $86
-    ld   [rSCY], a                                ; $52D8: $E0 $42
+    ldh  [rSCY], a                                ; $52D8: $E0 $42
     jr   jr_020_5296                              ; $52DA: $18 $BA
 
 jr_020_52DC:
     ldh  a, [hBaseScrollY]                        ; $52DC: $F0 $97
     sub  $38                                      ; $52DE: $D6 $38
-    ld   [rSCY], a                                ; $52E0: $E0 $42
+    ldh  [rSCY], a                                ; $52E0: $E0 $42
 
 jr_020_52E2:
-    ld   a, [rLY]                                 ; $52E2: $F0 $44
+    ldh  a, [rLY]                                 ; $52E2: $F0 $44
     cp   $48                                      ; $52E4: $FE $48
     jr   c, jr_020_52E2                           ; $52E6: $38 $FA
 
 jr_020_52E8:
-    ld   a, [rSTAT]                               ; $52E8: $F0 $41
+    ldh  a, [rSTAT]                               ; $52E8: $F0 $41
     and  $03                                      ; $52EA: $E6 $03
     jr   nz, jr_020_52E8                          ; $52EC: $20 $FA
 
     ldh  a, [hBaseScrollY]                        ; $52EE: $F0 $97
-    ld   [rSCY], a                                ; $52F0: $E0 $42
+    ldh  [rSCY], a                                ; $52F0: $E0 $42
     ld   a, [wBGPalette]                          ; $52F2: $FA $97 $DB
-    ld   [rBGP], a                                ; $52F5: $E0 $47
+    ldh  [rBGP], a                                ; $52F5: $E0 $47
     ret                                           ; $52F7: $C9
 
 Data_020_52F8::
-    db   $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F  ; $52F8 |........|
-    db   $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F  ; $5300 |........|
+    db   $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F
 
 func_020_5308::
     ld   a, $98                                   ; $5308: $3E $98
-    ld   [rBCPS], a                               ; $530A: $E0 $68
+    ldh  [rBCPS], a                               ; $530A: $E0 $68
     ld   hl, $FF69                                ; $530C: $21 $69 $FF
     ld   b, $08                                   ; $530F: $06 $08
 
@@ -2756,39 +1920,23 @@ LinkAnimationStateTable::
     db   $BE, $D0, $D2, $A0, $FC, $FC, $A0       ; $5400 |........|
 
 data_020_5407::
-    db   $00                                     ; $5407
-    db   $00, $20, $20, $00, $00, $00, $20, $00  ; $5408 |.  ... .|
-    db   $00, $20, $20, $00, $00, $00, $00, $00  ; $5410 |.  .....|
-    db   $00, $00, $00, $20, $20, $20, $20, $20  ; $5418 |...     |
-    db   $20, $20, $20, $00, $00, $00, $00, $00  ; $5420 |   .....|
-    db   $00, $20, $20, $00, $00, $00, $00, $00  ; $5428 |.  .....|
-    db   $00, $00, $00, $00, $00, $00, $00, $20  ; $5430 |....... |
-    db   $20, $20, $20, $00, $20, $00, $20, $00  ; $5438 |   . . .|
-    db   $00, $00, $00, $00, $00, $00, $00, $20  ; $5440 |....... |
-    db   $20, $20, $20, $00, $00, $00, $20, $00  ; $5448 |   ... .|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $5450 |........|
-    db   $00, $00, $00, $00, $00, $20, $00, $00  ; $5458 |..... ..|
-    db   $20, $00, $20, $00, $00, $00, $00, $00  ; $5460 | . .....|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $5468 |........|
-    db   $00, $20, $00, $20, $20, $20, $20, $00  ; $5470 |. .    .|
-    db   $00, $00, $00, $00, $00, $00, $20, $00  ; $5478 |...... .|
-    db   $20, $00, $20, $20, $20, $20, $20, $00  ; $5480 | .     .|
-    db   $00, $00, $00, $00, $00, $20, $20, $00  ; $5488 |.....  .|
-    db   $00, $20, $20, $20, $20, $20, $20, $00  ; $5490 |.      .|
-    db   $00, $00, $00, $00, $00, $00, $00, $00  ; $5498 |........|
-    db   $20, $00, $20, $00, $20, $00, $20, $00  ; $54A0 | . . . .|
-    db   $00, $00, $00, $00, $00, $00, $20, $00  ; $54A8 |...... .|
-    db   $00, $00, $00, $00, $00, $00, $20, $00  ; $54B0 |...... .|
-    db   $00, $00, $00, $00, $00, $20, $20, $20  ; $54B8 |.....   |
-    db   $20, $20, $20, $00, $00, $00, $00, $60  ; $54C0 |   ....`|
-    db   $60, $20, $20, $20, $20, $40, $40, $00  ; $54C8 |`    @@.|
-    db   $20, $00, $20, $00, $20, $40, $60, $40  ; $54D0 | . . @`@|
-    db   $60, $40, $60, $00, $20, $00, $00, $00  ; $54D8 |`@`. ...|
-    db   $20, $00, $00, $00, $00, $00, $00, $00  ; $54E0 | .......|
-    db   $00, $20, $20, $20, $20, $00, $00, $00  ; $54E8 |.    ...|
-    db   $00, $00, $00, $20, $20                 ; $54F0 |...  |
-
 ; Called from SkipTilesGroupAnimation
+    db   $00, $00, $20, $20, $00, $00, $00, $20, $00, $00, $20, $20, $00, $00, $00, $00
+    db   $00, $00, $00, $00, $20, $20, $20, $20, $20, $20, $20, $20, $00, $00, $00, $00
+    db   $00, $00, $20, $20, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+    db   $20, $20, $20, $20, $00, $20, $00, $20, $00, $00, $00, $00, $00, $00, $00, $00
+    db   $20, $20, $20, $20, $00, $00, $00, $20, $00, $00, $00, $00, $00, $00, $00, $00
+    db   $00, $00, $00, $00, $00, $00, $20, $00, $00, $20, $00, $20, $00, $00, $00, $00
+    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $20, $00, $20, $20, $20, $20
+    db   $00, $00, $00, $00, $00, $00, $00, $20, $00, $20, $00, $20, $20, $20, $20, $20
+    db   $00, $00, $00, $00, $00, $00, $20, $20, $00, $00, $20, $20, $20, $20, $20, $20
+    db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $20, $00, $20, $00, $20, $00, $20
+    db   $00, $00, $00, $00, $00, $00, $00, $20, $00, $00, $00, $00, $00, $00, $00, $20
+    db   $00, $00, $00, $00, $00, $00, $20, $20, $20, $20, $20, $20, $00, $00, $00, $00
+    db   $60, $60, $20, $20, $20, $20, $40, $40, $00, $20, $00, $20, $00, $20, $40, $60
+    db   $40, $60, $40, $60, $00, $20, $00, $00, $00, $20, $00, $00, $00, $00, $00, $00
+    db   $00, $00, $20, $20, $20, $20, $00, $00, $00, $00, $00, $00, $20, $20
+
 func_020_54F5::
     ldh  a, [hLinkAnimationState]                 ; $54F5: $F0 $9D
     cp   $FF                                      ; $54F7: $FE $FF
@@ -2865,7 +2013,7 @@ Data_020_556C::
 
 ; Set next BG region origin, and decrement wRoomTransitionFramesBeforeMidScreen
 func_020_5570::
-    ld   e, $FF                                   ; $5570: $FF
+    ld   e, $FF                                   ; $5570: $1E $FF
     ld   a, [wRoomTransitionDirection]            ; $5572: $FA $25 $C1
     ld   c, a                                     ; $5575: $4F
     ld   b, $00                                   ; $5576: $06 $00
@@ -2999,12 +2147,8 @@ jr_020_561C:
 jr_020_562E:
     ret                                           ; $562E: $C9
 
-    nop                                           ; $562F: $00
-    ld   bc, $302                                 ; $5630: $01 $02 $03
-    nop                                           ; $5633: $00
-    inc  bc                                       ; $5634: $03
-    ld   bc, $00                                  ; $5635: $01 $00 $00
-    ld   bc, $302                                 ; $5638: $01 $02 $03
+Data_020_562F::
+    db   $00, $01, $02, $03, $00, $03, $01, $00, $00, $01, $02, $03
 
 func_020_563B::
     ld   hl, wC16C                                ; $563B: $21 $6C $C1
@@ -3019,7 +2163,7 @@ label_020_5649:
     ld   a, [hl]                                  ; $5649: $7E
     inc  [hl]                                     ; $564A: $34
 
-func_020_564B:
+func_020_564B::
     cp   $04                                      ; $564B: $FE $04
     jr   z, jr_020_568A                           ; $564D: $28 $3B
 
@@ -3046,7 +2190,7 @@ jr_020_5664:
     sla  a                                        ; $5668: $CB $27
     or   b                                        ; $566A: $B0
     ld   e, a                                     ; $566B: $5F
-    ld   hl, $562F                                ; $566C: $21 $2F $56
+    ld   hl, Data_020_562F                        ; $566C: $21 $2F $56
     add  hl, de                                   ; $566F: $19
     ld   a, c                                     ; $5670: $79
     and  $03                                      ; $5671: $E6 $03
@@ -3073,98 +2217,92 @@ jr_020_5677:
 jr_020_568A:
     ret                                           ; $568A: $C9
 
-    db   $27, $6A, $6C, $21, $22, $23, $24, $25  ; $568B |'jl!"#$%|
-    db   $26, $6A, $FF, $6C, $6A, $6C, $6A, $6C  ; $5693 |&j.ljljl|
-    db   $65, $65, $66, $31, $32, $33, $34, $35  ; $569B |eef12345|
-    db   $36, $67, $68, $64, $67, $69, $65, $66  ; $56A3 |6ghdgief|
-    db   $40, $40, $41, $42, $43, $44, $FA, $FA  ; $56AB |@@ABCD..|
-    db   $63, $40, $40, $40, $40, $40, $40, $60  ; $56B3 |c@@@@@@`|
-    db   $FF, $FA, $48, $49, $4A, $FA, $FA, $FF  ; $56BB |..HIJ...|
-    db   $62, $6D, $6D, $6D, $6D, $6D, $6D, $FF  ; $56C3 |bmmmmmm.|
-    db   $00, $01, $00, $01, $FA, $FF, $5E, $5F  ; $56CB |......^_|
-    db   $04, $05, $06, $07, $28, $29, $29, $2A  ; $56D3 |....())*|
-    db   $10, $11, $10, $11, $FA, $FA, $6E, $6F  ; $56DB |......no|
-    db   $14, $15, $16, $17, $38, $20, $20, $3A  ; $56E3 |....8  :|
-    db   $00, $01, $00, $01, $FB, $FF, $FE, $FE  ; $56EB |........|
-    db   $08, $09, $0A, $0B, $38, $20, $20, $3A  ; $56F3 |....8  :|
-    db   $10, $11, $10, $11, $FB, $FB, $FE, $FE  ; $56FB |........|
-    db   $18, $19, $1A, $1B, $48, $49, $49, $4A  ; $5703 |....HIIJ|
-    db   $FB, $FF, $0C, $0D, $40, $40, $40, $40  ; $570B |....@@@@|
-    db   $FA, $FA, $FF, $58, $0E, $0F, $FA, $FA  ; $5713 |...X....|
-    db   $FB, $FB, $1C, $1D, $FA, $FA, $FA, $FA  ; $571B |........|
-    db   $FA, $FA, $FA, $5D, $1E, $1F, $FA, $FA  ; $5723 |...]....|
-    db   $0C, $0D, $0C, $0D, $FB, $FB, $28, $2A  ; $572B |......(*|
-    db   $FA, $FA, $FA, $58, $2D, $2E, $2E, $2F  ; $5733 |...X-../|
-    db   $1C, $1D, $1C, $1D, $FB, $56, $61, $4A  ; $573B |.....VaJ|
-    db   $FA, $FA, $59, $5A, $3D, $3E, $3E, $3F  ; $5743 |..YZ=>>?|
-    db   $FD, $FD, $FD, $FD, $FB, $FB, $FB, $FB  ; $574B |........|
-    db   $28, $29, $5B, $FA, $FF, $FF, $54, $54  ; $5753 |()[...TT|
-    db   $FD, $FD, $FD, $FD, $FB, $FB, $FF, $FB  ; $575B |........|
-    db   $38, $30, $3A, $FA, $FF, $FF, $54, $54  ; $5763 |80:...TT|
-    db   $FD, $FD, $FD, $FF, $FD, $FD, $FB, $FB  ; $576B |........|
-    db   $48, $FE, $4A, $FA, $56, $57, $54, $54  ; $5773 |H.J.VWTT|
-    db   $03, $12, $13, $12, $13, $02, $FF, $FB  ; $577B |........|
-    db   $5C, $2B, $FA, $FA, $FA, $FA, $54, $54  ; $5783 |\+....TT|
-    db   $03, $03, $03, $03, $03, $03, $02, $03  ; $578B |........|
-    db   $03, $03, $00, $03, $03, $03, $03, $03  ; $5793 |........|
-    db   $03, $03, $03, $03, $03, $03, $03, $03  ; $579B |........|
-    db   $03, $03, $03, $03, $03, $03, $03, $03  ; $57A3 |........|
-    db   $03, $03, $04, $04, $04, $04, $00, $00  ; $57AB |........|
-    db   $04, $03, $03, $03, $03, $03, $03, $03  ; $57B3 |........|
-    db   $01, $00, $04, $04, $04, $04, $00, $01  ; $57BB |........|
-    db   $04, $04, $04, $04, $04, $04, $04, $01  ; $57C3 |........|
-    db   $00, $00, $00, $00, $00, $02, $01, $01  ; $57CB |........|
-    db   $04, $04, $04, $04, $04, $04, $04, $04  ; $57D3 |........|
-    db   $00, $00, $00, $00, $00, $00, $01, $01  ; $57DB |........|
-    db   $04, $06, $04, $04, $04, $07, $07, $04  ; $57E3 |........|
-    db   $00, $00, $00, $00, $00, $01, $01, $01  ; $57EB |........|
-    db   $04, $06, $04, $04, $04, $07, $07, $04  ; $57F3 |........|
-    db   $00, $00, $00, $00, $00                 ; $57FB |........|
+Data_20_568B::
+    db   $27, $6A, $6C, $21, $22, $23, $24, $25
+    db   $26, $6A, $FF, $6C, $6A, $6C, $6A, $6C
+    db   $65, $65, $66, $31, $32, $33, $34, $35
+    db   $36, $67, $68, $64, $67, $69, $65, $66
+    db   $40, $40, $41, $42, $43, $44, $FA, $FA
+    db   $63, $40, $40, $40, $40, $40, $40, $60
+    db   $FF, $FA, $48, $49, $4A, $FA, $FA, $FF
+    db   $62, $6D, $6D, $6D, $6D, $6D, $6D, $FF
+    db   $00, $01, $00, $01, $FA, $FF, $5E, $5F
+    db   $04, $05, $06, $07, $28, $29, $29, $2A
+    db   $10, $11, $10, $11, $FA, $FA, $6E, $6F
+    db   $14, $15, $16, $17, $38, $20, $20, $3A
+    db   $00, $01, $00, $01, $FB, $FF, $FE, $FE
+    db   $08, $09, $0A, $0B, $38, $20, $20, $3A
+    db   $10, $11, $10, $11, $FB, $FB, $FE, $FE
+    db   $18, $19, $1A, $1B, $48, $49, $49, $4A
+    db   $FB, $FF, $0C, $0D, $40, $40, $40, $40
+    db   $FA, $FA, $FF, $58, $0E, $0F, $FA, $FA
+    db   $FB, $FB, $1C, $1D, $FA, $FA, $FA, $FA
+    db   $FA, $FA, $FA, $5D, $1E, $1F, $FA, $FA
+    db   $0C, $0D, $0C, $0D, $FB, $FB, $28, $2A
+    db   $FA, $FA, $FA, $58, $2D, $2E, $2E, $2F
+    db   $1C, $1D, $1C, $1D, $FB, $56, $61, $4A
+    db   $FA, $FA, $59, $5A, $3D, $3E, $3E, $3F
+    db   $FD, $FD, $FD, $FD, $FB, $FB, $FB, $FB
+    db   $28, $29, $5B, $FA, $FF, $FF, $54, $54
+    db   $FD, $FD, $FD, $FD, $FB, $FB, $FF, $FB
+    db   $38, $30, $3A, $FA, $FF, $FF, $54, $54
+    db   $FD, $FD, $FD, $FF, $FD, $FD, $FB, $FB
+    db   $48, $FE, $4A, $FA, $56, $57, $54, $54
+    db   $03, $12, $13, $12, $13, $02, $FF, $FB
+    db   $5C, $2B, $FA, $FA, $FA, $FA, $54, $54
+
+Data_020_578B::
+    db   $03, $03, $03, $03, $03, $03, $02, $03
+    db   $03, $03, $00, $03, $03, $03, $03, $03
+    db   $03, $03, $03, $03, $03, $03, $03, $03
+    db   $03, $03, $03, $03, $03, $03, $03, $03
+    db   $03, $03, $04, $04, $04, $04, $00, $00
+    db   $04, $03, $03, $03, $03, $03, $03, $03
+    db   $01, $00, $04, $04, $04, $04, $00, $01
+    db   $04, $04, $04, $04, $04, $04, $04, $01
+    db   $00, $00, $00, $00, $00, $02, $01, $01
+    db   $04, $04, $04, $04, $04, $04, $04, $04
+    db   $00, $00, $00, $00, $00, $00, $01, $01
+    db   $04, $06, $04, $04, $04, $07, $07, $04
+    db   $00, $00, $00, $00, $00, $01, $01, $01
+    db   $04, $06, $04, $04, $04, $07, $07, $04
+    db   $00, $00, $00, $00, $00
 
 data_020_5800::
-    db   $00, $01, $01                           ; $5800 |........|
-    db   $04, $04, $04, $04, $04, $04, $04, $04  ; $5803 |........|
-    db   $00, $01, $02, $02, $03, $03, $03, $03  ; $580B |........|
-    db   $00, $00, $00, $04, $02, $07, $00, $00  ; $5813 |........|
-    db   $00, $00, $02, $02, $00, $00, $00, $00  ; $581B |........|
-    db   $00, $00, $00, $04, $07, $07, $00, $00  ; $5823 |........|
-    db   $07, $07, $01, $01, $00, $00, $04, $04  ; $582B |........|
-    db   $00, $00, $00, $04, $05, $03, $03, $03  ; $5833 |........|
-    db   $07, $07, $01, $01, $00, $04, $04, $04  ; $583B |........|
-    db   $00, $00, $04, $04, $03, $03, $03, $03  ; $5843 |........|
-    db   $03, $03, $03, $03, $00, $00, $00, $00  ; $584B |........|
-    db   $04, $04, $04, $00, $07, $01, $03, $03  ; $5853 |........|
-    db   $03, $03, $03, $03, $00, $00, $02, $00  ; $585B |........|
-    db   $04, $04, $04, $00, $00, $02, $03, $03  ; $5863 |........|
-    db   $03, $03, $03, $07, $03, $03, $00, $00  ; $586B |........|
-    db   $04, $04, $04, $00, $04, $04, $03, $03  ; $5873 |........|
-    db   $04, $04, $04, $04, $04, $04, $07, $00  ; $587B |........|
-    db   $04, $04, $00, $00, $00, $00, $03, $03  ; $5883 |........|
+    db   $00, $01, $01, $04, $04, $04, $04, $04, $04, $04, $04, $00, $01, $02, $02, $03
+    db   $03, $03, $03, $00, $00, $00, $04, $02, $07, $00, $00, $00, $00, $02, $02, $00
+    db   $00, $00, $00, $00, $00, $00, $04, $07, $07, $00, $00, $07, $07, $01, $01, $00
+    db   $00, $04, $04, $00, $00, $00, $04, $05, $03, $03, $03, $07, $07, $01, $01, $00
+    db   $04, $04, $04, $00, $00, $04, $04, $03, $03, $03, $03, $03, $03, $03, $03, $00
+    db   $00, $00, $00, $04, $04, $04, $00, $07, $01, $03, $03, $03, $03, $03, $03, $00
+    db   $00, $02, $00, $04, $04, $04, $00, $00, $02, $03, $03, $03, $03, $03, $07, $03
+    db   $03, $00, $00, $04, $04, $04, $00, $04, $04, $03, $03, $04, $04, $04, $04, $04
+    db   $04, $07, $00, $04, $04, $00, $00, $00, $00, $03, $03
 
 LoadTilemap0E::
-    ld   a, $8B                                   ; $588B: $3E $8B
-    ldh  [hBGMapOffsetLow], a                     ; $588D: $E0 $E1
-    ld   a, $56                                   ; $588F: $3E $56
-    ldh  [$FFE2], a                               ; $5891: $E0 $E2
+    ld   a, LOW(Data_20_568B)                     ; $588B: $3E $8B
+    ldh  [hScratchA], a                           ; $588D: $E0 $E1
+    ld   a, HIGH(Data_20_568B)                    ; $588F: $3E $56
+    ldh  [hScratchB], a                           ; $5891: $E0 $E2
     xor  a                                        ; $5893: $AF
-    ldh  [$FFE3], a                               ; $5894: $E0 $E3
+    ldh  [hScratchC], a                           ; $5894: $E0 $E3
     call func_020_58AD                            ; $5896: $CD $AD $58
     ldh  a, [hIsGBC]                              ; $5899: $F0 $FE
     and  a                                        ; $589B: $A7
     ret  z                                        ; $589C: $C8
 
-    ld   a, $8B                                   ; $589D: $3E $8B
-    ldh  [hBGMapOffsetLow], a                     ; $589F: $E0 $E1
-    ld   a, $57                                   ; $58A1: $3E $57
-    ldh  [$FFE2], a                               ; $58A3: $E0 $E2
-    ld   hl, $FFE3                                ; $58A5: $21 $E3 $FF
+    ld   a, LOW(Data_020_578B)                    ; $589D: $3E $8B
+    ldh  [hScratchA], a                           ; $589F: $E0 $E1
+    ld   a, HIGH(Data_020_578B)                   ; $58A1: $3E $57
+    ldh  [hScratchB], a                           ; $58A3: $E0 $E2
+    ld   hl, hScratchC                            ; $58A5: $21 $E3 $FF
     inc  [hl]                                     ; $58A8: $34
     call func_020_58AD                            ; $58A9: $CD $AD $58
     ret                                           ; $58AC: $C9
 
-func_020_58AD:
+func_020_58AD::
     ld   de, $9822                                ; $58AD: $11 $22 $98
-    ld   bc, $00                                  ; $58B0: $01 $00 $00
+    ld   bc, 0                                    ; $58B0: $01 $00 $00
 
 jr_020_58B3:
     ld   a, [$C5A2]                               ; $58B3: $FA $A2 $C5
@@ -3185,19 +2323,19 @@ jr_020_58B3:
 jr_020_58CB:
     ldh  a, [hBGMapOffsetLow]                     ; $58CB: $F0 $E1
     ld   l, a                                     ; $58CD: $6F
-    ldh  a, [$FFE2]                               ; $58CE: $F0 $E2
+    ldh  a, [hScratchB]                           ; $58CE: $F0 $E2
     ld   h, a                                     ; $58D0: $67
     add  hl, bc                                   ; $58D1: $09
     ld   a, [hl]                                  ; $58D2: $7E
 
 jr_020_58D3:
     ld   h, a                                     ; $58D3: $67
-    ldh  a, [$FFE3]                               ; $58D4: $F0 $E3
+    ldh  a, [hScratchC]                           ; $58D4: $F0 $E3
     and  a                                        ; $58D6: $A7
     jr   z, jr_020_58EA                           ; $58D7: $28 $11
 
     ld   a, $01                                   ; $58D9: $3E $01
-    ld   [rVBK], a                                ; $58DB: $E0 $4F
+    ldh  [rVBK], a                                ; $58DB: $E0 $4F
     ld   a, h                                     ; $58DD: $7C
     cp   $2C                                      ; $58DE: $FE $2C
     jr   nz, jr_020_58E4                          ; $58E0: $20 $02
@@ -3207,7 +2345,7 @@ jr_020_58D3:
 jr_020_58E4:
     ld   [de], a                                  ; $58E4: $12
     xor  a                                        ; $58E5: $AF
-    ld   [rVBK], a                                ; $58E6: $E0 $4F
+    ldh  [rVBK], a                                ; $58E6: $E0 $4F
     jr   jr_020_58EC                              ; $58E8: $18 $02
 
 jr_020_58EA:
@@ -3248,7 +2386,7 @@ InventoryEntryPoint::
     ret  nc                                       ; $590C: $D0
 
     ld   e, c                                     ; $590D: $59
-    db   $fd                                      ; $590E: $FD
+    db   $FD                                      ; $590E: $FD
     ld   e, d                                     ; $590F: $5A
     dec  h                                        ; $5910: $25
     ld   e, l                                     ; $5911: $5D
@@ -3275,10 +2413,10 @@ InventoryEntryPoint::
 
 jr_020_592D:
     xor  a                                        ; $592D: $AF
-    ld   [rSVBK], a                               ; $592E: $E0 $70
+    ldh  [rSVBK], a                               ; $592E: $E0 $70
     ld   b, [hl]                                  ; $5930: $46
     ld   a, $03                                   ; $5931: $3E $03
-    ld   [rSVBK], a                               ; $5933: $E0 $70
+    ldh  [rSVBK], a                               ; $5933: $E0 $70
     ld   [hl], b                                  ; $5935: $70
     inc  hl                                       ; $5936: $23
     dec  c                                        ; $5937: $0D
@@ -3287,12 +2425,14 @@ jr_020_592D:
     jr   nz, jr_020_592D                          ; $593A: $20 $F1
 
     xor  a                                        ; $593C: $AF
-    ld   [rSVBK], a                               ; $593D: $E0 $70
+    ldh  [rSVBK], a                               ; $593D: $E0 $70
     ei                                            ; $593F: $FB
 
 jr_020_5940:
     call func_020_6683                            ; $5940: $CD $83 $66
-    call func_1A22                               ; $5943: $CD $22 $1A
+
+func_020_5943::
+    call func_1A22                                ; $5943: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5946: $FA $6B $C1
     cp   $04                                      ; $5949: $FE $04
     ; Returns back to render palettes if transition isn't finished
@@ -3317,31 +2457,28 @@ jr_020_5940:
 
 ; Palette Data ?
 data_020_596A::
-    db $9C, $AA, $81, $06, $06, $9C, $AC, $81
-    db $06, $06, $9C, $AE, $81, $06, $06, $9C
-    db $B0, $81, $06, $06, $9C, $B2, $81, $06
-    db $06, $9C, $71, $81, $03, $03, $00, $9C
-    db $AC, $81, $04, $04, $9C, $AE, $81, $03
-    db $03, $00
-
 ; Sprite Data ?
 ; Start of data copied for inventory display
-data_020_5994::
-    db $9C, $6A, $83, $94, $95, $C0, $C1, $9C
-    db $6C, $83, $A0, $A1, $C2, $C3, $9C, $6E
-    db $83, $9A, $9B, $C4, $C5, $9C, $6F, $81
-    db $9C, $9D, $9C, $B0, $81, $C6, $C7, $9C
-    db $71, $81, $9E, $9F, $9C, $B2, $81, $CA
-    db $CB, $9C, $92, $01, $7F, $7F, $9C, $D3
-    db $00, $7F, $00
+    db   $9C, $AA, $81, $06, $06, $9C, $AC, $81, $06, $06, $9C, $AE, $81, $06, $06, $9C
+    db   $B0, $81, $06, $06, $9C, $B2, $81, $06, $06, $9C, $71, $81, $03, $03, $00
 
+Data_020_5989::
+    db   $9C, $AC, $81, $04, $04, $9C, $AE, $81, $03, $03, $00
+
+data_020_5994::
 ; Location for overwriting each inventory sprite
+    db   $9C, $6A, $83, $94, $95, $C0, $C1, $9C, $6C, $83, $A0, $A1, $C2, $C3, $9C, $6E
+    db   $83, $9A, $9B, $C4, $C5, $9C, $6F, $81, $9C, $9D, $9C, $B0, $81, $C6, $C7, $9C
+    db   $71, $81, $9E, $9F, $9C, $B2, $81, $CA, $CB, $9C, $92, $01, $7F, $7F, $9C, $D3
+    db   $00, $7F, $00
+
 data_020_59C7::
-    db $03, $0A, $11, $22, $05, $0C, $13, $1D, $27
+    db   $03, $0A, $11, $22, $05, $0C, $13, $1D, $27
 
 ; Start building display of inventory
 ; Called from jp hl in 00:28CE (TABLEJUMP)
 ; Copies 51 bytes from data_020_5994 (above) to wRequestDestination (D601)                                          ; $59CF: $27
+func_020_59D0::
     ld   hl, wRequestDestinationHigh              ; $59D0: $21 $01 $D6
     ld   bc, data_020_5994                        ; $59D3: $01 $94 $59
     ld   e, $33                                   ; $59D6: $1E $33
@@ -3399,7 +2536,7 @@ jr_020_59EB:
     ld   c, a                                     ; $5A0C: $4F
     ld   b, $00                                   ; $5A0D: $06 $00
     add  hl, bc                                   ; $5A0F: $09
-    ld   bc, $5989                                ; $5A10: $01 $89 $59
+    ld   bc, Data_020_5989                        ; $5A10: $01 $89 $59
     ld   e, $0B                                   ; $5A13: $1E $0B
 
 ; Copy the remaining palette data
@@ -3449,7 +2586,7 @@ inventoryDisplayLoop:
     jr   nc, jr_020_5A4F                          ; $5A4A: $30 $03
 
 jr_020_5A4C:
-    ld   de, wHasDungeonMap                       ; $5A4C: $11 $CC $DB
+    ld   de, wCurrentDungeonItemFlags             ; $5A4C: $11 $CC $DB
 
 jr_020_5A4F:
     ; Load current inventory display item memory
@@ -3536,7 +2673,7 @@ jr_020_5A97:
     jr   nc, jr_020_5AD1                          ; $5AAC: $30 $23
 
 jr_020_5AAE:
-    ld   a, [wSmallKeysCount]                               ; $5AAE: $FA $D0 $DB
+    ld   a, [wSmallKeysCount]                     ; $5AAE: $FA $D0 $DB
     and  a                                        ; $5AB1: $A7
     jr   z, jr_020_5ADE                           ; $5AB2: $28 $2A
 
@@ -3581,19 +2718,10 @@ jr_020_5ADE:
     ldh  [hWindowXUnused], a                      ; $5AE9: $E0 $AA
     jp   label_020_5D34                           ; $5AEB: $C3 $34 $5D
 
-    nop                                           ; $5AEE: $00
-    dec  b                                        ; $5AEF: $05
-    ld   [bc], a                                  ; $5AF0: $02
-    dec  b                                        ; $5AF1: $05
-    dec  b                                        ; $5AF2: $05
-    ld   b, $06                                   ; $5AF3: $06 $06
-    dec  b                                        ; $5AF5: $05
-    dec  b                                        ; $5AF6: $05
-    dec  b                                        ; $5AF7: $05
-    ld   b, $01                                   ; $5AF8: $06 $01
-    ld   [bc], a                                  ; $5AFA: $02
-    ld   [bc], a                                  ; $5AFB: $02
-    dec  b                                        ; $5AFC: $05
+Data_020_5AEE::
+    db   $00, $05, $02, $05, $05, $06, $06, $05, $05, $05, $06, $01, $02, $02, $05
+
+func_020_5AFD::
     ldh  a, [hIsGBC]                              ; $5AFD: $F0 $FE
     and  a                                        ; $5AFF: $A7
     jr   z, jr_020_5B3D                           ; $5B00: $28 $3B
@@ -3601,7 +2729,7 @@ jr_020_5ADE:
     ld   b, $00                                   ; $5B02: $06 $00
     ld   a, [wTradeSequenceItem]                  ; $5B04: $FA $0E $DB
     ld   c, a                                     ; $5B07: $4F
-    ld   hl, $5AEE                                ; $5B08: $21 $EE $5A
+    ld   hl, Data_020_5AEE                        ; $5B08: $21 $EE $5A
     add  hl, bc                                   ; $5B0B: $09
     ld   a, [hl]                                  ; $5B0C: $7E
     ldh  [hScratch0], a                           ; $5B0D: $E0 $D7
@@ -3632,7 +2760,7 @@ jr_020_5B3D:
     call func_020_6683                            ; $5B45: $CD $83 $66
     ret                                           ; $5B48: $C9
 
-func_020_5B49:
+func_020_5B49::
     ldh  a, [hScratch1]                           ; $5B49: $F0 $D8
     cp   $09                                      ; $5B4B: $FE $09
     jr   z, jr_020_5B8B                           ; $5B4D: $28 $3C
@@ -3656,7 +2784,6 @@ func_020_5B49:
     jr   z, jr_020_5BA0                           ; $5B60: $28 $3E
 
 label_020_5B62:
-jr_020_5B62:
     ld   a, [de]                                  ; $5B62: $1A
     inc  de                                       ; $5B63: $13
     ld   [hl+], a                                 ; $5B64: $22
@@ -3690,13 +2817,13 @@ jr_020_5B76:
 jr_020_5B80:
     ld   a, [wHasToadstool]                       ; $5B80: $FA $4B $DB
     and  a                                        ; $5B83: $A7
-    jr   nz, jr_020_5B62                          ; $5B84: $20 $DC
+    jr   nz, label_020_5B62                       ; $5B84: $20 $DC
 
     ld   a, [wMagicPowderCount]                   ; $5B86: $FA $4C $DB
-    jr   jr_020_5BA8                              ; $5B89: $18 $1D
+    jr   func_020_5BA8                            ; $5B89: $18 $1D
 
 jr_020_5B8B:
-    ld   a, [wOcarinaSongFlags]                  ; $5B8B: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                   ; $5B8B: $FA $49 $DB
     and  a                                        ; $5B8E: $A7
     jp   z, label_020_5B62                        ; $5B8F: $CA $62 $5B
 
@@ -3711,13 +2838,12 @@ jr_020_5B8B:
 
 jr_020_5BA0:
     ld   a, [wArrowCount]                         ; $5BA0: $FA $45 $DB
-    jr   jr_020_5BA8                              ; $5BA3: $18 $03
+    jr   func_020_5BA8                            ; $5BA3: $18 $03
 
 jr_020_5BA5:
     ld   a, [wBombCount]                          ; $5BA5: $FA $4D $DB
 
-func_020_5BA8:
-jr_020_5BA8:
+func_020_5BA8::
     push af                                       ; $5BA8: $F5
     and  $0F                                      ; $5BA9: $E6 $0F
     add  $B0                                      ; $5BAB: $C6 $B0
@@ -3731,7 +2857,7 @@ jr_020_5BA8:
     ld   [hl+], a                                 ; $5BB7: $22
     ret                                           ; $5BB8: $C9
 
-func_020_5BB9:
+func_020_5BB9::
     push bc                                       ; $5BB9: $C5
     ld   a, [$DC90]                               ; $5BBA: $FA $90 $DC
     ld   e, a                                     ; $5BBD: $5F
@@ -3742,7 +2868,7 @@ func_020_5BB9:
     ld   [$DC90], a                               ; $5BC6: $EA $90 $DC
     push hl                                       ; $5BC9: $E5
     sla  c                                        ; $5BCA: $CB $21
-    ld   hl, $5C84                                ; $5BCC: $21 $84 $5C
+    ld   hl, Data_020_5C84                        ; $5BCC: $21 $84 $5C
     add  hl, bc                                   ; $5BCF: $09
     push hl                                       ; $5BD0: $E5
     pop  de                                       ; $5BD1: $D1
@@ -3758,7 +2884,7 @@ func_020_5BB9:
     ldh  a, [hScratch1]                           ; $5BDC: $F0 $D8
     sla  a                                        ; $5BDE: $CB $27
     ld   c, a                                     ; $5BE0: $4F
-    ld   hl, $5C14                                ; $5BE1: $21 $14 $5C
+    ld   hl, Data_020_5C14                        ; $5BE1: $21 $14 $5C
     add  hl, bc                                   ; $5BE4: $09
     push hl                                       ; $5BE5: $E5
     pop  de                                       ; $5BE6: $D1
@@ -3802,126 +2928,26 @@ jr_020_5C10:
     pop  bc                                       ; $5C12: $C1
     ret                                           ; $5C13: $C9
 
-    ld   bc, $101                                 ; $5C14: $01 $01 $01
-    ld   bc, $101                                 ; $5C17: $01 $01 $01
-    ld   bc, $101                                 ; $5C1A: $01 $01 $01
-    ld   bc, $303                                 ; $5C1D: $01 $03 $03
-    ld   bc, $202                                 ; $5C20: $01 $02 $02
-    ld   bc, $303                                 ; $5C23: $01 $03 $03
-    ld   [bc], a                                  ; $5C26: $02
-    ld   [bc], a                                  ; $5C27: $02
-    inc  bc                                       ; $5C28: $03
-    inc  bc                                       ; $5C29: $03
-    inc  bc                                       ; $5C2A: $03
-    ld   bc, $303                                 ; $5C2B: $01 $03 $03
-    ld   [bc], a                                  ; $5C2E: $02
-    ld   [bc], a                                  ; $5C2F: $02
-    ld   a, a                                     ; $5C30: $7F
-    ld   a, a                                     ; $5C31: $7F
-    ld   a, a                                     ; $5C32: $7F
-    ld   a, a                                     ; $5C33: $7F
-    ld   a, a                                     ; $5C34: $7F
-    ld   a, a                                     ; $5C35: $7F
-    add  h                                        ; $5C36: $84
-    ld   a, a                                     ; $5C37: $7F
-    ld   a, a                                     ; $5C38: $7F
-    add  l                                        ; $5C39: $85
-    cp   d                                        ; $5C3A: $BA
-    ld   a, a                                     ; $5C3B: $7F
-    add  b                                        ; $5C3C: $80
-    ld   a, a                                     ; $5C3D: $7F
-    ld   a, a                                     ; $5C3E: $7F
-    add  c                                        ; $5C3F: $81
-    ld   a, a                                     ; $5C40: $7F
-    ld   a, a                                     ; $5C41: $7F
-    add  d                                        ; $5C42: $82
-    ld   a, a                                     ; $5C43: $7F
-    ld   a, a                                     ; $5C44: $7F
-    add  e                                        ; $5C45: $83
-    cp   d                                        ; $5C46: $BA
-    ld   a, a                                     ; $5C47: $7F
-    add  [hl]                                     ; $5C48: $86
-    ld   a, a                                     ; $5C49: $7F
-    ld   a, a                                     ; $5C4A: $7F
-    add  a                                        ; $5C4B: $87
-    cp   d                                        ; $5C4C: $BA
-    ld   a, a                                     ; $5C4D: $7F
-    adc  b                                        ; $5C4E: $88
-    ld   a, a                                     ; $5C4F: $7F
-    ld   a, a                                     ; $5C50: $7F
-    adc  c                                        ; $5C51: $89
-    ld   a, a                                     ; $5C52: $7F
-    ld   a, a                                     ; $5C53: $7F
-    adc  d                                        ; $5C54: $8A
-    ld   a, a                                     ; $5C55: $7F
-    ld   a, a                                     ; $5C56: $7F
-    adc  e                                        ; $5C57: $8B
-    ld   a, a                                     ; $5C58: $7F
-    ld   a, a                                     ; $5C59: $7F
-    adc  h                                        ; $5C5A: $8C
-    ld   a, a                                     ; $5C5B: $7F
-    ld   a, a                                     ; $5C5C: $7F
-    adc  l                                        ; $5C5D: $8D
-    ld   a, a                                     ; $5C5E: $7F
-    ld   a, a                                     ; $5C5F: $7F
-    sbc  b                                        ; $5C60: $98
-    ld   a, a                                     ; $5C61: $7F
-    ld   a, a                                     ; $5C62: $7F
-    sbc  c                                        ; $5C63: $99
-    ld   a, a                                     ; $5C64: $7F
-    ld   a, a                                     ; $5C65: $7F
-    sub  b                                        ; $5C66: $90
-    ld   a, a                                     ; $5C67: $7F
-    ld   a, a                                     ; $5C68: $7F
-    sub  c                                        ; $5C69: $91
-    ld   a, a                                     ; $5C6A: $7F
-    ld   a, a                                     ; $5C6B: $7F
-    sub  d                                        ; $5C6C: $92
-    ld   a, a                                     ; $5C6D: $7F
-    ld   a, a                                     ; $5C6E: $7F
-    sub  e                                        ; $5C6F: $93
-    ld   a, a                                     ; $5C70: $7F
-    ld   a, a                                     ; $5C71: $7F
-    sub  [hl]                                     ; $5C72: $96
-    ld   a, a                                     ; $5C73: $7F
-    ld   a, a                                     ; $5C74: $7F
-    sub  a                                        ; $5C75: $97
-    ld   a, a                                     ; $5C76: $7F
-    ld   a, a                                     ; $5C77: $7F
-    adc  [hl]                                     ; $5C78: $8E
-    ld   a, a                                     ; $5C79: $7F
-    ld   a, a                                     ; $5C7A: $7F
-    adc  a                                        ; $5C7B: $8F
-    ld   a, a                                     ; $5C7C: $7F
-    ld   a, a                                     ; $5C7D: $7F
-    and  h                                        ; $5C7E: $A4
-    ld   a, a                                     ; $5C7F: $7F
-    ld   a, a                                     ; $5C80: $7F
-    and  l                                        ; $5C81: $A5
-    ld   a, a                                     ; $5C82: $7F
-    ld   a, a                                     ; $5C83: $7F
-    sbc  h                                        ; $5C84: $9C
-    ld   bc, $69C                                 ; $5C85: $01 $9C $06
-    sbc  h                                        ; $5C88: $9C
-    ld   h, c                                     ; $5C89: $61
-    sbc  h                                        ; $5C8A: $9C
-    ld   h, l                                     ; $5C8B: $65
-    sbc  h                                        ; $5C8C: $9C
-    pop  bc                                       ; $5C8D: $C1
-    sbc  h                                        ; $5C8E: $9C
-    push bc                                       ; $5C8F: $C5
-    sbc  l                                        ; $5C90: $9D
-    ld   hl, $259D                                ; $5C91: $21 $9D $25
-    sbc  l                                        ; $5C94: $9D
-    add  c                                        ; $5C95: $81
-    sbc  l                                        ; $5C96: $9D
-    add  l                                        ; $5C97: $85
-    sbc  l                                        ; $5C98: $9D
-    pop  hl                                       ; $5C99: $E1
-    sbc  l                                        ; $5C9A: $9D
-    push hl                                       ; $5C9B: $E5
+Data_020_5C14::
+    db   $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $03, $03, $01, $02, $02, $01
+    db   $03, $03, $02, $02, $03, $03, $03, $01, $03, $03, $02, $02
 
-func_020_5C9C:
+Data_020_5C30::
+    db   $7F, $7F, $7F
+
+Data_020_5C33::
+    db   $7F, $7F, $7F, $84, $7F, $7F, $85, $BA, $7F, $80, $7F, $7F, $81, $7F, $7F, $82
+    db   $7F, $7F, $83, $BA, $7F, $86, $7F, $7F, $87, $BA, $7F, $88, $7F, $7F, $89, $7F
+    db   $7F, $8A, $7F, $7F, $8B, $7F, $7F, $8C, $7F, $7F, $8D, $7F, $7F, $98, $7F, $7F
+    db   $99, $7F, $7F, $90, $7F, $7F, $91, $7F, $7F, $92, $7F, $7F, $93, $7F, $7F, $96
+    db   $7F, $7F, $97, $7F, $7F, $8E, $7F, $7F, $8F, $7F, $7F, $A4, $7F, $7F, $A5, $7F
+    db   $7F
+
+Data_020_5C84::
+    db   $9C, $01, $9C, $06, $9C, $61, $9C, $65, $9C, $C1, $9C, $C5, $9D, $21, $9D, $25
+    db   $9D, $81, $9D, $85, $9D, $E1, $9D, $E5
+
+func_020_5C9C::
     push de                                       ; $5C9C: $D5
     push bc                                       ; $5C9D: $C5
     ld   hl, wAButtonSlot                         ; $5C9E: $21 $00 $DB
@@ -3949,7 +2975,7 @@ jr_020_5CB5:
     ld   [wRequests], a                           ; $5CC1: $EA $00 $D6
     push hl                                       ; $5CC4: $E5
     sla  c                                        ; $5CC5: $CB $21
-    ld   hl, $5C84                                ; $5CC7: $21 $84 $5C
+    ld   hl, Data_020_5C84                        ; $5CC7: $21 $84 $5C
     add  hl, bc                                   ; $5CCA: $09
     push hl                                       ; $5CCB: $E5
     pop  de                                       ; $5CCC: $D1
@@ -3965,7 +2991,7 @@ jr_020_5CB5:
     push hl                                       ; $5CD7: $E5
     ldh  a, [hScratch0]                           ; $5CD8: $F0 $D7
     ld   c, a                                     ; $5CDA: $4F
-    ld   hl, $5C30                                ; $5CDB: $21 $30 $5C
+    ld   hl, Data_020_5C30                        ; $5CDB: $21 $30 $5C
     add  hl, bc                                   ; $5CDE: $09
     push hl                                       ; $5CDF: $E5
     pop  de                                       ; $5CE0: $D1
@@ -3983,7 +3009,7 @@ jr_020_5CB5:
     push bc                                       ; $5CEC: $C5
     push hl                                       ; $5CED: $E5
     sla  c                                        ; $5CEE: $CB $21
-    ld   hl, $5C84                                ; $5CF0: $21 $84 $5C
+    ld   hl, Data_020_5C84                        ; $5CF0: $21 $84 $5C
     add  hl, bc                                   ; $5CF3: $09
     push hl                                       ; $5CF4: $E5
     pop  de                                       ; $5CF5: $D1
@@ -4006,7 +3032,7 @@ jr_020_5CB5:
     push hl                                       ; $5D09: $E5
     ldh  a, [hScratch0]                           ; $5D0A: $F0 $D7
     ld   c, a                                     ; $5D0C: $4F
-    ld   hl, $5C33                                ; $5D0D: $21 $33 $5C
+    ld   hl, Data_020_5C33                        ; $5D0D: $21 $33 $5C
     add  hl, bc                                   ; $5D10: $09
     push hl                                       ; $5D11: $E5
     pop  de                                       ; $5D12: $D1
@@ -4026,6 +3052,7 @@ jr_020_5CB5:
 
     ret                                           ; $5D24: $C9
 
+func_020_5D25::
     ld   a, [$C154]                               ; $5D25: $FA $54 $C1
     ld   c, a                                     ; $5D28: $4F
     ld   b, $00                                   ; $5D29: $06 $00
@@ -4038,192 +3065,69 @@ label_020_5D34:
     call func_020_6683                            ; $5D34: $CD $83 $66
     call LCDOff                                   ; $5D37: $CD $CF $28
     ld   a, $20                                   ; $5D3A: $3E $20
-    call func_AB5                                ; $5D3C: $CD $B5 $0A
+    call func_AB5                                 ; $5D3C: $CD $B5 $0A
     xor  a                                        ; $5D3F: $AF
     ld   [wRequests], a                           ; $5D40: $EA $00 $D6
     ld   [wRequestDestinationHigh], a             ; $5D43: $EA $01 $D6
     ld   [$DC90], a                               ; $5D46: $EA $90 $DC
     ld   [$DC91], a                               ; $5D49: $EA $91 $DC
     ld   a, [wLCDControl]                         ; $5D4C: $FA $FD $D6
-    ld   [rLCDC], a                               ; $5D4F: $E0 $40
+    ldh  [rLCDC], a                               ; $5D4F: $E0 $40
     ret                                           ; $5D51: $C9
 
+func_020_5D52::
     call LCDOff                                   ; $5D52: $CD $CF $28
     call LoadColorDungeonTiles                    ; $5D55: $CD $D1 $3F
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
-    ld   [rLCDC], a                               ; $5D5B: $E0 $40
+    ldh  [rLCDC], a                               ; $5D5B: $E0 $40
     call func_020_6683                            ; $5D5D: $CD $83 $66
     ret                                           ; $5D60: $C9
 
-    rst  $38                                      ; $5D61: $FF
-    ld   d, a                                     ; $5D62: $57
-    call nz, $2126                                ; $5D63: $C4 $26 $21
-    dec  d                                        ; $5D66: $15
-    nop                                           ; $5D67: $00
-    nop                                           ; $5D68: $00
-    rst  $38                                      ; $5D69: $FF
-    ld   d, a                                     ; $5D6A: $57
-    ld   sp, $C552                                ; $5D6B: $31 $52 $C5
-    jr   z, jr_020_5D70                           ; $5D6E: $28 $00
+Data_020_5D61::
+    db   $FF, $57, $C4, $26, $21, $15, $00, $00, $FF, $57, $31, $52, $C5, $28, $00, $00
+    db   $FF, $57, $7F, $2C, $0E, $14, $00, $00, $FF, $57, $D9, $11, $CE, $10, $00, $00
+    db   $FF, $57, $AE, $7E, $00, $7C, $00, $00, $FF, $57, $FF, $7F, $42, $06, $00, $00
+    db   $FF, $57, $BB, $12, $51, $01, $00, $00, $FF, $57, $02, $2B, $00, $0A, $00, $00
+    db   $FF, $57, $00, $00, $A2, $22, $FF, $4E, $00, $7C, $00, $00, $FF, $05, $FF, $4E
+    db   $00, $7C, $00, $00, $03, $7E, $FF, $4E, $00, $7C, $00, $00, $31, $52, $FF, $7F
+    db   $00, $7C, $DF, $1A, $7D, $18, $00, $00, $00, $7C, $00, $00, $A2, $22, $FF, $7F
+    db   $00, $7C, $00, $00, $1F, $00, $FF, $7F, $00, $7C, $00, $00, $00, $7C, $FF, $7F
 
-jr_020_5D70:
-    nop                                           ; $5D70: $00
-    rst  $38                                      ; $5D71: $FF
-    ld   d, a                                     ; $5D72: $57
-    ld   a, a                                     ; $5D73: $7F
-    inc  l                                        ; $5D74: $2C
-    ld   c, $14                                   ; $5D75: $0E $14
-    nop                                           ; $5D77: $00
-    nop                                           ; $5D78: $00
-    rst  $38                                      ; $5D79: $FF
-    ld   d, a                                     ; $5D7A: $57
-    reti                                          ; $5D7B: $D9
+Data_020_5DE1::
+    db   $FF, $7F, $42, $06
 
-    ld   de, $10CE                                ; $5D7C: $11 $CE $10
-    nop                                           ; $5D7F: $00
-    nop                                           ; $5D80: $00
-    rst  $38                                      ; $5D81: $FF
-    ld   d, a                                     ; $5D82: $57
-    xor  [hl]                                     ; $5D83: $AE
-    ld   a, [hl]                                  ; $5D84: $7E
-    nop                                           ; $5D85: $00
-    ld   a, h                                     ; $5D86: $7C
-    nop                                           ; $5D87: $00
-    nop                                           ; $5D88: $00
-    rst  $38                                      ; $5D89: $FF
-    ld   d, a                                     ; $5D8A: $57
-    rst  $38                                      ; $5D8B: $FF
-    ld   a, a                                     ; $5D8C: $7F
-    ld   b, d                                     ; $5D8D: $42
-    ld   b, $00                                   ; $5D8E: $06 $00
-    nop                                           ; $5D90: $00
-    rst  $38                                      ; $5D91: $FF
-    ld   d, a                                     ; $5D92: $57
-    cp   e                                        ; $5D93: $BB
-    ld   [de], a                                  ; $5D94: $12
-    ld   d, c                                     ; $5D95: $51
-    ld   bc, $00                                  ; $5D96: $01 $00 $00
-    rst  $38                                      ; $5D99: $FF
-    ld   d, a                                     ; $5D9A: $57
-    ld   [bc], a                                  ; $5D9B: $02
-    dec  hl                                       ; $5D9C: $2B
-    nop                                           ; $5D9D: $00
-    ld   a, [bc]                                  ; $5D9E: $0A
-    nop                                           ; $5D9F: $00
-    nop                                           ; $5DA0: $00
-    rst  $38                                      ; $5DA1: $FF
-    ld   d, a                                     ; $5DA2: $57
-    nop                                           ; $5DA3: $00
-    nop                                           ; $5DA4: $00
-    and  d                                        ; $5DA5: $A2
-    ld   [hl+], a                                 ; $5DA6: $22
-    rst  $38                                      ; $5DA7: $FF
-    ld   c, [hl]                                  ; $5DA8: $4E
-    nop                                           ; $5DA9: $00
-    ld   a, h                                     ; $5DAA: $7C
-    nop                                           ; $5DAB: $00
-    nop                                           ; $5DAC: $00
-    rst  $38                                      ; $5DAD: $FF
-    dec  b                                        ; $5DAE: $05
-    rst  $38                                      ; $5DAF: $FF
-    ld   c, [hl]                                  ; $5DB0: $4E
-    nop                                           ; $5DB1: $00
-    ld   a, h                                     ; $5DB2: $7C
-    nop                                           ; $5DB3: $00
-    nop                                           ; $5DB4: $00
-    inc  bc                                       ; $5DB5: $03
-    ld   a, [hl]                                  ; $5DB6: $7E
-    rst  $38                                      ; $5DB7: $FF
-    ld   c, [hl]                                  ; $5DB8: $4E
-    nop                                           ; $5DB9: $00
-    ld   a, h                                     ; $5DBA: $7C
-    nop                                           ; $5DBB: $00
-    nop                                           ; $5DBC: $00
-    ld   sp, $FF52                                ; $5DBD: $31 $52 $FF
-    ld   a, a                                     ; $5DC0: $7F
-    nop                                           ; $5DC1: $00
-    ld   a, h                                     ; $5DC2: $7C
-    rst  $18                                      ; $5DC3: $DF
-    ld   a, [de]                                  ; $5DC4: $1A
-    ld   a, l                                     ; $5DC5: $7D
-    jr   jr_020_5DC8                              ; $5DC6: $18 $00
+Data_020_5DE5::
+    db   $BE, $0F, $13, $02
 
-jr_020_5DC8:
-    nop                                           ; $5DC8: $00
-    nop                                           ; $5DC9: $00
-    ld   a, h                                     ; $5DCA: $7C
-    nop                                           ; $5DCB: $00
-    nop                                           ; $5DCC: $00
-    and  d                                        ; $5DCD: $A2
-    ld   [hl+], a                                 ; $5DCE: $22
-    rst  $38                                      ; $5DCF: $FF
-    ld   a, a                                     ; $5DD0: $7F
-    nop                                           ; $5DD1: $00
-    ld   a, h                                     ; $5DD2: $7C
-    nop                                           ; $5DD3: $00
-    nop                                           ; $5DD4: $00
-    rra                                           ; $5DD5: $1F
-    nop                                           ; $5DD6: $00
-    rst  $38                                      ; $5DD7: $FF
-    ld   a, a                                     ; $5DD8: $7F
-    nop                                           ; $5DD9: $00
-    ld   a, h                                     ; $5DDA: $7C
-    nop                                           ; $5DDB: $00
-    nop                                           ; $5DDC: $00
-    nop                                           ; $5DDD: $00
-    ld   a, h                                     ; $5DDE: $7C
-    rst  $38                                      ; $5DDF: $FF
-    ld   a, a                                     ; $5DE0: $7F
-    rst  $38                                      ; $5DE1: $FF
-    ld   a, a                                     ; $5DE2: $7F
-    ld   b, d                                     ; $5DE3: $42
-    ld   b, $BE                                   ; $5DE4: $06 $BE
-    rrca                                          ; $5DE6: $0F
-    inc  de                                       ; $5DE7: $13
-    ld   [bc], a                                  ; $5DE8: $02
-    ld   a, a                                     ; $5DE9: $7F
-    rrca                                          ; $5DEA: $0F
-    ldh  [$FF09], a                               ; $5DEB: $E0 $09
-    rst  $18                                      ; $5DED: $DF
-    ld   [hl-], a                                 ; $5DEE: $32
-    ld   a, l                                     ; $5DEF: $7D
-    jr   @+$01                                    ; $5DF0: $18 $FF
+Data_020_5DE9::
+    db   $7F, $0F, $E0, $09
 
-    ld   a, a                                     ; $5DF2: $7F
-    dec  a                                        ; $5DF3: $3D
-    ld   [$7EAE], sp                              ; $5DF4: $08 $AE $7E
-    nop                                           ; $5DF7: $00
-    ld   a, h                                     ; $5DF8: $7C
-    rst  $38                                      ; $5DF9: $FF
-    ld   a, a                                     ; $5DFA: $7F
-    ld   sp, $E152                                ; $5DFB: $31 $52 $E1
-    ld   e, l                                     ; $5DFE: $5D
-    push hl                                       ; $5DFF: $E5
-    ld   e, l                                     ; $5E00: $5D
-    jp   hl                                       ; $5E01: $E9
+Data_020_5DED::
+    db   $DF, $32, $7D, $18
 
-    ld   e, l                                     ; $5E02: $5D
-    db   $ed                                      ; $5E03: $ED
-    ld   e, l                                     ; $5E04: $5D
-    pop  af                                       ; $5E05: $F1
-    ld   e, l                                     ; $5E06: $5D
-    push af                                       ; $5E07: $F5
-    ld   e, l                                     ; $5E08: $5D
-    ld   sp, hl                                   ; $5E09: $F9
-    ld   e, l                                     ; $5E0A: $5D
-    nop                                           ; $5E0B: $00
-    ld   bc, $700                                 ; $5E0C: $01 $00 $07
-    ld   [bc], a                                  ; $5E0F: $02
-    nop                                           ; $5E10: $00
-    nop                                           ; $5E11: $00
-    inc  bc                                       ; $5E12: $03
-    inc  b                                        ; $5E13: $04
-    dec  b                                        ; $5E14: $05
-    nop                                           ; $5E15: $00
-    nop                                           ; $5E16: $00
-    nop                                           ; $5E17: $00
-    nop                                           ; $5E18: $00
-    ld   b, $AF                                   ; $5E19: $06 $AF
+Data_020_5DF1::
+    db   $FF, $7F, $3D, $08
+
+Data_020_5DF5::
+    db   $AE, $7E, $00, $7C
+
+Data_020_5DF9::
+    db   $FF, $7F, $31, $52
+
+Data_020_5DFD::
+    dw   Data_020_5DE1
+    dw   Data_020_5DE5
+    dw   Data_020_5DE9
+    dw   Data_020_5DED
+    dw   Data_020_5DF1
+    dw   Data_020_5DF5
+    dw   Data_020_5DF9
+
+Data_020_5E0B::
+    db   $00, $01, $00, $07, $02, $00, $00, $03, $04, $05, $00, $00, $00, $00, $06
+
+func_020_5E1A::
+    xor  a                                        ; $5E1A: $AF
     ld   [wWindowY], a                            ; $5E1B: $EA $9A $DB
     ld   a, $01                                   ; $5E1E: $3E $01
     ld   [wPaletteUnknownE], a                    ; $5E20: $EA $D5 $DD
@@ -4231,24 +3135,24 @@ jr_020_5DC8:
     and  a                                        ; $5E25: $A7
     jr   z, jr_020_5E6D                           ; $5E26: $28 $45
 
-    ld   bc, $5D61                                ; $5E28: $01 $61 $5D
+    ld   bc, Data_020_5D61                        ; $5E28: $01 $61 $5D
     ld   hl, $DC10                                ; $5E2B: $21 $10 $DC
     di                                            ; $5E2E: $F3
     ld   a, $02                                   ; $5E2F: $3E $02
-    ld   [rSVBK], a                               ; $5E31: $E0 $70
+    ldh  [rSVBK], a                               ; $5E31: $E0 $70
 
-jr_020_5E33:
+.loop
     ld   a, [bc]                                  ; $5E33: $0A
     ld   [hl+], a                                 ; $5E34: $22
     inc  bc                                       ; $5E35: $03
     ld   a, l                                     ; $5E36: $7D
     cp   $90                                      ; $5E37: $FE $90
-    jr   nz, jr_020_5E33                          ; $5E39: $20 $F8
+    jr   nz, .loop                                ; $5E39: $20 $F8
 
     xor  a                                        ; $5E3B: $AF
-    ld   [rSVBK], a                               ; $5E3C: $E0 $70
+    ldh  [rSVBK], a                               ; $5E3C: $E0 $70
     ei                                            ; $5E3E: $FB
-    ld   hl, $5E0B                                ; $5E3F: $21 $0B $5E
+    ld   hl, Data_020_5E0B                        ; $5E3F: $21 $0B $5E
     ld   a, [wTradeSequenceItem]                  ; $5E42: $FA $0E $DB
     ld   e, a                                     ; $5E45: $5F
     ld   d, $00                                   ; $5E46: $16 $00
@@ -4259,7 +3163,7 @@ jr_020_5E33:
 
     sla  a                                        ; $5E4D: $CB $27
     ld   e, a                                     ; $5E4F: $5F
-    ld   hl, $5DFB                                ; $5E50: $21 $FB $5D
+    ld   hl, Data_020_5DFD - 2                    ; $5E50: $21 $FB $5D
     add  hl, de                                   ; $5E53: $19
     ld   a, [hl+]                                 ; $5E54: $2A
     ld   h, [hl]                                  ; $5E55: $66
@@ -4268,7 +3172,7 @@ jr_020_5E33:
     ld   c, $04                                   ; $5E5A: $0E $04
     di                                            ; $5E5C: $F3
     ld   a, $02                                   ; $5E5D: $3E $02
-    ld   [rSVBK], a                               ; $5E5F: $E0 $70
+    ldh  [rSVBK], a                               ; $5E5F: $E0 $70
 
 jr_020_5E61:
     ld   a, [hl+]                                 ; $5E61: $2A
@@ -4280,7 +3184,7 @@ jr_020_5E61:
     jr   nz, jr_020_5E61                          ; $5E67: $20 $F8
 
     xor  a                                        ; $5E69: $AF
-    ld   [rSVBK], a                               ; $5E6A: $E0 $70
+    ldh  [rSVBK], a                               ; $5E6A: $E0 $70
     ei                                            ; $5E6C: $FB
 
 jr_020_5E6D:
@@ -4289,71 +3193,13 @@ jr_020_5E6D:
     call func_020_6683                            ; $5E71: $CD $83 $66
     ret                                           ; $5E74: $C9
 
-    add  b                                        ; $5E75: $80
-    ld   h, $00                                   ; $5E76: $26 $00
-    ld   de, $3A20                                ; $5E78: $11 $20 $3A
-    ld   [rNR23], a                               ; $5E7B: $E0 $18
-    and  b                                        ; $5E7D: $A0
-    ld   d, c                                     ; $5E7E: $51
-    ret  nz                                       ; $5E7F: $C0
+Data_020_5E75::
+    db   $80, $26, $00, $11, $20, $3A, $E0, $18, $A0, $51, $C0, $20, $08, $7D, $84, $34
+    db   $AD, $7C, $46, $30, $50, $5C, $27, $28, $12, $40, $08, $1C, $15, $30, $09, $14
+    db   $17, $14, $09, $00, $D7, $04, $6A, $04, $37, $05, $8A, $04, $97, $09, $AA, $04
+    db   $F5, $09, $C9, $04, $10, $0A, $E7, $04, $4B, $06, $05, $05, $A0, $02, $20, $01
 
-    jr   nz, jr_020_5E8A                          ; $5E80: $20 $08
-
-    ld   a, l                                     ; $5E82: $7D
-    add  h                                        ; $5E83: $84
-    inc  [hl]                                     ; $5E84: $34
-    xor  l                                        ; $5E85: $AD
-    ld   a, h                                     ; $5E86: $7C
-    ld   b, [hl]                                  ; $5E87: $46
-    jr   nc, @+$52                                ; $5E88: $30 $50
-
-jr_020_5E8A:
-    ld   e, h                                     ; $5E8A: $5C
-    daa                                           ; $5E8B: $27
-    jr   z, jr_020_5EA0                           ; $5E8C: $28 $12
-
-    ld   b, b                                     ; $5E8E: $40
-    ld   [$151C], sp                              ; $5E8F: $08 $1C $15
-    jr   nc, jr_020_5E9D                          ; $5E92: $30 $09
-
-    inc  d                                        ; $5E94: $14
-    rla                                           ; $5E95: $17
-    inc  d                                        ; $5E96: $14
-    add  hl, bc                                   ; $5E97: $09
-    nop                                           ; $5E98: $00
-    rst  $10                                      ; $5E99: $D7
-    inc  b                                        ; $5E9A: $04
-    ld   l, d                                     ; $5E9B: $6A
-    inc  b                                        ; $5E9C: $04
-
-jr_020_5E9D:
-    scf                                           ; $5E9D: $37
-    dec  b                                        ; $5E9E: $05
-    adc  d                                        ; $5E9F: $8A
-
-jr_020_5EA0:
-    inc  b                                        ; $5EA0: $04
-    sub  a                                        ; $5EA1: $97
-    add  hl, bc                                   ; $5EA2: $09
-    xor  d                                        ; $5EA3: $AA
-    inc  b                                        ; $5EA4: $04
-    push af                                       ; $5EA5: $F5
-    add  hl, bc                                   ; $5EA6: $09
-    ret                                           ; $5EA7: $C9
-
-    inc  b                                        ; $5EA8: $04
-    db   $10                                      ; $5EA9: $10
-    ld   a, [bc]                                  ; $5EAA: $0A
-    rst  $20                                      ; $5EAB: $E7
-    inc  b                                        ; $5EAC: $04
-    ld   c, e                                     ; $5EAD: $4B
-    ld   b, $05                                   ; $5EAE: $06 $05
-    dec  b                                        ; $5EB0: $05
-    and  b                                        ; $5EB1: $A0
-    ld   [bc], a                                  ; $5EB2: $02
-    jr   nz, @+$03                                ; $5EB3: $20 $01
-
-func_020_5EB5:
+func_020_5EB5::
     ldh  a, [hIsGBC]                              ; $5EB5: $F0 $FE
     and  a                                        ; $5EB7: $A7
     jr   z, jr_020_5EEE                           ; $5EB8: $28 $34
@@ -4376,7 +3222,7 @@ func_020_5EB5:
 
 jr_020_5ED6:
     ld   b, $00                                   ; $5ED6: $06 $00
-    ld   hl, $5E75                                ; $5ED8: $21 $75 $5E
+    ld   hl, Data_020_5E75                        ; $5ED8: $21 $75 $5E
     add  hl, bc                                   ; $5EDB: $09
     ld   bc, $DC4A                                ; $5EDC: $01 $4A $DC
     ld   e, $04                                   ; $5EDF: $1E $04
@@ -4391,13 +3237,14 @@ jr_020_5EE1:
     jr   nz, jr_020_5EE1                          ; $5EE7: $20 $F8
 
     ld   a, $01                                   ; $5EE9: $3E $01
-    ld   [wPaletteDataFlags], a                    ; $5EEB: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $5EEB: $EA $D1 $DD
 
 jr_020_5EEE:
     ret                                           ; $5EEE: $C9
 
+func_020_5EEF::
     call func_020_635C                            ; $5EEF: $CD $5C $63
-    call func_1A39                               ; $5EF2: $CD $39 $1A
+    call func_1A39                                ; $5EF2: $CD $39 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5EF5: $FA $6B $C1
     cp   $04                                      ; $5EF8: $FE $04
     jr   nz, jr_020_5EFF                          ; $5EFA: $20 $03
@@ -4407,11 +3254,13 @@ jr_020_5EEE:
 jr_020_5EFF:
     ret                                           ; $5EFF: $C9
 
-    nop                                           ; $5F00: $00
-    ld   bc, $FF                                  ; $5F01: $01 $FF $00
-    cp   $02                                      ; $5F04: $FE $02
+Data_020_5F00::
+    db   $00, $01, $FF
 
-func_020_5F06:
+Data_020_5F03::
+    db   $00, $FE, $02
+
+func_020_5F06::
     ld   a, [$DBA3]                               ; $5F06: $FA $A3 $DB
     ld   [$C1B6], a                               ; $5F09: $EA $B6 $C1
     ld   a, [$C1B8]                               ; $5F0C: $FA $B8 $C1
@@ -4427,7 +3276,7 @@ func_020_5F06:
     and  $03                                      ; $5F1D: $E6 $03
     ld   e, a                                     ; $5F1F: $5F
     ld   d, $00                                   ; $5F20: $16 $00
-    ld   hl, $5F00                                ; $5F22: $21 $00 $5F
+    ld   hl, Data_020_5F00                        ; $5F22: $21 $00 $5F
     add  hl, de                                   ; $5F25: $19
     ld   a, [$DBA3]                               ; $5F26: $FA $A3 $DB
     add  [hl]                                     ; $5F29: $86
@@ -4450,7 +3299,7 @@ jr_020_5F38:
     and  $03                                      ; $5F3E: $E6 $03
     ld   e, a                                     ; $5F40: $5F
     ld   d, $00                                   ; $5F41: $16 $00
-    ld   hl, $5F03                                ; $5F43: $21 $03 $5F
+    ld   hl, Data_020_5F03                        ; $5F43: $21 $03 $5F
     add  hl, de                                   ; $5F46: $19
     ld   a, [$DBA3]                               ; $5F47: $FA $A3 $DB
     add  [hl]                                     ; $5F4A: $86
@@ -4512,7 +3361,7 @@ jr_020_5F85:
     cp   $09                                      ; $5F9B: $FE $09
     jr   nz, jr_020_5FB2                          ; $5F9D: $20 $13
 
-    ld   a, [wOcarinaSongFlags]                  ; $5F9F: $FA $49 $DB
+    ld   a, [wOcarinaSongFlags]                   ; $5F9F: $FA $49 $DB
     and  a                                        ; $5FA2: $A7
     jr   z, jr_020_5FB2                           ; $5FA3: $28 $0D
 
@@ -4539,7 +3388,7 @@ jr_020_5FC1:
     ld   hl, $C1B9                                ; $5FC1: $21 $B9 $C1
     ld   a, [$C1B8]                               ; $5FC4: $FA $B8 $C1
     or   [hl]                                     ; $5FC7: $B6
-    jp   nz, label_020_604A                       ; $5FC8: $C2 $4A $60
+    jp   nz, jr_020_604A                          ; $5FC8: $C2 $4A $60
 
     ldh  a, [hJoypadState]                        ; $5FCB: $F0 $CC
     and  $10                                      ; $5FCD: $E6 $10
@@ -4561,7 +3410,7 @@ label_020_5FDB:
     ld   c, $01                                   ; $5FE5: $0E $01
     ld   b, $00                                   ; $5FE7: $06 $00
     ld   e, $00                                   ; $5FE9: $1E $00
-    jr   jr_020_600D                              ; $5FEB: $18 $20
+    jr   @+$22                                    ; $5FEB: $18 $20
 
 jr_020_5FED:
     ldh  a, [hJoypadState]                        ; $5FED: $F0 $CC
@@ -4623,392 +3472,52 @@ func_020_6039:
     ld   e, a                                     ; $6046: $5F
     call func_020_5C9C                            ; $6047: $CD $9C $5C
 
-label_020_604A:
 jr_020_604A:
     ret                                           ; $604A: $C9
 
-    ld   hl, sp-$10                               ; $604B: $F8 $F0
-    ld   [hl+], a                                 ; $604D: $22
-    ld   bc, $F8F8                                ; $604E: $01 $F8 $F8
-    ld   [hl+], a                                 ; $6051: $22
-    ld   hl, $00F8                                ; $6052: $21 $F8 $00
-    inc  h                                        ; $6055: $24
-    ld   [bc], a                                  ; $6056: $02
-    ld   hl, sp+$08                               ; $6057: $F8 $08
-    inc  h                                        ; $6059: $24
-    ld   [hl+], a                                 ; $605A: $22
-    ld   hl, sp+$10                               ; $605B: $F8 $10
-    ld   h, $00                                   ; $605D: $26 $00
-    ld   hl, sp+$18                               ; $605F: $F8 $18
-    ld   h, $20                                   ; $6061: $26 $20
-    ld   [$20F0], sp                              ; $6063: $08 $F0 $20
-    nop                                           ; $6066: $00
-    ld   [$20F8], sp                              ; $6067: $08 $F8 $20
-    nop                                           ; $606A: $00
-    ld   [$2000], sp                              ; $606B: $08 $00 $20
-    nop                                           ; $606E: $00
-    ld   [$2008], sp                              ; $606F: $08 $08 $20
-    nop                                           ; $6072: $00
-    ld   [$2010], sp                              ; $6073: $08 $10 $20
-    nop                                           ; $6076: $00
-    ld   [$2018], sp                              ; $6077: $08 $18 $20
-    nop                                           ; $607A: $00
-    ei                                            ; $607B: $FB
-    db   $f4                                      ; $607C: $F4
-    jr   nz, jr_020_607F                          ; $607D: $20 $00
+Data_020_604B::
+    db   $F8, $F0, $22, $01, $F8, $F8, $22, $21, $F8, $00, $24, $02, $F8, $08, $24, $22
+    db   $F8, $10, $26, $00, $F8, $18, $26, $20, $08, $F0, $20, $00, $08, $F8, $20, $00
+    db   $08, $00, $20, $00, $08, $08, $20, $00, $08, $10, $20, $00, $08, $18, $20, $00
+    db   $FB, $F4, $20, $00, $FB, $FC, $20, $20, $FB, $00, $20, $00, $FB, $08, $20, $20
+    db   $FB, $0C, $20, $00, $FB, $14, $20, $20, $05, $F4, $20, $00, $05, $FC, $20, $00
+    db   $05, $00, $20, $00, $05, $08, $20, $00, $05, $0C, $20, $00, $05, $14, $20, $00
+    db   $FD, $F8, $20, $00, $FD, $10, $20, $20, $FD, $00, $20, $00, $FD, $08, $20, $20
+    db   $FD, $08, $20, $00, $FD, $10, $20, $20, $03, $F8, $20, $00, $03, $10, $20, $00
+    db   $03, $00, $20, $00, $03, $08, $20, $00, $03, $08, $20, $00, $03, $10, $20, $00
+    db   $00, $00, $20, $00, $00, $08, $20, $20, $00, $00, $20, $00, $00, $08, $20, $20
+    db   $00, $00, $20, $00, $00, $08, $20, $20, $00, $00, $20, $00, $00, $08, $20, $00
+    db   $00, $00, $20, $00, $00, $08, $20, $00, $00, $00, $20, $00, $00, $08, $20, $00
 
-jr_020_607F:
-    ei                                            ; $607F: $FB
-    db   $fc                                      ; $6080: $FC
-    jr   nz, jr_020_60A3                          ; $6081: $20 $20
+Data_020_610B::
+    db   $50, $60, $70
 
-    ei                                            ; $6083: $FB
-    nop                                           ; $6084: $00
-    jr   nz, jr_020_6087                          ; $6085: $20 $00
+Data_020_610E::
+    db   $04, $02, $01, $FA, $B9, $C1, $A7, $28, $1A, $3D, $EA, $B9, $C1, $20, $11, $21
+    db   $90, $FF, $36, $0B, $FA, $BA, $C1, $A7, $28, $05, $3E, $0C, $EA, $96, $DB, $C9
+    db   $2F, $18, $0A, $FA, $B8, $C1, $A7, $28, $0A, $3D, $EA, $B8, $C1, $1F, $1F, $E6
+    db   $03, $18, $09, $FA, $B5, $C1, $A7, $CA, $14, $62, $3E, $00, $EA, $B7, $C1, $FA
+    db   $B7, $C1, $16, $00, $CB, $27, $CB, $27, $CB, $27, $CB, $27, $5F, $CB, $27, $83
+    db   $5F, $21, $4B, $60, $19, $11, $18, $C0, $0E, $0C, $06, $04, $2A, $C6, $30, $12
+    db   $13, $2A, $C6, $60, $12, $13, $2A, $12, $13, $FE, $22, $28, $0A, $FE, $24, $28
+    db   $0A, $FE, $26, $28, $0A, $18, $15, $06, $04, $18, $06, $06, $02, $18, $02, $06
+    db   $01, $FA, $49, $DB, $A0, $20, $05, $1B, $3E, $20, $12, $13, $2A, $12, $13, $0D
+    db   $20, $CA, $FA, $B7, $C1, $FE, $00, $20, $6D, $F0, $CC, $E6, $01, $28, $18, $21
+    db   $4A, $DB, $7E, $3C, $FE, $03, $20, $01, $AF, $77, $5F, $16, $00, $21, $0E, $61
+    db   $19, $FA, $49, $DB, $A6, $28, $E8, $F0, $CC, $E6, $02, $28, $19, $21, $4A, $DB
+    db   $7E, $3D, $FE, $80, $38, $02, $3E, $02, $77, $5F, $16, $00, $21, $0E, $61, $19
+    db   $FA, $49, $DB, $A6, $28, $E7, $F0, $CC, $E6, $03, $28, $03, $CD, $39, $60, $21
+    db   $10, $C0, $3E, $38, $22, $E5, $FA, $4A, $DB, $5F, $16, $00, $21, $0B, $61, $19
+    db   $7E, $E1, $22, $F5, $3E, $28, $22, $3E, $06, $22, $3E, $38, $22, $F1, $C6, $08
+    db   $22, $3E, $28, $22, $36, $26
 
-jr_020_6087:
-    ei                                            ; $6087: $FB
-    ld   [$2020], sp                              ; $6088: $08 $20 $20
-    ei                                            ; $608B: $FB
-    inc  c                                        ; $608C: $0C
-    jr   nz, jr_020_608F                          ; $608D: $20 $00
-
-jr_020_608F:
-    ei                                            ; $608F: $FB
-    inc  d                                        ; $6090: $14
-    jr   nz, jr_020_60B3                          ; $6091: $20 $20
-
-    dec  b                                        ; $6093: $05
-    db   $f4                                      ; $6094: $F4
-    jr   nz, jr_020_6097                          ; $6095: $20 $00
-
-jr_020_6097:
-    dec  b                                        ; $6097: $05
-    db   $fc                                      ; $6098: $FC
-    jr   nz, jr_020_609B                          ; $6099: $20 $00
-
-jr_020_609B:
-    dec  b                                        ; $609B: $05
-    nop                                           ; $609C: $00
-    jr   nz, jr_020_609F                          ; $609D: $20 $00
-
-jr_020_609F:
-    dec  b                                        ; $609F: $05
-    ld   [$0020], sp                              ; $60A0: $08 $20 $00
-
-jr_020_60A3:
-    dec  b                                        ; $60A3: $05
-    inc  c                                        ; $60A4: $0C
-    jr   nz, jr_020_60A7                          ; $60A5: $20 $00
-
-jr_020_60A7:
-    dec  b                                        ; $60A7: $05
-    inc  d                                        ; $60A8: $14
-    jr   nz, jr_020_60AB                          ; $60A9: $20 $00
-
-jr_020_60AB:
-    db   $fd                                      ; $60AB: $FD
-    ld   hl, sp+$20                               ; $60AC: $F8 $20
-    nop                                           ; $60AE: $00
-    db   $fd                                      ; $60AF: $FD
-    db   $10                                      ; $60B0: $10
-    jr   nz, jr_020_60D3                          ; $60B1: $20 $20
-
-jr_020_60B3:
-    db   $fd                                      ; $60B3: $FD
-    nop                                           ; $60B4: $00
-    jr   nz, jr_020_60B7                          ; $60B5: $20 $00
-
-jr_020_60B7:
-    db   $fd                                      ; $60B7: $FD
-    ld   [$2020], sp                              ; $60B8: $08 $20 $20
-    db   $fd                                      ; $60BB: $FD
-    ld   [$0020], sp                              ; $60BC: $08 $20 $00
-    db   $fd                                      ; $60BF: $FD
-    db   $10                                      ; $60C0: $10
-    jr   nz, jr_020_60E3                          ; $60C1: $20 $20
-
-    inc  bc                                       ; $60C3: $03
-    ld   hl, sp+$20                               ; $60C4: $F8 $20
-    nop                                           ; $60C6: $00
-    inc  bc                                       ; $60C7: $03
-    db   $10                                      ; $60C8: $10
-    jr   nz, jr_020_60CB                          ; $60C9: $20 $00
-
-jr_020_60CB:
-    inc  bc                                       ; $60CB: $03
-    nop                                           ; $60CC: $00
-    jr   nz, jr_020_60CF                          ; $60CD: $20 $00
-
-jr_020_60CF:
-    inc  bc                                       ; $60CF: $03
-    ld   [$0020], sp                              ; $60D0: $08 $20 $00
-
-jr_020_60D3:
-    inc  bc                                       ; $60D3: $03
-    ld   [$0020], sp                              ; $60D4: $08 $20 $00
-    inc  bc                                       ; $60D7: $03
-    db   $10                                      ; $60D8: $10
-    jr   nz, jr_020_60DB                          ; $60D9: $20 $00
-
-jr_020_60DB:
-    nop                                           ; $60DB: $00
-    nop                                           ; $60DC: $00
-    jr   nz, jr_020_60DF                          ; $60DD: $20 $00
-
-jr_020_60DF:
-    nop                                           ; $60DF: $00
-    ld   [$2020], sp                              ; $60E0: $08 $20 $20
-
-jr_020_60E3:
-    nop                                           ; $60E3: $00
-    nop                                           ; $60E4: $00
-    jr   nz, jr_020_60E7                          ; $60E5: $20 $00
-
-jr_020_60E7:
-    nop                                           ; $60E7: $00
-    ld   [$2020], sp                              ; $60E8: $08 $20 $20
-    nop                                           ; $60EB: $00
-    nop                                           ; $60EC: $00
-    jr   nz, jr_020_60EF                          ; $60ED: $20 $00
-
-jr_020_60EF:
-    nop                                           ; $60EF: $00
-    ld   [$2020], sp                              ; $60F0: $08 $20 $20
-    nop                                           ; $60F3: $00
-    nop                                           ; $60F4: $00
-    jr   nz, jr_020_60F7                          ; $60F5: $20 $00
-
-jr_020_60F7:
-    nop                                           ; $60F7: $00
-    ld   [$0020], sp                              ; $60F8: $08 $20 $00
-    nop                                           ; $60FB: $00
-    nop                                           ; $60FC: $00
-    jr   nz, jr_020_60FF                          ; $60FD: $20 $00
-
-jr_020_60FF:
-    nop                                           ; $60FF: $00
-    ld   [$0020], sp                              ; $6100: $08 $20 $00
-    nop                                           ; $6103: $00
-    nop                                           ; $6104: $00
-    jr   nz, jr_020_6107                          ; $6105: $20 $00
-
-jr_020_6107:
-    nop                                           ; $6107: $00
-    ld   [$0020], sp                              ; $6108: $08 $20 $00
-    ld   d, b                                     ; $610B: $50
-    ld   h, b                                     ; $610C: $60
-    ld   [hl], b                                  ; $610D: $70
-    inc  b                                        ; $610E: $04
-    ld   [bc], a                                  ; $610F: $02
-    ld   bc, $B9FA                                ; $6110: $01 $FA $B9
-    pop  bc                                       ; $6113: $C1
-    and  a                                        ; $6114: $A7
-    jr   z, jr_020_6131                           ; $6115: $28 $1A
-
-    dec  a                                        ; $6117: $3D
-    ld   [$C1B9], a                               ; $6118: $EA $B9 $C1
-    jr   nz, jr_020_612E                          ; $611B: $20 $11
-
-    ld   hl, hNeedsUpdatingBGTiles                ; $611D: $21 $90 $FF
-    ld   [hl], $0B                                ; $6120: $36 $0B
-    ld   a, [$C1BA]                               ; $6122: $FA $BA $C1
-    and  a                                        ; $6125: $A7
-    jr   z, jr_020_612D                           ; $6126: $28 $05
-
-    ld   a, $0C                                   ; $6128: $3E $0C
-    ld   [wGameplaySubtype], a                    ; $612A: $EA $96 $DB
-
-jr_020_612D:
-    ret                                           ; $612D: $C9
-
-jr_020_612E:
-    cpl                                           ; $612E: $2F
-    jr   jr_020_613B                              ; $612F: $18 $0A
-
-jr_020_6131:
-    ld   a, [$C1B8]                               ; $6131: $FA $B8 $C1
-    and  a                                        ; $6134: $A7
-    jr   z, jr_020_6141                           ; $6135: $28 $0A
-
-    dec  a                                        ; $6137: $3D
-    ld   [$C1B8], a                               ; $6138: $EA $B8 $C1
-
-jr_020_613B:
-    rra                                           ; $613B: $1F
-    rra                                           ; $613C: $1F
-    and  $03                                      ; $613D: $E6 $03
-    jr   jr_020_614A                              ; $613F: $18 $09
-
-jr_020_6141:
-    ld   a, [$C1B5]                               ; $6141: $FA $B5 $C1
-    and  a                                        ; $6144: $A7
-    jp   z, label_020_6214                        ; $6145: $CA $14 $62
-
-    ld   a, $00                                   ; $6148: $3E $00
-
-jr_020_614A:
-    ld   [$C1B7], a                               ; $614A: $EA $B7 $C1
-    ld   a, [$C1B7]                               ; $614D: $FA $B7 $C1
-    ld   d, $00                                   ; $6150: $16 $00
-    sla  a                                        ; $6152: $CB $27
-    sla  a                                        ; $6154: $CB $27
-    sla  a                                        ; $6156: $CB $27
-    sla  a                                        ; $6158: $CB $27
-    ld   e, a                                     ; $615A: $5F
-    sla  a                                        ; $615B: $CB $27
-    add  e                                        ; $615D: $83
-    ld   e, a                                     ; $615E: $5F
-    ld   hl, $604B                                ; $615F: $21 $4B $60
-    add  hl, de                                   ; $6162: $19
-    ld   de, $C018                                ; $6163: $11 $18 $C0
-    ld   c, $0C                                   ; $6166: $0E $0C
-    ld   b, $04                                   ; $6168: $06 $04
-
-jr_020_616A:
-    ld   a, [hl+]                                 ; $616A: $2A
-    add  $30                                      ; $616B: $C6 $30
-    ld   [de], a                                  ; $616D: $12
-    inc  de                                       ; $616E: $13
-    ld   a, [hl+]                                 ; $616F: $2A
-    add  $60                                      ; $6170: $C6 $60
-    ld   [de], a                                  ; $6172: $12
-    inc  de                                       ; $6173: $13
-    ld   a, [hl+]                                 ; $6174: $2A
-    ld   [de], a                                  ; $6175: $12
-    inc  de                                       ; $6176: $13
-    cp   $22                                      ; $6177: $FE $22
-    jr   z, jr_020_6185                           ; $6179: $28 $0A
-
-    cp   $24                                      ; $617B: $FE $24
-    jr   z, jr_020_6189                           ; $617D: $28 $0A
-
-    cp   $26                                      ; $617F: $FE $26
-    jr   z, jr_020_618D                           ; $6181: $28 $0A
-
-    jr   jr_020_619A                              ; $6183: $18 $15
-
-jr_020_6185:
-    ld   b, $04                                   ; $6185: $06 $04
-    jr   jr_020_618F                              ; $6187: $18 $06
-
-jr_020_6189:
-    ld   b, $02                                   ; $6189: $06 $02
-    jr   jr_020_618F                              ; $618B: $18 $02
-
-jr_020_618D:
-    ld   b, $01                                   ; $618D: $06 $01
-
-jr_020_618F:
-    ld   a, [wOcarinaSongFlags]                  ; $618F: $FA $49 $DB
-    and  b                                        ; $6192: $A0
-    jr   nz, jr_020_619A                          ; $6193: $20 $05
-
-    dec  de                                       ; $6195: $1B
-    ld   a, $20                                   ; $6196: $3E $20
-    ld   [de], a                                  ; $6198: $12
-    inc  de                                       ; $6199: $13
-
-jr_020_619A:
-    ld   a, [hl+]                                 ; $619A: $2A
-    ld   [de], a                                  ; $619B: $12
-    inc  de                                       ; $619C: $13
-    dec  c                                        ; $619D: $0D
-    jr   nz, jr_020_616A                          ; $619E: $20 $CA
-
-    ld   a, [$C1B7]                               ; $61A0: $FA $B7 $C1
-    cp   $00                                      ; $61A3: $FE $00
-    jr   nz, jr_020_6214                          ; $61A5: $20 $6D
-
-    ldh  a, [hJoypadState]                        ; $61A7: $F0 $CC
-    and  $01                                      ; $61A9: $E6 $01
-    jr   z, jr_020_61C5                           ; $61AB: $28 $18
-
-jr_020_61AD:
-    ld   hl, $DB4A                                ; $61AD: $21 $4A $DB
-    ld   a, [hl]                                  ; $61B0: $7E
-    inc  a                                        ; $61B1: $3C
-    cp   $03                                      ; $61B2: $FE $03
-    jr   nz, jr_020_61B7                          ; $61B4: $20 $01
-
-    xor  a                                        ; $61B6: $AF
-
-jr_020_61B7:
-    ld   [hl], a                                  ; $61B7: $77
-    ld   e, a                                     ; $61B8: $5F
-    ld   d, $00                                   ; $61B9: $16 $00
-    ld   hl, $610E                                ; $61BB: $21 $0E $61
-    add  hl, de                                   ; $61BE: $19
-    ld   a, [wOcarinaSongFlags]                  ; $61BF: $FA $49 $DB
-    and  [hl]                                     ; $61C2: $A6
-    jr   z, jr_020_61AD                           ; $61C3: $28 $E8
-
-jr_020_61C5:
-    ldh  a, [hJoypadState]                        ; $61C5: $F0 $CC
-    and  $02                                      ; $61C7: $E6 $02
-    jr   z, jr_020_61E4                           ; $61C9: $28 $19
-
-jr_020_61CB:
-    ld   hl, $DB4A                                ; $61CB: $21 $4A $DB
-    ld   a, [hl]                                  ; $61CE: $7E
-    dec  a                                        ; $61CF: $3D
-    cp   $80                                      ; $61D0: $FE $80
-    jr   c, jr_020_61D6                           ; $61D2: $38 $02
-
-    ld   a, $02                                   ; $61D4: $3E $02
-
-jr_020_61D6:
-    ld   [hl], a                                  ; $61D6: $77
-    ld   e, a                                     ; $61D7: $5F
-    ld   d, $00                                   ; $61D8: $16 $00
-    ld   hl, $610E                                ; $61DA: $21 $0E $61
-    add  hl, de                                   ; $61DD: $19
-    ld   a, [wOcarinaSongFlags]                  ; $61DE: $FA $49 $DB
-    and  [hl]                                     ; $61E1: $A6
-    jr   z, jr_020_61CB                           ; $61E2: $28 $E7
-
-jr_020_61E4:
-    ldh  a, [hJoypadState]                        ; $61E4: $F0 $CC
-    and  $03                                      ; $61E6: $E6 $03
-    jr   z, jr_020_61ED                           ; $61E8: $28 $03
-
-    call func_020_6039                            ; $61EA: $CD $39 $60
-
-jr_020_61ED:
-    ld   hl, $C010                                ; $61ED: $21 $10 $C0
-    ld   a, $38                                   ; $61F0: $3E $38
-    ld   [hl+], a                                 ; $61F2: $22
-    push hl                                       ; $61F3: $E5
-    ld   a, [$DB4A]                               ; $61F4: $FA $4A $DB
-    ld   e, a                                     ; $61F7: $5F
-    ld   d, $00                                   ; $61F8: $16 $00
-    ld   hl, $610B                                ; $61FA: $21 $0B $61
-    add  hl, de                                   ; $61FD: $19
-    ld   a, [hl]                                  ; $61FE: $7E
-    pop  hl                                       ; $61FF: $E1
-    ld   [hl+], a                                 ; $6200: $22
-    push af                                       ; $6201: $F5
-    ld   a, $28                                   ; $6202: $3E $28
-    ld   [hl+], a                                 ; $6204: $22
-    ld   a, $06                                   ; $6205: $3E $06
-    ld   [hl+], a                                 ; $6207: $22
-    ld   a, $38                                   ; $6208: $3E $38
-    ld   [hl+], a                                 ; $620A: $22
-    pop  af                                       ; $620B: $F1
-    add  $08                                      ; $620C: $C6 $08
-    ld   [hl+], a                                 ; $620E: $22
-    ld   a, $28                                   ; $620F: $3E $28
-    ld   [hl+], a                                 ; $6211: $22
-    ld   [hl], $26                                ; $6212: $36 $26
-
-label_020_6214:
 jr_020_6214:
     ret                                           ; $6214: $C9
 
-func_020_6215:
+func_020_6215::
     ld   a, [wIsIndoor]                           ; $6215: $FA $A5 $DB
     and  a                                        ; $6218: $A7
-    jr   z, jr_020_628D                           ; $6219: $28 $72
+    jr   z, label_020_628D                        ; $6219: $28 $72
 
     ldh  a, [hMapId]                              ; $621B: $F0 $F7
     cp   $FF                                      ; $621D: $FE $FF
@@ -5029,7 +3538,7 @@ jr_020_6226:
     and  $38                                      ; $6234: $E6 $38
     add  $60                                      ; $6236: $C6 $60
     ld   l, a                                     ; $6238: $6F
-    ld   a, [wMinimapLayout]                               ; $6239: $FA $B0 $DB
+    ld   a, [wMinimapLayout]                      ; $6239: $FA $B0 $DB
     and  $20                                      ; $623C: $E6 $20
     jr   z, jr_020_624D                           ; $623E: $28 $0D
 
@@ -5043,7 +3552,7 @@ jr_020_6226:
     ld   h, a                                     ; $624C: $67
 
 jr_020_624D:
-    ld   a, [wMinimapLayout]                               ; $624D: $FA $B0 $DB
+    ld   a, [wMinimapLayout]                      ; $624D: $FA $B0 $DB
     and  $10                                      ; $6250: $E6 $10
     jr   z, jr_020_6261                           ; $6252: $28 $0D
 
@@ -5071,11 +3580,11 @@ jr_020_6261:
     ld   [$C003], a                               ; $6275: $EA $03 $C0
     ldh  a, [hFrameCounter]                       ; $6278: $F0 $E7
     and  $08                                      ; $627A: $E6 $08
-    jr   z, jr_020_628D                           ; $627C: $28 $0F
+    jr   z, label_020_628D                        ; $627C: $28 $0F
 
     ld   a, $04                                   ; $627E: $3E $04
     ld   [$C003], a                               ; $6280: $EA $03 $C0
-    jr   jr_020_628D                              ; $6283: $18 $08
+    jr   label_020_628D                           ; $6283: $18 $08
 
 jr_020_6285:
     ldh  a, [hFrameCounter]                       ; $6285: $F0 $E7
@@ -5084,34 +3593,15 @@ jr_020_6285:
     ld   [$C003], a                               ; $628A: $EA $03 $C0
 
 label_020_628D:
-jr_020_628D:
     ret                                           ; $628D: $C9
 
-    ld   [$0828], sp                              ; $628E: $08 $28 $08
-    jr   z, jr_020_629B                           ; $6291: $28 $08
+Data_020_628E::
+    db   $08, $28, $08, $28, $08, $28, $08, $28, $08, $28
 
-    jr   z, jr_020_629D                           ; $6293: $28 $08
+Data_020_6298::
+    db   $28, $28, $40, $40, $58, $58, $70, $70, $88, $88
 
-    jr   z, jr_020_629F                           ; $6295: $28 $08
-
-    jr   z, jr_020_62C1                           ; $6297: $28 $28
-
-    jr   z, @+$42                                 ; $6299: $28 $40
-
-jr_020_629B:
-    ld   b, b                                     ; $629B: $40
-    ld   e, b                                     ; $629C: $58
-
-jr_020_629D:
-    ld   e, b                                     ; $629D: $58
-    ld   [hl], b                                  ; $629E: $70
-
-jr_020_629F:
-    ld   [hl], b                                  ; $629F: $70
-    adc  b                                        ; $62A0: $88
-    adc  b                                        ; $62A1: $88
-
-func_020_62A2:
+func_020_62A2::
     ld   a, [wInventoryCursorFrameCounter]        ; $62A2: $FA $59 $C1
     inc  a                                        ; $62A5: $3C
     ld   [wInventoryCursorFrameCounter], a        ; $62A6: $EA $59 $C1
@@ -5121,12 +3611,12 @@ func_020_62A2:
     ld   a, [$DBA3]                               ; $62AD: $FA $A3 $DB
     ld   e, a                                     ; $62B0: $5F
     ld   d, $00                                   ; $62B1: $16 $00
-    ld   hl, $6298                                ; $62B3: $21 $98 $62
+    ld   hl, Data_020_6298                        ; $62B3: $21 $98 $62
     add  hl, de                                   ; $62B6: $19
     ld   a, [hl]                                  ; $62B7: $7E
     ld   [$C004], a                               ; $62B8: $EA $04 $C0
     ld   [$C008], a                               ; $62BB: $EA $08 $C0
-    ld   hl, $628E                                ; $62BE: $21 $8E $62
+    ld   hl, Data_020_628E                        ; $62BE: $21 $8E $62
 
 jr_020_62C1:
     add  hl, de                                   ; $62C1: $19
@@ -5145,7 +3635,7 @@ jr_020_62C1:
 jr_020_62DD:
     ret                                           ; $62DD: $C9
 
-func_020_62DE:
+func_020_62DE::
     ld   a, [$DE09]                               ; $62DE: $FA $09 $DE
     ld   b, a                                     ; $62E1: $47
     ld   a, [$DE08]                               ; $62E2: $FA $08 $DE
@@ -5214,33 +3704,11 @@ jr_020_632E:
     ld   [hl], a                                  ; $6338: $77
     ret                                           ; $6339: $C9
 
-    db   $10                                      ; $633A: $10
-    jr   c, jr_020_634D                           ; $633B: $38 $10
+Data_020_633A::
+    db   $10, $38, $10, $30, $10, $30, $10, $30, $10, $30, $10, $30
 
-    jr   nc, jr_020_634F                          ; $633D: $30 $10
-
-    jr   nc, jr_020_6351                          ; $633F: $30 $10
-
-    jr   nc, @+$12                                ; $6341: $30 $10
-
-    jr   nc, jr_020_6355                          ; $6343: $30 $10
-
-    jr   nc, jr_020_6355                          ; $6345: $30 $0E
-
-    ld   c, $26                                   ; $6347: $0E $26
-    ld   h, $3E                                   ; $6349: $26 $3E
-    ld   a, $56                                   ; $634B: $3E $56
-
-jr_020_634D:
-    ld   d, [hl]                                  ; $634D: $56
-    ld   l, [hl]                                  ; $634E: $6E
-
-jr_020_634F:
-    ld   l, [hl]                                  ; $634F: $6E
-    add  [hl]                                     ; $6350: $86
-
-jr_020_6351:
-    add  [hl]                                     ; $6351: $86
+Data_020_6346::
+    db   $0E, $0E, $26, $26, $3E, $3E, $56, $56, $6E, $6E, $86, $86
 
 func_020_6352::
     ld   a, [wBGPalette]                          ; $6352: $FA $97 $DB
@@ -5252,7 +3720,7 @@ jr_020_6355:
     ld   d, $02                                   ; $6358: $16 $02
     jr   jr_020_635E                              ; $635A: $18 $02
 
-func_020_635C:
+func_020_635C::
     ld   d, $0C                                   ; $635C: $16 $0C
 
 jr_020_635E:
@@ -5273,11 +3741,11 @@ jr_020_6363:
 
 jr_020_636E:
     ld   d, $00                                   ; $636E: $16 $00
-    ld   hl, $633A                                ; $6370: $21 $3A $63
+    ld   hl, Data_020_633A                        ; $6370: $21 $3A $63
     add  hl, de                                   ; $6373: $19
     ld   a, [hl]                                  ; $6374: $7E
     ldh  [hScratch0], a                           ; $6375: $E0 $D7
-    ld   hl, $6346                                ; $6377: $21 $46 $63
+    ld   hl, Data_020_6346                        ; $6377: $21 $46 $63
     add  hl, de                                   ; $637A: $19
     ld   a, [hl]                                  ; $637B: $7E
     ldh  [hScratch1], a                           ; $637C: $E0 $D8
@@ -5330,6 +3798,7 @@ jr_020_63BE:
     call label_3DA0                               ; $63C0: $CD $A0 $3D
     ret                                           ; $63C3: $C9
 
+func_020_63C4::
     call func_020_5EB5                            ; $63C4: $CD $B5 $5E
     call func_020_6215                            ; $63C7: $CD $15 $62
     call func_020_5F06                            ; $63CA: $CD $06 $5F
@@ -5403,9 +3872,8 @@ jr_020_6436:
 jr_020_6445:
     ret                                           ; $6445: $C9
 
-func_020_6446:
-jr_020_6446:
-    ldh  a, [$FFE2]                               ; $6446: $F0 $E2
+func_020_6446::
+    ldh  a, [hScratchB]                           ; $6446: $F0 $E2
     ld   [hl+], a                                 ; $6448: $22
     ldh  a, [hBGMapOffsetLow]                     ; $6449: $F0 $E1
     ld   [hl+], a                                 ; $644B: $22
@@ -5420,7 +3888,7 @@ jr_020_6446:
     dec  c                                        ; $6456: $0D
     ld   a, c                                     ; $6457: $79
     and  a                                        ; $6458: $A7
-    jr   nz, jr_020_6446                          ; $6459: $20 $EB
+    jr   nz, func_020_6446                        ; $6459: $20 $EB
 
     ret                                           ; $645B: $C9
 
@@ -5446,130 +3914,36 @@ jr_020_6446:
     inc  bc                                       ; $6471: $03
     ld   a, [hl]                                  ; $6472: $7E
     inc  bc                                       ; $6473: $03
-    ld   e, h                                     ; $6474: $5C
-    ld   h, h                                     ; $6475: $64
-    ld   h, h                                     ; $6476: $64
-    ld   h, h                                     ; $6477: $64
-    ld   l, h                                     ; $6478: $6C
-    ld   h, h                                     ; $6479: $64
-    ld   b, d                                     ; $647A: $42
-    ld   b, $42                                   ; $647B: $06 $42
-    ld   h, $66                                   ; $647D: $26 $66
-    inc  bc                                       ; $647F: $03
-    ld   a, d                                     ; $6480: $7A
-    inc  bc                                       ; $6481: $03
-    ld   l, [hl]                                  ; $6482: $6E
-    inc  bc                                       ; $6483: $03
-    ld   b, [hl]                                  ; $6484: $46
-    ld   b, $42                                   ; $6485: $06 $42
-    ld   h, $68                                   ; $6487: $26 $68
-    inc  bc                                       ; $6489: $03
-    ld   a, d                                     ; $648A: $7A
-    inc  bc                                       ; $648B: $03
-    ld   l, [hl]                                  ; $648C: $6E
-    inc  bc                                       ; $648D: $03
-    ld   b, h                                     ; $648E: $44
-    ld   b, $42                                   ; $648F: $06 $42
-    ld   h, $6A                                   ; $6491: $26 $6A
-    inc  bc                                       ; $6493: $03
-    ld   a, d                                     ; $6494: $7A
-    inc  bc                                       ; $6495: $03
-    ld   l, [hl]                                  ; $6496: $6E
-    inc  bc                                       ; $6497: $03
-    ld   b, h                                     ; $6498: $44
-    ld   b, $46                                   ; $6499: $06 $46
-    ld   h, $6C                                   ; $649B: $26 $6C
-    inc  bc                                       ; $649D: $03
-    ld   a, d                                     ; $649E: $7A
-    inc  bc                                       ; $649F: $03
-    ld   l, [hl]                                  ; $64A0: $6E
-    inc  bc                                       ; $64A1: $03
-    ld   a, d                                     ; $64A2: $7A
-    ld   h, h                                     ; $64A3: $64
-    add  h                                        ; $64A4: $84
-    ld   h, h                                     ; $64A5: $64
-    adc  [hl]                                     ; $64A6: $8E
-    ld   h, h                                     ; $64A7: $64
-    sbc  b                                        ; $64A8: $98
-    ld   h, h                                     ; $64A9: $64
-    ld   a, h                                     ; $64AA: $7C
-    inc  bc                                       ; $64AB: $03
-    ld   c, b                                     ; $64AC: $48
-    inc  bc                                       ; $64AD: $03
-    ld   c, b                                     ; $64AE: $48
-    inc  hl                                       ; $64AF: $23
-    ld   h, [hl]                                  ; $64B0: $66
-    inc  bc                                       ; $64B1: $03
-    ld   h, [hl]                                  ; $64B2: $66
-    inc  bc                                       ; $64B3: $03
-    ld   h, [hl]                                  ; $64B4: $66
-    inc  bc                                       ; $64B5: $03
-    ld   l, b                                     ; $64B6: $68
-    inc  bc                                       ; $64B7: $03
-    ld   h, [hl]                                  ; $64B8: $66
-    inc  bc                                       ; $64B9: $03
-    ld   l, d                                     ; $64BA: $6A
-    inc  bc                                       ; $64BB: $03
-    ld   h, [hl]                                  ; $64BC: $66
-    inc  bc                                       ; $64BD: $03
-    ld   l, h                                     ; $64BE: $6C
-    inc  bc                                       ; $64BF: $03
-    ld   h, [hl]                                  ; $64C0: $66
-    inc  bc                                       ; $64C1: $03
-    ld   l, [hl]                                  ; $64C2: $6E
-    inc  bc                                       ; $64C3: $03
-    ld   h, [hl]                                  ; $64C4: $66
-    inc  bc                                       ; $64C5: $03
-    ld   [hl], b                                  ; $64C6: $70
-    inc  bc                                       ; $64C7: $03
-    ld   h, [hl]                                  ; $64C8: $66
-    inc  bc                                       ; $64C9: $03
-    ld   [hl], d                                  ; $64CA: $72
-    inc  bc                                       ; $64CB: $03
-    ld   h, [hl]                                  ; $64CC: $66
-    inc  bc                                       ; $64CD: $03
-    ld   [hl], h                                  ; $64CE: $74
-    inc  bc                                       ; $64CF: $03
-    ld   h, [hl]                                  ; $64D0: $66
-    inc  bc                                       ; $64D1: $03
-    db   $76                                      ; $64D2: $76
-    inc  bc                                       ; $64D3: $03
-    ld   h, [hl]                                  ; $64D4: $66
-    inc  bc                                       ; $64D5: $03
-    ld   a, b                                     ; $64D6: $78
-    inc  bc                                       ; $64D7: $03
-    ld   l, b                                     ; $64D8: $68
-    inc  bc                                       ; $64D9: $03
-    ld   h, [hl]                                  ; $64DA: $66
-    inc  bc                                       ; $64DB: $03
-    ld   l, b                                     ; $64DC: $68
-    inc  bc                                       ; $64DD: $03
-    ld   l, b                                     ; $64DE: $68
-    inc  bc                                       ; $64DF: $03
-    ld   l, b                                     ; $64E0: $68
-    inc  bc                                       ; $64E1: $03
-    ld   l, d                                     ; $64E2: $6A
-    inc  bc                                       ; $64E3: $03
-    ld   a, d                                     ; $64E4: $7A
-    inc  bc                                       ; $64E5: $03
-    ld   l, b                                     ; $64E6: $68
-    inc  bc                                       ; $64E7: $03
-    ld   l, d                                     ; $64E8: $6A
-    inc  bc                                       ; $64E9: $03
-    ld   a, h                                     ; $64EA: $7C
-    inc  bc                                       ; $64EB: $03
-    ld   a, h                                     ; $64EC: $7C
-    inc  bc                                       ; $64ED: $03
 
-func_020_64EE:
+Data_020_6474::
+    db   $5C, $64, $64, $64, $6C, $64, $42, $06, $42, $26, $66, $03, $7A, $03, $6E, $03
+    db   $46, $06, $42, $26, $68, $03, $7A, $03, $6E, $03, $44, $06, $42, $26, $6A, $03
+    db   $7A, $03, $6E, $03, $44, $06, $46, $26, $6C, $03, $7A, $03, $6E, $03
+
+Data_020_64A2::
+    db   $7A, $64, $84, $64, $8E, $64, $98, $64
+
+Data_020_64AA::
+    db   $7C, $03, $48, $03, $48, $23
+
+Data_020_64B0::
+    db   $66, $03, $66, $03, $66, $03, $68, $03, $66, $03, $6A, $03, $66, $03, $6C, $03
+    db   $66, $03, $6E, $03, $66, $03, $70, $03, $66, $03, $72, $03, $66, $03, $74, $03
+    db   $66, $03, $76, $03, $66, $03, $78, $03, $68, $03, $66, $03, $68, $03, $68, $03
+    db   $68, $03, $6A, $03
+
+Data_020_64E4::
+    db   $7A, $03, $68, $03, $6A, $03, $7C, $03, $7C, $03
+
+func_020_64EE::
     ld   hl, $C010                                ; $64EE: $21 $10 $C0
     ld   a, $53                                   ; $64F1: $3E $53
     ldh  [hBGMapOffsetLow], a                     ; $64F3: $E0 $E1
     ld   a, [$DE0A]                               ; $64F5: $FA $0A $DE
-    ldh  [$FFE2], a                               ; $64F8: $E0 $E2
+    ldh  [hScratchB], a                           ; $64F8: $E0 $E2
     push hl                                       ; $64FA: $E5
     ld   c, $04                                   ; $64FB: $0E $04
-    ld   hl, $6474                                ; $64FD: $21 $74 $64
+    ld   hl, Data_020_6474                        ; $64FD: $21 $74 $64
     ld   a, [wTunicType]                          ; $6500: $FA $0F $DC
     sla  a                                        ; $6503: $CB $27
     ld   e, a                                     ; $6505: $5F
@@ -5580,7 +3954,7 @@ func_020_64EE:
     ld   d, [hl]                                  ; $650B: $56
     pop  hl                                       ; $650C: $E1
     call func_020_6446                            ; $650D: $CD $46 $64
-    ldh  a, [$FFE2]                               ; $6510: $F0 $E2
+    ldh  a, [hScratchB]                           ; $6510: $F0 $E2
     ld   [hl+], a                                 ; $6512: $22
     ldh  a, [hBGMapOffsetLow]                     ; $6513: $F0 $E1
     ld   [hl+], a                                 ; $6515: $22
@@ -5592,7 +3966,7 @@ func_020_64EE:
     ld   [hl+], a                                 ; $651F: $22
     push hl                                       ; $6520: $E5
     ld   c, $06                                   ; $6521: $0E $06
-    ld   de, $64A2                                ; $6523: $11 $A2 $64
+    ld   de, Data_020_64A2                        ; $6523: $11 $A2 $64
     ld   h, $00                                   ; $6526: $26 $00
     ld   a, [wHeartPiecesCount]                   ; $6528: $FA $5C $DB
     sla  a                                        ; $652B: $CB $27
@@ -5607,9 +3981,9 @@ func_020_64EE:
     ldh  [hBGMapOffsetLow], a                     ; $6538: $E0 $E1
     ld   a, [$DE0A]                               ; $653A: $FA $0A $DE
     add  $10                                      ; $653D: $C6 $10
-    ldh  [$FFE2], a                               ; $653F: $E0 $E2
+    ldh  [hScratchB], a                           ; $653F: $E0 $E2
     ld   c, $03                                   ; $6541: $0E $03
-    ld   de, $64AA                                ; $6543: $11 $AA $64
+    ld   de, Data_020_64AA                        ; $6543: $11 $AA $64
     call func_020_6446                            ; $6546: $CD $46 $64
     ld   e, $00                                   ; $6549: $1E $00
     ld   a, [wPhotos1]                            ; $654B: $FA $0C $DC
@@ -5637,24 +4011,12 @@ jr_020_655D:
 jr_020_6562:
     srl  a                                        ; $6562: $CB $3F
     and  a                                        ; $6564: $A7
-    jr   nz, jr_020_655D                          ; $6565: $20 $F6
 
-    ld   d, $00                                   ; $6567: $16 $00
-    sla  e                                        ; $6569: $CB $23
-    sla  e                                        ; $656B: $CB $23
-    push hl                                       ; $656D: $E5
-    ld   c, $02                                   ; $656E: $0E $02
-    ld   hl, $64B0                                ; $6570: $21 $B0 $64
-    add  hl, de                                   ; $6573: $19
-    push hl                                       ; $6574: $E5
-    pop  de                                       ; $6575: $D1
-    pop  hl                                       ; $6576: $E1
-    call func_020_6446                            ; $6577: $CD $46 $64
-    ld   c, $05                                   ; $657A: $0E $05
-    ld   de, $64E4                                ; $657C: $11 $E4 $64
-    call func_020_6446                            ; $657F: $CD $46 $64
-    ret                                           ; $6582: $C9
+Data_020_6565::
+    db   $20, $F6, $16, $00, $CB, $23, $CB, $23, $E5, $0E, $02, $21, $B0, $64, $19, $E5
+    db   $D1, $E1, $CD, $46, $64, $0E, $05, $11, $E4, $64, $CD, $46, $64, $C9
 
+func_020_6583::
     call func_020_5EB5                            ; $6583: $CD $B5 $5E
     call func_020_64EE                            ; $6586: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $6589: $F0 $CB
@@ -5680,6 +4042,7 @@ jr_020_65A4:
 jr_020_65A7:
     ret                                           ; $65A7: $C9
 
+func_020_65A8::
     call func_020_5EB5                            ; $65A8: $CD $B5 $5E
     call func_020_64EE                            ; $65AB: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $65AE: $F0 $CB
@@ -5691,6 +4054,7 @@ jr_020_65A7:
 jr_020_65B7:
     ret                                           ; $65B7: $C9
 
+func_020_65B8::
     call func_020_5EB5                            ; $65B8: $CD $B5 $5E
     call func_020_64EE                            ; $65BB: $CD $EE $64
     ld   a, [$DE0A]                               ; $65BE: $FA $0A $DE
@@ -5706,11 +4070,12 @@ jr_020_65CE:
     ld   [$DE0A], a                               ; $65CE: $EA $0A $DE
     ret                                           ; $65D1: $C9
 
+func_020_65D2::
     call func_020_635C                            ; $65D2: $CD $5C $63
-    call func_1A22                               ; $65D5: $CD $22 $1A
+    call func_1A22                                ; $65D5: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $65D8: $FA $6B $C1
     cp   $04                                      ; $65DB: $FE $04
-    jp   nz, label_020_6682                       ; $65DD: $C2 $82 $66
+    jp   nz, jr_020_6682                          ; $65DD: $C2 $82 $66
 
     ld   a, $01                                   ; $65E0: $3E $01
     ld   [wPaletteUnknownE], a                    ; $65E2: $EA $D5 $DD
@@ -5816,810 +4181,130 @@ label_020_6682:
 jr_020_6682:
     ret                                           ; $6682: $C9
 
-func_020_6683:
+func_020_6683::
     ld   hl, wGameplaySubtype                     ; $6683: $21 $96 $DB
     inc  [hl]                                     ; $6686: $34
     ret                                           ; $6687: $C9
 
-    nop                                           ; $6688: $00
-    ld   [$0248], sp                              ; $6689: $08 $48 $02
-    nop                                           ; $668C: $00
-    nop                                           ; $668D: $00
-    ld   b, b                                     ; $668E: $40
-    ld   [bc], a                                  ; $668F: $02
-    nop                                           ; $6690: $00
-    nop                                           ; $6691: $00
-    rst  $38                                      ; $6692: $FF
-    rst  $38                                      ; $6693: $FF
-    nop                                           ; $6694: $00
-    ld   [$024A], sp                              ; $6695: $08 $4A $02
-    nop                                           ; $6698: $00
-    nop                                           ; $6699: $00
-    ld   c, h                                     ; $669A: $4C
-    ld   [bc], a                                  ; $669B: $02
-    nop                                           ; $669C: $00
-    nop                                           ; $669D: $00
-    rst  $38                                      ; $669E: $FF
-    rst  $38                                      ; $669F: $FF
-    nop                                           ; $66A0: $00
-    nop                                           ; $66A1: $00
-    ld   c, d                                     ; $66A2: $4A
-    ld   [hl+], a                                 ; $66A3: $22
-    nop                                           ; $66A4: $00
-    ld   [$224C], sp                              ; $66A5: $08 $4C $22
-    nop                                           ; $66A8: $00
-    ld   [$FFFF], sp                              ; $66A9: $08 $FF $FF
-    nop                                           ; $66AC: $00
-    nop                                           ; $66AD: $00
-    ld   c, b                                     ; $66AE: $48
-    ld   [hl+], a                                 ; $66AF: $22
-    nop                                           ; $66B0: $00
-    ld   [$2240], sp                              ; $66B1: $08 $40 $22
-    nop                                           ; $66B4: $00
-    ld   [$FFFF], sp                              ; $66B5: $08 $FF $FF
-    nop                                           ; $66B8: $00
-    inc  c                                        ; $66B9: $0C
-    ld   b, h                                     ; $66BA: $44
-    ld   [bc], a                                  ; $66BB: $02
-    nop                                           ; $66BC: $00
-    inc  b                                        ; $66BD: $04
-    ld   b, [hl]                                  ; $66BE: $46
-    ld   [bc], a                                  ; $66BF: $02
-    nop                                           ; $66C0: $00
-    db   $fc                                      ; $66C1: $FC
-    ld   b, b                                     ; $66C2: $40
-    ld   [bc], a                                  ; $66C3: $02
-    nop                                           ; $66C4: $00
-    db   $fc                                      ; $66C5: $FC
-    ld   b, h                                     ; $66C6: $44
-    ld   [hl+], a                                 ; $66C7: $22
-    nop                                           ; $66C8: $00
-    inc  b                                        ; $66C9: $04
-    ld   b, [hl]                                  ; $66CA: $46
-    ld   [hl+], a                                 ; $66CB: $22
-    nop                                           ; $66CC: $00
-    inc  c                                        ; $66CD: $0C
-    ld   b, b                                     ; $66CE: $40
-    ld   [hl+], a                                 ; $66CF: $22
-    nop                                           ; $66D0: $00
-    db   $fc                                      ; $66D1: $FC
-    ld   b, h                                     ; $66D2: $44
-    ld   [hl+], a                                 ; $66D3: $22
-    nop                                           ; $66D4: $00
-    inc  b                                        ; $66D5: $04
-    ld   b, d                                     ; $66D6: $42
-    ld   [hl+], a                                 ; $66D7: $22
-    nop                                           ; $66D8: $00
-    inc  c                                        ; $66D9: $0C
-    ld   b, b                                     ; $66DA: $40
-    ld   [hl+], a                                 ; $66DB: $22
-    nop                                           ; $66DC: $00
-    inc  c                                        ; $66DD: $0C
-    ld   b, h                                     ; $66DE: $44
-    ld   [bc], a                                  ; $66DF: $02
-    nop                                           ; $66E0: $00
-    inc  b                                        ; $66E1: $04
-    ld   b, d                                     ; $66E2: $42
-    ld   [bc], a                                  ; $66E3: $02
-    nop                                           ; $66E4: $00
-    db   $fc                                      ; $66E5: $FC
-    ld   b, b                                     ; $66E6: $40
-    ld   [bc], a                                  ; $66E7: $02
-    nop                                           ; $66E8: $00
-    ld   [$0048], sp                              ; $66E9: $08 $48 $00
-    nop                                           ; $66EC: $00
-    nop                                           ; $66ED: $00
-    ld   b, b                                     ; $66EE: $40
-    nop                                           ; $66EF: $00
-    nop                                           ; $66F0: $00
-    nop                                           ; $66F1: $00
-    rst  $38                                      ; $66F2: $FF
-    rst  $38                                      ; $66F3: $FF
-    nop                                           ; $66F4: $00
-    ld   [$004A], sp                              ; $66F5: $08 $4A $00
-    nop                                           ; $66F8: $00
-    nop                                           ; $66F9: $00
-    ld   c, h                                     ; $66FA: $4C
-    nop                                           ; $66FB: $00
-    nop                                           ; $66FC: $00
-    nop                                           ; $66FD: $00
-    rst  $38                                      ; $66FE: $FF
-    rst  $38                                      ; $66FF: $FF
-    nop                                           ; $6700: $00
-    nop                                           ; $6701: $00
-    ld   c, d                                     ; $6702: $4A
-    jr   nz, jr_020_6705                          ; $6703: $20 $00
+Data_020_6688::
+    db   $00, $08, $48, $02, $00, $00, $40, $02   ; $6688
+    db   $00, $00, $FF, $FF, $00, $08, $4A, $02   ; $6690
+    db   $00, $00, $4C, $02, $00, $00, $FF, $FF   ; $6698
+    db   $00, $00, $4A, $22, $00, $08, $4C, $22   ; $66A0
+    db   $00, $08, $FF, $FF, $00, $00, $48, $22   ; $66A8
+    db   $00, $08, $40, $22, $00, $08, $FF, $FF   ; $66B0
+    db   $00, $0C, $44, $02, $00, $04, $46, $02   ; $66B8
+    db   $00, $FC, $40, $02, $00, $FC, $44, $22   ; $66C0
+    db   $00, $04, $46, $22, $00, $0C, $40, $22   ; $66C8
+    db   $00, $FC, $44, $22, $00, $04, $42, $22   ; $66D0
+    db   $00, $0C, $40, $22, $00, $0C, $44, $02   ; $66D8
+    db   $00, $04, $42, $02, $00, $FC, $40, $02   ; $66E0
+    db   $00, $08, $48, $00, $00, $00, $40, $00   ; $66E8
+    db   $00, $00, $FF, $FF, $00, $08, $4A, $00   ; $66F0
+    db   $00, $00, $4C, $00, $00, $00, $FF, $FF   ; $66F8
+    db   $00, $00, $4A, $20, $00, $08, $4C, $20   ; $6700
+    db   $00, $08, $FF, $FF, $00, $00, $48, $20   ; $6708
+    db   $00, $08, $40, $20, $00, $08, $FF, $FF   ; $6710
+    db   $00, $0C, $44, $00, $00, $04, $46, $00   ; $6718
+    db   $00, $FC, $40, $00, $00, $FC, $44, $20   ; $6720
+    db   $00, $04, $46, $20, $00, $0C, $40, $20   ; $6728
+    db   $00, $FC, $44, $20, $00, $04, $42, $20   ; $6730
+    db   $00, $0C, $40, $20, $00, $0C, $44, $00   ; $6738
+    db   $00, $04, $42, $00, $00, $FC, $40, $00   ; $6740
+    db   $00, $08, $48, $03, $00, $00, $40, $03   ; $6748
+    db   $00, $00, $FF, $FF, $00, $08, $4A, $03   ; $6750
+    db   $00, $00, $4C, $03, $00, $00, $FF, $FF   ; $6758
+    db   $00, $00, $4A, $23, $00, $08, $4C, $23   ; $6760
+    db   $00, $08, $FF, $FF, $00, $00, $48, $23   ; $6768
+    db   $00, $08, $40, $23, $00, $08, $FF, $FF   ; $6770
+    db   $00, $0C, $44, $03, $00, $04, $46, $03   ; $6778
+    db   $00, $FC, $40, $03, $00, $FC, $44, $23   ; $6780
+    db   $00, $04, $46, $23, $00, $0C, $40, $23   ; $6788
+    db   $00, $FC, $44, $23, $00, $04, $42, $23   ; $6790
+    db   $00, $0C, $40, $23, $00, $0C, $44, $03   ; $6798
+    db   $00, $04, $42, $03, $00, $FC, $40, $03   ; $67A0
+    db   $00, $00, $4C, $02, $00, $08, $4E, $02   ; $67A8
+    db   $00, $00, $FF, $02, $00, $00, $4E, $22   ; $67B0
+    db   $00, $08, $4C, $22, $00, $00, $FF, $02   ; $67B8
+    db   $00, $00, $50, $02, $00, $08, $5A, $02   ; $67C0
+    db   $00, $00, $FF, $02, $00, $00, $5A, $22   ; $67C8
+    db   $00, $08, $50, $22, $00, $00, $FF, $02   ; $67D0
+    db   $00, $00, $4C, $00, $00, $08, $4E, $00   ; $67D8
+    db   $00, $00, $FF, $00, $00, $00, $4E, $20   ; $67E0
+    db   $00, $08, $4C, $20, $00, $00, $FF, $00   ; $67E8
+    db   $00, $00, $50, $00, $00, $08, $5A, $00   ; $67F0
+    db   $00, $00, $FF, $00, $00, $00, $5A, $20   ; $67F8
+    db   $00, $08, $50, $20, $00, $00, $FF, $00   ; $6800
+    db   $00, $00, $4C, $03, $00, $08, $4E, $03   ; $6808
+    db   $00, $00, $FF, $03, $00, $00, $4E, $23   ; $6810
+    db   $00, $08, $4C, $23, $00, $00, $FF, $03   ; $6818
+    db   $00, $00, $50, $03, $00, $08, $5A, $03   ; $6820
+    db   $00, $00, $FF, $03, $00, $00, $5A, $23   ; $6828
+    db   $00, $08, $50, $23, $00, $00, $FF, $03   ; $6830
+    db   $00, $00, $78, $03, $00, $08, $7A, $03   ; $6838
+    db   $00, $00, $FF, $03, $00, $00, $FF, $03   ; $6840
+    db   $00, $00, $7C, $03, $00, $08, $7E, $03   ; $6848
+    db   $00, $00, $FF, $03, $00, $00, $FF, $03   ; $6850
+    db   $00, $00, $7A, $23, $00, $08, $78, $23   ; $6858
+    db   $00, $00, $FF, $03, $00, $00, $FF, $03   ; $6860
+    db   $00, $00, $7E, $23, $00, $08, $7C, $23   ; $6868
+    db   $00, $00, $FF, $03, $00, $00, $FF, $03   ; $6870
+    db   $FD, $10, $22, $23, $FD, $FD, $22, $03   ; $6878
+    db   $00, $00, $78, $03, $00, $08, $7A, $03   ; $6880
+    db   $07, $10, $22, $03, $07, $FD, $22, $23   ; $6888
+    db   $FF, $00, $78, $03, $FF, $08, $7A, $03   ; $6890
+    db   $FD, $0B, $22, $23, $FD, $F8, $22, $03   ; $6898
+    db   $00, $00, $7A, $23, $00, $08, $78, $23   ; $68A0
+    db   $07, $0B, $22, $03, $07, $F8, $22, $23   ; $68A8
+    db   $FF, $00, $7A, $23, $FF, $08, $78, $23   ; $68B0
+    db   $F4, $F8, $40, $07, $F4, $00, $42, $07   ; $68B8
+    db   $F4, $08, $44, $07, $F4, $10, $46, $07   ; $68C0
+    db   $04, $F8, $48, $07, $04, $00, $4A, $07   ; $68C8
+    db   $04, $08, $4C, $07, $04, $10, $4E, $07   ; $68D0
+    db   $F4, $10, $40, $27, $F4, $08, $42, $27   ; $68D8
+    db   $F4, $00, $44, $27, $F4, $F8, $46, $27   ; $68E0
+    db   $04, $10, $48, $27, $04, $08, $4A, $27   ; $68E8
+    db   $04, $00, $4C, $27, $04, $F8, $4E, $27   ; $68F0
+    db   $F4, $10, $50, $27, $F4, $08, $52, $27   ; $68F8
+    db   $F4, $00, $54, $27, $F4, $F8, $56, $27   ; $6900
+    db   $04, $10, $58, $27, $04, $08, $5A, $27   ; $6908
+    db   $04, $00, $5C, $27, $04, $F8, $5E, $27   ; $6910
+    db   $F4, $F8, $50, $07, $F4, $00, $52, $07   ; $6918
+    db   $F4, $08, $54, $07, $F4, $10, $56, $07   ; $6920
+    db   $04, $F8, $58, $07, $04, $00, $5A, $07   ; $6928
+    db   $04, $08, $5C, $07, $04, $10, $5E, $07   ; $6930
+    db   $02, $FC, $40, $07, $02, $04, $42, $07   ; $6938
+    db   $02, $0C, $40, $27, $00, $00, $FF, $00   ; $6940
+    db   $00, $00, $FF, $00, $00, $00, $FF, $00   ; $6948
+    db   $F2, $00, $44, $07, $F2, $08, $44, $27   ; $6950
+    db   $02, $00, $46, $07, $02, $08, $46, $27   ; $6958
+    db   $00, $00, $FF, $00, $00, $00, $FF, $00   ; $6960
+    db   $F2, $00, $48, $07, $F2, $08, $48, $27   ; $6968
+    db   $02, $00, $4A, $07, $02, $08, $4A, $27   ; $6970
+    db   $00, $00, $FF, $00, $00, $00, $FF, $00   ; $6978
+    db   $F2, $00, $4C, $07, $F2, $08, $4C, $27   ; $6980
+    db   $02, $F8, $4E, $07, $02, $00, $50, $07   ; $6988
+    db   $02, $08, $50, $27, $02, $10, $4E, $27   ; $6990
+    db   $F2, $FC, $52, $07, $F2, $04, $56, $07   ; $6998
+    db   $F2, $0C, $5A, $07, $02, $FC, $54, $07   ; $69A0
+    db   $02, $04, $58, $07, $02, $0C, $5C, $07   ; $69A8
+    db   $F2, $FC, $5A, $27, $F2, $04, $56, $27   ; $69B0
+    db   $F2, $0C, $52, $27, $02, $FC, $5C, $27   ; $69B8
+    db   $02, $04, $58, $27, $02, $0C, $54, $27   ; $69C0
+    db   $F2, $00, $4C, $04, $F2, $08, $4C, $24   ; $69C8
+    db   $02, $F8, $4E, $04, $02, $00, $50, $04   ; $69D0
+    db   $02, $08, $50, $24, $02, $10, $4E, $24   ; $69D8
+    db   $F0, $FC, $50, $01, $F0, $04, $52, $01   ; $69E0
+    db   $F0, $0C, $54, $01, $00, $FC, $56, $01   ; $69E8
+    db   $00, $04, $58, $01, $00, $0C, $5A, $01   ; $69F0
+    db   $F0, $FC, $50, $01, $F0, $04, $52, $01   ; $69F8
+    db   $F0, $0C, $54, $01, $00, $FC, $5C, $01   ; $6A00
+    db   $00, $04, $58, $01, $00, $0C, $5E, $01   ; $6A08
+    db   $F4, $04, $20, $21, $00, $04, $8E, $16   ; $6A10
+    db   $F4, $04, $20, $01, $00, $04, $8E, $16   ; $6A18
+    db   $F4, $00, $40, $03, $F4, $08, $40, $23   ; $6A20
+    db   $F4, $00, $40, $02, $F4, $08, $40, $22   ; $6A28
 
-jr_020_6705:
-    ld   [$204C], sp                              ; $6705: $08 $4C $20
-    nop                                           ; $6708: $00
-    ld   [$FFFF], sp                              ; $6709: $08 $FF $FF
-    nop                                           ; $670C: $00
-    nop                                           ; $670D: $00
-    ld   c, b                                     ; $670E: $48
-    jr   nz, jr_020_6711                          ; $670F: $20 $00
-
-jr_020_6711:
-    ld   [$2040], sp                              ; $6711: $08 $40 $20
-    nop                                           ; $6714: $00
-    ld   [$FFFF], sp                              ; $6715: $08 $FF $FF
-    nop                                           ; $6718: $00
-    inc  c                                        ; $6719: $0C
-    ld   b, h                                     ; $671A: $44
-    nop                                           ; $671B: $00
-    nop                                           ; $671C: $00
-    inc  b                                        ; $671D: $04
-    ld   b, [hl]                                  ; $671E: $46
-    nop                                           ; $671F: $00
-    nop                                           ; $6720: $00
-    db   $fc                                      ; $6721: $FC
-    ld   b, b                                     ; $6722: $40
-    nop                                           ; $6723: $00
-    nop                                           ; $6724: $00
-    db   $fc                                      ; $6725: $FC
-    ld   b, h                                     ; $6726: $44
-    jr   nz, jr_020_6729                          ; $6727: $20 $00
-
-jr_020_6729:
-    inc  b                                        ; $6729: $04
-    ld   b, [hl]                                  ; $672A: $46
-    jr   nz, jr_020_672D                          ; $672B: $20 $00
-
-jr_020_672D:
-    inc  c                                        ; $672D: $0C
-    ld   b, b                                     ; $672E: $40
-    jr   nz, jr_020_6731                          ; $672F: $20 $00
-
-jr_020_6731:
-    db   $fc                                      ; $6731: $FC
-    ld   b, h                                     ; $6732: $44
-    jr   nz, jr_020_6735                          ; $6733: $20 $00
-
-jr_020_6735:
-    inc  b                                        ; $6735: $04
-    ld   b, d                                     ; $6736: $42
-    jr   nz, jr_020_6739                          ; $6737: $20 $00
-
-jr_020_6739:
-    inc  c                                        ; $6739: $0C
-    ld   b, b                                     ; $673A: $40
-    jr   nz, jr_020_673D                          ; $673B: $20 $00
-
-jr_020_673D:
-    inc  c                                        ; $673D: $0C
-    ld   b, h                                     ; $673E: $44
-    nop                                           ; $673F: $00
-    nop                                           ; $6740: $00
-    inc  b                                        ; $6741: $04
-    ld   b, d                                     ; $6742: $42
-    nop                                           ; $6743: $00
-    nop                                           ; $6744: $00
-    db   $fc                                      ; $6745: $FC
-    ld   b, b                                     ; $6746: $40
-    nop                                           ; $6747: $00
-    nop                                           ; $6748: $00
-    ld   [$0348], sp                              ; $6749: $08 $48 $03
-    nop                                           ; $674C: $00
-    nop                                           ; $674D: $00
-    ld   b, b                                     ; $674E: $40
-    inc  bc                                       ; $674F: $03
-    nop                                           ; $6750: $00
-    nop                                           ; $6751: $00
-    rst  $38                                      ; $6752: $FF
-    rst  $38                                      ; $6753: $FF
-    nop                                           ; $6754: $00
-    ld   [$034A], sp                              ; $6755: $08 $4A $03
-    nop                                           ; $6758: $00
-    nop                                           ; $6759: $00
-    ld   c, h                                     ; $675A: $4C
-    inc  bc                                       ; $675B: $03
-    nop                                           ; $675C: $00
-    nop                                           ; $675D: $00
-    rst  $38                                      ; $675E: $FF
-    rst  $38                                      ; $675F: $FF
-    nop                                           ; $6760: $00
-    nop                                           ; $6761: $00
-    ld   c, d                                     ; $6762: $4A
-    inc  hl                                       ; $6763: $23
-    nop                                           ; $6764: $00
-    ld   [$234C], sp                              ; $6765: $08 $4C $23
-    nop                                           ; $6768: $00
-    ld   [$FFFF], sp                              ; $6769: $08 $FF $FF
-    nop                                           ; $676C: $00
-    nop                                           ; $676D: $00
-    ld   c, b                                     ; $676E: $48
-    inc  hl                                       ; $676F: $23
-    nop                                           ; $6770: $00
-    ld   [$2340], sp                              ; $6771: $08 $40 $23
-    nop                                           ; $6774: $00
-    ld   [$FFFF], sp                              ; $6775: $08 $FF $FF
-    nop                                           ; $6778: $00
-    inc  c                                        ; $6779: $0C
-    ld   b, h                                     ; $677A: $44
-    inc  bc                                       ; $677B: $03
-    nop                                           ; $677C: $00
-    inc  b                                        ; $677D: $04
-    ld   b, [hl]                                  ; $677E: $46
-    inc  bc                                       ; $677F: $03
-    nop                                           ; $6780: $00
-    db   $fc                                      ; $6781: $FC
-    ld   b, b                                     ; $6782: $40
-    inc  bc                                       ; $6783: $03
-    nop                                           ; $6784: $00
-    db   $fc                                      ; $6785: $FC
-    ld   b, h                                     ; $6786: $44
-    inc  hl                                       ; $6787: $23
-    nop                                           ; $6788: $00
-    inc  b                                        ; $6789: $04
-    ld   b, [hl]                                  ; $678A: $46
-    inc  hl                                       ; $678B: $23
-    nop                                           ; $678C: $00
-    inc  c                                        ; $678D: $0C
-    ld   b, b                                     ; $678E: $40
-    inc  hl                                       ; $678F: $23
-    nop                                           ; $6790: $00
-    db   $fc                                      ; $6791: $FC
-    ld   b, h                                     ; $6792: $44
-    inc  hl                                       ; $6793: $23
-    nop                                           ; $6794: $00
-    inc  b                                        ; $6795: $04
-    ld   b, d                                     ; $6796: $42
-    inc  hl                                       ; $6797: $23
-    nop                                           ; $6798: $00
-    inc  c                                        ; $6799: $0C
-    ld   b, b                                     ; $679A: $40
-    inc  hl                                       ; $679B: $23
-    nop                                           ; $679C: $00
-    inc  c                                        ; $679D: $0C
-    ld   b, h                                     ; $679E: $44
-    inc  bc                                       ; $679F: $03
-    nop                                           ; $67A0: $00
-    inc  b                                        ; $67A1: $04
-    ld   b, d                                     ; $67A2: $42
-    inc  bc                                       ; $67A3: $03
-    nop                                           ; $67A4: $00
-    db   $fc                                      ; $67A5: $FC
-    ld   b, b                                     ; $67A6: $40
-    inc  bc                                       ; $67A7: $03
-    nop                                           ; $67A8: $00
-    nop                                           ; $67A9: $00
-    ld   c, h                                     ; $67AA: $4C
-    ld   [bc], a                                  ; $67AB: $02
-    nop                                           ; $67AC: $00
-    ld   [$024E], sp                              ; $67AD: $08 $4E $02
-    nop                                           ; $67B0: $00
-    nop                                           ; $67B1: $00
-    rst  $38                                      ; $67B2: $FF
-    ld   [bc], a                                  ; $67B3: $02
-    nop                                           ; $67B4: $00
-    nop                                           ; $67B5: $00
-    ld   c, [hl]                                  ; $67B6: $4E
-    ld   [hl+], a                                 ; $67B7: $22
-    nop                                           ; $67B8: $00
-    ld   [$224C], sp                              ; $67B9: $08 $4C $22
-    nop                                           ; $67BC: $00
-    nop                                           ; $67BD: $00
-    rst  $38                                      ; $67BE: $FF
-    ld   [bc], a                                  ; $67BF: $02
-    nop                                           ; $67C0: $00
-    nop                                           ; $67C1: $00
-    ld   d, b                                     ; $67C2: $50
-    ld   [bc], a                                  ; $67C3: $02
-    nop                                           ; $67C4: $00
-    ld   [$025A], sp                              ; $67C5: $08 $5A $02
-    nop                                           ; $67C8: $00
-    nop                                           ; $67C9: $00
-    rst  $38                                      ; $67CA: $FF
-    ld   [bc], a                                  ; $67CB: $02
-    nop                                           ; $67CC: $00
-    nop                                           ; $67CD: $00
-    ld   e, d                                     ; $67CE: $5A
-    ld   [hl+], a                                 ; $67CF: $22
-    nop                                           ; $67D0: $00
-    ld   [$2250], sp                              ; $67D1: $08 $50 $22
-    nop                                           ; $67D4: $00
-    nop                                           ; $67D5: $00
-    rst  $38                                      ; $67D6: $FF
-    ld   [bc], a                                  ; $67D7: $02
-    nop                                           ; $67D8: $00
-    nop                                           ; $67D9: $00
-    ld   c, h                                     ; $67DA: $4C
-    nop                                           ; $67DB: $00
-    nop                                           ; $67DC: $00
-    ld   [$004E], sp                              ; $67DD: $08 $4E $00
-    nop                                           ; $67E0: $00
-    nop                                           ; $67E1: $00
-    rst  $38                                      ; $67E2: $FF
-    nop                                           ; $67E3: $00
-    nop                                           ; $67E4: $00
-    nop                                           ; $67E5: $00
-    ld   c, [hl]                                  ; $67E6: $4E
-    jr   nz, jr_020_67E9                          ; $67E7: $20 $00
-
-jr_020_67E9:
-    ld   [$204C], sp                              ; $67E9: $08 $4C $20
-    nop                                           ; $67EC: $00
-    nop                                           ; $67ED: $00
-    rst  $38                                      ; $67EE: $FF
-    nop                                           ; $67EF: $00
-    nop                                           ; $67F0: $00
-    nop                                           ; $67F1: $00
-    ld   d, b                                     ; $67F2: $50
-    nop                                           ; $67F3: $00
-    nop                                           ; $67F4: $00
-    ld   [$005A], sp                              ; $67F5: $08 $5A $00
-    nop                                           ; $67F8: $00
-    nop                                           ; $67F9: $00
-    rst  $38                                      ; $67FA: $FF
-    nop                                           ; $67FB: $00
-    nop                                           ; $67FC: $00
-    nop                                           ; $67FD: $00
-    ld   e, d                                     ; $67FE: $5A
-    jr   nz, jr_020_6801                          ; $67FF: $20 $00
-
-jr_020_6801:
-    ld   [$2050], sp                              ; $6801: $08 $50 $20
-    nop                                           ; $6804: $00
-    nop                                           ; $6805: $00
-    rst  $38                                      ; $6806: $FF
-    nop                                           ; $6807: $00
-    nop                                           ; $6808: $00
-    nop                                           ; $6809: $00
-    ld   c, h                                     ; $680A: $4C
-    inc  bc                                       ; $680B: $03
-    nop                                           ; $680C: $00
-    ld   [$034E], sp                              ; $680D: $08 $4E $03
-    nop                                           ; $6810: $00
-    nop                                           ; $6811: $00
-    rst  $38                                      ; $6812: $FF
-    inc  bc                                       ; $6813: $03
-    nop                                           ; $6814: $00
-    nop                                           ; $6815: $00
-    ld   c, [hl]                                  ; $6816: $4E
-    inc  hl                                       ; $6817: $23
-    nop                                           ; $6818: $00
-    ld   [$234C], sp                              ; $6819: $08 $4C $23
-    nop                                           ; $681C: $00
-    nop                                           ; $681D: $00
-    rst  $38                                      ; $681E: $FF
-    inc  bc                                       ; $681F: $03
-    nop                                           ; $6820: $00
-    nop                                           ; $6821: $00
-    ld   d, b                                     ; $6822: $50
-    inc  bc                                       ; $6823: $03
-    nop                                           ; $6824: $00
-    ld   [$035A], sp                              ; $6825: $08 $5A $03
-    nop                                           ; $6828: $00
-    nop                                           ; $6829: $00
-    rst  $38                                      ; $682A: $FF
-    inc  bc                                       ; $682B: $03
-    nop                                           ; $682C: $00
-    nop                                           ; $682D: $00
-    ld   e, d                                     ; $682E: $5A
-    inc  hl                                       ; $682F: $23
-    nop                                           ; $6830: $00
-    ld   [$2350], sp                              ; $6831: $08 $50 $23
-    nop                                           ; $6834: $00
-    nop                                           ; $6835: $00
-    rst  $38                                      ; $6836: $FF
-    inc  bc                                       ; $6837: $03
-    nop                                           ; $6838: $00
-    nop                                           ; $6839: $00
-    ld   a, b                                     ; $683A: $78
-    inc  bc                                       ; $683B: $03
-    nop                                           ; $683C: $00
-    ld   [$037A], sp                              ; $683D: $08 $7A $03
-    nop                                           ; $6840: $00
-    nop                                           ; $6841: $00
-    rst  $38                                      ; $6842: $FF
-    inc  bc                                       ; $6843: $03
-    nop                                           ; $6844: $00
-    nop                                           ; $6845: $00
-    rst  $38                                      ; $6846: $FF
-    inc  bc                                       ; $6847: $03
-    nop                                           ; $6848: $00
-    nop                                           ; $6849: $00
-    ld   a, h                                     ; $684A: $7C
-    inc  bc                                       ; $684B: $03
-    nop                                           ; $684C: $00
-    ld   [$037E], sp                              ; $684D: $08 $7E $03
-    nop                                           ; $6850: $00
-    nop                                           ; $6851: $00
-    rst  $38                                      ; $6852: $FF
-    inc  bc                                       ; $6853: $03
-    nop                                           ; $6854: $00
-    nop                                           ; $6855: $00
-    rst  $38                                      ; $6856: $FF
-    inc  bc                                       ; $6857: $03
-    nop                                           ; $6858: $00
-    nop                                           ; $6859: $00
-    ld   a, d                                     ; $685A: $7A
-    inc  hl                                       ; $685B: $23
-    nop                                           ; $685C: $00
-    ld   [$2378], sp                              ; $685D: $08 $78 $23
-    nop                                           ; $6860: $00
-    nop                                           ; $6861: $00
-    rst  $38                                      ; $6862: $FF
-    inc  bc                                       ; $6863: $03
-    nop                                           ; $6864: $00
-    nop                                           ; $6865: $00
-    rst  $38                                      ; $6866: $FF
-    inc  bc                                       ; $6867: $03
-    nop                                           ; $6868: $00
-    nop                                           ; $6869: $00
-    ld   a, [hl]                                  ; $686A: $7E
-    inc  hl                                       ; $686B: $23
-    nop                                           ; $686C: $00
-    ld   [OpenDialogInTable2], sp                 ; $686D: $08 $7C $23
-    nop                                           ; $6870: $00
-    nop                                           ; $6871: $00
-    rst  $38                                      ; $6872: $FF
-    inc  bc                                       ; $6873: $03
-    nop                                           ; $6874: $00
-    nop                                           ; $6875: $00
-    rst  $38                                      ; $6876: $FF
-    inc  bc                                       ; $6877: $03
-    db   $fd                                      ; $6878: $FD
-    db   $10                                      ; $6879: $10
-    ld   [hl+], a                                 ; $687A: $22
-    inc  hl                                       ; $687B: $23
-    db   $fd                                      ; $687C: $FD
-    db   $fd                                      ; $687D: $FD
-    ld   [hl+], a                                 ; $687E: $22
-    inc  bc                                       ; $687F: $03
-    nop                                           ; $6880: $00
-    nop                                           ; $6881: $00
-    ld   a, b                                     ; $6882: $78
-    inc  bc                                       ; $6883: $03
-    nop                                           ; $6884: $00
-    ld   [$037A], sp                              ; $6885: $08 $7A $03
-    rlca                                          ; $6888: $07
-    db   $10                                      ; $6889: $10
-    ld   [hl+], a                                 ; $688A: $22
-    inc  bc                                       ; $688B: $03
-    rlca                                          ; $688C: $07
-    db   $fd                                      ; $688D: $FD
-    ld   [hl+], a                                 ; $688E: $22
-    inc  hl                                       ; $688F: $23
-    rst  $38                                      ; $6890: $FF
-    nop                                           ; $6891: $00
-    ld   a, b                                     ; $6892: $78
-    inc  bc                                       ; $6893: $03
-    rst  $38                                      ; $6894: $FF
-    ld   [$037A], sp                              ; $6895: $08 $7A $03
-    db   $fd                                      ; $6898: $FD
-    dec  bc                                       ; $6899: $0B
-    ld   [hl+], a                                 ; $689A: $22
-    inc  hl                                       ; $689B: $23
-    db   $fd                                      ; $689C: $FD
-    ld   hl, sp+$22                               ; $689D: $F8 $22
-    inc  bc                                       ; $689F: $03
-    nop                                           ; $68A0: $00
-    nop                                           ; $68A1: $00
-    ld   a, d                                     ; $68A2: $7A
-    inc  hl                                       ; $68A3: $23
-    nop                                           ; $68A4: $00
-    ld   [$2378], sp                              ; $68A5: $08 $78 $23
-    rlca                                          ; $68A8: $07
-    dec  bc                                       ; $68A9: $0B
-    ld   [hl+], a                                 ; $68AA: $22
-    inc  bc                                       ; $68AB: $03
-    rlca                                          ; $68AC: $07
-    ld   hl, sp+$22                               ; $68AD: $F8 $22
-    inc  hl                                       ; $68AF: $23
-    rst  $38                                      ; $68B0: $FF
-    nop                                           ; $68B1: $00
-    ld   a, d                                     ; $68B2: $7A
-    inc  hl                                       ; $68B3: $23
-    rst  $38                                      ; $68B4: $FF
-    ld   [$2378], sp                              ; $68B5: $08 $78 $23
-    db   $f4                                      ; $68B8: $F4
-    ld   hl, sp+$40                               ; $68B9: $F8 $40
-    rlca                                          ; $68BB: $07
-    db   $f4                                      ; $68BC: $F4
-    nop                                           ; $68BD: $00
-    ld   b, d                                     ; $68BE: $42
-    rlca                                          ; $68BF: $07
-    db   $f4                                      ; $68C0: $F4
-    ld   [$0744], sp                              ; $68C1: $08 $44 $07
-    db   $f4                                      ; $68C4: $F4
-    db   $10                                      ; $68C5: $10
-    ld   b, [hl]                                  ; $68C6: $46
-    rlca                                          ; $68C7: $07
-    inc  b                                        ; $68C8: $04
-    ld   hl, sp+$48                               ; $68C9: $F8 $48
-    rlca                                          ; $68CB: $07
-    inc  b                                        ; $68CC: $04
-    nop                                           ; $68CD: $00
-    ld   c, d                                     ; $68CE: $4A
-    rlca                                          ; $68CF: $07
-    inc  b                                        ; $68D0: $04
-    ld   [$074C], sp                              ; $68D1: $08 $4C $07
-    inc  b                                        ; $68D4: $04
-    db   $10                                      ; $68D5: $10
-    ld   c, [hl]                                  ; $68D6: $4E
-    rlca                                          ; $68D7: $07
-    db   $f4                                      ; $68D8: $F4
-    db   $10                                      ; $68D9: $10
-    ld   b, b                                     ; $68DA: $40
-    daa                                           ; $68DB: $27
-    db   $f4                                      ; $68DC: $F4
-    ld   [$2742], sp                              ; $68DD: $08 $42 $27
-    db   $f4                                      ; $68E0: $F4
-    nop                                           ; $68E1: $00
-    ld   b, h                                     ; $68E2: $44
-    daa                                           ; $68E3: $27
-    db   $f4                                      ; $68E4: $F4
-    ld   hl, sp+$46                               ; $68E5: $F8 $46
-    daa                                           ; $68E7: $27
-    inc  b                                        ; $68E8: $04
-    db   $10                                      ; $68E9: $10
-    ld   c, b                                     ; $68EA: $48
-    daa                                           ; $68EB: $27
-    inc  b                                        ; $68EC: $04
-    ld   [$274A], sp                              ; $68ED: $08 $4A $27
-    inc  b                                        ; $68F0: $04
-    nop                                           ; $68F1: $00
-    ld   c, h                                     ; $68F2: $4C
-    daa                                           ; $68F3: $27
-    inc  b                                        ; $68F4: $04
-    ld   hl, sp+$4E                               ; $68F5: $F8 $4E
-    daa                                           ; $68F7: $27
-    db   $f4                                      ; $68F8: $F4
-    db   $10                                      ; $68F9: $10
-    ld   d, b                                     ; $68FA: $50
-    daa                                           ; $68FB: $27
-    db   $f4                                      ; $68FC: $F4
-    ld   [$2752], sp                              ; $68FD: $08 $52 $27
-    db   $f4                                      ; $6900: $F4
-    nop                                           ; $6901: $00
-    ld   d, h                                     ; $6902: $54
-    daa                                           ; $6903: $27
-    db   $f4                                      ; $6904: $F4
-    ld   hl, sp+$56                               ; $6905: $F8 $56
-    daa                                           ; $6907: $27
-    inc  b                                        ; $6908: $04
-    db   $10                                      ; $6909: $10
-    ld   e, b                                     ; $690A: $58
-    daa                                           ; $690B: $27
-    inc  b                                        ; $690C: $04
-    ld   [$275A], sp                              ; $690D: $08 $5A $27
-    inc  b                                        ; $6910: $04
-    nop                                           ; $6911: $00
-    ld   e, h                                     ; $6912: $5C
-    daa                                           ; $6913: $27
-    inc  b                                        ; $6914: $04
-    ld   hl, sp+$5E                               ; $6915: $F8 $5E
-    daa                                           ; $6917: $27
-    db   $f4                                      ; $6918: $F4
-    ld   hl, sp+$50                               ; $6919: $F8 $50
-    rlca                                          ; $691B: $07
-    db   $f4                                      ; $691C: $F4
-    nop                                           ; $691D: $00
-    ld   d, d                                     ; $691E: $52
-    rlca                                          ; $691F: $07
-    db   $f4                                      ; $6920: $F4
-    ld   [$0754], sp                              ; $6921: $08 $54 $07
-    db   $f4                                      ; $6924: $F4
-    db   $10                                      ; $6925: $10
-    ld   d, [hl]                                  ; $6926: $56
-    rlca                                          ; $6927: $07
-    inc  b                                        ; $6928: $04
-    ld   hl, sp+$58                               ; $6929: $F8 $58
-    rlca                                          ; $692B: $07
-    inc  b                                        ; $692C: $04
-    nop                                           ; $692D: $00
-    ld   e, d                                     ; $692E: $5A
-    rlca                                          ; $692F: $07
-    inc  b                                        ; $6930: $04
-    ld   [$075C], sp                              ; $6931: $08 $5C $07
-    inc  b                                        ; $6934: $04
-    db   $10                                      ; $6935: $10
-    ld   e, [hl]                                  ; $6936: $5E
-    rlca                                          ; $6937: $07
-    ld   [bc], a                                  ; $6938: $02
-    db   $fc                                      ; $6939: $FC
-    ld   b, b                                     ; $693A: $40
-    rlca                                          ; $693B: $07
-    ld   [bc], a                                  ; $693C: $02
-    inc  b                                        ; $693D: $04
-    ld   b, d                                     ; $693E: $42
-    rlca                                          ; $693F: $07
-    ld   [bc], a                                  ; $6940: $02
-    inc  c                                        ; $6941: $0C
-    ld   b, b                                     ; $6942: $40
-    daa                                           ; $6943: $27
-    nop                                           ; $6944: $00
-    nop                                           ; $6945: $00
-    rst  $38                                      ; $6946: $FF
-    nop                                           ; $6947: $00
-    nop                                           ; $6948: $00
-    nop                                           ; $6949: $00
-    rst  $38                                      ; $694A: $FF
-    nop                                           ; $694B: $00
-    nop                                           ; $694C: $00
-    nop                                           ; $694D: $00
-    rst  $38                                      ; $694E: $FF
-    nop                                           ; $694F: $00
-    ld   a, [$ff00+c]                             ; $6950: $F2
-    nop                                           ; $6951: $00
-    ld   b, h                                     ; $6952: $44
-    rlca                                          ; $6953: $07
-    ld   a, [$ff00+c]                             ; $6954: $F2
-    ld   [$2744], sp                              ; $6955: $08 $44 $27
-    ld   [bc], a                                  ; $6958: $02
-    nop                                           ; $6959: $00
-    ld   b, [hl]                                  ; $695A: $46
-    rlca                                          ; $695B: $07
-    ld   [bc], a                                  ; $695C: $02
-    ld   [$2746], sp                              ; $695D: $08 $46 $27
-    nop                                           ; $6960: $00
-    nop                                           ; $6961: $00
-    rst  $38                                      ; $6962: $FF
-    nop                                           ; $6963: $00
-    nop                                           ; $6964: $00
-    nop                                           ; $6965: $00
-    rst  $38                                      ; $6966: $FF
-    nop                                           ; $6967: $00
-    ld   a, [$ff00+c]                             ; $6968: $F2
-    nop                                           ; $6969: $00
-    ld   c, b                                     ; $696A: $48
-    rlca                                          ; $696B: $07
-    ld   a, [$ff00+c]                             ; $696C: $F2
-    ld   [$2748], sp                              ; $696D: $08 $48 $27
-    ld   [bc], a                                  ; $6970: $02
-    nop                                           ; $6971: $00
-    ld   c, d                                     ; $6972: $4A
-    rlca                                          ; $6973: $07
-    ld   [bc], a                                  ; $6974: $02
-    ld   [$274A], sp                              ; $6975: $08 $4A $27
-    nop                                           ; $6978: $00
-    nop                                           ; $6979: $00
-    rst  $38                                      ; $697A: $FF
-    nop                                           ; $697B: $00
-    nop                                           ; $697C: $00
-    nop                                           ; $697D: $00
-    rst  $38                                      ; $697E: $FF
-    nop                                           ; $697F: $00
-    ld   a, [$ff00+c]                             ; $6980: $F2
-    nop                                           ; $6981: $00
-    ld   c, h                                     ; $6982: $4C
-    rlca                                          ; $6983: $07
-    ld   a, [$ff00+c]                             ; $6984: $F2
-    ld   [$274C], sp                              ; $6985: $08 $4C $27
-    ld   [bc], a                                  ; $6988: $02
-    ld   hl, sp+$4E                               ; $6989: $F8 $4E
-    rlca                                          ; $698B: $07
-    ld   [bc], a                                  ; $698C: $02
-    nop                                           ; $698D: $00
-    ld   d, b                                     ; $698E: $50
-    rlca                                          ; $698F: $07
-    ld   [bc], a                                  ; $6990: $02
-    ld   [$2750], sp                              ; $6991: $08 $50 $27
-    ld   [bc], a                                  ; $6994: $02
-    db   $10                                      ; $6995: $10
-    ld   c, [hl]                                  ; $6996: $4E
-    daa                                           ; $6997: $27
-    ld   a, [$ff00+c]                             ; $6998: $F2
-    db   $fc                                      ; $6999: $FC
-    ld   d, d                                     ; $699A: $52
-    rlca                                          ; $699B: $07
-    ld   a, [$ff00+c]                             ; $699C: $F2
-    inc  b                                        ; $699D: $04
-    ld   d, [hl]                                  ; $699E: $56
-    rlca                                          ; $699F: $07
-    ld   a, [$ff00+c]                             ; $69A0: $F2
-    inc  c                                        ; $69A1: $0C
-    ld   e, d                                     ; $69A2: $5A
-    rlca                                          ; $69A3: $07
-    ld   [bc], a                                  ; $69A4: $02
-    db   $fc                                      ; $69A5: $FC
-    ld   d, h                                     ; $69A6: $54
-    rlca                                          ; $69A7: $07
-    ld   [bc], a                                  ; $69A8: $02
-    inc  b                                        ; $69A9: $04
-    ld   e, b                                     ; $69AA: $58
-    rlca                                          ; $69AB: $07
-    ld   [bc], a                                  ; $69AC: $02
-    inc  c                                        ; $69AD: $0C
-    ld   e, h                                     ; $69AE: $5C
-    rlca                                          ; $69AF: $07
-    ld   a, [$ff00+c]                             ; $69B0: $F2
-    db   $fc                                      ; $69B1: $FC
-    ld   e, d                                     ; $69B2: $5A
-    daa                                           ; $69B3: $27
-    ld   a, [$ff00+c]                             ; $69B4: $F2
-    inc  b                                        ; $69B5: $04
-    ld   d, [hl]                                  ; $69B6: $56
-    daa                                           ; $69B7: $27
-    ld   a, [$ff00+c]                             ; $69B8: $F2
-    inc  c                                        ; $69B9: $0C
-    ld   d, d                                     ; $69BA: $52
-    daa                                           ; $69BB: $27
-    ld   [bc], a                                  ; $69BC: $02
-    db   $fc                                      ; $69BD: $FC
-    ld   e, h                                     ; $69BE: $5C
-    daa                                           ; $69BF: $27
-    ld   [bc], a                                  ; $69C0: $02
-    inc  b                                        ; $69C1: $04
-    ld   e, b                                     ; $69C2: $58
-    daa                                           ; $69C3: $27
-    ld   [bc], a                                  ; $69C4: $02
-    inc  c                                        ; $69C5: $0C
-    ld   d, h                                     ; $69C6: $54
-    daa                                           ; $69C7: $27
-    ld   a, [$ff00+c]                             ; $69C8: $F2
-    nop                                           ; $69C9: $00
-    ld   c, h                                     ; $69CA: $4C
-    inc  b                                        ; $69CB: $04
-    ld   a, [$ff00+c]                             ; $69CC: $F2
-    ld   [$244C], sp                              ; $69CD: $08 $4C $24
-    ld   [bc], a                                  ; $69D0: $02
-    ld   hl, sp+$4E                               ; $69D1: $F8 $4E
-    inc  b                                        ; $69D3: $04
-    ld   [bc], a                                  ; $69D4: $02
-    nop                                           ; $69D5: $00
-    ld   d, b                                     ; $69D6: $50
-    inc  b                                        ; $69D7: $04
-    ld   [bc], a                                  ; $69D8: $02
-    ld   [$2450], sp                              ; $69D9: $08 $50 $24
-    ld   [bc], a                                  ; $69DC: $02
-    db   $10                                      ; $69DD: $10
-    ld   c, [hl]                                  ; $69DE: $4E
-    inc  h                                        ; $69DF: $24
-    ldh  a, [hFFFC]                               ; $69E0: $F0 $FC
-    ld   d, b                                     ; $69E2: $50
-    ld   bc, $4F0                                 ; $69E3: $01 $F0 $04
-    ld   d, d                                     ; $69E6: $52
-    ld   bc, $CF0                                 ; $69E7: $01 $F0 $0C
-    ld   d, h                                     ; $69EA: $54
-    ld   bc, $FC00                                ; $69EB: $01 $00 $FC
-    ld   d, [hl]                                  ; $69EE: $56
-    ld   bc, $400                                 ; $69EF: $01 $00 $04
-    ld   e, b                                     ; $69F2: $58
-    ld   bc, $C00                                 ; $69F3: $01 $00 $0C
-    ld   e, d                                     ; $69F6: $5A
-    ld   bc, $FCF0                                ; $69F7: $01 $F0 $FC
-    ld   d, b                                     ; $69FA: $50
-    ld   bc, $4F0                                 ; $69FB: $01 $F0 $04
-    ld   d, d                                     ; $69FE: $52
-    ld   bc, $CF0                                 ; $69FF: $01 $F0 $0C
-    ld   d, h                                     ; $6A02: $54
-    ld   bc, $FC00                                ; $6A03: $01 $00 $FC
-    ld   e, h                                     ; $6A06: $5C
-    ld   bc, $400                                 ; $6A07: $01 $00 $04
-    ld   e, b                                     ; $6A0A: $58
-    ld   bc, $C00                                 ; $6A0B: $01 $00 $0C
-    ld   e, [hl]                                  ; $6A0E: $5E
-    ld   bc, $4F4                                 ; $6A0F: $01 $F4 $04
-    jr   nz, @+$23                                ; $6A12: $20 $21
-
-    nop                                           ; $6A14: $00
-    inc  b                                        ; $6A15: $04
-    adc  [hl]                                     ; $6A16: $8E
-    ld   d, $F4                                   ; $6A17: $16 $F4
-    inc  b                                        ; $6A19: $04
-    jr   nz, jr_020_6A1D                          ; $6A1A: $20 $01
-
-    nop                                           ; $6A1C: $00
-
-jr_020_6A1D:
-    inc  b                                        ; $6A1D: $04
-    adc  [hl]                                     ; $6A1E: $8E
-    ld   d, $F4                                   ; $6A1F: $16 $F4
-    nop                                           ; $6A21: $00
-    ld   b, b                                     ; $6A22: $40
-    inc  bc                                       ; $6A23: $03
-    db   $f4                                      ; $6A24: $F4
-    ld   [$2340], sp                              ; $6A25: $08 $40 $23
-    db   $f4                                      ; $6A28: $F4
-    nop                                           ; $6A29: $00
-    ld   b, b                                     ; $6A2A: $40
-    ld   [bc], a                                  ; $6A2B: $02
-    db   $f4                                      ; $6A2C: $F4
-    ld   [$2240], sp                              ; $6A2D: $08 $40 $22
-
-; Palette-related
 func_020_6A30::
     ldh  a, [hIsGBC]                              ; $6A30: $F0 $FE
     and  a                                        ; $6A32: $A7
@@ -6632,7 +4317,7 @@ func_020_6A30::
     ld   a, $01                                   ; $6A3A: $3E $01
     ldh  [hScratchD], a                           ; $6A3C: $E0 $E4
     ld   a, $02                                   ; $6A3E: $3E $02
-    ldh  [$FFE5], a                               ; $6A40: $E0 $E5
+    ldh  [hScratchE], a                           ; $6A40: $E0 $E5
     ld   a, $04                                   ; $6A42: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6A44: $E0 $E6
     ld   hl, $DC10                                ; $6A46: $21 $10 $DC
@@ -6645,20 +4330,19 @@ func_020_6A30::
 
 jr_020_6A52:
     and  $10                                      ; $6A52: $E6 $10
-    jr   z, jr_020_6A68                           ; $6A54: $28 $12
+    jr   z, func_020_6A68                         ; $6A54: $28 $12
 
     ldh  a, [hScratchD]                           ; $6A56: $F0 $E4
     sla  a                                        ; $6A58: $CB $27
     ldh  [hScratchD], a                           ; $6A5A: $E0 $E4
-    ldh  a, [$FFE5]                               ; $6A5C: $F0 $E5
+    ldh  a, [hScratchE]                           ; $6A5C: $F0 $E5
     sla  a                                        ; $6A5E: $CB $27
-    ldh  [$FFE5], a                               ; $6A60: $E0 $E5
+    ldh  [hScratchE], a                           ; $6A60: $E0 $E5
     ldh  a, [hFreeWarpDataAddress]                ; $6A62: $F0 $E6
     sla  a                                        ; $6A64: $CB $27
     ldh  [hFreeWarpDataAddress], a                ; $6A66: $E0 $E6
 
-func_020_6A68:
-jr_020_6A68:
+func_020_6A68::
     push hl                                       ; $6A68: $E5
     ldh  a, [hScratchD]                           ; $6A69: $F0 $E4
     ld   c, a                                     ; $6A6B: $4F
@@ -6672,7 +4356,7 @@ jr_020_6A68:
 
 jr_020_6A76:
     ldh  [hScratch0], a                           ; $6A76: $E0 $D7
-    ldh  a, [$FFE5]                               ; $6A78: $F0 $E5
+    ldh  a, [hScratchE]                           ; $6A78: $F0 $E5
     ld   c, a                                     ; $6A7A: $4F
     ld   a, [hl+]                                 ; $6A7B: $2A
     and  $E0                                      ; $6A7C: $E6 $E0
@@ -6721,10 +4405,10 @@ jr_020_6A9F:
     dec  d                                        ; $6AB6: $15
     ld   a, d                                     ; $6AB7: $7A
     and  a                                        ; $6AB8: $A7
-    jr   nz, jr_020_6A68                          ; $6AB9: $20 $AD
+    jr   nz, func_020_6A68                        ; $6AB9: $20 $AD
 
     ld   a, $03                                   ; $6ABB: $3E $03
-    ld   [wPaletteDataFlags], a                    ; $6ABD: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6ABD: $EA $D1 $DD
     ret                                           ; $6AC0: $C9
 
 func_020_6AC1::
@@ -6739,7 +4423,7 @@ func_020_6AC1::
     ld   a, $01                                   ; $6ACB: $3E $01
     ldh  [hScratchD], a                           ; $6ACD: $E0 $E4
     ld   a, $02                                   ; $6ACF: $3E $02
-    ldh  [$FFE5], a                               ; $6AD1: $E0 $E5
+    ldh  [hScratchE], a                           ; $6AD1: $E0 $E5
     ld   a, $04                                   ; $6AD3: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6AD5: $E0 $E6
     ld   hl, $DC10                                ; $6AD7: $21 $10 $DC
@@ -6747,31 +4431,29 @@ func_020_6AC1::
     ldh  [hScratch3], a                           ; $6ADC: $E0 $DA
     ld   a, e                                     ; $6ADE: $7B
     and  $10                                      ; $6ADF: $E6 $10
-    jr   z, jr_020_6AF5                           ; $6AE1: $28 $12
+    jr   z, func_020_6AF5                         ; $6AE1: $28 $12
 
     ldh  a, [hScratchD]                           ; $6AE3: $F0 $E4
     sla  a                                        ; $6AE5: $CB $27
     ldh  [hScratchD], a                           ; $6AE7: $E0 $E4
-    ldh  a, [$FFE5]                               ; $6AE9: $F0 $E5
+    ldh  a, [hScratchE]                           ; $6AE9: $F0 $E5
     sla  a                                        ; $6AEB: $CB $27
-    ldh  [$FFE5], a                               ; $6AED: $E0 $E5
+    ldh  [hScratchE], a                           ; $6AED: $E0 $E5
     ldh  a, [hFreeWarpDataAddress]                ; $6AEF: $F0 $E6
     sla  a                                        ; $6AF1: $CB $27
     ldh  [hFreeWarpDataAddress], a                ; $6AF3: $E0 $E6
 
-func_020_6AF5:
-label_020_6AF5:
-jr_020_6AF5:
+func_020_6AF5::
     push hl                                       ; $6AF5: $E5
     ld   a, $02                                   ; $6AF6: $3E $02
-    ld   [rSVBK], a                               ; $6AF8: $E0 $70
+    ldh  [rSVBK], a                               ; $6AF8: $E0 $70
     ld   a, [hl+]                                 ; $6AFA: $2A
     ld   e, a                                     ; $6AFB: $5F
     ld   a, [hl]                                  ; $6AFC: $7E
     ld   d, a                                     ; $6AFD: $57
     dec  hl                                       ; $6AFE: $2B
     xor  a                                        ; $6AFF: $AF
-    ld   [rSVBK], a                               ; $6B00: $E0 $70
+    ldh  [rSVBK], a                               ; $6B00: $E0 $70
     ldh  a, [hScratchD]                           ; $6B02: $F0 $E4
     ld   c, a                                     ; $6B04: $4F
     ld   a, e                                     ; $6B05: $7B
@@ -6813,7 +4495,7 @@ jr_020_6B18:
     swap a                                        ; $6B30: $CB $37
     or   c                                        ; $6B32: $B1
     push af                                       ; $6B33: $F5
-    ldh  a, [$FFE5]                               ; $6B34: $F0 $E5
+    ldh  a, [hScratchE]                           ; $6B34: $F0 $E5
     ld   c, a                                     ; $6B36: $4F
     pop  af                                       ; $6B37: $F1
     cp   b                                        ; $6B38: $B8
@@ -6874,19 +4556,19 @@ jr_020_6B5C:
     dec  a                                        ; $6B75: $3D
     ldh  [hScratch3], a                           ; $6B76: $E0 $DA
     and  a                                        ; $6B78: $A7
-    jp   nz, label_020_6AF5                       ; $6B79: $C2 $F5 $6A
+    jp   nz, func_020_6AF5                        ; $6B79: $C2 $F5 $6A
 
     ld   a, $03                                   ; $6B7C: $3E $03
-    ld   [wPaletteDataFlags], a                    ; $6B7E: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6B7E: $EA $D1 $DD
 
 label_020_6B81:
     xor  a                                        ; $6B81: $AF
     ld   [wPaletteUnknownE], a                    ; $6B82: $EA $D5 $DD
     ret                                           ; $6B85: $C9
 
-func_020_6B86:
+func_020_6B86::
     ld   a, $02                                   ; $6B86: $3E $02
-    ld   [rSVBK], a                               ; $6B88: $E0 $70
+    ldh  [rSVBK], a                               ; $6B88: $E0 $70
     ld   a, [bc]                                  ; $6B8A: $0A
     or   [hl]                                     ; $6B8B: $B6
     ld   e, a                                     ; $6B8C: $5F
@@ -6898,19 +4580,15 @@ func_020_6B86:
     dec  bc                                       ; $6B92: $0B
     dec  hl                                       ; $6B93: $2B
     xor  a                                        ; $6B94: $AF
-    ld   [rSVBK], a                               ; $6B95: $E0 $70
+    ldh  [rSVBK], a                               ; $6B95: $E0 $70
     ld   [hl], e                                  ; $6B97: $73
     inc  hl                                       ; $6B98: $23
     ld   [hl], d                                  ; $6B99: $72
     inc  hl                                       ; $6B9A: $23
     ret                                           ; $6B9B: $C9
 
-    nop                                           ; $6B9C: $00
-    nop                                           ; $6B9D: $00
-    add  h                                        ; $6B9E: $84
-    db   $10                                      ; $6B9F: $10
-    adc  h                                        ; $6BA0: $8C
-    ld   sp, $1084                                ; $6BA1: $31 $84 $10
+Data_020_6B9C::
+    db   $00, $00, $84, $10, $8C, $31, $84, $10
 
 func_020_6BA4::
     ldh  a, [hIsGBC]                              ; $6BA4: $F0 $FE
@@ -6925,7 +4603,7 @@ func_020_6BA4::
     jr   nc, jr_020_6BDB                          ; $6BB2: $30 $27
 
 jr_020_6BB4:
-    ld   hl, $6B9C                                ; $6BB4: $21 $9C $6B
+    ld   hl, Data_020_6B9C                        ; $6BB4: $21 $9C $6B
     sla  e                                        ; $6BB7: $CB $23
     add  hl, de                                   ; $6BB9: $19
     push hl                                       ; $6BBA: $E5
@@ -6947,7 +4625,7 @@ jr_020_6BC3:
     jr   nz, jr_020_6BC3                          ; $6BD4: $20 $ED
 
     ld   a, $01                                   ; $6BD6: $3E $01
-    ld   [wPaletteDataFlags], a                    ; $6BD8: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6BD8: $EA $D1 $DD
 
 jr_020_6BDB:
     ret                                           ; $6BDB: $C9
@@ -6975,7 +4653,7 @@ jr_020_6BE8:
     jr   nz, jr_020_6BE8                          ; $6BF3: $20 $F3
 
     ld   a, $03                                   ; $6BF5: $3E $03
-    ld   [wPaletteDataFlags], a                    ; $6BF7: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6BF7: $EA $D1 $DD
     ld   a, $01                                   ; $6BFA: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6BFC: $EA $D5 $DD
     ret                                           ; $6BFF: $C9
@@ -6990,10 +4668,10 @@ LoadFileMenuBG::
 
 jr_020_6C0B:
     ld   a, $02                                   ; $6C0B: $3E $02
-    ld   [rSVBK], a                               ; $6C0D: $E0 $70
+    ldh  [rSVBK], a                               ; $6C0D: $E0 $70
     ld   b, [hl]                                  ; $6C0F: $46
     xor  a                                        ; $6C10: $AF
-    ld   [rSVBK], a                               ; $6C11: $E0 $70
+    ldh  [rSVBK], a                               ; $6C11: $E0 $70
     ld   [hl], b                                  ; $6C13: $70
     inc  hl                                       ; $6C14: $23
     dec  c                                        ; $6C15: $0D
@@ -7002,7 +4680,7 @@ jr_020_6C0B:
     jr   nz, jr_020_6C0B                          ; $6C18: $20 $F1
 
     ld   a, $03                                   ; $6C1A: $3E $03
-    ld   [wPaletteDataFlags], a                    ; $6C1C: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6C1C: $EA $D1 $DD
     xor  a                                        ; $6C1F: $AF
     ld   [wPaletteUnknownE], a                    ; $6C20: $EA $D5 $DD
     ret                                           ; $6C23: $C9
@@ -7034,10 +4712,10 @@ CopyLinkTunicPalette::
     ; Copy 8 bytes from 02:DC50 to 01:DC50
 .loop
     ld   a, $02                                   ; $6C3F: $3E $02
-    ld   [rSVBK], a                               ; $6C41: $E0 $70
+    ldh  [rSVBK], a                               ; $6C41: $E0 $70
     ld   c, [hl]                                  ; $6C43: $4E
     xor  a                                        ; $6C44: $AF
-    ld   [rSVBK], a                               ; $6C45: $E0 $70
+    ldh  [rSVBK], a                               ; $6C45: $E0 $70
     ld   [hl], c                                  ; $6C47: $71
     inc  hl                                       ; $6C48: $23
     dec  b                                        ; $6C49: $05
@@ -7064,7 +4742,7 @@ jr_020_6C60:
     ld   a, $04                                   ; $6C60: $3E $04
     ldh  [hScratchD], a                           ; $6C62: $E0 $E4
     ld   a, $08                                   ; $6C64: $3E $08
-    ldh  [$FFE5], a                               ; $6C66: $E0 $E5
+    ldh  [hScratchE], a                           ; $6C66: $E0 $E5
     ld   a, $10                                   ; $6C68: $3E $10
     ldh  [hFreeWarpDataAddress], a                ; $6C6A: $E0 $E6
     ld   hl, $DC10                                ; $6C6C: $21 $10 $DC
@@ -7073,7 +4751,7 @@ jr_020_6C60:
     ld   a, $01                                   ; $6C74: $3E $01
 
 jr_020_6C76:
-    ld   [wPaletteDataFlags], a                    ; $6C76: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6C76: $EA $D1 $DD
     ret                                           ; $6C79: $C9
 
 func_020_6C7A::
@@ -7092,7 +4770,7 @@ jr_020_6C8B:
     ld   a, $04                                   ; $6C8B: $3E $04
     ldh  [hScratchD], a                           ; $6C8D: $E0 $E4
     ld   a, $08                                   ; $6C8F: $3E $08
-    ldh  [$FFE5], a                               ; $6C91: $E0 $E5
+    ldh  [hScratchE], a                           ; $6C91: $E0 $E5
     ld   a, $10                                   ; $6C93: $3E $10
     ldh  [hFreeWarpDataAddress], a                ; $6C95: $E0 $E6
     ld   hl, $DC10                                ; $6C97: $21 $10 $DC
@@ -7102,7 +4780,7 @@ jr_020_6C8B:
     ld   a, $01                                   ; $6CA1: $3E $01
 
 jr_020_6CA3:
-    ld   [wPaletteDataFlags], a                    ; $6CA3: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6CA3: $EA $D1 $DD
     ret                                           ; $6CA6: $C9
 
 ApplyFadeToWhite_GBC::
@@ -7118,7 +4796,7 @@ ApplyFadeToWhite_GBC::
 
 jr_020_6CB5:
     or   $80                                      ; $6CB5: $F6 $80
-    ld   [wPaletteDataFlags], a                    ; $6CB7: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6CB7: $EA $D1 $DD
     ld   a, [$C3CA]                               ; $6CBA: $FA $CA $C3
     and  $01                                      ; $6CBD: $E6 $01
     swap a                                        ; $6CBF: $CB $37
@@ -7131,7 +4809,7 @@ jr_020_6CB5:
     ld   a, $08                                   ; $6CCE: $3E $08
     ldh  [hScratchD], a                           ; $6CD0: $E0 $E4
     ld   a, $10                                   ; $6CD2: $3E $10
-    ldh  [$FFE5], a                               ; $6CD4: $E0 $E5
+    ldh  [hScratchE], a                           ; $6CD4: $E0 $E5
     ld   a, $20                                   ; $6CD6: $3E $20
     ldh  [hFreeWarpDataAddress], a                ; $6CD8: $E0 $E6
     ld   hl, $DC10                                ; $6CDA: $21 $10 $DC
@@ -7141,11 +4819,11 @@ jr_020_6CB5:
     cp   $03                                      ; $6CE4: $FE $03
     jr   z, jr_020_6CFA                           ; $6CE6: $28 $12
 
-    ld   a, [wPaletteDataFlags]                    ; $6CE8: $FA $D1 $DD
+    ld   a, [wPaletteDataFlags]                   ; $6CE8: $FA $D1 $DD
     push af                                       ; $6CEB: $F5
     call func_020_6A30                            ; $6CEC: $CD $30 $6A
     pop  af                                       ; $6CEF: $F1
-    ld   [wPaletteDataFlags], a                    ; $6CF0: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6CF0: $EA $D1 $DD
     ld   a, $01                                   ; $6CF3: $3E $01
     ld   [wPaletteUnknownE], a                    ; $6CF5: $EA $D5 $DD
     jr   jr_020_6D0D                              ; $6CF8: $18 $13
@@ -7156,11 +4834,11 @@ jr_020_6CFA:
     and  $03                                      ; $6CFE: $E6 $03
     jr   nz, jr_020_6D0D                          ; $6D00: $20 $0B
 
-    ld   a, [wPaletteDataFlags]                    ; $6D02: $FA $D1 $DD
+    ld   a, [wPaletteDataFlags]                   ; $6D02: $FA $D1 $DD
     push af                                       ; $6D05: $F5
     call func_020_6AF5                            ; $6D06: $CD $F5 $6A
     pop  af                                       ; $6D09: $F1
-    ld   [wPaletteDataFlags], a                    ; $6D0A: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6D0A: $EA $D1 $DD
 
 jr_020_6D0D:
     ret                                           ; $6D0D: $C9
@@ -7187,7 +4865,7 @@ jr_020_6D1E:
     ld   a, $01                                   ; $6D24: $3E $01
     ldh  [hScratchD], a                           ; $6D26: $E0 $E4
     ld   a, $02                                   ; $6D28: $3E $02
-    ldh  [$FFE5], a                               ; $6D2A: $E0 $E5
+    ldh  [hScratchE], a                           ; $6D2A: $E0 $E5
     ld   a, $04                                   ; $6D2C: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6D2E: $E0 $E6
     ld   hl, $DC30                                ; $6D30: $21 $30 $DC
@@ -7198,7 +4876,7 @@ jr_020_6D38:
     ld   a, $01                                   ; $6D38: $3E $01
     ldh  [hScratchD], a                           ; $6D3A: $E0 $E4
     ld   a, $02                                   ; $6D3C: $3E $02
-    ldh  [$FFE5], a                               ; $6D3E: $E0 $E5
+    ldh  [hScratchE], a                           ; $6D3E: $E0 $E5
     ld   a, $04                                   ; $6D40: $3E $04
     ldh  [hFreeWarpDataAddress], a                ; $6D42: $E0 $E6
     ld   hl, $DC10                                ; $6D44: $21 $10 $DC
@@ -7207,7 +4885,7 @@ jr_020_6D38:
     ld   a, $01                                   ; $6D4C: $3E $01
 
 jr_020_6D4E:
-    ld   [wPaletteDataFlags], a                    ; $6D4E: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6D4E: $EA $D1 $DD
 
 jr_020_6D51:
     ret                                           ; $6D51: $C9
@@ -7227,7 +4905,7 @@ jr_020_6D60:
     ld   a, $01                                   ; $6D63: $3E $01
 
 jr_020_6D65:
-    ld   [wPaletteDataFlags], a                    ; $6D65: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $6D65: $EA $D1 $DD
 
 jr_020_6D68:
     push hl                                       ; $6D68: $E5
@@ -7298,8 +4976,8 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DBD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DBF: $28 $59
 
-    ld   hl, $5090                                ; $6DC1: $21 $90 $50
-    jr   .jr_020_6E14                              ; $6DC4: $18 $4E
+    ld   hl, Data_020_5090                        ; $6DC1: $21 $90 $50
+    jr   .jr_020_6E14                             ; $6DC4: $18 $4E
 
 .jr_020_6DC6
     cp   $8C                                      ; $6DC6: $FE $8C
@@ -7309,8 +4987,8 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DCD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DCF: $28 $49
 
-    ld   hl, $51D0                                ; $6DD1: $21 $D0 $51
-    jr   .jr_020_6E14                              ; $6DD4: $18 $3E
+    ld   hl, Data_020_51D0                        ; $6DD1: $21 $D0 $51
+    jr   .jr_020_6E14                             ; $6DD4: $18 $3E
 
 .jr_020_6DD6
     cp   $79                                      ; $6DD6: $FE $79
@@ -7320,8 +4998,8 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DDD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DDF: $28 $39
 
-    ld   hl, $5180                                ; $6DE1: $21 $80 $51
-    jr   .jr_020_6E14                              ; $6DE4: $18 $2E
+    ld   hl, Data_020_5180                        ; $6DE1: $21 $80 $51
+    jr   .jr_020_6E14                             ; $6DE4: $18 $2E
 
 .jr_020_6DE6
     cp   $06                                      ; $6DE6: $FE $06
@@ -7331,7 +5009,7 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DED: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DEF: $28 $29
 
-    ld   hl, $5040                                ; $6DF1: $21 $40 $50
+    ld   hl, Data_020_5040                        ; $6DF1: $21 $40 $50
     jr   .jr_020_6E14                             ; $6DF4: $18 $1E
 
 .jr_020_6DF6
@@ -7342,7 +5020,7 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DFD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DFF: $28 $19
 
-    ld   hl, $50E0                                ; $6E01: $21 $E0 $50
+    ld   hl, Data_020_50E0                        ; $6E01: $21 $E0 $50
     jr   .jr_020_6E14                             ; $6E04: $18 $0E
 
 .jr_020_6E06
@@ -7353,7 +5031,7 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6E0D: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6E0F: $28 $09
 
-    ld   hl, $5130                                ; $6E11: $21 $30 $51
+    ld   hl, Data_020_5130                        ; $6E11: $21 $30 $51
 
 .jr_020_6E14
     ld   a, $27                                   ; $6E14: $3E $27
@@ -7411,7 +5089,7 @@ func_020_6E50::
     push hl                                       ; $6E50: $E5
     ld   c, [hl]                                  ; $6E51: $4E
     ld   b, $0E                                   ; $6E52: $06 $0E
-    ld   hl, $6E65                                ; $6E54: $21 $65 $6E
+    ld   hl, Data_020_6E65                        ; $6E54: $21 $65 $6E
 
 jr_020_6E57:
     ld   a, [hl+]                                 ; $6E57: $2A
@@ -7432,3306 +5110,345 @@ jr_020_6E63:
     pop  hl                                       ; $6E63: $E1
     ret                                           ; $6E64: $C9
 
-    inc  bc                                       ; $6E65: $03
-    inc  b                                        ; $6E66: $04
-    add  hl, bc                                   ; $6E67: $09
-    ld   e, [hl]                                  ; $6E68: $5E
-    sub  c                                        ; $6E69: $91
-    and  c                                        ; $6E6A: $A1
-    xor  d                                        ; $6E6B: $AA
-    call nz, $CCC6                                ; $6E6C: $C4 $C6 $CC
-    db   $db                                      ; $6E6F: $DB
-    pop  hl                                       ; $6E70: $E1
-    db   $e3                                      ; $6E71: $E3
-    db   $E8                                      ; $6E72: $E8
-
 ; Sprite table for overworld?
+Data_020_6E65::
+    db   $03, $04, $09, $5E, $91, $A1, $AA, $C4, $C6, $CC, $DB, $E1, $E3, $E8
+
 data_020_6E73::
-    db   $1C                                      ; $6E73: $1C
-    inc  e                                        ; $6E74: $1C
-    ld   a, $3C                                   ; $6E75: $3E $3C
-    ld   a, $3E                                   ; $6E77: $3E $3E
-    ld   a, $30                                   ; $6E79: $3E $30
-    rrca                                          ; $6E7B: $0F
-    ld   [hl], $36                                ; $6E7C: $36 $36
-    ld   a, [de]                                  ; $6E7E: $1A
-    rrca                                          ; $6E7F: $0F
-    inc  [hl]                                     ; $6E80: $34
-    rrca                                          ; $6E81: $0F
-    ld   a, $20                                   ; $6E82: $3E $20
-    jr   nz, @+$11                                ; $6E84: $20 $0F
-
-    jr   c, jr_020_6EB0                           ; $6E86: $38 $28
-
-    jr   z, jr_020_6EBC                           ; $6E88: $28 $32
-
-    ld   [hl-], a                                 ; $6E8A: $32
-    jr   nz, jr_020_6EAD                          ; $6E8B: $20 $20
-
-    jr   c, jr_020_6EC7                           ; $6E8D: $38 $38
-
-    jr   z, @+$2A                                 ; $6E8F: $28 $28
-
-    ld   [hl-], a                                 ; $6E91: $32
-    ld   [hl-], a                                 ; $6E92: $32
-    rrca                                          ; $6E93: $0F
-    ld   h, $0F                                   ; $6E94: $26 $0F
-    inc  h                                        ; $6E96: $24
-    rrca                                          ; $6E97: $0F
-    ld   e, $2A                                   ; $6E98: $1E $2A
-    rrca                                          ; $6E9A: $0F
-    ld   h, $26                                   ; $6E9B: $26 $26
-    ld   l, $2E                                   ; $6E9D: $2E $2E
-    rrca                                          ; $6E9F: $0F
-    ld   a, [hl+]                                 ; $6EA0: $2A
-    ld   a, [hl+]                                 ; $6EA1: $2A
-    ld   a, [hl+]                                 ; $6EA2: $2A
-    rrca                                          ; $6EA3: $0F
-    inc  h                                        ; $6EA4: $24
-    ld   l, $2E                                   ; $6EA5: $2E $2E
-    ld   a, [hl-]                                 ; $6EA7: $3A
-    rrca                                          ; $6EA8: $0F
-    ld   h, $2C                                   ; $6EA9: $26 $2C
-    ld   [hl+], a                                 ; $6EAB: $22
-    ld   [hl+], a                                 ; $6EAC: $22
-
-jr_020_6EAD:
-    ld   [hl+], a                                 ; $6EAD: $22
-    rrca                                          ; $6EAE: $0F
-    ld   a, [hl-]                                 ; $6EAF: $3A
-
-jr_020_6EB0:
-    ld   a, [hl-]                                 ; $6EB0: $3A
-    rrca                                          ; $6EB1: $0F
-    inc  l                                        ; $6EB2: $2C
-
 ; Sprites banks table for indoors?
+    db   $1C, $1C, $3E, $3C, $3E, $3E, $3E, $30, $0F, $36, $36, $1A, $0F, $34, $0F, $3E
+    db   $20, $20, $0F, $38, $28, $28, $32, $32, $20, $20, $38, $38, $28, $28, $32, $32
+    db   $0F, $26, $0F, $24, $0F, $1E, $2A, $0F, $26, $26, $2E, $2E, $0F, $2A, $2A, $2A
+    db   $0F, $24, $2E, $2E, $3A, $0F, $26, $2C, $22, $22, $22, $0F, $3A, $3A, $0F, $2C
+
 data_020_6EB3::
-    rst  $38                                      ; $6EB3: $FF
-    nop                                           ; $6EB4: $00
-    nop                                           ; $6EB5: $00
-    nop                                           ; $6EB6: $00
-    rst  $38                                      ; $6EB7: $FF
-    ld   bc, $500                                 ; $6EB8: $01 $00 $05
-    nop                                           ; $6EBB: $00
-
-jr_020_6EBC:
-    add  hl, bc                                   ; $6EBC: $09
-    nop                                           ; $6EBD: $00
-    nop                                           ; $6EBE: $00
-    dec  b                                        ; $6EBF: $05
-    dec  b                                        ; $6EC0: $05
-    dec  b                                        ; $6EC1: $05
-    rst  $38                                      ; $6EC2: $FF
-    nop                                           ; $6EC3: $00
-    nop                                           ; $6EC4: $00
-    rst  $38                                      ; $6EC5: $FF
-    rst  $38                                      ; $6EC6: $FF
-
-jr_020_6EC7:
-    ld   [bc], a                                  ; $6EC7: $02
-    ld   bc, $101                                 ; $6EC8: $01 $01 $01
-    rst  $38                                      ; $6ECB: $FF
-    rst  $38                                      ; $6ECC: $FF
-    rst  $38                                      ; $6ECD: $FF
-    rst  $38                                      ; $6ECE: $FF
-    rst  $38                                      ; $6ECF: $FF
-    rst  $38                                      ; $6ED0: $FF
-    rst  $38                                      ; $6ED1: $FF
-    rst  $38                                      ; $6ED2: $FF
-    rst  $38                                      ; $6ED3: $FF
-    rst  $38                                      ; $6ED4: $FF
-    rst  $38                                      ; $6ED5: $FF
-    rst  $38                                      ; $6ED6: $FF
-    rst  $38                                      ; $6ED7: $FF
-    nop                                           ; $6ED8: $00
-    rst  $38                                      ; $6ED9: $FF
-    nop                                           ; $6EDA: $00
-    rst  $38                                      ; $6EDB: $FF
-    nop                                           ; $6EDC: $00
-    rst  $38                                      ; $6EDD: $FF
-    rst  $38                                      ; $6EDE: $FF
-    ld   [bc], a                                  ; $6EDF: $02
-    nop                                           ; $6EE0: $00
-    rst  $38                                      ; $6EE1: $FF
-    ld   c, $FF                                   ; $6EE2: $0E $FF
-    rst  $38                                      ; $6EE4: $FF
-    rst  $38                                      ; $6EE5: $FF
-    rst  $38                                      ; $6EE6: $FF
-    rst  $38                                      ; $6EE7: $FF
-    rst  $38                                      ; $6EE8: $FF
-    ld   bc, $FFFF                                ; $6EE9: $01 $FF $FF
-    rst  $38                                      ; $6EEC: $FF
-    rst  $38                                      ; $6EED: $FF
-    rst  $38                                      ; $6EEE: $FF
-    rst  $38                                      ; $6EEF: $FF
-    rst  $38                                      ; $6EF0: $FF
-    rst  $38                                      ; $6EF1: $FF
-    rst  $38                                      ; $6EF2: $FF
-    ld   [bc], a                                  ; $6EF3: $02
-    ld   [bc], a                                  ; $6EF4: $02
-    rst  $38                                      ; $6EF5: $FF
-    ld   [bc], a                                  ; $6EF6: $02
-    ld   [bc], a                                  ; $6EF7: $02
-    add  hl, bc                                   ; $6EF8: $09
-    add  hl, bc                                   ; $6EF9: $09
-    rst  $38                                      ; $6EFA: $FF
-    ld   [bc], a                                  ; $6EFB: $02
-    ld   [bc], a                                  ; $6EFC: $02
-    add  hl, bc                                   ; $6EFD: $09
-    ld   [bc], a                                  ; $6EFE: $02
-    add  hl, bc                                   ; $6EFF: $09
-    add  hl, bc                                   ; $6F00: $09
-    add  hl, bc                                   ; $6F01: $09
-    add  hl, bc                                   ; $6F02: $09
-    add  hl, bc                                   ; $6F03: $09
-    rst  $38                                      ; $6F04: $FF
-    ld   bc, vBlankContinue.drawLinkSprite        ; $6F05: $01 $01 $05
-    nop                                           ; $6F08: $00
-    nop                                           ; $6F09: $00
-    nop                                           ; $6F0A: $00
-    nop                                           ; $6F0B: $00
-    ld   a, [bc]                                  ; $6F0C: $0A
-    ld   a, [bc]                                  ; $6F0D: $0A
-    ld   a, [bc]                                  ; $6F0E: $0A
-    ld   a, [bc]                                  ; $6F0F: $0A
-    nop                                           ; $6F10: $00
-    nop                                           ; $6F11: $00
-    nop                                           ; $6F12: $00
-    add  hl, bc                                   ; $6F13: $09
-    nop                                           ; $6F14: $00
-    nop                                           ; $6F15: $00
-    add  hl, bc                                   ; $6F16: $09
-    add  hl, bc                                   ; $6F17: $09
-    nop                                           ; $6F18: $00
-    nop                                           ; $6F19: $00
-    add  hl, bc                                   ; $6F1A: $09
-    add  hl, bc                                   ; $6F1B: $09
-    add  hl, bc                                   ; $6F1C: $09
-    add  hl, bc                                   ; $6F1D: $09
-    nop                                           ; $6F1E: $00
-    nop                                           ; $6F1F: $00
-    rst  $38                                      ; $6F20: $FF
-    ld   [bc], a                                  ; $6F21: $02
-    rst  $38                                      ; $6F22: $FF
-    add  hl, bc                                   ; $6F23: $09
-    nop                                           ; $6F24: $00
-    nop                                           ; $6F25: $00
-    rst  $38                                      ; $6F26: $FF
-    nop                                           ; $6F27: $00
-    nop                                           ; $6F28: $00
-    nop                                           ; $6F29: $00
-    rst  $38                                      ; $6F2A: $FF
-    rst  $38                                      ; $6F2B: $FF
-    nop                                           ; $6F2C: $00
-    ld   bc, $05                                  ; $6F2D: $01 $05 $00
-    nop                                           ; $6F30: $00
-    nop                                           ; $6F31: $00
-    nop                                           ; $6F32: $00
-    rst  $38                                      ; $6F33: $FF
-    dec  b                                        ; $6F34: $05
-    rst  $38                                      ; $6F35: $FF
-    rst  $38                                      ; $6F36: $FF
-    rst  $38                                      ; $6F37: $FF
-    ld   b, $07                                   ; $6F38: $06 $07
-    rlca                                          ; $6F3A: $07
-    rlca                                          ; $6F3B: $07
-    rst  $38                                      ; $6F3C: $FF
-    rst  $38                                      ; $6F3D: $FF
-    ld   b, $06                                   ; $6F3E: $06 $06
-    rst  $38                                      ; $6F40: $FF
-    rst  $38                                      ; $6F41: $FF
-    rst  $38                                      ; $6F42: $FF
-    add  hl, bc                                   ; $6F43: $09
-    rst  $38                                      ; $6F44: $FF
-    rst  $38                                      ; $6F45: $FF
-    rst  $38                                      ; $6F46: $FF
-    rlca                                          ; $6F47: $07
-    rst  $38                                      ; $6F48: $FF
-    rst  $38                                      ; $6F49: $FF
-    rlca                                          ; $6F4A: $07
-    rst  $38                                      ; $6F4B: $FF
-    rlca                                          ; $6F4C: $07
-    dec  b                                        ; $6F4D: $05
-    rst  $38                                      ; $6F4E: $FF
-    rst  $38                                      ; $6F4F: $FF
-    dec  b                                        ; $6F50: $05
-    dec  b                                        ; $6F51: $05
-    dec  b                                        ; $6F52: $05
-    rst  $38                                      ; $6F53: $FF
-    ld   bc, $FFFF                                ; $6F54: $01 $FF $FF
-    rst  $38                                      ; $6F57: $FF
-    rst  $38                                      ; $6F58: $FF
-    rst  $38                                      ; $6F59: $FF
-    rst  $38                                      ; $6F5A: $FF
-    rst  $38                                      ; $6F5B: $FF
-    rst  $38                                      ; $6F5C: $FF
-    rst  $38                                      ; $6F5D: $FF
-    rst  $38                                      ; $6F5E: $FF
-    add  hl, de                                   ; $6F5F: $19
-    rst  $38                                      ; $6F60: $FF
-    rst  $38                                      ; $6F61: $FF
-    rst  $38                                      ; $6F62: $FF
-    inc  bc                                       ; $6F63: $03
-    ld   c, $03                                   ; $6F64: $0E $03
-    ld   c, $FF                                   ; $6F66: $0E $FF
-    ld   c, $0E                                   ; $6F68: $0E $0E
-    ld   c, $0E                                   ; $6F6A: $0E $0E
-    ld   c, $0E                                   ; $6F6C: $0E $0E
-    rst  $38                                      ; $6F6E: $FF
-    ld   c, $0E                                   ; $6F6F: $0E $0E
-    rst  $38                                      ; $6F71: $FF
-    ld   c, $0E                                   ; $6F72: $0E $0E
-    ld   c, $0E                                   ; $6F74: $0E $0E
-    add  hl, bc                                   ; $6F76: $09
-    nop                                           ; $6F77: $00
-    ld   c, $09                                   ; $6F78: $0E $09
-    rst  $38                                      ; $6F7A: $FF
-    rst  $38                                      ; $6F7B: $FF
-    ld   c, $09                                   ; $6F7C: $0E $09
-    nop                                           ; $6F7E: $00
-    ld   c, $FF                                   ; $6F7F: $0E $FF
-    ld   [bc], a                                  ; $6F81: $02
-    ld   c, $0E                                   ; $6F82: $0E $0E
-    ld   c, $02                                   ; $6F84: $0E $02
-    rst  $38                                      ; $6F86: $FF
-    ld   bc, $101                                 ; $6F87: $01 $01 $01
-    add  hl, bc                                   ; $6F8A: $09
-    nop                                           ; $6F8B: $00
-    nop                                           ; $6F8C: $00
-    nop                                           ; $6F8D: $00
-    nop                                           ; $6F8E: $00
-    nop                                           ; $6F8F: $00
-    nop                                           ; $6F90: $00
-    nop                                           ; $6F91: $00
-    nop                                           ; $6F92: $00
-    rrca                                          ; $6F93: $0F
-    rrca                                          ; $6F94: $0F
-    rrca                                          ; $6F95: $0F
-    ld   [$C00], sp                               ; $6F96: $08 $00 $0C
-    inc  c                                        ; $6F99: $0C
-    inc  bc                                       ; $6F9A: $03
-    inc  c                                        ; $6F9B: $0C
-    inc  c                                        ; $6F9C: $0C
-    inc  c                                        ; $6F9D: $0C
-    nop                                           ; $6F9E: $00
-    nop                                           ; $6F9F: $00
-    nop                                           ; $6FA0: $00
-    inc  c                                        ; $6FA1: $0C
-    nop                                           ; $6FA2: $00
-    inc  bc                                       ; $6FA3: $03
-    inc  bc                                       ; $6FA4: $03
-    nop                                           ; $6FA5: $00
-    add  hl, de                                   ; $6FA6: $19
-    nop                                           ; $6FA7: $00
-    ld   [$030C], sp                              ; $6FA8: $08 $0C $03
-    inc  c                                        ; $6FAB: $0C
-    inc  c                                        ; $6FAC: $0C
-    ld   [$0C19], sp                              ; $6FAD: $08 $19 $0C
-    dec  b                                        ; $6FB0: $05
-    inc  c                                        ; $6FB1: $0C
-    nop                                           ; $6FB2: $00
-    nop                                           ; $6FB3: $00
-    inc  bc                                       ; $6FB4: $03
-    inc  bc                                       ; $6FB5: $03
-    inc  bc                                       ; $6FB6: $03
-    inc  bc                                       ; $6FB7: $03
-    inc  bc                                       ; $6FB8: $03
-    inc  bc                                       ; $6FB9: $03
-    inc  bc                                       ; $6FBA: $03
-    inc  bc                                       ; $6FBB: $03
-    inc  bc                                       ; $6FBC: $03
-    inc  bc                                       ; $6FBD: $03
-    inc  bc                                       ; $6FBE: $03
-    inc  bc                                       ; $6FBF: $03
-    rst  $38                                      ; $6FC0: $FF
-    db   $01, $FF, $03                            ; $6FC1: $01 $FF $03
-    inc  bc                                       ; $6FC4: $03
-    inc  bc                                       ; $6FC5: $03
-    rst  $38                                      ; $6FC6: $FF
-    inc  bc                                       ; $6FC7: $03
-    inc  bc                                       ; $6FC8: $03
-    rst  $38                                      ; $6FC9: $FF
-    dec  bc                                       ; $6FCA: $0B
-    rst  $38                                      ; $6FCB: $FF
-    inc  bc                                       ; $6FCC: $03
-    rst  $38                                      ; $6FCD: $FF
-    rst  $38                                      ; $6FCE: $FF
-    rst  $38                                      ; $6FCF: $FF
-    rlca                                          ; $6FD0: $07
-    rlca                                          ; $6FD1: $07
-    rst  $38                                      ; $6FD2: $FF
-    rst  $38                                      ; $6FD3: $FF
-    ld   b, $FF                                   ; $6FD4: $06 $FF
-    rst  $38                                      ; $6FD6: $FF
-    nop                                           ; $6FD7: $00
-    rst  $38                                      ; $6FD8: $FF
-    rst  $38                                      ; $6FD9: $FF
-    rst  $38                                      ; $6FDA: $FF
-    rst  $38                                      ; $6FDB: $FF
-    ld   c, $0E                                   ; $6FDC: $0E $0E
-    rst  $38                                      ; $6FDE: $FF
-    rst  $38                                      ; $6FDF: $FF
-    ld   c, $0E                                   ; $6FE0: $0E $0E
-    nop                                           ; $6FE2: $00
-    rst  $38                                      ; $6FE3: $FF
-    nop                                           ; $6FE4: $00
-    rst  $38                                      ; $6FE5: $FF
-    rst  $38                                      ; $6FE6: $FF
-    rst  $38                                      ; $6FE7: $FF
-    rst  $38                                      ; $6FE8: $FF
-    rst  $38                                      ; $6FE9: $FF
-    nop                                           ; $6FEA: $00
-    rst  $38                                      ; $6FEB: $FF
-    rla                                           ; $6FEC: $17
-    rla                                           ; $6FED: $17
-    rla                                           ; $6FEE: $17
-    rst  $38                                      ; $6FEF: $FF
-    inc  bc                                       ; $6FF0: $03
-    rst  $38                                      ; $6FF1: $FF
-    rst  $38                                      ; $6FF2: $FF
-    rst  $38                                      ; $6FF3: $FF
-    rst  $38                                      ; $6FF4: $FF
-    ld   a, [bc]                                  ; $6FF5: $0A
-    ld   a, [bc]                                  ; $6FF6: $0A
-    ld   a, [bc]                                  ; $6FF7: $0A
-    rst  $38                                      ; $6FF8: $FF
-    rst  $38                                      ; $6FF9: $FF
-    rst  $38                                      ; $6FFA: $FF
-    ld   a, [bc]                                  ; $6FFB: $0A
-    ld   a, [bc]                                  ; $6FFC: $0A
-    rst  $38                                      ; $6FFD: $FF
-    dec  bc                                       ; $6FFE: $0B
-    rst  $38                                      ; $6FFF: $FF
-    dec  c                                        ; $7000: $0D
-    rst  $38                                      ; $7001: $FF
-    rst  $38                                      ; $7002: $FF
-    ld   a, [bc]                                  ; $7003: $0A
-    ld   a, [bc]                                  ; $7004: $0A
-    rst  $38                                      ; $7005: $FF
-    nop                                           ; $7006: $00
-    rst  $38                                      ; $7007: $FF
-    rst  $38                                      ; $7008: $FF
-    rst  $38                                      ; $7009: $FF
-    rst  $38                                      ; $700A: $FF
-    rst  $38                                      ; $700B: $FF
-    rst  $38                                      ; $700C: $FF
-    rst  $38                                      ; $700D: $FF
-    rst  $38                                      ; $700E: $FF
-    add  hl, bc                                   ; $700F: $09
-    ld   bc, $00                                  ; $7010: $01 $00 $00
-    rst  $38                                      ; $7013: $FF
-    rst  $38                                      ; $7014: $FF
-    rst  $38                                      ; $7015: $FF
-    rst  $38                                      ; $7016: $FF
-    rst  $38                                      ; $7017: $FF
-    rst  $38                                      ; $7018: $FF
-    rst  $38                                      ; $7019: $FF
-    rst  $38                                      ; $701A: $FF
-    rst  $38                                      ; $701B: $FF
-    rst  $38                                      ; $701C: $FF
-    rst  $38                                      ; $701D: $FF
-    rst  $38                                      ; $701E: $FF
-    rst  $38                                      ; $701F: $FF
-    rst  $38                                      ; $7020: $FF
-    rst  $38                                      ; $7021: $FF
-    ld   bc, $FF0C                                ; $7022: $01 $0C $FF
-    rst  $38                                      ; $7025: $FF
-    rst  $38                                      ; $7026: $FF
-    ld   a, [de]                                  ; $7027: $1A
-    rst  $38                                      ; $7028: $FF
-    rst  $38                                      ; $7029: $FF
-    rst  $38                                      ; $702A: $FF
-    rst  $38                                      ; $702B: $FF
-    rst  $38                                      ; $702C: $FF
-    inc  c                                        ; $702D: $0C
-    inc  c                                        ; $702E: $0C
-    inc  c                                        ; $702F: $0C
-    inc  c                                        ; $7030: $0C
-    inc  c                                        ; $7031: $0C
-    db   $01, $0C, $0C                            ; $7032: $01 $0C $0C
-    inc  c                                        ; $7035: $0C
-    inc  c                                        ; $7036: $0C
-    inc  c                                        ; $7037: $0C
-    inc  c                                        ; $7038: $0C
-    inc  c                                        ; $7039: $0C
-    inc  c                                        ; $703A: $0C
-    inc  c                                        ; $703B: $0C
-    inc  c                                        ; $703C: $0C
-    inc  c                                        ; $703D: $0C
-    inc  c                                        ; $703E: $0C
-    dec  b                                        ; $703F: $05
-    dec  b                                        ; $7040: $05
-    dec  b                                        ; $7041: $05
-    ld   bc, $505                                 ; $7042: $01 $05 $05
-    dec  b                                        ; $7045: $05
-    dec  b                                        ; $7046: $05
-    dec  b                                        ; $7047: $05
-    dec  b                                        ; $7048: $05
-    dec  b                                        ; $7049: $05
-    dec  b                                        ; $704A: $05
-    dec  b                                        ; $704B: $05
-    inc  b                                        ; $704C: $04
-    dec  b                                        ; $704D: $05
-    inc  b                                        ; $704E: $04
-    inc  b                                        ; $704F: $04
-    inc  b                                        ; $7050: $04
-    nop                                           ; $7051: $00
-    ld   [$0404], sp                              ; $7052: $08 $04 $04
-    ld   [$0008], sp                              ; $7055: $08 $08 $00
-    ld   [$808], sp                          ; $7058: $08 $08 $08
-    ld   [$808], sp                          ; $705B: $08 $08 $08
-    dec  b                                        ; $705E: $05
-    dec  b                                        ; $705F: $05
-    db   $08, $0C, $0C                            ; $7060: $08 $0C $0C
-    db   $08, $04, $05                            ; $7063: $08 $04 $05
-    inc  c                                        ; $7066: $0C
-    inc  b                                        ; $7067: $04
-    ld   [$0505], sp                              ; $7068: $08 $05 $05
-    inc  c                                        ; $706B: $0C
-    inc  c                                        ; $706C: $0C
-    inc  c                                        ; $706D: $0C
-    inc  c                                        ; $706E: $0C
-    inc  c                                        ; $706F: $0C
-    dec  b                                        ; $7070: $05
-    inc  c                                        ; $7071: $0C
-    inc  c                                        ; $7072: $0C
-    inc  c                                        ; $7073: $0C
-    inc  c                                        ; $7074: $0C
-    inc  bc                                       ; $7075: $03
-    inc  bc                                       ; $7076: $03
-    nop                                           ; $7077: $00
-    inc  bc                                       ; $7078: $03
-    rst  $38                                      ; $7079: $FF
-    ld   [$C00], sp                               ; $707A: $08 $00 $0C
-    inc  c                                        ; $707D: $0C
-    inc  b                                        ; $707E: $04
-    inc  b                                        ; $707F: $04
-    inc  c                                        ; $7080: $0C
-    inc  c                                        ; $7081: $0C
-    inc  c                                        ; $7082: $0C
-    inc  c                                        ; $7083: $0C
-    inc  c                                        ; $7084: $0C
-    rst  $38                                      ; $7085: $FF
-    ld   bc, $100                                 ; $7086: $01 $00 $01
-    ld   bc, $08                                  ; $7089: $01 $08 $00
-    ld   [$808], sp                          ; $708C: $08 $08 $08
-    ld   [IsZero], sp                             ; $708F: $08 $08 $0C
-    inc  c                                        ; $7092: $0C
-    rst  $38                                      ; $7093: $FF
-    ld   [InterruptSerial], sp                    ; $7094: $08 $08 $04
-    inc  c                                        ; $7097: $0C
-    inc  c                                        ; $7098: $0C
-    inc  c                                        ; $7099: $0C
-    inc  c                                        ; $709A: $0C
-    nop                                           ; $709B: $00
-    db   $08, $0C, $0C                            ; $709C: $08 $0C $0C
-    inc  c                                        ; $709F: $0C
-    inc  c                                        ; $70A0: $0C
-    inc  c                                        ; $70A1: $0C
-    inc  c                                        ; $70A2: $0C
-    inc  c                                        ; $70A3: $0C
-    inc  c                                        ; $70A4: $0C
-    inc  c                                        ; $70A5: $0C
-    inc  c                                        ; $70A6: $0C
-    inc  c                                        ; $70A7: $0C
-    nop                                           ; $70A8: $00
-    inc  c                                        ; $70A9: $0C
-    inc  c                                        ; $70AA: $0C
-    nop                                           ; $70AB: $00
-    inc  c                                        ; $70AC: $0C
-    inc  c                                        ; $70AD: $0C
-    jr   jr_020_70B5                              ; $70AE: $18 $05
-
-    nop                                           ; $70B0: $00
-    db $08                                        ; $70B1: $08
-    nop                                           ; $70B2: $00
-
 ; Sprites banks table for color dungeon?
+    db   $FF, $00, $00, $00, $FF, $01, $00, $05, $00, $09, $00, $00, $05, $05, $05, $FF
+    db   $00, $00, $FF, $FF, $02, $01, $01, $01, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    db   $FF, $FF, $FF, $FF, $FF, $00, $FF, $00, $FF, $00, $FF, $FF, $02, $00, $FF, $0E
+    db   $FF, $FF, $FF, $FF, $FF, $FF, $01, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    db   $02, $02, $FF, $02, $02, $09, $09, $FF, $02, $02, $09, $02, $09, $09, $09, $09
+    db   $09, $FF, $01, $01, $05, $00, $00, $00, $00, $0A, $0A, $0A, $0A, $00, $00, $00
+    db   $09, $00, $00, $09, $09, $00, $00, $09, $09, $09, $09, $00, $00, $FF, $02, $FF
+    db   $09, $00, $00, $FF, $00, $00, $00, $FF, $FF, $00, $01, $05, $00, $00, $00, $00
+    db   $FF, $05, $FF, $FF, $FF, $06, $07, $07, $07, $FF, $FF, $06, $06, $FF, $FF, $FF
+    db   $09, $FF, $FF, $FF, $07, $FF, $FF, $07, $FF, $07, $05, $FF, $FF, $05, $05, $05
+    db   $FF, $01, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $19, $FF, $FF, $FF
+    db   $03, $0E, $03, $0E, $FF, $0E, $0E, $0E, $0E, $0E, $0E, $FF, $0E, $0E, $FF, $0E
+    db   $0E, $0E, $0E, $09, $00, $0E, $09, $FF, $FF, $0E, $09, $00, $0E, $FF, $02, $0E
+    db   $0E, $0E, $02, $FF, $01, $01, $01, $09, $00, $00, $00, $00, $00, $00, $00, $00
+    db   $0F, $0F, $0F, $08, $00, $0C, $0C, $03, $0C, $0C, $0C, $00, $00, $00, $0C, $00
+    db   $03, $03, $00, $19, $00, $08, $0C, $03, $0C, $0C, $08, $19, $0C, $05, $0C, $00
+    db   $00, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $03, $FF, $01, $FF
+    db   $03, $03, $03, $FF, $03, $03, $FF, $0B, $FF, $03, $FF, $FF, $FF, $07, $07, $FF
+    db   $FF, $06, $FF, $FF, $00, $FF, $FF, $FF, $FF, $0E, $0E, $FF, $FF, $0E, $0E, $00
+    db   $FF, $00, $FF, $FF, $FF, $FF, $FF, $00, $FF, $17, $17, $17, $FF, $03, $FF, $FF
+    db   $FF, $FF, $0A, $0A, $0A, $FF, $FF, $FF, $0A, $0A, $FF, $0B, $FF, $0D, $FF, $FF
+    db   $0A, $0A, $FF, $00, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $09, $01, $00, $00
+    db   $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $01
+    db   $0C, $FF, $FF, $FF, $1A, $FF, $FF, $FF, $FF, $FF, $0C, $0C, $0C, $0C, $0C, $01
+    db   $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $05, $05, $05, $01
+    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $04, $05, $04, $04, $04, $00, $08
+    db   $04, $04, $08, $08, $00, $08, $08, $08, $08, $08, $08, $05, $05, $08, $0C, $0C
+    db   $08, $04, $05, $0C, $04, $08, $05, $05, $0C, $0C, $0C, $0C, $0C, $05, $0C, $0C
+    db   $0C, $0C, $03, $03, $00, $03, $FF, $08, $00, $0C, $0C, $04, $04, $0C, $0C, $0C
+    db   $0C, $0C, $FF, $01, $00, $01, $01, $08, $00, $08, $08, $08, $08, $08, $0C, $0C
+    db   $FF, $08, $08, $04, $0C, $0C, $0C, $0C, $00, $08, $0C, $0C, $0C, $0C, $0C, $0C
+    db   $0C, $0C, $0C, $0C, $0C, $00, $0C, $0C, $00, $0C, $0C, $18, $05, $00, $08, $00
+
 data_020_70B3::
-    nop                                           ; $70B3: $00
-    nop                                           ; $70B4: $00
-
-jr_020_70B5:
-    dec  bc                                       ; $70B5: $0B
-    dec  bc                                       ; $70B6: $0B
-    nop                                           ; $70B7: $00
-    nop                                           ; $70B8: $00
-    dec  bc                                       ; $70B9: $0B
-    dec  bc                                       ; $70BA: $0B
-    dec  bc                                       ; $70BB: $0B
-    dec  bc                                       ; $70BC: $0B
-    dec  bc                                       ; $70BD: $0B
-    dec  bc                                       ; $70BE: $0B
-    dec  bc                                       ; $70BF: $0B
-    dec  bc                                       ; $70C0: $0B
-    dec  bc                                       ; $70C1: $0B
-    ld   c, $0B                                   ; $70C2: $0E $0B
-    dec  bc                                       ; $70C4: $0B
-    dec  bc                                       ; $70C5: $0B
-    jr   jr_020_70D3                              ; $70C6: $18 $0B
-
-    dec  bc                                       ; $70C8: $0B
-    rst  $38                                      ; $70C9: $FF
-    rst  $38                                      ; $70CA: $FF
-    rst  $38                                      ; $70CB: $FF
-    rst  $38                                      ; $70CC: $FF
-    rst  $38                                      ; $70CD: $FF
-    rst  $38                                      ; $70CE: $FF
-    rst  $38                                      ; $70CF: $FF
-    rst  $38                                      ; $70D0: $FF
-    rst  $38                                      ; $70D1: $FF
-    rst  $38                                      ; $70D2: $FF
-
-jr_020_70D3:
-    ld   h, l                                     ; $70D3: $65
-    ld   h, [hl]                                  ; $70D4: $66
-    ld   h, a                                     ; $70D5: $67
-    ld   l, b                                     ; $70D6: $68
-    ld   l, c                                     ; $70D7: $69
-    ld   l, l                                     ; $70D8: $6D
-    ld   b, l                                     ; $70D9: $45
-    ld   b, [hl]                                  ; $70DA: $46
-    ld   b, [hl]                                  ; $70DB: $46
-    nop                                           ; $70DC: $00
-    ld   c, [hl]                                  ; $70DD: $4E
-    ld   c, [hl]                                  ; $70DE: $4E
-    ld   c, [hl]                                  ; $70DF: $4E
-    ld   c, [hl]                                  ; $70E0: $4E
-    ld   b, h                                     ; $70E1: $44
-    ld   d, b                                     ; $70E2: $50
-    jr   nz, jr_020_7159                          ; $70E3: $20 $74
-
-    ld   l, e                                     ; $70E5: $6B
-    ld   l, h                                     ; $70E6: $6C
-    ld   l, l                                     ; $70E7: $6D
-    ld   l, l                                     ; $70E8: $6D
-    scf                                           ; $70E9: $37
-    scf                                           ; $70EA: $37
-    ld   c, a                                     ; $70EB: $4F
-    inc  e                                        ; $70EC: $1C
-    ld   c, a                                     ; $70ED: $4F
-    ld   c, [hl]                                  ; $70EE: $4E
-    ld   c, [hl]                                  ; $70EF: $4E
-    ld   c, [hl]                                  ; $70F0: $4E
-    ld   d, b                                     ; $70F1: $50
-    ld   c, [hl]                                  ; $70F2: $4E
-    ld   [bc], a                                  ; $70F3: $02
-    ld   a, l                                     ; $70F4: $7D
-    nop                                           ; $70F5: $00
-    ld   c, $48                                   ; $70F6: $0E $48
-    ld   b, a                                     ; $70F8: $47
-    scf                                           ; $70F9: $37
-    ld   b, $06                                   ; $70FA: $06 $06
-    nop                                           ; $70FC: $00
-    ld   d, c                                     ; $70FD: $51
-    ld   d, b                                     ; $70FE: $50
-    ld   d, b                                     ; $70FF: $50
-    ld   h, d                                     ; $7100: $62
-    ld   h, d                                     ; $7101: $62
-    ld   h, d                                     ; $7102: $62
-    ld   [bc], a                                  ; $7103: $02
-    ld   a, l                                     ; $7104: $7D
-    nop                                           ; $7105: $00
-    ld   c, $48                                   ; $7106: $0E $48
-    ld   b, a                                     ; $7108: $47
-    scf                                           ; $7109: $37
-    ld   b, $06                                   ; $710A: $06 $06
-    nop                                           ; $710C: $00
-    ld   d, c                                     ; $710D: $51
-    ld   d, c                                     ; $710E: $51
-    nop                                           ; $710F: $00
-    ld   h, d                                     ; $7110: $62
-    ld   h, d                                     ; $7111: $62
-    ld   h, d                                     ; $7112: $62
-    nop                                           ; $7113: $00
-    ld   b, c                                     ; $7114: $41
-    ld   a, [hl]                                  ; $7115: $7E
-    ld   a, [hl]                                  ; $7116: $7E
-    ld   a, d                                     ; $7117: $7A
-    ld   b, $28                                   ; $7118: $06 $28
-    jr   z, @+$13                                 ; $711A: $28 $11
-
-    ld   de, $6364                                ; $711C: $11 $64 $63
-    dec  l                                        ; $711F: $2D
-    dec  l                                        ; $7120: $2D
-    dec  l                                        ; $7121: $2D
-    dec  l                                        ; $7122: $2D
-    ld   bc, $742E                                ; $7123: $01 $2E $74
-    ld   a, a                                     ; $7126: $7F
-    jr   c, jr_020_7151                           ; $7127: $38 $28
-
-    jr   z, jr_020_7154                           ; $7129: $28 $29
-
-    ld   de, $1111                                ; $712B: $11 $11 $11
-    ld   h, h                                     ; $712E: $64
-    dec  l                                        ; $712F: $2D
-    dec  l                                        ; $7130: $2D
-    dec  l                                        ; $7131: $2D
-    dec  l                                        ; $7132: $2D
-    nop                                           ; $7133: $00
-    nop                                           ; $7134: $00
-    ld   a, [hl]                                  ; $7135: $7E
-    nop                                           ; $7136: $00
-    nop                                           ; $7137: $00
-    jr   z, jr_020_7163                           ; $7138: $28 $29
-
-    dec  b                                        ; $713A: $05
-    ld   e, b                                     ; $713B: $58
-    ld   e, c                                     ; $713C: $59
-    ld   e, d                                     ; $713D: $5A
-    nop                                           ; $713E: $00
-    dec  l                                        ; $713F: $2D
-    dec  l                                        ; $7140: $2D
-    dec  l                                        ; $7141: $2D
-    dec  l                                        ; $7142: $2D
-    ld   a, [hl]                                  ; $7143: $7E
-    ld   a, [hl]                                  ; $7144: $7E
-    ld   a, [hl]                                  ; $7145: $7E
-    ld   a, [hl]                                  ; $7146: $7E
-    ld   a, [hl-]                                 ; $7147: $3A
-    ld   a, [hl-]                                 ; $7148: $3A
-    jr   z, jr_020_7174                           ; $7149: $28 $29
-
-    ld   e, e                                     ; $714B: $5B
-    ld   e, h                                     ; $714C: $5C
-    nop                                           ; $714D: $00
-    ld   [de], a                                  ; $714E: $12
-    dec  l                                        ; $714F: $2D
-    dec  l                                        ; $7150: $2D
-
-jr_020_7151:
-    dec  l                                        ; $7151: $2D
-    dec  l                                        ; $7152: $2D
-    dec  a                                        ; $7153: $3D
-
-jr_020_7154:
-    inc  bc                                       ; $7154: $03
-    ld   a, [bc]                                  ; $7155: $0A
-    dec  bc                                       ; $7156: $0B
-    add  hl, sp                                   ; $7157: $39
-    ld   h, c                                     ; $7158: $61
-
-jr_020_7159:
-    jr   jr_020_7173                              ; $7159: $18 $18
-
-    ld   c, d                                     ; $715B: $4A
-    inc  l                                        ; $715C: $2C
-    ld   [hl], d                                  ; $715D: $72
-    nop                                           ; $715E: $00
-    ld   a, [hl+]                                 ; $715F: $2A
-    ld   l, a                                     ; $7160: $6F
-    dec  l                                        ; $7161: $2D
-    dec  l                                        ; $7162: $2D
-
-jr_020_7163:
-    nop                                           ; $7163: $00
-    nop                                           ; $7164: $00
-    ld   b, e                                     ; $7165: $43
-    ld   a, [bc]                                  ; $7166: $0A
-    ld   b, b                                     ; $7167: $40
-    ld   a, $00                                   ; $7168: $3E $00
-    nop                                           ; $716A: $00
-    ld   [hl], l                                  ; $716B: $75
-    ld   e, a                                     ; $716C: $5F
-    ld   [hl], e                                  ; $716D: $73
-    ld   [hl], b                                  ; $716E: $70
-    ld   a, [hl+]                                 ; $716F: $2A
-    ld   l, a                                     ; $7170: $6F
-    dec  l                                        ; $7171: $2D
-    dec  l                                        ; $7172: $2D
-
-jr_020_7173:
-    inc  de                                       ; $7173: $13
-
-jr_020_7174:
-    inc  c                                        ; $7174: $0C
-    ld   a, [bc]                                  ; $7175: $0A
-    nop                                           ; $7176: $00
-    dec  sp                                       ; $7177: $3B
-    nop                                           ; $7178: $00
-    dec  sp                                       ; $7179: $3B
-    dec  sp                                       ; $717A: $3B
-    ld   e, a                                     ; $717B: $5F
-    ld   d, h                                     ; $717C: $54
-    scf                                           ; $717D: $37
-    ld   [hl], c                                  ; $717E: $71
-    ld   l, [hl]                                  ; $717F: $6E
-    ld   l, [hl]                                  ; $7180: $6E
-    ld   l, [hl]                                  ; $7181: $6E
-    nop                                           ; $7182: $00
-    rrca                                          ; $7183: $0F
-    inc  c                                        ; $7184: $0C
-    add  hl, bc                                   ; $7185: $09
-    add  hl, bc                                   ; $7186: $09
-    nop                                           ; $7187: $00
-    dec  sp                                       ; $7188: $3B
-    dec  sp                                       ; $7189: $3B
-    dec  sp                                       ; $718A: $3B
-    ld   [hl], a                                  ; $718B: $77
-    ld   [hl], d                                  ; $718C: $72
-    ld   [hl], b                                  ; $718D: $70
-    ld   c, e                                     ; $718E: $4B
-    ld   l, [hl]                                  ; $718F: $6E
-    ld   l, [hl]                                  ; $7190: $6E
-    ld   l, [hl]                                  ; $7191: $6E
-    ld   l, [hl]                                  ; $7192: $6E
-    ld   [$0708], sp                              ; $7193: $08 $08 $07
-    rlca                                          ; $7196: $07
-    inc  a                                        ; $7197: $3C
-    inc  a                                        ; $7198: $3C
-    inc  a                                        ; $7199: $3C
-    nop                                           ; $719A: $00
-    ld   a, b                                     ; $719B: $78
-    inc  hl                                       ; $719C: $23
-    ld   h, $57                                   ; $719D: $26 $57
-    inc  [hl]                                     ; $719F: $34
-    dec  [hl]                                     ; $71A0: $35
-    dec  e                                        ; $71A1: $1D
-    ld   a, e                                     ; $71A2: $7B
-    rlca                                          ; $71A3: $07
-    rlca                                          ; $71A4: $07
-    rlca                                          ; $71A5: $07
-    rlca                                          ; $71A6: $07
-    inc  a                                        ; $71A7: $3C
-    inc  a                                        ; $71A8: $3C
-    inc  a                                        ; $71A9: $3C
-    ld   a, d                                     ; $71AA: $7A
-    ld   a, c                                     ; $71AB: $79
-    ld   h, $1F                                   ; $71AC: $26 $1F
-    ld   d, e                                     ; $71AE: $53
-    cpl                                           ; $71AF: $2F
-    inc  [hl]                                     ; $71B0: $34
-    nop                                           ; $71B1: $00
-    ld   c, l                                     ; $71B2: $4D
-    rlca                                          ; $71B3: $07
-    rlca                                          ; $71B4: $07
-    nop                                           ; $71B5: $00
-    ld   b, d                                     ; $71B6: $42
-    nop                                           ; $71B7: $00
-    sub  b                                        ; $71B8: $90
-    sub  c                                        ; $71B9: $91
-    ld   h, $26                                   ; $71BA: $26 $26
-    dec  h                                        ; $71BC: $25
-    ld   [hl], $33                                ; $71BD: $36 $33
-    ld   sp, $7C30                                ; $71BF: $31 $30 $7C
-    ld   c, l                                     ; $71C2: $4D
-    rlca                                          ; $71C3: $07
-    rlca                                          ; $71C4: $07
-    rlca                                          ; $71C5: $07
-    nop                                           ; $71C6: $00
-    sub  b                                        ; $71C7: $90
-    sub  b                                        ; $71C8: $90
-    sub  c                                        ; $71C9: $91
-    nop                                           ; $71CA: $00
-    rra                                           ; $71CB: $1F
-    ld   h, $1F                                   ; $71CC: $26 $1F
-    nop                                           ; $71CE: $00
-    jr   nc, jr_020_71F2                          ; $71CF: $30 $21
-
-    ld   c, h                                     ; $71D1: $4C
-    ld   a, h                                     ; $71D2: $7C
-    ld   bc, $0E03                                ; $71D3: $01 $03 $0E
-    rlca                                          ; $71D6: $07
-    rlca                                          ; $71D7: $07
-    nop                                           ; $71D8: $00
-    dec  b                                        ; $71D9: $05
-    ld   bc, $300                                 ; $71DA: $01 $00 $03
-    inc  e                                        ; $71DD: $1C
-    dec  b                                        ; $71DE: $05
-    ld   bc, $101                                 ; $71DF: $01 $01 $01
-    nop                                           ; $71E2: $00
-    nop                                           ; $71E3: $00
-    ld   [bc], a                                  ; $71E4: $02
-    nop                                           ; $71E5: $00
-    inc  bc                                       ; $71E6: $03
-    inc  bc                                       ; $71E7: $03
-    inc  bc                                       ; $71E8: $03
-    inc  bc                                       ; $71E9: $03
-    inc  bc                                       ; $71EA: $03
-    inc  sp                                       ; $71EB: $33
-    inc  sp                                       ; $71EC: $33
-    inc  sp                                       ; $71ED: $33
-    inc  sp                                       ; $71EE: $33
-    nop                                           ; $71EF: $00
-    nop                                           ; $71F0: $00
-    ld   h, e                                     ; $71F1: $63
-
-jr_020_71F2:
-    ld   h, e                                     ; $71F2: $63
-    inc  d                                        ; $71F3: $14
-    nop                                           ; $71F4: $00
-    inc  d                                        ; $71F5: $14
-    inc  d                                        ; $71F6: $14
-    nop                                           ; $71F7: $00
-    ld   b, $13                                   ; $71F8: $06 $13
-    ld   b, $13                                   ; $71FA: $06 $13
-    inc  de                                       ; $71FC: $13
-    ld   c, $08                                   ; $71FD: $0E $08
-    inc  de                                       ; $71FF: $13
-    ld   [$0706], sp                              ; $7200: $08 $06 $07
-    ld   b, $06                                   ; $7203: $06 $06
-    nop                                           ; $7205: $00
-    nop                                           ; $7206: $00
-    dec  de                                       ; $7207: $1B
-    dec  de                                       ; $7208: $1B
-    ld   b, $1B                                   ; $7209: $06 $1B
-    ld   b, $00                                   ; $720B: $06 $00
-    inc  sp                                       ; $720D: $33
-    inc  sp                                       ; $720E: $33
-    inc  sp                                       ; $720F: $33
-    inc  sp                                       ; $7210: $33
-    inc  sp                                       ; $7211: $33
-    inc  sp                                       ; $7212: $33
-    jr   @+$1A                                    ; $7213: $18 $18
-
-    jr   jr_020_722F                              ; $7215: $18 $18
-
-    nop                                           ; $7217: $00
-    dec  d                                        ; $7218: $15
-    nop                                           ; $7219: $00
-    nop                                           ; $721A: $00
-    rla                                           ; $721B: $17
-    nop                                           ; $721C: $00
-    rla                                           ; $721D: $17
-    rla                                           ; $721E: $17
-    ld   b, $17                                   ; $721F: $06 $17
-    ld   b, $00                                   ; $7221: $06 $00
-    jr   jr_020_7261                              ; $7223: $18 $3C
-
-    inc  a                                        ; $7225: $3C
-    inc  a                                        ; $7226: $3C
-    rla                                           ; $7227: $17
-    rla                                           ; $7228: $17
-    rla                                           ; $7229: $17
-    rla                                           ; $722A: $17
-    rla                                           ; $722B: $17
-    ld   c, $16                                   ; $722C: $0E $16
-    nop                                           ; $722E: $00
-
-jr_020_722F:
-    rla                                           ; $722F: $17
-    ld   bc, $3333                                ; $7230: $01 $33 $33
-    nop                                           ; $7233: $00
-    nop                                           ; $7234: $00
-    ld   c, $31                                   ; $7235: $0E $31
-    add  hl, de                                   ; $7237: $19
-    jr   nc, jr_020_726C                          ; $7238: $30 $32
-
-    ld   [hl-], a                                 ; $723A: $32
-    nop                                           ; $723B: $00
-    nop                                           ; $723C: $00
-    ld   [hl-], a                                 ; $723D: $32
-    ld   [hl-], a                                 ; $723E: $32
-    nop                                           ; $723F: $00
-    ld   [hl-], a                                 ; $7240: $32
-    jr   nc, jr_020_7273                          ; $7241: $30 $30
-
-    nop                                           ; $7243: $00
-    jr   nc, jr_020_7278                          ; $7244: $30 $32
-
-    nop                                           ; $7246: $00
-    jr   nc, jr_020_7279                          ; $7247: $30 $30
-
-    nop                                           ; $7249: $00
-    jr   nc, jr_020_727C                          ; $724A: $30 $30
-
-    jr   nc, jr_020_727E                          ; $724C: $30 $30
-
-    jr   nc, jr_020_7283                          ; $724E: $30 $33
-
-    inc  sp                                       ; $7250: $33
-    nop                                           ; $7251: $00
-    ld   bc, $1E1E                                ; $7252: $01 $1E $1E
-    rrca                                          ; $7255: $0F
-    ld   e, $1E                                   ; $7256: $1E $1E
-    dec  e                                        ; $7258: $1D
-    nop                                           ; $7259: $00
-    nop                                           ; $725A: $00
-    inc  h                                        ; $725B: $24
-    inc  h                                        ; $725C: $24
-    inc  h                                        ; $725D: $24
-    nop                                           ; $725E: $00
-    inc  h                                        ; $725F: $24
-    inc  h                                        ; $7260: $24
-
-jr_020_7261:
-    inc  h                                        ; $7261: $24
-    inc  h                                        ; $7262: $24
-    inc  h                                        ; $7263: $24
-    nop                                           ; $7264: $00
-    ld   e, $1F                                   ; $7265: $1E $1F
-    rra                                           ; $7267: $1F
-    ld   e, $1E                                   ; $7268: $1E $1E
-    inc  b                                        ; $726A: $04
-    inc  b                                        ; $726B: $04
-
-jr_020_726C:
-    nop                                           ; $726C: $00
-    nop                                           ; $726D: $00
-    inc  b                                        ; $726E: $04
-    inc  b                                        ; $726F: $04
-    inc  b                                        ; $7270: $04
-    inc  b                                        ; $7271: $04
-    inc  b                                        ; $7272: $04
-
-jr_020_7273:
-    inc  b                                        ; $7273: $04
-    inc  b                                        ; $7274: $04
-    inc  sp                                       ; $7275: $33
-    inc  sp                                       ; $7276: $33
-    inc  sp                                       ; $7277: $33
-
-jr_020_7278:
-    inc  sp                                       ; $7278: $33
-
-jr_020_7279:
-    inc  sp                                       ; $7279: $33
-    inc  sp                                       ; $727A: $33
-    inc  sp                                       ; $727B: $33
-
-jr_020_727C:
-    inc  sp                                       ; $727C: $33
-    ld   h, h                                     ; $727D: $64
-
-jr_020_727E:
-    ld   h, h                                     ; $727E: $64
-    add  b                                        ; $727F: $80
-    nop                                           ; $7280: $00
-    nop                                           ; $7281: $00
-    nop                                           ; $7282: $00
-
-jr_020_7283:
-    jr   z, jr_020_72AD                           ; $7283: $28 $28
-
-    jr   z, jr_020_72AF                           ; $7285: $28 $28
-
-    ld   h, c                                     ; $7287: $61
-    rrca                                          ; $7288: $0F
-    ld   h, c                                     ; $7289: $61
-    nop                                           ; $728A: $00
-    nop                                           ; $728B: $00
-    jr   z, jr_020_72B6                           ; $728C: $28 $28
-
-    nop                                           ; $728E: $00
-    dec  h                                        ; $728F: $25
-    ld   h, $61                                   ; $7290: $26 $61
-    add  hl, hl                                   ; $7292: $29
-    daa                                           ; $7293: $27
-    nop                                           ; $7294: $00
-    jr   z, jr_020_72F8                           ; $7295: $28 $61
-
-    nop                                           ; $7297: $00
-    ld   h, $00                                   ; $7298: $26 $00
-    add  hl, hl                                   ; $729A: $29
-    ld   a, [hl+]                                 ; $729B: $2A
-    nop                                           ; $729C: $00
-    nop                                           ; $729D: $00
-    ld   h, d                                     ; $729E: $62
-    nop                                           ; $729F: $00
-    ld   h, c                                     ; $72A0: $61
-    nop                                           ; $72A1: $00
-    daa                                           ; $72A2: $27
-    ld   h, c                                     ; $72A3: $61
-    ld   h, c                                     ; $72A4: $61
-    daa                                           ; $72A5: $27
-    daa                                           ; $72A6: $27
-    daa                                           ; $72A7: $27
-    daa                                           ; $72A8: $27
-    nop                                           ; $72A9: $00
-    ld   h, c                                     ; $72AA: $61
-    ld   h, e                                     ; $72AB: $63
-    ld   h, e                                     ; $72AC: $63
-
-jr_020_72AD:
-    inc  sp                                       ; $72AD: $33
-    inc  sp                                       ; $72AE: $33
-
-jr_020_72AF:
-    inc  sp                                       ; $72AF: $33
-    inc  sp                                       ; $72B0: $33
-    nop                                           ; $72B1: $00
-    nop                                           ; $72B2: $00
-    ld   b, h                                     ; $72B3: $44
-    ld   b, h                                     ; $72B4: $44
-    ld   b, h                                     ; $72B5: $44
-
-jr_020_72B6:
-    nop                                           ; $72B6: $00
-    ld   c, d                                     ; $72B7: $4A
-    ld   h, a                                     ; $72B8: $67
-    ld   h, a                                     ; $72B9: $67
-    nop                                           ; $72BA: $00
-    ld   a, a                                     ; $72BB: $7F
-    nop                                           ; $72BC: $00
-    nop                                           ; $72BD: $00
-    inc  sp                                       ; $72BE: $33
-    inc  sp                                       ; $72BF: $33
-    nop                                           ; $72C0: $00
-    ld   l, [hl]                                  ; $72C1: $6E
-    ld   a, [de]                                  ; $72C2: $1A
-    ld   h, a                                     ; $72C3: $67
-    ld   h, a                                     ; $72C4: $67
-    nop                                           ; $72C5: $00
-    add  b                                        ; $72C6: $80
-    ld   c, d                                     ; $72C7: $4A
-    ld   a, [hl]                                  ; $72C8: $7E
-    ld   h, a                                     ; $72C9: $67
-    nop                                           ; $72CA: $00
-    ld   a, a                                     ; $72CB: $7F
-    ld   a, a                                     ; $72CC: $7F
-    dec  a                                        ; $72CD: $3D
-    add  b                                        ; $72CE: $80
-    stop                                          ; $72CF: $10 $00
-    ld   l, [hl]                                  ; $72D1: $6E
-    ld   a, [de]                                  ; $72D2: $1A
-    nop                                           ; $72D3: $00
-    nop                                           ; $72D4: $00
-    ccf                                           ; $72D5: $3F
-    inc  l                                        ; $72D6: $2C
-    inc  l                                        ; $72D7: $2C
-    ld   e, [hl]                                  ; $72D8: $5E
-    inc  [hl]                                     ; $72D9: $34
-    add  hl, sp                                   ; $72DA: $39
-    nop                                           ; $72DB: $00
-    ld   e, a                                     ; $72DC: $5F
-    ld   h, b                                     ; $72DD: $60
-    ld   a, $39                                   ; $72DE: $3E $39
-    dec  hl                                       ; $72E0: $2B
-    dec  hl                                       ; $72E1: $2B
-    nop                                           ; $72E2: $00
-    add  hl, sp                                   ; $72E3: $39
-    dec  l                                        ; $72E4: $2D
-    dec  l                                        ; $72E5: $2D
-    dec  l                                        ; $72E6: $2D
-    dec  l                                        ; $72E7: $2D
-    dec  l                                        ; $72E8: $2D
-    dec  l                                        ; $72E9: $2D
-    ld   l, $2D                                   ; $72EA: $2E $2D
-    dec  l                                        ; $72EC: $2D
-    dec  l                                        ; $72ED: $2D
-    ld   l, $00                                   ; $72EE: $2E $00
-    dec  l                                        ; $72F0: $2D
-    dec  l                                        ; $72F1: $2D
-    nop                                           ; $72F2: $00
-    ld   [hl], $00                                ; $72F3: $36 $00
-    dec  [hl]                                     ; $72F5: $35
-    rrca                                          ; $72F6: $0F
-    scf                                           ; $72F7: $37
-
-jr_020_72F8:
-    dec  [hl]                                     ; $72F8: $35
-    dec  [hl]                                     ; $72F9: $35
-    nop                                           ; $72FA: $00
-    scf                                           ; $72FB: $37
-    nop                                           ; $72FC: $00
-    jr   c, jr_020_7334                           ; $72FD: $38 $35
-
-    rrca                                          ; $72FF: $0F
-    dec  [hl]                                     ; $7300: $35
-    jr   c, jr_020_7304                           ; $7301: $38 $01
-
-    rrca                                          ; $7303: $0F
-
-jr_020_7304:
-    ld   e, h                                     ; $7304: $5C
-    ld   d, [hl]                                  ; $7305: $56
-    nop                                           ; $7306: $00
-    ld   d, b                                     ; $7307: $50
-    ld   e, h                                     ; $7308: $5C
-    nop                                           ; $7309: $00
-    ld   d, c                                     ; $730A: $51
-    ld   d, [hl]                                  ; $730B: $56
-    ld   e, b                                     ; $730C: $58
-    ld   e, e                                     ; $730D: $5B
-    ld   e, e                                     ; $730E: $5B
-    nop                                           ; $730F: $00
-    ld   d, h                                     ; $7310: $54
-    nop                                           ; $7311: $00
-    ld   d, c                                     ; $7312: $51
-    ld   e, d                                     ; $7313: $5A
-    nop                                           ; $7314: $00
-    ld   e, c                                     ; $7315: $59
-    ld   e, c                                     ; $7316: $59
-    nop                                           ; $7317: $00
-    ld   d, a                                     ; $7318: $57
-    ld   e, d                                     ; $7319: $5A
-    ld   e, c                                     ; $731A: $59
-    ld   e, c                                     ; $731B: $59
-    nop                                           ; $731C: $00
-    ld   e, h                                     ; $731D: $5C
-    ld   e, h                                     ; $731E: $5C
-    ld   d, d                                     ; $731F: $52
-    nop                                           ; $7320: $00
-    ld   d, l                                     ; $7321: $55
-    nop                                           ; $7322: $00
-    ld   e, h                                     ; $7323: $5C
-    ld   e, h                                     ; $7324: $5C
-    nop                                           ; $7325: $00
-    ld   d, e                                     ; $7326: $53
-    ld   d, d                                     ; $7327: $52
-    ld   d, d                                     ; $7328: $52
-    nop                                           ; $7329: $00
-    ld   e, e                                     ; $732A: $5B
-    nop                                           ; $732B: $00
-    ld   e, h                                     ; $732C: $5C
-    nop                                           ; $732D: $00
-    ld   d, e                                     ; $732E: $53
-    ld   d, d                                     ; $732F: $52
-    ld   e, e                                     ; $7330: $5B
-    ld   e, d                                     ; $7331: $5A
-    ld   d, e                                     ; $7332: $53
-    inc  sp                                       ; $7333: $33
-
-jr_020_7334:
-    inc  sp                                       ; $7334: $33
-    inc  sp                                       ; $7335: $33
-    inc  sp                                       ; $7336: $33
-    inc  sp                                       ; $7337: $33
-    inc  sp                                       ; $7338: $33
-    inc  sp                                       ; $7339: $33
-    inc  sp                                       ; $733A: $33
-    inc  sp                                       ; $733B: $33
-    inc  sp                                       ; $733C: $33
-    inc  sp                                       ; $733D: $33
-    inc  sp                                       ; $733E: $33
-    ld   bc, $101                                 ; $733F: $01 $01 $01
-    dec  a                                        ; $7342: $3D
-    ld   bc, $101                                 ; $7343: $01 $01 $01
-    ld   bc, Init                                 ; $7346: $01 $6F $01
-    ld   bc, $101                                 ; $7349: $01 $01 $01
-    ld   bc, $101                                 ; $734C: $01 $01 $01
-    ld   bc, $101                                 ; $734F: $01 $01 $01
-    dec  a                                        ; $7352: $3D
-    ld   h, [hl]                                  ; $7353: $66
-    ld   h, [hl]                                  ; $7354: $66
-    ld   h, [hl]                                  ; $7355: $66
-    ld   bc, $6601                                ; $7356: $01 $01 $66
-    ld   h, [hl]                                  ; $7359: $66
-    ld   h, [hl]                                  ; $735A: $66
-    ld   h, l                                     ; $735B: $65
-    ld   h, l                                     ; $735C: $65
-    ld   h, l                                     ; $735D: $65
-    ld   h, l                                     ; $735E: $65
-    ld   h, [hl]                                  ; $735F: $66
-    ld   h, [hl]                                  ; $7360: $66
-    ld   h, l                                     ; $7361: $65
-    dec  a                                        ; $7362: $3D
-    ld   h, l                                     ; $7363: $65
-    ld   h, l                                     ; $7364: $65
-    ld   h, l                                     ; $7365: $65
-    ld   h, l                                     ; $7366: $65
-    ld   h, [hl]                                  ; $7367: $66
-    ld   h, [hl]                                  ; $7368: $66
-    ld   h, [hl]                                  ; $7369: $66
-    dec  c                                        ; $736A: $0D
-    dec  c                                        ; $736B: $0D
-    add  hl, bc                                   ; $736C: $09
-    ld   h, l                                     ; $736D: $65
-    add  hl, bc                                   ; $736E: $09
-    add  hl, bc                                   ; $736F: $09
-    add  hl, bc                                   ; $7370: $09
-    nop                                           ; $7371: $00
-    ld   c, c                                     ; $7372: $49
-    db   $10                                      ; $7373: $10
-    ld   de, $2F20                                ; $7374: $11 $20 $2F
-    ld   bc, $A0A                                 ; $7377: $01 $0A $0A
-    dec  bc                                       ; $737A: $0B
-    inc  c                                        ; $737B: $0C
-    add  hl, bc                                   ; $737C: $09
-    ld   c, e                                     ; $737D: $4B
-    ld   h, l                                     ; $737E: $65
-    ld   h, l                                     ; $737F: $65
-    ld   c, h                                     ; $7380: $4C
-    ld   h, l                                     ; $7381: $65
-    ld   h, l                                     ; $7382: $65
-    db   $10                                      ; $7383: $10
-    ld   [de], a                                  ; $7384: $12
-    dec  bc                                       ; $7385: $0B
-    ld   h, l                                     ; $7386: $65
-    add  hl, bc                                   ; $7387: $09
-    ld   bc, $6565                                ; $7388: $01 $65 $65
-    ld   h, l                                     ; $738B: $65
-    ld   h, l                                     ; $738C: $65
-    ld   h, l                                     ; $738D: $65
-    ld   h, l                                     ; $738E: $65
-    ld   h, l                                     ; $738F: $65
-    ld   h, l                                     ; $7390: $65
-    dec  c                                        ; $7391: $0D
-    dec  c                                        ; $7392: $0D
-    nop                                           ; $7393: $00
-    nop                                           ; $7394: $00
-    ld   hl, $2121                                ; $7395: $21 $21 $21
-    ld   hl, $2221                                ; $7398: $21 $21 $22
-    ld   h, [hl]                                  ; $739B: $66
-    ld   h, l                                     ; $739C: $65
-    ld   h, l                                     ; $739D: $65
-    add  hl, bc                                   ; $739E: $09
-    add  hl, bc                                   ; $739F: $09
-    ld   h, [hl]                                  ; $73A0: $66
-    dec  c                                        ; $73A1: $0D
-    dec  c                                        ; $73A2: $0D
-    ld   h, a                                     ; $73A3: $67
-    ld   h, a                                     ; $73A4: $67
-    ld   hl, $2121                                ; $73A5: $21 $21 $21
-    ld   hl, $4021                                ; $73A8: $21 $21 $40
-    ld   h, [hl]                                  ; $73AB: $66
-    ld   b, c                                     ; $73AC: $41
-    ld   a, l                                     ; $73AD: $7D
-    ld   c, l                                     ; $73AE: $4D
-    ld   c, l                                     ; $73AF: $4D
-    ld   b, [hl]                                  ; $73B0: $46
-    ld   h, [hl]                                  ; $73B1: $66
-    ld   h, [hl]                                  ; $73B2: $66
-    ld   a, [hl-]                                 ; $73B3: $3A
-    ld   c, [hl]                                  ; $73B4: $4E
-    ld   a, [hl-]                                 ; $73B5: $3A
-    add  hl, bc                                   ; $73B6: $09
-    ld   h, [hl]                                  ; $73B7: $66
-    ld   h, [hl]                                  ; $73B8: $66
-    ld   h, l                                     ; $73B9: $65
-    ld   h, l                                     ; $73BA: $65
-    dec  sp                                       ; $73BB: $3B
-    ld   b, a                                     ; $73BC: $47
-    ld   h, l                                     ; $73BD: $65
-    ld   h, l                                     ; $73BE: $65
-    ld   h, l                                     ; $73BF: $65
-    ld   h, l                                     ; $73C0: $65
-    ld   h, l                                     ; $73C1: $65
-    ld   h, l                                     ; $73C2: $65
-    ld   a, [hl-]                                 ; $73C3: $3A
-    ld   h, a                                     ; $73C4: $67
-    ld   h, a                                     ; $73C5: $67
-    ld   h, a                                     ; $73C6: $67
-    ld   h, [hl]                                  ; $73C7: $66
-    ld   a, h                                     ; $73C8: $7C
-    ld   h, l                                     ; $73C9: $65
-    ld   h, l                                     ; $73CA: $65
-    dec  sp                                       ; $73CB: $3B
-    ld   h, a                                     ; $73CC: $67
-    ld   h, a                                     ; $73CD: $67
-    ld   b, e                                     ; $73CE: $43
-    ld   bc, $4845                                ; $73CF: $01 $45 $48
-    nop                                           ; $73D2: $00
-    inc  b                                        ; $73D3: $04
-    inc  b                                        ; $73D4: $04
-    inc  b                                        ; $73D5: $04
-    inc  b                                        ; $73D6: $04
-    inc  b                                        ; $73D7: $04
-    inc  b                                        ; $73D8: $04
-    inc  b                                        ; $73D9: $04
-    inc  b                                        ; $73DA: $04
-    inc  b                                        ; $73DB: $04
-    inc  b                                        ; $73DC: $04
-    inc  b                                        ; $73DD: $04
-    inc  b                                        ; $73DE: $04
-    inc  b                                        ; $73DF: $04
-    inc  b                                        ; $73E0: $04
-    inc  b                                        ; $73E1: $04
-    inc  b                                        ; $73E2: $04
-    inc  b                                        ; $73E3: $04
-    inc  b                                        ; $73E4: $04
-    inc  b                                        ; $73E5: $04
-    inc  b                                        ; $73E6: $04
-    inc  b                                        ; $73E7: $04
-    inc  b                                        ; $73E8: $04
-    inc  b                                        ; $73E9: $04
-    inc  b                                        ; $73EA: $04
-    inc  b                                        ; $73EB: $04
-    inc  b                                        ; $73EC: $04
-    inc  b                                        ; $73ED: $04
-    inc  b                                        ; $73EE: $04
-    inc  b                                        ; $73EF: $04
-    inc  b                                        ; $73F0: $04
-    inc  b                                        ; $73F1: $04
-    inc  b                                        ; $73F2: $04
-    and  h                                        ; $73F3: $A4
-    rst  $38                                      ; $73F4: $FF
-    rst  $38                                      ; $73F5: $FF
-    rst  $38                                      ; $73F6: $FF
-    and  h                                        ; $73F7: $A4
-    adc  [hl]                                     ; $73F8: $8E
-    ld   a, h                                     ; $73F9: $7C
-    ret  z                                        ; $73FA: $C8
-
-    and  h                                        ; $73FB: $A4
-    ld   c, d                                     ; $73FC: $4A
-    ld   a, h                                     ; $73FD: $7C
-    sub  e                                        ; $73FE: $93
-    and  h                                        ; $73FF: $A4
-    push hl                                       ; $7400: $E5
-    rst  $38                                      ; $7401: $FF
-    ld   c, [hl]                                  ; $7402: $4E
-    and  h                                        ; $7403: $A4
-    sub  c                                        ; $7404: $91
-    add  e                                        ; $7405: $83
-    and  d                                        ; $7406: $A2
-    and  h                                        ; $7407: $A4
-    ld   b, d                                     ; $7408: $42
-    adc  d                                        ; $7409: $8A
-    rst  $38                                      ; $740A: $FF
-    and  h                                        ; $740B: $A4
-    ld   b, d                                     ; $740C: $42
-    add  e                                        ; $740D: $83
-    and  d                                        ; $740E: $A2
-    and  h                                        ; $740F: $A4
-    add  c                                        ; $7410: $81
-    db   $e3                                      ; $7411: $E3
-    and  d                                        ; $7412: $A2
-    and  h                                        ; $7413: $A4
-    push hl                                       ; $7414: $E5
-    db   $e3                                      ; $7415: $E3
-    rst  $38                                      ; $7416: $FF
-    and  h                                        ; $7417: $A4
-    push hl                                       ; $7418: $E5
-    ld   b, e                                     ; $7419: $43
-    rst  $20                                      ; $741A: $E7
-    and  h                                        ; $741B: $A4
-    push hl                                       ; $741C: $E5
-    and  $FF                                      ; $741D: $E6 $FF
-    and  h                                        ; $741F: $A4
-    push hl                                       ; $7420: $E5
-    and  $E7                                      ; $7421: $E6 $E7
-    and  h                                        ; $7423: $A4
-    push hl                                       ; $7424: $E5
-    ld   b, e                                     ; $7425: $43
-    and  h                                        ; $7426: $A4
-    and  h                                        ; $7427: $A4
-    adc  [hl]                                     ; $7428: $8E
-    add  e                                        ; $7429: $83
-    and  h                                        ; $742A: $A4
-    and  h                                        ; $742B: $A4
-    ld   c, d                                     ; $742C: $4A
-    add  e                                        ; $742D: $83
-    ld   b, b                                     ; $742E: $40
-    and  h                                        ; $742F: $A4
-    push hl                                       ; $7430: $E5
-    ld   c, h                                     ; $7431: $4C
-    rst  $20                                      ; $7432: $E7
-    and  h                                        ; $7433: $A4
-    ld   c, l                                     ; $7434: $4D
-    add  e                                        ; $7435: $83
-    rst  $38                                      ; $7436: $FF
-    and  h                                        ; $7437: $A4
-    ld   b, d                                     ; $7438: $42
-    sub  d                                        ; $7439: $92
-    ld   e, d                                     ; $743A: $5A
-    and  h                                        ; $743B: $A4
-    ld   h, c                                     ; $743C: $61
-    sub  d                                        ; $743D: $92
-    ld   h, a                                     ; $743E: $67
-    and  h                                        ; $743F: $A4
-    push hl                                       ; $7440: $E5
-    rst  $38                                      ; $7441: $FF
-    rst  $38                                      ; $7442: $FF
-    and  h                                        ; $7443: $A4
-    db   $e3                                      ; $7444: $E3
-    adc  e                                        ; $7445: $8B
-    rst  $38                                      ; $7446: $FF
-    and  h                                        ; $7447: $A4
-    db   $e3                                      ; $7448: $E3
-    add  e                                        ; $7449: $83
-    db   $76                                      ; $744A: $76
-    and  h                                        ; $744B: $A4
-    add  c                                        ; $744C: $81
-    ld   a, c                                     ; $744D: $79
-    db   $76                                      ; $744E: $76
-    and  h                                        ; $744F: $A4
-    ld   h, c                                     ; $7450: $61
-    adc  e                                        ; $7451: $8B
-    rst  $38                                      ; $7452: $FF
-    and  h                                        ; $7453: $A4
-    ld   l, h                                     ; $7454: $6C
-    adc  e                                        ; $7455: $8B
-    ld   l, e                                     ; $7456: $6B
-    and  h                                        ; $7457: $A4
-    rst  $38                                      ; $7458: $FF
-    adc  e                                        ; $7459: $8B
-    rst  $38                                      ; $745A: $FF
-    and  h                                        ; $745B: $A4
-    db   $e3                                      ; $745C: $E3
-    adc  e                                        ; $745D: $8B
-    and  d                                        ; $745E: $A2
-    and  h                                        ; $745F: $A4
-    push hl                                       ; $7460: $E5
-    rst  $38                                      ; $7461: $FF
-    rst  $38                                      ; $7462: $FF
-    and  h                                        ; $7463: $A4
-    ld   c, d                                     ; $7464: $4A
-    adc  a                                        ; $7465: $8F
-    ld   l, l                                     ; $7466: $6D
-    and  h                                        ; $7467: $A4
-    add  c                                        ; $7468: $81
-    ld   l, [hl]                                  ; $7469: $6E
-    ld   d, d                                     ; $746A: $52
-    and  h                                        ; $746B: $A4
-    ld   c, l                                     ; $746C: $4D
-    ld   b, e                                     ; $746D: $43
-    and  d                                        ; $746E: $A2
-    and  h                                        ; $746F: $A4
-    ld   h, c                                     ; $7470: $61
-    ld   a, c                                     ; $7471: $79
-    db   $76                                      ; $7472: $76
-    and  h                                        ; $7473: $A4
-    add  $7C                                      ; $7474: $C6 $7C
-    ld   b, c                                     ; $7476: $41
-    and  h                                        ; $7477: $A4
-    push bc                                       ; $7478: $C5
-    ld   l, [hl]                                  ; $7479: $6E
-    ld   l, a                                     ; $747A: $6F
-    and  h                                        ; $747B: $A4
-    push bc                                       ; $747C: $C5
-    rst  $38                                      ; $747D: $FF
-    ld   [hl], b                                  ; $747E: $70
-    and  h                                        ; $747F: $A4
-    ld   h, c                                     ; $7480: $61
-    rst  $38                                      ; $7481: $FF
-    ld   [hl], c                                  ; $7482: $71
-    and  h                                        ; $7483: $A4
-    ld   h, c                                     ; $7484: $61
-    rst  $38                                      ; $7485: $FF
-    ld   [hl], d                                  ; $7486: $72
-    and  h                                        ; $7487: $A4
-    ld   h, c                                     ; $7488: $61
-    ld   a, c                                     ; $7489: $79
-    ld   [hl], e                                  ; $748A: $73
-    and  h                                        ; $748B: $A4
-    ld   h, c                                     ; $748C: $61
-    ld   a, c                                     ; $748D: $79
-    rst  $38                                      ; $748E: $FF
-    and  h                                        ; $748F: $A4
-    db   $e3                                      ; $7490: $E3
-    ld   a, c                                     ; $7491: $79
-    db   $76                                      ; $7492: $76
-    and  h                                        ; $7493: $A4
-    ld   b, d                                     ; $7494: $42
-    add  d                                        ; $7495: $82
-    and  d                                        ; $7496: $A2
-    and  h                                        ; $7497: $A4
-    ld   b, d                                     ; $7498: $42
-    rst  $38                                      ; $7499: $FF
-    add  d                                        ; $749A: $82
-    and  h                                        ; $749B: $A4
-    ld   h, c                                     ; $749C: $61
-    ld   a, b                                     ; $749D: $78
-    and  d                                        ; $749E: $A2
-    and  h                                        ; $749F: $A4
-    add  c                                        ; $74A0: $81
-    adc  a                                        ; $74A1: $8F
-    rst  $20                                      ; $74A2: $E7
-    and  h                                        ; $74A3: $A4
-    db   $e3                                      ; $74A4: $E3
-    adc  e                                        ; $74A5: $8B
-    adc  h                                        ; $74A6: $8C
-    and  h                                        ; $74A7: $A4
-    add  a                                        ; $74A8: $87
-    ld   a, b                                     ; $74A9: $78
-    and  d                                        ; $74AA: $A2
-    and  h                                        ; $74AB: $A4
-    ld   l, h                                     ; $74AC: $6C
-    ld   a, h                                     ; $74AD: $7C
-    ret  z                                        ; $74AE: $C8
-
-    and  h                                        ; $74AF: $A4
-    call nz, $CFE6                                ; $74B0: $C4 $E6 $CF
-    and  h                                        ; $74B3: $A4
-    rst  $38                                      ; $74B4: $FF
-    ld   l, [hl]                                  ; $74B5: $6E
-    ld   l, a                                     ; $74B6: $6F
-    and  h                                        ; $74B7: $A4
-    rst  $38                                      ; $74B8: $FF
-    and  $CF                                      ; $74B9: $E6 $CF
-    and  h                                        ; $74BB: $A4
-    rst  $38                                      ; $74BC: $FF
-    add  e                                        ; $74BD: $83
-    rst  $38                                      ; $74BE: $FF
-    and  h                                        ; $74BF: $A4
-    db   $C4, $79, $76                            ; $74C0: $C4 $79 $76
-    and  h                                        ; $74C3: $A4
-    call nz, $FFFF                                ; $74C4: $C4 $FF $FF
-    and  h                                        ; $74C7: $A4
-    call nz, $CF43                                ; $74C8: $C4 $43 $CF
-    and  h                                        ; $74CB: $A4
-    rst  $38                                      ; $74CC: $FF
-    ld   a, c                                     ; $74CD: $79
-    rst  $38                                      ; $74CE: $FF
-    and  h                                        ; $74CF: $A4
-    rst  $38                                      ; $74D0: $FF
-    rst  $38                                      ; $74D1: $FF
-    and  d                                        ; $74D2: $A2
-    and  h                                        ; $74D3: $A4
-    ld   h, c                                     ; $74D4: $61
-    ld   a, c                                     ; $74D5: $79
-    and  d                                        ; $74D6: $A2
-    and  h                                        ; $74D7: $A4
-    push hl                                       ; $74D8: $E5
-    rst  $38                                      ; $74D9: $FF
-    rst  $38                                      ; $74DA: $FF
-    and  h                                        ; $74DB: $A4
-    push hl                                       ; $74DC: $E5
-    add  d                                        ; $74DD: $82
-    and  d                                        ; $74DE: $A2
-    and  h                                        ; $74DF: $A4
-    db   $e3                                      ; $74E0: $E3
-    add  e                                        ; $74E1: $83
-    and  d                                        ; $74E2: $A2
-    and  h                                        ; $74E3: $A4
-    sub  c                                        ; $74E4: $91
-    add  e                                        ; $74E5: $83
-    db   $76                                      ; $74E6: $76
-    and  h                                        ; $74E7: $A4
-    rst  $38                                      ; $74E8: $FF
-    ld   a, h                                     ; $74E9: $7C
-    and  d                                        ; $74EA: $A2
-    and  h                                        ; $74EB: $A4
-    db   $e3                                      ; $74EC: $E3
-    adc  e                                        ; $74ED: $8B
-    and  d                                        ; $74EE: $A2
-    and  h                                        ; $74EF: $A4
-    db   $e3                                      ; $74F0: $E3
-    rst  $38                                      ; $74F1: $FF
-    db   $76                                      ; $74F2: $76
-    and  h                                        ; $74F3: $A4
-    rst  $38                                      ; $74F4: $FF
-    and  $A2                                      ; $74F5: $E6 $A2
-    and  h                                        ; $74F7: $A4
-    rst  $38                                      ; $74F8: $FF
-    ld   a, h                                     ; $74F9: $7C
-    and  d                                        ; $74FA: $A2
-    and  h                                        ; $74FB: $A4
-    add  c                                        ; $74FC: $81
-    db   $e3                                      ; $74FD: $E3
-    call nc, $E5A4                                ; $74FE: $D4 $A4 $E5
-    and  $DC                                      ; $7501: $E6 $DC
-    and  h                                        ; $7503: $A4
-    add  a                                        ; $7504: $87
-    sub  $D7                                      ; $7505: $D6 $D7
-    and  h                                        ; $7507: $A4
-    ld   d, b                                     ; $7508: $50
-    ld   d, c                                     ; $7509: $51
-    and  d                                        ; $750A: $A2
-    and  h                                        ; $750B: $A4
-    ld   l, h                                     ; $750C: $6C
-    adc  a                                        ; $750D: $8F
-    and  d                                        ; $750E: $A2
-    and  h                                        ; $750F: $A4
-    ld   c, d                                     ; $7510: $4A
-    add  e                                        ; $7511: $83
-    and  d                                        ; $7512: $A2
-    and  h                                        ; $7513: $A4
-    ld   c, d                                     ; $7514: $4A
-    add  e                                        ; $7515: $83
-    rst  $38                                      ; $7516: $FF
-    and  h                                        ; $7517: $A4
-    add  c                                        ; $7518: $81
-    adc  a                                        ; $7519: $8F
-    db   $76                                      ; $751A: $76
-    and  h                                        ; $751B: $A4
-    db   $e3                                      ; $751C: $E3
-    adc  e                                        ; $751D: $8B
-    rst  $38                                      ; $751E: $FF
-    and  h                                        ; $751F: $A4
-    rst  $38                                      ; $7520: $FF
-    ld   a, c                                     ; $7521: $79
-    rst  $38                                      ; $7522: $FF
-    and  h                                        ; $7523: $A4
-    add  c                                        ; $7524: $81
-    ld   l, [hl]                                  ; $7525: $6E
-    rst  $38                                      ; $7526: $FF
-    and  h                                        ; $7527: $A4
-    add  c                                        ; $7528: $81
-    ld   l, [hl]                                  ; $7529: $6E
-    adc  h                                        ; $752A: $8C
-    and  h                                        ; $752B: $A4
-    add  a                                        ; $752C: $87
-    adc  a                                        ; $752D: $8F
-    db   $76                                      ; $752E: $76
-    and  h                                        ; $752F: $A4
-    rst  $38                                      ; $7530: $FF
-    adc  a                                        ; $7531: $8F
-    rst  $38                                      ; $7532: $FF
-    and  h                                        ; $7533: $A4
-    add  a                                        ; $7534: $87
-    rst  $38                                      ; $7535: $FF
-    rst  $38                                      ; $7536: $FF
-    and  h                                        ; $7537: $A4
-    add  a                                        ; $7538: $87
-    add  e                                        ; $7539: $83
-    db   $76                                      ; $753A: $76
-    and  h                                        ; $753B: $A4
-    add  a                                        ; $753C: $87
-    add  e                                        ; $753D: $83
-    sbc  b                                        ; $753E: $98
-    and  h                                        ; $753F: $A4
-    rst  $38                                      ; $7540: $FF
-    ld   a, c                                     ; $7541: $79
-    db   $76                                      ; $7542: $76
-    and  h                                        ; $7543: $A4
-    db   $e3                                      ; $7544: $E3
-    add  e                                        ; $7545: $83
-    and  d                                        ; $7546: $A2
-    and  h                                        ; $7547: $A4
-    ld   h, c                                     ; $7548: $61
-    ld   a, c                                     ; $7549: $79
-    sub  e                                        ; $754A: $93
-    and  h                                        ; $754B: $A4
-    rst  $38                                      ; $754C: $FF
-    ld   a, c                                     ; $754D: $79
-    sub  e                                        ; $754E: $93
-    and  h                                        ; $754F: $A4
-    call nz, $FF79                                ; $7550: $C4 $79 $FF
-    and  h                                        ; $7553: $A4
-    rst  $38                                      ; $7554: $FF
-    sub  d                                        ; $7555: $92
-    ld   e, d                                     ; $7556: $5A
-    and  h                                        ; $7557: $A4
-    ld   h, c                                     ; $7558: $61
-    sub  d                                        ; $7559: $92
-    adc  h                                        ; $755A: $8C
-    and  h                                        ; $755B: $A4
-    ld   b, d                                     ; $755C: $42
-    sub  d                                        ; $755D: $92
-    rst  $38                                      ; $755E: $FF
-    and  h                                        ; $755F: $A4
-    ld   h, c                                     ; $7560: $61
-    rst  $38                                      ; $7561: $FF
-    rst  $38                                      ; $7562: $FF
-    and  h                                        ; $7563: $A4
-    ld   h, c                                     ; $7564: $61
-    rst  $38                                      ; $7565: $FF
-    adc  h                                        ; $7566: $8C
-    and  h                                        ; $7567: $A4
-    rst  $38                                      ; $7568: $FF
-    add  e                                        ; $7569: $83
-    sub  e                                        ; $756A: $93
-    and  h                                        ; $756B: $A4
-    ld   h, c                                     ; $756C: $61
-    adc  e                                        ; $756D: $8B
-    rst  $38                                      ; $756E: $FF
-    and  h                                        ; $756F: $A4
-    db   $e3                                      ; $7570: $E3
-    rst  $38                                      ; $7571: $FF
-    rst  $38                                      ; $7572: $FF
-    and  h                                        ; $7573: $A4
-    ld   h, c                                     ; $7574: $61
-    rst  $38                                      ; $7575: $FF
-    ld   h, a                                     ; $7576: $67
-    and  h                                        ; $7577: $A4
-    rst  $38                                      ; $7578: $FF
-    rst  $38                                      ; $7579: $FF
-    and  d                                        ; $757A: $A2
-    and  h                                        ; $757B: $A4
-    add  a                                        ; $757C: $87
-    db   $e3                                      ; $757D: $E3
-    sub  e                                        ; $757E: $93
-    and  h                                        ; $757F: $A4
-    add  a                                        ; $7580: $87
-    rst  $38                                      ; $7581: $FF
-    rst  $38                                      ; $7582: $FF
-    and  h                                        ; $7583: $A4
-    add  a                                        ; $7584: $87
-    sub  d                                        ; $7585: $92
-    ld   e, d                                     ; $7586: $5A
-    and  h                                        ; $7587: $A4
-    add  $9C                                      ; $7588: $C6 $9C
-    sbc  b                                        ; $758A: $98
-    and  h                                        ; $758B: $A4
-    add  $9C                                      ; $758C: $C6 $9C
-    rst  $38                                      ; $758E: $FF
-    and  h                                        ; $758F: $A4
-    rst  $38                                      ; $7590: $FF
-    sbc  h                                        ; $7591: $9C
-    sub  e                                        ; $7592: $93
-    and  h                                        ; $7593: $A4
-    add  c                                        ; $7594: $81
-    rst  $38                                      ; $7595: $FF
-    rst  $38                                      ; $7596: $FF
-    and  h                                        ; $7597: $A4
-    rst  $38                                      ; $7598: $FF
-    sbc  h                                        ; $7599: $9C
-    sbc  b                                        ; $759A: $98
-    and  h                                        ; $759B: $A4
-    rst  $38                                      ; $759C: $FF
-    add  e                                        ; $759D: $83
-    rst  $38                                      ; $759E: $FF
-    and  h                                        ; $759F: $A4
-    add  c                                        ; $75A0: $81
-    rst  $38                                      ; $75A1: $FF
-    sub  e                                        ; $75A2: $93
-    and  h                                        ; $75A3: $A4
-    add  c                                        ; $75A4: $81
-    sbc  h                                        ; $75A5: $9C
-    sub  e                                        ; $75A6: $93
-    and  h                                        ; $75A7: $A4
-    ld   b, h                                     ; $75A8: $44
-    sbc  h                                        ; $75A9: $9C
-    sbc  b                                        ; $75AA: $98
-    and  h                                        ; $75AB: $A4
-    sub  c                                        ; $75AC: $91
-    ld   a, b                                     ; $75AD: $78
-    and  d                                        ; $75AE: $A2
-    and  h                                        ; $75AF: $A4
-    rst  $38                                      ; $75B0: $FF
-    ld   a, b                                     ; $75B1: $78
-    and  d                                        ; $75B2: $A2
-    and  h                                        ; $75B3: $A4
-    ld   h, c                                     ; $75B4: $61
-    rst  $38                                      ; $75B5: $FF
-    and  d                                        ; $75B6: $A2
-    and  h                                        ; $75B7: $A4
-    rst  $38                                      ; $75B8: $FF
-    ld   a, c                                     ; $75B9: $79
-    and  d                                        ; $75BA: $A2
-    and  h                                        ; $75BB: $A4
-    ld   h, c                                     ; $75BC: $61
-    add  e                                        ; $75BD: $83
-    rst  $38                                      ; $75BE: $FF
-    and  h                                        ; $75BF: $A4
-    rst  $38                                      ; $75C0: $FF
-    add  e                                        ; $75C1: $83
-    and  d                                        ; $75C2: $A2
-    and  h                                        ; $75C3: $A4
-    rst  $38                                      ; $75C4: $FF
-    ld   a, h                                     ; $75C5: $7C
-    rst  $38                                      ; $75C6: $FF
-    and  h                                        ; $75C7: $A4
-    db   $e3                                      ; $75C8: $E3
-    adc  e                                        ; $75C9: $8B
-    and  d                                        ; $75CA: $A2
-    and  h                                        ; $75CB: $A4
-    db   $e3                                      ; $75CC: $E3
-    add  e                                        ; $75CD: $83
-    rst  $38                                      ; $75CE: $FF
-    and  h                                        ; $75CF: $A4
-    rst  $38                                      ; $75D0: $FF
-    add  e                                        ; $75D1: $83
-    db   $76                                      ; $75D2: $76
-    and  h                                        ; $75D3: $A4
-    ld   h, c                                     ; $75D4: $61
-    add  e                                        ; $75D5: $83
-    rst  $38                                      ; $75D6: $FF
-    and  h                                        ; $75D7: $A4
-    ld   h, c                                     ; $75D8: $61
-    rst  $38                                      ; $75D9: $FF
-    db   $76                                      ; $75DA: $76
-    and  h                                        ; $75DB: $A4
-    ld   h, c                                     ; $75DC: $61
-    rst  $38                                      ; $75DD: $FF
-    and  d                                        ; $75DE: $A2
-    and  h                                        ; $75DF: $A4
-    add  c                                        ; $75E0: $81
-    ld   l, [hl]                                  ; $75E1: $6E
-    rst  $38                                      ; $75E2: $FF
-    and  h                                        ; $75E3: $A4
-    add  c                                        ; $75E4: $81
-    rst  $38                                      ; $75E5: $FF
-    adc  h                                        ; $75E6: $8C
-    and  h                                        ; $75E7: $A4
-    ld   c, d                                     ; $75E8: $4A
-    ld   a, h                                     ; $75E9: $7C
-    sub  e                                        ; $75EA: $93
-    and  h                                        ; $75EB: $A4
-    sub  c                                        ; $75EC: $91
-    ld   a, h                                     ; $75ED: $7C
-    and  d                                        ; $75EE: $A2
-    and  h                                        ; $75EF: $A4
-    ld   c, l                                     ; $75F0: $4D
-    ld   a, h                                     ; $75F1: $7C
-    rst  $38                                      ; $75F2: $FF
-    and  h                                        ; $75F3: $A4
-    rst  $38                                      ; $75F4: $FF
-    rst  $38                                      ; $75F5: $FF
-    rst  $38                                      ; $75F6: $FF
-    and  h                                        ; $75F7: $A4
-    rst  $38                                      ; $75F8: $FF
-    rst  $38                                      ; $75F9: $FF
-    rst  $38                                      ; $75FA: $FF
-    and  h                                        ; $75FB: $A4
-    rst  $38                                      ; $75FC: $FF
-    rst  $38                                      ; $75FD: $FF
-    rst  $38                                      ; $75FE: $FF
-    and  h                                        ; $75FF: $A4
-    rst  $38                                      ; $7600: $FF
-    rst  $38                                      ; $7601: $FF
-    rst  $38                                      ; $7602: $FF
-    and  h                                        ; $7603: $A4
-    rst  $38                                      ; $7604: $FF
-    rst  $38                                      ; $7605: $FF
-    rst  $38                                      ; $7606: $FF
-    and  h                                        ; $7607: $A4
-    rst  $38                                      ; $7608: $FF
-    rst  $38                                      ; $7609: $FF
-    rst  $38                                      ; $760A: $FF
-    and  h                                        ; $760B: $A4
-    rst  $38                                      ; $760C: $FF
-    rst  $38                                      ; $760D: $FF
-    rst  $38                                      ; $760E: $FF
-    and  h                                        ; $760F: $A4
-    rst  $38                                      ; $7610: $FF
-    rst  $38                                      ; $7611: $FF
-    rst  $38                                      ; $7612: $FF
-    and  h                                        ; $7613: $A4
-    rst  $38                                      ; $7614: $FF
-    rst  $38                                      ; $7615: $FF
-    rst  $38                                      ; $7616: $FF
-    and  h                                        ; $7617: $A4
-    rst  $38                                      ; $7618: $FF
-    rst  $38                                      ; $7619: $FF
-    rst  $38                                      ; $761A: $FF
-    and  h                                        ; $761B: $A4
-    rst  $38                                      ; $761C: $FF
-    rst  $38                                      ; $761D: $FF
-    rst  $38                                      ; $761E: $FF
-    and  h                                        ; $761F: $A4
-    rst  $38                                      ; $7620: $FF
-    rst  $38                                      ; $7621: $FF
-    rst  $38                                      ; $7622: $FF
-    and  h                                        ; $7623: $A4
-    rst  $38                                      ; $7624: $FF
-    rst  $38                                      ; $7625: $FF
-    rst  $38                                      ; $7626: $FF
-    and  h                                        ; $7627: $A4
-    rst  $38                                      ; $7628: $FF
-    rst  $38                                      ; $7629: $FF
-    rst  $38                                      ; $762A: $FF
-    and  h                                        ; $762B: $A4
-    rst  $38                                      ; $762C: $FF
-    rst  $38                                      ; $762D: $FF
-    rst  $38                                      ; $762E: $FF
-    and  h                                        ; $762F: $A4
-    rst  $38                                      ; $7630: $FF
-    rst  $38                                      ; $7631: $FF
-    rst  $38                                      ; $7632: $FF
-    and  h                                        ; $7633: $A4
-    add  c                                        ; $7634: $81
-    adc  a                                        ; $7635: $8F
-    call nc, $81A4                                ; $7636: $D4 $A4 $81
-    ld   a, c                                     ; $7639: $79
-    rst  $38                                      ; $763A: $FF
-    rst  $38                                      ; $763B: $FF
-    rst  $38                                      ; $763C: $FF
-    rst  $38                                      ; $763D: $FF
-    rst  $38                                      ; $763E: $FF
-    sub  b                                        ; $763F: $90
-    sub  c                                        ; $7640: $91
-    sub  d                                        ; $7641: $92
-    sbc  b                                        ; $7642: $98
-    sub  b                                        ; $7643: $90
-    sub  c                                        ; $7644: $91
-    xor  e                                        ; $7645: $AB
-    rst  $38                                      ; $7646: $FF
-    sub  b                                        ; $7647: $90
-    sub  c                                        ; $7648: $91
-    sub  d                                        ; $7649: $92
-    sub  e                                        ; $764A: $93
-    sub  b                                        ; $764B: $90
-    sub  c                                        ; $764C: $91
-    sub  h                                        ; $764D: $94
-    sbc  a                                        ; $764E: $9F
-    sub  b                                        ; $764F: $90
-    sub  c                                        ; $7650: $91
-    or   b                                        ; $7651: $B0
-    or   c                                        ; $7652: $B1
-    sub  b                                        ; $7653: $90
-    sub  c                                        ; $7654: $91
-    sbc  h                                        ; $7655: $9C
-    sub  e                                        ; $7656: $93
-    sub  b                                        ; $7657: $90
-    sub  c                                        ; $7658: $91
-    sub  a                                        ; $7659: $97
-    sbc  e                                        ; $765A: $9B
-    rst  $38                                      ; $765B: $FF
-    rst  $38                                      ; $765C: $FF
-    or   [hl]                                     ; $765D: $B6
-    or   a                                        ; $765E: $B7
-    and  h                                        ; $765F: $A4
-    ld   c, h                                     ; $7660: $4C
-    ld   c, c                                     ; $7661: $49
-    ld   b, [hl]                                  ; $7662: $46
-    and  h                                        ; $7663: $A4
-    rst  $38                                      ; $7664: $FF
-    ld   b, l                                     ; $7665: $45
-    ld   l, l                                     ; $7666: $6D
-    and  h                                        ; $7667: $A4
-    rst  $38                                      ; $7668: $FF
-    ld   b, a                                     ; $7669: $47
-    ld   c, b                                     ; $766A: $48
-    and  h                                        ; $766B: $A4
-    rst  $38                                      ; $766C: $FF
-    ld   c, h                                     ; $766D: $4C
-    ld   c, e                                     ; $766E: $4B
-    sub  b                                        ; $766F: $90
-    sub  c                                        ; $7670: $91
-    sub  [hl]                                     ; $7671: $96
-    rst  $38                                      ; $7672: $FF
-    rst  $38                                      ; $7673: $FF
-    rst  $38                                      ; $7674: $FF
-    ld   c, a                                     ; $7675: $4F
-    ld   d, b                                     ; $7676: $50
-    rst  $38                                      ; $7677: $FF
-    rst  $38                                      ; $7678: $FF
-    ld   c, a                                     ; $7679: $4F
-    ld   d, c                                     ; $767A: $51
-    and  h                                        ; $767B: $A4
-    add  a                                        ; $767C: $87
-    add  h                                        ; $767D: $84
-    adc  c                                        ; $767E: $89
-    and  h                                        ; $767F: $A4
-    rst  $38                                      ; $7680: $FF
-    adc  b                                        ; $7681: $88
-    rst  $00                                      ; $7682: $C7
-    and  b                                        ; $7683: $A0
-    and  c                                        ; $7684: $A1
-    add  h                                        ; $7685: $84
-    add  e                                        ; $7686: $83
-    sub  b                                        ; $7687: $90
-    sub  c                                        ; $7688: $91
-    ld   d, h                                     ; $7689: $54
-    and  [hl]                                     ; $768A: $A6
-    sub  b                                        ; $768B: $90
-    sub  c                                        ; $768C: $91
-    sub  a                                        ; $768D: $97
-    sub  e                                        ; $768E: $93
-    sub  b                                        ; $768F: $90
-    sub  c                                        ; $7690: $91
-    xor  d                                        ; $7691: $AA
-    rst  $38                                      ; $7692: $FF
-    sub  b                                        ; $7693: $90
-    sub  c                                        ; $7694: $91
-    or   h                                        ; $7695: $B4
-    or   l                                        ; $7696: $B5
-    sub  b                                        ; $7697: $90
-    sub  c                                        ; $7698: $91
-    sbc  h                                        ; $7699: $9C
-    sbc  [hl]                                     ; $769A: $9E
-    sub  b                                        ; $769B: $90
-    sub  c                                        ; $769C: $91
-    sbc  h                                        ; $769D: $9C
-    sbc  l                                        ; $769E: $9D
-    ld   l, b                                     ; $769F: $68
-    sub  c                                        ; $76A0: $91
-    ld   d, [hl]                                  ; $76A1: $56
-    ld   h, b                                     ; $76A2: $60
-    xor  h                                        ; $76A3: $AC
-    xor  l                                        ; $76A4: $AD
-    xor  [hl]                                     ; $76A5: $AE
-    xor  a                                        ; $76A6: $AF
-    sub  b                                        ; $76A7: $90
-    sub  c                                        ; $76A8: $91
-    ld   e, b                                     ; $76A9: $58
-    sbc  e                                        ; $76AA: $9B
-    sub  b                                        ; $76AB: $90
-    sub  c                                        ; $76AC: $91
-    and  [hl]                                     ; $76AD: $A6
-    ld   e, c                                     ; $76AE: $59
-    rst  $38                                      ; $76AF: $FF
-    rst  $38                                      ; $76B0: $FF
-    cp   b                                        ; $76B1: $B8
-    cp   c                                        ; $76B2: $B9
-    sub  b                                        ; $76B3: $90
-    sub  c                                        ; $76B4: $91
-    ld   h, d                                     ; $76B5: $62
-    ld   h, e                                     ; $76B6: $63
-    sub  b                                        ; $76B7: $90
-    sub  c                                        ; $76B8: $91
-    xor  b                                        ; $76B9: $A8
-    sbc  a                                        ; $76BA: $9F
-    and  h                                        ; $76BB: $A4
-    rst  $18                                      ; $76BC: $DF
-    and  e                                        ; $76BD: $A3
-    rst  $38                                      ; $76BE: $FF
-    sub  b                                        ; $76BF: $90
-    sub  c                                        ; $76C0: $91
-    sub  d                                        ; $76C1: $92
-    sbc  d                                        ; $76C2: $9A
-    and  h                                        ; $76C3: $A4
-    ld   e, e                                     ; $76C4: $5B
-    ld   e, h                                     ; $76C5: $5C
-    rst  $38                                      ; $76C6: $FF
-    and  [hl]                                     ; $76C7: $A6
-    sub  c                                        ; $76C8: $91
-    sub  a                                        ; $76C9: $97
-    sbc  e                                        ; $76CA: $9B
-    sub  b                                        ; $76CB: $90
-    sub  c                                        ; $76CC: $91
-    sbc  h                                        ; $76CD: $9C
-    ld   h, b                                     ; $76CE: $60
-    rst  $38                                      ; $76CF: $FF
-    rst  $38                                      ; $76D0: $FF
-    or   d                                        ; $76D1: $B2
-    or   e                                        ; $76D2: $B3
-    and  [hl]                                     ; $76D3: $A6
-    sub  c                                        ; $76D4: $91
-    ld   d, a                                     ; $76D5: $57
-    rst  $38                                      ; $76D6: $FF
-    and  [hl]                                     ; $76D7: $A6
-    sub  c                                        ; $76D8: $91
-    sub  l                                        ; $76D9: $95
-    sbc  b                                        ; $76DA: $98
-    and  [hl]                                     ; $76DB: $A6
-    sub  c                                        ; $76DC: $91
-    ld   e, [hl]                                  ; $76DD: $5E
-    ld   h, b                                     ; $76DE: $60
-    and  [hl]                                     ; $76DF: $A6
-    sub  c                                        ; $76E0: $91
-    xor  d                                        ; $76E1: $AA
-    sub  e                                        ; $76E2: $93
-    and  [hl]                                     ; $76E3: $A6
-    sub  c                                        ; $76E4: $91
-    ld   e, b                                     ; $76E5: $58
-    sbc  c                                        ; $76E6: $99
-    sub  b                                        ; $76E7: $90
-    sub  c                                        ; $76E8: $91
-    sub  l                                        ; $76E9: $95
-    sub  e                                        ; $76EA: $93
-    ld   e, a                                     ; $76EB: $5F
-    sub  c                                        ; $76EC: $91
-    ld   d, l                                     ; $76ED: $55
-    sbc  c                                        ; $76EE: $99
-    ld   h, [hl]                                  ; $76EF: $66
-    sub  c                                        ; $76F0: $91
-    ld   e, [hl]                                  ; $76F1: $5E
-    ld   e, c                                     ; $76F2: $59
-    ld   h, [hl]                                  ; $76F3: $66
-    sub  c                                        ; $76F4: $91
-    ld   d, h                                     ; $76F5: $54
-    ld   e, c                                     ; $76F6: $59
-    adc  l                                        ; $76F7: $8D
-    adc  [hl]                                     ; $76F8: $8E
-    adc  a                                        ; $76F9: $8F
-    ld   l, d                                     ; $76FA: $6A
-    ld   l, b                                     ; $76FB: $68
-    sub  c                                        ; $76FC: $91
-    sbc  e                                        ; $76FD: $9B
-    ld   h, b                                     ; $76FE: $60
-    ld   l, b                                     ; $76FF: $68
-    sub  c                                        ; $7700: $91
-    sub  h                                        ; $7701: $94
-    sbc  a                                        ; $7702: $9F
-    ld   l, b                                     ; $7703: $68
-    sub  c                                        ; $7704: $91
-    sbc  h                                        ; $7705: $9C
-    ld   h, b                                     ; $7706: $60
-    ld   e, a                                     ; $7707: $5F
-    ld   h, l                                     ; $7708: $65
-    ld   e, l                                     ; $7709: $5D
-    ld   h, h                                     ; $770A: $64
-    rst  $38                                      ; $770B: $FF
-    sub  c                                        ; $770C: $91
-    ld   d, l                                     ; $770D: $55
-    rst  $38                                      ; $770E: $FF
-    ld   e, a                                     ; $770F: $5F
-    sub  c                                        ; $7710: $91
-    sub  l                                        ; $7711: $95
-    sbc  c                                        ; $7712: $99
-    ld   e, a                                     ; $7713: $5F
-    sub  c                                        ; $7714: $91
-    ld   e, [hl]                                  ; $7715: $5E
-    sbc  c                                        ; $7716: $99
-    ld   e, a                                     ; $7717: $5F
-    sub  c                                        ; $7718: $91
-    xor  c                                        ; $7719: $A9
-    rst  $38                                      ; $771A: $FF
-    ld   e, a                                     ; $771B: $5F
-    sub  c                                        ; $771C: $91
-    sub  h                                        ; $771D: $94
-    sbc  a                                        ; $771E: $9F
-    sub  b                                        ; $771F: $90
-    sub  c                                        ; $7720: $91
-    ld   d, l                                     ; $7721: $55
-    sub  e                                        ; $7722: $93
-    and  h                                        ; $7723: $A4
-    rst  $38                                      ; $7724: $FF
-    ld   a, h                                     ; $7725: $7C
-    rst  $38                                      ; $7726: $FF
-    cp   h                                        ; $7727: $BC
-    cp   l                                        ; $7728: $BD
-    cp   [hl]                                     ; $7729: $BE
-    cp   a                                        ; $772A: $BF
-    and  [hl]                                     ; $772B: $A6
-    sub  c                                        ; $772C: $91
-    sbc  h                                        ; $772D: $9C
-    sbc  l                                        ; $772E: $9D
-    rst  $38                                      ; $772F: $FF
-    push de                                       ; $7730: $D5
-    ld   a, b                                     ; $7731: $78
-    ld   d, e                                     ; $7732: $53
-    sub  b                                        ; $7733: $90
-    sub  c                                        ; $7734: $91
-    rst  $38                                      ; $7735: $FF
-    rst  $38                                      ; $7736: $FF
-    ld   e, a                                     ; $7737: $5F
-    sub  c                                        ; $7738: $91
-    ld   d, l                                     ; $7739: $55
-    sbc  b                                        ; $773A: $98
-    and  h                                        ; $773B: $A4
-    rst  $38                                      ; $773C: $FF
-    rst  $38                                      ; $773D: $FF
-    ld   l, c                                     ; $773E: $69
-    and  h                                        ; $773F: $A4
-    rst  $38                                      ; $7740: $FF
-    ld   c, h                                     ; $7741: $4C
-    ld   [hl], h                                  ; $7742: $74
-    and  b                                        ; $7743: $A0
-    and  c                                        ; $7744: $A1
-    ld   [hl], l                                  ; $7745: $75
-    ld   c, [hl]                                  ; $7746: $4E
-    and  h                                        ; $7747: $A4
-    ld   a, l                                     ; $7748: $7D
-    ld   a, [hl]                                  ; $7749: $7E
-    ld   a, a                                     ; $774A: $7F
-    and  h                                        ; $774B: $A4
-    rst  $38                                      ; $774C: $FF
-    rst  $38                                      ; $774D: $FF
-    rst  $00                                      ; $774E: $C7
-    ret  nz                                       ; $774F: $C0
-
-    pop  bc                                       ; $7750: $C1
-    jp   nz, $A4C3                                ; $7751: $C2 $C3 $A4
-
-    call z, $CECD                                 ; $7754: $CC $CD $CE
-    and  h                                        ; $7757: $A4
-    ret                                           ; $7758: $C9
-
-    jp   z, $A4CB                                 ; $7759: $CA $CB $A4
-
-    pop  de                                       ; $775C: $D1
-    jp   nc, $DD6A                                ; $775D: $D2 $6A $DD
-
-    push hl                                       ; $7760: $E5
-    db   $d3                                      ; $7761: $D3
-    db   $dd                                      ; $7762: $DD
-    db   $dd                                      ; $7763: $DD
-    rst  $38                                      ; $7764: $FF
-    sbc  $FF                                      ; $7765: $DE $FF
-    and  h                                        ; $7767: $A4
-    adc  l                                        ; $7768: $8D
-    rst  $38                                      ; $7769: $FF
-    rst  $38                                      ; $776A: $FF
-    rst  $38                                      ; $776B: $FF
-    rst  $18                                      ; $776C: $DF
-    ld   c, c                                     ; $776D: $49
-    rst  $38                                      ; $776E: $FF
-    rst  $38                                      ; $776F: $FF
-    call nz, $FFFF                                ; $7770: $C4 $FF $FF
-    and  h                                        ; $7773: $A4
-    add  b                                        ; $7774: $80
-    ld   a, h                                     ; $7775: $7C
-    and  l                                        ; $7776: $A5
-    rst  $38                                      ; $7777: $FF
-    rst  $38                                      ; $7778: $FF
-    rst  $38                                      ; $7779: $FF
-    rst  $38                                      ; $777A: $FF
-    rst  $38                                      ; $777B: $FF
-    rst  $38                                      ; $777C: $FF
-    cp   d                                        ; $777D: $BA
-    cp   e                                        ; $777E: $BB
-    ld   [hl], a                                  ; $777F: $77
-    sub  c                                        ; $7780: $91
-    and  a                                        ; $7781: $A7
-    rst  $38                                      ; $7782: $FF
-    ld   a, e                                     ; $7783: $7B
-    sub  c                                        ; $7784: $91
-    ld   a, d                                     ; $7785: $7A
-    xor  e                                        ; $7786: $AB
-    ld   a, e                                     ; $7787: $7B
-    sub  c                                        ; $7788: $91
-    ld   d, a                                     ; $7789: $57
-    sbc  c                                        ; $778A: $99
-    ld   [hl], a                                  ; $778B: $77
-    sub  c                                        ; $778C: $91
-    ld   a, d                                     ; $778D: $7A
-    xor  d                                        ; $778E: $AA
-    ld   a, e                                     ; $778F: $7B
-    sub  c                                        ; $7790: $91
-    ld   d, h                                     ; $7791: $54
-    sbc  c                                        ; $7792: $99
-    ld   a, e                                     ; $7793: $7B
-    sub  c                                        ; $7794: $91
-    ld   d, [hl]                                  ; $7795: $56
-    rst  $38                                      ; $7796: $FF
-    ld   [hl], a                                  ; $7797: $77
-    sub  c                                        ; $7798: $91
-    ld   d, h                                     ; $7799: $54
-    sbc  c                                        ; $779A: $99
-    ld   a, e                                     ; $779B: $7B
-    sub  c                                        ; $779C: $91
-    rst  $38                                      ; $779D: $FF
-    rst  $38                                      ; $779E: $FF
-    ld   e, a                                     ; $779F: $5F
-    sub  c                                        ; $77A0: $91
-    sbc  l                                        ; $77A1: $9D
-    sbc  c                                        ; $77A2: $99
-    ld   a, e                                     ; $77A3: $7B
-    sub  c                                        ; $77A4: $91
-    sub  [hl]                                     ; $77A5: $96
-    sbc  c                                        ; $77A6: $99
-    ld   a, e                                     ; $77A7: $7B
-    sub  c                                        ; $77A8: $91
-    ld   a, d                                     ; $77A9: $7A
-    sbc  c                                        ; $77AA: $99
-    ld   [hl], a                                  ; $77AB: $77
-    sub  c                                        ; $77AC: $91
-    ld   a, d                                     ; $77AD: $7A
-    sbc  c                                        ; $77AE: $99
-    ld   [hl], a                                  ; $77AF: $77
-    sub  c                                        ; $77B0: $91
-    sub  [hl]                                     ; $77B1: $96
-    sbc  c                                        ; $77B2: $99
-    ld   e, a                                     ; $77B3: $5F
-    sub  c                                        ; $77B4: $91
-    ld   d, l                                     ; $77B5: $55
-    sub  e                                        ; $77B6: $93
-    rst  $38                                      ; $77B7: $FF
-    sub  c                                        ; $77B8: $91
-    sub  l                                        ; $77B9: $95
-    sub  e                                        ; $77BA: $93
-    sub  b                                        ; $77BB: $90
-    sub  c                                        ; $77BC: $91
-    ld   d, l                                     ; $77BD: $55
-    sub  e                                        ; $77BE: $93
-    and  [hl]                                     ; $77BF: $A6
-    sub  c                                        ; $77C0: $91
-    sub  l                                        ; $77C1: $95
-    ld   h, b                                     ; $77C2: $60
-    and  [hl]                                     ; $77C3: $A6
-    sub  c                                        ; $77C4: $91
-    sub  l                                        ; $77C5: $95
-    sbc  c                                        ; $77C6: $99
-    ld   e, a                                     ; $77C7: $5F
-    reti                                          ; $77C8: $D9
-
-    jp   c, label_020_5FDB                        ; $77C9: $DA $DB $5F
-
-    reti                                          ; $77CC: $D9
-
-    jp   c, $FF64                                 ; $77CD: $DA $64 $FF
-
-    sub  c                                        ; $77D0: $91
-    sub  b                                        ; $77D1: $90
-    db   $76                                      ; $77D2: $76
-    rst  $38                                      ; $77D3: $FF
-    sub  c                                        ; $77D4: $91
-    sub  b                                        ; $77D5: $90
-    sbc  b                                        ; $77D6: $98
-    rst  $38                                      ; $77D7: $FF
-    ld   c, d                                     ; $77D8: $4A
-    sub  b                                        ; $77D9: $90
-    db   $76                                      ; $77DA: $76
-    ld   e, a                                     ; $77DB: $5F
-    rst  $38                                      ; $77DC: $FF
-    rst  $38                                      ; $77DD: $FF
-    rst  $38                                      ; $77DE: $FF
-    rst  $38                                      ; $77DF: $FF
-    rst  $38                                      ; $77E0: $FF
-    rst  $38                                      ; $77E1: $FF
-    rst  $38                                      ; $77E2: $FF
-    rst  $38                                      ; $77E3: $FF
-    rst  $38                                      ; $77E4: $FF
-    rst  $38                                      ; $77E5: $FF
-    rst  $38                                      ; $77E6: $FF
-    rst  $38                                      ; $77E7: $FF
-    rst  $38                                      ; $77E8: $FF
-    rst  $38                                      ; $77E9: $FF
-    rst  $38                                      ; $77EA: $FF
-    rst  $38                                      ; $77EB: $FF
-    rst  $38                                      ; $77EC: $FF
-    rst  $38                                      ; $77ED: $FF
-    rst  $38                                      ; $77EE: $FF
-    rst  $38                                      ; $77EF: $FF
-    sub  c                                        ; $77F0: $91
-    sub  b                                        ; $77F1: $90
-    and  [hl]                                     ; $77F2: $A6
-    and  h                                        ; $77F3: $A4
-    rst  $38                                      ; $77F4: $FF
-    rst  $38                                      ; $77F5: $FF
-    db   $f4                                      ; $77F6: $F4
-    add  sp, -$17                                 ; $77F7: $E8 $E9
-    db   $EA, $EB, $FF
-    rst  $38                                      ; $77FC: $FF
-    rst  $38                                      ; $77FD: $FF
-    rst  $38                                      ; $77FE: $FF
-    rst  $38                                      ; $77FF: $FF
-    rst  $38                                      ; $7800: $FF
-    rst  $38                                      ; $7801: $FF
-    rst  $38                                      ; $7802: $FF
-    rst  $38                                      ; $7803: $FF
-    rst  $38                                      ; $7804: $FF
-    rst  $38                                      ; $7805: $FF
-    rst  $38                                      ; $7806: $FF
-    rst  $38                                      ; $7807: $FF
-    rst  $38                                      ; $7808: $FF
-    rst  $38                                      ; $7809: $FF
-    rst  $38                                      ; $780A: $FF
-    rst  $38                                      ; $780B: $FF
-    rst  $38                                      ; $780C: $FF
-    rst  $38                                      ; $780D: $FF
-    rst  $38                                      ; $780E: $FF
-    rst  $38                                      ; $780F: $FF
-    rst  $38                                      ; $7810: $FF
-    rst  $38                                      ; $7811: $FF
-    rst  $38                                      ; $7812: $FF
-    rst  $38                                      ; $7813: $FF
-    rst  $38                                      ; $7814: $FF
-    rst  $38                                      ; $7815: $FF
-    rst  $38                                      ; $7816: $FF
-    rst  $38                                      ; $7817: $FF
-    rst  $38                                      ; $7818: $FF
-    rst  $38                                      ; $7819: $FF
-    rst  $38                                      ; $781A: $FF
-    rst  $38                                      ; $781B: $FF
-    rst  $38                                      ; $781C: $FF
-    rst  $38                                      ; $781D: $FF
-    rst  $38                                      ; $781E: $FF
-    rst  $38                                      ; $781F: $FF
-    rst  $38                                      ; $7820: $FF
-    rst  $38                                      ; $7821: $FF
-    rst  $38                                      ; $7822: $FF
-    rst  $38                                      ; $7823: $FF
-    rst  $38                                      ; $7824: $FF
-    rst  $38                                      ; $7825: $FF
-    rst  $38                                      ; $7826: $FF
-    rst  $38                                      ; $7827: $FF
-    rst  $38                                      ; $7828: $FF
-    rst  $38                                      ; $7829: $FF
-    rst  $38                                      ; $782A: $FF
-    ld   b, h                                     ; $782B: $44
-    and  c                                        ; $782C: $A1
-    ld   [hl], l                                  ; $782D: $75
-    ld   c, [hl]                                  ; $782E: $4E
-    rst  $38                                      ; $782F: $FF
-    ld   h, c                                     ; $7830: $61
-    rst  $38                                      ; $7831: $FF
-    rst  $38                                      ; $7832: $FF
-    and  h                                        ; $7833: $A4
-    rst  $38                                      ; $7834: $FF
-    add  [hl]                                     ; $7835: $86
-    rst  $38                                      ; $7836: $FF
-    and  h                                        ; $7837: $A4
-    rst  $38                                      ; $7838: $FF
-    adc  e                                        ; $7839: $8B
-    rst  $38                                      ; $783A: $FF
-    and  h                                        ; $783B: $A4
-    ld   c, l                                     ; $783C: $4D
-    rst  $38                                      ; $783D: $FF
-    rst  $38                                      ; $783E: $FF
-    ld   b, l                                     ; $783F: $45
-    ld   a, b                                     ; $7840: $78
-    ld   a, l                                     ; $7841: $7D
-    ld   a, b                                     ; $7842: $78
-    or   l                                        ; $7843: $B5
-    ld   a, b                                     ; $7844: $78
-    nop                                           ; $7845: $00
-    nop                                           ; $7846: $00
-    push bc                                       ; $7847: $C5
-    ld   c, h                                     ; $7848: $4C
-    ld   l, b                                     ; $7849: $68
-    ld   a, l                                     ; $784A: $7D
-    rst  $38                                      ; $784B: $FF
-    ld   a, a                                     ; $784C: $7F
-    nop                                           ; $784D: $00
-    nop                                           ; $784E: $00
-    ld   h, d                                     ; $784F: $62
-    inc  a                                        ; $7850: $3C
-    push hl                                       ; $7851: $E5
-    ld   l, b                                     ; $7852: $68
-    sub  $5E                                      ; $7853: $D6 $5E
-    nop                                           ; $7855: $00
-    nop                                           ; $7856: $00
-    nop                                           ; $7857: $00
-    jr   nz, jr_020_785A                          ; $7858: $20 $00
-
-jr_020_785A:
-    ld   d, b                                     ; $785A: $50
-    xor  l                                        ; $785B: $AD
-    dec  [hl]                                     ; $785C: $35
-    nop                                           ; $785D: $00
-    nop                                           ; $785E: $00
-    rrca                                          ; $785F: $0F
-    ld   h, [hl]                                  ; $7860: $66
-    sub  $6E                                      ; $7861: $D6 $6E
-    rst  $38                                      ; $7863: $FF
-    ld   a, a                                     ; $7864: $7F
-    rrca                                          ; $7865: $0F
-    ld   h, [hl]                                  ; $7866: $66
-    rrca                                          ; $7867: $0F
-    ld   h, [hl]                                  ; $7868: $66
-    sub  $6E                                      ; $7869: $D6 $6E
-    rst  $38                                      ; $786B: $FF
-    ld   a, a                                     ; $786C: $7F
-    xor  h                                        ; $786D: $AC
-    ld   e, c                                     ; $786E: $59
-    rrca                                          ; $786F: $0F
-    ld   h, [hl]                                  ; $7870: $66
-    sub  $6E                                      ; $7871: $D6 $6E
-    rst  $38                                      ; $7873: $FF
-    ld   a, a                                     ; $7874: $7F
-    ld   c, c                                     ; $7875: $49
-    ld   c, l                                     ; $7876: $4D
-    rrca                                          ; $7877: $0F
-    ld   h, [hl]                                  ; $7878: $66
-    sub  $6E                                      ; $7879: $D6 $6E
-    rst  $38                                      ; $787B: $FF
-    ld   a, a                                     ; $787C: $7F
-    nop                                           ; $787D: $00
-    nop                                           ; $787E: $00
-    ld   l, b                                     ; $787F: $68
-    ld   a, l                                     ; $7880: $7D
-    rst  $38                                      ; $7881: $FF
-    ld   a, a                                     ; $7882: $7F
-    push bc                                       ; $7883: $C5
-    ld   c, h                                     ; $7884: $4C
-    nop                                           ; $7885: $00
-
-jr_020_7886:
-    nop                                           ; $7886: $00
-    push hl                                       ; $7887: $E5
-    ld   l, b                                     ; $7888: $68
-    sub  $5E                                      ; $7889: $D6 $5E
-    ld   h, d                                     ; $788B: $62
-    inc  a                                        ; $788C: $3C
-    nop                                           ; $788D: $00
-    nop                                           ; $788E: $00
-    nop                                           ; $788F: $00
-    ld   d, b                                     ; $7890: $50
-    xor  l                                        ; $7891: $AD
-    dec  [hl]                                     ; $7892: $35
-    nop                                           ; $7893: $00
-    jr   nz, jr_020_7896                          ; $7894: $20 $00
-
-jr_020_7896:
-    nop                                           ; $7896: $00
-    sub  $6E                                      ; $7897: $D6 $6E
-    rst  $38                                      ; $7899: $FF
-    ld   a, a                                     ; $789A: $7F
-    rrca                                          ; $789B: $0F
-    ld   h, [hl]                                  ; $789C: $66
-    push bc                                       ; $789D: $C5
-    ld   c, h                                     ; $789E: $4C
-    sub  $6E                                      ; $789F: $D6 $6E
-    rst  $38                                      ; $78A1: $FF
-    ld   a, a                                     ; $78A2: $7F
-    rrca                                          ; $78A3: $0F
-    ld   h, [hl]                                  ; $78A4: $66
-    ld   h, d                                     ; $78A5: $62
-    inc  a                                        ; $78A6: $3C
-    sub  $6E                                      ; $78A7: $D6 $6E
-    rst  $38                                      ; $78A9: $FF
-    ld   a, a                                     ; $78AA: $7F
-    rrca                                          ; $78AB: $0F
-    ld   h, [hl]                                  ; $78AC: $66
-    nop                                           ; $78AD: $00
-    jr   nz, jr_020_7886                          ; $78AE: $20 $D6
-
-    ld   l, [hl]                                  ; $78B0: $6E
-    rst  $38                                      ; $78B1: $FF
-    ld   a, a                                     ; $78B2: $7F
-    rrca                                          ; $78B3: $0F
-    ld   h, [hl]                                  ; $78B4: $66
-    nop                                           ; $78B5: $00
-    nop                                           ; $78B6: $00
-    rst  $38                                      ; $78B7: $FF
-    ld   a, a                                     ; $78B8: $7F
-    push bc                                       ; $78B9: $C5
-    ld   c, h                                     ; $78BA: $4C
-    ld   l, b                                     ; $78BB: $68
-    ld   a, l                                     ; $78BC: $7D
-    nop                                           ; $78BD: $00
-    nop                                           ; $78BE: $00
-    sub  $5E                                      ; $78BF: $D6 $5E
-    ld   h, d                                     ; $78C1: $62
-    inc  a                                        ; $78C2: $3C
-    push hl                                       ; $78C3: $E5
-    ld   l, b                                     ; $78C4: $68
-    nop                                           ; $78C5: $00
-    nop                                           ; $78C6: $00
-    xor  l                                        ; $78C7: $AD
-    dec  [hl]                                     ; $78C8: $35
-    nop                                           ; $78C9: $00
-    jr   nz, jr_020_78CC                          ; $78CA: $20 $00
-
-jr_020_78CC:
-    ld   d, b                                     ; $78CC: $50
-    nop                                           ; $78CD: $00
-    nop                                           ; $78CE: $00
-    rst  $38                                      ; $78CF: $FF
-    ld   a, a                                     ; $78D0: $7F
-    rrca                                          ; $78D1: $0F
-    ld   h, [hl]                                  ; $78D2: $66
-    sub  $6E                                      ; $78D3: $D6 $6E
-    ld   l, b                                     ; $78D5: $68
-    ld   a, l                                     ; $78D6: $7D
-    rst  $38                                      ; $78D7: $FF
-    ld   a, a                                     ; $78D8: $7F
-    rrca                                          ; $78D9: $0F
-    ld   h, [hl]                                  ; $78DA: $66
-    sub  $6E                                      ; $78DB: $D6 $6E
-    push hl                                       ; $78DD: $E5
-    ld   l, b                                     ; $78DE: $68
-    rst  $38                                      ; $78DF: $FF
-    ld   a, a                                     ; $78E0: $7F
-    rrca                                          ; $78E1: $0F
-    ld   h, [hl]                                  ; $78E2: $66
-    sub  $6E                                      ; $78E3: $D6 $6E
-    nop                                           ; $78E5: $00
-    ld   d, b                                     ; $78E6: $50
-    rst  $38                                      ; $78E7: $FF
-    ld   a, a                                     ; $78E8: $7F
-    rrca                                          ; $78E9: $0F
-    ld   h, [hl]                                  ; $78EA: $66
-    sub  $6E                                      ; $78EB: $D6 $6E
-
+    db   $00, $00, $0B, $0B, $00, $00, $0B, $0B, $0B, $0B, $0B, $0B, $0B, $0B, $0B, $0E
+    db   $0B, $0B, $0B, $18, $0B, $0B, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    db   $65, $66, $67, $68, $69, $6D, $45, $46, $46, $00, $4E, $4E, $4E, $4E, $44, $50
+    db   $20, $74, $6B, $6C, $6D, $6D, $37, $37, $4F, $1C, $4F, $4E, $4E, $4E, $50, $4E
+    db   $02, $7D, $00, $0E, $48, $47, $37, $06, $06, $00, $51, $50, $50, $62, $62, $62
+    db   $02, $7D, $00, $0E, $48, $47, $37, $06, $06, $00, $51, $51, $00, $62, $62, $62
+    db   $00, $41, $7E, $7E, $7A, $06, $28, $28, $11, $11, $64, $63, $2D, $2D, $2D, $2D
+    db   $01, $2E, $74, $7F, $38, $28, $28, $29, $11, $11, $11, $64, $2D, $2D, $2D, $2D
+    db   $00, $00, $7E, $00, $00, $28, $29, $05, $58, $59, $5A, $00, $2D, $2D, $2D, $2D
+    db   $7E, $7E, $7E, $7E, $3A, $3A, $28, $29, $5B, $5C, $00, $12, $2D, $2D, $2D, $2D
+    db   $3D, $03, $0A, $0B, $39, $61, $18, $18, $4A, $2C, $72, $00, $2A, $6F, $2D, $2D
+    db   $00, $00, $43, $0A, $40, $3E, $00, $00, $75, $5F, $73, $70, $2A, $6F, $2D, $2D
+    db   $13, $0C, $0A, $00, $3B, $00, $3B, $3B, $5F, $54, $37, $71, $6E, $6E, $6E, $00
+    db   $0F, $0C, $09, $09, $00, $3B, $3B, $3B, $77, $72, $70, $4B, $6E, $6E, $6E, $6E
+    db   $08, $08, $07, $07, $3C, $3C, $3C, $00, $78, $23, $26, $57, $34, $35, $1D, $7B
+    db   $07, $07, $07, $07, $3C, $3C, $3C, $7A, $79, $26, $1F, $53, $2F, $34, $00, $4D
+    db   $07, $07, $00, $42, $00, $90, $91, $26, $26, $25, $36, $33, $31, $30, $7C, $4D
+    db   $07, $07, $07, $00, $90, $90, $91, $00, $1F, $26, $1F, $00, $30, $21, $4C, $7C
+    db   $01, $03, $0E, $07, $07, $00, $05, $01, $00, $03, $1C, $05, $01, $01, $01, $00
+    db   $00, $02, $00, $03, $03, $03, $03, $03, $33, $33, $33, $33, $00, $00, $63, $63
+    db   $14, $00, $14, $14, $00, $06, $13, $06, $13, $13, $0E, $08, $13, $08, $06, $07
+    db   $06, $06, $00, $00, $1B, $1B, $06, $1B, $06, $00, $33, $33, $33, $33, $33, $33
+    db   $18, $18, $18, $18, $00, $15, $00, $00, $17, $00, $17, $17, $06, $17, $06, $00
+    db   $18, $3C, $3C, $3C, $17, $17, $17, $17, $17, $0E, $16, $00, $17, $01, $33, $33
+    db   $00, $00, $0E, $31, $19, $30, $32, $32, $00, $00, $32, $32, $00, $32, $30, $30
+    db   $00, $30, $32, $00, $30, $30, $00, $30, $30, $30, $30, $30, $33, $33, $00, $01
+    db   $1E, $1E, $0F, $1E, $1E, $1D, $00, $00, $24, $24, $24, $00, $24, $24, $24, $24
+    db   $24, $00, $1E, $1F, $1F, $1E, $1E, $04, $04, $00, $00, $04, $04, $04, $04, $04
+    db   $04, $04, $33, $33, $33, $33, $33, $33, $33, $33, $64, $64, $80, $00, $00, $00
+    db   $28, $28, $28, $28, $61, $0F, $61, $00, $00, $28, $28, $00, $25, $26, $61, $29
+    db   $27, $00, $28, $61, $00, $26, $00, $29, $2A, $00, $00, $62, $00, $61, $00, $27
+    db   $61, $61, $27, $27, $27, $27, $00, $61, $63, $63, $33, $33, $33, $33, $00, $00
+    db   $44, $44, $44, $00, $4A, $67, $67, $00, $7F, $00, $00, $33, $33, $00, $6E, $1A
+    db   $67, $67, $00, $80, $4A, $7E, $67, $00, $7F, $7F, $3D, $80, $10, $00, $6E, $1A
+    db   $00, $00, $3F, $2C, $2C, $5E, $34, $39, $00, $5F, $60, $3E, $39, $2B, $2B, $00
+    db   $39, $2D, $2D, $2D, $2D, $2D, $2D, $2E, $2D, $2D, $2D, $2E, $00, $2D, $2D, $00
+    db   $36, $00, $35, $0F, $37, $35, $35, $00, $37, $00, $38, $35, $0F, $35, $38, $01
+    db   $0F, $5C, $56, $00, $50, $5C, $00, $51, $56, $58, $5B, $5B, $00, $54, $00, $51
+    db   $5A, $00, $59, $59, $00, $57, $5A, $59, $59, $00, $5C, $5C, $52, $00, $55, $00
+    db   $5C, $5C, $00, $53, $52, $52, $00, $5B, $00, $5C, $00, $53, $52, $5B, $5A, $53
+    db   $33, $33, $33, $33, $33, $33, $33, $33, $33, $33, $33, $33, $01, $01, $01, $3D
+    db   $01, $01, $01, $01, $6F, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $3D
+    db   $66, $66, $66, $01, $01, $66, $66, $66, $65, $65, $65, $65, $66, $66, $65, $3D
+    db   $65, $65, $65, $65, $66, $66, $66, $0D, $0D, $09, $65, $09, $09, $09, $00, $49
+    db   $10, $11, $20, $2F, $01, $0A, $0A, $0B, $0C, $09, $4B, $65, $65, $4C, $65, $65
+    db   $10, $12, $0B, $65, $09, $01, $65, $65, $65, $65, $65, $65, $65, $65, $0D, $0D
+    db   $00, $00, $21, $21, $21, $21, $21, $22, $66, $65, $65, $09, $09, $66, $0D, $0D
+    db   $67, $67, $21, $21, $21, $21, $21, $40, $66, $41, $7D, $4D, $4D, $46, $66, $66
+    db   $3A, $4E, $3A, $09, $66, $66, $65, $65, $3B, $47, $65, $65, $65, $65, $65, $65
+    db   $3A, $67, $67, $67, $66, $7C, $65, $65, $3B, $67, $67, $43, $01, $45, $48, $00
+    db   $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
+    db   $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
+    db   $A4, $FF, $FF, $FF, $A4, $8E, $7C, $C8, $A4, $4A, $7C, $93, $A4, $E5, $FF, $4E
+    db   $A4, $91, $83, $A2, $A4, $42, $8A, $FF, $A4, $42, $83, $A2, $A4, $81, $E3, $A2
+    db   $A4, $E5, $E3, $FF, $A4, $E5, $43, $E7, $A4, $E5, $E6, $FF, $A4, $E5, $E6, $E7
+    db   $A4, $E5, $43, $A4, $A4, $8E, $83, $A4, $A4, $4A, $83
+    db   $40, $A4, $E5, $4C, $E7, $A4, $4D, $83, $FF, $A4, $42, $92, $5A, $A4, $61, $92
+    db   $67, $A4, $E5, $FF, $FF, $A4, $E3, $8B, $FF, $A4, $E3, $83, $76, $A4, $81, $79
+    db   $76, $A4, $61, $8B, $FF, $A4, $6C, $8B, $6B, $A4, $FF, $8B, $FF, $A4, $E3, $8B
+    db   $A2, $A4, $E5, $FF, $FF, $A4, $4A, $8F, $6D, $A4, $81, $6E, $52, $A4, $4D, $43
+    db   $A2, $A4, $61, $79, $76, $A4, $C6, $7C, $41, $A4, $C5, $6E, $6F, $A4, $C5, $FF
+    db   $70, $A4, $61, $FF, $71, $A4, $61, $FF, $72, $A4, $61, $79, $73, $A4, $61, $79
+    db   $FF, $A4, $E3, $79, $76, $A4, $42, $82, $A2, $A4, $42, $FF, $82, $A4, $61, $78
+    db   $A2, $A4, $81, $8F, $E7, $A4, $E3, $8B, $8C, $A4, $87, $78, $A2, $A4, $6C, $7C
+    db   $C8, $A4, $C4, $E6, $CF, $A4, $FF, $6E, $6F, $A4, $FF, $E6, $CF, $A4, $FF, $83
+    db   $FF, $A4, $C4, $79, $76, $A4, $C4, $FF, $FF, $A4, $C4, $43, $CF, $A4, $FF, $79
+    db   $FF, $A4, $FF, $FF, $A2, $A4, $61, $79, $A2, $A4, $E5, $FF, $FF, $A4, $E5, $82
+    db   $A2, $A4, $E3, $83, $A2, $A4, $91, $83, $76, $A4, $FF, $7C, $A2, $A4, $E3, $8B
+    db   $A2, $A4, $E3, $FF, $76, $A4, $FF, $E6, $A2, $A4, $FF, $7C, $A2, $A4, $81, $E3
+    db   $D4, $A4, $E5, $E6, $DC, $A4, $87, $D6, $D7, $A4, $50, $51, $A2, $A4, $6C, $8F
+    db   $A2, $A4, $4A, $83, $A2, $A4, $4A, $83, $FF, $A4, $81, $8F, $76, $A4, $E3, $8B
+    db   $FF, $A4, $FF, $79, $FF, $A4, $81, $6E, $FF, $A4, $81, $6E, $8C, $A4, $87, $8F
+    db   $76, $A4, $FF, $8F, $FF, $A4, $87, $FF, $FF, $A4, $87, $83, $76, $A4, $87, $83
+    db   $98, $A4, $FF, $79, $76, $A4, $E3, $83, $A2, $A4, $61, $79, $93, $A4, $FF, $79
+    db   $93, $A4, $C4, $79, $FF, $A4, $FF, $92, $5A, $A4, $61, $92, $8C, $A4, $42, $92
+    db   $FF, $A4, $61, $FF, $FF, $A4, $61, $FF, $8C, $A4, $FF, $83, $93, $A4, $61, $8B
+    db   $FF, $A4, $E3, $FF, $FF, $A4, $61, $FF, $67, $A4, $FF, $FF, $A2, $A4, $87, $E3
+    db   $93, $A4, $87, $FF, $FF, $A4, $87, $92, $5A, $A4, $C6, $9C, $98, $A4, $C6, $9C
+    db   $FF, $A4, $FF, $9C, $93, $A4, $81, $FF, $FF, $A4, $FF, $9C, $98, $A4, $FF, $83
+    db   $FF, $A4, $81, $FF, $93, $A4, $81, $9C, $93, $A4, $44, $9C, $98, $A4, $91, $78
+    db   $A2, $A4, $FF, $78, $A2, $A4, $61, $FF, $A2, $A4, $FF, $79, $A2, $A4, $61, $83
+    db   $FF, $A4, $FF, $83, $A2, $A4, $FF, $7C, $FF, $A4, $E3, $8B, $A2, $A4, $E3, $83
+    db   $FF, $A4, $FF, $83, $76, $A4, $61, $83, $FF, $A4, $61, $FF, $76, $A4, $61, $FF
+    db   $A2, $A4, $81, $6E, $FF, $A4, $81, $FF, $8C, $A4, $4A, $7C, $93, $A4, $91, $7C
+    db   $A2, $A4, $4D, $7C, $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF
+    db   $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF
+    db   $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF
+    db   $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF, $FF, $A4, $FF, $FF
+    db   $FF, $A4, $FF, $FF, $FF, $A4, $81, $8F, $D4, $A4, $81, $79, $FF, $FF, $FF, $FF
+    db   $FF, $90, $91, $92, $98, $90, $91, $AB, $FF, $90, $91, $92, $93, $90, $91, $94
+    db   $9F, $90, $91, $B0, $B1, $90, $91, $9C, $93, $90, $91, $97, $9B, $FF, $FF, $B6
+    db   $B7, $A4, $4C, $49, $46, $A4, $FF, $45, $6D, $A4, $FF, $47, $48, $A4, $FF, $4C
+    db   $4B, $90, $91, $96, $FF, $FF, $FF, $4F, $50, $FF, $FF, $4F, $51, $A4, $87, $84
+    db   $89, $A4, $FF, $88, $C7, $A0, $A1, $84, $83, $90, $91, $54, $A6, $90, $91, $97
+    db   $93, $90, $91, $AA, $FF, $90, $91, $B4, $B5, $90, $91, $9C, $9E, $90, $91, $9C
+    db   $9D, $68, $91, $56, $60, $AC, $AD, $AE, $AF, $90, $91, $58, $9B, $90, $91, $A6
+    db   $59, $FF, $FF, $B8, $B9, $90, $91, $62, $63, $90, $91, $A8, $9F, $A4, $DF, $A3
+    db   $FF, $90, $91, $92, $9A, $A4, $5B, $5C, $FF, $A6, $91, $97, $9B, $90, $91, $9C
+    db   $60, $FF, $FF, $B2, $B3, $A6, $91, $57, $FF, $A6, $91, $95, $98, $A6, $91, $5E
+    db   $60, $A6, $91, $AA, $93, $A6, $91, $58, $99, $90, $91, $95, $93, $5F, $91, $55
+    db   $99, $66, $91, $5E, $59, $66, $91, $54, $59, $8D, $8E, $8F, $6A, $68, $91, $9B
+    db   $60, $68, $91, $94, $9F, $68, $91, $9C, $60, $5F, $65, $5D, $64, $FF, $91, $55
+    db   $FF, $5F, $91, $95, $99, $5F, $91, $5E, $99, $5F, $91, $A9, $FF, $5F, $91, $94
+    db   $9F, $90, $91, $55, $93, $A4, $FF, $7C, $FF, $BC, $BD, $BE, $BF, $A6, $91, $9C
+    db   $9D, $FF, $D5, $78, $53, $90, $91, $FF, $FF, $5F, $91, $55, $98, $A4, $FF, $FF
+    db   $69, $A4, $FF, $4C, $74, $A0, $A1, $75, $4E, $A4, $7D, $7E, $7F, $A4, $FF, $FF
+    db   $C7, $C0, $C1, $C2, $C3, $A4, $CC, $CD, $CE, $A4, $C9, $CA, $CB, $A4, $D1, $D2
+    db   $6A, $DD, $E5, $D3, $DD, $DD, $FF, $DE, $FF, $A4, $8D, $FF, $FF, $FF, $DF, $49
+    db   $FF, $FF, $C4, $FF, $FF, $A4, $80, $7C, $A5, $FF, $FF, $FF, $FF, $FF, $FF, $BA
+    db   $BB, $77, $91, $A7, $FF, $7B, $91, $7A, $AB, $7B, $91, $57, $99, $77, $91, $7A
+    db   $AA, $7B, $91, $54, $99, $7B, $91, $56, $FF, $77, $91, $54, $99, $7B, $91, $FF
+    db   $FF, $5F, $91, $9D, $99, $7B, $91, $96, $99, $7B, $91, $7A, $99, $77, $91, $7A
+    db   $99, $77, $91, $96, $99, $5F, $91, $55, $93, $FF, $91, $95, $93, $90, $91, $55
+    db   $93, $A6, $91, $95, $60, $A6, $91, $95, $99, $5F, $D9, $DA, $DB, $5F, $D9, $DA
+    db   $64, $FF, $91, $90, $76, $FF, $91, $90, $98, $FF, $4A, $90, $76, $5F, $FF, $FF
+    db   $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    db   $FF, $FF, $91, $90, $A6, $A4, $FF, $FF, $F4, $E8, $E9, $EA, $EB, $FF, $FF, $FF
+    db   $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    db   $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
+    db   $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $44, $A1, $75
+    db   $4E, $FF, $61, $FF, $FF, $A4, $FF, $86, $FF, $A4, $FF, $8B, $FF, $A4, $4D, $FF
+    db   $FF
+
+; These look like pointers, but actually point to random locations in
+; the ROM, to make the water geyser splashing effect.
+Data_020_783F::
+    dw   $7845
+    dw   $787D
+    dw   $78B5
+    dw   $0000
+    dw   $4CC5
+    dw   $7D68
+    dw   $7FFF
+    dw   $0000
+    dw   $3C62
+    dw   $68E5
+    dw   $5ED6
+    dw   $0000
+    dw   $2000
+    dw   $5000
+    dw   $35AD
+    dw   $0000
+    dw   $660F
+    dw   $6ED6
+    dw   $7FFF
+    dw   $660F
+    dw   $660F
+    dw   $6ED6
+    dw   $7FFF
+    dw   $59AC
+    dw   $660F
+    dw   $6ED6
+    dw   $7FFF
+    dw   $4D49
+    dw   $660F
+    dw   $6ED6
+    dw   $7FFF
+    dw   $0000
+    dw   $7D68
+    dw   $7FFF
+    dw   $4CC5
+    dw   $0000
+    dw   $68E5
+    dw   $5ED6
+    dw   $3C62
+    dw   $0000
+    dw   $5000
+    dw   $35AD
+    dw   $2000
+    dw   $0000
+    dw   $6ED6
+    dw   $7FFF
+    dw   $660F
+    dw   $4CC5
+    dw   $6ED6
+    dw   $7FFF
+    dw   $660F
+    dw   $3C62
+    dw   $6ED6
+    dw   $7FFF
+    dw   $660F
+    dw   $2000
+    dw   $6ED6
+    dw   $7FFF
+    dw   $660F
+    dw   $0000
+    dw   $7FFF
+    dw   $4CC5
+    dw   $7D68
+    dw   $0000
+    dw   $5ED6
+    dw   $3C62
+    dw   $68E5
+    dw   $0000
+    dw   $35AD
+    dw   $2000
+    dw   $5000
+    dw   $0000
+    dw   $7FFF
+    dw   $660F
+    dw   $6ED6
+    dw   $7D68
+    dw   $7FFF
+    dw   $660F
+    dw   $6ED6
+    dw   $68E5
+    dw   $7FFF
+    dw   $660F
+    dw   $6ED6
+    dw   $5000
+    dw   $7FFF
+    dw   $660F
+    dw   $6ED6
+
+; Copy semi-random data to $DC10
+; (Called during the Credits water geyser sequence; to animate the water?)
 func_020_78ED::
     ld   a, [wIsFileSelectionArrowShifted]        ; $78ED: $FA $00 $D0
     sla  a                                        ; $78F0: $CB $27
     ld   e, a                                     ; $78F2: $5F
     ld   d, $00                                   ; $78F3: $16 $00
-    ld   hl, $783F                                ; $78F5: $21 $3F $78
+    ld   hl, Data_020_783F                        ; $78F5: $21 $3F $78
     add  hl, de                                   ; $78F8: $19
     ld   a, [hl+]                                 ; $78F9: $2A
     ld   b, a                                     ; $78FA: $47
     ld   h, [hl]                                  ; $78FB: $66
     ld   l, b                                     ; $78FC: $68
+
     ld   bc, $38                                  ; $78FD: $01 $38 $00
     ld   de, $DC10                                ; $7900: $11 $10 $DC
     call CopyData                                 ; $7903: $CD $14 $29
+
     xor  a                                        ; $7906: $AF
     ld   [wPaletteUnknownC], a                    ; $7907: $EA $D3 $DD
     ld   a, $1C                                   ; $790A: $3E $1C
     ld   [wPaletteUnknownD], a                    ; $790C: $EA $D4 $DD
     ld   a, $81                                   ; $790F: $3E $81
-    ld   [wPaletteDataFlags], a                    ; $7911: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $7911: $EA $D1 $DD
     ret                                           ; $7914: $C9
 
-    nop                                           ; $7915: $00
-    nop                                           ; $7916: $00
-    db   $10                                      ; $7917: $10
-    rla                                           ; $7918: $17
-    nop                                           ; $7919: $00
-    ld   [$1704], sp                              ; $791A: $08 $04 $17
-    nop                                           ; $791D: $00
-    db   $10                                      ; $791E: $10
-    ld   b, $17                                   ; $791F: $06 $17
-    nop                                           ; $7921: $00
-    jr   jr_020_792A                              ; $7922: $18 $06
-
-    scf                                           ; $7924: $37
-    nop                                           ; $7925: $00
-    jr   nz, jr_020_792C                          ; $7926: $20 $04
-
-    scf                                           ; $7928: $37
-    nop                                           ; $7929: $00
-
-jr_020_792A:
-    jr   z, jr_020_793C                           ; $792A: $28 $10
-
-jr_020_792C:
-    scf                                           ; $792C: $37
-    stop                                          ; $792D: $10 $00
-    ld   [$1017], sp                              ; $792F: $08 $17 $10
-    ld   [$170A], sp                              ; $7932: $08 $0A $17
-    db   $10                                      ; $7935: $10
-    db   $10                                      ; $7936: $10
-    inc  c                                        ; $7937: $0C
-    rla                                           ; $7938: $17
-    db   $10                                      ; $7939: $10
-    jr   @+$0E                                    ; $793A: $18 $0C
-
-jr_020_793C:
-    scf                                           ; $793C: $37
-    db   $10                                      ; $793D: $10
-    jr   nz, @+$0C                                ; $793E: $20 $0A
-
-    scf                                           ; $7940: $37
-    db   $10                                      ; $7941: $10
-    jr   z, @+$0A                                 ; $7942: $28 $08
-
-    scf                                           ; $7944: $37
-    jr   nz, jr_020_7957                          ; $7945: $20 $10
-
-    jr   nz, @+$19                                ; $7947: $20 $17
-
-    jr   nz, @+$1A                                ; $7949: $20 $18
-
-    jr   nc, jr_020_7964                          ; $794B: $30 $17
-
-    jr   nc, jr_020_795F                          ; $794D: $30 $10
-
-    jr   nz, @+$19                                ; $794F: $20 $17
-
-    jr   nc, @+$1A                                ; $7951: $30 $18
-
-    jr   nc, jr_020_796C                          ; $7953: $30 $17
-
-    ld   b, b                                     ; $7955: $40
-    db   $10                                      ; $7956: $10
-
-jr_020_7957:
-    jr   nz, @+$19                                ; $7957: $20 $17
-
-    ld   b, b                                     ; $7959: $40
-    jr   jr_020_798C                              ; $795A: $18 $30
-
-    rla                                           ; $795C: $17
-    ld   d, b                                     ; $795D: $50
-    db   $10                                      ; $795E: $10
-
-jr_020_795F:
-    jr   nz, @+$19                                ; $795F: $20 $17
-
-    ld   d, b                                     ; $7961: $50
-    jr   jr_020_7994                              ; $7962: $18 $30
-
-jr_020_7964:
-    rla                                           ; $7964: $17
-    ld   h, b                                     ; $7965: $60
-    db   $10                                      ; $7966: $10
-    jr   nz, @+$19                                ; $7967: $20 $17
-
-    ld   h, b                                     ; $7969: $60
-    jr   @+$32                                    ; $796A: $18 $30
-
-jr_020_796C:
-    rla                                           ; $796C: $17
-    ld   [hl], b                                  ; $796D: $70
-    db   $10                                      ; $796E: $10
-    jr   nz, @+$19                                ; $796F: $20 $17
-
-    ld   [hl], b                                  ; $7971: $70
-    jr   jr_020_79A4                              ; $7972: $18 $30
-
-    rla                                           ; $7974: $17
-    add  b                                        ; $7975: $80
-    db   $10                                      ; $7976: $10
-    jr   nz, @+$19                                ; $7977: $20 $17
-
-    add  b                                        ; $7979: $80
-    jr   jr_020_79AC                              ; $797A: $18 $30
-
-    rla                                           ; $797C: $17
-    sub  b                                        ; $797D: $90
-    db   $10                                      ; $797E: $10
-    jr   nz, jr_020_7998                          ; $797F: $20 $17
-
-    sub  b                                        ; $7981: $90
-    jr   @+$32                                    ; $7982: $18 $30
-
-    rla                                           ; $7984: $17
-    and  b                                        ; $7985: $A0
-    db   $10                                      ; $7986: $10
-    jr   nz, @+$19                                ; $7987: $20 $17
-
-    and  b                                        ; $7989: $A0
-    jr   jr_020_79BC                              ; $798A: $18 $30
-
-jr_020_798C:
-    rla                                           ; $798C: $17
-    or   b                                        ; $798D: $B0
-    db   $10                                      ; $798E: $10
-    jr   nz, jr_020_79A8                          ; $798F: $20 $17
-
-    or   b                                        ; $7991: $B0
-    jr   jr_020_79C4                              ; $7992: $18 $30
-
-jr_020_7994:
-    rla                                           ; $7994: $17
-    nop                                           ; $7995: $00
-    nop                                           ; $7996: $00
-    ld   [de], a                                  ; $7997: $12
-
-jr_020_7998:
-    rla                                           ; $7998: $17
-    nop                                           ; $7999: $00
-    ld   [$1714], sp                              ; $799A: $08 $14 $17
-    nop                                           ; $799D: $00
-    db   $10                                      ; $799E: $10
-    ld   d, $17                                   ; $799F: $16 $17
-    nop                                           ; $79A1: $00
-    jr   jr_020_79BA                              ; $79A2: $18 $16
-
-jr_020_79A4:
-    scf                                           ; $79A4: $37
-    nop                                           ; $79A5: $00
-    jr   nz, jr_020_79BC                          ; $79A6: $20 $14
-
-jr_020_79A8:
-    scf                                           ; $79A8: $37
-    nop                                           ; $79A9: $00
-    jr   z, jr_020_79BE                           ; $79AA: $28 $12
-
-jr_020_79AC:
-    scf                                           ; $79AC: $37
-    stop                                          ; $79AD: $10 $00
-    jr   jr_020_79C8                              ; $79AF: $18 $17
-
-    db   $10                                      ; $79B1: $10
-    ld   [$171A], sp                              ; $79B2: $08 $1A $17
-    db   $10                                      ; $79B5: $10
-    db   $10                                      ; $79B6: $10
-    inc  e                                        ; $79B7: $1C
-    rla                                           ; $79B8: $17
-    db   $10                                      ; $79B9: $10
-
-jr_020_79BA:
-    jr   jr_020_79D8                              ; $79BA: $18 $1C
-
-jr_020_79BC:
-    scf                                           ; $79BC: $37
-    db   $10                                      ; $79BD: $10
-
-jr_020_79BE:
-    jr   nz, jr_020_79DA                          ; $79BE: $20 $1A
-
-    scf                                           ; $79C0: $37
-    db   $10                                      ; $79C1: $10
-    jr   z, jr_020_79DC                           ; $79C2: $28 $18
-
-jr_020_79C4:
-    scf                                           ; $79C4: $37
-    jr   nz, jr_020_79D7                          ; $79C5: $20 $10
-
-    ld   b, b                                     ; $79C7: $40
-
-jr_020_79C8:
-    rla                                           ; $79C8: $17
-    jr   nz, @+$1A                                ; $79C9: $20 $18
-
-    ld   d, b                                     ; $79CB: $50
-    rla                                           ; $79CC: $17
-    jr   nc, jr_020_79DF                          ; $79CD: $30 $10
-
-    ld   b, b                                     ; $79CF: $40
-    rla                                           ; $79D0: $17
-    jr   nc, @+$1A                                ; $79D1: $30 $18
-
-    ld   d, b                                     ; $79D3: $50
-    rla                                           ; $79D4: $17
-    ld   b, b                                     ; $79D5: $40
-    db   $10                                      ; $79D6: $10
-
-jr_020_79D7:
-    ld   b, b                                     ; $79D7: $40
-
-jr_020_79D8:
-    rla                                           ; $79D8: $17
-    ld   b, b                                     ; $79D9: $40
-
-jr_020_79DA:
-    jr   jr_020_7A2C                              ; $79DA: $18 $50
-
-jr_020_79DC:
-    rla                                           ; $79DC: $17
-    ld   d, b                                     ; $79DD: $50
-    db   $10                                      ; $79DE: $10
-
-jr_020_79DF:
-    ld   b, b                                     ; $79DF: $40
-    rla                                           ; $79E0: $17
-    ld   d, b                                     ; $79E1: $50
-    jr   @+$52                                    ; $79E2: $18 $50
-
-    rla                                           ; $79E4: $17
-    ld   h, b                                     ; $79E5: $60
-    db   $10                                      ; $79E6: $10
-    ld   b, b                                     ; $79E7: $40
-    rla                                           ; $79E8: $17
-    ld   h, b                                     ; $79E9: $60
-    jr   jr_020_7A3C                              ; $79EA: $18 $50
-
-    rla                                           ; $79EC: $17
-    ld   [hl], b                                  ; $79ED: $70
-    db   $10                                      ; $79EE: $10
-    ld   b, b                                     ; $79EF: $40
-    rla                                           ; $79F0: $17
-    ld   [hl], b                                  ; $79F1: $70
-    jr   jr_020_7A44                              ; $79F2: $18 $50
-
-    rla                                           ; $79F4: $17
-    add  b                                        ; $79F5: $80
-    db   $10                                      ; $79F6: $10
-    ld   b, b                                     ; $79F7: $40
-    rla                                           ; $79F8: $17
-    add  b                                        ; $79F9: $80
-    jr   jr_020_7A4C                              ; $79FA: $18 $50
-
-    rla                                           ; $79FC: $17
-    sub  b                                        ; $79FD: $90
-    db   $10                                      ; $79FE: $10
-    ld   b, b                                     ; $79FF: $40
-    rla                                           ; $7A00: $17
-    sub  b                                        ; $7A01: $90
-    jr   jr_020_7A54                              ; $7A02: $18 $50
-
-    rla                                           ; $7A04: $17
-    and  b                                        ; $7A05: $A0
-    db   $10                                      ; $7A06: $10
-    ld   b, b                                     ; $7A07: $40
-    rla                                           ; $7A08: $17
-    and  b                                        ; $7A09: $A0
-    jr   jr_020_7A5C                              ; $7A0A: $18 $50
-
-    rla                                           ; $7A0C: $17
-    or   b                                        ; $7A0D: $B0
-    db   $10                                      ; $7A0E: $10
-    ld   b, b                                     ; $7A0F: $40
-    rla                                           ; $7A10: $17
-    or   b                                        ; $7A11: $B0
-    jr   jr_020_7A64                              ; $7A12: $18 $50
-
-    rla                                           ; $7A14: $17
-    nop                                           ; $7A15: $00
-    nop                                           ; $7A16: $00
-    ld   [hl+], a                                 ; $7A17: $22
-    rla                                           ; $7A18: $17
-    nop                                           ; $7A19: $00
-    ld   [$1724], sp                              ; $7A1A: $08 $24 $17
-    nop                                           ; $7A1D: $00
-    db   $10                                      ; $7A1E: $10
-    ld   h, $17                                   ; $7A1F: $26 $17
-    nop                                           ; $7A21: $00
-    jr   @+$28                                    ; $7A22: $18 $26
-
-    scf                                           ; $7A24: $37
-    nop                                           ; $7A25: $00
-    jr   nz, jr_020_7A4C                          ; $7A26: $20 $24
-
-    scf                                           ; $7A28: $37
-    nop                                           ; $7A29: $00
-    jr   z, @+$24                                 ; $7A2A: $28 $22
-
-jr_020_7A2C:
-    scf                                           ; $7A2C: $37
-    stop                                          ; $7A2D: $10 $00
-    jr   z, jr_020_7A48                           ; $7A2F: $28 $17
-
-    db   $10                                      ; $7A31: $10
-    ld   [$172A], sp                              ; $7A32: $08 $2A $17
-    db   $10                                      ; $7A35: $10
-    db   $10                                      ; $7A36: $10
-    inc  l                                        ; $7A37: $2C
-    rla                                           ; $7A38: $17
-    db   $10                                      ; $7A39: $10
-    jr   jr_020_7A68                              ; $7A3A: $18 $2C
-
-jr_020_7A3C:
-    scf                                           ; $7A3C: $37
-    db   $10                                      ; $7A3D: $10
-    jr   nz, jr_020_7A6A                          ; $7A3E: $20 $2A
-
-    scf                                           ; $7A40: $37
-    db   $10                                      ; $7A41: $10
-    jr   z, jr_020_7A6C                           ; $7A42: $28 $28
-
-jr_020_7A44:
-    scf                                           ; $7A44: $37
-    jr   nz, jr_020_7A57                          ; $7A45: $20 $10
-
-    ld   h, b                                     ; $7A47: $60
-
-jr_020_7A48:
-    rla                                           ; $7A48: $17
-    jr   nz, @+$1A                                ; $7A49: $20 $18
-
-    ld   [hl], b                                  ; $7A4B: $70
-
-jr_020_7A4C:
-    rla                                           ; $7A4C: $17
-    jr   nc, jr_020_7A5F                          ; $7A4D: $30 $10
-
-    ld   h, b                                     ; $7A4F: $60
-    rla                                           ; $7A50: $17
-    jr   nc, @+$1A                                ; $7A51: $30 $18
-
-    ld   [hl], b                                  ; $7A53: $70
-
-jr_020_7A54:
-    rla                                           ; $7A54: $17
-    ld   b, b                                     ; $7A55: $40
-    db   $10                                      ; $7A56: $10
-
-jr_020_7A57:
-    ld   h, b                                     ; $7A57: $60
-    rla                                           ; $7A58: $17
-    ld   b, b                                     ; $7A59: $40
-    jr   jr_020_7ACC                              ; $7A5A: $18 $70
-
-jr_020_7A5C:
-    rla                                           ; $7A5C: $17
-    ld   d, b                                     ; $7A5D: $50
-    db   $10                                      ; $7A5E: $10
-
-jr_020_7A5F:
-    ld   h, b                                     ; $7A5F: $60
-    rla                                           ; $7A60: $17
-    ld   d, b                                     ; $7A61: $50
-    jr   jr_020_7AD4                              ; $7A62: $18 $70
-
-jr_020_7A64:
-    rla                                           ; $7A64: $17
-    ld   h, b                                     ; $7A65: $60
-    db   $10                                      ; $7A66: $10
-    ld   h, b                                     ; $7A67: $60
-
-jr_020_7A68:
-    rla                                           ; $7A68: $17
-    ld   h, b                                     ; $7A69: $60
-
-jr_020_7A6A:
-    jr   jr_020_7ADC                              ; $7A6A: $18 $70
-
-jr_020_7A6C:
-    rla                                           ; $7A6C: $17
-    ld   [hl], b                                  ; $7A6D: $70
-    db   $10                                      ; $7A6E: $10
-    ld   h, b                                     ; $7A6F: $60
-    rla                                           ; $7A70: $17
-    ld   [hl], b                                  ; $7A71: $70
-    jr   jr_020_7AE4                              ; $7A72: $18 $70
-
-    rla                                           ; $7A74: $17
-    add  b                                        ; $7A75: $80
-    db   $10                                      ; $7A76: $10
-    ld   h, b                                     ; $7A77: $60
-    rla                                           ; $7A78: $17
-    add  b                                        ; $7A79: $80
-    jr   jr_020_7AEC                              ; $7A7A: $18 $70
-
-    rla                                           ; $7A7C: $17
-    sub  b                                        ; $7A7D: $90
-    db   $10                                      ; $7A7E: $10
-    ld   h, b                                     ; $7A7F: $60
-    rla                                           ; $7A80: $17
-    sub  b                                        ; $7A81: $90
-    jr   jr_020_7AF4                              ; $7A82: $18 $70
-
-    rla                                           ; $7A84: $17
-    and  b                                        ; $7A85: $A0
-    db   $10                                      ; $7A86: $10
-    ld   h, b                                     ; $7A87: $60
-    rla                                           ; $7A88: $17
-    and  b                                        ; $7A89: $A0
-    jr   jr_020_7AFC                              ; $7A8A: $18 $70
-
-    rla                                           ; $7A8C: $17
-    or   b                                        ; $7A8D: $B0
-    db   $10                                      ; $7A8E: $10
-    ld   h, b                                     ; $7A8F: $60
-    rla                                           ; $7A90: $17
-    or   b                                        ; $7A91: $B0
-    jr   jr_020_7B04                              ; $7A92: $18 $70
-
-    rla                                           ; $7A94: $17
-    nop                                           ; $7A95: $00
-    nop                                           ; $7A96: $00
-    ld   [hl-], a                                 ; $7A97: $32
-    rla                                           ; $7A98: $17
-    nop                                           ; $7A99: $00
-    ld   [$1734], sp                              ; $7A9A: $08 $34 $17
-    nop                                           ; $7A9D: $00
-    db   $10                                      ; $7A9E: $10
-    ld   [hl], $17                                ; $7A9F: $36 $17
-    nop                                           ; $7AA1: $00
-    jr   jr_020_7ADA                              ; $7AA2: $18 $36
-
-    scf                                           ; $7AA4: $37
-    nop                                           ; $7AA5: $00
-    jr   nz, jr_020_7ADC                          ; $7AA6: $20 $34
-
-    scf                                           ; $7AA8: $37
-    nop                                           ; $7AA9: $00
-    jr   z, jr_020_7ADE                           ; $7AAA: $28 $32
-
-    scf                                           ; $7AAC: $37
-    stop                                          ; $7AAD: $10 $00
-    jr   c, jr_020_7AC8                           ; $7AAF: $38 $17
-
-    db   $10                                      ; $7AB1: $10
-    ld   [$173A], sp                              ; $7AB2: $08 $3A $17
-    db   $10                                      ; $7AB5: $10
-    db   $10                                      ; $7AB6: $10
-    inc  a                                        ; $7AB7: $3C
-    rla                                           ; $7AB8: $17
-    db   $10                                      ; $7AB9: $10
-    jr   jr_020_7AF8                              ; $7ABA: $18 $3C
-
-    scf                                           ; $7ABC: $37
-    db   $10                                      ; $7ABD: $10
-    jr   nz, jr_020_7AFA                          ; $7ABE: $20 $3A
-
-    scf                                           ; $7AC0: $37
-    db   $10                                      ; $7AC1: $10
-    jr   z, jr_020_7AFC                           ; $7AC2: $28 $38
-
-    scf                                           ; $7AC4: $37
-    jr   nz, jr_020_7AD7                          ; $7AC5: $20 $10
-
-    ld   d, d                                     ; $7AC7: $52
-
-jr_020_7AC8:
-    rla                                           ; $7AC8: $17
-    jr   nz, @+$1A                                ; $7AC9: $20 $18
-
-    ld   h, d                                     ; $7ACB: $62
-
-jr_020_7ACC:
-    rla                                           ; $7ACC: $17
-    jr   nc, jr_020_7ADF                          ; $7ACD: $30 $10
-
-    ld   d, d                                     ; $7ACF: $52
-    rla                                           ; $7AD0: $17
-    jr   nc, @+$1A                                ; $7AD1: $30 $18
-
-    ld   h, d                                     ; $7AD3: $62
-
-jr_020_7AD4:
-    rla                                           ; $7AD4: $17
-    ld   b, b                                     ; $7AD5: $40
-    db   $10                                      ; $7AD6: $10
-
-jr_020_7AD7:
-    ld   d, d                                     ; $7AD7: $52
-    rla                                           ; $7AD8: $17
-    ld   b, b                                     ; $7AD9: $40
-
-jr_020_7ADA:
-    jr   jr_020_7B3E                              ; $7ADA: $18 $62
-
-jr_020_7ADC:
-    rla                                           ; $7ADC: $17
-    ld   d, b                                     ; $7ADD: $50
-
-jr_020_7ADE:
-    db   $10                                      ; $7ADE: $10
-
-jr_020_7ADF:
-    ld   d, d                                     ; $7ADF: $52
-    rla                                           ; $7AE0: $17
-    ld   d, b                                     ; $7AE1: $50
-    jr   @+$64                                    ; $7AE2: $18 $62
-
-jr_020_7AE4:
-    rla                                           ; $7AE4: $17
-    ld   h, b                                     ; $7AE5: $60
-    db   $10                                      ; $7AE6: $10
-    ld   d, d                                     ; $7AE7: $52
-    rla                                           ; $7AE8: $17
-    ld   h, b                                     ; $7AE9: $60
-    jr   @+$64                                    ; $7AEA: $18 $62
-
-jr_020_7AEC:
-    rla                                           ; $7AEC: $17
-    ld   [hl], b                                  ; $7AED: $70
-    db   $10                                      ; $7AEE: $10
-    ld   d, d                                     ; $7AEF: $52
-    rla                                           ; $7AF0: $17
-    ld   [hl], b                                  ; $7AF1: $70
-    jr   jr_020_7B56                              ; $7AF2: $18 $62
-
-jr_020_7AF4:
-    rla                                           ; $7AF4: $17
-    add  b                                        ; $7AF5: $80
-    db   $10                                      ; $7AF6: $10
-    ld   d, d                                     ; $7AF7: $52
-
-jr_020_7AF8:
-    rla                                           ; $7AF8: $17
-    add  b                                        ; $7AF9: $80
-
-jr_020_7AFA:
-    jr   jr_020_7B5E                              ; $7AFA: $18 $62
-
-jr_020_7AFC:
-    rla                                           ; $7AFC: $17
-    sub  b                                        ; $7AFD: $90
-    db   $10                                      ; $7AFE: $10
-    ld   d, d                                     ; $7AFF: $52
-    rla                                           ; $7B00: $17
-    sub  b                                        ; $7B01: $90
-    jr   jr_020_7B66                              ; $7B02: $18 $62
-
-jr_020_7B04:
-    rla                                           ; $7B04: $17
-    and  b                                        ; $7B05: $A0
-    db   $10                                      ; $7B06: $10
-    ld   d, d                                     ; $7B07: $52
-    rla                                           ; $7B08: $17
-    and  b                                        ; $7B09: $A0
-    jr   jr_020_7B6E                              ; $7B0A: $18 $62
-
-    rla                                           ; $7B0C: $17
-    or   b                                        ; $7B0D: $B0
-    db   $10                                      ; $7B0E: $10
-    ld   d, d                                     ; $7B0F: $52
-    rla                                           ; $7B10: $17
-    or   b                                        ; $7B11: $B0
-    jr   jr_020_7B76                              ; $7B12: $18 $62
-
-    rla                                           ; $7B14: $17
-    nop                                           ; $7B15: $00
-    nop                                           ; $7B16: $00
-    ld   b, d                                     ; $7B17: $42
-    rla                                           ; $7B18: $17
-    nop                                           ; $7B19: $00
-    ld   [$1744], sp                              ; $7B1A: $08 $44 $17
-    nop                                           ; $7B1D: $00
-    db   $10                                      ; $7B1E: $10
-    ld   b, [hl]                                  ; $7B1F: $46
-    rla                                           ; $7B20: $17
-    nop                                           ; $7B21: $00
-    jr   jr_020_7B6A                              ; $7B22: $18 $46
-
-jr_020_7B24:
-    scf                                           ; $7B24: $37
-    nop                                           ; $7B25: $00
-    jr   nz, jr_020_7B6C                          ; $7B26: $20 $44
-
-    scf                                           ; $7B28: $37
-    nop                                           ; $7B29: $00
-    jr   z, jr_020_7B6E                           ; $7B2A: $28 $42
-
-    scf                                           ; $7B2C: $37
-    stop                                          ; $7B2D: $10 $00
-    ld   c, b                                     ; $7B2F: $48
-    rla                                           ; $7B30: $17
-    db   $10                                      ; $7B31: $10
-    ld   [$174A], sp                              ; $7B32: $08 $4A $17
-    db   $10                                      ; $7B35: $10
-    db   $10                                      ; $7B36: $10
-    ld   c, h                                     ; $7B37: $4C
-    rla                                           ; $7B38: $17
-    db   $10                                      ; $7B39: $10
-    jr   jr_020_7B88                              ; $7B3A: $18 $4C
-
-    scf                                           ; $7B3C: $37
-    db   $10                                      ; $7B3D: $10
-
-jr_020_7B3E:
-    jr   nz, jr_020_7B8A                          ; $7B3E: $20 $4A
-
-    scf                                           ; $7B40: $37
-    db   $10                                      ; $7B41: $10
-    jr   z, jr_020_7B4C                           ; $7B42: $28 $08
-
-    scf                                           ; $7B44: $37
-    jr   nz, jr_020_7B57                          ; $7B45: $20 $10
-
-    ld   d, [hl]                                  ; $7B47: $56
-    rla                                           ; $7B48: $17
-    jr   nz, @+$1A                                ; $7B49: $20 $18
-
-    ld   h, [hl]                                  ; $7B4B: $66
-
-jr_020_7B4C:
-    rla                                           ; $7B4C: $17
-    jr   nc, jr_020_7B5F                          ; $7B4D: $30 $10
-
-    ld   d, [hl]                                  ; $7B4F: $56
-    rla                                           ; $7B50: $17
-    jr   nc, @+$1A                                ; $7B51: $30 $18
-
-    ld   h, [hl]                                  ; $7B53: $66
-    rla                                           ; $7B54: $17
-    ld   b, b                                     ; $7B55: $40
-
-jr_020_7B56:
-    db   $10                                      ; $7B56: $10
-
-jr_020_7B57:
-    ld   d, [hl]                                  ; $7B57: $56
-    rla                                           ; $7B58: $17
-    ld   b, b                                     ; $7B59: $40
-    jr   jr_020_7BC2                              ; $7B5A: $18 $66
-
-    rla                                           ; $7B5C: $17
-    ld   d, b                                     ; $7B5D: $50
-
-jr_020_7B5E:
-    db   $10                                      ; $7B5E: $10
-
-jr_020_7B5F:
-    ld   d, [hl]                                  ; $7B5F: $56
-    rla                                           ; $7B60: $17
-    ld   d, b                                     ; $7B61: $50
-    jr   @+$68                                    ; $7B62: $18 $66
-
-    rla                                           ; $7B64: $17
-    ld   h, b                                     ; $7B65: $60
-
-jr_020_7B66:
-    db   $10                                      ; $7B66: $10
-    ld   d, [hl]                                  ; $7B67: $56
-    rla                                           ; $7B68: $17
-    ld   h, b                                     ; $7B69: $60
-
-jr_020_7B6A:
-    jr   @+$68                                    ; $7B6A: $18 $66
-
-jr_020_7B6C:
-    rla                                           ; $7B6C: $17
-    ld   [hl], b                                  ; $7B6D: $70
-
-jr_020_7B6E:
-    db   $10                                      ; $7B6E: $10
-    ld   d, [hl]                                  ; $7B6F: $56
-    rla                                           ; $7B70: $17
-    ld   [hl], b                                  ; $7B71: $70
-    jr   jr_020_7BDA                              ; $7B72: $18 $66
-
-    rla                                           ; $7B74: $17
-    add  b                                        ; $7B75: $80
-
-jr_020_7B76:
-    db   $10                                      ; $7B76: $10
-    ld   d, [hl]                                  ; $7B77: $56
-    rla                                           ; $7B78: $17
-    add  b                                        ; $7B79: $80
-    jr   jr_020_7BE2                              ; $7B7A: $18 $66
-
-    rla                                           ; $7B7C: $17
-    sub  b                                        ; $7B7D: $90
-    db   $10                                      ; $7B7E: $10
-    ld   d, [hl]                                  ; $7B7F: $56
-    rla                                           ; $7B80: $17
-    sub  b                                        ; $7B81: $90
-    jr   @+$68                                    ; $7B82: $18 $66
-
-    rla                                           ; $7B84: $17
-    and  b                                        ; $7B85: $A0
-    db   $10                                      ; $7B86: $10
-    ld   d, [hl]                                  ; $7B87: $56
-
-jr_020_7B88:
-    rla                                           ; $7B88: $17
-    and  b                                        ; $7B89: $A0
-
-jr_020_7B8A:
-    jr   @+$68                                    ; $7B8A: $18 $66
-
-    rla                                           ; $7B8C: $17
-    or   b                                        ; $7B8D: $B0
-    db   $10                                      ; $7B8E: $10
-    ld   d, [hl]                                  ; $7B8F: $56
-    rla                                           ; $7B90: $17
-    or   b                                        ; $7B91: $B0
-    jr   jr_020_7BFA                              ; $7B92: $18 $66
-
-    rla                                           ; $7B94: $17
-    ld   [hl], b                                  ; $7B95: $70
-    ld   l, b                                     ; $7B96: $68
-    ld   h, b                                     ; $7B97: $60
-    ld   e, b                                     ; $7B98: $58
-    ld   d, b                                     ; $7B99: $50
-    ld   c, b                                     ; $7B9A: $48
-    ld   b, b                                     ; $7B9B: $40
-    jr   c, jr_020_7BCE                           ; $7B9C: $38 $30
-
-    jr   nc, @+$32                                ; $7B9E: $30 $30
-
-    jr   nc, @+$32                                ; $7BA0: $30 $30
-
-    jr   nc, jr_020_7B24                          ; $7BA2: $30 $80
-
-    ld   a, b                                     ; $7BA4: $78
+Data_020_7915::
+    db   $00, $00, $10, $17, $00, $08, $04, $17, $00, $10, $06, $17, $00, $18, $06, $37
+    db   $00, $20, $04, $37, $00, $28, $10, $37, $10, $00, $08, $17, $10, $08, $0A, $17
+    db   $10, $10, $0C, $17, $10, $18, $0C, $37, $10, $20, $0A, $37, $10, $28, $08, $37
+    db   $20, $10, $20, $17, $20, $18, $30, $17, $30, $10, $20, $17, $30, $18, $30, $17
+    db   $40, $10, $20, $17, $40, $18, $30, $17, $50, $10, $20, $17, $50, $18, $30, $17
+    db   $60, $10, $20, $17, $60, $18, $30, $17, $70, $10, $20, $17, $70, $18, $30, $17
+    db   $80, $10, $20, $17, $80, $18, $30, $17, $90, $10, $20, $17, $90, $18, $30, $17
+    db   $A0, $10, $20, $17, $A0, $18, $30, $17, $B0, $10, $20, $17, $B0, $18, $30, $17
+
+Data_020_7995::
+    db   $00, $00, $12, $17, $00, $08, $14, $17, $00, $10, $16, $17, $00, $18, $16, $37
+    db   $00, $20, $14, $37, $00, $28, $12, $37, $10, $00, $18, $17, $10, $08, $1A, $17
+    db   $10, $10, $1C, $17, $10, $18, $1C, $37, $10, $20, $1A, $37, $10, $28, $18, $37
+    db   $20, $10, $40, $17, $20, $18, $50, $17, $30, $10, $40, $17, $30, $18, $50, $17
+    db   $40, $10, $40, $17, $40, $18, $50, $17, $50, $10, $40, $17, $50, $18, $50, $17
+    db   $60, $10, $40, $17, $60, $18, $50, $17, $70, $10, $40, $17, $70, $18, $50, $17
+    db   $80, $10, $40, $17, $80, $18, $50, $17, $90, $10, $40, $17, $90, $18, $50, $17
+    db   $A0, $10, $40, $17, $A0, $18, $50, $17, $B0, $10, $40, $17, $B0, $18, $50, $17
+
+Data_020_7A15::
+    db   $00, $00, $22, $17, $00, $08, $24, $17, $00, $10, $26, $17, $00, $18, $26, $37
+    db   $00, $20, $24, $37, $00, $28, $22, $37, $10, $00, $28, $17, $10, $08, $2A, $17
+    db   $10, $10, $2C, $17, $10, $18, $2C, $37, $10, $20, $2A, $37, $10, $28, $28, $37
+    db   $20, $10, $60, $17, $20, $18, $70, $17, $30, $10, $60, $17, $30, $18, $70, $17
+    db   $40, $10, $60, $17, $40, $18, $70, $17, $50, $10, $60, $17, $50, $18, $70, $17
+    db   $60, $10, $60, $17, $60, $18, $70, $17, $70, $10, $60, $17, $70, $18, $70, $17
+    db   $80, $10, $60, $17, $80, $18, $70, $17, $90, $10, $60, $17, $90, $18, $70, $17
+    db   $A0, $10, $60, $17, $A0, $18, $70, $17, $B0, $10, $60, $17, $B0, $18, $70, $17
+
+Data_020_7A95::
+    db   $00, $00, $32, $17, $00, $08, $34, $17, $00, $10, $36, $17, $00, $18, $36, $37
+    db   $00, $20, $34, $37, $00, $28, $32, $37, $10, $00, $38, $17, $10, $08, $3A, $17
+    db   $10, $10, $3C, $17, $10, $18, $3C, $37, $10, $20, $3A, $37, $10, $28, $38, $37
+    db   $20, $10, $52, $17, $20, $18, $62, $17, $30, $10, $52, $17, $30, $18, $62, $17
+    db   $40, $10, $52, $17, $40, $18, $62, $17, $50, $10, $52, $17, $50, $18, $62, $17
+    db   $60, $10, $52, $17, $60, $18, $62, $17, $70, $10, $52, $17, $70, $18, $62, $17
+    db   $80, $10, $52, $17, $80, $18, $62, $17, $90, $10, $52, $17, $90, $18, $62, $17
+    db   $A0, $10, $52, $17, $A0, $18, $62, $17, $B0, $10, $52, $17, $B0, $18, $62, $17
+
+Data_020_7B15::
+    db   $00, $00, $42, $17, $00, $08, $44, $17, $00, $10, $46, $17, $00, $18, $46, $37
+    db   $00, $20, $44, $37, $00, $28, $42, $37, $10, $00, $48, $17, $10, $08, $4A, $17
+    db   $10, $10, $4C, $17, $10, $18, $4C, $37, $10, $20, $4A, $37, $10, $28, $08, $37
+    db   $20, $10, $56, $17, $20, $18, $66, $17, $30, $10, $56, $17, $30, $18, $66, $17
+    db   $40, $10, $56, $17, $40, $18, $66, $17, $50, $10, $56, $17, $50, $18, $66, $17
+    db   $60, $10, $56, $17, $60, $18, $66, $17, $70, $10, $56, $17, $70, $18, $66, $17
+    db   $80, $10, $56, $17, $80, $18, $66, $17, $90, $10, $56, $17, $90, $18, $66, $17
+    db   $A0, $10, $56, $17, $A0, $18, $66, $17, $B0, $10, $56, $17, $B0, $18, $66, $17
+
+Data_020_7B95::
+    db   $70, $68, $60, $58, $50, $48, $40, $38, $30, $30, $30, $30, $30, $30, $80, $78
 
 func_020_7BA5::
     push bc                                       ; $7BA5: $C5
@@ -10740,55 +5457,51 @@ func_020_7BA5::
     and  $0F                                      ; $7BAA: $E6 $0F
     ld   e, a                                     ; $7BAC: $5F
     ld   d, b                                     ; $7BAD: $50
-    ld   hl, $7B95                                ; $7BAE: $21 $95 $7B
+    ld   hl, Data_020_7B95                        ; $7BAE: $21 $95 $7B
     add  hl, de                                   ; $7BB1: $19
     ld   b, [hl]                                  ; $7BB2: $46
-    ld   hl, $7915                                ; $7BB3: $21 $15 $79
-    ldh  a, [hActiveEntitySpriteVariant]               ; $7BB6: $F0 $F1
+    ld   hl, Data_020_7915                        ; $7BB3: $21 $15 $79
+    ldh  a, [hActiveEntitySpriteVariant]          ; $7BB6: $F0 $F1
     cp   $05                                      ; $7BB8: $FE $05
     jr   z, jr_020_7BFC                           ; $7BBA: $28 $40
 
     and  a                                        ; $7BBC: $A7
     jr   z, jr_020_7BD4                           ; $7BBD: $28 $15
 
-    ld   hl, $7995                                ; $7BBF: $21 $95 $79
+    ld   hl, Data_020_7995                        ; $7BBF: $21 $95 $79
 
 jr_020_7BC2:
     dec  a                                        ; $7BC2: $3D
     jr   z, jr_020_7BD4                           ; $7BC3: $28 $0F
 
-    ld   hl, $7A15                                ; $7BC5: $21 $15 $7A
+    ld   hl, Data_020_7A15                        ; $7BC5: $21 $15 $7A
     dec  a                                        ; $7BC8: $3D
     jr   z, jr_020_7BD4                           ; $7BC9: $28 $09
 
-    ld   hl, $7A95                                ; $7BCB: $21 $95 $7A
+    ld   hl, Data_020_7A95                        ; $7BCB: $21 $95 $7A
 
 jr_020_7BCE:
     dec  a                                        ; $7BCE: $3D
     jr   z, jr_020_7BD4                           ; $7BCF: $28 $03
 
-    ld   hl, $7B15                                ; $7BD1: $21 $15 $7B
+    ld   hl, Data_020_7B15                        ; $7BD1: $21 $15 $7B
 
 jr_020_7BD4:
     ld   de, $C00C                                ; $7BD4: $11 $0C $C0
     ld   c, $00                                   ; $7BD7: $0E $00
 
-jr_020_7BD9:
+.loop
     ld   a, c                                     ; $7BD9: $79
-
-jr_020_7BDA:
     and  $03                                      ; $7BDA: $E6 $03
     cp   $00                                      ; $7BDC: $FE $00
-    jr   nz, jr_020_7BE4                          ; $7BDE: $20 $04
+    jr   nz, .jr_020_7BE4                         ; $7BDE: $20 $04
 
     ldh  a, [hActiveEntityVisualPosY]             ; $7BE0: $F0 $EC
+    jr   .jr_020_7BF0                             ; $7BE2: $18 $0C
 
-jr_020_7BE2:
-    jr   jr_020_7BF0                              ; $7BE2: $18 $0C
-
-jr_020_7BE4:
+.jr_020_7BE4
     cp   $01                                      ; $7BE4: $FE $01
-    jr   nz, jr_020_7BF3                          ; $7BE6: $20 $0B
+    jr   nz, .jr_020_7BF3                         ; $7BE6: $20 $0B
 
     push hl                                       ; $7BE8: $E5
     ld   hl, wScreenShakeHorizontal               ; $7BE9: $21 $55 $C1
@@ -10796,62 +5509,30 @@ jr_020_7BE4:
     sub  [hl]                                     ; $7BEE: $96
     pop  hl                                       ; $7BEF: $E1
 
-jr_020_7BF0:
+.jr_020_7BF0
     add  [hl]                                     ; $7BF0: $86
-    jr   jr_020_7BF4                              ; $7BF1: $18 $01
+    jr   .jr_020_7BF4                             ; $7BF1: $18 $01
 
-jr_020_7BF3:
+.jr_020_7BF3
     ld   a, [hl]                                  ; $7BF3: $7E
-
-jr_020_7BF4:
+.jr_020_7BF4
     ld   [de], a                                  ; $7BF4: $12
     inc  hl                                       ; $7BF5: $23
     inc  de                                       ; $7BF6: $13
     inc  c                                        ; $7BF7: $0C
     ld   a, c                                     ; $7BF8: $79
     cp   b                                        ; $7BF9: $B8
-
-jr_020_7BFA:
-    jr   nz, jr_020_7BD9                          ; $7BFA: $20 $DD
+    jr   nz, .loop                                ; $7BFA: $20 $DD
 
 jr_020_7BFC:
     pop  bc                                       ; $7BFC: $C1
     ret                                           ; $7BFD: $C9
 
-    ld   c, b                                     ; $7BFE: $48
-    ld   [hl], c                                  ; $7BFF: $71
-    ld   sp, LoadRoom.notColorDungeon             ; $7C00: $31 $56 $31
-    ld   d, [hl]                                  ; $7C03: $56
-    sbc  h                                        ; $7C04: $9C
-    ld   [hl], e                                  ; $7C05: $73
-    daa                                           ; $7C06: $27
-    ld   h, l                                     ; $7C07: $65
-    rst  $28                                      ; $7C08: $EF
-    ld   c, l                                     ; $7C09: $4D
-    rst  $28                                      ; $7C0A: $EF
-    ld   c, l                                     ; $7C0B: $4D
-    add  hl, sp                                   ; $7C0C: $39
-    ld   h, a                                     ; $7C0D: $67
-    ld   b, $69                                   ; $7C0E: $06 $69
-    xor  l                                        ; $7C10: $AD
-    ld   b, l                                     ; $7C11: $45
-    xor  l                                        ; $7C12: $AD
-    ld   b, l                                     ; $7C13: $45
-    sub  $5A                                      ; $7C14: $D6 $5A
-    push hl                                       ; $7C16: $E5
-    ld   c, h                                     ; $7C17: $4C
-    ld   l, e                                     ; $7C18: $6B
-    dec  a                                        ; $7C19: $3D
-    ld   l, e                                     ; $7C1A: $6B
-    dec  a                                        ; $7C1B: $3D
-    ld   [hl], e                                  ; $7C1C: $73
-    ld   c, [hl]                                  ; $7C1D: $4E
-    and  h                                        ; $7C1E: $A4
-    inc  a                                        ; $7C1F: $3C
-    add  hl, hl                                   ; $7C20: $29
-    ld   sp, $3129                                ; $7C21: $31 $29 $31
-    rst  $28                                      ; $7C24: $EF
-    dec  a                                        ; $7C25: $3D
+; FIXME: resolve this pointers table
+Data_020_7BFE::
+    db   $48, $71, $31, $56, $31, $56, $9C, $73, $27, $65, $EF, $4D, $EF, $4D, $39, $67
+    db   $06, $69, $AD, $45, $AD, $45, $D6, $5A, $E5, $4C, $6B, $3D, $6B, $3D, $73, $4E
+    db   $A4, $3C, $29, $31, $29, $31, $EF, $3D
 
 func_020_7C26::
     ld   a, [$D00D]                               ; $7C26: $FA $0D $D0
@@ -10868,7 +5549,7 @@ func_020_7C26::
     ld   c, a                                     ; $7C35: $4F
     ld   b, $00                                   ; $7C36: $06 $00
     push bc                                       ; $7C38: $C5
-    ld   hl, $7BFE                                ; $7C39: $21 $FE $7B
+    ld   hl, Data_020_7BFE                        ; $7C39: $21 $FE $7B
     add  hl, bc                                   ; $7C3C: $09
     ld   bc, $08                                  ; $7C3D: $01 $08 $00
     ld   de, $DC10                                ; $7C40: $11 $10 $DC
@@ -10894,133 +5575,45 @@ jr_020_7C5B:
     xor  a                                        ; $7C5E: $AF
     ld   [wPaletteUnknownC], a                    ; $7C5F: $EA $D3 $DD
     ld   a, $81                                   ; $7C62: $3E $81
-    ld   [wPaletteDataFlags], a                    ; $7C64: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $7C64: $EA $D1 $DD
     ret                                           ; $7C67: $C9
 
-    nop                                           ; $7C68: $00
-    add  hl, de                                   ; $7C69: $19
-    ld   e, e                                     ; $7C6A: $5B
-    ld   b, $03                                   ; $7C6B: $06 $03
-    db   $10                                      ; $7C6D: $10
-    ld   e, d                                     ; $7C6E: $5A
-    ld   b, $05                                   ; $7C6F: $06 $05
-    ld   [$0659], sp                              ; $7C71: $08 $59 $06
-    ld   [$EB20], sp                              ; $7C74: $08 $20 $EB
-    dec  b                                        ; $7C77: $05
-    nop                                           ; $7C78: $00
-    jr   nz, @-$14                                ; $7C79: $20 $EA
+Data_020_7C68::
+    db   $00, $19, $5B, $06, $03, $10, $5A, $06, $05, $08, $59, $06
 
-    dec  b                                        ; $7C7B: $05
-    ld   [$DF18], sp                              ; $7C7C: $08 $18 $DF
-    dec  b                                        ; $7C7F: $05
-    nop                                           ; $7C80: $00
-    jr   @-$20                                    ; $7C81: $18 $DE
+Data_020_7C74::
+    db   $08, $20, $EB, $05, $00, $20, $EA, $05   ; $7C74
+    db   $08, $18, $DF, $05, $00, $18, $DE, $05   ; $7C7C
+    db   $08, $10, $CF, $05, $00, $10, $CE, $05   ; $7C84
+    db   $08, $08, $C1, $05, $00, $08, $C0, $05   ; $7C8C
+    db   $10, $00, $5D, $05, $08, $00, $5C, $05   ; $7C94
 
-    dec  b                                        ; $7C83: $05
-    ld   [$CF10], sp                              ; $7C84: $08 $10 $CF
-    dec  b                                        ; $7C87: $05
-    nop                                           ; $7C88: $00
+Data_020_7C9C::
+    db   $08, $20, $EB, $05, $00, $20, $EA, $05   ; $7C9C
+    db   $08, $18, $DF, $05, $00, $18, $DE, $05   ; $7CA4
+    db   $08, $10, $CF, $05, $00, $10, $CE, $05   ; $7CAC
+    db   $08, $08, $C1, $05, $00, $08, $C0, $05   ; $7CB4
+    db   $10, $00, $5F, $05, $08, $00, $5E, $05   ; $7CBC
 
-jr_020_7C89:
-    db   $10                                      ; $7C89: $10
-    adc  $05                                      ; $7C8A: $CE $05
-    ld   [wNameIndex], sp                         ; $7C8C: $08 $08 $C1
-    dec  b                                        ; $7C8F: $05
-    nop                                           ; $7C90: $00
-    ld   [$05C0], sp                              ; $7C91: $08 $C0 $05
-    stop                                          ; $7C94: $10 $00
-    ld   e, l                                     ; $7C96: $5D
-    dec  b                                        ; $7C97: $05
-    ld   [$5C00], sp                              ; $7C98: $08 $00 $5C
-    dec  b                                        ; $7C9B: $05
-    ld   [$EB20], sp                              ; $7C9C: $08 $20 $EB
-    dec  b                                        ; $7C9F: $05
-    nop                                           ; $7CA0: $00
-    jr   nz, @-$14                                ; $7CA1: $20 $EA
+Data_020_7CC4::
+    db   $08, $20, $EB, $05, $00, $20, $EA, $05   ; $7CC4
+    db   $08, $18, $DF, $05, $00, $18, $DE, $05   ; $7CCC
+    db   $08, $10, $CF, $05, $00, $10, $CE, $05   ; $7CD4
+    db   $08, $08, $D1, $05, $00, $08, $D0, $05   ; $7CDC
+    db   $10, $00, $ED, $05, $08, $00, $EC, $05   ; $7CE4
 
-    dec  b                                        ; $7CA3: $05
-    ld   [$DF18], sp                              ; $7CA4: $08 $18 $DF
-    dec  b                                        ; $7CA7: $05
-    nop                                           ; $7CA8: $00
-    jr   jr_020_7C89                              ; $7CA9: $18 $DE
+Data_020_7CEC::
+    db   $08, $20, $EB, $05, $00, $20, $EA, $05   ; $7CEC
+    db   $08, $18, $DF, $05, $00, $18, $DE, $05   ; $7CF4
+    db   $08, $10, $CF, $05, $00, $10, $CE, $05   ; $7CFC
+    db   $08, $08, $D1, $05, $00, $08, $D0, $05   ; $7D04
+    db   $10, $00, $EF, $05, $08, $00, $EE, $05   ; $7D0C
 
-    dec  b                                        ; $7CAB: $05
-    ld   [$CF10], sp                              ; $7CAC: $08 $10 $CF
-    dec  b                                        ; $7CAF: $05
-    nop                                           ; $7CB0: $00
-
-jr_020_7CB1:
-    db   $10                                      ; $7CB1: $10
-    adc  $05                                      ; $7CB2: $CE $05
-    ld   [wNameIndex], sp                         ; $7CB4: $08 $08 $C1
-    dec  b                                        ; $7CB7: $05
-    nop                                           ; $7CB8: $00
-    ld   [$05C0], sp                              ; $7CB9: $08 $C0 $05
-    stop                                          ; $7CBC: $10 $00
-    ld   e, a                                     ; $7CBE: $5F
-    dec  b                                        ; $7CBF: $05
-    ld   [$5E00], sp                              ; $7CC0: $08 $00 $5E
-    dec  b                                        ; $7CC3: $05
-    ld   [$EB20], sp                              ; $7CC4: $08 $20 $EB
-    dec  b                                        ; $7CC7: $05
-    nop                                           ; $7CC8: $00
-    jr   nz, @-$14                                ; $7CC9: $20 $EA
-
-    dec  b                                        ; $7CCB: $05
-    ld   [$DF18], sp                              ; $7CCC: $08 $18 $DF
-    dec  b                                        ; $7CCF: $05
-    nop                                           ; $7CD0: $00
-    jr   jr_020_7CB1                              ; $7CD1: $18 $DE
-
-    dec  b                                        ; $7CD3: $05
-    ld   [$CF10], sp                              ; $7CD4: $08 $10 $CF
-    dec  b                                        ; $7CD7: $05
-    nop                                           ; $7CD8: $00
-
-jr_020_7CD9:
-    db   $10                                      ; $7CD9: $10
-    adc  $05                                      ; $7CDA: $CE $05
-    ld   [$D108], sp                              ; $7CDC: $08 $08 $D1
-    dec  b                                        ; $7CDF: $05
-    nop                                           ; $7CE0: $00
-    ld   [$05D0], sp                              ; $7CE1: $08 $D0 $05
-    stop                                          ; $7CE4: $10 $00
-    db   $ed                                      ; $7CE6: $ED
-    dec  b                                        ; $7CE7: $05
-    ld   [$EC00], sp                              ; $7CE8: $08 $00 $EC
-    dec  b                                        ; $7CEB: $05
-    ld   [$EB20], sp                              ; $7CEC: $08 $20 $EB
-    dec  b                                        ; $7CEF: $05
-    nop                                           ; $7CF0: $00
-    jr   nz, @-$14                                ; $7CF1: $20 $EA
-
-    dec  b                                        ; $7CF3: $05
-    ld   [$DF18], sp                              ; $7CF4: $08 $18 $DF
-    dec  b                                        ; $7CF7: $05
-    nop                                           ; $7CF8: $00
-    jr   jr_020_7CD9                              ; $7CF9: $18 $DE
-
-    dec  b                                        ; $7CFB: $05
-    ld   [$CF10], sp                              ; $7CFC: $08 $10 $CF
-    dec  b                                        ; $7CFF: $05
-    nop                                           ; $7D00: $00
-    db   $10                                      ; $7D01: $10
-    adc  $05                                      ; $7D02: $CE $05
-    ld   [$D108], sp                              ; $7D04: $08 $08 $D1
-    dec  b                                        ; $7D07: $05
-    nop                                           ; $7D08: $00
-    ld   [$05D0], sp                              ; $7D09: $08 $D0 $05
-    stop                                          ; $7D0C: $10 $00
-    rst  $28                                      ; $7D0E: $EF
-    dec  b                                        ; $7D0F: $05
-    ld   [$EE00], sp                              ; $7D10: $08 $00 $EE
-    dec  b                                        ; $7D13: $05
-    ld   [hl], h                                  ; $7D14: $74
-    ld   a, h                                     ; $7D15: $7C
-    sbc  h                                        ; $7D16: $9C
-    ld   a, h                                     ; $7D17: $7C
-    call nz, $EC7C                                ; $7D18: $C4 $7C $EC
-    ld   a, h                                     ; $7D1B: $7C
+Data_020_7D14::
+    dw   Data_020_7C74
+    dw   Data_020_7C9C
+    dw   Data_020_7CC4
+    dw   Data_020_7CEC
 
 func_020_7D1C::
     ld   a, $6C                                   ; $7D1C: $3E $6C
@@ -11030,7 +5623,7 @@ func_020_7D1C::
     swap a                                        ; $7D25: $CB $37
     ld   e, a                                     ; $7D27: $5F
     ld   d, $00                                   ; $7D28: $16 $00
-    ld   hl, $7D14                                ; $7D2A: $21 $14 $7D
+    ld   hl, Data_020_7D14                        ; $7D2A: $21 $14 $7D
     add  hl, de                                   ; $7D2D: $19
     ld   a, [hl+]                                 ; $7D2E: $2A
     ld   d, a                                     ; $7D2F: $57
@@ -11038,12 +5631,12 @@ func_020_7D1C::
     ld   l, d                                     ; $7D31: $6A
     ld   c, $28                                   ; $7D32: $0E $28
     call func_020_7D40                            ; $7D34: $CD $40 $7D
-    ld   hl, $7C68                                ; $7D37: $21 $68 $7C
+    ld   hl, Data_020_7C68                        ; $7D37: $21 $68 $7C
     ld   c, $0C                                   ; $7D3A: $0E $0C
     call func_020_7D40                            ; $7D3C: $CD $40 $7D
     ret                                           ; $7D3F: $C9
 
-func_020_7D40:
+func_020_7D40::
     push bc                                       ; $7D40: $C5
     push hl                                       ; $7D41: $E5
     ld   a, [wOAMNextAvailableSlot]               ; $7D42: $FA $C0 $C3
@@ -11097,18 +5690,17 @@ func_020_7D7C::
     ld   a, $03                                   ; $7D7C: $3E $03
     ldh  [hScratchD], a                           ; $7D7E: $E0 $E4
     ld   a, $06                                   ; $7D80: $3E $06
-    ldh  [$FFE5], a                               ; $7D82: $E0 $E5
+    ldh  [hScratchE], a                           ; $7D82: $E0 $E5
     ld   a, $0C                                   ; $7D84: $3E $0C
     ldh  [hFreeWarpDataAddress], a                ; $7D86: $E0 $E6
     ld   hl, $DC10                                ; $7D88: $21 $10 $DC
     ld   d, $24                                   ; $7D8B: $16 $24
-    call func_020_7D97                            ; $7D8D: $CD $97 $7D
+    call jr_020_7D97                              ; $7D8D: $CD $97 $7D
     ld   a, $01                                   ; $7D90: $3E $01
-    ld   [wPaletteDataFlags], a                    ; $7D92: $EA $D1 $DD
+    ld   [wPaletteDataFlags], a                   ; $7D92: $EA $D1 $DD
     xor  a                                        ; $7D95: $AF
     ret                                           ; $7D96: $C9
 
-func_020_7D97:
 jr_020_7D97:
     push hl                                       ; $7D97: $E5
     ldh  a, [hScratchD]                           ; $7D98: $F0 $E4
@@ -11124,7 +5716,7 @@ jr_020_7D97:
 
 jr_020_7DA4:
     ldh  [hScratch0], a                           ; $7DA4: $E0 $D7
-    ldh  a, [$FFE5]                               ; $7DA6: $F0 $E5
+    ldh  a, [hScratchE]                           ; $7DA6: $F0 $E5
     ld   c, a                                     ; $7DA8: $4F
     ld   a, [hl+]                                 ; $7DA9: $2A
     and  $E0                                      ; $7DAA: $E6 $E0

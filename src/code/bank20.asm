@@ -294,43 +294,43 @@ GetEntityInitHandler::
 ; (The requests themselves load data in bank 8.)
 BGMapToLoadAdjustementTable::
     dw   $0000  ; disabled
-    dw   $56CC  ; Data_BGCopyRequest01_56CC
-    dw   $6748  ; Data_BGCopyRequest02_6748
-    dw   $6336  ; Data_BGCopyRequest03_6336
-    dw   $6328  ; Data_BGCopyRequest04_6328
-    dw   $644D  ; Data_BGCopyRequest05_644D
-    dw   $6589  ; Data_BGCopyRequest06_6589
-    dw   $D651  ; Data_BGCopyRequest07_D651
-    dw   $62E9  ; Data_BGCopyRequest08_62E9
-    dw   $67C9  ; Data_BGCopyRequest09_67C9
-    dw   $698F  ; Data_BGCopyRequest0A_698F
-    dw   $68F6  ; Data_BGCopyRequest0B_68F6
-    dw   $6660  ; Data_BGCopyRequest0C_6660
-    dw   $6A6D  ; Data_BGCopyRequest0D_6A6D
-    dw   $6AEE  ; Data_BGCopyRequest0E_6AEE
-    dw   $6D80  ; Data_BGCopyRequest0F_6D80
-    dw   $6F8B  ; Data_BGCopyRequest10_6F8B
-    dw   $710A  ; Data_BGCopyRequest11_710A
-    dw   $7422  ; Data_BGCopyRequest12_7422
-    dw   $75E3  ; Data_BGCopyRequest13_75E3
-    dw   $62A8  ; Data_BGCopyRequest14_62A8
-    dw   $7283  ; Data_BGCopyRequest15_7283
-    dw   $578C  ; Data_BGCopyRequest16_578C
-    dw   $5AF5  ; Data_BGCopyRequest17_5AF5
-    dw   $5BC8  ; Data_BGCopyRequest18_5BC8
-    dw   $5D0C  ; Data_BGCopyRequest19_5D0C
-    dw   $5E5B  ; Data_BGCopyRequest1A_5E5B
-    dw   $5F47  ; Data_BGCopyRequest1B_5F47
-    dw   $6004  ; Data_BGCopyRequest1C_6004
-    dw   $6004  ; Data_BGCopyRequest1D_6004
-    dw   $4E9A  ; Data_BGCopyRequest1E_4E9A
-    dw   $5050  ; Data_BGCopyRequest1F_5050
-    dw   $51EF  ; Data_BGCopyRequest20_51EF
-    dw   $538E  ; Data_BGCopyRequest21_538E
-    dw   $552D  ; Data_BGCopyRequest22_552D
-    dw   $7781  ; Data_BGCopyRequest23_7781
-    dw   $4DD4  ; Data_BGCopyRequest24_4DD4
-    dw   $6C37  ; Data_BGCopyRequest25_6C37
+    dw   BGCopyRequest01
+    dw   BGCopyRequest02
+    dw   BGCopyRequest03
+    dw   BGCopyRequest04
+    dw   BGCopyRequest05
+    dw   BGCopyRequest06
+    dw   $D651
+    dw   BGCopyRequest08
+    dw   BGCopyRequest09
+    dw   BGCopyRequest0A
+    dw   BGCopyRequest0B
+    dw   BGCopyRequest0C
+    dw   BGCopyRequest0D
+    dw   BGCopyRequest0E
+    dw   BGCopyRequest0F
+    dw   BGCopyRequest10
+    dw   BGCopyRequest11
+    dw   BGCopyRequest12
+    dw   BGCopyRequest13
+    dw   BGCopyRequest14
+    dw   BGCopyRequest15
+    dw   BGCopyRequest16
+    dw   BGCopyRequest17
+    dw   BGCopyRequest18
+    dw   BGCopyRequest19
+    dw   BGCopyRequest1A
+    dw   BGCopyRequest1B
+    dw   BGCopyRequest1C
+    dw   BGCopyRequest1D
+    dw   BGCopyRequest1E
+    dw   BGCopyRequest1F
+    dw   BGCopyRequest20
+    dw   BGCopyRequest21
+    dw   BGCopyRequest22
+    dw   BGCopyRequest23
+    dw   BGCopyRequest24
+    dw   BGCopyRequest25
 
 ; Retrieve the address of a wRequest for loading a given background.
 ; Input:

@@ -485,7 +485,7 @@ LoadTiles::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    callsb func_020_4616
+    callsb GetColorDungeonTilesAddress
     ld   [MBC3SelectBank], a
     jr   .copyData
 .colorDungeonEnd
@@ -581,7 +581,7 @@ LoadOAMTiles::
     ld   [$C10F], a
     ld   hl, vTiles2
     ld   bc, $00
-    call func_020_4616
+    call GetColorDungeonTilesAddress
     ld   c, $90
     ld   b, h
     ld   h, $00

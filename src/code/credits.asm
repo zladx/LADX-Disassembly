@@ -143,7 +143,7 @@ jr_017_4526:
     ld   a, [hl]                                  ; $4532: $7E
     ld   [$D011], a                               ; $4533: $EA $11 $D0
     xor  a                                        ; $4536: $AF
-    ld   [wIsFileSelectionArrowShifted], a        ; $4537: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $4537: $EA $00 $D0
     jp   func_017_45B5                            ; $453A: $C3 $B5 $45
 
 Data_017_453D::
@@ -191,7 +191,7 @@ jr_017_45AD:
     ld   a, c                                     ; $45AD: $79
     ld   [$D005], a                               ; $45AE: $EA $05 $D0
     xor  a                                        ; $45B1: $AF
-    ld   [wIsFileSelectionArrowShifted], a        ; $45B2: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $45B2: $EA $00 $D0
 
 func_017_45B5::
     ld   hl, $D012                                ; $45B5: $21 $12 $D0
@@ -234,9 +234,9 @@ jr_017_45E8:
     and  $07                                      ; $45EA: $E6 $07
     jr   nz, jr_017_4612                          ; $45EC: $20 $24
 
-    ld   a, [wIsFileSelectionArrowShifted]        ; $45EE: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $45EE: $FA $00 $D0
     inc  a                                        ; $45F1: $3C
-    ld   [wIsFileSelectionArrowShifted], a        ; $45F2: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $45F2: $EA $00 $D0
     cp   $0C                                      ; $45F5: $FE $0C
     jr   nz, jr_017_4612                          ; $45F7: $20 $19
 
@@ -257,7 +257,7 @@ jr_017_4603:
     ld   [$D00A], a                               ; $460F: $EA $0A $D0
 
 jr_017_4612:
-    ld   a, [wIsFileSelectionArrowShifted]        ; $4612: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $4612: $FA $00 $D0
     ld   e, a                                     ; $4615: $5F
     ldh  a, [hFrameCounter]                       ; $4616: $F0 $E7
     and  $03                                      ; $4618: $E6 $03
@@ -1211,7 +1211,7 @@ jr_017_4D8F:
 
 ResetCreditsSceneVariables::
     xor  a                                        ; $4DA5: $AF
-    ld   [wIsFileSelectionArrowShifted], a        ; $4DA6: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $4DA6: $EA $00 $D0
     ld   [wIntroTimer], a                         ; $4DA9: $EA $01 $D0
     ld   [wIntroSubTimer], a                      ; $4DAC: $EA $02 $D0
     ld   [$D003], a                               ; $4DAF: $EA $03 $D0
@@ -1237,7 +1237,7 @@ Data_017_4DD1::
     db   $9A, $00, $53, $A0, $9A, $20, $53, $A0
 
 CreditsStairsReachingPlatformHandler::
-    ld   a, [wIsFileSelectionArrowShifted]        ; $4E19: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $4E19: $FA $00 $D0
     cp   $09                                      ; $4E1C: $FE $09
     jr   nz, jr_017_4E27                          ; $4E1E: $20 $07
 
@@ -1248,7 +1248,7 @@ CreditsStairsReachingPlatformHandler::
 jr_017_4E27:
     ld   e, a                                     ; $4E27: $5F
     inc  a                                        ; $4E28: $3C
-    ld   [wIsFileSelectionArrowShifted], a        ; $4E29: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $4E29: $EA $00 $D0
     sla  e                                        ; $4E2C: $CB $23
     sla  e                                        ; $4E2E: $CB $23
     sla  e                                        ; $4E30: $CB $23
@@ -1425,7 +1425,7 @@ Data_017_503E::
     db   $00
 
 CreditsWindFishPrepare3Handler::
-    ld   a, [wIsFileSelectionArrowShifted]        ; $50CF: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $50CF: $FA $00 $D0
     cp   $0A                                      ; $50D2: $FE $0A
     jr   nz, jr_017_50F9                          ; $50D4: $20 $23
 
@@ -1449,7 +1449,7 @@ CreditsWindFishPrepare3Handler::
 jr_017_50F9:
     ld   e, a                                     ; $50F9: $5F
     inc  a                                        ; $50FA: $3C
-    ld   [wIsFileSelectionArrowShifted], a        ; $50FB: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $50FB: $EA $00 $D0
     sla  e                                        ; $50FE: $CB $23
     sla  e                                        ; $5100: $CB $23
     sla  e                                        ; $5102: $CB $23
@@ -1753,7 +1753,7 @@ CreditsWindFishDisappearedHandler::
     and  a                                        ; $54BF: $A7
     ret  nz                                       ; $54C0: $C0
 
-    ld   a, [wIsFileSelectionArrowShifted]        ; $54C1: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $54C1: $FA $00 $D0
     cp   $0A                                      ; $54C4: $FE $0A
     jr   nz, jr_017_54D5                          ; $54C6: $20 $0D
 
@@ -1767,7 +1767,7 @@ CreditsWindFishDisappearedHandler::
 jr_017_54D5:
     ld   e, a                                     ; $54D5: $5F
     inc  a                                        ; $54D6: $3C
-    ld   [wIsFileSelectionArrowShifted], a        ; $54D7: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $54D7: $EA $00 $D0
     sla  e                                        ; $54DA: $CB $23
     sla  e                                        ; $54DC: $CB $23
     ld   d, $00                                   ; $54DE: $16 $00
@@ -1827,7 +1827,7 @@ jr_017_551F:
     ret                                           ; $551F: $C9
 
 CreditsLinkTurnsToPlayHandler::
-    ld   a, [wIsFileSelectionArrowShifted]        ; $5520: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $5520: $FA $00 $D0
     cp   $07                                      ; $5523: $FE $07
     jr   nz, jr_017_5532                          ; $5525: $20 $0B
 
@@ -1838,7 +1838,7 @@ CreditsLinkTurnsToPlayHandler::
 
 jr_017_5532:
     inc  a                                        ; $5532: $3C
-    ld   [wIsFileSelectionArrowShifted], a        ; $5533: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $5533: $EA $00 $D0
     ld   a, $0C                                   ; $5536: $3E $0C
     ldh  [hFFA5], a                               ; $5538: $E0 $A5
     ret                                           ; $553A: $C9
@@ -1874,7 +1874,7 @@ CreditsLinkPreparesToPlayHandler::
 jr_017_557A:
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $557A: $3E $E8
     call SpawnNewEntity_trampoline                ; $557C: $CD $86 $3B
-    ld   a, [wIsFileSelectionArrowShifted]        ; $557F: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $557F: $FA $00 $D0
     ld   c, a                                     ; $5582: $4F
     ld   b, $00                                   ; $5583: $06 $00
     ld   hl, Data_017_553B                        ; $5585: $21 $3B $55
@@ -1927,7 +1927,7 @@ jr_017_55A3:
     ld   [hl], $20                                ; $55D3: $36 $20
     ld   a, c                                     ; $55D5: $79
     inc  a                                        ; $55D6: $3C
-    ld   [wIsFileSelectionArrowShifted], a        ; $55D7: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $55D7: $EA $00 $D0
     cp   $08                                      ; $55DA: $FE $08
     jr   nz, jr_017_557A                          ; $55DC: $20 $9C
 
@@ -2739,7 +2739,7 @@ Data_017_5B0F::
 
 CreditsLoadBGMap::
     ld   hl, Data_017_5B0F                        ; $5B19: $21 $0F $5B
-    ld   a, [wIsFileSelectionArrowShifted]        ; $5B1C: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $5B1C: $FA $00 $D0
     dec  a                                        ; $5B1F: $3D
     ld   e, a                                     ; $5B20: $5F
     ld   d, $00                                   ; $5B21: $16 $00
@@ -2761,7 +2761,7 @@ Data_017_5B32::
 
 func_017_5B37::
     ld   hl, Data_017_5B32                        ; $5B37: $21 $32 $5B
-    ld   a, [wIsFileSelectionArrowShifted]        ; $5B3A: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $5B3A: $FA $00 $D0
     dec  a                                        ; $5B3D: $3D
     srl  a                                        ; $5B3E: $CB $3F
     ld   d, $00                                   ; $5B40: $16 $00
@@ -2833,21 +2833,21 @@ func_017_5B96::
 
     ld   a, $03                                   ; $5BA7: $3E $03
     ld   [$D006], a                               ; $5BA9: $EA $06 $D0
-    ld   a, [wIsFileSelectionArrowShifted]        ; $5BAC: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $5BAC: $FA $00 $D0
     inc  a                                        ; $5BAF: $3C
-    ld   [wIsFileSelectionArrowShifted], a        ; $5BB0: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $5BB0: $EA $00 $D0
     cp   $03                                      ; $5BB3: $FE $03
     jr   nz, jr_017_5BBB                          ; $5BB5: $20 $04
 
     xor  a                                        ; $5BB7: $AF
-    ld   [wIsFileSelectionArrowShifted], a        ; $5BB8: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $5BB8: $EA $00 $D0
 
 jr_017_5BBB:
     ldh  a, [hIsGBC]                              ; $5BBB: $F0 $FE
     and  a                                        ; $5BBD: $A7
     jp   nz, label_017_5BD0                       ; $5BBE: $C2 $D0 $5B
 
-    ld   a, [wIsFileSelectionArrowShifted]        ; $5BC1: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $5BC1: $FA $00 $D0
     ld   e, a                                     ; $5BC4: $5F
     ld   d, $00                                   ; $5BC5: $16 $00
     ld   hl, Data_017_5B54                        ; $5BC7: $21 $54 $5B
@@ -3412,7 +3412,7 @@ jr_017_6271:
     add  hl, de                                   ; $627A: $19
     ld   a, [hl]                                  ; $627B: $7E
     add  $00                                      ; $627C: $C6 $00
-    ld   [wIsFileSelectionArrowShifted], a        ; $627E: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $627E: $EA $00 $D0
     call func_017_7971                            ; $6281: $CD $71 $79
     ld   a, [wCreditsSubscene]                    ; $6284: $FA $0E $D0
     JP_TABLE                                      ; $6287
@@ -4043,9 +4043,9 @@ LinkSeatedOnLog5Handler::
 
     ld   a, $0A                                   ; $6AB8: $3E $0A
     ld   [$D006], a                               ; $6ABA: $EA $06 $D0
-    ld   a, [wIsFileSelectionArrowShifted]        ; $6ABD: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $6ABD: $FA $00 $D0
     inc  a                                        ; $6AC0: $3C
-    ld   [wIsFileSelectionArrowShifted], a        ; $6AC1: $EA $00 $D0
+    ld   [wCreditsScratch0], a                    ; $6AC1: $EA $00 $D0
     cp   $02                                      ; $6AC4: $FE $02
     jr   nz, jr_017_6AD0                          ; $6AC6: $20 $08
 
@@ -5341,7 +5341,7 @@ jr_017_76FD:
     and  a                                        ; $7716: $A7
     jr   nz, jr_017_7739                          ; $7717: $20 $20
 
-    ld   a, [$D000]                               ; $7719: $FA $00 $D0
+    ld   a, [wCreditsScratch0]                    ; $7719: $FA $00 $D0
     rla                                           ; $771C: $17
     rla                                           ; $771D: $17
     and  $FC                                      ; $771E: $E6 $FC

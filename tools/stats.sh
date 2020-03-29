@@ -44,7 +44,9 @@ EXCLUDED_FILES="\
 count_matches '(, | \[|\(|call |jp   )\$[0-3][A-Z0-9]{3}' "$EXCLUDED_FILES"
 
 echo "   Referencing non-Home ROM banks (4000-7FFF):"
-count_matches '(, | \[|\(|call |jp   )\$[4-7][A-Z0-9]{3}'
+EXCLUDED_FILES="\
+--exclude */bank20.asm"
+count_matches '(, | \[|\(|call |jp   )\$[4-7][A-Z0-9]{3}' "$EXCLUDED_FILES"
 
 echo "   Referencing RAM (8000-FFFF):"
 count_matches '(, | \[|call |jp   )\$[89A-Z][A-Z0-9]{3}'

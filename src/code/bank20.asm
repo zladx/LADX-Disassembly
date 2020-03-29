@@ -610,7 +610,7 @@ jr_020_490A:
     jr   nz, jr_020_4917                          ; $4910: $20 $05
 
 jr_020_4912:
-    call $4923                                    ; $4912: $CD $23 $49
+    call func_020_4923                            ; $4912: $CD $23 $49
     jr   jr_020_4917                              ; $4915: $18 $00
 
 jr_020_4917:
@@ -643,9 +643,9 @@ func_020_4923::
     call label_2887                               ; $493F: $CD $87 $28
     push bc                                       ; $4942: $C5
     ld   a, $20                                   ; $4943: $3E $20
-    call func_91D                                ; $4945: $CD $1D $09
+    call func_91D                                 ; $4945: $CD $1D $09
     pop  bc                                       ; $4948: $C1
-    ld   de, $491F                                ; $4949: $11 $1F $49
+    ld   de, Data_020_491F                        ; $4949: $11 $1F $49
     call func_020_4898                            ; $494C: $CD $98 $48
     ret                                           ; $494F: $C9
 
@@ -2090,33 +2090,24 @@ jr_020_5903:
 
 InventoryEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $5904: $FA $96 $DB
-    rst  $00                                      ; $5907: $C7
-    ld   [hl+], a                                 ; $5908: $22
-    ld   e, c                                     ; $5909: $59
-    ld   b, e                                     ; $590A: $43
-    ld   e, c                                     ; $590B: $59
-    ret  nc                                       ; $590C: $D0
+    JP_TABLE                                      ; $5907
+._00 dw InventoryInitialHandler
+._01 dw InventoryMapFadeOutHandler
+._02 dw InventoryLoad1Handler
+._03 dw InventoryLoad2Handler
+._04 dw InventoryLoad3Handler
+._05 dw InventoryLoad4Handler
+._06 dw InventoryLoad5Handler
+._07 dw InventoryFadeInHandler
+._08 dw InventoryVisibleHandler
+._09 dw InventoryInteractiveHandler
+._0A dw InventoryStatusInHandler
+._0B dw InventoryStatusOutHandler
+._0C dw InventoryFadeOutHandler
 
-    ld   e, c                                     ; $590D: $59
-    db   $FD                                      ; $590E: $FD
-    ld   e, d                                     ; $590F: $5A
-    dec  h                                        ; $5910: $25
-    ld   e, l                                     ; $5911: $5D
-    ld   d, d                                     ; $5912: $52
-    ld   e, l                                     ; $5913: $5D
-    ld   a, [de]                                  ; $5914: $1A
-    ld   e, [hl]                                  ; $5915: $5E
-    rst  $28                                      ; $5916: $EF
-    ld   e, [hl]                                  ; $5917: $5E
-    call nz, $8363                                ; $5918: $C4 $63 $83
-    ld   h, l                                     ; $591B: $65
-    xor  b                                        ; $591C: $A8
-    ld   h, l                                     ; $591D: $65
-    cp   b                                        ; $591E: $B8
-    ld   h, l                                     ; $591F: $65
-    jp   nc, $F065                                ; $5920: $D2 $65 $F0
-
-    cp   $A7                                      ; $5923: $FE $A7
+InventoryInitialHandler::
+    ldh  a, [hIsGBC]
+    and  a
     jr   z, jr_020_5940                           ; $5925: $28 $19
 
     ld   hl, $DC10                                ; $5927: $21 $10 $DC
@@ -2143,7 +2134,7 @@ jr_020_592D:
 jr_020_5940:
     call func_020_6683                            ; $5940: $CD $83 $66
 
-func_020_5943::
+InventoryMapFadeOutHandler::
     call func_1A22                                ; $5943: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $5946: $FA $6B $C1
     cp   $04                                      ; $5949: $FE $04
@@ -2190,7 +2181,7 @@ data_020_59C7::
 ; Start building display of inventory
 ; Called from jp hl in 00:28CE (TABLEJUMP)
 ; Copies 51 bytes from data_020_5994 (above) to wRequestDestination (D601)                                          ; $59CF: $27
-func_020_59D0::
+InventoryLoad1Handler::
     ld   hl, wRequestDestinationHigh              ; $59D0: $21 $01 $D6
     ld   bc, data_020_5994                        ; $59D3: $01 $94 $59
     ld   e, $33                                   ; $59D6: $1E $33
@@ -2433,7 +2424,7 @@ jr_020_5ADE:
 Data_020_5AEE::
     db   $00, $05, $02, $05, $05, $06, $06, $05, $05, $05, $06, $01, $02, $02, $05
 
-func_020_5AFD::
+InventoryLoad2Handler::
     ldh  a, [hIsGBC]                              ; $5AFD: $F0 $FE
     and  a                                        ; $5AFF: $A7
     jr   z, jr_020_5B3D                           ; $5B00: $28 $3B
@@ -2764,7 +2755,7 @@ jr_020_5CB5:
 
     ret                                           ; $5D24: $C9
 
-func_020_5D25::
+InventoryLoad3Handler::
     ld   a, [$C154]                               ; $5D25: $FA $54 $C1
     ld   c, a                                     ; $5D28: $4F
     ld   b, $00                                   ; $5D29: $06 $00
@@ -2787,7 +2778,7 @@ label_020_5D34:
     ldh  [rLCDC], a                               ; $5D4F: $E0 $40
     ret                                           ; $5D51: $C9
 
-func_020_5D52::
+InventoryLoad4Handler::
     call LCDOff                                   ; $5D52: $CD $CF $28
     call LoadColorDungeonTiles                    ; $5D55: $CD $D1 $3F
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
@@ -2838,7 +2829,7 @@ Data_020_5DFD::
 Data_020_5E0B::
     db   $00, $01, $00, $07, $02, $00, $00, $03, $04, $05, $00, $00, $00, $00, $06
 
-func_020_5E1A::
+InventoryLoad5Handler::
     xor  a                                        ; $5E1A: $AF
     ld   [wWindowY], a                            ; $5E1B: $EA $9A $DB
     ld   a, $01                                   ; $5E1E: $3E $01
@@ -2954,16 +2945,16 @@ jr_020_5EE1:
 jr_020_5EEE:
     ret                                           ; $5EEE: $C9
 
-func_020_5EEF::
+InventoryFadeInHandler::
     call func_020_635C                            ; $5EEF: $CD $5C $63
     call func_1A39                                ; $5EF2: $CD $39 $1A
+
     ld   a, [wTransitionSequenceCounter]          ; $5EF5: $FA $6B $C1
     cp   $04                                      ; $5EF8: $FE $04
-    jr   nz, jr_020_5EFF                          ; $5EFA: $20 $03
-
+    jr   nz, .jr_020_5EFF                         ; $5EFA: $20 $03
     call func_020_6683                            ; $5EFC: $CD $83 $66
+.jr_020_5EFF
 
-jr_020_5EFF:
     ret                                           ; $5EFF: $C9
 
 Data_020_5F00::
@@ -3205,23 +3196,207 @@ Data_020_610B::
     db   $50, $60, $70
 
 Data_020_610E::
-    db   $04, $02, $01, $FA, $B9, $C1, $A7, $28, $1A, $3D, $EA, $B9, $C1, $20, $11, $21
-    db   $90, $FF, $36, $0B, $FA, $BA, $C1, $A7, $28, $05, $3E, $0C, $EA, $96, $DB, $C9
-    db   $2F, $18, $0A, $FA, $B8, $C1, $A7, $28, $0A, $3D, $EA, $B8, $C1, $1F, $1F, $E6
-    db   $03, $18, $09, $FA, $B5, $C1, $A7, $CA, $14, $62, $3E, $00, $EA, $B7, $C1, $FA
-    db   $B7, $C1, $16, $00, $CB, $27, $CB, $27, $CB, $27, $CB, $27, $5F, $CB, $27, $83
-    db   $5F, $21, $4B, $60, $19, $11, $18, $C0, $0E, $0C, $06, $04, $2A, $C6, $30, $12
-    db   $13, $2A, $C6, $60, $12, $13, $2A, $12, $13, $FE, $22, $28, $0A, $FE, $24, $28
-    db   $0A, $FE, $26, $28, $0A, $18, $15, $06, $04, $18, $06, $06, $02, $18, $02, $06
-    db   $01, $FA, $49, $DB, $A0, $20, $05, $1B, $3E, $20, $12, $13, $2A, $12, $13, $0D
-    db   $20, $CA, $FA, $B7, $C1, $FE, $00, $20, $6D, $F0, $CC, $E6, $01, $28, $18, $21
-    db   $4A, $DB, $7E, $3C, $FE, $03, $20, $01, $AF, $77, $5F, $16, $00, $21, $0E, $61
-    db   $19, $FA, $49, $DB, $A6, $28, $E8, $F0, $CC, $E6, $02, $28, $19, $21, $4A, $DB
-    db   $7E, $3D, $FE, $80, $38, $02, $3E, $02, $77, $5F, $16, $00, $21, $0E, $61, $19
-    db   $FA, $49, $DB, $A6, $28, $E7, $F0, $CC, $E6, $03, $28, $03, $CD, $39, $60, $21
-    db   $10, $C0, $3E, $38, $22, $E5, $FA, $4A, $DB, $5F, $16, $00, $21, $0B, $61, $19
-    db   $7E, $E1, $22, $F5, $3E, $28, $22, $3E, $06, $22, $3E, $38, $22, $F1, $C6, $08
-    db   $22, $3E, $28, $22, $36, $26
+    db   $04, $02, $01
+
+func_020_6111::
+    ld   a, [$C1B9]
+    and  a                                        ; $6114: $A7
+    jr   z, jr_020_6131                           ; $6115: $28 $1A
+
+    dec  a                                        ; $6117: $3D
+    ld   [$C1B9], a                               ; $6118: $EA $B9 $C1
+    jr   nz, jr_020_612E                          ; $611B: $20 $11
+
+    ld   hl, hNeedsUpdatingBGTiles                ; $611D: $21 $90 $FF
+    ld   [hl], $0B                                ; $6120: $36 $0B
+    ld   a, [$C1BA]                               ; $6122: $FA $BA $C1
+    and  a                                        ; $6125: $A7
+    jr   z, jr_020_612D                           ; $6126: $28 $05
+
+    ld   a, $0C                                   ; $6128: $3E $0C
+    ld   [wGameplaySubtype], a                    ; $612A: $EA $96 $DB
+
+jr_020_612D:
+    ret                                           ; $612D: $C9
+
+jr_020_612E:
+    cpl                                           ; $612E: $2F
+    jr   jr_020_613B                              ; $612F: $18 $0A
+
+jr_020_6131:
+    ld   a, [$C1B8]                               ; $6131: $FA $B8 $C1
+    and  a                                        ; $6134: $A7
+    jr   z, jr_020_6141                           ; $6135: $28 $0A
+
+    dec  a                                        ; $6137: $3D
+    ld   [$C1B8], a                               ; $6138: $EA $B8 $C1
+
+jr_020_613B:
+    rra                                           ; $613B: $1F
+    rra                                           ; $613C: $1F
+    and  $03                                      ; $613D: $E6 $03
+    jr   jr_020_614A                              ; $613F: $18 $09
+
+jr_020_6141:
+    ld   a, [$C1B5]                               ; $6141: $FA $B5 $C1
+    and  a                                        ; $6144: $A7
+    jp   z, jr_020_6214                           ; $6145: $CA $14 $62
+
+    ld   a, $00                                   ; $6148: $3E $00
+
+jr_020_614A:
+    ld   [$C1B7], a                               ; $614A: $EA $B7 $C1
+    ld   a, [$C1B7]                               ; $614D: $FA $B7 $C1
+    ld   d, $00                                   ; $6150: $16 $00
+    sla  a                                        ; $6152: $CB $27
+    sla  a                                        ; $6154: $CB $27
+    sla  a                                        ; $6156: $CB $27
+    sla  a                                        ; $6158: $CB $27
+    ld   e, a                                     ; $615A: $5F
+    sla  a                                        ; $615B: $CB $27
+    add  e                                        ; $615D: $83
+    ld   e, a                                     ; $615E: $5F
+    ld   hl, Data_020_604B                        ; $615F: $21 $4B $60
+    add  hl, de                                   ; $6162: $19
+    ld   de, $C018                                ; $6163: $11 $18 $C0
+    ld   c, $0C                                   ; $6166: $0E $0C
+    ld   b, $04                                   ; $6168: $06 $04
+
+jr_020_616A:
+    ld   a, [hl+]                                 ; $616A: $2A
+    add  $30                                      ; $616B: $C6 $30
+    ld   [de], a                                  ; $616D: $12
+    inc  de                                       ; $616E: $13
+    ld   a, [hl+]                                 ; $616F: $2A
+    add  $60                                      ; $6170: $C6 $60
+    ld   [de], a                                  ; $6172: $12
+    inc  de                                       ; $6173: $13
+    ld   a, [hl+]                                 ; $6174: $2A
+    ld   [de], a                                  ; $6175: $12
+    inc  de                                       ; $6176: $13
+    cp   $22                                      ; $6177: $FE $22
+    jr   z, jr_020_6185                           ; $6179: $28 $0A
+
+    cp   $24                                      ; $617B: $FE $24
+    jr   z, jr_020_6189                           ; $617D: $28 $0A
+
+    cp   $26                                      ; $617F: $FE $26
+    jr   z, jr_020_618D                           ; $6181: $28 $0A
+
+    jr   jr_020_619A                              ; $6183: $18 $15
+
+jr_020_6185:
+    ld   b, $04                                   ; $6185: $06 $04
+    jr   jr_020_618F                              ; $6187: $18 $06
+
+jr_020_6189:
+    ld   b, $02                                   ; $6189: $06 $02
+    jr   jr_020_618F                              ; $618B: $18 $02
+
+jr_020_618D:
+    ld   b, $01                                   ; $618D: $06 $01
+
+jr_020_618F:
+    ld   a, [wOcarinaSongFlags]                   ; $618F: $FA $49 $DB
+    and  b                                        ; $6192: $A0
+    jr   nz, jr_020_619A                          ; $6193: $20 $05
+
+    dec  de                                       ; $6195: $1B
+    ld   a, $20                                   ; $6196: $3E $20
+    ld   [de], a                                  ; $6198: $12
+    inc  de                                       ; $6199: $13
+
+jr_020_619A:
+    ld   a, [hl+]                                 ; $619A: $2A
+    ld   [de], a                                  ; $619B: $12
+    inc  de                                       ; $619C: $13
+    dec  c                                        ; $619D: $0D
+    jr   nz, jr_020_616A                          ; $619E: $20 $CA
+
+    ld   a, [$C1B7]                               ; $61A0: $FA $B7 $C1
+    cp   $00                                      ; $61A3: $FE $00
+    jr   nz, jr_020_6214                          ; $61A5: $20 $6D
+
+    ldh  a, [hJoypadState]                        ; $61A7: $F0 $CC
+    and  $01                                      ; $61A9: $E6 $01
+    jr   z, jr_020_61C5                           ; $61AB: $28 $18
+
+jr_020_61AD:
+    ld   hl, $DB4A                                ; $61AD: $21 $4A $DB
+    ld   a, [hl]                                  ; $61B0: $7E
+    inc  a                                        ; $61B1: $3C
+    cp   $03                                      ; $61B2: $FE $03
+    jr   nz, jr_020_61B7                          ; $61B4: $20 $01
+
+    xor  a                                        ; $61B6: $AF
+
+jr_020_61B7:
+    ld   [hl], a                                  ; $61B7: $77
+    ld   e, a                                     ; $61B8: $5F
+    ld   d, $00                                   ; $61B9: $16 $00
+    ld   hl, Data_020_610E                        ; $61BB: $21 $0E $61
+    add  hl, de                                   ; $61BE: $19
+    ld   a, [wOcarinaSongFlags]                   ; $61BF: $FA $49 $DB
+    and  [hl]                                     ; $61C2: $A6
+    jr   z, jr_020_61AD                           ; $61C3: $28 $E8
+
+jr_020_61C5:
+    ldh  a, [hJoypadState]                        ; $61C5: $F0 $CC
+    and  $02                                      ; $61C7: $E6 $02
+    jr   z, jr_020_61E4                           ; $61C9: $28 $19
+
+jr_020_61CB:
+    ld   hl, $DB4A                                ; $61CB: $21 $4A $DB
+    ld   a, [hl]                                  ; $61CE: $7E
+    dec  a                                        ; $61CF: $3D
+    cp   $80                                      ; $61D0: $FE $80
+    jr   c, jr_020_61D6                           ; $61D2: $38 $02
+
+    ld   a, $02                                   ; $61D4: $3E $02
+
+jr_020_61D6:
+    ld   [hl], a                                  ; $61D6: $77
+    ld   e, a                                     ; $61D7: $5F
+    ld   d, $00                                   ; $61D8: $16 $00
+    ld   hl, Data_020_610E                        ; $61DA: $21 $0E $61
+    add  hl, de                                   ; $61DD: $19
+    ld   a, [wOcarinaSongFlags]                   ; $61DE: $FA $49 $DB
+    and  [hl]                                     ; $61E1: $A6
+    jr   z, jr_020_61CB                           ; $61E2: $28 $E7
+
+jr_020_61E4:
+    ldh  a, [hJoypadState]                        ; $61E4: $F0 $CC
+    and  $03                                      ; $61E6: $E6 $03
+    jr   z, jr_020_61ED                           ; $61E8: $28 $03
+
+    call func_020_6039                            ; $61EA: $CD $39 $60
+
+jr_020_61ED:
+    ld   hl, $C010                                ; $61ED: $21 $10 $C0
+    ld   a, $38                                   ; $61F0: $3E $38
+    ld   [hl+], a                                 ; $61F2: $22
+    push hl                                       ; $61F3: $E5
+    ld   a, [$DB4A]                               ; $61F4: $FA $4A $DB
+    ld   e, a                                     ; $61F7: $5F
+    ld   d, $00                                   ; $61F8: $16 $00
+    ld   hl, Data_020_610B                        ; $61FA: $21 $0B $61
+    add  hl, de                                   ; $61FD: $19
+    ld   a, [hl]                                  ; $61FE: $7E
+    pop  hl                                       ; $61FF: $E1
+    ld   [hl+], a                                 ; $6200: $22
+    push af                                       ; $6201: $F5
+    ld   a, $28                                   ; $6202: $3E $28
+    ld   [hl+], a                                 ; $6204: $22
+    ld   a, $06                                   ; $6205: $3E $06
+    ld   [hl+], a                                 ; $6207: $22
+    ld   a, $38                                   ; $6208: $3E $38
+    ld   [hl+], a                                 ; $620A: $22
+    pop  af                                       ; $620B: $F1
+    add  $08                                      ; $620C: $C6 $08
+    ld   [hl+], a                                 ; $620E: $22
+    ld   a, $28                                   ; $620F: $3E $28
+    ld   [hl+], a                                 ; $6211: $22
+    ld   [hl], $26                                ; $6212: $36 $26
 
 jr_020_6214:
     ret                                           ; $6214: $C9
@@ -3510,11 +3685,11 @@ jr_020_63BE:
     call label_3DA0                               ; $63C0: $CD $A0 $3D
     ret                                           ; $63C3: $C9
 
-func_020_63C4::
+InventoryVisibleHandler::
     call func_020_5EB5                            ; $63C4: $CD $B5 $5E
     call func_020_6215                            ; $63C7: $CD $15 $62
     call func_020_5F06                            ; $63CA: $CD $06 $5F
-    call $6111                                    ; $63CD: $CD $11 $61
+    call func_020_6111                            ; $63CD: $CD $11 $61
     call func_020_62A2                            ; $63D0: $CD $A2 $62
     call func_020_635C                            ; $63D3: $CD $5C $63
     call func_020_62DE                            ; $63D6: $CD $DE $62
@@ -3728,7 +3903,7 @@ Data_020_6565::
     db   $20, $F6, $16, $00, $CB, $23, $CB, $23, $E5, $0E, $02, $21, $B0, $64, $19, $E5
     db   $D1, $E1, $CD, $46, $64, $0E, $05, $11, $E4, $64, $CD, $46, $64, $C9
 
-func_020_6583::
+InventoryInteractiveHandler::
     call func_020_5EB5                            ; $6583: $CD $B5 $5E
     call func_020_64EE                            ; $6586: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $6589: $F0 $CB
@@ -3754,7 +3929,7 @@ jr_020_65A4:
 jr_020_65A7:
     ret                                           ; $65A7: $C9
 
-func_020_65A8::
+InventoryStatusInHandler::
     call func_020_5EB5                            ; $65A8: $CD $B5 $5E
     call func_020_64EE                            ; $65AB: $CD $EE $64
     ldh  a, [hPressedButtonsMask]                 ; $65AE: $F0 $CB
@@ -3766,7 +3941,7 @@ func_020_65A8::
 jr_020_65B7:
     ret                                           ; $65B7: $C9
 
-func_020_65B8::
+InventoryStatusOutHandler::
     call func_020_5EB5                            ; $65B8: $CD $B5 $5E
     call func_020_64EE                            ; $65BB: $CD $EE $64
     ld   a, [$DE0A]                               ; $65BE: $FA $0A $DE
@@ -3782,7 +3957,7 @@ jr_020_65CE:
     ld   [$DE0A], a                               ; $65CE: $EA $0A $DE
     ret                                           ; $65D1: $C9
 
-func_020_65D2::
+InventoryFadeOutHandler::
     call func_020_635C                            ; $65D2: $CD $5C $63
     call func_1A22                                ; $65D5: $CD $22 $1A
     ld   a, [wTransitionSequenceCounter]          ; $65D8: $FA $6B $C1

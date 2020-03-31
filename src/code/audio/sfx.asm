@@ -18,7 +18,7 @@ label_01F_4204:
 
 jr_01F_4216:
     ld   a, [hl]                                  ; $4216: $7E
-    ld   hl, SfxPointersTable                        ; $4217: $21 $00 $41
+    ld   hl, SfxPointersTable1                    ; $4217: $21 $00 $41
     jr   jr_01F_4223                              ; $421A: $18 $07
 
 jr_01F_421C:
@@ -27,7 +27,7 @@ jr_01F_421C:
     and  a                                        ; $421E: $A7
     ret  z                                        ; $421F: $C8
 
-    ld   hl, $4182                                ; $4220: $21 $82 $41
+    ld   hl, SfxPointersTable2                    ; $4220: $21 $82 $41
 
 jr_01F_4223:
     call GetHandlerAddressInTable                 ; $4223: $CD $64 $7A
@@ -1026,7 +1026,7 @@ jr_01F_4784:
     ld   b, a                                     ; $47CC: $47
     db   $E3                                      ; $47CD: $E3
     ld   b, a                                     ; $47CE: $47
-    jp   hl                                       ; $47CF: $E9
+    db   $E9                                      ; $47CF: $E9
 
     ld   b, a                                     ; $47D0: $47
     nop                                           ; $47D1: $00
@@ -3266,7 +3266,7 @@ label_01F_53ED:
 
 jr_01F_53FF:
     ld   a, [hl]                                  ; $53FF: $7E
-    ld   hl, $541B                                ; $5400: $21 $1B $54
+    ld   hl, Data_01F_541B                        ; $5400: $21 $1B $54
     jr   jr_01F_540C                              ; $5403: $18 $07
 
 jr_01F_5405:
@@ -3275,7 +3275,7 @@ jr_01F_5405:
     and  a                                        ; $5407: $A7
     ret  z                                        ; $5408: $C8
 
-    ld   hl, $5461                                ; $5409: $21 $61 $54
+    ld   hl, Data_01F_5461                        ; $5409: $21 $61 $54
 
 jr_01F_540C:
     call GetHandlerAddressInTable                 ; $540C: $CD $64 $7A
@@ -3287,140 +3287,83 @@ jr_01F_540C:
 
     jp   hl                                       ; $541A: $E9
 
-    and  a                                        ; $541B: $A7
-    ld   d, h                                     ; $541C: $54
-    di                                            ; $541D: $F3
-    ld   d, h                                     ; $541E: $54
-    jr   c, jr_01F_5476                           ; $541F: $38 $55
+; Pointers table to functions
+Data_01F_541B::
+    dw   $54A7
+    dw   $54F3
+    dw   $5538
+    dw   $5564
+    dw   $55B3
+    dw   $55F9
+    dw   $5645
+    dw   $56D1
+    dw   $5732
+    dw   $57FE
+    dw   $58A3
+    dw   $5949
+    dw   $5999
+    dw   $59E1
+    dw   $5A19
+    dw   $5A44
+    dw   $5B67
+    dw   $5BC4
+    dw   $5C0C
+    dw   $5C80
+    dw   $5CB0
+    dw   $5CFC
+    dw   $5D84
+    dw   $5ED7
+    dw   $5F19
+    dw   $5F78
+    dw   $5FC0
+    dw   $601C
+    dw   $606C
+    dw   $606E
+    dw   $60D4
+    dw   $614D
+    dw   $61A2
+    dw   $621C
+    dw   $627C
 
-    ld   h, h                                     ; $5421: $64
-    ld   d, l                                     ; $5422: $55
-    or   e                                        ; $5423: $B3
-    ld   d, l                                     ; $5424: $55
-    ld   sp, hl                                   ; $5425: $F9
-    ld   d, l                                     ; $5426: $55
-    ld   b, l                                     ; $5427: $45
-    ld   d, [hl]                                  ; $5428: $56
-    pop  de                                       ; $5429: $D1
-    ld   d, [hl]                                  ; $542A: $56
-    ld   [hl-], a                                 ; $542B: $32
-    ld   d, a                                     ; $542C: $57
-    cp   $57                                      ; $542D: $FE $57
-    and  e                                        ; $542F: $A3
-    ld   e, b                                     ; $5430: $58
-    ld   c, c                                     ; $5431: $49
-    ld   e, c                                     ; $5432: $59
-    sbc  c                                        ; $5433: $99
-    ld   e, c                                     ; $5434: $59
-    pop  hl                                       ; $5435: $E1
-    ld   e, c                                     ; $5436: $59
-    add  hl, de                                   ; $5437: $19
-    ld   e, d                                     ; $5438: $5A
-    ld   b, h                                     ; $5439: $44
-    ld   e, d                                     ; $543A: $5A
-    ld   h, a                                     ; $543B: $67
-    ld   e, e                                     ; $543C: $5B
-    call nz, $0C5B                                ; $543D: $C4 $5B $0C
-    ld   e, h                                     ; $5440: $5C
-    add  b                                        ; $5441: $80
-    ld   e, h                                     ; $5442: $5C
-    or   b                                        ; $5443: $B0
-    ld   e, h                                     ; $5444: $5C
-    db   $FC                                      ; $5445: $FC
-    ld   e, h                                     ; $5446: $5C
-    add  h                                        ; $5447: $84
-    ld   e, l                                     ; $5448: $5D
-    rst  $10                                      ; $5449: $D7
-    ld   e, [hl]                                  ; $544A: $5E
-    add  hl, de                                   ; $544B: $19
-    ld   e, a                                     ; $544C: $5F
-    ld   a, b                                     ; $544D: $78
-    ld   e, a                                     ; $544E: $5F
-    ret  nz                                       ; $544F: $C0
+; Pointers table to functions
+Data_01F_5461::
+    dw   $54B0
+    dw   $5504
+    dw   $554A
+    dw   $5585
+    dw   $55BC
+    dw   $5610
+    dw   $565E
+    dw   $56E2
+    dw   $5740
+    dw   $580C
+    dw   $58AF
+    dw   $595A
+    dw   $59AA
+    dw   $59EA
+    dw   $5A2A
+    dw   $5A55
+    dw   $5B78
+    dw   $5BD5
+    dw   $5C1D
+    dw   $5C99
+    dw   $5CB9
+    dw   $5D1A
+    dw   $5DA6
+    dw   $5EE8
+    dw   $5F25
+    dw   $5F93
+    dw   $5FC9
+    dw   $602D
+    dw   $606D
+    dw   $6084
+    dw   $60EF
+    dw   $6163
+    dw   $61CF
+    dw   $6231
+    dw   $6285
 
-    ld   e, a                                     ; $5450: $5F
-    inc  e                                        ; $5451: $1C
-    ld   h, b                                     ; $5452: $60
-    ld   l, h                                     ; $5453: $6C
-    ld   h, b                                     ; $5454: $60
-    ld   l, [hl]                                  ; $5455: $6E
-    ld   h, b                                     ; $5456: $60
-    call nc, func_01F_4D60                        ; $5457: $D4 $60 $4D
-    ld   h, c                                     ; $545A: $61
-    and  d                                        ; $545B: $A2
-    ld   h, c                                     ; $545C: $61
-    inc  e                                        ; $545D: $1C
-    ld   h, d                                     ; $545E: $62
-    ld   a, h                                     ; $545F: $7C
-    ld   h, d                                     ; $5460: $62
-    or   b                                        ; $5461: $B0
-    ld   d, h                                     ; $5462: $54
-    inc  b                                        ; $5463: $04
-    ld   d, l                                     ; $5464: $55
-    ld   c, d                                     ; $5465: $4A
-    ld   d, l                                     ; $5466: $55
-    add  l                                        ; $5467: $85
-    ld   d, l                                     ; $5468: $55
-    cp   h                                        ; $5469: $BC
-    ld   d, l                                     ; $546A: $55
-    db   $10                                      ; $546B: $10
-    ld   d, [hl]                                  ; $546C: $56
-    ld   e, [hl]                                  ; $546D: $5E
-    ld   d, [hl]                                  ; $546E: $56
-    ld   [c], a                                   ; $546F: $E2
-    ld   d, [hl]                                  ; $5470: $56
-    ld   b, b                                     ; $5471: $40
-    ld   d, a                                     ; $5472: $57
-    inc  c                                        ; $5473: $0C
-    ld   e, b                                     ; $5474: $58
-    xor  a                                        ; $5475: $AF
-
-jr_01F_5476:
-    ld   e, b                                     ; $5476: $58
-    ld   e, d                                     ; $5477: $5A
-    ld   e, c                                     ; $5478: $59
-    xor  d                                        ; $5479: $AA
-    ld   e, c                                     ; $547A: $59
-    ld   [$2A59], a                               ; $547B: $EA $59 $2A
-    ld   e, d                                     ; $547E: $5A
-    ld   d, l                                     ; $547F: $55
-    ld   e, d                                     ; $5480: $5A
-    ld   a, b                                     ; $5481: $78
-    ld   e, e                                     ; $5482: $5B
-    push de                                       ; $5483: $D5
-    ld   e, e                                     ; $5484: $5B
-    dec  e                                        ; $5485: $1D
-    ld   e, h                                     ; $5486: $5C
-    sbc  c                                        ; $5487: $99
-    ld   e, h                                     ; $5488: $5C
-    cp   c                                        ; $5489: $B9
-    ld   e, h                                     ; $548A: $5C
-    ld   a, [de]                                  ; $548B: $1A
-    ld   e, l                                     ; $548C: $5D
-    and  [hl]                                     ; $548D: $A6
-    ld   e, l                                     ; $548E: $5D
-    add  sp, $5E                                  ; $548F: $E8 $5E
-    dec  h                                        ; $5491: $25
-    ld   e, a                                     ; $5492: $5F
-    sub  e                                        ; $5493: $93
-    ld   e, a                                     ; $5494: $5F
-    ret                                           ; $5495: $C9
-
-    ld   e, a                                     ; $5496: $5F
-    dec  l                                        ; $5497: $2D
-    ld   h, b                                     ; $5498: $60
-    ld   l, l                                     ; $5499: $6D
-    ld   h, b                                     ; $549A: $60
-    add  h                                        ; $549B: $84
-    ld   h, b                                     ; $549C: $60
-    rst  $28                                      ; $549D: $EF
-    ld   h, b                                     ; $549E: $60
-    ld   h, e                                     ; $549F: $63
-    ld   h, c                                     ; $54A0: $61
-    rst  $08                                      ; $54A1: $CF
-    ld   h, c                                     ; $54A2: $61
-    ld   sp, $8562                                ; $54A3: $31 $62 $85
-    ld   h, d                                     ; $54A6: $62
+func_01F_54A7::
     call func_01F_636A                            ; $54A7: $CD $6A $63
     ld   hl, $54CF                                ; $54AA: $21 $CF $54
     jp   label_01F_62F3                           ; $54AD: $C3 $F3 $62
@@ -3432,10 +3375,11 @@ jr_01F_5476:
     cp   $06                                      ; $54B7: $FE $06
     jp   z, label_01F_632D                        ; $54B9: $CA $2D $63
 
-    ld   hl, $54C5                                ; $54BC: $21 $C5 $54
+    ld   hl, Data_01F_54C5                        ; $54BC: $21 $C5 $54
     call GetHandlerAddressInTable                 ; $54BF: $CD $64 $7A
     jp   label_01F_7A85                           ; $54C2: $C3 $85 $7A
 
+Data_01F_54C5::
     push de                                       ; $54C5: $D5
     ld   d, h                                     ; $54C6: $54
     db   $DB                                      ; $54C7: $DB
@@ -6221,38 +6165,140 @@ Data_01F_63CC::
 Data_01F_63DC::
     db   $01, $23, $45, $67, $89, $AC, $EE, $EE   ; $63DC
     db   $FE, $DC, $BA, $98, $76, $54, $32, $10   ; $63E4
-    db   $1E, $65, $3D, $65, $87, $65, $EF, $65   ; $63EC
-    db   $1F, $66, $6D, $66, $A2, $66, $E0, $66   ; $63F4
-    db   $26, $67, $60, $67, $92, $67, $B4, $67   ; $63FC
-    db   $F5, $67, $2E, $68, $5C, $68, $91, $68   ; $6404
-    db   $F0, $68, $02, $69, $3F, $69, $C9, $69   ; $640C
-    db   $0F, $6A, $4E, $6A, $80, $6A, $A2, $6A   ; $6414
-    db   $EC, $6A, $32, $6B, $97, $6B, $13, $6C   ; $641C
-    db   $4C, $6C, $97, $6C, $C4, $6C, $0B, $6D   ; $6424
-    db   $01, $7A, $35, $6D, $73, $6D, $95, $6D   ; $642C
-    db   $B7, $6D, $4E, $6E, $87, $6E, $DD, $6E   ; $6434
-    db   $31, $6F, $78, $6F, $DD, $6F, $EF, $6F   ; $643C
-    db   $78, $70, $C4, $70, $14, $71, $36, $71   ; $6444
-    db   $C7, $71, $3E, $72, $95, $72, $E4, $72   ; $644C
-    db   $8B, $74, $90, $75, $DA, $75, $A1, $76   ; $6454
-    db   $0A, $76, $1C, $77, $6E, $77, $C0, $77   ; $645C
-    db   $E6, $77, $05, $79, $5B, $79, $1B, $7B   ; $6464
-    db   $29, $65, $43, $65, $8D, $65, $F5, $65   ; $646C
-    db   $3C, $66, $73, $66, $C4, $66, $F3, $66   ; $6474
-    db   $2C, $67, $66, $67, $98, $67, $C7, $67   ; $647C
-    db   $00, $68, $34, $68, $69, $68, $9C, $68   ; $6484
-    db   $F6, $68, $08, $69, $45, $69, $CF, $69   ; $648C
-    db   $15, $6A, $5C, $6A, $86, $6A, $A8, $6A   ; $6494
-    db   $F2, $6A, $38, $6B, $AF, $6B, $1E, $6C   ; $649C
-    db   $57, $6C, $A4, $6C, $CF, $6C, $11, $6D   ; $64A4
-    db   $01, $7A, $3B, $6D, $79, $6D, $9B, $6D   ; $64AC
-    db   $BD, $6D, $59, $6E, $8D, $6E, $E8, $6E   ; $64B4
-    db   $3C, $6F, $83, $6F, $E3, $6F, $F5, $6F   ; $64BC
-    db   $7E, $70, $CF, $70, $1A, $71, $3C, $71   ; $64C4
-    db   $CD, $71, $44, $72, $9B, $72, $F4, $72   ; $64CC
-    db   $96, $74, $9B, $75, $EB, $75, $A7, $76   ; $64D4
-    db   $10, $76, $30, $77, $90, $77, $07, $7A   ; $64DC
-    db   $EC, $77, $0B, $79, $61, $79, $21, $7B   ; $64E4
+
+; Pointers table to functions
+Data_01F_63EC::
+    dw   $651E
+    dw   $653D
+    dw   $6587
+    dw   $65EF
+    dw   $661F
+    dw   $666D
+    dw   $66A2
+    dw   $66E0
+    dw   $6726
+    dw   $6760
+    dw   $6792
+    dw   $67B4
+    dw   $67F5
+    dw   $682E
+    dw   $685C
+    dw   $6891
+    dw   $68F0
+    dw   $6902
+    dw   $693F
+    dw   $69C9
+    dw   $6A0F
+    dw   $6A4E
+    dw   $6A80
+    dw   $6AA2
+    dw   $6AEC
+    dw   $6B32
+    dw   $6B97
+    dw   $6C13
+    dw   $6C4C
+    dw   $6C97
+    dw   $6CC4
+    dw   $6D0B
+    dw   $7A01
+    dw   $6D35
+    dw   $6D73
+    dw   $6D95
+    dw   $6DB7
+    dw   $6E4E
+    dw   $6E87
+    dw   $6EDD
+    dw   $6F31
+    dw   $6F78
+    dw   $6FDD
+    dw   $6FEF
+    dw   $7078
+    dw   $70C4
+    dw   $7114
+    dw   $7136
+    dw   $71C7
+    dw   $723E
+    dw   $7295
+    dw   $72E4
+    dw   $748B
+    dw   $7590
+    dw   $75DA
+    dw   $76A1
+    dw   $760A
+    dw   $771C
+    dw   $776E
+    dw   $77C0
+    dw   $77E6
+    dw   $7905
+    dw   $795B
+    dw   $7B1B
+
+; Pointers table to functions
+Data_01F_646C::
+    dw   $6529
+    dw   $6543
+    dw   $658D
+    dw   $65F5
+    dw   $663C
+    dw   $6673
+    dw   $66C4
+    dw   $66F3
+    dw   $672C
+    dw   $6766
+    dw   $6798
+    dw   $67C7
+    dw   $6800
+    dw   $6834
+    dw   $6869
+    dw   $689C
+    dw   $68F6
+    dw   $6908
+    dw   $6945
+    dw   $69CF
+    dw   $6A15
+    dw   $6A5C
+    dw   $6A86
+    dw   $6AA8
+    dw   $6AF2
+    dw   $6B38
+    dw   $6BAF
+    dw   $6C1E
+    dw   $6C57
+    dw   $6CA4
+    dw   $6CCF
+    dw   $6D11
+    dw   $7A01
+    dw   $6D3B
+    dw   $6D79
+    dw   $6D9B
+    dw   $6DBD
+    dw   $6E59
+    dw   $6E8D
+    dw   $6EE8
+    dw   $6F3C
+    dw   $6F83
+    dw   $6FE3
+    dw   $6FF5
+    dw   $707E
+    dw   $70CF
+    dw   $711A
+    dw   $713C
+    dw   $71CD
+    dw   $7244
+    dw   $729B
+    dw   $72F4
+    dw   $7496
+    dw   $759B
+    dw   $75EB
+    dw   $76A7
+    dw   $7610
+    dw   $7730
+    dw   $7790
+    dw   $7A07
+    dw   $77EC
+    dw   $790B
+    dw   $7961
+    dw   $7B21
 
 func_01F_64EC::
     ld   hl, wActiveNoiseSfx                      ; $64EC
@@ -6265,7 +6311,7 @@ func_01F_64EC::
     jp   nz, label_01F_7A2C                       ; $64F7: $C2 $2C $7A
 
     ld   a, [hl]                                  ; $64FA: $7E
-    ld   hl, $63EC                                ; $64FB: $21 $EC $63
+    ld   hl, Data_01F_63EC                        ; $64FB: $21 $EC $63
     jr   jr_01F_6508                              ; $64FE: $18 $08
 
 jr_01F_6500:
@@ -6274,7 +6320,7 @@ jr_01F_6500:
     and  a                                        ; $6502: $A7
     jr   z, jr_01F_6512                           ; $6503: $28 $0D
 
-    ld   hl, $646C                                ; $6505: $21 $6C $64
+    ld   hl, Data_01F_646C                        ; $6505: $21 $6C $64
 
 jr_01F_6508:
     call GetHandlerAddressInTable                 ; $6508: $CD $64 $7A
@@ -6794,19 +6840,14 @@ jr_01F_677D:
     call GetHandlerAddressInTable                 ; $67D6: $CD $64 $7A
     jp   $7A25                                    ; $67D9: $C3 $25 $7A
 
-    jp   hl                                       ; $67DC: $E9
+Data_01F_67DC::
+    dw   $67E9
+    dw   $67EC
+    dw   $67EF
+    dw   $67F2
 
-    ld   h, a                                     ; $67DD: $67
-    db   $EC                                      ; $67DE: $EC
-    ld   h, a                                     ; $67DF: $67
-    rst  $28                                      ; $67E0: $EF
-    ld   h, a                                     ; $67E1: $67
-    ld   a, [c]                                   ; $67E2: $F2
-    ld   h, a                                     ; $67E3: $67
-    nop                                           ; $67E4: $00
-    add  $6A                                      ; $67E5: $C6 $6A
-    add  b                                        ; $67E7: $80
-    inc  b                                        ; $67E8: $04
+    db   $00, $C6, $6A, $80, $04                  ; $67E4
+
     ld   l, e                                     ; $67E9: $6B
     nop                                           ; $67EA: $00
     dec  b                                        ; $67EB: $05
@@ -6845,15 +6886,15 @@ jr_01F_6814:
     ld   [bc], a                                  ; $681C: $02
     jr   jr_01F_680B                              ; $681D: $18 $EC
 
-    jr   z, jr_01F_6889                           ; $681F: $28 $68
+Data_01F_681F::
+    dw   $6828
+    dw   $682B
+    dw   $6700
 
-    dec  hl                                       ; $6821: $2B
-    ld   l, b                                     ; $6822: $68
-    nop                                           ; $6823: $00
-    ld   h, a                                     ; $6824: $67
     rrca                                          ; $6825: $0F
     add  b                                        ; $6826: $80
     ld   [bc], a                                  ; $6827: $02
+
     ld   h, b                                     ; $6828: $60
     nop                                           ; $6829: $00
     ld   [bc], a                                  ; $682A: $02
@@ -10410,7 +10451,10 @@ label_01F_7A07:
     nop                                           ; $7A21: $00
     nop                                           ; $7A22: $00
     nop                                           ; $7A23: $00
-    ld   bc, RenderLoop.RenderLoop_loadNewMap     ; $7A24: $01 $06 $02
+    db  $01                                       ; $7A24: $01
+
+func_01F_7A25::
+    db   $06, $02
     ld   c, $22                                   ; $7A27: $0E $22
     jp   label_01F_7A91                           ; $7A29: $C3 $91 $7A
 
@@ -10447,7 +10491,7 @@ label_01F_7A51:
 ; Inputs:
 ;   a   the item index in the pointers table
 ; Output:
-;   hl  the handler index for the item at index a
+;   hl  the handler address for the item at index a
 GetHandlerAddressInTable::
     dec  a                                        ; $7A64: $3D
     sla  a                                        ; $7A65: $CB $27

@@ -3,7 +3,6 @@
 ; https://github.com/mattcurrie/mgbdis
 
 func_01F_4204::
-label_01F_4204:
     ld   hl, wActiveJingle                        ; $4204: $21 $60 $D3
     ld   a, [hl]                                  ; $4207: $7E
     and  a                                        ; $4208: $A7
@@ -77,7 +76,7 @@ jr_01F_4273:
     ld   hl, $42F0                                ; $4279: $21 $F0 $42
     call func_01F_7A7F                            ; $427C: $CD $7F $7A
     ld   hl, $4305                                ; $427F: $21 $05 $43
-    jp   label_01F_7A85                           ; $4282: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $4282: $C3 $85 $7A
 
 jr_01F_4285:
     ld   hl, $42DF                                ; $4285: $21 $DF $42
@@ -85,7 +84,7 @@ jr_01F_4285:
     ld   hl, $42F5                                ; $428B: $21 $F5 $42
     call func_01F_7A7F                            ; $428E: $CD $7F $7A
     ld   hl, $430B                                ; $4291: $21 $0B $43
-    jp   label_01F_7A85                           ; $4294: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $4294: $C3 $85 $7A
 
 jr_01F_4297:
     ld   hl, $42E5                                ; $4297: $21 $E5 $42
@@ -93,7 +92,7 @@ jr_01F_4297:
     ld   hl, $42FA                                ; $429D: $21 $FA $42
     call func_01F_7A7F                            ; $42A0: $CD $7F $7A
     ld   hl, $4311                                ; $42A3: $21 $11 $43
-    jp   label_01F_7A85                           ; $42A6: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $42A6: $C3 $85 $7A
 
 jr_01F_42A9:
     ld   hl, $4317                                ; $42A9: $21 $17 $43
@@ -101,7 +100,7 @@ jr_01F_42A9:
     ld   hl, $431D                                ; $42AF: $21 $1D $43
     call func_01F_7A7F                            ; $42B2: $CD $7F $7A
     ld   hl, $4317                                ; $42B5: $21 $17 $43
-    jp   label_01F_7A85                           ; $42B8: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $42B8: $C3 $85 $7A
 
 jr_01F_42BB:
     ld   hl, $D32F                                ; $42BB: $21 $2F $D3
@@ -255,7 +254,7 @@ jr_01F_437C:
     jp   z, label_01F_53B5                        ; $437C: $CA $B5 $53
 
     ld   hl, $4385                                ; $437F: $21 $85 $43
-    jp   label_01F_7AE1                           ; $4382: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4382: $C3 $E1 $7A
 
     rst  $38                                      ; $4385: $FF
     ret  nz                                       ; $4386: $C0
@@ -312,7 +311,7 @@ jr_01F_4390:
 
 jr_01F_43C7:
     ld   hl, $43D8                                ; $43C7: $21 $D8 $43
-    jp   label_01F_7AE1                           ; $43CA: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $43CA: $C3 $E1 $7A
 
 jr_01F_43CD:
     call func_01F_7A9A                            ; $43CD: $CD $9A $7A
@@ -349,7 +348,7 @@ jr_01F_43CD:
 
 jr_01F_43FE:
     ld   hl, $440F                                ; $43FE: $21 $0F $44
-    jp   label_01F_7AE1                           ; $4401: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4401: $C3 $E1 $7A
 
 jr_01F_4404:
     call func_01F_7A9A                            ; $4404: $CD $9A $7A
@@ -385,7 +384,7 @@ jr_01F_4404:
 
 jr_01F_4432:
     ld   hl, $4443                                ; $4432: $21 $43 $44
-    jp   label_01F_7AE1                           ; $4435: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4435: $C3 $E1 $7A
 
 jr_01F_4438:
     call func_01F_7A9A                            ; $4438: $CD $9A $7A
@@ -430,7 +429,7 @@ jr_01F_4438:
     jp   z, label_01F_53BB                        ; $4468: $CA $BB $53
 
     ld   hl, $4477                                ; $446B: $21 $77 $44
-    jp   label_01F_7A79                           ; $446E: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $446E: $C3 $79 $7A
 
 func_01F_4471::
     nop                                           ; $4471: $00
@@ -454,7 +453,7 @@ func_01F_4471::
     jp   z, label_01F_53BB                        ; $448C: $CA $BB $53
 
     ld   hl, $449B                                ; $448F: $21 $9B $44
-    jp   label_01F_7A79                           ; $4492: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4492: $C3 $79 $7A
 
     ccf                                           ; $4495: $3F
     sbc  [hl]                                     ; $4496: $9E
@@ -475,7 +474,7 @@ func_01F_4471::
     jp   z, label_01F_53B5                        ; $44AF: $CA $B5 $53
 
     ld   hl, $44B8                                ; $44B2: $21 $B8 $44
-    jp   label_01F_7AE1                           ; $44B5: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $44B5: $C3 $E1 $7A
 
     ld   bc, $00                                  ; $44B8: $01 $00 $00
     ret  nz                                       ; $44BB: $C0
@@ -570,7 +569,7 @@ jr_01F_4505:
 
 jr_01F_4531:
     ld   hl, $4542                                ; $4531: $21 $42 $45
-    jp   label_01F_7AE1                           ; $4534: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4534: $C3 $E1 $7A
 
 jr_01F_4537:
     call func_01F_7A9A                            ; $4537: $CD $9A $7A
@@ -612,7 +611,7 @@ jr_01F_454A:
 
 jr_01F_4569:
     ld   hl, $4589                                ; $4569: $21 $89 $45
-    jp   label_01F_7AE1                           ; $456C: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $456C: $C3 $E1 $7A
 
 jr_01F_456F:
     call func_01F_7A9A                            ; $456F: $CD $9A $7A
@@ -630,7 +629,7 @@ jr_01F_457E:
     ld   [bc], a                                  ; $457F: $02
     ld   hl, $4595                                ; $4580: $21 $95 $45
     call func_01F_7AB7                            ; $4583: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $4586: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4586: $C3 $79 $7A
 
     nop                                           ; $4589: $00
     jr   z, jr_01F_458C                           ; $458A: $28 $00
@@ -699,7 +698,7 @@ jr_01F_45B9:
     jp   z, label_01F_53BB                        ; $45DB: $CA $BB $53
 
     ld   hl, $45EA                                ; $45DE: $21 $EA $45
-    jp   label_01F_7A79                           ; $45E1: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $45E1: $C3 $79 $7A
 
     rla                                           ; $45E4: $17
     add  b                                        ; $45E5: $80
@@ -712,7 +711,7 @@ jr_01F_45B9:
     ld   c, $00                                   ; $45EC: $0E $00
     push bc                                       ; $45EE: $C5
     db   $10                                      ; $45EF: $10
-    jp   label_01F_7B5C                           ; $45F0: $C3 $5C $7B
+    jp   func_01F_7B5C                            ; $45F0: $C3 $5C $7B
 
     ld   a, $17                                   ; $45F3: $3E $17
     ld   [$D3BC], a                               ; $45F5: $EA $BC $D3
@@ -734,7 +733,7 @@ jr_01F_4616:
     call func_01F_7B11                            ; $4619: $CD $11 $7B
     ld   bc, $D394                                ; $461C: $01 $94 $D3
     ld   hl, $4630                                ; $461F: $21 $30 $46
-    jp   label_01F_7AE1                           ; $4622: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4622: $C3 $E1 $7A
 
 jr_01F_4625:
     call func_01F_7A9A                            ; $4625: $CD $9A $7A
@@ -787,7 +786,7 @@ jr_01F_4676:
     call func_01F_7B11                            ; $4679: $CD $11 $7B
     ld   bc, $D394                                ; $467C: $01 $94 $D3
     ld   hl, $4690                                ; $467F: $21 $90 $46
-    jp   label_01F_7AE1                           ; $4682: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4682: $C3 $E1 $7A
 
 jr_01F_4685:
     call func_01F_7A9A                            ; $4685: $CD $9A $7A
@@ -841,7 +840,7 @@ jr_01F_46C4:
     ld   hl, $46D5                                ; $46C4: $21 $D5 $46
 
 jr_01F_46C7:
-    jp   label_01F_7AE1                           ; $46C7: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $46C7: $C3 $E1 $7A
 
 jr_01F_46CA:
     call func_01F_7A9A                            ; $46CA: $CD $9A $7A
@@ -899,7 +898,7 @@ jr_01F_46CA:
 
     ld   hl, $471C                                ; $4713: $21 $1C $47
     call GetHandlerAddressInTable                 ; $4716: $CD $64 $7A
-    jp   label_01F_7A79                           ; $4719: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4719: $C3 $79 $7A
 
     ld   h, $47                                   ; $471C: $26 $47
     inc  l                                        ; $471E: $2C
@@ -947,7 +946,7 @@ jr_01F_46CA:
 
 jr_01F_475A:
     ld   hl, $477E                                ; $475A: $21 $7E $47
-    jp   label_01F_7AE1                           ; $475D: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $475D: $C3 $E1 $7A
 
 jr_01F_4760:
     call func_01F_7A9A                            ; $4760: $CD $9A $7A
@@ -994,7 +993,7 @@ jr_01F_4784:
     jp   z, label_01F_53B5                        ; $4799: $CA $B5 $53
 
     ld   hl, $47A8                                ; $479C: $21 $A8 $47
-    jp   label_01F_7A79                           ; $479F: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $479F: $C3 $79 $7A
 
     cpl                                           ; $47A2: $2F
     add  b                                        ; $47A3: $80
@@ -1018,7 +1017,7 @@ jr_01F_4784:
 
     ld   hl, $47C9                                ; $47C0: $21 $C9 $47
     call GetHandlerAddressInTable                 ; $47C3: $CD $64 $7A
-    jp   label_01F_7A79                           ; $47C6: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $47C6: $C3 $79 $7A
 
     rst  $10                                      ; $47C9: $D7
     ld   b, a                                     ; $47CA: $47
@@ -1099,7 +1098,7 @@ jr_01F_47EA:
     jr   z, jr_01F_483A                           ; $4832: $28 $06
 
     ld   hl, $4855                                ; $4834: $21 $55 $48
-    jp   label_01F_7AE1                           ; $4837: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4837: $C3 $E1 $7A
 
 jr_01F_483A:
     call func_01F_7A9A                            ; $483A: $CD $9A $7A
@@ -1114,7 +1113,7 @@ jr_01F_4847:
     call func_01F_7AB7                            ; $4847: $CD $B7 $7A
     ld   a, $04                                   ; $484A: $3E $04
     ld   [bc], a                                  ; $484C: $02
-    jp   label_01F_7A79                           ; $484D: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $484D: $C3 $79 $7A
 
 jr_01F_4850:
     ld   hl, $4869                                ; $4850: $21 $69 $48
@@ -1166,7 +1165,7 @@ jr_01F_4850:
 
 jr_01F_488E:
     ld   hl, $48BB                                ; $488E: $21 $BB $48
-    jp   label_01F_7AE1                           ; $4891: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4891: $C3 $E1 $7A
 
 jr_01F_4894:
     call func_01F_7A9A                            ; $4894: $CD $9A $7A
@@ -1185,7 +1184,7 @@ jr_01F_48A4:
     ld   [bc], a                                  ; $48A6: $02
     ld   hl, $48C9                                ; $48A7: $21 $C9 $48
     call func_01F_7AB7                            ; $48AA: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $48AD: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $48AD: $C3 $79 $7A
 
 jr_01F_48B0:
     call func_01F_7A9A                            ; $48B0: $CD $9A $7A
@@ -1293,7 +1292,7 @@ jr_01F_48FA:
 
 jr_01F_494E:
     ld   hl, $495F                                ; $494E: $21 $5F $49
-    jp   label_01F_7AE1                           ; $4951: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4951: $C3 $E1 $7A
 
 jr_01F_4954:
     call func_01F_7A9A                            ; $4954: $CD $9A $7A
@@ -1348,7 +1347,7 @@ jr_01F_4980:
 
 jr_01F_4995:
     ld   hl, $49A6                                ; $4995: $21 $A6 $49
-    jp   label_01F_7AE1                           ; $4998: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4998: $C3 $E1 $7A
 
 jr_01F_499B:
     call func_01F_7A9A                            ; $499B: $CD $9A $7A
@@ -1380,7 +1379,7 @@ jr_01F_499B:
 
 jr_01F_49C5:
     ld   hl, $49F4                                ; $49C5: $21 $F4 $49
-    jp   label_01F_7AE1                           ; $49C8: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $49C8: $C3 $E1 $7A
 
 jr_01F_49CB:
     call func_01F_7A9A                            ; $49CB: $CD $9A $7A
@@ -1401,14 +1400,14 @@ jr_01F_49DE:
     ld   [bc], a                                  ; $49DF: $02
     ld   hl, $49FC                                ; $49E0: $21 $FC $49
     call func_01F_7AB7                            ; $49E3: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $49E6: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $49E6: $C3 $79 $7A
 
 jr_01F_49E9:
     xor  a                                        ; $49E9: $AF
     ld   [bc], a                                  ; $49EA: $02
     ld   hl, $4A02                                ; $49EB: $21 $02 $4A
     call func_01F_7AB7                            ; $49EE: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $49F1: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $49F1: $C3 $79 $7A
 
     rst  $38                                      ; $49F4: $FF
     rst  $38                                      ; $49F5: $FF
@@ -1526,9 +1525,9 @@ jr_01F_4A4A:
     call GetHandlerAddressInTable                 ; $4A89: $CD $64 $7A
     ld   a, [$D394]                               ; $4A8C: $FA $94 $D3
     and  $01                                      ; $4A8F: $E6 $01
-    jp   nz, label_01F_7A7F                       ; $4A91: $C2 $7F $7A
+    jp   nz, func_01F_7A7F                        ; $4A91: $C2 $7F $7A
 
-    jp   label_01F_7A79                           ; $4A94: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4A94: $C3 $79 $7A
 
 jr_01F_4A97:
     ld   hl, $D32F                                ; $4A97: $21 $2F $D3
@@ -1682,7 +1681,7 @@ jr_01F_4B2B:
 
 jr_01F_4B5F:
     ld   hl, $4B7F                                ; $4B5F: $21 $7F $4B
-    jp   label_01F_7AE1                           ; $4B62: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4B62: $C3 $E1 $7A
 
 jr_01F_4B65:
     call func_01F_7A9A                            ; $4B65: $CD $9A $7A
@@ -1700,7 +1699,7 @@ jr_01F_4B74:
     ld   [bc], a                                  ; $4B75: $02
     ld   hl, $4B8B                                ; $4B76: $21 $8B $4B
     call func_01F_7AB7                            ; $4B79: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $4B7C: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4B7C: $C3 $79 $7A
 
     rst  $38                                      ; $4B7F: $FF
     ldh  [rP1], a                                 ; $4B80: $E0 $00
@@ -1835,7 +1834,7 @@ jr_01F_4B74:
 
 jr_01F_4C41:
     ld   hl, $4C61                                ; $4C41: $21 $61 $4C
-    jp   label_01F_7AE1                           ; $4C44: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4C44: $C3 $E1 $7A
 
 jr_01F_4C47:
     call func_01F_7A9A                            ; $4C47: $CD $9A $7A
@@ -1853,7 +1852,7 @@ jr_01F_4C56:
     ld   [bc], a                                  ; $4C57: $02
     ld   hl, $4C7B                                ; $4C58: $21 $7B $4C
     call func_01F_7AB7                            ; $4C5B: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $4C5E: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4C5E: $C3 $79 $7A
 
     nop                                           ; $4C61: $00
     ld   [$F0FF], sp                              ; $4C62: $08 $FF $F0
@@ -1890,7 +1889,7 @@ jr_01F_4C56:
 
 jr_01F_4C96:
     ld   hl, $4CC3                                ; $4C96: $21 $C3 $4C
-    jp   label_01F_7AE1                           ; $4C99: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4C99: $C3 $E1 $7A
 
 jr_01F_4C9C:
     call func_01F_7A9A                            ; $4C9C: $CD $9A $7A
@@ -1914,7 +1913,7 @@ jr_01F_4CB5:
     ld   a, $01                                   ; $4CB5: $3E $01
     ld   [bc], a                                  ; $4CB7: $02
     call func_01F_7AB7                            ; $4CB8: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $4CBB: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4CBB: $C3 $79 $7A
 
 jr_01F_4CBE:
     ld   hl, $4CDB                                ; $4CBE: $21 $DB $4C
@@ -1960,7 +1959,7 @@ jr_01F_4CBE:
 
 jr_01F_4CFD:
     ld   hl, $4D18                                ; $4CFD: $21 $18 $4D
-    jp   label_01F_7AE1                           ; $4D00: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4D00: $C3 $E1 $7A
 
 jr_01F_4D03:
     call func_01F_7A9A                            ; $4D03: $CD $9A $7A
@@ -2003,7 +2002,7 @@ jr_01F_4D12:
 
 jr_01F_4D3B:
     ld   hl, $4D5B                                ; $4D3B: $21 $5B $4D
-    jp   label_01F_7AE1                           ; $4D3E: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4D3E: $C3 $E1 $7A
 
 jr_01F_4D41:
     call func_01F_7A9A                            ; $4D41: $CD $9A $7A
@@ -2021,7 +2020,7 @@ jr_01F_4D50:
     ld   [bc], a                                  ; $4D51: $02
     ld   hl, $4DB1                                ; $4D52: $21 $B1 $4D
     call func_01F_7AB7                            ; $4D55: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $4D58: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4D58: $C3 $79 $7A
 
     nop                                           ; $4D5B: $00
     jr   nc, jr_01F_4D5E                          ; $4D5C: $30 $00
@@ -2136,7 +2135,7 @@ jr_01F_4D7C:
 
 jr_01F_4DCC:
     ld   hl, $4DDD                                ; $4DCC: $21 $DD $4D
-    jp   label_01F_7AE1                           ; $4DCF: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4DCF: $C3 $E1 $7A
 
 jr_01F_4DD2:
     call func_01F_7A9A                            ; $4DD2: $CD $9A $7A
@@ -2176,7 +2175,7 @@ jr_01F_4DD2:
     jp   z, label_01F_53BB                        ; $4E01: $CA $BB $53
 
     ld   hl, $4E0A                                ; $4E04: $21 $0A $4E
-    jp   label_01F_7A79                           ; $4E07: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4E07: $C3 $79 $7A
 
     rla                                           ; $4E0A: $17
     cp   h                                        ; $4E0B: $BC
@@ -2196,7 +2195,7 @@ jr_01F_4DD2:
 
 jr_01F_4E25:
     ld   hl, $4E46                                ; $4E25: $21 $46 $4E
-    jp   label_01F_7AE1                           ; $4E28: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4E28: $C3 $E1 $7A
 
 jr_01F_4E2B:
     call func_01F_7A9A                            ; $4E2B: $CD $9A $7A
@@ -2214,7 +2213,7 @@ jr_01F_4E3A:
     ld   a, $01                                   ; $4E3D: $3E $01
     ld   [bc], a                                  ; $4E3F: $02
     call func_01F_7AB7                            ; $4E40: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $4E43: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4E43: $C3 $79 $7A
 
     rst  $38                                      ; $4E46: $FF
     db   $FC                                      ; $4E47: $FC
@@ -2241,7 +2240,7 @@ jr_01F_4E3A:
 
     ld   hl, $4E71                                ; $4E68: $21 $71 $4E
     call GetHandlerAddressInTable                 ; $4E6B: $CD $64 $7A
-    jp   label_01F_7A79                           ; $4E6E: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4E6E: $C3 $79 $7A
 
     ld   a, e                                     ; $4E71: $7B
     ld   c, [hl]                                  ; $4E72: $4E
@@ -2285,7 +2284,7 @@ jr_01F_4E3A:
 
 jr_01F_4EA7:
     ld   hl, $4EBC                                ; $4EA7: $21 $BC $4E
-    jp   label_01F_7AE1                           ; $4EAA: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4EAA: $C3 $E1 $7A
 
 jr_01F_4EAD:
     call func_01F_7A9A                            ; $4EAD: $CD $9A $7A
@@ -2326,7 +2325,7 @@ jr_01F_4EB8:
 
 jr_01F_4EE3:
     ld   hl, $4F05                                ; $4EE3: $21 $05 $4F
-    jp   label_01F_7AE1                           ; $4EE6: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4EE6: $C3 $E1 $7A
 
 jr_01F_4EE9:
     call func_01F_7A9A                            ; $4EE9: $CD $9A $7A
@@ -2342,7 +2341,7 @@ jr_01F_4EF5:
     ld   [bc], a                                  ; $4EF6: $02
     ld   hl, $4F1D                                ; $4EF7: $21 $1D $4F
     call func_01F_7AB7                            ; $4EFA: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $4EFD: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4EFD: $C3 $79 $7A
 
 jr_01F_4F00:
     ld   a, $01                                   ; $4F00: $3E $01
@@ -2388,7 +2387,7 @@ jr_01F_4F00:
 
 jr_01F_4F43:
     ld   hl, $4F66                                ; $4F43: $21 $66 $4F
-    jp   label_01F_7AE1                           ; $4F46: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4F46: $C3 $E1 $7A
 
 jr_01F_4F49:
     call func_01F_7A9A                            ; $4F49: $CD $9A $7A
@@ -2410,7 +2409,7 @@ jr_01F_4F5B:
     ld   [bc], a                                  ; $4F5C: $02
     ld   hl, $4F7E                                ; $4F5D: $21 $7E $4F
     call func_01F_7AB7                            ; $4F60: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $4F63: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $4F63: $C3 $79 $7A
 
     nop                                           ; $4F66: $00
     stop                                          ; $4F67: $10 $00
@@ -2458,7 +2457,7 @@ jr_01F_4F97:
 jr_01F_4FA4:
     ld   [bc], a                                  ; $4FA4: $02
     ld   hl, $4FE7                                ; $4FA5: $21 $E7 $4F
-    jp   label_01F_7AE1                           ; $4FA8: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $4FA8: $C3 $E1 $7A
 
 jr_01F_4FAB:
     ld   a, $02                                   ; $4FAB: $3E $02
@@ -2533,7 +2532,7 @@ jr_01F_4FE3:
 
 jr_01F_500E:
     ld   hl, $5024                                ; $500E: $21 $24 $50
-    jp   label_01F_7AE1                           ; $5011: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $5011: $C3 $E1 $7A
 
 jr_01F_5014:
     call func_01F_7A9A                            ; $5014: $CD $9A $7A
@@ -2598,7 +2597,7 @@ jr_01F_5052:
     jr   z, jr_01F_5064                           ; $505C: $28 $06
 
     ld   hl, $506E                                ; $505E: $21 $6E $50
-    jp   label_01F_7AE1                           ; $5061: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $5061: $C3 $E1 $7A
 
 jr_01F_5064:
     ld   hl, wActiveJingle                        ; $5064: $21 $60 $D3
@@ -2659,11 +2658,11 @@ jr_01F_50A7:
     jr   c, jr_01F_50B4                           ; $50AC: $38 $06
 
     ld   hl, $50DC                                ; $50AE: $21 $DC $50
-    jp   label_01F_7AE1                           ; $50B1: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $50B1: $C3 $E1 $7A
 
 jr_01F_50B4:
     ld   hl, $50F8                                ; $50B4: $21 $F8 $50
-    jp   label_01F_7AE1                           ; $50B7: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $50B7: $C3 $E1 $7A
 
 jr_01F_50BA:
     call func_01F_7A9A                            ; $50BA: $CD $9A $7A
@@ -2687,7 +2686,7 @@ jr_01F_50D1:
     ld   [bc], a                                  ; $50D2: $02
     ld   hl, $511A                                ; $50D3: $21 $1A $51
     call func_01F_7AB7                            ; $50D6: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $50D9: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $50D9: $C3 $79 $7A
 
     nop                                           ; $50DC: $00
     ret  nz                                       ; $50DD: $C0
@@ -2771,7 +2770,7 @@ jr_01F_5103:
 
 jr_01F_5139:
     ld   hl, $514F                                ; $5139: $21 $4F $51
-    jp   label_01F_7AE1                           ; $513C: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $513C: $C3 $E1 $7A
 
 jr_01F_513F:
     call func_01F_7A9A                            ; $513F: $CD $9A $7A
@@ -2819,7 +2818,7 @@ jr_01F_514A:
 
 jr_01F_5180:
     ld   hl, $5196                                ; $5180: $21 $96 $51
-    jp   label_01F_7AE1                           ; $5183: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $5183: $C3 $E1 $7A
 
 jr_01F_5186:
     ld   a, $01                                   ; $5186: $3E $01
@@ -2876,7 +2875,7 @@ jr_01F_518B:
     jr   z, jr_01F_51CF                           ; $51C7: $28 $06
 
     ld   hl, $51E0                                ; $51C9: $21 $E0 $51
-    jp   label_01F_7AE1                           ; $51CC: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $51CC: $C3 $E1 $7A
 
 jr_01F_51CF:
     call func_01F_7A9A                            ; $51CF: $CD $9A $7A
@@ -2886,7 +2885,7 @@ jr_01F_51CF:
     ld   [bc], a                                  ; $51D6: $02
     ld   hl, $51F6                                ; $51D7: $21 $F6 $51
     call func_01F_7AB7                            ; $51DA: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $51DD: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $51DD: $C3 $79 $7A
 
     nop                                           ; $51E0: $00
     ld   [bc], a                                  ; $51E1: $02
@@ -2945,7 +2944,7 @@ jr_01F_51CF:
 
 jr_01F_5231:
     ld   hl, $525A                                ; $5231: $21 $5A $52
-    jp   label_01F_7AE1                           ; $5234: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $5234: $C3 $E1 $7A
 
 jr_01F_5237:
     ld   a, $01                                   ; $5237: $3E $01
@@ -2966,7 +2965,7 @@ jr_01F_5248:
     ld   [bc], a                                  ; $5249: $02
     ld   hl, $5268                                ; $524A: $21 $68 $52
     call func_01F_7AB7                            ; $524D: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $5250: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $5250: $C3 $79 $7A
 
 label_01F_5253:
     ld   a, $3D                                   ; $5253: $3E $3D
@@ -3025,7 +3024,7 @@ label_01F_5253:
 
 jr_01F_52A2:
     ld   hl, $52C7                                ; $52A2: $21 $C7 $52
-    jp   label_01F_7AE1                           ; $52A5: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $52A5: $C3 $E1 $7A
 
 jr_01F_52A8:
     call func_01F_7A9A                            ; $52A8: $CD $9A $7A
@@ -3048,7 +3047,7 @@ jr_01F_52BC:
     ld   [bc], a                                  ; $52BD: $02
     ld   hl, $52D3                                ; $52BE: $21 $D3 $52
     call func_01F_7AB7                            ; $52C1: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $52C4: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $52C4: $C3 $79 $7A
 
     nop                                           ; $52C7: $00
     ld   h, b                                     ; $52C8: $60
@@ -3084,7 +3083,7 @@ jr_01F_52EC:
 jr_01F_52F5:
     ld   [bc], a                                  ; $52F5: $02
     ld   hl, $5327                                ; $52F6: $21 $27 $53
-    jp   label_01F_7AE1                           ; $52F9: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $52F9: $C3 $E1 $7A
 
 jr_01F_52FC:
     ld   a, $02                                   ; $52FC: $3E $02
@@ -3110,7 +3109,7 @@ label_01F_5319:
     ld   [$D3BC], a                               ; $531B: $EA $BC $D3
     ld   hl, $5331                                ; $531E: $21 $31 $53
     call func_01F_7AB7                            ; $5321: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $5324: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $5324: $C3 $79 $7A
 
     nop                                           ; $5327: $00
     db   $10                                      ; $5328: $10
@@ -3137,7 +3136,7 @@ label_01F_5319:
 
     ld   hl, $5352                                ; $5349: $21 $52 $53
     call GetHandlerAddressInTable                 ; $534C: $CD $64 $7A
-    jp   label_01F_7A79                           ; $534F: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $534F: $C3 $79 $7A
 
     ld   a, b                                     ; $5352: $78
     ld   d, e                                     ; $5353: $53
@@ -3216,7 +3215,7 @@ label_01F_539A:
     ld   a, [$D31F]                               ; $53AA: $FA $1F $D3
     set  7, a                                     ; $53AD: $CB $FF
     ld   [$D31F], a                               ; $53AF: $EA $1F $D3
-    jp   label_01F_7A79                           ; $53B2: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $53B2: $C3 $79 $7A
 
 label_01F_53B5:
     ld   hl, $53D9                                ; $53B5: $21 $D9 $53
@@ -3248,10 +3247,9 @@ label_01F_53BB:
 label_01F_53E6:
     xor  a                                        ; $53E6: $AF
     ld   [wActiveJingle], a                       ; $53E7: $EA $60 $D3
-    jp   label_01F_4204                           ; $53EA: $C3 $04 $42
+    jp   func_01F_4204                            ; $53EA: $C3 $04 $42
 
 func_01F_53ED::
-label_01F_53ED:
     ld   hl, wActiveWaveSfx                       ; $53ED: $21 $70 $D3
     ld   a, [hl]                                  ; $53F0: $7E
     and  a                                        ; $53F1: $A7
@@ -3377,7 +3375,7 @@ func_01F_54A7::
 
     ld   hl, Data_01F_54C5                        ; $54BC: $21 $C5 $54
     call GetHandlerAddressInTable                 ; $54BF: $CD $64 $7A
-    jp   label_01F_7A85                           ; $54C2: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $54C2: $C3 $85 $7A
 
 Data_01F_54C5::
     push de                                       ; $54C5: $D5
@@ -3526,7 +3524,7 @@ jr_01F_5596:
     xor  a                                        ; $559C: $AF
     ld   [bc], a                                  ; $559D: $02
     ld   hl, $55AD                                ; $559E: $21 $AD $55
-    jp   label_01F_7A85                           ; $55A1: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $55A1: $C3 $85 $7A
 
     add  b                                        ; $55A4: $80
     ld   a, [$C040]                               ; $55A5: $FA $40 $C0
@@ -3608,7 +3606,7 @@ jr_01F_561D:
     ld   [bc], a                                  ; $561E: $02
     ld   hl, $563F                                ; $561F: $21 $3F $56
     call func_01F_7ABD                            ; $5622: $CD $BD $7A
-    jp   label_01F_7A85                           ; $5625: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5625: $C3 $85 $7A
 
 jr_01F_5628:
     call func_01F_7AA6                            ; $5628: $CD $A6 $7A
@@ -3666,7 +3664,7 @@ jr_01F_5676:
     ld   [bc], a                                  ; $567E: $02
     ld   hl, $56CB                                ; $567F: $21 $CB $56
     call func_01F_7ABD                            ; $5682: $CD $BD $7A
-    jp   label_01F_7A85                           ; $5685: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5685: $C3 $85 $7A
 
 jr_01F_5688:
     ld   a, $02                                   ; $5688: $3E $02
@@ -3821,7 +3819,7 @@ jr_01F_5743:
 
     call IncrementValueAtBC                            ; $5744: $CD $75 $7A
     cp   $14                                      ; $5747: $FE $14
-    jr   z, jr_01F_575C                           ; $5749: $28 $11
+    jr   z, label_01F_575C                        ; $5749: $28 $11
 
     ld   hl, $576A                                ; $574B: $21 $6A $57
 
@@ -3831,12 +3829,11 @@ jr_01F_574E:
 label_01F_5751:
     ld   a, [$D396]                               ; $5751: $FA $96 $D3
     and  $01                                      ; $5754: $E6 $01
-    jp   nz, label_01F_7A7F                       ; $5756: $C2 $7F $7A
+    jp   nz, func_01F_7A7F                        ; $5756: $C2 $7F $7A
 
-    jp   label_01F_7A85                           ; $5759: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5759: $C3 $85 $7A
 
 label_01F_575C:
-jr_01F_575C:
     ld   hl, $431D                                ; $575C: $21 $1D $43
     call func_01F_7A7F                            ; $575F: $CD $7F $7A
     ld   hl, $D32F                                ; $5762: $21 $2F $D3
@@ -4361,7 +4358,7 @@ jr_01F_59C6:
     ld   [bc], a                                  ; $59C7: $02
     ld   hl, $59DB                                ; $59C8: $21 $DB $59
     call func_01F_7ABD                            ; $59CB: $CD $BD $7A
-    jp   label_01F_7A85                           ; $59CE: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $59CE: $C3 $85 $7A
 
     rst  $38                                      ; $59D1: $FF
     and  b                                        ; $59D2: $A0
@@ -4393,7 +4390,7 @@ jr_01F_59C6:
 
     ld   hl, $59FF                                ; $59F6: $21 $FF $59
     call GetHandlerAddressInTable                 ; $59F9: $CD $64 $7A
-    jp   label_01F_7A85                           ; $59FC: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $59FC: $C3 $85 $7A
 
     dec  c                                        ; $59FF: $0D
     ld   e, d                                     ; $5A00: $5A
@@ -4433,7 +4430,7 @@ jr_01F_5A0B:
     jp   z, label_01F_632D                        ; $5A2F: $CA $2D $63
 
     ld   hl, $5A3E                                ; $5A32: $21 $3E $5A
-    jp   label_01F_7A85                           ; $5A35: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5A35: $C3 $85 $7A
 
     add  b                                        ; $5A38: $80
     ei                                            ; $5A39: $FB
@@ -4474,7 +4471,7 @@ jr_01F_5A69:
     ld   [bc], a                                  ; $5A71: $02
     ld   hl, $5B61                                ; $5A72: $21 $61 $5B
     call func_01F_7ABD                            ; $5A75: $CD $BD $7A
-    jp   label_01F_7A85                           ; $5A78: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5A78: $C3 $85 $7A
 
     nop                                           ; $5A7B: $00
     or   b                                        ; $5A7C: $B0
@@ -4753,7 +4750,7 @@ jr_01F_5BA1:
     call func_01F_7ABD                            ; $5BA1: $CD $BD $7A
     xor  a                                        ; $5BA4: $AF
     ld   [bc], a                                  ; $5BA5: $02
-    jp   label_01F_7A85                           ; $5BA6: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5BA6: $C3 $85 $7A
 
 label_01F_5BA9:
     ld   hl, $5BBE                                ; $5BA9: $21 $BE $5B
@@ -4807,7 +4804,7 @@ jr_01F_5BF1:
     ld   [bc], a                                  ; $5BF2: $02
     ld   hl, $5C06                                ; $5BF3: $21 $06 $5C
     call func_01F_7ABD                            ; $5BF6: $CD $BD $7A
-    jp   label_01F_7A85                           ; $5BF9: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5BF9: $C3 $85 $7A
 
     ld   bc, $FE00                                ; $5BFC: $01 $00 $FE
     ret  nz                                       ; $5BFF: $C0
@@ -4863,7 +4860,7 @@ jr_01F_5C46:
     xor  a                                        ; $5C46: $AF
     ld   [bc], a                                  ; $5C47: $02
     call func_01F_7ABD                            ; $5C48: $CD $BD $7A
-    jp   label_01F_7A85                           ; $5C4B: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5C4B: $C3 $85 $7A
 
 jr_01F_5C4E:
     ld   a, [$D3BE]                               ; $5C4E: $FA $BE $D3
@@ -4944,7 +4941,7 @@ jr_01F_5C88:
 
     ld   hl, $5CCE                                ; $5CC5: $21 $CE $5C
     call GetHandlerAddressInTable                 ; $5CC8: $CD $64 $7A
-    jp   label_01F_7A85                           ; $5CCB: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5CCB: $C3 $85 $7A
 
     sbc  $5C                                      ; $5CCE: $DE $5C
     db   $E4                                      ; $5CD0: $E4
@@ -5039,7 +5036,7 @@ jr_01F_5D38:
     ld   [bc], a                                  ; $5D40: $02
     ld   hl, $5D6E                                ; $5D41: $21 $6E $5D
     call func_01F_7ABD                            ; $5D44: $CD $BD $7A
-    jp   label_01F_7A85                           ; $5D47: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5D47: $C3 $85 $7A
 
     ld   [bc], a                                  ; $5D4A: $02
     nop                                           ; $5D4B: $00
@@ -5159,7 +5156,7 @@ jr_01F_5DCE:
     call func_01F_7A8B                            ; $5DDD: $CD $8B $7A
     ld   hl, $5ECB                                ; $5DE0: $21 $CB $5E
     call func_01F_7ABD                            ; $5DE3: $CD $BD $7A
-    jp   label_01F_7A85                           ; $5DE6: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5DE6: $C3 $85 $7A
 
 jr_01F_5DE9:
     ld   a, $40                                   ; $5DE9: $3E $40
@@ -5168,7 +5165,7 @@ jr_01F_5DE9:
     call func_01F_7A8B                            ; $5DEF: $CD $8B $7A
     ld   hl, $5ED1                                ; $5DF2: $21 $D1 $5E
     call func_01F_7ABD                            ; $5DF5: $CD $BD $7A
-    jp   label_01F_7A85                           ; $5DF8: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5DF8: $C3 $85 $7A
 
 jr_01F_5DFB:
     ld   hl, $D34F                                ; $5DFB: $21 $4F $D3
@@ -5358,7 +5355,7 @@ jr_01F_5F04:
     ld   [bc], a                                  ; $5F05: $02
     ld   hl, $5F13                                ; $5F06: $21 $13 $5F
     call func_01F_7ABD                            ; $5F09: $CD $BD $7A
-    jp   label_01F_7A85                           ; $5F0C: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5F0C: $C3 $85 $7A
 
     nop                                           ; $5F0F: $00
     ld   h, b                                     ; $5F10: $60
@@ -5467,7 +5464,7 @@ jr_01F_5F73:
 
     ld   hl, $5FA8                                ; $5F9F: $21 $A8 $5F
     call GetHandlerAddressInTable                 ; $5FA2: $CD $64 $7A
-    jp   label_01F_7A85                           ; $5FA5: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5FA5: $C3 $85 $7A
 
     or   h                                        ; $5FA8: $B4
     ld   e, a                                     ; $5FA9: $5F
@@ -5507,7 +5504,7 @@ jr_01F_5F73:
 
     ld   hl, $5FDE                                ; $5FD5: $21 $DE $5F
     call GetHandlerAddressInTable                 ; $5FD8: $CD $64 $7A
-    jp   label_01F_7A85                           ; $5FDB: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $5FDB: $C3 $85 $7A
 
     inc  b                                        ; $5FDE: $04
     ld   h, b                                     ; $5FDF: $60
@@ -5572,7 +5569,7 @@ jr_01F_6047:
     xor  a                                        ; $6047: $AF
     ld   [bc], a                                  ; $6048: $02
     call func_01F_7ABD                            ; $6049: $CD $BD $7A
-    jp   label_01F_7A85                           ; $604C: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $604C: $C3 $85 $7A
 
 jr_01F_604F:
     ld   hl, $6060                                ; $604F: $21 $60 $60
@@ -5814,7 +5811,7 @@ jr_01F_6184:
     call func_01F_7A85                            ; $61C3: $CD $85 $7A
     ld   hl, $6217                                ; $61C6: $21 $17 $62
     call func_01F_7AD0                            ; $61C9: $CD $D0 $7A
-    jp   label_01F_7A7F                           ; $61CC: $C3 $7F $7A
+    jp   func_01F_7A7F                            ; $61CC: $C3 $7F $7A
 
     call IncrementValueAtBC                            ; $61CF: $CD $75 $7A
     cp   $09                                      ; $61D2: $FE $09
@@ -5825,7 +5822,7 @@ jr_01F_6184:
 
 jr_01F_61DA:
     ld   hl, $6205                                ; $61DA: $21 $05 $62
-    jp   label_01F_7B11                           ; $61DD: $C3 $11 $7B
+    jp   func_01F_7B11                            ; $61DD: $C3 $11 $7B
 
 jr_01F_61E0:
     call func_01F_7AA6                            ; $61E0: $CD $A6 $7A
@@ -5952,16 +5949,16 @@ jr_01F_626A:
     call GetHandlerAddressInTable                 ; $6294: $CD $64 $7A
     ld   a, [$D396]                               ; $6297: $FA $96 $D3
     cp   $01                                      ; $629A: $FE $01
-    jp   z, label_01F_7A85                        ; $629C: $CA $85 $7A
+    jp   z, func_01F_7A85                         ; $629C: $CA $85 $7A
 
     cp   $02                                      ; $629F: $FE $02
-    jp   z, label_01F_7A85                        ; $62A1: $CA $85 $7A
+    jp   z, func_01F_7A85                         ; $62A1: $CA $85 $7A
 
     cp   $07                                      ; $62A4: $FE $07
-    jp   z, label_01F_7A85                        ; $62A6: $CA $85 $7A
+    jp   z, func_01F_7A85                         ; $62A6: $CA $85 $7A
 
     cp   $0A                                      ; $62A9: $FE $0A
-    jp   z, label_01F_7A85                        ; $62AB: $CA $85 $7A
+    jp   z, func_01F_7A85                         ; $62AB: $CA $85 $7A
 
     jp   label_01F_637E                           ; $62AE: $C3 $7E $63
 
@@ -6042,7 +6039,7 @@ label_01F_62F8:
     ld   [$D392], a                               ; $6306: $EA $92 $D3
     ld   [$D396], a                               ; $6309: $EA $96 $D3
     ldh  [rNR30], a                               ; $630C: $E0 $1A
-    jp   label_01F_7A85                           ; $630E: $C3 $85 $7A
+    jp   func_01F_7A85                            ; $630E: $C3 $85 $7A
 
     add  b                                        ; $6311: $80
     nop                                           ; $6312: $00
@@ -6083,7 +6080,6 @@ label_01F_632D:
     ret                                           ; $6346: $C9
 
 func_01F_6347::
-label_01F_6347:
     push bc                                       ; $6347: $C5
     ld   c, $30                                   ; $6348: $0E $30
 
@@ -6105,7 +6101,7 @@ jr_01F_634A:
     add  c                                        ; $6358: $81
     ld   bc, $E0AF                                ; $6359: $01 $AF $E0
     ld   a, [de]                                  ; $635C: $1A
-    jp   label_01F_6347                           ; $635D: $C3 $47 $63
+    jp   func_01F_6347                            ; $635D: $C3 $47 $63
 
 func_01F_6360::
     ld   hl, Data_01F_63AC                        ; $6360: $21 $AC $63
@@ -6139,7 +6135,7 @@ label_01F_637E:
 label_01F_6385:
     xor  a                                        ; $6385: $AF
     ld   [wActiveWaveSfx], a                      ; $6386: $EA $70 $D3
-    jp   label_01F_53ED                           ; $6389: $C3 $ED $53
+    jp   func_01F_53ED                            ; $6389: $C3 $ED $53
 
 
 Data_01F_638C::
@@ -6342,12 +6338,12 @@ jr_01F_6512:
     ld   a, $01                                   ; $651E: $3E $01
     ld   [$D379], a                               ; $6520: $EA $79 $D3
     ld   hl, $6533                                ; $6523: $21 $33 $65
-    jp   label_01F_7A8B                           ; $6526: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6526: $C3 $8B $7A
 
     xor  a                                        ; $6529: $AF
     ld   [$D379], a                               ; $652A: $EA $79 $D3
     ld   hl, $6538                                ; $652D: $21 $38 $65
-    jp   label_01F_7A8B                           ; $6530: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6530: $C3 $8B $7A
 
     dec  sp                                       ; $6533: $3B
     add  b                                        ; $6534: $80
@@ -6371,7 +6367,7 @@ jr_01F_6512:
 
     ld   hl, $6558                                ; $654F: $21 $58 $65
     call GetHandlerAddressInTable                 ; $6552: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $6555: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6555: $C3 $8B $7A
 
     ld   l, c                                     ; $6558: $69
     ld   h, l                                     ; $6559: $65
@@ -6420,7 +6416,7 @@ jr_01F_6512:
 
     ld   hl, $65A2                                ; $6599: $21 $A2 $65
     call GetHandlerAddressInTable                 ; $659C: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $659F: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $659F: $C3 $8B $7A
 
     rst  $00                                      ; $65A2: $C7
     ld   h, l                                     ; $65A3: $65
@@ -6502,7 +6498,7 @@ jr_01F_65E3:
 
     ld   hl, $660A                                ; $6601: $21 $0A $66
     call GetHandlerAddressInTable                 ; $6604: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $6607: $C3 $8B $7A
+    jp   func_01F_7A8B                            ; $6607: $C3 $8B $7A
 
     dec  d                                        ; $660A: $15
     ld   h, [hl]                                  ; $660B: $66
@@ -6550,7 +6546,7 @@ jr_01F_6627:
 
     ld   hl, $6651                                ; $6648: $21 $51 $66
     call GetHandlerAddressInTable                 ; $664B: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $664E: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $664E: $C3 $8B $7A
 
     ld   e, [hl]                                  ; $6651: $5E
     ld   h, [hl]                                  ; $6652: $66
@@ -6593,7 +6589,7 @@ jr_01F_6627:
 
     ld   hl, $6688                                ; $667F: $21 $88 $66
     call GetHandlerAddressInTable                 ; $6682: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $6685: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6685: $C3 $8B $7A
 
     sub  e                                        ; $6688: $93
     ld   h, [hl]                                  ; $6689: $66
@@ -6650,7 +6646,7 @@ jr_01F_669F:
     jp   z, label_01F_7A07                        ; $66CD: $CA $07 $7A
 
     ld   hl, $66DB                                ; $66D0: $21 $DB $66
-    jp   label_01F_7A8B                           ; $66D3: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $66D3: $C3 $8B $7A
 
     dec  sp                                       ; $66D6: $3B
     ldh  a, [rNR41]                               ; $66D7: $F0 $20
@@ -6771,7 +6767,7 @@ jr_01F_671C:
 
     ld   hl, $677B                                ; $6772: $21 $7B $67
     call GetHandlerAddressInTable                 ; $6775: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $6778: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6778: $C3 $8B $7A
 
     adc  b                                        ; $677B: $88
     ld   h, a                                     ; $677C: $67
@@ -6808,7 +6804,7 @@ jr_01F_677D:
     jp   z, label_01F_7A07                        ; $67A1: $CA $07 $7A
 
     ld   hl, $67AF                                ; $67A4: $21 $AF $67
-    jp   label_01F_7A8B                           ; $67A7: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $67A7: $C3 $8B $7A
 
     inc  a                                        ; $67AA: $3C
     ret  nz                                       ; $67AB: $C0
@@ -6914,7 +6910,7 @@ jr_01F_6834:
 
     ld   hl, $6849                                ; $6840: $21 $49 $68
     call GetHandlerAddressInTable                 ; $6843: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $6846: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6846: $C3 $8B $7A
 
     ld   d, d                                     ; $6849: $52
     ld   l, b                                     ; $684A: $68
@@ -6949,7 +6945,7 @@ jr_01F_6834:
 
     ld   hl, $687E                                ; $6875: $21 $7E $68
     call GetHandlerAddressInTable                 ; $6878: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $687B: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $687B: $C3 $8B $7A
 
     add  a                                        ; $687E: $87
     ld   l, b                                     ; $687F: $68
@@ -7003,7 +6999,7 @@ jr_01F_68B0:
 jr_01F_68BD:
     ld   a, $01                                   ; $68BD: $3E $01
     ld   [bc], a                                  ; $68BF: $02
-    jp   label_01F_7A8B                           ; $68C0: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $68C0: $C3 $8B $7A
 
 jr_01F_68C3:
     ld   hl, $68EB                                ; $68C3: $21 $EB $68
@@ -7120,7 +7116,7 @@ jr_01F_6924:
     cp   $11                                      ; $695A: $FE $11
     jr   nc, jr_01F_6961                          ; $695C: $30 $03
 
-    jp   label_01F_7A8B                           ; $695E: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $695E: $C3 $8B $7A
 
 jr_01F_6961:
     inc  hl                                       ; $6961: $23
@@ -7229,7 +7225,7 @@ jr_01F_69C4:
 
     ld   hl, $69E0                                ; $69D7: $21 $E0 $69
     call GetHandlerAddressInTable                 ; $69DA: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $69DD: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $69DD: $C3 $8B $7A
 
     pop  af                                       ; $69E0: $F1
     ld   l, c                                     ; $69E1: $69
@@ -7273,7 +7269,7 @@ jr_01F_69C4:
 
     ld   hl, $6A26                                ; $6A1D: $21 $26 $6A
     call GetHandlerAddressInTable                 ; $6A20: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $6A23: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6A23: $C3 $8B $7A
 
     dec  [hl]                                     ; $6A26: $35
     ld   l, d                                     ; $6A27: $6A
@@ -7321,7 +7317,7 @@ jr_01F_69C4:
 
     ld   hl, $6A6D                                ; $6A64: $21 $6D $6A
     call GetHandlerAddressInTable                 ; $6A67: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $6A6A: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6A6A: $C3 $8B $7A
 
     db   $76                                      ; $6A6D: $76
     ld   l, d                                     ; $6A6E: $6A
@@ -7354,7 +7350,7 @@ jr_01F_6A7A:
     jp   z, label_01F_7A07                        ; $6A8F: $CA $07 $7A
 
     ld   hl, $6A9D                                ; $6A92: $21 $9D $6A
-    jp   label_01F_7A8B                           ; $6A95: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6A95: $C3 $8B $7A
 
     nop                                           ; $6A98: $00
     pop  af                                       ; $6A99: $F1
@@ -7377,7 +7373,7 @@ jr_01F_6A7A:
 
     ld   hl, $6ABD                                ; $6AB4: $21 $BD $6A
     call GetHandlerAddressInTable                 ; $6AB7: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $6ABA: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6ABA: $C3 $8B $7A
 
     adc  $6A                                      ; $6ABD: $CE $6A
     db   $D3                                      ; $6ABF: $D3
@@ -7461,7 +7457,7 @@ jr_01F_6A7A:
 
     ld   [hl], a                                  ; $6B33: $77
     ld   l, e                                     ; $6B34: $6B
-    jp   label_01F_79E4                           ; $6B35: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $6B35: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $6B38: $CD $71 $7A
     ret  nz                                       ; $6B3B: $C0
@@ -7599,7 +7595,7 @@ jr_01F_6BC5:
 jr_01F_6BC8:
     ld   a, [bc]                                  ; $6BC8: $0A
     call GetHandlerAddressInTable                 ; $6BC9: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $6BCC: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6BCC: $C3 $8B $7A
 
 jr_01F_6BCF:
     ld   hl, $6BF1                                ; $6BCF: $21 $F1 $6B
@@ -7706,7 +7702,7 @@ jr_01F_6C32:
     ld   a, $78                                   ; $6C4C: $3E $78
     ld   [$D3BF], a                               ; $6C4E: $EA $BF $D3
     ld   hl, $6C87                                ; $6C51: $21 $87 $6C
-    jp   label_01F_79E4                           ; $6C54: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $6C54: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $6C57: $CD $71 $7A
     ret  nz                                       ; $6C5A: $C0
@@ -7735,7 +7731,7 @@ jr_01F_6C7A:
     ld   a, $01                                   ; $6C7A: $3E $01
     ld   [bc], a                                  ; $6C7C: $02
     ld   hl, $6C8C                                ; $6C7D: $21 $8C $6C
-    jp   label_01F_7A8B                           ; $6C80: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6C80: $C3 $8B $7A
 
     sub  c                                        ; $6C83: $91
     ld   l, h                                     ; $6C84: $6C
@@ -7817,7 +7813,7 @@ jr_01F_6CEE:
     ld   a, $01                                   ; $6CEE: $3E $01
     ld   [bc], a                                  ; $6CF0: $02
     ld   hl, $6D00                                ; $6CF1: $21 $00 $6D
-    jp   label_01F_7A8B                           ; $6CF4: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6CF4: $C3 $8B $7A
 
     dec  b                                        ; $6CF7: $05
     ld   l, l                                     ; $6CF8: $6D
@@ -7858,7 +7854,7 @@ jr_01F_6D21:
     ld   bc, $0B                                  ; $6D31: $01 $0B $00
     ld   bc, $6021                                ; $6D34: $01 $21 $60
     ld   l, l                                     ; $6D37: $6D
-    jp   label_01F_79E4                           ; $6D38: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $6D38: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $6D3B: $CD $71 $7A
     ret  nz                                       ; $6D3E: $C0
@@ -7871,7 +7867,7 @@ jr_01F_6D21:
     call GetHandlerAddressInTable                 ; $6D4A: $CD $64 $7A
     ld   a, [$D398]                               ; $6D4D: $FA $98 $D3
     cp   $01                                      ; $6D50: $FE $01
-    jp   z, label_01F_7A8B                        ; $6D52: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $6D52: $CA $8B $7A
 
     jp   $7A25                                    ; $6D55: $C3 $25 $7A
 
@@ -7905,7 +7901,7 @@ jr_01F_6D66:
 
     adc  e                                        ; $6D74: $8B
     ld   l, l                                     ; $6D75: $6D
-    jp   label_01F_79E4                           ; $6D76: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $6D76: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $6D79: $CD $71 $7A
     ret  nz                                       ; $6D7C: $C0
@@ -7915,7 +7911,7 @@ jr_01F_6D66:
     jp   z, label_01F_7A01                        ; $6D82: $CA $01 $7A
 
     ld   hl, $6D90                                ; $6D85: $21 $90 $6D
-    jp   label_01F_7A8B                           ; $6D88: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6D88: $C3 $8B $7A
 
     nop                                           ; $6D8B: $00
     rrca                                          ; $6D8C: $0F
@@ -7940,7 +7936,7 @@ jr_01F_6D95:
     jp   z, label_01F_7A07                        ; $6DA4: $CA $07 $7A
 
     ld   hl, $6DB2                                ; $6DA7: $21 $B2 $6D
-    jp   label_01F_7A8B                           ; $6DAA: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $6DAA: $C3 $8B $7A
 
     nop                                           ; $6DAD: $00
     add  hl, hl                                   ; $6DAE: $29
@@ -7951,7 +7947,7 @@ jr_01F_6D95:
     add  b                                        ; $6DB5: $80
     ld   d, b                                     ; $6DB6: $50
     ld   hl, $6E20                                ; $6DB7: $21 $20 $6E
-    jp   label_01F_79E4                           ; $6DBA: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $6DBA: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $6DBD: $CD $71 $7A
     ret  nz                                       ; $6DC0: $C0
@@ -7964,7 +7960,7 @@ jr_01F_6D95:
     call GetHandlerAddressInTable                 ; $6DCC: $CD $64 $7A
     ld   a, [$D398]                               ; $6DCF: $FA $98 $D3
     cp   $1E                                      ; $6DD2: $FE $1E
-    jp   z, label_01F_7A8B                        ; $6DD4: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $6DD4: $CA $8B $7A
 
     jp   $7A25                                    ; $6DD7: $C3 $25 $7A
 
@@ -8209,7 +8205,7 @@ jr_01F_6EFC:
     ld   a, $05                                   ; $6F31: $3E $05
     ld   [$D3BF], a                               ; $6F33: $EA $BF $D3
     ld   hl, $6F67                                ; $6F36: $21 $67 $6F
-    jp   label_01F_79E4                           ; $6F39: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $6F39: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $6F3C: $CD $71 $7A
     ret  nz                                       ; $6F3F: $C0
@@ -8265,7 +8261,7 @@ jr_01F_6F50:
 jr_01F_6F7A:
     ld   [$D3BF], a                               ; $6F7A: $EA $BF $D3
     ld   hl, $6FBE                                ; $6F7D: $21 $BE $6F
-    jp   label_01F_79E4                           ; $6F80: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $6F80: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $6F83: $CD $71 $7A
     ret  nz                                       ; $6F86: $C0
@@ -8281,7 +8277,7 @@ jr_01F_6F8E:
     call GetHandlerAddressInTable                 ; $6F91: $CD $64 $7A
     ld   a, [$D398]                               ; $6F94: $FA $98 $D3
     cp   $01                                      ; $6F97: $FE $01
-    jp   z, label_01F_7A8B                        ; $6F99: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $6F99: $CA $8B $7A
 
     jp   $7A25                                    ; $6F9C: $C3 $25 $7A
 
@@ -8350,7 +8346,7 @@ jr_01F_6F9F:
     call GetHandlerAddressInTable                 ; $7004: $CD $64 $7A
     ld   a, [$D398]                               ; $7007: $FA $98 $D3
     cp   $13                                      ; $700A: $FE $13
-    jp   z, label_01F_7A8B                        ; $700C: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $700C: $CA $8B $7A
 
     jp   $7A25                                    ; $700F: $C3 $25 $7A
 
@@ -8450,7 +8446,7 @@ jr_01F_6F9F:
 
     ld   hl, $7093                                ; $708A: $21 $93 $70
     call GetHandlerAddressInTable                 ; $708D: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $7090: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $7090: $C3 $8B $7A
 
     and  [hl]                                     ; $7093: $A6
     ld   [hl], b                                  ; $7094: $70
@@ -8506,7 +8502,7 @@ jr_01F_709A:
     ld   a, $08                                   ; $70C4: $3E $08
     ld   [$D3BF], a                               ; $70C6: $EA $BF $D3
     ld   hl, $710C                                ; $70C9: $21 $0C $71
-    jp   label_01F_79E4                           ; $70CC: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $70CC: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $70CF: $CD $71 $7A
     ret  nz                                       ; $70D2: $C0
@@ -8520,7 +8516,7 @@ jr_01F_70DA:
     call GetHandlerAddressInTable                 ; $70DD: $CD $64 $7A
     ld   a, [$D398]                               ; $70E0: $FA $98 $D3
     cp   $02                                      ; $70E3: $FE $02
-    jp   z, label_01F_7A8B                        ; $70E5: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $70E5: $CA $8B $7A
 
     jp   $7A25                                    ; $70E8: $C3 $25 $7A
 
@@ -8568,7 +8564,7 @@ jr_01F_7123:
     jp   z, label_01F_7A01                        ; $7123: $CA $01 $7A
 
     ld   hl, $7131                                ; $7126: $21 $31 $71
-    jp   label_01F_7A8B                           ; $7129: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $7129: $C3 $8B $7A
 
     nop                                           ; $712C: $00
     add  hl, de                                   ; $712D: $19
@@ -8593,7 +8589,7 @@ jr_01F_7123:
 
     ld   hl, $7151                                ; $7148: $21 $51 $71
     call GetHandlerAddressInTable                 ; $714B: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $714E: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $714E: $C3 $8B $7A
 
     sbc  d                                        ; $7151: $9A
     ld   [hl], c                                  ; $7152: $71
@@ -8704,7 +8700,7 @@ jr_01F_719B:
 
     ld   [bc], a                                  ; $71C6: $02
     ld   hl, $7216                                ; $71C7: $21 $16 $72
-    jp   label_01F_79E4                           ; $71CA: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $71CA: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $71CD: $CD $71 $7A
     ret  nz                                       ; $71D0: $C0
@@ -8715,7 +8711,7 @@ jr_01F_719B:
 
     ld   hl, $71E2                                ; $71D9: $21 $E2 $71
     call GetHandlerAddressInTable                 ; $71DC: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $71DF: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $71DF: $C3 $8B $7A
 
     dec  de                                       ; $71E2: $1B
     ld   [hl], d                                  ; $71E3: $72
@@ -8811,7 +8807,7 @@ jr_01F_721C:
 
     ld   hl, $7259                                ; $7250: $21 $59 $72
     call GetHandlerAddressInTable                 ; $7253: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $7256: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $7256: $C3 $8B $7A
 
     ld   [hl], d                                  ; $7259: $72
 
@@ -8890,7 +8886,7 @@ jr_01F_725A:
     call GetHandlerAddressInTable                 ; $72AA: $CD $64 $7A
     ld   a, [$D398]                               ; $72AD: $FA $98 $D3
     cp   $06                                      ; $72B0: $FE $06
-    jp   z, label_01F_7A8B                        ; $72B2: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $72B2: $CA $8B $7A
 
     jp   $7A25                                    ; $72B5: $C3 $25 $7A
 
@@ -8960,25 +8956,25 @@ jr_01F_730C:
     call GetHandlerAddressInTable                 ; $730F: $CD $64 $7A
     ld   a, [$D398]                               ; $7312: $FA $98 $D3
     cp   $1A                                      ; $7315: $FE $1A
-    jp   z, label_01F_7A8B                        ; $7317: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $7317: $CA $8B $7A
 
     cp   $22                                      ; $731A: $FE $22
-    jp   z, label_01F_7A8B                        ; $731C: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $731C: $CA $8B $7A
 
     cp   $2A                                      ; $731F: $FE $2A
-    jp   z, label_01F_7A8B                        ; $7321: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $7321: $CA $8B $7A
 
     cp   $32                                      ; $7324: $FE $32
-    jp   z, label_01F_7A8B                        ; $7326: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $7326: $CA $8B $7A
 
     cp   $3A                                      ; $7329: $FE $3A
-    jp   z, label_01F_7A8B                        ; $732B: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $732B: $CA $8B $7A
 
     cp   $42                                      ; $732E: $FE $42
-    jp   z, label_01F_7A8B                        ; $7330: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $7330: $CA $8B $7A
 
     cp   $4A                                      ; $7333: $FE $4A
-    jp   z, label_01F_7A8B                        ; $7335: $CA $8B $7A
+    jp   z, func_01F_7A8B                        ; $7335: $CA $8B $7A
 
     jp   $7A25                                    ; $7338: $C3 $25 $7A
 
@@ -9292,7 +9288,7 @@ jr_01F_7499:
 
     ld   hl, $74AB                                ; $74A2: $21 $AB $74
     call GetHandlerAddressInTable                 ; $74A5: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $74A8: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $74A8: $C3 $8B $7A
 
     ldh  a, [$FF74]                               ; $74AB: $F0 $74
     push af                                       ; $74AD: $F5
@@ -9526,7 +9522,7 @@ jr_01F_758C:
     rlca                                          ; $7591: $07
     ld   [$D3BF], a                               ; $7592: $EA $BF $D3
     ld   hl, $75C6                                ; $7595: $21 $C6 $75
-    jp   label_01F_79E4                           ; $7598: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $7598: $C3 $E4 $79
 
     call IncrementValueAtBC                            ; $759B: $CD $75 $7A
     cp   $09                                      ; $759E: $FE $09
@@ -9568,7 +9564,7 @@ jr_01F_75AB:
     call func_01F_7A33                            ; $75DF: $CD $33 $7A
     ld   hl, $6217                                ; $75E2: $21 $17 $62
     call func_01F_7AD0                            ; $75E5: $CD $D0 $7A
-    jp   label_01F_7A7F                           ; $75E8: $C3 $7F $7A
+    jp   func_01F_7A7F                            ; $75E8: $C3 $7F $7A
 
     call IncrementValueAtBC                            ; $75EB: $CD $75 $7A
     cp   $09                                      ; $75EE: $FE $09
@@ -9579,7 +9575,7 @@ jr_01F_75AB:
 
 jr_01F_75F6:
     ld   hl, $6205                                ; $75F6: $21 $05 $62
-    jp   label_01F_7B11                           ; $75F9: $C3 $11 $7B
+    jp   func_01F_7B11                            ; $75F9: $C3 $11 $7B
 
 jr_01F_75FC:
     call func_01F_7AAC                            ; $75FC: $CD $AC $7A
@@ -9605,7 +9601,7 @@ jr_01F_7605:
 
     ld   hl, $7625                                ; $761C: $21 $25 $76
     call GetHandlerAddressInTable                 ; $761F: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $7622: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $7622: $C3 $8B $7A
 
     ld   c, h                                     ; $7625: $4C
     db   $76                                      ; $7626: $76
@@ -9727,7 +9723,7 @@ jr_01F_7605:
 
     ld   hl, $76BC                                ; $76B3: $21 $BC $76
     call GetHandlerAddressInTable                 ; $76B6: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $76B9: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $76B9: $C3 $8B $7A
 
     db   $DB                                      ; $76BC: $DB
     db   $76                                      ; $76BD: $76
@@ -9834,7 +9830,7 @@ jr_01F_7716:
     ld   a, $01                                   ; $7725: $3E $01
     ld   [$D3C6], a                               ; $7727: $EA $C6 $D3
     ld   hl, $775E                                ; $772A: $21 $5E $77
-    jp   label_01F_79E4                           ; $772D: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $772D: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $7730: $CD $71 $7A
     ret  nz                                       ; $7733: $C0
@@ -9847,9 +9843,9 @@ jr_01F_7716:
     call GetHandlerAddressInTable                 ; $773E: $CD $64 $7A
     ld   a, [$D398]                               ; $7741: $FA $98 $D3
     cp   $01                                      ; $7744: $FE $01
-    jp   z, label_01F_7A79                        ; $7746: $CA $79 $7A
+    jp   z, func_01F_7A79                         ; $7746: $CA $79 $7A
 
-    jp   label_01F_7A8B                           ; $7749: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $7749: $C3 $8B $7A
 
 jr_01F_774C:
     xor  a                                        ; $774C: $AF
@@ -9896,7 +9892,7 @@ jr_01F_775F:
     ld   [$D3BF], a                               ; $7784: $EA $BF $D3
     ld   hl, $77E0                                ; $7787: $21 $E0 $77
     call func_01F_7AB7                            ; $778A: $CD $B7 $7A
-    jp   label_01F_7A79                           ; $778D: $C3 $79 $7A
+    jp   func_01F_7A79                            ; $778D: $C3 $79 $7A
 
     ld   hl, $D3E6                                ; $7790: $21 $E6 $D3
     ld   a, [hl]                                  ; $7793: $7E
@@ -9919,7 +9915,7 @@ jr_01F_775F:
 jr_01F_77A8:
     ld   [bc], a                                  ; $77A8: $02
     ld   hl, $77D2                                ; $77A9: $21 $D2 $77
-    jp   label_01F_7AE1                           ; $77AC: $C3 $E1 $7A
+    jp   func_01F_7AE1                            ; $77AC: $C3 $E1 $7A
 
 jr_01F_77AF:
     ld   a, $01                                   ; $77AF: $3E $01
@@ -9958,7 +9954,7 @@ jr_01F_77C0:
     add  a                                        ; $77E4: $87
     ld   bc, $A321                                ; $77E5: $01 $21 $A3
     ld   a, b                                     ; $77E8: $78
-    jp   label_01F_79E4                           ; $77E9: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $77E9: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $77EC: $CD $71 $7A
     ret  nz                                       ; $77EF: $C0
@@ -10218,7 +10214,7 @@ jr_01F_7825:
 
     inc  bc                                       ; $7904: $03
     ld   hl, $7933                                ; $7905: $21 $33 $79
-    jp   label_01F_79E4                           ; $7908: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $7908: $C3 $E4 $79
 
     ld   a, [$D3E8]                               ; $790B: $FA $E8 $D3
     and  a                                        ; $790E: $A7
@@ -10233,7 +10229,7 @@ jr_01F_7825:
 
     ld   hl, $7925                                ; $791C: $21 $25 $79
     call GetHandlerAddressInTable                 ; $791F: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $7922: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $7922: $C3 $8B $7A
 
     jr   c, jr_01F_79A0                           ; $7925: $38 $79
 
@@ -10285,7 +10281,7 @@ jr_01F_7825:
     ld   b, $21                                   ; $795A: $06 $21
     sub  h                                        ; $795C: $94
     ld   a, c                                     ; $795D: $79
-    jp   label_01F_79E4                           ; $795E: $C3 $E4 $79
+    jp   func_01F_79E4                            ; $795E: $C3 $E4 $79
 
     call DecrementValueAtDE                            ; $7961: $CD $71 $7A
     ret  nz                                       ; $7964: $C0
@@ -10296,7 +10292,7 @@ jr_01F_7825:
 
     ld   hl, $7976                                ; $796D: $21 $76 $79
     call GetHandlerAddressInTable                 ; $7970: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $7973: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $7973: $C3 $8B $7A
 
     sbc  c                                        ; $7976: $99
     ld   a, c                                     ; $7977: $79
@@ -10416,7 +10412,6 @@ jr_01F_79BE:
     inc  b                                        ; $79E3: $04
 
 func_01F_79E4::
-label_01F_79E4:
     ld   a, $01                                   ; $79E4: $3E $01
     ld   [$D3C9], a                               ; $79E6: $EA $C9 $D3
 
@@ -10429,7 +10424,7 @@ label_01F_79E9:
     ld   a, [$D34F]                               ; $79F6: $FA $4F $D3
     set  7, a                                     ; $79F9: $CB $FF
     ld   [$D34F], a                               ; $79FB: $EA $4F $D3
-    jp   label_01F_7A8B                           ; $79FE: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $79FE: $C3 $8B $7A
 
 label_01F_7A01:
     ld   hl, $7A20                                ; $7A01: $21 $20 $7A
@@ -10518,36 +10513,31 @@ IncrementValueAtBC::
     ret                                           ; $7A78: $C9
 
 func_01F_7A79::
-label_01F_7A79:
     ld   b, $05                                   ; $7A79: $06 $05
     ld   c, $10                                   ; $7A7B: $0E $10
-    jr   jr_01F_7A91                              ; $7A7D: $18 $12
+    jr   label_01F_7A91                           ; $7A7D: $18 $12
 
 func_01F_7A7F::
-label_01F_7A7F:
     ld   b, $04                                   ; $7A7F: $06 $04
     ld   c, $16                                   ; $7A81: $0E $16
-    jr   jr_01F_7A91                              ; $7A83: $18 $0C
+    jr   label_01F_7A91                           ; $7A83: $18 $0C
 
 func_01F_7A85::
-label_01F_7A85:
     ld   b, $05                                   ; $7A85: $06 $05
     ld   c, $1A                                   ; $7A87: $0E $1A
-    jr   jr_01F_7A91                              ; $7A89: $18 $06
+    jr   label_01F_7A91                           ; $7A89: $18 $06
 
 func_01F_7A8B::
-label_01F_7A8B:
     ld   b, $04                                   ; $7A8B: $06 $04
     ld   c, $20                                   ; $7A8D: $0E $20
-    jr   jr_01F_7A91                              ; $7A8F: $18 $00
+    jr   label_01F_7A91                           ; $7A8F: $18 $00
 
 label_01F_7A91:
-jr_01F_7A91:
     ld   a, [hl+]                                 ; $7A91: $2A
     ld   [c], a                                   ; $7A92: $E2
     inc  c                                        ; $7A93: $0C
     dec  b                                        ; $7A94: $05
-    jr   nz, jr_01F_7A91                          ; $7A95: $20 $FA
+    jr   nz, label_01F_7A91                       ; $7A95: $20 $FA
 
     ld   a, [hl]                                  ; $7A97: $7E
     ld   [de], a                                  ; $7A98: $12
@@ -10619,7 +10609,6 @@ func_01F_7AD0::
     ret                                           ; $7AE0: $C9
 
 func_01F_7AE1::
-label_01F_7AE1:
     push de                                       ; $7AE1: $D5
     ld   de, $D3C1                                ; $7AE2: $11 $C1 $D3
     ld   a, [bc]                                  ; $7AE5: $0A
@@ -10664,7 +10653,6 @@ jr_01F_7AF5:
     ret                                           ; $7B10: $C9
 
 func_01F_7B11::
-label_01F_7B11:
     push de                                       ; $7B11: $D5
     ld   de, $D3C3                                ; $7B12: $11 $C3 $D3
     ld   a, [bc]                                  ; $7B15: $0A
@@ -10684,7 +10672,7 @@ label_01F_7B11:
 
     ld   hl, $7B36                                ; $7B2D: $21 $36 $7B
     call GetHandlerAddressInTable                 ; $7B30: $CD $64 $7A
-    jp   label_01F_7A8B                           ; $7B33: $C3 $8B $7A
+    jp   func_01F_7A8B                           ; $7B33: $C3 $8B $7A
 
     ld   c, b                                     ; $7B36: $48
     ld   a, e                                     ; $7B37: $7B
@@ -10711,7 +10699,6 @@ label_01F_7B11:
     ld   de, $180                                 ; $7B59: $11 $80 $01
 
 func_01F_7B5C::
-label_01F_7B5C:
     ld   a, $FF                                   ; $7B5C: $3E $FF
     ldh  [rNR51], a                               ; $7B5E: $E0 $25
     ld   a, $03                                   ; $7B60: $3E $03

@@ -3,7 +3,7 @@ SoundSystemInit::
     jp   label_01F_4009                           ; $4000: $C3 $09 $40
 
 func_01F_4003::
-    jp   label_01F_7B5C                           ; $4003: $C3 $5C $7B
+    jp   func_01F_7B5C                            ; $4003: $C3 $5C $7B
 
 PlaySfx::
     jp   label_01F_401E                           ; $4006: $C3 $1E $40

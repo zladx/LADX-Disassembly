@@ -2,7 +2,7 @@
 ; This file was created with mgbdis v1.3 - Game Boy ROM disassembler by Matt Currie.
 ; https://github.com/mattcurrie/mgbdis
 
-func_01F_4204::
+PlayActiveJingle::
     ld   hl, wActiveJingle                        ; $4204: $21 $60 $D3
     ld   a, [hl]                                  ; $4207: $7E
     and  a                                        ; $4208: $A7
@@ -2587,9 +2587,9 @@ Data_01F_53D9::
 label_01F_53E6:
     xor  a                                        ; $53E6: $AF
     ld   [wActiveJingle], a                       ; $53E7: $EA $60 $D3
-    jp   func_01F_4204                            ; $53EA: $C3 $04 $42
+    jp   PlayActiveJingle                         ; $53EA: $C3 $04 $42
 
-func_01F_53ED::
+PlayActiveWaveSfx::
     ld   hl, wActiveWaveSfx                       ; $53ED: $21 $70 $D3
     ld   a, [hl]                                  ; $53F0: $7E
     and  a                                        ; $53F1: $A7
@@ -2604,7 +2604,7 @@ func_01F_53ED::
 
 jr_01F_53FF:
     ld   a, [hl]                                  ; $53FF: $7E
-    ld   hl, Data_01F_541B                        ; $5400: $21 $1B $54
+    ld   hl, WaveSfxHandlersTable1                        ; $5400: $21 $1B $54
     jr   jr_01F_540C                              ; $5403: $18 $07
 
 jr_01F_5405:
@@ -2613,7 +2613,7 @@ jr_01F_5405:
     and  a                                        ; $5407: $A7
     ret  z                                        ; $5408: $C8
 
-    ld   hl, Data_01F_5461                        ; $5409: $21 $61 $54
+    ld   hl, WaveSfxHandlersTable2                        ; $5409: $21 $61 $54
 
 jr_01F_540C:
     call GetHandlerAddressInTable                 ; $540C: $CD $64 $7A
@@ -2625,7 +2625,7 @@ jr_01F_540C:
 
     jp   hl                                       ; $541A: $E9
 
-Data_01F_541B::
+WaveSfxHandlersTable1::
     dw   func_01F_54A7
     dw   func_01F_54F3
     dw   func_01F_5538
@@ -2662,8 +2662,7 @@ Data_01F_541B::
     dw   func_01F_621C
     dw   func_01F_627C
 
-; Pointers table to functions
-Data_01F_5461::
+WaveSfxHandlersTable2::
     dw   func_01F_54B0
     dw   func_01F_5504
     dw   func_01F_554A
@@ -4355,7 +4354,7 @@ label_01F_637E:
 label_01F_6385:
     xor  a                                        ; $6385: $AF
     ld   [wActiveWaveSfx], a                      ; $6386: $EA $70 $D3
-    jp   func_01F_53ED                            ; $6389: $C3 $ED $53
+    jp   PlayActiveWaveSfx                        ; $6389: $C3 $ED $53
 
 Data_01F_638C::
     db   $8C, $EF, $FE, $C8, $84, $21, $12, $48, $8C, $EF, $FE, $C8, $84, $21, $12, $48
@@ -4375,8 +4374,7 @@ Data_01F_63CC::
 Data_01F_63DC::
     db   $01, $23, $45, $67, $89, $AC, $EE, $EE, $FE, $DC, $BA, $98, $76, $54, $32, $10
 
-; Pointers table to functions
-Data_01F_63EC::
+NoiseSfxHandlersTable1::
     dw   func_01F_651E
     dw   func_01F_653D
     dw   func_01F_6587
@@ -4442,8 +4440,7 @@ Data_01F_63EC::
     dw   func_01F_795B
     dw   func_01F_7B1B
 
-; Pointers table to functions
-Data_01F_646C::
+NoiseSfxHandlersTable2::
     dw   func_01F_6529
     dw   func_01F_6543
     dw   func_01F_658D
@@ -4509,7 +4506,7 @@ Data_01F_646C::
     dw   func_01F_7961
     dw   func_01F_7B21
 
-func_01F_64EC::
+PlayActiveNoiseSfx::
     ld   hl, wActiveNoiseSfx                      ; $64EC: $21 $78 $D3
     ld   a, [hl]                                  ; $64EF: $7E
     and  a                                        ; $64F0: $A7
@@ -4520,7 +4517,7 @@ func_01F_64EC::
     jp   nz, label_01F_7A2C                       ; $64F7: $C2 $2C $7A
 
     ld   a, [hl]                                  ; $64FA: $7E
-    ld   hl, Data_01F_63EC                        ; $64FB: $21 $EC $63
+    ld   hl, NoiseSfxHandlersTable1                        ; $64FB: $21 $EC $63
     jr   jr_01F_6508                              ; $64FE: $18 $08
 
 jr_01F_6500:
@@ -4529,7 +4526,7 @@ jr_01F_6500:
     and  a                                        ; $6502: $A7
     jr   z, jr_01F_6512                           ; $6503: $28 $0D
 
-    ld   hl, Data_01F_646C                        ; $6505: $21 $6C $64
+    ld   hl, NoiseSfxHandlersTable2                        ; $6505: $21 $6C $64
 
 jr_01F_6508:
     call GetHandlerAddressInTable                 ; $6508: $CD $64 $7A
@@ -4546,7 +4543,7 @@ jr_01F_6512:
 
     ld   a, $1E                                   ; $6517: $3E $1E
     ld   [wActiveNoiseSfx], a                     ; $6519: $EA $78 $D3
-    jr   func_01F_64EC                            ; $651C: $18 $CE
+    jr   PlayActiveNoiseSfx                       ; $651C: $18 $CE
 
 func_01F_651E::
     ld   a, $01                                   ; $651E: $3E $01
@@ -6086,7 +6083,7 @@ jr_01F_735E:
 jr_01F_7363:
     ld   a, $20                                   ; $7363: $3E $20
     ld   [wActiveWaveSfx], a                      ; $7365: $EA $70 $D3
-    call func_01F_53ED                            ; $7368: $CD $ED $53
+    call PlayActiveWaveSfx                        ; $7368: $CD $ED $53
     ld   bc, $D398                                ; $736B: $01 $98 $D3
     ld   de, $D393                                ; $736E: $11 $93 $D3
     jr   jr_01F_730C                              ; $7371: $18 $99
@@ -6528,7 +6525,7 @@ func_01F_7A25::
 label_01F_7A2C:
     xor  a                                        ; $7A2C: $AF
     ld   [wActiveNoiseSfx], a                     ; $7A2D: $EA $78 $D3
-    jp   func_01F_64EC                            ; $7A30: $C3 $EC $64
+    jp   PlayActiveNoiseSfx                       ; $7A30: $C3 $EC $64
 
 func_01F_7A33::
     ld   a, [wActiveNoiseSfx]                     ; $7A33: $FA $78 $D3

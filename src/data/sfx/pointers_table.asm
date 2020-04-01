@@ -1,19 +1,134 @@
 ; TODO: turn this into proper labels
-SfxPointersTable::
-    db   $2D, $42, $22, $43, $6E, $43, $A3, $43, $E2, $43, $1D, $44, $59, $44, $7D, $44
-    db   $A1, $44, $CE, $44, $15, $45, $54, $45, $9B, $45, $AE, $45, $CC, $45, $F0, $45
-    db   $F3, $45, $4B, $46, $9D, $46, $E7, $46, $01, $47, $32, $47, $45, $47, $8A, $47
-    db   $AE, $47, $EF, $47, $18, $48, $75, $48, $CF, $48, $0A, $49, $39, $49, $75, $49
-    db   $B0, $49, $08, $4A, $70, $4A, $D9, $4A, $EC, $4A, $43, $4B, $91, $4B, $B1, $4B
-    db   $F9, $4B, $19, $4C, $2C, $4C, $81, $4C, $E1, $4C, $26, $4D, $B7, $4D, $EF, $4D
-    db   $10, $4E, $56, $4E, $87, $4E, $CA, $4E, $23, $4F, $84, $4F, $F5, $4F, $3C, $50
-    db   $8E, $50, $20, $51, $67, $51, $B4, $51, $FC, $51, $6E, $52, $89, $52, $D9, $52
-    db   $37, $53, $5A, $42, $28, $43, $77, $43, $B1, $43, $F0, $43, $2B, $44, $5F, $44
-    db   $83, $44, $AA, $44, $E7, $44, $23, $45, $62, $45, $A1, $45, $BF, $45, $D2, $45
-    db   $BB, $53, $0F, $46, $6F, $46, $B6, $46, $F4, $46, $07, $47, $38, $47, $53, $47
-    db   $90, $47, $B4, $47, $FD, $47, $26, $48, $83, $48, $DA, $48, $10, $49, $47, $49
-    db   $8E, $49, $BE, $49, $4F, $4A, $7B, $4A, $DF, $4A, $F7, $4A, $51, $4B, $97, $4B
-    db   $B7, $4B, $FF, $4B, $1F, $4C, $3A, $4C, $8F, $4C, $EF, $4C, $34, $4D, $C5, $4D
-    db   $FA, $4D, $1E, $4E, $5C, $4E, $95, $4E, $D8, $4E, $31, $4F, $92, $4F, $03, $50
-    db   $57, $50, $9C, $50, $2E, $51, $75, $51, $C2, $51, $26, $52, $7C, $52, $97, $52
-    db   $E7, $52, $3D, $53
+SfxPointersTable1::
+    dw   func_01F_422D
+    dw   func_01F_4322
+    dw   func_01F_436E
+    dw   func_01F_43A3
+    dw   func_01F_43E2
+    dw   func_01F_441D
+    dw   func_01F_4459
+    dw   func_01F_447D
+    dw   func_01F_44A1
+    dw   func_01F_44CE
+    dw   func_01F_4515
+    dw   func_01F_4554
+    dw   func_01F_459B
+    dw   func_01F_45AE
+    dw   func_01F_45CC
+    dw   func_01F_45F0
+    dw   func_01F_45F3
+    dw   func_01F_464B
+    dw   func_01F_469D
+    dw   func_01F_46E7
+    dw   func_01F_4701
+    dw   func_01F_4732
+    dw   func_01F_4745
+    dw   func_01F_478A
+    dw   func_01F_47AE
+    dw   func_01F_47EF
+    dw   func_01F_4818
+    dw   func_01F_4875
+    dw   func_01F_48CF
+    dw   func_01F_490A
+    dw   func_01F_4939
+    dw   func_01F_4975
+    dw   func_01F_49B0
+    dw   func_01F_4A08
+    dw   func_01F_4A70
+    dw   func_01F_4AD9
+    dw   func_01F_4AEC
+    dw   func_01F_4B43
+    dw   func_01F_4B91
+    dw   func_01F_4BB1
+    dw   func_01F_4BF9
+    dw   func_01F_4C19
+    dw   func_01F_4C2C
+    dw   func_01F_4C81
+    dw   func_01F_4CE1
+    dw   func_01F_4D26
+    dw   func_01F_4DB7
+    dw   func_01F_4DEF
+    dw   func_01F_4E10
+    dw   func_01F_4E56
+    dw   func_01F_4E87
+    dw   func_01F_4ECA
+    dw   func_01F_4F23
+    dw   func_01F_4F84
+    dw   func_01F_4FF5
+    dw   func_01F_503C
+    dw   func_01F_508E
+    dw   func_01F_5120
+    dw   func_01F_5167
+    dw   func_01F_51B4
+    dw   func_01F_51FC
+    dw   func_01F_526E
+    dw   func_01F_5289
+    dw   func_01F_52D9
+    dw   func_01F_5337
+
+SfxPointersTable2::
+    dw   func_01F_425A
+    dw   func_01F_4328
+    dw   func_01F_4377
+    dw   func_01F_43B1
+    dw   func_01F_43F0
+    dw   func_01F_442B
+    dw   func_01F_445F
+    dw   func_01F_4483
+    dw   func_01F_44AA
+    dw   func_01F_44E7
+    dw   func_01F_4523
+    dw   func_01F_4562
+    dw   func_01F_45A1
+    dw   func_01F_45BF
+    dw   func_01F_45D2
+    dw   func_01F_53BB
+    dw   func_01F_460F
+    dw   func_01F_466F
+    dw   func_01F_46B6
+    dw   func_01F_46F4
+    dw   func_01F_4707
+    dw   func_01F_4738
+    dw   func_01F_4753
+    dw   func_01F_4790
+    dw   func_01F_47B4
+    dw   func_01F_47FD
+    dw   func_01F_4826
+    dw   func_01F_4883
+    dw   func_01F_48DA
+    dw   func_01F_4910
+    dw   func_01F_4947
+    dw   func_01F_498E
+    dw   func_01F_49BE
+    dw   func_01F_4A4F
+    dw   func_01F_4A7B
+    dw   func_01F_4ADF
+    dw   func_01F_4AF7
+    dw   func_01F_4B51
+    dw   func_01F_4B97
+    dw   func_01F_4BB7
+    dw   func_01F_4BFF
+    dw   func_01F_4C1F
+    dw   func_01F_4C3A
+    dw   func_01F_4C8F
+    dw   func_01F_4CEF
+    dw   func_01F_4D34
+    dw   func_01F_4DC5
+    dw   func_01F_4DFA
+    dw   func_01F_4E1E
+    dw   func_01F_4E5C
+    dw   func_01F_4E95
+    dw   func_01F_4ED8
+    dw   func_01F_4F31
+    dw   func_01F_4F92
+    dw   func_01F_5003
+    dw   func_01F_5057
+    dw   func_01F_509C
+    dw   func_01F_512E
+    dw   func_01F_5175
+    dw   func_01F_51C2
+    dw   func_01F_5226
+    dw   func_01F_527C
+    dw   func_01F_5297
+    dw   func_01F_52E7
+    dw   func_01F_533D

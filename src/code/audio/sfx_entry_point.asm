@@ -3,7 +3,7 @@ SoundSystemInit::
     jp   label_01F_4009                           ; $4000: $C3 $09 $40
 
 func_01F_4003::
-    jp   label_01F_7B5C                           ; $4003: $C3 $5C $7B
+    jp   func_01F_7B5C                            ; $4003: $C3 $5C $7B
 
 PlaySfx::
     jp   label_01F_401E                           ; $4006: $C3 $1E $40
@@ -25,9 +25,9 @@ jr_01F_400C:
     ret                                           ; $401D: $C9
 
 label_01F_401E:
-    call func_01F_4204                            ; $401E: $CD $04 $42
-    call func_01F_53ED                            ; $4021: $CD $ED $53
-    call func_01F_64EC                            ; $4024: $CD $EC $64
+    call PlayActiveJingle                         ; $401E: $CD $04 $42
+    call PlayActiveWaveSfx                        ; $4021: $CD $ED $53
+    call PlayActiveNoiseSfx                       ; $4024: $CD $EC $64
     xor  a                                        ; $4027: $AF
     ld   [wActiveJingle], a                       ; $4028: $EA $60 $D3
     ld   [wActiveWaveSfx], a                      ; $402B: $EA $70 $D3

@@ -176,7 +176,7 @@ func_01F_4328::
     ldh  [rNR11], a                               ; $433C: $E0 $11
     ld   a, $F1                                   ; $433E: $3E $F1
     ldh  [rNR12], a                               ; $4340: $E0 $12
-    jp   $53DF                                    ; $4342: $C3 $DF $53
+    jp   func_01F_53DF                            ; $4342: $C3 $DF $53
 
 Data_01F_4345::
     db   $59, $43, $5C, $43, $5F, $43, $62, $43, $65, $43, $68, $43, $6B, $43
@@ -862,7 +862,7 @@ func_01F_47FD::
     jp   z, label_01F_53B5                        ; $4806: $CA $B5 $53
 
     ld   hl, Data_01F_4815                        ; $4809: $21 $15 $48
-    jp   $53DF                                    ; $480C: $C3 $DF $53
+    jp   func_01F_53DF                            ; $480C: $C3 $DF $53
 
 Data_01F_480F::
     db   $00, $80, $34, $90, $87, $01
@@ -995,7 +995,7 @@ func_01F_48DA::
 jr_01F_48E9:
     ld   hl, Data_01F_48FD                        ; $48E9: $21 $FD $48
     call GetHandlerAddressInTable                 ; $48EC: $CD $64 $7A
-    jp   $53DF                                    ; $48EF: $C3 $DF $53
+    jp   func_01F_53DF                            ; $48EF: $C3 $DF $53
 
 jr_01F_48F2:
     call func_01F_7A9A                            ; $48F2: $CD $9A $7A
@@ -1027,7 +1027,7 @@ func_01F_4910::
 
     ld   hl, Data_01F_4925                        ; $491C: $21 $25 $49
     call GetHandlerAddressInTable                 ; $491F: $CD $64 $7A
-    jp   $53DF                                    ; $4922: $C3 $DF $53
+    jp   func_01F_53DF                            ; $4922: $C3 $DF $53
 
 Data_01F_4925::
     db   $33, $49, $33, $49, $36, $49, $36, $49
@@ -1296,7 +1296,7 @@ func_01F_4AF7::
 jr_01F_4B06:
     ld   hl, Data_01F_4B1F                        ; $4B06: $21 $1F $4B
     call GetHandlerAddressInTable                 ; $4B09: $CD $64 $7A
-    jp   $53DF                                    ; $4B0C: $C3 $DF $53
+    jp   func_01F_53DF                            ; $4B0C: $C3 $DF $53
 
 jr_01F_4B0F:
     call func_01F_7A9A                            ; $4B0F: $CD $9A $7A
@@ -1403,7 +1403,7 @@ func_01F_4BB7::
     call GetHandlerAddressInTable                 ; $4BC6: $CD $64 $7A
     ld   a, $BD                                   ; $4BC9: $3E $BD
     ldh  [rNR11], a                               ; $4BCB: $E0 $11
-    jp   $53DF                                    ; $4BCD: $C3 $DF $53
+    jp   func_01F_53DF                            ; $4BCD: $C3 $DF $53
 
 Data_01F_4BD0::
     db   $E4, $4B, $E7, $4B, $EA, $4B, $ED, $4B, $F0, $4B, $F3, $4B, $F6, $4B
@@ -2582,7 +2582,12 @@ func_01F_53BB::
     ret                                           ; $53D8: $C9
 
 Data_01F_53D9::
-    db   $00, $3F, $00, $00, $C1, $01, $06, $02, $0E, $13, $C3, $91, $7A
+    db   $00, $3F, $00, $00, $C1, $01
+
+func_01F_53DF::
+    ld   b, $02
+    ld   c, $13
+    jp   label_01F_7A91
 
 label_01F_53E6:
     xor  a                                        ; $53E6: $AF
@@ -3013,7 +3018,7 @@ Data_01F_571C::
 
 func_01F_572C::
     ld   hl, Data_01F_571C                        ; $572C: $21 $1C $57
-    jp   $635A                                    ; $572F: $C3 $5A $63
+    jp   func_01F_635A                            ; $572F: $C3 $5A $63
 
 func_01F_5732::
     ld   hl, $D32F                                ; $5732: $21 $2F $D3
@@ -3612,7 +3617,7 @@ func_01F_5D84::
     call func_01F_7A8B                            ; $5D91: $CD $8B $7A
     call func_01F_636A                            ; $5D94: $CD $6A $63
     ld   hl, Data_01F_5D74                        ; $5D97: $21 $74 $5D
-    call $635A                                    ; $5D9A: $CD $5A $63
+    call func_01F_635A                            ; $5D9A: $CD $5A $63
     ld   hl, Data_01F_5EC5                        ; $5D9D: $21 $C5 $5E
     call func_01F_7ABD                            ; $5DA0: $CD $BD $7A
     jp   label_01F_62F3                           ; $5DA3: $C3 $F3 $62
@@ -3965,7 +3970,7 @@ Data_01F_60CD::
 func_01F_60D4::
     call func_01F_7B5C                            ; $60D4: $CD $5C $7B
     ld   hl, Data_01F_60C4                        ; $60D7: $21 $C4 $60
-    call $635A                                    ; $60DA: $CD $5A $63
+    call func_01F_635A                            ; $60DA: $CD $5A $63
     ld   a, $05                                   ; $60DD: $3E $05
     ld   [$D3BE], a                               ; $60DF: $EA $BE $D3
     xor  a                                        ; $60E2: $AF
@@ -4320,7 +4325,12 @@ jr_01F_634A:
     ret                                           ; $6353: $C9
 
 Data_01F_6354::
-    db   $80, $00, $00, $00, $81, $01, $AF, $E0, $1A, $C3, $47, $63
+    db   $80, $00, $00, $00, $81, $01
+
+func_01F_635A::
+    xor  a
+    ldh  [rNR30], a
+    jp   func_01F_6347
 
 func_01F_6360::
     ld   hl, Data_01F_63AC                        ; $6360: $21 $AC $63
@@ -5025,7 +5035,7 @@ Data_01F_68FD::
     db   $00, $F0, $A0, $80, $20
 
 func_01F_6902::
-    ld   hl, $692B                                ; $6902: $21 $2B $69
+    ld   hl, Data_01F_692B                        ; $6902: $21 $2B $69
     jp   label_01F_79E9                           ; $6905: $C3 $E9 $79
 
 func_01F_6908::
@@ -5041,9 +5051,11 @@ func_01F_6908::
     jp   func_01F_7A25                            ; $691A: $C3 $25 $7A
 
 Data_01F_691D::
-    db   $30, $69, $33, $69, $36, $69, $33, $69, $30, $69, $39, $69, $3C, $69, $00, $69
-    db   $B8, $80, $02, $A8, $00, $02, $98, $00, $02, $88, $00, $02, $B8, $00, $02, $C8
-    db   $00, $02
+    db   $30, $69, $33, $69, $36, $69, $33, $69, $30, $69, $39, $69, $3C, $69
+
+Data_01F_692B::
+    db   $00, $69, $B8, $80, $02, $A8, $00, $02, $98, $00, $02, $88, $00, $02, $B8, $00
+    db   $02, $C8, $00, $02
 
 func_01F_693F::
     ld   hl, Data_01F_699C                        ; $693F: $21 $9C $69

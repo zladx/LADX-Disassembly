@@ -27,8 +27,16 @@ LocalAddress = Struct.new(:bank, :offset) do
     ("%02x:%02x" % [bank, offset]).upcase
   end
 
+  def to_global
+    return [bank - 1, 0].max * 0x4000 + offset
+  end
+
   def inspect
     "#<LocalAddress #{to_s}>"
+  end
+
+  def in_bank?(bank_number)
+    return bank == bank_number && (0x4000...0x8000).include?(offset)
   end
 end
 

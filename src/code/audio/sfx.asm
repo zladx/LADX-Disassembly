@@ -3346,23 +3346,79 @@ func_01F_580C::
     jp   z, label_01F_575C                        ; $5815: $CA $5C $57
 
     ld   hl, Data_01F_5821                        ; $5818: $21 $21 $58
-
-jr_01F_581B:
     call GetHandlerAddressInTable                 ; $581B: $CD $64 $7A
     jp   label_01F_5751                           ; $581E: $C3 $51 $57
 
 Data_01F_5821::
-    db   $7B, $58, $51, $58, $80, $58, $57, $58, $85, $58, $5D, $58, $8A, $58, $63, $58
-    db   $8F, $58, $69, $58, $94, $58, $6F, $58, $99, $58, $5D, $58, $8A, $58, $57, $58
-    db   $85, $58, $51, $58, $80, $58, $75, $58, $9E, $58
+    dw   Data_01F_587B
+    dw   Data_01F_5851
+    dw   Data_01F_5880
+    dw   Data_01F_5857
+    dw   Data_01F_5885
+    dw   Data_01F_585D
+    dw   Data_01F_588A
+    dw   Data_01F_5863
+    dw   Data_01F_588F
+    dw   Data_01F_5869
+    dw   Data_01F_5894
+    dw   Data_01F_586F
+    dw   Data_01F_5899
+    dw   Data_01F_585D
+    dw   Data_01F_588A
+    dw   Data_01F_5857
+    dw   Data_01F_5885
+    dw   Data_01F_5851
+    dw   Data_01F_5880
+    dw   Data_01F_5875
+    dw   Data_01F_589E
 
 Data_01F_584B::
-    db   $80, $E0, $20, $9D, $C7, $04, $80, $E0, $20, $A7, $C7, $04, $80, $E0, $20, $B0
-    db   $C7, $04, $80, $E0, $20, $B6, $C7, $04, $80, $90, $20, $BD, $C7, $04, $80, $E0
-    db   $20, $C4, $C7, $04, $80, $E0, $20, $BD, $C7, $04, $80, $80, $20, $9D, $C7, $04
-    db   $80, $20, $9D, $87, $07, $80, $20, $A7, $87, $07, $80, $20, $B0, $87, $07, $80
-    db   $20, $B6, $87, $07, $80, $20, $BD, $87, $23, $80, $20, $C4, $87, $07, $80, $20
-    db   $BD, $87, $07, $80, $20, $9D, $87, $35
+    db   $80, $E0, $20, $9D, $C7, $04
+
+Data_01F_5851::
+    db   $80, $E0, $20, $A7, $C7, $04
+
+Data_01F_5857::
+    db   $80, $E0, $20, $B0, $C7, $04
+
+Data_01F_585D::
+    db   $80, $E0, $20, $B6, $C7, $04
+
+Data_01F_5863::
+    db   $80, $90, $20, $BD, $C7, $04
+
+Data_01F_5869::
+    db   $80, $E0, $20, $C4, $C7, $04
+
+Data_01F_586F::
+    db   $80, $E0, $20, $BD, $C7, $04
+
+Data_01F_5875::
+    db   $80, $80, $20, $9D, $C7, $04
+
+Data_01F_587B::
+    db   $80, $20, $9D, $87, $07
+
+Data_01F_5880::
+    db   $80, $20, $A7, $87, $07
+
+Data_01F_5885::
+    db   $80, $20, $B0, $87, $07
+
+Data_01F_588A::
+    db   $80, $20, $B6, $87, $07
+
+Data_01F_588F::
+    db   $80, $20, $BD, $87, $23
+
+Data_01F_5894::
+    db   $80, $20, $C4, $87, $07
+
+Data_01F_5899::
+    db   $80, $20, $BD, $87, $07
+
+Data_01F_589E::
+    db   $80, $20, $9D, $87, $35
 
 func_01F_58A3::
     call func_01F_7B5C                            ; $58A3: $CD $5C $7B
@@ -3385,9 +3441,26 @@ jr_01F_58C1:
     jp   label_01F_5751                           ; $58C1: $C3 $51 $57
 
 Data_01F_58C4::
-    db   $1C, $59, $EC, $58, $21, $59, $F2, $58, $26, $59, $F8, $58, $2B, $59, $FE, $58
-    db   $30, $59, $04, $59, $35, $59, $0A, $59, $3A, $59, $10, $59, $3F, $59, $16, $59
-    db   $44, $59, $80, $C0, $20, $9D, $C7, $04
+    dw   Data_01F_591C
+    dw   Data_01F_58EC
+    dw   Data_01F_5921
+    dw   Data_01F_58F2
+    dw   Data_01F_5926
+    dw   Data_01F_58F8
+    dw   Data_01F_592B
+    dw   Data_01F_58FE
+    dw   Data_01F_5930
+    dw   Data_01F_5904
+    dw   Data_01F_5935
+    dw   Data_01F_590A
+    dw   Data_01F_593A
+    dw   Data_01F_5910
+    dw   Data_01F_593F
+    dw   Data_01F_5916
+    dw   Data_01F_5944
+
+Data_01F_58E6::
+    db   $80, $C0, $20, $9D, $C7, $04
 
 Data_01F_58EC::
     db   $80, $F0, $20, $9D, $C7, $04
@@ -3543,7 +3616,10 @@ func_01F_59EA::
     jp   func_01F_7A85                            ; $59FC: $C3 $85 $7A
 
 Data_01F_59FF::
-    db   $0D, $5A, $13, $5A, $0D, $5A, $07, $5A
+    dw   Data_01F_5A0D
+    dw   Data_01F_5A13
+    dw   Data_01F_5A0D
+    dw   Data_01F_5A07
 
 Data_01F_5A07::
     db   $80, $FB, $20, $00, $C2, $03
@@ -3850,7 +3926,11 @@ func_01F_5CB9::
     jp   func_01F_7A85                            ; $5CCB: $C3 $85 $7A
 
 Data_01F_5CCE::
-    db   $DE, $5C, $E4, $5C, $EA, $5C, $F0, $5C, $F6, $5C
+    dw   Data_01F_5CDE
+    dw   Data_01F_5CE4
+    dw   Data_01F_5CEA
+    dw   Data_01F_5CF0
+    dw   Data_01F_5CF6
 
 Data_01F_5CD8::
     db   $80, $D0, $20, $40, $C7, $14
@@ -4158,7 +4238,9 @@ func_01F_5F93::
     jp   func_01F_7A85                            ; $5FA5: $C3 $85 $7A
 
 Data_01F_5FA8::
-    db   $B4, $5F, $BA, $5F, $B4, $5F
+    dw   Data_01F_5FB4
+    dw   Data_01F_5FBA
+    dw   Data_01F_5FB4
 
 Data_01F_5FAE::
     db   $80, $FD, $40, $20, $C0, $02
@@ -4187,7 +4269,13 @@ func_01F_5FC9::
     jp   func_01F_7A85                            ; $5FDB: $C3 $85 $7A
 
 Data_01F_5FDE::
-    db   $04, $60, $F2, $5F, $0A, $60, $F8, $5F, $10, $60, $FE, $5F, $16, $60
+    dw   Data_01F_6004
+    dw   Data_01F_5FF2
+    dw   Data_01F_600A
+    dw   Data_01F_5FF8
+    dw   Data_01F_6010
+    dw   Data_01F_5FFE
+    dw   Data_01F_6016
 
 Data_01F_5FEC::
     db   $80, $EA, $20, $62, $C7, $06
@@ -4219,9 +4307,10 @@ Data_01F_6016::
 func_01F_601C::
     ld   a, $04                                   ; $601C: $3E $04
     ld   [$D3BE], a                               ; $601E: $EA $BE $D3
-
-Data_01F_6021::
-    db   $CD, $79, $63, $21, $60, $60, $CD, $BD, $7A, $C3, $F8, $62
+    call func_01F_6379                            ; $6021: $CD $79 $63
+    ld   hl, Data_01F_6060                        ; $6024: $21 $60 $60
+    call func_01F_7ABD                            ; $6027: $CD $BD $7A
+    jp   label_01F_62F8                           ; $602A: $C3 $F8 $62
 
 func_01F_602D::
     call IncrementValueAtBC                       ; $602D: $CD $75 $7A
@@ -4232,12 +4321,23 @@ func_01F_602D::
     jp   label_01F_7AEB                           ; $6037: $C3 $EB $7A
 
 jr_01F_603A:
-    db   $CD                                      ; $603A: $CD
-    and  [hl]                                     ; $603B: $A6
+    call func_01F_7AA6                            ; $603A: $CD $A6 $7A
+    jp   z, label_01F_6327                        ; $603D: $CA $27 $63
 
-Data_01F_603C::
-    db   $7A, $CA, $27, $63, $FE, $02, $28, $0B, $21, $66, $60, $AF, $02, $CD, $BD, $7A
-    db   $C3, $85, $7A, $21, $60, $60, $18, $F3
+    cp   $02                                      ; $6040: $FE $02
+    jr   z, jr_01F_604F                           ; $6042: $28 $0B
+
+    ld   hl, Data_01F_6066                        ; $6044: $21 $66 $60
+
+jr_01F_6047:
+    xor  a                                        ; $6047: $AF
+    ld   [bc], a                                  ; $6048: $02
+    call func_01F_7ABD                            ; $6049: $CD $BD $7A
+    jp   func_01F_7A85                            ; $604C: $C3 $85 $7A
+
+jr_01F_604F:
+    ld   hl, Data_01F_6060                        ; $604F: $21 $60 $60
+    jr   jr_01F_6047                              ; $6052: $18 $F3
 
 Data_01F_6054::
     db   $00, $06, $00, $04, $00, $02, $FF, $F8, $FF, $F0, $FF, $E8
@@ -4594,8 +4694,18 @@ func_01F_6285::
     jp   label_01F_637E                           ; $62AE: $C3 $7E $63
 
 Data_01F_62B1::
-    db   $CF, $62, $D5, $62, $E7, $62, $EA, $62, $ED, $62, $F0, $62, $DB, $62, $ED, $62
-    db   $F0, $62, $E1, $62, $ED, $62, $F0, $62
+    dw   Data_01F_62CF
+    dw   Data_01F_62D5
+    dw   Data_01F_62E7
+    dw   Data_01F_62EA
+    dw   Data_01F_62ED
+    dw   Data_01F_62F0
+    dw   Data_01F_62DB
+    dw   Data_01F_62ED
+    dw   Data_01F_62F0
+    dw   Data_01F_62E1
+    dw   Data_01F_62ED
+    dw   Data_01F_62F0
 
 Data_01F_62C9::
     db   $80, $F2, $60, $DF, $87, $02
@@ -4641,26 +4751,10 @@ label_01F_62F8:
     ldh  [rNR30], a                               ; $630C: $E0 $1A
     jp   func_01F_7A85                            ; $630E: $C3 $85 $7A
 
-    add  b                                        ; $6311: $80
-    nop                                           ; $6312: $00
-    nop                                           ; $6313: $00
-    nop                                           ; $6314: $00
-    ld   bc, $0001                                ; $6315: $01 $01 $00
-    nop                                           ; $6318: $00
-    nop                                           ; $6319: $00
-    nop                                           ; $631A: $00
-    rst  $38                                      ; $631B: $FF
-    rst  $38                                      ; $631C: $FF
-    rst  $38                                      ; $631D: $FF
-    rst  $38                                      ; $631E: $FF
-    nop                                           ; $631F: $00
-    nop                                           ; $6320: $00
-    nop                                           ; $6321: $00
-    nop                                           ; $6322: $00
-    rst  $38                                      ; $6323: $FF
-    rst  $38                                      ; $6324: $FF
-    rst  $38                                      ; $6325: $FF
-    rst  $38                                      ; $6326: $FF
+Data_01F_6311::
+    db   $80, $00, $00, $00, $01, $01, $00, $00   ; $6311
+    db   $00, $00, $FF, $FF, $FF, $FF, $00, $00   ; $6319
+    db   $00, $00, $FF, $FF, $FF, $FF             ; $6321
 
 label_01F_6327:
     ld   hl, Data_01F_6354                        ; $6327: $21 $54 $63
@@ -4960,7 +5054,12 @@ func_01F_6543::
     jp   func_01F_7A8B                            ; $6555: $C3 $8B $7A
 
 Data_01F_6558::
-    db   $69, $65, $6E, $65, $73, $65, $78, $65, $7D, $65, $82, $65
+    dw   Data_01F_6569
+    dw   Data_01F_656E
+    dw   Data_01F_6573
+    dw   Data_01F_6578
+    dw   Data_01F_657D
+    dw   Data_01F_6582
 
 Data_01F_6564::
     db   $00, $40, $21, $80, $01
@@ -5000,8 +5099,22 @@ func_01F_658D::
     jp   func_01F_7A8B                            ; $659F: $C3 $8B $7A
 
 Data_01F_65A2::
-    db   $C7, $65, $CC, $65, $D1, $65, $D6, $65, $DB, $65, $E0, $65, $E5, $65, $EA, $65
-    db   $E5, $65, $E0, $65, $DB, $65, $D6, $65, $D1, $65, $CC, $65, $C7, $65, $C2, $65
+    dw   Data_01F_65C7
+    dw   Data_01F_65CC
+    dw   Data_01F_65D1
+    dw   Data_01F_65D6
+    dw   Data_01F_65DB
+    dw   Data_01F_65E0
+    dw   Data_01F_65E5
+    dw   Data_01F_65EA
+    dw   Data_01F_65E5
+    dw   Data_01F_65E0
+    dw   Data_01F_65DB
+    dw   Data_01F_65D6
+    dw   Data_01F_65D1
+    dw   Data_01F_65CC
+    dw   Data_01F_65C7
+    dw   Data_01F_65C2
 
 Data_01F_65C2::
     db   $37, $10, $04, $C0, $02
@@ -5050,7 +5163,9 @@ func_01F_65F5::
     jp   func_01F_7A8B                            ; $6607: $C3 $8B $7A
 
 Data_01F_660A::
-    db   $15, $66, $10, $66, $1A, $66
+    dw   Data_01F_6615
+    dw   Data_01F_6610
+    dw   Data_01F_661A
 
 Data_01F_6610::
     db   $3B, $C0, $3E, $C0, $01
@@ -5092,7 +5207,10 @@ func_01F_663C::
     jp   func_01F_7A8B                            ; $664E: $C3 $8B $7A
 
 Data_01F_6651::
-    db   $5E, $66, $63, $66, $68, $66, $68, $66
+    dw   Data_01F_665E
+    dw   Data_01F_6663
+    dw   Data_01F_6668
+    dw   Data_01F_6668
 
 Data_01F_6659::
     db   $30, $49, $60, $C0, $06
@@ -5123,7 +5241,9 @@ func_01F_6673::
     jp   func_01F_7A8B                            ; $6685: $C3 $8B $7A
 
 Data_01F_6688::
-    db   $93, $66, $98, $66, $9D, $66
+    dw   Data_01F_6693
+    dw   Data_01F_6698
+    dw   Data_01F_669D
 
 Data_01F_668E::
     db   $00, $61, $24, $80, $0C
@@ -5225,7 +5345,11 @@ func_01F_672C::
     jp   func_01F_7A25                            ; $6742: $C3 $25 $7A
 
 Data_01F_6745::
-    db   $54, $67, $57, $67, $5A, $67, $5D, $67, $5D, $67
+    dw   Data_01F_6754
+    dw   Data_01F_6757
+    dw   Data_01F_675A
+    dw   Data_01F_675D
+    dw   Data_01F_675D
 
 Data_01F_674F::
     db   $33, $A0, $72, $C0, $04
@@ -5259,7 +5383,10 @@ func_01F_6766::
     jp   func_01F_7A8B                            ; $6778: $C3 $8B $7A
 
 Data_01F_677B::
-    db   $88, $67, $8D, $67, $88, $67, $83, $67
+    dw   Data_01F_6788
+    dw   Data_01F_678D
+    dw   Data_01F_6788
+    dw   Data_01F_6783
 
 Data_01F_6783::
     db   $37, $40, $47, $C0, $01
@@ -5315,7 +5442,10 @@ func_01F_67C7::
     jp   func_01F_7A25                            ; $67D9: $C3 $25 $7A
 
 Data_01F_67DC::
-    db   $E9, $67, $EC, $67, $EF, $67, $F2, $67
+    dw   Data_01F_67E9
+    dw   Data_01F_67EC
+    dw   Data_01F_67EF
+    dw   Data_01F_67F2
 
 Data_01F_67E4::
     db   $00, $C6, $6A, $80, $04
@@ -5360,7 +5490,8 @@ jr_01F_6814:
     jr   jr_01F_680B                              ; $681D: $18 $EC
 
 Data_01F_681F::
-    db   $28, $68, $2B, $68
+    dw   Data_01F_6828
+    dw   Data_01F_682B
 
 Data_01F_6823::
     db   $00, $67, $0F, $80, $02
@@ -5388,7 +5519,8 @@ func_01F_6834::
     jp   func_01F_7A8B                            ; $6846: $C3 $8B $7A
 
 Data_01F_6849::
-    db   $52, $68, $57, $68
+    dw   Data_01F_6852
+    dw   Data_01F_6857
 
 Data_01F_684D::
     db   $1E, $29, $46, $C0, $10
@@ -5420,7 +5552,8 @@ func_01F_6869::
     jp   func_01F_7A8B                            ; $687B: $C3 $8B $7A
 
 Data_01F_687E::
-    db   $87, $68, $8C, $68
+    dw   Data_01F_6887
+    dw   Data_01F_688C
 
 Data_01F_6882::
     db   $00, $0F, $30, $80, $20
@@ -5468,7 +5601,11 @@ jr_01F_68C3:
     jr   jr_01F_68BD                              ; $68C6: $18 $F5
 
 Data_01F_68C8::
-    db   $D7, $68, $DA, $68, $DD, $68, $E0, $68, $E3, $68
+    dw   Data_01F_68D7
+    dw   Data_01F_68DA
+    dw   Data_01F_68DD
+    dw   Data_01F_68E0
+    dw   Data_01F_68E3
 
 Data_01F_68D2::
     db   $00, $E0, $48, $80, $01
@@ -5527,7 +5664,13 @@ func_01F_6908::
     jp   func_01F_7A25                            ; $691A: $C3 $25 $7A
 
 Data_01F_691D::
-    db   $30, $69, $33, $69, $36, $69, $33, $69, $30, $69, $39, $69, $3C, $69
+    dw   Data_01F_6930
+    dw   Data_01F_6933
+    dw   Data_01F_6936
+    dw   Data_01F_6933
+    dw   Data_01F_6930
+    dw   Data_01F_6939
+    dw   Data_01F_693C
 
 Data_01F_692B::
     db   $00, $69, $B8, $80, $02
@@ -5575,10 +5718,31 @@ jr_01F_6961:
     jp   func_01F_7A25                            ; $6967: $C3 $25 $7A
 
 Data_01F_696A::
-    db   $A1, $69, $A6, $69, $AB, $69, $B0, $69, $B5, $69, $BA, $69, $BF, $69, $C4, $69
-    db   $BF, $69, $BA, $69, $B5, $69, $B0, $69, $AB, $69, $A6, $69, $A1, $69, $9C, $69
-    db   $C4, $69, $BF, $69, $BA, $69, $B5, $69, $B0, $69, $AB, $69, $A6, $69, $A1, $69
-    db   $9C, $69
+    dw   Data_01F_69A1
+    dw   Data_01F_69A6
+    dw   Data_01F_69AB
+    dw   Data_01F_69B0
+    dw   Data_01F_69B5
+    dw   Data_01F_69BA
+    dw   Data_01F_69BF
+    dw   Data_01F_69C4
+    dw   Data_01F_69BF
+    dw   Data_01F_69BA
+    dw   Data_01F_69B5
+    dw   Data_01F_69B0
+    dw   Data_01F_69AB
+    dw   Data_01F_69A6
+    dw   Data_01F_69A1
+    dw   Data_01F_699C
+    dw   Data_01F_69C4
+    dw   Data_01F_69BF
+    dw   Data_01F_69BA
+    dw   Data_01F_69B5
+    dw   Data_01F_69B0
+    dw   Data_01F_69AB
+    dw   Data_01F_69A6
+    dw   Data_01F_69A1
+    dw   Data_01F_699C
 
 Data_01F_699C::
     db   $37, $20, $25, $C0, $01
@@ -5621,7 +5785,12 @@ func_01F_69CF::
     jp   func_01F_7A8B                            ; $69DD: $C3 $8B $7A
 
 Data_01F_69E0::
-    db   $F1, $69, $F6, $69, $FB, $69, $00, $6A, $05, $6A, $0A, $6A
+    dw   Data_01F_69F1
+    dw   Data_01F_69F6
+    dw   Data_01F_69FB
+    dw   Data_01F_6A00
+    dw   Data_01F_6A05
+    dw   Data_01F_6A0A
 
 Data_01F_69EC::
     db   $00, $40, $5F, $80, $01
@@ -5658,7 +5827,11 @@ func_01F_6A15::
     jp   func_01F_7A8B                            ; $6A23: $C3 $8B $7A
 
 Data_01F_6A26::
-    db   $35, $6A, $3A, $6A, $3F, $6A, $44, $6A, $49, $6A
+    dw   Data_01F_6A35
+    dw   Data_01F_6A3A
+    dw   Data_01F_6A3F
+    dw   Data_01F_6A44
+    dw   Data_01F_6A49
 
 Data_01F_6A30::
     db   $00, $20, $47, $80, $02
@@ -5696,7 +5869,8 @@ func_01F_6A5C::
     jp   func_01F_7A8B                            ; $6A6A: $C3 $8B $7A
 
 Data_01F_6A6D::
-    db   $76, $6A, $7B, $6A
+    dw   Data_01F_6A76
+    dw   Data_01F_6A7B
 
 Data_01F_6A71::
     db   $00, $29, $68, $80, $10
@@ -5745,7 +5919,12 @@ func_01F_6AA8::
     jp   func_01F_7A8B                            ; $6ABA: $C3 $8B $7A
 
 Data_01F_6ABD::
-    db   $CE, $6A, $D3, $6A, $D8, $6A, $DD, $6A, $E2, $6A, $E7, $6A
+    dw   Data_01F_6ACE
+    dw   Data_01F_6AD3
+    dw   Data_01F_6AD8
+    dw   Data_01F_6ADD
+    dw   Data_01F_6AE2
+    dw   Data_01F_6AE7
 
 Data_01F_6AC9::
     db   $00, $20, $11, $80, $01
@@ -5785,8 +5964,16 @@ func_01F_6AF2::
     jp   func_01F_7A25                            ; $6B04: $C3 $25 $7A
 
 Data_01F_6B07::
-    db   $20, $6B, $23, $6B, $26, $6B, $29, $6B, $2C, $6B, $29, $6B, $26, $6B, $23, $6B
-    db   $20, $6B, $2F, $6B
+    dw   Data_01F_6B20
+    dw   Data_01F_6B23
+    dw   Data_01F_6B26
+    dw   Data_01F_6B29
+    dw   Data_01F_6B2C
+    dw   Data_01F_6B29
+    dw   Data_01F_6B26
+    dw   Data_01F_6B23
+    dw   Data_01F_6B20
+    dw   Data_01F_6B2F
 
 Data_01F_6B1B::
     db   $00, $67, $2C, $80, $01
@@ -5826,9 +6013,27 @@ func_01F_6B38::
     jp   func_01F_7A25                            ; $6B4A: $C3 $25 $7A
 
 Data_01F_6B4D::
-    db   $7C, $6B, $7F, $6B, $82, $6B, $85, $6B, $88, $6B, $85, $6B, $82, $6B, $7F, $6B
-    db   $82, $6B, $85, $6B, $88, $6B, $8B, $6B, $8E, $6B, $8B, $6B, $88, $6B, $85, $6B
-    db   $88, $6B, $8B, $6B, $8E, $6B, $91, $6B, $94, $6B
+    dw   Data_01F_6B7C
+    dw   Data_01F_6B7F
+    dw   Data_01F_6B82
+    dw   Data_01F_6B85
+    dw   Data_01F_6B88
+    dw   Data_01F_6B85
+    dw   Data_01F_6B82
+    dw   Data_01F_6B7F
+    dw   Data_01F_6B82
+    dw   Data_01F_6B85
+    dw   Data_01F_6B88
+    dw   Data_01F_6B8B
+    dw   Data_01F_6B8E
+    dw   Data_01F_6B8B
+    dw   Data_01F_6B88
+    dw   Data_01F_6B85
+    dw   Data_01F_6B88
+    dw   Data_01F_6B8B
+    dw   Data_01F_6B8E
+    dw   Data_01F_6B91
+    dw   Data_01F_6B94
 
 Data_01F_6B77::
     db   $00, $F7, $3D, $80, $04
@@ -5921,14 +6126,26 @@ label_01F_6BDD:
     jr   func_01F_6B97                            ; $6BE5: $18 $B0
 
 Data_01F_6BE7::
-    db   $FF, $6B, $FA, $6B, $04, $6C, $FA, $6B, $04, $6C
+    dw   Data_01F_6BFF
+    dw   Data_01F_6BFA
+    dw   Data_01F_6C04
+    dw   Data_01F_6BFA
+    dw   Data_01F_6C04
 
 Data_01F_6BF1::
     db   $0E, $6C, $0E, $6C
 
 Data_01F_6BF5::
-    db   $37, $61, $30, $80, $03, $37, $41, $14, $80, $03, $37, $20, $30, $C0, $02, $37
-    db   $20, $14, $C0, $02
+    db   $37, $61, $30, $80, $03
+
+Data_01F_6BFA::
+    db   $37, $41, $14, $80, $03
+
+Data_01F_6BFF::
+    db   $37, $20, $30, $C0, $02
+
+Data_01F_6C04::
+    db   $37, $20, $14, $C0, $02
 
 Data_01F_6C09::
     db   $37, $A1, $30, $80, $04, $37, $51, $14, $80, $04
@@ -5963,7 +6180,8 @@ jr_01F_6C32:
     jr   jr_01F_6C29                              ; $6C3B: $18 $EC
 
 Data_01F_6C3D::
-    db   $46, $6C, $49, $6C
+dw   Data_01F_6C46
+    dw   Data_01F_6C49
 
 Data_01F_6C41::
     db   $00, $C0, $58, $80, $02
@@ -6011,7 +6229,8 @@ jr_01F_6C7A:
     jp   func_01F_7A8B                            ; $6C80: $C3 $8B $7A
 
 Data_01F_6C83::
-    db   $91, $6C, $94, $6C
+dw   Data_01F_6C91
+    dw   Data_01F_6C94
 
 Data_01F_6C87::
     db   $00, $2C, $7C, $80, $02
@@ -6088,7 +6307,8 @@ jr_01F_6CEE:
     jp   func_01F_7A8B                            ; $6CF4: $C3 $8B $7A
 
 Data_01F_6CF7::
-    db   $05, $6D, $08, $6D
+    dw   Data_01F_6D05
+    dw   Data_01F_6D08
 
 Data_01F_6CFB::
     db   $00, $1A, $06, $80, $01
@@ -6122,7 +6342,8 @@ jr_01F_6D21:
     jr   jr_01F_6D18                              ; $6D24: $18 $F2
 
 Data_01F_6D26::
-    db   $2F, $6D, $32, $6D
+    dw   Data_01F_6D2F
+    dw   Data_01F_6D32
 
 Data_01F_6D2A::
     db   $00, $50, $0B, $80, $01
@@ -6154,7 +6375,10 @@ func_01F_6D3B::
     jp   func_01F_7A25                            ; $6D55: $C3 $25 $7A
 
 Data_01F_6D58::
-    db   $65, $6D, $6A, $6D, $6D, $6D, $70, $6D
+    dw   Data_01F_6D65
+    dw   Data_01F_6D6A
+    dw   Data_01F_6D6D
+    dw   Data_01F_6D70
 
 Data_01F_6D60::
     db   $00, $0F, $60, $80, $38
@@ -6234,11 +6458,41 @@ func_01F_6DBD::
     jp   func_01F_7A25                            ; $6DD7: $C3 $25 $7A
 
 Data_01F_6DDA::
-    db   $2B, $6E, $2E, $6E, $31, $6E, $2E, $6E, $2B, $6E, $28, $6E, $2B, $6E, $2E, $6E
-    db   $31, $6E, $2E, $6E, $2B, $6E, $28, $6E, $2B, $6E, $31, $6E, $34, $6E, $31, $6E
-    db   $2B, $6E, $28, $6E, $2B, $6E, $31, $6E, $34, $6E, $31, $6E, $2B, $6E, $25, $6E
-    db   $2B, $6E, $2E, $6E, $31, $6E, $34, $6E, $37, $6E, $3A, $6E, $3F, $6E, $42, $6E
-    db   $45, $6E, $48, $6E, $4B, $6E
+    dw   Data_01F_6E2B
+    dw   Data_01F_6E2E
+    dw   Data_01F_6E31
+    dw   Data_01F_6E2E
+    dw   Data_01F_6E2B
+    dw   Data_01F_6E28
+    dw   Data_01F_6E2B
+    dw   Data_01F_6E2E
+    dw   Data_01F_6E31
+    dw   Data_01F_6E2E
+    dw   Data_01F_6E2B
+    dw   Data_01F_6E28
+    dw   Data_01F_6E2B
+    dw   Data_01F_6E31
+    dw   Data_01F_6E34
+    dw   Data_01F_6E31
+    dw   Data_01F_6E2B
+    dw   Data_01F_6E28
+    dw   Data_01F_6E2B
+    dw   Data_01F_6E31
+    dw   Data_01F_6E34
+    dw   Data_01F_6E31
+    dw   Data_01F_6E2B
+    dw   Data_01F_6E25
+    dw   Data_01F_6E2B
+    dw   Data_01F_6E2E
+    dw   Data_01F_6E31
+    dw   Data_01F_6E34
+    dw   Data_01F_6E37
+    dw   Data_01F_6E3A
+    dw   Data_01F_6E3F
+    dw   Data_01F_6E42
+    dw   Data_01F_6E45
+    dw   Data_01F_6E48
+    dw   Data_01F_6E4B
 
 Data_01F_6E20::
     db   $00, $F0, $8C, $80, $5C
@@ -6312,7 +6566,8 @@ jr_01F_6E6D:
     jr   jr_01F_6E64                              ; $6E76: $18 $EC
 
 Data_01F_6E78::
-    db   $81, $6E, $84, $6E
+    dw   Data_01F_6E81
+    dw   Data_01F_6E84
 
 Data_01F_6E7C::
     db   $00, $80, $3A, $80, $01
@@ -6340,8 +6595,18 @@ func_01F_6E8D::
     jp   func_01F_7A25                            ; $6E9F: $C3 $25 $7A
 
 Data_01F_6EA2::
-    db   $BF, $6E, $C2, $6E, $C5, $6E, $C2, $6E, $BF, $6E, $C8, $6E, $CB, $6E, $CE, $6E
-    db   $D1, $6E, $D4, $6E, $D7, $6E, $DA, $6E
+    dw   Data_01F_6EBF
+    dw   Data_01F_6EC2
+    dw   Data_01F_6EC5
+    dw   Data_01F_6EC2
+    dw   Data_01F_6EBF
+    dw   Data_01F_6EC8
+    dw   Data_01F_6ECB
+    dw   Data_01F_6ECE
+    dw   Data_01F_6ED1
+    dw   Data_01F_6ED4
+    dw   Data_01F_6ED7
+    dw   Data_01F_6EDA
 
 Data_01F_6EBA::
     db   $00, $C2, $5D, $80, $01
@@ -6404,8 +6669,17 @@ jr_01F_6EFC:
     jr   jr_01F_6EF3                              ; $6F05: $18 $EC
 
 Data_01F_6F07::
-    db   $25, $6F, $28, $6F, $2B, $6F, $2E, $6F, $2B, $6F, $28, $6F, $25, $6F, $22, $6F
-    db   $25, $6F, $28, $6F, $2B, $6F
+    dw   Data_01F_6F25
+    dw   Data_01F_6F28
+    dw   Data_01F_6F2B
+    dw   Data_01F_6F2E
+    dw   Data_01F_6F2B
+    dw   Data_01F_6F28
+    dw   Data_01F_6F25
+    dw   Data_01F_6F22
+    dw   Data_01F_6F25
+    dw   Data_01F_6F28
+    dw   Data_01F_6F2B
 
 Data_01F_6F1D::
     db   $00, $67, $6C, $80, $01
@@ -6453,7 +6727,12 @@ jr_01F_6F50:
     jr   jr_01F_6F47                              ; $6F59: $18 $EC
 
 Data_01F_6F5B::
-    db   $6C, $6F, $6F, $6F, $6C, $6F, $72, $6F, $6C, $6F, $75, $6F
+    dw   Data_01F_6F6C
+    dw   Data_01F_6F6F
+    dw   Data_01F_6F6C
+    dw   Data_01F_6F72
+    dw   Data_01F_6F6C
+    dw   Data_01F_6F75
 
 Data_01F_6F67::
     db   $00, $F4, $68, $80, $02
@@ -6506,8 +6785,16 @@ jr_01F_6F9F:
     jr   jr_01F_6F8E                              ; $6FA8: $18 $E4
 
 Data_01F_6FAA::
-    db   $C3, $6F, $C8, $6F, $CE, $6F, $D4, $6F, $DA, $6F, $D7, $6F, $D4, $6F, $D1, $6F
-    db   $CE, $6F, $CB, $6F
+    dw   Data_01F_6FC3
+    dw   Data_01F_6FC8
+    dw   Data_01F_6FCE
+    dw   Data_01F_6FD4
+    dw   Data_01F_6FDA
+    dw   Data_01F_6FD7
+    dw   Data_01F_6FD4
+    dw   Data_01F_6FD1
+    dw   Data_01F_6FCE
+    dw   Data_01F_6FCB
 
 Data_01F_6FBE::
     db   $00, $C0, $7F, $80, $88
@@ -6559,23 +6846,96 @@ func_01F_6FF5::
 
     call IncrementValueAtBC                       ; $6FF9: $CD $75 $7A
     cp   $14                                      ; $6FFC: $FE $14
-    db   $CA                                      ; $6FFE: $CA
-    db   $01                                      ; $6FFF: $01
+    jp   z, func_01F_7A01                         ; $6FFE: $CA $01 $7A
 
-Data_01F_7000::
-    db   $7A, $21, $12, $70, $CD, $64, $7A, $FA, $98, $D3, $FE, $13, $CA, $8B, $7A, $C3
-    db   $25, $7A
+    ld   hl, Data_01F_7012                        ; $7001: $21 $12 $70
+    call GetHandlerAddressInTable                 ; $7004: $CD $64 $7A
+    ld   a, [$D398]                               ; $7007: $FA $98 $D3
+    cp   $13                                      ; $700A: $FE $13
+    jp   z, func_01F_7A8B                         ; $700C: $CA $8B $7A
+
+    jp   func_01F_7A25                            ; $700F: $C3 $25 $7A
 
 Data_01F_7012::
-    db   $3D, $70, $40, $70, $43, $70, $46, $70, $49, $70, $4C, $70, $4F, $70, $52, $70
-    db   $55, $70, $58, $70, $5B, $70, $5E, $70, $61, $70, $64, $70, $67, $70, $6A, $70
-    db   $6D, $70, $70, $70, $73, $70
+    dw   Data_01F_703D
+    dw   Data_01F_7040
+    dw   Data_01F_7043
+    dw   Data_01F_7046
+    dw   Data_01F_7049
+    dw   Data_01F_704C
+    dw   Data_01F_704F
+    dw   Data_01F_7052
+    dw   Data_01F_7055
+    dw   Data_01F_7058
+    dw   Data_01F_705B
+    dw   Data_01F_705E
+    dw   Data_01F_7061
+    dw   Data_01F_7064
+    dw   Data_01F_7067
+    dw   Data_01F_706A
+    dw   Data_01F_706D
+    dw   Data_01F_7070
+    dw   Data_01F_7073
 
 Data_01F_7038::
-    db   $26, $40, $37, $80, $06, $36, $80, $06, $35, $80, $06, $34, $80, $06, $27, $80
-    db   $06, $26, $80, $06, $25, $80, $06, $24, $80, $06, $17, $80, $06, $16, $80, $06
-    db   $15, $80, $06, $14, $80, $06, $07, $80, $06, $06, $00, $06, $05, $00, $06, $04
-    db   $00, $06, $03, $00, $06, $02, $00, $06, $01, $00, $06, $00, $47, $00, $80, $20
+    db   $26, $40, $37, $80, $06
+
+Data_01F_703D::
+    db   $36, $80, $06
+
+Data_01F_7040::
+    db   $35, $80, $06
+
+Data_01F_7043::
+    db   $34, $80, $06
+
+Data_01F_7046::
+    db   $27, $80, $06
+
+Data_01F_7049::
+    db   $26, $80, $06
+
+Data_01F_704C::
+    db   $25, $80, $06
+
+Data_01F_704F::
+    db   $24, $80, $06
+
+Data_01F_7052::
+    db   $17, $80, $06
+
+Data_01F_7055::
+    db   $16, $80, $06
+
+Data_01F_7058::
+    db   $15, $80, $06
+
+Data_01F_705B::
+    db   $14, $80, $06
+
+Data_01F_705E::
+    db   $07, $80, $06
+
+Data_01F_7061::
+    db   $06, $00, $06
+
+Data_01F_7064::
+    db   $05, $00, $06
+
+Data_01F_7067::
+    db   $04, $00, $06
+
+Data_01F_706A::
+    db   $03, $00, $06
+
+Data_01F_706D::
+    db   $02, $00, $06
+
+Data_01F_7070::
+    db   $01, $00, $06
+
+Data_01F_7073::
+    db   $00, $47, $00, $80, $20
 
 func_01F_7078::
     ld   hl, Data_01F_70A1                        ; $7078: $21 $A1 $70
@@ -6594,7 +6954,13 @@ func_01F_707E::
     jp   func_01F_7A8B                            ; $7090: $C3 $8B $7A
 
 Data_01F_7093::
-    db   $A6, $70, $AB, $70, $B0, $70, $B5, $70, $BA, $70, $AB, $70, $BF, $70
+    dw    Data_01F_70A6
+    dw    Data_01F_70AB
+    dw    Data_01F_70B0
+    dw    Data_01F_70B5
+    dw    Data_01F_70BA
+    dw    Data_01F_70AB
+    dw    Data_01F_70BF
 
 Data_01F_70A1::
     db   $26, $29, $40, $C0, $04
@@ -6649,8 +7015,17 @@ jr_01F_70EB:
     jr   jr_01F_70DA                              ; $70F4: $18 $E4
 
 Data_01F_70F6::
-    db   $11, $71, $C3, $6F, $C8, $6F, $CE, $6F, $D4, $6F, $DA, $6F, $D7, $6F, $D4, $6F
-    db   $D1, $6F, $CE, $6F, $CB, $6F
+    dw    Data_01F_7111
+    dw    Data_01F_6FC3
+    dw    Data_01F_6FC8
+    dw    Data_01F_6FCE
+    dw    Data_01F_6FD4
+    dw    Data_01F_6FDA
+    dw    Data_01F_6FD7
+    dw    Data_01F_6FD4
+    dw    Data_01F_6FD1
+    dw    Data_01F_6FCE
+    dw    Data_01F_6FCB
 
 Data_01F_710C::
     db   $00, $C0, $7F, $80, $FF
@@ -6694,11 +7069,40 @@ func_01F_713C::
     jp   func_01F_7A8B                            ; $714E: $C3 $8B $7A
 
 Data_01F_7151::
-    db   $9A, $71, $BD, $71, $9F, $71, $BD, $71, $A4, $71, $BD, $71, $A9, $71, $BD, $71
-    db   $A9, $71, $BD, $71, $AE, $71, $C2, $71, $B3, $71, $C2, $71, $B8, $71, $C2, $71
-    db   $B3, $71, $C2, $71, $AE, $71, $C2, $71, $B3, $71, $C2, $71, $B8, $71, $C2, $71
-    db   $B3, $71, $C2, $71, $AE, $71, $C2, $71, $B3, $71, $C2, $71, $B8, $71, $C2, $71
-    db   $B3, $71, $C2, $71
+    dw    Data_01F_719A
+    dw    Data_01F_71BD
+    dw    Data_01F_719F
+    dw    Data_01F_71BD
+    dw    Data_01F_71A4
+    dw    Data_01F_71BD
+    dw    Data_01F_71A9
+    dw    Data_01F_71BD
+    dw    Data_01F_71A9
+    dw    Data_01F_71BD
+    dw    Data_01F_71AE
+    dw    Data_01F_71C2
+    dw    Data_01F_71B3
+    dw    Data_01F_71C2
+    dw    Data_01F_71B8
+    dw    Data_01F_71C2
+    dw    Data_01F_71B3
+    dw    Data_01F_71C2
+    dw    Data_01F_71AE
+    dw    Data_01F_71C2
+    dw    Data_01F_71B3
+    dw    Data_01F_71C2
+    dw    Data_01F_71B8
+    dw    Data_01F_71C2
+    dw    Data_01F_71B3
+    dw    Data_01F_71C2
+    dw    Data_01F_71AE
+    dw    Data_01F_71C2
+    dw    Data_01F_71B3
+    dw    Data_01F_71C2
+    dw    Data_01F_71B8
+    dw    Data_01F_71C2
+    dw    Data_01F_71B3
+    dw    Data_01F_71C2
 
 Data_01F_7195::
     db   $00, $1C, $60, $80, $18
@@ -6747,12 +7151,34 @@ func_01F_71CD::
     jp   func_01F_7A8B                            ; $71DF: $C3 $8B $7A
 
 Data_01F_71E2::
-    db   $1B, $72, $BD, $71, $20, $72, $BD, $71, $25, $72, $BD, $71, $2A, $72, $BD, $71
-    db   $2A, $72, $BD, $71, $2F, $72, $C2, $71
+    dw    Data_01F_721B
+    dw    Data_01F_71BD
+    dw    Data_01F_7220
+    dw    Data_01F_71BD
+    dw    Data_01F_7225
+    dw    Data_01F_71BD
+    dw    Data_01F_722A
+    dw    Data_01F_71BD
+    dw    Data_01F_722A
+    dw    Data_01F_71BD
+    dw    Data_01F_722F
+    dw    Data_01F_71C2
 
 Data_01F_71FA::
-    db   $34, $72, $C2, $71, $39, $72, $C2, $71, $34, $72, $C2, $71, $2F, $72, $C2, $71
-    db   $34, $72, $C2, $71, $39, $72, $C2, $71, $34, $72, $C2, $71
+    dw    Data_01F_7234
+    dw    Data_01F_71C2
+    dw    Data_01F_7239
+    dw    Data_01F_71C2
+    dw    Data_01F_7234
+    dw    Data_01F_71C2
+    dw    Data_01F_722F
+    dw    Data_01F_71C2
+    dw    Data_01F_7234
+    dw    Data_01F_71C2
+    dw    Data_01F_7239
+    dw    Data_01F_71C2
+    dw    Data_01F_7234
+    dw    Data_01F_71C2
 
 Data_01F_7216::
     db   $00, $00, $00, $80, $20
@@ -6795,8 +7221,16 @@ func_01F_7244::
     jp   func_01F_7A8B                            ; $7256: $C3 $8B $7A
 
 Data_01F_7259::
-    db   $72, $72, $77, $72, $7C, $72, $77, $72, $72, $72, $6D, $72, $90, $72, $8B, $72
-    db   $86, $72, $81, $72
+    dw   Data_01F_7272
+    dw   Data_01F_7277
+    dw   Data_01F_727C
+    dw   Data_01F_7277
+    dw   Data_01F_7272
+    dw   Data_01F_726D
+    dw   Data_01F_7290
+    dw   Data_01F_728B
+    dw   Data_01F_7286
+    dw   Data_01F_7281
 
 Data_01F_726D::
     db   $00, $20, $30, $80, $02
@@ -6843,8 +7277,17 @@ func_01F_729B::
     jp   func_01F_7A25                            ; $72B5: $C3 $25 $7A
 
 Data_01F_72B8::
-    db   $D6, $72, $D3, $72, $D9, $72, $D6, $72, $DC, $72, $DF, $72, $D6, $72, $D3, $72
-    db   $D9, $72, $D6, $72, $DC, $72
+    dw   Data_01F_72D6
+    dw   Data_01F_72D3
+    dw   Data_01F_72D9
+    dw   Data_01F_72D6
+    dw   Data_01F_72DC
+    dw   Data_01F_72DF
+    dw   Data_01F_72D6
+    dw   Data_01F_72D3
+    dw   Data_01F_72D9
+    dw   Data_01F_72D6
+    dw   Data_01F_72DC
 
 Data_01F_72CE::
     db   $00, $80, $48, $80, $02
@@ -6957,17 +7400,87 @@ jr_01F_7363:
     jr   jr_01F_730C                              ; $7371: $18 $99
 
 Data_01F_7373::
-    db   $1A, $74, $1D, $74, $20, $74, $23, $74, $26, $74, $29, $74, $2C, $74, $2F, $74
-    db   $32, $74, $35, $74, $38, $74, $3B, $74, $3E, $74, $41, $74, $44, $74, $47, $74
-    db   $4A, $74, $4D, $74, $50, $74, $53, $74, $56, $74, $59, $74, $56, $74, $53, $74
-    db   $50, $74, $5C, $74, $61, $74, $64, $74, $67, $74, $6A, $74, $67, $74, $64, $74
-    db   $61, $74, $6D, $74, $61, $74, $64, $74, $67, $74, $6A, $74, $67, $74, $64, $74
-    db   $61, $74, $72, $74, $61, $74, $64, $74, $67, $74, $6A, $74, $67, $74, $64, $74
-    db   $61, $74, $77, $74, $61, $74, $64, $74, $67, $74, $6A, $74, $67, $74, $64, $74
-    db   $61, $74, $7C, $74, $61, $74, $64, $74, $67, $74, $6A, $74, $67, $74, $64, $74
-    db   $61, $74, $81, $74, $61, $74, $64, $74, $67, $74, $6A, $74, $67, $74, $64, $74
-    db   $61, $74, $86, $74, $61, $74, $64, $74, $67, $74, $6A, $74, $67, $74, $64, $74
-    db   $61, $74
+    dw   Data_01F_741A
+    dw   Data_01F_741D
+    dw   Data_01F_7420
+    dw   Data_01F_7423
+    dw   Data_01F_7426
+    dw   Data_01F_7429
+    dw   Data_01F_742C
+    dw   Data_01F_742F
+    dw   Data_01F_7432
+    dw   Data_01F_7435
+    dw   Data_01F_7438
+    dw   Data_01F_743B
+    dw   Data_01F_743E
+    dw   Data_01F_7441
+    dw   Data_01F_7444
+    dw   Data_01F_7447
+    dw   Data_01F_744A
+    dw   Data_01F_744D
+    dw   Data_01F_7450
+    dw   Data_01F_7453
+    dw   Data_01F_7456
+    dw   Data_01F_7459
+    dw   Data_01F_7456
+    dw   Data_01F_7453
+    dw   Data_01F_7450
+    dw   Data_01F_745C
+    dw   Data_01F_7461
+    dw   Data_01F_7464
+    dw   Data_01F_7467
+    dw   Data_01F_746A
+    dw   Data_01F_7467
+    dw   Data_01F_7464
+    dw   Data_01F_7461
+    dw   Data_01F_746D
+    dw   Data_01F_7461
+    dw   Data_01F_7464
+    dw   Data_01F_7467
+    dw   Data_01F_746A
+    dw   Data_01F_7467
+    dw   Data_01F_7464
+    dw   Data_01F_7461
+    dw   Data_01F_7472
+    dw   Data_01F_7461
+    dw   Data_01F_7464
+    dw   Data_01F_7467
+    dw   Data_01F_746A
+    dw   Data_01F_7467
+    dw   Data_01F_7464
+    dw   Data_01F_7461
+    dw   Data_01F_7477
+    dw   Data_01F_7461
+    dw   Data_01F_7464
+    dw   Data_01F_7467
+    dw   Data_01F_746A
+    dw   Data_01F_7467
+    dw   Data_01F_7464
+    dw   Data_01F_7461
+    dw   Data_01F_747C
+    dw   Data_01F_7461
+    dw   Data_01F_7464
+    dw   Data_01F_7467
+    dw   Data_01F_746A
+    dw   Data_01F_7467
+    dw   Data_01F_7464
+    dw   Data_01F_7461
+    dw   Data_01F_7481
+    dw   Data_01F_7461
+    dw   Data_01F_7464
+    dw   Data_01F_7467
+    dw   Data_01F_746A
+    dw   Data_01F_7467
+    dw   Data_01F_7464
+    dw   Data_01F_7461
+    dw   Data_01F_7486
+    dw   Data_01F_7461
+    dw   Data_01F_7464
+    dw   Data_01F_7467
+    dw   Data_01F_746A
+    dw   Data_01F_7467
+    dw   Data_01F_7464
+    dw   Data_01F_7461
 
 Data_01F_7415::
     db   $00, $80, $9C, $80, $01
@@ -7092,10 +7605,38 @@ jr_01F_7499:
     jp   func_01F_7A8B                            ; $74A8: $C3 $8B $7A
 
 Data_01F_74AB::
-    db   $F0, $74, $F5, $74, $FA, $74, $FF, $74, $04, $75, $09, $75, $0E, $75, $13, $75
-    db   $18, $75, $1D, $75, $22, $75, $27, $75, $2C, $75, $31, $75, $36, $75, $3B, $75
-    db   $40, $75, $45, $75, $4A, $75, $4F, $75, $54, $75, $59, $75, $5E, $75, $63, $75
-    db   $68, $75, $6D, $75, $72, $75, $77, $75, $7C, $75, $81, $75, $86, $75, $8B, $75
+    dw    Data_01F_74F0
+    dw    Data_01F_74F5
+    dw    Data_01F_74FA
+    dw    Data_01F_74FF
+    dw    Data_01F_7504
+    dw    Data_01F_7509
+    dw    Data_01F_750E
+    dw    Data_01F_7513
+    dw    Data_01F_7518
+    dw    Data_01F_751D
+    dw    Data_01F_7522
+    dw    Data_01F_7527
+    dw    Data_01F_752C
+    dw    Data_01F_7531
+    dw    Data_01F_7536
+    dw    Data_01F_753B
+    dw    Data_01F_7540
+    dw    Data_01F_7545
+    dw    Data_01F_754A
+    dw    Data_01F_754F
+    dw    Data_01F_7554
+    dw    Data_01F_7559
+    dw    Data_01F_755E
+    dw    Data_01F_7563
+    dw    Data_01F_7568
+    dw    Data_01F_756D
+    dw    Data_01F_7572
+    dw    Data_01F_7577
+    dw    Data_01F_757C
+    dw    Data_01F_7581
+    dw    Data_01F_7586
+    dw    Data_01F_758B
 
 Data_01F_74EB::
     db   $00, $20, $67, $80, $02
@@ -7224,7 +7765,14 @@ jr_01F_75AB:
     jr   jr_01F_75A2                              ; $75B4: $18 $EC
 
 Data_01F_75B6::
-    db   $CB, $75, $CE, $75, $D1, $75, $D4, $75, $D7, $75, $D4, $75, $D1, $75, $CE, $75
+    dw    Data_01F_75CB
+    dw    Data_01F_75CE
+    dw    Data_01F_75D1
+    dw    Data_01F_75D4
+    dw    Data_01F_75D7
+    dw    Data_01F_75D4
+    dw    Data_01F_75D1
+    dw    Data_01F_75CE
 
 Data_01F_75C6::
     db   $00, $F4, $0F, $80, $01
@@ -7293,9 +7841,23 @@ func_01F_7610::
     jp   func_01F_7A8B                            ; $7622: $C3 $8B $7A
 
 Data_01F_7625::
-    db   $4C, $76, $51, $76, $56, $76, $5B, $76, $60, $76, $65, $76, $6A, $76, $6F, $76
-    db   $74, $76, $79, $76, $7E, $76, $83, $76, $88, $76, $8D, $76, $92, $76, $97, $76
-    db   $9C, $76
+    dw    Data_01F_764C
+    dw    Data_01F_7651
+    dw    Data_01F_7656
+    dw    Data_01F_765B
+    dw    Data_01F_7660
+    dw    Data_01F_7665
+    dw    Data_01F_766A
+    dw    Data_01F_766F
+    dw    Data_01F_7674
+    dw    Data_01F_7679
+    dw    Data_01F_767E
+    dw    Data_01F_7683
+    dw    Data_01F_7688
+    dw    Data_01F_768D
+    dw    Data_01F_7692
+    dw    Data_01F_7697
+    dw    Data_01F_769C
 
 Data_01F_7647::
     db   $00, $20, $0C, $80, $01
@@ -7368,8 +7930,19 @@ func_01F_76A7::
     jp   func_01F_7A8B                            ; $76B9: $C3 $8B $7A
 
 Data_01F_76BC::
-    db   $DB, $76, $E0, $76, $E5, $76, $EA, $76, $EF, $76, $F4, $76, $F9, $76, $FE, $76
-    db   $03, $77, $08, $77, $0D, $77, $12, $77, $17, $77
+    dw   Data_01F_76DB
+    dw   Data_01F_76E0
+    dw   Data_01F_76E5
+    dw   Data_01F_76EA
+    dw   Data_01F_76EF
+    dw   Data_01F_76F4
+    dw   Data_01F_76F9
+    dw   Data_01F_76FE
+    dw   Data_01F_7703
+    dw   Data_01F_7708
+    dw   Data_01F_770D
+    dw   Data_01F_7712
+    dw   Data_01F_7717
 
 Data_01F_76D6::
     db   $00, $30, $3D, $80, $02
@@ -7452,7 +8025,8 @@ jr_01F_7752:
     jp   func_01F_7A07                            ; $7757: $C3 $07 $7A
 
 Data_01F_775A::
-    db   $63, $77, $69, $77
+    dw    Data_01F_7763
+    dw    Data_01F_7769
 
 Data_01F_775E::
     db   $00, $20, $70, $80, $01
@@ -7551,17 +8125,87 @@ func_01F_77EC::
     jp   func_01F_7A25                            ; $77FE: $C3 $25 $7A
 
 Data_01F_7801::
-    db   $A8, $78, $AB, $78, $AE, $78, $B1, $78, $B4, $78, $B7, $78, $B4, $78, $B1, $78
-    db   $AE, $78, $B1, $78, $B4, $78, $B7, $78, $BA, $78, $BD, $78, $C0, $78, $BD, $78
-    db   $BA, $78, $B7, $78, $BA, $78, $BD, $78, $C0, $78, $C3, $78, $C6, $78, $C9, $78
-    db   $C6, $78, $C3, $78, $C0, $78, $C3, $78, $C6, $78, $C9, $78, $CC, $78, $CF, $78
-    db   $D2, $78, $CF, $78, $CC, $78, $C9, $78, $CC, $78, $CF, $78, $D2, $78, $D5, $78
-    db   $D8, $78, $DB, $78, $D8, $78, $D5, $78, $D2, $78, $D5, $78, $D8, $78, $DB, $78
-    db   $DE, $78, $E1, $78, $E4, $78, $E1, $78, $DE, $78, $DB, $78, $DE, $78, $E1, $78
-    db   $E4, $78, $E7, $78, $EA, $78, $ED, $78, $EA, $78, $E7, $78, $E4, $78, $E7, $78
-    db   $EA, $78, $ED, $78, $F0, $78, $F3, $78, $F6, $78, $F3, $78, $F0, $78, $ED, $78
-    db   $F0, $78, $F3, $78, $F6, $78, $F9, $78, $FC, $78, $FF, $78, $02, $79, $FF, $78
-    db   $02, $79
+    dw    Data_01F_78A8
+    dw    Data_01F_78AB
+    dw    Data_01F_78AE
+    dw    Data_01F_78B1
+    dw    Data_01F_78B4
+    dw    Data_01F_78B7
+    dw    Data_01F_78B4
+    dw    Data_01F_78B1
+    dw    Data_01F_78AE
+    dw    Data_01F_78B1
+    dw    Data_01F_78B4
+    dw    Data_01F_78B7
+    dw    Data_01F_78BA
+    dw    Data_01F_78BD
+    dw    Data_01F_78C0
+    dw    Data_01F_78BD
+    dw    Data_01F_78BA
+    dw    Data_01F_78B7
+    dw    Data_01F_78BA
+    dw    Data_01F_78BD
+    dw    Data_01F_78C0
+    dw    Data_01F_78C3
+    dw    Data_01F_78C6
+    dw    Data_01F_78C9
+    dw    Data_01F_78C6
+    dw    Data_01F_78C3
+    dw    Data_01F_78C0
+    dw    Data_01F_78C3
+    dw    Data_01F_78C6
+    dw    Data_01F_78C9
+    dw    Data_01F_78CC
+    dw    Data_01F_78CF
+    dw    Data_01F_78D2
+    dw    Data_01F_78CF
+    dw    Data_01F_78CC
+    dw    Data_01F_78C9
+    dw    Data_01F_78CC
+    dw    Data_01F_78CF
+    dw    Data_01F_78D2
+    dw    Data_01F_78D5
+    dw    Data_01F_78D8
+    dw    Data_01F_78DB
+    dw    Data_01F_78D8
+    dw    Data_01F_78D5
+    dw    Data_01F_78D2
+    dw    Data_01F_78D5
+    dw    Data_01F_78D8
+    dw    Data_01F_78DB
+    dw    Data_01F_78DE
+    dw    Data_01F_78E1
+    dw    Data_01F_78E4
+    dw    Data_01F_78E1
+    dw    Data_01F_78DE
+    dw    Data_01F_78DB
+    dw    Data_01F_78DE
+    dw    Data_01F_78E1
+    dw    Data_01F_78E4
+    dw    Data_01F_78E7
+    dw    Data_01F_78EA
+    dw    Data_01F_78ED
+    dw    Data_01F_78EA
+    dw    Data_01F_78E7
+    dw    Data_01F_78E4
+    dw    Data_01F_78E7
+    dw    Data_01F_78EA
+    dw    Data_01F_78ED
+    dw    Data_01F_78F0
+    dw    Data_01F_78F3
+    dw    Data_01F_78F6
+    dw    Data_01F_78F3
+    dw    Data_01F_78F0
+    dw    Data_01F_78ED
+    dw    Data_01F_78F0
+    dw    Data_01F_78F3
+    dw    Data_01F_78F6
+    dw    Data_01F_78F9
+    dw    Data_01F_78FC
+    dw    Data_01F_78FF
+    dw    Data_01F_7902
+    dw    Data_01F_78FF
+    dw    Data_01F_7902
 
 Data_01F_78A3::
     db   $38, $80, $24, $80, $02
@@ -7683,7 +8327,13 @@ func_01F_790B::
     jp   func_01F_7A8B                            ; $7922: $C3 $8B $7A
 
 Data_01F_7925::
-    db   $38, $79, $3D, $79, $42, $79, $47, $79, $4C, $79, $51, $79, $56, $79
+    dw    Data_01F_7938
+    dw    Data_01F_793D
+    dw    Data_01F_7942
+    dw    Data_01F_7947
+    dw    Data_01F_794C
+    dw    Data_01F_7951
+    dw    Data_01F_7956
 
 Data_01F_7933::
     db   $00, $1F, $7F, $80, $01
@@ -7726,8 +8376,21 @@ func_01F_7961::
     jp   func_01F_7A8B                            ; $7973: $C3 $8B $7A
 
 Data_01F_7976::
-    db   $99, $79, $9E, $79, $A3, $79, $A8, $79, $AD, $79, $B2, $79, $B7, $79, $BC, $79
-    db   $C1, $79, $C6, $79, $CB, $79, $D0, $79, $D5, $79, $DA, $79, $DF, $79
+    dw    Data_01F_7999
+    dw    Data_01F_799E
+    dw    Data_01F_79A3
+    dw    Data_01F_79A8
+    dw    Data_01F_79AD
+    dw    Data_01F_79B2
+    dw    Data_01F_79B7
+    dw    Data_01F_79BC
+    dw    Data_01F_79C1
+    dw    Data_01F_79C6
+    dw    Data_01F_79CB
+    dw    Data_01F_79D0
+    dw    Data_01F_79D5
+    dw    Data_01F_79DA
+    dw    Data_01F_79DF
 
 Data_01F_7994::
     db   $00, $20, $27, $80, $02
@@ -8039,7 +8702,10 @@ func_01F_7B21::
     jp   func_01F_7A8B                            ; $7B33: $C3 $8B $7A
 
 Data_01F_7B36::
-    db   $48, $7B, $4D, $7B, $52, $7B, $57, $7B
+dw    Data_01F_7B48
+    dw    Data_01F_7B4D
+    dw    Data_01F_7B52
+    dw    Data_01F_7B57
 
 Data_01F_7B3E::
     db   $00, $F8, $1D, $80, $01, $00, $F8, $1D, $80, $01

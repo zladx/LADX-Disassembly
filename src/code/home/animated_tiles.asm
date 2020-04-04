@@ -542,3 +542,38 @@ label_1DE7::
 
 AnimateTiles_return::
     ret
+
+label_1DE9::
+    ld   hl, Npc1Tiles + $F00
+    ld   a, BANK(Npc1Tiles)
+    jr   label_1DF5
+
+label_1DF0::
+    ld   a, BANK(Npc3Tiles)
+    ld   hl, Npc3Tiles + $2080
+
+label_1DF5::
+    ld   [MBC3SelectBank], a
+    ld   de, vTiles0 + $400
+    ld   bc, $40
+    jp   label_1F3B
+
+label_1E01::
+    ld   a, [wTradeSequenceItem]
+    cp   $02
+    jp  c, label_1F3E
+    sub  a, $02
+    ld   d, a
+    ld   e, $00
+    sra  d
+    rr   e
+    sra  d
+    rr   e
+    ld   hl, Items1Tiles
+    add  hl, de
+    ld   de, vTiles1 + $1A0
+    ld   bc, $40
+    ld   a, BANK(Items1Tiles)
+    call AdjustBankNumberForGBC
+    ld   [MBC3SelectBank], a
+    jp   label_1F3B

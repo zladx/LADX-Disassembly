@@ -1057,7 +1057,7 @@ LoadRoomSprites::
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
-    ld   hl, $70D3
+    ld   hl, data_020_70D3
     ld   a, [wIsIndoor]
     ld   d, a
     ldh  a, [hMapId]
@@ -1114,11 +1114,11 @@ LoadRoomSprites::
     jr   .return
 
 .label_DF1
-    ld   hl, $73F3
+    ld   hl, data_020_73F3
     ld   a, [wIsIndoor]
     and  a
     jr   z, .label_DFD
-    ld   hl, $763B
+    ld   hl, data_020_763B
 
 .label_DFD
     add  hl, de
@@ -2015,7 +2015,7 @@ ShootArrow::
     sub  a, $01
     daa
     ld   [wArrowCount], a
-    call label_157C
+    call func_157C
     ld   a, ENTITY_ARROW
     call SpawnPlayerProjectile
     ret  c
@@ -2249,7 +2249,7 @@ label_1535::
     ld   a, [hl]
     ldh  [hNoiseSfx], a
 
-    call label_157C
+    call func_157C
     ld   a, [$C146]
     and  a
     jr   nz, label_1562
@@ -2272,12 +2272,12 @@ label_1562::
     ld   [$C19B], a
     ret
 
-label_157C::
+func_157C::
     ldh  a, [hPressedButtonsMask]
-    and  $0F
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN
     ld   e, a
     ld   d, $00
-    ld   hl, $4905
+    ld   hl, Data_002_4905
     add  hl, de
     ld   a, [hl]
     cp   $0F
@@ -2672,7 +2672,7 @@ ApplyLinkMotionState::
     ld   a, [wRoomTransitionState]
     or   [hl]
     jr   nz, .magicRodEnd
-    call label_157C
+    call func_157C
     ld   a, ENTITY_HOOKSHOT_HIT
     call SpawnPlayerProjectile
     jr   c, .magicRodEnd
@@ -3120,43 +3120,8 @@ UpdateLinkWalkingAnimation::
 
 include "code/home/animated_tiles.asm"
 
-label_1DE9::
-    ld   hl, $4F00
-    ld   a, $0E
-    jr   label_1DF5
-
-label_1DF0::
-    ld   a, $12
-    ld   hl, $6080
-
-label_1DF5::
-    ld   [MBC3SelectBank], a
-    ld   de, $8400
-    ld   bc, $40
-    jp   label_1F3B
-
-label_1E01::
-    ld   a, [wTradeSequenceItem]
-    cp   $02
-    jp  c, label_1F3E
-    sub  a, $02
-    ld   d, a
-    ld   e, $00
-    sra  d
-    rr   e
-    sra  d
-    rr   e
-    ld   hl, $4400
-    add  hl, de
-    ld   de, $89A0
-    ld   bc, $40
-    ld   a, $0C
-    call AdjustBankNumberForGBC
-    ld   [MBC3SelectBank], a
-    jp   label_1F3B
-
 label_1E2B::
-    ld   hl, $68C0
+    ld   hl, LinkCharacter2Tiles + $10C0
     ld   de, $88E0
     jr   label_1EA7
 
@@ -3210,33 +3175,33 @@ label_1E69::
     jr   label_1E55
 
 label_1E8D::
-    ld   hl, $48E0
+    ld   hl, Items2Tiles + $E0
     ld   de, $88E0
-    ld   a, $0C
+    ld   a, BANK(Items2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   bc, $20
     jp   label_1F3B
 
 label_1EA1::
-    ld   hl, $68E0
+    ld   hl, LinkCharacter2Tiles + $10E0
     ld   de, $8CA0
 
 label_1EA7::
-    ld   a, $0C
+    ld   a, BANK(LinkCharacter2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   bc, $20
     jp   label_1F3B
 
 label_1EB5::
-    ld   hl, $7F00
-    ld   a, $12
+    ld   hl, DungeonMinimapTiles + $100
+    ld   a, BANK(DungeonMinimapTiles)
     jr   label_1EC1
 
 label_1EBC::
-    ld   hl, $4C40
-    ld   a, $0D
+    ld   hl, Dungeons1Tiles + $C40
+    ld   a, BANK(Dungeons1Tiles)
 
 label_1EC1::
     call AdjustBankNumberForGBC

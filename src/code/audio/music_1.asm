@@ -1377,7 +1377,7 @@ func_01B_47D2::
     dec  b                                        ; $47D3: $05
     ld   c, b                                     ; $47D4: $48
     ld   b, $00                                   ; $47D5: $06 $00
-    ld   hl, $4B13                                ; $47D7: $21 $13 $4B
+    ld   hl, HardcodedData_1b_4b13                ; $47D7: $21 $13 $4B
     add  hl, bc                                   ; $47DA: $09
     ld   a, [hl]                                  ; $47DB: $7E
     pop  bc                                       ; $47DC: $C1

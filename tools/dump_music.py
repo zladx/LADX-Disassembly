@@ -542,6 +542,17 @@ for addr in waveformAddresses:
     dataSet.addData(data)
 
 
+hardcodedAddresses = [
+        bankedAddress(0x1e, 0x4b15),
+        bankedAddress(0x1b, 0x4b13)
+        ]
+
+for addr in hardcodedAddresses:
+    data = Data(addr, Data.printAsByteString)
+    data.setLabel('HardcodedData_{0}_{1}'.format(myhex(addr // 0x4000), myhex(toGbPointer(addr), 4)))
+    dataSet.addData(data)
+
+
 # Hardcoded offsets for start and end of sound data segments
 f = open('src/data/music/music_tracks_data_1b_1.asm', 'w')
 s = dataSet.printDataRange(0x6caaa, 0x6ce2c)

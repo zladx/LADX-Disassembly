@@ -1015,7 +1015,7 @@ jr_01E_46A8:
     ld   c, l                                     ; $46AA: $4D
 
 jr_01E_46AB:
-    ld   hl, $49bf ; TODO                        ; $46AB: $21 $BF $49
+    ld   hl, Data_01E_49BF                        ; $46AB: $21 $BF $49
     add  hl, bc                                   ; $46AE: $09
     ld   a, [hl+]                                 ; $46AF: $2A
     ld   [de], a                                  ; $46B0: $12
@@ -1037,7 +1037,7 @@ label_01E_46BD:
     jr   z, jr_01E_46DB                           ; $46C1: $28 $18
 
     ld   de, $D346                                ; $46C3: $11 $46 $D3
-    ld   hl, $4a51 ; TODO                         ; $46C6: $21 $51 $4A
+    ld   hl, Data_01E_4A51                        ; $46C6: $21 $51 $4A
     add  hl, bc                                   ; $46C9: $09
 
 jr_01E_46CA:
@@ -1323,7 +1323,7 @@ func_01E_4841::
     dec  b                                        ; $4842: $05
     ld   c, b                                     ; $4843: $48
     ld   b, $00                                   ; $4844: $06 $00
-    ld   hl, $4b15 ; TODO                         ; $4846: $21 $15 $4B
+    ld   hl, HardcodedData_1e_4b15                ; $4846: $21 $15 $4B
     add  hl, bc                                   ; $4849: $09
     ld   a, [hl]                                  ; $484A: $7E
     pop  bc                                       ; $484B: $C1
@@ -1544,7 +1544,7 @@ jr_01E_496A:
     sla  a                                        ; $496E: $CB $27
     ld   l, a                                     ; $4970: $6F
     ld   h, $00                                   ; $4971: $26 $00
-    ld   de, $4997 ; TODO                         ; $4973: $11 $97 $49
+    ld   de, Data_01E_4997                        ; $4973: $11 $97 $49
     add  hl, de                                   ; $4976: $19
     ld   a, [hl+]                                 ; $4977: $2A
     ld   d, a                                     ; $4978: $57

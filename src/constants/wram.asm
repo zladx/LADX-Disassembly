@@ -768,8 +768,73 @@ wFinalNightmareForm:: ; D219
 ; Unlabeled
 ds $D300 - $D21A
 
-; D300 (unlabeled, audio related)
-ds $60
+wMusicTranspose:: ; D300
+  ; Note transpose value applied to all channels. Should be multiple of 2.
+  ds 1
+
+wMusicSpeedPointer:: ; D301
+  ; Points to some data which somehow sets the music's speed
+  ds 2
+
+; Unlabeled
+ds $D310 - $D303
+
+; D307: ds 4 (channel-specific, used by opcode A0-AF)
+
+wD310:: ; D310
+  ; Channel 1 data pointer
+  ds 2
+
+wD312:: ; D312
+  ; Copied from D313. A counter?
+  ds 1
+
+wD313:: ; D313
+  ds 1
+
+wD314:: ; D314
+  ; Channel 1 definition data pointer
+  ds 2
+
+wD316:: ; D316
+  ; Opcode 9D stores data here.
+  ; For channel 3, D336-D337 are a pointer to waveform data.
+  ds 3
+
+wD319:: ; D319
+  ; Points to frequency data for NRx3 and NRx4
+  ds 2
+
+wD31B:: ; D31B
+  ds 1
+
+wD31C:: ; D31C
+  ; Loop pointer for sound definition data?
+  ds 2
+
+wD31E:: ; D31E
+  ; Incremented each frame?
+  ds 1
+
+wD31F:: ; D31F
+  ; Audio loop counter; a segment loops [wD31F] times, then continues on.
+  ds 1
+
+wD320:: ; D320
+  ; Channel 2 data (similar to D310)
+  ds $10
+
+wD330:: ; D330
+  ; Channel 3 data (similar to D310)
+  ds $10
+
+wD340:: ; D340
+  ; Channel 4 data (similar to D310)
+  ds $10
+
+wActiveChannelIndex:: ; D350
+  ; Current sound channel being processed. Number from 1-4.
+  ds $10
 
 wActiveJingle:: ; D360
   ; The squareform jingle currently playing
@@ -782,8 +847,27 @@ wActiveMusicTrack:: ; D368
   ; The music track currently playing
   ds 1
 
-; Unlabeled
-ds 7
+wD369:: ; D369
+  ; Copied from wActiveMusicTrack
+  ds 1
+
+wD36A:: ; D36A
+  ds 1
+
+wD36B:: ; D36B
+  ds 1
+
+wD36C:: ; D36C
+  ds 1
+
+wD36D:: ; D36D
+  ds 1
+
+wD36E:: ; D36E
+  ds 1
+
+wD36F:: ; D36F
+  ds 1
 
 wActiveWaveSfx:: ; D370
   ; The waveform sound effect currently playing
@@ -796,10 +880,50 @@ wActiveNoiseSfx:: ; D378
   ; The noise generator sound effect currently playing
   ds 1
 
+wD379:: ; D379
+  ds 1
 ; D379-D???: noise sound effect parameters
 
 ; Unlabeled
-ds $88
+ds $D39E-$D37A
+
+wD39E::
+  ; Set to 1 by opcode 99, 0 by opcode 9A.
+  ; Enabled "envelope" behaviour of channel 3?
+  ds 1
+
+; Unlabeled
+ds $D3C8-$D39F
+
+; D3B6: ds 8 (channel-specific data)
+
+wD3C8::
+  ds 1
+wD3C9::
+  ds 1
+wD3CA::
+  ; Copied from $D369 (a music index)
+  ds 1
+wD3CB:: ; D3CB
+  ; Copied from $D3CA
+  ds 1
+
+; Unlabeled
+ds 2
+
+wMusicMode:: ; D3CE
+  ; Music disabled when this is 0?
+  ds 1
+
+; Unlabeled
+ds $D3D9-$D3CF
+
+wD3D9:: ; D3D9
+  ; Set to 1 by opcode 94
+  ds 1
+
+; Unlabeled
+ds $D401-$D3DA
 
 ; Room warps
 ;

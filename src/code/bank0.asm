@@ -4263,20 +4263,21 @@ PlayBoomerangSfx_trampoline::
     ret
 
 label_2A07::
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call label_5A59
+    callsb label_5A59
     jp   ReloadSavedBank
 
 ; Read an unknown value from the base map bank
+; Inputs:
+;   d    map group id
+;   e    room object id
 ReadValueFromBaseMap::
-    ld   a, $08
+    ld   a, BANK(OverworldObjectPhysicFlags)
     ld   [MBC3SelectBank], a
-    ld   hl, $4AD4
+    ld   hl, OverworldObjectPhysicFlags
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    ld   hl, $4BD4
+    ld   hl, Indoors1ObjectPhysicFlags
 .colorDungeonEnd
     add  hl, de
     ld   a, [hl]
@@ -4286,7 +4287,7 @@ ReadValueFromBaseMap_trampoline::
     call ReadValueFromBaseMap
     jp   ReloadSavedBank
 
-label_2A2C::
+ReadValueFromBaseMapAndRestoreBank3::
     call ReadValueFromBaseMap
     push af
     ld   a, $03

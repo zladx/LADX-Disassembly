@@ -8490,16 +8490,17 @@ jr_003_7B13:
     ; Entities special cases
     ;
 
-    cp   $20                                      ; $7B33: $FE $20
+    cp   OBJECT_LIFTABLE_ROCK ; or liftable pot   ; $7B33: $FE $20
     jp   z, label_003_7C7B                        ; $7B35: $CA $7B $7C
 
     push de                                       ; $7B38: $D5
     ld   e, a                                     ; $7B39: $5F
     ld   a, [wIsIndoor]                           ; $7B3A: $FA $A5 $DB
     ld   d, a                                     ; $7B3D: $57
-    call label_2A2C                               ; $7B3E: $CD $2C $2A
+    call ReadValueFromBaseMapAndRestoreBank3      ; $7B3E: $CD $2C $2A
     pop  de                                       ; $7B41: $D1
     ldh  [hScratch3], a                           ; $7B42: $E0 $DA
+
     ldh  a, [hActiveEntityType]                   ; $7B44: $F0 $EB
     cp   $CC                                      ; $7B46: $FE $CC
     jr   z, jr_003_7B4E                           ; $7B48: $28 $04
@@ -8722,6 +8723,7 @@ jr_003_7C75:
     cp   $60                                      ; $7C77: $FE $60
     jr   nz, hookshotEnd                          ; $7C79: $20 $16
 
+; liftable rock or pot
 label_003_7C7B:
     ldh  a, [hActiveEntityType]                   ; $7C7B: $F0 $EB
     cp   ENTITY_HOOKSHOT_CHAIN                    ; $7C7D: $FE $03
@@ -8890,7 +8892,7 @@ jr_003_7D6B:
     ld   e, a                                     ; $7D6C: $5F
     ld   a, [wIsIndoor]                           ; $7D6D: $FA $A5 $DB
     ld   d, a                                     ; $7D70: $57
-    call label_2A2C                               ; $7D71: $CD $2C $2A
+    call ReadValueFromBaseMapAndRestoreBank3      ; $7D71: $CD $2C $2A
     ldh  [hScratch1], a                           ; $7D74: $E0 $D8
     and  a                                        ; $7D76: $A7
     jp   z, jr_003_7E03                           ; $7D77: $CA $03 $7E
@@ -9038,7 +9040,7 @@ func_003_7E0E::
     ld   e, a                                     ; $7E3A: $5F
     ld   a, [wIsIndoor]                           ; $7E3B: $FA $A5 $DB
     ld   d, a                                     ; $7E3E: $57
-    call label_2A2C                               ; $7E3F: $CD $2C $2A
+    call ReadValueFromBaseMapAndRestoreBank3      ; $7E3F: $CD $2C $2A
     ldh  [hScratch3], a                           ; $7E42: $E0 $DA
     ret                                           ; $7E44: $C9
 

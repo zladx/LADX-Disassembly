@@ -5544,7 +5544,7 @@ jr_003_6ADA:
     jr   nz, @+$6C                                ; $6AE0: $20 $6A
 
     call func_003_7F25                            ; $6AE2: $CD $25 $7F
-    call func_003_7CAB                            ; $6AE5: $CD $AB $7C
+    call ApplySwordIntersectionWithObjects        ; $6AE5: $CD $AB $7C
     ld   hl, wEntitiesCollisionsTable             ; $6AE8: $21 $A0 $C2
     add  hl, bc                                   ; $6AEB: $09
     ld   a, [hl]                                  ; $6AEC: $7E
@@ -8765,7 +8765,7 @@ setCarryFlagAndReturn:
 Data_003_7CA9::
     db   $00, $02
 
-func_003_7CAB::
+ApplySwordIntersectionWithObjects::
     ld   de, $00                                  ; $7CAB: $11 $00 $00
     push bc                                       ; $7CAE: $C5
     ld   hl, wEntitiesPosXTable                   ; $7CAF: $21 $00 $C2
@@ -8794,10 +8794,10 @@ func_003_7CAB::
     pop  bc                                       ; $7CD6: $C1
     ld   a, [hl]                                  ; $7CD7: $7E
     ldh  [hObjectUnderEntity], a                  ; $7CD8: $E0 $AF
-    cp   $AC                                      ; $7CDA: $FE $AC
+    cp   OBJECT_TORCH_LIT                         ; $7CDA: $FE $AC
     jp   z, jr_003_7E03                           ; $7CDC: $CA $03 $7E
 
-    cp   $AB                                      ; $7CDF: $FE $AB
+    cp   OBJECT_TORCH_UNLIT                       ; $7CDF: $FE $AB
     jp   nz, jr_003_7D6B                          ; $7CE1: $C2 $6B $7D
 
     ldh  a, [hIsGBC]                              ; $7CE4: $F0 $FE
@@ -8818,7 +8818,7 @@ func_003_7CAB::
 
 jr_003_7CFD:
     ldh  a, [hActiveEntityType]                   ; $7CFD: $F0 $EB
-    cp   $04                                      ; $7CFF: $FE $04
+    cp   ENTITY_HOOKSHOT_HIT                      ; $7CFF: $FE $04
     jr   nz, jr_003_7D6B                          ; $7D01: $20 $68
 
     ld   a, [wIsIndoor]                           ; $7D03: $FA $A5 $DB

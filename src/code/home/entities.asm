@@ -357,7 +357,7 @@ label_3B23::
     jp   ReloadSavedBank
 
 label_3B2E::
-    callsb func_003_7CAB
+    callsb ApplySwordIntersectionWithObjects
     jp   ReloadSavedBank
 
 label_3B39::

@@ -4298,16 +4298,16 @@ GetObjectPhysicsFlagsAndRestoreBank3::
     ret
 
 LoadTilemap1E::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-    ld   hl, $6800
+    ld   hl, EndingTiles + $2800
     ld   de, vTiles2
     ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   hl, $7000
+    ld   hl, EndingTiles + $3000
     ld   de, vTiles1
     ld   bc, TILE_SIZE * $80
     jp   CopyData
@@ -4315,168 +4315,179 @@ LoadTilemap1E::
 LoadTilemap1F::
     call LoadTilemap15
     ld   de, vTiles0 + $400
-    ld   hl, $7600
+    ld   hl, EndingTiles + $3600
     ld   bc, TILE_SIZE * $10
     jp   CopyData
 
 LoadTilemap15::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-    ld   hl, $4000
+    ld   hl, EndingTiles
     ld   de, vTiles0
     ld   bc, TILE_SIZE * $180
     call CopyData
 
-    ld   a, $0C
+    ld   a, BANK(Overworld1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $57E0
-    ld   de, $97F0
+    ld   hl, Overworld1Tiles + $8E0 ; filler color
+    ld   de, vTiles2 + $7F0
     ld   bc, TILE_SIZE
     call CopyData
 
-    ld   a, $12
+    ld   a, BANK(Npc4Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $7500
+    ld   hl, Npc4Tiles + $100
     ld   de, vTiles0
     ld   bc, TILE_SIZE * 4
     call CopyData
 
-    ld   de, $8D00
-    ld   hl, $7500
-    ld   bc, $200
+    ld   de, vTiles1 + $500
+    ld   hl, Npc4Tiles + $100
+    ld   bc, TILE_SIZE * $20
     jp   CopyData
 
 LoadTilemap1D::
-    ld   a, $0C
+    ld   a, BANK(Overworld1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $5000
+    ld   hl, Overworld1Tiles + $100
     ld   de, vTiles2
     ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   a, $12
+    ld   a, BANK(Npc3Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $6000
+    ld   hl, Npc3Tiles + $2000
     ld   de, $8000
-    ld   bc, $800
+    ld   bc, TILE_SIZE * $80
     call CopyData
-    ld   a, $0F
+
+    ld   a, BANK(Overworld2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $6000
+    ld   hl, Overworld2Tiles + $400
     ld   de, $8800
-    ld   bc, $800
+    ld   bc, TILE_SIZE * $80
     jp   CopyData
 
 LoadTilemap18::
-    ld   hl, $4000
+    ld   hl, EndingTiles
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B01
-    ld   hl, $6800
-    ld   a, $35
+    ld   hl, ColorDungeonTiles + $2800
+    ld   a, BANK(ColorDungeonTiles)
     jr   label_2B06
 
 LoadTilemap17::
-    ld   hl, $4800
+    ld   hl, EndingTiles + $800
     jr   label_2B01
 
 LoadTilemap16::
-    ld   hl, $6000
+    ld   hl, EndingTiles + $2000
 
 label_2B01::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
 
 label_2B06::
     ld   [MBC3SelectBank], a
-    ld   de, $8000
-    ld   bc, $800
+    ld   de, vTiles0
+    ld   bc, TILE_SIZE * $80
     call CopyData
-    ld   a, $13
+
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $5800
-    ld   de, $8800
-    ld   bc, $1000
+    ld   hl, EndingTiles + $1800
+    ld   de, vTiles0 + TILE_SIZE * $80
+    ld   bc, TILE_SIZE * $100
     jp   CopyData
 
 LoadTilemap1B::
     call PlayAudioStep
-    ld   hl, $6800
-    ld   a, $10
-    call label_2B92
+
+    ld   hl, FontLargeTiles + $100
+    ld   a, BANK(FontLargeTiles)
+    call func_2B92
+
     call PlayAudioStep
-    ld   a, $12
+
+    ld   a, BANK(Npc3Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $6600
-    ld   de, $8000
-    ld   bc, $80
+    ld   hl, Npc3Tiles + $2600
+    ld   de, vTiles0
+    ld   bc, TILE_SIZE * $8
     call CopyData
+
     call PlayAudioStep
+
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_2B61
-    ld   a, $10
+    jr   nz, .cgbOnly
+
+.dmgOnly
+    ld   a, BANK(FontLargeTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $6900
-    ld   de, $8100
-    ld   bc, $700
+    ld   hl, FontLargeTiles + $200
+    ld   de, vTiles0 + $100
+    ld   bc, TILE_SIZE * $70
     jp   CopyData
 
-label_2B61::
-    ld   a, $38
+.cgbOnly
+    ld   a, BANK(CgbMiscTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $5000
-    ld   de, $8000
-    ld   bc, $800
+    ld   hl, CgbMiscTiles + $1000
+    ld   de, vTiles0
+    ld   bc, TILE_SIZE * $80
     jp   CopyData
 
 LoadTilemap1A::
-    ld   hl, $7800
+    ld   hl, EndingTiles + $3800
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B90
-    ld   hl, $7800
-    ld   a, $35
+    ld   hl, EndingCGBAltTiles
+    ld   a, BANK(EndingCGBAltTiles)
     jr   label_2B95
 
 LoadTilemap19::
-    ld   hl, $4800
+    ld   hl, EndingTiles + $800
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B90
-    ld   hl, $7000
-    ld   a, $35
+    ld   hl, ColorDungeonTiles + $3000
+    ld   a, BANK(ColorDungeonTiles)
     jr   label_2B95
 
 label_2B90::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
 
-label_2B92::
+func_2B92::
     call AdjustBankNumberForGBC
 
 label_2B95::
     ld   [MBC3SelectBank], a
-    ld   de, $8000
+    ld   de, vTiles0
     ld   bc, $800
     call CopyData
+
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   hl, $7000
-    ld   de, $8800
+    ld   de, vTiles1
     ld   bc, $800
     call CopyData
+
     ld   hl, $6800
-    ld   de, $9000
+    ld   de, vTiles2
     ld   bc, $800
     jp   CopyData
 

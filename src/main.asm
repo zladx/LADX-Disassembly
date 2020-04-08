@@ -118,7 +118,9 @@ incbin "gfx/menus/menu.dmg.2bpp"
 incbin "gfx/intro/title.dmg.2bpp"
 FontTiles::
 incbin "gfx/fonts/font.dmg.2bpp"
+CameraShopTiles::
 incbin "gfx/world/camera_shop.dmg.2bpp"
+Overworld2Tiles::
 incbin "gfx/world/overworld_2.dmg.2bpp"
 
 section "bank10",romx[$4000],bank[$10]
@@ -131,7 +133,9 @@ incbin "gfx/scenes/christine.dmg.2bpp"
 incbin "gfx/scenes/marin_beach.dmg.2bpp"
 MarinBeachWavesTiles::
 incbin "gfx/scenes/marin_beach_waves.dmg.2bpp"
+FontLargeTiles::
 incbin "gfx/fonts/font_large.dmg.2bpp"
+ReliefTiles::
 incbin "gfx/scenes/relief.dmg.2bpp"
 incbin "gfx/scenes/painting.dmg.2bpp"
 
@@ -142,8 +146,11 @@ incbin "gfx/characters/npc_2.dmg.2bpp"
 section "bank12",romx[$4000],bank[$12]
 Npc3Tiles::
 incbin "gfx/characters/npc_3.dmg.2bpp"
+NightmareTiles::
 incbin "gfx/characters/nightmare.dmg.2bpp"
+Npc4Tiles::
 incbin "gfx/characters/npc_4.dmg.2bpp"
+Items3Tiles::
 incbin "gfx/items/items_3.dmg.2bpp"
 DungeonMinimapTiles::
 incbin "gfx/items/minimap_dmg.2bpp"
@@ -348,6 +355,8 @@ incbin "gfx/menus/print.2bpp"
 section "bank35",romx[$4000],bank[$35]
 ColorDungeonTiles::
 incbin "gfx/world/color_dungeon.2bpp"
+EndingCGBAltTiles::
+incbin "gfx/ending/ending.cgb.alt.2bpp"
 
 section "bank36",romx[$4000],bank[$36]
 include "code/entities/bank36.asm"

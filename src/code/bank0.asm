@@ -400,7 +400,7 @@ CopyColorDungeonSymbols::
     push af
     ld   a, BANK(ColorDungeonTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $4F00
+    ld   hl, ColorDungeonTiles + $F00
     ld   de, $DCC0
     ld   bc, $20
     call CopyData
@@ -3126,7 +3126,7 @@ label_1E2B::
     jr   label_1EA7
 
 label_1E33::
-    ld   a, $11
+    ld   a, BANK(Npc2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   a, [$D000]
@@ -3138,10 +3138,10 @@ label_1E33::
     rl   d
     sla  e
     rl   d
-    ld   hl, $8D00
+    ld   hl, vTiles1 + $500
     add  hl, de
     push hl
-    ld   hl, $5000
+    ld   hl, Npc2Tiles + $1000
 
 label_1E55::
     add  hl, de
@@ -3156,7 +3156,7 @@ label_1E55::
     ret
 
 label_1E69::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   a, [$D000]
@@ -3168,10 +3168,10 @@ label_1E69::
     rl   d
     sla  e
     rl   d
-    ld   hl, $8D00
+    ld   hl, vTiles1 + $500
     add  hl, de
     push hl
-    ld   hl, $4D00
+    ld   hl, EndingTiles + $D00
     jr   label_1E55
 
 label_1E8D::
@@ -3185,7 +3185,7 @@ label_1E8D::
 
 label_1EA1::
     ld   hl, LinkCharacter2Tiles + $10E0
-    ld   de, $8CA0
+    ld   de, vTiles1 + $4A0
 
 label_1EA7::
     ld   a, BANK(LinkCharacter2Tiles)
@@ -3206,7 +3206,7 @@ label_1EBC::
 label_1EC1::
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   de, $9140
+    ld   de, vTiles2 + $140
     jp   label_1F38
 
 data_1ECD::
@@ -4021,7 +4021,7 @@ SetWorldMusicTrack::
 
 EnableExternalRAMWriting::
     push hl
-    ld   hl, $4000
+    ld   hl, MBC3SRamBank
     ld   [hl], $00 ; Switch to RAM bank 0
     ld   hl, $00
     ld   [hl], $0A ; Enable external RAM writing

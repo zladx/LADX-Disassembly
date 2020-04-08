@@ -149,6 +149,7 @@ DungeonMinimapTiles::
 incbin "gfx/items/minimap_dmg.2bpp"
 
 section "bank13",romx[$4000],bank[$13]
+EndingTiles::
 incbin "gfx/ending/ending.dmg.2bpp"
 
 section "bank14",romx[$4000],bank[$14]

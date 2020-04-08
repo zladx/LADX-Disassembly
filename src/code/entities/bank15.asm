@@ -6388,7 +6388,7 @@ Entity68Handler::
 
     ld   e, a                                     ; $7457: $5F
     ld   d, $01                                   ; $7458: $16 $01
-    call ReadValueFromBaseMap_trampoline          ; $745A: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $745A: $CD $26 $2A
     and  a                                        ; $745D: $A7
     jr   nz, jr_015_746A                          ; $745E: $20 $0A
 

@@ -2363,7 +2363,7 @@ CheckStaticSwordCollision::
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
-    call ReadValueFromBaseMap_trampoline
+    call GetObjectPhysicsFlags_trampoline
     pop  de
 
     cp   $D0
@@ -3390,7 +3390,7 @@ label_1F69::
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
-    call ReadValueFromBaseMap_trampoline
+    call GetObjectPhysicsFlags_trampoline
     ldh  [hScratch5], a
 
     ; If the object is $9A, skip this section
@@ -4266,11 +4266,13 @@ label_2A07::
     callsb label_5A59
     jp   ReloadSavedBank
 
-; Read an unknown value from the base map bank
+; Read the physics flags for a given static object.
 ; Inputs:
 ;   d    map group id
 ;   e    room object id
-ReadValueFromBaseMap::
+; Return:
+;   a    physics flags for the object
+GetObjectPhysicsFlags::
     ld   a, BANK(OverworldObjectPhysicFlags)
     ld   [MBC3SelectBank], a
     ld   hl, OverworldObjectPhysicFlags
@@ -4283,12 +4285,12 @@ ReadValueFromBaseMap::
     ld   a, [hl]
     ret
 
-ReadValueFromBaseMap_trampoline::
-    call ReadValueFromBaseMap
+GetObjectPhysicsFlags_trampoline::
+    call GetObjectPhysicsFlags
     jp   ReloadSavedBank
 
-ReadValueFromBaseMapAndRestoreBank3::
-    call ReadValueFromBaseMap
+GetObjectPhysicsFlagsAndRestoreBank3::
+    call GetObjectPhysicsFlags
     push af
     ld   a, $03
     ld   [MBC3SelectBank], a

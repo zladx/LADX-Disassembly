@@ -1747,7 +1747,7 @@ func_002_4D20::
     ld   e, a                                     ; $4D65: $5F
     ld   a, [wIsIndoor]                           ; $4D66: $FA $A5 $DB
     ld   d, a                                     ; $4D69: $57
-    call ReadValueFromBaseMap_trampoline          ; $4D6A: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $4D6A: $CD $26 $2A
     cp   $00                                      ; $4D6D: $FE $00
     jr   nz, label_002_4D95                       ; $4D6F: $20 $24
 
@@ -5562,7 +5562,7 @@ func_002_6C2F::
     ld   e, a                                     ; $6C57: $5F
     ld   a, [wIsIndoor]                           ; $6C58: $FA $A5 $DB
     ld   d, a                                     ; $6C5B: $57
-    call ReadValueFromBaseMap_trampoline          ; $6C5C: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $6C5C: $CD $26 $2A
     ldh  [hScratch1], a                           ; $6C5F: $E0 $D8
     cp   $60                                      ; $6C61: $FE $60
     jr   z, func_002_6C69                         ; $6C63: $28 $04
@@ -6153,7 +6153,7 @@ func_002_6F2C::
     ld   e, a                                     ; $6F58: $5F
     ld   a, [wIsIndoor]                           ; $6F59: $FA $A5 $DB
     ld   d, a                                     ; $6F5C: $57
-    call ReadValueFromBaseMap_trampoline          ; $6F5D: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $6F5D: $CD $26 $2A
     ldh  [hScratchD], a                           ; $6F60: $E0 $E4
     and  a                                        ; $6F62: $A7
     jp   z, label_002_7461                        ; $6F63: $CA $61 $74
@@ -7173,7 +7173,7 @@ func_002_755B::
     and  a                                        ; $756C: $A7
     jr   nz, jr_002_7582                          ; $756D: $20 $13
 
-    call ReadValueFromBaseMap_trampoline          ; $756F: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $756F: $CD $26 $2A
     ld   c, $02                                   ; $7572: $0E $02
     cp   $05                                      ; $7574: $FE $05
     jr   z, jr_002_7582                           ; $7576: $28 $0A
@@ -7262,7 +7262,7 @@ jr_002_75D9:
     jr   nc, func_002_75F5                        ; $75E5: $30 $0E
 
 jr_002_75E7:
-    call ReadValueFromBaseMap_trampoline          ; $75E7: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $75E7: $CD $26 $2A
     ld   [wLinkGroundVfx], a                      ; $75EA: $EA $81 $C1
     and  a                                        ; $75ED: $A7
     jp   z, label_002_77A2                        ; $75EE: $CA $A2 $77

@@ -5187,7 +5187,7 @@ func_003_6822::
 jr_003_6828:
     ld   a, [wIsIndoor]                           ; $6828: $FA $A5 $DB
     ld   d, a                                     ; $682B: $57
-    call ReadValueFromBaseMap_trampoline          ; $682C: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $682C: $CD $26 $2A
     sub  $99                                      ; $682F: $D6 $99
     jp   c, label_003_68E4                        ; $6831: $DA $E4 $68
 
@@ -8497,7 +8497,7 @@ jr_003_7B13:
     ld   e, a                                     ; $7B39: $5F
     ld   a, [wIsIndoor]                           ; $7B3A: $FA $A5 $DB
     ld   d, a                                     ; $7B3D: $57
-    call ReadValueFromBaseMapAndRestoreBank3      ; $7B3E: $CD $2C $2A
+    call GetObjectPhysicsFlagsAndRestoreBank3     ; $7B3E: $CD $2C $2A
     pop  de                                       ; $7B41: $D1
     ldh  [hScratch3], a                           ; $7B42: $E0 $DA
 
@@ -8892,7 +8892,7 @@ jr_003_7D6B:
     ld   e, a                                     ; $7D6C: $5F
     ld   a, [wIsIndoor]                           ; $7D6D: $FA $A5 $DB
     ld   d, a                                     ; $7D70: $57
-    call ReadValueFromBaseMapAndRestoreBank3      ; $7D71: $CD $2C $2A
+    call GetObjectPhysicsFlagsAndRestoreBank3     ; $7D71: $CD $2C $2A
     ldh  [hScratch1], a                           ; $7D74: $E0 $D8
     and  a                                        ; $7D76: $A7
     jp   z, jr_003_7E03                           ; $7D77: $CA $03 $7E
@@ -9040,7 +9040,7 @@ func_003_7E0E::
     ld   e, a                                     ; $7E3A: $5F
     ld   a, [wIsIndoor]                           ; $7E3B: $FA $A5 $DB
     ld   d, a                                     ; $7E3E: $57
-    call ReadValueFromBaseMapAndRestoreBank3      ; $7E3F: $CD $2C $2A
+    call GetObjectPhysicsFlagsAndRestoreBank3     ; $7E3F: $CD $2C $2A
     ldh  [hScratch3], a                           ; $7E42: $E0 $DA
     ret                                           ; $7E44: $C9
 

@@ -3120,10 +3120,10 @@ UpdateLinkWalkingAnimation::
 
 include "code/home/animated_tiles.asm"
 
-label_1E2B::
-    ld   hl, LinkCharacter2Tiles + $10C0
+ReplaceMagicPowderTilesByToadstool::
+    ld   hl, LinkCharacter2Tiles + $10C0 ; toadstool tiles
     ld   de, $88E0
-    jr   label_1EA7
+    jr   ReplaceTilesPairAndDrawLinkSprite
 
 label_1E33::
     ld   a, BANK(Npc2Tiles)
@@ -3181,18 +3181,25 @@ label_1E8D::
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   bc, $20
-    jp   label_1F3B
+    jp   CopyDataAndDrawLinkSprite
 
-label_1EA1::
+ReplaceSlimeKeyTilesByGoldenLeaf::
     ld   hl, LinkCharacter2Tiles + $10E0
     ld   de, vTiles1 + $4A0
+    ; fallthrough to ReplaceTilesPairAndDrawLinkSprite
 
-label_1EA7::
+; Replace two tiles in VRAM by the content at hl, then
+; draw link sprite.
+
+; Inputs:
+;   hl   tiles source address
+;   de   tiles destination in VRAM
+ReplaceTilesPairAndDrawLinkSprite::
     ld   a, BANK(LinkCharacter2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   bc, $20
-    jp   label_1F3B
+    ld   bc, TILE_SIZE * $2
+    jp   CopyDataAndDrawLinkSprite
 
 label_1EB5::
     ld   hl, DungeonMinimapTiles + $100
@@ -3287,13 +3294,13 @@ label_1F35::
 label_1F38::
     ld   bc, $40
 
-label_1F3B::
+CopyDataAndDrawLinkSprite::
     call CopyData
 
-label_1F3E::
+.drawLinkSprite
     xor  a
     ldh  [$FFA5], a
-    ld   a, $0C
+    ld   a, BANK(LinkCharacterTiles)
     ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
@@ -4555,7 +4562,6 @@ LoadDungeonTiles::
     ; Load floor tiles
     ;
 
-    ; Switch to bank $20
     ld   a, BANK(DungeonFloorTilesPointers)
     call SwitchBank
     ld   hl, DungeonFloorTilesPointers
@@ -4627,79 +4633,91 @@ LoadDungeonTiles::
     ld   bc, TILE_SIZE * $20
     call CopyData
 
-    ld   a, $0C
+    ld   a, BANK(Items1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $47C0
+    ld   hl, Items1Tiles + $3C0
     ld   de, $DCC0
-    ld   bc, $40
+    ld   bc, TILE_SIZE * $4
     call CopyData
 
     call func_2D50
-    ld   a, $20
+
+    ;
+    ; Load dungeon items tiles
+    ;
+
+    ld   a, BANK(DungeonItemsTilesPointers)
     ld   [MBC3SelectBank], a
     pop  de
-    ld   hl, $45CA
+    ld   hl, DungeonItemsTilesPointers
     add  hl, de
     ld   h, [hl]
     ld   l, $00
 
-    ld   a, $12
+    ld   a, BANK(DungeonItemsTiles)
     call SwitchAdjustedBank
 
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd2
-    ld   hl, $6100
-    ld   a, $35
+    ld   hl, ColorDungeonTiles + $2100 ; TODO: add a proper label
+    ld   a, BANK(ColorDungeonTiles)
     ld   [MBC3SelectBank], a
 .colorDungeonEnd2
 
-    ld   de, $8F00
-    ld   bc, $100
+    ld   de, vTiles1 + $700
+    ld   bc, TILE_SIZE * $10
     call CopyData
+
+    ;
+    ; Load inventory items tiles for dungeon
+    ;
+
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
-    ld   hl, $7D00
+    ld   hl, DungeonInventoryItemsTiles
+
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, .label_2CF5
+    jr   z, .caveBOrColorDungeon
     cp   MAP_CAVE_B
-    jr   c, .label_2CF5
-    ld   a, $0C
+    jr   c, .caveBOrColorDungeon
+    ld   a, BANK(DungeonKeysTiles)
     call SwitchAdjustedBank
-    ld   hl, $4C00
+    ld   hl, DungeonKeysTiles
+.caveBOrColorDungeon
 
-.label_2CF5
-    ld   de, $8C00
-    ld   bc, $300
+    ld   de, vTiles1 + $400
+    ld   bc, TILE_SIZE * $30
     call CopyData
 
-label_2CFE::
+.patchInventoryTiles
+
     ld   a, [wHasToadstool]
     and  a
-    jr   z, label_2D07
-    call label_1E2B
+    jr   z, .noToadstoolEnd
+    call ReplaceMagicPowderTilesByToadstool
+.noToadstoolEnd
 
-label_2D07::
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_2D17
+    jr   z, .jr_2D17
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, label_2D21
+    jr   z, .jr_2D21
     cp   MAP_CAVE_B
-    jr   c, label_2D21
+    jr   c, .jr_2D21
+.jr_2D17
 
-label_2D17::
-    ld   a, [$DB15]
-    cp   $06
-    jr   c, label_2D21
-    call label_1EA1
+    ld   a, [wGoldenLeavesCount]
+    cp   $06 ; slime key
+    jr   c, .jr_2D21
+    call ReplaceSlimeKeyTilesByGoldenLeaf
 
-label_2D21::
+.jr_2D21
     ld   a, [wTradeSequenceItem]
-    cp   $02
+    cp   TRADING_ITEM_RIBBON
     jr   c, .return
     ld   a, $0D
     ldh  [$FFA5], a
@@ -4720,7 +4738,7 @@ LoadTilemap5::
     ld   bc, $400
     call CopyData
     call func_2D50
-    jp   label_2CFE
+    jp   LoadDungeonTiles.patchInventoryTiles
 
 func_2D50::
     xor  a

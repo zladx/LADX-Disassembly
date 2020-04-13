@@ -155,9 +155,9 @@ AnimateTiles::
     cp   $08
     jp   z, label_1E69
     cp   $09
-    jp   z, label_1EA1
+    jp   z, ReplaceSlimeKeyTilesByGoldenLeaf
     cp   $0A
-    jp   z, label_1E2B
+    jp   z, ReplaceMagicPowderTilesByToadstool
     cp   $0B
     jp   z, label_1E8D
     cp   $0C
@@ -556,12 +556,12 @@ label_1DF5::
     ld   [MBC3SelectBank], a
     ld   de, vTiles0 + $400
     ld   bc, $40
-    jp   label_1F3B
+    jp   CopyDataAndDrawLinkSprite
 
 label_1E01::
     ld   a, [wTradeSequenceItem]
     cp   $02
-    jp  c, label_1F3E
+    jp  c, CopyDataAndDrawLinkSprite.drawLinkSprite
     sub  a, $02
     ld   d, a
     ld   e, $00
@@ -576,4 +576,4 @@ label_1E01::
     ld   a, BANK(Items1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    jp   label_1F3B
+    jp   CopyDataAndDrawLinkSprite

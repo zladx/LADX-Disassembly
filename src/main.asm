@@ -86,6 +86,8 @@ Items1Tiles::
 incbin "gfx/items/items_1.dmg.2bpp"
 Items2Tiles::
 incbin "gfx/items/items_2.dmg.2bpp"
+DungeonKeysTiles::
+incbin "gfx/items/dungeon_keys.dmg.2bpp"
 SirenInstrumentsTiles::
 incbin "gfx/items/instruments.dmg.2bpp"
 Overworld1Tiles::
@@ -193,8 +195,21 @@ NightmareTiles::
 incbin "gfx/characters/nightmare.dmg.2bpp"
 Npc4Tiles::
 incbin "gfx/characters/npc_4.dmg.2bpp"
-Items3Tiles::
-incbin "gfx/items/items_3.dmg.2bpp"
+DungeonItemsTiles::
+DungeonItemsATiles::
+incbin "gfx/items/dungeon_a.dmg.2bpp"
+DungeonItemsBTiles::
+incbin "gfx/items/dungeon_b.dmg.2bpp"
+DungeonItemsCTiles::
+incbin "gfx/items/dungeon_c.dmg.2bpp"
+DungeonItemsDTiles::
+incbin "gfx/items/dungeon_d.dmg.2bpp"
+HouseAItemsTiles::
+incbin "gfx/items/house_a.dmg.2bpp"
+HouseBItemsTiles::
+incbin "gfx/items/house_b.dmg.2bpp"
+DungeonInventoryItemsTiles::
+incbin "gfx/items/dungeon_items.dmg.2bpp"
 DungeonMinimapTiles::
 incbin "gfx/items/minimap_dmg.2bpp"
 
@@ -328,6 +343,7 @@ section "bank2C",romx[$4000],bank[$2C]
 incbin "gfx/characters/link_1.cgb.2bpp"
 incbin "gfx/items/items_1.cgb.2bpp"
 incbin "gfx/items/items_2.cgb.2bpp"
+incbin "gfx/items/dungeon_keys.cgb.2bpp"
 incbin "gfx/items/instruments.cgb.2bpp"
 incbin "gfx/world/overworld_1.cgb.2bpp"
 incbin "gfx/characters/link_2.cgb.2bpp"
@@ -386,7 +402,13 @@ section "bank32",romx[$4000],bank[$32]
 incbin "gfx/characters/npc_3.cgb.2bpp"
 incbin "gfx/characters/nightmare.cgb.2bpp"
 incbin "gfx/characters/npc_4.cgb.2bpp"
-incbin "gfx/items/items_3.cgb.2bpp"
+incbin "gfx/items/dungeon_a.cgb.2bpp"
+incbin "gfx/items/dungeon_b.cgb.2bpp"
+incbin "gfx/items/dungeon_c.cgb.2bpp"
+incbin "gfx/items/dungeon_d.cgb.2bpp"
+incbin "gfx/items/house_a.cgb.2bpp"
+incbin "gfx/items/house_b.cgb.2bpp"
+incbin "gfx/items/dungeon_items.cgb.2bpp"
 incbin "gfx/items/minimap_cgb.2bpp"
 
 section "bank33",romx[$4000],bank[$33]

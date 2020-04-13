@@ -131,41 +131,42 @@ DungeonWallsTilesPointers::
     db   HIGH(DungeonWallsCTiles)
     db   HIGH(DungeonWallsBTiles)
 
-; Specific Dungeon tiles when in color dungeon?
 ColorDungeonWallsTilesPointers::
-    db   HIGH($4A00)
-    db   HIGH($7900)
-    db   HIGH($7900)
-    db   HIGH($7700)
-    db   HIGH($7900)
-    db   HIGH($7900)
-    db   HIGH($7700)
-    db   HIGH($7800)
-    db   HIGH($7900)
-    db   HIGH($7900)
-    db   HIGH($6300)
-    db   HIGH($7A00)
-    db   HIGH($0000)
-    db   HIGH($0000)
-    db   HIGH($0000)
-    db   HIGH($7B00)
-    db   HIGH($7B00)
-    db   HIGH($7B00)
-    db   HIGH($7A00)
-    db   HIGH($7B00)
-    db   HIGH($7900)
-    db   HIGH($7C00)
-    db   HIGH($7A00)
-    db   HIGH($7700)
-    db   HIGH($0000)
-    db   HIGH($0000)
-    db   HIGH($0000)
-    db   HIGH($0000)
-    db   HIGH($0000)
-    db   HIGH($0000)
-    db   HIGH($7C00)
-    db   HIGH($7B00)
-    db   HIGH($7A00)
+    db   HIGH(DungeonWallsDTiles) ; actually color dungeon walls
+
+DungeonItemsTilesPointers::
+    db   HIGH(DungeonItemsCTiles)
+    db   HIGH(DungeonItemsCTiles)
+    db   HIGH(DungeonItemsATiles)
+    db   HIGH(DungeonItemsCTiles)
+    db   HIGH(DungeonItemsCTiles)
+    db   HIGH(DungeonItemsATiles)
+    db   HIGH(DungeonItemsBTiles)
+    db   HIGH(DungeonItemsCTiles)
+    db   HIGH(DungeonItemsCTiles)
+    db   HIGH(Npc3Tiles + $2300) ; TODO: add a proper label
+    db   HIGH(DungeonItemsDTiles)
+    db   $00
+    db   $00
+    db   $00
+    db   HIGH(HouseAItemsTiles)
+    db   HIGH(HouseAItemsTiles)
+    db   HIGH(HouseAItemsTiles)
+    db   HIGH(DungeonItemsDTiles)
+    db   HIGH(HouseAItemsTiles)
+    db   HIGH(DungeonItemsCTiles)
+    db   HIGH(HouseBItemsTiles)
+    db   HIGH(DungeonItemsDTiles)
+    db   HIGH(DungeonItemsATiles)
+    db   $00
+    db   $00
+    db   $00
+    db   $00
+    db   $00
+    db   $00
+    db   HIGH(HouseBItemsTiles)
+    db   HIGH(HouseAItemsTiles)
+    db   HIGH(DungeonItemsDTiles)
 
 ; Tuples of (address higher byte, bank index)
 data_020_45EA::

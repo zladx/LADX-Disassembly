@@ -3175,9 +3175,9 @@ label_1E69::
     jr   label_1E55
 
 label_1E8D::
-    ld   hl, Items2Tiles + $E0
+    ld   hl, InventoryEquipmentItemsTiles + $E0
     ld   de, $88E0
-    ld   a, BANK(Items2Tiles)
+    ld   a, BANK(InventoryEquipmentItemsTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   bc, $20
@@ -4517,10 +4517,10 @@ LoadBaseTiles::
     call CopyData
 
     ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
-    ld   a, BANK(Items2Tiles)
+    ld   a, BANK(InventoryEquipmentItemsTiles)
     call SwitchAdjustedBank
     ; Copy $1000 bytes from the items tile sheet to Tiles Map 1
-    ld   hl, Items2Tiles
+    ld   hl, InventoryEquipmentItemsTiles
     ld   de, vTiles1
     ld   bc, TILE_SIZE * $100
     call CopyData
@@ -4676,7 +4676,7 @@ LoadDungeonTiles::
 
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
-    ld   hl, DungeonInventoryItemsTiles
+    ld   hl, InventoryDungeonItemsTiles
 
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
@@ -4726,18 +4726,28 @@ LoadDungeonTiles::
     ret
 
 LoadTilemap5::
-    ld   a, $0C
+    ;
+    ; Load Overworld landscape
+    ;
+
+    ld   a, BANK(OverworldLandscapeTiles)
     call SwitchAdjustedBank
-    ld   hl, $5200
+    ld   hl, OverworldLandscapeTiles
     ld   de, vTiles2 + $200
-    ld   bc, $600
+    ld   bc, TILE_SIZE * $60
     call CopyData
-    ; Load keys tiles
-    ld   hl, $4C00
-    ld   de, $8C00
-    ld   bc, $400
+
+    ;
+    ; Load dungeon keys
+    ;
+
+    ld   hl, DungeonKeysTiles
+    ld   de, vTiles1 + $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
+
     call func_2D50
+
     jp   LoadDungeonTiles.patchInventoryTiles
 
 func_2D50::
@@ -4746,18 +4756,18 @@ func_2D50::
     ldh  [hAnimatedTilesDataOffset], a
     call AnimateTiles.jumpTable
 
-    ld   a, BANK(Items2Tiles)
+    ld   a, BANK(InventoryEquipmentItemsTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-    ld   hl, Items2Tiles
+    ld   hl, InventoryEquipmentItemsTiles
     ld   de, vTiles1
-    ld   bc, $800
+    ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   hl, $4200
+    ld   hl, LinkCharacterTiles + $200
     ld   de, vTiles0 + $200
-    ld   bc, $100
+    ld   bc, TILE_SIZE * $10
     call CopyData
     ret
 

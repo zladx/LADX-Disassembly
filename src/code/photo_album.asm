@@ -168,10 +168,10 @@ JumpTable_028_40FB:
     ld   de, vTiles2 + $7C0                     ; $4117: JumpTable_028_40FB $11 $C0 $97
     call CopyData_trampoline                    ; $411A: JumpTable_028_40FB $CD $5D $0B
 
-    ld   a, BANK(Items2Tiles)                   ; $411D: JumpTable_028_40FB $3E $0C
+    ld   a, BANK(InventoryEquipmentItemsTiles)                   ; $411D: JumpTable_028_40FB $3E $0C
     call AdjustBankNumberForGBC                 ; $411F: JumpTable_028_40FB $CD $0B $0B
     ld   bc, $300                               ; $4122: JumpTable_028_40FB $01 $00 $03
-    ld   hl, Items2Tiles + $200                 ; $4125: JumpTable_028_40FB $21 $00 $4A
+    ld   hl, InventoryEquipmentItemsTiles + $200                 ; $4125: JumpTable_028_40FB $21 $00 $4A
     ld   de, vTiles1 + $200                     ; $4128: JumpTable_028_40FB $11 $00 $8A
     call CopyData_trampoline                    ; $412B: JumpTable_028_40FB $CD $5D $0B
 

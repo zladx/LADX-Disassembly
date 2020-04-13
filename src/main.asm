@@ -84,7 +84,7 @@ LinkCharacterTiles::
 incbin "gfx/characters/link_1.dmg.2bpp"
 Items1Tiles::
 incbin "gfx/items/items_1.dmg.2bpp"
-Items2Tiles::
+InventoryEquipmentItemsTiles::
 incbin "gfx/items/items_2.dmg.2bpp"
 DungeonKeysTiles::
 incbin "gfx/items/dungeon_keys.dmg.2bpp"
@@ -92,6 +92,8 @@ SirenInstrumentsTiles::
 incbin "gfx/items/instruments.dmg.2bpp"
 Overworld1Tiles::
 incbin "gfx/world/overworld_1.dmg.2bpp"
+OverworldLandscapeTiles::
+incbin "gfx/world/overworld_landscape.dmg.2bpp"
 LinkCharacter2Tiles::
 incbin "gfx/characters/link_2.dmg.2bpp"
 PieceOfHeartMeterTiles::
@@ -208,7 +210,7 @@ HouseAItemsTiles::
 incbin "gfx/items/house_a.dmg.2bpp"
 HouseBItemsTiles::
 incbin "gfx/items/house_b.dmg.2bpp"
-DungeonInventoryItemsTiles::
+InventoryDungeonItemsTiles::
 incbin "gfx/items/dungeon_items.dmg.2bpp"
 DungeonMinimapTiles::
 incbin "gfx/items/minimap_dmg.2bpp"

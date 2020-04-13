@@ -63,21 +63,109 @@ GetBGCopyRequest::
     ld   d, a                                     ; $4587: $57
     ret                                           ; $4588: $C9
 
-; Pointers to data in bank 0D
-data_020_4589::
-    db   $4C, $62, $63, $66, $6B, $63, $65, $64  ; $4589 |Lbcfkced|
-    db   $60, $4C, $4D, $4C, $4C, $4C, $4E, $4E  ; $4591 |`LMLLLNN|
-    db   $4E, $4D, $4D, $4F, $61, $63, $63, $00  ; $4599 |NMMOacc.|
-    db   $00, $00, $00, $00, $00, $4E, $4E, $4D  ; $45A1 |.....NNM|
-    db   $40, $40, $6C, $40, $40, $6C, $40, $6E  ; $45A9 |@@l@@l@n|
-    db   $4A, $40, $46, $40, $40, $40, $48, $48  ; $45B1 |J@F@@@HH|
-    db   $48, $46, $48, $4A, $40, $46, $6C, $00  ; $45B9 |HFHJ@Fl.|
-    db   $00, $00, $00, $00, $00, $48, $48, $46  ; $45C1 |.....HHF|
-    db   $4A, $79, $79, $77, $79, $79, $77, $78  ; $45C9 |Jyywyywx|
-    db   $79, $79, $63, $7A, $00, $00, $00, $7B  ; $45D1 |yycz...{|
-    db   $7B, $7B, $7A, $7B, $79, $7C, $7A, $77  ; $45D9 |{{z{y|zw|
-    db   $00, $00, $00, $00, $00, $00, $7C, $7B  ; $45E1 |......|{|
-    db   $7A                                     ; $45E9 |^-^-b5b|
+DungeonFloorTilesPointers::
+    db   HIGH(DungeonFloorATiles)
+    db   HIGH(DungeonFloorGTiles)
+    db   HIGH(DungeonFloorHTiles)
+    db   HIGH(DungeonFloorKTiles)
+    db   HIGH(DungeonFloorLTiles)
+    db   HIGH(DungeonFloorHTiles)
+    db   HIGH(DungeonFloorJTiles)
+    db   HIGH(DungeonFloorITiles)
+    db   HIGH(DungeonFloorETiles)
+    db   HIGH(DungeonFloorATiles)
+    db   HIGH(DungeonFloorBTiles)
+    db   HIGH(DungeonFloorATiles)
+    db   HIGH(DungeonFloorATiles)
+    db   HIGH(DungeonFloorATiles)
+    db   HIGH(DungeonFloorCTiles)
+    db   HIGH(DungeonFloorCTiles)
+    db   HIGH(DungeonFloorCTiles)
+    db   HIGH(DungeonFloorBTiles)
+    db   HIGH(DungeonFloorBTiles)
+    db   HIGH(DungeonFloorDTiles)
+    db   HIGH(DungeonFloorFTiles)
+    db   HIGH(DungeonFloorHTiles)
+    db   HIGH(DungeonFloorHTiles)
+    db   $00
+    db   $00
+    db   $00
+    db   $00
+    db   $00
+    db   $00
+    db   HIGH(DungeonFloorCTiles)
+    db   HIGH(DungeonFloorCTiles)
+    db   HIGH(DungeonFloorBTiles)
+
+DungeonWallsTilesPointers::
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsETiles)
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsETiles)
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsFTiles)
+    db   HIGH(DungeonWallsDTiles)
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsBTiles)
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsCTiles)
+    db   HIGH(DungeonWallsCTiles)
+    db   HIGH(DungeonWallsCTiles)
+    db   HIGH(DungeonWallsBTiles)
+    db   HIGH(DungeonWallsCTiles)
+    db   HIGH(DungeonWallsDTiles)
+    db   HIGH(DungeonWallsATiles)
+    db   HIGH(DungeonWallsBTiles)
+    db   HIGH(DungeonWallsETiles)
+    db   $0000
+    db   $0000
+    db   $0000
+    db   $0000
+    db   $0000
+    db   $0000
+    db   HIGH(DungeonWallsCTiles)
+    db   HIGH(DungeonWallsCTiles)
+    db   HIGH(DungeonWallsBTiles)
+
+; Specific Dungeon tiles when in color dungeon?
+ColorDungeonWallsTilesPointers::
+    db   HIGH($4A00)
+    db   HIGH($7900)
+    db   HIGH($7900)
+    db   HIGH($7700)
+    db   HIGH($7900)
+    db   HIGH($7900)
+    db   HIGH($7700)
+    db   HIGH($7800)
+    db   HIGH($7900)
+    db   HIGH($7900)
+    db   HIGH($6300)
+    db   HIGH($7A00)
+    db   HIGH($0000)
+    db   HIGH($0000)
+    db   HIGH($0000)
+    db   HIGH($7B00)
+    db   HIGH($7B00)
+    db   HIGH($7B00)
+    db   HIGH($7A00)
+    db   HIGH($7B00)
+    db   HIGH($7900)
+    db   HIGH($7C00)
+    db   HIGH($7A00)
+    db   HIGH($7700)
+    db   HIGH($0000)
+    db   HIGH($0000)
+    db   HIGH($0000)
+    db   HIGH($0000)
+    db   HIGH($0000)
+    db   HIGH($0000)
+    db   HIGH($7C00)
+    db   HIGH($7B00)
+    db   HIGH($7A00)
 
 ; Tuples of (address higher byte, bank index)
 data_020_45EA::

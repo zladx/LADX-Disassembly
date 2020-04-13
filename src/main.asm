@@ -102,10 +102,53 @@ MinimapTiles::
 incbin "gfx/world/minimap.dmg.2bpp"
 
 section "bankOD",romx[$4000],bank[$0D]
+DungeonsTiles::
+DungeonWallsATiles::
+incbin "gfx/dungeons/walls_a.dmg.2bpp"
 Dungeons1Tiles::
-incbin "gfx/world/dungeons_1.dmg.2bpp"
+incbin "gfx/dungeons/doors.dmg.2bpp"
+DungeonWallsBTiles::
+incbin "gfx/dungeons/walls_b.dmg.2bpp"
+DungeonWallsCTiles::
+incbin "gfx/dungeons/walls_c.dmg.2bpp"
+DungeonWallsDTiles::
+incbin "gfx/dungeons/walls_d.dmg.2bpp"
+DungeonFloorATiles::
+incbin "gfx/dungeons/floor_a.dmg.2bpp"
+DungeonFloorBTiles::
+incbin "gfx/dungeons/floor_b.dmg.2bpp"
+DungeonFloorCTiles::
+incbin "gfx/dungeons/floor_c.dmg.2bpp"
+DungeonFloorDTiles::
+incbin "gfx/dungeons/floor_d.dmg.2bpp"
 Dungeons2Tiles::
-incbin "gfx/world/dungeons_2.dmg.2bpp"
+incbin "gfx/dungeons/dungeons_2.dmg.2bpp"
+DungeonFloorETiles::
+incbin "gfx/dungeons/floor_e.dmg.2bpp"
+DungeonFloorFTiles::
+incbin "gfx/dungeons/floor_f.dmg.2bpp"
+DungeonFloorGTiles::
+incbin "gfx/dungeons/floor_g.dmg.2bpp"
+DungeonFloorHTiles::
+incbin "gfx/dungeons/floor_h.dmg.2bpp"
+DungeonFloorITiles::
+incbin "gfx/dungeons/floor_i.dmg.2bpp"
+DungeonFloorJTiles::
+incbin "gfx/dungeons/floor_j.dmg.2bpp"
+DungeonFloorKTiles::
+incbin "gfx/dungeons/floor_k.dmg.2bpp"
+Dungeons3Tiles::
+incbin "gfx/dungeons/dungeons_3.dmg.2bpp"
+WindfishFloorTiles::
+incbin "gfx/dungeons/windfish_floor.dmg.2bpp"
+DungeonFloorLTiles::
+incbin "gfx/dungeons/floor_l.dmg.2bpp"
+DungeonWallsETiles::
+incbin "gfx/dungeons/walls_e.dmg.2bpp"
+DungeonWallsFTiles::
+incbin "gfx/dungeons/walls_f.dmg.2bpp"
+DungeonSideviewTiles::
+incbin "gfx/dungeons/sideview.dmg.2bpp"
 
 section "bankOE",romx[$4000],bank[$0E]
 NpcTilesDataStart::
@@ -295,7 +338,7 @@ incbin "gfx/world/minimap.cgb.2bpp"
 
 section "bank2D",romx[$4000],bank[$2D]
 DungeonsTilesCGB::
-incbin "gfx/world/dungeons.cgb.2bpp"
+incbin "gfx/dungeons/dungeons.cgb.2bpp"
 
 section "bank2E",romx[$4000],bank[$2E]
 incbin "gfx/characters/npc_1.cgb.2bpp"
@@ -354,7 +397,7 @@ incbin "gfx/menus/print.2bpp"
 
 section "bank35",romx[$4000],bank[$35]
 ColorDungeonTiles::
-incbin "gfx/world/color_dungeon.2bpp"
+incbin "gfx/dungeons/color_dungeon.2bpp"
 EndingCGBAltTiles::
 incbin "gfx/ending/ending.cgb.alt.2bpp"
 

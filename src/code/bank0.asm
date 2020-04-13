@@ -3200,8 +3200,8 @@ label_1EB5::
     jr   label_1EC1
 
 label_1EBC::
-    ld   hl, Dungeons1Tiles + $C40
-    ld   a, BANK(Dungeons1Tiles)
+    ld   hl, DungeonsTiles + $C40
+    ld   a, BANK(DungeonsTiles)
 
 label_1EC1::
     call AdjustBankNumberForGBC
@@ -4475,20 +4475,20 @@ func_2B92::
 label_2B95::
     ld   [MBC3SelectBank], a
     ld   de, vTiles0
-    ld   bc, $800
+    ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $7000
+    ld   hl, EndingTiles + $3000
     ld   de, vTiles1
-    ld   bc, $800
+    ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   hl, $6800
+    ld   hl, EndingTiles + $2800
     ld   de, vTiles2
-    ld   bc, $800
+    ld   bc, TILE_SIZE * $80
     jp   CopyData
 
 label_2BC1::
@@ -4506,7 +4506,7 @@ LoadBaseTiles::
     ; Copy $400 bytes from the link's tile sheet to Tiles map 0
     ld   hl, LinkCharacterTiles
     ld   de, vTiles0
-    ld   bc, $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
 
     ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
@@ -4515,16 +4515,16 @@ LoadBaseTiles::
     ; Copy $1000 bytes from the items tile sheet to Tiles Map 1
     ld   hl, Items2Tiles
     ld   de, vTiles1
-    ld   bc, $1000
+    ld   bc, TILE_SIZE * $100
     call CopyData
 
     ; Copy two tiles from the times tile sheet to a portion of Tiles Map 1
     ld   hl, Items1Tiles + $3A0
     ld   de, vTiles1 + $600
-    ld   bc, $20
+    ld   bc, TILE_SIZE * $2
     call CopyData
 
-    ; Swtich back to bank 1
+    ; Switch back to bank 1
     ld   a, $01
     call SwitchBank
     ret
@@ -4551,68 +4551,80 @@ LoadInventoryTiles::
     jp   CopyData ; tail-call
 
 LoadDungeonTiles::
+    ;
+    ; Load floor tiles
+    ;
+
     ; Switch to bank $20
-    ld   a, $20
+    ld   a, BANK(DungeonFloorTilesPointers)
     call SwitchBank
-    ld   hl, data_020_4589
-    ; e = [hMapId]
+    ld   hl, DungeonFloorTilesPointers
+
+    ; If inside the Color Dungeon…
     ldh  a, [hMapId]
     ld   e, a
     ld   d, $00
-    ; If inside the Color Dungeon…
     cp   MAP_COLOR_DUNGEON
     jr   nz, .notColorDungeon
-    ; … switch to bank $35
-    ld   a, $35
+    ld   a, BANK(ColorDungeonTiles)
     ld   [MBC3SelectBank], a
-    ; … and copy Color Dungeon tiles to Tiles Map 2
-    ld   hl, $6200
+    ld   hl, ColorDungeonTiles + $2200
     ld   de, vTiles2
-    ld   bc, $100
+    ld   bc, TILE_SIZE * $10
     call CopyData
 
     ld   e, $00
     ld   d, e
-    ld   hl, $6000
+    ld   hl, ColorDungeonTiles + $2000
     push de
     jr   .endIf
 
 .notColorDungeon
+    ; Read a data pointer from DungeonFloorTilesPointers
     push de
     add  hl, de
     ld   h, [hl]
     ld   l, $00
-    ld   a, $0D
+    ld   a, BANK(DungeonsTiles)
     call SwitchAdjustedBank
 .endIf
 
-    ld   de, $9100
-    ld   bc, $100
-    call CopyData
-    ld   a, $0D
-    call SwitchAdjustedBank
-    ld   hl, $4000
-    ld   de, $9200
-    ld   bc, $600
+    ld   de, vTiles2 + $100
+    ld   bc, TILE_SIZE * $10
     call CopyData
 
-    ld   a, $20
+    ;
+    ; Load dungeon doors, stairs and torches
+    ;
+
+    ld   a, BANK(DungeonsTiles)
+    call SwitchAdjustedBank
+    ld   hl, DungeonsTiles
+    ld   de, vTiles2 + $200
+    ld   bc, TILE_SIZE * $60
+    call CopyData
+
+    ;
+    ; Load dungeon walls
+    ;
+
+    ld   a, BANK(DungeonWallsTilesPointers)
     ld   [MBC3SelectBank], a
     pop  de
     push de
-    ld   hl, $45A9
+    ld   hl, DungeonWallsTilesPointers
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    ld   hl, $45C9
+    ld   hl, ColorDungeonWallsTilesPointers
 .colorDungeonEnd
 
     add  hl, de
     ld   h, [hl]
     ld   l, $00
     call ReloadSavedBank
-    ld   de, $9200
-    ld   bc, $200
+    ld   de, vTiles2 + $200
+    ld   bc, TILE_SIZE * $20
     call CopyData
 
     ld   a, $0C

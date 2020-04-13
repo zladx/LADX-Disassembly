@@ -5086,7 +5086,7 @@ func_018_6493::
     ld   e, a                                     ; $64BF: $5F
     ld   a, [wIsIndoor]                           ; $64C0: $FA $A5 $DB
     ld   d, a                                     ; $64C3: $57
-    call ReadValueFromBaseMap_trampoline          ; $64C4: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $64C4: $CD $26 $2A
     db   $E0                                      ; $64C7: $E0
 
 Data_018_64C8::

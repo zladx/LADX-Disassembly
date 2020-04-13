@@ -5187,7 +5187,7 @@ func_003_6822::
 jr_003_6828:
     ld   a, [wIsIndoor]                           ; $6828: $FA $A5 $DB
     ld   d, a                                     ; $682B: $57
-    call ReadValueFromBaseMap_trampoline          ; $682C: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $682C: $CD $26 $2A
     sub  $99                                      ; $682F: $D6 $99
     jp   c, label_003_68E4                        ; $6831: $DA $E4 $68
 
@@ -5544,7 +5544,7 @@ jr_003_6ADA:
     jr   nz, @+$6C                                ; $6AE0: $20 $6A
 
     call func_003_7F25                            ; $6AE2: $CD $25 $7F
-    call func_003_7CAB                            ; $6AE5: $CD $AB $7C
+    call ApplySwordIntersectionWithObjects        ; $6AE5: $CD $AB $7C
     ld   hl, wEntitiesCollisionsTable             ; $6AE8: $21 $A0 $C2
     add  hl, bc                                   ; $6AEB: $09
     ld   a, [hl]                                  ; $6AEC: $7E
@@ -8490,16 +8490,17 @@ jr_003_7B13:
     ; Entities special cases
     ;
 
-    cp   $20                                      ; $7B33: $FE $20
+    cp   OBJECT_LIFTABLE_ROCK ; or liftable pot   ; $7B33: $FE $20
     jp   z, label_003_7C7B                        ; $7B35: $CA $7B $7C
 
     push de                                       ; $7B38: $D5
     ld   e, a                                     ; $7B39: $5F
     ld   a, [wIsIndoor]                           ; $7B3A: $FA $A5 $DB
     ld   d, a                                     ; $7B3D: $57
-    call label_2A2C                               ; $7B3E: $CD $2C $2A
+    call GetObjectPhysicsFlagsAndRestoreBank3     ; $7B3E: $CD $2C $2A
     pop  de                                       ; $7B41: $D1
     ldh  [hScratch3], a                           ; $7B42: $E0 $DA
+
     ldh  a, [hActiveEntityType]                   ; $7B44: $F0 $EB
     cp   $CC                                      ; $7B46: $FE $CC
     jr   z, jr_003_7B4E                           ; $7B48: $28 $04
@@ -8722,6 +8723,7 @@ jr_003_7C75:
     cp   $60                                      ; $7C77: $FE $60
     jr   nz, hookshotEnd                          ; $7C79: $20 $16
 
+; liftable rock or pot
 label_003_7C7B:
     ldh  a, [hActiveEntityType]                   ; $7C7B: $F0 $EB
     cp   ENTITY_HOOKSHOT_CHAIN                    ; $7C7D: $FE $03
@@ -8763,7 +8765,7 @@ setCarryFlagAndReturn:
 Data_003_7CA9::
     db   $00, $02
 
-func_003_7CAB::
+ApplySwordIntersectionWithObjects::
     ld   de, $00                                  ; $7CAB: $11 $00 $00
     push bc                                       ; $7CAE: $C5
     ld   hl, wEntitiesPosXTable                   ; $7CAF: $21 $00 $C2
@@ -8792,10 +8794,10 @@ func_003_7CAB::
     pop  bc                                       ; $7CD6: $C1
     ld   a, [hl]                                  ; $7CD7: $7E
     ldh  [hObjectUnderEntity], a                  ; $7CD8: $E0 $AF
-    cp   $AC                                      ; $7CDA: $FE $AC
+    cp   OBJECT_TORCH_LIT                         ; $7CDA: $FE $AC
     jp   z, jr_003_7E03                           ; $7CDC: $CA $03 $7E
 
-    cp   $AB                                      ; $7CDF: $FE $AB
+    cp   OBJECT_TORCH_UNLIT                       ; $7CDF: $FE $AB
     jp   nz, jr_003_7D6B                          ; $7CE1: $C2 $6B $7D
 
     ldh  a, [hIsGBC]                              ; $7CE4: $F0 $FE
@@ -8816,7 +8818,7 @@ func_003_7CAB::
 
 jr_003_7CFD:
     ldh  a, [hActiveEntityType]                   ; $7CFD: $F0 $EB
-    cp   $04                                      ; $7CFF: $FE $04
+    cp   ENTITY_HOOKSHOT_HIT                      ; $7CFF: $FE $04
     jr   nz, jr_003_7D6B                          ; $7D01: $20 $68
 
     ld   a, [wIsIndoor]                           ; $7D03: $FA $A5 $DB
@@ -8890,7 +8892,7 @@ jr_003_7D6B:
     ld   e, a                                     ; $7D6C: $5F
     ld   a, [wIsIndoor]                           ; $7D6D: $FA $A5 $DB
     ld   d, a                                     ; $7D70: $57
-    call label_2A2C                               ; $7D71: $CD $2C $2A
+    call GetObjectPhysicsFlagsAndRestoreBank3     ; $7D71: $CD $2C $2A
     ldh  [hScratch1], a                           ; $7D74: $E0 $D8
     and  a                                        ; $7D76: $A7
     jp   z, jr_003_7E03                           ; $7D77: $CA $03 $7E
@@ -9038,7 +9040,7 @@ func_003_7E0E::
     ld   e, a                                     ; $7E3A: $5F
     ld   a, [wIsIndoor]                           ; $7E3B: $FA $A5 $DB
     ld   d, a                                     ; $7E3E: $57
-    call label_2A2C                               ; $7E3F: $CD $2C $2A
+    call GetObjectPhysicsFlagsAndRestoreBank3     ; $7E3F: $CD $2C $2A
     ldh  [hScratch3], a                           ; $7E42: $E0 $DA
     ret                                           ; $7E44: $C9
 

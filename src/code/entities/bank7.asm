@@ -2772,7 +2772,7 @@ jr_007_51F2:
     add  hl, de                                   ; $524C: $19
     ld   e, [hl]                                  ; $524D: $5E
     ld   d, $01                                   ; $524E: $16 $01
-    call ReadValueFromBaseMap_trampoline          ; $5250: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $5250: $CD $26 $2A
     cp   $0B                                      ; $5253: $FE $0B
     jr   z, jr_007_529F                           ; $5255: $28 $48
 
@@ -2808,7 +2808,7 @@ jr_007_5287:
     push hl                                       ; $5288: $E5
     ld   e, a                                     ; $5289: $5F
     ld   d, $01                                   ; $528A: $16 $01
-    call ReadValueFromBaseMap_trampoline          ; $528C: $CD $26 $2A
+    call GetObjectPhysicsFlags_trampoline         ; $528C: $CD $26 $2A
     pop  hl                                       ; $528F: $E1
     cp   $50                                      ; $5290: $FE $50
     jr   z, jr_007_529E                           ; $5292: $28 $0A

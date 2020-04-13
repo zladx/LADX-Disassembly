@@ -400,7 +400,7 @@ CopyColorDungeonSymbols::
     push af
     ld   a, BANK(ColorDungeonTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $4F00
+    ld   hl, ColorDungeonTiles + $F00
     ld   de, $DCC0
     ld   bc, $20
     call CopyData
@@ -1057,7 +1057,7 @@ LoadRoomSprites::
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
-    ld   hl, $70D3
+    ld   hl, data_020_70D3
     ld   a, [wIsIndoor]
     ld   d, a
     ldh  a, [hMapId]
@@ -1114,11 +1114,11 @@ LoadRoomSprites::
     jr   .return
 
 .label_DF1
-    ld   hl, $73F3
+    ld   hl, data_020_73F3
     ld   a, [wIsIndoor]
     and  a
     jr   z, .label_DFD
-    ld   hl, $763B
+    ld   hl, data_020_763B
 
 .label_DFD
     add  hl, de
@@ -2015,7 +2015,7 @@ ShootArrow::
     sub  a, $01
     daa
     ld   [wArrowCount], a
-    call label_157C
+    call func_157C
     ld   a, ENTITY_ARROW
     call SpawnPlayerProjectile
     ret  c
@@ -2249,7 +2249,7 @@ label_1535::
     ld   a, [hl]
     ldh  [hNoiseSfx], a
 
-    call label_157C
+    call func_157C
     ld   a, [$C146]
     and  a
     jr   nz, label_1562
@@ -2272,12 +2272,12 @@ label_1562::
     ld   [$C19B], a
     ret
 
-label_157C::
+func_157C::
     ldh  a, [hPressedButtonsMask]
-    and  $0F
+    and  J_RIGHT | J_LEFT | J_UP | J_DOWN
     ld   e, a
     ld   d, $00
-    ld   hl, $4905
+    ld   hl, Data_002_4905
     add  hl, de
     ld   a, [hl]
     cp   $0F
@@ -2363,7 +2363,7 @@ CheckStaticSwordCollision::
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
-    call ReadValueFromBaseMap_trampoline
+    call GetObjectPhysicsFlags_trampoline
     pop  de
 
     cp   $D0
@@ -2672,7 +2672,7 @@ ApplyLinkMotionState::
     ld   a, [wRoomTransitionState]
     or   [hl]
     jr   nz, .magicRodEnd
-    call label_157C
+    call func_157C
     ld   a, ENTITY_HOOKSHOT_HIT
     call SpawnPlayerProjectile
     jr   c, .magicRodEnd
@@ -3120,48 +3120,13 @@ UpdateLinkWalkingAnimation::
 
 include "code/home/animated_tiles.asm"
 
-label_1DE9::
-    ld   hl, $4F00
-    ld   a, $0E
-    jr   label_1DF5
-
-label_1DF0::
-    ld   a, $12
-    ld   hl, $6080
-
-label_1DF5::
-    ld   [MBC3SelectBank], a
-    ld   de, $8400
-    ld   bc, $40
-    jp   label_1F3B
-
-label_1E01::
-    ld   a, [wTradeSequenceItem]
-    cp   $02
-    jp  c, label_1F3E
-    sub  a, $02
-    ld   d, a
-    ld   e, $00
-    sra  d
-    rr   e
-    sra  d
-    rr   e
-    ld   hl, $4400
-    add  hl, de
-    ld   de, $89A0
-    ld   bc, $40
-    ld   a, $0C
-    call AdjustBankNumberForGBC
-    ld   [MBC3SelectBank], a
-    jp   label_1F3B
-
-label_1E2B::
-    ld   hl, $68C0
+ReplaceMagicPowderTilesByToadstool::
+    ld   hl, LinkCharacter2Tiles + $10C0 ; toadstool tiles
     ld   de, $88E0
-    jr   label_1EA7
+    jr   ReplaceTilesPairAndDrawLinkSprite
 
 label_1E33::
-    ld   a, $11
+    ld   a, BANK(Npc2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   a, [$D000]
@@ -3173,10 +3138,10 @@ label_1E33::
     rl   d
     sla  e
     rl   d
-    ld   hl, $8D00
+    ld   hl, vTiles1 + $500
     add  hl, de
     push hl
-    ld   hl, $5000
+    ld   hl, Npc2Tiles + $1000
 
 label_1E55::
     add  hl, de
@@ -3191,7 +3156,7 @@ label_1E55::
     ret
 
 label_1E69::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   a, [$D000]
@@ -3203,45 +3168,52 @@ label_1E69::
     rl   d
     sla  e
     rl   d
-    ld   hl, $8D00
+    ld   hl, vTiles1 + $500
     add  hl, de
     push hl
-    ld   hl, $4D00
+    ld   hl, EndingTiles + $D00
     jr   label_1E55
 
 label_1E8D::
-    ld   hl, $48E0
+    ld   hl, InventoryEquipmentItemsTiles + $E0
     ld   de, $88E0
-    ld   a, $0C
+    ld   a, BANK(InventoryEquipmentItemsTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ld   bc, $20
-    jp   label_1F3B
+    jp   CopyDataAndDrawLinkSprite
 
-label_1EA1::
-    ld   hl, $68E0
-    ld   de, $8CA0
+ReplaceSlimeKeyTilesByGoldenLeaf::
+    ld   hl, LinkCharacter2Tiles + $10E0
+    ld   de, vTiles1 + $4A0
+    ; fallthrough to ReplaceTilesPairAndDrawLinkSprite
 
-label_1EA7::
-    ld   a, $0C
+; Replace two tiles in VRAM by the content at hl, then
+; draw link sprite.
+
+; Inputs:
+;   hl   tiles source address
+;   de   tiles destination in VRAM
+ReplaceTilesPairAndDrawLinkSprite::
+    ld   a, BANK(LinkCharacter2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   bc, $20
-    jp   label_1F3B
+    ld   bc, TILE_SIZE * $2
+    jp   CopyDataAndDrawLinkSprite
 
 label_1EB5::
-    ld   hl, $7F00
-    ld   a, $12
+    ld   hl, DungeonMinimapTiles + $100
+    ld   a, BANK(DungeonMinimapTiles)
     jr   label_1EC1
 
 label_1EBC::
-    ld   hl, $4C40
-    ld   a, $0D
+    ld   hl, DungeonsTiles + $C40
+    ld   a, BANK(DungeonsTiles)
 
 label_1EC1::
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   de, $9140
+    ld   de, vTiles2 + $140
     jp   label_1F38
 
 data_1ECD::
@@ -3322,13 +3294,13 @@ label_1F35::
 label_1F38::
     ld   bc, $40
 
-label_1F3B::
+CopyDataAndDrawLinkSprite::
     call CopyData
 
-label_1F3E::
+.drawLinkSprite
     xor  a
     ldh  [$FFA5], a
-    ld   a, $0C
+    ld   a, BANK(LinkCharacterTiles)
     ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
@@ -3425,7 +3397,7 @@ label_1F69::
     ld   e, a
     ld   a, [wIsIndoor]
     ld   d, a
-    call ReadValueFromBaseMap_trampoline
+    call GetObjectPhysicsFlags_trampoline
     ldh  [hScratch5], a
 
     ; If the object is $9A, skip this section
@@ -4056,7 +4028,7 @@ SetWorldMusicTrack::
 
 EnableExternalRAMWriting::
     push hl
-    ld   hl, $4000
+    ld   hl, MBC3SRamBank
     ld   [hl], $00 ; Switch to RAM bank 0
     ld   hl, $00
     ld   [hl], $0A ; Enable external RAM writing
@@ -4298,31 +4270,34 @@ PlayBoomerangSfx_trampoline::
     ret
 
 label_2A07::
-    ld   a, $01
-    ld   [MBC3SelectBank], a
-    call label_5A59
+    callsb label_5A59
     jp   ReloadSavedBank
 
-; Read an unknown value from the base map bank
-ReadValueFromBaseMap::
-    ld   a, $08
+; Read the physics flags for a given static object.
+; Inputs:
+;   d    map group id
+;   e    room object id
+; Return:
+;   a    physics flags for the object
+GetObjectPhysicsFlags::
+    ld   a, BANK(OverworldObjectPhysicFlags)
     ld   [MBC3SelectBank], a
-    ld   hl, $4AD4
+    ld   hl, OverworldObjectPhysicFlags
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    ld   hl, $4BD4
+    ld   hl, Indoors1ObjectPhysicFlags
 .colorDungeonEnd
     add  hl, de
     ld   a, [hl]
     ret
 
-ReadValueFromBaseMap_trampoline::
-    call ReadValueFromBaseMap
+GetObjectPhysicsFlags_trampoline::
+    call GetObjectPhysicsFlags
     jp   ReloadSavedBank
 
-label_2A2C::
-    call ReadValueFromBaseMap
+GetObjectPhysicsFlagsAndRestoreBank3::
+    call GetObjectPhysicsFlags
     push af
     ld   a, $03
     ld   [MBC3SelectBank], a
@@ -4330,16 +4305,16 @@ label_2A2C::
     ret
 
 LoadTilemap1E::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-    ld   hl, $6800
+    ld   hl, EndingTiles + $2800
     ld   de, vTiles2
     ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   hl, $7000
+    ld   hl, EndingTiles + $3000
     ld   de, vTiles1
     ld   bc, TILE_SIZE * $80
     jp   CopyData
@@ -4347,169 +4322,180 @@ LoadTilemap1E::
 LoadTilemap1F::
     call LoadTilemap15
     ld   de, vTiles0 + $400
-    ld   hl, $7600
+    ld   hl, EndingTiles + $3600
     ld   bc, TILE_SIZE * $10
     jp   CopyData
 
 LoadTilemap15::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-    ld   hl, $4000
+    ld   hl, EndingTiles
     ld   de, vTiles0
     ld   bc, TILE_SIZE * $180
     call CopyData
 
-    ld   a, $0C
+    ld   a, BANK(Overworld1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $57E0
-    ld   de, $97F0
+    ld   hl, Overworld1Tiles + $8E0 ; filler color
+    ld   de, vTiles2 + $7F0
     ld   bc, TILE_SIZE
     call CopyData
 
-    ld   a, $12
+    ld   a, BANK(Npc4Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $7500
+    ld   hl, Npc4Tiles + $100
     ld   de, vTiles0
     ld   bc, TILE_SIZE * 4
     call CopyData
 
-    ld   de, $8D00
-    ld   hl, $7500
-    ld   bc, $200
+    ld   de, vTiles1 + $500
+    ld   hl, Npc4Tiles + $100
+    ld   bc, TILE_SIZE * $20
     jp   CopyData
 
 LoadTilemap1D::
-    ld   a, $0C
+    ld   a, BANK(Overworld1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $5000
+    ld   hl, Overworld1Tiles + $100
     ld   de, vTiles2
     ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   a, $12
+    ld   a, BANK(Npc3Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $6000
+    ld   hl, Npc3Tiles + $2000
     ld   de, $8000
-    ld   bc, $800
+    ld   bc, TILE_SIZE * $80
     call CopyData
-    ld   a, $0F
+
+    ld   a, BANK(Overworld2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $6000
+    ld   hl, Overworld2Tiles + $400
     ld   de, $8800
-    ld   bc, $800
+    ld   bc, TILE_SIZE * $80
     jp   CopyData
 
 LoadTilemap18::
-    ld   hl, $4000
+    ld   hl, EndingTiles
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B01
-    ld   hl, $6800
-    ld   a, $35
+    ld   hl, ColorDungeonTiles + $2800
+    ld   a, BANK(ColorDungeonTiles)
     jr   label_2B06
 
 LoadTilemap17::
-    ld   hl, $4800
+    ld   hl, EndingTiles + $800
     jr   label_2B01
 
 LoadTilemap16::
-    ld   hl, $6000
+    ld   hl, EndingTiles + $2000
 
 label_2B01::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
 
 label_2B06::
     ld   [MBC3SelectBank], a
-    ld   de, $8000
-    ld   bc, $800
+    ld   de, vTiles0
+    ld   bc, TILE_SIZE * $80
     call CopyData
-    ld   a, $13
+
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $5800
-    ld   de, $8800
-    ld   bc, $1000
+    ld   hl, EndingTiles + $1800
+    ld   de, vTiles0 + TILE_SIZE * $80
+    ld   bc, TILE_SIZE * $100
     jp   CopyData
 
 LoadTilemap1B::
     call PlayAudioStep
-    ld   hl, $6800
-    ld   a, $10
-    call label_2B92
+
+    ld   hl, FontLargeTiles + $100
+    ld   a, BANK(FontLargeTiles)
+    call func_2B92
+
     call PlayAudioStep
-    ld   a, $12
+
+    ld   a, BANK(Npc3Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $6600
-    ld   de, $8000
-    ld   bc, $80
+    ld   hl, Npc3Tiles + $2600
+    ld   de, vTiles0
+    ld   bc, TILE_SIZE * $8
     call CopyData
+
     call PlayAudioStep
+
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_2B61
-    ld   a, $10
+    jr   nz, .cgbOnly
+
+.dmgOnly
+    ld   a, BANK(FontLargeTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $6900
-    ld   de, $8100
-    ld   bc, $700
+    ld   hl, FontLargeTiles + $200
+    ld   de, vTiles0 + $100
+    ld   bc, TILE_SIZE * $70
     jp   CopyData
 
-label_2B61::
-    ld   a, $38
+.cgbOnly
+    ld   a, BANK(CgbMiscTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $5000
-    ld   de, $8000
-    ld   bc, $800
+    ld   hl, CgbMiscTiles + $1000
+    ld   de, vTiles0
+    ld   bc, TILE_SIZE * $80
     jp   CopyData
 
 LoadTilemap1A::
-    ld   hl, $7800
+    ld   hl, EndingTiles + $3800
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B90
-    ld   hl, $7800
-    ld   a, $35
+    ld   hl, EndingCGBAltTiles
+    ld   a, BANK(EndingCGBAltTiles)
     jr   label_2B95
 
 LoadTilemap19::
-    ld   hl, $4800
+    ld   hl, EndingTiles + $800
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B90
-    ld   hl, $7000
-    ld   a, $35
+    ld   hl, ColorDungeonTiles + $3000
+    ld   a, BANK(ColorDungeonTiles)
     jr   label_2B95
 
 label_2B90::
-    ld   a, $13
+    ld   a, BANK(EndingTiles)
 
-label_2B92::
+func_2B92::
     call AdjustBankNumberForGBC
 
 label_2B95::
     ld   [MBC3SelectBank], a
-    ld   de, $8000
-    ld   bc, $800
+    ld   de, vTiles0
+    ld   bc, TILE_SIZE * $80
     call CopyData
-    ld   a, $13
+
+    ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $7000
-    ld   de, $8800
-    ld   bc, $800
+    ld   hl, EndingTiles + $3000
+    ld   de, vTiles1
+    ld   bc, TILE_SIZE * $80
     call CopyData
-    ld   hl, $6800
-    ld   de, $9000
-    ld   bc, $800
+
+    ld   hl, EndingTiles + $2800
+    ld   de, vTiles2
+    ld   bc, TILE_SIZE * $80
     jp   CopyData
 
 label_2BC1::
@@ -4527,25 +4513,25 @@ LoadBaseTiles::
     ; Copy $400 bytes from the link's tile sheet to Tiles map 0
     ld   hl, LinkCharacterTiles
     ld   de, vTiles0
-    ld   bc, $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
 
     ; Select the tiles sheet bank ($0C on DMG, $2C on GBC)
-    ld   a, BANK(Items2Tiles)
+    ld   a, BANK(InventoryEquipmentItemsTiles)
     call SwitchAdjustedBank
     ; Copy $1000 bytes from the items tile sheet to Tiles Map 1
-    ld   hl, Items2Tiles
+    ld   hl, InventoryEquipmentItemsTiles
     ld   de, vTiles1
-    ld   bc, $1000
+    ld   bc, TILE_SIZE * $100
     call CopyData
 
     ; Copy two tiles from the times tile sheet to a portion of Tiles Map 1
     ld   hl, Items1Tiles + $3A0
     ld   de, vTiles1 + $600
-    ld   bc, $20
+    ld   bc, TILE_SIZE * $2
     call CopyData
 
-    ; Swtich back to bank 1
+    ; Switch back to bank 1
     ld   a, $01
     call SwitchBank
     ret
@@ -4572,143 +4558,166 @@ LoadInventoryTiles::
     jp   CopyData ; tail-call
 
 LoadDungeonTiles::
-    ; Switch to bank $20
-    ld   a, $20
+    ;
+    ; Load floor tiles
+    ;
+
+    ld   a, BANK(DungeonFloorTilesPointers)
     call SwitchBank
-    ld   hl, data_020_4589
-    ; e = [hMapId]
+    ld   hl, DungeonFloorTilesPointers
+
+    ; If inside the Color Dungeon…
     ldh  a, [hMapId]
     ld   e, a
     ld   d, $00
-    ; If inside the Color Dungeon…
     cp   MAP_COLOR_DUNGEON
     jr   nz, .notColorDungeon
-    ; … switch to bank $35
-    ld   a, $35
+    ld   a, BANK(ColorDungeonTiles)
     ld   [MBC3SelectBank], a
-    ; … and copy Color Dungeon tiles to Tiles Map 2
-    ld   hl, $6200
+    ld   hl, ColorDungeonTiles + $2200
     ld   de, vTiles2
-    ld   bc, $100
+    ld   bc, TILE_SIZE * $10
     call CopyData
 
     ld   e, $00
     ld   d, e
-    ld   hl, $6000
+    ld   hl, ColorDungeonTiles + $2000
     push de
     jr   .endIf
 
 .notColorDungeon
+    ; Read a data pointer from DungeonFloorTilesPointers
     push de
     add  hl, de
     ld   h, [hl]
     ld   l, $00
-    ld   a, $0D
+    ld   a, BANK(DungeonsTiles)
     call SwitchAdjustedBank
 .endIf
 
-    ld   de, $9100
-    ld   bc, $100
-    call CopyData
-    ld   a, $0D
-    call SwitchAdjustedBank
-    ld   hl, $4000
-    ld   de, $9200
-    ld   bc, $600
+    ld   de, vTiles2 + $100
+    ld   bc, TILE_SIZE * $10
     call CopyData
 
-    ld   a, $20
+    ;
+    ; Load dungeon doors, stairs and torches
+    ;
+
+    ld   a, BANK(DungeonsTiles)
+    call SwitchAdjustedBank
+    ld   hl, DungeonsTiles
+    ld   de, vTiles2 + $200
+    ld   bc, TILE_SIZE * $60
+    call CopyData
+
+    ;
+    ; Load dungeon walls
+    ;
+
+    ld   a, BANK(DungeonWallsTilesPointers)
     ld   [MBC3SelectBank], a
     pop  de
     push de
-    ld   hl, $45A9
+    ld   hl, DungeonWallsTilesPointers
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
-    ld   hl, $45C9
+    ld   hl, ColorDungeonWallsTilesPointers
 .colorDungeonEnd
 
     add  hl, de
     ld   h, [hl]
     ld   l, $00
     call ReloadSavedBank
-    ld   de, $9200
-    ld   bc, $200
+    ld   de, vTiles2 + $200
+    ld   bc, TILE_SIZE * $20
     call CopyData
 
-    ld   a, $0C
+    ld   a, BANK(Items1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $47C0
+    ld   hl, Items1Tiles + $3C0
     ld   de, $DCC0
-    ld   bc, $40
+    ld   bc, TILE_SIZE * $4
     call CopyData
 
     call func_2D50
-    ld   a, $20
+
+    ;
+    ; Load dungeon items tiles
+    ;
+
+    ld   a, BANK(DungeonItemsTilesPointers)
     ld   [MBC3SelectBank], a
     pop  de
-    ld   hl, $45CA
+    ld   hl, DungeonItemsTilesPointers
     add  hl, de
     ld   h, [hl]
     ld   l, $00
 
-    ld   a, $12
+    ld   a, BANK(DungeonItemsTiles)
     call SwitchAdjustedBank
 
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd2
-    ld   hl, $6100
-    ld   a, $35
+    ld   hl, ColorDungeonTiles + $2100 ; TODO: add a proper label
+    ld   a, BANK(ColorDungeonTiles)
     ld   [MBC3SelectBank], a
 .colorDungeonEnd2
 
-    ld   de, $8F00
-    ld   bc, $100
+    ld   de, vTiles1 + $700
+    ld   bc, TILE_SIZE * $10
     call CopyData
+
+    ;
+    ; Load inventory items tiles for dungeon
+    ;
+
     ld   a, [wCurrentBank]
     ld   [MBC3SelectBank], a
-    ld   hl, $7D00
+    ld   hl, InventoryDungeonItemsTiles
+
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, .label_2CF5
+    jr   z, .caveBOrColorDungeon
     cp   MAP_CAVE_B
-    jr   c, .label_2CF5
-    ld   a, $0C
+    jr   c, .caveBOrColorDungeon
+    ld   a, BANK(DungeonKeysTiles)
     call SwitchAdjustedBank
-    ld   hl, $4C00
+    ld   hl, DungeonKeysTiles
+.caveBOrColorDungeon
 
-.label_2CF5
-    ld   de, $8C00
-    ld   bc, $300
+    ld   de, vTiles1 + $400
+    ld   bc, TILE_SIZE * $30
     call CopyData
 
-label_2CFE::
+.patchInventoryTiles
+
     ld   a, [wHasToadstool]
     and  a
-    jr   z, label_2D07
-    call label_1E2B
+    jr   z, .noToadstoolEnd
+    call ReplaceMagicPowderTilesByToadstool
+.noToadstoolEnd
 
-label_2D07::
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_2D17
+    jr   z, .jr_2D17
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, label_2D21
+    jr   z, .jr_2D21
     cp   MAP_CAVE_B
-    jr   c, label_2D21
+    jr   c, .jr_2D21
+.jr_2D17
 
-label_2D17::
-    ld   a, [$DB15]
-    cp   $06
-    jr   c, label_2D21
-    call label_1EA1
+    ld   a, [wGoldenLeavesCount]
+    cp   $06 ; slime key
+    jr   c, .jr_2D21
+    call ReplaceSlimeKeyTilesByGoldenLeaf
 
-label_2D21::
+.jr_2D21
     ld   a, [wTradeSequenceItem]
-    cp   $02
+    cp   TRADING_ITEM_RIBBON
     jr   c, .return
     ld   a, $0D
     ldh  [$FFA5], a
@@ -4717,19 +4726,29 @@ label_2D21::
     ret
 
 LoadTilemap5::
-    ld   a, $0C
+    ;
+    ; Load Overworld landscape
+    ;
+
+    ld   a, BANK(OverworldLandscapeTiles)
     call SwitchAdjustedBank
-    ld   hl, $5200
+    ld   hl, OverworldLandscapeTiles
     ld   de, vTiles2 + $200
-    ld   bc, $600
+    ld   bc, TILE_SIZE * $60
     call CopyData
-    ; Load keys tiles
-    ld   hl, $4C00
-    ld   de, $8C00
-    ld   bc, $400
+
+    ;
+    ; Load dungeon keys
+    ;
+
+    ld   hl, DungeonKeysTiles
+    ld   de, vTiles1 + $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
+
     call func_2D50
-    jp   label_2CFE
+
+    jp   LoadDungeonTiles.patchInventoryTiles
 
 func_2D50::
     xor  a
@@ -4737,18 +4756,18 @@ func_2D50::
     ldh  [hAnimatedTilesDataOffset], a
     call AnimateTiles.jumpTable
 
-    ld   a, BANK(Items2Tiles)
+    ld   a, BANK(InventoryEquipmentItemsTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-    ld   hl, Items2Tiles
+    ld   hl, InventoryEquipmentItemsTiles
     ld   de, vTiles1
-    ld   bc, $800
+    ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   hl, $4200
+    ld   hl, LinkCharacterTiles + $200
     ld   de, vTiles0 + $200
-    ld   bc, $100
+    ld   bc, TILE_SIZE * $10
     call CopyData
     ret
 

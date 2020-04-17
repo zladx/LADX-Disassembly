@@ -162,6 +162,7 @@ incbin "gfx/characters/npc_1.dmg.2bpp"
 section "bankOF",romx[$4000],bank[$0F]
 MenuTiles::
 incbin "gfx/menus/menu.dmg.2bpp"
+TitleLogoTitles::
 incbin "gfx/intro/title.dmg.2bpp"
 FontTiles::
 incbin "gfx/fonts/font.dmg.2bpp"
@@ -421,6 +422,11 @@ include "code/photos.asm"
 section "bank38",romx[$4000],bank[$38]
 CgbMiscTiles::
 incbin "gfx/cgb_misc.2bpp"
+TitleDXTiles::
+TitleDXTilesDMG::
+incbin "gfx/intro/title_dx.dmg.2bpp"
+TitleDXTilesCGB::
+incbin "gfx/intro/title_dx.cgb.2bpp"
 PhotoElementsTiles::
 incbin "gfx/photos/photo_elements_4.2bpp"
 include "code/photos_animations.asm"

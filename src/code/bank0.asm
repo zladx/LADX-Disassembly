@@ -4796,27 +4796,32 @@ LoadIntroSequenceTiles::
     jp   CopyData
 
 LoadTilemap11::
-    ld   a, $0F
+    ; Load title logo
+    ld   a, BANK(TitleLogoTitles)
     call SwitchAdjustedBank
-    ld   hl, $4900
-    ld   de, $8800
-    ld   bc, $700
+    ld   hl, TitleLogoTitles
+    ld   de, vTiles1
+    ld   bc, TILE_SIZE * $70
     call CopyData
-    ld   a, $38
+
+    ; Load tiles for large "DX" text
+    ld   a, BANK(TitleDXTiles)
     call SwitchBank
 
     ldh  a, [hIsGBC]
     and  a
     jr   nz, .else
-    ld   hl, $5C00
+    ld   hl, TitleDXTilesCGB
     jr   .endIf
 .else
-    ld   hl, $5800
+    ld   hl, TitleDXTilesDMG
 .endIf
 
-    ld   de, $8400
-    ld   bc, $400
+    ld   de, vTiles0 + $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
+
+    ;
     ldh  a, [hIsGBC]
     and  a
     jr   nz, .label_2DDD

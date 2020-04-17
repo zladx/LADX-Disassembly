@@ -4773,30 +4773,27 @@ func_2D50::
 
 ; Load Map n°10 (introduction sequence)
 LoadIntroSequenceTiles::
-    ; Copy $80 bytes of map tiles from 01:6D4A to Tiles Memory
-    ; (rain graphics)
-    ld   a, $01
+    ; Load rain tiles
+    ld   a, BANK(IntroRainTiles)
     call SwitchBank
-    ld   hl, $6D4A
+    ld   hl, IntroRainTiles
     ld   de, vTiles0 + $700
-    ld   bc, $80
+    ld   bc, TILE_SIZE * $8
     call CopyData
 
-    ; Copy $600 bytes of map tiles from 10:5400 to Tiles Memory
-    ; (some intro sequence graphics)
-    ld   a, $10
+    ; Load intro sequence misc tiles
+    ld   a, BANK(IntroTiles)
     call SwitchAdjustedBank
-    ld   hl, $5400
+    ld   hl, Intro3Tiles
     ld   de, vTiles0
-    ld   bc, $600
+    ld   bc, TILE_SIZE * $60
     call CopyData
 
-    ; Copy $1000 bytes of map tiles from 10:4000 to Tiles Memory
-    ; (intro sequence graphics)
-    ld   hl, $4000
+    ; Load intro sequence misc tiles
+    ld   hl, Intro1Tiles
     ld   de, vTiles1
-    ld   bc, $1000
-    jp   CopyData ; tail-call ; will return afterwards.
+    ld   bc, TILE_SIZE * $100
+    jp   CopyData
 
 LoadTilemap11::
     ld   a, $0F

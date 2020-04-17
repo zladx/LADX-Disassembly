@@ -171,12 +171,16 @@ Overworld2Tiles::
 incbin "gfx/world/overworld_2.dmg.2bpp"
 
 section "bank10",romx[$4000],bank[$10]
-incbin "gfx/intro/clouds-top.dmg.2bpp"
-incbin "gfx/intro/clouds-middle.dmg.2bpp"
-incbin "gfx/intro/clouds-bottom.dmg.2bpp"
-incbin "gfx/intro/waves.dmg.2bpp"
-incbin "gfx/intro/intro.dmg.2bpp"
+IntroTiles::
+Intro1Tiles::
+incbin "gfx/intro/intro_1.dmg.2bpp"
+Intro2Tiles::
+incbin "gfx/intro/intro_2.dmg.2bpp"
+Intro3Tiles::
+incbin "gfx/intro/intro_3.dmg.2bpp"
+ChristineTiles::
 incbin "gfx/scenes/christine.dmg.2bpp"
+MarinBeachTiles::
 incbin "gfx/scenes/marin_beach.dmg.2bpp"
 MarinBeachWavesTiles::
 incbin "gfx/scenes/marin_beach_waves.dmg.2bpp"
@@ -370,26 +374,9 @@ incbin "gfx/world/camera_shop.cgb.2bpp"
 incbin "gfx/world/overworld_2.cgb.2bpp"
 
 section "bank30",romx[$4000],bank[$30]
-incbin "gfx/intro/clouds-top.cgb.2bpp"
-incbin "gfx/intro/clouds-middle.cgb.2bpp"
-incbin "gfx/intro/clouds-bottom.cgb.2bpp"
-incbin "gfx/intro/waves.cgb.2bpp"
-incbin "gfx/intro/link_pic.cgb.2bpp"
-incbin "gfx/intro/egg_top.cgb.2bpp"
-incbin "gfx/intro/unused_1.cgb.2bpp"
-incbin "gfx/intro/seafoam.cgb.2bpp"
-incbin "gfx/intro/palm_trees.cgb.2bpp"
-incbin "gfx/intro/mountain.cgb.2bpp"
-incbin "gfx/intro/egg.cgb.2bpp"
-incbin "gfx/intro/canopy.cgb.2bpp"
-incbin "gfx/intro/sand.cgb.2bpp"
-incbin "gfx/intro/copyright.cgb.2bpp"
-incbin "gfx/intro/mountain_clouds.cgb.2bpp"
-incbin "gfx/intro/unused_2.cgb.2bpp"
-incbin "gfx/intro/waves_animation.cgb.2bpp"
-incbin "gfx/intro/seafoam_animation.cgb.2bpp"
-incbin "gfx/intro/marin.cgb.2bpp"
-incbin "gfx/intro/intro.cgb.2bpp"
+incbin "gfx/intro/intro_1.cgb.2bpp"
+incbin "gfx/intro/intro_2.cgb.2bpp"
+incbin "gfx/intro/intro_3.cgb.2bpp"
 incbin "gfx/scenes/christine.cgb.2bpp"
 incbin "gfx/scenes/marin_beach.cgb.2bpp"
 incbin "gfx/scenes/marin_beach_waves.cgb.2bpp"

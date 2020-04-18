@@ -4224,11 +4224,11 @@ LCDOff::
     ld   [rIE], a    ; Restore interrupts configuration
     ret
 
-LoadTilemap0F_trampoline::
-    jpsw LoadTilemap0F
+LoadTileset0F_trampoline::
+    jpsw LoadTileset0F
 
 ; Fill the Background Map with all 7Es
-LoadTilemap8::
+LoadTileset8::
     ld   a, $7E    ; value
     ld   bc, $400 ; count
     jr   FillBGMap
@@ -4304,7 +4304,7 @@ GetObjectPhysicsFlagsAndRestoreBank3::
     pop  af
     ret
 
-LoadTilemap1E::
+LoadTileset1E::
     ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4319,14 +4319,14 @@ LoadTilemap1E::
     ld   bc, TILE_SIZE * $80
     jp   CopyData
 
-LoadTilemap1F::
-    call LoadTilemap15
+LoadTileset1F::
+    call LoadTileset15
     ld   de, vTiles0 + $400
     ld   hl, EndingTiles + $3600
     ld   bc, TILE_SIZE * $10
     jp   CopyData
 
-LoadTilemap15::
+LoadTileset15::
     ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4357,7 +4357,7 @@ LoadTilemap15::
     ld   bc, TILE_SIZE * $20
     jp   CopyData
 
-LoadTilemap1D::
+LoadTileset1D::
     ld   a, BANK(Overworld1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4382,7 +4382,7 @@ LoadTilemap1D::
     ld   bc, TILE_SIZE * $80
     jp   CopyData
 
-LoadTilemap18::
+LoadTileset18::
     ld   hl, EndingTiles
     ldh  a, [hIsGBC]
     and  a
@@ -4391,11 +4391,11 @@ LoadTilemap18::
     ld   a, BANK(ColorDungeonTiles)
     jr   label_2B06
 
-LoadTilemap17::
+LoadTileset17::
     ld   hl, EndingTiles + $800
     jr   label_2B01
 
-LoadTilemap16::
+LoadTileset16::
     ld   hl, EndingTiles + $2000
 
 label_2B01::
@@ -4416,7 +4416,7 @@ label_2B06::
     ld   bc, TILE_SIZE * $100
     jp   CopyData
 
-LoadTilemap1B::
+LoadTileset1B::
     call PlayAudioStep
 
     ld   hl, FontLargeTiles + $100
@@ -4455,7 +4455,7 @@ LoadTilemap1B::
     ld   bc, TILE_SIZE * $80
     jp   CopyData
 
-LoadTilemap1A::
+LoadTileset1A::
     ld   hl, EndingTiles + $3800
     ldh  a, [hIsGBC]
     and  a
@@ -4464,7 +4464,7 @@ LoadTilemap1A::
     ld   a, BANK(EndingCGBAltTiles)
     jr   label_2B95
 
-LoadTilemap19::
+LoadTileset19::
     ld   hl, EndingTiles + $800
     ldh  a, [hIsGBC]
     and  a
@@ -4725,7 +4725,7 @@ LoadDungeonTiles::
 .return
     ret
 
-LoadTilemap5::
+LoadTileset5::
     ;
     ; Load Overworld landscape
     ;
@@ -4795,7 +4795,7 @@ LoadIntroSequenceTiles::
     ld   bc, TILE_SIZE * $100
     jp   CopyData
 
-LoadTilemap11::
+LoadTitleScreenTiles::
     ; Load title logo
     ld   a, BANK(TitleLogoTitles)
     call SwitchAdjustedBank
@@ -4835,7 +4835,7 @@ LoadTilemap11::
     ld   bc, TILE_SIZE * $10
     jp   CopyData
 
-LoadTilemap0B::
+LoadTileset0B::
     ld   a, $0C
     call SwitchAdjustedBank
     ld   hl, $7800
@@ -4848,15 +4848,15 @@ LoadTilemap0B::
     ld   bc, $100
     jp   CopyData
 
-LoadTilemap14::
+LoadTileset14::
     ld   hl, $7000
     jr   CopyTilesToVTiles2
 
-LoadTilemap20::
+LoadTileset20::
     ld   hl, $7800
     jr   CopyTilesToVTiles2
 
-LoadTilemap12::
+LoadTileset12::
     ld   hl, $5800
 
 CopyTilesToVTiles2::
@@ -4866,7 +4866,7 @@ CopyTilesToVTiles2::
     ld   bc, TILE_SIZE * $80
     jp   CopyData
 
-LoadTilemap21::
+LoadTileset21::
     ld   a, $13
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4880,7 +4880,7 @@ LoadTilemap21::
     ld   bc, $400
     jp   CopyData
 
-LoadTilemap13::
+LoadTileset13::
     ld   a, $10
     call SwitchAdjustedBank
     ld   hl, $6700
@@ -4893,7 +4893,7 @@ LoadTilemap13::
     ld   bc, $600
     jp   CopyData
 
-LoadTilemap0D::
+LoadTileset0D::
     ld   a, $0F
     call SwitchBank
     ld   hl, $4400
@@ -4907,7 +4907,7 @@ NpcTilesBankTable::
 
 ; Load lower section of OAM tiles (NPCs),
 ; and upper section of BG tiles
-LoadTilemap9::
+LoadTileset9::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
@@ -5307,7 +5307,7 @@ doCopyObjectToBG:
 ; This is used when loading a map in one go (instead
 ; of having a sliding screen transition.)
 ; (called by LoadMapData)
-LoadTilemap1::
+LoadTileset1::
     call SwitchToMapDataBank
     call SwitchBank
     ld   de, vBGMap0
@@ -7070,8 +7070,8 @@ LoadRoomTemplate_trampoline::
     ld   [MBC3SelectBank], a
     ret
 
-LoadTilemap0E_trampoline::
-    callsb LoadTilemap0E
+LoadTileset0E_trampoline::
+    callsb LoadTileset0E
     ret
 
 SwitchToMapDataBank::
@@ -7088,11 +7088,11 @@ SwitchToMapDataBank::
     ld   [MBC3SelectBank], a
     ret
 
-LoadTilemap22_trampoline::
-    jpsb LoadTilemap22
+LoadTileset22_trampoline::
+    jpsb LoadTileset22
 
-LoadTilemap23_trampoline::
-    jpsb LoadTilemap23
+LoadTileset23_trampoline::
+    jpsb LoadTileset23
 
 include "code/home/entities.asm"
 

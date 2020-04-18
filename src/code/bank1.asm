@@ -3839,7 +3839,7 @@ PadRoomObjectsArea::
 .end
     ret
 
-LoadTilemap0F::
+LoadTileset0F::
     ld   bc, $400
     ld   hl, $9800
 

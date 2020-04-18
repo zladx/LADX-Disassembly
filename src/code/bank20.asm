@@ -277,41 +277,41 @@ GetTilemapHandlerAddress::
 
 ; Pointers to addresses to execute for loading a specific tilemap
 TilemapLoadingHandlersTable::
-._01 dw LoadTilemap1
+._01 dw LoadTileset1
 ._02 dw ClearBGMap
 ._03 dw LoadBaseTiles
 ._04 dw LoadInventoryTiles
-._05 dw LoadTilemap5
+._05 dw LoadTileset5
 ._06 dw LoadDungeonTiles
-._07 dw LoadTilemap5
-._08 dw LoadTilemap8
-._09 dw LoadTilemap9
+._07 dw LoadTileset5
+._08 dw LoadTileset8
+._09 dw LoadTileset9
 ._0A dw LoadMapData.return
-._0B dw LoadTilemap0B
+._0B dw LoadTileset0B
 ._0C dw LoadMapData.return
-._0D dw LoadTilemap0D
-._0E dw LoadTilemap0E_trampoline
-._0F dw LoadTilemap0F_trampoline
+._0D dw LoadTileset0D
+._0E dw LoadTileset0E_trampoline
+._0F dw LoadTileset0F_trampoline
 ._10 dw LoadIntroSequenceTiles
-._11 dw LoadTilemap11
-._12 dw LoadTilemap12
-._13 dw LoadTilemap13
-._14 dw LoadTilemap14
-._15 dw LoadTilemap15
-._16 dw LoadTilemap16
-._17 dw LoadTilemap17
-._18 dw LoadTilemap18
-._19 dw LoadTilemap19
-._1A dw LoadTilemap1A
-._1B dw LoadTilemap1B
-._1C dw LoadTilemap1A
-._1D dw LoadTilemap1D
-._1E dw LoadTilemap1E
-._1F dw LoadTilemap1F
-._20 dw LoadTilemap20
-._21 dw LoadTilemap21
-._22 dw LoadTilemap22_trampoline
-._23 dw LoadTilemap23_trampoline
+._11 dw LoadTitleScreenTiles
+._12 dw LoadTileset12
+._13 dw LoadTileset13
+._14 dw LoadTileset14
+._15 dw LoadTileset15
+._16 dw LoadTileset16
+._17 dw LoadTileset17
+._18 dw LoadTileset18
+._19 dw LoadTileset19
+._1A dw LoadTileset1A
+._1B dw LoadTileset1B
+._1C dw LoadTileset1A
+._1D dw LoadTileset1D
+._1E dw LoadTileset1E
+._1F dw LoadTileset1F
+._20 dw LoadTileset20
+._21 dw LoadTileset21
+._22 dw LoadTileset22_trampoline
+._23 dw LoadTileset23_trampoline
 
 data_020_46AA::
     db   $51, $35, $4F, $35, $00, $00, $4B, $35, $00, $00, $00, $00, $00, $00, $44, $35
@@ -2080,7 +2080,7 @@ data_020_5800::
     db   $03, $00, $00, $04, $04, $04, $00, $04, $04, $03, $03, $04, $04, $04, $04, $04
     db   $04, $07, $00, $04, $04, $00, $00, $00, $00, $03, $03
 
-LoadTilemap0E::
+LoadTileset0E::
     ld   a, LOW(Data_20_568B)                     ; $588B: $3E $8B
     ldh  [hScratchA], a                           ; $588D: $E0 $E1
     ld   a, HIGH(Data_20_568B)                    ; $588F: $3E $56
@@ -5869,7 +5869,7 @@ jr_020_7DCB:
 
     ret                                           ; $7DE5: $C9
 
-LoadTilemap23::
+LoadTileset23::
     ld   c, $10                                   ; $7DE6: $0E $10
     ld   b, $68                                   ; $7DE8: $06 $68
     ld   a, $38                                   ; $7DEA: $3E $38

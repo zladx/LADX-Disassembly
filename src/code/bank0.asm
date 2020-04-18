@@ -4887,24 +4887,26 @@ LoadEaglesTowerTopTiles::
     jp   CopyData
 
 LoadTileset13::
-    ld   a, $10
+    ld   a, BANK(FontLargeTiles)
     call SwitchAdjustedBank
-    ld   hl, $6700
-    ld   de, $8400
-    ld   bc, $400
+
+    ld   hl, FontLargeTiles
+    ld   de, vTiles0 + $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
 
-    ld   hl, $6000
-    ld   de, $9000
-    ld   bc, $600
+    ld   hl, MarinBeachTiles
+    ld   de, vTiles2
+    ld   bc, TILE_SIZE * $60
     jp   CopyData
 
-LoadTileset0D::
-    ld   a, $0F
+; Tiles for Saving and Game Over screens
+LoadSaveMenuTiles::
+    ld   a, BANK(SaveMenuTiles)
     call SwitchBank
-    ld   hl, $4400
-    ld   de, $8800
-    ld   bc, $500
+    ld   hl, SaveMenuTiles
+    ld   de, vTiles1
+    ld   bc, TILE_SIZE * $50
     jp   CopyData
 
 ; NPC tiles banks
@@ -5008,11 +5010,10 @@ LoadTileset9::
     add  hl, de
     ld   e, l
     ld   d, h
-    ; source = $4000 + bc
-    ld   hl, $4000
+    ; Source: NpcTilesDataStart + bc
+    ld   hl, NpcTilesDataStart
     add  hl, bc
-    ; length = $100
-    ld   bc, TILE_SIZE * 16
+    ld   bc, TILE_SIZE * $10
     call CopyData
 .copyskipEntityLoad
 
@@ -5027,7 +5028,8 @@ LoadTileset9::
     ; Load 8 rows (128 tiles) to the BG-only tiles
     ;
 
-    ld   de, $9000
+    ld   de, vTiles2
+
     ld   a, [wIsIndoor]
     and  a
     jp   z, label_2FAD

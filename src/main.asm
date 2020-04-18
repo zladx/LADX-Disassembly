@@ -162,6 +162,8 @@ incbin "gfx/characters/npc_1.dmg.2bpp"
 section "bankOF",romx[$4000],bank[$0F]
 MenuTiles::
 incbin "gfx/menus/menu.dmg.2bpp"
+SaveMenuTiles::
+incbin "gfx/menus/save_menu.dmg.2bpp"
 TitleLogoTitles::
 incbin "gfx/intro/title.dmg.2bpp"
 FontTiles::
@@ -377,8 +379,8 @@ incbin "gfx/characters/npc_1.cgb.2bpp"
 
 section "bank2F",romx[$4000],bank[$2F]
 incbin "gfx/menus/menu.cgb.2bpp"
+incbin "gfx/menus/save_menu.cgb.2bpp"
 incbin "gfx/intro/title.cgb.2bpp"
-FontTilesCGB::
 incbin "gfx/fonts/font.cgb.2bpp"
 incbin "gfx/world/camera_shop.cgb.2bpp"
 incbin "gfx/world/overworld_2.cgb.2bpp"

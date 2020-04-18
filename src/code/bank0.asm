@@ -4810,29 +4810,29 @@ LoadTilemap11::
 
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, .else
+    jr   nz, .dxTilesDMG
     ld   hl, TitleDXTilesCGB
-    jr   .endIf
-.else
+    jr   .dxTilesEnd
+.dxTilesDMG
     ld   hl, TitleDXTilesDMG
-.endIf
+.dxTilesEnd
 
     ld   de, vTiles0 + $400
     ld   bc, TILE_SIZE * $40
     call CopyData
 
-    ;
+    ; Load some title sprites
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, .label_2DDD
-    ld   hl, $6600
-    jr   .label_2DE0
-.label_2DDD
-    ld   hl, $6500
-.label_2DE0
+    jr   nz, .else
+    ld   hl, PhotoElementsTiles + $600
+    jr   .endIf
+.else
+    ld   hl, PhotoElementsTiles + $500
+.endIf
 
-    ld   de, $8200
-    ld   bc, $100
+    ld   de, vTiles0 + $200
+    ld   bc, TILE_SIZE * $10
     jp   CopyData
 
 LoadTilemap0B::

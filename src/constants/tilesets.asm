@@ -39,3 +39,4 @@ W_TILESET_3B                 equ $3B
 W_TILESET_EGG                equ $3C
 W_TILESET_3D                 equ $3D
 W_TILESET_TARAMANCH_MIDDLE   equ $3E
+W_TILESET_NO_UPDATE          equ $FF

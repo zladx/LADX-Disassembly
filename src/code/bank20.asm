@@ -5090,6 +5090,8 @@ jr_020_6E63:
 Data_020_6E65::
     db   $03, $04, $09, $5E, $91, $A1, $AA, $C4, $C6, $CC, $DB, $E1, $E3, $E8
 
+TilesetTables::
+
 ; Constants for Overworld tilesets
 ; See W_TILESET_* constants for values
 OverworldTilesetsTable::
@@ -5102,8 +5104,9 @@ OverworldTilesetsTable::
     db   $0F, $24, $2E, $2E, $3A, $0F, $26, $2C
     db   $22, $22, $22, $0F, $3A, $3A, $0F, $2C
 
-data_020_6EB3::
-; Sprites banks table for color dungeon?
+; Constants for Indoors tilesets
+; See W_TILESET_* constants for values
+IndoorsTilesetsTable::
     db   $FF, $00, $00, $00, $FF, $01, $00, $05, $00, $09, $00, $00, $05, $05, $05, $FF
     db   $00, $00, $FF, $FF, $02, $01, $01, $01, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
     db   $FF, $FF, $FF, $FF, $FF, $00, $FF, $00, $FF, $00, $FF, $FF, $02, $00, $FF, $0E
@@ -5137,7 +5140,9 @@ data_020_6EB3::
     db   $FF, $08, $08, $04, $0C, $0C, $0C, $0C, $00, $08, $0C, $0C, $0C, $0C, $0C, $0C
     db   $0C, $0C, $0C, $0C, $0C, $00, $0C, $0C, $00, $0C, $0C, $18, $05, $00, $08, $00
 
-data_020_70B3::
+; Constants for Color Dungeon tilesets
+; See W_TILESET_* constants for values
+ColorDungeonTilesetsTable::
     db   $00, $00, $0B, $0B, $00, $00, $0B, $0B, $0B, $0B, $0B, $0B, $0B, $0B, $0B, $0E
     db   $0B, $0B, $0B, $18, $0B, $0B, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF, $FF
 

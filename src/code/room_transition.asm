@@ -230,7 +230,7 @@ ApplyRoomTransition::
     dec  a                                        ; $79CD: $3D
     JP_TABLE                                      ; $79CE: $C7
 ._00 dw RoomTransitionPrepareHandler
-._01 dw RoomTransitionLoadSprites
+._01 dw RoomTransitionLoadTiles
 ._02 dw RoomTransitionConfigureScrollTargets
 ._03 dw RoomTransitionFirstHalfHandler
 ._04 dw RoomTransitionSecondHalfHandler
@@ -561,8 +561,8 @@ IncrementRoomTransitionStateAndReturn::
     ld   [wRoomTransitionState], a                ; $7B3A: $EA $24 $C1
     ret                                           ; $7B3D: $C9
 
-RoomTransitionLoadSprites::
-    call LoadRoomSprites                          ; $7B3E: $CD $1E $0D
+RoomTransitionLoadTiles::
+    call LoadRoomTiles                          ; $7B3E: $CD $1E $0D
 
     ; If room has mobile blocks…
     ld   a, [wRoomSwitchableObject]               ; $7B41: $FA $FA $D6

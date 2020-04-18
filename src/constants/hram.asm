@@ -21,7 +21,7 @@ hNeedsUpdatingBGTiles:: ; FF90
  ;
  ; Commands:
  ;   0:   do nothing
- ;   1:
+ ;   1:   load world tiles
  ;   2:   load dungeon minimap tiles
  ;   3:
  ;   4:

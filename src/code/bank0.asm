@@ -960,57 +960,78 @@ label_D15::
     ld   a, TRANSCIENT_VFX_SWORD_POKE
     jp   AddTranscientVfx
 
-; Load sprites for the next room,
-; either during a map transition or a room transition.
-LoadRoomSprites::
-    ld   a, $20
+; Schedule the loading of the tilesets for the next room,
+; (either during a map transition or a room transition).
+;
+; Actual loading will be done during the next vblank period.
+LoadRoomTiles::
+    ld   a, BANK(TilesetTables)
     ld   [MBC3SelectBank], a
 
-    ; If is indoor…
+    ; ------------------------------------------------------------
+    ;
+    ; Load Background tileset
+    ;
+    ; ------------------------------------------------------------
+
     ld   a, [wIsIndoor]
     and  a
     jr   z, .overworld
 
     ;
-    ; Indoor
+    ; Indoor BG tileset
     ;
 
+    ; de = [hMapRoom]
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
-    ld   hl, data_020_6EB3
+    ld   hl, IndoorsTilesetsTable
+
+    ; Use a special table for the Color Dungeon
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, .label_D3C
-    ld   hl, data_020_70B3
-    jr   .label_D45
+    jr   nz, .colorDungeonEnd
+    ld   hl, ColorDungeonTilesetsTable
+    jr   .readTilesetFromTable
+.colorDungeonEnd
 
-.label_D3C
-    cp   $1A
-    jr   nc, .label_D45
-    cp   $06
-    jr   c, .label_D45
+    ; If 06 < mapId < MAP_UNKNOWN_1A, add $100 to the table address
+    cp   MAP_UNKNOWN_1A
+    jr   nc, .readTilesetFromTable
+    cp   MAP_EAGLES_TOWER
+    jr   c, .readTilesetFromTable
     inc  h
 
-.label_D45
+.readTilesetFromTable
     add  hl, de
+
+    ; a = Table[hMapRoom]
+    ; e = previous tileset
     ldh  a, [hWorldTileset]
     ld   e, a
     ld   a, [hl]
+
+    ; If the tileset didn't change, nothing to do.
     cp   e
-    jr   z, .label_D57
+    jr   z, .indoorTilesetEnd
+
+    ; Apply the new tileset
     ldh  [hWorldTileset], a
-    cp   $FF
-    jr   z, .label_D57
+
+    ; Schedule the tiles loading operation for the next vblank
+    ; (except if the tileset is W_TILESET_NO_UPDATE)
+    cp   W_TILESET_NO_UPDATE
+    jr   z, .indoorTilesetEnd
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
 
-.label_D57::
+.indoorTilesetEnd
     jr   .tilesetEnd
 
 .overworld
     ;
-    ; Overworld
+    ; Overworld BG tileset
     ;
 
     ldh  a, [hMapRoom]
@@ -1059,16 +1080,25 @@ LoadRoomSprites::
 .cameraShopEnd
 
     ldh  [hWorldTileset], a
+    ; Schedule the tiles loading operation for the next vblank
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
 .tilesetEnd
 
+    ; ------------------------------------------------------------
+    ;
+    ; Load Sprites tileset
+    ;
+    ; ------------------------------------------------------------
+
     xor  a
     ldh  [hScratch0], a
+
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, data_020_70D3
+
     ld   a, [wIsIndoor]
     ld   d, a
     ldh  a, [hMapId]

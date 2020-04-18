@@ -179,6 +179,7 @@ Intro2Tiles::
 incbin "gfx/intro/intro_2.dmg.2bpp"
 Intro3Tiles::
 incbin "gfx/intro/intro_3.dmg.2bpp"
+StaticPicturesTiles::
 ChristineTiles::
 incbin "gfx/scenes/christine.dmg.2bpp"
 MarinBeachTiles::
@@ -189,6 +190,7 @@ FontLargeTiles::
 incbin "gfx/fonts/font_large.dmg.2bpp"
 ReliefTiles::
 incbin "gfx/scenes/relief.dmg.2bpp"
+PaintingTiles::
 incbin "gfx/scenes/painting.dmg.2bpp"
 
 section "bank11",romx[$4000],bank[$11]
@@ -222,7 +224,14 @@ incbin "gfx/items/minimap_dmg.2bpp"
 
 section "bank13",romx[$4000],bank[$13]
 EndingTiles::
-incbin "gfx/ending/ending.dmg.2bpp"
+EndingTiles1::
+incbin "gfx/ending/ending_1.dmg.2bpp"
+EaglesTowerTop1Tiles::
+incbin "gfx/dungeons/eagles_tower_top_1.dmg.2bpp"
+EndingTiles2::
+incbin "gfx/ending/ending_2.dmg.2bpp"
+EaglesTowerTop2Tiles::
+incbin "gfx/dungeons/eagles_tower_top_2.dmg.2bpp"
 
 section "bank14",romx[$4000],bank[$14]
 include "data/events/dungeons.asm"
@@ -402,7 +411,10 @@ incbin "gfx/items/dungeon_items.cgb.2bpp"
 incbin "gfx/items/minimap_cgb.2bpp"
 
 section "bank33",romx[$4000],bank[$33]
-incbin "gfx/ending/ending.cgb.2bpp"
+incbin "gfx/ending/ending_1.cgb.2bpp"
+incbin "gfx/dungeons/eagles_tower_top_1.cgb.2bpp"
+incbin "gfx/ending/ending_2.cgb.2bpp"
+incbin "gfx/dungeons/eagles_tower_top_2.cgb.2bpp"
 
 section "bank34",romx[$4000],bank[$34]
 incbin "gfx/menus/print.2bpp"

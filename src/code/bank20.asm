@@ -294,9 +294,9 @@ TilemapLoadingHandlersTable::
 ._0F dw LoadTileset0F_trampoline
 ._10 dw LoadIntroSequenceTiles
 ._11 dw LoadTitleScreenTiles
-._12 dw LoadTileset12
+._12 dw LoadChristinePortraitTiles
 ._13 dw LoadTileset13
-._14 dw LoadTileset14
+._14 dw LoadFaceShrineReliefTiles
 ._15 dw LoadTileset15
 ._16 dw LoadTileset16
 ._17 dw LoadTileset17
@@ -308,8 +308,8 @@ TilemapLoadingHandlersTable::
 ._1D dw LoadTileset1D
 ._1E dw LoadTileset1E
 ._1F dw LoadTileset1F
-._20 dw LoadTileset20
-._21 dw LoadTileset21
+._20 dw LoadSchulePaintingTiles
+._21 dw LoadEaglesTowerTopTiles
 ._22 dw LoadTileset22_trampoline
 ._23 dw LoadTileset23_trampoline
 

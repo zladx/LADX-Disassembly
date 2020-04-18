@@ -4836,48 +4836,54 @@ LoadTitleScreenTiles::
     jp   CopyData
 
 LoadTileset0B::
-    ld   a, $0C
+    ; Load minimap tiles
+    ld   a, BANK(MinimapTiles)
     call SwitchAdjustedBank
-    ld   hl, $7800
-    ld   de, $8F00
-    ld   bc, $800
+    ld   hl, MinimapTiles
+    ld   de, vTiles1 + $700
+    ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   hl, $5000
-    ld   de, $8200
-    ld   bc, $100
+    ; Load some overworld tiles
+    ld   hl, Overworld1Tiles + $100
+    ld   de, vTiles0 + $200
+    ld   bc, TILE_SIZE * $10
     jp   CopyData
 
-LoadTileset14::
-    ld   hl, $7000
-    jr   CopyTilesToVTiles2
+LoadFaceShrineReliefTiles::
+    ld   hl, ReliefTiles
+    jr   LoadStaticPictureTiles
 
-LoadTileset20::
-    ld   hl, $7800
-    jr   CopyTilesToVTiles2
+LoadSchulePaintingTiles::
+    ld   hl, PaintingTiles
+    jr   LoadStaticPictureTiles
 
-LoadTileset12::
-    ld   hl, $5800
+LoadChristinePortraitTiles::
+    ld   hl, ChristineTiles
+    ; fallthrough
 
-CopyTilesToVTiles2::
-    ld   a, $10
+; Load tiles for a static full-screen picture to vTiles2
+; Inputs:
+;   hl   tiles source address
+LoadStaticPictureTiles::
+    ld   a, BANK(StaticPicturesTiles)
     call SwitchAdjustedBank
     ld   de, vTiles2
     ld   bc, TILE_SIZE * $80
     jp   CopyData
 
-LoadTileset21::
-    ld   a, $13
+LoadEaglesTowerTopTiles::
+    ld   a, BANK(EaglesTowerTop1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $7C00
-    ld   de, $8C00
-    ld   bc, $400
+    ld   hl, EaglesTowerTop2Tiles
+    ld   de, vTiles1 + $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
 
-    ld   hl, $6800
-    ld   de, $9000
-    ld   bc, $400
+    ld   hl, EaglesTowerTop1Tiles
+    ld   de, vTiles2
+    ld   bc, TILE_SIZE * $40
     jp   CopyData
 
 LoadTileset13::

@@ -49,8 +49,12 @@ hEnemiesTilesLoadingStage:: ; FF93
  ; Possible values: 0 -> $0B
  ds 1
 
+hWorldTileset:: ; FF94
+  ; Sub-tileset to use for overworld or dungeon
+  ds 1
+
 ; Unlabeled
-ds 2
+ds 1 ; FF95
 
 hBaseScrollX:: ; FF96
  ds 1

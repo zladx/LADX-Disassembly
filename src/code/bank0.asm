@@ -994,19 +994,19 @@ LoadRoomSprites::
 
 .label_D45
     add  hl, de
-    ldh  a, [$FF94]
+    ldh  a, [hWorldTileset]
     ld   e, a
     ld   a, [hl]
     cp   e
     jr   z, .label_D57
-    ldh  [$FF94], a
+    ldh  [hWorldTileset], a
     cp   $FF
     jr   z, .label_D57
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
 
 .label_D57::
-    jr   .indoorOutdoorEnd
+    jr   .tilesetEnd
 
 .overworld
     ;
@@ -1014,11 +1014,13 @@ LoadRoomSprites::
     ;
 
     ldh  a, [hMapRoom]
+    ; hack: for overworld room $07 (right of the Egg), use tilset of the taramanch center
     cp   $07
-    jr   nz, .label_D60
+    jr   nz, .eggHackEnd
     inc  a
+.eggHackEnd
 
-.label_D60
+    ; de = hMapRoom / 4
     ld   d, a
     srl  a
     srl  a
@@ -1030,28 +1032,37 @@ LoadRoomSprites::
     or   e
     ld   e, a
     ld   d, $00
-    ld   hl, data_020_6E73
+
+    ; a = OverworldTilesetsTable[hMapRoom / 4]
+    ; e = previous tileset
+    ld   hl, OverworldTilesetsTable
     add  hl, de
-    ldh  a, [$FF94]
+    ldh  a, [hWorldTileset]
     ld   e, a
     ld   a, [hl]
-    cp   e
-    jr   z, .indoorOutdoorEnd
-    cp   $0F
-    jr   z, .indoorOutdoorEnd
-    cp   $1A
-    jr   nz, .label_D8B
-    ldh  a, [hMapRoom]
-    cp   $37
-    jr   nz, .indoorOutdoorEnd
-    ld   a, [hl]
 
-.label_D8B
-    ldh  [$FF94], a
+    ; If the tileset didn't change, nothing to do.
+    cp   e
+    jr   z, .tilesetEnd
+    ; If the tileset is TILESET_KEEP, nothing to do.
+    cp   W_TILESET_KEEP
+    jr   z, .tilesetEnd
+
+    ; If on prairie north, but not on the Camera Shoop room,
+    ; treat the tileset as TILESET_KEEP: nothing to do.
+    cp   W_TILESET_CAMERA_SHOP
+    jr   nz, .cameraShopEnd
+    ldh  a, [hMapRoom]
+    cp   $37 ; camera shop room
+    jr   nz, .tilesetEnd
+    ld   a, [hl]
+.cameraShopEnd
+
+    ldh  [hWorldTileset], a
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
+.tilesetEnd
 
-.indoorOutdoorEnd
     xor  a
     ldh  [hScratch0], a
     ldh  a, [hMapRoom]
@@ -5032,13 +5043,14 @@ LoadTileset9::
 
     ld   a, [wIsIndoor]
     and  a
-    jp   z, label_2FAD
+    jp   z, .loadOverworldBGTiles
+
     ld   a, $0D
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   z, label_2F4B
+    jr   z, .jr_2F4B
     ld   hl, $7000
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
@@ -5060,34 +5072,33 @@ LoadTileset9::
     ld   de, vTiles2
     ld   bc, TILE_SIZE * 128
     call CopyData
-
     ret
 
-label_2F4B::
+.jr_2F4B
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2F57
+    jr   nz, .jr_2F57
     ldh  a, [hMapRoom]
     cp   $12
-    jr   nz, label_2F69
+    jr   nz, .jr_2F69
 
-label_2F57::
+.jr_2F57
     ld   hl, $5000
-    ldh  a, [$FF94]
+    ldh  a, [hWorldTileset]
     cp   $FF
-    jr   z, label_2F69
+    jr   z, .jr_2F69
     add  a, $50
     ld   h, a
     ld   bc, $100
     call CopyData
 
-label_2F69::
+.jr_2F69
     ldh  a, [hMapId]
     cp   MAP_HOUSE
-    jr   nz, label_2F87
+    jr   nz, .jr_2F87
     ldh  a, [hMapRoom]
     cp   $B5
-    jr   nz, label_2F87
+    jr   nz, .jr_2F87
     ld   a, $35
     ld   [MBC3SelectBank], a
     ld   hl, $6600
@@ -5096,7 +5107,7 @@ label_2F69::
     call CopyData
     ret
 
-label_2F87::
+.jr_2F87
     ldh  a, [hIsGBC]
     and  a
     ret  z
@@ -5115,18 +5126,21 @@ label_2F87::
     call CopyData
     ret
 
-label_2FAD::
+.loadOverworldBGTiles
     ld   a, $0F
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ldh  a, [$FF94]
+
+    ldh  a, [hWorldTileset]
     cp   $0F
     jr   z, .return
+
     add  a, $40
     ld   h, a
     ld   l, $00
-    ld   bc, $200
+    ld   bc, TILE_SIZE * $20
     call CopyData
+
 .return
     ret
 

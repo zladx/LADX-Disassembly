@@ -217,7 +217,7 @@ label_44B0::
 
 GameplayWorldSubtype2Handler::
     ld   a, $0F
-    ldh  [$FF94], a
+    ldh  [hWorldTileset], a
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_44C9

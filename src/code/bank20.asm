@@ -289,7 +289,7 @@ TilemapLoadingHandlersTable::
 ._0A dw LoadMapData.return
 ._0B dw LoadTileset0B
 ._0C dw LoadMapData.return
-._0D dw LoadTileset0D
+._0D dw LoadSaveMenuTiles
 ._0E dw LoadTileset0E_trampoline
 ._0F dw LoadTileset0F_trampoline
 ._10 dw LoadIntroSequenceTiles
@@ -5090,12 +5090,17 @@ jr_020_6E63:
 Data_020_6E65::
     db   $03, $04, $09, $5E, $91, $A1, $AA, $C4, $C6, $CC, $DB, $E1, $E3, $E8
 
-data_020_6E73::
-; Sprites banks table for indoors?
-    db   $1C, $1C, $3E, $3C, $3E, $3E, $3E, $30, $0F, $36, $36, $1A, $0F, $34, $0F, $3E
-    db   $20, $20, $0F, $38, $28, $28, $32, $32, $20, $20, $38, $38, $28, $28, $32, $32
-    db   $0F, $26, $0F, $24, $0F, $1E, $2A, $0F, $26, $26, $2E, $2E, $0F, $2A, $2A, $2A
-    db   $0F, $24, $2E, $2E, $3A, $0F, $26, $2C, $22, $22, $22, $0F, $3A, $3A, $0F, $2C
+; Constants for Overworld tilesets
+; See W_TILESET_* constants for values
+OverworldTilesetsTable::
+    db   $1C, $1C, $3E, $3C, $3E, $3E, $3E, $30
+    db   $0F, $36, $36, $1A, $0F, $34, $0F, $3E
+    db   $20, $20, $0F, $38, $28, $28, $32, $32
+    db   $20, $20, $38, $38, $28, $28, $32, $32
+    db   $0F, $26, $0F, $24, $0F, $1E, $2A, $0F
+    db   $26, $26, $2E, $2E, $0F, $2A, $2A, $2A
+    db   $0F, $24, $2E, $2E, $3A, $0F, $26, $2C
+    db   $22, $22, $22, $0F, $3A, $3A, $0F, $2C
 
 data_020_6EB3::
 ; Sprites banks table for color dungeon?

@@ -490,7 +490,7 @@ LoadTiles::
     jr   .copyData
 .colorDungeonEnd
 
-    ldh  a, [$FF94]
+    ldh  a, [hWorldTileset]
     add  a, $50
     ld   h, a
     add  hl, bc
@@ -545,12 +545,12 @@ LoadOverworldBGTiles::
     ld   e, l
     ld   d, h
 
-    ldh  a, [$FF94]
+    ldh  a, [hWorldTileset]
     add  a, $40
     ld   h, a
     ld   l, $00
     add  hl, bc
-    ld   bc, $40
+    ld   bc, TILE_SIZE * $4
     call CopyData
 
     ; Increment the loading stage

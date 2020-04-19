@@ -3434,7 +3434,7 @@ label_1F69::
     ld   a, [hl]
     ldh  [hScratch0], a
 
-    ; hScratch5 = unknown value read from the base map
+    ; hScratch5 = unknown value read from the objects tilesets table
     ; d = map group id
     ; e = room object
     ld   e, a
@@ -3922,26 +3922,26 @@ DoUpdateBGRegion::
     ld   a, [wIsIndoor]
     and  a
     jr   z, .baseAddress_isOverworld
-    ld   hl, IndoorBaseMapDMG
+    ld   hl, IndoorObjectsTilemapDMG
     ; if IsGBC…
     ldh  a, [hIsGBC]
     and  a
     jr   z, .palettesskipEntityLoad
-    ; … hl = (MapId == MAP_COLOR_DUNGEON ? ColorDungeonBaseMap : IndoorBaseMapGBC)
-    ld   hl, IndoorBaseMapGBC
+    ; … hl = (MapId == MAP_COLOR_DUNGEON ? ColorDungeonObjectsTilemap : IndoorObjectsTilemapCGB)
+    ld   hl, IndoorObjectsTilemapCGB
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .configurePalettes
-    ld   hl, ColorDungeonBaseMap
+    ld   hl, ColorDungeonObjectsTilemap
     jr   .configurePalettes
 
 .baseAddress_isOverworld
-    ; hl = (hIsGBC ? OverworldBaseMapGBC : OverworldBaseMapDMG)
-    ld   hl, OverworldBaseMapDMG
+    ; hl = (hIsGBC ? OverworldObjectsTilemapCGB : OverworldObjectsTilemapDMG)
+    ld   hl, OverworldObjectsTilemapDMG
     ldh  a, [hIsGBC]
     and  a
     jr   z, .palettesskipEntityLoad
-    ld   hl, OverworldBaseMapGBC
+    ld   hl, OverworldObjectsTilemapCGB
 
     ;
     ; Palettes configuration (GBC only)
@@ -5208,8 +5208,15 @@ CopyWord::
     ld   [de], a
     ret
 
-; TODO: document better
-CopySomeDMGMapData::
+; Given an object (overworld or indoors), retrieve its tiles indices,
+; and copy them to the BG map.
+; (DMG only)
+;
+; Inputs:
+;   hl   pointer to the object in the objects map (see wRoomObjects)
+;   de   pointer to the target in the BG map (4 bytes will be written)
+WriteObjectToBG_DMG::
+    ; bc = [hl] * 4
     ld   a, [hl]
     ld   c, a
     ld   b, $00
@@ -5217,51 +5224,72 @@ CopySomeDMGMapData::
     rl   b
     sla  c
     rl   b
-    ld   hl, $6749
+
+    ;
+    ; Select the objects tilemap table to use
+    ;
+
+    ld   hl, OverworldObjectsTilemapDMG
+
+    ; If on Color Dungeon, use the objects tilemap of the Color Dungeon
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, label_2FEC
+    jr   z, .ColorDungeonObjectsTilemap
+
+    ; Hack: if on camera shop, also use the objects tilemap of the Color Dungeon
     cp   MAP_HOUSE
-    jr   nz, label_2FF1
+    jr   nz, .notCameraShop
     ldh  a, [hMapRoom]
-    cp   $B5
-    jr   nz, label_2FF1
+    cp   $B5 ; camera shop indoors
+    jr   nz, .notCameraShop
+.ColorDungeonObjectsTilemap
+    ld   hl, ColorDungeonObjectsTilemap
+    jr   .readValueInTable
 
-label_2FEC::
-    ld   hl, $4760
-    jr   label_2FFA
-
-label_2FF1::
+.notCameraShop
+    ; If indoors, use a special objects tilemap
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_2FFA
-    ld   hl, $4000
+    jr   z, .readValueInTable
+    ld   hl, IndoorObjectsTilemapDMG
 
-label_2FFA::
+.readValueInTable
+    ; hl = address of the tilemap for the given object
     add  hl, bc
+
+    ; Read the first 2 bytes of the object tilemap, and write them
+    ; to the target address in the BG map
     ld   a, [hli]
     ld   [de], a
     inc  de
     ld   a, [hli]
     ld   [de], a
+
+    ; Add $1F to the target address (to move one row below in the BG map)
     ld   a, e
     add  a, $1F
     ld   e, a
     ld   a, d
     adc  a, $00
     ld   d, a
+
+    ; Read the last 2 bytes of the object tilemap, and write them
+    ; to the target address in the BG map
     ld   a, [hli]
     ld   [de], a
     inc  de
     ld   a, [hl]
     ld   [de], a
+
     ret
 
-; Given an overworld object, retrieve its tiles and palettes (2x2), and copy them to the BG map
+; Given an overworld object, retrieve its tiles indices and palettes (2x2),
+; and copy them to the BG map
 ; (CGB only)
 ;
 ; Inputs:
-;   hl   address of the object in the object map (see wRoomObjects)
+;   hl   pointer to the object in the objects map (see wRoomObjects)
+;   de   pointer to the target in the BG map (4 bytes will be written)
 WriteOverworldObjectToBG::
     ; Switch to RAM bank 2 (object attributes?)
     ld   a, $02
@@ -5273,7 +5301,13 @@ WriteOverworldObjectToBG::
     ld   [rSVBK], a
     jr   doCopyObjectToBG
 
-; Given an indoor object, retrieve its tiles and palettes (2x2), and copy them to the BG map
+; Given an indoor object, retrieve its tiles indices and palettes (2x2),
+; and copy them to the BG map
+; (CGB only)
+;
+; Inputs:
+;   hl   pointer to the object in the objects map (see wRoomObjects)
+;   de   pointer to the target in the BG map (4 bytes will be written)
 WriteIndoorObjectToBG::
     ld   c, [hl]
 
@@ -5315,7 +5349,7 @@ doCopyObjectToBG:
     jr   .baseAddressskipEntityLoad
 
 .isOverworld
-    ld   hl, $6B1D
+    ld   hl, OverworldObjectsTilemapCGB
 .baseAddressskipEntityLoad
 
     ; Copy tile numbers to BG map for tiles on the upper row
@@ -5400,8 +5434,8 @@ LoadTileset1::
     ldh  a, [hIsGBC]
     and  a
     jr   nz, .copyObjectToBG
-    ; …copy some data to vBGMap0
-    call CopySomeDMGMapData
+    ; … copy the object tiles (2x2 tiles) to the BG map
+    call WriteObjectToBG_DMG
     jr   .objectCopyEnd
 
     ; Copy the object tiles and palettes (2x2 tiles) to the BG map
@@ -7156,7 +7190,7 @@ SwitchToMapDataBank::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, .indoor
-    ld   a, BANK(OverworldBaseMapDMG)
+    ld   a, BANK(OverworldObjectsTilemapDMG)
     jr   .end
 .indoor
     ld   a, $08

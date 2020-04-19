@@ -268,9 +268,9 @@ include "data/rooms/overworld_b.asm"
 include "data/bg_attributes/overworld_pointers.asm"
 include "data/bg_attributes/overworld_banks.asm"
 include "code/map_loading.asm"
-OverworldBaseMapDMG::
+OverworldObjectsTilemapDMG::
 incbin "data/base_maps/overworld.dmg.bin"
-OverworldBaseMapGBC::
+OverworldObjectsTilemapCGB::
 incbin "data/base_maps/overworld.cgb.bin"
 include "code/entities/anglers_tunnel_door.asm"
 

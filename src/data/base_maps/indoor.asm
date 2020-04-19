@@ -4,7 +4,9 @@
 
 SECTION "ROM Bank $008", ROMX[$4000], BANK[$8]
 
-IndoorBaseMapDMG::
+; Tilemaps for each indoor object (DMG)
+; Each object tilemap is 4 bytes, representing the tiles indices.
+IndoorObjectsTilemapDMG::
     db   $7F, $7F, $7F, $7F, $7E, $7E, $7E, $7E   ; $4000
     db   $7D, $7D, $7D, $7D, $7C, $7C, $7C, $7C   ; $4008
     db   $7E, $7E, $7E, $7E, $5A, $5A, $5A, $5A   ; $4010
@@ -124,7 +126,7 @@ IndoorBaseMapDMG::
     db   $04, $05, $06, $07, $08, $09, $0A, $0B   ; $43A0
     db   $0C, $0D, $0E, $0F, $00, $00, $00, $00   ; $43A8
 
-IndoorBaseMapGBC::
+IndoorObjectsTilemapCGB::
     db   $7F, $7F, $7F, $7F, $7E, $7E, $7E, $7E   ; $43B0
     db   $7D, $7D, $7D, $7D, $7C, $7C, $7C, $7C   ; $43B8
     db   $7E, $7E, $7E, $7E, $5A, $5A, $5A, $5A   ; $43C0
@@ -244,7 +246,7 @@ IndoorBaseMapGBC::
     db   $04, $05, $06, $07, $08, $09, $0A, $0B   ; $4750
     db   $0C, $0D, $0E, $0F, $00, $00, $00, $00   ; $4758
 
-ColorDungeonBaseMap::
+ColorDungeonObjectsTilemap::
     db   $7F, $7F, $7F, $7F, $7E, $7E, $7E, $7E   ; $4760
     db   $7D, $7D, $7D, $7D, $7C, $7C, $7C, $7C   ; $4768
     db   $7E, $7E, $7E, $7E, $5A, $5A, $5A, $5A   ; $4770

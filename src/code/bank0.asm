@@ -7234,7 +7234,7 @@ label_3FBD::
     call CopyData
     xor  a
     ldh  [$FFA5], a
-    ld   a, $0C
+    ld   a, BANK(LinkCharacterTiles)
     ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
@@ -7252,9 +7252,9 @@ LoadColorDungeonTiles::
     ld   a, b
     ld   [MBC3SelectBank], a
     ld   hl, ColorDungeonTiles
-    ld   de, vTiles0 + $0400
+    ld   de, vTiles0 + $400
     ld   bc, $400
     call CopyData
-    ld   a, $20
+    ld   a, BANK(InventoryEntryPoint)
     ld   [MBC3SelectBank], a
     ret

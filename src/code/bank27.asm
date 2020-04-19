@@ -1001,7 +1001,7 @@ Data_027_SourceTable::
 ._02 db HIGH(PhotoElementsTiles + $200), BANK(PhotoElementsTiles)
 ._03 db HIGH(PhotoElementsTiles + $300), BANK(PhotoElementsTiles)
 ._04 db HIGH(PhotoElementsTiles + $400), BANK(PhotoElementsTiles)
-._05 db HIGH(ColorDungeonTiles + $2F00), BANK(ColorDungeonTiles)
+._05 db HIGH(PhotoAlbumTiles    + $700), BANK(PhotoAlbumTiles)
 
 ; Copy data from a source specified in the table
 ; to a destination specified by $D01A

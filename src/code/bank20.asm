@@ -121,12 +121,12 @@ DungeonWallsTilesPointers::
     db   HIGH(DungeonWallsATiles)
     db   HIGH(DungeonWallsBTiles)
     db   HIGH(DungeonWallsETiles)
-    db   $0000
-    db   $0000
-    db   $0000
-    db   $0000
-    db   $0000
-    db   $0000
+    db   $00
+    db   $00
+    db   $00
+    db   $00
+    db   $00
+    db   $00
     db   HIGH(DungeonWallsCTiles)
     db   HIGH(DungeonWallsCTiles)
     db   HIGH(DungeonWallsBTiles)

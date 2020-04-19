@@ -643,7 +643,7 @@ LoadOAMTiles::
     push hl
     ld   a, [$C197]
     ld   d, a
-    ld   hl, $8400
+    ld   hl, vTiles0 + $400
     add  hl, bc
     add  hl, de
     ld   e, l
@@ -742,13 +742,13 @@ label_7B0::
 ; Data origin table (in bank $0C)
 TilesGfxSource::
 ; Inventory icons for ocarina songs
-._08 dw $6960
-._09 dw $69A0
-._0A dw $69C0
+._08 dw OcarinaSymbolsTiles
+._09 dw OcarinaSymbolsTiles + $40
+._0A dw OcarinaSymbolsTiles + $60
 ; Shared GFX: shadows, explosions, etc.
-._0B dw $4200
-._0C dw $4240
-._0D dw $4260
+._0B dw CharacterVfxTiles
+._0C dw CharacterVfxTiles + $40
+._0D dw CharacterVfxTiles + $60
 
 ; Data destination table
 TilesDestination::

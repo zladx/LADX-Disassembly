@@ -398,9 +398,9 @@ SelectBankAtHAndReturn::
 ; Copy Color Dungeon tiles?
 CopyColorDungeonSymbols::
     push af
-    ld   a, BANK(ColorDungeonTiles)
+    ld   a, BANK(ColorDungeonNpcTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, ColorDungeonTiles + $F00
+    ld   hl, ColorDungeonNpcTiles + $F00
     ld   de, $DCC0
     ld   bc, $20
     call CopyData
@@ -4430,8 +4430,8 @@ LoadTileset18::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B01
-    ld   hl, ColorDungeonTiles + $2800
-    ld   a, BANK(ColorDungeonTiles)
+    ld   hl, PhotoAlbumTiles
+    ld   a, BANK(PhotoAlbumTiles)
     jr   label_2B06
 
 LoadTileset17::
@@ -4512,8 +4512,8 @@ LoadTileset19::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_2B90
-    ld   hl, ColorDungeonTiles + $3000
-    ld   a, BANK(ColorDungeonTiles)
+    ld   hl, PhotoAlbumTiles + $800
+    ld   a, BANK(PhotoAlbumTiles)
     jr   label_2B95
 
 label_2B90::
@@ -4617,14 +4617,14 @@ LoadDungeonTiles::
     jr   nz, .notColorDungeon
     ld   a, BANK(ColorDungeonTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, ColorDungeonTiles + $2200
+    ld   hl, ColorDungeonTiles + $200
     ld   de, vTiles2
     ld   bc, TILE_SIZE * $10
     call CopyData
 
     ld   e, $00
     ld   d, e
-    ld   hl, ColorDungeonTiles + $2000
+    ld   hl, ColorDungeonTiles
     push de
     jr   .endIf
 
@@ -4704,7 +4704,7 @@ LoadDungeonTiles::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd2
-    ld   hl, ColorDungeonTiles + $2100 ; TODO: add a proper label
+    ld   hl, ColorDungeonTiles + $100
     ld   a, BANK(ColorDungeonTiles)
     ld   [MBC3SelectBank], a
 .colorDungeonEnd2
@@ -7251,9 +7251,9 @@ LoadColorDungeonTiles::
     ; Switch to bank $34 or $35
     ld   a, b
     ld   [MBC3SelectBank], a
-    ld   hl, ColorDungeonTiles
+    ld   hl, ColorDungeonNpcTiles
     ld   de, vTiles0 + $400
-    ld   bc, $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
     ld   a, BANK(InventoryEntryPoint)
     ld   [MBC3SelectBank], a

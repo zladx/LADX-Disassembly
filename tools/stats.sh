@@ -27,6 +27,7 @@ cd "$(dirname $0)/.."
 echo "Number of remaining raw addresses:"
 echo "   Referencing Home (0000-3FFF):"
 EXCLUDED_FILES="\
+--exclude */macros.asm \
 --exclude */bank0.asm \
 --exclude */bank1.asm \
 --exclude */bank14.asm \
@@ -35,18 +36,21 @@ EXCLUDED_FILES="\
 --exclude */bank19.asm \
 --exclude */bank20.asm \
 --exclude */bank36.asm \
+--exclude */animated_tiles.asm \
 --exclude */credits.asm \
+--exclude */photos.asm \
+--exclude */photos_bg.asm \
 --exclude */super_gameboy.asm \
 --exclude */home/init.asm \
 --exclude */home/clear_memory.asm \
 --exclude */audio/sfx.asm \
 --exclude */audio/music_1.asm"
-count_matches '(, | \[|\(|call |jp   )\$[0-3][A-Z0-9]{3}' "$EXCLUDED_FILES"
+count_matches '[^;] \$[0-3][0-9A-F]{3}' "$EXCLUDED_FILES"
 
 echo "   Referencing non-Home ROM banks (4000-7FFF):"
 EXCLUDED_FILES="\
 --exclude */bank20.asm"
-count_matches '(, | \[|\(|call |jp   )\$[4-7][A-Z0-9]{3}' "$EXCLUDED_FILES"
+count_matches '[^;] \$[4-7][0-9A-F]{3}' "$EXCLUDED_FILES"
 
 echo "   Referencing RAM (8000-FFFF):"
 count_matches '(, | \[|call |jp   )\$[89A-Z][A-Z0-9]{3}'

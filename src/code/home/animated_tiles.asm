@@ -546,13 +546,13 @@ AnimateTiles_return::
 label_1DE9::
     ld   hl, Npc1Tiles + $F00
     ld   a, BANK(Npc1Tiles)
-    jr   label_1DF5
+    jr   label_1DF0.loadTiles
 
 label_1DF0::
     ld   a, BANK(Npc3Tiles)
     ld   hl, Npc3Tiles + $2080
 
-label_1DF5::
+.loadTiles
     ld   [MBC3SelectBank], a
     ld   de, vTiles0 + $400
     ld   bc, $40

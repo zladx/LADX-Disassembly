@@ -53,7 +53,14 @@ section "bank7",romx[$4000],bank[$07]
 include "code/entities/bank7.asm"
 
 section "bank8",romx[$4000],bank[$08]
-include "data/base_maps/indoor.asm"
+IndoorObjectsTilemapDMG::
+include "data/objects_tilemaps/indoor.dmg.asm"
+IndoorObjectsTilemapCGB::
+include "data/objects_tilemaps/indoor.cgb.asm"
+ColorDungeonObjectsTilemap::
+include "data/objects_tilemaps/color_dungeon.asm"
+include "data/objects/physics.asm"
+include "data/bg_copy_requests.asm"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]
@@ -269,9 +276,9 @@ include "data/bg_attributes/overworld_pointers.asm"
 include "data/bg_attributes/overworld_banks.asm"
 include "code/map_loading.asm"
 OverworldObjectsTilemapDMG::
-incbin "data/base_maps/overworld.dmg.bin"
+include "data/objects_tilemaps/overworld.dmg.asm"
 OverworldObjectsTilemapCGB::
-incbin "data/base_maps/overworld.cgb.bin"
+include "data/objects_tilemaps/overworld.cgb.asm"
 include "code/entities/anglers_tunnel_door.asm"
 
 section "bank1B",romx[$4000],bank[$1B]

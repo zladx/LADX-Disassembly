@@ -5731,10 +5731,11 @@ jr_020_7BFC:
     pop  bc                                       ; $7BFC: $C1
     ret                                           ; $7BFD: $C9
 
-; FIXME: resolve this pointers table
 Data_020_7BFE::
-    db   $48, $71, $31, $56, $31, $56, $9C, $73, $27, $65, $EF, $4D, $EF, $4D, $39, $67
-    db   $06, $69, $AD, $45, $AD, $45, $D6, $5A, $E5, $4C, $6B, $3D, $6B, $3D, $73, $4E
+    db   $48, $71, $31, $56, $31, $56, $9C, $73
+    db   $27, $65, $EF, $4D, $EF, $4D, $39, $67
+    db   $06, $69, $AD, $45, $AD, $45, $D6, $5A
+    db   $E5, $4C, $6B, $3D, $6B, $3D, $73, $4E
     db   $A4, $3C, $29, $31, $29, $31, $EF, $3D
 
 func_020_7C26::
@@ -5752,11 +5753,13 @@ func_020_7C26::
     ld   c, a                                     ; $7C35: $4F
     ld   b, $00                                   ; $7C36: $06 $00
     push bc                                       ; $7C38: $C5
+
     ld   hl, Data_020_7BFE                        ; $7C39: $21 $FE $7B
     add  hl, bc                                   ; $7C3C: $09
     ld   bc, $08                                  ; $7C3D: $01 $08 $00
     ld   de, $DC10                                ; $7C40: $11 $10 $DC
     call CopyData                                 ; $7C43: $CD $14 $29
+
     pop  bc                                       ; $7C46: $C1
     ld   a, c                                     ; $7C47: $79
     cp   $20                                      ; $7C48: $FE $20

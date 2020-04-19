@@ -5332,20 +5332,22 @@ doCopyObjectToBG:
     and  a
     jr   z, .isOverworld
     ; … set the default base address
-    ld   hl, $43B0
-    ; If MapID == MAP_COLOR_DUNGEON, hl = $4760
+    ld   hl, IndoorObjectsTilemapCGB
+
+    ; If on Color Dungeon, use the objects tilemap of the Color Dungeon
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, .hasSpecialBaseAddress
-    ; If MapId == MAP_HOUSE && MapRoom == $B5, hl = $4760
+    jr   z, .useColorDungeonTable
+
+    ; Hack: if on camera shop, also use the objects tilemap of the Color Dungeon
     cp   MAP_HOUSE
     jr   nz, .baseAddressskipEntityLoad
     ldh  a, [hMapRoom]
-    cp   $B5
+    cp   $B5 ; camera shop indoor
     jr   nz, .baseAddressskipEntityLoad
 
-.hasSpecialBaseAddress
-    ld   hl, $4760
+.useColorDungeonTable
+    ld   hl, ColorDungeonObjectsTilemap
     jr   .baseAddressskipEntityLoad
 
 .isOverworld
@@ -5712,7 +5714,7 @@ LoadRoom::
 
     ; Set the base address for resolving usual room pointers
     ; (except Color Dungeon)
-    ld   hl, $4000
+    ld   hl, OverworldRoomPointers
 
 .fetchRoomAddress
     ; b = hl[room index]

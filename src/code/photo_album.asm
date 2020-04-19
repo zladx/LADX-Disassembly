@@ -155,35 +155,35 @@ Data_028_40E3::
 JumpTable_028_40FB:
     call LCDOff                                 ; $40FB: JumpTable_028_40FB $CD $CF $28
 
-    ld   a, BANK(ColorDungeonTiles)             ; $40FE: JumpTable_028_40FB $3E $35
-    ld   bc, $200                               ; $4100: JumpTable_028_40FB $01 $00 $02
-    ld   hl, ColorDungeonTiles + $1700          ; $4103: JumpTable_028_40FB $21 $00 $57
+    ld   a, BANK(PrintUI2Tiles)                 ; $40FE: JumpTable_028_40FB $3E $35
+    ld   bc, TILE_SIZE * $20                    ; $4100: JumpTable_028_40FB $01 $00 $02
+    ld   hl, PrintUI2Tiles                      ; $4103: JumpTable_028_40FB $21 $00 $57
     ld   de, vTiles2                            ; $4106: JumpTable_028_40FB $11 $00 $90
     call CopyData_trampoline                    ; $4109: JumpTable_028_40FB $CD $5D $0B
 
     ld   a, BANK(Overworld1Tiles)               ; $410C: JumpTable_028_40FB $3E $0C
     call AdjustBankNumberForGBC                 ; $410E: JumpTable_028_40FB $CD $0B $0B
-    ld   bc, $40                                ; $4111: JumpTable_028_40FB $01 $40 $00
-    ld   hl, Overworld1Tiles + $08C0            ; $4114: JumpTable_028_40FB $21 $C0 $57
+    ld   bc, TILE_SIZE * $4                     ; $4111: JumpTable_028_40FB $01 $40 $00
+    ld   hl, Overworld1Tiles + $8C0             ; $4114: JumpTable_028_40FB $21 $C0 $57
     ld   de, vTiles2 + $7C0                     ; $4117: JumpTable_028_40FB $11 $C0 $97
     call CopyData_trampoline                    ; $411A: JumpTable_028_40FB $CD $5D $0B
 
-    ld   a, BANK(InventoryEquipmentItemsTiles)                   ; $411D: JumpTable_028_40FB $3E $0C
+    ld   a, BANK(InventoryEquipmentItemsTiles)  ; $411D: JumpTable_028_40FB $3E $0C
     call AdjustBankNumberForGBC                 ; $411F: JumpTable_028_40FB $CD $0B $0B
-    ld   bc, $300                               ; $4122: JumpTable_028_40FB $01 $00 $03
+    ld   bc, TILE_SIZE * $30                    ; $4122: JumpTable_028_40FB $01 $00 $03
     ld   hl, InventoryEquipmentItemsTiles + $200                 ; $4125: JumpTable_028_40FB $21 $00 $4A
     ld   de, vTiles1 + $200                     ; $4128: JumpTable_028_40FB $11 $00 $8A
     call CopyData_trampoline                    ; $412B: JumpTable_028_40FB $CD $5D $0B
 
-    ld   a, BANK(ColorDungeonTiles)             ; $412E: JumpTable_028_40FB $3E $35
-    ld   bc, $200                               ; $4130: JumpTable_028_40FB $01 $00 $02
-    ld   hl, ColorDungeonTiles + $2B00          ; $4133: JumpTable_028_40FB $21 $00 $6B
+    ld   a, BANK(PhotoAlbumTiles)               ; $412E: JumpTable_028_40FB $3E $35
+    ld   bc, TILE_SIZE * $20                    ; $4130: JumpTable_028_40FB $01 $00 $02
+    ld   hl, PhotoAlbumTiles + $300             ; $4133: JumpTable_028_40FB $21 $00 $6B
     ld   de, vTiles1 + $500                     ; $4136: JumpTable_028_40FB $11 $00 $8D
     call CopyData_trampoline                    ; $4139: JumpTable_028_40FB $CD $5D $0B
 
-    ld   a, BANK(ColorDungeonTiles)             ; $413C: JumpTable_028_40FB $3E $35
-    ld   bc, $500                               ; $413E: JumpTable_028_40FB $01 $00 $05
-    ld   hl, ColorDungeonTiles + $1200          ; $4141: JumpTable_028_40FB $21 $00 $52
+    ld   a, BANK(PrintUI1Tiles)                 ; $413C: JumpTable_028_40FB $3E $35
+    ld   bc, TILE_SIZE * $50                    ; $413E: JumpTable_028_40FB $01 $00 $05
+    ld   hl, PrintUI1Tiles                      ; $4141: JumpTable_028_40FB $21 $00 $52
     ld   de, vTiles0                            ; $4144: JumpTable_028_40FB $11 $00 $80
     call CopyData_trampoline                    ; $4147: JumpTable_028_40FB $CD $5D $0B
 

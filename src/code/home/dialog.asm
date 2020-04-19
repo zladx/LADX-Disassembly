@@ -342,7 +342,7 @@ DialogLetterAnimationEndHandler::
     ; bc = [wDialogNextCharPosition]
     ld   c, a
     ld   b, $00
-    ; de = $0001
+    ; de = $01
     ld   e, $01
     ld   d, $00
     ld   a, [wBGOriginHigh]

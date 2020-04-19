@@ -431,6 +431,12 @@ section "bank34",romx[$4000],bank[$34]
 incbin "gfx/menus/print.2bpp"
 
 section "bank35",romx[$4000],bank[$35]
+ColorDungeonNpcTiles::
+incbin "gfx/characters/color_dungeon.2bpp"
+PrintUI1Tiles::
+incbin "gfx/photos/print_ui_1.2bpp"
+PrintUI2Tiles::
+incbin "gfx/photos/print_ui_2.2bpp"
 ColorDungeonTiles::
 incbin "gfx/dungeons/color_dungeon.2bpp"
 CameraShopIndoorTiles::

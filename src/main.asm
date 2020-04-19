@@ -151,8 +151,10 @@ DungeonWallsETiles::
 incbin "gfx/dungeons/walls_e.dmg.2bpp"
 DungeonWallsFTiles::
 incbin "gfx/dungeons/walls_f.dmg.2bpp"
-DungeonSideviewTiles::
-incbin "gfx/dungeons/sideview.dmg.2bpp"
+DungeonSideview1Tiles::
+incbin "gfx/dungeons/sideview_1.dmg.2bpp"
+DungeonSideview2Tiles::
+incbin "gfx/dungeons/sideview_2.dmg.2bpp"
 
 section "bankOE",romx[$4000],bank[$0E]
 NpcTilesDataStart::
@@ -168,8 +170,6 @@ TitleLogoTitles::
 incbin "gfx/intro/title.dmg.2bpp"
 FontTiles::
 incbin "gfx/fonts/font.dmg.2bpp"
-CameraShopTiles::
-incbin "gfx/world/camera_shop.dmg.2bpp"
 Overworld2Tiles::
 incbin "gfx/world/overworld_2.dmg.2bpp"
 
@@ -382,7 +382,6 @@ incbin "gfx/menus/menu.cgb.2bpp"
 incbin "gfx/menus/save_menu.cgb.2bpp"
 incbin "gfx/intro/title.cgb.2bpp"
 incbin "gfx/fonts/font.cgb.2bpp"
-incbin "gfx/world/camera_shop.cgb.2bpp"
 incbin "gfx/world/overworld_2.cgb.2bpp"
 
 section "bank30",romx[$4000],bank[$30]
@@ -424,6 +423,10 @@ incbin "gfx/menus/print.2bpp"
 section "bank35",romx[$4000],bank[$35]
 ColorDungeonTiles::
 incbin "gfx/dungeons/color_dungeon.2bpp"
+CameraShopIndoorTiles::
+incbin "gfx/dungeons/camera_shop.2bpp"
+PhotoAlbumTiles::
+incbin "gfx/photos/photo_album.2bpp"
 EndingCGBAltTiles::
 incbin "gfx/ending/ending.cgb.alt.2bpp"
 

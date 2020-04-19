@@ -1091,6 +1091,8 @@ LoadRoomTiles::
     ;
     ; ------------------------------------------------------------
 
+    ; TODO: document this
+
     xor  a
     ldh  [hScratch0], a
 
@@ -4418,7 +4420,7 @@ LoadTileset1D::
     ld   a, BANK(Overworld2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, Overworld2Tiles + $400
+    ld   hl, Overworld2Tiles + $600
     ld   de, $8800
     ld   bc, TILE_SIZE * $80
     jp   CopyData
@@ -5075,13 +5077,19 @@ LoadTileset9::
     and  a
     jp   z, .loadOverworldBGTiles
 
-    ld   a, $0D
+    ld   a, BANK(DungeonsTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
+
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   z, .jr_2F4B
-    ld   hl, $7000
+    jr   z, .loadTopViewTiles
+
+    ;
+    ; Load tiles for side-scrolling sections
+    ;
+
+    ld   hl, DungeonSideview1Tiles
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   z, .label_2F41
@@ -5089,7 +5097,7 @@ LoadTileset9::
     jr   nc, .label_2F3B
 
 .label_2F36
-    ld   hl, $7800
+    ld   hl, DungeonSideview2Tiles
     jr   .label_2F41
 
 .label_2F3B
@@ -5098,73 +5106,90 @@ LoadTileset9::
     jr   z, .label_2F36
 .label_2F41
 
-    ; Copy tiles to the BG tiles
+    ; Copy sideview tiles to the BG tiles
     ld   de, vTiles2
-    ld   bc, TILE_SIZE * 128
+    ld   bc, TILE_SIZE * $80
     call CopyData
     ret
 
-.jr_2F4B
+.loadTopViewTiles
+    ;
+    ; Load tiles for top-view dungeon
+    ;
+
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, .jr_2F57
+    jr   nz, .notColorDungeon
     ldh  a, [hMapRoom]
     cp   $12
-    jr   nz, .jr_2F69
+    jr   nz, .skipBGLoading
+.notColorDungeon
 
-.jr_2F57
-    ld   hl, $5000
+    ld   hl, Dungeons2Tiles
     ldh  a, [hWorldTileset]
-    cp   $FF
-    jr   z, .jr_2F69
+    cp   W_TILESET_NO_UPDATE
+    jr   z, .skipBGLoading
+
     add  a, $50
     ld   h, a
-    ld   bc, $100
+    ld   bc, TILE_SIZE * $10
     call CopyData
+.skipBGLoading
 
-.jr_2F69
+    ; Hack: if inside the camera shop, load a specific tileset
     ldh  a, [hMapId]
     cp   MAP_HOUSE
-    jr   nz, .jr_2F87
+    jr   nz, .cameraShopEnd
     ldh  a, [hMapRoom]
-    cp   $B5
-    jr   nz, .jr_2F87
-    ld   a, $35
+    cp   $B5 ; camera shop indoor room
+    jr   nz, .cameraShopEnd
+    ld   a, BANK(CameraShopIndoorTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $6600
-    ld   de, $8F00
-    ld   bc, $200
+    ld   hl, CameraShopIndoorTiles
+    ld   de, vTiles1 + $700
+    ld   bc, TILE_SIZE * $20
     call CopyData
     ret
+.cameraShopEnd
 
-.jr_2F87
+    ; Hack: on GBC, load 2 tiles to a specific location
+    ; TODO: find out which tiles
+
     ldh  a, [hIsGBC]
     and  a
     ret  z
+
     ldh  a, [hMapId]
     and  a
     ret  nz
-    ld   a, $35
+
+    ld   a, BANK(PhotoAlbumTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $6E00
-    ld   de, $9690
-    ld   bc, $10
+    ld   hl, PhotoAlbumTiles + $600
+    ld   de, vTiles2 + $690
+    ld   bc, TILE_SIZE
     call CopyData
-    ld   hl, $6E10
-    ld   de, $9790
-    ld   bc, $10
+
+    ld   hl, PhotoAlbumTiles + $610
+    ld   de, vTiles2 + $790
+    ld   bc, TILE_SIZE
     call CopyData
     ret
 
 .loadOverworldBGTiles
-    ld   a, $0F
+    ;
+    ; Load 2 rows of tiles for the world BG tileset
+    ;
+    ld   a, BANK(Overworld2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
+    ; If the tileset is W_TILESET_KEEP, do nothing.
     ldh  a, [hWorldTileset]
-    cp   $0F
+    cp   W_TILESET_KEEP
     jr   z, .return
 
+    ; hl = ($40 + hWorldTileset) * $100
     add  a, $40
     ld   h, a
     ld   l, $00

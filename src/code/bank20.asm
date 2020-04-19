@@ -1689,36 +1689,125 @@ jr_020_5311:
     ret                                           ; $5318: $C9
 
 LinkAnimationStateTable::
-    db   $00, $02, $02, $00, $10, $02, $12       ; $5318 |........|
-    db   $00, $04, $06, $06, $04, $08, $0A, $0C  ; $5320 |........|
-    db   $0E, $18, $0A, $1C, $0E, $0A, $08, $0E  ; $5328 |........|
-    db   $0C, $0A, $18, $0E, $1C, $20, $22, $24  ; $5330 |..... "$|
-    db   $26, $28, $2A, $2A, $28, $30, $32, $20  ; $5338 |&(**(02 |
-    db   $22, $34, $36, $24, $26, $38, $3A, $28  ; $5340 |"46$&8:(|
-    db   $2A, $3A, $38, $2A, $28, $40, $40, $42  ; $5348 |*:8*(@@B|
-    db   $42, $44, $46, $48, $4A, $4C, $4E, $50  ; $5350 |BDFHJLNP|
-    db   $52, $4E, $4C, $52, $50, $80, $02, $82  ; $5358 |RNLRP...|
-    db   $00, $84, $86, $88, $8A, $8C, $8E, $90  ; $5360 |........|
-    db   $92, $94, $96, $98, $9A, $9C, $9E, $9A  ; $5368 |........|
-    db   $A2, $A4, $08, $A6, $0C, $A8, $AA, $AC  ; $5370 |........|
-    db   $AE, $B0, $B2, $B4, $B6, $B0, $B2, $B4  ; $5378 |........|
-    db   $B6, $04, $C0, $06, $C2, $5A, $58, $5E  ; $5380 |.....ZX^|
-    db   $5C, $58, $5A, $5C, $5E, $44, $46, $6E  ; $5388 |\XZ\^DFn|
-    db   $6E, $40, $40, $56, $56, $7A, $78, $7E  ; $5390 |n@@VVzx~|
-    db   $7C, $78, $7A, $7C, $7E, $74, $76, $76  ; $5398 ||xz|~tvv|
-    db   $74, $70, $72, $72, $70, $CA, $C8, $D6  ; $53A0 |tprrp...|
-    db   $D4, $C8, $CA, $D4, $D6, $CC, $CE, $D8  ; $53A8 |........|
-    db   $DA, $C4, $C4, $C6, $C6, $DC, $DC, $DE  ; $53B0 |........|
-    db   $DE, $EA, $EC, $EE, $F0, $F2, $F4, $F6  ; $53B8 |........|
-    db   $F6, $F8, $FA, $E0, $E2, $E4, $E6, $E8  ; $53C0 |........|
-    db   $E8, $10, $12, $14, $16, $18, $1C, $12  ; $53C8 |........|
-    db   $10, $16, $14, $1C, $18, $66, $68, $6A  ; $53D0 |.....fhj|
-    db   $6C, $68, $66, $68, $66, $6C, $6A, $66  ; $53D8 |lhfhfljf|
-    db   $68, $60, $60, $62, $62, $64, $64, $62  ; $53E0 |h``bbddb|
-    db   $62, $64, $64, $60, $60, $54, $54, $3C  ; $53E8 |bdd``TT<|
-    db   $3E, $FE, $FE, $18, $1A, $1C, $1E, $2C  ; $53F0 |>......,|
-    db   $2E, $B8, $BA, $2E, $2C, $BA, $B8, $BC  ; $53F8 |....,...|
-    db   $BE, $D0, $D2, $A0, $FC, $FC, $A0       ; $5400 |........|
+    db   $00, $02
+    db   $02, $00
+    db   $10, $02
+    db   $12, $00
+    db   $04, $06
+    db   $06, $04
+    db   $08, $0A
+    db   $0C, $0E
+    db   $18, $0A
+    db   $1C, $0E
+    db   $0A, $08
+    db   $0E, $0C
+    db   $0A, $18
+    db   $0E, $1C
+    db   $20, $22
+    db   $24, $26
+    db   $28, $2A
+    db   $2A, $28
+    db   $30, $32
+    db   $20, $22
+    db   $34, $36
+    db   $24, $26
+    db   $38, $3A
+    db   $28, $2A
+    db   $3A, $38
+    db   $2A, $28
+    db   $40, $40
+    db   $42, $42
+    db   $44, $46
+    db   $48, $4A
+    db   $4C, $4E
+    db   $50, $52
+    db   $4E, $4C
+    db   $52, $50
+    db   $80, $02
+    db   $82, $00
+    db   $84, $86
+    db   $88, $8A
+    db   $8C, $8E
+    db   $90, $92
+    db   $94, $96
+    db   $98, $9A
+    db   $9C, $9E
+    db   $9A, $A2
+    db   $A4, $08
+    db   $A6, $0C
+    db   $A8, $AA
+    db   $AC, $AE
+    db   $B0, $B2
+    db   $B4, $B6
+    db   $B0, $B2
+    db   $B4, $B6
+    db   $04, $C0
+    db   $06, $C2
+    db   $5A, $58
+    db   $5E, $5C
+    db   $58, $5A
+    db   $5C, $5E
+    db   $44, $46
+    db   $6E, $6E
+    db   $40, $40
+    db   $56, $56
+    db   $7A, $78
+    db   $7E, $7C
+    db   $78, $7A
+    db   $7C, $7E
+    db   $74, $76
+    db   $76, $74
+    db   $70, $72
+    db   $72, $70
+    db   $CA, $C8
+    db   $D6, $D4
+    db   $C8, $CA
+    db   $D4, $D6
+    db   $CC, $CE
+    db   $D8, $DA
+    db   $C4, $C4
+    db   $C6, $C6
+    db   $DC, $DC
+    db   $DE, $DE
+    db   $EA, $EC
+    db   $EE, $F0
+    db   $F2, $F4
+    db   $F6, $F6
+    db   $F8, $FA
+    db   $E0, $E2
+    db   $E4, $E6
+    db   $E8, $E8
+    db   $10, $12
+    db   $14, $16
+    db   $18, $1C
+    db   $12, $10
+    db   $16, $14
+    db   $1C, $18
+    db   $66, $68
+    db   $6A, $6C
+    db   $68, $66
+    db   $68, $66
+    db   $6C, $6A
+    db   $66, $68
+    db   $60, $60
+    db   $62, $62
+    db   $64, $64
+    db   $62, $62
+    db   $64, $64
+    db   $60, $60
+    db   $54, $54
+    db   $3C, $3E
+    db   $FE, $FE
+    db   $18, $1A
+    db   $1C, $1E
+    db   $2C, $2E
+    db   $B8, $BA
+    db   $2E, $2C
+    db   $BA, $B8
+    db   $BC, $BE
+    db   $D0, $D2
+    db   $A0, $FC
+    db   $FC, $A0
 
 data_020_5407::
 ; Called from SkipTilesGroupAnimation
@@ -1743,6 +1832,7 @@ func_020_54F5::
     cp   $FF                                      ; $54F7: $FE $FF
     ret  z                                        ; $54F9: $C8
 
+    ; Read the first byte in LinkAnimationStateTable
     ld   hl, LinkAnimationStateTable              ; $54FA: $21 $19 $53
     sla  a                                        ; $54FD: $CB $27
     ld   c, a                                     ; $54FF: $4F
@@ -1750,6 +1840,7 @@ func_020_54F5::
     add  hl, bc                                   ; $5502: $09
     ld   e, [hl]                                  ; $5503: $5E
     push hl                                       ; $5504: $E5
+
     ld   hl, data_020_5407                        ; $5505: $21 $07 $54
     add  hl, bc                                   ; $5508: $09
     ld   a, [wC11D]                               ; $5509: $FA $1D $C1
@@ -1758,8 +1849,6 @@ func_020_54F5::
     ld   [wC11D], a                               ; $550F: $EA $1D $C1
     inc  hl                                       ; $5512: $23
     ld   a, [wC11E]                               ; $5513: $FA $1E $C1
-
-jr_020_5516:
     and  $98                                      ; $5516: $E6 $98
     or   [hl]                                     ; $5518: $B6
     ld   [wC11E], a                               ; $5519: $EA $1E $C1
@@ -1778,8 +1867,11 @@ jr_020_5516:
     ld   b, h                                     ; $5533: $44
     ld   hl, vTiles0                              ; $5534: $21 $00 $80
     ld   d, $20                                   ; $5537: $16 $20
-    call label_1D0A                               ; $5539: $CD $0A $1D
+    call CopyLinkTilesPair                        ; $5539: $CD $0A $1D
+
+    ; hl = LinkAnimationStateTable + hLinkAnimationState
     pop  hl                                       ; $553C: $E1
+    ; Read the 2nd byte from the table
     inc  hl                                       ; $553D: $23
     ld   e, [hl]                                  ; $553E: $5E
     ld   d, $00                                   ; $553F: $16 $00
@@ -1795,9 +1887,9 @@ jr_020_5516:
     add  hl, de                                   ; $5554: $19
     ld   c, l                                     ; $5555: $4D
     ld   b, h                                     ; $5556: $44
-    ld   hl, $8020                                ; $5557: $21 $20 $80
+    ld   hl, vTiles0 + $20                        ; $5557: $21 $20 $80
     ld   d, $20                                   ; $555A: $16 $20
-    call label_1D0A                               ; $555C: $CD $0A $1D
+    call CopyLinkTilesPair                        ; $555C: $CD $0A $1D
     ret                                           ; $555F: $C9
 
 Data_020_5560::

@@ -390,18 +390,24 @@ AnimatePhotoTilesGroup::
     callsb func_038_7830
     jp   DrawLinkSpriteAndReturn
 
-label_1D0A::
-    ld   a, $0C
+; Copy D bytes from BC to HL, then return to bank 20.
+; Inputs:
+;   d    number of bytes to copy
+;   bc   source address
+;   hl   target address in VRAM
+CopyLinkTilesPair::
+    ld   a, BANK(LinkCharacterTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
 
-label_1D12::
+.loop
     ld   a, [bc]
     inc  bc
     ldi  [hl], a
     dec  d
-    jr   nz, label_1D12
-    ld   a, $20
+    jr   nz, .loop
+
+    ld   a, BANK(func_020_54F5)
     ld   [MBC3SelectBank], a
     ret
 

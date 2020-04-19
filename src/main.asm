@@ -89,6 +89,8 @@ include "data/rooms/indoors_b.asm"
 section "bank0C",romx[$4000],bank[$0C]
 LinkCharacterTiles::
 incbin "gfx/characters/link_1.dmg.2bpp"
+CharacterVfxTiles::
+incbin "gfx/characters/vfx.dmg.2bpp"
 Items1Tiles::
 incbin "gfx/items/items_1.dmg.2bpp"
 InventoryEquipmentItemsTiles::
@@ -366,6 +368,7 @@ incbin "gfx/photos/photo_bridge.2bpp"
 
 section "bank2C",romx[$4000],bank[$2C]
 incbin "gfx/characters/link_1.cgb.2bpp"
+incbin "gfx/characters/vfx.cgb.2bpp"
 incbin "gfx/items/items_1.cgb.2bpp"
 incbin "gfx/items/items_2.cgb.2bpp"
 incbin "gfx/items/dungeon_keys.cgb.2bpp"

@@ -53,7 +53,14 @@ section "bank7",romx[$4000],bank[$07]
 include "code/entities/bank7.asm"
 
 section "bank8",romx[$4000],bank[$08]
-include "data/base_maps/indoor.asm"
+IndoorObjectsTilemapDMG::
+include "data/objects_tilemaps/indoor.dmg.asm"
+IndoorObjectsTilemapCGB::
+include "data/objects_tilemaps/indoor.cgb.asm"
+ColorDungeonObjectsTilemap::
+include "data/objects_tilemaps/color_dungeon.asm"
+include "data/objects/physics.asm"
+include "data/bg_copy_requests.asm"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]
@@ -151,8 +158,10 @@ DungeonWallsETiles::
 incbin "gfx/dungeons/walls_e.dmg.2bpp"
 DungeonWallsFTiles::
 incbin "gfx/dungeons/walls_f.dmg.2bpp"
-DungeonSideviewTiles::
-incbin "gfx/dungeons/sideview.dmg.2bpp"
+DungeonSideview1Tiles::
+incbin "gfx/dungeons/sideview_1.dmg.2bpp"
+DungeonSideview2Tiles::
+incbin "gfx/dungeons/sideview_2.dmg.2bpp"
 
 section "bankOE",romx[$4000],bank[$0E]
 NpcTilesDataStart::
@@ -162,21 +171,27 @@ incbin "gfx/characters/npc_1.dmg.2bpp"
 section "bankOF",romx[$4000],bank[$0F]
 MenuTiles::
 incbin "gfx/menus/menu.dmg.2bpp"
+SaveMenuTiles::
+incbin "gfx/menus/save_menu.dmg.2bpp"
+TitleLogoTitles::
 incbin "gfx/intro/title.dmg.2bpp"
 FontTiles::
 incbin "gfx/fonts/font.dmg.2bpp"
-CameraShopTiles::
-incbin "gfx/world/camera_shop.dmg.2bpp"
 Overworld2Tiles::
 incbin "gfx/world/overworld_2.dmg.2bpp"
 
 section "bank10",romx[$4000],bank[$10]
-incbin "gfx/intro/clouds-top.dmg.2bpp"
-incbin "gfx/intro/clouds-middle.dmg.2bpp"
-incbin "gfx/intro/clouds-bottom.dmg.2bpp"
-incbin "gfx/intro/waves.dmg.2bpp"
-incbin "gfx/intro/intro.dmg.2bpp"
+IntroTiles::
+Intro1Tiles::
+incbin "gfx/intro/intro_1.dmg.2bpp"
+Intro2Tiles::
+incbin "gfx/intro/intro_2.dmg.2bpp"
+Intro3Tiles::
+incbin "gfx/intro/intro_3.dmg.2bpp"
+StaticPicturesTiles::
+ChristineTiles::
 incbin "gfx/scenes/christine.dmg.2bpp"
+MarinBeachTiles::
 incbin "gfx/scenes/marin_beach.dmg.2bpp"
 MarinBeachWavesTiles::
 incbin "gfx/scenes/marin_beach_waves.dmg.2bpp"
@@ -184,6 +199,7 @@ FontLargeTiles::
 incbin "gfx/fonts/font_large.dmg.2bpp"
 ReliefTiles::
 incbin "gfx/scenes/relief.dmg.2bpp"
+PaintingTiles::
 incbin "gfx/scenes/painting.dmg.2bpp"
 
 section "bank11",romx[$4000],bank[$11]
@@ -217,7 +233,14 @@ incbin "gfx/items/minimap_dmg.2bpp"
 
 section "bank13",romx[$4000],bank[$13]
 EndingTiles::
-incbin "gfx/ending/ending.dmg.2bpp"
+EndingTiles1::
+incbin "gfx/ending/ending_1.dmg.2bpp"
+EaglesTowerTop1Tiles::
+incbin "gfx/dungeons/eagles_tower_top_1.dmg.2bpp"
+EndingTiles2::
+incbin "gfx/ending/ending_2.dmg.2bpp"
+EaglesTowerTop2Tiles::
+incbin "gfx/dungeons/eagles_tower_top_2.dmg.2bpp"
 
 section "bank14",romx[$4000],bank[$14]
 include "data/events/dungeons.asm"
@@ -252,10 +275,10 @@ include "data/rooms/overworld_b.asm"
 include "data/bg_attributes/overworld_pointers.asm"
 include "data/bg_attributes/overworld_banks.asm"
 include "code/map_loading.asm"
-OverworldBaseMapDMG::
-incbin "data/base_maps/overworld.dmg.bin"
-OverworldBaseMapGBC::
-incbin "data/base_maps/overworld.cgb.bin"
+OverworldObjectsTilemapDMG::
+include "data/objects_tilemaps/overworld.dmg.asm"
+OverworldObjectsTilemapCGB::
+include "data/objects_tilemaps/overworld.cgb.asm"
 include "code/entities/anglers_tunnel_door.asm"
 
 section "bank1B",romx[$4000],bank[$1B]
@@ -363,33 +386,15 @@ incbin "gfx/characters/npc_1.cgb.2bpp"
 
 section "bank2F",romx[$4000],bank[$2F]
 incbin "gfx/menus/menu.cgb.2bpp"
+incbin "gfx/menus/save_menu.cgb.2bpp"
 incbin "gfx/intro/title.cgb.2bpp"
-FontTilesCGB::
 incbin "gfx/fonts/font.cgb.2bpp"
-incbin "gfx/world/camera_shop.cgb.2bpp"
 incbin "gfx/world/overworld_2.cgb.2bpp"
 
 section "bank30",romx[$4000],bank[$30]
-incbin "gfx/intro/clouds-top.cgb.2bpp"
-incbin "gfx/intro/clouds-middle.cgb.2bpp"
-incbin "gfx/intro/clouds-bottom.cgb.2bpp"
-incbin "gfx/intro/waves.cgb.2bpp"
-incbin "gfx/intro/link_pic.cgb.2bpp"
-incbin "gfx/intro/egg_top.cgb.2bpp"
-incbin "gfx/intro/unused_1.cgb.2bpp"
-incbin "gfx/intro/seafoam.cgb.2bpp"
-incbin "gfx/intro/palm_trees.cgb.2bpp"
-incbin "gfx/intro/mountain.cgb.2bpp"
-incbin "gfx/intro/egg.cgb.2bpp"
-incbin "gfx/intro/canopy.cgb.2bpp"
-incbin "gfx/intro/sand.cgb.2bpp"
-incbin "gfx/intro/copyright.cgb.2bpp"
-incbin "gfx/intro/mountain_clouds.cgb.2bpp"
-incbin "gfx/intro/unused_2.cgb.2bpp"
-incbin "gfx/intro/waves_animation.cgb.2bpp"
-incbin "gfx/intro/seafoam_animation.cgb.2bpp"
-incbin "gfx/intro/marin.cgb.2bpp"
-incbin "gfx/intro/intro.cgb.2bpp"
+incbin "gfx/intro/intro_1.cgb.2bpp"
+incbin "gfx/intro/intro_2.cgb.2bpp"
+incbin "gfx/intro/intro_3.cgb.2bpp"
 incbin "gfx/scenes/christine.cgb.2bpp"
 incbin "gfx/scenes/marin_beach.cgb.2bpp"
 incbin "gfx/scenes/marin_beach_waves.cgb.2bpp"
@@ -414,7 +419,10 @@ incbin "gfx/items/dungeon_items.cgb.2bpp"
 incbin "gfx/items/minimap_cgb.2bpp"
 
 section "bank33",romx[$4000],bank[$33]
-incbin "gfx/ending/ending.cgb.2bpp"
+incbin "gfx/ending/ending_1.cgb.2bpp"
+incbin "gfx/dungeons/eagles_tower_top_1.cgb.2bpp"
+incbin "gfx/ending/ending_2.cgb.2bpp"
+incbin "gfx/dungeons/eagles_tower_top_2.cgb.2bpp"
 
 section "bank34",romx[$4000],bank[$34]
 incbin "gfx/menus/print.2bpp"
@@ -422,6 +430,10 @@ incbin "gfx/menus/print.2bpp"
 section "bank35",romx[$4000],bank[$35]
 ColorDungeonTiles::
 incbin "gfx/dungeons/color_dungeon.2bpp"
+CameraShopIndoorTiles::
+incbin "gfx/dungeons/camera_shop.2bpp"
+PhotoAlbumTiles::
+incbin "gfx/photos/photo_album.2bpp"
 EndingCGBAltTiles::
 incbin "gfx/ending/ending.cgb.alt.2bpp"
 
@@ -434,6 +446,11 @@ include "code/photos.asm"
 section "bank38",romx[$4000],bank[$38]
 CgbMiscTiles::
 incbin "gfx/cgb_misc.2bpp"
+TitleDXTiles::
+TitleDXTilesDMG::
+incbin "gfx/intro/title_dx.dmg.2bpp"
+TitleDXTilesCGB::
+incbin "gfx/intro/title_dx.cgb.2bpp"
 PhotoElementsTiles::
 incbin "gfx/photos/photo_elements_4.2bpp"
 include "code/photos_animations.asm"

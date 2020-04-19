@@ -217,7 +217,7 @@ label_44B0::
 
 GameplayWorldSubtype2Handler::
     ld   a, $0F
-    ldh  [$FF94], a
+    ldh  [hWorldTileset], a
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_44C9
@@ -230,7 +230,7 @@ GameplayWorldSubtype2Handler::
     ei
 
 label_44C9::
-    call LoadRoomSprites
+    call LoadRoomTiles
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
     ldh  [hNeedsUpdatingEnnemiesTiles], a

@@ -960,65 +960,88 @@ label_D15::
     ld   a, TRANSCIENT_VFX_SWORD_POKE
     jp   AddTranscientVfx
 
-; Load sprites for the next room,
-; either during a map transition or a room transition.
-LoadRoomSprites::
-    ld   a, $20
+; Schedule the loading of the tilesets for the next room,
+; (either during a map transition or a room transition).
+;
+; Actual loading will be done during the next vblank period.
+LoadRoomTiles::
+    ld   a, BANK(TilesetTables)
     ld   [MBC3SelectBank], a
 
-    ; If is indoor…
+    ; ------------------------------------------------------------
+    ;
+    ; Load Background tileset
+    ;
+    ; ------------------------------------------------------------
+
     ld   a, [wIsIndoor]
     and  a
     jr   z, .overworld
 
     ;
-    ; Indoor
+    ; Indoor BG tileset
     ;
 
+    ; de = [hMapRoom]
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
-    ld   hl, data_020_6EB3
+    ld   hl, IndoorsTilesetsTable
+
+    ; Use a special table for the Color Dungeon
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, .label_D3C
-    ld   hl, data_020_70B3
-    jr   .label_D45
+    jr   nz, .colorDungeonEnd
+    ld   hl, ColorDungeonTilesetsTable
+    jr   .readTilesetFromTable
+.colorDungeonEnd
 
-.label_D3C
-    cp   $1A
-    jr   nc, .label_D45
-    cp   $06
-    jr   c, .label_D45
+    ; If 06 < mapId < MAP_UNKNOWN_1A, add $100 to the table address
+    cp   MAP_UNKNOWN_1A
+    jr   nc, .readTilesetFromTable
+    cp   MAP_EAGLES_TOWER
+    jr   c, .readTilesetFromTable
     inc  h
 
-.label_D45
+.readTilesetFromTable
     add  hl, de
-    ldh  a, [$FF94]
+
+    ; a = Table[hMapRoom]
+    ; e = previous tileset
+    ldh  a, [hWorldTileset]
     ld   e, a
     ld   a, [hl]
+
+    ; If the tileset didn't change, nothing to do.
     cp   e
-    jr   z, .label_D57
-    ldh  [$FF94], a
-    cp   $FF
-    jr   z, .label_D57
+    jr   z, .indoorTilesetEnd
+
+    ; Apply the new tileset
+    ldh  [hWorldTileset], a
+
+    ; Schedule the tiles loading operation for the next vblank
+    ; (except if the tileset is W_TILESET_NO_UPDATE)
+    cp   W_TILESET_NO_UPDATE
+    jr   z, .indoorTilesetEnd
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
 
-.label_D57::
-    jr   .indoorOutdoorEnd
+.indoorTilesetEnd
+    jr   .tilesetEnd
 
 .overworld
     ;
-    ; Overworld
+    ; Overworld BG tileset
     ;
 
     ldh  a, [hMapRoom]
+    ; hack: for overworld room $07 (right of the Egg), use tilset of the taramanch center
     cp   $07
-    jr   nz, .label_D60
+    jr   nz, .eggHackEnd
     inc  a
+.eggHackEnd
 
-.label_D60
+    ; de = hMapRoom / 4
     ld   d, a
     srl  a
     srl  a
@@ -1030,34 +1053,54 @@ LoadRoomSprites::
     or   e
     ld   e, a
     ld   d, $00
-    ld   hl, data_020_6E73
+
+    ; a = OverworldTilesetsTable[hMapRoom / 4]
+    ; e = previous tileset
+    ld   hl, OverworldTilesetsTable
     add  hl, de
-    ldh  a, [$FF94]
+    ldh  a, [hWorldTileset]
     ld   e, a
     ld   a, [hl]
-    cp   e
-    jr   z, .indoorOutdoorEnd
-    cp   $0F
-    jr   z, .indoorOutdoorEnd
-    cp   $1A
-    jr   nz, .label_D8B
-    ldh  a, [hMapRoom]
-    cp   $37
-    jr   nz, .indoorOutdoorEnd
-    ld   a, [hl]
 
-.label_D8B
-    ldh  [$FF94], a
+    ; If the tileset didn't change, nothing to do.
+    cp   e
+    jr   z, .tilesetEnd
+    ; If the tileset is TILESET_KEEP, nothing to do.
+    cp   W_TILESET_KEEP
+    jr   z, .tilesetEnd
+
+    ; If on prairie north, but not on the Camera Shoop room,
+    ; treat the tileset as TILESET_KEEP: nothing to do.
+    cp   W_TILESET_CAMERA_SHOP
+    jr   nz, .cameraShopEnd
+    ldh  a, [hMapRoom]
+    cp   $37 ; camera shop room
+    jr   nz, .tilesetEnd
+    ld   a, [hl]
+.cameraShopEnd
+
+    ldh  [hWorldTileset], a
+    ; Schedule the tiles loading operation for the next vblank
     ld   a, $01
     ldh  [hNeedsUpdatingBGTiles], a
+.tilesetEnd
 
-.indoorOutdoorEnd
+    ; ------------------------------------------------------------
+    ;
+    ; Load Sprites tileset
+    ;
+    ; ------------------------------------------------------------
+
+    ; TODO: document this
+
     xor  a
     ldh  [hScratch0], a
+
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   hl, data_020_70D3
+
     ld   a, [wIsIndoor]
     ld   d, a
     ldh  a, [hMapId]
@@ -3391,7 +3434,7 @@ label_1F69::
     ld   a, [hl]
     ldh  [hScratch0], a
 
-    ; hScratch5 = unknown value read from the base map
+    ; hScratch5 = unknown value read from the objects tilesets table
     ; d = map group id
     ; e = room object
     ld   e, a
@@ -3879,26 +3922,26 @@ DoUpdateBGRegion::
     ld   a, [wIsIndoor]
     and  a
     jr   z, .baseAddress_isOverworld
-    ld   hl, IndoorBaseMapDMG
+    ld   hl, IndoorObjectsTilemapDMG
     ; if IsGBC…
     ldh  a, [hIsGBC]
     and  a
     jr   z, .palettesskipEntityLoad
-    ; … hl = (MapId == MAP_COLOR_DUNGEON ? ColorDungeonBaseMap : IndoorBaseMapGBC)
-    ld   hl, IndoorBaseMapGBC
+    ; … hl = (MapId == MAP_COLOR_DUNGEON ? ColorDungeonObjectsTilemap : IndoorObjectsTilemapCGB)
+    ld   hl, IndoorObjectsTilemapCGB
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .configurePalettes
-    ld   hl, ColorDungeonBaseMap
+    ld   hl, ColorDungeonObjectsTilemap
     jr   .configurePalettes
 
 .baseAddress_isOverworld
-    ; hl = (hIsGBC ? OverworldBaseMapGBC : OverworldBaseMapDMG)
-    ld   hl, OverworldBaseMapDMG
+    ; hl = (hIsGBC ? OverworldObjectsTilemapCGB : OverworldObjectsTilemapDMG)
+    ld   hl, OverworldObjectsTilemapDMG
     ldh  a, [hIsGBC]
     and  a
     jr   z, .palettesskipEntityLoad
-    ld   hl, OverworldBaseMapGBC
+    ld   hl, OverworldObjectsTilemapCGB
 
     ;
     ; Palettes configuration (GBC only)
@@ -4224,11 +4267,11 @@ LCDOff::
     ld   [rIE], a    ; Restore interrupts configuration
     ret
 
-LoadTilemap0F_trampoline::
-    jpsw LoadTilemap0F
+LoadTileset0F_trampoline::
+    jpsw LoadTileset0F
 
 ; Fill the Background Map with all 7Es
-LoadTilemap8::
+LoadTileset8::
     ld   a, $7E    ; value
     ld   bc, $400 ; count
     jr   FillBGMap
@@ -4304,7 +4347,7 @@ GetObjectPhysicsFlagsAndRestoreBank3::
     pop  af
     ret
 
-LoadTilemap1E::
+LoadTileset1E::
     ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4319,14 +4362,14 @@ LoadTilemap1E::
     ld   bc, TILE_SIZE * $80
     jp   CopyData
 
-LoadTilemap1F::
-    call LoadTilemap15
+LoadTileset1F::
+    call LoadTileset15
     ld   de, vTiles0 + $400
     ld   hl, EndingTiles + $3600
     ld   bc, TILE_SIZE * $10
     jp   CopyData
 
-LoadTilemap15::
+LoadTileset15::
     ld   a, BANK(EndingTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4357,7 +4400,7 @@ LoadTilemap15::
     ld   bc, TILE_SIZE * $20
     jp   CopyData
 
-LoadTilemap1D::
+LoadTileset1D::
     ld   a, BANK(Overworld1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
@@ -4377,12 +4420,12 @@ LoadTilemap1D::
     ld   a, BANK(Overworld2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, Overworld2Tiles + $400
+    ld   hl, Overworld2Tiles + $600
     ld   de, $8800
     ld   bc, TILE_SIZE * $80
     jp   CopyData
 
-LoadTilemap18::
+LoadTileset18::
     ld   hl, EndingTiles
     ldh  a, [hIsGBC]
     and  a
@@ -4391,11 +4434,11 @@ LoadTilemap18::
     ld   a, BANK(ColorDungeonTiles)
     jr   label_2B06
 
-LoadTilemap17::
+LoadTileset17::
     ld   hl, EndingTiles + $800
     jr   label_2B01
 
-LoadTilemap16::
+LoadTileset16::
     ld   hl, EndingTiles + $2000
 
 label_2B01::
@@ -4416,7 +4459,7 @@ label_2B06::
     ld   bc, TILE_SIZE * $100
     jp   CopyData
 
-LoadTilemap1B::
+LoadTileset1B::
     call PlayAudioStep
 
     ld   hl, FontLargeTiles + $100
@@ -4455,7 +4498,7 @@ LoadTilemap1B::
     ld   bc, TILE_SIZE * $80
     jp   CopyData
 
-LoadTilemap1A::
+LoadTileset1A::
     ld   hl, EndingTiles + $3800
     ldh  a, [hIsGBC]
     and  a
@@ -4464,7 +4507,7 @@ LoadTilemap1A::
     ld   a, BANK(EndingCGBAltTiles)
     jr   label_2B95
 
-LoadTilemap19::
+LoadTileset19::
     ld   hl, EndingTiles + $800
     ldh  a, [hIsGBC]
     and  a
@@ -4725,7 +4768,7 @@ LoadDungeonTiles::
 .return
     ret
 
-LoadTilemap5::
+LoadTileset5::
     ;
     ; Load Overworld landscape
     ;
@@ -4773,130 +4816,140 @@ func_2D50::
 
 ; Load Map n°10 (introduction sequence)
 LoadIntroSequenceTiles::
-    ; Copy $80 bytes of map tiles from 01:6D4A to Tiles Memory
-    ; (rain graphics)
-    ld   a, $01
+    ; Load rain tiles
+    ld   a, BANK(IntroRainTiles)
     call SwitchBank
-    ld   hl, $6D4A
+    ld   hl, IntroRainTiles
     ld   de, vTiles0 + $700
-    ld   bc, $80
+    ld   bc, TILE_SIZE * $8
     call CopyData
 
-    ; Copy $600 bytes of map tiles from 10:5400 to Tiles Memory
-    ; (some intro sequence graphics)
-    ld   a, $10
+    ; Load intro sequence misc tiles
+    ld   a, BANK(IntroTiles)
     call SwitchAdjustedBank
-    ld   hl, $5400
+    ld   hl, Intro3Tiles
     ld   de, vTiles0
-    ld   bc, $600
+    ld   bc, TILE_SIZE * $60
     call CopyData
 
-    ; Copy $1000 bytes of map tiles from 10:4000 to Tiles Memory
-    ; (intro sequence graphics)
-    ld   hl, $4000
+    ; Load intro sequence misc tiles
+    ld   hl, Intro1Tiles
     ld   de, vTiles1
-    ld   bc, $1000
-    jp   CopyData ; tail-call ; will return afterwards.
+    ld   bc, TILE_SIZE * $100
+    jp   CopyData
 
-LoadTilemap11::
-    ld   a, $0F
+LoadTitleScreenTiles::
+    ; Load title logo
+    ld   a, BANK(TitleLogoTitles)
     call SwitchAdjustedBank
-    ld   hl, $4900
-    ld   de, $8800
-    ld   bc, $700
+    ld   hl, TitleLogoTitles
+    ld   de, vTiles1
+    ld   bc, TILE_SIZE * $70
     call CopyData
-    ld   a, $38
+
+    ; Load tiles for large "DX" text
+    ld   a, BANK(TitleDXTiles)
     call SwitchBank
 
+    ldh  a, [hIsGBC]
+    and  a
+    jr   nz, .dxTilesDMG
+    ld   hl, TitleDXTilesCGB
+    jr   .dxTilesEnd
+.dxTilesDMG
+    ld   hl, TitleDXTilesDMG
+.dxTilesEnd
+
+    ld   de, vTiles0 + $400
+    ld   bc, TILE_SIZE * $40
+    call CopyData
+
+    ; Load some title sprites
     ldh  a, [hIsGBC]
     and  a
     jr   nz, .else
-    ld   hl, $5C00
+    ld   hl, PhotoElementsTiles + $600
     jr   .endIf
 .else
-    ld   hl, $5800
+    ld   hl, PhotoElementsTiles + $500
 .endIf
 
-    ld   de, $8400
-    ld   bc, $400
-    call CopyData
-    ldh  a, [hIsGBC]
-    and  a
-    jr   nz, .label_2DDD
-    ld   hl, $6600
-    jr   .label_2DE0
-.label_2DDD
-    ld   hl, $6500
-.label_2DE0
-
-    ld   de, $8200
-    ld   bc, $100
+    ld   de, vTiles0 + $200
+    ld   bc, TILE_SIZE * $10
     jp   CopyData
 
-LoadTilemap0B::
-    ld   a, $0C
+LoadTileset0B::
+    ; Load minimap tiles
+    ld   a, BANK(MinimapTiles)
     call SwitchAdjustedBank
-    ld   hl, $7800
-    ld   de, $8F00
-    ld   bc, $800
+    ld   hl, MinimapTiles
+    ld   de, vTiles1 + $700
+    ld   bc, TILE_SIZE * $80
     call CopyData
 
-    ld   hl, $5000
-    ld   de, $8200
-    ld   bc, $100
+    ; Load some overworld tiles
+    ld   hl, Overworld1Tiles + $100
+    ld   de, vTiles0 + $200
+    ld   bc, TILE_SIZE * $10
     jp   CopyData
 
-LoadTilemap14::
-    ld   hl, $7000
-    jr   CopyTilesToVTiles2
+LoadFaceShrineReliefTiles::
+    ld   hl, ReliefTiles
+    jr   LoadStaticPictureTiles
 
-LoadTilemap20::
-    ld   hl, $7800
-    jr   CopyTilesToVTiles2
+LoadSchulePaintingTiles::
+    ld   hl, PaintingTiles
+    jr   LoadStaticPictureTiles
 
-LoadTilemap12::
-    ld   hl, $5800
+LoadChristinePortraitTiles::
+    ld   hl, ChristineTiles
+    ; fallthrough
 
-CopyTilesToVTiles2::
-    ld   a, $10
+; Load tiles for a static full-screen picture to vTiles2
+; Inputs:
+;   hl   tiles source address
+LoadStaticPictureTiles::
+    ld   a, BANK(StaticPicturesTiles)
     call SwitchAdjustedBank
     ld   de, vTiles2
     ld   bc, TILE_SIZE * $80
     jp   CopyData
 
-LoadTilemap21::
-    ld   a, $13
+LoadEaglesTowerTopTiles::
+    ld   a, BANK(EaglesTowerTop1Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ld   hl, $7C00
-    ld   de, $8C00
-    ld   bc, $400
+    ld   hl, EaglesTowerTop2Tiles
+    ld   de, vTiles1 + $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
 
-    ld   hl, $6800
-    ld   de, $9000
-    ld   bc, $400
+    ld   hl, EaglesTowerTop1Tiles
+    ld   de, vTiles2
+    ld   bc, TILE_SIZE * $40
     jp   CopyData
 
-LoadTilemap13::
-    ld   a, $10
+LoadTileset13::
+    ld   a, BANK(FontLargeTiles)
     call SwitchAdjustedBank
-    ld   hl, $6700
-    ld   de, $8400
-    ld   bc, $400
+
+    ld   hl, FontLargeTiles
+    ld   de, vTiles0 + $400
+    ld   bc, TILE_SIZE * $40
     call CopyData
 
-    ld   hl, $6000
-    ld   de, $9000
-    ld   bc, $600
+    ld   hl, MarinBeachTiles
+    ld   de, vTiles2
+    ld   bc, TILE_SIZE * $60
     jp   CopyData
 
-LoadTilemap0D::
-    ld   a, $0F
+; Tiles for Saving and Game Over screens
+LoadSaveMenuTiles::
+    ld   a, BANK(SaveMenuTiles)
     call SwitchBank
-    ld   hl, $4400
-    ld   de, $8800
-    ld   bc, $500
+    ld   hl, SaveMenuTiles
+    ld   de, vTiles1
+    ld   bc, TILE_SIZE * $50
     jp   CopyData
 
 ; NPC tiles banks
@@ -4905,7 +4958,7 @@ NpcTilesBankTable::
 
 ; Load lower section of OAM tiles (NPCs),
 ; and upper section of BG tiles
-LoadTilemap9::
+LoadTileset9::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
     jr   nz, .colorDungeonEnd
@@ -5000,11 +5053,10 @@ LoadTilemap9::
     add  hl, de
     ld   e, l
     ld   d, h
-    ; source = $4000 + bc
-    ld   hl, $4000
+    ; Source: NpcTilesDataStart + bc
+    ld   hl, NpcTilesDataStart
     add  hl, bc
-    ; length = $100
-    ld   bc, TILE_SIZE * 16
+    ld   bc, TILE_SIZE * $10
     call CopyData
 .copyskipEntityLoad
 
@@ -5019,17 +5071,25 @@ LoadTilemap9::
     ; Load 8 rows (128 tiles) to the BG-only tiles
     ;
 
-    ld   de, $9000
+    ld   de, vTiles2
+
     ld   a, [wIsIndoor]
     and  a
-    jp   z, label_2FAD
-    ld   a, $0D
+    jp   z, .loadOverworldBGTiles
+
+    ld   a, BANK(DungeonsTiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
+
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   z, label_2F4B
-    ld   hl, $7000
+    jr   z, .loadTopViewTiles
+
+    ;
+    ; Load tiles for side-scrolling sections
+    ;
+
+    ld   hl, DungeonSideview1Tiles
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   z, .label_2F41
@@ -5037,7 +5097,7 @@ LoadTilemap9::
     jr   nc, .label_2F3B
 
 .label_2F36
-    ld   hl, $7800
+    ld   hl, DungeonSideview2Tiles
     jr   .label_2F41
 
 .label_2F3B
@@ -5046,77 +5106,96 @@ LoadTilemap9::
     jr   z, .label_2F36
 .label_2F41
 
-    ; Copy tiles to the BG tiles
+    ; Copy sideview tiles to the BG tiles
     ld   de, vTiles2
-    ld   bc, TILE_SIZE * 128
+    ld   bc, TILE_SIZE * $80
     call CopyData
-
     ret
 
-label_2F4B::
+.loadTopViewTiles
+    ;
+    ; Load tiles for top-view dungeon
+    ;
+
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_2F57
+    jr   nz, .notColorDungeon
     ldh  a, [hMapRoom]
     cp   $12
-    jr   nz, label_2F69
+    jr   nz, .skipBGLoading
+.notColorDungeon
 
-label_2F57::
-    ld   hl, $5000
-    ldh  a, [$FF94]
-    cp   $FF
-    jr   z, label_2F69
+    ld   hl, Dungeons2Tiles
+    ldh  a, [hWorldTileset]
+    cp   W_TILESET_NO_UPDATE
+    jr   z, .skipBGLoading
+
     add  a, $50
     ld   h, a
-    ld   bc, $100
+    ld   bc, TILE_SIZE * $10
     call CopyData
+.skipBGLoading
 
-label_2F69::
+    ; Hack: if inside the camera shop, load a specific tileset
     ldh  a, [hMapId]
     cp   MAP_HOUSE
-    jr   nz, label_2F87
+    jr   nz, .cameraShopEnd
     ldh  a, [hMapRoom]
-    cp   $B5
-    jr   nz, label_2F87
-    ld   a, $35
+    cp   $B5 ; camera shop indoor room
+    jr   nz, .cameraShopEnd
+    ld   a, BANK(CameraShopIndoorTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $6600
-    ld   de, $8F00
-    ld   bc, $200
+    ld   hl, CameraShopIndoorTiles
+    ld   de, vTiles1 + $700
+    ld   bc, TILE_SIZE * $20
     call CopyData
     ret
+.cameraShopEnd
 
-label_2F87::
+    ; Hack: on GBC, load 2 tiles to a specific location
+    ; TODO: find out which tiles
+
     ldh  a, [hIsGBC]
     and  a
     ret  z
+
     ldh  a, [hMapId]
     and  a
     ret  nz
-    ld   a, $35
+
+    ld   a, BANK(PhotoAlbumTiles)
     ld   [MBC3SelectBank], a
-    ld   hl, $6E00
-    ld   de, $9690
-    ld   bc, $10
+    ld   hl, PhotoAlbumTiles + $600
+    ld   de, vTiles2 + $690
+    ld   bc, TILE_SIZE
     call CopyData
-    ld   hl, $6E10
-    ld   de, $9790
-    ld   bc, $10
+
+    ld   hl, PhotoAlbumTiles + $610
+    ld   de, vTiles2 + $790
+    ld   bc, TILE_SIZE
     call CopyData
     ret
 
-label_2FAD::
-    ld   a, $0F
+.loadOverworldBGTiles
+    ;
+    ; Load 2 rows of tiles for the world BG tileset
+    ;
+    ld   a, BANK(Overworld2Tiles)
     call AdjustBankNumberForGBC
     ld   [MBC3SelectBank], a
-    ldh  a, [$FF94]
-    cp   $0F
+
+    ; If the tileset is W_TILESET_KEEP, do nothing.
+    ldh  a, [hWorldTileset]
+    cp   W_TILESET_KEEP
     jr   z, .return
+
+    ; hl = ($40 + hWorldTileset) * $100
     add  a, $40
     ld   h, a
     ld   l, $00
-    ld   bc, $200
+    ld   bc, TILE_SIZE * $20
     call CopyData
+
 .return
     ret
 
@@ -5129,8 +5208,15 @@ CopyWord::
     ld   [de], a
     ret
 
-; TODO: document better
-CopySomeDMGMapData::
+; Given an object (overworld or indoors), retrieve its tiles indices,
+; and copy them to the BG map.
+; (DMG only)
+;
+; Inputs:
+;   hl   pointer to the object in the objects map (see wRoomObjects)
+;   de   pointer to the target in the BG map (4 bytes will be written)
+WriteObjectToBG_DMG::
+    ; bc = [hl] * 4
     ld   a, [hl]
     ld   c, a
     ld   b, $00
@@ -5138,51 +5224,72 @@ CopySomeDMGMapData::
     rl   b
     sla  c
     rl   b
-    ld   hl, $6749
+
+    ;
+    ; Select the objects tilemap table to use
+    ;
+
+    ld   hl, OverworldObjectsTilemapDMG
+
+    ; If on Color Dungeon, use the objects tilemap of the Color Dungeon
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, label_2FEC
+    jr   z, .ColorDungeonObjectsTilemap
+
+    ; Hack: if on camera shop, also use the objects tilemap of the Color Dungeon
     cp   MAP_HOUSE
-    jr   nz, label_2FF1
+    jr   nz, .notCameraShop
     ldh  a, [hMapRoom]
-    cp   $B5
-    jr   nz, label_2FF1
+    cp   $B5 ; camera shop indoors
+    jr   nz, .notCameraShop
+.ColorDungeonObjectsTilemap
+    ld   hl, ColorDungeonObjectsTilemap
+    jr   .readValueInTable
 
-label_2FEC::
-    ld   hl, $4760
-    jr   label_2FFA
-
-label_2FF1::
+.notCameraShop
+    ; If indoors, use a special objects tilemap
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_2FFA
-    ld   hl, $4000
+    jr   z, .readValueInTable
+    ld   hl, IndoorObjectsTilemapDMG
 
-label_2FFA::
+.readValueInTable
+    ; hl = address of the tilemap for the given object
     add  hl, bc
+
+    ; Read the first 2 bytes of the object tilemap, and write them
+    ; to the target address in the BG map
     ld   a, [hli]
     ld   [de], a
     inc  de
     ld   a, [hli]
     ld   [de], a
+
+    ; Add $1F to the target address (to move one row below in the BG map)
     ld   a, e
     add  a, $1F
     ld   e, a
     ld   a, d
     adc  a, $00
     ld   d, a
+
+    ; Read the last 2 bytes of the object tilemap, and write them
+    ; to the target address in the BG map
     ld   a, [hli]
     ld   [de], a
     inc  de
     ld   a, [hl]
     ld   [de], a
+
     ret
 
-; Given an overworld object, retrieve its tiles and palettes (2x2), and copy them to the BG map
+; Given an overworld object, retrieve its tiles indices and palettes (2x2),
+; and copy them to the BG map
 ; (CGB only)
 ;
 ; Inputs:
-;   hl   address of the object in the object map (see wRoomObjects)
+;   hl   pointer to the object in the objects map (see wRoomObjects)
+;   de   pointer to the target in the BG map (4 bytes will be written)
 WriteOverworldObjectToBG::
     ; Switch to RAM bank 2 (object attributes?)
     ld   a, $02
@@ -5194,7 +5301,13 @@ WriteOverworldObjectToBG::
     ld   [rSVBK], a
     jr   doCopyObjectToBG
 
-; Given an indoor object, retrieve its tiles and palettes (2x2), and copy them to the BG map
+; Given an indoor object, retrieve its tiles indices and palettes (2x2),
+; and copy them to the BG map
+; (CGB only)
+;
+; Inputs:
+;   hl   pointer to the object in the objects map (see wRoomObjects)
+;   de   pointer to the target in the BG map (4 bytes will be written)
 WriteIndoorObjectToBG::
     ld   c, [hl]
 
@@ -5219,24 +5332,26 @@ doCopyObjectToBG:
     and  a
     jr   z, .isOverworld
     ; … set the default base address
-    ld   hl, $43B0
-    ; If MapID == MAP_COLOR_DUNGEON, hl = $4760
+    ld   hl, IndoorObjectsTilemapCGB
+
+    ; If on Color Dungeon, use the objects tilemap of the Color Dungeon
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, .hasSpecialBaseAddress
-    ; If MapId == MAP_HOUSE && MapRoom == $B5, hl = $4760
+    jr   z, .useColorDungeonTable
+
+    ; Hack: if on camera shop, also use the objects tilemap of the Color Dungeon
     cp   MAP_HOUSE
     jr   nz, .baseAddressskipEntityLoad
     ldh  a, [hMapRoom]
-    cp   $B5
+    cp   $B5 ; camera shop indoor
     jr   nz, .baseAddressskipEntityLoad
 
-.hasSpecialBaseAddress
-    ld   hl, $4760
+.useColorDungeonTable
+    ld   hl, ColorDungeonObjectsTilemap
     jr   .baseAddressskipEntityLoad
 
 .isOverworld
-    ld   hl, $6B1D
+    ld   hl, OverworldObjectsTilemapCGB
 .baseAddressskipEntityLoad
 
     ; Copy tile numbers to BG map for tiles on the upper row
@@ -5305,7 +5420,7 @@ doCopyObjectToBG:
 ; This is used when loading a map in one go (instead
 ; of having a sliding screen transition.)
 ; (called by LoadMapData)
-LoadTilemap1::
+LoadTileset1::
     call SwitchToMapDataBank
     call SwitchBank
     ld   de, vBGMap0
@@ -5321,8 +5436,8 @@ LoadTilemap1::
     ldh  a, [hIsGBC]
     and  a
     jr   nz, .copyObjectToBG
-    ; …copy some data to vBGMap0
-    call CopySomeDMGMapData
+    ; … copy the object tiles (2x2 tiles) to the BG map
+    call WriteObjectToBG_DMG
     jr   .objectCopyEnd
 
     ; Copy the object tiles and palettes (2x2 tiles) to the BG map
@@ -5599,7 +5714,7 @@ LoadRoom::
 
     ; Set the base address for resolving usual room pointers
     ; (except Color Dungeon)
-    ld   hl, $4000
+    ld   hl, OverworldRoomPointers
 
 .fetchRoomAddress
     ; b = hl[room index]
@@ -7068,8 +7183,8 @@ LoadRoomTemplate_trampoline::
     ld   [MBC3SelectBank], a
     ret
 
-LoadTilemap0E_trampoline::
-    callsb LoadTilemap0E
+LoadTileset0E_trampoline::
+    callsb LoadTileset0E
     ret
 
 SwitchToMapDataBank::
@@ -7077,7 +7192,7 @@ SwitchToMapDataBank::
     ld   a, [wIsIndoor]
     and  a
     jr   nz, .indoor
-    ld   a, BANK(OverworldBaseMapDMG)
+    ld   a, BANK(OverworldObjectsTilemapDMG)
     jr   .end
 .indoor
     ld   a, $08
@@ -7086,11 +7201,11 @@ SwitchToMapDataBank::
     ld   [MBC3SelectBank], a
     ret
 
-LoadTilemap22_trampoline::
-    jpsb LoadTilemap22
+LoadTileset22_trampoline::
+    jpsb LoadTileset22
 
-LoadTilemap23_trampoline::
-    jpsb LoadTilemap23
+LoadTileset23_trampoline::
+    jpsb LoadTileset23
 
 include "code/home/entities.asm"
 
@@ -7119,7 +7234,7 @@ label_3FBD::
     call CopyData
     xor  a
     ldh  [$FFA5], a
-    ld   a, $0C
+    ld   a, BANK(LinkCharacterTiles)
     ld   [MBC3SelectBank], a
     jp   DrawLinkSpriteAndReturn
 
@@ -7137,9 +7252,9 @@ LoadColorDungeonTiles::
     ld   a, b
     ld   [MBC3SelectBank], a
     ld   hl, ColorDungeonTiles
-    ld   de, vTiles0 + $0400
+    ld   de, vTiles0 + $400
     ld   bc, $400
     call CopyData
-    ld   a, $20
+    ld   a, BANK(InventoryEntryPoint)
     ld   [MBC3SelectBank], a
     ret

@@ -3839,7 +3839,7 @@ PadRoomObjectsArea::
 .end
     ret
 
-LoadTilemap0F::
+LoadTileset0F::
     ld   bc, $400
     ld   hl, $9800
 
@@ -3905,22 +3905,8 @@ label_6D26::
 
 include "src/code/oam_dma.asm"
 
-label_6D4A::
-    db $80, $80, $40, $40, $20, $20, $10, $10, 8, 8, 4, 4, 2, 2, 1, 1
-    db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db $80, $80, $40, $40, $20, $20
-
-label_6D70::
-    db $10, $10, 8, 8, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, $80, $80, $40, $40, $20, $20
-
-label_6D90::
-    db $10, $10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, $80, $80, $40, $40, $20, $20
-
-label_6DB0::
-    db $10, $10, 8, 8, 4, 4, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0
-    db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+IntroRainTiles::
+incbin "src/gfx/intro/rain.2bpp"
 
 ; Background tile where the Dungeon entrance arrow should be displayed
 MinimapEntrancePosition::

@@ -1861,7 +1861,7 @@ func_020_54F5::
     rl   d                                        ; $5528: $CB $12
     sla  e                                        ; $552A: $CB $23
     rl   d                                        ; $552C: $CB $12
-    ld   hl, data_020_5800                        ; $552E: $21 $00 $58
+    ld   hl, LinkCharacter2Tiles                  ; $552E: $21 $00 $58
     add  hl, de                                   ; $5531: $19
     ld   c, l                                     ; $5532: $4D
     ld   b, h                                     ; $5533: $44
@@ -1883,7 +1883,7 @@ func_020_54F5::
     rl   d                                        ; $554B: $CB $12
     sla  e                                        ; $554D: $CB $23
     rl   d                                        ; $554F: $CB $12
-    ld   hl, data_020_5800                        ; $5551: $21 $00 $58
+    ld   hl, LinkCharacter2Tiles                  ; $5551: $21 $00 $58
     add  hl, de                                   ; $5554: $19
     ld   c, l                                     ; $5555: $4D
     ld   b, h                                     ; $5556: $44

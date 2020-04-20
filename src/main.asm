@@ -247,7 +247,7 @@ incbin "gfx/dungeons/eagles_tower_top_2.dmg.2bpp"
 section "bank14",romx[$4000],bank[$14]
 include "data/events/dungeons.asm"
 include "data/maps/layouts.asm"
-include "data/chests/dungeons.asm"
+include "data/chests/chests.asm"
 include "code/bank14.asm"
 include "text/dialog_1.asm"
 

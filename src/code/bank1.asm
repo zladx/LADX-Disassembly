@@ -3811,9 +3811,17 @@ LoadSirenInstrumentTiles::
 
 ; Coordinates of the borders surrounding the room objects
 RoomBorderCoordinates::
-    db $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $0A, $0B, $10, $1B, $20, $2B
-    db $30, $3B, $40, $4B, $50, $5B, $60, $6B, $70, $7B, $80, $8B, $90, $91, $92, $93
-    db $94, $95, $96, $97, $98, $99, $9A, $9B, $FF
+    db $00, $01, $02, $03, $04, $05, $06, $07, $08, $09, $0A, $0B
+    db $10,                                                   $1B
+    db $20,                                                   $2B
+    db $30,                                                   $3B
+    db $40,                                                   $4B
+    db $50,                                                   $5B
+    db $60,                                                   $6B
+    db $70,                                                   $7B
+    db $80,                                                   $8B
+    db $90, $91, $92, $93, $94, $95, $96, $97, $98, $99, $9A, $9B
+    db $FF
 
 ; Surround the objects area defining a room by ROOM_BORDER values
 PadRoomObjectsArea::

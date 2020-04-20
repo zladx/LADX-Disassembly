@@ -5624,7 +5624,7 @@ LoadRoom::
     ld   a, [wTradeSequenceItem]
     cp   $0E ; Magnifying Glass
     jr   nz, .goriyaRoomEnd
-    ld   bc, IndoorsAUnreferenced02
+    ld   bc, IndoorsAF5Alt
     jp   .parseRoomHeader
 .goriyaRoomEnd
 

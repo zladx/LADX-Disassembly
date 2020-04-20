@@ -322,16 +322,14 @@ label_4BB0::
     ld   h, h
     ld   l, h
 
-label_4BB5::
-    db $42, $43, $44, $45, $46, $47, $48, $00
-    db $00, $62, $63, $64, $65, $66, $67, $68
-    db $49, $4a, $4b, $4c, $4d, $4e, $4f, $00
-    db $00, $69, $6a, $6b, $6c, $6d, $6e, $6f
-    db $50, $51, $52, $53, $54, $55, $56, $00
-    db $00, $70, $71, $72, $73, $74, $75, $76
-    db $57, $58, $59, $5a, $5b, $00, $00, $00
-    db $00, $77, $78, $79, $7a, $7b, $00, $00
-
+NameEntryCharacterTable::
+    PUSHC
+    SETCHARMAP NameEntryCharmap
+    db   "ABCDEFG",  0,0, "abcdefg"
+    db   "HIJKLMN",  0,0, "hijklmn"
+    db   "OPQRSTU",  0,0, "opqrstu"
+    db   "VWXYZ",0,0,0,0, "vwxyz",0,0
+    POPC
 
 label_4BF5::
     ldh  a, [hJoypadState]
@@ -487,7 +485,7 @@ label_4CDA::
     ld   a, [$DBA9]
     ld   c, a
     ld   b, $00
-    ld   hl, label_4BB5
+    ld   hl, NameEntryCharacterTable
     add  hl, bc
     ld   a, [hl]
     ld   e, a

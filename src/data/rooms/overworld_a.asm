@@ -307,7 +307,7 @@ Overworld06::
   db   $E1, $08, $70, $50, $7C ; object
   db   ROOM_END
 
-OverworldUnreferenced00::
+Overworld06Alt::   ; Alternate Wind Fish's Egg (with entrance open)
   db   ANIMATED_TILES_WATERFALL_SLOW ; animation id
   db   $E5 ; floor tile
   db   $8A, $00, $00           ; object
@@ -694,7 +694,7 @@ Overworld0E::
   db   $E1, $06, $0E, $50, $7C ; object
   db   ROOM_END
 
-OverworldUnreferenced01::
+Overworld0EAlt::   ; Alternate Eagle's Tower (spun around with door and ladder)
   db   ANIMATED_TILES_WATERFALL_SLOW ; animation id
   db   $03 ; floor tile
   db   $8A, $00, $00           ; object
@@ -1180,7 +1180,7 @@ Overworld1B::
   db   $77, $2E                ; object
   db   ROOM_END
 
-OverworldUnreferenced02::
+Overworld1BAlt::   ; Alternate Angler's Tunnel upper cliff (water drained)
   db   ANIMATED_TILES_WATERFALL_SLOW ; animation id
   db   $03 ; floor tile
   db   $82, $18, $1B           ; object
@@ -1714,7 +1714,7 @@ Overworld2B::
   db   $79, $2C                ; object
   db   ROOM_END
 
-OverworldUnreferenced03::
+Overworld2BAlt::   ; Alternate Angler's Tunnel entrance (waterfall turned off)
   db   ANIMATED_TILES_WATERFALL_SLOW ; animation id
   db   $0E ; floor tile
   db   $8A, $00, $3A           ; object
@@ -4164,7 +4164,7 @@ Overworld79::
   db   $83, $24, $AC           ; object
   db   ROOM_END
 
-OverworldUnreferenced04::
+Overworld79Alt::   ; Alternate Kanalet Castle entry (gate down)
   db   ANIMATED_TILES_VILLAGE ; animation id
   db   $04 ; floor tile
   db   $8A, $00, $96           ; object

@@ -554,7 +554,7 @@ RoomGBCOverlay0EAlt::   ; Alternate Eagle's Tower (spun around with door and lad
     db $2E, $3C, $03, $09, $03, $03, $03, $03, $03, $03
     db $3E, $2E, $2F, $2F, $48, $4A, $49, $48, $4A, $49
 
-RoomGBCOverlay1BAlt::   ; Alternate Catfish's Maw upper cliff (water drained)
+RoomGBCOverlay1BAlt::   ; Alternate Angler's Tunnel upper cliff (water drained)
     db $03, $03, $03, $03, $03, $03, $03, $38, $50, $50
     db $03, $3D, $2F, $3C, $03, $03, $03, $38, $1B, $1B
     db $2F, $4E, $E1, $2E, $2F, $2F, $2F, $4E, $03, $1B
@@ -564,7 +564,7 @@ RoomGBCOverlay1BAlt::   ; Alternate Catfish's Maw upper cliff (water drained)
     db $1B, $3D, $48, $4A, $4A, $4A, $49, $3C, $09, $03
     db $2F, $4E, $3A, $3A, $3A, $3A, $3A, $2E, $2F, $2F
 
-RoomGBCOverlay2BAlt::   ; Alternate Catfish's Maw entrance (waterfall turned off)
+RoomGBCOverlay2BAlt::   ; Alternate Angler's Tunnel entrance (waterfall turned off)
     db $3A, $3F, $3A, $D5, $D6, $D7, $3A, $3E, $3A, $3A
     db $3A, $3F, $3A, $CD, $E1, $CE, $3A, $3E, $3A, $3A
     db $3A, $3B, $03, $09, $03, $09, $C6, $39, $3A, $3A

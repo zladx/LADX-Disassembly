@@ -5655,7 +5655,7 @@ LoadRoom::
     ld   a, [$D80E]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced01 ; Eagle's Tower open
+    ld   bc, Overworld0EAlt ; Eagle's Tower open
     jr   .loadBankForOverworldRooms
 .endEaglesTowerAlt
 
@@ -5664,7 +5664,7 @@ LoadRoom::
     ld   a, [$D88C]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced05 ; South Face Shrine open
+    ld   bc, Overworld8CAlt ; South Face Shrine open
     jr   .loadBankForOverworldRooms
 .endSouthFaceShrineAlt
 
@@ -5673,7 +5673,7 @@ LoadRoom::
     ld   a, [$D879]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced04 ; Upper Tal Tal Heights dry
+    ld   bc, Overworld79Alt ; Kanalet Castle open
     jr   .loadBankForOverworldRooms
 .endUpperTalTalHeightsAlt
 
@@ -5682,7 +5682,7 @@ LoadRoom::
     ld   a, [$D806]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced00 ; Windfish's Egg open
+    ld   bc, Overworld06Alt ; Windfish's Egg open
     jr   .loadBankForOverworldRooms
 .endWindfishsEggAlt
 
@@ -5691,7 +5691,7 @@ LoadRoom::
     ld   a, [$D82B]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced02 ; Tal Tal Heights dry
+    ld   bc, Overworld1BAlt ; Angler's Tunnel upper water dry
     jr   .loadBankForOverworldRooms
 .endTalTalHeightsAlt
 
@@ -5700,7 +5700,7 @@ LoadRoom::
     ld   a, [$D82B]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced03 ; Angler's Tunnel open
+    ld   bc, Overworld2BAlt ; Angler's Tunnel open
     jr   .loadBankForOverworldRooms
 
 .altRoomsEnd

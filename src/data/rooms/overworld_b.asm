@@ -392,7 +392,7 @@ Overworld8C::
   db   $28, $DD                ; object
   db   ROOM_END
 
-OverworldUnreferenced05::
+Overworld8CAlt::   ; Alternate Northern Face Shrine (entrance raised)
   db   ANIMATED_TILES_VILLAGE ; animation id
   db   $04 ; floor tile
   db   $C8, $00, $38           ; object

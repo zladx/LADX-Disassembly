@@ -3961,14 +3961,14 @@ incbin "src/gfx/intro/rain.2bpp"
 
 ; Background tile where the Dungeon entrance arrow should be displayed
 MinimapEntrancePosition::
-    dw vBGMap1 + $20E ; Dungeon 1
-    dw vBGMap1 + $20D ; Dungeon 2
-    dw vBGMap1 + $20C ; Dungeon 3
-    dw vBGMap1 + $20E ; Dungeon 4
-    dw vBGMap1 + $212 ; Dungeon 5
-    dw vBGMap1 + $20E ; Dungeon 6
-    dw vBGMap1 + $20C ; Dungeon 7
-    dw vBGMap1 + $20E ; Dungeon 8
+    dw vBGMap1 + $20B + MINIMAP_ARROW_TAIL_CAVE
+    dw vBGMap1 + $20B + MINIMAP_ARROW_BOTTLE_GROTTO
+    dw vBGMap1 + $20B + MINIMAP_ARROW_KEY_CAVERN
+    dw vBGMap1 + $20B + MINIMAP_ARROW_ANGLERS_TUNNEL
+    dw vBGMap1 + $20B + MINIMAP_ARROW_CATFISHS_MAW
+    dw vBGMap1 + $20B + MINIMAP_ARROW_FACE_SHRINE
+    dw vBGMap1 + $20B + MINIMAP_ARROW_EAGLES_TOWER
+    dw vBGMap1 + $20B + MINIMAP_ARROW_TURTLE_ROCK
     dw $0    ; (unused)
     dw $0    ; (unused)
     dw $0    ; (unused)
@@ -3976,7 +3976,7 @@ MinimapEntrancePosition::
     dw $0    ; (unused)
     dw $0    ; (unused)
     dw $0    ; (unused)
-    dw vBGMap1 + $20D ; Color Dungeon
+    dw vBGMap1 + $20B + MINIMAP_ARROW_COLOR_DUNGEON
 
 ; Called after tiles are copied to the BG when loading a map all at once
 UpdateMinimapEntranceArrowAndReturn::

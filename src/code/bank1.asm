@@ -2880,10 +2880,12 @@ CreateFollowingNpcEntity::
     cp   MAP_CAVE_B
     ret  c
     ; Exclude some rooms
+    ; POI: Curiously, these should be excluded by the
+    ; check against side-scrolling rooms...
     ldh  a, [hMapRoom]
-    cp   $FD
+    cp   $FD ; Mambo the Sun Fish
     ret  z
-    cp   $B1
+    cp   $B1 ; Fishing minigame
     ret  z
 .excludedRoomsEnd
 

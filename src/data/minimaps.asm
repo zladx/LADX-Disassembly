@@ -19,8 +19,28 @@ CHARMAP "Ch", $ED   ; Room with chest
 CHARMAP "Nm", $EE   ; Nightmare boss marker
 
 
+; Temporary macros used only in this file.
+; This is a really gross mess i'm sorry
+_VARDEF: MACRO
+\1 equ \2
+         ENDM
+
+_ARROW: MACRO
+_temp_\@ equs STRCAT("MINIMAP_ARROW_", "{_N}")
+        _VARDEF _temp_\@, \1
+        PURGE _temp_\@
+        ENDM
+
+_STYLE: MACRO
+_temp_\@ equs STRCAT("MINIMAP_STYLE_", "{_N}")
+        _VARDEF _temp_\@, \1
+        PURGE _N, _temp_\@
+        ENDM
+
+
     ;    0 1 2 3 4 5 6 7  - Minimap arrow positions. Spaces for visbiility only.
 Minimap0::
+_N equs "TAIL_CAVE"
     db "                "
     db "                "
     db "            ##  "
@@ -29,11 +49,12 @@ Minimap0::
     db "####ChCh######  "
     db "##  ##ChCh      "
     db "  Ch####        "
-MINIMAP_ARROW_TAIL_CAVE equ \
-              03
+ _ARROW       03
+ _STYLE INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap1::
+_N equs "BOTTLE_GROTTO"
     db "                "
     db "  ChChCh######  "
     db "    Ch    Ch    "
@@ -42,11 +63,12 @@ Minimap1::
     db "  Ch        ##  "
     db "  ############  "
     db "    ChChChCh    "
-MINIMAP_ARROW_BOTTLE_GROTTO equ \
-            02
+ _ARROW     02
+ _STYLE INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap2::
+_N equs "KEY_CAVERN"
     db "####Ch##        "
     db "Ch##ChCh        "
     db "########    ##  "
@@ -55,11 +77,12 @@ Minimap2::
     db "  ChCh      ##  "
     db "  Ch        Nm  "
     db "  ##Ch      ####"
-MINIMAP_ARROW_KEY_CAVERN equ \
-          01
+ _ARROW   01
+ _STYLE INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap3::
+_N equs "ANGLERS_TUNNEL"
     db "                "
     db "      Ch##      "
     db "  ##  ####  Ch  "
@@ -68,11 +91,12 @@ Minimap3::
     db "    ######Ch    "
     db "    Ch##ChCh    "
     db "      ##Ch      "
-MINIMAP_ARROW_ANGLERS_TUNNEL equ \
-              03
+ _ARROW       03
+ _STYLE INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap4::
+_N equs "CATFISHS_MAW"
     db "  ######Ch##    "
     db "      Nm  ##Ch  "
     db "  ##########ChCh"
@@ -81,11 +105,12 @@ Minimap4::
     db "    Ch######    "
     db "      Ch####    "
     db "        Ch##Ch##"
-MINIMAP_ARROW_CATFISHS_MAW equ \
-                      07
+ _ARROW               07
+ _STYLE INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap5::
+_N equs "FACE_SHRINE"
     db "                "
     db "Ch            Ch"
     db "##Ch  ####  Ch##"
@@ -94,11 +119,12 @@ Minimap5::
     db "  ##Ch########  "
     db "  ChCh    ##Ch  "
     db "  ############  "
-MINIMAP_ARROW_FACE_SHRINE equ \
-              03
+ _ARROW       03
+ _STYLE INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 Minimap6::
+_N equs "EAGLES_TOWER"
     db "  ChCh          "
     db "########  ####  "
     db "######Ch  ##Nm  "
@@ -107,11 +133,12 @@ Minimap6::
     db "##############Ch"
     db "Ch##############"
     db "########  ####  "
-MINIMAP_ARROW_EAGLES_TOWER equ \
-          01
+ _ARROW   01
+ _STYLE INVENTORY_MINIMAP_FOUR_FLOORS_A
 
 
 Minimap7::
+_N equs "TURTLE_ROCK"
     db "      ####      "
     db "Ch    NmCh    Ch"
     db "####Ch####Ch####"
@@ -120,8 +147,8 @@ Minimap7::
     db "##Ch##Ch########"
     db "##Ch######Ch####"
     db "Ch    ####    Ch"
-MINIMAP_ARROW_TURTLE_ROCK equ \
-              03
+ _ARROW       03
+ _STYLE INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
 EaglesTowerCollapsedMinimap::
@@ -136,6 +163,7 @@ EaglesTowerCollapsedMinimap::
 
 
 ColorDungeonMinimap::
+_N equs "COLOR_DUNGEON"
     db "                "
     db "                "
     db "                "
@@ -144,8 +172,9 @@ ColorDungeonMinimap::
     db "    ########    "
     db "    ##Ch##Ch    "
     db "    ####Ch##    "
-MINIMAP_ARROW_COLOR_DUNGEON equ \
-            02
+ _ARROW     02
+ _STYLE INVENTORY_MINIMAP_SINGLE_FLOOR
 
 
+PURGE _VARDEF, _ARROW, _STYLE
 POPC

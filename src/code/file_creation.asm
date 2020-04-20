@@ -96,7 +96,7 @@ label_4A98::
     ld   bc, $984A
     call func_4852
     ldh  a, [hJoypadState]
-    and  $80
+    and  J_START
     jr   z, label_4B29
     call PlayValidationJingle
     ld   a, [wSaveSlot]
@@ -431,28 +431,29 @@ label_4C63::
     ld   [hl], a
     ret
 
-label_4C8A::
-    ldh  a, [hJoypadState]
-    and  $30
-    jr   z, label_4CB7
-    bit  5, a
-    jr   nz, label_4CA7
-    call PlayValidationJingle
-    call label_4CDA
+label_4C8A::                            ; "Enter Name" screen
+    ldh  a, [hJoypadState]              ; Check inputs...
+    and  J_A | J_B                      ; Was A or B pushed?
+    jr   z, label_4CB7                  ; If no, bail
+    bit  5, a                           ; Was B pushed?
+    jr   nz, label_4CA7                 ; If yes, backspace
+    call PlayValidationJingle           ; Otherwise, A was pushed
+    call label_4CDA                     ; so add the current letter
     ld   a, [$DBAA]
     add  a, $01
-    cp   $05
+    cp   $05                            ; Prevent cursor from going > 5th place
     jr   c, label_4CB4
     ld   a, $04
     jr   label_4CB4
 
 label_4CA7::
+    ; B button when inputting filename
     call PlayValidationJingle
     ld   a, [$DBAA]
     sub  a, $01
     cp   $FF
     jr   nz, label_4CB4
-    xor  a
+    xor  a                              ; Prevent cursor from going < 1st place
 
 label_4CB4::
     ld   [$DBAA], a

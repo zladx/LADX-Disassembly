@@ -198,12 +198,50 @@ label_41BB::
 include "code/game_over.asm"
 include "code/world_handler.asm"
 
-label_4667::
-    db 4, 1, 2, 3, 5, 6, 7, 8, 9, $A, $B, $C, 1, 1, 1, 0
-    db 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
-    db 1, 1, 1, 1, 3, 1, 1, 1, 1, 4, 1, 1, 1, 1, 5, 1
-    db 1, 1, 1, 6, 1, 1, 1, 1, 7, 1, 1, 1, 1, 8, 1, 1
-    db 1, 1, 9
+DebugSaveFileData::
+    db INVENTORY_SHIELD          ; B button
+    db INVENTORY_SWORD           ; A button
+    db INVENTORY_BOMBS           ; Inventory slots
+    db INVENTORY_POWER_BRACELET  ; .
+    db INVENTORY_BOW             ; .
+    db INVENTORY_HOOKSHOT        ; .
+    db INVENTORY_MAGIC_ROD       ; .
+    db INVENTORY_PEGASUS_BOOTS   ; .
+    db INVENTORY_OCARINA         ; .
+    db INVENTORY_ROCS_FEATHER    ; .
+    db INVENTORY_SHOVEL          ; .
+    db INVENTORY_MAGIC_POWDER    ; .
+
+    db 1  ; Have Flippers
+    db 1  ; Have Medicine
+    db 1  ; Trading item = Yoshi doll
+    db 0  ; 0 Secret Seashells
+    db 0  ; (@TODO "Medicine count: found?")
+    db 1  ; Have Tail Key
+    db 1  ; Have Angler Key
+    db 1  ; Have Face Key
+    db 1  ; Have Bird Key
+    db 0  ; 0 Golden Leaves / no Slime Key
+
+    ; Dungeon flags ...
+    ;  +-------------- Map
+    ;  |  +----------- Compass
+    ;  |  |  +-------- Owl Beak / Stone Tablet
+    ;  |  |  |  +----- Nightmare Key
+    ;  |  |  |  |  +-- Small keys
+    ;  |  |  |  |  |
+    db 1, 1, 1, 1, 1 ; Tail Cave
+    db 1, 1, 1, 1, 2 ; Bottle Grotto
+    db 1, 1, 1, 1, 3 ; Key Cavern
+    db 1, 1, 1, 1, 4 ; Angler's Tunnel
+    db 1, 1, 1, 1, 5 ; Catfish's Maw
+    db 1, 1, 1, 1, 6 ; Face Shrine
+    db 1, 1, 1, 1, 7 ; Eagle's Tower
+    db 1, 1, 1, 1, 8 ; Turtle Rock
+    db 1, 1, 1, 1, 9 ; POI: unused? (9th dungeon?)
+
+DEBUG_SAVE_FILE_SIZE equ @ - DebugSaveFileData
+
 
 ; Initialize save files, and load debug save file if needed
 InitSaveFiles::
@@ -215,7 +253,7 @@ InitSaveFiles::
     ld   de, $75A
     call label_4794
 
-    ; If DebugTool1 is enabled,
+    ; POI: If DebugTool1 is enabled,
     ; write a default save file with everything unlocked
     ld   a, [ROM_DebugTool1]
     and  a
@@ -225,84 +263,87 @@ InitSaveFiles::
     ld   d, $00
     ld   bc, $A405
 .loop
-    ld   hl, label_4667
+    ld   hl, DebugSaveFileData
     add  hl, de
     ld   a, [hli]
     ld   [bc], a
     inc  bc
     inc  e
     ld   a, e
-    cp   $43
+    cp   DEBUG_SAVE_FILE_SIZE
     jr   nz, .loop
 
+    ; Set some other parts of the first save file ...
     ld   a, $01
-    ld   [$A453], a
+    ld   [$A453], a ; Sword level 1
     ld   a, $01
-    ld   [$A449], a
+    ld   [$A449], a ; Shield level 1
     ld   a, $02
-    ld   [$A448], a
+    ld   [$A448], a ; Power bracelet level 2
 
-    ld   hl, $A46A
-    ld   e, $09
-    ld   a, $02
+    ; Set boss flags for all dungeons
+    ld   hl, $A46A ; Dungeon boss flags = 00000010
+    ld   e, $09 ; POI: Sets 9 flags (but only 8 dungeons...?)
+    ld   a, $02 ; Sets 46A~447
 .loop2
     ldi  [hl], a
     dec  e
     jr   nz, .loop2
 
     ld   a, $60
-    ld   [$A452], a
-    ld   [$A47D], a
-    ld   [$A47C], a
-    ld   [$A44A], a
+    ld   [$A452], a ; 60 bombs
+    ld   [$A47D], a ; 60 max arrows
+    ld   [$A47C], a ; 60 max bombs
+    ld   [$A44A], a ; 60 arrows
     ld   a, $40
-    ld   [$A47B], a
-    ld   [$A451], a
+    ld   [$A47B], a ; 40 max magic powder
+    ld   [$A451], a ; 40 magic powder
     ld   a, $89
-    ld   [$A44C], a
+    ld   [$A44C], a ; "time/animation?" (unknown)
     xor  a
-    ld   [$A414], a
-    ld   a, $07
-    ld   [$A44E], a
+    ld   [$A414], a ; 0 secret seashells
+    ld   a, %00000111 ; @TODO Ocarina song constants?
+    ld   [$A44E], a ; all 3 Ocarina songs
     ld   a, $05
-    ld   [$A462], a
+    ld   [$A462], a ; 5xx rupees
     ld   a, $09
-    ld   [$A463], a
+    ld   [$A463], a ; x09 rupees
     ld   a, $01
-    ld   [$A44D], a
+    ld   [$A44D], a ; "Tarin at home flag"
     ld   a, $50
-    ld   [$A45F], a
+    ld   [$A45F], a ; 10 hearts of health
     ld   a, $0A
-    ld   [$A460], a
+    ld   [$A460], a ; 10 heart containers
 
     ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_NEW
     jr   z, .notOnNewFileScreen
-    ld   a, $5B
-    ld   [$A454], a
+    ld   a, $5B     ; Set name ...
+    ld   [$A454], a ; Z
     ld   a, $46
-    ld   [$A455], a
+    ld   [$A455], a ; E
     ld   a, $4D
-    ld   [$A456], a
+    ld   [$A456], a ; L
     ld   a, $45
-    ld   [$A457], a
+    ld   [$A457], a ; D
     ld   a, $42
-    ld   [$A458], a
+    ld   [$A458], a ; A
 
 .notOnNewFileScreen
     xor  a
-    ld   [$A45C], a
-    ld   [$A45D], a
-    ld   [$A45B], a
-    ld   [$A464], a
-    ld   [$A465], a
+    ld   [$A45C], a ; death counter = 0
+    ld   [$A45D], a ; death counter = 0
+    ld   [$A45B], a ; bowwow flag = off
+    ld   [$A464], a ; current map = overworld
+    ld   [$A465], a ; current submap = none
     ld   a, $92
-    ld   [$A466], a
+    ld   [$A466], a ; saved room = flying rooster in mabe village
     ld   a, $48
-    ld   [$A467], a
+    ld   [$A467], a ; saved y position
     ld   a, $62
-    ld   [$A468], a
+    ld   [$A468], a ; saved x position
 
+    ; Set all overworld map tiles as seen (80)
     ld   hl, $A105
     ld   a, $80
     ld   e, $00

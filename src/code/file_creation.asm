@@ -41,8 +41,8 @@ label_4A3F::
     ld   [hl], a
     pop  hl
     ret
-    ld   bc, label_4667
-    ld   e, $43
+    ld   bc, DebugSaveFileData
+    ld   e, DEBUG_SAVE_FILE_SIZE
     push hl
 
 label_4A4D::

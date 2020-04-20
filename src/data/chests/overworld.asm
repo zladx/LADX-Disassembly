@@ -5,19 +5,275 @@
 ;
 
 RoomChestsTable::
-  db   0,   0,   0,   0, $1B,   0,   0, $1B,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0, $1B, $1D,   0,   0,   0, $20,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0, $1B,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0, $11,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, $1C, $1C,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, $20,   0,   0,   0
-  db   0, $20,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0, $1B,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    ; 00 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_50
+    db 0
+    db 0
+    db CHEST_RUPEES_50              ; POI: No chest in this room
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; 10 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_50
+    db CHEST_RUPEES_100             ; POI: No chest in this room
+    db 0
+    db 0
+    db 0
+    db CHEST_SEASHELL
+    db 0
+    db 0
+    ; 20 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; 30 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_50
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; 40 --------------------
+    db 0
+    db CHEST_TAIL_KEY
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; 50 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_20
+    db CHEST_RUPEES_20
+    db 0
+    db 0
+    ; 60 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_SEASHELL
+    db 0
+    db 0
+    db 0
+    ; 70 --------------------
+    db 0
+    db CHEST_SEASHELL
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; 80 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; 90 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; A0 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; B0 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; C0 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; D0 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; E0 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_50
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; F0 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0

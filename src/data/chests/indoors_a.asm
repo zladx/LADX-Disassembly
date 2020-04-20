@@ -5,19 +5,275 @@
 ;
 
 
-  db   0,   0,   0,   0,   0,   0,   0,   0, $19,   0, $18,   0, $20, $1C, $1A,   0
-  db   0,   0,   0, $1A, $16, $17, $1A,   0,   0,   0,   0,   0,   0, $07,   0,   0
-  db $00, $1C, $1A,   0,   0,   0, $16, $19,   0,   0,   0,   0,   0,   0, $18,   0
-  db   0,   0,   0,   0,   0,   0, $1B, $17, $1A, $1A,   0,   0,   0,   0,   0,   0
-  db   0,   0, $17,   0, $1B,   0, $05, $19,   0,   0,   0,   0, $18,   0, $1E, $22
-  db $16, $1A,   0, $1A, $1A, $1A,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db $0C,   0,   0,   0,   0, $1A,   0,   0, $1A, $1A, $16,   0,   0, $22, $1B,   0
-  db   0, $1A,   0,   0,   0, $1B, $19,   0, $17, $18,   0, $1A,   0,   0,   0,   0
-  db   0,   0,   0, $16,   0,   0, $19,   0, $1B,   0,   0,   0,   0,   0, $1B, $1A
-  db   0,   0,   0,   0,   0,   0, $21, $1A,   0,   0,   0, $18,   0,   0, $17,   0
-  db $1E,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db $1D, $1E,   0, $17,   0,   0, $19,   0,   0, $18,   0,   0,   0,   0, $1A,   0
-  db $16,   0,   0,   0,   0,   0,   0,   0,   0, $1D,   0,   0,   0,   0, $00, $1B
-  db   0, $10,   0,   0,   0,   0,   0, $1B,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
-  db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, $1E, $20,   0,   0
+    ; 00 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_NIGHTMARE_KEY
+    db 0
+    db CHEST_STONE_BEAK
+    db 0
+    db CHEST_SEASHELL
+    db CHEST_RUPEES_20
+    db CHEST_SMALL_KEY
+    db 0
+    ; 10 --------------------
+    db 0
+    db 0
+    db 0
+    db CHEST_SMALL_KEY
+    db CHEST_MAP
+    db CHEST_COMPASS
+    db CHEST_SMALL_KEY
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_FEATHER
+    db 0
+    db 0
+    ; 20 --------------------
+    db CHEST_POWER_BRACELET
+    db CHEST_RUPEES_20
+    db CHEST_SMALL_KEY
+    db 0
+    db 0
+    db 0
+    db CHEST_MAP
+    db CHEST_NIGHTMARE_KEY
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_STONE_BEAK
+    db 0
+    ; 30 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_50
+    db CHEST_COMPASS
+    db CHEST_SMALL_KEY
+    db CHEST_SMALL_KEY
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; 40 --------------------
+    db 0
+    db 0
+    db CHEST_COMPASS
+    db 0
+    db CHEST_RUPEES_50
+    db 0
+    db CHEST_PEGASUS_BOOTS
+    db CHEST_NIGHTMARE_KEY
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_STONE_BEAK
+    db 0
+    db CHEST_RUPEES_200
+    db CHEST_GEL
+    ; 50 --------------------
+    db CHEST_MAP
+    db CHEST_SMALL_KEY
+    db 0
+    db CHEST_SMALL_KEY
+    db CHEST_SMALL_KEY
+    db CHEST_SMALL_KEY
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; 60 --------------------
+    db CHEST_FLIPPERS
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_SMALL_KEY
+    db 0
+    db 0
+    db CHEST_SMALL_KEY
+    db CHEST_SMALL_KEY
+    db CHEST_MAP
+    db 0
+    db 0
+    db CHEST_GEL
+    db CHEST_RUPEES_50
+    db 0
+    ; 70 --------------------
+    db 0
+    db CHEST_SMALL_KEY
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_50
+    db CHEST_NIGHTMARE_KEY
+    db 0
+    db CHEST_COMPASS
+    db CHEST_STONE_BEAK
+    db 0
+    db CHEST_SMALL_KEY
+    db 0
+    db 0
+    db 0
+    db 0
+    ; 80 --------------------
+    db 0
+    db 0
+    db 0
+    db CHEST_MAP
+    db 0
+    db 0
+    db CHEST_NIGHTMARE_KEY
+    db 0
+    db CHEST_RUPEES_50
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_50
+    db CHEST_SMALL_KEY
+    ; 90 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_MESSAGE
+    db CHEST_SMALL_KEY
+    db 0
+    db 0
+    db 0
+    db CHEST_STONE_BEAK
+    db 0
+    db 0
+    db CHEST_COMPASS
+    db 0
+    ; A0 --------------------
+    db CHEST_RUPEES_200
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; B0 --------------------
+    db CHEST_RUPEES_100
+    db CHEST_RUPEES_200
+    db 0
+    db CHEST_COMPASS
+    db 0
+    db 0
+    db CHEST_NIGHTMARE_KEY
+    db 0
+    db 0
+    db CHEST_STONE_BEAK
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_SMALL_KEY
+    db 0
+    ; C0 --------------------
+    db CHEST_MAP
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_100
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_POWER_BRACELET
+    db CHEST_RUPEES_50
+    ; D0 --------------------
+    db 0
+    db CHEST_MEDICINE
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_50              ; POI: No chest in this room
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; E0 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    ; F0 --------------------
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_RUPEES_200
+    db CHEST_SEASHELL
+    db 0
+    db 0

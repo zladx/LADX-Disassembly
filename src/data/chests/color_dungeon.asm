@@ -5,5 +5,37 @@
 ;
 
 ColorDungeonRoomChestsTable::
-  db   0,   0, $19,   0,   0,   0, $16,   0,   0,   0,   0,   0,   0,   0,   0, $17
-  db   0, $18,   0,   0, $1A,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
+    ; 00 --------------------
+    db 0
+    db 0
+    db CHEST_NIGHTMARE_KEY
+    db 0
+    db 0
+    db 0
+    db CHEST_MAP
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db CHEST_COMPASS
+    ; 10 --------------------
+    db 0
+    db CHEST_STONE_BEAK
+    db 0
+    db 0
+    db CHEST_SMALL_KEY
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0
+    db 0

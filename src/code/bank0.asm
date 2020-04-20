@@ -6119,6 +6119,11 @@ LoadRoomObject::
     ; clear wObjectAffectingBGPalette
     xor  a
     ld   [wObjectAffectingBGPalette], a
+    ; POI: Potential bug: Room $1C4 (IndoorA) is the Face Shrine pre-boss room
+    ; where you can light two torches to trigger an event. However,
+    ; room $2C4 (IndoorB) *also* has an unlit torch. This causes some
+    ; weird palette flickering, though $2C4 and $2D4 are inaccessible
+    ; (part of an old Kanalet Castle entry before the side-scrolling stuff)
     ; If the room is $C4…
     ldh  a, [hMapRoom]
     cp   $C4
@@ -6299,7 +6304,7 @@ LoadRoomObject::
     ; Raised fences can be activated: they turn into a wall
     ; jumpable from the top.
     ;
-    ; NB: it seems these objects are not used in the final game.
+    ; POI: NB: it seems these objects are not used in the final game.
     ;
 
     cp   OBJECT_RAISED_FENCE_BOTTOM
@@ -6434,7 +6439,7 @@ label_3500::
     cp   $09
     jr   nz, label_350E
     ldh  a, [hMapRoom]
-    cp   $97
+    cp   $97            ; Room with the giant bombable skull thing
     ret  nz
     jr   label_3527
 
@@ -6442,16 +6447,16 @@ label_350E::
     cp   $E1
     jr   nz, label_351D
     ldh  a, [hMapRoom]
-    cp   $0E
+    cp   $0E            ; Eagle's Tower room
     ret  z
-    cp   $0C
+    cp   $0C            ; Tal-Tal Heights, 1N1E of the drainable water above Angler's Tunnel
     ret  z
-    cp   $1B
+    cp   $1B            ; The drainable water above Angler's Tunnel
     ret  z
 
 label_351D::
     ldh  a, [hMapRoom]
-    cp   $80
+    cp   $80            ; Mysterious Forest enterance from Mabe (?)
     jr   nc, label_3527
     ld   a, $09
     jr   label_3529

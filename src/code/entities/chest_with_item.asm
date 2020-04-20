@@ -88,21 +88,21 @@ jr_007_7C36:
     jr   z, jr_007_7C58                           ; $7C39: $28 $1D
 
     ldh  a, [hMapId]                              ; $7C3B: $F0 $F7
-    cp   $05                                      ; $7C3D: $FE $05
+    cp   MAP_FACE_SHRINE
     jr   nz, jr_007_7C49                          ; $7C3F: $20 $08
 
     ldh  a, [hMapRoom]                            ; $7C41: $F0 $F6
-    cp   $CE                                      ; $7C43: $FE $CE
-    jr   nz, jr_007_7C58                          ; $7C45: $20 $11
+    cp   $CE                     ; @TODO ?? L2 power bracelet chest in Face Shrine?
+    jr   nz, jr_007_7C58         ; maybe related to incrementing an item level
 
     jr   jr_007_7C53                              ; $7C47: $18 $0A
 
 jr_007_7C49:
-    cp   $06                                      ; $7C49: $FE $06
+    cp   MAP_EAGLES_TOWER
     jr   nz, jr_007_7C58                          ; $7C4B: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $7C4D: $F0 $F6
-    cp   $1A                                      ; $7C4F: $FE $1A
+    cp   $1A                     ; @TODO ?? L2 shield in Eagle's Tower?
     jr   nz, jr_007_7C58                          ; $7C51: $20 $05
 
 jr_007_7C53:
@@ -169,7 +169,7 @@ jr_007_7C93:
     jr   nz, jr_007_7CB1                          ; $7CA2: $20 $0D
 
     ldh  a, [hMapRoom]                            ; $7CA4: $F0 $F6
-    cp   $96                                      ; $7CA6: $FE $96
+    cp   $96                             ; @TODO Master Stalfos "screw you" letter chest?
     jr   nz, jr_007_7CB1                          ; $7CA8: $20 $07
 
     call_open_dialog $111                         ; $7CAA
@@ -192,7 +192,7 @@ jr_007_7CC1:
     cp   $0B                                      ; $7CC2: $FE $0B
     jr   nz, jr_007_7CD1                          ; $7CC4: $20 $0B
 
-    ld   a, [wSwordLevel]                         ; $7CC6: $FA $4E $DB
+    ld   a, [wSwordLevel]                ; @TODO ??? Is this used by the Seashell Mansion??
     cp   $02                                      ; $7CC9: $FE $02
     jr   nz, jr_007_7CD1                          ; $7CCB: $20 $04
 

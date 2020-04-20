@@ -795,9 +795,9 @@ label_278B::
 
 DialogChoiceHandler::
     ldh  a, [hJoypadState]
-    bit  4, a
+    bit  4, a               ; Was A pushed?
     jp   nz, .jp_27B7
-    and  $03
+    and  J_LEFT | J_RIGHT
     jr   z, .jp_27AA
     ld   hl, $C177
     ld   a, [hl]

@@ -4020,7 +4020,7 @@ Data_018_5D7F::
 Data_018_5D82::
     db   $00, $10, $F0
 
-TextDebuggerEntityHandler::
+TextDebuggerEntityHandler::                       ; POI: Text debugging tool
     call func_018_7DE8                            ; $5D85: $CD $E8 $7D
     ld   a, $01                                   ; $5D88: $3E $01
     ldh  [hAnimatedTilesGroup], a                 ; $5D8A: $E0 $A4

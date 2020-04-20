@@ -15,7 +15,7 @@ IntroHandlerEntryPoint::
     jp   RenderIntroFrame
 
 .checkJoypad
-    ; If pressing Start, render the next intro frame
+    ; If not pressing Start, render the next intro frame
     ldh  a, [hJoypadState]
     and  J_START
     jp   z, RenderIntroFrame
@@ -81,7 +81,7 @@ IntroHandlerEntryPoint::
 .transitionToFileMenu
     jp   TransitionToFileMenu
 
-    ; Jump to End Sequence (dead code, never reached)
+    ; POI: Jump to End Sequence (dead code, never reached)
     xor  a
     ld   [wGameplaySubtype], a
     ldh  [hBaseScrollX], a

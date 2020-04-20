@@ -13,12 +13,12 @@ TelephoneEntityHandler::
 
     ld   e, $FD                                   ; $6A8F: $1E $FD
     ldh  a, [hMapRoom]                            ; $6A91: $F0 $F6
-    cp   $A9                                      ; $6A93: $FE $A9
+    cp   $A9                           ; Ulrira's house
     jp   z, label_006_6BAD                        ; $6A95: $CA $AD $6B
 
     ld   e, $6E                                   ; $6A98: $1E $6E
     ld   a, [wTradeSequenceItem]                  ; $6A9A: $FA $0E $DB
-    cp   $0A                                      ; $6A9D: $FE $0A
+    cp   TRADING_ITEM_BROOM
     jr   nz, jr_006_6AA9                          ; $6A9F: $20 $08
 
     ld   a, [wHasInstrument5]                     ; $6AA1: $FA $69 $DB
@@ -58,7 +58,7 @@ jr_006_6AA9:
 
     ld   e, $45                                   ; $6AE5: $1E $45
     ld   a, [wTradeSequenceItem]                  ; $6AE7: $FA $0E $DB
-    cp   $05                                      ; $6AEA: $FE $05
+    cp   TRADING_ITEM_STICK
     jp   c, label_006_6BAD                        ; $6AEC: $DA $AD $6B
 
     ld   a, [wGoldenLeavesCount]                  ; $6AEF: $FA $15 $DB

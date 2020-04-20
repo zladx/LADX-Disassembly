@@ -117,7 +117,7 @@ ENTITY_DODONGO_SNAKE                 equ $60
 ENTITY_WARP                          equ $61
 ENTITY_HOT_HEAD                      equ $62
 ENTITY_EVIL_EAGLE                    equ $63
-ENTITY_SOUTH_FACE_SHRINE_DOOR        equ $64 ; unknown
+ENTITY_SOUTH_FACE_SHRINE_DOOR        equ $64 ; unknown ; @TODO unused Eagle's Tower split-screen vfx
 ENTITY_ANGLER_FISH                   equ $65
 ENTITY_CRYSTAL_SWITCH                equ $66
 ENTITY_67                            equ $67 ; unknown

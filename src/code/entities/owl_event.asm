@@ -2,7 +2,7 @@ OwlEventEntityHandler::
     ld   a, c                                     ; $67F5: $79
     ld   [$C501], a                               ; $67F6: $EA $01 $C5
     ldh  a, [hMapRoom]                            ; $67F9: $F0 $F6
-    cp   $64                                      ; $67FB: $FE $64
+    cp   $64                        ; Ghost's gravestone
     jr   nz, jr_006_680D                          ; $67FD: $20 $0E
 
     ld   a, [$D9E3]                               ; $67FF: $FA $E3 $D9
@@ -15,7 +15,7 @@ OwlEventEntityHandler::
 
 jr_006_680D:
     ldh  a, [hMapRoom]                            ; $680D: $F0 $F6
-    cp   $AC                                      ; $680F: $FE $AC
+    cp   $AC                        ; Southern Face Shrine
     jr   nz, jr_006_681A                          ; $6811: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $6813: $F0 $F8
@@ -24,7 +24,7 @@ jr_006_680D:
 
 jr_006_681A:
     ldh  a, [hMapRoom]                            ; $681A: $F0 $F6
-    cp   $41                                      ; $681C: $FE $41
+    cp   $41                        ; Tail Cave key chest
     jr   nz, jr_006_6829                          ; $681E: $20 $09
 
     ld   a, [wHasTailKey]                         ; $6820: $FA $11 $DB
@@ -36,7 +36,7 @@ jr_006_681A:
 
 jr_006_6829:
     ldh  a, [hMapRoom]                            ; $6829: $F0 $F6
-    cp   $EE                                      ; $682B: $FE $EE
+    cp   $EE                        ; Yarna Desert
     jr   nz, jr_006_6835                          ; $682D: $20 $06
 
     ld   a, [wHasAnglerKey]                       ; $682F: $FA $12 $DB
@@ -45,10 +45,10 @@ jr_006_6829:
 
 jr_006_6835:
     ldh  a, [hMapRoom]                            ; $6835: $F0 $F6
-    cp   $D2                                      ; $6837: $FE $D2
+    cp   $D2                        ; 1 room west of Tail Cave
     jr   z, jr_006_684E                           ; $6839: $28 $13
 
-    cp   $36                                      ; $683B: $FE $36
+    cp   $36                        ; 1 room east of Moblin Hideout
     jr   nz, jr_006_6853                          ; $683D: $20 $14
 
     ld   a, [wHasInstrument2]                     ; $683F: $FA $66 $DB
@@ -65,7 +65,7 @@ jr_006_684E:
 
 jr_006_6853:
     ldh  a, [hMapRoom]                            ; $6853: $F0 $F6
-    cp   $08                                      ; $6855: $FE $08
+    cp   $08                        ; Bridge where Marin gets trapped
     jr   nz, jr_006_6869                          ; $6857: $20 $10
 
     ld   a, [wHasInstrument8]                     ; $6859: $FA $6C $DB
@@ -79,14 +79,14 @@ jr_006_6853:
     jr   jr_006_68A0                              ; $6867: $18 $37
 
 jr_006_6869:
-    cp   $9D                                      ; $6869: $FE $9D
+    cp   $9D                        ; Room with staircase leading to Face Shrine dungeon passage
     jr   nz, jr_006_6872                          ; $686B: $20 $05
 
     ld   a, [wHasInstrument5]                     ; $686D: $FA $69 $DB
     jr   jr_006_689B                              ; $6870: $18 $29
 
 jr_006_6872:
-    cp   $06                                      ; $6872: $FE $06
+    cp   $06                        ; Wind Fish's Egg
     jr   nz, jr_006_687E                          ; $6874: $20 $08
 
     ld   a, [$D806]                               ; $6876: $FA $06 $D8
@@ -96,17 +96,17 @@ jr_006_6872:
     jr   jr_006_68A0                              ; $687C: $18 $22
 
 jr_006_687E:
-    cp   $B6                                      ; $687E: $FE $B6
+    cp   $B6                        ; One east of Key Cavern
     jr   nz, jr_006_6887                          ; $6880: $20 $05
 
     ld   a, [wHasInstrument3]                     ; $6882: $FA $67 $DB
     jr   jr_006_689B                              ; $6885: $18 $14
 
 jr_006_6887:
-    cp   $17                                      ; $6887: $FE $17
+    cp   $17                        ; One south-east of Wind Fish's Egg
     jr   z, jr_006_688F                           ; $6889: $28 $04
 
-    cp   $9C                                      ; $688B: $FE $9C
+    cp   $9C                        ; One south of Face Shrine dungeon
     jr   nz, jr_006_6894                          ; $688D: $20 $05
 
 jr_006_688F:
@@ -114,7 +114,7 @@ jr_006_688F:
     jr   jr_006_689B                              ; $6892: $18 $07
 
 jr_006_6894:
-    cp   $16                                      ; $6894: $FE $16
+    cp   $16                        ; One south of Wind Fish's Egg
     jr   nz, jr_006_68A0                          ; $6896: $20 $08
 
     ld   a, [wHasInstrument2]                     ; $6898: $FA $66 $DB
@@ -127,13 +127,13 @@ jr_006_689D:
 
 jr_006_68A0:
     ldh  a, [hMapRoom]                            ; $68A0: $F0 $F6
-    cp   $D2                                      ; $68A2: $FE $D2
+    cp   $D2                        ; 1 room west of Tail Cave
     jr   z, jr_006_68B4                           ; $68A4: $28 $0E
 
-    cp   $16                                      ; $68A6: $FE $16
+    cp   $16                        ; One south of Wind Fish's Egg
     jr   z, jr_006_68B4                           ; $68A8: $28 $0A
 
-    cp   $36                                      ; $68AA: $FE $36
+    cp   $36                        ; 1 room east of Moblin Hideout
     jr   z, jr_006_68B4                           ; $68AC: $28 $06
 
     ldh  a, [hActiveEntityState]                  ; $68AE: $F0 $F0
@@ -167,7 +167,7 @@ jr_006_68C0:
 
 OwlState0Handler::
     ldh  a, [hMapRoom]
-    cp   $F2
+    cp   $F2                        ; Sword on the beach
     jr   nz, jr_006_68EF                          ; $68D9: $20 $14
 
     ld   a, $1D                                   ; $68DB: $3E $1D
@@ -347,7 +347,7 @@ OwlState4Handler::
     and  a                                        ; $69FA: $A7
     jr   nz, jr_006_6A04                          ; $69FB: $20 $07
 
-    ld   a, $49                                   ; $69FD: $3E $49
+    ld   a, MUSIC_ACTIVE_POWER_UP
     ld   [wActiveMusicTrack], a                   ; $69FF: $EA $68 $D3
     ldh  [$FFBD], a                               ; $6A02: $E0 $BD
 

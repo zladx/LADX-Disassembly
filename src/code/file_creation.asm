@@ -323,6 +323,10 @@ label_4BB0::
     ld   l, h
 
 NameEntryCharacterTable::
+    ; Used to translate cursor position -> name letter
+    ; on the name entry menu. Does not actually represent
+    ; the graphics - this is just the letter that is chosen
+    ; when you push A
     PUSHC
     SETCHARMAP NameEntryCharmap
     db   "ABCDEFG",  0,0, "abcdefg"

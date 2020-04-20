@@ -3,6 +3,8 @@
 ; Space is 0, other values seem to just map to A
 ; (but 0 in a charmap makes rgbds truncate the rest of the string, doh)
 ;
+; If you look at this and go "wow, it's ASCII but off by one!" ... yep.
+;
 PUSHC
 NEWCHARMAP NameEntryCharmap
 

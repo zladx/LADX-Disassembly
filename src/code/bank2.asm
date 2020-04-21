@@ -2381,7 +2381,7 @@ jr_002_512B:
     cp   $FF                                      ; $5132: $FE $FF
     jr   z, jr_002_5155                           ; $5134: $28 $1F
 
-    ld   a, [wWarp0MapCategory]                               ; $5136: $FA $01 $D4
+    ld   a, [wWarp0MapCategory]                   ; $5136: $FA $01 $D4
     cp   $02                                      ; $5139: $FE $02
     jr   nz, jr_002_5145                          ; $513B: $20 $08
 

@@ -221,3 +221,8 @@ TRADING_ITEM_FISHING_HOOK      equ $0B
 TRADING_ITEM_NECKLACE          equ $0C
 TRADING_ITEM_SCALE             equ $0D
 TRADING_ITEM_MAGNIFIYING_GLASS equ $0E
+
+
+; #define-like macros
+HALF_HEARTS equs "* 4"
+FULL_HEARTS equs "* 8"

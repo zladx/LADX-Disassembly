@@ -832,29 +832,45 @@ include "code/file_creation.asm"
 include "code/file_deletion.asm"
 include "code/file_copy.asm"
 
-label_5295::
-    db $18, $18, $18, $18, $18, $18, $28, $28, $28, $28, $38, $38, $38, $38, $50
+; Table that determines how much health you have after a game over.
+; New files always start with 3 HP / 3 MAX HP, but after that
+; the health you're provided on respawning depends on your max:
+MaxHealthToStartingHealthTable::
+    db  3 FULL_HEARTS  ;  0 heart containers
+    db  3 FULL_HEARTS  ;  1 heart container
+    db  3 FULL_HEARTS  ;  2 heart containers
+    db  3 FULL_HEARTS  ;  3 heart containers
+    db  3 FULL_HEARTS  ;  4 heart containers
+    db  3 FULL_HEARTS  ;  5 heart containers
+
+    db  5 FULL_HEARTS  ;  6 heart containers
+    db  5 FULL_HEARTS  ;  7 heart containers
+    db  5 FULL_HEARTS  ;  8 heart containers
+    db  5 FULL_HEARTS  ;  9 heart containers
+
+    db  7 FULL_HEARTS  ; 10 heart containers
+    db  7 FULL_HEARTS  ; 11 heart containers
+    db  7 FULL_HEARTS  ; 12 heart containers
+    db  7 FULL_HEARTS  ; 13 heart containers
+
+    db 10 FULL_HEARTS  ; 14 heart containers
 
 ; Main entry point for loading a saved game
 LoadSavedFile::
-    xor  a
-    ldh  [hIsSideScrolling], a
-    ld   a, [wHealth]
-    and  a
-    jr   nz, label_52BB
-    ld   a, [wMaxHealth]
+    xor  a                                      ; Can never save in a side-scrolling area
+    ldh  [hIsSideScrolling], a                  ; so make sure that flag is not set
+    ld   a, [wHealth]                           ; Does the player have any health?
+    and  a                                      ; If yes, skip this
+    jr   nz, .skipHealthReset
+    ld   a, [wMaxHealth]                        ; Otherwise, get their max health...
     ld   e, a
-
-label_52B1::
     ld   d, $00
-
-label_52B3::
-    ld   hl, label_5295
-    add  hl, de
+    ld   hl, MaxHealthToStartingHealthTable     ; and use it as an index into the table
+    add  hl, de                                 ; to provide the starting health value.
     ld   a, [hl]
     ld   [wHealth], a
 
-label_52BB::
+.skipHealthReset:
     ld   hl, $DBD1
     ld   a, [hl]
     ld   [hl], $00
@@ -2496,18 +2512,18 @@ label_5DE1::
     ret
 
 label_5DE6::
-    ld   a, [wHealth]
-    and  a
-    jr   nz, label_5DFA
-    ld   a, [wMaxHealth]
+    ld   a, [wHealth]                           ; Does the player have any health?
+    and  a                                      ; If yes, skip this
+    jr   nz, .skipHealthReset
+    ld   a, [wMaxHealth]                        ; Otherwise, get their max health...
     ld   e, a
     ld   d, $00
-    ld   hl, label_5295
-    add  hl, de
+    ld   hl, MaxHealthToStartingHealthTable     ; and use it as an index into the table
+    add  hl, de                                 ; to provide the starting health value.
     ld   a, [hl]
     ld   [wHealth], a
 
-label_5DFA::
+.skipHealthReset:
     call SynchronizeDungeonsItemFlags_trampoline
     ld   a, [wSaveSlot]
     sla  a

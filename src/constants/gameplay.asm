@@ -166,26 +166,28 @@ TRANSITION_GFX_FLOATING     equ $FE ; slow up-and-down motion
 TRANSITION_GFX_WIND_FISH    equ $FF ; wavy transition when the Wind Fish appears and disappears
 
 ; Chest content
+; @TODO Some marked "unused" aren't used in actual chest tables,
+; but may be used in other events
 CHEST_POWER_BRACELET   equ $00
 CHEST_SHIELD           equ $01
-CHEST_BOW              equ $02
-CHEST_HOOKSHOT         equ $03
+CHEST_BOW              equ $02 ; POI: Unused
+CHEST_HOOKSHOT         equ $03 ; Unused?
 CHEST_MAGIC_ROD        equ $04
 CHEST_PEGASUS_BOOTS    equ $05
 CHEST_OCARINA          equ $06
 CHEST_FEATHER          equ $07
-CHEST_SHOVEL           equ $08
-CHEST_MAGIC_POWDER_BAG equ $09
+CHEST_SHOVEL           equ $08 ; POI: Unused
+CHEST_MAGIC_POWDER_BAG equ $09 ; Unused?
 CHEST_BOMB             equ $0A
-CHEST_SWORD            equ $0B
+CHEST_SWORD            equ $0B ; Unused?
 CHEST_FLIPPERS         equ $0C
-CHEST_MAGNIFYING_LENS  equ $0D
-CHEST_MEDECINE         equ $10
+CHEST_MAGNIFYING_LENS  equ $0D ; Unused?
+CHEST_MEDICINE         equ $10
 CHEST_TAIL_KEY         equ $11
-CHEST_ANGLER_KEY       equ $12
-CHEST_FACE_KEY         equ $13
-CHEST_BIRD_KEY         equ $14
-CHEST_GOLD_LEAF        equ $15
+CHEST_ANGLER_KEY       equ $12 ; Unused?
+CHEST_FACE_KEY         equ $13 ; Unused?
+CHEST_BIRD_KEY         equ $14 ; Unused?
+CHEST_GOLD_LEAF        equ $15 ; Unused?
 ; Dungeon items
 CHEST_MAP              equ $16
 CHEST_COMPASS          equ $17
@@ -197,11 +199,11 @@ CHEST_RUPEES_50        equ $1B
 CHEST_RUPEES_20        equ $1C
 CHEST_RUPEES_100       equ $1D
 CHEST_RUPEES_200       equ $1E
-CHEST_RUPEES_500       equ $1F
+CHEST_RUPEES_500       equ $1F ; POI: Unused
 CHEST_SEASHELL         equ $20
 ; Miscellaneous
 CHEST_MESSAGE          equ $21 ; used in Catfish's Maw
-CHEST_BLOB             equ $22 ; green slime enemy
+CHEST_GEL              equ $22 ; green slime enemy
 
 ; Values for wTradeSequenceItem
 TRADING_ITEM_NONE              equ $00

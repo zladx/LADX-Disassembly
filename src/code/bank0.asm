@@ -5624,7 +5624,7 @@ LoadRoom::
     ld   a, [wTradeSequenceItem]
     cp   $0E ; Magnifying Glass
     jr   nz, .goriyaRoomEnd
-    ld   bc, IndoorsAUnreferenced02
+    ld   bc, IndoorsAF5Alt
     jp   .parseRoomHeader
 .goriyaRoomEnd
 
@@ -5655,7 +5655,7 @@ LoadRoom::
     ld   a, [$D80E]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced01 ; Eagle's Tower open
+    ld   bc, Overworld0EAlt ; Eagle's Tower open
     jr   .loadBankForOverworldRooms
 .endEaglesTowerAlt
 
@@ -5664,7 +5664,7 @@ LoadRoom::
     ld   a, [$D88C]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced05 ; South Face Shrine open
+    ld   bc, Overworld8CAlt ; South Face Shrine open
     jr   .loadBankForOverworldRooms
 .endSouthFaceShrineAlt
 
@@ -5673,7 +5673,7 @@ LoadRoom::
     ld   a, [$D879]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced04 ; Upper Tal Tal Heights dry
+    ld   bc, Overworld79Alt ; Kanalet Castle open
     jr   .loadBankForOverworldRooms
 .endUpperTalTalHeightsAlt
 
@@ -5682,7 +5682,7 @@ LoadRoom::
     ld   a, [$D806]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced00 ; Windfish's Egg open
+    ld   bc, Overworld06Alt ; Windfish's Egg open
     jr   .loadBankForOverworldRooms
 .endWindfishsEggAlt
 
@@ -5691,7 +5691,7 @@ LoadRoom::
     ld   a, [$D82B]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced02 ; Tal Tal Heights dry
+    ld   bc, Overworld1BAlt ; Angler's Tunnel upper water dry
     jr   .loadBankForOverworldRooms
 .endTalTalHeightsAlt
 
@@ -5700,7 +5700,7 @@ LoadRoom::
     ld   a, [$D82B]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
-    ld   bc, OverworldUnreferenced03 ; Angler's Tunnel open
+    ld   bc, Overworld2BAlt ; Angler's Tunnel open
     jr   .loadBankForOverworldRooms
 
 .altRoomsEnd
@@ -6119,6 +6119,11 @@ LoadRoomObject::
     ; clear wObjectAffectingBGPalette
     xor  a
     ld   [wObjectAffectingBGPalette], a
+    ; POI: Potential bug: Room $1C4 (IndoorA) is the Face Shrine pre-boss room
+    ; where you can light two torches to trigger an event. However,
+    ; room $2C4 (IndoorB) *also* has an unlit torch. This causes some
+    ; weird palette flickering, though $2C4 and $2D4 are inaccessible
+    ; (part of an old Kanalet Castle entry before the side-scrolling stuff)
     ; If the room is $C4…
     ldh  a, [hMapRoom]
     cp   $C4
@@ -6299,7 +6304,7 @@ LoadRoomObject::
     ; Raised fences can be activated: they turn into a wall
     ; jumpable from the top.
     ;
-    ; NB: it seems these objects are not used in the final game.
+    ; POI: NB: it seems these objects are not used in the final game.
     ;
 
     cp   OBJECT_RAISED_FENCE_BOTTOM
@@ -6434,7 +6439,7 @@ label_3500::
     cp   $09
     jr   nz, label_350E
     ldh  a, [hMapRoom]
-    cp   $97
+    cp   $97            ; Room with the giant bombable skull thing
     ret  nz
     jr   label_3527
 
@@ -6442,16 +6447,16 @@ label_350E::
     cp   $E1
     jr   nz, label_351D
     ldh  a, [hMapRoom]
-    cp   $0E
+    cp   $0E            ; Eagle's Tower room
     ret  z
-    cp   $0C
+    cp   $0C            ; Tal-Tal Heights, 1N1E of the drainable water above Angler's Tunnel
     ret  z
-    cp   $1B
+    cp   $1B            ; The drainable water above Angler's Tunnel
     ret  z
 
 label_351D::
     ldh  a, [hMapRoom]
-    cp   $80
+    cp   $80            ; Mysterious Forest enterance from Mabe (?)
     jr   nc, label_3527
     ld   a, $09
     jr   label_3529

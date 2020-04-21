@@ -5016,19 +5016,19 @@ LoadRoomObjectsAttributes::
 
 .jr_020_6E1A
     ; Set attributes bank for rooms < $CC
-    ld   a, BANK(OverworldObjectsAttributesTableA) ; $6E1A: $3E $26
+    ld   a, BANK(RoomGBCOverlaysA) ; $6E1A: $3E $26
     ldh  [hScratch0], a                           ; $6E1C: $E0 $D7
     ; If the room id >= $CC…
     ldh  a, [hMapRoom]                            ; $6E1E: $F0 $F6
     cp   $CC                                      ; $6E20: $FE $CC
     jr   c, .bankEnd                              ; $6E22: $38 $06
     ld   hl, hScratch0                            ; $6E24: $21 $D7 $FF
-    ; … use BANK(OverworldObjectsAttributesTableA) + 1 for the attributes bank
+    ; … use BANK(RoomGBCOverlaysA) + 1 for the overlay bank
     inc  [hl]                                     ; $6E27: $34
     sub  $CC                                      ; $6E28: $D6 $CC
 .bankEnd
 
-    ld   hl, OverworldObjectsAttributesTableA     ; $6E2A: $21 $00 $40
+    ld   hl, RoomGBCOverlaysA     ; $6E2A: $21 $00 $40
     ld   b, a                                     ; $6E2D: $47
     and  b                                        ; $6E2E: $A0
 

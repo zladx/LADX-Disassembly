@@ -41,8 +41,8 @@ label_4A3F::
     ld   [hl], a
     pop  hl
     ret
-    ld   bc, label_4667
-    ld   e, $43
+    ld   bc, DebugSaveFileData
+    ld   e, DEBUG_SAVE_FILE_SIZE
     push hl
 
 label_4A4D::
@@ -96,7 +96,7 @@ label_4A98::
     ld   bc, $984A
     call func_4852
     ldh  a, [hJoypadState]
-    and  $80
+    and  J_START
     jr   z, label_4B29
     call PlayValidationJingle
     ld   a, [wSaveSlot]
@@ -322,16 +322,18 @@ label_4BB0::
     ld   h, h
     ld   l, h
 
-label_4BB5::
-    db $42, $43, $44, $45, $46, $47, $48, $00
-    db $00, $62, $63, $64, $65, $66, $67, $68
-    db $49, $4a, $4b, $4c, $4d, $4e, $4f, $00
-    db $00, $69, $6a, $6b, $6c, $6d, $6e, $6f
-    db $50, $51, $52, $53, $54, $55, $56, $00
-    db $00, $70, $71, $72, $73, $74, $75, $76
-    db $57, $58, $59, $5a, $5b, $00, $00, $00
-    db $00, $77, $78, $79, $7a, $7b, $00, $00
-
+NameEntryCharacterTable::
+    ; Used to translate cursor position -> name letter
+    ; on the name entry menu. Does not actually represent
+    ; the graphics - this is just the letter that is chosen
+    ; when you push A
+    PUSHC
+    SETCHARMAP NameEntryCharmap
+    db   "ABCDEFG",  0,0, "abcdefg"
+    db   "HIJKLMN",  0,0, "hijklmn"
+    db   "OPQRSTU",  0,0, "opqrstu"
+    db   "VWXYZ",0,0,0,0, "vwxyz",0,0
+    POPC
 
 label_4BF5::
     ldh  a, [hJoypadState]
@@ -431,28 +433,29 @@ label_4C63::
     ld   [hl], a
     ret
 
-label_4C8A::
-    ldh  a, [hJoypadState]
-    and  $30
-    jr   z, label_4CB7
-    bit  5, a
-    jr   nz, label_4CA7
-    call PlayValidationJingle
-    call label_4CDA
+label_4C8A::                            ; "Enter Name" screen
+    ldh  a, [hJoypadState]              ; Check inputs...
+    and  J_A | J_B                      ; Was A or B pushed?
+    jr   z, label_4CB7                  ; If no, bail
+    bit  5, a                           ; Was B pushed?
+    jr   nz, label_4CA7                 ; If yes, backspace
+    call PlayValidationJingle           ; Otherwise, A was pushed
+    call label_4CDA                     ; so add the current letter
     ld   a, [$DBAA]
     add  a, $01
-    cp   $05
+    cp   $05                            ; Prevent cursor from going > 5th place
     jr   c, label_4CB4
     ld   a, $04
     jr   label_4CB4
 
 label_4CA7::
+    ; B button when inputting filename
     call PlayValidationJingle
     ld   a, [$DBAA]
     sub  a, $01
     cp   $FF
     jr   nz, label_4CB4
-    xor  a
+    xor  a                              ; Prevent cursor from going < 1st place
 
 label_4CB4::
     ld   [$DBAA], a
@@ -486,7 +489,7 @@ label_4CDA::
     ld   a, [$DBA9]
     ld   c, a
     ld   b, $00
-    ld   hl, label_4BB5
+    ld   hl, NameEntryCharacterTable
     add  hl, bc
     ld   a, [hl]
     ld   e, a

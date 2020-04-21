@@ -2070,11 +2070,11 @@ GetChestsStatusForRoom::
     jr   nz, jr_014_5891                          ; $5888: $20 $07
 
     ld   d, $00                                   ; $588A: $16 $00
-    ld   hl, ColorDungeonChestsTable              ; $588C: $21 $60 $48
+    ld   hl, ColorDungeonRoomChestsTable          ; $588C: $21 $60 $48
     jr   jr_014_5894                              ; $588F: $18 $03
 
 jr_014_5891:
-    ld   hl, DungeonChestsTable                   ; $5891: $21 $60 $45
+    ld   hl, RoomChestsTable                      ; $5891: $21 $60 $45
 
 jr_014_5894:
     add  hl, de                                   ; $5894: $19
@@ -2164,7 +2164,7 @@ func_014_5900::
     jr   nz, jr_014_5914                          ; $590B: $20 $07
 
     ld   d, $00                                   ; $590D: $16 $00
-    ld   hl, ColorDungeonChestsTable              ; $590F: $21 $60 $48
+    ld   hl, ColorDungeonRoomChestsTable          ; $590F: $21 $60 $48
     jr   jr_014_5920                              ; $5912: $18 $0C
 
 jr_014_5914:
@@ -2177,7 +2177,7 @@ jr_014_5914:
     inc  d                                        ; $591C: $14
 
 jr_014_591D:
-    ld   hl, DungeonChestsTable                   ; $591D: $21 $60 $45
+    ld   hl, RoomChestsTable                      ; $591D: $21 $60 $45
 
 jr_014_5920:
     add  hl, de                                   ; $5920: $19

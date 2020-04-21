@@ -247,7 +247,7 @@ incbin "gfx/dungeons/eagles_tower_top_2.dmg.2bpp"
 section "bank14",romx[$4000],bank[$14]
 include "data/events/dungeons.asm"
 include "data/maps/layouts.asm"
-include "data/chests/dungeons.asm"
+include "data/chests/chests.asm"
 include "code/bank14.asm"
 include "text/dialog_1.asm"
 
@@ -337,10 +337,10 @@ section "bank25",romx[$4000],bank[$25]
 include "data/bg_attributes/overworld_b.asm"
 
 section "bank26",romx[$4000],bank[$26]
-include "data/rooms_attributes/overworld_a.asm"
+include "data/rooms_gbc_overlays/overworld_a.asm"
 
 section "bank27",romx[$4000],bank[$27]
-include "data/rooms_attributes/overworld_b.asm"
+include "data/rooms_gbc_overlays/overworld_b.asm"
 include "data/bg_attributes/overworld_c.asm"
 include "code/bank27.asm"
 

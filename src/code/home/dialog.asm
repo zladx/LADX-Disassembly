@@ -479,7 +479,10 @@ DialogDrawNextCharacterHandler::
     ret
 
 .ThiefString::
-    db "T" + 1, "H" + 1, "I" + 1, "E" + 1, "F" + 1
+PUSHC
+SETCHARMAP NameEntryCharmap
+    db "THIEF"
+POPC
 
 .notEnd
     cp   " "
@@ -795,9 +798,9 @@ label_278B::
 
 DialogChoiceHandler::
     ldh  a, [hJoypadState]
-    bit  4, a
+    bit  4, a               ; Was A pushed?
     jp   nz, .jp_27B7
-    and  $03
+    and  J_LEFT | J_RIGHT
     jr   z, .jp_27AA
     ld   hl, $C177
     ld   a, [hl]

@@ -1518,7 +1518,7 @@ MinimapEntryPoint::
     cp   $05
     jr   z, label_5639
     xor  a
-    ldh  [$FFCB], a
+    ldh  [hPressedButtonsMask], a
     ldh  [hJoypadState], a
     ld   a, [wGameplaySubtype]
 
@@ -1669,7 +1669,7 @@ label_5731::
     and  a
     jp   nz, label_5818
     ldh  a, [hJoypadState]
-    and  $10
+    and  J_A
     jr   z, label_57B7
     ld   a, [$DBB4]
     ld   e, a
@@ -1753,10 +1753,10 @@ label_57B3::
     ret
 
 label_57B7::
-    ld   a, [ROM_DebugTool1]
+    ld   a, [ROM_DebugTool1]                    ; POI: Debug code reference
     and  a
     jr   z, label_57FA
-    ldh  a, [$FFCB]
+    ldh  a, [hPressedButtonsMask]
     cp   $60
     jr   nz, label_57FA
     ld   a, GAMEPLAY_WORLD
@@ -1979,7 +1979,7 @@ label_5A71::
     ld   hl, $C19F
     or   [hl]
     jp   nz, label_5B3F
-    ldh  a, [$FFCB]
+    ldh  a, [hPressedButtonsMask]
     ld   c, a
     ld   hl, $C182
     and  $0F

@@ -1,5 +1,8 @@
 ; Root source file for the game.
 
+; Build options
+include "options.asm"
+
 ; Definitions
 include "constants/constants.asm"
 

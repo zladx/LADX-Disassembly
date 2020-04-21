@@ -1752,9 +1752,10 @@ label_57B3::
     ld   [$C19F], a
     ret
 
-label_57B7::                                    ; If we weren't pushing A above, then...
-    ld   a, [ROM_DebugTool1]                    ; POI: Debug code to warp to any room on the map
-    and  a                                      ; when pushing ... ?
+; POI: Debug code to warp to any room on the map by pushing B + Select (on the map screen)
+label_57B7::
+    ld   a, [ROM_DebugTool1]                    ; If we weren't pushing A above, then
+    and  a                                      ; Check the first debug flag
     jr   z, label_57FA                          ; If the debug flag is off, skip this
     ldh  a, [hPressedButtonsMask]               ; Otherwise, are we holding SELECT / B?
     cp   J_SELECT | J_B

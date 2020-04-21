@@ -222,7 +222,9 @@ TRADING_ITEM_NECKLACE          equ $0C
 TRADING_ITEM_SCALE             equ $0D
 TRADING_ITEM_MAGNIFIYING_GLASS equ $0E
 
+; Price to pay to play the fishing game
+FISHING_GAME_PRICE        equ 10
 
-; #define-like macros
-HALF_HEARTS equs "* 4"
-FULL_HEARTS equs "* 8"
+; Fishing game rewards
+FISHING_GAME_SMALL_REWARD equ 05
+FISHING_GAME_LARGE_REWARD equ 20

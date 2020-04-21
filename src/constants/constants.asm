@@ -1,4 +1,9 @@
 ;
+; Useful defintions
+;
+include "constants/defines.asm"
+
+;
 ; Game-specific constants
 ;
 include "constants/animated_tiles.asm"

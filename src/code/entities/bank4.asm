@@ -2781,6 +2781,7 @@ jr_004_6019:
     dec  de                                       ; $6020: $1B
     jr   jr_004_6019                              ; $6021: $18 $F6
 
+    ; Play the fishing game: remove the price from the player's rupees
 jr_004_6023:
     ld   a, l                                     ; $6023: $7D
     sub  $10                                      ; $6024: $D6 $10
@@ -2790,7 +2791,7 @@ jr_004_6023:
     pop  hl                                       ; $602A: $E1
     jr   c, jr_004_6037                           ; $602B: $38 $0A
 
-    ld   a, $0A                                   ; $602D: $3E $0A
+    ld   a, FISHING_GAME_PRICE
     ld   [wSubstractRupeeBufferLow], a            ; $602F: $EA $92 $DB
     jp_open_dialog $047                           ; $6032
 
@@ -3073,6 +3074,7 @@ jr_004_6214:
     dec  de                                       ; $621B: $1B
     jr   jr_004_6214                              ; $621C: $18 $F6
 
+    ; Play again: remove the price from the player's rupees
 jr_004_621E:
     ld   a, l                                     ; $621E: $7D
     sub  $10                                      ; $621F: $D6 $10
@@ -3082,7 +3084,7 @@ jr_004_621E:
     pop  hl                                       ; $6225: $E1
     jr   c, jr_004_623F                           ; $6226: $38 $17
 
-    ld   a, $0A                                   ; $6228: $3E $0A
+    ld   a, FISHING_GAME_PRICE                    ; $6228: $3E $0A
     ld   [wSubstractRupeeBufferLow], a            ; $622A: $EA $92 $DB
     call_open_dialog $047                         ; $622D
     call IncrementEntityState                     ; $6232: $CD $12 $3B
@@ -3890,20 +3892,25 @@ jr_004_66DC:
     ld   [hl], $14                                ; $66E2: $36 $14
     jr   jr_004_66FE                              ; $66E4: $18 $18
 
+    ; Check for fish size (in wEntitiesPrivateState1Table)
 jr_004_66E6:
     ld   hl, wEntitiesPrivateState1Table          ; $66E6: $21 $B0 $C2
     add  hl, bc                                   ; $66E9: $09
     ld   a, [hl]                                  ; $66EA: $7E
     cp   $03                                      ; $66EB: $FE $03
-    ld   e, $14                                   ; $66ED: $1E $14
-    ld   a, $4A                                   ; $66EF: $3E $4A
-    jr   z, jr_004_66F7                           ; $66F1: $28 $04
+    ; Nice fish
+    ld   e, FISHING_GAME_LARGE_REWARD             ; $66ED: $1E $14
+    ld   a, LOW($04A) ; Nice fish dialog id      ; $66EF: $3E $4A
+    jr   z, .rewardsSelectionEnd                  ; $66F1: $28 $04
+    ; Runt
+    ld   e, FISHING_GAME_SMALL_REWARD             ; $66F3: $1E $05
+    ld   a, LOW($04D) ; Runt dialog id           ; $66F5: $3E $4D
+.rewardsSelectionEnd
 
-    ld   e, $05                                   ; $66F3: $1E $05
-    ld   a, $4D                                   ; $66F5: $3E $4D
-
-jr_004_66F7:
+    ; Add the prize to the player's rupees
     ld   hl, wAddRupeeBufferLow                   ; $66F7: $21 $90 $DB
+
+    ; Open the prize dialog
     ld   [hl], e                                  ; $66FA: $73
     call OpenDialog                               ; $66FB: $CD $85 $23
 

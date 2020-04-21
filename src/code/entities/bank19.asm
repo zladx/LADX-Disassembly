@@ -4116,7 +4116,8 @@ jr_019_5C61:
     inc  a                                        ; $5C66: $3C
     jp   SetEntitySpriteVariant                   ; $5C67: $C3 $0C $3B
 
-Data_019_5C6A::
+; Location of the 4 warps on the overworld
+WarpLocationsTable::
     db   $00, $2C, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
     db   $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $EC, $00, $00, $00
@@ -4196,16 +4197,18 @@ func_019_5DAC::
     ld   e, a                                     ; $5DBE: $5F
     ld   d, $00                                   ; $5DBF: $16 $00
 
-jr_019_5DC1:
-    ld   hl, Data_019_5C6A                        ; $5DC1: $21 $6A $5C
+    ; Find the next discovered warp on the overworld map
+.loop
+    ld   hl, WarpLocationsTable                   ; $5DC1: $21 $6A $5C
     add  hl, de                                   ; $5DC4: $19
     ld   e, [hl]                                  ; $5DC5: $5E
     ld   hl, wOverworldRoomStatus                 ; $5DC6: $21 $00 $D8
     add  hl, de                                   ; $5DC9: $19
     ld   a, [hl]                                  ; $5DCA: $7E
     and  $80                                      ; $5DCB: $E6 $80
-    jr   z, jr_019_5DC1                           ; $5DCD: $28 $F2
+    jr   z, .loop                                 ; $5DCD: $28 $F2
 
+    ; Warp Link
     ld   a, e                                     ; $5DCF: $7B
     ld   [wWarp0Room], a                          ; $5DD0: $EA $03 $D4
     xor  a                                        ; $5DD3: $AF

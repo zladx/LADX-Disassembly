@@ -479,7 +479,10 @@ DialogDrawNextCharacterHandler::
     ret
 
 .ThiefString::
-    db "T" + 1, "H" + 1, "I" + 1, "E" + 1, "F" + 1
+PUSHC
+SETCHARMAP NameEntryCharmap
+    db "THIEF"
+POPC
 
 .notEnd
     cp   " "

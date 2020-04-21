@@ -317,18 +317,20 @@ InitSaveFiles::
 
     ld   a, [wGameplayType]
     cp   GAMEPLAY_FILE_NEW
+PUSHC
+SETCHARMAP NameEntryCharmap
     jr   z, .notOnNewFileScreen
-    ld   a, $5B     ; Set name ...
-    ld   [$A454], a ; Z
-    ld   a, $46
-    ld   [$A455], a ; E
-    ld   a, $4D
-    ld   [$A456], a ; L
-    ld   a, $45
-    ld   [$A457], a ; D
-    ld   a, $42
-    ld   [$A458], a ; A
-
+    ld   a, "Z"     ; Set save file name to "ZELDA"
+    ld   [$A454], a
+    ld   a, "E"
+    ld   [$A455], a
+    ld   a, "L"
+    ld   [$A456], a
+    ld   a, "D"
+    ld   [$A457], a
+    ld   a, "A"
+    ld   [$A458], a
+POPC
 .notOnNewFileScreen
     xor  a
     ld   [$A45C], a ; death counter = 0

@@ -1752,14 +1752,14 @@ label_57B3::
     ld   [$C19F], a
     ret
 
-label_57B7::
-    ld   a, [ROM_DebugTool1]                    ; POI: Debug code reference
-    and  a
-    jr   z, label_57FA
-    ldh  a, [hPressedButtonsMask]
-    cp   $60
-    jr   nz, label_57FA
-    ld   a, GAMEPLAY_WORLD
+label_57B7::                                    ; If we weren't pushing A above, then...
+    ld   a, [ROM_DebugTool1]                    ; POI: Debug code to warp to any room on the map
+    and  a                                      ; when pushing ... ?
+    jr   z, label_57FA                          ; If the debug flag is off, skip this
+    ldh  a, [hPressedButtonsMask]               ; Otherwise, are we holding SELECT / B?
+    cp   J_SELECT | J_B
+    jr   nz, label_57FA                         ; If yes, skip this too
+    ld   a, GAMEPLAY_WORLD                      ; Otherwise, warp somewhere
     ld   [wGameplayType], a
     call ApplyMapFadeOutTransition
     ld   a, $00
@@ -1785,11 +1785,11 @@ label_57B7::
     ret
 
 label_57FA::
-    ld   e, $40
+    ld   e, J_SELECT
     ld   a, [ROM_DebugTool1]
     and  a
     jr   nz, label_5804
-    ld   e, $60
+    ld   e, J_SELECT | J_B
 
 label_5804::
     ldh  a, [hJoypadState]

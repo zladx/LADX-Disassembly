@@ -346,7 +346,7 @@ label_4BF7::
     ldh  a, [hScratch0]
     and  $03
     jr   nz, label_4C21
-    ldh  a, [$FFCB]
+    ldh  a, [hPressedButtonsMask]
     ld   hl, $C182
     and  $0F
     jr   nz, label_4C12
@@ -361,7 +361,7 @@ label_4C12::
     cp   $18
     jr   nz, label_4C1F
     ld   [hl], $15
-    ldh  a, [$FFCB]
+    ldh  a, [hPressedButtonsMask]
     jr   label_4BF7
 
 label_4C1F::

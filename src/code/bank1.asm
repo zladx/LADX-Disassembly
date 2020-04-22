@@ -832,29 +832,45 @@ include "code/file_creation.asm"
 include "code/file_deletion.asm"
 include "code/file_copy.asm"
 
-label_5295::
-    db $18, $18, $18, $18, $18, $18, $28, $28, $28, $28, $38, $38, $38, $38, $50
+; Table that determines how much health you have after a game over.
+; New files always start with 3 HP / 3 MAX HP, but after that
+; the health you're provided on respawning depends on your max:
+MaxHealthToStartingHealthTable::
+    db  3 FULL_HEARTS  ;  0 heart containers
+    db  3 FULL_HEARTS  ;  1 heart container
+    db  3 FULL_HEARTS  ;  2 heart containers
+    db  3 FULL_HEARTS  ;  3 heart containers
+    db  3 FULL_HEARTS  ;  4 heart containers
+    db  3 FULL_HEARTS  ;  5 heart containers
+
+    db  5 FULL_HEARTS  ;  6 heart containers
+    db  5 FULL_HEARTS  ;  7 heart containers
+    db  5 FULL_HEARTS  ;  8 heart containers
+    db  5 FULL_HEARTS  ;  9 heart containers
+
+    db  7 FULL_HEARTS  ; 10 heart containers
+    db  7 FULL_HEARTS  ; 11 heart containers
+    db  7 FULL_HEARTS  ; 12 heart containers
+    db  7 FULL_HEARTS  ; 13 heart containers
+
+    db 10 FULL_HEARTS  ; 14 heart containers
 
 ; Main entry point for loading a saved game
 LoadSavedFile::
-    xor  a
-    ldh  [hIsSideScrolling], a
-    ld   a, [wHealth]
-    and  a
-    jr   nz, label_52BB
-    ld   a, [wMaxHealth]
+    xor  a                                      ; Can never save in a side-scrolling area
+    ldh  [hIsSideScrolling], a                  ; so make sure that flag is not set
+    ld   a, [wHealth]                           ; Does the player have any health?
+    and  a                                      ; If yes, skip this
+    jr   nz, .skipHealthReset
+    ld   a, [wMaxHealth]                        ; Otherwise, get their max health...
     ld   e, a
-
-label_52B1::
     ld   d, $00
-
-label_52B3::
-    ld   hl, label_5295
-    add  hl, de
+    ld   hl, MaxHealthToStartingHealthTable     ; and use it as an index into the table
+    add  hl, de                                 ; to provide the starting health value.
     ld   a, [hl]
     ld   [wHealth], a
 
-label_52BB::
+.skipHealthReset:
     ld   hl, $DBD1
     ld   a, [hl]
     ld   [hl], $00
@@ -946,7 +962,7 @@ label_531D::
 .setStartingPoint
     ld   a, [wSpawnPositionX]
     and  a
-    jr   z, .loadPredefinedSaveFile
+    jr   z, .initNewGame
     ld   [wMapEntrancePositionX], a
 
     ld   a, [wSpawnPositionY]
@@ -985,7 +1001,10 @@ label_531D::
     ld   [wBGMapToLoad], a
     ret
 
-.loadPredefinedSaveFile
+; Initializes some stuff related to starting a new game
+; 30 max arrows, 30 max bombs, 20 max magic powder,
+; places you in Marin's room in the bed, etc
+.initNewGame
     ld   a, $30
     ld   [wMaxArrows], a
     ld   a, $30
@@ -1016,6 +1035,8 @@ label_531D::
     ld   [$DB71], a
     jr   .finish
 
+
+; @TODO Code as data
 label_53D8::
     sbc  a, l
     sbc  a, l
@@ -1502,7 +1523,7 @@ MinimapEntryPoint::
     cp   $05
     jr   z, label_5639
     xor  a
-    ldh  [$FFCB], a
+    ldh  [hPressedButtonsMask], a
     ldh  [hJoypadState], a
     ld   a, [wGameplaySubtype]
 
@@ -1581,7 +1602,7 @@ label_5678::
     ld   [$DBB4], a
     ld   e, a
     ld   d, $00
-    ld   hl, label_5959
+    ld   hl, MapSpecialLocationNamesTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -1653,12 +1674,12 @@ label_5731::
     and  a
     jp   nz, label_5818
     ldh  a, [hJoypadState]
-    and  $10
+    and  J_A
     jr   z, label_57B7
     ld   a, [$DBB4]
     ld   e, a
     ld   d, $00
-    ld   hl, label_5959
+    ld   hl, MapSpecialLocationNamesTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -1681,7 +1702,7 @@ label_5731::
 
 label_5766::
     ld   d, $00
-    ld   hl, label_5909
+    ld   hl, MapSpecialLocationNamesLookupTable
     add  hl, de
     ld   a, [hl]
     jr   label_5792
@@ -1708,7 +1729,7 @@ label_577E::
     or   e
     ld   e, a
     ld   d, $00
-    ld   hl, label_58C9
+    ld   hl, MapLocationNamesTable
     add  hl, de
     ld   a, [hl]
 
@@ -1736,14 +1757,15 @@ label_57B3::
     ld   [$C19F], a
     ret
 
+; POI: Debug code to warp to any room on the map by pushing B + Select (on the map screen)
 label_57B7::
-    ld   a, [ROM_DebugTool1]
-    and  a
-    jr   z, label_57FA
-    ldh  a, [$FFCB]
-    cp   $60
-    jr   nz, label_57FA
-    ld   a, GAMEPLAY_WORLD
+    ld   a, [ROM_DebugTool1]                    ; If we weren't pushing A above, then
+    and  a                                      ; Check the first debug flag
+    jr   z, label_57FA                          ; If the debug flag is off, skip this
+    ldh  a, [hPressedButtonsMask]               ; Otherwise, are we holding SELECT / B?
+    cp   J_SELECT | J_B
+    jr   nz, label_57FA                         ; If yes, skip this too
+    ld   a, GAMEPLAY_WORLD                      ; Otherwise, warp somewhere
     ld   [wGameplayType], a
     call ApplyMapFadeOutTransition
     ld   a, $00
@@ -1769,11 +1791,11 @@ label_57B7::
     ret
 
 label_57FA::
-    ld   e, $40
+    ld   e, J_SELECT
     ld   a, [ROM_DebugTool1]
     and  a
     jr   nz, label_5804
-    ld   e, $60
+    ld   e, J_SELECT | J_B
 
 label_5804::
     ldh  a, [hJoypadState]
@@ -1897,53 +1919,73 @@ label_58A8::
     ld   [hl], a
     ret
 
-label_58C9::
-    db $6C, $6C, $6C, $6B, $6C, $6C, $6C, $6C, $76, $76, $79, $79, $79, $79, $79, $79
-    db $6A, $6A, $72, $7A, $78, $78, $71, $71, $6A, $6A, $72, $70, $78, $78, $71, $71
-    db $6A, $6E, $69, $69, $69, $69, $77, $71, $6E, $6E, $69, $69, $69, $69, $77, $77
-    db $7B, $7B, $6D, $62, $74, $74, $6F, $68, $73, $73, $73, $74, $74, $74, $75, $68
 
-label_5909::
-    db 0, $D9, $C0, $C1, $C2, $C3, $C4, $C5, $C6, $C7, $C8, $C9, $CA, $CB, $CC, $CD
-    db 0, $56, $57, $58, $59, $5A, $5B, $5C, $5D, 0, 0, 0, 0, 0, 0, 0
-    db 0, $7C, $67, 0, 0, $80, $65, 0, $64, $88, $7D, 0, 0, 0, 0, 0
-    db 0, $5E, $5F, $7F, $7E, $7D, $82, $84, $85, $86, $87, $81, $66, $A7, $5E, $63
-    db 0, $61, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+;
+; Each 2x2 section of the overworld is assigned a dialogue index
+; that will be shown when you push A on the map screen.
+; e.g. bottom right = $68 = Dialog068 = "Yarna Desert"
+;
+MapLocationNamesTable::
+    ;   0    2    4    6    8    A    C    E
+    db $6C, $6C, $6C, $6B, $6C, $6C, $6C, $6C ; 00
+    db $76, $76, $79, $79, $79, $79, $79, $79 ; 20
+    db $6A, $6A, $72, $7A, $78, $78, $71, $71 ; 40
+    db $6A, $6A, $72, $70, $78, $78, $71, $71 ; 60
+    db $6A, $6E, $69, $69, $69, $69, $77, $71 ; 80
+    db $6E, $6E, $69, $69, $69, $69, $77, $77 ; A0
+    db $7B, $7B, $6D, $62, $74, $74, $6F, $68 ; C0
+    db $73, $73, $73, $74, $74, $74, $75, $68 ; E0
 
-label_5959::
-    db 0, 0, 0, 0, 0, 0, $3E, 0, $E, 0, $39, 0, 0, 0, $17, 0
-    db $18, $3D, 0, 0, 0, 0, 6, $C, 0, 0, 0, 0, 0, 0, 0, 0
-    db 0, 0, 0, 0, $12, 0, 0, 0, 7, 0, 0, $14, 0, 0, 0, 0
-    db $33, $3D, 0, 0, 0, 0, 5, $2A, 0, 0, 0, 0, 0, 0, 0, $29
-    db 0, 3, 0, 0, 0, $25, 0, 0, 0, 0, 0, $3D, 0, 0, 0
+;
+; Lookup table for what dialogue message to show when examining a location on the map screen
+; "Owl" icons are only visible if you've seen that particular event, though
+;
+; For (as of yet) unknown reasons, A7 actually maps to Dialog1A7 rather than 0A7
+; POI: Unused entries that don't appear in MapSpecialLocationNamesTable anywhere
+; 0F ("Enter the Egg!", maybe manually overridden?)
+; 31 (Duplicate of 3E, "Wind Fish's Egg")
+; 32 (Dialog05F and Dialog060 both point to "Mountain Bridge", hmm...!)
+;
+MapSpecialLocationNamesLookupTable::
+    ;   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
+    db   0, $D9, $C0, $C1, $C2, $C3, $C4, $C5, $C6, $C7, $C8, $C9, $CA, $CB, $CC, $CD  ; 00 - Owl reminders
+    db   0, $56, $57, $58, $59, $5A, $5B, $5C, $5D,   0,   0,   0,   0,   0,   0,   0  ; 10 - Dungeon icons
+    db   0, $7C, $67,   0,   0, $80, $65,   0, $64, $88, $7D,   0,   0,   0,   0,   0  ; 20 - Shop icons
+    db   0, $5E, $5F, $7F, $7E, $7D, $82, $84, $85, $86, $87, $81, $66, $A7, $5E, $63  ; 30 - "!?" icons
+    db   0, $61,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0  ; 40 - "!?" icons
 
-label_59A8::
-    db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db 0, 0, 0, 0, 0, $D, $22, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db 0, 2, $21, $3B, $36, 0, 0, 0, 0, $3D, 0, $37, 0, $16, 0, 0
-    db 0, 0, 0, 0, $26, 0, 0, 0, 0, 0, 0, 0, 9, $B, 9, 0
-    db 0, 0, $35, $3C, 0, $3D, 0, 0, 0, 0, 0, 0, 0, $A, 0, 0
-    db 0, $3A, $34, $3D, $28, 0
-
-label_5A0E::
-    db $13, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, $11, 0
-    db 0, $38, 0
-
-label_5A31::
-    db 0, $15, 0, $3D, 0, 0, 0, 0, 0, 0, 0, $41, 0, 0, 0, 0
-    db $3D, 0, 0, 0, 0, 0, 8, 0, 0, 0, 1, 0, 0, 0, $3F, 0
-    db 0, 0, 0, 0, 0, 0, 0, 0
+;
+; Table for map squares that have special text instead of the generic name from MapLocationNamesTable.
+; Rather than directly indexing the dialogue entry, for some reason these are instead lookup values
+; for *another* table (just above this one), MapSpecialLocationNamesLookupTable, which has the dialogue indexes...
+;
+MapSpecialLocationNamesTable::
+    ;   0    1    2    3    4    5    6    7    8    9    A    B    C    D    E    F
+    db   0,   0,   0,   0,   0,   0, $3E,   0, $0E,   0, $39,   0,   0,   0, $17,   0 ; 00
+    db $18, $3D,   0,   0,   0,   0, $06, $0C,   0,   0,   0,   0,   0,   0,   0,   0 ; 10
+    db   0,   0,   0,   0, $12,   0,   0,   0, $07,   0,   0, $14,   0,   0,   0,   0 ; 20
+    db $33, $3D,   0,   0,   0,   0, $05, $2A,   0,   0,   0,   0,   0,   0,   0, $29 ; 30
+    db   0, $03,   0,   0,   0, $25,   0,   0,   0,   0,   0, $3D,   0,   0,   0,   0 ; 40
+    db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 50
+    db   0,   0,   0,   0, $0D, $22,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 60
+    db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 70
+    db $02, $21, $3B, $36,   0,   0,   0,   0, $3D,   0, $37,   0, $16,   0,   0,   0 ; 80
+    db   0,   0,   0, $26,   0,   0,   0,   0,   0,   0,   0, $09, $0B, $09,   0,   0 ; 90
+    db   0, $35, $3C,   0, $3D,   0,   0,   0,   0,   0,   0,   0, $0A,   0,   0,   0 ; A0
+    db $3A, $34, $3D, $28,   0, $13, $07,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; B0
+    db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; C0
+    db   0,   0, $04, $11,   0,   0, $38,   0,   0, $15,   0, $3D,   0,   0,   0,   0 ; D0
+    db   0,   0,   0, $41,   0,   0,   0,   0, $3D,   0,   0,   0,   0,   0, $08,   0 ; E0
+    db   0,   0, $01,   0,   0,   0, $3F,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; F0
 
 label_5A59::
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
-    ld   hl, label_5959
+    ld   hl, MapSpecialLocationNamesTable
     add  hl, de
     ld   e, [hl]
-    ld   hl, label_5909
+    ld   hl, MapSpecialLocationNamesLookupTable
     add  hl, de
     ld   a, [hl]
     jp   OpenDialog
@@ -1963,7 +2005,7 @@ label_5A71::
     ld   hl, $C19F
     or   [hl]
     jp   nz, label_5B3F
-    ldh  a, [$FFCB]
+    ldh  a, [hPressedButtonsMask]
     ld   c, a
     ld   hl, $C182
     and  $0F
@@ -2036,7 +2078,7 @@ label_5AA0::
 
 label_5AF5::
     call label_6BAE
-    ld   hl, label_5959
+    ld   hl, MapSpecialLocationNamesTable
     add  hl, de
     ld   a, [hl]
     and  a
@@ -2496,18 +2538,18 @@ label_5DE1::
     ret
 
 label_5DE6::
-    ld   a, [wHealth]
-    and  a
-    jr   nz, label_5DFA
-    ld   a, [wMaxHealth]
+    ld   a, [wHealth]                           ; Does the player have any health?
+    and  a                                      ; If yes, skip this
+    jr   nz, .skipHealthReset
+    ld   a, [wMaxHealth]                        ; Otherwise, get their max health...
     ld   e, a
     ld   d, $00
-    ld   hl, label_5295
-    add  hl, de
+    ld   hl, MaxHealthToStartingHealthTable     ; and use it as an index into the table
+    add  hl, de                                 ; to provide the starting health value.
     ld   a, [hl]
     ld   [wHealth], a
 
-label_5DFA::
+.skipHealthReset:
     call SynchronizeDungeonsItemFlags_trampoline
     ld   a, [wSaveSlot]
     sla  a

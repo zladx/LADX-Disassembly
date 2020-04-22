@@ -4,8 +4,22 @@ section "RST 0x0000", rom0[$0000]
 
 ; Debug Mode (see debug.asm)
 ; Uncomment to enable
-;section "Enable debug tools", rom0[$0003]
-;    db   01
+section "Debug tool toggles", rom0[$0003]
+IF DEF(ENABLE_DEBUG_1)
+    db 1
+ELSE
+    db 0
+ENDC
+IF DEF(ENABLE_DEBUG_2)
+    db 1
+ELSE
+    db 0
+ENDC
+IF DEF(ENABLE_DEBUG_3)
+    db 1
+ELSE
+    db 0
+ENDC
 
 section "Interrupt VBlank", rom0[$0040]
     jp   InterruptVBlank

@@ -559,10 +559,13 @@ label_1DF0::
     jp   CopyDataAndDrawLinkSprite
 
 label_1E01::
+    ; This has something to do with drawing the trading sequence item ...
+    ; changing TRADING_ITEM_RIBBON to 0 changes the order of shown trading items
+    ; @TODO Probably able to figure this out with a few minutes of time
     ld   a, [wTradeSequenceItem]
-    cp   $02
+    cp   TRADING_ITEM_RIBBON
     jp  c, CopyDataAndDrawLinkSprite.drawLinkSprite
-    sub  a, $02
+    sub  a, TRADING_ITEM_RIBBON
     ld   d, a
     ld   e, $00
     sra  d

@@ -1087,13 +1087,13 @@ MermaidStatueState1Handler::
     ret  nc                                       ; $4965: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $4966: $FA $0E $DB
-    cp   $0E                                      ; $4969: $FE $0E
-    ret  z                                        ; $496B: $C8
+    cp   TRADING_ITEM_MAGNIFIYING_GLASS           ; $4969: $FE $0E
+    ret  z                                        ; If you have the magnifying glass, return
 
-    cp   $0D                                      ; $496C: $FE $0D
-    jr   nz, jr_018_498E                          ; $496E: $20 $1E
+    cp   TRADING_ITEM_SCALE                       ; $496C: $FE $0D
+    jr   nz, jr_018_498E                          ; If you don't have the mermaid scale, return
 
-    ld   a, $0E                                   ; $4970: $3E $0E
+    ld   a, TRADING_ITEM_MAGNIFIYING_GLASS        ; $4970: $3E $0E
     ld   [wTradeSequenceItem], a                  ; $4972: $EA $0E $DB
     ld   a, $01                                   ; $4975: $3E $01
     ld   [$DB7F], a                               ; $4977: $EA $7F $DB
@@ -1162,7 +1162,7 @@ ZoraEntityHandler::
     jp   z, func_018_7F08                         ; $49F0: $CA $08 $7F
 
     ld   a, [wTradeSequenceItem]                  ; $49F3: $FA $0E $DB
-    cp   $0E                                      ; $49F6: $FE $0E
+    cp   TRADING_ITEM_MAGNIFIYING_GLASS           ; $49F6: $FE $0E
     jp   nz, func_018_7F08                        ; $49F8: $C2 $08 $7F
 
     ld   a, [$DB7F]                               ; $49FB: $FA $7F $DB
@@ -1413,12 +1413,12 @@ jr_018_4BB5:
 jr_018_4BE4:
     call func_018_7D36                            ; $4BE4: $CD $36 $7D
     ldh  a, [hMapRoom]                            ; $4BE7: $F0 $F6
-    cp   $A8                                      ; $4BE9: $FE $A8
+    cp   $A8                                      ; $A8 = Mr. Write's house
     jp   z, label_018_4C75                        ; $4BEB: $CA $75 $4C
 
     ld   de, Data_018_4B95                        ; $4BEE: $11 $95 $4B
     ld   a, [wTradeSequenceItem]                  ; $4BF1: $FA $0E $DB
-    cp   $09                                      ; $4BF4: $FE $09
+    cp   TRADING_ITEM_LETTER                      ; $4BF4: $FE $09
     jr   nc, jr_018_4BFB                          ; $4BF6: $30 $03
 
     ld   de, Data_018_4B99                        ; $4BF8: $11 $99 $4B
@@ -1454,7 +1454,7 @@ MrWriteState0Handler::
     ret  nc                                       ; $4C2B: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $4C2C: $FA $0E $DB
-    cp   $08                                      ; $4C2F: $FE $08
+    cp   TRADING_ITEM_HIBISCUS                    ; $4C2F: $FE $08
     jr   nz, jr_018_4C3B                          ; $4C31: $20 $08
 
     call_open_dialog $167                         ; $4C33
@@ -1493,7 +1493,7 @@ MrWriteState2Handler::
     call IncrementEntityState                     ; $4C64: $CD $12 $3B
     ld   [hl], b                                  ; $4C67: $70
     call CreateTradingItemEntity                  ; $4C68: $CD $0C $0C
-    ld   a, $09                                   ; $4C6B: $3E $09
+    ld   a, TRADING_ITEM_LETTER                   ; $4C6B: $3E $09
     ld   [wTradeSequenceItem], a                  ; $4C6D: $EA $0E $DB
     ld   a, $0D                                   ; $4C70: $3E $0D
     ldh  [hFFA5], a                               ; $4C72: $E0 $A5
@@ -1517,7 +1517,7 @@ func_018_4C87::
     ret  nc                                       ; $4C8A: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $4C8B: $FA $0E $DB
-    cp   $09                                      ; $4C8E: $FE $09
+    cp   TRADING_ITEM_LETTER                      ; $4C8E: $FE $09
     jr   nz, jr_018_4C9A                          ; $4C90: $20 $08
 
     call_open_dialog $134                         ; $4C92
@@ -1574,7 +1574,7 @@ func_018_4CD1::
     jr   nz, jr_018_4CEC                          ; $4CDD: $20 $0D
 
     call CreateTradingItemEntity                  ; $4CDF: $CD $0C $0C
-    ld   a, $0A                                   ; $4CE2: $3E $0A
+    ld   a, TRADING_ITEM_BROOM                    ; $4CE2: $3E $0A
     ld   [wTradeSequenceItem], a                  ; $4CE4: $EA $0E $DB
     ld   a, $0D                                   ; $4CE7: $3E $0D
     ldh  [hFFA5], a                               ; $4CE9: $E0 $A5
@@ -1626,7 +1626,7 @@ jr_018_4D36:
     xor  a                                        ; $4D39: $AF
     ldh  [hFFE8], a                               ; $4D3A: $E0 $E8
     ld   a, [wTradeSequenceItem]                  ; $4D3C: $FA $0E $DB
-    cp   $0B                                      ; $4D3F: $FE $0B
+    cp   TRADING_ITEM_FISHING_HOOK                ; $4D3F: $FE $0B
     jr   nc, jr_018_4D58                          ; $4D41: $30 $15
 
     ld   a, [wHasInstrument5]                     ; $4D43: $FA $69 $DB
@@ -1634,7 +1634,7 @@ jr_018_4D36:
     jr   nz, jr_018_4D51                          ; $4D48: $20 $07
 
     ld   a, [wTradeSequenceItem]                  ; $4D4A: $FA $0E $DB
-    cp   $0A                                      ; $4D4D: $FE $0A
+    cp   TRADING_ITEM_BROOM                       ; $4D4D: $FE $0A
     jr   c, jr_018_4D58                           ; $4D4F: $38 $07
 
 jr_018_4D51:
@@ -1682,7 +1682,7 @@ GrandmaUlriraState0Handler::
     jr   nz, jr_018_4DA3                          ; $4D93: $20 $0E
 
     ld   a, [wTradeSequenceItem]                  ; $4D95: $FA $0E $DB
-    cp   $0B                                      ; $4D98: $FE $0B
+    cp   TRADING_ITEM_FISHING_HOOK                ; $4D98: $FE $0B
     ld   a, $5A                                   ; $4D9A: $3E $5A
     jr   c, jr_018_4DA0                           ; $4D9C: $38 $02
 
@@ -1693,7 +1693,7 @@ jr_018_4DA0:
 
 jr_018_4DA3:
     ld   a, [wTradeSequenceItem]                  ; $4DA3: $FA $0E $DB
-    cp   $0A                                      ; $4DA6: $FE $0A
+    cp   TRADING_ITEM_BROOM                       ; $4DA6: $FE $0A
     jr   nz, jr_018_4DB5                          ; $4DA8: $20 $0B
 
     ld   [wC167], a                               ; $4DAA: $EA $67 $C1
@@ -1727,7 +1727,7 @@ GrandmaUlriraState2Handler::
     call GetEntityTransitionCountdown             ; $4DDD: $CD $05 $0C
     jr   nz, jr_018_4DF3                          ; $4DE0: $20 $11
 
-    ld   a, $0B                                   ; $4DE2: $3E $0B
+    ld   a, TRADING_ITEM_FISHING_HOOK             ; $4DE2: $3E $0B
     ld   [wTradeSequenceItem], a                  ; $4DE4: $EA $0E $DB
     ld   a, $0D                                   ; $4DE7: $3E $0D
     ldh  [hFFA5], a                               ; $4DE9: $E0 $A5
@@ -1803,10 +1803,10 @@ PapahlsWifeState0Handler::
     ret  nc                                       ; $4E79: $D0
 
     ld   a, [wTradeSequenceItem]                  ; $4E7A: $FA $0E $DB
-    cp   $08                                      ; $4E7D: $FE $08
+    cp   TRADING_ITEM_HIBISCUS                    ; $4E7D: $FE $08
     jr   nc, label_018_4E91                       ; $4E7F: $30 $10
 
-    cp   $01                                      ; $4E81: $FE $01
+    cp   TRADING_ITEM_YOSHI_DOLL                  ; $4E81: $FE $01
     jr   z, jr_018_4E9F                           ; $4E83: $28 $1A
 
     ld   a, [wHasInstrument3]                     ; $4E85: $FA $67 $DB
@@ -1843,7 +1843,7 @@ PapahlsWifeState1Handler::
     and  a                                        ; $4EB1: $A7
     jr   nz, jr_018_4EC5                          ; $4EB2: $20 $11
 
-    ld   a, $02                                   ; $4EB4: $3E $02
+    ld   a, TRADING_ITEM_RIBBON                   ; $4EB4: $3E $02
     ld   [wTradeSequenceItem], a                  ; $4EB6: $EA $0E $DB
     ld   a, $0D                                   ; $4EB9: $3E $0D
     ldh  [hFFA5], a                               ; $4EBB: $E0 $A5
@@ -4609,7 +4609,7 @@ MarinAtTheShoreEntityHandler::
     jp   nz, func_018_7F08                        ; $619B: $C2 $08 $7F
 
     ld   a, [wTradeSequenceItem]                  ; $619E: $FA $0E $DB
-    cp   $07                                      ; $61A1: $FE $07
+    cp   TRADING_ITEM_PINEAPPLE                   ; $61A1: $FE $07
     jp   c, func_018_7F08                         ; $61A3: $DA $08 $7F
 
     ld   de, Data_018_5EB7                        ; $61A6: $11 $B7 $5E

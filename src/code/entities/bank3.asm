@@ -672,7 +672,7 @@ EntityInitRacoon::
     jr   nz, EntityInitNpcFacingDown              ; $4AE4: $20 $49
 
     ld   a, [wTradeSequenceItem]                  ; $4AE6: $FA $0E $DB
-    cp   $04                                      ; $4AE9: $FE $04
+    cp   TRADING_ITEM_BANANAS                     ; $4AE9: $FE $04
     jr   nc, EntityInitNpcFacingDown              ; $4AEB: $30 $42
 
     ld   a, [$DB48]                               ; $4AED: $FA $48 $DB
@@ -2995,32 +2995,45 @@ HeartContainerEntityHandler::
 
     ld   a, $18                                   ; $59EB: $3E $18
     ld   [wActiveMusicTrack], a                   ; $59ED: $EA $68 $D3
-    ; Increase max health
+    ; Increase max health, and fully restore health
     ld   hl, wMaxHealth                           ; $59F0: $21 $5B $DB
     inc  [hl]                                     ; $59F3: $34
     ld   hl, wAddHealthBuffer                     ; $59F4: $21 $93 $DB
     ld   [hl], $FF                                ; $59F7: $36 $FF
     call func_003_5134                            ; $59F9: $CD $34 $51
     ld   a, [hl]                                  ; $59FC: $7E
-    or   $20                                      ; $59FD: $F6 $20
+    or   $20                                      ; @TODO Set this room's status bit
     ld   [hl], a                                  ; $59FF: $77
     ldh  [hRoomStatus], a                         ; $5A00: $E0 $F8
 
-    ldh  a, [hMapId]                              ; $5A02: $F0 $F7
-    ld   hl, wIndoorBRoomStatus + $2E             ; $5A04: $21 $2E $DA
-    cp   MAP_EAGLES_TOWER                         ; $5A07: $FE $06
-    jr   z, jr_003_5A12                           ; $5A09: $28 $07
+    ; Now, check if we should modify another room's status bits as well.
+    ; This is how the Eagle's Tower and Angler's Tunnel bosses
+    ; exist in different rooms -- this sets the room flag in the
+    ; room where the *staircase* is, so that it opens when you return.
 
-    cp   MAP_ANGLERS_TUNNEL                       ; $5A0B: $FE $03
-    jr   nz, jr_003_5A14                          ; $5A0D: $20 $05
+    ldh  a, [hMapId]
 
-    ld   hl, wIndoorARoomStatus + $66             ; $5A0F: $21 $66 $D9
+    ; Set room status pointer to Eagle's Tower Nightmare staircase room
+    ; (IndoorB + $2E)
+    ld   hl, wIndoorBRoomStatus + $2E
+    cp   MAP_EAGLES_TOWER                         ; If we ARE in Eagle's Tower...
+    jr   z, .inEaglesTower                        ; ... skip to setting the bit - address already loaded.
 
-jr_003_5A12:
-    set  5, [hl]                                  ; $5A12: $CB $EE
+    cp   MAP_ANGLERS_TUNNEL                       ; If we are NOT in Angler's Tunnel...
+    jr   nz, .skipSecondRoomFlags                 ; ... skip setting a second bit entirely - don't need to.
 
-jr_003_5A14:
-    jp   UnloadEntityAndReturn                    ; $5A14: $C3 $8D $3F
+    ; Set room status pointer to Angler's Tunnel Nightmare staircase room.
+    ; (IndoorA + $66)
+    ; Eagle's Tower check skips this, not-Angler's-Tunnel check skips the set too.
+    ld   hl, wIndoorARoomStatus + $66
+
+.inEaglesTower:
+    ; Set the room status bits for the second room.
+    set  5, [hl]                                  ; or $20
+
+.skipSecondRoomFlags:
+    ; Finished setting status bits for rooms, delete this
+    jp   UnloadEntityAndReturn
 
 func_003_5A17::
     ldh  a, [hLinkPositionX]                      ; $5A17: $F0 $98
@@ -3769,7 +3782,7 @@ func_003_5ED5::
     ld   hl, wHasInstrument1                      ; $5EEE: $21 $65 $DB
     add  hl, de                                   ; $5EF1: $19
     ld   a, [hl]                                  ; $5EF2: $7E
-    or   $02                                      ; $5EF3: $F6 $02
+    or   $02                                      ; @TODO Sets instrument as acquired
     ld   [hl], a                                  ; $5EF5: $77
     call func_003_5134                            ; $5EF6: $CD $34 $51
     ld   a, [hl]                                  ; $5EF9: $7E

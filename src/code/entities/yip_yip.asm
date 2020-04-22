@@ -51,11 +51,11 @@ jr_006_5A1B:
     jr   nz, jr_006_5A33                          ; $5A24: $20 $0D
 
     ldh  a, [hMapRoom]                            ; $5A26: $F0 $F6
-    cp   $B2                                      ; $5A28: $FE $B2
+    cp   $B2                                      ; Inside the dog house
     jr   nz, jr_006_5A36                          ; $5A2A: $20 $0A
 
     ld   a, [wTradeSequenceItem]                  ; $5A2C: $FA $0E $DB
-    cp   $03                                      ; $5A2F: $FE $03
+    cp   TRADING_ITEM_DOG_FOOD                    ; $5A2F: $FE $03
     jr   c, jr_006_5A36                           ; $5A31: $38 $03
 
 jr_006_5A33:
@@ -63,7 +63,7 @@ jr_006_5A33:
 
 jr_006_5A36:
     ld   a, [wGameplayType]                       ; $5A36: $FA $95 $DB
-    cp   $01                                      ; $5A39: $FE $01
+    cp   GAMEPLAY_CREDITS                         ; $5A39: $FE $01
     jr   nz, jr_006_5A43                          ; $5A3B: $20 $06
 
     ldh  a, [hActiveEntitySpriteVariant]          ; $5A3D: $F0 $F1
@@ -102,12 +102,12 @@ jr_006_5A67:
 
     ld   e, $23                                   ; $5A72: $1E $23
     ldh  a, [hMapRoom]                            ; $5A74: $F0 $F6
-    cp   $B2                                      ; $5A76: $FE $B2
+    cp   $B2                                      ; Inside the dog house
     jr   nz, jr_006_5A91                          ; $5A78: $20 $17
 
     ld   e, $80                                   ; $5A7A: $1E $80
     ld   a, [wTradeSequenceItem]                  ; $5A7C: $FA $0E $DB
-    cp   $02                                      ; $5A7F: $FE $02
+    cp   TRADING_ITEM_RIBBON                      ; $5A7F: $FE $02
     jr   nz, jr_006_5A8A                          ; $5A81: $20 $07
 
     call IncrementEntityState                     ; $5A83: $CD $12 $3B
@@ -141,7 +141,7 @@ YipYipState2Handler::
     and  a                                        ; $5AAC: $A7
     jr   nz, jr_006_5AC3                          ; $5AAD: $20 $14
 
-    ld   a, $03                                   ; $5AAF: $3E $03
+    ld   a, TRADING_ITEM_DOG_FOOD                 ; $5AAF: $3E $03
     ld   [wTradeSequenceItem], a                  ; $5AB1: $EA $0E $DB
     ld   a, $0D                                   ; $5AB4: $3E $0D
     ldh  [hFFA5], a                               ; $5AB6: $E0 $A5

@@ -1575,7 +1575,7 @@ BossDestructionHandler::
 
 ; Load heart container value to load when boss is killed
 DropHeartContainer::
-    ld   a, $36                                   ; $5751: $3E $36
+    ld   a, ENTITY_HEART_CONTAINER                ; $5751: $3E $36
     call SpawnNewEntity_trampoline                ; $5753: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $5756: $F0 $D7
     cp   $88                                      ; $5758: $FE $88

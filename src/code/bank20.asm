@@ -2510,8 +2510,22 @@ jr_020_5ADE:
     ldh  [hWindowXUnused], a                      ; $5AE9: $E0 $AA
     jp   label_020_5D34                           ; $5AEB: $C3 $34 $5D
 
-Data_020_5AEE::
-    db   $00, $05, $02, $05, $05, $06, $06, $05, $05, $05, $06, $01, $02, $02, $05
+tradingItemPaletteIndexes:
+    db $00  ; TRADING_ITEM_NONE
+    db $05  ; TRADING_ITEM_YOSHI_DOLL
+    db $02  ; TRADING_ITEM_RIBBON
+    db $05  ; TRADING_ITEM_DOG_FOOD
+    db $05  ; TRADING_ITEM_BANANAS
+    db $06  ; TRADING_ITEM_STICK
+    db $06  ; TRADING_ITEM_HONEYCOMB
+    db $05  ; TRADING_ITEM_PINEAPPLE
+    db $05  ; TRADING_ITEM_HIBISCUS
+    db $05  ; TRADING_ITEM_LETTER
+    db $06  ; TRADING_ITEM_BROOM
+    db $01  ; TRADING_ITEM_FISHING_HOOK
+    db $02  ; TRADING_ITEM_NECKLACE
+    db $02  ; TRADING_ITEM_SCALE
+    db $05  ; TRADING_ITEM_MAGNIFIYING_GLASS
 
 InventoryLoad2Handler::
     ldh  a, [hIsGBC]                              ; $5AFD: $F0 $FE
@@ -2521,7 +2535,7 @@ InventoryLoad2Handler::
     ld   b, $00                                   ; $5B02: $06 $00
     ld   a, [wTradeSequenceItem]                  ; $5B04: $FA $0E $DB
     ld   c, a                                     ; $5B07: $4F
-    ld   hl, Data_020_5AEE                        ; $5B08: $21 $EE $5A
+    ld   hl, tradingItemPaletteIndexes           ; $5B08: $21 $EE $5A
     add  hl, bc                                   ; $5B0B: $09
     ld   a, [hl]                                  ; $5B0C: $7E
     ldh  [hScratch0], a                           ; $5B0D: $E0 $D7
@@ -2676,7 +2690,7 @@ func_020_5BB9::
     ldh  a, [hScratch1]                           ; $5BDC: $F0 $D8
     sla  a                                        ; $5BDE: $CB $27
     ld   c, a                                     ; $5BE0: $4F
-    ld   hl, Data_020_5C14                        ; $5BE1: $21 $14 $5C
+    ld   hl, InventoryItemPaletteIndexes          ; $5BE1: $21 $14 $5C
     add  hl, bc                                   ; $5BE4: $09
     push hl                                       ; $5BE5: $E5
     pop  de                                       ; $5BE6: $D1
@@ -2720,20 +2734,52 @@ jr_020_5C10:
     pop  bc                                       ; $5C12: $C1
     ret                                           ; $5C13: $C9
 
-Data_020_5C14::
-    db   $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $03, $03, $01, $02, $02, $01
-    db   $03, $03, $02, $02, $03, $03, $03, $01, $03, $03, $02, $02
+InventoryItemPaletteIndexes::
+    db  $01, $01 ; (blank)
+    db  $01, $01 ; INVENTORY_SWORD
+    db  $01, $01 ; INVENTORY_BOMBS
+    db  $01, $01 ; INVENTORY_POWER_BRACELET  (note: L2 has special code elsewhere)
+    db  $01, $01 ; INVENTORY_SHIELD
+    db  $03, $03 ; INVENTORY_BOW
+    db  $01, $02 ; INVENTORY_HOOKSHOT
+    db  $02, $01 ; INVENTORY_MAGIC_ROD
+    db  $03, $03 ; INVENTORY_PEGASUS_BOOTS
+    db  $02, $02 ; INVENTORY_OCARINA
+    db  $03, $03 ; INVENTORY_ROCS_FEATHER
+    db  $03, $01 ; INVENTORY_SHOVEL
+    db  $03, $03 ; INVENTORY_MAGIC_POWDER
+    db  $02, $02 ; INVENTORY_BOOMERANG
 
-Data_020_5C30::
-    db   $7F, $7F, $7F
+InventoryItemTiles::
+    db $7F, $7F, $7F ; (Blank space)
+    db $7F, $7F, $7F ;
+    db $84, $7F, $7F ; INVENTORY_SWORD
+    db $85, $BA, $7F ; L-
+    db $80, $7F, $7F ; INVENTORY_BOMBS
+    db $81, $7F, $7F ;
+    db $82, $7F, $7F ; INVENTORY_POWER_BRACELET
+    db $83, $BA, $7F ; L-
+    db $86, $7F, $7F ; INVENTORY_SHIELD
+    db $87, $BA, $7F ; L-
+    db $88, $7F, $7F ; INVENTORY_BOW
+    db $89, $7F, $7F ;
+    db $8A, $7F, $7F ; INVENTORY_HOOKSHOT
+    db $8B, $7F, $7F ;
+    db $8C, $7F, $7F ; INVENTORY_MAGIC_ROD
+    db $8D, $7F, $7F ;
+    db $98, $7F, $7F ; INVENTORY_PEGASUS_BOOTS
+    db $99, $7F, $7F ;
+    db $90, $7F, $7F ; INVENTORY_OCARINA
+    db $91, $7F, $7F ;
+    db $92, $7F, $7F ; INVENTORY_ROCS_FEATHER
+    db $93, $7F, $7F ;
+    db $96, $7F, $7F ; INVENTORY_SHOVEL
+    db $97, $7F, $7F ;
+    db $8E, $7F, $7F ; INVENTORY_MAGIC_POWDER
+    db $8F, $7F, $7F ;
+    db $A4, $7F, $7F ; INVENTORY_BOOMERANG
+    db $A5, $7F, $7F ;
 
-Data_020_5C33::
-    db   $7F, $7F, $7F, $84, $7F, $7F, $85, $BA, $7F, $80, $7F, $7F, $81, $7F, $7F, $82
-    db   $7F, $7F, $83, $BA, $7F, $86, $7F, $7F, $87, $BA, $7F, $88, $7F, $7F, $89, $7F
-    db   $7F, $8A, $7F, $7F, $8B, $7F, $7F, $8C, $7F, $7F, $8D, $7F, $7F, $98, $7F, $7F
-    db   $99, $7F, $7F, $90, $7F, $7F, $91, $7F, $7F, $92, $7F, $7F, $93, $7F, $7F, $96
-    db   $7F, $7F, $97, $7F, $7F, $8E, $7F, $7F, $8F, $7F, $7F, $A4, $7F, $7F, $A5, $7F
-    db   $7F
 
 Data_020_5C84::
     db   $9C, $01, $9C, $06, $9C, $61, $9C, $65, $9C, $C1, $9C, $C5, $9D, $21, $9D, $25
@@ -2783,7 +2829,7 @@ jr_020_5CB5:
     push hl                                       ; $5CD7: $E5
     ldh  a, [hScratch0]                           ; $5CD8: $F0 $D7
     ld   c, a                                     ; $5CDA: $4F
-    ld   hl, Data_020_5C30                        ; $5CDB: $21 $30 $5C
+    ld   hl, InventoryItemTiles                   ; $5CDB: $21 $30 $5C
     add  hl, bc                                   ; $5CDE: $09
     push hl                                       ; $5CDF: $E5
     pop  de                                       ; $5CE0: $D1
@@ -2824,7 +2870,7 @@ jr_020_5CB5:
     push hl                                       ; $5D09: $E5
     ldh  a, [hScratch0]                           ; $5D0A: $F0 $D7
     ld   c, a                                     ; $5D0C: $4F
-    ld   hl, Data_020_5C33                        ; $5D0D: $21 $33 $5C
+    ld   hl, InventoryItemTiles + 3               ; $5D0D: $21 $33 $5C
     add  hl, bc                                   ; $5D10: $09
     push hl                                       ; $5D11: $E5
     pop  de                                       ; $5D12: $D1

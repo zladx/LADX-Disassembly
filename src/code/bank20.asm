@@ -3356,6 +3356,8 @@ jr_020_604A:
     ret                                           ; $604A: $C9
 
 Data_020_604B::
+    ; @TODO This is a big block of data for the ocarina song selection popup
+    ; involving how it animates and draws on the subscreen
     db   $F8, $F0, $22, $01, $F8, $F8, $22, $21, $F8, $00, $24, $02, $F8, $08, $24, $22
     db   $F8, $10, $26, $00, $F8, $18, $26, $20, $08, $F0, $20, $00, $08, $F8, $20, $00
     db   $08, $00, $20, $00, $08, $08, $20, $00, $08, $10, $20, $00, $08, $18, $20, $00
@@ -3886,8 +3888,10 @@ InventoryVisibleHandler::
     jr   jr_020_6436                              ; $63F3: $18 $41
 
 jr_020_63F5:
+    ; POI: Debug tool 3 check to enable free movement mode on the subscreen
+    ; and resetting the photo album on pushing Select
     ldh  a, [hJoypadState]                        ; $63F5: $F0 $CC
-    and  $40                                      ; $63F7: $E6 $40
+    and  J_SELECT                                 ; $63F7: $E6 $40
     jr   z, jr_020_641E                           ; $63F9: $28 $23
 
     ld   a, $09                                   ; $63FB: $3E $09
@@ -3918,7 +3922,7 @@ jr_020_641E:
     jr   nz, jr_020_6445                          ; $6429: $20 $1A
 
     ldh  a, [hJoypadState]                        ; $642B: $F0 $CC
-    and  $80                                      ; $642D: $E6 $80
+    and  J_START                                  ; $642D: $E6 $80
     jr   z, jr_020_6445                           ; $642F: $28 $14
 
     ld   a, $0C                                   ; $6431: $3E $0C
@@ -4165,7 +4169,7 @@ InventoryFadeOutHandler::
     jr   nz, jr_020_6628                          ; $6610: $20 $16
 
     ldh  a, [hMapRoom]                            ; $6612: $F0 $F6
-    cp   $64                                      ; $6614: $FE $64
+    cp   $64                                      ; @TODO ?? Map screen where you take the ghost after the house
     jr   nz, jr_020_6626                          ; $6616: $20 $0E
 
     ld   hl, $C193                                ; $6618: $21 $93 $C1
@@ -4230,7 +4234,7 @@ jr_020_6659:
     and  $7F                                      ; $666E: $E6 $7F
     ld   [rLCDC], a                               ; $6670: $E0 $40
     ldh  a, [hMapId]                              ; $6672: $F0 $F7
-    cp   $FF                                      ; $6674: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $6674: $FE $FF
     jr   nz, jr_020_667C                          ; $6676: $20 $04
 
     ld   a, $01                                   ; $6678: $3E $01
@@ -5480,6 +5484,7 @@ data_020_763B::
 
 ; These look like pointers, but actually point to random locations in
 ; the ROM, to make the water geyser splashing effect.
+; @TODO Actually seems to be palette colors
 Data_020_783F::
     dw   $7845
     dw   $787D
@@ -5569,7 +5574,7 @@ Data_020_783F::
     dw   $660F
     dw   $6ED6
 
-; Copy semi-random data to $DC10
+; Copy palette data to $DC10
 ; (Called during the Credits water geyser sequence; to animate the water?)
 func_020_78ED::
     ld   a, [wCreditsScratch0]                    ; $78ED: $FA $00 $D0

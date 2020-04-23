@@ -2932,48 +2932,65 @@ InventoryLoad4Handler::
     call func_020_6683                            ; $5D5D: $CD $83 $66
     ret                                           ; $5D60: $C9
 
-Data_020_5D61::
-    db   $FF, $57, $C4, $26, $21, $15, $00, $00, $FF, $57, $31, $52, $C5, $28, $00, $00
-    db   $FF, $57, $7F, $2C, $0E, $14, $00, $00, $FF, $57, $D9, $11, $CE, $10, $00, $00
-    db   $FF, $57, $AE, $7E, $00, $7C, $00, $00, $FF, $57, $FF, $7F, $42, $06, $00, $00
-    db   $FF, $57, $BB, $12, $51, $01, $00, $00, $FF, $57, $02, $2B, $00, $0A, $00, $00
-    db   $FF, $57, $00, $00, $A2, $22, $FF, $4E, $00, $7C, $00, $00, $FF, $05, $FF, $4E
-    db   $00, $7C, $00, $00, $03, $7E, $FF, $4E, $00, $7C, $00, $00, $31, $52, $FF, $7F
-    db   $00, $7C, $DF, $1A, $7D, $18, $00, $00, $00, $7C, $00, $00, $A2, $22, $FF, $7F
-    db   $00, $7C, $00, $00, $1F, $00, $FF, $7F, $00, $7C, $00, $00, $00, $7C, $FF, $7F
+InventoryPalettes::
+    ; 8 + 8 palettes used for the inventory subscreen
+    ;       0      1      2      3
+    dw   $57FF, $26C4, $1521, $0000
+    dw   $57FF, $5231, $28C5, $0000
+    dw   $57FF, $2C7F, $140E, $0000
+    dw   $57FF, $11D9, $10CE, $0000
+    dw   $57FF, $7EAE, $7C00, $0000
+    dw   $57FF, $7FFF, $0642, $0000
+    dw   $57FF, $12BB, $0151, $0000
+    dw   $57FF, $2B02, $0A00, $0000
+    dw   $57FF, $0000, $22A2, $4EFF
+    dw   $7C00, $0000, $05FF, $4EFF
+    dw   $7C00, $0000, $7E03, $4EFF
+    dw   $7C00, $0000, $5231, $7FFF
+    dw   $7C00, $1ADF, $187D, $0000
+    dw   $7C00, $0000, $22A2, $7FFF
+    dw   $7C00, $0000, $001F, $7FFF
+    dw   $7C00, $0000, $7C00, $7FFF
 
-Data_020_5DE1::
-    db   $FF, $7F, $42, $06
+InventoryTradingItemPalettes::
+    ; Replaces the second and third color in the fifth BG palette line
+    ; Used for trading sequence items
+    ;       2      3
+    dw   $7FFF, $0642
+    dw   $0FBE, $0213
+    dw   $0F7F, $09E0
+    dw   $32DF, $187D
+    dw   $7FFF, $083D
+    dw   $7EAE, $7C00
+    dw   $7FFF, $5231
 
-Data_020_5DE5::
-    db   $BE, $0F, $13, $02
+InventoryTradingItemPaletteTable::
+    ; Pointers to InventoryTradingItemPalettes
+    dw   InventoryTradingItemPalettes
+    dw   InventoryTradingItemPalettes + $04
+    dw   InventoryTradingItemPalettes + $08
+    dw   InventoryTradingItemPalettes + $0C
+    dw   InventoryTradingItemPalettes + $10
+    dw   InventoryTradingItemPalettes + $14
+    dw   InventoryTradingItemPalettes + $18
 
-Data_020_5DE9::
-    db   $7F, $0F, $E0, $09
-
-Data_020_5DED::
-    db   $DF, $32, $7D, $18
-
-Data_020_5DF1::
-    db   $FF, $7F, $3D, $08
-
-Data_020_5DF5::
-    db   $AE, $7E, $00, $7C
-
-Data_020_5DF9::
-    db   $FF, $7F, $31, $52
-
-Data_020_5DFD::
-    dw   Data_020_5DE1
-    dw   Data_020_5DE5
-    dw   Data_020_5DE9
-    dw   Data_020_5DED
-    dw   Data_020_5DF1
-    dw   Data_020_5DF5
-    dw   Data_020_5DF9
-
-Data_020_5E0B::
-    db   $00, $01, $00, $07, $02, $00, $00, $03, $04, $05, $00, $00, $00, $00, $06
+InventoryTradingItemPaletteIndex::
+    ; Which trading item palette should be used, per trading item
+    db  $00  ; TRADING_ITEM_NONE
+    db  $01  ; TRADING_ITEM_YOSHI_DOLL
+    db  $00  ; TRADING_ITEM_RIBBON
+    db  $07  ; TRADING_ITEM_DOG_FOOD
+    db  $02  ; TRADING_ITEM_BANANAS
+    db  $00  ; TRADING_ITEM_STICK
+    db  $00  ; TRADING_ITEM_HONEYCOMB
+    db  $03  ; TRADING_ITEM_PINEAPPLE
+    db  $04  ; TRADING_ITEM_HIBISCUS
+    db  $05  ; TRADING_ITEM_LETTER
+    db  $00  ; TRADING_ITEM_BROOM
+    db  $00  ; TRADING_ITEM_FISHING_HOOK
+    db  $00  ; TRADING_ITEM_NECKLACE
+    db  $00  ; TRADING_ITEM_SCALE
+    db  $06  ; TRADING_ITEM_MAGNIFIYING_GLASS
 
 InventoryLoad5Handler::
     xor  a                                        ; $5E1A: $AF
@@ -2984,7 +3001,7 @@ InventoryLoad5Handler::
     and  a                                        ; $5E25: $A7
     jr   z, jr_020_5E6D                           ; $5E26: $28 $45
 
-    ld   bc, Data_020_5D61                        ; $5E28: $01 $61 $5D
+    ld   bc, InventoryPalettes                        ; $5E28: $01 $61 $5D
     ld   hl, $DC10                                ; $5E2B: $21 $10 $DC
     di                                            ; $5E2E: $F3
     ld   a, $02                                   ; $5E2F: $3E $02
@@ -3001,7 +3018,7 @@ InventoryLoad5Handler::
     xor  a                                        ; $5E3B: $AF
     ldh  [rSVBK], a                               ; $5E3C: $E0 $70
     ei                                            ; $5E3E: $FB
-    ld   hl, Data_020_5E0B                        ; $5E3F: $21 $0B $5E
+    ld   hl, InventoryTradingItemPaletteIndex                        ; $5E3F: $21 $0B $5E
     ld   a, [wTradeSequenceItem]                  ; $5E42: $FA $0E $DB
     ld   e, a                                     ; $5E45: $5F
     ld   d, $00                                   ; $5E46: $16 $00
@@ -3012,7 +3029,7 @@ InventoryLoad5Handler::
 
     sla  a                                        ; $5E4D: $CB $27
     ld   e, a                                     ; $5E4F: $5F
-    ld   hl, Data_020_5DFD - 2                    ; $5E50: $21 $FB $5D
+    ld   hl, InventoryTradingItemPaletteTable - 2                    ; $5E50: $21 $FB $5D
     add  hl, de                                   ; $5E53: $19
     ld   a, [hl+]                                 ; $5E54: $2A
     ld   h, [hl]                                  ; $5E55: $66

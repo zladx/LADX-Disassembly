@@ -1,4 +1,7 @@
 
+; GBC palette entry
+; RGB r, g, b
+; values: 0 ~ 31
 RGB: macro
     db (\1) + (\2) << 5 + (\3) << 10
 endm

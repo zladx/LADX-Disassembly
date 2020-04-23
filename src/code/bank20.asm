@@ -2966,6 +2966,7 @@ InventoryTradingItemPalettes::
 
 InventoryTradingItemPaletteTable::
     ; Pointers to InventoryTradingItemPalettes
+    ; POI: This seems really inefficent compared to just adding the index... but w/e
     dw   InventoryTradingItemPalettes
     dw   InventoryTradingItemPalettes + $04
     dw   InventoryTradingItemPalettes + $08
@@ -3059,11 +3060,24 @@ jr_020_5E6D:
     call func_020_6683                            ; $5E71: $CD $83 $66
     ret                                           ; $5E74: $C9
 
-Data_020_5E75::
-    db   $80, $26, $00, $11, $20, $3A, $E0, $18, $A0, $51, $C0, $20, $08, $7D, $84, $34
-    db   $AD, $7C, $46, $30, $50, $5C, $27, $28, $12, $40, $08, $1C, $15, $30, $09, $14
-    db   $17, $14, $09, $00, $D7, $04, $6A, $04, $37, $05, $8A, $04, $97, $09, $AA, $04
-    db   $F5, $09, $C9, $04, $10, $0A, $E7, $04, $4B, $06, $05, $05, $A0, $02, $20, $01
+InventoryInstrumentCyclingColors::
+    ; Palette colors for the color-cycling the instruments use on the subscreen.
+    dw  $2680, $1100
+    dw  $3A20, $18E0
+    dw  $51A0, $20C0
+    dw  $7D08, $3484
+    dw  $7CAD, $3046
+    dw  $5C50, $2827
+    dw  $4012, $1C08
+    dw  $3015, $1409
+    dw  $1417, $0009
+    dw  $04D7, $046A
+    dw  $0537, $048A
+    dw  $0997, $04AA
+    dw  $09F5, $04C9
+    dw  $0A10, $04E7
+    dw  $064B, $0505
+    dw  $02A0, $0120
 
 func_020_5EB5::
     ldh  a, [hIsGBC]                              ; $5EB5: $F0 $FE
@@ -3088,7 +3102,7 @@ func_020_5EB5::
 
 jr_020_5ED6:
     ld   b, $00                                   ; $5ED6: $06 $00
-    ld   hl, Data_020_5E75                        ; $5ED8: $21 $75 $5E
+    ld   hl, InventoryInstrumentCyclingColors                        ; $5ED8: $21 $75 $5E
     add  hl, bc                                   ; $5EDB: $09
     ld   bc, $DC4A                                ; $5EDC: $01 $4A $DC
     ld   e, $04                                   ; $5EDF: $1E $04

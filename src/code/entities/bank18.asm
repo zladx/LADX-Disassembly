@@ -56,7 +56,7 @@ jr_018_404A:
     call ClearLinkPositionIncrement               ; $4054: $CD $8E $17
     call ResetSpinAttack                          ; $4057: $CD $AF $0C
     ld   e, $0B                                   ; $405A: $1E $0B
-    ld   hl, wAButtonSlot                         ; $405C: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $405C: $21 $00 $DB
 
 jr_018_405F:
     ld   a, [hl+]                                 ; $405F: $2A
@@ -698,7 +698,7 @@ ManboAndFishesState1Handler::
     jr   nz, jr_018_4581                          ; $456F: $20 $10
 
     ld   e, $0B                                   ; $4571: $1E $0B
-    ld   hl, wAButtonSlot                         ; $4573: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $4573: $21 $00 $DB
 
 jr_018_4576:
     ld   a, [hl+]                                 ; $4576: $2A
@@ -2644,12 +2644,12 @@ jr_018_53ED:
     jr   nc, jr_018_5466                          ; $5403: $30 $61
 
     ld   e, $20                                   ; $5405: $1E $20
-    ld   a, [wAButtonSlot]                        ; $5407: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $5407: $FA $00 $DB
     cp   $03                                      ; $540A: $FE $03
     jr   z, jr_018_5417                           ; $540C: $28 $09
 
     ld   e, $10                                   ; $540E: $1E $10
-    ld   a, [wBButtonSlot]                        ; $5410: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $5410: $FA $01 $DB
     cp   $03                                      ; $5413: $FE $03
     jr   nz, jr_018_5466                          ; $5415: $20 $4F
 

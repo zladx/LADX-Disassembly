@@ -2633,7 +2633,7 @@ func_015_5435::
     and  a                                        ; $5438: $A7
     jr   z, jr_015_5465                           ; $5439: $28 $2A
 
-    ld   a, [wAButtonSlot]                        ; $543B: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $543B: $FA $00 $DB
     cp   $0C                                      ; $543E: $FE $0C
     jr   nz, jr_015_5450                          ; $5440: $20 $0E
 
@@ -2646,7 +2646,7 @@ func_015_5435::
     jp   label_015_54A2                           ; $544D: $C3 $A2 $54
 
 jr_015_5450:
-    ld   a, [wBButtonSlot]                        ; $5450: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $5450: $FA $01 $DB
     cp   $0C                                      ; $5453: $FE $0C
     jr   nz, jr_015_5465                          ; $5455: $20 $0E
 

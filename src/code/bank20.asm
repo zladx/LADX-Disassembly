@@ -1252,7 +1252,7 @@ func_020_4C47::
     ld   [wMagicPowderCount], a                   ; $4C56: $EA $4C $DB
     jr   nz, jr_020_4C6D                          ; $4C59: $20 $12
 
-    ld   hl, wAButtonSlot                         ; $4C5B: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $4C5B: $21 $00 $DB
     ld   a, [hl]                                  ; $4C5E: $7E
     cp   $0C                                      ; $4C5F: $FE $0C
     jr   nz, jr_020_4C65                          ; $4C61: $20 $02
@@ -2799,7 +2799,7 @@ InventoryTileMapPositions::
 func_020_5C9C::
     push de                                       ; $5C9C: $D5
     push bc                                       ; $5C9D: $C5
-    ld   hl, wAButtonSlot                         ; $5C9E: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $5C9E: $21 $00 $DB
     add  hl, bc                                   ; $5CA1: $09
     ld   a, [hl]                                  ; $5CA2: $7E
     ldh  [hScratch1], a                           ; $5CA3: $E0 $D8
@@ -3274,7 +3274,7 @@ jr_020_5FC1:
     and  J_A                                      ; $5FCD: $E6 $10
     jr   z, jr_020_5FED                           ; $5FCF: $28 $1C
 
-    ld   a, [wBButtonSlot]                        ; $5FD1: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $5FD1: $FA $01 $DB
     push af                                       ; $5FD4: $F5
     ld   hl, wInventoryItem1                      ; $5FD5: $21 $02 $DB
     ld   a, [$DBA3]                               ; $5FD8: $FA $A3 $DB
@@ -3284,7 +3284,7 @@ label_020_5FDB:
     ld   b, $00                                   ; $5FDC: $06 $00
     add  hl, bc                                   ; $5FDE: $09
     ld   a, [hl]                                  ; $5FDF: $7E
-    ld   [wBButtonSlot], a                        ; $5FE0: $EA $01 $DB
+    ld   [wAButtonSlot], a                        ; $5FE0: $EA $01 $DB
     pop  af                                       ; $5FE3: $F1
     ld   [hl], a                                  ; $5FE4: $77
     ld   c, $01                                   ; $5FE5: $0E $01
@@ -3297,7 +3297,7 @@ jr_020_5FED:
     and  J_B                                      ; $5FEF: $E6 $20
     jr   z, jr_020_604A                           ; $5FF1: $28 $57
 
-    ld   a, [wAButtonSlot]                        ; $5FF3: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $5FF3: $FA $00 $DB
     push af                                       ; $5FF6: $F5
     ld   hl, wInventoryItem1                      ; $5FF7: $21 $02 $DB
     ld   a, [$DBA3]                               ; $5FFA: $FA $A3 $DB
@@ -3305,7 +3305,7 @@ jr_020_5FED:
     ld   b, $00                                   ; $5FFE: $06 $00
     add  hl, bc                                   ; $6000: $09
     ld   a, [hl]                                  ; $6001: $7E
-    ld   [wAButtonSlot], a                        ; $6002: $EA $00 $DB
+    ld   [wBButtonSlot], a                        ; $6002: $EA $00 $DB
     pop  af                                       ; $6005: $F1
     ld   [hl], a                                  ; $6006: $77
     ld   c, $00                                   ; $6007: $0E $00
@@ -3790,7 +3790,7 @@ func_020_635C::
     ld   d, $0C                                   ; $635C: $16 $0C
 
 jr_020_635E:
-    ld   hl, wAButtonSlot                         ; $635E: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $635E: $21 $00 $DB
     ld   e, $00                                   ; $6361: $1E $00
 
 jr_020_6363:

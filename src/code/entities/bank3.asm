@@ -1239,7 +1239,7 @@ EntityStunnedHandler::
     call func_003_60B3                            ; $4E10: $CD $B3 $60
     call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
-    ld   a, [wAButtonSlot]                        ; $4E19: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $4E19: $FA $00 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E1C: $FE $03
     jr   nz, jr_003_4E28                          ; $4E1E: $20 $08
 
@@ -1250,7 +1250,7 @@ EntityStunnedHandler::
     jr   jr_003_4E72                              ; $4E26: $18 $4A
 
 jr_003_4E28:
-    ld   a, [wBButtonSlot]                        ; $4E28: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $4E28: $FA $01 $DB
     cp   INVENTORY_POWER_BRACELET                 ; $4E2B: $FE $03
     jr   nz, jr_003_4E72                          ; $4E2D: $20 $43
 
@@ -1767,7 +1767,7 @@ jr_003_50EF:
     jr   func_003_512A                              ; $5123: $18 $05
 
 jr_003_5125:
-    ld   hl, wAButtonSlot                         ; $5125: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $5125: $21 $00 $DB
     add  hl, de                                   ; $5128: $19
     inc  [hl]                                     ; $5129: $34
 
@@ -4682,7 +4682,7 @@ jr_003_6468:
     ld   d, $04                                   ; $6470: $16 $04
 
 func_003_6472::
-    ld   hl, wAButtonSlot                         ; $6472: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $6472: $21 $00 $DB
     ld   e, $0C                                   ; $6475: $1E $0C
 
 jr_003_6477:
@@ -4693,7 +4693,7 @@ jr_003_6477:
     dec  e                                        ; $647B: $1D
     jr   nz, jr_003_6477                          ; $647C: $20 $F9
 
-    ld   hl, wAButtonSlot                         ; $647E: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $647E: $21 $00 $DB
 
 jr_003_6481:
     ld   a, [hl]                                  ; $6481: $7E

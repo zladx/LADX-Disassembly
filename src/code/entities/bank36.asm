@@ -3316,7 +3316,7 @@ func_036_54B0::
     and  a                                        ; $54B8: $A7
     ret  z                                        ; $54B9: $C8
 
-    ld   a, [wAButtonSlot]                        ; $54BA: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $54BA: $FA $00 $DB
     cp   $0C                                      ; $54BD: $FE $0C
     jr   nz, jr_036_54C8                          ; $54BF: $20 $07
 
@@ -3327,7 +3327,7 @@ func_036_54B0::
     jr   jr_036_54D3                              ; $54C6: $18 $0B
 
 jr_036_54C8:
-    ld   a, [wBButtonSlot]                        ; $54C8: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $54C8: $FA $01 $DB
     cp   $0C                                      ; $54CB: $FE $0C
     ret  nz                                       ; $54CD: $C0
 
@@ -8107,7 +8107,7 @@ label_036_71AD:
     and  $20                                      ; $71B0: $E6 $20
     jp   nz, label_036_7288                       ; $71B2: $C2 $88 $72
 
-    ld   hl, wAButtonSlot                         ; $71B5: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $71B5: $21 $00 $DB
     ld   e, $0C                                   ; $71B8: $1E $0C
 
 jr_036_71BA:

@@ -41,7 +41,7 @@ jr_003_66BF:
     or   [hl]                                     ; $66D8: $B6
     jr   nz, jr_003_66FA                          ; $66D9: $20 $1F
 
-    ld   a, [wAButtonSlot]                        ; $66DB: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $66DB: $FA $00 $DB
     cp   $02                                      ; $66DE: $FE $02
     jr   nz, jr_003_66EA                          ; $66E0: $20 $08
 
@@ -52,7 +52,7 @@ jr_003_66BF:
     jr   jr_003_66FA                              ; $66E8: $18 $10
 
 jr_003_66EA:
-    ld   a, [wBButtonSlot]                        ; $66EA: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $66EA: $FA $01 $DB
     cp   $02                                      ; $66ED: $FE $02
     jr   nz, jr_003_66FA                          ; $66EF: $20 $09
 

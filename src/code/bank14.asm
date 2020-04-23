@@ -1179,7 +1179,7 @@ jr_014_536B:
 
 jr_014_537D:
     ld   e, $10                                   ; $537D: $1E $10
-    ld   a, [wAButtonSlot]                        ; $537F: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $537F: $FA $00 $DB
     cp   d                                        ; $5382: $BA
     jr   nz, jr_014_5389                          ; $5383: $20 $04
 
@@ -1187,7 +1187,7 @@ jr_014_537D:
     jr   jr_014_5391                              ; $5387: $18 $08
 
 jr_014_5389:
-    ld   a, [wBButtonSlot]                        ; $5389: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $5389: $FA $01 $DB
     cp   d                                        ; $538C: $BA
     jr   z, jr_014_5391                           ; $538D: $28 $02
 

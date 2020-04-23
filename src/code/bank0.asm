@@ -1707,16 +1707,16 @@ CheckItemsToUse::
     and  a
     jr   z, .notRunning
 
-    ld   a, [wBButtonSlot]
-    cp   INVENTORY_SWORD
-    jr   z, .swordEquiped
     ld   a, [wAButtonSlot]
     cp   INVENTORY_SWORD
     jr   z, .swordEquiped
     ld   a, [wBButtonSlot]
+    cp   INVENTORY_SWORD
+    jr   z, .swordEquiped
+    ld   a, [wAButtonSlot]
     cp   INVENTORY_SHIELD
     jr   z, .shieldEquiped
-    ld   a, [wAButtonSlot]
+    ld   a, [wBButtonSlot]
     cp   INVENTORY_SHIELD
     jr   nz, .shieldEnd
 
@@ -1764,7 +1764,7 @@ CheckItemsToUse::
     jp   nz, UseItem.return
 
 .jr_11E8
-    ld   a, [wAButtonSlot]
+    ld   a, [wBButtonSlot]
     cp   INVENTORY_PEGASUS_BOOTS
     jr   nz, .jr_11FE
     ldh  a, [hPressedButtonsMask]
@@ -1778,7 +1778,7 @@ CheckItemsToUse::
     ld   [wPegasusBootsChargeMeter], a
 
 .jr_11FE
-    ld   a, [wBButtonSlot]
+    ld   a, [wAButtonSlot]
     cp   INVENTORY_PEGASUS_BOOTS
     jr   nz, .jr_1214
     ldh  a, [hPressedButtonsMask]
@@ -1793,7 +1793,7 @@ CheckItemsToUse::
 
 .jr_1214
 
-    ld   a, [wBButtonSlot]
+    ld   a, [wAButtonSlot]
     cp   INVENTORY_SHIELD
     jr   nz, .shieldBEnd
     ld   a, [wShieldLevel]
@@ -1809,7 +1809,7 @@ CheckItemsToUse::
     call SetShieldVals
 .shieldBEnd
 
-    ld   a, [wAButtonSlot]
+    ld   a, [wBButtonSlot]
     cp   INVENTORY_SHIELD
     jr   nz, .shieldAEnd
     ld   a, [wShieldLevel]
@@ -1828,7 +1828,7 @@ CheckItemsToUse::
     jr   z, .jr_125E
 
     ; Use item in A slot
-    ld   a, [wAButtonSlot]
+    ld   a, [wBButtonSlot]
     call UseItem
 
 .jr_125E
@@ -1842,21 +1842,21 @@ CheckItemsToUse::
     jr   z, .jr_1275
 
     ; Use item in B slot
-    ld   a, [wBButtonSlot]
+    ld   a, [wAButtonSlot]
     call UseItem
 
 .jr_1275
     ldh  a, [hPressedButtonsMask]
     and  $20
     jr   z, .jr_1281
-    ld   a, [wAButtonSlot]
+    ld   a, [wBButtonSlot]
     call label_1321
 
 .jr_1281
     ldh  a, [hPressedButtonsMask]
     and  $10
     jr   z, .jr_128D
-    ld   a, [wBButtonSlot]
+    ld   a, [wAButtonSlot]
     call label_1321
 
 .jr_128D
@@ -3615,7 +3615,7 @@ label_1F69::
 
 .specialCasesEnd
 
-    ld   a, [wAButtonSlot]
+    ld   a, [wBButtonSlot]
     cp   INVENTORY_POWER_BRACELET
     jr   nz, .jr_20DD
     ldh  a, [hPressedButtonsMask]
@@ -3624,7 +3624,7 @@ label_1F69::
     ret
 
 .jr_20DD
-    ld   a, [wBButtonSlot]
+    ld   a, [wAButtonSlot]
     cp   INVENTORY_POWER_BRACELET
     jp   nz, func_2165.return
     ldh  a, [hPressedButtonsMask]

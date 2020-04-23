@@ -1185,7 +1185,7 @@ Data_004_5501::
 FacadeState2Handler:
     ld   de, Data_004_5501                        ; $5509: $11 $01 $55
     ldh  a, [hMapId]                              ; $550C: $F0 $F7
-    cp   $06                                      ; $550E: $FE $06
+    cp   MAP_EAGLES_TOWER                         ; @TODO ??? Is this right?
     jr   z, jr_004_551C                           ; $5510: $28 $0A
 
     ld   de, Data_004_54F1                        ; $5512: $11 $F1 $54
@@ -2953,7 +2953,7 @@ func_004_6154::
     jr   nz, jr_004_616C                          ; $6158: $20 $12
 
     ldh  a, [hJoypadState]                        ; $615A: $F0 $CC
-    and  $30                                      ; $615C: $E6 $30
+    and  J_A | J_B                                ; $615C: $E6 $30
     jr   z, jr_004_616C                           ; $615E: $28 $0C
 
     call IncrementEntityState                     ; $6160: $CD $12 $3B

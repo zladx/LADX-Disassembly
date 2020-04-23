@@ -688,7 +688,7 @@ jr_020_48FC:
     jr   nz, jr_020_4917                          ; $4900: $20 $15
 
     call func_020_4954                            ; $4902: $CD $54 $49
-    call UseRocksFeather                          ; $4905: $CD $CB $14
+    call UseRocsFeather                          ; $4905: $CD $CB $14
     jr   jr_020_4917                              ; $4908: $18 $0D
 
 jr_020_490A:

@@ -1821,19 +1821,19 @@ CheckItemsToUse::
 .shieldAEnd
 
     ldh  a, [hJoypadState]
-    and  $20
+    and  J_B
     jr   z, .jr_125E
     ld   a, [$C1AD]
     cp   $02
     jr   z, .jr_125E
 
-    ; Use item in A slot
+    ; Use item in B slot
     ld   a, [wBButtonSlot]
     call UseItem
 
 .jr_125E
     ldh  a, [hJoypadState]
-    and  $10
+    and  J_A
     jr   z, .jr_1275
     ld   a, [$C1AD]
     cp   $01
@@ -1841,20 +1841,20 @@ CheckItemsToUse::
     cp   $02
     jr   z, .jr_1275
 
-    ; Use item in B slot
+    ; Use item in A slot
     ld   a, [wAButtonSlot]
     call UseItem
 
 .jr_1275
     ldh  a, [hPressedButtonsMask]
-    and  $20
+    and  J_B
     jr   z, .jr_1281
     ld   a, [wBButtonSlot]
     call label_1321
 
 .jr_1281
     ldh  a, [hPressedButtonsMask]
-    and  $10
+    and  J_A
     jr   z, .jr_128D
     ld   a, [wAButtonSlot]
     call label_1321
@@ -1887,7 +1887,7 @@ UseItem::
     cp   INVENTORY_HOOKSHOT
     jp   z, UseHookshot
     cp   INVENTORY_ROCS_FEATHER
-    jp   z, UseRocksFeather
+    jp   z, UseRocsFeather
     cp   INVENTORY_OCARINA
     jp   z, UseOcarina
     cp   INVENTORY_MAGIC_POWDER
@@ -2211,7 +2211,7 @@ data_14C3::
 data_14C7::
     db 0, 0, $E4, $1C
 
-UseRocksFeather::
+UseRocsFeather::
     ld   a, [$C130]
     cp   $07
     ret  z
@@ -2230,7 +2230,7 @@ UseRocksFeather::
     jr   z, label_1508
     call label_1508
     ldh  a, [hPressedButtonsMask]
-    and  $03
+    and  J_LEFT | J_RIGHT
     ld   a, $EA
     jr   z, label_14F8
     ld   a, $E8
@@ -2484,6 +2484,7 @@ label_1653::
 
 .dropRandomItem
     ; In some random cases, don't drop anything.
+    ; (~ 1/8 chance to drop an item)
     call GetRandomByte
     and  $07
     ret  nz
@@ -2860,7 +2861,7 @@ LinkMotionMapFadeOutHandler::
     and  a
     jr   z, .label_1907
     xor  a
-    ld   [wActivePowerUp], a
+    ld   [wActivePowerUp], a            ; Clear any active powerup on room change
 
 .label_1907
     jr   .label_196F
@@ -2887,12 +2888,12 @@ LinkMotionMapFadeOutHandler::
     jr   .label_193C
 .colorDungeonEnd
 
-    cp   $06
-    jr   nz, .label_193C
-    ld   a, [$DB6B]
+    cp   MAP_EAGLES_TOWER           ; Is this Eagle's Tower?
+    jr   nz, .label_193C            ; If not, skip this...
+    ld   a, [wHasInstrument7]       ; Otherwise, check if the pillars have all been dunked...
     and  $04
-    jr   z, .label_193C
-    ld   hl, MapLayout12
+    jr   z, .label_193C             ; If not, skip this...
+    ld   hl, MapLayout12            ; Otherwise, swap to the alternate Eagle's Tower map (post-3F collapse)
 
 .label_193C
     ld   e, $00
@@ -2913,11 +2914,11 @@ LinkMotionMapFadeOutHandler::
     and  a
     jr   nz, .label_196E
     xor  a
-    ld   [wActivePowerUp], a
+    ld   [wActivePowerUp], a        ; Clear any active powerup
     ldh  a, [hMapId]
     cp   MAP_CAVE_B
     jr   nc, .label_196E
-    callsw IsMapRoomE8
+    callsw IsMapRoomE8              ; @TODO Either Eagle's Tower boss room bottom half or Yarna Desert quicksand pit
     ld   a, $30
     ldh  [$FFB4], a
     xor  a
@@ -3522,7 +3523,7 @@ label_1F69::
     ldh  a, [hMapRoom]
     jr   nz, .noSwordEnd
     ld   e, $FF
-    cp   $A3
+    cp   $A3                        ; Marin & Tarin's house
     jr   z, .jr_2046
 .noSwordEnd
 
@@ -3600,7 +3601,7 @@ label_1F69::
     jr   nz, .specialCasesEnd
     ld   [$C1AD], a
     ldh  a, [hJoypadState]
-    and  $30
+    and  J_A | J_B
     jr   z, .specialCasesEnd
     ldh  a, [hIsSideScrolling]
     and  a
@@ -3619,7 +3620,7 @@ label_1F69::
     cp   INVENTORY_POWER_BRACELET
     jr   nz, .jr_20DD
     ldh  a, [hPressedButtonsMask]
-    and  $20
+    and  J_B
     jr   nz, .jr_20EC
     ret
 
@@ -3628,7 +3629,7 @@ label_1F69::
     cp   INVENTORY_POWER_BRACELET
     jp   nz, func_2165.return
     ldh  a, [hPressedButtonsMask]
-    and  $10
+    and  J_A
     jp   z, func_2165.return
 
 .jr_20EC

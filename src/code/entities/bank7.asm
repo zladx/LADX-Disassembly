@@ -1791,7 +1791,7 @@ jr_007_4C32:
 
     ld   e, $CE                                   ; $4C3A: $1E $CE
     ld   a, [wTradeSequenceItem]                  ; $4C3C: $FA $0E $DB
-    cp   $07                                      ; $4C3F: $FE $07
+    cp   TRADING_ITEM_PINEAPPLE                   ; $4C3F: $FE $07
     jr   nz, jr_007_4C45                          ; $4C41: $20 $02
 
 func_007_4C43::
@@ -1816,7 +1816,7 @@ func_007_4C49::
     jp   func_007_4C83                            ; $4C5B: $C3 $83 $4C
 
 jr_007_4C5E:
-    ld   a, $07                                   ; $4C5E: $3E $07
+    ld   a, TRADING_ITEM_PINEAPPLE                ; $4C5E: $3E $07
     ld   [wTradeSequenceItem], a                  ; $4C60: $EA $0E $DB
     ld   a, $0D                                   ; $4C63: $3E $0D
     ldh  [hFFA5], a                               ; $4C65: $E0 $A5

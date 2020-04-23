@@ -2674,7 +2674,7 @@ func_020_5BB9::
     ld   [$DC90], a                               ; $5BC6: $EA $90 $DC
     push hl                                       ; $5BC9: $E5
     sla  c                                        ; $5BCA: $CB $21
-    ld   hl, Data_020_5C84                        ; $5BCC: $21 $84 $5C
+    ld   hl, InventoryTileMapPositions            ; $5BCC: $21 $84 $5C
     add  hl, bc                                   ; $5BCF: $09
     push hl                                       ; $5BD0: $E5
     pop  de                                       ; $5BD1: $D1
@@ -2735,6 +2735,8 @@ jr_020_5C10:
     ret                                           ; $5C13: $C9
 
 InventoryItemPaletteIndexes::
+    ; Palettes used by the inventory items. This only affects the
+    ; leftmost column.
     db  $01, $01 ; (blank)
     db  $01, $01 ; INVENTORY_SWORD
     db  $01, $01 ; INVENTORY_BOMBS
@@ -2751,6 +2753,8 @@ InventoryItemPaletteIndexes::
     db  $02, $02 ; INVENTORY_BOOMERANG
 
 InventoryItemTiles::
+    ; Tiles used for the inventory items.
+    ; The "L-" is baked in for the sword/shield/bracelet.
     db $7F, $7F, $7F ; (Blank space)
     db $7F, $7F, $7F ;
     db $84, $7F, $7F ; INVENTORY_SWORD
@@ -2781,9 +2785,16 @@ InventoryItemTiles::
     db $A5, $7F, $7F ;
 
 
-Data_020_5C84::
-    db   $9C, $01, $9C, $06, $9C, $61, $9C, $65, $9C, $C1, $9C, $C5, $9D, $21, $9D, $25
-    db   $9D, $81, $9D, $85, $9D, $E1, $9D, $E5
+InventoryTileMapPositions::
+    ; Where each inventory item is drawn in the subscreen
+    ; (and, for the first one, the status bar)
+    db  $9C, $01,   $9C, $06  ; B[   ] A[   ]
+    ;    -------  |  ------     ------------|---
+    db  $9C, $61,   $9C, $65  ;  [   ] [   ]
+    db  $9C, $C1,   $9C, $C5  ;  [   ] [   ]
+    db  $9D, $21,   $9D, $25  ;  [   ] [   ]
+    db  $9D, $81,   $9D, $85  ;  [   ] [   ]
+    db  $9D, $E1,   $9D, $E5  ;  [   ] [   ]
 
 func_020_5C9C::
     push de                                       ; $5C9C: $D5
@@ -2813,7 +2824,7 @@ jr_020_5CB5:
     ld   [wRequests], a                           ; $5CC1: $EA $00 $D6
     push hl                                       ; $5CC4: $E5
     sla  c                                        ; $5CC5: $CB $21
-    ld   hl, Data_020_5C84                        ; $5CC7: $21 $84 $5C
+    ld   hl, InventoryTileMapPositions            ; $5CC7: $21 $84 $5C
     add  hl, bc                                   ; $5CCA: $09
     push hl                                       ; $5CCB: $E5
     pop  de                                       ; $5CCC: $D1
@@ -2847,7 +2858,7 @@ jr_020_5CB5:
     push bc                                       ; $5CEC: $C5
     push hl                                       ; $5CED: $E5
     sla  c                                        ; $5CEE: $CB $21
-    ld   hl, Data_020_5C84                        ; $5CF0: $21 $84 $5C
+    ld   hl, InventoryTileMapPositions            ; $5CF0: $21 $84 $5C
     add  hl, bc                                   ; $5CF3: $09
     push hl                                       ; $5CF4: $E5
     pop  de                                       ; $5CF5: $D1

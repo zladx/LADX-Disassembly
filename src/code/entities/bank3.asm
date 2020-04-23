@@ -1240,22 +1240,22 @@ EntityStunnedHandler::
     call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
     ld   a, [wAButtonSlot]                        ; $4E19: $FA $00 $DB
-    cp   $03                                      ; $4E1C: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $4E1C: $FE $03
     jr   nz, jr_003_4E28                          ; $4E1E: $20 $08
 
     ldh  a, [hJoypadState]                        ; $4E20: $F0 $CC
-    and  $20                                      ; $4E22: $E6 $20
+    and  J_B                                      ; $4E22: $E6 $20
     jr   nz, func_003_4E35                        ; $4E24: $20 $0F
 
     jr   jr_003_4E72                              ; $4E26: $18 $4A
 
 jr_003_4E28:
     ld   a, [wBButtonSlot]                        ; $4E28: $FA $01 $DB
-    cp   $03                                      ; $4E2B: $FE $03
+    cp   INVENTORY_POWER_BRACELET                 ; $4E2B: $FE $03
     jr   nz, jr_003_4E72                          ; $4E2D: $20 $43
 
     ldh  a, [hJoypadState]                        ; $4E2F: $F0 $CC
-    and  $10                                      ; $4E31: $E6 $10
+    and  J_A                                      ; $4E31: $E6 $10
     jr   z, jr_003_4E72                           ; $4E33: $28 $3D
 
 func_003_4E35::

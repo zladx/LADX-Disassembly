@@ -5581,97 +5581,94 @@ data_020_763B::
     db   $A4, $FF, $86, $FF, $A4, $FF, $8B, $FF   ; $7833
     db   $A4, $4D, $FF, $FF                       ; $783B
 
-; These look like pointers, but actually point to random locations in
-; the ROM, to make the water geyser splashing effect.
-; @TODO Actually seems to be palette colors
-Data_020_783F::
-    dw   $7845
-    dw   $787D
-    dw   $78B5
-    dw   $0000
-    dw   $4CC5
-    dw   $7D68
-    dw   $7FFF
-    dw   $0000
-    dw   $3C62
-    dw   $68E5
-    dw   $5ED6
-    dw   $0000
-    dw   $2000
-    dw   $5000
-    dw   $35AD
-    dw   $0000
-    dw   $660F
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $660F
-    dw   $6ED6
-    dw   $7FFF
-    dw   $59AC
-    dw   $660F
-    dw   $6ED6
-    dw   $7FFF
-    dw   $4D49
-    dw   $660F
-    dw   $6ED6
-    dw   $7FFF
-    dw   $0000
-    dw   $7D68
-    dw   $7FFF
-    dw   $4CC5
-    dw   $0000
-    dw   $68E5
-    dw   $5ED6
-    dw   $3C62
-    dw   $0000
-    dw   $5000
-    dw   $35AD
-    dw   $2000
-    dw   $0000
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $4CC5
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $3C62
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $2000
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $0000
-    dw   $7FFF
-    dw   $4CC5
-    dw   $7D68
-    dw   $0000
-    dw   $5ED6
-    dw   $3C62
-    dw   $68E5
-    dw   $0000
-    dw   $35AD
-    dw   $2000
-    dw   $5000
-    dw   $0000
-    dw   $7FFF
-    dw   $660F
-    dw   $6ED6
-    dw   $7D68
-    dw   $7FFF
-    dw   $660F
-    dw   $6ED6
-    dw   $68E5
-    dw   $7FFF
-    dw   $660F
-    dw   $6ED6
-    dw   $5000
-    dw   $7FFF
-    dw   $660F
-    dw   $6ED6
+EndingWaterGeyserPalettes::
+    db   $45, $78
+    db   $7D, $78
+    db   $B5, $78
+    db   $00, $00
+    db   $C5, $4C
+    db   $68, $7D
+    db   $FF, $7F
+    db   $00, $00
+    db   $62, $3C
+    db   $E5, $68
+    db   $D6, $5E
+    db   $00, $00
+    db   $00, $20
+    db   $00, $50
+    db   $AD, $35
+    db   $00, $00
+    db   $0F, $66
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $0F, $66
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $AC, $59
+    db   $0F, $66
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $49, $4D
+    db   $0F, $66
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $00, $00
+    db   $68, $7D
+    db   $FF, $7F
+    db   $C5, $4C
+    db   $00, $00
+    db   $E5, $68
+    db   $D6, $5E
+    db   $62, $3C
+    db   $00, $00
+    db   $00, $50
+    db   $AD, $35
+    db   $00, $20
+    db   $00, $00
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $C5, $4C
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $62, $3C
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $00, $20
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $00, $00
+    db   $FF, $7F
+    db   $C5, $4C
+    db   $68, $7D
+    db   $00, $00
+    db   $D6, $5E
+    db   $62, $3C
+    db   $E5, $68
+    db   $00, $00
+    db   $AD, $35
+    db   $00, $20
+    db   $00, $50
+    db   $00, $00
+    db   $FF, $7F
+    db   $0F, $66
+    db   $D6, $6E
+    db   $68, $7D
+    db   $FF, $7F
+    db   $0F, $66
+    db   $D6, $6E
+    db   $E5, $68
+    db   $FF, $7F
+    db   $0F, $66
+    db   $D6, $6E
+    db   $00, $50
+    db   $FF, $7F
+    db   $0F, $66
+    db   $D6, $6E
 
 ; Copy palette data to $DC10
 ; (Called during the Credits water geyser sequence; to animate the water?)
@@ -5680,7 +5677,7 @@ func_020_78ED::
     sla  a                                        ; $78F0: $CB $27
     ld   e, a                                     ; $78F2: $5F
     ld   d, $00                                   ; $78F3: $16 $00
-    ld   hl, Data_020_783F                        ; $78F5: $21 $3F $78
+    ld   hl, EndingWaterGeyserPalettes            ; $78F5: $21 $3F $78
     add  hl, de                                   ; $78F8: $19
     ld   a, [hl+]                                 ; $78F9: $2A
     ld   b, a                                     ; $78FA: $47

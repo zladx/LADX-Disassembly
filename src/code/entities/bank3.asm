@@ -672,7 +672,7 @@ EntityInitRacoon::
     jr   nz, EntityInitNpcFacingDown              ; $4AE4: $20 $49
 
     ld   a, [wTradeSequenceItem]                  ; $4AE6: $FA $0E $DB
-    cp   $04                                      ; $4AE9: $FE $04
+    cp   TRADING_ITEM_BANANAS                     ; $4AE9: $FE $04
     jr   nc, EntityInitNpcFacingDown              ; $4AEB: $30 $42
 
     ld   a, [$DB48]                               ; $4AED: $FA $48 $DB
@@ -1239,23 +1239,23 @@ EntityStunnedHandler::
     call func_003_60B3                            ; $4E10: $CD $B3 $60
     call ClearEntitySpeed                         ; $4E13: $CD $7F $3D
     call func_003_6E2B                            ; $4E16: $CD $2B $6E
-    ld   a, [wAButtonSlot]                        ; $4E19: $FA $00 $DB
-    cp   $03                                      ; $4E1C: $FE $03
+    ld   a, [wBButtonSlot]                        ; $4E19: $FA $00 $DB
+    cp   INVENTORY_POWER_BRACELET                 ; $4E1C: $FE $03
     jr   nz, jr_003_4E28                          ; $4E1E: $20 $08
 
     ldh  a, [hJoypadState]                        ; $4E20: $F0 $CC
-    and  $20                                      ; $4E22: $E6 $20
+    and  J_B                                      ; $4E22: $E6 $20
     jr   nz, func_003_4E35                        ; $4E24: $20 $0F
 
     jr   jr_003_4E72                              ; $4E26: $18 $4A
 
 jr_003_4E28:
-    ld   a, [wBButtonSlot]                        ; $4E28: $FA $01 $DB
-    cp   $03                                      ; $4E2B: $FE $03
+    ld   a, [wAButtonSlot]                        ; $4E28: $FA $01 $DB
+    cp   INVENTORY_POWER_BRACELET                 ; $4E2B: $FE $03
     jr   nz, jr_003_4E72                          ; $4E2D: $20 $43
 
     ldh  a, [hJoypadState]                        ; $4E2F: $F0 $CC
-    and  $10                                      ; $4E31: $E6 $10
+    and  J_A                                      ; $4E31: $E6 $10
     jr   z, jr_003_4E72                           ; $4E33: $28 $3D
 
 func_003_4E35::
@@ -1401,10 +1401,10 @@ EntityInitSecretSeashell::
     add  hl, bc                                   ; $4EFE: $09
     ld   [hl], $02                                ; $4EFF: $36 $02
     ldh  a, [hMapRoom]                            ; $4F01: $F0 $F6
-    cp   $A4                                      ; $4F03: $FE $A4
+    cp   $A4                                      ; Overworld room A4 (1 east of Mabe's big bush field)
     jr   z, jr_003_4F0B                           ; $4F05: $28 $04
 
-    cp   $D2                                      ; $4F07: $FE $D2
+    cp   $D2                                      ; overworld room D2 (1 west of Tail Cave)
     jr   nz, jr_003_4F0F                          ; $4F09: $20 $04
 
 jr_003_4F0B:
@@ -1437,7 +1437,7 @@ jr_003_4F24:
 
 EntityInitKeyDropPoint::
     ldh  a, [hMapRoom]                            ; $4F2D: $F0 $F6
-    cp   $F8                                      ; $4F2F: $FE $F8
+    cp   $F8                                      ; In the Yarna Desert quicksand pit
     jr   nz, jr_003_4F44                          ; $4F31: $20 $11
 
     ldh  a, [hRoomStatus]                         ; $4F33: $F0 $F8
@@ -1767,7 +1767,7 @@ jr_003_50EF:
     jr   func_003_512A                              ; $5123: $18 $05
 
 jr_003_5125:
-    ld   hl, wAButtonSlot                         ; $5125: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $5125: $21 $00 $DB
     add  hl, de                                   ; $5128: $19
     inc  [hl]                                     ; $5129: $34
 
@@ -1786,7 +1786,7 @@ func_003_5134::
     ldh  a, [hMapRoom]                            ; $513B: $F0 $F6
     ld   e, a                                     ; $513D: $5F
     ldh  a, [hMapId]                              ; $513E: $F0 $F7
-    cp   $FF                                      ; $5140: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $5140: $FE $FF
     jr   nz, jr_003_514B                          ; $5142: $20 $07
 
     ld   d, $00                                   ; $5144: $16 $00
@@ -1794,10 +1794,10 @@ func_003_5134::
     jr   jr_003_5154                              ; $5149: $18 $09
 
 jr_003_514B:
-    cp   $1A                                      ; $514B: $FE $1A
+    cp   $1A                                      ; @TODO MAP_UNKNOWN_1A (?)
     jr   nc, jr_003_5154                          ; $514D: $30 $05
 
-    cp   $06                                      ; $514F: $FE $06
+    cp   $06                                      ; @tODO MAP_EAGLES_TOWER (?)
     jr   c, jr_003_5154                           ; $5151: $38 $01
 
     inc  d                                        ; $5153: $14
@@ -1874,7 +1874,7 @@ jr_003_51B3:
     ld   de, Data_003_515A                        ; $51B9: $11 $5A $51
     ld   b, $0D                                   ; $51BC: $06 $0D
     ldh  a, [hMapRoom]                            ; $51BE: $F0 $F6
-    cp   $C7                                      ; $51C0: $FE $C7
+    cp   $C7                                      ; @TODO Richard's Villa?
     jr   nz, func_003_51C9                        ; $51C2: $20 $05
 
     ld   de, Data_003_5156                        ; $51C4: $11 $56 $51
@@ -2306,7 +2306,7 @@ Data_003_55C7::
 ; Entities random drop tables
 ; Spawn a dropped item when an enemy is destroyed.
 ; The item can be:
-;  - The sword eaten by a Like-Like
+;  - The shield eaten by a Like-Like
 ;  - A specific dropped item defined by the entity
 ;  - A power-up (fragment of power or guardian acorn)
 ;  - A random object set by the drop table
@@ -2324,7 +2324,7 @@ SpawnEnemyDrop::
     and  a                                        ; $55DA: $A7
     jr   z, .likeLikeEnd                          ; $55DB: $28 $05
 
-    ld   a, ENTITY_SWORD                          ; $55DD: $3E $31
+    ld   a, ENTITY_SWORD                          ; @TODO Pretty sure likelikes only eat shields and this entity is both
     jp   .dropEntity                              ; $55DF: $C3 $70 $56
 .likeLikeEnd
 
@@ -2366,17 +2366,17 @@ SpawnEnemyDrop::
     and  a                                        ; $561A: $A7
     ret  z                                        ; $561B: $C8
 
-    ld   e, a                                     ; $561C: $5F
-    ld   d, $1E                                   ; $561D: $16 $1E
-    ld   a, [wMaxHealth]                          ; $561F: $FA $5B $DB
-    cp   $07                                      ; $5622: $FE $07
-    jr   c, .jr_003_562E                          ; $5624: $38 $08
+    ld   e, a                                     ; How many enemies to kill before a Piece of Power drops?
+    ld   d, $1E                                   ; Max HP 0~6: 30
+    ld   a, [wMaxHealth]                          ; 
+    cp   $07                                      ; If max HP <= 6, skip
+    jr   c, .jr_003_562E                          ; 
 
-    ld   d, $23                                   ; $5626: $16 $23
-    cp   $0B                                      ; $5628: $FE $0B
-    jr   c, .jr_003_562E                          ; $562A: $38 $02
+    ld   d, $23                                   ; Max HP 7~10: 35
+    cp   $0B                                      ; 
+    jr   c, .jr_003_562E                          ; If max HP <= 11, skip
 
-    ld   d, $28                                   ; $562C: $16 $28
+    ld   d, $28                                   ; Max HP 11~14: 40
 
 .jr_003_562E
     ld   hl, wPieceOfPowerKillCount               ; $562E: $21 $15 $D4
@@ -2482,10 +2482,10 @@ SpawnEnemyDrop::
     jr   nz, .slimeKeyEnd                         ; $56BA: $20 $15
 
     ldh  a, [hMapRoom]                            ; $56BC: $F0 $F6
-    cp   $58                                      ; $56BE: $FE $58
+    cp   $58                                      ; Overworld Kanalet Castle crow room
     jr   z, .moveKeyTowardsLink                   ; $56C0: $28 $04
 
-    cp   $5A                                      ; $56C2: $FE $5A
+    cp   $5A                                      ; Overwrold Kanalet Castle five-pits room
     jr   nz, .slimeKeyEnd                         ; $56C4: $20 $0B
 
 .moveKeyTowardsLink
@@ -2695,7 +2695,7 @@ Data_003_5823::
 
 MoblinEntityHandler::
     ldh  a, [hMapId]                              ; $5827: $F0 $F7
-    cp   $15                                      ; $5829: $FE $15
+    cp   MAP_BOWWOW_HIDEOUT                       ; $5829: $FE $15
     jr   nz, jr_003_5835                          ; $582B: $20 $08
 
     ld   a, [wIsBowWowFollowingLink]              ; $582D: $FA $56 $DB
@@ -2980,6 +2980,7 @@ EntityInitBrokenHeartContainer::
     ret                                           ; $59D7: $C9
 
 HeartContainerTilesTable::
+    ;   Tile Attr Tile Attr
     db   $AA, $14, $AA, $34
 
 ; Loop run every frame heart container is on screen
@@ -2995,32 +2996,45 @@ HeartContainerEntityHandler::
 
     ld   a, $18                                   ; $59EB: $3E $18
     ld   [wActiveMusicTrack], a                   ; $59ED: $EA $68 $D3
-    ; Increase max health
+    ; Increase max health, and fully restore health
     ld   hl, wMaxHealth                           ; $59F0: $21 $5B $DB
     inc  [hl]                                     ; $59F3: $34
     ld   hl, wAddHealthBuffer                     ; $59F4: $21 $93 $DB
     ld   [hl], $FF                                ; $59F7: $36 $FF
     call func_003_5134                            ; $59F9: $CD $34 $51
     ld   a, [hl]                                  ; $59FC: $7E
-    or   $20                                      ; $59FD: $F6 $20
+    or   $20                                      ; @TODO Set this room's status bit
     ld   [hl], a                                  ; $59FF: $77
     ldh  [hRoomStatus], a                         ; $5A00: $E0 $F8
 
-    ldh  a, [hMapId]                              ; $5A02: $F0 $F7
-    ld   hl, wIndoorBRoomStatus + $2E             ; $5A04: $21 $2E $DA
-    cp   MAP_EAGLES_TOWER                         ; $5A07: $FE $06
-    jr   z, jr_003_5A12                           ; $5A09: $28 $07
+    ; Now, check if we should modify another room's status bits as well.
+    ; This is how the Eagle's Tower and Angler's Tunnel bosses
+    ; exist in different rooms -- this sets the room flag in the
+    ; room where the *staircase* is, so that it opens when you return.
 
-    cp   MAP_ANGLERS_TUNNEL                       ; $5A0B: $FE $03
-    jr   nz, jr_003_5A14                          ; $5A0D: $20 $05
+    ldh  a, [hMapId]
 
-    ld   hl, wIndoorARoomStatus + $66             ; $5A0F: $21 $66 $D9
+    ; Set room status pointer to Eagle's Tower Nightmare staircase room
+    ; (IndoorB + $2E)
+    ld   hl, wIndoorBRoomStatus + $2E
+    cp   MAP_EAGLES_TOWER                         ; If we ARE in Eagle's Tower...
+    jr   z, .inEaglesTower                        ; ... skip to setting the bit - address already loaded.
 
-jr_003_5A12:
-    set  5, [hl]                                  ; $5A12: $CB $EE
+    cp   MAP_ANGLERS_TUNNEL                       ; If we are NOT in Angler's Tunnel...
+    jr   nz, .skipSecondRoomFlags                 ; ... skip setting a second bit entirely - don't need to.
 
-jr_003_5A14:
-    jp   UnloadEntityAndReturn                    ; $5A14: $C3 $8D $3F
+    ; Set room status pointer to Angler's Tunnel Nightmare staircase room.
+    ; (IndoorA + $66)
+    ; Eagle's Tower check skips this, not-Angler's-Tunnel check skips the set too.
+    ld   hl, wIndoorARoomStatus + $66
+
+.inEaglesTower:
+    ; Set the room status bits for the second room.
+    set  5, [hl]                                  ; or $20
+
+.skipSecondRoomFlags:
+    ; Finished setting status bits for rooms, delete this
+    jp   UnloadEntityAndReturn
 
 func_003_5A17::
     ldh  a, [hLinkPositionX]                      ; $5A17: $F0 $98
@@ -3406,7 +3420,7 @@ KeyDropPointEntityHandler::
 
 jr_003_5C99:
     ldh  a, [hMapRoom]                            ; $5C99: $F0 $F6
-    cp   $80                                      ; $5C9B: $FE $80
+    cp   $80                                      ; @TODO (?) L5 Master Stalfos final room
     jp   z, label_003_5C49                        ; $5C9D: $CA $49 $5C
 
     ld   de, Data_003_5C78                        ; $5CA0: $11 $78 $5C
@@ -3465,7 +3479,7 @@ func_003_5CEA::
     jr   nz, jr_003_5D34                          ; $5CEE: $20 $44
 
     ldh  a, [hMapRoom]                            ; $5CF0: $F0 $F6
-    cp   $CE                                      ; $5CF2: $FE $CE
+    cp   $CE                                      ; Overworld Yarna Desert Lanmola fight
     jr   nz, jr_003_5D34                          ; $5CF4: $20 $3E
 
     ldh  a, [hActiveEntityPosY]                   ; $5CF6: $F0 $EF
@@ -3761,7 +3775,7 @@ func_003_5ED5::
     dec  [hl]                                     ; $5EDF: $35
     call IncrementEntityState                     ; $5EE0: $CD $12 $3B
     ldh  a, [hMapId]                              ; $5EE3: $F0 $F7
-    add  $00                                      ; $5EE5: $C6 $00
+    add  $00                                      ; $5EE5: $C6 $00 (???)
     call OpenDialogInTable1                       ; $5EE7: $CD $73 $23
     ldh  a, [hMapId]                              ; $5EEA: $F0 $F7
     ld   e, a                                     ; $5EEC: $5F
@@ -3769,7 +3783,7 @@ func_003_5ED5::
     ld   hl, wHasInstrument1                      ; $5EEE: $21 $65 $DB
     add  hl, de                                   ; $5EF1: $19
     ld   a, [hl]                                  ; $5EF2: $7E
-    or   $02                                      ; $5EF3: $F6 $02
+    or   $02                                      ; @TODO Sets instrument as acquired
     ld   [hl], a                                  ; $5EF5: $77
     call func_003_5134                            ; $5EF6: $CD $34 $51
     ld   a, [hl]                                  ; $5EF9: $7E
@@ -3929,7 +3943,7 @@ DroppableSeashellEntityHandler::
     jp   nz, UnloadEntityAndReturn                ; $5FDF: $C2 $8D $3F
 
     ldh  a, [hMapRoom]                            ; $5FE2: $F0 $F6
-    cp   $E3                                      ; $5FE4: $FE $E3
+    cp   $E3                                      ; House by the Bay
     jr   nz, jr_003_5FEF                          ; $5FE6: $20 $07
 
     ldh  a, [hRoomStatus]                         ; $5FE8: $F0 $F8
@@ -3965,7 +3979,7 @@ HidingSlimeKeyEntityHandler::
     jr   nz, jr_003_6029                          ; $601C: $20 $0B
 
     ldh  a, [hMapRoom]                            ; $601E: $F0 $F6
-    cp   $C6                                      ; $6020: $FE $C6
+    cp   $C6                                      ; Overworld Pothole Field - Slime Key
     jr   nz, jr_003_6029                          ; $6022: $20 $05
 
     ld   a, $05                                   ; $6024: $3E $05
@@ -4238,8 +4252,8 @@ func_003_61DE::
     jr   nz, jr_003_6243                          ; $61F1: $20 $50
 
     ldh  a, [hActiveEntityType]                   ; $61F3: $F0 $EB
-    cp   $3D                                      ; $61F5: $FE $3D
-    jr   z, jr_003_6200                           ; $61F7: $28 $07
+    cp   ENTITY_DROPPABLE_SECRET_SEASHELL         ; $61F5: $FE $3D
+    jr   z, jr_003_6200                           ; $61F7: $28 $07 (???: If a seashell, jump?)
 
     ld   a, [wIsIndoor]                           ; $61F9: $FA $A5 $DB
     and  a                                        ; $61FC: $A7
@@ -4248,29 +4262,29 @@ func_003_61DE::
 jr_003_6200:
     call func_003_7E0E                            ; $6200: $CD $0E $7E
     ldh  a, [hActiveEntityType]                   ; $6203: $F0 $EB
-    cp   $2D                                      ; $6205: $FE $2D
+    cp   ENTITY_DROPPABLE_HEART                   ; $6205: $FE $2D
     jr   z, jr_003_6227                           ; $6207: $28 $1E
 
-    cp   $3D                                      ; $6209: $FE $3D
+    cp   ENTITY_DROPPABLE_SECRET_SEASHELL         ; $6209: $FE $3D
     jr   nz, jr_003_622F                          ; $620B: $20 $22
 
     ldh  a, [hMapRoom]                            ; $620D: $F0 $F6
-    cp   $DA                                      ; $620F: $FE $DA
+    cp   $DA                                      ; Overworld room one north of fisherman under bridge
     jr   z, jr_003_622F                           ; $6211: $28 $1C
 
-    cp   $A5                                      ; $6213: $FE $A5
+    cp   $A5                                      ; Overworld room two east of Mabe bush field
     jr   z, jr_003_622F                           ; $6215: $28 $18
 
-    cp   $74                                      ; $6217: $FE $74
+    cp   $74                                      ; Overworld room one south of ghost's gravestone (w/zombies)
     jr   z, jr_003_622F                           ; $6219: $28 $14
 
-    cp   $3A                                      ; $621B: $FE $3A
+    cp   $3A                                      ; Overworld room with... no seashell?
     jr   z, jr_003_622F                           ; $621D: $28 $10
 
-    cp   $A8                                      ; $621F: $FE $A8
+    cp   $A8                                      ; Overworld room northeast-ish of Pothole Field
     jr   z, jr_003_622F                           ; $6221: $28 $0C
 
-    cp   $B2                                      ; $6223: $FE $B2
+    cp   $B2                                      ; Overworld room - Mabe village telephone booth (...no seashell???)
     jr   z, jr_003_622F                           ; $6225: $28 $08
 
 jr_003_6227:
@@ -4504,6 +4518,8 @@ label_003_636D:
     ld   hl, wSeashellsCount                      ; $6370: $21 $0F $DB
 
 func_003_6373::
+    ; POI: Adds one to seashell / golden leaves count, preventing overflow if at 99.
+    ; But you can never get anywhere near that! Golden Leaves even stop at 6 (slime key)!
     ld   a, [hl]                                  ; $6373: $7E
     cp   $99                                      ; $6374: $FE $99
     jr   z, jr_003_637C                           ; $6376: $28 $04
@@ -4662,6 +4678,7 @@ PickSword::
     ret                                           ; $6467: $C9
 
 jr_003_6468:
+    ; POI: If sword level > 0, it's a shield instead. Used for Like-Likes?
     ld   hl, wEntitiesPrivateState1Table          ; $6468: $21 $B0 $C2
     add  hl, bc                                   ; $646B: $09
     ld   a, [hl]                                  ; $646C: $7E
@@ -4669,7 +4686,7 @@ jr_003_6468:
     ld   d, $04                                   ; $6470: $16 $04
 
 func_003_6472::
-    ld   hl, wAButtonSlot                         ; $6472: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $6472: $21 $00 $DB
     ld   e, $0C                                   ; $6475: $1E $0C
 
 jr_003_6477:
@@ -4680,7 +4697,7 @@ jr_003_6477:
     dec  e                                        ; $647B: $1D
     jr   nz, jr_003_6477                          ; $647C: $20 $F9
 
-    ld   hl, wAButtonSlot                         ; $647E: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $647E: $21 $00 $DB
 
 jr_003_6481:
     ld   a, [hl]                                  ; $6481: $7E
@@ -4702,11 +4719,11 @@ jr_003_648E:
 
 PickDroppableKey::
     ldh  a, [hMapRoom]                            ; $648F: $F0 $F6
-    cp   $80                                      ; $6491: $FE $80
+    cp   $80                                      ; L5 Master Stalfos's final fight
     jr   z, jr_003_64A5                           ; $6493: $28 $10
 
     ldh  a, [hMapRoom]                            ; $6495: $F0 $F6
-    cp   $7C                                      ; $6497: $FE $7C
+    cp   $7C                                      ; L4 Side-view room where the key drops
     jr   nz, jr_003_64A0                          ; $6499: $20 $05
 
     ld   hl, $D969                                ; $649B: $21 $69 $D9
@@ -5241,7 +5258,7 @@ jr_003_6878:
     ld   e, a                                     ; $687D: $5F
     ld   d, $00                                   ; $687E: $16 $00
     ldh  a, [hMapId]                              ; $6880: $F0 $F7
-    cp   $FF                                      ; $6882: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $6882: $FE $FF
     jr   nz, jr_003_688B                          ; $6884: $20 $05
 
     ld   hl, wColorDungeonRoomStatus              ; $6886: $21 $E0 $DD

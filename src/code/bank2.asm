@@ -5379,7 +5379,7 @@ jr_002_6B34:
     jr   z, jr_002_6B55                           ; $6B43: $28 $10
 
     ld   e, $20                                   ; $6B45: $1E $20
-    ld   a, [wAButtonSlot]                        ; $6B47: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $6B47: $FA $00 $DB
     cp   $0A                                      ; $6B4A: $FE $0A
     jr   z, jr_002_6B50                           ; $6B4C: $28 $02
 
@@ -6738,11 +6738,11 @@ jr_002_72D1:
     cp   $20                                      ; $72D1: $FE $20
     jr   nz, jr_002_72FA                          ; $72D3: $20 $25
 
-    ld   a, [wBButtonSlot]                        ; $72D5: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $72D5: $FA $01 $DB
     cp   $03                                      ; $72D8: $FE $03
     jr   z, jr_002_72FA                           ; $72DA: $28 $1E
 
-    ld   a, [wAButtonSlot]                        ; $72DC: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $72DC: $FA $00 $DB
     cp   $03                                      ; $72DF: $FE $03
     jr   z, jr_002_72FA                           ; $72E1: $28 $17
 
@@ -6918,7 +6918,7 @@ jr_002_73EE:
     cp   $04                                      ; $73EF: $FE $04
     jr   c, jr_002_742D                           ; $73F1: $38 $3A
 
-    ld   hl, wAButtonSlot                         ; $73F3: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $73F3: $21 $00 $DB
 
 jr_002_73F6:
     ld   a, [hl+]                                 ; $73F6: $2A

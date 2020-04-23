@@ -1,6 +1,8 @@
 ;
 ; Constants for audio effects
-;
+
+; @TODO Are these correct? Some of these don't seem to match
+; their actual in-game use (???)
 
 ; Values for hMusicTrack
 MUSIC_NONE                                      equ $00

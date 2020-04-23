@@ -199,7 +199,7 @@ jr_007_4128:
     and  a                                        ; $413E: $A7
     ret  nz                                       ; $413F: $C0
 
-    ld   a, [wAButtonSlot]                        ; $4140: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $4140: $FA $00 $DB
     cp   $03                                      ; $4143: $FE $03
     jr   nz, jr_007_414E                          ; $4145: $20 $07
 
@@ -210,7 +210,7 @@ jr_007_4128:
     ret                                           ; $414D: $C9
 
 jr_007_414E:
-    ld   a, [wBButtonSlot]                        ; $414E: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $414E: $FA $01 $DB
     cp   $03                                      ; $4151: $FE $03
     ret  nz                                       ; $4153: $C0
 
@@ -1791,7 +1791,7 @@ jr_007_4C32:
 
     ld   e, $CE                                   ; $4C3A: $1E $CE
     ld   a, [wTradeSequenceItem]                  ; $4C3C: $FA $0E $DB
-    cp   $07                                      ; $4C3F: $FE $07
+    cp   TRADING_ITEM_PINEAPPLE                   ; $4C3F: $FE $07
     jr   nz, jr_007_4C45                          ; $4C41: $20 $02
 
 func_007_4C43::
@@ -1816,7 +1816,7 @@ func_007_4C49::
     jp   func_007_4C83                            ; $4C5B: $C3 $83 $4C
 
 jr_007_4C5E:
-    ld   a, $07                                   ; $4C5E: $3E $07
+    ld   a, TRADING_ITEM_PINEAPPLE                ; $4C5E: $3E $07
     ld   [wTradeSequenceItem], a                  ; $4C60: $EA $0E $DB
     ld   a, $0D                                   ; $4C63: $3E $0D
     ldh  [hFFA5], a                               ; $4C65: $E0 $A5
@@ -3496,7 +3496,7 @@ label_007_5721:
     cp   $40                                      ; $5737: $FE $40
     jr   nc, jr_007_5777                          ; $5739: $30 $3C
 
-    ld   a, [wAButtonSlot]                        ; $573B: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $573B: $FA $00 $DB
     cp   $01                                      ; $573E: $FE $01
     jr   nz, jr_007_574A                          ; $5740: $20 $08
 
@@ -3507,7 +3507,7 @@ label_007_5721:
     jr   jr_007_5777                              ; $5748: $18 $2D
 
 jr_007_574A:
-    ld   a, [wBButtonSlot]                        ; $574A: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $574A: $FA $01 $DB
     cp   $01                                      ; $574D: $FE $01
     jr   nz, jr_007_5777                          ; $574F: $20 $26
 
@@ -5001,7 +5001,7 @@ jr_007_60DD:
     and  a                                        ; $60E5: $A7
     jr   nz, jr_007_6133                          ; $60E6: $20 $4B
 
-    ld   a, [wAButtonSlot]                        ; $60E8: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $60E8: $FA $00 $DB
     cp   $03                                      ; $60EB: $FE $03
     jr   nz, jr_007_60F7                          ; $60ED: $20 $08
 
@@ -5012,7 +5012,7 @@ jr_007_60DD:
     jr   jr_007_6133                              ; $60F5: $18 $3C
 
 jr_007_60F7:
-    ld   a, [wBButtonSlot]                        ; $60F7: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $60F7: $FA $01 $DB
     cp   $03                                      ; $60FA: $FE $03
     jr   nz, jr_007_6133                          ; $60FC: $20 $35
 
@@ -8511,7 +8511,7 @@ label_007_7733:
     and  a                                        ; $773B: $A7
     jr   nz, jr_007_7783                          ; $773C: $20 $45
 
-    ld   a, [wAButtonSlot]                        ; $773E: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $773E: $FA $00 $DB
     cp   $03                                      ; $7741: $FE $03
     jr   nz, jr_007_774D                          ; $7743: $20 $08
 
@@ -8522,7 +8522,7 @@ label_007_7733:
     jr   jr_007_7783                              ; $774B: $18 $36
 
 jr_007_774D:
-    ld   a, [wBButtonSlot]                        ; $774D: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $774D: $FA $01 $DB
     cp   $03                                      ; $7750: $FE $03
     jr   nz, jr_007_7783                          ; $7752: $20 $2F
 

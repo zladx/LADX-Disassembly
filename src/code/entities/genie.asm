@@ -291,7 +291,7 @@ jr_004_41AC:
     jr   nc, jr_004_4210                          ; $41CB: $30 $43
 
     call ResetPegasusBoots                                ; $41CD: $CD $B6 $0C
-    ld   a, [wAButtonSlot]                        ; $41D0: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $41D0: $FA $00 $DB
     cp   $03                                      ; $41D3: $FE $03
     jr   nz, jr_004_41DF                          ; $41D5: $20 $08
 
@@ -302,7 +302,7 @@ jr_004_41AC:
     jr   jr_004_4210                              ; $41DD: $18 $31
 
 jr_004_41DF:
-    ld   a, [wBButtonSlot]                        ; $41DF: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $41DF: $FA $01 $DB
     cp   $03                                      ; $41E2: $FE $03
     jr   nz, jr_004_4210                          ; $41E4: $20 $2A
 

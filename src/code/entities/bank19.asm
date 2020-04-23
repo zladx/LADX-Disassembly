@@ -73,7 +73,7 @@ LiftableStatueState0Handler::
     and  a                                        ; $408D: $A7
     jp   nz, label_019_411C                       ; $408E: $C2 $1C $41
 
-    ld   a, [wAButtonSlot]                        ; $4091: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $4091: $FA $00 $DB
     cp   $03                                      ; $4094: $FE $03
     jr   nz, jr_019_40A0                          ; $4096: $20 $08
 
@@ -84,7 +84,7 @@ LiftableStatueState0Handler::
     jr   label_019_411C                           ; $409E: $18 $7C
 
 jr_019_40A0:
-    ld   a, [wBButtonSlot]                        ; $40A0: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $40A0: $FA $01 $DB
     cp   $03                                      ; $40A3: $FE $03
     jr   nz, label_019_411C                       ; $40A5: $20 $75
 
@@ -887,7 +887,7 @@ GoriyaState1Handler::
     and  a                                        ; $4699: $A7
     jr   nz, jr_019_46DB                          ; $469A: $20 $3F
 
-    ld   a, [wAButtonSlot]                        ; $469C: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $469C: $FA $00 $DB
     and  a                                        ; $469F: $A7
     jr   z, jr_019_46DB                           ; $46A0: $28 $39
 
@@ -915,7 +915,7 @@ jr_019_46A2:
 
     ld   [$DB7D], a                               ; $46BE: $EA $7D $DB
     ld   a, $0D                                   ; $46C1: $3E $0D
-    ld   [wAButtonSlot], a                        ; $46C3: $EA $00 $DB
+    ld   [wBButtonSlot], a                        ; $46C3: $EA $00 $DB
     ld   hl, wEntitiesPrivateState1Table          ; $46C6: $21 $B0 $C2
     add  hl, bc                                   ; $46C9: $09
     ld   [hl], a                                  ; $46CA: $77
@@ -943,7 +943,7 @@ GoriyaState3Handler::
     and  a                                        ; $46F2: $A7
     jr   nz, jr_019_4725                          ; $46F3: $20 $30
 
-    ld   hl, wAButtonSlot                         ; $46F5: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $46F5: $21 $00 $DB
     ld   de, $00                                  ; $46F8: $11 $00 $00
 
 jr_019_46FB:
@@ -3593,7 +3593,7 @@ jr_019_5922:
     and  a                                        ; $5935: $A7
     ret  nz                                       ; $5936: $C0
 
-    ld   a, [wAButtonSlot]                        ; $5937: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $5937: $FA $00 $DB
     cp   $03                                      ; $593A: $FE $03
     jr   nz, jr_019_5945                          ; $593C: $20 $07
 
@@ -3604,7 +3604,7 @@ jr_019_5922:
     ret                                           ; $5944: $C9
 
 jr_019_5945:
-    ld   a, [wBButtonSlot]                        ; $5945: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $5945: $FA $01 $DB
     cp   $03                                      ; $5948: $FE $03
     ret  nz                                       ; $594A: $C0
 
@@ -3834,7 +3834,7 @@ jr_019_5A9F:
     and  a                                        ; $5AA9: $A7
     ret  nz                                       ; $5AAA: $C0
 
-    ld   a, [wAButtonSlot]                        ; $5AAB: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $5AAB: $FA $00 $DB
     cp   $03                                      ; $5AAE: $FE $03
     jr   nz, jr_019_5AB9                          ; $5AB0: $20 $07
 
@@ -3845,7 +3845,7 @@ jr_019_5A9F:
     ret                                           ; $5AB8: $C9
 
 jr_019_5AB9:
-    ld   a, [wBButtonSlot]                        ; $5AB9: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $5AB9: $FA $01 $DB
     cp   $03                                      ; $5ABC: $FE $03
     ret  nz                                       ; $5ABE: $C0
 

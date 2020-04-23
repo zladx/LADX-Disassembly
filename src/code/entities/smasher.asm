@@ -453,7 +453,7 @@ jr_006_4806:
     and  a                                        ; $480E: $A7
     jr   nz, jr_006_4852                          ; $480F: $20 $41
 
-    ld   a, [wAButtonSlot]                        ; $4811: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $4811: $FA $00 $DB
     cp   $03                                      ; $4814: $FE $03
     jr   nz, jr_006_4820                          ; $4816: $20 $08
 
@@ -464,7 +464,7 @@ jr_006_4806:
     jr   jr_006_4852                              ; $481E: $18 $32
 
 jr_006_4820:
-    ld   a, [wBButtonSlot]                        ; $4820: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $4820: $FA $01 $DB
     cp   $03                                      ; $4823: $FE $03
     jr   nz, jr_006_4852                          ; $4825: $20 $2B
 

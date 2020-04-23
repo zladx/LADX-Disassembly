@@ -1126,10 +1126,10 @@ wIndoorARoomStatus:: ; D900
 wIndoorBRoomStatus:: ; DA00
   ds $100
 
-wAButtonSlot:: ; DB00
+wBButtonSlot:: ; DB00
   ds 1
 
-wBButtonSlot:: ; DB01
+wAButtonSlot:: ; DB01
   ds 1
 
 wInventoryItem1:: ; DB02

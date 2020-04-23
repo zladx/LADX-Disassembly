@@ -45,7 +45,7 @@ jr_005_4E87:
     jr   nz, jr_005_4E96                          ; $4E8C: $20 $08
 
     ld   a, [wTradeSequenceItem]                  ; $4E8E: $FA $0E $DB
-    cp   $07                                      ; $4E91: $FE $07
+    cp   TRADING_ITEM_PINEAPPLE                   ; $4E91: $FE $07
     jp   nc, func_005_7B4B                        ; $4E93: $D2 $4B $7B
 
 jr_005_4E96:
@@ -214,7 +214,7 @@ jr_005_4F90:
 
 jr_005_4F95:
     ld   e, $0B                                   ; $4F95: $1E $0B
-    ld   hl, wAButtonSlot                         ; $4F97: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $4F97: $21 $00 $DB
 
 jr_005_4F9A:
     ld   a, [hl+]                                 ; $4F9A: $2A
@@ -259,7 +259,7 @@ jr_005_4FAC:
 jr_005_4FD0:
     push bc                                       ; $4FD0: $C5
     ld   c, $0B                                   ; $4FD1: $0E $0B
-    ld   hl, wAButtonSlot                         ; $4FD3: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $4FD3: $21 $00 $DB
 
 jr_005_4FD6:
     ld   a, [hl+]                                 ; $4FD6: $2A
@@ -602,7 +602,7 @@ Data_005_51CA::
 
 func_005_51CE::
     ld   a, [wTradeSequenceItem]                  ; $51CE: $FA $0E $DB
-    cp   $07                                      ; $51D1: $FE $07
+    cp   TRADING_ITEM_PINEAPPLE                   ; $51D1: $FE $07
     jr   c, jr_005_51FB                           ; $51D3: $38 $26
 
     ld   a, [$D8FD]                               ; $51D5: $FA $FD $D8
@@ -781,7 +781,7 @@ func_005_5312::
 
 ; Add item to inventory slot (used for assigning the shield)
 AssignItemToSlot:
-    ld   hl, wAButtonSlot                         ; $5321: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $5321: $21 $00 $DB
     ld   e, $0C                                   ; $5324: $1E $0C
 
     ; Search if a matching item exists in inventory
@@ -793,7 +793,7 @@ AssignItemToSlot:
     dec  e                                        ; $532A: $1D
     jr   nz, .searchLoop                          ; $532B: $20 $F9
 
-    ld   hl, wAButtonSlot                         ; $532D: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $532D: $21 $00 $DB
 
     ; Check for first empty slot, add item to it and return
 .assignLoop

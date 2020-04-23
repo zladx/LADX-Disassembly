@@ -1185,7 +1185,7 @@ Data_004_5501::
 FacadeState2Handler:
     ld   de, Data_004_5501                        ; $5509: $11 $01 $55
     ldh  a, [hMapId]                              ; $550C: $F0 $F7
-    cp   $06                                      ; $550E: $FE $06
+    cp   MAP_EAGLES_TOWER                         ; @TODO ??? Is this right?
     jr   z, jr_004_551C                           ; $5510: $28 $0A
 
     ld   de, Data_004_54F1                        ; $5512: $11 $F1 $54
@@ -1575,7 +1575,7 @@ BossDestructionHandler::
 
 ; Load heart container value to load when boss is killed
 DropHeartContainer::
-    ld   a, $36                                   ; $5751: $3E $36
+    ld   a, ENTITY_HEART_CONTAINER                ; $5751: $3E $36
     call SpawnNewEntity_trampoline                ; $5753: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $5756: $F0 $D7
     cp   $88                                      ; $5758: $FE $88
@@ -2953,7 +2953,7 @@ func_004_6154::
     jr   nz, jr_004_616C                          ; $6158: $20 $12
 
     ldh  a, [hJoypadState]                        ; $615A: $F0 $CC
-    and  $30                                      ; $615C: $E6 $30
+    and  J_A | J_B                                ; $615C: $E6 $30
     jr   z, jr_004_616C                           ; $615E: $28 $0C
 
     call IncrementEntityState                     ; $6160: $CD $12 $3B
@@ -6728,7 +6728,7 @@ jr_004_7839:
 
 jr_004_7845:
     push bc                                       ; $7845: $C5
-    ld   hl, wAButtonSlot                         ; $7846: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $7846: $21 $00 $DB
     ld   c, $0B                                   ; $7849: $0E $0B
 
 jr_004_784B:
@@ -6749,7 +6749,7 @@ jr_004_7859:
     cp   $FF                                      ; $785B: $FE $FF
     jr   nz, jr_004_784B                          ; $785D: $20 $EC
 
-    ld   hl, wAButtonSlot                         ; $785F: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $785F: $21 $00 $DB
     ld   c, $0B                                   ; $7862: $0E $0B
 
 jr_004_7864:
@@ -7007,7 +7007,7 @@ jr_004_79BB:
     cp   $04                                      ; $79BB: $FE $04
     jr   nz, jr_004_79D9                          ; $79BD: $20 $1A
 
-    ld   hl, wAButtonSlot                         ; $79BF: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $79BF: $21 $00 $DB
     ld   d, $0C                                   ; $79C2: $16 $0C
 
 jr_004_79C4:
@@ -7032,7 +7032,7 @@ jr_004_79D9:
     cp   $06                                      ; $79D9: $FE $06
     jr   nz, jr_004_79F7                          ; $79DB: $20 $1A
 
-    ld   hl, wAButtonSlot                         ; $79DD: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $79DD: $21 $00 $DB
     ld   d, $0C                                   ; $79E0: $16 $0C
 
 jr_004_79E2:
@@ -7057,7 +7057,7 @@ jr_004_79F7:
     cp   $03                                      ; $79F7: $FE $03
     jr   nz, jr_004_7A0C                          ; $79F9: $20 $11
 
-    ld   hl, wAButtonSlot                         ; $79FB: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $79FB: $21 $00 $DB
     ld   d, $0C                                   ; $79FE: $16 $0C
 
 jr_004_7A00:

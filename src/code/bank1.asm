@@ -1036,278 +1036,57 @@ label_531D::
     jr   .finish
 
 
-; @TODO Code as data
 label_53D8::
-    sbc  a, l
-    sbc  a, l
-    sbc  a, l
-    rst  $38
-    sbc  a, l
-    sbc  a, l
-    sbc  a, l
-    rst  $38
-    sbc  a, l
-    sbc  a, l
-    sbc  a, h
-    rst  $38
-    sbc  a, l
-    sbc  a, l
-    sbc  a, h
-    rst  $38
+    db   $9D, $9D, $9D, $FF, $9D, $9D, $9D, $FF   ; $53D8
+    db   $9D, $9D, $9C, $FF, $9D, $9D, $9C, $FF   ; $53E0
 
 label_53E8::
-    ldd  [hl], a
-    ldd  [hl], a
-    add  hl, bc
-    rst  $38
-    ld   l, $2E
-    add  hl, bc
-    rst  $38
-    adc  a, d
-    ldd  [hl], a
-    jp   hl
-    rst  $38
-    adc  a, d
-    ld   l, $E9
-    rst  $38
+    db   $32, $32, $09, $FF, $2E, $2E, $09, $FF   ; $53E8
+    db   $8A, $32, $E9, $FF, $8A, $2E, $E9, $FF   ; $53F0
 
 label_53F8::
-    ret  z
-    ret  z
-    nop
-    rst  $38
-    ret  z
-    ret  z
-    nop
-    rst  $38
-    ld   c, b
-    ret  z
-    nop
-    rst  $38
-    ld   c, b
-    ret  z
-    nop
-    rst  $38
+    db   $C8, $C8, $00, $FF, $C8, $C8, $00, $FF   ; $53F8
+    db   $48, $C8, $00, $FF, $48, $C8, $00, $FF   ; $5400
 
 label_5408::
-    ld   a, a
-    ld   a, a
-    cp   d
-    rst  $38
-    ld   a, a
-    ld   a, a
-    cp   d
-    rst  $38
-    ld   a, a
-    ld   a, a
-    cp   d
-    rst  $38
-    ld   a, a
-    ld   a, a
-    cp   d
-    rst  $38
+    db   $7F, $7F, $BA, $FF, $7F, $7F, $BA, $FF   ; $5408
+    db   $7F, $7F, $BA, $FF, $7F, $7F, $BA, $FF   ; $5410
 
 label_5418::
-    nop
-    nop
-    nop
-    rst  $38
-    nop
-    nop
-    nop
-    rst  $38
-    sbc  a, l
-    sbc  a, l
-    rst  $38
-    nop
-    sbc  a, l
-    sbc  a, l
-    sbc  a, l
-    rst  $38
-    sbc  a, l
-    sbc  a, h
-    rst  $38
-    nop
-    sbc  a, l
-    sbc  a, h
-    sbc  a, h
-    rst  $38
-    sbc  a, l
-    sbc  a, l
-    sbc  a, h
-    sbc  a, h
-    rst  $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    sbc  a, l
-    sbc  a, l
-    sbc  a, h
-    sbc  a, h
-    sbc  a, h
-    sbc  a, h
-    rst  $38
-    nop
-    nop
-    nop
-    nop
-    sbc  a, l
-    sbc  a, l
-    sbc  a, h
-    sbc  a, h
-    sbc  a, l
-    sbc  a, l
-    sbc  a, h
-    sbc  a, h
-    rst  $38
-    nop
-    nop
-    sbc  a, l
-    sbc  a, l
-    sbc  a, h
-    sbc  a, h
-    sbc  a, l
-    sbc  a, l
-    sbc  a, h
-    sbc  a, h
-    sbc  a, h
-    sbc  a, h
-    rst  $38
+    db   $00, $00, $00, $FF, $00, $00, $00, $FF   ; $5418
+    db   $9D, $9D, $FF, $00, $9D, $9D, $9D, $FF   ; $5420
+    db   $9D, $9C, $FF, $00, $9D, $9C, $9C, $FF   ; $5428
+    db   $9D, $9D, $9C, $9C, $FF, $00, $00, $00   ; $5430
+    db   $00, $00, $00, $9D, $9D, $9C, $9C, $9C   ; $5438
+    db   $9C, $FF, $00, $00, $00, $00, $9D, $9D   ; $5440
+    db   $9C, $9C, $9D, $9D, $9C, $9C, $FF, $00   ; $5448
+    db   $00, $9D, $9D, $9C, $9C, $9D, $9D, $9C   ; $5450
+    db   $9C, $9C, $9C, $FF                       ; $5458
 
 label_545C::
-    nop
-    nop
-    nop
-    rst  $38
-    nop
-    nop
-    nop
-    rst  $38
-    dec  c
-    ld   [de], a
-    rst  $38
-    nop
-    dec  c
-    ld   de, rNR12
-    sub  a, d
-    db   $F2 ; Undefined instruction
-    rst  $38
-    nop
-    sub  a, d
-    pop  af
-    db   $F2 ; Undefined instruction
-    rst  $38
-    adc  a, l
-    sub  a, d
-    db   $ED ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    rst  $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    adc  a, l
-    sub  a, d
-    db   $ED ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    pop  af
-    db   $F2 ; Undefined instruction
-    rst  $38
-    nop
-    nop
-    nop
-    nop
-    adc  a, l
-    sub  a, d
-    db   $ED ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    sub  a, c
-    sub  a, d
-    pop  af
-    db   $F2 ; Undefined instruction
-    rst  $38
-    nop
-    nop
-    adc  a, l
-    sub  a, d
-    db   $ED ; Undefined instruction
-    db   $F2 ; Undefined instruction
-    sub  a, c
-    sub  a, d
-    db   $EC ; Undefined instruction
-    db   $ED ; Undefined instruction
-    pop  af
-    db   $F2 ; Undefined instruction
-    rst  $38
+    db   $00, $00, $00, $FF, $00, $00, $00, $FF   ; $545C
+    db   $0D, $12, $FF, $00, $0D, $11, $12, $FF   ; $5464
+    db   $92, $F2, $FF, $00, $92, $F1, $F2, $FF   ; $546C
+    db   $8D, $92, $ED, $F2, $FF, $00, $00, $00   ; $5474
+    db   $00, $00, $00, $8D, $92, $ED, $F2, $F1   ; $547C
+    db   $F2, $FF, $00, $00, $00, $00, $8D, $92   ; $5484
+    db   $ED, $F2, $91, $92, $F1, $F2, $FF, $00   ; $548C
+    db   $00, $8D, $92, $ED, $F2, $91, $92, $EC   ; $5494
+    db   $ED, $F1, $F2, $FF                       ; $549C
 
 label_54A0::
-    nop
-    nop
-    nop
-    rst  $38
-    nop
-    nop
-    nop
-    rst  $38
-    db   $E8 ; add  sp, d
-    jp   hl
-    rst  $38
-    nop
-    db   $E8 ; add  sp, d
-    db   $EC ; Undefined instruction
-    db   $E8 ; add  sp, d
-    rst  $38
-    db   $E8 ; add  sp, d
-    jp   hl
-    rst  $38
-    nop
-    db   $E8 ; add  sp, d
-    db   $EC ; Undefined instruction
-    db   $E8 ; add  sp, d
-    rst  $38
-    db   $E8 ; add  sp, d
-    ld   [$EBE9], a
-    rst  $38
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    db   $E8 ; add  sp, d
-    ld   [$EBE9], a
-    db   $EC ; Undefined instruction
-    db   $E8 ; add  sp, d
-    rst  $38
-    nop
-    nop
-    nop
-    nop
-    db   $E8 ; add  sp, d
-    ld   [$EBE9], a
-    db   $EC ; Undefined instruction
-    db   $E8 ; add  sp, d
-    db   $EC ; Undefined instruction
-    jp   hl
-    rst  $38
-    nop
-    nop
-    db   $E8 ; add  sp, d
-    ld   [$EBE9], a
-    db   $EC ; Undefined instruction
-    db   $E8 ; add  sp, d
-    db   $EC ; Undefined instruction
-    ld   [$E9EC], a
-    rst  $38
+    db   $00, $00, $00, $FF, $00, $00, $00, $FF   ; $54A0
+    db   $E8, $E9, $FF, $00, $E8, $EC, $E8, $FF   ; $54A8
+    db   $E8, $E9, $FF, $00, $E8, $EC, $E8, $FF   ; $54B0
+    db   $E8, $EA, $E9, $EB, $FF, $00, $00, $00   ; $54B8
+    db   $00, $00, $00, $E8, $EA, $E9, $EB, $EC   ; $54C0
+    db   $E8, $FF, $00, $00, $00, $00, $E8, $EA   ; $54C8
+    db   $E9, $EB, $EC, $E8, $EC, $E9, $FF, $00   ; $54D0
+    db   $00, $E8, $EA, $E9, $EB, $EC, $E8, $EC   ; $54D8
+    db   $EA, $EC, $E9, $FF                       ; $54E0
 
 label_54E4::
-    sbc  a, l
-    sbc  a, h
+    db   $9D, $9C                                 ; $54E4
 
 label_54E6::
     db $A, $EA
@@ -1813,6 +1592,8 @@ label_5818::
     call label_5A71
     call label_5C49
     ret
+
+label_5822::
     call func_6A7C
 
 FileSaveFadeOut::
@@ -2359,67 +2140,19 @@ label_5D13::
     ret
 
 label_5D14::
-    sbc  a, b
-    rlc  [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    sbc  a, b
-    db   $EB ; Undefined instruction
-    ld   b, $7E
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    nop
+    db  $98, $CB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db  $98, $EB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db  $00
 
 label_5D29::
-    sbc  a, c
-    dec  hl
-    ld   b, $7E
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    sbc  a, c
-    ld   c, e
-    ld   b, $7E
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    nop
+    db  $99, $2B, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db  $99, $4B, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db  $00
 
 label_5D3E::
-    sbc  a, c
-    adc  a, e
-    ld   b, $7E
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    sbc  a, c
-    xor  e
-    ld   b, $7E
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    ld   a, [hl]
-    nop
+    db  $99, $8B, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db  $99, $AB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
+    db  $00
 
 label_5D53::
     ld   a, [$D600]
@@ -3348,9 +3081,24 @@ OpenDungeonNameDialog::
 include "code/marin_beach.asm"
 
 PeachPictureEntryPoint::
-    ; Actually code for a jump table
-    db $FA, $96, $DB, $C7, 8, $68, $29, $68, $56, $68, $73, $68, $AA, $68, $C0, $68
-    db $25, $58, $E4, $68, 8, $69, $45, $69, $22, $58, $CD, $D6, $44
+    ld a, [wGameplaySubtype]
+    JP_TABLE
+
+    dw label_6808
+    dw label_6829
+    dw label_6856
+    dw label_6873
+    dw label_68AA
+    dw label_68C0
+    dw FileSaveFadeOut
+    dw label_68E4
+    dw label_6908
+    dw label_6945
+    dw label_5822
+
+
+label_6808::
+    call IncrementGameplaySubtypeAndReturn
 
 label_680B::
     ldh  a, [hIsGBC]
@@ -3401,6 +3149,7 @@ label_6849::
 
 label_6855::
     ret
+label_6856::
     ld   e, $21
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
@@ -3417,6 +3166,7 @@ label_6868::
     xor  a
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
+label_6873::
     ld   e, $24
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
@@ -3447,6 +3197,8 @@ label_689E::
     ld   a, $01
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
+
+label_68AA::
     call func_6A7C
     call func_1A39
     ld   a, [$C16B]
@@ -3458,6 +3210,8 @@ label_689E::
 
 label_68BF::
     ret
+
+label_68C0::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   nz, label_68CF
@@ -3482,6 +3236,7 @@ label_68D9::
 
 label_68E3::
     ret
+label_68E4::
     call func_6A7C
     ld   a, [$D210]
     dec  a
@@ -3502,6 +3257,7 @@ label_6903::
     ld   a, e
     ld   [wScreenShakeVertical], a
     ret
+label_6908::
     call func_6A7C
     call label_695B
     ld   a, [$D210]
@@ -3529,6 +3285,7 @@ label_6903::
 
 label_6944::
     ret
+label_6945::
     call func_6A7C
     call label_695B
     ld   hl, $D210

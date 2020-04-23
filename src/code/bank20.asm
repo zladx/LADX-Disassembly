@@ -688,7 +688,7 @@ jr_020_48FC:
     jr   nz, jr_020_4917                          ; $4900: $20 $15
 
     call func_020_4954                            ; $4902: $CD $54 $49
-    call UseRocksFeather                          ; $4905: $CD $CB $14
+    call UseRocsFeather                          ; $4905: $CD $CB $14
     jr   jr_020_4917                              ; $4908: $18 $0D
 
 jr_020_490A:
@@ -1252,7 +1252,7 @@ func_020_4C47::
     ld   [wMagicPowderCount], a                   ; $4C56: $EA $4C $DB
     jr   nz, jr_020_4C6D                          ; $4C59: $20 $12
 
-    ld   hl, wAButtonSlot                         ; $4C5B: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $4C5B: $21 $00 $DB
     ld   a, [hl]                                  ; $4C5E: $7E
     cp   $0C                                      ; $4C5F: $FE $0C
     jr   nz, jr_020_4C65                          ; $4C61: $20 $02
@@ -2510,8 +2510,22 @@ jr_020_5ADE:
     ldh  [hWindowXUnused], a                      ; $5AE9: $E0 $AA
     jp   label_020_5D34                           ; $5AEB: $C3 $34 $5D
 
-Data_020_5AEE::
-    db   $00, $05, $02, $05, $05, $06, $06, $05, $05, $05, $06, $01, $02, $02, $05
+tradingItemPaletteIndexes:
+    db $00  ; TRADING_ITEM_NONE
+    db $05  ; TRADING_ITEM_YOSHI_DOLL
+    db $02  ; TRADING_ITEM_RIBBON
+    db $05  ; TRADING_ITEM_DOG_FOOD
+    db $05  ; TRADING_ITEM_BANANAS
+    db $06  ; TRADING_ITEM_STICK
+    db $06  ; TRADING_ITEM_HONEYCOMB
+    db $05  ; TRADING_ITEM_PINEAPPLE
+    db $05  ; TRADING_ITEM_HIBISCUS
+    db $05  ; TRADING_ITEM_LETTER
+    db $06  ; TRADING_ITEM_BROOM
+    db $01  ; TRADING_ITEM_FISHING_HOOK
+    db $02  ; TRADING_ITEM_NECKLACE
+    db $02  ; TRADING_ITEM_SCALE
+    db $05  ; TRADING_ITEM_MAGNIFIYING_GLASS
 
 InventoryLoad2Handler::
     ldh  a, [hIsGBC]                              ; $5AFD: $F0 $FE
@@ -2521,7 +2535,7 @@ InventoryLoad2Handler::
     ld   b, $00                                   ; $5B02: $06 $00
     ld   a, [wTradeSequenceItem]                  ; $5B04: $FA $0E $DB
     ld   c, a                                     ; $5B07: $4F
-    ld   hl, Data_020_5AEE                        ; $5B08: $21 $EE $5A
+    ld   hl, tradingItemPaletteIndexes           ; $5B08: $21 $EE $5A
     add  hl, bc                                   ; $5B0B: $09
     ld   a, [hl]                                  ; $5B0C: $7E
     ldh  [hScratch0], a                           ; $5B0D: $E0 $D7
@@ -2660,7 +2674,7 @@ func_020_5BB9::
     ld   [$DC90], a                               ; $5BC6: $EA $90 $DC
     push hl                                       ; $5BC9: $E5
     sla  c                                        ; $5BCA: $CB $21
-    ld   hl, Data_020_5C84                        ; $5BCC: $21 $84 $5C
+    ld   hl, InventoryTileMapPositions            ; $5BCC: $21 $84 $5C
     add  hl, bc                                   ; $5BCF: $09
     push hl                                       ; $5BD0: $E5
     pop  de                                       ; $5BD1: $D1
@@ -2676,7 +2690,7 @@ func_020_5BB9::
     ldh  a, [hScratch1]                           ; $5BDC: $F0 $D8
     sla  a                                        ; $5BDE: $CB $27
     ld   c, a                                     ; $5BE0: $4F
-    ld   hl, Data_020_5C14                        ; $5BE1: $21 $14 $5C
+    ld   hl, InventoryItemPaletteIndexes          ; $5BE1: $21 $14 $5C
     add  hl, bc                                   ; $5BE4: $09
     push hl                                       ; $5BE5: $E5
     pop  de                                       ; $5BE6: $D1
@@ -2720,29 +2734,72 @@ jr_020_5C10:
     pop  bc                                       ; $5C12: $C1
     ret                                           ; $5C13: $C9
 
-Data_020_5C14::
-    db   $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $03, $03, $01, $02, $02, $01
-    db   $03, $03, $02, $02, $03, $03, $03, $01, $03, $03, $02, $02
+InventoryItemPaletteIndexes::
+    ; Palettes used by the inventory items. This only affects the
+    ; leftmost column.
+    db  $01, $01 ; (blank)
+    db  $01, $01 ; INVENTORY_SWORD
+    db  $01, $01 ; INVENTORY_BOMBS
+    db  $01, $01 ; INVENTORY_POWER_BRACELET  (note: L2 has special code elsewhere)
+    db  $01, $01 ; INVENTORY_SHIELD
+    db  $03, $03 ; INVENTORY_BOW
+    db  $01, $02 ; INVENTORY_HOOKSHOT
+    db  $02, $01 ; INVENTORY_MAGIC_ROD
+    db  $03, $03 ; INVENTORY_PEGASUS_BOOTS
+    db  $02, $02 ; INVENTORY_OCARINA
+    db  $03, $03 ; INVENTORY_ROCS_FEATHER
+    db  $03, $01 ; INVENTORY_SHOVEL
+    db  $03, $03 ; INVENTORY_MAGIC_POWDER
+    db  $02, $02 ; INVENTORY_BOOMERANG
 
-Data_020_5C30::
-    db   $7F, $7F, $7F
+InventoryItemTiles::
+    ; Tiles used for the inventory items.
+    ; The "L-" is baked in for the sword/shield/bracelet.
+    db $7F, $7F, $7F ; (Blank space)
+    db $7F, $7F, $7F ;
+    db $84, $7F, $7F ; INVENTORY_SWORD
+    db $85, $BA, $7F ; L-
+    db $80, $7F, $7F ; INVENTORY_BOMBS
+    db $81, $7F, $7F ;
+    db $82, $7F, $7F ; INVENTORY_POWER_BRACELET
+    db $83, $BA, $7F ; L-
+    db $86, $7F, $7F ; INVENTORY_SHIELD
+    db $87, $BA, $7F ; L-
+    db $88, $7F, $7F ; INVENTORY_BOW
+    db $89, $7F, $7F ;
+    db $8A, $7F, $7F ; INVENTORY_HOOKSHOT
+    db $8B, $7F, $7F ;
+    db $8C, $7F, $7F ; INVENTORY_MAGIC_ROD
+    db $8D, $7F, $7F ;
+    db $98, $7F, $7F ; INVENTORY_PEGASUS_BOOTS
+    db $99, $7F, $7F ;
+    db $90, $7F, $7F ; INVENTORY_OCARINA
+    db $91, $7F, $7F ;
+    db $92, $7F, $7F ; INVENTORY_ROCS_FEATHER
+    db $93, $7F, $7F ;
+    db $96, $7F, $7F ; INVENTORY_SHOVEL
+    db $97, $7F, $7F ;
+    db $8E, $7F, $7F ; INVENTORY_MAGIC_POWDER
+    db $8F, $7F, $7F ;
+    db $A4, $7F, $7F ; INVENTORY_BOOMERANG
+    db $A5, $7F, $7F ;
 
-Data_020_5C33::
-    db   $7F, $7F, $7F, $84, $7F, $7F, $85, $BA, $7F, $80, $7F, $7F, $81, $7F, $7F, $82
-    db   $7F, $7F, $83, $BA, $7F, $86, $7F, $7F, $87, $BA, $7F, $88, $7F, $7F, $89, $7F
-    db   $7F, $8A, $7F, $7F, $8B, $7F, $7F, $8C, $7F, $7F, $8D, $7F, $7F, $98, $7F, $7F
-    db   $99, $7F, $7F, $90, $7F, $7F, $91, $7F, $7F, $92, $7F, $7F, $93, $7F, $7F, $96
-    db   $7F, $7F, $97, $7F, $7F, $8E, $7F, $7F, $8F, $7F, $7F, $A4, $7F, $7F, $A5, $7F
-    db   $7F
 
-Data_020_5C84::
-    db   $9C, $01, $9C, $06, $9C, $61, $9C, $65, $9C, $C1, $9C, $C5, $9D, $21, $9D, $25
-    db   $9D, $81, $9D, $85, $9D, $E1, $9D, $E5
+InventoryTileMapPositions::
+    ; Where each inventory item is drawn in the subscreen
+    ; (and, for the first one, the status bar)
+    db  $9C, $01,   $9C, $06  ; B[   ] A[   ]
+    ;    -------  |  ------     ------------|---
+    db  $9C, $61,   $9C, $65  ;  [   ] [   ]
+    db  $9C, $C1,   $9C, $C5  ;  [   ] [   ]
+    db  $9D, $21,   $9D, $25  ;  [   ] [   ]
+    db  $9D, $81,   $9D, $85  ;  [   ] [   ]
+    db  $9D, $E1,   $9D, $E5  ;  [   ] [   ]
 
 func_020_5C9C::
     push de                                       ; $5C9C: $D5
     push bc                                       ; $5C9D: $C5
-    ld   hl, wAButtonSlot                         ; $5C9E: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $5C9E: $21 $00 $DB
     add  hl, bc                                   ; $5CA1: $09
     ld   a, [hl]                                  ; $5CA2: $7E
     ldh  [hScratch1], a                           ; $5CA3: $E0 $D8
@@ -2767,7 +2824,7 @@ jr_020_5CB5:
     ld   [wRequests], a                           ; $5CC1: $EA $00 $D6
     push hl                                       ; $5CC4: $E5
     sla  c                                        ; $5CC5: $CB $21
-    ld   hl, Data_020_5C84                        ; $5CC7: $21 $84 $5C
+    ld   hl, InventoryTileMapPositions            ; $5CC7: $21 $84 $5C
     add  hl, bc                                   ; $5CCA: $09
     push hl                                       ; $5CCB: $E5
     pop  de                                       ; $5CCC: $D1
@@ -2783,7 +2840,7 @@ jr_020_5CB5:
     push hl                                       ; $5CD7: $E5
     ldh  a, [hScratch0]                           ; $5CD8: $F0 $D7
     ld   c, a                                     ; $5CDA: $4F
-    ld   hl, Data_020_5C30                        ; $5CDB: $21 $30 $5C
+    ld   hl, InventoryItemTiles                   ; $5CDB: $21 $30 $5C
     add  hl, bc                                   ; $5CDE: $09
     push hl                                       ; $5CDF: $E5
     pop  de                                       ; $5CE0: $D1
@@ -2801,7 +2858,7 @@ jr_020_5CB5:
     push bc                                       ; $5CEC: $C5
     push hl                                       ; $5CED: $E5
     sla  c                                        ; $5CEE: $CB $21
-    ld   hl, Data_020_5C84                        ; $5CF0: $21 $84 $5C
+    ld   hl, InventoryTileMapPositions            ; $5CF0: $21 $84 $5C
     add  hl, bc                                   ; $5CF3: $09
     push hl                                       ; $5CF4: $E5
     pop  de                                       ; $5CF5: $D1
@@ -2824,7 +2881,7 @@ jr_020_5CB5:
     push hl                                       ; $5D09: $E5
     ldh  a, [hScratch0]                           ; $5D0A: $F0 $D7
     ld   c, a                                     ; $5D0C: $4F
-    ld   hl, Data_020_5C33                        ; $5D0D: $21 $33 $5C
+    ld   hl, InventoryItemTiles + 3               ; $5D0D: $21 $33 $5C
     add  hl, bc                                   ; $5D10: $09
     push hl                                       ; $5D11: $E5
     pop  de                                       ; $5D12: $D1
@@ -2875,48 +2932,66 @@ InventoryLoad4Handler::
     call func_020_6683                            ; $5D5D: $CD $83 $66
     ret                                           ; $5D60: $C9
 
-Data_020_5D61::
-    db   $FF, $57, $C4, $26, $21, $15, $00, $00, $FF, $57, $31, $52, $C5, $28, $00, $00
-    db   $FF, $57, $7F, $2C, $0E, $14, $00, $00, $FF, $57, $D9, $11, $CE, $10, $00, $00
-    db   $FF, $57, $AE, $7E, $00, $7C, $00, $00, $FF, $57, $FF, $7F, $42, $06, $00, $00
-    db   $FF, $57, $BB, $12, $51, $01, $00, $00, $FF, $57, $02, $2B, $00, $0A, $00, $00
-    db   $FF, $57, $00, $00, $A2, $22, $FF, $4E, $00, $7C, $00, $00, $FF, $05, $FF, $4E
-    db   $00, $7C, $00, $00, $03, $7E, $FF, $4E, $00, $7C, $00, $00, $31, $52, $FF, $7F
-    db   $00, $7C, $DF, $1A, $7D, $18, $00, $00, $00, $7C, $00, $00, $A2, $22, $FF, $7F
-    db   $00, $7C, $00, $00, $1F, $00, $FF, $7F, $00, $7C, $00, $00, $00, $7C, $FF, $7F
+InventoryPalettes::
+    ; 8 + 8 palettes used for the inventory subscreen
+    ;       0      1      2      3
+    dw   $57FF, $26C4, $1521, $0000
+    dw   $57FF, $5231, $28C5, $0000
+    dw   $57FF, $2C7F, $140E, $0000
+    dw   $57FF, $11D9, $10CE, $0000
+    dw   $57FF, $7EAE, $7C00, $0000
+    dw   $57FF, $7FFF, $0642, $0000
+    dw   $57FF, $12BB, $0151, $0000
+    dw   $57FF, $2B02, $0A00, $0000
+    dw   $57FF, $0000, $22A2, $4EFF
+    dw   $7C00, $0000, $05FF, $4EFF
+    dw   $7C00, $0000, $7E03, $4EFF
+    dw   $7C00, $0000, $5231, $7FFF
+    dw   $7C00, $1ADF, $187D, $0000
+    dw   $7C00, $0000, $22A2, $7FFF
+    dw   $7C00, $0000, $001F, $7FFF
+    dw   $7C00, $0000, $7C00, $7FFF
 
-Data_020_5DE1::
-    db   $FF, $7F, $42, $06
+InventoryTradingItemPalettes::
+    ; Replaces the second and third color in the fifth BG palette line
+    ; Used for trading sequence items
+    ;       2      3
+    dw   $7FFF, $0642
+    dw   $0FBE, $0213
+    dw   $0F7F, $09E0
+    dw   $32DF, $187D
+    dw   $7FFF, $083D
+    dw   $7EAE, $7C00
+    dw   $7FFF, $5231
 
-Data_020_5DE5::
-    db   $BE, $0F, $13, $02
+InventoryTradingItemPaletteTable::
+    ; Pointers to InventoryTradingItemPalettes
+    ; POI: This seems really inefficent compared to just adding the index... but w/e
+    dw   InventoryTradingItemPalettes
+    dw   InventoryTradingItemPalettes + $04
+    dw   InventoryTradingItemPalettes + $08
+    dw   InventoryTradingItemPalettes + $0C
+    dw   InventoryTradingItemPalettes + $10
+    dw   InventoryTradingItemPalettes + $14
+    dw   InventoryTradingItemPalettes + $18
 
-Data_020_5DE9::
-    db   $7F, $0F, $E0, $09
-
-Data_020_5DED::
-    db   $DF, $32, $7D, $18
-
-Data_020_5DF1::
-    db   $FF, $7F, $3D, $08
-
-Data_020_5DF5::
-    db   $AE, $7E, $00, $7C
-
-Data_020_5DF9::
-    db   $FF, $7F, $31, $52
-
-Data_020_5DFD::
-    dw   Data_020_5DE1
-    dw   Data_020_5DE5
-    dw   Data_020_5DE9
-    dw   Data_020_5DED
-    dw   Data_020_5DF1
-    dw   Data_020_5DF5
-    dw   Data_020_5DF9
-
-Data_020_5E0B::
-    db   $00, $01, $00, $07, $02, $00, $00, $03, $04, $05, $00, $00, $00, $00, $06
+InventoryTradingItemPaletteIndex::
+    ; Which trading item palette should be used, per trading item
+    db  $00  ; TRADING_ITEM_NONE
+    db  $01  ; TRADING_ITEM_YOSHI_DOLL
+    db  $00  ; TRADING_ITEM_RIBBON
+    db  $07  ; TRADING_ITEM_DOG_FOOD
+    db  $02  ; TRADING_ITEM_BANANAS
+    db  $00  ; TRADING_ITEM_STICK
+    db  $00  ; TRADING_ITEM_HONEYCOMB
+    db  $03  ; TRADING_ITEM_PINEAPPLE
+    db  $04  ; TRADING_ITEM_HIBISCUS
+    db  $05  ; TRADING_ITEM_LETTER
+    db  $00  ; TRADING_ITEM_BROOM
+    db  $00  ; TRADING_ITEM_FISHING_HOOK
+    db  $00  ; TRADING_ITEM_NECKLACE
+    db  $00  ; TRADING_ITEM_SCALE
+    db  $06  ; TRADING_ITEM_MAGNIFIYING_GLASS
 
 InventoryLoad5Handler::
     xor  a                                        ; $5E1A: $AF
@@ -2927,7 +3002,7 @@ InventoryLoad5Handler::
     and  a                                        ; $5E25: $A7
     jr   z, jr_020_5E6D                           ; $5E26: $28 $45
 
-    ld   bc, Data_020_5D61                        ; $5E28: $01 $61 $5D
+    ld   bc, InventoryPalettes                        ; $5E28: $01 $61 $5D
     ld   hl, $DC10                                ; $5E2B: $21 $10 $DC
     di                                            ; $5E2E: $F3
     ld   a, $02                                   ; $5E2F: $3E $02
@@ -2944,7 +3019,7 @@ InventoryLoad5Handler::
     xor  a                                        ; $5E3B: $AF
     ldh  [rSVBK], a                               ; $5E3C: $E0 $70
     ei                                            ; $5E3E: $FB
-    ld   hl, Data_020_5E0B                        ; $5E3F: $21 $0B $5E
+    ld   hl, InventoryTradingItemPaletteIndex                        ; $5E3F: $21 $0B $5E
     ld   a, [wTradeSequenceItem]                  ; $5E42: $FA $0E $DB
     ld   e, a                                     ; $5E45: $5F
     ld   d, $00                                   ; $5E46: $16 $00
@@ -2955,7 +3030,7 @@ InventoryLoad5Handler::
 
     sla  a                                        ; $5E4D: $CB $27
     ld   e, a                                     ; $5E4F: $5F
-    ld   hl, Data_020_5DFD - 2                    ; $5E50: $21 $FB $5D
+    ld   hl, InventoryTradingItemPaletteTable - 2                    ; $5E50: $21 $FB $5D
     add  hl, de                                   ; $5E53: $19
     ld   a, [hl+]                                 ; $5E54: $2A
     ld   h, [hl]                                  ; $5E55: $66
@@ -2985,11 +3060,24 @@ jr_020_5E6D:
     call func_020_6683                            ; $5E71: $CD $83 $66
     ret                                           ; $5E74: $C9
 
-Data_020_5E75::
-    db   $80, $26, $00, $11, $20, $3A, $E0, $18, $A0, $51, $C0, $20, $08, $7D, $84, $34
-    db   $AD, $7C, $46, $30, $50, $5C, $27, $28, $12, $40, $08, $1C, $15, $30, $09, $14
-    db   $17, $14, $09, $00, $D7, $04, $6A, $04, $37, $05, $8A, $04, $97, $09, $AA, $04
-    db   $F5, $09, $C9, $04, $10, $0A, $E7, $04, $4B, $06, $05, $05, $A0, $02, $20, $01
+InventoryInstrumentCyclingColors::
+    ; Palette colors for the color-cycling the instruments use on the subscreen.
+    dw  $2680, $1100
+    dw  $3A20, $18E0
+    dw  $51A0, $20C0
+    dw  $7D08, $3484
+    dw  $7CAD, $3046
+    dw  $5C50, $2827
+    dw  $4012, $1C08
+    dw  $3015, $1409
+    dw  $1417, $0009
+    dw  $04D7, $046A
+    dw  $0537, $048A
+    dw  $0997, $04AA
+    dw  $09F5, $04C9
+    dw  $0A10, $04E7
+    dw  $064B, $0505
+    dw  $02A0, $0120
 
 func_020_5EB5::
     ldh  a, [hIsGBC]                              ; $5EB5: $F0 $FE
@@ -3014,7 +3102,7 @@ func_020_5EB5::
 
 jr_020_5ED6:
     ld   b, $00                                   ; $5ED6: $06 $00
-    ld   hl, Data_020_5E75                        ; $5ED8: $21 $75 $5E
+    ld   hl, InventoryInstrumentCyclingColors                        ; $5ED8: $21 $75 $5E
     add  hl, bc                                   ; $5EDB: $09
     ld   bc, $DC4A                                ; $5EDC: $01 $4A $DC
     ld   e, $04                                   ; $5EDF: $1E $04
@@ -3065,7 +3153,7 @@ func_020_5F06::
     jr   nz, jr_020_5F38                          ; $5F19: $20 $1D
 
     ldh  a, [hJoypadState]                        ; $5F1B: $F0 $CC
-    and  $03                                      ; $5F1D: $E6 $03
+    and  J_LEFT | J_RIGHT                         ; $5F1D: $E6 $03
     ld   e, a                                     ; $5F1F: $5F
     ld   d, $00                                   ; $5F20: $16 $00
     ld   hl, Data_020_5F00                        ; $5F22: $21 $00 $5F
@@ -3088,7 +3176,7 @@ jr_020_5F38:
     ldh  a, [hJoypadState]                        ; $5F38: $F0 $CC
     srl  a                                        ; $5F3A: $CB $3F
     srl  a                                        ; $5F3C: $CB $3F
-    and  $03                                      ; $5F3E: $E6 $03
+    and  (J_UP | J_DOWN) >> 2                     ; ...probably
     ld   e, a                                     ; $5F40: $5F
     ld   d, $00                                   ; $5F41: $16 $00
     ld   hl, Data_020_5F03                        ; $5F43: $21 $03 $5F
@@ -3109,7 +3197,7 @@ jr_020_5F56:
 
 jr_020_5F59:
     ldh  a, [hPressedButtonsMask]                 ; $5F59: $F0 $CB
-    and  $0F                                      ; $5F5B: $E6 $0F
+    and  J_UP | J_DOWN | J_LEFT | J_RIGHT         ; $5F5B: $E6 $0F
     jr   z, jr_020_5F69                           ; $5F5D: $28 $0A
 
     ld   a, [$C1B5]                               ; $5F5F: $FA $B5 $C1
@@ -3130,7 +3218,7 @@ jr_020_5F69:
     jr   nz, jr_020_5F85                          ; $5F76: $20 $0D
 
     ldh  a, [hJoypadState]                        ; $5F78: $F0 $CC
-    and  $80                                      ; $5F7A: $E6 $80
+    and  J_START                                  ; $5F7A: $E6 $80
     jr   z, jr_020_5F85                           ; $5F7C: $28 $07
 
     ld   a, $01                                   ; $5F7E: $3E $01
@@ -3183,10 +3271,10 @@ jr_020_5FC1:
     jp   nz, jr_020_604A                          ; $5FC8: $C2 $4A $60
 
     ldh  a, [hJoypadState]                        ; $5FCB: $F0 $CC
-    and  $10                                      ; $5FCD: $E6 $10
+    and  J_A                                      ; $5FCD: $E6 $10
     jr   z, jr_020_5FED                           ; $5FCF: $28 $1C
 
-    ld   a, [wBButtonSlot]                        ; $5FD1: $FA $01 $DB
+    ld   a, [wAButtonSlot]                        ; $5FD1: $FA $01 $DB
     push af                                       ; $5FD4: $F5
     ld   hl, wInventoryItem1                      ; $5FD5: $21 $02 $DB
     ld   a, [$DBA3]                               ; $5FD8: $FA $A3 $DB
@@ -3196,7 +3284,7 @@ label_020_5FDB:
     ld   b, $00                                   ; $5FDC: $06 $00
     add  hl, bc                                   ; $5FDE: $09
     ld   a, [hl]                                  ; $5FDF: $7E
-    ld   [wBButtonSlot], a                        ; $5FE0: $EA $01 $DB
+    ld   [wAButtonSlot], a                        ; $5FE0: $EA $01 $DB
     pop  af                                       ; $5FE3: $F1
     ld   [hl], a                                  ; $5FE4: $77
     ld   c, $01                                   ; $5FE5: $0E $01
@@ -3206,10 +3294,10 @@ label_020_5FDB:
 
 jr_020_5FED:
     ldh  a, [hJoypadState]                        ; $5FED: $F0 $CC
-    and  $20                                      ; $5FEF: $E6 $20
+    and  J_B                                      ; $5FEF: $E6 $20
     jr   z, jr_020_604A                           ; $5FF1: $28 $57
 
-    ld   a, [wAButtonSlot]                        ; $5FF3: $FA $00 $DB
+    ld   a, [wBButtonSlot]                        ; $5FF3: $FA $00 $DB
     push af                                       ; $5FF6: $F5
     ld   hl, wInventoryItem1                      ; $5FF7: $21 $02 $DB
     ld   a, [$DBA3]                               ; $5FFA: $FA $A3 $DB
@@ -3217,7 +3305,7 @@ jr_020_5FED:
     ld   b, $00                                   ; $5FFE: $06 $00
     add  hl, bc                                   ; $6000: $09
     ld   a, [hl]                                  ; $6001: $7E
-    ld   [wAButtonSlot], a                        ; $6002: $EA $00 $DB
+    ld   [wBButtonSlot], a                        ; $6002: $EA $00 $DB
     pop  af                                       ; $6005: $F1
     ld   [hl], a                                  ; $6006: $77
     ld   c, $00                                   ; $6007: $0E $00
@@ -3268,6 +3356,8 @@ jr_020_604A:
     ret                                           ; $604A: $C9
 
 Data_020_604B::
+    ; @TODO This is a big block of data for the ocarina song selection popup
+    ; involving how it animates and draws on the subscreen
     db   $F8, $F0, $22, $01, $F8, $F8, $22, $21, $F8, $00, $24, $02, $F8, $08, $24, $22
     db   $F8, $10, $26, $00, $F8, $18, $26, $20, $08, $F0, $20, $00, $08, $F8, $20, $00
     db   $08, $00, $20, $00, $08, $08, $20, $00, $08, $10, $20, $00, $08, $18, $20, $00
@@ -3700,7 +3790,7 @@ func_020_635C::
     ld   d, $0C                                   ; $635C: $16 $0C
 
 jr_020_635E:
-    ld   hl, wAButtonSlot                         ; $635E: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; $635E: $21 $00 $DB
     ld   e, $00                                   ; $6361: $1E $00
 
 jr_020_6363:
@@ -3798,8 +3888,10 @@ InventoryVisibleHandler::
     jr   jr_020_6436                              ; $63F3: $18 $41
 
 jr_020_63F5:
+    ; POI: Debug tool 3 check to enable free movement mode on the subscreen
+    ; and resetting the photo album on pushing Select
     ldh  a, [hJoypadState]                        ; $63F5: $F0 $CC
-    and  $40                                      ; $63F7: $E6 $40
+    and  J_SELECT                                 ; $63F7: $E6 $40
     jr   z, jr_020_641E                           ; $63F9: $28 $23
 
     ld   a, $09                                   ; $63FB: $3E $09
@@ -3830,7 +3922,7 @@ jr_020_641E:
     jr   nz, jr_020_6445                          ; $6429: $20 $1A
 
     ldh  a, [hJoypadState]                        ; $642B: $F0 $CC
-    and  $80                                      ; $642D: $E6 $80
+    and  J_START                                  ; $642D: $E6 $80
     jr   z, jr_020_6445                           ; $642F: $28 $14
 
     ld   a, $0C                                   ; $6431: $3E $0C
@@ -4077,7 +4169,7 @@ InventoryFadeOutHandler::
     jr   nz, jr_020_6628                          ; $6610: $20 $16
 
     ldh  a, [hMapRoom]                            ; $6612: $F0 $F6
-    cp   $64                                      ; $6614: $FE $64
+    cp   $64                                      ; @TODO ?? Map screen where you take the ghost after the house
     jr   nz, jr_020_6626                          ; $6616: $20 $0E
 
     ld   hl, $C193                                ; $6618: $21 $93 $C1
@@ -4142,7 +4234,7 @@ jr_020_6659:
     and  $7F                                      ; $666E: $E6 $7F
     ld   [rLCDC], a                               ; $6670: $E0 $40
     ldh  a, [hMapId]                              ; $6672: $F0 $F7
-    cp   $FF                                      ; $6674: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $6674: $FE $FF
     jr   nz, jr_020_667C                          ; $6676: $20 $04
 
     ld   a, $01                                   ; $6678: $3E $01
@@ -5392,6 +5484,7 @@ data_020_763B::
 
 ; These look like pointers, but actually point to random locations in
 ; the ROM, to make the water geyser splashing effect.
+; @TODO Actually seems to be palette colors
 Data_020_783F::
     dw   $7845
     dw   $787D
@@ -5481,7 +5574,7 @@ Data_020_783F::
     dw   $660F
     dw   $6ED6
 
-; Copy semi-random data to $DC10
+; Copy palette data to $DC10
 ; (Called during the Credits water geyser sequence; to animate the water?)
 func_020_78ED::
     ld   a, [wCreditsScratch0]                    ; $78ED: $FA $00 $D0

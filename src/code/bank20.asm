@@ -3153,7 +3153,7 @@ func_020_5F06::
     jr   nz, jr_020_5F38                          ; $5F19: $20 $1D
 
     ldh  a, [hJoypadState]                        ; $5F1B: $F0 $CC
-    and  $03                                      ; $5F1D: $E6 $03
+    and  J_LEFT | J_RIGHT                         ; $5F1D: $E6 $03
     ld   e, a                                     ; $5F1F: $5F
     ld   d, $00                                   ; $5F20: $16 $00
     ld   hl, Data_020_5F00                        ; $5F22: $21 $00 $5F
@@ -3176,7 +3176,7 @@ jr_020_5F38:
     ldh  a, [hJoypadState]                        ; $5F38: $F0 $CC
     srl  a                                        ; $5F3A: $CB $3F
     srl  a                                        ; $5F3C: $CB $3F
-    and  $03                                      ; $5F3E: $E6 $03
+    and  (J_UP | J_DOWN) >> 2                     ; ...probably
     ld   e, a                                     ; $5F40: $5F
     ld   d, $00                                   ; $5F41: $16 $00
     ld   hl, Data_020_5F03                        ; $5F43: $21 $03 $5F
@@ -3197,7 +3197,7 @@ jr_020_5F56:
 
 jr_020_5F59:
     ldh  a, [hPressedButtonsMask]                 ; $5F59: $F0 $CB
-    and  $0F                                      ; $5F5B: $E6 $0F
+    and  J_UP | J_DOWN | J_LEFT | J_RIGHT         ; $5F5B: $E6 $0F
     jr   z, jr_020_5F69                           ; $5F5D: $28 $0A
 
     ld   a, [$C1B5]                               ; $5F5F: $FA $B5 $C1
@@ -3218,7 +3218,7 @@ jr_020_5F69:
     jr   nz, jr_020_5F85                          ; $5F76: $20 $0D
 
     ldh  a, [hJoypadState]                        ; $5F78: $F0 $CC
-    and  $80                                      ; $5F7A: $E6 $80
+    and  J_START                                  ; $5F7A: $E6 $80
     jr   z, jr_020_5F85                           ; $5F7C: $28 $07
 
     ld   a, $01                                   ; $5F7E: $3E $01
@@ -3271,7 +3271,7 @@ jr_020_5FC1:
     jp   nz, jr_020_604A                          ; $5FC8: $C2 $4A $60
 
     ldh  a, [hJoypadState]                        ; $5FCB: $F0 $CC
-    and  $10                                      ; $5FCD: $E6 $10
+    and  J_A                                      ; $5FCD: $E6 $10
     jr   z, jr_020_5FED                           ; $5FCF: $28 $1C
 
     ld   a, [wBButtonSlot]                        ; $5FD1: $FA $01 $DB
@@ -3294,7 +3294,7 @@ label_020_5FDB:
 
 jr_020_5FED:
     ldh  a, [hJoypadState]                        ; $5FED: $F0 $CC
-    and  $20                                      ; $5FEF: $E6 $20
+    and  J_B                                      ; $5FEF: $E6 $20
     jr   z, jr_020_604A                           ; $5FF1: $28 $57
 
     ld   a, [wAButtonSlot]                        ; $5FF3: $FA $00 $DB

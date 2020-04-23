@@ -12,10 +12,15 @@ MD5 - 07C211479386825042EFB4AD31BB525F
 
 ## How to contribute
 
-- Read the [disassembling How-Tos](https://github.com/zladx/LADX-Disassembly/wiki) in the Wiki
-- Join the discussion on [Discord](https://discord.gg/sSHrwdB)
-- Fork this repository
-- Submit a pull request
+1. Fork this repository;
+2. Find a little piece of code to improve:
+  - Maybe a typo, a missing constant, an obvious label that could be renamed;
+  - Or start following a thread (Link's animations? The island fade-out special effect? Trading items constants?) and document some details along your read;
+  - You can also look at the [known improvements](https://github.com/zladx/LADX-Disassembly/issues) – especially [good first issues](https://github.com/zladx/LADX-Disassembly/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22);
+3. Submit a pull request.
+
+Having questions, or do you need help? Join the discussion on [Discord](https://discord.gg/sSHrwdB).
+You can also read [disassembling How-Tos](https://github.com/zladx/LADX-Disassembly/wiki) in the Wiki, for some infos about the tools and disassembling processes.
 
 ## Resources
 
@@ -26,7 +31,6 @@ MD5 - 07C211479386825042EFB4AD31BB525F
 - [Zelda III Disassembly](http://www.zeldix.net/t143-disassembly-zelda-docs) ([archive](https://web.archive.org/web/20180315181518/http://www.zeldix.net/t143-disassembly-zelda-docs)): good source on Zelda SNES source code, which has many similarities to LADX
 - [Disassembling Link's Awakening](https://kemenaran.winosx.com/posts/category-disassembling-links-awakening/): a series of blog posts and progress reports
 - Discord: [LADX](https://discord.gg/sSHrwdB)
-
 
 ## Contributors
 

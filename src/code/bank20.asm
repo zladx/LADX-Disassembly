@@ -2320,7 +2320,7 @@ jr_020_592D:
     ei                                            ; $593F: $FB
 
 jr_020_5940:
-    call func_020_6683                            ; $5940: $CD $83 $66
+    call IncrementGameplaySubtype_20              ; $5940: $CD $83 $66
 
 InventoryMapFadeOutHandler::
     call func_1A22                                ; $5943: $CD $22 $1A
@@ -2340,7 +2340,7 @@ InventoryMapFadeOutHandler::
     ld   [$DE07], a                               ; $595D: $EA $07 $DE
     ld   [$DE08], a                               ; $5960: $EA $08 $DE
     ld   [$DE09], a                               ; $5963: $EA $09 $DE
-    call func_020_6683                            ; $5966: $CD $83 $66
+    call IncrementGameplaySubtype_20              ; $5966: $CD $83 $66
 
 .return
     ; Returns to 0346 (Render Palettes)
@@ -2662,15 +2662,15 @@ jr_020_5B3D:
     ldh  [hWindowYUnused], a                      ; $5B3F: $E0 $A9
     ld   a, $30                                   ; $5B41: $3E $30
     ldh  [hWindowXUnused], a                      ; $5B43: $E0 $AA
-    call func_020_6683                            ; $5B45: $CD $83 $66
+    call IncrementGameplaySubtype_20              ; $5B45: $CD $83 $66
     ret                                           ; $5B48: $C9
 
-func_020_5B49::
+AdjustInventoryTilesForLevelsAndCounts::
     ldh  a, [hScratch1]                           ; $5B49: $F0 $D8
-    cp   $09                                      ; $5B4B: $FE $09
+    cp   INVENTORY_OCARINA                        ; $5B4B: $FE $09
     jr   z, jr_020_5B8B                           ; $5B4D: $28 $3C
 
-    cp   $0C                                      ; $5B4F: $FE $0C
+    cp   INVENTORY_MAGIC_POWDER                   ; $5B4F: $FE $0C
     jr   z, jr_020_5B80                           ; $5B51: $28 $2D
 
     dec  a                                        ; $5B53: $3D
@@ -2762,6 +2762,7 @@ func_020_5BA8::
     ld   [hl+], a                                 ; $5BB7: $22
     ret                                           ; $5BB8: $C9
 
+; Configure request for loading inventory plette
 func_020_5BB9::
     push bc                                       ; $5BB9: $C5
     ld   a, [$DC90]                               ; $5BBA: $FA $90 $DC
@@ -2914,36 +2915,52 @@ func_020_5C9C::
     call func_020_5BB9                            ; $5CB2: $CD $B9 $5B
 
 jr_020_5CB5:
+    ; de = [wRequests]
     ld   a, [wRequests]                           ; $5CB5: $FA $00 $D6
     ld   e, a                                     ; $5CB8: $5F
     ld   d, $00                                   ; $5CB9: $16 $00
+
+    ; hl = request start address
     ld   hl, wRequestDestinationHigh              ; $5CBB: $21 $01 $D6
     add  hl, de                                   ; $5CBE: $19
+
+    ; Increment the request start by 0C
     add  $0C                                      ; $5CBF: $C6 $0C
     ld   [wRequests], a                           ; $5CC1: $EA $00 $D6
     push hl                                       ; $5CC4: $E5
+
+    ; de = InventoryTileMapPositions + c * 2
     sla  c                                        ; $5CC5: $CB $21
     ld   hl, InventoryTileMapPositions            ; $5CC7: $21 $84 $5C
     add  hl, bc                                   ; $5CCA: $09
     push hl                                       ; $5CCB: $E5
     pop  de                                       ; $5CCC: $D1
     pop  hl                                       ; $5CCD: $E1
+
+    ; Copy request destination (2 bytes)
     ld   a, [de]                                  ; $5CCE: $1A
     inc  de                                       ; $5CCF: $13
     ld   [hl+], a                                 ; $5CD0: $22
     ld   a, [de]                                  ; $5CD1: $1A
     inc  de                                       ; $5CD2: $13
     ld   [hl+], a                                 ; $5CD3: $22
+
+    ; Copy request length
     ld   a, $02                                   ; $5CD4: $3E $02
     ld   [hl+], a                                 ; $5CD6: $22
+
     push hl                                       ; $5CD7: $E5
     ldh  a, [hScratch0]                           ; $5CD8: $F0 $D7
     ld   c, a                                     ; $5CDA: $4F
+
+    ; de = InventoryItemTiles + [hScratch0]
     ld   hl, InventoryItemTiles                   ; $5CDB: $21 $30 $5C
     add  hl, bc                                   ; $5CDE: $09
     push hl                                       ; $5CDF: $E5
     pop  de                                       ; $5CE0: $D1
     pop  hl                                       ; $5CE1: $E1
+
+    ; Append 3 data bytes to the request
     ld   a, [de]                                  ; $5CE2: $1A
     inc  de                                       ; $5CE3: $13
     ld   [hl+], a                                 ; $5CE4: $22
@@ -2953,10 +2970,13 @@ jr_020_5CB5:
     ld   a, [de]                                  ; $5CE8: $1A
     inc  de                                       ; $5CE9: $13
     ld   [hl+], a                                 ; $5CEA: $22
+
+    ; hl = bc
     pop  bc                                       ; $5CEB: $C1
     push bc                                       ; $5CEC: $C5
     push hl                                       ; $5CED: $E5
     sla  c                                        ; $5CEE: $CB $21
+
     ld   hl, InventoryTileMapPositions            ; $5CF0: $21 $84 $5C
     add  hl, bc                                   ; $5CF3: $09
     push hl                                       ; $5CF4: $E5
@@ -2988,7 +3008,9 @@ jr_020_5CB5:
     ld   a, [de]                                  ; $5D14: $1A
     inc  de                                       ; $5D15: $13
     ld   [hl+], a                                 ; $5D16: $22
-    call func_020_5B49                            ; $5D17: $CD $49 $5B
+
+    call AdjustInventoryTilesForLevelsAndCounts                            ; $5D17: $CD $49 $5B
+
     xor  a                                        ; $5D1A: $AF
     ld   [hl], a                                  ; $5D1B: $77
     pop  bc                                       ; $5D1C: $C1
@@ -3010,7 +3032,7 @@ InventoryLoad3Handler::
     ld   [$C154], a                               ; $5D31: $EA $54 $C1
 
 label_020_5D34:
-    call func_020_6683                            ; $5D34: $CD $83 $66
+    call IncrementGameplaySubtype_20              ; $5D34: $CD $83 $66
     call LCDOff                                   ; $5D37: $CD $CF $28
     ld   a, $20                                   ; $5D3A: $3E $20
     call func_AB5                                 ; $5D3C: $CD $B5 $0A
@@ -3028,7 +3050,7 @@ InventoryLoad4Handler::
     call LoadColorDungeonTiles                    ; $5D55: $CD $D1 $3F
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
     ldh  [rLCDC], a                               ; $5D5B: $E0 $40
-    call func_020_6683                            ; $5D5D: $CD $83 $66
+    call IncrementGameplaySubtype_20              ; $5D5D: $CD $83 $66
     ret                                           ; $5D60: $C9
 
 InventoryPalettes::
@@ -3156,7 +3178,7 @@ jr_020_5E61:
 jr_020_5E6D:
     xor  a                                        ; $5E6D: $AF
     ld   [wTransitionSequenceCounter], a          ; $5E6E: $EA $6B $C1
-    call func_020_6683                            ; $5E71: $CD $83 $66
+    call IncrementGameplaySubtype_20              ; $5E71: $CD $83 $66
     ret                                           ; $5E74: $C9
 
 InventoryInstrumentCyclingColors::
@@ -3228,7 +3250,7 @@ InventoryFadeInHandler::
     ld   a, [wTransitionSequenceCounter]          ; $5EF5: $FA $6B $C1
     cp   $04                                      ; $5EF8: $FE $04
     jr   nz, .jr_020_5EFF                         ; $5EFA: $20 $03
-    call func_020_6683                            ; $5EFC: $CD $83 $66
+    call IncrementGameplaySubtype_20              ; $5EFC: $CD $83 $66
 .jr_020_5EFF
 
     ret                                           ; $5EFF: $C9
@@ -4175,13 +4197,13 @@ jr_020_6553:
     ld   a, [wPhotos2]                            ; $6558: $FA $0D $DC
     and  $0F                                      ; $655B: $E6 $0F
 
-jr_020_655D:
+.loop
     bit  0, a                                     ; $655D: $CB $47
-    jr   z, jr_020_6562                           ; $655F: $28 $01
+    jr   z, .jr_020_6562                          ; $655F: $28 $01
 
     inc  e                                        ; $6561: $1C
 
-jr_020_6562:
+.jr_020_6562:
     srl  a                                        ; $6562: $CB $3F
     and  a                                        ; $6564: $A7
 
@@ -4220,7 +4242,7 @@ jr_020_6596:
     cp   $78                                      ; $659B: $FE $78
     jr   nc, jr_020_65A4                          ; $659D: $30 $05
 
-    call func_020_6683                            ; $659F: $CD $83 $66
+    call IncrementGameplaySubtype_20              ; $659F: $CD $83 $66
     ld   a, $78                                   ; $65A2: $3E $78
 
 jr_020_65A4:
@@ -4236,7 +4258,7 @@ InventoryStatusInHandler::
     and  $40                                      ; $65B0: $E6 $40
     jr   nz, jr_020_65B7                          ; $65B2: $20 $03
 
-    call func_020_6683                            ; $65B4: $CD $83 $66
+    call IncrementGameplaySubtype_20              ; $65B4: $CD $83 $66
 
 jr_020_65B7:
     ret                                           ; $65B7: $C9
@@ -4368,7 +4390,7 @@ label_020_6682:
 jr_020_6682:
     ret                                           ; $6682: $C9
 
-func_020_6683::
+IncrementGameplaySubtype_20::
     ld   hl, wGameplaySubtype                     ; $6683: $21 $96 $DB
     inc  [hl]                                     ; $6686: $34
     ret                                           ; $6687: $C9
@@ -6110,3 +6132,4 @@ LoadTileset23::
     ld   h, BANK(@)                               ; $7E02: $26 $20
     call Copy100BytesFromBankAtA                  ; $7E04: $CD $13 $0A
     ret                                           ; $7E07: $C9
+

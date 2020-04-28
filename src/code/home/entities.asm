@@ -990,8 +990,8 @@ label_3E5A::
     call label_5C9C
     jp   ReloadSavedBank
 
-label_3E6B::
-    callhl func_003_6472
+GiveInventoryItem_trampoline::                ; @TODO Give player item in reg d
+    callhl GiveInventoryItem
     jp   ReloadSavedBank
 
 func_006_783C_trampoline::

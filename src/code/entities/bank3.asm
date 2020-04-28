@@ -1763,7 +1763,7 @@ jr_003_50EF:
     ld   hl, Data_003_5057                        ; $511B: $21 $57 $50
     add  hl, de                                   ; $511E: $19
     ld   d, [hl]                                  ; $511F: $56
-    call func_003_6472                            ; $5120: $CD $72 $64
+    call GiveInventoryItem                            ; $5120: $CD $72 $64
     jr   func_003_512A                              ; $5123: $18 $05
 
 jr_003_5125:
@@ -3351,7 +3351,7 @@ SwordState3Handler::
 
     ld   [wC167], a                               ; $5C24: $EA $67 $C1
     ld   d, $01                                   ; $5C27: $16 $01
-    call func_003_6472                            ; $5C29: $CD $72 $64
+    call GiveInventoryItem                            ; $5C29: $CD $72 $64
     ld   a, $01                                   ; $5C2C: $3E $01
     ld   [wSwordLevel], a                         ; $5C2E: $EA $4E $DB
     call func_003_512A                            ; $5C31: $CD $2A $51
@@ -3395,7 +3395,7 @@ jr_003_5C67:
     jr   nz, jr_003_5C75                          ; $5C68: $20 $0B
 
     ld   d, $06                                   ; $5C6A: $16 $06
-    call func_003_6472                            ; $5C6C: $CD $72 $64
+    call GiveInventoryItem                            ; $5C6C: $CD $72 $64
     call func_003_512A                            ; $5C6F: $CD $2A $51
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
@@ -3562,7 +3562,7 @@ jr_003_5D6C:
     ld   a, $0A                                   ; $5D6F: $3E $0A
     ldh  [hFFA5], a                               ; $5D71: $E0 $A5
     ld   d, $0C                                   ; $5D73: $16 $0C
-    call func_003_6472                            ; $5D75: $CD $72 $64
+    call GiveInventoryItem                            ; $5D75: $CD $72 $64
     ld   a, $01                                   ; $5D78: $3E $01
     ld   [wHasToadstool], a                       ; $5D7A: $EA $4B $DB
     jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F
@@ -4494,7 +4494,7 @@ PickDroppableMagicPowder::
     ld   a, $0B                                   ; $6350: $3E $0B
     ldh  [hFFA5], a                               ; $6352: $E0 $A5
     ld   d, $0C                                   ; $6354: $16 $0C
-    call func_003_6472                            ; $6356: $CD $72 $64
+    call GiveInventoryItem                            ; $6356: $CD $72 $64
     ld   hl, wMaxMagicPowder                      ; $6359: $21 $76 $DB
     ld   de, wMagicPowderCount                    ; $635C: $11 $4C $DB
 
@@ -4538,7 +4538,7 @@ PickDroppableArrows::
 
 PickDroppableBombs::
     ld   d, $02                                   ; $6385: $16 $02
-    call func_003_6472                            ; $6387: $CD $72 $64
+    call GiveInventoryItem                            ; $6387: $CD $72 $64
     ld   hl, wMaxBombs                            ; $638A: $21 $77 $DB
     ld   de, wBombCount                           ; $638D: $11 $4D $DB
     jr   jr_003_635F                              ; $6390: $18 $CD
@@ -4683,38 +4683,38 @@ jr_003_6468:
     add  hl, bc                                   ; $646B: $09
     ld   a, [hl]                                  ; $646C: $7E
     ld   [wShieldLevel], a                        ; $646D: $EA $44 $DB
-    ld   d, $04                                   ; $6470: $16 $04
+    ld   d, INVENTORY_SHIELD                      ; $6470: $16 $04
 
-func_003_6472::
+GiveInventoryItem::     ; @TODO GivePlayerItem or w/e - inserts item in [d] into first available slot
     ld   hl, wBButtonSlot                         ; $6472: $21 $00 $DB
     ld   e, $0C                                   ; $6475: $1E $0C
 
-jr_003_6477:
-    ld   a, [hl+]                                 ; $6477: $2A
-    cp   d                                        ; $6478: $BA
-    jr   z, jr_003_648E                           ; $6479: $28 $13
+.checkInventorySlot:                              ; Check if we already have this item:
+    ld   a, [hl+]                                 ; Check what item is in this slot
+    cp   d                                        ; Is it the item we're trying to add?
+    jr   z, .return                               ; If yes, return
 
-    dec  e                                        ; $647B: $1D
-    jr   nz, jr_003_6477                          ; $647C: $20 $F9
+    dec  e                                        ; Otherwise, have we checked all slots?
+    jr   nz, .checkInventorySlot                  ; If no, continue
 
-    ld   hl, wBButtonSlot                         ; $647E: $21 $00 $DB
+    ld   hl, wBButtonSlot                         ; Otherwise, load the inventory start again...
 
-jr_003_6481:
-    ld   a, [hl]                                  ; $6481: $7E
-    and  a                                        ; $6482: $A7
-    jr   nz, jr_003_6487                          ; $6483: $20 $02
+.checkInventorySlotEmpty:
+    ld   a, [hl]                                  ; Check if an item is equipped in this slot
+    and  a                                        ;
+    jr   nz, .inventorySlotFull                   ; If there is an item, jump ahead
 
-    ld   [hl], d                                  ; $6485: $72
-    ret                                           ; $6486: $C9
+    ld   [hl], d                                  ; Otherwise, put the item into this slot
+    ret                                           ; and return
 
-jr_003_6487:
-    inc  hl                                       ; $6487: $23
-    inc  e                                        ; $6488: $1C
-    ld   a, e                                     ; $6489: $7B
-    cp   $0C                                      ; $648A: $FE $0C
-    jr   nz, jr_003_6481                          ; $648C: $20 $F3
+.inventorySlotFull:
+    inc  hl                                       ; Do we have more inventory spaces to check?
+    inc  e                                        ; (e was 0C - slots checked)
+    ld   a, e                                     ; 
+    cp   $0C                                      ; If we've checked enough to get back to 0C, we're out
+    jr   nz, .checkInventorySlotEmpty             ; Otherwise, go back to check next slot
 
-jr_003_648E:
+.return:
     ret                                           ; $648E: $C9
 
 PickDroppableKey::

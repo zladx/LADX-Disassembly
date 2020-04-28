@@ -134,7 +134,7 @@ Floating10RupeesHandler::
 
 FloatingMagicPowderHandler::
     ld   d, $0C                                   ; $7BBF: $16 $0C
-    call label_3E6B                               ; $7BC1: $CD $6B $3E
+    call GiveInventoryItem_trampoline                               ; $7BC1: $CD $6B $3E
     ld   a, $0B                                   ; $7BC4: $3E $0B
     ldh  [hFFA5], a                               ; $7BC6: $E0 $A5
     ld   hl, wMaxMagicPowder                      ; $7BC8: $21 $76 $DB

@@ -6524,7 +6524,7 @@ jr_004_7653:
 jr_004_7666:
     ld   [wMagicPowderCount], a                   ; $7666: $EA $4C $DB
     ld   d, $0C                                   ; $7669: $16 $0C
-    call label_3E6B                               ; $766B: $CD $6B $3E
+    call GiveInventoryItem_trampoline                               ; $766B: $CD $6B $3E
     ld   a, $0B                                   ; $766E: $3E $0B
     ldh  [hFFA5], a                               ; $7670: $E0 $A5
     ret                                           ; $7672: $C9
@@ -6534,7 +6534,7 @@ jr_004_7673:
     jr   nz, jr_004_767B                          ; $7674: $20 $05
 
     ld   d, $04                                   ; $7676: $16 $04
-    jp   label_3E6B                               ; $7678: $C3 $6B $3E
+    jp   GiveInventoryItem_trampoline                               ; $7678: $C3 $6B $3E
 
 jr_004_767B:
     ld   a, $FF                                   ; $767B: $3E $FF
@@ -6659,23 +6659,42 @@ Data_004_7775::
     db   $98, $6A, $43, $7F, $98, $8B, $42, $7F, $98, $AB, $42, $7F, $00, $00, $00, $00
     db   $98, $6E, $43, $7F, $98, $8F, $42, $7F, $98, $AF, $42, $7F, $00, $00, $00, $00
 
-Data_004_77B5::
-    db   $01, $02, $03, $00, $01, $02, $03, $04, $05, $02, $03, $04, $06, $02, $03, $04
-    db   $07, $08, $09, $0A
+Data_004_77B5::             ; @TODO Shop item "for sale" table.
+    db   $01, $02, $03, $00 ; Shovel,    3 hearts, shield    (nothing)
+    db   $01, $02, $03, $04 ; Shovel,    3 hearts, shield,   10 bombs
+    db   $05, $02, $03, $04 ; Bow,       3 hearts, shield,   10 bombs
+    db   $06, $02, $03, $04 ; 10 arrows, 3 hearts, shield,   10 bombs
+    db   $07, $08, $09, $0A ; Ocarina,   Acorn,    Medicine, (glitch)
+    ; POI: Unused shop layout (?)
 
-Data_004_77C9::
-    db   $30, $31, $32, $33, $2C, $2D, $39, $00, $00, $00
 
-Data_004_77D3::
+; 01  Shovel
+; 02  3 Hearts
+; 03  Shield
+; 04  10 Bombs
+; 05  Bow
+; 06  10 Arrows
+; 07  Ocarina
+; 08  Guardian Acorn (in appearance only)
+; 09  Medicine
+
+    ;         Shvl 3Hrt Shld 10bm Bow 10awo Ocar Acrn Medc
+    ;          1    2    3    4    5    6    7    8    9
+Data_004_77C9::     ; @TODO: Shop dialogue indexes (table 0) when about to buy
+    db        $30, $31, $32, $33, $2C, $2D, $39, $00, $00, $00
+    ; POI: Ocarina has a dialog index assigned (39), but
+    ; it's the message about the Kanalet castle gate opening.
+    ; (Comes right after the "I wasn't kidding when I said pay" message, though...)
+
+    ;    ---  Shvl 3Hrt Shld 10bm Bow 10awo Ocar Acrn Medc
+    ;     0    1    2    3    4    5    6    7    8    9
+Data_004_77D3::     ; Price (dec, high) ?
     db   $00, $02, $00, $00, $00, $09, $00, $00, $00
-
-Data_004_77DC::
+Data_004_77DC::     ; Price (dec, low) ?
     db   $00, $00, $10, $20, $10, $80, $10, $00, $00
-
-Data_004_77E5::
+Data_004_77E5::     ; Price (high) ?
     db   $00, $00, $00, $00, $00, $03, $00, $00, $00
-
-Data_004_77EE::
+Data_004_77EE::     ; Price (low) ?
     db   $00, $C8, $0A, $14, $0A, $D4, $0A, $00, $00, $00
 
 func_004_77F8::
@@ -6832,7 +6851,7 @@ func_004_78AF::
 
     sub  $02                                      ; $78CB: $D6 $02
     ldh  [hLinkPositionY], a                      ; $78CD: $E0 $99
-    jp_open_dialog $02F                           ; $78CF
+    jp_open_dialog $02F                           ; @TODO Text used when you're trying to steal stuff
 
 jr_004_78D4:
     ldh  a, [hLinkPositionY]                      ; $78D4: $F0 $99
@@ -7124,66 +7143,66 @@ jr_004_7A2E:
     call_open_dialog $035                         ; $7A59
     pop  af                                       ; $7A5E: $F1
 
-label_004_7A5F:
-    dec  a                                        ; $7A5F: $3D
-    JP_TABLE                                      ; $7A60
-._00 dw func_004_7AA9                             ; $7A61
-._01 dw func_004_7AD2                             ; $7A63
-._02 dw func_004_7AD8                             ; $7A65
-._03 dw func_004_7AAE                             ; $7A67
-._04 dw func_004_7A73                             ; $7A69
-._05 dw func_004_7A7E                             ; $7A6B
-._06 dw func_004_7A8C                             ; $7A6D
-._07 dw func_004_7A91                             ; $7A6F
-._08 dw func_004_7A9F                             ; $7A71
+label_004_7A5F:                         ; @TODO What to do after buying a shopkeeper item
+    dec  a                              ; (see: C505~C508 (what item is in each shop slot))
+    JP_TABLE                            ; POI: The last 3 entries are not used (normally)
+._00 dw boughtShovel                    ; 01  Shovel
+._01 dw bought3Hearts                   ; 02  3 Hearts
+._02 dw boughtShield                    ; 03  Shield
+._03 dw bought10Bombs                   ; 04  10 Bombs
+._04 dw boughtBow                       ; 05  Bow
+._05 dw bought10Arrows                  ; 06  10 Arrows
+._06 dw boughtOcarina                   ; 07  Ocarina
+._07 dw boughtShop08                    ; 08  Guardian Acorn (in appearance only)
+._08 dw boughtMedicine                  ; 09  Medicine
 
-func_004_7A73::
-    ld   d, $05                                   ; $7A73: $16 $05
-    call label_3E6B                               ; $7A75: $CD $6B $3E
+boughtBow:
+    ld   d, INVENTORY_BOW                         ; $7A73: $16 $05
+    call GiveInventoryItem_trampoline             ; $7A75: $CD $6B $3E
     ld   a, $20                                   ; $7A78: $3E $20
     ld   [wArrowCount], a                         ; $7A7A: $EA $45 $DB
     ret                                           ; $7A7D: $C9
 
-func_004_7A7E::
+bought10Arrows:
     ld   a, [wArrowCount]                         ; $7A7E: $FA $45 $DB
     add  $0A                                      ; $7A81: $C6 $0A
     daa                                           ; $7A83: $27
     jr   nc, jr_004_7A88                          ; $7A84: $30 $02
 
-    ld   a, $99                                   ; $7A86: $3E $99
+    ld   a, $99                                   ; POI: ?? Checks for going over 99 (normal max 60)?
 
 jr_004_7A88:
     ld   [wArrowCount], a                         ; $7A88: $EA $45 $DB
     ret                                           ; $7A8B: $C9
 
-func_004_7A8C::
-    ld   d, $09                                   ; $7A8C: $16 $09
-    jp   label_3E6B                               ; $7A8E: $C3 $6B $3E
+boughtOcarina:
+    ld   d, INVENTORY_OCARINA                     ; $7A8C: $16 $09
+    jp   GiveInventoryItem_trampoline             ; $7A8E: $C3 $6B $3E
 
-func_004_7A91::
-    ld   a, [$DB47]                               ; $7A91: $FA $47 $DB
-    add  $0A                                      ; $7A94: $C6 $0A
-    daa                                           ; $7A96: $27
-    jr   nc, jr_004_7A9B                          ; $7A97: $30 $02
+boughtShop08:                           ; POI: Appears as a guardian acorn, but...???
+    ld   a, [$DB47]                     ; Add 10 to DB47 (?)
+    add  $0A                            ; This code is similar to that for adding bought arrows
+    daa                                 ; But DB47 isn't one of those (?)
+    jr   nc, jr_004_7A9B                ; Still attempts to cap to 99
 
-    ld   a, $99                                   ; $7A99: $3E $99
+    ld   a, $99                         ; ????????
 
 jr_004_7A9B:
     ld   [$DB47], a                               ; $7A9B: $EA $47 $DB
     ret                                           ; $7A9E: $C9
 
-func_004_7A9F::
-    ld   a, [wHasMedicine]                        ; $7A9F: $FA $0D $DB
-    add  $01                                      ; $7AA2: $C6 $01
+boughtMedicine:
+    ld   a, [wHasMedicine]              ; POI: Medicine not bought in shops, and not tracked like this
+    add  $01                            ; Adds one to value with BCD
     daa                                           ; $7AA4: $27
     ld   [wHasMedicine], a                        ; $7AA5: $EA $0D $DB
     ret                                           ; $7AA8: $C9
 
-func_004_7AA9::
-    ld   d, $0B                                   ; $7AA9: $16 $0B
-    jp   label_3E6B                               ; $7AAB: $C3 $6B $3E
+boughtShovel:
+    ld   d, INVENTORY_SHOVEL                      ; $7AA9: $16 $0B
+    jp   GiveInventoryItem_trampoline             ; $7AAB: $C3 $6B $3E
 
-func_004_7AAE::
+bought10Bombs:
     ld   a, [wBombCount]                          ; $7AAE: $FA $4D $DB
     add  $0A                                      ; $7AB1: $C6 $0A
     daa                                           ; $7AB3: $27
@@ -7193,10 +7212,11 @@ func_004_7AAE::
 
 jr_004_7AB8:
     ld   [wBombCount], a                          ; $7AB8: $EA $4D $DB
-    ld   d, $02                                   ; $7ABB: $16 $02
-    jp   label_3E6B                               ; $7ABD: $C3 $6B $3E
+    ld   d, INVENTORY_BOMBS                       ; $7ABB: $16 $02
+    jp   GiveInventoryItem_trampoline             ; $7ABD: $C3 $6B $3E
 
-    ld   a, [wArrowCount]                         ; $7AC0: $FA $45 $DB
+; POI: Dead code??? Seems to give 10 arrows, then gives you Magic Powder too (!?)
+    ld   a, [wArrowCount]                         ; ???????????????????
     add  $0A                                      ; $7AC3: $C6 $0A
     daa                                           ; $7AC5: $27
     jr   nc, jr_004_7ACA                          ; $7AC6: $30 $02
@@ -7205,17 +7225,17 @@ jr_004_7AB8:
 
 jr_004_7ACA:
     ld   [wArrowCount], a                         ; $7ACA: $EA $45 $DB
-    ld   d, $0C                                   ; $7ACD: $16 $0C
-    jp   label_3E6B                               ; $7ACF: $C3 $6B $3E
+    ld   d, INVENTORY_MAGIC_POWDER                ; $7ACD: $16 $0C
+    jp   GiveInventoryItem_trampoline             ; $7ACF: $C3 $6B $3E
 
-func_004_7AD2::
-    ld   a, $18                                   ; $7AD2: $3E $18
+bought3Hearts:
+    ld   a, 3 FULL_HEARTS                         ; $7AD2: $3E $18
     ld   [wAddHealthBuffer], a                    ; $7AD4: $EA $93 $DB
     ret                                           ; $7AD7: $C9
 
-func_004_7AD8::
-    ld   d, $04                                   ; $7AD8: $16 $04
-    jp   label_3E6B                               ; $7ADA: $C3 $6B $3E
+boughtShield::
+    ld   d, INVENTORY_SHIELD                      ; $7AD8: $16 $04
+    jp   GiveInventoryItem_trampoline             ; $7ADA: $C3 $6B $3E
 
 func_004_7ADD::
     ld   a, [wDialogState]                        ; $7ADD: $FA $9F $C1
@@ -7224,7 +7244,7 @@ func_004_7ADD::
 
     jp   label_004_796D                           ; $7AE2: $C3 $6D $79
 
-Data_004_7AE5::
+Data_004_7AE5:: ; @TODO Palette data
     db   $33, $62, $1A, $01, $FF, $0F, $FF, $7F
 
 func_004_7AED::

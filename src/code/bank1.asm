@@ -3149,12 +3149,12 @@ label_6849::
 
 label_6855::
     ret
-label_6856::
-    ld   e, $21
-    ldh  a, [hMapId]
-    cp   MAP_EAGLES_TOWER
-    jr   z, label_6868
-    ldh  a, [hMapRoom]
+label_6856::                    ; This is for full-screen images ...
+    ld   e, $21                 ; First, check if it's Eagle's Tower
+    ldh  a, [hMapId]            ; If so, load the tower graphics for when the pillars are knocked out
+    cp   MAP_EAGLES_TOWER       ; Otherwise, check if it's room $DD (Schule's house)
+    jr   z, label_6868          ; If it is, load the ... whatever it is painting
+    ldh  a, [hMapRoom]          ; Otherwise, load the Christine picture
     cp   $DD
     ld   e, $12
     jr   nz, label_6868
@@ -3166,7 +3166,7 @@ label_6868::
     xor  a
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
-label_6873::
+label_6873::                    ; Determines the tilemap to load (?)
     ld   e, $24
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER

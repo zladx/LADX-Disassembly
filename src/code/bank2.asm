@@ -46,9 +46,9 @@ UseOcarina::
     ld   [$C5A4], a                               ; $4208: $EA $A4 $C5
     ld   [$C5A5], a                               ; $420B: $EA $A5 $C5
     call CopyLinkFinalPositionToPosition          ; $420E: $CD $BE $0C
-    ld   a, [wOcarinaSongFlags]                   ; $4211: $FA $49 $DB
-    and  $07                                      ; $4214: $E6 $07
-    jr   z, jr_002_4241                           ; $4216: $28 $29
+    ld   a, [wOcarinaSongFlags]                   ; Do we have any songs available?
+    and  $07                                      ;
+    jr   z, jr_002_4241                           ; If no, play the tone-deaf notes
 
     ld   a, [$DB4A]                               ; $4218: $FA $4A $DB
     cp   $01                                      ; $421B: $FE $01
@@ -80,7 +80,7 @@ jr_002_4237:
 jr_002_4241:
     ld   a, $D0                                   ; $4241: $3E $D0
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4243: $EA $66 $C1
-    ld   a, WAVE_SFX_OCARINA_UNUSED               ; $4246: $3E $15
+    ld   a, WAVE_SFX_OCARINA_NOSONG               ; $4246: $3E $15
     ldh  [hWaveSfx], a                            ; $4248: $E0 $F3
     ret                                           ; $424A: $C9
 

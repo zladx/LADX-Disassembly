@@ -4789,7 +4789,7 @@ jr_002_63A3:
     ld   d, $00                                   ; $63C3: $16 $00
     add  $04                                      ; $63C5: $C6 $04
     ld   [wRequests], a                           ; $63C7: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $63CA: $21 $01 $D6
+    ld   hl, wRequestDestinationHigh              ; POI: Updates (old) medicine counter on the subscreen
     add  hl, de                                   ; $63CD: $19
     ld   a, $9C                                   ; $63CE: $3E $9C
     ld   [hl+], a                                 ; $63D0: $22

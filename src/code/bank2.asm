@@ -2425,10 +2425,10 @@ jr_002_5176:
     cp   MAP_CAVE_B                                      ; $5178: $FE $0A
     jr   nz, jr_002_51AC                          ; $517A: $20 $30
 
-    ldh  a, [hMapRoom]                            ; $517C: $F0 $F6
-    cp   $7A                                      ; $517E: $FE $7A
-    jr   z, jr_002_518E                           ; $5180: $28 $0C
-
+    ldh  a, [hMapRoom]                          ; Underworld 2:
+    cp   $7A                                    ; 7A, 7B, 7C, and 7D are the caves
+    jr   z, jr_002_518E                         ; in the mountains where falling in a pit
+                                                ; will spit you out of a waterfall
     cp   $7B                                      ; $5182: $FE $7B
     jr   z, jr_002_518E                           ; $5184: $28 $08
 
@@ -4342,16 +4342,16 @@ func_002_60E0::
     and  a                                        ; $6105: $A7
     ret  nz                                       ; $6106: $C0
 
-    ld   a, [wInventoryAppearing]                 ; $6107: $FA $4F $C1
+    ld   a, [wInventoryAppearing]                 ; Handles subscreen transition state?
     and  a                                        ; $610A: $A7
     jp   nz, label_002_61A9                       ; $610B: $C2 $A9 $61
 
-    ldh  a, [hPressedButtonsMask]                 ; $610E: $F0 $CB
-    and  $40                                      ; $6110: $E6 $40
+    ldh  a, [hPressedButtonsMask]                 ; Checks if map should be opened?
+    and  J_SELECT                                 ; $6110: $E6 $40
     jp   nz, label_002_61E7                       ; $6112: $C2 $E7 $61
 
-    ldh  a, [hJoypadState]                        ; $6115: $F0 $CC
-    and  $80                                      ; $6117: $E6 $80
+    ldh  a, [hJoypadState]                        ; Checks if subscreen should be opened?
+    and  J_START                                  ; $6117: $E6 $80
     jp   z, label_002_61E7                        ; $6119: $CA $E7 $61
 
     ld   a, [wWindowY]                            ; $611C: $FA $9A $DB
@@ -4391,7 +4391,7 @@ jr_002_613D:
     cpl                                           ; $615A: $2F
     inc  a                                        ; $615B: $3C
     ld   [$C150], a                               ; $615C: $EA $50 $C1
-    and  $80                                      ; $615F: $E6 $80
+    and  $80                                      ; POI: Zeroing this restores the scroll up/down subscreen????
     jr   z, jr_002_619F                           ; $6161: $28 $3C
 
     xor  a                                        ; $6163: $AF
@@ -4411,7 +4411,7 @@ jr_002_613D:
     ld   a, [wIsIndoor]                           ; $6183: $FA $A5 $DB
     and  a                                        ; $6186: $A7
     ld   a, $07                                   ; $6187: $3E $07
-    jr   z, jr_002_619C                           ; $6189: $28 $11
+    jr   z, jr_002_619C                           ; Partially determines if subscreen dungeon map should be drawn
 
     ldh  a, [hMapId]                              ; $618B: $F0 $F7
     cp   MAP_COLOR_DUNGEON                                      ; $618D: $FE $FF
@@ -6203,7 +6203,7 @@ func_002_6F2C::
     jp   nz, label_002_703B                       ; $6FAD: $C2 $3B $70
 
     ldh  a, [hMapRoom]                            ; $6FB0: $F0 $F6
-    cp   $0E                                      ; $6FB2: $FE $0E
+    cp   $0E                                      ; L7 Eagle's Tower overworld entrance
     jr   nz, jr_002_6FBD                          ; $6FB4: $20 $07
 
     ld   a, [wHasBirdKey]                         ; $6FB6: $FA $14 $DB
@@ -6222,7 +6222,7 @@ jr_002_6FC6:
     jr   z, jr_002_703E                           ; $6FC7: $28 $75
 
     ldh  a, [hMapRoom]                            ; $6FC9: $F0 $F6
-    cp   $8C                                      ; $6FCB: $FE $8C
+    cp   $8C                                      ; L6 Face Shrine overworld entrance
     jr   nz, jr_002_6FD4                          ; $6FCD: $20 $05
 
     call label_27F2                               ; $6FCF: $CD $F2 $27

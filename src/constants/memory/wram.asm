@@ -1017,8 +1017,10 @@ wBossDefeated:: ; D46C
   ds 1
 
 ; Unlabeled
-ds $D
+ds $C
 
+wDebugWarpIndex:: ; D479
+  ds 1
 wPowerUpHits:: ; D47A
   ; Power-ups are disabled after 3 hits are taken from ennemies
   ds 1

@@ -983,11 +983,11 @@ label_3E4D::
 
 label_3E5A::
     ld   hl, MBC3SelectBank
-    ld   [hl], $20
+    ld   [hl], BANK(func_020_5C9C)
     ld   c, $01
     ld   b, $00
     ld   e, $FF
-    call label_5C9C
+    call func_020_5C9C
     jp   ReloadSavedBank
 
 label_3E6B::

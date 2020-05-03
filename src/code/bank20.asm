@@ -1674,10 +1674,12 @@ jr_020_52E8:
 Data_020_52F8::
     db   $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F
 
+; Fill a palette with white?
+; (dead code)
 func_020_5308::
     ld   a, $98                                   ; $5308: $3E $98
     ldh  [rBCPS], a                               ; $530A: $E0 $68
-    ld   hl, $FF69                                ; $530C: $21 $69 $FF
+    ld   hl, rBGPD                                ; $530C: $21 $69 $FF
     ld   b, $08                                   ; $530F: $06 $08
 
 jr_020_5311:
@@ -2320,7 +2322,7 @@ jr_020_592D:
     ei                                            ; $593F: $FB
 
 jr_020_5940:
-    call func_020_6683                            ; $5940: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5940: $CD $83 $66
 
 InventoryMapFadeOutHandler::
     call func_1A22                                ; $5943: $CD $22 $1A
@@ -2340,7 +2342,7 @@ InventoryMapFadeOutHandler::
     ld   [$DE07], a                               ; $595D: $EA $07 $DE
     ld   [$DE08], a                               ; $5960: $EA $08 $DE
     ld   [$DE09], a                               ; $5963: $EA $09 $DE
-    call func_020_6683                            ; $5966: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5966: $CD $83 $66
 
 .return
     ; Returns to 0346 (Render Palettes)
@@ -2662,15 +2664,15 @@ jr_020_5B3D:
     ldh  [hWindowYUnused], a                      ; $5B3F: $E0 $A9
     ld   a, $30                                   ; $5B41: $3E $30
     ldh  [hWindowXUnused], a                      ; $5B43: $E0 $AA
-    call func_020_6683                            ; $5B45: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5B45: $CD $83 $66
     ret                                           ; $5B48: $C9
 
-func_020_5B49::
+AdjustInventoryTilesForLevelsAndCounts::
     ldh  a, [hScratch1]                           ; $5B49: $F0 $D8
-    cp   $09                                      ; $5B4B: $FE $09
+    cp   INVENTORY_OCARINA                        ; $5B4B: $FE $09
     jr   z, jr_020_5B8B                           ; $5B4D: $28 $3C
 
-    cp   $0C                                      ; $5B4F: $FE $0C
+    cp   INVENTORY_MAGIC_POWDER                   ; $5B4F: $FE $0C
     jr   z, jr_020_5B80                           ; $5B51: $28 $2D
 
     dec  a                                        ; $5B53: $3D
@@ -2762,6 +2764,7 @@ func_020_5BA8::
     ld   [hl+], a                                 ; $5BB7: $22
     ret                                           ; $5BB8: $C9
 
+; Configure request for loading inventory plette
 func_020_5BB9::
     push bc                                       ; $5BB9: $C5
     ld   a, [$DC90]                               ; $5BBA: $FA $90 $DC
@@ -2887,14 +2890,14 @@ InventoryItemTiles::
 InventoryTileMapPositions::
     ; Where each inventory item is drawn in the subscreen
     ; (and, for the first one, the status bar)
-    db  $9C, $01,   $9C, $06  ; B[   ] A[   ]
-    ;    -------  |  ------     ------------|---
-    db  $9C, $61,   $9C, $65  ;  [   ] [   ]
-    db  $9C, $C1,   $9C, $C5  ;  [   ] [   ]
-    db  $9D, $21,   $9D, $25  ;  [   ] [   ]
-    db  $9D, $81,   $9D, $85  ;  [   ] [   ]
-    db  $9D, $E1,   $9D, $E5  ;  [   ] [   ]
+    db  HIGH(vBGMap1), $01,          HIGH(vBGMap1), $06         ; B[   ] A[   ]
+    db  HIGH(vBGMap1), $61,          HIGH(vBGMap1), $65         ;  [   ] [   ]
+    db  HIGH(vBGMap1), $C1,          HIGH(vBGMap1), $C5         ;  [   ] [   ]
+    db  HIGH(vBGMap1 + $100), $21,   HIGH(vBGMap1 + $100), $25  ;  [   ] [   ]
+    db  HIGH(vBGMap1 + $100), $81,   HIGH(vBGMap1 + $100), $85  ;  [   ] [   ]
+    db  HIGH(vBGMap1 + $100), $E1,   HIGH(vBGMap1 + $100), $E5  ;  [   ] [   ]
 
+; Draw a and B button slot in the inventory bar
 func_020_5C9C::
     push de                                       ; $5C9C: $D5
     push bc                                       ; $5C9D: $C5
@@ -2914,36 +2917,52 @@ func_020_5C9C::
     call func_020_5BB9                            ; $5CB2: $CD $B9 $5B
 
 jr_020_5CB5:
+    ; de = [wRequests]
     ld   a, [wRequests]                           ; $5CB5: $FA $00 $D6
     ld   e, a                                     ; $5CB8: $5F
     ld   d, $00                                   ; $5CB9: $16 $00
+
+    ; hl = request start address
     ld   hl, wRequestDestinationHigh              ; $5CBB: $21 $01 $D6
     add  hl, de                                   ; $5CBE: $19
+
+    ; Increment the request start by 0C
     add  $0C                                      ; $5CBF: $C6 $0C
     ld   [wRequests], a                           ; $5CC1: $EA $00 $D6
     push hl                                       ; $5CC4: $E5
+
+    ; de = InventoryTileMapPositions + c * 2
     sla  c                                        ; $5CC5: $CB $21
     ld   hl, InventoryTileMapPositions            ; $5CC7: $21 $84 $5C
     add  hl, bc                                   ; $5CCA: $09
     push hl                                       ; $5CCB: $E5
     pop  de                                       ; $5CCC: $D1
     pop  hl                                       ; $5CCD: $E1
+
+    ; Copy request destination (2 bytes)
     ld   a, [de]                                  ; $5CCE: $1A
     inc  de                                       ; $5CCF: $13
     ld   [hl+], a                                 ; $5CD0: $22
     ld   a, [de]                                  ; $5CD1: $1A
     inc  de                                       ; $5CD2: $13
     ld   [hl+], a                                 ; $5CD3: $22
+
+    ; Copy request length
     ld   a, $02                                   ; $5CD4: $3E $02
     ld   [hl+], a                                 ; $5CD6: $22
+
     push hl                                       ; $5CD7: $E5
     ldh  a, [hScratch0]                           ; $5CD8: $F0 $D7
     ld   c, a                                     ; $5CDA: $4F
+
+    ; de = InventoryItemTiles + [hScratch0]
     ld   hl, InventoryItemTiles                   ; $5CDB: $21 $30 $5C
     add  hl, bc                                   ; $5CDE: $09
     push hl                                       ; $5CDF: $E5
     pop  de                                       ; $5CE0: $D1
     pop  hl                                       ; $5CE1: $E1
+
+    ; Append 3 data bytes to the request
     ld   a, [de]                                  ; $5CE2: $1A
     inc  de                                       ; $5CE3: $13
     ld   [hl+], a                                 ; $5CE4: $22
@@ -2953,10 +2972,13 @@ jr_020_5CB5:
     ld   a, [de]                                  ; $5CE8: $1A
     inc  de                                       ; $5CE9: $13
     ld   [hl+], a                                 ; $5CEA: $22
+
+    ; hl = bc
     pop  bc                                       ; $5CEB: $C1
     push bc                                       ; $5CEC: $C5
     push hl                                       ; $5CED: $E5
     sla  c                                        ; $5CEE: $CB $21
+
     ld   hl, InventoryTileMapPositions            ; $5CF0: $21 $84 $5C
     add  hl, bc                                   ; $5CF3: $09
     push hl                                       ; $5CF4: $E5
@@ -2988,7 +3010,9 @@ jr_020_5CB5:
     ld   a, [de]                                  ; $5D14: $1A
     inc  de                                       ; $5D15: $13
     ld   [hl+], a                                 ; $5D16: $22
-    call func_020_5B49                            ; $5D17: $CD $49 $5B
+
+    call AdjustInventoryTilesForLevelsAndCounts                            ; $5D17: $CD $49 $5B
+
     xor  a                                        ; $5D1A: $AF
     ld   [hl], a                                  ; $5D1B: $77
     pop  bc                                       ; $5D1C: $C1
@@ -3010,7 +3034,7 @@ InventoryLoad3Handler::
     ld   [$C154], a                               ; $5D31: $EA $54 $C1
 
 label_020_5D34:
-    call func_020_6683                            ; $5D34: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5D34: $CD $83 $66
     call LCDOff                                   ; $5D37: $CD $CF $28
     ld   a, $20                                   ; $5D3A: $3E $20
     call func_AB5                                 ; $5D3C: $CD $B5 $0A
@@ -3028,7 +3052,7 @@ InventoryLoad4Handler::
     call LoadColorDungeonTiles                    ; $5D55: $CD $D1 $3F
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
     ldh  [rLCDC], a                               ; $5D5B: $E0 $40
-    call func_020_6683                            ; $5D5D: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5D5D: $CD $83 $66
     ret                                           ; $5D60: $C9
 
 InventoryPalettes::
@@ -3156,7 +3180,7 @@ jr_020_5E61:
 jr_020_5E6D:
     xor  a                                        ; $5E6D: $AF
     ld   [wTransitionSequenceCounter], a          ; $5E6E: $EA $6B $C1
-    call func_020_6683                            ; $5E71: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5E71: $CD $83 $66
     ret                                           ; $5E74: $C9
 
 InventoryInstrumentCyclingColors::
@@ -3228,7 +3252,7 @@ InventoryFadeInHandler::
     ld   a, [wTransitionSequenceCounter]          ; $5EF5: $FA $6B $C1
     cp   $04                                      ; $5EF8: $FE $04
     jr   nz, .jr_020_5EFF                         ; $5EFA: $20 $03
-    call func_020_6683                            ; $5EFC: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5EFC: $CD $83 $66
 .jr_020_5EFF
 
     ret                                           ; $5EFF: $C9
@@ -4092,14 +4116,20 @@ Data_020_64A2::
     dw   Data_020_6498
 
 Data_020_64AA::
-    db   $7C, $03, $48, $03, $48, $23, $66, $03   ; $64AA
+    db   $7C, $03, $48, $03, $48, $23
+
+Data_020_64B0::
+    db   $66, $03
     db   $66, $03, $66, $03, $68, $03, $66, $03   ; $64B2
     db   $6A, $03, $66, $03, $6C, $03, $66, $03   ; $64BA
     db   $6E, $03, $66, $03, $70, $03, $66, $03   ; $64C2
     db   $72, $03, $66, $03, $74, $03, $66, $03   ; $64CA
     db   $76, $03, $66, $03, $78, $03, $68, $03   ; $64D2
     db   $66, $03, $68, $03, $68, $03, $68, $03   ; $64DA
-    db   $6A, $03, $7A, $03, $68, $03, $6A, $03   ; $64E2
+    db   $6A, $03
+
+Data_020_64E4::
+    db   $7A, $03, $68, $03, $6A, $03   ; $64E2
     db   $7C, $03, $7C, $03                       ; $64EA
 
 func_020_64EE::
@@ -4169,19 +4199,33 @@ jr_020_6553:
     ld   a, [wPhotos2]                            ; $6558: $FA $0D $DC
     and  $0F                                      ; $655B: $E6 $0F
 
-jr_020_655D:
+.loop
     bit  0, a                                     ; $655D: $CB $47
-    jr   z, jr_020_6562                           ; $655F: $28 $01
+    jr   z, .jr_020_6562                          ; $655F: $28 $01
 
     inc  e                                        ; $6561: $1C
 
-jr_020_6562:
+.jr_020_6562:
     srl  a                                        ; $6562: $CB $3F
     and  a                                        ; $6564: $A7
 
-Data_020_6565::
-    db   $20, $F6, $16, $00, $CB, $23, $CB, $23, $E5, $0E, $02, $21, $B0, $64, $19, $E5
-    db   $D1, $E1, $CD, $46, $64, $0E, $05, $11, $E4, $64, $CD, $46, $64, $C9
+    jr   nz, .loop                                ; $6565: $20 $F6
+
+    ld   d, $00                                   ; $6567: $16 $00
+    sla  e                                        ; $6569: $CB $23
+    sla  e                                        ; $656B: $CB $23
+    push hl                                       ; $656D: $E5
+    ld   c, $02                                   ; $656E: $0E $02
+    ld   hl, Data_020_64B0                        ; $6570: $21 $B0 $64
+    add  hl, de                                   ; $6573: $19
+    push hl                                       ; $6574: $E5
+    pop  de                                       ; $6575: $D1
+    pop  hl                                       ; $6576: $E1
+    call func_020_6446                            ; $6577: $CD $46 $64
+    ld   c, $05                                   ; $657A: $0E $05
+    ld   de, Data_020_64E4                        ; $657C: $11 $E4 $64
+    call func_020_6446                            ; $657F: $CD $46 $64
+    ret                                           ; $6582: $C9
 
 InventoryInteractiveHandler::
     call func_020_5EB5                            ; $6583: $CD $B5 $5E
@@ -4200,7 +4244,7 @@ jr_020_6596:
     cp   $78                                      ; $659B: $FE $78
     jr   nc, jr_020_65A4                          ; $659D: $30 $05
 
-    call func_020_6683                            ; $659F: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $659F: $CD $83 $66
     ld   a, $78                                   ; $65A2: $3E $78
 
 jr_020_65A4:
@@ -4216,7 +4260,7 @@ InventoryStatusInHandler::
     and  $40                                      ; $65B0: $E6 $40
     jr   nz, jr_020_65B7                          ; $65B2: $20 $03
 
-    call func_020_6683                            ; $65B4: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $65B4: $CD $83 $66
 
 jr_020_65B7:
     ret                                           ; $65B7: $C9
@@ -4348,7 +4392,7 @@ label_020_6682:
 jr_020_6682:
     ret                                           ; $6682: $C9
 
-func_020_6683::
+IncrementGameplaySubtype_20::
     ld   hl, wGameplaySubtype                     ; $6683: $21 $96 $DB
     inc  [hl]                                     ; $6686: $34
     ret                                           ; $6687: $C9
@@ -5581,97 +5625,94 @@ data_020_763B::
     db   $A4, $FF, $86, $FF, $A4, $FF, $8B, $FF   ; $7833
     db   $A4, $4D, $FF, $FF                       ; $783B
 
-; These look like pointers, but actually point to random locations in
-; the ROM, to make the water geyser splashing effect.
-; @TODO Actually seems to be palette colors
-Data_020_783F::
-    dw   $7845
-    dw   $787D
-    dw   $78B5
-    dw   $0000
-    dw   $4CC5
-    dw   $7D68
-    dw   $7FFF
-    dw   $0000
-    dw   $3C62
-    dw   $68E5
-    dw   $5ED6
-    dw   $0000
-    dw   $2000
-    dw   $5000
-    dw   $35AD
-    dw   $0000
-    dw   $660F
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $660F
-    dw   $6ED6
-    dw   $7FFF
-    dw   $59AC
-    dw   $660F
-    dw   $6ED6
-    dw   $7FFF
-    dw   $4D49
-    dw   $660F
-    dw   $6ED6
-    dw   $7FFF
-    dw   $0000
-    dw   $7D68
-    dw   $7FFF
-    dw   $4CC5
-    dw   $0000
-    dw   $68E5
-    dw   $5ED6
-    dw   $3C62
-    dw   $0000
-    dw   $5000
-    dw   $35AD
-    dw   $2000
-    dw   $0000
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $4CC5
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $3C62
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $2000
-    dw   $6ED6
-    dw   $7FFF
-    dw   $660F
-    dw   $0000
-    dw   $7FFF
-    dw   $4CC5
-    dw   $7D68
-    dw   $0000
-    dw   $5ED6
-    dw   $3C62
-    dw   $68E5
-    dw   $0000
-    dw   $35AD
-    dw   $2000
-    dw   $5000
-    dw   $0000
-    dw   $7FFF
-    dw   $660F
-    dw   $6ED6
-    dw   $7D68
-    dw   $7FFF
-    dw   $660F
-    dw   $6ED6
-    dw   $68E5
-    dw   $7FFF
-    dw   $660F
-    dw   $6ED6
-    dw   $5000
-    dw   $7FFF
-    dw   $660F
-    dw   $6ED6
+EndingWaterGeyserPalettes::
+    db   $45, $78
+    db   $7D, $78
+    db   $B5, $78
+    db   $00, $00
+    db   $C5, $4C
+    db   $68, $7D
+    db   $FF, $7F
+    db   $00, $00
+    db   $62, $3C
+    db   $E5, $68
+    db   $D6, $5E
+    db   $00, $00
+    db   $00, $20
+    db   $00, $50
+    db   $AD, $35
+    db   $00, $00
+    db   $0F, $66
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $0F, $66
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $AC, $59
+    db   $0F, $66
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $49, $4D
+    db   $0F, $66
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $00, $00
+    db   $68, $7D
+    db   $FF, $7F
+    db   $C5, $4C
+    db   $00, $00
+    db   $E5, $68
+    db   $D6, $5E
+    db   $62, $3C
+    db   $00, $00
+    db   $00, $50
+    db   $AD, $35
+    db   $00, $20
+    db   $00, $00
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $C5, $4C
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $62, $3C
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $00, $20
+    db   $D6, $6E
+    db   $FF, $7F
+    db   $0F, $66
+    db   $00, $00
+    db   $FF, $7F
+    db   $C5, $4C
+    db   $68, $7D
+    db   $00, $00
+    db   $D6, $5E
+    db   $62, $3C
+    db   $E5, $68
+    db   $00, $00
+    db   $AD, $35
+    db   $00, $20
+    db   $00, $50
+    db   $00, $00
+    db   $FF, $7F
+    db   $0F, $66
+    db   $D6, $6E
+    db   $68, $7D
+    db   $FF, $7F
+    db   $0F, $66
+    db   $D6, $6E
+    db   $E5, $68
+    db   $FF, $7F
+    db   $0F, $66
+    db   $D6, $6E
+    db   $00, $50
+    db   $FF, $7F
+    db   $0F, $66
+    db   $D6, $6E
 
 ; Copy palette data to $DC10
 ; (Called during the Credits water geyser sequence; to animate the water?)
@@ -5680,7 +5721,7 @@ func_020_78ED::
     sla  a                                        ; $78F0: $CB $27
     ld   e, a                                     ; $78F2: $5F
     ld   d, $00                                   ; $78F3: $16 $00
-    ld   hl, Data_020_783F                        ; $78F5: $21 $3F $78
+    ld   hl, EndingWaterGeyserPalettes            ; $78F5: $21 $3F $78
     add  hl, de                                   ; $78F8: $19
     ld   a, [hl+]                                 ; $78F9: $2A
     ld   b, a                                     ; $78FA: $47
@@ -6093,3 +6134,4 @@ LoadTileset23::
     ld   h, BANK(@)                               ; $7E02: $26 $20
     call Copy100BytesFromBankAtA                  ; $7E04: $CD $13 $0A
     ret                                           ; $7E07: $C9
+

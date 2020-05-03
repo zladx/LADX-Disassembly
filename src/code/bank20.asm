@@ -1674,10 +1674,12 @@ jr_020_52E8:
 Data_020_52F8::
     db   $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F
 
+; Fill a palette with white?
+; (dead code)
 func_020_5308::
     ld   a, $98                                   ; $5308: $3E $98
     ldh  [rBCPS], a                               ; $530A: $E0 $68
-    ld   hl, $FF69                                ; $530C: $21 $69 $FF
+    ld   hl, rBGPD                                ; $530C: $21 $69 $FF
     ld   b, $08                                   ; $530F: $06 $08
 
 jr_020_5311:
@@ -2320,7 +2322,7 @@ jr_020_592D:
     ei                                            ; $593F: $FB
 
 jr_020_5940:
-    call IncrementGameplaySubtype_20              ; $5940: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5940: $CD $83 $66
 
 InventoryMapFadeOutHandler::
     call func_1A22                                ; $5943: $CD $22 $1A
@@ -2340,7 +2342,7 @@ InventoryMapFadeOutHandler::
     ld   [$DE07], a                               ; $595D: $EA $07 $DE
     ld   [$DE08], a                               ; $5960: $EA $08 $DE
     ld   [$DE09], a                               ; $5963: $EA $09 $DE
-    call IncrementGameplaySubtype_20              ; $5966: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5966: $CD $83 $66
 
 .return
     ; Returns to 0346 (Render Palettes)
@@ -2662,7 +2664,7 @@ jr_020_5B3D:
     ldh  [hWindowYUnused], a                      ; $5B3F: $E0 $A9
     ld   a, $30                                   ; $5B41: $3E $30
     ldh  [hWindowXUnused], a                      ; $5B43: $E0 $AA
-    call IncrementGameplaySubtype_20              ; $5B45: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5B45: $CD $83 $66
     ret                                           ; $5B48: $C9
 
 AdjustInventoryTilesForLevelsAndCounts::
@@ -2888,14 +2890,14 @@ InventoryItemTiles::
 InventoryTileMapPositions::
     ; Where each inventory item is drawn in the subscreen
     ; (and, for the first one, the status bar)
-    db  $9C, $01,   $9C, $06  ; B[   ] A[   ]
-    ;    -------  |  ------     ------------|---
-    db  $9C, $61,   $9C, $65  ;  [   ] [   ]
-    db  $9C, $C1,   $9C, $C5  ;  [   ] [   ]
-    db  $9D, $21,   $9D, $25  ;  [   ] [   ]
-    db  $9D, $81,   $9D, $85  ;  [   ] [   ]
-    db  $9D, $E1,   $9D, $E5  ;  [   ] [   ]
+    db  HIGH(vBGMap1), $01,          HIGH(vBGMap1), $06         ; B[   ] A[   ]
+    db  HIGH(vBGMap1), $61,          HIGH(vBGMap1), $65         ;  [   ] [   ]
+    db  HIGH(vBGMap1), $C1,          HIGH(vBGMap1), $C5         ;  [   ] [   ]
+    db  HIGH(vBGMap1 + $100), $21,   HIGH(vBGMap1 + $100), $25  ;  [   ] [   ]
+    db  HIGH(vBGMap1 + $100), $81,   HIGH(vBGMap1 + $100), $85  ;  [   ] [   ]
+    db  HIGH(vBGMap1 + $100), $E1,   HIGH(vBGMap1 + $100), $E5  ;  [   ] [   ]
 
+; Draw a and B button slot in the inventory bar
 func_020_5C9C::
     push de                                       ; $5C9C: $D5
     push bc                                       ; $5C9D: $C5
@@ -3032,7 +3034,7 @@ InventoryLoad3Handler::
     ld   [$C154], a                               ; $5D31: $EA $54 $C1
 
 label_020_5D34:
-    call IncrementGameplaySubtype_20              ; $5D34: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5D34: $CD $83 $66
     call LCDOff                                   ; $5D37: $CD $CF $28
     ld   a, $20                                   ; $5D3A: $3E $20
     call func_AB5                                 ; $5D3C: $CD $B5 $0A
@@ -3050,7 +3052,7 @@ InventoryLoad4Handler::
     call LoadColorDungeonTiles                    ; $5D55: $CD $D1 $3F
     ld   a, [wLCDControl]                         ; $5D58: $FA $FD $D6
     ldh  [rLCDC], a                               ; $5D5B: $E0 $40
-    call IncrementGameplaySubtype_20              ; $5D5D: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5D5D: $CD $83 $66
     ret                                           ; $5D60: $C9
 
 InventoryPalettes::
@@ -3178,7 +3180,7 @@ jr_020_5E61:
 jr_020_5E6D:
     xor  a                                        ; $5E6D: $AF
     ld   [wTransitionSequenceCounter], a          ; $5E6E: $EA $6B $C1
-    call IncrementGameplaySubtype_20              ; $5E71: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5E71: $CD $83 $66
     ret                                           ; $5E74: $C9
 
 InventoryInstrumentCyclingColors::
@@ -3250,7 +3252,7 @@ InventoryFadeInHandler::
     ld   a, [wTransitionSequenceCounter]          ; $5EF5: $FA $6B $C1
     cp   $04                                      ; $5EF8: $FE $04
     jr   nz, .jr_020_5EFF                         ; $5EFA: $20 $03
-    call IncrementGameplaySubtype_20              ; $5EFC: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $5EFC: $CD $83 $66
 .jr_020_5EFF
 
     ret                                           ; $5EFF: $C9
@@ -4242,7 +4244,7 @@ jr_020_6596:
     cp   $78                                      ; $659B: $FE $78
     jr   nc, jr_020_65A4                          ; $659D: $30 $05
 
-    call IncrementGameplaySubtype_20              ; $659F: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $659F: $CD $83 $66
     ld   a, $78                                   ; $65A2: $3E $78
 
 jr_020_65A4:
@@ -4258,7 +4260,7 @@ InventoryStatusInHandler::
     and  $40                                      ; $65B0: $E6 $40
     jr   nz, jr_020_65B7                          ; $65B2: $20 $03
 
-    call IncrementGameplaySubtype_20              ; $65B4: $CD $83 $66
+    call IncrementGameplaySubtype_20                            ; $65B4: $CD $83 $66
 
 jr_020_65B7:
     ret                                           ; $65B7: $C9

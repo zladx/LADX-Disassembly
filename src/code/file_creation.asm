@@ -5,11 +5,11 @@
 FileCreationEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-    ; Code below is actually data for the jump table
-    ld   de, label_244A
-    ld   c, d
-    sbc  a, e
-    ld   c, d
+._00 dw label_4A11
+._01 dw label_4A24
+._02 dw label_4A9B
+
+label_4A11::
     call IncrementGameplaySubtype
     ld   a, $08
     ld   [wTileMapToLoad], a
@@ -18,6 +18,8 @@ FileCreationEntryPoint::
     ld   [$DBA9], a
     ld   [$DBAA], a
     ret
+
+label_4A24::
     ld   a, $05
     ld   [wBGMapToLoad], a
     ld   hl, $D601
@@ -79,14 +81,14 @@ label_4A4D::
     call label_4A3F
     ret
 
-label_4A98::
-    nop
-    dec  b
-    ld   a, [bc]
+Data_001_4A98::
+    db   $00, $05, $0A
+
+label_4A9B::
     ld   a, [wSaveSlot]
     ld   e, a
     ld   d, $00
-    ld   hl, label_4A98
+    ld   hl, Data_001_4A98
     add  hl, de
     ld   e, [hl]
     ld   hl, $DB80
@@ -177,150 +179,28 @@ label_4B29::
     call label_4C8A
     ret
 
-label_4B30::
-    jr   c, label_4B6A
-    jr   c, label_4B6C
-    jr   c, label_4B6E
-    jr   c, label_4B70
-    jr   c, label_4B72
-    jr   c, label_4B74
-    jr   c, label_4B76
-    jr   c, label_4B78
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   c, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   e, b
-    ld   l, b
-    ld   l, b
-    ld   l, b
-    ld   l, b
-    ld   l, b
-    ld   l, b
-    ld   l, b
-    ld   l, b
-    ld   l, b
-    ld   l, b
+Data_001_4B30::
+    db   $38, $38, $38, $38, $38, $38, $38, $38   ; $4B30
+    db   $38, $38, $38, $38, $38, $38, $38, $38   ; $4B38
+    db   $48, $48, $48, $48, $48, $48, $48, $48   ; $4B40
+    db   $48, $48, $48, $48, $48, $48, $48, $48   ; $4B48
+    db   $58, $58, $58, $58, $58, $58, $58, $58   ; $4B50
+    db   $58, $58, $58, $58, $58, $58, $58, $58   ; $4B58
+    db   $68, $68, $68, $68, $68, $68, $68, $68   ; $4B60
+    db   $68, $68, $68, $68, $68, $68, $68, $68   ; $4B68
 
-label_4B6A::
-    ld   l, b
-    ld   l, b
+Data_001_4B70::
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4B70
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4B78
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4B80
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4B88
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4B90
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4B98
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4BA0
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4BA8
 
-label_4B6C::
-    ld   l, b
-    ld   l, b
-
-label_4B6E::
-    ld   l, b
-    ld   l, b
-
-label_4B70::
-    inc  d
-    inc  e
-
-label_4B72::
-    inc  h
-    inc  l
-
-label_4B74::
-    inc  [hl]
-    inc  a
-
-label_4B76::
-    ld   b, h
-    ld   c, h
-
-label_4B78::
-    ld   d, h
-    ld   e, h
-    ld   h, h
-    ld   l, h
-    ld   [hl], h
-    ld   a, h
-    add  a, h
-    adc  a, h
-    inc  d
-    inc  e
-    inc  h
-    inc  l
-    inc  [hl]
-    inc  a
-    ld   b, h
-    ld   c, h
-    ld   d, h
-    ld   e, h
-    ld   h, h
-    ld   l, h
-    ld   [hl], h
-    ld   a, h
-    add  a, h
-    adc  a, h
-    inc  d
-    inc  e
-    inc  h
-    inc  l
-    inc  [hl]
-    inc  a
-    ld   b, h
-    ld   c, h
-    ld   d, h
-    ld   e, h
-    ld   h, h
-    ld   l, h
-    ld   [hl], h
-    ld   a, h
-    add  a, h
-    adc  a, h
-    inc  d
-    inc  e
-    inc  h
-    inc  l
-    inc  [hl]
-    inc  a
-    ld   b, h
-    ld   c, h
-    ld   d, h
-    ld   e, h
-    ld   h, h
-    ld   l, h
-    ld   [hl], h
-    ld   a, h
-    add  a, h
-    adc  a, h
-
-label_4BB0::
-    ld   c, h
-    ld   d, h
-    ld   e, h
-    ld   h, h
-    ld   l, h
+Data_001_4BB0::
+    db   $4C, $54, $5C, $64, $6C                  ; $4BB0
 
 NameEntryCharacterTable::
     ; Used to translate cursor position -> name letter
@@ -409,13 +289,13 @@ label_4C5E::
 
 label_4C63::
     ld   a, [$DBA9]
-    ld   hl, label_4B70
+    ld   hl, Data_001_4B70
     ld   c, a
     ld   b, $00
     add  hl, bc
     ld   e, [hl]
     ld   a, [$DBA9]
-    ld   hl, label_4B30
+    ld   hl, Data_001_4B30
     ld   c, a
     ld   b, $00
     add  hl, bc
@@ -462,14 +342,14 @@ label_4CB4::
 
 label_4CB7::
     ld   a, [$DBAA]
-    ld   hl, label_4BB0
+    ld   hl, Data_001_4BB0
     ld   c, a
     ld   b, $00
     add  hl, bc
     ld   e, [hl]
     ldh  a, [hFrameCounter]
     and  $10
-    jr   z, label_4CD9
+    jr   z, .return
     ld   hl, $C004
     ld   a, $18
     add  a, $0B
@@ -482,7 +362,7 @@ label_4CB7::
     xor  a
     ld   [hl], a
 
-label_4CD9::
+.return
     ret
 
 label_4CDA::

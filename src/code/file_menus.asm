@@ -1,4 +1,430 @@
-; Screens for file creation, copy and deletion
+; Screens for save files:
+;  - selection
+;  - creation
+;  - copy
+;  - deletion
+
+
+; -----------------------------------------------------------------------------
+;
+; FILE SELECTION
+; Screen for selecting a save file
+;
+; -----------------------------------------------------------------------------
+
+
+FileSelectionEntryPoint::
+    call func_5DC0
+    ld   a, [wGameplaySubtype]
+    JP_TABLE
+    ; Code below is actually data for the jump table
+._00 dw FileSelectionPrepare0
+._01 dw FileSelectionPrepare1
+._02 dw FileSelectionPrepare2
+._03 dw FileSelectionPrepare3
+._04 dw CopyDeathCountsToBG
+._05 dw FileSelectionPrepare5
+._06 dw FileSelectionPrepare6
+._07 dw FileSelectionInteractiveHandler
+._08 dw FileSelectionExecuteChoice
+._09 dw FileSelectionLoadSavedFile
+
+FileSelectionPrepare0::
+    ; Load tilemap 4
+    ld   a, $04
+    ld   [wTileMapToLoad], a
+    xor  a
+    ld   [$D000], a
+    jp   IncrementGameplaySubtypeAndReturn
+
+FileSelectionPrepare1::
+    ; Load tilemap 8
+    ld   a, $08
+    ld   [wTileMapToLoad], a
+    jp   IncrementGameplaySubtypeAndReturn
+
+FileSelectionPrepare2::
+    call label_4DA6
+    call label_4DBE
+    jp   IncrementGameplaySubtypeAndReturn
+
+FileSelectionPrepare3::
+    call label_4DD6
+    jp   IncrementGameplaySubtypeAndReturn
+
+CopyDeathCountsToBG::
+    ld   a, [wSaveFilesCount]
+    and  $01
+    jr   z, .file2
+
+    ld   a, [wFile1DeathCountHigh]
+    ld   h, a
+    ld   a, [wFile1DeathCountLow]
+    ld   l, a
+    ld   de, vBGMap0 + $00E7
+    call CopyDigitsToFileScreenBG
+
+.file2
+    ld   a, [wSaveFilesCount]
+    and  $02
+    jr   z, .file3
+
+    ld   a, [wFile2DeathCountHigh]
+    ld   h, a
+    ld   a, [wFile2DeathCountLow]
+    ld   l, a
+    ld   de, vBGMap0 + $0147
+    call CopyDigitsToFileScreenBG
+
+.file3
+    ld   a, [wSaveFilesCount]
+    and  $04
+    jr   z, .return
+
+    ld   a, [wFile3DeathCountHigh]
+    ld   h, a
+    ld   a, [wFile3DeathCountLow]
+    ld   l, a
+    ld   de, vBGMap0 + $01A7
+    call CopyDigitsToFileScreenBG
+
+.return
+    jp   IncrementGameplaySubtypeAndReturn
+    ; Unused
+    ret
+
+FileSelectionPrepare5::
+    jp   FileDeletionState4Handler
+
+func_4852::
+    push de
+    ld   a, [$D600]
+    ld   e, a
+    ld   d, $00
+    ld   hl, $D601
+    add  hl, de
+    add  a, $10
+    ld   [$D600], a
+    ld   a, b
+    ldi  [hl], a
+    ld   a, c
+    ldi  [hl], a
+    ld   a, $04
+    ldi  [hl], a
+    pop  de
+    push de
+    ld   a, $05
+
+.loop
+    ldh  [hScratch0], a
+    ld   a, [de]
+    and  a
+    ld   a, $7E
+    jr   z, .skipDE
+    ld   a, [de]
+    dec  a
+    push bc
+    push hl
+    ld   c, a
+    ld   b, $00
+    call ReadTileValueFromAsciiTable
+    pop  hl
+    pop  bc
+.skipDE
+
+    ldi  [hl], a
+    inc  de
+    ldh  a, [hScratch0]
+    dec  a
+    jr   nz, .loop
+    ld   a, b
+    ldi  [hl], a
+    ld   a, c
+    sub  a, $20
+    ldi  [hl], a
+    ld   a, $04
+    ldi  [hl], a
+    pop  de
+    ld   a, $05
+
+label_4894::
+    ldh  [hScratch0], a
+    ld   a, [de]
+    and  a
+    jr   label_489D
+    dec  a
+    and  $C0
+
+label_489D::
+    ld   a, $7E
+    jr   label_48A9
+    ld   a, [de]
+    and  $80
+    ld   a, $C8
+    jr   z, label_48A9
+    inc  a
+
+label_48A9::
+    ldi  [hl], a
+    inc  de
+    ldh  a, [hScratch0]
+    dec  a
+    jr   nz, label_4894
+    xor  a
+    ld   [hl], a
+    ret
+
+FileSelectionPrepare6::
+    ; If the music track should set overriden…
+    ld   a, [wForceFileSelectionScreenMusic]
+    and  a
+    jr   z, .dontForceMusicTrack
+    ; … clear the flag…
+    xor  a
+    ld   [wForceFileSelectionScreenMusic], a
+    ; … and set the music to the file menu selection track
+    ld   a, $11
+    ld   [wActiveMusicTrack], a
+.dontForceMusicTrack
+
+    ; If there are no saved files yet…
+    ld   a, [wSaveFilesCount]
+    and  a
+    ; … use background map 3,
+    ld   a, $03
+    jr   z, .BGMapEnd
+    ; else use background map 4.
+    ld   a, $04
+.BGMapEnd
+
+    ; Load background and palette
+    ld   [wBGMapToLoad], a
+    ld   a, $E4
+    ld   [wBGPalette], a
+    ld   a, $1C
+    ld   [wOBJ0Palette], a
+    ld   a, $E4
+    ld   [wOBJ1Palette], a
+    call LoadFileMenuBG_trampoline
+    jp   IncrementGameplaySubtypeAndReturn
+
+label_48E4::
+    dec  sp
+    ld   d, e
+    ld   l, e
+    add  a, e
+
+FileSelectionInteractiveHandler::
+    call label_6BA8
+    ldh  a, [hJoypadState]
+    and  $90
+    jr   z, label_48F4
+    jp   IncrementGameplaySubtypeAndReturn
+
+label_48F4::
+    ldh  a, [hJoypadState]
+    and  $0C
+    jr   z, label_4920
+    ld   c, $02
+    ld   a, [wSaveFilesCount]
+    and  a
+    jr   z, label_4903
+    inc  c
+
+label_4903::
+    ldh  a, [hJoypadState]
+    bit  2, a
+    jr   nz, label_4915
+    ld   a, [wSaveSlot]
+    add  a, $01
+    inc  c
+    cp   c
+    jr   c, label_491D
+    xor  a
+    jr   label_491D
+
+label_4915::
+    ld   a, [wSaveSlot]
+    sub  a, $01
+    jr   nc, label_491D
+    ld   a, c
+
+label_491D::
+    ld   [wSaveSlot], a
+
+label_4920::
+    ld   a, [wSaveSlot]
+    cp   $03
+    jr   nz, label_4954
+    ldh  a, [hJoypadState]
+    and  $03
+    jr   z, label_4938
+    call label_6BAE
+    ld   a, [$D000]
+    xor  $01
+    ld   [$D000], a
+
+label_4938::
+    ldh  a, [hFrameCounter]
+    and  $10
+    jr   nz, label_4954
+    ld   a, [$D000]
+    and  a
+    ld   a, $2C
+    jr   z, label_4948
+    ld   a, $64
+
+label_4948::
+    ld   hl, $C008
+    ld   [hl], $88
+    inc  hl
+    ldi  [hl], a
+    ld   a, $BE
+    ldi  [hl], a
+    xor  a
+    ld   [hl], a
+
+label_4954::
+    ld   a, [wSaveSlot]
+    ld   e, a
+    ld   d, $00
+    ld   hl, label_48E4
+    add  hl, de
+    ldh  a, [hFrameCounter]
+    and  $08
+    jr   z, label_497B
+    ld   a, [hl]
+    ld   hl, wOAMBuffer
+    push af
+    ldi  [hl], a
+    ld   a, $18
+    ldi  [hl], a
+    xor  a
+    ldi  [hl], a
+    ldi  [hl], a
+    pop  af
+    ldi  [hl], a
+    ld   a, $20
+    ldi  [hl], a
+    ld   a, $02
+    ldi  [hl], a
+    xor  a
+    ld   [hl], a
+    ret
+
+label_497B::
+    ld   a, [hl]
+    ld   hl, wOAMBuffer
+    push af
+    ldi  [hl], a
+    ld   a, $18
+    ldi  [hl], a
+    ld   a, $02
+    ldi  [hl], a
+    ld   a, $20
+    ldi  [hl], a
+    pop  af
+    ldi  [hl], a
+    ld   a, $20
+    ldi  [hl], a
+    xor  a
+    ldi  [hl], a
+    ld   a, $20
+    ld   [hl], a
+    ret
+
+FileSelectionExecuteChoice::
+    ; If the COPY or ERASE menu item was selected, handle this.
+    ld   a, [wSaveSlot]
+    cp   $03
+    jr   z, HandleFileSelectionCommand
+
+    ; The player selected an actual save file.
+    ld   a, [wSaveSlot]
+    ld   e, a
+    sla  a
+    sla  a
+    add  a, e
+    ld   e, a
+    ld   d, $00
+    ld   c, $05
+    ld   hl, $DB80
+    add  hl, de
+
+.loop
+    ld   a, [hli]
+    and  a
+    jr   nz, LoadSelectedFile
+    dec  c
+    jr   nz, .loop
+
+    ; Go to the file new dialog
+    xor  a
+    ld   [wGameplaySubtype], a
+    ld   a, GAMEPLAY_FILE_NEW
+    ld   [wGameplayType], a
+
+PlayValidationJingle::
+PlayValidationJingleAndReturn::
+    ld   a, JINGLE_VALIDATE
+    ldh  [hJingle], a
+    ret
+
+LoadSelectedFile::
+    call PlayValidationJingle
+
+    ld   a, $00
+    ld   [wBGPalette], a
+    ld   [wOBJ0Palette], a
+    ld   [wOBJ1Palette], a
+    ld   a, $01
+    call ClearFileMenuBG_trampoline
+
+    ld   a, $05
+    ld   [wTileMapToLoad], a
+    jp   IncrementGameplaySubtypeAndReturn
+
+HandleFileSelectionCommand::
+    ; Clear Gameplay Subtype
+    xor  a
+    ld   [wGameplaySubtype], a
+    ; If the arrow is not the COPY item…
+    ld   a, [wIsFileSelectionArrowShifted]
+    and  a
+    ; … go to the File Deletion screen,
+    ld   a, GAMEPLAY_FILE_DELETE
+    jr   z, .nextScreenEnd
+    ; else go to the File Copy screen.
+    ld   a, GAMEPLAY_FILE_COPY
+.nextScreenEnd
+
+    ; Move to the Game Start stage
+    ld   [wGameplayType], a
+    jp   PlayValidationJingleAndReturn
+
+; File creation data
+label_49F2::
+    dec  b
+    and  h
+    or   d
+    and  a
+    ld   e, a
+    xor  e
+
+label_49F8::
+    dec  b
+    and  c
+    or   d
+    and  h
+    ld   e, a
+    xor  b
+
+; Part of file copy
+label_49FE::
+    db 0, $A1, $AD, $A4, $5A, $A8
+
+FileSelectionLoadSavedFile::
+    jp   LoadSavedFile
 
 
 ; -----------------------------------------------------------------------------
@@ -12,11 +438,11 @@
 FileCreationEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-._00 dw label_4A11
-._01 dw label_4A24
-._02 dw label_4A9B
+._00 dw FileCreationInit1Handler
+._01 dw FileCreationInit2Handler
+._02 dw FileCreationInteractiveHandler
 
-label_4A11::
+FileCreationInit1Handler::
     call IncrementGameplaySubtype
     ld   a, $08
     ld   [wTileMapToLoad], a
@@ -26,7 +452,7 @@ label_4A11::
     ld   [$DBAA], a
     ret
 
-label_4A24::
+FileCreationInit2Handler::
     ld   a, $05
     ld   [wBGMapToLoad], a
     ld   hl, $D601
@@ -43,13 +469,20 @@ label_4A24::
     ld   [hl], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_4A3F::
+; Write a single byte to the save file.
+; Inputs:
+;   hl   address of the save file start
+;   bc   offset
+;   a    value to write
+WriteByteToExternalRAM::
     push hl
     add  hl, bc
     call EnableExternalRAMWriting
     ld   [hl], a
     pop  hl
     ret
+
+label_4A47::
     ld   bc, DebugSaveFileData
     ld   e, DEBUG_SAVE_FILE_SIZE
     push hl
@@ -66,32 +499,32 @@ label_4A4D::
     pop  hl
     ld   bc, $4E
     ld   a, $01
-    call label_4A3F
+    call WriteByteToExternalRAM
     ld   bc, $44
-    call label_4A3F
+    call WriteByteToExternalRAM
     ld   bc, $43
     ld   a, $02
-    call label_4A3F
+    call WriteByteToExternalRAM
     ld   bc, $4D
     ld   a, $59
-    call label_4A3F
+    call WriteByteToExternalRAM
     ld   bc, $77
-    call label_4A3F
+    call WriteByteToExternalRAM
     ld   bc, $78
-    call label_4A3F
+    call WriteByteToExternalRAM
     ld   bc, $45
-    call label_4A3F
+    call WriteByteToExternalRAM
     ld   bc, $76
     ld   a, $39
-    call label_4A3F
+    call WriteByteToExternalRAM
     ld   bc, $4C
-    call label_4A3F
+    call WriteByteToExternalRAM
     ret
 
 Data_001_4A98::
     db   $00, $05, $0A
 
-label_4A9B::
+FileCreationInteractiveHandler::
     ld   a, [wSaveSlot]
     ld   e, a
     ld   d, $00
@@ -104,6 +537,7 @@ label_4A9B::
     ld   d, h
     ld   bc, $984A
     call func_4852
+
     ldh  a, [hJoypadState]
     and  J_START
     jr   z, label_4B29
@@ -407,20 +841,20 @@ FileDeletionEntryPoint::
     call func_5DC0                                ; $4CFB: $CD $C0 $5D
     ld   a, [wGameplaySubtype]                    ; $4CFE: $FA $96 $DB
     JP_TABLE                                      ; $4D01
-._00 dw label_4D1A                                ; $4D02
-._01 dw label_4D2C                                ; $4D04
-._02 dw label_4D56                                ; $4D06
-._03 dw label_4D65                                ; $4D08
-._04 dw label_4D6D                                ; $4D0A
-._05 dw label_4D79                                ; $4D0C
-._06 dw label_4D82                                ; $4D0E
-._07 dw label_4D88                                ; $4D10
-._08 dw label_4D39                                ; $4D12
-._09 dw label_4D49                                ; $4D14
-._0A dw label_4E06                                ; $4D16
-._0B dw label_4E6B                                ; $4D18
+._00 dw FileDeletionState0Handler
+._01 dw FileDeletionState1Handler
+._02 dw FileDeletionState2Handler
+._03 dw FileDeletionState3Handler
+._04 dw FileDeletionState4Handler
+._05 dw FileDeletionState5Handler
+._06 dw FileDeletionState6Handler
+._07 dw FileDeletionState7Handler
+._08 dw FileDeletionState8Handler
+._09 dw FileDeletionState9Handler
+._0A dw FileDeletionState10Handler
+._0B dw FileDeletionState11Handler
 
-label_4D1A::
+FileDeletionState0Handler::
     ldh  a, [hIsGBC]                              ; $4D1A: $F0 $FE
     and  a                                        ; $4D1C: $A7
     jr   z, label_4D53                            ; $4D1D: $28 $34
@@ -431,7 +865,7 @@ label_4D1A::
     ld   [wPaletteDataFlags], a                   ; $4D26: $EA $D1 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $4D29: $C3 $D6 $44
 
-label_4D2C::
+FileDeletionState1Handler::
     ldh  a, [hIsGBC]                              ; $4D2C: $F0 $FE
     and  a                                        ; $4D2E: $A7
     jr   z, label_4D53                            ; $4D2F: $28 $22
@@ -440,7 +874,7 @@ label_4D2C::
     ld   [wPaletteDataFlags], a                   ; $4D33: $EA $D1 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $4D36: $C3 $D6 $44
 
-label_4D39::
+FileDeletionState8Handler::
     ldh  a, [hIsGBC]                              ; $4D39: $F0 $FE
     and  a                                        ; $4D3B: $A7
     jr   z, label_4D53                            ; $4D3C: $28 $15
@@ -450,7 +884,7 @@ label_4D39::
     ld   [wPaletteDataFlags], a                   ; $4D43: $EA $D1 $DD
     jp   IncrementGameplaySubtypeAndReturn        ; $4D46: $C3 $D6 $44
 
-label_4D49::
+FileDeletionState9Handler::
     ldh  a, [hIsGBC]                              ; $4D49: $F0 $FE
     and  a                                        ; $4D4B: $A7
     jr   z, label_4D53                            ; $4D4C: $28 $05
@@ -461,7 +895,7 @@ label_4D49::
 label_4D53::
     jp   IncrementGameplaySubtypeAndReturn        ; $4D53: $C3 $D6 $44
 
-label_4D56::
+FileDeletionState2Handler::
     ld   a, $08                                   ; $4D56: $3E $08
     ld   [wTileMapToLoad], a                      ; $4D58: $EA $FE $D6
     xor  a                                        ; $4D5B: $AF
@@ -469,27 +903,27 @@ label_4D56::
     ld   [wCreditsScratch0], a                    ; $4D5F: $EA $00 $D0
     jp   IncrementGameplaySubtypeAndReturn        ; $4D62: $C3 $D6 $44
 
-label_4D65::
+FileDeletionState3Handler::
     ld   a, $06                                   ; $4D65: $3E $06
     ld   [wBGMapToLoad], a                        ; $4D67: $EA $FF $D6
     jp   IncrementGameplaySubtypeAndReturn        ; $4D6A: $C3 $D6 $44
 
-label_4D6D::
+FileDeletionState4Handler::
     call label_4D8B                               ; $4D6D: $CD $8B $4D
     call label_4D94                               ; $4D70: $CD $94 $4D
     call label_4D9D                               ; $4D73: $CD $9D $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4D76: $C3 $D6 $44
 
-label_4D79::
+FileDeletionState5Handler::
     call label_4DA6                               ; $4D79: $CD $A6 $4D
     call label_4DBE                               ; $4D7C: $CD $BE $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4D7F: $C3 $D6 $44
 
-label_4D82::
+FileDeletionState6Handler::
     call label_4DD6                               ; $4D82: $CD $D6 $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4D85: $C3 $D6 $44
 
-label_4D88::
+FileDeletionState7Handler::
     jp   CopyDeathCountsToBG                      ; $4D88: $C3 $0C $48
 
 label_4D8B::
@@ -554,7 +988,7 @@ Data_001_4DEE::
     db   $99, $05, $44, $7E, $99, $25, $44, $7E   ; $4DF6
     db   $99, $65, $44, $7E, $99, $85, $44, $7E   ; $4DFE
 
-label_4E06::
+FileDeletionState10Handler::
     call label_6BA8                               ; $4E06: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $4E09: $F0 $CC
     and  $08                                      ; $4E0B: $E6 $08
@@ -621,7 +1055,7 @@ label_4E67::
     call label_4954                               ; $4E67: $CD $54 $49
     ret                                           ; $4E6A: $C9
 
-label_4E6B::
+FileDeletionState11Handler::
     ldh  a, [hJoypadState]                        ; $4E6B: $F0 $CC
     bit  5, a                                     ; $4E6D: $CB $6F
     jr   nz, label_4E9E                           ; $4E6F: $20 $2D
@@ -831,14 +1265,14 @@ CopyDigitsToFileScreenBG::
 FileCopyEntryPoint::
     ld   a, [wGameplaySubtype]                    ; $4F8C: $FA $96 $DB
     JP_TABLE
-._00 dw label_4D1A
-._01 dw label_4D2C
+._00 dw FileDeletionState0Handler
+._01 dw FileDeletionState1Handler
 ._02 dw label_4FA6
 ._03 dw label_4FBB
 ._04 dw label_4FC3
 ._05 dw label_4FE1
-._06 dw label_4D39
-._07 dw label_4D49
+._06 dw FileDeletionState8Handler
+._07 dw FileDeletionState9Handler
 ._08 dw label_4FFF
 ._09 dw label_50DF
 ._0A dw label_51E9

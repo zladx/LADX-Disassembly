@@ -5,19 +5,19 @@
 FaceShrineMuralEntryPoint::
     ld   a, [wGameplaySubtype]
     JP_TABLE
-._0 dw label_6B0A
-._1 dw label_6B2B
-._2 dw label_6B52
-._3 dw label_6B6F
-._4 dw label_6B81
-._5 dw label_6B9A
+._0 dw FaceShrineMuralStage0Handler
+._1 dw FaceShrineMuralStage1Handler
+._2 dw FaceShrineMuralStage2Handler
+._3 dw FaceShrineMuralStage3Handler
+._4 dw FaceShrineMuralStage4Handler
+._5 dw FaceShrineMuralStage5Handler
 ._6 dw FileSaveFadeOut
 
-label_6B0A::
+FaceShrineMuralStage0Handler::
     call IncrementGameplaySubtype
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_6B2B
+    jr   z, FaceShrineMuralStage1Handler
     ld   hl, $DC10
     ld   c, $80
     di
@@ -38,7 +38,7 @@ label_6B18::
     ld   [rSVBK], a
     ei
 
-label_6B2B::
+FaceShrineMuralStage1Handler::
     ld   a, $01
     ld   [$C167], a
     call func_1A22
@@ -59,7 +59,7 @@ label_6B2B::
 label_6B51::
     ret
 
-label_6B52::
+FaceShrineMuralStage2Handler::
     ld   a, $15
     ld   [wBGMapToLoad], a
     ld   a, $FF
@@ -73,7 +73,7 @@ label_6B52::
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_6B6F::
+FaceShrineMuralStage3Handler::
     call func_1A39
     ld   a, [$C16B]
     cp   $04
@@ -85,7 +85,7 @@ label_6B6F::
 label_6B80::
     ret
 
-label_6B81::
+FaceShrineMuralStage4Handler::
     ld   a, [$C19F]
     and  a
     ret  nz
@@ -101,13 +101,12 @@ label_6B81::
 label_6B99::
     ret
 
-label_6B9A::
+FaceShrineMuralStage5Handler::
     ldh  a, [hJoypadState]
     and  $B0
-    jr   z, label_6BA7
+    jr   z, .return
     ld   a, JINGLE_VALIDATE
     ldh  [hJingle], a
     call label_68D9
-
-label_6BA7::
+.return
     ret

@@ -828,9 +828,7 @@ label_49FE::
 FileSelectionLoadSavedFile::
     jp   LoadSavedFile
 
-include "code/file_creation.asm"
-include "code/file_deletion.asm"
-include "code/file_copy.asm"
+include "code/file_menus.asm"
 
 ; Table that determines how much health you have after a game over.
 ; New files always start with 3 HP / 3 MAX HP, but after that

@@ -1,8 +1,6 @@
 ; Code for bank 1.
 ; Contains main engine support code.
 
-data_380   equ $0380
-
 include "code/file_save_screen.asm"
 
 ; Unused code?
@@ -473,7 +471,7 @@ label_52C7::
     inc  hl
     ld   b, [hl]
     ld   hl, $D800
-    ld   de, data_380
+    ld   de, $0380
 
 label_52D9::
     call EnableExternalRAMWriting
@@ -1879,7 +1877,7 @@ label_5DE6::
     ld   h, [hl]
     ld   l, a
     ld   bc, $D800
-    ld   de, data_380
+    ld   de, $0380
 
 label_5E12::
     call EnableExternalRAMWriting

@@ -5282,12 +5282,15 @@ TrendyEntityJumpTable:
 ._0B dw func_004_72EF                             ; $6F0E
 ._0C dw func_004_732F                             ; $6F10
 
+; Remainer of the entities initial pos y table
 Data_004_6F12::
     db   $38, $58, $78
 
+; Trendy entity  initial direction
 Data_004_6F15::
     db   $58, $40, $70, $2E, $2E, $2E
 
+; Trendy entity initial sprite variant
 Data_004_6F1B::
     db   $3E, $4E, $4E, $00, $00, $00
 
@@ -5314,6 +5317,7 @@ jr_004_6F3C:
     ld   hl, wEntitiesPrivateState1Table          ; $6F44: $21 $B0 $C2
     add  hl, de                                   ; $6F47: $19
     ld   [hl], $01                                ; $6F48: $36 $01
+
     ld   hl, (TrendyEntityJumpTable._08 + 1)      ; $6F4A: $21 $09 $6F
     add  hl, de                                   ; $6F4D: $19
     ld   a, [hl]                                  ; $6F4E: $7E

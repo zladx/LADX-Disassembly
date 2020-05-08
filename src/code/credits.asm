@@ -143,6 +143,7 @@ jr_017_4526:
     ld   [wCreditsScratch0], a                    ; $4537: $EA $00 $D0
     jp   func_017_45B5                            ; $453A: $C3 $B5 $45
 
+; Unused data
 Data_017_453D::
     db   $00, $00, $00, $00, $04, $04, $04, $04, $19, $19, $19, $19, $1E, $1E, $1E, $1E
     db   $FF, $FF, $FF, $FF, $AF, $AF, $AF, $AF, $5A, $5A, $5A, $5A, $1E, $1E, $1E, $1E

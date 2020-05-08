@@ -31,7 +31,7 @@ LiftableStatueEntityHandler::
     add  hl, bc                                   ; $4042: $09
     ld   a, [hl]                                  ; $4043: $7E
     and  $80                                      ; $4044: $E6 $80
-    jp   nz, func_019_7E61                        ; $4046: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                        ; $4046: $C2 $61 $7E
 
     ret                                           ; $4049: $C9
 
@@ -302,7 +302,7 @@ jr_019_41E2:
     ldh  [hScratch1], a                           ; $41F7: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $41F9: $3E $02
     call AddTranscientVfx                         ; $41FB: $CD $C7 $0C
-    jp   func_019_7E61                            ; $41FE: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $41FE: $C3 $61 $7E
 
 Data_019_4201::
     db   $17, $11, $36, $28, $45, $52, $7A, $64, $93, $A1, $C5, $D4, $28, $0E, $3F, $5D
@@ -362,7 +362,7 @@ jr_019_4226:
     ld   [$DBCB], a                               ; $426F: $EA $CB $DB
     ld   a, $0C                                   ; $4272: $3E $0C
     ldh  [hWaveSfx], a                            ; $4274: $E0 $F3
-    jp   func_019_7E61                            ; $4276: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $4276: $C3 $61 $7E
 
 jr_019_4279:
     ld   a, $01                                   ; $4279: $3E $01
@@ -488,7 +488,7 @@ jr_019_434A:
     ld   [hl], a                                  ; $434A: $77
     xor  a                                        ; $434B: $AF
     ld   [wC167], a                               ; $434C: $EA $67 $C1
-    call func_019_7E61                            ; $434F: $CD $61 $7E
+    call ClearEntityStatus_19                            ; $434F: $CD $61 $7E
     jp   label_C9E                                ; $4352: $C3 $9E $0C
 
 jr_019_4355:
@@ -745,7 +745,7 @@ jr_019_459F:
     ret                                           ; $459F: $C9
 
 jr_019_45A0:
-    call func_019_7E61                            ; $45A0: $CD $61 $7E
+    call ClearEntityStatus_19                            ; $45A0: $CD $61 $7E
 
 func_019_45A3::
     ldh  a, [hActiveEntityPosX]                   ; $45A3: $F0 $EE
@@ -780,11 +780,11 @@ GoriyaEntityHandler::
     set  7, [hl]                                  ; $45EA: $CB $FE
     ld   a, [wTradeSequenceItem]                  ; $45EC: $FA $0E $DB
     cp   $0E                                      ; $45EF: $FE $0E
-    jp   nz, func_019_7E61                        ; $45F1: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                        ; $45F1: $C2 $61 $7E
 
     ld   a, [$DB7F]                               ; $45F4: $FA $7F $DB
     and  a                                        ; $45F7: $A7
-    jp   nz, func_019_7E61                        ; $45F8: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                        ; $45F8: $C2 $61 $7E
 
     ld   hl, wEntitiesPosXTable                   ; $45FB: $21 $00 $C2
     add  hl, bc                                   ; $45FE: $09
@@ -1201,7 +1201,7 @@ jr_019_48AC:
     jr   nz, jr_019_48AC                          ; $48B0: $20 $FA
 
     pop  bc                                       ; $48B2: $C1
-    call func_019_7E61                            ; $48B3: $CD $61 $7E
+    call ClearEntityStatus_19                            ; $48B3: $CD $61 $7E
     ldh  a, [hLinkPositionX]                      ; $48B6: $F0 $98
     swap a                                        ; $48B8: $CB $37
     and  $0F                                      ; $48BA: $E6 $0F
@@ -1512,7 +1512,7 @@ EggSongEventEntityHandler::
     ld   [$D461], a                               ; $4AD5: $EA $61 $D4
     ldh  a, [hRoomStatus]                         ; $4AD8: $F0 $F8
     and  $10                                      ; $4ADA: $E6 $10
-    jp   nz, func_019_7E61                        ; $4ADC: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                        ; $4ADC: $C2 $61 $7E
 
     ldh  a, [hActiveEntityState]                  ; $4ADF: $F0 $F0
     JP_TABLE
@@ -1692,7 +1692,7 @@ label_019_4BCC::
 jr_019_4BF7:
     ldh  a, [hActiveEntitySpriteVariant]          ; $4BF7: $F0 $F1
     cp   $07                                      ; $4BF9: $FE $07
-    jp   nz, func_019_7E61                        ; $4BFB: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                        ; $4BFB: $C2 $61 $7E
 
     ld   e, $08                                   ; $4BFE: $1E $08
     ld   hl, wHasInstrument1                      ; $4C00: $21 $65 $DB
@@ -1707,7 +1707,7 @@ jr_019_4C03:
 
     ldh  a, [hRoomStatus]                         ; $4C0B: $F0 $F8
     and  $10                                      ; $4C0D: $E6 $10
-    jp   nz, func_019_7E61                       ; $4C0F: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                       ; $4C0F: $C2 $61 $7E
 
     call GetEntityTransitionCountdown             ; $4C12: $CD $05 $0C
     ld   [hl], $A0                                ; $4C15: $36 $A0
@@ -1716,7 +1716,7 @@ jr_019_4C03:
 jr_019_4C1A:
     xor  a                                        ; $4C1A: $AF
     ld   [$C5A3], a                               ; $4C1B: $EA $A3 $C5
-    jp   func_019_7E61                           ; $4C1E: $C3 $61 $7E
+    jp   ClearEntityStatus_19                           ; $4C1E: $C3 $61 $7E
 
 jr_019_4C21:
     ld   a, $02                                   ; $4C21: $3E $02
@@ -1831,7 +1831,7 @@ jr_019_4CD6:
 
     ld   a, $02                                   ; $4CE2: $3E $02
     ld   [wPaletteDataFlags], a                    ; $4CE4: $EA $D1 $DD
-    jp   func_019_7E61                           ; $4CE7: $C3 $61 $7E
+    jp   ClearEntityStatus_19                           ; $4CE7: $C3 $61 $7E
 
 label_019_4CEA:
     ld   e, $01                                   ; $4CEA: $1E $01
@@ -1868,7 +1868,7 @@ jr_019_4D1A:
     set  4, [hl]                                  ; $4D1D: $CB $E6
     ld   a, [hl]                                  ; $4D1F: $7E
     ldh  [hRoomStatus], a                         ; $4D20: $E0 $F8
-    jp   func_019_7E61                            ; $4D22: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $4D22: $C3 $61 $7E
 
 Data_019_4D25::
     db   $00, $04, $08, $00, $08, $00, $04, $08
@@ -1941,7 +1941,7 @@ jr_019_4D46:
 label_019_4D9B:
     ldh  a, [hRoomStatus]                         ; $4D9B: $F0 $F8
     and  $20                                      ; $4D9D: $E6 $20
-    jp   nz, func_019_7E61                        ; $4D9F: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                        ; $4D9F: $C2 $61 $7E
 
     ld   hl, wEntitiesPrivateState1Table          ; $4DA2: $21 $B0 $C2
     add  hl, bc                                   ; $4DA5: $09
@@ -2089,7 +2089,7 @@ func_019_4E74::
     xor  a                                        ; $4EA0: $AF
     ld   [wC167], a                               ; $4EA1: $EA $67 $C1
     call func_019_7F0E                            ; $4EA4: $CD $0E $7F
-    jp   func_019_7E61                            ; $4EA7: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $4EA7: $C3 $61 $7E
 
 Data_019_4EAA::
     db   $6A, $06, $6C, $06, $6E, $06
@@ -2125,7 +2125,7 @@ label_019_4F30:
     jr   z, jr_019_4F5A                           ; $4F44: $28 $14
 
     cp   $01                                      ; $4F46: $FE $01
-    jp   z, func_019_7E61                         ; $4F48: $CA $61 $7E
+    jp   z, ClearEntityStatus_19                         ; $4F48: $CA $61 $7E
 
     rra                                           ; $4F4B: $1F
     rra                                           ; $4F4C: $1F
@@ -2169,7 +2169,7 @@ jr_019_4F5A:
     ld   hl, wEntitiesTransitionCountdownTable    ; $4F86: $21 $E0 $C2
     add  hl, de                                   ; $4F89: $19
     ld   [hl], $80                                ; $4F8A: $36 $80
-    jp   func_019_7E61                            ; $4F8C: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $4F8C: $C3 $61 $7E
 
 jr_019_4F8F:
     ld   hl, wEntitiesPrivateState2Table          ; $4F8F: $21 $C0 $C2
@@ -2525,7 +2525,7 @@ FlyingRoosterEventsEntityHandler::
 jr_019_51D2:
     ldh  a, [hRoomStatus]                         ; $51D2: $F0 $F8
     and  $20                                      ; $51D4: $E6 $20
-    jp   nz, func_019_7E61                        ; $51D6: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                        ; $51D6: $C2 $61 $7E
 
     ldh  a, [hActiveEntityState]                  ; $51D9: $F0 $F0
     JP_TABLE                                      ; $51DB
@@ -2754,7 +2754,7 @@ jr_019_531E:
     ld   a, $23                                   ; $5359: $3E $23
     ldh  [hJingle], a                             ; $535B: $E0 $F2
     call func_019_7F0E                            ; $535D: $CD $0E $7F
-    jp   func_019_7E61                            ; $5360: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $5360: $C3 $61 $7E
 
 label_019_5363:
     ld   hl, wEntitiesSpeedYTable                 ; $5363: $21 $50 $C2
@@ -3017,7 +3017,7 @@ label_019_54FD:
 jr_019_5519:
     call func_019_7D3D                            ; $5519: $CD $3D $7D
     call GetEntityTransitionCountdown             ; $551C: $CD $05 $0C
-    jp   z, func_019_7E61                         ; $551F: $CA $61 $7E
+    jp   z, ClearEntityStatus_19                         ; $551F: $CA $61 $7E
 
     cp   $08                                      ; $5522: $FE $08
     jr   nz, jr_019_552C                          ; $5524: $20 $06
@@ -3046,7 +3046,7 @@ jr_019_552D:
     cp   $10                                      ; $5545: $FE $10
     ret  nz                                       ; $5547: $C0
 
-    jp   func_019_7E61                            ; $5548: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $5548: $C3 $61 $7E
 
 Data_019_554B::
     db   $00, $00, $50, $02, $00, $08, $52, $02, $00, $10, $52, $22, $00, $18, $50, $22
@@ -3659,7 +3659,7 @@ jr_019_598B:
     ret  z                                        ; $5994: $C8
 
     call label_3E34                               ; $5995: $CD $34 $3E
-    jp   func_019_7E61                            ; $5998: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $5998: $C3 $61 $7E
 
 func_019_599B::
     call ResetPegasusBoots                        ; $599B: $CD $B6 $0C
@@ -3693,7 +3693,7 @@ Data_019_59BC::
 RoosterEntityHandler::
     ld   a, [wIsRoosterFollowingLink]             ; $59DC: $FA $7B $DB
     and  a                                        ; $59DF: $A7
-    jp   z, func_019_7E61                         ; $59E0: $CA $61 $7E
+    jp   z, ClearEntityStatus_19                         ; $59E0: $CA $61 $7E
 
     ldh  a, [hMapRoom]                            ; $59E3: $F0 $F6
     ld   hl, wEntitiesRoomTable                   ; $59E5: $21 $E0 $C3
@@ -4250,7 +4250,7 @@ Data_019_5E10::
 GhostEntityHandler::
     ld   a, [wIsGhostFollowingLink]               ; $5E18: $FA $79 $DB
     cp   $01                                      ; $5E1B: $FE $01
-    jp   nz, func_019_7E61                        ; $5E1D: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                        ; $5E1D: $C2 $61 $7E
 
     ldh  a, [hMapRoom]                            ; $5E20: $F0 $F6
     ld   hl, wEntitiesRoomTable                   ; $5E22: $21 $E0 $C3
@@ -4452,7 +4452,7 @@ GhostState2Handler::
     ld   [wC167], a                               ; $5F51: $EA $67 $C1
     ld   hl, $D9E3                                ; $5F54: $21 $E3 $D9
     set  6, [hl]                                  ; $5F57: $CB $F6
-    jp   func_019_7E61                            ; $5F59: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $5F59: $C3 $61 $7E
 
 jr_019_5F5C:
     jp   label_019_6053                           ; $5F5C: $C3 $53 $60
@@ -4678,7 +4678,7 @@ func_019_60A5::
     ld   a, $01                                   ; $60A5: $3E $01
     ld   [wDB7A], a                               ; $60A7: $EA $7A $DB
     call func_019_7F0E                            ; $60AA: $CD $0E $7F
-    call func_019_7E61                            ; $60AD: $CD $61 $7E
+    call ClearEntityStatus_19                            ; $60AD: $CD $61 $7E
     jp   ApplyMapFadeOutTransition                ; $60B0: $C3 $7D $0C
 
     nop
@@ -4918,7 +4918,7 @@ EaglesTowerOpeningState6Handler::
     call func_2BF                                 ; $62E8: $CD $2F $0B
     call func_019_6374                            ; $62EB: $CD $74 $63
     call func_019_63B5                            ; $62EE: $CD $B5 $63
-    jp   func_019_7E61                            ; $62F1: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $62F1: $C3 $61 $7E
 
 Data_019_62F4::
     db   $98, $4A, $87, $0C, $1C, $64, $66, $0F, $0F, $0F, $0F, $98, $4B, $87, $0D, $1D
@@ -5593,7 +5593,7 @@ jr_019_6961:
     ld   [wC167], a                               ; $6A32: $EA $67 $C1
     ld   a, $02                                   ; $6A35: $3E $02
     ldh  [hJingle], a                             ; $6A37: $E0 $F2
-    jp   func_019_7E61                            ; $6A39: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $6A39: $C3 $61 $7E
 
 label_019_6A3C:
     call IncrementEntityState                     ; $6A3C: $CD $12 $3B
@@ -6019,7 +6019,7 @@ jr_019_6CC2:
     jr   c, func_019_6C99                         ; $6CC9: $38 $CE
 
     cp   $88                                      ; $6CCB: $FE $88
-    jp   nc, func_019_7E61                        ; $6CCD: $D2 $61 $7E
+    jp   nc, ClearEntityStatus_19                        ; $6CCD: $D2 $61 $7E
 
     ret                                           ; $6CD0: $C9
 
@@ -6049,7 +6049,7 @@ label_019_6CE7:
     add  hl, bc                                   ; $6CF8: $09
     ld   a, [hl]                                  ; $6CF9: $7E
     and  $80                                      ; $6CFA: $E6 $80
-    jp   nz, func_019_7E61                        ; $6CFC: $C2 $61 $7E
+    jp   nz, ClearEntityStatus_19                        ; $6CFC: $C2 $61 $7E
 
     ret                                           ; $6CFF: $C9
 
@@ -7311,7 +7311,7 @@ func_019_7744::
     and  a                                        ; $774A: $A7
     ret  nz                                       ; $774B: $C0
 
-    jp   func_019_7E61                            ; $774C: $C3 $61 $7E
+    jp   ClearEntityStatus_19                            ; $774C: $C3 $61 $7E
 
 Data_019_774F::
     db   $00, $04, $72, $00, $E0, $04, $72, $00   ; $774F
@@ -7424,7 +7424,7 @@ jr_019_7898:
 
     ld   a, $01                                   ; $78A9: $3E $01
     ldh  [hWaveSfx], a                            ; $78AB: $E0 $F3
-    call func_019_7E61                            ; $78AD: $CD $61 $7E
+    call ClearEntityStatus_19                            ; $78AD: $CD $61 $7E
     ld   hl, $DAE9                                ; $78B0: $21 $E9 $DA
     ld   a, [wSeashellsCount]                     ; $78B3: $FA $0F $DB
 
@@ -8286,7 +8286,7 @@ jr_019_7E5F:
     ld   e, a                                     ; $7E5F: $5F
     ret                                           ; $7E60: $C9
 
-func_019_7E61::
+ClearEntityStatus_19::
     ld   hl, wEntitiesStatusTable                 ; $7E61: $21 $80 $C2
     add  hl, bc                                   ; $7E64: $09
     ld   [hl], b                                  ; $7E65: $70
@@ -8394,7 +8394,7 @@ jr_019_7EF9:
     ld   [hl], $08                                ; $7F03: $36 $08
 
 jr_019_7F05:
-    call func_019_7E61                            ; $7F05: $CD $61 $7E
+    call ClearEntityStatus_19                            ; $7F05: $CD $61 $7E
     ld   hl, hNoiseSfx                            ; $7F08: $21 $F4 $FF
     ld   [hl], $1A                                ; $7F0B: $36 $1A
     ret                                           ; $7F0D: $C9

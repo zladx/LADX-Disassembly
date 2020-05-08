@@ -123,6 +123,7 @@ LinkPassOut2Handler::
     call SynchronizeDungeonsItemFlags_trampoline  ; $42B6: $CD $02 $28
     ret                                           ; $42B9: $C9
 
+; Unused data
 Data_001_42BA::
     db   $00, $FE, $FD, $FE, $00, $02, $03, $02   ; $42BA
     db   $00, $04, $08, $0C, $10, $0C, $08, $04   ; $42C2

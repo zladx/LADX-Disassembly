@@ -2210,8 +2210,7 @@ func_01F_4FF5::
     ld   hl, Data_01F_5036                        ; $4FFA: $21 $36 $50
     call func_01F_7AB7                            ; $4FFD: $CD $B7 $7A
 
-Data_01F_5000::
-    db   $C3, $95, $53
+    jp   label_01F_5395                           ; $5000: $C3 $95 $53
 
 func_01F_5003::
     call IncrementValueAtBC                       ; $5003: $CD $75 $7A
@@ -2353,10 +2352,7 @@ Data_01F_5114::
     db   $00, $40, $4D, $80, $83, $01
 
 Data_01F_511A::
-    db   $00, $80, $20
-
-Data_01F_511D::
-    db   $C0, $84, $01
+    db   $00, $80, $20, $C0, $84, $01
 
 func_01F_5120::
     ld   a, $04                                   ; $5120: $3E $04
@@ -3459,6 +3455,7 @@ Data_01F_58C4::
     dw   Data_01F_5916
     dw   Data_01F_5944
 
+; Unused pattern
 Data_01F_58E6::
     db   $80, $C0, $20, $9D, $C7, $04
 
@@ -4287,10 +4284,7 @@ Data_01F_5FF8::
     db   $80, $EA, $20, $7B, $C7, $06
 
 Data_01F_5FFE::
-    db   $80, $EA
-
-Data_01F_6000::
-    db   $20, $A7, $C7, $06
+    db   $80, $EA, $20, $A7, $C7, $06
 
 Data_01F_6004::
     db   $80, $EA, $60, $62, $C7, $06
@@ -4409,10 +4403,8 @@ Data_01F_60BE::
     db   $80, $00, $20, $FF, $87, $01
 
 Data_01F_60C4::
-    db   $06, $C6, $06, $C6, $06, $C6, $06, $C6, $89
-
-Data_01F_60CD::
-    db   $BD, $ED, $B9, $87, $53, $23, $57
+    db   $06, $C6, $06, $C6, $06, $C6, $06, $C6
+    db   $89, $BD, $ED, $B9, $87, $53, $23, $57
 
 func_01F_60D4::
     call func_01F_7B5C                            ; $60D4: $CD $5C $7B
@@ -4436,10 +4428,9 @@ func_01F_60EF::
     jr   z, jr_01F_610D                           ; $60FB: $28 $10
 
     cp   $0A                                      ; $60FD: $FE $0A
-    db   $30                                      ; $60FF: $30
+    jr   nc, jr_01F_6111                          ; $60FF: $30 $10
 
-Data_01F_6100::
-    db   $10, $3E, $01
+    ld   a, $01                                   ; $6101: $3E $01
 
 jr_01F_6103:
     ld   bc, $D396                                ; $6103: $01 $96 $D3
@@ -4590,9 +4581,11 @@ jr_01F_61ED:
     ld   [$D396], a                               ; $61F1: $EA $96 $D3
     ld   [$D371], a                               ; $61F4: $EA $71 $D3
     ld   [$D3C8], a                               ; $61F7: $EA $C8 $D3
-
-Data_01F_61FA::
-    db   $21, $2F, $D3, $CB, $BE, $21, $2F, $D3, $CB, $BE, $C9
+    ld   hl, $D32F                                ; $61FA: $21 $2F $D3
+    res  7, [hl]                                  ; $61FD: $CB $BE
+    ld   hl, $D32F                                ; $61FF: $21 $2F $D3
+    res  7, [hl]                                  ; $6202: $CB $BE
+    ret                                           ; $6204: $C9
 
 Data_01F_6205::
     db   $FF, $FF, $FF, $FE, $FF, $FD, $FF, $FC, $FF, $FA, $FF, $F6, $FF, $F2, $FF, $EE
@@ -4751,6 +4744,7 @@ label_01F_62F8:
     ldh  [rNR30], a                               ; $630C: $E0 $1A
     jp   func_01F_7A85                            ; $630E: $C3 $85 $7A
 
+; Unused data
 Data_01F_6311::
     db   $80, $00, $00, $00, $01, $01, $00, $00   ; $6311
     db   $00, $00, $FF, $FF, $FF, $FF, $00, $00   ; $6319
@@ -5123,10 +5117,7 @@ Data_01F_65C7::
     db   $00, $20, $06, $80, $02
 
 Data_01F_65CC::
-    db   $00
-
-Data_01F_65CD::
-    db   $30, $14, $80, $02
+    db   $00, $30, $14, $80, $02
 
 Data_01F_65D1::
     db   $00, $40, $16, $80, $02
@@ -5313,18 +5304,34 @@ func_01F_66F3::
     jr   z, @+$0B                                 ; $66FC: $28 $09
 
 jr_01F_66FE:
-    db   $21                                      ; $66FE: $21
-    ld   [de], a                                  ; $66FF: $12
+    ld   hl, Data_01F_6712                        ; $66FE: $21 $12 $67
+    call GetHandlerAddressInTable                 ; $6701: $CD $64 $7A
+    jp   func_01F_7A25                            ; $6704: $C3 $25 $7A
 
-Data_01F_6700::
-    db   $67, $CD, $64, $7A, $C3, $25, $7A, $CD, $AC, $7A, $CA, $07, $7A, $3E, $01, $02
-    db   $18, $EC
+jr_01F_6707:
+    call func_01F_7AAC                            ; $6707: $CD $AC $7A
+    jp   z, func_01F_7A07                         ; $670A: $CA $07 $7A
+
+    ld   a, $01                                   ; $670D: $3E $01
+    ld   [bc], a                                  ; $670F: $02
+    jr   jr_01F_66FE                              ; $6710: $18 $EC
 
 Data_01F_6712::
-    db   $1D, $67, $20, $67, $23, $67
+    dw   Data_01F_671D
+    dw   Data_01F_6720
+    dw   Data_01F_6723
 
 Data_01F_6718::
-    db   $00, $A3, $3C, $80, $03, $3D, $00, $03, $3E, $00, $03, $3F, $00, $03
+    db   $00, $A3, $3C, $80, $03
+
+Data_01F_671D::
+    db   $3D, $00, $03
+
+Data_01F_6720::
+    db   $3E, $00, $03
+
+Data_01F_6723::
+    db   $3F, $00, $03
 
 func_01F_6726::
     ld   hl, Data_01F_674F                        ; $6726: $21 $4F $67
@@ -5642,10 +5649,7 @@ func_01F_68F6::
     jp   func_01F_7A01                            ; $68FA: $C3 $01 $7A
 
 Data_01F_68FD::
-    db   $00, $F0, $A0
-
-Data_01F_6900::
-    db   $80, $20
+    db   $00, $F0, $A0, $80, $20
 
 func_01F_6902::
     ld   hl, Data_01F_692B                        ; $6902: $21 $2B $69
@@ -7042,9 +7046,11 @@ func_01F_711A::
     ret  nz                                       ; $711D: $C0
 
     call IncrementValueAtBC                       ; $711E: $CD $75 $7A
+    cp   $02                                      ; $7121: $FE $02
+    jp   z, func_01F_7A01                         ; $7123: $CA $01 $7A
 
-Data_01F_7121::
-    db   $FE, $02, $CA, $01, $7A, $21, $31, $71, $C3, $8B, $7A
+    ld   hl, Data_01F_7131                        ; $7126: $21 $31 $71
+    jp   func_01F_7A8B                            ; $7129: $C3 $8B $7A
 
 Data_01F_712C::
     db   $00, $19, $50, $80, $06
@@ -7163,8 +7169,6 @@ Data_01F_71E2::
     dw    Data_01F_71BD
     dw    Data_01F_722F
     dw    Data_01F_71C2
-
-Data_01F_71FA::
     dw    Data_01F_7234
     dw    Data_01F_71C2
     dw    Data_01F_7239
@@ -7669,10 +7673,7 @@ Data_01F_7518::
     db   $00, $20, $46, $80, $05
 
 Data_01F_751D::
-    db   $00, $20, $45, $80
-
-Data_01F_7521::
-    db   $05
+    db   $00, $20, $45, $80, $05
 
 Data_01F_7522::
     db   $00, $20, $44, $80, $05
@@ -8298,10 +8299,7 @@ Data_01F_78FC::
     db   $7D, $C0, $03
 
 Data_01F_78FF::
-    db   $7E
-
-Data_01F_7900::
-    db   $C0, $03
+    db   $7E, $C0, $03
 
 Data_01F_7902::
     db   $7F, $C0, $03
@@ -8426,10 +8424,7 @@ Data_01F_79C6::
     db   $00, $70, $17, $80, $04
 
 Data_01F_79CB::
-    db   $00, $60
-
-Data_01F_79CD::
-    db   $25, $80, $04
+    db   $00, $60, $25, $80, $04
 
 Data_01F_79D0::
     db   $00, $50, $27, $80, $04
@@ -8454,10 +8449,9 @@ label_01F_79E9:
     ld   [$D393], a                               ; $79F0: $EA $93 $D3
     ld   [$D398], a                               ; $79F3: $EA $98 $D3
     ld   a, [$D34F]                               ; $79F6: $FA $4F $D3
-    db   $CB                                      ; $79F9: $CB
-
-Data_01F_79FA::
-    db   $FF, $EA, $4F, $D3, $C3, $8B, $7A
+    set  7, a                                     ; $79F9: $CB $FF
+    ld   [$D34F], a                               ; $79FB: $EA $4F $D3
+    jp   func_01F_7A8B                            ; $79FE: $C3 $8B $7A
 
 func_01F_7A01::
     ld   hl, Data_01F_7A20                        ; $7A01: $21 $20 $7A

@@ -32,11 +32,11 @@ jr_019_4489:
     call label_3B2E                               ; $448C: $CD $2E $3B
     call func_019_44CC                            ; $448F: $CD $CC $44
     ldh  a, [hActiveEntityState]                  ; $4492: $F0 $F0
-    rst  $00                                      ; $4494: $C7
-    sbc  c                                        ; $4495: $99
-    ld   b, h                                     ; $4496: $44
-    cp   d                                        ; $4497: $BA
-    ld   b, h                                     ; $4498: $44
+    JP_TABLE                                      ; $4494
+._00 dw func_019_4499                             ; $4495
+._01 dw func_019_44BA                             ; $4497
+
+func_019_4499::
     call GetEntityTransitionCountdown             ; $4499: $CD $05 $0C
     jr   nz, jr_019_44A6                          ; $449C: $20 $08
 
@@ -60,6 +60,7 @@ jr_019_44A6:
 jr_019_44B9:
     ret                                           ; $44B9: $C9
 
+func_019_44BA::
     ldh  a, [hFrameCounter]                       ; $44BA: $F0 $E7
     and  $03                                      ; $44BC: $E6 $03
     jr   nz, jr_019_44C5                          ; $44BE: $20 $05
@@ -71,7 +72,7 @@ jr_019_44C5:
     call label_3B44                               ; $44C5: $CD $44 $3B
     ret  nc                                       ; $44C8: $D0
 
-    jp   func_019_7E61                            ; $44C9: $C3 $61 $7E
+    jp   ClearEntityStatus_19                       ; $44C9: $C3 $61 $7E
 
 func_019_44CC::
     ld   a, [wIsIndoor]                           ; $44CC: $FA $A5 $DB

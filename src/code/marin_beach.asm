@@ -5,21 +5,21 @@
 MarineBeachEntryPoint::
     ld   a, [$C19F]
     and  a
-    jr   nz, label_6213
+    jr   nz, jr_001_6213
     ld   a, [$C3C7]
     and  a
-    jr   z, label_6213
+    jr   z, jr_001_6213
     dec  a
     ld   [$C3C7], a
 
-label_6213::
+jr_001_6213::
     ld   a, [$C3C4]
     and  a
-    jr   z, label_621D
+    jr   z, jr_001_621D
     dec  a
     ld   [$C3C4], a
 
-label_621D::
+jr_001_621D::
     ld   a, [wGameplaySubtype]
     JP_TABLE
 ._00 dw MarineBeachPrepare0
@@ -48,7 +48,7 @@ MarineBeachPrepare0::
     ld   c, $80
     di
 
-label_624D::
+jr_001_624D::
     xor  a
     ld   [rSVBK], a
     ld   b, [hl]
@@ -59,7 +59,7 @@ label_624D::
     dec  c
     ld   a, c
     and  a
-    jr   nz, label_624D
+    jr   nz, jr_001_624D
     xor  a
     ld   [rSVBK], a
     ei
@@ -213,7 +213,7 @@ label_63BA::
 MarineBeachScroll1::
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_63E4
+    jr   z, jr_001_63E4
     ldh  a, [hFrameCounter]
     and  $07
     jr   nz, MarineBeachScroll2
@@ -224,18 +224,18 @@ MarineBeachScroll1::
     call IncrementGameplaySubtype
     jr   MarineBeachScroll2
 
-label_63E4::
+jr_001_63E4::
     ldh  a, [hFrameCounter]
     and  $07
-    jr   nz, label_63F8
+    jr   nz, jr_001_63F8
     ld   a, [$C3C5]
     inc  a
     ld   [$C3C5], a
     cp   $0C
-    jr   nz, label_63F8
+    jr   nz, jr_001_63F8
     call IncrementGameplaySubtype
 
-label_63F8::
+jr_001_63F8::
     ldh  a, [hFrameCounter]
     and  $03
     ld   e, a
@@ -256,17 +256,17 @@ label_63F8::
 MarineBeachScroll2::
     ldh  a, [hFrameCounter]
     and  $03
-    jr   nz, label_642E
+    jr   nz, jr_001_642E
     ldh  a, [$FF97]
     inc  a
     ldh  [$FF97], a
     cp   $00
-    jr   nz, label_642E
+    jr   nz, jr_001_642E
     ld   a, $80
     ld   [$C3C7], a
     call IncrementGameplaySubtype
 
-label_642E::
+jr_001_642E::
     call func_001_651E
     ret
 
@@ -274,18 +274,18 @@ MarineBeachScrollStop::
     call func_001_651E
     ld   a, [$C19F]
     and  a
-    jr   nz, label_644A
+    jr   nz, jr_001_644A
     ld   a, [$C3C7]
     and  a
-    jr   nz, label_6449
+    jr   nz, jr_001_6449
     ld   a, $D8
     call OpenMarinBeachDialog
     call IncrementGameplaySubtype
 
-label_6449::
+jr_001_6449::
     ret
 
-label_644A::
+jr_001_644A::
     ld   a, $02
     ld   [$C3C4], a
     ret
@@ -294,68 +294,68 @@ MarineBeachDialog1::
     call func_001_651E
     ld   a, [$C19F]
     and  a
-    jr   nz, label_6466
+    jr   nz, jr_001_6466
     ld   a, $80
     ld   [$C3C4], a
     ld   a, $C0
     ld   [$C3C7], a
     call IncrementGameplaySubtype
 
-label_6466::
+jr_001_6466::
     ret
 
 MarineBeachPause1::
     call func_001_651E
     ld   a, [$C3C7]
     and  a
-    jr   nz, label_6478
+    jr   nz, jr_001_6478
     ld   a, $D9
     call OpenMarinBeachDialog
     jp   IncrementGameplaySubtypeAndReturn
 
-label_6478::
+jr_001_6478::
     ret
 
 MarineBeachDialog2::
     call func_001_651E
     ld   a, [$C19F]
     and  a
-    jr   nz, label_648F
+    jr   nz, jr_001_648F
     ld   a, $80
     ld   [$C3C4], a
     ld   a, $C0
     ld   [$C3C7], a
     call IncrementGameplaySubtype
 
-label_648F::
+jr_001_648F::
     ret
 
 MarineBeachPause2::
     call func_001_651E
     ld   a, [$C3C7]
     and  a
-    jr   nz, label_64A1
+    jr   nz, jr_001_64A1
     ld   a, $DA
     call OpenMarinBeachDialog
     jp   IncrementGameplaySubtypeAndReturn
 
-label_64A1::
+jr_001_64A1::
     ret
 
 MarineBeachAreYouListening::
     call func_001_651E
     ld   a, [$C19F]
     and  a
-    jr   nz, label_64CA
+    jr   nz, jr_001_64CA
     ld   a, [$C177]
     and  a
-    jr   nz, label_64BA
+    jr   nz, jr_001_64BA
     ld   a, $DB
     call OpenMarinBeachDialog
     call IncrementGameplaySubtype
     ret
 
-label_64BA::
+jr_001_64BA::
     ld   a, $DE
     call OpenMarinBeachDialog
     ld   a, $06
@@ -364,7 +364,7 @@ label_64BA::
     ld   [$C3C7], a
     ret
 
-label_64CA::
+jr_001_64CA::
     ld   a, $02
     ld   [$C3C4], a
     ret
@@ -373,14 +373,14 @@ MarineBeachDialog3::
     call func_001_651E
     ld   a, [$C19F]
     and  a
-    jr   nz, label_64E6
+    jr   nz, jr_001_64E6
     ld   a, $DC
     call OpenMarinBeachDialog
     ld   a, $30
     ld   [$C3C7], a
     call IncrementGameplaySubtype
 
-label_64E6::
+jr_001_64E6::
     ret
 
 MarineBeachDialog4::
@@ -400,10 +400,10 @@ func_001_64FF::
     ld   hl, wTranscientVfxTypeTable
     xor  a
 
-label_6505::
+jr_001_6505::
     ldi  [hl], a
     dec  e
-    jr   nz, label_6505
+    jr   nz, jr_001_6505
     ret
 
 ;
@@ -430,16 +430,16 @@ func_001_651E::
     ld   a, [$C114]
     inc  a
     cp   $A0
-    jr   nz, label_652E
+    jr   nz, jr_001_652E
     ld   a, NOISE_SFX_SEA_WAVES
     ldh  [hNoiseSfx], a
     xor  a
 
-label_652E::
+jr_001_652E::
     ld   [$C114], a
     ld   a, [$D466]
     and  a
-    jr   nz, label_6545
+    jr   nz, jr_001_6545
     ld   a, JINGLE_SEAGULL
     ldh  [hJingle], a
     call GetRandomByte
@@ -447,7 +447,7 @@ label_652E::
     add  a, $60
     ld   [$D466], a
 
-label_6545::
+jr_001_6545::
     dec  a
     ld   [$D466], a
     ldh  a, [$FF97]
@@ -457,12 +457,12 @@ label_6545::
     ld   de, label_650A
     ld   a, [$C3C4]
     and  a
-    jr   z, label_655F
+    jr   z, jr_001_655F
     cp   $60
-    jr   nc, label_655F
+    jr   nc, jr_001_655F
     ld   de, label_650E
 
-label_655F::
+jr_001_655F::
     ld   a, $7C
     ldh  [hActiveEntityVisualPosY], a
     ld   a, $58
@@ -474,13 +474,13 @@ label_655F::
     ld   de, label_6512
     ld   a, [$DC0F]
     and  a
-    jr   z, label_6584
+    jr   z, jr_001_6584
     ld   de, label_6516
     cp   $01
-    jr   z, label_6584
+    jr   z, jr_001_6584
     ld   de, label_651A
 
-label_6584::
+jr_001_6584::
     ld   hl, $C038
     call func_001_658B
     ret
@@ -519,12 +519,12 @@ func_001_65AE::
     ld   c, $08
     ld   b, $00
 
-label_65B2::
+jr_001_65B2::
     ld   hl, wTranscientVfxTypeTable
     add  hl, bc
     ld   a, [hl]
     and  a
-    jr   z, label_65D6
+    jr   z, jr_001_65D6
     push af
     ld   hl, wTranscientVfxPosXTable
     add  hl, bc
@@ -538,18 +538,18 @@ label_65B2::
     add  hl, bc
     ld   a, [hl]
     and  a
-    jr   z, label_65D2
+    jr   z, jr_001_65D2
     dec  [hl]
 
-label_65D2::
+jr_001_65D2::
     pop  af
     call func_001_65DD
 
-label_65D6::
+jr_001_65D6::
     dec  c
     ld   a, c
     cp   $FF
-    jr   nz, label_65B2
+    jr   nz, jr_001_65B2
     ret
 
 func_001_65DD::
@@ -563,13 +563,13 @@ label_65E3::
 label_6607::
     db 3, 3, 3, 3
 
-label_660B::
+jr_001_660B::
     db 3, 3, 3, 3, 3, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1
     db 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5
     db 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 3, 3, 3, 3, 3, 3
     db 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3
 
-label_6646::
+jr_001_6646::
     db 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0
     db 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4
     db 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5
@@ -586,13 +586,13 @@ label_6673::
     inc  a
     ld   [hl], a
     cp   $06
-    jr   c, label_668B
+    jr   c, jr_001_668B
     ld   [hl], b
     ld   hl, $D200
     add  hl, bc
     inc  [hl]
 
-label_668B::
+jr_001_668B::
     ld   hl, $D200
     add  hl, bc
     ld   e, [hl]
@@ -622,18 +622,18 @@ label_668B::
     call func_001_67A8
     ldh  a, [hFrameCounter]
     and  $07
-    jr   nz, label_66C4
+    jr   nz, jr_001_66C4
     ld   hl, $C560
     add  hl, bc
     ld   a, [hl]
     cp   $FB
-    jr   z, label_66C4
+    jr   z, jr_001_66C4
     dec  [hl]
 
-label_66C4::
+jr_001_66C4::
     ldh  a, [$FFE8]
     cp   $F0
-    jr   c, label_66D7
+    jr   c, jr_001_66D7
     ld   hl, $C560
     add  hl, bc
     ld   a, [hl]
@@ -643,7 +643,7 @@ label_66C4::
     add  hl, bc
     ld   [hl], b
 
-label_66D7::
+jr_001_66D7::
     ret
 
 label_66D8::
@@ -653,7 +653,7 @@ label_66D8::
 label_66F0::
     db 1, $FF
 
-label_66F2::
+jr_001_66F2::
     db 1, $FF, $FE, 2
 
 label_66F6::
@@ -665,21 +665,21 @@ label_66FD::
     ld   a, [hl]
     ld   e, $03
     and  $80
-    jr   z, label_6718
+    jr   z, jr_001_6718
     ld   hl, $D200
     add  hl, bc
     ldh  a, [hFrameCounter]
     and  $07
-    jr   nz, label_6717
+    jr   nz, jr_001_6717
     ld   a, [hl]
     inc  a
     and  $03
     ld   [hl], a
 
-label_6717::
+jr_001_6717::
     ld   e, [hl]
 
-label_6718::
+jr_001_6718::
     sla  e
     ld   d, b
     ld   hl, label_66D8
@@ -700,7 +700,7 @@ label_6718::
     pop  de
     call func_001_658B
 
-label_6733::
+jr_001_6733::
     call func_001_67A8
     ld   a, c
     sla  a
@@ -712,9 +712,9 @@ label_6733::
     add  a, e
     ldh  [$FFE9], a
 
-label_6745::
+jr_001_6745::
     and  $3F
-    jr   nz, label_675A
+    jr   nz, jr_001_675A
     call GetRandomByte
     and  $07
     ld   e, a
@@ -726,11 +726,11 @@ label_6745::
     add  hl, bc
     ld   [hl], a
 
-label_675A::
+jr_001_675A::
     ldh  a, [$FFE9]
     add  a, $40
     and  $3F
-    jr   nz, label_6773
+    jr   nz, jr_001_6773
     call GetRandomByte
     and  $07
     ld   e, a
@@ -742,14 +742,14 @@ label_675A::
     add  hl, bc
     ld   [hl], a
 
-label_6773::
+jr_001_6773::
     ld   hl, $C590
     add  hl, bc
     ld   a, [hl]
     inc  a
     ld   [hl], a
     cp   $13
-    jr   c, label_67A7
+    jr   c, jr_001_67A7
     ld   [hl], b
     ld   hl, label_66F6
     add  hl, bc
@@ -760,10 +760,10 @@ label_6773::
     sub  a, d
     ld   e, $01
     and  $80
-    jr   nz, label_6792
+    jr   nz, jr_001_6792
     ld   e, $FF
 
-label_6792::
+jr_001_6792::
     ld   a, [hl]
     add  a, e
     ld   [hl], a
@@ -773,15 +773,15 @@ label_6792::
     sub  a, $48
     ld   e, $01
     and  $80
-    jr   nz, label_67A4
+    jr   nz, jr_001_67A4
     ld   e, $FF
 
-label_67A4::
+jr_001_67A4::
     ld   a, [hl]
     add  a, e
     ld   [hl], a
 
-label_67A7::
+jr_001_67A7::
     ret
 
 func_001_67A8::
@@ -811,10 +811,10 @@ func_001_67B5::
     pop  af
     ld   e, $00
     bit  7, a
-    jr   z, label_67D4
+    jr   z, jr_001_67D4
     ld   e, $F0
 
-label_67D4::
+jr_001_67D4::
     swap a
     and  $0F
     or   e

@@ -75,7 +75,7 @@ FileSaveMapFadeOut::
     call func_1A22
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_4072
+    jr   nz, jr_001_4072
     ld   a, $03
     ldh  [hWindowYUnused], a
     ld   a, $30
@@ -90,7 +90,7 @@ FileSaveMapFadeOut::
     ld   a, $0F
     ld   [wTileMapToLoad], a
 
-label_4072::
+jr_001_4072::
     ret
 
 FileSaveDelay1::
@@ -132,7 +132,7 @@ FileSaveInteractive::
     ldh  [hJingle], a
     ld   a, [$C13F]
     cp   $01
-    jr   z, label_40F9
+    jr   z, jr_001_40F9
     call IncrementGameplaySubtype
     xor  a
     ld   [$C16B], a

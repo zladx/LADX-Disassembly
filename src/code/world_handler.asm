@@ -37,22 +37,22 @@ GameplayWorldSubtype0Handler::
     call IncrementGameplaySubtype
     ld   a, [ROM_DebugTool2]
     and  a
-    jr   z, label_43A7
+    jr   z, jr_001_43A7
     ld   a, $0B
     ld   [wBGMapToLoad], a
     ret
 
-label_43A7::
+jr_001_43A7::
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_4414
+    jr   z, jr_001_4414
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_43B8
+    jr   nz, jr_001_43B8
     ld   hl, $DDDA
-    jr   label_43C5
+    jr   jr_001_43C5
 
-label_43B8::
+jr_001_43B8::
     ld   e, a
     sla  a
     sla  a
@@ -62,31 +62,31 @@ label_43B8::
     ld   hl, wDungeonItemFlags
     add  hl, de
 
-label_43C5::
+jr_001_43C5::
     ld   de, wHasDungeonMap
     ld   c, $05
 
-label_43CA::
+jr_001_43CA::
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, label_43DB
+    jr   z, jr_001_43DB
     cp   MAP_WINDFISHS_EGG
-    jr   z, label_43D8
+    jr   z, jr_001_43D8
     cp   MAP_CAVE_B
-    jr   c, label_43DB
+    jr   c, jr_001_43DB
 
-label_43D8::
+jr_001_43D8::
     xor  a
-    jr   z, label_43DC
+    jr   z, jr_001_43DC
 
-label_43DB::
+jr_001_43DB::
     ld   a, [hli]
 
-label_43DC::
+jr_001_43DC::
     ld   [de], a
     inc  de
     dec  c
-    jr   nz, label_43CA
+    jr   nz, jr_001_43CA
 
     ; If inside the color dungeon ($FF),
     ; lookup for dungeon $0F in the table instead.
@@ -106,24 +106,24 @@ label_43DC::
 
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   z, label_440B
+    jr   z, jr_001_440B
     cp   MAP_WINDFISHS_EGG
-    jr   z, label_4425
+    jr   z, jr_001_4425
     cp   MAP_CAVE_B
-    jr   nc, label_4425
+    jr   nc, jr_001_4425
     cp   MAP_EAGLES_TOWER
-    jr   nz, label_440B
+    jr   nz, jr_001_440B
     ldh  a, [hIsSideScrolling]
     and  a
-    jr   nz, label_4425
+    jr   nz, jr_001_4425
 
-label_440B::
+jr_001_440B::
     call func_001_5511
     ld   a, $07
     ld   [wBGMapToLoad], a
     ret
 
-label_4414::
+jr_001_4414::
     ld   a, $02
     ld   [wBGMapToLoad], a
     call GetRandomByte
@@ -133,7 +133,7 @@ label_4414::
     ldh  [$FFB9], a
     ret
 
-label_4425::
+jr_001_4425::
     ld   a, $09
     ld   [wBGMapToLoad], a
     ret
@@ -152,11 +152,11 @@ GameplayWorldSubtype1Handler::
     ld   a, [$DBC8]
     ldh  [hLinkPositionZ], a
     and  a
-    jr   z, label_4452
+    jr   z, jr_001_4452
     ld   a, $02
     ld   [$C146], a
 
-label_4452::
+jr_001_4452::
     ld   a, $04
     ld   [wRoomTransitionDirection], a
     call LoadRoom
@@ -166,52 +166,52 @@ label_4452::
     ldh  [hAnimatedTilesFrameCount], a
     ld   a, [wIsIndoor]
     and  a
-    jr   z, label_44A6
+    jr   z, jr_001_44A6
     ld   d, a
     ldh  a, [hMapId]
     cp   MAP_COLOR_DUNGEON
-    jr   nz, label_4475
+    jr   nz, jr_001_4475
     ld   d, $00
-    jr   label_447E
+    jr   jr_001_447E
 
-label_4475::
+jr_001_4475::
     cp   $1A
-    jr   nc, label_447E
+    jr   nc, jr_001_447E
     cp   $06
-    jr   c, label_447E
+    jr   c, jr_001_447E
     inc  d
 
-label_447E::
+jr_001_447E::
     ldh  a, [hMapRoom]
     ld   e, a
     call GetChestsStatusForRoom_trampoline
     cp   $1A
-    jr   z, label_4495
+    jr   z, jr_001_4495
     cp   $19
-    jr   z, label_4495
+    jr   z, jr_001_4495
     ld   a, [wRoomEvent]
     and  EVENT_EFFECT_MASK
     cp   EFFECT_DROP_KEY
-    jr   nz, label_44A6
+    jr   nz, jr_001_44A6
 
-label_4495::
+jr_001_4495::
     ld   a, [$DBCD]
     and  a
-    jr   z, label_44A6
+    jr   z, jr_001_44A6
     ldh  a, [hRoomStatus]
     and  $10
-    jr   nz, label_44A6
+    jr   nz, jr_001_44A6
     ld   a, $0C
     ld   [wCompassSfxCountdown], a
 
-label_44A6::
+jr_001_44A6::
     ld   a, [wIsIndoor]
     and  a
     ld   a, $06
-    jr   nz, label_44B0
+    jr   nz, jr_001_44B0
     ld   a, $07
 
-label_44B0::
+jr_001_44B0::
     ld   [wTileMapToLoad], a
     ret
 
@@ -220,7 +220,7 @@ GameplayWorldSubtype2Handler::
     ldh  [hWorldTileset], a
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_44C9
+    jr   z, jr_001_44C9
     di
     ld   a, $03
     ld   [rSVBK], a
@@ -229,7 +229,7 @@ GameplayWorldSubtype2Handler::
     ld   [rSVBK], a
     ei
 
-label_44C9::
+jr_001_44C9::
     call LoadRoomTiles
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
@@ -248,16 +248,16 @@ GameplayWorldSubtype3Handler::
     ld   [wTileMapToLoad], a
     ld   a, [wRoomSwitchableObject]
     and  a
-    jr   z, label_44F5
+    jr   z, jr_001_44F5
     ld   a, $05
     ld   [$D6F8], a
     ld   a, [$C1CB]
     and  a
-    jr   z, label_44F5
+    jr   z, jr_001_44F5
     ld   a, $03
     ldh  [$FFA5], a
 
-label_44F5::
+jr_001_44F5::
     call IncrementGameplaySubtype
     ret
 
@@ -287,7 +287,7 @@ GameplayWorldSubtype6Handler::
     ld   [$C16C], a
     ld   a, [wObjectAffectingBGPalette]
     and  a
-    jr   z, label_4548
+    jr   z, jr_001_4548
     ld   a, [$C5AD]
     ld   [wBGPalette], a
     ld   a, $1C
@@ -296,11 +296,11 @@ GameplayWorldSubtype6Handler::
     ld   [wOBJ1Palette], a
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_4548
+    jr   nz, jr_001_4548
     ld   a, $04
     ld   [$C16B], a
 
-label_4548::
+jr_001_4548::
     jp   label_27DD
     ldh  a, [hJoypadState]
     and  $90

@@ -21,7 +21,7 @@ label_40D6::
     ld   [$DBC7], a
     ret
 
-label_40F9::
+jr_001_40F9::
     call label_27F2
     call func_001_5DE6
     call ClearWRAMAndLowerHRAM
@@ -73,13 +73,13 @@ func_001_412A::
     call func_001_6BA8
     ldh  a, [hJoypadState]
     and  $0C
-    jr   z, label_413B
+    jr   z, jr_001_413B
     ld   a, [hl]
     inc  a
     and  $01
     ld   [hl], a
 
-label_413B::
+jr_001_413B::
     ld   e, [hl]
     ld   d, $00
     ld   hl, label_4128
@@ -135,18 +135,18 @@ label_413B::
     jr   nz, .wait
     ld   e, $30
 
-label_417E::
+jr_001_417E::
     ld   a, $40
     ld   [rBGP], a
     dec  e
-    jr   nz, label_417E
+    jr   nz, jr_001_417E
     ld   e, $30
 
-label_4187::
+jr_001_4187::
     ld   a, $80
     ld   [rBGP], a
     dec  e
-    jr   nz, label_4187
+    jr   nz, jr_001_4187
     ld   e, $FF
 
 .wait
@@ -174,18 +174,18 @@ label_4187::
     jr   nz, .wait
     ld   e, $30
 
-label_41AB::
+jr_001_41AB::
     ld   a, $80
     ld   [rBGP], a
     dec  e
-    jr   nz, label_41AB
+    jr   nz, jr_001_41AB
     ld   e, $30
 
-label_41B4::
+jr_001_41B4::
     ld   a, $40
     ld   [rBGP], a
     dec  e
-    jr   nz, label_41B4
+    jr   nz, jr_001_41B4
 
 label_001_41BB::
     xor  a
@@ -372,45 +372,45 @@ func_001_4794::
     ld   hl, $A100
     add  hl, de
 
-label_479C::
+jr_001_479C::
     call EnableExternalRAMWriting
     ld   a, [hli]
     cp   c
-    jr   nz, label_47AA
+    jr   nz, jr_001_47AA
     inc  c
     inc  c
     dec  b
-    jr   nz, label_479C
-    jr   label_47CD
+    jr   nz, jr_001_479C
+    jr   jr_001_47CD
 
-label_47AA::
+jr_001_47AA::
     push de
     ld   hl, $A105
     add  hl, de
     ld   de, $3A8
 
-label_47B2::
+jr_001_47B2::
     call EnableExternalRAMWriting
     xor  a
     ldi  [hl], a
     dec  de
     ld   a, e
     or   d
-    jr   nz, label_47B2
+    jr   nz, jr_001_47B2
     pop  de
     ld   hl, $A100
     add  hl, de
     ld   a, $01
 
-label_47C3::
+jr_001_47C3::
     call EnableExternalRAMWriting
     ldi  [hl], a
     inc  a
     inc  a
     cp   $0B
-    jr   c, label_47C3
+    jr   c, jr_001_47C3
 
-label_47CD::
+jr_001_47CD::
     ret
 
 include "code/file_menus.asm"
@@ -458,10 +458,10 @@ LoadSavedFile::
     ld   a, [hl]
     ld   [hl], $00
     and  a
-    jr   nz, label_531D
+    jr   nz, jr_001_531D
     ld   a, [wSaveSlot]
 
-label_52C7::
+jr_001_52C7::
     sla  a
     ld   e, a
     ld   d, $00
@@ -473,7 +473,7 @@ label_52C7::
     ld   hl, $D800
     ld   de, $0380
 
-label_52D9::
+jr_001_52D9::
     call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
@@ -481,11 +481,11 @@ label_52D9::
     dec  de
     ld   a, e
     or   d
-    jr   nz, label_52D9
+    jr   nz, jr_001_52D9
     ld   hl, $DDDA
     ld   de, $05
 
-label_52EA::
+jr_001_52EA::
     call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
@@ -493,11 +493,11 @@ label_52EA::
     dec  de
     ld   a, e
     or   d
-    jr   nz, label_52EA
+    jr   nz, jr_001_52EA
     ld   hl, $DDE0
     ld   de, $20
 
-label_52FB::
+jr_001_52FB::
     call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
@@ -505,7 +505,7 @@ label_52FB::
     dec  de
     ld   a, e
     or   d
-    jr   nz, label_52FB
+    jr   nz, jr_001_52FB
     call EnableExternalRAMWriting
     ld   a, [bc]
     ld   [$DC0F], a
@@ -518,7 +518,7 @@ label_52FB::
     ld   a, [bc]
     ld   [$DC0D], a
 
-label_531D::
+jr_001_531D::
     ld   a, GAMEPLAY_WORLD
     ld   [wGameplayType], a
     xor  a
@@ -684,12 +684,12 @@ func_001_5511::
     ld   de, $D650
     ld   c, $29
 
-label_5519::
+jr_001_5519::
     ld   a, [hli]
     inc  de
     ld   [de], a
     dec  c
-    jr   nz, label_5519
+    jr   nz, jr_001_5519
     push de
     xor  a
     ldh  [hScratch0], a
@@ -705,22 +705,22 @@ label_5519::
     and  $03
     ld   e, a
     and  a
-    jr   z, label_5543
+    jr   z, jr_001_5543
 
-label_5538::
+jr_001_5538::
     ld   a, c
     add  a, $04
     ld   c, a
     dec  e
     ld   a, e
     and  a
-    jr   nz, label_5538
+    jr   nz, jr_001_5538
     ld   b, $00
 
-label_5543::
+jr_001_5543::
     pop  hl
 
-label_5544::
+jr_001_5544::
     push hl
     ld   hl, label_53D8
     add  hl, bc
@@ -748,7 +748,7 @@ label_5544::
     pop  hl
     inc  hl
     cp   $FF
-    jr   nz, label_5544
+    jr   nz, jr_001_5544
     xor  a
     ld   [hl], a
     xor  a
@@ -765,9 +765,9 @@ label_5544::
     and  $03
     ld   e, a
     and  a
-    jr   z, label_55EA
+    jr   z, jr_001_55EA
 
-label_558C::
+jr_001_558C::
     ld   b, $00
     ld   a, c
     add  a, $08
@@ -775,26 +775,26 @@ label_558C::
     dec  e
     ld   a, e
     and  a
-    jr   nz, label_558C
+    jr   nz, jr_001_558C
     ld   a, [wMinimapLayout]
     and  $03
-    jr   z, label_55C0
+    jr   z, jr_001_55C0
     ld   a, [wMinimapLayout]
     and  $30
     cp   $30
-    jr   z, label_55AF
+    jr   z, jr_001_55AF
     ld   a, c
     add  a, $04
     ld   c, a
     ld   b, $00
-    jr   label_55C0
+    jr   jr_001_55C0
 
-label_55AF::
+jr_001_55AF::
     ld   a, [wMinimapLayout]
     and  $03
     ld   e, a
 
-label_55B5::
+jr_001_55B5::
     ld   b, $00
     ld   a, c
     add  a, $0B
@@ -802,9 +802,9 @@ label_55B5::
     dec  e
     ld   a, e
     and  a
-    jr   nz, label_55B5
+    jr   nz, jr_001_55B5
 
-label_55C0::
+jr_001_55C0::
     push hl
     ld   hl, label_5418
     add  hl, bc
@@ -830,18 +830,18 @@ label_55C0::
     pop  hl
     inc  hl
     cp   $FF
-    jr   nz, label_55C0
+    jr   nz, jr_001_55C0
 
-label_55EA::
+jr_001_55EA::
     xor  a
     ld   b, a
     ld   c, a
     ld   a, [wMinimapLayout]
     bit  5, a
-    jr   z, label_55F5
+    jr   z, jr_001_55F5
     inc  bc
 
-label_55F5::
+jr_001_55F5::
     push hl
     ld   hl, label_54E4
     add  hl, bc
@@ -883,13 +883,13 @@ MinimapEntryPoint::
     ld   [wOAMNextAvailableSlot], a
     ld   a, [wGameplaySubtype]
     cp   $05
-    jr   z, label_5639
+    jr   z, jr_001_5639
     xor  a
     ldh  [hPressedButtonsMask], a
     ldh  [hJoypadState], a
     ld   a, [wGameplaySubtype]
 
-label_5639::
+jr_001_5639::
     JP_TABLE
     ; Code below is actually data for the jump table
     ld   c, b
@@ -909,7 +909,7 @@ label_5639::
     call IncrementGameplaySubtype
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_5678
+    jr   z, jr_001_5678
     ld   hl, $DC10
     ld   c, $80
     di
@@ -917,9 +917,9 @@ label_5639::
     ld   [rSVBK], a
     ld   a, [$D000]
     and  a
-    jr   nz, label_5674
+    jr   nz, jr_001_5674
 
-label_5660::
+jr_001_5660::
     xor  a
     ld   [rSVBK], a
     ld   b, [hl]
@@ -930,22 +930,22 @@ label_5660::
     dec  c
     ld   a, c
     and  a
-    jr   nz, label_5660
+    jr   nz, jr_001_5660
     ld   a, $01
     ld   [$D000], a
 
-label_5674::
+jr_001_5674::
     xor  a
     ld   [rSVBK], a
     ei
 
-label_5678::
+jr_001_5678::
     call DrawLinkSprite
     call AnimateEntitiesAndRestoreBank01
     call func_1A22
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_56F3
+    jr   nz, jr_001_56F3
     ld   a, $03
     ldh  [hWindowYUnused], a
     ld   a, $30
@@ -968,25 +968,25 @@ label_5678::
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_56D9
+    jr   z, jr_001_56D9
     swap a
     and  $07
     inc  a
     cp   $01
-    jr   nz, label_56D9
+    jr   nz, jr_001_56D9
     ld   a, [$C5A2]
     and  a
     ld   a, $00
-    jr   nz, label_56D9
+    jr   nz, jr_001_56D9
     ld   hl, $D800
     add  hl, de
     ld   a, [hl]
     and  $20
     ld   a, $00
-    jr   z, label_56D9
+    jr   z, jr_001_56D9
     ld   a, $01
 
-label_56D9::
+jr_001_56D9::
     ld   [$C1B1], a
     ld   a, [$DBB4]
     ld   [$C1B4], a
@@ -998,7 +998,7 @@ label_56D9::
     ld   a, $08
     ld   [wBGMapToLoad], a
 
-label_56F3::
+jr_001_56F3::
     ret
     ld   a, $0B
     ld   [wTileMapToLoad], a
@@ -1013,31 +1013,31 @@ label_56F3::
     call func_1A39
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_571B
+    jr   nz, jr_001_571B
     call IncrementGameplaySubtype
     call PlayValidationJingle
 
-label_571B::
+jr_001_571B::
     ret
     ld   a, [ROM_DebugTool3]
     and  a
-    jr   z, label_5731
+    jr   z, jr_001_5731
     ldh  a, [hJoypadState]
     bit  7, a
-    jr   z, label_5731
+    jr   z, jr_001_5731
     xor  a
     ld   [wGameplaySubtype], a
     inc  a
     ld   [wGameplayType], a
     ret
 
-label_5731::
+jr_001_5731::
     ld   a, [$C19F]
     and  a
     jp   nz, label_001_5818
     ldh  a, [hJoypadState]
     and  J_A
-    jr   z, label_57B7
+    jr   z, jr_001_57B7
     ld   a, [$DBB4]
     ld   e, a
     ld   d, $00
@@ -1045,13 +1045,13 @@ label_5731::
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_576F
+    jr   z, jr_001_576F
     ld   e, a
     and  $F0
-    jr   nz, label_5766
+    jr   nz, jr_001_5766
     ld   a, [$C5A2]
     and  a
-    jr   nz, label_576F
+    jr   nz, jr_001_576F
     push de
     ld   a, [$DBB4]
     ld   e, a
@@ -1060,27 +1060,27 @@ label_5731::
     pop  de
     ld   a, [hl]
     and  $20
-    jr   z, label_576F
+    jr   z, jr_001_576F
 
-label_5766::
+jr_001_5766::
     ld   d, $00
     ld   hl, MapSpecialLocationNamesLookupTable
     add  hl, de
     ld   a, [hl]
-    jr   label_5792
+    jr   jr_001_5792
 
-label_576F::
+jr_001_576F::
     ld   a, [$DBB4]
     cp   $24
-    jr   z, label_577A
+    jr   z, jr_001_577A
     cp   $34
-    jr   nz, label_577E
+    jr   nz, jr_001_577E
 
-label_577A::
+jr_001_577A::
     ld   a, $76
-    jr   label_5792
+    jr   jr_001_5792
 
-label_577E::
+jr_001_577E::
     rra
     and  $07
     ld   e, a
@@ -1095,38 +1095,38 @@ label_577E::
     add  hl, de
     ld   a, [hl]
 
-label_5792::
+jr_001_5792::
     call OpenDialog
     ld   a, [$C173]
     cp   $A7
-    jr   z, label_57A3
+    jr   z, jr_001_57A3
     ld   a, [$DBB4]
     cp   $37
-    jr   nz, label_57A8
+    jr   nz, jr_001_57A8
 
-label_57A3::
+jr_001_57A3::
     ld   a, $01
     ld   [$C112], a
 
-label_57A8::
+jr_001_57A8::
     ld   a, [$DBB4]
     cp   $70
     ld   a, $01
-    jr   nc, label_57B3
+    jr   nc, jr_001_57B3
     ld   a, $81
 
-label_57B3::
+jr_001_57B3::
     ld   [$C19F], a
     ret
 
 ; POI: Debug code to warp to any room on the map by pushing B + Select (on the map screen)
-label_57B7::
+jr_001_57B7::
     ld   a, [ROM_DebugTool1]                    ; If we weren't pushing A above, then
     and  a                                      ; Check the first debug flag
-    jr   z, label_57FA                          ; If the debug flag is off, skip this
+    jr   z, jr_001_57FA                          ; If the debug flag is off, skip this
     ldh  a, [hPressedButtonsMask]               ; Otherwise, are we holding SELECT / B?
     cp   J_SELECT | J_B
-    jr   nz, label_57FA                         ; If yes, skip this too
+    jr   nz, jr_001_57FA                         ; If yes, skip this too
     ld   a, GAMEPLAY_WORLD                      ; Otherwise, warp somewhere
     ld   [wGameplayType], a
     call ApplyMapFadeOutTransition
@@ -1152,14 +1152,14 @@ label_57B7::
     ld   [wGameplaySubtype], a
     ret
 
-label_57FA::
+jr_001_57FA::
     ld   e, J_SELECT
     ld   a, [ROM_DebugTool1]
     and  a
-    jr   nz, label_5804
+    jr   nz, jr_001_5804
     ld   e, J_SELECT | J_B
 
-label_5804::
+jr_001_5804::
     ldh  a, [hJoypadState]
     and  e
     jr   z, label_001_5818
@@ -1183,15 +1183,15 @@ FileSaveFadeOut::
     call func_1A22
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_58A7
+    jr   nz, jr_001_58A7
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_5854
+    jr   z, jr_001_5854
     ld   hl, $DC10
     ld   c, $80
     di
 
-label_583A::
+jr_001_583A::
     ld   a, $03
     ld   [rSVBK], a
     ld   b, [hl]
@@ -1202,7 +1202,7 @@ label_583A::
     dec  c
     ld   a, c
     and  a
-    jr   nz, label_583A
+    jr   nz, jr_001_583A
     ld   a, $03
     ld   [rSVBK], a
     xor  a
@@ -1210,7 +1210,7 @@ label_583A::
     ld   [rSVBK], a
     ei
 
-label_5854::
+jr_001_5854::
     ld   a, $01
     ld   [$DDD5], a
     xor  a
@@ -1231,23 +1231,23 @@ label_5854::
     ld   a, [wIsIndoor]
     and  a
     ld   a, $06
-    jr   nz, label_5885
+    jr   nz, jr_001_5885
     ld   a, $07
 
-label_5885::
+jr_001_5885::
     ld   [wTileMapToLoad], a
 
 func_001_5888::
     ld   hl, wRoomTransitionState
     ld   e, $00
 
-label_588D::
+jr_001_588D::
     xor  a
     ldi  [hl], a
     inc  e
     ld   a, e
     cp   $0C
-    jr   nz, label_588D
+    jr   nz, jr_001_588D
 
 func_001_5895::
     ld   a, $80
@@ -1259,7 +1259,7 @@ func_001_5895::
     xor  a
     ld   [wInventoryAppearing], a
 
-label_58A7::
+jr_001_58A7::
     ret
 
 func_001_58A8::
@@ -1373,25 +1373,25 @@ func_001_5A71::
     ld   c, a
     ld   hl, $C182
     and  $0F
-    jr   nz, label_5A92
+    jr   nz, jr_001_5A92
     xor  a
     ld   [hl], a
-    jr   label_5A9D
+    jr   jr_001_5A9D
 
-label_5A92::
+jr_001_5A92::
     ld   a, [hl]
     inc  a
     ld   [hl], a
     cp   $18
-    jr   nz, label_5A9D
+    jr   nz, jr_001_5A9D
     ld   [hl], $15
-    jr   label_5AA0
+    jr   jr_001_5AA0
 
-label_5A9D::
+jr_001_5A9D::
     ldh  a, [hJoypadState]
     ld   c, a
 
-label_5AA0::
+jr_001_5AA0::
     ld   a, c
     and  $03
     ld   e, a
@@ -1427,56 +1427,56 @@ label_5AA0::
     add  hl, de
     ld   a, [$C5A2]
     and  a
-    jr   nz, label_5AF5
+    jr   nz, jr_001_5AF5
     ld   a, [hl]
     and  $FF
-    jr   nz, label_5AF5
+    jr   nz, jr_001_5AF5
     ld   a, [wFreeMovementMode]
     and  a
-    jr   nz, label_5AF5
+    jr   nz, jr_001_5AF5
     ld   a, JINGLE_BUMP
     ldh  [hJingle], a
     ldh  a, [hScratch0]
     ld   [$DBB4], a
     jr   label_001_5B3F
 
-label_5AF5::
+jr_001_5AF5::
     call func_001_6BAE
     ld   hl, MapSpecialLocationNamesTable
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_5B30
+    jr   z, jr_001_5B30
     swap a
     and  $07
     inc  a
     ld   c, a
     cp   $01
-    jr   nz, label_5B19
+    jr   nz, jr_001_5B19
     ld   a, [$C5A2]
     and  a
-    jr   nz, label_5B30
+    jr   nz, jr_001_5B30
     ld   hl, $D800
     add  hl, de
     ld   a, [hl]
     and  $20
-    jr   z, label_5B30
+    jr   z, jr_001_5B30
 
-label_5B19::
+jr_001_5B19::
     ld   a, [$C1B1]
     and  a
-    jr   nz, label_5B24
+    jr   nz, jr_001_5B24
     ld   a, $10
     ld   [$C1B2], a
 
-label_5B24::
+jr_001_5B24::
     ld   a, c
     ld   [$C1B1], a
     ld   a, [$DBB4]
     ld   [$C1B4], a
     jr   label_001_5B3F
 
-label_5B30::
+jr_001_5B30::
     ld   a, [$C1B1]
     and  a
     jr   z, label_001_5B3F
@@ -1516,7 +1516,7 @@ label_001_5B3F::
     ld   [hl], $20
     ldh  a, [hFrameCounter]
     and  $10
-    jr   nz, label_5BAC
+    jr   nz, jr_001_5BAC
     ld   hl, $C088
     ld   a, e
     add  a, $04
@@ -1559,7 +1559,7 @@ label_001_5B3F::
     ld   a, $40
     ldi  [hl], a
 
-label_5BAC::
+jr_001_5BAC::
     ret
 
 label_5BAD::
@@ -1575,10 +1575,10 @@ label_5BAD::
 label_5C2D::
     db $20, 1, $22
 
-label_5C30::
+jr_001_5C30::
     db 1, $24, 6, $26, 6, $28, 7, $2A, 7, $2C, 5, $2E, 5, $2C
 
-label_5C3E::
+jr_001_5C3E::
     db 5, $2E, 5
 
 label_5C41::
@@ -1598,32 +1598,32 @@ func_001_5C49::
 func_001_5C55::
     ld   a, [$C1B3]
     and  a
-    jr   z, label_5C62
+    jr   z, jr_001_5C62
     dec  a
     ld   [$C1B3], a
     cpl
-    jr   label_5C6C
+    jr   jr_001_5C6C
 
-label_5C62::
+jr_001_5C62::
     ld   a, [$C1B2]
     and  a
-    jr   z, label_5C72
+    jr   z, jr_001_5C72
     dec  a
     ld   [$C1B2], a
 
-label_5C6C::
+jr_001_5C6C::
     rra
     rra
     and  $03
-    jr   label_5C7B
+    jr   jr_001_5C7B
 
-label_5C72::
+jr_001_5C72::
     ld   a, [$C1B1]
     and  a
     jp   z, label_001_5D13
     ld   a, $00
 
-label_5C7B::
+jr_001_5C7B::
     ld   [$C1B0], a
     ldh  [hActiveEntitySpriteVariant], a
     ld   a, $00
@@ -1636,16 +1636,16 @@ label_5C7B::
     ld   e, $00
     ld   a, [$C1B4]
     cp   $70
-    jr   c, label_5C9C
+    jr   c, jr_001_5C9C
     ld   e, $02
 
-label_5C9C::
+jr_001_5C9C::
     and  $0F
     cp   $08
-    jr   nc, label_5CA3
+    jr   nc, jr_001_5CA3
     inc  e
 
-label_5CA3::
+jr_001_5CA3::
     ld   d, $00
     ld   hl, label_5C41
     add  hl, de
@@ -1662,10 +1662,10 @@ label_5CA3::
     rla
     rla
 
-label_5CBB::
+jr_001_5CBB::
     and  $E0
 
-label_5CBD::
+jr_001_5CBD::
     ld   e, a
     ld   d, $00
     ld   hl, label_5BAD
@@ -1749,75 +1749,75 @@ label_001_5D53::
     ld   bc, label_5D14
     ldh  a, [$FFDB]
     and  a
-    jr   z, label_5D75
+    jr   z, jr_001_5D75
     ld   bc, label_5D29
     cp   $01
-    jr   z, label_5D75
+    jr   z, jr_001_5D75
     ld   bc, label_5D3E
 
-label_5D75::
+jr_001_5D75::
     ld   e, $15
 
-label_5D77::
+jr_001_5D77::
     ld   a, [bc]
     inc  bc
     ldi  [hl], a
     dec  e
-    jr   nz, label_5D77
+    jr   nz, jr_001_5D77
     pop  de
     ld   hl, $D604
     add  hl, de
     ld   c, $00
     ldh  a, [hScratch2]
     and  a
-    jr   z, label_5DAB
+    jr   z, jr_001_5DAB
     ldh  [hScratch0], a
 
-label_5D8B::
+jr_001_5D8B::
     ldh  a, [hScratch0]
     sub  a, $08
     ldh  [hScratch0], a
-    jr   c, label_5DA2
+    jr   c, jr_001_5DA2
     ld   a, $AE
     ldi  [hl], a
     inc  c
     ld   a, c
     cp   $07
-    jr   nz, label_5DA0
+    jr   nz, jr_001_5DA0
     ld   a, l
     add  a, $03
     ld   l, a
 
-label_5DA0::
-    jr   label_5D8B
+jr_001_5DA0::
+    jr   jr_001_5D8B
 
-label_5DA2::
+jr_001_5DA2::
     add  a, $08
-    jr   z, label_5DAB
+    jr   z, jr_001_5DAB
     ld   a, $AE
     ldi  [hl], a
-    jr   label_5DB3
+    jr   jr_001_5DB3
 
-label_5DAB::
+jr_001_5DAB::
     ldh  a, [hScratch3]
     cp   c
-    jr   z, label_5DBF
+    jr   z, jr_001_5DBF
     ld   a, $AE
     ldi  [hl], a
 
-label_5DB3::
+jr_001_5DB3::
     inc  c
     ld   a, c
     cp   $07
-    jr   nz, label_5DBD
+    jr   nz, jr_001_5DBD
     ld   a, l
     add  a, $03
     ld   l, a
 
-label_5DBD::
-    jr   label_5DAB
+jr_001_5DBD::
+    jr   jr_001_5DAB
 
-label_5DBF::
+jr_001_5DBF::
     ret
 
 func_5DC0::
@@ -1828,29 +1828,29 @@ func_5DC0::
     ld   c, $00
     ld   hl, $DB80
 
-label_5DCC::
+jr_001_5DCC::
     ld   a, [hli]
     and  a
-    jr   z, label_5DD3
+    jr   z, jr_001_5DD3
     ld   a, [de]
     or   b
     ld   [de], a
 
-label_5DD3::
+jr_001_5DD3::
     inc  c
     ld   a, c
     cp   $05
-    jr   nz, label_5DDB
+    jr   nz, jr_001_5DDB
     ld   b, $02
 
-label_5DDB::
+jr_001_5DDB::
     cp   $0A
-    jr   nz, label_5DE1
+    jr   nz, jr_001_5DE1
     ld   b, $04
 
-label_5DE1::
+jr_001_5DE1::
     cp   $0F
-    jr   nz, label_5DCC
+    jr   nz, jr_001_5DCC
     ret
 
 func_001_5DE6::
@@ -1879,7 +1879,7 @@ func_001_5DE6::
     ld   bc, $D800
     ld   de, $0380
 
-label_5E12::
+jr_001_5E12::
     call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
@@ -1888,11 +1888,11 @@ label_5E12::
     dec  de
     ld   a, e
     or   d
-    jr   nz, label_5E12
+    jr   nz, jr_001_5E12
     ld   bc, $DDDA
     ld   de, $05
 
-label_5E26::
+jr_001_5E26::
     call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
@@ -1901,11 +1901,11 @@ label_5E26::
     dec  de
     ld   a, e
     or   d
-    jr   nz, label_5E26
+    jr   nz, jr_001_5E26
     ld   bc, $DDE0
     ld   de, $20
 
-label_5E3A::
+jr_001_5E3A::
     call EnableExternalRAMWriting
     ld   a, [bc]
     inc  bc
@@ -1914,7 +1914,7 @@ label_5E3A::
     dec  de
     ld   a, e
     or   d
-    jr   nz, label_5E3A
+    jr   nz, jr_001_5E3A
     call EnableExternalRAMWriting
     ld   a, [$DC0F]
     call EnableExternalRAMWriting
@@ -2179,29 +2179,29 @@ HideAllSprites::
 UpdateWindowPosition::
     ld   a, [wInventoryAppearing]
     and  a
-    jr   z, label_5F6A
+    jr   z, jr_001_5F6A
     ld   hl, wOAMBuffer
     ld   a, [wWindowY]
     add  a, $08
     ld   d, a
     ld   e, $28
 
-label_5F5C::
+jr_001_5F5C::
     ld   a, [hl]
     cp   d
-    jr   c, label_5F62
+    jr   c, jr_001_5F62
     ld   [hl], $00
 
-label_5F62::
+jr_001_5F62::
     inc  hl
     inc  hl
     inc  hl
     inc  hl
     dec  e
-    jr   nz, label_5F5C
+    jr   nz, jr_001_5F5C
     ret
 
-label_5F6A::
+jr_001_5F6A::
     ld   a, [wWindowY]
     and  a
     ret  z
@@ -2211,48 +2211,48 @@ label_5F6A::
     ld   d, $3E
     ld   a, [$C19F]
     and  $80
-    jr   z, label_5F7F
+    jr   z, jr_001_5F7F
     ld   d, $58
 
-label_5F7F::
+jr_001_5F7F::
     ld   e, $1F
     ld   hl, $C024
 
-label_5F84::
+jr_001_5F84::
     ld   a, [hl]
     cp   d
     ld   a, [$C19F]
     bit  7, a
-    jr   nz, label_5F8E
+    jr   nz, jr_001_5F8E
     ccf
 
-label_5F8E::
-    jr   c, label_5FAB
+jr_001_5F8E::
+    jr   c, jr_001_5FAB
     ld   a, [$C173]
     cp   $4F
-    jr   nz, label_5FA9
+    jr   nz, jr_001_5FA9
     ld   a, [$C112]
     and  a
-    jr   nz, label_5FA9
+    jr   nz, jr_001_5FA9
     inc  hl
     inc  hl
     db   $3A ; ldd  a, [hl]
     dec  hl
     cp   $9A
-    jr   c, label_5FA9
+    jr   c, jr_001_5FA9
     cp   $A0
-    jr   c, label_5FAB
+    jr   c, jr_001_5FAB
 
-label_5FA9::
+jr_001_5FA9::
     ld   [hl], $00
 
-label_5FAB::
+jr_001_5FAB::
     inc  hl
     inc  hl
     inc  hl
     inc  hl
     dec  e
-    jr   nz, label_5F84
+    jr   nz, jr_001_5F84
     ret
 
 ; Create the entity for the NPC currently following Link (if any).
@@ -2640,7 +2640,7 @@ LoadCounterAnimatedTiles::
     ld   a, $6C
     ld   [$9909], a
 
-label_61E9::
+jr_001_61E9::
     inc  a
     ld   [$990A], a
     ret
@@ -2668,7 +2668,7 @@ PeachPictureEntryPoint::
     JP_TABLE
 
     dw label_6808
-    dw label_6829
+    dw jr_001_6829
     dw label_6856
     dw label_6873
     dw label_68AA
@@ -2686,12 +2686,12 @@ label_6808::
 label_680B::
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_6829
+    jr   z, jr_001_6829
     ld   hl, $DC10
     ld   c, $80
     di
 
-label_6816::
+jr_001_6816::
     xor  a
     ld   [rSVBK], a
     ld   b, [hl]
@@ -2702,48 +2702,48 @@ label_6816::
     dec  c
     ld   a, c
     and  a
-    jr   nz, label_6816
+    jr   nz, jr_001_6816
     xor  a
     ld   [rSVBK], a
     ei
 
-label_6829::
+jr_001_6829::
     ld   a, $01
     ld   [$C167], a
     call func_1A22
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_6855
+    jr   nz, jr_001_6855
     call func_001_5888
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
-    jr   z, label_6849
+    jr   z, jr_001_6849
     ld   a, $03
     ldh  [hWindowYUnused], a
     ld   a, $30
     ldh  [hWindowXUnused], a
 
-label_6849::
+jr_001_6849::
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
     ld   a, $0F
     ld   [wTileMapToLoad], a
 
-label_6855::
+jr_001_6855::
     ret
 label_6856::
     ld   e, $21
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
-    jr   z, label_6868
+    jr   z, jr_001_6868
     ldh  a, [hMapRoom]
     cp   $DD
     ld   e, $12
-    jr   nz, label_6868
+    jr   nz, jr_001_6868
     ld   e, $20
 
-label_6868::
+jr_001_6868::
     ld   a, e
     ld   [wTileMapToLoad], a
     xor  a
@@ -2753,14 +2753,14 @@ label_6873::
     ld   e, $24
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
-    jr   z, label_6885
+    jr   z, jr_001_6885
     ldh  a, [hMapRoom]
     cp   $DD
     ld   e, $12
-    jr   nz, label_6885
+    jr   nz, jr_001_6885
     ld   e, $23
 
-label_6885::
+jr_001_6885::
     ld   a, e
     ld   [wBGMapToLoad], a
     ld   a, $FF
@@ -2773,10 +2773,10 @@ label_6885::
     ld   e, $08
     ld   hl, $D210
 
-label_689E::
+jr_001_689E::
     ldi  [hl], a
     dec  e
-    jr   nz, label_689E
+    jr   nz, jr_001_689E
     ld   a, $01
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
@@ -2786,28 +2786,28 @@ label_68AA::
     call func_1A39
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_68BF
+    jr   nz, jr_001_68BF
     call IncrementGameplaySubtype
     ld   a, $80
     ld   [$D210], a
 
-label_68BF::
+jr_001_68BF::
     ret
 
 label_68C0::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
-    jr   nz, label_68CF
+    jr   nz, jr_001_68CF
 
     call func_6A7C
     ld   a, $07
     ld   [wGameplaySubtype], a
     ret
 
-label_68CF::
+jr_001_68CF::
     ldh  a, [hJoypadState]
     and  $B0
-    jr   z, label_68E3
+    jr   z, jr_001_68E3
     ld   a, JINGLE_VALIDATE
     ldh  [hJingle], a
 
@@ -2817,26 +2817,26 @@ func_001_68D9::
     ld   [$C16B], a
     ld   [$C16C], a
 
-label_68E3::
+jr_001_68E3::
     ret
 label_68E4::
     call func_6A7C
     ld   a, [$D210]
     dec  a
     ld   [$D210], a
-    jr   nz, label_68FB
+    jr   nz, jr_001_68FB
     ld   [wScreenShakeVertical], a
     ld   a, $20
     ld   [$D210], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_68FB::
+jr_001_68FB::
     ld   e, $00
     and  $04
-    jr   z, label_6903
+    jr   z, jr_001_6903
     ld   e, $FE
 
-label_6903::
+jr_001_6903::
     ld   a, e
     ld   [wScreenShakeVertical], a
     ret
@@ -2846,7 +2846,7 @@ label_6908::
     ld   a, [$D210]
     dec  a
     ld   [$D210], a
-    jr   nz, label_6944
+    jr   nz, jr_001_6944
     call PlayBombExplosionSfx
     ld   a, $30
     ld   [$D210], a
@@ -2861,12 +2861,12 @@ label_6908::
     inc  a
     ld   [$D213], a
     cp   $04
-    jr   nz, label_6944
+    jr   nz, jr_001_6944
     ld   a, $80
     ld   [$D210], a
     call IncrementGameplaySubtype
 
-label_6944::
+jr_001_6944::
     ret
 label_6945::
     call func_6A7C
@@ -2885,19 +2885,19 @@ func_001_695B::
     ld   [wScreenShakeVertical], a
     ld   a, [$D215]
     and  a
-    jr   z, label_6975
+    jr   z, jr_001_6975
     dec  a
     ld   [$D215], a
     ld   e, $FE
     and  $04
-    jr   z, label_6971
+    jr   z, jr_001_6971
     ld   e, $00
 
-label_6971::
+jr_001_6971::
     ld   a, e
     ld   [wScreenShakeVertical], a
 
-label_6975::
+jr_001_6975::
     ret
 
 label_6976::
@@ -3066,7 +3066,7 @@ include "code/face_shrine_mural.asm"
 func_001_6BA8::
     ldh  a, [hJoypadState]
     and  $0C
-    jr   z, label_6BB4
+    jr   z, jr_001_6BB4
 
 func_001_6BAE::
     push af
@@ -3074,20 +3074,20 @@ func_001_6BAE::
     ldh  [hJingle], a
     pop  af
 
-label_6BB4::
+jr_001_6BB4::
     ret
 
 func_001_6BB5::
     ldh  a, [hBGTilesLoadingStage]
     cp   $08
     jp  c, LoadSirenInstrumentTiles
-    jr   nz, label_6BC6
+    jr   nz, jr_001_6BC6
     call func_001_6BF0
     ld   hl, hBGTilesLoadingStage
     inc  [hl]
     ret
 
-label_6BC6::
+jr_001_6BC6::
     call func_001_6BEA
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
@@ -3112,7 +3112,7 @@ func_001_6BEA::
 func_001_6BF0::
     db $E, 4, $1E, 0
 
-label_6BF4::
+jr_001_6BF4::
     ld   a, c
     ldh  [hScratch9], a
     ld   d, $00
@@ -3145,7 +3145,7 @@ label_001_6BF9::
     ld   a, [hl]
     ldh  [hScratch3], a
     pop  hl
-    jr   label_6C48
+    jr   jr_001_6C48
 
 label_001_6C2A::
     ld   c, $00
@@ -3168,7 +3168,7 @@ label_001_6C2A::
     ldh  [hScratch3], a
     pop  hl
 
-label_6C48::
+jr_001_6C48::
     ldh  a, [hScratch0]
     ld   [hl], a
     call func_001_6C69
@@ -3278,62 +3278,62 @@ LoadTileset0F::
     ld   bc, $400
     ld   hl, $9800
 
-label_6CE9::
+jr_001_6CE9::
     ld   e, $00
     ld   a, l
     and  $20
-    jr   z, label_6CF1
+    jr   z, jr_001_6CF1
     inc  e
 
-label_6CF1::
+jr_001_6CF1::
     ld   d, $AE
     ld   a, l
     and  $01
     xor  e
-    jr   z, label_6CFA
+    jr   z, jr_001_6CFA
     inc  d
 
-label_6CFA::
+jr_001_6CFA::
     ld   a, l
     and  $1F
     cp   $14
-    jr   nc, label_6D02
+    jr   nc, jr_001_6D02
     ld   [hl], d
 
-label_6D02::
+jr_001_6D02::
     inc  hl
     dec  bc
     ld   a, b
     or   c
-    jr   nz, label_6CE9
+    jr   nz, jr_001_6CE9
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_6D10
+    jr   z, jr_001_6D10
     call func_001_6D11
 
-label_6D10::
+jr_001_6D10::
     ret
 
 func_001_6D11::
     ld   d, $05
     ld   a, [wGameplayType]
     cp   GAMEPLAY_WORLD
-    jr   z, label_6D1C
+    jr   z, jr_001_6D1C
     ld   d, $06
 
-label_6D1C::
+jr_001_6D1C::
     ld   a, $01
     ld   [rVBK], a
     ld   hl, $9800
     ld   bc, $400
 
-label_6D26::
+jr_001_6D26::
     ld   a, d
     ldi  [hl], a
     dec  bc
     ld   a, b
     or   c
-    jr   nz, label_6D26
+    jr   nz, jr_001_6D26
     ld   a, $00
     ld   [rVBK], a
     ret

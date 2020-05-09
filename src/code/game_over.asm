@@ -29,8 +29,8 @@ LinkPassOut0Handler::
     ldh  a, [$FFB7]                               ; $420A: $F0 $B7
     and  a                                        ; $420C: $A7
 
-label_420D::
-    jr   nz, label_4259                           ; $420D: $20 $4A
+jr_001_420D::
+    jr   nz, jr_001_4259                           ; $420D: $20 $4A
 
     ld   a, $10                                   ; $420F: $3E $10
     ldh  [$FFB7], a                               ; $4211: $E0 $B7
@@ -49,14 +49,14 @@ label_420D::
     daa                                           ; $422E: $27
     ld   [$DB58], a                               ; $422F: $EA $58 $DB
     cp   $10                                      ; $4232: $FE $10
-    jr   c, label_4240                            ; $4234: $38 $0A
+    jr   c, jr_001_4240                            ; $4234: $38 $0A
 
     ld   a, $99                                   ; $4236: $3E $99
     ld   [wDeathCount], a                         ; $4238: $EA $57 $DB
     ld   a, $09                                   ; $423B: $3E $09
     ld   [$DB58], a                               ; $423D: $EA $58 $DB
 
-label_4240::
+jr_001_4240::
     xor  a                                        ; $4240: $AF
     ld   [wScrollXOffset], a                      ; $4241: $EA $BF $C1
     ld   [wPieceOfPowerKillCount], a              ; $4244: $EA $15 $D4
@@ -68,7 +68,7 @@ label_4240::
     ldh  [rOBP0], a                               ; $4256: $E0 $48
     ret                                           ; $4258: $C9
 
-label_4259::
+jr_001_4259::
     rra                                           ; $4259: $1F
     rra                                           ; $425A: $1F
     rra                                           ; $425B: $1F
@@ -131,44 +131,44 @@ Data_001_42BA::
 LinkPassOut3Handler::
     ldh  a, [$FFB7]
     and  a                                        ; $42CC: $A7
-    jr   nz, label_42D8                           ; $42CD: $20 $09
+    jr   nz, jr_001_42D8                           ; $42CD: $20 $09
 
     ld   hl, hFF9C                                ; $42CF: $21 $9C $FF
     inc  [hl]                                     ; $42D2: $34
     ld   a, $03                                   ; $42D3: $3E $03
     ld   [wActiveMusicTrack], a                   ; $42D5: $EA $68 $D3
 
-label_42D8::
+jr_001_42D8::
     ret                                           ; $42D8: $C9
 
 LinkPassOut4Handler::
     call func_001_4339                               ; $42D9: $CD $39 $43
     ldh  a, [hJoypadState]                        ; $42DC: $F0 $CC
     and  $B0                                      ; $42DE: $E6 $B0
-    jr   z, label_4335                            ; $42E0: $28 $53
+    jr   z, jr_001_4335                            ; $42E0: $28 $53
 
     ld   a, [$C13F]                               ; $42E2: $FA $3F $C1
     cp   $01                                      ; $42E5: $FE $01
-    jr   z, label_432C                            ; $42E7: $28 $43
+    jr   z, jr_001_432C                            ; $42E7: $28 $43
 
     cp   $00                                      ; $42E9: $FE $00
-    jr   z, label_42F2                            ; $42EB: $28 $05
+    jr   z, jr_001_42F2                            ; $42EB: $28 $05
 
     ld   [$DBD1], a                               ; $42ED: $EA $D1 $DB
-    jr   label_42F5                               ; $42F0: $18 $03
+    jr   jr_001_42F5                               ; $42F0: $18 $03
 
-label_42F2::
+jr_001_42F2::
     call func_001_5DE6                               ; $42F2: $CD $E6 $5D
 
-label_42F5::
+jr_001_42F5::
     xor  a                                        ; $42F5: $AF
     ld   hl, wEntitiesStatusTable                 ; $42F6: $21 $80 $C2
     ld   e, $10                                   ; $42F9: $1E $10
 
-label_42FB::
+jr_001_42FB::
     ld   [hl+], a                                 ; $42FB: $22
     dec  e                                        ; $42FC: $1D
-    jr   nz, label_42FB                           ; $42FD: $20 $FC
+    jr   nz, jr_001_42FB                           ; $42FD: $20 $FC
 
     ld   [wOBJ0Palette], a                        ; $42FF: $EA $98 $DB
     ld   [wOBJ1Palette], a                        ; $4302: $EA $99 $DB
@@ -189,13 +189,13 @@ label_42FB::
     ld   [$DBC7], a                               ; $4328: $EA $C7 $DB
     ret                                           ; $432B: $C9
 
-label_432C::
+jr_001_432C::
     call func_001_5DE6                               ; $432C: $CD $E6 $5D
     xor  a                                        ; $432F: $AF
     ldh  [hActiveEntityTilesOffset], a            ; $4330: $E0 $F5
     call func_001_6162                               ; $4332: $CD $62 $61
 
-label_4335::
+jr_001_4335::
     ret                                           ; $4335: $C9
 
 label_4336::
@@ -208,34 +208,34 @@ func_001_4339::
     call func_001_6BA8                               ; $433C: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $433F: $F0 $CC
     and  $08                                      ; $4341: $E6 $08
-    jr   z, label_434D                            ; $4343: $28 $08
+    jr   z, jr_001_434D                            ; $4343: $28 $08
 
     ld   a, [hl]                                  ; $4345: $7E
     inc  a                                        ; $4346: $3C
     cp   $03                                      ; $4347: $FE $03
-    jr   nz, label_434C                           ; $4349: $20 $01
+    jr   nz, jr_001_434C                           ; $4349: $20 $01
 
     xor  a                                        ; $434B: $AF
 
-label_434C::
+jr_001_434C::
     ld   [hl], a                                  ; $434C: $77
 
-label_434D::
+jr_001_434D::
     ldh  a, [hJoypadState]                        ; $434D: $F0 $CC
     and  $04                                      ; $434F: $E6 $04
-    jr   z, label_435C                            ; $4351: $28 $09
+    jr   z, jr_001_435C                            ; $4351: $28 $09
 
     ld   a, [hl]                                  ; $4353: $7E
     dec  a                                        ; $4354: $3D
     cp   $FF                                      ; $4355: $FE $FF
-    jr   nz, label_435B                           ; $4357: $20 $02
+    jr   nz, jr_001_435B                           ; $4357: $20 $02
 
     ld   a, $02                                   ; $4359: $3E $02
 
-label_435B::
+jr_001_435B::
     ld   [hl], a                                  ; $435B: $77
 
-label_435C::
+jr_001_435C::
     ld   e, [hl]                                  ; $435C: $5E
     ld   d, $00                                   ; $435D: $16 $00
     ld   hl, label_4336                           ; $435F: $21 $36 $43

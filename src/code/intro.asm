@@ -248,7 +248,7 @@ IntroShipOnSeaHandler::
     call RenderIntroEntities
     ld   a, [wIntroSubTimer]
     and  a
-    jr   z, label_7014
+    jr   z, jr_001_7014
 
     inc  a
     ld   [wIntroSubTimer], a ; Increment subtimer
@@ -299,7 +299,7 @@ IntroShipOnSeaHandler::
 .jp_7013
     ret
 
-label_7014::
+jr_001_7014::
     ; If Intro's ship X == $50…
     ld   a, [wEntitiesPosXTable + $02]
     cp   $50
@@ -334,28 +334,28 @@ label_7014::
     ld   c, $00
     ldh  a, [hBaseScrollX]
     cp   $10
-    jr   z, label_7068
+    jr   z, jr_001_7068
     inc  c
     cp   $30
-    jr   z, label_7068
+    jr   z, jr_001_7068
     inc  c
     cp   $38
-    jr   z, label_7068
+    jr   z, jr_001_7068
     inc  c
     cp   $58
-    jr   z, label_7068
+    jr   z, jr_001_7068
     inc  c
     cp   $5A
-    jr   z, label_7068
+    jr   z, jr_001_7068
     inc  c
     cp   $69
     jr   nz, label_001_70B1
 
-label_7068::
+jr_001_7068::
     ld   e, $01
     ld   d, $00
 
-label_706C::
+jr_001_706C::
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
@@ -364,7 +364,7 @@ label_706C::
     dec  e
     ld   a, e
     cp   $FF
-    jr   nz, label_706C
+    jr   nz, jr_001_706C
     ret
 
 label_707B::
@@ -500,16 +500,16 @@ IntroStage6Handler::
     call func_001_71C7
     ld   a, [$D001]
     cp   $A0
-    jr   nz, label_7168
+    jr   nz, jr_001_7168
     push af
     ld   a, $02
     ld   [rLYC], a
     pop  af
 
-label_7168::
+jr_001_7168::
     dec  a
     ld   [$D001], a
-    jr   nz, label_7188
+    jr   nz, jr_001_7188
     ld   a, $07
     ld   [wGameplaySubtype], a
     ld   a, $06
@@ -522,18 +522,18 @@ label_7168::
     ld   [wEntitiesUnknowTableY], a
     ret
 
-label_7188::
+jr_001_7188::
     cp   $34
-    jr   nc, label_71C2
+    jr   nc, jr_001_71C2
     and  $03
-    jr   nz, label_719B
+    jr   nz, jr_001_719B
     ld   a, [$D010]
     cp   $0C
-    jr   z, label_719B
+    jr   z, jr_001_719B
     inc  a
     ld   [$D010], a
 
-label_719B::
+jr_001_719B::
     ldh  a, [hFrameCounter]
     and  $03
     ld   e, a
@@ -555,7 +555,7 @@ label_719B::
     ld   [wOBJ1Palette], a
     call func_020_6AC1_trampoline
 
-label_71C2::
+jr_001_71C2::
     ret
 
 IntroBeachHandler::
@@ -565,19 +565,19 @@ IntroBeachHandler::
 func_001_71C7::
     ld   a, [$C291]
     cp   $02
-    jr   nc, label_71DE
+    jr   nc, jr_001_71DE
     ld   a, [$C114]
     inc  a
     cp   $A0
-    jr   nz, label_71DB
+    jr   nz, jr_001_71DB
     ld   a, NOISE_SFX_SEA_WAVES
     ldh  [hNoiseSfx], a
     xor  a
 
-label_71DB::
+jr_001_71DB::
     ld   [$C114], a
 
-label_71DE::
+jr_001_71DE::
     ret
 
 label_71DF::
@@ -613,27 +613,27 @@ IntroStage8Handler::
     ld   hl, $D601
     ld   c, $13
 
-label_7286::
+jr_001_7286::
     ld   a, [de]
     inc  de
     ldi  [hl], a
     dec  c
-    jr   nz, label_7286
+    jr   nz, jr_001_7286
     ld   [hl], $00
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_7296
+    jr   z, jr_001_7296
     call func_001_7338
 
-label_7296::
+jr_001_7296::
     ld   a, [$D002]
     inc  a
     ld   [$D002], a
     cp   $07
-    jr   nz, label_72A4
+    jr   nz, jr_001_72A4
     call IncrementGameplaySubtype
 
-label_72A4::
+jr_001_72A4::
     ret
     sbc  a, d
     ld   d, $0F
@@ -685,7 +685,7 @@ label_72A4::
     nop
     nop
 
-label_72D8::
+jr_001_72D8::
     nop
     nop
     nop
@@ -794,12 +794,12 @@ func_001_7338::
     ld   hl, $DC91
     ld   c, $13
 
-label_734C::
+jr_001_734C::
     ld   a, [de]
     inc  de
     ldi  [hl], a
     dec  c
-    jr   nz, label_734C
+    jr   nz, jr_001_734C
     ld   [hl], $00
     ret
 
@@ -840,24 +840,24 @@ IntroStageAHandler::
     ld   hl, $D601
     ld   c, $12
 
-label_737E::
+jr_001_737E::
     ld   a, [de]
     inc  de
     ldi  [hl], a
     dec  c
-    jr   nz, label_737E
+    jr   nz, jr_001_737E
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_738E
+    jr   nz, jr_001_738E
     call func_001_79AE
-    jr   label_7395
+    jr   jr_001_7395
 
-label_738E::
+jr_001_738E::
     xor  a
     call func_001_79C2
     call func_001_73B1
 
-label_7395::
+jr_001_7395::
     ld   a, $3C
     ld   [$D015], a
     call IncrementGameplaySubtype
@@ -883,12 +883,12 @@ func_001_73B1::
     ld   hl, $DC91
     ld   c, $12
 
-label_73B9::
+jr_001_73B9::
     ld   a, [de]
     inc  de
     ldi  [hl], a
     dec  c
-    jr   nz, label_73B9
+    jr   nz, jr_001_73B9
     ret
 
 label_73C0::
@@ -902,23 +902,23 @@ TitleScreenHandler::
     call func_001_7920
     ldh  a, [hFrameCounter]
     and  $3F
-    jr   nz, label_7418
+    jr   nz, jr_001_7418
     ld   e, $01
     ld   d, $00
 
-label_73E0::
+jr_001_73E0::
     ld   hl, wEntitiesStatusTable
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_73F0
+    jr   z, jr_001_73F0
     dec  e
     ld   a, e
     cp   $FF
-    jr   nz, label_73E0
-    jr   label_7418
+    jr   nz, jr_001_73E0
+    jr   jr_001_7418
 
-label_73F0::
+jr_001_73F0::
     ld   [hl], $08
     ld   hl, $C2E0
     add  hl, de
@@ -930,7 +930,7 @@ label_73F0::
     ld   c, a
     ld   b, $00
 
-label_7404::
+jr_001_7404::
     ld   hl, label_73C0
     add  hl, bc
     ld   a, [hl]
@@ -939,42 +939,42 @@ label_7404::
     ld   [hl], a
     ld   hl, label_73C8
 
-label_7411::
+jr_001_7411::
     add  hl, bc
 
-label_7412::
+jr_001_7412::
     ld   a, [hl]
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a
 
-label_7418::
+jr_001_7418::
     ld   a, [$D002]
     inc  a
     ld   [$D002], a
     and  $0F
-    jr   nz, label_7439
+    jr   nz, jr_001_7439
     ld   a, [$D001]
     dec  a
     ld   [$D001], a
-    jr   nz, label_7439
+    jr   nz, jr_001_7439
     call IncrementGameplaySubtype
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
     call label_27EA
 
-label_7439::
+jr_001_7439::
     ret
 
 IntroStageCHandler::
     call func_1A22
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_7447
+    jr   nz, jr_001_7447
     jp   func_001_6162
 
-label_7447::
+jr_001_7447::
     ret
 
 IntroStageDHandler::
@@ -1052,12 +1052,12 @@ IntroLinkScream::
     ld   hl, label_74B8
     ld   c, $0F
 
-label_74CF::
+jr_001_74CF::
     ld   a, [hli]
     ld   [de], a
     inc  de
     dec  c
-    jr   nz, label_74CF
+    jr   nz, jr_001_74CF
     ret
 
 RenderIntroEntities::
@@ -1231,12 +1231,12 @@ RenderIntroShip::
 label_75CB::
     db 0, 0, $34, 1, 0, 8
 
-label_75D1::
+jr_001_75D1::
     db $36, 1, $10, 0, $2C, 1, $20, $F8, $2C, 1, $28, 0, $2E, $21, $30, $F0
     db $2E, 1, 8, 0, $36, $21, 8, 8, $34, $21, $18, 0, $30, 1, $18, 8
     db $2C, $21, $28, $10, $2E, $21, $28, $10
 
-label_75F9::
+jr_001_75F9::
     db $2E, $21, 0, 8, $34, $21, 0, 0, $36, $21, $10, 8, $2C, $21, $20, $10
     db $2C
 
@@ -1244,13 +1244,13 @@ label_7609::
     db $21, $28, 8, $2E, 1, $30, $18, $2E, $21, 8, 8, $36, 1, 8, 0, $34
     db 1, $18, 8, $30, $21, $18, 0
 
-label_7621::
+jr_001_7621::
     inc  l
     ld   bc, $F828
     ld   l, $01
-    jr   z, label_7621
+    jr   z, jr_001_7621
 
-label_7629::
+jr_001_7629::
     ld   l, $01
 
 func_001_762B::
@@ -1268,7 +1268,7 @@ func_001_762B::
     ld   d, b
     ld   hl, label_75CB
 
-label_7640::
+jr_001_7640::
     add  hl, de
     ld   c, $06
     call RenderActiveEntitySpritesRect
@@ -1504,9 +1504,9 @@ IntroMarinState4::
     ret
 
 label_77BD::
-    jr   c, label_77BF
+    jr   c, jr_001_77BF
 
-label_77BF::
+jr_001_77BF::
     db $38, $20, $3a, $00, $3a, $20, $3a, $00
     db $3a, $20, $3c, $00, $3e, $00, $3c, $00
     db $3e, $00, $3a, $00, $3a, $20, $3a, $00
@@ -1516,16 +1516,16 @@ RenderIntroSparkle::
     xor  a
     ld   [$C3C1], a
 
-label_77E1::
+jr_001_77E1::
     call GetEntityTransitionCountdown
     dec  [hl]
-    jr   nz, label_77ED
+    jr   nz, jr_001_77ED
     ld   hl, wEntitiesStatusTable
     add  hl, bc
     ld   [hl], b
     ret
 
-label_77ED::
+jr_001_77ED::
     ld   a, [hl]
     rra
     rra
@@ -1544,20 +1544,20 @@ label_77ED::
 label_7808::
     db   $10, $18, $2e, $05, $00, $18, $2c, $05
 
-label_7810::
+jr_001_7810::
     db   $10, $10
 
-label_7812::
+jr_001_7812::
     db $2A, 5, 0, $10, $28, 5, $10, 8, $26, 5, 0, 8, $24, 5, $10, 0
     db $22, 5, 0, 0, $20, 5
 
 label_7828::
     db 0, $28, $52, $16, 0
 
-label_782D::
+jr_001_782D::
     db $20, $50, $16, $10, $18, $4E, $16, 0, $18, $4C, $16, $10, $10, $4A
 
-label_783B::
+jr_001_783B::
     db $16, 0, $10, $48, $16, $10, 8, $46, $16, 0, 8, $44, $16, $10, 0, $42
     db $16, 0, 0, $40, $16
 
@@ -1568,19 +1568,19 @@ label_7850::
 label_7870::
     db 0, $28, $52, $16, 0
 
-label_7875::
+jr_001_7875::
     db $20, $50, $16, $10, $18, $4E, $16, 0
 
-label_787D::
+jr_001_787D::
     db $18, $4C
 
-label_787F::
+jr_001_787F::
     db $16, $10
 
-label_7881::
+jr_001_7881::
     db   $10, $4A ; Undefined instruction
 
-label_7883::
+jr_001_7883::
     db $16, 0, $10, $48, $16, $10, 8, $46, $16, 0, 8, $44, $16, $10, 0, $42
     db $16, 0, 0, $40, $16
 
@@ -1606,26 +1606,26 @@ label_78A0::
     db $f5, $7a, $7b, $6f, $bd, $73, $ff, $77
     db $f5, $7a, $2a, $5d, $8e
 
-label_78C5::
+jr_001_78C5::
     ld   h, l
     ld   [de], a
 
-label_78C7::
+jr_001_78C7::
     ld   l, [hl]
     push af
 
-label_78C9::
+jr_001_78C9::
     ld   a, d
     rst  $30
 
-label_78CB::
+jr_001_78CB::
     db $5E, $5B, $67, $DF, $6F, $F5, $7A, $E8, $48, $8E, $59, $54, $66, $F5, $7A, $52
     db $4A, $19, $5B, $BF, $67, $F5, $7A, $C6, $38, $8F, $49, $97, $5A, $F5, $7A, $CE
     db $39, $B7, $4A, $BF, $5B, $F5, $7A, $84, $24, $8F, $3D, $D9, $52, $F5, $7A, $29
     db $25, $75, $3E, $9F, $53, $F5, $7A, $42, $14, $90, $31, $1C, $4B, $F5, $7A, $A5
     db $14
 
-label_790C::
+jr_001_790C::
     db $13, $32, $7F, $4B, $F5, $7A, 0, 0, $B1, $21, $5F, $3F, $F5, $7A, 0, 0
     db $B1, $21, $5F, $3F
 
@@ -1633,11 +1633,11 @@ func_001_7920::
     ld   hl, $D015
     ld   a, [hl]
     and  a
-    jr   z, label_7929
+    jr   z, jr_001_7929
     dec  [hl]
     ret
 
-label_7929::
+jr_001_7929::
     ld   a, $78
     ldh  [hActiveEntityPosX], a
     ld   hl, $D018
@@ -1646,10 +1646,10 @@ label_7929::
     ldh  [hActiveEntityVisualPosY], a
     ldh  a, [hIsGBC]
     and  a
-    jr   nz, label_795D
+    jr   nz, jr_001_795D
     ld   a, [$D013]
     cp   $04
-    jr   z, label_797D
+    jr   z, jr_001_797D
     ld   hl, $D014
     inc  [hl]
     ld   a, [hl]
@@ -1665,54 +1665,54 @@ label_7929::
     call func_001_79AE
     jp   label_001_7997
 
-label_795D::
+jr_001_795D::
     ld   a, [$D013]
     cp   $08
-    jr   z, label_797D
+    jr   z, jr_001_797D
     ld   hl, $D014
     inc  [hl]
     ld   a, [hl]
     cp   $08
-    jr   nz, label_797D
+    jr   nz, jr_001_797D
     xor  a
     ld   [hl], a
     ld   hl, $D013
     inc  [hl]
     ld   a, [hl]
     cp   $08
-    jr   z, label_797D
+    jr   z, jr_001_797D
     call func_001_79C2
-    jr   label_797D
+    jr   jr_001_797D
 
-label_797D::
+jr_001_797D::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_001_7997
     ld   a, [$D013]
     cp   $08
-    jr   z, label_7990
+    jr   z, jr_001_7990
     ld   hl, label_7850
     ld   c, $12
-    jr   label_79AA
+    jr   jr_001_79AA
 
-label_7990::
+jr_001_7990::
     ld   hl, label_7870
     ld   c, $0A
-    jr   label_79AA
+    jr   jr_001_79AA
 
 label_001_7997::
     ld   a, [$D013]
     cp   $03
-    jr   nc, label_79A5
+    jr   nc, jr_001_79A5
     ld   hl, label_7808
     ld   c, $12
-    jr   label_79AA
+    jr   jr_001_79AA
 
-label_79A5::
+jr_001_79A5::
     ld   hl, label_7828
     ld   c, $0A
 
-label_79AA::
+jr_001_79AA::
     call RenderActiveEntitySpritesRect
     ret
 
@@ -1741,12 +1741,12 @@ func_001_79C2::
     ld   bc, $DC78
     ld   e, $10
 
-label_79D6::
+jr_001_79D6::
     ld   a, [hli]
     ld   [bc], a
     inc  bc
     dec  e
-    jr   nz, label_79D6
+    jr   nz, jr_001_79D6
     ld   a, $14
     ld   [$DDD3], a
     ld   a, $08
@@ -1761,7 +1761,7 @@ label_79EC::
     ld   b, e
     ld   a, l
     sbc  a, b
-    jr   nz, label_7A36
+    jr   nz, jr_001_7A36
     ld   a, l
     sbc  a, b
     ld   b, b
@@ -1797,22 +1797,22 @@ label_79FD::
 
 func_001_7A11::
     ld   hl, label_79FD
-    jr   label_7A19
+    jr   jr_001_7A19
 
 func_001_7A16::
     ld   hl, label_79EC
 
-label_7A19::
+jr_001_7A19::
     ld   de, $D601
     push bc
     ld   c, $18
 
-label_7A1F::
+jr_001_7A1F::
     ld   a, [hli]
     ld   [de], a
     inc  de
     dec  c
-    jr   nz, label_7A1F
+    jr   nz, jr_001_7A1F
     pop  bc
     ret
 
@@ -1827,10 +1827,10 @@ data_7A27::
 RenderIntroInertLink::
     ldh  a, [hActiveEntityPosX]
     cp   $F0
-    jr   nc, label_7A47
+    jr   nc, jr_001_7A47
     xor  a
 
-label_7A36::
+jr_001_7A36::
     ld   [wEntitiesPhysicsFlagsTable], a
     ld   de, data_7A27
     call RenderActiveEntitySpritesPair
@@ -1838,7 +1838,7 @@ label_7A36::
     add  a, $08
     ld   [wOAMNextAvailableSlot], a
 
-label_7A47::
+jr_001_7A47::
     ldh  a, [hActiveEntityState]
     JP_TABLE
 ._00 dw InertLinkState0Handler
@@ -2092,39 +2092,39 @@ func_001_7D01::
     ld   hl, wScrollXOffsetForSection
     ldh  a, [hFrameCounter]
     and  $07
-    jr   nz, label_7D0B
+    jr   nz, jr_001_7D0B
     inc  [hl]
 
-label_7D0B::
+jr_001_7D0B::
     inc  hl
     ldh  a, [hFrameCounter]
     and  $0F
-    jr   nz, label_7D13
+    jr   nz, jr_001_7D13
     inc  [hl]
 
-label_7D13::
+jr_001_7D13::
     inc  hl
     ldh  a, [hFrameCounter]
     and  $1F
-    jr   nz, label_7D1B
+    jr   nz, jr_001_7D1B
     inc  [hl]
 
-label_7D1B::
+jr_001_7D1B::
     inc  hl
     ldh  a, [hFrameCounter]
     and  $0F
-    jr   nz, label_7D23
+    jr   nz, jr_001_7D23
     inc  [hl]
 
-label_7D23::
+jr_001_7D23::
     inc  hl
     ld   a, [$D004]
     add  a, $28
     ld   [$D004], a
-    jr   nc, label_7D2F
+    jr   nc, jr_001_7D2F
     inc  [hl]
 
-label_7D2F::
+jr_001_7D2F::
     ldh  a, [hFrameCounter]
     add  a, $FC
     rra
@@ -2144,7 +2144,7 @@ func_001_7D46::
     ldh  a, [hFrameCounter]
     and  $0F
     cp   $04
-    jr   c, label_7D9B
+    jr   c, jr_001_7D9B
 
 func_001_7D4E::
     ldh  a, [hFrameCounter]
@@ -2161,10 +2161,10 @@ func_001_7D4E::
     ld   hl, label_7CE1
     ld   a, [$D00F]
     and  a
-    jr   z, label_7D6A
+    jr   z, jr_001_7D6A
     ld   hl, label_7CE9
 
-label_7D6A::
+jr_001_7D6A::
     add  hl, de
     ld   a, [hli]
     ld   h, [hl]
@@ -2172,10 +2172,10 @@ label_7D6A::
     ld   de, $8900
     ld   a, [$D00F]
     and  a
-    jr   z, label_7D7A
+    jr   z, jr_001_7D7A
     ld   de, $9300
 
-label_7D7A::
+jr_001_7D7A::
     ldh  a, [hFrameCounter]
     and  $03
     sla  a
@@ -2195,73 +2195,73 @@ label_7D7A::
     ld   a, d
     ld   [$D009], a
 
-label_7D9B::
+jr_001_7D9B::
     ret
 
 func_001_7D9C::
     ld   hl, wScrollXOffsetForSection
     ldh  a, [hFrameCounter]
     and  $07
-    jr   nz, label_7DA6
+    jr   nz, jr_001_7DA6
     inc  [hl]
 
-label_7DA6::
+jr_001_7DA6::
     ld   hl, $C101
     ld   a, [$D004]
     add  a, $50
     ld   [$D004], a
-    jr   nc, label_7DB4
+    jr   nc, jr_001_7DB4
     inc  [hl]
 
-label_7DB4::
+jr_001_7DB4::
     inc  hl
     ld   a, [$D005]
     add  a, $58
     ld   [$D005], a
-    jr   nc, label_7DC0
+    jr   nc, jr_001_7DC0
     inc  [hl]
 
-label_7DC0::
+jr_001_7DC0::
     inc  hl
     ld   a, [$D00D]
     add  a, $B0
     ld   [$D00D], a
-    jr   nc, label_7DCC
+    jr   nc, jr_001_7DCC
     inc  [hl]
 
-label_7DCC::
+jr_001_7DCC::
     jp   func_001_7D46
 
 func_001_7DCF::
     ld   hl, wScrollXOffsetForSection
     ldh  a, [hFrameCounter]
     and  $0F
-    jr   nz, label_7DD9
+    jr   nz, jr_001_7DD9
     inc  [hl]
 
-label_7DD9::
+jr_001_7DD9::
     ld   hl, $C101
     ld   a, [$D004]
     add  a, $28
     ld   [$D004], a
-    jr   nc, label_7DE7
+    jr   nc, jr_001_7DE7
     inc  [hl]
 
-label_7DE7::
+jr_001_7DE7::
     inc  hl
     ld   a, [$D005]
     add  a, $2C
     ld   [$D005], a
-    jr   nc, label_7DF3
+    jr   nc, jr_001_7DF3
     inc  [hl]
 
-label_7DF3::
+jr_001_7DF3::
     inc  hl
     ld   a, [$D00D]
     add  a, $58
     ld   [$D00D], a
-    jr   nc, label_7DFF
+    jr   nc, jr_001_7DFF
     inc  [hl]
 
-label_7DFF::
+jr_001_7DFF::
     jp   func_001_7D46

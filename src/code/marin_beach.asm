@@ -39,7 +39,7 @@ jr_001_621D::
 ._0E dw FileSaveFadeOut
 
 MarineBeachPrepare0::
-    call IncrementGameplaySubtypeAndReturn
+    call IncrementGameplaySubtype
     ldh  a, [hIsGBC]
     and  a
     jr   z, MarineBeachPrepare1
@@ -555,6 +555,7 @@ jr_001_65D6::
 func_001_65DD::
     db $3D, $C7, $73, $66, $FD, $66
 
+; TODO: fix pointers table
 Data_001_65E3::
     db $EF, $65, $F3, $65, $F7, $65, $FB, $65, $FF, $65, 3, $66, $50, 0, $50, $20
     db $52, 0, $52, $20, $54, 0, $54, $20, $56, 0, $56, $20, $58, 0, $58, $20

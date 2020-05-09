@@ -1176,7 +1176,7 @@ label_001_5818::
     call func_001_5C49
     ret
 
-label_5822::
+PeachPictureStateAHandler::
     call func_6A7C
 
 FileSaveFadeOut::
@@ -1342,7 +1342,7 @@ MapSpecialLocationNamesTable::
     db   0,   0,   0, $41,   0,   0,   0,   0, $3D,   0,   0,   0,   0,   0, $08,   0 ; E0
     db   0,   0, $01,   0,   0,   0, $3F,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; F0
 
-label_5A59::
+func_001_5A59::
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
@@ -2666,27 +2666,24 @@ include "code/marin_beach.asm"
 PeachPictureEntryPoint::
     ld a, [wGameplaySubtype]
     JP_TABLE
+._00 dw PeachPictureState0Handler
+._01 dw PeachPictureState1Handler
+._02 dw PeachPictureState2Handler
+._03 dw PeachPictureState3Handler
+._04 dw PeachPictureState4Handler
+._05 dw PeachPictureState5Handler
+._06 dw FileSaveFadeOut
+._07 dw PeachPictureState7Handler
+._08 dw PeachPictureState8Handler
+._09 dw PeachPictureState9Handler
+._0A dw PeachPictureStateAHandler
 
-    dw label_6808
-    dw jr_001_6829
-    dw label_6856
-    dw label_6873
-    dw label_68AA
-    dw label_68C0
-    dw FileSaveFadeOut
-    dw label_68E4
-    dw label_6908
-    dw label_6945
-    dw label_5822
+PeachPictureState0Handler::
+    call IncrementGameplaySubtype
 
-
-label_6808::
-    call IncrementGameplaySubtypeAndReturn
-
-label_680B::
     ldh  a, [hIsGBC]
     and  a
-    jr   z, jr_001_6829
+    jr   z, PeachPictureState1Handler
     ld   hl, $DC10
     ld   c, $80
     di
@@ -2707,7 +2704,7 @@ jr_001_6816::
     ld   [rSVBK], a
     ei
 
-jr_001_6829::
+PeachPictureState1Handler::
     ld   a, $01
     ld   [$C167], a
     call func_1A22
@@ -2732,7 +2729,7 @@ jr_001_6849::
 
 jr_001_6855::
     ret
-label_6856::
+PeachPictureState2Handler::
     ld   e, $21
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
@@ -2749,7 +2746,7 @@ jr_001_6868::
     xor  a
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
-label_6873::
+PeachPictureState3Handler::
     ld   e, $24
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
@@ -2781,7 +2778,7 @@ jr_001_689E::
     ld   [$DDD5], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_68AA::
+PeachPictureState4Handler::
     call func_6A7C
     call func_1A39
     ld   a, [$C16B]
@@ -2794,7 +2791,7 @@ label_68AA::
 jr_001_68BF::
     ret
 
-label_68C0::
+PeachPictureState5Handler::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   nz, jr_001_68CF
@@ -2819,7 +2816,7 @@ func_001_68D9::
 
 jr_001_68E3::
     ret
-label_68E4::
+PeachPictureState7Handler::
     call func_6A7C
     ld   a, [$D210]
     dec  a
@@ -2840,7 +2837,7 @@ jr_001_6903::
     ld   a, e
     ld   [wScreenShakeVertical], a
     ret
-label_6908::
+PeachPictureState8Handler::
     call func_6A7C
     call func_001_695B
     ld   a, [$D210]
@@ -2868,7 +2865,7 @@ label_6908::
 
 jr_001_6944::
     ret
-label_6945::
+PeachPictureState9Handler::
     call func_6A7C
     call func_001_695B
     ld   hl, $D210

@@ -1027,7 +1027,7 @@ jr_001_4E2B::
 
 jr_001_4E3B::
     call PlayValidationJingleAndReturn            ; $4E3B: $CD $BE $49
-    call IncrementGameplaySubtypeAndReturn        ; $4E3E: $CD $D6 $44
+    call IncrementGameplaySubtype                 ; $4E3E: $CD $D6 $44
     jr   label_001_4E55                               ; $4E41: $18 $12
 
 Data_001_4E43::
@@ -1267,17 +1267,17 @@ FileCopyEntryPoint::
     JP_TABLE
 ._00 dw FileDeletionState0Handler
 ._01 dw FileDeletionState1Handler
-._02 dw label_4FA6
-._03 dw label_4FBB
-._04 dw label_4FC3
-._05 dw label_4FE1
+._02 dw FileCopyState2Handler
+._03 dw FileCopyState3Handler
+._04 dw FileCopyState4Handler
+._05 dw FileCopyState5Handler
 ._06 dw FileDeletionState8Handler
 ._07 dw FileDeletionState9Handler
-._08 dw label_4FFF
-._09 dw label_50DF
-._0A dw label_51E9
+._08 dw FileCopyState8Handler
+._09 dw FileCopyState9Handler
+._0A dw FileCopyStateAHandler
 
-label_4FA6::
+FileCopyState2Handler::
     ld   a, $08                                   ; $4FA6: $3E $08
     ld   [wTileMapToLoad], a                      ; $4FA8: $EA $FE $D6
     xor  a                                        ; $4FAB: $AF
@@ -1287,12 +1287,12 @@ label_4FA6::
     ld   [wIntroSubTimer], a                      ; $4FB5: $EA $02 $D0
     jp   IncrementGameplaySubtypeAndReturn        ; $4FB8: $C3 $D6 $44
 
-label_4FBB::
+FileCopyState3Handler::
     ld   a, $0C                                   ; $4FBB: $3E $0C
     ld   [wBGMapToLoad], a                        ; $4FBD: $EA $FF $D6
     jp   IncrementGameplaySubtypeAndReturn        ; $4FC0: $C3 $D6 $44
 
-label_4FC3::
+FileCopyState4Handler::
     ld   bc, $98C4                                ; $4FC3: $01 $C4 $98
     ld   de, $DB80                                ; $4FC6: $11 $80 $DB
     call func_4852                                ; $4FC9: $CD $52 $48
@@ -1304,7 +1304,7 @@ label_4FC3::
     call func_4852                                ; $4FDB: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FDE: $C3 $D6 $44
 
-label_4FE1::
+FileCopyState5Handler::
     ld   bc, $98CD                                ; $4FE1: $01 $CD $98
     ld   de, $DB80                                ; $4FE4: $11 $80 $DB
     call func_4852                                ; $4FE7: $CD $52 $48
@@ -1316,7 +1316,7 @@ label_4FE1::
     call func_4852                                ; $4FF9: $CD $52 $48
     jp   IncrementGameplaySubtypeAndReturn        ; $4FFC: $C3 $D6 $44
 
-label_4FFF::
+FileCopyState8Handler::
     call func_001_6BA8                               ; $4FFF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $5002: $F0 $CC
     and  $08                                      ; $5004: $E6 $08
@@ -1376,7 +1376,7 @@ jr_001_5042::
     and  a                                        ; $504C: $A7
     jr   z, jr_001_5055                            ; $504D: $28 $06
 
-    call IncrementGameplaySubtypeAndReturn        ; $504F: $CD $D6 $44
+    call IncrementGameplaySubtype                 ; $504F: $CD $D6 $44
     call PlayValidationJingleAndReturn            ; $5052: $CD $BE $49
 
 jr_001_5055::
@@ -1457,7 +1457,7 @@ Data_001_50C7::
     db   $99, $0D, $44, $7E, $99, $2D, $44, $7E   ; $50CF
     db   $99, $6D, $44, $7E, $99, $8D, $44, $7E   ; $50D7
 
-label_50DF::
+FileCopyState9Handler::
     call func_001_6BA8                               ; $50DF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $50E2: $F0 $CC
     and  $08                                      ; $50E4: $E6 $08
@@ -1502,7 +1502,7 @@ jr_001_5114::
     jp   z, label_001_4555                            ; $511D: $CA $55 $45
 
     call PlayValidationJingleAndReturn            ; $5120: $CD $BE $49
-    call IncrementGameplaySubtypeAndReturn        ; $5123: $CD $D6 $44
+    call IncrementGameplaySubtype                 ; $5123: $CD $D6 $44
     jp   label_001_4E55                               ; $5126: $C3 $55 $4E
 
 jr_001_5129::
@@ -1638,7 +1638,7 @@ func_001_51CE::
     ld   [hl], a                                  ; $51E7: $77
     ret                                           ; $51E8: $C9
 
-label_51E9::
+FileCopyStateAHandler::
     call func_001_5094                               ; $51E9: $CD $94 $50
     call func_001_51CE                               ; $51EC: $CD $CE $51
     call func_001_4F0C                               ; $51EF: $CD $0C $4F

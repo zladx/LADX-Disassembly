@@ -40,9 +40,9 @@ IntroHandlerEntryPoint::
     and  a
     jr   nz, .isGBC
     ; Not GBC
-    ld   a, [label_789B]
+    ld   a, [Data_001_789B]
     ld   [wOBJ0Palette], a
-    ld   a, [label_789F]
+    ld   a, [Data_001_789F]
     ld   [wOBJ1Palette], a
     ld   a, $04
     jr   .paletteEnd
@@ -360,7 +360,7 @@ jr_001_706C::
     add  hl, de
     ld   a, [hl]
     and  a
-    jr   z, label_7087
+    jr   z, jr_001_7087
     dec  e
     ld   a, e
     cp   $FF
@@ -374,7 +374,7 @@ Data_001_707B::
 Data_001_7081::
     db 4, 2, 1, 4, 3, 1
 
-label_7087::
+jr_001_7087::
     ld   b, 0
     ld   hl, Data_001_7081
     add  hl, bc
@@ -580,7 +580,7 @@ jr_001_71DB::
 jr_001_71DE::
     ret
 
-label_71DF::
+Data_001_71DF::
     db $9A, $16, $F, $80, $81, $82, $83, $84, $85, $86, $87, $88, $89, $8A, $8B, $8C
     db $8D, $8E, $8F, $9A, $36, $F, $90, $91, $92, $93, $94, $95, $96, $97, $98, $99
     db $9A, $9B, $9C, $9D, $9E, $9F, $9A, $56, $F, $A0, $A1, $A2, $A3, $A4, $A5, $A6
@@ -594,8 +594,15 @@ label_71DF::
 Data_001_7264::
     db $18, $72
 
-label_7266::
-    db 5, $72, $2B, $72, $F2, $71, $3E, $72, $DF, $71, $51
+; TODO: fix pointers table
+Data_001_7266::
+    db $05, $72
+    db $2B, $72
+    db $F2, $71
+    db $3E, $72
+    db $DF, $71
+
+    db $51
 
 label_001_7271::
     ld   [hl], d
@@ -1137,16 +1144,14 @@ RenderIntroEntity::
     call func_001_762B
     ret
 
-data_7538::
+Data_001_7538::
     db 0, 0
 
-label_753A::
+func_001_753A::
     db $1C, 2, 0, 8, $1E, 2, $10, $F8, $20, 2, $10, 0
-
-label_7546::
     db $22, 2, $10, 8, $24, 2, $10, $10, $26, 2
 
-data_7550::
+Data_001_7550::
     db $F8, 4, $32, 1, $E8, 4, $32, 1, $D8, 4, $32, 1, $C8, 4, $32, 1
 
 ShipHeaveTable::
@@ -1173,7 +1178,7 @@ RenderIntroShip::
     ld   hl, hActiveEntityVisualPosY
     add  a, [hl]
     ld   [hl], a
-    ld   hl, data_7538
+    ld   hl, Data_001_7538
     ld   de, wOAMBuffer
     push bc
     ld   c, $06
@@ -1201,7 +1206,7 @@ RenderIntroShip::
     ld   a, [wIntroSubTimer]
     cp   $10
     jr   c, .return
-    ld   hl, data_7550
+    ld   hl, Data_001_7550
     ld   de, $C018
     ld   c, $04
 .loop2
@@ -1230,17 +1235,11 @@ RenderIntroShip::
 
 Data_001_75CB::
     db 0, 0, $34, 1, 0, 8
-
-jr_001_75D1::
     db $36, 1, $10, 0, $2C, 1, $20, $F8, $2C, 1, $28, 0, $2E, $21, $30, $F0
     db $2E, 1, 8, 0, $36, $21, 8, 8, $34, $21, $18, 0, $30, 1, $18, 8
     db $2C, $21, $28, $10, $2E, $21, $28, $10
-
-jr_001_75F9::
     db $2E, $21, 0, 8, $34, $21, 0, 0, $36, $21, $10, 8, $2C, $21, $20, $10
     db $2C
-
-label_7609::
     db $21, $28, 8, $2E, 1, $30, $18, $2E, $21, 8, 8, $36, 1, 8, 0, $34
     db 1, $18, 8, $30, $21, $18, 0
 
@@ -1587,16 +1586,14 @@ jr_001_7883::
 Data_001_7898::
     db $54, $58, $68
 
-label_789B::
+Data_001_789B::
     db $1C
 
 Data_001_789C::
     db 0, 4
-
-label_789E::
     db $18
 
-label_789F::
+Data_001_789F::
     db $6C ; l
 
 Data_001_78A0::

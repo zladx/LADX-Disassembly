@@ -22,7 +22,7 @@ FaceShrineMuralStage0Handler::
     ld   c, $80
     di
 
-label_6B18::
+jr_001_6B18::
     xor  a
     ld   [rSVBK], a
     ld   b, [hl]
@@ -33,7 +33,7 @@ label_6B18::
     dec  c
     ld   a, c
     and  a
-    jr   nz, label_6B18
+    jr   nz, jr_001_6B18
     xor  a
     ld   [rSVBK], a
     ei
@@ -44,8 +44,8 @@ FaceShrineMuralStage1Handler::
     call func_1A22
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_6B51
-    call label_5888
+    jr   nz, jr_001_6B51
+    call func_001_5888
     ld   a, $03
     ldh  [hWindowYUnused], a
     ld   a, $30
@@ -56,7 +56,7 @@ FaceShrineMuralStage1Handler::
     ld   a, $14
     ld   [wTileMapToLoad], a
 
-label_6B51::
+jr_001_6B51::
     ret
 
 FaceShrineMuralStage2Handler::
@@ -77,12 +77,12 @@ FaceShrineMuralStage3Handler::
     call func_1A39
     ld   a, [$C16B]
     cp   $04
-    jr   nz, label_6B80
+    jr   nz, jr_001_6B80
     call IncrementGameplaySubtype
     xor  a
     ld   [$C3C4], a
 
-label_6B80::
+jr_001_6B80::
     ret
 
 FaceShrineMuralStage4Handler::
@@ -94,11 +94,11 @@ FaceShrineMuralStage4Handler::
     ld   [$C3C4], a
     jp   z, IncrementGameplaySubtype
     cp   $80
-    jr   nz, label_6B99
+    jr   nz, jr_001_6B99
     ld   a, $E7
     call OpenDialog
 
-label_6B99::
+jr_001_6B99::
     ret
 
 FaceShrineMuralStage5Handler::
@@ -107,6 +107,6 @@ FaceShrineMuralStage5Handler::
     jr   z, .return
     ld   a, JINGLE_VALIDATE
     ldh  [hJingle], a
-    call label_68D9
+    call func_001_68D9
 .return
     ret

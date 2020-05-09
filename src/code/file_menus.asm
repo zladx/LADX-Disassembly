@@ -208,7 +208,7 @@ FileSelectionPrepare6::
     call LoadFileMenuBG_trampoline
     jp   IncrementGameplaySubtypeAndReturn
 
-label_48E4::
+Data_001_48E4::
     dec  sp
     ld   d, e
     ld   l, e
@@ -288,7 +288,7 @@ func_001_4954::
     ld   a, [wSaveSlot]
     ld   e, a
     ld   d, $00
-    ld   hl, label_48E4
+    ld   hl, Data_001_48E4
     add  hl, de
     ldh  a, [hFrameCounter]
     and  $08
@@ -403,7 +403,7 @@ HandleFileSelectionCommand::
     jp   PlayValidationJingleAndReturn
 
 ; File creation data
-label_49F2::
+Data_001_49F2::
     dec  b
     and  h
     or   d
@@ -411,7 +411,7 @@ label_49F2::
     ld   e, a
     xor  e
 
-label_49F8::
+Data_001_49F8::
     dec  b
     and  c
     or   d
@@ -420,7 +420,7 @@ label_49F8::
     xor  b
 
 ; Part of file copy
-label_49FE::
+Data_001_49FE::
     db 0, $A1, $AD, $A4, $5A, $A8
 
 FileSelectionLoadSavedFile::
@@ -546,7 +546,7 @@ FileCreationInteractiveHandler::
     sla  a
     ld   e, a
     ld   d, $00
-    ld   hl, label_49F2
+    ld   hl, Data_001_49F2
     add  hl, de
     ld   a, [hli]
     ld   h, [hl]
@@ -605,7 +605,7 @@ jr_001_4B05::
     ld   de, $5B
     add  hl, de
 
-label_4B1C::
+Data_001_4B1C::
     ld   [hl], $03
     pop  hl
     ld   de, $57
@@ -1072,7 +1072,7 @@ FileDeletionState11Handler::
     sla  a                                        ; $4E82: $CB $27
     ld   e, a                                     ; $4E84: $5F
     ld   d, $00                                   ; $4E85: $16 $00
-    ld   hl, label_49F8                           ; $4E87: $21 $F8 $49
+    ld   hl, Data_001_49F8                           ; $4E87: $21 $F8 $49
     add  hl, de                                   ; $4E8A: $19
     ld   a, [hl+]                                 ; $4E8B: $2A
     ld   h, [hl]                                  ; $4E8C: $66
@@ -1383,7 +1383,7 @@ jr_001_5055::
     ld   a, [wIntroTimer]                         ; $5055: $FA $01 $D0
     ld   e, a                                     ; $5058: $5F
     ld   d, $00                                   ; $5059: $16 $00
-    ld   hl, label_48E4                           ; $505B: $21 $E4 $48
+    ld   hl, Data_001_48E4                           ; $505B: $21 $E4 $48
     add  hl, de                                   ; $505E: $19
     ldh  a, [hFrameCounter]                       ; $505F: $F0 $E7
     and  $08                                      ; $5061: $E6 $08
@@ -1433,7 +1433,7 @@ func_001_5094::
     ld   a, [wIntroTimer]                         ; $5094: $FA $01 $D0
     ld   e, a                                     ; $5097: $5F
     ld   d, $00                                   ; $5098: $16 $00
-    ld   hl, label_48E4                           ; $509A: $21 $E4 $48
+    ld   hl, Data_001_48E4                           ; $509A: $21 $E4 $48
     add  hl, de                                   ; $509D: $19
     ld   a, [hl]                                  ; $509E: $7E
     ld   hl, wLinkOAMBuffer                       ; $509F: $21 $00 $C0
@@ -1562,7 +1562,7 @@ func_001_5175::
     ld   a, [wIntroSubTimer]                      ; $5175: $FA $02 $D0
     ld   e, a                                     ; $5178: $5F
     ld   d, $00                                   ; $5179: $16 $00
-    ld   hl, label_48E4                           ; $517B: $21 $E4 $48
+    ld   hl, Data_001_48E4                           ; $517B: $21 $E4 $48
     add  hl, de                                   ; $517E: $19
     ld   a, [wIntroSubTimer]                      ; $517F: $FA $02 $D0
     cp   $03                                      ; $5182: $FE $03
@@ -1624,7 +1624,7 @@ func_001_51CE::
     ld   a, [wIntroSubTimer]                      ; $51CE: $FA $02 $D0
     ld   e, a                                     ; $51D1: $5F
     ld   d, $00                                   ; $51D2: $16 $00
-    ld   hl, label_48E4                           ; $51D4: $21 $E4 $48
+    ld   hl, Data_001_48E4                           ; $51D4: $21 $E4 $48
     add  hl, de                                   ; $51D7: $19
     ld   a, [hl]                                  ; $51D8: $7E
     ld   hl, $C008                                ; $51D9: $21 $08 $C0
@@ -1655,7 +1655,7 @@ label_51E9::
     sla  a                                        ; $5205: $CB $27
     ld   e, a                                     ; $5207: $5F
     ld   d, $00                                   ; $5208: $16 $00
-    ld   hl, label_49FE                           ; $520A: $21 $FE $49
+    ld   hl, Data_001_49FE                           ; $520A: $21 $FE $49
     add  hl, de                                   ; $520D: $19
     ld   c, [hl]                                  ; $520E: $4E
     inc  hl                                       ; $520F: $23
@@ -1664,7 +1664,7 @@ label_51E9::
     sla  a                                        ; $5214: $CB $27
     ld   e, a                                     ; $5216: $5F
     ld   d, $00                                   ; $5217: $16 $00
-    ld   hl, label_49FE                           ; $5219: $21 $FE $49
+    ld   hl, Data_001_49FE                           ; $5219: $21 $FE $49
     add  hl, de                                   ; $521C: $19
     ld   a, [hl]                                  ; $521D: $7E
     inc  hl                                       ; $521E: $23

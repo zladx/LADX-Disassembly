@@ -204,10 +204,10 @@ MarineBeachPrepare3::
     ld   [$D206], a
     jp   IncrementGameplaySubtypeAndReturn
 
-label_63AA::
+Data_001_63AA::
     db 0, 0, 0, 0, $40, $40, $40, $40, $94, $94, $94, $94, $E4, $E4, $E4, $E4
 
-label_63BA::
+Data_001_63BA::
     db 0, 0, 0, 0, 4, 4, 4, 4, $18, $18, $18, $18, $1C, $1C, $1C, $1C
 
 MarineBeachScroll1::
@@ -243,12 +243,12 @@ jr_001_63F8::
     add  a, e
     ld   e, a
     ld   d, $00
-    ld   hl, label_63AA
+    ld   hl, Data_001_63AA
     add  hl, de
     ld   a, [hl]
     ld   [wBGPalette], a
     ld   [wOBJ1Palette], a
-    ld   hl, label_63BA
+    ld   hl, Data_001_63BA
     add  hl, de
     ld   a, [hl]
     ld   [wOBJ0Palette], a
@@ -410,19 +410,19 @@ jr_001_6505::
 ; Seagull animations and sounds
 ;
 
-label_650A::
+Data_001_650A::
     db $40, 1, $40, $21
 
-label_650E::
+Data_001_650E::
     db $46, 1, $48, 1
 
-label_6512::
+Data_001_6512::
     db $42, 0, $44, 0
 
-label_6516::
+Data_001_6516::
     db $42, 2, $44, 2
 
-label_651A::
+Data_001_651A::
     db $42, 3, $44, 3
 
 func_001_651E::
@@ -454,13 +454,13 @@ jr_001_6545::
     dec  a
     cp   $C0
     ret  c
-    ld   de, label_650A
+    ld   de, Data_001_650A
     ld   a, [$C3C4]
     and  a
     jr   z, jr_001_655F
     cp   $60
     jr   nc, jr_001_655F
-    ld   de, label_650E
+    ld   de, Data_001_650E
 
 jr_001_655F::
     ld   a, $7C
@@ -471,14 +471,14 @@ jr_001_655F::
     call func_001_658B
     ld   a, $48
     ldh  [hActiveEntityPosX], a
-    ld   de, label_6512
+    ld   de, Data_001_6512
     ld   a, [$DC0F]
     and  a
     jr   z, jr_001_6584
-    ld   de, label_6516
+    ld   de, Data_001_6516
     cp   $01
     jr   z, jr_001_6584
-    ld   de, label_651A
+    ld   de, Data_001_651A
 
 jr_001_6584::
     ld   hl, $C038
@@ -555,12 +555,12 @@ jr_001_65D6::
 func_001_65DD::
     db $3D, $C7, $73, $66, $FD, $66
 
-label_65E3::
+Data_001_65E3::
     db $EF, $65, $F3, $65, $F7, $65, $FB, $65, $FF, $65, 3, $66, $50, 0, $50, $20
     db $52, 0, $52, $20, $54, 0, $54, $20, $56, 0, $56, $20, $58, 0, $58, $20
     db $5A, 0, $5A, $20
 
-label_6607::
+Data_001_6607::
     db 3, 3, 3, 3
 
 jr_001_660B::
@@ -597,12 +597,12 @@ jr_001_668B::
     add  hl, bc
     ld   e, [hl]
     ld   d, b
-    ld   hl, label_6607
+    ld   hl, Data_001_6607
     add  hl, de
     ld   e, [hl]
     sla  e
     ld   d, b
-    ld   hl, label_65E3
+    ld   hl, Data_001_65E3
     add  hl, de
     ld   a, [hli]
     ld   d, [hl]
@@ -646,17 +646,17 @@ jr_001_66C4::
 jr_001_66D7::
     ret
 
-label_66D8::
+Data_001_66D8::
     db $E0, $66, $E4, $66, $E8, $66, $EC, $66, $4C, 0, $4C, $20, $4E, 0, $4E, $20
     db $5C, 0, $5C, $20, $5E, 0, $5E, $20
 
-label_66F0::
+Data_001_66F0::
     db 1, $FF
 
 jr_001_66F2::
     db 1, $FF, $FE, 2
 
-label_66F6::
+Data_001_66F6::
     db 1, $FF, $4C, $52, $58, $5C, $60
 
 label_66FD::
@@ -682,7 +682,7 @@ jr_001_6717::
 jr_001_6718::
     sla  e
     ld   d, b
-    ld   hl, label_66D8
+    ld   hl, Data_001_66D8
     add  hl, de
     ld   a, [hli]
     ld   d, [hl]
@@ -719,7 +719,7 @@ jr_001_6745::
     and  $07
     ld   e, a
     ld   d, b
-    ld   hl, label_66F0
+    ld   hl, Data_001_66F0
     add  hl, de
     ld   a, [hl]
     ld   hl, $C550
@@ -735,7 +735,7 @@ jr_001_675A::
     and  $07
     ld   e, a
     ld   d, b
-    ld   hl, label_66F0
+    ld   hl, Data_001_66F0
     add  hl, de
     ld   a, [hl]
     ld   hl, $C560
@@ -751,7 +751,7 @@ jr_001_6773::
     cp   $13
     jr   c, jr_001_67A7
     ld   [hl], b
-    ld   hl, label_66F6
+    ld   hl, Data_001_66F6
     add  hl, bc
     ld   d, [hl]
     ld   hl, wTranscientVfxPosXTable

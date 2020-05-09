@@ -63,7 +63,7 @@ LCDOn::
 LCDOn_return:
     ret
 
-label_4128::
+Data_001_4128::
     ld   c, b
     ld   e, b
 
@@ -82,7 +82,7 @@ func_001_412A::
 jr_001_413B::
     ld   e, [hl]
     ld   d, $00
-    ld   hl, label_4128
+    ld   hl, Data_001_4128
     add  hl, de
     ld   a, [hl]
     ld   hl, $C018
@@ -465,7 +465,7 @@ jr_001_52C7::
     sla  a
     ld   e, a
     ld   d, $00
-    ld   hl, label_49F8
+    ld   hl, Data_001_49F8
     add  hl, de
     ld   c, [hl]
     inc  hl
@@ -619,23 +619,23 @@ jr_001_531D::
     jr   .finish
 
 
-label_53D8::
+Data_001_53D8::
     db   $9D, $9D, $9D, $FF, $9D, $9D, $9D, $FF   ; $53D8
     db   $9D, $9D, $9C, $FF, $9D, $9D, $9C, $FF   ; $53E0
 
-label_53E8::
+Data_001_53E8::
     db   $32, $32, $09, $FF, $2E, $2E, $09, $FF   ; $53E8
     db   $8A, $32, $E9, $FF, $8A, $2E, $E9, $FF   ; $53F0
 
-label_53F8::
+Data_001_53F8::
     db   $C8, $C8, $00, $FF, $C8, $C8, $00, $FF   ; $53F8
     db   $48, $C8, $00, $FF, $48, $C8, $00, $FF   ; $5400
 
-label_5408::
+Data_001_5408::
     db   $7F, $7F, $BA, $FF, $7F, $7F, $BA, $FF   ; $5408
     db   $7F, $7F, $BA, $FF, $7F, $7F, $BA, $FF   ; $5410
 
-label_5418::
+Data_001_5418::
     db   $00, $00, $00, $FF, $00, $00, $00, $FF   ; $5418
     db   $9D, $9D, $FF, $00, $9D, $9D, $9D, $FF   ; $5420
     db   $9D, $9C, $FF, $00, $9D, $9C, $9C, $FF   ; $5428
@@ -646,7 +646,7 @@ label_5418::
     db   $00, $9D, $9D, $9C, $9C, $9D, $9D, $9C   ; $5450
     db   $9C, $9C, $9C, $FF                       ; $5458
 
-label_545C::
+Data_001_545C::
     db   $00, $00, $00, $FF, $00, $00, $00, $FF   ; $545C
     db   $0D, $12, $FF, $00, $0D, $11, $12, $FF   ; $5464
     db   $92, $F2, $FF, $00, $92, $F1, $F2, $FF   ; $546C
@@ -657,7 +657,7 @@ label_545C::
     db   $00, $8D, $92, $ED, $F2, $91, $92, $EC   ; $5494
     db   $ED, $F1, $F2, $FF                       ; $549C
 
-label_54A0::
+Data_001_54A0::
     db   $00, $00, $00, $FF, $00, $00, $00, $FF   ; $54A0
     db   $E8, $E9, $FF, $00, $E8, $EC, $E8, $FF   ; $54A8
     db   $E8, $E9, $FF, $00, $E8, $EC, $E8, $FF   ; $54B0
@@ -668,19 +668,19 @@ label_54A0::
     db   $00, $E8, $EA, $E9, $EB, $EC, $E8, $EC   ; $54D8
     db   $EA, $EC, $E9, $FF                       ; $54E0
 
-label_54E4::
+Data_001_54E4::
     db   $9D, $9C                                 ; $54E4
 
-label_54E6::
+Data_001_54E6::
     db $A, $EA
 
-label_54E8::
+Data_001_54E8::
     db $9C, $E9, $49, $7F, $9D, 9, $49, $7F, $9D, $29, $49, $7F, $9D, $49, $49, $7F
     db $9D, $69, $49, $7F, $9D, $89, $49, $7F, $9D, $A9, $49, $7F, $9D, $C9, $49, $7F
     db $9D, $E9, $49, $7F, $9E, 9, $49, $7F, 0
 
 func_001_5511::
-    ld   hl, label_54E8
+    ld   hl, Data_001_54E8
     ld   de, $D650
     ld   c, $29
 
@@ -722,26 +722,26 @@ jr_001_5543::
 
 jr_001_5544::
     push hl
-    ld   hl, label_53D8
+    ld   hl, Data_001_53D8
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch0], a
-    ld   hl, label_53E8
+    ld   hl, Data_001_53E8
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch1], a
-    ld   hl, label_53F8
+    ld   hl, Data_001_53F8
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch2], a
-    ld   hl, label_5408
+    ld   hl, Data_001_5408
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch3], a
     pop  hl
     call func_001_5619
     push hl
-    ld   hl, label_53D8
+    ld   hl, Data_001_53D8
     inc  bc
     add  hl, bc
     ld   a, [hl]
@@ -806,24 +806,24 @@ jr_001_55B5::
 
 jr_001_55C0::
     push hl
-    ld   hl, label_5418
+    ld   hl, Data_001_5418
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch0], a
-    ld   hl, label_545C
+    ld   hl, Data_001_545C
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch1], a
     xor  a
     ldh  [hScratch2], a
-    ld   hl, label_54A0
+    ld   hl, Data_001_54A0
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch3], a
     pop  hl
     call func_001_5619
     push hl
-    ld   hl, label_5418
+    ld   hl, Data_001_5418
     inc  bc
     add  hl, bc
     ld   a, [hl]
@@ -843,11 +843,11 @@ jr_001_55EA::
 
 jr_001_55F5::
     push hl
-    ld   hl, label_54E4
+    ld   hl, Data_001_54E4
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch0], a
-    ld   hl, label_54E6
+    ld   hl, Data_001_54E6
 
 func_001_5600::
     add  hl, bc
@@ -1354,10 +1354,10 @@ label_5A59::
     ld   a, [hl]
     jp   OpenDialog
 
-label_5A6B::
+Data_001_5A6B::
     db 0, 1, $FF
 
-label_5A6E::
+Data_001_5A6E::
     db 0, $F0, $10
 
 func_001_5A71::
@@ -1396,7 +1396,7 @@ jr_001_5AA0::
     and  $03
     ld   e, a
     ld   d, $00
-    ld   hl, label_5A6B
+    ld   hl, Data_001_5A6B
     add  hl, de
     ld   a, [$DBB4]
     ld   d, a
@@ -1413,7 +1413,7 @@ jr_001_5AA0::
     and  $03
     ld   e, a
     ld   d, $00
-    ld   hl, label_5A6E
+    ld   hl, Data_001_5A6E
     add  hl, de
     ld   a, [$DBB4]
     add  a, [hl]
@@ -1562,7 +1562,7 @@ label_001_5B3F::
 jr_001_5BAC::
     ret
 
-label_5BAD::
+Data_001_5BAD::
     db $F8, $F8, $F2, 4, $F8, 0, $F4, 4, $F8, 8, $F4, $24, $F8, $10, $F2, $24
     db 8, $F8, $F2, $44, 8, 0, $F4, $44, 8, 8, $F4, $64, 8, $10, $F2, $64
     db $FA, $FA, $F2, 4, $FA, 2, $F4, 4, $FA, 6, $F4, $24, $FA, $E, $F2, $24
@@ -1572,7 +1572,7 @@ label_5BAD::
     db $FE, $FE, $F2, 4, $FE, 4, $F4, 4, $FE, 4, $F4, $24, $FE, $A, $F2, $24
     db 2, $FE, $F2, $44, 2, 4, $F4, $44, 2, 4, $F4, $64, 2, $A, $F2, $64
 
-label_5C2D::
+Data_001_5C2D::
     db $20, 1, $22
 
 jr_001_5C30::
@@ -1581,10 +1581,10 @@ jr_001_5C30::
 jr_001_5C3E::
     db 5, $2E, 5
 
-label_5C41::
+Data_001_5C41::
     db $28, $78, $28, $78
 
-label_5C45::
+Data_001_5C45::
     db $28, $28, $78, $78
 
 func_001_5C49::
@@ -1647,11 +1647,11 @@ jr_001_5C9C::
 
 jr_001_5CA3::
     ld   d, $00
-    ld   hl, label_5C41
+    ld   hl, Data_001_5C41
     add  hl, de
     ld   a, [hl]
     ldh  [hActiveEntityPosX], a
-    ld   hl, label_5C45
+    ld   hl, Data_001_5C45
     add  hl, de
     ld   a, [hl]
     ldh  [hActiveEntityVisualPosY], a
@@ -1668,7 +1668,7 @@ jr_001_5CBB::
 jr_001_5CBD::
     ld   e, a
     ld   d, $00
-    ld   hl, label_5BAD
+    ld   hl, Data_001_5BAD
     add  hl, de
     ld   a, $08
     ld   [wOAMNextAvailableSlot], a
@@ -1698,7 +1698,7 @@ jr_001_5CBD::
     rl   b
     sla  c
     rl   b
-    ld   hl, label_5C2D
+    ld   hl, Data_001_5C2D
     add  hl, bc
     ld   a, [hli]
     ld   [de], a
@@ -1722,17 +1722,17 @@ jr_001_5CBD::
 label_001_5D13::
     ret
 
-label_5D14::
+Data_001_5D14::
     db  $98, $CB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
     db  $98, $EB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
     db  $00
 
-label_5D29::
+Data_001_5D29::
     db  $99, $2B, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
     db  $99, $4B, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
     db  $00
 
-label_5D3E::
+Data_001_5D3E::
     db  $99, $8B, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
     db  $99, $AB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
     db  $00
@@ -1746,14 +1746,14 @@ label_001_5D53::
     ld   hl, $D601
     add  hl, de
     push de
-    ld   bc, label_5D14
+    ld   bc, Data_001_5D14
     ldh  a, [$FFDB]
     and  a
     jr   z, jr_001_5D75
-    ld   bc, label_5D29
+    ld   bc, Data_001_5D29
     cp   $01
     jr   z, jr_001_5D75
-    ld   bc, label_5D3E
+    ld   bc, Data_001_5D3E
 
 jr_001_5D75::
     ld   e, $15
@@ -1871,7 +1871,7 @@ func_001_5DE6::
     sla  a
     ld   e, a
     ld   d, $00
-    ld   hl, label_49F8
+    ld   hl, Data_001_49F8
     add  hl, de
     ld   a, [hli]
     ld   h, [hl]
@@ -2603,7 +2603,7 @@ func_001_6162::
     ldh  [$FFB5], a
     ret
 
-label_618A::
+Data_001_618A::
     db 0, $57, $10, $57, $20, $57, $30, $57, $40, $57, $50, $57, $60, $57, $70, $57
     db $80, $57, $90, $57, 0, $58, $10, $58, $20, $58, $30, $58, $40, $58, $50, $58
 
@@ -2613,7 +2613,7 @@ LoadCounterAnimatedTiles::
     sla  a
     ld   e, a
     ld   d, $00
-    ld   hl, label_618A
+    ld   hl, Data_001_618A
     add  hl, de
     ld   a, [hli]
     ld   h, [hl]
@@ -2628,7 +2628,7 @@ LoadCounterAnimatedTiles::
     sla  a
     ld   e, a
     ld   d, $00
-    ld   hl, label_618A
+    ld   hl, Data_001_618A
     add  hl, de
     ld   a, [hli]
     ld   h, [hl]
@@ -2900,10 +2900,10 @@ jr_001_6971::
 jr_001_6975::
     ret
 
-label_6976::
+Data_001_6976::
     db $14, $14, $10, $10, $0c, $0c
 
-label_697C::
+Data_001_697C::
     db $17, $17, $13
     db $13, $0f, $0f
 
@@ -3040,11 +3040,11 @@ func_6A7C::
     ld   a, [$D213]
     ld   e, a
     ld   d, $00
-    ld   hl, label_6976
+    ld   hl, Data_001_6976
     ldh  a, [hIsGBC]
     and  a
     jr   z, .jr_6AE3
-    ld   hl, label_697C
+    ld   hl, Data_001_697C
 
 .jr_6AE3
     add  hl, de
@@ -3094,16 +3094,16 @@ jr_001_6BC6::
     ldh  [hBGTilesLoadingStage], a
     ret
 
-label_6BCF::
+Data_001_6BCF::
     db $F, $51, $B1, $EF, $EC, $AA, $4A, $C
 
-label_6BD7::
+Data_001_6BD7::
     db $B1, $B2, $B3, $B4, $B5, $B6, $B7, $B8
 
-label_6BDF::
+Data_001_6BDF::
     db $D0, $D2, $D4, $D6, $D8, $DA, $DC, $DE
 
-label_6BE7::
+Data_001_6BE7::
     db 1, $1F, 1
 
 func_001_6BEA::
@@ -3130,7 +3130,7 @@ label_001_6BF9::
     jp   nz, label_001_6C2A
     ld   c, $00
     ld   b, c
-    ld   hl, label_6BCF
+    ld   hl, Data_001_6BCF
     add  hl, de
     ld   a, [hl]
     ld   l, a
@@ -3140,7 +3140,7 @@ label_001_6BF9::
     ldh  [hScratch0], a
     ldh  [hScratch1], a
     ldh  [hScratch2], a
-    ld   hl, label_6BD7
+    ld   hl, Data_001_6BD7
     add  hl, de
     ld   a, [hl]
     ldh  [hScratch3], a
@@ -3150,13 +3150,13 @@ label_001_6BF9::
 label_001_6C2A::
     ld   c, $00
     ld   b, c
-    ld   hl, label_6BCF
+    ld   hl, Data_001_6BCF
     add  hl, de
     ld   a, [hl]
     ld   l, a
     ld   h, $9D
     push hl
-    ld   hl, label_6BDF
+    ld   hl, Data_001_6BDF
     add  hl, de
     ld   a, [hl]
     ldh  [hScratch0], a
@@ -3191,7 +3191,7 @@ jr_001_6C48::
 
 func_001_6C69::
     push hl
-    ld   hl, label_6BE7
+    ld   hl, Data_001_6BE7
     add  hl, bc
     ld   a, [hl]
     pop  hl

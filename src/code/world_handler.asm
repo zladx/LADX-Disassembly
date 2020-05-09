@@ -118,7 +118,7 @@ label_43DC::
     jr   nz, label_4425
 
 label_440B::
-    call label_5511
+    call func_001_5511
     ld   a, $07
     ld   [wBGMapToLoad], a
     ret
@@ -272,7 +272,7 @@ GameplayWorldSubtype5Handler::
     ret
 
 GameplayWorldSubtype6Handler::
-    call label_5895
+    call func_001_5895
     ld   a, [$FF40]
     or   $20
     ld   [wLCDControl], a

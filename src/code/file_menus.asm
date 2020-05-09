@@ -44,12 +44,12 @@ FileSelectionPrepare1::
     jp   IncrementGameplaySubtypeAndReturn
 
 FileSelectionPrepare2::
-    call label_4DA6
-    call label_4DBE
+    call func_001_4DA6
+    call func_001_4DBE
     jp   IncrementGameplaySubtypeAndReturn
 
 FileSelectionPrepare3::
-    call label_4DD6
+    call func_001_4DD6
     jp   IncrementGameplaySubtypeAndReturn
 
 CopyDeathCountsToBG::
@@ -215,7 +215,7 @@ label_48E4::
     add  a, e
 
 FileSelectionInteractiveHandler::
-    call label_6BA8
+    call func_001_6BA8
     ldh  a, [hJoypadState]
     and  $90
     jr   z, label_48F4
@@ -255,11 +255,11 @@ label_491D::
 label_4920::
     ld   a, [wSaveSlot]
     cp   $03
-    jr   nz, label_4954
+    jr   nz, func_001_4954
     ldh  a, [hJoypadState]
     and  $03
     jr   z, label_4938
-    call label_6BAE
+    call func_001_6BAE
     ld   a, [$D000]
     xor  $01
     ld   [$D000], a
@@ -267,7 +267,7 @@ label_4920::
 label_4938::
     ldh  a, [hFrameCounter]
     and  $10
-    jr   nz, label_4954
+    jr   nz, func_001_4954
     ld   a, [$D000]
     and  a
     ld   a, $2C
@@ -284,7 +284,7 @@ label_4948::
     xor  a
     ld   [hl], a
 
-label_4954::
+func_001_4954::
     ld   a, [wSaveSlot]
     ld   e, a
     ld   d, $00
@@ -616,8 +616,8 @@ label_4B1C::
     jp   label_4555
 
 label_4B29::
-    call label_4BF5
-    call label_4C8A
+    call func_001_4BF5
+    call func_001_4C8A
     ret
 
 Data_001_4B30::
@@ -656,7 +656,7 @@ NameEntryCharacterTable::
     db   "VWXYZ",0,0,0,0, "vwxyz",0,0
     POPC
 
-label_4BF5::
+func_001_4BF5::
     ldh  a, [hJoypadState]
 
 label_4BF7::
@@ -689,7 +689,7 @@ label_4C1F::
     jr   label_4C63
 
 label_4C21::
-    call label_6BAE
+    call func_001_6BAE
     bit  1, a
     jr   nz, label_4C34
     ld   a, [$DBA9]
@@ -708,7 +708,7 @@ label_4C34::
     jr   label_4C5E
 
 label_4C41::
-    call label_6BAE
+    call func_001_6BAE
     bit  2, a
     jr   z, label_4C53
     ld   a, [$DBA9]
@@ -754,14 +754,14 @@ label_4C63::
     ld   [hl], a
     ret
 
-label_4C8A::                            ; "Enter Name" screen
+func_001_4C8A::                            ; "Enter Name" screen
     ldh  a, [hJoypadState]              ; Check inputs...
     and  J_A | J_B                      ; Was A or B pushed?
     jr   z, label_4CB7                  ; If no, bail
     bit  5, a                           ; Was B pushed?
     jr   nz, label_4CA7                 ; If yes, backspace
     call PlayValidationJingle           ; Otherwise, A was pushed
-    call label_4CDA                     ; so add the current letter
+    call func_001_4CDA                     ; so add the current letter
     ld   a, [$DBAA]
     add  a, $01
     cp   $05                            ; Prevent cursor from going > 5th place
@@ -806,7 +806,7 @@ label_4CB7::
 .return
     ret
 
-label_4CDA::
+func_001_4CDA::
     ld   a, [$DBA9]
     ld   c, a
     ld   b, $00
@@ -909,39 +909,39 @@ FileDeletionState3Handler::
     jp   IncrementGameplaySubtypeAndReturn        ; $4D6A: $C3 $D6 $44
 
 FileDeletionState4Handler::
-    call label_4D8B                               ; $4D6D: $CD $8B $4D
-    call label_4D94                               ; $4D70: $CD $94 $4D
-    call label_4D9D                               ; $4D73: $CD $9D $4D
+    call func_001_4D8B                               ; $4D6D: $CD $8B $4D
+    call func_001_4D94                               ; $4D70: $CD $94 $4D
+    call func_001_4D9D                               ; $4D73: $CD $9D $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4D76: $C3 $D6 $44
 
 FileDeletionState5Handler::
-    call label_4DA6                               ; $4D79: $CD $A6 $4D
-    call label_4DBE                               ; $4D7C: $CD $BE $4D
+    call func_001_4DA6                               ; $4D79: $CD $A6 $4D
+    call func_001_4DBE                               ; $4D7C: $CD $BE $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4D7F: $C3 $D6 $44
 
 FileDeletionState6Handler::
-    call label_4DD6                               ; $4D82: $CD $D6 $4D
+    call func_001_4DD6                               ; $4D82: $CD $D6 $4D
     jp   IncrementGameplaySubtypeAndReturn        ; $4D85: $C3 $D6 $44
 
 FileDeletionState7Handler::
     jp   CopyDeathCountsToBG                      ; $4D88: $C3 $0C $48
 
-label_4D8B::
+func_001_4D8B::
     ld   bc, $98C5                                ; $4D8B: $01 $C5 $98
     ld   de, $DB80                                ; $4D8E: $11 $80 $DB
     jp   func_4852                                ; $4D91: $C3 $52 $48
 
-label_4D94::
+func_001_4D94::
     ld   bc, $9925                                ; $4D94: $01 $25 $99
     ld   de, $DB85                                ; $4D97: $11 $85 $DB
     jp   func_4852                                ; $4D9A: $C3 $52 $48
 
-label_4D9D::
+func_001_4D9D::
     ld   bc, $9985                                ; $4D9D: $01 $85 $99
     ld   de, $DB8A                                ; $4DA0: $11 $8A $DB
     jp   func_4852                                ; $4DA3: $C3 $52 $48
 
-label_4DA6::
+func_001_4DA6::
     ld   a, [wSaveFilesCount]                     ; $4DA6: $FA $A7 $DB
     and  $01                                      ; $4DA9: $E6 $01
     jr   z, label_4DBD                            ; $4DAB: $28 $10
@@ -957,7 +957,7 @@ label_4DA6::
 label_4DBD::
     ret                                           ; $4DBD: $C9
 
-label_4DBE::
+func_001_4DBE::
     ld   a, [wSaveFilesCount]                     ; $4DBE: $FA $A7 $DB
     and  $02                                      ; $4DC1: $E6 $02
     jr   z, label_4DBD                            ; $4DC3: $28 $F8
@@ -970,7 +970,7 @@ label_4DBE::
     ldh  [hScratch3], a                           ; $4DD1: $E0 $DA
     jp   label_5D53                               ; $4DD3: $C3 $53 $5D
 
-label_4DD6::
+func_001_4DD6::
     ld   a, [wSaveFilesCount]                     ; $4DD6: $FA $A7 $DB
     and  $04                                      ; $4DD9: $E6 $04
     jr   z, label_4DBD                            ; $4DDB: $28 $E0
@@ -989,7 +989,7 @@ Data_001_4DEE::
     db   $99, $65, $44, $7E, $99, $85, $44, $7E   ; $4DFE
 
 FileDeletionState10Handler::
-    call label_6BA8                               ; $4E06: $CD $A8 $6B
+    call func_001_6BA8                               ; $4E06: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $4E09: $F0 $CC
     and  $08                                      ; $4E0B: $E6 $08
     jr   z, label_4E18                            ; $4E0D: $28 $09
@@ -1052,7 +1052,7 @@ label_4E55::
     ret                                           ; $4E66: $C9
 
 label_4E67::
-    call label_4954                               ; $4E67: $CD $54 $49
+    call func_001_4954                               ; $4E67: $CD $54 $49
     ret                                           ; $4E6A: $C9
 
 FileDeletionState11Handler::
@@ -1091,8 +1091,8 @@ label_4E91::
     jp   label_4555                               ; $4E9B: $C3 $55 $45
 
 label_4E9E::
-    call label_4EE5                               ; $4E9E: $CD $E5 $4E
-    call label_4EBB                               ; $4EA1: $CD $BB $4E
+    call func_001_4EE5                               ; $4E9E: $CD $E5 $4E
+    call func_001_4EBB                               ; $4EA1: $CD $BB $4E
     ld   hl, wGameplaySubtype                     ; $4EA4: $21 $96 $DB
     dec  [hl]                                     ; $4EA7: $35
     ret                                           ; $4EA8: $C9
@@ -1102,7 +1102,7 @@ Data_001_4EA9::
     db   $0D, $7E, $13, $0E, $7E, $0C, $04, $0D   ; $4EB1
     db   $14, $00                                 ; $4EB9
 
-label_4EBB::
+func_001_4EBB::
     ld   a, [wRequests]                           ; $4EBB: $FA $00 $D6
     ld   e, a                                     ; $4EBE: $5F
     add  $11                                      ; $4EBF: $C6 $11
@@ -1125,18 +1125,18 @@ label_4EBB::
     ret                                           ; $4ED8: $C9
 
 label_4ED9::
-    call label_4F0C                               ; $4ED9: $CD $0C $4F
-    call label_4954                               ; $4EDC: $CD $54 $49
+    call func_001_4F0C                               ; $4ED9: $CD $0C $4F
+    call func_001_4954                               ; $4EDC: $CD $54 $49
     ldh  a, [hFrameCounter]                       ; $4EDF: $F0 $E7
     and  $10                                      ; $4EE1: $E6 $10
     jr   z, label_4EEF                            ; $4EE3: $28 $0A
 
-label_4EE5::
+func_001_4EE5::
     ld   a, [wSaveSlot]                           ; $4EE5: $FA $A6 $DB
     JP_TABLE                                      ; $4EE8
-._00 dw label_4D8B                                ; $4EE9
-._01 dw label_4D94                                ; $4EEB
-._02 dw label_4D9D                                ; $4EED
+._00 dw func_001_4D8B                                ; $4EE9
+._01 dw func_001_4D94                                ; $4EEB
+._02 dw func_001_4D9D                                ; $4EED
 
 label_4EEF::
     ld   a, [wSaveSlot]                           ; $4EEF: $FA $A6 $DB
@@ -1162,12 +1162,12 @@ label_4F03::
     ld   [de], a                                  ; $4F0A: $12
     ret                                           ; $4F0B: $C9
 
-label_4F0C::
+func_001_4F0C::
     ldh  a, [hJoypadState]                        ; $4F0C: $F0 $CC
     and  $03                                      ; $4F0E: $E6 $03
     jr   z, label_4F1D                            ; $4F10: $28 $0B
 
-    call label_6BAE                               ; $4F12: $CD $AE $6B
+    call func_001_6BAE                               ; $4F12: $CD $AE $6B
     ld   a, [wCreditsScratch0]                    ; $4F15: $FA $00 $D0
     xor  $01                                      ; $4F18: $EE $01
     ld   [wCreditsScratch0], a                    ; $4F1A: $EA $00 $D0
@@ -1317,7 +1317,7 @@ label_4FE1::
     jp   IncrementGameplaySubtypeAndReturn        ; $4FFC: $C3 $D6 $44
 
 label_4FFF::
-    call label_6BA8                               ; $4FFF: $CD $A8 $6B
+    call func_001_6BA8                               ; $4FFF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $5002: $F0 $CC
     and  $08                                      ; $5004: $E6 $08
     jr   z, label_500E                            ; $5006: $28 $06
@@ -1429,7 +1429,7 @@ label_507D::
     ld   [hl], a                                  ; $5092: $77
     ret                                           ; $5093: $C9
 
-label_5094::
+func_001_5094::
     ld   a, [wIntroTimer]                         ; $5094: $FA $01 $D0
     ld   e, a                                     ; $5097: $5F
     ld   d, $00                                   ; $5098: $16 $00
@@ -1458,7 +1458,7 @@ Data_001_50C7::
     db   $99, $6D, $44, $7E, $99, $8D, $44, $7E   ; $50D7
 
 label_50DF::
-    call label_6BA8                               ; $50DF: $CD $A8 $6B
+    call func_001_6BA8                               ; $50DF: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $50E2: $F0 $CC
     and  $08                                      ; $50E4: $E6 $08
     jr   z, label_50F1                            ; $50E6: $28 $09
@@ -1484,7 +1484,7 @@ label_5101::
     ld   [wIntroSubTimer], a                      ; $5101: $EA $02 $D0
 
 label_5104::
-    call label_5094                               ; $5104: $CD $94 $50
+    call func_001_5094                               ; $5104: $CD $94 $50
     ldh  a, [hJoypadState]                        ; $5107: $F0 $CC
     bit  5, a                                     ; $5109: $CB $6F
     jr   z, label_5114                            ; $510B: $28 $07
@@ -1506,9 +1506,9 @@ label_5114::
     jp   label_4E55                               ; $5126: $C3 $55 $4E
 
 label_5129::
-    call label_5175                               ; $5129: $CD $75 $51
+    call func_001_5175                               ; $5129: $CD $75 $51
 
-label_512C::
+func_001_512C::
     ldh  a, [hFrameCounter]                       ; $512C: $F0 $E7
     and  $10                                      ; $512E: $E6 $10
     jr   z, label_514F                            ; $5130: $28 $1D
@@ -1558,7 +1558,7 @@ label_516C::
     ld   de, $DB8A                                ; $516F: $11 $8A $DB
     jp   func_4852                                ; $5172: $C3 $52 $48
 
-label_5175::
+func_001_5175::
     ld   a, [wIntroSubTimer]                      ; $5175: $FA $02 $D0
     ld   e, a                                     ; $5178: $5F
     ld   d, $00                                   ; $5179: $16 $00
@@ -1620,7 +1620,7 @@ label_51C3::
     ld   hl, $C008                                ; $51C8: $21 $08 $C0
     jp   label_5067                               ; $51CB: $C3 $67 $50
 
-label_51CE::
+func_001_51CE::
     ld   a, [wIntroSubTimer]                      ; $51CE: $FA $02 $D0
     ld   e, a                                     ; $51D1: $5F
     ld   d, $00                                   ; $51D2: $16 $00
@@ -1639,9 +1639,9 @@ label_51CE::
     ret                                           ; $51E8: $C9
 
 label_51E9::
-    call label_5094                               ; $51E9: $CD $94 $50
-    call label_51CE                               ; $51EC: $CD $CE $51
-    call label_4F0C                               ; $51EF: $CD $0C $4F
+    call func_001_5094                               ; $51E9: $CD $94 $50
+    call func_001_51CE                               ; $51EC: $CD $CE $51
+    call func_001_4F0C                               ; $51EF: $CD $0C $4F
     ldh  a, [hJoypadState]                        ; $51F2: $F0 $CC
     and  $90                                      ; $51F4: $E6 $90
     jr   z, label_5235                            ; $51F6: $28 $3D
@@ -1694,11 +1694,11 @@ label_5235::
     dec  [hl]                                     ; $523E: $35
     xor  a                                        ; $523F: $AF
     ld   [wCreditsScratch0], a                    ; $5240: $EA $00 $D0
-    call label_4EBB                               ; $5243: $CD $BB $4E
+    call func_001_4EBB                               ; $5243: $CD $BB $4E
     jp   label_526F                               ; $5246: $C3 $6F $52
 
 label_5249::
-    call label_512C                               ; $5249: $CD $2C $51
+    call func_001_512C                               ; $5249: $CD $2C $51
     ldh  a, [hFrameCounter]                       ; $524C: $F0 $E7
     and  $10                                      ; $524E: $E6 $10
     jr   z, label_526F                            ; $5250: $28 $1D

@@ -124,7 +124,7 @@ FileSaveVisible::
     ret
 
 FileSaveInteractive::
-    call label_412A
+    call func_001_412A
     ldh  a, [hJoypadState]
     and  $B0
     jr   z, LCDOn_return

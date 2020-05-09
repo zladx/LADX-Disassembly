@@ -142,7 +142,7 @@ label_42D8::
     ret                                           ; $42D8: $C9
 
 LinkPassOut4Handler::
-    call label_4339                               ; $42D9: $CD $39 $43
+    call func_001_4339                               ; $42D9: $CD $39 $43
     ldh  a, [hJoypadState]                        ; $42DC: $F0 $CC
     and  $B0                                      ; $42DE: $E6 $B0
     jr   z, label_4335                            ; $42E0: $28 $53
@@ -158,7 +158,7 @@ LinkPassOut4Handler::
     jr   label_42F5                               ; $42F0: $18 $03
 
 label_42F2::
-    call label_5DE6                               ; $42F2: $CD $E6 $5D
+    call func_001_5DE6                               ; $42F2: $CD $E6 $5D
 
 label_42F5::
     xor  a                                        ; $42F5: $AF
@@ -190,10 +190,10 @@ label_42FB::
     ret                                           ; $432B: $C9
 
 label_432C::
-    call label_5DE6                               ; $432C: $CD $E6 $5D
+    call func_001_5DE6                               ; $432C: $CD $E6 $5D
     xor  a                                        ; $432F: $AF
     ldh  [hActiveEntityTilesOffset], a            ; $4330: $E0 $F5
-    call label_6162                               ; $4332: $CD $62 $61
+    call func_001_6162                               ; $4332: $CD $62 $61
 
 label_4335::
     ret                                           ; $4335: $C9
@@ -203,9 +203,9 @@ label_4336::
     ld   h, b                                     ; $4337: $60
     ld   [hl], b                                  ; $4338: $70
 
-label_4339::
+func_001_4339::
     ld   hl, $C13F                                ; $4339: $21 $3F $C1
-    call label_6BA8                               ; $433C: $CD $A8 $6B
+    call func_001_6BA8                               ; $433C: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $433F: $F0 $CC
     and  $08                                      ; $4341: $E6 $08
     jr   z, label_434D                            ; $4343: $28 $08

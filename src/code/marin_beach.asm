@@ -74,8 +74,8 @@ MarineBeachPrepare1::
     call IncrementGameplaySubtype
     xor  a
     ld   [$C1BF], a
-    call label_5888
-    call label_64FF
+    call func_001_5888
+    call func_001_64FF
     ld   a, $0F
     ld   [wTileMapToLoad], a
 .return
@@ -267,11 +267,11 @@ MarineBeachScroll2::
     call IncrementGameplaySubtype
 
 label_642E::
-    call label_651E
+    call func_001_651E
     ret
 
 MarineBeachScrollStop::
-    call label_651E
+    call func_001_651E
     ld   a, [$C19F]
     and  a
     jr   nz, label_644A
@@ -291,7 +291,7 @@ label_644A::
     ret
 
 MarineBeachDialog1::
-    call label_651E
+    call func_001_651E
     ld   a, [$C19F]
     and  a
     jr   nz, label_6466
@@ -305,7 +305,7 @@ label_6466::
     ret
 
 MarineBeachPause1::
-    call label_651E
+    call func_001_651E
     ld   a, [$C3C7]
     and  a
     jr   nz, label_6478
@@ -317,7 +317,7 @@ label_6478::
     ret
 
 MarineBeachDialog2::
-    call label_651E
+    call func_001_651E
     ld   a, [$C19F]
     and  a
     jr   nz, label_648F
@@ -331,7 +331,7 @@ label_648F::
     ret
 
 MarineBeachPause2::
-    call label_651E
+    call func_001_651E
     ld   a, [$C3C7]
     and  a
     jr   nz, label_64A1
@@ -343,7 +343,7 @@ label_64A1::
     ret
 
 MarineBeachAreYouListening::
-    call label_651E
+    call func_001_651E
     ld   a, [$C19F]
     and  a
     jr   nz, label_64CA
@@ -370,7 +370,7 @@ label_64CA::
     ret
 
 MarineBeachDialog3::
-    call label_651E
+    call func_001_651E
     ld   a, [$C19F]
     and  a
     jr   nz, label_64E6
@@ -384,18 +384,18 @@ label_64E6::
     ret
 
 MarineBeachDialog4::
-    call label_651E
+    call func_001_651E
     ld   a, $02
     ld   [$C3C4], a
     ld   a, [$C3C7]
     and  a
     ret  nz
     call label_27F2
-    call label_68D9
+    call func_001_68D9
     ld   a, $01
     ld   [wIsMarinFollowingLink], a
 
-label_64FF::
+func_001_64FF::
     ld   e, $10
     ld   hl, wTranscientVfxTypeTable
     xor  a
@@ -425,8 +425,8 @@ label_6516::
 label_651A::
     db $42, 3, $44, 3
 
-label_651E::
-    call label_65AE
+func_001_651E::
+    call func_001_65AE
     ld   a, [$C114]
     inc  a
     cp   $A0
@@ -468,7 +468,7 @@ label_655F::
     ld   a, $58
     ldh  [hActiveEntityPosX], a
     ld   hl, wDynamicOAMBuffer
-    call label_658B
+    call func_001_658B
     ld   a, $48
     ldh  [hActiveEntityPosX], a
     ld   de, label_6512
@@ -482,10 +482,10 @@ label_655F::
 
 label_6584::
     ld   hl, $C038
-    call label_658B
+    call func_001_658B
     ret
 
-label_658B::
+func_001_658B::
     push bc
     ldh  a, [$FF97]
     ld   c, a
@@ -515,7 +515,7 @@ label_658B::
     pop  bc
     ret
 
-label_65AE::
+func_001_65AE::
     ld   c, $08
     ld   b, $00
 
@@ -543,7 +543,7 @@ label_65B2::
 
 label_65D2::
     pop  af
-    call label_65DD
+    call func_001_65DD
 
 label_65D6::
     dec  c
@@ -552,7 +552,7 @@ label_65D6::
     jr   nz, label_65B2
     ret
 
-label_65DD::
+func_001_65DD::
     db $3D, $C7, $73, $66, $FD, $66
 
 label_65E3::
@@ -618,8 +618,8 @@ label_668B::
     ld   d, b
     add  hl, de
     pop  de
-    call label_658B
-    call label_67A8
+    call func_001_658B
+    call func_001_67A8
     ldh  a, [hFrameCounter]
     and  $07
     jr   nz, label_66C4
@@ -698,10 +698,10 @@ label_6718::
     ld   d, b
     add  hl, de
     pop  de
-    call label_658B
+    call func_001_658B
 
 label_6733::
-    call label_67A8
+    call func_001_67A8
     ld   a, c
     sla  a
     sla  a
@@ -784,17 +784,17 @@ label_67A4::
 label_67A7::
     ret
 
-label_67A8::
-    call label_67B5
+func_001_67A8::
+    call func_001_67B5
     push bc
     ld   a, c
     add  a, $10
     ld   c, a
-    call label_67B5
+    call func_001_67B5
     pop  bc
     ret
 
-label_67B5::
+func_001_67B5::
     ld   hl, $C550
     add  hl, bc
     ld   a, [hl]

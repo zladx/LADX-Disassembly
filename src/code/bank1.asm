@@ -23,13 +23,13 @@ label_40D6::
 
 label_40F9::
     call label_27F2
-    call label_5DE6
+    call func_001_5DE6
     call ClearWRAMAndLowerHRAM
     xor  a
     ldh  [hActiveEntityTilesOffset], a
     ld   a, $01
     ld   [$DBAF], a
-    call label_6162
+    call func_001_6162
 
 ; Enable LCD Screen
 LCDOn::
@@ -68,9 +68,9 @@ label_4128::
     ld   e, b
 
 ; Called by FileSaveInteractive
-label_412A::
+func_001_412A::
     ld   hl, $C13F
-    call label_6BA8
+    call func_001_6BA8
     ldh  a, [hJoypadState]
     and  $0C
     jr   z, label_413B
@@ -245,11 +245,11 @@ DEBUG_SAVE_FILE_SIZE equ @ - DebugSaveFileData
 InitSaveFiles::
     ; Initialize the battery-backed memory used for save files
     ld   de, $00
-    call label_4794
+    call func_001_4794
     ld   de, $3AD
-    call label_4794
+    call func_001_4794
     ld   de, $75A
-    call label_4794
+    call func_001_4794
 
     ; POI: If DebugTool1 is enabled,
     ; write a default save file with everything unlocked
@@ -366,7 +366,7 @@ POPC
 .return
     ret
 
-label_4794::
+func_001_4794::
     ld   c, $01
     ld   b, $05
     ld   hl, $A100
@@ -679,7 +679,7 @@ label_54E8::
     db $9D, $69, $49, $7F, $9D, $89, $49, $7F, $9D, $A9, $49, $7F, $9D, $C9, $49, $7F
     db $9D, $E9, $49, $7F, $9E, 9, $49, $7F, 0
 
-label_5511::
+func_001_5511::
     ld   hl, label_54E8
     ld   de, $D650
     ld   c, $29
@@ -739,7 +739,7 @@ label_5544::
     ld   a, [hl]
     ldh  [hScratch3], a
     pop  hl
-    call label_5619
+    call func_001_5619
     push hl
     ld   hl, label_53D8
     inc  bc
@@ -821,7 +821,7 @@ label_55C0::
     ld   a, [hl]
     ldh  [hScratch3], a
     pop  hl
-    call label_5619
+    call func_001_5619
     push hl
     ld   hl, label_5418
     inc  bc
@@ -849,7 +849,7 @@ label_55F5::
     ldh  [hScratch0], a
     ld   hl, label_54E6
 
-label_5600::
+func_001_5600::
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch1], a
@@ -859,7 +859,7 @@ label_5600::
     add  a, $B1
     ldh  [hScratch3], a
     pop  hl
-    call label_5619
+    call func_001_5619
     inc  hl
     ld   a, $7F
     ldi  [hl], a
@@ -867,7 +867,7 @@ label_5600::
     ld   [hl], a
     ret
 
-label_5619::
+func_001_5619::
     ldh  a, [hScratch0]
     ldi  [hl], a
     ldh  a, [hScratch1]
@@ -994,7 +994,7 @@ label_56D9::
     and  $DF
     ld   [wLCDControl], a
     ld   [rLCDC], a
-    call label_5888
+    call func_001_5888
     ld   a, $08
     ld   [wBGMapToLoad], a
 
@@ -1171,9 +1171,9 @@ label_5804::
     call IncrementGameplaySubtype
 
 label_5818::
-    call label_58A8
-    call label_5A71
-    call label_5C49
+    call func_001_58A8
+    call func_001_5A71
+    call func_001_5C49
     ret
 
 label_5822::
@@ -1237,7 +1237,7 @@ label_5854::
 label_5885::
     ld   [wTileMapToLoad], a
 
-label_5888::
+func_001_5888::
     ld   hl, wRoomTransitionState
     ld   e, $00
 
@@ -1249,7 +1249,7 @@ label_588D::
     cp   $0C
     jr   nz, label_588D
 
-label_5895::
+func_001_5895::
     ld   a, $80
     ld   [wWindowY], a
     ld   a, $07
@@ -1262,7 +1262,7 @@ label_5895::
 label_58A7::
     ret
 
-label_58A8::
+func_001_58A8::
     ld   hl, $C09C
     ld   a, [$DB54]
     rra
@@ -1360,7 +1360,7 @@ label_5A6B::
 label_5A6E::
     db 0, $F0, $10
 
-label_5A71::
+func_001_5A71::
     ld   a, [$DBB4]
     ldh  [hScratch0], a
     ld   a, [$C1B3]
@@ -1441,7 +1441,7 @@ label_5AA0::
     jr   label_5B3F
 
 label_5AF5::
-    call label_6BAE
+    call func_001_6BAE
     ld   hl, MapSpecialLocationNamesTable
     add  hl, de
     ld   a, [hl]
@@ -1587,15 +1587,15 @@ label_5C41::
 label_5C45::
     db $28, $28, $78, $78
 
-label_5C49::
+func_001_5C49::
     ld   a, [wEntitiesPhysicsFlagsTable]
     push af
-    call label_5C55
+    call func_001_5C55
     pop  af
     ld   [wEntitiesPhysicsFlagsTable], a
     ret
 
-label_5C55::
+func_001_5C55::
     ld   a, [$C1B3]
     and  a
     jr   z, label_5C62
@@ -1853,7 +1853,7 @@ label_5DE1::
     jr   nz, label_5DCC
     ret
 
-label_5DE6::
+func_001_5DE6::
     ld   a, [wHealth]                           ; Does the player have any health?
     and  a                                      ; If yes, skip this
     jr   nz, .skipHealthReset
@@ -2584,7 +2584,7 @@ CreateFollowingNpcEntity::
     ret
 
 ; Reset?
-label_6162::
+func_001_6162::
     call label_27F2
     xor  a
     ld   [wGameplayType], a
@@ -2714,7 +2714,7 @@ label_6829::
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_6855
-    call label_5888
+    call func_001_5888
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   z, label_6849
@@ -2811,7 +2811,7 @@ label_68CF::
     ld   a, JINGLE_VALIDATE
     ldh  [hJingle], a
 
-label_68D9::
+func_001_68D9::
     call IncrementGameplaySubtype
     xor  a
     ld   [$C16B], a
@@ -2842,7 +2842,7 @@ label_6903::
     ret
 label_6908::
     call func_6A7C
-    call label_695B
+    call func_001_695B
     ld   a, [$D210]
     dec  a
     ld   [$D210], a
@@ -2870,7 +2870,7 @@ label_6944::
     ret
 label_6945::
     call func_6A7C
-    call label_695B
+    call func_001_695B
     ld   hl, $D210
     dec  [hl]
     ret  nz
@@ -2880,7 +2880,7 @@ label_6945::
     ld   [$C16C], a
     ret
 
-label_695B::
+func_001_695B::
     xor  a
     ld   [wScreenShakeVertical], a
     ld   a, [$D215]
@@ -3063,12 +3063,12 @@ func_6A7C::
 
 include "code/face_shrine_mural.asm"
 
-label_6BA8::
+func_001_6BA8::
     ldh  a, [hJoypadState]
     and  $0C
     jr   z, label_6BB4
 
-label_6BAE::
+func_001_6BAE::
     push af
     ld   a, JINGLE_MOVE_SELECTION
     ldh  [hJingle], a
@@ -3082,13 +3082,13 @@ func_001_6BB5::
     cp   $08
     jp  c, LoadSirenInstrumentTiles
     jr   nz, label_6BC6
-    call label_6BF0
+    call func_001_6BF0
     ld   hl, hBGTilesLoadingStage
     inc  [hl]
     ret
 
 label_6BC6::
-    call label_6BEA
+    call func_001_6BEA
     xor  a
     ldh  [hNeedsUpdatingBGTiles], a
     ldh  [hBGTilesLoadingStage], a
@@ -3106,10 +3106,10 @@ label_6BDF::
 label_6BE7::
     db 1, $1F, 1
 
-label_6BEA::
+func_001_6BEA::
     db $E, 8, $1E, 4, $18, 4
 
-label_6BF0::
+func_001_6BF0::
     db $E, 4, $1E, 0
 
 label_6BF4::
@@ -3171,15 +3171,15 @@ label_6C2A::
 label_6C48::
     ldh  a, [hScratch0]
     ld   [hl], a
-    call label_6C69
+    call func_001_6C69
     ldh  a, [hScratch1]
     ld   [hl], a
     inc  c
-    call label_6C69
+    call func_001_6C69
     ldh  a, [hScratch2]
     ld   [hl], a
     inc  c
-    call label_6C69
+    call func_001_6C69
     ldh  a, [hScratch3]
     ld   [hl], a
     inc  e
@@ -3189,7 +3189,7 @@ label_6C48::
     jp   nz, label_6BF9
     ret
 
-label_6C69::
+func_001_6C69::
     push hl
     ld   hl, label_6BE7
     add  hl, bc
@@ -3309,12 +3309,12 @@ label_6D02::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_6D10
-    call label_6D11
+    call func_001_6D11
 
 label_6D10::
     ret
 
-label_6D11::
+func_001_6D11::
     ld   d, $05
     ld   a, [wGameplayType]
     cp   GAMEPLAY_WORLD

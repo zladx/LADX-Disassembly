@@ -45,7 +45,7 @@ FaceShrineMuralStage1Handler::
     ld   a, [$C16B]
     cp   $04
     jr   nz, label_6B51
-    call label_5888
+    call func_001_5888
     ld   a, $03
     ldh  [hWindowYUnused], a
     ld   a, $30
@@ -107,6 +107,6 @@ FaceShrineMuralStage5Handler::
     jr   z, .return
     ld   a, JINGLE_VALIDATE
     ldh  [hJingle], a
-    call label_68D9
+    call func_001_68D9
 .return
     ret

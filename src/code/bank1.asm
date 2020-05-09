@@ -95,7 +95,7 @@ label_413B::
     ret
     ldh  a, [$FFB7]
     and  a
-    jp   nz, label_41BB
+    jp   nz, label_001_41BB
     ld   e, $70
 
 .wait
@@ -187,7 +187,7 @@ label_41B4::
     dec  e
     jr   nz, label_41B4
 
-label_41BB::
+label_001_41BB::
     xor  a
     ld   [wBGPalette], a
     ld   [rBGP], a
@@ -1034,7 +1034,7 @@ label_571B::
 label_5731::
     ld   a, [$C19F]
     and  a
-    jp   nz, label_5818
+    jp   nz, label_001_5818
     ldh  a, [hJoypadState]
     and  J_A
     jr   z, label_57B7
@@ -1162,7 +1162,7 @@ label_57FA::
 label_5804::
     ldh  a, [hJoypadState]
     and  e
-    jr   z, label_5818
+    jr   z, label_001_5818
     xor  a
     ld   [$C16B], a
     ld   [$C16C], a
@@ -1170,7 +1170,7 @@ label_5804::
     ld   [$DDD5], a
     call IncrementGameplaySubtype
 
-label_5818::
+label_001_5818::
     call func_001_58A8
     call func_001_5A71
     call func_001_5C49
@@ -1368,7 +1368,7 @@ func_001_5A71::
     or   [hl]
     ld   hl, $C19F
     or   [hl]
-    jp   nz, label_5B3F
+    jp   nz, label_001_5B3F
     ldh  a, [hPressedButtonsMask]
     ld   c, a
     ld   hl, $C182
@@ -1420,7 +1420,7 @@ label_5AA0::
     ld   hl, hScratch0
     ld   [$DBB4], a
     cp   [hl]
-    jr   z, label_5B3F
+    jr   z, label_001_5B3F
     ld   e, a
     ld   d, $00
     ld   hl, $D800
@@ -1438,7 +1438,7 @@ label_5AA0::
     ldh  [hJingle], a
     ldh  a, [hScratch0]
     ld   [$DBB4], a
-    jr   label_5B3F
+    jr   label_001_5B3F
 
 label_5AF5::
     call func_001_6BAE
@@ -1474,18 +1474,18 @@ label_5B24::
     ld   [$C1B1], a
     ld   a, [$DBB4]
     ld   [$C1B4], a
-    jr   label_5B3F
+    jr   label_001_5B3F
 
 label_5B30::
     ld   a, [$C1B1]
     and  a
-    jr   z, label_5B3F
+    jr   z, label_001_5B3F
     xor  a
     ld   [$C1B1], a
     ld   a, $10
     ld   [$C1B3], a
 
-label_5B3F::
+label_001_5B3F::
     ld   hl, $C080
     ld   a, [$DBB4]
     rra
@@ -1620,7 +1620,7 @@ label_5C6C::
 label_5C72::
     ld   a, [$C1B1]
     and  a
-    jp   z, label_5D13
+    jp   z, label_001_5D13
     ld   a, $00
 
 label_5C7B::
@@ -1678,11 +1678,11 @@ label_5CBD::
     call RenderActiveEntitySpritesRect
     ld   a, [$C1B0]
     cp   $00
-    jr   nz, label_5D13
+    jr   nz, label_001_5D13
     ld   a, [$C1B1]
     dec  a
     cp   $80
-    jr   nc, label_5D13
+    jr   nc, label_001_5D13
     ldh  [hActiveEntitySpriteVariant], a
     ld   de, wDynamicOAMBuffer
     ldh  a, [hActiveEntityVisualPosY]
@@ -1719,7 +1719,7 @@ label_5CBD::
     ld   a, [hl]
     ld   [de], a
 
-label_5D13::
+label_001_5D13::
     ret
 
 label_5D14::
@@ -1737,7 +1737,7 @@ label_5D3E::
     db  $99, $AB, $06, $7E, $7E, $7E, $7E, $7E, $7E, $7E
     db  $00
 
-label_5D53::
+label_001_5D53::
     ld   a, [$D600]
     ld   e, a
     ld   d, $00
@@ -3117,7 +3117,7 @@ label_6BF4::
     ldh  [hScratch9], a
     ld   d, $00
 
-label_6BF9::
+label_001_6BF9::
     xor  a
     ldh  [hScratch0], a
     ldh  [hScratch1], a
@@ -3127,7 +3127,7 @@ label_6BF9::
     add  hl, de
     ld   a, [hl]
     bit  1, a
-    jp   nz, label_6C2A
+    jp   nz, label_001_6C2A
     ld   c, $00
     ld   b, c
     ld   hl, label_6BCF
@@ -3147,7 +3147,7 @@ label_6BF9::
     pop  hl
     jr   label_6C48
 
-label_6C2A::
+label_001_6C2A::
     ld   c, $00
     ld   b, c
     ld   hl, label_6BCF
@@ -3186,7 +3186,7 @@ label_6C48::
     ld   a, e
     ld   hl, hScratch9
     cp   [hl]
-    jp   nz, label_6BF9
+    jp   nz, label_001_6BF9
     ret
 
 func_001_6C69::

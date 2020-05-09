@@ -309,7 +309,7 @@ label_4548::
 TransitionToFileMenu::
     ld   [wForceFileSelectionScreenMusic], a
 
-label_4555::
+label_001_4555::
     call EnableExternalRAMWriting
     ld   a, [$A454]
     ld   [$DB80], a

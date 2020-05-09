@@ -613,7 +613,7 @@ label_4B1C::
     xor  a
     ldi  [hl], a
     ld   [hl], a
-    jp   label_4555
+    jp   label_001_4555
 
 label_4B29::
     call func_001_4BF5
@@ -952,7 +952,7 @@ func_001_4DA6::
     ldh  [hScratch2], a                           ; $4DB3: $E0 $D9
     ld   a, [$DC09]                               ; $4DB5: $FA $09 $DC
     ldh  [hScratch3], a                           ; $4DB8: $E0 $DA
-    jp   label_5D53                               ; $4DBA: $C3 $53 $5D
+    jp   label_001_5D53                               ; $4DBA: $C3 $53 $5D
 
 label_4DBD::
     ret                                           ; $4DBD: $C9
@@ -968,7 +968,7 @@ func_001_4DBE::
     ldh  [hScratch2], a                           ; $4DCC: $E0 $D9
     ld   a, [$DC0A]                               ; $4DCE: $FA $0A $DC
     ldh  [hScratch3], a                           ; $4DD1: $E0 $DA
-    jp   label_5D53                               ; $4DD3: $C3 $53 $5D
+    jp   label_001_5D53                               ; $4DD3: $C3 $53 $5D
 
 func_001_4DD6::
     ld   a, [wSaveFilesCount]                     ; $4DD6: $FA $A7 $DB
@@ -981,7 +981,7 @@ func_001_4DD6::
     ldh  [hScratch2], a                           ; $4DE4: $E0 $D9
     ld   a, [$DC0B]                               ; $4DE6: $FA $0B $DC
     ldh  [hScratch3], a                           ; $4DE9: $E0 $DA
-    jp   label_5D53                               ; $4DEB: $C3 $53 $5D
+    jp   label_001_5D53                               ; $4DEB: $C3 $53 $5D
 
 Data_001_4DEE::
     db   $98, $A5, $44, $7E, $98, $C5, $44, $7E   ; $4DEE
@@ -1023,19 +1023,19 @@ label_4E2B::
     cp   $03                                      ; $4E34: $FE $03
     jr   nz, label_4E3B                           ; $4E36: $20 $03
 
-    jp   label_4555                               ; $4E38: $C3 $55 $45
+    jp   label_001_4555                               ; $4E38: $C3 $55 $45
 
 label_4E3B::
     call PlayValidationJingleAndReturn            ; $4E3B: $CD $BE $49
     call IncrementGameplaySubtypeAndReturn        ; $4E3E: $CD $D6 $44
-    jr   label_4E55                               ; $4E41: $18 $12
+    jr   label_001_4E55                               ; $4E41: $18 $12
 
 Data_001_4E43::
     db   $99, $E4, $0D, $7E, $7E, $10, $14, $08   ; $4E43
     db   $13, $7E, $7E, $7E, $7E, $0E, $0A, $7E   ; $4E4B
     db   $7E, $00                                 ; $4E53
 
-label_4E55::
+label_001_4E55::
     ld   hl, wRequestDestinationHigh              ; $4E55: $21 $01 $D6
     ld   de, Data_001_4E43                        ; $4E58: $11 $43 $4E
     ld   c, $11                                   ; $4E5B: $0E $11
@@ -1065,7 +1065,7 @@ FileDeletionState11Handler::
 
     ld   a, [wCreditsScratch0]                    ; $4E75: $FA $00 $D0
     and  a                                        ; $4E78: $A7
-    jp   z, label_4555                            ; $4E79: $CA $55 $45
+    jp   z, label_001_4555                            ; $4E79: $CA $55 $45
 
     call PlayValidationJingleAndReturn            ; $4E7C: $CD $BE $49
     ld   a, [wSaveSlot]                           ; $4E7F: $FA $A6 $DB
@@ -1088,7 +1088,7 @@ label_4E91::
     or   d                                        ; $4E98: $B2
     jr   nz, label_4E91                           ; $4E99: $20 $F6
 
-    jp   label_4555                               ; $4E9B: $C3 $55 $45
+    jp   label_001_4555                               ; $4E9B: $C3 $55 $45
 
 label_4E9E::
     call func_001_4EE5                               ; $4E9E: $CD $E5 $4E
@@ -1345,7 +1345,7 @@ label_501D::
 
     ld   a, [wIntroTimer]                         ; $5023: $FA $01 $D0
     cp   $03                                      ; $5026: $FE $03
-    jp   z, label_4555                            ; $5028: $CA $55 $45
+    jp   z, label_001_4555                            ; $5028: $CA $55 $45
 
     ld   hl, $DB80                                ; $502B: $21 $80 $DB
     ld   b, $00                                   ; $502E: $06 $00
@@ -1390,7 +1390,7 @@ label_5055::
     ld   a, [hl]                                  ; $5063: $7E
     ld   hl, wLinkOAMBuffer                       ; $5064: $21 $00 $C0
 
-label_5067::
+label_001_5067::
     jr   z, label_507D                            ; $5067: $28 $14
 
     push af                                       ; $5069: $F5
@@ -1491,7 +1491,7 @@ label_5104::
 
     ld   hl, wGameplaySubtype                     ; $510D: $21 $96 $DB
     dec  [hl]                                     ; $5110: $35
-    jp   label_514F                               ; $5111: $C3 $4F $51
+    jp   label_001_514F                               ; $5111: $C3 $4F $51
 
 label_5114::
     and  $90                                      ; $5114: $E6 $90
@@ -1499,11 +1499,11 @@ label_5114::
 
     ld   a, [wIntroSubTimer]                      ; $5118: $FA $02 $D0
     cp   $03                                      ; $511B: $FE $03
-    jp   z, label_4555                            ; $511D: $CA $55 $45
+    jp   z, label_001_4555                            ; $511D: $CA $55 $45
 
     call PlayValidationJingleAndReturn            ; $5120: $CD $BE $49
     call IncrementGameplaySubtypeAndReturn        ; $5123: $CD $D6 $44
-    jp   label_4E55                               ; $5126: $C3 $55 $4E
+    jp   label_001_4E55                               ; $5126: $C3 $55 $4E
 
 label_5129::
     call func_001_5175                               ; $5129: $CD $75 $51
@@ -1511,7 +1511,7 @@ label_5129::
 func_001_512C::
     ldh  a, [hFrameCounter]                       ; $512C: $F0 $E7
     and  $10                                      ; $512E: $E6 $10
-    jr   z, label_514F                            ; $5130: $28 $1D
+    jr   z, label_001_514F                            ; $5130: $28 $1D
 
     ld   a, [wIntroTimer]                         ; $5132: $FA $01 $D0
     rla                                           ; $5135: $17
@@ -1536,7 +1536,7 @@ label_5146::
     ld   [de], a                                  ; $514D: $12
     ret                                           ; $514E: $C9
 
-label_514F::
+label_001_514F::
     ld   a, [wIntroTimer]                         ; $514F: $FA $01 $D0
     cp   $01                                      ; $5152: $FE $01
     jr   z, label_5163                            ; $5154: $28 $0D
@@ -1566,7 +1566,7 @@ func_001_5175::
     add  hl, de                                   ; $517E: $19
     ld   a, [wIntroSubTimer]                      ; $517F: $FA $02 $D0
     cp   $03                                      ; $5182: $FE $03
-    jp   z, label_51C3                            ; $5184: $CA $C3 $51
+    jp   z, label_001_51C3                            ; $5184: $CA $C3 $51
 
     ldh  a, [hFrameCounter]                       ; $5187: $F0 $E7
     and  $08                                      ; $5189: $E6 $08
@@ -1613,12 +1613,12 @@ label_51A8::
     ld   [hl], a                                  ; $51C1: $77
     ret                                           ; $51C2: $C9
 
-label_51C3::
+label_001_51C3::
     ldh  a, [hFrameCounter]                       ; $51C3: $F0 $E7
     and  $08                                      ; $51C5: $E6 $08
     ld   a, [hl]                                  ; $51C7: $7E
     ld   hl, $C008                                ; $51C8: $21 $08 $C0
-    jp   label_5067                               ; $51CB: $C3 $67 $50
+    jp   label_001_5067                               ; $51CB: $C3 $67 $50
 
 func_001_51CE::
     ld   a, [wIntroSubTimer]                      ; $51CE: $FA $02 $D0
@@ -1648,7 +1648,7 @@ label_51E9::
 
     ld   a, [wCreditsScratch0]                    ; $51F8: $FA $00 $D0
     and  a                                        ; $51FB: $A7
-    jp   z, label_4555                            ; $51FC: $CA $55 $45
+    jp   z, label_001_4555                            ; $51FC: $CA $55 $45
 
     call PlayValidationJingleAndReturn            ; $51FF: $CD $BE $49
     ld   a, [wIntroTimer]                         ; $5202: $FA $01 $D0
@@ -1683,7 +1683,7 @@ label_5224::
     or   d                                        ; $522F: $B2
     jr   nz, label_5224                           ; $5230: $20 $F2
 
-    jp   label_4555                               ; $5232: $C3 $55 $45
+    jp   label_001_4555                               ; $5232: $C3 $55 $45
 
 label_5235::
     ldh  a, [hJoypadState]                        ; $5235: $F0 $CC
@@ -1695,13 +1695,13 @@ label_5235::
     xor  a                                        ; $523F: $AF
     ld   [wCreditsScratch0], a                    ; $5240: $EA $00 $D0
     call func_001_4EBB                               ; $5243: $CD $BB $4E
-    jp   label_526F                               ; $5246: $C3 $6F $52
+    jp   label_001_526F                               ; $5246: $C3 $6F $52
 
 label_5249::
     call func_001_512C                               ; $5249: $CD $2C $51
     ldh  a, [hFrameCounter]                       ; $524C: $F0 $E7
     and  $10                                      ; $524E: $E6 $10
-    jr   z, label_526F                            ; $5250: $28 $1D
+    jr   z, label_001_526F                            ; $5250: $28 $1D
 
     ld   a, [wIntroSubTimer]                      ; $5252: $FA $02 $D0
     rla                                           ; $5255: $17
@@ -1726,7 +1726,7 @@ label_5266::
     ld   [de], a                                  ; $526D: $12
     ret                                           ; $526E: $C9
 
-label_526F::
+label_001_526F::
     ld   a, [wIntroSubTimer]                      ; $526F: $FA $02 $D0
     cp   $01                                      ; $5272: $FE $01
     jr   z, label_5283                            ; $5274: $28 $0D

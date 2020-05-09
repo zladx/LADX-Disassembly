@@ -322,7 +322,7 @@ label_7014::
     call func_001_7D01
     ldh  a, [hFrameCounter]
     and  $07
-    jp   nz, label_70B1
+    jp   nz, label_001_70B1
     ld   hl, hBaseScrollX
     inc  [hl]
     ld   hl, wEntitiesPosXTable
@@ -349,7 +349,7 @@ label_7014::
     jr   z, label_7068
     inc  c
     cp   $69
-    jr   nz, label_70B1
+    jr   nz, label_001_70B1
 
 label_7068::
     ld   e, $01
@@ -400,7 +400,7 @@ func_001_70A9::
     ld   [$D000], a
     call PlayBombExplosionSfx
 
-label_70B1::
+label_001_70B1::
     ret
 
 IntroLinkFaceHandler::
@@ -597,7 +597,7 @@ label_7264::
 label_7266::
     db 5, $72, $2B, $72, $F2, $71, $3E, $72, $DF, $71, $51
 
-label_7271::
+label_001_7271::
     ld   [hl], d
 
 IntroStage8Handler::
@@ -1654,16 +1654,16 @@ label_7929::
     inc  [hl]
     ld   a, [hl]
     cp   $0C
-    jp   nz, label_7997
+    jp   nz, label_001_7997
     xor  a
     ld   [hl], a
     ld   hl, $D013
     inc  [hl]
     ld   a, [hl]
     cp   $04
-    jp   z, label_7997
+    jp   z, label_001_7997
     call func_001_79AE
-    jp   label_7997
+    jp   label_001_7997
 
 label_795D::
     ld   a, [$D013]
@@ -1687,7 +1687,7 @@ label_795D::
 label_797D::
     ldh  a, [hIsGBC]
     and  a
-    jr   z, label_7997
+    jr   z, label_001_7997
     ld   a, [$D013]
     cp   $08
     jr   z, label_7990
@@ -1700,7 +1700,7 @@ label_7990::
     ld   c, $0A
     jr   label_79AA
 
-label_7997::
+label_001_7997::
     ld   a, [$D013]
     cp   $03
     jr   nc, label_79A5

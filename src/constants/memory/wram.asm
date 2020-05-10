@@ -448,7 +448,7 @@ wEntitiesStateTable:: ; C290
   ;
   ; For instance:
   ; Mabe fox:  1 when jumping around, and 0 when standing in place moving the tail.
-  ; Cucoo: 1 when jumping around, and 0 when standing in place
+  ; Cucco: 1 when jumping around, and 0 when standing in place
   ; BowWow: 0 when standing still, 1 when bouncing lightly, 2 when making a big jump, 3 after a jump
   ; Village kids: 0 when standing still, 1 when bouncing
   ; Moblin: 0 when walking, 1 when standing still
@@ -469,7 +469,7 @@ wEntitiesCollisionsTable:: ; C2A0
 ; Examples:
 ;  - Octorock: enumerates 1-2-3-0
 ;  - Moblin: enumerates 1-2-3-0
-;  - Cucoo: stays to 0
+;  - Cucco: stays to 0
 ;  - Butterfly: stores a delta X to move closer to Link
 ;  - Genie: store the substate
 ;  - LikeLike: swallowed item

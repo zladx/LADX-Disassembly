@@ -1671,6 +1671,7 @@ jr_020_52E8:
     ldh  [rBGP], a                                ; $52F5: $E0 $47
     ret                                           ; $52F7: $C9
 
+; Unused data
 Data_020_52F8::
     db   $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F, $FF, $7F
 
@@ -1682,11 +1683,11 @@ func_020_5308::
     ld   hl, rBGPD                                ; $530C: $21 $69 $FF
     ld   b, $08                                   ; $530F: $06 $08
 
-jr_020_5311:
+.loop
     ld   [hl], $FF                                ; $5311: $36 $FF
     ld   [hl], $7F                                ; $5313: $36 $7F
     dec  b                                        ; $5315: $05
-    jr   nz, jr_020_5311                          ; $5316: $20 $F9
+    jr   nz, .loop                                ; $5316: $20 $F9
 
     ret                                           ; $5318: $C9
 
@@ -4397,6 +4398,7 @@ IncrementGameplaySubtype_20::
     inc  [hl]                                     ; $6686: $34
     ret                                           ; $6687: $C9
 
+; Unused data?
 Data_020_6688::
     db   $00, $08, $48, $02, $00, $00, $40, $02   ; $6688
     db   $00, $00, $FF, $FF, $00, $08, $4A, $02   ; $6690

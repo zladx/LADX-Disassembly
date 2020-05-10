@@ -34,7 +34,7 @@ include "code/entities/bank4.asm"
 
 section "bank5",romx[$4000],bank[$05]
 include "code/entities/bow_wow.asm"
-include "code/entities/cucoo.asm"
+include "code/entities/cucco.asm"
 include "code/entities/witch.asm"
 include "code/entities/racoon.asm"
 include "code/entities/marin.asm"

@@ -1441,9 +1441,7 @@ Data_015_4CD5::
     db   $76, $00, $76, $20
 
 label_015_4CD9:
-    db   $11
-    push de                                       ; $4CDA: $D5
-    ld   c, h                                     ; $4CDB: $4C
+    ld   de, Data_015_4CD5
     call RenderActiveEntitySpritesPair            ; $4CDC: $CD $C0 $3B
     call func_015_7B0D                            ; $4CDF: $CD $0D $7B
     call func_015_7B3E                            ; $4CE2: $CD $3E $7B

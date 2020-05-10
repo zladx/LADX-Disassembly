@@ -2199,8 +2199,6 @@ jr_036_4D28:
 
 Data_036_4D39::
     db   $1F, $00, $1F, $00, $1F, $01, $1F, $02, $1F
-
-Data_036_4D42::
     db   $03, $31, $07, $44, $0B, $40, $3A, $A5, $7C
 
 func_036_4D4B::
@@ -5917,14 +5915,10 @@ label_036_6423:
     ret                                           ; $6423: $C9
 
 Data_036_6424::
-    db   $10
-    db   $0C
-    db   $0E
+    db   $10, $0C, $0E
 
 ColorGhoulState2Handler::
-    db   $21
-    inc  h                                        ; $6428: $24
-    ld   h, h                                     ; $6429: $64
+    ld   hl, Data_036_6424
     ldh  a, [hActiveEntityType]                   ; $642A: $F0 $EB
     sub  $EC                                      ; $642C: $D6 $EC
     ld   e, a                                     ; $642E: $5F
@@ -8051,6 +8045,7 @@ label_036_712D:
     ld   e, $12                                   ; $7154: $1E $12
     jp   label_036_728B                           ; $7156: $C3 $8B $72
 
+; Unused data
 Data_036_7159::
     db   $FF, $7F, $00, $00, $71, $44, $7F, $7D
 

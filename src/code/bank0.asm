@@ -2664,7 +2664,7 @@ ClearLinkPositionIncrement::
 
 ; Animate Link motion?
 ApplyLinkMotionState::
-    call label_753A
+    call func_002_753A
 .skipInitialCall
     ld   a, [wLinkMotionState]
     cp   $01
@@ -4314,7 +4314,7 @@ PlayBoomerangSfx_trampoline::
     ret
 
 label_2A07::
-    callsb label_5A59
+    callsb func_001_5A59
     jp   ReloadSavedBank
 
 ; Read the physics flags for a given static object.

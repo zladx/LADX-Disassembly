@@ -149,7 +149,7 @@ WAVE_SFX_OCARINA_MAMBO   equ $0B
 WAVE_SFX_LINK_FALLS      equ $0C
 WAVE_SFX_TYPEWRITER      equ $0F
 WAVE_SFX_BOSS_AGONY      equ $10
-WAVE_SFX_CUCOO_HURT      equ $13
+WAVE_SFX_CUCCO_HURT      equ $13
 WAVE_SFX_OCARINA_NOSONG  equ $15	; Off-key notes for when you have no songs available
 WAVE_SFX_BOSS_HIT        equ $16
 WAVE_SFX_CHAIN_CHOMP     equ $18

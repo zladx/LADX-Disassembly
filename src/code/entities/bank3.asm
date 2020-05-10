@@ -2176,9 +2176,11 @@ jr_003_5467:
 jr_003_547D:
     jp   MarkTriggerAsResolved                    ; $547D: $C3 $60 $0C
 
+; Alternate explosion GFX display list (unused?)
 Data_003_5480::
     db   $32, $01, $32, $61
 
+; Explosion GFX display list
 Data_003_5484::
     db   $30, $01, $30, $61
 
@@ -2368,12 +2370,12 @@ SpawnEnemyDrop::
 
     ld   e, a                                     ; How many enemies to kill before a Piece of Power drops?
     ld   d, $1E                                   ; Max HP 0~6: 30
-    ld   a, [wMaxHealth]                          ; 
+    ld   a, [wMaxHealth]                          ;
     cp   $07                                      ; If max HP <= 6, skip
-    jr   c, .jr_003_562E                          ; 
+    jr   c, .jr_003_562E                          ;
 
     ld   d, $23                                   ; Max HP 7~10: 35
-    cp   $0B                                      ; 
+    cp   $0B                                      ;
     jr   c, .jr_003_562E                          ; If max HP <= 11, skip
 
     ld   d, $28                                   ; Max HP 11~14: 40
@@ -6917,7 +6919,7 @@ jr_003_7228:
     cp   $6C                                      ; $722D: $FE $6C
     jr   nz, jr_003_7235                          ; $722F: $20 $04
 
-    ld   a, WAVE_SFX_CUCOO_HURT                   ; $7231: $3E $13
+    ld   a, WAVE_SFX_CUCCO_HURT                   ; $7231: $3E $13
     ldh  [hWaveSfx], a                            ; $7233: $E0 $F3
 
 jr_003_7235:

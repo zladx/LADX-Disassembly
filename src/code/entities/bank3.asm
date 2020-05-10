@@ -6919,7 +6919,7 @@ jr_003_7228:
     cp   $6C                                      ; $722D: $FE $6C
     jr   nz, jr_003_7235                          ; $722F: $20 $04
 
-    ld   a, WAVE_SFX_CUCOO_HURT                   ; $7231: $3E $13
+    ld   a, WAVE_SFX_CUCCO_HURT                   ; $7231: $3E $13
     ldh  [hWaveSfx], a                            ; $7233: $E0 $F3
 
 jr_003_7235:

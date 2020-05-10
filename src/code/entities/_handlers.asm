@@ -130,7 +130,7 @@ EntityHandlersTable::
 ._69 entity_pointer MovingBlockMoverEntityHandler
 ._6A entity_pointer EntityRaftOwnerHandler
 ._6B entity_pointer TextDebuggerEntityHandler
-._6C entity_pointer CucooEntityHandler ; $6C
+._6C entity_pointer CuccoEntityHandler ; $6C
 ._6D entity_pointer BowWowEntityHandler
 ._6E entity_pointer ButterflyEntityHandler
 ._6F entity_pointer DogEntityHandler

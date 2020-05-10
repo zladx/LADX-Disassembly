@@ -1,7 +1,7 @@
 Data_005_4514::
     db   $50, $01, $52, $01, $54, $01, $56, $01, $52, $21, $50, $21, $56, $21, $54, $21
 
-CucooEntityHandler::
+CuccoEntityHandler::
     ld   hl, wEntitiesHealthTable                 ; $4524: $21 $60 $C3
     add  hl, bc                                   ; $4527: $09
     ld   [hl], $4C                                ; $4528: $36 $4C
@@ -26,7 +26,7 @@ jr_005_4538:
     and  $1F                                      ; $4546: $E6 $1F
     jr   nz, jr_005_454E                          ; $4548: $20 $04
 
-    ld   a, WAVE_SFX_CUCOO_HURT                   ; $454A: $3E $13
+    ld   a, WAVE_SFX_CUCCO_HURT                   ; $454A: $3E $13
     ldh  [hWaveSfx], a                            ; $454C: $E0 $F3
 
 jr_005_454E:
@@ -301,7 +301,7 @@ jr_005_46E9:
     call SpawnNewEntityInRange_trampoline         ; $4703: $CD $98 $3B
     jr   c, jr_005_474D                           ; $4706: $38 $45
 
-    ld   a, WAVE_SFX_CUCOO_HURT                   ; $4708: $3E $13
+    ld   a, WAVE_SFX_CUCCO_HURT                   ; $4708: $3E $13
     ldh  [hWaveSfx], a                            ; $470A: $E0 $F3
     ld   hl, wEntitiesStateTable                  ; $470C: $21 $90 $C2
     add  hl, de                                   ; $470F: $19

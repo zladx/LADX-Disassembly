@@ -401,7 +401,7 @@ EntityInitTarin::
     jp   SetEntitySpriteVariant                   ; $4979: $C3 $0C $3B
 
 EntityInitTelephone::
-    ld   a, MUSIC_ULRIRA_HOUSE                    ; $497C: $3E $33
+    ld   a, MUSIC_PHONE_BOOTH                     ; $497C: $3E $33
     jr   SetMusicTrackIfHasSword                  ; $497E: $18 $15
 
 EntityInitRichard::
@@ -417,7 +417,7 @@ EntityInitRichard::
     ld   [hl], DIRECTION_DOWN                     ; $4991: $36 $03
 .jr_003_4993
 
-    ld   a, MUSIC_RICHARD_S_HOUSE                 ; $4993: $3E $40
+    ld   a, MUSIC_RICHARDS_HOUSE                 ; $4993: $3E $40
     ; fallthrough
 
 SetMusicTrackIfHasSword::
@@ -441,7 +441,7 @@ EntityInitFinalNightmare::
     jp   label_27F2                               ; $49AA: $C3 $F2 $27
 
 EntityInitDreamShrineBed::
-    ld   a, MUSIC_DREAM_SHRINE_BED                ; $49AD: $3E $24
+    ld   a, MUSIC_DREAM_SHRINE                    ; $49AD: $3E $24
     jr   SetMusicTrack                            ; $49AF: $18 $EB
 
 EntityInitFishermanUnderBridge::

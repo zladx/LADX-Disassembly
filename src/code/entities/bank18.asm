@@ -3437,7 +3437,7 @@ jr_018_5A07:
 
     xor  a                                        ; $5A0B: $AF
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
-    ld   a, MUSIC_RECEIVED_LEVEL_1_SWORD          ; $5A0F: $3E $31
+    ld   a, MUSIC_OVERWORLD_INTRODUCTION                ; $5A0F: $3E $31
     ld   [wActiveMusicTrack], a                   ; $5A11: $EA $68 $D3
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
     ldh  [hMusicTrack], a                         ; $5A16: $E0 $B0

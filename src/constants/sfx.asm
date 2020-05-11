@@ -13,7 +13,7 @@ MUSIC_GAME_OVER                                 equ $03
 MUSIC_MABE_VILLAGE                              equ $04
 MUSIC_OVERWORLD                                 equ $05
 MUSIC_MT_TAMARANCH                              equ $06;	Also Tal Tal Heights
-MUSIC_VILLAGE_SHOP                              equ $07;	Witch hut. The shopkeeper also has magic, it's more of a magic theme in general.
+MUSIC_WITCH_HUT                                 equ $07;	Witch hut. The shopkeeper also has magic, it's more of a magic theme in general.
 ;MUSIC_RAFT_RIDE_RAPIDS                         equ $08;don't remember where it is used; probably indeed raft minigame.
 MUSIC_MYSTERIOUS_FOREST                         equ $09
 MUSIC_HOUSE                                     equ $0A;	Inside most regular houses.
@@ -30,14 +30,14 @@ MUSIC_TAIL_CAVE                                 equ $14
 MUSIC_BOTTLE_GROTTO                             equ $15
 MUSIC_KEY_CAVERN                                equ $16
 MUSIC_ANGLERS_TUNNEL                            equ $17
-;MUSIC_RECEIVED_HORN_INSTRUMENT                 equ $18;unknown item receive jingle
+MUSIC_INSTRUMENT_FOUND                          equ $18;	Plays after obtaining an instrument and their jingle has finished playing.
 MUSIC_BOSS_BATTLE                               equ $19
 MUSIC_INTRO_CUTSCENE                            equ $1A
 ;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B;item receive thing
 MUSIC_LINK_AWAKENS                              equ $1C;	Played in the house when you begin your game.
 MUSIC_SWORD_SEARCH                              equ $1D;	First time on Koholint Island.
 MUSIC_ENTERING_DREAM_WORLD                      equ $1E
-;MUSIC_MARIN_DUNGEON                            equ $1F;sounds like a dungeon, but has marin's song but changed. 
+MUSIC_SOUTHERN_SHRINE                           equ $1F 
 MUSIC_FULL_MOON_CELLO                           equ $20
 MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22

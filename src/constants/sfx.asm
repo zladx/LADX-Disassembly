@@ -12,7 +12,7 @@ MUSIC_TRENDY_GAME                               equ $02
 MUSIC_GAME_OVER                                 equ $03
 MUSIC_MABE_VILLAGE                              equ $04
 MUSIC_OVERWORLD                                 equ $05
-MUSIC_TAL_TAL_HEIGHTS                           equ $06
+MUSIC_MT_TAMARANCH                              equ $06;	Also Tal Tal Heights
 MUSIC_VILLAGE_SHOP                              equ $07;	Witch hut. The shopkeeper also has magic, it's more of a magic theme in general.
 ;MUSIC_RAFT_RIDE_RAPIDS                         equ $08;don't remember where it is used; probably indeed raft minigame.
 MUSIC_MYSTERIOUS_FOREST                         equ $09
@@ -24,7 +24,7 @@ MUSIC_FAIRY_FOUNTAIN                            equ $0C
 MUSIC_FOUND_LEVEL_1_SWORD                       equ $0F;	Possibly also playing for LVL2 sword.
 MUSIC_FOUND_NEW_WEAPON                          equ $10;item received jingle. when finished, reloads the current maps music
 MUSIC_FILE_SELECT                               equ $11
-MUSIC_INSIDE_EGG                                equ $12;	Plays inside the Wind Fish's Egg
+MUSIC_INSIDE_THE_WIND_EGG                       equ $12
 MUSIC_KANALET_CASTLE                            equ $13
 MUSIC_TAIL_CAVE                                 equ $14
 MUSIC_BOTTLE_GROTTO                             equ $15
@@ -34,25 +34,25 @@ MUSIC_ANGLERS_TUNNEL                            equ $17
 MUSIC_BOSS_BATTLE                               equ $19
 MUSIC_INTRO_CUTSCENE                            equ $1A
 ;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B;item receive thing
-;MUSIC_RECEIVED_UNKNOWN_INSTRUMENT              equ $1C;alternative house theme? not sure
+MUSIC_LINK_AWAKENS                              equ $1C;	Played in the house when you begin your game.
 MUSIC_SWORD_SEARCH                              equ $1D;	First time on Koholint Island.
 MUSIC_ENTERING_DREAM_WORLD                      equ $1E
 ;MUSIC_MARIN_DUNGEON                            equ $1F;sounds like a dungeon, but has marin's song but changed. 
 MUSIC_FULL_MOON_CELLO                           equ $20
 MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22
-;MUSIC_FINAL_BOSS                               equ $23
+MUSIC_FINAL_BOSS                                equ $23
 MUSIC_DREAM_SHRINE_BED                          equ $24
 MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;;;Item jingle
 MUSIC_COMMON_CAVE                               equ $26
 MUSIC_POWERUP_ACQUIRED                          equ $27
-MUSIC_CONCH_HORN                                equ $28
-MUSIC_SEA_LILY_BELL                             equ $29
-MUSIC_SURF_HARP                                 equ $2A
-;MUSIC_LEVEL_5                                  equ $2B;unknown jingle. sounds like an OOT theme
-;MUSIC_DUNGEON_ENTRANCE_UNLOCKING               equ $2C; Theme played on a triangle. Only uses one note in a rhythm.
+MUSIC_INSTRUMENT_CONCH_HORN                     equ $28
+MUSIC_INSTRUMENT_SEA_LILY_BELL                  equ $29
+MUSIC_INSTRUMENT_SURF_HARP                      equ $2A
+MUSIC_INSTRUMENT_WIND_MARIMBA                   equ $2B
+MUSIC_INSTRUMENT_CORAL_TRIANGLE                 equ $2C
 ;MUSIC_BOTWF                                    equ $2D; Marin melodic motif on a flute-like instrument.
-;MUSIC_AT_BEACH_WITH_MARIN                      equ $2E;Funky bongo
+MUSIC_THUNDER_DRUM                              equ $2E
 MUSIC_MARIN_SINGING                             equ $2F
 MUSIC_MANBOS_MAMBO                              equ $30
 MUSIC_OVERWORLD_INTRODUCTION                    equ $31;    The overworld theme's introduction section.
@@ -68,8 +68,8 @@ MUSIC_FISHING_GAME                              equ $3A;;; Mashup of Witch Hut a
 ;MUSIC_RECEIVED_ITEM                            equ $3B; Short item jingle
 MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C;	とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
 ;MUSIC_BOTWF                                    equ $3D; Silence, then marin's theme with an echo. Probably from a cutscene. Sounds baroque.
-;MUSIC_BOWWOW_STOLEN                            equ $3E;Chromatic introduction, then tense loop.
-;MUSIC_ENDING                                   equ $3F; Not the theme that plays during the opening the egg cutscene.
+;MUSIC_BOWWOW_STOLEN                            equ $3E; Chromatic introduction, for $0E
+MUSIC_ENDING                                    equ $3F;	Plays after defeating the final boss
 MUSIC_RICHARDS_HOUSE                            equ $40
 ;MUSIC_BOTWF                                    equ $41; Awakening of egg, on horn and flute-like instruments.
 ;MUSIC_BOTWF                                    equ $42; Awakening, has added marimba motif. More voices than $41
@@ -79,17 +79,17 @@ MUSIC_RICHARDS_HOUSE                            equ $40
 ;MUSIC_BOTWF                                    equ $46; Awakening, has added horn. More voices than $45
 ;MUSIC_BOTWF                                    equ $47; Awakening, drums, high ting. Awakening tracks are not well described.
 MUSIC_GHOSTS_HOUSE                              equ $48;	Ghost's abandoned house by the bay. GHOSTS_HOUSE rather than GHOST_HOUSE to avoid confusion
-MUSIC_ACTIVE_POWER_UP                           equ $49;
+MUSIC_ACTIVE_POWER_UP                           equ $49
 ;MUSIC_SILENCE                                  equ $4A; More awakening...
 MUSIC_CATFISHS_MAW                              equ $4B
 ;MUSIC_GLITCHY                                  equ $4C;Orchestral, short jingle.
 ;MUSIC_SILENCE                                  equ $4D;harp jingle
 MUSIC_MINI_BOSS                                 equ $50
-;MUSIC_GLITCHY                                  equ $58; Unknown Dungeon. Sounds like Bach's prelude in C minor from WTC I.
+MUSIC_FACE_SHRINE                               equ $58
 ;MUSIC_SILENCE                                  equ $59;magical jingles, loops.
-;MUSIC_GLITCHY                                  equ $5A;dungeon?
-;MUSIC_SILENCE                                  equ $5B;dungeon?
-;MUSIC_SILENCE                                  equ $5C;intense 
+MUSIC_TURTLE_ROCK                               equ $5A
+MUSIC_EAGLES_TOWER                              equ $5B
+MUSIC_BEFORE_EAGLES_TOWER_BOSS                  equ $5C;    Plays before/when the Grim Creeper summons the boss at the top of Eagle's Tower
 MUSIC_FINAL_BOSS_DIALOG                         equ $5D;	Plays during the final boss' dialog.
 ;MUSIC_BEES                                     equ $5E; MORE BEE SOUNDS. Might be used in Tarin cutscene
 ;MUSIC_SILENCE                                  equ $5F;Magic. loops.

@@ -7,21 +7,21 @@
 ; Values for hMusicTrack
  
 MUSIC_NONE                                      equ $00
-MUSIC_TITLE_SCREEN                              equ $01;probably correct
+MUSIC_TITLE_SCREEN_INTRODUCTION                 equ $01;	The title screen's theme's introduction section.
 MUSIC_TRENDY_GAME                               equ $02
 MUSIC_GAME_OVER                                 equ $03
 MUSIC_MABE_VILLAGE                              equ $04
 MUSIC_OVERWORLD                                 equ $05
-MUSIC_MT_TAMARANCH                              equ $06;	Also Tal Tal Heights
-MUSIC_WITCH_HUT                                 equ $07;	Witch hut. The shopkeeper also has magic, it's more of a magic theme in general.
-;MUSIC_RAFT_RIDE_RAPIDS                         equ $08;don't remember where it is used; probably indeed raft minigame.
+MUSIC_MT_TAMARANCH                              equ $06;	Also Tal Tal Height.
+MUSIC_WITCH_HUT                                 equ $07;	Also used in the shop.
+;MUSIC_RAFT_RIDE_RAPIDS                         equ $08;don't remember where it is used; probably indeed raft minigame
 MUSIC_MYSTERIOUS_FOREST                         equ $09
 MUSIC_HOUSE                                     equ $0A;	Inside most regular houses.
 MUSIC_ANIMAL_VILLAGE                            equ $0B
 MUSIC_FAIRY_FOUNTAIN                            equ $0C
-;MUSIC_TITLE                                    equ $0D;classic zelda theme.
-;MUSIC_BOWWOW_KIDNAPPED                         equ $0E;don't remember where it is used. intense theme, probably correct
-MUSIC_FOUND_LEVEL_1_SWORD                       equ $0F;	Possibly also playing for LVL2 sword.
+MUSIC_TITLE_SCREEN                              equ $0D;	Plays when $01 has finished.
+MUSIC_BOWWOW_KIDNAPPED                          equ $0E;	Plays when $3E has finished.
+MUSIC_FOUND_LEVEL_1_SWORD                       equ $0F;	Possibly also for LVL2 sword
 MUSIC_FOUND_NEW_WEAPON                          equ $10;item received jingle. when finished, reloads the current maps music
 MUSIC_FILE_SELECT                               equ $11
 MUSIC_INSIDE_THE_WIND_EGG                       equ $12
@@ -33,7 +33,7 @@ MUSIC_ANGLERS_TUNNEL                            equ $17
 MUSIC_INSTRUMENT_FOUND                          equ $18;	Plays after obtaining an instrument and their jingle has finished playing.
 MUSIC_BOSS_BATTLE                               equ $19
 MUSIC_INTRO_CUTSCENE                            equ $1A
-;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B;item receive thing
+;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B;magic good item receive thing
 MUSIC_LINK_AWAKENS                              equ $1C;	Played in the house when you begin your game.
 MUSIC_SWORD_SEARCH                              equ $1D;	First time on Koholint Island.
 MUSIC_ENTERING_DREAM_WORLD                      equ $1E
@@ -43,7 +43,7 @@ MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22
 MUSIC_FINAL_BOSS                                equ $23
 MUSIC_DREAM_SHRINE_BED                          equ $24
-MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;;;Item jingle
+MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;;; Unknown instrument. Plays $18 when finished.
 MUSIC_COMMON_CAVE                               equ $26
 MUSIC_POWERUP_ACQUIRED                          equ $27
 MUSIC_INSTRUMENT_CONCH_HORN                     equ $28
@@ -51,7 +51,7 @@ MUSIC_INSTRUMENT_SEA_LILY_BELL                  equ $29
 MUSIC_INSTRUMENT_SURF_HARP                      equ $2A
 MUSIC_INSTRUMENT_WIND_MARIMBA                   equ $2B
 MUSIC_INSTRUMENT_CORAL_TRIANGLE                 equ $2C
-;MUSIC_BOTWF                                    equ $2D; Marin melodic motif on a flute-like instrument.
+MUSIC_INSTRUMENT_ORGAN_OF_EVENING               equ $2D
 MUSIC_THUNDER_DRUM                              equ $2E
 MUSIC_MARIN_SINGING                             equ $2F
 MUSIC_MANBOS_MAMBO                              equ $30
@@ -62,13 +62,13 @@ MUSIC_TARIN_ATTACKED_BY_BEES                    equ $34
 MUSIC_MAMUS_SONG                                equ $35
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
 ;MUSIC_MR_WRITE_HOUSE_VERSION_2                 equ $37;	Mr Write House variant. Where is this used?
-MUSIC_TOTAKAS_SONG                              equ $38;	Totaka's Song as played in Richard's mansion; does not init instrument bank.
+MUSIC_TOTAKAS_SONG                              equ $38;	Totaka's Song as played in Richard's mansion; does not init instrument bank. Missing drums(?)
 MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_GAME                              equ $3A;;; Mashup of Witch Hut and Trendy Game 
 ;MUSIC_RECEIVED_ITEM                            equ $3B; Short item jingle
 MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C;	とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
-;MUSIC_BOTWF                                    equ $3D; Silence, then marin's theme with an echo. Probably from a cutscene. Sounds baroque.
-;MUSIC_BOWWOW_STOLEN                            equ $3E; Chromatic introduction, for $0E
+MUSIC_STAFF_ROLL                                equ $3D
+MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E
 MUSIC_ENDING                                    equ $3F;	Plays after defeating the final boss
 MUSIC_RICHARDS_HOUSE                            equ $40
 ;MUSIC_BOTWF                                    equ $41; Awakening of egg, on horn and flute-like instruments.
@@ -78,7 +78,7 @@ MUSIC_RICHARDS_HOUSE                            equ $40
 ;MUSIC_BOTWF                                    equ $45; Awakening, has triangle rhythm. More voices than $44
 ;MUSIC_BOTWF                                    equ $46; Awakening, has added horn. More voices than $45
 ;MUSIC_BOTWF                                    equ $47; Awakening, drums, high ting. Awakening tracks are not well described.
-MUSIC_GHOSTS_HOUSE                              equ $48;	Ghost's abandoned house by the bay. GHOSTS_HOUSE rather than GHOST_HOUSE to avoid confusion
+MUSIC_GHOSTS_HOUSE                              equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
 ;MUSIC_SILENCE                                  equ $4A; More awakening...
 MUSIC_CATFISHS_MAW                              equ $4B

@@ -441,7 +441,7 @@ EntityInitFinalNightmare::
     jp   label_27F2                               ; $49AA: $C3 $F2 $27
 
 EntityInitDreamShrineBed::
-    ld   a, MUSIC_DREAM_SHRINE                    ; $49AD: $3E $24
+    ld   a, MUSIC_DREAM_SHRINE_BED                ; $49AD: $3E $24
     jr   SetMusicTrack                            ; $49AF: $18 $EB
 
 EntityInitFishermanUnderBridge::

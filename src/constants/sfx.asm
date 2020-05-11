@@ -11,15 +11,15 @@ MUSIC_MABE_VILLAGE                              equ $04
 MUSIC_OVERWORLD                                 equ $05
 MUSIC_MT_TAMARANCH                              equ $06;	Also Tal Tal Height.
 MUSIC_WITCH_HUT                                 equ $07;	Also used in the shop.
-;MUSIC_RAFT_RIDE_RAPIDS                         equ $08;don't remember where it is used; probably indeed raft minigame
+MUSIC_RAFT_RIDE_RAPIDS                          equ $08
 MUSIC_MYSTERIOUS_FOREST                         equ $09
 MUSIC_HOUSE                                     equ $0A;	Inside most regular houses.
 MUSIC_ANIMAL_VILLAGE                            equ $0B
 MUSIC_FAIRY_FOUNTAIN                            equ $0C
 MUSIC_TITLE_SCREEN                              equ $0D;	Plays when $01 has finished.
 MUSIC_BOWWOW_KIDNAPPED                          equ $0E;	Plays when $3E has finished.
-MUSIC_FOUND_SWORD                               equ $0F;	Possibly also for LVL2 sword
-MUSIC_FOUND_NEW_WEAPON                          equ $10;item received jingle. when finished, reloads the current area's music
+MUSIC_SWORD_ACQUIRED                            equ $0F;	Possibly also for LVL2 sword
+MUSIC_WEAPON_ACQUIRED                           equ $10; item received jingle. when finished, reloads the current area's music
 MUSIC_FILE_SELECT                               equ $11
 MUSIC_INSIDE_THE_WIND_EGG                       equ $12
 MUSIC_KANALET_CASTLE                            equ $13
@@ -30,17 +30,17 @@ MUSIC_ANGLERS_TUNNEL                            equ $17
 MUSIC_INSTRUMENT_FOUND                          equ $18;	Plays after obtaining an instrument and their jingle has finished playing.
 MUSIC_BOSS_BATTLE                               equ $19
 MUSIC_INTRO_CUTSCENE                            equ $1A
-;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B;magic good item receive thingy
+;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B; magic good item receive thingy
 MUSIC_LINK_AWAKENS                              equ $1C;	Played in the house when you begin your game.
 MUSIC_SWORD_SEARCH                              equ $1D;	First time on Koholint Island.
-MUSIC_ENTERING_DREAM_WORLD                      equ $1E
+MUSIC_DREAMING                                  equ $1E
 MUSIC_SOUTHERN_SHRINE                           equ $1F 
 MUSIC_FULL_MOON_CELLO                           equ $20
 MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22
 MUSIC_FINAL_BOSS                                equ $23
 MUSIC_DREAM_SHRINE_BED                          equ $24
-MUSIC_FOUND_INSTRUMENT                          equ $25;	I *assume* this is an 'Item get!' sound effect that plays before the instrument themes ($28-$2D) play 
+MUSIC_HEART_CONTAINER_ACQUIRED                  equ $25
 MUSIC_COMMON_CAVE                               equ $26
 MUSIC_POWERUP_ACQUIRED                          equ $27
 MUSIC_INSTRUMENT_CONCH_HORN                     equ $28
@@ -61,12 +61,12 @@ MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
 ;MUSIC_MR_WRITE_HOUSE_VERSION_2                 equ $37;	Mr Write House variant. Where is this used?
 MUSIC_TOTAKAS_SONG                              equ $38;	Totaka's Song as played in Richard's mansion; does not init instrument bank. Missing drums(?)
 MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
-MUSIC_FISHING_GAME                              equ $3A;;; Mashup of Witch Hut and Trendy Game 
+MUSIC_FISHING_GAME                              equ $3A
 ;MUSIC_RECEIVED_ITEM                            equ $3B; Short item jingle
 MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C;	とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
 MUSIC_ENDING                                    equ $3D;	During ending cutscene. Silence, then music. Plays staff roll theme when finished.
 MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E
-MUSIC_WIND_FISH_AWAKENS                         equ $3F;	Plays during cutscene defeating the final boss
+MUSIC_WIND_FISH_AWAKENS                         equ $3F;	Plays during cutscene after defeating the final boss
 MUSIC_RICHARDS_HOUSE                            equ $40
 ;MUSIC_BOTWF                                    equ $41; Ballad of the Wind Fish, on horn and flute-like instruments.
 ;MUSIC_BOTWF                                    equ $42; Ballad of the Wind Fish, has added marimba motif. More voices than $41
@@ -79,30 +79,30 @@ MUSIC_GHOSTS_HOUSE                              equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
 ;MUSIC_SILENCE                                  equ $4A; More awakening...
 MUSIC_CATFISHS_MAW                              equ $4B
-;MUSIC_GLITCHY                                  equ $4C;Orchestral, short jingle.
-;MUSIC_SILENCE                                  equ $4D;harp jingle
+;MUSIC_GLITCHY                                  equ $4C; Orchestral, short jingle.
+;MUSIC_SILENCE                                  equ $4D; harp jingle
 ;MUSIC_MARIN_BEACH                              equ $4E
-;MUSIC_UNKNOWN                                  equ $4F;ITEM JINGLE
+;MUSIC_UNKNOWN                                  equ $4F; item jingle
 MUSIC_MINI_BOSS                                 equ $50
-;MUSIC_UNKNOWN                                  equ $51;DUNGEON WITH INCREASING CHORD PROGRESSION
-;MUSIC_UNKNOWN                                  equ $52;DUNGEON
-;MUSIC_UNKNOWN                                  equ $53;DREAM SHRINE?
-;MUSIC_UNKNOWN                                  equ $54;INTENSE ARPEGGIO, SWITCHES TO $19
-;MUSIC_UNKNOWN                                  equ $55;HAUNTING ARPEGGIO LOOP. GRAVEYARD...?
-;MUSIC_UNKNOWN                                  equ $56;PUNCH NOISES IN UPWARDS CHORD PROGRESSION, PLAYS $55 AFTERWARDS
-;MUSIC_UNKNOWN                                  equ $57;HAPPY SONG. CROCODILE PAINTERS HOUSE?
+;MUSIC_KANALET_CASTLE_COPY                      equ $51;	Copy of $13.
+;MUSIC_TAIL_CAVE_COPY                           equ $52;	Copy of $14.
+MUSIC_DREAM_SHRINE                              equ $53
+;MUSIC_UNKNOWN                                  equ $54; intense arpeggio, pre boss music? Switches to $19.
+MUSIC_FLYING_ROOSTER_REVIVED                    equ $55
+;MUSIC_UNKNOWN                                  equ $56; punch noises in upwards chord progression, plays $55 afterwards
+;MUSIC_CUCCO_HOUSE                              equ $57;	Is called 'Cucco House'
 MUSIC_FACE_SHRINE                               equ $58
-;MUSIC_SILENCE                                  equ $59;magical jingles, loops.
+;MUSIC_WINDFISH                                 equ $59;	Is called 'The WindFish'
 MUSIC_TURTLE_ROCK                               equ $5A
 MUSIC_EAGLES_TOWER                              equ $5B
-MUSIC_BEFORE_EAGLES_TOWER_BOSS                  equ $5C;    Plays before/when the Grim Creeper summons the boss at the top of Eagle's Tower
+MUSIC_BEFORE_EAGLES_TOWER_BOSS                  equ $5C;    Plays before the boss at the top of Eagle's Tower is summon by Grim Creeper.
 MUSIC_FINAL_BOSS_DIALOG                         equ $5D;	Plays during the final boss' dialog.
-;MUSIC_BEES                                     equ $5E; MORE BEE SOUNDS. Might be used in Tarin cutscene
-;MUSIC_SILENCE                                  equ $5F;Magic. loops.
+MUSIC_BOSS_WARNING                              equ $5E;	Plays when the bosses tell you not to wake the windfish after defeating them.
+MUSIC_FINAL_BOSS_DEFEATED                       equ $5F
 MUSIC_ZELDA_NICKNAME_EASTER_EGG                 equ $60;	ZELDA nickname easter egg.
 MUSIC_COLOR_DUNGEON                             equ $61;
-;MUSIC_COLOR_DUNGEON                            equ $62-6F;	Same as $61	
-;MUSIC_GLITCHED                                 equ $70-FE; Glitched version of the music that played before it.
+;MUSIC_COLOR_DUNGEON_COPIES                     equ $62 to 6F;	Same as $61	
+;MUSIC_GLITCHED                                 equ $70 to $FE;	Glitches the music that played before it.
 MUSIC_NOTHING                                   equ $FF;	Silence.
 
 ; Values for hJingle

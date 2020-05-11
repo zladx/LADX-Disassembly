@@ -719,13 +719,13 @@ soundOpcode00:
 ; Music ends?
 .val00
     ld   a, [$D3CA]                               ; $4492: $FA $CA $D3
-    cp   MUSIC_FOUND_LEVEL_1_SWORD                ; $4495: $FE $0F
+    cp   MUSIC_FOUND_SWORD                        ; $4495: $FE $0F
     jp   z, label_01B_47E5                        ; $4497: $CA $E5 $47
 
     cp   MUSIC_FOUND_NEW_WEAPON                   ; $449A: $FE $10
     jp   z, label_01B_47E5                        ; $449C: $CA $E5 $47
 
-    cp   MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1   ; $449F: $FE $25
+    cp   MUSIC_FOUND_INSTRUMENT                   ; $449F: $FE $25
     jp   z, label_01B_47E5                        ; $44A1: $CA $E5 $47
 
     ld   hl, $D369                                ; $44A4: $21 $69 $D3

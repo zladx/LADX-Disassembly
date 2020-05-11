@@ -24,12 +24,12 @@ MUSIC_FAIRY_FOUNTAIN                            equ $0C
 MUSIC_FOUND_LEVEL_1_SWORD                       equ $0F;	Possibly also playing for LVL2 sword.
 MUSIC_FOUND_NEW_WEAPON                          equ $10;item received jingle. when finished, reloads the current maps music
 MUSIC_FILE_SELECT                               equ $11
-MUSIC_EGG_INSIDE                                equ $12; Plays inside the Wind Fish's Egg
+MUSIC_INSIDE_EGG                                equ $12;	Plays inside the Wind Fish's Egg
 MUSIC_KANALET_CASTLE                            equ $13
 MUSIC_TAIL_CAVE                                 equ $14
 MUSIC_BOTTLE_GROTTO                             equ $15
 MUSIC_KEY_CAVERN                                equ $16
-;MUSIC_COMMON_CAVE_FAST                         equ $17;Faster/higher version of common cave theme as heard at $26
+MUSIC_ANGLERS_TUNNEL                            equ $17
 ;MUSIC_RECEIVED_HORN_INSTRUMENT                 equ $18;unknown item receive jingle
 MUSIC_BOSS_BATTLE                               equ $19
 MUSIC_INTRO_CUTSCENE                            equ $1A
@@ -37,19 +37,19 @@ MUSIC_INTRO_CUTSCENE                            equ $1A
 ;MUSIC_RECEIVED_UNKNOWN_INSTRUMENT              equ $1C;alternative house theme? not sure
 MUSIC_SWORD_SEARCH                              equ $1D;	First time on Koholint Island.
 MUSIC_ENTERING_DREAM_WORLD                      equ $1E
-;MUSIC_MARIN_DUNGEON                            equ $1F;sounds like a dungeon, but has marin's song. Similar to 
+;MUSIC_MARIN_DUNGEON                            equ $1F;sounds like a dungeon, but has marin's song but changed. 
 MUSIC_FULL_MOON_CELLO                           equ $20
 MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22
 ;MUSIC_FINAL_BOSS                               equ $23
 MUSIC_DREAM_SHRINE_BED                          equ $24
 MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;;;Item jingle
-MUSIC_COMMON_CAVE                               equ $26;$17 is a variation on this theme.
+MUSIC_COMMON_CAVE                               equ $26
 MUSIC_POWERUP_ACQUIRED                          equ $27
-;MUSIC_BOTWF                                    equ $28; Marin melodic motif on horn-like instrument.
-;MUSIC_SEA_LILY_BELL                            equ $29;
-;MUSIC_MARIN_SINGING_LINKS_OCARINA              equ $2A;unknown. Incorrectly labeled.
-;MUSIC_LEVEL_5                                  equ $2B;unknown jingle. 
+MUSIC_CONCH_HORN                                equ $28
+MUSIC_SEA_LILY_BELL                             equ $29
+MUSIC_SURF HARP                                 equ $2A
+;MUSIC_LEVEL_5                                  equ $2B;unknown jingle. sounds like an OOT theme
 ;MUSIC_DUNGEON_ENTRANCE_UNLOCKING               equ $2C; Theme played on a triangle. Only uses one note in a rhythm.
 ;MUSIC_BOTWF                                    equ $2D; Marin melodic motif on a flute-like instrument.
 ;MUSIC_AT_BEACH_WITH_MARIN                      equ $2E;Funky bongo
@@ -59,7 +59,7 @@ MUSIC_OVERWORLD_INTRODUCTION                    equ $31;    The overworld theme'
 MUSIC_MR_WRITE_HOUSE                            equ $32
 MUSIC_PHONE_BOOTH                               equ $33;	Also Ulrira's house.
 MUSIC_TARIN_ATTACKED_BY_BEES                    equ $34
-MUSIC_MAMUS_SONG                                 equ $35;	Mamu's/Wart's song.
+MUSIC_MAMUS_SONG                                equ $35
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
 ;MUSIC_MR_WRITE_HOUSE_VERSION_2                 equ $37;	Mr Write House variant. Where is this used?
 MUSIC_TOTAKAS_SONG                              equ $38;	Totaka's Song as played in Richard's mansion; does not init instrument bank.
@@ -67,7 +67,7 @@ MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_GAME                              equ $3A;;; Mashup of Witch Hut and Trendy Game 
 ;MUSIC_RECEIVED_ITEM                            equ $3B; Short item jingle
 MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C;	とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
-;MUSIC_BOTWF                                    equ $3D; Silence, then marin's theme. Probably from a cutscene.
+;MUSIC_BOTWF                                    equ $3D; Silence, then marin's theme with an echo. Probably from a cutscene. Sounds baroque.
 ;MUSIC_BOWWOW_STOLEN                            equ $3E;Chromatic introduction, then tense loop.
 ;MUSIC_ENDING                                   equ $3F; Not the theme that plays during the opening the egg cutscene.
 MUSIC_RICHARDS_HOUSE                            equ $40
@@ -81,7 +81,7 @@ MUSIC_RICHARDS_HOUSE                            equ $40
 MUSIC_GHOSTS_HOUSE                              equ $48;	Ghost's abandoned house by the bay. GHOSTS_HOUSE rather than GHOST_HOUSE to avoid confusion
 MUSIC_ACTIVE_POWER_UP                           equ $49;
 ;MUSIC_SILENCE                                  equ $4A; More awakening...
-;MUSIC_DUNGEON                                  equ $4B;dungeon-like
+MUSIC_CATFISHS_MAW                              equ $4B
 ;MUSIC_GLITCHY                                  equ $4C;Orchestral, short jingle.
 ;MUSIC_SILENCE                                  equ $4D;harp jingle
 MUSIC_MINI_BOSS                                 equ $50

@@ -1,9 +1,6 @@
 ;
 ; Constants for audio effects
 
-; @TODO Are these correct? Some of these don't seem to match
-; their actual in-game use (???)
-
 ; Values for hMusicTrack
  
 MUSIC_NONE                                      equ $00
@@ -22,7 +19,7 @@ MUSIC_FAIRY_FOUNTAIN                            equ $0C
 MUSIC_TITLE_SCREEN                              equ $0D;	Plays when $01 has finished.
 MUSIC_BOWWOW_KIDNAPPED                          equ $0E;	Plays when $3E has finished.
 MUSIC_FOUND_LEVEL_1_SWORD                       equ $0F;	Possibly also for LVL2 sword
-MUSIC_FOUND_NEW_WEAPON                          equ $10;item received jingle. when finished, reloads the current maps music
+MUSIC_FOUND_NEW_WEAPON                          equ $10;item received jingle. when finished, reloads the current area's music
 MUSIC_FILE_SELECT                               equ $11
 MUSIC_INSIDE_THE_WIND_EGG                       equ $12
 MUSIC_KANALET_CASTLE                            equ $13
@@ -43,7 +40,7 @@ MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22
 MUSIC_FINAL_BOSS                                equ $23
 MUSIC_DREAM_SHRINE_BED                          equ $24
-MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;;; Unknown instrument. Plays $18 when finished.
+MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;;; Unknown instrument.  Plays $18 when finished.
 MUSIC_COMMON_CAVE                               equ $26
 MUSIC_POWERUP_ACQUIRED                          equ $27
 MUSIC_INSTRUMENT_CONCH_HORN                     equ $28
@@ -67,24 +64,33 @@ MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_GAME                              equ $3A;;; Mashup of Witch Hut and Trendy Game 
 ;MUSIC_RECEIVED_ITEM                            equ $3B; Short item jingle
 MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C;	とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
-MUSIC_STAFF_ROLL                                equ $3D
+MUSIC_ENDING                                    equ $3D;	During ending cutscene. Silence, then music. Plays staff roll theme when finished.
 MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E
-MUSIC_ENDING                                    equ $3F;	Plays after defeating the final boss
+MUSIC_WIND_FISH_AWAKENS                         equ $3F;	Plays during cutscene defeating the final boss
 MUSIC_RICHARDS_HOUSE                            equ $40
-;MUSIC_BOTWF                                    equ $41; Awakening of egg, on horn and flute-like instruments.
-;MUSIC_BOTWF                                    equ $42; Awakening, has added marimba motif. More voices than $41
-;MUSIC_BOTWF                                    equ $43; Awakening, piano, more voices than $42
-;MUSIC_BOTWF                                    equ $44; Awakening, has high pitched ting. more voices than $43
-;MUSIC_BOTWF                                    equ $45; Awakening, has triangle rhythm. More voices than $44
-;MUSIC_BOTWF                                    equ $46; Awakening, has added horn. More voices than $45
-;MUSIC_BOTWF                                    equ $47; Awakening, drums, high ting. Awakening tracks are not well described.
+;MUSIC_BOTWF                                    equ $41; Ballad of the Wind Fish, on horn and flute-like instruments.
+;MUSIC_BOTWF                                    equ $42; Ballad of the Wind Fish, has added marimba motif. More voices than $41
+;MUSIC_BOTWF                                    equ $43; Ballad of the Wind Fish, piano, more voices than $42
+;MUSIC_BOTWF                                    equ $44; Ballad of the Wind Fish, has high pitched ting. more voices than $43
+;MUSIC_BOTWF                                    equ $45; Ballad of the Wind Fish, has triangle rhythm. More voices than $44
+;MUSIC_BOTWF                                    equ $46; Ballad of the Wind Fish, has added horn. More voices than $45
+;MUSIC_BOTWF                                    equ $47; Ballad of the Wind Fish, drums, high ting. Awakening tracks are not well described.
 MUSIC_GHOSTS_HOUSE                              equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
 ;MUSIC_SILENCE                                  equ $4A; More awakening...
 MUSIC_CATFISHS_MAW                              equ $4B
 ;MUSIC_GLITCHY                                  equ $4C;Orchestral, short jingle.
 ;MUSIC_SILENCE                                  equ $4D;harp jingle
+;MUSIC_MARIN_BEACH                              equ $4E
+;MUSIC_UNKNOWN                                  equ $4F;ITEM JINGLE
 MUSIC_MINI_BOSS                                 equ $50
+;MUSIC_UNKNOWN                                  equ $51;DUNGEON WITH INCREASING CHORD PROGRESSION
+;MUSIC_UNKNOWN                                  equ $52;DUNGEON
+;MUSIC_UNKNOWN                                  equ $53;DREAM SHRINE?
+;MUSIC_UNKNOWN                                  equ $54;INTENSE ARPEGGIO, SWITCHES TO $19
+;MUSIC_UNKNOWN                                  equ $55;HAUNTING ARPEGGIO LOOP. GRAVEYARD...?
+;MUSIC_UNKNOWN                                  equ $56;PUNCH NOISES IN UPWARDS CHORD PROGRESSION, PLAYS $55 AFTERWARDS
+;MUSIC_UNKNOWN                                  equ $57;HAPPY SONG. CROCODILE PAINTERS HOUSE?
 MUSIC_FACE_SHRINE                               equ $58
 ;MUSIC_SILENCE                                  equ $59;magical jingles, loops.
 MUSIC_TURTLE_ROCK                               equ $5A

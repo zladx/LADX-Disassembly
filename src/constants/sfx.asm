@@ -27,7 +27,7 @@ MUSIC_FILE_SELECT                               equ $11
 MUSIC_EGG_INSIDE                                equ $12; Plays inside the Wind Fish's Egg
 ;MUSIC_FINAL_NIGHTMARE_IN_EGG                   equ $13;unrecognized. Sounds dungeonlike
 ;MUSIC_DREAM_SHRINE_ENTRANCE                    equ $14;probably a dungeon theme
-;MUSIC_FOUND_INSTRUMENT                         equ $15;dungeon theme.
+MUSIC_BOTTLE_GROTTO                             equ $15
 ;MUSIC_OVERWORLD_CAVE                           equ $16;don't know. Probably a dungeon
 ;MUSIC_COMMON_CAVE_FAST                         equ $17;Faster/higher version of common cave theme as heard at $26
 ;MUSIC_RECEIVED_HORN_INSTRUMENT                 equ $18;unknown item receive jingle
@@ -63,10 +63,10 @@ MUSIC_MAMU_SONG                                 equ $35;	Mamu's/Wart's song.
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
 ;MUSIC_MR_WRITE_HOUSE_VERSION_2                 equ $37;	Mr Write House variant. Where is this used?
 MUSIC_TOTAKAS_SONG                              equ $38;	Totaka's Song as played in Richard's mansion; does not init instrument bank.
-;MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                equ $39;Rumbling noise, cutscene, then a boss theme.
+MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_GAME                              equ $3A;;; Mashup of Witch Hut and Trendy Game 
 ;MUSIC_RECEIVED_ITEM                            equ $3B; Short item jingle
-MUSIC_TOTAKEKE_EASTER_EGG                       equ $3C;	とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
+MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C;	とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
 ;MUSIC_BOTWF                                    equ $3D; Silence, then marin's theme. Probably from a cutscene.
 ;MUSIC_BOWWOW_STOLEN                            equ $3E;Chromatic introduction, then tense loop.
 ;MUSIC_ENDING                                   equ $3F; Not the theme that plays during the opening the egg cutscene.
@@ -93,7 +93,7 @@ MUSIC_MINI_BOSS                                 equ $50
 MUSIC_FINAL_BOSS_DIALOG                         equ $5D;	Plays during the final boss' dialog.
 ;MUSIC_BEES                                     equ $5E; MORE BEE SOUNDS. Might be used in Tarin cutscene
 ;MUSIC_SILENCE                                  equ $5F;Magic. loops.
-MUSIC_ZELDA_EASTER_EGG                          equ $60;	ZELDA nickname easter egg.
+MUSIC_ZELDA_NICKNAME_EASTER_EGG                 equ $60;	ZELDA nickname easter egg.
 MUSIC_COLOR_DUNGEON                             equ $61;
 ;MUSIC_COLOR_DUNGEON                            equ $62-6F;	Same as $61	
 ;MUSIC_GLITCHED                                 equ $70-FE; Glitched version of the music that played before it.

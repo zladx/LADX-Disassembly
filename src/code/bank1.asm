@@ -2729,12 +2729,12 @@ jr_001_6849::
 
 jr_001_6855::
     ret
-PeachPictureState2Handler::
-    ld   e, $21
-    ldh  a, [hMapId]
-    cp   MAP_EAGLES_TOWER
-    jr   z, jr_001_6868
-    ldh  a, [hMapRoom]
+PeachPictureState2Handler::     ; This is for full-screen images ...
+    ld   e, $21                 ; First, check if it's Eagle's Tower
+    ldh  a, [hMapId]            ; If so, load the tower graphics for when the pillars are knocked out
+    cp   MAP_EAGLES_TOWER       ; Otherwise, check if it's room $DD (Schule's house)
+    jr   z, jr_001_6868         ; If it is, load the ... whatever it is painting
+    ldh  a, [hMapRoom]          ; Otherwise, load the Christine picture
     cp   $DD
     ld   e, $12
     jr   nz, jr_001_6868
@@ -2746,7 +2746,7 @@ jr_001_6868::
     xor  a
     ld   [$C13F], a
     jp   IncrementGameplaySubtypeAndReturn
-PeachPictureState3Handler::
+PeachPictureState3Handler::     ; Determines the tilemap to load (?)
     ld   e, $24
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER

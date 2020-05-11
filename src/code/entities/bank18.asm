@@ -2089,7 +2089,7 @@ MadBatterState7Handler::
     ld   hl, wMagicPowderCount                    ; $5032: $21 $4C $DB
     ld   [hl], d                                  ; $5035: $72
     ld   d, $0C                                   ; $5036: $16 $0C
-    call label_3E6B                               ; $5038: $CD $6B $3E
+    call GiveInventoryItem_trampoline                               ; $5038: $CD $6B $3E
     xor  a                                        ; $503B: $AF
     ld   [wHasToadstool], a                       ; $503C: $EA $4B $DB
     ld   a, $0B                                   ; $503F: $3E $0B

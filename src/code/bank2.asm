@@ -46,9 +46,9 @@ UseOcarina::
     ld   [$C5A4], a                               ; $4208: $EA $A4 $C5
     ld   [$C5A5], a                               ; $420B: $EA $A5 $C5
     call CopyLinkFinalPositionToPosition          ; $420E: $CD $BE $0C
-    ld   a, [wOcarinaSongFlags]                   ; $4211: $FA $49 $DB
-    and  $07                                      ; $4214: $E6 $07
-    jr   z, jr_002_4241                           ; $4216: $28 $29
+    ld   a, [wOcarinaSongFlags]                   ; Do we have any songs available?
+    and  $07                                      ;
+    jr   z, jr_002_4241                           ; If no, play the tone-deaf notes
 
     ld   a, [$DB4A]                               ; $4218: $FA $4A $DB
     cp   $01                                      ; $421B: $FE $01
@@ -80,7 +80,7 @@ jr_002_4237:
 jr_002_4241:
     ld   a, $D0                                   ; $4241: $3E $D0
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4243: $EA $66 $C1
-    ld   a, WAVE_SFX_OCARINA_UNUSED               ; $4246: $3E $15
+    ld   a, WAVE_SFX_OCARINA_NOSONG               ; $4246: $3E $15
     ldh  [hWaveSfx], a                            ; $4248: $E0 $F3
     ret                                           ; $424A: $C9
 
@@ -2422,10 +2422,10 @@ jr_002_5176:
     cp   MAP_CAVE_B                                      ; $5178: $FE $0A
     jr   nz, jr_002_51AC                          ; $517A: $20 $30
 
-    ldh  a, [hMapRoom]                            ; $517C: $F0 $F6
-    cp   $7A                                      ; $517E: $FE $7A
-    jr   z, jr_002_518E                           ; $5180: $28 $0C
-
+    ldh  a, [hMapRoom]                          ; Underworld 2:
+    cp   $7A                                    ; 7A, 7B, 7C, and 7D are the caves
+    jr   z, jr_002_518E                         ; in the mountains where falling in a pit
+                                                ; will spit you out of a waterfall
     cp   $7B                                      ; $5182: $FE $7B
     jr   z, jr_002_518E                           ; $5184: $28 $08
 
@@ -2922,11 +2922,54 @@ jr_002_546F:
     pop  bc                                       ; $546F: $C1
     ret                                           ; $5470: $C9
 
-Data_002_5471::
-    db   $30, $33, $81, $01, $28, $56, $68, $87, $B3, $E6, $0A
+;
+; POI: https://tcrf.net/The_Legend_of_Zelda:_Link%27s_Awakening#Pre-set_Warps
+; A list of room ID and submaps for use with the dummied-out B + SELECT warp code.
+; Many of these make no sense - it's likely this was forgotten about early on,
+; and suggests the maps were shuffled around at one point
+;
+; List of warps:
+; Bottle Grotto   $30  - The darkened room 1N1W from the entrance. Spawns you between two traps.
+; Bottle Grotto   $33  - The first room with crystal switches, 1N1E of the entrance.
+; Catfish's Maw   $81  - On top of a Stalfos in the room you need to make a square with blocks in.
+; Tail Cave       $01  - The bottom room of the left edge of the map (with the staircase)
+; Bottle Grotto   $28  - Hinox miniboss room.
+; Key Cavern      $56  - The + shape room with 4 locked doors.
+; Angler's Tunnel $68  - Nondescript room
+; Catfish's Maw   $87  - Nondescript room
+; Face Shrine     $B3  - You spawn in a row of solid statues and can only move south
+; Eagle's Tower   $E6  - The interesting parts: Eagle's Tower takes up rooms $01~$2E,
+;                        on the second underworld (201-22E)! Possibly done before
+;                        Eagle's Tower was moved to the second underworld area?
+;                        Failing to find you the game dumps you in some side-view area
+; Turtle Rock     $0A  - Turtle Rock occupies $30-$6B. Failing to find this room on
+;                        the submap, the game dumps you off the map, in room $00
+;
+DebugWarpRooms::
+    db   $30    ; MAP_BOTTLE_GROTTO
+    db   $33    ; MAP_BOTTLE_GROTTO
+    db   $81    ; MAP_CATFISHS_MAW
+    db   $01    ; MAP_TAIL_CAVE
+    db   $28    ; MAP_BOTTLE_GROTTO
+    db   $56    ; MAP_KEY_CAVERN
+    db   $68    ; MAP_ANGLERS_TUNNEL
+    db   $87    ; MAP_CATFISHS_MAW
+    db   $B3    ; MAP_FACE_SHRINE
+    db   $E6    ; MAP_EAGLES_TOWER
+    db   $0A    ; MAP_TURTLE_ROCK
 
-Data_002_547C::
-    db   $01, $01, $04, $00, $01, $02, $03, $04, $05, $06, $07
+DebugWarpMaps::
+    db   MAP_BOTTLE_GROTTO
+    db   MAP_BOTTLE_GROTTO
+    db   MAP_CATFISHS_MAW
+    db   MAP_TAIL_CAVE
+    db   MAP_BOTTLE_GROTTO
+    db   MAP_KEY_CAVERN
+    db   MAP_ANGLERS_TUNNEL
+    db   MAP_CATFISHS_MAW
+    db   MAP_FACE_SHRINE
+    db   MAP_EAGLES_TOWER
+    db   MAP_TURTLE_ROCK
 
 label_002_5487:
     xor  a                                        ; $5487: $AF
@@ -2949,18 +2992,19 @@ jr_002_5498:
 
 jr_002_54A2:
     ldh  a, [hPressedButtonsMask]                 ; $54A2: $F0 $CB
-    and  $20                                      ; $54A4: $E6 $20
+    and  J_B                                      ; $54A4: $E6 $20
 
 jr_002_54A6:
     jr   z, renderTranscientVFXs                  ; $54A6: $28 $3C
 
     ldh  a, [hJoypadState]                        ; $54A8: $F0 $CC
-    and  $40                                      ; $54AA: $E6 $40
-    jr   renderTranscientVFXs                     ; $54AC: $18 $36
+    and  J_SELECT                               ; POI: Debug tool to warp around to various places
+    jr   renderTranscientVFXs                   ; when holding B and pushing SELECT
+    ;jr   z, renderTranscientVFXs               ; Should be this
 
     ld   a, $01                                   ; $54AE: $3E $01
-    ld   [wWarp0MapCategory], a                               ; $54B0: $EA $01 $D4
-    ld   a, [$D479]                               ; $54B3: $FA $79 $D4
+    ld   [wWarp0MapCategory], a                   ; $54B0: $EA $01 $D4
+    ld   a, [wDebugWarpIndex]                     ; $54B3: $FA $79 $D4
     ld   e, a                                     ; $54B6: $5F
     inc  a                                        ; $54B7: $3C
     cp   $0B                                      ; $54B8: $FE $0B
@@ -2969,13 +3013,13 @@ jr_002_54A6:
     xor  a                                        ; $54BC: $AF
 
 jr_002_54BD:
-    ld   [$D479], a                               ; $54BD: $EA $79 $D4
+    ld   [wDebugWarpIndex], a                     ; $54BD: $EA $79 $D4
     ld   d, $00                                   ; $54C0: $16 $00
-    ld   hl, Data_002_5471                        ; $54C2: $21 $71 $54
+    ld   hl, DebugWarpRooms                       ; $54C2: $21 $71 $54
     add  hl, de                                   ; $54C5: $19
     ld   a, [hl]                                  ; $54C6: $7E
     ld   [wWarp0Room], a                          ; $54C7: $EA $03 $D4
-    ld   hl, Data_002_547C                        ; $54CA: $21 $7C $54
+    ld   hl, DebugWarpMaps                        ; $54CA: $21 $7C $54
     add  hl, de                                   ; $54CD: $19
     ld   a, [hl]                                  ; $54CE: $7E
     ld   [wWarp0Map], a                           ; $54CF: $EA $02 $D4
@@ -4339,16 +4383,16 @@ func_002_60E0::
     and  a                                        ; $6105: $A7
     ret  nz                                       ; $6106: $C0
 
-    ld   a, [wInventoryAppearing]                 ; $6107: $FA $4F $C1
+    ld   a, [wInventoryAppearing]                 ; Handles subscreen transition state?
     and  a                                        ; $610A: $A7
     jp   nz, label_002_61A9                       ; $610B: $C2 $A9 $61
 
-    ldh  a, [hPressedButtonsMask]                 ; $610E: $F0 $CB
-    and  $40                                      ; $6110: $E6 $40
+    ldh  a, [hPressedButtonsMask]                 ; Checks if map should be opened?
+    and  J_SELECT                                 ; $6110: $E6 $40
     jp   nz, label_002_61E7                       ; $6112: $C2 $E7 $61
 
-    ldh  a, [hJoypadState]                        ; $6115: $F0 $CC
-    and  $80                                      ; $6117: $E6 $80
+    ldh  a, [hJoypadState]                        ; Checks if subscreen should be opened?
+    and  J_START                                  ; $6117: $E6 $80
     jp   z, label_002_61E7                        ; $6119: $CA $E7 $61
 
     ld   a, [wWindowY]                            ; $611C: $FA $9A $DB
@@ -4388,7 +4432,7 @@ jr_002_613D:
     cpl                                           ; $615A: $2F
     inc  a                                        ; $615B: $3C
     ld   [$C150], a                               ; $615C: $EA $50 $C1
-    and  $80                                      ; $615F: $E6 $80
+    and  $80                                      ; POI: Zeroing this restores the scroll up/down subscreen????
     jr   z, jr_002_619F                           ; $6161: $28 $3C
 
     xor  a                                        ; $6163: $AF
@@ -4408,7 +4452,7 @@ jr_002_613D:
     ld   a, [wIsIndoor]                           ; $6183: $FA $A5 $DB
     and  a                                        ; $6186: $A7
     ld   a, $07                                   ; $6187: $3E $07
-    jr   z, jr_002_619C                           ; $6189: $28 $11
+    jr   z, jr_002_619C                           ; Partially determines if subscreen dungeon map should be drawn
 
     ldh  a, [hMapId]                              ; $618B: $F0 $F7
     cp   MAP_COLOR_DUNGEON                                      ; $618D: $FE $FF
@@ -4786,7 +4830,7 @@ jr_002_63A3:
     ld   d, $00                                   ; $63C3: $16 $00
     add  $04                                      ; $63C5: $C6 $04
     ld   [wRequests], a                           ; $63C7: $EA $00 $D6
-    ld   hl, wRequestDestinationHigh              ; $63CA: $21 $01 $D6
+    ld   hl, wRequestDestinationHigh              ; POI: Updates (old) medicine counter on the subscreen
     add  hl, de                                   ; $63CD: $19
     ld   a, $9C                                   ; $63CE: $3E $9C
     ld   [hl+], a                                 ; $63D0: $22
@@ -6200,7 +6244,7 @@ func_002_6F2C::
     jp   nz, label_002_703B                       ; $6FAD: $C2 $3B $70
 
     ldh  a, [hMapRoom]                            ; $6FB0: $F0 $F6
-    cp   $0E                                      ; $6FB2: $FE $0E
+    cp   $0E                                      ; L7 Eagle's Tower overworld entrance
     jr   nz, jr_002_6FBD                          ; $6FB4: $20 $07
 
     ld   a, [wHasBirdKey]                         ; $6FB6: $FA $14 $DB
@@ -6219,7 +6263,7 @@ jr_002_6FC6:
     jr   z, jr_002_703E                           ; $6FC7: $28 $75
 
     ldh  a, [hMapRoom]                            ; $6FC9: $F0 $F6
-    cp   $8C                                      ; $6FCB: $FE $8C
+    cp   $8C                                      ; L6 Face Shrine overworld entrance
     jr   nz, jr_002_6FD4                          ; $6FCD: $20 $05
 
     call label_27F2                               ; $6FCF: $CD $F2 $27

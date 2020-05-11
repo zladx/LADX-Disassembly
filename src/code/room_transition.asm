@@ -247,6 +247,7 @@ WindFishEggMazeSequence::
     db DIRECTION_UP
     db DIRECTION_LEFT
     db DIRECTION_UP
+
     db DIRECTION_RIGHT
     db DIRECTION_UP
     db DIRECTION_UP
@@ -255,6 +256,7 @@ WindFishEggMazeSequence::
     db DIRECTION_UP
     db DIRECTION_RIGHT
     db DIRECTION_UP
+
     db DIRECTION_LEFT
     db DIRECTION_UP
     db DIRECTION_RIGHT
@@ -263,6 +265,7 @@ WindFishEggMazeSequence::
     db DIRECTION_UP
     db DIRECTION_RIGHT
     db DIRECTION_UP
+
     db DIRECTION_RIGHT
     db DIRECTION_RIGHT
     db DIRECTION_RIGHT
@@ -800,9 +803,9 @@ label_002_7C50:
     cp   $0E                                      ; $7C6D: $FE $0E
     jr   nz, jr_002_7C88                          ; $7C6F: $20 $17
 
-    ldh  a, [hMapRoom]                            ; $7C71: $F0 $F6
-    cp   $3E                                      ; $7C73: $FE $3E
-    jr   z, jr_002_7C8B                           ; $7C75: $28 $14
+    ldh  a, [hMapRoom]                            ; @TODO Likely involves the river rapids area
+    cp   $3E                                      ; possibly for determining the leftward push
+    jr   z, jr_002_7C8B                           ; at the top, before entering the rapids themselves
 
     inc  e                                        ; $7C77: $1C
     cp   $3D                                      ; $7C78: $FE $3D

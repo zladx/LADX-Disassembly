@@ -92,7 +92,7 @@ LoadMinimap::
     and  $0F                                      ; $6778: $E6 $0F
     ld   c, a                                     ; $677A: $4F
     ld   b, $00                                   ; $677B: $06 $00
-    ld   hl, Data_002_66F9                        ; $677D: $21 $F9 $66
+    ld   hl, Data_002_66F9                        ; Tiles to use for revealed minimap spaces
     add  hl, bc                                   ; $6780: $09
     ld   a, [hl]                                  ; $6781: $7E
     inc  a                                        ; $6782: $3C

@@ -14,91 +14,91 @@ MUSIC_GAME_OVER                                 equ $03;
 MUSIC_MABE_VILLAGE                              equ $04;
 MUSIC_OVERWORLD                                 equ $05;
 MUSIC_TAL_TAL_HEIGHTS                           equ $06;
-MUSIC_VILLAGE_SHOP                              equ $07;	Witch hut.
+MUSIC_VILLAGE_SHOP                              equ $07;	Witch hut. The shopkeeper also has magic, it's more of a magic theme in general.
 MUSIC_RAFT_RIDE_RAPIDS                          equ $08;don't remember where it is used; probably indeed raft minigame.
 MUSIC_MYSTERIOUS_FOREST                         equ $09;
-MUSIC_HOME_TRADER_HOUSE                         equ $0A;	Inside the houses.
+MUSIC_HOUSE                                     equ $0A;	Inside most regular houses.
 MUSIC_ANIMAL_VILLAGE                            equ $0B;
-MUSIC_FAIRY_HOUSE                               equ $0C;	Inside a Fairy Fountain
-MUSIC_TITLE                                     equ $0D;classic zelda theme, used when acorn/triangle is collected?
-MUSIC_BOWWOW_KIDNAPPED                          equ $0E;don't remember where it is used. intense theme, probably correct
-MUSIC_FOUND_LEVEL_2_SWORD                       equ $0F; Sword found. Not sure if specifically for the LVL2 sword.
+MUSIC_FAIRY_FOUNTAIN                            equ $0C;
+;MUSIC_TITLE                                    equ $0D;classic zelda theme, used when acorn/triangle is collected?
+;MUSIC_BOWWOW_KIDNAPPED                         equ $0E;don't remember where it is used. intense theme, probably correct
+MUSIC_FOUND_LEVEL_1_SWORD                       equ $0F; Sword found. Not sure if specifically for the LVL2 sword.
 MUSIC_FOUND_NEW_WEAPON                          equ $10;item received jingle. when finished, reloads the current maps music
-MUSIC_2D_UNDERGROUND_DUNGEON                    equ $11;	File Select Screen.
-MUSIC_OWL                                       equ $12;don't know. Definitely not owl, probs a dungeon/cave.
-MUSIC_FINAL_NIGHTMARE_IN_EGG                    equ $13;unrecognized. Sounds dungeonlike
-MUSIC_DREAM_SHRINE_ENTRANCE                     equ $14;probably a dungeon theme
-MUSIC_FOUND_INSTRUMENT                          equ $15;dungeon theme.
-MUSIC_OVERWORLD_CAVE                            equ $16;don't know. Probably a dungeon
-MUSIC_PIECE_OF_POWER                            equ $17;Faster/higher version of common cave theme as heard at $26
-MUSIC_RECEIVED_HORN_INSTRUMENT                  equ $18;unknown item receive jingle
-MUSIC_RECEIVED_BELL_INSTRUMENT                  equ $19;boss battle theme, sounds different from what I'm used to(?)
-MUSIC_RECEIVED_HARP_INSTRUMENT                  equ $1A;	Intro cutscene.
-MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT             equ $1B;item receive thing
+MUSIC_FILE_SELECT                               equ $11;	File Select Screen.
+;MUSIC_NOT_OWL                                  equ $12;don't know. Definitely not owl, probs a dungeon/cave.
+;MUSIC_FINAL_NIGHTMARE_IN_EGG                   equ $13;unrecognized. Sounds dungeonlike
+;MUSIC_DREAM_SHRINE_ENTRANCE                    equ $14;probably a dungeon theme
+;MUSIC_FOUND_INSTRUMENT                         equ $15;dungeon theme.
+;MUSIC_OVERWORLD_CAVE                           equ $16;don't know. Probably a dungeon
+;MUSIC_COMMON_CAVE_FAST                         equ $17;Faster/higher version of common cave theme as heard at $26
+;MUSIC_RECEIVED_HORN_INSTRUMENT                 equ $18;unknown item receive jingle
+;MUSIC_RECEIVED_BELL_INSTRUMENT                 equ $19;boss battle theme, sounds different from what I'm used to(?)
+MUSIC_INTRO_CUTSCENE                            equ $1A;	Intro cutscene.
+;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B;item receive thing
 ;MUSIC_RECEIVED_UNKNOWN_INSTRUMENT              equ $1C;alternative house theme? not sure
-;MUSIC_RECEIVED_UNKNOWN_INSTRUMENT              equ $1D;	First time on Koholint Island.
-MUSIC_RECEIVED_THUNDER_DRUM_INSTRUMENT          equ $1E;bed sleeping dream world entering cutscene?
-MUSIC_MARIN_SINGING                             equ $1F;sounds like a dungeon, but has marin's song. Probably cutscene related
-MUSIC_MANBO_SONG                                equ $20; Marin melodic motif on violin-like instrument.
-;MUSIC_RECEIVED ?? INSTRUMENT                   equ $21;	2D sidescrolling cave. (where the Goombas are)
-;MUSIC_INSTRUMENTS_SONG ??                      equ $22;	Owl theme.
-;MUSIC_INSTRUMENTS_SONG ??                      equ $23;	Final Boss theme. (shadow face with 2 arms)
-MUSIC_DREAM_SHRINE_BED                          equ $24;	Dream Shrine.
-MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;Item jingle
-MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_2          equ $26;Common cave passageway theme. $17 is a variation on this theme.
-;MUSIC_INSTRUMENTS_SONG ??                      equ $27;	Super acorn and/or power piece jingle+theme. Like Starman in Mario.
-MUSIC_LONELY_HOUSE                              equ $28; Marin melodic motif on horn-like instrument.
-MUSIC_PIECE_OF_POWER_PART_2                     equ $29;Sounds like annoying mobile ringtone. (Item?) jingle.
-MUSIC_MARIN_SINGING_LINKS_OCARINA               equ $2A;unknown. Incorrectly labeled.
-MUSIC_LEVEL_5                                   equ $2B;unknown jingle. 
-MUSIC_DUNGEON_ENTRANCE_UNLOCKING                equ $2C; Theme played on a triangle. Only uses one note in a rhythm.
-MUSIC_DREAM_SEQUENCE_SOUND                      equ $2D; Marin melodic motif on a flute-like instrument.
-MUSIC_AT_BEACH_WITH_MARIN                       equ $2E;Funky bongo
-MUSIC_UNKNOWN                                   equ $2F;	Marin's singing the Ballad of the Wind Fish. Beautiful theme.
-MUSIC_DUNGEON_SUB_BOSS                          equ $30;	Manbo's Mambo
-MUSIC_RECEIVED_LEVEL_1_SWORD                    equ $31; Overworld theme, with introduction section.
+MUSIC_KOHOLINT_ISLAND                           equ $1D;	First time on Koholint Island.
+;MUSIC_ENTERING_DREAM_WORLD                     equ $1E;bed sleeping dream world entering cutscene?
+;MUSIC_MARIN_DUNGEON                            equ $1F;sounds like a dungeon, but has marin's song. Probably cutscene related
+;MUSIC_MANBO_SONG                               equ $20; Marin melodic motif on violin-like instrument.
+MUSIC_2D_UNDERGROUND                            equ $21;	2D sidescrolling cave. (where the Goombas are)
+MUSIC_OWL                                       equ $22;	Owl theme.
+;MUSIC_FINAL_BOSS                               equ $23;	Final Boss theme.
+MUSIC_DREAM_SHRINE                              equ $24;	Dream Shrine.
+MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;;;Item jingle
+MUSIC_COMMON_CAVE                               equ $26;$17 is a variation on this theme.
+MUSIC_POWERUP_ACQUIRED                          equ $27;	Powerup/acorn jingle. Then loops $49.
+;MUSIC_LONELY_HOUSE                             equ $28; Marin melodic motif on horn-like instrument.
+;MUSIC_PIECE_OF_POWER_PART_2                    equ $29;Sounds like annoying mobile ringtone. (Item?) jingle.
+;MUSIC_MARIN_SINGING_LINKS_OCARINA              equ $2A;unknown. Incorrectly labeled.
+;MUSIC_LEVEL_5                                  equ $2B;unknown jingle. 
+;MUSIC_DUNGEON_ENTRANCE_UNLOCKING               equ $2C; Theme played on a triangle. Only uses one note in a rhythm.
+;MUSIC_DREAM_SEQUENCE_SOUND                     equ $2D; Marin melodic motif on a flute-like instrument.
+;MUSIC_AT_BEACH_WITH_MARIN                      equ $2E;Funky bongo
+MUSIC_MARIN_SINGING                             equ $2F;	Marin's singing the Ballad of the Wind Fish. Beautiful theme.
+MUSIC_MANBOS_MAMBO                              equ $30;	Manbo's Mambo
+MUSIC_OVERWORLD_INTRODUCTION                    equ $31;    The overworld theme's introduction section.
 MUSIC_MR_WRITE_HOUSE                            equ $32;
-MUSIC_ULRIRA_HOUSE                              equ $33;	Phone Booth.
+MUSIC_PHONE_BOOTH                               equ $33;	Also Ulrira's house.
 MUSIC_TARIN_ATTACKED_BY_BEES                    equ $34; 
 MUSIC_MAMU_SONG                                 equ $35;	Mamu's/Wart's song.
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36;
-MUSIC_MR_WRITE_HOUSE_VERSION_2                  equ $37;	
-MUSIC_RICHARD_HOUSE_SECRET_SONG                 equ $38;	Totaka's Song, different instrument from the one in Richards house.
-MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39;Rumbling noise, cutscene, then a boss theme.
-MUSIC_FISHING_GAME                              equ $3A;	Mashup of Witch Hut and Trendy Game 
-MUSIC_RECEIVED_ITEM                             equ $3B; Short item jingle
-MUSIC_HIDDEN_UNUSED_SONG                        equ $3C;	Introduction like ZELDA easter egg, then Totaka's Song. 
-MUSIC_NOTHING                                   equ $3D; Silence, then marin's theme. Probably from a cutscene.
-MUSIC_BOWWOW_STOLEN                             equ $3E;Chromatic introduction, then tense loop.
-MUSIC_ENDING                                    equ $3F; Marin's motif on instruments. Epic mashup.
-MUSIC_RICHARD_S_HOUSE                           equ $40; Needs renaming for consistency e.g. RICHARDS_HOUSE or RICHARD_HOUSE
-;MUSIC_GLITCHED_NOISE                           equ $41; Marin's motif on horn and flute-like instruments.
-;MUSIC_GLITCHED_NOISE                           equ $42
-;MUSIC_GLITCHED_NOISE                           equ $43
-;MUSIC_GLITCHY                                  equ $44
-;MUSIC_GLITCHY                                  equ $45
-;MUSIC_GLITCHY                                  equ $46
-;MUSIC_SILENCE                                  equ $47
-;MUSIC_SILENCE                                  equ $48
-MUSIC_ACTIVE_POWER_UP                           equ $49
-;MUSIC_SILENCE                                  equ $4A
-;MUSIC_GLITCHY                                  equ $4B
-;MUSIC_GLITCHY                                  equ $4C
-;MUSIC_SILENCE                                  equ $4D
-;MUSIC_SILENCE                                  equ $50
-;MUSIC_GLITCHY                                  equ $58
-;MUSIC_SILENCE                                  equ $59
-;MUSIC_GLITCHY                                  equ $5A
-;MUSIC_SILENCE                                  equ $5B
-;MUSIC_SILENCE                                  equ $5C
-;MUSIC_GLITCHY                                  equ $5D
-;MUSIC_SILENCE                                  equ $5E
-;MUSIC_SILENCE                                  equ $5F
-;MUSIC_SILENCE                                  equ $60
-MUSIC_COLOR_DUNGEON                             equ $61
-;MUSIC_UNTESTED                                 equ $6A
-;MUSIC_GLITCHED                                 equ $F0
-;MUSIC_NOTHING                                  equ $FF
+;MUSIC_MR_WRITE_HOUSE_VERSION_2                  equ $37;	
+MUSIC_TOTAKAS_SONG                              equ $38;	Totaka's Song; does not init instrument bank.
+;MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39;Rumbling noise, cutscene, then a boss theme.
+MUSIC_FISHING_GAME                              equ $3A;;; Mashup of Witch Hut and Trendy Game 
+;MUSIC_RECEIVED_ITEM                             equ $3B; Short item jingle
+MUSIC_TOTAKEKE_EASTER_EGG                       equ $3C;	とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
+;MUSIC_NOTHING                                  equ $3D; Silence, then marin's theme. Probably from a cutscene.
+;MUSIC_BOWWOW_STOLEN                            equ $3E;Chromatic introduction, then tense loop.
+;MUSIC_ENDING                                   equ $3F; Marin's motif on instruments. Epic mashup.
+MUSIC_RICHARDS_HOUSE                            equ $40
+;MUSIC_GLITCHED_NOISE                           equ $41; Awakening of egg, on horn and flute-like instruments.
+;MUSIC_GLITCHED_NOISE                           equ $42; Awakening, has added marimba motif. More voices than $41
+;MUSIC_GLITCHED_NOISE                           equ $43; Awakening, piano, more voices than $42
+;MUSIC_GLITCHY                                  equ $44; Awakening, has high pitched ting. more voices than $43
+;MUSIC_GLITCHY                                  equ $45; Awakening, has triangle rhythm. More voices than $44
+;MUSIC_GLITCHY                                  equ $46; Awakening, has added horn. More voices than $45
+;MUSIC_SILENCE                                  equ $47; Awakening, drums, high ting. Awakening tracks are not well described.
+MUSIC_GHOSTS_HOUSE                              equ $48;	Ghost's abandoned house. GHOSTS_HOUSE rather than GHOST_HOUSE to avoid confusion
+MUSIC_ACTIVE_POWER_UP                           equ $49;
+;MUSIC_SILENCE                                  equ $4A; More awakening...
+;MUSIC_DUNGEON                                  equ $4B;dungeon-like
+;MUSIC_GLITCHY                                  equ $4C;Orchestral, short jingle.
+;MUSIC_SILENCE                                  equ $4D;harp jingle
+;MUSIC_MINI_BOSS                                equ $50; Mini-boss?
+;MUSIC_GLITCHY                                  equ $58; Unknown Dungeon. Sounds like Bach's prelude in C minor from WTC I.
+;MUSIC_SILENCE                                  equ $59;magical jingles, loops.
+;MUSIC_GLITCHY                                  equ $5A;dungeon?
+;MUSIC_SILENCE                                  equ $5B;dungeon?
+;MUSIC_SILENCE                                  equ $5C;intense 
+;MUSIC_GLITCHY                                  equ $5D;sounds unstable, like bees buzzing. Perhaps related to Tarin bee cutscene
+;MUSIC_BEES                                     equ $5E; MORE BEE SOUNDS. Might be used in Tarin cutscene
+;MUSIC_SILENCE                                  equ $5F;Magic. loops.
+MUSIC_ZELDA_EASTER_EGG                          equ $60;	ZELDA nickname easter egg.
+MUSIC_COLOR_DUNGEON                             equ $61;
+;MUSIC_UNTESTED                                 equ $6A;	Sounds same as $61
+;MUSIC_GLITCHED                                 equ $F0-FE; Actual music, but glitched. There's musical patterns in there.
+;MUSIC_NOTHING                                  equ $FF;	Silence.
 
 ; Values for hJingle
 JINGLE_TREASURE_FOUND   equ $01

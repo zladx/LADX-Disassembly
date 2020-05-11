@@ -746,7 +746,7 @@ EntityInitWitch::
     ret                                           ; $4B42: $C9
 
 EntityInitShopOwner::
-    ld   a, MUSIC_VILLAGE_SHOP                    ; $4B43: $3E $07
+    ld   a, MUSIC_WITCH_HUT                       ; $4B43: $3E $07
     call SetMusicTrackIfHasSword                  ; $4B45: $CD $95 $49
 
 .setDirectionLeft

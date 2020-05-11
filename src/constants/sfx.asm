@@ -48,7 +48,7 @@ MUSIC_COMMON_CAVE                               equ $26
 MUSIC_POWERUP_ACQUIRED                          equ $27
 MUSIC_CONCH_HORN                                equ $28
 MUSIC_SEA_LILY_BELL                             equ $29
-MUSIC_SURF HARP                                 equ $2A
+MUSIC_SURF_HARP                                 equ $2A
 ;MUSIC_LEVEL_5                                  equ $2B;unknown jingle. sounds like an OOT theme
 ;MUSIC_DUNGEON_ENTRANCE_UNLOCKING               equ $2C; Theme played on a triangle. Only uses one note in a rhythm.
 ;MUSIC_BOTWF                                    equ $2D; Marin melodic motif on a flute-like instrument.

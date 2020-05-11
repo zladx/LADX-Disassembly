@@ -19,16 +19,16 @@ MUSIC_MYSTERIOUS_FOREST                         equ $09
 MUSIC_HOUSE                                     equ $0A;	Inside most regular houses.
 MUSIC_ANIMAL_VILLAGE                            equ $0B
 MUSIC_FAIRY_FOUNTAIN                            equ $0C
-;MUSIC_TITLE                                    equ $0D;classic zelda theme, used when acorn/triangle is collected?
+;MUSIC_TITLE                                    equ $0D;classic zelda theme.
 ;MUSIC_BOWWOW_KIDNAPPED                         equ $0E;don't remember where it is used. intense theme, probably correct
-MUSIC_FOUND_LEVEL_1_SWORD                       equ $0F; Sword found. Not sure if specifically for the LVL2 sword.
+MUSIC_FOUND_LEVEL_1_SWORD                       equ $0F;	Possibly also playing for LVL2 sword.
 MUSIC_FOUND_NEW_WEAPON                          equ $10;item received jingle. when finished, reloads the current maps music
 MUSIC_FILE_SELECT                               equ $11
 MUSIC_EGG_INSIDE                                equ $12; Plays inside the Wind Fish's Egg
-;MUSIC_FINAL_NIGHTMARE_IN_EGG                   equ $13;unrecognized. Sounds dungeonlike
-;MUSIC_DREAM_SHRINE_ENTRANCE                    equ $14;probably a dungeon theme
+MUSIC_KANALET_CASTLE                            equ $13
+MUSIC_TAIL_CAVE                                 equ $14
 MUSIC_BOTTLE_GROTTO                             equ $15
-;MUSIC_OVERWORLD_CAVE                           equ $16;don't know. Probably a dungeon
+MUSIC_KEY_CAVERN                                equ $16
 ;MUSIC_COMMON_CAVE_FAST                         equ $17;Faster/higher version of common cave theme as heard at $26
 ;MUSIC_RECEIVED_HORN_INSTRUMENT                 equ $18;unknown item receive jingle
 MUSIC_BOSS_BATTLE                               equ $19
@@ -36,30 +36,30 @@ MUSIC_INTRO_CUTSCENE                            equ $1A
 ;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B;item receive thing
 ;MUSIC_RECEIVED_UNKNOWN_INSTRUMENT              equ $1C;alternative house theme? not sure
 MUSIC_SWORD_SEARCH                              equ $1D;	First time on Koholint Island.
-;MUSIC_ENTERING_DREAM_WORLD                     equ $1E;bed sleeping dream world entering cutscene?
-;MUSIC_MARIN_DUNGEON                            equ $1F;sounds like a dungeon, but has marin's song. Probably cutscene related
-;MUSIC_BOTWF                                    equ $20; Marin melodic motif on violin-like instrument.
+MUSIC_ENTERING_DREAM_WORLD                      equ $1E
+;MUSIC_MARIN_DUNGEON                            equ $1F;sounds like a dungeon, but has marin's song. Similar to 
+MUSIC_FULL_MOON_CELLO                           equ $20
 MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22
 ;MUSIC_FINAL_BOSS                               equ $23
-MUSIC_DREAM_SHRINE                              equ $24
+MUSIC_DREAM_SHRINE_BED                          equ $24
 MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;;;Item jingle
 MUSIC_COMMON_CAVE                               equ $26;$17 is a variation on this theme.
-MUSIC_POWERUP_ACQUIRED                          equ $27;	Powerup/acorn jingle. Then loops $49.
+MUSIC_POWERUP_ACQUIRED                          equ $27
 ;MUSIC_BOTWF                                    equ $28; Marin melodic motif on horn-like instrument.
-;MUSIC_PIECE_OF_POWER_PART_2                    equ $29;Sounds like annoying mobile ringtone. (Item?) jingle.
+;MUSIC_SEA_LILY_BELL                            equ $29;
 ;MUSIC_MARIN_SINGING_LINKS_OCARINA              equ $2A;unknown. Incorrectly labeled.
 ;MUSIC_LEVEL_5                                  equ $2B;unknown jingle. 
 ;MUSIC_DUNGEON_ENTRANCE_UNLOCKING               equ $2C; Theme played on a triangle. Only uses one note in a rhythm.
 ;MUSIC_BOTWF                                    equ $2D; Marin melodic motif on a flute-like instrument.
 ;MUSIC_AT_BEACH_WITH_MARIN                      equ $2E;Funky bongo
-MUSIC_MARIN_SINGING                             equ $2F;	Marin's singing the Ballad of the Wind Fish. Beautiful theme.
+MUSIC_MARIN_SINGING                             equ $2F
 MUSIC_MANBOS_MAMBO                              equ $30
 MUSIC_OVERWORLD_INTRODUCTION                    equ $31;    The overworld theme's introduction section.
 MUSIC_MR_WRITE_HOUSE                            equ $32
 MUSIC_PHONE_BOOTH                               equ $33;	Also Ulrira's house.
 MUSIC_TARIN_ATTACKED_BY_BEES                    equ $34
-MUSIC_MAMU_SONG                                 equ $35;	Mamu's/Wart's song.
+MUSIC_MAMUS_SONG                                 equ $35;	Mamu's/Wart's song.
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
 ;MUSIC_MR_WRITE_HOUSE_VERSION_2                 equ $37;	Mr Write House variant. Where is this used?
 MUSIC_TOTAKAS_SONG                              equ $38;	Totaka's Song as played in Richard's mansion; does not init instrument bank.

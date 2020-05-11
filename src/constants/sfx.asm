@@ -18,7 +18,7 @@ MUSIC_ANIMAL_VILLAGE                            equ $0B
 MUSIC_FAIRY_FOUNTAIN                            equ $0C
 MUSIC_TITLE_SCREEN                              equ $0D;	Plays when $01 has finished.
 MUSIC_BOWWOW_KIDNAPPED                          equ $0E;	Plays when $3E has finished.
-MUSIC_FOUND_LEVEL_1_SWORD                       equ $0F;	Possibly also for LVL2 sword
+MUSIC_FOUND_SWORD                               equ $0F;	Possibly also for LVL2 sword
 MUSIC_FOUND_NEW_WEAPON                          equ $10;item received jingle. when finished, reloads the current area's music
 MUSIC_FILE_SELECT                               equ $11
 MUSIC_INSIDE_THE_WIND_EGG                       equ $12
@@ -30,7 +30,7 @@ MUSIC_ANGLERS_TUNNEL                            equ $17
 MUSIC_INSTRUMENT_FOUND                          equ $18;	Plays after obtaining an instrument and their jingle has finished playing.
 MUSIC_BOSS_BATTLE                               equ $19
 MUSIC_INTRO_CUTSCENE                            equ $1A
-;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B;magic good item receive thing
+;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B;magic good item receive thingy
 MUSIC_LINK_AWAKENS                              equ $1C;	Played in the house when you begin your game.
 MUSIC_SWORD_SEARCH                              equ $1D;	First time on Koholint Island.
 MUSIC_ENTERING_DREAM_WORLD                      equ $1E
@@ -40,7 +40,7 @@ MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22
 MUSIC_FINAL_BOSS                                equ $23
 MUSIC_DREAM_SHRINE_BED                          equ $24
-MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25;;; Unknown instrument.  Plays $18 when finished.
+MUSIC_FOUND_INSTRUMENT                          equ $25;	I *assume* this is an 'Item get!' sound effect that plays before the instrument themes ($28-$2D) play 
 MUSIC_COMMON_CAVE                               equ $26
 MUSIC_POWERUP_ACQUIRED                          equ $27
 MUSIC_INSTRUMENT_CONCH_HORN                     equ $28

@@ -5,8 +5,7 @@
 ; their actual in-game use (???)
 
 ; Values for hMusicTrack
-; Values for wActiveMusicTrack (d368)??
-                                                       ;No comment = correct.
+ 
 MUSIC_NONE                                      equ $00
 MUSIC_TITLE_SCREEN                              equ $01;probably correct
 MUSIC_TRENDY_GAME                               equ $02

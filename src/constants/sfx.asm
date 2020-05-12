@@ -1,7 +1,7 @@
 ;
 ; Constants for audio effects
 
-; Values for hMusicTrack
+; Values for wActiveMusicTrack
  
 MUSIC_NONE                                      equ $00
 MUSIC_TITLE_SCREEN_INTRODUCTION                 equ $01;	The title screen's theme's introduction section.
@@ -27,10 +27,10 @@ MUSIC_TAIL_CAVE                                 equ $14
 MUSIC_BOTTLE_GROTTO                             equ $15
 MUSIC_KEY_CAVERN                                equ $16
 MUSIC_ANGLERS_TUNNEL                            equ $17
-MUSIC_INSTRUMENT_FOUND                          equ $18;	Plays after obtaining an instrument and their jingle has finished playing.
+MUSIC_BOSS_DEFEATED                             equ $18;	Plays in boss rooms after the boss has been defeated.
 MUSIC_BOSS_BATTLE                               equ $19
 MUSIC_INTRO_CUTSCENE                            equ $1A
-;MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT            equ $1B; magic good item receive thingy
+MUSIC_INSTRUMENT_ACQUIRED                       equ $1B
 MUSIC_LINK_AWAKENS                              equ $1C;	Played in the house when you begin your game.
 MUSIC_SWORD_SEARCH                              equ $1D;	First time on Koholint Island.
 MUSIC_DREAMING                                  equ $1E

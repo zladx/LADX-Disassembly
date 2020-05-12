@@ -3437,7 +3437,7 @@ jr_018_5A07:
 
     xor  a                                        ; $5A0B: $AF
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
-    ld   a, MUSIC_RECEIVED_LEVEL_1_SWORD          ; $5A0F: $3E $31
+    ld   a, MUSIC_OVERWORLD_INTRODUCTION                ; $5A0F: $3E $31
     ld   [wActiveMusicTrack], a                   ; $5A11: $EA $68 $D3
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
     ldh  [hMusicTrack], a                         ; $5A16: $E0 $B0
@@ -3478,7 +3478,7 @@ jr_018_5A3F:
     inc  [hl]                                     ; $5A4E: $34
     call GetEntityTransitionCountdown             ; $5A4F: $CD $05 $0C
     ld   [hl], $70                                ; $5A52: $36 $70
-    ld   a, MUSIC_FOUND_NEW_WEAPON                ; $5A54: $3E $10
+    ld   a, MUSIC_WEAPON_ACQUIRED                  ; $5A54: $3E $10
     ld   [wActiveMusicTrack], a                   ; $5A56: $EA $68 $D3
     ld   a, $FF                                   ; $5A59: $3E $FF
     ldh  [hNextWorldMusicTrack], a                ; $5A5B: $E0 $BF

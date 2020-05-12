@@ -3225,7 +3225,7 @@ jr_007_5572:
     call CheckLinkCollisionWithEnemy_trampoline   ; $557A: $CD $5A $3B
     jr   nc, jr_007_5599                          ; $557D: $30 $1A
 
-    ld   a, MUSIC_FOUND_NEW_WEAPON                ; $557F: $3E $10
+    ld   a, MUSIC_WEAPON_ACQUIRED                 ; $557F: $3E $10
     ld   [wActiveMusicTrack], a                   ; $5581: $EA $68 $D3
     ld   [wC167], a                               ; $5584: $EA $67 $C1
     ldh  a, [hNextWorldMusicTrack]                ; $5587: $F0 $BF

@@ -401,7 +401,7 @@ EntityInitTarin::
     jp   SetEntitySpriteVariant                   ; $4979: $C3 $0C $3B
 
 EntityInitTelephone::
-    ld   a, MUSIC_ULRIRA_HOUSE                    ; $497C: $3E $33
+    ld   a, MUSIC_PHONE_BOOTH                     ; $497C: $3E $33
     jr   SetMusicTrackIfHasSword                  ; $497E: $18 $15
 
 EntityInitRichard::
@@ -417,7 +417,7 @@ EntityInitRichard::
     ld   [hl], DIRECTION_DOWN                     ; $4991: $36 $03
 .jr_003_4993
 
-    ld   a, MUSIC_RICHARD_S_HOUSE                 ; $4993: $3E $40
+    ld   a, MUSIC_RICHARDS_HOUSE                 ; $4993: $3E $40
     ; fallthrough
 
 SetMusicTrackIfHasSword::
@@ -746,7 +746,7 @@ EntityInitWitch::
     ret                                           ; $4B42: $C9
 
 EntityInitShopOwner::
-    ld   a, MUSIC_VILLAGE_SHOP                    ; $4B43: $3E $07
+    ld   a, MUSIC_WITCH_HUT                       ; $4B43: $3E $07
     call SetMusicTrackIfHasSword                  ; $4B45: $CD $95 $49
 
 .setDirectionLeft

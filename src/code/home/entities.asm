@@ -1103,7 +1103,7 @@ jp_3EFB::
     ld   a, $50
 
 jp_3F11::
-    ld   [wActiveMusicTrack], a
+    ld   [wPlayMusicTrack], a
     ldh  [$FFBD], a
     ld   a, [wTransitionSequenceCounter]
     cp   $04

@@ -843,12 +843,12 @@ wActiveJingle:: ; D360
 ; D361-D367: squareform jingle parameters
 ds 7
 
-wActiveMusicTrack:: ; D368
+wPlayMusicTrack:: ; D368
   ; The music track currently playing
   ds 1
 
 wD369:: ; D369
-  ; Copied from wActiveMusicTrack
+  ; Copied from wPlayMusicTrack
   ds 1
 
 wD36A:: ; D36A

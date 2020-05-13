@@ -836,6 +836,7 @@ MarkTriggerAsResolved::
 
 ApplyMapFadeOutTransition::
     ld   a, $30
+	; Timer that counts down and ends when the track has completely faded out. *Might* be used for the visual effect when entering a house as well.
     ldh  [$FFA8], a
     jr   label_C9A
 
@@ -4060,14 +4061,14 @@ include "code/home/dialog.asm"
 ; Input:
 ;   a:   soundtrack id to load
 SetWorldMusicTrack::
-    ld   [wPlayMusicTrack], a
+    ld   [wMusicTrackToPlay], a
     ldh  [hNextWorldMusicTrack], a
-    ; $FFAB = a
+	; Sets the music fade in timer to 38
     ld   a, $38
     ldh  [$FFAB], a
-    ; $FFA8 = 0
+	; Prematurely sets the timer to zero, to skip a tiny part of the fade at the end and skip straight to playing the new area's music track.
     xor  a
-    ldh  [$FFA8], a
+    ldh  [hMusicFadeOutTimer], a
     ret
 
 EnableExternalRAMWriting::

@@ -73,7 +73,7 @@ IntroHandlerEntryPoint::
 
     call ResetIntroTimers
     ld   a, $0D
-    ld   [wPlayMusicTrack], a
+    ld   [wMusicTrackToPlay], a
     ld   [$D00F], a
     call func_001_7D4E
     jr   .enableVBlankInterruptAndReturn
@@ -1728,7 +1728,7 @@ InertLinkState2Handler::
     cp   $0B
     jr   nz, .return
     ld   a, $01
-    ld   [wPlayMusicTrack], a
+    ld   [wMusicTrackToPlay], a
 
 .return
     ret

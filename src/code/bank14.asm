@@ -207,7 +207,7 @@ PerformOverworldAudioTasks::
     ldh  a, [hNextWorldMusicTrack]                ; $4AE2: $F0 $BF
 
 jr_014_4AE4:
-    ld   [wPlayMusicTrack], a                   ; $4AE4: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $4AE4: $EA $68 $D3
 
 jr_014_4AE7:
 

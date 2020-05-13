@@ -12,7 +12,7 @@ PlayMusicTrack_1B::
     jp   PlayMusicTrack_1B_EntryPoint             ; $4006: $C3 $1E $40
 
 label_01B_4009:
-    ld   hl, wMusicTranspose                                ; $4009: $21 $00 $D3
+    ld   hl, wMusicTranspose                      ; $4009: $21 $00 $D3
 
 jr_01B_400C:
     ld   [hl], $00                                ; $400C: $36 $00
@@ -28,28 +28,28 @@ jr_01B_400C:
     ret                                           ; $401D: $C9
 
 PlayMusicTrack_1B_EntryPoint::
-    ld   hl, wPlayMusicTrack                    ; $401E: $21 $68 $D3
+    ld   hl, wMusicTrackToPlay                      ; $401E: $21 $68 $D3
     ld   a, [hl+]                                 ; $4021: $2A
     and  a                                        ; $4022: $A7
-    jr   nz, BeginMusicTrack_1B                          ; $4023: $20 $0C
+    jr   nz, BeginMusicTrack_1B                   ; $4023: $20 $0C
 
     call func_01B_4037                            ; $4025: $CD $37 $40
 
 jr_01B_4028:
-    call UpdateAllMusicChannels_1B                            ; $4028: $CD $0F $45
+    call UpdateAllMusicChannels_1B                ; $4028: $CD $0F $45
     ret                                           ; $402B: $C9
 
 DontPlayAudio_1B:
     xor  a                                        ; $402C: $AF
-    ld   [wMusicMode], a                               ; $402D: $EA $CE $D3
+    ld   [wMusicMode], a                          ; $402D: $EA $CE $D3
     ret                                           ; $4030: $C9
 
 ; Input:
-;  hl   Points to data after "wPlayMusicTrack"
+;  hl   Points to data after "wMusicTrackToPlay"
 BeginMusicTrack_1B::
-    ; [$D369] = [wPlayMusicTrack]
+    ; [$D369] = [wMusicTrackToPlay]
     ld   [hl], a                                  ; $4031: $77
-    call BeginMusicTrack_Dispatch_1B                            ; $4032: $CD $3B $41
+    call BeginMusicTrack_Dispatch_1B              ; $4032: $CD $3B $41
     jr   jr_01B_4028                              ; $4035: $18 $F1
 
 func_01B_4037::
@@ -105,7 +105,7 @@ jr_01B_406E:
     ret                                           ; $4076: $C9
 
 
-; Music ID numbers are based on values written to wPlayMusicTrack. They don't
+; Music ID numbers are based on values written to wMusicTrackToPlay. They don't
 ; match up with "constants/sfx.asm" for some reason.
 MusicDataPointerTable_1B::
     dw   Music01
@@ -1387,7 +1387,7 @@ ContinueCurrentScreenMusic:
     xor  a                                        ; $47E5: $AF
     ld   [wMusicMode], a                               ; $47E6: $EA $CE $D3
     ldh  a, [hNextWorldMusicTrack]                ; $47E9: $F0 $BF
-    ld   [wPlayMusicTrack], a                     ; $47EB: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                     ; $47EB: $EA $68 $D3
     jp   PlayMusicTrack_1B_EntryPoint             ; $47EE: $C3 $1E $40
 
 soundOpcode96:

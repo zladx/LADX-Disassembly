@@ -4465,7 +4465,7 @@ jr_01F_6131:
 
 jr_01F_6135:
     ld   a, $59                                   ; $6135: $3E $59
-    ld   [wPlayMusicTrack], a                   ; $6137: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $6137: $EA $68 $D3
     jp   label_01F_6327                           ; $613A: $C3 $27 $63
 
 Data_01F_613D::
@@ -9672,12 +9672,12 @@ func_01F_7B5C::
     nop                                           ; $7F7F: $00
 
 func_01F_7F80::
-    ldh  a, [hFFA8]                               ; $7F80: $F0 $A8
+    ldh  a, [hMusicFadeOutTimer]                               ; $7F80: $F0 $A8
     and  a                                        ; $7F82: $A7
     jr   z, jr_01F_7F9E                           ; $7F83: $28 $19
 
     sub  $01                                      ; $7F85: $D6 $01
-    ldh  [hFFA8], a                               ; $7F87: $E0 $A8
+    ldh  [hMusicFadeOutTimer], a                               ; $7F87: $E0 $A8
     and  $03                                      ; $7F89: $E6 $03
     jr   nz, jr_01F_7F9E                          ; $7F8B: $20 $11
 
@@ -9697,12 +9697,12 @@ jr_01F_7F95:
     ldh  [hWindowXUnused], a                      ; $7F9C: $E0 $AA
 
 jr_01F_7F9E:
-    ldh  a, [hFFAB]                               ; $7F9E: $F0 $AB
+    ldh  a, [hMusicFadeInTimer]                   ; $7F9E: $F0 $AB
     and  a                                        ; $7FA0: $A7
     jr   z, jr_01F_7FBE                           ; $7FA1: $28 $1B
 
     sub  $01                                      ; $7FA3: $D6 $01
-    ldh  [hFFAB], a                               ; $7FA5: $E0 $AB
+    ldh  [hMusicFadeInTimer], a                   ; $7FA5: $E0 $AB
     and  $01                                      ; $7FA7: $E6 $01
     jr   nz, jr_01F_7FBE                          ; $7FA9: $20 $13
 

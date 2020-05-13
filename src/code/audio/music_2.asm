@@ -26,7 +26,7 @@ jr_01E_400C:
     ret                                           ; $401D: $C9
 
 PlayMusicTrack_1E_EntryPoint::
-    ld   hl, wPlayMusicTrack                                ; $401E: $21 $68 $D3
+    ld   hl, wMusicTrackToPlay                                ; $401E: $21 $68 $D3
     ld   a, [hl+]                                 ; $4021: $2A
     and  a                                        ; $4022: $A7
     jr   nz, BeginMusicTrack_1E                          ; $4023: $20 $14
@@ -39,13 +39,13 @@ jr_01E_4028:
 DontPlayAudio_1E::
     xor  a                                        ; $402B: $AF
     ld   [wActiveJingle], a                       ; $402C: $EA $60 $D3
-    ld   [wPlayMusicTrack], a                   ; $402F: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $402F: $EA $68 $D3
     ld   [wActiveWaveSfx], a                      ; $4032: $EA $70 $D3
     ld   [wActiveNoiseSfx], a                     ; $4035: $EA $78 $D3
     ret                                           ; $4038: $C9
 
 BeginMusicTrack_1E::
-    ; [$D369] = [wPlayMusicTrack]
+    ; [$D369] = [wMusicTrackToPlay]
     ld   [hl], a                                  ; $4039: $77
     call BeginMusicTrack_Dispatch_1E                            ; $403A: $CD $63 $41
     jr   jr_01E_4028                              ; $403D: $18 $E9
@@ -111,7 +111,7 @@ jr_01E_4076:
     ret                                           ; $407E: $C9
 
 
-; Music ID numbers are based on values written to wPlayMusicTrack. They don't
+; Music ID numbers are based on values written to wMusicTrackToPlay. They don't
 ; match up with "constants/sfx.asm" for some reason.
 MusicDataPointerTable_1E::
     dw   Music11
@@ -1339,7 +1339,7 @@ label_01E_4854:
     xor  a                                        ; $4854: $AF
     ld   [wMusicMode], a                               ; $4855: $EA $CE $D3
     ldh  a, [$FFBF]                               ; $4858: $F0 $BF
-    ld   [wPlayMusicTrack], a                               ; $485A: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                               ; $485A: $EA $68 $D3
     jp   PlayMusicTrack_1E_EntryPoint             ; $485D: $C3 $1E $40
 
 label_01E_4860:

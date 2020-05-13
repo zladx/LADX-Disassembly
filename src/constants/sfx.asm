@@ -1,7 +1,7 @@
 ;
 ; Constants for audio effects
 
-; Values for wPlayMusicTrack
+; Values for wMusicTrackToPlay
  
 MUSIC_NONE                                      equ $00 ; This value means: Don't play a different track.
 MUSIC_TITLE_SCREEN_INTRODUCTION                 equ $01	; $0D's introduction section.
@@ -18,7 +18,7 @@ MUSIC_ANIMAL_VILLAGE                            equ $0B
 MUSIC_FAIRY_FOUNTAIN                            equ $0C
 MUSIC_TITLE_SCREEN                              equ $0D	; Plays when $01 has finished.
 MUSIC_BOWWOW_KIDNAPPED                          equ $0E	; Plays when $3E has finished.
-MUSIC_SWORD_ACQUIRED                            equ $0F	; Possibly also for LVL2 sword.
+MUSIC_SWORD_ACQUIRED                            equ $0F
 MUSIC_WEAPON_ACQUIRED                           equ $10
 MUSIC_FILE_SELECT                               equ $11
 MUSIC_INSIDE_THE_WIND_EGG                       equ $12
@@ -52,14 +52,14 @@ MUSIC_INSTRUMENT_ORGAN_OF_EVENING               equ $2D
 MUSIC_THUNDER_DRUM                              equ $2E
 MUSIC_MARIN_SINGING                             equ $2F
 MUSIC_MANBOS_MAMBO                              equ $30
-MUSIC_OVERWORLD_INTRODUCTION                    equ $31	; $05's introduction section after retrieving your sword.
+MUSIC_SWORD_RETRIEVED                           equ $31	; Plays after retrieving your sword on the beach.
 MUSIC_MR_WRITE_HOUSE                            equ $32
 MUSIC_PHONE_BOOTH                               equ $33	; Also Ulrira's house.
 MUSIC_TARIN_ATTACKED_BY_BEES                    equ $34
 MUSIC_MAMUS_SONG                                equ $35
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
-;MUSIC_MR_WRITE_HOUSE_VERSION_2                 equ $37	; mr write house variant. where is this used?
-MUSIC_TOTAKAS_SONG                              equ $38	; Totaka's Song as played in Richard's mansion	; does not init instrument bank. Missing drums(?)
+MUSIC_CHRISTINES_HOUSE                          equ $37
+MUSIC_TOTAKAS_SONG                              equ $38	; Totaka's Song as played in Richard's mansion	; does not init instrument bank. Missing drums at the beginning. Perhaps the song parameters are modidified in realtime?
 MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_GAME                              equ $3A
 ;MUSIC_RECEIVED_ITEM                            equ $3B	; short item jingle
@@ -68,16 +68,16 @@ MUSIC_ENDING                                    equ $3D	; During ending cutscene
 MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E
 MUSIC_WIND_FISH_AWAKENS                         equ $3F	; Plays during cutscene after defeating the final boss
 MUSIC_RICHARDS_HOUSE                            equ $40
-;MUSIC_BOTWF                                    equ $41	; ballad of the wind fish, on horn and flute-like instruments.
-;MUSIC_BOTWF                                    equ $42	; ballad of the wind fish, has added marimba motif. more voices than $41
-;MUSIC_BOTWF                                    equ $43	; ballad of the wind fish, piano, more voices than $42
-;MUSIC_BOTWF                                    equ $44	; ballad of the wind fish, has high pitched ting. more voices than $43
-;MUSIC_BOTWF                                    equ $45	; ballad of the wind fish, has triangle rhythm. more voices than $44
-;MUSIC_BOTWF                                    equ $46	; ballad of the wind fish, has added horn. more voices than $45
-;MUSIC_BOTWF                                    equ $47	; ballad of the wind fish, drums, high ting. awakening tracks are not well described.
+;MUSIC_UNKNOWN_BOTWF                            equ $41	; ballad of the wind fish, on horn and flute-like instruments.
+;MUSIC_UNKNOWN_BOTWF                            equ $42	; ballad of the wind fish, has added marimba motif. more voices than $41
+;MUSIC_UNKNOWN_BOTWF                            equ $43	; ballad of the wind fish, piano, more voices than $42
+;MUSIC_UNKNOWN_BOTWF                            equ $44	; ballad of the wind fish, has high pitched ting. more voices than $43
+;MUSIC_UNKNOWN_BOTWF                            equ $45	; ballad of the wind fish, has triangle rhythm. more voices than $44
+;MUSIC_UNKNOWN_BOTWF                            equ $46	; ballad of the wind fish, has added horn. more voices than $45
+;MUSIC_UNKNOWN_BOTWF                            equ $47	; ballad of the wind fish, drums, high ting. awakening tracks are not well described.
 MUSIC_GHOSTS_HOUSE                              equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
-;MUSIC_SILENCE                                  equ $4A	; more awakening...
+;MUSIC_UNKNOWN_BOTWF                            equ $4A	; more awakening...
 MUSIC_CATFISHS_MAW                              equ $4B
 ;MUSIC_UNKNOWN                                  equ $4C	; orchestral, short jingle.
 ;MUSIC_UNKNOWN                                  equ $4D	; harp jingle

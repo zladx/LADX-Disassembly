@@ -2065,7 +2065,7 @@ func_015_50C2::
     ret  nz                                       ; $50C6: $C0
 
     ld   a, $5D                                   ; $50C7: $3E $5D
-    ld   [wPlayMusicTrack], a                   ; $50C9: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $50C9: $EA $68 $D3
     ld   hl, $DA74                                ; $50CC: $21 $74 $DA
     set  6, [hl]                                  ; $50CF: $CB $F6
     call_open_dialog $0F5                         ; $50D1
@@ -2128,7 +2128,7 @@ jr_015_512D:
 
     dec  [hl]                                     ; $5131: $35
     ld   a, $23                                   ; $5132: $3E $23
-    ld   [wPlayMusicTrack], a                   ; $5134: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $5134: $EA $68 $D3
 
 jr_015_5137:
     ret                                           ; $5137: $C9
@@ -5602,7 +5602,7 @@ func_015_6E66::
     ld   [wBossAgonySFXCountdown], a              ; $6E71: $EA $A7 $C5
     call_open_dialog $0F6                         ; $6E74
     ld   a, $5E                                   ; $6E79: $3E $5E
-    ld   [wPlayMusicTrack], a                   ; $6E7B: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $6E7B: $EA $68 $D3
     call GetEntityTransitionCountdown             ; $6E7E: $CD $05 $0C
     ld   [hl], $80                                ; $6E81: $36 $80
     ld   hl, wEntitiesFlashCountdownTable         ; $6E83: $21 $20 $C4
@@ -5631,7 +5631,7 @@ jr_015_6E9B:
     cp   $01                                      ; $6EAC: $FE $01
     jr   nz, jr_015_6EB5                          ; $6EAE: $20 $05
 
-    ld   hl, wPlayMusicTrack                    ; $6EB0: $21 $68 $D3
+    ld   hl, wMusicTrackToPlay                    ; $6EB0: $21 $68 $D3
     ld   [hl], $50                                ; $6EB3: $36 $50
 
 jr_015_6EB5:
@@ -5803,7 +5803,7 @@ func_015_6FA1::
     cp   $02                                      ; $6FA4: $FE $02
     jr   nz, jr_015_6FAD                          ; $6FA6: $20 $05
 
-    ld   hl, wPlayMusicTrack                    ; $6FA8: $21 $68 $D3
+    ld   hl, wMusicTrackToPlay                    ; $6FA8: $21 $68 $D3
     ld   [hl], $5F                                ; $6FAB: $36 $5F
 
 jr_015_6FAD:
@@ -7908,7 +7908,7 @@ func_015_7D01::
     ld   a, $01                                   ; $7D3E: $3E $01
     ld   [wC10A], a                               ; $7D40: $EA $0A $C1
     ld   a, $1E                                   ; $7D43: $3E $1E
-    ld   [wPlayMusicTrack], a                   ; $7D45: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $7D45: $EA $68 $D3
     xor  a                                        ; $7D48: $AF
     ld   [wTransitionSequenceCounter], a          ; $7D49: $EA $6B $C1
     ld   [wC16C], a                               ; $7D4C: $EA $6C $C1

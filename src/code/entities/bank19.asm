@@ -387,7 +387,7 @@ jr_019_4279:
 WarpState0Handler::
     call IncrementEntityState                     ; $429A: $CD $12 $3B
     ld   a, $1B                                   ; $429D: $3E $1B
-    ld   [wPlayMusicTrack], a                   ; $429F: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $429F: $EA $68 $D3
     ret                                           ; $42A2: $C9
 
 WarpState1Handler::
@@ -924,7 +924,7 @@ jr_019_46A2:
     ld   a, $01                                   ; $46D0: $3E $01
     ld   [wC167], a                               ; $46D2: $EA $67 $C1
     ld   a, $10                                   ; $46D5: $3E $10
-    ld   [wPlayMusicTrack], a                   ; $46D7: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $46D7: $EA $68 $D3
     ret                                           ; $46DA: $C9
 
 jr_019_46DB:
@@ -970,7 +970,7 @@ jr_019_4707:
     ld   a, $01                                   ; $471A: $3E $01
     ld   [wC167], a                               ; $471C: $EA $67 $C1
     ld   a, $10                                   ; $471F: $3E $10
-    ld   [wPlayMusicTrack], a                   ; $4721: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $4721: $EA $68 $D3
     ret                                           ; $4724: $C9
 
 jr_019_4725:
@@ -1598,7 +1598,7 @@ jr_019_4B4C:
 
 jr_019_4B57:
     ld   a, e                                     ; $4B57: $7B
-    ld   [wPlayMusicTrack], a                   ; $4B58: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $4B58: $EA $68 $D3
     ld   [$D465], a                               ; $4B5B: $EA $65 $D4
     ld   a, $FF                                   ; $4B5E: $3E $FF
     ld   [wLinkPlayingOcarinaCountdown], a        ; $4B60: $EA $66 $C1
@@ -1994,7 +1994,7 @@ func_019_4DBC::
     add  hl, de                                   ; $4DF4: $19
     ld   [hl], $C1                                ; $4DF5: $36 $C1
     ld   a, $55                                   ; $4DF7: $3E $55
-    ld   [wPlayMusicTrack], a                   ; $4DF9: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $4DF9: $EA $68 $D3
     jp   IncrementEntityState                     ; $4DFC: $C3 $12 $3B
 
     ret                                           ; $4DFF: $C9
@@ -2048,7 +2048,7 @@ func_019_4E43::
     jr   nz, jr_019_4E61                          ; $4E5A: $20 $05
 
     ld   a, $10                                   ; $4E5C: $3E $10
-    ld   [wPlayMusicTrack], a                   ; $4E5E: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $4E5E: $EA $68 $D3
 
 jr_019_4E61:
     ret                                           ; $4E61: $C9
@@ -2244,7 +2244,7 @@ func_019_500D::
 
     inc  [hl]                                     ; $5021: $34
     ld   a, $57                                   ; $5022: $3E $57
-    ld   [wPlayMusicTrack], a                   ; $5024: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $5024: $EA $68 $D3
 
 jr_019_5027:
     ld   a, [wIsRoosterFollowingLink]             ; $5027: $FA $7B $DB
@@ -4885,7 +4885,7 @@ EaglesTowerOpeningState5Handler::
     jr   nz, jr_019_62B4                          ; $62AC: $20 $06
 
     ldh  a, [hNextWorldMusicTrack]                ; $62AE: $F0 $BF
-    ld   [wPlayMusicTrack], a                   ; $62B0: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $62B0: $EA $68 $D3
     ret                                           ; $62B3: $C9
 
 jr_019_62B4:
@@ -5393,7 +5393,7 @@ jr_019_68E4:
     jr   nz, jr_019_68F6                          ; $68EF: $20 $05
 
     ldh  a, [hNextWorldMusicTrack]                ; $68F1: $F0 $BF
-    ld   [wPlayMusicTrack], a                   ; $68F3: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $68F3: $EA $68 $D3
 
 jr_019_68F6:
     jp   IncrementEntityState                     ; $68F6: $C3 $12 $3B
@@ -6785,7 +6785,7 @@ jr_019_72AC:
     add  hl, bc                                   ; $72B7: $09
     ld   [hl], $01                                ; $72B8: $36 $01
     ld   a, $56                                   ; $72BA: $3E $56
-    ld   [wPlayMusicTrack], a                   ; $72BC: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $72BC: $EA $68 $D3
 
 label_019_72BF:
     xor  a                                        ; $72BF: $AF
@@ -7237,7 +7237,7 @@ func_019_76B1::
 
     call IncrementEntityState                     ; $76BD: $CD $12 $3B
     ld   a, $0F                                   ; $76C0: $3E $0F
-    ld   [wPlayMusicTrack], a                   ; $76C2: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $76C2: $EA $68 $D3
     call GetEntityTransitionCountdown             ; $76C5: $CD $05 $0C
     ld   [hl], $FF                                ; $76C8: $36 $FF
 
@@ -7260,7 +7260,7 @@ jr_019_76D6:
 
     ld   [hl], $20                                ; $76DF: $36 $20
     ld   a, $10                                   ; $76E1: $3E $10
-    ld   [wPlayMusicTrack], a                   ; $76E3: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $76E3: $EA $68 $D3
     call_open_dialog $09F                         ; $76E6
     ld   a, [$DAE9]                               ; $76EB: $FA $E9 $DA
     or   $10                                      ; $76EE: $F6 $10

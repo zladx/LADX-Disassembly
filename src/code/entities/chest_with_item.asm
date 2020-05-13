@@ -153,7 +153,7 @@ jr_007_7C76:
     jr   jr_007_7C93                              ; $7C8E: $18 $03
 
 jr_007_7C90:
-    ld   [wPlayMusicTrack], a                   ; $7C90: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $7C90: $EA $68 $D3
 
 jr_007_7C93:
     ld   hl, wEntitiesUnknowTableY                ; $7C93: $21 $D0 $C3

@@ -158,7 +158,7 @@ jr_005_40FA:
 
     ; Bow-Wow retrieved from King Moblin
     ld   a, $10                                   ; $4114: $3E $10
-    ld   [wPlayMusicTrack], a                   ; $4116: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $4116: $EA $68 $D3
     call_open_dialog $16C                         ; $4119
     ld   a, WAVE_SFX_CHAIN_CHOMP                  ; $411E: $3E $18
     ldh  [hWaveSfx], a                            ; $4120: $E0 $F3

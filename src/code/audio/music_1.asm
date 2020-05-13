@@ -28,7 +28,7 @@ jr_01B_400C:
     ret                                           ; $401D: $C9
 
 PlayMusicTrack_1B_EntryPoint::
-    ld   hl, wActiveMusicTrack                    ; $401E: $21 $68 $D3
+    ld   hl, wPlayMusicTrack                    ; $401E: $21 $68 $D3
     ld   a, [hl+]                                 ; $4021: $2A
     and  a                                        ; $4022: $A7
     jr   nz, BeginMusicTrack_1B                          ; $4023: $20 $0C
@@ -45,9 +45,9 @@ DontPlayAudio_1B:
     ret                                           ; $4030: $C9
 
 ; Input:
-;  hl   Points to data after "wActiveMusicTrack"
+;  hl   Points to data after "wPlayMusicTrack"
 BeginMusicTrack_1B::
-    ; [$D369] = [wActiveMusicTrack]
+    ; [$D369] = [wPlayMusicTrack]
     ld   [hl], a                                  ; $4031: $77
     call BeginMusicTrack_Dispatch_1B                            ; $4032: $CD $3B $41
     jr   jr_01B_4028                              ; $4035: $18 $F1
@@ -105,7 +105,7 @@ jr_01B_406E:
     ret                                           ; $4076: $C9
 
 
-; Music ID numbers are based on values written to wActiveMusicTrack. They don't
+; Music ID numbers are based on values written to wPlayMusicTrack. They don't
 ; match up with "constants/sfx.asm" for some reason.
 MusicDataPointerTable_1B::
     dw   Music01
@@ -716,17 +716,17 @@ soundOpcode00:
     ld   [hl-], a                                 ; $448F: $32
     jr   .readNext                              ; $4490: $18 $D5
 
-; Music ends?
+; Item acquired fanfare ends
 .val00
     ld   a, [$D3CA]                               ; $4492: $FA $CA $D3
     cp   MUSIC_SWORD_ACQUIRED                     ; $4495: $FE $0F
-    jp   z, label_01B_47E5                        ; $4497: $CA $E5 $47
+    jp   z, ContinueCurrentScreenMusic            ; $4497: $CA $E5 $47
 
     cp   MUSIC_WEAPON_ACQUIRED                    ; $449A: $FE $10
-    jp   z, label_01B_47E5                        ; $449C: $CA $E5 $47
+    jp   z, ContinueCurrentScreenMusic            ; $449C: $CA $E5 $47
 
-    cp   MUSIC_HEART_CONTAINER_ACQUIRED                 ; $449F: $FE $25
-    jp   z, label_01B_47E5                        ; $44A1: $CA $E5 $47
+    cp   MUSIC_HEART_CONTAINER_ACQUIRED           ; $449F: $FE $25
+    jp   z, ContinueCurrentScreenMusic            ; $44A1: $CA $E5 $47
 
     ld   hl, $D369                                ; $44A4: $21 $69 $D3
     ld   [hl], $00                                ; $44A7: $36 $00
@@ -1382,11 +1382,12 @@ func_01B_47D2::
     ld   [c], a                                   ; $47E3: $E2
     ret                                           ; $47E4: $C9
 
-label_01B_47E5:
+; Continues playing the music after a fanfare has played when you find your sword/weapon/heart container.
+ContinueCurrentScreenMusic:
     xor  a                                        ; $47E5: $AF
     ld   [wMusicMode], a                               ; $47E6: $EA $CE $D3
     ldh  a, [hNextWorldMusicTrack]                ; $47E9: $F0 $BF
-    ld   [wActiveMusicTrack], a                   ; $47EB: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                     ; $47EB: $EA $68 $D3
     jp   PlayMusicTrack_1B_EntryPoint             ; $47EE: $C3 $1E $40
 
 soundOpcode96:

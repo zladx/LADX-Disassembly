@@ -2302,6 +2302,7 @@ func_007_4F56::
     ld   a, $08                                   ; $4F76: $3E $08
     jp   SetEntitySpriteVariant                   ; $4F78: $C3 $0C $3B
 
+; Tarin beehive cutscene related
 jr_007_4F7B:
     cp   $18                                      ; $4F7B: $FE $18
     jr   nc, jr_007_4FA5                          ; $4F7D: $30 $26
@@ -2317,9 +2318,9 @@ jr_007_4F7B:
     call GetEntityTransitionCountdown             ; $4F91: $CD $05 $0C
     jr   nz, jr_007_4FA5                          ; $4F94: $20 $0F
 
-    ld   a, $34                                   ; $4F96: $3E $34
+    ld   a, MUSIC_TARIN_BEEHIVE                   ; $4F96: $3E $34
     ld   [wMusicTrackToPlay], a                   ; $4F98: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $4F9B: $E0 $B0
+    ldh  [hCurrentScreenTrack], a                         ; $4F9B: $E0 $B0
     call GetEntityTransitionCountdown             ; $4F9D: $CD $05 $0C
     ld   [hl], $C0                                ; $4FA0: $36 $C0
     jp   IncrementEntityState                     ; $4FA2: $C3 $12 $3B
@@ -3225,11 +3226,11 @@ jr_007_5572:
     call CheckLinkCollisionWithEnemy_trampoline   ; $557A: $CD $5A $3B
     jr   nc, jr_007_5599                          ; $557D: $30 $1A
 
-    ld   a, MUSIC_WEAPON_ACQUIRED                 ; $557F: $3E $10
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $557F: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $5581: $EA $68 $D3
     ld   [wC167], a                               ; $5584: $EA $67 $C1
     ldh  a, [hNextWorldMusicTrack]                ; $5587: $F0 $BF
-    ldh  [hMusicTrack], a                         ; $5589: $E0 $B0
+    ldh  [hCurrentScreenTrack], a                         ; $5589: $E0 $B0
     call GetEntityTransitionCountdown             ; $558B: $CD $05 $0C
     ld   a, $68                                   ; $558E: $3E $68
     ld   [hl], a                                  ; $5590: $77
@@ -3833,9 +3834,9 @@ func_007_5951::
     call GetEntityTransitionCountdown             ; $5956: $CD $05 $0C
     jr   nz, jr_007_596A                          ; $5959: $20 $0F
 
-    ld   a, $36                                   ; $595B: $3E $36
+    ld   a, MUSIC_MONKEYS_BUILDING_BRIDGE         ; $595B: $3E $36
     ld   [wMusicTrackToPlay], a                   ; $595D: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $5960: $E0 $B0
+    ldh  [hCurrentScreenTrack], a                         ; $5960: $E0 $B0
     call GetEntityDropTimer                       ; $5962: $CD $FB $0B
     ld   [hl], $80                                ; $5965: $36 $80
     jp   IncrementEntityState                     ; $5967: $C3 $12 $3B
@@ -6386,7 +6387,7 @@ func_007_698A::
     ret  nz                                       ; $698D: $C0
 
 jr_007_698E:
-    ld   a, $4C                                   ; $698E: $3E $4C
+    ld   a, MUSIC_WATERFALL_DRAIN                 ; $698E: $3E $4C
     ld   [wMusicTrackToPlay], a                   ; $6990: $EA $68 $D3
     jp   IncrementEntityState                     ; $6993: $C3 $12 $3B
 
@@ -7293,7 +7294,7 @@ func_007_6ED0::
     ld   [hl], $7F                                ; $6ED4: $36 $7F
     call GetEntityTransitionCountdown             ; $6ED6: $CD $05 $0C
     ld   [hl], $80                                ; $6ED9: $36 $80
-    ldh  a, [hMusicTrack]                         ; $6EDB: $F0 $B0
+    ldh  a, [hCurrentScreenTrack]                         ; $6EDB: $F0 $B0
     ld   hl, wEntitiesUnknowTableR                ; $6EDD: $21 $90 $C3
     add  hl, bc                                   ; $6EE0: $09
     ld   [hl], a                                  ; $6EE1: $77
@@ -9588,7 +9589,7 @@ func_007_7ED6::
     ld   hl, wEntitiesUnknowTableR                ; $7F00: $21 $90 $C3
     add  hl, bc                                   ; $7F03: $09
     ld   a, [hl]                                  ; $7F04: $7E
-    ldh  [hMusicTrack], a                         ; $7F05: $E0 $B0
+    ldh  [hCurrentScreenTrack], a                         ; $7F05: $E0 $B0
     jp   jr_007_7F76                              ; $7F07: $C3 $76 $7F
 
 jr_007_7F0A:

@@ -4463,8 +4463,9 @@ jr_01F_6131:
     ld   a, $04                                   ; $6131: $3E $04
     jr   jr_01F_6103                              ; $6133: $18 $CE
 
+; Plays the ethereal staircase room's music
 jr_01F_6135:
-    ld   a, $59                                   ; $6135: $3E $59
+    ld   a, MUSIC_MEETING_WINDFISH                ; $6135: $3E $59
     ld   [wMusicTrackToPlay], a                   ; $6137: $EA $68 $D3
     jp   label_01F_6327                           ; $613A: $C3 $27 $63
 

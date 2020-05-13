@@ -106,7 +106,7 @@ LoadPhotoBgMap::
     ld   hl, Data_03D_401C                      ; $4090: $21 $1C $40
     add  hl, de                                 ; $4093: $19
     ld   a, [hl]                                ; $4094: $7E
-    ld   [$D368], a                             ; $4095: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                             ; $4095: $EA $68 $D3
     xor  a                                      ; $4098: $AF
     ld   [$C16C], a                             ; $4099: $EA $6C $C1
     ld   [$C16B], a                             ; $409C: $EA $6B $C1

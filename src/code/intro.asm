@@ -72,7 +72,7 @@ IntroHandlerEntryPoint::
     ld   [$C17E], a
 
     call ResetIntroTimers
-    ld   a, $0D
+    ld   a, MUSIC_TITLE_SCREEN
     ld   [wMusicTrackToPlay], a
     ld   [$D00F], a
     call func_001_7D4E
@@ -1727,7 +1727,7 @@ InertLinkState2Handler::
     ld   a, [$D00A]
     cp   $0B
     jr   nz, .return
-    ld   a, $01
+    ld   a, MUSIC_TITLE_SCREEN_INTRODUCTION
     ld   [wMusicTrackToPlay], a
 
 .return

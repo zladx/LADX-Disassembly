@@ -16,7 +16,7 @@ DesertLanmolaEntityHandler::
 
     inc  [hl]                                     ; $55F6: $34
     ld   a, $50                                   ; $55F7: $3E $50
-    ldh  [hMusicTrack], a                         ; $55F9: $E0 $B0
+    ldh  [hCurrentScreenTrack], a                         ; $55F9: $E0 $B0
     ld   hl, wEntitiesPosZTable                   ; $55FB: $21 $10 $C3
     add  hl, bc                                   ; $55FE: $09
     ld   [hl], $FF                                ; $55FF: $36 $FF

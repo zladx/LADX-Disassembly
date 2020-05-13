@@ -1657,7 +1657,7 @@ jr_005_79B3:
     call label_27F2                               ; $7A08: $CD $F2 $27
     ld   a, $03                                   ; $7A0B: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $7A0D: $EA $A7 $C5
-    ld   a, $5E                                   ; $7A10: $3E $5E
+    ld   a, MUSIC_BOSS_WARNING                    ; $7A10: $3E $5E
     ld   [wMusicTrackToPlay], a                   ; $7A12: $EA $68 $D3
     ld   a, $B5                                   ; $7A15: $3E $B5
     call OpenDialog                               ; $7A17: $CD $85 $23

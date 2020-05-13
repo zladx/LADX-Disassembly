@@ -28,7 +28,7 @@ jr_01B_400C:
     ret                                           ; $401D: $C9
 
 PlayMusicTrack_1B_EntryPoint::
-    ld   hl, wMusicTrackToPlay                      ; $401E: $21 $68 $D3
+    ld   hl, wMusicTrackToPlay                    ; $401E: $21 $68 $D3
     ld   a, [hl+]                                 ; $4021: $2A
     and  a                                        ; $4022: $A7
     jr   nz, BeginMusicTrack_1B                   ; $4023: $20 $0C
@@ -107,6 +107,7 @@ jr_01B_406E:
 
 ; Music ID numbers are based on values written to wMusicTrackToPlay. They don't
 ; match up with "constants/sfx.asm" for some reason.
+; Is this still the case? The constants are now correctly named.
 MusicDataPointerTable_1B::
     dw   Music01
     dw   Music02
@@ -238,7 +239,7 @@ jr_01B_410F:
     cp   $3F                                      ; $4130: $FE $3F
     jp   z, label_01B_4E4A                        ; $4132: $CA $4A $4E
 
-    call StopNoiseChannel_1B                            ; $4135: $CD $F3 $40
+    call StopNoiseChannel_1B                      ; $4135: $CD $F3 $40
     jp   label_01B_4E4A                           ; $4138: $C3 $4A $4E
 
 BeginMusicTrack_Dispatch_1B::
@@ -253,32 +254,32 @@ BeginMusicTrack_Dispatch_1B::
     ld   [$D3CA], a                               ; $4146: $EA $CA $D3
 
     cp   $11                                      ; $4149: $FE $11
-    jr   nc, .above10                          ; $414B: $30 $02
+    jr   nc, .above10                             ; $414B: $30 $02
 
-    jr   .playAudio                              ; $414D: $18 $23
+    jr   .playAudio                               ; $414D: $18 $23
 
 .above10
     cp   $21                                      ; $414F: $FE $21
-    jr   nc, .above20                          ; $4151: $30 $03
+    jr   nc, .above20                             ; $4151: $30 $03
 
-    jp   DontPlayAudio_1B                           ; $4153: $C3 $2C $40
+    jp   DontPlayAudio_1B                         ; $4153: $C3 $2C $40
 
 .above20
     cp   $31                                      ; $4156: $FE $31
-    jr   nc, .above30                          ; $4158: $30 $03
+    jr   nc, .above30                             ; $4158: $30 $03
 
-    jp   DontPlayAudio_1B                           ; $415A: $C3 $2C $40
+    jp   DontPlayAudio_1B                         ; $415A: $C3 $2C $40
 
 .above30
     cp   $41                                      ; $415D: $FE $41
-    jp   nc, .above40                       ; $415F: $D2 $66 $41
+    jp   nc, .above40                             ; $415F: $D2 $66 $41
 
     add  $E0                                      ; $4162: $C6 $E0
-    jr   .playAudio                              ; $4164: $18 $0C
+    jr   .playAudio                               ; $4164: $18 $0C
 
 .above40
     cp   $61                                      ; $4166: $FE $61
-    jp   c, DontPlayAudio_1B                        ; $4168: $DA $2C $40
+    jp   c, DontPlayAudio_1B                      ; $4168: $DA $2C $40
 
     cp   $70                                      ; $416B: $FE $70
     jp   nc, DontPlayAudio_1B                       ; $416D: $D2 $2C $40
@@ -287,18 +288,18 @@ BeginMusicTrack_Dispatch_1B::
 
 .playAudio
     dec  hl                                       ; $4172: $2B
-    ld   [hl+], a ; [$D368]                       ; $4173: $22
+    ld   [hl+], a ; [wMusicTrackToPlay]           ; $4173: $22
 
     ld   b, a                                     ; $4174: $47
     ld   a, $01                                   ; $4175: $3E $01
-    ld   [wMusicMode], a                               ; $4177: $EA $CE $D3
+    ld   [wMusicMode], a                          ; $4177: $EA $CE $D3
     ld   a, b                                     ; $417A: $78
     ld   [hl], a ; [$D369]                        ; $417B: $77
     ld   b, a                                     ; $417C: $47
-    ld   hl, MusicDataPointerTable_1B                        ; $417D: $21 $77 $40
+    ld   hl, MusicDataPointerTable_1B             ; $417D: $21 $77 $40
     and  $7F                                      ; $4180: $E6 $7F
-    call GetMusicDataPtr_1B                            ; $4182: $CD $D7 $40
-    call LoadMusicData_1B                            ; $4185: $CD $3C $43
+    call GetMusicDataPtr_1B                       ; $4182: $CD $D7 $40
+    call LoadMusicData_1B                         ; $4185: $CD $3C $43
     jp   label_01B_42D5                           ; $4188: $C3 $D5 $42
 
 Data_1B_418B::
@@ -720,13 +721,13 @@ soundOpcode00:
 .val00
     ld   a, [$D3CA]                               ; $4492: $FA $CA $D3
     cp   MUSIC_SWORD_ACQUIRED                     ; $4495: $FE $0F
-    jp   z, ContinueCurrentScreenMusic            ; $4497: $CA $E5 $47
+    jp   z, ContinueCurrentScreenMusic_1B         ; $4497: $CA $E5 $47
 
-    cp   MUSIC_WEAPON_ACQUIRED                    ; $449A: $FE $10
-    jp   z, ContinueCurrentScreenMusic            ; $449C: $CA $E5 $47
+    cp   MUSIC_TOOL_ACQUIRED                      ; $449A: $FE $10
+    jp   z, ContinueCurrentScreenMusic_1B         ; $449C: $CA $E5 $47
 
     cp   MUSIC_HEART_CONTAINER_ACQUIRED           ; $449F: $FE $25
-    jp   z, ContinueCurrentScreenMusic            ; $44A1: $CA $E5 $47
+    jp   z, ContinueCurrentScreenMusic_1B         ; $44A1: $CA $E5 $47
 
     ld   hl, $D369                                ; $44A4: $21 $69 $D3
     ld   [hl], $00                                ; $44A7: $36 $00
@@ -1383,11 +1384,11 @@ func_01B_47D2::
     ret                                           ; $47E4: $C9
 
 ; Continues playing the music after a fanfare has played when you find your sword/weapon/heart container.
-ContinueCurrentScreenMusic:
+ContinueCurrentScreenMusic_1B:
     xor  a                                        ; $47E5: $AF
-    ld   [wMusicMode], a                               ; $47E6: $EA $CE $D3
+    ld   [wMusicMode], a                          ; $47E6: $EA $CE $D3
     ldh  a, [hNextWorldMusicTrack]                ; $47E9: $F0 $BF
-    ld   [wMusicTrackToPlay], a                     ; $47EB: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $47EB: $EA $68 $D3
     jp   PlayMusicTrack_1B_EntryPoint             ; $47EE: $C3 $1E $40
 
 soundOpcode96:

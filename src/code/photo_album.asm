@@ -798,8 +798,8 @@ JumpTable_028_457E:
     ld   [$D1CA], a                             ; $4588: JumpTable_028_457E $EA $CA $D1
     ld   a, $20                                 ; $458B: JumpTable_028_457E $3E $20
     ld   [$D1C9], a                             ; $458D: JumpTable_028_457E $EA $C9 $D1
-    ld   a, $22                                 ; $4590: JumpTable_028_457E $3E $22
-    ld   [$D368], a                             ; $4592: JumpTable_028_457E $EA $68 $D3
+    ld   a, MUSIC_OWL                           ; $4590: JumpTable_028_457E $3E $22
+    ld   [wMusicTrackToPlay], a                 ; $4592: JumpTable_028_457E $EA $68 $D3
     call func_028_44DB                          ; $4595: JumpTable_028_457E $CD $DB $44
     jr   .func_028_45A3                         ; $4598: JumpTable_028_457E $18 $09
 
@@ -1948,8 +1948,8 @@ JumpTable_028_4CAD:
 
     ld   a, $01                                 ; $4CBF: JumpTable_028_4CAD $3E $01
     ld   [wGameplaySubtype], a                  ; $4CC1: JumpTable_028_4CAD $EA $96 $DB
-    ld   a, $02                                 ; $4CC4: JumpTable_028_4CAD $3E $02
-    ld   [$D368], a                             ; $4CC6: JumpTable_028_4CAD $EA $68 $D3
+    ld   a, MUSIC_TRENDY_GAME                   ; $4CC4: JumpTable_028_4CAD $3E $02
+    ld   [wMusicTrackToPlay], a                 ; $4CC6: JumpTable_028_4CAD $EA $68 $D3
     xor  a                                      ; $4CC9: JumpTable_028_4CAD $AF
     ld   [$D16B], a                             ; $4CCA: JumpTable_028_4CAD $EA $6B $D1
 .return_4CCD_28:
@@ -2001,8 +2001,8 @@ JumpTable_028_4D8C:
 
     ld   a, $01                                 ; $4D91: JumpTable_028_4D8C $3E $01
     ld   [wGameplaySubtype], a                  ; $4D93: JumpTable_028_4D8C $EA $96 $DB
-    ld   a, $02                                 ; $4D96: JumpTable_028_4D8C $3E $02
-    ld   [$D368], a                             ; $4D98: JumpTable_028_4D8C $EA $68 $D3
+    ld   a, MUSIC_TRENDY_GAME                   ; $4D96: JumpTable_028_4D8C $3E $02
+    ld   [wMusicTrackToPlay], a                 ; $4D98: JumpTable_028_4D8C $EA $68 $D3
     xor  a                                      ; $4D9B: JumpTable_028_4D8C $AF
     ld   [$C16B], a                             ; $4D9C: JumpTable_028_4D8C $EA $6B $C1
 .else_4D9F_28:

@@ -4625,8 +4625,8 @@ UpdateRupeesCount::
     or   [hl]                                     ; $627A: $B6
     ret  z                                        ; $627B: $C8
 
-    ld   a, NOISE_SFX_RUPEE                             ; $627C: $3E $05
-    ldh  [hWaveSfx], a                                ; $627E: $E0 $F3
+    ld   a, NOISE_SFX_CUT_GRASS                   ; $627C: $3E $05
+    ldh  [hWaveSfx], a                            ; $627E: $E0 $F3
     ld   a, [wSubstractRupeeBufferLow]            ; $6280: $FA $92 $DB
     ld   e, a                                     ; $6283: $5F
     ld   a, [wSubstractRupeeBufferHigh]           ; $6284: $FA $91 $DB

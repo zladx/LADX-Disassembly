@@ -9,19 +9,19 @@ MUSIC_TRENDY_GAME                               equ $02
 MUSIC_GAME_OVER                                 equ $03
 MUSIC_MABE_VILLAGE                              equ $04
 MUSIC_OVERWORLD                                 equ $05
-MUSIC_MT_TAMARANCH                              equ $06	; Also Tal Tal Height.
+MUSIC_MT_TAMARANCH                              equ $06	; Also Tal Tal Heights.
 MUSIC_WITCH_HUT                                 equ $07	; Also used in the shop.
 MUSIC_RAFT_RIDE_RAPIDS                          equ $08
 MUSIC_MYSTERIOUS_FOREST                         equ $09
-MUSIC_HOUSE                                     equ $0A	; Inside most regular houses.
+MUSIC_HOUSE                                     equ $0A	; Inside regular houses.
 MUSIC_ANIMAL_VILLAGE                            equ $0B
 MUSIC_FAIRY_FOUNTAIN                            equ $0C
 MUSIC_TITLE_SCREEN                              equ $0D	; Plays when $01 has finished.
 MUSIC_BOWWOW_KIDNAPPED                          equ $0E	; Plays when $3E has finished.
-MUSIC_SWORD_ACQUIRED                            equ $0F
-MUSIC_WEAPON_ACQUIRED                           equ $10
+MUSIC_SWORD_ACQUIRED                            equ $0F ; Plays when you retrieve your sword on the beach.
+MUSIC_TOOL_ACQUIRED                             equ $10
 MUSIC_FILE_SELECT                               equ $11
-MUSIC_INSIDE_THE_WIND_EGG                       equ $12
+MUSIC_EGG_MAZE                                  equ $12
 MUSIC_KANALET_CASTLE                            equ $13
 MUSIC_TAIL_CAVE                                 equ $14
 MUSIC_BOTTLE_GROTTO                             equ $15
@@ -51,23 +51,23 @@ MUSIC_INSTRUMENT_CORAL_TRIANGLE                 equ $2C
 MUSIC_INSTRUMENT_ORGAN_OF_EVENING               equ $2D
 MUSIC_THUNDER_DRUM                              equ $2E
 MUSIC_MARIN_SINGING                             equ $2F
-MUSIC_MANBOS_MAMBO                              equ $30
-MUSIC_SWORD_RETRIEVED                           equ $31	; Plays after retrieving your sword on the beach.
+MUSIC_MANBO_MAMBO                               equ $30
+MUSIC_OVERWORLD_INTRODUCTION                    equ $31	; Heroic introduction before $05. It only plays once; after retrieving your sword on the shore.
 MUSIC_MR_WRITE_HOUSE                            equ $32
-MUSIC_PHONE_BOOTH                               equ $33	; Also Ulrira's house.
-MUSIC_TARIN_ATTACKED_BY_BEES                    equ $34
-MUSIC_MAMUS_SONG                                equ $35
+MUSIC_PHONE_BOOTH                               equ $33	; Also used in Ulrira's house.
+MUSIC_TARIN_BEEHIVE                             equ $34 ; Used for Tarin's beehive cutscene.
+MUSIC_MAMU_SONG                                 equ $35
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
-MUSIC_CHRISTINES_HOUSE                          equ $37
-MUSIC_TOTAKAS_SONG                              equ $38	; Totaka's Song as played in Richard's mansion	; does not init instrument bank. Missing drums at the beginning. Perhaps the song parameters are modidified in realtime?
+MUSIC_CHRISTINE_HOUSE                           equ $37
+MUSIC_TOTAKA_SONG                               equ $38	; Totaka's Song. Similar to the one played in Richard's mansion. Does not init instrument bank. Missing drums at the beginning. Perhaps the song parameters are modified in realtime, causing the change in instrument, rhythm, and note pitch? 
 MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
-MUSIC_FISHING_GAME                              equ $3A
-;MUSIC_RECEIVED_ITEM                            equ $3B	; short item jingle
+MUSIC_FISHING_UNDER_BRIDGE                      equ $3A ; The fishing pond plays $02 during the fishing minigame. This is a different fishing minigame.
+;MUSIC_RECEIVED_ITEM                            equ $3B	; short item jingle IT IS THE CLASSIC LEGEND OF ZELDA ONE SO COLOR DUNGEON PERHAPS?
 MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C	; とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
 MUSIC_ENDING                                    equ $3D	; During ending cutscene. Silence, then music. Plays staff roll theme when finished.
-MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E
+MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E ; Plays during kidnapping related dialog and in the Moblin hideout.
 MUSIC_WIND_FISH_AWAKENS                         equ $3F	; Plays during cutscene after defeating the final boss
-MUSIC_RICHARDS_HOUSE                            equ $40
+MUSIC_RICHARD_MANSION                           equ $40
 ;MUSIC_UNKNOWN_BOTWF                            equ $41	; ballad of the wind fish, on horn and flute-like instruments.
 ;MUSIC_UNKNOWN_BOTWF                            equ $42	; ballad of the wind fish, has added marimba motif. more voices than $41
 ;MUSIC_UNKNOWN_BOTWF                            equ $43	; ballad of the wind fish, piano, more voices than $42
@@ -75,27 +75,27 @@ MUSIC_RICHARDS_HOUSE                            equ $40
 ;MUSIC_UNKNOWN_BOTWF                            equ $45	; ballad of the wind fish, has triangle rhythm. more voices than $44
 ;MUSIC_UNKNOWN_BOTWF                            equ $46	; ballad of the wind fish, has added horn. more voices than $45
 ;MUSIC_UNKNOWN_BOTWF                            equ $47	; ballad of the wind fish, drums, high ting. awakening tracks are not well described.
-MUSIC_GHOSTS_HOUSE                              equ $48
+MUSIC_GHOST_HOUSE                               equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
-;MUSIC_UNKNOWN_BOTWF                            equ $4A	; more awakening...
-MUSIC_CATFISHS_MAW                              equ $4B
-;MUSIC_UNKNOWN                                  equ $4C	; orchestral, short jingle.
-;MUSIC_UNKNOWN                                  equ $4D	; harp jingle
+MUSIC_LINK_MARIN_DUET                           equ $4A
+MUSIC_CATFISH_MAW                               equ $4B
+MUSIC_WATERFALL_DRAIN                           equ $4C ; Plays when you open the lock for the Angler's Tunnel.
+MUSIC_MARIN_BEACH_TRANSITION                    equ $4D	; Plays during the fade to white, between the top-down view and the scenic view of Link and Marin sitting at the beach. The beginning is not used, as well for a couple of notes at the end.
 MUSIC_MARIN_BEACH                               equ $4E
 ;MUSIC_UNKNOWN                                  equ $4F	; item jingle
-MUSIC_MINI_BOSS                                 equ $50
+MUSIC_MINIBOSS                                  equ $50
 MUSIC_KANALET_CASTLE_COPY                       equ $51	; Copy of $13.
 MUSIC_TAIL_CAVE_COPY                            equ $52	; Copy of $14.
 MUSIC_DREAM_SHRINE                              equ $53
-;MUSIC_UNKNOWN                                  equ $54	; intense arpeggio, pre boss music? Switches to $19.
+MUSIC_EAGLES_TOWER_BOSS_CUTSCENE                equ $54	; Plays when the boss comes into view. Switches to $19.
 MUSIC_FLYING_ROOSTER_REVIVED                    equ $55
-;MUSIC_UNKNOWN                                  equ $56	; punch noises in upwards chord progression, plays $55 afterwards
+MUSIC_SEASHELL_MANSION_SPIRIT                   equ $56	; Plays $55 afterwards. Possibly left unused for resurrecting the rooster?
 MUSIC_CUCCO_HOUSE                               equ $57
 MUSIC_FACE_SHRINE                               equ $58
-;MUSIC_WINDFISH                                 equ $59	; Is called 'The WindFish'
+MUSIC_MEETING_WINDFISH                          equ $59	; When you climb the staircase and meet the Wind Fish.
 MUSIC_TURTLE_ROCK                               equ $5A
-MUSIC_EAGLES_TOWER                              equ $5B
-MUSIC_BEFORE_EAGLES_TOWER_BOSS                  equ $5C	; Plays before the boss at the top of Eagle's Tower is summon by Grim Creeper.
+MUSIC_EAGLE_TOWER                               equ $5B
+MUSIC_GRIM_CREEPER_DIALOG                       equ $5C	; Plays during Grim Creeper's dialog before the boss. Switches to $54 after the dialog.
 MUSIC_FINAL_BOSS_DIALOG                         equ $5D	; Plays during the final boss' dialog.
 MUSIC_BOSS_WARNING                              equ $5E	; Plays during the dialogs where the bosses tell you not to wake the Wind Fish.
 MUSIC_FINAL_BOSS_DEFEATED                       equ $5F
@@ -103,7 +103,7 @@ MUSIC_ZELDA_NICKNAME_EASTER_EGG                 equ $60	; ZELDA nickname easter 
 MUSIC_COLOR_DUNGEON                             equ $61
 ;MUSIC_COLOR_DUNGEON_COPIES                     equ $62 to 6F	; Same as $61	
 ;MUSIC_GLITCHED                                 equ $70 to $FE	; Glitches the music that played before it.
-MUSIC_SILENCE_VOICE_CHANNELS                    equ $FF	; Changes the voice channels. Does not always silence currently playing tracks. 
+MUSIC_SILENCE                                   equ $FF	; Seems to try to silence the voice channels. Does not always correctly silence the music. 
 
 ; Values for hJingle
 JINGLE_NONE             equ $00;
@@ -209,7 +209,7 @@ NOISE_SFX_FOOTSTEP                equ $07;	Landing after jump
 NOISE_SFX_POT_SMASHED             equ $09;hit/stun, perhaps pot
 NOISE_SFX_SHOOT_ARROW             equ $0A;probs arrow
 ;NOISE_SFX_SHIELD_DEFLECT         equ $0B;shield sound but shorter
-NOISE_SFX_BOMB_EXPLOSION          equ $0C;boom.
+NOISE_SFX_BOMB_EXPLOSION          equ $0C; Used for the lightning sounds in the title screen intro cutscene
 NOISE_SFX_MAGIC_ROD               equ $0D;electricity, but likely magic
 NOISE_SFX_SHOWEL_DIG              equ $0E;digging
 NOISE_SFX_SEA_WAVES               equ $0F;beach waves
@@ -223,6 +223,12 @@ NOISE_SFX_DRAW_SHIELD             equ $16;
 ;NOISE_SFX_UNKNOWN                equ $17;LVL2 shield?
 NOISE_SFX_SWORD_D                 equ $18;
 NOISE_SFX_TITLE_APPEARS           equ $19;probably correct
+;NOISE_SFX_UNKNOWN                equ $1A
+;NOISE_SFX_UNKNOWN                equ $1B
+;NOISE_SFX_UNKNOWN                equ $1C
+;NOISE_SFX_UNKNOWN                equ $1D
+;NOISE_SFX_UNKNOWN                equ $1E
+;NOISE_SFX_UNKNOWN                equ $1F
 ;NOISE_SFX_ELECTRICITY            equ $20;Electricity/Shopkeeper's magic 
 ;NOISE_SFX_UNKNOWN                equ $21;silent?
 ;NOISE_SFX_UNKNOWN                equ $22;beach/explosion with fade out

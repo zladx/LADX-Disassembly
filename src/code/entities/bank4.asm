@@ -6734,7 +6734,7 @@ jr_004_77FC:
     ld   hl, wEntitiesStateTable                  ; $782D: $21 $90 $C2
     add  hl, bc                                   ; $7830: $09
     ld   [hl], $04                                ; $7831: $36 $04
-    ld   a, $19                                   ; $7833: $3E $19
+    ld   a, MUSIC_BOSS_BATTLE                     ; $7833: $3E $19
     ld   [wMusicTrackToPlay], a                   ; $7835: $EA $68 $D3
 
 jr_004_7838:

@@ -1098,7 +1098,7 @@ jp_3EFB::
     add  hl, bc
     ld   a, [hl]
     and  $04
-    ld   a, $19
+    ld   a, MUSIC_BOSS_BATTLE
     jr   z, jp_3F11
     ld   a, $50
 

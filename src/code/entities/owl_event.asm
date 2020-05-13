@@ -171,7 +171,7 @@ OwlState0Handler::
     jr   nz, jr_006_68EF                          ; $68D9: $20 $14
 
     ld   a, $1D                                   ; $68DB: $3E $1D
-    ldh  [hMusicTrack], a                         ; $68DD: $E0 $B0
+    ldh  [hCurrentScreenTrack], a                         ; $68DD: $E0 $B0
     ldh  a, [hLinkPositionY]                      ; $68DF: $F0 $99
     cp   $44                                      ; $68E1: $FE $44
     ret  c                                        ; $68E3: $D8
@@ -190,13 +190,13 @@ jr_006_68EF:
     jp   z, ClearEntityStatus_06                  ; $68F3: $CA $DB $65
 
 jr_006_68F6:
-    ldh  a, [hMusicTrack]                         ; $68F6: $F0 $B0
+    ldh  a, [hCurrentScreenTrack]                         ; $68F6: $F0 $B0
     ld   hl, wEntitiesPrivateState1Table          ; $68F8: $21 $B0 $C2
     add  hl, bc                                   ; $68FB: $09
     ld   [hl], a                                  ; $68FC: $77
-    ld   a, $22                                   ; $68FD: $3E $22
+    ld   a, MUSIC_OWL                             ; $68FD: $3E $22
     ld   [wMusicTrackToPlay], a                   ; $68FF: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $6902: $E0 $B0
+    ldh  [hCurrentScreenTrack], a                         ; $6902: $E0 $B0
     ldh  [$FFBD], a                               ; $6904: $E0 $BD
     ldh  a, [hMapRoom]                            ; $6906: $F0 $F6
     cp   $16                                      ; $6908: $FE $16
@@ -338,7 +338,7 @@ OwlState4Handler::
     add  hl, bc                                   ; $69EA: $09
     ld   a, [hl]                                  ; $69EB: $7E
     ld   [wMusicTrackToPlay], a                   ; $69EC: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $69EF: $E0 $B0
+    ldh  [hCurrentScreenTrack], a                         ; $69EF: $E0 $B0
     ld   a, [wActivePowerUp]                      ; $69F1: $FA $7C $D4
     and  a                                        ; $69F4: $A7
     jr   z, jr_006_6A04                           ; $69F5: $28 $0D

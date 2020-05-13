@@ -149,13 +149,13 @@ hAnimatedTilesFrameCount:: ;FFA6
   ; Incremented every frame, wraps around $FF
   ds 1
 
-hAnimatedTilesDataOffset:: ;FFA7
+hAnimatedTilesDataOffset:: ; FFA7
   ; Pointer to the animation data for the current
   ; frame (either 00, 40, 80 or C0).
   ds 1
 
-; Unlabeled
-hFFA8:: ; FFA8
+hMusicFadeOutTimer:: ; FFA8
+  ; Music fade out timer
   ds 1
 
 ; Unused (?) Window Y value
@@ -166,15 +166,15 @@ hWindowYUnused:: ; FFA9
 hWindowXUnused:: ; FFAA
   ds 1
 
-; Unlabeled
-hFFAB:: ; hFFAB
+hMusicFadeInTimer:: ; hFFAB
+  ; Music fade in timer
   ds 4
 
 hObjectUnderEntity:: ; FFAF
   ; Type of the object under the active entity
   ds 1
 
-hMusicTrack:: ; FFB0
+hCurrentScreenTrack:: ; FFB0
   ; Music track to play
   ; See MUSIC_* constants for possible values
   ds 1

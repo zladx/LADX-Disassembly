@@ -4060,7 +4060,7 @@ include "code/home/dialog.asm"
 ; Input:
 ;   a:   soundtrack id to load
 SetWorldMusicTrack::
-    ld   [wActiveMusicTrack], a
+    ld   [wPlayMusicTrack], a
     ldh  [hNextWorldMusicTrack], a
     ; $FFAB = a
     ld   a, $38

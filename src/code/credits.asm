@@ -1005,7 +1005,7 @@ jr_017_4C2F:
     call ResetCreditsSceneVariables               ; $4C45: $CD $A5 $4D
     call IncrementCreditsGameplaySubtype          ; $4C48: $CD $5B $4C
     ld   a, $59                                   ; $4C4B: $3E $59
-    ld   [wActiveMusicTrack], a                   ; $4C4D: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $4C4D: $EA $68 $D3
     ld   a, $40                                   ; $4C50: $3E $40
     ld   [$D006], a                               ; $4C52: $EA $06 $D0
     ld   a, $04                                   ; $4C55: $3E $04
@@ -1866,7 +1866,7 @@ CreditsLinkPreparesToPlayHandler::
     ld   a, $04                                   ; $5571: $3E $04
     ldh  [hLinkAnimationState], a                 ; $5573: $E0 $9D
     ld   a, $3F                                   ; $5575: $3E $3F
-    ld   [wActiveMusicTrack], a                   ; $5577: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $5577: $EA $68 $D3
 
 jr_017_557A:
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $557A: $3E $E8
@@ -3240,7 +3240,7 @@ CreditsSunAbove0Handler::
     ld   [wScreenShakeHorizontal], a              ; $6138: $EA $55 $C1
     ld   [wScreenShakeVertical], a                ; $613B: $EA $56 $C1
     ld   a, $3D                                   ; $613E: $3E $3D
-    ld   [wActiveMusicTrack], a                   ; $6140: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $6140: $EA $68 $D3
     call ResetCreditsSceneVariables               ; $6143: $CD $A5 $4D
     jp   IncrementCreditsSubscene                 ; $6146: $C3 $D9 $4C
 

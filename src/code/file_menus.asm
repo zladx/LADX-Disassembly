@@ -184,7 +184,7 @@ FileSelectionPrepare6::
     ld   [wForceFileSelectionScreenMusic], a
     ; … and set the music to the file menu selection track
     ld   a, $11
-    ld   [wActiveMusicTrack], a
+    ld   [wPlayMusicTrack], a
 .dontForceMusicTrack
 
     ; If there are no saved files yet…
@@ -580,7 +580,7 @@ FileCreationInteractiveHandler::
     cp   $42
     jr   nz, jr_001_4AFE
     ld   a, $60
-    ld   [wActiveMusicTrack], a
+    ld   [wPlayMusicTrack], a
 
 jr_001_4AFE::
     ld   hl, $DB80

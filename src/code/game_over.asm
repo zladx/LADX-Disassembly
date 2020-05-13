@@ -136,7 +136,7 @@ LinkPassOut3Handler::
     ld   hl, hFF9C                                ; $42CF: $21 $9C $FF
     inc  [hl]                                     ; $42D2: $34
     ld   a, $03                                   ; $42D3: $3E $03
-    ld   [wActiveMusicTrack], a                   ; $42D5: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $42D5: $EA $68 $D3
 
 jr_001_42D8::
     ret                                           ; $42D8: $C9

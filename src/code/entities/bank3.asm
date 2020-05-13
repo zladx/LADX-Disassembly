@@ -429,7 +429,7 @@ SetMusicTrackIfHasSword::
     ld   a, e                                     ; $499B: $7B
 
 SetMusicTrack::
-    ld   [wActiveMusicTrack], a                   ; $499C: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $499C: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $499F: $E0 $B0
     ldh  [$FFBD], a                               ; $49A1: $E0 $BD
     ldh  [hNextWorldMusicTrack], a                ; $49A3: $E0 $BF
@@ -705,7 +705,7 @@ EntityInitMadamMeowMeow::
     jr   nz, jr_003_4B1A                          ; $4B13: $20 $05
 
     ld   a, $0E                                   ; $4B15: $3E $0E
-    ld   [wActiveMusicTrack], a                   ; $4B17: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $4B17: $EA $68 $D3
 
 jr_003_4B1A:
     ret                                           ; $4B1A: $C9
@@ -2066,9 +2066,9 @@ jr_003_53B6:
 
     call func_003_5438                            ; $53E1: $CD $38 $54
 
-func_003_53E4::
+func_003_53E4::; likely cutting grass
     ld   hl, hNoiseSfx                            ; $53E4: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_RUPEE                    ; $53E7: $36 $05
+    ld   [hl], NOISE_SFX_CUT_GRASS                ; $53E7: $36 $05
     ld   e, $1F                                   ; $53E9: $1E $1F
     ldh  a, [hActiveEntitySpriteVariant]          ; $53EB: $F0 $F1
     cp   $FF                                      ; $53ED: $FE $FF
@@ -2997,7 +2997,7 @@ HeartContainerEntityHandler::
     jr   nz, func_003_5A17                        ; $59E9: $20 $2C
 
     ld   a, $18                                   ; $59EB: $3E $18
-    ld   [wActiveMusicTrack], a                   ; $59ED: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $59ED: $EA $68 $D3
     ; Increase max health, and fully restore health
     ld   hl, wMaxHealth                           ; $59F0: $21 $5B $DB
     inc  [hl]                                     ; $59F3: $34
@@ -3304,7 +3304,7 @@ jr_003_5BCB:
     jr   nz, jr_003_5BE1                          ; $5BCC: $20 $13
 
     ld   a, $31                                   ; $5BCE: $3E $31
-    ld   [wActiveMusicTrack], a                   ; $5BD0: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $5BD0: $EA $68 $D3
     ld   a, $05                                   ; $5BD3: $3E $05
     ldh  [hMusicTrack], a                         ; $5BD5: $E0 $B0
     ldh  [hNextWorldMusicTrack], a                ; $5BD7: $E0 $BF
@@ -3818,7 +3818,7 @@ func_003_5F0C::
     ld   hl, Data_003_5F04                        ; $5F1C: $21 $04 $5F
     add  hl, de                                   ; $5F1F: $19
     ld   a, [hl]                                  ; $5F20: $7E
-    ld   [wActiveMusicTrack], a                   ; $5F21: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $5F21: $EA $68 $D3
     call IncrementEntityState                     ; $5F24: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $5F27: $CD $05 $0C
     ld   [hl], $FF                                ; $5F2A: $36 $FF
@@ -4550,7 +4550,7 @@ PickSirensInstrument::
     ld   [wBossDefeated], a                       ; $6393: $EA $6C $D4
     ld   [wObjectAffectingBGPalette], a           ; $6396: $EA $CB $C3
     ld   a, $1B                                   ; $6399: $3E $1B
-    ld   [wActiveMusicTrack], a                   ; $639B: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $639B: $EA $68 $D3
     ld   [wC167], a                               ; $639E: $EA $67 $C1
 
 func_003_63A1::
@@ -4567,7 +4567,7 @@ PickHeartContainer::
     xor  a                                        ; $63B0: $AF
     ld   [wActivePowerUp], a                      ; $63B1: $EA $7C $D4
     ld   a, $25                                   ; $63B4: $3E $25
-    ld   [wActiveMusicTrack], a                   ; $63B6: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $63B6: $EA $68 $D3
     ld   [wBossDefeated], a                       ; $63B9: $EA $6C $D4
     call GetEntityTransitionCountdown             ; $63BC: $CD $05 $0C
     ld   a, $70                                   ; $63BF: $3E $70
@@ -4577,7 +4577,7 @@ PickHeartContainer::
 
 PickToadstoolOrDungeonKey::
     ld   a, $10                                   ; $63C7: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $63C9: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $63C9: $EA $68 $D3
     jr   label_003_63D2                           ; $63CC: $18 $04
 
     ld   a, $01                                   ; $63CE: $3E $01
@@ -4597,7 +4597,7 @@ jr_003_63DB:
 
 PickHeartPiece::
     ld   a, $10                                   ; $63E4: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $63E6: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $63E6: $EA $68 $D3
     call IncrementEntityState                     ; $63E9: $CD $12 $3B
     jr   jr_003_63DB                              ; $63EC: $18 $ED
 
@@ -4626,7 +4626,7 @@ jr_003_6400:
     xor  a                                        ; $640F: $AF
     ld   [wPowerUpHits], a                        ; $6410: $EA $7A $D4
     ld   a, $27                                   ; $6413: $3E $27
-    ld   [wActiveMusicTrack], a                   ; $6415: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $6415: $EA $68 $D3
     ld   a, $49                                   ; $6418: $3E $49
     ldh  [$FFBD], a                               ; $641A: $E0 $BD
     ldh  [hNextWorldMusicTrack], a                ; $641C: $E0 $BF
@@ -4670,7 +4670,7 @@ PickSword::
     jr   nz, jr_003_6468                          ; $6451: $20 $15
 
     ld   a, $0F                                   ; $6453: $3E $0F
-    ld   [wActiveMusicTrack], a                   ; $6455: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $6455: $EA $68 $D3
     ld   [wC167], a                               ; $6458: $EA $67 $C1
     call func_003_63A1                            ; $645B: $CD $A1 $63
     call GetEntityTransitionCountdown             ; $645E: $CD $05 $0C
@@ -4738,7 +4738,7 @@ jr_003_64A0:
 
 jr_003_64A5:
     ld   a, $10                                   ; $64A5: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $64A7: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $64A7: $EA $68 $D3
     jp   label_003_63D2                           ; $64AA: $C3 $D2 $63
 
 jr_003_64AD:
@@ -6160,7 +6160,7 @@ jr_003_6D73:
     cp   $22                                      ; $6DD6: $FE $22
     jr   z, jr_003_6DDD                           ; $6DD8: $28 $03
 
-    ld   [wActiveMusicTrack], a                   ; $6DDA: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $6DDA: $EA $68 $D3
 
 jr_003_6DDD:
     ldh  [hNextWorldMusicTrack], a                ; $6DDD: $E0 $BF
@@ -7094,7 +7094,7 @@ jr_003_7325:
     ld   a, e                                     ; $7325: $7B
     call OpenDialog                               ; $7326: $CD $85 $23
     ld   a, $5E                                   ; $7329: $3E $5E
-    ld   [wActiveMusicTrack], a                   ; $732B: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $732B: $EA $68 $D3
     jr   jr_003_733E                              ; $732E: $18 $0E
 
 jr_003_7330:

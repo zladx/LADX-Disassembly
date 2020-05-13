@@ -2318,7 +2318,7 @@ jr_007_4F7B:
     jr   nz, jr_007_4FA5                          ; $4F94: $20 $0F
 
     ld   a, $34                                   ; $4F96: $3E $34
-    ld   [wActiveMusicTrack], a                   ; $4F98: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $4F98: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $4F9B: $E0 $B0
     call GetEntityTransitionCountdown             ; $4F9D: $CD $05 $0C
     ld   [hl], $C0                                ; $4FA0: $36 $C0
@@ -3226,7 +3226,7 @@ jr_007_5572:
     jr   nc, jr_007_5599                          ; $557D: $30 $1A
 
     ld   a, MUSIC_WEAPON_ACQUIRED                 ; $557F: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $5581: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $5581: $EA $68 $D3
     ld   [wC167], a                               ; $5584: $EA $67 $C1
     ldh  a, [hNextWorldMusicTrack]                ; $5587: $F0 $BF
     ldh  [hMusicTrack], a                         ; $5589: $E0 $B0
@@ -3834,7 +3834,7 @@ func_007_5951::
     jr   nz, jr_007_596A                          ; $5959: $20 $0F
 
     ld   a, $36                                   ; $595B: $3E $36
-    ld   [wActiveMusicTrack], a                   ; $595D: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $595D: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $5960: $E0 $B0
     call GetEntityDropTimer                       ; $5962: $CD $FB $0B
     ld   [hl], $80                                ; $5965: $36 $80
@@ -6387,7 +6387,7 @@ func_007_698A::
 
 jr_007_698E:
     ld   a, $4C                                   ; $698E: $3E $4C
-    ld   [wActiveMusicTrack], a                   ; $6990: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $6990: $EA $68 $D3
     jp   IncrementEntityState                     ; $6993: $C3 $12 $3B
 
 func_007_6996::

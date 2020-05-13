@@ -6735,7 +6735,7 @@ jr_004_77FC:
     add  hl, bc                                   ; $7830: $09
     ld   [hl], $04                                ; $7831: $36 $04
     ld   a, $19                                   ; $7833: $3E $19
-    ld   [wActiveMusicTrack], a                   ; $7835: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $7835: $EA $68 $D3
 
 jr_004_7838:
     ret                                           ; $7838: $C9

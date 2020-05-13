@@ -173,7 +173,7 @@ func_005_4896::
     jr   nz, jr_005_48AE                          ; $489F: $20 $0D
 
     ldh  a, [hMusicTrack]                         ; $48A1: $F0 $B0
-    ld   [wActiveMusicTrack], a                   ; $48A3: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $48A3: $EA $68 $D3
     ld   a, $01                                   ; $48A6: $3E $01
     ld   [wMusicTrackTiming], a                   ; $48A8: $EA $0B $C1
     ld   [wC167], a                               ; $48AB: $EA $67 $C1
@@ -192,7 +192,7 @@ jr_005_48AE:
     ld   [wMusicTrackTiming], a                   ; $48BC: $EA $0B $C1
     ld   [wC167], a                               ; $48BF: $EA $67 $C1
     ldh  a, [hMusicTrack]                         ; $48C2: $F0 $B0
-    ld   [wActiveMusicTrack], a                   ; $48C4: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $48C4: $EA $68 $D3
     call_open_dialog $0FE                         ; $48C7
     jp   IncrementEntityState                     ; $48CC: $C3 $12 $3B
 

@@ -195,7 +195,7 @@ jr_006_68F6:
     add  hl, bc                                   ; $68FB: $09
     ld   [hl], a                                  ; $68FC: $77
     ld   a, $22                                   ; $68FD: $3E $22
-    ld   [wActiveMusicTrack], a                   ; $68FF: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $68FF: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $6902: $E0 $B0
     ldh  [$FFBD], a                               ; $6904: $E0 $BD
     ldh  a, [hMapRoom]                            ; $6906: $F0 $F6
@@ -337,7 +337,7 @@ OwlState4Handler::
     ld   hl, wEntitiesPrivateState1Table          ; $69E7: $21 $B0 $C2
     add  hl, bc                                   ; $69EA: $09
     ld   a, [hl]                                  ; $69EB: $7E
-    ld   [wActiveMusicTrack], a                   ; $69EC: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $69EC: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $69EF: $E0 $B0
     ld   a, [wActivePowerUp]                      ; $69F1: $FA $7C $D4
     and  a                                        ; $69F4: $A7
@@ -348,7 +348,7 @@ OwlState4Handler::
     jr   nz, jr_006_6A04                          ; $69FB: $20 $07
 
     ld   a, MUSIC_ACTIVE_POWER_UP
-    ld   [wActiveMusicTrack], a                   ; $69FF: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $69FF: $EA $68 $D3
     ldh  [$FFBD], a                               ; $6A02: $E0 $BD
 
 jr_006_6A04:

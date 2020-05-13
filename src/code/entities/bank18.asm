@@ -145,7 +145,7 @@ MamuAndFrogsState2Handler::
     jr   nz, jr_018_40F0                          ; $40E1: $20 $0D
 
     ld   a, $35                                   ; $40E3: $3E $35
-    ld   [wActiveMusicTrack], a                   ; $40E5: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                     ; $40E5: $EA $68 $D3
     ld   a, $01                                   ; $40E8: $3E $01
     ld   [$D215], a                               ; $40EA: $EA $15 $D2
     jp   IncrementEntityState                     ; $40ED: $C3 $12 $3B
@@ -285,7 +285,7 @@ MamuAndFrogsState4Handler::
     call GetEntityTransitionCountdown             ; $425B: $CD $05 $0C
     ld   [hl], $70                                ; $425E: $36 $70
     ld   a, $10                                   ; $4260: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $4262: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $4262: $EA $68 $D3
     call IncrementEntityState                     ; $4265: $CD $12 $3B
 
 jr_018_4268:
@@ -725,7 +725,7 @@ ManboAndFishesState2Handler::
     jr   nz, jr_018_45B6                          ; $4596: $20 $1E
 
     ld   a, $30                                   ; $4598: $3E $30
-    ld   [wActiveMusicTrack], a                   ; $459A: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $459A: $EA $68 $D3
     call IncrementEntityState                     ; $459D: $CD $12 $3B
 
 func_018_45A0::
@@ -856,7 +856,7 @@ ManboAndFishesState4Handler::
 
     ld   [hl], $70                                ; $4739: $36 $70
     ld   a, $10                                   ; $473B: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $473D: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $473D: $EA $68 $D3
     ld   [wC167], a                               ; $4740: $EA $67 $C1
     call IncrementEntityState                     ; $4743: $CD $12 $3B
 
@@ -1884,15 +1884,15 @@ MadBatterEntityHandler::
     call DecrementEntityIgnoreHitsCountdown       ; $4EED: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4EF0: $F0 $F0
     JP_TABLE                                      ; $4EF2
-._00 dw MadBatterState0Handler                             ; $4EF3
-._01 dw MadBatterState1Handler                             ; $4EF5
-._02 dw MadBatterState2Handler                             ; $4EF7
-._03 dw MadBatterState3Handler                             ; $4EF9
-._04 dw MadBatterState4Handler                             ; $4EFB
-._05 dw MadBatterState5Handler                             ; $4EFD
-._06 dw MadBatterState6Handler                             ; $4EFF
-._07 dw MadBatterState7Handler                             ; $4F01
-._08 dw MadBatterState8Handler                             ; $4F03
+._00 dw MadBatterState0Handler                    ; $4EF3
+._01 dw MadBatterState1Handler                    ; $4EF5
+._02 dw MadBatterState2Handler                    ; $4EF7
+._03 dw MadBatterState3Handler                    ; $4EF9
+._04 dw MadBatterState4Handler                    ; $4EFB
+._05 dw MadBatterState5Handler                    ; $4EFD
+._06 dw MadBatterState6Handler                    ; $4EFF
+._07 dw MadBatterState7Handler                    ; $4F01
+._08 dw MadBatterState8Handler                    ; $4F03
 
 MadBatterState0Handler::
     ld   a, [wMaxMagicPowder]                     ; $4F05: $FA $76 $DB
@@ -2837,15 +2837,15 @@ jr_018_552F:
     call func_018_7D36                            ; $552F: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $5532: $F0 $F0
     JP_TABLE                                      ; $5534
-._00 dw WalrusState0Handler                             ; $5535
-._01 dw WalrusState1Handler                             ; $5537
-._02 dw WalrusState2Handler                             ; $5539
-._03 dw WalrusState3Handler                             ; $553B
-._04 dw WalrusState4Handler                             ; $553D
-._05 dw WalrusState5Handler                             ; $553F
-._06 dw WalrusState6Handler                             ; $5541
-._07 dw WalrusState7Handler                             ; $5543
-._08 dw WalrusState8Handler                             ; $5545
+._00 dw WalrusState0Handler                       ; $5535
+._01 dw WalrusState1Handler                       ; $5537
+._02 dw WalrusState2Handler                       ; $5539
+._03 dw WalrusState3Handler                       ; $553B
+._04 dw WalrusState4Handler                       ; $553D
+._05 dw WalrusState5Handler                       ; $553F
+._06 dw WalrusState6Handler                       ; $5541
+._07 dw WalrusState7Handler                       ; $5543
+._08 dw WalrusState8Handler                       ; $5545
 
 WalrusState0Handler::
     ld   hl, wEntitiesUnknowTableY                ; $5547: $21 $D0 $C3
@@ -2930,7 +2930,7 @@ WalrusState1Handler::
     jr   nz, jr_018_55D8                          ; $55C8: $20 $0E
 
     ld   a, $2F                                   ; $55CA: $3E $2F
-    ld   [wActiveMusicTrack], a                   ; $55CC: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $55CC: $EA $68 $D3
     ld   [$C3C8], a                               ; $55CF: $EA $C8 $C3
     call GetEntityDropTimer                       ; $55D2: $CD $FB $0B
     ld   [hl], $50                                ; $55D5: $36 $50
@@ -3137,7 +3137,7 @@ WalrusState6Handler::
 
     call IncrementEntityState                     ; $5757: $CD $12 $3B
     ldh  a, [hMusicTrack]                         ; $575A: $F0 $B0
-    ld   [wActiveMusicTrack], a                   ; $575C: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $575C: $EA $68 $D3
     ld   a, $FF                                   ; $575F: $3E $FF
     call SetEntitySpriteVariant                   ; $5761: $CD $0C $3B
     call_open_dialog $1E2                         ; $5764
@@ -3438,7 +3438,7 @@ jr_018_5A07:
     xor  a                                        ; $5A0B: $AF
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
     ld   a, MUSIC_OVERWORLD_INTRODUCTION                ; $5A0F: $3E $31
-    ld   [wActiveMusicTrack], a                   ; $5A11: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $5A11: $EA $68 $D3
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
     ldh  [hMusicTrack], a                         ; $5A16: $E0 $B0
 
@@ -3479,7 +3479,7 @@ jr_018_5A3F:
     call GetEntityTransitionCountdown             ; $5A4F: $CD $05 $0C
     ld   [hl], $70                                ; $5A52: $36 $70
     ld   a, MUSIC_WEAPON_ACQUIRED                  ; $5A54: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $5A56: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $5A56: $EA $68 $D3
     ld   a, $FF                                   ; $5A59: $3E $FF
     ldh  [hNextWorldMusicTrack], a                ; $5A5B: $E0 $BF
     ldh  a, [hLinkPositionX]                      ; $5A5D: $F0 $98
@@ -4639,7 +4639,7 @@ MarinAtTheShoreEntityHandler::
 
 MarinAtTheShoreState0Handler::
     ld   a, $4D                                   ; $61D1: $3E $4D
-    ld   [wActiveMusicTrack], a                   ; $61D3: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $61D3: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $61D6: $E0 $B0
     ldh  [$FFBD], a                               ; $61D8: $E0 $BD
     jp   IncrementEntityState                     ; $61DA: $C3 $12 $3B
@@ -4701,7 +4701,7 @@ MarinAtTheShoreState3Handler::
     ld   a, $09                                   ; $6232: $3E $09
     ld   [wGameplayType], a                       ; $6234: $EA $95 $DB
     ld   a, $4E                                   ; $6237: $3E $4E
-    ld   [wActiveMusicTrack], a                   ; $6239: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $6239: $EA $68 $D3
     ret                                           ; $623C: $C9
 
 jr_018_623D:
@@ -7265,7 +7265,7 @@ TurtleRockHeadState1Handler::
     call GetEntityTransitionCountdown             ; $73B1: $CD $05 $0C
     ld   [hl], $80                                ; $73B4: $36 $80
     ld   a, $39                                   ; $73B6: $3E $39
-    ld   [wActiveMusicTrack], a                   ; $73B8: $EA $68 $D3
+    ld   [wPlayMusicTrack], a                   ; $73B8: $EA $68 $D3
     ldh  [hMusicTrack], a                         ; $73BB: $E0 $B0
     ldh  [$FFBD], a                               ; $73BD: $E0 $BD
     ldh  [hNextWorldMusicTrack], a                ; $73BF: $E0 $BF
@@ -8794,7 +8794,7 @@ jr_018_7ED0:
 func_018_7ED2::
     ld   e, $02                                   ; $7ED2: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7ED4: $F0 $99
-    ld   hl, hActiveEntityVisualPosY                                ; $7ED6: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7ED6: $21 $EC $FF
     sub  [hl]                                     ; $7ED9: $96
     bit  7, a                                     ; $7EDA: $CB $7F
     jr   nz, jr_018_7EDF                          ; $7EDC: $20 $01

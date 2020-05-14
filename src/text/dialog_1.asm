@@ -1,4 +1,4 @@
-Dialog000::
+DialogTarinLeaveWithoutShield::
 	db "Whoa, boy! Where"
 	db "ya off to in    "
 	db "such a hurry?   "
@@ -6,7 +6,7 @@ Dialog000::
 	db "got somethin' ta"
 	db "tell ya!@"
 
-Dialog001::
+DialogMarinLinkWakesUp::
 	db "What a relief! I"
 	db "thought you'd   "
 	db "never wake up!  "

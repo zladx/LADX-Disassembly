@@ -1,6 +1,8 @@
+; This file could theoretically automatically be generated from the dialog_xx.asm files
+
 DialogPointerTable::
-	dw Dialog000
-	dw Dialog001
+	dw DialogTarinLeaveWithoutShield
+	dw DialogMarinLinkWakesUp
 	dw Dialog002
 	dw Dialog003
 	dw Dialog004
@@ -42,7 +44,7 @@ DialogPointerTable::
 	dw Dialog028
 	dw Dialog029
 	dw Dialog02A
-	dw Dialog02B
+	dw Dialog02B ; Empty
 	dw Dialog02C
 	dw Dialog02D
 	dw Dialog02E
@@ -54,10 +56,10 @@ DialogPointerTable::
 	dw Dialog034
 	dw Dialog035
 	dw Dialog036
-	dw Dialog037
+	dw Dialog037 ; Empty
 	dw Dialog038
 	dw Dialog039
-	dw Dialog03A
+	dw Dialog03A ; Empty
 	dw Dialog03B
 	dw Dialog03C
 	dw Dialog03D
@@ -94,7 +96,7 @@ DialogPointerTable::
 	dw Dialog05C
 	dw Dialog05D
 	dw Dialog05E
-	dw Dialog05F
+	dw Dialog05F ; Empty
 	dw Dialog060
 	dw Dialog061
 	dw Dialog062
@@ -157,112 +159,116 @@ DialogPointerTable::
 	dw Dialog09B
 	dw Dialog09C
 	dw Dialog09D
-	dw Dialog09E
+	dw Dialog09E ; Empty
 	dw Dialog09F
 	dw Dialog0A0
 	dw Dialog0A1
 	dw Dialog0A2
 	dw Dialog0A3
-	dw Dialog0A4
-	dw Dialog0A5
-	dw Dialog0A6
-	dw Dialog0A7
-	dw Dialog0A8
-	dw Dialog0A9
-	dw Dialog0AA
-	dw Dialog0AB
-	dw Dialog0AC
-	dw Dialog0AD
-	dw Dialog0AE
-	dw Dialog0AF
-	dw Dialog0B0
-	dw Dialog0B1
-	dw Dialog0B2
-	dw Dialog0B3
-	dw Dialog0B4
-	dw Dialog0B5
-	dw Dialog0B6
-	dw Dialog0B7
-	dw Dialog0B8
-	dw Dialog0B9
-	dw Dialog0BA
-	dw Dialog0BB
-	dw Dialog0BC
-	dw Dialog0BD
-	dw Dialog0BE
-	dw Dialog0BF
-	dw Dialog0C0
-	dw Dialog0C1
-	dw Dialog0C2
-	dw Dialog0C3
-	dw Dialog0C4
-	dw Dialog0C5
-	dw Dialog0C6
-	dw Dialog0C7
-	dw Dialog0C8
-	dw Dialog0C9
-	dw Dialog0CA
-	dw Dialog0CB
-	dw Dialog0CC
-	dw Dialog0CD
-	dw Dialog0CE
-	dw Dialog0CF
-	dw Dialog0D0
-	dw Dialog0D1
-	dw Dialog0D2
-	dw Dialog0D3
-	dw Dialog0D4
-	dw Dialog0D5
-	dw Dialog0D6
-	dw Dialog0D7
-	dw Dialog0D8
-	dw Dialog0D9
-	dw Dialog0DA
-	dw Dialog0DB
-	dw Dialog0DC
-	dw Dialog0DD
-	dw Dialog0DE
-	dw Dialog0DF
-	dw Dialog0E0
-	dw Dialog0E1
-	dw Dialog0E2
-	dw Dialog0E3
-	dw Dialog0E4
-	dw Dialog0E5
-	dw Dialog0E6
-	dw Dialog0E7
-	dw Dialog0E8
-	dw Dialog0E9
-	dw Dialog0EA
-	dw Dialog0EB
-	dw Dialog0EC
-	dw Dialog0ED
-	dw Dialog0EE
-	dw Dialog0EF
-	dw Dialog0F0
-	dw Dialog0F1
-	dw Dialog0F2
-	dw Dialog0F3
-	dw Dialog0F4
-	dw Dialog0F5
-	dw Dialog0F6
-	dw Dialog0F7
-	dw Dialog0F8
-	dw Dialog0F9
-	dw Dialog0FA
-	dw Dialog0FB
-	dw Dialog0FC
-	dw Dialog0FD
-	dw Dialog0FE
-	dw Dialog0FF
-	dw Dialog100
-	dw Dialog101
-	dw Dialog102
-	dw Dialog103
-	dw Dialog104
-	dw Dialog105
-	dw Dialog106
-	dw Dialog107
+
+; dialog_2.asm starts here
+	dw DialogFaceKeyAcquired
+	dw DialogBirdKeyAcquired
+	dw DialogMapAcquired
+	dw DialogCompassAcquired
+	dw DialogStoneBeakAcquired
+	dw DialogNightmareKeyAcquired
+	dw DialogSmallKeyAcquired
+	dw Dialog20RupeesAcquired
+	dw Dialog50RupeesAcquired
+	dw Dialog100RupeesAcquired
+	dw Dialog200RupeesAcquired
+	dw DialogHippoModelEnterHouse
+	dw DialogBossMoldorm
+	dw DialogBossSlimeEyes
+	dw DialogBossAnglerFish
+	dw DialogBossSlimeEel
+	dw DialogBossGenie
+	dw DialogBossDefeatedSlimeEel
+	dw DialogBossFacade
+	dw DialogBossDefeatedFacade
+	dw Dialog0B8 ; Empty
+	dw DialogBossDefeatedEvilEagle
+	dw DialogBossEvilEagle
+	dw Dialog0BB ; Empty
+	dw DialogBossHotHead
+	dw DialogBossDefeatedHotHead
+	dw Dialog0BE ; Empty
+	dw Dialog0BF ; Empty
+	dw DialogOwlMysteriousForest
+	dw DialogOwl1
+	dw DialogOwl2
+	dw DialogOwl3
+	dw DialogOwl4
+	dw DialogOwl5
+	dw DialogOwl6
+	dw DialogOwl7
+	dw DialogOwl8
+	dw DialogOwl9
+	dw DialogOwlA
+	dw DialogOwlB
+	dw DialogOwlC
+	dw DialogOwlEnterEgg
+	dw Dialog0CE ; Empty
+	dw DialogOwlGoodbye
+	dw DialogWindFishRevelation
+	dw Dialog0D1 ; Empty
+	dw DialogWindFishPlayInstruments
+	dw Dialog0D3 ; Empty
+	dw Dialog0D4 ; Empty
+	dw DialogMermaidStatue
+	dw Dialog0D6 ; Empty
+	dw DialogWindFishClimbStairs
+	dw DialogSchuleDonavitchMagnifyingLens
+	dw DialogOwlSwordBeach
+	dw DialogMiniBossLanmola
+	dw DialogMamuTooEarly
+	dw DialogMamuOfferSong
+	dw DialogMamuAccept
+	dw DialogMamuDeny
+	dw DialogFrogSongAcquired
+	dw DialogMamuFrogSongComment
+	dw DialogLilDevilIntro
+	dw DialogLilDevilOfferMagicPowder
+	dw DialogLilDevilOfferBombs
+	dw DialogLilDevilOfferArrows
+	dw DialogLilDevilDisappear
+	dw DialogAncientRuinsTooDark
+	dw DialogAncientRuinsRelief
+	dw DialogGoldLeafAcquired
+	dw DialogLastGoldLeafAcquired
+	dw Dialog0EA ; Empty
+	dw Dialog0EB ; Empty
+	dw DialogGuardianAcornAcquired
+	dw DialogMirrorShieldAcquired
+	dw DialogPowerfulBraceletAcquired
+	dw DialogSecretSeashellAcquired
+	dw DialogRaftOwnerAsk
+	dw DialogRaftOwnerAccept
+	dw DialogWaterfallAtShrine
+	dw DialogSouthOfShrine
+	dw DialogAnimalVillageEntrance
+	dw DialogFinalBoss
+	dw DialogFinalBossDefeated
+	dw DialogMarinCraneGameAsk
+	dw DialogMarinCraneGamePersist
+	dw DialogCraneGameOwnerGrabbed
+	dw DialogHippoModelTalk
+	dw DialogHippoModelGoAway
+	dw DialogExamineBookcase
+	dw DialogExamineDresser
+	dw DialogWitchMagicPowderComment
+	dw DialogTarinExamineDrawer
+	dw DialogFullMoonCelloAcquired
+	dw DialogConchHornAcquired
+	dw DialogSeaLilysBellAcquired
+	dw DialogSurfHarpAcquired
+	dw DialogWindMarimbaAcquired
+	dw DialogCoralTriangleAcquired
+	dw DialogOrganOfEveningCalmAcquired
+	dw DialogThunderDrumAcquired
+
+; 
 	dw Dialog108
 	dw Dialog109
 	dw Dialog10A
@@ -343,7 +349,7 @@ DialogPointerTable::
 	dw Dialog155
 	dw Dialog156
 	dw Dialog157
-	dw Dialog158
+	dw Dialog158 ; Empty
 	dw Dialog159
 	dw Dialog15A
 	dw Dialog15B
@@ -414,7 +420,7 @@ DialogPointerTable::
 	dw Dialog19C
 	dw Dialog19D
 	dw Dialog19E
-	dw Dialog19F
+	dw Dialog19F ; Empty
 	dw Dialog1A0
 	dw Dialog1A1
 	dw Dialog1A2
@@ -446,12 +452,12 @@ DialogPointerTable::
 	dw Dialog1BC
 	dw Dialog1BD
 	dw Dialog1BE
-	dw Dialog1BF
+	dw Dialog1BF ; Empty
 	dw Dialog1C0
 	dw Dialog1C1
 	dw Dialog1C2
 	dw Dialog1C3
-	dw Dialog1C4
+	dw Dialog1C4 ; Empty
 	dw Dialog1C5
 	dw Dialog1C6
 	dw Dialog1C7
@@ -526,7 +532,7 @@ DialogPointerTable::
 	dw Dialog20C
 	dw Dialog20D
 	dw Dialog20E
-	dw Dialog20F
+	dw Dialog20F ; Empty
 	dw Dialog210
 	dw Dialog211
 	dw Dialog212
@@ -542,7 +548,7 @@ DialogPointerTable::
 	dw Dialog21C
 	dw Dialog21D
 	dw Dialog21E
-	dw Dialog21F
+	dw Dialog21F ; Empty
 	dw Dialog220
 	dw Dialog221
 	dw Dialog222
@@ -558,7 +564,7 @@ DialogPointerTable::
 	dw Dialog22C
 	dw Dialog22D
 	dw Dialog22E
-	dw Dialog22F
+	dw Dialog22F ; Empty
 	dw Dialog230
 	dw Dialog231
 	dw Dialog232

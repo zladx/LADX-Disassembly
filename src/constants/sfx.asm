@@ -61,7 +61,7 @@ MUSIC_CHRISTINE_HOUSE                           equ $37
 MUSIC_TOTAKA_SONG_UNUSED                        equ $38	; Unused. Where is the one that plays in Richard's mansion?
 MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_UNDER_BRIDGE                      equ $3A ; The fishing pond plays $02 during the fishing minigame. This is a different fishing minigame.
-MUSIC_CLASSIC_RECEIVED_ITEM                     equ $3B	; It is the classic Legend of Zelda item fanfare. I think it is unused.
+MUSIC_CLASSIC_RECEIVED_ITEM                     equ $3B	; It is the classic Legend of Zelda item fanfare. I think it is in the Color Dungeon.
 MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C	; とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
 MUSIC_ENDING                                    equ $3D	; During ending cutscene. Silence, then music. Plays staff roll theme when finished.
 MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E ; Plays during kidnapping related dialog and in the Moblin hideout.

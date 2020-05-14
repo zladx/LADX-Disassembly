@@ -174,13 +174,13 @@ hObjectUnderEntity:: ; FFAF
   ; Type of the object under the active entity
   ds 1
 
-hCurrentScreenTrack:: ; FFB0
+hDefaultMusicTrack:: ; FFB0
   ; Music track to play
   ; See MUSIC_* constants for possible values
   ds 1
 
 ; Next music to be played after room transition
-hNextMusicTrack:: ; hFFB1
+hNextMusicTrackToFadeInto:: ; hFFB1
   ds 1
 
 hFFB2:: ; hFFB2
@@ -204,7 +204,7 @@ hFFBC:: ; FFBC
   ds 3
 
 ; Music track to be played after countdown
-; See hNextMusicTrack and
+; See hNextMusicTrackToFadeInto and
 hNextWorldMusicTrack:: ; FFBF
   ds 1
 

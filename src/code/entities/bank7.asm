@@ -2320,7 +2320,7 @@ jr_007_4F7B:
 
     ld   a, MUSIC_TARIN_BEEHIVE                   ; $4F96: $3E $34
     ld   [wMusicTrackToPlay], a                   ; $4F98: $EA $68 $D3
-    ldh  [hCurrentScreenTrack], a                         ; $4F9B: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $4F9B: $E0 $B0
     call GetEntityTransitionCountdown             ; $4F9D: $CD $05 $0C
     ld   [hl], $C0                                ; $4FA0: $36 $C0
     jp   IncrementEntityState                     ; $4FA2: $C3 $12 $3B
@@ -3230,7 +3230,7 @@ jr_007_5572:
     ld   [wMusicTrackToPlay], a                   ; $5581: $EA $68 $D3
     ld   [wC167], a                               ; $5584: $EA $67 $C1
     ldh  a, [hNextWorldMusicTrack]                ; $5587: $F0 $BF
-    ldh  [hCurrentScreenTrack], a                         ; $5589: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $5589: $E0 $B0
     call GetEntityTransitionCountdown             ; $558B: $CD $05 $0C
     ld   a, $68                                   ; $558E: $3E $68
     ld   [hl], a                                  ; $5590: $77
@@ -3836,7 +3836,7 @@ func_007_5951::
 
     ld   a, MUSIC_MONKEYS_BUILDING_BRIDGE         ; $595B: $3E $36
     ld   [wMusicTrackToPlay], a                   ; $595D: $EA $68 $D3
-    ldh  [hCurrentScreenTrack], a                         ; $5960: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $5960: $E0 $B0
     call GetEntityDropTimer                       ; $5962: $CD $FB $0B
     ld   [hl], $80                                ; $5965: $36 $80
     jp   IncrementEntityState                     ; $5967: $C3 $12 $3B
@@ -7294,7 +7294,7 @@ func_007_6ED0::
     ld   [hl], $7F                                ; $6ED4: $36 $7F
     call GetEntityTransitionCountdown             ; $6ED6: $CD $05 $0C
     ld   [hl], $80                                ; $6ED9: $36 $80
-    ldh  a, [hCurrentScreenTrack]                         ; $6EDB: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                  ; $6EDB: $F0 $B0
     ld   hl, wEntitiesUnknowTableR                ; $6EDD: $21 $90 $C3
     add  hl, bc                                   ; $6EE0: $09
     ld   [hl], a                                  ; $6EE1: $77
@@ -9589,7 +9589,7 @@ func_007_7ED6::
     ld   hl, wEntitiesUnknowTableR                ; $7F00: $21 $90 $C3
     add  hl, bc                                   ; $7F03: $09
     ld   a, [hl]                                  ; $7F04: $7E
-    ldh  [hCurrentScreenTrack], a                         ; $7F05: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $7F05: $E0 $B0
     jp   jr_007_7F76                              ; $7F07: $C3 $76 $7F
 
 jr_007_7F0A:

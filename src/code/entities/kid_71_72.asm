@@ -89,7 +89,7 @@ func_006_60E5::
 
 jr_006_60F0:
     ld   [wMusicTrackToPlay], a                   ; $60F0: $EA $68 $D3
-    ldh  [hCurrentScreenTrack], a                         ; $60F3: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $60F3: $E0 $B0
     ldh  [$FFBD], a                               ; $60F5: $E0 $BD
 
 label_006_60F7:

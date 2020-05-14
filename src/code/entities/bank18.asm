@@ -3142,7 +3142,7 @@ WalrusDisappearHandler::
 
     call IncrementEntityState                     ; $5757: $CD $12 $3B
 	; Resumes the normal music after the walrus has disappeared
-    ldh  a, [hCurrentScreenTrack]                         ; $575A: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                         ; $575A: $F0 $B0
     ld   [wMusicTrackToPlay], a                   ; $575C: $EA $68 $D3
     ld   a, $FF                                   ; $575F: $3E $FF
     call SetEntitySpriteVariant                   ; $5761: $CD $0C $3B
@@ -3450,7 +3450,7 @@ jr_018_5A07:
     ld   [wMusicTrackToPlay], a                   ; $5A11: $EA $68 $D3
 	; Sets the area track to overworld, so that after the introduction section fanfare, the overworld music will play rather than the Koholint Island theme
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
-    ldh  [hCurrentScreenTrack], a                         ; $5A16: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                         ; $5A16: $E0 $B0
 
 jr_018_5A18:
     xor  a                                        ; $5A18: $AF
@@ -4654,7 +4654,7 @@ MarinAtTheShoreEntityHandler::
 MarinAtTheShoreState0Handler::
     ld   a, MUSIC_MARIN_BEACH_TRANSITION          ; $61D1: $3E $4D
     ld   [wMusicTrackToPlay], a                   ; $61D3: $EA $68 $D3
-    ldh  [hCurrentScreenTrack], a                         ; $61D6: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                         ; $61D6: $E0 $B0
     ldh  [$FFBD], a                               ; $61D8: $E0 $BD
     jp   IncrementEntityState                     ; $61DA: $C3 $12 $3B
 
@@ -7280,7 +7280,7 @@ TurtleRockHeadState1Handler::
     ld   [hl], $80                                ; $73B4: $36 $80
     ld   a, MUSIC_TURTLE_ROCK_ENTRANCE_BOSS       ; $73B6: $3E $39
     ld   [wMusicTrackToPlay], a                   ; $73B8: $EA $68 $D3
-    ldh  [hCurrentScreenTrack], a                         ; $73BB: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                         ; $73BB: $E0 $B0
     ldh  [$FFBD], a                               ; $73BD: $E0 $BD
     ldh  [hNextWorldMusicTrack], a                ; $73BF: $E0 $BF
     jp   IncrementEntityState                     ; $73C1: $C3 $12 $3B

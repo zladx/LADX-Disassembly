@@ -430,7 +430,7 @@ SetMusicTrackIfHasSword::
 
 SetMusicTrack::
     ld   [wMusicTrackToPlay], a                   ; $499C: $EA $68 $D3
-    ldh  [hCurrentScreenTrack], a                         ; $499F: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $499F: $E0 $B0
     ldh  [$FFBD], a                               ; $49A1: $E0 $BD
     ldh  [hNextWorldMusicTrack], a                ; $49A3: $E0 $BF
     ret                                           ; $49A5: $C9
@@ -484,8 +484,9 @@ EntityInitMovingBlockMover::
     ret                                           ; $49E1: $C9
 
 EntityInitDesertLanmola::
+	; Sets MUSIC_NONE as the default music track. weird...
     xor  a                                        ; $49E2: $AF
-    ldh  [hCurrentScreenTrack], a                         ; $49E3: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $49E3: $E0 $B0
     ret                                           ; $49E5: $C9
 
 EntityInitFloatingItem2::
@@ -621,9 +622,9 @@ EntityInitMarin::
 
     inc  a                                        ; $4A94: $3C
     ld   [$C3C8], a                               ; $4A95: $EA $C8 $C3
-    ld   a, $2F                                   ; $4A98: $3E $2F
-    ldh  [hNextMusicTrack], a                     ; $4A9A: $E0 $B1
-    ldh  [hCurrentScreenTrack], a                         ; $4A9C: $E0 $B0
+    ld   a, MUSIC_MARIN_SINGING                   ; $4A98: $3E $2F
+    ldh  [hNextMusicTrackToFadeInto], a           ; $4A9A: $E0 $B1
+    ldh  [hDefaultMusicTrack], a                  ; $4A9C: $E0 $B0
     ldh  [$FFBD], a                               ; $4A9E: $E0 $BD
     call label_27EA                               ; $4AA0: $CD $EA $27
 .mabeWeatherVaneEnd
@@ -3307,7 +3308,7 @@ jr_003_5BCB:
     ld   a, MUSIC_OVERWORLD_INTRODUCTION          ; $5BCE: $3E $31
     ld   [wMusicTrackToPlay], a                   ; $5BD0: $EA $68 $D3
     ld   a, MUSIC_OVERWORLD                       ; $5BD3: $3E $05
-    ldh  [hCurrentScreenTrack], a                         ; $5BD5: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $5BD5: $E0 $B0
     ldh  [hNextWorldMusicTrack], a                ; $5BD7: $E0 $BF
     call GetEntityDropTimer                       ; $5BD9: $CD $FB $0B
     ld   [hl], $52                                ; $5BDC: $36 $52
@@ -3805,7 +3806,7 @@ Data_003_5F04::
     db   $20, $28, $29, $2A, $2B, $2C, $2D, $2E
 
 func_003_5F0C::
-    ld   a, [$D369]                               ; $5F0C: $FA $69 $D3
+    ld   a, [wActiveMusicIndex]                   ; $5F0C: $FA $69 $D3
     and  a                                        ; $5F0F: $A7
     jr   nz, jr_003_5F2C                          ; $5F10: $20 $1A
 
@@ -6158,7 +6159,7 @@ jr_003_6D73:
     and  a                                        ; $6DD1: $A7
     jr   nz, func_003_6DDF                        ; $6DD2: $20 $0B
 
-    ldh  a, [hCurrentScreenTrack]                         ; $6DD4: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                  ; $6DD4: $F0 $B0
     cp   MUSIC_OWL                                ; $6DD6: $FE $22
     jr   z, jr_003_6DDD                           ; $6DD8: $28 $03
 

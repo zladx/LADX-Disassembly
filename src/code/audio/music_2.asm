@@ -45,7 +45,7 @@ DontPlayAudio_1E::
     ret                                           ; $4038: $C9
 
 BeginMusicTrack_1E::
-    ; [$D369] = [wMusicTrackToPlay]
+    ; [wActiveMusicIndex] = [wMusicTrackToPlay]
     ld   [hl], a                                  ; $4039: $77
     call BeginMusicTrack_Dispatch_1E              ; $403A: $CD $63 $41
     jr   jr_01E_4028                              ; $403D: $18 $E9
@@ -256,7 +256,7 @@ jr_01E_4137:
 
 BeginMusicTrack_Dispatch_1E::
     ld   b, a                                     ; $4163: $47
-    ld   a, [wMusicMode]                          ; $4164: $FA $CE $D3
+    ld   a, [wActiveMusicTable]                   ; $4164: $FA $CE $D3
     and  a                                        ; $4167: $A7
     jp   nz, DontPlayAudio_1E                     ; $4168: $C2 $2B $40
 
@@ -365,7 +365,7 @@ jr_01E_4348:
     jp   label_01E_473F                           ; $4356: $C3 $3F $47
 
 label_01E_4359:
-    ld   a, [$D369]                               ; $4359: $FA $69 $D3
+    ld   a, [wActiveMusicIndex]                   ; $4359: $FA $69 $D3
     ld   hl, Data_01E_41AF                        ; $435C: $21 $AF $41
 
 jr_01E_435F:
@@ -710,7 +710,7 @@ jr_01E_450E:
     cp   $15                                      ; $4511: $FE $15
     jp   z, ContinueCurrentScreenMusic_1E         ; $4513: $CA $54 $48
 
-    ld   hl, $D369                                ; $4516: $21 $69 $D3
+    ld   hl, wActiveMusicIndex                    ; $4516: $21 $69 $D3
     ld   [hl], $00                                ; $4519: $36 $00
     call func_01E_4137                            ; $451B: $CD $37 $41
     ret                                           ; $451E: $C9
@@ -794,14 +794,14 @@ jr_01E_457E:
     jr   jr_01E_453C                              ; $457F: $18 $BB
 
 func_01E_4581::
-    ld   hl, $D369                                ; $4581: $21 $69 $D3
+    ld   hl, wActiveMusicIndex                    ; $4581: $21 $69 $D3
     ld   a, [hl]                                  ; $4584: $7E
     and  a                                        ; $4585: $A7
     ret  z                                        ; $4586: $C8
 
-    ld   a, [wMusicMode]                               ; $4587: $FA $CE $D3
+    ld   a, [wActiveMusicTable]                   ; $4587: $FA $CE $D3
     and  a                                        ; $458A: $A7
-    jp   nz, DontPlayAudio_1E                       ; $458B: $C2 $2B $40
+    jp   nz, DontPlayAudio_1E                     ; $458B: $C2 $2B $40
 
     call func_01E_4387                            ; $458E: $CD $87 $43
     ld   a, $01                                   ; $4591: $3E $01
@@ -1338,7 +1338,7 @@ func_01E_4841::
 
 ContinueCurrentScreenMusic_1E:
     xor  a                                        ; $4854: $AF
-    ld   [wMusicMode], a                          ; $4855: $EA $CE $D3
+    ld   [wActiveMusicTable], a                   ; $4855: $EA $CE $D3
     ldh  a, [$FFBF]                               ; $4858: $F0 $BF
     ld   [wMusicTrackToPlay], a                   ; $485A: $EA $68 $D3
     jp   PlayMusicTrack_1E_EntryPoint             ; $485D: $C3 $1E $40
@@ -1642,7 +1642,7 @@ label_01E_4D1D:
     ld   a, $03                                   ; $4D21: $3E $03
     ld   [$D355], a                               ; $4D23: $EA $55 $D3
     xor  a                                        ; $4D26: $AF
-    ld   [$D369], a                               ; $4D27: $EA $69 $D3
+    ld   [wActiveMusicIndex], a                   ; $4D27: $EA $69 $D3
 
 func_01E_4D2A::
     xor  a                                        ; $4D2A: $AF

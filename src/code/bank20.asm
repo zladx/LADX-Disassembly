@@ -1965,7 +1965,7 @@ label_020_55C2:
     ret                                           ; $55C9: $C9
 
 func_020_55CA::
-    ldh  a, [hMusicFadeOutTimer]                               ; $55CA: $F0 $A8
+    ldh  a, [hMusicFadeOutTimer]                  ; $55CA: $F0 $A8
     and  a                                        ; $55CC: $A7
     jr   z, jr_020_55F0                           ; $55CD: $28 $21
 

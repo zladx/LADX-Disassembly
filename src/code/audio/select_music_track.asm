@@ -58,9 +58,9 @@ SelectMusicTrackAfterTransition::
     ld   d, [hl]                                  ; $4161: $56
     ld   a, d                                     ; $4162: $7A
 
-    ; Clear hNextMusicTrack
+    ; Clear hNextMusicTrackToFadeInto
     xor  a                                        ; $4163: $AF
-    ldh  [hNextMusicTrack], a                     ; $4164: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $4164: $E0 $B1
 
     ; If wIsIndoor == 0, skip further code and load the soundtrack
     ld   a, [wIsIndoor]                         ; $4166: $FA $A5 $DB
@@ -125,7 +125,7 @@ SelectMusicTrackAfterTransition::
     ; Set overworld soundtrack
     ld   e, a                                     ; $41A7: $5F
     ld   d, $00                                   ; $41A8: $16 $00
-    ldh  [hCurrentScreenTrack], a                         ; $41AA: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                         ; $41AA: $E0 $B0
     call SetWorldMusicTrack                       ; $41AC: $CD $C3 $27
 
     ; If soundtrack id <= $24…

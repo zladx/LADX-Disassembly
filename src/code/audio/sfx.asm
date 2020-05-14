@@ -8719,7 +8719,7 @@ func_01F_7B5C::
     ld   a, $03                                   ; $7B60: $3E $03
     ld   [$D355], a                               ; $7B62: $EA $55 $D3
     xor  a                                        ; $7B65: $AF
-    ld   [$D369], a                               ; $7B66: $EA $69 $D3
+    ld   [wActiveMusicIndex], a                   ; $7B66: $EA $69 $D3
     xor  a                                        ; $7B69: $AF
     ld   [$D361], a                               ; $7B6A: $EA $61 $D3
     ld   [$D371], a                               ; $7B6D: $EA $71 $D3

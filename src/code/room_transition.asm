@@ -92,12 +92,12 @@ ApplyRoomTransition::
 
     ; Change the music track if needed
     pop  af                                       ; $7931: $F1
-    ldh  a, [hNextMusicTrack]                     ; $7932: $F0 $B1
+    ldh  a, [hNextMusicTrackToFadeInto]           ; $7932: $F0 $B1
     and  a                                        ; $7934: $A7
     jr   z, .noMusicTrackChange                   ; $7935: $28 $06
     call SetWorldMusicTrack                       ; $7937: $CD $C3 $27
     xor  a                                        ; $793A: $AF
-    ldh  [hNextMusicTrack], a                     ; $793B: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $793B: $E0 $B1
 .noMusicTrackChange
 
     ; Clear variables
@@ -482,18 +482,18 @@ RoomTransitionPrepareHandler::
     ld   [$C1CF], a                               ; $7ACD: $EA $CF $C1
     ld   a, [wTunicType]                          ; $7AD0: $FA $0F $DC
     and  a                                        ; $7AD3: $A7
-    ldh  a, [hCurrentScreenTrack]                               ; $7AD4: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                               ; $7AD4: $F0 $B0
     jr   nz, .jr_002_7AE2                         ; $7AD6: $20 $0A
 
     ld   a, [wActivePowerUp]                      ; $7AD8: $FA $7C $D4
     and  a                                        ; $7ADB: $A7
-    ldh  a, [hCurrentScreenTrack]                         ; $7ADC: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                         ; $7ADC: $F0 $B0
     jr   z, .jr_002_7AE2                          ; $7ADE: $28 $02
 
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $7AE0: $3E $49
 
 .jr_002_7AE2
-    ldh  [hNextMusicTrack], a                     ; $7AE2: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $7AE2: $E0 $B1
     call label_27EA                               ; $7AE4: $CD $EA $27
     jr   IncrementRoomTransitionStateAndReturn    ; $7AE7: $18 $4D
 
@@ -515,7 +515,7 @@ RoomTransitionPrepareHandler::
     ld   hl, OverworldMusicTracks                 ; $7AFA: $21 $00 $40
     add  hl, de                                   ; $7AFD: $19
     ld   a, [hl]                                  ; $7AFE: $7E
-    ld   hl, hCurrentScreenTrack                          ; $7AFF: $21 $B0 $FF
+    ld   hl, hDefaultMusicTrack                          ; $7AFF: $21 $B0 $FF
     cp   [hl]                                     ; $7B02: $BE
     jr   z, IncrementRoomTransitionStateAndReturn ; $7B03: $28 $31
 
@@ -541,7 +541,7 @@ jr_002_7B14:
 
     call SetNextMusicTrack                        ; $7B20: $CD $2D $7B
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $7B23: $3E $49
-    ldh  [hNextMusicTrack], a                     ; $7B25: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $7B25: $E0 $B1
     ldh  [$FFBD], a                               ; $7B27: $E0 $BD
     ret                                           ; $7B29: $C9
 
@@ -551,12 +551,12 @@ jr_002_7B2A:
 
 SetNextMusicTrack::
     ld   a, c                                     ; $7B2D: $79
-    ldh  [hNextMusicTrack], a                     ; $7B2E: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $7B2E: $E0 $B1
     call label_27EA                               ; $7B30: $CD $EA $27
 
 .setMusicTrack
     ld   a, c                                     ; $7B33: $79
-    ldh  [hCurrentScreenTrack], a                         ; $7B34: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                         ; $7B34: $E0 $B0
 
 IncrementRoomTransitionStateAndReturn::
     ld   a, [wRoomTransitionState]                ; $7B36: $FA $24 $C1

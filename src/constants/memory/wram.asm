@@ -847,7 +847,7 @@ wMusicTrackToPlay:: ; D368
   ; The music track to be played next
   ds 1
 
-wD369:: ; D369
+wActiveMusicIndex:: ; wActiveMusicIndex
   ; Copied from wMusicTrackToPlay
   ds 1
 
@@ -902,7 +902,7 @@ wD3C8::
 wD3C9::
   ds 1
 wD3CA::
-  ; Copied from $D369 (a music index)
+  ; Copied from wActiveMusicIndex (a music index)
   ds 1
 wD3CB:: ; D3CB
   ; Copied from $D3CA
@@ -911,8 +911,7 @@ wD3CB:: ; D3CB
 ; Unlabeled
 ds 2
 
-wMusicMode:: ; D3CE
-  ; Music disabled when this is 0?
+wActiveMusicTable:: ; D3CE
   ds 1
 
 ; Unlabeled

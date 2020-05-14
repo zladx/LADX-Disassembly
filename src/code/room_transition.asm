@@ -113,7 +113,7 @@ ApplyRoomTransition::
 
     ; If the transition direction was to the bottom…
     ld   a, [wRoomTransitionDirection]            ; $794F: $FA $25 $C1
-    cp   DIRECTION_DOWN               ; $7952: $FE $03
+    cp   DIRECTION_DOWN                           ; $7952: $FE $03
     jr   nz, .bottomDirectionEnd                  ; $7954: $20 $24
 
     ; Initiate a jump if Link landed on a ledge
@@ -123,7 +123,7 @@ ApplyRoomTransition::
 
     ; If (hObjectUnderEntity != $DB && hObjectUnderEntity != $DC && (hObjectUnderEntity == $E1 || wCollisionType != 0),
     ; handle special case.
-    ldh  a, [hObjectUnderEntity]                               ; $795D: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $795D: $F0 $AF
     cp   $DB                                      ; $795F: $FE $DB
     jr   z, .bottomDirectionEnd                   ; $7961: $28 $17
 
@@ -133,7 +133,7 @@ ApplyRoomTransition::
     cp   $E1                                      ; $7967: $FE $E1
     jr   z, .handleFFAFSpecialCase                ; $7969: $28 $06
 
-    ld   a, [wCollisionType]                               ; $796B: $FA $33 $C1
+    ld   a, [wCollisionType]                      ; $796B: $FA $33 $C1
     and  a                                        ; $796E: $A7
     jr   z, .bottomDirectionEnd                   ; $796F: $28 $09
 
@@ -194,7 +194,7 @@ ApplyRoomTransition::
     ldh  a, [hMapRoom]                            ; $79A6: $F0 $F6
     ld   e, a                                     ; $79A8: $5F
 
-    call GetChestsStatusForRoom_trampoline                   ; $79A9: $CD $ED $29
+    call GetChestsStatusForRoom_trampoline        ; $79A9: $CD $ED $29
 
     ; If chest status is not some key, and room trigger != EFFECT_DROP_KEY, return.
     cp   CHEST_SMALL_KEY                          ; $79AC: $FE $1A
@@ -309,7 +309,7 @@ RoomTransitionPrepareHandler::
 
     ; … and is not sliding to the bottom…
     ld   a, c                                     ; $7A1A: $79
-    cp   DIRECTION_DOWN               ; $7A1B: $FE $03
+    cp   DIRECTION_DOWN                           ; $7A1B: $FE $03
     jr   z, .noWindFishEggMaze                    ; $7A1D: $28 $29
 
     ; hl = WindFishEggMazeSequence + $DB7C
@@ -341,7 +341,7 @@ RoomTransitionPrepareHandler::
     cp   $07                                      ; $7A3E: $FE $07
     jp   nz, .loadRoom                            ; $7A40: $C2 $A5 $7A
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $7A43: $3E $02
-    ld   [wNextJingle], a                               ; $7A45: $EA $69 $C1
+    ld   [wNextJingle], a                         ; $7A45: $EA $69 $C1
 
 .noWindFishEggMaze
 
@@ -359,7 +359,7 @@ RoomTransitionPrepareHandler::
 
     ; If wRoomTransitionDirection == Top…
     ld   a, c                                     ; $7A50: $79
-    cp   DIRECTION_UP                  ; $7A51: $FE $02
+    cp   DIRECTION_UP                             ; $7A51: $FE $02
     jr   nz, .noFaceShrineHack                    ; $7A53: $20 $12
 
     ; … and dungeon is Face Shrine…
@@ -395,7 +395,7 @@ RoomTransitionPrepareHandler::
 
     ; … and direction == top…
     ld   a, c                                     ; $7A73: $79
-    cp   DIRECTION_UP                  ; $7A74: $FE $02
+    cp   DIRECTION_UP                             ; $7A74: $FE $02
     jr   nz, .mysteriousWoodsEnd                  ; $7A76: $20 $0C
 
     ; … Link got lost in the Mysterious Woods
@@ -430,7 +430,7 @@ RoomTransitionPrepareHandler::
 
     ; … and direction == top…
     ld   a, c                                     ; $7A92: $79
-    cp   DIRECTION_UP                  ; $7A93: $FE $02
+    cp   DIRECTION_UP                             ; $7A93: $FE $02
     jr   nz, .forestRoomEnd                       ; $7A95: $20 $0E
 
     ; … and this room has not been visited yet…
@@ -463,10 +463,10 @@ RoomTransitionPrepareHandler::
 
     ; Replace objects $56 and $57 by object $0D
     ld   a, $02                                   ; $7AB8: $3E $02
-    call ReplaceObjects56and57_trampoline                                ; $7ABA: $CD $F5 $09
+    call ReplaceObjects56and57_trampoline         ; $7ABA: $CD $F5 $09
 .colorDungeonEnd
 
-    call LoadRoomEntities                               ; $7ABD: $CD $FE $37
+    call LoadRoomEntities                         ; $7ABD: $CD $FE $37
     call DrawLinkSprite                           ; $7AC0: $CD $2E $1D
     call ApplyLinkMotionState                     ; $7AC3: $CD $94 $17
 
@@ -565,7 +565,7 @@ IncrementRoomTransitionStateAndReturn::
     ret                                           ; $7B3D: $C9
 
 RoomTransitionLoadTiles::
-    call LoadRoomTiles                          ; $7B3E: $CD $1E $0D
+    call LoadRoomTiles                            ; $7B3E: $CD $1E $0D
 
     ; If room has mobile blocks…
     ld   a, [wRoomSwitchableObject]               ; $7B41: $FA $FA $D6
@@ -574,6 +574,7 @@ RoomTransitionLoadTiles::
     ; … $FFBB == 2
     ld   a, $02                                   ; $7B48: $3E $02
     ldh  [$FFBB], a                               ; $7B4A: $E0 $BB
+
 .mobileBlocksEnd
 
     jp   IncrementRoomTransitionStateAndReturn    ; $7B4C: $C3 $36 $7B
@@ -717,7 +718,7 @@ RoomTransitionConfigureScrollTargets::
     ld   hl, data_002_7B5F                        ; $7BE1: $21 $5F $7B
     add  hl, bc                                   ; $7BE4: $09
     ld   a, [hl]                                  ; $7BE5: $7E
-    ld   [wBGUpdateRegionTilesCount], a                               ; $7BE6: $EA $28 $C1
+    ld   [wBGUpdateRegionTilesCount], a           ; $7BE6: $EA $28 $C1
 
     ; Set number of frames to elapse before reaching
     ; the mid-transition point
@@ -737,7 +738,7 @@ RoomTransitionConfigureScrollTargets::
 
 RoomTransitionFirstHalfHandler::
     ; Update BG Map
-    jp   UpdateBGRegion                       ; $7C00: $C3 $09 $22
+    jp   UpdateBGRegion                           ; $7C00: $C3 $09 $22
 
 RoomTransitionSecondHalfHandler::
     ; The scroll increment has already been done earlier:
@@ -755,13 +756,13 @@ label_002_7C14:
     and  $03                                      ; $7C16: $E6 $03
     ld   hl, wC167                                ; $7C18: $21 $67 $C1
     or   [hl]                                     ; $7C1B: $B6
-    ld   hl, hLinkInteractiveMotionBlocked                                ; $7C1C: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked        ; $7C1C: $21 $A1 $FF
     or   [hl]                                     ; $7C1F: $B6
     ld   hl, wDialogGotItem                       ; $7C20: $21 $A9 $C1
     or   [hl]                                     ; $7C23: $B6
     ret  nz                                       ; $7C24: $C0
 
-    ld   a, [wLinkGroundVfx]                               ; $7C25: $FA $81 $C1
+    ld   a, [wLinkGroundVfx]                      ; $7C25: $FA $81 $C1
     sub  $F0                                      ; $7C28: $D6 $F0
     ld   e, a                                     ; $7C2A: $5F
     ld   d, $00                                   ; $7C2B: $16 $00
@@ -790,7 +791,7 @@ label_002_7C50:
     or   [hl]                                     ; $7C57: $B6
     ld   hl, wDialogGotItem                       ; $7C58: $21 $A9 $C1
     or   [hl]                                     ; $7C5B: $B6
-    ld   hl, hLinkInteractiveMotionBlocked                                ; $7C5C: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked        ; $7C5C: $21 $A1 $FF
     or   [hl]                                     ; $7C5F: $B6
     ld   hl, wDialogState                         ; $7C60: $21 $9F $C1
     or   [hl]                                     ; $7C63: $B6

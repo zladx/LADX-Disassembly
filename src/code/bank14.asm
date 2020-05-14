@@ -181,8 +181,8 @@ PerformOverworldAudioTasks::
     ; If the countdown reached 0…
     jr   nz, .compassSfxEnd                       ; $4AC6: $20 $04
     ; play the compass sfx.
-    ld   a, WAVE_SFX_COMPASS                           ; $4AC8: $3E $1B
-    ldh  [hWaveSfx], a                                ; $4ACA: $E0 $F3
+    ld   a, WAVE_SFX_COMPASS                      ; $4AC8: $3E $1B
+    ldh  [hWaveSfx], a                            ; $4ACA: $E0 $F3
 .compassSfxEnd
 
     ;

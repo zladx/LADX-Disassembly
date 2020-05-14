@@ -1994,7 +1994,7 @@ func_019_4DBC::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $4DF1: $21 $40 $C3
     add  hl, de                                   ; $4DF4: $19
     ld   [hl], $C1                                ; $4DF5: $36 $C1
-    ld   a, MUSIC_FLYING_ROOSTER_REVIVED          ; $4DF7: $3E $55
+    ld   a, MUSIC_ROOSTER_REVIVAL                 ; $4DF7: $3E $55
     ld   [wMusicTrackToPlay], a                   ; $4DF9: $EA $68 $D3
     jp   IncrementEntityState                     ; $4DFC: $C3 $12 $3B
 
@@ -2091,7 +2091,7 @@ func_019_4E74::
     xor  a                                        ; $4EA0: $AF
     ld   [wC167], a                               ; $4EA1: $EA $67 $C1
     call func_019_7F0E                            ; $4EA4: $CD $0E $7F
-    jp   ClearEntityStatus_19                            ; $4EA7: $C3 $61 $7E
+    jp   ClearEntityStatus_19                     ; $4EA7: $C3 $61 $7E
 
 Data_019_4EAA::
     db   $6A, $06, $6C, $06, $6E, $06

@@ -627,6 +627,7 @@ EntityInitMarin::
     ldh  [hDefaultMusicTrack], a                  ; $4A9C: $E0 $B0
     ldh  [$FFBD], a                               ; $4A9E: $E0 $BD
     call label_27EA                               ; $4AA0: $CD $EA $27
+	
 .mabeWeatherVaneEnd
 
     ld   a, [ROM_DebugTool1]                      ; $4AA3: $FA $03 $00
@@ -3305,7 +3306,7 @@ jr_003_5BCB:
     dec  a                                        ; $5BCB: $3D
     jr   nz, jr_003_5BE1                          ; $5BCC: $20 $13
 
-    ld   a, MUSIC_OVERWORLD_INTRODUCTION          ; $5BCE: $3E $31
+    ld   a, MUSIC_OVERWORLD_INTRO                 ; $5BCE: $3E $31
     ld   [wMusicTrackToPlay], a                   ; $5BD0: $EA $68 $D3
     ld   a, MUSIC_OVERWORLD                       ; $5BD3: $3E $05
     ldh  [hDefaultMusicTrack], a                  ; $5BD5: $E0 $B0

@@ -3446,7 +3446,7 @@ jr_018_5A07:
 
     xor  a                                        ; $5A0B: $AF
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
-    ld   a, MUSIC_OVERWORLD_INTRODUCTION          ; $5A0F: $3E $31
+    ld   a, MUSIC_OVERWORLD_INTRO                 ; $5A0F: $3E $31
     ld   [wMusicTrackToPlay], a                   ; $5A11: $EA $68 $D3
 	; Sets the area track to overworld, so that after the introduction section fanfare, the overworld music will play rather than the Koholint Island theme
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
@@ -4643,7 +4643,7 @@ MarinAtTheShoreEntityHandler::
 
     ldh  a, [hActiveEntityState]                  ; $61C0: $F0 $F0
     JP_TABLE                                      ; $61C2
-._00 dw MarinAtTheShoreState0Handler
+._00 dw MarinAtTheShoreTransitionHandler
 ._01 dw MarinAtTheShoreState1Handler
 ._02 dw MarinAtTheShoreState2Handler
 ._03 dw MarinAtTheShoreState3Handler
@@ -4651,7 +4651,7 @@ MarinAtTheShoreEntityHandler::
 ._05 dw MarinAtTheShoreState5Handler
 ._06 dw MarinAtTheShoreState6Handler
 
-MarinAtTheShoreState0Handler::
+MarinAtTheShoreTransitionHandler::
     ld   a, MUSIC_MARIN_BEACH_TRANSITION          ; $61D1: $3E $4D
     ld   [wMusicTrackToPlay], a                   ; $61D3: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $61D6: $E0 $B0

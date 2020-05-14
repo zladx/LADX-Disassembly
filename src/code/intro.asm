@@ -1727,7 +1727,7 @@ InertLinkState2Handler::
     ld   a, [$D00A]
     cp   $0B
     jr   nz, .return
-    ld   a, MUSIC_TITLE_SCREEN_INTRODUCTION
+    ld   a, MUSIC_TITLE_SCREEN_INTRO
     ld   [wMusicTrackToPlay], a
 
 .return

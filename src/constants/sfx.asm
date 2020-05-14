@@ -1,11 +1,10 @@
-;
-; Constants for audio effects
+; Constants for music tracks and sound effects
 
 ; Values for wMusicTrackToPlay
  
 MUSIC_NONE                                      equ $00 ; This value means: Don't play a different track.
-MUSIC_TITLE_SCREEN_INTRODUCTION                 equ $01	; $0D's introduction section.
-MUSIC_TRENDY_GAME                               equ $02
+MUSIC_TITLE_SCREEN_INTRO                        equ $01	; $0D's introduction section.
+MUSIC_MINIGAME                                  equ $02
 MUSIC_GAME_OVER                                 equ $03
 MUSIC_MABE_VILLAGE                              equ $04
 MUSIC_OVERWORLD                                 equ $05
@@ -19,7 +18,7 @@ MUSIC_FAIRY_FOUNTAIN                            equ $0C
 MUSIC_TITLE_SCREEN                              equ $0D	; Plays when $01 has finished.
 MUSIC_BOWWOW_KIDNAPPED                          equ $0E	; Plays when $3E has finished.
 MUSIC_SWORD_ACQUIRED                            equ $0F ; Plays when you retrieve your sword on the beach.
-MUSIC_TOOL_ACQUIRED                             equ $10
+MUSIC_TOOL_ACQUIRED                             equ $10 ; Tool refers to many things here. Weapons, maps/compasses, etc.
 MUSIC_FILE_SELECT                               equ $11
 MUSIC_EGG_MAZE                                  equ $12
 MUSIC_KANALET_CASTLE                            equ $13
@@ -33,9 +32,9 @@ MUSIC_INTRO_CUTSCENE                            equ $1A
 MUSIC_INSTRUMENT_ACQUIRED                       equ $1B
 MUSIC_LINK_AWAKENS                              equ $1C	; Played in the house when you begin your game.
 MUSIC_SWORD_SEARCH                              equ $1D	; First time on Koholint Island.
-MUSIC_DREAMING                                  equ $1E
+MUSIC_DREAMING                                  equ $1E ; Plays when you sleep in the bed in the upper Dream Shrine and the VFXplays.
 MUSIC_SOUTHERN_SHRINE                           equ $1F 
-MUSIC_FULL_MOON_CELLO                           equ $20
+MUSIC_INSTRUMENT_FULL_MOON_CELLO                equ $20 ; When you obtain the Full Moon Cello and it plays its tune.
 MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22
 MUSIC_FINAL_BOSS                                equ $23
@@ -43,23 +42,23 @@ MUSIC_DREAM_SHRINE_BED                          equ $24
 MUSIC_HEART_CONTAINER_ACQUIRED                  equ $25
 MUSIC_COMMON_CAVE                               equ $26
 MUSIC_POWERUP_ACQUIRED                          equ $27
-MUSIC_INSTRUMENT_CONCH_HORN                     equ $28
-MUSIC_INSTRUMENT_SEA_LILY_BELL                  equ $29
-MUSIC_INSTRUMENT_SURF_HARP                      equ $2A
-MUSIC_INSTRUMENT_WIND_MARIMBA                   equ $2B
-MUSIC_INSTRUMENT_CORAL_TRIANGLE                 equ $2C
-MUSIC_INSTRUMENT_ORGAN_OF_EVENING               equ $2D
-MUSIC_THUNDER_DRUM                              equ $2E
+MUSIC_INSTRUMENT_CONCH_HORN                     equ $28 ; When you obtain the Conch Horn and it plays its tune.
+MUSIC_INSTRUMENT_SEA_LILY_BELL                  equ $29 ; When you obtain Sea Lily's Bell and it plays its tune.
+MUSIC_INSTRUMENT_SURF_HARP                      equ $2A ; When you obtain the Surf Harp and it plays its tune.
+MUSIC_INSTRUMENT_WIND_MARIMBA                   equ $2B ; When you obtain the Wind Marimba and it plays its tune.
+MUSIC_INSTRUMENT_CORAL_TRIANGLE                 equ $2C ; When you obtain the Coral Triangle and it plays its tune.
+MUSIC_INSTRUMENT_ORGAN_OF_EVENING_CALM          equ $2D ; When you obtain the Organ of Evening Calm and it plays its tune.
+MUSIC_INSTRUMENT_THUNDER_DRUM                   equ $2E ; When you obtain the Thunder Drum and it plays its tune.
 MUSIC_MARIN_SINGING                             equ $2F
 MUSIC_MANBO_MAMBO                               equ $30
-MUSIC_OVERWORLD_INTRODUCTION                    equ $31	; Heroic introduction before $05. It only plays once; after retrieving your sword on the shore.
+MUSIC_OVERWORLD_INTRO                           equ $31	; Heroic introduction before $05. It only plays once; after retrieving your sword on the shore.
 MUSIC_MR_WRITE_HOUSE                            equ $32
 MUSIC_PHONE_BOOTH                               equ $33	; Also used in Ulrira's house.
 MUSIC_TARIN_BEEHIVE                             equ $34 ; Used for Tarin's beehive cutscene.
 MUSIC_MAMU_SONG                                 equ $35
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
 MUSIC_CHRISTINE_HOUSE                           equ $37
-MUSIC_TOTAKA_SONG                               equ $38	; Totaka's Song. Similar to the one played in Richard's mansion. Does not init instrument bank. Missing drums at the beginning. Perhaps the song parameters are modified in realtime, causing the change in instrument, rhythm, and note pitch? 
+MUSIC_TOTAKA_SONG_UNUSED                        equ $38	; Unused. Where is the one that plays in Richard's mansion?
 MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_UNDER_BRIDGE                      equ $3A ; The fishing pond plays $02 during the fishing minigame. This is a different fishing minigame.
 MUSIC_CLASSIC_RECEIVED_ITEM                     equ $3B	; It is the classic Legend of Zelda item fanfare. I think it is unused.
@@ -68,27 +67,27 @@ MUSIC_ENDING                                    equ $3D	; During ending cutscene
 MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E ; Plays during kidnapping related dialog and in the Moblin hideout.
 MUSIC_WIND_FISH_AWAKENS                         equ $3F	; Plays during cutscene after defeating the final boss
 MUSIC_RICHARD_MANSION                           equ $40
-MUSIC_BOTWF_ORCHESTRAL_1                        equ $41	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BOTWF_ORCHESTRAL_2                        equ $42	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BOTWF_ORCHESTRAL_3                        equ $43	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BOTWF_ORCHESTRAL_4                        equ $44 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BOTWF_ORCHESTRAL_5                        equ $45	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BOTWF_ORCHESTRAL_6                        equ $46	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BOTWF_ORCHESTRAL_7                        equ $47	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_HORN                               equ $41	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_BELL                               equ $42	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_HARP                               equ $43	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_MARIMBA                            equ $44 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_TRIANGLE                           equ $45	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_ORGAN                              equ $46	; When playing for the egg w 
+MUSIC_BALLAD_ALL                                equ $47	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
 MUSIC_GHOST_HOUSE                               equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
 MUSIC_LINK_MARIN_DUET                           equ $4A
 MUSIC_CATFISH_MAW                               equ $4B
 MUSIC_WATERFALL_DRAIN                           equ $4C ; Plays when you open the lock for the Angler's Tunnel.
-MUSIC_MARIN_BEACH_TRANSITION                    equ $4D	; Plays during the fade to white, between the top-down view and the scenic view of Link and Marin sitting at the beach. The beginning is not used, as well for a couple of notes at the end.
+MUSIC_MARIN_BEACH_TRANSITION                    equ $4D	; For the transition to the Link and Marin beach cutscene. The beginning and ending notes are skipped.
 MUSIC_MARIN_BEACH                               equ $4E
-;MUSIC_UNKNOWN                                  equ $4F	; item jingle
+;MUSIC_UNKNOWN                                  equ $4F	; Jingle, possible unused/possibly related to Marin 
 MUSIC_MINIBOSS                                  equ $50
 MUSIC_KANALET_CASTLE_COPY                       equ $51	; Copy of $13.
 MUSIC_TAIL_CAVE_COPY                            equ $52	; Copy of $14.
-MUSIC_DREAM_SHRINE                              equ $53
+MUSIC_DREAM_SHRINE                              equ $53 ; Plays in the lower Dream Shrine. (After sleeping in the bed)
 MUSIC_EAGLES_TOWER_BOSS_CUTSCENE                equ $54	; Plays when the boss comes into view. Switches to $19.
-MUSIC_FLYING_ROOSTER_REVIVED                    equ $55
+MUSIC_ROOSTER_REVIVAL                           equ $55 ; Plays while the flying rooster's spirit reenters his remains.
 MUSIC_SEASHELL_MANSION_SPIRIT                   equ $56	; Plays $55 afterwards. Possibly left unused for resurrecting the rooster?
 MUSIC_CUCCO_HOUSE                               equ $57
 MUSIC_FACE_SHRINE                               equ $58

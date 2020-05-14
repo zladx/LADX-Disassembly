@@ -8730,7 +8730,7 @@ func_01F_7B5C::
     ld   [$D34F], a                               ; $7B7C: $EA $4F $D3
     ld   [$D39E], a                               ; $7B7F: $EA $9E $D3
     ld   [$D39F], a                               ; $7B82: $EA $9F $D3
-    ld   [$D3D9], a                               ; $7B85: $EA $D9 $D3
+    ld   [wActiveMusicTableIndex], a              ; $7B85: $EA $D9 $D3
     ld   [$D3DA], a                               ; $7B88: $EA $DA $D3
     ld   [$D3B6], a                               ; $7B8B: $EA $B6 $D3
     ld   [$D3B7], a                               ; $7B8E: $EA $B7 $D3

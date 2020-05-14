@@ -904,8 +904,9 @@ wD3C9::
 wD3CA::
   ; Copied from wActiveMusicIndex (a music index)
   ds 1
-wD3CB:: ; D3CB
+wPreviousMusicTrack:: ; D3CB
   ; Copied from $D3CA
+  ; The music track that was playing previously.
   ds 1
 
 ; Unlabeled
@@ -917,7 +918,7 @@ wActiveMusicTable:: ; D3CE
 ; Unlabeled
 ds $D3D9-$D3CF
 
-wD3D9:: ; D3D9
+wActiveMusicTableIndex:: ; D3D9
   ; Set to 1 by opcode 94
   ds 1
 

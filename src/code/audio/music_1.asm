@@ -247,7 +247,7 @@ BeginMusicTrack_Dispatch_1B::
     jr   z, jr_01B_410F                           ; $413D: $28 $D0
 
     ld   a, [$D3CA]                               ; $413F: $FA $CA $D3
-    ld   [$D3CB], a                               ; $4142: $EA $CB $D3
+    ld   [wPreviousMusicTrack], a                 ; $4142: $EA $CB $D3
 
     ; [$D3CA] = [wActiveMusicIndex]
     ld   a, [hl]                                  ; $4145: $7E
@@ -303,24 +303,54 @@ BeginMusicTrack_Dispatch_1B::
     jp   label_01B_42D5                           ; $4188: $C3 $D5 $42
 
 Data_1B_418B::
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
-    db   $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF
-    db   $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00
-    db   $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00, $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00 
+    db   $01, $00, $FF, $FF, $00, $00
 
 label_01B_42AB:
     ld   a, [$D3E7]                               ; $42AB: $FA $E7 $D3
@@ -997,7 +1027,7 @@ HandleNote::
     ld   [$D39F], a                               ; $45F5: $EA $9F $D3
 
 .jr_01B_45F8:
-    ld   de, $D3D9                                ; $45F8: $11 $D9 $D3
+    ld   de, wActiveMusicTableIndex               ; $45F8: $11 $D9 $D3
     ld   a, [de]                                  ; $45FB: $1A
     and  a                                        ; $45FC: $A7
     jr   z, .doneChannel3Handler                  ; $45FD: $28 $07
@@ -1278,7 +1308,7 @@ jr_01B_4720:
     jp   label_01B_485E                           ; $4746: $C3 $5E $48
 
 label_01B_4749:
-    ld   a, [wActiveChannelIndex]                               ; $4749: $FA $50 $D3
+    ld   a, [wActiveChannelIndex]                 ; $4749: $FA $50 $D3
     cp   $03                                      ; $474C: $FE $03
     jp   nz, label_01B_46FC                       ; $474E: $C2 $FC $46
 
@@ -1286,7 +1316,7 @@ label_01B_4749:
     and  a                                        ; $4754: $A7
     jp   nz, label_01B_4810                       ; $4755: $C2 $10 $48
 
-    ld   a, [$D3D9]                               ; $4758: $FA $D9 $D3
+    ld   a, [wActiveMusicTableIndex]              ; $4758: $FA $D9 $D3
     and  a                                        ; $475B: $A7
     jp   nz, label_01B_4998                       ; $475C: $C2 $98 $49
 
@@ -1657,9 +1687,9 @@ Data_01B_494D::
 
 soundOpcode94:
     ld   a, $01                                   ; $498D: $3E $01
-    ld   [$D3D9], a                               ; $498F: $EA $D9 $D3
-    call IncChannelDefinitionPointer                            ; $4992: $CD $0B $44
-    jp   ParseSoundOpcode                           ; $4995: $C3 $31 $45
+    ld   [wActiveMusicTableIndex], a              ; $498F: $EA $D9 $D3
+    call IncChannelDefinitionPointer              ; $4992: $CD $0B $44
+    jp   ParseSoundOpcode                         ; $4995: $C3 $31 $45
 
 label_01B_4998:
     cp   $02                                      ; $4998: $FE $02
@@ -1681,7 +1711,7 @@ label_01B_4998:
     jp   nz, label_01B_46FC                       ; $49B7: $C2 $FC $46
 
     ld   a, $02                                   ; $49BA: $3E $02
-    ld   [$D3D9], a                               ; $49BC: $EA $D9 $D3
+    ld   [wActiveMusicTableIndex], a              ; $49BC: $EA $D9 $D3
     jp   label_01B_483D                           ; $49BF: $C3 $3D $48
 
 
@@ -1761,7 +1791,7 @@ StopSquareAndWaveChannels_1B::
     ld   [$D33F], a                               ; $4E64: $EA $3F $D3
     ld   [$D39E], a                               ; $4E67: $EA $9E $D3
     ld   [$D39F], a                               ; $4E6A: $EA $9F $D3
-    ld   [$D3D9], a                               ; $4E6D: $EA $D9 $D3
+    ld   [wActiveMusicTableIndex], a              ; $4E6D: $EA $D9 $D3
     ld   [$D3DA], a                               ; $4E70: $EA $DA $D3
     ld   [$D3B6], a                               ; $4E73: $EA $B6 $D3
     ld   [$D3B7], a                               ; $4E76: $EA $B7 $D3

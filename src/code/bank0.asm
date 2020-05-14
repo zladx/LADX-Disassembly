@@ -3501,14 +3501,14 @@ label_1F69::
     and  J_A | J_B
     jp   z, .specialCasesEnd
     ld   a, e
-    cp   $5E
-    ld   a, $8E
+    cp   OBJECT_WEATHER_VANE_BASE
+    ld   a, $8E                     ; Dialog $18E "Here sleeps..."
     jr   z, .jr_2088
     ld   a, e
-    cp   $6F
-    jr   z, .jr_2049
-    cp   $D4
-    jr   z, .jr_2049
+    cp   OBJECT_OWN_STATUE
+    jr   z, .signpost
+    cp   OBJECT_SIGNPOST
+    jr   z, .signpost
     ld   a, [wIsMarinFollowingLink]
     and  a
     jr   z, .jr_2030
@@ -3536,14 +3536,15 @@ label_1F69::
     ld   a, e
     jr   .jr_208E
 
-.jr_2049
+.signpost
+    ; Activating an OBJECT_SIGNPOST
     ; de = [hMapRoom]
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00
     ld   a, $14
     ld   [MBC3SelectBank], a
-    ld   hl, Data_014_5118
+    ld   hl, SignpostDialogTable
     add  hl, de
     ld   a, [wOcarinaSongFlags]
     ld   e, a
@@ -3566,10 +3567,11 @@ label_1F69::
     ldh  a, [hSwordIntersectedAreaY]
     and  $F0
     or   e
-    ld   [$D473], a
+    ld   [wMazeSignpostPos], a
     jp   .specialCasesEnd
 
 .jr_2080
+    ; Some other signpost (not part of the maze), or maze completed
     cp   $83
     jr   z, .jr_208E
     cp   $2D

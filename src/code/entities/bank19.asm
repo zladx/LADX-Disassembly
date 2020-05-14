@@ -4886,7 +4886,7 @@ EaglesTowerOpeningState5Handler::
     cp   $0C                                      ; $62AA: $FE $0C
     jr   nz, jr_019_62B4                          ; $62AC: $20 $06
 
-    ldh  a, [hNextWorldMusicTrack]                ; $62AE: $F0 $BF
+    ldh  a, [hNextDefaultMusicTrack]              ; $62AE: $F0 $BF
     ld   [wMusicTrackToPlay], a                   ; $62B0: $EA $68 $D3
     ret                                           ; $62B3: $C9
 
@@ -5394,7 +5394,7 @@ jr_019_68E4:
     cp   $03                                      ; $68ED: $FE $03
     jr   nz, jr_019_68F6                          ; $68EF: $20 $05
 
-    ldh  a, [hNextWorldMusicTrack]                ; $68F1: $F0 $BF
+    ldh  a, [hNextDefaultMusicTrack]              ; $68F1: $F0 $BF
     ld   [wMusicTrackToPlay], a                   ; $68F3: $EA $68 $D3
 
 jr_019_68F6:

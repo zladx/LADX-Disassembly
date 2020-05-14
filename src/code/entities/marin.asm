@@ -333,7 +333,7 @@ func_005_5020::
 
     inc  [hl]                                     ; $5031: $34
     ld   [wMusicTrackToPlay], a                   ; $5032: $EA $68 $D3
-    ldh  [hDefaultMusicTrack], a                         ; $5035: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $5035: $E0 $B0
     ldh  [$FFBD], a                               ; $5037: $E0 $BD
     ld   hl, $C3C8                                ; $5039: $21 $C8 $C3
     ld   [hl], $01                                ; $503C: $36 $01

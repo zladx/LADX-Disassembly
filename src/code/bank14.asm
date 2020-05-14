@@ -204,7 +204,7 @@ PerformOverworldAudioTasks::
     ld   [wNextWorldMusicTrackCountdown], a       ; $4ADD: $EA $AF $C5
     jr   nz, jr_014_4AE7                          ; $4AE0: $20 $05
 
-    ldh  a, [hNextWorldMusicTrack]                ; $4AE2: $F0 $BF
+    ldh  a, [hNextDefaultMusicTrack]              ; $4AE2: $F0 $BF
 
 jr_014_4AE4:
     ld   [wMusicTrackToPlay], a                   ; $4AE4: $EA $68 $D3

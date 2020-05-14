@@ -432,7 +432,7 @@ SetMusicTrack::
     ld   [wMusicTrackToPlay], a                   ; $499C: $EA $68 $D3
     ldh  [hDefaultMusicTrack], a                  ; $499F: $E0 $B0
     ldh  [$FFBD], a                               ; $49A1: $E0 $BD
-    ldh  [hNextWorldMusicTrack], a                ; $49A3: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $49A3: $E0 $BF
     ret                                           ; $49A5: $C9
 
 EntityInitFinalNightmare::
@@ -3309,7 +3309,7 @@ jr_003_5BCB:
     ld   [wMusicTrackToPlay], a                   ; $5BD0: $EA $68 $D3
     ld   a, MUSIC_OVERWORLD                       ; $5BD3: $3E $05
     ldh  [hDefaultMusicTrack], a                  ; $5BD5: $E0 $B0
-    ldh  [hNextWorldMusicTrack], a                ; $5BD7: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $5BD7: $E0 $BF
     call GetEntityDropTimer                       ; $5BD9: $CD $FB $0B
     ld   [hl], $52                                ; $5BDC: $36 $52
     call IncrementEntityState                     ; $5BDE: $CD $12 $3B
@@ -4632,7 +4632,7 @@ jr_003_6400:
     ld   [wMusicTrackToPlay], a                   ; $6415: $EA $68 $D3
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $6418: $3E $49
     ldh  [$FFBD], a                               ; $641A: $E0 $BD
-    ldh  [hNextWorldMusicTrack], a                ; $641C: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $641C: $E0 $BF
 
 func_003_641E::
     ld   e, $03                                   ; $641E: $1E $03
@@ -4679,7 +4679,7 @@ PickSword::
     call GetEntityTransitionCountdown             ; $645E: $CD $05 $0C
     ld   [hl], $A0                                ; $6461: $36 $A0
     ld   a, MUSIC_SILENCE                         ; $6463: $3E $FF
-    ldh  [hNextWorldMusicTrack], a                ; $6465: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $6465: $E0 $BF
     ret                                           ; $6467: $C9
 
 jr_003_6468:
@@ -6166,7 +6166,7 @@ jr_003_6D73:
     ld   [wMusicTrackToPlay], a                   ; $6DDA: $EA $68 $D3
 
 jr_003_6DDD:
-    ldh  [hNextWorldMusicTrack], a                ; $6DDD: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $6DDD: $E0 $BF
 
 func_003_6DDF::
     call ResetPegasusBoots                        ; $6DDF: $CD $B6 $0C

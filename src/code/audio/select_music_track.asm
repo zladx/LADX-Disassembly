@@ -125,7 +125,7 @@ SelectMusicTrackAfterTransition::
     ; Set overworld soundtrack
     ld   e, a                                     ; $41A7: $5F
     ld   d, $00                                   ; $41A8: $16 $00
-    ldh  [hDefaultMusicTrack], a                         ; $41AA: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $41AA: $E0 $B0
     call SetWorldMusicTrack                       ; $41AC: $CD $C3 $27
 
     ; If soundtrack id <= $24…
@@ -151,7 +151,7 @@ SelectMusicTrackAfterTransition::
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $41C2: $3E $49
     ld   [wMusicTrackToPlay], a                   ; $41C4: $EA $68 $D3
     ldh  [$FFBD], a                               ; $41C7: $E0 $BD
-    ldh  [hNextWorldMusicTrack], a                ; $41C9: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $41C9: $E0 $BF
     xor  a                                        ; $41CB: $AF
     ld   [$C1CF], a                               ; $41CC: $EA $CF $C1
 

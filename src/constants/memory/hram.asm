@@ -205,7 +205,7 @@ hFFBC:: ; FFBC
 
 ; Music track to be played after countdown
 ; See hNextMusicTrackToFadeInto and
-hNextWorldMusicTrack:: ; FFBF
+hNextDefaultMusicTrack:: ; FFBF
   ds 1
 
 ; DMA routine copied from ROM during initialization

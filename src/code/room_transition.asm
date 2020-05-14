@@ -482,12 +482,12 @@ RoomTransitionPrepareHandler::
     ld   [$C1CF], a                               ; $7ACD: $EA $CF $C1
     ld   a, [wTunicType]                          ; $7AD0: $FA $0F $DC
     and  a                                        ; $7AD3: $A7
-    ldh  a, [hDefaultMusicTrack]                               ; $7AD4: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                  ; $7AD4: $F0 $B0
     jr   nz, .jr_002_7AE2                         ; $7AD6: $20 $0A
 
     ld   a, [wActivePowerUp]                      ; $7AD8: $FA $7C $D4
     and  a                                        ; $7ADB: $A7
-    ldh  a, [hDefaultMusicTrack]                         ; $7ADC: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                  ; $7ADC: $F0 $B0
     jr   z, .jr_002_7AE2                          ; $7ADE: $28 $02
 
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $7AE0: $3E $49
@@ -515,7 +515,7 @@ RoomTransitionPrepareHandler::
     ld   hl, OverworldMusicTracks                 ; $7AFA: $21 $00 $40
     add  hl, de                                   ; $7AFD: $19
     ld   a, [hl]                                  ; $7AFE: $7E
-    ld   hl, hDefaultMusicTrack                          ; $7AFF: $21 $B0 $FF
+    ld   hl, hDefaultMusicTrack                   ; $7AFF: $21 $B0 $FF
     cp   [hl]                                     ; $7B02: $BE
     jr   z, IncrementRoomTransitionStateAndReturn ; $7B03: $28 $31
 
@@ -556,7 +556,7 @@ SetNextMusicTrack::
 
 .setMusicTrack
     ld   a, c                                     ; $7B33: $79
-    ldh  [hDefaultMusicTrack], a                         ; $7B34: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $7B34: $E0 $B0
 
 IncrementRoomTransitionStateAndReturn::
     ld   a, [wRoomTransitionState]                ; $7B36: $FA $24 $C1

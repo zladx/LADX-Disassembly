@@ -1384,10 +1384,11 @@ func_01B_47D2::
     ret                                           ; $47E4: $C9
 
 ; Continues playing the music after a fanfare has played when you find your sword/weapon/heart container.
+; Above is wrong, seems to set all tracks to MUSIC_NONE?
 ContinueCurrentScreenMusic_1B:
     xor  a                                        ; $47E5: $AF
     ld   [wActiveMusicTable], a                   ; $47E6: $EA $CE $D3
-    ldh  a, [hNextWorldMusicTrack]                ; $47E9: $F0 $BF
+    ldh  a, [hNextDefaultMusicTrack]              ; $47E9: $F0 $BF
     ld   [wMusicTrackToPlay], a                   ; $47EB: $EA $68 $D3
     jp   PlayMusicTrack_1B_EntryPoint             ; $47EE: $C3 $1E $40
 

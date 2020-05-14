@@ -62,19 +62,19 @@ MUSIC_CHRISTINE_HOUSE                           equ $37
 MUSIC_TOTAKA_SONG                               equ $38	; Totaka's Song. Similar to the one played in Richard's mansion. Does not init instrument bank. Missing drums at the beginning. Perhaps the song parameters are modified in realtime, causing the change in instrument, rhythm, and note pitch? 
 MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_UNDER_BRIDGE                      equ $3A ; The fishing pond plays $02 during the fishing minigame. This is a different fishing minigame.
-;MUSIC_RECEIVED_ITEM                            equ $3B	; short item jingle IT IS THE CLASSIC LEGEND OF ZELDA ONE SO COLOR DUNGEON PERHAPS?
+MUSIC_CLASSIC_RECEIVED_ITEM                     equ $3B	; It is the classic Legend of Zelda item fanfare. I think it is unused.
 MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C	; とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
 MUSIC_ENDING                                    equ $3D	; During ending cutscene. Silence, then music. Plays staff roll theme when finished.
 MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E ; Plays during kidnapping related dialog and in the Moblin hideout.
 MUSIC_WIND_FISH_AWAKENS                         equ $3F	; Plays during cutscene after defeating the final boss
 MUSIC_RICHARD_MANSION                           equ $40
-;MUSIC_UNKNOWN_BOTWF                            equ $41	; ballad of the wind fish, on horn and flute-like instruments.
-;MUSIC_UNKNOWN_BOTWF                            equ $42	; ballad of the wind fish, has added marimba motif. more voices than $41
-;MUSIC_UNKNOWN_BOTWF                            equ $43	; ballad of the wind fish, piano, more voices than $42
-;MUSIC_UNKNOWN_BOTWF                            equ $44	; ballad of the wind fish, has high pitched ting. more voices than $43
-;MUSIC_UNKNOWN_BOTWF                            equ $45	; ballad of the wind fish, has triangle rhythm. more voices than $44
-;MUSIC_UNKNOWN_BOTWF                            equ $46	; ballad of the wind fish, has added horn. more voices than $45
-;MUSIC_UNKNOWN_BOTWF                            equ $47	; ballad of the wind fish, drums, high ting. awakening tracks are not well described.
+MUSIC_BOTWF_ORCHESTRAL_1                        equ $41	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BOTWF_ORCHESTRAL_2                        equ $42	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BOTWF_ORCHESTRAL_3                        equ $43	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BOTWF_ORCHESTRAL_4                        equ $44 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BOTWF_ORCHESTRAL_5                        equ $45	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BOTWF_ORCHESTRAL_6                        equ $46	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BOTWF_ORCHESTRAL_7                        equ $47	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
 MUSIC_GHOST_HOUSE                               equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
 MUSIC_LINK_MARIN_DUET                           equ $4A

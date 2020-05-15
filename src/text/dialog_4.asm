@@ -1,11 +1,11 @@
-DialogMoblinHideout::
+Dialog190::
     db "Ennh?  Who's    "
     db "this suspicious-"
     db "looking runt?!  "
     db "Okay boys, let's"
     db "get ridda him!@"
 
-DialogMoblinKing::
+Dialog191::
     db "You must be an  "
     db "assassin sent by"
     db "Madam MeowMeow  "
@@ -57,7 +57,7 @@ Dialog195::
     db "never forgive   "
     db "you!@"
 
-DialogAnimalEntranced::
+Dialog196::
     db "... ... ... ... "
     db "It seems to be  "
     db "totally absorbed"
@@ -87,13 +87,13 @@ Dialog199::
     db "are a bad boy,  "
     db "#####!@"
 
-DialogCrazyTracyHeal::
+Dialog19A::
     db "Here's some     "
     db "bonus treatment!"
     db "Behold!  Your   "
     db "Hearts are full!@"
 
-DialogSchuleDonavitchIntroduction::
+Dialog19B::
     db "Ya, I am Schule "
     db "Donavitch!  Zee "
     db "mermaid statue  "
@@ -107,28 +107,28 @@ DialogSchuleDonavitchIntroduction::
     db "you to grasp, iz"
     db "it not?@"
 
-DialogMermaidStatueMissingScale::
+Dialog19C::
     db "  THE MOURNING  "
     db "     MERMAID    "
     db "    By SCHULE   "
     db "? ...A scale is "
     db "missing...@"
 
-DialogSeashellMansion::
+Dialog19D::
     db "Seashell Mansion@"
 
-DialogSignpostDesertEntrance::
+Dialog19E::
     db "Entrance to     "
     db "  Yarna Desert <right>@"
 
-Dialog19F:: ; Removed beta signpost? :o
-DialogSignpostWoodsEntrance::
+Dialog19F::
+Dialog1A0::
     db "   Mysterious   "
     db "     Forest     "
     db " (It's a little "
     db " bit mysterious)@"
 
-DialogSignpostRapidsRide::
+Dialog1A1::
     db "Do you want to  "
     db "challenge the   "
     db "river rapids on "
@@ -142,7 +142,7 @@ Dialog1A2::
     db "Farther East    "
     db "  Animal Village@"
 
-DialogSignpostMtTamaranch::
+Dialog1A3::
     db "Mt. Tamaranch   @"
 
 Dialog1A4::
@@ -154,14 +154,14 @@ Dialog1A5::
     db "<down> Mysterious    "
     db "  Forest@"
 
-DialogSignpostCrackedFloorWarning::
+Dialog1A6::
     db "Beware of floors"
     db "with cracks!  A "
     db "heavy person    "
     db "should not stand"
     db "on them!@"
 
-DialogSignpostTelephoneBooth::
+Dialog1A7::
     db "Telephone Booth @"
 
 Dialog1A8::

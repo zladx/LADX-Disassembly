@@ -772,7 +772,7 @@ TarinShield4Handler::
     jr   jr_005_4DC2                              ; $4DBB: $18 $05
 
 jr_005_4DBD:
-    call_open_dialog $1C9                         ; $4DBD
+    call_open_dialog DIALOG_DOG_FOOD_DENY                         ; $4DBD
 
 jr_005_4DC2:
     call IncrementEntityState                     ; $4DC2: $CD $12 $3B

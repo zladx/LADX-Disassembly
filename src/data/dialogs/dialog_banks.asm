@@ -4,12 +4,10 @@
 
 ; All textboxes with a prompt - e.g. 'yes/no', or a red 'press a button to continue' arrow - have '| $80'.
 
-; This file could theoretically automatically be generated from the dialog_xx.asm files
-
 DialogBankTable::
 ; dialog_1.asm starts here
-    db BANK(DialogTarinLeaveWithoutShield)
-    db BANK(DialogMarinLinkWakesUp) | $80
+    db BANK(Dialog000)
+    db BANK(Dialog001) | $80
     db BANK(Dialog002)
     db BANK(Dialog003)
     db BANK(Dialog004)
@@ -51,7 +49,7 @@ DialogBankTable::
     db BANK(Dialog028)
     db BANK(Dialog029)
     db BANK(Dialog02A)
-    db BANK(Dialog02B) ; Empty
+    db BANK(Dialog02B)
     db BANK(Dialog02C)
     db BANK(Dialog02D)
     db BANK(Dialog02E)
@@ -63,10 +61,10 @@ DialogBankTable::
     db BANK(Dialog034)
     db BANK(Dialog035)
     db BANK(Dialog036) | $80
-    db BANK(Dialog037) ; Empty
+    db BANK(Dialog037)
     db BANK(Dialog038) | $80
     db BANK(Dialog039)
-    db BANK(Dialog03A) ; Empty
+    db BANK(Dialog03A)
     db BANK(Dialog03B)
     db BANK(Dialog03C)
     db BANK(Dialog03D)
@@ -103,7 +101,7 @@ DialogBankTable::
     db BANK(Dialog05C)
     db BANK(Dialog05D)
     db BANK(Dialog05E)
-    db BANK(Dialog05F) ; Empty
+    db BANK(Dialog05F)
     db BANK(Dialog060)
     db BANK(Dialog061)
     db BANK(Dialog062)
@@ -166,7 +164,7 @@ DialogBankTable::
     db BANK(Dialog09B) | $80
     db BANK(Dialog09C) | $80
     db BANK(Dialog09D) | $80
-    db BANK(Dialog09E) | $80 ; Empty
+    db BANK(Dialog09E) | $80
     db BANK(Dialog09F) | $80
     db BANK(Dialog0A0) | $80
     db BANK(Dialog0A1) | $80
@@ -174,106 +172,106 @@ DialogBankTable::
     db BANK(Dialog0A3) | $80
 
 ; dialog_2.asm starts here
-    db BANK(DialogFaceKeyAcquired) | $80
-    db BANK(DialogBirdKeyAcquired) | $80
-    db BANK(DialogMapAcquired) | $80
-    db BANK(DialogCompassAcquired) | $80
-    db BANK(DialogStoneBeakAcquired) | $80
-    db BANK(DialogNightmareKeyAcquired) | $80
-    db BANK(DialogSmallKeyAcquired) | $80
-    db BANK(Dialog20RupeesAcquired) | $80
-    db BANK(Dialog50RupeesAcquired) | $80
-    db BANK(Dialog100RupeesAcquired) | $80
-    db BANK(Dialog200RupeesAcquired) | $80
-    db BANK(DialogHippoModelEnterHouse) | $80
-    db BANK(DialogBossMoldorm) | $80
-    db BANK(DialogBossSlimeEyes) | $80
-    db BANK(DialogBossAnglerFish) | $80
-    db BANK(DialogBossSlimeEel) | $80
-    db BANK(DialogBossGenie) | $80
-    db BANK(DialogBossDefeatedSlimeEel) | $80
-    db BANK(DialogBossFacade) | $80
-    db BANK(DialogBossDefeatedFacade) | $80
-    db BANK(Dialog0B8) | $80 ; Empty
-    db BANK(DialogBossDefeatedEvilEagle) | $80
-    db BANK(DialogBossEvilEagle) | $80
-    db BANK(Dialog0BB) | $80 ; Empty
-    db BANK(DialogBossHotHead) | $80
-    db BANK(DialogBossDefeatedHotHead) | $80
-    db BANK(Dialog0BE) | $80 ; Empty
-    db BANK(Dialog0BF) | $80 ; Empty
-    db BANK(DialogOwlMysteriousForest) | $80
-    db BANK(DialogOwl1) | $80
-    db BANK(DialogOwl2) | $80
-    db BANK(DialogOwl3) | $80
-    db BANK(DialogOwl4) | $80
-    db BANK(DialogOwl5) | $80
-    db BANK(DialogOwl6) | $80
-    db BANK(DialogOwl7) | $80
-    db BANK(DialogOwl8) | $80
-    db BANK(DialogOwl9) | $80
-    db BANK(DialogOwlA) | $80
-    db BANK(DialogOwlB) | $80
-    db BANK(DialogOwlC) | $80
-    db BANK(DialogOwlEnterEgg) | $80
-    db BANK(Dialog0CE) | $80 ; Empty
-    db BANK(DialogOwlGoodbye) | $80
-    db BANK(DialogWindFishRevelation) | $80
-    db BANK(Dialog0D1) | $80 ; Empty
-    db BANK(DialogWindFishPlayInstruments) | $80
-    db BANK(Dialog0D3) | $80 ; Empty
-    db BANK(Dialog0D4) | $80 ; Empty
-    db BANK(DialogMermaidStatue) | $80
-    db BANK(Dialog0D6) | $80 ; Empty
-    db BANK(DialogWindFishClimbStairs) | $80
-    db BANK(DialogSchuleDonavitchMagnifyingLens) | $80
-    db BANK(DialogOwlSwordBeach) | $80
-    db BANK(DialogMiniBossLanmola)
-    db BANK(DialogMamuTooEarly)
-    db BANK(DialogMamuOfferSong) | $80
-    db BANK(DialogMamuAccept)
-    db BANK(DialogMamuDeny)
-    db BANK(DialogFrogSongAcquired)
-    db BANK(DialogMamuFrogSongComment)
-    db BANK(DialogLilDevilIntro) | $80
-    db BANK(DialogLilDevilOfferMagicPowder) | $80
-    db BANK(DialogLilDevilOfferBombs) | $80
-    db BANK(DialogLilDevilOfferArrows) | $80
-    db BANK(DialogLilDevilDisappear) | $80
-    db BANK(DialogAncientRuinsTooDark)
-    db BANK(DialogAncientRuinsRelief)
-    db BANK(DialogGoldLeafAcquired)
-    db BANK(DialogLastGoldLeafAcquired) | $80
-    db BANK(Dialog0EA) ; Empty
-    db BANK(Dialog0EB) ; Empty
-    db BANK(DialogGuardianAcornAcquired)
-    db BANK(DialogMirrorShieldAcquired)
-    db BANK(DialogPowerfulBraceletAcquired)
-    db BANK(DialogSecretSeashellAcquired)
-    db BANK(DialogRaftOwnerAsk)
-    db BANK(DialogRaftOwnerAccept)
-    db BANK(DialogWaterfallAtShrine)
-    db BANK(DialogSouthOfShrine)
-    db BANK(DialogAnimalVillageEntrance)
-    db BANK(DialogFinalBoss) | $80
-    db BANK(DialogFinalBossDefeated) | $80
-    db BANK(DialogMarinCraneGameAsk) | $80
-    db BANK(DialogMarinCraneGamePersist)
-    db BANK(DialogCraneGameOwnerGrabbed)
-    db BANK(DialogHippoModelTalk)
-    db BANK(DialogHippoModelGoAway)
-    db BANK(DialogExamineBookcase)
-    db BANK(DialogExamineDresser)
-    db BANK(DialogWitchMagicPowderComment) | $80
-    db BANK(DialogTarinExamineDrawer)
-    db BANK(DialogFullMoonCelloAcquired)
-    db BANK(DialogConchHornAcquired)
-    db BANK(DialogSeaLilysBellAcquired)
-    db BANK(DialogSurfHarpAcquired)
-    db BANK(DialogWindMarimbaAcquired)
-    db BANK(DialogCoralTriangleAcquired)
-    db BANK(DialogOrganOfEveningCalmAcquired)
-    db BANK(DialogThunderDrumAcquired)
+    db BANK(Dialog0A4) | $80
+    db BANK(Dialog0A5) | $80
+    db BANK(Dialog0A6) | $80
+    db BANK(Dialog0A7) | $80
+    db BANK(Dialog0A8) | $80
+    db BANK(Dialog0A9) | $80
+    db BANK(Dialog0AA) | $80
+    db BANK(Dialog0AB) | $80
+    db BANK(Dialog0AC) | $80
+    db BANK(Dialog0AD) | $80
+    db BANK(Dialog0AE) | $80
+    db BANK(Dialog0AF) | $80
+    db BANK(Dialog0B0) | $80
+    db BANK(Dialog0B1) | $80
+    db BANK(Dialog0B2) | $80
+    db BANK(Dialog0B3) | $80
+    db BANK(Dialog0B4) | $80
+    db BANK(Dialog0B5) | $80
+    db BANK(Dialog0B6) | $80
+    db BANK(Dialog0B7) | $80
+    db BANK(Dialog0B8) | $80
+    db BANK(Dialog0B9) | $80
+    db BANK(Dialog0BA) | $80
+    db BANK(Dialog0BB) | $80
+    db BANK(Dialog0BC) | $80
+    db BANK(Dialog0BD) | $80
+    db BANK(Dialog0BE) | $80
+    db BANK(Dialog0BF) | $80
+    db BANK(Dialog0C0) | $80
+    db BANK(Dialog0C1) | $80
+    db BANK(Dialog0C2) | $80
+    db BANK(Dialog0C3) | $80
+    db BANK(Dialog0C4) | $80
+    db BANK(Dialog0C5) | $80
+    db BANK(Dialog0C6) | $80
+    db BANK(Dialog0C7) | $80
+    db BANK(Dialog0C8) | $80
+    db BANK(Dialog0C9) | $80
+    db BANK(Dialog0CA) | $80
+    db BANK(Dialog0CB) | $80
+    db BANK(Dialog0CC) | $80
+    db BANK(Dialog0CD) | $80
+    db BANK(Dialog0CE) | $80
+    db BANK(Dialog0CF) | $80
+    db BANK(Dialog0D0) | $80
+    db BANK(Dialog0D1) | $80
+    db BANK(Dialog0D2) | $80
+    db BANK(Dialog0D3) | $80
+    db BANK(Dialog0D4) | $80
+    db BANK(Dialog0D5) | $80
+    db BANK(Dialog0D6) | $80
+    db BANK(Dialog0D7) | $80
+    db BANK(Dialog0D8) | $80
+    db BANK(Dialog0D9) | $80
+    db BANK(Dialog0DA)
+    db BANK(Dialog0DB)
+    db BANK(Dialog0DC) | $80
+    db BANK(Dialog0DD)
+    db BANK(Dialog0DE)
+    db BANK(Dialog0DF)
+    db BANK(Dialog0E0)
+    db BANK(Dialog0E1) | $80
+    db BANK(Dialog0E2) | $80
+    db BANK(Dialog0E3) | $80
+    db BANK(Dialog0E4) | $80
+    db BANK(Dialog0E5) | $80
+    db BANK(Dialog0E6)
+    db BANK(Dialog0E7)
+    db BANK(Dialog0E8)
+    db BANK(Dialog0E9) | $80
+    db BANK(Dialog0EA)
+    db BANK(Dialog0EB)
+    db BANK(Dialog0EC)
+    db BANK(Dialog0ED)
+    db BANK(Dialog0EE)
+    db BANK(Dialog0EF)
+    db BANK(Dialog0F0)
+    db BANK(Dialog0F1)
+    db BANK(Dialog0F2)
+    db BANK(Dialog0F3)
+    db BANK(Dialog0F4)
+    db BANK(Dialog0F5) | $80
+    db BANK(Dialog0F6) | $80
+    db BANK(Dialog0F7) | $80
+    db BANK(Dialog0F8)
+    db BANK(Dialog0F9)
+    db BANK(Dialog0FA)
+    db BANK(Dialog0FB)
+    db BANK(Dialog0FC)
+    db BANK(Dialog0FD)
+    db BANK(Dialog0FE) | $80
+    db BANK(Dialog0FF)
+    db BANK(Dialog100)
+    db BANK(Dialog101)
+    db BANK(Dialog102)
+    db BANK(Dialog103)
+    db BANK(Dialog104)
+    db BANK(Dialog105)
+    db BANK(Dialog106)
+    db BANK(Dialog107)
 
 ; dialog_3.asm starts here
     db BANK(Dialog108) | $80
@@ -356,7 +354,7 @@ DialogBankTable::
     db BANK(Dialog155)
     db BANK(Dialog156)
     db BANK(Dialog157)
-    db BANK(Dialog158) ; Empty
+    db BANK(Dialog158)
     db BANK(Dialog159)
     db BANK(Dialog15A)
     db BANK(Dialog15B)
@@ -414,30 +412,30 @@ DialogBankTable::
     db BANK(Dialog18F)
 
 ; dialog_4.asm starts here
-    db BANK(DialogMoblinHideout)
-    db BANK(DialogMoblinKing) | $80
+    db BANK(Dialog190)
+    db BANK(Dialog191) | $80
     db BANK(Dialog192)
     db BANK(Dialog193)
     db BANK(Dialog194) | $80
     db BANK(Dialog195)
-    db BANK(DialogAnimalEntranced)
+    db BANK(Dialog196)
     db BANK(Dialog197)
     db BANK(Dialog198)
     db BANK(Dialog199)
-    db BANK(DialogCrazyTracyHeal)
-    db BANK(DialogSchuleDonavitchIntroduction)
-    db BANK(DialogMermaidStatueMissingScale)
-    db BANK(DialogSeashellMansion)
-    db BANK(DialogSignpostDesertEntrance)
-    db BANK(Dialog19F) ; Empty
-    db BANK(DialogSignpostWoodsEntrance)
-    db BANK(DialogSignpostRapidsRide)
+    db BANK(Dialog19A)
+    db BANK(Dialog19B)
+    db BANK(Dialog19C)
+    db BANK(Dialog19D)
+    db BANK(Dialog19E)
+    db BANK(Dialog19F)
+    db BANK(Dialog1A0)
+    db BANK(Dialog1A1)
     db BANK(Dialog1A2)
-    db BANK(DialogSignpostMtTamaranch)
+    db BANK(Dialog1A3)
     db BANK(Dialog1A4)
     db BANK(Dialog1A5)
-    db BANK(DialogSignpostCrackedFloorWarning)
-    db BANK(DialogSignpostTelephoneBooth)
+    db BANK(Dialog1A6)
+    db BANK(Dialog1A7)
     db BANK(Dialog1A8)
     db BANK(Dialog1A9)
     db BANK(Dialog1AA)
@@ -461,12 +459,12 @@ DialogBankTable::
     db BANK(Dialog1BC)
     db BANK(Dialog1BD)
     db BANK(Dialog1BE)
-    db BANK(Dialog1BF) ; Empty
+    db BANK(Dialog1BF)
     db BANK(Dialog1C0)
     db BANK(Dialog1C1) | $80
     db BANK(Dialog1C2)
     db BANK(Dialog1C3)
-    db BANK(Dialog1C4) ; Empty
+    db BANK(Dialog1C4)
     db BANK(Dialog1C5)
     db BANK(Dialog1C6)
     db BANK(Dialog1C7)
@@ -541,7 +539,7 @@ DialogBankTable::
     db BANK(Dialog20C)
     db BANK(Dialog20D)
     db BANK(Dialog20E)
-    db BANK(Dialog20F) ; Empty
+    db BANK(Dialog20F)
     db BANK(Dialog210) | $80
     db BANK(Dialog211) | $80
     db BANK(Dialog212)
@@ -557,7 +555,7 @@ DialogBankTable::
     db BANK(Dialog21C)
     db BANK(Dialog21D)
     db BANK(Dialog21E)
-    db BANK(Dialog21F) ; Empty
+    db BANK(Dialog21F)
     db BANK(Dialog220)
     db BANK(Dialog221)
     db BANK(Dialog222)
@@ -573,7 +571,7 @@ DialogBankTable::
     db BANK(Dialog22C)
     db BANK(Dialog22D)
     db BANK(Dialog22E)
-    db BANK(Dialog22F) ; Empty
+    db BANK(Dialog22F)
     db BANK(Dialog230)
     db BANK(Dialog231)
     db BANK(Dialog232)

@@ -1,18 +1,18 @@
-DialogFaceKeyAcquired::
+Dialog0A4::
     db "You've got the  "
     db "Face Key!@"
 
-DialogBirdKeyAcquired::
+Dialog0A5::
     db "You've got the  "
     db "Bird Key!@"
 
-DialogMapAcquired::
+Dialog0A6::
     db "At last, you got"
     db "a Map!  Press   "
     db "the START Button"
     db "to look at it!@"
 
-DialogCompassAcquired::
+Dialog0A7::
     db "You've got the  "
     db "Compass!  Now,  "
     db "you can see     "
@@ -26,14 +26,14 @@ DialogCompassAcquired::
     db "hidden in a room"
     db "when you enter! @"
 
-DialogStoneBeakAcquired::
+Dialog0A8::
     db "You found a     "
     db "stone beak!     "
     db "Let's find the  "
     db "owl statue that "
     db "belongs to it.@"
 
-DialogNightmareKeyAcquired::
+Dialog0A9::
     db "You've got the  "
     db "Nightmare's Key!"
     db "Now you can open"
@@ -41,55 +41,55 @@ DialogNightmareKeyAcquired::
     db "Nightmare's     "
     db "Lair!@"
 
-DialogSmallKeyAcquired::
+Dialog0AA::
     db "You got a Small "
     db "Key!  You can   "
     db "open a locked   "
     db "door.@"
 
-Dialog20RupeesAcquired::
+Dialog0AB::
     db "   You got 20   "
     db "     Rupees!    "
     db "      JOY!@"
 
-Dialog50RupeesAcquired::
+Dialog0AC::
     db "    You got 50  "
     db "      Rupees!   "
     db "    Very Nice!@"
 
-Dialog100RupeesAcquired::
+Dialog0AD::
     db "   You got 100  "
     db "     Rupees!    "
     db "  You're Happy!@"
 
-Dialog200RupeesAcquired::
+Dialog0AE::
     db "   You got 200  "
     db "     Rupees!    "
     db "You're Ecstatic!@"
 
-DialogHippoModelEnterHouse::
+Dialog0AF::
     db "Leave me alone! "
     db "I'm trying to   "
     db "sit still so    "
     db "Schule can paint"
     db "my portrait!@"
 
-DialogBossMoldorm::
+Dialog0B0::
     db "BUZZZZZ! BUZZZZ!"
     db "   OUTZZZIDER!  @"
 
-DialogBossSlimeEyes::
+Dialog0B1::
     db "NEENER NEENER!  "
     db "You can't find  "
     db "me!  NYAH NYAH!@"
 
-DialogBossAnglerFish::
+Dialog0B2::
     db "BLOOOP! BLOOOP! "
     db "  GLUB!  GLUB!  "
     db "OGGGH!  FOOOOD! "
     db "BLOOOOP!  GLUB!@"
 
-DialogBossSlimeEel::
+Dialog0B3::
     db "Ssso...you are  "
     db "the outsssider, "
     db "come to wake the"
@@ -97,13 +97,13 @@ DialogBossSlimeEel::
     db "KEEE-HEE-HEEEH! "
     db "I shall eat you!@"
 
-DialogBossGenie::
+Dialog0B4::
     db "HO HO HO!       "
     db "I'm your bad guy"
     db "this time!!     "
     db "HO HO HO!@"
 
-DialogBossDefeatedSlimeEel::
+Dialog0B5::
     db "TSSSK, TSSSK!   "
     db "You don't ssseem"
     db "to know what    "
@@ -113,7 +113,7 @@ DialogBossDefeatedSlimeEel::
     db "What a fool...  "
     db "KEE-HEE-HEH!!@"
 
-DialogBossFacade::
+Dialog0B6::
     db "Hey dummy! Need "
     db "a hint?  My weak"
     db "point is... !!  "
@@ -121,7 +121,7 @@ DialogBossFacade::
     db "go, talking too "
     db "much again...@"
 
-DialogBossDefeatedFacade::
+Dialog0B7::
     db "Okay, listen up!"
     db "If the Wind Fish"
     db "wakes up, every-"
@@ -132,7 +132,7 @@ DialogBossDefeatedFacade::
     db "EVERYTHING!@"
 
 Dialog0B8::
-DialogBossDefeatedEvilEagle::
+Dialog0B9::
     db "My energy...    "
     db "gone...I...lost!"
     db "But you will be "
@@ -142,7 +142,7 @@ DialogBossDefeatedEvilEagle::
     db "...are...in...  "
     db "his...dream...@"
 
-DialogBossEvilEagle::
+Dialog0BA::
     db "BAH!  I'm not   "
     db "going to hold   "
     db "back!  I'm going"
@@ -151,7 +151,7 @@ DialogBossEvilEagle::
     db "born!!@"
 
 Dialog0BB::
-DialogBossHotHead::
+Dialog0BC::
     db "CRACKLE-FWOOOSH!"
     db "You're finished!"
     db "I will never let"
@@ -159,7 +159,7 @@ DialogBossHotHead::
     db "Instruments of  "
     db "the Sirens!!@"
 
-DialogBossDefeatedHotHead::
+Dialog0BD::
     db "C-C-CRACKLE!    "
     db "Why did you come"
     db "here?  If it    "
@@ -174,7 +174,7 @@ DialogBossDefeatedHotHead::
 
 Dialog0BE::
 Dialog0BF::
-DialogOwlMysteriousForest::
+Dialog0C0::
     db "Hoot!  Ho, brave"
     db "lad, on your    "
     db "quest to wake   "
@@ -203,7 +203,7 @@ DialogOwlMysteriousForest::
     db "The Wind Fish is"
     db "watching...Hoot!@"
 
-DialogOwl1::
+Dialog0C1::
     db "Hoot!  Take the "
     db "key and go to   "
     db "the Tail Cave.  "
@@ -214,7 +214,7 @@ DialogOwl1::
     db "Wind Fish is    "
     db "waiting!  Hooot!@"
 
-DialogOwl2::
+Dialog0C2::
     db "Hoooot!  That is"
     db "an 'Instrument  "
     db "of the Sirens!' "
@@ -238,7 +238,7 @@ DialogOwl2::
     db "Goponga Swamp!! "
     db "Hoot, indeed!@"
 
-DialogOwl3::
+Dialog0C3::
     db "Hoot!  That is a"
     db "fearsome looking"
     db "animal you have "
@@ -247,7 +247,7 @@ DialogOwl3::
     db "Instrument is in"
     db "Goponga Swamp!@"
 
-DialogOwl4::
+Dialog0C4::
     db "Hoooot! The Wind"
     db "Fish sleeps long"
     db "and dreamily in "
@@ -262,7 +262,7 @@ DialogOwl4::
     db "for you to leave"
     db "the island! Hoo!@"
 
-DialogOwl5::
+Dialog0C5::
     db "Hoot!  How many "
     db "Instruments     "
     db "have you gotten "
@@ -284,7 +284,7 @@ DialogOwl5::
     db "show you the    "
     db "way! Hoot Hoot!@"
 
-DialogOwl6::
+Dialog0C6::
     db "Hoot!  The shape"
     db "of the key shows"
     db "a fish, swimming"
@@ -296,7 +296,7 @@ DialogOwl6::
     db "top and you will"
     db "reach your goal!@"
 
-DialogOwl7::
+Dialog0C7::
     db "Hoot!  There are"
     db "two shrines, one"
     db "to the north,   "
@@ -309,7 +309,7 @@ DialogOwl7::
     db "You will learn  "
     db "much there...@"
 
-DialogOwl8::
+Dialog0C8::
     db "Hoot!  I see you"
     db "have read the   "
     db "relief...  While"
@@ -335,7 +335,7 @@ DialogOwl8::
     db "Someday you will"
     db "know for sure...@"
 
-DialogOwl9::
+Dialog0C9::
     db "Hoot!  The many "
     db "monsters of this"
     db "island fear that"
@@ -353,7 +353,7 @@ DialogOwl9::
     db "Fly like a bird!"
     db "Hoot! Hoot!@"
 
-DialogOwlA::
+Dialog0CA::
     db "Hoot hoot!      "
     db "Your path is    "
     db "not easy, but   "
@@ -363,7 +363,7 @@ DialogOwlA::
     db "is getting      "
     db " restless.@"
 
-DialogOwlB::
+Dialog0CB::
     db "Hoot!  It has   "
     db "been some time  "
     db "since our paths "
@@ -380,7 +380,7 @@ DialogOwlB::
     db "sleeps.  Carry  "
     db "onward!  Hoot!@"
 
-DialogOwlC::
+Dialog0CC::
     db "Hoot!  That girl"
     db "sang her song in"
     db "front of the    "
@@ -402,7 +402,7 @@ DialogOwlC::
     db "Wind Fish waits "
     db "for you!  Hoot!@"
 
-DialogOwlEnterEgg::
+Dialog0CD::
     db "The time has    "
     db "come... The Wind"
     db "Fish awaits...  "
@@ -410,7 +410,7 @@ DialogOwlEnterEgg::
     db "Hoot! Hoot!@"
 
 Dialog0CE::
-DialogOwlGoodbye::
+Dialog0CF::
     db "Hoot! Young lad,"
     db "I mean... #####,"
     db "the hero!  You  "
@@ -445,7 +445,7 @@ DialogOwlGoodbye::
     db "will wake soon. "
     db "Good bye...Hoot!@"
 
-DialogWindFishRevelation::
+Dialog0D0::
     db "... ... ... ... "
     db " ... ... ... ..."
     db " I AM THE WIND  "
@@ -483,7 +483,7 @@ DialogWindFishRevelation::
     db "   TOGETHER!!@"
 
 Dialog0D1::
-DialogWindFishPlayInstruments::
+Dialog0D2::
     db " PLAY THE EIGHT "
     db "  INSTRUMENTS!  "
     db "PLAY THE SONG OF"
@@ -491,25 +491,25 @@ DialogWindFishPlayInstruments::
 
 Dialog0D3::
 Dialog0D4::
-DialogMermaidStatue::
+Dialog0D5::
     db "Mermaid Statue  @"
 
 Dialog0D6::
-DialogWindFishClimbStairs::
+Dialog0D7::
     db "...#####, you   "
     db "have beaten all "
     db "the Nightmares! "
     db "Climb the stairs"
     db "before you!@"
 
-DialogSchuleDonavitchMagnifyingLens::
+Dialog0D8::
     db "Ach! Vat are you"
     db "looking at vith "
     db "zat magnifying  "
     db "lens?  Stop it  "
     db "at vonce!@"
 
-DialogOwlSwordBeach::
+Dialog0D9::
     db "  Hoot!  Hoot!  "
     db "So you are the  "
     db "lad who owns the"
@@ -533,12 +533,12 @@ DialogOwlSwordBeach::
     db "wait for you    "
     db "there!  Hoot!@"
 
-DialogMiniBossLanmola::
+Dialog0DA::
     db "Annoyance!  You "
     db "are only getting"
     db "in the way!@"
 
-DialogMamuTooEarly:: ; Used when you talk to Mamu before the story wants you to have the frog song.
+Dialog0DB::
     db "Ribbit!  Ribbit!"
     db "Hey, man, I'm   "
     db "Mamu, on vocals!"
@@ -548,7 +548,7 @@ DialogMamuTooEarly:: ; Used when you talk to Mamu before the story wants you to 
     db "squat about     "
     db "music!  Ribbit!@"
 
-DialogMamuOfferSong::
+Dialog0DC::
     db "Ribbit!  Ribbit!"
     db "I'm Mamu, on    "
     db "vocals!  But I  "
@@ -566,18 +566,18 @@ DialogMamuOfferSong::
     db "What do you do? "
     db "    Pay  Leave<ask>"
 
-DialogMamuAccept::
+Dialog0DD::
     db "Thank you...    "
     db "Thank you very  "
     db "much... Croak!@"
 
-DialogMamuDeny::
+Dialog0DE::
     db "Well, that's a  "
     db "shame, but we   "
     db "don't play for  "
     db "free!@"
 
-DialogFrogSongAcquired::
+Dialog0DF::
     db "You've learned  "
     db "The Frog's Song "
     db "of Soul!  It's a"
@@ -586,14 +586,14 @@ DialogFrogSongAcquired::
     db "even liven up   "
     db "unliving things!@"
 
-DialogMamuFrogSongComment::
+Dialog0E0::
     db "If you play this"
     db "song, you'll    "
     db "make everything "
     db "around you feel "
     db "more alive!@"
 
-DialogLilDevilIntro::
+Dialog0E1::
     db "Hey, Kid!  You  "
     db "woke me up from "
     db "a fine nap!!    "
@@ -603,28 +603,28 @@ DialogLilDevilIntro::
     db "Are you ready?! "
     db "    Yes  N-No<ask>"
 
-DialogLilDevilOfferMagicPowder::
+Dialog0E2::
     db "I'll let you    "
     db "carry more Magic"
     db "Powder!  He He! "
     db "Are you ready?! "
     db "    Yes  N-No<ask>"
 
-DialogLilDevilOfferBombs::
+Dialog0E3::
     db "Okay, I'll let  "
     db "you carry more  "
     db "Bombs! He He He!"
     db "Are you ready?! "
     db "    Yes  N-No<ask>"
 
-DialogLilDevilOfferArrows::
+Dialog0E4::
     db "Fine, I'll let  "
     db "you have more   "
     db "arrows! Heh Heh!"
     db "Are you ready?! "
     db "    Yes  N-No<ask>"
 
-DialogLilDevilDisappear::
+Dialog0E5::
     db "Heh Heh Heh!    "
     db "You deserve it! "
     db "Now look at all "
@@ -633,7 +633,7 @@ DialogLilDevilDisappear::
     db "Hah!  Take care!"
     db "See you again!@"
 
-DialogAncientRuinsTooDark::
+Dialog0E6::
     db "??  There is a  "
     db "picture carved  "
     db "on the wall, but"
@@ -641,7 +641,7 @@ DialogAncientRuinsTooDark::
     db "because it's too"
     db "dark in here...@"
 
-DialogAncientRuinsRelief::
+Dialog0E7::
     db "TO THE FINDER..."
     db "  THE ISLE OF   "
     db "KOHOLINT, IS BUT"
@@ -661,14 +661,14 @@ DialogAncientRuinsRelief::
     db "... ... ... ... "
     db "What?  Illusion?@"
 
-DialogGoldLeafAcquired::
+Dialog0E8::
     db "You've found a  "
     db "Gold Leaf! Press"
     db "START to see    "
     db "how many you've "
     db "collected!@"
 
-DialogLastGoldLeafAcquired::
+Dialog0E9::
     db "At last!  You've"
     db "got the final   "
     db "Golden Leaf!    "
@@ -678,14 +678,14 @@ DialogLastGoldLeafAcquired::
 
 Dialog0EA::
 Dialog0EB::
-DialogGuardianAcornAcquired::
+Dialog0EC::
     db "You've got a    "
     db "Guardian Acorn! "
     db "It will reduce  "
     db "the damage you  "
     db "take by half!@"
 
-DialogMirrorShieldAcquired::
+Dialog0ED::
     db "You've got the  "
     db "Mirror Shield!  "
     db "You can now turn"
@@ -693,14 +693,14 @@ DialogMirrorShieldAcquired::
     db "you couldn't    "
     db "block before!@"
 
-DialogPowerfulBraceletAcquired::
+Dialog0EE::
     db "You've got a    "
     db "more Powerful   "
     db "Bracelet!  Now  "
     db "you can almost  "
     db "lift a whale!@"
 
-DialogSecretSeashellAcquired::
+Dialog0EF::
     db "You found a     "
     db "Secret Seashell!"
     db "If you collect a"
@@ -709,30 +709,30 @@ DialogSecretSeashellAcquired::
     db "is bound to     "
     db "happen!@"
 
-DialogRaftOwnerAsk::
+Dialog0F0::
     db "Want to go on a "
     db "raft ride for a "
     db "hundred Rupees? "
     db "    Yes  No Way<ask>"
 
-DialogRaftOwnerAccept::
+Dialog0F1::
     db "Okay, the raft  "
     db "is ready for you"
     db "outside!  Enjoy!@"
 
-DialogWaterfallAtShrine::
+Dialog0F2::
     db "Waterfall at the"
     db "    Shrine@"
 
-DialogSouthOfShrine::
+Dialog0F3::
     db " South of the   "
     db "    Shrine@"
 
-DialogAnimalVillageEntrance::
+Dialog0F4::
     db "Entrance to the "
     db " Animal Village@"
 
-DialogFinalBoss::
+Dialog0F5::
     db "We were born of "
     db "nightmares... To"
     db "take over this  "
@@ -754,7 +754,7 @@ DialogFinalBoss::
     db "defeat us!!!    "
     db "Let's rumble!@"
 
-DialogFinalBossDefeated::
+Dialog0F6::
     db "This island is  "
     db "going to dis-   "
     db "appear...  Our  "
@@ -763,19 +763,19 @@ DialogFinalBossDefeated::
     db "Our world...    "
     db "Our... world... @"
 
-DialogMarinCraneGameAsk::
+Dialog0F7::
     db "Wow!  #####, can"
     db "I try this?!    "
     db "What do you say?"
     db "    Okay No Way<ask>"
 
-DialogMarinCraneGamePersist::
+Dialog0F8::
     db "C'mon!  I want  "
     db "to do it! Can I?"
     db "It looks so fun!"
     db "    Yes  Okay<ask>"
 
-DialogCraneGameOwnerGrabbed::
+Dialog0F9::
     db "You're good!    "
     db "You're a pro,   "
     db "aren't you?     "
@@ -784,25 +784,25 @@ DialogCraneGameOwnerGrabbed::
     db "Pros aren't     "
     db "allowed in here!@"
 
-DialogHippoModelTalk:: ; Likely crane game owner after telling you to leave
+Dialog0FA::
     db "Go away!@"
 
-DialogHippoModelGoAway:: ; Likely crane game owner after telling you to leave twice
+Dialog0FB::
     db "Quit it!@"
 
-DialogExamineBookcase::
+Dialog0FC::
     db "This is not a   "
     db "chest...  What? "
     db "You knew that?  "
     db "Okay.@"
 
-DialogExamineDresser::
+Dialog0FD::
     db "##### checked   "
     db "the chest.  Wow!"
     db "This is a nice  "
     db "chest!@"
 
-DialogWitchMagicPowderComment::
+Dialog0FE::
     db "It's all ready, "
     db "it is!  Take    "
     db "care, as there's"
@@ -810,42 +810,42 @@ DialogWitchMagicPowderComment::
     db "Why not try a   "
     db "bit in my hut?@"
 
-DialogTarinExamineDrawer::
+Dialog0FF::
     db "Hey!  What are  "
     db "ya doin' in my  "
     db "chest?!  Where'd"
     db "you learn ta do "
     db "such a thing?!@"
 
-DialogFullMoonCelloAcquired::
+Dialog100::
     db "You've got the  "
     db "Full Moon Cello!@"
 
-DialogConchHornAcquired::
+Dialog101::
     db "You've got the  "
     db "Conch Horn!@"
 
-DialogSeaLilysBellAcquired::
+Dialog102::
     db "You've got the  "
     db "Sea Lily's Bell!@"
 
-DialogSurfHarpAcquired::
+Dialog103::
     db "You've got the  "
     db "Surf Harp!@"
 
-DialogWindMarimbaAcquired::
+Dialog104::
     db "You've got the  "
     db "Wind Marimba!@"
 
-DialogCoralTriangleAcquired::
+Dialog105::
     db "You've got the  "
     db "Coral Triangle!@"
 
-DialogOrganOfEveningCalmAcquired::
+Dialog106::
     db "You've got the  "
     db "Organ of        "
     db "  Evening Calm!@"
 
-DialogThunderDrumAcquired::
+Dialog107::
     db "You've got the  "
     db "Thunder Drum!@"

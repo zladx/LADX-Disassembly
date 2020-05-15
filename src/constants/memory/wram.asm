@@ -1031,7 +1031,9 @@ wMazeSignpostPos:: ; D473
 ds $5
 
 wDebugWarpIndex:: ; D479
+  ; What index the B + SELECT warp tool is at (00~0B)
   ds 1
+
 wPowerUpHits:: ; D47A
   ; Power-ups are disabled after 3 hits are taken from ennemies
   ds 1

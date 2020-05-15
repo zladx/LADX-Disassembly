@@ -3437,7 +3437,7 @@ jr_018_5A07:
 
     xor  a                                        ; $5A0B: $AF
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
-    ld   a, MUSIC_RECEIVED_LEVEL_1_SWORD          ; $5A0F: $3E $31
+    ld   a, MUSIC_OVERWORLD_INTRODUCTION                ; $5A0F: $3E $31
     ld   [wActiveMusicTrack], a                   ; $5A11: $EA $68 $D3
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
     ldh  [hMusicTrack], a                         ; $5A16: $E0 $B0
@@ -3478,7 +3478,7 @@ jr_018_5A3F:
     inc  [hl]                                     ; $5A4E: $34
     call GetEntityTransitionCountdown             ; $5A4F: $CD $05 $0C
     ld   [hl], $70                                ; $5A52: $36 $70
-    ld   a, MUSIC_FOUND_NEW_WEAPON                ; $5A54: $3E $10
+    ld   a, MUSIC_WEAPON_ACQUIRED                  ; $5A54: $3E $10
     ld   [wActiveMusicTrack], a                   ; $5A56: $EA $68 $D3
     ld   a, $FF                                   ; $5A59: $3E $FF
     ldh  [hNextWorldMusicTrack], a                ; $5A5B: $E0 $BF
@@ -4738,79 +4738,81 @@ jr_018_6263:
 MarinAtTheShoreState6Handler::
     ret                                           ; $6267: $C9
 
-Data_018_6268::
+MazeSignpostEntityPosition::
     db   $65, $64, $54, $52, $22, $22, $32, $37, $37, $37, $57, $56, $26, $21
 
-Data_018_6276::
+MazeSignpostEntityRoom::
     db   $C4, $C5, $D5, $D4, $C4, $C5, $D5, $D5, $C5, $C4, $C4, $C5, $D5, $D4
 
-Data_018_6284::
+MazeSignpostEntityDialog::
     db   $AB, $A9, $AC, $AA, $AB, $A9, $AB, $AA, $AC, $A9, $AB, $A9, $AC, $AE
 
 MazeSignpostEntityHandler::
-    call func_018_7DE8                            ; $6292: $CD $E8 $7D
-    ldh  a, [hMapRoom]                            ; $6295: $F0 $F6
-    cp   $B4                                      ; $6297: $FE $B4
-    jr   nz, jr_018_62A2                          ; $6299: $20 $07
+    call func_018_7DE8
+    ldh  a, [hMapRoom]
+    cp   $B4                                      ; are we in the starting room?
+    jr   nz, .in_maze_proper
 
-    xor  a                                        ; $629B: $AF
-    ld   [$D472], a                               ; $629C: $EA $72 $D4
-    ld   [$D473], a                               ; $629F: $EA $73 $D4
+    xor  a                                        ; if so, then re-initialize
+    ld   [wMazeSignpostGoal], a
+    ld   [wMazeSignpostPos], a
 
-jr_018_62A2:
-    ld   a, [$D473]                               ; $62A2: $FA $73 $D4
+.in_maze_proper:
+    ld   a, [wMazeSignpostPos]                    ; $62A2: $FA $73 $D4
     and  a                                        ; $62A5: $A7
-    jr   z, jr_018_62F4                           ; $62A6: $28 $4C
+    jr   z, .skip
 
-    ld   a, [$D472]                               ; $62A8: $FA $72 $D4
+    ld   a, [wMazeSignpostGoal]                   ; $62A8: $FA $72 $D4
     ld   e, a                                     ; $62AB: $5F
     ld   d, b                                     ; $62AC: $50
-    ld   hl, Data_018_6268                        ; $62AD: $21 $68 $62
+    ld   hl, MazeSignpostEntityPosition           ; $62AD: $21 $68 $62
     add  hl, de                                   ; $62B0: $19
-    ld   a, [$D473]                               ; $62B1: $FA $73 $D4
+    ld   a, [wMazeSignpostPos]                    ; $62B1: $FA $73 $D4
     cp   [hl]                                     ; $62B4: $BE
-    jr   nz, jr_018_62E4                          ; $62B5: $20 $2D
+    jr   nz, .wrong                               ; $62B5: $20 $2D
 
-    ld   hl, Data_018_6276                        ; $62B7: $21 $76 $62
+    ld   hl, MazeSignpostEntityRoom               ; $62B7: $21 $76 $62
     add  hl, de                                   ; $62BA: $19
     ldh  a, [hMapRoom]                            ; $62BB: $F0 $F6
     cp   [hl]                                     ; $62BD: $BE
-    jr   nz, jr_018_62E4                          ; $62BE: $20 $24
+    jr   nz, .wrong                               ; $62BE: $20 $24
 
+    ; correct sign
     xor  a                                        ; $62C0: $AF
-    ld   [$D473], a                               ; $62C1: $EA $73 $D4
-    ld   a, [$D472]                               ; $62C4: $FA $72 $D4
+    ld   [wMazeSignpostPos], a                    ; $62C1: $EA $73 $D4
+    ld   a, [wMazeSignpostGoal]                   ; $62C4: $FA $72 $D4
     inc  a                                        ; $62C7: $3C
-    ld   [$D472], a                               ; $62C8: $EA $72 $D4
+    ld   [wMazeSignpostGoal], a                   ; $62C8: $EA $72 $D4
     cp   $0E                                      ; $62CB: $FE $0E
-    jr   nz, jr_018_62DC                          ; $62CD: $20 $0D
+    jr   nz, .dialog                              ; $62CD: $20 $0D
 
+    ; maze solved
     xor  a                                        ; $62CF: $AF
-    ld   [$D472], a                               ; $62D0: $EA $72 $D4
+    ld   [wMazeSignpostGoal], a                   ; $62D0: $EA $72 $D4
     ld   a, $02                                   ; $62D3: $3E $02
     ldh  [hJingle], a                             ; $62D5: $E0 $F2
     push de                                       ; $62D7: $D5
-    call func_018_62F5                            ; $62D8: $CD $F5 $62
+    call RevealMamuCave                           ; $62D8: $CD $F5 $62
     pop  de                                       ; $62DB: $D1
 
-jr_018_62DC:
-    ld   hl, Data_018_6284                        ; $62DC: $21 $84 $62
+.dialog:
+    ld   hl, MazeSignpostEntityDialog             ; $62DC: $21 $84 $62
     add  hl, de                                   ; $62DF: $19
     ld   a, [hl]                                  ; $62E0: $7E
     jp   OpenDialogInTable1                       ; $62E1: $C3 $73 $23
 
-jr_018_62E4:
+.wrong:
     xor  a                                        ; $62E4: $AF
-    ld   [$D472], a                               ; $62E5: $EA $72 $D4
-    ld   [$D473], a                               ; $62E8: $EA $73 $D4
+    ld   [wMazeSignpostGoal], a                   ; $62E5: $EA $72 $D4
+    ld   [wMazeSignpostPos], a                    ; $62E8: $EA $73 $D4
     ld   a, $1D                                   ; $62EB: $3E $1D
     ldh  [hJingle], a                             ; $62ED: $E0 $F2
-    call_open_dialog $1AD                         ; $62EF
+    call_open_dialog $1AD                         ; "try again from the start"
 
-jr_018_62F4:
-    ret                                           ; $62F4: $C9
+.skip:
+    ret
 
-func_018_62F5::
+RevealMamuCave::
     ld   hl, $D739                                ; $62F5: $21 $39 $D7
     ld   [hl], $C6                                ; $62F8: $36 $C6
     ld   a, $98                                   ; $62FA: $3E $98
@@ -4884,7 +4886,7 @@ jr_018_632D:
     ld   d, $00                                   ; $6374: $16 $00
     ld   hl, wOverworldRoomStatus                 ; $6376: $21 $00 $D8
     add  hl, de                                   ; $6379: $19
-    set  4, [hl]                                  ; $637A: $CB $E6
+    set  ROOM_STATUS_DOOR_OPENED, [hl]            ; $637A: $CB $E6
     ret                                           ; $637C: $C9
 
 Data_018_637D::
@@ -8609,15 +8611,15 @@ jr_018_7DE6:
 
 func_018_7DE8::
     ldh  a, [hActiveEntityStatus]                 ; $7DE8: $F0 $EA
-    cp   $05                                      ; $7DEA: $FE $05
+    cp   ENTITY_STATUS_ACTIVE                     ; $7DEA: $FE $05
     jr   nz, jr_018_7E13                          ; $7DEC: $20 $25
 
 func_018_7DEE::
     ld   a, [wGameplayType]                       ; $7DEE: $FA $95 $DB
-    cp   $07                                      ; $7DF1: $FE $07
+    cp   GAMEPLAY_MINI_MAP                        ; $7DF1: $FE $07
     jr   z, jr_018_7E13                           ; $7DF3: $28 $1E
 
-    cp   $0B                                      ; $7DF5: $FE $0B
+    cp   GAMEPLAY_WORLD                           ; $7DF5: $FE $0B
     jr   nz, jr_018_7E13                          ; $7DF7: $20 $1A
 
     ld   a, [wTransitionSequenceCounter]          ; $7DF9: $FA $6B $C1
@@ -8636,6 +8638,7 @@ func_018_7DEE::
     jr   z, jr_018_7E14                           ; $7E11: $28 $01
 
 jr_018_7E13:
+    ; return from caller
     pop  af                                       ; $7E13: $F1
 
 jr_018_7E14:

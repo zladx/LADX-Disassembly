@@ -1017,7 +1017,18 @@ wBossDefeated:: ; D46C
   ds 1
 
 ; Unlabeled
-ds $C
+ds $5
+
+wMazeSignpostGoal:: ; D472
+  ; Signpost maze: current goal
+  ds 1
+
+wMazeSignpostPos:: ; D473
+  ; Signpost maze: sign activated by Link
+  ds 1
+
+; Unlabeled
+ds $5
 
 wDebugWarpIndex:: ; D479
   ds 1
@@ -1225,9 +1236,9 @@ wDB46 equ $DB46
   ds 3
 
 ; $0111 means that the player has every song.
-;   byte 0: has Ballad of the Wind Fish?
-;   byte 1: has Manbo's Mambo?
-;   byte 2: has Frog's Song of the Soul?
+;   bit 0: has Frog's Song of the Soul
+;   bit 1: has Manbo's Mambo
+;   bit 2: has Ballad of the Wind Fish
 wOcarinaSongFlags:: ; DB49
   ds 1
 

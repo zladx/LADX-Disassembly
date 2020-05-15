@@ -1106,8 +1106,10 @@ func_014_50C3::
 
     ret                                           ; $5117: $C9
 
-; Array indexed by hMapRoom
-Data_014_5118::
+; The text for the signposts.
+; The high byte is selected by label_1F69. Most dialogs are in table 1.
+; Array indexed by hMapRoom.
+SignpostDialogTable::
     db   $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $0C
     db   $0C, $B6, $0C, $0C, $0C, $0C, $A3, $0C, $0C, $0C, $0C, $0C, $0C, $0C, $2D, $0C
     db   $10, $10, $10, $10, $10, $B5, $10, $10, $10, $10, $10, $10, $10, $10, $10, $10

@@ -1,102 +1,109 @@
 ;
 ; Constants for audio effects
 
-; @TODO Are these correct? Some of these don't seem to match
-; their actual in-game use (???)
-
-; Values for hMusicTrack
+; Values for wActiveMusicTrack
+ 
 MUSIC_NONE                                      equ $00
-MUSIC_TITLE_SCREEN                              equ $01
+MUSIC_TITLE_SCREEN_INTRODUCTION                 equ $01; The title screen's theme's introduction section.
 MUSIC_TRENDY_GAME                               equ $02
 MUSIC_GAME_OVER                                 equ $03
 MUSIC_MABE_VILLAGE                              equ $04
 MUSIC_OVERWORLD                                 equ $05
-MUSIC_TAL_TAL_HEIGHTS                           equ $06
-MUSIC_VILLAGE_SHOP                              equ $07
+MUSIC_MT_TAMARANCH                              equ $06; Also Tal Tal Height.
+MUSIC_WITCH_HUT                                 equ $07; Also used in the shop.
 MUSIC_RAFT_RIDE_RAPIDS                          equ $08
 MUSIC_MYSTERIOUS_FOREST                         equ $09
-MUSIC_HOME_TRADER_HOUSE                         equ $0A
+MUSIC_HOUSE                                     equ $0A; Inside most regular houses.
 MUSIC_ANIMAL_VILLAGE                            equ $0B
-MUSIC_FAIRY_HOUSE                               equ $0C
-MUSIC_TITLE                                     equ $0D
-MUSIC_BOWWOW_KIDNAPPED                          equ $0E
-MUSIC_FOUND_LEVEL_2_SWORD                       equ $0F
-MUSIC_FOUND_NEW_WEAPON                          equ $10
-MUSIC_2D_UNDERGROUND_DUNGEON                    equ $11
-MUSIC_OWL                                       equ $12
-MUSIC_FINAL_NIGHTMARE_IN_EGG                    equ $13
-MUSIC_DREAM_SHRINE_ENTRANCE                     equ $14
-MUSIC_FOUND_INSTRUMENT                          equ $15
-MUSIC_OVERWORLD_CAVE                            equ $16
-MUSIC_PIECE_OF_POWER                            equ $17
-MUSIC_RECEIVED_HORN_INSTRUMENT                  equ $18
-MUSIC_RECEIVED_BELL_INSTRUMENT                  equ $19
-MUSIC_RECEIVED_HARP_INSTRUMENT                  equ $1A
-MUSIC_RECEIVED_XYLOPHONE_INSTRUMENT             equ $1B
-;MUSIC_RECEIVED_UNKNOWN_INSTRUMENT              equ $1C
-;MUSIC_RECEIVED_UNKNOWN_INSTRUMENT              equ $1D
-MUSIC_RECEIVED_THUNDER_DRUM_INSTRUMENT          equ $1E
-MUSIC_MARIN_SINGING                             equ $1F
-MUSIC_MANBO_SONG                                equ $20
-;MUSIC_RECEIVED ?? INSTRUMENT                   equ $21
-;MUSIC_INSTRUMENTS_SONG ??                      equ $22
-;MUSIC_INSTRUMENTS_SONG ??                      equ $23
+MUSIC_FAIRY_FOUNTAIN                            equ $0C
+MUSIC_TITLE_SCREEN                              equ $0D; Plays when $01 has finished.
+MUSIC_BOWWOW_KIDNAPPED                          equ $0E; Plays when $3E has finished.
+MUSIC_SWORD_ACQUIRED                            equ $0F; Possibly also for LVL2 sword
+MUSIC_WEAPON_ACQUIRED                           equ $10
+MUSIC_FILE_SELECT                               equ $11
+MUSIC_INSIDE_THE_WIND_EGG                       equ $12
+MUSIC_KANALET_CASTLE                            equ $13
+MUSIC_TAIL_CAVE                                 equ $14
+MUSIC_BOTTLE_GROTTO                             equ $15
+MUSIC_KEY_CAVERN                                equ $16
+MUSIC_ANGLERS_TUNNEL                            equ $17
+MUSIC_BOSS_DEFEATED                             equ $18; Plays in boss rooms after the boss has been defeated.
+MUSIC_BOSS_BATTLE                               equ $19
+MUSIC_INTRO_CUTSCENE                            equ $1A
+MUSIC_INSTRUMENT_ACQUIRED                       equ $1B
+MUSIC_LINK_AWAKENS                              equ $1C; Played in the house when you begin your game.
+MUSIC_SWORD_SEARCH                              equ $1D; First time on Koholint Island.
+MUSIC_DREAMING                                  equ $1E
+MUSIC_SOUTHERN_SHRINE                           equ $1F 
+MUSIC_FULL_MOON_CELLO                           equ $20
+MUSIC_2D_UNDERGROUND                            equ $21
+MUSIC_OWL                                       equ $22
+MUSIC_FINAL_BOSS                                equ $23
 MUSIC_DREAM_SHRINE_BED                          equ $24
-MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_1          equ $25
-MUSIC_COMPLETE_INSTRUMENTS_SONG_PART_2          equ $26
-;MUSIC_INSTRUMENTS_SONG ??                      equ $27
-MUSIC_LONELY_HOUSE                              equ $28
-MUSIC_PIECE_OF_POWER_PART_2                     equ $29
-MUSIC_MARIN_SINGING_LINKS_OCARINA               equ $2A
-MUSIC_LEVEL_5                                   equ $2B
-MUSIC_DUNGEON_ENTRANCE_UNLOCKING                equ $2C
-MUSIC_DREAM_SEQUENCE_SOUND                      equ $2D
-MUSIC_AT_BEACH_WITH_MARIN                       equ $2E
-MUSIC_UNKNOWN                                   equ $2F
-MUSIC_DUNGEON_SUB_BOSS                          equ $30
-MUSIC_RECEIVED_LEVEL_1_SWORD                    equ $31
+MUSIC_HEART_CONTAINER_ACQUIRED                  equ $25
+MUSIC_COMMON_CAVE                               equ $26
+MUSIC_POWERUP_ACQUIRED                          equ $27
+MUSIC_INSTRUMENT_CONCH_HORN                     equ $28
+MUSIC_INSTRUMENT_SEA_LILY_BELL                  equ $29
+MUSIC_INSTRUMENT_SURF_HARP                      equ $2A
+MUSIC_INSTRUMENT_WIND_MARIMBA                   equ $2B
+MUSIC_INSTRUMENT_CORAL_TRIANGLE                 equ $2C
+MUSIC_INSTRUMENT_ORGAN_OF_EVENING               equ $2D
+MUSIC_THUNDER_DRUM                              equ $2E
+MUSIC_MARIN_SINGING                             equ $2F
+MUSIC_MANBOS_MAMBO                              equ $30
+MUSIC_OVERWORLD_INTRODUCTION                    equ $31;    The overworld theme's introduction section.
 MUSIC_MR_WRITE_HOUSE                            equ $32
-MUSIC_ULRIRA_HOUSE                              equ $33
+MUSIC_PHONE_BOOTH                               equ $33; Also Ulrira's house.
 MUSIC_TARIN_ATTACKED_BY_BEES                    equ $34
-MUSIC_MAMU_SONG                                 equ $35
+MUSIC_MAMUS_SONG                                equ $35
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
-MUSIC_MR_WRITE_HOUSE_VERSION_2                  equ $37
-MUSIC_RICHARD_HOUSE_SECRET_SONG                 equ $38
+;MUSIC_MR_WRITE_HOUSE_VERSION_2                 equ $37; Mr Write House variant. Where is this used?
+MUSIC_TOTAKAS_SONG                              equ $38; Totaka's Song as played in Richard's mansion; does not init instrument bank. Missing drums(?)
 MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_GAME                              equ $3A
-MUSIC_RECEIVED_ITEM                             equ $3B
-MUSIC_HIDDEN_UNUSED_SONG                        equ $3C
-MUSIC_NOTHING                                   equ $3D
-MUSIC_BOWWOW_STOLEN                             equ $3E
-MUSIC_ENDING                                    equ $3F
-MUSIC_RICHARD_S_HOUSE                           equ $40
-;MUSIC_GLITCHED_NOISE                           equ $41
-;MUSIC_GLITCHED_NOISE                           equ $42
-;MUSIC_GLITCHED_NOISE                           equ $43
-;MUSIC_GLITCHY                                  equ $44
-;MUSIC_GLITCHY                                  equ $45
-;MUSIC_GLITCHY                                  equ $46
-;MUSIC_SILENCE                                  equ $47
-;MUSIC_SILENCE                                  equ $48
+;MUSIC_RECEIVED_ITEM                            equ $3B; Short item jingle
+MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C; とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
+MUSIC_ENDING                                    equ $3D; During ending cutscene. Silence, then music. Plays staff roll theme when finished.
+MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E
+MUSIC_WIND_FISH_AWAKENS                         equ $3F; Plays during cutscene after defeating the final boss
+MUSIC_RICHARDS_HOUSE                            equ $40
+;MUSIC_BOTWF                                    equ $41; Ballad of the Wind Fish, on horn and flute-like instruments.
+;MUSIC_BOTWF                                    equ $42; Ballad of the Wind Fish, has added marimba motif. More voices than $41
+;MUSIC_BOTWF                                    equ $43; Ballad of the Wind Fish, piano, more voices than $42
+;MUSIC_BOTWF                                    equ $44; Ballad of the Wind Fish, has high pitched ting. more voices than $43
+;MUSIC_BOTWF                                    equ $45; Ballad of the Wind Fish, has triangle rhythm. More voices than $44
+;MUSIC_BOTWF                                    equ $46; Ballad of the Wind Fish, has added horn. More voices than $45
+;MUSIC_BOTWF                                    equ $47; Ballad of the Wind Fish, drums, high ting. Awakening tracks are not well described.
+MUSIC_GHOSTS_HOUSE                              equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
-;MUSIC_SILENCE                                  equ $4A
-;MUSIC_GLITCHY                                  equ $4B
-;MUSIC_GLITCHY                                  equ $4C
-;MUSIC_SILENCE                                  equ $4D
-;MUSIC_SILENCE                                  equ $50
-;MUSIC_GLITCHY                                  equ $58
-;MUSIC_SILENCE                                  equ $59
-;MUSIC_GLITCHY                                  equ $5A
-;MUSIC_SILENCE                                  equ $5B
-;MUSIC_SILENCE                                  equ $5C
-;MUSIC_GLITCHY                                  equ $5D
-;MUSIC_SILENCE                                  equ $5E
-;MUSIC_SILENCE                                  equ $5F
-;MUSIC_SILENCE                                  equ $60
-MUSIC_COLOR_DUNGEON                             equ $61
-;MUSIC_UNTESTED                                 equ $6A
-;MUSIC_GLITCHED                                 equ $F0
-;MUSIC_NOTHING                                  equ $FF
+;MUSIC_SILENCE                                  equ $4A; More awakening...
+MUSIC_CATFISHS_MAW                              equ $4B
+;MUSIC_GLITCHY                                  equ $4C; Orchestral, short jingle.
+;MUSIC_SILENCE                                  equ $4D; harp jingle
+MUSIC_MARIN_BEACH                               equ $4E
+;MUSIC_UNKNOWN                                  equ $4F; item jingle
+MUSIC_MINI_BOSS                                 equ $50
+MUSIC_KANALET_CASTLE_COPY                       equ $51; Copy of $13.
+MUSIC_TAIL_CAVE_COPY                            equ $52; Copy of $14.
+MUSIC_DREAM_SHRINE                              equ $53
+;MUSIC_UNKNOWN                                  equ $54; intense arpeggio, pre boss music? Switches to $19.
+MUSIC_FLYING_ROOSTER_REVIVED                    equ $55
+;MUSIC_UNKNOWN                                  equ $56; punch noises in upwards chord progression, plays $55 afterwards
+;MUSIC_CUCCO_HOUSE                              equ $57; Is called 'Cucco House'
+MUSIC_FACE_SHRINE                               equ $58
+;MUSIC_WINDFISH                                 equ $59; Is called 'The WindFish'
+MUSIC_TURTLE_ROCK                               equ $5A
+MUSIC_EAGLES_TOWER                              equ $5B
+MUSIC_BEFORE_EAGLES_TOWER_BOSS                  equ $5C; Plays before the boss at the top of Eagle's Tower is summon by Grim Creeper.
+MUSIC_FINAL_BOSS_DIALOG                         equ $5D; Plays during the final boss' dialog.
+MUSIC_BOSS_WARNING                              equ $5E; Plays during the dialogs where the bosses tell you not to wake the Wind Fish.
+MUSIC_FINAL_BOSS_DEFEATED                       equ $5F
+MUSIC_ZELDA_NICKNAME_EASTER_EGG                 equ $60; ZELDA nickname easter egg.
+MUSIC_COLOR_DUNGEON                             equ $61;
+;MUSIC_COLOR_DUNGEON_COPIES                     equ $62 to 6F;	Same as $61	
+;MUSIC_GLITCHED                                 equ $70 to $FE;	Glitches the music that played before it.
+MUSIC_NOTHING                                   equ $FF;	Silence.
 
 ; Values for hJingle
 JINGLE_TREASURE_FOUND   equ $01

@@ -3800,8 +3800,15 @@ jr_003_5EFE:
 jr_003_5F01:
     jp   func_003_5A17                            ; $5F01: $C3 $17 $5A
 
-Data_003_5F04::
-    db   $20, $28, $29, $2A, $2B, $2C, $2D, $2E
+InstrumentMusicTable::
+    db   MUSIC_FULL_MOON_CELLO
+    db   MUSIC_INSTRUMENT_CONCH_HORN
+    db   MUSIC_INSTRUMENT_SEA_LILY_BELL
+    db   MUSIC_INSTRUMENT_SURF_HARP
+    db   MUSIC_INSTRUMENT_WIND_MARIMBA
+    db   MUSIC_INSTRUMENT_CORAL_TRIANGLE
+    db   MUSIC_INSTRUMENT_ORGAN_OF_EVENING
+    db   MUSIC_THUNDER_DRUM
 
 func_003_5F0C::
     ld   a, [$D369]                               ; $5F0C: $FA $69 $D3
@@ -3815,7 +3822,7 @@ func_003_5F0C::
     ldh  a, [hMapId]                              ; $5F18: $F0 $F7
     ld   e, a                                     ; $5F1A: $5F
     ld   d, b                                     ; $5F1B: $50
-    ld   hl, Data_003_5F04                        ; $5F1C: $21 $04 $5F
+    ld   hl, InstrumentMusicTable                 ; $5F1C: $21 $04 $5F
     add  hl, de                                   ; $5F1F: $19
     ld   a, [hl]                                  ; $5F20: $7E
     ld   [wActiveMusicTrack], a                   ; $5F21: $EA $68 $D3

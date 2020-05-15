@@ -3,20 +3,20 @@
 ; Values for wMusicTrackToPlay
  
 MUSIC_NONE                                      equ $00 ; This value means: Don't play a different track.
-MUSIC_TITLE_SCREEN_INTRO                        equ $01	; $0D's introduction section.
+MUSIC_TITLE_SCREEN_INTRO                        equ $01 ; $0D's introduction section.
 MUSIC_MINIGAME                                  equ $02
 MUSIC_GAME_OVER                                 equ $03
 MUSIC_MABE_VILLAGE                              equ $04
 MUSIC_OVERWORLD                                 equ $05
-MUSIC_MT_TAMARANCH                              equ $06	; Also Tal Tal Heights.
-MUSIC_WITCH_HUT                                 equ $07	; Also used in the shop.
+MUSIC_MT_TAMARANCH                              equ $06 ; Also Tal Tal Heights.
+MUSIC_WITCH_HUT                                 equ $07 ; Also used in the shop.
 MUSIC_RAFT_RIDE_RAPIDS                          equ $08
 MUSIC_MYSTERIOUS_FOREST                         equ $09
-MUSIC_HOUSE                                     equ $0A	; Inside regular houses.
+MUSIC_HOUSE                                     equ $0A ; Inside regular houses.
 MUSIC_ANIMAL_VILLAGE                            equ $0B
 MUSIC_FAIRY_FOUNTAIN                            equ $0C
-MUSIC_TITLE_SCREEN                              equ $0D	; Plays when $01 has finished.
-MUSIC_BOWWOW_KIDNAPPED                          equ $0E	; Plays when $3E has finished.
+MUSIC_TITLE_SCREEN                              equ $0D ; Plays when $01 has finished.
+MUSIC_BOWWOW_KIDNAPPED                          equ $0E ; Plays when $3E has finished.
 MUSIC_SWORD_ACQUIRED                            equ $0F ; Plays when you retrieve your sword on the beach.
 MUSIC_TOOL_ACQUIRED                             equ $10 ; Tool refers to many things here. Weapons, maps/compasses, etc.
 MUSIC_FILE_SELECT                               equ $11
@@ -26,12 +26,12 @@ MUSIC_TAIL_CAVE                                 equ $14
 MUSIC_BOTTLE_GROTTO                             equ $15
 MUSIC_KEY_CAVERN                                equ $16
 MUSIC_ANGLERS_TUNNEL                            equ $17
-MUSIC_BOSS_DEFEATED                             equ $18	; Plays in boss rooms after the boss has been defeated.
+MUSIC_BOSS_DEFEATED                             equ $18 ; Plays in boss rooms after the boss has been defeated.
 MUSIC_BOSS_BATTLE                               equ $19
 MUSIC_INTRO_CUTSCENE                            equ $1A
 MUSIC_INSTRUMENT_ACQUIRED                       equ $1B
-MUSIC_LINK_AWAKENS                              equ $1C	; Played in the house when you begin your game.
-MUSIC_SWORD_SEARCH                              equ $1D	; First time on Koholint Island.
+MUSIC_LINK_AWAKENS                              equ $1C ; Played in the house when you begin your game.
+MUSIC_SWORD_SEARCH                              equ $1D ; First time on Koholint Island.
 MUSIC_DREAMING                                  equ $1E ; Plays when you sleep in the bed in the upper Dream Shrine and the VFXplays.
 MUSIC_SOUTHERN_SHRINE                           equ $1F 
 MUSIC_INSTRUMENT_FULL_MOON_CELLO                equ $20 ; When you obtain the Full Moon Cello and it plays its tune.
@@ -51,58 +51,58 @@ MUSIC_INSTRUMENT_ORGAN_OF_EVENING_CALM          equ $2D ; When you obtain the Or
 MUSIC_INSTRUMENT_THUNDER_DRUM                   equ $2E ; When you obtain the Thunder Drum and it plays its tune.
 MUSIC_MARIN_SINGING                             equ $2F
 MUSIC_MANBO_MAMBO                               equ $30
-MUSIC_OVERWORLD_INTRO                           equ $31	; Heroic introduction before $05. It only plays once; after retrieving your sword on the shore.
+MUSIC_OVERWORLD_INTRO                           equ $31 ; Heroic introduction before $05. It only plays once; after retrieving your sword on the shore.
 MUSIC_MR_WRITE_HOUSE                            equ $32
-MUSIC_PHONE_BOOTH                               equ $33	; Also used in Ulrira's house.
+MUSIC_PHONE_BOOTH                               equ $33 ; Also used in Ulrira's house.
 MUSIC_TARIN_BEEHIVE                             equ $34 ; Used for Tarin's beehive cutscene.
 MUSIC_MAMU_SONG                                 equ $35
 MUSIC_MONKEYS_BUILDING_BRIDGE                   equ $36
 MUSIC_CHRISTINE_HOUSE                           equ $37
-MUSIC_TOTAKA_SONG_UNUSED                        equ $38	; Unused. Where is the one that plays in Richard's mansion?
+MUSIC_TOTAKA_SONG_UNUSED                        equ $38 ; Unused. Where is the one that plays in Richard's mansion?
 MUSIC_TURTLE_ROCK_ENTRANCE_BOSS                 equ $39
 MUSIC_FISHING_UNDER_BRIDGE                      equ $3A ; The fishing pond plays $02 during the fishing minigame. This is a different fishing minigame.
-MUSIC_CLASSIC_RECEIVED_ITEM                     equ $3B	; It is the classic Legend of Zelda item fanfare. I think it is in the Color Dungeon.
-MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C	; とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
-MUSIC_ENDING                                    equ $3D	; During ending cutscene. Silence, then music. Plays staff roll theme when finished.
+MUSIC_CLASSIC_RECEIVED_ITEM                     equ $3B ; It is the classic Legend of Zelda item fanfare. I think it is in the Color Dungeon.
+MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG              equ $3C ; とたけけ nickname easter egg. Unused in EU/US versions. Similar to $60
+MUSIC_ENDING                                    equ $3D ; During ending cutscene. Silence, then music. Plays staff roll theme when finished.
 MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION             equ $3E ; Plays during kidnapping related dialog and in the Moblin hideout.
-MUSIC_WIND_FISH_AWAKENS                         equ $3F	; Plays during cutscene after defeating the final boss
+MUSIC_WIND_FISH_AWAKENS                         equ $3F ; Plays during cutscene after defeating the final boss
 MUSIC_RICHARD_MANSION                           equ $40
-MUSIC_BALLAD_HORN                               equ $41	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BALLAD_BELL                               equ $42	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BALLAD_HARP                               equ $43	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_HORN                               equ $41 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_BELL                               equ $42 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_HARP                               equ $43 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
 MUSIC_BALLAD_MARIMBA                            equ $44 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BALLAD_TRIANGLE                           equ $45	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BALLAD_ORGAN                              equ $46	; When playing for the egg w 
-MUSIC_BALLAD_ALL                                equ $47	; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_TRIANGLE                           equ $45 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
+MUSIC_BALLAD_ORGAN                              equ $46 ; When playing for the egg w 
+MUSIC_BALLAD_ALL                                equ $47 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
 MUSIC_GHOST_HOUSE                               equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
 MUSIC_LINK_MARIN_DUET                           equ $4A
 MUSIC_CATFISH_MAW                               equ $4B
 MUSIC_WATERFALL_DRAIN                           equ $4C ; Plays when you open the lock for the Angler's Tunnel.
-MUSIC_MARIN_BEACH_TRANSITION                    equ $4D	; For the transition to the Link and Marin beach cutscene. The beginning and ending notes are skipped.
+MUSIC_MARIN_BEACH_TRANSITION                    equ $4D ; For the transition to the Link and Marin beach cutscene. The beginning and ending notes are skipped.
 MUSIC_MARIN_BEACH                               equ $4E
-;MUSIC_UNKNOWN                                  equ $4F	; Jingle, possible unused/possibly related to Marin 
+;MUSIC_UNKNOWN                                  equ $4F ; Jingle, possible unused/possibly related to Marin 
 MUSIC_MINIBOSS                                  equ $50
-MUSIC_KANALET_CASTLE_COPY                       equ $51	; Copy of $13.
-MUSIC_TAIL_CAVE_COPY                            equ $52	; Copy of $14.
+MUSIC_KANALET_CASTLE_COPY                       equ $51 ; Copy of $13.
+MUSIC_TAIL_CAVE_COPY                            equ $52 ; Copy of $14.
 MUSIC_DREAM_SHRINE                              equ $53 ; Plays in the lower Dream Shrine. (After sleeping in the bed)
-MUSIC_EAGLES_TOWER_BOSS_CUTSCENE                equ $54	; Plays when the boss comes into view. Switches to $19.
+MUSIC_EAGLES_TOWER_BOSS_CUTSCENE                equ $54 ; Plays when the boss comes into view. Switches to $19.
 MUSIC_ROOSTER_REVIVAL                           equ $55 ; Plays while the flying rooster's spirit reenters his remains.
-MUSIC_SEASHELL_MANSION_SPIRIT                   equ $56	; Plays $55 afterwards. Possibly left unused for resurrecting the rooster?
+MUSIC_SEASHELL_MANSION_SPIRIT                   equ $56 ; Plays $55 afterwards. Possibly left unused for resurrecting the rooster?
 MUSIC_CUCCO_HOUSE                               equ $57
 MUSIC_FACE_SHRINE                               equ $58
-MUSIC_MEETING_WINDFISH                          equ $59	; When you climb the staircase and meet the Wind Fish.
+MUSIC_MEETING_WINDFISH                          equ $59 ; When you climb the staircase and meet the Wind Fish.
 MUSIC_TURTLE_ROCK                               equ $5A
 MUSIC_EAGLE_TOWER                               equ $5B
-MUSIC_GRIM_CREEPER_DIALOG                       equ $5C	; Plays during Grim Creeper's dialog before the boss. Switches to $54 after the dialog.
-MUSIC_FINAL_BOSS_DIALOG                         equ $5D	; Plays during the final boss' dialog.
-MUSIC_BOSS_WARNING                              equ $5E	; Plays during the dialogs where the bosses tell you not to wake the Wind Fish.
+MUSIC_GRIM_CREEPER_DIALOG                       equ $5C ; Plays during Grim Creeper's dialog before the boss. Switches to $54 after the dialog.
+MUSIC_FINAL_BOSS_DIALOG                         equ $5D ; Plays during the final boss' dialog.
+MUSIC_BOSS_WARNING                              equ $5E ; Plays during the dialogs where the bosses tell you not to wake the Wind Fish.
 MUSIC_FINAL_BOSS_DEFEATED                       equ $5F
-MUSIC_ZELDA_NICKNAME_EASTER_EGG                 equ $60	; ZELDA nickname easter egg.
+MUSIC_ZELDA_NICKNAME_EASTER_EGG                 equ $60 ; ZELDA nickname easter egg.
 MUSIC_COLOR_DUNGEON                             equ $61
-;MUSIC_COLOR_DUNGEON_COPIES                     equ $62 to 6F	; Same as $61	
-;MUSIC_GLITCHED                                 equ $70 to $FE	; Glitches the music that played before it.
-MUSIC_SILENCE                                   equ $FF	; Seems to try to silence the voice channels. Does not always correctly silence the music. 
+;MUSIC_COLOR_DUNGEON_COPIES                     equ $62 to 6F   ; Same as $61   
+;MUSIC_GLITCHED                                 equ $70 to $FE  ; Glitches the music that played before it.
+MUSIC_SILENCE                                   equ $FF ; Seems to try to silence the voice channels. Does not always correctly silence the music. 
 
 ; Values for hJingle
 JINGLE_NONE             equ $00;
@@ -188,7 +188,7 @@ WAVE_SFX_BOSS_AGONY      equ $10
 ;WAVE_SFX_UNKNOWN        equ $12
 WAVE_SFX_CUCCO_HURT      equ $13
 ;WAVE_SFX_UNKNOWN        equ $14
-WAVE_SFX_OCARINA_NOSONG  equ $15	; Off-key notes for when you have no songs available
+WAVE_SFX_OCARINA_NOSONG  equ $15    ; Off-key notes for when you have no songs available
 WAVE_SFX_BOSS_HIT        equ $16
 ;WAVE_SFX_UNKNOWN        equ $17
 WAVE_SFX_CHAIN_CHOMP     equ $18
@@ -203,8 +203,8 @@ NOISE_SFX_SWORD_A                 equ $02;
 NOISE_SFX_SPIN_ATTACK             equ $03;
 NOISE_SFX_DOOR_UNLOCKED           equ $04;opening of door likely
 NOISE_SFX_CUT_GRASS               equ $05;
-NOISE_SFX_STAIRS                  equ $06;	Also used for doorways.
-NOISE_SFX_FOOTSTEP                equ $07;	Landing after jump
+NOISE_SFX_STAIRS                  equ $06;  Also used for doorways.
+NOISE_SFX_FOOTSTEP                equ $07;  Landing after jump
 NOISE_SFX_POT_SMASHED             equ $09;hit/stun, perhaps pot
 NOISE_SFX_SHOOT_ARROW             equ $0A;probs arrow
 ;NOISE_SFX_SHIELD_DEFLECT         equ $0B;shield sound but shorter

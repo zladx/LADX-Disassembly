@@ -484,7 +484,7 @@ EntityInitMovingBlockMover::
     ret                                           ; $49E1: $C9
 
 EntityInitDesertLanmola::
-	; Sets MUSIC_NONE as the default music track. weird...
+    ; Sets MUSIC_NONE as the default music track. weird...
     xor  a                                        ; $49E2: $AF
     ldh  [hDefaultMusicTrack], a                  ; $49E3: $E0 $B0
     ret                                           ; $49E5: $C9
@@ -627,7 +627,7 @@ EntityInitMarin::
     ldh  [hDefaultMusicTrack], a                  ; $4A9C: $E0 $B0
     ldh  [$FFBD], a                               ; $4A9E: $E0 $BD
     call label_27EA                               ; $4AA0: $CD $EA $27
-	
+
 .mabeWeatherVaneEnd
 
     ld   a, [ROM_DebugTool1]                      ; $4AA3: $FA $03 $00

@@ -2783,7 +2783,7 @@ LinkMotionMapFadeOutHandler::
     call label_004_7A5F
     ld   hl, wIsThief
     inc  [hl]
-    ld   hl, $DB46
+    ld   hl, wHasStolenFromShop
     inc  [hl]
     ld   a, [$DC0C]
     or   $40
@@ -6919,8 +6919,8 @@ LoadObject_IndoorEntrance::
     cp   $D3
     jr   nz, .end
 
-    ; … and $DB46 != 0…
-    ld   a, [$DB46]
+    ; … and HasStolenFromShop != 0…
+    ld   a, [wHasStolenFromShop]
     and  a
     jr   z, .end
 

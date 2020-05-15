@@ -1231,9 +1231,14 @@ wShieldLevel:: ; DB44
 wArrowCount:: ; DB45
   ds 1
 
+; Set to 1 when you steal from the shop.
+; Set back to zero when the shopkeeper kills you.
+wHasStolenFromShop:: ; DB46
+  ds 1
+
 ; Unlabeled
-wDB46 equ $DB46
-  ds 3
+wDB47 equ $DB47
+  ds 2
 
 ; $0111 means that the player has every song.
 ;   bit 0: has Frog's Song of the Soul

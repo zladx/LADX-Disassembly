@@ -6702,7 +6702,7 @@ Data_004_77EE::     ; Price (low) ?
     db   $00, $C8, $0A, $14, $0A, $D4, $0A, $00, $00, $00
 
 func_004_77F8::
-    ld   a, [$DB46]                               ; $77F8: $FA $46 $DB
+    ld   a, [wHasStolenFromShop]                  ; $77F8: $FA $46 $DB
     and  a                                        ; $77FB: $A7
 
 jr_004_77FC:
@@ -7312,7 +7312,7 @@ func_004_7B40::
     and  a                                        ; $7B4B: $A7
     ret  nz                                       ; $7B4C: $C0
 
-    ld   [$DB46], a                               ; $7B4D: $EA $46 $DB
+    ld   [wHasStolenFromShop], a                  ; $7B4D: $EA $46 $DB
     ld   [$C50A], a                               ; $7B50: $EA $0A $C5
     db   $C3                                      ; $7B53: $C3
     ld   a, d                                     ; $7B54: $7A

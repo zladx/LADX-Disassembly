@@ -4736,7 +4736,7 @@ label_002_6317:
 
     ld   a, $30                                   ; $6338: $3E $30
     ld   hl, hWaveSfx                             ; $633A: $21 $F3 $FF
-    ld   [hl], $04                                ; $633D: $36 $04
+    ld   [hl], WAVE_SFX_LOW_HEARTS                ; $633D: $36 $04
 
 jr_002_633F:
     ld   [wC110], a                               ; $633F: $EA $10 $C1

@@ -30,7 +30,7 @@ jr_006_4B98:
     jp   nz, label_006_5308                       ; $4BA2: $C2 $08 $53
 
     call func_006_64C6                            ; $4BA5: $CD $C6 $64
-    call label_3EE8                               ; $4BA8: $CD $E8 $3E
+    call BossIntro                                ; $4BA8: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $4BAB: $CD $56 $0C
     call label_3B44                               ; $4BAE: $CD $44 $3B
     call func_006_6541                            ; $4BB1: $CD $41 $65

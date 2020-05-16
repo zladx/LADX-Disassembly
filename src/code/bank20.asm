@@ -1320,7 +1320,7 @@ ResetRoomVariables::
     ldh  [$FFAC], a                               ; $4CBE: $E0 $AC
     ld   [wC113], a                               ; $4CC0: $EA $13 $C1
     ld   [$D460], a                               ; $4CC3: $EA $60 $D4
-    ld   [$C1BE], a                               ; $4CC6: $EA $BE $C1
+    ld   [wInBossBattle], a                       ; $4CC6: $EA $BE $C1
     ld   [$C50E], a                               ; $4CC9: $EA $0E $C5
     ld   [$C3C8], a                               ; $4CCC: $EA $C8 $C3
     ld   [$C5A6], a                               ; $4CCF: $EA $A6 $C5

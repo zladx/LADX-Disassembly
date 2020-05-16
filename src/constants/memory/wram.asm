@@ -268,7 +268,9 @@ wC161: ds 1
 wC162: ds 1
 wC163: ds 1
 wDialogCharacterIndexHi: ds 1
-wC165: ds 1
+wBossIntroDelay: ; C165
+  ; Delay boss intro until this reaches zero
+  ds 1
 wLinkPlayingOcarinaCountdown: ; C166
   ; While not zero, Link is shown playing the Ocarina
   ds 1
@@ -378,8 +380,13 @@ wLoadPreviousMapCountdown:: ; C1BC
   ; Number of frames to wait before loading the previous map and room
   ds 1
 
-; Unlabeled
-ds 2
+wDidBossIntro:: ; C1BD
+  ; Non-zero when the BossIntro routine did its thing
+  ds 1
+
+wInBossBattle:: ; C1BE
+  ; Non-zero after initializing a boss entity
+  ds 1
 
 wScrollXOffset:: ; C1BF
   ds 1
@@ -614,6 +621,7 @@ wEntitiesFlashCountdownTable:: ; C420
 
 ; Entity initialization flags?
 ; Seems to be a bitfield
+; bit 2: set for bosses, clear for minibosses
 wEntitiesUnknowTableH::  ; C430
   ds $10
 

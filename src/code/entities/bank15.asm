@@ -2059,13 +2059,14 @@ FinalNightmareForm1Handler::
 ._05 dw func_015_5191                             ; $50BE
 ._06 dw func_015_51B5                             ; $50C0
 
+; Final boss dialog related
 func_015_50C2::
     ld   a, [$C146]                               ; $50C2: $FA $46 $C1
     and  a                                        ; $50C5: $A7
     ret  nz                                       ; $50C6: $C0
 
-    ld   a, $5D                                   ; $50C7: $3E $5D
-    ld   [wActiveMusicTrack], a                   ; $50C9: $EA $68 $D3
+    ld   a, MUSIC_FINAL_BOSS_DIALOG               ; $50C7: $3E $5D
+    ld   [wMusicTrackToPlay], a                   ; $50C9: $EA $68 $D3
     ld   hl, $DA74                                ; $50CC: $21 $74 $DA
     set  6, [hl]                                  ; $50CF: $CB $F6
     call_open_dialog $0F5                         ; $50D1
@@ -2122,13 +2123,14 @@ func_015_5128::
     ldh  [hJingle], a                             ; $512A: $E0 $F2
     ret                                           ; $512C: $C9
 
+; Final boss music initalization???
 jr_015_512D:
     cp   $30                                      ; $512D: $FE $30
     jr   nz, jr_015_5137                          ; $512F: $20 $06
 
     dec  [hl]                                     ; $5131: $35
-    ld   a, $23                                   ; $5132: $3E $23
-    ld   [wActiveMusicTrack], a                   ; $5134: $EA $68 $D3
+    ld   a, MUSIC_FINAL_BOSS                      ; $5132: $3E $23
+    ld   [wMusicTrackToPlay], a                   ; $5134: $EA $68 $D3
 
 jr_015_5137:
     ret                                           ; $5137: $C9
@@ -5591,6 +5593,7 @@ jr_015_6E5A:
 ._01 dw func_015_6FA1                             ; $6E62
 ._02 dw func_015_6FBC                             ; $6E64
 
+; After a boss is defeated??? Scream and defeated boss' dialog
 func_015_6E66::
     ld   hl, wEntitiesHealthTable                 ; $6E66: $21 $60 $C3
     add  hl, bc                                   ; $6E69: $09
@@ -5601,8 +5604,8 @@ func_015_6E66::
     ld   a, $03                                   ; $6E6F: $3E $03
     ld   [wBossAgonySFXCountdown], a              ; $6E71: $EA $A7 $C5
     call_open_dialog $0F6                         ; $6E74
-    ld   a, $5E                                   ; $6E79: $3E $5E
-    ld   [wActiveMusicTrack], a                   ; $6E7B: $EA $68 $D3
+    ld   a, MUSIC_BOSS_WARNING                    ; $6E79: $3E $5E
+    ld   [wMusicTrackToPlay], a                   ; $6E7B: $EA $68 $D3
     call GetEntityTransitionCountdown             ; $6E7E: $CD $05 $0C
     ld   [hl], $80                                ; $6E81: $36 $80
     ld   hl, wEntitiesFlashCountdownTable         ; $6E83: $21 $20 $C4
@@ -5617,6 +5620,7 @@ func_015_6E66::
     call label_27F2                               ; $6E95: $CD $F2 $27
     jp   IncrementEntityState                     ; $6E98: $C3 $12 $3B
 
+; Miniboss initalization???
 jr_015_6E9B:
     ldh  a, [hFrameCounter]                       ; $6E9B: $F0 $E7
     and  $0F                                      ; $6E9D: $E6 $0F
@@ -5631,8 +5635,8 @@ jr_015_6E9B:
     cp   $01                                      ; $6EAC: $FE $01
     jr   nz, jr_015_6EB5                          ; $6EAE: $20 $05
 
-    ld   hl, wActiveMusicTrack                    ; $6EB0: $21 $68 $D3
-    ld   [hl], $50                                ; $6EB3: $36 $50
+    ld   hl, wMusicTrackToPlay                    ; $6EB0: $21 $68 $D3
+    ld   [hl], MUSIC_MINIBOSS                     ; $6EB3: $36 $50
 
 jr_015_6EB5:
     call DecrementEntityIgnoreHitsCountdown       ; $6EB5: $CD $56 $0C
@@ -5803,8 +5807,8 @@ func_015_6FA1::
     cp   $02                                      ; $6FA4: $FE $02
     jr   nz, jr_015_6FAD                          ; $6FA6: $20 $05
 
-    ld   hl, wActiveMusicTrack                    ; $6FA8: $21 $68 $D3
-    ld   [hl], $5F                                ; $6FAB: $36 $5F
+    ld   hl, wMusicTrackToPlay                    ; $6FA8: $21 $68 $D3
+    ld   [hl], MUSIC_FINAL_BOSS_DEFEATED          ; $6FAB: $36 $5F
 
 jr_015_6FAD:
     and  a                                        ; $6FAD: $A7
@@ -7871,6 +7875,7 @@ DreamShrineBedEntityHandler::
 ._01 dw func_015_7D78                             ; $7CFD
 ._02 dw func_015_7E31                             ; $7CFF
 
+; Dream Shrine transition sequence?
 func_015_7D01::
     call func_015_7BDB                            ; $7D02: $DB
     add  $0E                                      ; $7D04: $C6 $0E
@@ -7907,8 +7912,8 @@ func_015_7D01::
     ldh  [hLinkDirection], a                      ; $7D3C: $E0 $9E
     ld   a, $01                                   ; $7D3E: $3E $01
     ld   [wC10A], a                               ; $7D40: $EA $0A $C1
-    ld   a, $1E                                   ; $7D43: $3E $1E
-    ld   [wActiveMusicTrack], a                   ; $7D45: $EA $68 $D3
+    ld   a, MUSIC_DREAMING                        ; $7D43: $3E $1E
+    ld   [wMusicTrackToPlay], a                   ; $7D45: $EA $68 $D3
     xor  a                                        ; $7D48: $AF
     ld   [wTransitionSequenceCounter], a          ; $7D49: $EA $6B $C1
     ld   [wC16C], a                               ; $7D4C: $EA $6C $C1

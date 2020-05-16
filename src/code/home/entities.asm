@@ -1105,11 +1105,14 @@ BossIntro::
     ld   a, [hl]
     and  $04
     ld   a, MUSIC_BOSS_BATTLE
+
     jr   z, .endIf
-    ld   a, MUSIC_MINI_BOSS
+    ld   a, MUSIC_MINIBOSS
+    
 .endIf:
-    ld   [wActiveMusicTrack], a
-    ldh  [$FFBD], a
+    ld   [wMusicTrackToPlay], a
+
+ldh  [$FFBD], a
     ld   a, [wTransitionSequenceCounter]
     cp   $04
     ret  nz

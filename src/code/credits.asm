@@ -1004,8 +1004,8 @@ jr_017_4C2F:
     res  3, [hl]                                  ; $4C43: $CB $9E
     call ResetCreditsSceneVariables               ; $4C45: $CD $A5 $4D
     call IncrementCreditsGameplaySubtype          ; $4C48: $CD $5B $4C
-    ld   a, $59                                   ; $4C4B: $3E $59
-    ld   [wActiveMusicTrack], a                   ; $4C4D: $EA $68 $D3
+    ld   a, MUSIC_MEETING_WINDFISH                ; $4C4B: $3E $59
+    ld   [wMusicTrackToPlay], a                   ; $4C4D: $EA $68 $D3
     ld   a, $40                                   ; $4C50: $3E $40
     ld   [$D006], a                               ; $4C52: $EA $06 $D0
     ld   a, $04                                   ; $4C55: $3E $04
@@ -1031,8 +1031,8 @@ CreditsWindFishHandler::
     ldh  [hMapRoom], a                            ; $4C72: $E0 $F6
     ld   a, $FF                                   ; $4C74: $3E $FF
     ld   [$DBC7], a                               ; $4C76: $EA $C7 $DB
-    call AnimateEntitiesAndRestoreBank17                                    ; $4C79: $CD $ED $0E
-    ld   a, [wCreditsSubscene]                               ; $4C7C: $FA $0E $D0
+    call AnimateEntitiesAndRestoreBank17          ; $4C79: $CD $ED $0E
+    ld   a, [wCreditsSubscene]                    ; $4C7C: $FA $0E $D0
     JP_TABLE                                      ; $4C7F: $C7
 ._00 dw CreditsStairsPrepare1Handler              ; $4C80
 ._01 dw CreditsStairsPrepare2Handler              ; $4C82
@@ -1865,8 +1865,8 @@ CreditsLinkPreparesToPlayHandler::
 
     ld   a, $04                                   ; $5571: $3E $04
     ldh  [hLinkAnimationState], a                 ; $5573: $E0 $9D
-    ld   a, $3F                                   ; $5575: $3E $3F
-    ld   [wActiveMusicTrack], a                   ; $5577: $EA $68 $D3
+    ld   a, MUSIC_WIND_FISH_AWAKENS               ; $5575: $3E $3F
+    ld   [wMusicTrackToPlay], a                   ; $5577: $EA $68 $D3
 
 jr_017_557A:
     ld   a, ENTITY_ENDING_OWL_STAIR_CLIMBING      ; $557A: $3E $E8
@@ -3239,8 +3239,8 @@ CreditsSunAbove0Handler::
     ldh  [hBaseScrollY], a                        ; $6136: $E0 $97
     ld   [wScreenShakeHorizontal], a              ; $6138: $EA $55 $C1
     ld   [wScreenShakeVertical], a                ; $613B: $EA $56 $C1
-    ld   a, $3D                                   ; $613E: $3E $3D
-    ld   [wActiveMusicTrack], a                   ; $6140: $EA $68 $D3
+    ld   a, MUSIC_ENDING                          ; $613E: $3E $3D
+    ld   [wMusicTrackToPlay], a                   ; $6140: $EA $68 $D3
     call ResetCreditsSceneVariables               ; $6143: $CD $A5 $4D
     jp   IncrementCreditsSubscene                 ; $6146: $C3 $D9 $4C
 

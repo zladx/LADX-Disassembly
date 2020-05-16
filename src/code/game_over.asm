@@ -30,7 +30,7 @@ LinkPassOut0Handler::
     and  a                                        ; $420C: $A7
 
 jr_001_420D::
-    jr   nz, jr_001_4259                           ; $420D: $20 $4A
+    jr   nz, jr_001_4259                          ; $420D: $20 $4A
 
     ld   a, $10                                   ; $420F: $3E $10
     ldh  [$FFB7], a                               ; $4211: $E0 $B7
@@ -49,7 +49,7 @@ jr_001_420D::
     daa                                           ; $422E: $27
     ld   [$DB58], a                               ; $422F: $EA $58 $DB
     cp   $10                                      ; $4232: $FE $10
-    jr   c, jr_001_4240                            ; $4234: $38 $0A
+    jr   c, jr_001_4240                           ; $4234: $38 $0A
 
     ld   a, $99                                   ; $4236: $3E $99
     ld   [wDeathCount], a                         ; $4238: $EA $57 $DB
@@ -131,34 +131,34 @@ Data_001_42BA::
 LinkPassOut3Handler::
     ldh  a, [$FFB7]
     and  a                                        ; $42CC: $A7
-    jr   nz, jr_001_42D8                           ; $42CD: $20 $09
+    jr   nz, jr_001_42D8                          ; $42CD: $20 $09
 
     ld   hl, hFF9C                                ; $42CF: $21 $9C $FF
     inc  [hl]                                     ; $42D2: $34
-    ld   a, $03                                   ; $42D3: $3E $03
-    ld   [wActiveMusicTrack], a                   ; $42D5: $EA $68 $D3
+    ld   a, MUSIC_GAME_OVER                       ; $42D3: $3E $03
+    ld   [wMusicTrackToPlay], a                   ; $42D5: $EA $68 $D3
 
 jr_001_42D8::
     ret                                           ; $42D8: $C9
 
 LinkPassOut4Handler::
-    call func_001_4339                               ; $42D9: $CD $39 $43
+    call func_001_4339                            ; $42D9: $CD $39 $43
     ldh  a, [hJoypadState]                        ; $42DC: $F0 $CC
     and  $B0                                      ; $42DE: $E6 $B0
-    jr   z, jr_001_4335                            ; $42E0: $28 $53
+    jr   z, jr_001_4335                           ; $42E0: $28 $53
 
     ld   a, [$C13F]                               ; $42E2: $FA $3F $C1
     cp   $01                                      ; $42E5: $FE $01
-    jr   z, jr_001_432C                            ; $42E7: $28 $43
+    jr   z, jr_001_432C                           ; $42E7: $28 $43
 
     cp   $00                                      ; $42E9: $FE $00
-    jr   z, jr_001_42F2                            ; $42EB: $28 $05
+    jr   z, jr_001_42F2                           ; $42EB: $28 $05
 
     ld   [$DBD1], a                               ; $42ED: $EA $D1 $DB
-    jr   jr_001_42F5                               ; $42F0: $18 $03
+    jr   jr_001_42F5                              ; $42F0: $18 $03
 
 jr_001_42F2::
-    call func_001_5DE6                               ; $42F2: $CD $E6 $5D
+    call func_001_5DE6                            ; $42F2: $CD $E6 $5D
 
 jr_001_42F5::
     xor  a                                        ; $42F5: $AF
@@ -168,7 +168,7 @@ jr_001_42F5::
 jr_001_42FB::
     ld   [hl+], a                                 ; $42FB: $22
     dec  e                                        ; $42FC: $1D
-    jr   nz, jr_001_42FB                           ; $42FD: $20 $FC
+    jr   nz, jr_001_42FB                          ; $42FD: $20 $FC
 
     ld   [wOBJ0Palette], a                        ; $42FF: $EA $98 $DB
     ld   [wOBJ1Palette], a                        ; $4302: $EA $99 $DB
@@ -190,10 +190,10 @@ jr_001_42FB::
     ret                                           ; $432B: $C9
 
 jr_001_432C::
-    call func_001_5DE6                               ; $432C: $CD $E6 $5D
+    call func_001_5DE6                            ; $432C: $CD $E6 $5D
     xor  a                                        ; $432F: $AF
     ldh  [hActiveEntityTilesOffset], a            ; $4330: $E0 $F5
-    call func_001_6162                               ; $4332: $CD $62 $61
+    call func_001_6162                            ; $4332: $CD $62 $61
 
 jr_001_4335::
     ret                                           ; $4335: $C9
@@ -205,15 +205,15 @@ Data_001_4336::
 
 func_001_4339::
     ld   hl, $C13F                                ; $4339: $21 $3F $C1
-    call func_001_6BA8                               ; $433C: $CD $A8 $6B
+    call func_001_6BA8                            ; $433C: $CD $A8 $6B
     ldh  a, [hJoypadState]                        ; $433F: $F0 $CC
     and  $08                                      ; $4341: $E6 $08
-    jr   z, jr_001_434D                            ; $4343: $28 $08
+    jr   z, jr_001_434D                           ; $4343: $28 $08
 
     ld   a, [hl]                                  ; $4345: $7E
     inc  a                                        ; $4346: $3C
     cp   $03                                      ; $4347: $FE $03
-    jr   nz, jr_001_434C                           ; $4349: $20 $01
+    jr   nz, jr_001_434C                          ; $4349: $20 $01
 
     xor  a                                        ; $434B: $AF
 
@@ -223,12 +223,12 @@ jr_001_434C::
 jr_001_434D::
     ldh  a, [hJoypadState]                        ; $434D: $F0 $CC
     and  $04                                      ; $434F: $E6 $04
-    jr   z, jr_001_435C                            ; $4351: $28 $09
+    jr   z, jr_001_435C                           ; $4351: $28 $09
 
     ld   a, [hl]                                  ; $4353: $7E
     dec  a                                        ; $4354: $3D
     cp   $FF                                      ; $4355: $FE $FF
-    jr   nz, jr_001_435B                           ; $4357: $20 $02
+    jr   nz, jr_001_435B                          ; $4357: $20 $02
 
     ld   a, $02                                   ; $4359: $3E $02
 
@@ -238,7 +238,7 @@ jr_001_435B::
 jr_001_435C::
     ld   e, [hl]                                  ; $435C: $5E
     ld   d, $00                                   ; $435D: $16 $00
-    ld   hl, Data_001_4336                           ; $435F: $21 $36 $43
+    ld   hl, Data_001_4336                        ; $435F: $21 $36 $43
     add  hl, de                                   ; $4362: $19
     ld   a, [hl]                                  ; $4363: $7E
     ld   hl, $C018                                ; $4364: $21 $18 $C0

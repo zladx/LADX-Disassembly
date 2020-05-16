@@ -183,8 +183,8 @@ FileSelectionPrepare6::
     xor  a
     ld   [wForceFileSelectionScreenMusic], a
     ; … and set the music to the file menu selection track
-    ld   a, $11
-    ld   [wActiveMusicTrack], a
+    ld   a, MUSIC_FILE_SELECT
+    ld   [wMusicTrackToPlay], a
 .dontForceMusicTrack
 
     ; If there are no saved files yet…
@@ -564,23 +564,24 @@ FileCreationInteractiveHandler::
     ld   d, $00
     ld   hl, $DB80
     add  hl, de
+	; Checks if the chosen name is 'ZELDA' and plays the easter egg music if this is the case.
     ld   a, [hli]
-    cp   $5B
+    cp   "Z" + $01
     jr   nz, jr_001_4AFE
     ld   a, [hli]
-    cp   $46
+    cp   "E" + $01
     jr   nz, jr_001_4AFE
     ld   a, [hli]
-    cp   $4D
+    cp   "L" + $01
     jr   nz, jr_001_4AFE
     ld   a, [hli]
-    cp   $45
+    cp   "D" + $01
     jr   nz, jr_001_4AFE
     ld   a, [hli]
-    cp   $42
+    cp   "A" + $01
     jr   nz, jr_001_4AFE
-    ld   a, $60
-    ld   [wActiveMusicTrack], a
+    ld   a, MUSIC_ZELDA_NICKNAME_EASTER_EGG
+    ld   [wMusicTrackToPlay], a
 
 jr_001_4AFE::
     ld   hl, $DB80

@@ -1,14 +1,15 @@
 ; Overworld music tracks, indexed by map index
 ; See MUSIC_* constants for values
+
 OverworldMusicTracks::
+    db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06 ; LEGEND:
     db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06
-    db   $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06, $06
-    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
-    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08
-    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08
-    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08
-    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08
+    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05 ; $04 MUSIC_MABE_VILLAGE
+    db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05 ; $05 MUSIC_OVERWORLD
+    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08 ; $06 MUSIC_MT_TAMARANCH
+    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08 ; $08 MUSIC_RAFT_RIDE_RAPIDS
+    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08 ; $09 MUSIC_MYSTERIOUS_FOREST
+    db   $09, $09, $09, $09, $05, $05, $05, $05, $05, $05, $05, $05, $08, $08, $08, $08 ; $0B MUSIC_ANIMAL_VILLAGE
     db   $09, $04, $04, $04, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
     db   $04, $04, $04, $04, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
     db   $04, $04, $04, $04, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
@@ -19,10 +20,9 @@ OverworldMusicTracks::
     db   $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05
 
 ; Music tracks for inside houses, indexed by map index
-; See MUSIC_* constants for values
 HouseMusicTracks::
-    db   $14, $15, $16, $17, $4B, $58, $5B, $5A, $12, $61, $26, $26, $26, $26, $07, $02
-    db   $0A, $26, $0A, $53, $13, $3E, $1F, $00, $00, $00, $00, $00, $00, $0A, $48, $26
+    db   MUSIC_TAIL_CAVE, MUSIC_BOTTLE_GROTTO, MUSIC_KEY_CAVERN, MUSIC_ANGLERS_TUNNEL, MUSIC_CATFISH_MAW, MUSIC_FACE_SHRINE, MUSIC_EAGLE_TOWER, MUSIC_TURTLE_ROCK, MUSIC_EGG_MAZE, MUSIC_COLOR_DUNGEON, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_COMMON_CAVE, MUSIC_WITCH_HUT, MUSIC_MINIGAME
+    db   MUSIC_HOUSE, MUSIC_COMMON_CAVE, MUSIC_HOUSE, MUSIC_DREAM_SHRINE, MUSIC_KANALET_CASTLE, MUSIC_BOWWOW_KIDNAPPED_INTRODUCTION, MUSIC_SOUTHERN_SHRINE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_NONE, MUSIC_HOUSE, MUSIC_GHOST_HOUSE, MUSIC_COMMON_CAVE
 
 ; Whether a music track has precedence over the Power-Up music, indexed by track id
 MusicOverridesPowerUpTrack::
@@ -58,9 +58,9 @@ SelectMusicTrackAfterTransition::
     ld   d, [hl]                                  ; $4161: $56
     ld   a, d                                     ; $4162: $7A
 
-    ; Clear hNextMusicTrack
+    ; Clear hNextMusicTrackToFadeInto
     xor  a                                        ; $4163: $AF
-    ldh  [hNextMusicTrack], a                     ; $4164: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $4164: $E0 $B1
 
     ; If wIsIndoor == 0, skip further code and load the soundtrack
     ld   a, [wIsIndoor]                         ; $4166: $FA $A5 $DB
@@ -68,7 +68,7 @@ SelectMusicTrackAfterTransition::
     jr   z, .clearEventFlagsAndLoadSoundtrack     ; $416A: $28 $36
 
     ; If a boss was just defeated, load specific music
-    ld   d, $18 ; Siren Instrument Calling music  ; $416C: $16 $18
+    ld   d, MUSIC_BOSS_DEFEATED                   ; $416C: $16 $18
     ld   a, [wBossDefeated]                       ; $416E: $FA $6C $D4
     and  a                                        ; $4171: $A7
     jr   nz, .loadSoundtrack                      ; $4172: $20 $32
@@ -110,7 +110,7 @@ SelectMusicTrackAfterTransition::
     cp   $0A                                      ; $419A: $FE $0A
     jr   nc, .loadSoundtrack                      ; $419C: $30 $08
     ; …force sountrack_id to $21
-    ld   a, $21                                   ; $419E: $3E $21
+    ld   a, MUSIC_2D_UNDERGROUND                  ; $419E: $3E $21
     jr   .loadSoundtrackFromA                     ; $41A0: $18 $05
 
 .clearEventFlagsAndLoadSoundtrack
@@ -125,7 +125,7 @@ SelectMusicTrackAfterTransition::
     ; Set overworld soundtrack
     ld   e, a                                     ; $41A7: $5F
     ld   d, $00                                   ; $41A8: $16 $00
-    ldh  [hMusicTrack], a                               ; $41AA: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $41AA: $E0 $B0
     call SetWorldMusicTrack                       ; $41AC: $CD $C3 $27
 
     ; If soundtrack id <= $24…
@@ -149,9 +149,9 @@ SelectMusicTrackAfterTransition::
 
     ; Replace the current music by the power-up music
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $41C2: $3E $49
-    ld   [wActiveMusicTrack], a                   ; $41C4: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $41C4: $EA $68 $D3
     ldh  [$FFBD], a                               ; $41C7: $E0 $BD
-    ldh  [hNextWorldMusicTrack], a                ; $41C9: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $41C9: $E0 $BF
     xor  a                                        ; $41CB: $AF
     ld   [$C1CF], a                               ; $41CC: $EA $CF $C1
 

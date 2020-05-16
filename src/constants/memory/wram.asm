@@ -851,12 +851,12 @@ wActiveJingle:: ; D360
 ; D361-D367: squareform jingle parameters
 ds 7
 
-wActiveMusicTrack:: ; D368
-  ; The music track currently playing
+wMusicTrackToPlay:: ; D368
+  ; The music track to be played next
   ds 1
 
-wD369:: ; D369
-  ; Copied from wActiveMusicTrack
+wActiveMusicIndex:: ; wActiveMusicIndex
+  ; Copied from wMusicTrackToPlay
   ds 1
 
 wD36A:: ; D36A
@@ -910,23 +910,23 @@ wD3C8::
 wD3C9::
   ds 1
 wD3CA::
-  ; Copied from $D369 (a music index)
+  ; Copied from wActiveMusicIndex (a music index)
   ds 1
-wD3CB:: ; D3CB
+wPreviousMusicTrack:: ; D3CB
   ; Copied from $D3CA
+  ; The music track that was playing previously.
   ds 1
 
 ; Unlabeled
 ds 2
 
-wMusicMode:: ; D3CE
-  ; Music disabled when this is 0?
+wActiveMusicTable:: ; D3CE
   ds 1
 
 ; Unlabeled
 ds $D3D9-$D3CF
 
-wD3D9:: ; D3D9
+wActiveMusicTableIndex:: ; D3D9
   ; Set to 1 by opcode 94
   ds 1
 

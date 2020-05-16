@@ -417,7 +417,7 @@ EntityInitRichard::
     ld   [hl], DIRECTION_DOWN                     ; $4991: $36 $03
 .jr_003_4993
 
-    ld   a, MUSIC_RICHARDS_HOUSE                 ; $4993: $3E $40
+    ld   a, MUSIC_RICHARD_MANSION                 ; $4993: $3E $40
     ; fallthrough
 
 SetMusicTrackIfHasSword::
@@ -429,10 +429,10 @@ SetMusicTrackIfHasSword::
     ld   a, e                                     ; $499B: $7B
 
 SetMusicTrack::
-    ld   [wActiveMusicTrack], a                   ; $499C: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $499F: $E0 $B0
+    ld   [wMusicTrackToPlay], a                   ; $499C: $EA $68 $D3
+    ldh  [hDefaultMusicTrack], a                  ; $499F: $E0 $B0
     ldh  [$FFBD], a                               ; $49A1: $E0 $BD
-    ldh  [hNextWorldMusicTrack], a                ; $49A3: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $49A3: $E0 $BF
     ret                                           ; $49A5: $C9
 
 EntityInitFinalNightmare::
@@ -445,7 +445,7 @@ EntityInitDreamShrineBed::
     jr   SetMusicTrack                            ; $49AF: $18 $EB
 
 EntityInitFishermanUnderBridge::
-    ld   a, MUSIC_FISHING_GAME                    ; $49B1: $3E $3A
+    ld   a, MUSIC_FISHING_UNDER_BRIDGE            ; $49B1: $3E $3A
     jr   SetMusicTrack                            ; $49B3: $18 $E7
 
 EntityInitKikiTheMonkey::
@@ -484,8 +484,9 @@ EntityInitMovingBlockMover::
     ret                                           ; $49E1: $C9
 
 EntityInitDesertLanmola::
+    ; Sets MUSIC_NONE as the default music track. weird...
     xor  a                                        ; $49E2: $AF
-    ldh  [hMusicTrack], a                         ; $49E3: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $49E3: $E0 $B0
     ret                                           ; $49E5: $C9
 
 EntityInitFloatingItem2::
@@ -621,11 +622,12 @@ EntityInitMarin::
 
     inc  a                                        ; $4A94: $3C
     ld   [$C3C8], a                               ; $4A95: $EA $C8 $C3
-    ld   a, $2F                                   ; $4A98: $3E $2F
-    ldh  [hNextMusicTrack], a                     ; $4A9A: $E0 $B1
-    ldh  [hMusicTrack], a                         ; $4A9C: $E0 $B0
+    ld   a, MUSIC_MARIN_SINGING                   ; $4A98: $3E $2F
+    ldh  [hNextMusicTrackToFadeInto], a           ; $4A9A: $E0 $B1
+    ldh  [hDefaultMusicTrack], a                  ; $4A9C: $E0 $B0
     ldh  [$FFBD], a                               ; $4A9E: $E0 $BD
     call label_27EA                               ; $4AA0: $CD $EA $27
+
 .mabeWeatherVaneEnd
 
     ld   a, [ROM_DebugTool1]                      ; $4AA3: $FA $03 $00
@@ -704,8 +706,8 @@ EntityInitMadamMeowMeow::
     cp   $80                                      ; $4B11: $FE $80
     jr   nz, jr_003_4B1A                          ; $4B13: $20 $05
 
-    ld   a, $0E                                   ; $4B15: $3E $0E
-    ld   [wActiveMusicTrack], a                   ; $4B17: $EA $68 $D3
+    ld   a, MUSIC_BOWWOW_KIDNAPPED                ; $4B15: $3E $0E
+    ld   [wMusicTrackToPlay], a                   ; $4B17: $EA $68 $D3
 
 jr_003_4B1A:
     ret                                           ; $4B1A: $C9
@@ -2066,9 +2068,9 @@ jr_003_53B6:
 
     call func_003_5438                            ; $53E1: $CD $38 $54
 
-func_003_53E4::
+func_003_53E4::; likely cutting grass
     ld   hl, hNoiseSfx                            ; $53E4: $21 $F4 $FF
-    ld   [hl], NOISE_SFX_RUPEE                    ; $53E7: $36 $05
+    ld   [hl], NOISE_SFX_CUT_GRASS                ; $53E7: $36 $05
     ld   e, $1F                                   ; $53E9: $1E $1F
     ldh  a, [hActiveEntitySpriteVariant]          ; $53EB: $F0 $F1
     cp   $FF                                      ; $53ED: $FE $FF
@@ -2996,8 +2998,8 @@ HeartContainerEntityHandler::
     dec  a                                        ; $59E8: $3D
     jr   nz, func_003_5A17                        ; $59E9: $20 $2C
 
-    ld   a, $18                                   ; $59EB: $3E $18
-    ld   [wActiveMusicTrack], a                   ; $59ED: $EA $68 $D3
+    ld   a, MUSIC_BOSS_DEFEATED                   ; $59EB: $3E $18
+    ld   [wMusicTrackToPlay], a                   ; $59ED: $EA $68 $D3
     ; Increase max health, and fully restore health
     ld   hl, wMaxHealth                           ; $59F0: $21 $5B $DB
     inc  [hl]                                     ; $59F3: $34
@@ -3299,15 +3301,16 @@ SwordState0Handler::
     call_open_dialog $09B                         ; $5BC5
     xor  a                                        ; $5BCA: $AF
 
+; Plays a heroic fanfare, when you first retrieve your sword from the beach
 jr_003_5BCB:
     dec  a                                        ; $5BCB: $3D
     jr   nz, jr_003_5BE1                          ; $5BCC: $20 $13
 
-    ld   a, $31                                   ; $5BCE: $3E $31
-    ld   [wActiveMusicTrack], a                   ; $5BD0: $EA $68 $D3
-    ld   a, $05                                   ; $5BD3: $3E $05
-    ldh  [hMusicTrack], a                         ; $5BD5: $E0 $B0
-    ldh  [hNextWorldMusicTrack], a                ; $5BD7: $E0 $BF
+    ld   a, MUSIC_OVERWORLD_INTRO                 ; $5BCE: $3E $31
+    ld   [wMusicTrackToPlay], a                   ; $5BD0: $EA $68 $D3
+    ld   a, MUSIC_OVERWORLD                       ; $5BD3: $3E $05
+    ldh  [hDefaultMusicTrack], a                  ; $5BD5: $E0 $B0
+    ldh  [hNextDefaultMusicTrack], a              ; $5BD7: $E0 $BF
     call GetEntityDropTimer                       ; $5BD9: $CD $FB $0B
     ld   [hl], $52                                ; $5BDC: $36 $52
     call IncrementEntityState                     ; $5BDE: $CD $12 $3B
@@ -3801,17 +3804,17 @@ jr_003_5F01:
     jp   func_003_5A17                            ; $5F01: $C3 $17 $5A
 
 InstrumentMusicTable::
-    db   MUSIC_FULL_MOON_CELLO
+    db   MUSIC_INSTRUMENT_FULL_MOON_CELLO
     db   MUSIC_INSTRUMENT_CONCH_HORN
     db   MUSIC_INSTRUMENT_SEA_LILY_BELL
     db   MUSIC_INSTRUMENT_SURF_HARP
     db   MUSIC_INSTRUMENT_WIND_MARIMBA
     db   MUSIC_INSTRUMENT_CORAL_TRIANGLE
-    db   MUSIC_INSTRUMENT_ORGAN_OF_EVENING
-    db   MUSIC_THUNDER_DRUM
+    db   MUSIC_INSTRUMENT_ORGAN_OF_EVENING_CALM
+    db   MUSIC_INSTRUMENT_THUNDER_DRUM
 
 func_003_5F0C::
-    ld   a, [$D369]                               ; $5F0C: $FA $69 $D3
+    ld   a, [wActiveMusicIndex]                   ; $5F0C: $FA $69 $D3
     and  a                                        ; $5F0F: $A7
     jr   nz, jr_003_5F2C                          ; $5F10: $20 $1A
 
@@ -3825,7 +3828,7 @@ func_003_5F0C::
     ld   hl, InstrumentMusicTable                 ; $5F1C: $21 $04 $5F
     add  hl, de                                   ; $5F1F: $19
     ld   a, [hl]                                  ; $5F20: $7E
-    ld   [wActiveMusicTrack], a                   ; $5F21: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $5F21: $EA $68 $D3
     call IncrementEntityState                     ; $5F24: $CD $12 $3B
     call GetEntityTransitionCountdown             ; $5F27: $CD $05 $0C
     ld   [hl], $FF                                ; $5F2A: $36 $FF
@@ -4556,10 +4559,11 @@ PickSirensInstrument::
     xor  a                                        ; $6392: $AF
     ld   [wBossDefeated], a                       ; $6393: $EA $6C $D4
     ld   [wObjectAffectingBGPalette], a           ; $6396: $EA $CB $C3
-    ld   a, $1B                                   ; $6399: $3E $1B
-    ld   [wActiveMusicTrack], a                   ; $639B: $EA $68 $D3
+    ld   a, MUSIC_INSTRUMENT_ACQUIRED             ; $6399: $3E $1B
+    ld   [wMusicTrackToPlay], a                   ; $639B: $EA $68 $D3
     ld   [wC167], a                               ; $639E: $EA $67 $C1
 
+; Link beach sword lifting in the air animation?
 func_003_63A1::
     ldh  a, [hLinkPositionX]                      ; $63A1: $F0 $98
     push af                                       ; $63A3: $F5
@@ -4573,8 +4577,8 @@ func_003_63A1::
 PickHeartContainer::
     xor  a                                        ; $63B0: $AF
     ld   [wActivePowerUp], a                      ; $63B1: $EA $7C $D4
-    ld   a, $25                                   ; $63B4: $3E $25
-    ld   [wActiveMusicTrack], a                   ; $63B6: $EA $68 $D3
+    ld   a, MUSIC_HEART_CONTAINER_ACQUIRED        ; $63B4: $3E $25
+    ld   [wMusicTrackToPlay], a                   ; $63B6: $EA $68 $D3
     ld   [wBossDefeated], a                       ; $63B9: $EA $6C $D4
     call GetEntityTransitionCountdown             ; $63BC: $CD $05 $0C
     ld   a, $70                                   ; $63BF: $3E $70
@@ -4583,8 +4587,8 @@ PickHeartContainer::
     jr   jr_003_63DB                              ; $63C5: $18 $14
 
 PickToadstoolOrDungeonKey::
-    ld   a, $10                                   ; $63C7: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $63C9: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $63C7: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $63C9: $EA $68 $D3
     jr   label_003_63D2                           ; $63CC: $18 $04
 
     ld   a, $01                                   ; $63CE: $3E $01
@@ -4603,8 +4607,8 @@ jr_003_63DB:
     jp   ResetSpinAttack                          ; $63E1: $C3 $AF $0C
 
 PickHeartPiece::
-    ld   a, $10                                   ; $63E4: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $63E6: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $63E4: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $63E6: $EA $68 $D3
     call IncrementEntityState                     ; $63E9: $CD $12 $3B
     jr   jr_003_63DB                              ; $63EC: $18 $ED
 
@@ -4632,11 +4636,11 @@ jr_003_6400:
     ld   [wC111], a                               ; $640C: $EA $11 $C1
     xor  a                                        ; $640F: $AF
     ld   [wPowerUpHits], a                        ; $6410: $EA $7A $D4
-    ld   a, $27                                   ; $6413: $3E $27
-    ld   [wActiveMusicTrack], a                   ; $6415: $EA $68 $D3
-    ld   a, $49                                   ; $6418: $3E $49
+    ld   a, MUSIC_POWERUP_ACQUIRED                ; $6413: $3E $27
+    ld   [wMusicTrackToPlay], a                   ; $6415: $EA $68 $D3
+    ld   a, MUSIC_ACTIVE_POWER_UP                 ; $6418: $3E $49
     ldh  [$FFBD], a                               ; $641A: $E0 $BD
-    ldh  [hNextWorldMusicTrack], a                ; $641C: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $641C: $E0 $BF
 
 func_003_641E::
     ld   e, $03                                   ; $641E: $1E $03
@@ -4676,14 +4680,14 @@ PickSword::
     and  a                                        ; $6450: $A7
     jr   nz, jr_003_6468                          ; $6451: $20 $15
 
-    ld   a, $0F                                   ; $6453: $3E $0F
-    ld   [wActiveMusicTrack], a                   ; $6455: $EA $68 $D3
+    ld   a, MUSIC_SWORD_ACQUIRED                  ; $6453: $3E $0F
+    ld   [wMusicTrackToPlay], a                   ; $6455: $EA $68 $D3
     ld   [wC167], a                               ; $6458: $EA $67 $C1
     call func_003_63A1                            ; $645B: $CD $A1 $63
     call GetEntityTransitionCountdown             ; $645E: $CD $05 $0C
     ld   [hl], $A0                                ; $6461: $36 $A0
-    ld   a, $FF                                   ; $6463: $3E $FF
-    ldh  [hNextWorldMusicTrack], a                ; $6465: $E0 $BF
+    ld   a, MUSIC_SILENCE                         ; $6463: $3E $FF
+    ldh  [hNextDefaultMusicTrack], a              ; $6465: $E0 $BF
     ret                                           ; $6467: $C9
 
 jr_003_6468:
@@ -4744,8 +4748,8 @@ jr_003_64A0:
     jr   z, jr_003_64AD                           ; $64A3: $28 $08
 
 jr_003_64A5:
-    ld   a, $10                                   ; $64A5: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $64A7: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $64A5: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $64A7: $EA $68 $D3
     jp   label_003_63D2                           ; $64AA: $C3 $D2 $63
 
 jr_003_64AD:
@@ -6163,14 +6167,14 @@ jr_003_6D73:
     and  a                                        ; $6DD1: $A7
     jr   nz, func_003_6DDF                        ; $6DD2: $20 $0B
 
-    ldh  a, [hMusicTrack]                         ; $6DD4: $F0 $B0
-    cp   $22                                      ; $6DD6: $FE $22
+    ldh  a, [hDefaultMusicTrack]                  ; $6DD4: $F0 $B0
+    cp   MUSIC_OWL                                ; $6DD6: $FE $22
     jr   z, jr_003_6DDD                           ; $6DD8: $28 $03
 
-    ld   [wActiveMusicTrack], a                   ; $6DDA: $EA $68 $D3
+    ld   [wMusicTrackToPlay], a                   ; $6DDA: $EA $68 $D3
 
 jr_003_6DDD:
-    ldh  [hNextWorldMusicTrack], a                ; $6DDD: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $6DDD: $E0 $BF
 
 func_003_6DDF::
     call ResetPegasusBoots                        ; $6DDF: $CD $B6 $0C
@@ -6919,6 +6923,7 @@ jr_003_7215:
     ld   hl, hWaveSfx                             ; $7223: $21 $F3 $FF
     ld   [hl], WAVE_SFX_BOSS_GRAWL                ; $7226: $36 $07
 
+; Hurt cucco.
 jr_003_7228:
     ld   hl, wEntitiesTypeTable                   ; $7228: $21 $A0 $C3
     add  hl, bc                                   ; $722B: $09
@@ -7097,11 +7102,12 @@ jr_003_7304:
     cp   $62                                      ; $7321: $FE $62
     jr   nz, jr_003_733E                          ; $7323: $20 $19
 
+; Boss dialog after defeating them
 jr_003_7325:
     ld   a, e                                     ; $7325: $7B
     call OpenDialog                               ; $7326: $CD $85 $23
-    ld   a, $5E                                   ; $7329: $3E $5E
-    ld   [wActiveMusicTrack], a                   ; $732B: $EA $68 $D3
+    ld   a, MUSIC_BOSS_WARNING                    ; $7329: $3E $5E
+    ld   [wMusicTrackToPlay], a                   ; $732B: $EA $68 $D3
     jr   jr_003_733E                              ; $732E: $18 $0E
 
 jr_003_7330:

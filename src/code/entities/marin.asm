@@ -332,8 +332,8 @@ func_005_5020::
     jr   nz, jr_005_503E                          ; $502F: $20 $0D
 
     inc  [hl]                                     ; $5031: $34
-    ld   [wActiveMusicTrack], a                   ; $5032: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $5035: $E0 $B0
+    ld   [wMusicTrackToPlay], a                   ; $5032: $EA $68 $D3
+    ldh  [hDefaultMusicTrack], a                  ; $5035: $E0 $B0
     ldh  [$FFBD], a                               ; $5037: $E0 $BD
     ld   hl, $C3C8                                ; $5039: $21 $C8 $C3
     ld   [hl], $01                                ; $503C: $36 $01
@@ -505,8 +505,8 @@ func_005_512B::
 
     ld   a, $01                                   ; $513A: $3E $01
     ld   [$DE00], a                               ; $513C: $EA $00 $DE
-    ld   a, $10                                   ; $513F: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $5141: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $513F: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $5141: $EA $68 $D3
     ld   a, $05                                   ; $5144: $3E $05
     call func_036_703E_trampoline                 ; $5146: $CD $C6 $0A
     call GetEntityTransitionCountdown             ; $5149: $CD $05 $0C

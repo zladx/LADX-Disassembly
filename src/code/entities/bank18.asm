@@ -23,9 +23,9 @@ jr_018_400F:
     JP_TABLE                                      ; $401E
 ._00 dw MamuAndFrogsState0Handler
 ._01 dw MamuAndFrogsState1Handler
-._02 dw MamuAndFrogsState2Handler
+._02 dw MamuAndFrogsSingingHandler
 ._03 dw MamuAndFrogsState3Handler
-._04 dw MamuAndFrogsState4Handler
+._04 dw MamuAndFrogsGrantSongHandler
 ._05 dw MamuAndFrogsState5Handler
 ._06 dw MamuAndFrogsState6Handler
 
@@ -137,15 +137,16 @@ jr_018_40AF:
 jr_018_40D6:
     ret                                           ; $40D6: $C9
 
-MamuAndFrogsState2Handler::
+; Frogs start singing
+MamuAndFrogsSingingHandler::
     ld   a, $02                                   ; $40D7: $3E $02
     ldh  [hLinkInteractiveMotionBlocked], a       ; $40D9: $E0 $A1
     ld   [wC167], a                               ; $40DB: $EA $67 $C1
     call GetEntityTransitionCountdown             ; $40DE: $CD $05 $0C
     jr   nz, jr_018_40F0                          ; $40E1: $20 $0D
 
-    ld   a, $35                                   ; $40E3: $3E $35
-    ld   [wActiveMusicTrack], a                   ; $40E5: $EA $68 $D3
+    ld   a, MUSIC_MAMU_SONG                       ; $40E3: $3E $35
+    ld   [wMusicTrackToPlay], a                   ; $40E5: $EA $68 $D3
     ld   a, $01                                   ; $40E8: $3E $01
     ld   [$D215], a                               ; $40EA: $EA $15 $D2
     jp   IncrementEntityState                     ; $40ED: $C3 $12 $3B
@@ -276,7 +277,8 @@ jr_018_4230:
 
     ret                                           ; $4251: $C9
 
-MamuAndFrogsState4Handler::
+; When you receive the Frog Song 'item'
+MamuAndFrogsGrantSongHandler::
     ld   a, [wDialogState]                        ; $4252: $FA $9F $C1
     and  a                                        ; $4255: $A7
     jr   nz, jr_018_4268                          ; $4256: $20 $10
@@ -284,8 +286,8 @@ MamuAndFrogsState4Handler::
     ld   [$D215], a                               ; $4258: $EA $15 $D2
     call GetEntityTransitionCountdown             ; $425B: $CD $05 $0C
     ld   [hl], $70                                ; $425E: $36 $70
-    ld   a, $10                                   ; $4260: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $4262: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                 ; $4260: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $4262: $EA $68 $D3
     call IncrementEntityState                     ; $4265: $CD $12 $3B
 
 jr_018_4268:
@@ -654,9 +656,9 @@ jr_018_4521:
     JP_TABLE                                      ; $4529
 ._00 dw ManboAndFishesState0Handler
 ._01 dw ManboAndFishesState1Handler
-._02 dw ManboAndFishesState2Handler
+._02 dw ManboAndFishesSingHandler
 ._03 dw ManboAndFishesState3Handler
-._04 dw ManboAndFishesState4Handler
+._04 dw ManboAndFishesGrantSongHandler
 ._05 dw ManboAndFishesState5Handler
 
 ManboAndFishesState0Handler::
@@ -719,13 +721,14 @@ jr_018_458A:
     call IncrementEntityState                     ; $458A: $CD $12 $3B
     jp_open_dialog $187                           ; $458D
 
-ManboAndFishesState2Handler::
+; Manbo singing his song
+ManboAndFishesSingHandler::
     ld   a, [wDialogState]                        ; $4592: $FA $9F $C1
     and  a                                        ; $4595: $A7
     jr   nz, jr_018_45B6                          ; $4596: $20 $1E
 
-    ld   a, $30                                   ; $4598: $3E $30
-    ld   [wActiveMusicTrack], a                   ; $459A: $EA $68 $D3
+    ld   a, MUSIC_MANBO_MAMBO                     ; $4598: $3E $30
+    ld   [wMusicTrackToPlay], a                   ; $459A: $EA $68 $D3
     call IncrementEntityState                     ; $459D: $CD $12 $3B
 
 func_018_45A0::
@@ -850,13 +853,13 @@ jr_018_4722:
 Data_018_4728::
     db   $00, $00, $40, $00, $00, $08, $42, $00, $00, $10, $44, $00
 
-ManboAndFishesState4Handler::
+ManboAndFishesGrantSongHandler::
     call GetEntityTransitionCountdown             ; $4734: $CD $05 $0C
     jr   nz, jr_018_4746                          ; $4737: $20 $0D
 
     ld   [hl], $70                                ; $4739: $36 $70
-    ld   a, $10                                   ; $473B: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $473D: $EA $68 $D3
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $473B: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $473D: $EA $68 $D3
     ld   [wC167], a                               ; $4740: $EA $67 $C1
     call IncrementEntityState                     ; $4743: $CD $12 $3B
 
@@ -1884,15 +1887,15 @@ MadBatterEntityHandler::
     call DecrementEntityIgnoreHitsCountdown       ; $4EED: $CD $56 $0C
     ldh  a, [hActiveEntityState]                  ; $4EF0: $F0 $F0
     JP_TABLE                                      ; $4EF2
-._00 dw MadBatterState0Handler                             ; $4EF3
-._01 dw MadBatterState1Handler                             ; $4EF5
-._02 dw MadBatterState2Handler                             ; $4EF7
-._03 dw MadBatterState3Handler                             ; $4EF9
-._04 dw MadBatterState4Handler                             ; $4EFB
-._05 dw MadBatterState5Handler                             ; $4EFD
-._06 dw MadBatterState6Handler                             ; $4EFF
-._07 dw MadBatterState7Handler                             ; $4F01
-._08 dw MadBatterState8Handler                             ; $4F03
+._00 dw MadBatterState0Handler                    ; $4EF3
+._01 dw MadBatterState1Handler                    ; $4EF5
+._02 dw MadBatterState2Handler                    ; $4EF7
+._03 dw MadBatterState3Handler                    ; $4EF9
+._04 dw MadBatterState4Handler                    ; $4EFB
+._05 dw MadBatterState5Handler                    ; $4EFD
+._06 dw MadBatterState6Handler                    ; $4EFF
+._07 dw MadBatterState7Handler                    ; $4F01
+._08 dw MadBatterState8Handler                    ; $4F03
 
 MadBatterState0Handler::
     ld   a, [wMaxMagicPowder]                     ; $4F05: $FA $76 $DB
@@ -2837,15 +2840,15 @@ jr_018_552F:
     call func_018_7D36                            ; $552F: $CD $36 $7D
     ldh  a, [hActiveEntityState]                  ; $5532: $F0 $F0
     JP_TABLE                                      ; $5534
-._00 dw WalrusState0Handler                             ; $5535
-._01 dw WalrusState1Handler                             ; $5537
-._02 dw WalrusState2Handler                             ; $5539
-._03 dw WalrusState3Handler                             ; $553B
-._04 dw WalrusState4Handler                             ; $553D
-._05 dw WalrusState5Handler                             ; $553F
-._06 dw WalrusState6Handler                             ; $5541
-._07 dw WalrusState7Handler                             ; $5543
-._08 dw WalrusState8Handler                             ; $5545
+._00 dw WalrusState0Handler                       ; $5535
+._01 dw WalrusWakingUpHandler                     ; $5537
+._02 dw WalrusState2Handler                       ; $5539
+._03 dw WalrusState3Handler                       ; $553B
+._04 dw WalrusState4Handler                       ; $553D
+._05 dw WalrusState5Handler                       ; $553F
+._06 dw WalrusDisappearHandler                    ; $5541
+._07 dw WalrusState7Handler                       ; $5543
+._08 dw WalrusState8Handler                       ; $5545
 
 WalrusState0Handler::
     ld   hl, wEntitiesUnknowTableY                ; $5547: $21 $D0 $C3
@@ -2919,7 +2922,7 @@ jr_018_558A:
     call_open_dialog $1E1                         ; $55B4
     jp   label_018_59AC                           ; $55B9: $C3 $AC $59
 
-WalrusState1Handler::
+WalrusWakingUpHandler::
     ld   a, [wDialogState]                        ; $55BC: $FA $9F $C1
     and  a                                        ; $55BF: $A7
     ret  nz                                       ; $55C0: $C0
@@ -2929,8 +2932,8 @@ WalrusState1Handler::
     and  a                                        ; $55C7: $A7
     jr   nz, jr_018_55D8                          ; $55C8: $20 $0E
 
-    ld   a, $2F                                   ; $55CA: $3E $2F
-    ld   [wActiveMusicTrack], a                   ; $55CC: $EA $68 $D3
+    ld   a, MUSIC_MARIN_SINGING                   ; $55CA: $3E $2F
+    ld   [wMusicTrackToPlay], a                   ; $55CC: $EA $68 $D3
     ld   [$C3C8], a                               ; $55CF: $EA $C8 $C3
     call GetEntityDropTimer                       ; $55D2: $CD $FB $0B
     ld   [hl], $50                                ; $55D5: $36 $50
@@ -3112,6 +3115,7 @@ WalrusState5Handler::
     call GetEntityTransitionCountdown             ; $5729: $CD $05 $0C
     ld   [hl], $08                                ; $572C: $36 $08
 
+; Walrus splash VFX
 func_018_572E::
     ld   a, $24                                   ; $572E: $3E $24
     ldh  [hNoiseSfx], a                           ; $5730: $E0 $F4
@@ -3131,19 +3135,21 @@ func_018_572E::
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $574D: $3E $01
     jp   AddTranscientVfx                         ; $574F: $C3 $C7 $0C
 
-WalrusState6Handler::
+; When the walrus disappears and Link looks down and the normal music resumes.
+WalrusDisappearHandler::
     call GetEntityTransitionCountdown             ; $5752: $CD $05 $0C
     jr   nz, jr_018_5778                          ; $5755: $20 $21
 
     call IncrementEntityState                     ; $5757: $CD $12 $3B
-    ldh  a, [hMusicTrack]                         ; $575A: $F0 $B0
-    ld   [wActiveMusicTrack], a                   ; $575C: $EA $68 $D3
+	; Resumes the normal music after the walrus has disappeared
+    ldh  a, [hDefaultMusicTrack]                  ; $575A: $F0 $B0
+    ld   [wMusicTrackToPlay], a                   ; $575C: $EA $68 $D3
     ld   a, $FF                                   ; $575F: $3E $FF
     call SetEntitySpriteVariant                   ; $5761: $CD $0C $3B
     call_open_dialog $1E2                         ; $5764
     ld   a, $03                                   ; $5769: $3E $03
     call func_018_59AE                            ; $576B: $CD $AE $59
-    ld   a, $03                                   ; $576E: $3E $03
+    ld   a, DIRECTION_DOWN                        ; $576E: $3E $03
     ldh  [hLinkDirection], a                      ; $5770: $E0 $9E
     push bc                                       ; $5772: $C5
     call UpdateLinkWalkingAnimation_trampoline    ; $5773: $CD $F0 $0B
@@ -3412,10 +3418,12 @@ Data_018_59B8::
 Data_018_59E4::
     db   $06, $04, $02, $00
 
+; Marin beach cutscene related.
 label_018_59E8:
     ld   a, c                                     ; $59E8: $79
     ld   [$C50F], a                               ; $59E9: $EA $0F $C5
     call GetEntityTransitionCountdown             ; $59EC: $CD $05 $0C
+	
     jr   z, jr_018_5A3F                           ; $59EF: $28 $4E
 
     cp   $10                                      ; $59F1: $FE $10
@@ -3431,16 +3439,18 @@ label_018_59E8:
     ldh  [hLinkPositionY], a                      ; $5A03: $E0 $99
     ld   a, $0F                                   ; $5A05: $3E $0F
 
+; Sword on beach music handling script
 jr_018_5A07:
     cp   $01                                      ; $5A07: $FE $01
     jr   nz, jr_018_5A18                          ; $5A09: $20 $0D
 
     xor  a                                        ; $5A0B: $AF
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
-    ld   a, MUSIC_OVERWORLD_INTRODUCTION                ; $5A0F: $3E $31
-    ld   [wActiveMusicTrack], a                   ; $5A11: $EA $68 $D3
+    ld   a, MUSIC_OVERWORLD_INTRO                 ; $5A0F: $3E $31
+    ld   [wMusicTrackToPlay], a                   ; $5A11: $EA $68 $D3
+	; Sets the area track to overworld, so that after the introduction section fanfare, the overworld music will play rather than the Koholint Island theme
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
-    ldh  [hMusicTrack], a                         ; $5A16: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $5A16: $E0 $B0
 
 jr_018_5A18:
     xor  a                                        ; $5A18: $AF
@@ -3464,6 +3474,7 @@ jr_018_5A18:
     ld   [hl], a                                  ; $5A3D: $77
     ret                                           ; $5A3E: $C9
 
+; 'You got Marin!' joke
 jr_018_5A3F:
     ld   hl, wEntitiesUnknowTableP                ; $5A3F: $21 $40 $C4
     add  hl, bc                                   ; $5A42: $09
@@ -3478,10 +3489,13 @@ jr_018_5A3F:
     inc  [hl]                                     ; $5A4E: $34
     call GetEntityTransitionCountdown             ; $5A4F: $CD $05 $0C
     ld   [hl], $70                                ; $5A52: $36 $70
-    ld   a, MUSIC_WEAPON_ACQUIRED                  ; $5A54: $3E $10
-    ld   [wActiveMusicTrack], a                   ; $5A56: $EA $68 $D3
-    ld   a, $FF                                   ; $5A59: $3E $FF
-    ldh  [hNextWorldMusicTrack], a                ; $5A5B: $E0 $BF
+    ld   a, MUSIC_TOOL_ACQUIRED                   ; $5A54: $3E $10
+    ld   [wMusicTrackToPlay], a                   ; $5A56: $EA $68 $D3
+	; Makes it so that no music plays after the 'item found' fanfare
+    ld   a, MUSIC_SILENCE                         ; $5A59: $3E $FF
+    ldh  [hNextDefaultMusicTrack], a              ; $5A5B: $E0 $BF
+	
+	; Link lifting Marin animation
     ldh  a, [hLinkPositionX]                      ; $5A5D: $F0 $98
     ld   hl, $D155                                ; $5A5F: $21 $55 $D1
     call func_018_5A79                            ; $5A62: $CD $79 $5A
@@ -4629,7 +4643,7 @@ MarinAtTheShoreEntityHandler::
 
     ldh  a, [hActiveEntityState]                  ; $61C0: $F0 $F0
     JP_TABLE                                      ; $61C2
-._00 dw MarinAtTheShoreState0Handler
+._00 dw MarinAtTheShoreTransitionHandler
 ._01 dw MarinAtTheShoreState1Handler
 ._02 dw MarinAtTheShoreState2Handler
 ._03 dw MarinAtTheShoreState3Handler
@@ -4637,10 +4651,10 @@ MarinAtTheShoreEntityHandler::
 ._05 dw MarinAtTheShoreState5Handler
 ._06 dw MarinAtTheShoreState6Handler
 
-MarinAtTheShoreState0Handler::
-    ld   a, $4D                                   ; $61D1: $3E $4D
-    ld   [wActiveMusicTrack], a                   ; $61D3: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $61D6: $E0 $B0
+MarinAtTheShoreTransitionHandler::
+    ld   a, MUSIC_MARIN_BEACH_TRANSITION          ; $61D1: $3E $4D
+    ld   [wMusicTrackToPlay], a                   ; $61D3: $EA $68 $D3
+    ldh  [hDefaultMusicTrack], a                  ; $61D6: $E0 $B0
     ldh  [$FFBD], a                               ; $61D8: $E0 $BD
     jp   IncrementEntityState                     ; $61DA: $C3 $12 $3B
 
@@ -4700,8 +4714,8 @@ MarinAtTheShoreState3Handler::
     ld   [wGameplaySubtype], a                    ; $622F: $EA $96 $DB
     ld   a, $09                                   ; $6232: $3E $09
     ld   [wGameplayType], a                       ; $6234: $EA $95 $DB
-    ld   a, $4E                                   ; $6237: $3E $4E
-    ld   [wActiveMusicTrack], a                   ; $6239: $EA $68 $D3
+    ld   a, MUSIC_MARIN_BEACH                     ; $6237: $3E $4E
+    ld   [wMusicTrackToPlay], a                   ; $6239: $EA $68 $D3
     ret                                           ; $623C: $C9
 
 jr_018_623D:
@@ -7266,11 +7280,11 @@ TurtleRockHeadState0Handler::
 TurtleRockHeadState1Handler::
     call GetEntityTransitionCountdown             ; $73B1: $CD $05 $0C
     ld   [hl], $80                                ; $73B4: $36 $80
-    ld   a, $39                                   ; $73B6: $3E $39
-    ld   [wActiveMusicTrack], a                   ; $73B8: $EA $68 $D3
-    ldh  [hMusicTrack], a                         ; $73BB: $E0 $B0
+    ld   a, MUSIC_TURTLE_ROCK_ENTRANCE_BOSS       ; $73B6: $3E $39
+    ld   [wMusicTrackToPlay], a                   ; $73B8: $EA $68 $D3
+    ldh  [hDefaultMusicTrack], a                  ; $73BB: $E0 $B0
     ldh  [$FFBD], a                               ; $73BD: $E0 $BD
-    ldh  [hNextWorldMusicTrack], a                ; $73BF: $E0 $BF
+    ldh  [hNextDefaultMusicTrack], a              ; $73BF: $E0 $BF
     jp   IncrementEntityState                     ; $73C1: $C3 $12 $3B
 
 TurtleRockHeadState2Handler::
@@ -8797,7 +8811,7 @@ jr_018_7ED0:
 func_018_7ED2::
     ld   e, $02                                   ; $7ED2: $1E $02
     ldh  a, [hLinkPositionY]                      ; $7ED4: $F0 $99
-    ld   hl, hActiveEntityVisualPosY                                ; $7ED6: $21 $EC $FF
+    ld   hl, hActiveEntityVisualPosY              ; $7ED6: $21 $EC $FF
     sub  [hl]                                     ; $7ED9: $96
     bit  7, a                                     ; $7EDA: $CB $7F
     jr   nz, jr_018_7EDF                          ; $7EDC: $20 $01

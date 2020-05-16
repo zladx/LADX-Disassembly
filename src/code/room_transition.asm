@@ -57,7 +57,7 @@ ApplyRoomTransition::
     ldh  [hLinkPositionYIncrement], a             ; $7908: $E0 $9B
 
     push bc                                       ; $790A: $C5
-    call UpdateFinalLinkPosition                               ; $790B: $CD $A8 $21
+    call UpdateFinalLinkPosition                  ; $790B: $CD $A8 $21
     pop  bc                                       ; $790E: $C1
 
     ; hBaseScrollX += RoomTransitionXIncrement[wRoomTransitionDirection]
@@ -92,12 +92,12 @@ ApplyRoomTransition::
 
     ; Change the music track if needed
     pop  af                                       ; $7931: $F1
-    ldh  a, [hNextMusicTrack]                     ; $7932: $F0 $B1
+    ldh  a, [hNextMusicTrackToFadeInto]           ; $7932: $F0 $B1
     and  a                                        ; $7934: $A7
     jr   z, .noMusicTrackChange                   ; $7935: $28 $06
     call SetWorldMusicTrack                       ; $7937: $CD $C3 $27
     xor  a                                        ; $793A: $AF
-    ldh  [hNextMusicTrack], a                     ; $793B: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $793B: $E0 $B1
 .noMusicTrackChange
 
     ; Clear variables
@@ -113,7 +113,7 @@ ApplyRoomTransition::
 
     ; If the transition direction was to the bottom…
     ld   a, [wRoomTransitionDirection]            ; $794F: $FA $25 $C1
-    cp   DIRECTION_DOWN               ; $7952: $FE $03
+    cp   DIRECTION_DOWN                           ; $7952: $FE $03
     jr   nz, .bottomDirectionEnd                  ; $7954: $20 $24
 
     ; Initiate a jump if Link landed on a ledge
@@ -123,7 +123,7 @@ ApplyRoomTransition::
 
     ; If (hObjectUnderEntity != $DB && hObjectUnderEntity != $DC && (hObjectUnderEntity == $E1 || wCollisionType != 0),
     ; handle special case.
-    ldh  a, [hObjectUnderEntity]                               ; $795D: $F0 $AF
+    ldh  a, [hObjectUnderEntity]                  ; $795D: $F0 $AF
     cp   $DB                                      ; $795F: $FE $DB
     jr   z, .bottomDirectionEnd                   ; $7961: $28 $17
 
@@ -133,7 +133,7 @@ ApplyRoomTransition::
     cp   $E1                                      ; $7967: $FE $E1
     jr   z, .handleFFAFSpecialCase                ; $7969: $28 $06
 
-    ld   a, [wCollisionType]                               ; $796B: $FA $33 $C1
+    ld   a, [wCollisionType]                      ; $796B: $FA $33 $C1
     and  a                                        ; $796E: $A7
     jr   z, .bottomDirectionEnd                   ; $796F: $28 $09
 
@@ -194,7 +194,7 @@ ApplyRoomTransition::
     ldh  a, [hMapRoom]                            ; $79A6: $F0 $F6
     ld   e, a                                     ; $79A8: $5F
 
-    call GetChestsStatusForRoom_trampoline                   ; $79A9: $CD $ED $29
+    call GetChestsStatusForRoom_trampoline        ; $79A9: $CD $ED $29
 
     ; If chest status is not some key, and room trigger != EFFECT_DROP_KEY, return.
     cp   CHEST_SMALL_KEY                          ; $79AC: $FE $1A
@@ -309,7 +309,7 @@ RoomTransitionPrepareHandler::
 
     ; … and is not sliding to the bottom…
     ld   a, c                                     ; $7A1A: $79
-    cp   DIRECTION_DOWN               ; $7A1B: $FE $03
+    cp   DIRECTION_DOWN                           ; $7A1B: $FE $03
     jr   z, .noWindFishEggMaze                    ; $7A1D: $28 $29
 
     ; hl = WindFishEggMazeSequence + $DB7C
@@ -341,7 +341,7 @@ RoomTransitionPrepareHandler::
     cp   $07                                      ; $7A3E: $FE $07
     jp   nz, .loadRoom                            ; $7A40: $C2 $A5 $7A
     ld   a, JINGLE_PUZZLE_SOLVED                  ; $7A43: $3E $02
-    ld   [wNextJingle], a                               ; $7A45: $EA $69 $C1
+    ld   [wNextJingle], a                         ; $7A45: $EA $69 $C1
 
 .noWindFishEggMaze
 
@@ -359,7 +359,7 @@ RoomTransitionPrepareHandler::
 
     ; If wRoomTransitionDirection == Top…
     ld   a, c                                     ; $7A50: $79
-    cp   DIRECTION_UP                  ; $7A51: $FE $02
+    cp   DIRECTION_UP                             ; $7A51: $FE $02
     jr   nz, .noFaceShrineHack                    ; $7A53: $20 $12
 
     ; … and dungeon is Face Shrine…
@@ -395,7 +395,7 @@ RoomTransitionPrepareHandler::
 
     ; … and direction == top…
     ld   a, c                                     ; $7A73: $79
-    cp   DIRECTION_UP                  ; $7A74: $FE $02
+    cp   DIRECTION_UP                             ; $7A74: $FE $02
     jr   nz, .mysteriousWoodsEnd                  ; $7A76: $20 $0C
 
     ; … Link got lost in the Mysterious Woods
@@ -430,7 +430,7 @@ RoomTransitionPrepareHandler::
 
     ; … and direction == top…
     ld   a, c                                     ; $7A92: $79
-    cp   DIRECTION_UP                  ; $7A93: $FE $02
+    cp   DIRECTION_UP                             ; $7A93: $FE $02
     jr   nz, .forestRoomEnd                       ; $7A95: $20 $0E
 
     ; … and this room has not been visited yet…
@@ -463,10 +463,10 @@ RoomTransitionPrepareHandler::
 
     ; Replace objects $56 and $57 by object $0D
     ld   a, $02                                   ; $7AB8: $3E $02
-    call ReplaceObjects56and57_trampoline                                ; $7ABA: $CD $F5 $09
+    call ReplaceObjects56and57_trampoline         ; $7ABA: $CD $F5 $09
 .colorDungeonEnd
 
-    call LoadRoomEntities                               ; $7ABD: $CD $FE $37
+    call LoadRoomEntities                         ; $7ABD: $CD $FE $37
     call DrawLinkSprite                           ; $7AC0: $CD $2E $1D
     call ApplyLinkMotionState                     ; $7AC3: $CD $94 $17
 
@@ -482,18 +482,18 @@ RoomTransitionPrepareHandler::
     ld   [$C1CF], a                               ; $7ACD: $EA $CF $C1
     ld   a, [wTunicType]                          ; $7AD0: $FA $0F $DC
     and  a                                        ; $7AD3: $A7
-    ldh  a, [hMusicTrack]                               ; $7AD4: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                  ; $7AD4: $F0 $B0
     jr   nz, .jr_002_7AE2                         ; $7AD6: $20 $0A
 
     ld   a, [wActivePowerUp]                      ; $7AD8: $FA $7C $D4
     and  a                                        ; $7ADB: $A7
-    ldh  a, [hMusicTrack]                         ; $7ADC: $F0 $B0
+    ldh  a, [hDefaultMusicTrack]                  ; $7ADC: $F0 $B0
     jr   z, .jr_002_7AE2                          ; $7ADE: $28 $02
 
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $7AE0: $3E $49
 
 .jr_002_7AE2
-    ldh  [hNextMusicTrack], a                     ; $7AE2: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $7AE2: $E0 $B1
     call label_27EA                               ; $7AE4: $CD $EA $27
     jr   IncrementRoomTransitionStateAndReturn    ; $7AE7: $18 $4D
 
@@ -515,7 +515,7 @@ RoomTransitionPrepareHandler::
     ld   hl, OverworldMusicTracks                 ; $7AFA: $21 $00 $40
     add  hl, de                                   ; $7AFD: $19
     ld   a, [hl]                                  ; $7AFE: $7E
-    ld   hl, hMusicTrack                          ; $7AFF: $21 $B0 $FF
+    ld   hl, hDefaultMusicTrack                   ; $7AFF: $21 $B0 $FF
     cp   [hl]                                     ; $7B02: $BE
     jr   z, IncrementRoomTransitionStateAndReturn ; $7B03: $28 $31
 
@@ -541,7 +541,7 @@ jr_002_7B14:
 
     call SetNextMusicTrack                        ; $7B20: $CD $2D $7B
     ld   a, MUSIC_ACTIVE_POWER_UP                 ; $7B23: $3E $49
-    ldh  [hNextMusicTrack], a                     ; $7B25: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $7B25: $E0 $B1
     ldh  [$FFBD], a                               ; $7B27: $E0 $BD
     ret                                           ; $7B29: $C9
 
@@ -551,12 +551,12 @@ jr_002_7B2A:
 
 SetNextMusicTrack::
     ld   a, c                                     ; $7B2D: $79
-    ldh  [hNextMusicTrack], a                     ; $7B2E: $E0 $B1
+    ldh  [hNextMusicTrackToFadeInto], a           ; $7B2E: $E0 $B1
     call label_27EA                               ; $7B30: $CD $EA $27
 
 .setMusicTrack
     ld   a, c                                     ; $7B33: $79
-    ldh  [hMusicTrack], a                         ; $7B34: $E0 $B0
+    ldh  [hDefaultMusicTrack], a                  ; $7B34: $E0 $B0
 
 IncrementRoomTransitionStateAndReturn::
     ld   a, [wRoomTransitionState]                ; $7B36: $FA $24 $C1
@@ -565,7 +565,7 @@ IncrementRoomTransitionStateAndReturn::
     ret                                           ; $7B3D: $C9
 
 RoomTransitionLoadTiles::
-    call LoadRoomTiles                          ; $7B3E: $CD $1E $0D
+    call LoadRoomTiles                            ; $7B3E: $CD $1E $0D
 
     ; If room has mobile blocks…
     ld   a, [wRoomSwitchableObject]               ; $7B41: $FA $FA $D6
@@ -574,6 +574,7 @@ RoomTransitionLoadTiles::
     ; … $FFBB == 2
     ld   a, $02                                   ; $7B48: $3E $02
     ldh  [$FFBB], a                               ; $7B4A: $E0 $BB
+
 .mobileBlocksEnd
 
     jp   IncrementRoomTransitionStateAndReturn    ; $7B4C: $C3 $36 $7B
@@ -717,7 +718,7 @@ RoomTransitionConfigureScrollTargets::
     ld   hl, data_002_7B5F                        ; $7BE1: $21 $5F $7B
     add  hl, bc                                   ; $7BE4: $09
     ld   a, [hl]                                  ; $7BE5: $7E
-    ld   [wBGUpdateRegionTilesCount], a                               ; $7BE6: $EA $28 $C1
+    ld   [wBGUpdateRegionTilesCount], a           ; $7BE6: $EA $28 $C1
 
     ; Set number of frames to elapse before reaching
     ; the mid-transition point
@@ -737,7 +738,7 @@ RoomTransitionConfigureScrollTargets::
 
 RoomTransitionFirstHalfHandler::
     ; Update BG Map
-    jp   UpdateBGRegion                       ; $7C00: $C3 $09 $22
+    jp   UpdateBGRegion                           ; $7C00: $C3 $09 $22
 
 RoomTransitionSecondHalfHandler::
     ; The scroll increment has already been done earlier:
@@ -755,13 +756,13 @@ label_002_7C14:
     and  $03                                      ; $7C16: $E6 $03
     ld   hl, wC167                                ; $7C18: $21 $67 $C1
     or   [hl]                                     ; $7C1B: $B6
-    ld   hl, hLinkInteractiveMotionBlocked                                ; $7C1C: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked        ; $7C1C: $21 $A1 $FF
     or   [hl]                                     ; $7C1F: $B6
     ld   hl, wDialogGotItem                       ; $7C20: $21 $A9 $C1
     or   [hl]                                     ; $7C23: $B6
     ret  nz                                       ; $7C24: $C0
 
-    ld   a, [wLinkGroundVfx]                               ; $7C25: $FA $81 $C1
+    ld   a, [wLinkGroundVfx]                      ; $7C25: $FA $81 $C1
     sub  $F0                                      ; $7C28: $D6 $F0
     ld   e, a                                     ; $7C2A: $5F
     ld   d, $00                                   ; $7C2B: $16 $00
@@ -790,7 +791,7 @@ label_002_7C50:
     or   [hl]                                     ; $7C57: $B6
     ld   hl, wDialogGotItem                       ; $7C58: $21 $A9 $C1
     or   [hl]                                     ; $7C5B: $B6
-    ld   hl, hLinkInteractiveMotionBlocked                                ; $7C5C: $21 $A1 $FF
+    ld   hl, hLinkInteractiveMotionBlocked        ; $7C5C: $21 $A1 $FF
     or   [hl]                                     ; $7C5F: $B6
     ld   hl, wDialogState                         ; $7C60: $21 $9F $C1
     or   [hl]                                     ; $7C63: $B6
@@ -835,5 +836,5 @@ jr_002_7C8B:
     add  hl, de                                   ; $7C97: $19
     ld   a, [hl]                                  ; $7C98: $7E
     ldh  [hLinkPositionYIncrement], a             ; $7C99: $E0 $9B
-    call UpdateFinalLinkPosition                               ; $7C9B: $CD $A8 $21
+    call UpdateFinalLinkPosition                  ; $7C9B: $CD $A8 $21
     jp   CheckForLedgeJump                        ; $7C9E: $C3 $45 $6E

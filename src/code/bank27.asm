@@ -451,8 +451,8 @@ func_027_7884::
     cp   $06                                      ; $7888: $FE $06
     jp   nz, label_027_7895                       ; $788A: $C2 $95 $78
 
-    ld   a, $2F                                   ; $788D: $3E $2F
-    ld   [wActiveMusicTrack], a                   ; $788F: $EA $68 $D3
+    ld   a, MUSIC_MARIN_SINGING                   ; $788D: $3E $2F
+    ld   [wMusicTrackToPlay], a                   ; $788F: $EA $68 $D3
     jp   label_027_7BAB                           ; $7892: $C3 $AB $7B
 
 label_027_7895:
@@ -564,8 +564,8 @@ func_027_7925::
     ldh  [hWindowXUnused], a                      ; $7936: $E0 $AA
     jr   nz, jr_027_7940                          ; $7938: $20 $06
 
-    ld   a, $FF                                   ; $793A: $3E $FF
-    ld   [wActiveMusicTrack], a                   ; $793C: $EA $68 $D3
+    ld   a, MUSIC_SILENCE                         ; $793A: $3E $FF
+    ld   [wMusicTrackToPlay], a                   ; $793C: $EA $68 $D3
     ret                                           ; $793F: $C9
 
 jr_027_7940:

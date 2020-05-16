@@ -66,8 +66,8 @@ jr_005_5A5D:
 
     ld   a, $02                                   ; $5A73: $3E $02
     ld   [$D205], a                               ; $5A75: $EA $05 $D2
-    ld   a, $5C                                   ; $5A78: $3E $5C
-    ld   [wActiveMusicTrack], a                   ; $5A7A: $EA $68 $D3
+    ld   a, MUSIC_GRIM_CREEPER_DIALOG             ; $5A78: $3E $5C
+    ld   [wMusicTrackToPlay], a                   ; $5A7A: $EA $68 $D3
 
 Data_005_5A7D::
     db   $C9, $10, $F0
@@ -155,8 +155,8 @@ func_005_5ADB::
     ret                                           ; $5AFD: $C9
 
 jr_005_5AFE:
-    ld   a, $54                                   ; $5AFE: $3E $54
-    ld   [wActiveMusicTrack], a                   ; $5B00: $EA $68 $D3
+    ld   a, MUSIC_EAGLES_TOWER_BOSS_CUTSCENE      ; $5AFE: $3E $54
+    ld   [wMusicTrackToPlay], a                   ; $5B00: $EA $68 $D3
 
 func_005_5B03::
     ld   a, ENTITY_EVIL_EAGLE                     ; $5B03: $3E $63

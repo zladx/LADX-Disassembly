@@ -1,6 +1,6 @@
 ; Constants for dialog IDs
 
-;DIALOG_                                                equ $000
+DIALOG_TARIN_WITHOUT_SHIELD                             equ $000
 DIALOG_MARIN_LINK_WAKES_UP                              equ $001
 ;DIALOG_                                                equ $002
 ;DIALOG_                                                equ $003
@@ -43,7 +43,7 @@ DIALOG_MARIN_LINK_WAKES_UP                              equ $001
 ;DIALOG_                                                equ $028
 ;DIALOG_                                                equ $029
 ;DIALOG_                                                equ $02A
-;DIALOG_                                                equ $02B
+;DIALOG_EMPTY                                           equ $02B ; Empty.
 ;DIALOG_                                                equ $02C
 ;DIALOG_                                                equ $02D
 ;DIALOG_                                                equ $02E
@@ -55,10 +55,10 @@ DIALOG_MARIN_LINK_WAKES_UP                              equ $001
 ;DIALOG_                                                equ $034
 ;DIALOG_                                                equ $035
 ;DIALOG_                                                equ $036
-;DIALOG_                                                equ $037
+;DIALOG_EMPTY                                           equ $037 ; Empty
 ;DIALOG_                                                equ $038
 ;DIALOG_                                                equ $039
-;DIALOG_                                                equ $03A
+;DIALOG_EMPTY                                           equ $03A ; Empty.
 ;DIALOG_                                                equ $03B
 ;DIALOG_                                                equ $03C
 ;DIALOG_                                                equ $03D
@@ -95,7 +95,7 @@ DIALOG_MARIN_LINK_WAKES_UP                              equ $001
 ;DIALOG_                                                equ $05C
 ;DIALOG_                                                equ $05D
 ;DIALOG_                                                equ $05E
-;DIALOG_                                                equ $05F
+;DIALOG_EMPTY                                           equ $05F ; Empty
 ;DIALOG_                                                equ $060
 ;DIALOG_                                                equ $061
 ;DIALOG_                                                equ $062
@@ -158,7 +158,7 @@ DIALOG_MARIN_LINK_WAKES_UP                              equ $001
 ;DIALOG_                                                equ $09B
 ;DIALOG_                                                equ $09C
 ;DIALOG_                                                equ $09D
-;DIALOG_                                                equ $09E
+;DIALOG_EMPTY                                           equ $09E ; Empty
 ;DIALOG_                                                equ $09F
 ;DIALOG_                                                equ $0A0
 ;DIALOG_                                                equ $0A1
@@ -166,106 +166,106 @@ DIALOG_MARIN_LINK_WAKES_UP                              equ $001
 ;DIALOG_                                                equ $0A3
 
 ; dialog_2.asm starts here
-;DIALOG_DialogBirdKeyAcquired                                                equ $0A4
-;DIALOG_DialogMapAcquired                                                equ $0A5
-;DIALOG_                                                equ $0A6
-;DIALOG_                                                equ $0A7
-;DIALOG_                                                equ $0A8
-;DIALOG_                                                equ $0A9
-;DIALOG_                                                equ $0AA
-;DIALOG_                                                equ $0AB
-;DIALOG_                                                equ $0AC
-;DIALOG_                                                equ $0AD
-;DIALOG_                                                equ $0AE
-;DIALOG_                                                equ $0AF
-;DIALOG_                                                equ $0B0
-;DIALOG_                                                equ $0B1
-;DIALOG_                                                equ $0B2
-;DIALOG_                                                equ $0B3
-;DIALOG_                                                equ $0B4
-;DIALOG_                                                equ $0B5
-;DIALOG_                                                equ $0B6
-;DIALOG_                                                equ $0B7
-;DIALOG_                                                equ $0B8
-;DIALOG_                                                equ $0B9
-;DIALOG_                                                equ $0BA
-;DIALOG_                                                equ $0BB
-;DIALOG_                                                equ $0BC
-;DIALOG_                                                equ $0BD
-;DIALOG_                                                equ $0BE
-;DIALOG_                                                equ $0BF
-;DIALOG_                                                equ $0C0
-;DIALOG_                                                equ $0C1
-;DIALOG_                                                equ $0C2
-;DIALOG_                                                equ $0C3
-;DIALOG_                                                equ $0C4
-;DIALOG_                                                equ $0C5
-;DIALOG_                                                equ $0C6
-;DIALOG_                                                equ $0C7
-;DIALOG_                                                equ $0C8
-;DIALOG_                                                equ $0C9
-;DIALOG_                                                equ $0CA
-;DIALOG_                                                equ $0CB
-;DIALOG_                                                equ $0CC
-;DIALOG_                                                equ $0CD
-;DIALOG_                                                equ $0CE
-;DIALOG_                                                equ $0CF
-;DIALOG_                                                equ $0D0
-;DIALOG_                                                equ $0D1
-;DIALOG_                                                equ $0D2
-;DIALOG_                                                equ $0D3
-;DIALOG_                                                equ $0D4
-;DIALOG_                                                equ $0D5
-;DIALOG_                                                equ $0D6
-;DIALOG_                                                equ $0D7
-;DIALOG_                                                equ $0D8
-;DIALOG_                                                equ $0D9
-;DIALOG_                                                equ $0DA
-;DIALOG_                                                equ $0DB
-;DIALOG_                                                equ $0DC
-;DIALOG_                                                equ $0DD
-;DIALOG_                                                equ $0DE
-;DIALOG_                                                equ $0DF
-;DIALOG_                                                equ $0E0
-;DIALOG_                                                equ $0E1
-;DIALOG_                                                equ $0E2
-;DIALOG_                                                equ $0E3
-;DIALOG_                                                equ $0E4
-;DIALOG_                                                equ $0E5
-;DIALOG_                                                equ $0E6
-;DIALOG_                                                equ $0E7
-;DIALOG_                                                equ $0E8
-;DIALOG_                                                equ $0E9
-;DIALOG_                                                equ $0EA
-;DIALOG_                                                equ $0EB
-;DIALOG_                                                equ $0EC
-;DIALOG_                                                equ $0ED
-;DIALOG_                                                equ $0EE
-;DIALOG_                                                equ $0EF
-;DIALOG_                                                equ $0F0
-;DIALOG_                                                equ $0F1
-;DIALOG_                                                equ $0F2
-;DIALOG_                                                equ $0F3
-;DIALOG_                                                equ $0F4
-;DIALOG_                                                equ $0F5
-;DIALOG_                                                equ $0F6
-;DIALOG_                                                equ $0F7
-;DIALOG_                                                equ $0F8
-;DIALOG_                                                equ $0F9
-;DIALOG_                                                equ $0FA
-;DIALOG_                                                equ $0FB
-;DIALOG_                                                equ $0FC
-;DIALOG_                                                equ $0FD
-;DIALOG_                                                equ $0FE
-;DIALOG_                                                equ $0FF
-;DIALOG_                                                equ $100
-;DIALOG_                                                equ $101
-;DIALOG_                                                equ $102
-;DIALOG_                                                equ $103
-;DIALOG_                                                equ $104
-;DIALOG_                                                equ $105
-;DIALOG_                                                equ $106
-;DIALOG_                                                equ $107
+DIALOG_FACE_KEY_ACQUIRED                                equ $0A4
+DIALOG_Bird_KEY_ACQUIRED                                equ $0A5
+DIALOG_Map_ACQUIRED                                     equ $0A6
+DIALOG_COMPASS_ACQUIRED                                 equ $0A7
+DIALOG_STONE_BEAK_ACQUIRED                              equ $0A8
+DIALOG_NIGHTMARE_KEY_ACQUIRED                           equ $0A9
+DIALOG_SMALL_KEY_ACQUIRED                               equ $0AA
+DIALOG_20_RUPEES_ACQUIRED                               equ $0AB
+DIALOG_50_RUPEES_ACQUIRED                               equ $0AC
+DIALOG_100_RUPEES_ACQUIRED                              equ $0AD
+DIALOG_200_RUPEES_ACQUIRED                              equ $0AE
+DIALOG_HIPPO_MODEL_ENTER_HOUSE                          equ $0AF
+DIALOG_BOSS_MOLDORM                                     equ $0B0
+DIALOG_BOSS_SLIME_Eyes                                  equ $0B1
+DIALOG_BOSS_ANGLER_FISH                                 equ $0B2
+DIALOG_BOSS_SLIME_EEL                                   equ $0B3
+DIALOG_BOSS_GENIE                                       equ $0B4
+DIALOG_BOSS_DEFEATED_SLIME_EEL                          equ $0B5
+DIALOG_BOSS_FACADE                                      equ $0B6
+DIALOG_BOSS_DEFEATED_FACADE                             equ $0B7
+;DIALOG_EMPTY                                           equ $0B8 ; Empty
+DIALOG_BOSS_DEFEATED_EVIL_EAGLE                         equ $0B9
+DIALOG_BOSS_EVIL_EAGLE                                  equ $0BA
+;DIALOG_EMPTY                                           equ $0BB ; Empty
+DIALOG_BOSS_Hot_Head                                    equ $0BC
+DIALOG_BOSS_DEFEATED_Hot_Head                           equ $0BD
+;DIALOG_EMPTY                                           equ $0BE ; Empty.
+;DIALOG_EMPTY                                           equ $0BF ; Empty.
+DIALOG_OWL_MYSTERIOUS_FOREST                            equ $0C0
+DIALOG_OWL1                                             equ $0C1
+DIALOG_OWL2                                             equ $0C2
+DIALOG_OWL3                                             equ $0C3
+DIALOG_OWL4                                             equ $0C4
+DIALOG_OWL5                                             equ $0C5
+DIALOG_OWL6                                             equ $0C6
+DIALOG_OWL7                                             equ $0C7
+DIALOG_OWL8                                             equ $0C8
+DIALOG_OWL9                                             equ $0C9
+DIALOG_OWL10                                            equ $0CA
+DIALOG_OWL11                                            equ $0CB
+DIALOG_OWL12                                            equ $0CC
+DIALOG_OWL_ENTER_EGG                                    equ $0CD
+;DIALOG_EMPTY                                           equ $0CE ; Empty
+DIALOG_OWL_Goodbye                                      equ $0CF
+DIALOG_WindFISH_REVELATION                              equ $0D0 ; When you meet the Wind fish 'in person' after defeating the final boss.
+;DIALOG_EMPTY                                           equ $0D1 ; Empty
+DIALOG_WindFISH_Play_Instruments                        equ $0D2 ; When the Wind fish tells you to play the instruments to awaken him.
+;DIALOG_EMPTY                                           equ $0D3 ; Empty
+;DIALOG_EMPTY                                           equ $0D4 ; Empty
+DIALOG_MERMAID_STATUE                                   equ $0D5 ; Just says 'Mermaid Statue'
+DIALOG_EMPTY                                            equ $0D6 ; Empty
+DIALOG_WINDFISH_CLIMB_STAIRS                            equ $0D7 ; When the Wind fish calls you to climb the stairs after defeating the final boss.
+DIALOG_Schule_Donavitch_Magnifying_Lens                 equ $0D8
+DIALOG_OWL_Sword_Beach                                  equ $0D9 ; When the owl interrupts you when you're about to grab your sword.
+DIALOG_MINIBOSS_LANMOLA                                 equ $0DA
+DIALOG_MAMU_TOO_EARLY                                   equ $0DB ; Used when you talk to Mamu before the story wants you to have the frog song.
+DIALOG_MAMU_OFFER_SONG                                  equ $0DC ; When Mamu offers to learn you the frog song
+DIALOG_MAMU_Accept                                      equ $0DD ; When you accept Mamu's offer
+DIALOG_MAMU_Deny                                        equ $0DE ; When you deny Mamu's offer
+DIALOG_FrogSong_ACQUIRED                                equ $0DF
+DIALOG_MAMU_FrogSong_COMMENT                            equ $0E0 ; When Mamu notes that the frog song has the power to revive.
+DIALOG_LIL_DEVIL_Intro                                  equ $0E1
+DIALOG_LIL_DEVIL_OFFER_MAGICPOWDER                      equ $0E2
+DIALOG_LIL_DEVIL_OFFER_BOMBS                            equ $0E3
+DIALOG_LIL_DEVIL_OFFER_Arrows                           equ $0E4
+DIALOG_LIL_DEVIL_Disappear                              equ $0E5
+DIALOG_ANCIENTRUINS_TOO_DARK                            equ $0E6
+DIALOG_ANCIENTRUINS_RELIEF                              equ $0E7
+DIALOG_GOLDLEAF_ACQUIRED                                equ $0E8
+DIALOG_Last_GOLDLEAF_ACQUIRED                           equ $0E9
+;DIALOG_EMPTY                                           equ $0EA ; Empty
+;DIALOG_EMPTY                                           equ $0EB ; Empty
+DIALOG_GuardianAcorn_ACQUIRED                           equ $0EC
+DIALOG_MirrorShield_ACQUIRED                            equ $0ED
+DIALOG_Powerful_Bracelet_ACQUIRED                       equ $0EE
+DIALOG_Seashell_ACQUIRED                                equ $0EF
+DIALOG_Raft_Owner_ASK                                   equ $0F0 ; When the raft ride owner asks if you want to play.
+DIALOG_Raft_Owner_Accept                                equ $0F1
+DIALOG_Waterfall_At_SHRINE                              equ $0F2
+DIALOG_South_Of_SHRINE                                  equ $0F3
+DIALOG_Animal_VILLAGE_Entrance                          equ $0F4
+DIALOG_FINAL_BOSS                                       equ $0F5
+DIALOG_FINAL_BOSS_DEFEATED                              equ $0F6
+DIALOG_Marin_CRANEGAME_ASK                              equ $0F7
+DIALOG_Marin_CRANEGAME_PERSIST                          equ $0F8
+DIALOG_CRANEGAME_Owner_GRABBED                          equ $0F9
+DIALOG_HIPPO_MODEL_TALK                                 equ $0FA
+DIALOG_HIPPO_MODEL_GO_AWAY                              equ $0FB
+DIALOG_EXAMINE_BOOKCASE                                 equ $0FC
+DIALOG_EXAMINE_DRESSER                                  equ $0FD
+DIALOG_WITCH_MAGICPOWDER_COMMENT                        equ $0FE
+DIALOGTARIN_EXAMINE_DRAWER                              equ $0FF ; When you examine a dresser when Tarin is in the house.
+DIALOG_FULL_MOON_CELLO_ACQUIRED                         equ $100
+DIALOG_CONCH_HORN_ACQUIRED                              equ $101
+DIALOG_SEA_LILYS_BELL_ACQUIRED                          equ $102
+DIALOG_SURF_HARP_ACQUIRED                               equ $103
+DIALOG_WIND_MARIMBA_ACQUIRED                            equ $104
+DIALOG_CORAL_TRIANGLE_ACQUIRED                          equ $105
+DIALOG_ORGAN_OF_EVENING_CALM_ACQUIRED                   equ $106
+DIALOG_THUNDER_DRUM_ACQUIRED                            equ $107
 
 ; dialog_3.asm starts here
 ;DIALOG_                                                equ $108
@@ -348,7 +348,7 @@ DIALOG_MARIN_LINK_WAKES_UP                              equ $001
 ;DIALOG_                                                equ $155
 ;DIALOG_                                                equ $156
 ;DIALOG_                                                equ $157
-;DIALOG_                                                equ $158
+;DIALOG_EMPTY                                           equ $158 ; Empty
 ;DIALOG_                                                equ $159
 ;DIALOG_                                                equ $15A
 ;DIALOG_                                                equ $15B
@@ -406,30 +406,30 @@ DIALOG_MARIN_LINK_WAKES_UP                              equ $001
 ;DIALOG_                                                equ $18F
 
 ; dialog_4.asm starts here
-;DIALOG_                                                equ $190
-;DIALOG_                                                equ $191
+DIALOG_MOBLIN_Hideout                                                equ $190
+DIALOG_MOBLIN_King                                                equ $191
 ;DIALOG_                                                equ $192
 ;DIALOG_                                                equ $193
 ;DIALOG_                                                equ $194
 ;DIALOG_                                                equ $195
-;DIALOG_                                                equ $196
+;DIALOG_Animal_Entranced                                                equ $196
 ;DIALOG_                                                equ $197
 ;DIALOG_                                                equ $198
 ;DIALOG_                                                equ $199
-;DIALOG_                                                equ $19A
-;DIALOG_                                                equ $19B
-;DIALOG_                                                equ $19C
-;DIALOG_                                                equ $19D
-;DIALOG_                                                equ $19E
-;DIALOG_                                                equ $19F
-;DIALOG_                                                equ $1A0
-;DIALOG_                                                equ $1A1
+;DIALOG_CrazyTracy_Heal                                                equ $19A
+;DIALOG_Schule_Donavitch_Introduction                                                equ $19B
+;DIALOG_MermaidStatue_Missing_Scale                                                equ $19C
+;DIALOG_Seashell_Mansion                                                equ $19D
+;DIALOG_Signpost_Desert_Entrance                                                equ $19E
+;DIALOG_EMPTY                                           equ $19F ; Empty
+;DIALOG_Signpost_Woods_Entrance                                                equ $1A0
+;DIALOG_Signpost_Rapids_Ride                                                equ $1A1
 ;DIALOG_                                                equ $1A2
-;DIALOG_                                                equ $1A3
+;DIALOG_Signpost_Mt_Tamaranch                                                equ $1A3
 ;DIALOG_                                                equ $1A4
 ;DIALOG_                                                equ $1A5
-;DIALOG_                                                equ $1A6
-;DIALOG_                                                equ $1A7
+;DIALOG_Signpost_Cracked_Floor_Warning                                                equ $1A6
+;DIALOG_Signpost_Telephone_Booth                                                equ $1A7
 ;DIALOG_                                                equ $1A8
 ;DIALOG_                                                equ $1A9
 ;DIALOG_                                                equ $1AA
@@ -453,17 +453,17 @@ DIALOG_MARIN_LINK_WAKES_UP                              equ $001
 ;DIALOG_                                                equ $1BC
 ;DIALOG_                                                equ $1BD
 ;DIALOG_                                                equ $1BE
-;DIALOG_                                                equ $1BF
+;DIALOG_EMPTY                                           equ $1BF ; Empty
 ;DIALOG_                                                equ $1C0
 ;DIALOG_                                                equ $1C1
 ;DIALOG_                                                equ $1C2
 ;DIALOG_                                                equ $1C3
-;DIALOG_                                                equ $1C4
+;DIALOG_EMPTY                                           equ $1C4 ; Empty
 ;DIALOG_                                                equ $1C5
 ;DIALOG_                                                equ $1C6
 ;DIALOG_                                                equ $1C7
 ;DIALOG_                                                equ $1C8
-DIALOG_DOG_FOOD_DENY                                                equ $1C9
+;DIALOG_                                                equ $1C9
 ;DIALOG_                                                equ $1CA
 ;DIALOG_                                                equ $1CB
 ;DIALOG_                                                equ $1CC
@@ -533,7 +533,7 @@ DIALOG_DOG_FOOD_DENY                                                equ $1C9
 ;DIALOG_                                                equ $20C
 ;DIALOG_                                                equ $20D
 ;DIALOG_                                                equ $20E
-;DIALOG_                                                equ $20F
+;DIALOG_EMPTY                                           equ $20F ; Empty
 ;DIALOG_                                                equ $210
 ;DIALOG_                                                equ $211
 ;DIALOG_                                                equ $212
@@ -549,7 +549,7 @@ DIALOG_DOG_FOOD_DENY                                                equ $1C9
 ;DIALOG_                                                equ $21C
 ;DIALOG_                                                equ $21D
 ;DIALOG_                                                equ $21E
-;DIALOG_                                                equ $21F
+;DIALOG_EMPTY                                           equ $21F ; Empty
 ;DIALOG_                                                equ $220
 ;DIALOG_                                                equ $221
 ;DIALOG_                                                equ $222
@@ -565,7 +565,7 @@ DIALOG_DOG_FOOD_DENY                                                equ $1C9
 ;DIALOG_                                                equ $22C
 ;DIALOG_                                                equ $22D
 ;DIALOG_                                                equ $22E
-;DIALOG_                                                equ $22F
+;DIALOG_EMPTY                                           equ $22F ; Empty
 ;DIALOG_                                                equ $230
 ;DIALOG_                                                equ $231
 ;DIALOG_                                                equ $232

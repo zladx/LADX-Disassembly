@@ -1615,7 +1615,6 @@ IronMaskEntityHandler::
     jp   SetEntitySpriteVariant                   ; $5045: $C3 $0C $3B
 
 .return
-Data_003_5048::
     ld   de, Data_003_4FCB                        ; $5048: $11 $CB $4F
     call func_003_583C                            ; $504B: $CD $3C $58
     ret                                           ; $504E: $C9
@@ -1639,8 +1638,12 @@ ChestToInventoryMappingTable::
     db   INVENTORY_MAGIC_POWDER                   ; CHEST_MAGIC_POWDER_BAG
     db   INVENTORY_BOMBS                          ; CHEST_BOMB
     db   INVENTORY_SWORD                          ; CHEST_SWORD
-    ; Unknown data follows, as this table is only used on chests below CHEST_FLIPPERS
-    db   $00, $00, $00, $00, $01, $32, $14, $64, $C8, $F4
+
+    ; High and low bytes for the CHEST_RUPEE_xxx amounts of rupees
+ChestRupeeCountHigh::
+    db   $00, $00, $00, $00, $01
+ChestRupeeCountLow::
+    db   $32, $14, $64, $C8, $F4
 
 EntityInitChestWithItem::
     ld   a, $2A                                   ; $506D: $3E $2A
@@ -1699,11 +1702,11 @@ jr_003_50B9:
     cp   $20                                      ; $50BD: $FE $20
     jr   nc, jr_003_50D8                          ; $50BF: $30 $17
 
-    ld   hl, (Data_003_504F - 2)                  ; $50C1: $21 $4D $50
+    ld   hl, (ChestRupeeCountLow - CHEST_RUPEES_50); $50C1: $21 $4D $50
     add  hl, de                                   ; $50C4: $19
     ld   a, [hl]                                  ; $50C5: $7E
     ld   [wAddRupeeBufferLow], a                  ; $50C6: $EA $90 $DB
-    ld   hl, Data_003_5048                        ; $50C9: $21 $48 $50
+    ld   hl, (ChestRupeeCountHigh - CHEST_RUPEES_50); $50C9: $21 $48 $50
     add  hl, de                                   ; $50CC: $19
     ld   a, [hl]                                  ; $50CD: $7E
     ld   [wAddRupeeBufferHigh], a                 ; $50CE: $EA $8F $DB

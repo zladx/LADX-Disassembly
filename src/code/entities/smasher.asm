@@ -34,7 +34,7 @@ SmasherEntityHandler::
 
 jr_006_453F:
     call func_006_4767                            ; $453F: $CD $67 $47
-    call label_3EE8                               ; $4542: $CD $E8 $3E
+    call BossIntro                                ; $4542: $CD $E8 $3E
     ldh  a, [hActiveEntityStatus]                 ; $4545: $F0 $EA
     cp   $05                                      ; $4547: $FE $05
     jp   nz, label_006_5308                       ; $4549: $C2 $08 $53

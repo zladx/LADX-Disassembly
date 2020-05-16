@@ -93,7 +93,7 @@ ArmosKnightPrivateState3Handler::
 
 jr_006_5361:
     call func_006_64C6                            ; $5361: $CD $C6 $64
-    call label_3EE8                               ; $5364: $CD $E8 $3E
+    call BossIntro                                ; $5364: $CD $E8 $3E
     call label_3B70                               ; $5367: $CD $70 $3B
     call func_006_641A                            ; $536A: $CD $1A $64
     call func_006_657A                            ; $536D: $CD $7A $65

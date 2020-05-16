@@ -62,7 +62,7 @@ EntityInitSlimeEye::
 
 SlimeEyeEntityHandler::
     call label_394D                               ; $49C9: $CD $4D $39
-    call label_3EE8                               ; $49CC: $CD $E8 $3E
+    call BossIntro                                ; $49CC: $CD $E8 $3E
     call func_004_4E52                            ; $49CF: $CD $52 $4E
     ld   hl, wEntitiesUnknowTableR                ; $49D2: $21 $90 $C3
     add  hl, bc                                   ; $49D5: $09

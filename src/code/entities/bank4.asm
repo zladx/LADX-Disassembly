@@ -601,7 +601,7 @@ FacadeEntityHandler::
 FacadeState0Handler::
     xor  a                                        ; $507E: $AF
     ld   [wScreenShakeHorizontal], a              ; $507F: $EA $55 $C1
-    call label_3EE8                               ; $5082: $CD $E8 $3E
+    call BossIntro                                ; $5082: $CD $E8 $3E
     call label_394D                               ; $5085: $CD $4D $39
     call func_004_542F                            ; $5088: $CD $2F $54
     ldh  a, [hActiveEntityStatus]                 ; $508B: $F0 $EA
@@ -1478,7 +1478,7 @@ MoldormEntityHandler::
     and  a                                        ; $56BC: $A7
     jp   nz, EntityInitMoldorm                        ; $56BD: $C2 $90 $56
 
-    call label_3EE8                               ; $56C0: $CD $E8 $3E
+    call BossIntro                                ; $56C0: $CD $E8 $3E
     ldh  a, [hActiveEntityStatus]                 ; $56C3: $F0 $EA
     cp   ENTITY_STATUS_ACTIVE                     ; $56C5: $FE $05
     jp   z, MoldormEntityActiveHandler            ; $56C7: $CA $91 $57

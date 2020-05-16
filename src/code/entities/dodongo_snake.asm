@@ -72,7 +72,7 @@ DodongoSnakeEntityHandler::
 jr_005_6879:
     call func_005_6A38                            ; $6879: $CD $38 $6A
     call func_005_7A3A                            ; $687C: $CD $3A $7A
-    call label_3EE8                               ; $687F: $CD $E8 $3E
+    call BossIntro                                ; $687F: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $6882: $CD $56 $0C
     call label_3B39                               ; $6885: $CD $39 $3B
     ldh  a, [hActiveEntityState]                  ; $6888: $F0 $F0

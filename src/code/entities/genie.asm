@@ -1,6 +1,6 @@
 GenieEntityHandler::
     call label_394D                               ; $4000: $CD $4D $39
-    call label_3EE8                               ; $4003: $CD $E8 $3E
+    call BossIntro                                ; $4003: $CD $E8 $3E
     ld   hl, wEntitiesPrivateState1Table          ; $4006: $21 $B0 $C2
     add  hl, bc                                   ; $4009: $09
     ld   a, [hl]                                  ; $400A: $7E

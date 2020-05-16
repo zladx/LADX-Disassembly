@@ -11,7 +11,7 @@ EntityInitHotHead::
 
 HotHeadEntityHandler::
     call label_394D                               ; $6314: $CD $4D $39
-    call label_3EE8                               ; $6317: $CD $E8 $3E
+    call BossIntro                                ; $6317: $CD $E8 $3E
     ld   hl, wEntitiesPrivateState1Table          ; $631A: $21 $B0 $C2
     add  hl, bc                                   ; $631D: $09
     ld   a, [hl]                                  ; $631E: $7E

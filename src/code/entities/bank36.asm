@@ -2133,7 +2133,7 @@ HardhitBeetleEntityHandler::
     ld   [hl], a                                  ; $4CD4: $77
 
 jr_036_4CD5:
-    call label_3EE8                               ; $4CD5: $CD $E8 $3E
+    call BossIntro                                ; $4CD5: $CD $E8 $3E
     call func_036_6A40                            ; $4CD8: $CD $40 $6A
     call func_036_6A62                            ; $4CDB: $CD $62 $6A
     ld   de, Data_036_4CB4                        ; $4CDE: $11 $B4 $4C
@@ -3362,7 +3362,7 @@ GiantBuzzBlobEntityHandler::
     pop  bc                                       ; $54FD: $C1
 
 jr_036_54FE:
-    call label_3EE8                               ; $54FE: $CD $E8 $3E
+    call BossIntro                                ; $54FE: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $5501: $CD $56 $0C
     call func_036_6A40                            ; $5504: $CD $40 $6A
     ldh  a, [hActiveEntityState]                  ; $5507: $F0 $F0
@@ -4532,7 +4532,7 @@ AvalaunchEntityHandler::
     cp   $05                                      ; $5C06: $FE $05
     jr   nz, label_036_5C3C                       ; $5C08: $20 $32
 
-    call label_3EE8                               ; $5C0A: $CD $E8 $3E
+    call BossIntro                                ; $5C0A: $CD $E8 $3E
     call func_036_6A40                            ; $5C0D: $CD $40 $6A
     ld   a, [$C190]                               ; $5C10: $FA $90 $C1
     and  a                                        ; $5C13: $A7

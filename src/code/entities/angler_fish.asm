@@ -9,7 +9,7 @@ AnglerFishEntityHandler::
 ._03 dw func_005_5984                             ; $5582
 
 func_005_5584::
-    call label_3EE8                               ; $5584: $CD $E8 $3E
+    call BossIntro                                ; $5584: $CD $E8 $3E
     call func_005_58D4                            ; $5587: $CD $D4 $58
     ldh  a, [hActiveEntityStatus]                 ; $558A: $F0 $EA
     cp   $05                                      ; $558C: $FE $05

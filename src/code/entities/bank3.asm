@@ -311,11 +311,11 @@ EntityInitHandler::
 
 .jr_003_490B
     xor  a                                        ; $490B: $AF
-    ld   [$C1BD], a                               ; $490C: $EA $BD $C1
+    ld   [wDidBossIntro], a                       ; $490C: $EA $BD $C1
     inc  a                                        ; $490F: $3C
-    ld   [$C1BE], a                               ; $4910: $EA $BE $C1
+    ld   [wInBossBattle], a                       ; $4910: $EA $BE $C1
     ld   a, $20                                   ; $4913: $3E $20
-    ld   [wC165], a                               ; $4915: $EA $65 $C1
+    ld   [wBossIntroDelay], a                     ; $4915: $EA $65 $C1
 
 .callEntityInitHandler
 
@@ -2349,7 +2349,7 @@ SpawnEnemyDrop::
 
     xor  a                                        ; $55F9: $AF
     ld   [$D471], a                               ; $55FA: $EA $71 $D4
-    ld   a, [$C1BE]                               ; $55FD: $FA $BE $C1
+    ld   a, [wInBossBattle]                       ; $55FD: $FA $BE $C1
     ld   hl, wActivePowerUp                       ; $5600: $21 $7C $D4
     or   [hl]                                     ; $5603: $B6
     ld   hl, hIsSideScrolling                     ; $5604: $21 $F9 $FF
@@ -2390,7 +2390,7 @@ SpawnEnemyDrop::
     jr   c, .jr_003_5648                          ; $5634: $38 $12
 
     ld   [hl], b                                  ; $5636: $70
-    ld   a, [$C1BE]                               ; $5637: $FA $BE $C1
+    ld   a, [wInBossBattle]                       ; $5637: $FA $BE $C1
     ld   hl, hIsSideScrolling                     ; $563A: $21 $F9 $FF
     or   [hl]                                     ; $563D: $B6
     ld   hl, wActivePowerUp                       ; $563E: $21 $7C $D4
@@ -6163,7 +6163,7 @@ jr_003_6D73:
 
     xor  a                                        ; $6DCA: $AF
     ld   [wActivePowerUp], a                      ; $6DCB: $EA $7C $D4
-    ld   a, [$C1BE]                               ; $6DCE: $FA $BE $C1
+    ld   a, [wInBossBattle]                       ; $6DCE: $FA $BE $C1
     and  a                                        ; $6DD1: $A7
     jr   nz, func_003_6DDF                        ; $6DD2: $20 $0B
 

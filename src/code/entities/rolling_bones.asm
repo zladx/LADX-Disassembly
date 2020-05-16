@@ -10,7 +10,7 @@ RollingBonesEntityHandler::
 
 jr_006_6C7B:
     call func_006_6E7E                            ; $6C7B: $CD $7E $6E
-    call label_3EE8                               ; $6C7E: $CD $E8 $3E
+    call BossIntro                                ; $6C7E: $CD $E8 $3E
     call label_394D                               ; $6C81: $CD $4D $39
     ldh  a, [hActiveEntityStatus]                 ; $6C84: $F0 $EA
     cp   $05                                      ; $6C86: $FE $05

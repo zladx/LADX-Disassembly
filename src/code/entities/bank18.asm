@@ -5115,7 +5115,7 @@ BlainoEntityHandler::
     jp   z, func_018_7F0F                         ; $64D3: $CA $0F $7F
 
     call func_018_7DE8                            ; $64D6: $CD $E8 $7D
-    call label_3EE8                               ; $64D9: $CD $E8 $3E
+    call BossIntro                                ; $64D9: $CD $E8 $3E
     ld   hl, wEntitiesPrivateState1Table          ; $64DC: $21 $B0 $C2
     add  hl, bc                                   ; $64DF: $09
     ld   a, [hl]                                  ; $64E0: $7E
@@ -6702,7 +6702,7 @@ jr_018_6FDB:
     set  6, [hl]                                  ; $6FE3: $CB $F6
     call func_018_7181                            ; $6FE5: $CD $81 $71
     call label_394D                               ; $6FE8: $CD $4D $39
-    call label_3EE8                               ; $6FEB: $CD $E8 $3E
+    call BossIntro                                ; $6FEB: $CD $E8 $3E
     call func_018_7DE8                            ; $6FEE: $CD $E8 $7D
     ld   a, [wRoomEventEffectExecuted]            ; $6FF1: $FA $8F $C1
     and  a                                        ; $6FF4: $A7

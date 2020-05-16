@@ -6536,7 +6536,7 @@ jr_007_6A52:
 
     call func_007_7D96                            ; $6A5C: $CD $96 $7D
     call label_394D                               ; $6A5F: $CD $4D $39
-    call label_3EE8                               ; $6A62: $CD $E8 $3E
+    call BossIntro                                ; $6A62: $CD $E8 $3E
     ld   hl, wEntitiesFlashCountdownTable         ; $6A65: $21 $20 $C4
     add  hl, bc                                   ; $6A68: $09
     ld   a, [hl]                                  ; $6A69: $7E

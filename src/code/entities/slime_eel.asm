@@ -12,7 +12,7 @@ EntityInitSlimeEel::
 
 SlimeEelEntityHandler::
     call label_394D                               ; $6CDC: $CD $4D $39
-    call label_3EE8                               ; $6CDF: $CD $E8 $3E
+    call BossIntro                                ; $6CDF: $CD $E8 $3E
     call DecrementEntityIgnoreHitsCountdown       ; $6CE2: $CD $56 $0C
     ld   hl, wEntitiesPrivateState1Table          ; $6CE5: $21 $B0 $C2
     add  hl, bc                                   ; $6CE8: $09

@@ -156,7 +156,7 @@ func_006_56C7::
 
 label_006_56C8:
     call func_006_64C6                            ; $56C8: $CD $C6 $64
-    call label_3EE8                               ; $56CB: $CD $E8 $3E
+    call BossIntro                                ; $56CB: $CD $E8 $3E
     call GetEntityPrivateCountdown1               ; $56CE: $CD $00 $0C
     jr   z, jr_006_5726                           ; $56D1: $28 $53
 

@@ -2,16 +2,40 @@
 Data_007_7B53::
     db $82, $17, $86, $14
 
-Data_007_7B57::
-    db $82, $15, $86, $15
-    db $88, $10, $8A, $10, $8C, $14, $98, $16
-    db $90, $17, $92, $16, $96, $10, $8E, $10
-    db $80, $15, $84, $10, $94, $15, $9A, $10
-    db $AE, $10, $9C, $10, $A0, $14, $C0, $14
-    db $C2, $14, $C4, $14, $C6, $14, $CA, $14
-    db $C0, $14, $C2, $15, $C4, $14, $C6, $14
-    db $CA, $17, $A6, $15, $A6, $15, $A6, $15
-    db $A6, $15, $A6, $15, $9E, $14
+ChestItemSpriteTable::
+    db $82, $15        ; CHEST_POWER_BRACELET
+    db $86, $15        ; CHEST_SHIELD
+    db $88, $10        ; CHEST_BOW
+    db $8A, $10        ; CHEST_HOOKSHOT
+    db $8C, $14        ; CHEST_MAGIC_ROD
+    db $98, $16        ; CHEST_PEGASUS_BOOTS
+    db $90, $17        ; CHEST_OCARINA
+    db $92, $16        ; CHEST_FEATHER
+    db $96, $10        ; CHEST_SHOVEL
+    db $8E, $10        ; CHEST_MAGIC_POWDER_BAG
+    db $80, $15        ; CHEST_BOMB
+    db $84, $10        ; CHEST_SWORD
+    db $94, $15        ; CHEST_FLIPPERS
+    db $9A, $10        ; CHEST_MAGNIFYING_LENS
+    db $AE, $10
+    db $9C, $10
+    db $A0, $14        ; CHEST_MEDICINE
+    db $C0, $14        ; CHEST_TAIL_KEY
+    db $C2, $14        ; CHEST_ANGLER_KEY
+    db $C4, $14        ; CHEST_FACE_KEY
+    db $C6, $14        ; CHEST_BIRD_KEY
+    db $CA, $14        ; CHEST_GOLD_LEAF
+    db $C0, $14        ; CHEST_MAP
+    db $C2, $15        ; CHEST_COMPASS
+    db $C4, $14        ; CHEST_STONE_BEAK
+    db $C6, $14        ; CHEST_NIGHTMARE_KEY
+    db $CA, $17        ; CHEST_SMALL_KEY
+    db $A6, $15        ; CHEST_RUPEES_50
+    db $A6, $15        ; CHEST_RUPEES_20
+    db $A6, $15        ; CHEST_RUPEES_100
+    db $A6, $15        ; CHEST_RUPEES_200
+    db $A6, $15        ; CHEST_RUPEES_500
+    db $9E, $14        ; CHEST_SEASHELL
 
 SpitObjectDialog::
     db $90 ; Dialog144
@@ -110,7 +134,7 @@ jr_007_7C53:
     jr   jr_007_7C5B                              ; $7C56: $18 $03
 
 jr_007_7C58:
-    ld   de, Data_007_7B57                        ; $7C58: $11 $57 $7B
+    ld   de, ChestItemSpriteTable                 ; $7C58: $11 $57 $7B
 
 jr_007_7C5B:
     call RenderActiveEntitySprite                 ; $7C5B: $CD $77 $3C

@@ -1617,39 +1617,47 @@ IronMaskEntityHandler::
     jp   SetEntitySpriteVariant                   ; $5045: $C3 $0C $3B
 
 .return
-Data_003_5048::
     ld   de, Data_003_4FCB                        ; $5048: $11 $CB $4F
     call func_003_583C                            ; $504B: $CD $3C $58
     ret                                           ; $504E: $C9
 
-Data_003_504F::
+OpenChestTilesGBC::
     db   $62, $70, $63, $71
 
-Data_003_5053::
+OpenChestTiles::
     db   $62, $70, $62, $70
 
-Data_003_5057::
-    db   $03, $04, $05, $06, $07, $08, $09, $0A, $0B, $0C, $02, $01, $00, $00, $00, $00
-    db   $01
+ChestToInventoryMappingTable::
+    db   INVENTORY_POWER_BRACELET                 ; CHEST_POWER_BRACELET
+    db   INVENTORY_SHIELD                         ; CHEST_SHIELD
+    db   INVENTORY_BOW                            ; CHEST_BOW
+    db   INVENTORY_HOOKSHOT                       ; CHEST_HOOKSHOT
+    db   INVENTORY_MAGIC_ROD                      ; CHEST_MAGIC_ROD
+    db   INVENTORY_PEGASUS_BOOTS                  ; CHEST_PEGASUS_BOOTS
+    db   INVENTORY_OCARINA                        ; CHEST_OCARINA
+    db   INVENTORY_ROCS_FEATHER                   ; CHEST_FEATHER
+    db   INVENTORY_SHOVEL                         ; CHEST_SHOVEL
+    db   INVENTORY_MAGIC_POWDER                   ; CHEST_MAGIC_POWDER_BAG
+    db   INVENTORY_BOMBS                          ; CHEST_BOMB
+    db   INVENTORY_SWORD                          ; CHEST_SWORD
 
-    ld   [hl-], a                                 ; $5068: $32
-    inc  d                                        ; $5069: $14
-    ld   h, h                                     ; $506A: $64
-    ret  z                                        ; $506B: $C8
-
-    db   $F4                                      ; $506C: $F4
+    ; High and low bytes for the CHEST_RUPEE_xxx amounts of rupees
+ChestRupeeCountHigh::
+    db   $00, $00, $00, $00, $01
+ChestRupeeCountLow::
+    db   $32, $14, $64, $C8, $F4
 
 EntityInitChestWithItem::
     ld   a, $2A                                   ; $506D: $3E $2A
     ld   [wC111], a                               ; $506F: $EA $11 $C1
     ld   a, NOISE_SFX_DOOR_UNLOCKED               ; $5072: $3E $04
     ldh  [hNoiseSfx], a                           ; $5074: $E0 $F4
-    ld   de, Data_003_504F                        ; $5076: $11 $4F $50
+    ld   de, OpenChestTilesGBC                    ; $5076: $11 $4F $50
     ldh  a, [hIsGBC]                              ; $5079: $F0 $FE
     and  a                                        ; $507B: $A7
     jr   z, jr_003_5081                           ; $507C: $28 $03
 
-    ld   de, Data_003_5053                        ; $507E: $11 $53 $50
+    ld   de, OpenChestTiles                       ; $507E: $11 $53 $50
 
 jr_003_5081:
     ld   b, $A1                                   ; $5081: $06 $A1
@@ -1670,6 +1678,7 @@ jr_003_5081:
     cp   CHEST_TAIL_KEY                           ; $509C: $FE $11
     jr   nz, jr_003_50AC                          ; $509E: $20 $0C
 
+    ; Next part seems to be related to the owl flying in when you get the tail key
     push af                                       ; $50A0: $F5
     ld   a, [$C501]                               ; $50A1: $FA $01 $C5
     ld   e, a                                     ; $50A4: $5F
@@ -1695,11 +1704,11 @@ jr_003_50B9:
     cp   $20                                      ; $50BD: $FE $20
     jr   nc, jr_003_50D8                          ; $50BF: $30 $17
 
-    ld   hl, (Data_003_504F - 2)                  ; $50C1: $21 $4D $50
+    ld   hl, (ChestRupeeCountLow - CHEST_RUPEES_50); $50C1: $21 $4D $50
     add  hl, de                                   ; $50C4: $19
     ld   a, [hl]                                  ; $50C5: $7E
     ld   [wAddRupeeBufferLow], a                  ; $50C6: $EA $90 $DB
-    ld   hl, Data_003_5048                        ; $50C9: $21 $48 $50
+    ld   hl, (ChestRupeeCountHigh - CHEST_RUPEES_50); $50C9: $21 $48 $50
     add  hl, de                                   ; $50CC: $19
     ld   a, [hl]                                  ; $50CD: $7E
     ld   [wAddRupeeBufferHigh], a                 ; $50CE: $EA $8F $DB
@@ -1725,7 +1734,7 @@ jr_003_50D8:
 
 jr_003_50EF:
     cp   CHEST_FLIPPERS                           ; $50EF: $FE $0C
-    jr   nc, jr_003_5125                          ; $50F1: $30 $32
+    jr   nc, ChestGiveNoneInventoryItem           ; $50F1: $30 $32
 
     ; When finding the Shield chest…
     ldh  a, [hFFE8]                               ; $50F3: $F0 $E8
@@ -1762,13 +1771,15 @@ jr_003_50EF:
 .bombsEnd
 
     ld   d, b                                     ; $511A: $50
-    ld   hl, Data_003_5057                        ; $511B: $21 $57 $50
+    ld   hl, ChestToInventoryMappingTable         ; $511B: $21 $57 $50
     add  hl, de                                   ; $511E: $19
     ld   d, [hl]                                  ; $511F: $56
-    call GiveInventoryItem                            ; $5120: $CD $72 $64
-    jr   func_003_512A                              ; $5123: $18 $05
+    call GiveInventoryItem                        ; $5120: $CD $72 $64
+    jr   func_003_512A                            ; $5123: $18 $05
 
-jr_003_5125:
+ChestGiveNoneInventoryItem:
+    ; This handles giving keys, golden leafs and flippers
+    ; by increasing the proper memory location.
     ld   hl, wBButtonSlot                         ; $5125: $21 $00 $DB
     add  hl, de                                   ; $5128: $19
     inc  [hl]                                     ; $5129: $34

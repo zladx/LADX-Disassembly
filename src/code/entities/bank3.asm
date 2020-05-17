@@ -3366,8 +3366,8 @@ SwordState3Handler::
     jr   nz, jr_003_5C37                          ; $5C22: $20 $13
 
     ld   [wC167], a                               ; $5C24: $EA $67 $C1
-    ld   d, $01                                   ; $5C27: $16 $01
-    call GiveInventoryItem                            ; $5C29: $CD $72 $64
+    ld   d, INVENTORY_SWORD                       ; $5C27: $16 $01
+    call GiveInventoryItem                        ; $5C29: $CD $72 $64
     ld   a, $01                                   ; $5C2C: $3E $01
     ld   [wSwordLevel], a                         ; $5C2E: $EA $4E $DB
     call func_003_512A                            ; $5C31: $CD $2A $51
@@ -3386,7 +3386,7 @@ jr_003_5C37:
 jr_003_5C46:
     ret                                           ; $5C46: $C9
 
-Data_003_5C47::
+HookshotSpriteData::
     db   $8A, $14
 
 label_003_5C49:
@@ -3394,7 +3394,7 @@ label_003_5C49:
     and  $10                                      ; $5C4B: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5C4D: $C2 $8D $3F
 
-    ld   de, Data_003_5C47                        ; $5C50: $11 $47 $5C
+    ld   de, HookshotSpriteData                   ; $5C50: $11 $47 $5C
     call RenderActiveEntitySprite                 ; $5C53: $CD $77 $3C
     call GetEntityTransitionCountdown             ; $5C56: $CD $05 $0C
     jp   z, label_003_60AA                        ; $5C59: $CA $AA $60
@@ -3410,8 +3410,8 @@ jr_003_5C67:
     dec  a                                        ; $5C67: $3D
     jr   nz, jr_003_5C75                          ; $5C68: $20 $0B
 
-    ld   d, $06                                   ; $5C6A: $16 $06
-    call GiveInventoryItem                            ; $5C6C: $CD $72 $64
+    ld   d, INVENTORY_HOOKSHOT                    ; $5C6A: $16 $06
+    call GiveInventoryItem                        ; $5C6C: $CD $72 $64
     call func_003_512A                            ; $5C6F: $CD $2A $51
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
@@ -3577,8 +3577,8 @@ jr_003_5D6C:
 
     ld   a, $0A                                   ; $5D6F: $3E $0A
     ldh  [hFFA5], a                               ; $5D71: $E0 $A5
-    ld   d, $0C                                   ; $5D73: $16 $0C
-    call GiveInventoryItem                            ; $5D75: $CD $72 $64
+    ld   d, INVENTORY_MAGIC_POWDER                ; $5D73: $16 $0C
+    call GiveInventoryItem                        ; $5D75: $CD $72 $64
     ld   a, $01                                   ; $5D78: $3E $01
     ld   [wHasToadstool], a                       ; $5D7A: $EA $4B $DB
     jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F

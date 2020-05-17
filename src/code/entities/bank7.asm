@@ -9567,10 +9567,10 @@ func_007_7ED6::
     jr   nz, jr_007_7F13                          ; $7ED9: $20 $38
 
     ldh  a, [hActiveEntityType]                   ; $7EDB: $F0 $EB
-    cp   $5F                                      ; $7EDD: $FE $5F
+    cp   ENTITY_MASTER_STALFOS                    ; $7EDD: $FE $5F
     jr   nz, jr_007_7F0A                          ; $7EDF: $20 $29
 
-    ld   a, $30                                   ; $7EE1: $3E $30
+    ld   a, ENTITY_KEY_DROP_POINT                 ; $7EE1: $3E $30
     call SpawnNewEntity_trampoline                ; $7EE3: $CD $86 $3B
     ldh  a, [hScratch0]                           ; $7EE6: $F0 $D7
     ld   hl, wEntitiesPosXTable                   ; $7EE8: $21 $00 $C2

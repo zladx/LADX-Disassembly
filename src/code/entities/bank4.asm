@@ -4930,7 +4930,7 @@ label_004_6D0F:
     jr   nc, jr_004_6D5C                          ; $6D31: $30 $29
 
     call func_004_6D7A                            ; $6D33: $CD $7A $6D
-    ld   a, [$DBC7]                               ; $6D36: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $6D36: $FA $C7 $DB
     and  a                                        ; $6D39: $A7
     jr   nz, jr_004_6D5C                          ; $6D3A: $20 $20
 

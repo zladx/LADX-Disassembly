@@ -1030,7 +1030,7 @@ CreditsWindFishHandler::
     ld   a, $92                                   ; $4C70: $3E $92
     ldh  [hMapRoom], a                            ; $4C72: $E0 $F6
     ld   a, $FF                                   ; $4C74: $3E $FF
-    ld   [$DBC7], a                               ; $4C76: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $4C76: $EA $C7 $DB
     call AnimateEntitiesAndRestoreBank17          ; $4C79: $CD $ED $0E
     ld   a, [wCreditsSubscene]                    ; $4C7C: $FA $0E $D0
     JP_TABLE                                      ; $4C7F: $C7

@@ -7678,7 +7678,7 @@ jr_018_76C9:
     push hl                                       ; $76CF: $E5
     ld   de, Data_018_7666                        ; $76D0: $11 $66 $76
     call RenderActiveEntitySpritesPair            ; $76D3: $CD $C0 $3B
-    ld   a, [$DBC7]                               ; $76D6: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $76D6: $FA $C7 $DB
     and  a                                        ; $76D9: $A7
     jr   nz, jr_018_7717                          ; $76DA: $20 $3B
 
@@ -7712,7 +7712,7 @@ jr_018_76FE:
     ld   a, $18                                   ; $7704: $3E $18
     ld   [$C13E], a                               ; $7706: $EA $3E $C1
     ld   a, $10                                   ; $7709: $3E $10
-    ld   [$DBC7], a                               ; $770B: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $770B: $EA $C7 $DB
     ld   a, $08                                   ; $770E: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $7710: $EA $94 $DB
     ld   a, $03                                   ; $7713: $3E $03

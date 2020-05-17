@@ -186,7 +186,7 @@ jr_001_42FB::
     ld   a, $01                                   ; $4321: $3E $01
     call ClearFileMenuBG_trampoline               ; $4323: $CD $FA $08
     ld   a, $80                                   ; $4326: $3E $80
-    ld   [$DBC7], a                               ; $4328: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $4328: $EA $C7 $DB
     ret                                           ; $432B: $C9
 
 jr_001_432C::

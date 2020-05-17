@@ -7505,7 +7505,7 @@ func_007_7090::
 
 func_007_70B7::
     ld   hl, $C146                                ; $70B7: $21 $46 $C1
-    ld   a, [$DBC7]                               ; $70BA: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $70BA: $FA $C7 $DB
     or   [hl]                                     ; $70BD: $B6
     jr   nz, jr_007_7111                          ; $70BE: $20 $51
 
@@ -7552,7 +7552,7 @@ jr_007_70E0:
     ld   a, $08                                   ; $7103: $3E $08
     ld   [wSubtractHealthBuffer], a               ; $7105: $EA $94 $DB
     ld   a, $20                                   ; $7108: $3E $20
-    ld   [$DBC7], a                               ; $710A: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $710A: $EA $C7 $DB
     ld   a, $03                                   ; $710D: $3E $03
     ldh  [hWaveSfx], a                            ; $710F: $E0 $F3
 

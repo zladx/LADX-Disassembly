@@ -2352,14 +2352,14 @@ SpawnEnemyDrop::
     and  a                                        ; $55EA: $A7
     jp   nz, .dropEntity                          ; $55EB: $C2 $70 $56
 
-    ld   a, [$D471]                               ; $55EE: $FA $71 $D4
+    ld   a, [wGuardianAcornCounter]               ; $55EE: $FA $71 $D4
     inc  a                                        ; $55F1: $3C
-    ld   [$D471], a                               ; $55F2: $EA $71 $D4
+    ld   [wGuardianAcornCounter], a               ; $55F2: $EA $71 $D4
     cp   $0C                                      ; $55F5: $FE $0C
     jr   c, .jr_003_560F                          ; $55F7: $38 $16
 
     xor  a                                        ; $55F9: $AF
-    ld   [$D471], a                               ; $55FA: $EA $71 $D4
+    ld   [wGuardianAcornCounter], a               ; $55FA: $EA $71 $D4
     ld   a, [wInBossBattle]                       ; $55FD: $FA $BE $C1
     ld   hl, wActivePowerUp                       ; $5600: $21 $7C $D4
     or   [hl]                                     ; $5603: $B6
@@ -2367,7 +2367,7 @@ SpawnEnemyDrop::
     or   [hl]                                     ; $5607: $B6
     jr   nz, .jr_003_560F                         ; $5608: $20 $05
 
-    ld   a, $34                                   ; $560A: $3E $34
+    ld   a, ENTITY_GUARDIAN_ACORN                 ; $560A: $3E $34
     jp   .dropEntity                              ; $560C: $C3 $70 $56
 
 .jr_003_560F
@@ -6111,7 +6111,7 @@ jr_003_6D5D:
     ret                                           ; $6D72: $C9
 
 jr_003_6D73:
-    ld   a, [$DBC7]                               ; $6D73: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $6D73: $FA $C7 $DB
     ld   hl, $C1C6                                ; $6D76: $21 $C6 $C1
     or   [hl]                                     ; $6D79: $B6
     ld   hl, wLinkPlayingOcarinaCountdown         ; $6D7A: $21 $66 $C1
@@ -6159,9 +6159,9 @@ jr_003_6D73:
     add  e                                        ; $6DAE: $83
     ld   [wSubtractHealthBuffer], a               ; $6DAF: $EA $94 $DB
     ld   a, $50                                   ; $6DB2: $3E $50
-    ld   [$DBC7], a                               ; $6DB4: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $6DB4: $EA $C7 $DB
     xor  a                                        ; $6DB7: $AF
-    ld   [$D471], a                               ; $6DB8: $EA $71 $D4
+    ld   [wGuardianAcornCounter], a               ; $6DB8: $EA $71 $D4
     ld   a, [wActivePowerUp]                      ; $6DBB: $FA $7C $D4
     and  a                                        ; $6DBE: $A7
     jr   z, func_003_6DDF                         ; $6DBF: $28 $1E
@@ -7486,7 +7486,7 @@ jr_003_752D:
     cp   e                                        ; $7535: $BB
     jr   nc, jr_003_7570                          ; $7536: $30 $38
 
-    ld   a, [$DBC7]                               ; $7538: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $7538: $FA $C7 $DB
     and  a                                        ; $753B: $A7
     jr   nz, jr_003_7570                          ; $753C: $20 $32
 

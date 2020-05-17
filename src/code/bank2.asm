@@ -2640,7 +2640,7 @@ jr_002_52B5:
 
 label_002_52B9:
     ld   a, $40                                   ; $52B9: $3E $40
-    ld   [$DBC7], a                               ; $52BB: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $52BB: $EA $C7 $DB
     ld   a, [wLinkMapEntryPositionX]              ; $52BE: $FA $B1 $DB
     ldh  [hLinkPositionX], a                      ; $52C1: $E0 $98
     ldh  [hLinkFinalPositionX], a                 ; $52C3: $E0 $9F
@@ -4824,7 +4824,7 @@ jr_002_63A3:
     add  $80                                      ; $63B5: $C6 $80
     ld   [wAddHealthBuffer], a                    ; $63B7: $EA $93 $DB
     ld   a, $A0                                   ; $63BA: $3E $A0
-    ld   [$DBC7], a                               ; $63BC: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $63BC: $EA $C7 $DB
     ld   a, [wRequests]                           ; $63BF: $FA $00 $D6
     ld   e, a                                     ; $63C2: $5F
     ld   d, $00                                   ; $63C3: $16 $00
@@ -5036,7 +5036,7 @@ func_002_6910::
     ld   a, WAVE_SFX_LINK_HURT                    ; $6921: $3E $03
     ldh  [hWaveSfx], a                            ; $6923: $E0 $F3
     ld   a, $80                                   ; $6925: $3E $80
-    ld   [$DBC7], a                               ; $6927: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $6927: $EA $C7 $DB
     ret                                           ; $692A: $C9
 
 jr_002_692B:
@@ -5380,7 +5380,7 @@ jr_002_6AFC:
     and  a                                        ; $6B11: $A7
     jr   nz, jr_002_6B26                          ; $6B12: $20 $12
 
-    ld   a, [$DBC7]                               ; $6B14: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $6B14: $FA $C7 $DB
     and  a                                        ; $6B17: $A7
     jr   nz, jr_002_6B1F                          ; $6B18: $20 $05
 
@@ -7064,7 +7064,7 @@ jr_002_7472:
     ld   a, $05                                   ; $747E: $3E $05
     ld   [wLinkMotionState], a                    ; $7480: $EA $1C $C1
     call ClearLinkPositionIncrement               ; $7483: $CD $8E $17
-    ld   [$DBC7], a                               ; $7486: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $7486: $EA $C7 $DB
     ld   [$C198], a                               ; $7489: $EA $98 $C1
     ldh  [hLinkPositionZ], a                      ; $748C: $E0 $A2
     ldh  [$FFA3], a                               ; $748E: $E0 $A3
@@ -7312,7 +7312,7 @@ jr_002_75E7:
     jr   nz, jr_002_7635                          ; $75F3: $20 $40
 
 func_002_75F5::
-    ld   a, [$DBC7]                               ; $75F5: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $75F5: $FA $C7 $DB
     and  a                                        ; $75F8: $A7
     jr   nz, jr_002_7634                          ; $75F9: $20 $39
 
@@ -7341,7 +7341,7 @@ jr_002_761E:
     ld   a, $10                                   ; $761E: $3E $10
     ld   [$C13E], a                               ; $7620: $EA $3E $C1
     ld   a, $30                                   ; $7623: $3E $30
-    ld   [$DBC7], a                               ; $7625: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $7625: $EA $C7 $DB
     ld   a, [wSubtractHealthBuffer]               ; $7628: $FA $94 $DB
     add  $04                                      ; $762B: $C6 $04
     ld   [wSubtractHealthBuffer], a               ; $762D: $EA $94 $DB

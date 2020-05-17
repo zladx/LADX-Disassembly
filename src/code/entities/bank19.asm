@@ -438,7 +438,7 @@ Data_019_42F1::
 WarpState3Handler::
     call ResetSpinAttack                          ; $42F5: $CD $AF $0C
     ld   [wSubtractHealthBuffer], a               ; $42F8: $EA $94 $DB
-    ld   [$DBC7], a                               ; $42FB: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $42FB: $EA $C7 $DB
     ld   [$C13E], a                               ; $42FE: $EA $3E $C1
     ld   [wSwordAnimationState], a                ; $4301: $EA $37 $C1
     ld   [wC16A], a                               ; $4304: $EA $6A $C1

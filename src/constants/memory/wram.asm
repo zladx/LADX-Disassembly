@@ -1025,7 +1025,11 @@ wBossDefeated:: ; D46C
   ds 1
 
 ; Unlabeled
-ds $5
+ds $4
+
+wGuardianAcornCounter:: ; D471
+  ; Increases on each kill. Reset to 0 when hit, or when it hits 12 a guardian acorn is spawned.
+  ds 1
 
 wMazeSignpostGoal:: ; D472
   ; Signpost maze: current goal
@@ -1509,7 +1513,13 @@ wKillCount2:: ; DBB5
 
 ; Unlabeled
 wDBB6 equ $DBB6
-  ds $13
+  ds $11
+
+wInvincibilityCounter:: ; DBC7
+  ds 1
+
+; Unlabeled
+  ds 1
 
 wTorchesCount:: ; DBC9
   ds 1

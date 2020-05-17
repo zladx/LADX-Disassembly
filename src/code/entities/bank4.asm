@@ -6755,7 +6755,7 @@ jr_004_7845:
     ld   c, $0B                                   ; $7849: $0E $0B
 
 jr_004_784B:
-    ld   a, [$DB7D]                               ; $784B: $FA $7D $DB
+    ld   a, [wBoomerangTradedItem]                ; $784B: $FA $7D $DB
     cp   $0B                                      ; $784E: $FE $0B
     jr   z, jr_004_7857                           ; $7850: $28 $05
 
@@ -6776,7 +6776,7 @@ jr_004_7859:
     ld   c, $0B                                   ; $7862: $0E $0B
 
 jr_004_7864:
-    ld   a, [$DB7D]                               ; $7864: $FA $7D $DB
+    ld   a, [wBoomerangTradedItem]]               ; $7864: $FA $7D $DB
     cp   $05                                      ; $7867: $FE $05
     jr   z, jr_004_7870                           ; $7869: $28 $05
 

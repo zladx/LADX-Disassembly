@@ -822,39 +822,25 @@ Data_019_4634::
     call func_019_7CFB                            ; $4634: $CD $FB $7C
     ret  nc                                       ; $4637: $D0
 
-    ld   a, [$DB7D]                               ; $4638: $FA $7D $DB
+    ld   a, [wBoomerangTradedItem]                ; $4638: $FA $7D $DB
     cp   $00                                      ; $463B: $FE $00
     jr   z, jr_019_4643                           ; $463D: $28 $04
 
     cp   $0D                                      ; $463F: $FE $0D
-    jr   nz, @+$22                                ; $4641: $20 $20
+    jr   nz, jr_019_4663                          ; $4641: $20 $20
 
 jr_019_4643:
     call_open_dialog $221                         ; $4643
     jp   IncrementEntityState                     ; $4648: $C3 $12 $3B
 
-    di                                            ; $464B: $F3
-    ld   d, c                                     ; $464C: $51
-    ld   h, a                                     ; $464D: $67
-    jr   z, jr_019_4643                           ; $464E: $28 $F3
+Data_019_454B::
+    db   $F3, $51, $67, $28, $F3, $51, $67, $28, $D9, $11, $CE, $10, $17, $14, $08, $10
+    db   $D9, $11, $CE, $10, $F3, $51, $67, $28
 
-    ld   d, c                                     ; $4650: $51
-    ld   h, a                                     ; $4651: $67
-    jr   z, @-$25                                 ; $4652: $28 $D9
-
-    ld   de, $10CE                                ; $4654: $11 $CE $10
-    rla                                           ; $4657: $17
-    inc  d                                        ; $4658: $14
-    ld   [$D910], sp                              ; $4659: $08 $10 $D9
-    ld   de, $10CE                                ; $465C: $11 $CE $10
-    di                                            ; $465F: $F3
-    ld   d, c                                     ; $4660: $51
-    ld   h, a                                     ; $4661: $67
-    jr   z, jr_019_46A2                           ; $4662: $28 $3E
-
-    dec  h                                        ; $4664: $25
+jr_019_4663:
+    ld   a, $25                                   ; $4663: $3E $25
     call OpenDialogInTable2                       ; $4665: $CD $7C $23
-    ld   a, [$DB7D]                               ; $4668: $FA $7D $DB
+    ld   a, [wBoomerangTradedItem]                ; $4668: $FA $7D $DB
     sla  a                                        ; $466B: $CB $27
     sla  a                                        ; $466D: $CB $27
     ld   e, a                                     ; $466F: $5F
@@ -913,7 +899,7 @@ jr_019_46A2:
     cp   $05                                      ; $46BA: $FE $05
     jr   z, jr_019_46E1                           ; $46BC: $28 $23
 
-    ld   [$DB7D], a                               ; $46BE: $EA $7D $DB
+    ld   [wBoomerangTradedItem], a                ; $46BE: $EA $7D $DB
     ld   a, $0D                                   ; $46C1: $3E $0D
     ld   [wBButtonSlot], a                        ; $46C3: $EA $00 $DB
     ld   hl, wEntitiesPrivateState1Table          ; $46C6: $21 $B0 $C2
@@ -958,13 +944,13 @@ jr_019_46FB:
     jr   nz, jr_019_46FB                          ; $4705: $20 $F4
 
 jr_019_4707:
-    ld   a, [$DB7D]                               ; $4707: $FA $7D $DB
+    ld   a, [wBoomerangTradedItem]                ; $4707: $FA $7D $DB
     ld   [hl], a                                  ; $470A: $77
     ld   hl, wEntitiesPrivateState1Table          ; $470B: $21 $B0 $C2
     add  hl, bc                                   ; $470E: $09
     ld   [hl], a                                  ; $470F: $77
     ld   a, $0D                                   ; $4710: $3E $0D
-    ld   [$DB7D], a                               ; $4712: $EA $7D $DB
+    ld   [wBoomerangTradedItem], a                ; $4712: $EA $7D $DB
     call GetEntityTransitionCountdown             ; $4715: $CD $05 $0C
     ld   [hl], $80                                ; $4718: $36 $80
     ld   a, $01                                   ; $471A: $3E $01

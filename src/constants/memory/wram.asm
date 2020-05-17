@@ -1405,8 +1405,16 @@ wIsRoosterFollowingLink:: ; DB7B
   ds 1
 
 ; Unlabeled
-wDB7C equ $DB7C
-  ds $13
+  ds 1
+
+wBoomerangTradedItem:: ; DB7D
+  ; Stores the inventory item that you traded for the boomerang.
+  ; Initially this value is zero, indicating no trade. But after you traded the boomerang
+  ; back it will be INVENTORY_BOOMERANG
+  ds 1
+
+; Unlabeled
+  ds $11
 
 wAddRupeeBufferHigh:: ; DB8F
   ; Higher digits of the amount of rupees to be added to your wallet (high digits)

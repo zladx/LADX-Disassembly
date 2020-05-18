@@ -64,22 +64,22 @@ ArmosKnightPrivateState2Handler::
     call label_27DD                               ; $533C: $CD $DD $27
     call DidKillEnemy                             ; $533F: $CD $50 $3F
     ldh  a, [hActiveEntityType]                   ; $5342: $F0 $EB
-    cp   $88                                      ; $5344: $FE $88
+    cp   ENTITY_ARMOS_KNIGHT                      ; $5344: $FE $88
     ret  z                                        ; $5346: $C8
 
     ldh  a, [hActiveEntityType]                   ; $5347: $F0 $EB
-    cp   $89                                      ; $5349: $FE $89
+    cp   ENTITY_HINOX                             ; $5349: $FE $89
     jr   z, jr_006_5355                           ; $534B: $28 $08
 
-    cp   $8E                                      ; $534D: $FE $8E
+    cp   ENTITY_CUE_BALL                          ; $534D: $FE $8E
     jr   z, jr_006_5355                           ; $534F: $28 $04
 
-    cp   $92                                      ; $5351: $FE $92
+    cp   ENTITY_SMASHER                           ; $5351: $FE $92
     jr   nz, jr_006_535A                          ; $5353: $20 $05
 
 jr_006_5355:
     ldh  a, [hMapId]                              ; $5355: $F0 $F7
-    cp   $06                                      ; $5357: $FE $06
+    cp   MAP_EAGLES_TOWER                         ; $5357: $FE $06
     ret  nc                                       ; $5359: $D0
 
 jr_006_535A:

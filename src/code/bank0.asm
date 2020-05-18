@@ -7006,19 +7006,19 @@ LoadRoomEntities::
     ldh  a, [hMapId]
     cp   MAP_EAGLES_TOWER
     jr   nz, .eaglesTowerEnd
-    ; … and [hMapRoom] == [$DB6F]…
-    ld   a, [$DB6F]
+    ; … and [hMapRoom] == [wWreckingBallRoom]…
+    ld   a, [wWreckingBallRoom]
     ld   hl, hMapRoom
     cp   [hl]
     jr   nz, .eaglesTowerEnd
-    ; do some special casing for this room entities
-    ld   a, ENTITY_A8
+    ; place the wrecking ball
+    ld   a, ENTITY_WRECKING_BALL
     call SpawnNewEntity_trampoline
-    ld   a, [$DB70]
+    ld   a, [wWreckingBallPosX]
     ld   hl, wEntitiesPosXTable
     add  hl, de
     ld   [hl], a
-    ld   a, [$DB71]
+    ld   a, [wWreckingBallPosY]
     ld   hl, wEntitiesPosYTable
     add  hl, de
     ld   [hl], a

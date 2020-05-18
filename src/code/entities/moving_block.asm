@@ -124,7 +124,7 @@ jr_015_41A4:
     jr   nz, jr_015_41B9                          ; $41A6: $20 $11
 
     ldh  a, [hActiveEntityType]                   ; $41A8: $F0 $EB
-    cp   $47                                      ; $41AA: $FE $47
+    cp   ENTITY_MOVING_BLOCK_LEFT_BOTTOM          ; $41AA: $FE $47
     jr   nz, jr_015_41B2                          ; $41AC: $20 $04
 
     ldh  a, [hFFE8]                               ; $41AE: $F0 $E8
@@ -139,7 +139,7 @@ jr_015_41B2:
 
 jr_015_41B9:
     ldh  a, [hActiveEntityType]                   ; $41B9: $F0 $EB
-    cp   $46                                      ; $41BB: $FE $46
+    cp   ENTITY_MOVING_BLOCK_LEFT_TOP             ; $41BB: $FE $46
     jr   nz, jr_015_41C3                          ; $41BD: $20 $04
 
     ldh  a, [hFFE8]                               ; $41BF: $F0 $E8

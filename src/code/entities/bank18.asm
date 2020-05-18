@@ -8585,7 +8585,7 @@ func_018_7DA0::
 
     inc  e                                        ; $7DAE: $1C
     ldh  a, [hActiveEntityType]                   ; $7DAF: $F0 $EB
-    cp   $C4                                      ; $7DB1: $FE $C4
+    cp   ENTITY_WALRUS                            ; $7DB1: $FE $C4
     jr   z, jr_018_7DC1                           ; $7DB3: $28 $0C
 
     push de                                       ; $7DB5: $D5

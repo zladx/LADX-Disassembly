@@ -256,6 +256,7 @@ wIsUsingShield:: ; C15B
 
 wIsCarryingLiftedObject: ; C15C
   ; Is Link carrying an object above his head
+  ; (not a boolean -- possible values: Data_003_56F1)
   ds 1
 
 ; Contains a DIRECTION_* value taken from Link's irection
@@ -707,8 +708,12 @@ wBossAgonySFXCountdown:: ; C5A7
   ; When reaching zero, play the WAVE_SFX_BOSS_AGONY sound effect
   ds 1
 
+wLiftedEntityType:: ; C5A8
+  ; Type of lifted entity. Used only for Rooster behavior.
+  ds 1
+
 ; Unlabeled
-ds 2
+ds 1
 
 wEggMazeProgress:: ; C5AA
   ; Number of rooms progressed correctly in the Wind Fish's Egg maze
@@ -1369,9 +1374,15 @@ wDB6D: ds 1
 wIsThief:: ; DB6E
   ds 1
 
-wDB6F: ds 1
-wDB70: ds 1
-wDB71: ds 1
+wWreckingBallRoom: ; DB6F
+  ds 1
+
+wWreckingBallPosX: ; DB70
+  ds 1
+
+wWreckingBallPosY: ; DB71
+  ds 1
+
 wDB72: ds 1
 
 wIsMarinFollowingLink:: ; DB73
@@ -1398,7 +1409,9 @@ wMaxArrows:: ; DB78
 wIsGhostFollowingLink:: ; DB79
   ds 1
 
-wDB7A:: ; DB7A
+wGhostSeeksGrave:: ; DB7A
+  ; Zero: The ghost wants to go to House by the Bay
+  ; Non-zero: ... to his grave in Kohilint Prairie
   ds 1
 
 wIsRoosterFollowingLink:: ; DB7B

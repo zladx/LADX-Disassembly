@@ -479,8 +479,8 @@ label_002_4464:
     and  a                                        ; $4471: $A7
     jr   z, jr_002_4481                           ; $4472: $28 $0D
 
-    ld   a, [$C5A8]                               ; $4474: $FA $A8 $C5
-    cp   $D5                                      ; $4477: $FE $D5
+    ld   a, [wLiftedEntityType]                   ; $4474: $FA $A8 $C5
+    cp   ENTITY_ROOSTER                           ; $4477: $FE $D5
     jr   nz, jr_002_4481                          ; $4479: $20 $06
 
     ld   a, [$C146]                               ; $447B: $FA $46 $C1
@@ -6057,8 +6057,8 @@ jr_002_6E72:
     and  a                                        ; $6E92: $A7
     jr   z, jr_002_6EC6                           ; $6E93: $28 $31
 
-    ld   a, [$C5A8]                               ; $6E95: $FA $A8 $C5
-    cp   $D5                                      ; $6E98: $FE $D5
+    ld   a, [wLiftedEntityType]                   ; $6E95: $FA $A8 $C5
+    cp   ENTITY_ROOSTER                           ; $6E98: $FE $D5
     jr   z, jr_002_6EC6                           ; $6E9A: $28 $2A
 
     ld   a, [wLinkMotionState]                    ; $6E9C: $FA $1C $C1
@@ -6577,8 +6577,8 @@ label_002_719C:
     cp   $02                                      ; $719F: $FE $02
     jp   z, collisionEnd                          ; $71A1: $CA $54 $74
 
-    ld   a, [$C5A8]                               ; $71A4: $FA $A8 $C5
-    cp   $D5                                      ; $71A7: $FE $D5
+    ld   a, [wLiftedEntityType]                   ; $71A4: $FA $A8 $C5
+    cp   ENTITY_ROOSTER                           ; $71A7: $FE $D5
     jp   z, collisionEnd                          ; $71A9: $CA $54 $74
 
     ldh  a, [hScratch5]                           ; $71AC: $F0 $DC

@@ -484,7 +484,7 @@ label_005_7E9D:
     ld   a, $1A                                   ; $7E9D: $3E $1A
     ldh  [hNoiseSfx], a                           ; $7E9F: $E0 $F4
     ldh  a, [hActiveEntityType]                   ; $7EA1: $F0 $EB
-    cp   $63                                      ; $7EA3: $FE $63
+    cp   ENTITY_EVIL_EAGLE                        ; $7EA3: $FE $63
     jp   z, label_005_758C                        ; $7EA5: $CA $8C $75
 
     call DidKillEnemy                             ; $7EA8: $CD $50 $3F

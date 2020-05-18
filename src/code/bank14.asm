@@ -1152,7 +1152,7 @@ func_014_5347::
 
 jr_014_5354:
     ldh  a, [hActiveEntityType]                   ; $5354: $F0 $EB
-    cp   $A8                                      ; $5356: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $5356: $FE $A8
     jr   z, jr_014_5360                           ; $5358: $28 $06
 
     call func_014_53A3                            ; $535A: $CD $A3 $53
@@ -1174,7 +1174,7 @@ jr_014_536B:
 
     ld   d, $03                                   ; $5373: $16 $03
     ldh  a, [hActiveEntityType]                   ; $5375: $F0 $EB
-    cp   $02                                      ; $5377: $FE $02
+    cp   ENTITY_BOMB                              ; $5377: $FE $02
     jr   nz, jr_014_537D                          ; $5379: $20 $02
 
     ld   d, $02                                   ; $537B: $16 $02
@@ -1212,7 +1212,7 @@ func_014_53A3::
     add  hl, bc                                   ; $53A6: $09
     ld   [hl], $05                                ; $53A7: $36 $05
     ldh  a, [hActiveEntityType]                   ; $53A9: $F0 $EB
-    cp   $02                                      ; $53AB: $FE $02
+    cp   ENTITY_BOMB                              ; $53AB: $FE $02
     jr   nz, jr_014_53B6                          ; $53AD: $20 $07
 
     call GetEntityTransitionCountdown             ; $53AF: $CD $05 $0C
@@ -1288,7 +1288,7 @@ jr_014_5409:
 
 jr_014_5411:
     ldh  a, [hActiveEntityType]                   ; $5411: $F0 $EB
-    cp   $02                                      ; $5413: $FE $02
+    cp   ENTITY_BOMB                              ; $5413: $FE $02
     jr   nz, jr_014_541B                          ; $5415: $20 $04
 
     ld   a, e                                     ; $5417: $7B

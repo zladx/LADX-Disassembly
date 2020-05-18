@@ -532,15 +532,15 @@ jr_001_531D::
     ld   [wAddRupeeBufferHigh], a
     ld   [wSubstractRupeeBufferLow], a
     ld   [wSubstractRupeeBufferHigh], a
-    ld   a, [$DB6F]
+    ld   a, [wWreckingBallRoom]
     and  a
     jr   nz, .setStartingPoint
     ld   a, $16
-    ld   [$DB6F], a
+    ld   [wWreckingBallRoom], a
     ld   a, $50
-    ld   [$DB70], a
+    ld   [wWreckingBallPosX], a
     ld   a, $27
-    ld   [$DB71], a
+    ld   [wWreckingBallPosY], a
 
 .setStartingPoint
     ld   a, [wSpawnPositionX]
@@ -611,11 +611,11 @@ jr_001_531D::
     ld   a, $03
     ldh  [hLinkDirection], a
     ld   a, $16
-    ld   [$DB6F], a
+    ld   [wWreckingBallRoom], a
     ld   a, $50
-    ld   [$DB70], a
+    ld   [wWreckingBallPosX], a
     ld   a, $27
-    ld   [$DB71], a
+    ld   [wWreckingBallPosY], a
     jr   .finish
 
 

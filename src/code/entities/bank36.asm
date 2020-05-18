@@ -4229,7 +4229,7 @@ jr_036_5A00:
 
 func_036_5A0A::
     ldh  a, [hActiveEntityType]                   ; $5A0A: $F0 $EB
-    sub  $F6                                      ; $5A0C: $D6 $F6
+    sub  ENTITY_COLOR_GUARDIAN_BLUE               ; $5A0C: $D6 $F6
     ld   e, a                                     ; $5A0E: $5F
     ld   a, [wC177]                               ; $5A0F: $FA $77 $C1
     cp   e                                        ; $5A12: $BB
@@ -4374,7 +4374,7 @@ Data_036_5AC4::
 func_036_5AC8::
     ld   d, $00                                   ; $5AC8: $16 $00
     ldh  a, [hActiveEntityType]                   ; $5ACA: $F0 $EB
-    sub  $F6                                      ; $5ACC: $D6 $F6
+    sub  ENTITY_COLOR_GUARDIAN_BLUE               ; $5ACC: $D6 $F6
     sla  a                                        ; $5ACE: $CB $27
     ld   e, a                                     ; $5AD0: $5F
     ld   hl, Data_036_5AC4                        ; $5AD1: $21 $C4 $5A
@@ -5920,7 +5920,7 @@ Data_036_6424::
 ColorGhoulState2Handler::
     ld   hl, Data_036_6424
     ldh  a, [hActiveEntityType]                   ; $642A: $F0 $EB
-    sub  $EC                                      ; $642C: $D6 $EC
+    sub  ENTITY_COLOR_GHOUL_RED                   ; $642C: $D6 $EC
     ld   e, a                                     ; $642E: $5F
     ld   d, $00                                   ; $642F: $16 $00
     add  hl, de                                   ; $6431: $19
@@ -6039,7 +6039,7 @@ ColorGhoulState3Handler::
     call func_036_6C83                            ; $64D2: $CD $83 $6C
     ld   hl, Data_036_64BA                        ; $64D5: $21 $BA $64
     ldh  a, [hActiveEntityType]                   ; $64D8: $F0 $EB
-    sub  $EC                                      ; $64DA: $D6 $EC
+    sub  ENTITY_COLOR_GHOUL_RED                   ; $64DA: $D6 $EC
     ld   e, a                                     ; $64DC: $5F
     ld   d, $00                                   ; $64DD: $16 $00
     add  hl, de                                   ; $64DF: $19
@@ -6219,7 +6219,7 @@ func_036_6629::
     ld   hl, Data_036_6625                        ; $6633: $21 $25 $66
     call func_036_6C7E                            ; $6636: $CD $7E $6C
     ldh  a, [hActiveEntityType]                   ; $6639: $F0 $EB
-    sub  $EC                                      ; $663B: $D6 $EC
+    sub  ENTITY_COLOR_GHOUL_RED                   ; $663B: $D6 $EC
     sla  a                                        ; $663D: $CB $27
     ld   e, a                                     ; $663F: $5F
     call func_036_6C7E                            ; $6640: $CD $7E $6C
@@ -6647,7 +6647,7 @@ Data_036_688E::
 
 ColorShellState8Handler::
     ldh  a, [hActiveEntityType]                   ; $6891: $F0 $EB
-    sub  $E9                                      ; $6893: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $6893: $D6 $E9
     ld   e, a                                     ; $6895: $5F
     ld   d, $00                                   ; $6896: $16 $00
     ld   hl, Data_036_688E                        ; $6898: $21 $8E $68
@@ -6669,7 +6669,7 @@ ColorShellState8Handler::
     ld   [hl], a                                  ; $68B2: $77
     call func_036_6BCF                            ; $68B3: $CD $CF $6B
     ldh  a, [hActiveEntityType]                   ; $68B6: $F0 $EB
-    sub  $E9                                      ; $68B8: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $68B8: $D6 $E9
     add  $67                                      ; $68BA: $C6 $67
     ld   [hl], a                                  ; $68BC: $77
     ld   a, $04                                   ; $68BD: $3E $04
@@ -6818,7 +6818,7 @@ jr_036_6981:
     call IncrementEntityState                     ; $698C: $CD $12 $3B
     call func_036_6BCF                            ; $698F: $CD $CF $6B
     ldh  a, [hActiveEntityType]                   ; $6992: $F0 $EB
-    sub  $E9                                      ; $6994: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $6994: $D6 $E9
     add  $67                                      ; $6996: $C6 $67
     ld   [hl], a                                  ; $6998: $77
 
@@ -6833,7 +6833,7 @@ ColorShellStateDHandler::
     jr   nz, jr_036_69CC                          ; $69A0: $20 $2A
 
     ldh  a, [hActiveEntityType]                   ; $69A2: $F0 $EB
-    sub  $E9                                      ; $69A4: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $69A4: $D6 $E9
     ld   e, a                                     ; $69A6: $5F
     ld   d, $00                                   ; $69A7: $16 $00
     ld   hl, Data_036_699A                        ; $69A9: $21 $9A $69
@@ -6866,7 +6866,7 @@ Data_036_69D3::
 
 func_036_69D9::
     ldh  a, [hActiveEntityType]                   ; $69D9: $F0 $EB
-    sub  $E9                                      ; $69DB: $D6 $E9
+    sub  ENTITY_COLOR_SHELL_RED                   ; $69DB: $D6 $E9
     sla  a                                        ; $69DD: $CB $27
 Data_036_69DF::
     ldh  [hScratch0], a                           ; $69DF: $E0 $D7
@@ -7029,7 +7029,7 @@ func_036_6A98::
 
     inc  e                                        ; $6AB2: $1C
     ldh  a, [hActiveEntityType]                   ; $6AB3: $F0 $EB
-    cp   $B5                                      ; $6AB5: $FE $B5
+    cp   ENTITY_BEAR                              ; $6AB5: $FE $B5
     jr   z, jr_036_6AC5                           ; $6AB7: $28 $0C
 
     push de                                       ; $6AB9: $D5
@@ -7608,8 +7608,8 @@ jr_036_6E3B:
 jr_036_6E3F:
     call func_036_6A40                            ; $6E3F: $CD $40 $6A
     ldh  a, [hActiveEntityType]                   ; $6E42: $F0 $EB
-    cp   $8A                                      ; $6E44: $FE $8A
-    jr   nz, jr_036_6E57                          ; $6E46: $20 $0F
+    cp   ENTITY_TILE_GLINT_SHOWN                  ; $6E44: $FE $8A
+    jr   nz, .tileGlintShownEnd                   ; $6E46: $20 $0F
 
     ldh  a, [hFrameCounter]                       ; $6E48: $F0 $E7
     rra                                           ; $6E4A: $1F
@@ -7618,8 +7618,8 @@ jr_036_6E3F:
     call SetEntitySpriteVariant                   ; $6E4E: $CD $0C $3B
     ld   de, Data_036_6DA7                        ; $6E51: $11 $A7 $6D
     call RenderActiveEntitySpritesPair            ; $6E54: $CD $C0 $3B
+.tileGlintShownEnd
 
-jr_036_6E57:
     ld   hl, wEntitiesUnknowTableY                ; $6E57: $21 $D0 $C3
     add  hl, bc                                   ; $6E5A: $09
     ldh  a, [$FFB9]                               ; $6E5B: $F0 $B9

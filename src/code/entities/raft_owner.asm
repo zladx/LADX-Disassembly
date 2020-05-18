@@ -292,7 +292,7 @@ func_005_54EA::
 func_005_5506::
     ld   e, b                                     ; $5506: $58
     ldh  a, [hActiveEntityType]                   ; $5507: $F0 $EB
-    cp   $40                                      ; $5509: $FE $40
+    cp   ENTITY_WITCH                             ; $5509: $FE $40
     jr   nz, jr_005_5519                          ; $550B: $20 $0C
 
     ldh  a, [hLinkPositionY]                      ; $550D: $F0 $99
@@ -321,7 +321,7 @@ jr_005_5523:
 
     inc  e                                        ; $5531: $1C
     ldh  a, [hActiveEntityType]                   ; $5532: $F0 $EB
-    cp   $6D                                      ; $5534: $FE $6D
+    cp   ENTITY_BOW_WOW                           ; $5534: $FE $6D
     jr   z, jr_005_5544                           ; $5536: $28 $0C
 
     push de                                       ; $5538: $D5

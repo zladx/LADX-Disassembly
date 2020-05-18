@@ -100,6 +100,6 @@ jr_006_629B:
 jr_006_62A9:
     pop  af                                       ; $62A9: $F1
     ldh  a, [hActiveEntityType]                   ; $62AA: $F0 $EB
-    sub  $70                                      ; $62AC: $D6 $70
+    sub  ENTITY_KID_70                            ; $62AC: $D6 $70
     add  $1C                                      ; $62AE: $C6 $1C
     jp   OpenDialogInTable1                       ; $62B0: $C3 $73 $23

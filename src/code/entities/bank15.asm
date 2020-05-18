@@ -7274,7 +7274,7 @@ func_015_7995::
 
 label_015_79DF:
     ldh  a, [hActiveEntityType]                   ; $79DF: $F0 $EB
-    cp   $02                                      ; $79E1: $FE $02
+    cp   ENTITY_BOMB                              ; $79E1: $FE $02
     jr   nz, func_015_79F0                        ; $79E3: $20 $0B
 
     ld   hl, hActiveEntityVisualPosY                                ; $79E5: $21 $EC $FF

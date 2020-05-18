@@ -5790,7 +5790,7 @@ jr_019_6B8A:
 label_019_6B8D:
     ld   e, $80                                   ; $6B8D: $1E $80
     ldh  a, [hActiveEntityType]                   ; $6B8F: $F0 $EB
-    cp   $AA                                      ; $6B91: $FE $AA
+    cp   ENTITY_CHEEP_CHEEP_HORIZONTAL            ; $6B91: $FE $AA
     jr   z, jr_019_6B97                           ; $6B93: $28 $02
 
     ld   e, $60                                   ; $6B95: $1E $60
@@ -7553,9 +7553,10 @@ jr_019_7985:
     rr   d                                        ; $79B2: $CB $1A
     adc  [hl]                                     ; $79B4: $8E
     ld   [hl], a                                  ; $79B5: $77
+
     ldh  a, [hActiveEntityType]                   ; $79B6: $F0 $EB
-    cp   $7F                                      ; $79B8: $FE $7F
-    jr   nz, jr_019_79CF                          ; $79BA: $20 $13
+    cp   ENTITY_TURTLE_ROCK_HEAD                  ; $79B8: $FE $7F
+    jr   nz, .turtleRockHeadEnd                   ; $79BA: $20 $13
 
     ld   hl, wEntitiesUnknowTableP                ; $79BC: $21 $40 $C4
     add  hl, bc                                   ; $79BF: $09
@@ -7568,10 +7569,10 @@ jr_019_7985:
     add  [hl]                                     ; $79CA: $86
     ld   [hl], a                                  ; $79CB: $77
     jp   label_019_7A74                           ; $79CC: $C3 $74 $7A
+.turtleRockHeadEnd
 
-jr_019_79CF:
-    cp   $87                                      ; $79CF: $FE $87
-    jr   nz, jr_019_7A0F                          ; $79D1: $20 $3C
+    cp   ENTITY_DESERT_LANMOLA                    ; $79CF: $FE $87
+    jr   nz, .desertLanmolaEnd                    ; $79D1: $20 $3C
 
     ld   hl, wEntitiesUnknownTableD               ; $79D3: $21 $D0 $C2
     add  hl, bc                                   ; $79D6: $09
@@ -7583,9 +7584,9 @@ jr_019_79CF:
     add  hl, bc                                   ; $79E0: $09
     ld   a, [hl]                                  ; $79E1: $7E
     ldh  [hFreeWarpDataAddress], a                ; $79E2: $E0 $E6
-    ld   a, $06                                   ; $79E4: $3E $06
 
-jr_019_79E6:
+    ld   a, $06                                   ; $79E4: $3E $06
+.loop_019_79E6
     ldh  [hFFE8], a                               ; $79E6: $E0 $E8
     ld   e, a                                     ; $79E8: $5F
     ld   d, b                                     ; $79E9: $50
@@ -7613,78 +7614,78 @@ jr_019_79E6:
     ld   [hl], a                                  ; $7A09: $77
     ldh  a, [hFFE8]                               ; $7A0A: $F0 $E8
     dec  a                                        ; $7A0C: $3D
-    jr   nz, jr_019_79E6                          ; $7A0D: $20 $D7
+    jr   nz, .loop_019_79E6                       ; $7A0D: $20 $D7
+.desertLanmolaEnd
 
-jr_019_7A0F:
-    cp   $C1                                      ; $7A0F: $FE $C1
-    jr   nz, jr_019_7A33                          ; $7A11: $20 $20
+    cp   ENTITY_MARIN_AT_THE_SHORE                ; $7A0F: $FE $C1
+    jr   nz, .marinAtTheShoreEnd                  ; $7A11: $20 $20
 
     ld   a, [wIsMarinFollowingLink]               ; $7A13: $FA $73 $DB
     and  a                                        ; $7A16: $A7
     jr   z, label_019_7A74                        ; $7A17: $28 $5B
 
+    ; increment $10 bytes at $D155 by hScratch0
     ld   e, $10                                   ; $7A19: $1E $10
     ld   hl, $D155                                ; $7A1B: $21 $55 $D1
-
-jr_019_7A1E:
+.loop_019_7A1E
     ldh  a, [hScratch0]                           ; $7A1E: $F0 $D7
     add  [hl]                                     ; $7A20: $86
     ld   [hl+], a                                 ; $7A21: $22
     dec  e                                        ; $7A22: $1D
-    jr   nz, jr_019_7A1E                          ; $7A23: $20 $F9
+    jr   nz, .loop_019_7A1E                       ; $7A23: $20 $F9
 
+    ; increment $10 bytes at $D175 by hScratch2
     ld   e, $10                                   ; $7A25: $1E $10
     ld   hl, $D175                                ; $7A27: $21 $75 $D1
-
-jr_019_7A2A:
+.loop_019_7A2A
     ldh  a, [hScratch2]                           ; $7A2A: $F0 $D9
     add  [hl]                                     ; $7A2C: $86
     ld   [hl+], a                                 ; $7A2D: $22
     dec  e                                        ; $7A2E: $1D
-    jr   nz, jr_019_7A2A                          ; $7A2F: $20 $F9
+    jr   nz, .loop_019_7A2A                       ; $7A2F: $20 $F9
 
     jr   label_019_7A74                           ; $7A31: $18 $41
+.marinAtTheShoreEnd
 
-jr_019_7A33:
-    cp   $69                                      ; $7A33: $FE $69
-    jr   z, jr_019_7A64                           ; $7A35: $28 $2D
+    cp   ENTITY_MOVING_BLOCK_MOVER                ; $7A33: $FE $69
+    jr   z, .jr_019_7A64                          ; $7A35: $28 $2D
 
-    cp   $B0                                      ; $7A37: $FE $B0
-    jr   z, jr_019_7A64                           ; $7A39: $28 $29
+    cp   ENTITY_PINCER                            ; $7A37: $FE $B0
+    jr   z, .jr_019_7A64                          ; $7A39: $28 $29
 
-    cp   $6D                                      ; $7A3B: $FE $6D
+    cp   ENTITY_BOW_WOW                           ; $7A3B: $FE $6D
     jr   nz, label_019_7A74                       ; $7A3D: $20 $35
 
     ld   a, [wIsBowWowFollowingLink]              ; $7A3F: $FA $56 $DB
     cp   $01                                      ; $7A42: $FE $01
-    jr   nz, jr_019_7A4C                          ; $7A44: $20 $06
+    jr   nz, .jr_019_7A4C                         ; $7A44: $20 $06
 
     ldh  a, [hFrameCounter]                       ; $7A46: $F0 $E7
     and  $07                                      ; $7A48: $E6 $07
     jr   z, label_019_7A74                        ; $7A4A: $28 $28
 
-jr_019_7A4C:
+.jr_019_7A4C
+    ; increment $6 bytes at $D100 by hScratch0
     ld   e, $06                                   ; $7A4C: $1E $06
     ld   hl, $D100                                ; $7A4E: $21 $00 $D1
-
-jr_019_7A51:
+.loop_019_7A51
     ldh  a, [hScratch0]                           ; $7A51: $F0 $D7
     add  [hl]                                     ; $7A53: $86
     ld   [hl+], a                                 ; $7A54: $22
     dec  e                                        ; $7A55: $1D
-    jr   nz, jr_019_7A51                          ; $7A56: $20 $F9
+    jr   nz, .loop_019_7A51                       ; $7A56: $20 $F9
 
+    ; increment $6 bytes at $D110 by hScratch2
     ld   e, $06                                   ; $7A58: $1E $06
     ld   hl, $D110                                ; $7A5A: $21 $10 $D1
-
-jr_019_7A5D:
+.loop_019_7A5D
     ldh  a, [hScratch2]                           ; $7A5D: $F0 $D9
     add  [hl]                                     ; $7A5F: $86
     ld   [hl+], a                                 ; $7A60: $22
     dec  e                                        ; $7A61: $1D
-    jr   nz, jr_019_7A5D                          ; $7A62: $20 $F9
+    jr   nz, .loop_019_7A5D                       ; $7A62: $20 $F9
 
-jr_019_7A64:
+.jr_019_7A64
     ld   hl, wEntitiesPrivateState1Table          ; $7A64: $21 $B0 $C2
     add  hl, bc                                   ; $7A67: $09
     ldh  a, [hScratch0]                           ; $7A68: $F0 $D7
@@ -7718,7 +7719,7 @@ label_019_7A74:
 
 jr_019_7A8F:
     ldh  a, [hActiveEntityType]                   ; $7A8F: $F0 $EB
-    cp   $A7                                      ; $7A91: $FE $A7
+    cp   ENTITY_SMASHABLE_PILLAR                  ; $7A91: $FE $A7
     ret  z                                        ; $7A93: $C8
 
     ld   hl, wEntitiesStatusTable                 ; $7A94: $21 $80 $C2

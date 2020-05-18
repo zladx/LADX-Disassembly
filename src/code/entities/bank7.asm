@@ -5453,7 +5453,7 @@ SideViewPlatformVerticalEntityHandler::
     jr   nz, func_007_639E                        ; $6370: $20 $2C
 
     ldh  a, [hActiveEntityType]                   ; $6372: $F0 $EB
-    cp   $A4                                      ; $6374: $FE $A4
+    cp   ENTITY_SIDE_VIEW_PLATFORM_VERTICAL       ; $6374: $FE $A4
     jp   z, label_007_63FB                        ; $6376: $CA $FB $63
 
     ld   hl, wEntitiesPrivateState1Table          ; $6379: $21 $B0 $C2
@@ -9269,7 +9269,7 @@ jr_007_7D4E:
 
     inc  e                                        ; $7D5C: $1C
     ldh  a, [hActiveEntityType]                   ; $7D5D: $F0 $EB
-    cp   $B5                                      ; $7D5F: $FE $B5
+    cp   ENTITY_BEAR                              ; $7D5F: $FE $B5
     jr   z, jr_007_7D6F                           ; $7D61: $28 $0C
 
     push de                                       ; $7D63: $D5

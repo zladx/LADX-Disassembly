@@ -1374,9 +1374,15 @@ wDB6D: ds 1
 wIsThief:: ; DB6E
   ds 1
 
-wDB6F: ds 1
-wDB70: ds 1
-wDB71: ds 1
+wWreckingBallRoom: ; DB6F
+  ds 1
+
+wWreckingBallPosX: ; DB70
+  ds 1
+
+wWreckingBallPosY: ; DB71
+  ds 1
+
 wDB72: ds 1
 
 wIsMarinFollowingLink:: ; DB73

@@ -4884,11 +4884,11 @@ jr_007_602A:
     ret  nz                                       ; $6034: $C0
 
     ldh  a, [hMapRoom]                            ; $6035: $F0 $F6
-    ld   [wDB6F], a                               ; $6037: $EA $6F $DB
+    ld   [wWreckingBallRoom], a                   ; $6037: $EA $6F $DB
     ldh  a, [hActiveEntityPosX]                   ; $603A: $F0 $EE
-    ld   [wDB70], a                               ; $603C: $EA $70 $DB
+    ld   [wWreckingBallPosX], a                   ; $603C: $EA $70 $DB
     ldh  a, [hActiveEntityPosY]                   ; $603F: $F0 $EF
-    ld   [wDB71], a                               ; $6041: $EA $71 $DB
+    ld   [wWreckingBallPosY], a                   ; $6041: $EA $71 $DB
     ld   a, [wDialogState]                        ; $6044: $FA $9F $C1
     and  a                                        ; $6047: $A7
     ret  nz                                       ; $6048: $C0

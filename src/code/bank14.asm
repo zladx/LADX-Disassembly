@@ -1152,7 +1152,7 @@ func_014_5347::
 
 jr_014_5354:
     ldh  a, [hActiveEntityType]                   ; $5354: $F0 $EB
-    cp   ENTITY_A8                                ; $5356: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $5356: $FE $A8
     jr   z, jr_014_5360                           ; $5358: $28 $06
 
     call func_014_53A3                            ; $535A: $CD $A3 $53

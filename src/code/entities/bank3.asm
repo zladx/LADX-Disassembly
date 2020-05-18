@@ -1056,15 +1056,15 @@ EntityFallHandler::
 
 jr_003_4CEF:
     ldh  a, [hActiveEntityType]                   ; $4CEF: $F0 $EB
-    cp   $A8                                      ; $4CF1: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $4CF1: $FE $A8
     jr   nz, jr_003_4D04                          ; $4CF3: $20 $0F
 
     ld   a, $16                                   ; $4CF5: $3E $16
-    ld   [wDB6F], a                               ; $4CF7: $EA $6F $DB
+    ld   [wWreckingBallRoom], a                   ; $4CF7: $EA $6F $DB
     ld   a, $50                                   ; $4CFA: $3E $50
-    ld   [wDB70], a                               ; $4CFC: $EA $70 $DB
+    ld   [wWreckingBallPosX], a                   ; $4CFC: $EA $70 $DB
     ld   a, $27                                   ; $4CFF: $3E $27
-    ld   [wDB71], a                               ; $4D01: $EA $71 $DB
+    ld   [wWreckingBallPosY], a                   ; $4D01: $EA $71 $DB
 
 jr_003_4D04:
     jp   UnloadEntityAndReturn                    ; $4D04: $C3 $8D $3F
@@ -7870,7 +7870,7 @@ jr_003_7734:
 
 jr_003_7737:
     ldh  a, [hActiveEntityType]                   ; $7737: $F0 $EB
-    cp   ENTITY_A8                                ; $7739: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $7739: $FE $A8
     jr   z, jr_003_775A                           ; $773B: $28 $1D
 
     cp   ENTITY_BOOMERANG                         ; $773D: $FE $01
@@ -8498,7 +8498,7 @@ ApplyEntityPhysics::
     jr   nz, jr_003_7B0E                          ; $7AED: $20 $1F
 
     ldh  a, [hActiveEntityType]                   ; $7AEF: $F0 $EB
-    cp   ENTITY_A8                                ; $7AF1: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $7AF1: $FE $A8
     jr   z, jr_003_7AF9                           ; $7AF3: $28 $04
 
     cp   ENTITY_ENTITY_LIFTABLE_ROCK              ; $7AF5: $FE $05
@@ -8628,7 +8628,7 @@ jr_003_7B8B:
     ldh  a, [hActiveEntityType]                   ; $7B97: $F0 $EB
     jr   c, jr_003_7BA7                           ; $7B99: $38 $0C
 
-    cp   ENTITY_A8                                ; $7B9B: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $7B9B: $FE $A8
     jp   z, setCarryFlagAndReturn                 ; $7B9D: $CA $A7 $7C
 
     cp   ENTITY_BOMB                              ; $7BA0: $FE $02
@@ -8693,7 +8693,7 @@ label_003_7BE4:
     jr   z, jr_003_7C1A                           ; $7BF5: $28 $23
 
     ldh  a, [hActiveEntityType]                   ; $7BF7: $F0 $EB
-    cp   ENTITY_A8                                ; $7BF9: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $7BF9: $FE $A8
     jr   z, jr_003_7C75                           ; $7BFB: $28 $78
 
     ld   hl, wEntitiesUnknowTableJ                ; $7BFD: $21 $F0 $C4
@@ -8752,7 +8752,7 @@ jr_003_7C2B:
     jr   nz, setCarryFlagAndReturn                ; $7C41: $20 $64
 
     ldh  a, [hActiveEntityType]                   ; $7C43: $F0 $EB
-    cp   ENTITY_A8                                ; $7C45: $FE $A8
+    cp   ENTITY_WRECKING_BALL                     ; $7C45: $FE $A8
     jp   z, setCarryFlagAndReturn                 ; $7C47: $CA $A7 $7C
 
     cp   ENTITY_BOMB                              ; $7C4A: $FE $02

@@ -4344,7 +4344,7 @@ jr_019_5EAF:
     and  a                                        ; $5EB2: $A7
     jp   nz, GhostInHouseSequence                       ; $5EB3: $C2 $BF $5F
 
-    ld   a, [wDB7A]                               ; $5EB6: $FA $7A $DB
+    ld   a, [wGhostSeeksGrave]                    ; $5EB6: $FA $7A $DB
     and  a                                        ; $5EB9: $A7
     jp   z, label_019_5F5F                        ; $5EBA: $CA $5F $5F
 
@@ -4436,7 +4436,7 @@ GhostState2Handler::
 
     xor  a                                        ; $5F4A: $AF
     ld   [wIsGhostFollowingLink], a               ; $5F4B: $EA $79 $DB
-    ld   [wDB7A], a                               ; $5F4E: $EA $7A $DB
+    ld   [wGhostSeeksGrave], a                    ; $5F4E: $EA $7A $DB
     ld   [wC167], a                               ; $5F51: $EA $67 $C1
     ld   hl, $D9E3                                ; $5F54: $21 $E3 $D9
     set  6, [hl]                                  ; $5F57: $CB $F6
@@ -4466,7 +4466,7 @@ label_019_5F5F:
     ret  nc                                       ; $5F79: $D0
 
     inc  [hl]                                     ; $5F7A: $34
-    ld   a, $2D                                   ; $5F7B: $3E $2D
+    ld   a, JINGLE_GHOST_PRESENCE                 ; $5F7B: $3E $2D
     ldh  [hJingle], a                             ; $5F7D: $E0 $F2
     jp_open_dialog $213                           ; $5F7F
 
@@ -4500,16 +4500,14 @@ label_019_5F84:
     ld   hl, wEntitiesUnknownTableD               ; $5FA9: $21 $D0 $C2
     add  hl, bc                                   ; $5FAC: $09
     inc  [hl]                                     ; $5FAD: $34
-    ld   a, $2D                                   ; $5FAE: $3E $2D
+    ld   a, JINGLE_GHOST_PRESENCE                 ; $5FAE: $3E $2D
     ldh  [hJingle], a                             ; $5FB0: $E0 $F2
-    ld   a, [wDB7A]                               ; $5FB2: $FA $7A $DB
+    ld   a, [wGhostSeeksGrave]                    ; $5FB2: $FA $7A $DB
     and  a                                        ; $5FB5: $A7
     ld   a, $11                                   ; $5FB6: $3E $11
-    jr   z, jr_019_5FBC                           ; $5FB8: $28 $02
-
+    jr   z, .endIf                                ; $5FB8: $28 $02
     ld   a, $10                                   ; $5FBA: $3E $10
-
-jr_019_5FBC:
+.endIf
     jp   OpenDialogInTable2                       ; $5FBC: $C3 $7C $23
 
 GhostInHouseSequence:
@@ -4664,9 +4662,9 @@ jr_019_608D:
 
 func_019_60A5::
     ld   a, $01                                   ; $60A5: $3E $01
-    ld   [wDB7A], a                               ; $60A7: $EA $7A $DB
+    ld   [wGhostSeeksGrave], a                    ; $60A7: $EA $7A $DB
     call func_019_7F0E                            ; $60AA: $CD $0E $7F
-    call ClearEntityStatus_19                            ; $60AD: $CD $61 $7E
+    call ClearEntityStatus_19                     ; $60AD: $CD $61 $7E
     jp   ApplyMapFadeOutTransition                ; $60B0: $C3 $7D $0C
 
     nop

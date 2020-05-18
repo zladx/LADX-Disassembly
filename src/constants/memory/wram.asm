@@ -1398,7 +1398,9 @@ wMaxArrows:: ; DB78
 wIsGhostFollowingLink:: ; DB79
   ds 1
 
-wDB7A:: ; DB7A
+wGhostSeeksGrave:: ; DB7A
+  ; Zero: The ghost wants to go to House by the Bay
+  ; Non-zero: ... to his grave in Kohilint Prairie
   ds 1
 
 wIsRoosterFollowingLink:: ; DB7B

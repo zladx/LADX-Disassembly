@@ -4930,7 +4930,7 @@ label_004_6D0F:
     jr   nc, jr_004_6D5C                          ; $6D31: $30 $29
 
     call func_004_6D7A                            ; $6D33: $CD $7A $6D
-    ld   a, [$DBC7]                               ; $6D36: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $6D36: $FA $C7 $DB
     and  a                                        ; $6D39: $A7
     jr   nz, jr_004_6D5C                          ; $6D3A: $20 $20
 
@@ -6755,7 +6755,7 @@ jr_004_7845:
     ld   c, $0B                                   ; $7849: $0E $0B
 
 jr_004_784B:
-    ld   a, [$DB7D]                               ; $784B: $FA $7D $DB
+    ld   a, [wBoomerangTradedItem]                ; $784B: $FA $7D $DB
     cp   $0B                                      ; $784E: $FE $0B
     jr   z, jr_004_7857                           ; $7850: $28 $05
 
@@ -6776,7 +6776,7 @@ jr_004_7859:
     ld   c, $0B                                   ; $7862: $0E $0B
 
 jr_004_7864:
-    ld   a, [$DB7D]                               ; $7864: $FA $7D $DB
+    ld   a, [wBoomerangTradedItem]                ; $7864: $FA $7D $DB
     cp   $05                                      ; $7867: $FE $05
     jr   z, jr_004_7870                           ; $7869: $28 $05
 

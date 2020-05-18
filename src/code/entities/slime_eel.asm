@@ -1015,7 +1015,7 @@ func_005_7425::
     and  a                                        ; $7437: $A7
     jr   z, jr_005_7478                           ; $7438: $28 $3E
 
-    ld   a, [$DBC7]                               ; $743A: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $743A: $FA $C7 $DB
     and  a                                        ; $743D: $A7
     jr   nz, jr_005_7478                          ; $743E: $20 $38
 

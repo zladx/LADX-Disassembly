@@ -308,7 +308,7 @@ jr_006_440C:
     ld   a, $10                                   ; $440E: $3E $10
     ldh  [$FFA3], a                               ; $4410: $E0 $A3
     ld   a, $20                                   ; $4412: $3E $20
-    ld   [$DBC7], a                               ; $4414: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $4414: $EA $C7 $DB
     ld   a, $02                                   ; $4417: $3E $02
     ld   [$C146], a                               ; $4419: $EA $46 $C1
     ld   a, $02                                   ; $441C: $3E $02

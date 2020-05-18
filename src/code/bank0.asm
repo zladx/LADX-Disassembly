@@ -1419,13 +1419,13 @@ WorldDefaultHandler::
 
 .normalFlow
 
-    ; If $DBC7 > 0, decrement it
-    ld   hl, $DBC7
+    ; If wInvincibilityCounter > 0, decrement it
+    ld   hl, wInvincibilityCounter
     ld   a, [hl]
     and  a
-    jr   z, .DBC7End
+    jr   z, .wInvincibilityAtZero
     dec  [hl]
-.DBC7End
+.wInvincibilityAtZero
 
     ; Copy Link's position into Link's final position
     ldh  a, [hLinkPositionX]
@@ -1649,7 +1649,7 @@ InitGotItemSequence::
     ld   a, $10
     ld   [$C3CC], a
     xor  a
-    ld   [$DBC7], a
+    ld   [wInvincibilityCounter], a
     ldh  [$FF9C], a
     ld   [$DDD6], a
     ld   [$DDD7], a

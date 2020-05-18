@@ -18,7 +18,7 @@ label_40D6::
     ld   [wMapEntrancePositionY], a
     call LoadSavedFile
     ld   a, $80
-    ld   [$DBC7], a
+    ld   [wInvincibilityCounter], a
     ret
 
 jr_001_40F9::

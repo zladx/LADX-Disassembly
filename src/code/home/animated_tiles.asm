@@ -425,14 +425,14 @@ DrawLinkSpriteAndReturn::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_1D42
-    ld   a, [$DBC7]
+    ld   a, [wInvincibilityCounter]
     and  $04
     jr   z, label_1D49
     ld   a, $04
     jr   label_1D49
 
 label_1D42::
-    ld   a, [$DBC7]
+    ld   a, [wInvincibilityCounter]
     rla
     rla
     and  $10
@@ -463,7 +463,7 @@ label_1D49::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_1DA1
-    ld   a, [$DBC7]
+    ld   a, [wInvincibilityCounter]
     and  $04
     jr   nz, label_1DA1
     ldh  a, [hLinkAnimationState]
@@ -512,7 +512,7 @@ label_1DA1::
     ldh  a, [hIsGBC]
     and  a
     jr   z, label_1DE7
-    ld   a, [$DBC7]
+    ld   a, [wInvincibilityCounter]
     and  $04
     jr   nz, label_1DE7
     ldh  a, [hLinkAnimationState]

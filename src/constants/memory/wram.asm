@@ -1025,7 +1025,11 @@ wBossDefeated:: ; D46C
   ds 1
 
 ; Unlabeled
-ds $5
+ds $4
+
+wGuardianAcornCounter:: ; D471
+  ; Increases on each kill. Reset to 0 when hit, or when it hits 12 a guardian acorn is spawned.
+  ds 1
 
 wMazeSignpostGoal:: ; D472
   ; Signpost maze: current goal
@@ -1401,8 +1405,16 @@ wIsRoosterFollowingLink:: ; DB7B
   ds 1
 
 ; Unlabeled
-wDB7C equ $DB7C
-  ds $13
+  ds 1
+
+wBoomerangTradedItem:: ; DB7D
+  ; Stores the inventory item that you traded for the boomerang.
+  ; Initially this value is zero, indicating no trade. But after you traded the boomerang
+  ; back it will be INVENTORY_BOOMERANG
+  ds 1
+
+; Unlabeled
+  ds $11
 
 wAddRupeeBufferHigh:: ; DB8F
   ; Higher digits of the amount of rupees to be added to your wallet (high digits)
@@ -1509,7 +1521,13 @@ wKillCount2:: ; DBB5
 
 ; Unlabeled
 wDBB6 equ $DBB6
-  ds $13
+  ds $11
+
+wInvincibilityCounter:: ; DBC7
+  ds 1
+
+; Unlabeled
+  ds 1
 
 wTorchesCount:: ; DBC9
   ds 1

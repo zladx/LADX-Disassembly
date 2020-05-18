@@ -2352,14 +2352,14 @@ SpawnEnemyDrop::
     and  a                                        ; $55EA: $A7
     jp   nz, .dropEntity                          ; $55EB: $C2 $70 $56
 
-    ld   a, [$D471]                               ; $55EE: $FA $71 $D4
+    ld   a, [wGuardianAcornCounter]               ; $55EE: $FA $71 $D4
     inc  a                                        ; $55F1: $3C
-    ld   [$D471], a                               ; $55F2: $EA $71 $D4
+    ld   [wGuardianAcornCounter], a               ; $55F2: $EA $71 $D4
     cp   $0C                                      ; $55F5: $FE $0C
     jr   c, .jr_003_560F                          ; $55F7: $38 $16
 
     xor  a                                        ; $55F9: $AF
-    ld   [$D471], a                               ; $55FA: $EA $71 $D4
+    ld   [wGuardianAcornCounter], a               ; $55FA: $EA $71 $D4
     ld   a, [wInBossBattle]                       ; $55FD: $FA $BE $C1
     ld   hl, wActivePowerUp                       ; $5600: $21 $7C $D4
     or   [hl]                                     ; $5603: $B6
@@ -2367,7 +2367,7 @@ SpawnEnemyDrop::
     or   [hl]                                     ; $5607: $B6
     jr   nz, .jr_003_560F                         ; $5608: $20 $05
 
-    ld   a, $34                                   ; $560A: $3E $34
+    ld   a, ENTITY_GUARDIAN_ACORN                 ; $560A: $3E $34
     jp   .dropEntity                              ; $560C: $C3 $70 $56
 
 .jr_003_560F
@@ -3366,8 +3366,8 @@ SwordState3Handler::
     jr   nz, jr_003_5C37                          ; $5C22: $20 $13
 
     ld   [wC167], a                               ; $5C24: $EA $67 $C1
-    ld   d, $01                                   ; $5C27: $16 $01
-    call GiveInventoryItem                            ; $5C29: $CD $72 $64
+    ld   d, INVENTORY_SWORD                       ; $5C27: $16 $01
+    call GiveInventoryItem                        ; $5C29: $CD $72 $64
     ld   a, $01                                   ; $5C2C: $3E $01
     ld   [wSwordLevel], a                         ; $5C2E: $EA $4E $DB
     call func_003_512A                            ; $5C31: $CD $2A $51
@@ -3386,7 +3386,7 @@ jr_003_5C37:
 jr_003_5C46:
     ret                                           ; $5C46: $C9
 
-Data_003_5C47::
+HookshotSpriteData::
     db   $8A, $14
 
 label_003_5C49:
@@ -3394,7 +3394,7 @@ label_003_5C49:
     and  $10                                      ; $5C4B: $E6 $10
     jp   nz, UnloadEntityAndReturn                ; $5C4D: $C2 $8D $3F
 
-    ld   de, Data_003_5C47                        ; $5C50: $11 $47 $5C
+    ld   de, HookshotSpriteData                   ; $5C50: $11 $47 $5C
     call RenderActiveEntitySprite                 ; $5C53: $CD $77 $3C
     call GetEntityTransitionCountdown             ; $5C56: $CD $05 $0C
     jp   z, label_003_60AA                        ; $5C59: $CA $AA $60
@@ -3410,8 +3410,8 @@ jr_003_5C67:
     dec  a                                        ; $5C67: $3D
     jr   nz, jr_003_5C75                          ; $5C68: $20 $0B
 
-    ld   d, $06                                   ; $5C6A: $16 $06
-    call GiveInventoryItem                            ; $5C6C: $CD $72 $64
+    ld   d, INVENTORY_HOOKSHOT                    ; $5C6A: $16 $06
+    call GiveInventoryItem                        ; $5C6C: $CD $72 $64
     call func_003_512A                            ; $5C6F: $CD $2A $51
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
@@ -3577,8 +3577,8 @@ jr_003_5D6C:
 
     ld   a, $0A                                   ; $5D6F: $3E $0A
     ldh  [hFFA5], a                               ; $5D71: $E0 $A5
-    ld   d, $0C                                   ; $5D73: $16 $0C
-    call GiveInventoryItem                            ; $5D75: $CD $72 $64
+    ld   d, INVENTORY_MAGIC_POWDER                ; $5D73: $16 $0C
+    call GiveInventoryItem                        ; $5D75: $CD $72 $64
     ld   a, $01                                   ; $5D78: $3E $01
     ld   [wHasToadstool], a                       ; $5D7A: $EA $4B $DB
     jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F
@@ -6111,7 +6111,7 @@ jr_003_6D5D:
     ret                                           ; $6D72: $C9
 
 jr_003_6D73:
-    ld   a, [$DBC7]                               ; $6D73: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $6D73: $FA $C7 $DB
     ld   hl, $C1C6                                ; $6D76: $21 $C6 $C1
     or   [hl]                                     ; $6D79: $B6
     ld   hl, wLinkPlayingOcarinaCountdown         ; $6D7A: $21 $66 $C1
@@ -6159,9 +6159,9 @@ jr_003_6D73:
     add  e                                        ; $6DAE: $83
     ld   [wSubtractHealthBuffer], a               ; $6DAF: $EA $94 $DB
     ld   a, $50                                   ; $6DB2: $3E $50
-    ld   [$DBC7], a                               ; $6DB4: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $6DB4: $EA $C7 $DB
     xor  a                                        ; $6DB7: $AF
-    ld   [$D471], a                               ; $6DB8: $EA $71 $D4
+    ld   [wGuardianAcornCounter], a               ; $6DB8: $EA $71 $D4
     ld   a, [wActivePowerUp]                      ; $6DBB: $FA $7C $D4
     and  a                                        ; $6DBE: $A7
     jr   z, func_003_6DDF                         ; $6DBF: $28 $1E
@@ -7486,7 +7486,7 @@ jr_003_752D:
     cp   e                                        ; $7535: $BB
     jr   nc, jr_003_7570                          ; $7536: $30 $38
 
-    ld   a, [$DBC7]                               ; $7538: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $7538: $FA $C7 $DB
     and  a                                        ; $753B: $A7
     jr   nz, jr_003_7570                          ; $753C: $20 $32
 

@@ -1148,7 +1148,7 @@ func_015_499C::
     ld   a, $28                                   ; $49AB: $3E $28
     ld   [$C13E], a                               ; $49AD: $EA $3E $C1
     ld   a, $40                                   ; $49B0: $3E $40
-    ld   [$DBC7], a                               ; $49B2: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $49B2: $EA $C7 $DB
     ld   a, [wSubtractHealthBuffer]               ; $49B5: $FA $94 $DB
     add  $08                                      ; $49B8: $C6 $08
     ld   [wSubtractHealthBuffer], a               ; $49BA: $EA $94 $DB
@@ -1591,12 +1591,12 @@ label_015_4DB5:
     call func_015_7B0D                            ; $4DC8: $CD $0D $7B
     call DecrementEntityIgnoreHitsCountdown       ; $4DCB: $CD $56 $0C
     call label_3B70                               ; $4DCE: $CD $70 $3B
-    ld   a, [$DBC7]                               ; $4DD1: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $4DD1: $FA $C7 $DB
     push af                                       ; $4DD4: $F5
     call CheckLinkCollisionWithEnemy_trampoline   ; $4DD5: $CD $5A $3B
     pop  af                                       ; $4DD8: $F1
     ld   e, a                                     ; $4DD9: $5F
-    ld   a, [$DBC7]                               ; $4DDA: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $4DDA: $FA $C7 $DB
     cp   e                                        ; $4DDD: $BB
     jr   z, jr_015_4DF2                           ; $4DDE: $28 $12
 
@@ -1604,7 +1604,7 @@ label_015_4DB5:
     jr   c, jr_015_4DF2                           ; $4DE2: $38 $0E
 
     ld   a, $1F                                   ; $4DE4: $3E $1F
-    ld   [$DBC7], a                               ; $4DE6: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $4DE6: $EA $C7 $DB
     ld   a, $30                                   ; $4DE9: $3E $30
     call GetVectorTowardsLink_trampoline          ; $4DEB: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $4DEE: $F0 $D7
@@ -6186,7 +6186,7 @@ func_015_72CF::
     jr   nc, jr_015_731D                          ; $72F2: $30 $29
 
     ld   hl, $C146                                ; $72F4: $21 $46 $C1
-    ld   a, [$DBC7]                               ; $72F7: $FA $C7 $DB
+    ld   a, [wInvincibilityCounter]               ; $72F7: $FA $C7 $DB
     or   [hl]                                     ; $72FA: $B6
     jr   nz, jr_015_731D                          ; $72FB: $20 $20
 
@@ -6201,7 +6201,7 @@ func_015_72CF::
     ld   a, $10                                   ; $730F: $3E $10
     ld   [$C13E], a                               ; $7311: $EA $3E $C1
     ld   a, $30                                   ; $7314: $3E $30
-    ld   [$DBC7], a                               ; $7316: $EA $C7 $DB
+    ld   [wInvincibilityCounter], a               ; $7316: $EA $C7 $DB
     ld   a, $03                                   ; $7319: $3E $03
     ldh  [hWaveSfx], a                            ; $731B: $E0 $F3
 

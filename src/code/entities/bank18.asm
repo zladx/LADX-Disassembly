@@ -4166,7 +4166,7 @@ func_018_5E5D::
     and  a                                        ; $5E63: $A7
     jr   nz, jr_018_5E79                          ; $5E64: $20 $13
 
-    ld   a, $0A                                   ; $5E66: $3E $0A
+    ld   a, GAMEPLAY_WF_MURAL                     ; $5E66: $3E $0A
     call func_018_4CB0                            ; $5E68: $CD $B0 $4C
     call GetEntityTransitionCountdown             ; $5E6B: $CD $05 $0C
     ld   [hl], $20                                ; $5E6E: $36 $20

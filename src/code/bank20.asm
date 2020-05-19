@@ -4,45 +4,7 @@
 
 ; Contains pointers to wRequests data.
 ; (The requests themselves load data in bank 8.)
-BGMapToLoadAdjustementTable::
-    dw   $0000  ; disabled
-    dw   BGCopyRequest01
-    dw   BGCopyRequest02
-    dw   BGCopyRequest03
-    dw   BGCopyRequest04
-    dw   BGCopyRequest05
-    dw   BGCopyRequest06
-    dw   $D651
-    dw   BGCopyRequest08
-    dw   BGCopyRequest09
-    dw   BGCopyRequest0A
-    dw   BGCopyRequest0B
-    dw   BGCopyRequest0C
-    dw   BGCopyRequest0D
-    dw   BGCopyRequest0E
-    dw   BGCopyRequest0F
-    dw   BGCopyRequest10
-    dw   BGCopyRequest11
-    dw   BGCopyRequest12
-    dw   BGCopyRequest13
-    dw   BGCopyRequest14
-    dw   BGCopyRequest15
-    dw   BGCopyRequest16
-    dw   BGCopyRequest17
-    dw   BGCopyRequest18
-    dw   BGCopyRequest19
-    dw   BGCopyRequest1A
-    dw   BGCopyRequest1B
-    dw   BGCopyRequest1C
-    dw   BGCopyRequest1D
-    dw   BGCopyRequest1E
-    dw   BGCopyRequest1F
-    dw   BGCopyRequest20
-    dw   BGCopyRequest21
-    dw   BGCopyRequest22
-    dw   BGCopyRequest23
-    dw   BGCopyRequest24
-    dw   BGCopyRequest25
+include "data/backgrounds/background_tile_commands_pointers.asm"
 
 ; Retrieve the address of a wRequest for loading a given background.
 ; Input:
@@ -50,7 +12,7 @@ BGMapToLoadAdjustementTable::
 ; Returns:
 ;   de   an address to a wRequest for loading BG data
 GetBGCopyRequest::
-    ld   hl, BGMapToLoadAdjustementTable          ; $4577: $21 $2B $45
+    ld   hl, BackgroundTileCommandsPointersTable  ; $4577: $21 $2B $45
     ld   b, $00                                   ; $457A: $06 $00
     ld   a, [wBGMapToLoad]                        ; $457C: $FA $FF $D6
     sla  a                                        ; $457F: $CB $27

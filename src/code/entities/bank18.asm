@@ -2815,7 +2815,7 @@ WalrusEntityHandler::
     and  a                                        ; $5506: $A7
     jp   nz, label_018_54BD                       ; $5507: $C2 $BD $54
 
-    ld   a, [$D8FD]                               ; $550A: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]                               ; $550A: $FA $FD $D8
     and  $20                                      ; $550D: $E6 $20
     jp   nz, label_018_589A                       ; $550F: $C2 $9A $58
 
@@ -4504,7 +4504,7 @@ jr_018_60A3:
 
     xor  a                                        ; $60B8: $AF
     ld   [wC167], a                               ; $60B9: $EA $67 $C1
-    ld   hl, $D808                                ; $60BC: $21 $08 $D8
+    ld   hl, wOverworldRoomStatus + $08                                ; $60BC: $21 $08 $D8
     set  4, [hl]                                  ; $60BF: $CB $E6
     ld   a, [hl]                                  ; $60C1: $7E
     ldh  [hRoomStatus], a                         ; $60C2: $E0 $F8
@@ -4618,7 +4618,7 @@ MarinAtTheShoreEntityHandler::
     and  a                                        ; $6194: $A7
     ret  nz                                       ; $6195: $C0
 
-    ld   a, [$D8FD]                               ; $6196: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]                               ; $6196: $FA $FD $D8
     and  $20                                      ; $6199: $E6 $20
     jp   nz, func_018_7F08                        ; $619B: $C2 $08 $7F
 
@@ -7236,7 +7236,7 @@ jr_018_7363:
     and  a                                        ; $7371: $A7
     jr   nz, jr_018_737D                          ; $7372: $20 $09
 
-    ld   hl, $D810                                ; $7374: $21 $10 $D8
+    ld   hl, wOverworldRoomStatus + $10                                ; $7374: $21 $10 $D8
     set  5, [hl]                                  ; $7377: $CB $EE
     ld   a, $02                                   ; $7379: $3E $02
     ldh  [hJingle], a                             ; $737B: $E0 $F2

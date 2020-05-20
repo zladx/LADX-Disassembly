@@ -1773,7 +1773,7 @@ func_007_4C16::
     ret  nc                                       ; $4C19: $D0
 
     ld   e, $D3                                   ; $4C1A: $1E $D3
-    ld   a, [$D8FD]                               ; $4C1C: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]                               ; $4C1C: $FA $FD $D8
     and  $30                                      ; $4C1F: $E6 $30
     jr   nz, jr_007_4C45                          ; $4C21: $20 $22
 
@@ -2264,7 +2264,7 @@ func_007_4F1F::
 
     ld   a, $02                                   ; $4F2E: $3E $02
     ld   [$DB7F], a                               ; $4F30: $EA $7F $DB
-    ld   hl, $D887                                ; $4F33: $21 $87 $D8
+    ld   hl, wOverworldRoomStatus + $87                                ; $4F33: $21 $87 $D8
     set  6, [hl]                                  ; $4F36: $CB $F6
     call GetEntityTransitionCountdown             ; $4F38: $CD $05 $0C
     ld   [hl], $A0                                ; $4F3B: $36 $A0
@@ -3165,7 +3165,7 @@ TradingItemEntityHandler::
     jr   nz, jr_007_552E                          ; $5526: $20 $06
 
 jr_007_5528:
-    ld   a, [$D87B]                               ; $5528: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + $7B]                               ; $5528: $FA $7B $D8
     and  $10                                      ; $552B: $E6 $10
     ret  z                                        ; $552D: $C8
 
@@ -3879,9 +3879,9 @@ jr_007_59A1:
 
     ld   a, $02                                   ; $59A3: $3E $02
     ldh  [hJingle], a                             ; $59A5: $E0 $F2
-    ld   a, [$D87B]                               ; $59A7: $FA $7B $D8
+    ld   a, [wOverworldRoomStatus + $7B]                               ; $59A7: $FA $7B $D8
     or   $10                                      ; $59AA: $F6 $10
-    ld   [$D87B], a                               ; $59AC: $EA $7B $D8
+    ld   [wOverworldRoomStatus + $7B], a                               ; $59AC: $EA $7B $D8
     ld   a, $01                                   ; $59AF: $3E $01
     ld   [$DB7F], a                               ; $59B1: $EA $7F $DB
     ld   a, $63                                   ; $59B4: $3E $63

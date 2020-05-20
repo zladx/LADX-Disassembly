@@ -40,7 +40,7 @@ MarinEntityHandler::
     jr   jr_005_4E96                              ; $4E85: $18 $0F
 
 jr_005_4E87:
-    ld   a, [$D808]                               ; $4E87: $FA $08 $D8
+    ld   a, [wOverworldRoomStatus + $08]                               ; $4E87: $FA $08 $D8
     and  $10                                      ; $4E8A: $E6 $10
     jr   nz, jr_005_4E96                          ; $4E8C: $20 $08
 
@@ -190,11 +190,11 @@ jr_005_4F6F:
     call func_005_5506                            ; $4F6F: $CD $06 $55
     ret  nc                                       ; $4F72: $D0
 
-    ld   a, [$D808]                               ; $4F73: $FA $08 $D8
+    ld   a, [wOverworldRoomStatus + $08]                               ; $4F73: $FA $08 $D8
     and  $10                                      ; $4F76: $E6 $10
     jr   z, jr_005_4FA7                           ; $4F78: $28 $2D
 
-    ld   hl, $D892                                ; $4F7A: $21 $92 $D8
+    ld   hl, wOverworldRoomStatus + $92                                ; $4F7A: $21 $92 $D8
     ld   a, [hl]                                  ; $4F7D: $7E
     and  $40                                      ; $4F7E: $E6 $40
     jr   nz, jr_005_4F89                          ; $4F80: $20 $07
@@ -605,7 +605,7 @@ func_005_51CE::
     cp   TRADING_ITEM_PINEAPPLE                   ; $51D1: $FE $07
     jr   c, jr_005_51FB                           ; $51D3: $38 $26
 
-    ld   a, [$D8FD]                               ; $51D5: $FA $FD $D8
+    ld   a, [wOverworldRoomStatus + $FD]                               ; $51D5: $FA $FD $D8
     and  $30                                      ; $51D8: $E6 $30
     jp   nz, func_005_7B4B                        ; $51DA: $C2 $4B $7B
 

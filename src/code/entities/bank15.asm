@@ -2067,7 +2067,7 @@ func_015_50C2::
 
     ld   a, MUSIC_FINAL_BOSS_DIALOG               ; $50C7: $3E $5D
     ld   [wMusicTrackToPlay], a                   ; $50C9: $EA $68 $D3
-    ld   hl, $DA74                                ; $50CC: $21 $74 $DA
+    ld   hl, wIndoorBRoomStatus + $74                                ; $50CC: $21 $74 $DA
     set  6, [hl]                                  ; $50CF: $CB $F6
     call_open_dialog $0F5                         ; $50D1
     call GetEntityTransitionCountdown             ; $50D6: $CD $05 $0C

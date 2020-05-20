@@ -1851,7 +1851,7 @@ label_019_4CFF:
     ret                                           ; $4D19: $C9
 
 jr_019_4D1A:
-    ld   hl, $D806                                ; $4D1A: $21 $06 $D8
+    ld   hl, wOverworldRoomStatus + $06                                ; $4D1A: $21 $06 $D8
     set  4, [hl]                                  ; $4D1D: $CB $E6
     ld   a, [hl]                                  ; $4D1F: $7E
     ldh  [hRoomStatus], a                         ; $4D20: $E0 $F8
@@ -4438,7 +4438,7 @@ GhostState2Handler::
     ld   [wIsGhostFollowingLink], a               ; $5F4B: $EA $79 $DB
     ld   [wGhostSeeksGrave], a                    ; $5F4E: $EA $7A $DB
     ld   [wC167], a                               ; $5F51: $EA $67 $C1
-    ld   hl, $D9E3                                ; $5F54: $21 $E3 $D9
+    ld   hl, wIndoorARoomStatus + $E3                                ; $5F54: $21 $E3 $D9
     set  6, [hl]                                  ; $5F57: $CB $F6
     jp   ClearEntityStatus_19                            ; $5F59: $C3 $61 $7E
 
@@ -6087,7 +6087,7 @@ BananasSchuleState0Handler::
     jr   nz, jr_019_6D63                          ; $6D47: $20 $1A
 
     ld   e, $CC                                   ; $6D49: $1E $CC
-    ld   a, [$DAFE]                               ; $6D4B: $FA $FE $DA
+    ld   a, [wIndoorBRoomStatus + $FE]                               ; $6D4B: $FA $FE $DA
     and  $20                                      ; $6D4E: $E6 $20
     jr   nz, jr_019_6D63                          ; $6D50: $20 $11
 
@@ -6782,7 +6782,7 @@ label_019_72BF:
     ret                                           ; $72C8: $C9
 
 jr_019_72C9:
-    ld   hl, $DAE9                                ; $72C9: $21 $E9 $DA
+    ld   hl, wIndoorBRoomStatus + $E9                                ; $72C9: $21 $E9 $DA
     cp   $05                                      ; $72CC: $FE $05
     jr   nz, jr_019_72E0                          ; $72CE: $20 $10
 
@@ -7250,9 +7250,9 @@ jr_019_76D6:
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $76E1: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $76E3: $EA $68 $D3
     call_open_dialog $09F                         ; $76E6
-    ld   a, [$DAE9]                               ; $76EB: $FA $E9 $DA
+    ld   a, [wIndoorBRoomStatus + $E9]                               ; $76EB: $FA $E9 $DA
     or   $10                                      ; $76EE: $F6 $10
-    ld   [$DAE9], a                               ; $76F0: $EA $E9 $DA
+    ld   [wIndoorBRoomStatus + $E9], a                               ; $76F0: $EA $E9 $DA
     ldh  [hRoomStatus], a                         ; $76F3: $E0 $F8
     ld   a, $02                                   ; $76F5: $3E $02
     ld   [wSwordLevel], a                         ; $76F7: $EA $4E $DB
@@ -7413,7 +7413,7 @@ jr_019_7898:
     ld   a, $01                                   ; $78A9: $3E $01
     ldh  [hWaveSfx], a                            ; $78AB: $E0 $F3
     call ClearEntityStatus_19                            ; $78AD: $CD $61 $7E
-    ld   hl, $DAE9                                ; $78B0: $21 $E9 $DA
+    ld   hl, wIndoorBRoomStatus + $E9                                ; $78B0: $21 $E9 $DA
     ld   a, [wSeashellsCount]                     ; $78B3: $FA $0F $DB
 
 jr_019_78B6:

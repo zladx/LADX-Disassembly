@@ -1130,7 +1130,7 @@ LoadRoomTiles::
     ld   a, e
     cp   $23
     jr   nz, .label_DCE
-    ld   a, [$D8C9]
+    ld   a, [wOverworldRoomStatus + $C9]
     and  $20
     jr   z, .label_DCE
     inc  e
@@ -1139,7 +1139,7 @@ LoadRoomTiles::
     ld   a, e
     cp   $21
     jr   nz, .label_DDB
-    ld   a, [$D8FD]
+    ld   a, [wOverworldRoomStatus + $FD]
     and  $20
     jr   z, .label_DDB
     inc  e
@@ -5656,7 +5656,7 @@ LoadRoom::
     ldh  a, [hMapRoom]
     cp   $0E
     jr   nz, .endEaglesTowerAlt
-    ld   a, [$D80E]
+    ld   a, [wOverworldRoomStatus + $0E]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld0EAlt ; Eagle's Tower open
@@ -5665,7 +5665,7 @@ LoadRoom::
 
     cp   $8C
     jr   nz, .endSouthFaceShrineAlt
-    ld   a, [$D88C]
+    ld   a, [wOverworldRoomStatus + $8C]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld8CAlt ; South Face Shrine open
@@ -5674,7 +5674,7 @@ LoadRoom::
 
     cp   $79
     jr   nz, .endUpperTalTalHeightsAlt
-    ld   a, [$D879]
+    ld   a, [wOverworldRoomStatus + $79]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld79Alt ; Kanalet Castle open
@@ -5683,7 +5683,7 @@ LoadRoom::
 
     cp   $06
     jr   nz, .endWindfishsEggAlt
-    ld   a, [$D806]
+    ld   a, [wOverworldRoomStatus + $06]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld06Alt ; Windfish's Egg open
@@ -5692,7 +5692,7 @@ LoadRoom::
 
     cp   $1B
     jr   nz, .endTalTalHeightsAlt
-    ld   a, [$D82B]
+    ld   a, [wOverworldRoomStatus + $2B]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld1BAlt ; Angler's Tunnel upper water dry
@@ -5701,7 +5701,7 @@ LoadRoom::
 
     cp   $2B
     jr   nz, .altRoomsEnd
-    ld   a, [$D82B]
+    ld   a, [wOverworldRoomStatus + $2B]
     and  ROOM_STATUS_CHANGED
     jr   z, .altRoomsEnd
     ld   bc, Overworld2BAlt ; Angler's Tunnel open
@@ -6760,7 +6760,7 @@ LoadObject_OpenDoorTop::
 ; Set hRoomStatus depending on the map and room
 label_36C4::
     push af
-    ld   hl, $D900
+    ld   hl, wIndoorARoomStatus
     ldh  a, [hMapRoom]
     ld   e, a
     ld   d, $00

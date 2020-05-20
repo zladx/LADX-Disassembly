@@ -276,16 +276,16 @@ EntityInitHandler::
     cp   $84                                      ; $48D7: $FE $84
     jr   z, .jr_003_48E2                          ; $48D9: $28 $07
 
-    ld   a, [$D984]                               ; $48DB: $FA $84 $D9
+    ld   a, [wIndoorARoomStatus + $84]                               ; $48DB: $FA $84 $D9
     and  $30                                      ; $48DE: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E0: $28 $CB
 
 .jr_003_48E2
-    ld   a, [$D992]                               ; $48E2: $FA $92 $D9
+    ld   a, [wIndoorARoomStatus + $92]                               ; $48E2: $FA $92 $D9
     and  $30                                      ; $48E5: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48E7: $28 $C4
 
-    ld   a, [$D995]                               ; $48E9: $FA $95 $D9
+    ld   a, [wIndoorARoomStatus + $95]                               ; $48E9: $FA $95 $D9
     and  $30                                      ; $48EC: $E6 $30
     jr   z, MasterStalfosDefeated                 ; $48EE: $28 $BD
 .masterStalfosEnd
@@ -1444,6 +1444,7 @@ EntityInitKeyDropPoint::
     cp   $F8                                      ; In the Yarna Desert quicksand pit
     jr   nz, jr_003_4F44                          ; $4F31: $20 $11
 
+    ; check if the angler key has dropped, and not dropped down the hole yet
     ldh  a, [hRoomStatus]                         ; $4F33: $F0 $F8
     bit  4, a                                     ; $4F35: $CB $67
     jp   nz, UnloadEntityAndReturn                ; $4F37: $C2 $8D $3F
@@ -1455,6 +1456,7 @@ EntityInitKeyDropPoint::
     jp   SetEntitySpriteVariant                   ; $4F41: $C3 $0C $3B
 
 jr_003_4F44:
+    ; Handle the sprite change for the bird key
     cp   $7A                                      ; $4F44: $FE $7A
     jr   nz, jr_003_4F54                          ; $4F46: $20 $0C
 
@@ -1466,10 +1468,12 @@ jr_003_4F44:
     jp   SetEntitySpriteVariant                   ; $4F51: $C3 $0C $3B
 
 jr_003_4F54:
+    ; handle the key in the sidescroll room in dungeon 4 where
+    ; the key drops in the hole down into the sidescrolling room with water
     cp   $7C                                      ; $4F54: $FE $7C
     jr   nz, jr_003_4F67                          ; $4F56: $20 $0F
 
-    ld   a, [$D969]                               ; $4F58: $FA $69 $D9
+    ld   a, [wIndoorARoomStatus + $69]            ; $4F58: $FA $69 $D9
     and  $10                                      ; $4F5B: $E6 $10
     jp   z, UnloadEntityAndReturn                 ; $4F5D: $CA $8D $3F
 
@@ -3009,7 +3013,7 @@ HeartContainerEntityHandler::
 
     ; Start of when item is picked up
     dec  a                                        ; $59E8: $3D
-    jr   nz, func_003_5A17                        ; $59E9: $20 $2C
+    jr   nz, HoldEntityAboveLink                  ; $59E9: $20 $2C
 
     ld   a, MUSIC_BOSS_DEFEATED                   ; $59EB: $3E $18
     ld   [wMusicTrackToPlay], a                   ; $59ED: $EA $68 $D3
@@ -3053,7 +3057,7 @@ HeartContainerEntityHandler::
     ; Finished setting status bits for rooms, delete this
     jp   UnloadEntityAndReturn
 
-func_003_5A17::
+HoldEntityAboveLink::
     ldh  a, [hLinkPositionX]                      ; $5A17: $F0 $98
     ld   hl, wEntitiesPosXTable                   ; $5A19: $21 $00 $C2
     add  hl, bc                                   ; $5A1C: $09
@@ -3106,7 +3110,7 @@ HeartPieceEntityHandler::
 ._08 dw HeartPieceState8Handler                   ; $5A6B
 
 HeartPieceState1Handler::
-    call func_003_5A17                            ; $5A6D: $CD $17 $5A
+    call HoldEntityAboveLink                      ; $5A6D: $CD $17 $5A
     call GetEntityTransitionCountdown             ; $5A70: $CD $05 $0C
     ret  nz                                       ; $5A73: $C0
 
@@ -3132,7 +3136,7 @@ HeartPieceState4Handler::
     ret                                           ; $5A97: $C9
 
 HeartPieceState5Handler::
-    call func_003_5A17                            ; $5A98: $CD $17 $5A
+    call HoldEntityAboveLink                      ; $5A98: $CD $17 $5A
     ld   de, Data_003_5A4D                        ; $5A9B: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5A9E: $CD $C0 $3B
     call func_003_5B2B                            ; $5AA1: $CD $2B $5B
@@ -3154,7 +3158,7 @@ jr_003_5ABA:
     ret                                           ; $5ABA: $C9
 
 HeartPieceState6Handler::
-    call func_003_5A17                            ; $5ABB: $CD $17 $5A
+    call HoldEntityAboveLink                      ; $5ABB: $CD $17 $5A
     ld   de, Data_003_5A4D                        ; $5ABE: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5AC1: $CD $C0 $3B
     xor  a                                        ; $5AC4: $AF
@@ -3187,7 +3191,7 @@ jr_003_5AED:
     jp   IncrementEntityState                     ; $5AED: $C3 $12 $3B
 
 HeartPieceState7Handler::
-    call func_003_5A17                            ; $5AF0: $CD $17 $5A
+    call HoldEntityAboveLink                      ; $5AF0: $CD $17 $5A
     ld   de, Data_003_5A4D                        ; $5AF3: $11 $4D $5A
     call RenderActiveEntitySpritesPair            ; $5AF6: $CD $C0 $3B
     ld   a, [wDialogState]                        ; $5AF9: $FA $9F $C1
@@ -3329,10 +3333,10 @@ jr_003_5BCB:
     call IncrementEntityState                     ; $5BDE: $CD $12 $3B
 
 jr_003_5BE1:
-    jp   func_003_5A17                            ; $5BE1: $C3 $17 $5A
+    jp   HoldEntityAboveLink                      ; $5BE1: $C3 $17 $5A
 
 SwordState1Handler::
-    call func_003_5A17                            ; $5BE4: $CD $17 $5A
+    call HoldEntityAboveLink                      ; $5BE4: $CD $17 $5A
     call GetEntityDropTimer                       ; $5BE7: $CD $FB $0B
     ret  nz                                       ; $5BEA: $C0
 
@@ -3356,7 +3360,7 @@ SwordState2Handler::
     jp   IncrementEntityState                     ; $5C0C: $C3 $12 $3B
 
 SwordState3Handler::
-    call func_003_5A17                            ; $5C0F: $CD $17 $5A
+    call HoldEntityAboveLink                      ; $5C0F: $CD $17 $5A
     ld   a, $6B                                   ; $5C12: $3E $6B
     ldh  [hLinkAnimationState], a                 ; $5C14: $E0 $9D
     ld   hl, wEntitiesPosXTable                   ; $5C16: $21 $00 $C2
@@ -3418,21 +3422,28 @@ jr_003_5C67:
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
 jr_003_5C75:
-    jp   func_003_5A17                            ; $5C75: $C3 $17 $5A
+    jp   HoldEntityAboveLink                      ; $5C75: $C3 $17 $5A
 
-Data_003_5C78::
-    db   $CA, $17, $C0, $17, $C2, $14, $C4, $17, $C6, $14, $CA, $17
+KeyDropSpriteTable:
+    db   $CA, $17
+    db   $C0, $17
+    db   $C2, $14
+    db   $C4, $17
+    db   $C6, $14
+    db   $CA, $17
 
-Data_003_5C84::
+KeyCollectDialogTable::
     db   $00, $A3, $A4, $A5, $00
 
 KeyDropPointEntityHandler::
-    call func_003_5CEA                            ; $5C89: $CD $EA $5C
+    call CheckForEntityFallingDownQuicksandHole   ; $5C89: $CD $EA $5C
     jr   nc, jr_003_5C99                          ; $5C8C: $30 $0B
 
-    ld   hl, $D8CE                                ; $5C8E: $21 $CE $D8
+    ; If dropped in the quicksand mark the angler key
+    ; as available in the quicksand cave by setting the room flags.
+    ld   hl, wOverworldRoomStatus + $CE           ; $5C8E: $21 $CE $D8
     set  4, [hl]                                  ; $5C91: $CB $E6
-    ld   hl, $D9F8                                ; $5C93: $21 $F8 $D9
+    ld   hl, wIndoorARoomStatus + $F8             ; $5C93: $21 $F8 $D9
     set  5, [hl]                                  ; $5C96: $CB $EE
     ret                                           ; $5C98: $C9
 
@@ -3441,7 +3452,7 @@ jr_003_5C99:
     cp   $80                                      ; @TODO (?) L5 Master Stalfos final room
     jp   z, label_003_5C49                        ; $5C9D: $CA $49 $5C
 
-    ld   de, Data_003_5C78                        ; $5CA0: $11 $78 $5C
+    ld   de, KeyDropSpriteTable                   ; $5CA0: $11 $78 $5C
     call RenderActiveEntitySprite                 ; $5CA3: $CD $77 $3C
     call GetEntityTransitionCountdown             ; $5CA6: $CD $05 $0C
     jp   z, label_003_5CD6                        ; $5CA9: $CA $D6 $5C
@@ -3454,7 +3465,7 @@ jr_003_5C99:
     dec  a                                        ; $5CB3: $3D
     ld   e, a                                     ; $5CB4: $5F
     ld   d, b                                     ; $5CB5: $50
-    ld   hl, Data_003_5C84                        ; $5CB6: $21 $84 $5C
+    ld   hl, KeyCollectDialogTable                ; $5CB6: $21 $84 $5C
     add  hl, de                                   ; $5CB9: $19
     ld   a, [hl]                                  ; $5CBA: $7E
     call OpenDialog                               ; $5CBB: $CD $85 $23
@@ -3475,7 +3486,7 @@ jr_003_5CCD:
     jp   UnloadEntityAndReturn                    ; $5CD0: $C3 $8D $3F
 
 jr_003_5CD3:
-    jp   func_003_5A17                            ; $5CD3: $C3 $17 $5A
+    jp   HoldEntityAboveLink                      ; $5CD3: $C3 $17 $5A
 
 label_003_5CD6:
     call func_003_7F78                            ; $5CD6: $CD $78 $7F
@@ -3491,7 +3502,9 @@ label_003_5CD6:
 jr_003_5CE7:
     jp   func_003_60B3                            ; $5CE7: $C3 $B3 $60
 
-func_003_5CEA::
+CheckForEntityFallingDownQuicksandHole::
+    ; This is called from the bomb code as well.
+    ; Checks if the entity is at the center of the quicksand room and makes it drop.
     ld   a, [wIsIndoor]                           ; $5CEA: $FA $A5 $DB
     and  a                                        ; $5CED: $A7
     jr   nz, jr_003_5D34                          ; $5CEE: $20 $44
@@ -3533,7 +3546,7 @@ func_003_5CEA::
     ld   [hl], $48                                ; $5D27: $36 $48
     call GetEntityTransitionCountdown             ; $5D29: $CD $05 $0C
     ld   [hl], $2F                                ; $5D2C: $36 $2F
-    ld   a, $18                                   ; $5D2E: $3E $18
+    ld   a, JINGLE_ITEM_FALLING                   ; $5D2E: $3E $18
     ldh  [hJingle], a                             ; $5D30: $E0 $F2
     scf                                           ; $5D32: $37
     ret                                           ; $5D33: $C9
@@ -3586,7 +3599,7 @@ jr_003_5D6C:
     jp   UnloadEntityAndReturn                    ; $5D7D: $C3 $8D $3F
 
 jr_003_5D80:
-    jp   func_003_5A17                            ; $5D80: $C3 $17 $5A
+    jp   HoldEntityAboveLink                      ; $5D80: $C3 $17 $5A
 
 Data_003_5D83::
     db   $70, $01, $72, $01, $74, $01, $76, $01, $78, $01, $7A, $01, $7C, $01, $7E, $01
@@ -3814,7 +3827,7 @@ jr_003_5EFE:
     jr   nz, jr_003_5F01                          ; $5EFF: $20 $00
 
 jr_003_5F01:
-    jp   func_003_5A17                            ; $5F01: $C3 $17 $5A
+    jp   HoldEntityAboveLink                      ; $5F01: $C3 $17 $5A
 
 InstrumentMusicTable::
     db   MUSIC_INSTRUMENT_FULL_MOON_CELLO
@@ -3847,7 +3860,7 @@ func_003_5F0C::
     ld   [hl], $FF                                ; $5F2A: $36 $FF
 
 jr_003_5F2C:
-    jp   func_003_5A17                            ; $5F2C: $C3 $17 $5A
+    jp   HoldEntityAboveLink                      ; $5F2C: $C3 $17 $5A
 
 Data_003_5F2F::
     db   $0A, $FA
@@ -3936,10 +3949,10 @@ jr_003_5F5F:
     pop  bc                                       ; $5FB8: $C1
 
 jr_003_5FB9:
-    jp   func_003_5A17                            ; $5FB9: $C3 $17 $5A
+    jp   HoldEntityAboveLink                      ; $5FB9: $C3 $17 $5A
 
 func_003_5FBC::
-    jp   func_003_5A17                            ; $5FBC: $C3 $17 $5A
+    jp   HoldEntityAboveLink                      ; $5FBC: $C3 $17 $5A
 
 func_003_5FBF::
     ret                                           ; $5FBF: $C9
@@ -4039,7 +4052,7 @@ jr_003_604C:
     jp   UnloadEntityAndReturn                    ; $604F: $C3 $8D $3F
 
 jr_003_6052:
-    jp   func_003_5A17                            ; $6052: $C3 $17 $5A
+    jp   HoldEntityAboveLink                      ; $6052: $C3 $17 $5A
 
 Data_003_6055::
     db   $8E, $16
@@ -4769,7 +4782,7 @@ PickDroppableKey::
     cp   $7C                                      ; L4 Side-view room where the key drops
     jr   nz, jr_003_64A0                          ; $6499: $20 $05
 
-    ld   hl, $D969                                ; $649B: $21 $69 $D9
+    ld   hl, wIndoorARoomStatus + $69                                ; $649B: $21 $69 $D9
     set  4, [hl]                                  ; $649E: $CB $E6
 
 jr_003_64A0:

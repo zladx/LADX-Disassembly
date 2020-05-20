@@ -4317,7 +4317,7 @@ jr_002_5D21:
     and  a                                        ; $5D27: $A7
     jr   z, jr_002_5D36                           ; $5D28: $28 $0C
 
-    ld   hl, $D900                                ; $5D2A: $21 $00 $D9
+    ld   hl, wIndoorARoomStatus                                ; $5D2A: $21 $00 $D9
     ldh  a, [hMapId]                         ; $5D2D: $F0 $F7
     cp   MAP_COLOR_DUNGEON                                      ; $5D2F: $FE $FF
     jr   nz, jr_002_5D36                          ; $5D31: $20 $03
@@ -7671,7 +7671,7 @@ jr_002_77F7:
     cp   $C3                                      ; $782A: $FE $C3
     jr   nz, jr_002_7833                          ; $782C: $20 $05
 
-    ld   hl, $D879                                ; $782E: $21 $79 $D8
+    ld   hl, wOverworldRoomStatus + $79                                ; $782E: $21 $79 $D8
     set  4, [hl]                                  ; $7831: $CB $E6
 
 jr_002_7833:

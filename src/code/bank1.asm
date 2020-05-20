@@ -470,7 +470,7 @@ jr_001_52C7::
     ld   c, [hl]
     inc  hl
     ld   b, [hl]
-    ld   hl, $D800
+    ld   hl, wOverworldRoomStatus
     ld   de, $0380
 
 jr_001_52D9::
@@ -978,7 +978,7 @@ jr_001_5678::
     and  a
     ld   a, $00
     jr   nz, jr_001_56D9
-    ld   hl, $D800
+    ld   hl, wOverworldRoomStatus
     add  hl, de
     ld   a, [hl]
     and  $20
@@ -1055,7 +1055,7 @@ jr_001_5731::
     push de
     ld   a, [$DBB4]
     ld   e, a
-    ld   hl, $D800
+    ld   hl, wOverworldRoomStatus
     add  hl, de
     pop  de
     ld   a, [hl]
@@ -1423,7 +1423,7 @@ jr_001_5AA0::
     jr   z, label_001_5B3F
     ld   e, a
     ld   d, $00
-    ld   hl, $D800
+    ld   hl, wOverworldRoomStatus
     add  hl, de
     ld   a, [$C5A2]
     and  a
@@ -1456,7 +1456,7 @@ jr_001_5AF5::
     ld   a, [$C5A2]
     and  a
     jr   nz, jr_001_5B30
-    ld   hl, $D800
+    ld   hl, wOverworldRoomStatus
     add  hl, de
     ld   a, [hl]
     and  $20
@@ -1876,7 +1876,7 @@ func_001_5DE6::
     ld   a, [hli]
     ld   h, [hl]
     ld   l, a
-    ld   bc, $D800
+    ld   bc, wOverworldRoomStatus
     ld   de, $0380
 
 jr_001_5E12::

@@ -3862,7 +3862,7 @@ func_004_6689::
     ldh  a, [hMapRoom]                            ; $66AF: $F0 $F6
     ld   e, a                                     ; $66B1: $5F
     ld   d, $01                                   ; $66B2: $16 $01
-    ld   hl, $D900                                ; $66B4: $21 $00 $D9
+    ld   hl, wIndoorARoomStatus                                ; $66B4: $21 $00 $D9
     add  hl, de                                   ; $66B7: $19
     ld   a, [hl]                                  ; $66B8: $7E
     or   $10                                      ; $66B9: $F6 $10
@@ -5406,7 +5406,7 @@ func_004_6FC6::
     cp   $6C                                      ; $6FD3: $FE $6C
     jr   c, jr_004_6FE2                           ; $6FD5: $38 $0B
 
-    ld   hl, $DAA0                                ; $6FD7: $21 $A0 $DA
+    ld   hl, wIndoorBRoomStatus + $A0                                ; $6FD7: $21 $A0 $DA
     set  4, [hl]                                  ; $6FDA: $CB $E6
     ld   a, $6B                                   ; $6FDC: $3E $6B
     ldh  [hLinkPositionX], a                      ; $6FDE: $E0 $98

@@ -8148,7 +8148,7 @@ jr_036_71C7:
     jp   label_036_728B                           ; $71F7: $C3 $8B $72
 
 label_036_71FA:
-    ld   a, [$D879]                               ; $71FA: $FA $79 $D8
+    ld   a, [wOverworldRoomStatus + $79]                               ; $71FA: $FA $79 $D8
     and  $10                                      ; $71FD: $E6 $10
     jp   nz, label_036_7288                       ; $71FF: $C2 $88 $72
 

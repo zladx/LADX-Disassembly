@@ -5185,7 +5185,7 @@ LoadRoomObjectsAttributes::
     cp   $0E                                      ; $6DB6: $FE $0E
     jr   nz, .jr_020_6DC6                         ; $6DB8: $20 $0C
 
-    ld   a, [$D80E]                               ; $6DBA: $FA $0E $D8
+    ld   a, [wOverworldRoomStatus + $0E]                               ; $6DBA: $FA $0E $D8
     and  $10                                      ; $6DBD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DBF: $28 $59
 
@@ -5196,7 +5196,7 @@ LoadRoomObjectsAttributes::
     cp   $8C                                      ; $6DC6: $FE $8C
     jr   nz, .jr_020_6DD6                         ; $6DC8: $20 $0C
 
-    ld   a, [$D88C]                               ; $6DCA: $FA $8C $D8
+    ld   a, [wOverworldRoomStatus + $8C]                               ; $6DCA: $FA $8C $D8
     and  $10                                      ; $6DCD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DCF: $28 $49
 
@@ -5207,7 +5207,7 @@ LoadRoomObjectsAttributes::
     cp   $79                                      ; $6DD6: $FE $79
     jr   nz, .jr_020_6DE6                         ; $6DD8: $20 $0C
 
-    ld   a, [$D879]                               ; $6DDA: $FA $79 $D8
+    ld   a, [wOverworldRoomStatus + $79]                               ; $6DDA: $FA $79 $D8
     and  $10                                      ; $6DDD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DDF: $28 $39
 
@@ -5218,7 +5218,7 @@ LoadRoomObjectsAttributes::
     cp   $06                                      ; $6DE6: $FE $06
     jr   nz, .jr_020_6DF6                         ; $6DE8: $20 $0C
 
-    ld   a, [$D806]                               ; $6DEA: $FA $06 $D8
+    ld   a, [wOverworldRoomStatus + $06]                               ; $6DEA: $FA $06 $D8
     and  $10                                      ; $6DED: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DEF: $28 $29
 
@@ -5229,7 +5229,7 @@ LoadRoomObjectsAttributes::
     cp   $1B                                      ; $6DF6: $FE $1B
     jr   nz, .jr_020_6E06                         ; $6DF8: $20 $0C
 
-    ld   a, [$D82B]                               ; $6DFA: $FA $2B $D8
+    ld   a, [wOverworldRoomStatus + $2B]                               ; $6DFA: $FA $2B $D8
     and  $10                                      ; $6DFD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DFF: $28 $19
 
@@ -5240,7 +5240,7 @@ LoadRoomObjectsAttributes::
     cp   $2B                                      ; $6E06: $FE $2B
     jr   nz, .jr_020_6E1A                         ; $6E08: $20 $10
 
-    ld   a, [$D82B]                               ; $6E0A: $FA $2B $D8
+    ld   a, [wOverworldRoomStatus + $2B]                               ; $6E0A: $FA $2B $D8
     and  $10                                      ; $6E0D: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6E0F: $28 $09
 

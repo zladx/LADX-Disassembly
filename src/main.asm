@@ -63,7 +63,7 @@ include "data/objects_tilemaps/indoor.cgb.asm"
 ColorDungeonObjectsTilemap::
 include "data/objects_tilemaps/color_dungeon.asm"
 include "data/objects/physics.asm"
-include "data/bg_copy_requests.asm"
+include "data/backgrounds/background_tile_commands.asm"
 
 ; Maps and dialogs
 section "bank9",romx[$4000],bank[$09]

@@ -2525,11 +2525,11 @@ func_036_4F68::
     ld   hl, wEntitiesPrivateState2Table          ; $4F71: $21 $C0 $C2
     add  hl, bc                                   ; $4F74: $09
     ld   a, [hl]                                  ; $4F75: $7E
-    ld   hl, Data_036_6A20                        ; $4F76: $21 $20 $6A
+    ld   hl, Data_020_6A20                        ; $4F76: $21 $20 $6A
     and  a                                        ; $4F79: $A7
     jr   nz, jr_036_4F7F                          ; $4F7A: $20 $03
 
-    ld   hl, Data_036_6A28                        ; $4F7C: $21 $28 $6A
+    ld   hl, Data_020_6A28                        ; $4F7C: $21 $28 $6A
 
 jr_036_4F7F:
     ld   c, $02                                   ; $4F7F: $0E $02
@@ -2569,7 +2569,7 @@ jr_036_4FB1:
     push af                                       ; $4FB4: $F5
     ld   a, $36                                   ; $4FB5: $3E $36
     ld   [wCurrentBank], a                        ; $4FB7: $EA $AF $DB
-    ld   hl, Data_036_6A0F + 1                    ; $4FBA: $21 $10 $6A
+    ld   hl, Data_020_6A10                        ; $4FBA: $21 $10 $6A
     ld   c, $02                                   ; $4FBD: $0E $02
     ld   a, $36                                   ; $4FBF: $3E $36
     call func_A5F                                 ; $4FC1: $CD $5F $0A
@@ -2673,12 +2673,12 @@ jr_036_505E:
     ret                                           ; $505E: $C9
 
 func_036_505F::
-    ld   hl, Data_036_69DF + 1                    ; $505F: $21 $E0 $69
+    ld   hl, Data_020_69E0                        ; $505F: $21 $E0 $69
     ldh  a, [hFrameCounter]                       ; $5062: $F0 $E7
     and  $08                                      ; $5064: $E6 $08
     jr   z, jr_036_506B                           ; $5066: $28 $03
 
-    ld   hl, Data_036_69F7 + 1                    ; $5068: $21 $F8 $69
+    ld   hl, Data_020_69F8                        ; $5068: $21 $F8 $69
 
 jr_036_506B:
     ld   c, $06                                   ; $506B: $0E $06
@@ -3842,77 +3842,64 @@ jr_036_57E6:
     call func_036_5756                            ; $57E6: $CD $56 $57
     ret                                           ; $57E9: $C9
 
-    jr   c, jr_036_5855                           ; $57EA: $38 $69
+Data_036_57EA:
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6968
+    dw   Data_020_6950
 
-    ld   d, b                                     ; $57EC: $50
-    ld   l, c                                     ; $57ED: $69
-    ld   l, b                                     ; $57EE: $68
-    ld   l, c                                     ; $57EF: $69
-    ld   d, b                                     ; $57F0: $50
-    ld   l, c                                     ; $57F1: $69
-    jr   c, @+$6B                                 ; $57F2: $38 $69
+Data_036_57F2:
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6968
+    dw   Data_020_6950
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6968
+    dw   Data_020_6950
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6980
 
-    ld   d, b                                     ; $57F4: $50
-    ld   l, c                                     ; $57F5: $69
-    ld   l, b                                     ; $57F6: $68
-    ld   l, c                                     ; $57F7: $69
-    ld   d, b                                     ; $57F8: $50
-    ld   l, c                                     ; $57F9: $69
-    jr   c, jr_036_5865                           ; $57FA: $38 $69
+Data_036_5808:
+    dw   Data_020_6980
+    dw   Data_020_6998
+    dw   Data_020_6980
+    dw   Data_020_69B0
 
-    ld   d, b                                     ; $57FC: $50
-    ld   l, c                                     ; $57FD: $69
-    ld   l, b                                     ; $57FE: $68
-    ld   l, c                                     ; $57FF: $69
-    ld   d, b                                     ; $5800: $50
-    ld   l, c                                     ; $5801: $69
-    jr   c, jr_036_586D                           ; $5802: $38 $69
+Data_036_5810:
+    dw   Data_020_6980
+    dw   Data_020_69C8
+    dw   Data_020_6980
 
-    ld   d, b                                     ; $5804: $50
-    ld   l, c                                     ; $5805: $69
-    add  b                                        ; $5806: $80
-    ld   l, c                                     ; $5807: $69
-    add  b                                        ; $5808: $80
-    ld   l, c                                     ; $5809: $69
-    sbc  b                                        ; $580A: $98
-    ld   l, c                                     ; $580B: $69
-    add  b                                        ; $580C: $80
-    ld   l, c                                     ; $580D: $69
-    or   b                                        ; $580E: $B0
-    ld   l, c                                     ; $580F: $69
-    add  b                                        ; $5810: $80
-    ld   l, c                                     ; $5811: $69
-    ret  z                                        ; $5812: $C8
-
-    ld   l, c                                     ; $5813: $69
-    add  b                                        ; $5814: $80
-    ld   l, c                                     ; $5815: $69
-    add  b                                        ; $5816: $80
-    ld   l, c                                     ; $5817: $69
-    ld   d, b                                     ; $5818: $50
-    ld   l, c                                     ; $5819: $69
-    jr   c, @+$6B                                 ; $581A: $38 $69
-
-    ld   d, b                                     ; $581C: $50
-    ld   l, c                                     ; $581D: $69
-    ld   l, b                                     ; $581E: $68
-    ld   l, c                                     ; $581F: $69
-    ld   d, b                                     ; $5820: $50
-    ld   l, c                                     ; $5821: $69
-    jr   c, @+$6B                                 ; $5822: $38 $69
-
-    jr   c, jr_036_588F                           ; $5824: $38 $69
-
-    ld   d, b                                     ; $5826: $50
-    ld   l, c                                     ; $5827: $69
-    ld   l, b                                     ; $5828: $68
-    ld   l, c                                     ; $5829: $69
-    ld   d, b                                     ; $582A: $50
-    ld   l, c                                     ; $582B: $69
+Data_036_5816:
+    dw   Data_020_6980 
+    dw   Data_020_6950
+    dw   Data_020_6938
+    dw   Data_020_6950
+    dw   Data_020_6968
+    dw   Data_020_6950
+    dw   Data_020_6938
+    
+Data_036_5824:
+    dw   Data_020_6938 
+    dw   Data_020_6950 
+    dw   Data_020_6968
+    dw   Data_020_6950
 
 Data_036_582C::
-    db   $EA, $57, $EA, $57, $EA, $57, $EA, $57, $F2, $57, $08, $58, $10, $58, $10, $58
-    db   $16, $58, $24, $58, $24, $58, $24, $58
+    dw   Data_036_57EA
+    dw   Data_036_57EA
+    dw   Data_036_57EA 
+    dw   Data_036_57EA 
+    dw   Data_036_57F2
+    dw   Data_036_5808 
+    dw   Data_036_5810
+    dw   Data_036_5810
+    dw   Data_036_5816
+    dw   Data_036_5824
+    dw   Data_036_5824
+    dw   Data_036_5824
 
 func_036_5844::
     ld   d, $00                                   ; $5844: $16 $00
@@ -4319,57 +4306,37 @@ func_036_5A87::
     call func_036_6C07                            ; $5A90: $CD $07 $6C
     ret                                           ; $5A93: $C9
 
-    ld   b, b                                     ; $5A94: $40
-    inc  bc                                       ; $5A95: $03
-    ld   b, d                                     ; $5A96: $42
-    inc  bc                                       ; $5A97: $03
-    ld   b, d                                     ; $5A98: $42
-    inc  hl                                       ; $5A99: $23
-    ld   b, b                                     ; $5A9A: $40
-    inc  hl                                       ; $5A9B: $23
-    ld   c, b                                     ; $5A9C: $48
-    inc  bc                                       ; $5A9D: $03
-    ld   c, d                                     ; $5A9E: $4A
-    inc  bc                                       ; $5A9F: $03
-    ld   c, h                                     ; $5AA0: $4C
-    inc  bc                                       ; $5AA1: $03
-    ld   c, [hl]                                  ; $5AA2: $4E
-    inc  bc                                       ; $5AA3: $03
-    ld   c, d                                     ; $5AA4: $4A
-    inc  hl                                       ; $5AA5: $23
-    ld   c, b                                     ; $5AA6: $48
-    inc  hl                                       ; $5AA7: $23
-    ld   c, [hl]                                  ; $5AA8: $4E
-    inc  hl                                       ; $5AA9: $23
-    ld   c, h                                     ; $5AAA: $4C
-    inc  hl                                       ; $5AAB: $23
-    ld   b, b                                     ; $5AAC: $40
-    ld   [bc], a                                  ; $5AAD: $02
-    ld   b, d                                     ; $5AAE: $42
-    ld   [bc], a                                  ; $5AAF: $02
-    ld   b, d                                     ; $5AB0: $42
-    ld   [hl+], a                                 ; $5AB1: $22
-    ld   b, b                                     ; $5AB2: $40
-    ld   [hl+], a                                 ; $5AB3: $22
-    ld   c, d                                     ; $5AB4: $4A
-    ld   [hl+], a                                 ; $5AB5: $22
-    ld   c, b                                     ; $5AB6: $48
-    ld   [hl+], a                                 ; $5AB7: $22
-    ld   c, [hl]                                  ; $5AB8: $4E
-    ld   [hl+], a                                 ; $5AB9: $22
-    ld   c, h                                     ; $5ABA: $4C
-    ld   [hl+], a                                 ; $5ABB: $22
-    ld   c, b                                     ; $5ABC: $48
-    ld   [bc], a                                  ; $5ABD: $02
-    ld   c, d                                     ; $5ABE: $4A
-    ld   [bc], a                                  ; $5ABF: $02
-    ld   c, h                                     ; $5AC0: $4C
-    ld   [bc], a                                  ; $5AC1: $02
-    ld   c, [hl]                                  ; $5AC2: $4E
-    ld   [bc], a                                  ; $5AC3: $02
+Data_036_5A94:
+    db   $40, $03
+    db   $42, $03
+    db   $42, $23
+    db   $40, $23
+    db   $48, $03
+    db   $4A, $03
+    db   $4C, $03
+    db   $4E, $03
+    db   $4A, $23
+    db   $48, $23
+    db   $4E, $23
+    db   $4C, $23
+
+Data_036_5AAC:
+    db   $40, $02
+    db   $42, $02
+    db   $42, $22
+    db   $40, $22
+    db   $4A, $22
+    db   $48, $22
+    db   $4E, $22
+    db   $4C, $22
+    db   $48, $02
+    db   $4A, $02
+    db   $4C, $02
+    db   $4E, $02
 
 Data_036_5AC4::
-    db   $94, $5A, $AC, $5A
+    dw   Data_036_5A94
+    dw   Data_036_5AAC
 
 func_036_5AC8::
     ld   d, $00                                   ; $5AC8: $16 $00
@@ -4386,7 +4353,10 @@ func_036_5AC8::
     ret                                           ; $5ADB: $C9
 
 Data_036_5ADC::
-    db   $40, $01, $40, $21, $42, $01, $42, $21
+    db   $40, $01
+    db   $40, $21
+    db   $42, $01
+    db   $42, $21
 
 label_036_5AE4:
     ld   de, Data_036_5ADC                        ; $5AE4: $11 $DC $5A
@@ -5088,13 +5058,24 @@ jr_036_5F58:
     ret                                           ; $5F58: $C9
 
 Data_036_5F59::
-    db   $B8, $68, $D8, $68
+    dw   Data_020_68B8
+    dw   Data_020_68D8
 
 Data_036_5F5D::
-    db   $18, $69, $B8, $68, $D8, $68, $F8, $68, $D8, $68, $B8, $68
+    dw   Data_020_6918
+    dw   Data_020_68B8
+    dw   Data_020_68D8
+    dw   Data_020_68F8
+    dw   Data_020_68D8
+    dw   Data_020_68B8
 
 Data_036_5F69::
-    db   $F8, $68, $D8, $68, $B8, $68, $18, $69, $B8, $68, $D8, $68
+    dw   Data_020_68F8
+    dw   Data_020_68D8
+    dw   Data_020_68B8
+    dw   Data_020_6918
+    dw   Data_020_68B8
+    dw   Data_020_68D8
 
 func_036_5F75::
     ld   d, $00                                   ; $5F75: $16 $00
@@ -5559,7 +5540,14 @@ jr_036_6205:
     ret                                           ; $6208: $C9
 
 Data_036_6209::
-    db   $38, $68, $48, $68, $58, $68, $68, $68, $78, $68, $88, $68, $98, $68, $A8, $68
+    dw   Data_020_6838
+    dw   Data_020_6848
+    dw   Data_020_6858
+    dw   Data_020_6868
+    dw   Data_020_6878
+    dw   Data_020_6888
+    dw   Data_020_6898
+    dw   Data_020_68A8
 
 func_036_6219::
     ld   d, $00                                   ; $6219: $16 $00
@@ -6859,10 +6847,14 @@ jr_036_69CC:
     ret                                           ; $69CC: $C9
 
 Data_036_69CD::
-    db   $88, $66, $E8, $66, $48, $67
+    dw   Data_020_6688
+    dw   Data_020_66E8
+    dw   Data_020_6748
 
 Data_036_69D3::
-    db   $A8, $67, $D8, $67, $08, $68
+    dw   Data_020_67A8
+    dw   Data_020_67D8
+    dw   Data_020_6808
 
 func_036_69D9::
     ldh  a, [hActiveEntityType]                   ; $69D9: $F0 $EB

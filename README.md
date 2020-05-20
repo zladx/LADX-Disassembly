@@ -45,3 +45,4 @@ Thanks to these people for contributing:
 * samuel-flynn - https://github.com/samuel-flynn
 * Xkeeper - https://github.com/Xkeeper0 
 * Vextrove - https://github.com/Vextrove
+* daid - https://github.com/daid

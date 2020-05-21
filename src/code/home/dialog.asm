@@ -481,7 +481,7 @@ DialogDrawNextCharacterHandler::
 .ThiefString::
 PUSHC
 SETCHARMAP NameEntryCharmap
-    db "THIEF"
+    db "DIEB "
 POPC
 
 .notEnd
@@ -568,12 +568,14 @@ POPC
     push hl
 
      ; stubbed out bit of code accessing a table for (han)dakutens
-    ld   a, $1C ; BANK(DakutenTable)
+    ld   a, BANK(DakutenTable)
     ld   [MBC3SelectBank], a ; current character
     ldh  a, [hScratch1]
     ld   e, a
     ld   d, $00
-    xor  a
+    ld   hl, DakutenTable
+    add  hl, de
+    ld   a, [hl]
     pop  hl
     and  a
     jr   z, .noDakuten
@@ -663,8 +665,7 @@ DialogBreakHandler::
     ld   d, a
     ld   hl, DialogBankTable
     add  hl, de
-    ld   a, [hl]
-    and  a
+    bit 7, [hl]
     jp   z, label_278B
 
 .jp_26E1
@@ -695,7 +696,7 @@ DialogBreakHandler::
     ld   [wRequestLength + 1], a
     xor  a
     ld   [$D605], a
-    call IncrementDialogState
+    jp IncrementDialogState
 
 DialogScrollingStartHandler::
     ret
@@ -820,8 +821,7 @@ DialogChoiceHandler::
     jpsb func_017_7DCC
 
 .jp_27B7
-    call UpdateDialogState
-    ret
+    jp UpdateDialogState
 
 func_27BB::
     jpsb func_017_7D7C

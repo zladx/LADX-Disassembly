@@ -309,9 +309,6 @@ func_999::
     jr   RestoreStackedBankAndReturn
 
 CheckPushedTombStone_trampoline::
-    push af
-    callsb CheckPushedTombStone
-    jr   RestoreStackedBankAndReturn
 
 GetEntityInitHandler_trampoline::
     push af
@@ -762,7 +759,7 @@ ReadTileValueFromAsciiTable::
     jr   ReadValueInDialogsBank
 
 ReadDialogBankFromTable::
-    ld   hl, DialogBankTable
+    ld   hl, DakutenTable
 
 ReadValueInDialogsBank::
     ld   a, BANK(AsciiToTileMap) ; or BANK(DialogBankTable)
@@ -1938,6 +1935,7 @@ UseShovel::
     ldh  [hNoiseSfx], a
 .endIf
 
+    call ResetPegasusBoots
     ld   a, $01
     ld   [$C1C7], a
     xor  a
@@ -2989,7 +2987,7 @@ LinkMotionMapFadeOutHandler::
 ; or starting after a game over.
 SetSpawnLocation::
     ; Initialize counter
-    ld   a, $00
+    xor a
     ldh  [hScratch0], a
     ld   de, wSpawnLocationData
 
@@ -3035,7 +3033,7 @@ LinkMotionMapFadeInHandler::
     call func_1A39
     ld   a, [wTransitionSequenceCounter]
     cp   $04
-    jr   nz, .return
+    ret nz
 
 .label_1A06
     ld   a, [$D463]
@@ -3047,14 +3045,11 @@ LinkMotionMapFadeInHandler::
     ld   [wLinkMotionState], a
     ld   a, [wDidStealItem]
     and  a
-    jr   z, .return
+    ret z
     xor  a
     ld   [wDidStealItem], a
     ld   a, $36
     jp   OpenDialog
-
-.return
-    ret
 
 func_1A22::
     callsb func_020_6C4F
@@ -3394,7 +3389,7 @@ label_1F69::
     or   [hl]
     ld   hl, wLinkMotionState
     or   [hl]
-    jp   nz, func_2165.return
+    ret nz
 
     ; Update hSwordIntersectedAreaX according to Link's position and direction
     ldh  a, [hLinkDirection]
@@ -3630,10 +3625,10 @@ label_1F69::
 .jr_20DD
     ld   a, [wAButtonSlot]
     cp   INVENTORY_POWER_BRACELET
-    jp   nz, func_2165.return
+    ret nz
     ldh  a, [hPressedButtonsMask]
     and  J_A
-    jp   z, func_2165.return
+    ret z
 
 .jr_20EC
     callsb label_002_48B0
@@ -3673,7 +3668,7 @@ label_1F69::
     inc  [hl]
     ld   a, [hl]
     cp   e
-    jr   c, .return
+    ret c
     xor  a
     ldh  [$FFE5], a
     ldh  a, [hScratch0]
@@ -3683,7 +3678,7 @@ label_1F69::
     jr   z, .jr_2153
     ld   a, [wIsIndoor]
     and  a
-    jr   nz, .return
+    ret nz
     ldh  a, [hScratch0]
     cp   $5C
     jr   z, .jr_2161
@@ -3715,9 +3710,6 @@ func_2165::
     ld   [$C15D], a
     jp   label_2183
 
-.return
-    ret
-
 func_014_5526_trampoline::
     callsb func_014_5526
     jp   ReloadSavedBank
@@ -3725,7 +3717,7 @@ func_014_5526_trampoline::
 label_2183::
     ld   a, ENTITY_ENTITY_LIFTABLE_ROCK
     call SpawnPlayerProjectile
-    jr   c, label_21A7
+    ret c
 
     ld   a, WAVE_SFX_ZIP
     ldh  [hWaveSfx], a
@@ -3741,9 +3733,6 @@ label_2183::
     ld   b, d
     ld   e, $01
     jpsw func_003_5795
-
-label_21A7::
-    ret
 
 UpdateFinalLinkPosition::
     ; If inventory is appearing, return
@@ -4077,8 +4066,8 @@ EnableExternalRAMWriting::
     push hl
     ld   hl, MBC3SRamBank
     ld   [hl], $00 ; Switch to RAM bank 0
-    ld   hl, $00
-    ld   [hl], $0A ; Enable external RAM writing
+    ld   hl, MBC3SRamEnable
+    ld   [hl], SRAM_ENABLE ; Enable external RAM writing
     pop  hl
     ret
 
@@ -4482,25 +4471,37 @@ LoadTileset1B::
 
     call PlayAudioStep
 
+    ld a, BANK(CharacterVfxTiles)
+    ld [MBC3SelectBank], a
+    ld hl, CharacterVfxTiles + $20
+    ld de, $8080
+    ld bc, $0020
+    call CopyData
+
     ldh  a, [hIsGBC]
     and  a
     jr   nz, .cgbOnly
 
 .dmgOnly
     ld   a, BANK(FontLargeTiles)
-    ld   [MBC3SelectBank], a
     ld   hl, FontLargeTiles + $200
-    ld   de, vTiles0 + $100
-    ld   bc, TILE_SIZE * $70
-    jp   CopyData
+    jr .both
 
 .cgbOnly
     ld   a, BANK(CgbMiscTiles)
+    ld   hl, CgbMiscTiles + $1100
+
+.both
     ld   [MBC3SelectBank], a
-    ld   hl, CgbMiscTiles + $1000
-    ld   de, vTiles0
-    ld   bc, TILE_SIZE * $80
-    jp   CopyData
+    ld   de, $8100
+    ld   bc, $0700
+    call   CopyData
+    ld a, BANK(CgbMiscTiles)
+    ld [MBC3SelectBank], a
+    ld hl, CgbMiscTiles + $10c0
+    ld de, $80c0
+    ld bc, $0040
+    jp CopyData
 
 LoadTileset1A::
     ld   hl, EndingTiles + $3800

@@ -453,7 +453,7 @@ LoadTiles::
 
     ld   a, [wIsIndoor]
     and  a
-    jp   z, LoadOverworldBGTiles
+    jr   z, LoadOverworldBGTiles
     ldh  a, [hNeedsUpdatingBGTiles]
     cp   $02
     jp   z, LoadDungeonMinimapTiles
@@ -595,7 +595,7 @@ LoadOAMTiles::
 
     ldh  a, [hNeedsUpdatingEnnemiesTiles]
     and  a
-    jp   z, label_73E
+    jr   z, label_73E
     ld   a, [$C197]
     ld   e, a
     ld   d, $00

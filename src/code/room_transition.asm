@@ -480,11 +480,6 @@ RoomTransitionPrepareHandler::
 
     xor  a                                        ; $7ACC: $AF
     ld   [$C1CF], a                               ; $7ACD: $EA $CF $C1
-    ld   a, [wTunicType]                          ; $7AD0: $FA $0F $DC
-    and  a                                        ; $7AD3: $A7
-    ldh  a, [hDefaultMusicTrack]                  ; $7AD4: $F0 $B0
-    jr   nz, .jr_002_7AE2                         ; $7AD6: $20 $0A
-
     ld   a, [wActivePowerUp]                      ; $7AD8: $FA $7C $D4
     and  a                                        ; $7ADB: $A7
     ldh  a, [hDefaultMusicTrack]                  ; $7ADC: $F0 $B0

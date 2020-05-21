@@ -35,13 +35,6 @@ MinimapLayoutTable::
 GameplayWorldSubtype0Handler::
     call label_27F2
     call IncrementGameplaySubtype
-    ld   a, [ROM_DebugTool2]
-    and  a
-    jr   z, jr_001_43A7
-    ld   a, $0B
-    ld   [wBGMapToLoad], a
-    ret
-
 jr_001_43A7::
     ld   a, [wIsIndoor]
     and  a
@@ -262,13 +255,13 @@ jr_001_44F5::
     ret
 
 GameplayWorldSubtype4Handler::
-    call LoadHeartsAndRuppeesCount
     call IncrementGameplaySubtype
+    call LoadHeartsAndRuppeesCount
     ret
 
 GameplayWorldSubtype5Handler::
-    call label_3E5A
     call IncrementGameplaySubtype
+    call label_3E5A
     ret
 
 GameplayWorldSubtype6Handler::

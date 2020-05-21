@@ -1,7 +1,190 @@
 ; File generated automatically by `tools/generate_background_data.py`
 
 
-BackgroundTileCommands24 ; $4DD4
+BackgroundTileCommands15 ; $4DD4
+  db    $98, $00, $13; draw row of 20 tiles
+  db    $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03
+  db    $98, $20, $13; draw row of 20 tiles
+  db    $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13
+  db    $98, $40, $13; draw row of 20 tiles
+  db    $02, $03, $04, $05, $06, $07, $06, $07, $07, $06, $06, $07, $06, $07, $07, $07, $06, $08, $00, $01
+  db    $98, $60, $13; draw row of 20 tiles
+  db    $12, $13, $09, $0A, $0B, $14, $0C, $0D, $0E, $0F, $0B, $15, $14, $15, $0B, $14, $16, $17, $10, $11
+  db    $98, $80, $13; draw row of 20 tiles
+  db    $00, $03, $18, $19, $1A, $1B, $1C, $1D, $1E, $1F, $20, $21, $22, $1E, $20, $22, $24, $25, $00, $03
+  db    $98, $A0, $13; draw row of 20 tiles
+  db    $10, $13, $26, $27, $28, $29, $2A, $2B, $2C, $22, $21, $37, $21, $22, $1F, $20, $42, $2D, $10, $13
+  db    $98, $C0, $13; draw row of 20 tiles
+  db    $02, $03, $18, $2E, $2F, $30, $42, $1D, $40, $21, $1F, $22, $20, $1F, $37, $21, $40, $31, $00, $01
+  db    $98, $E0, $13; draw row of 20 tiles
+  db    $12, $13, $32, $33, $34, $42, $35, $36, $1D, $22, $20, $1F, $39, $37, $38, $39, $42, $2D, $10, $11
+  db    $99, $00, $13; draw row of 20 tiles
+  db    $00, $03, $3A, $3B, $2B, $2C, $3C, $1D, $3D, $3E, $3F, $42, $40, $40, $40, $40, $3C, $31, $00, $03
+  db    $99, $20, $13; draw row of 20 tiles
+  db    $10, $13, $18, $41, $42, $3C, $1D, $42, $43, $44, $45, $40, $42, $40, $42, $1D, $46, $31, $10, $13
+  db    $99, $40, $13; draw row of 20 tiles
+  db    $02, $03, $18, $47, $48, $49, $4A, $4B, $48, $49, $4A, $4C, $4D, $4E, $3C, $4F, $50, $2D, $00, $01
+  db    $99, $60, $13; draw row of 20 tiles
+  db    $12, $13, $51, $52, $53, $54, $55, $56, $57, $58, $56, $58, $59, $5A, $5B, $5C, $5D, $2D, $10, $11
+  db    $99, $80, $13; draw row of 20 tiles
+  db    $02, $03, $5E, $5F, $60, $61, $62, $63, $64, $65, $63, $64, $66, $67, $68, $69, $6A, $31, $00, $03
+  db    $99, $A0, $13; draw row of 20 tiles
+  db    $10, $13, $18, $6B, $6C, $6D, $70, $6E, $6F, $70, $6E, $6F, $71, $72, $42, $73, $50, $2D, $10, $13
+  db    $99, $C0, $13; draw row of 20 tiles
+  db    $02, $03, $26, $41, $42, $1D, $3C, $1D, $74, $75, $76, $1D, $40, $1D, $35, $36, $77, $78, $00, $01
+  db    $99, $E0, $13; draw row of 20 tiles
+  db    $12, $13, $79, $10, $7B, $7A, $7B, $7A, $7C, $7D, $23, $7A, $7B, $7B, $7A, $7A, $7F, $13, $10, $11
+  db    $9A, $00, $13; draw row of 20 tiles
+  db    $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03
+  db    $9A, $20, $13; draw row of 20 tiles
+  db    $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13
+  db    $00 ; end of draw commands
+
+BackgroundTileCommands12 ; $4F73
+  db    $98, $00, $53, $05 ; draw row of 20x the same tile
+  db    $98, $20, $53, $05 ; draw row of 20x the same tile
+  db    $98, $40, $53, $05 ; draw row of 20x the same tile
+  db    $98, $60, $53, $05 ; draw row of 20x the same tile
+  db    $98, $80, $53, $05 ; draw row of 20x the same tile
+  db    $98, $A0, $53, $05 ; draw row of 20x the same tile
+  db    $98, $C0, $53, $05 ; draw row of 20x the same tile
+  db    $98, $E0, $53, $05 ; draw row of 20x the same tile
+  db    $99, $00, $53, $05 ; draw row of 20x the same tile
+  db    $99, $20, $53, $05 ; draw row of 20x the same tile
+  db    $99, $40, $53, $05 ; draw row of 20x the same tile
+  db    $99, $60, $53, $05 ; draw row of 20x the same tile
+  db    $99, $80, $53, $05 ; draw row of 20x the same tile
+  db    $99, $A0, $53, $05 ; draw row of 20x the same tile
+  db    $99, $C0, $53, $05 ; draw row of 20x the same tile
+  db    $99, $E0, $53, $05 ; draw row of 20x the same tile
+  db    $9A, $00, $53, $05 ; draw row of 20x the same tile
+  db    $9A, $20, $53, $05 ; draw row of 20x the same tile
+  db    $98, $00, $53, $05 ; draw row of 20x the same tile
+  db    $98, $20, $53, $05 ; draw row of 20x the same tile
+  db    $98, $40, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7B, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7E, $05, $05, $05, $05, $05
+  db    $98, $60, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $00, $01, $02, $03, $04, $05, $06, $07, $7F, $05, $05, $05, $05, $05
+  db    $98, $80, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $10, $11, $12, $13, $14, $15, $16, $17, $7F, $05, $05, $05, $05, $05
+  db    $98, $A0, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $20, $21, $22, $23, $24, $25, $26, $27, $7F, $05, $05, $05, $05, $05
+  db    $98, $C0, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $30, $31, $32, $33, $34, $35, $36, $37, $7F, $05, $05, $05, $05, $05
+  db    $98, $E0, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $40, $41, $42, $43, $44, $45, $46, $47, $7F, $05, $05, $05, $05, $05
+  db    $99, $00, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $50, $51, $52, $53, $54, $55, $56, $57, $7F, $05, $05, $05, $05, $05
+  db    $99, $20, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $60, $61, $62, $63, $64, $65, $66, $67, $7F, $05, $05, $05, $05, $05
+  db    $99, $40, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $70, $71, $72, $73, $74, $75, $76, $77, $7F, $05, $05, $05, $05, $05
+  db    $99, $60, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $08, $09, $0A, $0B, $0C, $0D, $0E, $0F, $7F, $68, $05, $05, $05, $05
+  db    $99, $80, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7F, $18, $19, $1A, $1B, $1C, $1D, $1E, $1F, $7F, $78, $79, $05, $05, $05
+  db    $99, $A0, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $7D, $3E, $4D, $4E, $58, $69, $6A, $6B, $6C, $6D, $6E, $6F, $05, $05, $05
+  db    $99, $C0, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $28, $29, $2A, $2B, $2C, $2D, $2E, $2F, $05, $05
+  db    $99, $E0, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $38, $39, $3A, $3B, $3C, $3D, $3D, $3F, $05, $05
+  db    $9A, $00, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $48, $49, $4A, $4B, $4C, $3D, $3D, $4F, $05, $05
+  db    $9A, $20, $13; draw row of 20 tiles
+  db    $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $59, $5A, $5B, $5C, $5D, $5E, $5F, $05, $05
+  db    $00 ; end of draw commands
+
+BackgroundTileCommands13 ; $5134
+  db    $98, $00, $53, $7C ; draw row of 20x the same tile
+  db    $98, $20, $53, $7C ; draw row of 20x the same tile
+  db    $98, $40, $53, $7C ; draw row of 20x the same tile
+  db    $98, $60, $13; draw row of 20 tiles
+  db    $06, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $09
+  db    $98, $80, $13; draw row of 20 tiles
+  db    $7F, $16, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $17, $7F
+  db    $98, $A0, $13; draw row of 20 tiles
+  db    $7F, $7F, $06, $07, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $08, $09, $06, $07, $08, $09, $7F, $7F
+  db    $98, $C0, $13; draw row of 20 tiles
+  db    $0D, $0E, $0F, $20, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $17, $7F, $7F, $16, $0A, $0B, $0C, $0D
+  db    $98, $E0, $13; draw row of 20 tiles
+  db    $1D, $1E, $1F, $30, $06, $07, $7C, $7C, $7C, $7C, $08, $09, $7F, $7F, $7F, $7F, $1A, $1B, $1C, $1D
+  db    $99, $00, $13; draw row of 20 tiles
+  db    $24, $25, $26, $27, $7F, $16, $7C, $7C, $7C, $7C, $17, $7F, $7F, $7F, $7F, $7F, $21, $22, $23, $24
+  db    $99, $20, $13; draw row of 20 tiles
+  db    $34, $35, $36, $37, $50, $51, $50, $51, $50, $51, $50, $51, $50, $51, $50, $51, $31, $32, $33, $34
+  db    $99, $40, $13; draw row of 20 tiles
+  db    $2B, $2C, $2D, $2E, $52, $53, $52, $53, $52, $53, $52, $53, $52, $53, $52, $53, $28, $29, $2A, $2B
+  db    $99, $60, $13; draw row of 20 tiles
+  db    $3B, $3C, $54, $55, $54, $55, $54, $55, $54, $55, $54, $55, $54, $55, $54, $55, $54, $55, $3A, $3B
+  db    $99, $80, $13; draw row of 20 tiles
+  db    $3E, $3F, $56, $57, $56, $57, $56, $57, $56, $57, $56, $57, $56, $57, $56, $57, $56, $57, $3D, $3E
+  db    $99, $A0, $13; draw row of 20 tiles
+  db    $3E, $3F, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $3D, $3E
+  db    $99, $C0, $13; draw row of 20 tiles
+  db    $3E, $3F, $10, $11, $10, $11, $10, $11, $10, $11, $10, $11, $10, $11, $04, $05, $10, $11, $3D, $3E
+  db    $99, $E0, $13; draw row of 20 tiles
+  db    $43, $44, $45, $46, $04, $05, $02, $18, $19, $38, $39, $4E, $4F, $03, $14, $15, $40, $41, $42, $43
+  db    $9A, $00, $13; draw row of 20 tiles
+  db    $4A, $4B, $4C, $4D, $14, $15, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $47, $48, $49, $4A
+  db    $9A, $20, $13; draw row of 20 tiles
+  db    $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13
+  db    $9A, $40, $53, $7C ; draw row of 20x the same tile
+  db    $9A, $60, $53, $7C ; draw row of 20x the same tile
+  db    $9A, $80, $53, $7C ; draw row of 20x the same tile
+  db    $9A, $A0, $53, $7C ; draw row of 20x the same tile
+  db    $9A, $C0, $53, $7C ; draw row of 20x the same tile
+  db    $9A, $E0, $53, $7C ; draw row of 20x the same tile
+  db    $9B, $00, $53, $7C ; draw row of 20x the same tile
+  db    $9B, $20, $53, $7C ; draw row of 20x the same tile
+  db    $9B, $40, $53, $7C ; draw row of 20x the same tile
+  db    $9B, $60, $53, $7C ; draw row of 20x the same tile
+  db    $9B, $80, $53, $7C ; draw row of 20x the same tile
+  db    $9B, $A0, $53, $7C ; draw row of 20x the same tile
+  db    $9B, $C0, $53, $7C ; draw row of 20x the same tile
+  db    $9B, $E0, $53, $7C ; draw row of 20x the same tile
+  db    $00 ; end of draw commands
+
+BackgroundTileCommands23 ; $52D2
+  db    $98, $00, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $04, $05, $06, $07, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
+  db    $98, $20, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $30, $7F, $7F, $40, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
+  db    $98, $40, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $00, $01, $02, $03, $03, $01, $01, $02, $08, $09, $7F, $7F, $7F, $7F, $7F
+  db    $98, $60, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $7F, $7F, $7F, $7F, $7F
+  db    $98, $80, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $7F, $7F, $7F, $7F, $7F
+  db    $98, $A0, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $10, $31, $32, $33, $34, $35, $36, $37, $38, $39, $7F, $7F, $7F, $7F, $7F
+  db    $98, $C0, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $20, $41, $42, $43, $44, $45, $46, $47, $48, $49, $7F, $7F, $7F, $7F, $7F
+  db    $98, $E0, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $7F, $7F, $7F, $7F, $7F
+  db    $99, $00, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $60, $61, $62, $63, $45, $65, $66, $67, $68, $69, $7F, $7F, $7F, $7F, $7F
+  db    $99, $20, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $70, $71, $72, $73, $75, $75, $76, $77, $78, $79, $7F, $7F, $7F, $7F, $7F
+  db    $99, $40, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $0A, $0B, $0C, $0D, $0E, $0F, $77, $4B, $4C, $4D, $7F, $7F, $7F, $7F, $7F
+  db    $99, $60, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $1A, $1B, $1C, $1D, $1E, $1F, $5A, $5B, $5C, $5D, $7F, $7F, $7F, $7F, $7F
+  db    $99, $80, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $2A, $2B, $2C, $2D, $2E, $2F, $6A, $6B, $1B, $6D, $7F, $7F, $7F, $7F, $7F
+  db    $99, $A0, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $3A, $3B, $3C, $3D, $3E, $3F, $7A, $7B, $7C, $7D, $7F, $7F, $7F, $7F, $7F
+  db    $99, $C0, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $6E, $4A, $64, $64, $6C, $64, $4A, $4A, $6C, $4A, $64, $6F, $7F, $7F, $7F, $7F
+  db    $99, $E0, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $7F, $04, $05, $7F, $4E, $4F, $7F, $06, $07, $7F, $7F, $7F, $7F, $7F, $7F
+  db    $9A, $00, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $7F, $30, $7F, $7F, $4E, $4F, $7F, $7F, $40, $7F, $7F, $7F, $7F, $7F, $7F
+  db    $9A, $20, $13; draw row of 20 tiles
+  db    $7F, $7F, $7F, $7F, $7F, $7F, $40, $7F, $7F, $5E, $5F, $7F, $7F, $30, $7F, $7F, $7F, $7F, $7F, $7F
+  db    $00 ; end of draw commands
+
+BackgroundTileCommands24 ; $5471
   db    $9B, $E0, $53, $7C ; draw row of 20x the same tile
   db    $98, $00, $53, $7C ; draw row of 20x the same tile
   db    $98, $20, $53, $7C ; draw row of 20x the same tile
@@ -48,7 +231,7 @@ BackgroundTileCommands24 ; $4DD4
   db    $24, $25, $26, $26, $29, $29, $27, $28
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1E ; $4E9A
+BackgroundTileCommands1E ; $5537
   db    $99, $E0, $13; draw row of 20 tiles
   db    $1B, $1B, $48, $49, $30, $31, $32, $33, $7F, $5A, $74, $74, $7F, $5A, $30, $31, $32, $33, $30, $31
   db    $98, $00, $13; draw row of 20 tiles
@@ -89,7 +272,7 @@ BackgroundTileCommands1E ; $4E9A
   db    $1B, $1B, $48, $49, $34, $35, $36, $37, $7F, $5A, $74, $74, $7F, $5A, $34, $35, $30, $31, $32, $33
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1F ; $5050
+BackgroundTileCommands1F ; $56ED
   db    $98, $00, $13; draw row of 20 tiles
   db    $26, $27, $5A, $7F, $44, $56, $55, $56, $55, $56, $55, $56, $55, $56, $55, $56, $55, $56, $55, $56
   db    $98, $20, $13; draw row of 20 tiles
@@ -128,7 +311,7 @@ BackgroundTileCommands1F ; $5050
   db    $36, $37, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A
   db    $00 ; end of draw commands
 
-BackgroundTileCommands20 ; $51EF
+BackgroundTileCommands20 ; $588C
   db    $98, $00, $13; draw row of 20 tiles
   db    $24, $25, $26, $27, $24, $25, $26, $27, $75, $75, $75, $75, $75, $75, $24, $25, $26, $27, $24, $25
   db    $98, $20, $13; draw row of 20 tiles
@@ -167,7 +350,7 @@ BackgroundTileCommands20 ; $51EF
   db    $36, $37, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A, $7F, $5A
   db    $00 ; end of draw commands
 
-BackgroundTileCommands21 ; $538E
+BackgroundTileCommands21 ; $5A2B
   db    $98, $00, $13; draw row of 20 tiles
   db    $92, $7C, $92, $7C, $92, $83, $5A, $7F, $5A, $7F, $5A, $7F, $75, $75, $82, $7C, $92, $7C, $24, $25
   db    $98, $20, $13; draw row of 20 tiles
@@ -206,7 +389,7 @@ BackgroundTileCommands21 ; $538E
   db    $7C, $92, $7C, $92, $7C, $83, $7F, $5A, $7F, $5A, $75, $75, $75, $75, $82, $92, $7C, $92, $8E, $8F
   db    $00 ; end of draw commands
 
-BackgroundTileCommands22 ; $552D
+BackgroundTileCommands22 ; $5BCA
   db    $98, $00, $13; draw row of 20 tiles
   db    $76, $76, $49, $59, $AC, $AD, $AC, $AD, $AC, $AD, $AC, $AD, $AC, $AD, $44, $56, $48, $51, $45, $45
   db    $98, $20, $13; draw row of 20 tiles
@@ -245,7 +428,7 @@ BackgroundTileCommands22 ; $552D
   db    $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F, $1E, $1F
   db    $00 ; end of draw commands
 
-BackgroundTileCommands01 ; $56CC
+BackgroundTileCommands01 ; $5D69
   db    $98, $00, $53, $AC ; draw row of 20x the same tile
   db    $98, $20, $53, $AC ; draw row of 20x the same tile
   db    $98, $40, $53, $AC ; draw row of 20x the same tile
@@ -288,7 +471,7 @@ BackgroundTileCommands01 ; $56CC
   db    $92, $93
   db    $00 ; end of draw commands
 
-BackgroundTileCommands16 ; $578C
+BackgroundTileCommands16 ; $5E29
   db    $9C, $00, $5F, $A0 ; draw row of 32x the same tile
   db    $9C, $20, $5F, $A0 ; draw row of 32x the same tile
   db    $9C, $40, $5F, $A0 ; draw row of 32x the same tile
@@ -404,7 +587,7 @@ BackgroundTileCommands16 ; $578C
   db    $9B, $E0, $53, $A0 ; draw row of 20x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands17 ; $5AF5
+BackgroundTileCommands17 ; $6192
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
   db    $98, $20, $5F, $AC ; draw row of 32x the same tile
   db    $98, $40, $5F, $AC ; draw row of 32x the same tile
@@ -445,7 +628,7 @@ BackgroundTileCommands17 ; $5AF5
   db    $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93, $92, $93
   db    $00 ; end of draw commands
 
-BackgroundTileCommands18 ; $5BC8
+BackgroundTileCommands18 ; $6265
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
   db    $98, $20, $5F, $AC ; draw row of 32x the same tile
   db    $98, $40, $5F, $AC ; draw row of 32x the same tile
@@ -534,7 +717,7 @@ BackgroundTileCommands18 ; $5BC8
   db    $72, $AE, $AE, $AE, $AE, $AE, $AE, $75
   db    $00 ; end of draw commands
 
-BackgroundTileCommands19 ; $5D0C
+BackgroundTileCommands19 ; $63A9
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
   db    $98, $20, $5F, $AC ; draw row of 32x the same tile
   db    $98, $40, $5F, $AC ; draw row of 32x the same tile
@@ -596,7 +779,7 @@ BackgroundTileCommands19 ; $5D0C
   db    $E0, $6C, $6D, $6E, $6F, $6C, $6D, $6E, $6F, $6C, $6D, $6E, $6F, $6C, $6D, $EF
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1A ; $5E5B
+BackgroundTileCommands1A ; $64F8
   db    $98, $00, $53, $AC ; draw row of 20x the same tile
   db    $98, $20, $53, $AC ; draw row of 20x the same tile
   db    $98, $28, $03; draw row of 4 tiles
@@ -639,7 +822,7 @@ BackgroundTileCommands1A ; $5E5B
   db    $9A, $20, $5F, $AC ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1B ; $5F47
+BackgroundTileCommands1B ; $65E4
   db    $9B, $C0, $5F, $AC ; draw row of 32x the same tile
   db    $9B, $E0, $5F, $AC ; draw row of 32x the same tile
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
@@ -692,8 +875,8 @@ BackgroundTileCommands1B ; $5F47
   db    $64, $65
   db    $00 ; end of draw commands
 
-BackgroundTileCommands1C ; $6004
-BackgroundTileCommands1D ; $6004
+BackgroundTileCommands1C ; $66A1
+BackgroundTileCommands1D ; $66A1
   db    $98, $00, $5F, $AC ; draw row of 32x the same tile
   db    $98, $20, $5F, $AC ; draw row of 32x the same tile
   db    $98, $40, $5F, $AC ; draw row of 32x the same tile
@@ -842,7 +1025,7 @@ BackgroundTileCommands1D ; $6004
   db    $9E, $20, $5F, $AC ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands14 ; $62A8
+BackgroundTileCommands14 ; $6945
   db    $9A, $00, $53, $7E ; draw row of 20x the same tile
   db    $9A, $20, $53, $7E ; draw row of 20x the same tile
   db    $9A, $40, $53, $7E ; draw row of 20x the same tile
@@ -861,7 +1044,7 @@ BackgroundTileCommands14 ; $62A8
   db    $9B, $E0, $53, $7E ; draw row of 20x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands08 ; $62E9
+BackgroundTileCommands08 ; $6986
   db    $98, $00, $13; draw row of 20 tiles
   db    $FC, $3B, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $52, $3C, $FC
   db    $9A, $20, $13; draw row of 20 tiles
@@ -872,28 +1055,19 @@ BackgroundTileCommands08 ; $62E9
   db    $98, $32, $CF, $51 ; draw column of 16x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands04 ; $6328
-  db    $99, $E6, $0A; draw row of 11 tiles
-  db    $04, $11, $00, $12, $04, $7E, $7E, $02, $0E, $0F, $18
+BackgroundTileCommands04 ; $69C5
+  db    $99, $E6, $0C; draw row of 13 tiles
+  db    $66, $67, $68, $69, $6A, $7E, $7E, $60, $61, $62, $63, $64, $65
 
-BackgroundTileCommands03 ; $6336
-  db    $98, $00, $48, $8F ; draw row of 9x the same tile
-  db    $98, $01, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $03, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $05, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $07, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $09, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $20, $08; draw row of 9 tiles
-  db    $9F, $80, $81, $82, $83, $84, $89, $8F, $9F
-  db    $98, $40, $08; draw row of 9 tiles
-  db    $8F, $90, $91, $92, $93, $94, $AA, $9F, $8F
-  db    $98, $60, $08; draw row of 9 tiles
-  db    $9F, $8A, $8B, $8C, $8D, $8E, $AF, $8F, $9F
+BackgroundTileCommands03 ; $69D5
+  db    $98, $00, $13; draw row of 20 tiles
+  db    $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
+  db    $98, $20, $13; draw row of 20 tiles
+  db    $9F, $80, $81, $82, $83, $84, $85, $8F, $9F, $7F, $7F, $7F, $A3, $A4, $7F, $7F, $A3, $A4, $7F, $7F
+  db    $98, $40, $13; draw row of 20 tiles
+  db    $8F, $90, $91, $92, $93, $94, $8F, $9F, $8F, $A1, $A0, $A1, $A5, $A6, $A0, $A1, $A5, $A6, $A0, $A1
+  db    $98, $60, $13; draw row of 20 tiles
+  db    $9F, $95, $9B, $9C, $9D, $9E, $9F, $8F, $9F, $A2, $A2, $A2, $A7, $A8, $A2, $A2, $A7, $A8, $A2, $A2
   db    $98, $80, $52, $8F ; draw row of 19x the same tile
   db    $98, $81, $00; draw row of 1 tiles
   db    $9F
@@ -928,28 +1102,7 @@ BackgroundTileCommands03 ; $6336
   db    $8F
   db    $9A, $00, $00; draw row of 1 tiles
   db    $8F
-  db    $9A, $20, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $21, $50, $8F ; draw row of 17x the same tile
-  db    $9A, $22, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $24, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $26, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $28, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $2A, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $2C, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $2E, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $30, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $32, $00; draw row of 1 tiles
-  db    $8F
-  db    $98, $B3, $CA, $8F ; draw column of 11x the same tile
+  db    $98, $B3, $CB, $8F ; draw column of 12x the same tile
   db    $98, $D3, $00; draw row of 1 tiles
   db    $9F
   db    $99, $13, $00; draw row of 1 tiles
@@ -962,71 +1115,51 @@ BackgroundTileCommands03 ; $6336
   db    $9F
   db    $9A, $13, $00; draw row of 1 tiles
   db    $9F
+  db    $9A, $20, $53, $9F ; draw row of 20x the same tile
+  db    $9A, $21, $00; draw row of 1 tiles
+  db    $8F
+  db    $9A, $23, $00; draw row of 1 tiles
+  db    $8F
+  db    $9A, $25, $00; draw row of 1 tiles
+  db    $8F
+  db    $9A, $27, $00; draw row of 1 tiles
+  db    $8F
+  db    $9A, $29, $00; draw row of 1 tiles
+  db    $8F
+  db    $9A, $2B, $00; draw row of 1 tiles
+  db    $8F
+  db    $9A, $2D, $00; draw row of 1 tiles
+  db    $8F
+  db    $9A, $2F, $00; draw row of 1 tiles
+  db    $8F
+  db    $9A, $31, $00; draw row of 1 tiles
+  db    $8F
   db    $9A, $33, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $0A, $49, $7F ; draw row of 10x the same tile
-  db    $98, $29, $4A, $7F ; draw row of 11x the same tile
-  db    $98, $69, $4A, $A2 ; draw row of 11x the same tile
-  db    $98, $49, $0A; draw row of 11 tiles
-  db    $A1, $A0, $A1, $A5, $A6, $A0, $A1, $A5, $A6, $A0, $A1
-  db    $98, $2C, $01; draw row of 2 tiles
-  db    $A3, $A4
-  db    $98, $30, $01; draw row of 2 tiles
-  db    $A3, $A4
-  db    $98, $6C, $01; draw row of 2 tiles
-  db    $A7, $A8
-  db    $98, $70, $01; draw row of 2 tiles
-  db    $A7, $A8
+  db    $8F
+  db    $99, $C2, $4F, $A9 ; draw row of 16x the same tile
   db    $98, $C4, $00; draw row of 1 tiles
   db    $AB
   db    $99, $24, $00; draw row of 1 tiles
   db    $AC
   db    $99, $84, $00; draw row of 1 tiles
   db    $AD
-  db    $99, $C2, $4F, $A9 ; draw row of 16x the same tile
-  db    $9A, $32, $00; draw row of 1 tiles
-  db    $9F
-  db    $9A, $33, $00; draw row of 1 tiles
-  db    $8F
   db    $00 ; end of draw commands
 
-BackgroundTileCommands05 ; $644D
-  db    $98, $00, $50, $8F ; draw row of 17x the same tile
-  db    $98, $01, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $03, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $05, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $07, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $09, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $0B, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $0D, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $0F, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $11, $00; draw row of 1 tiles
-  db    $9F
+BackgroundTileCommands05 ; $6AD2
+  db    $98, $00, $13; draw row of 20 tiles
+  db    $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $8F, $9F, $7F, $7F
   db    $98, $20, $07; draw row of 8 tiles
-  db    $9F, $85, $86, $87, $88, $8F, $9F, $8F
+  db    $9F, $86, $87, $88, $89, $8F, $9F, $8F
+  db    $98, $30, $03; draw row of 4 tiles
+  db    $9F, $7F, $7F, $7F
   db    $98, $40, $07; draw row of 8 tiles
-  db    $8F, $95, $96, $97, $98, $99, $8F, $9F
+  db    $8F, $96, $97, $98, $99, $9A, $8F, $9F
+  db    $98, $50, $03; draw row of 4 tiles
+  db    $8F, $A1, $A0, $A1
   db    $98, $60, $07; draw row of 8 tiles
-  db    $9F, $9A, $9B, $9C, $9D, $9E, $9F, $8F
-  db    $98, $30, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $50, $00; draw row of 1 tiles
-  db    $8F
-  db    $98, $70, $00; draw row of 1 tiles
-  db    $9F
-  db    $98, $12, $41, $7F ; draw row of 2x the same tile
-  db    $98, $31, $42, $7F ; draw row of 3x the same tile
-  db    $98, $51, $02; draw row of 3 tiles
-  db    $A1, $A0, $A1
-  db    $98, $71, $42, $A2 ; draw row of 3x the same tile
+  db    $9F, $8A, $8B, $8C, $8D, $8E, $9F, $8F
+  db    $98, $70, $03; draw row of 4 tiles
+  db    $9F, $A2, $A2, $A2
   db    $98, $80, $52, $8F ; draw row of 19x the same tile
   db    $98, $81, $00; draw row of 1 tiles
   db    $9F
@@ -1048,7 +1181,7 @@ BackgroundTileCommands05 ; $644D
   db    $9F
   db    $98, $93, $00; draw row of 1 tiles
   db    $9F
-  db    $98, $A0, $C9, $9F ; draw column of 10x the same tile
+  db    $98, $A0, $CB, $9F ; draw column of 12x the same tile
   db    $98, $C0, $00; draw row of 1 tiles
   db    $8F
   db    $99, $00, $00; draw row of 1 tiles
@@ -1059,7 +1192,9 @@ BackgroundTileCommands05 ; $644D
   db    $8F
   db    $99, $C0, $00; draw row of 1 tiles
   db    $8F
-  db    $98, $B3, $C9, $8F ; draw column of 10x the same tile
+  db    $9A, $00, $00; draw row of 1 tiles
+  db    $8F
+  db    $98, $B3, $CB, $8F ; draw column of 12x the same tile
   db    $98, $D3, $00; draw row of 1 tiles
   db    $9F
   db    $99, $13, $00; draw row of 1 tiles
@@ -1070,7 +1205,9 @@ BackgroundTileCommands05 ; $644D
   db    $9F
   db    $99, $D3, $00; draw row of 1 tiles
   db    $9F
-  db    $9A, $20, $52, $9F ; draw row of 19x the same tile
+  db    $9A, $13, $00; draw row of 1 tiles
+  db    $9F
+  db    $9A, $20, $53, $9F ; draw row of 20x the same tile
   db    $9A, $21, $00; draw row of 1 tiles
   db    $8F
   db    $9A, $23, $00; draw row of 1 tiles
@@ -1091,25 +1228,41 @@ BackgroundTileCommands05 ; $644D
   db    $8F
   db    $9A, $33, $00; draw row of 1 tiles
   db    $8F
+  db    $98, $A3, $00; draw row of 1 tiles
+  db    $C8
   db    $98, $C2, $06; draw row of 7 tiles
-  db    $00, $01, $02, $03, $04, $05, $06
+  db    $00, $00, $01, $02, $03, $04, $05
   db    $99, $02, $06; draw row of 7 tiles
-  db    $07, $08, $09, $0A, $0B, $0C, $0D
+  db    $06, $07, $08, $09, $0A, $0B, $0C
+  db    $99, $24, $00; draw row of 1 tiles
+  db    $C8
   db    $99, $42, $06; draw row of 7 tiles
-  db    $0E, $0F, $10, $11, $12, $13, $14
-  db    $99, $82, $04; draw row of 5 tiles
-  db    $15, $16, $17, $18, $19
+  db    $0D, $0E, $0E, $0F, $10, $11, $12
+  db    $99, $64, $00; draw row of 1 tiles
+  db    $C8
+  db    $99, $82, $06; draw row of 7 tiles
+  db    $13, $14, $14, $15, $16, $17, $18
+  db    $99, $C2, $00; draw row of 1 tiles
+  db    $19
+  db    $98, $AC, $00; draw row of 1 tiles
+  db    $C9
   db    $98, $CB, $06; draw row of 7 tiles
-  db    $1A, $1B, $1C, $1D, $1E, $1F, $20
+  db    $1A, $49, $1B, $1C, $1D, $1E, $1F
   db    $99, $0B, $06; draw row of 7 tiles
-  db    $21, $22, $23, $24, $25, $26, $27
+  db    $20, $21, $22, $23, $24, $25, $26
+  db    $99, $2D, $00; draw row of 1 tiles
+  db    $C9
   db    $99, $4B, $06; draw row of 7 tiles
-  db    $28, $29, $2A, $2B, $2C, $2D, $2E
-  db    $99, $8B, $04; draw row of 5 tiles
-  db    $2F, $30, $31, $32, $3E
+  db    $27, $28, $51, $29, $2A, $2B, $2C
+  db    $99, $6E, $00; draw row of 1 tiles
+  db    $C9
+  db    $99, $8B, $06; draw row of 7 tiles
+  db    $54, $2D, $2E, $4F, $2F, $30, $31
+  db    $99, $CB, $01; draw row of 2 tiles
+  db    $32, $3E
   db    $00 ; end of draw commands
 
-BackgroundTileCommands06 ; $6589
+BackgroundTileCommands06 ; $6C21
   db    $98, $00, $52, $8F ; draw row of 19x the same tile
   db    $98, $01, $00; draw row of 1 tiles
   db    $9F
@@ -1184,10 +1337,12 @@ BackgroundTileCommands06 ; $6589
   db    $9F
   db    $9A, $32, $00; draw row of 1 tiles
   db    $9F
-  db    $98, $42, $0A; draw row of 11 tiles
-  db    $04, $11, $00, $12, $04, $7E, $16, $07, $08, $02, $07
-  db    $98, $8A, $07; draw row of 8 tiles
-  db    $0F, $0B, $00, $18, $04, $11, $7E, $3C
+  db    $98, $42, $0C; draw row of 13 tiles
+  db    $16, $04, $0B, $02, $07, $04, $12, $7E, $12, $0F, $08, $04, $0B
+  db    $98, $6A, $00; draw row of 1 tiles
+  db    $C8
+  db    $98, $89, $08; draw row of 9 tiles
+  db    $0B, $0E, $12, $02, $07, $04, $0D, $7E, $3C
   db    $98, $C4, $00; draw row of 1 tiles
   db    $AB
   db    $99, $24, $00; draw row of 1 tiles
@@ -1195,11 +1350,15 @@ BackgroundTileCommands06 ; $6589
   db    $99, $84, $00; draw row of 1 tiles
   db    $AD
   db    $99, $C2, $4F, $A9 ; draw row of 16x the same tile
+  db    $99, $C7, $00; draw row of 1 tiles
+  db    $6F
+  db    $99, $D1, $00; draw row of 1 tiles
+  db    $6F
   db    $99, $E4, $0D; draw row of 14 tiles
-  db    $11, $04, $13, $14, $11, $0D, $7E, $13, $0E, $7E, $0C, $04, $0D, $14
+  db    $19, $14, $11, $14, $02, $0A, $6B, $6C, $6D, $6E, $0C, $04, $0D, $14
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0C ; $6660
+BackgroundTileCommands0C ; $6D07
   db    $98, $00, $52, $8F ; draw row of 19x the same tile
   db    $98, $01, $00; draw row of 1 tiles
   db    $9F
@@ -1275,10 +1434,14 @@ BackgroundTileCommands0C ; $6660
   db    $9A, $32, $00; draw row of 1 tiles
   db    $9F
   db    $99, $C2, $4F, $A9 ; draw row of 16x the same tile
-  db    $98, $42, $0A; draw row of 11 tiles
-  db    $02, $0E, $0F, $18, $7E, $0F, $0B, $00, $18, $04, $11
-  db    $98, $84, $0C; draw row of 13 tiles
-  db    $3F, $05, $11, $0E, $0C, $3F, $7E, $7E, $7E, $3F, $13, $0E, $3F
+  db    $99, $C6, $00; draw row of 1 tiles
+  db    $6F
+  db    $99, $D1, $00; draw row of 1 tiles
+  db    $6F
+  db    $98, $42, $0D; draw row of 14 tiles
+  db    $12, $0F, $08, $04, $0B, $7E, $0A, $0E, $0F, $08, $04, $11, $04, $0D
+  db    $98, $83, $0E; draw row of 15 tiles
+  db    $3F, $15, $0E, $0D, $3F, $7E, $7E, $7E, $7E, $3F, $0D, $00, $02, $07, $3F
   db    $98, $C3, $00; draw row of 1 tiles
   db    $AB
   db    $98, $CC, $00; draw row of 1 tiles
@@ -1291,11 +1454,11 @@ BackgroundTileCommands0C ; $6660
   db    $AD
   db    $99, $8C, $00; draw row of 1 tiles
   db    $AD
-  db    $99, $E4, $0D; draw row of 14 tiles
-  db    $11, $04, $13, $14, $11, $0D, $7E, $13, $0E, $7E, $0C, $04, $0D, $14
+  db    $99, $E3, $0E; draw row of 15 tiles
+  db    $19, $14, $11, $14, $02, $0A, $7E, $19, $14, $0C, $7E, $0C, $04, $0D, $14
   db    $00 ; end of draw commands
 
-BackgroundTileCommands02 ; $6748
+BackgroundTileCommands02 ; $6DFD
   db    $9C, $00, $53, $7F ; draw row of 20x the same tile
   db    $9C, $20, $53, $7F ; draw row of 20x the same tile
   db    $9C, $40, $53, $7F ; draw row of 20x the same tile
@@ -1319,25 +1482,18 @@ BackgroundTileCommands02 ; $6748
   db    $9C, $20, $0E; draw row of 15 tiles
   db    $BC, $7F, $7F, $7F, $BF, $BC, $7F, $7F, $7F, $BF, $7F, $7F, $7F, $7F, $7F
   db    $9C, $40, $53, $CC ; draw row of 20x the same tile
-  db    $9C, $68, $CE, $8D ; draw column of 15x the same tile
+  db    $9C, $68, $D3, $8D ; draw column of 20x the same tile
   db    $9C, $E9, $49, $7F ; draw row of 10x the same tile
   db    $9D, $09, $49, $7F ; draw row of 10x the same tile
   db    $9D, $0A, $C8, $7F ; draw column of 9x the same tile
-  db    $00 ; end of draw commands
 
-BackgroundTileCommands09 ; $67C9
-  db    $9A, $14, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $9A, $34, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $9A, $54, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $9A, $74, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $9A, $94, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $9A, $B4, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
+BackgroundTileCommands09 ; $6E7D
+  db    $9A, $14, $4B, $7C ; draw row of 12x the same tile
+  db    $9A, $34, $4B, $7C ; draw row of 12x the same tile
+  db    $9A, $54, $4B, $7C ; draw row of 12x the same tile
+  db    $9A, $74, $4B, $7C ; draw row of 12x the same tile
+  db    $9A, $94, $4B, $7C ; draw row of 12x the same tile
+  db    $9A, $B4, $4B, $7C ; draw row of 12x the same tile
   db    $9A, $D4, $0B; draw row of 12 tiles
   db    $2C, $2D, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $2A, $2B
   db    $9A, $F4, $0B; draw row of 12 tiles
@@ -1346,18 +1502,12 @@ BackgroundTileCommands09 ; $67C9
   db    $7F, $7F, $2C, $2D, $7C, $7C, $7C, $7C, $2A, $2B, $7F, $7F
   db    $9B, $34, $0B; draw row of 12 tiles
   db    $7F, $7F, $7F, $3D, $3E, $3F, $3E, $3F, $3A, $7F, $7F, $7F
-  db    $98, $14, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $98, $34, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $98, $54, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $98, $74, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $98, $94, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
-  db    $98, $B4, $0B; draw row of 12 tiles
-  db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C
+  db    $98, $14, $4B, $7C ; draw row of 12x the same tile
+  db    $98, $34, $4B, $7C ; draw row of 12x the same tile
+  db    $98, $54, $4B, $7C ; draw row of 12x the same tile
+  db    $98, $74, $4B, $7C ; draw row of 12x the same tile
+  db    $98, $94, $4B, $7C ; draw row of 12x the same tile
+  db    $98, $B4, $4B, $7C ; draw row of 12x the same tile
   db    $98, $D4, $0B; draw row of 12 tiles
   db    $2C, $2D, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $2A, $2B
   db    $98, $F4, $0B; draw row of 12 tiles
@@ -1368,7 +1518,7 @@ BackgroundTileCommands09 ; $67C9
   db    $7F, $7F, $7F, $3D, $3E, $3F, $3E, $3F, $3A, $7F, $7F, $7F
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0B ; $68F6
+BackgroundTileCommands0B ; $6F26
   db    $9C, $00, $5F, $7E ; draw row of 32x the same tile
   db    $9C, $20, $5F, $7E ; draw row of 32x the same tile
   db    $9C, $40, $5F, $7E ; draw row of 32x the same tile
@@ -1409,73 +1559,332 @@ BackgroundTileCommands0B ; $68F6
   db    $9D, $49, $41, $7F ; draw row of 2x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0A ; $698F
-  db    $98, $65, $4B, $7F ; draw row of 12x the same tile
-  db    $98, $83, $4D, $7F ; draw row of 14x the same tile
-  db    $98, $A3, $4D, $7F ; draw row of 14x the same tile
-  db    $98, $C3, $4D, $7F ; draw row of 14x the same tile
-  db    $98, $E3, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $03, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $23, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $43, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $63, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $83, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $A3, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $C3, $4D, $7F ; draw row of 14x the same tile
-  db    $98, $42, $0F; draw row of 16 tiles
-  db    $90, $91, $92, $93, $94, $98, $99, $98, $99, $98, $99, $98, $99, $98, $99, $A4
-  db    $98, $62, $02; draw row of 3 tiles
-  db    $95, $96, $97
-  db    $98, $82, $8B ; draw column of 12 tiles
-  db    $9E, $9C, $9E, $9C, $9E, $9C, $9E, $9C, $9E, $9C, $9E, $A5
-  db    $99, $E3, $0E; draw row of 15 tiles
-  db    $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $A6
-  db    $98, $71, $8B ; draw column of 12 tiles
-  db    $9D, $9F, $9D, $9F, $9D, $9F, $9D, $9F, $9D, $9F, $9D, $9F
-  db    $9A, $03, $0E; draw row of 15 tiles
-  db    $A7, $A8, $A7, $A8, $A7, $A8, $A7, $A8, $A7, $A8, $A7, $A8, $A7, $A8, $A7
-  db    $98, $86, $47, $A2 ; draw row of 8x the same tile
-  db    $98, $A5, $09; draw row of 10 tiles
-  db    $A0, $80, $81, $82, $83, $84, $85, $86, $87, $A1
-  db    $98, $C5, $09; draw row of 10 tiles
-  db    $A0, $88, $89, $8A, $8B, $8C, $8D, $8E, $8F, $A1
-  db    $98, $E6, $47, $A3 ; draw row of 8x the same tile
-  db    $99, $05, $0A; draw row of 11 tiles
-  db    $A9, $AA, $AB, $AC, $AD, $B0, $B1, $B2, $B3, $B4, $B5
-  db    $99, $45, $07; draw row of 8 tiles
-  db    $A9, $AA, $AB, $AC, $AD, $B6, $B7, $B8
-  db    $99, $85, $05; draw row of 6 tiles
-  db    $B0, $B1, $B2, $B3, $B4, $B5
-  db    $99, $A5, $0A; draw row of 11 tiles
-  db    $C5, $C6, $C7, $C8, $C9, $CA, $A9, $AA, $CB, $CC, $CD
+BackgroundTileCommands0A ; $6FBF
+  db    $98, $00, $52, $AF ; draw row of 19x the same tile
+  db    $98, $01, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $03, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $05, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $07, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $09, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $0B, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $0D, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $0F, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $11, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $13, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $20, $52, $AE ; draw row of 19x the same tile
+  db    $98, $21, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $23, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $25, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $27, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $29, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $2B, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $2D, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $2F, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $31, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $33, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $40, $13; draw row of 20 tiles
+  db    $AF, $90, $91, $92, $93, $94, $98, $99, $98, $99, $98, $99, $98, $99, $98, $99, $98, $99, $A4, $AE
+  db    $98, $60, $13; draw row of 20 tiles
+  db    $AE, $95, $96, $97, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9D, $AF
+  db    $98, $80, $13; draw row of 20 tiles
+  db    $AF, $9E, $7F, $7F, $7F, $7F, $A2, $A2, $A2, $A2, $A2, $A2, $A2, $A2, $7F, $7F, $7F, $7F, $9F, $AE
+  db    $98, $A0, $13; draw row of 20 tiles
+  db    $AE, $9C, $7F, $7F, $7F, $A0, $80, $81, $82, $83, $84, $85, $86, $87, $A1, $7F, $7F, $7F, $9D, $AF
+  db    $98, $C0, $13; draw row of 20 tiles
+  db    $AF, $9E, $7F, $7F, $7F, $A0, $88, $89, $8A, $8B, $8C, $8D, $8E, $8F, $A1, $7F, $7F, $7F, $9F, $AE
+  db    $98, $E0, $13; draw row of 20 tiles
+  db    $AE, $9C, $7F, $7F, $7F, $7F, $A3, $A3, $A3, $A3, $A3, $A3, $A3, $A3, $7F, $7F, $7F, $7F, $9D, $AF
+  db    $99, $00, $13; draw row of 20 tiles
+  db    $AF, $9E, $7F, $7F, $A7, $A8, $A9, $AA, $AB, $AC, $7F, $AD, $7F, $B0, $B1, $B2, $B3, $7F, $9F, $AE
+  db    $99, $20, $13; draw row of 20 tiles
+  db    $AE, $9C, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9D, $AF
+  db    $99, $40, $13; draw row of 20 tiles
+  db    $AF, $9E, $7F, $7F, $A7, $A8, $A9, $AA, $AB, $AC, $7F, $AD, $7F, $B4, $B5, $B6, $7F, $7F, $9F, $AE
+  db    $99, $60, $13; draw row of 20 tiles
+  db    $AE, $9C, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9D, $AF
+  db    $99, $80, $13; draw row of 20 tiles
+  db    $AF, $9E, $7F, $7F, $B0, $B1, $B2, $B3, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9F, $AE
+  db    $99, $A0, $13; draw row of 20 tiles
+  db    $AE, $9C, $7F, $7F, $B7, $B8, $B9, $BA, $A7, $A8, $A9, $AA, $AB, $AC, $BB, $7F, $7F, $7F, $9D, $AF
+  db    $99, $C0, $13; draw row of 20 tiles
+  db    $AF, $9E, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9F, $AE
+  db    $99, $E0, $13; draw row of 20 tiles
+  db    $AE, $A5, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $A6, $AF
+  db    $9A, $00, $52, $AF ; draw row of 19x the same tile
+  db    $9A, $01, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $03, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $05, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $07, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $09, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $0B, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $0D, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $0F, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $11, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $13, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $20, $52, $AE ; draw row of 19x the same tile
+  db    $9A, $21, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $23, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $25, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $27, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $29, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $2B, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $2D, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $2F, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $31, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $33, $00; draw row of 1 tiles
+  db    $AF
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0D ; $6A6D
-  db    $98, $A5, $4B, $7F ; draw row of 12x the same tile
-  db    $98, $C3, $4D, $7F ; draw row of 14x the same tile
-  db    $98, $E3, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $03, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $23, $4D, $7F ; draw row of 14x the same tile
-  db    $99, $43, $4D, $7F ; draw row of 14x the same tile
-  db    $98, $82, $0F; draw row of 16 tiles
-  db    $90, $91, $92, $93, $94, $98, $99, $98, $99, $98, $99, $98, $99, $98, $99, $A4
-  db    $98, $A2, $02; draw row of 3 tiles
-  db    $95, $96, $97
-  db    $98, $C2, $84 ; draw column of 5 tiles
-  db    $9E, $9C, $9E, $9C, $9E
-  db    $98, $B1, $85 ; draw column of 6 tiles
-  db    $9D, $9F, $9D, $9F, $9D, $9F
-  db    $99, $62, $0F; draw row of 16 tiles
-  db    $A5, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $A6
-  db    $99, $82, $0F; draw row of 16 tiles
-  db    $A8, $A7, $A8, $A7, $A8, $A7, $A8, $A7, $A8, $A7, $A8, $A7, $A8, $A7, $A8, $A7
-  db    $98, $E5, $09; draw row of 10 tiles
-  db    $B9, $BA, $BB, $BC, $BD, $C0, $C1, $C2, $C3, $C4
-  db    $99, $25, $07; draw row of 8 tiles
-  db    $A9, $AA, $AB, $AC, $AD, $B6, $B7, $B8
+BackgroundTileCommands0D ; $71B2
+  db    $98, $00, $52, $AF ; draw row of 19x the same tile
+  db    $98, $01, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $03, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $05, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $07, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $09, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $0B, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $0D, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $0F, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $11, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $13, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $20, $52, $AE ; draw row of 19x the same tile
+  db    $98, $21, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $23, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $25, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $27, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $29, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $2B, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $2D, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $2F, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $31, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $33, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $40, $52, $AF ; draw row of 19x the same tile
+  db    $98, $41, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $43, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $45, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $47, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $49, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $4B, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $4D, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $4F, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $51, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $53, $00; draw row of 1 tiles
+  db    $AE
+  db    $98, $60, $52, $AE ; draw row of 19x the same tile
+  db    $98, $61, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $63, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $65, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $67, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $69, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $6B, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $6D, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $6F, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $71, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $73, $00; draw row of 1 tiles
+  db    $AF
+  db    $98, $80, $13; draw row of 20 tiles
+  db    $AF, $90, $91, $92, $93, $94, $98, $99, $98, $99, $98, $99, $98, $99, $98, $99, $98, $99, $A4, $AE
+  db    $98, $A0, $13; draw row of 20 tiles
+  db    $AE, $95, $96, $97, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9D, $AF
+  db    $98, $C0, $13; draw row of 20 tiles
+  db    $AF, $9E, $7F, $7F, $7F, $7F, $7F, $CA, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9F, $AE
+  db    $98, $E0, $13; draw row of 20 tiles
+  db    $AE, $9C, $7F, $7F, $7F, $BC, $BD, $C0, $C1, $C2, $C3, $C4, $C5, $C6, $C7, $C8, $C9, $7F, $9D, $AF
+  db    $99, $00, $13; draw row of 20 tiles
+  db    $AF, $9E, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9F, $AE
+  db    $99, $20, $13; draw row of 20 tiles
+  db    $AE, $9C, $7F, $7F, $7F, $A7, $A8, $A9, $AA, $AB, $AC, $7F, $AD, $7F, $B4, $B5, $B6, $7F, $9D, $AF
+  db    $99, $40, $13; draw row of 20 tiles
+  db    $AF, $9E, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9F, $AE
+  db    $99, $60, $13; draw row of 20 tiles
+  db    $AE, $9C, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $9D, $AF
+  db    $99, $80, $13; draw row of 20 tiles
+  db    $AF, $A5, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $9A, $9B, $A6, $AE
+  db    $99, $A0, $52, $AE ; draw row of 19x the same tile
+  db    $99, $A1, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $A3, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $A5, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $A7, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $A9, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $AB, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $AD, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $AF, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $B1, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $B3, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $C0, $52, $AF ; draw row of 19x the same tile
+  db    $99, $C1, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $C3, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $C5, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $C7, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $C9, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $CB, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $CD, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $CF, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $D1, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $D3, $00; draw row of 1 tiles
+  db    $AE
+  db    $99, $E0, $52, $AE ; draw row of 19x the same tile
+  db    $99, $E1, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $E3, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $E5, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $E7, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $E9, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $EB, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $ED, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $EF, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $F1, $00; draw row of 1 tiles
+  db    $AF
+  db    $99, $F3, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $00, $52, $AF ; draw row of 19x the same tile
+  db    $9A, $01, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $03, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $05, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $07, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $09, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $0B, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $0D, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $0F, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $11, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $13, $00; draw row of 1 tiles
+  db    $AE
+  db    $9A, $20, $52, $AE ; draw row of 19x the same tile
+  db    $9A, $21, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $23, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $25, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $27, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $29, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $2B, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $2D, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $2F, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $31, $00; draw row of 1 tiles
+  db    $AF
+  db    $9A, $33, $00; draw row of 1 tiles
+  db    $AF
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0E ; $6AEE
+BackgroundTileCommands0E ; $740E
   db    $98, $00, $5F, $7F ; draw row of 32x the same tile
   db    $98, $20, $5F, $7F ; draw row of 32x the same tile
   db    $98, $40, $5F, $7F ; draw row of 32x the same tile
@@ -1506,7 +1915,7 @@ BackgroundTileCommands0E ; $6AEE
   db    $9A, $60, $5F, $7F ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands25 ; $6C37
+BackgroundTileCommands25 ; $7557
   db    $98, $00, $5F, $7F ; draw row of 32x the same tile
   db    $98, $20, $5F, $7F ; draw row of 32x the same tile
   db    $98, $40, $5F, $7F ; draw row of 32x the same tile
@@ -1537,7 +1946,7 @@ BackgroundTileCommands25 ; $6C37
   db    $9A, $60, $5F, $7F ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands0F ; $6D80
+BackgroundTileCommands0F ; $76A0
   db    $98, $00, $5F, $7F ; draw row of 32x the same tile
   db    $98, $20, $5F, $7F ; draw row of 32x the same tile
   db    $98, $40, $1F; draw row of 32 tiles
@@ -1549,15 +1958,15 @@ BackgroundTileCommands0F ; $6D80
   db    $98, $A0, $1F; draw row of 32 tiles
   db    $7F, $7F, $9E, $7F, $7F, $7F, $7F, $B0, $B1, $B2, $AA, $AB, $7F, $AC, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
   db    $98, $C0, $1F; draw row of 32 tiles
-  db    $7F, $7F, $9F, $AD, $7F, $7F, $B7, $A1, $A2, $B9, $BA, $BB, $BC, $BD, $BE, $BF, $C0, $C1, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
+  db    $7F, $7F, $9F, $AD, $7F, $B6, $B7, $A1, $A2, $B9, $BA, $BB, $BC, $BD, $BE, $BF, $C0, $C1, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
   db    $98, $E0, $1F; draw row of 32 tiles
   db    $7F, $7F, $AE, $AF, $B5, $C2, $C3, $B1, $B2, $C5, $C6, $C7, $C8, $C9, $CA, $CB, $CC, $CD, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
   db    $99, $00, $1F; draw row of 32 tiles
   db    $7F, $7F, $CE, $CF, $B8, $D0, $D1, $A2, $A3, $D2, $D3, $D4, $D5, $D6, $D7, $D8, $D9, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
   db    $99, $20, $1F; draw row of 32 tiles
-  db    $7F, $7F, $7F, $DC, $DD, $DE, $C4, $26, $B3, $DF, $E0, $E1, $E2, $E3, $E4, $E5, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
+  db    $7F, $7F, $7F, $DC, $DD, $DE, $C4, $B2, $B3, $DF, $E0, $E1, $E2, $E3, $E4, $E5, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
   db    $99, $40, $1F; draw row of 32 tiles
-  db    $7F, $7F, $7F, $7F, $E8, $E9, $EA, $EB, $DA, $7F, $EC, $ED, $EE, $EF, $F0, $F1, $F2, $F3, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
+  db    $7F, $7F, $7F, $7F, $E8, $E9, $EA, $EB, $A4, $7F, $EC, $ED, $EE, $EF, $F0, $F1, $F2, $F3, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
   db    $99, $60, $1F; draw row of 32 tiles
   db    $7F, $7F, $7F, $7F, $B0, $B1, $F4, $F5, $F6, $F7, $F8, $F9, $FA, $FB, $FC, $FD, $FE, $FF, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
   db    $99, $80, $1F; draw row of 32 tiles
@@ -1576,7 +1985,7 @@ BackgroundTileCommands0F ; $6D80
   db    $9B, $C0, $5F, $7F ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands10 ; $6F8B
+BackgroundTileCommands10 ; $78AB
   db    $98, $00, $1F; draw row of 32 tiles
   db    $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $44, $45, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D
   db    $98, $20, $1F; draw row of 32 tiles
@@ -1607,7 +2016,7 @@ BackgroundTileCommands10 ; $6F8B
   db    $9A, $20, $5F, $7C ; draw row of 32x the same tile
   db    $00 ; end of draw commands
 
-BackgroundTileCommands11 ; $710A
+BackgroundTileCommands11 ; $7A2A
   db    $98, $00, $53, $7E ; draw row of 20x the same tile
   db    $98, $20, $53, $7E ; draw row of 20x the same tile
   db    $98, $40, $13; draw row of 20 tiles
@@ -1642,187 +2051,4 @@ BackgroundTileCommands11 ; $710A
   db    $7C, $7C, $7C, $7C, $44, $45, $7D, $2D, $2E, $2D, $2E, $2D, $2E, $7D, $4C, $4D, $7C, $7C, $7C, $7C
   db    $9A, $20, $13; draw row of 20 tiles
   db    $7C, $7C, $44, $45, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $7D, $4C, $4D, $7C, $7C
-  db    $00 ; end of draw commands
-
-BackgroundTileCommands15 ; $7283
-  db    $98, $00, $13; draw row of 20 tiles
-  db    $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03
-  db    $98, $20, $13; draw row of 20 tiles
-  db    $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13
-  db    $98, $40, $13; draw row of 20 tiles
-  db    $02, $03, $04, $05, $06, $07, $06, $07, $07, $06, $06, $07, $06, $07, $07, $07, $06, $08, $00, $01
-  db    $98, $60, $13; draw row of 20 tiles
-  db    $12, $13, $09, $0A, $0B, $14, $0C, $0D, $0E, $0F, $0B, $15, $14, $15, $0B, $14, $16, $17, $10, $11
-  db    $98, $80, $13; draw row of 20 tiles
-  db    $00, $03, $18, $19, $1A, $1B, $1C, $1D, $1E, $1F, $20, $21, $22, $1E, $20, $22, $24, $25, $00, $03
-  db    $98, $A0, $13; draw row of 20 tiles
-  db    $10, $13, $26, $27, $28, $29, $2A, $2B, $2C, $22, $21, $37, $21, $22, $1F, $20, $42, $2D, $10, $13
-  db    $98, $C0, $13; draw row of 20 tiles
-  db    $02, $03, $18, $2E, $2F, $30, $42, $1D, $40, $21, $1F, $22, $20, $1F, $37, $21, $40, $31, $00, $01
-  db    $98, $E0, $13; draw row of 20 tiles
-  db    $12, $13, $32, $33, $34, $42, $35, $36, $1D, $22, $20, $1F, $39, $37, $38, $39, $42, $2D, $10, $11
-  db    $99, $00, $13; draw row of 20 tiles
-  db    $00, $03, $3A, $3B, $2B, $2C, $3C, $1D, $3D, $3E, $3F, $42, $40, $40, $40, $40, $3C, $31, $00, $03
-  db    $99, $20, $13; draw row of 20 tiles
-  db    $10, $13, $18, $41, $42, $3C, $1D, $42, $43, $44, $45, $40, $42, $40, $42, $1D, $46, $31, $10, $13
-  db    $99, $40, $13; draw row of 20 tiles
-  db    $02, $03, $18, $47, $48, $49, $4A, $4B, $48, $49, $4A, $4C, $4D, $4E, $3C, $4F, $50, $2D, $00, $01
-  db    $99, $60, $13; draw row of 20 tiles
-  db    $12, $13, $51, $52, $53, $54, $55, $56, $57, $58, $56, $58, $59, $5A, $5B, $5C, $5D, $2D, $10, $11
-  db    $99, $80, $13; draw row of 20 tiles
-  db    $02, $03, $5E, $5F, $60, $61, $62, $63, $64, $65, $63, $64, $66, $67, $68, $69, $6A, $31, $00, $03
-  db    $99, $A0, $13; draw row of 20 tiles
-  db    $10, $13, $18, $6B, $6C, $6D, $70, $6E, $6F, $70, $6E, $6F, $71, $72, $42, $73, $50, $2D, $10, $13
-  db    $99, $C0, $13; draw row of 20 tiles
-  db    $02, $03, $26, $41, $42, $1D, $3C, $1D, $74, $75, $76, $1D, $40, $1D, $35, $36, $77, $78, $00, $01
-  db    $99, $E0, $13; draw row of 20 tiles
-  db    $12, $13, $79, $10, $7B, $7A, $7B, $7A, $7C, $7D, $23, $7A, $7B, $7B, $7A, $7A, $7F, $13, $10, $11
-  db    $9A, $00, $13; draw row of 20 tiles
-  db    $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03, $00, $01, $02, $03
-  db    $9A, $20, $13; draw row of 20 tiles
-  db    $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13, $10, $11, $12, $13
-  db    $00 ; end of draw commands
-
-BackgroundTileCommands12 ; $7422
-  db    $98, $00, $53, $05 ; draw row of 20x the same tile
-  db    $98, $20, $53, $05 ; draw row of 20x the same tile
-  db    $98, $40, $53, $05 ; draw row of 20x the same tile
-  db    $98, $60, $53, $05 ; draw row of 20x the same tile
-  db    $98, $80, $53, $05 ; draw row of 20x the same tile
-  db    $98, $A0, $53, $05 ; draw row of 20x the same tile
-  db    $98, $C0, $53, $05 ; draw row of 20x the same tile
-  db    $98, $E0, $53, $05 ; draw row of 20x the same tile
-  db    $99, $00, $53, $05 ; draw row of 20x the same tile
-  db    $99, $20, $53, $05 ; draw row of 20x the same tile
-  db    $99, $40, $53, $05 ; draw row of 20x the same tile
-  db    $99, $60, $53, $05 ; draw row of 20x the same tile
-  db    $99, $80, $53, $05 ; draw row of 20x the same tile
-  db    $99, $A0, $53, $05 ; draw row of 20x the same tile
-  db    $99, $C0, $53, $05 ; draw row of 20x the same tile
-  db    $99, $E0, $53, $05 ; draw row of 20x the same tile
-  db    $9A, $00, $53, $05 ; draw row of 20x the same tile
-  db    $9A, $20, $53, $05 ; draw row of 20x the same tile
-  db    $98, $00, $53, $05 ; draw row of 20x the same tile
-  db    $98, $20, $53, $05 ; draw row of 20x the same tile
-  db    $98, $40, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7B, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7E, $05, $05, $05, $05, $05
-  db    $98, $60, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $00, $01, $02, $03, $04, $05, $06, $07, $7F, $05, $05, $05, $05, $05
-  db    $98, $80, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $10, $11, $12, $13, $14, $15, $16, $17, $7F, $05, $05, $05, $05, $05
-  db    $98, $A0, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $20, $21, $22, $23, $24, $25, $26, $27, $7F, $05, $05, $05, $05, $05
-  db    $98, $C0, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $30, $31, $32, $33, $34, $35, $36, $37, $7F, $05, $05, $05, $05, $05
-  db    $98, $E0, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $40, $41, $42, $43, $44, $45, $46, $47, $7F, $05, $05, $05, $05, $05
-  db    $99, $00, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $50, $51, $52, $53, $54, $55, $56, $57, $7F, $05, $05, $05, $05, $05
-  db    $99, $20, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $60, $61, $62, $63, $64, $65, $66, $67, $7F, $05, $05, $05, $05, $05
-  db    $99, $40, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $70, $71, $72, $73, $74, $75, $76, $77, $7F, $05, $05, $05, $05, $05
-  db    $99, $60, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $08, $09, $0A, $0B, $0C, $0D, $0E, $0F, $7F, $68, $05, $05, $05, $05
-  db    $99, $80, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7F, $18, $19, $1A, $1B, $1C, $1D, $1E, $1F, $7F, $78, $79, $05, $05, $05
-  db    $99, $A0, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $7D, $3E, $4D, $4E, $58, $69, $6A, $6B, $6C, $6D, $6E, $6F, $05, $05, $05
-  db    $99, $C0, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $28, $29, $2A, $2B, $2C, $2D, $2E, $2F, $05, $05
-  db    $99, $E0, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $38, $39, $3A, $3B, $3C, $3D, $3D, $3F, $05, $05
-  db    $9A, $00, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $48, $49, $4A, $4B, $4C, $3D, $3D, $4F, $05, $05
-  db    $9A, $20, $13; draw row of 20 tiles
-  db    $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $05, $59, $5A, $5B, $5C, $5D, $5E, $5F, $05, $05
-  db    $00 ; end of draw commands
-
-BackgroundTileCommands13 ; $75E3
-  db    $98, $00, $53, $7C ; draw row of 20x the same tile
-  db    $98, $20, $53, $7C ; draw row of 20x the same tile
-  db    $98, $40, $53, $7C ; draw row of 20x the same tile
-  db    $98, $60, $13; draw row of 20 tiles
-  db    $06, $07, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $08, $09
-  db    $98, $80, $13; draw row of 20 tiles
-  db    $7F, $16, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $17, $7F
-  db    $98, $A0, $13; draw row of 20 tiles
-  db    $7F, $7F, $06, $07, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $08, $09, $06, $07, $08, $09, $7F, $7F
-  db    $98, $C0, $13; draw row of 20 tiles
-  db    $0D, $0E, $0F, $20, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $7C, $17, $7F, $7F, $16, $0A, $0B, $0C, $0D
-  db    $98, $E0, $13; draw row of 20 tiles
-  db    $1D, $1E, $1F, $30, $06, $07, $7C, $7C, $7C, $7C, $08, $09, $7F, $7F, $7F, $7F, $1A, $1B, $1C, $1D
-  db    $99, $00, $13; draw row of 20 tiles
-  db    $24, $25, $26, $27, $7F, $16, $7C, $7C, $7C, $7C, $17, $7F, $7F, $7F, $7F, $7F, $21, $22, $23, $24
-  db    $99, $20, $13; draw row of 20 tiles
-  db    $34, $35, $36, $37, $50, $51, $50, $51, $50, $51, $50, $51, $50, $51, $50, $51, $31, $32, $33, $34
-  db    $99, $40, $13; draw row of 20 tiles
-  db    $2B, $2C, $2D, $2E, $52, $53, $52, $53, $52, $53, $52, $53, $52, $53, $52, $53, $28, $29, $2A, $2B
-  db    $99, $60, $13; draw row of 20 tiles
-  db    $3B, $3C, $54, $55, $54, $55, $54, $55, $54, $55, $54, $55, $54, $55, $54, $55, $54, $55, $3A, $3B
-  db    $99, $80, $13; draw row of 20 tiles
-  db    $3E, $3F, $56, $57, $56, $57, $56, $57, $56, $57, $56, $57, $56, $57, $56, $57, $56, $57, $3D, $3E
-  db    $99, $A0, $13; draw row of 20 tiles
-  db    $3E, $3F, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $3D, $3E
-  db    $99, $C0, $13; draw row of 20 tiles
-  db    $3E, $3F, $10, $11, $10, $11, $10, $11, $10, $11, $10, $11, $10, $11, $04, $05, $10, $11, $3D, $3E
-  db    $99, $E0, $13; draw row of 20 tiles
-  db    $43, $44, $45, $46, $04, $05, $02, $18, $19, $38, $39, $4E, $4F, $03, $14, $15, $40, $41, $42, $43
-  db    $9A, $00, $13; draw row of 20 tiles
-  db    $4A, $4B, $4C, $4D, $14, $15, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $47, $48, $49, $4A
-  db    $9A, $20, $13; draw row of 20 tiles
-  db    $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13, $12, $13
-  db    $9A, $40, $53, $7C ; draw row of 20x the same tile
-  db    $9A, $60, $53, $7C ; draw row of 20x the same tile
-  db    $9A, $80, $53, $7C ; draw row of 20x the same tile
-  db    $9A, $A0, $53, $7C ; draw row of 20x the same tile
-  db    $9A, $C0, $53, $7C ; draw row of 20x the same tile
-  db    $9A, $E0, $53, $7C ; draw row of 20x the same tile
-  db    $9B, $00, $53, $7C ; draw row of 20x the same tile
-  db    $9B, $20, $53, $7C ; draw row of 20x the same tile
-  db    $9B, $40, $53, $7C ; draw row of 20x the same tile
-  db    $9B, $60, $53, $7C ; draw row of 20x the same tile
-  db    $9B, $80, $53, $7C ; draw row of 20x the same tile
-  db    $9B, $A0, $53, $7C ; draw row of 20x the same tile
-  db    $9B, $C0, $53, $7C ; draw row of 20x the same tile
-  db    $9B, $E0, $53, $7C ; draw row of 20x the same tile
-  db    $00 ; end of draw commands
-
-BackgroundTileCommands23 ; $7781
-  db    $98, $00, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $04, $05, $06, $07, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
-  db    $98, $20, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $30, $7F, $7F, $40, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
-  db    $98, $40, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $00, $01, $02, $03, $03, $01, $01, $02, $08, $09, $7F, $7F, $7F, $7F, $7F
-  db    $98, $60, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $7F, $7F, $7F, $7F, $7F
-  db    $98, $80, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $7F, $7F, $7F, $7F, $7F
-  db    $98, $A0, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $10, $31, $32, $33, $34, $35, $36, $37, $38, $39, $7F, $7F, $7F, $7F, $7F
-  db    $98, $C0, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $20, $41, $42, $43, $44, $45, $46, $47, $48, $49, $7F, $7F, $7F, $7F, $7F
-  db    $98, $E0, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $50, $51, $52, $53, $54, $55, $56, $57, $58, $59, $7F, $7F, $7F, $7F, $7F
-  db    $99, $00, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $60, $61, $62, $63, $45, $65, $66, $67, $68, $69, $7F, $7F, $7F, $7F, $7F
-  db    $99, $20, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $70, $71, $72, $73, $75, $75, $76, $77, $78, $79, $7F, $7F, $7F, $7F, $7F
-  db    $99, $40, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $0A, $0B, $0C, $0D, $0E, $0F, $77, $4B, $4C, $4D, $7F, $7F, $7F, $7F, $7F
-  db    $99, $60, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $1A, $1B, $1C, $1D, $1E, $1F, $5A, $5B, $5C, $5D, $7F, $7F, $7F, $7F, $7F
-  db    $99, $80, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $2A, $2B, $2C, $2D, $2E, $2F, $6A, $6B, $1B, $6D, $7F, $7F, $7F, $7F, $7F
-  db    $99, $A0, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $3A, $3B, $3C, $3D, $3E, $3F, $7A, $7B, $7C, $7D, $7F, $7F, $7F, $7F, $7F
-  db    $99, $C0, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $6E, $4A, $64, $64, $6C, $64, $4A, $4A, $6C, $4A, $64, $6F, $7F, $7F, $7F, $7F
-  db    $99, $E0, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $7F, $04, $05, $7F, $4E, $4F, $7F, $06, $07, $7F, $7F, $7F, $7F, $7F, $7F
-  db    $9A, $00, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $7F, $30, $7F, $7F, $4E, $4F, $7F, $7F, $40, $7F, $7F, $7F, $7F, $7F, $7F
-  db    $9A, $20, $13; draw row of 20 tiles
-  db    $7F, $7F, $7F, $7F, $7F, $7F, $40, $7F, $7F, $5E, $5F, $7F, $7F, $30, $7F, $7F, $7F, $7F, $7F, $7F
   db    $00 ; end of draw commands

@@ -7,6 +7,14 @@
 ;
 PUSHC
 NEWCHARMAP NameEntryCharmap
+CHARMAP " ", $00
+CHARMAP "Ä", $C5
+CHARMAP "Ö", $D7
+CHARMAP "Ü", $DD
+CHARMAP "ß", $E0
+CHARMAP "ä", $E5
+CHARMAP "ö", $F7
+CHARMAP "ü", $FD
 
 CHARMAP "A", $42
 CHARMAP "B", $43

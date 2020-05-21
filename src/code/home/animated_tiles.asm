@@ -453,7 +453,7 @@ label_1D49::
     ldh  a, [hLinkPositionX]
     add  a, c
     ldi  [hl], a
-    ld   a, $00
+    xor a
     ldi  [hl], a
     ld   a, [$C135]
     ld   d, a

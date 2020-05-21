@@ -8695,7 +8695,7 @@ func_01F_7B5C::
     ldh  [rNR44], a                               ; $7BF9: $E0 $23
     xor  a                                        ; $7BFB: $AF
     ldh  [rNR10], a                               ; $7BFC: $E0 $10
-    ldh  [rP1], a                                 ; $7BFE: $E0 $00
+    ldh  [rNR30], a                                 ; $7BFE: $E0 $00
     nop                                           ; $7C00: $00
     nop                                           ; $7C01: $00
     nop                                           ; $7C02: $00

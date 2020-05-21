@@ -513,3 +513,13 @@ include "code/photos_bg.asm"
 ; the rom
 section "bank3E",romx[$4000],bank[$3E]
 section "bank3F",romx[$4000],bank[$3F]
+include "text/dialog_5.asm"
+
+section "sram",sram[$A000]
+    ds $100
+SaveGame1:
+    ds $3AD
+SaveGame2:
+    ds $3AD
+SaveGame3:
+    ds $3AD

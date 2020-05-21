@@ -150,15 +150,23 @@ jr_001_4894::
     ldh  [hScratch0], a
     ld   a, [de]
     and  a
-    jr   jr_001_489D
+    jr   z,jr_001_489D
     dec  a
-    and  $C0
+    push hl
+    push bc
+    ld c, a
+    ld b, $00
+    call ReadDialogBankFromTable
+    ldh [hRoomBank], a
+    pop bc
+    pop hl
+    cp $00
 
 jr_001_489D::
     ld   a, $7E
-    jr   jr_001_48A9
-    ld   a, [de]
-    and  $80
+    jr   z, jr_001_48A9
+    ldh  a, [hRoomBank]
+    cp   $02
     ld   a, $C8
     jr   z, jr_001_48A9
     inc  a
@@ -188,6 +196,7 @@ FileSelectionPrepare6::
 
     ; If there are no saved files yet…
     ld   a, [wSaveFilesCount]
+    ldh [hLinkInteractiveMotionBlocked], a
     and  a
     ; … use background map 3,
     ld   a, $03
@@ -213,7 +222,29 @@ Data_001_48E4::
     ld   l, e
     add  a, e
 
+Data_001_48EB:
+    ; bg copy requests
+    db  $99,$C6,$00,$AA,$99,$C7,$00,$AF,$00
+
 FileSelectionInteractiveHandler::
+    ldh a, [hLinkInteractiveMotionBlocked]
+    and a
+    jr z, jr_001_490a
+
+    xor a
+    ldh [hLinkInteractiveMotionBlocked], a
+    ld hl, wRequestDestination
+    ld de, Data_001_48EB
+    ld c, $09   ; sizeof(Data_001_48EB)
+
+jr_001_4904:
+    ld a, [de]                                    ; $4904: $1a
+    inc de                                        ; $4905: $13
+    ld [hl+], a                                   ; $4906: $22
+    dec c                                         ; $4907: $0d
+    jr nz, jr_001_4904                            ; $4908: $20 $fa
+
+jr_001_490a:
     call func_001_6BA8
     ldh  a, [hJoypadState]
     and  $90
@@ -269,9 +300,9 @@ jr_001_4938::
     jr   nz, func_001_4954
     ld   a, [$D000]
     and  a
-    ld   a, $2C
+    ld   a, $2E
     jr   z, jr_001_4948
-    ld   a, $64
+    ld   a, $66
 
 jr_001_4948::
     ld   hl, $C008
@@ -420,7 +451,9 @@ Data_001_49F8::
 
 ; Part of file copy
 Data_001_49FE::
-    db 0, $A1, $AD, $A4, $5A, $A8
+    dw SaveGame1
+    dw SaveGame2
+    dw SaveGame3
 
 FileSelectionLoadSavedFile::
     jp   LoadSavedFile
@@ -474,51 +507,6 @@ FileCreationInit2Handler::
 ;   bc   offset
 ;   a    value to write
 WriteByteToExternalRAM::
-    push hl
-    add  hl, bc
-    call EnableExternalRAMWriting
-    ld   [hl], a
-    pop  hl
-    ret
-
-label_4A47::
-    ld   bc, DebugSaveFileData
-    ld   e, DEBUG_SAVE_FILE_SIZE
-    push hl
-
-jr_001_4A4D::
-    call EnableExternalRAMWriting
-    ld   a, [bc]
-    ldi  [hl], a
-    inc  bc
-    dec  e
-    ld   a, e
-    and  a
-    jr   nz, jr_001_4A4D
-    pop  hl
-    ld   bc, $4E
-    ld   a, $01
-    call WriteByteToExternalRAM
-    ld   bc, $44
-    call WriteByteToExternalRAM
-    ld   bc, $43
-    ld   a, $02
-    call WriteByteToExternalRAM
-    ld   bc, $4D
-    ld   a, $59
-    call WriteByteToExternalRAM
-    ld   bc, $77
-    call WriteByteToExternalRAM
-    ld   bc, $78
-    call WriteByteToExternalRAM
-    ld   bc, $45
-    call WriteByteToExternalRAM
-    ld   bc, $76
-    ld   a, $39
-    call WriteByteToExternalRAM
-    ld   bc, $4C
-    call WriteByteToExternalRAM
-    ret
 
 Data_001_4A98::
     db   $00, $05, $0A
@@ -539,7 +527,7 @@ FileCreationInteractiveHandler::
 
     ldh  a, [hJoypadState]
     and  J_START
-    jr   z, jr_001_4B29
+    jp   z, jr_001_4B29
     call PlayValidationJingle
     ld   a, [wSaveSlot]
     sla  a
@@ -563,6 +551,27 @@ FileCreationInteractiveHandler::
     ld   d, $00
     ld   hl, $DB80
     add  hl, de
+    ; Checks if the chosen name is 'MOYSE' and plays the easter egg music if this is the case.
+    ld   a, [hli]
+    cp   "M" + $01
+    jr   nz, .zeldacheck
+    ld   a, [hli]
+    cp   "O" + $01
+    jr   nz, .zeldacheck
+    ld   a, [hli]
+    cp   "Y" + $01
+    jr   nz, .zeldacheck
+    ld   a, [hli]
+    cp   "S" + $01
+    jr   nz, .zeldacheck
+    ld   a, [hli]
+    cp   "E" + $01
+    jr   nz, .zeldacheck
+    ld   a, MUSIC_TOTAKEKE_NICKNAME_EASTER_EGG
+    jr jr_001_4ae6
+.zeldacheck
+    ld   hl, $DB80
+    add  hl, de
     ; Checks if the chosen name is 'ZELDA' and plays the easter egg music if this is the case.
     ld   a, [hli]
     cp   "Z" + $01
@@ -580,6 +589,7 @@ FileCreationInteractiveHandler::
     cp   "A" + $01
     jr   nz, jr_001_4AFE
     ld   a, MUSIC_ZELDA_NICKNAME_EASTER_EGG
+jr_001_4ae6::
     ld   [wMusicTrackToPlay], a
 
 jr_001_4AFE::
@@ -629,19 +639,23 @@ Data_001_4B30::
     db   $58, $58, $58, $58, $58, $58, $58, $58   ; $4B58
     db   $68, $68, $68, $68, $68, $68, $68, $68   ; $4B60
     db   $68, $68, $68, $68, $68, $68, $68, $68   ; $4B68
+    db   $78, $78, $78, $78, $78, $78, $78, $78
+    db   $78, $78, $78, $78, $78, $78, $78, $78
 
 Data_001_4B70::
-    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4B70
-    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4B78
-    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4B80
-    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4B88
-    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4B90
-    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4B98
-    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C   ; $4BA0
-    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C   ; $4BA8
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C
+    db   $14, $1C, $24, $2C, $34, $3C, $44, $4C
+    db   $54, $5C, $64, $6C, $74, $7C, $84, $8C
 
 Data_001_4BB0::
-    db   $4C, $54, $5C, $64, $6C                  ; $4BB0
+    db   $4C, $54, $5C, $64, $6C
 
 NameEntryCharacterTable::
     ; Used to translate cursor position -> name letter
@@ -650,10 +664,11 @@ NameEntryCharacterTable::
     ; when you push A
     PUSHC
     SETCHARMAP NameEntryCharmap
-    db   "ABCDEFG",  0,0, "abcdefg"
-    db   "HIJKLMN",  0,0, "hijklmn"
-    db   "OPQRSTU",  0,0, "opqrstu"
-    db   "VWXYZ",0,0,0,0, "vwxyz",0,0
+    db   "AÄBCDEF",  0,0, "aäbcdef"
+    db   "GHIJKLM",  0,0, "ghijklm"
+    db   "NOÖPQRS",  0,0, "noöpqrs"
+    db   "TUÜVWXY",  0,0, "ßtuüvwx"
+    db   "Z      ",  0,0, "yz     "
     POPC
 
 func_001_4BF5::
@@ -694,7 +709,7 @@ jr_001_4C21::
     jr   nz, jr_001_4C34
     ld   a, [$DBA9]
     add  a, $01
-    cp   $40
+    cp   $50
     jr   c, jr_001_4C5E
     xor  a
     jr   jr_001_4C5E
@@ -704,7 +719,7 @@ jr_001_4C34::
     sub  a, $01
     cp   $FF
     jr   nz, jr_001_4C5E
-    ld   a, $3F
+    ld   a, $4F
     jr   jr_001_4C5E
 
 jr_001_4C41::
@@ -714,15 +729,15 @@ jr_001_4C41::
     ld   a, [$DBA9]
     sub  a, $10
     jr   nc, jr_001_4C5E
-    add  a, $40
+    add  a, $50
     jr   jr_001_4C5E
 
 jr_001_4C53::
     ld   a, [$DBA9]
     add  a, $10
-    cp   $40
+    cp   $50
     jr   c, jr_001_4C5E
-    sub  a, $40
+    sub  a, $50
 
 jr_001_4C5E::
     ld   [$DBA9], a
@@ -984,6 +999,7 @@ func_001_4DD6::
     jp   label_001_5D53                               ; $4DEB: $C3 $53 $5D
 
 Data_001_4DEE::
+    ; 3x compressed BG data, end added programmatically
     db   $98, $A5, $44, $7E, $98, $C5, $44, $7E   ; $4DEE
     db   $99, $05, $44, $7E, $99, $25, $44, $7E   ; $4DF6
     db   $99, $65, $44, $7E, $99, $85, $44, $7E   ; $4DFE
@@ -1031,22 +1047,23 @@ jr_001_4E3B::
     jr   label_001_4E55                               ; $4E41: $18 $12
 
 Data_001_4E43::
-    db   $99, $E4, $0D, $7E, $7E, $10, $14, $08   ; $4E43
-    db   $13, $7E, $7E, $7E, $7E, $0E, $0A, $7E   ; $4E4B
-    db   $7E, $00                                 ; $4E53
+    db   $99, $C6, $01, $A9, $6F, $99, $D1, $00
+    db   $A9, $99, $E3, $0E, $7E, $19, $14, $11
+    db   $14, $02, $0A, $7E, $7E, $7E, $0E, $0A
+    db   $00, $18, $3D, $00
 
 label_001_4E55::
     ld   hl, wRequestDestinationHigh              ; $4E55: $21 $01 $D6
     ld   de, Data_001_4E43                        ; $4E58: $11 $43 $4E
-    ld   c, $11                                   ; $4E5B: $0E $11
+
+    ; c = sizeof(Data_001_4E43)
+    ld   c, $1C                                   ; $4E5B: $0E $11
 
 .loop
     ld   a, [de]                                  ; $4E5D: $1A
     inc  de                                       ; $4E5E: $13
     ld   [hl+], a                                 ; $4E5F: $22
     dec  c                                        ; $4E60: $0D
-    ld   a, c                                     ; $4E61: $79
-    cp   $FF                                      ; $4E62: $FE $FF
     jr   nz, .loop                                ; $4E64: $20 $F7
 
     ret                                           ; $4E66: $C9
@@ -1061,7 +1078,7 @@ FileDeletionState11Handler::
     jr   nz, jr_001_4E9E                           ; $4E6F: $20 $2D
 
     and  $90                                      ; $4E71: $E6 $90
-    jr   z, jr_001_4ED9                            ; $4E73: $28 $64
+    jp   z, jr_001_4ED9                            ; $4E73: $28 $64
 
     ld   a, [wCreditsScratch0]                    ; $4E75: $FA $00 $D0
     and  a                                        ; $4E78: $A7
@@ -1077,7 +1094,9 @@ FileDeletionState11Handler::
     ld   a, [hl+]                                 ; $4E8B: $2A
     ld   h, [hl]                                  ; $4E8C: $66
     ld   l, a                                     ; $4E8D: $6F
-    ld   de, $3a8                                 ; $4E8E: $11 $A8 $03
+
+    ; maybe size of save data?
+    ld   de, $3a8                                ; $4E8E: $11 $A8 $03
 
 jr_001_4E91::
     call EnableExternalRAMWriting                 ; $4E91: $CD $D0 $27
@@ -1098,30 +1117,43 @@ jr_001_4E9E::
     ret                                           ; $4EA8: $C9
 
 Data_001_4EA9::
-    db   $99, $E4, $0D, $11, $04, $13, $14, $11   ; $4EA9
-    db   $0D, $7E, $13, $0E, $7E, $0C, $04, $0D   ; $4EB1
-    db   $14, $00                                 ; $4EB9
+    ; compressed bg data
+    db   $99, $C6, $0B, $A9, $6F, $A9, $A9, $A9
+    db   $A9, $A9, $A9, $A9, $A9, $A9, $6F, $99
+    db   $E4, $0D, $19, $14, $11, $14, $02, $0A
+    db   $6B, $6C, $6D, $6E, $0C, $04, $0D, $14
+    db   $00
+
+    db   $00
+
+    db   $99, $C6, $0B, $6F, $A9, $A9, $A9, $A9
+    db   $A9, $A9, $A9, $A9, $A9, $A9, $6F, $99
+    db   $E3, $0E, $19, $14, $11, $14, $02, $0A
+    db   $7E, $19, $14, $0C, $7E, $0C, $04, $0D
+    db   $14, $00
 
 func_001_4EBB::
     ld   a, [wRequests]                           ; $4EBB: $FA $00 $D6
     ld   e, a                                     ; $4EBE: $5F
-    add  $11                                      ; $4EBF: $C6 $11
+    ; sizeof(Data_001_4EA9)?
+    add  $21                                      ; $4EBF: $C6 $11
     ld   [wRequests], a                           ; $4EC1: $EA $00 $D6
     ld   d, $00                                   ; $4EC4: $16 $00
     ld   hl, wRequestDestinationHigh              ; $4EC6: $21 $01 $D6
     add  hl, de                                   ; $4EC9: $19
     ld   de, Data_001_4EA9                        ; $4ECA: $11 $A9 $4E
-    ld   c, $11                                   ; $4ECD: $0E $11
-
+    ld a, [wGameplayType]
+    cp $05
+    jr nz, jr_001_4f2c
+    ld de, $4eee
+jr_001_4f2c::
+    ld c, $22
 .loop
-    ld   a, [de]                                  ; $4ECF: $1A
-    inc  de                                       ; $4ED0: $13
-    ld   [hl+], a                                 ; $4ED1: $22
-    dec  c                                        ; $4ED2: $0D
-    ld   a, c                                     ; $4ED3: $79
-    cp   $FF                                      ; $4ED4: $FE $FF
-    jr   nz, .loop                                ; $4ED6: $20 $F7
-
+    ld a, [de]
+    inc de
+    ld [hl+], a
+    dec c
+    jr nz, .loop
     ret                                           ; $4ED8: $C9
 
 jr_001_4ED9::
@@ -1179,11 +1211,11 @@ jr_001_4F1D::
 
     ld   a, [wCreditsScratch0]                    ; $4F23: $FA $00 $D0
     ld   e, a                                     ; $4F26: $5F
-    ld   a, $28                                   ; $4F27: $3E $28
+    ld   a, $1e                                   ; $4F27: $3E $28
     dec  e                                        ; $4F29: $1D
     jr   nz, jr_001_4F2E                           ; $4F2A: $20 $02
 
-    ld   a, $6C                                   ; $4F2C: $3E $6C
+    ld   a, $66                                   ; $4F2C: $3E $6C
 
 jr_001_4F2E::
     ld   hl, $C00C                                ; $4F2E: $21 $0C $C0
@@ -1670,6 +1702,8 @@ FileCopyStateAHandler::
     inc  hl                                       ; $521E: $23
     ld   h, [hl]                                  ; $521F: $66
     ld   l, a                                     ; $5220: $6F
+
+    ; sizeof save data + extra bytes?
     ld   de, $3ad                                 ; $5221: $11 $AD $03
 
 jr_001_5224::

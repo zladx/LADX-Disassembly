@@ -13,10 +13,10 @@ OverworldBGAttributesPointers::
     dw $5a20
     dw $5a20
     dw $5a20
-    dw $6240
+    dw $6220
     dw $5a20
-    dw $5e40
-    dw $5e40
+    dw $5e20
+    dw $5e20
 
     dw $7400
     dw $7800
@@ -28,9 +28,9 @@ OverworldBGAttributesPointers::
     dw $5620
     dw $5a20
     dw $5a20
-    dw $6240
-    dw $6240
-    dw $6240
+    dw $6220
+    dw $6220
+    dw $6220
     dw $5a20
     dw $5a20
     dw $5a20
@@ -43,14 +43,14 @@ OverworldBGAttributesPointers::
     dw $7400
     dw $7c00
     dw $7c00
-    dw $6640
-    dw $6640
-    dw $6640
-    dw $6640
-    dw $6640
-    dw $6640
-    dw $6a40
-    dw $6a40
+    dw $6620
+    dw $6620
+    dw $6620
+    dw $6620
+    dw $6620
+    dw $6620
+    dw $6a20
+    dw $6a20
 
     dw $7800
     dw $7800
@@ -60,14 +60,14 @@ OverworldBGAttributesPointers::
     dw $7400
     dw $7c00
     dw $7c00
-    dw $6640
-    dw $6640
-    dw $6640
-    dw $6640
-    dw $6640
-    dw $6640
-    dw $6a40
-    dw $6a40
+    dw $6620
+    dw $6620
+    dw $6620
+    dw $6620
+    dw $6620
+    dw $6620
+    dw $6a20
+    dw $6a20
     dw $4000
     dw $4000
     dw $4000
@@ -80,10 +80,10 @@ OverworldBGAttributesPointers::
     dw $5000
     dw $5000
     dw $5000
-    dw $6e40
-    dw $6e40
-    dw $6e40
-    dw $6e40
+    dw $6e20
+    dw $6e20
+    dw $6e20
+    dw $6e20
     dw $4000
     dw $4000
     dw $4000
@@ -96,10 +96,10 @@ OverworldBGAttributesPointers::
     dw $5000
     dw $5000
     dw $5000
-    dw $6e40
-    dw $6e40
-    dw $6e40
-    dw $6e40
+    dw $6e20
+    dw $6e20
+    dw $6e20
+    dw $6e20
     dw $4000
     dw $4000
     dw $4000
@@ -112,10 +112,10 @@ OverworldBGAttributesPointers::
     dw $5400
     dw $5800
     dw $5800
-    dw $6e40
-    dw $6e40
-    dw $6e40
-    dw $6e40
+    dw $6e20
+    dw $6e20
+    dw $6e20
+    dw $6e20
     dw $4000
     dw $4000
     dw $4000
@@ -128,10 +128,10 @@ OverworldBGAttributesPointers::
     dw $5400
     dw $5800
     dw $5800
-    dw $6e40
-    dw $6e40
-    dw $6e40
-    dw $6e40
+    dw $6e20
+    dw $6e20
+    dw $6e20
+    dw $6e20
     dw $4400
     dw $4400
     dw $4800

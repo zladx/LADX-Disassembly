@@ -7,7 +7,7 @@ PhysicsFlagsForEntity::
 ._03 db $C2
 ._04 db $C2
 ._05 db $D2
-._06 db $C2
+._06 db $A2
 ._07 db $C2
 ._08 db $C3
 ._09 db $12
@@ -75,7 +75,7 @@ PhysicsFlagsForEntity::
 ._47 db $82
 ._48 db $82
 ._49 db $82
-._4A db $F2
+._4A db $82
 ._4B db $82
 ._4C db $41
 ._4D db $82

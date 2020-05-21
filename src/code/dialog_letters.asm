@@ -150,8 +150,8 @@ func_01C_4AB9::
     ld   b, $00                                 ; $4AE2: $06 $00
     ld   hl, $D500                              ; $4AE4: $21 $00 $D5
     add  hl, bc                                 ; $4AE7: $09
-    push hl                                     ; $4AE8: $E5
-    pop  bc                                     ; $4AE9: $C1
+    ld   c, l
+    ld   b, h
     pop  hl                                     ; $4AEA: $E1
     ld   e, $12                                 ; $4AEB: $1E $12
 

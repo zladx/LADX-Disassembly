@@ -43,5 +43,3 @@
 ; - Jump to ending       (Push Start on the map screen)
 
 ;ENABLE_DEBUG_3 equ 1
-
-

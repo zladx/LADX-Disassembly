@@ -90,7 +90,7 @@ Data_005_6388::
     db   $28, $38, $58, $68, $28, $38, $58, $68
 
 Data_005_6390::
-    db   $38, $30, $30, $38, $50, $58, $58, $50
+    db   $38, $30, $30, $38, $48, $58, $58, $48
 
 Data_005_6398::
     db   $10, $10, $F0, $F0, $10, $10, $F0, $F0
@@ -280,7 +280,7 @@ jr_005_64AF:
     jr   nc, jr_005_64CC                          ; $64BB: $30 $0F
 
     ldh  a, [hActiveEntityVisualPosY]             ; $64BD: $F0 $EC
-    cp   $50                                      ; $64BF: $FE $50
+    cp   $58                                      ; $64BF: $FE $50
     jr   nc, jr_005_64CC                          ; $64C1: $30 $09
 
     call ClearEntitySpeed                         ; $64C3: $CD $7F $3D
@@ -300,7 +300,7 @@ jr_005_64CC:
     jr   nc, jr_005_64F7                          ; $64D9: $30 $1C
 
     ldh  a, [hActiveEntityVisualPosY]             ; $64DB: $F0 $EC
-    cp   $50                                      ; $64DD: $FE $50
+    cp   $58                                      ; $64DD: $FE $50
     jr   nc, jr_005_64F7                          ; $64DF: $30 $16
 
     ld   hl, wEntitiesUnknowTableY                ; $64E1: $21 $D0 $C3

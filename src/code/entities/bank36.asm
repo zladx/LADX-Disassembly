@@ -1465,7 +1465,7 @@ Data_036_48CE::
     db   $40, $07, $42, $07
 
 Data_036_48E2::
-    db   $70, $03, $72, $03, $74, $03, $76, $03, $6A, $23, $68, $23, $6E, $23, $6C, $23
+    db   $70, $06, $72, $06, $74, $06, $76, $06, $6A, $26, $68, $26, $6E, $26, $6C, $26
 
 Data_036_48F2::
     db   $70, $06, $72, $06, $74, $06, $76, $06
@@ -2520,6 +2520,10 @@ func_036_4F4E::
 func_036_4F68::
     ld   a, [wCurrentBank]                        ; $4F68: $FA $AF $DB
     push af                                       ; $4F6B: $F5
+    ld a, $09
+    ld hl, wEntitiesHealthGroup
+    add hl, bc
+    ld [hl], a
     ld   a, $36                                   ; $4F6C: $3E $36
     ld   [wCurrentBank], a                        ; $4F6E: $EA $AF $DB
     ld   hl, wEntitiesPrivateState2Table          ; $4F71: $21 $C0 $C2
@@ -2784,6 +2788,7 @@ func_036_5117::
 
     ld   a, [wC177]                               ; $511C: $FA $77 $C1
     and  a                                        ; $511F: $A7
+    xor $01
     ld   hl, wEntitiesPrivateState2Table          ; $5120: $21 $C0 $C2
     add  hl, bc                                   ; $5123: $09
     ld   [hl], a                                  ; $5124: $77
@@ -4217,6 +4222,7 @@ jr_036_5A00:
 func_036_5A0A::
     ldh  a, [hActiveEntityType]                   ; $5A0A: $F0 $EB
     sub  ENTITY_COLOR_GUARDIAN_BLUE               ; $5A0C: $D6 $F6
+     xor $01
     ld   e, a                                     ; $5A0E: $5F
     ld   a, [wC177]                               ; $5A0F: $FA $77 $C1
     cp   e                                        ; $5A12: $BB
@@ -4231,7 +4237,7 @@ jr_036_5A1E:
     ld   [hl], $FA                                ; $5A21: $36 $FA
     ld   a, e                                     ; $5A23: $7B
     and  a                                        ; $5A24: $A7
-    jr   z, jr_036_5A2B                           ; $5A25: $28 $04
+    jr   nz, jr_036_5A2B                           ; $5A25: $28 $04
 
     ld   a, [hl]                                  ; $5A27: $7E
     cpl                                           ; $5A28: $2F
@@ -4628,6 +4634,16 @@ func_036_5CBD::
     and  a                                        ; $5CC5: $A7
     ret  z                                        ; $5CC6: $C8
 
+    call func_036_6B8A
+    ld d, $20
+    cp d
+    jr nc, jr_036_5cf4
+
+    call func_036_6B9A
+    ld d, $20
+    cp d
+    jr nc, jr_036_5cf4
+
     ld   a, $10                                   ; $5CC7: $3E $10
     ld   [$C13E], a                               ; $5CC9: $EA $3E $C1
     ld   a, $20                                   ; $5CCC: $3E $20
@@ -4636,6 +4652,7 @@ func_036_5CBD::
     ldh  [hLinkPositionYIncrement], a             ; $5CD3: $E0 $9B
     ldh  a, [hScratch1]                           ; $5CD5: $F0 $D8
     ldh  [hLinkPositionXIncrement], a             ; $5CD7: $E0 $9A
+jr_036_5cf4:
     ld   a, $30                                   ; $5CD9: $3E $30
     call func_036_6C83                            ; $5CDB: $CD $83 $6C
     ld   hl, wEntitiesPrivateState2Table          ; $5CDE: $21 $C0 $C2
@@ -7956,7 +7973,8 @@ func_036_70D6::
     ld   a, [wTransitionSequenceCounter]          ; $70D9: $FA $6B $C1
     cp   $04                                      ; $70DC: $FE $04
     ret  nz                                       ; $70DE: $C0
-
+    xor a
+    ld [$dc52], a
     ldh  a, [hIsGBC]                              ; $70DF: $F0 $FE
     and  a                                        ; $70E1: $A7
     ret  z                                        ; $70E2: $C8

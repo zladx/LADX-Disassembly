@@ -26,9 +26,7 @@ RenderLoop::
     cp   GAMEPLAY_WORLD
     jr   nz, .noSpecialCase
     ; ... set scroll Y to $00 or $80 alternatively every other frame.
-    ldh  a, [hFrameCounter]
-    rrca
-    and  $80
+    ld a, $00
     jr   .setScrollY
 .noSpecialCase
 

@@ -37,6 +37,19 @@ jr_018_7C1C:
     and  a                                        ; $7C1E: $A7
     jr   z, jr_018_7C39                           ; $7C1F: $28 $18
 
+    ld hl, wEntitiesPosXTable
+    add hl, bc
+    ldh a, [hLinkPositionX]
+    cp [hl]
+    jr nz, jr_018_7c42
+
+    ld hl, wEntitiesPosYTable
+    add hl, bc
+    ldh a, [hLinkPositionY]
+    cp [hl]
+    jr z, jr_018_7C39
+
+jr_018_7c42:
     ld   a, $30                                   ; $7C21: $3E $30
     call GetVectorTowardsLink_trampoline          ; $7C23: $CD $B5 $3B
     ldh  a, [hScratch0]                           ; $7C26: $F0 $D7

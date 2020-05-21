@@ -2,9 +2,6 @@ Data_002_66F9::
     db   $00, $02, $03, $07, $05, $0A, $0B, $0F, $04, $08, $09, $0E, $06, $0C, $0D, $01
 
 IsMapRoomE8::
-    ldh  a, [hMapRoom]                            ; $6709: $F0 $F6
-    cp   $E8                                      ; $670B: $FE $E8
-    ret  z                                        ; $670D: $C8
 
 LoadMinimap::
     ; Load special minimap for Color Dungeon

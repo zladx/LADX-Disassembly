@@ -1,959 +1,972 @@
 Dialog000::
-    db "Whoa, boy! Where"
-    db "ya off to in    "
-    db "such a hurry?   "
-    db "Set a spell, I  "
-    db "got somethin' ta"
-    db "tell ya!@"
+	db "Hey, Kleiner! Wo"
+	db "willst Du denn  "
+	db "so schnell hin? "
+	db "Ich habe hier   "
+	db "etwas für Dich.@"
 
 Dialog001::
-    db "What a relief! I"
-    db "thought you'd   "
-    db "never wake up!  "
-    db "You were tossing"
-    db "and turning...  "
-    db "What?  Zelda?   "
-    db "No, my name's   "
-    db "Marin!  You must"
-    db "still be feeling"
-    db "a little woozy. "
-    db "You are on      "
-    db "Koholint Island!@"
+	db "Gott sei Dank!  "
+	db "Ich dachte, Du  "
+	db "wachst nie mehr "
+	db "auf...          "
+	db "Was..? Zelda..? "
+	db "Nein, ich heiße "
+	db "Marin! Du bist  "
+	db "auf der Insel   "
+	db "Cocolint! Bist  "
+	db "Du in Ordnung..?"
+	db "@"
 
 Dialog002::
-    db "Follow the lane "
-    db "south to reach  "
-    db "the beach where "
-    db "I found you.    "
-    db "Since you washed"
-    db "ashore, lots of "
-    db "nasty monsters  "
-    db "have been in the"
-    db "area, so be     "
-    db "careful, okay?@"
+	db "Am Strand unten,"
+	db "dort wo ich Dich"
+	db "gefunden habe,  "
+	db "wimmelt es von  "
+	db "Monstern. Viel- "
+	db "leicht solltest "
+	db "Du Dich dort mal"
+	db "umschauen?! Gehe"
+	db "den Weg entlang "
+	db "nach Süden!@"
 
 Dialog003::
-    db "Hi!  Tarin went "
-    db "to the forest to"
-    db "look for toad-  "
-    db "stools, but I'd "
-    db "rather sing.    "
-    db "Listen to this, "
-    db "it's called the "
-    db "'Ballad of the  "
-    db "Wind Fish.'@"
+	db "Hi! Tarin ist in"
+	db "den Wald gegan- "
+	db "gen, um Pilze zu"
+	db "sammeln. Ich bin"
+	db "aber lieber hier"
+	db "geblieben, um zu"
+	db "singen. Es folgt"
+	db "die \"Ballade vom"
+	db "Windfisch\"...@"
 
 Dialog004::
-    db "Hey!  That's a  "
-    db "nice Ocarina you"
-    db "have there! Will"
-    db "you accompany   "
-    db "me as I sing?@"
+	db "Mann, Du hast da"
+	db "ja eine tolle   "
+	db "Flöte! Willst Du"
+	db "mich beim Singen"
+	db "begleiten..?@"
 
 Dialog005::
-    db "I just love to  "
-    db "sing-- what can "
-    db "I say?  What do "
-    db "you like to do, "
-    db "#####?@"
+	db "Ich liebe diese "
+	db "Melodie... Und  "
+	db "Du, #####? Was  "
+	db "liebst Du???@"
 
 Dialog006::
-    db "#####, Tarin's  "
-    db "taking a nap at "
-    db "home.  I don't  "
-    db "know how he can "
-    db "sleep on such a "
-    db "nice day!  It   "
-    db "makes me want to"
-    db "sing a song...  "
-    db "Yes, the song is"
-    db "'Ballad of the  "
-    db "Wind Fish!'@"
+	db "Hi #####! Tarin "
+	db "ist zu Hause und"
+	db "schläft... Dabei"
+	db "scheint draußen "
+	db "doch die Sonne! "
+	db "Ich könnte das  "
+	db "nicht! Ich singe"
+	db "lieber. Und zwar"
+	db "die \"Ballade vom"
+	db "Windfisch\".@"
 
 Dialog007::
-    db "Eh? It's locked!"
-    db "You can open the"
-    db "door with the   "
-    db "Nightmare Key.@"
+	db "Diese Tür läßt  "
+	db "sich nur mit dem"
+	db "Großen Schlüssel"
+	db "öffnen. Pech!@"
 
 Dialog008::
-    db "You got a Piece "
-    db "of Power!  You  "
-    db "can feel the    "
-    db "energy flowing  "
-    db "through you!@"
+	db "Du hast ein Teil"
+	db "der MACHT erhal-"
+	db "ten. Spürst Du  "
+	db "die Energie???@"
 
 Dialog009::
-    db "Ahhh... It has  "
-    db "the Sleepy Toad-"
-    db "stool, it does! "
-    db "We'll mix it up "
-    db "something in a  "
-    db "jiffy, we will!@"
+	db "Aah! Es hat eine"
+	db "Schlummermorchel"
+	db "dabei! Ich werde"
+	db "daraus etwas    "
+	db "Feines machen!  "
+	db "Hihihi...@"
 
 Dialog00A::
-    db "The last thing I"
-    db "kin remember was"
-    db "bitin' into a   "
-    db "big juicy toad- "
-    db "stool... Then, I"
-    db "had the darndest"
-    db "dream... I was a"
-    db "raccoon!  Yeah, "
-    db "sounds strange, "
-    db "but it sure was "
-    db "fun!@"
+	db "Nachdem ich in  "
+	db "den seltsamen   "
+	db "Pilz gebissen   "
+	db "habe, muß ich   "
+	db "wohl eingeschla-"
+	db "fen sein. Im    "
+	db "Traum war ich   "
+	db "ein Waschbär.   "
+	db "Das war lustig, "
+	db "sage ich Dir... "
+	db "Du hältst mich  "
+	db "für verrückt???@"
 
 Dialog00B::
-    db "I'm all tucker'd"
-    db "out...  I think "
-    db "I better set a  "
-    db "spell before I  "
-    db "head home...@"
+	db "Kinder, bin ich "
+	db "kaputt! Ich ruhe"
+	db "mich erst einmal"
+	db "aus, später gehe"
+	db "ich nach Hause!@"
 
 Dialog00C::
-    db "Double double,  "
-    db "toil and trouble"
-    db "a toadstool mix "
-    db "makes powder for"
-    db "tricks!@"
+	db "BRAUCHE IHN BALD"
+	db "DEN PILZ IM WALD"
+	db "UND MACH DIR FIX"
+	db "EINEN ZAUBERMIX."
+	db "@"
 
 Dialog00D::
-    db "As a raccoon, my"
-    db "nose is verrry  "
-    db "sensitive, ta   "
-    db "stuff like dust "
-    db "and powder...@"
+	db "Meine Waschbär- "
+	db "nase ist äußerst"
+	db "sensibel, was   "
+	db "Staub betrifft.@"
 
 Dialog00E::
-    db "It's the toad-  "
-    db "stool you picked"
-    db "in the woods.   "
-    db "What is it for? "
-    db "You hold it over"
-    db "your head and a "
-    db "mellow aroma    "
-    db "wafts into your "
-    db "nostrils.@"
+	db "Du hältst die   "
+	db "Schlummermorchel"
+	db "nach oben, aber "
+	db "nichts passiert."
+	db "Stattdessen ver-"
+	db "breitet sich ein"
+	db "fauliger Geruch."
+	db "@"
 
 Dialog00F::
-    db "You pick the    "
-    db "toadstool... As "
-    db "you hold it over"
-    db "your head, a    "
-    db "mellow aroma    "
-    db "flows into your "
-    db "nostrils.@"
+	db "Du hast eine    "
+	db "Schlummermorchel"
+	db "gepflückt! Beim "
+	db "Hochheben ver-  "
+	db "breitet sie ein "
+	db "fauliges Aroma.@"
 
 Dialog010::
-    db "Hrrrm...Snore..."
-    db "Hunh?... If'n ya"
-    db "don' know...call"
-    db "old man Ulrira! "
-    db "Zonk...Snore...@"
+	db "Schnarch... Häh?"
+	db "Ruf doch Ulrira "
+	db "an, wenn Du eine"
+	db "Frage hast...Hm?"
+	db "Schnarch...@"
 
 Dialog011::
-    db "I'm tired... I'm"
-    db "goin' ta sleep  "
-    db "now... Zzzzzz...@"
+	db "Ich bin müde... "
+	db "Ich... muß...   "
+	db "schlafen. Gähn!@"
 
 Dialog012::
-    db "Well that was a "
-    db "surprise!  Hey! "
-    db "I'll tell you a "
-    db "secret! Use your"
-    db "sword to poke at"
-    db "dungeon walls..."
-    db "If you hear a   "
-    db "hollow clank,   "
-    db "you can break   "
-    db "the wall with a "
-    db "Bomb!@"
+	db "Komm mir nicht  "
+	db "zu nahe, Knirps!"
+	db "Ich verrate Dir "
+	db "auch ein Geheim-"
+	db "nis. Schlage mit"
+	db "dem Schwert an  "
+	db "die Wände! Hörst"
+	db "Du einen hohlen "
+	db "Klang, läßt sich"
+	db "die Wand mit ner"
+	db "Bombe sprengen.@"
 
 Dialog013::
-    db "You've learned  "
-    db "the 'Ballad of  "
-    db "the Wind Fish!' "
-    db "This song will  "
-    db "always remain in"
-    db "your heart!@"
+	db "Endlich hast Du "
+	db "die \"Ballade vom"
+	db "Windfisch\" ge-  "
+	db "lernt. Sie wird "
+	db "in Deinem Herzen"
+	db "weiterleben.@"
 
 Dialog014::
-    db "Please remember "
-    db "this song!  You "
-    db "should play it  "
-    db "every once in a "
-    db "while to keep it"
-    db "fresh in your   "
-    db "mind!@"
+	db "Du solltest die "
+	db "Melodie öfters  "
+	db "mal spielen,    "
+	db "damit Du sie    "
+	db "nicht vergißt..@"
 
 Dialog015::
-    db "Please!  I want "
-    db "you to learn it!"
-    db "This song is my "
-    db "favorite!@"
+	db "Schnief! Aber es"
+	db "ist doch mein   "
+	db "Lieblingslied..."
+	db "Bitte lerne sie!"
+	db "@"
 
 Dialog016::
-    db "So, how do you  "
-    db "like it?  It's  "
-    db "really touching,"
-    db "isn't it?  Does "
-    db "it stick in your"
-    db "mind?           "
-    db "    Yes  No<ask>"
+	db "Und, wie gefällt"
+	db "sie Dir? Sie ist"
+	db "doch mitreißend,"
+	db "oder? Kannst Du "
+	db "Dir sie merken? "
+	db "    Ja   Nein<ask>"
 
 Dialog017::
-    db "Hi there, big   "
-    db "guy!  I'm Crazy "
-    db "Tracy!  I've got"
-    db "a little secret "
-    db "for sale that'll"
-    db "pump you up!@"
+	db "Hallo, ich heiße"
+	db "Geierwally! Ich "
+	db "verkaufe Dir ein"
+	db "Geheimnis, das  "
+	db "Dich sicher an- "
+	db "machen wird...@"
 
 Dialog018::
-    db "Will you give me"
-    db "28 Rupees for my"
-    db "secret?         "
-    db "    Give Don't<ask>"
+	db "Zahlst Du mir 28"
+	db "Rubine für mein "
+	db "Geheimnis? Hm???"
+	db "    Klar Nö<ask>"
 
 Dialog019::
-    db "How about it?   "
-    db "42 Rupees for my"
-    db "little secret..."
-    db "    Give Don't<ask>"
+	db "Zahlst Du mir 42"
+	db "Rubine für mein "
+	db "Geheimnis? Hm???"
+	db "    Klar Nö<ask>"
 
 Dialog01A::
-    db "All right, come "
-    db "here and I'll   "
-    db "rub it on you!  "
-    db "...There... I've"
-    db "applied my own  "
-    db "secret medicine!"
-    db "It will take    "
-    db "effect when you "
-    db "lose all heart! "
-    db "Drop by again,  "
-    db "big guy!@"
+	db "Okay, Süßer! Du "
+	db "hast eine gute  "
+	db "Wahl getroffen!!"
+	db "Hier... Ich gebe"
+	db "Dir meine gehei-"
+	db "me Medizin. Wenn"
+	db "all Deine Herzen"
+	db "leer sind, wirst"
+	db "Du mit der Medi-"
+	db "zin automatisch "
+	db "wieder gesund!!@"
 
 Dialog01B::
-    db "Beat it, then!  "
-    db "Come back when  "
-    db "you have some   "
-    db "cash!@"
+	db "Nicht mit mir!!!"
+	db "Komm wieder,    "
+	db "wenn Du genügend"
+	db "Geld dabei hast!"
+	db "@"
 
 Dialog01C::
-    db "... ... ... ... "
-    db "But I won't sell"
-    db "it to you!@"
+	db "... oder lieber "
+	db "doch nicht... Du"
+	db "hast ja schon..@"
 
 Dialog01D::
-    db "Well!  I'm only "
-    db "offering you a  "
-    db "secret that will"
-    db "make you strong!"
-    db "You're such a   "
-    db "chicken!!@"
+	db "Dann eben nicht!"
+	db "Wer nicht will, "
+	db "der hat schon..."
+	db "Ich wollte Dir  "
+	db "nur etwas Gutes "
+	db "tun, Du Memme..."
+	db "@"
 
 Dialog01E::
-    db "...You're so    "
-    db "cute!  I'll give"
-    db "you a 7 Rupee   "
-    db "discount!@"
+	db "Du gefällst mir,"
+	db "Kleiner! Deshalb"
+	db "kostet es Dich  "
+	db "nur 7 Rubine...@"
 
 Dialog01F::
-    db "You got Marin!  "
-    db "Is this your big"
-    db "chance?@"
+	db "Marin kommt mit!"
+	db "Das ist DIE     "
+	db "Gelegenheit..!@"
 
 Dialog020::
-    db "GRRRR...@"
+	db "Grrrrrr...@"
 
 Dialog021::
-    db "Heh heh heh ho! "
-    db "You're goin' ta "
-    db "be lost, thanks "
-    db "to me!  Heh heh!@"
+	db "Hehehe! Du wirst"
+	db "Dich verlaufen! "
+	db "Ich sorge dafür."
+	db "Hehe! Verlaufen!"
+	db "@"
 
 Dialog022::
-    db "BOW WOW!        "
-    db "BOW WOW!@"
+	db "WUFF! WUFF!@"
 
 Dialog023::
-    db "YIP YIP!        "
-    db "YIP YIP!@"
+	db "KLÄFF! KLÄFF!@"
 
 Dialog024::
-    db "Let's heal your "
-    db "wounds and get  "
-    db "rid of all that "
-    db "stress... Close "
-    db "your eyes and   "
-    db "relax...@"
+	db "Laß mich Deine  "
+	db "Wunden heilen..!"
+	db "Entspanne Dich  "
+	db "und schließe die"
+	db "Augen... Ommmm!@"
 
 Dialog025::
-    db "You dirty rat!  "
-    db "You k-k-k...beat"
-    db "my brothers!    "
-    db "You'll pay!!    "
-    db "I'll never      "
-    db "forget you!@"
+	db "Du Miststück! Du"
+	db "hast eben meine "
+	db "Brüder besiegt. "
+	db "Dafür wirst Du  "
+	db "bezahlen. Das   "
+	db "schwöre ich Dir!"
+	db "@"
 
 Dialog026::
-    db "Hey runt!  You  "
-    db "think you can   "
-    db "take me?!  All  "
-    db "right boys, get "
-    db "this punk out   "
-    db "of my face!@"
+	db "Hey, Typ! Willst"
+	db "Du zu mir? Okay "
+	db "Jungs, kümmert  "
+	db "Euch um ihn...@"
 
 Dialog027::
-    db "Yep!  Those're  "
-    db "my boys!  I'm   "
-    db "Papahl, pleased "
-    db "ta meetcha! I'll"
-    db "be lost in the  "
-    db "hills later, so "
-    db "keep a look out "
-    db "for me, hear?@"
+	db "Hast Du schon   "
+	db "meine Vierlinge "
+	db "getroffen..? Ich"
+	db "bin Papahl und  "
+	db "glaube, daß ich "
+	db "mich später im  "
+	db "Gebirge verirren"
+	db "werde. Suchst Du"
+	db "mich dort..?@"
 
 Dialog028::
-    db "Yes!!  Yes!!    "
-    db "Break them!     "
-    db "Break them all! "
-    db "... ... ... ... "
-    db "What?  What's   "
-    db "wrong?@"
+	db "Au ja! Mach sie "
+	db "kaputt! Schmeiß "
+	db "sie an die Wand!"
+	db "... ... ... ... "
+	db "Was ist los?@"
 
 Dialog029::
-    db "Aye Caramba!    "
-    db "Kid, you have a "
-    db "lot to learn,   "
-    db "trying to buy   "
-    db "something you   "
-    db "have no use for!@"
+	db "Warum willst Du "
+	db "etwas kaufen,   "
+	db "was Du schon    "
+	db "besitzt? Du     "
+	db "dummer Kerl..!@"
 
 Dialog02A::
-    db "You've got a    "
-    db "Heart!  Thump!  "
-    db "One of your     "
-    db "Heart Containers"
-    db "is filled!@"
+	db "Du hast ein Herz"
+	db "gewonnen! Sofort"
+	db "wird einer der  "
+	db "Herzcontainer   "
+	db "aufgefüllt.@"
 
 Dialog02B::
 Dialog02C::
-    db "Bow & Arrow Set "
-    db "Only 980 Rupees!"
-    db "    Buy  No Way<ask>"
+	db " Pfeil & Bogen  "
+	db "Nur 980 Rubine! "
+	db "    Jaja Neee<ask>"
 
 Dialog02D::
-    db "   10 Arrows    "
-    db "   10 Rupees    "
-    db "    Buy  Don't<ask>"
+	db "   10  Pfeile   "
+	db "   10  Rubine   "
+	db "    Ja   Nein<ask>"
 
 Dialog02E::
-    db "Hey!  Welcome!  "
-    db "See something   "
-    db "you like?!  Just"
-    db "bring it here!@"
+	db "Gude..! Hol Dir "
+	db "etwas vom Regal "
+	db "und bring es zur"
+	db "Kasse...@"
 
 Dialog02F::
-    db "Hey! You! Stop! "
-    db "You gotta pay!  "
-    db "Put it back!@"
+	db "Ja, bist Du noch"
+	db "ganz sauber? Du "
+	db "mußt erst bezah-"
+	db "len. Zurück!@"
 
 Dialog030::
-    db "  Deluxe Shovel "
-    db "   200 Rupees!  "
-    db "Seems expensive!"
-    db "    Buy  No Way!"
-    db "<ask>"
+	db " Luxus-Schaufel "
+	db "   200 Rubine   "
+	db "    Ja   Nein<ask>"
 
 Dialog031::
-    db "   Three Hearts "
-    db "    10 Rupees!  "
-    db "    Buy  Don't<ask>"
+	db "     3 Herzen   "
+	db "    10 Rubine   "
+	db "    Ja   Nein<ask>"
 
 Dialog032::
-    db "     Shield     "
-    db "    20 Rupees!  "
-    db "    Buy  Don't<ask>"
+	db "     Schild     "
+	db "   20  Rubine   "
+	db "    Ja   Nein<ask>"
 
 Dialog033::
-    db "    Ten Bombs   "
-    db "    10 Rupees   "
-    db "    Buy  Don't<ask>"
+	db "   10  Bomben   "
+	db "   10  Rubine   "
+	db "    Ja   Nein<ask>"
 
 Dialog034::
-    db "Sorry, kid!  You"
-    db "don't have the  "
-    db "Rupees!  Come   "
-    db "back when you   "
-    db "have the cash!@"
+	db "Ich fürchte, das"
+	db "kannst Du Dir im"
+	db "Moment nicht    "
+	db "leisten. Tschüß!"
+	db "@"
 
 Dialog035::
-    db "Thanks a lot!   "
-    db "And come again!@"
+	db "Vielen Dank! Und"
+	db "bis bald..!@"
 
 Dialog036::
-    db "Guess what?  You"
-    db "got it for free."
-    db "Are you proud of"
-    db "yourself?@"
+	db "Wow! Er hat es  "
+	db "nicht gemerkt..."
+	db "Aber plagt Dich "
+	db "jetzt nicht Dein"
+	db "Gewissen??? Hm?@"
 
 Dialog037::
 Dialog038::
-    db "I wasn't kidding"
-    db "when I said pay!"
-    db "Now, you'll pay "
-    db "the ultimate    "
-    db "price!!@"
+	db "Ich habe gesagt:"
+	db "\"Du mußt erst   "
+	db "zahlen!\" Das war"
+	db "eine Warnung..! "
+	db "Jetzt zahlst Du "
+	db "mit dem Leben..."
+	db "@"
 
 Dialog039::
-    db "Hunh?  It sounds"
-    db "like the castle "
-    db "gate opened! You"
-    db "can easily leave"
-    db "the castle now!@"
+	db "Äh? Das hat sich"
+	db "angehört, als   "
+	db "sei das Burgtor "
+	db "aufgegangen. Nun"
+	db "kommst Du leicht"
+	db "nach draußen!@"
 
 Dialog03A::
 Dialog03B::
-    db "  TRENDY GAME!  "
-    db " One Play 10 Rs."
-    db "    Play No<ask>"
+	db " * WUNDERKRAN * "
+	db "1 Sp.  10 Rubine"
+	db "    Zock Gähn<ask>"
 
 Dialog03C::
-    db "The A and B     "
-    db "Buttons move the"
-    db "crane...The rest"
-    db "is just timing! "
-    db "Go over to the  "
-    db "buttons to play!"
-    db "Good Luck!@"
+	db "Mit den A und B "
+	db "Knöpfen bewegst "
+	db "Du den Kran. Der"
+	db "Rest ist Timing!"
+	db "Gehe vor die    "
+	db "Knöpfe.         "
+	db "Viel Erfolg!@"
 
 Dialog03D::
-    db "It's a Shield!  "
-    db "There is space  "
-    db "for your name!@"
+	db "Du hast einen   "
+	db "Schild gewonnen!"
+	db "@"
 
 Dialog03E::
-    db "Challenge Again?"
-    db "    Play No<ask>"
+	db "Noch ein Spiel? "
+	db "    Jaaa Nein<ask>"
 
 Dialog03F::
-    db "Good Luck!@"
+	db "Viel Glück!@"
 
 Dialog040::
-    db "We're closing up"
-    db "for today!  Come"
-    db "again, anytime!@"
+	db "Feierabend! Für "
+	db "heute ist erst  "
+	db "mal Schluß! Komm"
+	db "bald wieder!@"
 
 Dialog041::
-    db "You got some    "
-    db "Magic Powder!   "
-    db "Try to sprinkle "
-    db "it on many      "
-    db "things!@"
+	db "Das Zauberpulver"
+	db "gehört nun Dir! "
+	db "Streue es auf   "
+	db "alles mögliche!@"
 
 Dialog042::
-    db "It's 30 Rupees! "
-    db "You can play the"
-    db "game three more "
-    db "times with this!@"
+	db "Hey! 30 Rubine!!"
+	db "Damit kannst Du "
+	db "wieder dreimal  "
+	db "spielen!@"
 
 Dialog043::
-    db "Cough Cough...  "
-    db "Don't sprinkle  "
-    db "that on me...   "
-    db "...I'll have to "
-    db "curse you!      "
-    db "Cough Cough...@"
+	db "Haaatschiiii!   "
+	db "... kein Pulver "
+	db "mehr! Sonst ver-"
+	db "fluche ich Dich!"
+	db "Haaatschiiii!@"
 
 Dialog044::
-    db "You got a Yoshi "
-    db "Doll!  Recently,"
-    db "he seems to be  "
-    db "showing up in   "
-    db "many games!@"
+	db "Oh! Du hast eine"
+	db "Yoshi-Puppe be- "
+	db "kommen. Endlich!"
+	db "Du LIEBST Yoshi!"
+	db "@"
 
 Dialog045::
-    db "How about some  "
-    db "fishing, little "
-    db "buddy? I'll only"
-    db "charge you 10   "
-    db "Rupees...       "
-    db "    Fish Not Now"
-    db "<ask>"
+	db "Möchtest Du eine"
+	db "Runde angeln? Es"
+	db "kostet Dich nur "
+	db "10 Rubine pro   "
+	db "Versuch!        "
+	db "    Ja   Nein<ask>"
 
 Dialog046::
-    db "You have to have"
-    db "more passion!   "
-    db "Live a little!@"
+	db "Das ist schade! "
+	db "Angeln macht so "
+	db "großen Spaß...@"
 
 Dialog047::
-    db "Okay, here's how"
-    db "you do it.  Use "
-    db "<left> and <right> on the <dpad>"
-    db "to aim a cast.  "
-    db "Once you hook a "
-    db "fish, press the "
-    db "Button rapidly  "
-    db "to reel him in!@"
+	db "Fein! Mit dem <dpad> "
+	db "(<right> & <left>) und den "
+	db "Knöpfen kannst  "
+	db "Du bestimmen, wo"
+	db "die Schnur im   "
+	db "Wasser landen   "
+	db "soll...         "
+	db "Mit den A und B "
+	db "Knöpfen kannst  "
+	db "die Schnur dann "
+	db "im Wasser bewe- "
+	db "gen! Hat endlich"
+	db "ein Fisch ange- "
+	db "bissen, holst Du"
+	db "ihn raus, indem "
+	db "Du schnell die  "
+	db "Knöpfe drückst.@"
 
 Dialog048::
-    db "Why not try one "
-    db "more time,      "
-    db "little buddy?   "
-    db "    Cast Not Now"
-    db "<ask>"
+	db "Möchtest Du es  "
+	db "noch einmal ver-"
+	db "suchen?         "
+	db "    Gern Nein<ask>"
 
 Dialog049::
-    db "Wow! That one   "
-    db "got away!  Want "
-    db "to try again?   "
-    db "    Cast Not Now"
-    db "<ask>"
+	db "Die Schnur ist  "
+	db "gerissen! Noch  "
+	db "einen Versuch?  "
+	db "    Ja   Nein<ask>"
 
 Dialog04A::
-    db "Wow! Nice Fish! "
-    db "It's a lunker!! "
-    db "I'll give you a "
-    db "20 Rupee prize! "
-    db "Try again?      "
-    db "    Cast Not Now"
-    db "<ask>"
+	db "Wow! Das ist ja "
+	db "ein dicker Brok-"
+	db "ken! Dafür gebe "
+	db "ich Dir 20 Ru-  "
+	db "bine. Noch mal? "
+	db "    Klar Nie<ask>"
 
 Dialog04B::
-    db "This pond's all "
-    db "fished out.  Why"
-    db "not try your    "
-    db "luck in the sea?"
-    db "    Okay No<ask>"
+	db "Im Teich gibt es"
+	db "keine Fische    "
+	db "mehr! Willst Du "
+	db "es jetzt am Meer"
+	db "versuchen?      "
+	db "    Ja   Nein<ask>"
 
 Dialog04C::
-    db "Did I say that? "
-    db "Forget it, okay?"
-    db "Run along now...@"
+	db "Hab ich wirklich"
+	db "MEER gesagt? Das"
+	db "war wohl ein    "
+	db "Versehen. Ciao!@"
 
 Dialog04D::
-    db "It's a runt!    "
-    db "I'll only give  "
-    db "you a 5 Rupees  "
-    db "prize for that. "
-    db "You should try  "
-    db "again!          "
-    db "    Okay No<ask>"
+	db "Das ist aber ein"
+	db "Kleiner! Für den"
+	db "bekommst Du nur "
+	db "5 Rubine! Willst"
+	db "Du noch einmal? "
+	db "    Okay Nein<ask>"
 
 Dialog04E::
-    db "You're short of "
-    db "Rupees?  Don't  "
-    db "worry about it. "
-    db "You just come   "
-    db "back when you   "
-    db "have more money,"
-    db "little buddy.@"
+	db "Tut mir leid, Du"
+	db "hast nicht genug"
+	db "Rubine! Aber sei"
+	db "nicht traurig!  "
+	db "Die Fische lau- "
+	db "fen Dir ja nicht"
+	db "weg! Bis später!"
+	db "@"
 
 Dialog04F::
-    db "You've got a    "
-    db "Piece of Heart! "
-    db "Press SELECT on "
-    db "the Subscreen   "
-    db "to see.@"
+	db "Ein Herzteil!   "
+	db "Drücke SELECT   "
+	db "im Untermenü,   "
+	db "um die Anzahl   "
+	db "festzustellen.@"
 
 Dialog050::
-    db "You collected   "
-    db "four Pieces of  "
-    db "Heart.  Now, you"
-    db "have a complete "
-    db "Heart Container!@"
+	db "Du hast 4 Herz- "
+	db "teile gesammelt."
+	db "Jetzt bekommst  "
+	db "Du einen neuen  "
+	db "Herzcontainer!@"
 
 Dialog051::
-    db "Brrrr... This is"
-    db "a block of solid"
-    db "ice!  It's very "
-    db "cold!@"
+	db "Brrrrr... Dieser"
+	db "Eisblock ist ja "
+	db "verdammt hart..."
+	db "Und kalt! Brrrr!"
+	db "@"
 
 Dialog052::
-    db "NYAH NYAH! You  "
-    db "can't hurt me as"
-    db "long as I have  "
-    db "my bottle!@"
+	db "Ätschi! Bätschi!"
+	db "Mit meiner Vase "
+	db "bin ich unver-  "
+	db "wundbar!@"
 
 Dialog053::
-    db "Waaaah! You- you"
-    db "broke my bottle!"
-    db "Why, you... You "
-    db "make me hopping "
-    db "mad!!!@"
+	db "Ooooohh! Du hast"
+	db "meine Vase zer- "
+	db "stört! Das wirst"
+	db "Du bereuen! Du.."
+	db "@"
 
 Dialog054::
-    db "Well, #####, ya "
-    db "finally snapped "
-    db "out of it...    "
-    db "Name's Tarin... "
-    db "Hope yer feelin'"
-    db "better...  What?"
-    db "How did I know  "
-    db "your name?  You "
-    db "think it's weird"
-    db "eh?  Well, I saw"
-    db "it on back of   "
-    db "this shield!@"
+	db "Endlich bist Du "
+	db "wieder auf den  "
+	db "Beinen, #####..."
+	db "Heiße übrigens  "
+	db "Tarin... Bist Du"
+	db "okay? Was? Woher"
+	db "ich Deinen Namen"
+	db "weiß?? Der steht"
+	db "auf der Rücksei-"
+	db "te von diesem   "
+	db "Schild... Hier!@"
 
 Dialog055::
-    db "Oh, yeah... Some"
-    db "other stuff like"
-    db "this washed up  "
-    db "on the beach... "
-    db "If'n you go look"
-    db "watch out for   "
-    db "monsters! Ever  "
-    db "since you showed"
-    db "up, #####, I've "
-    db "seen 'em all    "
-    db "over the place!@"
+	db "Oh ja! Am Strand"
+	db "lag noch etwas.."
+	db "Ist wohl auch an"
+	db "Land gespült    "
+	db "worden... Achte "
+	db "auf die Monster!"
+	db "Sie treiben sich"
+	db "überall herum,  "
+	db "seit Du auf der "
+	db "Insel bist,     "
+	db "#####!@"
 
 Dialog056::
-    db "Level 1--       "
-    db "     Tail Cave@"
+	db "  * LEVEL  1 *  "
+	db "   Wurmpalast@"
 
 Dialog057::
-    db "Level 2--       "
-    db "   Bottle Grotto@"
+	db "  * LEVEL  2 *  "
+	db "  Djinn Grotte@"
 
 Dialog058::
-    db "Level 3--       "
-    db "      Key Cavern@"
+	db "  * LEVEL  3 *  "
+	db "  Teufelsvilla@"
 
 Dialog059::
-    db "Level 4--       "
-    db " Angler's Tunnel@"
+	db "  * LEVEL  4 *  "
+	db "  Wundertunnel@"
 
 Dialog05A::
-    db "Level 5--       "
-    db "   Catfish's Maw@"
+	db "  * LEVEL  5 *  "
+	db "   Fisch Maul@"
 
 Dialog05B::
-    db "Level 6--       "
-    db "     Face Shrine@"
+	db "  * LEVEL  6 *  "
+	db "  Maskentempel@"
 
 Dialog05C::
-    db "Level 7--       "
-    db "   Eagle's Tower@"
+	db "  * LEVEL  7 *  "
+	db "  Adlerfestung@"
 
 Dialog05D::
-    db "Level 8--       "
-    db "     Turtle Rock@"
+	db "  * LEVEL  8 *  "
+	db "  Reptilfelsen@"
 
 Dialog05E::
-    db "Wind Fish's Egg @"
+	db "  Windfisch Ei@"
 
 Dialog05F::
 Dialog060::
-    db "Mountain Bridge @"
+	db "  Hängebrücke@"
 
 Dialog061::
-    db "Sale's House O' "
-    db "    Bananas@"
+	db " Bananenhändler@"
 
 Dialog062::
-    db "Pothole Field@"
+	db "Schicksalsacker@"
 
 Dialog063::
-    db "    House By    "
-    db "     The Bay@"
+	db "    Haus  an    "
+	db "   der  Bucht@"
 
 Dialog064::
-    db "   Trendy Game@"
+	db "   Spielhalle@"
 
 Dialog065::
-    db "  Town Tool Shop@"
+	db "Tante Emma Laden"
+	db "@"
 
 Dialog066::
-    db "Marin and       "
-    db "   Tarin's House@"
+	db " Marin & Tarins "
+	db "     Zuhause@"
 
 Dialog067::
-    db "   Witch's Hut@"
+	db " Hexenhäuschen@"
 
 Dialog068::
-    db "  Yarna Desert@"
+	db "   Durstwüste@"
 
 Dialog069::
-    db "  Ukuku Prairie@"
+	db " Urunga  Steppe@"
 
 Dialog06A::
-    db "Mysterious Woods@"
+	db "   Zauberwald@"
 
 Dialog06B::
-    db "  Mt. Tamaranch @"
+	db " Tamaranch Berg@"
 
 Dialog06C::
-    db "     Tal Tal    "
-    db " Mountain Range @"
+	db " Taltal Gebirge@"
 
 Dialog06D::
-    db "  Signpost Maze @"
+	db "  Schilderwald@"
 
 Dialog06E::
-    db "  Mabe Village  @"
+	db "   Mövendorf@"
 
 Dialog06F::
-    db " Animal Village @"
+	db "    Zoodorf@"
 
 Dialog070::
-    db "    Cemetery    @"
+	db "    Friedhof@"
 
 Dialog071::
-    db "   Rapids Ride  @"
+	db " Stromschnellen@"
 
 Dialog072::
-    db "Koholint Prairie@"
+	db "Cocolint  Steppe"
+	db "@"
 
 Dialog073::
-    db " Toronbo Shores@"
+	db " Torongastrand@"
 
 Dialog074::
-    db "  Martha's Bay@"
+	db "  Zwergenbucht@"
 
 Dialog075::
-    db "East of the Bay@"
+	db " Östliche Bucht@"
 
 Dialog076::
-    db "  Goponga Swamp@"
+	db "  Schleimsumpf@"
 
 Dialog077::
-    db "   Face Shrine @"
+	db "  Maskentempel@"
 
 Dialog078::
-    db " Kanalet Castle@"
+	db " Schloß Kanalet@"
 
 Dialog079::
-    db "Tal Tal Heights@"
+	db "Taltal  Erhöhung"
+	db "@"
 
 Dialog07A::
-    db "Tabahl Wasteland@"
+	db "  Fratzenwald@"
 
 Dialog07B::
-    db "  South of the  "
-    db "    Village@"
+	db " Süd-Mövendorf@"
 
 Dialog07C::
-    db "  Fishing Pond  @"
+	db "   Angelteich@"
 
 Dialog07D::
-    db "Madam MeowMeow's"
-    db "     House      "
-    db " Beware of Dog!@"
+	db "Madame MiouMious"
+	db "      Haus      "
+	db " BISSIGER HUND!@"
 
 Dialog07E::
-    db "Old Man Ulrira's"
-    db "     House      @"
+	db " Ulriras  Hütte@"
 
 Dialog07F::
-    db "Weird Mr. Write @"
+	db "Dr. Wrights Haus"
+	db "@"
 
 Dialog080::
-    db " Crazy Tracy's  "
-    db "  Health Spa@"
+	db "  Geierwallies  "
+	db "   Reformhaus@"
 
 Dialog081::
-    db "Quadruplet's    "
-    db "      House@"
+	db "   Haus  der    "
+	db "  Großfamilie@"
 
 Dialog082::
-    db "  Dream Shrine  @"
+	db "  Traumschrein@"
 
 Dialog083::
-    db "Telephone Booth "
-    db "<down> Signpost Maze @"
+	db "Telefonhäuschen@"
 
 Dialog084::
-    db "Seashell Mansion@"
+	db "  Muschelbasar@"
 
 Dialog085::
-    db "Richard's Villa @"
+	db " Richards Villa@"
 
 Dialog086::
-    db "     Hen House  @"
+	db "  Hühnerstall@"
 
 Dialog087::
-    db "Village Library @"
+	db "  Dorfbücherei@"
 
 Dialog088::
-    db "    Raft Shop   @"
+	db "  Floß Verleih@"
 
 Dialog089::
-    db "    Warp Hole   @"
+	db "   Teleporter@"
 
 Dialog08A::
-    db "This rock has   "
-    db "many cracks...  "
-    db "There must be   "
-    db "some way to     "
-    db "shatter it...@"
+	db "Dieser Fels ist "
+	db "äußerst brüchig!"
+	db "Vielleicht kann "
+	db "man ihn irgend- "
+	db "wie sprengen..?@"
 
 Dialog08B::
-    db "Oh? What a weird"
-    db "object!  There  "
-    db "must be some way"
-    db "to tackle this  "
-    db "obstacle.@"
+	db "Das ist aber ein"
+	db "seltsamer Stein!"
+	db "Vielleicht kann "
+	db "man ihn einfach "
+	db "umrennen..?@"
 
 Dialog08C::
-    db "Hunh?  This rock"
-    db "has a key hole! "
-    db "You should come "
-    db "back with a key!@"
+	db "Der Stein hat ja"
+	db "ein Schlüssel-  "
+	db "loch! Vermutlich"
+	db "braucht man hier"
+	db "einen Schlüssel!"
+	db "@"
 
 Dialog08D::
-    db "Wow!  This looks"
-    db "pretty heavy!   "
-    db "You won't be    "
-    db "able to lift it "
-    db "with just your  "
-    db "bare hands...@"
+	db "Zu schwer! Mit  "
+	db "bloßen Händen   "
+	db "wirst Du DAS    "
+	db "nicht hochheben "
+	db "können!@"
 
 Dialog08E::
-    db "Well, it's an   "
-    db "Ocarina, but you"
-    db "don't know how  "
-    db "to play it...@"
+	db "Hm! Es ist eine "
+	db "Flöte! Aber was "
+	db "sollst Du auf   "
+	db "ihr spielen???@"
 
 Dialog08F::
-    db "No!  No!  Poor  "
-    db "hen!  Stop that!@"
+	db "Hey! Tierquäler!"
+	db "Die arme Henne!!"
+	db "@"
 
 Dialog090::
-    db "You found the   "
-    db "Power Bracelet! "
-    db "At last, you can"
-    db "pick up pots and"
-    db "stones!@"
+	db "Suuuper! Du hast"
+	db "das Kraftarmband"
+	db "gefunden! Damit "
+	db "kannst Du Steine"
+	db "und Vasen heben."
+	db "@"
 
 Dialog091::
-    db "You got your    "
-    db "shield back!    "
-    db "Press the button"
-    db "and repel       "
-    db "enemies with it!@"
+	db "Du hast Deinen  "
+	db "Schild wieder!  "
+	db "Halte den Knopf "
+	db "zur Abwehr der  "
+	db "Gegner gedrückt!"
+	db "@"
 
 Dialog092::
-    db "Ahhh... Yess... "
-    db "That dust was so"
-    db "refreshing...   "
-    db "For that, I'll  "
-    db "tell you a hint!"
-    db "Use a Bomb in a "
-    db "place where the "
-    db "sand swallows   "
-    db "you... There is "
-    db "a treat on the  "
-    db "other side of   "
-    db "the wall... Bye!@"
+	db "Ah! Vielen Dank!"
+	db "Dieser Staub war"
+	db "erfrischend...  "
+	db "Zum Dank gibt es"
+	db "einen Tip: Dort,"
+	db "wo der Sand Dich"
+	db "einsaugt, lasse "
+	db "Dich fallen! Mit"
+	db "einer Bombe mußt"
+	db "Du hier die Wand"
+	db "sprengen.@"
 
 Dialog093::
-    db "You've got the  "
-    db "Hook Shot!  Its "
-    db "chain stretches "
-    db "long when you   "
-    db "use it!@"
+	db "Jetzt besitzt Du"
+	db "den Enterhaken! "
+	db "Damit kommst Du "
+	db "über Schluchten!"
+	db "@"
 
 Dialog094::
-    db "You've got the  "
-    db "Magic Rod!  Now "
-    db "you can burn    "
-    db "things! Burn it!"
-    db "Burn, baby burn!@"
+	db "Jetzt besitzt Du"
+	db "den Somariastab!"
+	db "Damit feuerst Du"
+	db "einen glühenden "
+	db "Feuerstrahl ab.@"
 
 Dialog095::
-    db "You've got the  "
-    db "Pegasus Boots!  "
-    db "If you hold down"
-    db "the Button, you "
-    db "can dash!@"
+	db "Du besitzt jetzt"
+	db "ein Paar neuer  "
+	db "Pegasusstiefel! "
+	db "Damit kannst Du "
+	db "nun rennen, wenn"
+	db "Du den Knopf ge-"
+	db "drückt hältst.@"
 
 Dialog096::
-    db "You've got the  "
-    db "Ocarina!  You   "
-    db "should learn to "
-    db "play many songs!@"
+	db "Jetzt besitzt Du"
+	db "die Flöte! Musik"
+	db "ist Trumpf!!!@"
 
 Dialog097::
-    db "You've got the  "
-    db "Roc's Feather!  "
-    db "It feels like   "
-    db "your body is a  "
-    db "lot lighter!@"
+	db "Die Greifenfeder"
+	db "erlaubt es Dir, "
+	db "große Sprünge zu"
+	db "machen.@"
 
 Dialog098::
-    db "You've got a    "
-    db "Shovel!  Now you"
-    db "can feel the joy"
-    db "of digging!@"
+	db "Du besitzt jetzt"
+	db "eine Schaufel.  "
+	db "Aber was willst "
+	db "Du nun angraben?"
+	db "@"
 
 Dialog099::
-    db "You've got some "
-    db "Magic Powder!   "
-    db "Try sprinkling  "
-    db "it on a variety "
-    db "of things!@"
+	db "Das Zauberpulver"
+	db "gehört nun Dir! "
+	db "Probiere, was Du"
+	db "damit besprühen "
+	db "kannst...@"
 
 Dialog09A::
-    db "You've got a    "
-    db "bomb! Way to    "
-    db "go!@"
+	db "Du besitzt nun  "
+	db "eine Bombe.     "
+	db "Also los!@"
 
 Dialog09B::
-    db "You found your  "
-    db "Sword!  It must "
-    db "be yours because"
-    db "it has your name"
-    db "engraved on it!@"
+	db "Nun hast Du Dein"
+	db "Schwert gefunden"
+	db "und bist froh,  "
+	db "den Namen ##### "
+	db "darauf zu lesen!"
+	db "@"
 
 Dialog09C::
-    db "You've got the  "
-    db "Flippers! If you"
-    db "press the B     "
-    db "Button while you"
-    db "swim, you can   "
-    db "dive underwater!@"
+	db "Jetzt besitzt Du"
+	db "endlich ein Paar"
+	db "Schwimmflossen! "
+	db "Drückst Du beim "
+	db "Schwimmen den B-"
+	db "Knopf, kannst Du"
+	db "sogar tauchen!@"
 
 Dialog09D::
-    db "You've got the  "
-    db "Magnifying Lens!"
-    db "This will reveal"
-    db "many things you "
-    db "couldn't see    "
-    db "before!@"
+	db "Die Lupe!! Jetzt"
+	db "kannst Du Dinge "
+	db "sehen (& lesen),"
+	db "die vorher un-  "
+	db "sichtbar waren.@"
 
 Dialog09E::
 Dialog09F::
-    db "You've got a    "
-    db "new Sword!  You "
-    db "should put your "
-    db "name on it right"
-    db "away!@"
+	db "Du besitzt ein  "
+	db "neues Schwert!  "
+	db "Vielleicht wäre "
+	db "es gut, Deinen  "
+	db "Namen darauf zu "
+	db "schreiben..?!@"
 
 Dialog0A0::
-    db "You found the   "
-    db "secret medicine!"
-    db "You should apply"
-    db "this and see    "
-    db "what happens!@"
+	db "Geheimnisvolles "
+	db "Elixier!        "
+	db "Verwende es und "
+	db "warte ab, was   "
+	db "passieren wird!@"
 
 Dialog0A1::
-    db "You've got the  "
-    db "Tail Key!  Now  "
-    db "you can open the"
-    db "Tail Cave gate!@"
+	db "Nun hast Du den "
+	db "Wurmschlüssel in"
+	db "der Hand! Sicher"
+	db "kannst Du damit "
+	db "den Wurmpalast  "
+	db "öffnen.@"
 
 Dialog0A2::
-    db "You've got the  "
-    db "Slime Key!  Now "
-    db "you can open the"
-    db "gate in Ukuku   "
-    db "Prairie!@"
+	db "Coooool! Mit dem"
+	db "Schleimschlüssel"
+	db "öffnet sich das "
+	db "Tor in der      "
+	db "Urunga Steppe.@"
 
 Dialog0A3::
-    db "You've got the  "
-    db "Angler Key!@"
+	db "Mit dem Wunder- "
+	db "schlüssel öffnet"
+	db "sich das Tor zum"
+	db "Wundertunnel!@"
+
+Dialog0A4::
+	db "Der Masken-     "
+	db "schlüssel!!! Er "
+	db "gehört nun Dir!@"
+

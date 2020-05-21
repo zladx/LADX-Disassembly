@@ -97,8 +97,8 @@ InitSaveFiles::
 
     ld   a, $60
     ld   [$A452], a ; 60 bombs
-    ld   [$A47D], a ; 60 max arrows
     ld   [$A47C], a ; 60 max bombs
+    ld   [$A47D], a ; 60 max arrows
     ld   [$A44A], a ; 60 arrows
     ld   a, $40
     ld   [$A47B], a ; 40 max magic powder
@@ -192,8 +192,11 @@ jr_001_479C::
 
 jr_001_47AA::
     push de
+    ; hl = savefile
     ld   hl, $A105
     add  hl, de
+
+    ; de = sizeof(save)
     ld   de, $3A8
 
 jr_001_47B2::
@@ -466,7 +469,7 @@ Data_001_545C::
 
 Data_001_54A0::
     db   $00, $00, $00, $FF, $00, $00, $00, $FF   ; $54A0
-    db   $E8, $E9, $FF, $00, $E8, $EC, $E8, $FF   ; $54A8
+    db   $E8, $E9, $FF, $00, $E8, $7F, $EC, $FF   ; $54A8
     db   $E8, $E9, $FF, $00, $E8, $EC, $E8, $FF   ; $54B0
     db   $E8, $EA, $E9, $EB, $FF, $00, $00, $00   ; $54B8
     db   $00, $00, $00, $E8, $EA, $E9, $EB, $EC   ; $54C0
@@ -765,7 +768,7 @@ func_001_5895::
     ld   a, $07
     ld   [rWX], a
     ld   a, $08
-    ld   [$C150], a
+    ld   [wC150], a
     xor  a
     ld   [wInventoryAppearing], a
 
@@ -774,12 +777,12 @@ jr_001_58A7::
 
 func_001_58A8::
     ld   hl, $C09C
-    ld   a, [$DB54]
+    ld   a, [wDB54]
     rra
     and  $78
     add  a, $18
     ldi  [hl], a
-    ld   a, [$DB54]
+    ld   a, [wDB54]
     swap a
     rra
     and  $78
@@ -787,12 +790,25 @@ func_001_58A8::
     ldi  [hl], a
     ld   [hl], $3E
     inc  hl
-    ldh  a, [hFrameCounter]
-    rla
-    and  $10
-    ld   [hl], a
+    ldh a, [hIsGBC]
+    and a
+    jr z, jr_001_592f
+    ld a, $00
+    ld [hl], a
+    ldh a, [hFrameCounter]
+    and $08
+    ret z
+
+    ld a, $03
+    ld [hl], a
     ret
 
+jr_001_592f:
+    ldh a, [hFrameCounter]
+    rla
+    and $10
+    ld [hl], a
+    ret
 
 ;
 ; Each 2x2 section of the overworld is assigned a dialogue index
@@ -826,7 +842,7 @@ MapSpecialLocationNamesLookupTable::
     db   0, $56, $57, $58, $59, $5A, $5B, $5C, $5D,   0,   0,   0,   0,   0,   0,   0  ; 10 - Dungeon icons
     db   0, $7C, $67,   0,   0, $80, $65,   0, $64, $88, $7D,   0,   0,   0,   0,   0  ; 20 - Shop icons
     db   0, $5E, $5F, $7F, $7E, $7D, $82, $84, $85, $86, $87, $81, $66, $A7, $5E, $63  ; 30 - "!?" icons
-    db   0, $61,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0  ; 40 - "!?" icons
+    db   0, $61, $7C,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0  ; 40 - "!?" icons
 
 ;
 ; Table for map squares that have special text instead of the generic name from MapLocationNamesTable.
@@ -843,7 +859,7 @@ MapSpecialLocationNamesTable::
     db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 50
     db   0,   0,   0,   0, $0D, $22,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 60
     db   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; 70
-    db $02, $21, $3B, $36,   0,   0,   0,   0, $3D,   0, $37,   0, $16,   0,   0,   0 ; 80
+    db $02, $42, $3B, $36,   0,   0,   0,   0, $3D,   0, $37,   0, $16,   0,   0,   0 ; 80
     db   0,   0,   0, $26,   0,   0,   0,   0,   0,   0,   0, $09, $0B, $09,   0,   0 ; 90
     db   0, $35, $3C,   0, $3D,   0,   0,   0,   0,   0,   0,   0, $0A,   0,   0,   0 ; A0
     db $3A, $34, $3D, $28,   0, $13, $07,   0,   0,   0,   0,   0,   0,   0,   0,   0 ; B0
@@ -1465,13 +1481,13 @@ SynchronizeDungeonsItemFlags::
 
     ; Select the correct item flags slot for the current dungeon
     ; hl = wDungeonItemFlags + (hMapId * 5)
-    ld   hl, wDungeonItemFlags
     ld   e, a
     sla  a
     sla  a
     add  a, e
     ld   e, a
     ld   d, $00
+    ld   hl, wDungeonItemFlags
     add  hl, de
 .endIf
 
@@ -1652,7 +1668,7 @@ UpdateRecentRoomsList::
 
 HideAllSprites::
     ; $0000 controls whether to enable external RAM writing
-    ld   hl, $0000
+    ld   hl, MBC3SRamEnable
 
     ; If CGB…
     ldh  a, [hIsGBC]
@@ -1660,7 +1676,7 @@ HideAllSprites::
     jr   z, .enableExternalRAMWriting
     ; disable external RAM writing
     ; (probably because an extra RAM bank available on CGB can be used)
-    ld   [hl], $00
+    ld   [hl], SRAM_DISABLE
     jr   .endIf
 
 .enableExternalRAMWriting

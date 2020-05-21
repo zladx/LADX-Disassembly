@@ -252,12 +252,12 @@ IndoorsA2EEntities::
   entities_end
 
 IndoorsA2FEntities::
+  entity $0, $2, ENTITY_OWL_STATUE
   entity $2, $4, ENTITY_KEESE
   entity $5, $4, ENTITY_KEESE
   entity $6, $2, ENTITY_SPARK_CLOCKWISE
   entity $2, $4, ENTITY_DROPPABLE_HEART
   entity $6, $5, ENTITY_DROPPABLE_HEART
-  entity $0, $2, ENTITY_OWL_STATUE
   entities_end
 
 IndoorsA30Entities::

@@ -1648,9 +1648,10 @@ Data_019_4BAC::
     db   $68, $06, $6A, $06, $6C, $06, $6E, $06   ; $4BC4
 
 label_019_4BCC::
-    ld   hl, wEntitiesPrivateState1Table          ; $4bcc: $21 $b0 $c2
-    add  hl, bc
-    ld   a, [hl]                                  ; $4bd0: $7e
+    db   $21
+    or   b                                        ; $4BCD: $B0
+    jp   nz, jr_019_7DE7                       ; $4BCE: $C2 $09 $7E
+
     cp   $02                                      ; $4BD1: $FE $02
     jp   z, label_019_4CFF                        ; $4BD3: $CA $FF $4C
 
@@ -4495,6 +4496,10 @@ label_019_5F84:
     ld   hl, $C3C8                                ; $5FA4: $21 $C8 $C3
     or   [hl]                                     ; $5FA7: $B6
     ret  nz                                       ; $5FA8: $C0
+
+    ld a, [wGameplayType]
+    cp $0b
+    ret nz
 
     ld   hl, wEntitiesUnknownTableD               ; $5FA9: $21 $D0 $C2
     add  hl, bc                                   ; $5FAC: $09
@@ -7457,6 +7462,7 @@ Data_019_78FE::
     db   $98, $50, $8D, $6C, $6E, $6C, $6E, $6C, $6E, $6C, $6E, $6C, $6E, $6C, $6E, $6C
     db   $6E, $98, $51, $8D, $6D, $6F, $6D, $6F, $6D, $6F, $6D, $6F, $6D, $6F, $6D, $6F
     db   $6D, $6F, $00
+    db   $98, $50, $CD, $00, $98, $51, $CD, $00, $00
 
 func_019_7921::
     push bc                                       ; $7921: $C5
@@ -7472,6 +7478,19 @@ jr_019_792F:
     ld   [hl+], a                                 ; $7931: $22
     dec  c                                        ; $7932: $0D
     jr   nz, jr_019_792F                          ; $7933: $20 $FA
+
+    ld c, $09
+    ld a, $08
+    ld [$dc90], a
+    ld hl, $dc91
+    ld de, $7927
+
+jr_019_7951:
+    ld a, [de]
+    inc de
+    ld [hl+], a
+    dec c
+    jr nz, jr_019_7951
 
     pop  bc                                       ; $7935: $C1
     ld   a, $89                                   ; $7936: $3E $89

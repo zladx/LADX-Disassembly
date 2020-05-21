@@ -5,7 +5,6 @@
 ; All textboxes with a prompt - e.g. 'yes/no', or a red 'press a button to continue' arrow - have '| $80'.
 
 DialogBankTable::
-; dialog_1.asm starts here
     db BANK(Dialog000)
     db BANK(Dialog001) | $80
     db BANK(Dialog002)
@@ -170,8 +169,6 @@ DialogBankTable::
     db BANK(Dialog0A1) | $80
     db BANK(Dialog0A2) | $80
     db BANK(Dialog0A3) | $80
-
-; dialog_2.asm starts here
     db BANK(Dialog0A4) | $80
     db BANK(Dialog0A5) | $80
     db BANK(Dialog0A6) | $80
@@ -272,8 +269,6 @@ DialogBankTable::
     db BANK(Dialog105)
     db BANK(Dialog106)
     db BANK(Dialog107)
-
-; dialog_3.asm starts here
     db BANK(Dialog108) | $80
     db BANK(Dialog109) | $80
     db BANK(Dialog10A) | $80
@@ -288,8 +283,8 @@ DialogBankTable::
     db BANK(Dialog113)
     db BANK(Dialog114)
     db BANK(Dialog115)
-    db BANK(Dialog116)
-    db BANK(Dialog117)
+    db BANK(Dialog116) | $80
+    db BANK(Dialog117) | $80
     db BANK(Dialog118)
     db BANK(Dialog119)
     db BANK(Dialog11A)
@@ -302,25 +297,25 @@ DialogBankTable::
     db BANK(Dialog121)
     db BANK(Dialog122)
     db BANK(Dialog123)
-    db BANK(Dialog124)
-    db BANK(Dialog125)
+    db BANK(Dialog124) | $80
+    db BANK(Dialog125) | $80
     db BANK(Dialog126)
     db BANK(Dialog127)
-    db BANK(Dialog128)
-    db BANK(Dialog129)
+    db BANK(Dialog128) | $80
+    db BANK(Dialog129) | $80
     db BANK(Dialog12A)
-    db BANK(Dialog12B)
+    db BANK(Dialog12B) | $80
     db BANK(Dialog12C)
     db BANK(Dialog12D)
-    db BANK(Dialog12E)
+    db BANK(Dialog12E) | $80
     db BANK(Dialog12F)
     db BANK(Dialog130)
     db BANK(Dialog131)
     db BANK(Dialog132)
     db BANK(Dialog133)
-    db BANK(Dialog134)
-    db BANK(Dialog135)
-    db BANK(Dialog136)
+    db BANK(Dialog134) | $80
+    db BANK(Dialog135) | $80
+    db BANK(Dialog136) | $80
     db BANK(Dialog137)
     db BANK(Dialog138)
     db BANK(Dialog139)
@@ -358,31 +353,31 @@ DialogBankTable::
     db BANK(Dialog159)
     db BANK(Dialog15A)
     db BANK(Dialog15B)
-    db BANK(Dialog15C)
-    db BANK(Dialog15D)
-    db BANK(Dialog15E)
+    db BANK(Dialog15C) | $80
+    db BANK(Dialog15D) | $80
+    db BANK(Dialog15E) | $80
     db BANK(Dialog15F)
     db BANK(Dialog160)
     db BANK(Dialog161)
-    db BANK(Dialog162)
-    db BANK(Dialog163)
-    db BANK(Dialog164)
-    db BANK(Dialog165)
+    db BANK(Dialog162) | $80
+    db BANK(Dialog163) | $80
+    db BANK(Dialog164) | $80
+    db BANK(Dialog165) | $80
     db BANK(Dialog166)
     db BANK(Dialog167) | $80
-    db BANK(Dialog168)
+    db BANK(Dialog168) | $80
     db BANK(Dialog169)
-    db BANK(Dialog16A)
+    db BANK(Dialog16A) | $80
     db BANK(Dialog16B)
     db BANK(Dialog16C)
     db BANK(Dialog16D)
     db BANK(Dialog16E)
     db BANK(Dialog16F)
-    db BANK(Dialog170)
+    db BANK(Dialog170) | $80
     db BANK(Dialog171)
-    db BANK(Dialog172)
-    db BANK(Dialog173)
-    db BANK(Dialog174)
+    db BANK(Dialog172) | $80
+    db BANK(Dialog173) | $80
+    db BANK(Dialog174) | $80
     db BANK(Dialog175)
     db BANK(Dialog176)
     db BANK(Dialog177)
@@ -395,8 +390,8 @@ DialogBankTable::
     db BANK(Dialog17E)
     db BANK(Dialog17F)
     db BANK(Dialog180)
-    db BANK(Dialog181)
-    db BANK(Dialog182)
+    db BANK(Dialog181) | $80
+    db BANK(Dialog182) | $80
     db BANK(Dialog183)
     db BANK(Dialog184)
     db BANK(Dialog185)
@@ -410,8 +405,6 @@ DialogBankTable::
     db BANK(Dialog18D)
     db BANK(Dialog18E)
     db BANK(Dialog18F)
-
-; dialog_4.asm starts here
     db BANK(Dialog190)
     db BANK(Dialog191) | $80
     db BANK(Dialog192)
@@ -460,25 +453,25 @@ DialogBankTable::
     db BANK(Dialog1BD)
     db BANK(Dialog1BE)
     db BANK(Dialog1BF)
-    db BANK(Dialog1C0)
+    db BANK(Dialog1C0) | $80
     db BANK(Dialog1C1) | $80
     db BANK(Dialog1C2)
     db BANK(Dialog1C3)
     db BANK(Dialog1C4)
     db BANK(Dialog1C5)
     db BANK(Dialog1C6)
-    db BANK(Dialog1C7)
+    db BANK(Dialog1C7) | $80
     db BANK(Dialog1C8)
     db BANK(Dialog1C9)
-    db BANK(Dialog1CA)
-    db BANK(Dialog1CB)
+    db BANK(Dialog1CA) | $80
+    db BANK(Dialog1CB) | $80
     db BANK(Dialog1CC)
     db BANK(Dialog1CD)
     db BANK(Dialog1CE)
-    db BANK(Dialog1CF)
-    db BANK(Dialog1D0)
+    db BANK(Dialog1CF) | $80
+    db BANK(Dialog1D0) | $80
     db BANK(Dialog1D1)
-    db BANK(Dialog1D2)
+    db BANK(Dialog1D2) | $80
     db BANK(Dialog1D3)
     db BANK(Dialog1D4)
     db BANK(Dialog1D5) | $80
@@ -500,23 +493,23 @@ DialogBankTable::
     db BANK(Dialog1E5)
     db BANK(Dialog1E6)
     db BANK(Dialog1E7)
-    db BANK(Dialog1E8)
-    db BANK(Dialog1E9)
+    db BANK(Dialog1E8) | $80
+    db BANK(Dialog1E9) | $80
     db BANK(Dialog1EA)
     db BANK(Dialog1EB) | $80
-    db BANK(Dialog1EC)
+    db BANK(Dialog1EC) | $80
     db BANK(Dialog1ED)
     db BANK(Dialog1EE)
-    db BANK(Dialog1EF)
+    db BANK(Dialog1EF) | $80
     db BANK(Dialog1F0)
     db BANK(Dialog1F1)
-    db BANK(Dialog1F2)
-    db BANK(Dialog1F3)
+    db BANK(Dialog1F2) | $80
+    db BANK(Dialog1F3) | $80
     db BANK(Dialog1F4)
     db BANK(Dialog1F5) | $80
-    db BANK(Dialog1F6)
+    db BANK(Dialog1F6) | $80
     db BANK(Dialog1F7)
-    db BANK(Dialog1F8)
+    db BANK(Dialog1F8) | $80
     db BANK(Dialog1F9)
     db BANK(Dialog1FA)
     db BANK(Dialog1FB)
@@ -565,12 +558,12 @@ DialogBankTable::
     db BANK(Dialog226)
     db BANK(Dialog227)
     db BANK(Dialog228)
-    db BANK(Dialog229)
+    db BANK(Dialog229) | $80
     db BANK(Dialog22A)
     db BANK(Dialog22B)
-    db BANK(Dialog22C)
+    db BANK(Dialog22C) | $80
     db BANK(Dialog22D)
-    db BANK(Dialog22E)
+    db BANK(Dialog22E) | $80
     db BANK(Dialog22F)
     db BANK(Dialog230)
     db BANK(Dialog231)
@@ -584,10 +577,10 @@ DialogBankTable::
     db BANK(Dialog239) | $80
     db BANK(Dialog23A) | $80
     db BANK(Dialog23B) | $80
-    db BANK(Dialog23C)
-    db BANK(Dialog23D)
-    db BANK(Dialog23E)
-    db BANK(Dialog23F)
+    db BANK(Dialog23C) | $80
+    db BANK(Dialog23D) | $80
+    db BANK(Dialog23E) | $80
+    db BANK(Dialog23F) | $80
     db BANK(Dialog240)
     db BANK(Dialog241)
     db BANK(Dialog242)
@@ -602,48 +595,46 @@ DialogBankTable::
     db BANK(Dialog24B)
     db BANK(Dialog24C)
     db BANK(Dialog24D)
-
-; dialog_dx.asm starts here
     db BANK(Dialog24E)
     db BANK(Dialog24F)
     db BANK(Dialog250)
     db BANK(Dialog251)
     db BANK(Dialog252)
-    db BANK(Dialog253)
-    db BANK(Dialog254)
-    db BANK(Dialog255)
-    db BANK(Dialog256)
-    db BANK(Dialog257)
-    db BANK(Dialog258)
-    db BANK(Dialog259)
+    db BANK(Dialog253) | $80
+    db BANK(Dialog254) | $80
+    db BANK(Dialog255) | $80
+    db BANK(Dialog256) | $80
+    db BANK(Dialog257) | $80
+    db BANK(Dialog258) | $80
+    db BANK(Dialog259) | $80
     db BANK(Dialog25A) | $80
     db BANK(Dialog25B) | $80
     db BANK(Dialog25C) | $80
     db BANK(Dialog25D) | $80
-    db BANK(Dialog25E)
-    db BANK(Dialog25F)
-    db BANK(Dialog260)
-    db BANK(Dialog261)
-    db BANK(Dialog262)
-    db BANK(Dialog263)
-    db BANK(Dialog264)
-    db BANK(Dialog265)
-    db BANK(Dialog266)
+    db BANK(Dialog25E) | $80
+    db BANK(Dialog25F) | $80
+    db BANK(Dialog260) | $80
+    db BANK(Dialog261) | $80
+    db BANK(Dialog262) | $80
+    db BANK(Dialog263) | $80
+    db BANK(Dialog264) | $80
+    db BANK(Dialog265) | $80
+    db BANK(Dialog266) | $80
     db BANK(Dialog267)
     db BANK(Dialog268) | $80
-    db BANK(Dialog269)
-    db BANK(Dialog26A)
+    db BANK(Dialog269) | $80
+    db BANK(Dialog26A) | $80
     db BANK(Dialog26B) | $80
     db BANK(Dialog26C) | $80
-    db BANK(Dialog26D)
-    db BANK(Dialog26E)
-    db BANK(Dialog26F)
-    db BANK(Dialog270)
-    db BANK(Dialog271)
-    db BANK(Dialog272)
-    db BANK(Dialog273)
-    db BANK(Dialog274)
-    db BANK(Dialog275)
+    db BANK(Dialog26D) | $80
+    db BANK(Dialog26E) | $80
+    db BANK(Dialog26F) | $80
+    db BANK(Dialog270) | $80
+    db BANK(Dialog271) | $80
+    db BANK(Dialog272) | $80
+    db BANK(Dialog273) | $80
+    db BANK(Dialog274) | $80
+    db BANK(Dialog275) | $80
     db BANK(Dialog276)
     db BANK(Dialog277)
     db BANK(Dialog278)
@@ -676,8 +667,8 @@ DialogBankTable::
     db BANK(Dialog293) | $80
     db BANK(Dialog294) | $80
     db BANK(Dialog295) | $80
-    db BANK(Dialog296)
-    db BANK(Dialog297)
+    db BANK(Dialog296) | $80
+    db BANK(Dialog297) | $80
     db BANK(Dialog298) | $80
     db BANK(Dialog299) | $80
     db BANK(Dialog29A) | $80
@@ -700,5 +691,5 @@ DialogBankTable::
     db BANK(Dialog2AB)
     db BANK(Dialog2AC)
     db BANK(Dialog2AD)
-    db BANK(Dialog2AE)
+    db BANK(Dialog2AE) | $80
     db BANK(Dialog2AF) | $80

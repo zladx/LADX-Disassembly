@@ -1425,8 +1425,6 @@ Data_020_4FE4::
     db   $F0, $F1, $F2, $F2, $F3, $F4, $F4, $F5   ; $502C
     db   $F6, $F6, $F7, $F8, $F8, $F9, $FA, $FA   ; $5034
     db   $FB, $FC, $FC, $FD                       ; $503C
-
-Data_020_5040::
     db   $FE, $FE, $FF, $00, $00, $01, $02, $02, $03, $04, $04, $05, $06, $06, $07, $08
     db   $08, $09, $0A, $0A, $0B, $0C, $0C, $0D, $0E, $0E, $0F, $10, $10, $11, $12, $12
     db   $13, $14, $14, $15
@@ -1435,8 +1433,6 @@ Data_020_5064::
     db   $ED, $EE, $EE, $EF, $F0, $F0, $F1, $F1, $F2, $F2, $F3, $F3
     db   $F3, $F4, $F5, $F5, $F6, $F6, $F7, $F8, $F8, $F9, $F9, $FA, $FB, $FB, $FC, $FC
     db   $FE, $FF, $FF, $00, $00, $01, $01, $02, $03, $03, $04, $04, $05, $06, $06, $07
-
-Data_020_5090::
     db   $07, $08, $09, $09, $0A, $0A, $0B, $0C, $0C, $0D, $0D, $0E, $0F, $0F, $10, $10
     db   $11, $12, $12, $13
 
@@ -1445,8 +1441,6 @@ Data_020_50A4::
     db   $F6, $F7, $F7, $F8, $F8, $F9, $F9, $FA, $FA, $FB, $FB, $FC, $FC, $FD, $FD, $FE
     db   $FE, $FF, $FF, $00, $00, $01, $01, $02, $02, $03, $03, $04, $04, $05, $05, $06
     db   $06, $07, $07, $08, $08, $09, $09, $0A, $0A, $0B, $0B, $0C, $0C, $0D, $0D, $0E
-
-Data_020_50E0::
     db   $0E, $0F, $0F, $10
 
 Data_020_50E4::
@@ -1458,8 +1452,6 @@ Data_020_50E4::
 
 Data_020_5124::
     db   $F5, $F6, $F6, $F6, $F7, $F7, $F7, $F8, $F8, $F8, $F9, $F9
-
-Data_020_5130::
     db   $F9, $FA, $FA, $FA, $FB, $FB, $FB, $FC, $FC, $FC, $FD, $FD, $FD, $FE, $FE, $FE
     db   $FF, $FF, $FF, $00, $00, $01, $01, $01, $02, $02, $02, $03, $03, $03, $04, $04
     db   $04, $05, $05, $05, $06, $06, $06, $07, $07, $07, $08, $08, $08, $09, $09, $09
@@ -1468,8 +1460,6 @@ Data_020_5130::
 Data_020_5164::
     db   $FC, $FC, $FB, $FB, $FB, $FB, $FA, $FA, $FA, $FA, $FB, $FB
     db   $FB, $FB, $FC, $FC, $FC, $FC, $FD, $FD, $FD, $FD, $FE, $FE, $FE, $FE, $FF, $FF
-
-Data_020_5180::
     db   $FF, $FF, $00, $00, $00, $00, $01, $01, $01, $01, $02, $02, $02, $02, $03, $03
     db   $03, $03, $04, $04, $04, $04, $05, $05, $05, $05, $06, $06, $06, $06, $07, $07
     db   $07, $07, $08, $08
@@ -1478,8 +1468,6 @@ Data_020_51A4::
     db   $FB, $FB, $FB, $FB, $FB, $FC, $FC, $FC, $FC, $FC, $FC, $FD
     db   $FD, $FD, $FD, $FD, $FE, $FE, $FE, $FE, $FE, $FE, $FF, $FF, $FF, $FF, $FF, $FF
     db   $00, $00, $00, $00, $00, $00, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02
-
-Data_020_51D0::
     db   $02, $02, $03, $03, $03, $03, $03, $03, $04, $04, $04, $04, $04, $04, $05, $05
     db   $05, $05, $05, $05
 
@@ -5180,7 +5168,7 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DBD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DBF: $28 $59
 
-    ld   hl, Data_020_5090                        ; $6DC1: $21 $90 $50
+    ld   hl, RoomGBCOverlay0EAlt                  ; $6DC1: $21 $90 $50
     jr   .jr_020_6E14                             ; $6DC4: $18 $4E
 
 .jr_020_6DC6
@@ -5191,7 +5179,7 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DCD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DCF: $28 $49
 
-    ld   hl, Data_020_51D0                        ; $6DD1: $21 $D0 $51
+    ld   hl, RoomGBCOverlay8CAlt                  ; $6DD1: $21 $D0 $51
     jr   .jr_020_6E14                             ; $6DD4: $18 $3E
 
 .jr_020_6DD6
@@ -5202,7 +5190,7 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DDD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DDF: $28 $39
 
-    ld   hl, Data_020_5180                        ; $6DE1: $21 $80 $51
+    ld   hl, RoomGBCOverlay79Alt                  ; $6DE1: $21 $80 $51
     jr   .jr_020_6E14                             ; $6DE4: $18 $2E
 
 .jr_020_6DE6
@@ -5213,7 +5201,7 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DED: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DEF: $28 $29
 
-    ld   hl, Data_020_5040                        ; $6DF1: $21 $40 $50
+    ld   hl, RoomGBCOverlay06Alt                  ; $6DF1: $21 $40 $50
     jr   .jr_020_6E14                             ; $6DF4: $18 $1E
 
 .jr_020_6DF6
@@ -5224,7 +5212,7 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6DFD: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6DFF: $28 $19
 
-    ld   hl, Data_020_50E0                        ; $6E01: $21 $E0 $50
+    ld   hl, RoomGBCOverlay1BAlt                  ; $6E01: $21 $E0 $50
     jr   .jr_020_6E14                             ; $6E04: $18 $0E
 
 .jr_020_6E06
@@ -5235,10 +5223,10 @@ LoadRoomObjectsAttributes::
     and  $10                                      ; $6E0D: $E6 $10
     jr   z, .jr_020_6E1A                          ; $6E0F: $28 $09
 
-    ld   hl, Data_020_5130                        ; $6E11: $21 $30 $51
+    ld   hl, RoomGBCOverlay2BAlt                 ; $6E11: $21 $30 $51
 
 .jr_020_6E14
-    ld   a, $27                                   ; $6E14: $3E $27
+    ld   a, BANK(RoomGBCOverlay2BAlt)             ; $6E14: $3E $27
     ldh  [hScratch0], a                           ; $6E16: $E0 $D7
     jr   .copyAttributes                          ; $6E18: $18 $22
 
@@ -6134,4 +6122,3 @@ LoadTileset23::
     ld   h, BANK(@)                               ; $7E02: $26 $20
     call Copy100BytesFromBankAtA                  ; $7E04: $CD $13 $0A
     ret                                           ; $7E07: $C9
-

@@ -3141,7 +3141,7 @@ WalrusDisappearHandler::
     jr   nz, jr_018_5778                          ; $5755: $20 $21
 
     call IncrementEntityState                     ; $5757: $CD $12 $3B
-	; Resumes the normal music after the walrus has disappeared
+    ; Resumes the normal music after the walrus has disappeared
     ldh  a, [hDefaultMusicTrack]                  ; $575A: $F0 $B0
     ld   [wMusicTrackToPlay], a                   ; $575C: $EA $68 $D3
     ld   a, $FF                                   ; $575F: $3E $FF
@@ -3423,7 +3423,7 @@ label_018_59E8:
     ld   a, c                                     ; $59E8: $79
     ld   [$C50F], a                               ; $59E9: $EA $0F $C5
     call GetEntityTransitionCountdown             ; $59EC: $CD $05 $0C
-	
+
     jr   z, jr_018_5A3F                           ; $59EF: $28 $4E
 
     cp   $10                                      ; $59F1: $FE $10
@@ -3448,7 +3448,7 @@ jr_018_5A07:
     ld   [wC167], a                               ; $5A0C: $EA $67 $C1
     ld   a, MUSIC_OVERWORLD_INTRO                 ; $5A0F: $3E $31
     ld   [wMusicTrackToPlay], a                   ; $5A11: $EA $68 $D3
-	; Sets the area track to overworld, so that after the introduction section fanfare, the overworld music will play rather than the Koholint Island theme
+    ; Sets the area track to overworld, so that after the introduction section fanfare, the overworld music will play rather than the Koholint Island theme
     ld   a, MUSIC_OVERWORLD                       ; $5A14: $3E $05
     ldh  [hDefaultMusicTrack], a                  ; $5A16: $E0 $B0
 
@@ -3491,11 +3491,11 @@ jr_018_5A3F:
     ld   [hl], $70                                ; $5A52: $36 $70
     ld   a, MUSIC_TOOL_ACQUIRED                   ; $5A54: $3E $10
     ld   [wMusicTrackToPlay], a                   ; $5A56: $EA $68 $D3
-	; Makes it so that no music plays after the 'item found' fanfare
+    ; Makes it so that no music plays after the 'item found' fanfare
     ld   a, MUSIC_SILENCE                         ; $5A59: $3E $FF
     ldh  [hNextDefaultMusicTrack], a              ; $5A5B: $E0 $BF
-	
-	; Link lifting Marin animation
+
+    ; Link lifting Marin animation
     ldh  a, [hLinkPositionX]                      ; $5A5D: $F0 $98
     ld   hl, $D155                                ; $5A5F: $21 $55 $D1
     call func_018_5A79                            ; $5A62: $CD $79 $5A

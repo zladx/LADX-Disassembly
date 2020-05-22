@@ -1,6 +1,7 @@
-; Chest OAM data? (7B97 contains seashell tile info)
-Data_007_7B53::
-    db $82, $17, $86, $14
+
+ChestItemSpriteTableAlt::
+    db $82, $17        ; CHEST_POWER_BRACELET (in face shrine)
+    db $86, $14        ; CHEST_SHIELD (in eagles tower)
 
 ChestItemSpriteTable::
     db $82, $15        ; CHEST_POWER_BRACELET
@@ -61,9 +62,9 @@ ChestWithItemEntityHandler::
     xor  a                                        ; $7BE1: $AF
     ld   [wSwordAnimationState], a                ; $7BE2: $EA $37 $C1
     ld   [wC16A], a                               ; $7BE5: $EA $6A $C1
-    ldh  a, [hActiveEntitySpriteVariant]               ; $7BE8: $F0 $F1
-    cp   $22                                      ; $7BEA: $FE $22
-    jr   nz, jr_007_7C29                          ; $7BEC: $20 $3B
+    ldh  a, [hActiveEntitySpriteVariant]          ; $7BE8: $F0 $F1
+    cp   CHEST_GEL                                ; $7BEA: $FE $22
+    jr   nz, notGelChest                          ; $7BEC: $20 $3B
 
     ld   a, ENTITY_GEL                            ; $7BEE: $3E $1B
     call SpawnNewEntity_trampoline                ; $7BF0: $CD $86 $3B
@@ -80,27 +81,27 @@ ChestWithItemEntityHandler::
     ld   hl, wEntitiesSpeedZTable                                ; $7C04: $21 $20 $C3
     add  hl, de                                   ; $7C07: $19
     ld   [hl], $18                                ; $7C08: $36 $18
-    ld   hl, wEntitiesPosZTable                                ; $7C0A: $21 $10 $C3
+    ld   hl, wEntitiesPosZTable                   ; $7C0A: $21 $10 $C3
     add  hl, de                                   ; $7C0D: $19
     ld   [hl], $06                                ; $7C0E: $36 $06
     ld   hl, wEntitiesPrivateCountdown1Table      ; $7C10: $21 $F0 $C2
     add  hl, de                                   ; $7C13: $19
     ld   [hl], $50                                ; $7C14: $36 $50
-    ld   hl, wEntitiesSpeedXTable                       ; $7C16: $21 $40 $C2
+    ld   hl, wEntitiesSpeedXTable                 ; $7C16: $21 $40 $C2
     add  hl, de                                   ; $7C19: $19
     ld   [hl], $08                                ; $7C1A: $36 $08
     ld   hl, wEntitiesStateTable                  ; $7C1C: $21 $90 $C2
     add  hl, de                                   ; $7C1F: $19
     ld   [hl], $03                                ; $7C20: $36 $03
-    ld   a, $1D                                   ; $7C22: $3E $1D
+    ld   a, JINGLE_WRONG_ANSWER                   ; $7C22: $3E $1D
     ldh  [hJingle], a                             ; $7C24: $E0 $F2
     jp   func_007_7EA4                            ; $7C26: $C3 $A4 $7E
 
-jr_007_7C29:
-    cp   $21                                      ; $7C29: $FE $21
+notGelChest:
+    cp   CHEST_MESSAGE                            ; $7C29: $FE $21
     jr   z, jr_007_7C5E                           ; $7C2B: $28 $31
 
-    cp   $10                                      ; $7C2D: $FE $10
+    cp   CHEST_MEDICINE                           ; $7C2D: $FE $10
     jr   nz, jr_007_7C36                          ; $7C2F: $20 $05
 
     ld   a, $01                                   ; $7C31: $3E $01
@@ -130,7 +131,7 @@ jr_007_7C49:
     jr   nz, jr_007_7C58                          ; $7C51: $20 $05
 
 jr_007_7C53:
-    ld   de, Data_007_7B53                        ; $7C53: $11 $53 $7B
+    ld   de, ChestItemSpriteTableAlt                        ; $7C53: $11 $53 $7B
     jr   jr_007_7C5B                              ; $7C56: $18 $03
 
 jr_007_7C58:
@@ -172,7 +173,7 @@ jr_007_7C76:
     cp   $01                                      ; $7C86: $FE $01
     jr   nz, jr_007_7C90                          ; $7C88: $20 $06
 
-    ld   a, $01                                   ; $7C8A: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $7C8A: $3E $01
     ldh  [hJingle], a                             ; $7C8C: $E0 $F2
     jr   jr_007_7C93                              ; $7C8E: $18 $03
 
@@ -189,7 +190,7 @@ jr_007_7C93:
     ldh  a, [hActiveEntitySpriteVariant]               ; $7C9C: $F0 $F1
     ld   e, a                                     ; $7C9E: $5F
     ld   d, b                                     ; $7C9F: $50
-    cp   $21                                      ; $7CA0: $FE $21
+    cp   CHEST_MESSAGE                            ; $7CA0: $FE $21
     jr   nz, jr_007_7CB1                          ; $7CA2: $20 $0D
 
     ldh  a, [hMapRoom]                            ; $7CA4: $F0 $F6
@@ -201,7 +202,7 @@ jr_007_7C93:
 
 jr_007_7CB1:
     ld   a, e                                     ; $7CB1: $7B
-    cp   $01                                      ; $7CB2: $FE $01
+    cp   CHEST_SHIELD                             ; $7CB2: $FE $01
     jr   nz, jr_007_7CC1                          ; $7CB4: $20 $0B
 
     ld   a, [wShieldLevel]                        ; $7CB6: $FA $44 $DB
@@ -213,7 +214,7 @@ jr_007_7CB1:
 
 jr_007_7CC1:
     ld   a, e                                     ; $7CC1: $7B
-    cp   $0B                                      ; $7CC2: $FE $0B
+    cp   CHEST_SWORD                              ; $7CC2: $FE $0B
     jr   nz, jr_007_7CD1                          ; $7CC4: $20 $0B
 
     ld   a, [wSwordLevel]                ; @TODO ??? Is this used by the Seashell Mansion??
@@ -225,7 +226,7 @@ jr_007_7CC1:
 
 jr_007_7CD1:
     ld   a, e                                     ; $7CD1: $7B
-    cp   $00                                      ; $7CD2: $FE $00
+    cp   CHEST_POWER_BRACELET                     ; $7CD2: $FE $00
     jr   nz, jr_007_7CE1                          ; $7CD4: $20 $0B
 
     ld   a, [wPowerBraceletLevel]                 ; $7CD6: $FA $43 $DB

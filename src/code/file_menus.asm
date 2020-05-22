@@ -564,7 +564,7 @@ FileCreationInteractiveHandler::
     ld   d, $00
     ld   hl, $DB80
     add  hl, de
-	; Checks if the chosen name is 'ZELDA' and plays the easter egg music if this is the case.
+    ; Checks if the chosen name is 'ZELDA' and plays the easter egg music if this is the case.
     ld   a, [hli]
     cp   "Z" + $01
     jr   nz, jr_001_4AFE

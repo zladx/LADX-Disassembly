@@ -1728,7 +1728,7 @@ jr_003_50D8:
     cp   CHEST_RUPEES_50                          ; $50DC: $FE $1B
     jr   nc, jr_003_50EF                          ; $50DE: $30 $0F
 
-    sub  $16                                      ; $50E0: $D6 $16
+    sub  CHEST_MAP                                ; $50E0: $D6 $16
     ld   e, a                                     ; $50E2: $5F
     ld   d, $00                                   ; $50E3: $16 $00
     ld   hl, wHasDungeonMap                       ; $50E5: $21 $CC $DB

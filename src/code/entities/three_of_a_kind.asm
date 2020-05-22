@@ -206,7 +206,7 @@ jr_006_4A37:
     jr   nc, jr_006_4A62                          ; $4A53: $30 $0D
 
     ld   hl, hJingle                              ; $4A55: $21 $F2 $FF
-    ld   [hl], $02                                ; $4A58: $36 $02
+    ld   [hl], JINGLE_PUZZLE_SOLVED               ; $4A58: $36 $02
     ld   e, $2D                                   ; $4A5A: $1E $2D
     cp   $01                                      ; $4A5C: $FE $01
     jr   nz, jr_006_4A62                          ; $4A5E: $20 $02

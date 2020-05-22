@@ -5620,9 +5620,11 @@ data_020_763B::
     db   $A4, $4D, $FF, $FF                       ; $783B
 
 EndingWaterGeyserPalettes::
-    db   $45, $78
-    db   $7D, $78
-    db   $B5, $78
+    dw   Data_020_7845
+    dw   Data_020_787D
+    dw   Data_020_78B5
+
+Data_020_7845:
     db   $00, $00
     db   $C5, $4C
     db   $68, $7D
@@ -5651,6 +5653,8 @@ EndingWaterGeyserPalettes::
     db   $0F, $66
     db   $D6, $6E
     db   $FF, $7F
+
+Data_020_787D:
     db   $00, $00
     db   $68, $7D
     db   $FF, $7F
@@ -5679,6 +5683,8 @@ EndingWaterGeyserPalettes::
     db   $D6, $6E
     db   $FF, $7F
     db   $0F, $66
+
+Data_020_78B5:
     db   $00, $00
     db   $FF, $7F
     db   $C5, $4C

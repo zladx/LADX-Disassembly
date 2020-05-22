@@ -2012,6 +2012,7 @@ JumpTable_028_4CCE:
     ret                                         ; $4CDF: JumpTable_028_4CCE $C9
 
 ; There's a pattern to this one... it repeats every five lines, but shifted to the right by one entry in the list. That's why there are four values missing at the end. The only thing that changes each time is the Px0 part, increasing by 2 each time. I have formatted the list accordingly.
+Data_028_4CE0:
     db   $50, $30, $14, $00, $50, $38, $16, $00 ; $4CE0 |P0..P8..|
     db   $50, $40, $18, $00, $50, $48, $1A, $00 ; $4CE8 |P@..PH..|
     db   $50, $50, $24, $00, $50, $58, $26, $00 ; $4CF0 |PP$.PX&.|
@@ -2019,6 +2020,7 @@ JumpTable_028_4CCE:
     db   $50, $70, $2C, $00, $50, $78, $30, $00 ; $4D00 |Pp,.Px0.|
     db   $FF                                    ; $4D08 |.|
 
+Data_028_4D09:
     db   $50, $30, $14, $00, $50, $38, $16, $00 ; $4D08 |P0..P8..|
     db   $50, $40, $18, $00, $50, $48, $1A, $00 ; $4D10 |P@..PH..|
     db   $50, $50, $24, $00, $50, $58, $26, $00 ; $4D18 |PP$.PX&.|
@@ -2026,13 +2028,15 @@ JumpTable_028_4CCE:
     db   $50, $70, $2C, $00, $50, $78, $32, $00 ; $4D28 |Pp,.Px2.|
     db   $FF                                    ; $4D30 |.|
 
+Data_028_4D32:
     db   $50, $30, $14, $00, $50, $38, $16, $00 ; $4D30 |P0..P8..|
     db   $50, $40, $18, $00, $50, $48, $1A, $00 ; $4D38 |P@..PH..|
     db   $50, $50, $24, $00, $50, $58, $26, $00 ; $4D40 |PP$.PX&.|
     db   $50, $60, $28, $00, $50, $68, $2A, $00 ; $4D48 |P`(.Ph*.|
     db   $50, $70, $2C, $00, $50, $78, $34, $00 ; $4D50 |Pp,.Px4.|
-    db   $FF                                   ; $4D58 |.|
+    db   $FF                                    ; $4D58 |.|
 
+Data_028_4D5B:
     db   $50, $30, $14, $00, $50, $38, $16, $00 ; $4D58 |P0..P8..|
     db   $50, $40, $18, $00, $50, $48, $1A, $00 ; $4D60 |P@..PH..|
     db   $50, $50, $24, $00, $50, $58, $26, $00 ; $4D68 |PP$.PX&.|
@@ -2040,7 +2044,11 @@ JumpTable_028_4CCE:
     db   $50, $70, $2C, $00, $50, $78, $36, $00 ; $4D78 |Pp,.Px6.|
     db   $FF                                    ; $4D80 |.|
 
-    db   $E0, $4C, $09, $4D, $32, $4D, $5B, $4D ; $4D88 |L.M2M[M|
+Data_028_4D84:
+    dw Data_028_4CE0
+    dw Data_028_4D09
+    dw Data_028_4D32
+    dw Data_028_4D5B
 
 JumpTable_028_4D8C:
     ldh  a, [hJoypadState]                      ; $4D8C: JumpTable_028_4D8C $F0 $CC

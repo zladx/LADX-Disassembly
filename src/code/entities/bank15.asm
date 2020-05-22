@@ -8104,10 +8104,16 @@ Data_015_7E5D:
     db   $58, $01
 
 Data_015_7E5F::
-    db   $55, $7E, $57, $7E, $59, $7E, $5B, $7E, $59, $7E, $5B, $7E, $55, $7E
+    dw   Data_015_7E55
+    dw   Data_015_7E57
+    dw   Data_015_7E59
+    dw   Data_015_7E5B
+    dw   Data_015_7E59
+    dw   Data_015_7E5B
+    dw   Data_015_7E55
 
 Data_015_7E6D::
-    db   $5D, $7E
+    dw   Data_015_7E5D
 
 Data_015_7E6F::
     db   $58, $00, $5A, $00, $5A, $20

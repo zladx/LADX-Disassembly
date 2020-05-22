@@ -3209,11 +3209,10 @@ jr_002_55EF:
     ld   hl, Data_002_55BC                        ; $55FA: $21 $BC $55
 
 jr_002_55FD:
-    db   $C3                                      ; $55FD: $C3
-    ld   a, [hl-]                                 ; $55FE: $3A
+    jp   label_002_583A                           ; $55FD: $C3 $3A $58
 
-Data_002_55FF::
-    db   $58, $F8, $00, $08
+Data_002_5600::
+    db   $F8, $00, $08
 
 Data_002_5603::
     db   $10, $6C, $6E, $6E
@@ -3238,7 +3237,7 @@ jr_002_561E:
     ld   [de], a                                  ; $5620: $12
     inc  de                                       ; $5621: $13
     ldh  a, [hScratch2]                           ; $5622: $F0 $D9
-    ld   hl, Data_002_55FF                        ; $5624: $21 $FF $55
+    ld   hl, Data_002_5600 - 1                    ; $5624: $21 $FF $55
     add  hl, bc                                   ; $5627: $09
     add  [hl]                                     ; $5628: $86
     ld   [de], a                                  ; $5629: $12

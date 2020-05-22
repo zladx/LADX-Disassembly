@@ -3128,11 +3128,10 @@ jr_007_549C:
     jr   nz, jr_007_548A                          ; $54BB: $20 $CD
 
     ld   a, $03                                   ; $54BD: $3E $03
-    db   $C3                                      ; $54BF: $C3
-    and  b                                        ; $54C0: $A0
+    jp   label_3DA0
 
-Data_007_54C1::
-    db   $3D, $44, $29, $82, $CB, $64, $C1, $D0, $74, $6A, $36, $5E, $EC, $F5, $9D
+Data_007_54C2::
+    db   $44, $29, $82, $CB, $64, $C1, $D0, $74, $6A, $36, $5E, $EC, $F5, $9D
 
 Data_007_54D0::
     db   $9A, $16, $9C, $16
@@ -3249,7 +3248,7 @@ jr_007_559A:
     ld   a, [wTradeSequenceItem]                  ; $559F: $FA $0E $DB
     ld   e, a                                     ; $55A2: $5F
     ld   d, b                                     ; $55A3: $50
-    ld   hl, Data_007_54C1                        ; $55A4: $21 $C1 $54
+    ld   hl, Data_007_54C2 - 1                    ; $55A4: $21 $C1 $54
     add  hl, de                                   ; $55A7: $19
     ld   a, [hl]                                  ; $55A8: $7E
     cp   $9D                                      ; $55A9: $FE $9D

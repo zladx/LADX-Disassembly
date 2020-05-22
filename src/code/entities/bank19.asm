@@ -1648,10 +1648,9 @@ Data_019_4BAC::
     db   $68, $06, $6A, $06, $6C, $06, $6E, $06   ; $4BC4
 
 label_019_4BCC::
-    db   $21
-    or   b                                        ; $4BCD: $B0
-    jp   nz, label_019_7E09                       ; $4BCE: $C2 $09 $7E
-
+    ld   hl, wEntitiesPrivateState1Table          ; $4bcc: $21 $b0 $c2
+    add  hl, bc
+    ld   a, [hl]                                  ; $4bd0: $7e
     cp   $02                                      ; $4BD1: $FE $02
     jp   z, label_019_4CFF                        ; $4BD3: $CA $FF $4C
 
@@ -8193,8 +8192,6 @@ func_019_7DF1::
     ld   [hl], a                                  ; $7E03: $77
     rl   d                                        ; $7E04: $CB $12
     ld   hl, wEntitiesPosZTable                   ; $7E06: $21 $10 $C3
-
-label_019_7E09:
     jr   jr_019_7DDD                              ; $7E09: $18 $D2
 
 func_019_7E0B::

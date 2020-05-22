@@ -8088,14 +8088,20 @@ func_015_7E31::
     call ClearEntityStatus_15                        ; $7E4F: $CD $31 $7C
     jp   label_C9E                                ; $7E52: $C3 $9E $0C
 
-    ld   e, b                                     ; $7E55: $58
-    nop                                           ; $7E56: $00
-    ld   e, b                                     ; $7E57: $58
-    ld   bc, $258                                 ; $7E58: $01 $58 $02
-    ld   e, b                                     ; $7E5B: $58
-    inc  bc                                       ; $7E5C: $03
-    ld   e, b                                     ; $7E5D: $58
-    db   $01                                      ; $7E5E: $01
+Data_015_7E55:
+    db   $58, $00
+
+Data_015_7E57:
+    db   $58, $01
+
+Data_015_7E59:
+    db   $58, $02
+
+Data_015_7E5B:
+    db   $58, $03
+
+Data_015_7E5D:
+    db   $58, $01
 
 Data_015_7E5F::
     db   $55, $7E, $57, $7E, $59, $7E, $5B, $7E, $59, $7E, $5B, $7E, $55, $7E

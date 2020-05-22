@@ -42,7 +42,7 @@ MarineCliffPictureHandler::
     dw JumpTable_037_4229
     dw LoadPhotoBgMap_trampoline
     dw JumpTable_037_42FE
-    
+
     ; Plays the seagull/shore SFXs.
     dw JumpTable_037_4659
     dw JumpTable_037_5393

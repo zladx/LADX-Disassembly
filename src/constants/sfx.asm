@@ -1,7 +1,7 @@
 ; Constants for music tracks and sound effects
 
 ; Values for wMusicTrackToPlay
- 
+
 MUSIC_NONE                                      equ $00 ; This value means: Don't play a different track.
 MUSIC_TITLE_SCREEN_INTRO                        equ $01 ; $0D's introduction section.
 MUSIC_MINIGAME                                  equ $02
@@ -33,7 +33,7 @@ MUSIC_INSTRUMENT_ACQUIRED                       equ $1B
 MUSIC_LINK_AWAKENS                              equ $1C ; Played in the house when you begin your game.
 MUSIC_SWORD_SEARCH                              equ $1D ; First time on Koholint Island.
 MUSIC_DREAMING                                  equ $1E ; Plays when you sleep in the bed in the upper Dream Shrine and the VFXplays.
-MUSIC_SOUTHERN_SHRINE                           equ $1F 
+MUSIC_SOUTHERN_SHRINE                           equ $1F
 MUSIC_INSTRUMENT_FULL_MOON_CELLO                equ $20 ; When you obtain the Full Moon Cello and it plays its tune.
 MUSIC_2D_UNDERGROUND                            equ $21
 MUSIC_OWL                                       equ $22
@@ -72,7 +72,7 @@ MUSIC_BALLAD_BELL                               equ $42 ; Played when breaking o
 MUSIC_BALLAD_HARP                               equ $43 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
 MUSIC_BALLAD_MARIMBA                            equ $44 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
 MUSIC_BALLAD_TRIANGLE                           equ $45 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
-MUSIC_BALLAD_ORGAN                              equ $46 ; When playing for the egg w 
+MUSIC_BALLAD_ORGAN                              equ $46 ; When playing for the egg w
 MUSIC_BALLAD_ALL                                equ $47 ; Played when breaking open the Wind Egg. The game cycles through these to showcase different instruments.
 MUSIC_GHOST_HOUSE                               equ $48
 MUSIC_ACTIVE_POWER_UP                           equ $49
@@ -81,7 +81,7 @@ MUSIC_CATFISH_MAW                               equ $4B
 MUSIC_WATERFALL_DRAIN                           equ $4C ; Plays when you open the lock for the Angler's Tunnel.
 MUSIC_MARIN_BEACH_TRANSITION                    equ $4D ; For the transition to the Link and Marin beach cutscene. The beginning and ending notes are skipped.
 MUSIC_MARIN_BEACH                               equ $4E
-;MUSIC_UNKNOWN                                  equ $4F ; Jingle, possible unused/possibly related to Marin 
+;MUSIC_UNKNOWN                                  equ $4F ; Jingle, possible unused/possibly related to Marin
 MUSIC_MINIBOSS                                  equ $50
 MUSIC_KANALET_CASTLE_COPY                       equ $51 ; Copy of $13.
 MUSIC_TAIL_CAVE_COPY                            equ $52 ; Copy of $14.
@@ -100,9 +100,9 @@ MUSIC_BOSS_WARNING                              equ $5E ; Plays during the dialo
 MUSIC_FINAL_BOSS_DEFEATED                       equ $5F
 MUSIC_ZELDA_NICKNAME_EASTER_EGG                 equ $60 ; ZELDA nickname easter egg.
 MUSIC_COLOR_DUNGEON                             equ $61
-;MUSIC_COLOR_DUNGEON_COPIES                     equ $62 to 6F   ; Same as $61   
+;MUSIC_COLOR_DUNGEON_COPIES                     equ $62 to 6F   ; Same as $61
 ;MUSIC_GLITCHED                                 equ $70 to $FE  ; Glitches the music that played before it.
-MUSIC_SILENCE                                   equ $FF ; Seems to try to silence the voice channels. Does not always correctly silence the music. 
+MUSIC_SILENCE                                   equ $FF ; Seems to try to silence the voice channels. Does not always correctly silence the music.
 
 ; Values for hJingle
 JINGLE_NONE             equ $00;
@@ -228,7 +228,7 @@ NOISE_SFX_TITLE_APPEARS           equ $19;probably correct
 ;NOISE_SFX_UNKNOWN                equ $1D
 ;NOISE_SFX_UNKNOWN                equ $1E
 ;NOISE_SFX_UNKNOWN                equ $1F
-;NOISE_SFX_ELECTRICITY            equ $20;Electricity/Shopkeeper's magic 
+;NOISE_SFX_ELECTRICITY            equ $20;Electricity/Shopkeeper's magic
 ;NOISE_SFX_UNKNOWN                equ $21;silent?
 ;NOISE_SFX_UNKNOWN                equ $22;beach/explosion with fade out
 ;NOISE_SFX_UNKNOWN                equ $23;burning/explosion/rumbling

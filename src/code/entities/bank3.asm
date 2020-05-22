@@ -4766,7 +4766,7 @@ GiveInventoryItem::     ; @TODO GivePlayerItem or w/e - inserts item in [d] into
 .inventorySlotFull:
     inc  hl                                       ; Do we have more inventory spaces to check?
     inc  e                                        ; (e was 0C - slots checked)
-    ld   a, e                                     ; 
+    ld   a, e                                     ;
     cp   $0C                                      ; If we've checked enough to get back to 0C, we're out
     jr   nz, .checkInventorySlotEmpty             ; Otherwise, go back to check next slot
 

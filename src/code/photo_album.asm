@@ -2076,9 +2076,9 @@ JumpTable_028_4D8C:
 .else_4DAD_28:
     ld   a, [$D1C5]                             ; $4DAD: JumpTable_028_4D8C $FA $C5 $D1
     sla  a                                      ; $4DB0: JumpTable_028_4D8C $CB $27
-    add  $84                                    ; $4DB2: JumpTable_028_4D8C $C6 $84
+    add  LOW(Data_028_4D84)                     ; $4DB2: JumpTable_028_4D8C $C6 $84
     ld   l, a                                   ; $4DB4: JumpTable_028_4D8C $6F
-    ld   a, $4D                                 ; $4DB5: JumpTable_028_4D8C $3E $4D
+    ld   a, HIGH(Data_028_4D84)                 ; $4DB5: JumpTable_028_4D8C $3E $4D
     adc  $00                                    ; $4DB7: JumpTable_028_4D8C $CE $00
     ld   h, a                                   ; $4DB9: JumpTable_028_4D8C $67
     ld   e, [hl]                                ; $4DBA: JumpTable_028_4D8C $5E

@@ -553,7 +553,10 @@ jr_001_65D6::
     ret
 
 func_001_65DD::
-    db $3D, $C7, $73, $66, $FD, $66
+    dec a
+    JP_TABLE
+._00 dw label_6673
+._01 dw label_66FD
 
 ; TODO: fix pointers table
 Data_001_65E3::

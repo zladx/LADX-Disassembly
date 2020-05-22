@@ -7239,7 +7239,7 @@ func_019_76CB::
 
     ld   e, $84                                   ; $76D4: $1E $84
 
-; Sea shell house LVL 2 sword awarding script? 
+; Sea shell house LVL 2 sword awarding script?
 jr_019_76D6:
     ld   a, e                                     ; $76D6: $7B
     ld   [wBGPalette], a                          ; $76D7: $EA $97 $DB

@@ -1108,7 +1108,7 @@ BossIntro::
 
     jr   z, .endIf
     ld   a, MUSIC_MINIBOSS
-    
+
 .endIf:
     ld   [wMusicTrackToPlay], a
 

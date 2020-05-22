@@ -3873,27 +3873,27 @@ Data_036_5810:
     dw   Data_020_6980
 
 Data_036_5816:
-    dw   Data_020_6980 
+    dw   Data_020_6980
     dw   Data_020_6950
     dw   Data_020_6938
     dw   Data_020_6950
     dw   Data_020_6968
     dw   Data_020_6950
     dw   Data_020_6938
-    
+
 Data_036_5824:
-    dw   Data_020_6938 
-    dw   Data_020_6950 
+    dw   Data_020_6938
+    dw   Data_020_6950
     dw   Data_020_6968
     dw   Data_020_6950
 
 Data_036_582C::
     dw   Data_036_57EA
     dw   Data_036_57EA
-    dw   Data_036_57EA 
-    dw   Data_036_57EA 
+    dw   Data_036_57EA
+    dw   Data_036_57EA
     dw   Data_036_57F2
-    dw   Data_036_5808 
+    dw   Data_036_5808
     dw   Data_036_5810
     dw   Data_036_5810
     dw   Data_036_5816

@@ -1663,7 +1663,7 @@ InitGotItemSequence::
 .linkMotionJumpTable
     JP_TABLE
 ._00 dw LinkMotionInteractiveHandler
-._01 dw LinkMotionFallingUpHandler
+._01 dw LinkMotionSwimmingHandler
 ._02 dw LinkMotionJumpingHandler
 ._03 dw LinkMotionMapFadeOutHandler
 ._04 dw LinkMotionMapFadeInHandler
@@ -3092,16 +3092,16 @@ UpdateLinkWalkingAnimation::
 
     ld   hl, Data_002_4948
     ld   a, [wLinkMotionState]
-    cp   LINK_MOTION_FALLING_UP
-    jr   nz, .notFallingUp
+    cp   LINK_MOTION_SWIMMING
+    jr   nz, .notSwimming
     ldh  a, [$FF9C]
     and  a
-    jr   z, .fallingUpEnd
+    jr   z, .swimmingEnd
     ld   hl, Data_002_4950
-.fallingUpEnd
+.swimmingEnd
     jr   .done
 
-.notFallingUp
+.notSwimming
     ldh  a, [hIsSideScrolling]
     and  a
     jr   z, .notSideScrolling

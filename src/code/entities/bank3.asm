@@ -5811,7 +5811,7 @@ Data_003_6BDA::
 ; Check the collision of the active entity (an enemy projectile) with Link.
 ; If the entity is collisioning, handle whether Link has its shield up or not.
 CheckLinkCollisionWithProjectile::
-    ; If Link is not interactive of falling up, return.
+    ; If Link is not interactive or swimming, return.
     ld   a, [wLinkMotionState]                    ; $6BDE: $FA $1C $C1
     cp   LINK_MOTION_JUMPING                      ; $6BE1: $FE $02
     jr   nc, .return                              ; $6BE3: $30 $75
@@ -5940,7 +5940,7 @@ CheckLinkCollisionWithEnemy::
     jr   nz, CheckLinkCollisionWithProjectile.return; $6C75: $20 $E3
 
 .collisionEvenInTheAir
-    ; If Link is not interactive of falling up…
+    ; If Link is not interactive or swimming…
     ld   a, [wLinkMotionState]                    ; $6C77: $FA $1C $C1
     cp   LINK_MOTION_JUMPING                      ; $6C7A: $FE $02
     ; … return.

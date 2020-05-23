@@ -1097,11 +1097,11 @@ LinkAnimationsList_PushingObject::
 LinkAnimationsList_LiftingObject::
     db   $3E, $3F, $40, $41, $42, $43, $44, $45
 
-; Falling up 1
+; Swimming 1
 Data_002_4948::
     db   $46, $47, $48, $49, $4A, $4B, $4C, $4D
 
-; Falling up 2
+; Swimming 2
 Data_002_4950::
     db   $4E, $4F, $4E, $4F, $4E, $4F, $4E, $4F
 
@@ -2031,7 +2031,7 @@ Data_002_4F10::
 Data_002_4F20::
     db   $00, $00, $00, $00, $F0, $F4, $F4, $00, $10, $0C, $0C, $00, $00, $00, $00, $00
 
-LinkMotionFallingUpHandler::
+LinkMotionSwimmingHandler::
     ld   a, [wFreeMovementMode]                   ; $4F30: $FA $7B $C1
     and  a                                        ; $4F33: $A7
     jr   z, jr_002_4F3C                           ; $4F34: $28 $06

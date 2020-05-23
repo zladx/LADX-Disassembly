@@ -760,40 +760,35 @@ func_028_44DB::
     inc  [hl]                                   ; $44DE: $34
     ret                                         ; $44DF: $C9
 
-offset: macro
-    dw \1
-    db BANK(\1)
-endm
-
 Data_028_44E0::
-    offset PhotoNiceLinkTiles
-    offset PhotoMarinCliffTiles
-    offset PhotoMarinWellTiles
-    offset PhotoMabeTiles
-    offset PhotoUlriraTiles
-    offset PhotoBowWowTiles
-    offset PhotoShopTiles
-    offset PhotoFishermanTiles
-    offset PhotoZoraTiles
-    offset PhotoKanaletTiles
-    offset PhotoGhostTiles
-    offset PhotoBridgeTiles
-    offset PhotoDizzyLinkTiles;
+    entity_pointer PhotoNiceLinkTiles
+    entity_pointer PhotoMarinCliffTiles
+    entity_pointer PhotoMarinWellTiles
+    entity_pointer PhotoMabeTiles
+    entity_pointer PhotoUlriraTiles
+    entity_pointer PhotoBowWowTiles
+    entity_pointer PhotoShopTiles
+    entity_pointer PhotoFishermanTiles
+    entity_pointer PhotoZoraTiles
+    entity_pointer PhotoKanaletTiles
+    entity_pointer PhotoGhostTiles
+    entity_pointer PhotoBridgeTiles
+    entity_pointer PhotoDizzyLinkTiles;
 
 Data_028_4507::
-    offset Data_028_5820
-    offset Data_028_5AF0
-    offset Data_028_5DC0
-    offset Data_028_6090
-    offset Data_028_6360
-    offset Data_028_6630
-    offset Data_028_6900
-    offset Data_028_6BD0
-    offset Data_028_6EA0
-    offset Data_028_7170
-    offset Data_028_7440
-    offset Data_028_7710
-    offset Data_028_5550
+    entity_pointer Data_028_5820
+    entity_pointer Data_028_5AF0
+    entity_pointer Data_028_5DC0
+    entity_pointer Data_028_6090
+    entity_pointer Data_028_6360
+    entity_pointer Data_028_6630
+    entity_pointer Data_028_6900
+    entity_pointer Data_028_6BD0
+    entity_pointer Data_028_6EA0
+    entity_pointer Data_028_7170
+    entity_pointer Data_028_7440
+    entity_pointer Data_028_7710
+    entity_pointer Data_028_5550
 
 Data_028_452E::
     db   $50, $38, $14, $00, $50, $40, $16, $00 ; $452E

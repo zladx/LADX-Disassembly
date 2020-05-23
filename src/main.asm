@@ -352,21 +352,33 @@ include "src/code/photo_album.asm"
 include "data/photo_album/background.asm"
 
 section "bank29",romx[$4000],bank[$29]
+PhotoNiceLinkTiles:
 incbin "gfx/photos/photo_nice_link.2bpp"
+PhotoMarinCliffTiles:
 incbin "gfx/photos/photo_marin_cliff.2bpp"
+PhotoMarinWellTiles:
 incbin "gfx/photos/photo_marin_well.2bpp"
+PhotoMabeTiles:
 incbin "gfx/photos/photo_mabe.2bpp"
 
 section "bank2A",romx[$4000],bank[$2A]
+PhotoUlriraTiles:
 incbin "gfx/photos/photo_ulrira.2bpp"
+PhotoBowWowTiles:
 incbin "gfx/photos/photo_bow_wow.2bpp"
+PhotoShopTiles:
 incbin "gfx/photos/photo_shop.2bpp"
+PhotoFishermanTiles:
 incbin "gfx/photos/photo_fisherman.2bpp"
 
 section "bank2B",romx[$4000],bank[$2B]
+PhotoZoraTiles:
 incbin "gfx/photos/photo_zora.2bpp"
+PhotoKanaletTiles:
 incbin "gfx/photos/photo_kanalet.2bpp"
+PhotoGhostTiles:
 incbin "gfx/photos/photo_ghost.2bpp"
+PhotoBridgeTiles:
 incbin "gfx/photos/photo_bridge.2bpp"
 
 section "bank2C",romx[$4000],bank[$2C]
@@ -475,6 +487,7 @@ incbin "gfx/photos/photo_elements_2.2bpp"
 
 section "bank3B",romx[$4000],bank[$3B]
 incbin "gfx/photos/photo_elements_3.2bpp"
+PhotoDizzyLinkTiles:
 incbin "gfx/photos/photo_dizzy_link.2bpp"
 
 section "bank3C",romx[$4000],bank[$3C]

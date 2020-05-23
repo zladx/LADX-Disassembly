@@ -1648,10 +1648,9 @@ Data_019_4BAC::
     db   $68, $06, $6A, $06, $6C, $06, $6E, $06   ; $4BC4
 
 label_019_4BCC::
-    db   $21
-    or   b                                        ; $4BCD: $B0
-    jp   nz, label_019_7E09                       ; $4BCE: $C2 $09 $7E
-
+    ld   hl, wEntitiesPrivateState1Table          ; $4bcc: $21 $b0 $c2
+    add  hl, bc
+    ld   a, [hl]                                  ; $4bd0: $7e
     cp   $02                                      ; $4BD1: $FE $02
     jp   z, label_019_4CFF                        ; $4BD3: $CA $FF $4C
 
@@ -7739,9 +7738,9 @@ func_019_7A9A::
     ldh  a, [hFrameCounter]                       ; $7AA4: $F0 $E7
     and  $03                                      ; $7AA6: $E6 $03
     sla  a                                        ; $7AA8: $CB $27
-    add  $B6                                      ; $7AAA: $C6 $B6
+    add  LOW(Data_019_7AB6)                       ; $7AAA: $C6 $B6
     ld   l, a                                     ; $7AAC: $6F
-    ld   a, $7A                                   ; $7AAD: $3E $7A
+    ld   a, HIGH(Data_019_7AB6)                   ; $7AAD: $3E $7A
     adc  $00                                      ; $7AAF: $CE $00
     ld   h, a                                     ; $7AB1: $67
     ld   a, [hl+]                                 ; $7AB2: $2A
@@ -7749,13 +7748,13 @@ func_019_7A9A::
     ld   l, a                                     ; $7AB4: $6F
     jp   hl                                       ; $7AB5: $E9
 
-    cp   [hl]                                     ; $7AB6: $BE
-    ld   a, d                                     ; $7AB7: $7A
-    db   $DB                                      ; $7AB8: $DB
-    ld   a, d                                     ; $7AB9: $7A
-    ld   hl, sp+$7A                               ; $7ABA: $F8 $7A
-    inc  b                                        ; $7ABC: $04
-    ld   a, e                                     ; $7ABD: $7B
+Data_019_7AB6:
+._00 dw func_019_7ABE
+._01 dw func_019_7ADB
+._02 dw func_019_7AF8
+._03 dw func_019_7B04
+
+func_019_7ABE:
     ld   hl, $DCCF                                ; $7ABE: $21 $CF $DC
     ld   de, $DCCF                                ; $7AC1: $11 $CF $DC
     ld   a, [hl-]                                 ; $7AC4: $3A
@@ -7783,6 +7782,7 @@ jr_019_7ACA:
     ld   [de], a                                  ; $7AD9: $12
     ret                                           ; $7ADA: $C9
 
+func_019_7ADB:
     ld   hl, $DCD0                                ; $7ADB: $21 $D0 $DC
     ld   de, $DCD0                                ; $7ADE: $11 $D0 $DC
     ld   a, [hl+]                                 ; $7AE1: $2A
@@ -7810,6 +7810,7 @@ jr_019_7AE7:
     ld   [de], a                                  ; $7AF6: $12
     ret                                           ; $7AF7: $C9
 
+func_019_7AF8:
     ld   hl, $DCE0                                ; $7AF8: $21 $E0 $DC
     ld   e, $10                                   ; $7AFB: $1E $10
 
@@ -7821,6 +7822,7 @@ jr_019_7AFD:
 
     ret                                           ; $7B03: $C9
 
+func_019_7B04:
     ld   hl, $DCF0                                ; $7B04: $21 $F0 $DC
     ld   e, $10                                   ; $7B07: $1E $10
 
@@ -8190,8 +8192,6 @@ func_019_7DF1::
     ld   [hl], a                                  ; $7E03: $77
     rl   d                                        ; $7E04: $CB $12
     ld   hl, wEntitiesPosZTable                   ; $7E06: $21 $10 $C3
-
-label_019_7E09:
     jr   jr_019_7DDD                              ; $7E09: $18 $D2
 
 func_019_7E0B::

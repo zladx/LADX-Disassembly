@@ -5696,12 +5696,14 @@ func_003_6B43::
     jr   jr_003_6B37                              ; $6B46: $18 $EF
 
 Data_003_6B48::
-    nop                                           ; $6B48: $00
-    inc  bc                                       ; $6B49: $03
-    ld   bc, $FE02                                ; $6B4A: $01 $02 $FE
-    ld   bc, $320                                 ; $6B4D: $01 $20 $03
+    db   $00, $03, $01, $02
+
+func_003_6B48:
+    cp   $01                                      ; $6B4C: $FE $01
+    jr   nz, jr_003_6B53                          ; $6B4E: $20 $03
     jp   UnloadEntityAndReturn                    ; $6B50: $C3 $8D $3F
 
+jr_003_6B53:
     ldh  a, [hActiveEntityType]                   ; $6B53: $F0 $EB
     cp   ENTITY_OCTOROCK_ROCK                     ; $6B55: $FE $0A
     jr   z, .octorockRockEnd                      ; $6B57: $28 $15

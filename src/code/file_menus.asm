@@ -1078,7 +1078,7 @@ FileDeletionState11Handler::
     ld   a, [hl+]                                 ; $4E8B: $2A
     ld   h, [hl]                                  ; $4E8C: $66
     ld   l, a                                     ; $4E8D: $6F
-    ld   de, InterruptLCDStatus.setScrollY        ; $4E8E: $11 $A8 $03
+    ld   de, $3a8                                 ; $4E8E: $11 $A8 $03
 
 jr_001_4E91::
     call EnableExternalRAMWriting                 ; $4E91: $CD $D0 $27
@@ -1671,7 +1671,7 @@ FileCopyStateAHandler::
     inc  hl                                       ; $521E: $23
     ld   h, [hl]                                  ; $521F: $66
     ld   l, a                                     ; $5220: $6F
-    ld   de, InterruptLCDStatus.skipScrollY       ; $5221: $11 $AD $03
+    ld   de, $3ad                                 ; $5221: $11 $AD $03
 
 jr_001_5224::
     call EnableExternalRAMWriting                 ; $5224: $CD $D0 $27

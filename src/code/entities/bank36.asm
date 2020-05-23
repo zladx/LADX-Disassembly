@@ -6860,7 +6860,6 @@ func_036_69D9::
     ldh  a, [hActiveEntityType]                   ; $69D9: $F0 $EB
     sub  ENTITY_COLOR_SHELL_RED                   ; $69DB: $D6 $E9
     sla  a                                        ; $69DD: $CB $27
-Data_036_69DF::
     ldh  [hScratch0], a                           ; $69DF: $E0 $D7
     ld   d, $00                                   ; $69E1: $16 $00
     call func_036_6C02                            ; $69E3: $CD $02 $6C
@@ -6877,7 +6876,6 @@ jr_036_69F2:
     ld   l, a                                     ; $69F3: $6F
     sla  a                                        ; $69F4: $CB $27
     add  l                                        ; $69F6: $85
-Data_036_69F7::
     sla  a                                        ; $69F7: $CB $27
     sla  a                                        ; $69F9: $CB $27
     ld   e, a                                     ; $69FB: $5F
@@ -6897,7 +6895,6 @@ jr_036_6A0A:
     ld   l, a                                     ; $6A0B: $6F
     sla  a                                        ; $6A0C: $CB $27
     add  l                                        ; $6A0E: $85
-Data_036_6A0F::
     sla  a                                        ; $6A0F: $CB $27
     sla  a                                        ; $6A11: $CB $27
     ld   e, a                                     ; $6A13: $5F

@@ -2732,7 +2732,11 @@ func_017_5B00::
     ret                                           ; $5B0E: $C9
 
 Data_017_5B0F::
-    db   $40, $73, $D0, $6A, $A0, $6D, $70, $70, $00, $68
+    dw CreditsBGMaps._04
+    dw CreditsBGMaps._01
+    dw CreditsBGMaps._02
+    dw CreditsBGMaps._03
+    dw CreditsBGMaps._00
 
 CreditsLoadBGMap::
     ld   hl, Data_017_5B0F                        ; $5B19: $21 $0F $5B
@@ -2744,12 +2748,12 @@ CreditsLoadBGMap::
     ld   a, [hl+]                                 ; $5B24: $2A
     ld   b, a                                     ; $5B25: $47
     ; Return bank to restore
-    ld   a, BANK(CreditsLoadBGMap)                   ; $5B26: $3E $17
+    ld   a, BANK(@)                               ; $5B26: $3E $17
     ldh  [hScratchF], a                           ; $5B28: $E0 $E6
     ld   h, [hl]                                  ; $5B2A: $66
     ld   l, b                                     ; $5B2B: $68
     ; Source bank
-    ld   a, $23                                   ; $5B2C: $3E $23
+    ld   a, BANK(CreditsBGMaps)                ; $5B2C: $3E $23
     call CopyBGMapFromBank                        ; $5B2E: $CD $69 $0B
     ret                                           ; $5B31: $C9
 
@@ -5014,11 +5018,7 @@ Data_017_71DF::
     db   $00, $08, $00, $20, $08, $08, $01, $20, $00, $00, $02, $20, $08, $00, $03, $20
     db   $00, $FA, $10, $00, $08, $FA, $11, $00, $00, $0E, $10, $20, $08, $0E, $11, $20
     db   $00, $08, $00, $20, $08, $08, $01, $20, $00, $00, $02, $20, $08, $00, $03, $20
-    db   $08, $FA, $10, $40, $00, $FA, $11, $40, $08, $0E, $10, $60, $00
-
-func_017_725C::
-    ld   c, $11                                   ; $725C: $0E $11
-    ld   h, b                                     ; $725E: $60
+    db   $08, $FA, $10, $40, $00, $FA, $11, $40, $08, $0E, $10, $60, $00, $0E, $11, $60
 
 func_017_725F::
     ld   hl, wDeathCount                          ; $725F: $21 $57 $DB

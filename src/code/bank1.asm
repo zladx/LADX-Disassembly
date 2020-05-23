@@ -891,25 +891,19 @@ MinimapEntryPoint::
 
 jr_001_5639::
     JP_TABLE
-    ; Code below is actually data for the jump table
-    ld   c, b
-    ld   d, [hl]
-    ld   a, b
-    ld   d, [hl]
-    db   $F4 ; Undefined instruction
-    ld   d, [hl]
-    db   $FD ; Undefined instruction
-    ld   d, [hl]
-    dec  bc
-    ld   d, a
-    inc  e
-    ld   d, a
-    dec  h
-    ld   e, b
+._00 dw func_001_5648
+._01 dw func_001_5678
+._02 dw func_001_56F4
+._03 dw func_001_56FD
+._04 dw func_001_570B
+._05 dw func_001_571C
+._06 dw FileSaveFadeOut
+
+func_001_5648:
     call IncrementGameplaySubtype
     ldh  a, [hIsGBC]
     and  a
-    jr   z, jr_001_5678
+    jr   z, func_001_5678
     ld   hl, $DC10
     ld   c, $80
     di
@@ -939,7 +933,7 @@ jr_001_5674::
     ld   [rSVBK], a
     ei
 
-jr_001_5678::
+func_001_5678::
     call DrawLinkSprite
     call AnimateEntitiesAndRestoreBank01
     call func_1A22
@@ -1000,16 +994,22 @@ jr_001_56D9::
 
 jr_001_56F3::
     ret
+
+func_001_56F4:
     ld   a, $0B
     ld   [wTileMapToLoad], a
     call IncrementGameplaySubtype
     ret
+
+func_001_56FD:
     ld   a, $0E
     ld   [wTileMapToLoad], a
     ld   a, $01
     ld   [$DDD5], a
     call IncrementGameplaySubtype
     ret
+
+func_001_570B:
     call func_1A39
     ld   a, [$C16B]
     cp   $04
@@ -1019,6 +1019,8 @@ jr_001_56F3::
 
 jr_001_571B::
     ret
+
+func_001_571C:
     ld   a, [ROM_DebugTool3]
     and  a
     jr   z, jr_001_5731

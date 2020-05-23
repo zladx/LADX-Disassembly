@@ -555,8 +555,8 @@ jr_001_65D6::
 func_001_65DD::
     dec a
     JP_TABLE
-._00 dw label_6673
-._01 dw label_66FD
+._00 dw func_001_6673
+._01 dw func_001_66FD
 
 Data_001_65E3::
     dw Data_001_65EF
@@ -598,7 +598,7 @@ jr_001_6646::
     db 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4
     db 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5
 
-label_6673::
+func_001_6673::
     ld   hl, wTranscientVfxCountdownTable
     add  hl, bc
     ld   a, [hl]
@@ -697,7 +697,7 @@ jr_001_66F2::
 Data_001_66F6::
     db 1, $FF, $4C, $52, $58, $5C, $60
 
-label_66FD::
+func_001_66FD::
     ld   hl, $C560
     add  hl, bc
     ld   a, [hl]

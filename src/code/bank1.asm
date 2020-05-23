@@ -892,10 +892,10 @@ MinimapEntryPoint::
 jr_001_5639::
     JP_TABLE
 ._00 dw func_001_5648
-._01 dw jr_001_5678
-._02 dw jr_001_56F4
-._03 dw jr_001_56FD
-._04 dw jr_001_570B
+._01 dw func_001_5678
+._02 dw func_001_56F4
+._03 dw func_001_56FD
+._04 dw func_001_570B
 ._05 dw func_001_571C
 ._06 dw FileSaveFadeOut
 
@@ -903,7 +903,7 @@ func_001_5648:
     call IncrementGameplaySubtype
     ldh  a, [hIsGBC]
     and  a
-    jr   z, jr_001_5678
+    jr   z, func_001_5678
     ld   hl, $DC10
     ld   c, $80
     di
@@ -933,7 +933,7 @@ jr_001_5674::
     ld   [rSVBK], a
     ei
 
-jr_001_5678::
+func_001_5678::
     call DrawLinkSprite
     call AnimateEntitiesAndRestoreBank01
     call func_1A22
@@ -995,13 +995,13 @@ jr_001_56D9::
 jr_001_56F3::
     ret
 
-jr_001_56F4:
+func_001_56F4:
     ld   a, $0B
     ld   [wTileMapToLoad], a
     call IncrementGameplaySubtype
     ret
 
-jr_001_56FD:
+func_001_56FD:
     ld   a, $0E
     ld   [wTileMapToLoad], a
     ld   a, $01
@@ -1009,7 +1009,7 @@ jr_001_56FD:
     call IncrementGameplaySubtype
     ret
 
-jr_001_570B:
+func_001_570B:
     call func_1A39
     ld   a, [$C16B]
     cp   $04

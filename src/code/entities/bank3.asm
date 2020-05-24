@@ -1131,7 +1131,7 @@ jr_003_4D57:
     jr   nz, jr_003_4D66                          ; $4D5F: $20 $05
 
     ld   hl, hJingle                              ; $4D61: $21 $F2 $FF
-    ld   [hl], $18                                ; $4D64: $36 $18
+    ld   [hl], JINGLE_ITEM_FALLING                ; $4D64: $36 $18
 
 jr_003_4D66:
     rra                                           ; $4D66: $1F
@@ -3386,7 +3386,7 @@ jr_003_5C37:
     ldh  a, [hActiveEntityPosY]                   ; $5C3B: $F0 $EF
     sub  $0C                                      ; $5C3D: $D6 $0C
     call CheckLinkCollisionWithProjectile.func_003_6C36; $5C3F: $CD $36 $6C
-    ld   a, $07                                   ; $5C42: $3E $07
+    ld   a, JINGLE_SWORD_POKING                   ; $5C42: $3E $07
     ldh  [hJingle], a                             ; $5C44: $E0 $F2
 
 jr_003_5C46:
@@ -4204,7 +4204,7 @@ jr_003_6112:
     cp   $02                                      ; $612C: $FE $02
     jr   z, .bombEnd                              ; $612E: $28 $04
 
-    ld   a, $09                                   ; $6130: $3E $09
+    ld   a, JINGLE_BUMP                           ; $6130: $3E $09
     ldh  [hJingle], a                             ; $6132: $E0 $F2
 .bombEnd
 
@@ -4634,7 +4634,7 @@ PickToadstoolOrDungeonKey::
     ld   [wMusicTrackToPlay], a                   ; $63C9: $EA $68 $D3
     jr   label_003_63D2                           ; $63CC: $18 $04
 
-    ld   a, $01                                   ; $63CE: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $63CE: $3E $01
     ldh  [hJingle], a                             ; $63D0: $E0 $F2
 
 label_003_63D2:
@@ -5192,7 +5192,7 @@ func_003_6771::
     and  a                                        ; $67B7: $A7
     jr   nz, jr_003_6828                          ; $67B8: $20 $6E
 
-    ld   a, $02                                   ; $67BA: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $67BA: $3E $02
     ldh  [hJingle], a                             ; $67BC: $E0 $F2
     ldh  a, [hSwordIntersectedAreaY]              ; $67BE: $F0 $CD
     and  $E0                                      ; $67C0: $E6 $E0
@@ -5268,7 +5268,7 @@ jr_003_6828:
     jp   nc, label_003_68E4                       ; $6836: $D2 $E4 $68
 
     ld   c, a                                     ; $6839: $4F
-    ld   a, $02                                   ; $683A: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $683A: $3E $02
     ldh  [hJingle], a                             ; $683C: $E0 $F2
     ld   a, [wIsIndoor]                           ; $683E: $FA $A5 $DB
     and  a                                        ; $6841: $A7
@@ -5645,7 +5645,7 @@ jr_003_6ADA:
     inc  a                                        ; $6B0C: $3C
     jr   z, jr_003_6B13                           ; $6B0D: $28 $04
 
-    ld   a, $07                                   ; $6B0F: $3E $07
+    ld   a, JINGLE_SWORD_POKING                   ; $6B0F: $3E $07
     ldh  [hJingle], a                             ; $6B11: $E0 $F2
 
 jr_003_6B13:
@@ -6533,7 +6533,7 @@ jr_003_6F6D:
     jp   z, label_003_6F24                        ; $6F90: $CA $24 $6F
 
 func_003_6F93::
-    ld   a, $09                                   ; $6F93: $3E $09
+    ld   a, JINGLE_BUMP                           ; $6F93: $3E $09
     ldh  [hJingle], a                             ; $6F95: $E0 $F2
     call ResetPegasusBoots                        ; $6F97: $CD $B6 $0C
     ld   a, $0C                                   ; $6F9A: $3E $0C
@@ -6844,7 +6844,7 @@ jr_003_715E:
     ld   a, $30                                   ; $7162: $3E $30
     call func_003_6FCC                            ; $7164: $CD $CC $6F
     ld   hl, hJingle                              ; $7167: $21 $F2 $FF
-    ld   [hl], $09                                ; $716A: $36 $09
+    ld   [hl], JINGLE_BUMP                        ; $716A: $36 $09
     ld   a, [wTunicType]                          ; $716C: $FA $0F $DC
     cp   $01                                      ; $716F: $FE $01
     jr   z, jr_003_717A                           ; $7171: $28 $07
@@ -7403,7 +7403,7 @@ jr_003_748B:
     cp   ENTITY_BLAINO                            ; $748D: $FE $BE
     jr   nz, jr_003_74C1                          ; $748F: $20 $30
 
-    ld   a, $09                                   ; $7491: $3E $09
+    ld   a, JINGLE_BUMP                           ; $7491: $3E $09
     ldh  [hJingle], a                             ; $7493: $E0 $F2
     ld   a, [$D205]                               ; $7495: $FA $05 $D2
     cp   $00                                      ; $7498: $FE $00
@@ -7585,7 +7585,7 @@ jr_003_758B:
     ldh  [hLinkPositionYIncrement], a             ; $758E: $E0 $9B
     ld   a, $30                                   ; $7590: $3E $30
     ldh  [$FFA3], a                               ; $7592: $E0 $A3
-    ld   a, $0B                                   ; $7594: $3E $0B
+    ld   a, JINGLE_HUGE_BUMP                      ; $7594: $3E $0B
     ldh  [hJingle], a                             ; $7596: $E0 $F2
     ret                                           ; $7598: $C9
 
@@ -8271,7 +8271,7 @@ label_003_795C:
     add  hl, bc                                   ; $7966: $09
     ld   a, [hl]                                  ; $7967: $7E
     ldh  [hScratch1], a                           ; $7968: $E0 $D8
-    ld   a, $0E                                   ; $796A: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $796A: $3E $0E
     ldh  [hJingle], a                             ; $796C: $E0 $F2
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $796E: $3E $01
     call AddTranscientVfx                         ; $7970: $CD $C7 $0C
@@ -8387,7 +8387,7 @@ jr_003_79CB:
 
     call GetEntityTransitionCountdown             ; $7A0F: $CD $05 $0C
     ld   [hl], $2F                                ; $7A12: $36 $2F
-    ld   a, $18                                   ; $7A14: $3E $18
+    ld   a, JINGLE_ITEM_FALLING                   ; $7A14: $3E $18
     ldh  [hJingle], a                             ; $7A16: $E0 $F2
 
 jr_003_7A18:

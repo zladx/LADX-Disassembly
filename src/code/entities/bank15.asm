@@ -8261,10 +8261,10 @@ func_015_7F04::
     rla                                           ; $7F3D: $17
     rla                                           ; $7F3E: $17
     and  $18                                      ; $7F3F: $E6 $18
-    ld   [$DB7C], a                               ; $7F41: $EA $7C $DB
+    ld   [wWindFishEggMazeSequenceOffset], a      ; $7F41: $EA $7C $DB
 
 jr_015_7F44:
-    ld   a, [$DB7C]                               ; $7F44: $FA $7C $DB
+    ld   a, [wWindFishEggMazeSequenceOffset]      ; $7F44: $FA $7C $DB
     rra                                           ; $7F47: $1F
     rra                                           ; $7F48: $1F
     rra                                           ; $7F49: $1F

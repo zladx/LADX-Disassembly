@@ -4629,9 +4629,9 @@ jr_007_5EA6:
 label_007_5EA7:
     ld   a, $00                                   ; $5EA7: $3E $00
     ld   [wScreenShakeHorizontal], a              ; $5EA9: $EA $55 $C1
-    ld   a, [wDB72]                               ; $5EAC: $FA $72 $DB
+    ld   a, [wNumberOfDungeon7PillarsDestroyed]   ; $5EAC: $FA $72 $DB
     inc  a                                        ; $5EAF: $3C
-    ld   [wDB72], a                               ; $5EB0: $EA $72 $DB
+    ld   [wNumberOfDungeon7PillarsDestroyed], a   ; $5EB0: $EA $72 $DB
     cp   $04                                      ; $5EB3: $FE $04
     jr   c, jr_007_5EBF                           ; $5EB5: $38 $08
 

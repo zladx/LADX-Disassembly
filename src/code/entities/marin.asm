@@ -541,7 +541,7 @@ func_005_5161::
     ld   hl, wOcarinaSongFlags                    ; $5170: $21 $49 $DB
     set  2, [hl]                                  ; $5173: $CB $D6
     xor  a                                        ; $5175: $AF
-    ld   [$DB4A], a                               ; $5176: $EA $4A $DB
+    ld   [wSelectedSongIndex], a                               ; $5176: $EA $4A $DB
     call IncrementEntityState                     ; $5179: $CD $12 $3B
     ldh  a, [hMapRoom]                            ; $517C: $F0 $F6
     cp   $C0                                      ; $517E: $FE $C0

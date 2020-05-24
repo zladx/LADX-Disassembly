@@ -1264,8 +1264,8 @@ wDB47 equ $DB47
 wOcarinaSongFlags:: ; DB49
   ds 1
 
-; Unlabeled
-wDB4A equ $DB4A
+; Which song is selected (zero based)
+wSelectedSongIndex:: ; DB4A
   ds 1
 
 ; 0 means that the player does not have the Toadstool
@@ -1286,8 +1286,13 @@ wSwordLevel:: ; DB4E
 wName:: ; DB4F
   ds NAME_LENGTH ; 5
 
-wDB54:: ds 1
-wDB55:: ds 1
+wDB54:: ds 1 ; Unknown, but some kind of map index entry
+
+; Indicates if we have spoken with richard.
+; 1 indicates spoken with grandpa ulrira in his own house, but does not seem to be used anywhere.
+; 2 means spoken with richard, changes the telephone message.
+wRichardSpokenFlag::
+  ds 1
 
 wIsBowWowFollowingLink:: ; DB56
   ; Bow-Wow status.
@@ -1383,7 +1388,8 @@ wWreckingBallPosX: ; DB70
 wWreckingBallPosY: ; DB71
   ds 1
 
-wDB72: ds 1
+wNumberOfDungeon7PillarsDestroyed: ; DB72
+  ds 1
 
 wIsMarinFollowingLink:: ; DB73
   ds 1
@@ -1417,7 +1423,8 @@ wGhostSeeksGrave:: ; DB7A
 wIsRoosterFollowingLink:: ; DB7B
   ds 1
 
-; Unlabeled
+; Offset in the WindFishEggMazeSequence table, set to a random value chosen from $00 $08 $10 $18
+wWindFishEggMazeSequenceOffset:
   ds 1
 
 wBoomerangTradedItem:: ; DB7D
@@ -1426,8 +1433,16 @@ wBoomerangTradedItem:: ; DB7D
   ; back it will be INVENTORY_BOOMERANG
   ds 1
 
+wKidSaveHintIndex:: ;DB7E
+  ; Switches between 4 different hits for one of the kids throwing the ball
+  ds 1
+
+wDB7F:: ;DB7F
+  ; Unknown
+  ds 1
+  
 ; Unlabeled
-  ds $11
+  ds $10
 
 wAddRupeeBufferHigh:: ; DB8F
   ; Higher digits of the amount of rupees to be added to your wallet (high digits)

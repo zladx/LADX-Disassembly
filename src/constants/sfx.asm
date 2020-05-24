@@ -111,7 +111,7 @@ JINGLE_PUZZLE_SOLVED    equ $02;
 JINGLE_BOW_WOW_CHOMP    equ $03;damage
 JINGLE_CHARGING_SWORD   equ $04;
 JINGLE_POWDER           equ $05;powder
-JINGlE_ENNEMY_MORPH_IN  equ $06;mario mushroom
+JINGLE_ENEMY_MORPH_IN   equ $06;mario mushroom
 JINGLE_SWORD_POKING     equ $07
 JINGLE_JUMP_DOWN        equ $08
 JINGLE_BUMP             equ $09
@@ -120,8 +120,8 @@ JINGLE_HUGE_BUMP        equ $0B;huge bump
 JINGLE_REVOLVING_DOOR   equ $0C
 JINGLE_FEATHER_JUMP     equ $0D
 JINGLE_WATER_DIVE       equ $0E
-;JINGLE_UNKNOWN         equ $0F
-;JINGLE_UNKNOWN         equ $10
+JINGLE_WATER_SWIM       equ $0F
+JINGLE_UNKNOWN_10       equ $10 ;produces no sound
 JINGLE_OPEN_INVENTORY   equ $11
 JINGLE_CLOSE_INVENTORY  equ $12
 JINGLE_VALIDATE         equ $13
@@ -131,40 +131,46 @@ JINGLE_SHIELD_TING      equ $16
 JINGLE_GOT_POWER_UP     equ $17
 JINGLE_ITEM_FALLING     equ $18
 JINGLE_NEW_HEART        equ $19
-;JINGLE_UNKNOWN         equ $1A
-;JINGLE_UNKNOWN         equ $1B
-;JINGLE_UNKNOWN         equ $1C
+JINGLE_FAIRY_HEALING    equ $1A
+JINGLE_CLEAR_MIDBOSS    equ $1B
+JINGLE_MIDBOSS_WARP     equ $1C
 JINGLE_WRONG_ANSWER     equ $1D
 JINGLE_FOREST_LOST      equ $1E
-JINGLE_ENNEMY_MORPH_OUT equ $1F
+JINGLE_ENEMY_MORPH_OUT  equ $1F
 JINGLE_BIG_BUMP         equ $20
 JINGLE_SEAGULL          equ $21
+JINGLE_HONEYCOMB        equ $22
 JINGLE_DUNGEON_OPENED   equ $23
 JINGLE_JUMP             equ $24
-;JINGLE_UNKNOWN         equ $25
-;JINGLE_UNKNOWN         equ $26
-;JINGLE_UNKNOWN         equ $27
-;JINGLE_UNKNOWN         equ $28
-;JINGLE_UNKNOWN         equ $29
-;JINGLE_UNKNOWN         equ $2A
+JINGLE_OVERWORLD_WARP   equ $25
+JINGLE_DISAPPEAR        equ $26 ;great fairies + owl at the end of the game
+JINGLE_WALRUS           equ $27
+JINGLE_MASTER_STALFOS   equ $28
+JINGLE_SLIME_EEL_PULL   equ $29
+JINGLE_DODONGO_EAT_BOMB equ $2A
 JINGLE_INSTRUMENT_WARP  equ $2B
 JINGLE_MANBO_WARP       equ $2C
 JINGLE_GHOST_PRESENCE   equ $2D
-;JINGLE_UNKNOWN         equ $2E
-;JINGLE_UNKNOWN         equ $2F
-;JINGLE_UNKNOWN         equ $30
-;JINGLE_UNKNOWN         equ $31
-;JINGLE_UNKNOWN         equ $32
-;JINGLE_UNKNOWN         equ $33
-;JINGLE_UNKNOWN         equ $34
-;JINGLE_UNKNOWN         equ $35
-;JINGLE_UNKNOWN         equ $36
-;JINGLE_UNKNOWN         equ $37
-;JINGLE_UNKNOWN         equ $38
-;JINGLE_UNKNOWN         equ $39
-;JINGLE_UNKNOWN         equ $3A
-;JINGLE_UNKNOWN         equ $2B
-JINGLE_ENNEMY_SHRIEK    equ $3C
+JINGLE_EAGLE_TOWER_OPEN equ $2E
+JINGLE_POOF             equ $2F
+JINGLE_EVIL_EAGLE       equ $30
+JINGLE_GRIM_CREEPER     equ $31
+JINGLE_HOT_HEAD_SPLASH  equ $32
+JINGLE_BLAINO_PUNCH     equ $33
+JINGLE_SHOW_INSTRUMENTS equ $34 ;during credits
+JINGLE_SHADOW_NEXT      equ $35
+JINGLE_SHADOW_2_DEFEAT  equ $36
+JINGLE_SHADOW_1_HURT    equ $37
+JINGLE_SHADOW_3_BG      equ $38
+JINGLE_SHADOW_4_INTRO   equ $39
+JINGLE_UNKNOWN_3A       equ $3A
+JINGLE_SWORD_BEAM       equ $3B
+JINGLE_ENEMY_SHRIEK     equ $3C
+JINGLE_SHADOW_6_BG      equ $3D
+JINGLE_URCHIN_PUSH      equ $3E ;also Hole Fillers
+JINGLE_FLYING_TILE      equ $3F
+JINGLE_FACADE_HOLE      equ $40
+JINGLE_UNKNOWN_41       equ $41
 
 ; Values for hWaveSfx
 WAVE_SFX_NONE            equ $00

@@ -297,7 +297,7 @@ jr_005_4AEC:
     cpl                                           ; $4AFA: $2F
     inc  a                                        ; $4AFB: $3C
     ld   [hl], a                                  ; $4AFC: $77
-    ld   a, $09                                   ; $4AFD: $3E $09
+    ld   a, JINGLE_BUMP                           ; $4AFD: $3E $09
     ldh  [hJingle], a                             ; $4AFF: $E0 $F2
 
 jr_005_4B01:
@@ -313,7 +313,7 @@ jr_005_4B01:
     cpl                                           ; $4B0F: $2F
     inc  a                                        ; $4B10: $3C
     ld   [hl], a                                  ; $4B11: $77
-    ld   a, $09                                   ; $4B12: $3E $09
+    ld   a, JINGLE_BUMP                           ; $4B12: $3E $09
     ldh  [hJingle], a                             ; $4B14: $E0 $F2
 
 jr_005_4B16:
@@ -367,7 +367,7 @@ func_005_4B41::
     ld   [hl], b                                  ; $4B55: $70
     xor  a                                        ; $4B56: $AF
     ld   [wC167], a                               ; $4B57: $EA $67 $C1
-    ld   a, $23                                   ; $4B5A: $3E $23
+    ld   a, JINGLE_DUNGEON_OPENED                 ; $4B5A: $3E $23
     ldh  [hJingle], a                             ; $4B5C: $E0 $F2
     call label_27DD                               ; $4B5E: $CD $DD $27
     call GetEntityTransitionCountdown             ; $4B61: $CD $05 $0C

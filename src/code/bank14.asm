@@ -1205,7 +1205,7 @@ jr_014_5391:
     add  hl, bc                                   ; $539C: $09
     ld   [hl], a                                  ; $539D: $77
     ld   hl, hJingle                              ; $539E: $21 $F2 $FF
-    ld   [hl], $08                                ; $53A1: $36 $08
+    ld   [hl], JINGLE_JUMP_DOWN                   ; $53A1: $36 $08
 
 func_014_53A3::
     ld   hl, wEntitiesStatusTable                 ; $53A3: $21 $80 $C2
@@ -1946,7 +1946,7 @@ jr_014_5789:
     and  $F0                                      ; $57D6: $E6 $F0
     or   e                                        ; $57D8: $B3
     ld   [wWarp0PositionTileIndex], a             ; $57D9: $EA $16 $D4
-    ld   a, $02                                   ; $57DC: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $57DC: $3E $02
     ldh  [hJingle], a                             ; $57DE: $E0 $F2
     ret                                           ; $57E0: $C9
 

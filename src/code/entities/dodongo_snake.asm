@@ -200,7 +200,7 @@ jr_005_68F6:
     ld   hl, wEntitiesUnknowTableP                ; $6949: $21 $40 $C4
     add  hl, bc                                   ; $694C: $09
     inc  [hl]                                     ; $694D: $34
-    ld   a, $2A                                   ; $694E: $3E $2A
+    ld   a, JINGLE_DODONGO_EAT_BOMB               ; $694E: $3E $2A
     ldh  [hJingle], a                             ; $6950: $E0 $F2
     ret                                           ; $6952: $C9
 

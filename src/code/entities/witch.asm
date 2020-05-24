@@ -213,7 +213,7 @@ func_005_48CF::
     ld   [wMagicPowderCount], a                   ; $48E9: $EA $4C $DB
     ld   a, $0B                                   ; $48EC: $3E $0B
     ldh  [hFFA5], a                               ; $48EE: $E0 $A5
-    ld   a, $01                                   ; $48F0: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $48F0: $3E $01
     ldh  [hJingle], a                             ; $48F2: $E0 $F2
     call IncrementEntityState                     ; $48F4: $CD $12 $3B
 

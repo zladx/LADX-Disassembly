@@ -349,7 +349,7 @@ jr_005_5C38:
     jr   nz, jr_005_5C41                          ; $5C3A: $20 $05
 
     ld   hl, hJingle                              ; $5C3C: $21 $F2 $FF
-    ld   [hl], $30                                ; $5C3F: $36 $30
+    ld   [hl], JINGLE_EVIL_EAGLE                  ; $5C3F: $36 $30
 
 jr_005_5C41:
     and  a                                        ; $5C41: $A7
@@ -380,7 +380,7 @@ func_005_5C5B::
     ld   [hl], $28                                ; $5C64: $36 $28
     ld   a, $D0                                   ; $5C66: $3E $D0
     ld   [wEntitiesSpeedYTable], a                ; $5C68: $EA $50 $C2
-    ld   a, $24                                   ; $5C6B: $3E $24
+    ld   a, JINGLE_JUMP                           ; $5C6B: $3E $24
     ldh  [hJingle], a                             ; $5C6D: $E0 $F2
     ld   a, $12                                   ; $5C6F: $3E $12
     ld   [wEntitiesSpeedXTable], a                ; $5C71: $EA $40 $C2

@@ -1045,7 +1045,7 @@ jr_005_745F:
     and  $07                                      ; $7461: $E6 $07
     jr   nz, jr_005_7469                          ; $7463: $20 $04
 
-    ld   a, $29                                   ; $7465: $3E $29
+    ld   a, JINGLE_SLIME_EEL_PULL                 ; $7465: $3E $29
     ldh  [hJingle], a                             ; $7467: $E0 $F2
 
 jr_005_7469:

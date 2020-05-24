@@ -54,7 +54,7 @@ jr_019_44A6:
     call GetEntityTransitionCountdown             ; $44AE: $CD $05 $0C
     ld   [hl], b                                  ; $44B1: $70
     call func_019_45A3                            ; $44B2: $CD $A3 $45
-    ld   a, $07                                   ; $44B5: $3E $07
+    ld   a, JINGLE_SWORD_POKING                   ; $44B5: $3E $07
     ldh  [hJingle], a                             ; $44B7: $E0 $F2
 
 jr_019_44B9:

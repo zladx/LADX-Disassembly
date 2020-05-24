@@ -217,7 +217,7 @@ jr_005_6444:
     ld   [hl], b                                  ; $6461: $70
     call func_005_6611                            ; $6462: $CD $11 $66
     call func_005_65D9                            ; $6465: $CD $D9 $65
-    ld   a, $32                                   ; $6468: $3E $32
+    ld   a, JINGLE_HOT_HEAD_SPLASH                ; $6468: $3E $32
     ldh  [hJingle], a                             ; $646A: $E0 $F2
     ld   a, $FF                                   ; $646C: $3E $FF
     jp   SetEntitySpriteVariant                   ; $646E: $C3 $0C $3B

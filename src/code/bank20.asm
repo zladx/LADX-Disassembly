@@ -1103,7 +1103,7 @@ label_020_4B9E:
     and  a                                        ; $4BBF: $A7
     jr   nz, jr_020_4BC8                          ; $4BC0: $20 $06
 
-    ld   a, $09                                   ; $4BC2: $3E $09
+    ld   a, JINGLE_BUMP                           ; $4BC2: $3E $09
     ldh  [hJingle], a                             ; $4BC4: $E0 $F2
     jr   jr_020_4BCD                              ; $4BC6: $18 $05
 
@@ -1204,7 +1204,7 @@ Data_020_4C43::
     db   $00, $00, $F4, $0C
 
 func_020_4C47::
-    ld   a, $05                                   ; $4C47: $3E $05
+    ld   a, JINGLE_POWDER                         ; $4C47: $3E $05
     ldh  [hJingle], a                             ; $4C49: $E0 $F2
     ld   a, $0E                                   ; $4C4B: $3E $0E
     ld   [$C19B], a                               ; $4C4D: $EA $9B $C1
@@ -3306,7 +3306,7 @@ jr_020_5F85:
     jr   z, jr_020_5FC1                           ; $5F8C: $28 $33
 
     ld   hl, hJingle                              ; $5F8E: $21 $F2 $FF
-    ld   [hl], $0A                                ; $5F91: $36 $0A
+    ld   [hl], JINGLE_MOVE_SELECTION              ; $5F91: $36 $0A
     ld   e, a                                     ; $5F93: $5F
     ld   d, $00                                   ; $5F94: $16 $00
     ld   hl, wInventoryItem1                      ; $5F96: $21 $02 $DB
@@ -3416,7 +3416,7 @@ jr_020_6036:
     call func_020_5C9C                            ; $6036: $CD $9C $5C
 
 func_020_6039:
-    ld   a, $13                                   ; $6039: $3E $13
+    ld   a, JINGLE_VALIDATE                       ; $6039: $3E $13
     ldh  [hJingle], a                             ; $603B: $E0 $F2
     ld   a, [$DBA3]                               ; $603D: $FA $A3 $DB
     add  $02                                      ; $6040: $C6 $02
@@ -4008,7 +4008,7 @@ jr_020_6436:
     ld   [wC16C], a                               ; $643A: $EA $6C $C1
     inc  a                                        ; $643D: $3C
     ld   [wPaletteUnknownE], a                    ; $643E: $EA $D5 $DD
-    ld   a, $12                                   ; $6441: $3E $12
+    ld   a, JINGLE_CLOSE_INVENTORY                ; $6441: $3E $12
     ldh  [hJingle], a                             ; $6443: $E0 $F2
 
 jr_020_6445:

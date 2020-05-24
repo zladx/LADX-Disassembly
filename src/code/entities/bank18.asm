@@ -1120,7 +1120,7 @@ MermaidStatueState2Handler::
 
     call IncrementEntityState                     ; $499F: $CD $12 $3B
     ld   [hl], $01                                ; $49A2: $36 $01
-    ld   a, $02                                   ; $49A4: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $49A4: $3E $02
     ldh  [hJingle], a                             ; $49A6: $E0 $F2
     xor  a                                        ; $49A8: $AF
     ld   [wC167], a                               ; $49A9: $EA $67 $C1
@@ -1297,7 +1297,7 @@ ZoraState3Handler::
     ld   [hl], b                                  ; $4AC4: $70
     xor  a                                        ; $4AC5: $AF
     call SetEntitySpriteVariant                   ; $4AC6: $CD $0C $3B
-    ld   a, $0E                                   ; $4AC9: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $4AC9: $3E $0E
     ldh  [hJingle], a                             ; $4ACB: $E0 $F2
     ldh  a, [hActiveEntityPosX]                   ; $4ACD: $F0 $EE
     ldh  [hScratch0], a                           ; $4ACF: $E0 $D7
@@ -1711,7 +1711,7 @@ GrandmaUlriraState1Handler::
     and  a                                        ; $4DBD: $A7
     jr   nz, jr_018_4DCF                          ; $4DBE: $20 $0F
 
-    ld   a, $01                                   ; $4DC0: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $4DC0: $3E $01
     ldh  [hJingle], a                             ; $4DC2: $E0 $F2
     ld   [$DB7F], a                               ; $4DC4: $EA $7F $DB
     call GetEntityTransitionCountdown             ; $4DC7: $CD $05 $0C
@@ -1925,7 +1925,7 @@ MadBatterState1Handler::
     ldh  [hScratch1], a                           ; $4F29: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $4F2B: $3E $02
     call AddTranscientVfx                         ; $4F2D: $CD $C7 $0C
-    ld   a, $06                                   ; $4F30: $3E $06
+    ld   a, JINGLE_ENEMY_MORPH_IN                 ; $4F30: $3E $06
     ldh  [hJingle], a                             ; $4F32: $E0 $F2
     jp   IncrementEntityState                     ; $4F34: $C3 $12 $3B
 
@@ -2125,7 +2125,7 @@ MadBatterState8Handler::
     jr   nz, jr_018_5067                          ; $5060: $20 $05
 
     inc  [hl]                                     ; $5062: $34
-    ld   a, $3B                                   ; $5063: $3E $3B
+    ld   a, JINGLE_SWORD_BEAM                     ; $5063: $3E $3B
     ldh  [hJingle], a                             ; $5065: $E0 $F2
 
 jr_018_5067:
@@ -3028,7 +3028,7 @@ jr_018_5698:
     ld   hl, wEntitiesSpeedZTable                 ; $56AE: $21 $20 $C3
     add  hl, bc                                   ; $56B1: $09
     ld   [hl], $10                                ; $56B2: $36 $10
-    ld   a, $24                                   ; $56B4: $3E $24
+    ld   a, JINGLE_JUMP                           ; $56B4: $3E $24
     ldh  [hJingle], a                             ; $56B6: $E0 $F2
 
 jr_018_56B8:
@@ -3043,7 +3043,7 @@ jr_018_56B8:
     jr   nz, jr_018_56CC                          ; $56C5: $20 $05
 
     ld   hl, hJingle                              ; $56C7: $21 $F2 $FF
-    ld   [hl], $27                                ; $56CA: $36 $27
+    ld   [hl], JINGLE_WALRUS                      ; $56CA: $36 $27
 
 jr_018_56CC:
     ld   a, $02                                   ; $56CC: $3E $02
@@ -3098,7 +3098,7 @@ WalrusState4Handler::
     ld   a, [hl]                                  ; $5710: $7E
     add  $18                                      ; $5711: $C6 $18
     ld   [hl], a                                  ; $5713: $77
-    ld   a, $08                                   ; $5714: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $5714: $3E $08
     ldh  [hJingle], a                             ; $5716: $E0 $F2
     jp   IncrementEntityState                     ; $5718: $C3 $12 $3B
 
@@ -3648,7 +3648,7 @@ jr_018_5B33:
 
 jr_018_5B3B:
     ld   hl, hJingle                              ; $5B3B: $21 $F2 $FF
-    ld   [hl], $0B                                ; $5B3E: $36 $0B
+    ld   [hl], JINGLE_HUGE_BUMP                   ; $5B3E: $36 $0B
     ld   hl, hWaveSfx                             ; $5B40: $21 $F3 $FF
     ld   [hl], $03                                ; $5B43: $36 $03
     ld   hl, $C157                                ; $5B45: $21 $57 $C1
@@ -4005,7 +4005,7 @@ jr_018_5D5E:
     ldh  [hScratch1], a                           ; $5D60: $E0 $D8
     ldh  a, [hActiveEntityPosX]                   ; $5D62: $F0 $EE
     ldh  [hScratch0], a                           ; $5D64: $E0 $D7
-    ld   a, $0E                                   ; $5D66: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $5D66: $3E $0E
     ldh  [hJingle], a                             ; $5D68: $E0 $F2
     ld   a, TRANSCIENT_VFX_PEGASUS_SPLASH         ; $5D6A: $3E $0C
     jp   AddTranscientVfx                         ; $5D6C: $C3 $C7 $0C
@@ -4013,10 +4013,10 @@ jr_018_5D5E:
 jr_018_5D6F:
     ld   a, e                                     ; $5D6F: $7B
     cp   $08                                      ; $5D70: $FE $08
-    ld   a, $08                                   ; $5D72: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $5D72: $3E $08
     jr   nc, jr_018_5D78                          ; $5D74: $30 $02
 
-    ld   a, $24                                   ; $5D76: $3E $24
+    ld   a, JINGLE_JUMP                           ; $5D76: $3E $24
 
 jr_018_5D78:
     ldh  [hJingle], a                             ; $5D78: $E0 $F2
@@ -4803,7 +4803,7 @@ MazeSignpostEntityHandler::
     ; maze solved
     xor  a                                        ; $62CF: $AF
     ld   [wMazeSignpostGoal], a                   ; $62D0: $EA $72 $D4
-    ld   a, $02                                   ; $62D3: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $62D3: $3E $02
     ldh  [hJingle], a                             ; $62D5: $E0 $F2
     push de                                       ; $62D7: $D5
     call RevealMamuCave                           ; $62D8: $CD $F5 $62
@@ -4819,7 +4819,7 @@ MazeSignpostEntityHandler::
     xor  a                                        ; $62E4: $AF
     ld   [wMazeSignpostGoal], a                   ; $62E5: $EA $72 $D4
     ld   [wMazeSignpostPos], a                    ; $62E8: $EA $73 $D4
-    ld   a, $1D                                   ; $62EB: $3E $1D
+    ld   a, JINGLE_WRONG_ANSWER                   ; $62EB: $3E $1D
     ldh  [hJingle], a                             ; $62ED: $E0 $F2
     call_open_dialog $1AD                         ; "try again from the start"
 
@@ -5136,7 +5136,7 @@ jr_018_64EA:
     jr   nz, jr_018_64FC                          ; $64F5: $20 $05
 
     ld   hl, hJingle                              ; $64F7: $21 $F2 $FF
-    ld   [hl], $33                                ; $64FA: $36 $33
+    ld   [hl], JINGLE_BLAINO_PUNCH                ; $64FA: $36 $33
 
 jr_018_64FC:
     and  a                                        ; $64FC: $A7
@@ -6837,7 +6837,7 @@ jr_018_70A4:
     call SpawnNewEntity_trampoline                ; $70B3: $CD $86 $3B
     jr   c, label_018_70FD                        ; $70B6: $38 $45
 
-    ld   a, $31                                   ; $70B8: $3E $31
+    ld   a, JINGLE_GRIM_CREEPER                   ; $70B8: $3E $31
     ldh  [hJingle], a                             ; $70BA: $E0 $F2
     ld   hl, wEntitiesUnknowTableY                ; $70BC: $21 $D0 $C3
     add  hl, bc                                   ; $70BF: $09
@@ -7119,7 +7119,7 @@ func_018_72A5::
     ld   hl, wEntitiesSpeedZTable                 ; $72B8: $21 $20 $C3
     add  hl, bc                                   ; $72BB: $09
     ld   [hl], $F4                                ; $72BC: $36 $F4
-    ld   a, $31                                   ; $72BE: $3E $31
+    ld   a, JINGLE_GRIM_CREEPER                   ; $72BE: $3E $31
     ldh  [hJingle], a                             ; $72C0: $E0 $F2
     call IncrementEntityState                     ; $72C2: $CD $12 $3B
 
@@ -7238,7 +7238,7 @@ jr_018_7363:
 
     ld   hl, wOverworldRoomStatus + $10                                ; $7374: $21 $10 $D8
     set  5, [hl]                                  ; $7377: $CB $EE
-    ld   a, $02                                   ; $7379: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $7379: $3E $02
     ldh  [hJingle], a                             ; $737B: $E0 $F2
 
 jr_018_737D:
@@ -7983,7 +7983,7 @@ label_018_78A6:
     ld   a, $10                                   ; $78E7: $3E $10
     call ApplyVectorTowardsLink_trampoline        ; $78E9: $CD $AA $3B
     pop  bc                                       ; $78EC: $C1
-    ld   a, $08                                   ; $78ED: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $78ED: $3E $08
     ldh  [hJingle], a                             ; $78EF: $E0 $F2
 
 jr_018_78F1:
@@ -8125,7 +8125,7 @@ jr_018_79B3:
     ldh  [hScratch1], a                           ; $79C2: $E0 $D8
     ld   a, TRANSCIENT_VFX_POOF                   ; $79C4: $3E $02
     call AddTranscientVfx                         ; $79C6: $CD $C7 $0C
-    ld   a, $2F                                   ; $79C9: $3E $2F
+    ld   a, JINGLE_POOF                           ; $79C9: $3E $2F
     ldh  [hJingle], a                             ; $79CB: $E0 $F2
     jr   label_018_7A48                           ; $79CD: $18 $79
 

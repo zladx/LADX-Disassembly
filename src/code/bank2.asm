@@ -2068,7 +2068,7 @@ jr_002_4F6A:
 
 label_002_4F6D:
     ldh  a, [hJoypadState]                        ; $4F6D: $F0 $CC
-    and  $20                                      ; $4F6F: $E6 $20
+    and  J_B                                      ; $4F6F: $E6 $20
     jr   z, jr_002_4F86                           ; $4F71: $28 $13
 
     ldh  a, [hFF9C]                               ; $4F73: $F0 $9C
@@ -2093,10 +2093,10 @@ jr_002_4F86:
 
 jr_002_4F92:
     ldh  a, [hJoypadState]                        ; $4F92: $F0 $CC
-    and  $10                                      ; $4F94: $E6 $10
+    and  J_A                                      ; $4F94: $E6 $10
     jr   z, jr_002_4FA1                           ; $4F96: $28 $09
 
-    ld   a, $0F                                   ; $4F98: $3E $0F
+    ld   a, JINGLE_WATER_SWIM                     ; $4F98: $3E $0F
     ldh  [hJingle], a                             ; $4F9A: $E0 $F2
     ld   a, $20                                   ; $4F9C: $3E $20
     ld   [$C183], a                               ; $4F9E: $EA $83 $C1

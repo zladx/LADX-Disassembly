@@ -192,7 +192,7 @@ jr_004_4118:
     ld   hl, wEntitiesTransitionCountdownTable           ; $413A: $21 $E0 $C2
     add  hl, de                                   ; $413D: $19
     ld   [hl], $47                                ; $413E: $36 $47
-    ld   a, JINGlE_ENNEMY_MORPH_IN                ; $4140: $3E $06
+    ld   a, JINGLE_ENEMY_MORPH_IN                 ; $4140: $3E $06
     ldh  [hJingle], a                             ; $4142: $E0 $F2
 
 label_004_4144:
@@ -811,7 +811,7 @@ func_004_44E9::
     ld   hl, wEntitiesTransitionCountdownTable           ; $450C: $21 $E0 $C2
     add  hl, de                                   ; $450F: $19
     ld   [hl], $C7                                ; $4510: $36 $C7
-    ld   a, JINGLE_ENNEMY_MORPH_OUT               ; $4512: $3E $1F
+    ld   a, JINGLE_ENEMY_MORPH_OUT                ; $4512: $3E $1F
     ldh  [hJingle], a                             ; $4514: $E0 $F2
 
 jr_004_4516:

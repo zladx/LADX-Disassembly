@@ -1204,7 +1204,7 @@ func_036_471E::
 
 func_036_4730::
     call func_036_4365                            ; $4730: $CD $65 $43
-    ld   a, $01                                   ; $4733: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $4733: $3E $01
     ldh  [hJingle], a                             ; $4735: $E0 $F2
     call func_036_471E                            ; $4737: $CD $1E $47
     call GetEntityTransitionCountdown             ; $473A: $CD $05 $0C
@@ -2832,7 +2832,7 @@ func_036_5159::
     and  a                                        ; $5160: $A7
     ret  nz                                       ; $5161: $C0
 
-    ld   a, $01                                   ; $5162: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $5162: $3E $01
     ldh  [hJingle], a                             ; $5164: $E0 $F2
     ldh  a, [hLinkPositionX]                      ; $5166: $F0 $98
     ld   a, $B9                                   ; $5168: $3E $B9
@@ -4478,7 +4478,7 @@ jr_036_5B73:
     ld   a, [hl]                                  ; $5BDF: $7E
     call func_036_6BF8                            ; $5BE0: $CD $F8 $6B
     ld   [hl], a                                  ; $5BE3: $77
-    ld   a, $20                                   ; $5BE4: $3E $20
+    ld   a, JINGLE_BIG_BUMP                       ; $5BE4: $3E $20
     ldh  [hJingle], a                             ; $5BE6: $E0 $F2
 
 label_036_5BE8:
@@ -5187,7 +5187,7 @@ jr_036_6014:
     ld   [hl], e                                  ; $6017: $73
     call func_036_6BF8                            ; $6018: $CD $F8 $6B
     ld   [hl], $14                                ; $601B: $36 $14
-    ld   a, $0D                                   ; $601D: $3E $0D
+    ld   a, JINGLE_FEATHER_JUMP                   ; $601D: $3E $0D
     ldh  [hJingle], a                             ; $601F: $E0 $F2
 
 func_036_6021::
@@ -6665,7 +6665,7 @@ ColorShellState8Handler::
     jr   jr_036_68EB                              ; $68C1: $18 $28
 
 jr_036_68C3:
-    ld   a, $1D                                   ; $68C3: $3E $1D
+    ld   a, JINGLE_WRONG_ANSWER                   ; $68C3: $3E $1D
     ldh  [hJingle], a                             ; $68C5: $E0 $F2
     ld   e, $10                                   ; $68C7: $1E $10
     call func_036_6C23                            ; $68C9: $CD $23 $6C
@@ -7656,7 +7656,7 @@ jr_036_6E3F:
 
 jr_036_6EA0:
     inc  [hl]                                     ; $6EA0: $34
-    ld   a, $13                                   ; $6EA1: $3E $13
+    ld   a, JINGLE_VALIDATE                       ; $6EA1: $3E $13
     ldh  [hJingle], a                             ; $6EA3: $E0 $F2
     ld   a, $8A                                   ; $6EA5: $3E $8A
     call SpawnNewEntity_trampoline                ; $6EA7: $CD $86 $3B

@@ -270,7 +270,7 @@ CrazyTracySellingHandler::
     ld   [hl], $04                                ; $6001: $36 $04
     call GetEntityTransitionCountdown             ; $6003: $CD $05 $0C
     ld   [hl], $20                                ; $6006: $36 $20
-    ld   a, $01                                   ; $6008: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $6008: $3E $01
     ldh  [hJingle], a                             ; $600A: $E0 $F2
     ret                                           ; $600C: $C9
 

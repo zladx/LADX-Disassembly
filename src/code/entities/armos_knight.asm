@@ -286,7 +286,7 @@ ArmosKnightState3Handler::
     add  hl, bc                                   ; $5491: $09
     ld   [hl], $30                                ; $5492: $36 $30
     call IncrementEntityState                     ; $5494: $CD $12 $3B
-    ld   a, $24                                   ; $5497: $3E $24
+    ld   a, JINGLE_JUMP                           ; $5497: $3E $24
     ldh  [hJingle], a                             ; $5499: $E0 $F2
     ret                                           ; $549B: $C9
 
@@ -309,7 +309,7 @@ jr_006_549C:
 
 jr_006_54B4:
     call ApplyVectorTowardsLink_trampoline        ; $54B4: $CD $AA $3B
-    ld   a, $20                                   ; $54B7: $3E $20
+    ld   a, JINGLE_BIG_BUMP                       ; $54B7: $3E $20
     ldh  [hJingle], a                             ; $54B9: $E0 $F2
 
 jr_006_54BB:
@@ -356,7 +356,7 @@ ArmosKnightState6Handler::
     ld   [$C157], a                               ; $54F6: $EA $57 $C1
     ld   a, $04                                   ; $54F9: $3E $04
     ld   [$C158], a                               ; $54FB: $EA $58 $C1
-    ld   a, $0B                                   ; $54FE: $3E $0B
+    ld   a, JINGLE_HUGE_BUMP                      ; $54FE: $3E $0B
     ldh  [hJingle], a                             ; $5500: $E0 $F2
     call GetEntityTransitionCountdown             ; $5502: $CD $05 $0C
     ld   [hl], $30                                ; $5505: $36 $30

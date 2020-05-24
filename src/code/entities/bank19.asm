@@ -423,7 +423,7 @@ WarpState2Handler::
     ld   [$C1C6], a                               ; $42D4: $EA $C6 $C1
     call GetEntityTransitionCountdown             ; $42D7: $CD $05 $0C
     ld   [hl], $50                                ; $42DA: $36 $50
-    ld   a, $1C                                   ; $42DC: $3E $1C
+    ld   a, JINGLE_MIDBOSS_WARP                   ; $42DC: $3E $1C
     ldh  [hJingle], a                             ; $42DE: $E0 $F2
 
 label_019_42E0:
@@ -704,7 +704,7 @@ SwordBeamEntityHandler::
     ld   hl, wEntitiesFlashCountdownTable         ; $4555: $21 $20 $C4
     add  hl, bc                                   ; $4558: $09
     ld   [hl], $FF                                ; $4559: $36 $FF
-    ld   a, $3B                                   ; $455B: $3E $3B
+    ld   a, JINGLE_SWORD_BEAM                     ; $455B: $3E $3B
     ldh  [hJingle], a                             ; $455D: $E0 $F2
     jp   IncrementEntityState                     ; $455F: $C3 $12 $3B
 
@@ -1798,7 +1798,7 @@ jr_019_4C88:
     ld   [hl+], a                                 ; $4CC1: $22
     ld   [hl], b                                  ; $4CC2: $70
     call label_27F2                               ; $4CC3: $CD $F2 $27
-    ld   a, $23                                   ; $4CC6: $3E $23
+    ld   a, JINGLE_DUNGEON_OPENED                 ; $4CC6: $3E $23
     ldh  [hJingle], a                             ; $4CC8: $E0 $F2
     call func_019_4D45                            ; $4CCA: $CD $45 $4D
     call PlayBombExplosionSfx                     ; $4CCD: $CD $4B $0C
@@ -2738,7 +2738,7 @@ jr_019_531E:
     ld   a, $13                                   ; $5355: $3E $13
     ld   [hl+], a                                 ; $5357: $22
     ld   [hl], b                                  ; $5358: $70
-    ld   a, $23                                   ; $5359: $3E $23
+    ld   a, JINGLE_DUNGEON_OPENED                 ; $5359: $3E $23
     ldh  [hJingle], a                             ; $535B: $E0 $F2
     call func_019_7F0E                            ; $535D: $CD $0E $7F
     jp   ClearEntityStatus_19                            ; $5360: $C3 $61 $7E
@@ -3095,7 +3095,7 @@ jr_019_55CA:
     ld   [hl], $20                                ; $55CF: $36 $20
     ld   a, $01                                   ; $55D1: $3E $01
     call SetEntitySpriteVariant                   ; $55D3: $CD $0C $3B
-    ld   a, $0B                                   ; $55D6: $3E $0B
+    ld   a, JINGLE_HUGE_BUMP                      ; $55D6: $3E $0B
     ldh  [hJingle], a                             ; $55D8: $E0 $F2
     jp   IncrementEntityState                     ; $55DA: $C3 $12 $3B
 
@@ -3106,7 +3106,7 @@ ThwompRammableState1Handler::
     jr   nz, jr_019_55EC                          ; $55E5: $20 $05
 
     ld   hl, hJingle                              ; $55E7: $21 $F2 $FF
-    ld   [hl], $08                                ; $55EA: $36 $08
+    ld   [hl], JINGLE_JUMP_DOWN                   ; $55EA: $36 $08
 
 jr_019_55EC:
     and  a                                        ; $55EC: $A7
@@ -3280,7 +3280,7 @@ ThwimpState2Handler::
     jr   nz, jr_019_5721                          ; $571A: $20 $05
 
     ld   hl, hJingle                              ; $571C: $21 $F2 $FF
-    ld   [hl], $08                                ; $571F: $36 $08
+    ld   [hl], JINGLE_JUMP_DOWN                   ; $571F: $36 $08
 
 jr_019_5721:
     and  a                                        ; $5721: $A7
@@ -3304,7 +3304,7 @@ jr_019_5732:
     and  a                                        ; $573A: $A7
     ret  z                                        ; $573B: $C8
 
-    ld   a, $09                                   ; $573C: $3E $09
+    ld   a, JINGLE_BUMP                           ; $573C: $3E $09
     ldh  [hJingle], a                             ; $573E: $E0 $F2
     call GetEntityTransitionCountdown             ; $5740: $CD $05 $0C
     ld   [hl], $30                                ; $5743: $36 $30
@@ -3395,7 +3395,7 @@ jr_019_57FB:
     jr   nc, jr_019_581D                          ; $580C: $30 $0F
 
     call ClearEntitySpeed                         ; $580E: $CD $7F $3D
-    ld   a, $08                                   ; $5811: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $5811: $3E $08
     ldh  [hJingle], a                             ; $5813: $E0 $F2
     ld   a, $00                                   ; $5815: $3E $00
     call SetEntitySpriteVariant                   ; $5817: $CD $0C $3B
@@ -4140,7 +4140,7 @@ func_019_5D7D::
 
     ld   a, $01                                   ; $5D82: $3E $01
     ldh  [hFF9C], a                               ; $5D84: $E0 $9C
-    ld   a, $25                                   ; $5D86: $3E $25
+    ld   a, JINGLE_OVERWORLD_WARP                 ; $5D86: $3E $25
     ldh  [hJingle], a                             ; $5D88: $E0 $F2
 
 jr_019_5D8A:
@@ -4408,7 +4408,7 @@ GhostState1Handler::
     pop  af                                       ; $5F1B: $F1
     ldh  [hLinkPositionY], a                      ; $5F1C: $E0 $99
     call_open_dialog $216                         ; $5F1E
-    ld   a, $2D                                   ; $5F23: $3E $2D
+    ld   a, JINGLE_GHOST_PRESENCE                 ; $5F23: $3E $2D
     ldh  [hJingle], a                             ; $5F25: $E0 $F2
     call IncrementEntityState                     ; $5F27: $CD $12 $3B
     ld   hl, wEntitiesPrivateState2Table          ; $5F2A: $21 $C0 $C2
@@ -4761,7 +4761,7 @@ EaglesTowerOpeningState1Handler::
 
     ld   [wScreenShakeHorizontal], a              ; $6223: $EA $55 $C1
     call SetEntitySpriteVariant                   ; $6226: $CD $0C $3B
-    ld   a, $2E                                   ; $6229: $3E $2E
+    ld   a, JINGLE_EAGLE_TOWER_OPEN               ; $6229: $3E $2E
     ldh  [hJingle], a                             ; $622B: $E0 $F2
     jp   IncrementEntityState                     ; $622D: $C3 $12 $3B
 
@@ -4884,7 +4884,7 @@ EaglesTowerOpeningState6Handler::
     xor  a                                        ; $62BF: $AF
     ld   [wScreenShakeHorizontal], a              ; $62C0: $EA $55 $C1
     ld   [wC167], a                               ; $62C3: $EA $67 $C1
-    ld   a, $02                                   ; $62C6: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $62C6: $3E $02
     ldh  [hJingle], a                             ; $62C8: $E0 $F2
     ld   hl, $D736                                ; $62CA: $21 $36 $D7
     ld   a, $E1                                   ; $62CD: $3E $E1
@@ -5281,7 +5281,7 @@ jr_019_6877:
     and  a                                        ; $6877: $A7
     jr   nz, jr_019_6881                          ; $6878: $20 $07
 
-    ld   a, $2F                                   ; $687A: $3E $2F
+    ld   a, JINGLE_POOF                           ; $687A: $3E $2F
     ldh  [hJingle], a                             ; $687C: $E0 $F2
     call IncrementEntityState                     ; $687E: $CD $12 $3B
 
@@ -5576,7 +5576,7 @@ jr_019_6961:
     xor  a                                        ; $6A2E: $AF
     ld   [wScreenShakeHorizontal], a              ; $6A2F: $EA $55 $C1
     ld   [wC167], a                               ; $6A32: $EA $67 $C1
-    ld   a, $02                                   ; $6A35: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $6A35: $3E $02
     ldh  [hJingle], a                             ; $6A37: $E0 $F2
     jp   ClearEntityStatus_19                            ; $6A39: $C3 $61 $7E
 
@@ -5915,7 +5915,7 @@ CheepCheepJumpingState2Handler::
     ldh  a, [hActiveEntityVisualPosY]             ; $6C45: $F0 $EC
     sub  $08                                      ; $6C47: $D6 $08
     call func_019_6CD3                            ; $6C49: $CD $D3 $6C
-    ld   a, $24                                   ; $6C4C: $3E $24
+    ld   a, JINGLE_JUMP                           ; $6C4C: $3E $24
     ldh  [hJingle], a                             ; $6C4E: $E0 $F2
     jp   IncrementEntityState                     ; $6C50: $C3 $12 $3B
 
@@ -6016,7 +6016,7 @@ func_019_6CD3::
     ldh  [hScratch0], a                           ; $6CD7: $E0 $D7
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $6CD9: $3E $01
     call AddTranscientVfx                         ; $6CDB: $CD $C7 $0C
-    ld   a, $0E                                   ; $6CDE: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $6CDE: $3E $0E
     ldh  [hJingle], a                             ; $6CE0: $E0 $F2
     ret                                           ; $6CE2: $C9
 
@@ -6152,7 +6152,7 @@ BananasSchuleState2Handler::
     ld   hl, wEntitiesPhysicsFlagsTable           ; $6DB1: $21 $40 $C3
     add  hl, de                                   ; $6DB4: $19
     ld   [hl], $C2                                ; $6DB5: $36 $C2
-    ld   a, $24                                   ; $6DB7: $3E $24
+    ld   a, JINGLE_JUMP                           ; $6DB7: $3E $24
     ldh  [hJingle], a                             ; $6DB9: $E0 $F2
     ldh  a, [hIsGBC]                              ; $6DBB: $F0 $FE
     and  a                                        ; $6DBD: $A7
@@ -6790,7 +6790,7 @@ jr_019_72C9:
 
     call IncrementEntityState                     ; $72D4: $CD $12 $3B
     ld   [hl], $06                                ; $72D7: $36 $06
-    ld   a, $23                                   ; $72D9: $3E $23
+    ld   a, JINGLE_DUNGEON_OPENED                 ; $72D9: $3E $23
     ldh  [hJingle], a                             ; $72DB: $E0 $F2
     jp   label_019_72BF                           ; $72DD: $C3 $BF $72
 
@@ -6803,12 +6803,12 @@ jr_019_72E0:
 
     call IncrementEntityState                     ; $72E8: $CD $12 $3B
     ld   [hl], $06                                ; $72EB: $36 $06
-    ld   a, $23                                   ; $72ED: $3E $23
+    ld   a, JINGLE_DUNGEON_OPENED                 ; $72ED: $3E $23
     ldh  [hJingle], a                             ; $72EF: $E0 $F2
     jp   label_019_72BF                           ; $72F1: $C3 $BF $72
 
 jr_019_72F4:
-    ld   a, $1D                                   ; $72F4: $3E $1D
+    ld   a, JINGLE_WRONG_ANSWER                   ; $72F4: $3E $1D
     ldh  [hJingle], a                             ; $72F6: $E0 $F2
     call IncrementEntityState                     ; $72F8: $CD $12 $3B
     ld   [hl], $05                                ; $72FB: $36 $05
@@ -6827,7 +6827,7 @@ SeashellMansionState4Handler::
     jr   nz, jr_019_731A                          ; $7313: $20 $05
 
     ld   hl, hJingle                              ; $7315: $21 $F2 $FF
-    ld   [hl], $23                                ; $7318: $36 $23
+    ld   [hl], JINGLE_DUNGEON_OPENED              ; $7318: $36 $23
 
 jr_019_731A:
     and  a                                        ; $731A: $A7

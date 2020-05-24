@@ -451,7 +451,7 @@ jr_004_4F49:
     cp   $F2                                      ; $4F4F: $FE $F2
     jr   nc, jr_004_4F57                          ; $4F51: $30 $04
 
-    ld   a, $20                                   ; $4F53: $3E $20
+    ld   a, JINGLE_BIG_BUMP                       ; $4F53: $3E $20
     ldh  [hJingle], a                             ; $4F55: $E0 $F2
 
 jr_004_4F57:
@@ -502,7 +502,7 @@ func_004_4F7E::
     ld   hl, wEntitiesPosYTable                   ; $4FA4: $21 $10 $C2
     add  hl, bc                                   ; $4FA7: $09
     ld   [hl], a                                  ; $4FA8: $77
-    ld   a, $08                                   ; $4FA9: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $4FA9: $3E $08
     ldh  [hJingle], a                             ; $4FAB: $E0 $F2
 
 jr_004_4FAD:
@@ -1102,7 +1102,7 @@ FacadeState1Handler:
     jr   nz, jr_004_547E                          ; $5477: $20 $05
 
     ld   hl, hJingle                              ; $5479: $21 $F2 $FF
-    ld   [hl], $40                                ; $547C: $36 $40
+    ld   [hl], JINGLE_FACADE_HOLE                 ; $547C: $36 $40
 
 jr_004_547E:
     rra                                           ; $547E: $1F
@@ -1214,7 +1214,7 @@ jr_004_551C:
     and  $07                                      ; $5539: $E6 $07
     jr   nz, jr_004_5541                          ; $553B: $20 $04
 
-    ld   a, $3F                                   ; $553D: $3E $3F
+    ld   a, JINGLE_FLYING_TILE                    ; $553D: $3E $3F
     ldh  [hJingle], a                             ; $553F: $E0 $F2
 
 jr_004_5541:
@@ -2517,7 +2517,7 @@ PairoddState0Handler::
     call GetEntityTransitionCountdown                 ; $5E66: $CD $05 $0C
     ld   [hl], $20                                ; $5E69: $36 $20
     call IncrementEntityState                     ; $5E6B: $CD $12 $3B
-    ld   a, JINGLE_ENNEMY_SHRIEK                  ; $5E6E: $3E $3C
+    ld   a, JINGLE_ENEMY_SHRIEK                   ; $5E6E: $3E $3C
     ldh  [hJingle], a                             ; $5E70: $E0 $F2
 
 .return

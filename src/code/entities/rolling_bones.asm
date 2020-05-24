@@ -133,7 +133,7 @@ jr_006_6D0D:
     cp   $F2                                      ; $6D2A: $FE $F2
     jr   nc, jr_006_6D32                          ; $6D2C: $30 $04
 
-    ld   a, $20                                   ; $6D2E: $3E $20
+    ld   a, JINGLE_BIG_BUMP                       ; $6D2E: $3E $20
     ldh  [hJingle], a                             ; $6D30: $E0 $F2
 
 jr_006_6D32:

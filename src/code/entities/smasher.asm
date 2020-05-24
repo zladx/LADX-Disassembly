@@ -301,7 +301,7 @@ SmasherState3Handler::
     ld   hl, wEntitiesSpeedZTable                 ; $46EE: $21 $20 $C3
     add  hl, bc                                   ; $46F1: $09
     ld   [hl], $20                                ; $46F2: $36 $20
-    ld   a, $08                                   ; $46F4: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $46F4: $3E $08
     ldh  [hJingle], a                             ; $46F6: $E0 $F2
     jp   IncrementEntityState                     ; $46F8: $C3 $12 $3B
 
@@ -396,7 +396,7 @@ label_006_4781:
     jr   jr_006_47C9                              ; $47C3: $18 $04
 
 jr_006_47C5:
-    ld   a, $09                                   ; $47C5: $3E $09
+    ld   a, JINGLE_BUMP                           ; $47C5: $3E $09
     ldh  [hJingle], a                             ; $47C7: $E0 $F2
 
 jr_006_47C9:

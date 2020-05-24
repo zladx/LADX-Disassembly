@@ -835,7 +835,7 @@ func_007_4537::
     call ApplyVectorTowardsLink_trampoline        ; $4572: $CD $AA $3B
     pop  bc                                       ; $4575: $C1
     call func_007_48FD                            ; $4576: $CD $FD $48
-    ld   a, $08                                   ; $4579: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $4579: $3E $08
     ldh  [hJingle], a                             ; $457B: $E0 $F2
     ld   a, $0C                                   ; $457D: $3E $0C
     ld   [wTradeSequenceItem], a                  ; $457F: $EA $0E $DB
@@ -1232,7 +1232,7 @@ jr_007_4820:
     ldh  [hScratch1], a                           ; $4828: $E0 $D8
     ldh  a, [hLinkPositionX]                      ; $482A: $F0 $98
     ldh  [hScratch0], a                           ; $482C: $E0 $D7
-    ld   a, $0E                                   ; $482E: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $482E: $3E $0E
     ldh  [hJingle], a                             ; $4830: $E0 $F2
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $4832: $3E $01
     call AddTranscientVfx                         ; $4834: $CD $C7 $0C
@@ -1376,7 +1376,7 @@ func_007_48FD::
     ldh  [hScratch0], a                           ; $4903: $E0 $D7
     ld   a, TRANSCIENT_VFX_WATER_SPLASH           ; $4905: $3E $01
     call AddTranscientVfx                         ; $4907: $CD $C7 $0C
-    ld   a, $0E                                   ; $490A: $3E $0E
+    ld   a, JINGLE_WATER_DIVE                     ; $490A: $3E $0E
     ldh  [hJingle], a                             ; $490C: $E0 $F2
     ret                                           ; $490E: $C9
 
@@ -2107,7 +2107,7 @@ Data_007_4E0D::
     db   $20, $28, $F0, $E8, $E8, $E0, $E0, $D8
 
 func_007_4E25::
-    ld   a, $22                                   ; $4E25: $3E $22
+    ld   a, JINGLE_HONEYCOMB                      ; $4E25: $3E $22
     ldh  [hJingle], a                             ; $4E27: $E0 $F2
     ld   a, [$D204]                               ; $4E29: $FA $04 $D2
     ld   e, a                                     ; $4E2C: $5F
@@ -2268,7 +2268,7 @@ func_007_4F1F::
     set  6, [hl]                                  ; $4F36: $CB $F6
     call GetEntityTransitionCountdown             ; $4F38: $CD $05 $0C
     ld   [hl], $A0                                ; $4F3B: $36 $A0
-    ld   a, $01                                   ; $4F3D: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $4F3D: $3E $01
     ldh  [hJingle], a                             ; $4F3F: $E0 $F2
     jp   IncrementEntityState                     ; $4F41: $C3 $12 $3B
 
@@ -2637,7 +2637,7 @@ Data_007_5178::
 func_007_517C::
     ld   a, $01                                   ; $517C: $3E $01
     ldh  [hLinkInteractiveMotionBlocked], a       ; $517E: $E0 $A1
-    ld   a, $3E                                   ; $5180: $3E $3E
+    ld   a, JINGLE_URCHIN_PUSH                    ; $5180: $3E $3E
     ldh  [hJingle], a                             ; $5182: $E0 $F2
     ldh  a, [hJoypadState]                        ; $5184: $F0 $CC
     and  $0F                                      ; $5186: $E6 $0F
@@ -2789,7 +2789,7 @@ jr_007_51F2:
     ldh  [hScratch0], a                           ; $5261: $E0 $D7
     ldh  a, [hActiveEntityVisualPosY]             ; $5263: $F0 $EC
     ldh  [hScratch1], a                           ; $5265: $E0 $D8
-    ld   a, $2F                                   ; $5267: $3E $2F
+    ld   a, JINGLE_POOF                           ; $5267: $3E $2F
     ldh  [hJingle], a                             ; $5269: $E0 $F2
     ld   a, TRANSCIENT_VFX_POOF                   ; $526B: $3E $02
     call AddTranscientVfx                         ; $526D: $CD $C7 $0C
@@ -3815,7 +3815,7 @@ func_007_5934::
     ld   hl, wEntitiesUnknowTableV                ; $593B: $21 $80 $C4
     add  hl, bc                                   ; $593E: $09
     ld   [hl], $80                                ; $593F: $36 $80
-    ld   a, $01                                   ; $5941: $3E $01
+    ld   a, JINGLE_TREASURE_FOUND                 ; $5941: $3E $01
     ldh  [hJingle], a                             ; $5943: $E0 $F2
     call IncrementEntityState                     ; $5945: $CD $12 $3B
 
@@ -3876,7 +3876,7 @@ func_007_5997::
 jr_007_59A1:
     jr   nz, jr_007_59C8                          ; $59A1: $20 $25
 
-    ld   a, $02                                   ; $59A3: $3E $02
+    ld   a, JINGLE_PUZZLE_SOLVED                  ; $59A3: $3E $02
     ldh  [hJingle], a                             ; $59A5: $E0 $F2
     ld   a, [wOverworldRoomStatus + $7B]                               ; $59A7: $FA $7B $D8
     or   $10                                      ; $59AA: $F6 $10
@@ -5066,7 +5066,7 @@ func_007_6135::
     jr   z, jr_007_6164                           ; $6140: $28 $22
 
 func_007_6142::
-    ld   a, $07                                   ; $6142: $3E $07
+    ld   a, JINGLE_SWORD_POKING                   ; $6142: $3E $07
     ldh  [hJingle], a                             ; $6144: $E0 $F2
     ld   hl, wEntitiesSpeedXTable                 ; $6146: $21 $40 $C2
     add  hl, bc                                   ; $6149: $09
@@ -5146,7 +5146,7 @@ func_007_618F::
     call func_007_6142                            ; $61AE: $CD $42 $61
     ld   a, $25                                   ; $61B1: $3E $25
     ldh  [hNoiseSfx], a                           ; $61B3: $E0 $F4
-    ld   a, $0B                                   ; $61B5: $3E $0B
+    ld   a, JINGLE_HUGE_BUMP                      ; $61B5: $3E $0B
     ldh  [hJingle], a                             ; $61B7: $E0 $F2
     call GetEntityTransitionCountdown             ; $61B9: $CD $05 $0C
     ld   [hl], $10                                ; $61BC: $36 $10
@@ -6637,7 +6637,7 @@ func_007_6AF5::
     cp   $01                                      ; $6AFA: $FE $01
     jr   nz, jr_007_6B02                          ; $6AFC: $20 $04
 
-    ld   a, $08                                   ; $6AFE: $3E $08
+    ld   a, JINGLE_JUMP_DOWN                      ; $6AFE: $3E $08
     ldh  [hJingle], a                             ; $6B00: $E0 $F2
 
 jr_007_6B02:
@@ -7041,7 +7041,7 @@ func_007_6D7F::
     ld   hl, wEntitiesUnknowTableH                ; $6D92: $21 $30 $C4
     add  hl, bc                                   ; $6D95: $09
     set  6, [hl]                                  ; $6D96: $CB $F6
-    ld   a, $28                                   ; $6D98: $3E $28
+    ld   a, JINGLE_MASTER_STALFOS                 ; $6D98: $3E $28
     ldh  [hJingle], a                             ; $6D9A: $E0 $F2
 
 jr_007_6D9C:
@@ -7910,7 +7910,7 @@ func_007_7320::
     call IncrementEntityState                     ; $733C: $CD $12 $3B
 
 func_007_733F::
-    ld   a, $24                                   ; $733F: $3E $24
+    ld   a, JINGLE_JUMP                           ; $733F: $3E $24
     ldh  [hJingle], a                             ; $7341: $E0 $F2
     ret                                           ; $7343: $C9
 

@@ -508,7 +508,7 @@ jr_027_78BB:
     inc  [hl]                                     ; $78BE: $34
     ld   a, $01                                   ; $78BF: $3E $01
     ld   [$D017], a                               ; $78C1: $EA $17 $D0
-    ld   a, $1C                                   ; $78C4: $3E $1C
+    ld   a, JINGLE_MIDBOSS_WARP                   ; $78C4: $3E $1C
     ldh  [hJingle], a                             ; $78C6: $E0 $F2
     ld   a, $60                                   ; $78C8: $3E $60
     ld   [$D021], a                               ; $78CA: $EA $21 $D0
@@ -633,7 +633,7 @@ func_027_79F2::
     and  a                                        ; $79F5: $A7
     jr   nz, jr_027_7A06                          ; $79F6: $20 $0E
 
-    ld   a, $21                                   ; $79F8: $3E $21
+    ld   a, JINGLE_SEAGULL                        ; $79F8: $3E $21
     ldh  [hJingle], a                             ; $79FA: $E0 $F2
     call GetRandomByte                            ; $79FC: $CD $0D $28
     and  $7F                                      ; $79FF: $E6 $7F

@@ -590,7 +590,7 @@ jr_005_4380:
     and  a                                        ; $4385: $A7
     ret  nz                                       ; $4386: $C0
 
-    ld   a, $03                                   ; $4387: $3E $03
+    ld   a, JINGLE_BOW_WOW_CHOMP                  ; $4387: $3E $03
     ldh  [hJingle], a                             ; $4389: $E0 $F2
     ld   hl, wEntitiesTypeTable                   ; $438B: $21 $A0 $C3
     add  hl, de                                   ; $438E: $19

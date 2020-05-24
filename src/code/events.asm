@@ -222,8 +222,8 @@ jr_002_5E5A:
 jr_002_5E63:
     add  hl, de                                   ; $5E63: $19
     set  5, [hl]                                  ; $5E64: $CB $EE
-    ld   a, $1B                                   ; $5E66: $3E $1B
-    ldh  [hJingle], a                               ; $5E68: $E0 $F2
+    ld   a, JINGLE_CLEAR_MIDBOSS                  ; $5E66: $3E $1B
+    ldh  [hJingle], a                             ; $5E68: $E0 $F2
 
 jr_002_5E6A:
     ld   a, [$C190]                               ; $5E6A: $FA $90 $C1

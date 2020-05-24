@@ -1942,7 +1942,7 @@ CreditsLinkShowsInstrumentsHandler::
     jr   nz, jr_017_55F6                          ; $55EF: $20 $05
 
     ld   hl, hJingle                              ; $55F1: $21 $F2 $FF
-    ld   [hl], $34                                ; $55F4: $36 $34
+    ld   [hl], JINGLE_SHOW_INSTRUMENTS            ; $55F4: $36 $34
 
 jr_017_55F6:
     and  a                                        ; $55F6: $A7
@@ -6281,7 +6281,7 @@ jr_017_7CC8:
     cp   $DF                                      ; $7CCC: $FE $DF
     jr   nz, jr_017_7CD4                          ; $7CCE: $20 $04
 
-    ld   a, $26                                   ; $7CD0: $3E $26
+    ld   a, JINGLE_DISAPPEAR                      ; $7CD0: $3E $26
     ldh  [hJingle], a                             ; $7CD2: $E0 $F2
 
 jr_017_7CD4:

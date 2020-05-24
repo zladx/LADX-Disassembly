@@ -6,21 +6,21 @@ PlayActiveJingle::
     ld   hl, wActiveJingle                        ; $4204: $21 $60 $D3
     ld   a, [hl]                                  ; $4207: $7E
     and  a                                        ; $4208: $A7
-    jr   z, jr_01F_421C                           ; $4209: $28 $11
+    jr   z, .jr_01F_421C                          ; $4209: $28 $11
 
     cp   $01                                      ; $420B: $FE $01
-    jr   z, jr_01F_4216                           ; $420D: $28 $07
+    jr   z, .jr_01F_4216                          ; $420D: $28 $07
 
     ld   a, [$D3C6]                               ; $420F: $FA $C6 $D3
     and  a                                        ; $4212: $A7
     jp   nz, label_01F_53E6                       ; $4213: $C2 $E6 $53
 
-jr_01F_4216:
+.jr_01F_4216:
     ld   a, [hl]                                  ; $4216: $7E
     ld   hl, SfxPointersTable1                    ; $4217: $21 $00 $41
-    jr   jr_01F_4223                              ; $421A: $18 $07
+    jr   .jr_01F_4223                             ; $421A: $18 $07
 
-jr_01F_421C:
+.jr_01F_421C:
     inc  hl                                       ; $421C: $23
     ld   a, [hl]                                  ; $421D: $7E
     and  a                                        ; $421E: $A7
@@ -28,13 +28,13 @@ jr_01F_421C:
 
     ld   hl, SfxPointersTable2                    ; $4220: $21 $82 $41
 
-jr_01F_4223:
+.jr_01F_4223:
     call GetHandlerAddressInTable                 ; $4223: $CD $64 $7A
     ld   de, $D390                                ; $4226: $11 $90 $D3
     ld   bc, $D394                                ; $4229: $01 $94 $D3
     jp   hl                                       ; $422C: $E9
 
-func_01F_422D::
+BeginJingleTreasureFound::
     xor  a                                        ; $422D: $AF
     ld   [wActiveWaveSfx], a                      ; $422E: $EA $70 $D3
     ld   [$D371], a                               ; $4231: $EA $71 $D3
@@ -53,26 +53,26 @@ func_01F_422D::
     ld   hl, Data_01F_42D3                        ; $4254: $21 $D3 $42
     jp   label_01F_5395                           ; $4257: $C3 $95 $53
 
-func_01F_425A::
+ContinueJingleTreasureFound::
     call DecrementValueAtDE                       ; $425A: $CD $71 $7A
     ret  nz                                       ; $425D: $C0
 
     call IncrementValueAtBC                       ; $425E: $CD $75 $7A
     cp   $01                                      ; $4261: $FE $01
-    jr   z, jr_01F_4273                           ; $4263: $28 $0E
+    jr   z, .jr_01F_4273                          ; $4263: $28 $0E
 
     cp   $02                                      ; $4265: $FE $02
-    jr   z, jr_01F_4285                           ; $4267: $28 $1C
+    jr   z, .jr_01F_4285                          ; $4267: $28 $1C
 
     cp   $03                                      ; $4269: $FE $03
-    jr   z, jr_01F_4297                           ; $426B: $28 $2A
+    jr   z, .jr_01F_4297                          ; $426B: $28 $2A
 
     cp   $04                                      ; $426D: $FE $04
-    jr   z, jr_01F_42A9                           ; $426F: $28 $38
+    jr   z, .jr_01F_42A9                          ; $426F: $28 $38
 
-    jr   jr_01F_42BB                              ; $4271: $18 $48
+    jr   .jr_01F_42BB                             ; $4271: $18 $48
 
-jr_01F_4273:
+.jr_01F_4273:
     ld   hl, Data_01F_42D9                        ; $4273: $21 $D9 $42
     call WriteChannel1AndDE                       ; $4276: $CD $79 $7A
     ld   hl, Data_01F_42F0                        ; $4279: $21 $F0 $42
@@ -80,7 +80,7 @@ jr_01F_4273:
     ld   hl, Data_01F_4305                        ; $427F: $21 $05 $43
     jp   WriteChannel3AndDE                       ; $4282: $C3 $85 $7A
 
-jr_01F_4285:
+.jr_01F_4285:
     ld   hl, Data_01F_42DF                        ; $4285: $21 $DF $42
     call WriteChannel1AndDE                       ; $4288: $CD $79 $7A
     ld   hl, Data_01F_42F5                        ; $428B: $21 $F5 $42
@@ -88,7 +88,7 @@ jr_01F_4285:
     ld   hl, Data_01F_430B                        ; $4291: $21 $0B $43
     jp   WriteChannel3AndDE                       ; $4294: $C3 $85 $7A
 
-jr_01F_4297:
+.jr_01F_4297:
     ld   hl, Data_01F_42E5                        ; $4297: $21 $E5 $42
     call WriteChannel1AndDE                       ; $429A: $CD $79 $7A
     ld   hl, Data_01F_42FA                        ; $429D: $21 $FA $42
@@ -96,7 +96,7 @@ jr_01F_4297:
     ld   hl, Data_01F_4311                        ; $42A3: $21 $11 $43
     jp   WriteChannel3AndDE                       ; $42A6: $C3 $85 $7A
 
-jr_01F_42A9:
+.jr_01F_42A9:
     ld   hl, Data_01F_4317                        ; $42A9: $21 $17 $43
     call WriteChannel1AndDE                       ; $42AC: $CD $79 $7A
     ld   hl, Data_01F_431D                        ; $42AF: $21 $1D $43
@@ -104,7 +104,7 @@ jr_01F_42A9:
     ld   hl, Data_01F_4317                        ; $42B5: $21 $17 $43
     jp   WriteChannel3AndDE                       ; $42B8: $C3 $85 $7A
 
-jr_01F_42BB:
+.jr_01F_42BB:
     ld   hl, $D32F                                ; $42BB: $21 $2F $D3
     res  7, [hl]                                  ; $42BE: $CB $BE
     ld   hl, $D33F                                ; $42C0: $21 $3F $D3
@@ -158,11 +158,11 @@ Data_01F_4317::
 Data_01F_431D::
     db   $3F, $00, $00, $C1, $20
 
-func_01F_4322::
+BeginJinglePuzzleSolved::
     ld   hl, Data_01F_4353                        ; $4322: $21 $53 $43
     jp   label_01F_5395                           ; $4325: $C3 $95 $53
 
-func_01F_4328::
+ContinueJinglePuzzleSolved::
     call DecrementValueAtDE                       ; $4328: $CD $71 $7A
     ret  nz                                       ; $432B: $C0
 
@@ -211,16 +211,14 @@ Data_01F_4368::
 Data_01F_436B::
     db   $BE, $C7, $20
 
-func_01F_436E::
+BeginJingleBowWowChomp::
     ld   hl, Data_01F_439D                        ; $436E: $21 $9D $43
     call func_01F_7AB7                            ; $4371: $CD $B7 $7A
     jp   label_01F_539A                           ; $4374: $C3 $9A $53
 
-func_01F_4377::
+ContinueJingleBowWowChomp::
     call IncrementValueAtBC                       ; $4377: $CD $75 $7A
     cp   $0D                                      ; $437A: $FE $0D
-
-jr_01F_437C:
     jp   z, label_01F_53B5                        ; $437C: $CA $B5 $53
 
     ld   hl, Data_01F_4385                        ; $437F: $21 $85 $43
@@ -233,14 +231,14 @@ Data_01F_4385::
 Data_01F_439D::
     db   $00, $00, $C0, $80, $86, $01
 
-func_01F_43A3::
+BeginJingleChargingSword::
     ld   a, $0E                                   ; $43A3: $3E $0E
     ld   [$D3BC], a                               ; $43A5: $EA $BC $D3
     ld   hl, Data_01F_43DC                        ; $43A8: $21 $DC $43
     call func_01F_7AB7                            ; $43AB: $CD $B7 $7A
     jp   label_01F_539A                           ; $43AE: $C3 $9A $53
 
-func_01F_43B1::
+ContinueJingleChargingSword::
     call DecrementValueAtDE                       ; $43B1: $CD $71 $7A
     ret  nz                                       ; $43B4: $C0
 
@@ -252,19 +250,19 @@ func_01F_43B1::
     ld   [de], a                                  ; $43BF: $12
     call IncrementValueAtBC                       ; $43C0: $CD $75 $7A
     cp   $03                                      ; $43C3: $FE $03
-    jr   z, jr_01F_43CD                           ; $43C5: $28 $06
+    jr   z, .jr_01F_43CD                          ; $43C5: $28 $06
 
-jr_01F_43C7:
+.jr_01F_43C7:
     ld   hl, Data_01F_43D8                        ; $43C7: $21 $D8 $43
     jp   func_01F_7AE1                            ; $43CA: $C3 $E1 $7A
 
-jr_01F_43CD:
+.jr_01F_43CD:
     call func_01F_7A9A                            ; $43CD: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $43D0: $CA $BB $53
 
     ld   a, $01                                   ; $43D3: $3E $01
     ld   [bc], a                                  ; $43D5: $02
-    jr   jr_01F_43C7                              ; $43D6: $18 $EF
+    jr   .jr_01F_43C7                             ; $43D6: $18 $EF
 
 Data_01F_43D8::
     db   $00, $20, $FF, $F0
@@ -272,14 +270,14 @@ Data_01F_43D8::
 Data_01F_43DC::
     db   $00, $80, $87, $C0, $86, $02
 
-func_01F_43E2::
+BeginJinglePowder::
     ld   a, $04                                   ; $43E2: $3E $04
     ld   [$D3BC], a                               ; $43E4: $EA $BC $D3
     ld   hl, Data_01F_4417                        ; $43E7: $21 $17 $44
     call func_01F_7AB7                            ; $43EA: $CD $B7 $7A
     jp   label_01F_539A                           ; $43ED: $C3 $9A $53
 
-func_01F_43F0::
+ContinueJinglePowder::
     call DecrementValueAtDE                       ; $43F0: $CD $71 $7A
     ret  nz                                       ; $43F3: $C0
 
@@ -287,19 +285,19 @@ func_01F_43F0::
     ld   [de], a                                  ; $43F6: $12
     call IncrementValueAtBC                       ; $43F7: $CD $75 $7A
     cp   $05                                      ; $43FA: $FE $05
-    jr   z, jr_01F_4404                           ; $43FC: $28 $06
+    jr   z, .jr_01F_4404                          ; $43FC: $28 $06
 
-jr_01F_43FE:
+.jr_01F_43FE:
     ld   hl, Data_01F_440F                        ; $43FE: $21 $0F $44
     jp   func_01F_7AE1                            ; $4401: $C3 $E1 $7A
 
-jr_01F_4404:
+.jr_01F_4404:
     call func_01F_7A9A                            ; $4404: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $4407: $CA $BB $53
 
     ld   a, $01                                   ; $440A: $3E $01
     ld   [bc], a                                  ; $440C: $02
-    jr   jr_01F_43FE                              ; $440D: $18 $EF
+    jr   .jr_01F_43FE                             ; $440D: $18 $EF
 
 Data_01F_440F::
     db   $00, $06, $00, $04, $00, $02, $FF, $F4
@@ -307,29 +305,29 @@ Data_01F_440F::
 Data_01F_4417::
     db   $00, $00, $C5, $D8, $87, $04
 
-func_01F_441D::
+BeginJingleEnemyMorphIn::
     ld   a, $0A                                   ; $441D: $3E $0A
     ld   [$D3BC], a                               ; $441F: $EA $BC $D3
     ld   hl, Data_01F_4453                        ; $4422: $21 $53 $44
     call func_01F_7AB7                            ; $4425: $CD $B7 $7A
     jp   label_01F_5395                           ; $4428: $C3 $95 $53
 
-func_01F_442B::
+ContinueJingleEnemyMorphIn::
     call IncrementValueAtBC                       ; $442B: $CD $75 $7A
     cp   $09                                      ; $442E: $FE $09
-    jr   z, jr_01F_4438                           ; $4430: $28 $06
+    jr   z, .jr_01F_4438                          ; $4430: $28 $06
 
-jr_01F_4432:
+.jr_01F_4432:
     ld   hl, Data_01F_4443                        ; $4432: $21 $43 $44
     jp   func_01F_7AE1                            ; $4435: $C3 $E1 $7A
 
-jr_01F_4438:
+.jr_01F_4438:
     call func_01F_7A9A                            ; $4438: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $443B: $CA $B5 $53
 
     ld   a, $01                                   ; $443E: $3E $01
     ld   [bc], a                                  ; $4440: $02
-    jr   jr_01F_4432                              ; $4441: $18 $EF
+    jr   .jr_01F_4432                             ; $4441: $18 $EF
 
 Data_01F_4443::
     db   $00, $40, $00, $80, $00, $80, $00, $40, $FF, $D0, $FF, $A0, $FF, $A0, $FF, $D0
@@ -337,11 +335,11 @@ Data_01F_4443::
 Data_01F_4453::
     db   $00, $80, $1B, $00, $82, $01
 
-func_01F_4459::
+BeginJingleSwordPoking::
     ld   hl, Data_01F_4471                        ; $4459: $21 $71 $44
     jp   label_01F_539A                           ; $445C: $C3 $9A $53
 
-func_01F_445F::
+ContinueJingleSwordPoking::
     call DecrementValueAtDE                       ; $445F: $CD $71 $7A
     ret  nz                                       ; $4462: $C0
 
@@ -358,11 +356,11 @@ Data_01F_4471::
 Data_01F_4477::
     db   $00, $00, $81, $E0, $87, $08
 
-func_01F_447D::
+BeginJingleJumpDown::
     ld   hl, Data_01F_4495                        ; $447D: $21 $95 $44
     jp   label_01F_539A                           ; $4480: $C3 $9A $53
 
-func_01F_4483::
+ContinueJingleJumpDown::
     call DecrementValueAtDE                       ; $4483: $CD $71 $7A
     ret  nz                                       ; $4486: $C0
 
@@ -379,12 +377,12 @@ Data_01F_4495::
 Data_01F_449B::
     db   $1F, $9F, $81, $20, $87, $10
 
-func_01F_44A1::
+BeginJingleBump::
     ld   hl, Data_01F_44C8                        ; $44A1: $21 $C8 $44
     call func_01F_7AB7                            ; $44A4: $CD $B7 $7A
     jp   label_01F_539A                           ; $44A7: $C3 $9A $53
 
-func_01F_44AA::
+ContinueJingleBump::
     call IncrementValueAtBC                       ; $44AA: $CD $75 $7A
     cp   $09                                      ; $44AD: $FE $09
     jp   z, label_01F_53B5                        ; $44AF: $CA $B5 $53
@@ -398,25 +396,25 @@ Data_01F_44B8::
 Data_01F_44C8::
     db   $00, $9F, $A0, $00, $C2, $01
 
-func_01F_44CE::
+BeginJingleMoveSelection::
     ld   a, [$D361]                               ; $44CE: $FA $61 $D3
     cp   $13                                      ; $44D1: $FE $13
     jp   z, label_01F_53E6                        ; $44D3: $CA $E6 $53
 
     ldh  a, [rNR50]                               ; $44D6: $F0 $24
     cp   $77                                      ; $44D8: $FE $77
-    jr   nz, jr_01F_44E2                          ; $44DA: $20 $06
+    jr   nz, .jr_01F_44E2                         ; $44DA: $20 $06
 
     ld   hl, Data_01F_4509                        ; $44DC: $21 $09 $45
 
-jr_01F_44DF:
+.jr_01F_44DF:
     jp   label_01F_539A                           ; $44DF: $C3 $9A $53
 
-jr_01F_44E2:
+.jr_01F_44E2:
     ld   hl, Data_01F_450F                        ; $44E2: $21 $0F $45
-    jr   jr_01F_44DF                              ; $44E5: $18 $F8
+    jr   .jr_01F_44DF                             ; $44E5: $18 $F8
 
-func_01F_44E7::
+ContinueJingleMoveSelection::
     call DecrementValueAtDE                       ; $44E7: $CD $71 $7A
     ret  nz                                       ; $44EA: $C0
 
@@ -426,11 +424,11 @@ func_01F_44E7::
 
     ldh  a, [rNR50]                               ; $44F3: $F0 $24
     cp   $77                                      ; $44F5: $FE $77
-    jr   nz, jr_01F_4505                          ; $44F7: $20 $0C
+    jr   nz, .jr_01F_4505                         ; $44F7: $20 $0C
 
     ld   a, $10                                   ; $44F9: $3E $10
 
-jr_01F_44FB:
+.jr_01F_44FB:
     ldh  [rNR12], a                               ; $44FB: $E0 $12
     ld   a, $C7                                   ; $44FD: $3E $C7
     ldh  [rNR14], a                               ; $44FF: $E0 $14
@@ -438,9 +436,9 @@ jr_01F_44FB:
     ld   [de], a                                  ; $4503: $12
     ret                                           ; $4504: $C9
 
-jr_01F_4505:
+.jr_01F_4505:
     ld   a, $20                                   ; $4505: $3E $20
-    jr   jr_01F_44FB                              ; $4507: $18 $F2
+    jr   .jr_01F_44FB                             ; $4507: $18 $F2
 
 Data_01F_4509::
     db   $00, $9F, $80, $A0, $C7, $02
@@ -448,14 +446,14 @@ Data_01F_4509::
 Data_01F_450F::
     db   $00, $9F, $F0, $A0, $C7, $02
 
-func_01F_4515::
+BeginJingleHugeBump::
     ld   a, $05                                   ; $4515: $3E $05
     ld   [$D3BC], a                               ; $4517: $EA $BC $D3
     ld   hl, Data_01F_454E                        ; $451A: $21 $4E $45
     call func_01F_7AB7                            ; $451D: $CD $B7 $7A
     jp   label_01F_5395                           ; $4520: $C3 $95 $53
 
-func_01F_4523::
+ContinueJingleHugeBump::
     call DecrementValueAtDE                       ; $4523: $CD $71 $7A
     ret  nz                                       ; $4526: $C0
 
@@ -463,19 +461,19 @@ func_01F_4523::
     ld   [de], a                                  ; $4529: $12
     call IncrementValueAtBC                       ; $452A: $CD $75 $7A
     cp   $07                                      ; $452D: $FE $07
-    jr   z, jr_01F_4537                           ; $452F: $28 $06
+    jr   z, .jr_01F_4537                          ; $452F: $28 $06
 
-jr_01F_4531:
+.jr_01F_4531:
     ld   hl, Data_01F_4542                        ; $4531: $21 $42 $45
     jp   func_01F_7AE1                            ; $4534: $C3 $E1 $7A
 
-jr_01F_4537:
+.jr_01F_4537:
     call func_01F_7A9A                            ; $4537: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $453A: $CA $BB $53
 
     ld   a, $01                                   ; $453D: $3E $01
     ld   [bc], a                                  ; $453F: $02
-    jr   jr_01F_4531                              ; $4540: $18 $EF
+    jr   .jr_01F_4531                             ; $4540: $18 $EF
 
 Data_01F_4542::
     db   $FF, $C0, $FF, $80, $FF, $40, $00, $C0, $00, $80, $00, $40
@@ -483,34 +481,34 @@ Data_01F_4542::
 Data_01F_454E::
     db   $00, $80, $F4, $80, $83, $01
 
-func_01F_4554::
+BeginJingleRevolvingDoor::
     ld   a, $16                                   ; $4554: $3E $16
     ld   [$D3BC], a                               ; $4556: $EA $BC $D3
     ld   hl, Data_01F_458F                        ; $4559: $21 $8F $45
     call func_01F_7AB7                            ; $455C: $CD $B7 $7A
     jp   label_01F_539A                           ; $455F: $C3 $9A $53
 
-func_01F_4562::
+ContinueJingleRevolvingDoor::
     call IncrementValueAtBC                       ; $4562: $CD $75 $7A
     cp   $04                                      ; $4565: $FE $04
-    jr   z, jr_01F_456F                           ; $4567: $28 $06
+    jr   z, .jr_01F_456F                          ; $4567: $28 $06
 
-jr_01F_4569:
+.jr_01F_4569:
     ld   hl, Data_01F_4589                        ; $4569: $21 $89 $45
     jp   func_01F_7AE1                            ; $456C: $C3 $E1 $7A
 
-jr_01F_456F:
+.jr_01F_456F:
     call func_01F_7A9A                            ; $456F: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $4572: $CA $BB $53
 
     cp   $08                                      ; $4575: $FE $08
-    jr   z, jr_01F_457E                           ; $4577: $28 $05
+    jr   z, .jr_01F_457E                          ; $4577: $28 $05
 
     ld   a, $01                                   ; $4579: $3E $01
     ld   [bc], a                                  ; $457B: $02
-    jr   jr_01F_4569                              ; $457C: $18 $EB
+    jr   .jr_01F_4569                             ; $457C: $18 $EB
 
-jr_01F_457E:
+.jr_01F_457E:
     xor  a                                        ; $457E: $AF
     ld   [bc], a                                  ; $457F: $02
     ld   hl, Data_01F_4595                        ; $4580: $21 $95 $45
@@ -526,11 +524,11 @@ Data_01F_458F::
 Data_01F_4595::
     db   $00, $83, $47, $00, $87, $02
 
-func_01F_459B::
+BeginJingleFeatherJump::
     ld   hl, Data_01F_45A8                        ; $459B: $21 $A8 $45
     jp   label_01F_539A                           ; $459E: $C3 $9A $53
 
-func_01F_45A1::
+ContinueJingleFeatherJump::
     call DecrementValueAtDE                       ; $45A1: $CD $71 $7A
     ret  nz                                       ; $45A4: $C0
 
@@ -539,19 +537,19 @@ func_01F_45A1::
 Data_01F_45A8::
     db   $27, $80, $C2, $48, $86, $18
 
-func_01F_45AE::
+BeginJingleWaterDive::
     ld   a, [$D361]                               ; $45AE: $FA $61 $D3
     cp   $08                                      ; $45B1: $FE $08
-    jr   z, jr_01F_45B9                           ; $45B3: $28 $04
+    jr   z, .jr_01F_45B9                          ; $45B3: $28 $04
 
     and  a                                        ; $45B5: $A7
     jp   nz, label_01F_53E6                       ; $45B6: $C2 $E6 $53
 
-jr_01F_45B9:
+.jr_01F_45B9:
     ld   hl, Data_01F_45C6                        ; $45B9: $21 $C6 $45
     jp   label_01F_539A                           ; $45BC: $C3 $9A $53
 
-func_01F_45BF::
+ContinueJingleWaterDive::
     call DecrementValueAtDE                       ; $45BF: $CD $71 $7A
     ret  nz                                       ; $45C2: $C0
 
@@ -560,11 +558,11 @@ func_01F_45BF::
 Data_01F_45C6::
     db   $16, $AB, $20, $80, $C6, $05
 
-func_01F_45CC::
+BeginJingleWaterSwim::
     ld   hl, Data_01F_45E4                        ; $45CC: $21 $E4 $45
     jp   label_01F_539A                           ; $45CF: $C3 $9A $53
 
-func_01F_45D2::
+ContinueJingleWaterSwim::
     call DecrementValueAtDE                       ; $45D2: $CD $71 $7A
     ret  nz                                       ; $45D5: $C0
 
@@ -581,10 +579,10 @@ Data_01F_45E4::
 Data_01F_45EA::
     db   $17, $80, $0E, $00, $C5, $10
 
-func_01F_45F0::
+BeginJingleUnknown10::
     jp   func_01F_7B5C                            ; $45F0: $C3 $5C $7B
 
-func_01F_45F3::
+BeginJingleOpenInventory::
     ld   a, $17                                   ; $45F3: $3E $17
     ld   [$D3BC], a                               ; $45F5: $EA $BC $D3
     ld   hl, $D32F                                ; $45F8: $21 $2F $D3
@@ -596,25 +594,25 @@ func_01F_45F3::
     call func_01F_7AB7                            ; $4609: $CD $B7 $7A
     jp   label_01F_539A                           ; $460C: $C3 $9A $53
 
-func_01F_460F::
+ContinueJingleOpenInventory::
     call IncrementValueAtBC                       ; $460F: $CD $75 $7A
     cp   $02                                      ; $4612: $FE $02
-    jr   z, jr_01F_4625                           ; $4614: $28 $0F
+    jr   z, .jr_01F_4625                          ; $4614: $28 $0F
 
-jr_01F_4616:
+.jr_01F_4616:
     ld   hl, Data_01F_4630                        ; $4616: $21 $30 $46
     call func_01F_7B11                            ; $4619: $CD $11 $7B
     ld   bc, $D394                                ; $461C: $01 $94 $D3
     ld   hl, Data_01F_4630                        ; $461F: $21 $30 $46
     jp   func_01F_7AE1                            ; $4622: $C3 $E1 $7A
 
-jr_01F_4625:
+.jr_01F_4625:
     call func_01F_7A9A                            ; $4625: $CD $9A $7A
     jp   z, label_01F_463D                        ; $4628: $CA $3D $46
 
     ld   a, $01                                   ; $462B: $3E $01
     ld   [bc], a                                  ; $462D: $02
-    jr   jr_01F_4616                              ; $462E: $18 $E6
+    jr   .jr_01F_4616                             ; $462E: $18 $E6
 
 Data_01F_4630::
     db   $00, $21
@@ -632,7 +630,7 @@ label_01F_463D:
     call WriteChannel2AndDE                       ; $4645: $CD $7F $7A
     jp   label_01F_53B5                           ; $4648: $C3 $B5 $53
 
-func_01F_464B::
+BeginJingleCloseInventory::
     ld   a, [$D361]                               ; $464B: $FA $61 $D3
     cp   $13                                      ; $464E: $FE $13
     jp   z, label_01F_53E6                        ; $4650: $CA $E6 $53
@@ -648,25 +646,25 @@ func_01F_464B::
     call func_01F_7AB7                            ; $4669: $CD $B7 $7A
     jp   label_01F_539A                           ; $466C: $C3 $9A $53
 
-func_01F_466F::
+ContinueJingleCloseInventory::
     call IncrementValueAtBC                       ; $466F: $CD $75 $7A
     cp   $02                                      ; $4672: $FE $02
-    jr   z, jr_01F_4685                           ; $4674: $28 $0F
+    jr   z, .jr_01F_4685                          ; $4674: $28 $0F
 
-jr_01F_4676:
+.jr_01F_4676:
     ld   hl, Data_01F_4690                        ; $4676: $21 $90 $46
     call func_01F_7B11                            ; $4679: $CD $11 $7B
     ld   bc, $D394                                ; $467C: $01 $94 $D3
     ld   hl, Data_01F_4690                        ; $467F: $21 $90 $46
     jp   func_01F_7AE1                            ; $4682: $C3 $E1 $7A
 
-jr_01F_4685:
+.jr_01F_4685:
     call func_01F_7A9A                            ; $4685: $CD $9A $7A
     jp   z, label_01F_463D                        ; $4688: $CA $3D $46
 
     ld   a, $01                                   ; $468B: $3E $01
     ld   [bc], a                                  ; $468D: $02
-    jr   jr_01F_4676                              ; $468E: $18 $E6
+    jr   .jr_01F_4676                             ; $468E: $18 $E6
 
 Data_01F_4690::
     db   $FF, $D0
@@ -677,24 +675,24 @@ Data_01F_4692::
 Data_01F_4697::
     db   $00, $80, $09, $C0, $86, $12
 
-func_01F_469D::
+BeginJingleValidate::
     ld   a, $05                                   ; $469D: $3E $05
     ld   [$D3BC], a                               ; $469F: $EA $BC $D3
     ldh  a, [rNR50]                               ; $46A2: $F0 $24
     cp   $77                                      ; $46A4: $FE $77
-    jr   nz, jr_01F_46B1                          ; $46A6: $20 $09
+    jr   nz, .jr_01F_46B1                         ; $46A6: $20 $09
 
     ld   hl, Data_01F_46DB                        ; $46A8: $21 $DB $46
 
-jr_01F_46AB:
+.jr_01F_46AB:
     call func_01F_7AB7                            ; $46AB: $CD $B7 $7A
     jp   label_01F_539A                           ; $46AE: $C3 $9A $53
 
-jr_01F_46B1:
+.jr_01F_46B1:
     ld   hl, Data_01F_46E1                        ; $46B1: $21 $E1 $46
-    jr   jr_01F_46AB                              ; $46B4: $18 $F5
+    jr   .jr_01F_46AB                             ; $46B4: $18 $F5
 
-func_01F_46B6::
+ContinueJingleValidate::
     call DecrementValueAtDE                       ; $46B6: $CD $71 $7A
     ret  nz                                       ; $46B9: $C0
 
@@ -702,21 +700,19 @@ func_01F_46B6::
     ld   [de], a                                  ; $46BC: $12
     call IncrementValueAtBC                       ; $46BD: $CD $75 $7A
     cp   $04                                      ; $46C0: $FE $04
-    jr   z, jr_01F_46CA                           ; $46C2: $28 $06
+    jr   z, .jr_01F_46CA                          ; $46C2: $28 $06
 
-jr_01F_46C4:
+.jr_01F_46C4:
     ld   hl, Data_01F_46D5                        ; $46C4: $21 $D5 $46
-
-jr_01F_46C7:
     jp   func_01F_7AE1                            ; $46C7: $C3 $E1 $7A
 
-jr_01F_46CA:
+.jr_01F_46CA:
     call func_01F_7A9A                            ; $46CA: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $46CD: $CA $B5 $53
 
     ld   a, $01                                   ; $46D0: $3E $01
     ld   [bc], a                                  ; $46D2: $02
-    jr   jr_01F_46C4                              ; $46D3: $18 $EF
+    jr   .jr_01F_46C4                             ; $46D3: $18 $EF
 
 Data_01F_46D5::
     db   $00, $22, $00, $19, $FF, $C5
@@ -727,7 +723,7 @@ Data_01F_46DB::
 Data_01F_46E1::
     db   $00, $80, $F3, $7B, $87, $03
 
-func_01F_46E7::
+BeginJingleGotHeart::
     ld   a, [$D361]                               ; $46E7: $FA $61 $D3
     and  a                                        ; $46EA: $A7
     jp   nz, label_01F_53E6                       ; $46EB: $C2 $E6 $53
@@ -735,7 +731,7 @@ func_01F_46E7::
     ld   hl, Data_01F_46FB                        ; $46EE: $21 $FB $46
     jp   label_01F_539A                           ; $46F1: $C3 $9A $53
 
-func_01F_46F4::
+ContinueJingleGotHeart::
     call DecrementValueAtDE                       ; $46F4: $CD $71 $7A
     ret  nz                                       ; $46F7: $C0
 
@@ -744,11 +740,11 @@ func_01F_46F4::
 Data_01F_46FB::
     db   $35, $B0, $60, $20, $C7, $04
 
-func_01F_4701::
+BeginJingleDialogBreak::
     ld   hl, Data_01F_4720                        ; $4701: $21 $20 $47
     jp   label_01F_539A                           ; $4704: $C3 $9A $53
 
-func_01F_4707::
+ContinueJingleDialogBreak::
     call DecrementValueAtDE                       ; $4707: $CD $71 $7A
     ret  nz                                       ; $470A: $C0
 
@@ -773,11 +769,11 @@ Data_01F_4726::
 Data_01F_472C::
     db   $00, $B0, $29, $9D, $C7, $03
 
-func_01F_4732::
+BeginJingleShieldTing::
     ld   hl, Data_01F_473F                        ; $4732: $21 $3F $47
     jp   label_01F_539A                           ; $4735: $C3 $9A $53
 
-func_01F_4738::
+ContinueJingleShieldTing::
     call DecrementValueAtDE                       ; $4738: $CD $71 $7A
     ret  nz                                       ; $473B: $C0
 
@@ -786,37 +782,37 @@ func_01F_4738::
 Data_01F_473F::
     db   $00, $00, $81, $BB, $C7, $20
 
-func_01F_4745::
+BeginJingleGotPowerUp::
     ld   a, $2A                                   ; $4745: $3E $2A
     ld   [$D3BC], a                               ; $4747: $EA $BC $D3
     ld   hl, Data_01F_4784                        ; $474A: $21 $84 $47
     call func_01F_7AB7                            ; $474D: $CD $B7 $7A
     jp   label_01F_5395                           ; $4750: $C3 $95 $53
 
-func_01F_4753::
+ContinueJingleGotPowerUp::
     call IncrementValueAtBC                       ; $4753: $CD $75 $7A
     cp   $03                                      ; $4756: $FE $03
-    jr   z, jr_01F_4760                           ; $4758: $28 $06
+    jr   z, .jr_01F_4760                          ; $4758: $28 $06
 
-jr_01F_475A:
+.jr_01F_475A:
     ld   hl, Data_01F_477E                        ; $475A: $21 $7E $47
     jp   func_01F_7AE1                            ; $475D: $C3 $E1 $7A
 
-jr_01F_4760:
+.jr_01F_4760:
     call func_01F_7A9A                            ; $4760: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $4763: $CA $BB $53
 
     cp   $0E                                      ; $4766: $FE $0E
-    jr   z, jr_01F_4773                           ; $4768: $28 $09
+    jr   z, .jr_01F_4773                          ; $4768: $28 $09
 
     cp   $1C                                      ; $476A: $FE $1C
-    jr   z, jr_01F_4773                           ; $476C: $28 $05
+    jr   z, .jr_01F_4773                          ; $476C: $28 $05
 
     ld   a, $01                                   ; $476E: $3E $01
     ld   [bc], a                                  ; $4770: $02
-    jr   jr_01F_475A                              ; $4771: $18 $E7
+    jr   .jr_01F_475A                             ; $4771: $18 $E7
 
-jr_01F_4773:
+.jr_01F_4773:
     ld   hl, Data_01F_477E                        ; $4773: $21 $7E $47
     call func_01F_7AE1                            ; $4776: $CD $E1 $7A
     xor  a                                        ; $4779: $AF
@@ -829,11 +825,11 @@ Data_01F_477E::
 Data_01F_4784::
     db   $00, $80, $D7, $68, $87, $01
 
-func_01F_478A::
+BeginJingleItemFalling::
     ld   hl, Data_01F_47A2                        ; $478A: $21 $A2 $47
     jp   label_01F_539A                           ; $478D: $C3 $9A $53
 
-func_01F_4790::
+ContinueJingleItemFalling::
     call DecrementValueAtDE                       ; $4790: $CD $71 $7A
     ret  nz                                       ; $4793: $C0
 
@@ -850,11 +846,11 @@ Data_01F_47A2::
 Data_01F_47A8::
     db   $2F, $80, $10, $E0, $86, $14
 
-func_01F_47AE::
+BeginJingleNewHeart::
     ld   hl, Data_01F_47D1                        ; $47AE: $21 $D1 $47
     jp   label_01F_5395                           ; $47B1: $C3 $95 $53
 
-func_01F_47B4::
+ContinueJingleNewHeart::
     call DecrementValueAtDE                       ; $47B4: $CD $71 $7A
     ret  nz                                       ; $47B7: $C0
 
@@ -887,7 +883,7 @@ Data_01F_47E3::
 Data_01F_47E9::
     db   $00, $80, $A3, $C5, $87, $20
 
-func_01F_47EF::
+BeginJingleFairyHealing::
     ld   a, [$D361]                               ; $47EF: $FA $61 $D3
     cp   $1A                                      ; $47F2: $FE $1A
     jp   z, label_01F_53E6                        ; $47F4: $CA $E6 $53
@@ -895,7 +891,7 @@ func_01F_47EF::
     ld   hl, Data_01F_480F                        ; $47F7: $21 $0F $48
     jp   label_01F_539A                           ; $47FA: $C3 $9A $53
 
-func_01F_47FD::
+ContinueJingleFairyHealing::
     call DecrementValueAtDE                       ; $47FD: $CD $71 $7A
     ret  nz                                       ; $4800: $C0
 
@@ -912,14 +908,14 @@ Data_01F_480F::
 Data_01F_4815::
     db   $C8, $07, $04
 
-func_01F_4818::
+BeginJingleClearMidboss::
     ld   a, $03                                   ; $4818: $3E $03
     ld   [$D3BC], a                               ; $481A: $EA $BC $D3
     ld   hl, Data_01F_4863                        ; $481D: $21 $63 $48
     call func_01F_7AB7                            ; $4820: $CD $B7 $7A
     jp   label_01F_5395                           ; $4823: $C3 $95 $53
 
-func_01F_4826::
+ContinueJingleClearMidboss::
     call DecrementValueAtDE                       ; $4826: $CD $71 $7A
     ret  nz                                       ; $4829: $C0
 
@@ -927,29 +923,29 @@ func_01F_4826::
     ld   [de], a                                  ; $482C: $12
     call IncrementValueAtBC                       ; $482D: $CD $75 $7A
     cp   $08                                      ; $4830: $FE $08
-    jr   z, jr_01F_483A                           ; $4832: $28 $06
+    jr   z, .jr_01F_483A                          ; $4832: $28 $06
 
     ld   hl, Data_01F_4855                        ; $4834: $21 $55 $48
     jp   func_01F_7AE1                            ; $4837: $C3 $E1 $7A
 
-jr_01F_483A:
+.jr_01F_483A:
     call func_01F_7A9A                            ; $483A: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $483D: $CA $B5 $53
 
     cp   $02                                      ; $4840: $FE $02
-    jr   z, jr_01F_4850                           ; $4842: $28 $0C
+    jr   z, .jr_01F_4850                          ; $4842: $28 $0C
 
     ld   hl, Data_01F_486F                        ; $4844: $21 $6F $48
 
-jr_01F_4847:
+.jr_01F_4847:
     call func_01F_7AB7                            ; $4847: $CD $B7 $7A
     ld   a, $04                                   ; $484A: $3E $04
     ld   [bc], a                                  ; $484C: $02
     jp   WriteChannel1AndDE                       ; $484D: $C3 $79 $7A
 
-jr_01F_4850:
+.jr_01F_4850:
     ld   hl, Data_01F_4869                        ; $4850: $21 $69 $48
-    jr   jr_01F_4847                              ; $4853: $18 $F2
+    jr   .jr_01F_4847                             ; $4853: $18 $F2
 
 Data_01F_4855::
     db   $00, $2A, $00, $2E, $00, $25, $00, $07, $00, $15, $00, $17, $00, $13
@@ -963,51 +959,51 @@ Data_01F_4869::
 Data_01F_486F::
     db   $00, $80, $10, $7B, $87, $04
 
-func_01F_4875::
+BeginJingleMidbossWarp::
     ld   a, $2C                                   ; $4875: $3E $2C
     ld   [$D3BC], a                               ; $4877: $EA $BC $D3
     ld   hl, Data_01F_48C3                        ; $487A: $21 $C3 $48
     call func_01F_7AB7                            ; $487D: $CD $B7 $7A
     jp   label_01F_539A                           ; $4880: $C3 $9A $53
 
-func_01F_4883::
+ContinueJingleMidbossWarp::
     call IncrementValueAtBC                       ; $4883: $CD $75 $7A
     cp   $03                                      ; $4886: $FE $03
-    jr   z, jr_01F_4894                           ; $4888: $28 $0A
+    jr   z, .jr_01F_4894                          ; $4888: $28 $0A
 
     cp   $05                                      ; $488A: $FE $05
-    jr   z, jr_01F_48B0                           ; $488C: $28 $22
+    jr   z, .jr_01F_48B0                          ; $488C: $28 $22
 
-jr_01F_488E:
+.jr_01F_488E:
     ld   hl, Data_01F_48BB                        ; $488E: $21 $BB $48
     jp   func_01F_7AE1                            ; $4891: $C3 $E1 $7A
 
-jr_01F_4894:
+.jr_01F_4894:
     call func_01F_7A9A                            ; $4894: $CD $9A $7A
     cp   $18                                      ; $4897: $FE $18
-    jr   z, jr_01F_48A4                           ; $4899: $28 $09
+    jr   z, .jr_01F_48A4                          ; $4899: $28 $09
 
     cp   $17                                      ; $489B: $FE $17
-    jr   z, jr_01F_48B0                           ; $489D: $28 $11
+    jr   z, .jr_01F_48B0                          ; $489D: $28 $11
 
     ld   a, $01                                   ; $489F: $3E $01
     ld   [bc], a                                  ; $48A1: $02
-    jr   jr_01F_488E                              ; $48A2: $18 $EA
+    jr   .jr_01F_488E                             ; $48A2: $18 $EA
 
-jr_01F_48A4:
+.jr_01F_48A4:
     ld   a, $02                                   ; $48A4: $3E $02
     ld   [bc], a                                  ; $48A6: $02
     ld   hl, Data_01F_48C9                        ; $48A7: $21 $C9 $48
     call func_01F_7AB7                            ; $48AA: $CD $B7 $7A
     jp   WriteChannel1AndDE                       ; $48AD: $C3 $79 $7A
 
-jr_01F_48B0:
+.jr_01F_48B0:
     call func_01F_7A9A                            ; $48B0: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $48B3: $CA $BB $53
 
     ld   a, $03                                   ; $48B6: $3E $03
     ld   [bc], a                                  ; $48B8: $02
-    jr   jr_01F_488E                              ; $48B9: $18 $D3
+    jr   .jr_01F_488E                             ; $48B9: $18 $D3
 
 Data_01F_48BB::
     db   $00, $AE, $FF, $60, $00, $AA, $FF, $60
@@ -1018,13 +1014,13 @@ Data_01F_48C3::
 Data_01F_48C9::
     db   $00, $40, $A4, $40, $86, $01
 
-func_01F_48CF::
+BeginJingleWrongAnswer::
     ld   a, $08                                   ; $48CF: $3E $08
     ld   [$D3BC], a                               ; $48D1: $EA $BC $D3
     ld   hl, Data_01F_4901                        ; $48D4: $21 $01 $49
     jp   label_01F_539A                           ; $48D7: $C3 $9A $53
 
-func_01F_48DA::
+ContinueJingleWrongAnswer::
     call DecrementValueAtDE                       ; $48DA: $CD $71 $7A
     ret  nz                                       ; $48DD: $C0
 
@@ -1032,22 +1028,22 @@ func_01F_48DA::
     ldh  [rNR11], a                               ; $48E0: $E0 $11
     call IncrementValueAtBC                       ; $48E2: $CD $75 $7A
     cp   $03                                      ; $48E5: $FE $03
-    jr   z, jr_01F_48F2                           ; $48E7: $28 $09
+    jr   z, .jr_01F_48F2                          ; $48E7: $28 $09
 
-jr_01F_48E9:
+.jr_01F_48E9:
     ld   hl, Data_01F_48FD                        ; $48E9: $21 $FD $48
     call GetHandlerAddressInTable                 ; $48EC: $CD $64 $7A
     jp   WriteChannel1FrequencyAndDE              ; $48EF: $C3 $DF $53
 
-jr_01F_48F2:
+.jr_01F_48F2:
     call func_01F_7A9A                            ; $48F2: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $48F5: $CA $BB $53
 
     ld   a, $02                                   ; $48F8: $3E $02
 
-jr_01F_48FA:
+.jr_01F_48FA:
     ld   [bc], a                                  ; $48FA: $02
-    jr   jr_01F_48E9                              ; $48FB: $18 $EC
+    jr   .jr_01F_48E9                             ; $48FB: $18 $EC
 
 Data_01F_48FD::
     dw   Data_01F_4907
@@ -1062,11 +1058,11 @@ Data_01F_4904::
 Data_01F_4907::
     db   $C0, $C4, $0C
 
-func_01F_490A::
+BeginJingleForestLost::
     ld   hl, Data_01F_492D                        ; $490A: $21 $2D $49
     jp   label_01F_5395                           ; $490D: $C3 $95 $53
 
-func_01F_4910::
+ContinueJingleForestLost::
     call DecrementValueAtDE                       ; $4910: $CD $71 $7A
     ret  nz                                       ; $4913: $C0
 
@@ -1096,29 +1092,29 @@ Data_01F_4933::
 Data_01F_4936::
     db   $00, $C6, $18
 
-func_01F_4939::
+BeginJingleEnemyMorphOut::
     ld   a, $0A                                   ; $4939: $3E $0A
     ld   [$D3BC], a                               ; $493B: $EA $BC $D3
     ld   hl, Data_01F_496F                        ; $493E: $21 $6F $49
     call func_01F_7AB7                            ; $4941: $CD $B7 $7A
     jp   label_01F_5395                           ; $4944: $C3 $95 $53
 
-func_01F_4947::
+ContinueJingleEnemyMorphOut::
     call IncrementValueAtBC                       ; $4947: $CD $75 $7A
     cp   $09                                      ; $494A: $FE $09
-    jr   z, jr_01F_4954                           ; $494C: $28 $06
+    jr   z, .jr_01F_4954                          ; $494C: $28 $06
 
-jr_01F_494E:
+.jr_01F_494E:
     ld   hl, Data_01F_495F                        ; $494E: $21 $5F $49
     jp   func_01F_7AE1                            ; $4951: $C3 $E1 $7A
 
-jr_01F_4954:
+.jr_01F_4954:
     call func_01F_7A9A                            ; $4954: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $4957: $CA $B5 $53
 
     ld   a, $01                                   ; $495A: $3E $01
     ld   [bc], a                                  ; $495C: $02
-    jr   jr_01F_494E                              ; $495D: $18 $EF
+    jr   .jr_01F_494E                             ; $495D: $18 $EF
 
 Data_01F_495F::
     db   $00, $30, $00, $60, $00, $60, $00, $30, $FF, $C0, $FF, $80, $FF, $80, $FF, $C0
@@ -1126,37 +1122,37 @@ Data_01F_495F::
 Data_01F_496F::
     db   $00, $80, $0B, $20, $86, $01
 
-func_01F_4975::
+BeginJingleBigBump::
     ld   a, [$D361]                               ; $4975: $FA $61 $D3
     cp   $20                                      ; $4978: $FE $20
-    jr   z, jr_01F_4980                           ; $497A: $28 $04
+    jr   z, .jr_01F_4980                          ; $497A: $28 $04
 
     and  a                                        ; $497C: $A7
     jp   nz, label_01F_53E6                       ; $497D: $C2 $E6 $53
 
-jr_01F_4980:
+.jr_01F_4980:
     ld   a, $08                                   ; $4980: $3E $08
     ld   [$D3BC], a                               ; $4982: $EA $BC $D3
     ld   hl, Data_01F_49AA                        ; $4985: $21 $AA $49
     call func_01F_7AB7                            ; $4988: $CD $B7 $7A
     jp   label_01F_539A                           ; $498B: $C3 $9A $53
 
-func_01F_498E::
+ContinueJingleBigBump::
     call IncrementValueAtBC                       ; $498E: $CD $75 $7A
     cp   $03                                      ; $4991: $FE $03
-    jr   z, jr_01F_499B                           ; $4993: $28 $06
+    jr   z, .jr_01F_499B                          ; $4993: $28 $06
 
-jr_01F_4995:
+.jr_01F_4995:
     ld   hl, Data_01F_49A6                        ; $4995: $21 $A6 $49
     jp   func_01F_7AE1                            ; $4998: $C3 $E1 $7A
 
-jr_01F_499B:
+.jr_01F_499B:
     call func_01F_7A9A                            ; $499B: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $499E: $CA $BB $53
 
     ld   a, $01                                   ; $49A1: $3E $01
     ld   [bc], a                                  ; $49A3: $02
-    jr   jr_01F_4995                              ; $49A4: $18 $EF
+    jr   .jr_01F_4995                             ; $49A4: $18 $EF
 
 Data_01F_49A6::
     db   $00, $C0, $FF, $A0
@@ -1164,44 +1160,44 @@ Data_01F_49A6::
 Data_01F_49AA::
     db   $00, $80, $F1, $80, $83, $01
 
-func_01F_49B0::
+BeginJingleSeagull::
     ld   a, $1C                                   ; $49B0: $3E $1C
     ld   [$D3BC], a                               ; $49B2: $EA $BC $D3
     ld   hl, Data_01F_49F6                        ; $49B5: $21 $F6 $49
     call func_01F_7AB7                            ; $49B8: $CD $B7 $7A
     jp   label_01F_539A                           ; $49BB: $C3 $9A $53
 
-func_01F_49BE::
+ContinueJingleSeagull::
     call IncrementValueAtBC                       ; $49BE: $CD $75 $7A
     cp   $02                                      ; $49C1: $FE $02
-    jr   z, jr_01F_49CB                           ; $49C3: $28 $06
+    jr   z, .jr_01F_49CB                          ; $49C3: $28 $06
 
-jr_01F_49C5:
+.jr_01F_49C5:
     ld   hl, Data_01F_49F4                        ; $49C5: $21 $F4 $49
     jp   func_01F_7AE1                            ; $49C8: $C3 $E1 $7A
 
-jr_01F_49CB:
+.jr_01F_49CB:
     call func_01F_7A9A                            ; $49CB: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $49CE: $CA $B5 $53
 
     cp   $14                                      ; $49D1: $FE $14
-    jr   z, jr_01F_49DE                           ; $49D3: $28 $09
+    jr   z, .jr_01F_49DE                          ; $49D3: $28 $09
 
     cp   $0A                                      ; $49D5: $FE $0A
-    jr   z, jr_01F_49E9                           ; $49D7: $28 $10
+    jr   z, .jr_01F_49E9                          ; $49D7: $28 $10
 
     ld   a, $01                                   ; $49D9: $3E $01
     ld   [bc], a                                  ; $49DB: $02
-    jr   jr_01F_49C5                              ; $49DC: $18 $E7
+    jr   .jr_01F_49C5                             ; $49DC: $18 $E7
 
-jr_01F_49DE:
+.jr_01F_49DE:
     xor  a                                        ; $49DE: $AF
     ld   [bc], a                                  ; $49DF: $02
     ld   hl, Data_01F_49FC                        ; $49E0: $21 $FC $49
     call func_01F_7AB7                            ; $49E3: $CD $B7 $7A
     jp   WriteChannel1AndDE                       ; $49E6: $C3 $79 $7A
 
-jr_01F_49E9:
+.jr_01F_49E9:
     xor  a                                        ; $49E9: $AF
     ld   [bc], a                                  ; $49EA: $02
     ld   hl, Data_01F_4A02                        ; $49EB: $21 $02 $4A
@@ -1220,7 +1216,7 @@ Data_01F_49FC::
 Data_01F_4A02::
     db   $00, $00, $10, $A7, $87, $01
 
-func_01F_4A08::
+BeginJingleHoneycomb::
     ld   a, [$D361]                               ; $4A08: $FA $61 $D3
     cp   $22                                      ; $4A0B: $FE $22
     jp   z, label_01F_53E6                        ; $4A0D: $CA $E6 $53
@@ -1228,53 +1224,53 @@ func_01F_4A08::
     ld   bc, $D3D7                                ; $4A10: $01 $D7 $D3
     call IncrementValueAtBC                       ; $4A13: $CD $75 $7A
     cp   $04                                      ; $4A16: $FE $04
-    jr   nc, jr_01F_4A20                          ; $4A18: $30 $06
+    jr   nc, .jr_01F_4A20                         ; $4A18: $30 $06
 
-jr_01F_4A1A:
+.jr_01F_4A1A:
     ld   hl, Data_01F_4A52                        ; $4A1A: $21 $52 $4A
     jp   label_01F_539A                           ; $4A1D: $C3 $9A $53
 
-jr_01F_4A20:
+.jr_01F_4A20:
     cp   $06                                      ; $4A20: $FE $06
-    jr   nc, jr_01F_4A2A                          ; $4A22: $30 $06
+    jr   nc, .jr_01F_4A2A                         ; $4A22: $30 $06
 
-jr_01F_4A24:
+.jr_01F_4A24:
     ld   hl, Data_01F_4A58                        ; $4A24: $21 $58 $4A
     jp   label_01F_539A                           ; $4A27: $C3 $9A $53
 
-jr_01F_4A2A:
+.jr_01F_4A2A:
     cp   $08                                      ; $4A2A: $FE $08
-    jr   nc, jr_01F_4A34                          ; $4A2C: $30 $06
+    jr   nc, .jr_01F_4A34                         ; $4A2C: $30 $06
 
-jr_01F_4A2E:
+.jr_01F_4A2E:
     ld   hl, Data_01F_4A5E                        ; $4A2E: $21 $5E $4A
     jp   label_01F_539A                           ; $4A31: $C3 $9A $53
 
-jr_01F_4A34:
+.jr_01F_4A34:
     cp   $09                                      ; $4A34: $FE $09
-    jr   nc, jr_01F_4A3E                          ; $4A36: $30 $06
+    jr   nc, .jr_01F_4A3E                         ; $4A36: $30 $06
 
     ld   hl, Data_01F_4A64                        ; $4A38: $21 $64 $4A
     jp   label_01F_539A                           ; $4A3B: $C3 $9A $53
 
-jr_01F_4A3E:
+.jr_01F_4A3E:
     cp   $0B                                      ; $4A3E: $FE $0B
-    jr   nc, jr_01F_4A44                          ; $4A40: $30 $02
+    jr   nc, .jr_01F_4A44                         ; $4A40: $30 $02
 
-    jr   jr_01F_4A2E                              ; $4A42: $18 $EA
+    jr   .jr_01F_4A2E                             ; $4A42: $18 $EA
 
-jr_01F_4A44:
+.jr_01F_4A44:
     cp   $0D                                      ; $4A44: $FE $0D
-    jr   z, jr_01F_4A4A                           ; $4A46: $28 $02
+    jr   z, .jr_01F_4A4A                          ; $4A46: $28 $02
 
-    jr   jr_01F_4A24                              ; $4A48: $18 $DA
+    jr   .jr_01F_4A24                             ; $4A48: $18 $DA
 
-jr_01F_4A4A:
+.jr_01F_4A4A:
     ld   a, $01                                   ; $4A4A: $3E $01
     ld   [bc], a                                  ; $4A4C: $02
-    jr   jr_01F_4A1A                              ; $4A4D: $18 $CB
+    jr   .jr_01F_4A1A                             ; $4A4D: $18 $CB
 
-func_01F_4A4F::
+ContinueJingleHoneycomb::
     jp   func_01F_53BB                            ; $4A4F: $C3 $BB $53
 
 Data_01F_4A52::
@@ -1289,19 +1285,19 @@ Data_01F_4A5E::
 Data_01F_4A64::
     db   $15, $38, $90, $34, $C6, $02, $15, $38, $D0, $30, $C6, $02
 
-func_01F_4A70::
+BeginJingleDungeonOpened::
     ld   hl, $D32F                                ; $4A70: $21 $2F $D3
     set  7, [hl]                                  ; $4A73: $CB $FE
     ld   hl, Data_01F_4AAD                        ; $4A75: $21 $AD $4A
     jp   label_01F_5395                           ; $4A78: $C3 $95 $53
 
-func_01F_4A7B::
+ContinueJingleDungeonOpened::
     call DecrementValueAtDE                       ; $4A7B: $CD $71 $7A
     ret  nz                                       ; $4A7E: $C0
 
     call IncrementValueAtBC                       ; $4A7F: $CD $75 $7A
     cp   $08                                      ; $4A82: $FE $08
-    jr   z, jr_01F_4A97                           ; $4A84: $28 $11
+    jr   z, .jr_01F_4A97                          ; $4A84: $28 $11
 
     ld   hl, Data_01F_4A9F                        ; $4A86: $21 $9F $4A
     call GetHandlerAddressInTable                 ; $4A89: $CD $64 $7A
@@ -1311,7 +1307,7 @@ func_01F_4A7B::
 
     jp   WriteChannel1AndDE                       ; $4A94: $C3 $79 $7A
 
-jr_01F_4A97:
+.jr_01F_4A97:
     ld   hl, $D32F                                ; $4A97: $21 $2F $D3
     res  7, [hl]                                  ; $4A9A: $CB $BE
     jp   label_01F_53B5                           ; $4A9C: $C3 $B5 $53
@@ -1349,11 +1345,11 @@ Data_01F_4ACE::
 Data_01F_4AD4::
     db   $80, $E2, $BE, $87, $10
 
-func_01F_4AD9::
+BeginJingleJump::
     ld   hl, Data_01F_4AE6                        ; $4AD9: $21 $E6 $4A
     jp   label_01F_539A                           ; $4ADC: $C3 $9A $53
 
-func_01F_4ADF::
+ContinueJingleJump::
     call DecrementValueAtDE                       ; $4ADF: $CD $71 $7A
     ret  nz                                       ; $4AE2: $C0
 
@@ -1362,40 +1358,40 @@ func_01F_4ADF::
 Data_01F_4AE6::
     db   $27, $80, $83, $00, $86, $18
 
-func_01F_4AEC::
+BeginJingleOverworldWarp::
     ld   a, $07                                   ; $4AEC: $3E $07
     ld   [$D3BC], a                               ; $4AEE: $EA $BC $D3
     ld   hl, Data_01F_4B2B                        ; $4AF1: $21 $2B $4B
     jp   label_01F_5395                           ; $4AF4: $C3 $95 $53
 
-func_01F_4AF7::
+ContinueJingleOverworldWarp::
     call DecrementValueAtDE                       ; $4AF7: $CD $71 $7A
     ret  nz                                       ; $4AFA: $C0
 
     call IncrementValueAtBC                       ; $4AFB: $CD $75 $7A
     cp   $06                                      ; $4AFE: $FE $06
-    jr   z, jr_01F_4B0F                           ; $4B00: $28 $0D
+    jr   z, .jr_01F_4B0F                          ; $4B00: $28 $0D
 
     cp   $07                                      ; $4B02: $FE $07
-    jr   z, jr_01F_4B1A                           ; $4B04: $28 $14
+    jr   z, .jr_01F_4B1A                          ; $4B04: $28 $14
 
-jr_01F_4B06:
+.jr_01F_4B06:
     ld   hl, Data_01F_4B1F                        ; $4B06: $21 $1F $4B
     call GetHandlerAddressInTable                 ; $4B09: $CD $64 $7A
     jp   WriteChannel1FrequencyAndDE              ; $4B0C: $C3 $DF $53
 
-jr_01F_4B0F:
+.jr_01F_4B0F:
     call func_01F_7A9A                            ; $4B0F: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $4B12: $CA $B5 $53
 
     ld   a, $06                                   ; $4B15: $3E $06
     ld   [bc], a                                  ; $4B17: $02
-    jr   jr_01F_4B06                              ; $4B18: $18 $EC
+    jr   .jr_01F_4B06                             ; $4B18: $18 $EC
 
-jr_01F_4B1A:
+.jr_01F_4B1A:
     ld   a, $03                                   ; $4B1A: $3E $03
     ld   [bc], a                                  ; $4B1C: $02
-    jr   jr_01F_4B06                              ; $4B1D: $18 $E7
+    jr   .jr_01F_4B06                             ; $4B1D: $18 $E7
 
 Data_01F_4B1F::
     dw   Data_01F_4B31
@@ -1426,14 +1422,14 @@ Data_01F_4B3D::
 Data_01F_4B40::
     db   $06, $07, $02
 
-func_01F_4B43::
+BeginJingleDisappear::
     ld   a, $0E                                   ; $4B43: $3E $0E
     ld   [$D3BC], a                               ; $4B45: $EA $BC $D3
     ld   hl, Data_01F_4B85                        ; $4B48: $21 $85 $4B
     call func_01F_7AB7                            ; $4B4B: $CD $B7 $7A
     jp   label_01F_5395                           ; $4B4E: $C3 $95 $53
 
-func_01F_4B51::
+ContinueJingleDisappear::
     call DecrementValueAtDE                       ; $4B51: $CD $71 $7A
     ret  nz                                       ; $4B54: $C0
 
@@ -1441,24 +1437,24 @@ func_01F_4B51::
     ld   [de], a                                  ; $4B57: $12
     call IncrementValueAtBC                       ; $4B58: $CD $75 $7A
     cp   $04                                      ; $4B5B: $FE $04
-    jr   z, jr_01F_4B65                           ; $4B5D: $28 $06
+    jr   z, .jr_01F_4B65                          ; $4B5D: $28 $06
 
-jr_01F_4B5F:
+.jr_01F_4B5F:
     ld   hl, Data_01F_4B7F                        ; $4B5F: $21 $7F $4B
     jp   func_01F_7AE1                            ; $4B62: $C3 $E1 $7A
 
-jr_01F_4B65:
+.jr_01F_4B65:
     call func_01F_7A9A                            ; $4B65: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $4B68: $CA $BB $53
 
     cp   $09                                      ; $4B6B: $FE $09
-    jr   z, jr_01F_4B74                           ; $4B6D: $28 $05
+    jr   z, .jr_01F_4B74                          ; $4B6D: $28 $05
 
     ld   a, $01                                   ; $4B6F: $3E $01
     ld   [bc], a                                  ; $4B71: $02
-    jr   jr_01F_4B5F                              ; $4B72: $18 $EB
+    jr   .jr_01F_4B5F                             ; $4B72: $18 $EB
 
-jr_01F_4B74:
+.jr_01F_4B74:
     xor  a                                        ; $4B74: $AF
     ld   [bc], a                                  ; $4B75: $02
     ld   hl, Data_01F_4B8B                        ; $4B76: $21 $8B $4B
@@ -1474,11 +1470,11 @@ Data_01F_4B85::
 Data_01F_4B8B::
     db   $00, $00, $A7, $DC, $87, $03
 
-func_01F_4B91::
+BeginJingleWalrus::
     ld   hl, Data_01F_4BAB                        ; $4B91: $21 $AB $4B
     jp   label_01F_539A                           ; $4B94: $C3 $9A $53
 
-func_01F_4B97::
+ContinueJingleWalrus::
     call DecrementValueAtDE                       ; $4B97: $CD $71 $7A
     ret  nz                                       ; $4B9A: $C0
 
@@ -1495,11 +1491,11 @@ func_01F_4B97::
 Data_01F_4BAB::
     db   $14, $40, $C0, $00, $81, $0C
 
-func_01F_4BB1::
+BeginJingleMasterStalfos::
     ld   hl, Data_01F_4BDE                        ; $4BB1: $21 $DE $4B
     jp   label_01F_539A                           ; $4BB4: $C3 $9A $53
 
-func_01F_4BB7::
+ContinueJingleMasterStalfos::
     call DecrementValueAtDE                       ; $4BB7: $CD $71 $7A
     ret  nz                                       ; $4BBA: $C0
 
@@ -1546,11 +1542,11 @@ Data_01F_4BF3::
 Data_01F_4BF6::
     db   $20, $C7, $03
 
-func_01F_4BF9::
+BeginJingleSlimeEelPull::
     ld   hl, Data_01F_4C13                        ; $4BF9: $21 $13 $4C
     jp   label_01F_539A                           ; $4BFC: $C3 $9A $53
 
-func_01F_4BFF::
+ContinueJingleSlimeEelPull::
     call DecrementValueAtDE                       ; $4BFF: $CD $71 $7A
     ret  nz                                       ; $4C02: $C0
 
@@ -1567,11 +1563,11 @@ func_01F_4BFF::
 Data_01F_4C13::
     db   $17, $96, $49, $60, $C6, $04
 
-func_01F_4C19::
+BeginJingleDodongoEatBomb::
     ld   hl, Data_01F_4C26                        ; $4C19: $21 $26 $4C
     jp   label_01F_539A                           ; $4C1C: $C3 $9A $53
 
-func_01F_4C1F::
+ContinueJingleDodongoEatBomb::
     call DecrementValueAtDE                       ; $4C1F: $CD $71 $7A
     ret  nz                                       ; $4C22: $C0
 
@@ -1580,34 +1576,34 @@ func_01F_4C1F::
 Data_01F_4C26::
     db   $16, $00, $F0, $00, $C2, $10
 
-func_01F_4C2C::
+BeginJingleInstrumentWarp::
     ld   a, $2C                                   ; $4C2C: $3E $2C
     ld   [$D3BC], a                               ; $4C2E: $EA $BC $D3
     ld   hl, Data_01F_4C75                        ; $4C31: $21 $75 $4C
     call func_01F_7AB7                            ; $4C34: $CD $B7 $7A
     jp   label_01F_539A                           ; $4C37: $C3 $9A $53
 
-func_01F_4C3A::
+ContinueJingleInstrumentWarp::
     call IncrementValueAtBC                       ; $4C3A: $CD $75 $7A
     cp   $0B                                      ; $4C3D: $FE $0B
-    jr   z, jr_01F_4C47                           ; $4C3F: $28 $06
+    jr   z, .jr_01F_4C47                          ; $4C3F: $28 $06
 
-jr_01F_4C41:
+.jr_01F_4C41:
     ld   hl, Data_01F_4C61                        ; $4C41: $21 $61 $4C
     jp   func_01F_7AE1                            ; $4C44: $C3 $E1 $7A
 
-jr_01F_4C47:
+.jr_01F_4C47:
     call func_01F_7A9A                            ; $4C47: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $4C4A: $CA $B5 $53
 
     cp   $0C                                      ; $4C4D: $FE $0C
-    jr   z, jr_01F_4C56                           ; $4C4F: $28 $05
+    jr   z, .jr_01F_4C56                          ; $4C4F: $28 $05
 
     ld   a, $01                                   ; $4C51: $3E $01
     ld   [bc], a                                  ; $4C53: $02
-    jr   jr_01F_4C41                              ; $4C54: $18 $EB
+    jr   .jr_01F_4C41                             ; $4C54: $18 $EB
 
-jr_01F_4C56:
+.jr_01F_4C56:
     xor  a                                        ; $4C56: $AF
     ld   [bc], a                                  ; $4C57: $02
     ld   hl, Data_01F_4C7B                        ; $4C58: $21 $7B $4C
@@ -1624,49 +1620,49 @@ Data_01F_4C75::
 Data_01F_4C7B::
     db   $00, $00, $F7, $F0, $87, $04
 
-func_01F_4C81::
+BeginJingleManboWarp::
     ld   a, $22                                   ; $4C81: $3E $22
     ld   [$D3BC], a                               ; $4C83: $EA $BC $D3
     ld   hl, Data_01F_4CCF                        ; $4C86: $21 $CF $4C
     call func_01F_7AB7                            ; $4C89: $CD $B7 $7A
     jp   label_01F_5395                           ; $4C8C: $C3 $95 $53
 
-func_01F_4C8F::
+ContinueJingleManboWarp::
     call IncrementValueAtBC                       ; $4C8F: $CD $75 $7A
     cp   $07                                      ; $4C92: $FE $07
-    jr   z, jr_01F_4C9C                           ; $4C94: $28 $06
+    jr   z, .jr_01F_4C9C                          ; $4C94: $28 $06
 
-jr_01F_4C96:
+.jr_01F_4C96:
     ld   hl, Data_01F_4CC3                        ; $4C96: $21 $C3 $4C
     jp   func_01F_7AE1                            ; $4C99: $C3 $E1 $7A
 
-jr_01F_4C9C:
+.jr_01F_4C9C:
     call func_01F_7A9A                            ; $4C9C: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $4C9F: $CA $BB $53
 
     cp   $1E                                      ; $4CA2: $FE $1E
-    jr   z, jr_01F_4CB2                           ; $4CA4: $28 $0C
+    jr   z, .jr_01F_4CB2                          ; $4CA4: $28 $0C
 
     cp   $06                                      ; $4CA6: $FE $06
-    jr   z, jr_01F_4CBE                           ; $4CA8: $28 $14
+    jr   z, .jr_01F_4CBE                          ; $4CA8: $28 $14
 
     ld   a, $01                                   ; $4CAA: $3E $01
     ld   bc, $D394                                ; $4CAC: $01 $94 $D3
     ld   [bc], a                                  ; $4CAF: $02
-    jr   jr_01F_4C96                              ; $4CB0: $18 $E4
+    jr   .jr_01F_4C96                             ; $4CB0: $18 $E4
 
-jr_01F_4CB2:
+.jr_01F_4CB2:
     ld   hl, Data_01F_4CD5                        ; $4CB2: $21 $D5 $4C
 
-jr_01F_4CB5:
+.jr_01F_4CB5:
     ld   a, $01                                   ; $4CB5: $3E $01
     ld   [bc], a                                  ; $4CB7: $02
     call func_01F_7AB7                            ; $4CB8: $CD $B7 $7A
     jp   WriteChannel1AndDE                       ; $4CBB: $C3 $79 $7A
 
-jr_01F_4CBE:
+.jr_01F_4CBE:
     ld   hl, Data_01F_4CDB                        ; $4CBE: $21 $DB $4C
-    jr   jr_01F_4CB5                              ; $4CC1: $18 $F2
+    jr   .jr_01F_4CB5                             ; $4CC1: $18 $F2
 
 Data_01F_4CC3::
     db   $00, $02, $00, $01, $FF, $F0, $FF, $E0, $FF, $C0, $00, $71
@@ -1680,14 +1676,14 @@ Data_01F_4CD5::
 Data_01F_4CDB::
     db   $00, $00, $47, $70, $87, $01
 
-func_01F_4CE1::
+BeginJingleGhostPresence::
     ld   a, $03                                   ; $4CE1: $3E $03
     ld   [$D3BC], a                               ; $4CE3: $EA $BC $D3
     ld   hl, Data_01F_4D20                        ; $4CE6: $21 $20 $4D
     call func_01F_7AB7                            ; $4CE9: $CD $B7 $7A
     jp   label_01F_5395                           ; $4CEC: $C3 $95 $53
 
-func_01F_4CEF::
+ContinueJingleGhostPresence::
     call DecrementValueAtDE                       ; $4CEF: $CD $71 $7A
     ret  nz                                       ; $4CF2: $C0
 
@@ -1695,28 +1691,28 @@ func_01F_4CEF::
     ld   [de], a                                  ; $4CF5: $12
     call IncrementValueAtBC                       ; $4CF6: $CD $75 $7A
     cp   $05                                      ; $4CF9: $FE $05
-    jr   z, jr_01F_4D03                           ; $4CFB: $28 $06
+    jr   z, .jr_01F_4D03                          ; $4CFB: $28 $06
 
-jr_01F_4CFD:
+.jr_01F_4CFD:
     ld   hl, Data_01F_4D18                        ; $4CFD: $21 $18 $4D
     jp   func_01F_7AE1                            ; $4D00: $C3 $E1 $7A
 
-jr_01F_4D03:
+.jr_01F_4D03:
     call func_01F_7A9A                            ; $4D03: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $4D06: $CA $BB $53
 
     cp   $01                                      ; $4D09: $FE $01
-    jr   z, jr_01F_4D12                           ; $4D0B: $28 $05
+    jr   z, .jr_01F_4D12                          ; $4D0B: $28 $05
 
-jr_01F_4D0D:
+.jr_01F_4D0D:
     ld   a, $01                                   ; $4D0D: $3E $01
     ld   [bc], a                                  ; $4D0F: $02
-    jr   jr_01F_4CFD                              ; $4D10: $18 $EB
+    jr   .jr_01F_4CFD                             ; $4D10: $18 $EB
 
-jr_01F_4D12:
+.jr_01F_4D12:
     ld   a, $65                                   ; $4D12: $3E $65
     ldh  [rNR12], a                               ; $4D14: $E0 $12
-    jr   jr_01F_4D0D                              ; $4D16: $18 $F5
+    jr   .jr_01F_4D0D                             ; $4D16: $18 $F5
 
 Data_01F_4D18::
     db   $00, $04, $FF, $DD, $00, $06, $00, $19
@@ -1724,34 +1720,34 @@ Data_01F_4D18::
 Data_01F_4D20::
     db   $00, $80, $1F, $B6, $87, $08
 
-func_01F_4D26::
+BeginJingleEagleTowerOpen::
     ld   a, $09                                   ; $4D26: $3E $09
     ld   [$D3BC], a                               ; $4D28: $EA $BC $D3
     ld   hl, Data_01F_4DAB                        ; $4D2B: $21 $AB $4D
     call func_01F_7AB7                            ; $4D2E: $CD $B7 $7A
     jp   label_01F_539A                           ; $4D31: $C3 $9A $53
 
-func_01F_4D34::
+ContinueJingleEagleTowerOpen::
     call IncrementValueAtBC                       ; $4D34: $CD $75 $7A
     cp   $29                                      ; $4D37: $FE $29
-    jr   z, jr_01F_4D41                           ; $4D39: $28 $06
+    jr   z, .jr_01F_4D41                          ; $4D39: $28 $06
 
-jr_01F_4D3B:
+.jr_01F_4D3B:
     ld   hl, Data_01F_4D5B                        ; $4D3B: $21 $5B $4D
     jp   func_01F_7AE1                            ; $4D3E: $C3 $E1 $7A
 
-jr_01F_4D41:
+.jr_01F_4D41:
     call func_01F_7A9A                            ; $4D41: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $4D44: $CA $BB $53
 
     cp   $03                                      ; $4D47: $FE $03
-    jr   z, jr_01F_4D50                           ; $4D49: $28 $05
+    jr   z, .jr_01F_4D50                          ; $4D49: $28 $05
 
     ld   a, $01                                   ; $4D4B: $3E $01
     ld   [bc], a                                  ; $4D4D: $02
-    jr   jr_01F_4D3B                              ; $4D4E: $18 $EB
+    jr   .jr_01F_4D3B                             ; $4D4E: $18 $EB
 
-jr_01F_4D50:
+.jr_01F_4D50:
     xor  a                                        ; $4D50: $AF
     ld   [bc], a                                  ; $4D51: $02
     ld   hl, Data_01F_4DB1                        ; $4D52: $21 $B1 $4D
@@ -1759,90 +1755,16 @@ jr_01F_4D50:
     jp   WriteChannel1AndDE                       ; $4D58: $C3 $79 $7A
 
 Data_01F_4D5B::
-    db   $00, $30, $00, $30, $00
-
-func_01F_4D60::
-    jr   nc, jr_01F_4D62                          ; $4D60: $30 $00
-
-jr_01F_4D62:
-    jr   nc, jr_01F_4D64                          ; $4D62: $30 $00
-
-jr_01F_4D64:
-    jr   z, jr_01F_4D66                           ; $4D64: $28 $00
-
-jr_01F_4D66:
-    jr   z, jr_01F_4D68                           ; $4D66: $28 $00
-
-jr_01F_4D68:
-    jr   z, jr_01F_4D6A                           ; $4D68: $28 $00
-
-jr_01F_4D6A:
-    jr   z, jr_01F_4D6C                           ; $4D6A: $28 $00
-
-jr_01F_4D6C:
-    jr   nz, jr_01F_4D6E                          ; $4D6C: $20 $00
-
-jr_01F_4D6E:
-    jr   nz, jr_01F_4D70                          ; $4D6E: $20 $00
-
-jr_01F_4D70:
-    jr   nz, jr_01F_4D72                          ; $4D70: $20 $00
-
-jr_01F_4D72:
-    jr   nz, jr_01F_4D74                          ; $4D72: $20 $00
-
-jr_01F_4D74:
-    jr   jr_01F_4D76                              ; $4D74: $18 $00
-
-jr_01F_4D76:
-    jr   jr_01F_4D78                              ; $4D76: $18 $00
-
-jr_01F_4D78:
-    jr   jr_01F_4D7A                              ; $4D78: $18 $00
-
-jr_01F_4D7A:
-    jr   jr_01F_4D7C                              ; $4D7A: $18 $00
-
-jr_01F_4D7C:
-    stop                                          ; $4D7C: $10 $00
-    stop                                          ; $4D7E: $10 $00
-    stop                                          ; $4D80: $10 $00
-    db   $10                                      ; $4D82: $10
-    rst  $38                                      ; $4D83: $FF
-    ldh  a, [rIE]                                 ; $4D84: $F0 $FF
-    ldh  a, [rIE]                                 ; $4D86: $F0 $FF
-    ldh  a, [rIE]                                 ; $4D88: $F0 $FF
-    ldh  a, [rIE]                                 ; $4D8A: $F0 $FF
-    add  sp, -$01                                 ; $4D8C: $E8 $FF
-    add  sp, -$01                                 ; $4D8E: $E8 $FF
-    add  sp, -$01                                 ; $4D90: $E8 $FF
-    add  sp, -$01                                 ; $4D92: $E8 $FF
-    ldh  [rIE], a                                 ; $4D94: $E0 $FF
-    ldh  [rIE], a                                 ; $4D96: $E0 $FF
-    ldh  [rIE], a                                 ; $4D98: $E0 $FF
-    ldh  [rIE], a                                 ; $4D9A: $E0 $FF
-    ret  c                                        ; $4D9C: $D8
-
-    rst  $38                                      ; $4D9D: $FF
-    ret  c                                        ; $4D9E: $D8
-
-    rst  $38                                      ; $4D9F: $FF
-    ret  c                                        ; $4DA0: $D8
-
-    rst  $38                                      ; $4DA1: $FF
-    ret  c                                        ; $4DA2: $D8
-
-    rst  $38                                      ; $4DA3: $FF
-    ret  nc                                       ; $4DA4: $D0
-
-    rst  $38                                      ; $4DA5: $FF
-    ret  nc                                       ; $4DA6: $D0
-
-    rst  $38                                      ; $4DA7: $FF
-    ret  nc                                       ; $4DA8: $D0
-
-    rst  $38                                      ; $4DA9: $FF
-    ret  nc                                       ; $4DAA: $D0
+    db   $00, $30, $00, $30, $00, $30, $00, $30
+    db   $00, $28, $00, $28, $00, $28, $00, $28
+    db   $00, $20, $00, $20, $00, $20, $00, $20
+    db   $00, $18, $00, $18, $00, $18, $00, $18
+    db   $00, $10, $00, $10, $00, $10, $00, $10
+    db   $FF, $F0, $FF, $F0, $FF, $F0, $FF, $F0
+    db   $FF, $E8, $FF, $E8, $FF, $E8, $FF, $E8
+    db   $FF, $E0, $FF, $E0, $FF, $E0, $FF, $E0
+    db   $FF, $D8, $FF, $D8, $FF, $D8, $FF, $D8
+    db   $FF, $D0, $FF, $D0, $FF, $D0, $FF, $D0
 
 Data_01F_4DAB::
     db   $00, $80, $1D, $00, $81, $10
@@ -1850,29 +1772,29 @@ Data_01F_4DAB::
 Data_01F_4DB1::
     db   $00, $80, $F7, $00, $81, $10
 
-func_01F_4DB7::
+BeginJinglePoof::
     ld   a, $07                                   ; $4DB7: $3E $07
     ld   [$D3BC], a                               ; $4DB9: $EA $BC $D3
     ld   hl, Data_01F_4DE9                        ; $4DBC: $21 $E9 $4D
     call func_01F_7AB7                            ; $4DBF: $CD $B7 $7A
     jp   label_01F_539A                           ; $4DC2: $C3 $9A $53
 
-func_01F_4DC5::
+ContinueJinglePoof::
     call IncrementValueAtBC                       ; $4DC5: $CD $75 $7A
     cp   $07                                      ; $4DC8: $FE $07
-    jr   z, jr_01F_4DD2                           ; $4DCA: $28 $06
+    jr   z, .jr_01F_4DD2                          ; $4DCA: $28 $06
 
-jr_01F_4DCC:
+.jr_01F_4DCC:
     ld   hl, Data_01F_4DDD                        ; $4DCC: $21 $DD $4D
     jp   func_01F_7AE1                            ; $4DCF: $C3 $E1 $7A
 
-jr_01F_4DD2:
+.jr_01F_4DD2:
     call func_01F_7A9A                            ; $4DD2: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $4DD5: $CA $B5 $53
 
     ld   a, $01                                   ; $4DD8: $3E $01
     ld   [bc], a                                  ; $4DDA: $02
-    jr   jr_01F_4DCC                              ; $4DDB: $18 $EF
+    jr   .jr_01F_4DCC                             ; $4DDB: $18 $EF
 
 Data_01F_4DDD::
     db   $00, $80, $00, $60, $00, $40, $FF, $C0, $FF, $A0, $FF, $88
@@ -1880,13 +1802,13 @@ Data_01F_4DDD::
 Data_01F_4DE9::
     db   $00, $80, $F2, $00, $85, $01
 
-func_01F_4DEF::
+BeginJingleEvilEagle::
     ld   a, $0A                                   ; $4DEF: $3E $0A
     ld   [$D3BC], a                               ; $4DF1: $EA $BC $D3
     ld   hl, Data_01F_4E0A                        ; $4DF4: $21 $0A $4E
     jp   label_01F_539A                           ; $4DF7: $C3 $9A $53
 
-func_01F_4DFA::
+ContinueJingleEvilEagle::
     call DecrementValueAtDE                       ; $4DFA: $CD $71 $7A
     ret  nz                                       ; $4DFD: $C0
 
@@ -1899,34 +1821,34 @@ func_01F_4DFA::
 Data_01F_4E0A::
     db   $17, $BC, $64, $44, $C7, $02
 
-func_01F_4E10::
+BeginJingleGrimCreeper::
     ld   a, $14                                   ; $4E10: $3E $14
     ld   [$D3BC], a                               ; $4E12: $EA $BC $D3
     ld   hl, Data_01F_4E4A                        ; $4E15: $21 $4A $4E
     call func_01F_7AB7                            ; $4E18: $CD $B7 $7A
     jp   label_01F_539A                           ; $4E1B: $C3 $9A $53
 
-func_01F_4E1E::
+ContinueJingleGrimCreeper::
     call IncrementValueAtBC                       ; $4E1E: $CD $75 $7A
     cp   $03                                      ; $4E21: $FE $03
-    jr   z, jr_01F_4E2B                           ; $4E23: $28 $06
+    jr   z, .jr_01F_4E2B                          ; $4E23: $28 $06
 
-jr_01F_4E25:
+.jr_01F_4E25:
     ld   hl, Data_01F_4E46                        ; $4E25: $21 $46 $4E
     jp   func_01F_7AE1                            ; $4E28: $C3 $E1 $7A
 
-jr_01F_4E2B:
+.jr_01F_4E2B:
     call func_01F_7A9A                            ; $4E2B: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $4E2E: $CA $BB $53
 
     cp   $10                                      ; $4E31: $FE $10
-    jr   z, jr_01F_4E3A                           ; $4E33: $28 $05
+    jr   z, .jr_01F_4E3A                          ; $4E33: $28 $05
 
     ld   a, $01                                   ; $4E35: $3E $01
     ld   [bc], a                                  ; $4E37: $02
-    jr   jr_01F_4E25                              ; $4E38: $18 $EB
+    jr   .jr_01F_4E25                             ; $4E38: $18 $EB
 
-jr_01F_4E3A:
+.jr_01F_4E3A:
     ld   hl, Data_01F_4E50                        ; $4E3A: $21 $50 $4E
     ld   a, $01                                   ; $4E3D: $3E $01
     ld   [bc], a                                  ; $4E3F: $02
@@ -1942,11 +1864,11 @@ Data_01F_4E4A::
 Data_01F_4E50::
     db   $00, $00, $47, $E0, $87, $01
 
-func_01F_4E56::
+BeginJingleHotHeadSplash::
     ld   hl, Data_01F_4E75                        ; $4E56: $21 $75 $4E
     jp   label_01F_5395                           ; $4E59: $C3 $95 $53
 
-func_01F_4E5C::
+ContinueJingleHotHeadSplash::
     call DecrementValueAtDE                       ; $4E5C: $CD $71 $7A
     ret  nz                                       ; $4E5F: $C0
 
@@ -1971,14 +1893,14 @@ Data_01F_4E7B::
 Data_01F_4E81::
     db   $1F, $8D, $20, $A0, $C7, $0C
 
-func_01F_4E87::
+BeginJingleBlainoPunch::
     ld   a, $02                                   ; $4E87: $3E $02
     ld   [$D3BC], a                               ; $4E89: $EA $BC $D3
     ld   hl, Data_01F_4EC4                        ; $4E8C: $21 $C4 $4E
     call func_01F_7AB7                            ; $4E8F: $CD $B7 $7A
     jp   label_01F_539A                           ; $4E92: $C3 $9A $53
 
-func_01F_4E95::
+ContinueJingleBlainoPunch::
     call DecrementValueAtDE                       ; $4E95: $CD $71 $7A
     ret  nz                                       ; $4E98: $C0
 
@@ -1986,28 +1908,28 @@ func_01F_4E95::
     ld   [de], a                                  ; $4E9B: $12
     call IncrementValueAtBC                       ; $4E9C: $CD $75 $7A
     cp   $04                                      ; $4E9F: $FE $04
-    jr   z, jr_01F_4EAD                           ; $4EA1: $28 $0A
+    jr   z, .jr_01F_4EAD                          ; $4EA1: $28 $0A
 
     cp   $05                                      ; $4EA3: $FE $05
-    jr   z, jr_01F_4EB8                           ; $4EA5: $28 $11
+    jr   z, .jr_01F_4EB8                          ; $4EA5: $28 $11
 
-jr_01F_4EA7:
+.jr_01F_4EA7:
     ld   hl, Data_01F_4EBC                        ; $4EA7: $21 $BC $4E
     jp   func_01F_7AE1                            ; $4EAA: $C3 $E1 $7A
 
-jr_01F_4EAD:
+.jr_01F_4EAD:
     call func_01F_7A9A                            ; $4EAD: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $4EB0: $CA $B5 $53
 
     ld   a, $04                                   ; $4EB3: $3E $04
 
-jr_01F_4EB5:
+.jr_01F_4EB5:
     ld   [bc], a                                  ; $4EB5: $02
-    jr   jr_01F_4EA7                              ; $4EB6: $18 $EF
+    jr   .jr_01F_4EA7                             ; $4EB6: $18 $EF
 
-jr_01F_4EB8:
+.jr_01F_4EB8:
     ld   a, $01                                   ; $4EB8: $3E $01
-    jr   jr_01F_4EB5                              ; $4EBA: $18 $F9
+    jr   .jr_01F_4EB5                             ; $4EBA: $18 $F9
 
 Data_01F_4EBC::
     db   $00, $08, $FF, $FD, $00, $03, $FF, $F8
@@ -2015,45 +1937,45 @@ Data_01F_4EBC::
 Data_01F_4EC4::
     db   $00, $00, $60, $D1, $87, $08
 
-func_01F_4ECA::
+BeginJingleShowInstruments::
     ld   a, $0C                                   ; $4ECA: $3E $0C
     ld   [$D3BC], a                               ; $4ECC: $EA $BC $D3
     ld   hl, Data_01F_4F17                        ; $4ECF: $21 $17 $4F
     call func_01F_7AB7                            ; $4ED2: $CD $B7 $7A
     jp   label_01F_539A                           ; $4ED5: $C3 $9A $53
 
-func_01F_4ED8::
+ContinueJingleShowInstruments::
     call IncrementValueAtBC                       ; $4ED8: $CD $75 $7A
     cp   $09                                      ; $4EDB: $FE $09
-    jr   z, jr_01F_4EE9                           ; $4EDD: $28 $0A
+    jr   z, .jr_01F_4EE9                          ; $4EDD: $28 $0A
 
     cp   $0A                                      ; $4EDF: $FE $0A
-    jr   z, jr_01F_4F00                           ; $4EE1: $28 $1D
+    jr   z, .jr_01F_4F00                          ; $4EE1: $28 $1D
 
-jr_01F_4EE3:
+.jr_01F_4EE3:
     ld   hl, Data_01F_4F05                        ; $4EE3: $21 $05 $4F
     jp   func_01F_7AE1                            ; $4EE6: $C3 $E1 $7A
 
-jr_01F_4EE9:
+.jr_01F_4EE9:
     call func_01F_7A9A                            ; $4EE9: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $4EEC: $CA $B5 $53
 
     cp   $09                                      ; $4EEF: $FE $09
-    jr   z, jr_01F_4EF5                           ; $4EF1: $28 $02
+    jr   z, .jr_01F_4EF5                          ; $4EF1: $28 $02
 
-    jr   jr_01F_4EE3                              ; $4EF3: $18 $EE
+    jr   .jr_01F_4EE3                             ; $4EF3: $18 $EE
 
-jr_01F_4EF5:
+.jr_01F_4EF5:
     xor  a                                        ; $4EF5: $AF
     ld   [bc], a                                  ; $4EF6: $02
     ld   hl, Data_01F_4F1D                        ; $4EF7: $21 $1D $4F
     call func_01F_7AB7                            ; $4EFA: $CD $B7 $7A
     jp   WriteChannel1AndDE                       ; $4EFD: $C3 $79 $7A
 
-jr_01F_4F00:
+.jr_01F_4F00:
     ld   a, $01                                   ; $4F00: $3E $01
     ld   [bc], a                                  ; $4F02: $02
-    jr   jr_01F_4EE3                              ; $4F03: $18 $DE
+    jr   .jr_01F_4EE3                             ; $4F03: $18 $DE
 
 Data_01F_4F05::
     db   $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01
@@ -2065,14 +1987,14 @@ Data_01F_4F17::
 Data_01F_4F1D::
     db   $00, $00, $A7, $D8, $87, $01
 
-func_01F_4F23::
+BeginJingleShadowNext::
     ld   a, $05                                   ; $4F23: $3E $05
     ld   [$D3BC], a                               ; $4F25: $EA $BC $D3
     ld   hl, Data_01F_4F78                        ; $4F28: $21 $78 $4F
     call func_01F_7AB7                            ; $4F2B: $CD $B7 $7A
     jp   label_01F_539A                           ; $4F2E: $C3 $9A $53
 
-func_01F_4F31::
+ContinueJingleShadowNext::
     call DecrementValueAtDE                       ; $4F31: $CD $71 $7A
     ret  nz                                       ; $4F34: $C0
 
@@ -2080,31 +2002,31 @@ func_01F_4F31::
     ld   [de], a                                  ; $4F37: $12
     call IncrementValueAtBC                       ; $4F38: $CD $75 $7A
     cp   $09                                      ; $4F3B: $FE $09
-    jr   z, jr_01F_4F49                           ; $4F3D: $28 $0A
+    jr   z, .jr_01F_4F49                          ; $4F3D: $28 $0A
 
     cp   $0A                                      ; $4F3F: $FE $0A
-    jr   z, jr_01F_4F56                           ; $4F41: $28 $13
+    jr   z, .jr_01F_4F56                          ; $4F41: $28 $13
 
-jr_01F_4F43:
+.jr_01F_4F43:
     ld   hl, Data_01F_4F66                        ; $4F43: $21 $66 $4F
     jp   func_01F_7AE1                            ; $4F46: $C3 $E1 $7A
 
-jr_01F_4F49:
+.jr_01F_4F49:
     call func_01F_7A9A                            ; $4F49: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $4F4C: $CA $B5 $53
 
     cp   $03                                      ; $4F4F: $FE $03
-    jr   z, jr_01F_4F5B                           ; $4F51: $28 $08
+    jr   z, .jr_01F_4F5B                          ; $4F51: $28 $08
 
     ld   a, [bc]                                  ; $4F53: $0A
-    jr   jr_01F_4F43                              ; $4F54: $18 $ED
+    jr   .jr_01F_4F43                             ; $4F54: $18 $ED
 
-jr_01F_4F56:
+.jr_01F_4F56:
     ld   a, $01                                   ; $4F56: $3E $01
     ld   [bc], a                                  ; $4F58: $02
-    jr   jr_01F_4F43                              ; $4F59: $18 $E8
+    jr   .jr_01F_4F43                             ; $4F59: $18 $E8
 
-jr_01F_4F5B:
+.jr_01F_4F5B:
     xor  a                                        ; $4F5B: $AF
     ld   [bc], a                                  ; $4F5C: $02
     ld   hl, Data_01F_4F7E                        ; $4F5D: $21 $7E $4F
@@ -2121,78 +2043,78 @@ Data_01F_4F78::
 Data_01F_4F7E::
     db   $00, $80, $87, $A0, $86, $02
 
-func_01F_4F84::
+BeginJingleShadow2Defeat::
     ld   a, $0B                                   ; $4F84: $3E $0B
     ld   [$D3BC], a                               ; $4F86: $EA $BC $D3
     ld   hl, Data_01F_4FEF                        ; $4F89: $21 $EF $4F
     call func_01F_7AB7                            ; $4F8C: $CD $B7 $7A
     jp   label_01F_539A                           ; $4F8F: $C3 $9A $53
 
-func_01F_4F92::
+ContinueJingleShadow2Defeat::
     call func_01F_7A9A                            ; $4F92: $CD $9A $7A
-    jr   z, jr_01F_4FBB                           ; $4F95: $28 $24
+    jr   z, .jr_01F_4FBB                          ; $4F95: $28 $24
 
-jr_01F_4F97:
+.jr_01F_4F97:
     ld   a, [$D3E2]                               ; $4F97: $FA $E2 $D3
     cp   $0D                                      ; $4F9A: $FE $0D
-    jr   nc, jr_01F_4FAF                          ; $4F9C: $30 $11
+    jr   nc, .jr_01F_4FAF                         ; $4F9C: $30 $11
 
     and  $01                                      ; $4F9E: $E6 $01
-    jr   nz, jr_01F_4FAB                          ; $4FA0: $20 $09
+    jr   nz, .jr_01F_4FAB                         ; $4FA0: $20 $09
 
     ld   a, $01                                   ; $4FA2: $3E $01
 
-jr_01F_4FA4:
+.jr_01F_4FA4:
     ld   [bc], a                                  ; $4FA4: $02
     ld   hl, Data_01F_4FE7                        ; $4FA5: $21 $E7 $4F
     jp   func_01F_7AE1                            ; $4FA8: $C3 $E1 $7A
 
-jr_01F_4FAB:
+.jr_01F_4FAB:
     ld   a, $02                                   ; $4FAB: $3E $02
-    jr   jr_01F_4FA4                              ; $4FAD: $18 $F5
+    jr   .jr_01F_4FA4                             ; $4FAD: $18 $F5
 
-jr_01F_4FAF:
+.jr_01F_4FAF:
     and  $01                                      ; $4FAF: $E6 $01
-    jr   nz, jr_01F_4FB7                          ; $4FB1: $20 $04
+    jr   nz, .jr_01F_4FB7                         ; $4FB1: $20 $04
 
     ld   a, $03                                   ; $4FB3: $3E $03
-    jr   jr_01F_4FA4                              ; $4FB5: $18 $ED
+    jr   .jr_01F_4FA4                             ; $4FB5: $18 $ED
 
-jr_01F_4FB7:
+.jr_01F_4FB7:
     ld   a, $04                                   ; $4FB7: $3E $04
-    jr   jr_01F_4FA4                              ; $4FB9: $18 $E9
+    jr   .jr_01F_4FA4                             ; $4FB9: $18 $E9
 
-jr_01F_4FBB:
+.jr_01F_4FBB:
     push bc                                       ; $4FBB: $C5
     ld   bc, $D3E2                                ; $4FBC: $01 $E2 $D3
     call IncrementValueAtBC                       ; $4FBF: $CD $75 $7A
     pop  bc                                       ; $4FC2: $C1
     cp   $05                                      ; $4FC3: $FE $05
-    jr   z, jr_01F_4FDB                           ; $4FC5: $28 $14
+    jr   z, .jr_01F_4FDB                          ; $4FC5: $28 $14
 
     cp   $22                                      ; $4FC7: $FE $22
     jp   z, label_01F_53B5                        ; $4FC9: $CA $B5 $53
 
     cp   $11                                      ; $4FCC: $FE $11
-    jr   nc, jr_01F_4FE3                          ; $4FCE: $30 $13
+    jr   nc, .jr_01F_4FE3                         ; $4FCE: $30 $13
 
-jr_01F_4FD0:
+.jr_01F_4FD0:
     sra  a                                        ; $4FD0: $CB $2F
     ld   e, a                                     ; $4FD2: $5F
     ld   a, $0B                                   ; $4FD3: $3E $0B
     sub  e                                        ; $4FD5: $93
     ld   [$D3BC], a                               ; $4FD6: $EA $BC $D3
-    jr   jr_01F_4F97                              ; $4FD9: $18 $BC
+    jr   .jr_01F_4F97                             ; $4FD9: $18 $BC
 
-jr_01F_4FDB:
+.jr_01F_4FDB:
     ld   a, $A0                                   ; $4FDB: $3E $A0
     ldh  [rNR12], a                               ; $4FDD: $E0 $12
     ld   a, $05                                   ; $4FDF: $3E $05
-    jr   jr_01F_4FD0                              ; $4FE1: $18 $ED
+    jr   .jr_01F_4FD0                             ; $4FE1: $18 $ED
 
-jr_01F_4FE3:
+.jr_01F_4FE3:
     ld   a, $11                                   ; $4FE3: $3E $11
-    jr   jr_01F_4FD0                              ; $4FE5: $18 $E9
+    jr   .jr_01F_4FD0                             ; $4FE5: $18 $E9
 
 Data_01F_4FE7::
     db   $00, $20, $FF, $E8, $00, $1C, $FF, $F0
@@ -2200,7 +2122,7 @@ Data_01F_4FE7::
 Data_01F_4FEF::
     db   $00, $40, $1F, $80, $83, $01
 
-func_01F_4FF5::
+BeginJingleShadow1Hurt::
     ld   a, $10                                   ; $4FF5: $3E $10
     ld   [$D3BC], a                               ; $4FF7: $EA $BC $D3
     ld   hl, Data_01F_5036                        ; $4FFA: $21 $36 $50
@@ -2208,30 +2130,30 @@ func_01F_4FF5::
 
     jp   label_01F_5395                           ; $5000: $C3 $95 $53
 
-func_01F_5003::
+ContinueJingleShadow1Hurt::
     call IncrementValueAtBC                       ; $5003: $CD $75 $7A
     cp   $09                                      ; $5006: $FE $09
-    jr   z, jr_01F_5014                           ; $5008: $28 $0A
+    jr   z, .jr_01F_5014                          ; $5008: $28 $0A
 
     cp   $0A                                      ; $500A: $FE $0A
-    jr   z, jr_01F_501F                           ; $500C: $28 $11
+    jr   z, .jr_01F_501F                          ; $500C: $28 $11
 
-jr_01F_500E:
+.jr_01F_500E:
     ld   hl, Data_01F_5024                        ; $500E: $21 $24 $50
     jp   func_01F_7AE1                            ; $5011: $C3 $E1 $7A
 
-jr_01F_5014:
+.jr_01F_5014:
     call func_01F_7A9A                            ; $5014: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $5017: $CA $B5 $53
 
     ld   a, $09                                   ; $501A: $3E $09
     ld   [bc], a                                  ; $501C: $02
-    jr   jr_01F_500E                              ; $501D: $18 $EF
+    jr   .jr_01F_500E                             ; $501D: $18 $EF
 
-jr_01F_501F:
+.jr_01F_501F:
     ld   a, $01                                   ; $501F: $3E $01
     ld   [bc], a                                  ; $5021: $02
-    jr   jr_01F_500E                              ; $5022: $18 $EA
+    jr   .jr_01F_500E                             ; $5022: $18 $EA
 
 Data_01F_5024::
     db   $00, $40, $00, $30, $00, $20, $FF, $E0, $FF, $D0, $FF, $C0, $FF, $A0, $FF, $80
@@ -2240,40 +2162,40 @@ Data_01F_5024::
 Data_01F_5036::
     db   $00, $80, $80, $00, $86, $01
 
-func_01F_503C::
+BeginJingleShadow3BG::
     ld   a, [$D361]                               ; $503C: $FA $61 $D3
     and  a                                        ; $503F: $A7
     jp   nz, label_01F_53E6                       ; $5040: $C2 $E6 $53
 
     ld   a, [$D3D6]                               ; $5043: $FA $D6 $D3
     and  a                                        ; $5046: $A7
-    jr   nz, jr_01F_5052                          ; $5047: $20 $09
+    jr   nz, .jr_01F_5052                         ; $5047: $20 $09
 
     ld   hl, Data_01F_5082                        ; $5049: $21 $82 $50
 
-jr_01F_504C:
+.jr_01F_504C:
     call func_01F_7AB7                            ; $504C: $CD $B7 $7A
     jp   label_01F_539A                           ; $504F: $C3 $9A $53
 
-jr_01F_5052:
+.jr_01F_5052:
     ld   hl, Data_01F_5088                        ; $5052: $21 $88 $50
-    jr   jr_01F_504C                              ; $5055: $18 $F5
+    jr   .jr_01F_504C                             ; $5055: $18 $F5
 
-func_01F_5057::
+ContinueJingleShadow3BG::
     call IncrementValueAtBC                       ; $5057: $CD $75 $7A
     cp   $0B                                      ; $505A: $FE $0B
-    jr   z, jr_01F_5064                           ; $505C: $28 $06
+    jr   z, .jr_01F_5064                          ; $505C: $28 $06
 
     ld   hl, Data_01F_506E                        ; $505E: $21 $6E $50
     jp   func_01F_7AE1                            ; $5061: $C3 $E1 $7A
 
-jr_01F_5064:
+.jr_01F_5064:
     ld   hl, wActiveJingle                        ; $5064: $21 $60 $D3
     ld   a, $38                                   ; $5067: $3E $38
     ld   [hl+], a                                 ; $5069: $22
     xor  a                                        ; $506A: $AF
     ld   [hl], a                                  ; $506B: $77
-    jr   func_01F_503C                            ; $506C: $18 $CE
+    jr   BeginJingleShadow3BG                     ; $506C: $18 $CE
 
 Data_01F_506E::
     db   $00, $C0, $00, $90, $00, $60, $00, $30, $00, $18, $FF, $E8, $FF, $D0, $FF, $A0
@@ -2285,51 +2207,51 @@ Data_01F_5082::
 Data_01F_5088::
     db   $00, $80, $C0, $00, $83, $01
 
-func_01F_508E::
+BeginJingleShadow4Intro::
     ld   a, $04                                   ; $508E: $3E $04
     ld   [$D3BC], a                               ; $5090: $EA $BC $D3
     ld   hl, Data_01F_5114                        ; $5093: $21 $14 $51
     call func_01F_7AB7                            ; $5096: $CD $B7 $7A
     jp   label_01F_5395                           ; $5099: $C3 $95 $53
 
-func_01F_509C::
+ContinueJingleShadow4Intro::
     call IncrementValueAtBC                       ; $509C: $CD $75 $7A
     cp   $0E                                      ; $509F: $FE $0E
-    jr   z, jr_01F_50BA                           ; $50A1: $28 $17
+    jr   z, .jr_01F_50BA                          ; $50A1: $28 $17
 
     cp   $0F                                      ; $50A3: $FE $0F
-    jr   z, jr_01F_50C5                           ; $50A5: $28 $1E
+    jr   z, .jr_01F_50C5                          ; $50A5: $28 $1E
 
-jr_01F_50A7:
+.jr_01F_50A7:
     ld   a, [$D3BC]                               ; $50A7: $FA $BC $D3
     cp   $03                                      ; $50AA: $FE $03
-    jr   c, jr_01F_50B4                           ; $50AC: $38 $06
+    jr   c, .jr_01F_50B4                          ; $50AC: $38 $06
 
     ld   hl, Data_01F_50DC                        ; $50AE: $21 $DC $50
     jp   func_01F_7AE1                            ; $50B1: $C3 $E1 $7A
 
-jr_01F_50B4:
+.jr_01F_50B4:
     ld   hl, Data_01F_50F8                        ; $50B4: $21 $F8 $50
     jp   func_01F_7AE1                            ; $50B7: $C3 $E1 $7A
 
-jr_01F_50BA:
+.jr_01F_50BA:
     call func_01F_7A9A                            ; $50BA: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $50BD: $CA $B5 $53
 
     ld   a, $0E                                   ; $50C0: $3E $0E
     ld   [bc], a                                  ; $50C2: $02
-    jr   jr_01F_50A7                              ; $50C3: $18 $E2
+    jr   .jr_01F_50A7                             ; $50C3: $18 $E2
 
-jr_01F_50C5:
+.jr_01F_50C5:
     ld   a, [$D3BC]                               ; $50C5: $FA $BC $D3
     cp   $01                                      ; $50C8: $FE $01
-    jr   z, jr_01F_50D1                           ; $50CA: $28 $05
+    jr   z, .jr_01F_50D1                          ; $50CA: $28 $05
 
     ld   a, $01                                   ; $50CC: $3E $01
     ld   [bc], a                                  ; $50CE: $02
-    jr   jr_01F_50A7                              ; $50CF: $18 $D6
+    jr   .jr_01F_50A7                             ; $50CF: $18 $D6
 
-jr_01F_50D1:
+.jr_01F_50D1:
     xor  a                                        ; $50D1: $AF
     ld   [bc], a                                  ; $50D2: $02
     ld   hl, Data_01F_511A                        ; $50D3: $21 $1A $51
@@ -2350,37 +2272,37 @@ Data_01F_5114::
 Data_01F_511A::
     db   $00, $80, $20, $C0, $84, $01
 
-func_01F_5120::
+BeginJingleUnknown3A::
     ld   a, $04                                   ; $5120: $3E $04
     ld   [$D3BC], a                               ; $5122: $EA $BC $D3
     ld   hl, Data_01F_5161                        ; $5125: $21 $61 $51
     call func_01F_7AB7                            ; $5128: $CD $B7 $7A
     jp   label_01F_539A                           ; $512B: $C3 $9A $53
 
-func_01F_512E::
+ContinueJingleUnknown3A::
     call IncrementValueAtBC                       ; $512E: $CD $75 $7A
     cp   $09                                      ; $5131: $FE $09
-    jr   z, jr_01F_513F                           ; $5133: $28 $0A
+    jr   z, .jr_01F_513F                          ; $5133: $28 $0A
 
     cp   $0A                                      ; $5135: $FE $0A
-    jr   z, jr_01F_514A                           ; $5137: $28 $11
+    jr   z, .jr_01F_514A                          ; $5137: $28 $11
 
-jr_01F_5139:
+.jr_01F_5139:
     ld   hl, Data_01F_514F                        ; $5139: $21 $4F $51
     jp   func_01F_7AE1                            ; $513C: $C3 $E1 $7A
 
-jr_01F_513F:
+.jr_01F_513F:
     call func_01F_7A9A                            ; $513F: $CD $9A $7A
     jp   z, func_01F_53BB                         ; $5142: $CA $BB $53
 
     ld   a, $09                                   ; $5145: $3E $09
     ld   [bc], a                                  ; $5147: $02
-    jr   jr_01F_5139                              ; $5148: $18 $EF
+    jr   .jr_01F_5139                             ; $5148: $18 $EF
 
-jr_01F_514A:
+.jr_01F_514A:
     ld   a, $01                                   ; $514A: $3E $01
     ld   [bc], a                                  ; $514C: $02
-    jr   jr_01F_5139                              ; $514D: $18 $EA
+    jr   .jr_01F_5139                             ; $514D: $18 $EA
 
 Data_01F_514F::
     db   $00, $12, $00, $0E, $00, $0A, $00, $08, $00, $06, $00, $04, $00, $02, $00, $01
@@ -2389,37 +2311,37 @@ Data_01F_514F::
 Data_01F_5161::
     db   $00, $00, $A4, $00, $87, $01
 
-func_01F_5167::
+BeginJingleSwordBeam::
     ld   a, $05                                   ; $5167: $3E $05
     ld   [$D3BC], a                               ; $5169: $EA $BC $D3
     ld   hl, Data_01F_51AE                        ; $516C: $21 $AE $51
     call func_01F_7AB7                            ; $516F: $CD $B7 $7A
     jp   label_01F_539A                           ; $5172: $C3 $9A $53
 
-func_01F_5175::
+ContinueJingleSwordBeam::
     call IncrementValueAtBC                       ; $5175: $CD $75 $7A
     cp   $0C                                      ; $5178: $FE $0C
-    jr   z, jr_01F_518B                           ; $517A: $28 $0F
+    jr   z, .jr_01F_518B                          ; $517A: $28 $0F
 
     cp   $0D                                      ; $517C: $FE $0D
-    jr   z, jr_01F_5186                           ; $517E: $28 $06
+    jr   z, .jr_01F_5186                          ; $517E: $28 $06
 
-jr_01F_5180:
+.jr_01F_5180:
     ld   hl, Data_01F_5196                        ; $5180: $21 $96 $51
     jp   func_01F_7AE1                            ; $5183: $C3 $E1 $7A
 
-jr_01F_5186:
+.jr_01F_5186:
     ld   a, $01                                   ; $5186: $3E $01
     ld   [bc], a                                  ; $5188: $02
-    jr   jr_01F_5180                              ; $5189: $18 $F5
+    jr   .jr_01F_5180                             ; $5189: $18 $F5
 
-jr_01F_518B:
+.jr_01F_518B:
     call func_01F_7A9A                            ; $518B: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $518E: $CA $B5 $53
 
     ld   a, $0C                                   ; $5191: $3E $0C
     ld   [bc], a                                  ; $5193: $02
-    jr   jr_01F_5180                              ; $5194: $18 $EA
+    jr   .jr_01F_5180                             ; $5194: $18 $EA
 
 Data_01F_5196::
     db   $FF, $C0, $FF, $A0, $00, $80, $FF, $C0, $FF, $A0, $00, $80, $FF, $C0, $FF, $A0
@@ -2428,22 +2350,22 @@ Data_01F_5196::
 Data_01F_51AE::
     db   $00, $00, $87, $80, $87, $01
 
-func_01F_51B4::
+BeginJingleEnemyShriek::
     ld   a, $02                                   ; $51B4: $3E $02
     ld   [$D3BC], a                               ; $51B6: $EA $BC $D3
     ld   hl, Data_01F_51F0                        ; $51B9: $21 $F0 $51
     call func_01F_7AB7                            ; $51BC: $CD $B7 $7A
     jp   label_01F_539A                           ; $51BF: $C3 $9A $53
 
-func_01F_51C2::
+ContinueJingleEnemyShriek::
     call IncrementValueAtBC                       ; $51C2: $CD $75 $7A
     cp   $09                                      ; $51C5: $FE $09
-    jr   z, jr_01F_51CF                           ; $51C7: $28 $06
+    jr   z, .jr_01F_51CF                          ; $51C7: $28 $06
 
     ld   hl, Data_01F_51E0                        ; $51C9: $21 $E0 $51
     jp   func_01F_7AE1                            ; $51CC: $C3 $E1 $7A
 
-jr_01F_51CF:
+.jr_01F_51CF:
     call func_01F_7A9A                            ; $51CF: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $51D2: $CA $B5 $53
 
@@ -2462,7 +2384,7 @@ Data_01F_51F0::
 Data_01F_51F6::
     db   $00, $40, $10, $D0, $87, $01
 
-func_01F_51FC::
+BeginJingleShadow6BG::
     ld   a, [$D361]                               ; $51FC: $FA $61 $D3
     cp   $04                                      ; $51FF: $FE $04
     jp   z, label_01F_53E6                        ; $5201: $CA $E6 $53
@@ -2485,33 +2407,33 @@ func_01F_51FC::
     call func_01F_7AB7                            ; $5220: $CD $B7 $7A
     jp   label_01F_539A                           ; $5223: $C3 $9A $53
 
-func_01F_5226::
+ContinueJingleShadow6BG::
     call IncrementValueAtBC                       ; $5226: $CD $75 $7A
     cp   $04                                      ; $5229: $FE $04
-    jr   z, jr_01F_523C                           ; $522B: $28 $0F
+    jr   z, .jr_01F_523C                          ; $522B: $28 $0F
 
     cp   $05                                      ; $522D: $FE $05
-    jr   z, jr_01F_5237                           ; $522F: $28 $06
+    jr   z, .jr_01F_5237                          ; $522F: $28 $06
 
-jr_01F_5231:
+.jr_01F_5231:
     ld   hl, Data_01F_525A                        ; $5231: $21 $5A $52
     jp   func_01F_7AE1                            ; $5234: $C3 $E1 $7A
 
-jr_01F_5237:
+.jr_01F_5237:
     ld   a, $01                                   ; $5237: $3E $01
     ld   [bc], a                                  ; $5239: $02
-    jr   jr_01F_5231                              ; $523A: $18 $F5
+    jr   .jr_01F_5231                             ; $523A: $18 $F5
 
-jr_01F_523C:
+.jr_01F_523C:
     call func_01F_7A9A                            ; $523C: $CD $9A $7A
     jp   z, label_01F_5253                        ; $523F: $CA $53 $52
 
     cp   $07                                      ; $5242: $FE $07
-    jr   z, jr_01F_5248                           ; $5244: $28 $02
+    jr   z, .jr_01F_5248                          ; $5244: $28 $02
 
-    jr   jr_01F_5231                              ; $5246: $18 $E9
+    jr   .jr_01F_5231                             ; $5246: $18 $E9
 
-jr_01F_5248:
+.jr_01F_5248:
     xor  a                                        ; $5248: $AF
     ld   [bc], a                                  ; $5249: $02
     ld   hl, Data_01F_5268                        ; $524A: $21 $68 $52
@@ -2521,7 +2443,7 @@ jr_01F_5248:
 label_01F_5253:
     ld   a, $3D                                   ; $5253: $3E $3D
     ld   [wActiveJingle], a                       ; $5255: $EA $60 $D3
-    jr   func_01F_51FC                            ; $5258: $18 $A2
+    jr   BeginJingleShadow6BG                     ; $5258: $18 $A2
 
 Data_01F_525A::
     db   $00, $C0, $00, $80, $00, $40, $FE, $80
@@ -2532,7 +2454,7 @@ Data_01F_5262::
 Data_01F_5268::
     db   $00, $40, $86, $80, $83, $01
 
-func_01F_526E::
+BeginJingleUrchinPush::
     ld   a, [$D361]                               ; $526E: $FA $61 $D3
     cp   $3E                                      ; $5271: $FE $3E
     jp   z, label_01F_53E6                        ; $5273: $CA $E6 $53
@@ -2540,7 +2462,7 @@ func_01F_526E::
     ld   hl, Data_01F_5283                        ; $5276: $21 $83 $52
     jp   label_01F_539A                           ; $5279: $C3 $9A $53
 
-func_01F_527C::
+ContinueJingleUrchinPush::
     call DecrementValueAtDE                       ; $527C: $CD $71 $7A
     ret  nz                                       ; $527F: $C0
 
@@ -2549,42 +2471,42 @@ func_01F_527C::
 Data_01F_5283::
     db   $27, $BE, $60, $C0, $C7, $03
 
-func_01F_5289::
+BeginJingleFlyingTile::
     ld   a, $09                                   ; $5289: $3E $09
     ld   [$D3BC], a                               ; $528B: $EA $BC $D3
     ld   hl, Data_01F_52CD                        ; $528E: $21 $CD $52
     call func_01F_7AB7                            ; $5291: $CD $B7 $7A
     jp   label_01F_539A                           ; $5294: $C3 $9A $53
 
-func_01F_5297::
+ContinueJingleFlyingTile::
     call IncrementValueAtBC                       ; $5297: $CD $75 $7A
     cp   $03                                      ; $529A: $FE $03
-    jr   z, jr_01F_52A8                           ; $529C: $28 $0A
+    jr   z, .jr_01F_52A8                          ; $529C: $28 $0A
 
     cp   $04                                      ; $529E: $FE $04
-    jr   z, jr_01F_52B7                           ; $52A0: $28 $15
+    jr   z, .jr_01F_52B7                          ; $52A0: $28 $15
 
-jr_01F_52A2:
+.jr_01F_52A2:
     ld   hl, Data_01F_52C7                        ; $52A2: $21 $C7 $52
     jp   func_01F_7AE1                            ; $52A5: $C3 $E1 $7A
 
-jr_01F_52A8:
+.jr_01F_52A8:
     call func_01F_7A9A                            ; $52A8: $CD $9A $7A
     jp   z, label_01F_53B5                        ; $52AB: $CA $B5 $53
 
     cp   $06                                      ; $52AE: $FE $06
-    jr   z, jr_01F_52BC                           ; $52B0: $28 $0A
+    jr   z, .jr_01F_52BC                          ; $52B0: $28 $0A
 
     ld   a, $03                                   ; $52B2: $3E $03
     ld   [bc], a                                  ; $52B4: $02
-    jr   jr_01F_52A2                              ; $52B5: $18 $EB
+    jr   .jr_01F_52A2                             ; $52B5: $18 $EB
 
-jr_01F_52B7:
+.jr_01F_52B7:
     ld   a, $01                                   ; $52B7: $3E $01
     ld   [bc], a                                  ; $52B9: $02
-    jr   jr_01F_52A2                              ; $52BA: $18 $E6
+    jr   .jr_01F_52A2                             ; $52BA: $18 $E6
 
-jr_01F_52BC:
+.jr_01F_52BC:
     xor  a                                        ; $52BC: $AF
     ld   [bc], a                                  ; $52BD: $02
     ld   hl, Data_01F_52D3                        ; $52BE: $21 $D3 $52
@@ -2600,34 +2522,34 @@ Data_01F_52CD::
 Data_01F_52D3::
     db   $00, $80, $D1, $10, $86, $01
 
-func_01F_52D9::
+BeginJingleFacadeHole::
     ld   a, $04                                   ; $52D9: $3E $04
     ld   [$D3BC], a                               ; $52DB: $EA $BC $D3
     ld   hl, Data_01F_532B                        ; $52DE: $21 $2B $53
     call func_01F_7AB7                            ; $52E1: $CD $B7 $7A
     jp   label_01F_539A                           ; $52E4: $C3 $9A $53
 
-func_01F_52E7::
+ContinueJingleFacadeHole::
     call func_01F_7A9A                            ; $52E7: $CD $9A $7A
-    jr   z, jr_01F_5300                           ; $52EA: $28 $14
+    jr   z, .jr_01F_5300                          ; $52EA: $28 $14
 
-jr_01F_52EC:
+.jr_01F_52EC:
     ld   a, [$D3E2]                               ; $52EC: $FA $E2 $D3
     cp   $06                                      ; $52EF: $FE $06
-    jr   nc, jr_01F_52FC                          ; $52F1: $30 $09
+    jr   nc, .jr_01F_52FC                         ; $52F1: $30 $09
 
     ld   a, $01                                   ; $52F3: $3E $01
 
-jr_01F_52F5:
+.jr_01F_52F5:
     ld   [bc], a                                  ; $52F5: $02
     ld   hl, Data_01F_5327                        ; $52F6: $21 $27 $53
     jp   func_01F_7AE1                            ; $52F9: $C3 $E1 $7A
 
-jr_01F_52FC:
+.jr_01F_52FC:
     ld   a, $02                                   ; $52FC: $3E $02
-    jr   jr_01F_52F5                              ; $52FE: $18 $F5
+    jr   .jr_01F_52F5                             ; $52FE: $18 $F5
 
-jr_01F_5300:
+.jr_01F_5300:
     push bc                                       ; $5300: $C5
     ld   bc, $D3E2                                ; $5301: $01 $E2 $D3
     call IncrementValueAtBC                       ; $5304: $CD $75 $7A
@@ -2636,13 +2558,13 @@ jr_01F_5300:
     jp   z, func_01F_53BB                         ; $530A: $CA $BB $53
 
     cp   $06                                      ; $530D: $FE $06
-    jp   z, label_01F_5319                        ; $530F: $CA $19 $53
+    jp   z, .label_01F_5319                       ; $530F: $CA $19 $53
 
     ld   a, $04                                   ; $5312: $3E $04
     ld   [$D3BC], a                               ; $5314: $EA $BC $D3
-    jr   jr_01F_52EC                              ; $5317: $18 $D3
+    jr   .jr_01F_52EC                             ; $5317: $18 $D3
 
-label_01F_5319:
+.label_01F_5319:
     ld   a, $04                                   ; $5319: $3E $04
     ld   [$D3BC], a                               ; $531B: $EA $BC $D3
     ld   hl, Data_01F_5331                        ; $531E: $21 $31 $53
@@ -2658,11 +2580,11 @@ Data_01F_532B::
 Data_01F_5331::
     db   $00, $80, $E5, $10, $84, $01
 
-func_01F_5337::
+BeginJingleUnknown41::
     ld   hl, Data_01F_5360                        ; $5337: $21 $60 $53
     jp   label_01F_5395                           ; $533A: $C3 $95 $53
 
-func_01F_533D::
+ContinueJingleUnknown41::
     call DecrementValueAtDE                       ; $533D: $CD $71 $7A
     ret  nz                                       ; $5340: $C0
 
@@ -2758,21 +2680,21 @@ PlayActiveWaveSfx::
     ld   hl, wActiveWaveSfx                       ; $53ED: $21 $70 $D3
     ld   a, [hl]                                  ; $53F0: $7E
     and  a                                        ; $53F1: $A7
-    jr   z, jr_01F_5405                           ; $53F2: $28 $11
+    jr   z, .jr_01F_5405                          ; $53F2: $28 $11
 
     cp   $14                                      ; $53F4: $FE $14
-    jr   z, jr_01F_53FF                           ; $53F6: $28 $07
+    jr   z, .jr_01F_53FF                          ; $53F6: $28 $07
 
     ld   a, [$D3C8]                               ; $53F8: $FA $C8 $D3
     and  a                                        ; $53FB: $A7
     jp   nz, label_01F_6385                       ; $53FC: $C2 $85 $63
 
-jr_01F_53FF:
+.jr_01F_53FF:
     ld   a, [hl]                                  ; $53FF: $7E
     ld   hl, WaveSfxHandlersTable1                ; $5400: $21 $1B $54
-    jr   jr_01F_540C                              ; $5403: $18 $07
+    jr   .jr_01F_540C                             ; $5403: $18 $07
 
-jr_01F_5405:
+.jr_01F_5405:
     inc  hl                                       ; $5405: $23
     ld   a, [hl]                                  ; $5406: $7E
     and  a                                        ; $5407: $A7
@@ -2780,7 +2702,7 @@ jr_01F_5405:
 
     ld   hl, WaveSfxHandlersTable2                ; $5409: $21 $61 $54
 
-jr_01F_540C:
+.jr_01F_540C:
     call GetHandlerAddressInTable                 ; $540C: $CD $64 $7A
     ld   de, $D392                                ; $540F: $11 $92 $D3
     ld   bc, $D396                                ; $5412: $01 $96 $D3

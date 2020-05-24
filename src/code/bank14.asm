@@ -442,7 +442,7 @@ Data_014_4C20::
 ; objects are disabled, depending on Link's motion state.
 PaletteEffectDisabledTable::
 .LINK_MOTION_INTERACTIVE    db 0
-.LINK_MOTION_FALLING_UP     db 0
+.LINK_MOTION_SWIMMING       db 0
 .LINK_MOTION_JUMPING        db 0
 .LINK_MOTION_MAP_FADE_OUT   db 1
 .LINK_MOTION_MAP_FADE_IN    db 1

@@ -74,12 +74,12 @@ jr_006_4083:
     ldh  [hRoomStatus], a                         ; $4087: $E0 $F8
     ld   [wIndoorBRoomStatus + $C7], a                               ; $4089: $EA $C7 $DA
     call_open_dialog $13A                         ; $408C
-    ld   a, [wDB55]                               ; $4091: $FA $55 $DB
+    ld   a, [wRichardSpokenFlag]                  ; $4091: $FA $55 $DB
     cp   $02                                      ; $4094: $FE $02
     jr   nc, jr_006_409D                          ; $4096: $30 $05
 
     ld   a, $02                                   ; $4098: $3E $02
-    ld   [wDB55], a                               ; $409A: $EA $55 $DB
+    ld   [wRichardSpokenFlag], a                  ; $409A: $EA $55 $DB
 
 jr_006_409D:
     jp   IncrementEntityState                     ; $409D: $C3 $12 $3B

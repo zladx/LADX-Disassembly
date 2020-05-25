@@ -52,7 +52,7 @@ jr_006_6AA9:
     jp   z, label_006_6BB3                        ; $6AD8: $CA $B3 $6B
 
     ld   e, $44                                   ; $6ADB: $1E $44
-    ld   a, [wDB55]                               ; $6ADD: $FA $55 $DB
+    ld   a, [wRichardSpokenFlag]                  ; $6ADD: $FA $55 $DB
     cp   $02                                      ; $6AE0: $FE $02
     jp   nz, label_006_6BAD                       ; $6AE2: $C2 $AD $6B
 

@@ -30,12 +30,12 @@ GrandpaUlriraEntityHandler::
     call func_006_645D                            ; $5C3D: $CD $5D $64
     ret  nc                                       ; $5C40: $D0
 
-    ld   a, [wDB55]                               ; $5C41: $FA $55 $DB
+    ld   a, [wRichardSpokenFlag]                  ; $5C41: $FA $55 $DB
     and  a                                        ; $5C44: $A7
     jr   nz, jr_006_5C4C                          ; $5C45: $20 $05
 
     ld   a, $01                                   ; $5C47: $3E $01
-    ld   [wDB55], a                               ; $5C49: $EA $55 $DB
+    ld   [wRichardSpokenFlag], a                  ; $5C49: $EA $55 $DB
 
 jr_006_5C4C:
     jp_open_dialog $140                           ; $5C4C

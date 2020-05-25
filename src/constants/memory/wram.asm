@@ -1291,7 +1291,7 @@ wDB54:: ds 1 ; Unknown, but some kind of map index entry
 ; Indicates if we have spoken with richard.
 ; 1 indicates spoken with grandpa ulrira in his own house, but does not seem to be used anywhere.
 ; 2 means spoken with richard, changes the telephone message.
-wRichardSpokenFlag::
+wRichardSpokenFlag:: ; DB55
   ds 1
 
 wIsBowWowFollowingLink:: ; DB56
@@ -1441,8 +1441,8 @@ wDB7F:: ;DB7F
   ; Unknown
   ds 1
   
-; Unlabeled
-  ds $10
+; Unlabeled, outside the area that is stored in the savegame.
+  ds $0F
 
 wAddRupeeBufferHigh:: ; DB8F
   ; Higher digits of the amount of rupees to be added to your wallet (high digits)

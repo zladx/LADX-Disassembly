@@ -600,14 +600,14 @@ jr_001_4B05::
     push hl
     ld   de, $5A
     add  hl, de
-    ld   [hl], $18
+    ld   [hl], $18  ; write new save current health
     pop  hl
     push hl
     ld   de, $5B
     add  hl, de
 
 Data_001_4B1C::
-    ld   [hl], $03
+    ld   [hl], $03  ; write new save max health
     pop  hl
     ld   de, $57
     add  hl, de

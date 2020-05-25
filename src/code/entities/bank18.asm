@@ -298,7 +298,7 @@ MamuAndFrogsState5Handler::
     jr   nz, jr_018_427D                          ; $426E: $20 $0D
 
     ld   a, $02                                   ; $4270: $3E $02
-    ld   [$DB4A], a                               ; $4272: $EA $4A $DB
+    ld   [wSelectedSongIndex], a                  ; $4272: $EA $4A $DB
     ld   hl, wOcarinaSongFlags                    ; $4275: $21 $49 $DB
     set  0, [hl]                                  ; $4278: $CB $C6
     jp   IncrementEntityState                     ; $427A: $C3 $12 $3B
@@ -877,7 +877,7 @@ ManboAndFishesState5Handler::
     jr   nz, jr_018_476A                          ; $4755: $20 $13
 
     ld   a, $01                                   ; $4757: $3E $01
-    ld   [$DB4A], a                               ; $4759: $EA $4A $DB
+    ld   [wSelectedSongIndex], a                               ; $4759: $EA $4A $DB
     ld   hl, wOcarinaSongFlags                    ; $475C: $21 $49 $DB
     set  1, [hl]                                  ; $475F: $CB $CE
     xor  a                                        ; $4761: $AF
@@ -3267,7 +3267,7 @@ func_018_58C1::
     call GetEntityTransitionCountdown             ; $58C1: $CD $05 $0C
     ret  nz                                       ; $58C4: $C0
 
-    ld   a, [$DB4A]                               ; $58C5: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                               ; $58C5: $FA $4A $DB
     cp   $00                                      ; $58C8: $FE $00
     ret  nz                                       ; $58CA: $C0
 
@@ -7206,7 +7206,7 @@ jr_018_733C:
     and  a                                        ; $7341: $A7
     jr   nz, jr_018_7363                          ; $7342: $20 $1F
 
-    ld   a, [$DB4A]                               ; $7344: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                               ; $7344: $FA $4A $DB
     cp   $02                                      ; $7347: $FE $02
     jr   nz, jr_018_7363                          ; $7349: $20 $18
 

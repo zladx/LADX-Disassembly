@@ -312,8 +312,8 @@ RoomTransitionPrepareHandler::
     cp   DIRECTION_DOWN                           ; $7A1B: $FE $03
     jr   z, .noWindFishEggMaze                    ; $7A1D: $28 $29
 
-    ; hl = WindFishEggMazeSequence + $DB7C
-    ld   a, [$DB7C]                               ; $7A1F: $FA $7C $DB
+    ; hl = WindFishEggMazeSequence + wWindFishEggMazeSequenceOffset
+    ld   a, [wWindFishEggMazeSequenceOffset]      ; $7A1F: $FA $7C $DB
     ld   e, a                                     ; $7A22: $5F
     ld   d, $00                                   ; $7A23: $16 $00
     ld   hl, WindFishEggMazeSequence              ; $7A25: $21 $DA $79

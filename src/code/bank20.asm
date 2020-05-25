@@ -2311,10 +2311,16 @@ Data_020_5989::
 
 data_020_5994::
 ; Location for overwriting each inventory sprite
-    db   $9C, $6A, $83, $94, $95, $C0, $C1, $9C, $6C, $83, $A0, $A1, $C2, $C3, $9C, $6E
-    db   $83, $9A, $9B, $C4, $C5, $9C, $6F, $81, $9C, $9D, $9C, $B0, $81, $C6, $C7, $9C
-    db   $71, $81, $9E, $9F, $9C, $B2, $81, $CA, $CB, $9C, $92, $01, $7F, $7F, $9C, $D3
-    db   $00, $7F, $00
+    db   $9C, $6A, $83, $94, $95, $C0, $C1
+    db   $9C, $6C, $83, $A0, $A1, $C2, $C3
+    db   $9C, $6E, $83, $9A, $9B, $C4, $C5
+    db   $9C, $6F, $81, $9C, $9D
+    db   $9C, $B0, $81, $C6, $C7
+    db   $9C, $71, $81, $9E, $9F
+    db   $9C, $B2, $81, $CA, $CB
+    db   $9C, $92, $01, $7F, $7F
+    db   $9C, $D3, $00, $7F
+    db   $00
 
 data_020_59C7::
     db   $03, $0A, $11, $22, $05, $0C, $13, $1D, $27
@@ -2539,7 +2545,7 @@ jr_020_5AAE:
     ld   [hl], $01                                ; $5ACB: $36 $01
     pop  hl                                       ; $5ACD: $E1
     pop  af                                       ; $5ACE: $F1
-    jr   jr_020_5ADB                              ; $5ACF: $18 $0A
+    jr   DrawKeyCounter                              ; $5ACF: $18 $0A
 
 jr_020_5AD1:
     ld   a, [wGoldenLeavesCount]                  ; $5AD1: $FA $15 $DB
@@ -2549,7 +2555,7 @@ jr_020_5AD1:
     cp   $06                                      ; $5AD7: $FE $06
     jr   nc, jr_020_5ADE                          ; $5AD9: $30 $03
 
-jr_020_5ADB:
+DrawKeyCounter:
     add  $B0                                      ; $5ADB: $C6 $B0
     ld   [hl], a                                  ; $5ADD: $77
 

@@ -1513,7 +1513,7 @@ EggSongEventState0Handler::
     and  $04                                      ; $4AEF: $E6 $04
     ret  z                                        ; $4AF1: $C8
 
-    ld   a, [$DB4A]                               ; $4AF2: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                               ; $4AF2: $FA $4A $DB
     cp   $00                                      ; $4AF5: $FE $00
     ret  nz                                       ; $4AF7: $C0
 
@@ -1961,7 +1961,7 @@ func_019_4DBC::
     cp   $01                                      ; $4DD2: $FE $01
     ret  nz                                       ; $4DD4: $C0
 
-    ld   a, [$DB4A]                               ; $4DD5: $FA $4A $DB
+    ld   a, [wSelectedSongIndex]                               ; $4DD5: $FA $4A $DB
     cp   $02                                      ; $4DD8: $FE $02
     ret  nz                                       ; $4DDA: $C0
 

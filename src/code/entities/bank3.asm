@@ -1695,7 +1695,7 @@ jr_003_5081:
 jr_003_50AC:
     ld   e, a                                     ; $50AC: $5F
     cp   CHEST_MESSAGE                            ; $50AD: $FE $21
-    jp   nc, func_003_512A                       ; $50AF: $D2 $2A $51
+    jp   nc, MarkRoomCompleted                   ; $50AF: $D2 $2A $51
 
     cp   CHEST_SEASHELL                           ; $50B2: $FE $20
     jr   nz, jr_003_50B9                          ; $50B4: $20 $03
@@ -1719,7 +1719,7 @@ jr_003_50B9:
     ld   [wAddRupeeBufferHigh], a                 ; $50CE: $EA $8F $DB
     ld   a, $18                                   ; $50D1: $3E $18
     ld   [$C3CE], a                               ; $50D3: $EA $CE $C3
-    jr   func_003_512A                            ; $50D6: $18 $52
+    jr   MarkRoomCompleted                        ; $50D6: $18 $52
 
 jr_003_50D8:
     cp   CHEST_MAP                                ; $50D8: $FE $16
@@ -1735,7 +1735,7 @@ jr_003_50D8:
     add  hl, de                                   ; $50E8: $19
     inc  [hl]                                     ; $50E9: $34
     call SynchronizeDungeonsItemFlags_trampoline                               ; $50EA: $CD $02 $28
-    jr   func_003_512A                              ; $50ED: $18 $3B
+    jr   MarkRoomCompleted                          ; $50ED: $18 $3B
 
 jr_003_50EF:
     cp   CHEST_FLIPPERS                           ; $50EF: $FE $0C
@@ -1780,7 +1780,7 @@ jr_003_50EF:
     add  hl, de                                   ; $511E: $19
     ld   d, [hl]                                  ; $511F: $56
     call GiveInventoryItem                        ; $5120: $CD $72 $64
-    jr   func_003_512A                            ; $5123: $18 $05
+    jr   MarkRoomCompleted                        ; $5123: $18 $05
 
 ChestGiveNoneInventoryItem:
     ; This handles giving keys, golden leafs and flippers
@@ -1789,15 +1789,15 @@ ChestGiveNoneInventoryItem:
     add  hl, de                                   ; $5128: $19
     inc  [hl]                                     ; $5129: $34
 
-func_003_512A::
-    call func_003_5134                            ; $512A: $CD $34 $51
+MarkRoomCompleted::
+    call GetRoomStatusAddressInHL                 ; $512A: $CD $34 $51
     ld   a, [hl]                                  ; $512D: $7E
     or   $10                                      ; $512E: $F6 $10
     ld   [hl], a                                  ; $5130: $77
     ldh  [hRoomStatus], a                         ; $5131: $E0 $F8
     ret                                           ; $5133: $C9
 
-func_003_5134::
+GetRoomStatusAddressInHL::
     ld   a, [wIsIndoor]                           ; $5134: $FA $A5 $DB
     ld   d, a                                     ; $5137: $57
     ld   hl, wOverworldRoomStatus                 ; $5138: $21 $00 $D8
@@ -3022,7 +3022,7 @@ HeartContainerEntityHandler::
     inc  [hl]                                     ; $59F3: $34
     ld   hl, wAddHealthBuffer                     ; $59F4: $21 $93 $DB
     ld   [hl], $FF                                ; $59F7: $36 $FF
-    call func_003_5134                            ; $59F9: $CD $34 $51
+    call GetRoomStatusAddressInHL                 ; $59F9: $CD $34 $51
     ld   a, [hl]                                  ; $59FC: $7E
     or   $20                                      ; @TODO Set this room's status bit
     ld   [hl], a                                  ; $59FF: $77
@@ -3210,7 +3210,7 @@ HeartPieceState8Handler::
     ldh  [hFFA5], a                               ; $5B0E: $E0 $A5
     xor  a                                        ; $5B10: $AF
     ld   [wC167], a                               ; $5B11: $EA $67 $C1
-    jp   func_003_512A                            ; $5B14: $C3 $2A $51
+    jp   MarkRoomCompleted                        ; $5B14: $C3 $2A $51
 
 Data_003_5B17::
     db   $9A, $02, $9A, $22, $9C, $02, $9A, $22, $9E, $02, $9A, $22, $9E, $02, $9C, $22
@@ -3376,7 +3376,7 @@ SwordState3Handler::
     call GiveInventoryItem                        ; $5C29: $CD $72 $64
     ld   a, $01                                   ; $5C2C: $3E $01
     ld   [wSwordLevel], a                         ; $5C2E: $EA $4E $DB
-    call func_003_512A                            ; $5C31: $CD $2A $51
+    call MarkRoomCompleted                        ; $5C31: $CD $2A $51
     jp   UnloadEntityAndReturn                    ; $5C34: $C3 $8D $3F
 
 jr_003_5C37:
@@ -3418,7 +3418,7 @@ jr_003_5C67:
 
     ld   d, INVENTORY_HOOKSHOT                    ; $5C6A: $16 $06
     call GiveInventoryItem                        ; $5C6C: $CD $72 $64
-    call func_003_512A                            ; $5C6F: $CD $2A $51
+    call MarkRoomCompleted                        ; $5C6F: $CD $2A $51
     jp   UnloadEntityAndReturn                    ; $5C72: $C3 $8D $3F
 
 jr_003_5C75:
@@ -3476,7 +3476,7 @@ jr_003_5C99:
     ld   hl, wHasTailKey                          ; $5CC3: $21 $11 $DB
     add  hl, de                                   ; $5CC6: $19
     ld   [hl], $01                                ; $5CC7: $36 $01
-    call func_003_512A                            ; $5CC9: $CD $2A $51
+    call MarkRoomCompleted                        ; $5CC9: $CD $2A $51
     xor  a                                        ; $5CCC: $AF
 
 jr_003_5CCD:
@@ -3816,7 +3816,7 @@ func_003_5ED5::
     ld   a, [hl]                                  ; $5EF2: $7E
     or   $02                                      ; @TODO Sets instrument as acquired
     ld   [hl], a                                  ; $5EF5: $77
-    call func_003_5134                            ; $5EF6: $CD $34 $51
+    call GetRoomStatusAddressInHL                 ; $5EF6: $CD $34 $51
     ld   a, [hl]                                  ; $5EF9: $7E
     or   $10                                      ; $5EFA: $F6 $10
     ld   [hl], a                                  ; $5EFC: $77
@@ -4025,8 +4025,8 @@ HidingSlimeKeyEntityHandler::
 
 jr_003_6029:
     ld   hl, wGoldenLeavesCount                   ; $6029: $21 $15 $DB
-    call func_003_6373                            ; $602C: $CD $73 $63
-    call func_003_512A                            ; $602F: $CD $2A $51
+    call IncreaseValueAtHLClampAt99               ; $602C: $CD $73 $63
+    call MarkRoomCompleted                        ; $602F: $CD $2A $51
     ld   hl, hRoomStatus                          ; $6032: $21 $F8 $FF
     res  4, [hl]                                  ; $6035: $CB $A6
     ld   e, $A2                                   ; $6037: $1E $A2
@@ -4569,10 +4569,10 @@ PickSecretSeashell::
     call_open_dialog $0EF                         ; $6368
 
 label_003_636D:
-    call func_003_512A                            ; $636D: $CD $2A $51
+    call MarkRoomCompleted                        ; $636D: $CD $2A $51
     ld   hl, wSeashellsCount                      ; $6370: $21 $0F $DB
 
-func_003_6373::
+IncreaseValueAtHLClampAt99::
     ; POI: Adds one to seashell / golden leaves count, preventing overflow if at 99.
     ; But you can never get anywhere near that! Golden Leaves even stop at 6 (slime key)!
     ld   a, [hl]                                  ; $6373: $7E
@@ -4782,7 +4782,7 @@ PickDroppableKey::
     cp   $7C                                      ; L4 Side-view room where the key drops
     jr   nz, jr_003_64A0                          ; $6499: $20 $05
 
-    ld   hl, wIndoorARoomStatus + $69                                ; $649B: $21 $69 $D9
+    ld   hl, wIndoorARoomStatus + $69             ; $649B: $21 $69 $D9
     set  4, [hl]                                  ; $649E: $CB $E6
 
 jr_003_64A0:
@@ -4796,7 +4796,7 @@ jr_003_64A5:
     jp   label_003_63D2                           ; $64AA: $C3 $D2 $63
 
 jr_003_64AD:
-    call func_003_512A                            ; $64AD: $CD $2A $51
+    call MarkRoomCompleted                        ; $64AD: $CD $2A $51
     ld   hl, wSmallKeysCount                      ; $64B0: $21 $D0 $DB
     inc  [hl]                                     ; $64B3: $34
     jp   SynchronizeDungeonsItemFlags_trampoline  ; $64B4: $C3 $02 $28

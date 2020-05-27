@@ -17,7 +17,6 @@ FileSelectionEntryPoint::
     call func_5DC0
     ld   a, [wGameplaySubtype]
     JP_TABLE
-    ; Code below is actually data for the jump table
 ._00 dw FileSelectionPrepare0
 ._01 dw FileSelectionPrepare1
 ._02 dw FileSelectionPrepare2

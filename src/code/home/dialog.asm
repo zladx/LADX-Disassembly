@@ -655,7 +655,7 @@ DialogBreakHandler::
     ld   a, BANK(DialogBankTable)
     ld   [MBC3SelectBank], a
     ld   a, [wGameplayType]
-    cp   GAMEPLAY_MINI_MAP
+    cp   GAMEPLAY_WORLD_MAP
     jp   z, label_278B
     ld   a, [wDialogIndex]
     ld   e, a

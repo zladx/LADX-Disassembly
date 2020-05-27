@@ -1,9 +1,7 @@
-; Code for bank 1.
-; Contains main engine support code.
-
-include "code/file_save_screen.asm"
-include "code/game_over.asm"
-include "code/world_handler.asm"
+;
+; TODO: move these pieces of code to named files
+; (instead of the generic "bank1.asm")
+;
 
 DebugSaveFileData::
     db INVENTORY_SHIELD          ; B button

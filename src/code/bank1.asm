@@ -482,21 +482,22 @@ Data_001_54E6::
     db $A, $EA
 
 Data_001_54E8::
-    db $9C, $E9, $49, $7F, $9D, 9, $49, $7F, $9D, $29, $49, $7F, $9D, $49, $49, $7F
+    db $9C, $E9, $49, $7F, $9D, $09, $49, $7F, $9D, $29, $49, $7F, $9D, $49, $49, $7F
     db $9D, $69, $49, $7F, $9D, $89, $49, $7F, $9D, $A9, $49, $7F, $9D, $C9, $49, $7F
-    db $9D, $E9, $49, $7F, $9E, 9, $49, $7F, 0
+    db $9D, $E9, $49, $7F, $9E, $09, $49, $7F, $00
 
 func_001_5511::
+    ; Copy $29 bytes from Data_001_54E8 to $D650
     ld   hl, Data_001_54E8
     ld   de, $D650
     ld   c, $29
-
-jr_001_5519::
+.copyLoop
     ld   a, [hli]
     inc  de
     ld   [de], a
     dec  c
-    jr   nz, jr_001_5519
+    jr   nz, .copyLoop
+
     push de
     xor  a
     ldh  [hScratch0], a
@@ -514,14 +515,14 @@ jr_001_5519::
     and  a
     jr   z, jr_001_5543
 
-jr_001_5538::
+.loop
     ld   a, c
     add  a, $04
     ld   c, a
     dec  e
     ld   a, e
     and  a
-    jr   nz, jr_001_5538
+    jr   nz, .loop
     ld   b, $00
 
 jr_001_5543::
@@ -655,8 +656,6 @@ jr_001_55F5::
     ld   a, [hl]
     ldh  [hScratch0], a
     ld   hl, Data_001_54E6
-
-func_001_5600::
     add  hl, bc
     ld   a, [hl]
     ldh  [hScratch1], a

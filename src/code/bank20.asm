@@ -2323,6 +2323,8 @@ data_020_5994::
     db   $00
 
 data_020_59C7::
+    ; These are actually indexes in the precious table of bytes that need to be set to 7F to hide items.
+    ; It uses this offset to write 2x7F byte when an item is not available
     db   $03, $0A, $11, $22, $05, $0C, $13, $1D, $27
 
 ; Start building display of inventory

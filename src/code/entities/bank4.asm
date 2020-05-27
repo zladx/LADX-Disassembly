@@ -6651,13 +6651,17 @@ jr_004_7723:
 ._05 dw func_004_7B40                             ; $7730
 
 Data_004_7732::
-    db   $98, $63, $02, $B2, $B0, $B0, $98, $A4, $01, $7F, $7F, $98, $67, $02, $B1, $B0
-    db   $7F, $98, $A8, $01, $0A, $B3, $98, $6A, $02, $7F, $B2, $B0, $98, $AC, $01, $BA
-    db   $B1, $98, $6E, $02, $B1, $B0, $7F, $98, $B0, $01, $0A, $09, $98, $63, $02, $B9
-    db   $B8, $B0, $98, $A4, $01, $7F, $7F, $98, $63, $02, $B1, $B0, $7F, $98, $A4, $01
-    db   $0A, $09, $00
+    ; Per shop item type the data to write to the background. Each entry is 11 bytes.
+    db   $98, $63, $02, $B2, $B0, $B0, $98, $A4, $01, $7F, $7F
+    db   $98, $67, $02, $B1, $B0, $7F, $98, $A8, $01, $0A, $B3
+    db   $98, $6A, $02, $7F, $B2, $B0, $98, $AC, $01, $BA, $B1
+    db   $98, $6E, $02, $B1, $B0, $7F, $98, $B0, $01, $0A, $09
+    db   $98, $63, $02, $B9, $B8, $B0, $98, $A4, $01, $7F, $7F
+    db   $98, $63, $02, $B1, $B0, $7F, $98, $A4, $01, $0A, $09
+    db   $00
 
 Data_004_7775::
+    ; Per shop item position, data to write to the background when the item is picked up.
     db   $98, $62, $43, $7F, $98, $83, $42, $7F, $98, $A3, $42, $7F, $00, $00, $00, $00
     db   $98, $66, $43, $7F, $98, $87, $42, $7F, $98, $A7, $42, $7F, $00, $00, $00, $00
     db   $98, $6A, $43, $7F, $98, $8B, $42, $7F, $98, $AB, $42, $7F, $00, $00, $00, $00
@@ -6835,7 +6839,7 @@ Data_004_78A5::
     db   $00, $00, $00, $01, $01, $02, $02, $03, $03, $03
 
 func_004_78AF::
-    ld   a, [$C509]                               ; $78AF: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                               ; $78AF: $FA $09 $C5
     and  a                                        ; $78B2: $A7
     jr   z, jr_004_78D4                           ; $78B3: $28 $1F
 
@@ -6870,7 +6874,7 @@ jr_004_78D4:
     and  $30                                      ; $78E2: $E6 $30
     jr   z, jr_004_7940                           ; $78E4: $28 $5A
 
-    ld   a, [$C509]                               ; $78E6: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                               ; $78E6: $FA $09 $C5
     and  a                                        ; $78E9: $A7
     jr   z, jr_004_7907                           ; $78EA: $28 $1B
 
@@ -6906,7 +6910,7 @@ jr_004_7907:
     ld   hl, $C505                                ; $791B: $21 $05 $C5
     add  hl, de                                   ; $791E: $19
     ld   a, [hl]                                  ; $791F: $7E
-    ld   [$C509], a                               ; $7920: $EA $09 $C5
+    ld   [wItemPickedUpInShop], a                               ; $7920: $EA $09 $C5
     ld   [hl], b                                  ; $7923: $70
     and  a                                        ; $7924: $A7
     jr   z, jr_004_792B                           ; $7925: $28 $04
@@ -6937,7 +6941,7 @@ jr_004_7940:
     call func_004_7C06                            ; $7940: $CD $06 $7C
     ret  nc                                       ; $7943: $D0
 
-    ld   a, [$C509]                               ; $7944: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                               ; $7944: $FA $09 $C5
     and  a                                        ; $7947: $A7
     jr   z, jr_004_7958                           ; $7948: $28 $0E
 
@@ -6971,12 +6975,12 @@ label_004_796D:
     ld   d, b                                     ; $7971: $50
     ld   hl, $C505                                ; $7972: $21 $05 $C5
     add  hl, de                                   ; $7975: $19
-    ld   a, [$C509]                               ; $7976: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                               ; $7976: $FA $09 $C5
     ld   [hl], a                                  ; $7979: $77
     ld   de, wRequestDestinationHigh              ; $797A: $11 $01 $D6
     call func_004_798B                            ; $797D: $CD $8B $79
     xor  a                                        ; $7980: $AF
-    ld   [$C509], a                               ; $7981: $EA $09 $C5
+    ld   [wItemPickedUpInShop], a                               ; $7981: $EA $09 $C5
 
 jr_004_7984:
     ld   hl, wEntitiesStateTable                  ; $7984: $21 $90 $C2
@@ -7015,7 +7019,7 @@ jr_004_79A1:
     ret                                           ; $79AA: $C9
 
 jr_004_79AB:
-    ld   a, [$C509]                               ; $79AB: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                               ; $79AB: $FA $09 $C5
     ld   e, a                                     ; $79AE: $5F
     cp   $02                                      ; $79AF: $FE $02
     jr   nz, jr_004_79BB                          ; $79B1: $20 $08
@@ -7121,7 +7125,7 @@ jr_004_7A24:
     ret                                           ; $7A2D: $C9
 
 jr_004_7A2E:
-    ld   hl, $C509                                ; $7A2E: $21 $09 $C5
+    ld   hl, wItemPickedUpInShop                                ; $7A2E: $21 $09 $C5
     ld   a, [hl]                                  ; $7A31: $7E
     push af                                       ; $7A32: $F5
     ld   [hl], $00                                ; $7A33: $36 $00
@@ -7378,7 +7382,7 @@ jr_004_7BAC:
     jp   CopyEntityPositionToActivePosition       ; $7BB4: $C3 $8A $3D
 
 func_004_7BB7::
-    ld   a, [$C509]                               ; $7BB7: $FA $09 $C5
+    ld   a, [wItemPickedUpInShop]                               ; $7BB7: $FA $09 $C5
     and  a                                        ; $7BBA: $A7
     ret  z                                        ; $7BBB: $C8
 

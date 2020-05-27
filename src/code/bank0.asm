@@ -2774,7 +2774,7 @@ LinkMotionMapFadeOutHandler::
     dec  e
     jr   nz, .clearEntitiesStatusLoop
 
-    ld   a, [$C509]
+    ld   a, [wItemPickedUpInShop]
     and  a
     jr   z, .label_1898
     push af

@@ -1794,7 +1794,7 @@ CreateFollowingNpcEntity::
     ; POI: Curiously, these should be excluded by the
     ; check against side-scrolling rooms...
     ldh  a, [hMapRoom]
-    cp   $FD ; Mambo the Sun Fish
+    cp   $FD ; Manbo the Sun Fish
     ret  z
     cp   $B1 ; Fishing minigame
     ret  z

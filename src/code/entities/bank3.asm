@@ -7007,10 +7007,10 @@ jr_003_7279:
     ld   hl, wEntitiesTypeTable                   ; $727C: $21 $A0 $C3
     add  hl, bc                                   ; $727F: $09
     ld   a, [hl]                                  ; $7280: $7E
-    cp   $F8                                      ; $7281: $FE $F8
+    cp   ENTITY_GIANT_BUZZ_BLOB                   ; $7281: $FE $F8
     jr   z, jr_003_7289                           ; $7283: $28 $04
 
-    cp   $B9                                      ; $7285: $FE $B9
+    cp   ENTITY_BUZZ_BLOB                         ; $7285: $FE $B9
     jr   nz, jr_003_7293                          ; $7287: $20 $0A
 
 jr_003_7289:
@@ -7773,7 +7773,7 @@ jr_003_76AC:
     ld   hl, wEntitiesTypeTable                   ; $76BF: $21 $A0 $C3
     add  hl, de                                   ; $76C2: $19
     ld   a, [hl]                                  ; $76C3: $7E
-    cp   $24                                      ; $76C4: $FE $24
+    cp   ENTITY_IRON_MASK                         ; $76C4: $FE $24
     jr   nz, jr_003_7710                          ; $76C6: $20 $48
 
     ld   hl, wEntitiesDirectionTable              ; $76C8: $21 $80 $C3

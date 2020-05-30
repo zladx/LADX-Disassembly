@@ -940,7 +940,7 @@ func_037_4552::
     ld   [de], a                                  ; $4623: $12
     inc  de                                       ; $4624: $13
     ld   a, e                                     ; $4625: $7B
-    and  GAMEPLAY_MINI_MAP                        ; $4626: $E6 $07
+    and  GAMEPLAY_WORLD_MAP                       ; $4626: $E6 $07
     jr   nz, .loop_4622_37                        ; $4628: $20 $F8
 
     xor  a                                        ; $462A: $AF

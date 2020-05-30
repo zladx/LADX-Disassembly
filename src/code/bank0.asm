@@ -1208,7 +1208,7 @@ LoadRoomTiles::
 
 ExecuteGameplayHandler::
     ld   a, [wGameplayType]
-    cp   GAMEPLAY_MINI_MAP ; If GameplayType < MINI_MAP
+    cp   GAMEPLAY_WORLD_MAP; If GameplayType < MINI_MAP
     jr   c, jumpToGameplayHandler
     cp   GAMEPLAY_WORLD ; If GameplayType != World
     jr   nz, presentSaveScreenIfNeeded
@@ -1270,7 +1270,7 @@ jumpToGameplayHandler::
 ._04 dw FileDeletionHandler
 ._05 dw FileCopyHandler
 ._06 dw FileSaveHandler
-._07 dw MinimapHandler
+._07 dw WorldMapHandler
 ._08 dw PeachPictureHandler
 ._09 dw MarinBeachHandler
 ._0A dw FaceShrineMuralHandler
@@ -1303,8 +1303,8 @@ MarinBeachHandler::
     call MarineBeachEntryPoint
     jp   returnFromGameplayHandler
 
-MinimapHandler::
-    call MinimapEntryPoint
+WorldMapHandler::
+    call WorldMapEntryPoint
     jp   returnFromGameplayHandler
 
 FileSaveHandler::
@@ -1600,7 +1600,7 @@ InitGotItemSequence::
     ld   [wTransitionSequenceCounter], a
     ld   [$C16C], a
     ld   [wGameplaySubtype], a
-    ld   a, GAMEPLAY_MINI_MAP
+    ld   a, GAMEPLAY_WORLD_MAP
     ld   [wGameplayType], a
     callsb func_002_755B
     call DrawLinkSprite
@@ -4883,10 +4883,10 @@ LoadTitleScreenTiles::
     jp   CopyData
 
 LoadTileset0B::
-    ; Load minimap tiles
-    ld   a, BANK(MinimapTiles)
+    ; Load world map tiles
+    ld   a, BANK(WorldMapTiles)
     call SwitchAdjustedBank
-    ld   hl, MinimapTiles
+    ld   hl, WorldMapTiles
     ld   de, vTiles1 + $700
     ld   bc, TILE_SIZE * $80
     call CopyData

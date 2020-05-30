@@ -680,7 +680,7 @@ UpdateEntityTimers::
     ldh  [hActiveEntityTilesOffset], a            ; $4D76: $E0 $F5
 
     ld   a, [wGameplayType]                       ; $4D78: $FA $95 $DB
-    cp   GAMEPLAY_MINI_MAP                        ; $4D7B: $FE $07
+    cp   GAMEPLAY_WORLD_MAP                       ; $4D7B: $FE $07
     jr   z, .done                                 ; $4D7D: $28 $6E
 
     cp   GAMEPLAY_CREDITS                         ; $4D7F: $FE $01

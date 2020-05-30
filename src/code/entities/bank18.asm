@@ -8630,7 +8630,7 @@ func_018_7DE8::
 
 func_018_7DEE::
     ld   a, [wGameplayType]                       ; $7DEE: $FA $95 $DB
-    cp   GAMEPLAY_MINI_MAP                        ; $7DF1: $FE $07
+    cp   GAMEPLAY_WORLD_MAP                       ; $7DF1: $FE $07
     jr   z, jr_018_7E13                           ; $7DF3: $28 $1E
 
     cp   GAMEPLAY_WORLD                           ; $7DF5: $FE $0B

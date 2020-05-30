@@ -18,6 +18,9 @@ section "Main", rom0[$0150]
 include "code/bank0.asm"
 
 section "bank1",romx[$4000],bank[$01]
+include "code/file_save_screen.asm"
+include "code/game_over.asm"
+include "code/world_handler.asm"
 include "code/bank1.asm"
 
 section "bank2",romx[$4000],bank[$02]
@@ -114,7 +117,7 @@ OcarinaSymbolsTiles::
 incbin "gfx/items/ocarina_symbols.dmg.2bpp"
 AnimatedTiles::
 incbin "gfx/world/animated_tiles.w32.dmg.2bpp"
-MinimapTiles::
+WorldMapTiles::
 incbin "gfx/world/minimap.dmg.2bpp"
 
 section "bankOD",romx[$4000],bank[$0D]

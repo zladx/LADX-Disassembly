@@ -4303,7 +4303,7 @@ FillBGMap::
 
 include "code/home/copy_data.asm"
 
-include "src/code/home/clear_memory.asm"
+include "code/home/clear_memory.asm"
 
 GetChestsStatusForRoom_trampoline::
     callsb GetChestsStatusForRoom

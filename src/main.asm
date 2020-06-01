@@ -351,7 +351,7 @@ include "data/bg_attributes/overworld_c.asm"
 include "code/bank27.asm"
 
 section "bank28",romx[$4000],bank[$28]
-include "src/code/photo_album.asm"
+include "code/photo_album.asm"
 include "data/photo_album/background.asm"
 
 section "bank29",romx[$4000],bank[$29]

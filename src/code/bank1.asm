@@ -2845,7 +2845,7 @@ jr_001_6D26::
     ld   [rVBK], a
     ret
 
-include "src/code/oam_dma.asm"
+include "code/oam_dma.asm"
 
 IntroRainTiles::
 incbin "src/gfx/intro/rain.2bpp"

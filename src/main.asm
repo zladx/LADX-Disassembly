@@ -256,6 +256,7 @@ include "data/maps/layouts.asm"
 include "data/chests/chests.asm"
 include "code/bank14.asm"
 include "text/dialog_1.asm"
+include "text/dialog_200.asm"
 
 section "bank15",romx[$4000],bank[$15]
 include "code/entities/bank15.asm"
@@ -297,15 +298,24 @@ section "Music tracks section 1B/3",romx[$7100],bank[$1B]
 include "data/music/music_tracks_data_1b_3.asm"
 
 section "bank1C",romx[$4000],bank[$1C]
+IF(!DEF(LANG))
+LANG equs "en"
+ENDC
+IF (STRCMP("{LANG}", "jp") == 0)
+db $00
+ELSE
 db $01 ; Extra byte present in the original ROM
+ENDC
 include "data/dialogs/dialog_pointers.asm"
 include "data/ascii_to_tile.asm"
 include "data/dialogs/dialog_banks.asm"
 include "code/dialog_letters.asm"
 include "text/dialog_3.asm"
+include "text/dialog_000.asm"
 
 section "bank1D", romx[$4000], bank[$1D]
 include "text/dialog_4.asm"
+include "text/dialog_100.asm"
 
 section "bank1E", romx[$4000], bank[$1E]
 include "code/audio/music_2.asm"
@@ -513,3 +523,13 @@ include "code/photos_bg.asm"
 ; the rom
 section "bank3E",romx[$4000],bank[$3E]
 section "bank3F",romx[$4000],bank[$3F]
+include "text/dialog_5.asm"
+
+section "sram",sram[$A000],bank[0]
+    ds $100
+SaveGame1:
+    ds $3AD
+SaveGame2:
+    ds $3AD
+SaveGame3:
+    ds $3AD

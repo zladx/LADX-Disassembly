@@ -44,4 +44,12 @@
 
 ;ENABLE_DEBUG_3 equ 1
 
+IF(!DEF(VERSION))
+VERSION equs "0"
+ENDC
 
+BANK_1C_VAR = 1
+
+IF ("{LANG}" == "JP")
+BANK_1C_VAR = 0
+ENDC

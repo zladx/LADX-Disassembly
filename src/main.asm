@@ -298,14 +298,7 @@ section "Music tracks section 1B/3",romx[$7100],bank[$1B]
 include "data/music/music_tracks_data_1b_3.asm"
 
 section "bank1C",romx[$4000],bank[$1C]
-IF(!DEF(LANG))
-LANG equs "en"
-ENDC
-IF (STRCMP("{LANG}", "jp") == 0)
-db $00
-ELSE
-db $01 ; Extra byte present in the original ROM
-ENDC
+db BANK_1C_VAR ; Extra byte present in the original ROM
 include "data/dialogs/dialog_pointers.asm"
 include "data/ascii_to_tile.asm"
 include "data/dialogs/dialog_banks.asm"

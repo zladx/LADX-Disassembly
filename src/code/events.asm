@@ -150,20 +150,22 @@ MakeEffectObjectAppear::
 DropKeyEffectHandler::
     call EventEffectGuard                         ; $5E03: $CD $AF $5D
     ldh  a, [hMapRoom]                            ; $5E06: $F0 $F6
-    cp   $69                                      ; $5E08: $FE $69
-    jr   nz, jr_002_5E15                          ; $5E0A: $20 $09
+    cp   $69                        ; Is this room 169? (Angler's Tunnel)
+    jr   nz, jr_002_5E15            ; If not, skip ahead...
 
     ; Mark the room as cleared
-    call GetRoomStatusAddress                     ; $5E0C: $CD $9F $5B
-    ld   a, [hl]                                  ; $5E0F: $7E
-    or   $10                                      ; $5E10: $F6 $10
-    ld   [hl], a                                  ; $5E12: $77
-    ldh  [hRoomStatus], a                               ; $5E13: $E0 $F8
+    call GetRoomStatusAddress       ; This is the room where the key falls into
+    ld   a, [hl]                    ; a hole in the floor, making it fall into
+    or   $10                        ; a sidescrolling room.
+    ld   [hl], a                    ; Since that room handles the key now,
+    ldh  [hRoomStatus], a           ; mark this one.
 
 jr_002_5E15:
     jp   label_002_5425                           ; $5E15: $C3 $25 $54
 
 ; Open locked doors, and make the teleport point appear.
+; @FIXME Actually checks if the miniboss has been defeated.
+; Has nothing to do with actually clearing the miniboss.
 ClearMidbossEffectHandler::
     ldh  a, [hMapId]                              ; $5E18: $F0 $F7
     ld   e, a                                     ; $5E1A: $5F
@@ -191,7 +193,7 @@ jr_002_5E2E:
     cp   TRIGGER_KILL_ALL_ENEMIES | EFFECT_CLEAR_MIDBOSS ; $5E36: $FE $C1
     jr   nz, jr_002_5E6A                          ; $5E38: $20 $30
 
-    ldh  a, [hMapId]                         ; $5E3A: $F0 $F7
+    ldh  a, [hMapId]                         ; @TODO This sets the miniboss killed flag.
     ld   e, a                                     ; $5E3C: $5F
     ld   d, $00                                   ; $5E3D: $16 $00
     ld   hl, wHasInstrument1                      ; $5E3F: $21 $65 $DB
@@ -223,7 +225,7 @@ jr_002_5E63:
     add  hl, de                                   ; $5E63: $19
     set  5, [hl]                                  ; $5E64: $CB $EE
     ld   a, JINGLE_CLEAR_MIDBOSS                  ; $5E66: $3E $1B
-    ldh  [hJingle], a                             ; $5E68: $E0 $F2
+    ldh  [hJingle], a                               ; $5E68: $E0 $F2
 
 jr_002_5E6A:
     ld   a, [$C190]                               ; $5E6A: $FA $90 $C1

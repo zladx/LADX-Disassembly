@@ -1048,7 +1048,9 @@ wMazeSignpostPos:: ; D473
 ds $5
 
 wDebugWarpIndex:: ; D479
+  ; What index the B + SELECT warp tool is at (00~0B)
   ds 1
+
 wPowerUpHits:: ; D47A
   ; Power-ups are disabled after 3 hits are taken from ennemies
   ds 1
@@ -1342,6 +1344,10 @@ wSpawnPositionY:: ; DB63
 wSpawnIndoorRoom:: ; DB64
   ds 1
 
+; @TODO Dungeon 1-9 *flags*, not instrument checks
+; bit 0: miniboss clear
+; bit 1: (?)
+; bit 2: (?)
 wHasInstrument1:: ; DB65
   ; 0: false, 2: true
   ds 1

@@ -21,7 +21,7 @@ BigFairyEntityHandler::
     jr   z, jr_006_70B8                           ; $70AB: $28 $0B
 
     ldh  a, [hMapId]                              ; $70AD: $F0 $F7
-    cp   $FF                                      ; $70AF: $FE $FF
+    cp   MAP_COLOR_DUNGEON                        ; $70AF: $FE $FF
     jr   nz, jr_006_70B8                          ; $70B1: $20 $05
 
     ld   a, $06                                   ; $70B3: $3E $06
